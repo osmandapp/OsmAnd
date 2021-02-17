@@ -34,6 +34,15 @@ public class StopTrackRecordingBottomFragment extends MenuBottomSheetDialogFragm
 		this.mapActivity = mapActivity;
 	}
 
+	public static void showInstance(MapActivity mapActivity, @NonNull FragmentManager fragmentManager, @NonNull Fragment target) {
+		if (!fragmentManager.isStateSaved()) {
+			StopTrackRecordingBottomFragment fragment = new StopTrackRecordingBottomFragment();
+			fragment.setMapActivity(mapActivity);
+			fragment.setTargetFragment(target, 0);
+			fragment.show(fragmentManager, TAG);
+		}
+	}
+
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		app = requiredMyApplication();
@@ -42,6 +51,10 @@ public class StopTrackRecordingBottomFragment extends MenuBottomSheetDialogFragm
 		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
 		int verticalBig = getResources().getDimensionPixelSize(R.dimen.dialog_content_margin);
 		int verticalSmall = getResources().getDimensionPixelSize(R.dimen.content_padding_small);
+
+		final View buttonDiscard = createItem(inflater, ItemType.STOP_AND_DISCARD);
+		final View buttonSave = createItem(inflater, ItemType.STOP_AND_SAVE);
+		final View buttonCancel = createItem(inflater, ItemType.CANCEL);
 
 		items.add(new BottomSheetItemWithDescription.Builder()
 				.setDescription(app.getString(R.string.track_recording_description))
@@ -54,11 +67,11 @@ public class StopTrackRecordingBottomFragment extends MenuBottomSheetDialogFragm
 		items.add(new DividerSpaceItem(app, verticalBig));
 
 		items.add(new BaseBottomSheetItem.Builder()
-				.setCustomView(TripRecordingActiveBottomSheet.createButton(inflater, ItemType.STOP_AND_DISCARD, nightMode))
+				.setCustomView(buttonDiscard)
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						tag = ItemType.STOP_AND_DISCARD;
+						tag = (ItemType) buttonDiscard.getTag();
 						if (plugin != null && settings.SAVE_GLOBAL_TRACK_TO_GPX.get()) {
 							plugin.stopRecording();
 							app.getNotificationHelper().refreshNotifications();
@@ -72,11 +85,11 @@ public class StopTrackRecordingBottomFragment extends MenuBottomSheetDialogFragm
 		items.add(new DividerSpaceItem(app, verticalBig));
 
 		items.add(new BaseBottomSheetItem.Builder()
-				.setCustomView(TripRecordingActiveBottomSheet.createButton(inflater, ItemType.SAVE_AND_STOP, nightMode))
+				.setCustomView(buttonSave)
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						tag = ItemType.SAVE_AND_STOP;
+						tag = (ItemType) buttonSave.getTag();
 						if (plugin != null && settings.SAVE_GLOBAL_TRACK_TO_GPX.get()) {
 							plugin.saveCurrentTrack(null, mapActivity);
 							app.getNotificationHelper().refreshNotifications();
@@ -89,17 +102,21 @@ public class StopTrackRecordingBottomFragment extends MenuBottomSheetDialogFragm
 		items.add(new DividerSpaceItem(app, verticalSmall));
 
 		items.add(new BaseBottomSheetItem.Builder()
-				.setCustomView(TripRecordingActiveBottomSheet.createButton(inflater, ItemType.CANCEL, nightMode))
+				.setCustomView(buttonCancel)
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						tag = ItemType.CANCEL;
+						tag = (ItemType) buttonCancel.getTag();
 						dismiss();
 					}
 				})
 				.create());
 
 		items.add(new DividerSpaceItem(app, verticalSmall));
+	}
+
+	private View createItem(LayoutInflater inflater, ItemType type) {
+		return TripRecordingActiveBottomSheet.createItem(app, nightMode, inflater, type);
 	}
 
 	@Override
@@ -114,10 +131,13 @@ public class StopTrackRecordingBottomFragment extends MenuBottomSheetDialogFragm
 	@Override
 	public void onPause() {
 		super.onPause();
-		if (tag == ItemType.CANCEL) {
-			Fragment target = getTargetFragment();
-			if (target instanceof TripRecordingActiveBottomSheet) {
-				((TripRecordingActiveBottomSheet) target).show();
+		Fragment target = getTargetFragment();
+		if (target instanceof TripRecordingActiveBottomSheet) {
+			TripRecordingActiveBottomSheet tripRec = (TripRecordingActiveBottomSheet) target;
+			if (tag == ItemType.CANCEL) {
+				tripRec.show();
+			} else {
+				tripRec.dismiss();
 			}
 		}
 	}
@@ -125,14 +145,5 @@ public class StopTrackRecordingBottomFragment extends MenuBottomSheetDialogFragm
 	@Override
 	protected boolean hideButtonsContainer() {
 		return true;
-	}
-
-	public static void showInstance(MapActivity mapActivity, @NonNull FragmentManager fragmentManager, @NonNull Fragment target) {
-		if (!fragmentManager.isStateSaved()) {
-			StopTrackRecordingBottomFragment fragment = new StopTrackRecordingBottomFragment();
-			fragment.setMapActivity(mapActivity);
-			fragment.setTargetFragment(target, 0);
-			fragment.show(fragmentManager, TAG);
-		}
 	}
 }

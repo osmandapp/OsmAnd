@@ -23,12 +23,23 @@ public class ClearRecordedDataBottomSheetFragment extends MenuBottomSheetDialogF
 
 	private OsmandApplication app;
 
+	public static void showInstance(@NonNull FragmentManager fragmentManager, @NonNull Fragment target) {
+		if (!fragmentManager.isStateSaved()) {
+			ClearRecordedDataBottomSheetFragment fragment = new ClearRecordedDataBottomSheetFragment();
+			fragment.setTargetFragment(target, 0);
+			fragment.show(fragmentManager, TAG);
+		}
+	}
+
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		app = requiredMyApplication();
 		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
 		int verticalBig = getResources().getDimensionPixelSize(R.dimen.dialog_content_margin);
 		int verticalSmall = getResources().getDimensionPixelSize(R.dimen.content_padding_small);
+
+		final View buttonClear = createItem(inflater, ItemType.CLEAR_DATA);
+		final View buttonCancel = createItem(inflater, ItemType.CANCEL);
 
 		items.add(new BottomSheetItemWithDescription.Builder()
 				.setDescription(app.getString(R.string.clear_recorded_data_warning))
@@ -41,7 +52,7 @@ public class ClearRecordedDataBottomSheetFragment extends MenuBottomSheetDialogF
 		items.add(new DividerSpaceItem(app, verticalBig));
 
 		items.add(new BaseBottomSheetItem.Builder()
-				.setCustomView(TripRecordingActiveBottomSheet.createButton(inflater, ItemType.CLEAR_DATA, nightMode))
+				.setCustomView(buttonClear)
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -54,7 +65,7 @@ public class ClearRecordedDataBottomSheetFragment extends MenuBottomSheetDialogF
 		items.add(new DividerSpaceItem(app, verticalBig));
 
 		items.add(new BaseBottomSheetItem.Builder()
-				.setCustomView(TripRecordingActiveBottomSheet.createButton(inflater, ItemType.CANCEL, nightMode))
+				.setCustomView(buttonCancel)
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -64,6 +75,10 @@ public class ClearRecordedDataBottomSheetFragment extends MenuBottomSheetDialogF
 				.create());
 
 		items.add(new DividerSpaceItem(app, verticalSmall));
+	}
+
+	private View createItem(LayoutInflater inflater, ItemType type) {
+		return TripRecordingActiveBottomSheet.createItem(app, nightMode, inflater, type);
 	}
 
 	@Override
@@ -87,13 +102,5 @@ public class ClearRecordedDataBottomSheetFragment extends MenuBottomSheetDialogF
 	@Override
 	protected boolean hideButtonsContainer() {
 		return true;
-	}
-
-	public static void showInstance(@NonNull FragmentManager fragmentManager, @NonNull Fragment target) {
-		if (!fragmentManager.isStateSaved()) {
-			ClearRecordedDataBottomSheetFragment fragment = new ClearRecordedDataBottomSheetFragment();
-			fragment.setTargetFragment(target, 0);
-			fragment.show(fragmentManager, TAG);
-		}
 	}
 }
