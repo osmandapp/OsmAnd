@@ -1,8 +1,10 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
 import android.graphics.drawable.ColorDrawable;
+import android.opengl.Visibility;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -22,6 +24,7 @@ import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TrackEditCard extends BaseCard {
@@ -83,19 +86,22 @@ public class TrackEditCard extends BaseCard {
 		if (gpxFile.getNonEmptySegmentsCount() > 1 && routeParams != null && routeParams.getSelectedSegment() != -1) {
 			TextView distanceView = view.findViewById(R.id.distance);
 			TextView timeView = view.findViewById(R.id.time);
+			ImageView timeIcon = view.findViewById(R.id.time_icon);
 			TextView pointsView = view.findViewById(R.id.points_count);
+			ImageView pointsIcon = view.findViewById(R.id.points_icon);
+			pointsView.setVisibility(View.GONE);
+			pointsIcon.setVisibility(View.GONE);
 			List<GPXUtilities.TrkSegment> segments = gpxFile.getNonEmptyTrkSegments(false);
 			GPXUtilities.TrkSegment segment = segments.get(routeParams.getSelectedSegment());
-			int point = segment.points.size();
 			double distance = TrackSelectSegmentAdapter.getDistance(segment);
 			long time = TrackSelectSegmentAdapter.getSegmentTime(segment);
 			if (time != 1) {
 				timeView.setText(OsmAndFormatter.getFormattedDurationShort((int) (time / 1000)));
 			} else {
+				timeIcon.setVisibility(View.GONE);
 				timeView.setText("");
 			}
 			distanceView.setText(OsmAndFormatter.getFormattedDistance((float) distance, app));
-			pointsView.setText(String.valueOf(point));
 		}
 
 		ImageButton editButton = view.findViewById(R.id.show_on_map);

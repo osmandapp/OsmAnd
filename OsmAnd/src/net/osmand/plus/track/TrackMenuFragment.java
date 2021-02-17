@@ -1090,10 +1090,10 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	@Override
 	public void onSegmentSelect(GPXFile gpxFile, int selectedSegment) {
+		app.getSettings().GPX_ROUTE_SEGMENT.set(selectedSegment);
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			startNavigationForGPX(gpxFile, mapActivity.getMapActions());
-			app.getSettings().GPX_ROUTE_SEGMENT.set(selectedSegment);
 			RouteProvider.GPXRouteParamsBuilder paramsBuilder = app.getRoutingHelper().getCurrentGPXRoute();
 			if (paramsBuilder != null) {
 				paramsBuilder.setSelectedSegment(selectedSegment);

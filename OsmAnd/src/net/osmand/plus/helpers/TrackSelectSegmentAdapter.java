@@ -28,6 +28,7 @@ public class TrackSelectSegmentAdapter extends RecyclerView.Adapter<TrackViewHol
 	private final UiUtilities iconsCache;
 	private final List<TrkSegment> segments;
 	private OnItemClickListener onItemClickListener;
+	private  ImageView timeIcon;
 
 	public TrackSelectSegmentAdapter(Context ctx, List<TrkSegment> segments) {
 		app = (OsmandApplication) ctx.getApplicationContext();
@@ -42,14 +43,14 @@ public class TrackSelectSegmentAdapter extends RecyclerView.Adapter<TrackViewHol
 		View view = themedInflater.inflate(R.layout.gpx_segment_list_item, parent, false);
 		ImageView distanceIcon = view.findViewById(R.id.distance_icon);
 		distanceIcon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_split_interval));
-		ImageView timeIcon = view.findViewById(R.id.time_icon);
+		timeIcon = view.findViewById(R.id.time_icon);
 		timeIcon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_time_moving_16));
 		return new TrackViewHolder(view);
 	}
 
 	@Override
 	public void onBindViewHolder(@NonNull final TrackViewHolder holder, int position) {
-		holder.icon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_split_interval));
+		holder.iconSegment.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_split_interval));
 
 		TrkSegment segment = segments.get(position);
 
@@ -61,6 +62,7 @@ public class TrackSelectSegmentAdapter extends RecyclerView.Adapter<TrackViewHol
 		if (time != 1) {
 			holder.time.setText(OsmAndFormatter.getFormattedDurationShort((int) (time / 1000)));
 		} else {
+			timeIcon.setVisibility(View.GONE);
 			holder.time.setText("");
 		}
 		holder.distance.setText(OsmAndFormatter.getFormattedDistance((float) distance, app));
@@ -118,14 +120,14 @@ public class TrackSelectSegmentAdapter extends RecyclerView.Adapter<TrackViewHol
 
 	static class TrackViewHolder extends RecyclerView.ViewHolder {
 
-		ImageView icon;
+		ImageView iconSegment;
 		TextView name;
 		TextView distance;
 		TextView time;
 
 		TrackViewHolder(View itemView) {
 			super(itemView);
-			icon = itemView.findViewById(R.id.icon);
+			iconSegment = itemView.findViewById(R.id.icon);
 			name = itemView.findViewById(R.id.name);
 			distance = itemView.findViewById(R.id.distance);
 			time = itemView.findViewById(R.id.time_interval);
