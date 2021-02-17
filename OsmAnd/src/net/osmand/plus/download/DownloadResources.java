@@ -418,12 +418,14 @@ public class DownloadResources extends DownloadResourceGroup {
 			mainGrp.region = reg;
 			parentGroup.addGroup(mainGrp);
 
+			DownloadResourceGroup flatFiles = new DownloadResourceGroup(mainGrp, REGION_MAPS);
 			List<IndexItem> list = groupByRegion.get(reg);
 			if (list != null) {
-				DownloadResourceGroup flatFiles = new DownloadResourceGroup(mainGrp, REGION_MAPS);
 				for (IndexItem ii : list) {
 					flatFiles.addItem(ii);
 				}
+			}
+			if (list != null || !reg.isContinent()) {
 				mainGrp.addGroup(flatFiles);
 			}
 			DownloadResourceGroup subRegions = new DownloadResourceGroup(mainGrp, DownloadResourceGroupType.SUBREGIONS);
@@ -467,10 +469,14 @@ public class DownloadResources extends DownloadResourceGroup {
 		addGroup(otherGroup);
 
 		createHillshadeSRTMGroups();
+		collectMultipleIndexesItems();
 		trimEmptyGroups();
 		updateLoadedFiles();
-		collectMultipleIndexesItems(region);
 		return true;
+	}
+
+	private void collectMultipleIndexesItems() {
+		collectMultipleIndexesItems(region);
 	}
 
 	private void collectMultipleIndexesItems(@NonNull WorldRegion region) {
