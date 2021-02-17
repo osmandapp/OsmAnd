@@ -189,7 +189,7 @@ public class TravelNeededMapsCard extends BaseTravelCard {
 	 * @return true if button is visible, false otherwise.
 	 */
 	private boolean updateSecondaryButton(NeededMapsVH vh) {
-		vh.secondaryBtnContainer.setVisibility(Version.isPaidVersion(app) ? View.VISIBLE : View.GONE);
+		vh.secondaryBtnContainer.setVisibility(View.VISIBLE);
 		vh.secondaryBtn.setText(isDownloading() ? R.string.shared_string_cancel : R.string.later);
 		vh.secondaryBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
