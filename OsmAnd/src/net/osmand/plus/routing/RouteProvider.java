@@ -407,16 +407,13 @@ public class RouteProvider {
 		if (gpxParams.reverse && gpxParams.routePoints.size() > 1) {
 			List<Location> gpxRouteLocations = new ArrayList<>();
 			List<RouteSegmentResult> gpxRoute = new ArrayList<>();
-			Location start = null;
-			for (int i = 0; i < gpxParams.routePoints.size(); i++) {
+			WptPt firstGpxPoint = gpxParams.routePoints.get(0);
+			Location start = new Location("", firstGpxPoint.getLatitude(), firstGpxPoint.getLongitude());
+
+			for (int i = 1; i < gpxParams.routePoints.size(); i++) {
 				WptPt pt = gpxParams.routePoints.get(i);
 				ApplicationMode appMode = ApplicationMode.valueOfStringKey(pt.getProfileType(), ApplicationMode.DEFAULT);
 				LatLon end = new LatLon(pt.getLatitude(), pt.getLongitude());
-				if (start == null) {
-					start = new Location("");
-					start.setLatitude(routeParams.start.getLatitude());
-					start.setLongitude(routeParams.start.getLongitude());
-				}
 
 				RouteCalculationParams params = new RouteCalculationParams();
 				params.inSnapToRoadMode = true;
@@ -440,7 +437,7 @@ public class RouteProvider {
 							routeParams.mode.getDefaultSpeed(), new LocationsHolder(locations).getLatLonList()));
 				}
 				gpxRouteLocations.addAll(locations);
-				if (i > 0 && !gpxRouteLocations.isEmpty()) {
+				if (!gpxRouteLocations.isEmpty()) {
 					gpxRouteLocations.remove(gpxRouteLocations.size() - 1);
 				}
 				gpxRoute.addAll(route);
