@@ -582,6 +582,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			MeasurementEditingContext editingContext = new MeasurementEditingContext();
 			editingContext.setGpxData(gpxData);
 			editingContext.setAppMode(app.getRoutingHelper().getAppMode());
+			editingContext.setSelectedSegment(app.getSettings().GPX_ROUTE_SEGMENT.get());
 			MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(), editingContext, true);
 		}
 	}
