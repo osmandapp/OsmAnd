@@ -652,7 +652,7 @@ public class GeneralRouter implements VehicleRouter {
 			// more like UT
 			if (diff > 2 * Math.PI / 3) {
 				totalPenalty += getLeftTurn();
-			} else if (diff > Math.PI / 3) {
+			} else if (diff > Math.PI / 2.1) {
 				totalPenalty += getRightTurn();
 			}
 		}
