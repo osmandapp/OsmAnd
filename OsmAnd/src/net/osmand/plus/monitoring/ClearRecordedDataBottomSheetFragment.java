@@ -36,7 +36,7 @@ public class ClearRecordedDataBottomSheetFragment extends MenuBottomSheetDialogF
 		app = requiredMyApplication();
 		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
 		int verticalBig = getResources().getDimensionPixelSize(R.dimen.dialog_content_margin);
-		int verticalSmall = getResources().getDimensionPixelSize(R.dimen.content_padding_small);
+		int verticalNormal = getResources().getDimensionPixelSize(R.dimen.content_padding);
 
 		final View buttonClear = createItem(inflater, ItemType.CLEAR_DATA);
 		final View buttonCancel = createItem(inflater, ItemType.CANCEL);
@@ -74,7 +74,7 @@ public class ClearRecordedDataBottomSheetFragment extends MenuBottomSheetDialogF
 				})
 				.create());
 
-		items.add(new DividerSpaceItem(app, verticalSmall));
+		items.add(new DividerSpaceItem(app, verticalNormal));
 	}
 
 	private View createItem(LayoutInflater inflater, ItemType type) {

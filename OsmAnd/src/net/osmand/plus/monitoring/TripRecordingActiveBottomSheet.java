@@ -80,6 +80,7 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 	private SelectedGpxFile selectedGpxFile;
 
 	private View statusContainer;
+	private LinearLayout buttonAppearance;
 	private View buttonSave;
 	private GpxBlockStatisticsBuilder blockStatisticsBuilder;
 
@@ -129,15 +130,19 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 				.create());
 
 		View buttonClear = itemView.findViewById(R.id.button_clear);
+		final View buttonOnline = itemView.findViewById(R.id.button_online);
 		View buttonSegment = itemView.findViewById(R.id.button_segment);
 		buttonSave = itemView.findViewById(R.id.button_save);
 		final View buttonPause = itemView.findViewById(R.id.button_pause);
 		View buttonStop = itemView.findViewById(R.id.button_stop);
 
 		createItem(buttonClear, ItemType.CLEAR_DATA, hasDataToSave());
+		createItem(buttonOnline, ItemType.STOP_ONLINE, hasDataToSave());
 		createItem(buttonSegment, ItemType.START_SEGMENT, wasTrackMonitored());
 		createItem(buttonPause, wasTrackMonitored() ? ItemType.PAUSE : ItemType.RESUME, true);
 		createItem(buttonStop, ItemType.STOP, true);
+
+		AndroidUiHelper.updateVisibility(buttonOnline, app.getLiveMonitoringHelper().isLiveMonitoringEnabled());
 
 		statusContainer = itemView.findViewById(R.id.status_container);
 		updateStatus();
@@ -163,31 +168,29 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 		if (showTitle != null) {
 			showTrackTitle.setText(showTitle);
 		}
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+			buttonShow.setPaddingRelative(AndroidUtils.dpToPx(app, 12f), 0, buttonShow.getPaddingRight(), 0);
+		} else {
+			buttonShow.setPadding(AndroidUtils.dpToPx(app, 12f), 0, buttonShow.getPaddingRight(), 0);
+		}
 		showTrackTitle.setTextColor(ContextCompat.getColor(app, getActiveIconColorId(nightMode)));
 		showTrackTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.default_desc_text_size));
 		Typeface typeface = FontCache.getFont(app, app.getResources().getString(R.string.font_roboto_medium));
 		showTrackTitle.setTypeface(typeface);
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-			float letterSpacing = AndroidUtils.getFloatValueFromRes(app, R.dimen.description_letter_spacing);
+			float letterSpacing = AndroidUtils.getFloatValueFromRes(app, R.dimen.text_button_letter_spacing);
 			showTrackTitle.setLetterSpacing(letterSpacing);
 		}
 		final SwitchCompat showTrackOnMapButton = buttonShow.findViewById(R.id.switch_button);
 		showTrackOnMapButton.setChecked(app.getSelectedGpxHelper().getSelectedCurrentRecordingTrack() != null);
 		UiUtilities.setupCompoundButton(showTrackOnMapButton, nightMode, PROFILE_DEPENDENT);
 
-		final LinearLayout buttonAppearance = showTrackContainer.findViewById(R.id.additional_button);
+		buttonAppearance = showTrackContainer.findViewById(R.id.additional_button);
 		View divider = buttonAppearance.getChildAt(0);
 		AndroidUiHelper.setVisibility(View.GONE, divider);
 		int marginS = app.getResources().getDimensionPixelSize(R.dimen.context_menu_padding_margin_small);
 		UiUtilities.setMargins(buttonAppearance, marginS, 0, 0, 0);
-		String width = settings.CURRENT_TRACK_WIDTH.get();
-		boolean showArrows = settings.CURRENT_TRACK_SHOW_ARROWS.get();
-		int color = settings.CURRENT_TRACK_COLOR.get();
-		Drawable appearanceDrawable = TrackAppearanceFragment.getTrackIcon(app, width, showArrows, color);
-		AppCompatImageView appearanceIcon = buttonAppearance.findViewById(R.id.icon_after_divider);
-		int marginTrackIconH = app.getResources().getDimensionPixelSize(R.dimen.content_padding_small);
-		UiUtilities.setMargins(appearanceIcon, marginTrackIconH, 0, marginTrackIconH, 0);
-		appearanceIcon.setImageDrawable(appearanceDrawable);
+		updateTrackIcon(buttonAppearance);
 		buttonAppearance.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -223,6 +226,14 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 				if (fragmentManager != null && hasDataToSave()) {
 					ClearRecordedDataBottomSheetFragment.showInstance(fragmentManager, TripRecordingActiveBottomSheet.this);
 				}
+			}
+		});
+
+		buttonOnline.findViewById(R.id.button_container).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				settings.LIVE_MONITORING.set(false);
+				AndroidUiHelper.updateVisibility(buttonOnline, false);
 			}
 		});
 
@@ -297,6 +308,17 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 			Drawable statusDrawable = UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, iconId), colorDrawable);
 			statusIcon.setImageDrawable(statusDrawable);
 		}
+	}
+
+	private void updateTrackIcon(View buttonAppearance) {
+		String width = settings.CURRENT_TRACK_WIDTH.get();
+		boolean showArrows = settings.CURRENT_TRACK_SHOW_ARROWS.get();
+		int color = settings.CURRENT_TRACK_COLOR.get();
+		Drawable appearanceDrawable = TrackAppearanceFragment.getTrackIcon(app, width, showArrows, color);
+		AppCompatImageView appearanceIcon = buttonAppearance.findViewById(R.id.icon_after_divider);
+		int marginTrackIconH = app.getResources().getDimensionPixelSize(R.dimen.content_padding_small);
+		UiUtilities.setMargins(appearanceIcon, marginTrackIconH, 0, marginTrackIconH, 0);
+		appearanceIcon.setImageDrawable(appearanceDrawable);
 	}
 
 	private void createItem(View view, ItemType type, boolean enabled) {
@@ -474,6 +496,13 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 		}
 	}
 
+	public void show(boolean updateTrackIcon) {
+		show();
+		if (updateTrackIcon && buttonAppearance != null) {
+			updateTrackIcon(buttonAppearance);
+		}
+	}
+
 	public void hide() {
 		Dialog dialog = getDialog();
 		if (dialog != null) {
@@ -495,6 +524,7 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 		STOP(R.string.shared_string_control_stop, R.drawable.ic_action_rec_stop),
 		STOP_AND_DISCARD(R.string.track_recording_stop_without_saving, R.drawable.ic_action_rec_stop),
 		STOP_AND_SAVE(R.string.track_recording_save_and_stop, R.drawable.ic_action_save_to_file),
+		STOP_ONLINE(R.string.live_monitoring_stop, R.drawable.ic_world_globe_dark),
 		CANCEL(R.string.shared_string_cancel, R.drawable.ic_action_close);
 
 		@StringRes

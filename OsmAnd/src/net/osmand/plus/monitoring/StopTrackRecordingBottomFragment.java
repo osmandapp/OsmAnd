@@ -50,7 +50,7 @@ public class StopTrackRecordingBottomFragment extends MenuBottomSheetDialogFragm
 		plugin = OsmandPlugin.getPlugin(OsmandMonitoringPlugin.class);
 		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
 		int verticalBig = getResources().getDimensionPixelSize(R.dimen.dialog_content_margin);
-		int verticalSmall = getResources().getDimensionPixelSize(R.dimen.content_padding_small);
+		int verticalNormal = getResources().getDimensionPixelSize(R.dimen.content_padding);
 
 		final View buttonDiscard = createItem(inflater, ItemType.STOP_AND_DISCARD);
 		final View buttonSave = createItem(inflater, ItemType.STOP_AND_SAVE);
@@ -99,7 +99,7 @@ public class StopTrackRecordingBottomFragment extends MenuBottomSheetDialogFragm
 				})
 				.create());
 
-		items.add(new DividerSpaceItem(app, verticalSmall));
+		items.add(new DividerSpaceItem(app, verticalNormal));
 
 		items.add(new BaseBottomSheetItem.Builder()
 				.setCustomView(buttonCancel)
@@ -112,7 +112,7 @@ public class StopTrackRecordingBottomFragment extends MenuBottomSheetDialogFragm
 				})
 				.create());
 
-		items.add(new DividerSpaceItem(app, verticalSmall));
+		items.add(new DividerSpaceItem(app, verticalNormal));
 	}
 
 	private View createItem(LayoutInflater inflater, ItemType type) {
