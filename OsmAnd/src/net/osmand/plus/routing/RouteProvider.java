@@ -411,9 +411,9 @@ public class RouteProvider {
 			Location start = new Location("", firstGpxPoint.getLatitude(), firstGpxPoint.getLongitude());
 
 			for (int i = 1; i < gpxParams.routePoints.size(); i++) {
-				WptPt pt = gpxParams.routePoints.get(i);
-				ApplicationMode appMode = ApplicationMode.valueOfStringKey(pt.getProfileType(), ApplicationMode.DEFAULT);
-				LatLon end = new LatLon(pt.getLatitude(), pt.getLongitude());
+				WptPt gpxPoint = gpxParams.routePoints.get(i);
+				ApplicationMode appMode = ApplicationMode.valueOfStringKey(gpxPoint.getProfileType(), ApplicationMode.DEFAULT);
+				LatLon end = new LatLon(gpxPoint.getLatitude(), gpxPoint.getLongitude());
 
 				RouteCalculationParams params = new RouteCalculationParams();
 				params.inSnapToRoadMode = true;
@@ -458,29 +458,29 @@ public class RouteProvider {
 			RouteCalculationResult result = new RouteCalculationResult(gpxRouteResult, routeParams.start, routeParams.end,
 						routeParams.intermediates, routeParams.ctx, routeParams.leftSide, null, null, routeParams.mode, false);
 			List<Location> gpxRouteLocations = result.getImmutableAllLocations();
-			int gpxNextIndex = calcWholeRoute ? 0 : findStartIndexFromRoute(gpxRouteLocations, routeParams.start, calculateOsmAndRouteParts);
-			Location gpxNextLocation = null;
+			int nearestGpxPointInd = calcWholeRoute ? 0 : findNearestGpxPointIndexFromRoute(gpxRouteLocations, routeParams.start, calculateOsmAndRouteParts);
+			Location nearestGpxLocation = null;
 			Location gpxLastLocation = !gpxRouteLocations.isEmpty() ? gpxRouteLocations.get(gpxRouteLocations.size() - 1) : null;
 			List<RouteSegmentResult> firstSegmentRoute = null;
 			List<RouteSegmentResult> lastSegmentRoute = null;
 			List<RouteSegmentResult> gpxRoute;
-			if (gpxNextIndex > 0) {
-				gpxNextLocation = gpxRouteLocations.get(gpxNextIndex);
-				gpxRoute = result.getOriginalRoute(gpxNextIndex);
+			if (nearestGpxPointInd > 0) {
+				nearestGpxLocation = gpxRouteLocations.get(nearestGpxPointInd);
+				gpxRoute = result.getOriginalRoute(nearestGpxPointInd);
 				if (gpxRoute.size() > 0) {
 					gpxRoute.remove(0);
 				}
 			} else {
 				if (!gpxRouteLocations.isEmpty()) {
-					gpxNextLocation = gpxRouteLocations.get(0);
+					nearestGpxLocation = gpxRouteLocations.get(0);
 				}
 				gpxRoute = result.getOriginalRoute();
 			}
 			if (calculateOsmAndRouteParts
-					&& routeParams.start != null && gpxNextLocation != null
-					&& gpxNextLocation.distanceTo(routeParams.start) > MIN_DISTANCE_FOR_INSERTING_ROUTE_SEGMENT) {
+					&& routeParams.start != null && nearestGpxLocation != null
+					&& nearestGpxLocation.distanceTo(routeParams.start) > MIN_DISTANCE_FOR_INSERTING_ROUTE_SEGMENT) {
 				RouteCalculationResult firstSegmentResult = findOfflineRouteSegment(
-						routeParams, routeParams.start, new LatLon(gpxNextLocation.getLatitude(), gpxNextLocation.getLongitude()));
+						routeParams, routeParams.start, new LatLon(nearestGpxLocation.getLatitude(), nearestGpxLocation.getLongitude()));
 				firstSegmentRoute = firstSegmentResult.getOriginalRoute();
 			}
 			if (calculateOsmAndRouteParts
@@ -730,28 +730,28 @@ public class RouteProvider {
 		return sublist;
 	}
 
-	private int findStartIndexFromRoute(List<Location> route, Location startLoc, boolean calculateOsmAndRouteParts) {
+	private int findNearestGpxPointIndexFromRoute(List<Location> route, Location startLoc, boolean calculateOsmAndRouteParts) {
 		float minDist = Integer.MAX_VALUE;
-		int start = 0;
+		int nearestPointIndex = 0;
 		if (startLoc != null) {
 			for (int i = 0; i < route.size(); i++) {
 				float d = route.get(i).distanceTo(startLoc);
 				if (d < minDist) {
-					start = i;
+					nearestPointIndex = i;
 					minDist = d;
 				}
 			}
 		}
-		if (start > 0 && calculateOsmAndRouteParts) {
-			Location newStartLoc = route.get(start);
-			for (int i = start + 1; i < route.size(); i++) {
-				Location loc = route.get(i);
-				if (loc.distanceTo(newStartLoc) >= ADDITIONAL_DISTANCE_FOR_START_POINT) {
+		if (nearestPointIndex > 0 && calculateOsmAndRouteParts) {
+			Location nearestLocation = route.get(nearestPointIndex);
+			for (int i = nearestPointIndex + 1; i < route.size(); i++) {
+				Location nextLocation = route.get(i);
+				if (nextLocation.distanceTo(nearestLocation) >= ADDITIONAL_DISTANCE_FOR_START_POINT) {
 					return i;
 				}
 			}
 		}
-		return start;
+		return nearestPointIndex;
 	}
 
 	protected String getString(Context ctx, int resId){
