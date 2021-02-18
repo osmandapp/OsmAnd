@@ -2158,7 +2158,7 @@
     <string name="rendering_attr_depthContours_description">Afficher les lignes et points de sonde.</string>
     <string name="rendering_attr_depthContours_name">Lignes de sonde maritimes</string>
     <string name="routing_attr_height_obstacles_name">Utiliser les données d\'altitude</string>
-    <string name="routing_attr_height_obstacles_description">Facteur pour les données d\'altitude fournies par SRTM, ASTER et EU-DEM.</string>
+
     <string name="average_altitude">Altitude moyenne</string>
     <string name="total_distance">Distance totale</string>
     <string name="shared_string_time">Durée</string>

@@ -779,7 +779,7 @@
     <string name="altitude_descent">Eniş</string>
     <string name="altitude_ascent">Yoxuş</string>
     <string name="routing_attr_height_obstacles_name">Yüksəklik məlumatlarını istifadə et</string>
-    <string name="routing_attr_height_obstacles_description">SRTM, ASTER və EU-DEM tərəfindən təmin edilən ərazi yüksəklik məlumatlarını istifadə et.</string>
+
     <string name="rendering_attr_depthContours_description">Dərinlik konturlarını və nöqtələrini göstər.</string>
     <string name="rendering_attr_depthContours_name">Dəniz dərinliyi konturları</string>
     <string name="rendering_attr_contourDensity_description">Kontur xəttinin sıxlığı</string>

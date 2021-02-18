@@ -2167,7 +2167,7 @@
     <string name="rendering_attr_depthContours_name">Curvas de profondidade nàuticas</string>
     <string name="rendering_attr_depthContours_description">Ammustra sas lìnias de profondidade.</string>
     <string name="routing_attr_height_obstacles_name">Imprea sos datos de s\'artària</string>
-    <string name="routing_attr_height_obstacles_description">Fatore pro s\'artària de su terrinu (dae datos SRTM, ASTER e EU-DEM).</string>
+
     <string name="routing_attr_driving_style_name">Istile de ghia</string>
     <string name="route_altitude">Artària de su caminu</string>
     <string name="altitude_descent">Falada</string>

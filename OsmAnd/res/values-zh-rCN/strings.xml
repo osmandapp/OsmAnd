@@ -1382,7 +1382,7 @@
     <string name="average_altitude">平均海拔</string>
     <string name="routing_attr_relief_smoothness_factor_name">选择海拔波动</string>
     <string name="routing_attr_height_obstacles_name">使用标高数据</string>
-    <string name="routing_attr_height_obstacles_description">地形高程因素（通过 SRTM、ASTER 和欧盟 DEM 数据）。</string>
+
     <string name="rendering_attr_depthContours_description">显示等深线和标记。</string>
     <string name="rendering_attr_depthContours_name">航海等深线</string>
     <string name="auto_split_recording_title">自动拆分录音后的间隙</string>

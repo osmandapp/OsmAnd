@@ -2174,7 +2174,7 @@
     <string name="shared_string_time">Čas</string>
     <string name="total_distance">Celková vzdálenost</string>
     <string name="routing_attr_height_obstacles_name">Použít údaje o nadmořské výšce</string>
-    <string name="routing_attr_height_obstacles_description">Zohlednit převýšení terénu (data od SRTM, ASTER a EU-DEM).</string>
+
     <string name="routing_attr_driving_style_name">Styl jízdy</string>
     <string name="select_gpx_folder">Vyberte složku pro soubor GPX</string>
     <string name="file_can_not_be_moved">Soubor se nepodařilo přesunout.</string>

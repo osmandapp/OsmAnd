@@ -1525,7 +1525,7 @@
     <string name="index_item_depth_points_northern_hemisphere">Поморске дубинске тачке северне полулопте</string>
     <string name="download_depth_countours">Поморске изобате</string>
     <string name="shared_string_color">Боја</string>
-    <string name="routing_attr_height_obstacles_description">Урачунај и податке висине земљишта (обезбеђених помоћу СРМ, АСТЕР и ЕУ-ДЕМ података).</string>
+
     <string name="auto_split_recording_title">Самоподели снимке после размака</string>
     <string name="auto_split_recording_descr">Почни нови одсечак после размака од 6 минута, нову путању после размака од 2 сата, или нови фајл после дужег размака ако је дан измењен.</string>
     <string name="rendering_attr_showMtbRoutes_name">Прикажи путеве планинских бицикли</string>

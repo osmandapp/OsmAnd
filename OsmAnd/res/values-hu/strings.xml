@@ -2168,7 +2168,7 @@
     <string name="shared_string_time">Idő</string>
     <string name="total_distance">Teljes táv</string>
     <string name="routing_attr_height_obstacles_name">Magasságadatok használata</string>
-    <string name="routing_attr_height_obstacles_description">Terepmagasság figyelembe vétele (SRTM, ASTER és EU-DEM domborzatmodellekből).</string>
+
     <string name="rendering_attr_depthContours_description">Mélységvonalak és pontok megjelenítése.</string>
     <string name="rendering_attr_depthContours_name">Tengeri mélységvonalak</string>
     <string name="auto_split_recording_title">Felvételek automatikus szétvágása szünet után</string>

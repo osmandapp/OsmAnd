@@ -2189,7 +2189,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="mapillary_image">Vyjava Mapillary</string>
     <string name="mapillary_widget_descr">Dazvaliaje chutki ŭniosak ŭ Mapillary.</string>
     <string name="relief_smoothness_factor_descr">Pieravažny reĺjef: raŭninny ci harysty.</string>
-    <string name="routing_attr_height_obstacles_description">Faktar vyšyni ziamnoj pavierchni (danyja z SRTM, ASTER i EU-DEM).</string>
+
     <string name="rendering_attr_depthContours_description">Pakazvać kontury i punkty hlybini.</string>
     <string name="rendering_attr_contourDensity_description">Ščyĺnasć haryzantaliaŭ</string>
     <string name="rendering_attr_contourWidth_description">Taŭščynia haryzantaliaŭ (izahipsy)</string>

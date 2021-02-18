@@ -2307,7 +2307,7 @@
     <string name="average_altitude">Ortalama yükseklik</string>
     <string name="routing_attr_relief_smoothness_factor_name">Yükseklikte dalgalanma seçin</string>
     <string name="routing_attr_height_obstacles_name">Yükseklik verisi kullan</string>
-    <string name="routing_attr_height_obstacles_description">Arazi kotunda faktör (SRTM, ASTER ve EU-DEM verileri aracılığıyla).</string>
+
     <string name="search_map_hint">Şehir veya bölge</string>
     <string name="route_roundabout_short">%1$d çıkışa gir ve ilerle</string>
     <string name="gpx_no_tracks_title">Henüz yol dosyanız yok</string>
