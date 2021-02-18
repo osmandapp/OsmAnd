@@ -32,7 +32,6 @@
     <string name="poi_filter_fuel">Palivo</string>
     <string name="add_tag">Pridať značku</string>
     <string name="btn_advanced_mode">Pokročilý režim…</string>
-    <string name="snap_to_road_descr">Prichytiť pozíciu k cestám počas navigácie.</string>
     <string name="snap_to_road">Prichytiť k ceste</string>
     <string name="avoid_motorway">Žiadne diaľnice</string>
     <string name="layer_map_appearance">Konfigurovať obrazovku</string>
@@ -1989,7 +1988,6 @@
     <string name="shared_string_change">Zmeniť</string>
     <string name="get_started">Začať</string>
     <string name="routing_attr_short_way_name">Ekonomická trasa</string>
-    <string name="routing_attr_short_way_description">Použiť ekonomickú trasu (obyčajne kratšia).</string>
     <string name="replace_favorite_confirmation">Naozaj chcete nahradiť Obľúbený bod %1$s?</string>
     <string name="skip_map_downloading">Preskočiť sťahovanie máp</string>
     <string name="skip_map_downloading_desc">Nemáte nainštalovanú žiadnu offline mapu. Môžete vybrať mapu zo zoznamu alebo stiahnuť mapy neskôr cez \"Menu - %1$s\".</string>
@@ -2167,7 +2165,7 @@
     <string name="rendering_attr_depthContours_description">Zobraziť hĺbkové úrovne a body.</string>
     <string name="rendering_attr_depthContours_name">Námorné hĺbkové vrstevnice</string>
     <string name="routing_attr_height_obstacles_name">Použiť údaje nadmorskej výšky</string>
-    <string name="routing_attr_height_obstacles_description">Zohľadniť prevýšenie terénu (z údajov SRTM, ASTER a EU-DEM).</string>
+
     <string name="route_altitude">Prevýšenie trasy</string>
     <string name="altitude_descent">Klesanie</string>
     <string name="altitude_ascent">Stúpanie</string>
@@ -2415,7 +2413,7 @@
     <string name="distance_moving">Vzdialenosť opravená</string>
     <string name="shared_string_permissions">Povolenia</string>
     <string name="import_gpx_failed_descr">Nepodarilo sa naimportovať súbor. Prosím zabezpečte, že OsmAnd má oprávnenie čítať súbor.</string>
-    <string name="map_widget_ruler_control">Polomerové pravítko</string>
+    <string name="map_widget_ruler_control">Kruhové pravítko</string>
     <string name="shared_string_reset">Resetovať</string>
     <string name="shared_string_reload">Znovu načítať</string>
     <string name="mapillary_menu_descr_tile_cache">Znovu načítať dlaždice pre získanie aktuálnych dát.</string>
@@ -2434,7 +2432,7 @@
     <string name="average">Priemer</string>
     <string name="of">%1$d z %2$d</string>
     <string name="ascent_descent">Stúpanie/Klesanie</string>
-    <string name="moving_time">Trvanie presunu</string>
+    <string name="moving_time">Čas v pohybe</string>
     <string name="max_min">Max/Min</string>
     <string name="quick_action_resume_pause_navigation">Pozastaviť/pokračovať navigáciu</string>
     <string name="quick_action_resume_pause_navigation_descr">Tlačidlo pre pozastavenie alebo pokračovanie navigácie.</string>
@@ -3580,7 +3578,7 @@
     <string name="tracker_item">Stopovanie OsmAnd</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>
     <string name="quick_action_item">Rýchla akcia</string>
-    <string name="radius_ruler_item">Polomerové pravítko</string>
+    <string name="radius_ruler_item">Kruhové pravítko</string>
     <string name="measure_distance_item">Merať vzdialenosť</string>
     <string name="travel_item">Cestovanie (Wikivoyage a Wikipédia)</string>
     <string name="map_markers_item">Mapové značky</string>
@@ -3914,9 +3912,8 @@
     <string name="gpx_upload_private_visibility_descr">\"Súkromná\" znamená, že trasa sa nezobrazí vo verejných zoznamoch, ale body trasy z nej v budú dostupné v neusporiadanom poradí cez verejné GPS rozhranie (API) bez časových pečiatok.</string>
     <string name="gpx_upload_identifiable_visibility_descr">\"Identifikovateľná\" znamená, že trasa sa zobrazí verejne vo vašich GPS stopách a vo verejných zoznamoch GPS stôp, tzn. iní používatelia budú môcť stiahnuť nespracovanú trasu a prepojiť su s vašim používateľkým menom. Verejné body trasy s časovými pečiatkami poskytované cez GPS rozhranie (API) budú odkazovať na vašu pôvodnú stránku s trasou.</string>
     <string name="gpx_upload_trackable_visibility_descr">\"Sledovateľná\" znamená, že trasa sa nezobrazí vo verejných zoznamoch, ale spracované body trasy s časovými pečiatkami (ktoré nie je možné spojiť s vami), budú dostupné na stiahnutie cez verejné GPS rozhranie (API).</string>
-    <string name="elevation_data">Údaje o nadmorskej výške môžete použiť na zaznamenanie stúpania / klesania vašej cesty</string>
     <string name="app_mode_light_aircraft">Ľahké lietadlo</string>
-    <string name="plan_route_join_segments">Prepojte segmenty</string>
+    <string name="plan_route_join_segments">Spojiť úseky</string>
     <string name="plan_route_split_before">Rozdeliť predtým</string>
     <string name="plan_route_split_after">Rozdeliť po</string>
     <string name="plan_route_add_new_segment">Pridať nový segment</string>
@@ -3962,7 +3959,7 @@
     <string name="select_folder">Zvoľte priečinok</string>
     <string name="select_folder_descr">Zvoľte priečinok alebo pridajte nový</string>
     <string name="shared_string_empty">Prázdne</string>
-    <string name="analyze_by_intervals">Analyzovať podľa intervalov (rozdeliť interval)</string>
+    <string name="analyze_by_intervals">Analyzovať rozdelené intervaly</string>
     <string name="upload_to_openstreetmap">Nahrať do OpenStreetMap</string>
     <string name="edit_track">Upraviť stopu</string>
     <string name="rename_track">Premenovať stopu</string>
@@ -4001,4 +3998,31 @@
     <string name="delete_waypoints">Odstrániť body trasy</string>
     <string name="copy_to_map_markers">Skopírovať do mapových značiek</string>
     <string name="copy_to_map_favorites">Skopírovať do obľúbených</string>
+    <string name="upload_photo">Odosielanie</string>
+    <string name="upload_photo_completed">Odoslanie dokončené</string>
+    <string name="uploading_count">Odosiela sa %1$d z %2$d</string>
+    <string name="uploaded_count">Odoslané %1$d z %2$d</string>
+    <string name="toast_select_edits_for_upload">Zvoľte úpravy na odoslanie</string>
+    <string name="hillshade_slope_contour_lines">Tieňované svahy / Sklony svahov / Vrstevnice</string>
+    <string name="open_place_reviews_plugin_description">OpenPlaceReviews je komunitný projekt o verejných miestach ako reštaurácie, hotely, múzeá, body trasy. Zhromažďuje o nich verejné informácie ako fotografie, hodnotenia, odkazy na iné databázy ako OpenStreetMap, Wikipédia.
+\n
+\nVšetky údaje OpenPlaceReview data sú dostupné každému: http://openplacereviews.org/data.
+\n
+\nViac sa môžete dočítať na: http://openplacereviews.org</string>
+    <string name="open_place_reviews">OpenPlaceReviews</string>
+    <string name="opr_use_dev_url">Použiť test.openplacereviews.org</string>
+    <string name="login_open_place_reviews">Prihlásiť sa do OpenPlaceReviews</string>
+    <string name="activity_type_water_name">Voda</string>
+    <string name="activity_type_winter_name">Zima</string>
+    <string name="activity_type_snowmobile_name">Snežný skúter</string>
+    <string name="activity_type_riding_name">Jazda na koni</string>
+    <string name="activity_type_racing_name">Preteky</string>
+    <string name="activity_type_mountainbike_name">Horský bicykel</string>
+    <string name="activity_type_cycling_name">Cyklistika</string>
+    <string name="activity_type_hiking_name">Turistika</string>
+    <string name="activity_type_running_name">Beh</string>
+    <string name="activity_type_walking_name">Chôdza</string>
+    <string name="activity_type_offroad_name">Jazda mimo cesty</string>
+    <string name="activity_type_motorbike_name">Motorka</string>
+    <string name="activity_type_car_name">Auto</string>
 </resources>

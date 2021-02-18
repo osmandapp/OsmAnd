@@ -41,7 +41,6 @@
     <string name="avoid_motorway">Ingen motorveier</string>
     <string name="auto_zoom_map_descr">Zoomnivå i henhold til hastigheten din (mens kartet er synkronisert med gjeldende posisjon).</string>
     <string name="auto_zoom_map">Auto-zoom kart</string>
-    <string name="snap_to_road_descr">Hold posisjon på veien under navigering.</string>
     <string name="snap_to_road">Hold på vei</string>
     <string name="osmand_short_description_80_chars">Global mobilkartvisning &amp; navigering for offline og nettbaserte OSM-kart</string>
     <string name="osmand_plus_short_description_80_chars">Global mobilkartvisning &amp; navigering for offline og nettbaserte OSM-kart</string>
@@ -1558,7 +1557,6 @@
     <string name="replace_favorite_confirmation">Er du sikker på at du vil erstatte favoritt %1$s\?</string>
     <string name="get_started">Kom i gang</string>
     <string name="routing_attr_short_way_name">Drivstoff-effektiv vei</string>
-    <string name="routing_attr_short_way_description">Bruk drivstoffeffektiv vei (vanligvis kortere).</string>
     <string name="edit_tilesource_expiration_time">Utløper (minutter)</string>
     <string name="local_index_tile_data_expire">Utløper (minutter): %1$s</string>
     <string name="current_track">Aktuelle spor</string>
@@ -2017,7 +2015,7 @@
     <string name="add_new_folder">Legg til ny mappe</string>
     <string name="shared_string_gpx_track">Spor</string>
     <string name="routing_attr_height_obstacles_name">Bruk høydedata</string>
-    <string name="routing_attr_height_obstacles_description">Ta hensyn til terrenghøyde (data fra SRTM, ASTER og EU-DEM).</string>
+
     <string name="quick_action_bug_message">Melding</string>
     <string name="shared_string_permissions">Tillatelser</string>
     <string name="import_gpx_failed_descr">Kunne ikke importere filen. Kontroller at OsmAnd har tillatelse til å lese den.</string>
@@ -3846,7 +3844,6 @@
 \nOpenPlaceReviews - interessepunktbilder;
 \nMapillary - bilder på gatenivå;
 \nWeb / Wikimedia - interessepunktbilder i henhold til OpenStreetMap-data.</string>
-    <string name="elevation_data">Du kan bruke høydedata for å ta hensyn til stigning/nedstigning på turen din</string>
     <string name="app_mode_light_aircraft">Småfly</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="lang_de_casual">Tysk (uformell)</string>

@@ -54,7 +54,7 @@
     <string name="poi_service_tyres">Autógumi-szerelő</string>
     <string name="poi_car_wash">Autómosó</string>
     <string name="poi_fuel">Benzinkút;Töltőállomás;Gázolajtöltő-állomás</string>
-    <string name="poi_electricity_combined_charging">Elektromos töltőállomás</string>
+    <string name="poi_electricity_combined_charging">Elektromos töltőállomás;Elektromos autó töltése;Villanyautó töltése;Elektromos töltőpont</string>
     <string name="poi_compressed_air">Sűrített levegő</string>
     <string name="poi_parking">Parkoló</string>
     <string name="poi_motorcycle_parking">Motorkerékpár-parkoló</string>
@@ -708,7 +708,7 @@
     <string name="poi_recycling_cars">Autó</string>
     <string name="poi_recycling_bicycles">Kerékpár</string>
     <string name="poi_landfill_waste_nuclear">Radioaktívhulladék-lerakó</string>
-    <string name="poi_basin">Vízgyűjtő</string>
+    <string name="poi_basin">Vízgyűjtő medence</string>
     <string name="poi_monitoring_station">Megfigyelőállomás</string>
     <string name="poi_crane">Daru</string>
     <string name="poi_construction">Építkezés</string>
@@ -2633,7 +2633,7 @@
     <string name="poi_lottery">Lottózó</string>
     <string name="poi_gambling">Szerencsejáték-helyszín</string>
     <string name="poi_gambling_type">Típus</string>
-    <string name="poi_gambling_lottery">Lottózó</string>
+    <string name="poi_gambling_lottery">Lottó</string>
     <string name="poi_gambling_slot_machines">Játékgépek</string>
     <string name="poi_gambling_betting">Fogadás</string>
     <string name="poi_e_cigarette">E-cigaretta-bolt</string>
@@ -3446,7 +3446,7 @@
     <string name="poi_service_vehicle_motor_yes">Motorszerelés</string>
     <string name="poi_service_vehicle_insurance_yes">Biztosítás</string>
     <string name="poi_service_vehicle_tyres_yes">Gumiszerelés</string>
-    <string name="poi_aerialway_zip_line">Kötélpálya</string>
+    <string name="poi_aerialway_zip_line">Csúszópálya</string>
     <string name="poi_climbing_adventure">Kalandpark</string>
     <string name="poi_via_ferrata">Via ferrata (vasalt út)</string>
     <string name="poi_cable_number">Sodronyok száma</string>
@@ -3524,7 +3524,7 @@
     <string name="poi_books_academic">akadémiai</string>
     <string name="poi_books_children">gyermekkönyv</string>
     <string name="poi_atoll">Atoll</string>
-    <string name="poi_toll_gantry">Útdíjellenőrző kapu</string>
+    <string name="poi_toll_gantry">Automatikus útdíjbeszedő kapu</string>
     <string name="poi_childcare">Gyermekgondozás (bölcsőde)</string>
     <string name="poi_denotation_natural_monument">Természeti emlék</string>
     <string name="poi_denotation_landmark">Tájékozódási pont</string>
@@ -3582,7 +3582,7 @@
     <string name="poi_charcoal_pile">Faszénégető boksa</string>
     <string name="poi_historic_tank">Történelmi harckocsi</string>
     <string name="poi_hookah_lounge">Vízipipázó társalgóhely</string>
-    <string name="poi_source_biomass">Energiaforrás: biomassza</string>
+    <string name="poi_generator_source_biomass">Energiaforrás: biomassza</string>
     <string name="poi_taxi_office">Taxiiroda</string>
     <string name="poi_cellar_entrance">Pincebejárat</string>
     <string name="poi_craft_builder">Kőműves</string>
@@ -3879,4 +3879,14 @@
     <string name="poi_wildlife_crossing_bat_tunnel">Denevéralagút</string>
     <string name="poi_wildlife_crossing_bat_bridge">Denevérhíd</string>
     <string name="poi_wildlife_crossing">Vadátjáró</string>
+    <string name="poi_summit_register_no">Csúcsnapló nincs</string>
+    <string name="poi_summit_register_yes">Csúcsnapló van</string>
+    <string name="poi_patrolled_no">Hegyi mentő nincs</string>
+    <string name="poi_patrolled_yes">Hegyi mentő van</string>
+    <string name="poi_gladed_yes">Erdei pálya</string>
+    <string name="poi_mobile_library">Mozgó könyvtár tartózkodási helye</string>
+    <string name="poi_piste_status_closed">Pálya állapota: zárva</string>
+    <string name="poi_piste_status_open">Pálya állapota: nyitva</string>
+    <string name="poi_piste_name">Pálya neve</string>
+    <string name="poi_piste_ski_jump">Síugrósánc</string>
 </resources>

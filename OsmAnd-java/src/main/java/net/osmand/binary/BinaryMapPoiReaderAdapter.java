@@ -1,10 +1,6 @@
 package net.osmand.binary;
 
 
-import gnu.trove.list.array.TIntArrayList;
-import gnu.trove.map.hash.TIntLongHashMap;
-import gnu.trove.set.hash.TLongHashSet;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,6 +8,14 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+
+import com.google.protobuf.CodedInputStream;
+import com.google.protobuf.WireFormat;
+
+import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.map.hash.TIntLongHashMap;
+import gnu.trove.set.hash.TLongHashSet;
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
@@ -26,11 +30,6 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.util.MapUtils;
 
-import org.apache.commons.logging.Log;
-
-import com.google.protobuf.CodedInputStream;
-import com.google.protobuf.WireFormat;
-
 public class BinaryMapPoiReaderAdapter {
 	private static final Log LOG = PlatformUtil.getLog(BinaryMapPoiReaderAdapter.class);
 
@@ -38,7 +37,12 @@ public class BinaryMapPoiReaderAdapter {
 	private static final int CATEGORY_MASK = (1 << SHIFT_BITS_CATEGORY) - 1;
 	private static final int ZOOM_TO_SKIP_FILTER_READ = 6;
 	private static final int ZOOM_TO_SKIP_FILTER = 3;
-	private static final int BUCKET_SEARCH_BY_NAME = 5;
+	private static final int BUCKET_SEARCH_BY_NAME = 15; // should be bigger 100?
+	private static final int BASE_POI_SHIFT = SHIFT_BITS_CATEGORY;// 7
+	private static final int FINAL_POI_SHIFT = BinaryMapIndexReader.SHIFT_COORDINATES;// 5
+	private static final int BASE_POI_ZOOM = 31 - BASE_POI_SHIFT;// 24 zoom
+	private static final int FINAL_POI_ZOOM = 31 - FINAL_POI_SHIFT;// 26 zoom
+
 
 	public static class PoiSubType {
 		public boolean text;
@@ -332,7 +336,7 @@ public class BinaryMapPoiReaderAdapter {
 					});
 					int p = BUCKET_SEARCH_BY_NAME * 3;
 					if (p < offKeys.length) {
-						for (int i = p + BUCKET_SEARCH_BY_NAME; ; i += BUCKET_SEARCH_BY_NAME) {
+						for (int i = p + BUCKET_SEARCH_BY_NAME;; i += BUCKET_SEARCH_BY_NAME) {
 							if (i > offKeys.length) {
 								Arrays.sort(offKeys, p, offKeys.length);
 								break;
@@ -343,7 +347,6 @@ public class BinaryMapPoiReaderAdapter {
 						}
 					}
 				}
-
 
 				LOG.info("Searched poi structure in " + (System.currentTimeMillis() - time) +
 						"ms. Found " + offKeys.length + " subtrees");
@@ -370,7 +373,8 @@ public class BinaryMapPoiReaderAdapter {
 
 	private TIntLongHashMap readPoiNameIndex(Collator instance, String query, SearchRequest<Amenity> req) throws IOException {
 		TIntLongHashMap offsets = new TIntLongHashMap();
-		TIntArrayList dataOffsets = null;
+		List<TIntArrayList> listOffsets = null;
+		List<TIntLongHashMap> listOfSepOffsets = new ArrayList<TIntLongHashMap>();
 		int offset = 0;
 		while (true) {
 			int t = codedIS.readTag();
@@ -381,24 +385,51 @@ public class BinaryMapPoiReaderAdapter {
 			case OsmandOdb.OsmAndPoiNameIndex.TABLE_FIELD_NUMBER: {
 				int length = readInt();
 				int oldLimit = codedIS.pushLimit(length);
-				dataOffsets = new TIntArrayList();
 				offset = codedIS.getTotalBytesRead();
-				map.readIndexedStringTable(instance, query, "", dataOffsets, 0);
+				List<String> queries = new ArrayList<>();
+				for (String word : query.split(" ")) {
+					if (word.trim().length() > 0) {
+						queries.add(word.trim());
+					}
+				}
+				TIntArrayList charsList = new TIntArrayList(queries.size());
+				listOffsets = new ArrayList<TIntArrayList>(queries.size());
+				while(listOffsets.size() < queries.size()) {
+					charsList.add(0);
+					listOffsets.add(new TIntArrayList());
+				}
+				map.readIndexedStringTable(instance, queries, "", listOffsets, charsList);
 				codedIS.popLimit(oldLimit);
 				break;
 			}
 			case OsmandOdb.OsmAndPoiNameIndex.DATA_FIELD_NUMBER: {
-				if (dataOffsets != null) {
-					dataOffsets.sort(); // 1104125
-					for (int i = 0; i < dataOffsets.size(); i++) {
-						codedIS.seek(dataOffsets.get(i) + offset);
-						int len = codedIS.readRawVarint32();
-						int oldLim = codedIS.pushLimit(len);
-						readPoiNameIndexData(offsets, req);
-						codedIS.popLimit(oldLim);
-						if (req.isCancelled()) {
-							codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
-							return offsets;
+				if (listOffsets != null) {
+					for (TIntArrayList dataOffsets : listOffsets) {
+						TIntLongHashMap offsetMap = new TIntLongHashMap();
+						listOfSepOffsets.add(offsetMap);
+						dataOffsets.sort(); // 1104125
+						for (int i = 0; i < dataOffsets.size(); i++) {
+							codedIS.seek(dataOffsets.get(i) + offset);
+							int len = codedIS.readRawVarint32();
+							int oldLim = codedIS.pushLimit(len);
+							readPoiNameIndexData(offsetMap, req);
+							codedIS.popLimit(oldLim);
+							if (req.isCancelled()) {
+								codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+								return offsets;
+							}
+						}
+					}
+				}
+				if (listOfSepOffsets.size() > 0) {
+					offsets.putAll(listOfSepOffsets.get(0));
+					for (int j = 1; j < listOfSepOffsets.size(); j++) {
+						TIntLongHashMap mp = listOfSepOffsets.get(j);
+						// offsets.retainAll(mp); -- calculate intresection of mp & offsets
+						for (int chKey : offsets.keys()) {
+							if (!mp.containsKey(chKey)) {
+								offsets.remove(chKey);
+							}
 						}
 					}
 				}
@@ -688,6 +719,8 @@ public class BinaryMapPoiReaderAdapter {
 		Amenity am = null;
 		int x = 0;
 		int y = 0;
+		int precisionXY = 0;
+		boolean hasLocation = false;
 		StringBuilder retValue = new StringBuilder();
 		PoiCategory amenityType = null;
 		LinkedList<String> textTags = null;
@@ -714,12 +747,22 @@ public class BinaryMapPoiReaderAdapter {
 						am.setRoutePoint(arp);
 					}
 				}
+				if (hasLocation) {
+					if (precisionXY != 0) {
+						int[] xy = MapUtils.calculateFinalXYFromBaseAndPrecisionXY(BASE_POI_ZOOM, FINAL_POI_ZOOM, precisionXY, x >> BASE_POI_SHIFT, y >> BASE_POI_SHIFT, true);
+						int x31 = xy[0] << FINAL_POI_SHIFT;
+						int y31 = xy[1] << FINAL_POI_SHIFT;
+						am.setLocation(MapUtils.get31LatitudeY(y31), MapUtils.get31LongitudeX(x31));
+					} else {
+						am.setLocation(MapUtils.get31LatitudeY(y), MapUtils.get31LongitudeX(x));
+					}
+				}
 				return am;
 			case OsmandOdb.OsmAndPoiBoxDataAtom.DX_FIELD_NUMBER:
-				x = (codedIS.readSInt32() + (px << (24 - zoom))) << 7;
+				x = (codedIS.readSInt32() + (px << (BASE_POI_ZOOM - zoom))) << BASE_POI_SHIFT;
 				break;
 			case OsmandOdb.OsmAndPoiBoxDataAtom.DY_FIELD_NUMBER:
-				y = (codedIS.readSInt32() + (py << (24 - zoom))) << 7;
+				y = (codedIS.readSInt32() + (py << (BASE_POI_ZOOM - zoom))) << BASE_POI_SHIFT;
 				req.numberOfVisitedObjects++;
 				if (checkBounds) {
 					if (left31 > x || right31 < x || top31 > y || bottom31 < y) {
@@ -728,7 +771,8 @@ public class BinaryMapPoiReaderAdapter {
 					}
 				}
 				am = new Amenity();
-				am.setLocation(MapUtils.get31LatitudeY(y), MapUtils.get31LongitudeX(x));
+				hasLocation = true;
+				//am.setLocation(MapUtils.get31LatitudeY(y), MapUtils.get31LongitudeX(x)); // set precise coordinates
 				break;
 			case OsmandOdb.OsmAndPoiBoxDataAtom.SUBCATEGORIES_FIELD_NUMBER:
 				int subtypev = codedIS.readUInt32();
@@ -800,6 +844,11 @@ public class BinaryMapPoiReaderAdapter {
 				break;
 			case OsmandOdb.OsmAndPoiBoxDataAtom.NOTE_FIELD_NUMBER:
 				am.setDescription(codedIS.readString());
+				break;
+			case OsmandOdb.OsmAndPoiBoxDataAtom.PRECISIONXY_FIELD_NUMBER:
+				if (hasLocation) {
+					precisionXY = codedIS.readInt32();
+				}
 				break;
 			default:
 				skipUnknownField(t);

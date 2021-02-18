@@ -333,7 +333,7 @@
     <string name="total_distance">Jarak Total</string>
     <string name="routing_attr_relief_smoothness_factor_name">Pilih fluktuasi ketinggian</string>
     <string name="routing_attr_height_obstacles_name">Gunakan Data Ketinggian</string>
-    <string name="routing_attr_height_obstacles_description">Gunakan data elevasi medan yang disediakan oleh SRTM, ASTER, dan EU-DEM.</string>
+
     <string name="rendering_attr_depthContours_description">Tampilkan kontur dan titik kedalaman.</string>
     <string name="rendering_attr_depthContours_name">Kontur kedalaman bahari</string>
     <string name="auto_split_recording_title">Rekaman split otomatis setelah jeda</string>
@@ -424,7 +424,6 @@
     <string name="update_all_maps_now">Apakah anda ingin memperbahurui semua peta sekarang?</string>
     <string name="clear_tile_data">Bersihkan Semua ubin</string>
     <string name="routing_attr_short_way_name">Cara hemat bahan bakar</string>
-    <string name="routing_attr_short_way_description">Gunakan cara hemat bahan bakar (biasanya lebih pendek).</string>
     <string name="replace_favorite_confirmation">Apakah kamu yakin kamu ingin mengganti favorit %1$s?</string>
     <string name="rendering_attr_hideOverground_name">Benda-benda di atas tanah</string>
     <string name="shared_string_change">Ganti</string>

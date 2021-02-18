@@ -61,7 +61,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 		View.OnClickListener clickListener = new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				POIMapLayer.showDescriptionDialog(view.getContext(), app, wpt.desc, textPrefix);
+				POIMapLayer.showPlainDescriptionDialog(view.getContext(), app, wpt.desc, textPrefix);
 			}
 		};
 
@@ -103,7 +103,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 			rowc.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					POIMapLayer.showDescriptionDialog(rowc.getContext(), app, wpt.comment,
+					POIMapLayer.showPlainDescriptionDialog(rowc.getContext(), app, wpt.comment,
 							rowc.getResources().getString(R.string.poi_dialog_comment));
 				}
 			});

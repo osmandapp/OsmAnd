@@ -57,9 +57,6 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 	private LinearLayout itemsContainer;
 	private LinearLayout buttonsContainer;
 
-	@StringRes
-	protected int dismissButtonStringRes = R.string.shared_string_cancel;
-
 	public void setUsedOnMap(boolean usedOnMap) {
 		this.usedOnMap = usedOnMap;
 	}
@@ -261,11 +258,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 	@StringRes
 	protected int getDismissButtonTextId() {
-		return dismissButtonStringRes;
-	}
-
-	protected void setDismissButtonTextId(@StringRes int stringRes) {
-		dismissButtonStringRes = stringRes;
+		return R.string.shared_string_cancel;
 	}
 
 	protected int getDismissButtonHeight(){
@@ -387,7 +380,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		AndroidUiHelper.updateVisibility(dismissButton, buttonTextId != DEFAULT_VALUE);
 	}
 
-	private void setupRightButton() {
+	protected void setupRightButton() {
 		rightButton = buttonsContainer.findViewById(R.id.right_bottom_button);
 		rightButton.getLayoutParams().height = getRightButtonHeight();
 		int buttonTextId = getRightBottomButtonTextId();

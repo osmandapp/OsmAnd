@@ -36,6 +36,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -65,6 +66,8 @@ public class TrackDetailsMenu {
 	private MapActivity mapActivity;
 	@Nullable
 	private GpxDisplayItem gpxItem;
+	@Nullable
+	private SelectedGpxFile selectedGpxFile;
 	@Nullable
 	private TrackDetailsBarController toolbarController;
 	@Nullable
@@ -99,6 +102,15 @@ public class TrackDetailsMenu {
 
 	public void setGpxItem(@NonNull GpxDisplayItem gpxItem) {
 		this.gpxItem = gpxItem;
+	}
+
+	@Nullable
+	public SelectedGpxFile getSelectedGpxFile() {
+		return selectedGpxFile;
+	}
+
+	public void setSelectedGpxFile(@NonNull SelectedGpxFile selectedGpxFile) {
+		this.selectedGpxFile = selectedGpxFile;
 	}
 
 	public boolean isVisible() {
@@ -539,7 +551,7 @@ public class TrackDetailsMenu {
 		}
 	}
 
-	public boolean shouldShowXAxisPoints () {
+	public boolean shouldShowXAxisPoints() {
 		return true;
 	}
 
@@ -707,18 +719,19 @@ public class TrackDetailsMenu {
 		if (gpxItem.chartTypes != null && gpxItem.chartTypes.length > 0) {
 			for (int i = 0; i < gpxItem.chartTypes.length; i++) {
 				OrderedLineDataSet dataSet = null;
+				boolean withoutGaps = selectedGpxFile != null && (!selectedGpxFile.isJoinSegments() && gpxItem.isGeneralTrack());
 				switch (gpxItem.chartTypes[i]) {
 					case ALTITUDE:
 						dataSet = GpxUiHelper.createGPXElevationDataSet(app, chart, analysis,
-								gpxItem.chartAxisType, false, true, false);
+								gpxItem.chartAxisType, false, true, withoutGaps);
 						break;
 					case SPEED:
 						dataSet = GpxUiHelper.createGPXSpeedDataSet(app, chart, analysis,
-								gpxItem.chartAxisType, gpxItem.chartTypes.length > 1, true, false);
+								gpxItem.chartAxisType, gpxItem.chartTypes.length > 1, true, withoutGaps);
 						break;
 					case SLOPE:
 						dataSet = GpxUiHelper.createGPXSlopeDataSet(app, chart, analysis,
-								gpxItem.chartAxisType, null, gpxItem.chartTypes.length > 1, true, false);
+								gpxItem.chartAxisType, null, gpxItem.chartTypes.length > 1, true, withoutGaps);
 						break;
 				}
 				if (dataSet != null) {

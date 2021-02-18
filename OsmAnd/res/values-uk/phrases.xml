@@ -3582,7 +3582,7 @@
     <string name="poi_charcoal_pile">Вуглевипалювальна купа</string>
     <string name="poi_historic_tank">Старовинний танк</string>
     <string name="poi_hookah_lounge">Кальянна зала</string>
-    <string name="poi_source_biomass">Джерело енергії: біомаса</string>
+    <string name="poi_generator_source_biomass">Джерело енергії: біомаса</string>
     <string name="poi_snowmobile_filter">Доступ для снігоходів</string>
     <string name="poi_access_bus">Доступ для автобусів</string>
     <string name="poi_access_caravan">Доступ для житлових трейлерів (караванів)</string>
@@ -3881,4 +3881,14 @@
     <string name="poi_wildlife_crossing_bat_tunnel">Тунель кажанів</string>
     <string name="poi_wildlife_crossing_bat_bridge">Міст кажанів</string>
     <string name="poi_wildlife_crossing">Переправа диких тварин</string>
+    <string name="poi_piste_status_closed">Стан траси: зачинена</string>
+    <string name="poi_piste_status_open">Стан траси: відчинена</string>
+    <string name="poi_patrolled_no">Патрулюється: ні</string>
+    <string name="poi_patrolled_yes">Патрулюється: так</string>
+    <string name="poi_piste_name">Назва траси</string>
+    <string name="poi_piste_ski_jump">Cтрибки на лижах</string>
+    <string name="poi_summit_register_no">Реєстр вершин: ні</string>
+    <string name="poi_summit_register_yes">Реєстр вершин: так</string>
+    <string name="poi_gladed_yes">Розчищена поляна: так</string>
+    <string name="poi_mobile_library">Місце зупинка мобільної бібліотеки</string>
 </resources>

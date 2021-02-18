@@ -18,7 +18,7 @@ import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
-import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.ShortDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -114,8 +114,7 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 
 		int contentPaddingSmall = getResources().getDimensionPixelSize(R.dimen.content_padding_small);
 		items.add(new DividerSpaceItem(app, contentPaddingSmall));
-		items.add(new LongDescriptionItem(getString(R.string.elevation_data)));
-		items.add(new DividerSpaceItem(app, contentPaddingSmall));
+		items.add(new ShortDescriptionItem((getString(R.string.routing_attr_height_obstacles_description))));
 
 		createReliefFactorButtons(themedCtx);
 	}
