@@ -239,6 +239,16 @@ public class DownloadIndexesThread {
 		}
 	}
 
+	public void cancelDownload(DownloadItem item) {
+		if (item instanceof MultipleIndexItem) {
+			MultipleIndexItem multipleIndexItem = (MultipleIndexItem) item;
+			cancelDownload(multipleIndexItem.getAllIndexes());
+		} else if (item instanceof IndexItem) {
+			IndexItem indexItem = (IndexItem) item;
+			cancelDownload(indexItem);
+		}
+	}
+
 	public void cancelDownload(IndexItem item) {
 		app.logMapDownloadEvent("cancel", item);
 		if (currentDownloadingItem == item) {
@@ -294,8 +304,12 @@ public class DownloadIndexesThread {
 		File dir = app.getAppPath("").getParentFile();
 		double asz = -1;
 		if (dir.canRead()) {
-			StatFs fs = new StatFs(dir.getAbsolutePath());
-			asz = (((long) fs.getAvailableBlocks()) * fs.getBlockSize()) / (1 << 20);
+			try {
+				StatFs fs = new StatFs(dir.getAbsolutePath());
+				asz = (((long) fs.getAvailableBlocks()) * fs.getBlockSize()) / (1 << 20);
+			} catch (IllegalArgumentException e) {
+				LOG.error(e);
+			}
 		}
 		return asz;
 	}

@@ -2130,7 +2130,7 @@
     <string name="shared_string_time">Час</string>
     <string name="total_distance">Загальна відстань</string>
     <string name="routing_attr_height_obstacles_name">Використовувати дані висоти</string>
-    <string name="routing_attr_height_obstacles_description">Фактор висоти рельєфу земної поверхні (дані від SRTM, ASTER та EU-DEM).</string>
+
     <string name="rendering_attr_depthContours_description">Показати контури глибини і точки.</string>
     <string name="rendering_attr_depthContours_name">Контури морських глибин</string>
     <string name="auto_split_recording_title">Авто-розрив запису після перерви</string>

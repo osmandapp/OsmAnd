@@ -17,12 +17,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ibm.icu.impl.IllegalIcuArgumentException;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.FileUtils;
 import net.osmand.IProgress;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OnDismissDialogFragmentListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -32,9 +35,12 @@ import net.osmand.plus.dashboard.DashChooseAppDirFragment;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread;
 
+import org.apache.commons.logging.Log;
+
 import java.io.File;
 
 public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
+	private static final Log LOG = PlatformUtil.getLog(DataStoragePlaceDialogFragment.class);
 
 	public static final String TAG = "DataStoragePlaceDialogFragment";
 	private static final String STORAGE_READOLNY_KEY = "storage_readolny_key";
@@ -189,11 +195,15 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 	private String getFreeSpace(File dir) {
 		String sz = "";
 		if (dir != null && dir.canRead()) {
-			StatFs fs = new StatFs(dir.getAbsolutePath());
-			@SuppressWarnings("deprecation")
-			long size = (long) fs.getAvailableBlocks() * fs.getBlockSize();
-			if (size > 0) {
-				sz = AndroidUtils.formatSize(getActivity(), size);
+			try {
+				StatFs fs = new StatFs(dir.getAbsolutePath());
+				@SuppressWarnings("deprecation")
+				long size = (long) fs.getAvailableBlocks() * fs.getBlockSize();
+				if (size > 0) {
+					sz = AndroidUtils.formatSize(getActivity(), size);
+				}
+			} catch (IllegalIcuArgumentException e) {
+				LOG.error(e);
 			}
 		}
 		return sz;

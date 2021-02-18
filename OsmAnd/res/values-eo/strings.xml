@@ -2166,7 +2166,7 @@
     <string name="rendering_attr_depthContours_description">Montri punktojn kaj kurbojn de profundo.</string>
     <string name="rendering_attr_depthContours_name">Maraj profundec-kurboj</string>
     <string name="routing_attr_height_obstacles_name">Uzi datumojn pri altitudo</string>
-    <string name="routing_attr_height_obstacles_description">Konsideri nivelon de tereno (laŭ datumoj el SRTM, ASTER kaj EU-DEM).</string>
+
     <string name="route_altitude">Kursa altitudo</string>
     <string name="altitude_descent">Malsupreniro</string>
     <string name="altitude_ascent">Supreniro</string>

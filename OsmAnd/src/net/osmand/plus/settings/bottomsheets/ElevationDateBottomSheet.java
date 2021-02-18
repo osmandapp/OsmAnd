@@ -114,7 +114,7 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 
 		int contentPaddingSmall = getResources().getDimensionPixelSize(R.dimen.content_padding_small);
 		items.add(new DividerSpaceItem(app, contentPaddingSmall));
-		items.add(new ShortDescriptionItem((getString(R.string.elevation_data_descr))));
+		items.add(new ShortDescriptionItem((getString(R.string.routing_attr_height_obstacles_description))));
 
 		createReliefFactorButtons(themedCtx);
 	}

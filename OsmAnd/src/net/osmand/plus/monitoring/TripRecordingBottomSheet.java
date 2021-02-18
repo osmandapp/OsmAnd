@@ -32,6 +32,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -246,12 +247,12 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	@Override
-	protected int getRightButtonHeight(){
+	protected int getRightButtonHeight() {
 		return getResources().getDimensionPixelSize(R.dimen.bottom_sheet_cancel_button_height);
 	}
 
 	@Override
-	protected int getDismissButtonHeight(){
+	protected int getDismissButtonHeight() {
 		return getResources().getDimensionPixelSize(R.dimen.bottom_sheet_cancel_button_height);
 	}
 
@@ -277,9 +278,14 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		app.getSavingTrackHelper().startNewSegment();
+		SavingTrackHelper helper = app.getSavingTrackHelper();
+		helper.startNewSegment();
 		settings.SAVE_GLOBAL_TRACK_TO_GPX.set(true);
 		app.startNavigationService(NavigationService.USED_BY_GPX);
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			TripRecordingActiveBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), helper.getCurrentTrack());
+		}
 		dismiss();
 	}
 

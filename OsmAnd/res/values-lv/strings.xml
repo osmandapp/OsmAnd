@@ -2166,7 +2166,7 @@ Apraksta laukumu: %1$s x %2$s</string>
     <string name="shared_string_time">Laiks</string>
     <string name="total_distance">Maršruta garums</string>
     <string name="routing_attr_height_obstacles_name">Lietot elevācijas datus</string>
-    <string name="routing_attr_height_obstacles_description">Lietot apgabala elevācijas datus no SRTM, ASTER un EU-DEM.</string>
+
     <string name="relief_smoothness_factor_descr">Ieteicamais reljefs: līdzens vai kalnains.</string>
     <string name="shared_string_slope">Slīpums</string>
     <string name="lang_ber">Berberu</string>

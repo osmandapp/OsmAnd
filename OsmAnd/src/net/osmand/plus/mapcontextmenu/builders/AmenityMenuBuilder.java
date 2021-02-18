@@ -302,7 +302,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			ll.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					POIMapLayer.showDescriptionDialog(view.getContext(), app, text, textPrefix);
+					POIMapLayer.showPlainDescriptionDialog(view.getContext(), app, text, textPrefix);
 				}
 			});
 		}

@@ -51,7 +51,10 @@ public class SaveCurrentTrackTask extends AsyncTask<Void, Void, Boolean> {
 		}
 		for (final String f : files.keySet()) {
 			File fout = new File(dir, f + IndexConstants.GPX_FILE_EXT);
-			GPXUtilities.writeGpxFile(fout, gpx);
+			Exception exception = GPXUtilities.writeGpxFile(fout, gpx);
+			if (exception == null) {
+				app.getSavingTrackHelper().setLastTimeFileSaved(fout.lastModified());
+			}
 		}
 		return shouldClearPath;
 	}
