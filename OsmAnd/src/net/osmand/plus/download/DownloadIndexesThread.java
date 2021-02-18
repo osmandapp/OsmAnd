@@ -294,8 +294,12 @@ public class DownloadIndexesThread {
 		File dir = app.getAppPath("").getParentFile();
 		double asz = -1;
 		if (dir.canRead()) {
-			StatFs fs = new StatFs(dir.getAbsolutePath());
-			asz = (((long) fs.getAvailableBlocks()) * fs.getBlockSize()) / (1 << 20);
+			try {
+				StatFs fs = new StatFs(dir.getAbsolutePath());
+				asz = (((long) fs.getAvailableBlocks()) * fs.getBlockSize()) / (1 << 20);
+			} catch (IllegalArgumentException e) {
+				LOG.error(e);
+			}
 		}
 		return asz;
 	}
