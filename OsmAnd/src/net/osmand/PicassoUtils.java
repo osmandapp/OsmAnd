@@ -11,6 +11,8 @@ import com.squareup.picasso.Picasso;
 
 import net.osmand.plus.OsmandApplication;
 
+import org.apache.commons.logging.Log;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -23,6 +25,7 @@ import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.JELLY_BEAN_MR2;
 
 public class PicassoUtils {
+	private static final Log LOG = PlatformUtil.getLog(PicassoUtils.class);
 
 	private static final String PICASSO_CACHE = "picasso-cache";
 	private static final int MIN_DISK_CACHE_SIZE = 5 * 1024 * 1024; // 5MB
@@ -109,7 +112,8 @@ public class PicassoUtils {
 			long available = blockCount * blockSize;
 			// Target 2% of the total space.
 			size = available / 50;
-		} catch (IllegalArgumentException ignored) {
+		} catch (IllegalArgumentException e) {
+			LOG.error(e);
 		}
 
 		// Bound inside min/max size for disk cache.
