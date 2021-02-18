@@ -2197,7 +2197,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="shared_string_time">Denbora</string>
     <string name="total_distance">Distantzia guztira</string>
     <string name="routing_attr_height_obstacles_name">Erabili elebazio kotak</string>
-    <string name="routing_attr_height_obstacles_description">Kontuan izan terrenoaren elebazioa (SRTM, ASTER, eta EU-DEM datuen bidez).</string>
+
     <string name="shared_string_slope">Malda</string>
     <string name="lang_ber">Berberera</string>
     <string name="right_side_navigation">Eskumatik gidatzea</string>

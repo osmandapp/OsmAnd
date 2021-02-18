@@ -1898,7 +1898,7 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="shared_string_time">Aika</string>
     <string name="total_distance">Kokonaisetäisyys</string>
     <string name="routing_attr_height_obstacles_name">Käytä korkeustietoja</string>
-    <string name="routing_attr_height_obstacles_description">Käytä maaston korkeustietoja jotka saadaan SRTM, ASTER ja EU-DEM lähteistä</string>
+
     <string name="auto_split_recording_title">Jaa automaattisesti nauhoitukset tauon jälkeen</string>
     <string name="rendering_attr_hideWaterPolygons_name">Piilota vesi</string>
     <string name="shared_string_action_name">Toiminnon nimi</string>
