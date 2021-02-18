@@ -385,7 +385,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		if (target instanceof TripRecordingBottomSheet) {
 			((TripRecordingBottomSheet) target).show();
 		} else if (target instanceof TripRecordingActiveBottomSheet) {
-			((TripRecordingActiveBottomSheet) target).show();
+			((TripRecordingActiveBottomSheet) target).show(true);
 		}
 	}
 

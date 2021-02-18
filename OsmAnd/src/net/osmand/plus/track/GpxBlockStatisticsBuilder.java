@@ -1,6 +1,7 @@
 package net.osmand.plus.track;
 
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -250,7 +251,11 @@ public class GpxBlockStatisticsBuilder {
 			holder.valueText.setTextColor(activeColor);
 			holder.titleText.setText(item.title);
 			holder.titleText.setTextColor(app.getResources().getColor(R.color.text_color_secondary_light));
-			holder.titleText.setWidth(calculateWidthWithin(item.title, item.value));
+			float letterSpacing = 0.00f;
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+				letterSpacing = Math.max(holder.valueText.getLetterSpacing(), holder.titleText.getLetterSpacing());
+			}
+			holder.titleText.setMinWidth(calculateWidthWithin(letterSpacing, item.title, item.value));
 			holder.itemView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -283,8 +288,11 @@ public class GpxBlockStatisticsBuilder {
 			notifyDataSetChanged();
 		}
 
-		public int calculateWidthWithin(String... texts) {
+		public int calculateWidthWithin(float letterSpacing, String... texts) {
 			int textWidth = AndroidUtils.getTextMaxWidth(textSize, Arrays.asList(texts));
+			if (letterSpacing != 0.00f) {
+				textWidth += Math.ceil(textWidth * letterSpacing);
+			}
 			return Math.min(maxWidthPx, Math.max(minWidthPx, textWidth));
 		}
 	}
