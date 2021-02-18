@@ -226,16 +226,14 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 				GPXRouteParamsBuilder rparams = routingHelper.getCurrentGPXRoute();
 				boolean osmandRouter = mode.getRouteService() == RouteProvider.RouteService.OSMAND;
 				if (rparams != null && osmandRouter) {
-					boolean showReverseCard = !routingHelper.isCurrentGPXRouteV2();
-					if (showReverseCard) {
-						cardsContainer.addView(buildDividerView(cardsContainer, false));
+					cardsContainer.addView(buildDividerView(cardsContainer, false));
 
-						ReverseTrackCard reverseTrackCard = new ReverseTrackCard(mapActivity, rparams.isReverse());
-						reverseTrackCard.setListener(this);
-						cardsContainer.addView(reverseTrackCard.build(mapActivity));
-					}
+					ReverseTrackCard reverseTrackCard = new ReverseTrackCard(mapActivity, rparams.isReverse());
+					reverseTrackCard.setListener(this);
+					cardsContainer.addView(reverseTrackCard.build(mapActivity));
+
 					if (!gpxFile.hasRtePt() && !gpxFile.hasRoute()) {
-						cardsContainer.addView(buildDividerView(cardsContainer, showReverseCard));
+						cardsContainer.addView(buildDividerView(cardsContainer, true));
 
 						AttachTrackToRoadsCard attachTrackCard = new AttachTrackToRoadsCard(mapActivity);
 						attachTrackCard.setListener(this);
@@ -584,6 +582,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			MeasurementEditingContext editingContext = new MeasurementEditingContext();
 			editingContext.setGpxData(gpxData);
 			editingContext.setAppMode(app.getRoutingHelper().getAppMode());
+			editingContext.setSelectedSegment(app.getSettings().GPX_ROUTE_SEGMENT.get());
 			MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(), editingContext, true);
 		}
 	}
@@ -721,11 +720,11 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 	@Override
 	public void onSegmentSelect(GPXFile gpxFile, int selectedSegment) {
 		selectTrackToFollow(gpxFile);
-			GPXRouteParamsBuilder paramsBuilder = app.getRoutingHelper().getCurrentGPXRoute();
-			if (paramsBuilder != null) {
-				paramsBuilder.setSelectedSegment(selectedSegment);
-				app.getSettings().GPX_ROUTE_SEGMENT.set(selectedSegment);
-				app.getRoutingHelper().onSettingsChanged(true);
+		GPXRouteParamsBuilder paramsBuilder = app.getRoutingHelper().getCurrentGPXRoute();
+		if (paramsBuilder != null) {
+			paramsBuilder.setSelectedSegment(selectedSegment);
+			app.getSettings().GPX_ROUTE_SEGMENT.set(selectedSegment);
+			app.getRoutingHelper().onSettingsChanged(true);
 		}
 		updateSelectionMode(false);
 	}
