@@ -289,7 +289,11 @@ public class RouteProvider {
 			int selectedSegment = builder.getSelectedSegment();
 			if (OSMAND_ROUTER_V2.equals(file.author)) {
 				route = parseOsmAndGPXRoute(points, file, selectedSegment);
-				routePoints = file.getRoutePoints();
+				if (selectedSegment == -1) {
+					routePoints = file.getRoutePoints();
+				} else {
+					routePoints = file.getRoutePoints(selectedSegment);
+				}
 				if (reverse) {
 					Collections.reverse(points);
 					Collections.reverse(routePoints);

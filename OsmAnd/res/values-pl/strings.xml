@@ -2169,7 +2169,7 @@
     <string name="rendering_attr_depthContours_description">Wyświetla kontury i punkty głębi.</string>
     <string name="rendering_attr_depthContours_name">Morskie kontury głębokości</string>
     <string name="routing_attr_height_obstacles_name">Używanie danych wysokościowych</string>
-    <string name="routing_attr_height_obstacles_description">Używa danych wysokościowych (dane z SRTM, ASTER i EU-DEM).</string>
+
     <string name="route_altitude">Wysokość trasy</string>
     <string name="altitude_descent">W dół</string>
     <string name="altitude_ascent">W górę</string>

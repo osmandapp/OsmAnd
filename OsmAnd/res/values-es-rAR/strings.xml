@@ -2175,7 +2175,7 @@
     <string name="shared_string_time">Tiempo</string>
     <string name="total_distance">Distancia total</string>
     <string name="routing_attr_height_obstacles_name">Usar datos de elevación</string>
-    <string name="routing_attr_height_obstacles_description">Incluye como factor, la elevación del terreno (según datos de SRTM, ASTER y EU-DEM).</string>
+
     <string name="routing_attr_driving_style_name">Estilo de conducción</string>
     <string name="select_gpx_folder">Marcar la carpeta del archivo GPX</string>
     <string name="file_can_not_be_moved">No se pudo mover el archivo.</string>

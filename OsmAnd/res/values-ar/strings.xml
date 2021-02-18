@@ -2309,7 +2309,7 @@
     <string name="relief_smoothness_factor_descr">التضاريس المفضلة : مسطحة أو تلال.</string>
     <string name="shared_string_slope">الانحدار</string>
     <string name="shared_string_move">نقل</string>
-    <string name="routing_attr_height_obstacles_description">استخدام بيانات ارتفاع التضاريس المقدمة بواسطة SRTM, ASTER, EU-DEM.</string>
+
     <string name="rendering_attr_depthContours_description">إظهار نقاط ومعالم العمق.</string>
     <string name="auto_split_recording_descr">بدء مقطع جديدة بعد فارق 6 دقائق، مسار جديد بعد فارق 2 ساعة، أو ملف جديد بعد فارق أطول إذا تغير التاريخ.</string>
     <string name="shared_string_paused">متوقف مؤقتاً</string>

@@ -333,7 +333,7 @@
     <string name="total_distance">Jarak Total</string>
     <string name="routing_attr_relief_smoothness_factor_name">Pilih fluktuasi ketinggian</string>
     <string name="routing_attr_height_obstacles_name">Gunakan Data Ketinggian</string>
-    <string name="routing_attr_height_obstacles_description">Gunakan data elevasi medan yang disediakan oleh SRTM, ASTER, dan EU-DEM.</string>
+
     <string name="rendering_attr_depthContours_description">Tampilkan kontur dan titik kedalaman.</string>
     <string name="rendering_attr_depthContours_name">Kontur kedalaman bahari</string>
     <string name="auto_split_recording_title">Rekaman split otomatis setelah jeda</string>
