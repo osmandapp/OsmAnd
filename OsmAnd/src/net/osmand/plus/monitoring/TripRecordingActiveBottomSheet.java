@@ -168,11 +168,7 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 		if (showTitle != null) {
 			showTrackTitle.setText(showTitle);
 		}
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-			buttonShow.setPaddingRelative(AndroidUtils.dpToPx(app, 12f), 0, buttonShow.getPaddingRight(), 0);
-		} else {
-			buttonShow.setPadding(AndroidUtils.dpToPx(app, 12f), 0, buttonShow.getPaddingRight(), 0);
-		}
+		AndroidUtils.setPadding(buttonShow, AndroidUtils.dpToPx(app, 12f), 0, buttonShow.getPaddingRight(), 0);
 		showTrackTitle.setTextColor(ContextCompat.getColor(app, getActiveIconColorId(nightMode)));
 		showTrackTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.default_desc_text_size));
 		Typeface typeface = FontCache.getFont(app, app.getResources().getString(R.string.font_roboto_medium));
