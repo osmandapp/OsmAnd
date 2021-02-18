@@ -24,6 +24,7 @@
 			android:id="@+id/name_edit_text"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
+			android:inputType="textCapSentences"
 			android:lineSpacingMultiplier="@dimen/bottom_sheet_text_spacing_multiplier" />
 
 	</com.google.android.material.textfield.TextInputLayout>

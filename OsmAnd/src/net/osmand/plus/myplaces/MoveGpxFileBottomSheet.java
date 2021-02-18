@@ -74,7 +74,7 @@ public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implem
 						FragmentActivity activity = getActivity();
 						if (activity != null) {
 							AddNewTrackFolderBottomSheet.showInstance(activity.getSupportFragmentManager(),
-									MoveGpxFileBottomSheet.this, fileDir.getName(), usedOnMap);
+ 									MoveGpxFileBottomSheet.this, usedOnMap);
 						}
 					}
 				})

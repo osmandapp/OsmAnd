@@ -39,6 +39,7 @@ import net.osmand.plus.base.bottomsheetmenu.HorizontalRecyclerBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.measurementtool.adapter.FolderListAdapter;
+import net.osmand.plus.myplaces.AddNewTrackFolderBottomSheet;
 import net.osmand.plus.myplaces.MoveGpxFileBottomSheet;
 import net.osmand.plus.myplaces.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
 import net.osmand.util.Algorithms;
@@ -49,7 +50,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDialogFragment implements OnTrackFileMoveListener {
+public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDialogFragment
+		implements OnTrackFileMoveListener, AddNewTrackFolderBottomSheet.OnTrackFolderAddListener {
 
 	public static final String TAG = SaveAsNewTrackBottomSheetDialogFragment.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(SaveAsNewTrackBottomSheetDialogFragment.class);
@@ -250,6 +252,15 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 					updateFileNameFromEditText(editText.getText().toString());
 				}
 			}
+
+			@Override
+			public void onAddNewItemSelected() {
+				FragmentActivity activity = getActivity();
+				if (activity != null) {
+					AddNewTrackFolderBottomSheet.showInstance(activity.getSupportFragmentManager(),
+							SaveAsNewTrackBottomSheetDialogFragment.this, usedOnMap);
+				}
+			}
 		};
 	}
 
@@ -398,6 +409,13 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 	@Override
 	protected int getBgColorId() {
 		return nightMode ? R.color.activity_background_color_dark : R.color.list_background_color_light;
+	}
+
+	@Override
+	public void onTrackFolderAdd(String folderName) {
+		File file = getFile(app, this.folderName, fileName);
+		File destFolder = new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR), folderName);
+		this.onFileMove(file, new File(destFolder, file.getName()));
 	}
 
 	public interface SaveAsNewTrackFragmentListener {

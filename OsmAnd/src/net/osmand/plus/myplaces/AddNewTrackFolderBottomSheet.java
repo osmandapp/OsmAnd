@@ -51,8 +51,6 @@ public class AddNewTrackFolderBottomSheet extends MenuBottomSheetDialogFragment 
 		app = requiredMyApplication();
 		if (savedInstanceState != null) {
 			folderName = savedInstanceState.getString(FOLDER_NAME_KEY);
-		} else if (Algorithms.isEmpty(folderName)) {
-			folderName = app.getAppPath(IndexConstants.GPX_INDEX_DIR).getName();
 		}
 		items.add(new TitleItem(getString(R.string.add_new_folder)));
 
@@ -141,12 +139,10 @@ public class AddNewTrackFolderBottomSheet extends MenuBottomSheetDialogFragment 
 		void onTrackFolderAdd(String folderName);
 	}
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable Fragment target,
-									@NonNull String folderName, boolean usedOnMap) {
+	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable Fragment target, boolean usedOnMap) {
 		try {
 			if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(AddNewTrackFolderBottomSheet.TAG) == null) {
 				AddNewTrackFolderBottomSheet fragment = new AddNewTrackFolderBottomSheet();
-				fragment.folderName = folderName;
 				fragment.setUsedOnMap(usedOnMap);
 				fragment.setTargetFragment(target, 0);
 				fragment.show(fragmentManager, AddNewTrackFolderBottomSheet.TAG);
