@@ -95,13 +95,13 @@ public class TrackSelectSegmentBottomSheet extends MenuBottomSheetDialogFragment
 		pointsCount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
 		pointsCount.setText(String.valueOf(analysis.wptPoints));
 		time.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-		boolean timeAvailable = analysis.timeSpan != 1;
-		if (timeAvailable) {
+		boolean timeSpecified = analysis.isTimeSpecified();
+		if (timeSpecified) {
 			time.setText(Algorithms.formatDuration((int) (analysis.timeSpan / 1000),
 					app.accessibilityEnabled()));
 		}
-		AndroidUiHelper.updateVisibility(time, timeAvailable);
-		AndroidUiHelper.updateVisibility(timeIcon, timeAvailable);
+		AndroidUiHelper.updateVisibility(time, timeSpecified);
+		AndroidUiHelper.updateVisibility(timeIcon, timeSpecified);
 
 		RecyclerView recyclerView = itemView.findViewById(R.id.gpx_segment_list);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
