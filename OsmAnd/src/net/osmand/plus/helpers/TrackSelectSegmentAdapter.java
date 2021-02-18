@@ -49,7 +49,7 @@ public class TrackSelectSegmentAdapter extends RecyclerView.Adapter<TrackViewHol
 
 	@Override
 	public void onBindViewHolder(@NonNull final TrackViewHolder holder, int position) {
-		holder.icon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_split_interval));
+		holder.iconSegment.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_split_interval));
 
 		TrkSegment segment = segments.get(position);
 
@@ -59,8 +59,10 @@ public class TrackSelectSegmentAdapter extends RecyclerView.Adapter<TrackViewHol
 		double distance = getDistance(segment);
 		long time = getSegmentTime(segment);
 		if (time != 1) {
+			holder.timeIcon.setVisibility(View.VISIBLE);
 			holder.time.setText(OsmAndFormatter.getFormattedDurationShort((int) (time / 1000)));
 		} else {
+			holder.timeIcon.setVisibility(View.GONE);
 			holder.time.setText("");
 		}
 		holder.distance.setText(OsmAndFormatter.getFormattedDistance((float) distance, app));
@@ -118,14 +120,16 @@ public class TrackSelectSegmentAdapter extends RecyclerView.Adapter<TrackViewHol
 
 	static class TrackViewHolder extends RecyclerView.ViewHolder {
 
-		ImageView icon;
+		ImageView iconSegment;
+		ImageView timeIcon;
 		TextView name;
 		TextView distance;
 		TextView time;
 
 		TrackViewHolder(View itemView) {
 			super(itemView);
-			icon = itemView.findViewById(R.id.icon);
+			iconSegment = itemView.findViewById(R.id.icon);
+			timeIcon = itemView.findViewById(R.id.time_icon);
 			name = itemView.findViewById(R.id.name);
 			distance = itemView.findViewById(R.id.distance);
 			time = itemView.findViewById(R.id.time_interval);
