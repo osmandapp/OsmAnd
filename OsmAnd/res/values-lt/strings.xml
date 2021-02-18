@@ -2231,7 +2231,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="total_distance">Bendras atstumas</string>
     <string name="routing_attr_relief_smoothness_factor_name">Pasirinkite aukščio kaitos diapazoną</string>
     <string name="routing_attr_height_obstacles_name">Naudoti aukščio informaciją</string>
-    <string name="routing_attr_height_obstacles_description">Vietovės reljefo faktorius (SRTM, ASTER ir EU-DEM duomenimis).</string>
+
     <string name="rendering_attr_depthContours_description">Rodyti gylio kontūrus ir taškus.</string>
     <string name="rendering_attr_depthContours_name">Vandenyno gylio kontūrai</string>
     <string name="auto_split_recording_title">Automatinis įrašo padalinimas po pertraukimo</string>

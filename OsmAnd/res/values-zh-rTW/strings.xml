@@ -2161,7 +2161,7 @@
     <string name="rendering_attr_depthContours_description">顯示等深線和標記。</string>
     <string name="rendering_attr_depthContours_name">航海等深線</string>
     <string name="routing_attr_height_obstacles_name">使用海拔資料</string>
-    <string name="routing_attr_height_obstacles_description">將地勢海拔納入 (透過 SRTM、ASTER 和 EU-DEM 的資料)。</string>
+
     <string name="route_altitude">路線的海拔</string>
     <string name="altitude_descent">下坡</string>
     <string name="altitude_ascent">上坡</string>

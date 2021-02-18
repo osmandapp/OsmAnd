@@ -29,7 +29,7 @@ public class MultipleIndexesUiHelper {
 		OsmandRegions osmandRegions = app.getRegions();
 		for (IndexItem indexItem : multipleIndexItem.getAllIndexes()) {
 			SelectableItem selectableItem = new SelectableItem();
-			selectableItem.setTitle(indexItem.getVisibleName(app, osmandRegions));
+			selectableItem.setTitle(indexItem.getVisibleName(app, osmandRegions, false));
 
 			String size = indexItem.getSizeDescription(app);
 			String date = indexItem.getDate(dateFormat, showRemoteDate);

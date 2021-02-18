@@ -142,7 +142,7 @@
     <string name="routing_attr_driving_style_name">Стиль езды</string>
     <string name="routing_attr_relief_smoothness_factor_name">Колебания высоты ландшафта</string>
     <string name="routing_attr_height_obstacles_name">Использовать данные о высотах</string>
-    <string name="routing_attr_height_obstacles_description">Фактор рельефа местности (по данным SRTM, ASTER и EU-DEM).</string>
+
     <string name="quick_action_duplicates">Действие переименовано в %1$s, чтобы избежать дублирования.</string>
     <string name="quick_action_duplicate">Обнаружен дубликат имени</string>
     <string name="quick_action_showhide_favorites_descr">Переключатель, чтобы показать или скрыть избранные точки на карте.</string>

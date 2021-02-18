@@ -519,7 +519,7 @@
     <string name="shared_string_time">Tiempu</string>
     <string name="total_distance">Distancia total</string>
     <string name="routing_attr_height_obstacles_name">Usar datos d\'elevación</string>
-    <string name="routing_attr_height_obstacles_description">Inclúi la elevación del tarrén (pelos datos de SRTM, ASTER y EU-DEM).</string>
+
     <string name="search_another_country">Esbillar otra rexón</string>
     <string name="shared_string_change">Camudar</string>
     <string name="mapillary_image">Imaxe de Mapillary</string>

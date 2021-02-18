@@ -2194,7 +2194,7 @@
     <string name="shared_string_time">Час</string>
     <string name="total_distance">Агульная даўжыня</string>
     <string name="routing_attr_height_obstacles_name">Выкарыстоўваць даныя вышыні</string>
-    <string name="routing_attr_height_obstacles_description">Фактар вышыні зямной паверхні (даныя з SRTM, ASTER і EU-DEM).</string>
+
     <string name="auto_split_recording_title">Аўтаматычнае дзяленне запісаў пасля перапынку</string>
     <string name="auto_split_recording_descr">Пачаць новы сегмент пасля 6-хвіліннага перапынку, новы след — пасля 2-гадзіннага перапынку, ці новы файл пасля доўгага перапынку (як змяніляся дата).</string>
     <string name="lang_ber">Берберская</string>

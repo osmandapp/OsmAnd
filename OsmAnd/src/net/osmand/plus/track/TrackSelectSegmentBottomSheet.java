@@ -30,6 +30,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.helpers.TrackSelectSegmentAdapter;
 import net.osmand.plus.helpers.TrackSelectSegmentAdapter.OnItemClickListener;
@@ -81,6 +82,7 @@ public class TrackSelectSegmentBottomSheet extends MenuBottomSheetDialogFragment
 		TextView distance = gpxTrackContainer.findViewById(R.id.distance);
 		TextView pointsCount = gpxTrackContainer.findViewById(R.id.points_count);
 		TextView time = gpxTrackContainer.findViewById(R.id.time);
+		ImageView timeIcon = gpxTrackContainer.findViewById(R.id.time_icon);
 		LinearLayout container = gpxTrackContainer.findViewById(R.id.container);
 		LinearLayout containerNameAndReadSection = gpxTrackContainer.findViewById(R.id.name_and_read_section_container);
 		container.setPadding(sidePadding, 0, 0, 0);
@@ -93,7 +95,13 @@ public class TrackSelectSegmentBottomSheet extends MenuBottomSheetDialogFragment
 		pointsCount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
 		pointsCount.setText(String.valueOf(analysis.wptPoints));
 		time.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-		time.setText(analysis.isTimeSpecified() ? Algorithms.formatDuration((int) (analysis.timeSpan / 1000), app.accessibilityEnabled()) : "");
+		boolean timeSpecified = analysis.isTimeSpecified();
+		if (timeSpecified) {
+			time.setText(Algorithms.formatDuration((int) (analysis.timeSpan / 1000),
+					app.accessibilityEnabled()));
+		}
+		AndroidUiHelper.updateVisibility(time, timeSpecified);
+		AndroidUiHelper.updateVisibility(timeIcon, timeSpecified);
 
 		RecyclerView recyclerView = itemView.findViewById(R.id.gpx_segment_list);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

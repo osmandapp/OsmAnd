@@ -2084,7 +2084,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_time">時間</string>
     <string name="total_distance">総走行距離</string>
     <string name="routing_attr_height_obstacles_name">標高データを使用</string>
-    <string name="routing_attr_height_obstacles_description">SRTM、ASTER、EU-DEMによる地形標高データを使用します。</string>
+
     <string name="rendering_attr_hideWaterPolygons_description">水域</string>
     <string name="rendering_attr_hideWaterPolygons_name">水域ポリゴン</string>
     <string name="wiki_around">近隣のWikipedia記事</string>

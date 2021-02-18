@@ -2172,7 +2172,7 @@
     <string name="rendering_attr_depthContours_description">Vis dybdekonturer og -punkter.</string>
     <string name="rendering_attr_depthContours_name">Havdybdekonturer</string>
     <string name="routing_attr_height_obstacles_name">Brug højdedata</string>
-    <string name="routing_attr_height_obstacles_description">Terrænhøjde-faktor (via SRTM, ASTER og EU-DEM data).</string>
+
     <string name="route_altitude">Rutehøjde</string>
     <string name="altitude_descent">Fald</string>
     <string name="altitude_ascent">Stigning</string>

@@ -2504,7 +2504,7 @@
     <string name="rendering_attr_depthContours_description">Kuva sügavuskontuurid ja -punktid.</string>
     <string name="rendering_attr_depthContours_name">Meresügavuse kontuurid</string>
     <string name="routing_attr_height_obstacles_name">Kasuta kõrgusandmeid</string>
-    <string name="routing_attr_height_obstacles_description">Maastiku kõrguse tegur (SRTM, ASTER ja EU-DEM andmestikust).</string>
+
     <string name="altitude_descent">Laskumine</string>
     <string name="altitude_ascent">Tõus</string>
     <string name="altitude_range">Kõrgusevahe</string>
