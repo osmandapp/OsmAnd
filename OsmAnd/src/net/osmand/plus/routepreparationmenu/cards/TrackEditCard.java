@@ -1,7 +1,6 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
 import android.graphics.drawable.ColorDrawable;
-import android.opengl.Visibility;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -17,6 +16,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.helpers.TrackSelectSegmentAdapter;
@@ -24,7 +24,6 @@ import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 public class TrackEditCard extends BaseCard {
@@ -87,20 +86,19 @@ public class TrackEditCard extends BaseCard {
 			TextView distanceView = view.findViewById(R.id.distance);
 			TextView timeView = view.findViewById(R.id.time);
 			ImageView timeIcon = view.findViewById(R.id.time_icon);
-			TextView pointsView = view.findViewById(R.id.points_count);
-			ImageView pointsIcon = view.findViewById(R.id.points_icon);
-			pointsView.setVisibility(View.GONE);
-			pointsIcon.setVisibility(View.GONE);
+			AndroidUiHelper.updateVisibility(view.findViewById(R.id.points_icon), false);
+			AndroidUiHelper.updateVisibility(view.findViewById(R.id.points_count), false);
 			List<GPXUtilities.TrkSegment> segments = gpxFile.getNonEmptyTrkSegments(false);
 			GPXUtilities.TrkSegment segment = segments.get(routeParams.getSelectedSegment());
 			double distance = TrackSelectSegmentAdapter.getDistance(segment);
 			long time = TrackSelectSegmentAdapter.getSegmentTime(segment);
-			if (time != 1) {
-				timeView.setText(OsmAndFormatter.getFormattedDurationShort((int) (time / 1000)));
-			} else {
-				timeIcon.setVisibility(View.GONE);
-				timeView.setText("");
+			boolean timeAvailable = time != 1;
+			if (timeAvailable) {
+				timeView.setText(Algorithms.formatDuration((int) (time / 1000),
+						app.accessibilityEnabled()));
 			}
+			AndroidUiHelper.updateVisibility(timeView, timeAvailable);
+			AndroidUiHelper.updateVisibility(timeIcon, timeAvailable);
 			distanceView.setText(OsmAndFormatter.getFormattedDistance((float) distance, app));
 		}
 

@@ -30,6 +30,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.helpers.TrackSelectSegmentAdapter;
 import net.osmand.plus.helpers.TrackSelectSegmentAdapter.OnItemClickListener;
@@ -94,13 +95,13 @@ public class TrackSelectSegmentBottomSheet extends MenuBottomSheetDialogFragment
 		pointsCount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
 		pointsCount.setText(String.valueOf(analysis.wptPoints));
 		time.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-		if (analysis.isTimeSpecified()) {
+		boolean timeAvailable = analysis.timeSpan != 1;
+		if (timeAvailable) {
 			time.setText(Algorithms.formatDuration((int) (analysis.timeSpan / 1000),
 					app.accessibilityEnabled()));
-		} else {
-			time.setText("");
-			timeIcon.setVisibility(View.GONE);
 		}
+		AndroidUiHelper.updateVisibility(time, timeAvailable);
+		AndroidUiHelper.updateVisibility(timeIcon, timeAvailable);
 
 		RecyclerView recyclerView = itemView.findViewById(R.id.gpx_segment_list);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
