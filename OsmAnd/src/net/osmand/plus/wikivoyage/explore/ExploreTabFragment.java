@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -51,6 +52,7 @@ import static net.osmand.plus.wikivoyage.explore.WikivoyageExploreActivity.*;
 
 public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEvents, TravelLocalDataHelper.Listener {
 
+	public static final String DEFAULT_WIKIVOYAGE_TRAVEL_OBF = "Default_wikivoyage.travel.obf";
 	private static boolean SHOW_TRAVEL_UPDATE_CARD = true;
 	private static boolean SHOW_TRAVEL_NEEDED_MAPS_CARD = true;
 
@@ -187,7 +189,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 					}
 				}
 			}
-			if (app.getTravelHelper().isAnyTravelBookPresent()) {
+			if (!isOnlyDefaultTravelBookPresent()) {
 				TravelButtonCard travelButtonCard = new TravelButtonCard(app, nightMode);
 				travelButtonCard.setListener(new TravelNeededMapsCard.CardListener() {
 					@Override
@@ -249,8 +251,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 	}
 
 	private void addIndexItemCards(List<IndexItem> mainIndexItem, List<IndexItem> neededIndexItems) {
-		final OsmandApplication app = getMyApplication();
-		if (app != null && !app.getTravelHelper().isAnyTravelBookPresent()) {
+		if (isOnlyDefaultTravelBookPresent()) {
 			this.mainIndexItems.clear();
 			this.mainIndexItems.addAll(mainIndexItem);
 			addDownloadUpdateCard();
@@ -258,6 +259,18 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 		this.neededIndexItems.clear();
 		this.neededIndexItems.addAll(neededIndexItems);
 		addNeededMapsCard();
+	}
+
+	private boolean isOnlyDefaultTravelBookPresent() {
+		OsmandApplication app = getMyApplication();
+		if (app != null && !app.isApplicationInitializing()) {
+			for (BinaryMapIndexReader reader : app.getResourceManager().getTravelRepositories()) {
+				if (!reader.getFile().getName().equals(DEFAULT_WIKIVOYAGE_TRAVEL_OBF)) {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 
 	private void addDownloadUpdateCard() {
