@@ -8,6 +8,7 @@ import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,8 +21,8 @@ public class DownloadResourceGroup {
 
 	private final DownloadResourceGroupType type;
 	private final DownloadResourceGroup parentGroup;
-	// ASSERT: individualResources are not empty if and only if groups are empty
-	private final List<IndexItem> individualResources;
+	// ASSERT: individualDownloadItems are not empty if and only if groups are empty
+	private final List<DownloadItem> individualDownloadItems;
 	private final List<DownloadResourceGroup> groups;
 	protected final String id;
 
@@ -107,10 +108,10 @@ public class DownloadResourceGroup {
 	public DownloadResourceGroup(DownloadResourceGroup parentGroup, DownloadResourceGroupType type, String id) {
 		boolean flat = type.containsIndexItem();
 		if (flat) {
-			this.individualResources = new ArrayList<IndexItem>();
+			this.individualDownloadItems = new ArrayList<DownloadItem>();
 			this.groups = null;
 		} else {
-			this.individualResources = null;
+			this.individualDownloadItems = null;
 			this.groups = new ArrayList<DownloadResourceGroup>();
 		}
 		this.id = id;
@@ -173,7 +174,7 @@ public class DownloadResourceGroup {
 			DownloadResourceGroup regionMaps = getSubGroupById(DownloadResourceGroupType.REGION_MAPS.getDefaultId());
 			if(regionMaps != null && regionMaps.size() == 1 && parentGroup != null && parentGroup.getParentGroup() != null && 
 					isEmpty(getSubGroupById(DownloadResourceGroupType.SUBREGIONS.getDefaultId()))) {
-				IndexItem item = regionMaps.individualResources.get(0);
+				IndexItem item = regionMaps.getIndividualResources().get(0);
 				DownloadResourceGroup screenParent = parentGroup.getParentGroup();
 				if(item.getType() == DownloadActivityType.HILLSHADE_FILE) {
 					DownloadResourceGroup hillshades = 
@@ -183,7 +184,7 @@ public class DownloadResourceGroup {
 						screenParent.addGroup(hillshades);
 					}
 					hillshades.addItem(item);
-					regionMaps.individualResources.remove(0);
+					regionMaps.individualDownloadItems.remove(0);
 				} else if (item.getType() == DownloadActivityType.SRTM_COUNTRY_FILE) {
 					DownloadResourceGroup hillshades = screenParent
 							.getSubGroupById(DownloadResourceGroupType.SRTM_HEADER.getDefaultId());
@@ -192,7 +193,7 @@ public class DownloadResourceGroup {
 						screenParent.addGroup(hillshades);
 					}
 					hillshades.addItem(item);
-					regionMaps.individualResources.remove(0);
+					regionMaps.individualDownloadItems.remove(0);
 				}
 				
 			}
@@ -221,35 +222,38 @@ public class DownloadResourceGroup {
 			}
 		}
 		groups.add(g);
-		if (g.individualResources != null) {
-			final net.osmand.Collator collator = OsmAndCollator.primaryCollator();
-			final OsmandApplication app = getRoot().app;
-			final OsmandRegions osmandRegions = app.getRegions();
-			Collections.sort(g.individualResources, new Comparator<IndexItem>() {
-				@Override
-				public int compare(IndexItem lhs, IndexItem rhs) {
-					int lli = lhs.getType().getOrderIndex();
-					int rri = rhs.getType().getOrderIndex();
-					if(lli < rri) {
-						return -1; 
-					} else if(lli > rri) {
-						return 1;
-					}
+		sortDownloadItems(g.individualDownloadItems);
+	}
 
-					return collator.compare(lhs.getVisibleName(app.getApplicationContext(), osmandRegions),
-							rhs.getVisibleName(app.getApplicationContext(), osmandRegions));
+	protected void sortDownloadItems(List<DownloadItem> items) {
+		if (Algorithms.isEmpty(items)) return;
+		final net.osmand.Collator collator = OsmAndCollator.primaryCollator();
+		final OsmandApplication app = getRoot().app;
+		final OsmandRegions osmandRegions = app.getRegions();
+		Collections.sort(items, new Comparator<DownloadItem>() {
+			@Override
+			public int compare(DownloadItem firstItem, DownloadItem secondItem) {
+				int firstOrder = firstItem.getType().getOrderIndex();
+				int secondOrder = secondItem.getType().getOrderIndex();
+				if(firstOrder < secondOrder) {
+					return -1;
+				} else if(firstOrder > secondOrder) {
+					return 1;
 				}
-			});
-		}
+				String firstName = firstItem.getVisibleName(app, osmandRegions);
+				String secondName = secondItem.getVisibleName(app, osmandRegions);
+				return collator.compare(firstName, secondName);
+			}
+		});
 	}
 	
-	public void addItem(IndexItem i) {
+	public void addItem(DownloadItem i) {
 		i.setRelatedGroup(this);
-		individualResources.add(i);
+		individualDownloadItems.add(i);
 	}
 	
 	public boolean isEmpty() {
-		return isEmpty(individualResources) && isEmpty(groups);
+		return isEmpty(individualDownloadItems) && isEmpty(groups);
 	}
 
 	private boolean isEmpty(List<?> l) {
@@ -265,7 +269,7 @@ public class DownloadResourceGroup {
 	}
 	
 	public int size() {
-		return groups != null ? groups.size() : individualResources.size();
+		return groups != null ? groups.size() : individualDownloadItems.size();
 	}
 	
 	public DownloadResourceGroup getGroupByIndex(int ind) {
@@ -275,9 +279,9 @@ public class DownloadResourceGroup {
 		return null;
 	}
 	
-	public IndexItem getItemByIndex(int ind) {
-		if (individualResources != null && ind >= 0 && ind < individualResources.size()) {
-			return individualResources.get(ind);
+	public DownloadItem getItemByIndex(int ind) {
+		if (individualDownloadItems != null && ind >= 0 && ind < individualDownloadItems.size()) {
+			return individualDownloadItems.get(ind);
 		}
 		return null;
 	}
@@ -306,7 +310,19 @@ public class DownloadResourceGroup {
 	}
 	
 	public List<IndexItem> getIndividualResources() {
+		List<IndexItem> individualResources = new ArrayList<>();
+		if (individualDownloadItems != null) {
+			for (DownloadItem item : individualDownloadItems) {
+				if (item instanceof IndexItem) {
+					individualResources.add((IndexItem) item);
+				}
+			}
+		}
 		return individualResources;
+	}
+
+	public List<DownloadItem> getIndividualDownloadItems() {
+		return individualDownloadItems;
 	}
 	
 	public WorldRegion getRegion() {

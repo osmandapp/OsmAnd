@@ -2162,7 +2162,7 @@
     <string name="rendering_attr_depthContours_description">Mostra isòbates i fondàries puntuals.</string>
     <string name="rendering_attr_depthContours_name">Isòbates</string>
     <string name="routing_attr_height_obstacles_name">Utilitza les cotes d\'elevació</string>
-    <string name="routing_attr_height_obstacles_description">Revisa l\'elevació del terreny (mitjançant dades SRTM, ASTER i EU-DEM).</string>
+
     <string name="route_altitude">Alçat de la ruta</string>
     <string name="altitude_descent">Descens</string>
     <string name="altitude_ascent">Ascens</string>

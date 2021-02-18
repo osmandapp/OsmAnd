@@ -68,19 +68,18 @@
 			android:orientation="horizontal">
 
 			<FrameLayout
+				android:id="@+id/btn_read_full"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_marginStart="@dimen/context_menu_padding_margin_small"
-				android:layout_marginLeft="@dimen/context_menu_padding_margin_small"
-				android:background="@drawable/rounded_background_3dp">
+				android:layout_marginStart="@dimen/content_padding_half"
+				android:layout_marginLeft="@dimen/content_padding_half">
 
 				<net.osmand.plus.widgets.TextViewEx
-					android:id="@+id/btn_read_full"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_gravity="start"
 					android:gravity="center_vertical"
-					android:background="?attr/selectableItemBackgroundBorderless"
+					android:duplicateParentState="true"
 					android:padding="@dimen/bottom_sheet_content_padding_small"
 					android:paddingStart="@dimen/bottom_sheet_content_padding_small"
 					android:paddingEnd="@dimen/bottom_sheet_content_padding_small"
@@ -96,19 +95,19 @@
 			</FrameLayout>
 
 			<FrameLayout
+				android:id="@+id/btn_edit"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_marginRight="@dimen/context_menu_padding_margin_small"
-				android:layout_marginEnd="@dimen/context_menu_padding_margin_small"
-				android:layout_gravity="end"
-				android:background="@drawable/rounded_background_3dp">
+				android:layout_marginRight="@dimen/content_padding_half"
+				android:layout_marginEnd="@dimen/content_padding_half"
+				android:layout_gravity="end">
 
 				<net.osmand.plus.widgets.TextViewEx
-					android:id="@+id/btn_edit"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
+					android:layout_gravity="start"
 					android:gravity="center_vertical"
-					android:background="?attr/selectableItemBackgroundBorderless"
+					android:duplicateParentState="true"
 					android:padding="@dimen/bottom_sheet_content_padding_small"
 					android:paddingStart="@dimen/bottom_sheet_content_padding_small"
 					android:paddingEnd="@dimen/bottom_sheet_content_padding_small"
@@ -134,7 +133,6 @@
 		android:layout_marginStart="@dimen/card_padding"
 		android:layout_marginLeft="@dimen/card_padding"
 		android:layout_marginTop="@dimen/content_padding"
-		android:background="@drawable/rounded_background_3dp"
 		android:visibility="gone"
 		tools:visibility="visible">
 
@@ -142,7 +140,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:gravity="center_vertical"
-			android:background="?attr/selectableItemBackgroundBorderless"
+			android:duplicateParentState="true"
 			android:padding="@dimen/bottom_sheet_content_padding_small"
 			android:paddingStart="@dimen/bottom_sheet_content_padding_small"
 			android:paddingEnd="@dimen/bottom_sheet_content_padding_small"

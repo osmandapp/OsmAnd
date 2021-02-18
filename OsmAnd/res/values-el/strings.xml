@@ -1876,7 +1876,7 @@
     <string name="total_distance">Συνολική απόσταση</string>
     <string name="routing_attr_relief_smoothness_factor_name">Επιλέξτε διακύμανση ανύψωσης</string>
     <string name="routing_attr_height_obstacles_name">Χρήση υψομετρικών δεδομένων</string>
-    <string name="routing_attr_height_obstacles_description">Συντελεστής σε ανύψωση εδάφους (μέσω SRTM, ASTER και δεδομένων EU-DEM).</string>
+
     <string name="rendering_attr_depthContours_description">Εμφάνιση ισοβαθών καμπυλών και σημείων.</string>
     <string name="rendering_attr_depthContours_name">Ναυτικές ισοβαθείς καμπύλες</string>
     <string name="auto_split_recording_title">Αυτόματος διαχωρισμός καταγραφών μετά από κενό</string>

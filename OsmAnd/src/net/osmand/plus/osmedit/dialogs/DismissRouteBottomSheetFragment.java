@@ -46,12 +46,12 @@ public class DismissRouteBottomSheetFragment extends MenuBottomSheetDialogFragme
 
 	@Override
 	protected int getDismissButtonTextId() {
-		return R.string.shared_string_cancel;
+		return R.string.shared_string_no;
 	}
 
 	@Override
 	protected int getRightBottomButtonTextId() {
-		return R.string.shared_string_dismiss;
+		return R.string.shared_string_yes;
 	}
 
 	@Override

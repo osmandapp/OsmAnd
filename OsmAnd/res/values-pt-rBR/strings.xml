@@ -2207,7 +2207,7 @@
     <string name="route_altitude">Altitude da rota</string>
     <string name="routing_attr_relief_smoothness_factor_name">Selecionar a flutuação de altimetria</string>
     <string name="routing_attr_height_obstacles_name">Usar dados altimétricos</string>
-    <string name="routing_attr_height_obstacles_description">Considerar altimetria do terreno (via dados SRTM, ASTER e EU-DEM).</string>
+
     <string name="rendering_attr_depthContours_description">Mostrar curvas e pontos batimétricos.</string>
     <string name="rendering_attr_depthContours_name">Batimetria náutica</string>
     <string name="rendering_attr_contourDensity_description">Densidade das curvas de nível</string>

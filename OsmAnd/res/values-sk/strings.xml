@@ -2165,7 +2165,7 @@
     <string name="rendering_attr_depthContours_description">Zobraziť hĺbkové úrovne a body.</string>
     <string name="rendering_attr_depthContours_name">Námorné hĺbkové vrstevnice</string>
     <string name="routing_attr_height_obstacles_name">Použiť údaje nadmorskej výšky</string>
-    <string name="routing_attr_height_obstacles_description">Zohľadniť prevýšenie terénu (z údajov SRTM, ASTER a EU-DEM).</string>
+
     <string name="route_altitude">Prevýšenie trasy</string>
     <string name="altitude_descent">Klesanie</string>
     <string name="altitude_ascent">Stúpanie</string>

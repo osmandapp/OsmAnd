@@ -2011,7 +2011,7 @@
     <string name="total_distance">Distância total</string>
     <string name="routing_attr_relief_smoothness_factor_name">Selecionar flutuação de elevação</string>
     <string name="routing_attr_height_obstacles_name">Utilizar dados de elevação</string>
-    <string name="routing_attr_height_obstacles_description">Utilizar elevação de terreno (dos dados do SRTM, ASTER e EU-DEM).</string>
+
     <string name="rendering_attr_depthContours_description">Mostrar pontos e contornos de profundidade.</string>
     <string name="rendering_attr_depthContours_name">Contornos de profundidade náuticos</string>
     <string name="show_transparency_seekbar">Mostra a transparência da barra de navegação</string>

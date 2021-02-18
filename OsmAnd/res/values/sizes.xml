@@ -413,4 +413,7 @@
 
 	<dimen name="radioButtonSize">32dp</dimen>
 	<dimen name="checkBoxSize">24dp</dimen>
+
+	<dimen name="titleLineSpacingExtra">5sp</dimen>
+	<dimen name="descriptionLineSpacingExtra">3sp</dimen>
 </resources>

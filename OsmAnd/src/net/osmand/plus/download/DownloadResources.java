@@ -25,10 +25,14 @@ import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
+import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.REGION_MAPS;
 
 public class DownloadResources extends DownloadResourceGroup {
 	private static final String TAG = DownloadResources.class.getSimpleName();
@@ -40,7 +44,7 @@ public class DownloadResources extends DownloadResourceGroup {
 	private Map<String, String> indexFileNames = new LinkedHashMap<>();
 	private Map<String, String> indexActivatedFileNames = new LinkedHashMap<>();
 	private List<IndexItem> rawResources;
-	private Map<WorldRegion, List<IndexItem> > groupByRegion;
+	private Map<WorldRegion, List<IndexItem>> groupByRegion;
 	private List<IndexItem> itemsToUpdate = new ArrayList<>();
 	public static final String WORLD_SEAMARKS_KEY = "world_seamarks";
 	public static final String WORLD_SEAMARKS_NAME = "World_seamarks";
@@ -55,7 +59,7 @@ public class DownloadResources extends DownloadResourceGroup {
 		this.region = app.getRegions().getWorldRegion();
 		this.app = app;
 	}
-	
+
 	public List<IndexItem> getItemsToUpdate() {
 		return itemsToUpdate;
 	}
@@ -260,7 +264,7 @@ public class DownloadResources extends DownloadResourceGroup {
 	}
 
 	private Map<String, String> listWithAlternatives(final java.text.DateFormat dateFormat, File file,
-			final String ext, final Map<String, String> files) {
+	                                                 final String ext, final Map<String, String> files) {
 		if (file.isDirectory()) {
 			file.list(new FilenameFilter() {
 				@Override
@@ -292,7 +296,7 @@ public class DownloadResources extends DownloadResourceGroup {
 		}
 		return file;
 	}
-	
+
 	private void prepareFilesToUpdate() {
 		List<IndexItem> filtered = rawResources;
 		if (filtered != null) {
@@ -307,7 +311,7 @@ public class DownloadResources extends DownloadResourceGroup {
 			}
 		}
 	}
-	
+
 	protected boolean prepareData(List<IndexItem> resources) {
 		this.rawResources = resources;
 
@@ -332,18 +336,18 @@ public class DownloadResources extends DownloadResourceGroup {
 		DownloadResourceGroup nauticalMapsGroup = new DownloadResourceGroup(this, DownloadResourceGroupType.NAUTICAL_MAPS_GROUP);
 		DownloadResourceGroup nauticalMapsScreen = new DownloadResourceGroup(nauticalMapsGroup, DownloadResourceGroupType.NAUTICAL_MAPS);
 		DownloadResourceGroup nauticalMaps = new DownloadResourceGroup(nauticalMapsGroup, DownloadResourceGroupType.NAUTICAL_MAPS_HEADER);
-		
+
 		DownloadResourceGroup wikivoyageMapsGroup = new DownloadResourceGroup(this, DownloadResourceGroupType.TRAVEL_GROUP);
 		DownloadResourceGroup wikivoyageMapsScreen = new DownloadResourceGroup(wikivoyageMapsGroup, DownloadResourceGroupType.WIKIVOYAGE_MAPS);
 		DownloadResourceGroup wikivoyageMaps = new DownloadResourceGroup(wikivoyageMapsGroup, DownloadResourceGroupType.WIKIVOYAGE_HEADER);
 
-		Map<WorldRegion, List<IndexItem> > groupByRegion = new LinkedHashMap<WorldRegion, List<IndexItem>>();
+		Map<WorldRegion, List<IndexItem>> groupByRegion = new LinkedHashMap<>();
 		OsmandRegions regs = app.getRegions();
 		for (IndexItem ii : resources) {
 			if (ii.getType() == DownloadActivityType.VOICE_FILE) {
-				if (ii.getFileName().endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS)){
+				if (ii.getFileName().endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS)) {
 					voiceTTS.addItem(ii);
-				} else if (ii.getFileName().endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)){
+				} else if (ii.getFileName().endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)) {
 					voiceRec.addItem(ii);
 				}
 				continue;
@@ -377,7 +381,7 @@ public class DownloadResources extends DownloadResourceGroup {
 				groupByRegion.get(wg).add(ii);
 			} else {
 				if (ii.getFileName().startsWith("World_")) {
-					if (ii.getFileName().toLowerCase().startsWith(WORLD_SEAMARKS_KEY) || 
+					if (ii.getFileName().toLowerCase().startsWith(WORLD_SEAMARKS_KEY) ||
 							ii.getFileName().toLowerCase().startsWith(WORLD_SEAMARKS_OLD_KEY)) {
 						nauticalMaps.addItem(ii);
 					} else {
@@ -402,33 +406,35 @@ public class DownloadResources extends DownloadResourceGroup {
 		LinkedList<DownloadResourceGroup> parent = new LinkedList<DownloadResourceGroup>();
 		DownloadResourceGroup worldSubregions = new DownloadResourceGroup(this, DownloadResourceGroupType.SUBREGIONS);
 		addGroup(worldSubregions);
-		for(WorldRegion rg : region.getSubregions()) {
+		for (WorldRegion rg : region.getSubregions()) {
 			queue.add(rg);
 			parent.add(worldSubregions);
 		}
-		while(!queue.isEmpty()) {
+		while (!queue.isEmpty()) {
 			WorldRegion reg = queue.pollFirst();
 			DownloadResourceGroup parentGroup = parent.pollFirst();
 			List<WorldRegion> subregions = reg.getSubregions();
 			DownloadResourceGroup mainGrp = new DownloadResourceGroup(parentGroup, DownloadResourceGroupType.REGION, reg.getRegionId());
 			mainGrp.region = reg;
 			parentGroup.addGroup(mainGrp);
-			
+
+			DownloadResourceGroup flatFiles = new DownloadResourceGroup(mainGrp, REGION_MAPS);
 			List<IndexItem> list = groupByRegion.get(reg);
-			if(list != null) {
-				DownloadResourceGroup flatFiles = new DownloadResourceGroup(mainGrp, DownloadResourceGroupType.REGION_MAPS);
-				for(IndexItem ii : list) {
+			if (list != null) {
+				for (IndexItem ii : list) {
 					flatFiles.addItem(ii);
 				}
+			}
+			if (list != null || !reg.isContinent()) {
 				mainGrp.addGroup(flatFiles);
 			}
 			DownloadResourceGroup subRegions = new DownloadResourceGroup(mainGrp, DownloadResourceGroupType.SUBREGIONS);
 			mainGrp.addGroup(subRegions);
 			// add to processing queue
-			for(WorldRegion rg : subregions) {
+			for (WorldRegion rg : subregions) {
 				queue.add(rg);
 				parent.add(subRegions);
-			}	
+			}
 		}
 		// Possible improvements
 		// 1. if there is no subregions no need to create resource group REGIONS_MAPS - objection raise diversity and there is no value
@@ -455,17 +461,97 @@ public class DownloadResources extends DownloadResourceGroup {
 		}
 		otherGroup.addGroup(voiceScreenTTS);
 		otherGroup.addGroup(voiceScreenRec);
-		
-		
+
+
 		if (fonts.getIndividualResources() != null) {
 			otherGroup.addGroup(fontScreen);
 		}
 		addGroup(otherGroup);
 
 		createHillshadeSRTMGroups();
+		collectMultipleIndexesItems();
 		trimEmptyGroups();
 		updateLoadedFiles();
 		return true;
+	}
+
+	private void collectMultipleIndexesItems() {
+		collectMultipleIndexesItems(region);
+	}
+
+	private void collectMultipleIndexesItems(@NonNull WorldRegion region) {
+		List<WorldRegion> subRegions = region.getSubregions();
+		if (Algorithms.isEmpty(subRegions)) return;
+
+		DownloadResourceGroup group = getRegionMapsGroup(region);
+		if (group != null) {
+			boolean listModified = false;
+			List<IndexItem> indexesList = group.getIndividualResources();
+			List<WorldRegion> regionsToCollect = removeDuplicateRegions(subRegions);
+			for (DownloadActivityType type : DownloadActivityType.values()) {
+				if (!doesListContainIndexWithType(indexesList, type)) {
+					List<IndexItem> indexesFromSubRegions = collectIndexesOfType(regionsToCollect, type);
+					if (indexesFromSubRegions != null) {
+						group.addItem(new MultipleIndexItem(region, indexesFromSubRegions, type));
+						listModified = true;
+					}
+				}
+			}
+			if (listModified) {
+				sortDownloadItems(group.getIndividualDownloadItems());
+			}
+		}
+		for (WorldRegion subRegion : subRegions) {
+			collectMultipleIndexesItems(subRegion);
+		}
+	}
+
+	private DownloadResourceGroup getRegionMapsGroup(WorldRegion region) {
+		DownloadResourceGroup group = getRegionGroup(region);
+		if (group != null) {
+			return group.getSubGroupById(REGION_MAPS.getDefaultId());
+		}
+		return null;
+	}
+
+	@Nullable
+	private List<IndexItem> collectIndexesOfType(@NonNull List<WorldRegion> regions,
+	                                             @NonNull DownloadActivityType type) {
+		List<IndexItem> collectedIndexes = new ArrayList<>();
+		for (WorldRegion region : regions) {
+			List<IndexItem> regionIndexes = getIndexItems(region);
+			boolean found = false;
+			if (regionIndexes != null) {
+				for (IndexItem index : regionIndexes) {
+					if (index.getType() == type) {
+						found = true;
+						collectedIndexes.add(index);
+						break;
+					}
+				}
+			}
+			if (!found) return null;
+		}
+		return collectedIndexes;
+	}
+
+	private List<WorldRegion> removeDuplicateRegions(List<WorldRegion> regions) {
+		Set<WorldRegion> duplicates = new HashSet<>();
+		for (int i = 0; i < regions.size() - 1; i++) {
+			WorldRegion r1 = regions.get(i);
+			for (int j = i + 1; j < regions.size(); j++) {
+				WorldRegion r2 = regions.get(j);
+				if (r1.containsRegion(r2)) {
+					duplicates.add(r2);
+				} else if (r2.containsRegion(r1)) {
+					duplicates.add(r1);
+				}
+			}
+		}
+		for (WorldRegion region : duplicates) {
+			regions.remove(region);
+		}
+		return regions;
 	}
 
 	private void buildRegionsGroups(WorldRegion region, DownloadResourceGroup group) {
@@ -485,7 +571,7 @@ public class DownloadResources extends DownloadResourceGroup {
 				CustomRegion customRegion = (CustomRegion) reg;
 				List<IndexItem> indexItems = customRegion.loadIndexItems();
 				if (!Algorithms.isEmpty(indexItems)) {
-					DownloadResourceGroup flatFiles = new DownloadResourceGroup(mainGrp, DownloadResourceGroupType.REGION_MAPS);
+					DownloadResourceGroup flatFiles = new DownloadResourceGroup(mainGrp, REGION_MAPS);
 					for (IndexItem ii : indexItems) {
 						flatFiles.addItem(ii);
 					}
@@ -557,7 +643,11 @@ public class DownloadResources extends DownloadResourceGroup {
 		return res;
 	}
 
-	public static List<IndexItem> findIndexItemsAt(OsmandApplication app, List<String> names, DownloadActivityType type, boolean includeDownloaded, int limit) {
+	public static List<IndexItem> findIndexItemsAt(OsmandApplication app,
+	                                               List<String> names,
+	                                               DownloadActivityType type,
+	                                               boolean includeDownloaded,
+	                                               int limit) {
 		List<IndexItem> res = new ArrayList<>();
 		OsmandRegions regions = app.getRegions();
 		DownloadIndexesThread downloadThread = app.getDownloadThread();
@@ -573,8 +663,12 @@ public class DownloadResources extends DownloadResourceGroup {
 		return res;
 	}
 
-	private static boolean isIndexItemDownloaded(DownloadIndexesThread downloadThread, DownloadActivityType type, WorldRegion downloadRegion, List<IndexItem> res) {
-		List<IndexItem> otherIndexItems = new ArrayList<>(downloadThread.getIndexes().getIndexItems(downloadRegion));
+	private static boolean isIndexItemDownloaded(DownloadIndexesThread downloadThread,
+	                                             DownloadActivityType type,
+	                                             WorldRegion downloadRegion,
+	                                             List<IndexItem> res) {
+		List<IndexItem> otherIndexItems =
+				new ArrayList<>(downloadThread.getIndexes().getIndexItems(downloadRegion));
 		for (IndexItem indexItem : otherIndexItems) {
 			if (indexItem.getType() == type && indexItem.isDownloaded()) {
 				return true;
@@ -584,8 +678,24 @@ public class DownloadResources extends DownloadResourceGroup {
 				&& isIndexItemDownloaded(downloadThread, type, downloadRegion.getSuperregion(), res);
 	}
 
-	private static boolean addIndexItem(DownloadIndexesThread downloadThread, DownloadActivityType type, WorldRegion downloadRegion, List<IndexItem> res) {
-		List<IndexItem> otherIndexItems = new ArrayList<>(downloadThread.getIndexes().getIndexItems(downloadRegion));
+	private boolean doesListContainIndexWithType(List<IndexItem> indexItems,
+	                                             DownloadActivityType type) {
+		if (indexItems != null) {
+			for (IndexItem indexItem : indexItems) {
+				if (indexItem.getType() == type) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	private static boolean addIndexItem(DownloadIndexesThread downloadThread,
+	                                    DownloadActivityType type,
+	                                    WorldRegion downloadRegion,
+	                                    List<IndexItem> res) {
+		List<IndexItem> otherIndexItems =
+				new ArrayList<>(downloadThread.getIndexes().getIndexItems(downloadRegion));
 		for (IndexItem indexItem : otherIndexItems) {
 			if (indexItem.getType() == type
 					&& !res.contains(indexItem)) {

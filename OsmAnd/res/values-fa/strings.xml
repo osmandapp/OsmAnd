@@ -1811,7 +1811,7 @@
     <string name="average_altitude">میانگین ارتفاع</string>
     <string name="total_distance">مسافت کل</string>
     <string name="routing_attr_height_obstacles_name">استفاده از دادهٔ ارتفاعی</string>
-    <string name="routing_attr_height_obstacles_description">فاکتور ارتفاع‌دهی عارضه‌ها (با استفاده از داده‌های SRTM،‏ ASTER و EU-DEM).</string>
+
     <string name="rendering_attr_depthContours_description">نمایش نقاط و منحنی‌های میزان عمقی.</string>
     <string name="rendering_attr_depthContours_name">منحنی‌های میزان عمق دریا</string>
     <string name="rendering_attr_contourDensity_description">تراکم منحنی میزان</string>

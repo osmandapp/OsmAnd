@@ -2167,7 +2167,7 @@
     <string name="shared_string_time">Tempo</string>
     <string name="total_distance">Distanza totale</string>
     <string name="routing_attr_height_obstacles_name">Utilizza dati altitudine</string>
-    <string name="routing_attr_height_obstacles_description">Fattore di elevazione del terreno (tramite i dati SRTM, ASTER e EU-DEM).</string>
+
     <string name="shared_string_time_span">Intervallo di tempo</string>
     <string name="shared_string_max">Massimo</string>
     <string name="shared_string_start_time">Ora d\'inizio</string>

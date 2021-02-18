@@ -62,6 +62,8 @@ import net.osmand.plus.mapmarkers.MarkersPlanRouteContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.StartPlanRouteBottomSheet;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.monitoring.TripRecordingActiveBottomSheet;
+import net.osmand.plus.monitoring.TripRecordingBottomSheet;
 import net.osmand.plus.osmedit.dialogs.DismissRouteBottomSheetFragment;
 import net.osmand.plus.profiles.ProfileDataObject;
 import net.osmand.plus.profiles.ProfileDataUtils;
@@ -98,6 +100,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_CONFIGURE_P
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_CONFIGURE_SCREEN_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DASHBOARD_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DIRECTIONS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_TRIP_RECORDING_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DIVIDER_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DOWNLOAD_MAPS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_HELP_ID;
@@ -356,10 +359,10 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 	public void addActionsToAdapter(final double latitude,
-	                                final double longitude,
-	                                final ContextMenuAdapter adapter,
-	                                Object selectedObj,
-	                                boolean configureMenu) {
+									final double longitude,
+									final ContextMenuAdapter adapter,
+									Object selectedObj,
+									boolean configureMenu) {
 		ItemBuilder itemBuilder = new ItemBuilder();
 
 		adapter.addItem(itemBuilder
@@ -522,6 +525,7 @@ public class MapActivityActions implements DialogProvider {
 			GPXRouteParamsBuilder params = new GPXRouteParamsBuilder(result, settings);
 			params.setCalculateOsmAndRouteParts(settings.GPX_ROUTE_CALC_OSMAND_PARTS.get());
 			params.setCalculateOsmAndRoute(settings.GPX_ROUTE_CALC.get());
+			params.setSelectedSegment(settings.GPX_ROUTE_SEGMENT.get());
 			List<Location> ps = params.getPoints(settings.getContext());
 			mapActivity.getRoutingHelper().setGpxParams(params);
 			settings.FOLLOW_THE_GPX_ROUTE.set(result.path);
@@ -539,17 +543,17 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 	public void enterRoutePlanningModeGivenGpx(GPXFile gpxFile, LatLon from, PointDescription fromName,
-	                                           boolean useIntermediatePointsByDefault, boolean showMenu) {
+											   boolean useIntermediatePointsByDefault, boolean showMenu) {
 		enterRoutePlanningModeGivenGpx(gpxFile, from, fromName, useIntermediatePointsByDefault, showMenu, MapRouteInfoMenu.DEFAULT_MENU_STATE);
 	}
 
 	public void enterRoutePlanningModeGivenGpx(GPXFile gpxFile, LatLon from, PointDescription fromName,
-	                                           boolean useIntermediatePointsByDefault, boolean showMenu, int menuState) {
+											   boolean useIntermediatePointsByDefault, boolean showMenu, int menuState) {
 		enterRoutePlanningModeGivenGpx(gpxFile, null, from, fromName, useIntermediatePointsByDefault, showMenu, menuState);
 	}
 
 	public void enterRoutePlanningModeGivenGpx(GPXFile gpxFile, ApplicationMode appMode, LatLon from, PointDescription fromName,
-	                                           boolean useIntermediatePointsByDefault, boolean showMenu, int menuState) {
+											   boolean useIntermediatePointsByDefault, boolean showMenu, int menuState) {
 		settings.USE_INTERMEDIATE_POINTS_NAVIGATION.set(useIntermediatePointsByDefault);
 		OsmandApplication app = mapActivity.getMyApplication();
 		TargetPointsHelper targets = app.getTargetPointsHelper();
@@ -839,6 +843,26 @@ public class MapActivityActions implements DialogProvider {
 					}
 				}).createItem());
 
+		final OsmandMonitoringPlugin monitoringPlugin = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
+		if (monitoringPlugin != null) {
+			optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.map_widget_monitoring, mapActivity)
+					.setId(DRAWER_TRIP_RECORDING_ID)
+					.setIcon(R.drawable.ic_action_track_recordable)
+					.setListener(new ItemClickListener() {
+						@Override
+						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
+							app.logEvent("trip_recording_open");
+							MapActivity.clearPrevActivityIntent();
+							if (monitoringPlugin.hasDataToSave() || monitoringPlugin.wasTrackMonitored()) {
+								TripRecordingActiveBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), monitoringPlugin.getCurrentTrack());
+							} else {
+								TripRecordingBottomSheet.showInstance(mapActivity.getSupportFragmentManager());
+							}
+							return true;
+						}
+					}).createItem());
+		}
+
 
 		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.get_directions, mapActivity)
 				.setId(DRAWER_DIRECTIONS_ID)
@@ -1087,7 +1111,7 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 	private String getProfileDescription(OsmandApplication app, ApplicationMode mode,
-	                                     Map<String, ProfileDataObject> profilesObjects, String defaultDescription) {
+										 Map<String, ProfileDataObject> profilesObjects, String defaultDescription) {
 		String description = defaultDescription;
 
 		String routingProfileKey = mode.getRoutingProfile();

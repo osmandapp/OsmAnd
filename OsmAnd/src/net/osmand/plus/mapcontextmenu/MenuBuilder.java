@@ -808,7 +808,11 @@ public class MenuBuilder {
 		View.OnClickListener onClickListener = new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				POIMapLayer.showHtmlDescriptionDialog(view.getContext(), app, description, descriptionLabel);
+				if (description.contains("</")) {
+					POIMapLayer.showHtmlDescriptionDialog(view.getContext(), app, description, descriptionLabel);
+				} else {
+					POIMapLayer.showPlainDescriptionDialog(view.getContext(), app, description, descriptionLabel);
+				}
 			}
 		};
 
