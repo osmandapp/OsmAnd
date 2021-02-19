@@ -359,6 +359,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 			nameTextBox.setError(getString(R.string.file_with_name_already_exist));
 		} else {
 			nameTextBox.setError(null);
+			nameTextBox.setErrorEnabled(false);
 			fileName = text;
 			rightButtonEnabled = true;
 		}
