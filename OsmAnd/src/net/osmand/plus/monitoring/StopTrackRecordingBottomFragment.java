@@ -52,7 +52,7 @@ public class StopTrackRecordingBottomFragment extends MenuBottomSheetDialogFragm
 		int verticalBig = getResources().getDimensionPixelSize(R.dimen.dialog_content_margin);
 		int verticalNormal = getResources().getDimensionPixelSize(R.dimen.content_padding);
 
-		final View buttonDiscard = createItem(inflater, ItemType.STOP_AND_DISCARD);
+//		final View buttonDiscard = createItem(inflater, ItemType.STOP_AND_DISCARD);
 		final View buttonSave = createItem(inflater, ItemType.STOP_AND_SAVE);
 		final View buttonCancel = createItem(inflater, ItemType.CANCEL);
 
@@ -66,7 +66,7 @@ public class StopTrackRecordingBottomFragment extends MenuBottomSheetDialogFragm
 
 		items.add(new DividerSpaceItem(app, verticalBig));
 
-		items.add(new BaseBottomSheetItem.Builder()
+		/*items.add(new BaseBottomSheetItem.Builder()
 				.setCustomView(buttonDiscard)
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
@@ -82,7 +82,7 @@ public class StopTrackRecordingBottomFragment extends MenuBottomSheetDialogFragm
 				})
 				.create());
 
-		items.add(new DividerSpaceItem(app, verticalBig));
+		items.add(new DividerSpaceItem(app, verticalBig));*/
 
 		items.add(new BaseBottomSheetItem.Builder()
 				.setCustomView(buttonSave)
