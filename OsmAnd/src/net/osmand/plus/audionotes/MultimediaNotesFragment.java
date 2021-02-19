@@ -384,8 +384,12 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 		File dir = app.getAppPath("").getParentFile();
 		long size = 0;
 		if (dir.canRead()) {
-			StatFs fs = new StatFs(dir.getAbsolutePath());
-			size = ((long) fs.getBlockSize() * (long) fs.getBlockCount()) / (1 << 30);
+			try {
+				StatFs fs = new StatFs(dir.getAbsolutePath());
+				size = ((long) fs.getBlockSize() * (long) fs.getBlockCount()) / (1 << 30);
+			} catch (IllegalArgumentException e) {
+				log.error(e);
+			}
 		}
 		if (size > 0) {
 			int value = 1;

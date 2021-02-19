@@ -89,7 +89,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 	public static final int IMPORT_FAVOURITES_ID = 7;
 	public static final String GROUP_EXPANDED_POSTFIX = "_group_expanded";
 
-	private static final int MAX_POINTS_IN_DESCRIPTION = 100;
+	private static final int MAX_CHARS_IN_DESCRIPTION = 100000;
 
 	private FavouritesAdapter favouritesAdapter;
 	private FavouritesDbHelper helper;
@@ -611,35 +611,51 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 
 	private String generateHtmlPrint(List<FavoriteGroup> groups) {
 		StringBuilder html = new StringBuilder();
+		StringBuilder buffer = new StringBuilder();
 		html.append("<h1>My Favorites</h1>");
 
-		int addedPoints = 0;
 		for (FavoriteGroup group : groups) {
-			html.append("<h3>").append(group.getDisplayName(app)).append("</h3>");
-			for (FavouritePoint fp : group.getPoints()) {
-				if (addedPoints >= MAX_POINTS_IN_DESCRIPTION) {
-					break;
-				}
-
-				float lat = (float) fp.getLatitude();
-				float lon = (float) fp.getLongitude();
-				String url = "geo:" + lat + "," + lon + "?m=" + fp.getName();
-				html.append("<p>")
-						.append(fp.getDisplayName(app))
-						.append(" - <a href=\"")
-						.append(url)
-						.append("\">geo:")
-						.append(lat).append(",").append(lon)
-						.append("</a><br></p>");
-				addedPoints++;
+			buffer.setLength(0);
+			buffer.append("<h3>").append(group.getDisplayName(app)).append("</h3>");
+			if (buffer.length() + html.length() > MAX_CHARS_IN_DESCRIPTION) {
+				return html.append("<p>...</p>").toString();
 			}
 
-			if (addedPoints >= MAX_POINTS_IN_DESCRIPTION) {
-				html.append("<p>...</p>");
-				break;
+			html.append(buffer);
+			boolean reachedLimit = generateHtmlForGroup(group.getPoints(), html);
+			if (reachedLimit) {
+				return html.append("<p>...</p>").toString();
 			}
 		}
+
 		return html.toString();
+	}
+
+	private boolean generateHtmlForGroup(List<FavouritePoint> points, StringBuilder html) {
+		StringBuilder buffer = new StringBuilder();
+
+		for (FavouritePoint fp : points) {
+			buffer.setLength(0);
+
+			float lat = (float) fp.getLatitude();
+			float lon = (float) fp.getLongitude();
+			String url = "geo:" + lat + "," + lon + "?m=" + fp.getName();
+			buffer.append("<p>")
+					.append(fp.getDisplayName(app))
+					.append(" - <a href=\"")
+					.append(url)
+					.append("\">geo:")
+					.append(lat).append(",").append(lon)
+					.append("</a><br></p>");
+
+			if (buffer.length() + html.length() > MAX_CHARS_IN_DESCRIPTION) {
+				return true;
+			}
+
+			html.append(buffer);
+		}
+
+		return false;
 	}
 
 	private void shareFavourites() {

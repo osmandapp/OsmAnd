@@ -26,6 +26,7 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
+import net.osmand.PlatformUtil;
 import net.osmand.ValueHolder;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.data.LatLon;
@@ -67,6 +68,8 @@ import java.util.TimerTask;
 
 public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmAndLocationListener,
 		AppInitializeListener, DownloadEvents {
+	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(FirstUsageWizardFragment.class);
+
 	public static final String TAG = "FirstUsageWizardFrag";
 	public static final int FIRST_USAGE_LOCATION_PERMISSION = 300;
 	public static final int FIRST_USAGE_REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION = 400;
@@ -736,8 +739,12 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 
 	private String getFreeSpace(File dir) {
 		if (dir.canRead()) {
-			StatFs fs = new StatFs(dir.getAbsolutePath());
-			return AndroidUtils.formatSize(getActivity(), (long) fs.getAvailableBlocks() * fs.getBlockSize() );
+			try {
+				StatFs fs = new StatFs(dir.getAbsolutePath());
+				return AndroidUtils.formatSize(getActivity(), (long) fs.getAvailableBlocks() * fs.getBlockSize());
+			} catch (IllegalArgumentException e) {
+				LOG.error(e);
+			}
 		}
 		return "";
 	}

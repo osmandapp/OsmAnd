@@ -66,6 +66,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
+
 import java.io.File;
 import java.lang.reflect.Field;
 import java.text.MessageFormat;
@@ -84,6 +86,7 @@ import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 import static android.util.TypedValue.COMPLEX_UNIT_SP;
 
 public class AndroidUtils {
+	private static final Log LOG = PlatformUtil.getLog(AndroidUtils.class);
 
 	public static final String STRING_PLACEHOLDER = "%s";
 	public static final MessageFormat formatKb = new MessageFormat("{0, number,##.#}", Locale.US);
@@ -804,16 +807,24 @@ public class AndroidUtils {
 
 	public static long getAvailableSpace(@Nullable File dir) {
 		if (dir != null && dir.canRead()) {
-			StatFs fs = new StatFs(dir.getAbsolutePath());
-			return fs.getAvailableBlocksLong() * fs.getBlockSize();
+			try {
+				StatFs fs = new StatFs(dir.getAbsolutePath());
+				return fs.getAvailableBlocksLong() * fs.getBlockSize();
+			} catch (IllegalArgumentException e) {
+				LOG.error(e);
+			}
 		}
 		return -1;
 	}
 
 	public static float getFreeSpaceGb(File dir) {
 		if (dir.canRead()) {
-			StatFs fs = new StatFs(dir.getAbsolutePath());
-			return (float) (fs.getBlockSize()) * fs.getAvailableBlocks() / (1 << 30);
+			try {
+				StatFs fs = new StatFs(dir.getAbsolutePath());
+				return (float) (fs.getBlockSize()) * fs.getAvailableBlocks() / (1 << 30);
+			} catch (IllegalArgumentException e) {
+				LOG.error(e);
+			}
 		}
 		return -1;
 	}
