@@ -27,12 +27,12 @@ public class FolderListAdapter extends RecyclerView.Adapter<FolderListAdapter.Gr
 
 	private static final int VIEW_TYPE_FOOTER = 1;
 	private static final int VIEW_TYPE_CELL = 0;
-	List<String> items = new ArrayList<>();
+	private final List<String> items = new ArrayList<>();
 
-	String selectedItemName;
-	OsmandApplication app;
-	boolean nightMode;
-	FolderListAdapterListener listener;
+	private String selectedItemName;
+	private final OsmandApplication app;
+	private final boolean nightMode;
+	private FolderListAdapterListener listener;
 
 	public FolderListAdapter(OsmandApplication app, boolean nightMode, String folderName) {
 		this.app = app;
