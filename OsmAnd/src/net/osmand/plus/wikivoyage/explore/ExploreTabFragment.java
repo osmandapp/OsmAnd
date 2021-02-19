@@ -48,11 +48,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static net.osmand.plus.download.DownloadResources.WIKIVOYAGE_FILE_FILTER;
+import static net.osmand.plus.resources.ResourceManager.DEFAULT_WIKIVOYAGE_TRAVEL_OBF;
 import static net.osmand.plus.wikivoyage.explore.WikivoyageExploreActivity.*;
 
 public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEvents, TravelLocalDataHelper.Listener {
 
-	public static final String DEFAULT_WIKIVOYAGE_TRAVEL_OBF = "Default_wikivoyage.travel.obf";
 	private static boolean SHOW_TRAVEL_UPDATE_CARD = true;
 	private static boolean SHOW_TRAVEL_NEEDED_MAPS_CARD = true;
 
