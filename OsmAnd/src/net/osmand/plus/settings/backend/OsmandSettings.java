@@ -1678,6 +1678,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> SHOW_MAP_MARKERS = new BooleanPreference(this, "show_map_markers", true).makeProfile();
 
 	public final OsmandPreference<Boolean> SHOW_COORDINATES_WIDGET = new BooleanPreference(this, "show_coordinates_widget", false).makeProfile().cache();
+	public final OsmandPreference<Boolean> SHOW_RULER_WIDGET = new BooleanPreference(this, "show_ruler_widget", false).makeProfile().cache();
 
 	public final CommonPreference<NotesSortByMode> NOTES_SORT_BY_MODE = new EnumStringPreference<>(this, "notes_sort_by_mode", NotesSortByMode.BY_DATE, NotesSortByMode.values());
 	public final CommonPreference<TracksSortByMode> TRACKS_SORT_BY_MODE = new EnumStringPreference<>(this, "tracks_sort_by_mode", TracksSortByMode.BY_DATE, TracksSortByMode.values());

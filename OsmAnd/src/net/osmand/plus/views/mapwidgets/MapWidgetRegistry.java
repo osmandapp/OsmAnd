@@ -368,7 +368,14 @@ public class MapWidgetRegistry {
 				.setIcon(R.drawable.ic_action_coordinates_widget)
 				.setSelected(settings.SHOW_COORDINATES_WIDGET.get())
 				.setListener(new AppearanceItemClickListener(settings.SHOW_COORDINATES_WIDGET, map))
+ 				.setLayout(R.layout.list_item_icon_and_switch).createItem());
+
+		cm.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_widget_distance_by_tap, map)
+				.setIcon(R.drawable.ic_action_ruler_line)
+				.setSelected(settings.SHOW_RULER_WIDGET.get())
+				.setListener(new AppearanceItemClickListener(settings.SHOW_RULER_WIDGET, map))
 				.setLayout(R.layout.list_item_icon_and_switch).createItem());
+
 		cm.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_markers, map)
 				.setDescription(settings.MAP_MARKERS_MODE.get().toHumanString(map))
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
@@ -462,7 +469,7 @@ public class MapWidgetRegistry {
 				.setIcon(R.drawable.ic_quick_action)
 				.setSelected(selected)
 				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
-				.setSecondaryIcon( R.drawable.ic_action_additional_option)
+				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(new ContextMenuAdapter.OnRowItemClick() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {

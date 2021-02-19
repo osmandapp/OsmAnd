@@ -12,6 +12,7 @@
 
 -->
 
+    <string name="map_widget_distance_by_tap">Distance by tap</string>
     <string name="routing_attr_height_obstacles_description">Routing could avoid strong uphills.</string>
     <string name="app_restart_required">Application restart required to apply some settings.</string>
     <string name="on_pause">On pause</string>
