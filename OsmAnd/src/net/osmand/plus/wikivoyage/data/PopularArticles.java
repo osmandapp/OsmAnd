@@ -9,7 +9,7 @@ public class PopularArticles {
 
 	public static final int ARTICLES_PER_PAGE = 30;
 
-	private final List<TravelArticle> articles;
+	private List<TravelArticle> articles;
 
 	public PopularArticles() {
 		this.articles = new ArrayList<>();
@@ -20,12 +20,12 @@ public class PopularArticles {
 	}
 
 	public void clear() {
-		articles.clear();
+		articles = new ArrayList<>();
 	}
 
 	@NonNull
 	public List<TravelArticle> getArticles() {
-		return articles;
+		return new ArrayList<>(articles);
 	}
 
 	public boolean add(@NonNull TravelArticle article) {
