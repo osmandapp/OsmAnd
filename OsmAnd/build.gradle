@@ -36,9 +36,9 @@ android {
 
 	defaultConfig {
 		minSdkVersion System.getenv("MIN_SDK_VERSION") ? System.getenv("MIN_SDK_VERSION").toInteger() : 15
-		versionCode 390
+		versionCode 400
 		versionCode System.getenv("APK_NUMBER_VERSION") ? System.getenv("APK_NUMBER_VERSION").toInteger() : versionCode
-		versionName "3.9.0"
+		versionName "4.0.0"
 		versionName System.getenv("APK_VERSION")? System.getenv("APK_VERSION").toString(): versionName
 		versionName System.getenv("APK_VERSION_SUFFIX")? versionName + System.getenv("APK_VERSION_SUFFIX").toString(): versionName
 	}
