@@ -55,6 +55,7 @@ import static net.osmand.GPXUtilities.TrkSegment;
 import static net.osmand.GPXUtilities.WptPt;
 import static net.osmand.GPXUtilities.writeGpxFile;
 import static net.osmand.plus.helpers.GpxUiHelper.getGpxTitle;
+import static net.osmand.plus.wikivoyage.data.PopularArticles.ARTICLES_PER_PAGE;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.DIFF_ELE_DOWN;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.DIFF_ELE_UP;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.DISTANCE;
@@ -69,16 +70,16 @@ public class TravelObfHelper implements TravelHelper {
 	public static final String ROUTE_ARTICLE = "route_article";
 	public static final String ROUTE_ARTICLE_POINT = "route_article_point";
 	public static final String ROUTE_TRACK = "route_track";
-	public static final int ARTICLE_SEARCH_RADIUS = 50000;
-	public static final int SAVED_ARTICLE_SEARCH_RADIUS = 30000;
-	public static final int MAX_POPULAR_ARTICLES_COUNT = 30;
+	public static final int ARTICLE_SEARCH_RADIUS = 50 * 1000;
+	public static final int SAVED_ARTICLE_SEARCH_RADIUS = 30 * 1000;
+	public static final int MAX_SEARCH_RADIUS = 10000 * 1000;
 	public static final String REF_TAG = "ref";
 	public static final String NAME_TAG = "name";
 
 	private final OsmandApplication app;
 	private final Collator collator;
 
-	private List<TravelArticle> popularArticles = new ArrayList<>();
+	private PopularArticles popularArticles = new PopularArticles();
 	private final Map<TravelArticleIdentifier, Map<String, TravelArticle>> cachedArticles = new ConcurrentHashMap<>();
 	private final TravelLocalDataHelper localDataHelper;
 	private int searchRadius = ARTICLE_SEARCH_RADIUS;
@@ -113,13 +114,13 @@ public class TravelObfHelper implements TravelHelper {
 	}
 
 	@NonNull
-	public synchronized List<TravelArticle> loadPopularArticles() {
+	public synchronized PopularArticles loadPopularArticles() {
 		String lang = app.getLanguage();
-		List<TravelArticle> popularArticles = new ArrayList<>(this.popularArticles);
-		int pagesCount;
+		PopularArticles popularArticles = new PopularArticles(this.popularArticles);
 		if (isAnyTravelBookPresent()) {
+			boolean articlesLimitReached = false;
 			do {
-				if (foundAmenities.size() - foundAmenitiesIndex < MAX_POPULAR_ARTICLES_COUNT) {
+				if (foundAmenities.size() - foundAmenitiesIndex < ARTICLES_PER_PAGE) {
 					final LatLon location = app.getMapViewTrackingUtilities().getMapLocation();
 					for (final BinaryMapIndexReader reader : getReaders()) {
 						try {
@@ -145,21 +146,25 @@ public class TravelObfHelper implements TravelHelper {
 					}
 					searchRadius *= 2;
 				}
-				pagesCount = popularArticles.size() / MAX_POPULAR_ARTICLES_COUNT;
 				while (foundAmenitiesIndex < foundAmenities.size() - 1) {
-					Pair<File, Amenity> amenity = foundAmenities.get(foundAmenitiesIndex);
-					if (!Algorithms.isEmpty(amenity.second.getName(lang))) {
-						TravelArticle article = cacheTravelArticles(amenity.first, amenity.second, lang, false, null);
-						if (article != null && !popularArticles.contains(article)) {
-							popularArticles.add(article);
-							if (popularArticles.size() >= (pagesCount + 1) * MAX_POPULAR_ARTICLES_COUNT) {
-								break;
+					Pair<File, Amenity> fileAmenity = foundAmenities.get(foundAmenitiesIndex);
+					File file = fileAmenity.first;
+					Amenity amenity = fileAmenity.second;
+					if (!Algorithms.isEmpty(amenity.getName(lang))) {
+						String routeId = amenity.getAdditionalInfo(Amenity.ROUTE_ID);
+						if (!popularArticles.containsByRouteId(routeId)) {
+							TravelArticle article = cacheTravelArticles(file, amenity, lang, false, null);
+							if (article != null && !popularArticles.contains(article)) {
+								if (!popularArticles.add(article)) {
+									articlesLimitReached = true;
+									break;
+								}
 							}
 						}
 					}
 					foundAmenitiesIndex++;
 				}
-			} while (popularArticles.size() < (pagesCount + 1) * MAX_POPULAR_ARTICLES_COUNT);
+			} while (!articlesLimitReached && searchRadius < MAX_SEARCH_RADIUS);
 		}
 		this.popularArticles = popularArticles;
 		return popularArticles;
@@ -526,7 +531,7 @@ public class TravelObfHelper implements TravelHelper {
 	@NonNull
 	@Override
 	public List<TravelArticle> getPopularArticles() {
-		return popularArticles;
+		return popularArticles.getArticles();
 	}
 
 	@NonNull

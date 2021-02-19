@@ -335,7 +335,8 @@ public class ItemViewHolder {
 				clickAction = RightButtonAction.ASK_FOR_SRTM_PLUGIN_ENABLE;
 			}
 
-		} else if (item.getType() == DownloadActivityType.WIKIPEDIA_FILE
+		} else if ((item.getType() == DownloadActivityType.WIKIPEDIA_FILE
+				|| item.getType() == DownloadActivityType.TRAVEL_FILE)
 				&& !Version.isPaidVersion(context.getMyApplication())) {
 			clickAction = RightButtonAction.ASK_FOR_FULL_VERSION_PURCHASE;
 		} else if (item.getType() == DownloadActivityType.DEPTH_CONTOUR_FILE && !depthContoursPurchased) {

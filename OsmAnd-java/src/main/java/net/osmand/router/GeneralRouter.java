@@ -620,9 +620,7 @@ public class GeneralRouter implements VehicleRouter {
 	public double calculateTurnTime(RouteSegment segment, int segmentEnd, RouteSegment prev, int prevSegmentEnd) {
 		float ts = getPenaltyTransition(segment.getRoad());
 		float prevTs = getPenaltyTransition(prev.getRoad());
-		
 		float totalPenalty = 0;
-
 		if (prevTs != ts) {
 			totalPenalty += Math.abs(ts - prevTs) / 2;
 		}
@@ -638,7 +636,9 @@ public class GeneralRouter implements VehicleRouter {
 //				}
 //			}
 //		}
-		
+		if (shortestRoute) {
+			return totalPenalty;
+		}
 		if(segment.getRoad().roundabout() && !prev.getRoad().roundabout()) {
 			double rt = getRoundaboutTurn();
 			if(rt > 0) {
