@@ -39,6 +39,7 @@ public class DataStorageHelper {
 	public final static String MANUALLY_SPECIFIED = "manually_specified";
 
 	public final static String MAPS_MEMORY = "maps_memory_used";
+	public final static String TRAVEL_MEMORY = "travel_memory_used";
 	public final static String TERRAIN_MEMORY = "terrain_memory_used";
 	public final static String TRACKS_MEMORY = "tracks_memory_used";
 	public final static String NOTES_MEMORY = "notes_memory_used";
@@ -52,6 +53,7 @@ public class DataStorageHelper {
 
 	private ArrayList<MemoryItem> memoryItems = new ArrayList<>();
 	private MemoryItem mapsMemory;
+	private MemoryItem travelMemory;
 	private MemoryItem terrainMemory;
 	private MemoryItem tracksMemory;
 	private MemoryItem notesMemory;
@@ -184,10 +186,17 @@ public class DataStorageHelper {
 						createDirectory(MAPS_PATH, false, EXTENSIONS, true),
 						createDirectory(ROADS_INDEX_DIR, true, EXTENSIONS, true),
 						createDirectory(WIKI_INDEX_DIR, true, EXTENSIONS, true),
-						createDirectory(WIKIVOYAGE_INDEX_DIR, true, EXTENSIONS, true),
 						createDirectory(BACKUP_INDEX_DIR, true, EXTENSIONS, true))
 				.createItem();
 		memoryItems.add(mapsMemory);
+
+		travelMemory = MemoryItem.builder()
+				.setKey(TRAVEL_MEMORY)
+				.setExtensions(IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)
+				.setDirectories(
+						createDirectory(WIKIVOYAGE_INDEX_DIR, true, EXTENSIONS, true))
+				.createItem();
+		memoryItems.add(travelMemory);
 
 		terrainMemory = MemoryItem.builder()
 				.setKey(TERRAIN_MEMORY)
@@ -270,7 +279,7 @@ public class DataStorageHelper {
 	public RefreshUsedMemoryTask calculateMemoryUsedInfo(UpdateMemoryInfoUIAdapter uiAdapter) {
 		File rootDir = new File(currentStoragePath);
 		RefreshUsedMemoryTask task = new RefreshUsedMemoryTask(uiAdapter, otherMemory, rootDir, null, null, OTHER_MEMORY);
-		task.execute(mapsMemory, terrainMemory, tracksMemory, notesMemory);
+		task.execute(mapsMemory, travelMemory, terrainMemory, tracksMemory, notesMemory);
 		return task;
 	}
 

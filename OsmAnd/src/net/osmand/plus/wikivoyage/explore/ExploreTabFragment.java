@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -46,6 +47,8 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
+import static net.osmand.plus.download.DownloadResources.WIKIVOYAGE_FILE_FILTER;
+import static net.osmand.plus.resources.ResourceManager.DEFAULT_WIKIVOYAGE_TRAVEL_OBF;
 import static net.osmand.plus.wikivoyage.explore.WikivoyageExploreActivity.*;
 
 public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEvents, TravelLocalDataHelper.Listener {
@@ -186,7 +189,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 					}
 				}
 			}
-			if (app.getTravelHelper().isAnyTravelBookPresent()) {
+			if (!isOnlyDefaultTravelBookPresent()) {
 				TravelButtonCard travelButtonCard = new TravelButtonCard(app, nightMode);
 				travelButtonCard.setListener(new TravelNeededMapsCard.CardListener() {
 					@Override
@@ -248,8 +251,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 	}
 
 	private void addIndexItemCards(List<IndexItem> mainIndexItem, List<IndexItem> neededIndexItems) {
-		final OsmandApplication app = getMyApplication();
-		if (app != null && !app.getTravelHelper().isAnyTravelBookPresent()) {
+		if (isOnlyDefaultTravelBookPresent()) {
 			this.mainIndexItems.clear();
 			this.mainIndexItems.addAll(mainIndexItem);
 			addDownloadUpdateCard();
@@ -257,6 +259,18 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 		this.neededIndexItems.clear();
 		this.neededIndexItems.addAll(neededIndexItems);
 		addNeededMapsCard();
+	}
+
+	private boolean isOnlyDefaultTravelBookPresent() {
+		OsmandApplication app = getMyApplication();
+		if (app != null && !app.isApplicationInitializing()) {
+			for (BinaryMapIndexReader reader : app.getResourceManager().getTravelRepositories()) {
+				if (!reader.getFile().getName().equals(DEFAULT_WIKIVOYAGE_TRAVEL_OBF)) {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 
 	private void addDownloadUpdateCard() {
@@ -286,7 +300,8 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 
 				@Override
 				public void onIndexItemClick(IndexItem item) {
-					if (item.getType() == DownloadActivityType.WIKIPEDIA_FILE && !Version.isPaidVersion(app)) {
+					if ((item.getType() == DownloadActivityType.WIKIPEDIA_FILE
+							|| item.getType() == DownloadActivityType.TRAVEL_FILE) && !Version.isPaidVersion(app)) {
 						FragmentManager fm = getFragmentManager();
 						if (fm != null) {
 							ChoosePlanDialogFragment.showWikipediaInstance(fm);
@@ -341,7 +356,8 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 
 				@Override
 				public void onIndexItemClick(IndexItem item) {
-					if (item.getType() == DownloadActivityType.WIKIPEDIA_FILE && !Version.isPaidVersion(app)) {
+					if ((item.getType() == DownloadActivityType.WIKIPEDIA_FILE
+							|| item.getType() == DownloadActivityType.TRAVEL_FILE) && !Version.isPaidVersion(app)) {
 						FragmentManager fm = getFragmentManager();
 						if (fm != null) {
 							ChoosePlanDialogFragment.showWikipediaInstance(fm);
@@ -403,7 +419,9 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 			List<IndexItem> allWikivoyageItems = app.getDownloadThread().getIndexes().getWikivoyageItems();
 			if (allWikivoyageItems != null) {
 				for (IndexItem item : allWikivoyageItems) {
-					if (!item.isDownloaded() && !mainItems.contains(item)) {
+					if (!item.isDownloaded()
+							&& !mainItems.contains(item)
+							&& item.getFileName().contains(WIKIVOYAGE_FILE_FILTER)) {
 						mainItems.add(item);
 					}
 				}
