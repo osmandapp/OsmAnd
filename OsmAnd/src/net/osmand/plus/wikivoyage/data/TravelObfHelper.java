@@ -55,7 +55,7 @@ import static net.osmand.GPXUtilities.TrkSegment;
 import static net.osmand.GPXUtilities.WptPt;
 import static net.osmand.GPXUtilities.writeGpxFile;
 import static net.osmand.plus.helpers.GpxUiHelper.getGpxTitle;
-import static net.osmand.plus.wikivoyage.data.PopularArticleList.POPULAR_ARTICLES_COUNT_PER_PAGE;
+import static net.osmand.plus.wikivoyage.data.PopularArticles.ARTICLES_PER_PAGE;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.DIFF_ELE_DOWN;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.DIFF_ELE_UP;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.DISTANCE;
@@ -79,7 +79,7 @@ public class TravelObfHelper implements TravelHelper {
 	private final OsmandApplication app;
 	private final Collator collator;
 
-	private PopularArticleList popularArticles = new PopularArticleList();
+	private PopularArticles popularArticles = new PopularArticles();
 	private final Map<TravelArticleIdentifier, Map<String, TravelArticle>> cachedArticles = new ConcurrentHashMap<>();
 	private final TravelLocalDataHelper localDataHelper;
 	private int searchRadius = ARTICLE_SEARCH_RADIUS;
@@ -114,13 +114,13 @@ public class TravelObfHelper implements TravelHelper {
 	}
 
 	@NonNull
-	public synchronized PopularArticleList loadPopularArticles() {
+	public synchronized PopularArticles loadPopularArticles() {
 		String lang = app.getLanguage();
-		PopularArticleList popularArticles = new PopularArticleList(this.popularArticles);
-		popularArticles.nextPage();
+		PopularArticles popularArticles = new PopularArticles(this.popularArticles);
 		if (isAnyTravelBookPresent()) {
+			boolean articlesLimitReached = false;
 			do {
-				if (foundAmenities.size() - foundAmenitiesIndex < POPULAR_ARTICLES_COUNT_PER_PAGE) {
+				if (foundAmenities.size() - foundAmenitiesIndex < ARTICLES_PER_PAGE) {
 					final LatLon location = app.getMapViewTrackingUtilities().getMapLocation();
 					for (final BinaryMapIndexReader reader : getReaders()) {
 						try {
@@ -147,19 +147,24 @@ public class TravelObfHelper implements TravelHelper {
 					searchRadius *= 2;
 				}
 				while (foundAmenitiesIndex < foundAmenities.size() - 1) {
-					Pair<File, Amenity> amenity = foundAmenities.get(foundAmenitiesIndex);
-					if (!Algorithms.isEmpty(amenity.second.getName(lang)) && !popularArticles.containsAmenity(amenity.second)) {
-						TravelArticle article = cacheTravelArticles(amenity.first, amenity.second, lang, false, null);
-						if (article != null && !popularArticles.contains(article)) {
-							popularArticles.add(article);
-							if (popularArticles.isFullPage()) {
-								break;
+					Pair<File, Amenity> fileAmenity = foundAmenities.get(foundAmenitiesIndex);
+					File file = fileAmenity.first;
+					Amenity amenity = fileAmenity.second;
+					if (!Algorithms.isEmpty(amenity.getName(lang))) {
+						String routeId = amenity.getAdditionalInfo(Amenity.ROUTE_ID);
+						if (!popularArticles.containsByRouteId(routeId)) {
+							TravelArticle article = cacheTravelArticles(file, amenity, lang, false, null);
+							if (article != null && !popularArticles.contains(article)) {
+								if (!popularArticles.add(article)) {
+									articlesLimitReached = true;
+									break;
+								}
 							}
 						}
 					}
 					foundAmenitiesIndex++;
 				}
-			} while (!popularArticles.isFullPage() && searchRadius < MAX_SEARCH_RADIUS);
+			} while (!articlesLimitReached && searchRadius < MAX_SEARCH_RADIUS);
 		}
 		this.popularArticles = popularArticles;
 		return popularArticles;
