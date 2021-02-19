@@ -129,6 +129,8 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 				.create();
 		this.items.add(editFileName);
 
+		updateFileNameFromEditText(fileName);
+
 		int contentPaddingSmall = app.getResources().getDimensionPixelSize(R.dimen.content_padding_small);
 		int contentPaddingHalf = app.getResources().getDimensionPixelSize(R.dimen.content_padding_half);
 
@@ -360,9 +362,9 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 		} else {
 			nameTextBox.setError(null);
 			nameTextBox.setErrorEnabled(false);
-			fileName = text;
 			rightButtonEnabled = true;
 		}
+		fileName = text;
 		updateBottomButtons();
 	}
 
@@ -404,6 +406,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 			if (position != -1) {
 				recyclerView.scrollToPosition(position);
 			}
+			updateFileNameFromEditText(Algorithms.getFileNameWithoutExtension(dest.getName()));
 		}
 	}
 
