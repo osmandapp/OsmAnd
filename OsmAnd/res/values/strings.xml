@@ -12,6 +12,10 @@
 
 -->
 
+    <string name="quick_action_coordinates_widget_descr">A toggle to show or hide the Coordinates widget on the map.</string>
+    <string name="quick_action_coordinates_widget_show">Show Coordinates widget</string>
+    <string name="quick_action_coordinates_widget_hide">Hide Coordinates widget</string>
+    <string name="quick_action_showhide_coordinates_widget">Show/Hide coordinates widget</string>
     <string name="routing_attr_height_obstacles_description">Routing could avoid strong uphills.</string>
     <string name="app_restart_required">Application restart required to apply some settings.</string>
     <string name="on_pause">On pause</string>
