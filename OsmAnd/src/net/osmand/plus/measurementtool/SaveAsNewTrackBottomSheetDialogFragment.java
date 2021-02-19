@@ -40,6 +40,7 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.measurementtool.adapter.FolderListAdapter;
 import net.osmand.plus.myplaces.AddNewTrackFolderBottomSheet;
+import net.osmand.plus.myplaces.AddNewTrackFolderBottomSheet.OnTrackFolderAddListener;
 import net.osmand.plus.myplaces.MoveGpxFileBottomSheet;
 import net.osmand.plus.myplaces.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
 import net.osmand.util.Algorithms;
@@ -51,7 +52,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDialogFragment
-		implements OnTrackFileMoveListener, AddNewTrackFolderBottomSheet.OnTrackFolderAddListener {
+		implements OnTrackFileMoveListener, OnTrackFolderAddListener {
 
 	public static final String TAG = SaveAsNewTrackBottomSheetDialogFragment.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(SaveAsNewTrackBottomSheetDialogFragment.class);
