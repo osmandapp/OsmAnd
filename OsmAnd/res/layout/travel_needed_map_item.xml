@@ -78,20 +78,20 @@
 		<Button
 			android:id="@+id/button_action"
 			android:layout_width="wrap_content"
-			android:layout_height="33dp"
+			android:layout_height="wrap_content"
 			android:layout_gravity="center_vertical"
 			android:layout_marginLeft="@dimen/content_padding"
 			android:layout_marginStart="@dimen/content_padding"
-			android:background="@drawable/buy_btn_background_light"
-			android:minWidth="40dp"
-			android:paddingLeft="18dp"
-			android:paddingRight="18dp"
+			android:minWidth="@dimen/list_header_height"
+			android:minHeight="@dimen/list_content_padding_large"
+			android:paddingLeft="@dimen/bottom_sheet_exit_button_margin"
+			android:paddingRight="@dimen/bottom_sheet_exit_button_margin"
 			android:text="@string/get_plugin"
-			android:textColor="@color/buy_button_color"
+			android:textColor="@color/text_color_tab_active_light"
 			android:visibility="gone"
 			tools:visibility="visible"
-			android:paddingEnd="18dp"
-			android:paddingStart="18dp" />
+			android:paddingEnd="@dimen/bottom_sheet_exit_button_margin"
+			android:paddingStart="@dimen/bottom_sheet_exit_button_margin" />
 
 	</LinearLayout>
 

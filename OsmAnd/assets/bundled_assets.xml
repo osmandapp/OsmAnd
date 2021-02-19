@@ -109,4 +109,5 @@
 	<asset source="sounds/camera_click.ogg" destination="sounds/camera_click.ogg" mode="copyOnlyIfDoesNotExist" />
 
 	<asset source="World_basemap_mini.obf" destination="World_basemap_mini.obf" mode="alwaysOverwriteOrCopy" />
+	<asset source="Default_wikivoyage.travel.obf" destination="travel/Default_wikivoyage.travel.obf" mode="copyOnlyIfDoesNotExist" />
 </assets>
