@@ -109,6 +109,9 @@ android {
 clean.doFirst {
 	delete fileTree('assets') {
 		include '*.obf'
+		include 'fonts/**'
+		include 'feature_articles/**'
+		include 'voice/**'
 	}
 }
 
