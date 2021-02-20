@@ -100,7 +100,7 @@
             android:paddingRight="@dimen/bottom_sheet_exit_button_margin"
             android:text="@string/buy"
             android:textColor="@color/text_color_tab_active_light"
-            android:visibility="visible" />
+            android:visibility="gone" />
 
     </LinearLayout>
 
