@@ -462,7 +462,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 				boolean resultOk = false;
 				try {
 					String response = helper.makeRequest(exampleCard.getEditedText());
-					resultOk = requestedEngine.checkServerResponse(errorMessage, response);
+					resultOk = requestedEngine.getResponseParser().isResultOk(errorMessage, response);
 				} catch (IOException | JSONException e) {
 					errorMessage.append(e.toString());
 				}
@@ -513,6 +513,12 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 					apiKeyCard.show();
 				} else {
 					apiKeyCard.hide();
+				}
+				if (engine.isParameterAllowed(EngineParameter.VEHICLE_KEY)) {
+					vehicleCard.show();
+				} else {
+
+					vehicleCard.hide();
 				}
 
 			} else if (vehicleCard.equals(card)) {

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.onlinerouting.engine.EngineType;
+import net.osmand.plus.onlinerouting.engine.GpxEngine;
 import net.osmand.plus.onlinerouting.engine.GraphhopperEngine;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.onlinerouting.engine.OrsEngine;
@@ -27,6 +28,8 @@ public class OnlineRoutingFactory {
 				return new OsrmEngine(params);
 			case ORS:
 				return new OrsEngine(params);
+			case GPX:
+				return new GpxEngine(params);
 			default:
 				throw new IllegalArgumentException(
 						"Online routing type {" + type.name() + "} not supported");

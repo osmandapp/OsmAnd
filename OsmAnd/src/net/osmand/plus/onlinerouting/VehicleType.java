@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 
 public class VehicleType {
+
 	private final String key;
 	@StringRes
 	private final int titleId;

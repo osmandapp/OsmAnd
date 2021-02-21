@@ -53,6 +53,8 @@ public class Algorithms {
 	public static final int XML_FILE_SIGNATURE = 0x3c3f786d;
 	public static final int OBF_FILE_SIGNATURE = 0x08029001;
 	public static final int SQLITE_FILE_SIGNATURE = 0x53514C69;
+	public static final int BZIP_FILE_SIGNATURE = 0x425a;
+	public static final int GZIP_FILE_SIGNATURE = 0x1f8b;
 
 	public static String normalizeSearchText(String s) {
 		boolean norm = false;
@@ -356,6 +358,14 @@ public class Algorithms {
 		if ((ch1 | ch2 | ch3 | ch4) < 0)
 			throw new EOFException();
 		return ((ch1 << 24) + (ch2 << 16) + (ch3 << 8) + ch4);
+	}
+
+	public static int readSmallInt(InputStream in) throws IOException {
+		int ch1 = in.read();
+		int ch2 = in.read();
+		if ((ch1 | ch2) < 0)
+			throw new EOFException();
+		return ((ch1 << 8) + ch2);
 	}
 
 	public static String capitalizeFirstLetterAndLowercase(String s) {

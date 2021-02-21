@@ -9,7 +9,8 @@ import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
-import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.OnlineRoutingResponse;
+import net.osmand.plus.onlinerouting.parser.ResponseParser;
+import net.osmand.plus.onlinerouting.parser.ResponseParser.OnlineRoutingResponse;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 
@@ -19,12 +20,14 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.zip.GZIPInputStream;
 
 import static net.osmand.util.Algorithms.isEmpty;
 
@@ -88,7 +91,8 @@ public class OnlineRoutingHelper {
 	                                                   boolean leftSideNavigation) throws IOException, JSONException {
 		String url = engine.getFullUrl(path);
 		String content = makeRequest(url);
-		return engine.parseServerResponse(content, app, leftSideNavigation);
+		ResponseParser parser = engine.getResponseParser();
+		return parser.parseResponse(content, app, leftSideNavigation);
 	}
 
 	@NonNull
@@ -98,7 +102,7 @@ public class OnlineRoutingHelper {
 		StringBuilder content = new StringBuilder();
 		BufferedReader reader;
 		if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
-			reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+			reader = new BufferedReader(new InputStreamReader(getInputStream(connection)));
 		} else {
 			reader = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
 		}
@@ -111,6 +115,17 @@ public class OnlineRoutingHelper {
 		} catch (IOException ignored) {
 		}
 		return content.toString();
+	}
+
+	private InputStream getInputStream(@NonNull HttpURLConnection connection) throws IOException {
+		// todo check file signature correctly
+//		InputStream is = connection.getInputStream();
+//		int header = Algorithms.readTwoInt(is);
+//		boolean isGzipFile = header == Algorithms.GZIP_FILE_SIGNATURE;
+//		if (isGzipFile) {
+//			return new GZIPInputStream(connection.getInputStream());
+//		}
+		return connection.getInputStream();
 	}
 
 	public void saveEngine(@NonNull OnlineRoutingEngine engine) {
