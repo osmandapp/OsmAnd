@@ -66,7 +66,7 @@ public class MapWidgetRegistry {
 	public static String WIDGET_BEARING = "bearing";
 	public static String WIDGET_PLAIN_TIME = "plain_time";
 	public static String WIDGET_BATTERY = "battery";
-	public static String WIDGET_RULER = "ruler";
+	public static String WIDGET_RADIUS_RULER = "radius_ruler";
 
 	public static String WIDGET_STREET_NAME = "street_name";
 
@@ -368,12 +368,12 @@ public class MapWidgetRegistry {
 				.setIcon(R.drawable.ic_action_coordinates_widget)
 				.setSelected(settings.SHOW_COORDINATES_WIDGET.get())
 				.setListener(new AppearanceItemClickListener(settings.SHOW_COORDINATES_WIDGET, map))
- 				.setLayout(R.layout.list_item_icon_and_switch).createItem());
+				.setLayout(R.layout.list_item_icon_and_switch).createItem());
 
 		cm.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_widget_distance_by_tap, map)
 				.setIcon(R.drawable.ic_action_ruler_line)
-				.setSelected(settings.SHOW_RULER_WIDGET.get())
-				.setListener(new AppearanceItemClickListener(settings.SHOW_RULER_WIDGET, map))
+				.setSelected(settings.SHOW_RULER_BY_TAP.get())
+				.setListener(new AppearanceItemClickListener(settings.SHOW_RULER_BY_TAP, map))
 				.setLayout(R.layout.list_item_icon_and_switch).createItem());
 
 		cm.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_markers, map)

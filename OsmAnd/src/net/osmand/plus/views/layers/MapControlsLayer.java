@@ -780,7 +780,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 		if (app.getRoutingHelper().isFollowingMode() || app.getRoutingHelper().isPauseNavigation()
 				|| mapActivity.getMeasurementToolFragment() != null
 				|| mapActivity.getPlanRouteFragment() != null
-				|| mapActivity.getMapLayers().getRulerControlLayer().rulerModeOn()) {
+				|| mapActivity.getMapLayers().getRadiusRulerControlLayer().rulerModeOn()
+				|| mapActivity.getMapLayers().getRulerByTapControlLayer().rulerModeOn()) {
 			return;
 		}
 		if (isMapControlsVisible()) {
