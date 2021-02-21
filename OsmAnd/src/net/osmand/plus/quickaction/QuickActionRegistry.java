@@ -30,6 +30,7 @@ import net.osmand.plus.quickaction.actions.NavReplaceDestinationAction;
 import net.osmand.plus.quickaction.actions.NavResumePauseAction;
 import net.osmand.plus.quickaction.actions.NavStartStopAction;
 import net.osmand.plus.quickaction.actions.NavVoiceAction;
+import net.osmand.plus.quickaction.actions.ShowHideCoordinatesWidgetAction;
 import net.osmand.plus.quickaction.actions.ShowHideFavoritesAction;
 import net.osmand.plus.quickaction.actions.ShowHideGpxTracksAction;
 import net.osmand.plus.quickaction.actions.ShowHideMapillaryAction;
@@ -214,6 +215,7 @@ public class QuickActionRegistry {
 		quickActionTypes.add(DayNightModeAction.TYPE);
 		quickActionTypes.add(ShowHideTransportLinesAction.TYPE);
 		quickActionTypes.add(ShowHideMapillaryAction.TYPE);
+		quickActionTypes.add(ShowHideCoordinatesWidgetAction.TYPE);
 		// navigation
 		quickActionTypes.add(NavVoiceAction.TYPE);
 		quickActionTypes.add(NavDirectionsFromAction.TYPE);
@@ -313,7 +315,8 @@ public class QuickActionRegistry {
 				}
 				if (obj.has("params")) {
 					qa.setParams((Map<String, String>) context.deserialize(obj.get("params"),
-							new TypeToken<HashMap<String, String>>() {}.getType())
+							new TypeToken<HashMap<String, String>>() {
+							}.getType())
 					);
 				}
 				return qa;
