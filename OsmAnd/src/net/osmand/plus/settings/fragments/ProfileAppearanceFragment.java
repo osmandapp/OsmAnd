@@ -41,6 +41,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.backup.ProfileSettingsItem;
@@ -55,6 +56,7 @@ import net.osmand.plus.profiles.SelectProfileBottomSheet;
 import net.osmand.plus.profiles.SelectProfileBottomSheet.DialogMode;
 import net.osmand.plus.profiles.SelectProfileBottomSheet.OnSelectProfileCallback;
 import net.osmand.plus.routing.RouteProvider;
+import net.osmand.plus.track.ColorsCard;
 import net.osmand.plus.widgets.FlowLayout;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.util.Algorithms;
@@ -64,6 +66,7 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILES_LIST_UPDATED_ARG;
@@ -90,6 +93,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 	private static final String PROFILE_STRINGKEY_KEY = "profile_stringkey_key";
 	private static final String PROFILE_ICON_RES_KEY = "profile_icon_res_key";
 	private static final String PROFILE_COLOR_KEY = "profile_color_key";
+	private static final String PROFILE_CUSTOM_COLOR_INDEX_KEY = "profile_custom_color_index_key";
 	private static final String PROFILE_PARENT_KEY = "profile_parent_key";
 	private static final String PROFILE_LOCATION_ICON_KEY = "profile_location_icon_key";
 	private static final String PROFILE_NAVIGATION_ICON_KEY = "profile_navigation_icon_key";
@@ -145,6 +149,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 				changedProfile.name = profile.name;
 			}
 			changedProfile.color = profile.color;
+			changedProfile.customColorIndex = profile.customColorIndex;
 			changedProfile.iconRes = profile.iconRes;
 			changedProfile.routingProfile = profile.routingProfile;
 			changedProfile.routeService = profile.routeService;
@@ -164,6 +169,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		profile.parent = baseModeForNewProfile.getParent();
 		profile.name = baseModeForNewProfile.toHumanString();
 		profile.color = baseModeForNewProfile.getIconColorInfo();
+		profile.customColorIndex = baseModeForNewProfile.getCustomIconColorIndex();
 		profile.iconRes = baseModeForNewProfile.getIconRes();
 		profile.routingProfile = baseModeForNewProfile.getRoutingProfile();
 		profile.routeService = baseModeForNewProfile.getRouteService();
@@ -300,6 +306,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		outState.putString(PROFILE_STRINGKEY_KEY, changedProfile.stringKey);
 		outState.putInt(PROFILE_ICON_RES_KEY, changedProfile.iconRes);
 		outState.putSerializable(PROFILE_COLOR_KEY, changedProfile.color);
+		outState.putInt(PROFILE_CUSTOM_COLOR_INDEX_KEY, changedProfile.customColorIndex);
 		if (changedProfile.parent != null) {
 			outState.putString(PROFILE_PARENT_KEY, changedProfile.parent.getStringKey());
 		}
@@ -314,6 +321,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		changedProfile.stringKey = savedInstanceState.getString(PROFILE_STRINGKEY_KEY);
 		changedProfile.iconRes = savedInstanceState.getInt(PROFILE_ICON_RES_KEY);
 		changedProfile.color = (ProfileIconColors) savedInstanceState.getSerializable(PROFILE_COLOR_KEY);
+		changedProfile.customColorIndex = savedInstanceState.getInt(PROFILE_CUSTOM_COLOR_INDEX_KEY);
 		String parentStringKey = savedInstanceState.getString(PROFILE_PARENT_KEY);
 		changedProfile.parent = ApplicationMode.valueOfStringKey(parentStringKey, null);
 		isBaseProfileImported = savedInstanceState.getBoolean(IS_BASE_PROFILE_IMPORTED);
@@ -330,7 +338,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		}
 		View profileButton = view.findViewById(R.id.profile_button);
 		if (profileButton != null) {
-			int iconColor = ContextCompat.getColor(app, changedProfile.color.getColor(isNightMode()));
+			int iconColor = changedProfile.getActualColor();
 			AndroidUtils.setBackground(profileButton, UiUtilities.tintDrawable(AppCompatResources.getDrawable(app,
 					R.drawable.circle_background_light), UiUtilities.getColorWithAlpha(iconColor, 0.1f)));
 			ImageView profileIcon = view.findViewById(R.id.profile_icon);
@@ -515,7 +523,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 	private void updateProfileNameAppearance() {
 		if (profileName != null) {
 			if (profileName.isFocusable() && profileName.isFocusableInTouchMode()) {
-				int selectedColor = ContextCompat.getColor(app, changedProfile.color.getColor(isNightMode()));
+				int selectedColor = changedProfile.getActualColor();
 				profileNameOtfb.setPrimaryColor(selectedColor);
 				profileName.getBackground().mutate().setColorFilter(selectedColor, PorterDuff.Mode.SRC_ATOP);
 			}
@@ -560,8 +568,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 	private View createLocationIconView(final LocationIcon locationIcon, ViewGroup rootView) {
 		FrameLayout locationIconView = (FrameLayout) UiUtilities.getInflater(getContext(), isNightMode())
 				.inflate(R.layout.preference_select_icon_button, rootView, false);
-		int changedProfileColor = ContextCompat.getColor(app, changedProfile.color.getColor(
-				app.getDaynightHelper().isNightModeForMapControls()));
+		int changedProfileColor = changedProfile.getActualColor();
 		LayerDrawable locationIconDrawable = (LayerDrawable) AppCompatResources.getDrawable(app, locationIcon.getIconId());
 		if (locationIconDrawable != null) {
 			DrawableCompat.setTint(DrawableCompat.wrap(locationIconDrawable.getDrawable(1)), changedProfileColor);
@@ -609,7 +616,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		LayerDrawable navigationIconDrawable = (LayerDrawable) AppCompatResources.getDrawable(app, navigationIcon.getIconId());
 		if (navigationIconDrawable != null) {
 			DrawableCompat.setTint(DrawableCompat.wrap(navigationIconDrawable.getDrawable(1)),
-					ContextCompat.getColor(app, changedProfile.color.getColor(app.getDaynightHelper().isNightModeForMapControls())));
+					changedProfile.getActualColor());
 		}
 		ImageView imageView = navigationIconView.findViewById(R.id.icon);
 		imageView.setImageDrawable(navigationIconDrawable);
@@ -634,8 +641,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		});
 		ImageView outlineRect = navigationIconView.findViewById(R.id.outlineRect);
 		GradientDrawable rectContourDrawable = (GradientDrawable) AppCompatResources.getDrawable(app, R.drawable.bg_select_icon_button_outline);
-		int changedProfileColor = ContextCompat.getColor(app, changedProfile.color.getColor(
-				app.getDaynightHelper().isNightModeForMapControls()));
+		int changedProfileColor = changedProfile.getActualColor();
 		if (rectContourDrawable != null) {
 			rectContourDrawable.setStroke(AndroidUtils.dpToPx(app, 2), changedProfileColor);
 		}
@@ -660,13 +666,13 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 	}
 
 	private void setIconColor(int iconRes) {
-		int changedProfileColor = ContextCompat.getColor(app, changedProfile.color.getColor(
-				app.getDaynightHelper().isNightModeForMapControls()));
+		int changedProfileColor = changedProfile.getActualColor();
 		View iconItem = iconItems.findViewWithTag(iconRes);
 		if (iconItem != null) {
+			int newColor = changedProfile.getActualColor();
 			AndroidUtils.setBackground(iconItem.findViewById(R.id.background),
 					UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, R.drawable.circle_background_light),
-							UiUtilities.getColorWithAlpha(ContextCompat.getColor(app, changedProfile.color.getColor(isNightMode())), 0.1f)));
+							UiUtilities.getColorWithAlpha(newColor, 0.1f)));
 			ImageView outlineCircle = iconItem.findViewById(R.id.outline);
 			GradientDrawable circleContourDrawable = (GradientDrawable) AppCompatResources.getDrawable(app, R.drawable.circle_contour_bg_light);
 			if (circleContourDrawable != null) {
@@ -775,6 +781,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 			mode.setRoutingProfile(changedProfile.routingProfile);
 			mode.setRouteService(changedProfile.routeService);
 			mode.setIconColor(changedProfile.color);
+			mode.setCustomIconColorIndex(changedProfile.customColorIndex);
 			mode.setLocationIcon(changedProfile.locationIcon);
 			mode.setNavigationIcon(changedProfile.navigationIcon);
 
@@ -795,6 +802,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 				.setRoutingProfile(changedProfile.routingProfile)
 				.setRouteService(changedProfile.routeService)
 				.setIconColor(changedProfile.color)
+				.setCustomIconColorIndex(changedProfile.customColorIndex)
 				.setLocationIcon(changedProfile.locationIcon)
 				.setNavigationIcon(changedProfile.navigationIcon);
 
@@ -963,11 +971,26 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		ApplicationMode parent = null;
 		String name;
 		ProfileIconColors color;
+		int customColorIndex = -1;
 		int iconRes;
 		String routingProfile;
 		RouteProvider.RouteService routeService;
 		NavigationIcon navigationIcon;
 		LocationIcon locationIcon;
+
+		public int getActualColor() {
+			return customColorIndex != -1 ? customColorIndex : ContextCompat.getColor(app, color.getColor(isNightMode()));
+		}
+
+		public ProfileIconColors getProfileColorByColorValue(int colorValue) {
+			for (ProfileIconColors color : ProfileIconColors.values()) {
+				if (ContextCompat.getColor(app, color.getColor(true)) == colorValue
+						|| ContextCompat.getColor(app, color.getColor(false)) == colorValue) {
+					return color;
+				}
+			}
+			return ProfileIconColors.DEFAULT;
+		}
 
 		@Override
 		public boolean equals(Object o) {
@@ -982,6 +1005,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 			if (parent != null ? !parent.equals(that.parent) : that.parent != null) return false;
 			if (name != null ? !name.equals(that.name) : that.name != null) return false;
 			if (color != that.color) return false;
+			if (customColorIndex != that.customColorIndex) return false;
 			if (routingProfile != null ? !routingProfile.equals(that.routingProfile) : that.routingProfile != null)
 				return false;
 			if (routeService != that.routeService) return false;
@@ -995,6 +1019,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 			result = 31 * result + (parent != null ? parent.hashCode() : 0);
 			result = 31 * result + (name != null ? name.hashCode() : 0);
 			result = 31 * result + (color != null ? color.hashCode() : 0);
+			result = 31 * result + customColorIndex;
 			result = 31 * result + iconRes;
 			result = 31 * result + (routingProfile != null ? routingProfile.hashCode() : 0);
 			result = 31 * result + (routeService != null ? routeService.hashCode() : 0);
