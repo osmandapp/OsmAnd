@@ -15,6 +15,8 @@ import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -330,8 +332,12 @@ public class ApplicationMode {
 
 	public String toHumanString() {
 		String userProfileName = getUserProfileName();
-		if (Algorithms.isEmpty(userProfileName) && keyName != -1) {
-			return app.getString(keyName);
+		if (Algorithms.isEmpty(userProfileName)) {
+			if (keyName != -1) {
+				return app.getString(keyName);
+			} else {
+				return StringUtils.capitalize(getStringKey());
+			}
 		} else {
 			return userProfileName;
 		}
