@@ -673,10 +673,10 @@ public class ImportHelper {
 	public static List<FavouritePoint> asFavourites(OsmandApplication app, List<WptPt> wptPts, String fileName, boolean forceImportFavourites) {
 		List<FavouritePoint> favourites = new ArrayList<>();
 		for (WptPt p : wptPts) {
-			if (p.name == null) {
+			if (Algorithms.isEmpty(p.name)) {
 				p.name = Algorithms.getFileNameWithoutExtension(fileName);
 			}
-			if (p.name != null) {
+			if (!Algorithms.isEmpty(p.name)) {
 				final String fpCat;
 				if (p.category == null) {
 					if (forceImportFavourites) {
