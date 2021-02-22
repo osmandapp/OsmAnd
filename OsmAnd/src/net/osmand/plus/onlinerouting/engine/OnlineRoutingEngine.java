@@ -5,16 +5,20 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.onlinerouting.EngineParameter;
 import net.osmand.plus.onlinerouting.OnlineRoutingFactory;
 import net.osmand.plus.onlinerouting.VehicleType;
-import net.osmand.plus.onlinerouting.parser.ResponseParser;
+import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
+import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -36,7 +40,6 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 	private final Map<String, String> params = new HashMap<>();
 	private final List<VehicleType> allowedVehicles = new ArrayList<>();
 	private final Set<EngineParameter> allowedParameters = new HashSet<>();
-	private ResponseParser responseParser;
 
 	public OnlineRoutingEngine(@Nullable Map<String, String> params) {
 		if (!isEmpty(params)) {
@@ -97,16 +100,13 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 	@NonNull
 	public abstract String getStandardUrl();
 
-	@NonNull
-	public ResponseParser getResponseParser() {
-		if (responseParser == null) {
-			responseParser = createParser();
-		}
-		return responseParser;
-	}
+	@Nullable
+	public abstract OnlineRoutingResponse parseResponse(@NonNull String content,
+	                                                    @NonNull OsmandApplication app,
+	                                                    boolean leftSideNavigation) throws JSONException;
 
-	@NonNull
-	protected abstract ResponseParser createParser();
+	public abstract boolean isResultOk(@NonNull StringBuilder errorMessage,
+	                                   @NonNull String content) throws JSONException;
 
 	@NonNull
 	public Map<String, String> getParams() {
@@ -192,6 +192,36 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 	@NonNull
 	public static String generateKey() {
 		return ONLINE_ROUTING_ENGINE_PREFIX + System.currentTimeMillis();
+	}
+
+	public static class OnlineRoutingResponse {
+
+		private List<Location> route;
+		private List<RouteDirectionInfo> directions;
+		private GPXFile gpxFile;
+
+		// constructor for JSON responses
+		public OnlineRoutingResponse(List<Location> route, List<RouteDirectionInfo> directions) {
+			this.route = route;
+			this.directions = directions;
+		}
+
+		// constructor for GPX responses
+		public OnlineRoutingResponse(GPXFile gpxFile) {
+			this.gpxFile = gpxFile;
+		}
+
+		public List<Location> getRoute() {
+			return route;
+		}
+
+		public List<RouteDirectionInfo> getDirections() {
+			return directions;
+		}
+
+		public GPXFile getGpxFile() {
+			return gpxFile;
+		}
 	}
 
 }

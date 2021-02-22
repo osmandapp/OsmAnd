@@ -9,8 +9,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.onlinerouting.EngineParameter;
 import net.osmand.plus.onlinerouting.VehicleType;
-import net.osmand.plus.onlinerouting.parser.JSONParser;
-import net.osmand.plus.onlinerouting.parser.ResponseParser;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,7 +21,7 @@ import java.util.Set;
 
 import static net.osmand.util.Algorithms.isEmpty;
 
-public class OrsEngine extends OnlineRoutingEngine {
+public class OrsEngine extends JsonOnlineRoutingEngine {
 
 	public OrsEngine(@Nullable Map<String, String> params) {
 		super(params);
@@ -64,12 +62,6 @@ public class OrsEngine extends OnlineRoutingEngine {
 		vehicles.add(new VehicleType("wheelchair", R.string.routing_engine_vehicle_type_wheelchair));
 	}
 
-	@NonNull
-	@Override
-	protected ResponseParser createParser() {
-		return new OrsParser();
-	}
-
 	@Override
 	protected void makeFullUrl(@NonNull StringBuilder sb,
 	                           @NonNull List<LatLon> path) {
@@ -92,38 +84,36 @@ public class OrsEngine extends OnlineRoutingEngine {
 		}
 	}
 
-	private static class OrsParser extends JSONParser {
-
-		@Nullable
-		@Override
-		public OnlineRoutingResponse parseServerResponse(@NonNull JSONObject root,
-		                                                 @NonNull OsmandApplication app,
-		                                                 boolean leftSideNavigation) throws JSONException {
-			JSONArray array = root.getJSONObject("geometry").getJSONArray("coordinates");
-			List<LatLon> points = new ArrayList<>();
-			for (int i = 0; i < array.length(); i++) {
-				JSONArray point = array.getJSONArray(i);
-				double lon = Double.parseDouble(point.getString(0));
-				double lat = Double.parseDouble(point.getString(1));
-				points.add(new LatLon(lat, lon));
-			}
-			if (!isEmpty(points)) {
-				List<Location> route = convertRouteToLocationsList(points);
-				new OnlineRoutingResponse(route, null);
-			}
-			return null;
+	@Nullable
+	@Override
+	public OnlineRoutingResponse parseServerResponse(@NonNull JSONObject root,
+	                                                 @NonNull OsmandApplication app,
+	                                                 boolean leftSideNavigation) throws JSONException {
+		JSONArray array = root.getJSONObject("geometry").getJSONArray("coordinates");
+		List<LatLon> points = new ArrayList<>();
+		for (int i = 0; i < array.length(); i++) {
+			JSONArray point = array.getJSONArray(i);
+			double lon = Double.parseDouble(point.getString(0));
+			double lat = Double.parseDouble(point.getString(1));
+			points.add(new LatLon(lat, lon));
 		}
-
-		@NonNull
-		@Override
-		protected String getErrorMessageKey() {
-			return "error";
+		if (!isEmpty(points)) {
+			List<Location> route = convertRouteToLocationsList(points);
+			new OnlineRoutingResponse(route, null);
 		}
-
-		@NonNull
-		@Override
-		protected String getRootArrayKey() {
-			return "features";
-		}
+		return null;
 	}
+
+	@NonNull
+	@Override
+	protected String getErrorMessageKey() {
+		return "error";
+	}
+
+	@NonNull
+	@Override
+	protected String getRootArrayKey() {
+		return "features";
+	}
+
 }

@@ -9,8 +9,7 @@ import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
-import net.osmand.plus.onlinerouting.parser.ResponseParser;
-import net.osmand.plus.onlinerouting.parser.ResponseParser.OnlineRoutingResponse;
+import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.OnlineRoutingResponse;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 
@@ -95,8 +94,7 @@ public class OnlineRoutingHelper {
 	                                                   boolean leftSideNavigation) throws IOException, JSONException {
 		String url = engine.getFullUrl(path);
 		String content = makeRequest(url);
-		ResponseParser parser = engine.getResponseParser();
-		return parser.parseResponse(content, app, leftSideNavigation);
+		return engine.parseResponse(content, app, leftSideNavigation);
 	}
 
 	@NonNull

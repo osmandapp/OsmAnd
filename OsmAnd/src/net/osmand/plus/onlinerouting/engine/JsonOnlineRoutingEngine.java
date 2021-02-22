@@ -1,4 +1,4 @@
-package net.osmand.plus.onlinerouting.parser;
+package net.osmand.plus.onlinerouting.engine;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,10 +15,15 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static net.osmand.util.Algorithms.isEmpty;
 
-public abstract class JSONParser extends ResponseParser {
+public abstract class JsonOnlineRoutingEngine extends OnlineRoutingEngine {
+
+	public JsonOnlineRoutingEngine(@Nullable Map<String, String> params) {
+		super(params);
+	}
 
 	@Nullable
 	public OnlineRoutingResponse parseResponse(@NonNull String content,

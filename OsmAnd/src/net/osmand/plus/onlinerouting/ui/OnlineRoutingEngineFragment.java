@@ -462,7 +462,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 				boolean resultOk = false;
 				try {
 					String response = helper.makeRequest(exampleCard.getEditedText());
-					resultOk = requestedEngine.getResponseParser().isResultOk(errorMessage, response);
+					resultOk = requestedEngine.isResultOk(errorMessage, response);
 				} catch (IOException | JSONException e) {
 					errorMessage.append(e.toString());
 				}
