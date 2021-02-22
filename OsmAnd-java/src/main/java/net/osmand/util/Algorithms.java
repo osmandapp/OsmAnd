@@ -324,6 +324,24 @@ public class Algorithms {
 		return test == ZIP_FILE_SIGNATURE;
 	}
 
+	public static boolean checkFileSignature(InputStream inputStream, int fileSignature) throws IOException {
+		if (inputStream == null) return false;
+		int firstBytes;
+		if (isSmallFileSignature(fileSignature)) {
+			firstBytes = readSmallInt(inputStream);
+		} else {
+			firstBytes = readInt(inputStream);
+		}
+		if (inputStream.markSupported()) {
+			inputStream.reset();
+		}
+		return firstBytes == fileSignature;
+	}
+
+	public static boolean isSmallFileSignature(int fileSignature) {
+		return fileSignature == BZIP_FILE_SIGNATURE || fileSignature == GZIP_FILE_SIGNATURE;
+	}
+
 	/**
 	 * Checks, whether the child directory is a subdirectory of the parent
 	 * directory.
@@ -545,6 +563,18 @@ public class Algorithms {
 		} catch (IOException e) {
 			log.warn("Closing stream warn", e); //$NON-NLS-1$
 		}
+	}
+
+	public static ByteArrayInputStream createByteArrayIS(InputStream inputStream) throws IOException {
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		int i = 0;
+		while ((i = inputStream.read()) != -1) {
+			outputStream.write(i);
+		}
+		inputStream.close();
+
+		byte[] byteArray = outputStream.toByteArray();
+		return new ByteArrayInputStream(byteArray);
 	}
 
 	@SuppressWarnings("ResultOfMethodCallIgnored")

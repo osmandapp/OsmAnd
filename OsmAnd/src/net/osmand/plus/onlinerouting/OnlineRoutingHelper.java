@@ -19,6 +19,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -28,7 +29,10 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.zip.GZIPInputStream;
+import java.util.zip.ZipInputStream;
 
+import static net.osmand.util.Algorithms.GZIP_FILE_SIGNATURE;
+import static net.osmand.util.Algorithms.ZIP_FILE_SIGNATURE;
 import static net.osmand.util.Algorithms.isEmpty;
 
 public class OnlineRoutingHelper {
@@ -118,14 +122,15 @@ public class OnlineRoutingHelper {
 	}
 
 	private InputStream getInputStream(@NonNull HttpURLConnection connection) throws IOException {
-		// todo check file signature correctly
-//		InputStream is = connection.getInputStream();
-//		int header = Algorithms.readTwoInt(is);
-//		boolean isGzipFile = header == Algorithms.GZIP_FILE_SIGNATURE;
-//		if (isGzipFile) {
-//			return new GZIPInputStream(connection.getInputStream());
-//		}
-		return connection.getInputStream();
+		ByteArrayInputStream localIS = Algorithms.createByteArrayIS(connection.getInputStream());
+		if (Algorithms.checkFileSignature(localIS, ZIP_FILE_SIGNATURE)) {
+			ZipInputStream zipIS = new ZipInputStream(localIS);
+			zipIS.getNextEntry(); // set position to reading for the first item
+			return zipIS;
+		} else if (Algorithms.checkFileSignature(localIS, GZIP_FILE_SIGNATURE)) {
+			return new GZIPInputStream(localIS);
+		}
+		return localIS;
 	}
 
 	public void saveEngine(@NonNull OnlineRoutingEngine engine) {
