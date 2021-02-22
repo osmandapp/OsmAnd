@@ -12,7 +12,6 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.onlinerouting.EngineParameter;
-import net.osmand.plus.onlinerouting.OnlineRoutingFactory;
 import net.osmand.plus.onlinerouting.VehicleType;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.util.Algorithms;
@@ -50,7 +49,13 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 	}
 
 	@NonNull
-	public abstract EngineType getType();
+	public abstract OnlineRoutingEngine getType();
+
+	@NonNull
+	public abstract String getTitle();
+
+	@NonNull
+	public abstract String getTypeName();
 
 	@Nullable
 	public String getStringKey() {
@@ -176,7 +181,7 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 	@NonNull
 	@Override
 	public Object clone() {
-		return OnlineRoutingFactory.createEngine(getType(), getParams());
+		return newInstance(getParams());
 	}
 
 	@Override
@@ -188,6 +193,8 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 		if (getType() != engine.getType()) return false;
 		return Algorithms.objectEquals(getParams(), engine.getParams());
 	}
+
+	public abstract OnlineRoutingEngine newInstance(Map<String, String> params);
 
 	@NonNull
 	public static String generateKey() {

@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import static net.osmand.plus.onlinerouting.engine.EngineType.OSRM_TYPE;
 import static net.osmand.util.Algorithms.isEmpty;
 import static net.osmand.util.Algorithms.objectEquals;
 
@@ -34,9 +35,21 @@ public class OsrmEngine extends JsonOnlineRoutingEngine {
 	}
 
 	@Override
-	public @NonNull
-	EngineType getType() {
-		return EngineType.OSRM;
+	@NonNull
+	public OnlineRoutingEngine getType() {
+		return OSRM_TYPE;
+	}
+
+	@Override
+	@NonNull
+	public String getTitle() {
+		return "OSRM";
+	}
+
+	@NonNull
+	@Override
+	public String getTypeName() {
+		return "OSRM";
 	}
 
 	@NonNull
@@ -52,6 +65,11 @@ public class OsrmEngine extends JsonOnlineRoutingEngine {
 		params.add(EngineParameter.CUSTOM_NAME);
 		params.add(EngineParameter.NAME_INDEX);
 		params.add(EngineParameter.CUSTOM_URL);
+	}
+
+	@Override
+	public OnlineRoutingEngine newInstance(Map<String, String> params) {
+		return new OsrmEngine(params);
 	}
 
 	@Override

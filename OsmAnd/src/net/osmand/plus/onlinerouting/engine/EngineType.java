@@ -1,35 +1,38 @@
 package net.osmand.plus.onlinerouting.engine;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import net.osmand.util.Algorithms;
 
-public enum EngineType {
-	GRAPHHOPPER("Graphhopper"),
-	OSRM("OSRM"),
-	ORS("Openroute Service"),
-	GPX("GPX");
+public class EngineType {
 
-	private final String title;
+	public final static OnlineRoutingEngine GRAPHHOPPER_TYPE = new GraphhopperEngine(null);
+	public final static OnlineRoutingEngine OSRM_TYPE = new OsrmEngine(null);
+	public final static OnlineRoutingEngine ORS_TYPE = new OrsEngine(null);
+	public final static OnlineRoutingEngine GPX_TYPE = new GpxEngine(null);
 
-	EngineType(String title) {
-		this.title = title;
-	}
+	private static OnlineRoutingEngine[] enginesTypes;
 
-	public String getTitle() {
-		return title;
+	public static OnlineRoutingEngine[] values() {
+		if (enginesTypes == null) {
+			enginesTypes = new OnlineRoutingEngine[]{
+					GRAPHHOPPER_TYPE,
+					OSRM_TYPE,
+					ORS_TYPE,
+					GPX_TYPE
+			};
+		}
+		return enginesTypes;
 	}
 
 	@NonNull
-	public static EngineType getTypeByName(@Nullable String name) {
-		if (!Algorithms.isEmpty(name)) {
-			for (EngineType type : values()) {
-				if (type.name().equals(name)) {
-					return type;
-				}
+	public static OnlineRoutingEngine getTypeByName(@NonNull String typeName) {
+		for (OnlineRoutingEngine type : values()) {
+			if (Algorithms.objectEquals(type.getTypeName(), typeName)) {
+				return type;
 			}
 		}
 		return values()[0];
 	}
+
 }

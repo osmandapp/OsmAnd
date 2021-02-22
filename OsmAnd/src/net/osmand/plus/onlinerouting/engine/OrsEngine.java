@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import static net.osmand.plus.onlinerouting.engine.EngineType.ORS_TYPE;
 import static net.osmand.util.Algorithms.isEmpty;
 
 public class OrsEngine extends JsonOnlineRoutingEngine {
@@ -29,8 +30,20 @@ public class OrsEngine extends JsonOnlineRoutingEngine {
 
 	@NonNull
 	@Override
-	public EngineType getType() {
-		return EngineType.ORS;
+	public OnlineRoutingEngine getType() {
+		return ORS_TYPE;
+	}
+
+	@Override
+	@NonNull
+	public String getTitle() {
+		return "Openroute Service";
+	}
+
+	@NonNull
+	@Override
+	public String getTypeName() {
+		return "ORS";
 	}
 
 	@NonNull
@@ -47,6 +60,11 @@ public class OrsEngine extends JsonOnlineRoutingEngine {
 		params.add(EngineParameter.NAME_INDEX);
 		params.add(EngineParameter.CUSTOM_URL);
 		params.add(EngineParameter.API_KEY);
+	}
+
+	@Override
+	public OnlineRoutingEngine newInstance(Map<String, String> params) {
+		return new OrsEngine(params);
 	}
 
 	@Override

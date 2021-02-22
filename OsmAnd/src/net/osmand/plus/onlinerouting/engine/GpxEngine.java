@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import static net.osmand.plus.onlinerouting.engine.EngineType.GPX_TYPE;
+
 public class GpxEngine extends OnlineRoutingEngine {
 
 	public GpxEngine(@Nullable Map<String, String> params) {
@@ -25,8 +27,20 @@ public class GpxEngine extends OnlineRoutingEngine {
 
 	@NonNull
 	@Override
-	public EngineType getType() {
-		return EngineType.GPX;
+	public OnlineRoutingEngine getType() {
+		return GPX_TYPE;
+	}
+
+	@Override
+	@NonNull
+	public String getTitle() {
+		return "GPX";
+	}
+
+	@NonNull
+	@Override
+	public String getTypeName() {
+		return "GPX";
 	}
 
 	@Override
@@ -58,6 +72,11 @@ public class GpxEngine extends OnlineRoutingEngine {
 		params.add(EngineParameter.CUSTOM_NAME);
 		params.add(EngineParameter.NAME_INDEX);
 		params.add(EngineParameter.CUSTOM_URL);
+	}
+
+	@Override
+	public OnlineRoutingEngine newInstance(Map<String, String> params) {
+		return new GpxEngine(params);
 	}
 
 	@Override

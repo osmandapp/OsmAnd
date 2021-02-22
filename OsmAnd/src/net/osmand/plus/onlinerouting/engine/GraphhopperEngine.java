@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import static net.osmand.plus.onlinerouting.engine.EngineType.GRAPHHOPPER_TYPE;
 import static net.osmand.util.Algorithms.isEmpty;
 
 public class GraphhopperEngine extends JsonOnlineRoutingEngine {
@@ -32,8 +33,20 @@ public class GraphhopperEngine extends JsonOnlineRoutingEngine {
 
 	@NonNull
 	@Override
-	public EngineType getType() {
-		return EngineType.GRAPHHOPPER;
+	public OnlineRoutingEngine getType() {
+		return GRAPHHOPPER_TYPE;
+	}
+
+	@Override
+	@NonNull
+	public String getTitle() {
+		return "Graphhopper";
+	}
+
+	@NonNull
+	@Override
+	public String getTypeName() {
+		return "GRAPHHOPPER";
 	}
 
 	@NonNull
@@ -50,6 +63,11 @@ public class GraphhopperEngine extends JsonOnlineRoutingEngine {
 		params.add(EngineParameter.NAME_INDEX);
 		params.add(EngineParameter.CUSTOM_URL);
 		params.add(EngineParameter.API_KEY);
+	}
+
+	@Override
+	public OnlineRoutingEngine newInstance(Map<String, String> params) {
+		return new GraphhopperEngine(params);
 	}
 
 	@Override
