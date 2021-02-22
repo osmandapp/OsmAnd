@@ -64,6 +64,7 @@ public class TrackPointsCard extends BaseCard implements OnChildClickListener, O
 	private final TrackDisplayHelper displayHelper;
 	private final GpxDisplayItemType[] filterTypes = new GpxDisplayItemType[] {GpxDisplayItemType.TRACK_POINTS, GpxDisplayItemType.TRACK_ROUTE_POINTS};
 
+	private GpxDisplayGroup selectedGroup;
 	private final Set<Integer> selectedGroups = new LinkedHashSet<>();
 	private final LinkedHashMap<GpxDisplayItemType, Set<GpxDisplayItem>> selectedItems = new LinkedHashMap<>();
 	private boolean selectionMode;
@@ -97,7 +98,7 @@ public class TrackPointsCard extends BaseCard implements OnChildClickListener, O
 		listView.setOnChildClickListener(this);
 
 		adapter.setFilterResults(null);
-		adapter.synchronizeGroups(getOriginalGroups());
+		adapter.synchronizeGroups(getDisplayGroups());
 		if (listView.getAdapter() == null) {
 			listView.setAdapter(adapter);
 		}
@@ -107,6 +108,10 @@ public class TrackPointsCard extends BaseCard implements OnChildClickListener, O
 			addActions(inflater);
 		}
 		expandAllGroups();
+	}
+
+	public void setSelectedGroup(GpxDisplayGroup selectedGroup) {
+		this.selectedGroup = selectedGroup;
 	}
 
 	public List<GpxDisplayGroup> getGroups() {
@@ -176,6 +181,10 @@ public class TrackPointsCard extends BaseCard implements OnChildClickListener, O
 
 	private List<GpxDisplayGroup> getOriginalGroups() {
 		return displayHelper.getOriginalGroups(filterTypes);
+	}
+
+	private List<GpxDisplayGroup> getDisplayGroups() {
+		return selectedGroup != null ? Collections.singletonList(selectedGroup) : getOriginalGroups();
 	}
 
 	@Override
@@ -250,7 +259,7 @@ public class TrackPointsCard extends BaseCard implements OnChildClickListener, O
 	public void onPointsDeleted() {
 		selectedItems.clear();
 		selectedGroups.clear();
-		adapter.synchronizeGroups(getOriginalGroups());
+		adapter.synchronizeGroups(getDisplayGroups());
 	}
 
 	public void filter(String text) {
@@ -622,16 +631,13 @@ public class TrackPointsCard extends BaseCard implements OnChildClickListener, O
 			} else {
 				Set<Object> filter = new HashSet<>();
 				String cs = constraint.toString().toLowerCase();
-				List<GpxDisplayGroup> groups = getOriginalGroups();
-				if (groups != null) {
-					for (GpxDisplayGroup g : groups) {
-						for (GpxDisplayItem i : g.getModifiableList()) {
-							if (i.name.toLowerCase().contains(cs)) {
-								filter.add(i);
-							} else if (i.locationStart != null && !TextUtils.isEmpty(i.locationStart.category)
-									&& i.locationStart.category.toLowerCase().contains(cs)) {
-								filter.add(i.locationStart.category);
-							}
+				for (GpxDisplayGroup g : getDisplayGroups()) {
+					for (GpxDisplayItem i : g.getModifiableList()) {
+						if (i.name.toLowerCase().contains(cs)) {
+							filter.add(i);
+						} else if (i.locationStart != null && !TextUtils.isEmpty(i.locationStart.category)
+								&& i.locationStart.category.toLowerCase().contains(cs)) {
+							filter.add(i.locationStart.category);
 						}
 					}
 				}
@@ -645,10 +651,7 @@ public class TrackPointsCard extends BaseCard implements OnChildClickListener, O
 		protected void publishResults(CharSequence constraint, FilterResults results) {
 			synchronized (adapter) {
 				adapter.setFilterResults((Set<?>) results.values);
-				List<GpxDisplayGroup> groups = getOriginalGroups();
-				if (groups != null) {
-					adapter.synchronizeGroups(groups);
-				}
+				adapter.synchronizeGroups(getDisplayGroups());
 			}
 			adapter.notifyDataSetChanged();
 			expandAllGroups();

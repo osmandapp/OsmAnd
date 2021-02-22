@@ -340,31 +340,24 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				blocksBuilder.runUpdatingStatBlocksIfNeeded();
 			}
 		} else {
+			if (menuType == TrackMenuType.POINTS && !Algorithms.isEmpty(pointsCard.getGroups())) {
+				if (groupsCard != null && groupsCard.getView() != null) {
+					ViewGroup parent = ((ViewGroup) groupsCard.getView().getParent());
+					if (parent != null) {
+						parent.removeView(groupsCard.getView());
+					}
+					headerContainer.addView(groupsCard.getView());
+				} else {
+					groupsCard = new PointsGroupsCard(getMapActivity(), pointsCard.getGroups());
+					groupsCard.setListener(this);
+					headerContainer.addView(groupsCard.build(getMapActivity()));
+				}
+			} else if (groupsCard != null && groupsCard.getView() != null) {
+				headerContainer.removeView(groupsCard.getView());
+			}
 			if (overviewCard != null && overviewCard.getView() != null) {
 				overviewCard.getBlockStatisticsBuilder().stopUpdatingStatBlocks();
-				if (menuType == TrackMenuType.POINTS) {
-					if (groupsCard != null && groupsCard.getView() != null) {
-						ViewGroup parent = ((ViewGroup) groupsCard.getView().getParent());
-						if (parent != null) {
-							parent.removeView(groupsCard.getView());
-						}
-						headerContainer.addView(groupsCard.getView());
-					} else {
-						groupsCard = new PointsGroupsCard(getMapActivity(), displayHelper, pointsCard.getGroups());
-						groupsCard.setListener(this);
-						headerContainer.addView(groupsCard.build(getMapActivity()));
-					}
-					if (overviewCard != null && overviewCard.getView() != null) {
-						headerContainer.removeView(overviewCard.getView());
-					}
-				} else {
-					if (overviewCard != null && overviewCard.getView() != null) {
-						headerContainer.removeView(overviewCard.getView());
-					}
-					if (groupsCard != null && groupsCard.getView() != null) {
-						headerContainer.removeView(groupsCard.getView());
-					}
-				}
+				headerContainer.removeView(overviewCard.getView());
 			}
 			boolean isOptions = menuType == TrackMenuType.OPTIONS;
 			setHeaderTitle(isOptions ? app.getString(menuType.titleId) : gpxTitle, !isOptions);
@@ -852,6 +845,13 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				}
 			} else if (buttonIndex == OPEN_WAYPOINT_INDEX) {
 				dismiss();
+			}
+		} else if (card instanceof PointsGroupsCard) {
+			PointsGroupsCard groupsCard = (PointsGroupsCard) card;
+			GpxDisplayGroup group = groupsCard.getSelectedGroup();
+			if (pointsCard != null) {
+				pointsCard.setSelectedGroup(group);
+				pointsCard.updateContent();
 			}
 		}
 	}

@@ -1,33 +1,30 @@
 package net.osmand.plus.track;
 
-import android.text.TextUtils;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
-import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionAdapterListener;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionItem;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PointsGroupsCard extends BaseCard {
 
-	private final TrackDisplayHelper displayHelper;
-	private final GpxDisplayItemType[] filterTypes = new GpxDisplayItemType[]{GpxDisplayItemType.TRACK_POINTS, GpxDisplayItemType.TRACK_ROUTE_POINTS};
+	public static final int SELECT_GROUP_INDEX = 0;
+
+	private GpxDisplayGroup selectedGroup;
 	private final List<GpxDisplayGroup> displayGroups = new ArrayList<>();
 
-	public PointsGroupsCard(@NonNull MapActivity mapActivity, @NonNull TrackDisplayHelper displayHelper,
-							@NonNull List<GpxDisplayGroup> groups) {
+	public PointsGroupsCard(@NonNull MapActivity mapActivity, @NonNull List<GpxDisplayGroup> groups) {
 		super(mapActivity);
-		this.displayHelper = displayHelper;
 		displayGroups.addAll(groups);
 	}
 
@@ -36,38 +33,43 @@ public class PointsGroupsCard extends BaseCard {
 		return R.layout.track_groups_card;
 	}
 
+	public GpxDisplayGroup getSelectedGroup() {
+		return selectedGroup;
+	}
+
 	@Override
 	protected void updateContent() {
-		final List<String> groupNames = new ArrayList<>();
+		ArrayList<HorizontalSelectionItem> items = new ArrayList<>();
+		items.add(new HorizontalSelectionItem(app.getString(R.string.shared_string_all), null));
 		for (GpxDisplayGroup group : displayGroups) {
 			String categoryName = group.getName();
-			if (TextUtils.isEmpty(categoryName)) {
+			if (Algorithms.isEmpty(categoryName)) {
 				categoryName = app.getString(R.string.shared_string_gpx_points);
 			}
-			groupNames.add(categoryName);
-		}
-		if (groupNames.size() > 1) {
-			String categoryAll = app.getString(R.string.shared_string_all);
-			groupNames.add(0, categoryAll);
+			items.add(new HorizontalSelectionItem(categoryName, group));
 		}
 		final HorizontalSelectionAdapter selectionAdapter = new HorizontalSelectionAdapter(app, nightMode);
-		selectionAdapter.setTitledItems(groupNames);
-		selectionAdapter.setSelectedItemByTitle(groupNames.get(0));
+		selectionAdapter.setItems(items);
 		selectionAdapter.setListener(new HorizontalSelectionAdapterListener() {
 			@Override
 			public void onItemSelected(HorizontalSelectionItem item) {
-				selectionAdapter.setSelectedItem(item);
-				List<GpxDisplayGroup> trackPointsGroups = new ArrayList<>();
-				List<GpxDisplayGroup> routePointsGroups = new ArrayList<>();
-				for (GpxDisplayGroup group : displayGroups) {
-					if (group.getType() == GpxDisplayItemType.TRACK_POINTS) {
-						trackPointsGroups.add(group);
-					} else if (group.getType() == GpxDisplayItemType.TRACK_ROUTE_POINTS) {
-						routePointsGroups.add(group);
-					}
+				selectedGroup = (GpxDisplayGroup) item.getObject();
+				CardListener listener = getListener();
+				if (listener != null) {
+					listener.onCardButtonPressed(PointsGroupsCard.this, SELECT_GROUP_INDEX);
 				}
+				selectionAdapter.notifyDataSetChanged();
 			}
 		});
+		if (selectedGroup != null) {
+			String categoryName = selectedGroup.getName();
+			if (Algorithms.isEmpty(categoryName)) {
+				categoryName = app.getString(R.string.shared_string_gpx_points);
+			}
+			selectionAdapter.setSelectedItemByTitle(categoryName);
+		} else {
+			selectionAdapter.setSelectedItemByTitle(app.getString(R.string.shared_string_all));
+		}
 
 		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
 		recyclerView.setAdapter(selectionAdapter);
