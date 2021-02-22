@@ -232,11 +232,17 @@ class RouteRecalculationHelper {
 	}
 
 	void startProgress(final RouteCalculationParams params) {
-		if (params.calculationProgressCallback != null) {
-			params.calculationProgressCallback.start();
-		} else if (progressRoute != null) {
-			progressRoute.start();
-		}
+		app.runInUIThread(new Runnable() {
+
+			@Override
+			public void run() {
+				if (params.calculationProgressCallback != null) {
+					params.calculationProgressCallback.start();
+				} else if (progressRoute != null) {
+					progressRoute.start();
+				}
+			}
+		});
 	}
 
 	void updateProgress(final RouteCalculationParams params) {

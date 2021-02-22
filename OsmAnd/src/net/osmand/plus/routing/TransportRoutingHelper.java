@@ -237,7 +237,12 @@ public class TransportRoutingHelper {
 	private void startProgress(final TransportRouteCalculationParams params) {
 		final TransportRouteCalculationProgressCallback progressRoute = this.progressRoute;
 		if (progressRoute != null) {
-			progressRoute.start();
+			app.runInUIThread(new Runnable() {
+				@Override
+				public void run() {
+					progressRoute.start();
+				}
+			}, 300);
 		}
 		setCurrentRoute(-1);
 	}

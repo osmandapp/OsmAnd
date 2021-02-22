@@ -373,22 +373,30 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	
 	public void addLocationListener(@NonNull OsmAndLocationListener listener) {
 		if (!locationListeners.contains(listener)) {
-			locationListeners.add(listener);
+			List<OsmAndLocationListener> listeners = new ArrayList<>(locationListeners);
+			listeners.add(listener);
+			locationListeners = listeners;
 		}
 	}
 	
 	public void removeLocationListener(@NonNull OsmAndLocationListener listener) {
-		locationListeners.remove(listener);
+		List<OsmAndLocationListener> listeners = new ArrayList<>(locationListeners);
+		listeners.remove(listener);
+		locationListeners = listeners;
 	}
 	
 	public void addCompassListener(@NonNull OsmAndCompassListener listener) {
 		if (!compassListeners.contains(listener)) {
-			compassListeners.add(listener);
+			List<OsmAndCompassListener> listeners = new ArrayList<>(compassListeners);
+			listeners.add(listener);
+			compassListeners = listeners;
 		}
 	}
 	
 	public void removeCompassListener(@NonNull OsmAndCompassListener listener) {
-		compassListeners.remove(listener);
+		List<OsmAndCompassListener> listeners = new ArrayList<>(compassListeners);
+		listeners.remove(listener);
+		compassListeners = listeners;
 	}
 
 	@Nullable
