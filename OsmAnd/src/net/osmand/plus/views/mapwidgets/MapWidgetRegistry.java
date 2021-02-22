@@ -66,7 +66,7 @@ public class MapWidgetRegistry {
 	public static String WIDGET_BEARING = "bearing";
 	public static String WIDGET_PLAIN_TIME = "plain_time";
 	public static String WIDGET_BATTERY = "battery";
-	public static String WIDGET_RADIUS_RULER = "radius_ruler";
+	public static String WIDGET_RADIUS_RULER = "ruler";
 
 	public static String WIDGET_STREET_NAME = "street_name";
 
