@@ -145,7 +145,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 				if (activity != null) {
 					File dest = getFile(app, folderName, fileName);
 					MoveGpxFileBottomSheet.showInstance(activity.getSupportFragmentManager(),
-							SaveAsNewTrackBottomSheetDialogFragment.this, dest.getAbsolutePath(), usedOnMap);
+							SaveAsNewTrackBottomSheetDialogFragment.this, dest.getAbsolutePath(), usedOnMap, true);
 				}
 			}
 		});

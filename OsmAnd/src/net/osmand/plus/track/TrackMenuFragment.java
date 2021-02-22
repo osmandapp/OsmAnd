@@ -791,7 +791,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				FileUtils.renameFile(mapActivity, new File(gpxFile.path), this, true);
 			} else if (buttonIndex == CHANGE_FOLDER_BUTTON_INDEX) {
 				FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
-				MoveGpxFileBottomSheet.showInstance(fragmentManager, this, gpxFile.path, true);
+				MoveGpxFileBottomSheet.showInstance(fragmentManager, this, gpxFile.path, true, false);
 			} else if (buttonIndex == DELETE_BUTTON_INDEX) {
 				String fileName = Algorithms.getFileWithoutDirs(gpxFile.path);
 

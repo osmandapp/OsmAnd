@@ -21,7 +21,6 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment;
 import net.osmand.plus.myplaces.AddNewTrackFolderBottomSheet.OnTrackFolderAddListener;
 import net.osmand.util.Algorithms;
 
@@ -42,6 +41,7 @@ public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implem
 
 	private OsmandApplication app;
 	private String filePath;
+	private boolean showAllFolders = false;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -87,10 +87,9 @@ public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implem
 		dividerItem.setMargins(0, 0, 0, 0);
 		items.add(dividerItem);
 
-		boolean isSaveAsNewFragment = getTargetFragment() instanceof SaveAsNewTrackBottomSheetDialogFragment;
 		final List<File> dirs = new ArrayList<>();
-		collectDirs(app.getAppPath(IndexConstants.GPX_INDEX_DIR), dirs, isSaveAsNewFragment ? null : fileDir);
-		if (isSaveAsNewFragment || !Algorithms.objectEquals(fileDir, app.getAppPath(IndexConstants.GPX_INDEX_DIR))) {
+		collectDirs(app.getAppPath(IndexConstants.GPX_INDEX_DIR), dirs, showAllFolders ? null : fileDir);
+		if (showAllFolders || !Algorithms.objectEquals(fileDir, app.getAppPath(IndexConstants.GPX_INDEX_DIR))) {
 			dirs.add(0, app.getAppPath(IndexConstants.GPX_INDEX_DIR));
 		}
 		String gpxDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR).getPath();
@@ -165,12 +164,13 @@ public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implem
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable Fragment target,
-									@NonNull String filePath, boolean usedOnMap) {
+									@NonNull String filePath, boolean usedOnMap, boolean showAllFolders) {
 		try {
 			if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(MoveGpxFileBottomSheet.TAG) == null) {
 				MoveGpxFileBottomSheet fragment = new MoveGpxFileBottomSheet();
 				fragment.filePath = filePath;
 				fragment.setUsedOnMap(usedOnMap);
+				fragment.showAllFolders = showAllFolders;
 				fragment.setTargetFragment(target, 0);
 				fragment.show(fragmentManager, MoveGpxFileBottomSheet.TAG);
 			}
