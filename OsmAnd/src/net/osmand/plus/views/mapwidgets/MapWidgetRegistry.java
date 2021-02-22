@@ -372,8 +372,8 @@ public class MapWidgetRegistry {
 
 		cm.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_widget_distance_by_tap, map)
 				.setIcon(R.drawable.ic_action_ruler_line)
-				.setSelected(settings.SHOW_RULER_BY_TAP.get())
-				.setListener(new AppearanceItemClickListener(settings.SHOW_RULER_BY_TAP, map))
+				.setSelected(settings.SHOW_DISTANCE_RULER.get())
+				.setListener(new AppearanceItemClickListener(settings.SHOW_DISTANCE_RULER, map))
 				.setLayout(R.layout.list_item_icon_and_switch).createItem());
 
 		cm.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_markers, map)

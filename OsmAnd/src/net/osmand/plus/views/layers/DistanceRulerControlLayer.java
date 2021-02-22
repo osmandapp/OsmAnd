@@ -28,7 +28,7 @@ import net.osmand.util.MapUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RulerByTapControlLayer extends OsmandMapLayer {
+public class DistanceRulerControlLayer extends OsmandMapLayer {
 
 	private static final int VERTICAL_OFFSET = 15;
 	private static final long DRAW_TIME = 2000;
@@ -65,7 +65,7 @@ public class RulerByTapControlLayer extends OsmandMapLayer {
 
 	private Handler handler;
 
-	public RulerByTapControlLayer(MapActivity mapActivity) {
+	public DistanceRulerControlLayer(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
 	}
 
@@ -176,7 +176,7 @@ public class RulerByTapControlLayer extends OsmandMapLayer {
 	}
 
 	public boolean rulerModeOn() {
-		return app.getSettings().SHOW_RULER_BY_TAP.get();
+		return app.getSettings().SHOW_DISTANCE_RULER.get();
 	}
 
 	private void refreshMapDelayed() {

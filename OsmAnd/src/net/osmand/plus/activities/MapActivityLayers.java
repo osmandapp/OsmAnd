@@ -58,7 +58,7 @@ import net.osmand.plus.views.layers.PointLocationLayer;
 import net.osmand.plus.views.layers.PointNavigationLayer;
 import net.osmand.plus.views.layers.RouteLayer;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer;
-import net.osmand.plus.views.layers.RulerByTapControlLayer;
+import net.osmand.plus.views.layers.DistanceRulerControlLayer;
 import net.osmand.plus.views.layers.TransportStopsLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 
@@ -84,7 +84,7 @@ public class MapActivityLayers {
 	private TransportStopsLayer transportStopsLayer;
 	private PointLocationLayer locationLayer;
 	private RadiusRulerControlLayer radiusRulerControlLayer;
-	private RulerByTapControlLayer rulerByTapControlLayer;
+	private DistanceRulerControlLayer distanceRulerControlLayer;
 	private PointNavigationLayer navigationLayer;
 	private MapMarkersLayer mapMarkersLayer;
 	private ImpassableRoadsLayer impassableRoadsLayer;
@@ -174,8 +174,8 @@ public class MapActivityLayers {
 		radiusRulerControlLayer = new RadiusRulerControlLayer(activity);
 		mapView.addLayer(radiusRulerControlLayer, 7.8f);
 		// 7.9 ruler by tap control layer
-		rulerByTapControlLayer = new RulerByTapControlLayer(activity);
-		mapView.addLayer(rulerByTapControlLayer, 7.9f);
+		distanceRulerControlLayer = new DistanceRulerControlLayer(activity);
+		mapView.addLayer(distanceRulerControlLayer, 7.9f);
 		// 8. context menu layer 
 		// 9. map info layer
 		mapInfoLayer = new MapInfoLayer(activity, routeLayer);
@@ -621,8 +621,8 @@ public class MapActivityLayers {
 		return radiusRulerControlLayer;
 	}
 
-	public RulerByTapControlLayer getRulerByTapControlLayer() {
-		return rulerByTapControlLayer;
+	public DistanceRulerControlLayer getDistanceRulerControlLayer() {
+		return distanceRulerControlLayer;
 	}
 
 	public MapInfoLayer getMapInfoLayer() {
