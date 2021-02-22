@@ -159,7 +159,8 @@ public class TravelArticle {
 			System.err.println(e.getMessage());
 		}
 		String prefix = thumbnail ? THUMB_PREFIX : REGULAR_PREFIX;
-		return IMAGE_ROOT_URL + "thumb/" + hash[0] + "/" + hash[1] + "/" + imageTitle + "/" + prefix + imageTitle;
+		String suffix = imageTitle.endsWith(".svg") ? ".png" : "";
+		return IMAGE_ROOT_URL + "thumb/" + hash[0] + "/" + hash[1] + "/" + imageTitle + "/" + prefix + imageTitle + suffix;
 	}
 
 	@Size(2)
