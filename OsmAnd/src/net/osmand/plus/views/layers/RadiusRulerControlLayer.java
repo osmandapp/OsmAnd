@@ -173,7 +173,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	}
 
 	public boolean rulerModeOn() {
-		return mapActivity.getMapLayers().getMapWidgetRegistry().isVisible("radius_ruler") &&
+		return mapActivity.getMapLayers().getMapWidgetRegistry().isVisible("ruler") &&
 				rightWidgetsPanel.getVisibility() == View.VISIBLE;
 	}
 
