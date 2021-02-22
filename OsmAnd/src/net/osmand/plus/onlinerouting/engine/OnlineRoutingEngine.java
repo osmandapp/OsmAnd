@@ -5,8 +5,6 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.GPXUtilities.WptPt;
-import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.R;
@@ -14,7 +12,6 @@ import net.osmand.plus.onlinerouting.EngineParameter;
 import net.osmand.plus.onlinerouting.OnlineRoutingFactory;
 import net.osmand.plus.onlinerouting.VehicleType;
 import net.osmand.plus.onlinerouting.parser.ResponseParser;
-import net.osmand.plus.routing.RouteProvider;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -109,30 +106,7 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 	}
 
 	@NonNull
-	protected ResponseParser createParser() {
-		try {
-			return getType().getParserClass().newInstance();
-		} catch (IllegalAccessException e) {
-			LOG.debug("Error when create parser: " + e.getMessage());
-		} catch (InstantiationException e) {
-			LOG.debug("Error when create parser: " + e.getMessage());
-		}
-		return ResponseParser.emptyParser();
-	}
-
-	@NonNull
-	protected List<Location> convertRouteToLocationsList(@NonNull List<LatLon> route) {
-		List<Location> result = new ArrayList<>();
-		if (!isEmpty(route)) {
-			for (LatLon pt : route) {
-				WptPt wpt = new WptPt();
-				wpt.lat = pt.getLatitude();
-				wpt.lon = pt.getLongitude();
-				result.add(RouteProvider.createLocation(wpt));
-			}
-		}
-		return result;
-	}
+	protected abstract ResponseParser createParser();
 
 	@NonNull
 	public Map<String, String> getParams() {

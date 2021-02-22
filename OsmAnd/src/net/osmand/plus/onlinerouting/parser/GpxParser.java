@@ -25,7 +25,7 @@ public class GpxParser extends ResponseParser {
 	@Override
 	public boolean isResultOk(@NonNull StringBuilder errorMessage,
 	                          @NonNull String content) {
-		return parseGpx(content) != null; // TODO may be there should be another check
+		return parseGpx(content) != null;
 	}
 
 	private GPXFile parseGpx(@NonNull String content) {

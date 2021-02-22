@@ -6,6 +6,8 @@ import androidx.annotation.Nullable;
 import net.osmand.data.LatLon;
 import net.osmand.plus.onlinerouting.EngineParameter;
 import net.osmand.plus.onlinerouting.VehicleType;
+import net.osmand.plus.onlinerouting.parser.GpxParser;
+import net.osmand.plus.onlinerouting.parser.ResponseParser;
 
 import java.util.List;
 import java.util.Map;
@@ -38,7 +40,7 @@ public class GpxEngine extends OnlineRoutingEngine {
 	@NonNull
 	@Override
 	public String getStandardUrl() {
-		return ""; // TODO will be determined in the future
+		return "";
 	}
 
 	@Override
@@ -54,4 +56,9 @@ public class GpxEngine extends OnlineRoutingEngine {
 		params.add(EngineParameter.CUSTOM_URL);
 	}
 
+	@NonNull
+	@Override
+	protected ResponseParser createParser() {
+		return new GpxParser();
+	}
 }

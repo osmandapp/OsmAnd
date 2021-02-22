@@ -50,8 +50,19 @@ public abstract class JSONParser extends ResponseParser {
 		return obj.has(getRootArrayKey());
 	}
 
+	@Nullable
+	protected abstract OnlineRoutingResponse parseServerResponse(@NonNull JSONObject root,
+	                                                             @NonNull OsmandApplication app,
+	                                                             boolean leftSideNavigation) throws JSONException;
+
 	@NonNull
-	protected List<Location> convertRouteToLocationsList(@NonNull List<LatLon> route) {
+	protected abstract String getRootArrayKey();
+
+	@NonNull
+	protected abstract String getErrorMessageKey();
+
+	@NonNull
+	protected static List<Location> convertRouteToLocationsList(@NonNull List<LatLon> route) {
 		List<Location> result = new ArrayList<>();
 		if (!isEmpty(route)) {
 			for (LatLon pt : route) {
@@ -63,15 +74,4 @@ public abstract class JSONParser extends ResponseParser {
 		}
 		return result;
 	}
-
-	@Nullable
-	protected abstract OnlineRoutingResponse parseServerResponse(@NonNull JSONObject root,
-	                                                             @NonNull OsmandApplication app,
-	                                                             boolean leftSideNavigation) throws JSONException;
-
-	@NonNull
-	protected abstract String getRootArrayKey();
-
-	@NonNull
-	protected abstract String getErrorMessageKey();
 }
