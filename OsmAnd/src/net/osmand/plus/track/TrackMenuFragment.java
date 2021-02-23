@@ -136,6 +136,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private DescriptionCard descriptionCard;
 	private OverviewCard overviewCard;
 	private TrackPointsCard pointsCard;
+	private PointsGroupsCard groupsCard;
 
 	private TextView headerTitle;
 	private ImageView headerIcon;
@@ -373,6 +374,21 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				blocksBuilder.runUpdatingStatBlocksIfNeeded();
 			}
 		} else {
+			if (menuType == TrackMenuType.POINTS && !Algorithms.isEmpty(pointsCard.getGroups())) {
+				if (groupsCard != null && groupsCard.getView() != null) {
+					ViewGroup parent = ((ViewGroup) groupsCard.getView().getParent());
+					if (parent != null) {
+						parent.removeView(groupsCard.getView());
+					}
+					headerContainer.addView(groupsCard.getView());
+				} else {
+					groupsCard = new PointsGroupsCard(getMapActivity(), pointsCard.getGroups());
+					groupsCard.setListener(this);
+					headerContainer.addView(groupsCard.build(getMapActivity()));
+				}
+			} else if (groupsCard != null && groupsCard.getView() != null) {
+				headerContainer.removeView(groupsCard.getView());
+			}
 			if (overviewCard != null && overviewCard.getView() != null) {
 				overviewCard.getBlockStatisticsBuilder().stopUpdatingStatBlocks();
 				headerContainer.removeView(overviewCard.getView());
@@ -868,6 +884,13 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				}
 			} else if (buttonIndex == OPEN_WAYPOINT_INDEX) {
 				dismiss();
+			}
+		} else if (card instanceof PointsGroupsCard) {
+			PointsGroupsCard groupsCard = (PointsGroupsCard) card;
+			GpxDisplayGroup group = groupsCard.getSelectedGroup();
+			if (pointsCard != null) {
+				pointsCard.setSelectedGroup(group);
+				pointsCard.updateContent();
 			}
 		}
 	}
