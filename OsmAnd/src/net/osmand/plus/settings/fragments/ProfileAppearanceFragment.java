@@ -23,6 +23,38 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import net.osmand.AndroidUtils;
+import net.osmand.IndexConstants;
+import net.osmand.PlatformUtil;
+import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
+import net.osmand.plus.UiUtilities.DialogButtonType;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.profiles.LocationIcon;
+import net.osmand.plus.profiles.NavigationIcon;
+import net.osmand.plus.profiles.ProfileIconColors;
+import net.osmand.plus.profiles.ProfileIcons;
+import net.osmand.plus.profiles.SelectProfileBottomSheet;
+import net.osmand.plus.profiles.SelectProfileBottomSheet.DialogMode;
+import net.osmand.plus.profiles.SelectProfileBottomSheet.OnSelectProfileCallback;
+import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.routing.RouteProvider;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.backup.ProfileSettingsItem;
+import net.osmand.plus.settings.backend.backup.SettingsHelper;
+import net.osmand.plus.track.ColorsCard;
+import net.osmand.plus.track.CustomColorBottomSheet;
+import net.osmand.plus.widgets.FlowLayout;
+import net.osmand.plus.widgets.OsmandTextFieldBoxes;
+import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
@@ -37,38 +69,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 import androidx.recyclerview.widget.RecyclerView;
-
-import net.osmand.AndroidUtils;
-import net.osmand.IndexConstants;
-import net.osmand.PlatformUtil;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.R;
-import net.osmand.plus.settings.backend.backup.ProfileSettingsItem;
-import net.osmand.plus.settings.backend.backup.SettingsHelper;
-import net.osmand.plus.UiUtilities;
-import net.osmand.plus.UiUtilities.DialogButtonType;
-import net.osmand.plus.profiles.LocationIcon;
-import net.osmand.plus.profiles.NavigationIcon;
-import net.osmand.plus.profiles.ProfileIconColors;
-import net.osmand.plus.profiles.ProfileIcons;
-import net.osmand.plus.profiles.SelectProfileBottomSheet;
-import net.osmand.plus.profiles.SelectProfileBottomSheet.DialogMode;
-import net.osmand.plus.profiles.SelectProfileBottomSheet.OnSelectProfileCallback;
-import net.osmand.plus.routing.RouteProvider;
-import net.osmand.plus.track.ColorsCard;
-import net.osmand.plus.track.CustomColorBottomSheet;
-import net.osmand.plus.widgets.FlowLayout;
-import net.osmand.plus.widgets.OsmandTextFieldBoxes;
-import net.osmand.util.Algorithms;
-
-import org.apache.commons.logging.Log;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILES_LIST_UPDATED_ARG;
@@ -939,7 +939,6 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 			if (color == changedProfile.getActualColor()) {
 				return;
 			}
-
 
 			if (cardOfColors.isBaseColor(color)) {
 				changedProfile.customColor = null;

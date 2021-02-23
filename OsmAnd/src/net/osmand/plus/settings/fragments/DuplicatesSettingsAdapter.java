@@ -6,11 +6,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import alice.tuprolog.Int;
-import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.RecyclerView;
-
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -35,11 +30,15 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
 import net.osmand.util.Algorithms;
 
-import org.apache.commons.logging.Log;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 import static net.osmand.plus.settings.backend.backup.FileSettingsItem.FileSubtype;
 
