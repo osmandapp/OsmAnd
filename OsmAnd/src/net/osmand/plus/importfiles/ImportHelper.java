@@ -674,7 +674,7 @@ public class ImportHelper {
 		List<FavouritePoint> favourites = new ArrayList<>();
 		for (WptPt p : wptPts) {
 			if (Algorithms.isEmpty(p.name)) {
-				p.name = Algorithms.getFileNameWithoutExtension(fileName);
+				p.name = app.getResources().getString(R.string.shared_string_waypoint);
 			}
 			if (!Algorithms.isEmpty(p.name)) {
 				final String fpCat;
