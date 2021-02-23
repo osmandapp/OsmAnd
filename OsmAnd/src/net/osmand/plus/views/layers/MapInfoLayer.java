@@ -58,7 +58,7 @@ import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_NEXT_NEX
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_NEXT_TURN;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_NEXT_TURN_SMALL;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_PLAIN_TIME;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_RULER;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_RADIUS_RULER;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_SPEED;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_TIME;
 
@@ -85,16 +85,16 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private TopToolbarView topToolbarView;
 	private TopCoordinatesView topCoordinatesView;
 
-	public MapInfoLayer(MapActivity map, RouteLayer layer){
+	public MapInfoLayer(MapActivity map, RouteLayer layer) {
 		this.map = map;
 		settings = map.getMyApplication().getSettings();
 		this.routeLayer = layer;
 	}
-	
+
 	public MapWidgetRegistry getMapInfoControls() {
 		return mapInfoControls;
 	}
-	
+
 	public MapActivity getMapActivity() {
 		return map;
 	}
@@ -102,7 +102,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	@Override
 	public void initLayer(final OsmandMapTileView view) {
 		this.view = view;
-		mapInfoControls = map.getMapLayers().getMapWidgetRegistry() ;
+		mapInfoControls = map.getMapLayers().getMapWidgetRegistry();
 		leftStack = map.findViewById(R.id.map_left_widgets_panel);
 		rightStack = map.findViewById(R.id.map_right_widgets_panel);
 		expand = map.findViewById(R.id.map_collapse_button);
@@ -111,19 +111,19 @@ public class MapInfoLayer extends OsmandMapLayer {
 		// update and create controls
 		registerAllControls();
 		map.getMyApplication().getAidlApi().registerWidgetControls(map);
-		
+
 		recreateControls();
 	}
-	
+
 	public MapWidgetRegInfo registerSideWidget(TextInfoWidget widget, int drawableMenu,
-			int messageId, String key, boolean left, int priorityOrder) {
+											   int messageId, String key, boolean left, int priorityOrder) {
 		MapWidgetRegInfo reg = mapInfoControls.registerSideWidgetInternal(widget, drawableMenu, messageId, key, left, priorityOrder);
 		updateReg(calculateTextState(), reg);
 		return reg;
 	}
 
 	public MapWidgetRegInfo registerSideWidget(TextInfoWidget widget, int drawableMenu,
-								   String message, String key, boolean left, int priorityOrder) {
+											   String message, String key, boolean left, int priorityOrder) {
 		MapWidgetRegInfo reg = mapInfoControls.registerSideWidgetInternal(widget, drawableMenu, message, key, left, priorityOrder);
 		updateReg(calculateTextState(), reg);
 		return reg;
@@ -137,7 +137,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	public <T extends TextInfoWidget> T getSideWidget(Class<T> cl) {
 		return mapInfoControls.getSideWidget(cl);
 	}
-	
+
 	public void removeSideWidget(TextInfoWidget widget) {
 		mapInfoControls.removeSideWidgetInternal(widget);
 	}
@@ -167,7 +167,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		return topToolbarView != null && topToolbarView.isTopToolbarViewVisible();
 	}
 
-	public void registerAllControls(){
+	public void registerAllControls() {
 		rulerWidgets = new ArrayList<>();
 		RouteInfoWidgetsFactory ric = new RouteInfoWidgetsFactory();
 		MapInfoWidgetsFactory mic = new MapInfoWidgetsFactory();
@@ -198,7 +198,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		NextTurnWidget smallInfoControl = ric.createNextInfoControl(map, app, true);
 		registerSideWidget(smallInfoControl, R.drawable.ic_action_next_turn, R.string.map_widget_next_turn_small, WIDGET_NEXT_TURN_SMALL, true, 6);
 		NextTurnWidget nextNextInfoControl = ric.createNextNextInfoControl(map, app, true);
-		registerSideWidget(nextNextInfoControl, R.drawable.ic_action_next_turn, R.string.map_widget_next_next_turn, WIDGET_NEXT_NEXT_TURN,true, 7);
+		registerSideWidget(nextNextInfoControl, R.drawable.ic_action_next_turn, R.string.map_widget_next_next_turn, WIDGET_NEXT_NEXT_TURN, true, 7);
 
 		// register right stack
 		// priorityOrder: 10s navigation-related, 20s position-related, 30s recording- and other plugin-related, 40s general device information, 50s debugging-purpose
@@ -222,7 +222,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		TextInfoWidget speed = ric.createSpeedControl(map);
 		registerSideWidget(speed, R.drawable.ic_action_speed, R.string.map_widget_speed, WIDGET_SPEED, false, 20);
 		TextInfoWidget maxspeed = ric.createMaxSpeedControl(map);
-		registerSideWidget(maxspeed, R.drawable.ic_action_speed_limit, R.string.map_widget_max_speed, WIDGET_MAX_SPEED, false,  21);
+		registerSideWidget(maxspeed, R.drawable.ic_action_speed_limit, R.string.map_widget_max_speed, WIDGET_MAX_SPEED, false, 21);
 		TextInfoWidget alt = mic.createAltitudeControl(map);
 		registerSideWidget(alt, R.drawable.ic_action_altitude, R.string.map_widget_altitude, WIDGET_ALTITUDE, false, 23);
 		TextInfoWidget gpsInfo = mic.createGPSInfoControl(map);
@@ -232,8 +232,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 		registerSideWidget(plainTime, R.drawable.ic_action_time, R.string.map_widget_plain_time, WIDGET_PLAIN_TIME, false, 41);
 		TextInfoWidget battery = ric.createBatteryControl(map);
 		registerSideWidget(battery, R.drawable.ic_action_battery, R.string.map_widget_battery, WIDGET_BATTERY, false, 42);
-		TextInfoWidget ruler = mic.createRulerControl(map);
-		registerSideWidget(ruler, new CompassRulerWidgetState(app), WIDGET_RULER, false, 43);
+		TextInfoWidget radiusRuler = mic.createRadiusRulerControl(map);
+		registerSideWidget(radiusRuler, new CompassRulerWidgetState(app), WIDGET_RADIUS_RULER, false, 43);
 	}
 
 	public void recreateControls() {
@@ -245,14 +245,14 @@ public class MapInfoLayer extends OsmandMapLayer {
 		mapInfoControls.populateStackControl(rightStack, settings.getApplicationMode(), false, expanded);
 		rightStack.requestLayout();
 
-		expand.setVisibility(mapInfoControls.hasCollapsibles(settings.getApplicationMode())?
+		expand.setVisibility(mapInfoControls.hasCollapsibles(settings.getApplicationMode()) ?
 				View.VISIBLE : View.GONE);
 		Drawable expandIcon = map.getMyApplication().getUIUtilities().getMapIcon(expanded ? R.drawable.ic_action_arrow_up :
 				R.drawable.ic_action_arrow_down, true);
 		setMapButtonIcon(expand, expandIcon);
 		expand.setContentDescription(map.getString(expanded ? R.string.shared_string_collapse : R.string.access_widget_expand));
 		expand.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				expanded = !expanded;
@@ -298,6 +298,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 
 	private int themeId = -1;
+
 	public void updateColorShadowsOfText() {
 		boolean transparent = view.getSettings().TRANSPARENT_MAP_THEME.get();
 		boolean nightMode = drawSettings != null && drawSettings.isNightMode();
@@ -345,7 +346,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 	private void updateReg(TextState ts, MapWidgetRegInfo reg) {
 		View v = reg.widget != null ? reg.widget.getView().findViewById(R.id.widget_bg) : null;
-		if(v != null) {
+		if (v != null) {
 			v.setBackgroundResource(reg.left ? ts.leftRes : ts.rightRes);
 			reg.widget.updateTextColor(ts.textColor, ts.textShadowColor, ts.textBold, ts.textShadowRadius);
 			reg.widget.updateIconMode(ts.night);
@@ -407,7 +408,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			rulerWidget.updateInfo(tileBox, drawSettings);
 		}
 	}
-	
+
 	@Override
 	public void destroyLayer() {
 	}

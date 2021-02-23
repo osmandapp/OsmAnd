@@ -465,7 +465,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 				bld.setTitle(R.string.profile_alert_delete_title);
 				bld.setMessage(String
 						.format(getString(R.string.profile_alert_delete_msg),
-								profile.getUserProfileName()));
+								profile.toHumanString()));
 				bld.setPositiveButton(R.string.shared_string_delete,
 						new DialogInterface.OnClickListener() {
 							@Override

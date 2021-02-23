@@ -54,7 +54,7 @@ import net.osmand.plus.rastermaps.LayerTransparencySeekbarMode;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.srtmplugin.TerrainMode;
-import net.osmand.plus.views.layers.RulerControlLayer.RulerMode;
+import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.wikipedia.WikiArticleShowImages;
 import net.osmand.render.RenderingRulesStorage;
@@ -507,7 +507,7 @@ public class OsmandSettings {
 	public ApplicationMode getApplicationMode() {
 		return APPLICATION_MODE.get();
 	}
-	
+
 	public boolean hasAvailableApplicationMode() {
 		int currentModeCount = ApplicationMode.values(ctx).size();
 		if (currentModeCount == 0 || currentModeCount == 1 && getApplicationMode() == ApplicationMode.DEFAULT) {
@@ -700,9 +700,9 @@ public class OsmandSettings {
 		return false;
 	}
 
-	public final CommonPreference<RulerMode> RULER_MODE = new EnumStringPreference<>(this, "ruler_mode", RulerMode.FIRST, RulerMode.values()).makeGlobal().makeShared();
-
+	public final CommonPreference<RadiusRulerMode> RADIUS_RULER_MODE = new EnumStringPreference<>(this, "ruler_mode", RadiusRulerMode.FIRST, RadiusRulerMode.values()).makeGlobal().makeShared();
 	public final OsmandPreference<Boolean> SHOW_COMPASS_CONTROL_RULER = new BooleanPreference(this, "show_compass_ruler", true).makeGlobal().makeShared();
+	public final OsmandPreference<Boolean> SHOW_DISTANCE_RULER = new BooleanPreference(this, "show_distance_ruler", false).makeProfile();
 
 	public final CommonPreference<Boolean> SHOW_LINES_TO_FIRST_MARKERS = new BooleanPreference(this, "show_lines_to_first_markers", false).makeProfile();
 	public final CommonPreference<Boolean> SHOW_ARROWS_TO_FIRST_MARKERS = new BooleanPreference(this, "show_arrows_to_first_markers", false).makeProfile();
@@ -1049,7 +1049,7 @@ public class OsmandSettings {
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> ACCESSIBILITY_SMART_AUTOANNOUNCE =
-		new BooleanAccessibilityPreference(this, "accessibility_smart_autoannounce", true).makeProfile();
+			new BooleanAccessibilityPreference(this, "accessibility_smart_autoannounce", true).makeProfile();
 
 	// this value string is synchronized with settings_pref.xml preference name
 	// cache of metrics constants as they are used very often
@@ -1206,6 +1206,7 @@ public class OsmandSettings {
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Boolean> AUTO_ZOOM_MAP = new BooleanPreference(this, "auto_zoom_map_on_off", false).makeProfile().cache();
+
 	{
 		AUTO_ZOOM_MAP.setModeDefaultValue(ApplicationMode.CAR, true);
 		AUTO_ZOOM_MAP.setModeDefaultValue(ApplicationMode.BICYCLE, false);
@@ -1215,6 +1216,7 @@ public class OsmandSettings {
 	public final CommonPreference<AutoZoomMap> AUTO_ZOOM_MAP_SCALE =
 			new EnumStringPreference<AutoZoomMap>(this, "auto_zoom_map_scale", AutoZoomMap.FAR,
 					AutoZoomMap.values()).makeProfile().cache();
+
 	{
 		AUTO_ZOOM_MAP_SCALE.setModeDefaultValue(ApplicationMode.CAR, AutoZoomMap.FAR);
 		AUTO_ZOOM_MAP_SCALE.setModeDefaultValue(ApplicationMode.BICYCLE, AutoZoomMap.CLOSE);
@@ -1323,6 +1325,7 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> SPEAK_STREET_NAMES = new BooleanPreference(this, "speak_street_names", true).makeProfile().cache();
 	public final CommonPreference<Boolean> SPEAK_TRAFFIC_WARNINGS = new BooleanPreference(this, "speak_traffic_warnings", true).makeProfile().cache();
+
 	{
 		SPEAK_TRAFFIC_WARNINGS.setModeDefaultValue(ApplicationMode.CAR, true);
 	}
@@ -2064,7 +2067,7 @@ public class OsmandSettings {
 	}
 
 	public void setMapLocationToShow(double latitude, double longitude, int zoom, PointDescription pointDescription,
-	                                 boolean addToHistory, Object toShow) {
+									 boolean addToHistory, Object toShow) {
 		SettingsEditor edit = settingsAPI.edit(globalPreferences);
 		edit.putFloat(MAP_LAT_TO_SHOW, (float) latitude);
 		edit.putFloat(MAP_LON_TO_SHOW, (float) longitude);
@@ -2593,7 +2596,7 @@ public class OsmandSettings {
 
 	public static final String VOICE_PROVIDER_NOT_USE = "VOICE_PROVIDER_NOT_USE";
 
-	public static final String[] TTS_AVAILABLE_VOICES = new String[] {
+	public static final String[] TTS_AVAILABLE_VOICES = new String[]{
 			"de", "en", "es", "fr", "it", "ja", "nl", "pl", "pt", "ru", "zh"
 	};
 	// this value string is synchronized with settings_pref.xml preference name
