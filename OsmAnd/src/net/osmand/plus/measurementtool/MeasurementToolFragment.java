@@ -1338,7 +1338,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 					snapToRoadBtn.setVisibility(View.VISIBLE);
 					profileWithConfig.setVisibility(View.GONE);
 				} else {
-					icon = getIcon(appMode.getIconRes(), appMode.getIconColorInfo().getColor(nightMode));
+					icon = getPaintedContentIcon(appMode.getIconRes(), appMode.getProfileColor(nightMode));
 					snapToRoadBtn.setVisibility(View.GONE);
 					profileWithConfig.setVisibility(View.VISIBLE);
 				}

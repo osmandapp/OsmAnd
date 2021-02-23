@@ -84,8 +84,7 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 			entryValues = new Float[]{9.1f, 18.3f, 30.5f, 45.7f, 91.5f, 183.0f, 482.0f, 965.0f, 1609.0f};
 		}
 
-		final int appModeColorId = appMode.getIconColorInfo().getColor(nightMode);
-		final int appModeColor = ContextCompat.getColor(themedCtx, appModeColorId);
+		final int appModeColor = appMode.getProfileColor(nightMode);
 		final int activeColor = AndroidUtils.resolveAttribute(themedCtx, R.attr.active_color_basic);
 		final int disabledColor = AndroidUtils.resolveAttribute(themedCtx, android.R.attr.textColorSecondary);
 

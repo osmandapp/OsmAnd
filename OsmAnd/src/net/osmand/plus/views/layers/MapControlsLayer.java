@@ -1095,8 +1095,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			transparencyBarLayout.setVisibility(View.GONE);
 		}
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
-		int selectedModeColor = ContextCompat.getColor(app,
-				appMode.getIconColorInfo().getColor(nightMode));
+		int selectedModeColor = appMode.getProfileColor(nightMode);
 		UiUtilities.setupSlider(transparencySlider, nightMode, selectedModeColor);
 	}
 

@@ -473,7 +473,7 @@ public class SRTMPlugin extends OsmandPlugin {
 					possibleValues[j]);
 		}
 
-		int selectedModeColor = ContextCompat.getColor(app, settings.getApplicationMode().getIconColorInfo().getColor(nightMode));
+		int selectedModeColor = settings.getApplicationMode().getProfileColor(nightMode);
 		DialogListItemAdapter dialogAdapter = DialogListItemAdapter.createSingleChoiceAdapter(
 				possibleValuesString, nightMode, i, app, selectedModeColor, themeRes, new View.OnClickListener() {
 

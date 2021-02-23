@@ -172,7 +172,7 @@ public class ConfigureMapMenu {
 	                               final MapActivity activity, final int themeRes, final boolean nightMode) {
 		final OsmandApplication app = activity.getMyApplication();
 		final OsmandSettings settings = app.getSettings();
-		final int selectedProfileColorRes = settings.getApplicationMode().getIconColorInfo().getColor(nightMode);
+		final int selectedProfileColor = settings.getApplicationMode().getProfileColor(nightMode);
 		MapLayerMenuListener l = new MapLayerMenuListener(activity, adapter);
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setId(SHOW_CATEGORY_ID)
@@ -217,7 +217,7 @@ public class ConfigureMapMenu {
 				.setIcon(R.drawable.ic_action_transport_bus)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setSelected(selected)
-				.setColor(selected ? selectedProfileColorRes : ContextMenuItem.INVALID_ID)
+				.setColor(selected ? selectedProfileColor : ContextMenuItem.INVALID_ID)
 				.setListener(l).createItem());
 
 		selected = app.getSelectedGpxHelper().isShowingAnyGpxFiles();
@@ -267,8 +267,7 @@ public class ConfigureMapMenu {
 	                                           final int themeRes, final boolean nightMode) {
 		final OsmandApplication app = activity.getMyApplication();
 		final OsmandSettings settings = app.getSettings();
-		final int selectedProfileColorRes = settings.APPLICATION_MODE.get().getIconColorInfo().getColor(nightMode);
-		final int selectedProfileColor = ContextCompat.getColor(app, selectedProfileColorRes);
+		final int selectedProfileColor = settings.APPLICATION_MODE.get().getProfileColor(nightMode);
 
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_widget_map_rendering, activity)
 				.setId(MAP_RENDERING_CATEGORY_ID)

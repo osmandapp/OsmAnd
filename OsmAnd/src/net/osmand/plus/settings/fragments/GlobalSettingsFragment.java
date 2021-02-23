@@ -142,7 +142,6 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 
 	private void setupDefaultAppModePref() {
 		Preference defaultApplicationMode = (Preference) findPreference(settings.DEFAULT_APPLICATION_MODE.getId());
-		int iconColor = settings.getApplicationMode().getIconColorInfo().getColor(isNightMode());
 		String summary;
 		int iconId;
 		if (settings.USE_LAST_APPLICATION_MODE_BY_DEFAULT.get()) {
@@ -153,7 +152,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 			summary = appMode.toHumanString();
 			iconId = appMode.getIconRes();
 		}
-		defaultApplicationMode.setIcon(getIcon(iconId, iconColor));
+		defaultApplicationMode.setIcon(getPaintedIcon(iconId, settings.getApplicationMode().getProfileColor(isNightMode())));
 		defaultApplicationMode.setSummary(summary);
 	}
 

@@ -1,6 +1,7 @@
 package net.osmand.plus.settings.backend;
 
 import androidx.annotation.DrawableRes;
+import androidx.core.content.ContextCompat;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -461,6 +462,14 @@ public class ApplicationMode {
 
 	public LocationIcon getLocationIcon() {
 		return app.getSettings().LOCATION_ICON.getModeValue(this);
+	}
+
+	public int getProfileColor(boolean nightMode) {
+		int index = getCustomIconColorIndex();
+		if (index == -1) {
+			return ContextCompat.getColor(app, getIconColorInfo().getColor(nightMode));
+		}
+		return Integer.parseInt(getCustomIconColors().get(index));
 	}
 
 	public void setLocationIcon(LocationIcon locationIcon) {

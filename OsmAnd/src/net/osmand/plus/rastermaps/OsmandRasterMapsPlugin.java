@@ -483,7 +483,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 				final boolean[] selected = new boolean[downloaded.size()];
 				boolean nightMode = isNightMode(activity);
 				int themeResId = getThemeRes(activity);
-				int selectedProfileColor = ContextCompat.getColor(app, app.getSettings().getApplicationMode().getIconColorInfo().getColor(nightMode));
+				int selectedProfileColor = app.getSettings().getApplicationMode().getProfileColor(nightMode);
 				DialogListItemAdapter dialogAdapter = DialogListItemAdapter.createMultiChoiceAdapter(names, nightMode, selected, app,
 						selectedProfileColor, themeResId, new View.OnClickListener() {
 							@Override

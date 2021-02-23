@@ -515,8 +515,7 @@ public class MapWidgetRegistry {
 			final boolean selected = r.visibleCollapsed(mode) || r.visible(mode);
 			final String desc = mapActivity.getString(R.string.shared_string_collapse);
 			final boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
-			final int currentModeColorRes = mode.getIconColorInfo().getColor(nightMode);
-			final int currentModeColor = ContextCompat.getColor(app, currentModeColorRes);
+			final int currentModeColor = mode.getProfileColor(nightMode);
 			ContextMenuItem.ItemBuilder itemBuilder = new ContextMenuItem.ItemBuilder()
 					.setIcon(r.getDrawableMenu())
 					.setSelected(selected)
@@ -550,7 +549,7 @@ public class MapWidgetRegistry {
 									final int id = menuItemIds[i];
 									boolean isChecked = id == checkedId;
 									String title = app.getString(titleId);
-									Drawable icon = isChecked && selected ? ic.getIcon(iconId, currentModeColorRes) : ic.getThemedIcon(iconId);
+									Drawable icon = isChecked && selected ? ic.getPaintedIcon(iconId, currentModeColor) : ic.getThemedIcon(iconId);
 									items.add(new PopUpMenuItem.Builder(app)
 											.setTitle(title)
 											.setIcon(icon)

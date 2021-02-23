@@ -106,7 +106,7 @@ public class SnapToRoadBottomSheetDialogFragment extends BottomSheetDialogFragme
 
 		for (int i = 0; i < modes.size(); i++) {
 			ApplicationMode mode = modes.get(i);
-			Drawable icon = app.getUIUtilities().getIcon(mode.getIconRes(), mode.getIconColorInfo().getColor(nightMode));
+			Drawable icon = app.getUIUtilities().getPaintedIcon(mode.getIconRes(), mode.getProfileColor(nightMode));
 			addProfileView(container, onClickListener, i, icon, mode.toHumanString());
 		}
 

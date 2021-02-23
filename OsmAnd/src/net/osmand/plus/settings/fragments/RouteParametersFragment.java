@@ -434,7 +434,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		});
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
 
-		int selectedModeColor = ContextCompat.getColor(app, mode.getIconColorInfo().getColor(nightMode));
+		int selectedModeColor = mode.getProfileColor(nightMode);
 		setupAngleSlider(angleValue, sliderView, nightMode, selectedModeColor);
 		builder.show();
 	}

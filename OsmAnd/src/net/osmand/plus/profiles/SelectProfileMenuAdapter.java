@@ -100,11 +100,10 @@ public class SelectProfileMenuAdapter extends AbstractProfileMenuAdapter<SelectP
 			holder.title.setText(item.toHumanString());
 			holder.descr.setText(ProfileDataUtils.getAppModeDescription(app, item));
 
-			int profileColorResId = item.getIconColorInfo().getColor(nightMode);
-			holder.icon.setImageDrawable(app.getUIUtilities().getIcon(profileColorResId, selectedIconColorRes));
+			int colorNoAlpha = item.getProfileColor(nightMode);
+			holder.icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(selectedIconColorRes, colorNoAlpha));
 			
 			//set up cell color
-			int colorNoAlpha = ContextCompat.getColor(app, profileColorResId);
 			boolean selectedMode = appMode == item;
 			Drawable drawable = UiUtilities.getColoredSelectableDrawable(app, colorNoAlpha, 0.3f);
 

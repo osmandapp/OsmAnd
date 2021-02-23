@@ -67,10 +67,9 @@ public class SelectCopyProfilesMenuAdapter extends AbstractProfileMenuAdapter<Se
 		if (iconRes == 0 || iconRes == -1) {
 			iconRes = R.drawable.ic_action_world_globe;
 		}
-		int iconColor = appMode.getIconColorInfo().getColor(nightMode);
-		holder.icon.setImageDrawable(app.getUIUtilities().getIcon(iconRes, iconColor));
+		int colorNoAlpha = appMode.getProfileColor(nightMode);
 
-		int colorNoAlpha = ContextCompat.getColor(app, iconColor);
+		holder.icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(iconRes, colorNoAlpha));
 		Drawable drawable = UiUtilities.getColoredSelectableDrawable(app, colorNoAlpha, 0.3f);
 
 		if (selected) {

@@ -490,7 +490,7 @@ public class MapActivityLayers {
 		OsmandApplication app = getApplication();
 		boolean nightMode = isNightMode(app);
 		int themeRes = getThemeRes(app);
-		int selectedModeColor = ContextCompat.getColor(app, settings.getApplicationMode().getIconColorInfo().getColor(nightMode));
+		int selectedModeColor = settings.getApplicationMode().getProfileColor(nightMode);
 		DialogListItemAdapter dialogAdapter = DialogListItemAdapter.createSingleChoiceAdapter(
 				items, nightMode, selectedItem, app, selectedModeColor, themeRes, new View.OnClickListener() {
 					@Override

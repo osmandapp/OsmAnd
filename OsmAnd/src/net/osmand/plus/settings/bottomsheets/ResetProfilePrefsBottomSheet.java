@@ -38,8 +38,7 @@ public class ResetProfilePrefsBottomSheet extends BasePreferenceBottomSheet {
 		String title = getString(customProfile ? R.string.restore_all_profile_settings : R.string.reset_all_profile_settings);
 		items.add(new TitleItem(title));
 
-		int profileColor = mode.getIconColorInfo().getColor(nightMode);
-		int colorNoAlpha = ContextCompat.getColor(ctx, profileColor);
+		int colorNoAlpha = mode.getProfileColor(nightMode);
 
 		Drawable backgroundIcon = UiUtilities.getColoredSelectableDrawable(ctx, colorNoAlpha, 0.3f);
 		Drawable[] layers = {new ColorDrawable(UiUtilities.getColorWithAlpha(colorNoAlpha, 0.10f)), backgroundIcon};
