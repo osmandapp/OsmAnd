@@ -156,7 +156,7 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 		});
 
 		updateSearchBarVisibility();
-		populateData();
+		populateData(true);
 	}
 
 	@Override
@@ -249,7 +249,7 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 					invalidateTabAdapters();
 					break;
 				case WikivoyageOptionsBottomSheetDialogFragment.TRAVEL_BOOK_CHANGED:
-					populateData();
+					populateData(true);
 					break;
 			}
 		}
@@ -313,7 +313,7 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 		return ContextCompat.getColor(app, colorId);
 	}
 
-	public void populateData() {
+	public void populateData(final boolean resetData) {
 		switchProgressBarVisibility(true);
 		if (app.isApplicationInitializing()) {
 			final WeakReference<WikivoyageExploreActivity> activityRef = new WeakReference<>(this);
@@ -326,12 +326,12 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 				public void onFinish(AppInitializer init) {
 					WikivoyageExploreActivity activity = activityRef.get();
 					if (AndroidUtils.isActivityNotDestroyed(activity)) {
-						new LoadWikivoyageData(activity,true).execute();
+						new LoadWikivoyageData(activity, resetData).execute();
 					}
 				}
 			});
 		} else {
-			new LoadWikivoyageData(this,true).execute();
+			new LoadWikivoyageData(this, resetData).execute();
 		}
 	}
 
@@ -369,10 +369,6 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 		if (savedArticlesTabFragment != null) {
 			savedArticlesTabFragment.invalidateAdapter();
 		}
-	}
-
-	public void onTabFragmentResume(Fragment fragment) {
-		updateFragments();
 	}
 
 	@Override

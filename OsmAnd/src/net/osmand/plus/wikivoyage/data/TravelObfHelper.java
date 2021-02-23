@@ -943,6 +943,7 @@ public class TravelObfHelper implements TravelHelper {
 			}
 			if (!Algorithms.isEmpty(amenities)) {
 				article = cacheTravelArticles(reader.getFile(), amenities.get(0), lang, readGpx, callback);
+				break;
 			}
 		}
 		return article;
