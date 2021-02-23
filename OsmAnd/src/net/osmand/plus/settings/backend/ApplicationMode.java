@@ -1,5 +1,6 @@
 package net.osmand.plus.settings.backend;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.core.content.ContextCompat;
 
@@ -464,12 +465,14 @@ public class ApplicationMode {
 		return app.getSettings().LOCATION_ICON.getModeValue(this);
 	}
 
+	@ColorInt
 	public int getProfileColor(boolean nightMode) {
 		int index = getCustomIconColorIndex();
-		if (index == -1) {
+		List<String> customColors = getCustomIconColors();
+		if (index < 0 || index >= customColors.size()) {
 			return ContextCompat.getColor(app, getIconColorInfo().getColor(nightMode));
 		}
-		return Integer.parseInt(getCustomIconColors().get(index));
+		return Algorithms.parseColor(customColors.get(index));
 	}
 
 	public void setLocationIcon(LocationIcon locationIcon) {

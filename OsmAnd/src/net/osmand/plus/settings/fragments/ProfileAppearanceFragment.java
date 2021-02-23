@@ -944,7 +944,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 				changedProfile.customColorIndex = -1;
 				changedProfile.color = changedProfile.getProfileColorByColorValue(color);
 			} else {
-				changedProfile.customColorIndex = color;
+				changedProfile.customColorIndex = cardOfColors.getIndexOfSelectedColor();
 				changedProfile.color = null;
 			}
 
@@ -1006,7 +1006,9 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		LocationIcon locationIcon;
 
 		public int getActualColor() {
-			return customColorIndex != -1 ? customColorIndex : ContextCompat.getColor(app, color.getColor(isNightMode()));
+			return customColorIndex != -1 ?
+					Algorithms.parseColor(settings.CUSTOM_ICON_COLORS.getStringsListForProfile(getSelectedAppMode()).get(customColorIndex)) :
+					ContextCompat.getColor(app, color.getColor(isNightMode()));
 		}
 
 		public ProfileIconColors getProfileColorByColorValue(int colorValue) {
