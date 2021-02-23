@@ -749,7 +749,7 @@ public class MapActivityActions implements DialogProvider {
 
 			optionsMenuHelper.addItem(new ItemBuilder().setLayout(R.layout.profile_list_item)
 					.setIcon(appMode.getIconRes())
-					.setColor(appMode.getIconColorInfo().getColor(nightMode))
+					.setColorInt(appMode.getProfileColor(nightMode))
 					.setTag(tag)
 					.setTitle(appMode.toHumanString())
 					.setDescription(modeDescription)
@@ -1059,7 +1059,7 @@ public class MapActivityActions implements DialogProvider {
 				.setId(DRAWER_SWITCH_PROFILE_ID)
 				.setIcon(currentMode.getIconRes())
 				.setSecondaryIcon(icArrowResId)
-				.setColor(currentMode.getIconColorInfo().getColor(nightMode))
+				.setColorInt(currentMode.getProfileColor(nightMode))
 				.setTitle(currentMode.toHumanString())
 				.setDescription(modeDescription)
 				.setListener(new ItemClickListener() {
@@ -1073,7 +1073,7 @@ public class MapActivityActions implements DialogProvider {
 				.createItem());
 		optionsMenuHelper.addItem(new ItemBuilder().setLayout(R.layout.main_menu_drawer_btn_configure_profile)
 				.setId(DRAWER_CONFIGURE_PROFILE_ID)
-				.setColor(currentMode.getIconColorInfo().getColor(nightMode))
+				.setColorInt(currentMode.getProfileColor(nightMode))
 				.setTitle(getString(R.string.configure_profile))
 				.setListener(new ItemClickListener() {
 					@Override

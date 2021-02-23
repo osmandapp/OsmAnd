@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.content.res.AppCompatResources;
@@ -888,7 +889,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		compassHud.updateVisibility(!forceHideCompass && shouldShowCompass());
 
 		ApplicationMode appMode = settings.getApplicationMode();
-		layersHud.setIconColorId(appMode.getIconColorInfo().getColor(isNight));
+		layersHud.setIconColor(appMode.getProfileColor(isNight));
 		if (layersHud.setIconResId(appMode.getIconRes())) {
 			layersHud.update(app, isNight);
 		}
@@ -1114,6 +1115,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 		private int resDarkId;
 		private int resClrLight = R.color.map_button_icon_color_light;
 		private int resClrDark = R.color.map_button_icon_color_dark;
+		@ColorInt
+		private Integer clrIntLight = null;
+		@ColorInt
+		private Integer clrIntDark = null;
 		private String id;
 		private boolean flipIconForRtl;
 
@@ -1222,11 +1227,14 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 
 		public boolean resetIconColors() {
-			if (resClrLight == R.color.map_button_icon_color_light && resClrDark == R.color.map_button_icon_color_dark) {
+			if (resClrLight == R.color.map_button_icon_color_light && resClrDark == R.color.map_button_icon_color_dark
+					&& clrIntLight == null && clrIntDark == null) {
 				return false;
 			}
 			resClrLight = R.color.map_button_icon_color_light;
 			resClrDark = R.color.map_button_icon_color_dark;
+			clrIntLight = null;
+			clrIntDark = null;
 			f = true;
 			return true;
 		}
@@ -1237,6 +1245,16 @@ public class MapControlsLayer extends OsmandMapLayer {
 			}
 			resClrLight = clr;
 			resClrDark = clr;
+			f = true;
+			return this;
+		}
+
+		public MapHudButton setIconColor(@ColorInt Integer clr) {
+			if (clrIntLight == clr && clrIntDark == clr) {
+				return this;
+			}
+			clrIntLight = clr;
+			clrIntDark = clr;
 			f = true;
 			return this;
 		}
@@ -1261,6 +1279,17 @@ public class MapControlsLayer extends OsmandMapLayer {
 			return this;
 		}
 
+		public MapHudButton setIconColor(@ColorInt int clrLight, @ColorInt int clrDark) {
+			if (clrIntLight == clrLight && clrIntDark == clrDark) {
+				return this;
+			}
+			clrIntLight = clrLight;
+			clrIntDark = clrDark;
+			f = true;
+			return this;
+
+		}
+
 		@SuppressLint("NewApi")
 		@SuppressWarnings("deprecation")
 		public void update(OsmandApplication ctx, boolean night) {
@@ -1282,7 +1311,11 @@ public class MapControlsLayer extends OsmandMapLayer {
 			} else if (resLightId != 0 && !nightMode) {
 				d = ctx.getUIUtilities().getIcon(resLightId);
 			} else if (resId != 0) {
-				d = ctx.getUIUtilities().getIcon(resId, nightMode ? resClrDark : resClrLight);
+				if (clrIntLight != null && clrIntDark != null) {
+					d = ctx.getUIUtilities().getPaintedIcon(resId, nightMode ? clrIntDark : clrIntLight);
+				} else {
+					d = ctx.getUIUtilities().getIcon(resId, nightMode ? resClrDark : resClrLight);
+				}
 				if (flipIconForRtl) {
 					d = AndroidUtils.getDrawableForDirection(ctx, d);
 				}

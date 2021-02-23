@@ -11,7 +11,7 @@ public class RoutingProfileDataObject extends ProfileDataObject {
 	private String fileName;
 
 	public RoutingProfileDataObject(String stringKey, String name, String descr,  int iconRes, boolean isSelected, String fileName) {
-		super(name, descr, stringKey, iconRes, isSelected, null);
+		super(name, descr, stringKey, iconRes, isSelected, null, null);
 		this.fileName = fileName;
 	}
 

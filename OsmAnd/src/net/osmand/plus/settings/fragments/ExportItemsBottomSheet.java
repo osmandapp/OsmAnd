@@ -306,7 +306,10 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			}
 			int profileIconRes = AndroidUtils.getDrawableId(app, modeBean.iconName);
 			ProfileIconColors iconColor = modeBean.iconColor;
-			builder.setIcon(uiUtilities.getIcon(profileIconRes, iconColor.getColor(nightMode)));
+			Integer customIconColor = modeBean.customIconColor;
+			int actualIconColor = customIconColor != null ?
+					customIconColor : ContextCompat.getColor(app, iconColor.getColor(nightMode));
+			builder.setIcon(uiUtilities.getPaintedIcon(profileIconRes, actualIconColor));
 		} else if (object instanceof QuickAction) {
 			QuickAction quickAction = (QuickAction) object;
 			builder.setTitle(quickAction.getName(app));

@@ -249,8 +249,7 @@ public class ContextMenuAdapter {
 			final ContextMenuItem item = getItem(position);
 			int layoutId = item.getLayout();
 			layoutId = layoutId != ContextMenuItem.INVALID_ID ? layoutId : DEFAULT_LAYOUT_ID;
-			int currentModeColorRes = app.getSettings().getApplicationMode().getIconColorInfo().getColor(nightMode);
-			int currentModeColor = ContextCompat.getColor(app, currentModeColorRes);
+			int currentModeColor = app.getSettings().getApplicationMode().getProfileColor(nightMode);
 			if (layoutId == R.layout.mode_toggles) {
 				final Set<ApplicationMode> selected = new LinkedHashSet<>();
 				return AppModeDialog.prepareAppModeDrawerView((Activity) getContext(),
@@ -278,15 +277,20 @@ public class ContextMenuAdapter {
 			}
 			if (layoutId == R.layout.main_menu_drawer_btn_switch_profile || 
 					layoutId == R.layout.main_menu_drawer_btn_configure_profile) {
-				int colorResId = item.getColorRes();
-				int colorNoAlpha = ContextCompat.getColor(app, colorResId);
+				int colorNoAlpha;
+				if (item.getColor() != null) {
+					colorNoAlpha = item.getColor();
+				} else {
+					int colorResId = item.getColorRes();
+					colorNoAlpha = ContextCompat.getColor(app, colorResId);
+				}
 				
 				TextView title = convertView.findViewById(R.id.title);
 				title.setText(item.getTitle());
 
 				if (layoutId == R.layout.main_menu_drawer_btn_switch_profile) {
 					ImageView icon = convertView.findViewById(R.id.icon);
-					icon.setImageDrawable(mIconsCache.getIcon(item.getIcon(), colorResId));
+					icon.setImageDrawable(mIconsCache.getPaintedIcon(item.getIcon(), colorNoAlpha));
 					ImageView icArrow = convertView.findViewById(R.id.ic_expand_list);
 					icArrow.setImageDrawable(mIconsCache.getIcon(item.getSecondaryIcon()));
 					TextView desc = convertView.findViewById(R.id.description);
@@ -309,8 +313,13 @@ public class ContextMenuAdapter {
 				
 				int tag = item.getTag();
 
-				int colorResId = item.getColorRes();
-				int colorNoAlpha = ContextCompat.getColor(app, colorResId);
+				int colorNoAlpha;
+				if (item.getColor() != null) {
+					colorNoAlpha = item.getColor();
+				} else {
+					int colorResId = item.getColorRes();
+					colorNoAlpha = ContextCompat.getColor(app, colorResId);
+				}
 				TextView title = convertView.findViewById(R.id.title);
 				TextView desc = convertView.findViewById(R.id.description);
 				ImageView icon = convertView.findViewById(R.id.icon);
@@ -331,7 +340,7 @@ public class ContextMenuAdapter {
 					AndroidUiHelper.updateVisibility(icon, true);
 					AndroidUiHelper.updateVisibility(desc, true);
 					AndroidUtils.setTextPrimaryColor(app, title, nightMode);
-					icon.setImageDrawable(mIconsCache.getIcon(item.getIcon(), colorResId));
+					icon.setImageDrawable(mIconsCache.getPaintedIcon(item.getIcon(), colorNoAlpha));
 					desc.setText(item.getDescription());
 					boolean selectedMode = tag == PROFILES_CHOSEN_PROFILE_TAG;
 					if (selectedMode) {
@@ -420,16 +429,19 @@ public class ContextMenuAdapter {
 			} else {
 				if (item.getIcon() != ContextMenuItem.INVALID_ID) {
 					int colorRes = item.getColorRes();
-					if (colorRes == ContextMenuItem.INVALID_ID) {
-						if (!item.shouldSkipPainting()) {
-							colorRes = lightTheme ? R.color.icon_color_default_light : R.color.icon_color_default_dark;
-						} else {
-							colorRes = 0;
+					Drawable drawable;
+					if (profileDependent) {
+						drawable = mIconsCache.getPaintedIcon(item.getIcon(), currentModeColor);
+					} else {
+						if (colorRes == ContextMenuItem.INVALID_ID) {
+							if (!item.shouldSkipPainting()) {
+								colorRes = lightTheme ? R.color.icon_color_default_light : R.color.icon_color_default_dark;
+							} else {
+								colorRes = 0;
+							}
 						}
-					} else if (profileDependent) {
-						colorRes = currentModeColorRes;
+						drawable = mIconsCache.getIcon(item.getIcon(), colorRes);
 					}
-					final Drawable drawable = mIconsCache.getIcon(item.getIcon(), colorRes);
 					((AppCompatImageView) convertView.findViewById(R.id.icon)).setImageDrawable(drawable);
 					convertView.findViewById(R.id.icon).setVisibility(View.VISIBLE);
 				} else if (convertView.findViewById(R.id.icon) != null) {

@@ -77,11 +77,12 @@ public class SelectMultipleProfilesBottomSheet extends BasePreferenceBottomSheet
 		View itemView = UiUtilities.getInflater(app, nightMode)
 				.inflate(R.layout.bottom_sheet_item_with_descr_and_checkbox_56dp, null);
 
-		int profileColorId = profile.getIconColor(nightMode);
+		int profileColor = profile.getIconColor(nightMode);
 		int activeColorId = nightMode ?
 				R.color.active_color_primary_dark : R.color.active_color_primary_light;
 		int disableColorId = nightMode ?
 				R.color.icon_color_default_dark : R.color.icon_color_default_light;
+		int disableColor = ContextCompat.getColor(app, disableColorId);
 		boolean enable = profile.isEnabled();
 
 		TextView tvTitle = itemView.findViewById(R.id.title);
@@ -97,8 +98,8 @@ public class SelectMultipleProfilesBottomSheet extends BasePreferenceBottomSheet
 			tvDescription.setTextColor(ContextCompat.getColor(app, disableColorId));
 		}
 
-		Drawable drawableIcon = app.getUIUtilities().getIcon(
-				profile.getIconRes(), enable ? profileColorId : disableColorId);
+		Drawable drawableIcon = app.getUIUtilities().getPaintedIcon(
+				profile.getIconRes(), enable ? profileColor : disableColor);
 		ivIcon.setImageDrawable(drawableIcon);
 		UiUtilities.setupCompoundButton(nightMode, ContextCompat.getColor(app,
 				enable ? activeColorId : disableColorId), compoundButton);

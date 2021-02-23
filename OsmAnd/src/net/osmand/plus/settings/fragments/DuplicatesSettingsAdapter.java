@@ -6,7 +6,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import alice.tuprolog.Int;
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.AndroidUtils;
@@ -121,7 +123,10 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 				}
 				int profileIconRes = AndroidUtils.getDrawableId(app, modeBean.iconName);
 				ProfileIconColors iconColor = modeBean.iconColor;
-				itemHolder.icon.setImageDrawable(uiUtilities.getIcon(profileIconRes, iconColor.getColor(nightMode)));
+				Integer customIconColor = modeBean.customIconColor;
+				int actualIconColor = customIconColor != null ?
+						customIconColor : ContextCompat.getColor(app, iconColor.getColor(nightMode));
+				itemHolder.icon.setImageDrawable(uiUtilities.getPaintedIcon(profileIconRes, actualIconColor));
 			} else if (currentItem instanceof QuickAction) {
 				QuickAction action = (QuickAction) currentItem;
 				itemHolder.title.setText(action.getName(app));

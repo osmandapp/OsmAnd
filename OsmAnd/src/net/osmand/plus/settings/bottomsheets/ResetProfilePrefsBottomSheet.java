@@ -45,10 +45,10 @@ public class ResetProfilePrefsBottomSheet extends BasePreferenceBottomSheet {
 
 		BaseBottomSheetItem profileItem = new BottomSheetItemWithCompoundButton.Builder()
 				.setChecked(true)
-				.setCompoundButtonColorId(profileColor)
-				.setButtonTintList(ColorStateList.valueOf(getResolvedColor(profileColor)))
+				.setCompoundButtonColor(colorNoAlpha)
+				.setButtonTintList(ColorStateList.valueOf(colorNoAlpha))
 				.setDescription(ProfileDataUtils.getAppModeDescription(ctx, mode))
-				.setIcon(getIcon(mode.getIconRes(), profileColor))
+				.setIcon(getPaintedIcon(mode.getIconRes(), colorNoAlpha))
 				.setTitle(mode.toHumanString())
 				.setBackground(new LayerDrawable(layers))
 				.setLayoutId(R.layout.preference_profile_item_with_radio_btn)

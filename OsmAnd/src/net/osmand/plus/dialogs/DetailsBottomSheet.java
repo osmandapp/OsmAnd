@@ -98,7 +98,7 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		int selectedProfileColorRes = app.getSettings().APPLICATION_MODE.get().getIconColorInfo().getColor(nightMode);
+		int selectedProfileColor = app.getSettings().APPLICATION_MODE.get().getProfileColor(nightMode);
 		float spacing = getResources().getDimension(R.dimen.line_spacing_extra_description);
 		LinearLayout linearLayout = new LinearLayout(app);
 		linearLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -139,7 +139,7 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 									streetLightsNightPref.set(!onLeftClick);
 								}
 							})
-							.setCompoundButtonColorId(selectedProfileColorRes)
+							.setCompoundButtonColor(selectedProfileColor)
 							.setChecked(pref.get())
 							.setTitle(propertyName)
 							.setIconHidden(true)
@@ -160,7 +160,7 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 				} else if (!STREET_LIGHTING_NIGHT.equals(property.getAttrName())) {
 					final BottomSheetItemWithCompoundButton[] item = new BottomSheetItemWithCompoundButton[1];
 					item[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
-							.setCompoundButtonColorId(selectedProfileColorRes)
+							.setCompoundButtonColor(selectedProfileColor)
 							.setChecked(pref.get())
 							.setTitle(propertyName)
 							.setIconHidden(true)

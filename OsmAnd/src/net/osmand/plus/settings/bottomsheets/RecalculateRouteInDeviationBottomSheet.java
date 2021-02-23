@@ -107,7 +107,7 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 		final BottomSheetItemWithCompoundButton[] preferenceBtn = new BottomSheetItemWithCompoundButton[1];
 		preferenceBtn[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 				.setChecked(enabled)
-				.setCompoundButtonColorId(appModeColorId)
+				.setCompoundButtonColor(appModeColor)
 				.setTitle(enabled ? on : off)
 				.setTitleColorId(enabled ? activeColor : disabledColor)
 				.setCustomView(getCustomButtonView(app, getAppMode(), enabled, nightMode))

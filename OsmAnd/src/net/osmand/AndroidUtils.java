@@ -333,6 +333,43 @@ public class AndroidUtils {
 		);
 	}
 
+	public static ColorStateList createCheckedColorIntStateList(@ColorInt int normal, @ColorInt int checked) {
+		return createCheckedColorIntStateList(false, normal, checked, 0, 0);
+	}
+
+	public static ColorStateList createCheckedColorIntStateList(boolean night,
+															 @ColorInt int lightNormal, @ColorInt int lightChecked,
+															 @ColorInt int darkNormal, @ColorInt int darkChecked) {
+		return createColorIntStateList(night, android.R.attr.state_checked,
+				lightNormal, lightChecked, darkNormal, darkChecked);
+	}
+
+	public static ColorStateList createEnabledColorIntStateList(@ColorInt int normal, @ColorInt int pressed) {
+		return createEnabledColorIntStateList(false, normal, pressed, 0, 0);
+	}
+
+	public static ColorStateList createEnabledColorIntStateList(boolean night,
+															 @ColorInt int lightNormal, @ColorInt int lightPressed,
+															 @ColorInt int darkNormal, @ColorInt int darkPressed) {
+		return createColorIntStateList(night, android.R.attr.state_enabled,
+				lightNormal, lightPressed, darkNormal, darkPressed);
+	}
+
+	private static ColorStateList createColorIntStateList(boolean night, int state,
+													   @ColorInt int lightNormal, @ColorInt int lightState,
+													   @ColorInt int darkNormal, @ColorInt int darkState) {
+		return new ColorStateList(
+				new int[][]{
+						new int[]{state},
+						new int[]{}
+				},
+				new int[]{
+						night ? darkState : lightState,
+						night ? darkNormal : lightNormal
+				}
+		);
+	}
+
 	public static StateListDrawable createCheckedStateListDrawable(Drawable normal, Drawable checked) {
 		return createStateListDrawable(normal, checked, android.R.attr.state_checked);
 	}

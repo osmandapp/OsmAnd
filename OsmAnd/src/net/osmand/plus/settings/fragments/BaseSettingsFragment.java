@@ -680,12 +680,9 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 	@ColorInt
 	protected int getActiveProfileColor() {
-		return ContextCompat.getColor(app, getActiveProfileColorRes());
-	}
-
-	@ColorRes
-	protected int getActiveProfileColorRes() {
-		return isProfileDependent() ? getSelectedAppMode().getIconColorInfo().getColor(isNightMode()) : R.color.icon_color_active_light;
+		return isProfileDependent() ?
+				getSelectedAppMode().getProfileColor(isNightMode()) :
+				ContextCompat.getColor(app, R.color.icon_color_active_light);
 	}
 
 	@ColorRes
@@ -801,7 +798,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 	protected Drawable getActiveIcon(@DrawableRes int id) {
 		UiUtilities cache = getIconsCache();
-		return cache != null ? cache.getIcon(id, getActiveProfileColorRes()) : null;
+		return cache != null ? cache.getPaintedIcon(id, getActiveProfileColor()) : null;
 	}
 
 	protected Drawable getIcon(@DrawableRes int id, @ColorRes int colorId) {
@@ -829,7 +826,8 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		Drawable icon = AndroidUtils.createEnabledStateListDrawable(disabled, enabled);
 
 		if (Build.VERSION.SDK_INT < 21) {
-			ColorStateList colorStateList = AndroidUtils.createEnabledColorStateList(app, R.color.icon_color_default_light, getActiveProfileColorRes());
+			int defaultColor = ContextCompat.getColor(app, R.color.icon_color_default_light);
+			ColorStateList colorStateList = AndroidUtils.createEnabledColorIntStateList(defaultColor, getActiveProfileColor());
 			icon = DrawableCompat.wrap(icon);
 			DrawableCompat.setTintList(icon, colorStateList);
 			return icon;

@@ -21,6 +21,8 @@ public class ContextMenuItem {
 	private int mIcon;
 	@ColorRes
 	private int colorRes;
+	@ColorInt
+	private Integer color;
 	@DrawableRes
 	private int secondaryIcon;
 	private Boolean selected;
@@ -49,6 +51,7 @@ public class ContextMenuItem {
 							String title,
 							@DrawableRes int icon,
 							@ColorRes int colorRes,
+							@ColorInt Integer color,
 							@DrawableRes int secondaryIcon,
 							Boolean selected,
 							int progress,
@@ -73,6 +76,7 @@ public class ContextMenuItem {
 		this.title = title;
 		this.mIcon = icon;
 		this.colorRes = colorRes;
+		this.color = color;
 		this.secondaryIcon = secondaryIcon;
 		this.selected = selected;
 		this.progress = progress;
@@ -112,6 +116,11 @@ public class ContextMenuItem {
 	@ColorRes
 	public int getColorRes() {
 		return colorRes;
+	}
+
+	@ColorInt
+	Integer getColor() {
+		return color;
 	}
 
 	@ColorRes
@@ -270,6 +279,8 @@ public class ContextMenuItem {
 		private int mIcon = INVALID_ID;
 		@ColorRes
 		private int mColorRes = INVALID_ID;
+		@ColorInt
+		private Integer mColor = null;
 		@DrawableRes
 		private int mSecondaryIcon = INVALID_ID;
 		private Boolean mSelected = null;
@@ -309,6 +320,11 @@ public class ContextMenuItem {
 
 		public ItemBuilder setColor(@ColorRes int colorRes) {
 			mColorRes = colorRes;
+			return this;
+		}
+
+		public ItemBuilder setColorInt(@ColorInt int color) {
+			mColor = color;
 			return this;
 		}
 
@@ -422,7 +438,7 @@ public class ContextMenuItem {
 		}
 
 		public ContextMenuItem createItem() {
-			ContextMenuItem item = new ContextMenuItem(mTitleId, mTitle, mIcon, mColorRes, mSecondaryIcon,
+			ContextMenuItem item = new ContextMenuItem(mTitleId, mTitle, mIcon, mColorRes, mColor, mSecondaryIcon,
 					mSelected, mProgress, mLayout, mLoading, mIsCategory, mIsClickable, mSkipPaintingWithoutColor,
 					mOrder, mDescription, mOnUpdateCallback, mItemClickListener, mIntegerListener, mProgressListener,
 					mItemDeleteAction, mHideDivider, mHideCompoundButton, mMinHeight, mTag, mId);

@@ -24,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -94,7 +95,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 	private static final String PROFILE_STRINGKEY_KEY = "profile_stringkey_key";
 	private static final String PROFILE_ICON_RES_KEY = "profile_icon_res_key";
 	private static final String PROFILE_COLOR_KEY = "profile_color_key";
-	private static final String PROFILE_CUSTOM_COLOR_INDEX_KEY = "profile_custom_color_index_key";
+	private static final String PROFILE_CUSTOM_COLOR_KEY = "profile_custom_color_key";
 	private static final String PROFILE_PARENT_KEY = "profile_parent_key";
 	private static final String PROFILE_LOCATION_ICON_KEY = "profile_location_icon_key";
 	private static final String PROFILE_NAVIGATION_ICON_KEY = "profile_navigation_icon_key";
@@ -151,7 +152,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 				changedProfile.name = profile.name;
 			}
 			changedProfile.color = profile.color;
-			changedProfile.customColorIndex = profile.customColorIndex;
+			changedProfile.customColor = profile.customColor;
 			changedProfile.iconRes = profile.iconRes;
 			changedProfile.routingProfile = profile.routingProfile;
 			changedProfile.routeService = profile.routeService;
@@ -171,7 +172,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		profile.parent = baseModeForNewProfile.getParent();
 		profile.name = baseModeForNewProfile.toHumanString();
 		profile.color = baseModeForNewProfile.getIconColorInfo();
-		profile.customColorIndex = baseModeForNewProfile.getCustomIconColorIndex();
+		profile.customColor = baseModeForNewProfile.getCustomIconColor();
 		profile.iconRes = baseModeForNewProfile.getIconRes();
 		profile.routingProfile = baseModeForNewProfile.getRoutingProfile();
 		profile.routeService = baseModeForNewProfile.getRouteService();
@@ -308,7 +309,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		outState.putString(PROFILE_STRINGKEY_KEY, changedProfile.stringKey);
 		outState.putInt(PROFILE_ICON_RES_KEY, changedProfile.iconRes);
 		outState.putSerializable(PROFILE_COLOR_KEY, changedProfile.color);
-		outState.putInt(PROFILE_CUSTOM_COLOR_INDEX_KEY, changedProfile.customColorIndex);
+		outState.putInt(PROFILE_CUSTOM_COLOR_KEY, changedProfile.customColor);
 		if (changedProfile.parent != null) {
 			outState.putString(PROFILE_PARENT_KEY, changedProfile.parent.getStringKey());
 		}
@@ -323,7 +324,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		changedProfile.stringKey = savedInstanceState.getString(PROFILE_STRINGKEY_KEY);
 		changedProfile.iconRes = savedInstanceState.getInt(PROFILE_ICON_RES_KEY);
 		changedProfile.color = (ProfileIconColors) savedInstanceState.getSerializable(PROFILE_COLOR_KEY);
-		changedProfile.customColorIndex = savedInstanceState.getInt(PROFILE_CUSTOM_COLOR_INDEX_KEY);
+		changedProfile.customColor = savedInstanceState.getInt(PROFILE_CUSTOM_COLOR_KEY);
 		String parentStringKey = savedInstanceState.getString(PROFILE_PARENT_KEY);
 		changedProfile.parent = ApplicationMode.valueOfStringKey(parentStringKey, null);
 		isBaseProfileImported = savedInstanceState.getBoolean(IS_BASE_PROFILE_IMPORTED);
@@ -748,7 +749,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 			mode.setRoutingProfile(changedProfile.routingProfile);
 			mode.setRouteService(changedProfile.routeService);
 			mode.setIconColor(changedProfile.color);
-			mode.setCustomIconColorIndex(changedProfile.customColorIndex);
+			mode.setCustomIconColor(changedProfile.customColor);
 			mode.setLocationIcon(changedProfile.locationIcon);
 			mode.setNavigationIcon(changedProfile.navigationIcon);
 
@@ -769,7 +770,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 				.setRoutingProfile(changedProfile.routingProfile)
 				.setRouteService(changedProfile.routeService)
 				.setIconColor(changedProfile.color)
-				.setCustomIconColorIndex(changedProfile.customColorIndex)
+				.setCustomIconColor(changedProfile.customColor)
 				.setLocationIcon(changedProfile.locationIcon)
 				.setNavigationIcon(changedProfile.navigationIcon);
 
@@ -941,10 +942,10 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 
 
 			if (cardOfColors.isBaseColor(color)) {
-				changedProfile.customColorIndex = -1;
+				changedProfile.customColor = null;
 				changedProfile.color = changedProfile.getProfileColorByColorValue(color);
 			} else {
-				changedProfile.customColorIndex = cardOfColors.getIndexOfSelectedColor();
+				changedProfile.customColor = cardOfColors.getSelectedColor();
 				changedProfile.color = null;
 			}
 
@@ -998,17 +999,17 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		ApplicationMode parent = null;
 		String name;
 		ProfileIconColors color;
-		int customColorIndex = -1;
+		Integer customColor = null;
 		int iconRes;
 		String routingProfile;
 		RouteProvider.RouteService routeService;
 		NavigationIcon navigationIcon;
 		LocationIcon locationIcon;
 
+		@ColorInt
 		public int getActualColor() {
-			return customColorIndex != -1 ?
-					Algorithms.parseColor(settings.CUSTOM_ICON_COLORS.getStringsListForProfile(getSelectedAppMode()).get(customColorIndex)) :
-					ContextCompat.getColor(app, color.getColor(isNightMode()));
+			return customColor != null ?
+					customColor : ContextCompat.getColor(app, color.getColor(isNightMode()));
 		}
 
 		public ProfileIconColors getProfileColorByColorValue(int colorValue) {
@@ -1034,7 +1035,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 			if (parent != null ? !parent.equals(that.parent) : that.parent != null) return false;
 			if (name != null ? !name.equals(that.name) : that.name != null) return false;
 			if (color != that.color) return false;
-			if (customColorIndex != that.customColorIndex) return false;
+			if (customColor != null ? !customColor.equals(that.customColor) : that.customColor != null) return false;
 			if (routingProfile != null ? !routingProfile.equals(that.routingProfile) : that.routingProfile != null)
 				return false;
 			if (routeService != that.routeService) return false;
@@ -1048,7 +1049,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 			result = 31 * result + (parent != null ? parent.hashCode() : 0);
 			result = 31 * result + (name != null ? name.hashCode() : 0);
 			result = 31 * result + (color != null ? color.hashCode() : 0);
-			result = 31 * result + customColorIndex;
+			result = 31 * result + (customColor != null ? customColor.hashCode() : 0);
 			result = 31 * result + iconRes;
 			result = 31 * result + (routingProfile != null ? routingProfile.hashCode() : 0);
 			result = 31 * result + (routeService != null ? routeService.hashCode() : 0);
