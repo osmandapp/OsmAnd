@@ -413,7 +413,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 			colorItems.removeAllViews();
 			for (ProfileIconColors color : ProfileIconColors.values()) {
 				View colorItem = createColorItemView(color, colorItems);
-				colorItems.addView(colorItem, new FlowLayout.LayoutParams(0, 0));
+				colorItems.addView(colorItem, new FlowLayout.LayoutParams(0, 0, true));
 			}
 			updateColorSelector(changedProfile.color);
 		} else if (ICON_ITEMS.equals(preference.getKey())) {
@@ -422,7 +422,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 			ArrayList<Integer> icons = ProfileIcons.getIcons();
 			for (int iconRes : icons) {
 				View iconItem = createIconItemView(iconRes, iconItems);
-				iconItems.addView(iconItem, new FlowLayout.LayoutParams(0, 0));
+				iconItems.addView(iconItem, new FlowLayout.LayoutParams(0, 0,true));
 			}
 			setIconColor(changedProfile.iconRes);
 		} else if (LOCATION_ICON_ITEMS.equals(preference.getKey())) {
@@ -430,7 +430,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 			locationIconItems.removeAllViews();
 			for (LocationIcon locationIcon : LocationIcon.values()) {
 				View iconItemView = createLocationIconView(locationIcon, locationIconItems);
-				locationIconItems.addView(iconItemView, new FlowLayout.LayoutParams(0, 0));
+				locationIconItems.addView(iconItemView, new FlowLayout.LayoutParams(0, 0, false));
 			}
 			updateLocationIconSelector(changedProfile.locationIcon);
 		} else if (NAV_ICON_ITEMS.equals(preference.getKey())) {
@@ -438,7 +438,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 			navIconItems.removeAllViews();
 			for (NavigationIcon navigationIcon : NavigationIcon.values()) {
 				View iconItemView = createNavigationIconView(navigationIcon, navIconItems);
-				navIconItems.addView(iconItemView, new FlowLayout.LayoutParams(0, 0));
+				navIconItems.addView(iconItemView, new FlowLayout.LayoutParams(0, 0, false));
 			}
 			updateNavigationIconSelector(changedProfile.navigationIcon);
 		}

@@ -13,8 +13,6 @@ import androidx.core.content.ContextCompat;
 import androidx.core.graphics.ColorUtils;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.material.internal.FlowLayout;
-
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -23,6 +21,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.track.CustomColorBottomSheet.ColorPickerListener;
+import net.osmand.plus.widgets.FlowLayout;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -96,15 +95,15 @@ public class ColorsCard extends BaseCard implements ColorPickerListener {
 		selectColor.removeAllViews();
 
 		for (int color : customColors) {
-			selectColor.addView(createColorItemView(color, selectColor, true));
+			selectColor.addView(createColorItemView(color, selectColor, true), new FlowLayout.LayoutParams(0, 0, true));
 		}
 		if (customColors.size() < 6) {
-			selectColor.addView(createAddCustomColorItemView(selectColor));
+			selectColor.addView(createAddCustomColorItemView(selectColor), new FlowLayout.LayoutParams(0, 0, true));
 		}
-		selectColor.addView(createDividerView(selectColor));
+		selectColor.addView(createDividerView(selectColor), new FlowLayout.LayoutParams(0, 0, false));
 
 		for (int color : colors) {
-			selectColor.addView(createColorItemView(color, selectColor, false));
+			selectColor.addView(createColorItemView(color, selectColor, false), new FlowLayout.LayoutParams(0, 0, true));
 		}
 		updateColorSelector(selectedColor, selectColor);
 	}
@@ -195,7 +194,6 @@ public class ColorsCard extends BaseCard implements ColorPickerListener {
 		LinearLayout dividerContainer = new LinearLayout(view.getContext());
 		dividerContainer.addView(divider);
 		dividerContainer.setPadding(0, AndroidUtils.dpToPx(app, 1), 0, AndroidUtils.dpToPx(app, 5));
-
 		return dividerContainer;
 	}
 

@@ -294,8 +294,8 @@ public class PublicTransportCard extends BaseCard {
 			if (walkingSegment != null) {
 				double walkTime = walkingSegment.getRoutingTime();
 				if (walkTime > MIN_WALK_TIME) {
-					routesBadges.addView(createWalkRouteBadge(walkingSegment, badgesRowClickable), new FlowLayout.LayoutParams(itemsSpacing, itemsSpacing));
-					routesBadges.addView(createArrow(), new FlowLayout.LayoutParams(itemsSpacing, itemsSpacing));
+					routesBadges.addView(createWalkRouteBadge(walkingSegment, badgesRowClickable), new FlowLayout.LayoutParams(itemsSpacing, itemsSpacing, false));
+					routesBadges.addView(createArrow(), new FlowLayout.LayoutParams(itemsSpacing, itemsSpacing, false));
 				}
 			} else if (s.walkDist > 0) {
 				double walkTime = getWalkTime(s.walkDist, routeResult.getWalkSpeed());
@@ -307,20 +307,20 @@ public class PublicTransportCard extends BaseCard {
 					} else {
 						start = this.startLocation;
 					}
-					routesBadges.addView(createWalkRouteBadge(walkTime, start, end, badgesRowClickable), new FlowLayout.LayoutParams(itemsSpacing, itemsSpacing));
-					routesBadges.addView(createArrow(), new FlowLayout.LayoutParams(itemsSpacing, itemsSpacing));
+					routesBadges.addView(createWalkRouteBadge(walkTime, start, end, badgesRowClickable), new FlowLayout.LayoutParams(itemsSpacing, itemsSpacing, false));
+					routesBadges.addView(createArrow(), new FlowLayout.LayoutParams(itemsSpacing, itemsSpacing, false));
 				}
 			}
-			routesBadges.addView(createRouteBadge(s, badgesRowClickable), new FlowLayout.LayoutParams(itemsSpacing, itemsSpacing));
+			routesBadges.addView(createRouteBadge(s, badgesRowClickable), new FlowLayout.LayoutParams(itemsSpacing, itemsSpacing, false));
 			if (iterator.hasNext()) {
-				routesBadges.addView(createArrow(), new FlowLayout.LayoutParams(itemsSpacing, itemsSpacing));
+				routesBadges.addView(createArrow(), new FlowLayout.LayoutParams(itemsSpacing, itemsSpacing, false));
 			} else {
 				walkingSegment = transportRoutingHelper.getWalkingRouteSegment(s, null);
 				if (walkingSegment != null) {
 					double walkTime = walkingSegment.getRoutingTime();
 					if (walkTime > MIN_WALK_TIME) {
-						routesBadges.addView(createArrow(), new FlowLayout.LayoutParams(itemsSpacing, itemsSpacing));
-						routesBadges.addView(createWalkRouteBadge(walkingSegment, badgesRowClickable), new FlowLayout.LayoutParams(itemsSpacing, itemsSpacing));
+						routesBadges.addView(createArrow(), new FlowLayout.LayoutParams(itemsSpacing, itemsSpacing, false));
+						routesBadges.addView(createWalkRouteBadge(walkingSegment, badgesRowClickable), new FlowLayout.LayoutParams(itemsSpacing, itemsSpacing, false));
 					}
 				} else {
 					double finishWalkDist = routeResult.getFinishWalkDist();
@@ -329,7 +329,7 @@ public class PublicTransportCard extends BaseCard {
 						if (walkTime > MIN_WALK_TIME) {
 							LatLon start = s.getEnd().getLocation();
 							LatLon end = this.endLocation;
-							routesBadges.addView(createArrow(), new FlowLayout.LayoutParams(itemsSpacing, itemsSpacing));
+							routesBadges.addView(createArrow(), new FlowLayout.LayoutParams(itemsSpacing, itemsSpacing, false));
 							routesBadges.addView(createWalkRouteBadge(walkTime, start, end, badgesRowClickable));
 						}
 					}

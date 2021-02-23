@@ -1,7 +1,6 @@
 package net.osmand.plus.widgets;
 
 import android.content.Context;
-import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,15 +15,17 @@ public class FlowLayout extends ViewGroup {
 
 		final int horizontal_spacing;
 		final int vertical_spacing;
+		final boolean horizontalAutoSpacing;
 
 		/**
 		 * @param horizontal_spacing Pixels between items, horizontally
 		 * @param vertical_spacing   Pixels between items, vertically
 		 */
-		public LayoutParams(int horizontal_spacing, int vertical_spacing) {
+		public LayoutParams(int horizontal_spacing, int vertical_spacing, boolean horizontalAutoSpacing) {
 			super(0, 0);
 			this.horizontal_spacing = horizontal_spacing;
 			this.vertical_spacing = vertical_spacing;
+			this.horizontalAutoSpacing = horizontalAutoSpacing;
 		}
 	}
 
@@ -38,43 +39,44 @@ public class FlowLayout extends ViewGroup {
 
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-		if ((MeasureSpec.getMode(widthMeasureSpec) == MeasureSpec.UNSPECIFIED)) throw new AssertionError();
+		if ((MeasureSpec.getMode(widthMeasureSpec) == MeasureSpec.UNSPECIFIED))
+			throw new AssertionError();
 
 		final int width = MeasureSpec.getSize(widthMeasureSpec) - getPaddingLeft() - getPaddingRight();
 		int height = MeasureSpec.getSize(heightMeasureSpec) - getPaddingTop() - getPaddingBottom();
 		final int count = getChildCount();
 		int line_height = 0;
-		int xpos = getPaddingLeft();
-		int ypos = getPaddingTop();
-		int childHeightMeasureSpec;
+		int horizontalPosition = getPaddingLeft();
+		int verticalPosition = getPaddingTop();
+		int childHeighteightMeasureSpec;
 
 		if (MeasureSpec.getMode(heightMeasureSpec) == MeasureSpec.AT_MOST) {
-			childHeightMeasureSpec = MeasureSpec.makeMeasureSpec(height, MeasureSpec.AT_MOST);
+			childHeighteightMeasureSpec = MeasureSpec.makeMeasureSpec(height, MeasureSpec.AT_MOST);
 		} else {
-			childHeightMeasureSpec = MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED);
+			childHeighteightMeasureSpec = MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED);
 		}
 
 		for (int i = 0; i < count; i++) {
 			final View child = getChildAt(i);
 			if (child.getVisibility() != GONE) {
 				final LayoutParams lp = (LayoutParams) child.getLayoutParams();
-				child.measure(MeasureSpec.makeMeasureSpec(width, MeasureSpec.AT_MOST), childHeightMeasureSpec);
-				final int childw = child.getMeasuredWidth();
+				child.measure(MeasureSpec.makeMeasureSpec(width, MeasureSpec.AT_MOST), childHeighteightMeasureSpec);
+				final int childWidth = child.getMeasuredWidth();
 				line_height = Math.max(line_height, child.getMeasuredHeight() + lp.vertical_spacing);
-				if (xpos + childw > width) {
-					xpos = getPaddingLeft();
-					ypos += line_height;
+				if (horizontalPosition + childWidth > width) {
+					horizontalPosition = getPaddingLeft();
+					verticalPosition += line_height;
 				}
-				xpos += childw + lp.horizontal_spacing;
+				horizontalPosition += childWidth + lp.horizontal_spacing;
 			}
 		}
 
 		this.line_height = line_height;
 		if (MeasureSpec.getMode(heightMeasureSpec) == MeasureSpec.UNSPECIFIED) {
-			height = ypos + line_height;
+			height = verticalPosition + line_height;
 		} else if (MeasureSpec.getMode(heightMeasureSpec) == MeasureSpec.AT_MOST) {
-			if (ypos + line_height < height) {
-				height = ypos + line_height;
+			if (verticalPosition + line_height < height) {
+				height = verticalPosition + line_height;
 			}
 		}
 		setMeasuredDimension(width, height);
@@ -82,7 +84,7 @@ public class FlowLayout extends ViewGroup {
 
 	@Override
 	protected ViewGroup.LayoutParams generateDefaultLayoutParams() {
-		return new LayoutParams(1, 1); // default of 1px spacing
+		return new LayoutParams(1, 1, false); // default of 1px spacing
 	}
 
 	@Override
@@ -94,29 +96,44 @@ public class FlowLayout extends ViewGroup {
 	protected void onLayout(boolean changed, int l, int t, int r, int b) {
 		final int count = getChildCount();
 		final int width = r - l;
+		int freeSizeSpacing;
 		boolean isLayoutRtl = AndroidUtils.isLayoutRtl(getContext());
-		int xpos = isLayoutRtl ? width - getPaddingRight() : getPaddingLeft();
-		int ypos = getPaddingTop();
+		int horizontalPosition = isLayoutRtl ? width - getPaddingRight() : getPaddingLeft();
+		int verticalPosition = getPaddingTop();
 		for (int i = 0; i < count; i++) {
 			final View child = getChildAt(i);
 			if (child.getVisibility() != GONE) {
-				final int childw = child.getMeasuredWidth();
-				final int childh = child.getMeasuredHeight();
+				final int childWidth = child.getMeasuredWidth();
+				final int childHeight = child.getMeasuredHeight();
 				final LayoutParams lp = (LayoutParams) child.getLayoutParams();
-				if (isLayoutRtl) {
-					if (xpos - childw < l) {
-						xpos = width - getPaddingRight();
-						ypos += line_height;
-					}
-					child.layout(xpos - childw, ypos, xpos, ypos + childh);
-					xpos -= childw + lp.horizontal_spacing;
+				int itemsCount = width / childWidth;
+				if (itemsCount > 1) {
+					freeSizeSpacing = width % childWidth / (itemsCount - 1);
 				} else {
-					if (xpos + childw > width) {
-						xpos = getPaddingLeft();
-						ypos += line_height;
+					freeSizeSpacing = width % childWidth / itemsCount;
+				}
+				if (isLayoutRtl) {
+					if (horizontalPosition - childWidth < l) {
+						horizontalPosition = width - getPaddingRight();
+						verticalPosition += line_height;
 					}
-					child.layout(xpos, ypos, xpos + childw, ypos + childh);
-					xpos += childw + lp.horizontal_spacing;
+					child.layout(horizontalPosition - childWidth, verticalPosition, horizontalPosition, verticalPosition + childHeight);
+					if (lp.horizontalAutoSpacing) {
+						horizontalPosition -= childWidth + lp.horizontal_spacing + freeSizeSpacing;
+					} else {
+						horizontalPosition -= childWidth + lp.horizontal_spacing;
+					}
+				} else {
+					if (horizontalPosition + childWidth > width) {
+						horizontalPosition = getPaddingLeft();
+						verticalPosition += line_height;
+					}
+					child.layout(horizontalPosition, verticalPosition, horizontalPosition + childWidth, verticalPosition + childHeight);
+					if (lp.horizontalAutoSpacing) {
+						horizontalPosition += childWidth + lp.horizontal_spacing + freeSizeSpacing;
+					} else {
+						horizontalPosition += childWidth + lp.horizontal_spacing;
+					}
 				}
 			}
 		}
