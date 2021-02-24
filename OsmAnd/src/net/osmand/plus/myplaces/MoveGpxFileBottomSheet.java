@@ -38,6 +38,7 @@ public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implem
 	public static final String TAG = MoveGpxFileBottomSheet.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(MoveGpxFileBottomSheet.class);
 	private static final String FILE_PATH_KEY = "file_path_key";
+	private static final String SHOW_ALL_FOLDERS_KEY = "show_all_folders_key";
 
 	private OsmandApplication app;
 	private String filePath;
@@ -48,6 +49,7 @@ public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implem
 		app = requiredMyApplication();
 		if (savedInstanceState != null) {
 			filePath = savedInstanceState.getString(FILE_PATH_KEY);
+			showAllFolders = savedInstanceState.getBoolean(SHOW_ALL_FOLDERS_KEY);
 		}
 		if (filePath == null) {
 			return;
@@ -136,6 +138,7 @@ public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implem
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putString(FILE_PATH_KEY, filePath);
+		outState.putBoolean(SHOW_ALL_FOLDERS_KEY, showAllFolders);
 	}
 
 	@Override
