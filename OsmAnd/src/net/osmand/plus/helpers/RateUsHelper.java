@@ -84,10 +84,39 @@ public class RateUsHelper {
 	public static void showRateDialog(FragmentActivity activity) {
 		boolean inAppReviewSupported = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
 		if (inAppReviewSupported) {
-			// TODO
+			showInAppRateDialog(activity);
 		} else {
 			RateUsBottomSheetDialogFragment.showInstance(activity.getSupportFragmentManager());
 		}
+	}
+
+	private static void showInAppRateDialog(final FragmentActivity activity) {
+		final ReviewManager reviewManager = ReviewManagerFactory.create(activity);
+		Task<ReviewInfo> requestReview = reviewManager.requestReviewFlow();
+		requestReview.addOnCompleteListener(new OnCompleteListener<ReviewInfo>() {
+			@Override
+			public void onComplete(@NonNull Task<ReviewInfo> task) {
+				if (task.isSuccessful()) {
+					showInAppRateDialogInternal(reviewManager, activity, task.getResult());
+				} else {
+					log.error(task.getException());
+				}
+			}
+		});
+	}
+
+	private static void showInAppRateDialogInternal(ReviewManager reviewManager, final FragmentActivity activity, ReviewInfo reviewInfo) {
+		Task<Void> reviewFlow = reviewManager.launchReviewFlow(activity, reviewInfo);
+		reviewFlow.addOnCompleteListener(new OnCompleteListener<Void>() {
+			@Override
+			public void onComplete(@NonNull Task<Void> task) {
+				if (task.isSuccessful()) {
+					storeRateResult(activity, RateUsState.IGNORED);
+				} else {
+					log.error(task.getException());
+				}
+			}
+		});
 	}
 
 	public enum RateUsState {
