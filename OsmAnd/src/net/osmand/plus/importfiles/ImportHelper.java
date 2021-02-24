@@ -212,7 +212,7 @@ public class ImportHelper {
 	public static String getNameFromContentUri(OsmandApplication app, Uri contentUri) {
 		try {
 			String name;
-			Cursor returnCursor = app.getContentResolver().query(contentUri, new String[] {OpenableColumns.DISPLAY_NAME}, null, null, null);
+			Cursor returnCursor = app.getContentResolver().query(contentUri, new String[]{OpenableColumns.DISPLAY_NAME}, null, null, null);
 			if (returnCursor != null && returnCursor.moveToFirst()) {
 				int columnIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
 				if (columnIndex != -1) {
@@ -671,7 +671,7 @@ public class ImportHelper {
 	}
 
 	public static List<FavouritePoint> asFavourites(OsmandApplication app, List<WptPt> wptPts, String fileName, boolean forceImportFavourites) {
-		List<FavouritePoint> favourites = new ArrayList<>();
+		final List<FavouritePoint> favourites = new ArrayList<>();
 		for (WptPt p : wptPts) {
 			if (Algorithms.isEmpty(p.name)) {
 				p.name = app.getResources().getString(R.string.shared_string_waypoint);
@@ -687,7 +687,7 @@ public class ImportHelper {
 				} else {
 					fpCat = p.category;
 				}
-				FavouritePoint point = new FavouritePoint(p.lat, p.lon, p.name, fpCat);
+				final FavouritePoint point = new FavouritePoint(p.lat, p.lon, p.name, fpCat, p.ele, p.time);
 				if (p.desc != null) {
 					point.setDescription(p.desc);
 				}
@@ -698,7 +698,17 @@ public class ImportHelper {
 					point.setIconIdFromName(app, iconName);
 				}
 				point.setBackgroundType(BackgroundType.getByTypeName(p.getBackgroundType(), DEFAULT_BACKGROUND_TYPE));
-				favourites.add(point);
+				if (Double.isNaN(p.ele) || p.ele == 0) {
+					point.initAltitude(app, new Runnable() {
+
+						@Override
+						public void run() {
+							favourites.add(point);
+						}
+					});
+				} else {
+					favourites.add(point);
+				}
 			}
 		}
 		return favourites;

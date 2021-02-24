@@ -27,8 +27,8 @@ public class FavoritePointEditor extends PointEditor {
 		return favorite;
 	}
 
-	public void add(LatLon latLon, String title, String address, String originObjectName) {
-		MapActivity mapActivity = getMapActivity();
+	public void add(LatLon latLon, String title, String address, String originObjectName, double altitude, long timestamp) {
+		final MapActivity mapActivity = getMapActivity();
 		if (latLon == null || mapActivity == null) {
 			return;
 		}
@@ -37,15 +37,24 @@ public class FavoritePointEditor extends PointEditor {
 		if (!Algorithms.isEmpty(lastCategory) && !app.getFavorites().groupExists(lastCategory)) {
 			lastCategory = "";
 		}
-		favorite = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), title, lastCategory);
+		favorite = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), title, lastCategory, (float) altitude, timestamp);
 		favorite.setDescription("");
 		favorite.setAddress(address.isEmpty() ? title : address);
 		favorite.setOriginObjectName(originObjectName);
-		FavoritePointEditorFragmentNew.showInstance(mapActivity);
+		if (Double.isNaN(altitude) || altitude == 0) {
+			favorite.initAltitude(app, new Runnable() {
+				@Override
+				public void run() {
+					FavoritePointEditorFragmentNew.showInstance(mapActivity);
+				}
+			});
+		} else {
+			FavoritePointEditorFragmentNew.showInstance(mapActivity);
+		}
 	}
 
-	public void add(LatLon latLon, String title, String originObjectName, String categoryName, int categoryColor, boolean autoFill) {
-		MapActivity mapActivity = getMapActivity();
+	public void add(LatLon latLon, String title, String originObjectName, String categoryName, int categoryColor, final boolean autoFill, double altitude, long timestamp) {
+		final MapActivity mapActivity = getMapActivity();
 		if (latLon == null || mapActivity == null) {
 			return;
 		}
@@ -60,12 +69,20 @@ public class FavoritePointEditor extends PointEditor {
 			categoryName = "";
 		}
 
-		favorite = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), title, categoryName);
+		favorite = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), title, categoryName, (float) altitude, timestamp);
 		favorite.setDescription("");
 		favorite.setAddress("");
 		favorite.setOriginObjectName(originObjectName);
-
-		FavoritePointEditorFragmentNew.showAutoFillInstance(mapActivity, autoFill);
+		if (Double.isNaN(altitude) || altitude == 0) {
+			favorite.initAltitude(app, new Runnable() {
+				@Override
+				public void run() {
+					FavoritePointEditorFragmentNew.showAutoFillInstance(mapActivity, autoFill);
+				}
+			});
+		} else {
+			FavoritePointEditorFragmentNew.showAutoFillInstance(mapActivity, autoFill);
+		}
 	}
 
 	public void edit(FavouritePoint favorite) {
