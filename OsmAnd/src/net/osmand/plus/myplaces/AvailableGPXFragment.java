@@ -780,7 +780,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	private void moveGpx(final GpxInfo info) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
-			MoveGpxFileBottomSheet.showInstance(activity.getSupportFragmentManager(), this, info.file.getAbsolutePath(), false);
+			MoveGpxFileBottomSheet.showInstance(activity.getSupportFragmentManager(), this, info.file.getAbsolutePath(), false, false);
 		}
 	}
 

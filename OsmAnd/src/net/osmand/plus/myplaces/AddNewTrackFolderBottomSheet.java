@@ -51,8 +51,6 @@ public class AddNewTrackFolderBottomSheet extends MenuBottomSheetDialogFragment 
 		app = requiredMyApplication();
 		if (savedInstanceState != null) {
 			folderName = savedInstanceState.getString(FOLDER_NAME_KEY);
-		} else if (Algorithms.isEmpty(folderName)) {
-			folderName = app.getAppPath(IndexConstants.GPX_INDEX_DIR).getName();
 		}
 		items.add(new TitleItem(getString(R.string.add_new_folder)));
 
@@ -92,20 +90,23 @@ public class AddNewTrackFolderBottomSheet extends MenuBottomSheetDialogFragment 
 
 	private void updateFileNameFromEditText(String name) {
 		rightButtonEnabled = false;
-		if (ILLEGAL_PATH_NAME_CHARACTERS.matcher(name).find()) {
-			nameTextBox.setError(getString(R.string.file_name_containes_illegal_char));
-		} else if (Algorithms.isEmpty(name.trim())) {
+		if (Algorithms.isBlank(name)) {
 			nameTextBox.setError(getString(R.string.empty_filename));
 		} else {
-			File destFolder = new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR), name);
-			if (destFolder.exists()) {
-				nameTextBox.setError(getString(R.string.file_with_name_already_exist));
+			if (ILLEGAL_PATH_NAME_CHARACTERS.matcher(name).find()) {
+				nameTextBox.setError(getString(R.string.file_name_containes_illegal_char));
 			} else {
-				nameTextBox.setError(null);
-				folderName = name;
-				rightButtonEnabled = true;
+				File destFolder = new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR), name);
+				if (destFolder.exists()) {
+					nameTextBox.setError(getString(R.string.file_with_name_already_exist));
+				} else {
+					nameTextBox.setError(null);
+					nameTextBox.setErrorEnabled(false);
+					rightButtonEnabled = true;
+				}
 			}
 		}
+		folderName = name;
 		updateBottomButtons();
 	}
 
@@ -119,11 +120,15 @@ public class AddNewTrackFolderBottomSheet extends MenuBottomSheetDialogFragment 
 	protected void onRightBottomButtonClick() {
 		AndroidUtils.hideSoftKeyboard(requireActivity(), editText);
 		Fragment fragment = getTargetFragment();
-		if (fragment instanceof OnTrackFolderAddListener) {
-			OnTrackFolderAddListener listener = (OnTrackFolderAddListener) fragment;
-			listener.onTrackFolderAdd(folderName);
+		if (!Algorithms.isBlank(folderName)) {
+			if (fragment instanceof OnTrackFolderAddListener) {
+				OnTrackFolderAddListener listener = (OnTrackFolderAddListener) fragment;
+				listener.onTrackFolderAdd(folderName);
+			}
+			dismiss();
+		} else {
+			updateFileNameFromEditText(folderName);
 		}
-		dismiss();
 	}
 
 	@Override
@@ -141,12 +146,10 @@ public class AddNewTrackFolderBottomSheet extends MenuBottomSheetDialogFragment 
 		void onTrackFolderAdd(String folderName);
 	}
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable Fragment target,
-									@NonNull String folderName, boolean usedOnMap) {
+	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable Fragment target, boolean usedOnMap) {
 		try {
 			if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(AddNewTrackFolderBottomSheet.TAG) == null) {
 				AddNewTrackFolderBottomSheet fragment = new AddNewTrackFolderBottomSheet();
-				fragment.folderName = folderName;
 				fragment.setUsedOnMap(usedOnMap);
 				fragment.setTargetFragment(target, 0);
 				fragment.show(fragmentManager, AddNewTrackFolderBottomSheet.TAG);
