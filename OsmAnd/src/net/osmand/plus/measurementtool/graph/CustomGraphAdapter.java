@@ -158,6 +158,7 @@ public class CustomGraphAdapter extends BaseGraphAdapter<HorizontalBarChart, Bar
 			Spannable text = getSpanLegend(name, segment, selected);
 			TextView legend = (TextView) view.findViewById(R.id.legend_text);
 			legend.setText(text);
+			AndroidUtils.setTextPrimaryColor(app, legend, isNightMode());
 
 			legendContainer.addView(view);
 		}
