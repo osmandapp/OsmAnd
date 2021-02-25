@@ -24,13 +24,6 @@ import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.multidex.MultiDex;
-import androidx.multidex.MultiDexApplication;
-
 import net.osmand.AndroidUtils;
 import net.osmand.FileUtils;
 import net.osmand.IndexConstants;
@@ -53,7 +46,6 @@ import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPIImpl;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.dialogs.CrashBottomSheetDialogFragment;
-import net.osmand.plus.dialogs.RateUsBottomSheetDialogFragment;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadService;
 import net.osmand.plus.download.IndexItem;
@@ -62,6 +54,7 @@ import net.osmand.plus.helpers.DayNightHelper;
 import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.helpers.LocationServiceHelper;
 import net.osmand.plus.helpers.LockHelper;
+import net.osmand.plus.helpers.RateUsHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.helpers.enums.DrivingRegion;
 import net.osmand.plus.helpers.enums.MetricsConstants;
@@ -106,6 +99,12 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.multidex.MultiDex;
+import androidx.multidex.MultiDexApplication;
 import btools.routingapp.BRouterServiceConnection;
 import btools.routingapp.IBRouterService;
 
@@ -288,8 +287,8 @@ public class OsmandApplication extends MultiDexApplication {
 		if (routingHelper != null) {
 			routingHelper.getVoiceRouter().onApplicationTerminate();
 		}
-        if(RateUsBottomSheetDialogFragment.shouldShow(this)) {
-            osmandSettings.RATE_US_STATE.set(RateUsBottomSheetDialogFragment.RateUsState.IGNORED);
+        if(RateUsHelper.shouldShowRateDialog(this)) {
+            osmandSettings.RATE_US_STATE.set(RateUsHelper.RateUsState.IGNORED);
         }
         getNotificationHelper().removeNotifications(false);
 	}

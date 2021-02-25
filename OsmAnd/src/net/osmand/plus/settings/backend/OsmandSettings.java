@@ -11,10 +11,6 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Environment;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.util.Pair;
-
 import net.osmand.FileUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -35,8 +31,8 @@ import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.api.SettingsAPI.SettingsEditor;
 import net.osmand.plus.api.SettingsAPIImpl;
 import net.osmand.plus.audionotes.NotesSortByMode;
-import net.osmand.plus.dialogs.RateUsBottomSheetDialogFragment.RateUsState;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
+import net.osmand.plus.helpers.RateUsHelper.RateUsState;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.enums.AngularConstants;
 import net.osmand.plus.helpers.enums.AutoZoomMap;
@@ -79,6 +75,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.util.Pair;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONFIGURE_MAP_ITEM_ID_SCHEME;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;

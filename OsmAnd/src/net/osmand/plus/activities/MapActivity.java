@@ -30,21 +30,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.core.app.ActivityCompat;
-import androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback;
-import androidx.core.content.ContextCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentManager.BackStackEntry;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.PreferenceFragmentCompat.OnPreferenceStartFragmentCallback;
-
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.Location;
@@ -87,7 +72,6 @@ import net.osmand.plus.dashboard.DashBaseFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dialogs.CrashBottomSheetDialogFragment;
 import net.osmand.plus.dialogs.ImportGpxBottomSheetDialogFragment;
-import net.osmand.plus.dialogs.RateUsBottomSheetDialogFragment;
 import net.osmand.plus.dialogs.SendAnalyticsBottomSheetDialogFragment;
 import net.osmand.plus.dialogs.WhatsNewDialogFragment;
 import net.osmand.plus.dialogs.XMasDialogFragment;
@@ -102,6 +86,7 @@ import net.osmand.plus.helpers.DiscountHelper;
 import net.osmand.plus.helpers.IntentHelper;
 import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.helpers.LockHelper.LockUIAdapter;
+import net.osmand.plus.helpers.RateUsHelper;
 import net.osmand.plus.helpers.ScrollHelper;
 import net.osmand.plus.helpers.ScrollHelper.OnScrollEventListener;
 import net.osmand.plus.importfiles.ImportHelper;
@@ -169,6 +154,21 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback;
+import androidx.core.content.ContextCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentManager.BackStackEntry;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceFragmentCompat.OnPreferenceStartFragmentCallback;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
 
@@ -731,9 +731,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					if (CrashBottomSheetDialogFragment.shouldShow(settings, this)) {
 						SecondSplashScreenFragment.SHOW = false;
 						CrashBottomSheetDialogFragment.showInstance(getSupportFragmentManager());
-					} else if (RateUsBottomSheetDialogFragment.shouldShow(app)) {
+					} else if (RateUsHelper.shouldShowRateDialog(app)) {
 						SecondSplashScreenFragment.SHOW = false;
-						RateUsBottomSheetDialogFragment.showInstance(getSupportFragmentManager());
+						RateUsHelper.showRateDialog(this);
 					}
 				}
 			} else {
