@@ -39,10 +39,6 @@ class FavoritesImportTask extends BaseLoadAsyncTask<Void, Void, GPXFile> {
 		for (FavouritePoint favourite : favourites) {
 			favoritesHelper.deleteFavourite(favourite, false);
 			favoritesHelper.addFavourite(favourite, false);
-			double alt = favourite.getAltitude();
-			if (Double.isNaN(alt) || alt == 0) {
-				favourite.initAltitude(app);
-			}
 		}
 		favoritesHelper.sortAll();
 		favoritesHelper.saveCurrentPointsIntoFile();

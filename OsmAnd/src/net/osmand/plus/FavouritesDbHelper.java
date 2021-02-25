@@ -361,6 +361,9 @@ public class FavouritesDbHelper {
 	}
 
 	public boolean addFavourite(FavouritePoint p, boolean saveImmediately) {
+		if (p.getAltitude() == 0) {
+			p.initAltitude(context);
+		}
 		if (p.getName().isEmpty() && flatGroups.containsKey(p.getCategory())) {
 			return true;
 		}
@@ -543,6 +546,9 @@ public class FavouritesDbHelper {
 
 	private boolean editFavourite(@NonNull FavouritePoint p, double lat, double lon, @Nullable String description) {
 		cancelAddressRequest(p);
+		if (p.getLatitude() != lat && p.getLongitude() != lon) {
+			p.initAltitude(context);
+		}
 		p.setLatitude(lat);
 		p.setLongitude(lon);
 		if (description != null) {

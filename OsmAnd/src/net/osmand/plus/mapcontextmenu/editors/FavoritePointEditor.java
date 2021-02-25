@@ -41,16 +41,7 @@ public class FavoritePointEditor extends PointEditor {
 		favorite.setDescription("");
 		favorite.setAddress(address.isEmpty() ? title : address);
 		favorite.setOriginObjectName(originObjectName);
-		if (Double.isNaN(altitude) || altitude == 0) {
-			favorite.initAltitude(app, new Runnable() {
-				@Override
-				public void run() {
-					FavoritePointEditorFragmentNew.showInstance(mapActivity);
-				}
-			});
-		} else {
-			FavoritePointEditorFragmentNew.showInstance(mapActivity);
-		}
+		FavoritePointEditorFragmentNew.showInstance(mapActivity);
 	}
 
 	public void add(LatLon latLon, String title, String originObjectName, String categoryName, int categoryColor, final boolean autoFill) {
@@ -73,12 +64,7 @@ public class FavoritePointEditor extends PointEditor {
 		favorite.setDescription("");
 		favorite.setAddress("");
 		favorite.setOriginObjectName(originObjectName);
-		favorite.initAltitude(app, new Runnable() {
-			@Override
-			public void run() {
-				FavoritePointEditorFragmentNew.showAutoFillInstance(mapActivity, autoFill);
-			}
-		});
+		FavoritePointEditorFragmentNew.showAutoFillInstance(mapActivity, autoFill);
 	}
 
 	public void edit(FavouritePoint favorite) {
