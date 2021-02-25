@@ -17,6 +17,8 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 
 import org.apache.commons.logging.Log;
 
+import java.lang.ref.WeakReference;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
@@ -91,14 +93,18 @@ public class RateUsHelper {
 		}
 	}
 
-	private static void showInAppRateDialog(final FragmentActivity activity) {
+	private static void showInAppRateDialog(FragmentActivity activity) {
 		final ReviewManager reviewManager = ReviewManagerFactory.create(activity);
+		final WeakReference<FragmentActivity> activityRef = new WeakReference<>(activity);
 		Task<ReviewInfo> requestReview = reviewManager.requestReviewFlow();
 		requestReview.addOnCompleteListener(new OnCompleteListener<ReviewInfo>() {
 			@Override
 			public void onComplete(@NonNull Task<ReviewInfo> task) {
 				if (task.isSuccessful()) {
-					showInAppRateDialogInternal(reviewManager, activity, task.getResult());
+					FragmentActivity activity = activityRef.get();
+					if (activity != null) {
+						showInAppRateDialogInternal(reviewManager, activity, task.getResult());
+					}
 				} else {
 					log.error(task.getException());
 				}
@@ -106,13 +112,17 @@ public class RateUsHelper {
 		});
 	}
 
-	private static void showInAppRateDialogInternal(ReviewManager reviewManager, final FragmentActivity activity, ReviewInfo reviewInfo) {
+	private static void showInAppRateDialogInternal(ReviewManager reviewManager, FragmentActivity activity, ReviewInfo reviewInfo) {
 		Task<Void> reviewFlow = reviewManager.launchReviewFlow(activity, reviewInfo);
+		final WeakReference<FragmentActivity> activityRef = new WeakReference<>(activity);
 		reviewFlow.addOnCompleteListener(new OnCompleteListener<Void>() {
 			@Override
 			public void onComplete(@NonNull Task<Void> task) {
 				if (task.isSuccessful()) {
-					storeRateResult(activity, RateUsState.IGNORED);
+					FragmentActivity activity = activityRef.get();
+					if (activity != null) {
+						storeRateResult(activity, RateUsState.IGNORED);
+					}
 				} else {
 					log.error(task.getException());
 				}
