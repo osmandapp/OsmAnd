@@ -11,6 +11,7 @@ import com.google.android.play.core.tasks.Task;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.RateUsBottomSheetDialogFragment;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
@@ -81,12 +82,12 @@ public class RateUsHelper {
 		return false;
 	}
 
-	public static void showRateDialog(FragmentActivity activity) {
+	public static void showRateDialog(MapActivity mapActivity) {
 		boolean inAppReviewSupported = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
-		if (inAppReviewSupported) {
-			showInAppRateDialog(activity);
+		if (inAppReviewSupported && Version.isGooglePlayInstalled(mapActivity.getMyApplication())) {
+			showInAppRateDialog(mapActivity);
 		} else {
-			RateUsBottomSheetDialogFragment.showInstance(activity.getSupportFragmentManager());
+			RateUsBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager());
 		}
 	}
 
