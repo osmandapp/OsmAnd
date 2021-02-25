@@ -119,7 +119,7 @@ public class FavoriteAction extends QuickAction {
 		FavoritePointEditor favoritePointEditor = mapActivity.getContextMenu().getFavoritePointEditor();
 		if (favoritePointEditor != null) {
 			favoritePointEditor.add(latLon, title, "", getParams().get(KEY_CATEGORY_NAME),
-					Integer.valueOf(getParams().get(KEY_CATEGORY_COLOR)), autoFill, 0, 0);
+					Integer.valueOf(getParams().get(KEY_CATEGORY_COLOR)), autoFill);
 		}
 	}
 

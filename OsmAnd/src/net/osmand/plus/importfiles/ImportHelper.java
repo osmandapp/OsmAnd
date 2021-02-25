@@ -687,7 +687,7 @@ public class ImportHelper {
 				} else {
 					fpCat = p.category;
 				}
-				final FavouritePoint point = new FavouritePoint(p.lat, p.lon, p.name, fpCat, p.ele, p.time);
+				final FavouritePoint point = new FavouritePoint(p.lat, p.lon, p.name, fpCat, p.ele, 0);
 				if (p.desc != null) {
 					point.setDescription(p.desc);
 				}
@@ -698,17 +698,7 @@ public class ImportHelper {
 					point.setIconIdFromName(app, iconName);
 				}
 				point.setBackgroundType(BackgroundType.getByTypeName(p.getBackgroundType(), DEFAULT_BACKGROUND_TYPE));
-				if (Double.isNaN(p.ele) || p.ele == 0) {
-					point.initAltitude(app, new Runnable() {
-
-						@Override
-						public void run() {
-							favourites.add(point);
-						}
-					});
-				} else {
-					favourites.add(point);
-				}
+				favourites.add(point);
 			}
 		}
 		return favourites;

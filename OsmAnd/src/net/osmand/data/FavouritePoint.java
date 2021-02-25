@@ -59,6 +59,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 			name = "";
 		}
 		this.name = name;
+		timestamp = System.currentTimeMillis();
 		initPersonalType();
 	}
 
@@ -71,7 +72,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		}
 		this.name = name;
 		this.altitude = altitude;
-		this.timestamp = timestamp;
+		this.timestamp = timestamp != 0 ? timestamp : System.currentTimeMillis();
 		initPersonalType();
 	}
 
@@ -102,6 +103,10 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		}
 	}
 
+	public void initAltitude(final OsmandApplication app) {
+		initAltitude(app, null);
+	}
+
 	public void initAltitude(final OsmandApplication app, final Runnable callback) {
 		app.getLocationProvider().getRouteSegment(new Location("", latitude, longitude), null, false, new ResultMatcher<RouteDataObject>() {
 
@@ -110,9 +115,10 @@ public class FavouritePoint implements Serializable, LocationPoint {
 				if (routeDataObject != null) {
 					routeDataObject.calculateHeightArray(new LatLon(latitude, longitude));
 					altitude = routeDataObject.heightByCurrentLocation;
-				} else {
 				}
-				callback.run();
+				if (callback != null) {
+					callback.run();
+				}
 				return true;
 			}
 

@@ -37,7 +37,7 @@ public class FavoritePointEditor extends PointEditor {
 		if (!Algorithms.isEmpty(lastCategory) && !app.getFavorites().groupExists(lastCategory)) {
 			lastCategory = "";
 		}
-		favorite = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), title, lastCategory, (float) altitude, timestamp);
+		favorite = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), title, lastCategory, altitude, timestamp);
 		favorite.setDescription("");
 		favorite.setAddress(address.isEmpty() ? title : address);
 		favorite.setOriginObjectName(originObjectName);
@@ -53,7 +53,7 @@ public class FavoritePointEditor extends PointEditor {
 		}
 	}
 
-	public void add(LatLon latLon, String title, String originObjectName, String categoryName, int categoryColor, final boolean autoFill, double altitude, long timestamp) {
+	public void add(LatLon latLon, String title, String originObjectName, String categoryName, int categoryColor, final boolean autoFill) {
 		final MapActivity mapActivity = getMapActivity();
 		if (latLon == null || mapActivity == null) {
 			return;
@@ -69,20 +69,16 @@ public class FavoritePointEditor extends PointEditor {
 			categoryName = "";
 		}
 
-		favorite = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), title, categoryName, (float) altitude, timestamp);
+		favorite = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), title, categoryName);
 		favorite.setDescription("");
 		favorite.setAddress("");
 		favorite.setOriginObjectName(originObjectName);
-		if (Double.isNaN(altitude) || altitude == 0) {
-			favorite.initAltitude(app, new Runnable() {
-				@Override
-				public void run() {
-					FavoritePointEditorFragmentNew.showAutoFillInstance(mapActivity, autoFill);
-				}
-			});
-		} else {
-			FavoritePointEditorFragmentNew.showAutoFillInstance(mapActivity, autoFill);
-		}
+		favorite.initAltitude(app, new Runnable() {
+			@Override
+			public void run() {
+				FavoritePointEditorFragmentNew.showAutoFillInstance(mapActivity, autoFill);
+			}
+		});
 	}
 
 	public void edit(FavouritePoint favorite) {
