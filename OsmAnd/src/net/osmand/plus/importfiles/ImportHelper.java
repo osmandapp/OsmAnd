@@ -671,7 +671,7 @@ public class ImportHelper {
 	}
 
 	public static List<FavouritePoint> asFavourites(OsmandApplication app, List<WptPt> wptPts, String fileName, boolean forceImportFavourites) {
-		final List<FavouritePoint> favourites = new ArrayList<>();
+		List<FavouritePoint> favourites = new ArrayList<>();
 		for (WptPt p : wptPts) {
 			if (Algorithms.isEmpty(p.name)) {
 				p.name = app.getResources().getString(R.string.shared_string_waypoint);
@@ -687,7 +687,7 @@ public class ImportHelper {
 				} else {
 					fpCat = p.category;
 				}
-				final FavouritePoint point = new FavouritePoint(p.lat, p.lon, p.name, fpCat, p.ele, 0);
+				FavouritePoint point = new FavouritePoint(p.lat, p.lon, p.name, fpCat, p.ele, 0);
 				if (p.desc != null) {
 					point.setDescription(p.desc);
 				}

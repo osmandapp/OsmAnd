@@ -103,30 +103,33 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		}
 	}
 
-	public void initAltitude(final OsmandApplication app) {
+	public void initAltitude(OsmandApplication app) {
 		initAltitude(app, null);
 	}
 
-	public void initAltitude(final OsmandApplication app, final Runnable callback) {
-		app.getLocationProvider().getRouteSegment(new Location("", latitude, longitude), null, false, new ResultMatcher<RouteDataObject>() {
+	public void initAltitude(OsmandApplication app, final Runnable callback) {
+		Location location = new Location("", latitude, longitude);
+		app.getLocationProvider().getRouteSegment(location, null, false,
+				new ResultMatcher<RouteDataObject>() {
 
-			@Override
-			public boolean publish(RouteDataObject routeDataObject) {
-				if (routeDataObject != null) {
-					routeDataObject.calculateHeightArray(new LatLon(latitude, longitude));
-					altitude = routeDataObject.heightByCurrentLocation;
-				}
-				if (callback != null) {
-					callback.run();
-				}
-				return true;
-			}
+					@Override
+					public boolean publish(RouteDataObject routeDataObject) {
+						if (routeDataObject != null) {
+							LatLon latLon = new LatLon(latitude, longitude);
+							routeDataObject.calculateHeightArray(latLon);
+							altitude = routeDataObject.heightByCurrentLocation;
+						}
+						if (callback != null) {
+							callback.run();
+						}
+						return true;
+					}
 
-			@Override
-			public boolean isCancelled() {
-				return false;
-			}
-		});
+					@Override
+					public boolean isCancelled() {
+						return false;
+					}
+				});
 	}
 
 	public SpecialPointType getSpecialPointType() {

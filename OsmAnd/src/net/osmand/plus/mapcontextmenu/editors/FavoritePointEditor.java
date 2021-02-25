@@ -28,7 +28,7 @@ public class FavoritePointEditor extends PointEditor {
 	}
 
 	public void add(LatLon latLon, String title, String address, String originObjectName, double altitude, long timestamp) {
-		final MapActivity mapActivity = getMapActivity();
+		MapActivity mapActivity = getMapActivity();
 		if (latLon == null || mapActivity == null) {
 			return;
 		}
@@ -44,8 +44,8 @@ public class FavoritePointEditor extends PointEditor {
 		FavoritePointEditorFragmentNew.showInstance(mapActivity);
 	}
 
-	public void add(LatLon latLon, String title, String originObjectName, String categoryName, int categoryColor, final boolean autoFill) {
-		final MapActivity mapActivity = getMapActivity();
+	public void add(LatLon latLon, String title, String originObjectName, String categoryName, int categoryColor, boolean autoFill) {
+		MapActivity mapActivity = getMapActivity();
 		if (latLon == null || mapActivity == null) {
 			return;
 		}
