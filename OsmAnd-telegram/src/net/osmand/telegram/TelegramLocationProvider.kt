@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.hardware.*
 import android.location.Location
-import android.os.HandlerThread
+import android.os.Looper
 import android.util.Log
 import com.google.android.gms.location.*
 import net.osmand.PlatformUtil
@@ -43,12 +43,11 @@ class TelegramLocationProvider(private val app: TelegramApplication) : SensorEve
 	var lastKnownLocation: net.osmand.Location? = null
 		private set
 
-	private val locationUpdateHandlerThread = HandlerThread("LocationProviderUpdateHandlerThread")
 	private var fusedLocationProviderClient: FusedLocationProviderClient? = null
 	private val locationRequest = LocationRequest().apply {
 		interval = 1000
-		//fastestInterval = 500
-		maxWaitTime = 0
+		fastestInterval = 500
+		maxWaitTime = 2000
 		priority = LocationRequest.PRIORITY_HIGH_ACCURACY
 	}
 	private val locationCallback = object : LocationCallback() {
@@ -82,10 +81,6 @@ class TelegramLocationProvider(private val app: TelegramApplication) : SensorEve
 		fun updateCompassValue(value: Float)
 	}
 
-	init {
-		locationUpdateHandlerThread.start()
-	}
-
 	@SuppressLint("MissingPermission")
 	fun resumeAllUpdates() {
 		if (AndroidUtils.isLocationPermissionAvailable(app) && fusedLocationProviderClient == null) {
@@ -94,7 +89,7 @@ class TelegramLocationProvider(private val app: TelegramApplication) : SensorEve
 
 		try {
 			fusedLocationProviderClient?.requestLocationUpdates(
-					locationRequest, locationCallback, locationUpdateHandlerThread.looper)
+					locationRequest, locationCallback, Looper.myLooper())
 		} catch (unlikely: SecurityException) {
 			Log.d(PlatformUtil.TAG, "Lost location permissions. Couldn't request updates. $unlikely")
 		}
