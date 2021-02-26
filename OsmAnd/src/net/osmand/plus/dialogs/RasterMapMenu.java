@@ -66,21 +66,29 @@ public class RasterMapMenu {
 
 		final CommonPreference<Boolean> hidePolygonsPref =
 				mapActivity.getMyApplication().getSettings().getCustomRenderBooleanProperty("noPolygons");
+		final CommonPreference<Boolean> hideWaterPolygonsPref =
+				mapActivity.getMyApplication().getSettings().getCustomRenderBooleanProperty("hideWaterPolygons");
+
 
 		String mapTypeDescr = mapTypePreference.get();
 		if (mapTypeDescr!=null && mapTypeDescr.contains(".sqlitedb")) {
 			mapTypeDescr = mapTypeDescr.replaceFirst(".sqlitedb", "");
 		}
 
-		final boolean selected = mapTypeDescr != null;
-		final int toggleActionStringId = selected ? R.string.shared_string_on
+		final boolean mapSelected = mapTypeDescr != null;
+		final int toggleActionStringId = mapSelected ? R.string.shared_string_on
 				: R.string.shared_string_off;
+
+		if (mapSelected && type == RasterMapType.UNDERLAY) {
+			hideWaterPolygonsPref.set(hidePolygonsPref.get());
+		}
 
 		final OnMapSelectedCallback onMapSelectedCallback =
 				new OnMapSelectedCallback() {
 					@Override
 					public void onMapSelected(boolean canceled) {
 						mapActivity.getDashboard().refreshContent(true);
+						hideWaterPolygonsPref.set(hidePolygonsPref.get());
 					}
 				};
 		final MapActivityLayers mapLayers = mapActivity.getMapLayers();
@@ -89,7 +97,7 @@ public class RasterMapMenu {
 			public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter,
 										  View view, int itemId, int pos) {
 				if (itemId == mapTypeString) {
-					if (selected) {
+					if (mapSelected) {
 						plugin.selectMapOverlayLayer(mapActivity.getMapView(), mapTypePreference,
 								exMapTypePreference, true, mapActivity, onMapSelectedCallback);
 					}
@@ -111,6 +119,7 @@ public class RasterMapMenu {
 					});
 				} else if (itemId == R.string.show_polygons) {
 					hidePolygonsPref.set(!isChecked);
+					hideWaterPolygonsPref.set(!isChecked);
 					mapActivity.refreshMapComplete();
 				} else if (itemId == R.string.show_transparency_seekbar) {
 					if (isChecked) {
@@ -126,13 +135,13 @@ public class RasterMapMenu {
 			}
 		};
 
-		mapTypeDescr = selected ? mapTypeDescr : mapActivity.getString(R.string.shared_string_none);
+		mapTypeDescr = mapSelected ? mapTypeDescr : mapActivity.getString(R.string.shared_string_none);
 		contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(toggleActionStringId, mapActivity)
 				.hideDivider(true)
 				.setListener(l)
-				.setSelected(selected).createItem());
-		if (selected) {
+				.setSelected(mapSelected).createItem());
+		if (mapSelected) {
 			contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
 					.setTitleId(mapTypeString, mapActivity)
 					.hideDivider(true)
