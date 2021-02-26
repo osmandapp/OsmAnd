@@ -391,6 +391,7 @@ public class GeneralRouter implements VehicleRouter {
 	
 	private int[] filterDirectionTags(RouteDataObject road, int[] pointTypes, boolean dir) {
 		int wayOppositeDirection = dir ? -1 : 1;
+		String typeRoad = road.getValue("highway");
 		int direction = 0;
 		int tdirection = 0;
 		for (int i = 0; i < pointTypes.length; i++) {
@@ -404,12 +405,14 @@ public class GeneralRouter implements VehicleRouter {
 				tdirection = 1;
 			}
 		}
-		if (direction != 0 || tdirection != 0) {
+		if (direction != 0 || tdirection != 0 || typeRoad.equals("primary")) {
 			TIntArrayList filteredRules = new TIntArrayList();
 			for (int i = 0; i < pointTypes.length; i++) {
 				boolean skip = false;
 				if ((pointTypes[i] == road.region.stopSign || pointTypes[i] == road.region.giveWaySign)
 						&& direction == wayOppositeDirection) {
+					skip = true;
+				} else if (typeRoad.equals("primary") && pointTypes[i] == road.region.stopMinor) {
 					skip = true;
 				} else if (pointTypes[i] == road.region.trafficSignals && tdirection == wayOppositeDirection) {
 					skip = true;

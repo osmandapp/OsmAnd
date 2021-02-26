@@ -303,6 +303,7 @@ public class BinaryMapRouteReaderAdapter {
 		public int directionTrafficSignalsBackward = -1;
 		public int trafficSignals = -1;
 		public int stopSign = -1;
+		public int stopMinor = -1;
 		public int giveWaySign = -1;
 		
 		int nameTypeRule = -1;
@@ -363,9 +364,11 @@ public class BinaryMapRouteReaderAdapter {
 				destinationRefTypeRule = id;
 			} else if (tags.equals("highway") && val.equals("traffic_signals")){
 				trafficSignals = id;
-			} else if (tags.equals("highway") && val.equals("stop")){
+			} else if (tags.equals("stop") && val.equals("minor")) {
+				stopMinor = id;
+			} else if (tags.equals("highway") && val.equals("stop")) {
 				stopSign = id;
-			} else if (tags.equals("highway") && val.equals("give_way")){
+			} else if (tags.equals("highway") && val.equals("give_way")) {
 				giveWaySign = id;
 			} else if (tags.equals("traffic_signals:direction") && val != null){
 				if (val.equals("forward")) {
