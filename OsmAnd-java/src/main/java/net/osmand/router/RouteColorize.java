@@ -1,9 +1,12 @@
 package net.osmand.router;
 
 import net.osmand.GPXUtilities;
+import net.osmand.PlatformUtil;
+import net.osmand.binary.BinaryMapAddressReaderAdapter;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.OsmMapUtils;
 import net.osmand.util.MapUtils;
+import org.apache.commons.logging.Log;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -21,11 +24,13 @@ public class RouteColorize {
 
     private List<Data> dataList;
 
-    public static final int DARK_GREY = -10724260;
-    public static final int LIGHT_GREY = -3618616;
-    public static final int RED = -65279;
-    public static final int GREEN = -1087457024;
-    public static final int YELLOW = -469770750;
+
+
+    public static final int DARK_GREY = rgbaToDecimal(92, 92, 92, 255);
+    public static final int LIGHT_GREY = rgbaToDecimal(200, 200, 200, 255);
+    public static final int RED = rgbaToDecimal(255,1,1,255);
+    public static final int GREEN = rgbaToDecimal(46,185,0,191);
+    public static final int YELLOW = rgbaToDecimal(255,222,2,227);
 
     public enum ValueType {
         ELEVATION,
@@ -45,6 +50,7 @@ public class RouteColorize {
 
     public static int SLOPE_RANGE = 150;
 
+    private static final Log LOG = PlatformUtil.getLog(RouteColorize.class);
 
     /**
      * @param minValue can be NaN
@@ -72,8 +78,10 @@ public class RouteColorize {
      */
     public RouteColorize(int zoom, GPXUtilities.GPXFile gpxFile, ValueType type) {
 
-        if (!gpxFile.hasTrkPt())
+        if (!gpxFile.hasTrkPt()) {
+            LOG.warn("GPX file is not consist of track points");
             return;
+        }
 
         List<Double> latList = new ArrayList<>();
         List<Double> lonList = new ArrayList<>();
@@ -129,7 +137,7 @@ public class RouteColorize {
 
         double[] slopes = new double[elevations.length];
         if (latitudes.length != longitudes.length || latitudes.length != elevations.length) {
-            //System.out.println("Sizes of arrays latitudes, longitudes and values  are not match");
+            LOG.warn("Sizes of arrays latitudes, longitudes and values are not match");
             return slopes;
         }
 
@@ -269,7 +277,7 @@ public class RouteColorize {
 
     private void checkPalette() {
         if (palette == null || palette.length < 2 || palette[0].length < 2 || palette[1].length < 2) {
-            //System.out.println("Fill palette in {{[color][value]},...} format. Will use default palette");
+            LOG.info("Will use default palette");
             palette = new double[3][2];
 
             double[][] defaultPalette = {
@@ -358,7 +366,7 @@ public class RouteColorize {
             double diff = distances[closestMaxIndex] - distances[closestMaxIndex - 1];
             double coef = (maxDist - distances[closestMaxIndex - 1]) / diff;
             if (coef > 1 || coef < 0) {
-                //System.out.println("Coefficient fo max must be 0..1 , coef=" + coef);
+                LOG.warn("Coefficient fo max must be 0..1 , coef=" + coef);
             }
             result[1] = (1 - coef) * elevations[closestMaxIndex - 1] + coef * elevations[closestMaxIndex];
         }
@@ -366,12 +374,12 @@ public class RouteColorize {
             double diff = distances[closestMinIndex + 1] - distances[closestMinIndex];
             double coef = (minDist - distances[closestMinIndex]) / diff;
             if (coef > 1 || coef < 0) {
-                //System.out.println("Coefficient for min must be 0..1 , coef=" + coef);
+                LOG.warn("Coefficient for min must be 0..1 , coef=" + coef);
             }
             result[0] = (1 - coef) * elevations[closestMinIndex] + coef * elevations[closestMinIndex + 1];
         }
         if (Double.isNaN(result[0]) || Double.isNaN(result[1])) {
-            //System.out.println("Elevations wasn't calculated");
+            LOG.warn("Elevations wasn't calculated");
         }
         return result;
     }
@@ -396,6 +404,14 @@ public class RouteColorize {
             result[i] = doubleList.get(i);
         }
         return result;
+    }
+
+    private static int rgbaToDecimal(int r, int g, int b, int a) {
+        int value = ((a & 0xFF) << 24) |
+                ((r & 0xFF) << 16) |
+                ((g & 0xFF) << 8)  |
+                ((b & 0xFF) << 0);
+        return value;
     }
 
     public class Data {
