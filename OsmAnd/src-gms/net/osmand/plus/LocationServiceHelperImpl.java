@@ -13,7 +13,6 @@ import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.Tasks;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.helpers.DayNightHelper;
@@ -22,9 +21,6 @@ import net.osmand.plus.helpers.LocationServiceHelper;
 import org.apache.commons.logging.Log;
 
 import java.util.Collections;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 public class LocationServiceHelperImpl extends LocationServiceHelper {
 

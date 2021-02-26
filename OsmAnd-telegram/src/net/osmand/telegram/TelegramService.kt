@@ -82,11 +82,11 @@ class TelegramService : Service(), TelegramIncomingMessagesListener,
 
 			// Sets the fastest rate for active location updates. This interval is exact, and your
 			// application will never receive updates more frequently than this value.
-			fastestInterval = 500
+			//fastestInterval = 500
 
 			// Sets the maximum time when batched location updates are delivered. Updates may be
 			// delivered sooner than this interval.
-			maxWaitTime = 2000
+			maxWaitTime = 0
 
 			priority = LocationRequest.PRIORITY_HIGH_ACCURACY
 		}

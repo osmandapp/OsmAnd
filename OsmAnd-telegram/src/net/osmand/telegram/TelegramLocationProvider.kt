@@ -46,8 +46,8 @@ class TelegramLocationProvider(private val app: TelegramApplication) : SensorEve
 	private var fusedLocationProviderClient: FusedLocationProviderClient? = null
 	private val locationRequest = LocationRequest().apply {
 		interval = 1000
-		fastestInterval = 500
-		maxWaitTime = 2000
+		//fastestInterval = 500
+		maxWaitTime = 0
 		priority = LocationRequest.PRIORITY_HIGH_ACCURACY
 	}
 	private val locationCallback = object : LocationCallback() {
