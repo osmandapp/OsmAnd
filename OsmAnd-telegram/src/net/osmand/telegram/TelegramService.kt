@@ -38,7 +38,6 @@ class TelegramService : Service(), TelegramIncomingMessagesListener,
 	private var updateWidgetHandler: Handler? = null
 	private var updateWidgetThread = HandlerThread("WidgetUpdateServiceThread")
 
-	private var locationUpdateHandlerThread = HandlerThread("LocationUpdateServiceThread")
 	// FusedLocationProviderClient - Main class for receiving location updates.
 	private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
@@ -63,7 +62,6 @@ class TelegramService : Service(), TelegramIncomingMessagesListener,
 		mHandlerThread.start()
 		tracksHandlerThread.start()
 		updateWidgetThread.start()
-		locationUpdateHandlerThread.start()
 		updateShareInfoHandler = Handler(mHandlerThread.looper)
 		updateTracksHandler = Handler(tracksHandlerThread.looper)
 		updateWidgetHandler = Handler(updateWidgetThread.looper)
@@ -168,7 +166,6 @@ class TelegramService : Service(), TelegramIncomingMessagesListener,
 		tracksHandlerThread.quit()
 		mHandlerThread.quit()
 		updateWidgetThread.quit()
-		locationUpdateHandlerThread.quit()
 		app().showLocationHelper.addOrUpdateStatusWidget(-1, false)
 
 		usedBy = 0
@@ -201,7 +198,7 @@ class TelegramService : Service(), TelegramIncomingMessagesListener,
 		// request location updates
 		try {
 			fusedLocationProviderClient.requestLocationUpdates(
-					locationRequest, locationCallback, locationUpdateHandlerThread.looper)
+					locationRequest, locationCallback, Looper.myLooper())
 		} catch (unlikely: SecurityException) {
 			Toast.makeText(this, R.string.no_location_permission, Toast.LENGTH_LONG).show()
 			Log.d(PlatformUtil.TAG, "Lost location permissions. Couldn't request updates. $unlikely")
