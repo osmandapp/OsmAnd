@@ -2,13 +2,11 @@ package net.osmand.router;
 
 import net.osmand.GPXUtilities;
 import net.osmand.PlatformUtil;
-import net.osmand.binary.BinaryMapAddressReaderAdapter;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.OsmMapUtils;
 import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,9 +20,7 @@ public class RouteColorize {
     public double maxValue;
     public double[][] palette;
 
-    private List<Data> dataList;
-
-
+    private List<RouteColorizationPoint> dataList;
 
     public static final int DARK_GREY = rgbaToDecimal(92, 92, 92, 255);
     public static final int LIGHT_GREY = rgbaToDecimal(200, 200, 200, 255);
@@ -48,7 +44,8 @@ public class RouteColorize {
 
     private ValueType valueType;
 
-    public static int SLOPE_RANGE = 150;
+    public static int SLOPE_RANGE = 150;//150 meters
+    private static final double MIN_DIFFERENCE_SLOPE = 0.05d;//5%
 
     private static final Log LOG = PlatformUtil.getLog(RouteColorize.class);
 
@@ -160,39 +157,39 @@ public class RouteColorize {
         return slopes;
     }
 
-    public List<Data> getResult(boolean simplify) {
-        List<Data> result = new ArrayList<>();
+    public List<RouteColorizationPoint> getResult(boolean simplify) {
+        List<RouteColorizationPoint> result = new ArrayList<>();
         if (simplify) {
             result = simplify();
         } else {
             for (int i = 0; i < latitudes.length; i++) {
-                result.add(new Data(i, latitudes[i], longitudes[i], values[i]));
+                result.add(new RouteColorizationPoint(i, latitudes[i], longitudes[i], values[i]));
             }
         }
-        for (Data data : result) {
+        for (RouteColorizationPoint data : result) {
             data.color = getColorByValue(data.val);
         }
         return result;
     }
 
-    public Color getColorByValue(double value) {
+    public int getColorByValue(double value) {
         if (Double.isNaN(value)) {
             value = (minValue + maxValue) / 2;
         }
         for (int i = 0; i < palette.length - 1; i++) {
             if (value == palette[i][VALUE_INDEX])
-                return new Color((int) palette[i][DECIMAL_COLOR_INDEX]);
+                return (int) palette[i][DECIMAL_COLOR_INDEX];
             if (value >= palette[i][VALUE_INDEX] && value <= palette[i + 1][VALUE_INDEX]) {
-                Color minPaletteColor = new Color((int) palette[i][DECIMAL_COLOR_INDEX]);
-                Color maxPaletteColor = new Color((int) palette[i + 1][DECIMAL_COLOR_INDEX]);
+                int minPaletteColor = (int) palette[i][DECIMAL_COLOR_INDEX];
+                int maxPaletteColor = (int) palette[i + 1][DECIMAL_COLOR_INDEX];
                 double minPaletteValue = palette[i][VALUE_INDEX];
                 double maxPaletteValue = palette[i + 1][VALUE_INDEX];
                 double percent = (value - minPaletteValue) / (maxPaletteValue - minPaletteValue);
-                double resultRed = minPaletteColor.getRed() + percent * (maxPaletteColor.getRed() - minPaletteColor.getRed());
-                double resultGreen = minPaletteColor.getGreen() + percent * (maxPaletteColor.getGreen() - minPaletteColor.getGreen());
-                double resultBlue = minPaletteColor.getBlue() + percent * (maxPaletteColor.getBlue() - minPaletteColor.getBlue());
-                double resultAlpha = minPaletteColor.getAlpha() + percent * (maxPaletteColor.getAlpha() - minPaletteColor.getAlpha());
-                return new Color((int) resultRed, (int) resultGreen, (int) resultBlue, (int) resultAlpha);
+                double resultRed = getRed(minPaletteColor) + percent * (getRed(maxPaletteColor) - getRed(minPaletteColor));
+                double resultGreen = getGreen(minPaletteColor) + percent * (getGreen(maxPaletteColor) - getGreen(minPaletteColor));
+                double resultBlue = getBlue(minPaletteColor) + percent * (getBlue(maxPaletteColor) - getBlue(minPaletteColor));
+                double resultAlpha = getAlpha(minPaletteColor) + percent * (getAlpha(maxPaletteColor) - getAlpha(minPaletteColor));
+                return rgbaToDecimal((int) resultRed, (int) resultGreen, (int) resultBlue, (int) resultAlpha);
             }
         }
         return getDefaultColor();
@@ -204,49 +201,52 @@ public class RouteColorize {
         sortPalette();
     }
 
-    private Color getDefaultColor() {
-        return new Color(0, 0, 0, 0);
+    private int getDefaultColor() {
+        return rgbaToDecimal(0, 0, 0, 0);
     }
 
-    private List<Data> simplify() {
+    private List<RouteColorizationPoint> simplify() {
         if (dataList == null) {
             dataList = new ArrayList<>();
             for (int i = 0; i < latitudes.length; i++) {
                 //System.out.println(latitudes[i] + " " + longitudes[i] + " " + values[i]);
-                dataList.add(new Data(i, latitudes[i], longitudes[i], values[i]));
+                dataList.add(new RouteColorizationPoint(i, latitudes[i], longitudes[i], values[i]));
             }
         }
         List<Node> nodes = new ArrayList<>();
         List<Node> result = new ArrayList<>();
-        for (Data data : dataList) {
+        for (RouteColorizationPoint data : dataList) {
             nodes.add(new net.osmand.osm.edit.Node(data.lat, data.lon, data.id));
         }
         OsmMapUtils.simplifyDouglasPeucker(nodes, zoom + 5, 1, result, true);
 
-        List<Data> simplified = new ArrayList<>();
+        List<RouteColorizationPoint> simplified = new ArrayList<>();
 
         for (int i = 1; i < result.size() - 1; i++) {
             int prevId = (int) result.get(i - 1).getId();
             int currentId = (int) result.get(i).getId();
-            List<Data> sublist = dataList.subList(prevId, currentId);
+            List<RouteColorizationPoint> sublist = dataList.subList(prevId, currentId);
             simplified.addAll(getExtremums(sublist));
         }
         return simplified;
     }
 
-    private List<Data> getExtremums(List<Data> subDataList) {
-        if (subDataList.size() <= 2)
+    private List<RouteColorizationPoint> getExtremums(List<RouteColorizationPoint> subDataList) {
+        if (subDataList.size() <= 2) {
             return subDataList;
+        }
 
-        List<Data> result = new ArrayList<>();
+        List<RouteColorizationPoint> result = new ArrayList<>();
         double min;
         double max;
         min = max = subDataList.get(0).val;
-        for (Data pt : subDataList) {
-            if (min > pt.val)
+        for (RouteColorizationPoint pt : subDataList) {
+            if (min > pt.val) {
                 min = pt.val;
-            if (max < pt.val)
+            }
+            if (max < pt.val) {
                 max = pt.val;
+            }
         }
 
         double diff = max - min;
@@ -256,15 +256,15 @@ public class RouteColorize {
             double prev = subDataList.get(i - 1).val;
             double current = subDataList.get(i).val;
             double next = subDataList.get(i + 1).val;
-            Data currentData = subDataList.get(i);
+            RouteColorizationPoint currentData = subDataList.get(i);
 
             if ((current > prev && current > next) || (current < prev && current < next)
                     || (current < prev && current == next) || (current == prev && current < next)
                     || (current > prev && current == next) || (current == prev && current > next)) {
-                Data prevInResult;
+                RouteColorizationPoint prevInResult;
                 if (result.size() > 0) {
                     prevInResult = result.get(0);
-                    if (prevInResult.val / diff > 0.05d) {// check differences in 5%
+                    if (prevInResult.val / diff > MIN_DIFFERENCE_SLOPE) {
                         result.add(currentData);
                     }
                 } else
@@ -297,11 +297,11 @@ public class RouteColorize {
             if (p.length == 2) {
                 sRGBPalette[i] = p;
             } else if (p.length == 4) {
-                Color color = new Color((int) p[RED_COLOR_INDEX], (int) p[GREEN_COLOR_INDEX], (int) p[BLUE_COLOR_INDEX]);
-                sRGBPalette[i] = new double[]{p[VALUE_INDEX], color.getRGB()};
+                int color = rgbaToDecimal((int) p[RED_COLOR_INDEX], (int) p[GREEN_COLOR_INDEX], (int) p[BLUE_COLOR_INDEX], 255);
+                sRGBPalette[i] = new double[]{p[VALUE_INDEX], color};
             } else if (p.length >= 5) {
-                Color color = new Color((int) p[RED_COLOR_INDEX], (int) p[GREEN_COLOR_INDEX], (int) p[BLUE_COLOR_INDEX], (int) p[ALPHA_COLOR_INDEX]);
-                sRGBPalette[i] = new double[]{p[VALUE_INDEX], color.getRGB()};
+                int color = rgbaToDecimal((int) p[RED_COLOR_INDEX], (int) p[GREEN_COLOR_INDEX], (int) p[BLUE_COLOR_INDEX], (int) p[ALPHA_COLOR_INDEX]);
+                sRGBPalette[i] = new double[]{p[VALUE_INDEX], color};
             }
             if (p[VALUE_INDEX] > max) {
                 max = p[VALUE_INDEX];
@@ -414,14 +414,30 @@ public class RouteColorize {
         return value;
     }
 
-    public class Data {
+    private int getRed(int value) {
+        return (value >> 16) & 0xFF;
+    }
+
+    private int getGreen(int value) {
+        return (value >> 8) & 0xFF;
+    }
+
+    private int getBlue(int value) {
+        return (value >> 0) & 0xFF;
+    }
+
+    private int getAlpha(int value) {
+        return (value >> 24) & 0xff;
+    }
+
+    public static class RouteColorizationPoint {
         int id;
         public double lat;
         public double lon;
         public double val;
-        public Color color;
+        public int color;
 
-        Data(int id, double lat, double lon, double val) {
+        RouteColorizationPoint(int id, double lat, double lon, double val) {
             this.id = id;
             this.lat = lat;
             this.lon = lon;
