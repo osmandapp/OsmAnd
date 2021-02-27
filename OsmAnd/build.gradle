@@ -202,6 +202,6 @@ dependencies {
 
 	huaweiImplementation 'com.huawei.hms:iap:5.0.2.300'
 
-	gplayFreeImplementation 'com.google.android.gms:play-services-location:17.1.0'
-	gplayFullImplementation 'com.google.android.gms:play-services-location:17.1.0'
+	gplayFreeImplementation 'com.google.android.gms:play-services-location:18.0.0'
+	gplayFullImplementation 'com.google.android.gms:play-services-location:18.0.0'
 }
