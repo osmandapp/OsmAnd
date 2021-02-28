@@ -66,7 +66,7 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 				? getString(R.string.shared_string_disabled) : summaryOff.toString();
 		final int activeColor = AndroidUtils.resolveAttribute(themedCtx, R.attr.active_color_basic);
 		final int disabledColor = AndroidUtils.resolveAttribute(themedCtx, android.R.attr.textColorSecondary);
-		boolean checked = isPreferenceChecked(pref, app);
+		boolean checked = switchPreference.isChecked();
 
 		final BottomSheetItemWithCompoundButton[] preferenceBtn = new BottomSheetItemWithCompoundButton[1];
 		preferenceBtn[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
@@ -77,7 +77,7 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						boolean newValue = !isPreferenceChecked(pref, app);
+						boolean newValue = !switchPreference.isChecked();
 						Fragment targetFragment = getTargetFragment();
 						if (targetFragment instanceof OnConfirmPreferenceChange) {
 							ApplyQueryType applyQueryType = getApplyQueryType();
@@ -154,13 +154,6 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 
 	private SwitchPreferenceEx getSwitchPreferenceEx() {
 		return (SwitchPreferenceEx) getPreference();
-	}
-
-	private boolean isPreferenceChecked(BooleanPreference preference, OsmandApplication app) {
-		boolean checked = preference.getModeValue(getAppMode());
-		boolean shouldInvertSetting = app.getSettings().DISABLE_COMPLEX_ROUTING.getId()
-				.equals(preference.getId());
-		return checked != shouldInvertSetting;
 	}
 
 	public static void showInstance(@NonNull FragmentManager fm, String prefId, Fragment target, boolean usedOnMap,
