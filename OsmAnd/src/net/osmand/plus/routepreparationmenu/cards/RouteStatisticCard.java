@@ -79,24 +79,18 @@ public class RouteStatisticCard extends BaseCard {
 		((ImageView) view.findViewById(R.id.time_icon)).setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_time_span));
 
 		int dist = routingHelper.getLeftDistance();
-		int time = routingHelper.getLeftTime();
-		int hours = time / (60 * 60);
-		int minutes = (time / 60) % 60;
-		TextView distanceTv = (TextView) view.findViewById(R.id.distance);
 		String text = OsmAndFormatter.getFormattedDistance(dist, app);
 		SpannableStringBuilder distanceStr = new SpannableStringBuilder(text);
 		int spaceIndex = text.indexOf(" ");
 		if (spaceIndex != -1) {
 			distanceStr.setSpan(new ForegroundColorSpan(getMainFontColor()), 0, spaceIndex, 0);
 		}
+		TextView distanceTv = (TextView) view.findViewById(R.id.distance);
 		distanceTv.setText(distanceStr);
+
+		int time = routingHelper.getLeftTime();
 		SpannableStringBuilder timeStr = new SpannableStringBuilder();
-		if (hours > 0) {
-			timeStr.append(String.valueOf(hours)).append(" ").append(app.getString(R.string.osmand_parking_hour)).append(" ");
-		}
-		if (minutes > 0) {
-			timeStr.append(String.valueOf(minutes)).append(" ").append(app.getString(R.string.osmand_parking_minute));
-		}
+		timeStr.append(OsmAndFormatter.getFormattedDuration(time, app));
 		spaceIndex = timeStr.toString().lastIndexOf(" ");
 		if (spaceIndex != -1) {
 			timeStr.setSpan(new ForegroundColorSpan(getMainFontColor()), 0, spaceIndex, 0);

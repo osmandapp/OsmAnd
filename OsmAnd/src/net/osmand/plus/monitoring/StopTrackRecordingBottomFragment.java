@@ -90,11 +90,11 @@ public class StopTrackRecordingBottomFragment extends MenuBottomSheetDialogFragm
 					@Override
 					public void onClick(View v) {
 						tag = (ItemType) buttonSave.getTag();
-						if (plugin != null && settings.SAVE_GLOBAL_TRACK_TO_GPX.get()) {
+						if (plugin != null && app.getSavingTrackHelper().hasDataToSave()) {
 							plugin.saveCurrentTrack(null, mapActivity);
 							app.getNotificationHelper().refreshNotifications();
+							dismiss();
 						}
-						dismiss();
 					}
 				})
 				.create());
