@@ -79,16 +79,15 @@ public class RasterMapMenu {
 		final int toggleActionStringId = mapSelected ? R.string.shared_string_on
 				: R.string.shared_string_off;
 
-		if (mapSelected && type == RasterMapType.UNDERLAY) {
-			hideWaterPolygonsPref.set(hidePolygonsPref.get());
-		}
-
 		final OnMapSelectedCallback onMapSelectedCallback =
 				new OnMapSelectedCallback() {
 					@Override
 					public void onMapSelected(boolean canceled) {
 						mapActivity.getDashboard().refreshContent(true);
-						hideWaterPolygonsPref.set(hidePolygonsPref.get());
+						boolean refreshToHidePolygons = type == RasterMapType.UNDERLAY;
+						if (refreshToHidePolygons) {
+							mapActivity.refreshMapComplete();
+						}
 					}
 				};
 		final MapActivityLayers mapLayers = mapActivity.getMapLayers();
