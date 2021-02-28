@@ -690,6 +690,10 @@ public abstract class OsmandPlugin {
 		return null;
 	}
 
+	public static <T extends OsmandPlugin> boolean isPluginEnabled(Class<T> clz) {
+		return getEnabledPlugin(clz) != null;
+	}
+
 	public static List<WorldRegion> getCustomDownloadRegions() {
 		List<WorldRegion> l = new ArrayList<>();
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
