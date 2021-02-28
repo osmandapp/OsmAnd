@@ -1005,6 +1005,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 					}
 				}
 			});
+			notifyDataSetChanged();
 		}
 
 		public Set<GpxInfo> getSelectedGpx() {
