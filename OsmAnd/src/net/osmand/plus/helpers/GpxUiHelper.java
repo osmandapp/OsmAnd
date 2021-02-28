@@ -93,7 +93,6 @@ import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.ActivityResultListener.OnActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.PluginsFragment;
-import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter.AppearanceListItem;
 import net.osmand.plus.helpers.enums.MetricsConstants;
@@ -751,13 +750,32 @@ public class GpxUiHelper {
 		gpxDbHelper.updateShowStartFinish(item, showStartFinish);
 	}
 
-	public static void updateGpxInfoView(View v, String itemTitle, GPXInfo info, GpxDataItem dataItem, boolean currentlyRecordingTrack, OsmandApplication app) {
+	public static void updateGpxInfoView(OsmandApplication app,
+	                                     View v,
+	                                     String itemTitle,
+	                                     Drawable iconDrawable,
+	                                     GPXInfo info) {
+		GpxDataItem dataItem = getDataItem(app, info);
+		updateGpxInfoView(v, itemTitle, info, dataItem, false, app);
+		if (iconDrawable != null) {
+			ImageView icon = (ImageView) v.findViewById(R.id.icon);
+			icon.setImageDrawable(iconDrawable);
+			icon.setVisibility(View.VISIBLE);
+		}
+	}
+
+	public static void updateGpxInfoView(View v,
+	                                     String itemTitle,
+	                                     GPXInfo info,
+	                                     GpxDataItem dataItem,
+	                                     boolean currentlyRecordingTrack,
+	                                     OsmandApplication app) {
 		TextView viewName = ((TextView) v.findViewById(R.id.name));
 		viewName.setText(itemTitle.replace("/", " • ").trim());
+		viewName.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 		ImageView icon = (ImageView) v.findViewById(R.id.icon);
 		icon.setVisibility(View.GONE);
 		//icon.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_polygom_dark));
-		viewName.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 
 		GPXTrackAnalysis analysis = null;
 		if (currentlyRecordingTrack) {
@@ -809,9 +827,19 @@ public class GpxUiHelper {
 		}
 
 		TextView descr = ((TextView) v.findViewById(R.id.description));
-		descr.setVisibility(View.GONE);
+		if (descr != null) {
+			descr.setVisibility(View.GONE);
+		}
 
-		v.findViewById(R.id.check_item).setVisibility(View.GONE);
+		View checkbox = v.findViewById(R.id.check_item);
+		if (checkbox != null) {
+			checkbox.setVisibility(View.GONE);
+		}
+	}
+
+	private static GpxDataItem getDataItem(OsmandApplication app, GPXInfo info) {
+		return app.getGpxDbHelper().getItem(
+				new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR), info.getFileName()));
 	}
 
 	@TargetApi(Build.VERSION_CODES.KITKAT)
@@ -884,6 +912,17 @@ public class GpxUiHelper {
 		return list;
 	}
 
+	@Nullable
+	public static GPXInfo getGpxInfoByFileName(@NonNull OsmandApplication app, @NonNull String fileName) {
+		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
+		List<GPXInfo> infoList = getSortedGPXFilesInfo(dir, null, false);
+		for (GPXInfo info : infoList) {
+			if (Algorithms.objectEquals(info.fileName, fileName)) {
+				return info;
+			}
+		}
+		return null;
+	}
 
 	public static List<GPXInfo> getSortedGPXFilesInfo(File dir, final List<String> selectedGpxList, boolean absolutePath) {
 		final List<GPXInfo> list = new ArrayList<>();

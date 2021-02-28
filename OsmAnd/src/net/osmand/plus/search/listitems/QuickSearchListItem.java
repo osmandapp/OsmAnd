@@ -382,6 +382,8 @@ public class QuickSearchListItem {
 			case WPT:
 				WptPt wpt = (WptPt) searchResult.object;
 				return PointImageDrawable.getFromWpt(app, wpt.getColor(), false, wpt);
+			case GPX_TRACK:
+				return getIcon(app, R.drawable.ic_action_polygom_dark);
 			case UNKNOWN_NAME_FILTER:
 				break;
 		}

@@ -30,6 +30,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
 import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
+import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.search.listitems.QuickSearchBannerListItem;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.search.listitems.QuickSearchHeaderListItem;
@@ -225,6 +227,8 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			return bindTopShadowItem(convertView);
 		} else if (type == QuickSearchListItemType.BOTTOM_SHADOW) {
 			return bindBottomShadowItem(convertView);
+		} else if (type == QuickSearchListItemType.GPX_TRACK) {
+			view = bindGpxTrackItem(position, convertView, listItem);
 		} else {
 			view = bindSearchResultItem(position, convertView, listItem);
 		}
@@ -393,6 +397,17 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 
 	private LinearLayout bindBottomShadowItem(@Nullable View convertView) {
 		return getLinearLayout(convertView, R.layout.list_shadow_footer);
+	}
+
+	private LinearLayout bindGpxTrackItem(int position,
+	                                      @Nullable View convertView,
+	                                      @NonNull QuickSearchListItem listItem) {
+		LinearLayout view = getLinearLayout(convertView, R.layout.search_gpx_list_item);
+		SearchResult sr = listItem.getSearchResult();
+		GPXInfo gpxInfo = (GPXInfo) sr.object;
+		setupCheckBox(position, view, listItem);
+		GpxUiHelper.updateGpxInfoView(app, view, sr.localeName, listItem.getIcon(), gpxInfo);
+		return view;
 	}
 
 	private LinearLayout bindSearchResultItem(int position,

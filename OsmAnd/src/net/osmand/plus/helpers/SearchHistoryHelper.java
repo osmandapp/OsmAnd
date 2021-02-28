@@ -16,6 +16,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static net.osmand.data.PointDescription.POINT_TYPE_GPX_FILE;
+
 public class SearchHistoryHelper {
 
 	private static final int HISTORY_LIMIT = 1500;
@@ -38,6 +40,10 @@ public class SearchHistoryHelper {
 			instance = new SearchHistoryHelper(context);
 		}
 		return instance;
+	}
+
+	public void addGpxFileToHistory(String fileName) {
+		addNewItemToHistory(0, 0, new PointDescription(POINT_TYPE_GPX_FILE, fileName));
 	}
 
 	public void addNewItemToHistory(double latitude, double longitude, PointDescription pointDescription) {

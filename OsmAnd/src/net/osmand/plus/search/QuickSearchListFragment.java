@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import net.osmand.GPXUtilities;
+import net.osmand.IndexConstants;
 import net.osmand.data.Amenity;
 import net.osmand.data.City;
 import net.osmand.data.FavouritePoint;
@@ -23,6 +24,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.OsmAndListFragment;
+import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
+import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
 import net.osmand.plus.search.listitems.QuickSearchBottomShadowListItem;
@@ -30,10 +33,12 @@ import net.osmand.plus.search.listitems.QuickSearchButtonListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItemType;
 import net.osmand.plus.search.listitems.QuickSearchTopShadowListItem;
+import net.osmand.plus.track.TrackMenuFragment;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -103,6 +108,11 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 							showResult = true;
 						}
 						dialogFragment.completeQueryWithObject(sr);
+					}
+				} else if (item.getType() == QuickSearchListItemType.GPX_TRACK) {
+					SearchResult sr = item.getSearchResult();
+					if (sr.objectType == ObjectType.GPX_TRACK) {
+						showTrackMenuFragment((GPXInfo) sr.object);
 					}
 				}
 			}
@@ -290,6 +300,17 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 				dialogFragment.reloadHistory();
 			}
 		}
+	}
+
+	private void showTrackMenuFragment(GPXInfo gpxInfo) {
+		OsmandApplication app = getMyApplication();
+		MapActivity mapActivity = getMapActivity();
+		String fileName = gpxInfo.getFileName();
+		SearchHistoryHelper.getInstance(app).addGpxFileToHistory(fileName);
+		File file = new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR), fileName);
+		String path = file.getAbsolutePath();
+		TrackMenuFragment.showInstance(mapActivity, path, false, null, null);
+		dialogFragment.dismiss();
 	}
 
 	public MapActivity getMapActivity() {
