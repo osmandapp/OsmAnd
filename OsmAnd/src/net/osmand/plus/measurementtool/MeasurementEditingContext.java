@@ -1002,6 +1002,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 					pts.add(pt);
 				}
 				calculatedPairs++;
+				params.calculationProgressCallback.updateProgress(0);
 				List<RouteSegmentResult> originalRoute = route.getOriginalRoute();
 				if (Algorithms.isEmpty(originalRoute)) {
 					originalRoute = Collections.singletonList(RoutePlannerFrontEnd.generateStraightLineSegment(
@@ -1011,7 +1012,6 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 				application.runInUIThread(new Runnable() {
 					@Override
 					public void run() {
-						params.calculationProgressCallback.updateProgress(0);
 						updateSegmentsForSnap(true, false);
 						progressListener.refresh();
 						RouteCalculationParams params = getParams(false);

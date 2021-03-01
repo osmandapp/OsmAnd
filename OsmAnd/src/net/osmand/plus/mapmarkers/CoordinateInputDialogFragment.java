@@ -1444,8 +1444,9 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		if (!compassUpdateAllowed) {
 			return;
 		}
-		final OsmandApplication app = getMyApplication();
-		if (app != null && adapter != null) {
+		Activity activity = getActivity();
+		if (activity != null && adapter != null) {
+			OsmandApplication app = (OsmandApplication) activity.getApplication();
 			app.runInUIThread(new Runnable() {
 				@Override
 				public void run() {

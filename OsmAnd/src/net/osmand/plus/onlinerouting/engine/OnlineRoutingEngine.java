@@ -5,24 +5,21 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.Location;
+import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.onlinerouting.EngineParameter;
-import net.osmand.plus.onlinerouting.OnlineRoutingFactory;
 import net.osmand.plus.onlinerouting.VehicleType;
 import net.osmand.plus.routing.RouteDirectionInfo;
-import net.osmand.plus.routing.RouteProvider;
 import net.osmand.util.Algorithms;
 
-import org.json.JSONArray;
+import org.apache.commons.logging.Log;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -33,6 +30,8 @@ import java.util.Set;
 import static net.osmand.util.Algorithms.isEmpty;
 
 public abstract class OnlineRoutingEngine implements Cloneable {
+
+	protected static final Log LOG = PlatformUtil.getLog(OnlineRoutingEngine.class);
 
 	public final static String ONLINE_ROUTING_ENGINE_PREFIX = "online_routing_engine_";
 	public final static VehicleType CUSTOM_VEHICLE = new VehicleType("", R.string.shared_string_custom);
@@ -46,11 +45,17 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 			this.params.putAll(params);
 		}
 		collectAllowedVehiclesInternal();
-		collectAllowedParametersInternal();
+		collectAllowedParameters(allowedParameters);
 	}
 
 	@NonNull
-	public abstract EngineType getType();
+	public abstract OnlineRoutingEngine getType();
+
+	@NonNull
+	public abstract String getTitle();
+
+	@NonNull
+	public abstract String getTypeName();
 
 	@Nullable
 	public String getStringKey() {
@@ -100,45 +105,13 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 	@NonNull
 	public abstract String getStandardUrl();
 
-	public OnlineRoutingResponse parseServerResponse(@NonNull String content,
-	                                                 @NonNull OsmandApplication app,
-	                                                 boolean leftSideNavigation) throws JSONException {
-		JSONObject root = parseRootResponseObject(content);
-		return root != null ? parseServerResponse(root, app, leftSideNavigation) : null;
-	}
-
 	@Nullable
-	protected abstract OnlineRoutingResponse parseServerResponse(@NonNull JSONObject root,
-	                                                             @NonNull OsmandApplication app,
-	                                                             boolean leftSideNavigation) throws JSONException;
+	public abstract OnlineRoutingResponse parseResponse(@NonNull String content,
+	                                                    @NonNull OsmandApplication app,
+	                                                    boolean leftSideNavigation) throws JSONException;
 
-	@Nullable
-	protected JSONObject parseRootResponseObject(@NonNull String content) throws JSONException {
-		JSONObject fullJSON = new JSONObject(content);
-		String responseArrayKey = getRootArrayKey();
-		JSONArray array = null;
-		if (fullJSON.has(responseArrayKey)) {
-			array = fullJSON.getJSONArray(responseArrayKey);
-		}
-		return array != null && array.length() > 0 ? array.getJSONObject(0) : null;
-	}
-
-	@NonNull
-	protected abstract String getRootArrayKey();
-
-	@NonNull
-	protected List<Location> convertRouteToLocationsList(@NonNull List<LatLon> route) {
-		List<Location> result = new ArrayList<>();
-		if (!isEmpty(route)) {
-			for (LatLon pt : route) {
-				WptPt wpt = new WptPt();
-				wpt.lat = pt.getLatitude();
-				wpt.lon = pt.getLongitude();
-				result.add(RouteProvider.createLocation(wpt));
-			}
-		}
-		return result;
-	}
+	public abstract boolean isResultOk(@NonNull StringBuilder errorMessage,
+	                                   @NonNull String content) throws JSONException;
 
 	@NonNull
 	public Map<String, String> getParams() {
@@ -171,21 +144,10 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 		return Collections.unmodifiableList(allowedVehicles);
 	}
 
-	private void collectAllowedParametersInternal() {
-		allowedParameters.clear();
-		allowParameters(EngineParameter.KEY, EngineParameter.VEHICLE_KEY,
-				EngineParameter.CUSTOM_NAME, EngineParameter.NAME_INDEX, EngineParameter.CUSTOM_URL);
-		collectAllowedParameters();
-	}
-
-	protected abstract void collectAllowedParameters();
+	protected abstract void collectAllowedParameters(@NonNull Set<EngineParameter> params);
 
 	public boolean isParameterAllowed(EngineParameter key) {
 		return allowedParameters.contains(key);
-	}
-
-	protected void allowParameters(@NonNull EngineParameter... allowedParams) {
-		allowedParameters.addAll(Arrays.asList(allowedParams));
 	}
 
 	@Nullable
@@ -216,24 +178,10 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 		return CUSTOM_VEHICLE;
 	}
 
-	public boolean checkServerResponse(@NonNull StringBuilder errorMessage,
-	                                   @NonNull String content) throws JSONException {
-		JSONObject obj = new JSONObject(content);
-		String messageKey = getErrorMessageKey();
-		if (obj.has(messageKey)) {
-			String message = obj.getString(messageKey);
-			errorMessage.append(message);
-		}
-		return obj.has(getRootArrayKey());
-	}
-
-	@NonNull
-	protected abstract String getErrorMessageKey();
-
 	@NonNull
 	@Override
 	public Object clone() {
-		return OnlineRoutingFactory.createEngine(getType(), getParams());
+		return newInstance(getParams());
 	}
 
 	@Override
@@ -246,18 +194,28 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 		return Algorithms.objectEquals(getParams(), engine.getParams());
 	}
 
+	public abstract OnlineRoutingEngine newInstance(Map<String, String> params);
+
 	@NonNull
 	public static String generateKey() {
 		return ONLINE_ROUTING_ENGINE_PREFIX + System.currentTimeMillis();
 	}
 
 	public static class OnlineRoutingResponse {
+
 		private List<Location> route;
 		private List<RouteDirectionInfo> directions;
+		private GPXFile gpxFile;
 
+		// constructor for JSON responses
 		public OnlineRoutingResponse(List<Location> route, List<RouteDirectionInfo> directions) {
 			this.route = route;
 			this.directions = directions;
+		}
+
+		// constructor for GPX responses
+		public OnlineRoutingResponse(GPXFile gpxFile) {
+			this.gpxFile = gpxFile;
 		}
 
 		public List<Location> getRoute() {
@@ -267,5 +225,10 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 		public List<RouteDirectionInfo> getDirections() {
 			return directions;
 		}
+
+		public GPXFile getGpxFile() {
+			return gpxFile;
+		}
 	}
+
 }
