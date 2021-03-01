@@ -112,34 +112,38 @@ public class FlowLayout extends ViewGroup {
 				} else {
 					freeSizeSpacing = width % childWidth / itemsCount;
 				}
-				if (isLayoutRtl && lp.isHorizontalAutoSpacing) {
-					if (horizontalPosition - childWidth < getPaddingLeft()) {
-						horizontalPosition = width - getPaddingRight();
-						verticalPosition += line_height;
+				if (lp.isHorizontalAutoSpacing) {
+					if (isLayoutRtl) {
+						if (horizontalPosition - childWidth < getPaddingLeft()) {
+							horizontalPosition = width - getPaddingRight();
+							verticalPosition += line_height;
+						}
+						child.layout(horizontalPosition - childWidth, verticalPosition, horizontalPosition, verticalPosition + childHeight);
+						horizontalPosition -= childWidth + lp.horizontal_spacing + freeSizeSpacing;
+					} else {
+						if (horizontalPosition + childWidth > width) {
+							horizontalPosition = getPaddingLeft();
+							verticalPosition += line_height;
+						}
+						child.layout(horizontalPosition, verticalPosition, horizontalPosition + childWidth, verticalPosition + childHeight);
+						horizontalPosition += childWidth + lp.horizontal_spacing + freeSizeSpacing;
 					}
-					child.layout(horizontalPosition - childWidth, verticalPosition, horizontalPosition, verticalPosition + childHeight);
-					horizontalPosition -= childWidth + lp.horizontal_spacing + freeSizeSpacing;
-				} else if (isLayoutRtl) {
-					if (horizontalPosition - childWidth < l) {
-						horizontalPosition = width - getPaddingRight();
-						verticalPosition += line_height;
-					}
-					child.layout(horizontalPosition - childWidth, verticalPosition, horizontalPosition, verticalPosition + childHeight);
-					horizontalPosition -= childWidth + lp.horizontal_spacing;
-				} else if (!lp.isHorizontalAutoSpacing) {
-					if (horizontalPosition + childWidth > width) {
-						horizontalPosition = getPaddingLeft();
-						verticalPosition += line_height;
-					}
-					child.layout(horizontalPosition, verticalPosition, horizontalPosition + childWidth, verticalPosition + childHeight);
-					horizontalPosition += childWidth + lp.horizontal_spacing;
 				} else {
-					if (horizontalPosition + childWidth > width) {
-						horizontalPosition = getPaddingLeft();
-						verticalPosition += line_height;
+					if (isLayoutRtl) {
+						if (horizontalPosition - childWidth < l) {
+							horizontalPosition = width - getPaddingRight();
+							verticalPosition += line_height;
+						}
+						child.layout(horizontalPosition - childWidth, verticalPosition, horizontalPosition, verticalPosition + childHeight);
+						horizontalPosition -= childWidth + lp.horizontal_spacing;
+					} else {
+						if (horizontalPosition + childWidth > width) {
+							horizontalPosition = getPaddingLeft();
+							verticalPosition += line_height;
+						}
+						child.layout(horizontalPosition, verticalPosition, horizontalPosition + childWidth, verticalPosition + childHeight);
+						horizontalPosition += childWidth + lp.horizontal_spacing;
 					}
-					child.layout(horizontalPosition, verticalPosition, horizontalPosition + childWidth, verticalPosition + childHeight);
-					horizontalPosition += childWidth + lp.horizontal_spacing + freeSizeSpacing;
 				}
 			}
 		}
