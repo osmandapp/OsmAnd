@@ -277,14 +277,7 @@ public class ContextMenuAdapter {
 			}
 			if (layoutId == R.layout.main_menu_drawer_btn_switch_profile || 
 					layoutId == R.layout.main_menu_drawer_btn_configure_profile) {
-				int colorNoAlpha;
-				if (item.getColor() != null) {
-					colorNoAlpha = item.getColor();
-				} else {
-					int colorResId = item.getColorRes();
-					colorNoAlpha = ContextCompat.getColor(app, colorResId);
-				}
-				
+				int colorNoAlpha = item.getColor();
 				TextView title = convertView.findViewById(R.id.title);
 				title.setText(item.getTitle());
 
@@ -310,21 +303,13 @@ public class ContextMenuAdapter {
 				return convertView;
 			}
 			if (layoutId == R.layout.profile_list_item) {
-				
 				int tag = item.getTag();
-
-				int colorNoAlpha;
-				if (item.getColor() != null) {
-					colorNoAlpha = item.getColor();
-				} else {
-					int colorResId = item.getColorRes();
-					colorNoAlpha = ContextCompat.getColor(app, colorResId);
-				}
+				int colorNoAlpha = item.getColor();
 				TextView title = convertView.findViewById(R.id.title);
 				TextView desc = convertView.findViewById(R.id.description);
 				ImageView icon = convertView.findViewById(R.id.icon);
 				title.setText(item.getTitle());
-				
+
 				convertView.findViewById(R.id.divider_up).setVisibility(View.INVISIBLE);
 				convertView.findViewById(R.id.divider_bottom).setVisibility(View.INVISIBLE);
 				convertView.findViewById(R.id.menu_image).setVisibility(View.GONE);
@@ -428,20 +413,18 @@ public class ContextMenuAdapter {
 				}
 			} else {
 				if (item.getIcon() != ContextMenuItem.INVALID_ID) {
-					int colorRes = item.getColorRes();
+					Integer color = item.getColor();
 					Drawable drawable;
-					if (profileDependent) {
+					if (color == null) {
+						int colorRes = lightTheme ? R.color.icon_color_default_light : R.color.icon_color_default_dark;
+						colorRes = item.shouldSkipPainting() ? 0 : colorRes;
+						drawable = mIconsCache.getIcon(item.getIcon(), colorRes);
+					} else if (profileDependent) {
 						drawable = mIconsCache.getPaintedIcon(item.getIcon(), currentModeColor);
 					} else {
-						if (colorRes == ContextMenuItem.INVALID_ID) {
-							if (!item.shouldSkipPainting()) {
-								colorRes = lightTheme ? R.color.icon_color_default_light : R.color.icon_color_default_dark;
-							} else {
-								colorRes = 0;
-							}
-						}
-						drawable = mIconsCache.getIcon(item.getIcon(), colorRes);
+						drawable = mIconsCache.getPaintedIcon(item.getIcon(), color);
 					}
+
 					((AppCompatImageView) convertView.findViewById(R.id.icon)).setImageDrawable(drawable);
 					convertView.findViewById(R.id.icon).setVisibility(View.VISIBLE);
 				} else if (convertView.findViewById(R.id.icon) != null) {

@@ -678,7 +678,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 				if (itemId == R.string.layer_recordings) {
 					SHOW_RECORDINGS.set(!SHOW_RECORDINGS.get());
-					adapter.getItem(pos).setColorRes(SHOW_RECORDINGS.get() ?
+					adapter.getItem(pos).setColor(app, SHOW_RECORDINGS.get() ?
 							R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 					adapter.notifyDataSetChanged();
 					updateLayers(mapView, mapActivity);
@@ -690,7 +690,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				.setId(RECORDING_LAYER)
 				.setSelected(SHOW_RECORDINGS.get())
 				.setIcon(R.drawable.ic_action_micro_dark)
-				.setColor(SHOW_RECORDINGS.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
+				.setColor(mapActivity, SHOW_RECORDINGS.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setItemDeleteAction(makeDeleteAction(SHOW_RECORDINGS))
 				.setListener(listener).createItem());
 	}

@@ -10,7 +10,6 @@ import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
@@ -303,7 +302,7 @@ public class SRTMPlugin extends OsmandPlugin {
 								if (item != null) {
 									item.setDescription(app.getString(R.string.display_zoom_level,
 											getPrefDescription(app, contourLinesProp, pref)));
-									item.setColorRes(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+									item.setColor(app, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 									item.setSelected(selected);
 									adapter.notifyDataSetChanged();
 								}
@@ -322,7 +321,7 @@ public class SRTMPlugin extends OsmandPlugin {
 							}
 							ContextMenuItem item = adapter.getItem(position);
 							if (item != null) {
-								item.setColorRes(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+								item.setColor(app, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 								item.setSelected(selected);
 								adapter.notifyDataSetChanged();
 							}
@@ -346,7 +345,7 @@ public class SRTMPlugin extends OsmandPlugin {
 					.setSelected(contourLinesSelected)
 					.setIcon(R.drawable.ic_plugin_srtm)
 					.setDescription(app.getString(R.string.display_zoom_level, descr))
-					.setColor(contourLinesSelected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
+					.setColor(app, contourLinesSelected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 					.setItemDeleteAction(makeDeleteAction(settings.CONTOUR_LINES_ZOOM))
 					.setSecondaryIcon(R.drawable.ic_action_additional_option)
 					.setListener(listener).createItem());
@@ -360,7 +359,7 @@ public class SRTMPlugin extends OsmandPlugin {
 						? R.string.shared_string_hillshade
 						: R.string.download_slope_maps))
 				.setSelected(terrainEnabled)
-				.setColor(terrainEnabled ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
+				.setColor(app, terrainEnabled ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_hillshade_dark)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setItemDeleteAction(makeDeleteAction(settings.TERRAIN, settings.TERRAIN_MODE))

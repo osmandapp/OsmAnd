@@ -324,7 +324,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 				.setTitleId(R.string.layer_osm_bugs, mapActivity)
 				.setSelected(settings.SHOW_OSM_BUGS.get())
 				.setIcon(R.drawable.ic_action_osm_note)
-				.setColor(settings.SHOW_OSM_BUGS.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
+				.setColor(app, settings.SHOW_OSM_BUGS.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(new ContextMenuAdapter.OnRowItemClick() {
 
@@ -343,7 +343,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 						if (itemId == R.string.layer_osm_bugs) {
 							OsmandPreference<Boolean> showOsmBugs = settings.SHOW_OSM_BUGS;
 							showOsmBugs.set(isChecked);
-							adapter.getItem(pos).setColorRes(showOsmBugs.get() ?
+							adapter.getItem(pos).setColor(app, showOsmBugs.get() ?
 									R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 							adapter.notifyDataSetChanged();
 							updateLayers(mapActivity.getMapView(), mapActivity);
@@ -359,14 +359,14 @@ public class OsmEditingPlugin extends OsmandPlugin {
 				.setTitleId(R.string.layer_osm_edits, mapActivity)
 				.setSelected(settings.SHOW_OSM_EDITS.get())
 				.setIcon(R.drawable.ic_action_openstreetmap_logo)
-				.setColor(settings.SHOW_OSM_EDITS.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
+				.setColor(app, settings.SHOW_OSM_EDITS.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setListener(new ContextMenuAdapter.OnRowItemClick() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 						if (itemId == R.string.layer_osm_edits) {
 							OsmandPreference<Boolean> showOsmEdits = settings.SHOW_OSM_EDITS;
 							showOsmEdits.set(isChecked);
-							adapter.getItem(pos).setColorRes(showOsmEdits.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+							adapter.getItem(pos).setColor(app, showOsmEdits.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 							adapter.notifyDataSetChanged();
 							updateLayers(mapActivity.getMapView(), mapActivity);
 						}
@@ -404,7 +404,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			final AvailableGPXFragment f = ((AvailableGPXFragment) fragment);
 			optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.local_index_mi_upload_gpx, activity)
 					.setIcon(R.drawable.ic_action_export)
-					.setColor(R.color.color_white)
+					.setColor(app, R.color.color_white)
 					.setListener(new ItemClickListener() {
 
 						@Override

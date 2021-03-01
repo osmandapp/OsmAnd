@@ -500,11 +500,11 @@ public class ApplicationMode {
 
 	public Integer getCustomIconColor() {
 		String customColor = app.getSettings().CUSTOM_ICON_COLOR.getModeValue(this);
-		return customColor == null ? null : Integer.valueOf(customColor);
+		return customColor == null ? null : Algorithms.parseColor(customColor);
 	}
 
 	public void setCustomIconColor(Integer customIconColor) {
-		String valueToSave = customIconColor == null ? null : String.valueOf(customIconColor);
+		String valueToSave = customIconColor == null ? null : Algorithms.colorToString(customIconColor);
 		app.getSettings().CUSTOM_ICON_COLOR.setModeValue(this, valueToSave);
 	}
 
@@ -605,7 +605,6 @@ public class ApplicationMode {
 			mode.setRoutingProfile(builder.routingProfile);
 			mode.setRouteService(builder.routeService);
 			mode.setIconColor(builder.iconColor);
-			mode.setCustomIconColors(builder.customIconColors);
 			mode.setCustomIconColor(builder.customIconColor);
 			mode.setLocationIcon(builder.locationIcon);
 			mode.setNavigationIcon(builder.navigationIcon);
@@ -726,7 +725,6 @@ public class ApplicationMode {
 		private String routingProfile;
 		private String iconResName;
 		private ProfileIconColors iconColor;
-		private List<String> customIconColors;
 		private Integer customIconColor;
 		private LocationIcon locationIcon;
 		private NavigationIcon navigationIcon;
@@ -751,7 +749,6 @@ public class ApplicationMode {
 			applicationMode.setRouteService(routeService);
 			applicationMode.setRoutingProfile(routingProfile);
 			applicationMode.setIconResName(iconResName);
-			applicationMode.setCustomIconColors(customIconColors);
 			applicationMode.setCustomIconColor(customIconColor);
 			applicationMode.setIconColor(iconColor);
 			applicationMode.setLocationIcon(locationIcon);
@@ -798,11 +795,6 @@ public class ApplicationMode {
 
 		public ApplicationModeBuilder setIconColor(ProfileIconColors iconColor) {
 			this.iconColor = iconColor;
-			return this;
-		}
-
-		public ApplicationModeBuilder setCustomIconColors(List<String> customIconColors) {
-			this.customIconColors = customIconColors;
 			return this;
 		}
 

@@ -184,7 +184,7 @@ public class ConfigureMapMenu {
 				.setId(FAVORITES_ID)
 				.setTitleId(R.string.shared_string_favorites, activity)
 				.setSelected(settings.SHOW_FAVORITES.get())
-				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
+				.setColor(app, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_favorite)
 				.setItemDeleteAction(makeDeleteAction(settings.SHOW_FAVORITES))
 				.setListener(l)
@@ -196,7 +196,7 @@ public class ConfigureMapMenu {
 				.setTitleId(R.string.layer_poi, activity)
 				.setSelected(selected)
 				.setDescription(app.getPoiFilters().getSelectedPoiFiltersName(wiki))
-				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
+				.setColor(app, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_info_dark)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(l).createItem());
@@ -205,7 +205,7 @@ public class ConfigureMapMenu {
 				.setId(POI_OVERLAY_LABELS_ID)
 				.setTitleId(R.string.layer_amenity_label, activity)
 				.setSelected(settings.SHOW_POI_LABEL.get())
-				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
+				.setColor(app, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_text_dark)
 				.setItemDeleteAction(makeDeleteAction(settings.SHOW_POI_LABEL))
 				.setListener(l).createItem());
@@ -217,7 +217,7 @@ public class ConfigureMapMenu {
 				.setIcon(R.drawable.ic_action_transport_bus)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setSelected(selected)
-				.setColor(selected ? selectedProfileColor : ContextMenuItem.INVALID_ID)
+				.setColor(selected ? selectedProfileColor : null)
 				.setListener(l).createItem());
 
 		selected = app.getSelectedGpxHelper().isShowingAnyGpxFiles();
@@ -226,7 +226,7 @@ public class ConfigureMapMenu {
 				.setTitleId(R.string.layer_gpx_layer, activity)
 				.setSelected(app.getSelectedGpxHelper().isShowingAnyGpxFiles())
 				.setDescription(app.getSelectedGpxHelper().getGpxDescription())
-				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
+				.setColor(app, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_polygom_dark)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(l).createItem());
@@ -236,7 +236,7 @@ public class ConfigureMapMenu {
 				.setId(MAP_MARKERS_ID)
 				.setTitleId(R.string.map_markers, activity)
 				.setSelected(selected)
-				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
+				.setColor(app, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_flag)
 				.setItemDeleteAction(makeDeleteAction(settings.SHOW_MAP_MARKERS))
 				.setListener(l).createItem());
@@ -704,7 +704,6 @@ public class ConfigureMapMenu {
 						for (int i = 0; i < prefs.size(); i++) {
 							prefs.get(i).set(false);
 						}
-						adapter.getItem(pos).setColorRes(ContextMenuItem.INVALID_ID);
 						a.notifyDataSetInvalidated();
 						activity.refreshMapComplete();
 						activity.getMapLayers().updateLayers(activity.getMapView());
@@ -738,7 +737,7 @@ public class ConfigureMapMenu {
 					}
 				}
 			}
-			builder.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+			builder.setColor(activity, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 			if (useDescription) {
 				final String descr = getDescription(prefs, includedPrefs);
 				builder.setDescription(descr);
@@ -839,7 +838,7 @@ public class ConfigureMapMenu {
 					selected |= prefs.get(i).get();
 				}
 				adapter.getItem(pos).setSelected(selected);
-				adapter.getItem(pos).setColorRes(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+				adapter.getItem(pos).setColor(activity, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 				a.notifyDataSetInvalidated();
 			}
 		});
@@ -874,7 +873,7 @@ public class ConfigureMapMenu {
 					} else {
 						adapter.getItem(pos).setSelected(selected);
 					}
-					adapter.getItem(pos).setColorRes(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+					adapter.getItem(pos).setColor(activity, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 				}
 				a.notifyDataSetInvalidated();
 				activity.refreshMapComplete();

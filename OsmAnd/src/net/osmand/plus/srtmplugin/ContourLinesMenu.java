@@ -184,7 +184,7 @@ public class ContourLinesMenu {
 		contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(toggleActionStringId, mapActivity)
 				.setIcon(toggleIconId)
-				.setColor(toggleIconColorId)
+				.setColor(app, toggleIconColorId)
 				.setListener(l)
 				.setSelected(selected).createItem());
 		if (selected) {
@@ -225,7 +225,7 @@ public class ContourLinesMenu {
 					.setTitleId(R.string.srtm_plugin_name, mapActivity)
 					.setLayout(R.layout.list_item_icon_and_right_btn)
 					.setIcon(R.drawable.ic_plugin_srtm)
-					.setColor(R.color.osmand_orange)
+					.setColor(app, R.color.osmand_orange)
 					.setDescription(app.getString(R.string.shared_string_plugin))
 					.setListener(l).createItem());
 		} else {

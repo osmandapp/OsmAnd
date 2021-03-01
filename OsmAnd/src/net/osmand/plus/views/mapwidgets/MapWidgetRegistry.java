@@ -9,7 +9,6 @@ import android.widget.LinearLayout;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
-import androidx.core.content.ContextCompat;
 
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
@@ -461,7 +460,7 @@ public class MapWidgetRegistry {
 				.setTitleId(R.string.configure_screen_quick_action, mapActivity)
 				.setIcon(R.drawable.ic_quick_action)
 				.setSelected(selected)
-				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
+				.setColor(app, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setSecondaryIcon( R.drawable.ic_action_additional_option)
 				.setListener(new ContextMenuAdapter.OnRowItemClick() {
 					@Override
@@ -497,7 +496,7 @@ public class MapWidgetRegistry {
 						}
 						ContextMenuItem item = adapter.getItem(position);
 						item.setSelected(visible);
-						item.setColorRes(visible ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+						item.setColor(app, visible ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 						adapter.notifyDataSetChanged();
 
 					}
@@ -519,7 +518,7 @@ public class MapWidgetRegistry {
 			ContextMenuItem.ItemBuilder itemBuilder = new ContextMenuItem.ItemBuilder()
 					.setIcon(r.getDrawableMenu())
 					.setSelected(selected)
-					.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
+					.setColor(app, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 					.setSecondaryIcon(r.widget != null ? R.drawable.ic_action_additional_option : ContextMenuItem.INVALID_ID)
 					.setDescription(r.visibleCollapsed(mode) ? desc : null)
 					.setListener(new ContextMenuAdapter.OnRowItemClick() {
@@ -638,7 +637,7 @@ public class MapWidgetRegistry {
 							}
 							ContextMenuItem item = adapter.getItem(position);
 							item.setSelected(visible);
-							item.setColorRes(visible ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+							item.setColor(app, visible ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 							item.setDescription(visible && collapsed ? desc : null);
 							adapter.notifyDataSetChanged();
 						}

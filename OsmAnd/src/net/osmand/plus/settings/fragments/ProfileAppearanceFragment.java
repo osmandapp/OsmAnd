@@ -38,12 +38,13 @@ import net.osmand.plus.profiles.SelectProfileBottomSheet;
 import net.osmand.plus.profiles.SelectProfileBottomSheet.DialogMode;
 import net.osmand.plus.profiles.SelectProfileBottomSheet.OnSelectProfileCallback;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.backup.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.track.ColorsCard;
-import net.osmand.plus.track.CustomColorBottomSheet;
+import net.osmand.plus.track.CustomColorBottomSheet.ColorPickerListener;
 import net.osmand.plus.widgets.FlowLayout;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.util.Algorithms;
@@ -74,7 +75,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILES_LIST_UPDATED_ARG;
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILE_KEY_ARG;
 
-public class ProfileAppearanceFragment extends BaseSettingsFragment implements OnSelectProfileCallback, BaseCard.CardListener, CustomColorBottomSheet.ColorPickerListener {
+public class ProfileAppearanceFragment extends BaseSettingsFragment implements OnSelectProfileCallback, CardListener, ColorPickerListener {
 
 	private static final Log LOG = PlatformUtil.getLog(ProfileAppearanceFragment.class);
 
@@ -475,7 +476,9 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		if (mapActivity == null) {
 			return;
 		}
-		ViewGroup parentView = (ViewGroup) holder.itemView;
+		FlowLayout colorsCardContainer = (FlowLayout) holder.findViewById(R.id.color_items);
+		colorsCardContainer.removeAllViews();
+
 		int selectedColor = changedProfile.getActualColor();
 		List<Integer> colors = new ArrayList<>();
 		for (ProfileIconColors color : ProfileIconColors.values()) {
@@ -483,8 +486,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		}
 		colorsCard = new ColorsCard(mapActivity, selectedColor, this, colors, app.getSettings().CUSTOM_ICON_COLORS, getSelectedAppMode());
 		colorsCard.setListener(this);
-		parentView.removeAllViews();
-		parentView.addView(colorsCard.build(app));
+		colorsCardContainer.addView(colorsCard.build(app));
 		updateColorName();
 	}
 

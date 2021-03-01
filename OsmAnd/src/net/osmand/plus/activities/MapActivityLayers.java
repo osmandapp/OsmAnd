@@ -432,7 +432,7 @@ public class MapActivityLayers {
 		} else {
 			builder.setIcon(R.drawable.mx_user_defined);
 		}
-		builder.setColor(ContextMenuItem.INVALID_ID);
+		builder.setColor(activity, ContextMenuItem.INVALID_ID);
 		builder.setSkipPaintingWithoutColor(true);
 		adapter.addItem(builder.createItem());
 	}

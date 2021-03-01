@@ -110,7 +110,7 @@ public class OsmNotesMenu {
 				.setTitleId(osmNotesStringId, mapActivity)
 				.setDescription(mapActivity.getString(R.string.switch_osm_notes_visibility_desc))
 				.setIcon(R.drawable.ic_action_osm_note)
-				.setColor(toggleIconColorId)
+				.setColor(app, toggleIconColorId)
 				.setListener(l)
 				.setSelected(showOsmBugs)
 				.createItem());

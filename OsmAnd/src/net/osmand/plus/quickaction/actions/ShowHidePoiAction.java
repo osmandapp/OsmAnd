@@ -353,7 +353,6 @@ public class ShowHidePoiAction extends QuickAction {
 			builder.setIcon(R.drawable.mx_user_defined);
 		}
 
-		builder.setColor(ContextMenuItem.INVALID_ID);
 		builder.setSkipPaintingWithoutColor(true);
 		adapter.addItem(builder.createItem());
 	}

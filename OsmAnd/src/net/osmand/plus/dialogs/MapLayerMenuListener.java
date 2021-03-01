@@ -77,7 +77,7 @@ final class MapLayerMenuListener extends OnRowItemClick {
 				public boolean processResult(Boolean result) {
 					if (item != null) {
 						item.setSelected(result);
-						item.setColorRes(result ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+						item.setColor(mapActivity, result ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 						adapter.notifyDataSetChanged();
 					}
 					return true;
@@ -86,7 +86,7 @@ final class MapLayerMenuListener extends OnRowItemClick {
 			boolean selected = TransportLinesMenu.isShowLines(mapActivity.getMyApplication());
 			if (!selected && item != null) {
 				item.setSelected(true);
-				item.setColorRes(R.color.osmand_orange);
+				item.setColor(mapActivity, R.color.osmand_orange);
 				adapter.notifyDataSetChanged();
 			}
 			return false;
@@ -94,7 +94,7 @@ final class MapLayerMenuListener extends OnRowItemClick {
 			CompoundButton btn = (CompoundButton) view.findViewById(R.id.toggle_item);
 			if (btn != null && btn.getVisibility() == View.VISIBLE) {
 				btn.setChecked(!btn.isChecked());
-				menuAdapter.getItem(pos).setColorRes(btn.isChecked() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+				menuAdapter.getItem(pos).setColor(mapActivity, btn.isChecked() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 				adapter.notifyDataSetChanged();
 				return false;
 			} else {
@@ -110,7 +110,7 @@ final class MapLayerMenuListener extends OnRowItemClick {
 		final PoiFiltersHelper poiFiltersHelper = mapActivity.getMyApplication().getPoiFilters();
 		final ContextMenuItem item = menuAdapter.getItem(pos);
 		if (item.getSelected() != null) {
-			item.setColorRes(isChecked ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+			item.setColor(mapActivity, isChecked ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 		}
 		if (itemId == R.string.layer_poi) {
 			PoiUIFilter wiki = poiFiltersHelper.getTopWikiPoiFilter();
@@ -139,7 +139,7 @@ final class MapLayerMenuListener extends OnRowItemClick {
 				@Override
 				public boolean processResult(Boolean result) {
 					item.setSelected(result);
-					item.setColorRes(result ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+					item.setColor(mapActivity, result ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 					adapter.notifyDataSetChanged();
 					return true;
 				}
@@ -171,7 +171,7 @@ final class MapLayerMenuListener extends OnRowItemClick {
 				boolean selected = app.getSelectedGpxHelper().isShowingAnyGpxFiles();
 				item.setSelected(selected);
 				item.setDescription(app.getSelectedGpxHelper().getGpxDescription());
-				item.setColorRes(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+				item.setColor(mapActivity, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 				adapter.notifyDataSetChanged();
 			}
 		});
@@ -189,7 +189,7 @@ final class MapLayerMenuListener extends OnRowItemClick {
 						boolean selected = pf.isShowingAnyPoi(wiki);
 						item.setSelected(selected);
 						item.setDescription(pf.getSelectedPoiFiltersName(wiki));
-						item.setColorRes(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+						item.setColor(mapActivity, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 						adapter.notifyDataSetChanged();
 					}
 				};

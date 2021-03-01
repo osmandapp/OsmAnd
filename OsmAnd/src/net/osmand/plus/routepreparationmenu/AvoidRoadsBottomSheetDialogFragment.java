@@ -65,8 +65,6 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 	private List<BottomSheetItemWithCompoundButton> compoundButtons = new ArrayList<>();
 
 	private boolean hideImpassableRoads;
-	@ColorRes
-	private int compoundButtonColorId = INVALID_ID;
 	@ColorInt
 	private Integer compoundButtonColor = null;
 	private ApplicationMode appMode;
@@ -239,7 +237,6 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 
 			final BottomSheetItemWithCompoundButton[] item = new BottomSheetItemWithCompoundButton[1];
 			item[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
-					.setCompoundButtonColorId(compoundButtonColorId)
 					.setCompoundButtonColor(compoundButtonColor)
 					.setChecked(selected)
 					.setTitle(parameterName)
@@ -256,10 +253,6 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 			items.add(item[0]);
 			compoundButtons.add(item[0]);
 		}
-	}
-
-	public void setCompoundButtonColorId(@ColorRes int compoundButtonColorId) {
-		this.compoundButtonColorId = compoundButtonColorId;
 	}
 
 	public void setCompoundButtonColor(@ColorInt int compoundButtonColor) {

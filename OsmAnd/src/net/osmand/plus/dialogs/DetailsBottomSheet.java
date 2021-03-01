@@ -217,7 +217,7 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 		}
 		if (adapter != null) {
 			adapter.getItem(position).setSelected(checked);
-			adapter.getItem(position).setColorRes(checked ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+			adapter.getItem(position).setColor(app, checked ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 			adapter.getItem(position).setDescription(getString(
 					R.string.ltr_or_rtl_combine_via_slash,
 					String.valueOf(selected),

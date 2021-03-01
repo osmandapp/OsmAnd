@@ -26,7 +26,7 @@
 
 	<Preference
 		android:key="color_items"
-		android:layout="@layout/preference_color_select"
+		android:layout="@layout/preference_colors_card"
 		android:title="@string/select_color"
 		android:selectable="false"/>
 

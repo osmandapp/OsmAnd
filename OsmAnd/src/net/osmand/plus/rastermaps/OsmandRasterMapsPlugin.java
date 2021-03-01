@@ -13,7 +13,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -323,7 +322,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 													: mapActivity.getString(R.string.shared_string_none);
 											item.setDescription(overlayMapDescr);
 											item.setSelected(hasOverlayDescription);
-											item.setColorRes(hasOverlayDescription ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+											item.setColor(app, hasOverlayDescription ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 											adapter.notifyDataSetChanged();
 										}
 									}
@@ -348,7 +347,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
 											item.setDescription(underlayMapDescr);
 											item.setSelected(hasUnderlayDescription);
-											item.setColorRes(hasUnderlayDescription ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+											item.setColor(app, hasUnderlayDescription ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 
 											adapter.notifyDataSetChanged();
 
@@ -381,7 +380,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 				.setId(OVERLAY_MAP)
 				.setDescription(overlayMapDescr)
 				.setSelected(hasOverlayDescription)
-				.setColor(hasOverlayDescription ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
+				.setColor(app, hasOverlayDescription ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_layer_top)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(listener)
@@ -397,7 +396,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 				.setId(UNDERLAY_MAP)
 				.setDescription(underlayMapDescr)
 				.setSelected(hasUnderlayDescription)
-				.setColor(hasUnderlayDescription ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
+				.setColor(app, hasUnderlayDescription ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_layer_bottom)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(listener)
