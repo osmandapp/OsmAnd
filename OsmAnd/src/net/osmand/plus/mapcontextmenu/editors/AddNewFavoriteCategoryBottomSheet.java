@@ -40,6 +40,7 @@ import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class AddNewFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFragment implements CustomColorBottomSheet.ColorPickerListener, BaseCard.CardListener {
 
@@ -47,6 +48,9 @@ public class AddNewFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 	public static final String TAG = AddNewTrackFolderBottomSheet.class.getName();
 	private static final Log LOG = PlatformUtil.getLog(AddNewTrackFolderBottomSheet.class);
 	private static final String FOLDER_NAME_KEY = "folder_name_key";
+	private static final String KEY_CTX_EDIT_CAT_EDITOR_TAG = "key_ctx_edit_cat_editor_tag";
+	private static final String KEY_CTX_EDIT_GPX_FILE = "key_ctx_edit_gpx_file";
+	private static final String KEY_CTX_EDIT_GPX_CATEGORIES = "key_ctx_edit_gpx_categories";
 	FavouritesDbHelper favoritesHelper;
 	private boolean isGpx;
 	private ArrayList<String> gpxCategories;
@@ -55,7 +59,6 @@ public class AddNewFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 	private TextInputEditText editText;
 	private TextInputLayout nameTextBox;
 	private String folderName;
-	private int defaultColor;
 	private View view;
 	private String editorTag;
 	private SelectFavoriteCategoryBottomSheet.CategorySelectionListener selectionListener;
@@ -67,6 +70,22 @@ public class AddNewFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 			fragment.setTargetFragment(target, 0);
 			fragment.show(fragmentManager, TAG);
 		}
+	}
+
+	public static AddNewFavoriteCategoryBottomSheet createInstance(@NonNull String editorTag, @Nullable Set<String> gpxCategories, boolean isGpx) {
+		AddNewFavoriteCategoryBottomSheet fragment = new AddNewFavoriteCategoryBottomSheet();
+		Bundle bundle = new Bundle();
+		bundle.putString(KEY_CTX_EDIT_CAT_EDITOR_TAG, editorTag);
+		bundle.putBoolean(KEY_CTX_EDIT_GPX_FILE, isGpx);
+		if (gpxCategories != null) {
+			bundle.putStringArrayList(KEY_CTX_EDIT_GPX_CATEGORIES, new ArrayList<>(gpxCategories));
+		}
+		fragment.setArguments(bundle);
+		return fragment;
+	}
+
+	public void setSelectionListener(SelectFavoriteCategoryBottomSheet.CategorySelectionListener selectionListener) {
+		this.selectionListener = selectionListener;
 	}
 
 	@Override
@@ -129,19 +148,6 @@ public class AddNewFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 		return favoritesHelper;
 	}
 
-	@ColorInt
-	public int getCategoryColor(String category) {
-		FavouritesDbHelper helper = getHelper();
-		if (helper != null) {
-			for (FavouritesDbHelper.FavoriteGroup fg : getHelper().getFavoriteGroups()) {
-				if (fg.getDisplayName(getMyApplication()).equals(category)) {
-					return fg.getColor();
-				}
-			}
-		}
-		return defaultColor;
-	}
-
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		OsmandApplication app = requiredMyApplication();
@@ -150,7 +156,7 @@ public class AddNewFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 			folderName = savedInstanceState.getString(FOLDER_NAME_KEY);
 		}
 		items.add(new TitleItem(getString(R.string.favorite_category_add_new_title)));
-		defaultColor = getResources().getColor(R.color.color_favorite);
+		int defaultColor = getResources().getColor(R.color.color_favorite);
 		selectedColor = defaultColor;
 
 		view = UiUtilities.getInflater(app, nightMode).inflate(R.layout.add_new_favorite_category, null);
@@ -226,6 +232,11 @@ public class AddNewFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 		colorsCard.onColorSelected(prevColor, newColor);
 		int color = colorsCard.getSelectedColor();
 		updateColorSelector(color);
+	}
+
+	public interface CategorySelectionListener {
+
+		void onCategorySelected(String category, int color);
 	}
 
 }

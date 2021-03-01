@@ -50,6 +50,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
@@ -192,8 +193,9 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 			@Override
 			public void onClick(View v) {
 				FragmentManager fragmentManager = getFragmentManager();
+				SelectFavoriteCategoryBottomSheet dialogFragment = createSelectCategoryDialog();
 				if (fragmentManager != null) {
-					SelectFavoriteCategoryBottomSheet.showInstance(getChildFragmentManager(), getTargetFragment());
+					dialogFragment.showInstance(getChildFragmentManager(), getTargetFragment());
 				}
 			}
 		});
@@ -730,10 +732,10 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 	}
 
 	@Nullable
-	protected DialogFragment createSelectCategoryDialog() {
+	protected SelectFavoriteCategoryBottomSheet createSelectCategoryDialog() {
 		PointEditor editor = getEditor();
 		if (editor != null) {
-			return SelectCategoryDialogFragment.createInstance(editor.getFragmentTag());
+			return SelectFavoriteCategoryBottomSheet.createInstance(editor.getFragmentTag());
 		} else {
 			return null;
 		}

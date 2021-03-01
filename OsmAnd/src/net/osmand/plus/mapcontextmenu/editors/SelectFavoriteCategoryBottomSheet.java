@@ -35,15 +35,17 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class SelectFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFragment {
 
 	public static final String TAG = SelectFavoriteCategoryBottomSheet.class.getSimpleName();
+	private static final String KEY_CTX_SEL_CAT_EDITOR_TAG = "key_ctx_sel_cat_editor_tag";
 	private OsmandApplication app;
 	private GPXUtilities.GPXFile gpxFile;
 	private String editorTag;
 	private Map<String, Integer> gpxCategories;
-	private SelectCategoryDialogFragment.CategorySelectionListener selectionListener;
+	private SelectFavoriteCategoryBottomSheet.CategorySelectionListener selectionListener;
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable Fragment target) {
 		if (!fragmentManager.isStateSaved()) {
@@ -52,14 +54,6 @@ public class SelectFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 			fragment.setTargetFragment(target, 0);
 			fragment.show(fragmentManager, TAG);
 		}
-	}
-
-	private static Drawable getIcon(final Activity activity, int iconId) {
-		OsmandApplication app = (OsmandApplication) activity.getApplication();
-		UiUtilities iconsCache = app.getUIUtilities();
-		boolean light = app.getSettings().isLightContent();
-		return iconsCache.getIcon(iconId,
-				light ? R.color.icon_color_default_light : R.color.icon_color_default_dark);
 	}
 
 	private static Drawable getIcon(final Activity activity, int resId, int color) {
@@ -72,6 +66,17 @@ public class SelectFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 		return drawable;
 	}
 
+	public static SelectFavoriteCategoryBottomSheet createInstance(String editorTag) {
+		SelectFavoriteCategoryBottomSheet fragment = new SelectFavoriteCategoryBottomSheet();
+		Bundle bundle = new Bundle();
+		bundle.putString(KEY_CTX_SEL_CAT_EDITOR_TAG, editorTag);
+		fragment.setArguments(bundle);
+		return fragment;
+	}
+
+	public void setSelectionListener(SelectFavoriteCategoryBottomSheet.CategorySelectionListener selectionListener) {
+		this.selectionListener = selectionListener;
+	}
 
 	public GPXUtilities.GPXFile getGpxFile() {
 		return gpxFile;
@@ -88,6 +93,11 @@ public class SelectFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		app = requiredMyApplication();
+		if (savedInstanceState != null) {
+			restoreState(savedInstanceState);
+		} else if (getArguments() != null) {
+			restoreState(getArguments());
+		}
 
 		BaseBottomSheetItem titleItem = new BottomSheetItemWithDescription.Builder()
 				.setDescription(getString(R.string.select_category_descr))
@@ -112,7 +122,11 @@ public class SelectFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						AddNewFavoriteCategoryBottomSheet.showInstance(getFragmentManager(), getTargetFragment());
+						MapActivity mapActivity = (MapActivity) activity;
+						Set<String> categories = gpxCategories != null ? gpxCategories.keySet() : null;
+						AddNewFavoriteCategoryBottomSheet fragment = AddNewFavoriteCategoryBottomSheet.createInstance(editorTag, categories, gpxFile != null);
+						AddNewFavoriteCategoryBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), getTargetFragment());
+						fragment.setSelectionListener(selectionListener);
 						dismiss();
 					}
 				})
@@ -153,8 +167,8 @@ public class SelectFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 	private View createCategoryItem(@NonNull final Activity activity, boolean nightMode, final String categoryName, final int categoryColor, int categoryPointCount, boolean isHidden, final boolean selected) {
 		View itemView = UiUtilities.getInflater(activity, nightMode).inflate(R.layout.bottom_sheet_item_with_descr_and_radio_btn, null);
 		final AppCompatImageView button = (AppCompatImageView) itemView.findViewById(R.id.icon);
-		LinearLayout test = itemView.findViewById(R.id.descriptionContainer);
-		test.setPadding(0, 0, 0, 0);
+		LinearLayout descriptionContainer = itemView.findViewById(R.id.descriptionContainer);
+		descriptionContainer.setPadding(0, 0, 0, 0);
 		View divider = itemView.findViewById(R.id.divider_bottom);
 		divider.setVisibility(View.GONE);
 		itemView.setPadding(0, 0, 0, 0);
@@ -181,7 +195,7 @@ public class SelectFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 		TextView description = itemView.findViewById(R.id.description);
 		text.setText(name);
 		description.setText(String.valueOf(categoryPointCount));
-		test.setOnClickListener(new View.OnClickListener() {
+		descriptionContainer.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				FragmentActivity a = getActivity();
@@ -201,8 +215,13 @@ public class SelectFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 		return itemView;
 	}
 
+	public void restoreState(Bundle bundle) {
+		editorTag = bundle.getString(KEY_CTX_SEL_CAT_EDITOR_TAG);
+	}
+
 	public interface CategorySelectionListener {
 
 		void onCategorySelected(String category, int color);
 	}
+
 }

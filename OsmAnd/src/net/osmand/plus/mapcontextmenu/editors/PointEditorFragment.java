@@ -32,6 +32,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.widgets.AutoCompleteTextViewEx;
 import net.osmand.util.Algorithms;
 
@@ -177,10 +178,10 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 	}
 
 	@Nullable
-	protected DialogFragment createSelectCategoryDialog() {
+	protected BottomSheetDialogFragment createSelectCategoryDialog() {
 		PointEditor editor = getEditor();
 		if (editor != null) {
-			return SelectCategoryDialogFragment.createInstance(editor.getFragmentTag());
+			return SelectFavoriteCategoryBottomSheet.createInstance(editor.getFragmentTag());
 		} else {
 			return null;
 		}
