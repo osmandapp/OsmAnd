@@ -1228,16 +1228,28 @@ public class RouteProvider {
 	}
 
 	private RouteCalculationResult findOnlineRoute(RouteCalculationParams params) throws IOException, JSONException {
-		OnlineRoutingHelper helper = params.ctx.getOnlineRoutingHelper();
-		String stringKey = params.mode.getRoutingProfile();
+		OsmandApplication app = params.ctx;
+		OnlineRoutingHelper helper = app.getOnlineRoutingHelper();
+		OsmandSettings settings = app.getSettings();
+		String engineKey = params.mode.getRoutingProfile();
 		OnlineRoutingResponse response =
-				helper.calculateRouteOnline(stringKey, getPathFromParams(params), params.leftSide);
+				helper.calculateRouteOnline(engineKey, getPathFromParams(params), params.leftSide);
+
 		if (response != null) {
-			params.intermediates = null;
-			return new RouteCalculationResult(response.getRoute(), response.getDirections(), params, null, false);
-		} else {
-			return new RouteCalculationResult("Route is empty");
+			if (response.getGpxFile() != null) {
+				GPXRouteParamsBuilder builder = new GPXRouteParamsBuilder(response.getGpxFile(), settings);
+				params.gpxRoute = builder.build(app);
+				return calculateGpxRoute(params);
+			}
+			List<Location> route = response.getRoute();
+			List<RouteDirectionInfo> directions = response.getDirections();
+			if (!Algorithms.isEmpty(route) && !Algorithms.isEmpty(directions)) {
+				params.intermediates = null;
+				return new RouteCalculationResult(route, directions, params, null, false);
+			}
 		}
+
+		return new RouteCalculationResult("Route is empty");
 	}
 
 	private static List<LatLon> getPathFromParams(RouteCalculationParams params) {
