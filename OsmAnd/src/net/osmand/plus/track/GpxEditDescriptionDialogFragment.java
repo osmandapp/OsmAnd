@@ -1,14 +1,19 @@
 package net.osmand.plus.track;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 
+import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -26,6 +31,7 @@ import java.io.File;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -63,7 +69,50 @@ public class GpxEditDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 			}
 		});
 
-		view.findViewById(R.id.btn_save).setOnClickListener(new View.OnClickListener() {
+		setupSaveButton(view);
+
+		Bundle args = getArguments();
+		if (args != null) {
+			htmlCode = args.getString(CONTENT_KEY);
+			if (htmlCode != null) {
+				editableHtml.append(htmlCode);
+			}
+		}
+
+		return view;
+	}
+
+	@NonNull
+	@Override
+	public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+		Activity ctx = getActivity();
+		int themeId = isNightMode(true) ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
+		Dialog dialog = new Dialog(ctx, themeId);
+		Window window = dialog.getWindow();
+		if (window != null) {
+			if (!getSettings().DO_NOT_USE_ANIMATIONS.get()) {
+				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
+			}
+			if (Build.VERSION.SDK_INT >= 21) {
+				int statusBarColor = isNightMode(true) ? R.color.activity_background_color_dark : R.color.activity_background_color_light;
+				window.setStatusBarColor(ContextCompat.getColor(ctx, statusBarColor));
+			}
+		}
+		return dialog;
+	}
+
+	private boolean shouldClose() {
+		Editable editable = editableHtml.getText();
+		if (htmlCode == null || editable == null || editable.toString() == null) {
+			return true;
+		}
+		return htmlCode.equals(editable.toString());
+	}
+
+	private void setupSaveButton(View view) {
+		View btnSave = view.findViewById(R.id.btn_save);
+
+		btnSave.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				Editable editable = editableHtml.getText();
@@ -73,23 +122,12 @@ public class GpxEditDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 			}
 		});
 
-		Bundle args = getArguments();
-		if (args != null) {
-			htmlCode = args.getString(CONTENT_KEY);
-			if (htmlCode != null) {
-				editableHtml.setText(htmlCode);
-			}
+		Context ctx = btnSave.getContext();
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+			AndroidUtils.setBackground(ctx, btnSave, isNightMode(true), R.drawable.ripple_light, R.drawable.ripple_dark);
+		} else {
+			AndroidUtils.setBackground(ctx, btnSave, isNightMode(true), R.drawable.btn_unstroked_light, R.drawable.btn_unstroked_dark);
 		}
-
-		return view;
-	}
-
-	private boolean shouldClose() {
-		Editable editable = editableHtml.getText();
-		if (htmlCode == null || editable == null || editable.toString() == null) {
-			return true;
-		}
-		return htmlCode.equals(editable.toString());
 	}
 
 	private void showDismissDialog() {

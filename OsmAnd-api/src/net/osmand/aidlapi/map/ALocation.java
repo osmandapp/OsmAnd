@@ -25,6 +25,24 @@ public class ALocation extends AidlParams {
     private ALocation() {
     }
 
+    public ALocation(double latitude, double longitude, long time, boolean hasAltitude, double altitude,
+                     boolean hasSpeed, float speed, boolean hasBearing, float bearing,
+                     boolean hasAccuracy, float accuracy, boolean hasVerticalAccuracy, float verticalAccuracy) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.time = time;
+        this.hasAltitude = hasAltitude;
+        this.altitude = altitude;
+        this.hasSpeed = hasSpeed;
+        this.speed = speed;
+        this.hasBearing = hasBearing;
+        this.bearing = bearing;
+        this.hasAccuracy = hasAccuracy;
+        this.accuracy = accuracy;
+        this.hasVerticalAccuracy = hasVerticalAccuracy;
+        this.verticalAccuracy = verticalAccuracy;
+    }
+
     public ALocation(Parcel in) {
         readFromParcel(in);
     }

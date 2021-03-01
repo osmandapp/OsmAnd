@@ -279,7 +279,6 @@
     <string name="poi_filter_fuel">Gorivo</string>
     <string name="auto_zoom_map_descr">Približevanje zemljevida glede na hitrost vožnje (zemljevid se usklajuje s trenutnim mestom).</string>
     <string name="auto_zoom_map">Samodejna povečava zemljevida</string>
-    <string name="snap_to_road_descr">Med navigacijo pripni položaj na ceste.</string>
     <string name="snap_to_road">Pripni na cesto</string>
     <string name="osmand_short_description_80_chars">OsmAnd je odprtokodni program za navigacijo z uporabo shranjenih ali spletnih zemljevidov</string>
     <string name="osmand_plus_short_description_80_chars">OsmAnd je odprtokodni program za navigacijo z uporabo shranjenih ali spletnih zemljevidov</string>
@@ -1985,7 +1984,6 @@
     <string name="route_stops_before">%1$s se zaustavi pred</string>
     <string name="rendering_attr_hideOverground_name">Ne izriši nadzemnih zgradb</string>
     <string name="routing_attr_short_way_name">Pot z najmanjšo porabo goriva</string>
-    <string name="routing_attr_short_way_description">Prednostno izberi pot z najmanjšo porabo goriva (običajno najkrajša).</string>
     <string name="replace_favorite_confirmation">Ali ste prepričani, da želite zamenjati priljubljeno točko %1$s?</string>
     <string name="shared_string_change">Spremeni</string>
     <string name="get_started">Kako začeti ...</string>
@@ -2171,7 +2169,7 @@
     <string name="shared_string_time">Čas</string>
     <string name="total_distance">Skupna razdalja</string>
     <string name="routing_attr_height_obstacles_name">Uporabi podatke višine</string>
-    <string name="routing_attr_height_obstacles_description">Faktor podatkov spreminjanja višine terena (po podatkih SRTM, ASTER in EU-DEM).</string>
+
     <string name="routing_attr_driving_style_name">Način vožnje</string>
     <string name="select_gpx_folder">Izbor mape datotek GPX</string>
     <string name="file_can_not_be_moved">Datoteke ni mogoče premakniti.</string>
@@ -3275,14 +3273,14 @@
     <string name="select_folder">Izberi mapo</string>
     <string name="select_folder_descr">Izberi mapo ali dodaj novo</string>
     <string name="shared_string_empty">Prazno</string>
-    <string name="analyze_by_intervals">Analiziraj po intervalih (razdelitveni interval)</string>
+    <string name="analyze_by_intervals">Preuči po intervalih (razdelitveni interval)</string>
     <string name="upload_to_openstreetmap">Naloži v OpenStreetMap</string>
     <string name="edit_track">Uredi sled</string>
     <string name="rename_track">Preimenuj sled</string>
     <string name="change_folder">Spremeni mapo</string>
     <string name="shared_string_sec">sek</string>
     <string name="announcement_time_approach">Pristop</string>
-    <string name="announcement_time_prepare">Pripravi se</string>
+    <string name="announcement_time_prepare">Pripravljanje</string>
     <string name="announcement_time_off_route">Izven poti</string>
     <string name="announcement_time_arrive">Prihod na cilj</string>
     <string name="shared_string_turn">Zavoj</string>
@@ -3296,7 +3294,7 @@
     <string name="routing_engine_vehicle_type_cycling_electric">Električno kolesarjenje</string>
     <string name="routing_engine_vehicle_type_cycling_mountain">Gorsko kolesarjenje</string>
     <string name="routing_engine_vehicle_type_cycling_road">Cestno kolesarjenje</string>
-    <string name="routing_engine_vehicle_type_cycling_regular">Redno kolesarjenje</string>
+    <string name="routing_engine_vehicle_type_cycling_regular">Mestno kolesarjenje</string>
     <string name="routing_engine_vehicle_type_hgv">Težko tovorno vozilo</string>
     <string name="routing_engine_vehicle_type_small_truck">Majhno tovorno vozilo</string>
     <string name="routing_engine_vehicle_type_truck">Tovorno vozilo</string>
@@ -3309,4 +3307,58 @@
     <string name="context_menu_edit_descr">Uredi opis</string>
     <string name="delete_waypoints">Brisanje točk</string>
     <string name="copy_to_map_markers">Kopiraj na oznake na zemljevidu</string>
+    <string name="export_not_enough_space">Na napravi ni dovolj prostora.</string>
+    <string name="select_groups_for_import">Izbor skupin za uvoz.</string>
+    <string name="select_items_for_import">Izbor predmetov za uvoz.</string>
+    <string name="add_to_mapillary">Dodaj na Mapillary</string>
+    <string name="add_to_opr">Dodaj na OpenPlaceReviews</string>
+    <string name="use_dev_url_descr">Za preizkušanje pošiljanja sporočil, točk in sledi GPX preklopi iz openstreetmap.org na preizkusni dev.openstreetmap.org.</string>
+    <string name="use_dev_url">Uporabi dev.openstreetmap.org</string>
+    <string name="add_photos_descr">Program podpira prikaz fotografij različnih virov:
+\nOpenPlaceReviews – fotografije točk POI;
+\nMapillary – ulična fotografija;
+\nSplet / Wikimedia – fotografije točk POI in OpenStreetMap.</string>
+    <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
+    <string name="plan_route_add_new_segment">Dodaj nov del poti</string>
+    <string name="app_mode_light_aircraft">Lahko letalo</string>
+    <string name="plan_route_join_segments">Združi dele poti</string>
+    <string name="plan_route_split_before">Razdeli pred</string>
+    <string name="plan_route_split_after">Razdeli po</string>
+    <string name="profile_type_osmand_string">Profil OsmAnd</string>
+    <string name="profile_type_user_string">Uporabniški profil</string>
+    <string name="reverse_all_points">Obrni vse točke</string>
+    <string name="profile_by_default_description">Izbor profila, ki bo prikazan ob zagonu programa.</string>
+    <string name="shared_string_last_used">Nazadnje uporabljeno</string>
+    <string name="shared_string_subtype">Podvrsta</string>
+    <string name="shared_string_vehicle">Vozilo</string>
+    <string name="shared_string_api_key">Ključ API</string>
+    <string name="shared_string_server_url">Naslov URL strežnika</string>
+    <string name="shared_string_enter_param">Vpis parametrov</string>
+    <string name="online_routing_example_hint">Naslov URL z vsemi parametri bo zapisan kot:</string>
+    <string name="test_route_calculation">Preizkusi izračun poti</string>
+    <string name="routing_engine_vehicle_type_driving">Vožnja</string>
+    <string name="routing_engine_vehicle_type_foot">Hoja</string>
+    <string name="routing_engine_vehicle_type_bike">Kolo</string>
+    <string name="routing_engine_vehicle_type_car">Avto</string>
+    <string name="copy_address">Kopiraj naslov</string>
+    <string name="announcement_time_prepare_long">Dolgo pripravljanje</string>
+    <string name="show_track_on_map">Pokaži sled na zemljevidu</string>
+    <string name="shared_string_zoom_levels">Raven približanja</string>
+    <string name="shared_string_transparency">Prosojnost</string>
+    <string name="shared_string_legend">Legenda</string>
+    <string name="terrain_empty_state_text">Prikaz višinskega senčenja na zemljevidu. Več o tem je mogoče prebrati na spletni strani programa.</string>
+    <string name="shared_string_hillshade">Senčenje</string>
+    <string name="copy_to_map_favorites">Kopiraj med priljubljene</string>
+    <string name="upload_photo">Poteka pošiljanje</string>
+    <string name="upload_photo_completed">Pošiljanje je končano</string>
+    <string name="uploading_count">Poteka pošiljanje %1$d od %2$d</string>
+    <string name="uploaded_count">Poslano %1$d od %2$d</string>
+    <string name="toast_select_edits_for_upload">Izbor sprememb za pošiljanje</string>
+    <string name="activity_type_mountainbike_name">Gorsko kolesarjenje</string>
+    <string name="activity_type_cycling_name">Kolesarjenje</string>
+    <string name="activity_type_hiking_name">Pohod</string>
+    <string name="activity_type_running_name">Tek</string>
+    <string name="activity_type_walking_name">Hoja</string>
+    <string name="activity_type_motorbike_name">Motor</string>
+    <string name="activity_type_car_name">Avto</string>
 </resources>

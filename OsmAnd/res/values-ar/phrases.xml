@@ -2133,7 +2133,7 @@
     <string name="poi_water_characteristic_mineral">المعدنيه</string>
     <string name="poi_pump_powered">تعمل بالطاقة</string>
     <string name="poi_pump_manual">يدوي</string>
-    <string name="poi_source_biomass">مصدر الطاقة: الكتلة الحيوية</string>
+    <string name="poi_generator_source_biomass">مصدر الطاقة: الكتلة الحيوية</string>
     <string name="poi_deadlock">طريق مسدود</string>
     <string name="poi_architecture_umgebinde">العمارة: umgebinde</string>
     <string name="poi_architecture_constructivism">العمارة: البنائية</string>
@@ -3075,7 +3075,7 @@
     <string name="poi_motorcar_destination">السماح بدخول السيارات: للعبور للوجهة</string>
     <string name="poi_motorcar_no">السماح بدخول السيارات: لا</string>
     <string name="poi_motorcar_private">السماح بدخول السيارات:خاص</string>
-    <string name="poi_motorcar_yes">السماح بدخول السيارات:</string>
+    <string name="poi_motorcar_yes">السماح بدخول السيارات:نعم</string>
     <string name="poi_vehicle_forestry">السماح بدخول المركبات: الخاصة بالغابات</string>
     <string name="poi_vehicle_delivery">السماح بدخول المركبات: لتسليم الطلبات</string>
     <string name="poi_vehicle_military">السماح بدخول المركبات: العسكرية</string>
@@ -3586,7 +3586,7 @@
     <string name="poi_internet_access_service">الوصول إلى الإنترنت: خدمة</string>
     <string name="poi_internet_access_public">الوصول إلى الإنترنت: عام</string>
     <string name="poi_internet_access_wired">ولوج الإنترنت: سلكي</string>
-    <string name="poi_internet_access_terminal">"ولوج  الإنترنت: terminal"</string>
+    <string name="poi_internet_access_terminal">ولوج الإنترنت: terminal</string>
     <string name="poi_internet_access_wlan">ولوج الإنترنت: wlan</string>
     <string name="poi_denomination_mahayana">ماهايانا</string>
     <string name="poi_denomination_maronite">ماروني</string>
@@ -3678,4 +3678,15 @@
     <string name="poi_wildlife_crossing_bat_tunnel">نفق خفافيش</string>
     <string name="poi_wildlife_crossing_bat_bridge">جسر خفافيش</string>
     <string name="poi_wildlife_crossing">معبر الحيوانات البرية</string>
+    <string name="poi_attraction_slide">شريط التمرير</string>
+    <string name="poi_craft_winery">مصنع شراب</string>
+    <string name="poi_hanami">هانامي</string>
+    <string name="poi_wayside_shrine">ضريح على جانب الطريق</string>
+    <string name="poi_wayside_cross">صليب جانبي</string>
+    <string name="poi_monastery">ديرصومعة</string>
+    <string name="poi_denomination_wesleyan">الديانة</string>
+    <string name="poi_denomination_dutch_reformed">كنيسة المصلحة الهولندية</string>
+    <string name="poi_denomination_united_methodist">الكنيسة الميثودية</string>
+    <string name="poi_denomination_pentecostal">الخمسينية</string>
+    <string name="poi_denomination_presbyterian">المشيخية</string>
 </resources>

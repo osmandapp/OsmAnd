@@ -108,7 +108,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 			Activity activity = getActivity();
 			OsmandApplication app = getMyApplication();
 			if (app != null && activity != null) {
-				app.checkPreferredLocale();
+				app.getLocaleHelper().checkPreferredLocale();
 				app.restartApp(activity);
 			}
 		} else if (prefId.equals(settings.SPEED_CAMERAS_UNINSTALLED.getId())) {

@@ -71,7 +71,7 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 		nightMode = !settings.isLightContent();
 
 		int themeId = nightMode ? R.style.OsmandDarkTheme_NoActionbar : R.style.OsmandLightTheme_NoActionbar_LightStatusBar;
-		app.setLanguage(this);
+		app.getLocaleHelper().setLanguage(this);
 		setTheme(themeId);
 		super.onCreate(savedInstanceState);
 
@@ -156,7 +156,7 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 		});
 
 		updateSearchBarVisibility();
-		populateData();
+		populateData(true);
 	}
 
 	@Override
@@ -249,7 +249,7 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 					invalidateTabAdapters();
 					break;
 				case WikivoyageOptionsBottomSheetDialogFragment.TRAVEL_BOOK_CHANGED:
-					populateData();
+					populateData(true);
 					break;
 			}
 		}
@@ -313,7 +313,7 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 		return ContextCompat.getColor(app, colorId);
 	}
 
-	public void populateData() {
+	public void populateData(final boolean resetData) {
 		switchProgressBarVisibility(true);
 		if (app.isApplicationInitializing()) {
 			final WeakReference<WikivoyageExploreActivity> activityRef = new WeakReference<>(this);
@@ -326,12 +326,12 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 				public void onFinish(AppInitializer init) {
 					WikivoyageExploreActivity activity = activityRef.get();
 					if (AndroidUtils.isActivityNotDestroyed(activity)) {
-						new LoadWikivoyageData(activity).execute();
+						new LoadWikivoyageData(activity, resetData).execute();
 					}
 				}
 			});
 		} else {
-			new LoadWikivoyageData(this).execute();
+			new LoadWikivoyageData(this, resetData).execute();
 		}
 	}
 
@@ -371,28 +371,26 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 		}
 	}
 
-	public void onTabFragmentResume(Fragment fragment) {
-		updateFragments();
-	}
-
 	@Override
 	public void savedArticlesUpdated() {
 		updateFragments();
 	}
 
-	private static class LoadWikivoyageData extends AsyncTask<Void, Void, Void> {
+	public static class LoadWikivoyageData extends AsyncTask<Void, Void, Void> {
 
 		private final WeakReference<WikivoyageExploreActivity> activityRef;
 		private final TravelHelper travelHelper;
+		private final boolean resetData;
 
-		LoadWikivoyageData(WikivoyageExploreActivity activity) {
+		LoadWikivoyageData(WikivoyageExploreActivity activity, boolean resetData) {
 			travelHelper = activity.getMyApplication().getTravelHelper();
 			activityRef = new WeakReference<>(activity);
+			this.resetData = resetData;
 		}
 
 		@Override
 		protected Void doInBackground(Void... params) {
-			travelHelper.initializeDataToDisplay();
+			travelHelper.initializeDataToDisplay(resetData);
 			return null;
 		}
 

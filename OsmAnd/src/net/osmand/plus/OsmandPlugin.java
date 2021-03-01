@@ -468,7 +468,7 @@ public abstract class OsmandPlugin {
 					FragmentManager fm = mapActivity.getSupportFragmentManager();
 					Fragment fragment = fm.findFragmentByTag(fragmentData.tag);
 					if (fragment != null) {
-						fm.beginTransaction().remove(fragment).commit();
+						fm.beginTransaction().remove(fragment).commitAllowingStateLoss();
 					}
 				}
 			}
@@ -688,6 +688,10 @@ public abstract class OsmandPlugin {
 			}
 		}
 		return null;
+	}
+
+	public static <T extends OsmandPlugin> boolean isPluginEnabled(Class<T> clz) {
+		return getEnabledPlugin(clz) != null;
 	}
 
 	public static List<WorldRegion> getCustomDownloadRegions() {

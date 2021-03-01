@@ -31,6 +31,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.AndroidUtils;
 import net.osmand.FileUtils;
+import net.osmand.PlatformUtil;
 import net.osmand.ValueHolder;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -38,6 +39,8 @@ import net.osmand.plus.ProgressImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -52,7 +55,7 @@ import java.util.Locale;
 import gnu.trove.list.array.TIntArrayList;
 
 public class DashChooseAppDirFragment {
-
+	private static final Log LOG = PlatformUtil.getLog(DashChooseAppDirFragment.class);
 	
 	public static class ChooseAppDirFragment {
 		public static final int VERSION_DEFAULTLOCATION_CHANGED = 19;
@@ -92,8 +95,12 @@ public class DashChooseAppDirFragment {
 
 		private String getFreeSpace(File dir) {
 			if (dir.canRead()) {
-				StatFs fs = new StatFs(dir.getAbsolutePath());
-				return AndroidUtils.formatSize(activity, (long) fs.getAvailableBlocks() * fs.getBlockSize() );
+				try {
+					StatFs fs = new StatFs(dir.getAbsolutePath());
+					return AndroidUtils.formatSize(activity, (long) fs.getAvailableBlocks() * fs.getBlockSize());
+				} catch (IllegalArgumentException e) {
+					LOG.error(e);
+				}
 			}
 			return "";
 		}

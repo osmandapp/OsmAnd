@@ -781,7 +781,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		if (app.getRoutingHelper().isFollowingMode() || app.getRoutingHelper().isPauseNavigation()
 				|| mapActivity.getMeasurementToolFragment() != null
 				|| mapActivity.getPlanRouteFragment() != null
-				|| mapActivity.getMapLayers().getRulerControlLayer().rulerModeOn()) {
+				|| mapActivity.getMapLayers().getDistanceRulerControlLayer().rulerModeOn()) {
 			return;
 		}
 		if (isMapControlsVisible()) {
@@ -894,7 +894,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			layersHud.update(app, isNight);
 		}
 		boolean showTopButtons = !routeDialogOpened && !trackDialogOpened && !shouldHideTopControls
-				&& !isInMeasurementToolMode() && !isInPlanRouteMode()  && !isInChoosingRoutesMode()
+				&& !isInMeasurementToolMode() && !isInPlanRouteMode() && !isInChoosingRoutesMode()
 				&& !isInTrackAppearanceMode() && !isInWaypointsChoosingMode() && !isInFollowTrackMode();
 		layersHud.updateVisibility(showTopButtons);
 		quickSearchHud.updateVisibility(showTopButtons);
@@ -1070,7 +1070,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 	}
 
-	public void updateTransparencySlider () {
+	public void updateTransparencySlider() {
 		LayerTransparencySeekbarMode seekbarMode = settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get();
 		if (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) != null) {
 			if (seekbarMode == LayerTransparencySeekbarMode.OVERLAY && settings.MAP_OVERLAY.get() != null) {
@@ -1082,7 +1082,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	public void showTransparencyBar(CommonPreference<Integer> transparenPreference,
-	                                boolean isTransparencyBarEnabled) {
+									boolean isTransparencyBarEnabled) {
 		this.isTransparencyBarEnabled = isTransparencyBarEnabled;
 		ApplicationMode appMode = app.getSettings().getApplicationMode();
 		if (MapControlsLayer.transparencySetting != transparenPreference) {
@@ -1389,7 +1389,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	private boolean isInFollowTrackMode() {
-		return  MapRouteInfoMenu.followTrackVisible;
+		return MapRouteInfoMenu.followTrackVisible;
 	}
 
 	public static View.OnLongClickListener getOnClickMagnifierListener(final OsmandMapTileView view) {

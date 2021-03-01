@@ -1,6 +1,7 @@
 package net.osmand.map;
 
 import net.osmand.data.LatLon;
+import net.osmand.data.QuadRect;
 import net.osmand.util.Algorithms;
 
 import java.io.Serializable;
@@ -40,6 +41,7 @@ public class WorldRegion implements Serializable {
 	protected String regionDownloadName;
 	protected boolean regionMapDownload;
 	protected LatLon regionCenter;
+	protected QuadRect boundingBox;
 
 	public static class RegionParams {
 		protected String regionLeftHandDriving;
@@ -74,12 +76,12 @@ public class WorldRegion implements Serializable {
 		}
 	}
 
-	
-	
+
+
 	public boolean isRegionMapDownload() {
 		return regionMapDownload;
 	}
-	
+
 	public String getLocaleName() {
 		if(!Algorithms.isEmpty(regionNameLocale)) {
 			return regionNameLocale;
@@ -90,14 +92,14 @@ public class WorldRegion implements Serializable {
 		if(!Algorithms.isEmpty(regionName)) {
 			return regionName;
 		}
-		
+
 		return capitalize(regionFullName.replace('_', ' '));
 	}
-	
+
 	public String getRegionDownloadName() {
 		return regionDownloadName;
 	}
-	
+
 	public String getRegionDownloadNameLC() {
 		return regionDownloadName == null ? null : regionDownloadName.toLowerCase();
 	}
@@ -109,7 +111,7 @@ public class WorldRegion implements Serializable {
 	public LatLon getRegionCenter() {
 		return regionCenter;
 	}
-	
+
 	public String getRegionSearchText() {
 		return regionSearchText;
 	}
@@ -143,7 +145,7 @@ public class WorldRegion implements Serializable {
 		this.regionDownloadName = downloadName;
 		superregion = null;
 		subregions = new LinkedList<WorldRegion>();
-		
+
 	}
 	public WorldRegion(String id) {
 		this(id, null);
@@ -152,7 +154,7 @@ public class WorldRegion implements Serializable {
 	public String getRegionId() {
 		return regionFullName;
 	}
-	
+
 	private String capitalize(String s) {
 		String[] words = s.split(" ");
 		if (words[0].length() > 0) {
@@ -181,5 +183,21 @@ public class WorldRegion implements Serializable {
 			res++;
 		}
 		return res;
+	}
+
+	public boolean containsRegion(WorldRegion region) {
+		if (this.boundingBox != null && region.boundingBox != null) {
+			return this.boundingBox.contains(region.boundingBox);
+		}
+		return false;
+	}
+
+	public boolean isContinent() {
+		if (superregion != null) {
+			String superRegionId = superregion.getRegionId();
+			String thisRegionId = getRegionId();
+			return WORLD.equals(superRegionId) && !RUSSIA_REGION_ID.equals(thisRegionId);
+		}
+		return false;
 	}
 }

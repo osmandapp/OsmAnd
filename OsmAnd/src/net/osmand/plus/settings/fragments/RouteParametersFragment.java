@@ -28,9 +28,10 @@ import net.osmand.AndroidUtils;
 import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.Version;
+import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -156,6 +157,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		timeConditionalRouting.setIcon(getRoutingPrefIcon(settings.ENABLE_TIME_CONDITIONAL_ROUTING.getId()));
 		timeConditionalRouting.setSummaryOn(R.string.shared_string_on);
 		timeConditionalRouting.setSummaryOff(R.string.shared_string_off);
+		timeConditionalRouting.setDescription(R.string.temporary_conditional_routing_descr);
 		getPreferenceScreen().addPreference(timeConditionalRouting);
 	}
 
@@ -325,17 +327,10 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		setupRouteRecalcHeader(screen);
 		setupSelectRouteRecalcDistance(screen);
 		setupReverseDirectionRecalculation(screen);
-		addDivider(screen);
-		setupDevelopmentCategoryHeader(screen);
-		if (am.isDerivedRoutingFrom(ApplicationMode.PUBLIC_TRANSPORT)) {
-			setupOsmLiveForPublicTransportPref();
-			setupNativePublicTransport();
+
+		if (OsmandPlugin.isPluginEnabled(OsmandDevelopmentPlugin.class)) {
+			setupDevelopmentCategoryPreferences(screen, am);
 		}
-		if (am.isDerivedRoutingFrom(ApplicationMode.CAR)) {
-			setupOsmLiveForRoutingPref();
-			setupDisableComplexRoutingPref();
-		}
-		setupFastRecalculationPref();
 	}
 
 	private void setupOtherBooleanParameterSummary(ApplicationMode am, RoutingParameter p, SwitchPreferenceEx switchPreferenceEx) {
@@ -377,6 +372,20 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		routingCategory.setLayoutResource(R.layout.preference_category_with_descr);
 		routingCategory.setTitle(R.string.recalculate_route);
 		screen.addPreference(routingCategory);
+	}
+
+	private void setupDevelopmentCategoryPreferences(PreferenceScreen screen, ApplicationMode am) {
+		addDivider(screen);
+		setupDevelopmentCategoryHeader(screen);
+		if (am.isDerivedRoutingFrom(ApplicationMode.PUBLIC_TRANSPORT)) {
+			setupOsmLiveForPublicTransportPref();
+			setupNativePublicTransport();
+		}
+		if (am.isDerivedRoutingFrom(ApplicationMode.CAR)) {
+			setupOsmLiveForRoutingPref();
+			setupDisableComplexRoutingPref();
+		}
+		setupFastRecalculationPref();
 	}
 
 	private void setupDevelopmentCategoryHeader(PreferenceScreen screen) {
@@ -580,6 +589,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 	private ListPreferenceEx createRoutingBooleanListPreference(String groupKey, List<RoutingParameter> routingParameters) {
 		String defaultTitle = Algorithms.capitalizeFirstLetterAndLowercase(groupKey.replace('_', ' '));
 		String title = AndroidUtils.getRoutingStringPropertyName(app, groupKey, defaultTitle);
+		String description  = AndroidUtils.getRoutingStringPropertyDescription(app, groupKey, "");
 		ApplicationMode am = getSelectedAppMode();
 
 		Object[] entryValues = new Object[routingParameters.size()];
@@ -599,6 +609,9 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		routingListPref.setPersistent(false);
 		routingListPref.setValue(selectedParameterId);
 		routingListPref.setIcon(getRoutingPrefIcon(groupKey));
+		if (!Algorithms.isEmpty(defaultTitle)) {
+			routingListPref.setDescription(description);
+		}
 
 		return routingListPref;
 	}

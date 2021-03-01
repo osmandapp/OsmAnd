@@ -9,7 +9,9 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.OsmandApplication;
@@ -60,8 +62,12 @@ public class TravelNeededMapsCard extends BaseTravelCard {
 		if (viewHolder instanceof NeededMapsVH) {
 			NeededMapsVH holder = (NeededMapsVH) viewHolder;
 			ref = new WeakReference<NeededMapsVH>(holder);
-			holder.description.setText(isInternetAvailable()
-					? R.string.maps_you_need_descr : R.string.no_index_file_to_download);
+			holder.title.setText(getTitle());
+			holder.description.setText(getDescription());
+			int iconRes = getIconRes();
+			if (iconRes > 0) {
+				holder.icon.setImageResource(iconRes);
+			}
 			adjustChildCount(holder.itemsContainer);
 
 			updateView(holder);
@@ -71,7 +77,23 @@ public class TravelNeededMapsCard extends BaseTravelCard {
 			holder.buttonsDivider.setVisibility(primaryBtnVisible && secondaryBtnVisible ? View.VISIBLE : View.GONE);
 		}
 	}
-	
+
+	@StringRes
+	public int getTitle() {
+		return R.string.maps_you_need;
+	}
+
+	@StringRes
+	public int getDescription() {
+		return isInternetAvailable()
+				? R.string.maps_you_need_descr : R.string.no_index_file_to_download;
+	}
+
+	@DrawableRes
+	public int getIconRes() {
+		return 0;
+	}
+
 	public void updateView() {
 		if (ref != null) {
 			NeededMapsVH holder = ref.get();
@@ -89,7 +111,7 @@ public class TravelNeededMapsCard extends BaseTravelCard {
 			boolean downloading = downloadThread.isDownloading(item);
 			boolean currentDownloading = downloading && downloadThread.getCurrentDownloadingItem() == item;
 			boolean lastItem = i == items.size() - 1;
-			View view = holder.itemsContainer.getChildAt(i);
+			final View view = holder.itemsContainer.getChildAt(i);
 
 			if (item.isDownloaded()) {
 				view.setOnClickListener(null);
@@ -109,12 +131,23 @@ public class TravelNeededMapsCard extends BaseTravelCard {
 			if (item.isDownloaded()) {
 				iconAction.setVisibility(View.GONE);
 				buttonAction.setVisibility(View.GONE);
+
 			} else {
-				boolean showBtn = !paidVersion && item.getType() == DownloadActivityType.WIKIPEDIA_FILE;
+				boolean showBtn = !paidVersion
+						&& (item.getType() == DownloadActivityType.WIKIPEDIA_FILE
+						|| item.getType() == DownloadActivityType.TRAVEL_FILE);
 				iconAction.setVisibility(showBtn ? View.GONE : View.VISIBLE);
 				buttonAction.setVisibility(showBtn ? View.VISIBLE : View.GONE);
-				if (!showBtn) {
+				if (showBtn) {
+					buttonAction.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							view.callOnClick();
+						}
+					});
+				} else {
 					iconAction.setImageDrawable(downloading ? cancelIcon : downloadIcon);
+					buttonAction.setOnClickListener(null);
 				}
 			}
 
@@ -173,7 +206,7 @@ public class TravelNeededMapsCard extends BaseTravelCard {
 	 * @return true if button is visible, false otherwise.
 	 */
 	private boolean updatePrimaryButton(NeededMapsVH vh) {
-		if (showPrimaryButton()) {
+		if (showPrimaryButton() && Version.isPaidVersion(app)) {
 			boolean enabled = isInternetAvailable();
 			vh.primaryBtnContainer.setVisibility(View.VISIBLE);
 			vh.primaryBtnContainer.setBackgroundResource(getPrimaryBtnBgRes(enabled));
@@ -227,7 +260,9 @@ public class TravelNeededMapsCard extends BaseTravelCard {
 
 	public static class NeededMapsVH extends RecyclerView.ViewHolder {
 
+		final TextView title;
 		final TextView description;
+		final ImageView icon;
 		final LinearLayout itemsContainer;
 		final View secondaryBtnContainer;
 		final TextView secondaryBtn;
@@ -238,7 +273,9 @@ public class TravelNeededMapsCard extends BaseTravelCard {
 		@SuppressWarnings("RedundantCast")
 		public NeededMapsVH(View itemView) {
 			super(itemView);
+			title = (TextView) itemView.findViewById(R.id.title);
 			description = (TextView) itemView.findViewById(R.id.description);
+			icon = (ImageView) itemView.findViewById(R.id.icon);
 			itemsContainer = (LinearLayout) itemView.findViewById(R.id.items_container);
 			secondaryBtnContainer = itemView.findViewById(R.id.secondary_btn_container);
 			secondaryBtn = (TextView) itemView.findViewById(R.id.secondary_button);

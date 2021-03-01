@@ -3596,7 +3596,7 @@
     <string name="poi_charcoal_pile">Puusöe hunnik</string>
     <string name="poi_historic_tank">Ajalooline tank</string>
     <string name="poi_hookah_lounge">Vesipiibu salong</string>
-    <string name="poi_source_biomass">Energiaallikas: biomass</string>
+    <string name="poi_generator_source_biomass">Energiaallikas: biomass</string>
     <string name="poi_taxi_office">Takso kontor</string>
     <string name="poi_vehicle_yes">Sõidukiga ligipääs: jah</string>
     <string name="poi_vehicle_private">Sõidukiga ligipääs: privaatne</string>

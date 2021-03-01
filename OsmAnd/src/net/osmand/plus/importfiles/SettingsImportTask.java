@@ -134,7 +134,7 @@ class SettingsImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 	private SettingsImportListener getImportListener(final File file) {
 		return new SettingsImportListener() {
 			@Override
-			public void onSettingsImportFinished(boolean succeed, @NonNull List<SettingsItem> items) {
+			public void onSettingsImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> items) {
 				if (succeed) {
 					app.getRendererRegistry().updateExternalRenderers();
 					app.getPoiFilters().loadSelectedPoiFilters();
@@ -150,7 +150,7 @@ class SettingsImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 					}
 					if (!silentImport && file != null && activity != null) {
 						FragmentManager fm = activity.getSupportFragmentManager();
-						ImportCompleteFragment.showInstance(fm, items, file.getName());
+						ImportCompleteFragment.showInstance(fm, items, file.getName(), needRestart);
 					}
 				}
 			}
@@ -174,7 +174,7 @@ class SettingsImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 
 		final SettingsImportListener importListener = new SettingsImportListener() {
 			@Override
-			public void onSettingsImportFinished(boolean succeed, @NonNull List<SettingsItem> items) {
+			public void onSettingsImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> items) {
 				FragmentActivity activity = activityRef.get();
 				if (progress != null && AndroidUtils.isActivityNotDestroyed(activity)) {
 					progress.dismiss();

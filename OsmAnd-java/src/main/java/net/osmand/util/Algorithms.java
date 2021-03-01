@@ -53,6 +53,8 @@ public class Algorithms {
 	public static final int XML_FILE_SIGNATURE = 0x3c3f786d;
 	public static final int OBF_FILE_SIGNATURE = 0x08029001;
 	public static final int SQLITE_FILE_SIGNATURE = 0x53514C69;
+	public static final int BZIP_FILE_SIGNATURE = 0x425a;
+	public static final int GZIP_FILE_SIGNATURE = 0x1f8b;
 
 	public static String normalizeSearchText(String s) {
 		boolean norm = false;
@@ -120,6 +122,17 @@ public class Algorithms {
 		if (input != null && input.length() > 0) {
 			try {
 				return Integer.parseInt(input);
+			} catch (NumberFormatException e) {
+				return def;
+			}
+		}
+		return def;
+	}
+
+	public static double parseDoubleSilently(String input, double def) {
+		if (input != null && input.length() > 0) {
+			try {
+				return Double.parseDouble(input);
 			} catch (NumberFormatException e) {
 				return def;
 			}
@@ -311,6 +324,24 @@ public class Algorithms {
 		return test == ZIP_FILE_SIGNATURE;
 	}
 
+	public static boolean checkFileSignature(InputStream inputStream, int fileSignature) throws IOException {
+		if (inputStream == null) return false;
+		int firstBytes;
+		if (isSmallFileSignature(fileSignature)) {
+			firstBytes = readSmallInt(inputStream);
+		} else {
+			firstBytes = readInt(inputStream);
+		}
+		if (inputStream.markSupported()) {
+			inputStream.reset();
+		}
+		return firstBytes == fileSignature;
+	}
+
+	public static boolean isSmallFileSignature(int fileSignature) {
+		return fileSignature == BZIP_FILE_SIGNATURE || fileSignature == GZIP_FILE_SIGNATURE;
+	}
+
 	/**
 	 * Checks, whether the child directory is a subdirectory of the parent
 	 * directory.
@@ -345,6 +376,14 @@ public class Algorithms {
 		if ((ch1 | ch2 | ch3 | ch4) < 0)
 			throw new EOFException();
 		return ((ch1 << 24) + (ch2 << 16) + (ch3 << 8) + ch4);
+	}
+
+	public static int readSmallInt(InputStream in) throws IOException {
+		int ch1 = in.read();
+		int ch2 = in.read();
+		if ((ch1 | ch2) < 0)
+			throw new EOFException();
+		return ((ch1 << 8) + ch2);
 	}
 
 	public static String capitalizeFirstLetterAndLowercase(String s) {
@@ -524,6 +563,13 @@ public class Algorithms {
 		} catch (IOException e) {
 			log.warn("Closing stream warn", e); //$NON-NLS-1$
 		}
+	}
+
+	public static ByteArrayInputStream createByteArrayIS(InputStream in) throws IOException {
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		streamCopy(in, out);
+		in.close();
+		return new ByteArrayInputStream(out.toByteArray());
 	}
 
 	@SuppressWarnings("ResultOfMethodCallIgnored")

@@ -183,7 +183,7 @@ public class OsmBaseStorage {
 	protected static final int moduleProgress = 1 << 10;
 	
 	public void startElement(XmlPullParser parser, String name)  {
-		if(!parseStarted){
+		if (!parseStarted) {
 			initRootElement(parser, name);
 		}
 		if (ELEM_MODIFY.equals(name) ) {
@@ -283,13 +283,14 @@ public class OsmBaseStorage {
 		if (type != null) {
 			if(currentParsedEntity != null){
 				EntityId entityId = new EntityId(type, currentParsedEntity.getId());
-				if(acceptEntityToLoad(entityId, currentParsedEntity)){
+				if (acceptEntityToLoad(entityId, currentParsedEntity)) {
 					Entity oldEntity = entities.put(entityId, currentParsedEntity);
-					if(parseEntityInfo && currentParsedEntityInfo != null){
+					if (parseEntityInfo && currentParsedEntityInfo != null) {
 						entityInfo.put(entityId, currentParsedEntityInfo);
 					}
-					if(!supressWarnings && oldEntity!= null){
-						throw new UnsupportedOperationException("Entity with id=" + oldEntity.getId() +" is duplicated in osm map"); //$NON-NLS-1$ //$NON-NLS-2$
+					if (!supressWarnings && oldEntity != null) {
+						throw new UnsupportedOperationException(
+								"Entity with id=" + oldEntity.getId() + " is duplicated in osm map"); //$NON-NLS-1$ //$NON-NLS-2$
 					}
 				} else {
 //					System.gc();
@@ -308,8 +309,8 @@ public class OsmBaseStorage {
 	
 	
 	protected boolean acceptEntityToLoad(EntityId entityId, Entity entity) {
-		for(IOsmStorageFilter f : filters){
-			if(!f.acceptEntityToLoad(this, entityId, entity)){
+		for (IOsmStorageFilter f : filters) {
+			if (!f.acceptEntityToLoad(this, entityId, entity)) {
 				return false;
 			}
 		}

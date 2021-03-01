@@ -159,7 +159,8 @@ public class TravelArticle {
 			System.err.println(e.getMessage());
 		}
 		String prefix = thumbnail ? THUMB_PREFIX : REGULAR_PREFIX;
-		return IMAGE_ROOT_URL + "thumb/" + hash[0] + "/" + hash[1] + "/" + imageTitle + "/" + prefix + imageTitle;
+		String suffix = imageTitle.endsWith(".svg") ? ".png" : "";
+		return IMAGE_ROOT_URL + "thumb/" + hash[0] + "/" + hash[1] + "/" + imageTitle + "/" + prefix + imageTitle + suffix;
 	}
 
 	@Size(2)
@@ -167,6 +168,26 @@ public class TravelArticle {
 	private static String[] getHash(@NonNull String s) {
 		String md5 = new String(Hex.encodeHex(DigestUtils.md5(s)));
 		return new String[]{md5.substring(0, 1), md5.substring(0, 2)};
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		TravelArticle that = (TravelArticle) o;
+		return TravelArticleIdentifier.areLatLonEqual(that.lat, that.lon, lat, lon) &&
+				Algorithms.objectEquals(file, that.file) &&
+				Algorithms.stringsEqual(routeId, that.routeId) &&
+				Algorithms.stringsEqual(routeSource, that.routeSource);
+	}
+
+	@Override
+	public int hashCode() {
+		return Algorithms.hash(file, lat, lon, routeId, routeSource);
 	}
 
 	public static class TravelArticleIdentifier implements Parcelable {
@@ -249,7 +270,7 @@ public class TravelArticle {
 			return Algorithms.hash(file, lat, lon, routeId, routeSource);
 		}
 
-		private static boolean areLatLonEqual(double lat1, double lon1, double lat2, double lon2) {
+		public static boolean areLatLonEqual(double lat1, double lon1, double lat2, double lon2) {
 			boolean latEqual = (Double.isNaN(lat1) && Double.isNaN(lat2)) || Math.abs(lat1 - lat2) < 0.00001;
 			boolean lonEqual = (Double.isNaN(lon1) && Double.isNaN(lon2)) || Math.abs(lon1 - lon2) < 0.00001;
 			return latEqual && lonEqual;

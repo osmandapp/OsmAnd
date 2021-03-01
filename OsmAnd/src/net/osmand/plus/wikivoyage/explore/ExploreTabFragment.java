@@ -1,7 +1,6 @@
 package net.osmand.plus.wikivoyage.explore;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Pair;
@@ -16,6 +15,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -37,6 +37,7 @@ import net.osmand.plus.wikivoyage.explore.travelcards.BaseTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.HeaderTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.OpenBetaTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.StartEditingTravelCard;
+import net.osmand.plus.wikivoyage.explore.travelcards.TravelButtonCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.TravelDownloadUpdateCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.TravelGpxCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.TravelNeededMapsCard;
@@ -45,6 +46,9 @@ import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
+
+import static net.osmand.plus.download.DownloadResources.WIKIVOYAGE_FILE_FILTER;
+import static net.osmand.plus.resources.ResourceManager.DEFAULT_WIKIVOYAGE_TRAVEL_OBF;
 
 public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEvents, TravelLocalDataHelper.Listener {
 
@@ -63,9 +67,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 	private DownloadValidationManager downloadManager;
 	@Nullable
 	private IndexItem currentDownloadingIndexItem;
-	@Nullable
-	private IndexItem mainIndexItem;
-
+	private final List<IndexItem> mainIndexItems = new ArrayList<>();
 	private final List<IndexItem> neededIndexItems = new ArrayList<>();
 	private boolean waitForIndexes;
 
@@ -91,10 +93,6 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 		OsmandApplication app = getMyApplication();
 		if (app != null) {
 			app.getTravelHelper().getBookmarksHelper().addListener(this);
-		}
-		WikivoyageExploreActivity exploreActivity = getExploreActivity();
-		if (exploreActivity != null) {
-			exploreActivity.onTabFragmentResume(this);
 		}
 	}
 
@@ -138,7 +136,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 				app.getTravelHelper().initializeDataOnAppStartup();
 				WikivoyageExploreActivity exploreActivity = getExploreActivity();
 				if (exploreActivity != null) {
-					exploreActivity.populateData();
+					exploreActivity.populateData(true);
 				}
 			} else {
 				removeRedundantCards();
@@ -175,16 +173,39 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 			if (!Version.isPaidVersion(app) && !OpenBetaTravelCard.isClosed()) {
 				items.add(new OpenBetaTravelCard(activity, nightMode));
 			}
-			List<TravelArticle> popularArticles = app.getTravelHelper().getPopularArticles();
+			final List<TravelArticle> popularArticles = app.getTravelHelper().getPopularArticles();
 			if (!popularArticles.isEmpty()) {
 				items.add(new HeaderTravelCard(app, nightMode, getString(R.string.popular_destinations)));
 				for (TravelArticle article : popularArticles) {
 					if (article instanceof TravelGpx) {
-						items.add(new TravelGpxCard(app, nightMode, (TravelGpx) article, getActivity()));
+						items.add(new TravelGpxCard(app, nightMode, (TravelGpx) article, activity));
 					} else {
 						items.add(new ArticleTravelCard(app, nightMode, article, activity.getSupportFragmentManager()));
 					}
 				}
+			}
+			if (!isOnlyDefaultTravelBookPresent()) {
+				TravelButtonCard travelButtonCard = new TravelButtonCard(app, nightMode);
+				travelButtonCard.setListener(new TravelNeededMapsCard.CardListener() {
+					@Override
+					public void onPrimaryButtonClick() {
+						WikivoyageExploreActivity exploreActivity = getExploreActivity();
+						if (exploreActivity != null) {
+							exploreActivity.populateData(false);
+						}
+					}
+
+					@Override
+					public void onSecondaryButtonClick() {
+
+					}
+
+					@Override
+					public void onIndexItemClick(IndexItem item) {
+
+					}
+				});
+				items.add(travelButtonCard);
 			}
 			items.add(new StartEditingTravelCard(activity, nightMode));
 			adapter.setItems(items);
@@ -199,17 +220,24 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 	}
 
 	private void removeRedundantCards() {
-		if (mainIndexItem != null && mainIndexItem.isDownloaded() && !mainIndexItem.isOutdated()) {
-			removeDownloadUpdateCard();
-		}
-		boolean allMapsDownloaded = true;
-		for (IndexItem item : neededIndexItems) {
+		boolean allTravelGuideDownloaded = true;
+		for (IndexItem item : mainIndexItems) {
 			if (!item.isDownloaded()) {
-				allMapsDownloaded = false;
+				allTravelGuideDownloaded = false;
 				break;
 			}
 		}
-		if (allMapsDownloaded) {
+		if (allTravelGuideDownloaded) {
+			removeDownloadUpdateCard();
+		}
+		boolean neededMapsDownloaded = true;
+		for (IndexItem item : neededIndexItems) {
+			if (!item.isDownloaded()) {
+				neededMapsDownloaded = false;
+				break;
+			}
+		}
+		if (neededMapsDownloaded) {
 			removeNeededMapsCard();
 		}
 	}
@@ -218,63 +246,84 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 		new ProcessIndexItemsTask(this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	private void addIndexItemCards(IndexItem mainIndexItem, List<IndexItem> neededIndexItems) {
-		this.mainIndexItem = mainIndexItem;
+	private void addIndexItemCards(List<IndexItem> mainIndexItem, List<IndexItem> neededIndexItems) {
+		if (isOnlyDefaultTravelBookPresent()) {
+			this.mainIndexItems.clear();
+			this.mainIndexItems.addAll(mainIndexItem);
+			addDownloadUpdateCard();
+		}
 		this.neededIndexItems.clear();
 		this.neededIndexItems.addAll(neededIndexItems);
-		addDownloadUpdateCard();
 		addNeededMapsCard();
+	}
+
+	private boolean isOnlyDefaultTravelBookPresent() {
+		OsmandApplication app = getMyApplication();
+		if (app != null && !app.isApplicationInitializing()) {
+			for (BinaryMapIndexReader reader : app.getResourceManager().getTravelRepositories()) {
+				if (!reader.getFile().getName().equals(DEFAULT_WIKIVOYAGE_TRAVEL_OBF)) {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 
 	private void addDownloadUpdateCard() {
 		final OsmandApplication app = getMyApplication();
-		if (app != null) {
-			final DownloadIndexesThread downloadThread = app.getDownloadThread();
-
-			boolean outdated = mainIndexItem != null && mainIndexItem.isOutdated();
-			boolean needsDownloading = mainIndexItem != null && !mainIndexItem.isDownloaded();
-
-			if (!app.getTravelHelper().isAnyTravelBookPresent() || needsDownloading || (outdated && SHOW_TRAVEL_UPDATE_CARD)) {
-				boolean showOtherMaps = false;
-				if (needsDownloading) {
-					List<IndexItem> items = downloadThread.getIndexes().getWikivoyageItems();
-					showOtherMaps = items != null && items.size() > 1;
+		if (app != null && !mainIndexItems.isEmpty() && SHOW_TRAVEL_UPDATE_CARD) {
+			boolean outdated = isMapsOutdated();
+			downloadUpdateCard = new TravelDownloadUpdateCard(app, nightMode, mainIndexItems, !outdated);
+			downloadUpdateCard.setListener(new TravelDownloadUpdateCard.CardListener() {
+				@Override
+				public void onPrimaryButtonClick() {
+					if (downloadManager != null) {
+						downloadManager.startDownload(getMyActivity(), getAllItemsForDownload(mainIndexItems));
+						adapter.updateDownloadUpdateCard(false);
+					}
 				}
 
-				downloadUpdateCard = new TravelDownloadUpdateCard(app, nightMode, !outdated);
-				downloadUpdateCard.setShowOtherMapsBtn(showOtherMaps);
-				downloadUpdateCard.setListener(new TravelDownloadUpdateCard.ClickListener() {
-					@Override
-					public void onPrimaryButtonClick() {
-						if (mainIndexItem != null && downloadManager != null) {
-							downloadManager.startDownload(getMyActivity(), mainIndexItem);
-							adapter.updateDownloadUpdateCard(false);
-						}
+				@Override
+				public void onSecondaryButtonClick() {
+					if (downloadUpdateCard.isDownloading()) {
+						app.getDownloadThread().cancelDownload(mainIndexItems);
+						adapter.updateDownloadUpdateCard(false);
+					} else {
+						SHOW_TRAVEL_UPDATE_CARD = false;
+						removeDownloadUpdateCard();
 					}
+				}
 
-					@Override
-					public void onSecondaryButtonClick() {
-						if (downloadUpdateCard.isLoading()) {
-							downloadThread.cancelDownload(mainIndexItem);
-							adapter.updateDownloadUpdateCard(false);
-						} else if (!downloadUpdateCard.isDownload()) {
-							SHOW_TRAVEL_UPDATE_CARD = false;
-							removeDownloadUpdateCard();
-						} else if (downloadUpdateCard.isShowOtherMapsBtn()) {
-							Activity activity = getActivity();
-							if (activity != null) {
-								Intent newIntent = new Intent(activity,
-										((OsmandApplication) activity.getApplication()).getAppCustomization().getDownloadActivity());
-								newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-								activity.startActivity(newIntent);
-							}
+				@Override
+				public void onIndexItemClick(IndexItem item) {
+					if ((item.getType() == DownloadActivityType.WIKIPEDIA_FILE
+							|| item.getType() == DownloadActivityType.TRAVEL_FILE) && !Version.isPaidVersion(app)) {
+						FragmentManager fm = getFragmentManager();
+						if (fm != null) {
+							ChoosePlanDialogFragment.showWikipediaInstance(fm);
 						}
+					} else {
+						DownloadIndexesThread downloadThread = app.getDownloadThread();
+						if (downloadThread.isDownloading(item)) {
+							downloadThread.cancelDownload(item);
+						} else if (!item.isDownloaded() && downloadManager != null) {
+							downloadManager.startDownload(getMyActivity(), item);
+						}
+						adapter.updateDownloadUpdateCard(false);
 					}
-				});
-				downloadUpdateCard.setIndexItem(mainIndexItem);
-				adapter.addDownloadUpdateCard(downloadUpdateCard);
+				}
+			});
+			adapter.addDownloadUpdateCard(downloadUpdateCard);
+		}
+	}
+
+	private boolean isMapsOutdated() {
+		for (IndexItem indexItem : mainIndexItems) {
+			if (indexItem.isOutdated()) {
+				return true;
 			}
 		}
+		return false;
 	}
 
 	private void addNeededMapsCard() {
@@ -285,7 +334,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 				@Override
 				public void onPrimaryButtonClick() {
 					if (downloadManager != null) {
-						downloadManager.startDownload(getMyActivity(), getAllItemsForDownload());
+						downloadManager.startDownload(getMyActivity(), getAllItemsForDownload(neededIndexItems));
 						adapter.updateNeededMapsCard(false);
 					}
 				}
@@ -303,7 +352,8 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 
 				@Override
 				public void onIndexItemClick(IndexItem item) {
-					if (item.getType() == DownloadActivityType.WIKIPEDIA_FILE && !Version.isPaidVersion(app)) {
+					if ((item.getType() == DownloadActivityType.WIKIPEDIA_FILE
+							|| item.getType() == DownloadActivityType.TRAVEL_FILE) && !Version.isPaidVersion(app)) {
 						FragmentManager fm = getFragmentManager();
 						if (fm != null) {
 							ChoosePlanDialogFragment.showWikipediaInstance(fm);
@@ -323,10 +373,10 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 		}
 	}
 
-	private IndexItem[] getAllItemsForDownload() {
+	private IndexItem[] getAllItemsForDownload(List<IndexItem> indexItems) {
 		boolean paidVersion = Version.isPaidVersion(getMyApplication());
 		ArrayList<IndexItem> res = new ArrayList<>();
-		for (IndexItem item : neededIndexItems) {
+		for (IndexItem item : indexItems) {
 			if (!item.isDownloaded() && (paidVersion || item.getType() != DownloadActivityType.WIKIPEDIA_FILE)) {
 				res.add(item);
 			}
@@ -344,7 +394,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 		neededMapsCard = null;
 	}
 
-	private static class ProcessIndexItemsTask extends AsyncTask<Void, Void, Pair<IndexItem, List<IndexItem>>> {
+	private static class ProcessIndexItemsTask extends AsyncTask<Void, Void, Pair<List<IndexItem>, List<IndexItem>>> {
 
 		private static final DownloadActivityType[] types = new DownloadActivityType[]{
 				DownloadActivityType.NORMAL_FILE,
@@ -354,40 +404,43 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 		private final OsmandApplication app;
 		private final WeakReference<ExploreTabFragment> weakFragment;
 
-		private final String fileName;
-
 		ProcessIndexItemsTask(ExploreTabFragment fragment) {
 			app = fragment.getMyApplication();
 			weakFragment = new WeakReference<>(fragment);
-			fileName = app != null ? app.getTravelHelper().getWikivoyageFileName() : null;
 		}
 
 		@Override
-		protected Pair<IndexItem, List<IndexItem>> doInBackground(Void... voids) {
-			if (fileName != null) {
-				IndexItem mainItem = app.getDownloadThread().getIndexes().getWikivoyageItem(fileName);
-
-				List<IndexItem> neededItems = new ArrayList<>();
-				for (TravelArticle article : app.getTravelHelper().getBookmarksHelper().getSavedArticles()) {
-					LatLon latLon = new LatLon(article.getLat(), article.getLon());
-					try {
-						for (DownloadActivityType type : types) {
-							IndexItem item = DownloadResources.findSmallestIndexItemAt(app, latLon, type);
-							if (item != null && !item.isDownloaded() && !neededItems.contains(item)) {
-								neededItems.add(item);
-							}
-						}
-					} catch (IOException e) {
-						// ignore
+		protected Pair<List<IndexItem>, List<IndexItem>> doInBackground(Void... voids) {
+			List<IndexItem> mainItems = new ArrayList<>();
+			List<IndexItem> allWikivoyageItems = app.getDownloadThread().getIndexes().getWikivoyageItems();
+			if (allWikivoyageItems != null) {
+				for (IndexItem item : allWikivoyageItems) {
+					if (!item.isDownloaded()
+							&& !mainItems.contains(item)
+							&& item.getFileName().contains(WIKIVOYAGE_FILE_FILTER)) {
+						mainItems.add(item);
 					}
 				}
-				return new Pair<>(mainItem, neededItems);
 			}
-			return null;
+			List<IndexItem> neededItems = new ArrayList<>();
+			for (TravelArticle article : app.getTravelHelper().getBookmarksHelper().getSavedArticles()) {
+				LatLon latLon = new LatLon(article.getLat(), article.getLon());
+				try {
+					for (DownloadActivityType type : types) {
+						IndexItem item = DownloadResources.findSmallestIndexItemAt(app, latLon, type);
+						if (item != null && !item.isDownloaded() && !neededItems.contains(item)) {
+							neededItems.add(item);
+						}
+					}
+				} catch (IOException e) {
+					// ignore
+				}
+			}
+			return new Pair<>(mainItems, neededItems);
 		}
 
 		@Override
-		protected void onPostExecute(Pair<IndexItem, List<IndexItem>> res) {
+		protected void onPostExecute(Pair<List<IndexItem>, List<IndexItem>> res) {
 			ExploreTabFragment fragment = weakFragment.get();
 			if (res != null && fragment != null && fragment.isResumed()) {
 				fragment.addIndexItemCards(res.first, res.second);

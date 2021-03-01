@@ -779,7 +779,7 @@
     <string name="altitude_descent">Eniş</string>
     <string name="altitude_ascent">Yoxuş</string>
     <string name="routing_attr_height_obstacles_name">Yüksəklik məlumatlarını istifadə et</string>
-    <string name="routing_attr_height_obstacles_description">SRTM, ASTER və EU-DEM tərəfindən təmin edilən ərazi yüksəklik məlumatlarını istifadə et.</string>
+
     <string name="rendering_attr_depthContours_description">Dərinlik konturlarını və nöqtələrini göstər.</string>
     <string name="rendering_attr_depthContours_name">Dəniz dərinliyi konturları</string>
     <string name="rendering_attr_contourDensity_description">Kontur xəttinin sıxlığı</string>
@@ -979,7 +979,6 @@
     <string name="impassable_road">Yollardan yayın…</string>
     <string name="routing_attr_avoid_toll_name">Pullu yollardan yayın</string>
     <string name="ending_point_too_far">Son nöqtə ən yaxın yoldan çox uzaqdır.</string>
-    <string name="snap_to_road_descr">Naviqasiya zamanı mövqeni yollara bərkit.</string>
     <string name="snap_to_road">Yola bərkit</string>
     <string name="avoid_unpaved">Asfaltsız yollardan yayın</string>
     <string name="avoid_toll_roads">Pullu yollardan yayın</string>
@@ -1967,7 +1966,6 @@
     <string name="save_track_precision_descr">Filtr: Nöqtənin qeydiyyatı üçün minimum dəqiqlik seçin.</string>
     <string name="rendering_attr_surfaceIntegrity_name">Yol səthinin keyfiyyəti</string>
     <string name="routing_attr_short_way_name">Yanacağa qənaətli yol</string>
-    <string name="routing_attr_short_way_description">Yanacağa qənaətli yoldan istifadə et (adətən daha qısa).</string>
     <string name="access_direction_haptic_feedback_descr">Hədəf nöqtənin istiqamətini titrəmə ilə göstər.</string>
     <string name="use_osm_live_routing_description">OsmAnd Live dəyişiklikləri üçün naviqasiyanı aktivləşdir.</string>
     <string name="storage_permission_restart_is_required">İndi proqramın xarici yaddaşa yazmasına icazə verilir, lakin bunun üçün yenidən başlatmaq lazımdır.</string>

@@ -97,7 +97,6 @@
     <string name="avoid_motorway">Keine Autobahnen</string>
     <string name="auto_zoom_map_descr">Kartenvergrößerung der Geschwindigkeit anpassen (während der Kartennachführung).</string>
     <string name="auto_zoom_map">Automatische Vergrößerung</string>
-    <string name="snap_to_road_descr">Standort während der Navigation auf Straßen einrasten.</string>
     <string name="snap_to_road">Auf Straße einrasten</string>
     <string name="osmand_play_title_30_chars">OsmAnd Karten &amp; Navigation</string>
     <string name="osmand_short_description_80_chars">Globale Landkarten- und Navigationsanwendung für Offline- und Online-OSM-Karten</string>
@@ -1999,7 +1998,6 @@
     <string name="route_stops_before">%1$s Haltestellen davor</string>
     <string name="rendering_attr_hideOverground_name">Oberirdische Objekte</string>
     <string name="routing_attr_short_way_name">Kraftstoffsparende Route</string>
-    <string name="routing_attr_short_way_description">Kraftstoffsparende Route verwenden (in der Regel kürzer).</string>
     <string name="replace_favorite_confirmation">Wollen Sie den Favoriten \'%1$s\' wirklich ersetzen?</string>
     <string name="shared_string_change">Ändern</string>
     <string name="get_started">Erste Schritte</string>
@@ -2173,7 +2171,7 @@
     <string name="navigate_point_olc">Offener Standortcode (OLC)</string>
     <string name="quick_action_page_list_descr">Eine Schaltfläche, um durch die Liste unten zu blättern.</string>
     <string name="routing_attr_height_obstacles_name">Höhendaten berücksichtigen</string>
-    <string name="routing_attr_height_obstacles_description">Faktor im Geländeprofil (über SRTM, ASTER und EU-DEM-Daten).</string>
+
     <string name="rendering_attr_depthContours_name">Nautische Tiefenlinien</string>
     <string name="rendering_attr_depthContours_description">Tiefenlinien und -punkte einblenden.</string>
     <string name="route_altitude">Routenhöhenprofil</string>
@@ -3694,7 +3692,7 @@
     <string name="quick_action_showhide_mapillary_title">Mapillary ein-/ausblenden</string>
     <string name="quick_action_mapillary_hide">Mapillary ausblenden</string>
     <string name="quick_action_mapillary_show">Mapillary anzeigen</string>
-    <string name="quick_action_showhide_mapillary_descr">Eine Umschaltfläche zum ein- oder ausblenden der Mapillary-Layer auf der Karte.</string>
+    <string name="quick_action_showhide_mapillary_descr">Eine Umschaltfläche zum Ein- oder Ausblenden des Mapillary-Layers auf der Karte.</string>
     <string name="uninstall_speed_cameras">Blitzer deinstallieren</string>
     <string name="shared_string_legal">Rechtliches</string>
     <string name="speed_camera_pois">Blitzer-POIs</string>
@@ -3923,7 +3921,6 @@
     <string name="cannot_upload_image">Bild kann nicht hochgeladen werden, bitte versuchen Sie es später erneut</string>
     <string name="select_picture">Bild auswählen</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
-    <string name="elevation_data">Sie können Höhendaten verwenden, um Steigungen und Gefälle auf Ihrer Reise zu berücksichtigen</string>
     <string name="app_mode_light_aircraft">Kleinflugzeug</string>
     <string name="plan_route_split_before">Teilen vor</string>
     <string name="plan_route_split_after">Teilen nach</string>
@@ -3972,7 +3969,7 @@
     <string name="select_folder">Ordner auswählen</string>
     <string name="select_folder_descr">Ordner auswählen oder neuen hinzufügen</string>
     <string name="shared_string_empty">Leer</string>
-    <string name="analyze_by_intervals">Nach Intervallen auswerten (geteiltes Intervall)</string>
+    <string name="analyze_by_intervals">Nach Intervallen auswerten</string>
     <string name="upload_to_openstreetmap">Hochladen zu OpenStreetMap</string>
     <string name="edit_track">Track editieren</string>
     <string name="rename_track">Track umbenennen</string>
@@ -4008,4 +4005,34 @@
     <string name="delete_waypoints">Wegpunkte löschen</string>
     <string name="copy_to_map_favorites">In Favoriten kopieren</string>
     <string name="copy_to_map_markers">In Kartenmarkierungen kopieren</string>
+    <string name="upload_photo">Lade hoch</string>
+    <string name="upload_photo_completed">Hochladen abgeschlossen</string>
+    <string name="uploading_count">Lade %1$d von %2$d hoch</string>
+    <string name="uploaded_count">%1$d von %2$d hochgeladen</string>
+    <string name="toast_select_edits_for_upload">Bearbeitungen zum Hochladen auswählen</string>
+    <string name="hillshade_slope_contour_lines">Relief / Hangneigung / Höhenlinien</string>
+    <string name="open_place_reviews_plugin_description">OpenPlaceReviews ist ein von der Gemeinschaft betriebenes Projekt über öffentliche Orte wie Restaurants, Hotels, Museen, Wegpunkte. Es sammelt alle öffentlichen Informationen über sie wie Fotos, Bewertungen, Links zu anderen Systemen, Link OpenStreetMap, Wikipedia.
+\n
+\nAlle OpenPlaceReview-Daten sind offen und für jedermann zugänglich: http://openplacereviews.org/data.
+\n
+\nMehr Informationen finden Sie unter: http://openplacereviews.org</string>
+    <string name="open_place_reviews">OpenPlaceReviews</string>
+    <string name="opr_use_dev_url">test.openplacereviews.org verwenden</string>
+    <string name="login_open_place_reviews">Anmelden bei OpenPlaceReviews</string>
+    <string name="activity_type_water_name">Wasser</string>
+    <string name="activity_type_winter_name">Winter</string>
+    <string name="activity_type_snowmobile_name">Schneemobil</string>
+    <string name="activity_type_riding_name">Reiten</string>
+    <string name="activity_type_mountainbike_name">Mountainbike</string>
+    <string name="activity_type_cycling_name">Fahrrad</string>
+    <string name="activity_type_hiking_name">Wandern</string>
+    <string name="activity_type_running_name">Laufen</string>
+    <string name="activity_type_walking_name">Fußgänger</string>
+    <string name="activity_type_offroad_name">Geländegängig</string>
+    <string name="activity_type_motorbike_name">Motorrad</string>
+    <string name="activity_type_car_name">Auto</string>
+    <string name="announcement_time_prepare">Zweite Ankündigung (mittlere Distanz)</string>
+    <string name="shared_string_sec">sek</string>
+    <string name="activity_type_racing_name">Rennsport</string>
+    <string name="announcement_time_prepare_long">Erste Ankündigung (größere Distanz)</string>
 </resources>

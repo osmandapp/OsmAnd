@@ -33,50 +33,35 @@ public class WikivoyageShowPicturesDialogFragment extends BottomSheetDialogFragm
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		nightMode=!getMyApplication().getSettings().isLightContent();
+		nightMode = !getMyApplication().getSettings().isLightContent();
 		View view = inflater.inflate(R.layout.fragment_wikivoyage_show_images_first_time, container, false);
-		view.findViewById(R.id.button_no).setOnClickListener(new View.OnClickListener() {
+		TextView buttonNo = view.findViewById(R.id.button_no);
+		buttonNo.setText(R.string.shared_string_only_with_wifi);
+		buttonNo.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				OsmandApplication app = getMyApplication();
 				if (app != null) {
-					app.getSettings().WIKI_ARTICLE_SHOW_IMAGES.set(WikiArticleShowImages.OFF);
+					app.getSettings().WIKI_ARTICLE_SHOW_IMAGES.set(WikiArticleShowImages.WIFI);
 				}
 				sendResult();
 				dismiss();
 			}
 		});
 		TextView buttonDownload = view.findViewById(R.id.button_download);
-		if (getMyApplication().getSettings().isWifiConnected()) {
-			buttonDownload.setText(R.string.shared_string_only_with_wifi);
-			buttonDownload.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					OsmandApplication app = getMyApplication();
-					if (app != null) {
-						app.getSettings().WIKI_ARTICLE_SHOW_IMAGES.set(WikiArticleShowImages.WIFI);
-					}
-					sendResult();
-					dismiss();
+		buttonDownload.setText(R.string.shared_string_always);
+		buttonDownload.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				OsmandApplication app = getMyApplication();
+				if (app != null) {
+					app.getSettings().WIKI_ARTICLE_SHOW_IMAGES.set(WikiArticleShowImages.ON);
 				}
-			});
-		} else {
-			buttonDownload.setText(R.string.shared_string_show);
-			buttonDownload.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					OsmandApplication app = getMyApplication();
-					if (app != null) {
-						app.getSettings().WIKI_ARTICLE_SHOW_IMAGES.set(WikiArticleShowImages.ON);
-					}
-					sendResult();
-					dismiss();
-				}
-			});
-		}
-
+				sendResult();
+				dismiss();
+			}
+		});
 		setupHeightAndBackground(view);
-
 		return view;
 	}
 

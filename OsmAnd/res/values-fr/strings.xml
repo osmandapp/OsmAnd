@@ -781,7 +781,6 @@
     <string name="int_continuosly">En continu</string>
     <string name="osmand_short_description_80_chars">Logiciel de cartographie et de navigation fonctionnant avec des cartes OSM hors-ligne et en ligne</string>
     <string name="osmand_plus_short_description_80_chars">OsmAnd est un logiciel libre de navigation pouvant fonctionner avec des cartes hors-ligne ou en ligne</string>
-    <string name="snap_to_road_descr">Déplacer la position sur la route en cours de navigation.</string>
     <string name="snap_to_road">Déplacer sur la route</string>
     <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions) 
 \n 
@@ -1984,7 +1983,6 @@
     <string name="shared_string_change">Modifier</string>
     <string name="get_started">Démarrer</string>
     <string name="routing_attr_short_way_name">Trajet économe en carburant</string>
-    <string name="routing_attr_short_way_description">Suivre un trajet économe en carburant (habituellement plus court).</string>
     <string name="skip_map_downloading">Ignorer le téléchargement des cartes</string>
     <string name="skip_map_downloading_desc">Aucune carte hors ligne n\'est installée. Vous pouvez sélectionner une carte dans la liste ou télécharger une carte plus tard depuis le menu « %1$s ».</string>
     <string name="search_another_country">Sélectionner une autre région</string>
@@ -2160,7 +2158,7 @@
     <string name="rendering_attr_depthContours_description">Afficher les lignes et points de sonde.</string>
     <string name="rendering_attr_depthContours_name">Lignes de sonde maritimes</string>
     <string name="routing_attr_height_obstacles_name">Utiliser les données d\'altitude</string>
-    <string name="routing_attr_height_obstacles_description">Facteur pour les données d\'altitude fournies par SRTM, ASTER et EU-DEM.</string>
+
     <string name="average_altitude">Altitude moyenne</string>
     <string name="total_distance">Distance totale</string>
     <string name="shared_string_time">Durée</string>
@@ -2382,7 +2380,7 @@
     <string name="store_tracks_in_monthly_directories">Enregistrer les traces dans des dossiers mensuels</string>
     <string name="store_tracks_in_monthly_directories_descrp">Enregistrer les traces dans des sous-dossiers organisés par mois (par exemple 2018-01).</string>
     <string name="of">%1$d de %2$d</string>
-    <string name="moving_time">Durée de déplacement</string>
+    <string name="moving_time">Durée de mouvement</string>
     <string name="min_max">Min / Max</string>
     <string name="rendering_value_translucent_pink_name">Rose translucide</string>
     <string name="quick_action_resume_pause_navigation">Suspendre / Reprendre la Navigation</string>
@@ -3290,7 +3288,7 @@
     <string name="added_profiles_descr">Profils ajoutés par le greffon</string>
     <string name="shared_string_turn_off">Désactiver</string>
     <string name="new_plugin_added">Nouveau greffon ajouté</string>
-    <string name="join_segments">Relier les segments</string>
+    <string name="join_segments">Joindre les segments</string>
     <string name="add_new_profile_q">Ajouter le profil \'%1$s\' \?</string>
     <string name="save_heading">Inclure la direction</string>
     <string name="save_heading_descr">Inclure la direction de chaque point lors de l\'enregistrement d\'une trace.</string>
@@ -3907,7 +3905,6 @@
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="lang_de_casual">Allemand (courant)</string>
     <string name="app_mode_light_aircraft">Aviation légère</string>
-    <string name="elevation_data">Vous pouvez utiliser l\'altitude pour prendre en compte le dénivellé de votre itinéraire</string>
     <string name="gpx_upload_trackable_visibility_descr">« Traçable » signifie que la trace ne s\'affichera pas dans les listes publiques, mais que les points de cheminement horodatés qu\'elle contient seront téléchargeables depuis l\'API GPS publique (ces points sont traités afin de n\'avoir aucun lien direct avec vous).</string>
     <string name="release_3_9">• Ajout d\'une option pour exporter et importer toutes les données, y compris les paramètres, les ressources, mes lieux
 \n
@@ -3959,7 +3956,7 @@
     <string name="shared_string_empty">Vide</string>
     <string name="announcement_time_approach">Approche</string>
     <string name="announcement_time_prepare">Préparation</string>
-    <string name="announcement_time_prepare_long">Longue préparation</string>
+    <string name="announcement_time_prepare_long">Préparation longue</string>
     <string name="announcement_time_arrive">Arrivé à destination</string>
     <string name="shared_string_turn">Bifurcation</string>
     <string name="show_track_on_map">Afficher la trace sur la carte</string>
@@ -3981,7 +3978,7 @@
     <string name="message_name_is_already_exists">Ce nom existe déjà</string>
     <string name="routing_engine_vehicle_type_hgv">Poids lourd</string>
     <string name="announcement_time_passing">Durée</string>
-    <string name="analyze_by_intervals">Analyser par intervalles (fractionner)</string>
+    <string name="analyze_by_intervals">Analyser par intervalles de fractionnement</string>
     <string name="announcement_time_intervals">Intervalles de temps et de distance</string>
     <string name="announcement_time_descr">Le délai d\'annonce des alertes vocales dépend du type d\'annonce, de la vitesse actuelle et du type de navigation.</string>
     <string name="announcement_time_title">Délai de l\'annonce</string>
@@ -3996,4 +3993,31 @@
     <string name="context_menu_read_full">Lire la suite</string>
     <string name="context_menu_edit_descr">Modifier la description</string>
     <string name="delete_waypoints">Supprimer les points de passage</string>
+    <string name="uploading_count">Envoi de %1$d sur %2$d</string>
+    <string name="toast_select_edits_for_upload">Sélectionnez les modifications à envoyer</string>
+    <string name="uploaded_count">%1$d sur %2$d envoyé</string>
+    <string name="upload_photo">Envoi en cours</string>
+    <string name="upload_photo_completed">Envoi terminé</string>
+    <string name="hillshade_slope_contour_lines">Ombrage du relief / Pente / Courbes de niveaux</string>
+    <string name="open_place_reviews">OpenPlaceReviews</string>
+    <string name="opr_use_dev_url">Utilisez test.openplacereviews.org</string>
+    <string name="login_open_place_reviews">Se connecter à OpenPlaceReviews</string>
+    <string name="activity_type_water_name">Eau</string>
+    <string name="activity_type_winter_name">Hiver</string>
+    <string name="activity_type_snowmobile_name">Motoneige</string>
+    <string name="activity_type_cycling_name">Vélo</string>
+    <string name="activity_type_mountainbike_name">VTT</string>
+    <string name="activity_type_hiking_name">Randonnée</string>
+    <string name="activity_type_running_name">Course à pied</string>
+    <string name="activity_type_walking_name">Marche</string>
+    <string name="activity_type_car_name">Voiture</string>
+    <string name="activity_type_riding_name">Promenade</string>
+    <string name="activity_type_offroad_name">Voies non revêtues</string>
+    <string name="activity_type_motorbike_name">Moto</string>
+    <string name="open_place_reviews_plugin_description">OpenPlaceReviews est un projet communautaire sur les lieux publics comme les restaurants, hôtels, musées… Il recueille toutes les informations publiques les concernant telles que des photos, des avis, des liens vers d\'autres systèmes, des liens vers OpenStreetMap ou Wikipedia.
+\n
+\nToutes les données d\'OpenPlaceReview sont ouvertes et accessibles à tous sur http://openplacereviews.org/data.
+\n
+\nPour en savoir, consultez http://openplacereviews.org.</string>
+    <string name="activity_type_racing_name">Course automobile</string>
 </resources>

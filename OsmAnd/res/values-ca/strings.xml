@@ -641,7 +641,6 @@
     <string name="avoid_motorway">Sense autopistes</string>
     <string name="auto_zoom_map_descr">Nivell de zoom en funció de la velocitat (mentre el mapa estigui sincronitzat amb la posició actual).</string>
     <string name="auto_zoom_map">Zoom automàtic del mapa</string>
-    <string name="snap_to_road_descr">Ajusta la posició a les carreteres durant la navegació.</string>
     <string name="snap_to_road">Desplaça a la carretera</string>
     <string name="asap">MCP</string>
     <string name="prefs_plugins_descr">Els connectors activen els paràmetres del mode expert i de funcionalitats addicionals.</string>
@@ -1987,7 +1986,6 @@
     <string name="shared_string_change">Modifica</string>
     <string name="get_started">Comença</string>
     <string name="routing_attr_short_way_name">Ruta amb menys consum</string>
-    <string name="routing_attr_short_way_description">Utilitza la ruta de menys consum (normalment la més curta).</string>
     <string name="replace_favorite_confirmation">Confirmeu que voleu substituir el Preferit %1$s?</string>
     <string name="update_all_maps_now">Voleu actualitzar tots els mapes ara mateix?</string>
     <string name="clear_tile_data">Esborra totes les tessel·les</string>
@@ -2164,7 +2162,7 @@
     <string name="rendering_attr_depthContours_description">Mostra isòbates i fondàries puntuals.</string>
     <string name="rendering_attr_depthContours_name">Isòbates</string>
     <string name="routing_attr_height_obstacles_name">Utilitza les cotes d\'elevació</string>
-    <string name="routing_attr_height_obstacles_description">Revisa l\'elevació del terreny (mitjançant dades SRTM, ASTER i EU-DEM).</string>
+
     <string name="route_altitude">Alçat de la ruta</string>
     <string name="altitude_descent">Descens</string>
     <string name="altitude_ascent">Ascens</string>
@@ -3813,7 +3811,6 @@
 \nWeb / Wikimedia: fotos dels PDIs d\'OpenStreetMap.</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="icon_group_amenity">Equipament</string>
-    <string name="elevation_data">Podeu utilitzar les dades d’elevació per acumular l\'ascens/descens de la vostra ruta</string>
     <string name="app_mode_light_aircraft">Avioneta</string>
     <string name="gpx_upload_identifiable_visibility_descr">\"Identificable\" vol dir que la traça es mostrarà públicament a les vostres traces GPS i als llistats públics de traces GPS, és a dir, els altres usuaris la podran baixar en brut i associada al vostre usuari. Les dades cronològiques de pas per les fites de l’API GPS que es publiquen mitjançant l’API de fites faran referència a la pàgina de la vostra traça original.</string>
     <string name="gpx_upload_private_visibility_descr">\"Privada\" vol dir que la traça no es mostra a cap llistat públic, però les fites que conté estan disponibles a través de l\'API pública GPS, desordenades i sense enregistraments temporals.</string>

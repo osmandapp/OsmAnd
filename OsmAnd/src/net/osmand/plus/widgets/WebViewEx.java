@@ -40,7 +40,7 @@ public class WebViewEx extends WebView {
 		// also see: https://gist.github.com/amake/0ac7724681ac1c178c6f95a5b09f03ce
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
 			OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
-			app.checkPreferredLocale();
+			app.getLocaleHelper().checkPreferredLocale();
 			ctx.getResources().updateConfiguration(
 					new Configuration(app.getResources().getConfiguration()),
 					ctx.getResources().getDisplayMetrics());

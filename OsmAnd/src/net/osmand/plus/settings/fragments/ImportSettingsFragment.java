@@ -155,7 +155,7 @@ public class ImportSettingsFragment extends BaseSettingsListFragment {
 	public SettingsHelper.SettingsImportListener getImportListener() {
 		return new SettingsHelper.SettingsImportListener() {
 			@Override
-			public void onSettingsImportFinished(boolean succeed, @NonNull List<SettingsItem> items) {
+			public void onSettingsImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> items) {
 				if (succeed) {
 					app.getRendererRegistry().updateExternalRenderers();
 					AppInitializer.loadRoutingFiles(app, null);
@@ -166,7 +166,7 @@ public class ImportSettingsFragment extends BaseSettingsListFragment {
 					}
 					FragmentManager fm = getFragmentManager();
 					if (fm != null && file != null) {
-						ImportCompleteFragment.showInstance(fm, items, file.getName());
+						ImportCompleteFragment.showInstance(fm, items, file.getName(), needRestart);
 					}
 				}
 			}

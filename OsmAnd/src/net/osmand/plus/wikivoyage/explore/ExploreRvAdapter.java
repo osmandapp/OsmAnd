@@ -18,8 +18,9 @@ import net.osmand.plus.wikivoyage.explore.travelcards.OpenBetaTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.OpenBetaTravelCard.OpenBetaTravelVH;
 import net.osmand.plus.wikivoyage.explore.travelcards.StartEditingTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.StartEditingTravelCard.StartEditingTravelVH;
+import net.osmand.plus.wikivoyage.explore.travelcards.TravelButtonCard;
+import net.osmand.plus.wikivoyage.explore.travelcards.TravelButtonCard.TravelButtonVH;
 import net.osmand.plus.wikivoyage.explore.travelcards.TravelDownloadUpdateCard;
-import net.osmand.plus.wikivoyage.explore.travelcards.TravelDownloadUpdateCard.DownloadUpdateVH;
 import net.osmand.plus.wikivoyage.explore.travelcards.TravelGpxCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.TravelGpxCard.TravelGpxVH;
 import net.osmand.plus.wikivoyage.explore.travelcards.TravelNeededMapsCard;
@@ -53,12 +54,13 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 			case TravelGpxCard.TYPE:
 				return new TravelGpxVH(inflate(parent, R.layout.wikivoyage_travel_gpx_card));
 
-			case TravelDownloadUpdateCard.TYPE:
-				return new DownloadUpdateVH(inflate(parent, R.layout.travel_download_update_card));
-
 			case HeaderTravelCard.TYPE:
 				return new HeaderTravelVH(inflate(parent, R.layout.wikivoyage_list_header));
 
+			case TravelButtonCard.TYPE:
+				return new TravelButtonVH(inflate(parent, R.layout.wikivoyage_button_card));
+
+			case TravelDownloadUpdateCard.TYPE:
 			case TravelNeededMapsCard.TYPE:
 				return new NeededMapsVH(inflate(parent, R.layout.travel_needed_maps_card));
 
@@ -115,6 +117,9 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 	private int getLastArticleItemIndex() {
 		for (int i = items.size() - 1; i > 0; i--) {
 			BaseTravelCard o = items.get(i);
+			if (o instanceof TravelButtonCard) {
+				return 0;
+			}
 			if (o instanceof ArticleTravelCard || o instanceof TravelGpxCard) {
 				return i;
 			}
@@ -151,7 +156,7 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
 	public void addNeededMapsCard(TravelNeededMapsCard card) {
 		this.neededMapsCard = card;
-		if (neededMapsCardExists(getNeededMapsCardPosition())) {
+		if (isCardExists(getNeededMapsCardPosition(), TravelNeededMapsCard.TYPE)) {
 			updateNeededMapsCard(false);
 		} else if (addItem(getNeededMapsCardPosition(), card)) {
 			notifyDataSetChanged();
@@ -159,15 +164,15 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 	}
 
 	public void updateNeededMapsCard(boolean onlyProgress) {
-		if(onlyProgress) {
+		if (onlyProgress) {
 			TravelNeededMapsCard nd = this.neededMapsCard;
-			if(nd != null) {
+			if (nd != null) {
 				nd.updateView();
 			}
 			return;
 		}
 		int pos = getNeededMapsCardPosition();
-		if (neededMapsCardExists(pos)) {
+		if (isCardExists(pos, TravelNeededMapsCard.TYPE)) {
 			notifyItemChanged(pos);
 		}
 	}
@@ -175,42 +180,39 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 	public void removeNeededMapsCard() {
 		this.neededMapsCard = null;
 		int pos = getNeededMapsCardPosition();
-		if (neededMapsCardExists(pos)) {
+		if (isCardExists(pos, TravelNeededMapsCard.TYPE)) {
 			removeItem(pos);
 			notifyItemRemoved(pos);
 		}
 	}
 
 	private int getNeededMapsCardPosition() {
-		if (downloadUpdateCardExists(FIRST_POSITION)) {
+		if (isCardExists(FIRST_POSITION, TravelDownloadUpdateCard.TYPE)) {
 			return SECOND_POSITION;
 		}
 		return FIRST_POSITION;
 	}
 
-	private boolean neededMapsCardExists(int position) {
-		return items.size() > position && items.get(position).getCardType() == TravelNeededMapsCard.TYPE;
-	}
-
 	public void addDownloadUpdateCard(TravelDownloadUpdateCard card) {
 		this.downloadCard = card;
-		if (downloadUpdateCardExists(getDownloadUpdateCardPosition())) {
+		int pos = getDownloadUpdateCardPosition();
+		if (isCardExists(pos, TravelDownloadUpdateCard.TYPE)) {
 			updateDownloadUpdateCard(false);
-		} else if (addItem(getDownloadUpdateCardPosition(), card)) {
+		} else if (addItem(pos, card)) {
 			notifyDataSetChanged();
 		}
 	}
 
 	public void updateDownloadUpdateCard(boolean onlyProgress) {
-		if(onlyProgress) {
+		if (onlyProgress) {
 			TravelDownloadUpdateCard dc = this.downloadCard;
-			if(dc != null) {
-				dc.updateProgresBar();
+			if (dc != null) {
+				dc.updateView();
 			}
 			return;
 		}
 		int pos = getDownloadUpdateCardPosition();
-		if (downloadUpdateCardExists(pos)) {
+		if (isCardExists(pos, TravelDownloadUpdateCard.TYPE)) {
 			notifyItemChanged(pos);
 		}
 	}
@@ -218,7 +220,7 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 	public void removeDownloadUpdateCard() {
 		this.downloadCard = null;
 		int pos = getDownloadUpdateCardPosition();
-		if (downloadUpdateCardExists(pos)) {
+		if (isCardExists(pos, TravelDownloadUpdateCard.TYPE)) {
 			removeItem(pos);
 			notifyItemRemoved(pos);
 		}
@@ -228,7 +230,7 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 		return FIRST_POSITION;
 	}
 
-	private boolean downloadUpdateCardExists(int position) {
-		return items.size() > position && items.get(position).getCardType() == TravelDownloadUpdateCard.TYPE;
+	private boolean isCardExists(int position, int cardType) {
+		return items.size() > position && items.get(position).getCardType() == cardType;
 	}
 }

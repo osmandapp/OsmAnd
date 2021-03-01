@@ -231,7 +231,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 							 @Nullable Bundle savedInstanceState) {
-		final MapActivity mapActivity = (MapActivity) getActivity();
+		MapActivity mapActivity = (MapActivity) getActivity();
 		if (mapActivity == null) {
 			return null;
 		}
@@ -375,13 +375,16 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		mainView.findViewById(R.id.options_button).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				boolean trackSnappedToRoad = !editingCtx.isApproximationNeeded();
-				boolean addNewSegmentAllowed = editingCtx.isAddNewSegmentAllowed();
-				OptionsBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
-						MeasurementToolFragment.this,
-						trackSnappedToRoad, addNewSegmentAllowed,
-						editingCtx.getAppMode().getStringKey()
-				);
+				MapActivity mapActivity = getMapActivity();
+				if (mapActivity != null) {
+					boolean trackSnappedToRoad = !editingCtx.isApproximationNeeded();
+					boolean addNewSegmentAllowed = editingCtx.isAddNewSegmentAllowed();
+					OptionsBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
+							MeasurementToolFragment.this,
+							trackSnappedToRoad, addNewSegmentAllowed,
+							editingCtx.getAppMode().getStringKey()
+					);
+				}
 			}
 		});
 
@@ -431,7 +434,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 			@Override
 			public void onSelectPoint(int selectedPointPos) {
-				if (selectedPointPos != -1) {
+				MapActivity mapActivity = getMapActivity();
+				if (mapActivity != null && selectedPointPos != -1) {
 					openSelectedPointMenu(mapActivity);
 				}
 			}
@@ -440,7 +444,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		measurementLayer.setOnMeasureDistanceToCenterListener(new MeasurementToolLayer.OnMeasureDistanceToCenter() {
 			@Override
 			public void onMeasure(float distance, float bearing) {
-				String distStr = OsmAndFormatter.getFormattedDistance(distance, mapActivity.getMyApplication());
+				String distStr = OsmAndFormatter.getFormattedDistance(distance, app);
 				String azimuthStr = OsmAndFormatter.getFormattedAzimuth(bearing, app);
 				distanceToCenterTv.setText(String.format("%1$s • %2$s", distStr, azimuthStr));
 				TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(
@@ -496,8 +500,13 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			public void onClick(View v) {
 				if (isFollowTrackMode()) {
 					startTrackNavigation();
-				} else {
+				} else if (editingCtx.isNewData() || editingCtx.hasChanges()) {
 					saveChanges(FinalSaveAction.SHOW_SNACK_BAR_AND_CLOSE, false);
+				} else {
+					MapActivity mapActivity = getMapActivity();
+					if (mapActivity != null) {
+						dismiss(mapActivity, false);
+					}
 				}
 			}
 		});
@@ -535,9 +544,12 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		configBtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				RouteOptionsBottomSheet.showInstance(
-						mapActivity, MeasurementToolFragment.this, DialogMode.PLAN_ROUTE,
-						editingCtx.getAppMode().getStringKey());
+				MapActivity mapActivity = getMapActivity();
+				if (mapActivity != null) {
+					RouteOptionsBottomSheet.showInstance(
+							mapActivity, MeasurementToolFragment.this, DialogMode.PLAN_ROUTE,
+							editingCtx.getAppMode().getStringKey());
+				}
 			}
 		});
 
@@ -931,7 +943,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 					app.getTargetPointsHelper().updateRouteAndRefresh(true);
 					app.getRoutingHelper().onSettingsChanged(true);
 				} else {
-					mapActivity.getMapActions().stopNavigationActionConfirm(null , new Runnable() {
+					mapActivity.getMapActions().stopNavigationActionConfirm(null, new Runnable() {
 						@Override
 						public void run() {
 							MapActivity mapActivity = getMapActivity();
@@ -1145,7 +1157,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	@Override
 	public void onChangeApplicationMode(ApplicationMode mode, RouteBetweenPointsDialogType dialogType,
-	                                    RouteBetweenPointsDialogMode dialogMode) {
+										RouteBetweenPointsDialogMode dialogMode) {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
 			ChangeRouteType changeRouteType = ChangeRouteType.NEXT_SEGMENT;
@@ -1947,7 +1959,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	public static boolean showInstance(FragmentManager fragmentManager, MeasurementEditingContext editingCtx,
-	                                   boolean followTrackMode) {
+									   boolean followTrackMode) {
 		MeasurementToolFragment fragment = new MeasurementToolFragment();
 		fragment.setEditingCtx(editingCtx);
 		fragment.setMode(FOLLOW_TRACK_MODE, followTrackMode);

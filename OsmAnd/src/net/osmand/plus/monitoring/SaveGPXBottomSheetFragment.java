@@ -143,6 +143,12 @@ public class SaveGPXBottomSheetFragment extends MenuBottomSheetDialogFragment {
 		return UiUtilities.DialogButtonType.SECONDARY;
 	}
 
+
+	@Override
+	protected int getDismissButtonTextId() {
+		return R.string.shared_string_close;
+	}
+
 	@Override
 	protected int getRightBottomButtonTextId() {
 		return R.string.shared_string_open_track;

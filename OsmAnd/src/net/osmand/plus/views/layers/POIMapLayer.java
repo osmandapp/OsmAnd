@@ -274,7 +274,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		return true;
 	}
 
-	public static void showDescriptionDialog(Context ctx, OsmandApplication app, String text, String title) {
+	public static void showPlainDescriptionDialog(Context ctx, OsmandApplication app, String text, String title) {
 		final TextView textView = new TextView(ctx);
 		LinearLayout.LayoutParams llTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		int textMargin = dpToPx(app, 10f);

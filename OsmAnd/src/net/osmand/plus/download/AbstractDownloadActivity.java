@@ -17,7 +17,7 @@ public class AbstractDownloadActivity extends ActionBarProgressActivity {
 		downloadValidationManager.startDownload(this, indexItem);
 	}
 
-	public void makeSureUserCancelDownload(IndexItem item) {
+	public void makeSureUserCancelDownload(DownloadItem item) {
 		downloadValidationManager.makeSureUserCancelDownload(this, item);
 	}
 }

@@ -2723,7 +2723,7 @@
     <string name="poi_aquaculture_mussels">Acuicultura: mejillones</string>
     <string name="poi_min_age">Edad mínima</string>
     <string name="poi_organic_yes">Sí</string>
-    <string name="poi_organic_no">No</string>
+    <string name="poi_organic_no">Productos orgánicos: no</string>
     <string name="poi_organic_only">Únicamente</string>
     <string name="poi_traffic_mirror">Espejo de tráfico</string>
     <string name="poi_diplomatic_consulate">Consulado</string>
@@ -3222,7 +3222,7 @@
     <string name="poi_water_supply_pump">Bomba</string>
     <string name="poi_water_supply_borehole">Perforación</string>
     <string name="poi_water_supply_water_trucking">Camión de agua</string>
-    <string name="poi_water_supply_water_tank">Depósito de agua</string>
+    <string name="poi_water_supply_water_tank">Tanque de agua</string>
     <string name="poi_water_supply_bottled_water">Botella de agua</string>
     <string name="poi_water_place_access_community">Comunidad</string>
     <string name="poi_water_place_access_family">Familia</string>
@@ -3582,7 +3582,7 @@
     <string name="poi_charcoal_pile">Carbonera;Pila de carbón</string>
     <string name="poi_historic_tank">Tanque histórico</string>
     <string name="poi_hookah_lounge">Bar de cachimbas;Salón Hookah</string>
-    <string name="poi_source_biomass">Fuente de energía: biomasa</string>
+    <string name="poi_generator_source_biomass">Fuente de energía: biomasa</string>
     <string name="poi_snowmobile_filter">Acceso para motonieves</string>
     <string name="poi_access_bus">Acceso para colectivos</string>
     <string name="poi_access_caravan">Acceso para casas móviles</string>
@@ -3869,7 +3869,7 @@
     <string name="poi_water_source_river">Río</string>
     <string name="poi_water_source_well">Pozo</string>
     <string name="poi_water_source_powered_pump">Bomba accionada</string>
-    <string name="poi_water_source_water_tank">Depósito de agua</string>
+    <string name="poi_water_source_water_tank">Tanque de agua</string>
     <string name="poi_water_source_tap">Canilla</string>
     <string name="poi_water_source_water_works">Planta potabilizadora</string>
     <string name="poi_water_source_tube_well">Pozo entubado</string>
@@ -3881,4 +3881,14 @@
     <string name="poi_wildlife_crossing_bat_bridge">Puente para murciélagos</string>
     <string name="poi_wildlife_crossing">Cruce de vida silvestre</string>
     <string name="poi_swimming_area">Área de natación</string>
+    <string name="poi_mobile_library">Biblioteca móvil (parada)</string>
+    <string name="poi_summit_register_no">Registro de la cumbre: no</string>
+    <string name="poi_summit_register_yes">Registro de la cumbre: sí</string>
+    <string name="poi_piste_status_closed">Estado de la pista: cerrado</string>
+    <string name="poi_piste_status_open">Estado de la pista: abierto</string>
+    <string name="poi_patrolled_no">Patrullado: no</string>
+    <string name="poi_patrolled_yes">Patrullado: sí</string>
+    <string name="poi_gladed_yes">Arboleda: sí</string>
+    <string name="poi_piste_name">Nombre de la pista</string>
+    <string name="poi_piste_ski_jump">Salto con esquís</string>
 </resources>

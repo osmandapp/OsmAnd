@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.AsyncTask.Status;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
@@ -25,6 +26,8 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.FavouritePoint.BackgroundType;
 import net.osmand.plus.AppInitializer;
+import net.osmand.plus.AppInitializer.AppInitializeListener;
+import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -212,7 +215,7 @@ public class ImportHelper {
 	public static String getNameFromContentUri(OsmandApplication app, Uri contentUri) {
 		try {
 			String name;
-			Cursor returnCursor = app.getContentResolver().query(contentUri, new String[] {OpenableColumns.DISPLAY_NAME}, null, null, null);
+			Cursor returnCursor = app.getContentResolver().query(contentUri, new String[]{OpenableColumns.DISPLAY_NAME}, null, null, null);
 			if (returnCursor != null && returnCursor.moveToFirst()) {
 				int columnIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
 				if (columnIndex != -1) {
@@ -673,7 +676,10 @@ public class ImportHelper {
 	public static List<FavouritePoint> asFavourites(OsmandApplication app, List<WptPt> wptPts, String fileName, boolean forceImportFavourites) {
 		List<FavouritePoint> favourites = new ArrayList<>();
 		for (WptPt p : wptPts) {
-			if (p.name != null) {
+			if (Algorithms.isEmpty(p.name)) {
+				p.name = app.getResources().getString(R.string.shared_string_waypoint);
+			}
+			if (!Algorithms.isEmpty(p.name)) {
 				final String fpCat;
 				if (p.category == null) {
 					if (forceImportFavourites) {
@@ -684,7 +690,7 @@ public class ImportHelper {
 				} else {
 					fpCat = p.category;
 				}
-				FavouritePoint point = new FavouritePoint(p.lat, p.lon, p.name, fpCat);
+				FavouritePoint point = new FavouritePoint(p.lat, p.lon, p.name, fpCat, p.ele, 0);
 				if (p.desc != null) {
 					point.setDescription(p.desc);
 				}
@@ -704,14 +710,16 @@ public class ImportHelper {
 	@SuppressWarnings("unchecked")
 	private <P> void executeImportTask(final AsyncTask<P, ?, ?> importTask, final P... requests) {
 		if (app.isApplicationInitializing()) {
-			app.getAppInitializer().addListener(new AppInitializer.AppInitializeListener() {
+			app.getAppInitializer().addListener(new AppInitializeListener() {
 				@Override
-				public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
+				public void onProgress(AppInitializer init, InitEvents event) {
 				}
 
 				@Override
 				public void onFinish(AppInitializer init) {
-					importTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, requests);
+					if (importTask.getStatus() == Status.PENDING) {
+						importTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, requests);
+					}
 				}
 			});
 		} else {

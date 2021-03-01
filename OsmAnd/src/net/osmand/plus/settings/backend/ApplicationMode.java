@@ -13,6 +13,8 @@ import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -43,7 +45,7 @@ import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_NEXT_NEX
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_NEXT_TURN;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_NEXT_TURN_SMALL;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_PLAIN_TIME;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_RULER;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_RADIUS_RULER;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_SPEED;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_TIME;
 
@@ -190,13 +192,13 @@ public class ApplicationMode {
 
 	private static void initRegVisibility() {
 		// DEFAULT, CAR, BICYCLE, PEDESTRIAN, PUBLIC_TRANSPORT, BOAT, AIRCRAFT, SKI, TRUCK
-		ApplicationMode[] exceptDefault = new ApplicationMode[] {CAR, BICYCLE, PEDESTRIAN, PUBLIC_TRANSPORT, BOAT, AIRCRAFT, SKI, TRUCK, MOTORCYCLE};
+		ApplicationMode[] exceptDefault = new ApplicationMode[]{CAR, BICYCLE, PEDESTRIAN, PUBLIC_TRANSPORT, BOAT, AIRCRAFT, SKI, TRUCK, MOTORCYCLE};
 		ApplicationMode[] all = null;
-		ApplicationMode[] none = new ApplicationMode[] {};
+		ApplicationMode[] none = new ApplicationMode[]{};
 
 		// left
-		ApplicationMode[] navigationSet1 = new ApplicationMode[] {CAR, BICYCLE, BOAT, SKI, TRUCK, MOTORCYCLE};
-		ApplicationMode[] navigationSet2 = new ApplicationMode[] {PEDESTRIAN, PUBLIC_TRANSPORT, AIRCRAFT};
+		ApplicationMode[] navigationSet1 = new ApplicationMode[]{CAR, BICYCLE, BOAT, SKI, TRUCK, MOTORCYCLE};
+		ApplicationMode[] navigationSet2 = new ApplicationMode[]{PEDESTRIAN, PUBLIC_TRANSPORT, AIRCRAFT};
 
 		regWidgetVisibility(WIDGET_NEXT_TURN, navigationSet1);
 		regWidgetVisibility(WIDGET_NEXT_TURN_SMALL, navigationSet2);
@@ -228,7 +230,7 @@ public class ApplicationMode {
 		regWidgetAvailability(WIDGET_GPS_INFO, all);
 		regWidgetAvailability(WIDGET_BATTERY, all);
 		regWidgetAvailability(WIDGET_BEARING, all);
-		regWidgetAvailability(WIDGET_RULER, all);
+		regWidgetAvailability(WIDGET_RADIUS_RULER, all);
 		regWidgetAvailability(WIDGET_PLAIN_TIME, all);
 
 		// top
@@ -332,8 +334,12 @@ public class ApplicationMode {
 
 	public String toHumanString() {
 		String userProfileName = getUserProfileName();
-		if (Algorithms.isEmpty(userProfileName) && keyName != -1) {
-			return app.getString(keyName);
+		if (Algorithms.isEmpty(userProfileName)) {
+			if (keyName != -1) {
+				return app.getString(keyName);
+			} else {
+				return StringUtils.capitalize(getStringKey());
+			}
 		} else {
 			return userProfileName;
 		}

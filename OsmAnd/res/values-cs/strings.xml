@@ -781,7 +781,6 @@
     <string name="day_night_info">Denní/noční info</string>
     <string name="map_widget_renderer">Styl mapy</string>
     <string name="avoid_motorway">Žádné dálnice</string>
-    <string name="snap_to_road_descr">Zachytí kurzor na nejbližší silnici/cestu během navigace.</string>
     <string name="map_widget_vector_attributes">Vlastnosti vykreslování</string>
     <string name="poi_filter_parking">Parkoviště</string>
     <string name="poi_filter_public_transport">Veřejná doprava</string>
@@ -2004,7 +2003,6 @@
     <string name="update_all_maps_now">Aktualizovat všechny mapy ihned?</string>
     <string name="clear_tile_data">Vymazat všechny dlaždice</string>
     <string name="routing_attr_short_way_name">Ekonomická trasa</string>
-    <string name="routing_attr_short_way_description">Použít ekonomickou trasu (obvykle kratší).</string>
     <string name="replace_favorite_confirmation">Opravdu chcete nahradit Oblíbené místo „%1$s“\?</string>
     <string name="rendering_attr_hideOverground_name">Nadzemní objekty</string>
     <string name="shared_string_change">Změnit</string>
@@ -2176,7 +2174,7 @@
     <string name="shared_string_time">Čas</string>
     <string name="total_distance">Celková vzdálenost</string>
     <string name="routing_attr_height_obstacles_name">Použít údaje o nadmořské výšce</string>
-    <string name="routing_attr_height_obstacles_description">Zohlednit převýšení terénu (data od SRTM, ASTER a EU-DEM).</string>
+
     <string name="routing_attr_driving_style_name">Styl jízdy</string>
     <string name="select_gpx_folder">Vyberte složku pro soubor GPX</string>
     <string name="file_can_not_be_moved">Soubor se nepodařilo přesunout.</string>
@@ -2314,7 +2312,7 @@
     <string name="average">Průměr</string>
     <string name="of">%1$d z %2$d</string>
     <string name="ascent_descent">Stoupání/Klesání</string>
-    <string name="moving_time">Čas pohybu</string>
+    <string name="moving_time">Doba pohybu</string>
     <string name="max_min">Max/Min</string>
     <string name="min_max">Min/Max</string>
     <string name="quick_action_resume_pause_navigation">Pozastavit/pokračovat v navigaci</string>
@@ -3425,7 +3423,7 @@
     <string name="gpx_direction_arrows">Směrové šipky</string>
     <string name="plan_route_last_edited">Naposledy upraveno</string>
     <string name="plan_route_import_track">Importovat trasu</string>
-    <string name="plan_route_open_existing_track">Otevřít existující trasu</string>
+    <string name="plan_route_open_existing_track">Otevřít existující stopu</string>
     <string name="plan_route_create_new_route">Vytvořit novou trasu</string>
     <string name="plan_route_select_track_file_for_open">Vyberte stopu k otevření.</string>
     <string name="shared_string_done">Hotovo</string>
@@ -3442,10 +3440,10 @@
     <string name="quick_action_add_gpx">Přidat mezicíl</string>
     <string name="map_widget_monitoring">Záznam trasy</string>
     <string name="marker_save_as_track">Uložit jako soubor trasy</string>
-    <string name="follow_track">Sledovat trasu</string>
+    <string name="follow_track">Sledovat stopu</string>
     <string name="follow_track_descr">Zvolte soubor trasy, kterou chcete sledovat</string>
     <string name="import_track_descr">Zvolte soubor stopy, kterou chcete sledovat, nebo jej importujte ze svého zařízení.</string>
-    <string name="select_another_track">Zvolit jinou trasu</string>
+    <string name="select_another_track">Zvolit jinou stopu</string>
     <string name="navigate_to_track_descr">Navigovat z mé polohy k trase</string>
     <string name="pass_whole_track_descr">Bod trasy pro navigování</string>
     <string name="start_of_the_track">Začátek trasy</string>
@@ -3490,7 +3488,7 @@
     <string name="save_track_to_gpx_globally">Ukládat trasu do GPX souboru</string>
     <string name="shared_string_gpx_route">Trasa ze stopy</string>
     <string name="empty_state_my_tracks">Přidat soubory stop</string>
-    <string name="simplified_track">Zjednodušená trasa</string>
+    <string name="simplified_track">Zjednodušená stopa</string>
     <string name="simplified_track_description">Uloží se pouze linie trasy, mezicíle budou odstraněny.</string>
     <string name="shared_string_file_name">Název souboru</string>
     <string name="number_of_gpx_files_selected_pattern">%s vybraných souborů stop</string>
@@ -3505,7 +3503,7 @@
     <string name="only_selected_segment_recalc">Pouze vybraný úsek bude přepočítán pomocí vybraného profilu.</string>
     <string name="all_next_segments_will_be_recalc">Všechny následující úseky budou přepočítány pomocí vybraného profilu.</string>
     <string name="all_previous_segments_will_be_recalc">Všechny předcházející úseky budou přepočítány pomocí vybraného profilu.</string>
-    <string name="open_saved_track">Otevřít uloženou trasu</string>
+    <string name="open_saved_track">Otevřít uloženou stopu</string>
     <string name="shared_string_is_saved">je uloženo</string>
     <string name="one_point_error">Přidejte prosím alespoň dva body.</string>
     <string name="shared_string_redo">Znovu</string>
@@ -3919,7 +3917,6 @@
     <string name="use_dev_url">Použít dev.openstreetmap.org</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="lang_de_casual">Němčina (hovorová)</string>
-    <string name="elevation_data">Můžete použít výšková data pro započítání výstupu/sestupu na trase</string>
     <string name="app_mode_light_aircraft">Lehké letadlo</string>
     <string name="plan_route_join_segments">Spojit úseky</string>
     <string name="plan_route_split_before">Rozdělit před</string>
@@ -3967,7 +3964,7 @@
     <string name="select_folder">Zvolte složku</string>
     <string name="select_folder_descr">Zvolte složku nebo vytvořte novou</string>
     <string name="shared_string_empty">Prázdné</string>
-    <string name="analyze_by_intervals">Analyzovat podle intervalů (rozdělit interval)</string>
+    <string name="analyze_by_intervals">Analyzovat rozdělené intervaly</string>
     <string name="upload_to_openstreetmap">Nahrát do OpenStreetMap</string>
     <string name="edit_track">Editovat stopu</string>
     <string name="rename_track">Přejmenovat stopu</string>
@@ -4000,4 +3997,24 @@
     <string name="routing_engine_vehicle_type_mtb">Horské kolo</string>
     <string name="message_server_error">Chyba serveru: %1$s</string>
     <string name="message_name_is_already_exists">Název již existuje</string>
+    <string name="delete_online_routing_engine">Odstranit tuto online navigační službu\?</string>
+    <string name="context_menu_read_full">Přečíst celé</string>
+    <string name="context_menu_edit_descr">Upravit popis</string>
+    <string name="delete_waypoints">Odstranit body trasy</string>
+    <string name="copy_to_map_markers">Kopírovat do mapových značek</string>
+    <string name="copy_to_map_favorites">Kopírovat do oblíbených</string>
+    <string name="upload_photo">Nahrávání</string>
+    <string name="upload_photo_completed">Nahrávání dokončeno</string>
+    <string name="uploading_count">Nahrávám %1$d z %2$d</string>
+    <string name="uploaded_count">Nahráno %1$d z %2$d</string>
+    <string name="toast_select_edits_for_upload">Vyberte úpravy pro nahrání</string>
+    <string name="hillshade_slope_contour_lines">Stínované svahy / Sklon svahů / Vrstevnice</string>
+    <string name="open_place_reviews_plugin_description">OpenPlaceReviews je komunitní projekt o veřejných místech, jako jsou restaurace, hotely, muzea a další. Shromažďuje o nich veškeré veřejné informace, např. fotografie, hodnocení, odkazy do dalších systémů jako OpenStreetMap či Wikipedie.
+\n
+\nVšechna data OpenPlaceReviews jsou otevřená a přístupná každému: http://openplacereviews.org/data.
+\n
+\nPřečtěte si více na http://openplacereviews.org</string>
+    <string name="open_place_reviews">OpenPlaceReviews</string>
+    <string name="opr_use_dev_url">Použít test.openplacereviews.org</string>
+    <string name="login_open_place_reviews">Přihlásit se do OpenPlaceReviews</string>
 </resources>

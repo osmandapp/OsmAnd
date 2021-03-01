@@ -417,8 +417,12 @@ public class OsmandAidlApi {
 	}
 
 	private void registerReceiver(BroadcastReceiver rec, MapActivity ma, String filter) {
-		receivers.put(filter, rec);
-		ma.registerReceiver(rec, new IntentFilter(filter));
+		try {
+			receivers.put(filter, rec);
+			ma.registerReceiver(rec, new IntentFilter(filter));
+		} catch (IllegalStateException e) {
+			LOG.error(e);
+		}
 	}
 
 	private void registerRemoveMapWidgetReceiver(MapActivity mapActivity) {

@@ -8,6 +8,7 @@ import gnu.trove.set.hash.TIntHashSet;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -627,7 +628,9 @@ public class BinaryMapAddressReaderAdapter {
 				indexOffset = codedIS.getTotalBytesRead();
 				int oldLimit = codedIS.pushLimit(length);
 				// here offsets are sorted by distance
-				map.readIndexedStringTable(stringMatcher.getCollator(), req.nameQuery, "", loffsets, 0);
+				TIntArrayList charsList = new TIntArrayList();
+				charsList.add(0);
+				map.readIndexedStringTable(stringMatcher.getCollator(), Collections.singletonList(req.nameQuery), "", Collections.singletonList(loffsets), charsList);
 				codedIS.popLimit(oldLimit);
 				break;
 			case OsmAndAddressNameIndexData.ATOM_FIELD_NUMBER:

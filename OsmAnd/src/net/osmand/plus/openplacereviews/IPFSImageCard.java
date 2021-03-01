@@ -20,16 +20,17 @@ public class IPFSImageCard extends ImageCard {
 
 	public IPFSImageCard(MapActivity mapActivity, JSONObject imageObject) {
 		super(mapActivity, imageObject);
-		url = mapActivity.getString(R.string.opr_base_url) + "api/ipfs/image?";
 		try {
-			url += "cid=" + (String) imageObject.getString("cid");
-			url += "&hash=" + (String) imageObject.getString("hash");
-			url += "&ext=" + (String) imageObject.getString("extension");
+			String calcImageUrl = mapActivity.getString(R.string.opr_base_url) + "api/ipfs/image?";
+			calcImageUrl += "cid=" + (String) imageObject.getString("cid");
+			calcImageUrl += "&hash=" + (String) imageObject.getString("hash");
+			calcImageUrl += "&ext=" + (String) imageObject.getString("extension");
+			url = calcImageUrl;
+			imageHiresUrl = url;
+			imageUrl = url;
 		} catch (JSONException e) {
 			LOG.error(e);
 		}
-		imageHiresUrl = url;
-		imageUrl = url;
 		icon = ContextCompat.getDrawable(getMyApplication(), R.drawable.ic_logo_openplacereview);
 		if (!Algorithms.isEmpty(getUrl())) {
 			View.OnClickListener onClickListener = new View.OnClickListener() {

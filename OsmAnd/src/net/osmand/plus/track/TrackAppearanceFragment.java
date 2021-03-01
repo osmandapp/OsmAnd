@@ -44,6 +44,7 @@ import net.osmand.plus.dialogs.GpxAppearanceAdapter;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter.AppearanceListItem;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter.GpxAppearanceAdapterType;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.monitoring.TripRecordingActiveBottomSheet;
 import net.osmand.plus.monitoring.TripRecordingBottomSheet;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
@@ -63,6 +64,7 @@ import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
 import static net.osmand.plus.dialogs.GpxAppearanceAdapter.TRACK_WIDTH_BOLD;
 import static net.osmand.plus.dialogs.GpxAppearanceAdapter.TRACK_WIDTH_MEDIUM;
 import static net.osmand.plus.dialogs.GpxAppearanceAdapter.getAppearanceItems;
+import static net.osmand.plus.monitoring.TripRecordingActiveBottomSheet.UPDATE_TRACK_ICON;
 
 public class TrackAppearanceFragment extends ContextMenuScrollFragment implements CardListener, ColorPickerListener {
 
@@ -383,6 +385,8 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		Fragment target = getTargetFragment();
 		if (target instanceof TripRecordingBottomSheet) {
 			((TripRecordingBottomSheet) target).show();
+		} else if (target instanceof TripRecordingActiveBottomSheet) {
+			((TripRecordingActiveBottomSheet) target).show(UPDATE_TRACK_ICON);
 		}
 	}
 

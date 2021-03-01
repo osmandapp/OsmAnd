@@ -367,8 +367,9 @@ public class RouteStatisticsHelper {
 			RouteDataObject obj = segment.obj;
 			for (int type : obj.getTypes()) {
 				BinaryMapRouteReaderAdapter.RouteTypeRule tp = obj.region.quickGetEncodingRule(type);
-				if (tp.getTag().equals("highway") || tp.getTag().equals("route") ||
-						tp.getTag().equals("railway") || tp.getTag().equals("aeroway") || tp.getTag().equals("aerialway")) {
+				if (tp.getTag().equals("highway") || tp.getTag().equals("route")
+						|| tp.getTag().equals("railway") || tp.getTag().equals("aeroway")
+						|| tp.getTag().equals("aerialway") || tp.getTag().equals("piste:type")) {
 					if (!mainTagAdded) {
 						req.setStringFilter(rrs.PROPS.R_TAG, tp.getTag());
 						req.setStringFilter(rrs.PROPS.R_VALUE, tp.getValue());

@@ -88,6 +88,7 @@ public class ResourceManager {
 
 	public static final String VECTOR_MAP = "#vector_map"; //$NON-NLS-1$
 	private static final String INDEXES_CACHE = "ind.cache";
+	public static final String DEFAULT_WIKIVOYAGE_TRAVEL_OBF = "Default_wikivoyage.travel.obf";
 
 	private static final Log log = PlatformUtil.getLog(ResourceManager.class);
 	
@@ -638,6 +639,8 @@ public class ResourceManager {
 		if (Version.isPaidVersion(context)) {
 			collectFiles(context.getAppPath(IndexConstants.WIKI_INDEX_DIR), IndexConstants.BINARY_MAP_INDEX_EXT, files);
 			collectFiles(context.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR), IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT, files);
+		} else {
+			collectFiles(context.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR), DEFAULT_WIKIVOYAGE_TRAVEL_OBF, files);
 		}
 		if (OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null || InAppPurchaseHelper.isContourLinesPurchased(context)) {
 			collectFiles(context.getAppPath(IndexConstants.SRTM_INDEX_DIR), IndexConstants.BINARY_MAP_INDEX_EXT, files);
@@ -701,7 +704,7 @@ public class ResourceManager {
 				}
 				boolean wikiMap = (f.getName().contains("_wiki") || f.getName().contains(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT));
 				boolean srtmMap = f.getName().contains(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT);
-				if (mapReader == null || (!Version.isPaidVersion(context) && wikiMap)) {
+				if (mapReader == null || (!Version.isPaidVersion(context) && wikiMap && !f.getName().equals(DEFAULT_WIKIVOYAGE_TRAVEL_OBF))) {
 					warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
 				} else {
 					if (mapReader.isBasemap()) {

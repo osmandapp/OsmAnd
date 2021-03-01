@@ -35,6 +35,7 @@ import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivity.BannerAndDownloadFreeVersion;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
+import net.osmand.plus.download.DownloadItem;
 import net.osmand.plus.download.DownloadResourceGroup;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.DownloadValidationManager;
@@ -504,10 +505,10 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 
 			DownloadItemFragment downloadItemFragment = DownloadItemFragment.createInstance(regionId, childPosition);
 			((DownloadActivity) getActivity()).showDialog(getActivity(), downloadItemFragment);
-		} else if (child instanceof IndexItem) {
-			IndexItem indexItem = (IndexItem) child;
+		} else if (child instanceof DownloadItem) {
+			DownloadItem downloadItem = (DownloadItem) child;
 			ItemViewHolder vh = (ItemViewHolder) v.getTag();
-			OnClickListener ls = vh.getRightButtonAction(indexItem, vh.getClickAction(indexItem));
+			OnClickListener ls = vh.getRightButtonAction(downloadItem, vh.getClickAction(downloadItem));
 			ls.onClick(v);
 			return true;
 		}

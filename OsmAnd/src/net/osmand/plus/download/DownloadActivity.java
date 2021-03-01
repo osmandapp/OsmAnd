@@ -1,7 +1,6 @@
 package net.osmand.plus.download;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -22,6 +21,8 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Space;
 import android.widget.TextView;
+
+import com.ibm.icu.impl.IllegalIcuArgumentException;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -654,9 +655,13 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		String size = "";
 		int percent = 0;
 		if (dir.canRead()) {
-			StatFs fs = new StatFs(dir.getAbsolutePath());
-			size = AndroidUtils.formatSize(activity, ((long) fs.getAvailableBlocks()) * fs.getBlockSize());
-			percent = 100 - (int) ((long) fs.getAvailableBlocks() * 100 / fs.getBlockCount());
+			try {
+				StatFs fs = new StatFs(dir.getAbsolutePath());
+				size = AndroidUtils.formatSize(activity, ((long) fs.getAvailableBlocks()) * fs.getBlockSize());
+				percent = 100 - (int) ((long) fs.getAvailableBlocks() * 100 / fs.getBlockCount());
+			} catch (IllegalIcuArgumentException e) {
+				LOG.error(e);
+			}
 		}
 		sizeProgress.setIndeterminate(false);
 		sizeProgress.setProgress(percent);

@@ -202,7 +202,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 	private void importBackupSettingsItems(File file, List<SettingsItem> items) {
 		app.getSettingsHelper().importSettings(file, items, "", 1, new SettingsHelper.SettingsImportListener() {
 			@Override
-			public void onSettingsImportFinished(boolean succeed, @NonNull List<SettingsItem> items) {
+			public void onSettingsImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> items) {
 				app.showToastMessage(R.string.profile_prefs_reset_successful);
 				updateCopiedOrResetPrefs();
 			}
@@ -465,7 +465,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 				bld.setTitle(R.string.profile_alert_delete_title);
 				bld.setMessage(String
 						.format(getString(R.string.profile_alert_delete_msg),
-								profile.getUserProfileName()));
+								profile.toHumanString()));
 				bld.setPositiveButton(R.string.shared_string_delete,
 						new DialogInterface.OnClickListener() {
 							@Override

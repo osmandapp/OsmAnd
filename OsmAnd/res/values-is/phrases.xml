@@ -3582,7 +3582,7 @@
     <string name="poi_charcoal_pile">Kolahaugur</string>
     <string name="poi_historic_tank">Sögulegur tankur</string>
     <string name="poi_hookah_lounge">Hookah-skáli</string>
-    <string name="poi_source_biomass">Orkugjafi: lífmassi</string>
+    <string name="poi_generator_source_biomass">Orkugjafi: lífmassi</string>
     <string name="poi_snowmobile_filter">Aðgangur vélsleða</string>
     <string name="poi_access_bus">Aðgangur fólksflutningabíla</string>
     <string name="poi_access_caravan">Aðgangur hjólhýsa</string>
@@ -3881,4 +3881,14 @@
     <string name="poi_wildlife_crossing_bat_bridge">Brú fyrir leðurblökur</string>
     <string name="poi_wildlife_crossing">Þverun villtra dýra</string>
     <string name="poi_swimming_area">Sundsvæði</string>
+    <string name="poi_mobile_library">Stæði fyrir bókabíl</string>
+    <string name="poi_summit_register_no">Skráning á tind: nei</string>
+    <string name="poi_summit_register_yes">Skráning á tind: já</string>
+    <string name="poi_piste_status_closed">Staða brautar: lokuð</string>
+    <string name="poi_piste_status_open">Staða brautar: opin</string>
+    <string name="poi_patrolled_no">Eftirlit: nei</string>
+    <string name="poi_patrolled_yes">Eftirlit: já</string>
+    <string name="poi_gladed_yes">Skafið: já</string>
+    <string name="poi_piste_name">Heiti brautar</string>
+    <string name="poi_piste_ski_jump">Skíðastökk</string>
 </resources>
