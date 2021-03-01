@@ -465,6 +465,7 @@ public class QuickSearchHelper implements ResourceListener {
 						sr.localeName = gpxInfo.getFileName();
 						sr.object = gpxInfo;
 						sr.objectType = ObjectType.GPX_TRACK;
+						sr.relatedObject = point;
 						publish = true;
 					}
 				} else {

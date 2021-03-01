@@ -27,6 +27,7 @@ import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
+import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.enums.MetricsConstants;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
@@ -735,7 +736,8 @@ public class GpxSelectionHelper {
 			String path = gpx.path;
 			String rootGpxDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR).getAbsolutePath() + '/';
 			String fileName = path.replace(rootGpxDir, "");
-			SearchHistoryHelper.getInstance(app).addGpxFileToHistory(fileName);
+			GPXInfo gpxInfo = GpxUiHelper.getGpxInfoByFileName(app, fileName);
+			SearchHistoryHelper.getInstance(app).addNewItemToHistory(gpxInfo);
 		}
 		return sf;
 	}

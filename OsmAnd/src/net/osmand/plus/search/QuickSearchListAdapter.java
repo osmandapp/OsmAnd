@@ -579,7 +579,8 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 				selectedItems.clear();
 				for (int i = 0; i < getCount(); i++) {
 					QuickSearchListItemType t = getItem(i).getType();
-					if (t == QuickSearchListItemType.SEARCH_RESULT) {
+					if (t == QuickSearchListItemType.SEARCH_RESULT
+							|| t == QuickSearchListItemType.GPX_TRACK) {
 						selectedItems.add(getItem(i));
 					}
 				}

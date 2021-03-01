@@ -305,11 +305,10 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 	private void showTrackMenuFragment(GPXInfo gpxInfo) {
 		OsmandApplication app = getMyApplication();
 		MapActivity mapActivity = getMapActivity();
-		String fileName = gpxInfo.getFileName();
-		SearchHistoryHelper.getInstance(app).addGpxFileToHistory(fileName);
-		File file = new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR), fileName);
+		SearchHistoryHelper.getInstance(app).addNewItemToHistory(gpxInfo);
+		File file = new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR), gpxInfo.getFileName());
 		String path = file.getAbsolutePath();
-		TrackMenuFragment.showInstance(mapActivity, path, false, null, null);
+		TrackMenuFragment.showInstance(mapActivity, path, false, null, QuickSearchDialogFragment.TAG);
 		dialogFragment.dismiss();
 	}
 

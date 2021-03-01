@@ -750,12 +750,33 @@ public class GpxUiHelper {
 		gpxDbHelper.updateShowStartFinish(item, showStartFinish);
 	}
 
-	public static void updateGpxInfoView(OsmandApplication app,
-	                                     View v,
-	                                     String itemTitle,
-	                                     Drawable iconDrawable,
-	                                     GPXInfo info) {
-		GpxDataItem dataItem = getDataItem(app, info);
+	public static void updateGpxInfoView(final @NonNull OsmandApplication app,
+	                                     final @NonNull View v,
+	                                     final @NonNull String itemTitle,
+	                                     final @Nullable Drawable iconDrawable,
+	                                     final @NonNull GPXInfo info) {
+		GpxDataItem item = getDataItem(app, info, new GpxDataItemCallback() {
+			@Override
+			public boolean isCancelled() {
+				return false;
+			}
+
+			@Override
+			public void onGpxDataItemReady(GpxDataItem item) {
+				updateGpxInfoView(app, v, itemTitle, iconDrawable, info, item);
+			}
+		});
+		if (item != null) {
+			updateGpxInfoView(app, v, itemTitle, iconDrawable, info, item);
+		}
+	}
+
+	private static void updateGpxInfoView(@NonNull OsmandApplication app,
+	                                      @NonNull View v,
+	                                      @NonNull String itemTitle,
+	                                      @Nullable Drawable iconDrawable,
+	                                      @NonNull GPXInfo info,
+	                                      @NonNull GpxDataItem dataItem) {
 		updateGpxInfoView(v, itemTitle, info, dataItem, false, app);
 		if (iconDrawable != null) {
 			ImageView icon = (ImageView) v.findViewById(R.id.icon);
@@ -837,9 +858,13 @@ public class GpxUiHelper {
 		}
 	}
 
-	private static GpxDataItem getDataItem(OsmandApplication app, GPXInfo info) {
-		return app.getGpxDbHelper().getItem(
-				new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR), info.getFileName()));
+	private static GpxDataItem getDataItem(@NonNull OsmandApplication app,
+	                                       @NonNull GPXInfo info,
+	                                       @Nullable GpxDataItemCallback callback) {
+		File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
+		String fileName = info.getFileName();
+		File file = new File(dir, fileName);
+		return app.getGpxDbHelper().getItem(file, callback);
 	}
 
 	@TargetApi(Build.VERSION_CODES.KITKAT)
@@ -917,7 +942,7 @@ public class GpxUiHelper {
 		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
 		List<GPXInfo> infoList = getSortedGPXFilesInfo(dir, null, false);
 		for (GPXInfo info : infoList) {
-			if (Algorithms.objectEquals(info.fileName, fileName)) {
+			if (Algorithms.objectEquals(info.getFileName(), fileName)) {
 				return info;
 			}
 		}
