@@ -458,7 +458,7 @@ public class RoutingOptionsHelper {
 	public List<LocalRoutingParameter> getOsmandRouterParameters(ApplicationMode am) {
 		OsmandSettings settings = app.getSettings();
 		List<LocalRoutingParameter> list = new ArrayList<LocalRoutingParameter>();
-		boolean osmandRouter = am.getRouteService() == RouteProvider.RouteService.OSMAND;
+		boolean osmandRouter = am.getRouteService() == RouteService.OSMAND;
 		if (!osmandRouter) {
 			list.add(new OtherLocalRoutingParameter(R.string.calculate_osmand_route_without_internet,
 					app.getString(R.string.calculate_osmand_route_without_internet), settings.GPX_ROUTE_CALC_OSMAND_PARTS.get()));
