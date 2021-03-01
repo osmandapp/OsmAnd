@@ -194,7 +194,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 			public void onClick(View v) {
 				FragmentManager fragmentManager = getFragmentManager();
 				SelectFavoriteCategoryBottomSheet dialogFragment = createSelectCategoryDialog();
-				if (fragmentManager != null) {
+				if (fragmentManager != null && dialogFragment != null) {
 					dialogFragment.showInstance(getChildFragmentManager(), getTargetFragment());
 				}
 			}

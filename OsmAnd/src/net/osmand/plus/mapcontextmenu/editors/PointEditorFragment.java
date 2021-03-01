@@ -139,8 +139,9 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 			public boolean onTouch(final View v, MotionEvent event) {
 				if (event.getAction() == MotionEvent.ACTION_UP) {
 					FragmentManager fragmentManager = getFragmentManager();
-					if (fragmentManager != null) {
-						SelectFavoriteCategoryBottomSheet.showInstance(getChildFragmentManager(), getTargetFragment());
+					SelectFavoriteCategoryBottomSheet dialogFragment = createSelectCategoryDialog();
+					if (fragmentManager != null && dialogFragment != null) {
+						dialogFragment.showInstance(getChildFragmentManager(), getTargetFragment());
 					}
 					return true;
 				}
@@ -178,7 +179,7 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 	}
 
 	@Nullable
-	protected BottomSheetDialogFragment createSelectCategoryDialog() {
+	protected SelectFavoriteCategoryBottomSheet createSelectCategoryDialog() {
 		PointEditor editor = getEditor();
 		if (editor != null) {
 			return SelectFavoriteCategoryBottomSheet.createInstance(editor.getFragmentTag());
