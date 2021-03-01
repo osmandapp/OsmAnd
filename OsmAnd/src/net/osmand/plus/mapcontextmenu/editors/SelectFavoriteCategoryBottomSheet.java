@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.OsmandApplication;
@@ -129,9 +131,12 @@ public class SelectFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 		items.add(dividerItem);
 
 		View favoriteCategoryList = UiUtilities.getInflater(app, nightMode).inflate(R.layout.favorite_categories_dialog, null);
+		ScrollView scrollContainer = favoriteCategoryList.findViewById(R.id.scroll_container);
+		final int dp16 = AndroidUtils.dpToPx(app, 16f);
+		scrollContainer.setPadding(dp16,0, dp16,0);
 		LinearLayout favoriteCategoryContainer = favoriteCategoryList.findViewById(R.id.list_container);
 
-		final FavouritesDbHelper helper2 = app.getFavorites();
+		final FavouritesDbHelper favoritesHelper = app.getFavorites();
 		if (gpxFile != null) {
 			if (gpxCategories != null) {
 				for (Map.Entry<String, Integer> e : gpxCategories.entrySet()) {
@@ -141,7 +146,7 @@ public class SelectFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 				}
 			}
 		} else {
-			List<FavouritesDbHelper.FavoriteGroup> gs = helper2.getFavoriteGroups();
+			List<FavouritesDbHelper.FavoriteGroup> gs = favoritesHelper.getFavoriteGroups();
 			for (final FavouritesDbHelper.FavoriteGroup category : gs) {
 				int favoriteCategoryCount = category.getPoints().size();
 				favoriteCategoryContainer.addView(createCategoryItem(activity, nightMode, category.getDisplayName(getContext()),
@@ -157,6 +162,8 @@ public class SelectFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 	private View createCategoryItem(@NonNull final Activity activity, boolean nightMode, final String categoryName, final int categoryColor, int categoryPointCount, boolean isHidden, final boolean selected) {
 		View itemView = UiUtilities.getInflater(activity, nightMode).inflate(R.layout.bottom_sheet_item_with_descr_and_radio_btn, null);
 		final AppCompatImageView button = (AppCompatImageView) itemView.findViewById(R.id.icon);
+		final int dp8 = AndroidUtils.dpToPx(app, 8f);
+		button.setPadding(0,0, dp8,0);
 		LinearLayout descriptionContainer = itemView.findViewById(R.id.descriptionContainer);
 		descriptionContainer.setPadding(0, 0, 0, 0);
 		View divider = itemView.findViewById(R.id.divider_bottom);

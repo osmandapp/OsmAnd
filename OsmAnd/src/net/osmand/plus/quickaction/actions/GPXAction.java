@@ -124,7 +124,7 @@ public class GPXAction extends QuickAction {
 
 				dialogFragment.show(
 						activity.getSupportFragmentManager(),
-						SelectCategoryDialogFragment.TAG);
+						SelectFavoriteCategoryBottomSheet.TAG);
 
 				dialogFragment.setSelectionListener(new SelectFavoriteCategoryBottomSheet.CategorySelectionListener() {
 					@Override
