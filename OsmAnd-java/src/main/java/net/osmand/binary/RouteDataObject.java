@@ -8,6 +8,7 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import net.osmand.util.TransliterationHelper;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.logging.Log;
 
 import java.text.MessageFormat;
@@ -498,6 +499,17 @@ public class RouteDataObject {
 			return null;
 		}
 		return pointTypes[ind];
+	}
+	
+	public void removePointType(int ind, int type) {
+		if (pointTypes != null || ind < pointTypes.length) {
+			int[] typesArr = pointTypes[ind];
+			for (int t : typesArr) {
+				if (t == type) {
+					pointTypes[ind] = ArrayUtils.removeElement(typesArr, t);
+				}
+			}
+		}
 	}
 
 	public int[] getTypes() {

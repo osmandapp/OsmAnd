@@ -176,10 +176,85 @@ public class RouteResultPreparation {
 		combineWayPointsForAreaRouting(ctx, result);
 		validateAllPointsConnected(result);
 		splitRoadsAndAttachRoadSegments(ctx, result, recalculation);
+		for (int i = 0; i < result.size(); i++) {
+			prepareStopSign(result.get(i));
+		}
 		calculateTimeSpeed(ctx, result);
-		
 		prepareTurnResults(ctx, result);
 		return result;
+	}
+	
+	public RouteSegmentResult prepareStopSign(RouteSegmentResult seg) {
+		int start = seg.getStartPointIndex();
+		int end = seg.getEndPointIndex();
+		List<Integer> stops = new ArrayList<>();
+
+		for (int i = start; i > end; i--) {
+			int[] pointTypes = seg.getObject().getPointTypes(i);
+			if (pointTypes != null) {
+				for (int j = 0; j < pointTypes.length; j++) {
+					if (pointTypes[j] == seg.getObject().region.stopMinor) {
+						stops.add(i);
+					}
+				}
+			}
+		}
+
+		for (int stop : stops) {
+			List<RouteSegmentResult> attachedRoutes = seg.getAttachedRoutes(stop);
+			for (RouteSegmentResult attached : attachedRoutes) {
+				int attStopPriority = highwayStopPriority(attached.getObject().getHighway());
+				int segStopPriority = highwayStopPriority(seg.getObject().getHighway());
+				if (segStopPriority > attStopPriority) {
+					seg.getObject().removePointType(stop, seg.getObject().region.stopSign);
+				}
+			}
+		}
+
+		return seg;
+	}
+	
+	private int highwayStopPriority(String highway) {
+		if (highway.endsWith("trunk")) {
+			return 13;
+		}
+		if (highway.endsWith("trunk_link")) {
+			return 12;
+		}
+		if (highway.endsWith("primary")) {
+			return 11;
+		}
+		if (highway.endsWith("primary_link")) {
+			return 10;
+		}
+		if (highway.endsWith("secondary")) {
+			return 9;
+		}
+		if (highway.endsWith("secondary_link")) {
+			return 8;
+		}
+		if (highway.endsWith("tertiary")) {
+			return 7;
+		}
+		if (highway.endsWith("tertiary_link")) {
+			return 6;
+		}
+		if (highway.endsWith("residential")) {
+			return 5;
+		}
+		if (highway.endsWith("living_street")) {
+			return 4;
+		}
+		if (highway.endsWith("track")) {
+			return 3;
+		}
+		if (highway.endsWith("footway")) {
+			return 2;
+		}
+		if (highway.endsWith("path")) {
+			return 1;
+		}
+		return 0;
 	}
 
 	public void prepareTurnResults(RoutingContext ctx, List<RouteSegmentResult> result) {
