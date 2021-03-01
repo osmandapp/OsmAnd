@@ -46,7 +46,8 @@ import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.OtherSettingsRo
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.RouteSimulationItem;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.ShowAlongTheRouteItem;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.TimeConditionalRoutingItem;
-import net.osmand.plus.routing.RouteProvider;
+import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
+import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.CommonPreference;
@@ -501,7 +502,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	private BaseBottomSheetItem createGpxRoutingItem(final LocalRoutingParameter optionsItem) {
-		RouteProvider.GPXRouteParamsBuilder routeParamsBuilder = mapActivity.getRoutingHelper().getCurrentGPXRoute();
+		GPXRouteParamsBuilder routeParamsBuilder = mapActivity.getRoutingHelper().getCurrentGPXRoute();
 		String description = null;
 		int descriptionColorId;
 		if (routeParamsBuilder == null) {
@@ -661,11 +662,11 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 	private List<LocalRoutingParameter> getRoutingParameters(ApplicationMode applicationMode) {
 		List<String> routingParameters;
 
-		boolean osmandRouter = applicationMode.getRouteService() == RouteProvider.RouteService.OSMAND;
+		boolean osmandRouter = applicationMode.getRouteService() == RouteService.OSMAND;
 		if (!osmandRouter) {
-			if (applicationMode.getRouteService() == RouteProvider.RouteService.STRAIGHT) {
+			if (applicationMode.getRouteService() == RouteService.STRAIGHT) {
 				routingParameters = AppModeOptions.STRAIGHT.routingParameters;
-			} else if (applicationMode.getRouteService() == RouteProvider.RouteService.DIRECT_TO) {
+			} else if (applicationMode.getRouteService() == RouteService.DIRECT_TO) {
 				routingParameters = AppModeOptions.DIRECT_TO.routingParameters;
 			} else {
 				routingParameters = AppModeOptions.OTHER.routingParameters;

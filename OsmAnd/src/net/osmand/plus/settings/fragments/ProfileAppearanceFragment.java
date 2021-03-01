@@ -41,6 +41,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.backup.ProfileSettingsItem;
@@ -54,7 +55,6 @@ import net.osmand.plus.profiles.ProfileIcons;
 import net.osmand.plus.profiles.SelectProfileBottomSheet;
 import net.osmand.plus.profiles.SelectProfileBottomSheet.DialogMode;
 import net.osmand.plus.profiles.SelectProfileBottomSheet.OnSelectProfileCallback;
-import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.widgets.FlowLayout;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.util.Algorithms;
@@ -965,7 +965,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		ProfileIconColors color;
 		int iconRes;
 		String routingProfile;
-		RouteProvider.RouteService routeService;
+		RouteService routeService;
 		NavigationIcon navigationIcon;
 		LocationIcon locationIcon;
 

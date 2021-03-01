@@ -2073,7 +2073,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private void startTrackNavigation() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			if (editingCtx.hasRoute()) {
+			if (editingCtx.hasRoute() || editingCtx.hasChanges()) {
 				String trackName = getSuggestedFileName();
 				GPXFile gpx = editingCtx.exportGpx(trackName);
 				if (gpx != null) {

@@ -20,9 +20,7 @@ import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.helpers.enums.MetricsConstants;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
-import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
-import net.osmand.plus.routing.RouteProvider.RouteService;
-import net.osmand.plus.routing.RouteProvider.RoutingEnvironment;
+import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -670,9 +668,9 @@ public class RoutingHelper {
 	private static float getDefaultAllowedDeviation(OsmandSettings settings, ApplicationMode mode, float posTolerance) {
 		if (settings.DISABLE_OFFROUTE_RECALC.getModeValue(mode)) {
 			return -1.0f;
-		} else if (mode.getRouteService() == RouteProvider.RouteService.DIRECT_TO) {
+		} else if (mode.getRouteService() == RouteService.DIRECT_TO) {
 			return -1.0f;
-		} else if (mode.getRouteService() == RouteProvider.RouteService.STRAIGHT) {
+		} else if (mode.getRouteService() == RouteService.STRAIGHT) {
 			MetricsConstants mc = settings.METRIC_SYSTEM.getModeValue(mode);
 			if (mc == MetricsConstants.KILOMETERS_AND_METERS || mc == MetricsConstants.MILES_AND_METERS) {
 				return 500.f;

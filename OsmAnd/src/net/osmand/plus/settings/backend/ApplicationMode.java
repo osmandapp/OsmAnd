@@ -12,7 +12,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.profiles.NavigationIcon;
 import net.osmand.plus.profiles.ProfileIconColors;
-import net.osmand.plus.routing.RouteProvider.RouteService;
+import net.osmand.plus.routing.RouteService;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.lang3.StringUtils;
