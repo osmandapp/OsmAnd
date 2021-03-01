@@ -11,14 +11,11 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 
 import net.osmand.GPXUtilities;
 import net.osmand.plus.FavouritesDbHelper;
@@ -42,20 +39,12 @@ public class SelectFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 
 	public static final String TAG = SelectFavoriteCategoryBottomSheet.class.getSimpleName();
 	private static final String KEY_CTX_SEL_CAT_EDITOR_TAG = "key_ctx_sel_cat_editor_tag";
+	private static String editorTag;
 	private OsmandApplication app;
 	private GPXUtilities.GPXFile gpxFile;
-	private static String editorTag;
 	private Map<String, Integer> gpxCategories;
 	private SelectFavoriteCategoryBottomSheet.CategorySelectionListener selectionListener;
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable Fragment target) {
-		if (!fragmentManager.isStateSaved()) {
-			SelectFavoriteCategoryBottomSheet fragment = new SelectFavoriteCategoryBottomSheet();
-			fragment.setRetainInstance(true);
-			fragment.setTargetFragment(target, 0);
-			fragment.show(fragmentManager, TAG);
-		}
-	}
 
 	private static Drawable getIcon(final Activity activity, int resId, int color) {
 		Drawable drawable = AppCompatResources.getDrawable(activity, resId);

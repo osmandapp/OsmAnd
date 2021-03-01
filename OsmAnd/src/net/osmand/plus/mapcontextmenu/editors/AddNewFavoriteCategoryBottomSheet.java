@@ -2,26 +2,20 @@ package net.osmand.plus.mapcontextmenu.editors;
 
 import android.content.res.ColorStateList;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-import net.osmand.PlatformUtil;
+import net.osmand.AndroidUtils;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -35,8 +29,7 @@ import net.osmand.plus.myplaces.AddNewTrackFolderBottomSheet;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.track.ColorsCard;
 import net.osmand.plus.track.CustomColorBottomSheet;
-
-import org.apache.commons.logging.Log;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,31 +39,24 @@ public class AddNewFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 
 
 	public static final String TAG = AddNewTrackFolderBottomSheet.class.getName();
-	private static final Log LOG = PlatformUtil.getLog(AddNewTrackFolderBottomSheet.class);
-	private static final String FOLDER_NAME_KEY = "folder_name_key";
 	private static final String KEY_CTX_EDIT_CAT_EDITOR_TAG = "key_ctx_edit_cat_editor_tag";
 	private static final String KEY_CTX_EDIT_GPX_FILE = "key_ctx_edit_gpx_file";
 	private static final String KEY_CTX_EDIT_GPX_CATEGORIES = "key_ctx_edit_gpx_categories";
+	private static final String KEY_CTX_EDIT_CAT_NEW = "key_ctx_edit_cat_new";
+	private static final String KEY_CTX_EDIT_CAT_NAME = "key_ctx_edit_cat_name";
+	private static final String KEY_CTX_EDIT_CAT_COLOR = "key_ctx_edit_cat_color";
 	FavouritesDbHelper favoritesHelper;
+	private boolean isNew = true;
+	private String name = "";
 	private boolean isGpx;
 	private ArrayList<String> gpxCategories;
 	private int selectedColor;
 	private ColorsCard colorsCard;
 	private TextInputEditText editText;
 	private TextInputLayout nameTextBox;
-	private String folderName;
 	private View view;
 	private String editorTag;
 	private SelectFavoriteCategoryBottomSheet.CategorySelectionListener selectionListener;
-
-	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable Fragment target) {
-		if (!fragmentManager.isStateSaved()) {
-			AddNewFavoriteCategoryBottomSheet fragment = new AddNewFavoriteCategoryBottomSheet();
-			fragment.setRetainInstance(true);
-			fragment.setTargetFragment(target, 0);
-			fragment.show(fragmentManager, TAG);
-		}
-	}
 
 	public static AddNewFavoriteCategoryBottomSheet createInstance(@NonNull String editorTag, @Nullable Set<String> gpxCategories, boolean isGpx) {
 		AddNewFavoriteCategoryBottomSheet fragment = new AddNewFavoriteCategoryBottomSheet();
@@ -109,7 +95,7 @@ public class AddNewFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		String name = editText.getText().toString().trim();
+		name = editText.getText().toString().trim();
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			boolean exists = isGpx ? isGpxCategoryExists(name) : favoritesHelper.groupExists(name);
@@ -149,15 +135,36 @@ public class AddNewFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 	}
 
 	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		saveState(outState);
+		super.onSaveInstanceState(outState);
+	}
+
+	public void saveState(Bundle bundle) {
+		bundle.putString(KEY_CTX_EDIT_CAT_EDITOR_TAG, editorTag);
+		bundle.putString(KEY_CTX_EDIT_CAT_NEW, Boolean.valueOf(isNew).toString());
+		bundle.putString(KEY_CTX_EDIT_CAT_NAME, editText.getText().toString().trim());
+		bundle.putString(KEY_CTX_EDIT_CAT_COLOR, "" + selectedColor);
+		bundle.putBoolean(KEY_CTX_EDIT_GPX_FILE, isGpx);
+		if (gpxCategories != null) {
+			bundle.putStringArrayList(KEY_CTX_EDIT_GPX_CATEGORIES, gpxCategories);
+		}
+	}
+
+	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		OsmandApplication app = requiredMyApplication();
 		favoritesHelper = app.getFavorites();
+
 		if (savedInstanceState != null) {
-			folderName = savedInstanceState.getString(FOLDER_NAME_KEY);
+			restoreState(savedInstanceState);
+		} else if (getArguments() != null) {
+			restoreState(getArguments());
 		}
+
+
 		items.add(new TitleItem(getString(R.string.favorite_category_add_new_title)));
-		int defaultColor = getResources().getColor(R.color.color_favorite);
-		selectedColor = defaultColor;
+		selectedColor = getResources().getColor(R.color.color_favorite);
 
 		view = UiUtilities.getInflater(app, nightMode).inflate(R.layout.add_new_favorite_category, null);
 		nameTextBox = view.findViewById(R.id.name_text_box);
@@ -167,26 +174,12 @@ public class AddNewFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 				.getColor(app, nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light));
 		nameTextBox.setDefaultHintTextColor(colorStateList);
 		editText = view.findViewById(R.id.name_edit_text);
-		editText.setText(folderName);
-		if (editText.requestFocus()) {
-			getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-		}
+		editText.setText(name);
+		editText.requestFocus();
+		AndroidUtils.softKeyboardDelayed(getActivity(), editText);
 		nameTextBox.setStartIconTintList(ColorStateList.valueOf(selectedColor));
 		nameTextBox.setBoxStrokeColorStateList(ColorStateList.valueOf(selectedColor));
-		editText.addTextChangedListener(new TextWatcher() {
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-			}
 
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-			}
-
-			@Override
-			public void afterTextChanged(Editable s) {
-
-			}
-		});
 		BaseBottomSheetItem editFolderName = new BaseBottomSheetItem.Builder()
 				.setCustomView(view)
 				.create();
@@ -234,9 +227,21 @@ public class AddNewFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 		updateColorSelector(color);
 	}
 
-	public interface CategorySelectionListener {
-
-		void onCategorySelected(String category, int color);
+	public void restoreState(Bundle bundle) {
+		editorTag = bundle.getString(KEY_CTX_EDIT_CAT_EDITOR_TAG);
+		String isNewStr = bundle.getString(KEY_CTX_EDIT_CAT_NEW);
+		if (isNewStr != null) {
+			isNew = Boolean.parseBoolean(isNewStr);
+		}
+		name = bundle.getString(KEY_CTX_EDIT_CAT_NAME);
+		if (name == null) {
+			name = "";
+		}
+		String colorStr = bundle.getString(KEY_CTX_EDIT_CAT_COLOR);
+		if (!Algorithms.isEmpty(colorStr)) {
+			selectedColor = Integer.parseInt(colorStr);
+		}
+		isGpx = bundle.getBoolean(KEY_CTX_EDIT_GPX_FILE, false);
+		gpxCategories = bundle.getStringArrayList(KEY_CTX_EDIT_GPX_CATEGORIES);
 	}
-
 }
