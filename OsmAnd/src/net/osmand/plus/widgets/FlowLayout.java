@@ -20,6 +20,7 @@ public class FlowLayout extends ViewGroup {
 		/**
 		 * @param horizontal_spacing Pixels between items, horizontally
 		 * @param vertical_spacing   Pixels between items, vertically
+		 * @param isHorizontalAutoSpacing Pixels between items to fit screen width. When is enabled horizontal_spacing does not take into account.
 		 */
 		public LayoutParams(int horizontal_spacing, int vertical_spacing, boolean isHorizontalAutoSpacing) {
 			super(0, 0);
