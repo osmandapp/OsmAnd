@@ -12,7 +12,7 @@ public class OnlineRoutingEngineDataObject extends ProfileDataObject {
 	                                     String description,
 	                                     String stringKey,
 	                                     int order) {
-		super(name, description, stringKey, R.drawable.ic_world_globe_dark, false, null);
+		super(name, description, stringKey, R.drawable.ic_world_globe_dark, false, null, null);
 		this.order = order;
 	}
 

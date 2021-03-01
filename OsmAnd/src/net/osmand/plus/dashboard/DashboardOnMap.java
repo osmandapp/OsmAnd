@@ -1004,7 +1004,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 				new TransactionBuilder(mapActivity.getSupportFragmentManager(), settings, mapActivity);
 		builder.addFragmentsData(fragmentsData)
 				.addFragmentsData(OsmandPlugin.getPluginsCardsList())
-				.getFragmentTransaction().commit();
+				.getFragmentTransaction().commitAllowingStateLoss();
 	}
 
 	private void removeFragment(String tag) {

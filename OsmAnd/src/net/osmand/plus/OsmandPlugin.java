@@ -468,7 +468,7 @@ public abstract class OsmandPlugin {
 					FragmentManager fm = mapActivity.getSupportFragmentManager();
 					Fragment fragment = fm.findFragmentByTag(fragmentData.tag);
 					if (fragment != null) {
-						fm.beginTransaction().remove(fragment).commit();
+						fm.beginTransaction().remove(fragment).commitAllowingStateLoss();
 					}
 				}
 			}

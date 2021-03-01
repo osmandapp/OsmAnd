@@ -356,7 +356,7 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 					}
 				}
 			});
-			int selectedProfileColor = ContextCompat.getColor(app, getAppMode().getIconColorInfo().getColor(isNightMode(app)));
+			int selectedProfileColor = getAppMode().getProfileColor(isNightMode(app));
 			UiUtilities.setupCompoundButton(nightMode, selectedProfileColor, compoundButton);
 
 			convertView.setOnClickListener(new View.OnClickListener() {
@@ -516,7 +516,7 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 				selected = i;
 			}
 		}
-		int selectedProfileColor = ContextCompat.getColor(app, getAppMode().getIconColorInfo().getColor(nightMode));
+		int selectedProfileColor = getAppMode().getProfileColor(nightMode);
 		DialogListItemAdapter dialogAdapter = DialogListItemAdapter.createSingleChoiceAdapter(
 				names, nightMode, selected, app, selectedProfileColor, themeRes, new View.OnClickListener() {
 					@Override

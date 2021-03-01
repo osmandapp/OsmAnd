@@ -20,10 +20,12 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
+import static net.osmand.plus.onlinerouting.engine.EngineType.GRAPHHOPPER_TYPE;
 import static net.osmand.util.Algorithms.isEmpty;
 
-public class GraphhopperEngine extends OnlineRoutingEngine {
+public class GraphhopperEngine extends JsonOnlineRoutingEngine {
 
 	public GraphhopperEngine(@Nullable Map<String, String> params) {
 		super(params);
@@ -31,8 +33,20 @@ public class GraphhopperEngine extends OnlineRoutingEngine {
 
 	@NonNull
 	@Override
-	public EngineType getType() {
-		return EngineType.GRAPHHOPPER;
+	public OnlineRoutingEngine getType() {
+		return GRAPHHOPPER_TYPE;
+	}
+
+	@Override
+	@NonNull
+	public String getTitle() {
+		return "Graphhopper";
+	}
+
+	@NonNull
+	@Override
+	public String getTypeName() {
+		return "GRAPHHOPPER";
 	}
 
 	@NonNull
@@ -42,8 +56,18 @@ public class GraphhopperEngine extends OnlineRoutingEngine {
 	}
 
 	@Override
-	protected void collectAllowedParameters() {
-		allowParameters(EngineParameter.API_KEY);
+	protected void collectAllowedParameters(@NonNull Set<EngineParameter> params) {
+		params.add(EngineParameter.KEY);
+		params.add(EngineParameter.VEHICLE_KEY);
+		params.add(EngineParameter.CUSTOM_NAME);
+		params.add(EngineParameter.NAME_INDEX);
+		params.add(EngineParameter.CUSTOM_URL);
+		params.add(EngineParameter.API_KEY);
+	}
+
+	@Override
+	public OnlineRoutingEngine newInstance(Map<String, String> params) {
+		return new GraphhopperEngine(params);
 	}
 
 	@Override
@@ -82,10 +106,9 @@ public class GraphhopperEngine extends OnlineRoutingEngine {
 	}
 
 	@Nullable
-	@Override
-	public OnlineRoutingResponse parseServerResponse(@NonNull JSONObject root,
-	                                                 @NonNull OsmandApplication app,
-	                                                 boolean leftSideNavigation) throws JSONException {
+	protected OnlineRoutingResponse parseServerResponse(@NonNull JSONObject root,
+	                                                    @NonNull OsmandApplication app,
+	                                                    boolean leftSideNavigation) throws JSONException {
 		String encoded = root.getString("points");
 		List<LatLon> points = GeoPolylineParserUtil.parse(encoded, GeoPolylineParserUtil.PRECISION_5);
 		if (isEmpty(points)) return null;
@@ -223,4 +246,5 @@ public class GraphhopperEngine extends OnlineRoutingEngine {
 	protected String getRootArrayKey() {
 		return "paths";
 	}
+
 }

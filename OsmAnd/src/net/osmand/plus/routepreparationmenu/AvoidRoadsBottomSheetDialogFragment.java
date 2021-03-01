@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -64,8 +65,8 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 	private List<BottomSheetItemWithCompoundButton> compoundButtons = new ArrayList<>();
 
 	private boolean hideImpassableRoads;
-	@ColorRes
-	private int compoundButtonColorId = INVALID_ID;
+	@ColorInt
+	private Integer compoundButtonColor = null;
 	private ApplicationMode appMode;
 
 	public void setHideImpassableRoads(boolean hideImpassableRoads) {
@@ -236,7 +237,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 
 			final BottomSheetItemWithCompoundButton[] item = new BottomSheetItemWithCompoundButton[1];
 			item[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
-					.setCompoundButtonColorId(compoundButtonColorId)
+					.setCompoundButtonColor(compoundButtonColor)
 					.setChecked(selected)
 					.setTitle(parameterName)
 					.setLayoutId(R.layout.bottom_sheet_item_with_switch_no_icon)
@@ -254,8 +255,8 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 		}
 	}
 
-	public void setCompoundButtonColorId(@ColorRes int compoundButtonColorId) {
-		this.compoundButtonColorId = compoundButtonColorId;
+	public void setCompoundButtonColor(@ColorInt int compoundButtonColor) {
+		this.compoundButtonColor = compoundButtonColor;
 	}
 
 	@Override

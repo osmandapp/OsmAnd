@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.ColorInt;
 import androidx.appcompat.widget.SwitchCompat;
 
 import com.google.gson.Gson;
@@ -182,13 +183,14 @@ public class SwitchProfileAction extends SwitchableAction<String> {
 	}
 
 	@Override
-	protected int getItemIconColorRes(OsmandApplication app, String item) {
+	@ColorInt
+	protected int getItemIconColor(OsmandApplication app, String item) {
 		ApplicationMode appMode = getModeForKey(item);
 		if (appMode != null) {
 			boolean nightMode = !app.getSettings().isLightContent();
-			return appMode.getIconColorInfo().getColor(nightMode);
+			return appMode.getProfileColor(nightMode);
 		}
-		return super.getItemIconColorRes(app, item);
+		return super.getItemIconColor(app, item);
 	}
 
 	@Override

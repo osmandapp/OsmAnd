@@ -152,7 +152,7 @@ public class RoutingOptionsHelper {
 		Context themedContext = UiUtilities.getThemedContext(mapActivity, nightMode);
 		int themeRes = getThemeRes(app);
 		ApplicationMode selectedAppMode = app.getRoutingHelper().getAppMode();
-		int selectedModeColor = ContextCompat.getColor(app, selectedAppMode.getIconColorInfo().getColor(nightMode));
+		int selectedModeColor = selectedAppMode.getProfileColor(nightMode);
 		DialogListItemAdapter dialogAdapter = DialogListItemAdapter.createSingleChoiceAdapter(
 				entries, nightMode, selected, app, selectedModeColor, themeRes, new View.OnClickListener() {
 					@Override
@@ -334,7 +334,7 @@ public class RoutingOptionsHelper {
 		final boolean nightMode = isNightMode(app);
 		Context themedContext = UiUtilities.getThemedContext(mapActivity, nightMode);
 		ApplicationMode selectedAppMode = app.getRoutingHelper().getAppMode();
-		final int selectedModeColor = ContextCompat.getColor(app, selectedAppMode.getIconColorInfo().getColor(nightMode));
+		final int selectedModeColor = selectedAppMode.getProfileColor(nightMode);
 		AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
 		final int layout = R.layout.list_menu_item_native_singlechoice;
 

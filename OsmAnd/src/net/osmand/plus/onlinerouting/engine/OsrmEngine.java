@@ -22,20 +22,34 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
+import static net.osmand.plus.onlinerouting.engine.EngineType.OSRM_TYPE;
 import static net.osmand.util.Algorithms.isEmpty;
 import static net.osmand.util.Algorithms.objectEquals;
 
-public class OsrmEngine extends OnlineRoutingEngine {
+public class OsrmEngine extends JsonOnlineRoutingEngine {
 
 	public OsrmEngine(@Nullable Map<String, String> params) {
 		super(params);
 	}
 
 	@Override
-	public @NonNull
-	EngineType getType() {
-		return EngineType.OSRM;
+	@NonNull
+	public OnlineRoutingEngine getType() {
+		return OSRM_TYPE;
+	}
+
+	@Override
+	@NonNull
+	public String getTitle() {
+		return "OSRM";
+	}
+
+	@NonNull
+	@Override
+	public String getTypeName() {
+		return "OSRM";
 	}
 
 	@NonNull
@@ -45,7 +59,17 @@ public class OsrmEngine extends OnlineRoutingEngine {
 	}
 
 	@Override
-	protected void collectAllowedParameters() {
+	protected void collectAllowedParameters(@NonNull Set<EngineParameter> params) {
+		params.add(EngineParameter.KEY);
+		params.add(EngineParameter.VEHICLE_KEY);
+		params.add(EngineParameter.CUSTOM_NAME);
+		params.add(EngineParameter.NAME_INDEX);
+		params.add(EngineParameter.CUSTOM_URL);
+	}
+
+	@Override
+	public OnlineRoutingEngine newInstance(Map<String, String> params) {
+		return new OsrmEngine(params);
 	}
 
 	@Override
@@ -76,9 +100,9 @@ public class OsrmEngine extends OnlineRoutingEngine {
 
 	@Nullable
 	@Override
-	public OnlineRoutingResponse parseServerResponse(@NonNull JSONObject root,
-	                                                 @NonNull OsmandApplication app,
-	                                                 boolean leftSideNavigation) throws JSONException {
+	protected OnlineRoutingResponse parseServerResponse(@NonNull JSONObject root,
+	                                                    @NonNull OsmandApplication app,
+	                                                    boolean leftSideNavigation) throws JSONException {
 		String encodedPoints = root.getString("geometry");
 		List<LatLon> points = GeoPolylineParserUtil.parse(encodedPoints, GeoPolylineParserUtil.PRECISION_5);
 		if (isEmpty(points)) return null;
@@ -225,13 +249,14 @@ public class OsrmEngine extends OnlineRoutingEngine {
 
 	@NonNull
 	@Override
-	protected String getErrorMessageKey() {
-		return "message";
+	protected String getRootArrayKey() {
+		return "routes";
 	}
 
 	@NonNull
 	@Override
-	protected String getRootArrayKey() {
-		return "routes";
+	protected String getErrorMessageKey() {
+		return "message";
 	}
+
 }

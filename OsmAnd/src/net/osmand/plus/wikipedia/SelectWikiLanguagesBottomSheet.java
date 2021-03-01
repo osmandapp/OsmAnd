@@ -71,7 +71,7 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 	public void createMenuItems(Bundle savedInstanceState) {
 		final int activeColorResId = nightMode ?
 				R.color.active_color_primary_dark : R.color.active_color_primary_light;
-		final int profileColorResId = appMode.getIconColorInfo().getColor(nightMode);
+		final int profileColor = appMode.getProfileColor(nightMode);
 
 		final int contentPadding = app.getResources().getDimensionPixelSize(R.dimen.content_padding);
 		final int contentPaddingSmall = app.getResources().getDimensionPixelSize(R.dimen.content_padding_small);
@@ -86,7 +86,7 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 		final BottomSheetItemWithCompoundButton[] btnSelectAll = new BottomSheetItemWithCompoundButton[1];
 		btnSelectAll[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 				.setChecked(this.isGlobalWikiPoiEnabled)
-				.setCompoundButtonColorId(profileColorResId)
+				.setCompoundButtonColor(profileColor)
 				.setTitle(getString(R.string.shared_string_all_languages))
 				.setTitleColorId(activeColorResId)
 				.setCustomView(getCustomButtonView())
@@ -174,15 +174,15 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 		int disableColorId = nightMode ?
 				R.color.active_buttons_and_links_text_disabled_dark :
 				R.color.active_buttons_and_links_text_disabled_light;
-		int profileColorId = appMode.getIconColorInfo().getColor(nightMode);
+		int profileColor = appMode.getProfileColor(nightMode);
+		int disableColor = ContextCompat.getColor(app, disableColorId);
 		for (BottomSheetItemWithCompoundButton item : languageItems) {
 			item.getView().setEnabled(enable);
 			item.setTitleColorId(enable ? textColorPrimaryId : disableColorId);
 			CompoundButton cb = item.getCompoundButton();
 			if (cb != null) {
 				cb.setEnabled(enable);
-				UiUtilities.setupCompoundButton(nightMode, ContextCompat.getColor(app, enable ?
-						profileColorId : disableColorId), cb);
+				UiUtilities.setupCompoundButton(nightMode, enable ? profileColor : disableColor, cb);
 			}
 		}
 	}
@@ -254,7 +254,7 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 		Drawable bgDrawable = app.getUIUtilities().getPaintedIcon(bgResId, bgColor);
 		AndroidUtils.setBackground(buttonView, bgDrawable);
 
-		int selectedModeColorId = appMode.getIconColorInfo().getColor(nightMode);
+		int selectedModeColorId = appMode.getProfileColor(nightMode);
 		UiUtilities.setupCompoundButton(nightMode, selectedModeColorId, cb);
 
 		return buttonView;

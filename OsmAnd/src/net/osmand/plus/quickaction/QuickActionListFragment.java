@@ -372,8 +372,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment
     private void updateToolbarSwitch(final boolean isChecked) {
         OsmandApplication app = requireMyApplication();
         ApplicationMode appMode = app.getSettings().getApplicationMode();
-        int profileColor = appMode.getIconColorInfo().getColor(nightMode);
-        int color = ContextCompat.getColor(app, isChecked ? profileColor : R.color.preference_top_switch_off);
+        int color = isChecked ? appMode.getProfileColor(nightMode) : ContextCompat.getColor(app, R.color.preference_top_switch_off);
         AndroidUtils.setBackground(toolbarSwitchContainer, new ColorDrawable(color));
 
         SwitchCompat switchView = toolbarSwitchContainer.findViewById(R.id.switchWidget);

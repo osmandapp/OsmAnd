@@ -983,6 +983,10 @@ public class OsmandSettings {
 	public final CommonPreference<ProfileIconColors> ICON_COLOR = new EnumStringPreference<>(this,
 			"app_mode_icon_color", ProfileIconColors.DEFAULT, ProfileIconColors.values()).makeProfile().cache();
 
+	public final ListStringPreference CUSTOM_ICON_COLORS = (ListStringPreference) new ListStringPreference(this, "custom_icon_colors", null, ",").makeProfile().cache();
+
+	public final CommonPreference<String> CUSTOM_ICON_COLOR = new StringPreference(this, "custom_icon_color", null).makeProfile().cache();
+
 	public final CommonPreference<String> USER_PROFILE_NAME = new StringPreference(this, "user_profile_name", "").makeProfile().cache();
 
 	public final CommonPreference<String> PARENT_APP_MODE = new StringPreference(this, "parent_app_mode", null).makeProfile().cache();

@@ -38,18 +38,17 @@ public class ResetProfilePrefsBottomSheet extends BasePreferenceBottomSheet {
 		String title = getString(customProfile ? R.string.restore_all_profile_settings : R.string.reset_all_profile_settings);
 		items.add(new TitleItem(title));
 
-		int profileColor = mode.getIconColorInfo().getColor(nightMode);
-		int colorNoAlpha = ContextCompat.getColor(ctx, profileColor);
+		int colorNoAlpha = mode.getProfileColor(nightMode);
 
 		Drawable backgroundIcon = UiUtilities.getColoredSelectableDrawable(ctx, colorNoAlpha, 0.3f);
 		Drawable[] layers = {new ColorDrawable(UiUtilities.getColorWithAlpha(colorNoAlpha, 0.10f)), backgroundIcon};
 
 		BaseBottomSheetItem profileItem = new BottomSheetItemWithCompoundButton.Builder()
 				.setChecked(true)
-				.setCompoundButtonColorId(profileColor)
-				.setButtonTintList(ColorStateList.valueOf(getResolvedColor(profileColor)))
+				.setCompoundButtonColor(colorNoAlpha)
+				.setButtonTintList(ColorStateList.valueOf(colorNoAlpha))
 				.setDescription(ProfileDataUtils.getAppModeDescription(ctx, mode))
-				.setIcon(getIcon(mode.getIconRes(), profileColor))
+				.setIcon(getPaintedIcon(mode.getIconRes(), colorNoAlpha))
 				.setTitle(mode.toHumanString())
 				.setBackground(new LayerDrawable(layers))
 				.setLayoutId(R.layout.preference_profile_item_with_radio_btn)

@@ -87,8 +87,7 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 		if (CONFIGURE_PROFILE.equals(key)) {
 			View selectedProfile = holder.itemView.findViewById(R.id.selectable_list_item);
 			if (selectedProfile != null) {
-				int activeProfileColorId = getSelectedAppMode().getIconColorInfo().getColor(isNightMode());
-				int activeProfileColor = ContextCompat.getColor(app, activeProfileColorId);
+				int activeProfileColor = getSelectedAppMode().getProfileColor(isNightMode());
 				Drawable backgroundDrawable = new ColorDrawable(UiUtilities.getColorWithAlpha(activeProfileColor, 0.15f));
 				AndroidUtils.setBackground(selectedProfile, backgroundDrawable);
 			}
@@ -212,7 +211,7 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 
 	private Drawable getAppProfilesIcon(ApplicationMode applicationMode, boolean appProfileEnabled) {
 		int iconResId = applicationMode.getIconRes();
-		return appProfileEnabled ? app.getUIUtilities().getIcon(applicationMode.getIconRes(), applicationMode.getIconColorInfo().getColor(isNightMode()))
+		return appProfileEnabled ? app.getUIUtilities().getPaintedIcon(applicationMode.getIconRes(), applicationMode.getProfileColor(isNightMode()))
 				: getIcon(iconResId, isNightMode() ? R.color.icon_color_secondary_dark : R.color.icon_color_secondary_light);
 	}
 
