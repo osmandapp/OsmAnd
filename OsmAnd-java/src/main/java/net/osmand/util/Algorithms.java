@@ -565,16 +565,11 @@ public class Algorithms {
 		}
 	}
 
-	public static ByteArrayInputStream createByteArrayIS(InputStream inputStream) throws IOException {
-		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-		int i = 0;
-		while ((i = inputStream.read()) != -1) {
-			outputStream.write(i);
-		}
-		inputStream.close();
-
-		byte[] byteArray = outputStream.toByteArray();
-		return new ByteArrayInputStream(byteArray);
+	public static ByteArrayInputStream createByteArrayIS(InputStream in) throws IOException {
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		streamCopy(in, out);
+		in.close();
+		return new ByteArrayInputStream(out.toByteArray());
 	}
 
 	@SuppressWarnings("ResultOfMethodCallIgnored")

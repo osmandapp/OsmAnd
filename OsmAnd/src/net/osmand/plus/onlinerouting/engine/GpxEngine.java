@@ -95,7 +95,7 @@ public class GpxEngine extends OnlineRoutingEngine {
 	}
 
 	private GPXFile parseGpx(@NonNull String content) {
-		InputStream gpxStream = null;
+		InputStream gpxStream;
 		try {
 			gpxStream = new ByteArrayInputStream(content.getBytes("UTF-8"));
 			return GPXUtilities.loadGPXFile(gpxStream);
