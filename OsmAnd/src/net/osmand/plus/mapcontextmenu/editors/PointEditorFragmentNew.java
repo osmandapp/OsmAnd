@@ -195,7 +195,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 				FragmentManager fragmentManager = getFragmentManager();
 				SelectFavoriteCategoryBottomSheet dialogFragment = createSelectCategoryDialog();
 				if (fragmentManager != null && dialogFragment != null) {
-					dialogFragment.showInstance(getChildFragmentManager(), getTargetFragment());
+					dialogFragment.show(fragmentManager, SelectFavoriteCategoryBottomSheet.class.getSimpleName());
 				}
 			}
 		});
@@ -741,6 +741,17 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 		}
 	}
 
+	@Nullable
+	protected AddNewFavoriteCategoryBottomSheet createAddCategoryDialog() {
+		PointEditor editor = getEditor();
+		if (editor != null) {
+			return AddNewFavoriteCategoryBottomSheet.createInstance(editor.getFragmentTag(), getCategories(),
+					!editor.getFragmentTag().equals(FavoritePointEditor.TAG));
+		} else {
+			return null;
+		}
+	}
+
 	@Override
 	public void onDestroyView() {
 		PointEditor editor = getEditor();
@@ -1008,8 +1019,9 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 					@Override
 					public void onClick(View view) {
 						FragmentManager fragmentManager = getFragmentManager();
-						if (fragmentManager != null) {
-							SelectFavoriteCategoryBottomSheet.showInstance(getChildFragmentManager(), getTargetFragment());
+						AddNewFavoriteCategoryBottomSheet dialogFragment = createAddCategoryDialog();
+						if (fragmentManager != null && dialogFragment != null) {
+							dialogFragment.show(fragmentManager, SelectFavoriteCategoryBottomSheet.class.getSimpleName());
 						}
 					}
 				});

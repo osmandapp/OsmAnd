@@ -32,6 +32,7 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.myplaces.AddNewTrackFolderBottomSheet;
 
 import java.util.List;
 import java.util.Map;
@@ -43,7 +44,7 @@ public class SelectFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 	private static final String KEY_CTX_SEL_CAT_EDITOR_TAG = "key_ctx_sel_cat_editor_tag";
 	private OsmandApplication app;
 	private GPXUtilities.GPXFile gpxFile;
-	private String editorTag;
+	private static String editorTag;
 	private Map<String, Integer> gpxCategories;
 	private SelectFavoriteCategoryBottomSheet.CategorySelectionListener selectionListener;
 
@@ -125,7 +126,7 @@ public class SelectFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 						MapActivity mapActivity = (MapActivity) activity;
 						Set<String> categories = gpxCategories != null ? gpxCategories.keySet() : null;
 						AddNewFavoriteCategoryBottomSheet fragment = AddNewFavoriteCategoryBottomSheet.createInstance(editorTag, categories, gpxFile != null);
-						AddNewFavoriteCategoryBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), getTargetFragment());
+						fragment.show(mapActivity.getSupportFragmentManager(), AddNewTrackFolderBottomSheet.class.getName());
 						fragment.setSelectionListener(selectionListener);
 						dismiss();
 					}
