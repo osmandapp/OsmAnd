@@ -75,6 +75,9 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 		FavouritesDbHelper helper = getHelper();
 		if (editor != null && helper != null) {
 			FavouritePoint favorite = editor.getFavorite();
+			if (favorite == null && savedInstanceState != null) {
+				favorite = (FavouritePoint) savedInstanceState.getSerializable(FavoriteDialogs.KEY_FAVORITE);
+			}
 			this.favorite = favorite;
 			this.group = helper.getGroup(favorite);
 			this.color = favorite.getColor();
@@ -107,6 +110,12 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 			}
 		}
 		return view;
+	}
+
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putSerializable(FavoriteDialogs.KEY_FAVORITE, getFavorite());
 	}
 
 	private void replacePressed() {

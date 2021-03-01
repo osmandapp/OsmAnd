@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.AsyncTask.Status;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
@@ -25,6 +26,8 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.FavouritePoint.BackgroundType;
 import net.osmand.plus.AppInitializer;
+import net.osmand.plus.AppInitializer.AppInitializeListener;
+import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -704,14 +707,16 @@ public class ImportHelper {
 	@SuppressWarnings("unchecked")
 	private <P> void executeImportTask(final AsyncTask<P, ?, ?> importTask, final P... requests) {
 		if (app.isApplicationInitializing()) {
-			app.getAppInitializer().addListener(new AppInitializer.AppInitializeListener() {
+			app.getAppInitializer().addListener(new AppInitializeListener() {
 				@Override
-				public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
+				public void onProgress(AppInitializer init, InitEvents event) {
 				}
 
 				@Override
 				public void onFinish(AppInitializer init) {
-					importTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, requests);
+					if (importTask.getStatus() == Status.PENDING) {
+						importTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, requests);
+					}
 				}
 			});
 		} else {
