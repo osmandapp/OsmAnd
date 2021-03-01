@@ -21,12 +21,12 @@
 
 	<PreferenceCategory
 		android:key="select_color"
-		android:layout="@layout/preference_category_with_descr"
+		android:layout="@layout/preference_category_with_right_text"
 		android:title="@string/select_color" />
 
 	<Preference
 		android:key="color_items"
-		android:layout="@layout/preference_color_select"
+		android:layout="@layout/preference_colors_card"
 		android:title="@string/select_color"
 		android:selectable="false"/>
 

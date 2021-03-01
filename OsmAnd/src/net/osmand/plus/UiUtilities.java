@@ -553,7 +553,7 @@ public class UiUtilities {
 		switch (type) {
 			case PROFILE_DEPENDENT:
 				ApplicationMode appMode = app.getSettings().getApplicationMode();
-				activeColor = ContextCompat.getColor(app, appMode.getIconColorInfo().getColor(nightMode));
+				activeColor = appMode.getProfileColor(nightMode);
 				break;
 			case TOOLBAR:
 				activeColor = Color.WHITE;

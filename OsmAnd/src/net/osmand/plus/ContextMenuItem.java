@@ -19,8 +19,8 @@ public class ContextMenuItem {
 	private String title;
 	@DrawableRes
 	private int mIcon;
-	@ColorRes
-	private int colorRes;
+	@ColorInt
+	private Integer color;
 	@DrawableRes
 	private int secondaryIcon;
 	private Boolean selected;
@@ -48,7 +48,7 @@ public class ContextMenuItem {
 	private ContextMenuItem(@StringRes int titleId,
 							String title,
 							@DrawableRes int icon,
-							@ColorRes int colorRes,
+							@ColorInt Integer color,
 							@DrawableRes int secondaryIcon,
 							Boolean selected,
 							int progress,
@@ -72,7 +72,7 @@ public class ContextMenuItem {
 		this.titleId = titleId;
 		this.title = title;
 		this.mIcon = icon;
-		this.colorRes = colorRes;
+		this.color = color;
 		this.secondaryIcon = secondaryIcon;
 		this.selected = selected;
 		this.progress = progress;
@@ -109,23 +109,17 @@ public class ContextMenuItem {
 		return mIcon;
 	}
 
-	@ColorRes
-	public int getColorRes() {
-		return colorRes;
-	}
-
-	@ColorRes
-	public int getThemedColorRes(Context context) {
-		if (skipPaintingWithoutColor || getColorRes() != INVALID_ID) {
-			return getColorRes();
-		} else {
-			return UiUtilities.getDefaultColorRes(context);
-		}
+	@ColorInt
+	public Integer getColor() {
+		return color;
 	}
 
 	@ColorInt
 	public int getThemedColor(Context context) {
-		return ContextCompat.getColor(context, getThemedColorRes(context));
+		if (skipPaintingWithoutColor || color != null) {
+			return color;
+		}
+		return ContextCompat.getColor(context, UiUtilities.getDefaultColorRes(context));
 	}
 
 	@DrawableRes
@@ -212,8 +206,10 @@ public class ContextMenuItem {
 		this.secondaryIcon = secondaryIcon;
 	}
 
-	public void setColorRes(int colorRes) {
-		this.colorRes = colorRes;
+	public void setColor(Context context, @ColorRes int colorRes) {
+		if (colorRes != INVALID_ID) {
+			this.color = ContextCompat.getColor(context, colorRes);
+		}
 	}
 
 	public void setSelected(boolean selected) {
@@ -268,8 +264,8 @@ public class ContextMenuItem {
 		private String mTitle;
 		@DrawableRes
 		private int mIcon = INVALID_ID;
-		@ColorRes
-		private int mColorRes = INVALID_ID;
+		@ColorInt
+		private Integer mColor = null;
 		@DrawableRes
 		private int mSecondaryIcon = INVALID_ID;
 		private Boolean mSelected = null;
@@ -307,8 +303,15 @@ public class ContextMenuItem {
 			return this;
 		}
 
-		public ItemBuilder setColor(@ColorRes int colorRes) {
-			mColorRes = colorRes;
+		public ItemBuilder setColor(@ColorInt Integer color) {
+			mColor = color;
+			return this;
+		}
+
+		public ItemBuilder setColor(Context context, @ColorRes int colorRes) {
+			if (colorRes != INVALID_ID) {
+				mColor = ContextCompat.getColor(context, colorRes);
+			}
 			return this;
 		}
 
@@ -422,7 +425,7 @@ public class ContextMenuItem {
 		}
 
 		public ContextMenuItem createItem() {
-			ContextMenuItem item = new ContextMenuItem(mTitleId, mTitle, mIcon, mColorRes, mSecondaryIcon,
+			ContextMenuItem item = new ContextMenuItem(mTitleId, mTitle, mIcon, mColor, mSecondaryIcon,
 					mSelected, mProgress, mLayout, mLoading, mIsCategory, mIsClickable, mSkipPaintingWithoutColor,
 					mOrder, mDescription, mOnUpdateCallback, mItemClickListener, mIntegerListener, mProgressListener,
 					mItemDeleteAction, mHideDivider, mHideCompoundButton, mMinHeight, mTag, mId);

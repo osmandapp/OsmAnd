@@ -66,7 +66,7 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 				? getString(R.string.shared_string_disabled) : summaryOff.toString();
 		final int activeColor = AndroidUtils.resolveAttribute(themedCtx, R.attr.active_color_basic);
 		final int disabledColor = AndroidUtils.resolveAttribute(themedCtx, android.R.attr.textColorSecondary);
-		boolean checked = pref.getModeValue(getAppMode());
+		boolean checked = switchPreference.isChecked();
 
 		final BottomSheetItemWithCompoundButton[] preferenceBtn = new BottomSheetItemWithCompoundButton[1];
 		preferenceBtn[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
@@ -77,7 +77,7 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						boolean newValue = !pref.getModeValue(getAppMode());
+						boolean newValue = !switchPreference.isChecked();
 						Fragment targetFragment = getTargetFragment();
 						if (targetFragment instanceof OnConfirmPreferenceChange) {
 							ApplyQueryType applyQueryType = getApplyQueryType();
@@ -103,7 +103,7 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 				})
 				.create();
 		if (isProfileDependent()) {
-			preferenceBtn[0].setCompoundButtonColorId(getAppMode().getIconColorInfo().getColor(nightMode));
+			preferenceBtn[0].setCompoundButtonColor(getAppMode().getProfileColor(nightMode));
 		}
 		items.add(preferenceBtn[0]);
 
@@ -133,8 +133,7 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 		Context themedCtx = UiUtilities.getThemedContext(app, nightMode);
 		View buttonView = customView.findViewById(R.id.button_container);
 
-		int colorRes = mode.getIconColorInfo().getColor(nightMode);
-		int color = checked ? ContextCompat.getColor(themedCtx, colorRes) : AndroidUtils.getColorFromAttr(themedCtx, R.attr.divider_color_basic);
+		int color = checked ? mode.getProfileColor(nightMode) : AndroidUtils.getColorFromAttr(themedCtx, R.attr.divider_color_basic);
 		int bgColor = UiUtilities.getColorWithAlpha(color, checked ? 0.1f : 0.5f);
 		int selectedColor = UiUtilities.getColorWithAlpha(color, checked ? 0.3f : 0.5f);
 

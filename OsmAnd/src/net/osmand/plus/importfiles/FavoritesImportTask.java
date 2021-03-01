@@ -24,7 +24,7 @@ class FavoritesImportTask extends BaseLoadAsyncTask<Void, Void, GPXFile> {
 	private boolean forceImportFavourites;
 
 	public FavoritesImportTask(@NonNull FragmentActivity activity, @NonNull GPXFile gpxFile,
-	                           @NonNull String fileName, boolean forceImportFavourites) {
+							   @NonNull String fileName, boolean forceImportFavourites) {
 		super(activity);
 		this.gpxFile = gpxFile;
 		this.fileName = fileName;

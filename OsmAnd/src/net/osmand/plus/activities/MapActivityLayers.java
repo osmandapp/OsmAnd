@@ -437,7 +437,7 @@ public class MapActivityLayers {
 		} else {
 			builder.setIcon(R.drawable.mx_user_defined);
 		}
-		builder.setColor(ContextMenuItem.INVALID_ID);
+		builder.setColor(activity, ContextMenuItem.INVALID_ID);
 		builder.setSkipPaintingWithoutColor(true);
 		adapter.addItem(builder.createItem());
 	}
@@ -495,7 +495,7 @@ public class MapActivityLayers {
 		OsmandApplication app = getApplication();
 		boolean nightMode = isNightMode(app);
 		int themeRes = getThemeRes(app);
-		int selectedModeColor = ContextCompat.getColor(app, settings.getApplicationMode().getIconColorInfo().getColor(nightMode));
+		int selectedModeColor = settings.getApplicationMode().getProfileColor(nightMode);
 		DialogListItemAdapter dialogAdapter = DialogListItemAdapter.createSingleChoiceAdapter(
 				items, nightMode, selectedItem, app, selectedModeColor, themeRes, new View.OnClickListener() {
 					@Override

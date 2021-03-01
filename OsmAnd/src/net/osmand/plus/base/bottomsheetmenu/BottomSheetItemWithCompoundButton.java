@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.LayoutRes;
 import androidx.core.content.ContextCompat;
@@ -22,6 +23,7 @@ public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescri
 	private ColorStateList buttonTintList;
 	private OnCheckedChangeListener onCheckedChangeListener;
 	@ColorRes private int compoundButtonColorId;
+	@ColorInt private Integer compoundButtonColor;
 
 	private CompoundButton compoundButton;
 
@@ -80,6 +82,10 @@ public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescri
 		this.compoundButtonColorId = compoundButtonColorId;
 	}
 
+	public void setCompoundButtonColor(@ColorInt int compoundButtonColor) {
+		this.compoundButtonColor = compoundButtonColor;
+	}
+
 	public CompoundButton getCompoundButton() {
 		return compoundButton;
 	}
@@ -91,7 +97,9 @@ public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescri
 		if (compoundButton != null) {
 			compoundButton.setChecked(checked);
 			compoundButton.setOnCheckedChangeListener(onCheckedChangeListener);
-			if (compoundButtonColorId != INVALID_ID) {
+			if (compoundButtonColor != null) {
+				UiUtilities.setupCompoundButton(nightMode, compoundButtonColor, compoundButton);
+			} else if (compoundButtonColorId != INVALID_ID) {
 				UiUtilities.setupCompoundButton(nightMode, ContextCompat.getColor(context, compoundButtonColorId), compoundButton);
 			} else {
 				CompoundButtonCompat.setButtonTintList(compoundButton, buttonTintList);
@@ -105,6 +113,7 @@ public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescri
 		protected ColorStateList buttonTintList;
 		protected OnCheckedChangeListener onCheckedChangeListener;
 		@ColorRes protected int compoundButtonColorId = INVALID_ID;
+		@ColorInt protected Integer compoundButtonColor = null;
 
 		public Builder setChecked(boolean checked) {
 			this.checked = checked;
@@ -123,6 +132,11 @@ public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescri
 
 		public Builder setCompoundButtonColorId(@ColorRes int compoundButtonColorId) {
 			this.compoundButtonColorId = compoundButtonColorId;
+			return this;
+		}
+
+		public Builder setCompoundButtonColor(@ColorInt int compoundButtonColor) {
+			this.compoundButtonColor = compoundButtonColor;
 			return this;
 		}
 		

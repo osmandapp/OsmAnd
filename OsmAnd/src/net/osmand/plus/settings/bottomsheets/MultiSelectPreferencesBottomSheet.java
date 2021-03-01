@@ -89,7 +89,7 @@ public class MultiSelectPreferencesBottomSheet extends BasePreferenceBottomSheet
 					.setTag(prefId)
 					.create();
 			if (isProfileDependent()) {
-				item[0].setCompoundButtonColorId(getAppMode().getIconColorInfo().getColor(nightMode));
+				item[0].setCompoundButtonColor(getAppMode().getProfileColor(nightMode));
 			}
 			items.add(item[0]);
 		}

@@ -75,7 +75,6 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	private boolean nightMode;
 	private boolean terrainEnabled;
 
-	private int colorProfileRes;
 	private int colorProfile;
 
 	private TextView downloadDescriptionTv;
@@ -144,8 +143,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		uiUtilities = app.getUIUtilities();
 		nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		srtmPlugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
-		colorProfileRes = settings.getApplicationMode().getIconColorInfo().getColor(nightMode);
-		colorProfile = ContextCompat.getColor(app, colorProfileRes);
+		colorProfile = settings.getApplicationMode().getProfileColor(nightMode);
 		terrainEnabled = srtmPlugin.isTerrainLayerEnabled();
 		super.onCreate(savedInstanceState);
 	}
@@ -238,7 +236,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 			String transparency = transparencyValue + "%";
 			int minZoom = Math.max(srtmPlugin.getTerrainMinZoom(), TERRAIN_MIN_ZOOM);
 			int maxZoom = Math.min(srtmPlugin.getTerrainMaxZoom(), TERRAIN_MAX_ZOOM);
-			iconIv.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_hillshade_dark, colorProfileRes));
+			iconIv.setImageDrawable(uiUtilities.getPaintedIcon(R.drawable.ic_action_hillshade_dark, colorProfile));
 			stateTv.setText(R.string.shared_string_enabled);
 			transparencySlider.setValue(transparencyValue);
 			transparencyValueTv.setText(transparency);

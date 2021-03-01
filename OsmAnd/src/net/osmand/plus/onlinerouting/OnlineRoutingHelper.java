@@ -18,14 +18,20 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.ZipInputStream;
 
+import static net.osmand.util.Algorithms.GZIP_FILE_SIGNATURE;
+import static net.osmand.util.Algorithms.ZIP_FILE_SIGNATURE;
 import static net.osmand.util.Algorithms.isEmpty;
 
 public class OnlineRoutingHelper {
@@ -88,7 +94,7 @@ public class OnlineRoutingHelper {
 	                                                   boolean leftSideNavigation) throws IOException, JSONException {
 		String url = engine.getFullUrl(path);
 		String content = makeRequest(url);
-		return engine.parseServerResponse(content, app, leftSideNavigation);
+		return engine.parseResponse(content, app, leftSideNavigation);
 	}
 
 	@NonNull
@@ -98,7 +104,7 @@ public class OnlineRoutingHelper {
 		StringBuilder content = new StringBuilder();
 		BufferedReader reader;
 		if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
-			reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+			reader = new BufferedReader(new InputStreamReader(getInputStream(connection)));
 		} else {
 			reader = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
 		}
@@ -111,6 +117,18 @@ public class OnlineRoutingHelper {
 		} catch (IOException ignored) {
 		}
 		return content.toString();
+	}
+
+	private InputStream getInputStream(@NonNull HttpURLConnection connection) throws IOException {
+		ByteArrayInputStream localIS = Algorithms.createByteArrayIS(connection.getInputStream());
+		if (Algorithms.checkFileSignature(localIS, ZIP_FILE_SIGNATURE)) {
+			ZipInputStream zipIS = new ZipInputStream(localIS);
+			zipIS.getNextEntry(); // set position to reading for the first item
+			return zipIS;
+		} else if (Algorithms.checkFileSignature(localIS, GZIP_FILE_SIGNATURE)) {
+			return new GZIPInputStream(localIS);
+		}
+		return localIS;
 	}
 
 	public void saveEngine(@NonNull OnlineRoutingEngine engine) {

@@ -361,6 +361,9 @@ public class FavouritesDbHelper {
 	}
 
 	public boolean addFavourite(FavouritePoint p, boolean saveImmediately) {
+		if (Double.isNaN(p.getAltitude()) || p.getAltitude() == 0) {
+			p.initAltitude(context);
+		}
 		if (p.getName().isEmpty() && flatGroups.containsKey(p.getCategory())) {
 			return true;
 		}
@@ -545,6 +548,7 @@ public class FavouritesDbHelper {
 		cancelAddressRequest(p);
 		p.setLatitude(lat);
 		p.setLongitude(lon);
+		p.initAltitude(context);
 		if (description != null) {
 			p.setDescription(description);
 		}

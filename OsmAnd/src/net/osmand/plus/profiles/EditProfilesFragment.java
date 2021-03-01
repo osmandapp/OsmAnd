@@ -14,6 +14,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
@@ -241,7 +242,7 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 					order = mode.getOrder();
 				}
 				profiles.add(new EditProfileDataObject(modeKey, mode.toHumanString(), ProfileDataUtils.getAppModeDescription(getContext(), mode),
-						mode.getIconRes(), false, mode.isCustomProfile(), deleted, mode.getIconColorInfo(), order));
+						mode.getIconRes(), false, mode.isCustomProfile(), deleted, mode.getProfileColor(false), mode.getProfileColor(true), order));
 			}
 		}
 		Collections.sort(profiles, new Comparator<EditProfileDataObject>() {
@@ -274,8 +275,9 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 		private boolean deleted;
 		private boolean customProfile;
 
-		EditProfileDataObject(String stringKey, String name, String descr, int iconRes, boolean isSelected, boolean customProfile, boolean deleted, ProfileIconColors iconColor, int order) {
-			super(name, descr, stringKey, iconRes, isSelected, iconColor);
+		EditProfileDataObject(String stringKey, String name, String descr, int iconRes, boolean isSelected,
+							  boolean customProfile, boolean deleted, @ColorInt int iconColorLight, @ColorInt int iconColorDark, int order) {
+			super(name, descr, stringKey, iconRes, isSelected, iconColorLight, iconColorDark);
 			this.customProfile = customProfile;
 			this.deleted = deleted;
 			this.order = order;
@@ -365,10 +367,9 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 				if (iconRes == 0 || iconRes == -1) {
 					iconRes = R.drawable.ic_action_world_globe;
 				}
-				int profileColorResId = mode.getIconColor(nightMode);
-				int colorNoAlpha = ContextCompat.getColor(app, profileColorResId);
+				int colorNoAlpha = mode.getIconColor(nightMode);
 
-				profileViewHolder.icon.setImageDrawable(uiUtilities.getIcon(iconRes, profileColorResId));
+				profileViewHolder.icon.setImageDrawable(uiUtilities.getPaintedIcon(iconRes, colorNoAlpha));
 
 				//set up cell color
 				Drawable drawable = UiUtilities.getColoredSelectableDrawable(app, colorNoAlpha, 0.3f);
