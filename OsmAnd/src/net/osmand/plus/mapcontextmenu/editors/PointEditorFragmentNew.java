@@ -38,6 +38,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -190,9 +191,9 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 		groupList.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				DialogFragment dialogFragment = createSelectCategoryDialog();
-				if (dialogFragment != null) {
-					dialogFragment.show(getChildFragmentManager(), SelectCategoryDialogFragment.TAG);
+				FragmentManager fragmentManager = getFragmentManager();
+				if (fragmentManager != null) {
+					SelectFavoriteCategoryBottomSheet.showInstance(getChildFragmentManager(), getTargetFragment());
 				}
 			}
 		});
@@ -887,8 +888,6 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 		return true;
 	}
 
-	;
-
 	String getNameTextValue() {
 		EditText nameEdit = view.findViewById(R.id.name_edit);
 		return nameEdit.getText().toString().trim();
@@ -1006,12 +1005,9 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 				holder.groupButton.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						PointEditor editor = getEditor();
-						if (editor != null) {
-							EditCategoryDialogFragment dialogFragment =
-									EditCategoryDialogFragment.createInstance(editor.getFragmentTag(), getCategories(),
-											!editor.getFragmentTag().equals(FavoritePointEditor.TAG));
-							dialogFragment.show(requireActivity().getSupportFragmentManager(), EditCategoryDialogFragment.TAG);
+						FragmentManager fragmentManager = getFragmentManager();
+						if (fragmentManager != null) {
+							SelectFavoriteCategoryBottomSheet.showInstance(getChildFragmentManager(), getTargetFragment());
 						}
 					}
 				});

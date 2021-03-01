@@ -24,6 +24,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
@@ -136,9 +137,9 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 			@Override
 			public boolean onTouch(final View v, MotionEvent event) {
 				if (event.getAction() == MotionEvent.ACTION_UP) {
-					DialogFragment dialogFragment = createSelectCategoryDialog();
-					if (dialogFragment != null) {
-						dialogFragment.show(getChildFragmentManager(), SelectCategoryDialogFragment.TAG);
+					FragmentManager fragmentManager = getFragmentManager();
+					if (fragmentManager != null) {
+						SelectFavoriteCategoryBottomSheet.showInstance(getChildFragmentManager(), getTargetFragment());
 					}
 					return true;
 				}
