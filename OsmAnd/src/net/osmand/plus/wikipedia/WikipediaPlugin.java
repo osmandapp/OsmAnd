@@ -141,7 +141,7 @@ public class WikipediaPlugin extends OsmandPlugin {
 							ContextMenuItem item = adapter.getItem(pos);
 							if (item != null) {
 								item.setSelected(selected);
-								item.setColorRes(selected ?
+								item.setColor(app, selected ?
 										R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 								item.setDescription(selected ? getLanguagesSummary() : null);
 								adapter.notifyDataSetChanged();
@@ -160,7 +160,7 @@ public class WikipediaPlugin extends OsmandPlugin {
 				.setTitleId(R.string.shared_string_wikipedia, mapActivity)
 				.setDescription(selected ? getLanguagesSummary() : null)
 				.setSelected(selected)
-				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
+				.setColor(app, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_plugin_wikipedia)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(listener).createItem());

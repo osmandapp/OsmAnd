@@ -12,10 +12,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -161,8 +163,8 @@ public abstract class SwitchableAction<T> extends QuickAction {
 
 			OsmandApplication app = (OsmandApplication) context.getApplicationContext();
 
-			Drawable icon = app.getUIUtilities().getIcon(
-					getItemIconRes(app, item), getItemIconColorRes(app, item));
+			Drawable icon = app.getUIUtilities().getPaintedIcon(
+					getItemIconRes(app, item), getItemIconColor(app, item));
 			holder.icon.setImageDrawable(icon);
 
 			holder.title.setText(getItemName(context, item));
@@ -310,10 +312,11 @@ public abstract class SwitchableAction<T> extends QuickAction {
 		return R.drawable.ic_map;
 	}
 
-	@ColorRes
-	protected int getItemIconColorRes(OsmandApplication app, T item) {
+	@ColorInt
+	protected int getItemIconColor(OsmandApplication app, T item) {
 		boolean nightMode = !app.getSettings().isLightContent();
-		return nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
+		int colorRes = nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
+		return ContextCompat.getColor(app, colorRes);
 	}
 
 	protected abstract

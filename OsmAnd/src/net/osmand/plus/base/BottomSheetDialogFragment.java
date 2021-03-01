@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
@@ -86,6 +87,16 @@ public abstract class BottomSheetDialogFragment extends DialogFragment {
 		OsmandApplication app = getMyApplication();
 		if (app != null) {
 			return app.getUIUtilities().getIcon(drawableRes, colorRes);
+		} else {
+			return null;
+		}
+	}
+
+	@Nullable
+	protected Drawable getPaintedIcon(@DrawableRes int drawableRes, @ColorInt int color) {
+		OsmandApplication app = getMyApplication();
+		if (app != null) {
+			return app.getUIUtilities().getPaintedIcon(drawableRes, color);
 		} else {
 			return null;
 		}

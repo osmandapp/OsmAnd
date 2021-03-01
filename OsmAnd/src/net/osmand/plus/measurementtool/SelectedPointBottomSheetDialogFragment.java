@@ -403,7 +403,7 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 		if (MeasurementEditingContext.DEFAULT_APP_MODE.equals(routeAppMode)) {
 			icon = getContentIcon(R.drawable.ic_action_split_interval);
 		} else {
-			icon = getIcon(routeAppMode.getIconRes(), routeAppMode.getIconColorInfo().getColor(nightMode));
+			icon = getPaintedIcon(routeAppMode.getIconRes(), routeAppMode.getProfileColor(nightMode));
 		}
 		return icon;
 	}

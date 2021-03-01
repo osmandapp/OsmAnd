@@ -301,6 +301,7 @@ public class ProfileSettingsItem extends OsmandSettingsItem {
 		OsmandSettings settings = app.getSettings();
 		return new String[] {
 				settings.ICON_COLOR.getId(),
+				settings.CUSTOM_ICON_COLOR.getId(),
 				settings.ICON_RES_NAME.getId(),
 				settings.PARENT_APP_MODE.getId(),
 				settings.ROUTING_PROFILE.getId(),

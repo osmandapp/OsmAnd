@@ -116,8 +116,7 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment {
 		container = itemView.findViewById(R.id.always_ask_and_range_slider_container);
 		RangeSlider intervalSlider = itemView.findViewById(R.id.interval_slider);
 		intervalSlider.setValueTo(secondsLength + minutesLength - 1);
-		int currentModeColorRes = app.getSettings().getApplicationMode().getIconColorInfo().getColor(nightMode);
-		int currentModeColor = ContextCompat.getColor(app, currentModeColorRes);
+		int currentModeColor = app.getSettings().getApplicationMode().getProfileColor(nightMode);
 		UiUtilities.setupSlider(intervalSlider, nightMode, currentModeColor, true);
 		container.setVisibility(View.GONE);
 		intervalSlider.addOnChangeListener(new RangeSlider.OnChangeListener() {

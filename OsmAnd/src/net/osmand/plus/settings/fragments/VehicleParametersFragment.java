@@ -280,7 +280,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 			}
 		});
 
-		int selectedModeColor = ContextCompat.getColor(app, mode.getIconColorInfo().getColor(nightMode));
+		int selectedModeColor = mode.getProfileColor(nightMode);
 		if (!defaultSpeedOnly) {
 			setupSpeedSlider(SpeedSliderType.DEFAULT_SPEED, speedUnits, defaultValue, minValue, maxValue, min, max, seekbarView, selectedModeColor);
 			setupSpeedSlider(SpeedSliderType.MIN_SPEED, speedUnits, defaultValue, minValue, maxValue, min, max, seekbarView, selectedModeColor);

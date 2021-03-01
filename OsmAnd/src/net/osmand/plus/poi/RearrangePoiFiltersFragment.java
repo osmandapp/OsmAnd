@@ -310,13 +310,12 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 		ImageView profileIcon = (ImageView) view.findViewById(R.id.profile_icon);
 		if (profileIcon != null) {
 			int iconRes = selectedAppMode.getIconRes();
-			int iconColor = selectedAppMode.getIconColorInfo().getColor(nightMode);
-			profileIcon.setImageDrawable(uiUtilities.getPaintedIcon(iconRes, iconColor));
+			profileIcon.setImageDrawable(uiUtilities.getPaintedIcon(iconRes, selectedAppMode.getProfileColor(nightMode)));
 		}
 
 		View profileButton = view.findViewById(R.id.profile_button);
 		if (profileButton != null) {
-			int iconColor = getSelectedAppMode().getIconColorInfo().getColor(nightMode);
+			int iconColor = getSelectedAppMode().getProfileColor(nightMode);
 			int bgColor = ContextCompat.getColor(app, nightMode ?
 					R.color.divider_color_dark : R.color.active_buttons_and_links_text_light);
 			int selectedColor = UiUtilities.getColorWithAlpha(iconColor, 0.3f);

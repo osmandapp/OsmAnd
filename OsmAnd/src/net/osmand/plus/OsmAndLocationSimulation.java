@@ -59,7 +59,7 @@ public class OsmAndLocationSimulation {
 				boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 				int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 				ApplicationMode appMode = app.getSettings().getApplicationMode();
-				int selectedModeColor = ContextCompat.getColor(app, appMode.getIconColorInfo().getColor(nightMode));
+				int selectedModeColor = appMode.getProfileColor(nightMode);
 				AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(ma, themeRes));
 				builder.setTitle(R.string.animate_route);
 
