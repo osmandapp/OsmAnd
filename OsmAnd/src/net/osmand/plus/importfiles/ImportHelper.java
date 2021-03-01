@@ -215,7 +215,7 @@ public class ImportHelper {
 	public static String getNameFromContentUri(OsmandApplication app, Uri contentUri) {
 		try {
 			String name;
-			Cursor returnCursor = app.getContentResolver().query(contentUri, new String[] {OpenableColumns.DISPLAY_NAME}, null, null, null);
+			Cursor returnCursor = app.getContentResolver().query(contentUri, new String[]{OpenableColumns.DISPLAY_NAME}, null, null, null);
 			if (returnCursor != null && returnCursor.moveToFirst()) {
 				int columnIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
 				if (columnIndex != -1) {
@@ -690,7 +690,7 @@ public class ImportHelper {
 				} else {
 					fpCat = p.category;
 				}
-				FavouritePoint point = new FavouritePoint(p.lat, p.lon, p.name, fpCat);
+				FavouritePoint point = new FavouritePoint(p.lat, p.lon, p.name, fpCat, p.ele, 0);
 				if (p.desc != null) {
 					point.setDescription(p.desc);
 				}
