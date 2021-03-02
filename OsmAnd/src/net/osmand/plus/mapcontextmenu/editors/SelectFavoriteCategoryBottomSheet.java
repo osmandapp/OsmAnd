@@ -65,6 +65,7 @@ public class SelectFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 		Bundle bundle = new Bundle();
 		bundle.putString(KEY_CTX_SEL_CAT_EDITOR_TAG, editorTag);
 		fragment.setArguments(bundle);
+		fragment.setRetainInstance(true);
 		return fragment;
 	}
 
