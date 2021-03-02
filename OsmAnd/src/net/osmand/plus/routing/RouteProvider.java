@@ -216,22 +216,20 @@ public class RouteProvider {
 			List<RouteSegmentResult> lastSegmentRoute = null;
 			List<RouteSegmentResult> gpxRoute;
 
+			if (nearestGpxPointInd > 0) {
+				nearestGpxLocation = gpxRouteLocations.get(nearestGpxPointInd);
+			} else if (!gpxRouteLocations.isEmpty()) {
+				nearestGpxLocation = gpxRouteLocations.get(0);
+			}
 			if (calculateOsmAndRouteParts && !reverseRoutePoints && !Algorithms.isEmpty(gpxParams.segmentEndpoints)) {
-				if (nearestGpxPointInd > 0) {
-					nearestGpxLocation = gpxRouteLocations.get(nearestGpxPointInd);
-				}
 				gpxRoute = findRouteWithIntermediateSegments(routeParams, result, gpxRouteLocations, gpxParams.segmentEndpoints, nearestGpxPointInd);
 			} else {
 				if (nearestGpxPointInd > 0) {
-					nearestGpxLocation = gpxRouteLocations.get(nearestGpxPointInd);
 					gpxRoute = result.getOriginalRoute(nearestGpxPointInd);
 					if (gpxRoute.size() > 0) {
 						gpxRoute.remove(0);
 					}
 				} else {
-					if (!gpxRouteLocations.isEmpty()) {
-						nearestGpxLocation = gpxRouteLocations.get(0);
-					}
 					gpxRoute = result.getOriginalRoute();
 				}
 			}
@@ -433,6 +431,9 @@ public class RouteProvider {
 			Location prevSegmentPoint = segmentEndpoints.get(i);
 			Location newSegmentPoint = segmentEndpoints.get(i + 1);
 
+			if (prevSegmentPoint.distanceTo(newSegmentPoint) <= MIN_DISTANCE_FOR_INSERTING_ROUTE_SEGMENT) {
+				continue;
+			}
 			int index = points.indexOf(newSegmentPoint);
 			if (calculateOsmAndRouteParts && index != -1 && points.contains(prevSegmentPoint)) {
 				LatLon end = new LatLon(newSegmentPoint.getLatitude(), newSegmentPoint.getLongitude());
@@ -464,6 +465,9 @@ public class RouteProvider {
 			Location prevSegmentPoint = segmentEndpoints.get(i);
 			Location newSegmentPoint = segmentEndpoints.get(i + 1);
 
+			if (prevSegmentPoint.distanceTo(newSegmentPoint) <= MIN_DISTANCE_FOR_INSERTING_ROUTE_SEGMENT) {
+				continue;
+			}
 			int indexNew = findNearestGpxPointIndexFromRoute(gpxRouteLocations, newSegmentPoint, routeParams.gpxRoute.calculateOsmAndRouteParts);
 			int indexPrev = findNearestGpxPointIndexFromRoute(gpxRouteLocations, prevSegmentPoint, routeParams.gpxRoute.calculateOsmAndRouteParts);
 			if (indexPrev != -1 && indexPrev > nearestGpxPointInd && indexNew != -1) {
