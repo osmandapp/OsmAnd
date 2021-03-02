@@ -26,6 +26,9 @@ import android.widget.TextView;
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.routing.RouteService;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.DialogButtonType;
@@ -1003,7 +1006,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		Integer customColor = null;
 		int iconRes;
 		String routingProfile;
-		RouteProvider.RouteService routeService;
+		RouteService routeService;
 		NavigationIcon navigationIcon;
 		LocationIcon locationIcon;
 

@@ -36,7 +36,7 @@ import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.LocalRoutingPar
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.MuteSoundRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.OtherSettingsRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.VoiceGuidanceRoutingParameter;
-import net.osmand.plus.routing.RouteProvider;
+import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -373,13 +373,13 @@ public class RoutePreferencesMenu {
 	}
 
 	private void updateSpinnerItems(final TextView gpxSpinner) {
-		RouteProvider.GPXRouteParamsBuilder rp = mapActivity.getRoutingHelper().getCurrentGPXRoute();
+		GPXRouteParamsBuilder rp = mapActivity.getRoutingHelper().getCurrentGPXRoute();
 		gpxSpinner.setText(rp == null ? mapActivity.getString(R.string.shared_string_none) :
 				new File(rp.getFile().path).getName());
 	}
 
 	private void showOptionsMenu(final TextView gpxSpinner) {
-		RouteProvider.GPXRouteParamsBuilder rp = mapActivity.getRoutingHelper().getCurrentGPXRoute();
+		GPXRouteParamsBuilder rp = mapActivity.getRoutingHelper().getCurrentGPXRoute();
 		final PopupMenu optionsMenu = new PopupMenu(gpxSpinner.getContext(), gpxSpinner);
 		MenuItem item = optionsMenu.getMenu().add(
 				mapActivity.getString(R.string.shared_string_none));

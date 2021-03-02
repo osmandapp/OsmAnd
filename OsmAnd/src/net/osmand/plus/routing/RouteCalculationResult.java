@@ -15,7 +15,6 @@ import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
-import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.router.ExitInfo;
 import net.osmand.router.RouteSegmentResult;
@@ -291,12 +290,16 @@ public class RouteCalculationResult {
 	}
 
 	public List<RouteSegmentResult> getOriginalRoute(int startIndex) {
+		return getOriginalRoute(startIndex, segments.size());
+	}
+
+	public List<RouteSegmentResult> getOriginalRoute(int startIndex, int endIndex) {
 		if (segments.size() == 0) {
 			return null;
 		}
-		List<RouteSegmentResult> list = new ArrayList<RouteSegmentResult>();
+		List<RouteSegmentResult> list = new ArrayList<>();
 		list.add(segments.get(startIndex++));
-		for (int i = startIndex; i < segments.size(); i++) {
+		for (int i = startIndex; i < endIndex; i++) {
 			if (segments.get(i - 1) != segments.get(i)) {
 				list.add(segments.get(i));
 			}

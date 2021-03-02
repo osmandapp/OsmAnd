@@ -30,7 +30,7 @@ import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.helpers.enums.MetricsConstants;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.routing.RouteProvider;
+import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.util.Algorithms;
 
@@ -928,7 +928,7 @@ public class GpxSelectionHelper {
 		}
 
 		public boolean isFollowTrack(OsmandApplication app) {
-			RouteProvider.GPXRouteParamsBuilder routeParams = app.getRoutingHelper().getCurrentGPXRoute();
+			GPXRouteParamsBuilder routeParams = app.getRoutingHelper().getCurrentGPXRoute();
 			if (routeParams != null) {
 				return gpxFile.path.equals(routeParams.getFile().path);
 			}

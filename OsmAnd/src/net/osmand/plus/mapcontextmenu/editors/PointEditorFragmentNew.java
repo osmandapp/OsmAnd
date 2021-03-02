@@ -38,6 +38,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -49,6 +50,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
@@ -190,9 +192,10 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 		groupList.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				DialogFragment dialogFragment = createSelectCategoryDialog();
-				if (dialogFragment != null) {
-					dialogFragment.show(getChildFragmentManager(), SelectCategoryDialogFragment.TAG);
+				FragmentManager fragmentManager = getFragmentManager();
+				DialogFragment dialogFragment  = createSelectCategoryDialog();
+				if (fragmentManager != null && dialogFragment != null) {
+					dialogFragment.show(fragmentManager, SelectFavoriteCategoryBottomSheet.class.getSimpleName());
 				}
 			}
 		});
@@ -732,7 +735,18 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 	protected DialogFragment createSelectCategoryDialog() {
 		PointEditor editor = getEditor();
 		if (editor != null) {
-			return SelectCategoryDialogFragment.createInstance(editor.getFragmentTag());
+			return SelectFavoriteCategoryBottomSheet.createInstance(editor.getFragmentTag());
+		} else {
+			return null;
+		}
+	}
+
+	@Nullable
+	protected AddNewFavoriteCategoryBottomSheet createAddCategoryDialog() {
+		PointEditor editor = getEditor();
+		if (editor != null) {
+			return AddNewFavoriteCategoryBottomSheet.createInstance(editor.getFragmentTag(), getCategories(),
+					!editor.getFragmentTag().equals(FavoritePointEditor.TAG));
 		} else {
 			return null;
 		}
@@ -887,8 +901,6 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 		return true;
 	}
 
-	;
-
 	String getNameTextValue() {
 		EditText nameEdit = view.findViewById(R.id.name_edit);
 		return nameEdit.getText().toString().trim();
@@ -1006,12 +1018,10 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 				holder.groupButton.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						PointEditor editor = getEditor();
-						if (editor != null) {
-							EditCategoryDialogFragment dialogFragment =
-									EditCategoryDialogFragment.createInstance(editor.getFragmentTag(), getCategories(),
-											!editor.getFragmentTag().equals(FavoritePointEditor.TAG));
-							dialogFragment.show(requireActivity().getSupportFragmentManager(), EditCategoryDialogFragment.TAG);
+						FragmentManager fragmentManager = getFragmentManager();
+						DialogFragment dialogFragment = createAddCategoryDialog();
+						if (fragmentManager != null && dialogFragment != null) {
+							dialogFragment.show(fragmentManager, SelectFavoriteCategoryBottomSheet.class.getSimpleName());
 						}
 					}
 				});
