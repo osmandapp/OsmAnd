@@ -78,7 +78,7 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 	}
 
 	@Override
-	protected SelectFavoriteCategoryBottomSheet createSelectCategoryDialog() {
+	protected DialogFragment createSelectCategoryDialog() {
 		WptPtEditor editor = getWptPtEditor();
 		if (editor != null) {
 			SelectFavoriteCategoryBottomSheet selectCategoryDialogFragment = SelectFavoriteCategoryBottomSheet.createInstance(editor.getFragmentTag());

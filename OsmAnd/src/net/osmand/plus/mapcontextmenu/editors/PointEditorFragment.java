@@ -179,7 +179,7 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 	}
 
 	@Nullable
-	protected SelectFavoriteCategoryBottomSheet createSelectCategoryDialog() {
+	protected DialogFragment createSelectCategoryDialog() {
 		PointEditor editor = getEditor();
 		if (editor != null) {
 			return SelectFavoriteCategoryBottomSheet.createInstance(editor.getFragmentTag());
