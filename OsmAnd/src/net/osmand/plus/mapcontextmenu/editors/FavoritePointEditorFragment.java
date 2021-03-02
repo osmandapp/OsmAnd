@@ -190,7 +190,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		final FavouritePoint favorite = getFavorite();
 		if (favorite != null) {
 			final FavouritePoint point = new FavouritePoint(favorite.getLatitude(), favorite.getLongitude(),
-					getNameTextValue(), getCategoryTextValue());
+					getNameTextValue(), getCategoryTextValue(), favorite.getAltitude(), favorite.getTimestamp());
 			point.setDescription(getDescriptionTextValue());
 			point.setAddress(getAddressTextValue());
 			AlertDialog.Builder builder = FavouritesDbHelper.checkDuplicates(point, helper, getMapActivity());
@@ -198,7 +198,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 			if (favorite.getName().equals(point.getName()) &&
 					favorite.getCategory().equals(point.getCategory()) &&
 					Algorithms.stringsEqual(favorite.getDescription(), point.getDescription()) &&
-					Algorithms.stringsEqual(favorite.getAddress(),point.getAddress())) {
+					Algorithms.stringsEqual(favorite.getAddress(), point.getAddress())) {
 				if (needDismiss) {
 					dismiss(false);
 				}
@@ -209,7 +209,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 				builder.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						doSave(favorite, point.getName(), point.getCategory(), point.getDescription(),point.getAddress(), needDismiss);
+						doSave(favorite, point.getName(), point.getCategory(), point.getDescription(), point.getAddress(), needDismiss);
 					}
 				});
 				builder.create().show();
@@ -225,9 +225,9 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		FavoritePointEditor editor = getFavoritePointEditor();
 		if (editor != null && helper != null) {
 			if (editor.isNew()) {
-				doAddFavorite(name, category, description,address);
+				doAddFavorite(name, category, description, address);
 			} else {
-				helper.editFavouriteName(favorite, name, category, description,address);
+				helper.editFavouriteName(favorite, name, category, description, address);
 			}
 		}
 		MapActivity mapActivity = getMapActivity();
