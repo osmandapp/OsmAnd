@@ -477,7 +477,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 			if (!ColorDialogs.isPaletteColor(customColor)) {
 				colors.add(customColor);
 			}
-			colorsCard = new ColorsCard(mapActivity, selectedColor, this, colors);
+			colorsCard = new ColorsCard(mapActivity, selectedColor, this, colors, app.getSettings().CUSTOM_TRACK_COLORS, null);
 			colorsCard.setListener(this);
 			LinearLayout selectColor = view.findViewById(R.id.select_color);
 			selectColor.addView(colorsCard.build(view.getContext()));

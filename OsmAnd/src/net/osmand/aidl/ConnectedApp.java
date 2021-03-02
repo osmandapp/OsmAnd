@@ -133,7 +133,7 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 				CompoundButton btn = view.findViewById(R.id.toggle_item);
 				if (btn != null && btn.getVisibility() == View.VISIBLE) {
 					btn.setChecked(!btn.isChecked());
-					menuAdapter.getItem(position).setColorRes(btn.isChecked() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+					menuAdapter.getItem(position).setColor(app, btn.isChecked() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 					adapter.notifyDataSetChanged();
 					return false;
 				}
@@ -146,7 +146,7 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 				if (layersPref.set(isChecked)) {
 					ContextMenuItem item = adapter.getItem(position);
 					if (item != null) {
-						item.setColorRes(isChecked ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+						item.setColor(app, isChecked ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 						item.setSelected(isChecked);
 						adapter.notifyDataSetChanged();
 					}
@@ -162,7 +162,7 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 				.setListener(listener)
 				.setSelected(layersEnabled)
 				.setIcon(R.drawable.ic_extension_dark)
-				.setColor(layersEnabled ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
+				.setColor(app, layersEnabled ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.createItem());
 	}
 

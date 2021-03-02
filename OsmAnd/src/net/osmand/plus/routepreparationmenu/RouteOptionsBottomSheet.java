@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
@@ -84,8 +85,8 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 	private RoutingHelper routingHelper;
 	private RoutingOptionsHelper routingOptionsHelper;
 	private ApplicationMode applicationMode;
-	@ColorRes
-	private int selectedModeColorId;
+	@ColorInt
+	private int selectedModeColor;
 	private boolean currentMuteState;
 	private boolean currentUseHeightState;
 	private MapActivity mapActivity;
@@ -149,7 +150,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		if (dialogMode == null) {
 			dialogMode = DialogMode.DIRECTIONS;
 		}
-		selectedModeColorId = applicationMode.getIconColorInfo().getColor(nightMode);
+		selectedModeColor = applicationMode.getProfileColor(nightMode);
 		voiceMuteChangeListener = new StateChangedListener<Boolean>() {
 			@Override
 			public void stateChanged(Boolean change) {
@@ -271,7 +272,6 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private BaseBottomSheetItem createMuteSoundItem(final LocalRoutingParameter optionsItem) {
 		boolean active = !routingHelper.getVoiceRouter().isMuteForMode(applicationMode);
-		int selectedModeColor = ContextCompat.getColor(app, selectedModeColorId);
 		final View itemView = UiUtilities.getInflater(app, nightMode).inflate(
 				R.layout.bottom_sheet_item_with_descr_switch_and_additional_button_56dp, null, false);
 		final ImageView icon = itemView.findViewById(R.id.icon);
@@ -310,7 +310,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		Drawable drawable = app.getUIUtilities().getIcon(R.drawable.ic_action_settings,
 				nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light);
 		if (Build.VERSION.SDK_INT >= 21) {
-			Drawable activeDrawable = app.getUIUtilities().getIcon(R.drawable.ic_action_settings, selectedModeColorId);
+			Drawable activeDrawable = app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_settings, selectedModeColor);
 			drawable = AndroidUtils.createPressedStateListDrawable(drawable, activeDrawable);
 		}
 		voicePromptsBtnImage.setImageDrawable(drawable);
@@ -358,7 +358,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 
 		item[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 				.setChecked(!active)
-				.setCompoundButtonColorId(selectedModeColorId)
+				.setCompoundButtonColor(selectedModeColor)
 				.setDescription(getElevationDescription(parameter))
 				.setIcon(getContentIcon(active ? parameter.getActiveIconId() : parameter.getDisabledIconId()))
 				.setTitle(getString(R.string.routing_attr_height_obstacles_name))
@@ -387,7 +387,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 	private BaseBottomSheetItem createTimeConditionalRoutingItem(final LocalRoutingParameter optionsItem) {
 		final BottomSheetItemWithCompoundButton[] timeConditionalRoutingItem = new BottomSheetItemWithCompoundButton[1];
 		timeConditionalRoutingItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
-				.setCompoundButtonColorId(selectedModeColorId)
+				.setCompoundButtonColor(selectedModeColor)
 				.setChecked(settings.ENABLE_TIME_CONDITIONAL_ROUTING.getModeValue(applicationMode))
 				.setIcon(getContentIcon((optionsItem.getActiveIconId())))
 				.setTitle(getString(R.string.temporary_conditional_routing))
@@ -433,7 +433,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 	private BaseBottomSheetItem createRouteSimulationItem(final LocalRoutingParameter optionsItem) {
 		final BottomSheetItemWithCompoundButton[] simulateNavigationItem = new BottomSheetItemWithCompoundButton[1];
 		simulateNavigationItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
-				.setCompoundButtonColorId(selectedModeColorId)
+				.setCompoundButtonColor(selectedModeColor)
 				.setChecked(settings.simulateNavigation)
 				.setIcon(getContentIcon(R.drawable.ic_action_start_navigation))
 				.setTitle(getString(R.string.simulate_navigation))
@@ -470,7 +470,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 						routingOptionsHelper.addNewRouteMenuParameter(applicationMode, optionsItem);
 						AvoidRoadsBottomSheetDialogFragment avoidRoadsFragment = new AvoidRoadsBottomSheetDialogFragment();
 						avoidRoadsFragment.setTargetFragment(RouteOptionsBottomSheet.this, AvoidRoadsBottomSheetDialogFragment.REQUEST_CODE);
-						avoidRoadsFragment.setCompoundButtonColorId(selectedModeColorId);
+						avoidRoadsFragment.setCompoundButtonColor(selectedModeColor);
 						avoidRoadsFragment.setApplicationMode(applicationMode);
 						avoidRoadsFragment.show(mapActivity.getSupportFragmentManager(), AvoidRoadsBottomSheetDialogFragment.TAG);
 						updateMenu();
@@ -492,7 +492,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 						AvoidRoadsBottomSheetDialogFragment avoidRoadsFragment = new AvoidRoadsBottomSheetDialogFragment();
 						avoidRoadsFragment.setHideImpassableRoads(true);
 						avoidRoadsFragment.setTargetFragment(RouteOptionsBottomSheet.this, AvoidRoadsBottomSheetDialogFragment.REQUEST_CODE);
-						avoidRoadsFragment.setCompoundButtonColorId(selectedModeColorId);
+						avoidRoadsFragment.setCompoundButtonColor(selectedModeColor);
 						avoidRoadsFragment.show(mapActivity.getSupportFragmentManager(), AvoidRoadsBottomSheetDialogFragment.TAG);
 						updateMenu();
 					}
@@ -565,7 +565,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		if (parameter != null) {
 			final BottomSheetItemWithCompoundButton[] item = new BottomSheetItemWithCompoundButton[1];
 			BottomSheetItemWithCompoundButton.Builder builder = new BottomSheetItemWithCompoundButton.Builder();
-			builder.setCompoundButtonColorId(selectedModeColorId);
+			builder.setCompoundButtonColor(selectedModeColor);
 			int iconId = -1;
 			if (parameter.routingParameter != null || parameter instanceof RoutingOptionsHelper.OtherLocalRoutingParameter) {
 				builder.setTitle(parameter.getText(mapActivity));

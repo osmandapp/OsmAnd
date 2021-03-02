@@ -118,8 +118,7 @@ public class WakeTimeBottomSheet extends BasePreferenceBottomSheet {
 			}
 		});
 
-		int appModeColorId = getAppMode().getIconColorInfo().getColor(nightMode);
-		int appModeColor = ContextCompat.getColor(themedCtx, appModeColorId);
+		int appModeColor = getAppMode().getProfileColor(nightMode);
 		UiUtilities.setupSlider(slider, nightMode, appModeColor, true);
 
 		items.add(new BaseBottomSheetItem.Builder()

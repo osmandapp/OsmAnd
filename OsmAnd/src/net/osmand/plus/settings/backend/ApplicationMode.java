@@ -1,6 +1,8 @@
 package net.osmand.plus.settings.backend;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
+import androidx.core.content.ContextCompat;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -469,6 +471,15 @@ public class ApplicationMode {
 		return app.getSettings().LOCATION_ICON.getModeValue(this);
 	}
 
+	@ColorInt
+	public int getProfileColor(boolean nightMode) {
+		Integer customProfileColor = getCustomIconColor();
+		if (customProfileColor != null) {
+			return customProfileColor;
+		}
+		return ContextCompat.getColor(app, getIconColorInfo().getColor(nightMode));
+	}
+
 	public void setLocationIcon(LocationIcon locationIcon) {
 		if (locationIcon != null) {
 			app.getSettings().LOCATION_ICON.setModeValue(this, locationIcon);
@@ -483,6 +494,28 @@ public class ApplicationMode {
 		if (iconColor != null) {
 			app.getSettings().ICON_COLOR.setModeValue(this, iconColor);
 		}
+	}
+
+	public List<String> getCustomIconColors() {
+		return app.getSettings().CUSTOM_ICON_COLORS.getStringsListForProfile(this);
+	}
+
+	public void setCustomIconColors(List<String> customColors) {
+		app.getSettings().CUSTOM_ICON_COLORS.setModeValues(this, customColors);
+	}
+
+	public Integer getCustomIconColor() {
+		try {
+			String customColor = app.getSettings().CUSTOM_ICON_COLOR.getModeValue(this);
+			return Algorithms.isEmpty(customColor) ? null : Algorithms.parseColor(customColor);
+		} catch (IllegalArgumentException e) {
+			return null;
+		}
+	}
+
+	public void setCustomIconColor(Integer customIconColor) {
+		String valueToSave = customIconColor == null ? null : Algorithms.colorToString(customIconColor);
+		app.getSettings().CUSTOM_ICON_COLOR.setModeValue(this, valueToSave);
 	}
 
 	public int getOrder() {
@@ -582,6 +615,7 @@ public class ApplicationMode {
 			mode.setRoutingProfile(builder.routingProfile);
 			mode.setRouteService(builder.routeService);
 			mode.setIconColor(builder.iconColor);
+			mode.setCustomIconColor(builder.customIconColor);
 			mode.setLocationIcon(builder.locationIcon);
 			mode.setNavigationIcon(builder.navigationIcon);
 			mode.setOrder(builder.order);
@@ -604,6 +638,7 @@ public class ApplicationMode {
 		builder.setUserProfileName(modeBean.userProfileName);
 		builder.setIconResName(modeBean.iconName);
 		builder.setIconColor(modeBean.iconColor);
+		builder.setCustomIconColor(modeBean.customIconColor);
 		builder.setRoutingProfile(modeBean.routingProfile);
 		builder.setRouteService(modeBean.routeService);
 		builder.setLocationIcon(modeBean.locIcon);
@@ -623,6 +658,7 @@ public class ApplicationMode {
 		mb.stringKey = stringKey;
 		mb.userProfileName = getUserProfileName();
 		mb.iconColor = getIconColorInfo();
+		mb.customIconColor = getCustomIconColor();
 		mb.iconName = getIconName();
 		mb.parent = parentAppMode != null ? parentAppMode.getStringKey() : null;
 		mb.routeService = getRouteService();
@@ -699,6 +735,7 @@ public class ApplicationMode {
 		private String routingProfile;
 		private String iconResName;
 		private ProfileIconColors iconColor;
+		private Integer customIconColor;
 		private LocationIcon locationIcon;
 		private NavigationIcon navigationIcon;
 		private int order = -1;
@@ -722,6 +759,7 @@ public class ApplicationMode {
 			applicationMode.setRouteService(routeService);
 			applicationMode.setRoutingProfile(routingProfile);
 			applicationMode.setIconResName(iconResName);
+			applicationMode.setCustomIconColor(customIconColor);
 			applicationMode.setIconColor(iconColor);
 			applicationMode.setLocationIcon(locationIcon);
 			applicationMode.setNavigationIcon(navigationIcon);
@@ -770,6 +808,11 @@ public class ApplicationMode {
 			return this;
 		}
 
+		public ApplicationModeBuilder setCustomIconColor(Integer customIconColor) {
+			this.customIconColor = customIconColor;
+			return this;
+		}
+
 		public ApplicationModeBuilder setOrder(int order) {
 			this.order = order;
 			return this;
@@ -797,6 +840,8 @@ public class ApplicationMode {
 		public String iconName = "map_world_globe_dark";
 		@Expose
 		public ProfileIconColors iconColor = ProfileIconColors.DEFAULT;
+		@Expose
+		public Integer customIconColor = null;
 		@Expose
 		public String routingProfile = null;
 		@Expose

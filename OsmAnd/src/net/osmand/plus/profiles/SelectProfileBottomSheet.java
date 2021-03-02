@@ -254,12 +254,13 @@ public class SelectProfileBottomSheet extends BasePreferenceBottomSheet {
 		boolean isSelected = setupSelected && Algorithms.objectEquals(profile.getStringKey(), selectedItemKey);
 		int iconColor;
 		if (dialogMode == DialogMode.NAVIGATION_PROFILE) {
-			iconColor = isSelected ? activeColorResId : iconDefaultColorResId;
+			int iconColorResId = isSelected ? activeColorResId : iconDefaultColorResId;
+			iconColor = ContextCompat.getColor(app, iconColorResId);
 		} else {
 			iconColor = profile.getIconColor(nightMode);
 		}
 
-		Drawable drawableIcon = app.getUIUtilities().getIcon(profile.getIconRes(), iconColor);
+		Drawable drawableIcon = app.getUIUtilities().getPaintedIcon(profile.getIconRes(), iconColor);
 		ivIcon.setImageDrawable(drawableIcon);
 		compoundButton.setChecked(isSelected);
 		UiUtilities.setupCompoundButton(compoundButton, nightMode, UiUtilities.CompoundButtonType.GLOBAL);

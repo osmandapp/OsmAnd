@@ -6,9 +6,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -33,11 +30,15 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
 import net.osmand.util.Algorithms;
 
-import org.apache.commons.logging.Log;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 import static net.osmand.plus.settings.backend.backup.FileSettingsItem.FileSubtype;
 
@@ -121,7 +122,10 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 				}
 				int profileIconRes = AndroidUtils.getDrawableId(app, modeBean.iconName);
 				ProfileIconColors iconColor = modeBean.iconColor;
-				itemHolder.icon.setImageDrawable(uiUtilities.getIcon(profileIconRes, iconColor.getColor(nightMode)));
+				Integer customIconColor = modeBean.customIconColor;
+				int actualIconColor = customIconColor != null ?
+						customIconColor : ContextCompat.getColor(app, iconColor.getColor(nightMode));
+				itemHolder.icon.setImageDrawable(uiUtilities.getPaintedIcon(profileIconRes, actualIconColor));
 			} else if (currentItem instanceof QuickAction) {
 				QuickAction action = (QuickAction) currentItem;
 				itemHolder.title.setText(action.getName(app));
