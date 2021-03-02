@@ -160,11 +160,10 @@ public class SelectFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 				favoriteCategoryContainer.addView(createCategoryItem(activity, nightMode, category.getDisplayName(getContext()),
 						category.getColor(), favoriteCategoryCount, !category.isVisible()));
 			}
-
-			items.add(new BaseBottomSheetItem.Builder()
-					.setCustomView(favoriteCategoryList)
-					.create());
 		}
+		items.add(new BaseBottomSheetItem.Builder()
+				.setCustomView(favoriteCategoryList)
+				.create());
 	}
 
 	private View createCategoryItem(@NonNull final Activity activity, boolean nightMode, final String categoryName, final int categoryColor, String categoryPointCount, boolean isHidden) {
