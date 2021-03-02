@@ -143,14 +143,17 @@ public class SelectFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 			if (gpxCategories != null) {
 				for (Map.Entry<String, Integer> e : gpxCategories.entrySet()) {
 					String categoryName = e.getKey();
-					int favoriteCategoryCount = e.getKey().length();
+					String favoriteCategoryCount = String.valueOf(e.getKey().length());
 					favoriteCategoryContainer.addView(createCategoryItem(activity, nightMode, categoryName, e.getValue(), favoriteCategoryCount, false));
 				}
 			}
 		} else {
 			List<FavouritesDbHelper.FavoriteGroup> gs = favoritesHelper.getFavoriteGroups();
 			for (final FavouritesDbHelper.FavoriteGroup category : gs) {
-				int favoriteCategoryCount = category.getPoints().size();
+				String favoriteCategoryCount = String.valueOf(category.getPoints().size());
+				if (favoriteCategoryCount.equals("0")){
+					favoriteCategoryCount = app.getString(R.string.shared_string_empty);
+				}
 				favoriteCategoryContainer.addView(createCategoryItem(activity, nightMode, category.getDisplayName(getContext()),
 						category.getColor(), favoriteCategoryCount, !category.isVisible()));
 			}
@@ -161,7 +164,7 @@ public class SelectFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 		}
 	}
 
-	private View createCategoryItem(@NonNull final Activity activity, boolean nightMode, final String categoryName, final int categoryColor, int categoryPointCount, boolean isHidden) {
+	private View createCategoryItem(@NonNull final Activity activity, boolean nightMode, final String categoryName, final int categoryColor, String categoryPointCount, boolean isHidden) {
 		View itemView = UiUtilities.getInflater(activity, nightMode).inflate(R.layout.bottom_sheet_item_with_descr_and_radio_btn, null);
 		final AppCompatImageView button = (AppCompatImageView) itemView.findViewById(R.id.icon);
 		final int dp8 = AndroidUtils.dpToPx(app, 8f);
