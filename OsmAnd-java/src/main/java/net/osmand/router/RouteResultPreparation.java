@@ -203,58 +203,15 @@ public class RouteResultPreparation {
 		for (int stop : stops) {
 			List<RouteSegmentResult> attachedRoutes = seg.getAttachedRoutes(stop);
 			for (RouteSegmentResult attached : attachedRoutes) {
-				int attStopPriority = highwayStopPriority(attached.getObject().getHighway());
-				int segStopPriority = highwayStopPriority(seg.getObject().getHighway());
-				if (segStopPriority > attStopPriority) {
+				int attStopPriority = highwaySpeakPriority(attached.getObject().getHighway());
+				int segStopPriority = highwaySpeakPriority(seg.getObject().getHighway());
+				if (segStopPriority < attStopPriority) {
 					seg.getObject().removePointType(stop, seg.getObject().region.stopSign);
+					break;
 				}
 			}
 		}
-
 		return seg;
-	}
-	
-	private int highwayStopPriority(String highway) {
-		if (highway.endsWith("trunk")) {
-			return 13;
-		}
-		if (highway.endsWith("trunk_link")) {
-			return 12;
-		}
-		if (highway.endsWith("primary")) {
-			return 11;
-		}
-		if (highway.endsWith("primary_link")) {
-			return 10;
-		}
-		if (highway.endsWith("secondary")) {
-			return 9;
-		}
-		if (highway.endsWith("secondary_link")) {
-			return 8;
-		}
-		if (highway.endsWith("tertiary")) {
-			return 7;
-		}
-		if (highway.endsWith("tertiary_link")) {
-			return 6;
-		}
-		if (highway.endsWith("residential")) {
-			return 5;
-		}
-		if (highway.endsWith("living_street")) {
-			return 4;
-		}
-		if (highway.endsWith("track")) {
-			return 3;
-		}
-		if (highway.endsWith("footway")) {
-			return 2;
-		}
-		if (highway.endsWith("path")) {
-			return 1;
-		}
-		return 0;
 	}
 
 	public void prepareTurnResults(RoutingContext ctx, List<RouteSegmentResult> result) {
