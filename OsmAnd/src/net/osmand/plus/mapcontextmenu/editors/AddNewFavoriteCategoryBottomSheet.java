@@ -67,6 +67,7 @@ public class AddNewFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 			bundle.putStringArrayList(KEY_CTX_EDIT_GPX_CATEGORIES, new ArrayList<>(gpxCategories));
 		}
 		fragment.setArguments(bundle);
+		fragment.setRetainInstance(true);
 		return fragment;
 	}
 
