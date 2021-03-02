@@ -33,6 +33,7 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.myplaces.AddNewTrackFolderBottomSheet;
+import net.osmand.util.Algorithms;
 
 import java.util.List;
 import java.util.Map;
@@ -150,9 +151,11 @@ public class SelectFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 		} else {
 			List<FavouritesDbHelper.FavoriteGroup> gs = favoritesHelper.getFavoriteGroups();
 			for (final FavouritesDbHelper.FavoriteGroup category : gs) {
-				String favoriteCategoryCount = String.valueOf(category.getPoints().size());
-				if (favoriteCategoryCount.equals("0")){
+				String favoriteCategoryCount;
+				if (Algorithms.isEmpty(category.getPoints())) {
 					favoriteCategoryCount = app.getString(R.string.shared_string_empty);
+				} else {
+					favoriteCategoryCount = String.valueOf(category.getPoints().size());
 				}
 				favoriteCategoryContainer.addView(createCategoryItem(activity, nightMode, category.getDisplayName(getContext()),
 						category.getColor(), favoriteCategoryCount, !category.isVisible()));
