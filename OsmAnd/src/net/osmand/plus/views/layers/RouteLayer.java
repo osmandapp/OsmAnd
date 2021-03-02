@@ -32,7 +32,7 @@ import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteDirectionInfo;
-import net.osmand.plus.routing.RouteProvider;
+import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.views.OsmandMapLayer;
@@ -360,8 +360,8 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 			}
 		} else {
 			RouteCalculationResult route = helper.getRoute();
-			boolean directTo = route.getRouteService() == RouteProvider.RouteService.DIRECT_TO;
-			boolean straight = route.getRouteService() == RouteProvider.RouteService.STRAIGHT;
+			boolean directTo = route.getRouteService() == RouteService.DIRECT_TO;
+			boolean straight = route.getRouteService() == RouteService.STRAIGHT;
 			publicTransportRouteGeometry.clearRoute();
 			routeGeometry.updateRoute(tb, route);
 			if (directTo) {

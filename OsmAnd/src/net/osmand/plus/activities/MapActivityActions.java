@@ -69,7 +69,7 @@ import net.osmand.plus.profiles.ProfileDataObject;
 import net.osmand.plus.profiles.ProfileDataUtils;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.WaypointsFragment;
-import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
+import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
