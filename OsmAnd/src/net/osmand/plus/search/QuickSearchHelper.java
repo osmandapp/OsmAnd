@@ -463,9 +463,9 @@ public class QuickSearchHelper implements ResourceListener {
 					GPXInfo gpxInfo = GpxUiHelper.getGpxInfoByFileName(app, pd.getName());
 					if (gpxInfo != null) {
 						sr.localeName = gpxInfo.getFileName();
-						sr.object = gpxInfo;
-						sr.objectType = ObjectType.GPX_TRACK;
-						sr.relatedObject = point;
+						sr.object = point;
+						sr.objectType = ObjectType.RECENT_OBJ;
+						sr.relatedObject = gpxInfo;
 						publish = true;
 					}
 				} else {

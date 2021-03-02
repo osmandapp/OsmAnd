@@ -227,8 +227,6 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			return bindTopShadowItem(convertView);
 		} else if (type == QuickSearchListItemType.BOTTOM_SHADOW) {
 			return bindBottomShadowItem(convertView);
-		} else if (type == QuickSearchListItemType.GPX_TRACK) {
-			view = bindGpxTrackItem(position, convertView, listItem);
 		} else {
 			view = bindSearchResultItem(position, convertView, listItem);
 		}
@@ -399,20 +397,31 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		return getLinearLayout(convertView, R.layout.list_shadow_footer);
 	}
 
-	private LinearLayout bindGpxTrackItem(int position,
-	                                      @Nullable View convertView,
-	                                      @NonNull QuickSearchListItem listItem) {
+	private LinearLayout bindSearchResultItem(int position,
+	                                          @Nullable View convertView,
+	                                          @NonNull QuickSearchListItem listItem) {
+		SearchResult sr = listItem.getSearchResult();
+		if (sr != null && sr.relatedObject instanceof GPXInfo) {
+			return bindGpxTrack(position, convertView, listItem, (GPXInfo) sr.relatedObject);
+		} else {
+			return bindSearchResult(position, convertView, listItem);
+		}
+	}
+
+	private LinearLayout bindGpxTrack(int position,
+	                                  @Nullable View convertView,
+	                                  @NonNull QuickSearchListItem listItem,
+	                                  @NonNull GPXInfo gpxInfo) {
 		LinearLayout view = getLinearLayout(convertView, R.layout.search_gpx_list_item);
 		SearchResult sr = listItem.getSearchResult();
-		GPXInfo gpxInfo = (GPXInfo) sr.object;
 		setupCheckBox(position, view, listItem);
 		GpxUiHelper.updateGpxInfoView(app, view, sr.localeName, listItem.getIcon(), gpxInfo);
 		return view;
 	}
 
-	private LinearLayout bindSearchResultItem(int position,
-	                                          @Nullable View convertView,
-	                                          @NonNull QuickSearchListItem listItem) {
+	private LinearLayout bindSearchResult(int position,
+	                                      @Nullable View convertView,
+	                                      @NonNull QuickSearchListItem listItem) {
 		LinearLayout view = getLinearLayout(convertView, R.layout.search_list_item);
 		setupCheckBox(position, view, listItem);
 
@@ -502,10 +511,15 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	}
 
 	private LinearLayout getLinearLayout(@Nullable View convertView, int layoutId) {
-		if (convertView == null) {
+		if (convertView == null || isLayoutIdChanged(convertView, layoutId)) {
 			convertView = inflater.inflate(layoutId, null);
+			convertView.setTag(layoutId);
 		}
 		return (LinearLayout) convertView;
+	}
+
+	private boolean isLayoutIdChanged(@NonNull View view, int layoutId) {
+		return !Algorithms.objectEquals(view.getTag(), layoutId);
 	}
 
 	private void setupCheckBox(final int position,
@@ -579,8 +593,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 				selectedItems.clear();
 				for (int i = 0; i < getCount(); i++) {
 					QuickSearchListItemType t = getItem(i).getType();
-					if (t == QuickSearchListItemType.SEARCH_RESULT
-							|| t == QuickSearchListItemType.GPX_TRACK) {
+					if (t == QuickSearchListItemType.SEARCH_RESULT) {
 						selectedItems.add(getItem(i));
 					}
 				}

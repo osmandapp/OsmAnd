@@ -109,11 +109,6 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 						}
 						dialogFragment.completeQueryWithObject(sr);
 					}
-				} else if (item.getType() == QuickSearchListItemType.GPX_TRACK) {
-					SearchResult sr = item.getSearchResult();
-					if (sr.objectType == ObjectType.GPX_TRACK) {
-						showTrackMenuFragment((GPXInfo) sr.object);
-					}
 				}
 			}
 		}
@@ -175,7 +170,9 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 
 	public void showResult(SearchResult searchResult) {
 		showResult = false;
-		if (searchResult.location != null) {
+		if (searchResult.relatedObject instanceof GPXInfo) {
+			showTrackMenuFragment((GPXInfo) searchResult.relatedObject);
+		} else if (searchResult.location != null) {
 			OsmandApplication app = getMyApplication();
 			String lang = searchResult.requiredSearchPhrase.getSettings().getLang();
 			boolean transliterate = searchResult.requiredSearchPhrase.getSettings().isTransliterate();

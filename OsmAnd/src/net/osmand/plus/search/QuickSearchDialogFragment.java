@@ -90,7 +90,6 @@ import net.osmand.plus.poi.RearrangePoiFiltersFragment;
 import net.osmand.plus.resources.RegionAddressRepository;
 import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI;
 import net.osmand.plus.search.listitems.QuickSearchButtonListItem;
-import net.osmand.plus.search.listitems.QuickSearchGpxTrackListItem;
 import net.osmand.plus.search.listitems.QuickSearchHeaderListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchMoreListItem;
@@ -118,7 +117,6 @@ import java.util.List;
 
 import static net.osmand.plus.search.SendSearchQueryBottomSheet.MISSING_SEARCH_LOCATION_KEY;
 import static net.osmand.plus.search.SendSearchQueryBottomSheet.MISSING_SEARCH_QUERY_KEY;
-import static net.osmand.search.core.ObjectType.GPX_TRACK;
 import static net.osmand.search.core.ObjectType.POI_TYPE;
 import static net.osmand.search.core.ObjectType.SEARCH_STARTED;
 import static net.osmand.search.core.SearchCoreFactory.SEARCH_AMENITY_TYPE_PRIORITY;
@@ -516,7 +514,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						List<QuickSearchListItem> selectedItems = historySearchFragment.getListAdapter().getSelectedItems();
 						for (QuickSearchListItem searchListItem : selectedItems) {
 							SearchResult sr = searchListItem.getSearchResult();
-							Object object = sr.objectType == GPX_TRACK ? sr.relatedObject : sr.object;
+							Object object = sr.object;
 							if (object instanceof HistoryEntry) {
 								historyEntries.add((HistoryEntry) object);
 							}
@@ -1235,7 +1233,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			if (res != null) {
 				List<QuickSearchListItem> rows = new ArrayList<>();
 				for (SearchResult sr : res.getCurrentSearchResults()) {
-					addListItem(rows, sr);
+					rows.add(new QuickSearchListItem(app, sr));
 				}
 				rows.add(new QuickSearchButtonListItem(app, R.drawable.ic_world_globe_dark,
 						app.getString(R.string.search_online_address), new OnClickListener() {
@@ -1502,7 +1500,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			int limit = 15;
 			for (SearchResult sr : res.getCurrentSearchResults()) {
 				if (limit > 0) {
-					addListItem(rows, sr);
+					rows.add(new QuickSearchListItem(app, sr));
 				}
 				limit--;
 			}
@@ -1542,7 +1540,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				List<QuickSearchListItem> rows = new ArrayList<>();
 				if (res != null) {
 					for (SearchResult sr : res.getCurrentSearchResults()) {
-						addListItem(rows, sr);
+						rows.add(new QuickSearchListItem(app, sr));
 					}
 				}
 				historySearchFragment.updateListAdapter(rows, false);
@@ -1550,14 +1548,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				e.printStackTrace();
 				app.showToastMessage(e.getMessage());
 			}
-		}
-	}
-
-	private void addListItem(List<QuickSearchListItem> rows, SearchResult sr) {
-		if (sr.objectType == GPX_TRACK) {
-			rows.add(new QuickSearchGpxTrackListItem(app, sr));
-		} else {
-			rows.add(new QuickSearchListItem(app, sr));
 		}
 	}
 
@@ -2062,7 +2052,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			List<QuickSearchListItem> rows = new ArrayList<>();
 			if (res != null && res.getCurrentSearchResults().size() > 0) {
 				for (final SearchResult sr : res.getCurrentSearchResults()) {
-					addListItem(rows, sr);
+					rows.add(new QuickSearchListItem(app, sr));
 				}
 				updateSendEmptySearchBottomBar(false);
 			}
