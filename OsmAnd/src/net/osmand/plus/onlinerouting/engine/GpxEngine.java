@@ -46,11 +46,15 @@ public class GpxEngine extends OnlineRoutingEngine {
 	@Override
 	protected void makeFullUrl(@NonNull StringBuilder sb,
 	                           @NonNull List<LatLon> path) {
+		sb.append("?");
 		for (int i = 0; i < path.size(); i++) {
 			LatLon point = path.get(i);
-			sb.append(point.getLongitude()).append(',').append(point.getLatitude());
+			sb.append("point=")
+					.append(point.getLatitude())
+					.append(',')
+					.append(point.getLongitude());
 			if (i < path.size() - 1) {
-				sb.append(';');
+				sb.append('&');
 			}
 		}
 	}
