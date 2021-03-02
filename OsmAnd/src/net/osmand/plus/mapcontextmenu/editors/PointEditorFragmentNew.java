@@ -193,7 +193,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 			@Override
 			public void onClick(View v) {
 				FragmentManager fragmentManager = getFragmentManager();
-				SelectFavoriteCategoryBottomSheet dialogFragment = createSelectCategoryDialog();
+				DialogFragment dialogFragment  = createSelectCategoryDialog();
 				if (fragmentManager != null && dialogFragment != null) {
 					dialogFragment.show(fragmentManager, SelectFavoriteCategoryBottomSheet.class.getSimpleName());
 				}
@@ -1019,7 +1019,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 					@Override
 					public void onClick(View view) {
 						FragmentManager fragmentManager = getFragmentManager();
-						AddNewFavoriteCategoryBottomSheet dialogFragment = createAddCategoryDialog();
+						DialogFragment dialogFragment = createAddCategoryDialog();
 						if (fragmentManager != null && dialogFragment != null) {
 							dialogFragment.show(fragmentManager, SelectFavoriteCategoryBottomSheet.class.getSimpleName());
 						}

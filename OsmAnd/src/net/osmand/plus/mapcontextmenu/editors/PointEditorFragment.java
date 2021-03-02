@@ -139,7 +139,7 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 			public boolean onTouch(final View v, MotionEvent event) {
 				if (event.getAction() == MotionEvent.ACTION_UP) {
 					FragmentManager fragmentManager = getFragmentManager();
-					SelectFavoriteCategoryBottomSheet dialogFragment = createSelectCategoryDialog();
+					DialogFragment dialogFragment = createSelectCategoryDialog();
 					if (fragmentManager != null && dialogFragment != null) {
 						dialogFragment.show(fragmentManager, SelectFavoriteCategoryBottomSheet.class.getSimpleName());
 					}

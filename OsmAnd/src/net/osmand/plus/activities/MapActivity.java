@@ -2246,10 +2246,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return getFragment(TripRecordingBottomSheet.TAG);
 	}
 
-	public SelectFavoriteCategoryBottomSheet getSelectFavoriteCategoryBottomSheet() {
-		return getFragment(SelectFavoriteCategoryBottomSheet.TAG);
-	}
-
 	public ChooseRouteFragment getChooseRouteFragment() {
 		return getFragment(ChooseRouteFragment.TAG);
 	}

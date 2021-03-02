@@ -31,6 +31,7 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.myplaces.AddNewTrackFolderBottomSheet;
 
 import java.util.List;
@@ -102,9 +103,8 @@ public class SelectFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 		View addNewCategoryView = UiUtilities.getInflater(app, nightMode).inflate(R.layout.bottom_sheet_item_with_descr_64dp, null);
 		addNewCategoryView.setMinimumHeight(getResources().getDimensionPixelSize(R.dimen.bottom_sheet_list_item_height));
 		TextView title = addNewCategoryView.findViewById(R.id.title);
-		Typeface face = Typeface.createFromAsset(app.getAssets(),
-				"fonts/Roboto-Medium.ttf");
-		title.setTypeface(face);
+		Typeface typeface = FontCache.getRobotoMedium(getContext());
+		title.setTypeface(typeface);
 		AndroidUiHelper.updateVisibility(addNewCategoryView.findViewById(R.id.description), false);
 		BaseBottomSheetItem addNewFolderItem = new SimpleBottomSheetItem.Builder()
 				.setTitle(getString(R.string.favorite_category_add_new))
@@ -114,10 +114,12 @@ public class SelectFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						MapActivity mapActivity = (MapActivity) activity;
+						MapActivity mapActivity = (MapActivity) getActivity();
 						Set<String> categories = gpxCategories != null ? gpxCategories.keySet() : null;
 						AddNewFavoriteCategoryBottomSheet fragment = AddNewFavoriteCategoryBottomSheet.createInstance(editorTag, categories, gpxFile != null);
-						fragment.show(mapActivity.getSupportFragmentManager(), AddNewTrackFolderBottomSheet.class.getName());
+						if (mapActivity != null) {
+							fragment.show(mapActivity.getSupportFragmentManager(), AddNewTrackFolderBottomSheet.class.getName());
+						}
 						fragment.setSelectionListener(selectionListener);
 						dismiss();
 					}
@@ -142,7 +144,7 @@ public class SelectFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 				for (Map.Entry<String, Integer> e : gpxCategories.entrySet()) {
 					String categoryName = e.getKey();
 					int favoriteCategoryCount = e.getKey().length();
-					favoriteCategoryContainer.addView(createCategoryItem(activity, nightMode, categoryName, e.getValue(), favoriteCategoryCount, false, true));
+					favoriteCategoryContainer.addView(createCategoryItem(activity, nightMode, categoryName, e.getValue(), favoriteCategoryCount, false));
 				}
 			}
 		} else {
@@ -150,7 +152,7 @@ public class SelectFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 			for (final FavouritesDbHelper.FavoriteGroup category : gs) {
 				int favoriteCategoryCount = category.getPoints().size();
 				favoriteCategoryContainer.addView(createCategoryItem(activity, nightMode, category.getDisplayName(getContext()),
-						category.getColor(), favoriteCategoryCount, !category.isVisible(), true));
+						category.getColor(), favoriteCategoryCount, !category.isVisible()));
 			}
 
 			items.add(new BaseBottomSheetItem.Builder()
@@ -159,7 +161,7 @@ public class SelectFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 		}
 	}
 
-	private View createCategoryItem(@NonNull final Activity activity, boolean nightMode, final String categoryName, final int categoryColor, int categoryPointCount, boolean isHidden, final boolean selected) {
+	private View createCategoryItem(@NonNull final Activity activity, boolean nightMode, final String categoryName, final int categoryColor, int categoryPointCount, boolean isHidden) {
 		View itemView = UiUtilities.getInflater(activity, nightMode).inflate(R.layout.bottom_sheet_item_with_descr_and_radio_btn, null);
 		final AppCompatImageView button = (AppCompatImageView) itemView.findViewById(R.id.icon);
 		final int dp8 = AndroidUtils.dpToPx(app, 8f);
