@@ -3,7 +3,6 @@ package net.osmand.plus.routing;
 
 import android.os.Bundle;
 import android.util.Base64;
-import android.util.Pair;
 
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
@@ -283,19 +282,22 @@ public class RouteProvider {
 	}
 
 	public void insertSegments(RouteCalculationParams routeParams, List<Location> points, List<RouteDirectionInfo> directions,
-							   List<Pair<Location, Location>> segmentEndpoints, boolean calculateOsmAndRouteParts) {
-		for (Pair<Location, Location> pair : segmentEndpoints) {
-			int index = points.indexOf(pair.second);
-			if (calculateOsmAndRouteParts && index != -1 && points.contains(pair.first)) {
-				LatLon end = new LatLon(pair.second.getLatitude(), pair.second.getLongitude());
-				RouteCalculationResult newRes = findOfflineRouteSegment(routeParams, pair.first, end);
+							   List<Location> segmentEndpoints, boolean calculateOsmAndRouteParts) {
+		for (int i = 0; i < segmentEndpoints.size() - 1; i++) {
+			Location prevSegmentPoint = segmentEndpoints.get(i);
+			Location newSegmentPoint = segmentEndpoints.get(i + 1);
+
+			int index = points.indexOf(newSegmentPoint);
+			if (calculateOsmAndRouteParts && index != -1 && points.contains(prevSegmentPoint)) {
+				LatLon end = new LatLon(newSegmentPoint.getLatitude(), newSegmentPoint.getLongitude());
+				RouteCalculationResult newRes = findOfflineRouteSegment(routeParams, prevSegmentPoint, end);
 
 				if (newRes != null && newRes.isCalculated()) {
 					List<Location> loct = newRes.getImmutableAllLocations();
 					List<RouteDirectionInfo> dt = newRes.getImmutableAllDirections();
 
-					for (RouteDirectionInfo i : dt) {
-						i.routePointOffset += points.size();
+					for (RouteDirectionInfo directionInfo : dt) {
+						directionInfo.routePointOffset += points.size();
 					}
 					points.addAll(index, loct);
 					directions.addAll(dt);
@@ -763,7 +765,7 @@ public class RouteProvider {
 	}
 
 	protected static List<RouteSegmentResult> parseOsmAndGPXRoute(List<Location> points, GPXFile gpxFile,
-																  List<Pair<Location, Location>> segmentEndpoints,
+																  List<Location> segmentEndpoints,
 																  int selectedSegment) {
 		List<TrkSegment> segments = gpxFile.getNonEmptyTrkSegments(false);
 		if (selectedSegment != -1 && segments.size() > selectedSegment) {
@@ -781,7 +783,7 @@ public class RouteProvider {
 	}
 
 	protected static void collectSegmentPointsFromGpx(GPXFile gpxFile, List<Location> points,
-													  List<Pair<Location, Location>> segmentEndpoints, int selectedSegment) {
+													  List<Location> segmentEndpoints, int selectedSegment) {
 		List<TrkSegment> segments = gpxFile.getNonEmptyTrkSegments(false);
 		if (selectedSegment != -1 && segments.size() > selectedSegment) {
 			TrkSegment segment = segments.get(selectedSegment);
@@ -793,7 +795,7 @@ public class RouteProvider {
 		}
 	}
 
-	protected static void collectPointsFromSegments(List<TrkSegment> segments, List<Location> points, List<Pair<Location, Location>> segmentEndpoints) {
+	protected static void collectPointsFromSegments(List<TrkSegment> segments, List<Location> points, List<Location> segmentEndpoints) {
 		Location lastPoint = null;
 		for (int i = 0; i < segments.size(); i++) {
 			TrkSegment segment = segments.get(i);
@@ -801,14 +803,15 @@ public class RouteProvider {
 				points.add(createLocation(wptPt));
 			}
 			if (i <= segments.size() - 1 && lastPoint != null) {
-				segmentEndpoints.add(new Pair<>(lastPoint, points.get((points.size() - segment.points.size()))));
+				segmentEndpoints.add(lastPoint);
+				segmentEndpoints.add(points.get((points.size() - segment.points.size())));
 			}
 			lastPoint = points.get(points.size() - 1);
 		}
 	}
 
 	protected static List<RouteDirectionInfo> parseOsmAndGPXRoute(List<Location> points, GPXFile gpxFile,
-																  List<Pair<Location, Location>> segmentEndpoints,
+																  List<Location> segmentEndpoints,
 																  boolean osmandRouter, boolean leftSide,
 																  float defSpeed, int selectedSegment) {
 		List<RouteDirectionInfo> directions = null;
@@ -1085,7 +1088,7 @@ public class RouteProvider {
 		OsmandApplication ctx = params.ctx;
 		List<Location> res = new ArrayList<Location>();
 		List<RouteDirectionInfo> dir = new ArrayList<>();
-		List<Pair<Location, Location>> segmentEndpoints = new ArrayList<>();
+		List<Location> segmentEndpoints = new ArrayList<>();
 
 		IBRouterService brouterService = ctx.getBRouterService();
 		if (brouterService == null) {
