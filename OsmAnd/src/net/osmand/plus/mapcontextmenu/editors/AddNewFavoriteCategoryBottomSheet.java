@@ -189,7 +189,7 @@ public class AddNewFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 		for (int color : ColorDialogs.pallette) {
 			colors.add(color);
 		}
-		colorsCard = new ColorsCard(mapActivity, selectedColor, this, colors);
+		colorsCard = new ColorsCard(mapActivity, selectedColor, this, colors, app.getSettings().CUSTOM_TRACK_COLORS, null);
 		colorsCard.setListener(this);
 		LinearLayout selectColor = view.findViewById(R.id.select_color);
 		selectColor.addView(colorsCard.build(view.getContext()));
