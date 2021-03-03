@@ -14,7 +14,8 @@ import net.osmand.plus.quickaction.QuickActionType;
 public class ShowHideCoordinatesWidgetAction extends QuickAction {
 	public static final QuickActionType TYPE = new QuickActionType(35,
 			"coordinates.showhide", ShowHideCoordinatesWidgetAction.class)
-			.nameRes(R.string.quick_action_showhide_coordinates_widget)
+			.nameActionRes(R.string.quick_action_showhide_title)
+			.nameRes(R.string.coordinates_widget)
 			.iconRes(R.drawable.ic_action_coordinates_widget).nonEditable()
 			.category(QuickActionType.CONFIGURE_SCREEN);
 

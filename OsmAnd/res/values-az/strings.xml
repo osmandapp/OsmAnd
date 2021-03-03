@@ -741,10 +741,8 @@
     <string name="quick_action_add_favorite">Favorit əlavə et</string>
     <string name="favorite_autofill_toast_text">" burda saxlandı: "</string>
     <string name="favorite_empty_place_name">Yer</string>
-    <string name="quick_action_showhide_favorites_title">Favoritləri göstər/gizlət</string>
     <string name="quick_action_favorites_show">Favoritləri göstər</string>
     <string name="quick_action_favorites_hide">Favoritləri gizlət</string>
-    <string name="quick_action_showhide_poi_title">POI-ni göstər/gizlət</string>
     <string name="quick_action_poi_show">%1$s-i göstər</string>
     <string name="quick_action_poi_hide">%1$s-i gizlət</string>
     <string name="quick_action_add_category">Kateqoriya əlavə et</string>
@@ -754,7 +752,6 @@
     <string name="quick_action_map_styles">Xəritə stilləri</string>
     <string name="increase_search_radius">Axtarış radiusunu artır</string>
     <string name="nothing_found_descr">Axtarış sorğusunu dəyişin və ya axtarış radiusunu artırın.</string>
-    <string name="quick_action_showhide_osmbugs_title">OSM qeydlərini göstər və ya gizlət</string>
     <string name="quick_action_osmbugs_show">OSM qeydlərini göstər</string>
     <string name="quick_action_osmbugs_hide">OSM qeydlərini gizlət</string>
     <string name="quick_action_showhide_osmbugs_descr">Bu fəaliyyət düyməsinə toxunulduqda, xəritədə OSM qeydləri göstəriləcək və ya gizlədiləcək.</string>
@@ -2152,7 +2149,6 @@
     <string name="shared_string_uninstall">Sil</string>
     <string name="shared_string_tones">ton</string>
     <string name="shared_string_meters">metr</string>
-    <string name="quick_action_showhide_mapillary_title">Mapillary-ni göstər/gizlət</string>
     <string name="quick_action_mapillary_hide">Mapillary-ni gizlət</string>
     <string name="quick_action_mapillary_show">Mapillary-ni göstər</string>
     <string name="item_deleted">%1$s silindi</string>

@@ -16,6 +16,7 @@ public class QuickActionType {
 	private final String stringId;
 	private boolean actionEditable;
 	private @StringRes int nameRes;
+	private @StringRes int nameActionRes;
 	private @DrawableRes int iconRes;
 	private Class<? extends QuickAction> cl;
 	private int category;
@@ -34,6 +35,11 @@ public class QuickActionType {
 
 	public QuickActionType nameRes(int nameRes) {
 		this.nameRes = nameRes;
+		return this;
+	}
+
+	public QuickActionType nameActionRes(int nameActionRes) {
+		this.nameActionRes = nameActionRes;
 		return this;
 	}
 
@@ -100,6 +106,10 @@ public class QuickActionType {
 
 	public int getNameRes() {
 		return nameRes;
+	}
+
+	public int getActionNameRes() {
+		return nameActionRes;
 	}
 
 	public int getIconRes() {

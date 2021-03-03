@@ -2092,10 +2092,8 @@
     <string name="quick_favorites_name_preset">預設的名稱</string>
     <string name="favorite_autofill_toast_text">" 儲存到 "</string>
     <string name="favorite_empty_place_name">場所</string>
-    <string name="quick_action_showhide_favorites_title">顯示/隱藏我的收藏</string>
     <string name="quick_action_favorites_show">顯示我的收藏</string>
     <string name="quick_action_favorites_hide">隱藏我的收藏</string>
-    <string name="quick_action_showhide_poi_title">顯示/隱藏 POI</string>
     <string name="quick_action_poi_show">顯示 %1$s</string>
     <string name="quick_action_poi_hide">隱藏 %1$s</string>
     <string name="quick_action_add_category">增加一項類別</string>
@@ -2382,7 +2380,6 @@
     <string name="hillshade_purchase_header">安裝「等高線」外掛程式以顯示漸層垂直區域。</string>
     <string name="hide_from_zoom_level">自此縮放等級開始隱藏</string>
     <string name="sorted_by_distance">按距離排序</string>
-    <string name="quick_action_showhide_osmbugs_title">顯示或隱藏 OSM 註記</string>
     <string name="quick_action_osmbugs_show">顯示 OSM 註記</string>
     <string name="quick_action_osmbugs_hide">隱藏 OSM 註記</string>
     <string name="search_favorites">在我的最愛中搜尋</string>
@@ -2839,7 +2836,6 @@
     <string name="routeInfo_road_types_name">道路類型</string>
     <string name="exit_at">離開於</string>
     <string name="sit_on_the_stop">站點的座位</string>
-    <string name="quick_action_show_hide_gpx_tracks">顯示／隱藏軌跡</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">在地圖上顯示或隱藏所選軌跡的按鈕。</string>
     <string name="quick_action_gpx_tracks_hide">隱藏軌跡</string>
     <string name="quick_action_gpx_tracks_show">顯示軌跡</string>
@@ -3259,11 +3255,9 @@
     <string name="quick_action_contour_lines_descr">在地圖上顯示或隱藏等高線的按鈕。</string>
     <string name="quick_action_contour_lines_show">顯示等高線</string>
     <string name="quick_action_contour_lines_hide">隱藏等高線</string>
-    <string name="quick_action_show_hide_contour_lines">顯示／隱藏等高線</string>
     <string name="quick_action_hillshade_descr">在地圖上顯示或隱藏地形陰影的按鈕。</string>
     <string name="quick_action_hillshade_show">顯示地形陰影</string>
     <string name="quick_action_hillshade_hide">隱藏地形陰影</string>
-    <string name="quick_action_show_hide_hillshade">顯示／隱藏地形陰影</string>
     <string name="tts_initialization_error">無法啟動文字轉語音引擎。</string>
     <string name="simulate_your_location_gpx_descr">使用已紀錄的 GPX 軌跡模擬您的位置。</string>
     <string name="export_profile">匯出設定檔</string>
@@ -3490,7 +3484,6 @@
     <string name="terrain_empty_state_text">啟用以檢視地形陰影或坡度圖。您可以在我們的網站上閱讀更多關於這些地圖類型的資訊。</string>
     <string name="shared_string_hillshade">地形陰影</string>
     <string name="download_slope_maps">坡度</string>
-    <string name="quick_action_show_hide_terrain">顯示或隱藏地形</string>
     <string name="quick_action_terrain_hide">隱藏地形</string>
     <string name="quick_action_terrain_show">顯示地形</string>
     <string name="quick_action_terrain_descr">用於顯示或隱藏地圖上地形圖層的按鈕。</string>
@@ -3607,7 +3600,6 @@
     <string name="additional_actions_descr">您可以透過點選「%1$s」按鈕存取這些動作。</string>
     <string name="quick_action_transport_hide">隱藏大眾運輸</string>
     <string name="quick_action_transport_descr">在地圖上顯示或隱藏大眾運輸的按鈕。</string>
-    <string name="quick_action_show_hide_transport">顯示或隱藏大眾運輸</string>
     <string name="create_edit_poi">建立或編輯 POI</string>
     <string name="parking_positions">停車位置</string>
     <string name="add_edit_favorite">新增與編輯收藏</string>
@@ -3675,7 +3667,6 @@
     <string name="vessel_height_warning">您可以設定船艦高度以避免矮橋。請記住，如果橋是可動式的，我們將會使用其在開啟狀態的高度。</string>
     <string name="vessel_height_limit_description">設定船艦高度以避免矮橋。請記住，如果橋是可動式的，我們將會使用其開啟狀態的高度。</string>
     <string name="vessel_width_limit_description">設定船艦寬度以避免窄橋</string>
-    <string name="quick_action_showhide_mapillary_title">顯示／隱藏 Mapillary</string>
     <string name="quick_action_mapillary_hide">隱藏 Mapillary</string>
     <string name="quick_action_mapillary_show">顯示 Mapillary</string>
     <string name="quick_action_showhide_mapillary_descr">在地圖上顯示或隱藏 Mapillary 圖層的開關。</string>

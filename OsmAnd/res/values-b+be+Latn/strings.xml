@@ -2017,7 +2017,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="increase_search_radius">Pavialičyć radyus pošuku</string>
     <string name="nothing_found">Ničoha nie znojdziena</string>
     <string name="nothing_found_descr">Źmianicie pošukavy zapyt abo pavialičcie radyus pošuku.</string>
-    <string name="quick_action_showhide_osmbugs_title">Pakazać/schavać OSM-natatki</string>
     <string name="quick_action_osmbugs_show">Pakazać OSM-natatki</string>
     <string name="quick_action_osmbugs_hide">Schavać OSM-natatki</string>
     <string name="quick_action_showhide_osmbugs_descr">Nacisk na hetuju knopku pakaža ci schavaje OSM-natatki na mapie.</string>
@@ -2156,10 +2155,8 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="quick_action_navigation_voice_off">Ukliučyć Holas</string>
     <string name="quick_action_add_first_intermediate">Dadać pieršy pramiežkavy punkt</string>
     <string name="quick_action_interim_dialog">Pakazać pramiežkavy dyjaloh</string>
-    <string name="quick_action_showhide_favorites_title">Pakazać/schavać upadabanyja</string>
     <string name="quick_action_favorites_show">Pakazać upadabanyja</string>
     <string name="quick_action_favorites_hide">Schavać upadabanyja</string>
-    <string name="quick_action_showhide_poi_title">Pakazać/schavać POI</string>
     <string name="quick_action_poi_show">Pakazać %1$s</string>
     <string name="quick_action_poi_hide">Schavać %1$s</string>
     <string name="quick_action_add_category">Dadać katehoryu</string>
@@ -2823,7 +2820,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="shared_string_swap">Pamianiać</string>
     <string name="show_more">Pakazać boĺš</string>
     <string name="tracks_on_map">Adliustroŭvajemyja sliady</string>
-    <string name="quick_action_show_hide_gpx_tracks">Pakazać/schavać GPX-sliady</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Nacisk na knopku dziejannia pakaža ci schavaje abranyja GPX-sliady na mapie</string>
     <string name="quick_action_gpx_tracks_hide">Schavać GPX-sliady</string>
     <string name="quick_action_gpx_tracks_show">Pakazać GPX-sliady</string>

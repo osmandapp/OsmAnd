@@ -233,7 +233,6 @@
     <string name="increase_search_radius">Tingkatkan radius pencarian</string>
     <string name="nothing_found">Tidak ada yang ditemukan</string>
     <string name="nothing_found_descr">Ubah kata pencarian atau tingkatkan radius pencarian.</string>
-    <string name="quick_action_showhide_osmbugs_title">Tampil/sembunyikan Catatan OSM</string>
     <string name="quick_action_osmbugs_show">Tampilkan Catatan OSM</string>
     <string name="quick_action_osmbugs_hide">Sembunyikan Catatan OSM</string>
     <string name="quick_action_showhide_osmbugs_descr">Mengetuk tombol tindakan akan menampilkan atau menyembunyikan Catatan OSM di peta.</string>

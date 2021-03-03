@@ -2123,10 +2123,8 @@
     <string name="quick_action_interim_dialog">عرض مربع الحوار مؤقتاً</string>
     <string name="favorite_autofill_toast_text">" حفظ إلى "</string>
     <string name="favorite_empty_place_name">مكان</string>
-    <string name="quick_action_showhide_favorites_title">عرض/إخفاء المفضلة</string>
     <string name="quick_action_favorites_show">عرض المفضلة</string>
     <string name="quick_action_favorites_hide">إخفاء المفضلة</string>
-    <string name="quick_action_showhide_poi_title">عرض/إخفاء نقاط الاهتمام</string>
     <string name="quick_action_poi_show">عرض %1$s</string>
     <string name="quick_action_poi_hide">إخفاء %1$s</string>
     <string name="quick_action_add_category">إضافة فئة</string>
@@ -2241,7 +2239,6 @@
 \n • إضافة POI ورفعها مباشرة إلى الموقع (أو في وقت لاحق إن كنت غير متصل بالشبكة)
 \n</string>
     <string name="nothing_found_descr">عدل طلب البحث أو زد النطاق.</string>
-    <string name="quick_action_showhide_osmbugs_title">عرض/إخفاء ملاحظات OSM</string>
     <string name="quick_action_osmbugs_show">إظهار ملاحظات OSM</string>
     <string name="quick_action_osmbugs_hide">إخفاء ملاحظات OSM</string>
     <string name="sorted_by_distance">مرتبة حسب المسافة</string>
@@ -2880,7 +2877,6 @@
     <string name="shared_string_swap">تبديل</string>
     <string name="show_more">اعرض المزيد</string>
     <string name="tracks_on_map">المسارات على الخريطة</string>
-    <string name="quick_action_show_hide_gpx_tracks">إظهار/إخفاء مسارات GPX</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">إظهار أو إخفاء مسارات GPX المحددة على الخريطة.</string>
     <string name="quick_action_gpx_tracks_hide">إخفاء المسارات</string>
     <string name="quick_action_gpx_tracks_show">عرض المسارات</string>
@@ -3072,11 +3068,9 @@
     <string name="quick_action_contour_lines_descr">لإظهار أو إخفاء الخطوط الكنتورية على الخريطة.</string>
     <string name="quick_action_contour_lines_show">إظهار الخطوط الكنتورية</string>
     <string name="quick_action_contour_lines_hide">إخفاء الخطوط الكنتورية</string>
-    <string name="quick_action_show_hide_contour_lines">إظهار/إخفاء الخطوط الكنتورية</string>
     <string name="quick_action_hillshade_descr">لإظهار وإخفاء التضاريس على الخريطة.</string>
     <string name="quick_action_hillshade_show">إظهار التضاريس</string>
     <string name="quick_action_hillshade_hide">إخفاء التضاريس</string>
-    <string name="quick_action_show_hide_hillshade">إظهار/إخفاء التضاريس</string>
     <string name="tts_initialization_error">لا يمكن بدء تشغيل أداة تحويل النص إلى كلام.</string>
     <string name="export_profile">تصدير الوضع</string>
     <string name="exported_osmand_profile">وضع أوسماند: %1$s</string>
@@ -3559,7 +3553,6 @@
     <string name="quick_action_terrain_descr">زر لإظهار طبقة التضاريس أو إخفائها على الخريطة.</string>
     <string name="quick_action_terrain_show">إظهار التضاريس</string>
     <string name="quick_action_terrain_hide">إخفاء التضاريس</string>
-    <string name="quick_action_show_hide_terrain">إظهارأو إخفاء التضاريس</string>
     <string name="download_slope_maps">المنحدرات</string>
     <string name="shared_string_hillshade">التضاريس</string>
     <string name="terrain_empty_state_text">تمكين لعرض المنحدرات أو خريطة التضاريس. يمكنك قراءة المزيد عن أنواع الخرائط هذه على موقعنا.</string>
@@ -3682,7 +3675,6 @@
     <string name="additional_actions_descr">يمكنك الوصول إلى هذه الإجراءات عن طريق النقر على زر \"%1$s\".</string>
     <string name="quick_action_transport_hide">إخفاء وسائل النقل العام</string>
     <string name="quick_action_transport_show">إظهار وسائل النقل العام</string>
-    <string name="quick_action_show_hide_transport">إظهارأو إخفاء وسائل النقل العام</string>
     <string name="quick_action_transport_descr">زر لإظهار أو إخفاء وسائل النقل العام على الخريطة.</string>
     <string name="create_edit_poi">إنشاء أو تعديل نقطة الأهتمام POI</string>
     <string name="parking_positions">مكان الموقف</string>
@@ -3750,7 +3742,6 @@
     <string name="vessel_height_warning_link">ضبط ارتفاع السفينة</string>
     <string name="vessel_height_warning">يمكنك ضبط ارتفاع الحاوية لتجنب الجسور المنخفضة. ضع في اعتبارك أنه إذا كان الجسر متحركاً ، فسوف نستخدم ارتفاعه في الحالة المفتوحة.</string>
     <string name="vessel_width_limit_description">تحديد عرض السفينة لتجنب الجسور الضيقة</string>
-    <string name="quick_action_showhide_mapillary_title">إظهار/إخفاء مابيلاري</string>
     <string name="quick_action_mapillary_hide">إخفاء مابيلاري</string>
     <string name="quick_action_mapillary_show">إظهار مابيلاري</string>
     <string name="quick_action_showhide_mapillary_descr">إظهار أو إخفاء طبقة مابيلاري على الخريطة.</string>
