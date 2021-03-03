@@ -248,6 +248,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			public void showProgressBar() {
 				MeasurementToolFragment.this.showProgressBar();
 				updateInfoView();
+				updateCardContainerSize();
 			}
 
 			@Override
@@ -260,6 +261,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				((ProgressBar) mainView.findViewById(R.id.snap_to_road_progress_bar)).setVisibility(View.GONE);
 				progressBarVisible = false;
 				updateInfoView();
+				updateCardContainerSize();
 			}
 
 			@Override
@@ -808,7 +810,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		progressBar.setMinimumHeight(0);
 		progressBar.setProgress(0);
 		progressBarVisible = true;
-		updateCardContainerSize();
 	}
 
 	public boolean isProgressBarVisible() {
