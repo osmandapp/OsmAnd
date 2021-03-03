@@ -10,6 +10,7 @@ public class QuickActionType {
 	public static final int CREATE_CATEGORY = 0;
 	public static final int CONFIGURE_MAP = 1;
 	public static final int NAVIGATION = 2;
+	public static final int CONFIGURE_SCREEN = 3;
 
 	private final int id;
 	private final String stringId;
