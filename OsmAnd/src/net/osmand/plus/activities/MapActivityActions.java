@@ -441,7 +441,7 @@ public class MapActivityActions implements DialogProvider {
 		}
 
 		adapter.addItem(itemBuilder
-				.setTitleId(R.string.plan_a_route, mapActivity)
+				.setTitleId(R.string.plan_route, mapActivity)
 				.setId(MAP_CONTEXT_MENU_MEASURE_DISTANCE)
 				.setIcon(R.drawable.ic_action_ruler)
 				.setOrder(MEASURE_DISTANCE_ITEM_ORDER)
@@ -489,7 +489,7 @@ public class MapActivityActions implements DialogProvider {
 					//			new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
 					//			REQUEST_LOCATION_FOR_DIRECTIONS_NAVIGATION_PERMISSION);
 					//}
-				} else if (standardId == R.string.plan_a_route) {
+				} else if (standardId == R.string.plan_route) {
 					mapActivity.getContextMenu().close();
 					MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(), new LatLon(latitude, longitude));
 				} else if (standardId == R.string.avoid_road) {
@@ -963,7 +963,7 @@ public class MapActivityActions implements DialogProvider {
 					}
 				}).createItem());
 
-		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.plan_a_route, mapActivity)
+		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.plan_route, mapActivity)
 				.setId(DRAWER_MEASURE_DISTANCE_ID)
 				.setIcon(R.drawable.ic_action_plan_route)
 				.setListener(new ItemClickListener() {
