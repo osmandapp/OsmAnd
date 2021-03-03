@@ -511,7 +511,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 
 			String introductoryPrice = skuDetails.getIntroductoryPrice();
 			String introductoryPricePeriod = skuDetails.getIntroductoryPricePeriod();
-			String introductoryPriceCycles = skuDetails.getIntroductoryPriceCycles();
+			int introductoryPriceCycles = skuDetails.getIntroductoryPriceCycles();
 			long introductoryPriceAmountMicros = skuDetails.getIntroductoryPriceAmountMicros();
 			if (!Algorithms.isEmpty(introductoryPrice)) {
 				try {
