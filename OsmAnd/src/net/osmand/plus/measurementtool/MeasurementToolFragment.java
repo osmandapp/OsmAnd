@@ -622,11 +622,13 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	private void expandInfoView() {
 		infoExpanded = true;
-		shiftBottomMapControls(false);
+		if (portrait) {
+			setMapPosition(OsmandSettings.MIDDLE_TOP_CONSTANT);
+		} else {
+			shiftBottomMapControls(false);
+			setMapPosition(OsmandSettings.LANDSCAPE_MIDDLE_RIGHT_CONSTANT);
+		}
 		cardsContainer.setVisibility(View.VISIBLE);
-		setMapPosition(portrait
-				? OsmandSettings.MIDDLE_TOP_CONSTANT
-				: OsmandSettings.LANDSCAPE_MIDDLE_RIGHT_CONSTANT);
 		updateUpDownBtn();
 	}
 
