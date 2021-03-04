@@ -3,9 +3,7 @@ package net.osmand.plus.track;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
@@ -22,6 +20,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.track.CustomColorBottomSheet.ColorPickerListener;
 import net.osmand.plus.widgets.FlowLayout;
+import net.osmand.plus.widgets.FlowLayout.LayoutParams;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -87,35 +86,41 @@ public class ColorsCard extends BaseCard implements ColorPickerListener {
 	@Override
 	protected void updateContent() {
 		createColorSelector();
-		updateColorSelector(selectedColor, view);
+		updateColorSelector(selectedColor);
 	}
 
 	private void createColorSelector() {
-		FlowLayout selectColor = view.findViewById(R.id.select_color);
-		selectColor.removeAllViews();
+		FlowLayout selectCustomColor = view.findViewById(R.id.select_custom_color);
+		selectCustomColor.removeAllViews();
+		selectCustomColor.setHorizontalAutoSpacing(true);
+		int minimalPaddingBetweenIcon = app.getResources().getDimensionPixelSize(R.dimen.favorites_select_icon_button_right_padding);
 
 		for (int color : customColors) {
-			selectColor.addView(createColorItemView(color, selectColor, true), new FlowLayout.LayoutParams(0, 0, true));
+			selectCustomColor.addView(createColorItemView(color, selectCustomColor, true), new LayoutParams(minimalPaddingBetweenIcon, 0));
 		}
 		if (customColors.size() < 6) {
-			selectColor.addView(createAddCustomColorItemView(selectColor), new FlowLayout.LayoutParams(0, 0, true));
+			selectCustomColor.addView(createAddCustomColorItemView(selectCustomColor), new LayoutParams(minimalPaddingBetweenIcon, 0));
 		}
-		selectColor.addView(createDividerView(selectColor), new FlowLayout.LayoutParams(0, 0, false));
+
+		FlowLayout selectDefaultColor = view.findViewById(R.id.select_default_color);
+		selectDefaultColor.removeAllViews();
+		selectDefaultColor.setHorizontalAutoSpacing(true);
 
 		for (int color : colors) {
-			selectColor.addView(createColorItemView(color, selectColor, false), new FlowLayout.LayoutParams(0, 0, true));
+			selectDefaultColor.addView(createColorItemView(color, selectDefaultColor, false), new LayoutParams(minimalPaddingBetweenIcon, 0));
 		}
-		updateColorSelector(selectedColor, selectColor);
+		updateColorSelector(selectedColor);
 	}
 
-	private void updateColorSelector(int color, View rootView) {
-		View oldColor = rootView.findViewWithTag(selectedColor);
+	private void updateColorSelector(int color) {
+		View oldColor = view.findViewWithTag(selectedColor);
 		if (oldColor != null) {
 			oldColor.findViewById(R.id.outline).setVisibility(View.INVISIBLE);
 			ImageView icon = oldColor.findViewById(R.id.icon);
-			icon.setImageDrawable(UiUtilities.tintDrawable(icon.getDrawable(), R.color.icon_color_default_light));
+			icon.setImageDrawable(UiUtilities.tintDrawable(icon.getDrawable(),
+					getResolvedColor(nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light)));
 		}
-		View newColor = rootView.findViewWithTag(color);
+		View newColor = view.findViewWithTag(color);
 		if (newColor != null) {
 			newColor.findViewById(R.id.outline).setVisibility(View.VISIBLE);
 		}
@@ -137,7 +142,7 @@ public class ColorsCard extends BaseCard implements ColorPickerListener {
 		backgroundCircle.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				updateColorSelector(color, rootView);
+				updateColorSelector(color);
 				selectedColor = color;
 
 				CardListener listener = getListener();
@@ -187,17 +192,7 @@ public class ColorsCard extends BaseCard implements ColorPickerListener {
 		return colorItemView;
 	}
 
-	private View createDividerView(FlowLayout rootView) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(view.getContext(), nightMode);
-		View divider = themedInflater.inflate(R.layout.simple_divider_item, rootView, false);
-
-		LinearLayout dividerContainer = new LinearLayout(view.getContext());
-		dividerContainer.addView(divider);
-		dividerContainer.setPadding(0, AndroidUtils.dpToPx(app, 1), 0, AndroidUtils.dpToPx(app, 5));
-		return dividerContainer;
-	}
-
-	private View createCircleView(ViewGroup rootView) {
+	private View createCircleView(FlowLayout rootView) {
 		LayoutInflater themedInflater = UiUtilities.getInflater(view.getContext(), nightMode);
 		View circleView = themedInflater.inflate(R.layout.point_editor_button, rootView, false);
 		ImageView outline = circleView.findViewById(R.id.outline);

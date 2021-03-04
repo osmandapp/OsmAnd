@@ -5,14 +5,20 @@
 	android:orientation="vertical">
 
 	<net.osmand.plus.widgets.FlowLayout
-		android:id="@+id/select_color"
+		android:id="@+id/select_custom_color"
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_marginStart="@dimen/content_padding"
-		android:layout_marginLeft="@dimen/content_padding"
-		android:layout_marginEnd="@dimen/content_padding"
-		android:layout_marginRight="@dimen/content_padding"
+		android:layout_height="wrap_content" />
+
+	<include
+		layout="@layout/simple_divider_item"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
 		android:layout_marginTop="@dimen/context_menu_padding_margin_tiny"
 		android:layout_marginBottom="@dimen/content_padding_half" />
+
+	<net.osmand.plus.widgets.FlowLayout
+		android:id="@+id/select_default_color"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content" />
 
 </LinearLayout>

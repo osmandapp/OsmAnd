@@ -22,6 +22,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -476,9 +477,8 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 			}
 			colorsCard = new ColorsCard(mapActivity, selectedColor, this, colors);
 			colorsCard.setListener(this);
-			FlowLayout selectColor = view.findViewById(R.id.select_color);
-			selectColor.addView(colorsCard.build(view.getContext()),
-					new FlowLayout.LayoutParams(0, 0, true));
+			LinearLayout selectColor = view.findViewById(R.id.select_color);
+			selectColor.addView(colorsCard.build(view.getContext()));
 		}
 	}
 
@@ -521,7 +521,8 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 		for (BackgroundType backgroundType : BackgroundType.values()) {
 			if (backgroundType.isSelected()) {
 				selectShape.addView(createShapeItemView(backgroundType, selectShape),
-						new FlowLayout.LayoutParams(0, 0, true));
+						new FlowLayout.LayoutParams(0, 0));
+				selectShape.setHorizontalAutoSpacing(true);
 			}
 		}
 	}
@@ -644,7 +645,8 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 			horizontalSelectionAdapter.notifyDataSetChanged();
 			iconCategoriesRecyclerView.smoothScrollToPosition(horizontalSelectionAdapter.getItemPositionByTitle(selectedIconCategory));
 			for (String name : iconNameList) {
-				selectIcon.addView(createIconItemView(name, selectIcon), new FlowLayout.LayoutParams(0, 0, true));
+				selectIcon.addView(createIconItemView(name, selectIcon), new FlowLayout.LayoutParams(0, 0));
+				selectIcon.setHorizontalAutoSpacing(true);
 			}
 		}
 	}
