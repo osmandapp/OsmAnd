@@ -177,19 +177,30 @@ public class RouteResultPreparation {
 		validateAllPointsConnected(result);
 		splitRoadsAndAttachRoadSegments(ctx, result, recalculation);
 		for (int i = 0; i < result.size(); i++) {
-			prepareStopSign(result.get(i));
+			filterMinorStops(result.get(i));
 		}
 		calculateTimeSpeed(ctx, result);
 		prepareTurnResults(ctx, result);
 		return result;
 	}
 	
-	public RouteSegmentResult prepareStopSign(RouteSegmentResult seg) {
-		int start = seg.getStartPointIndex();
-		int end = seg.getEndPointIndex();
+	public RouteSegmentResult filterMinorStops(RouteSegmentResult seg) {
+		int startPoint = seg.getStartPointIndex();
+		int endPoint = seg.getEndPointIndex();
+		int start;
+		int end;
+
+		if (startPoint < endPoint) {
+			start = startPoint;
+			end = endPoint;
+		} else {
+			start = endPoint;
+			end = startPoint;
+		}
+
 		List<Integer> stops = new ArrayList<>();
 
-		for (int i = start; i > end; i--) {
+		for (int i = start; i < end; i++) {
 			int[] pointTypes = seg.getObject().getPointTypes(i);
 			if (pointTypes != null) {
 				for (int j = 0; j < pointTypes.length; j++) {
