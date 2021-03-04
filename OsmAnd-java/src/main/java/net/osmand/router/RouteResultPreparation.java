@@ -185,6 +185,7 @@ public class RouteResultPreparation {
 	}
 	
 	public RouteSegmentResult filterMinorStops(RouteSegmentResult seg) {
+		List<Integer> stops = null;
 		int startPoint = seg.getStartPointIndex();
 		int endPoint = seg.getEndPointIndex();
 		int start;
@@ -198,27 +199,31 @@ public class RouteResultPreparation {
 			end = startPoint;
 		}
 
-		List<Integer> stops = new ArrayList<>();
-
-		for (int i = start; i < end; i++) {
-			int[] pointTypes = seg.getObject().getPointTypes(i);
+		while (start <= end) {
+			int[] pointTypes = seg.getObject().getPointTypes(start);
 			if (pointTypes != null) {
 				for (int j = 0; j < pointTypes.length; j++) {
 					if (pointTypes[j] == seg.getObject().region.stopMinor) {
-						stops.add(i);
+						if (stops == null) {
+							stops = new ArrayList<>();
+						}
+						stops.add(start);
 					}
 				}
 			}
+			start++;
 		}
 
-		for (int stop : stops) {
-			List<RouteSegmentResult> attachedRoutes = seg.getAttachedRoutes(stop);
-			for (RouteSegmentResult attached : attachedRoutes) {
-				int attStopPriority = highwaySpeakPriority(attached.getObject().getHighway());
-				int segStopPriority = highwaySpeakPriority(seg.getObject().getHighway());
-				if (segStopPriority < attStopPriority) {
-					seg.getObject().removePointType(stop, seg.getObject().region.stopSign);
-					break;
+		if (stops != null) {
+			for (int stop : stops) {
+				List<RouteSegmentResult> attachedRoutes = seg.getAttachedRoutes(stop);
+				for (RouteSegmentResult attached : attachedRoutes) {
+					int attStopPriority = highwaySpeakPriority(attached.getObject().getHighway());
+					int segStopPriority = highwaySpeakPriority(seg.getObject().getHighway());
+					if (segStopPriority < attStopPriority) {
+						seg.getObject().removePointType(stop, seg.getObject().region.stopSign);
+						break;
+					}
 				}
 			}
 		}
