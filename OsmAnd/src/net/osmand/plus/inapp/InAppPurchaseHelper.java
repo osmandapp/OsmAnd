@@ -8,9 +8,6 @@ import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.AndroidNetworkUtils.OnRequestResultListener;
 import net.osmand.AndroidNetworkUtils.OnRequestsResultListener;
@@ -42,6 +39,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public abstract class InAppPurchaseHelper {
 	// Debug tag, for logging
@@ -364,8 +364,7 @@ public abstract class InAppPurchaseHelper {
 			notifyDismissProgress(InAppPurchaseTaskType.PURCHASE_LIVE_UPDATES);
 			if (!Algorithms.isEmpty(userId) && !Algorithms.isEmpty(token)) {
 				logDebug("Launching purchase flow for live updates subscription for userId=" + userId);
-				final String payload = userId + " " + token;
-				exec(InAppPurchaseTaskType.PURCHASE_LIVE_UPDATES, getPurchaseLiveUpdatesCommand(activity, sku, payload));
+				exec(InAppPurchaseTaskType.PURCHASE_LIVE_UPDATES, getPurchaseLiveUpdatesCommand(activity, sku));
 			} else {
 				notifyError(InAppPurchaseTaskType.PURCHASE_LIVE_UPDATES, "Empty userId");
 				stop(true);
@@ -374,7 +373,7 @@ public abstract class InAppPurchaseHelper {
 	}
 
 	protected abstract InAppCommand getPurchaseLiveUpdatesCommand(final WeakReference<Activity> activity,
-																  final String sku, final String payload) throws UnsupportedOperationException;
+																  final String sku) throws UnsupportedOperationException;
 
 	@SuppressLint("StaticFieldLeak")
 	private class RequestInventoryTask extends AsyncTask<Void, Void, String[]> {

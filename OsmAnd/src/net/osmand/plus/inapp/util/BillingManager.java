@@ -3,9 +3,6 @@ package net.osmand.plus.inapp.util;
 import android.app.Activity;
 import android.content.Context;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import com.android.billingclient.api.AcknowledgePurchaseParams;
 import com.android.billingclient.api.AcknowledgePurchaseResponseListener;
 import com.android.billingclient.api.BillingClient;
@@ -25,13 +22,17 @@ import com.android.billingclient.api.SkuDetailsParams;
 import com.android.billingclient.api.SkuDetailsResponseListener;
 
 import net.osmand.PlatformUtil;
-import net.osmand.util.Algorithms;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.settings.backend.OsmandSettings;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 /**
  * Handles all the interactions with Play Store (via Billing library), maintains connection to
@@ -58,7 +59,6 @@ public class BillingManager implements PurchasesUpdatedListener {
 
 	// Public key for verifying signature, in base64 encoding
 	private String mSignatureBase64;
-	private String mPayload;
 
 	private final BillingUpdatesListener mBillingUpdatesListener;
 	private final List<Purchase> mPurchases = new ArrayList<>();
@@ -145,7 +145,11 @@ public class BillingManager implements PurchasesUpdatedListener {
 		Runnable purchaseFlowRequest = new Runnable() {
 			@Override
 			public void run() {
-				BillingFlowParams.Builder paramsBuilder = BillingFlowParams.newBuilder().setSkuDetails(skuDetails);
+				OsmandSettings settings = getSettings(activity);
+				BillingFlowParams.Builder paramsBuilder = BillingFlowParams.newBuilder()
+						.setSkuDetails(skuDetails)
+						.setObfuscatedAccountId(settings.BILLING_USER_ID.get())
+						.setObfuscatedProfileId(settings.BILLING_USER_TOKEN.get());
 				if (oldSku != null) {
 					paramsBuilder.setOldSku(oldSku, purchaseToken);
 				}
@@ -180,9 +184,11 @@ public class BillingManager implements PurchasesUpdatedListener {
 			@Override
 			public void run() {
 				// Query the purchase async
-				SkuDetailsParams.Builder params = SkuDetailsParams.newBuilder();
-				params.setSkusList(skuList).setType(itemType);
-				mBillingClient.querySkuDetailsAsync(params.build(),
+				SkuDetailsParams params = SkuDetailsParams.newBuilder()
+						.setSkusList(skuList)
+						.setType(itemType)
+						.build();
+				mBillingClient.querySkuDetailsAsync(params,
 						new SkuDetailsResponseListener() {
 							@Override
 							public void onSkuDetailsResponse(BillingResult billingResult, List<SkuDetails> skuDetailsList) {
@@ -250,15 +256,6 @@ public class BillingManager implements PurchasesUpdatedListener {
 		return Collections.unmodifiableList(mPurchases);
 	}
 
-
-	public String getPayload() {
-		return mPayload;
-	}
-
-	public void setPayload(String payload) {
-		this.mPayload = payload;
-	}
-
 	/**
 	 * Handles the purchase
 	 * <p>Note: Notice that for each purchase, we check if signature is valid on the client.
@@ -277,13 +274,9 @@ public class BillingManager implements PurchasesUpdatedListener {
 		if (purchase.getPurchaseState() == Purchase.PurchaseState.PURCHASED) {
 			// Acknowledge the purchase if it hasn't already been acknowledged.
 			if (!purchase.isAcknowledged()) {
-				AcknowledgePurchaseParams.Builder builder =
-						AcknowledgePurchaseParams.newBuilder()
-								.setPurchaseToken(purchase.getPurchaseToken());
-				if (!Algorithms.isEmpty(mPayload)) {
-					builder.setDeveloperPayload(mPayload);
-				}
-				AcknowledgePurchaseParams acknowledgePurchaseParams = builder.build();
+				AcknowledgePurchaseParams acknowledgePurchaseParams = AcknowledgePurchaseParams.newBuilder()
+						.setPurchaseToken(purchase.getPurchaseToken())
+						.build();
 				mBillingClient.acknowledgePurchase(acknowledgePurchaseParams, new AcknowledgePurchaseResponseListener() {
 					@Override
 					public void onAcknowledgePurchaseResponse(BillingResult billingResult) {
@@ -418,6 +411,10 @@ public class BillingManager implements PurchasesUpdatedListener {
 
 	private boolean verifyValidSignature(String signedData, String signature) {
 		return Security.verifyPurchase(mSignatureBase64, signedData, signature);
+	}
+
+	private OsmandSettings getSettings(Activity activity) {
+		return  ((OsmandApplication) activity.getApplication()).getSettings();
 	}
 }
 

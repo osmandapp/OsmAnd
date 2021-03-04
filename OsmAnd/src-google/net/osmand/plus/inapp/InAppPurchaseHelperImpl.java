@@ -6,9 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
+import com.android.billingclient.api.AccountIdentifiers;
 import com.android.billingclient.api.BillingClient;
 import com.android.billingclient.api.BillingResult;
 import com.android.billingclient.api.Purchase;
@@ -25,7 +23,6 @@ import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
 import net.osmand.plus.inapp.InAppPurchasesImpl.InAppPurchaseLiveUpdatesOldSubscription;
 import net.osmand.plus.inapp.util.BillingManager;
 import net.osmand.plus.settings.backend.CommonPreference;
-import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.util.Algorithms;
@@ -36,6 +33,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map.Entry;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 
@@ -197,6 +197,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 					if (skuDetails == null) {
 						throw new IllegalArgumentException("Cannot find sku details");
 					}
+
 					BillingManager billingManager = getBillingManager();
 					if (billingManager != null) {
 						billingManager.initiatePurchaseFlow(activity, skuDetails);
@@ -442,19 +443,8 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 			if (liveUpdatesPurchases.size() > 0) {
 				List<String> tokensSent = Arrays.asList(settings.BILLING_PURCHASE_TOKENS_SENT.get().split(";"));
 				for (Purchase purchase : liveUpdatesPurchases) {
-					if ((Algorithms.isEmpty(settings.BILLING_USER_ID.get()) || Algorithms.isEmpty(settings.BILLING_USER_TOKEN.get()))
-							&& !Algorithms.isEmpty(purchase.getDeveloperPayload())) {
-						String payload = purchase.getDeveloperPayload();
-						if (!Algorithms.isEmpty(payload)) {
-							String[] arr = payload.split(" ");
-							if (arr.length > 0) {
-								settings.BILLING_USER_ID.set(arr[0]);
-							}
-							if (arr.length > 1) {
-								token = arr[1];
-								settings.BILLING_USER_TOKEN.set(token);
-							}
-						}
+					if (needRestoreUserInfo(settings)) {
+						restoreUserInfo(settings, purchase);
 					}
 					if (!tokensSent.contains(purchase.getSku())) {
 						tokensToSend.add(purchase);
@@ -468,6 +458,48 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 			onSkuDetailsResponseDone(purchaseInfoList);
 		}
 	};
+
+	private void restoreUserInfo(OsmandSettings settings, Purchase purchase) {
+		boolean restored = restoreUserInfoUsingPayload(settings, purchase);
+		if (!restored) {
+			restoreUserInfoUsingAccountIdentifiers(settings, purchase);
+		}
+	}
+
+	private boolean restoreUserInfoUsingPayload(OsmandSettings settings, Purchase purchase) {
+		String payload = purchase.getDeveloperPayload();
+		if (Algorithms.isEmpty(payload)) {
+			return false;
+		}
+		String[] arr = payload.split(" ");
+		if (arr.length > 0) {
+			settings.BILLING_USER_ID.set(arr[0]);
+		}
+		if (arr.length > 1) {
+			token = arr[1];
+			settings.BILLING_USER_TOKEN.set(token);
+		}
+		return needRestoreUserInfo(settings);
+	}
+
+	private void restoreUserInfoUsingAccountIdentifiers(OsmandSettings settings, Purchase purchase) {
+		AccountIdentifiers accountInfo = purchase.getAccountIdentifiers();
+		if (accountInfo != null) {
+			String userId = accountInfo.getObfuscatedAccountId();
+			String userToken = accountInfo.getObfuscatedProfileId();
+			if (Algorithms.isEmpty(settings.BILLING_USER_ID.get()) && !Algorithms.isEmpty(userId)) {
+				settings.BILLING_USER_ID.set(userId);
+			}
+			if (Algorithms.isEmpty(settings.BILLING_USER_TOKEN.get()) && !Algorithms.isEmpty(userToken)) {
+				token = userToken;
+				settings.BILLING_USER_TOKEN.set(userToken);
+			}
+		}
+	}
+
+	private boolean needRestoreUserInfo(OsmandSettings settings) {
+		return Algorithms.isEmpty(settings.BILLING_USER_ID.get()) || Algorithms.isEmpty(settings.BILLING_USER_TOKEN.get());
+	}
 
 	private PurchaseInfo getPurchaseInfo(Purchase purchase) {
 		return new PurchaseInfo(purchase.getSku(), purchase.getOrderId(), purchase.getPurchaseToken());
@@ -524,7 +556,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 		}
 	}
 
-	protected InAppCommand getPurchaseLiveUpdatesCommand(final WeakReference<Activity> activity, final String sku, final String payload) {
+	protected InAppCommand getPurchaseLiveUpdatesCommand(final WeakReference<Activity> activity, final String sku) {
 		return new InAppCommand() {
 			@Override
 			public void run(InAppPurchaseHelper helper) {
@@ -534,7 +566,6 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 					if (AndroidUtils.isActivityNotDestroyed(a) && skuDetails != null) {
 						BillingManager billingManager = getBillingManager();
 						if (billingManager != null) {
-							billingManager.setPayload(payload);
 							billingManager.initiatePurchaseFlow(a, skuDetails);
 						} else {
 							throw new IllegalStateException("BillingManager disposed");
