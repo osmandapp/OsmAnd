@@ -1204,7 +1204,7 @@
     <string name="import_file_favourites">Daten als GPX-Datei speichern oder Wegpunkte als Favoriten importieren?</string>
     <string name="shared_string_tracks">Tracks</string>
     <string name="shared_string_my_favorites">Favoriten</string>
-    <string name="shared_string_my_places">Meine orte</string>
+    <string name="shared_string_my_places">Meine Orte</string>
     <string name="loading_smth">%1$s wird geladen …</string>
     <string name="map_widget_plain_time">Aktuelle Zeit</string>
     <string name="selected_gpx_info_show">"
