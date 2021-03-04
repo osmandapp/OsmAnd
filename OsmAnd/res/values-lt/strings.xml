@@ -2048,7 +2048,6 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="dialog_add_action_title">Pridėti veiksmą</string>
     <string name="quick_actions_delete">Ištrinti veiksmą</string>
     <string name="favorite_empty_place_name">Vieta</string>
-    <string name="quick_action_showhide_poi_title">Rodyti/slėpti LV</string>
     <string name="quick_action_add_category">Pridėti kategoriją</string>
     <string name="quick_action_bug_message">Pranešimas</string>
     <string name="quick_action_map_styles">Žemėlapio stiliai</string>
@@ -2069,7 +2068,6 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="increase_search_radius">Padidinti paieškos spindulį</string>
     <string name="nothing_found">Nepavyko nieko rasti</string>
     <string name="nothing_found_descr">Pakeiskite paieškos užklausą arba padidinkite paieškos spindulį.</string>
-    <string name="quick_action_showhide_osmbugs_title">Rodyti/slėpti OSM Pastabas</string>
     <string name="quick_action_osmbugs_show">Rodyti OSM Pastabas</string>
     <string name="quick_action_osmbugs_hide">Slėpti OSM Pastabas</string>
     <string name="search_favorites">Ieškoti parankiniuose</string>
@@ -2141,7 +2139,6 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="quick_favorites_show_favorites_dialog">Rodyti parankinių dialogą</string>
     <string name="quick_action_interim_dialog">Rodyti tarpinį dialogo langą</string>
     <string name="favorite_autofill_toast_text">" įrašytas į "</string>
-    <string name="quick_action_showhide_favorites_title">Rodyti/slėpti parankinius</string>
     <string name="quick_action_favorites_show">Rodyti Parankinius</string>
     <string name="quick_action_favorites_hide">Slėpti Parankinius</string>
     <string name="quick_action_poi_show">Rodyti %1$s</string>
@@ -2620,7 +2617,6 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="time_of_day">Dienos metas</string>
     <string name="routeInfo_road_types_name">Kelių tipai</string>
     <string name="show_more">Rodyti daugiau</string>
-    <string name="quick_action_show_hide_gpx_tracks">Rodyti/slėpti GPX pėdsakus</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Paspaudus šį mygtuką žemėlapyje parodomi arba paslepiami GPX pėdsakai</string>
     <string name="quick_action_gpx_tracks_hide">Slėpti GPX pėdsakus</string>
     <string name="quick_action_gpx_tracks_show">Rodyti GPX pėdsakus</string>
@@ -2730,7 +2726,6 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="shared_string_restore">Atkurti</string>
     <string name="search_street">Ieškoti gatvės</string>
     <string name="measure_distance_item">Matuoti atstumą</string>
-    <string name="quick_action_show_hide_transport">Rodyti/paslėpti viešąjį transportą</string>
     <string name="quick_action_transport_hide">Paslėpti viešąjį transportą</string>
     <string name="quick_action_transport_show">Rodyti viešąjį transportą</string>
     <string name="shared_string_add_profile">Pridėti profilį</string>

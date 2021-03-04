@@ -16,7 +16,8 @@ public class ShowHideTransportLinesAction extends QuickAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(31,
 			"transport.showhide", ShowHideTransportLinesAction.class)
-			.nameRes(R.string.quick_action_show_hide_transport)
+			.nameActionRes(R.string.quick_action_showhide_title)
+			.nameRes(R.string.poi_filter_public_transport)
 			.iconRes(R.drawable.ic_action_transport_bus).nonEditable()
 			.category(QuickActionType.CONFIGURE_MAP);
 

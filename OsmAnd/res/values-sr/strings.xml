@@ -1245,7 +1245,6 @@
     <string name="increase_search_radius">Повећај област претраге</string>
     <string name="nothing_found">Нема ничег пронађеног</string>
     <string name="nothing_found_descr">Промените претрагу или повећајте област претраге.</string>
-    <string name="quick_action_showhide_osmbugs_title">Приказује или сакрива OSM белешке</string>
     <string name="quick_action_osmbugs_show">Прикажи белешке ОСМ-а</string>
     <string name="quick_action_osmbugs_hide">Сакриј белешке ОСМ-а</string>
     <string name="quick_action_showhide_osmbugs_descr">Дугме да прикажите или да сакријете OSM белешке на карти.</string>
@@ -2218,10 +2217,8 @@
     <string name="quick_favorites_show_favorites_dialog">Прикажи дијалог за Омиљене</string>
     <string name="favorite_autofill_toast_text">" сачувано у "</string>
     <string name="favorite_empty_place_name">Место</string>
-    <string name="quick_action_showhide_favorites_title">Прикажи/сакриј Омиљене</string>
     <string name="quick_action_favorites_show">Прикажи Омиљене</string>
     <string name="quick_action_favorites_hide">Сакриј Омиљене</string>
-    <string name="quick_action_showhide_poi_title">Прикажи/сакриј тачке од интереса</string>
     <string name="quick_action_poi_show">Прикажи %1$s</string>
     <string name="quick_action_poi_hide">Сакриј %1$s</string>
     <string name="quick_action_add_category">Додај категорију</string>
@@ -2901,7 +2898,6 @@
     <string name="show_more">Прикажи још</string>
     <string name="tracks_on_map">Приказане путање</string>
     <string name="sit_on_the_stop">Укрцавање на стајању</string>
-    <string name="quick_action_show_hide_gpx_tracks">Прикажи/сакриј путање</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Дугме које приказује или сакрива одабране путање са карте.</string>
     <string name="quick_action_gpx_tracks_hide">Сакриј путање</string>
     <string name="quick_action_gpx_tracks_show">Прикажи путање</string>
@@ -3264,11 +3260,9 @@
     <string name="quick_action_contour_lines_descr">Дугме које приказује или сакрива линије изохипси на карти.</string>
     <string name="quick_action_contour_lines_show">Прикажи изохипсе</string>
     <string name="quick_action_contour_lines_hide">Сакриј изохипсе</string>
-    <string name="quick_action_show_hide_contour_lines">Прикажи/сакриј изохипсе</string>
     <string name="quick_action_hillshade_descr">Дугме које приказује или сакрива рељеф на карти.</string>
     <string name="quick_action_hillshade_show">Прикажи рељеф</string>
     <string name="quick_action_hillshade_hide">Сакриј рељеф</string>
-    <string name="quick_action_show_hide_hillshade">Прикажи/сакриј рељеф</string>
     <string name="tts_initialization_error">Не могу да покренем мотор за синтетизовање гласа.</string>
     <string name="simulate_your_location_gpx_descr">Симулирајте Вашу позицију користећу снимљену GPX стазу.</string>
     <string name="export_profile">Извези профил</string>
@@ -3467,7 +3461,6 @@
     <string name="restore_all_profile_settings">Поврати све поставке профила\?</string>
     <string name="saving_new_profile">Чувам нови профил</string>
     <string name="profile_backup_failed">Не могу да направим резервну копију профила.</string>
-    <string name="quick_action_show_hide_terrain">Прикажи или сакриј терен</string>
     <string name="quick_action_terrain_hide">Сакриј терен</string>
     <string name="quick_action_terrain_show">Прикажи терен</string>
     <string name="quick_action_terrain_descr">Дугме да прикаже или сакрите слој терена на карти.</string>
@@ -3510,7 +3503,6 @@
     <string name="navigation_profiles_item">Профили навођења</string>
     <string name="quick_action_transport_hide">Сакриј јавни превоз</string>
     <string name="quick_action_transport_show">Прикажи јавни превоз</string>
-    <string name="quick_action_show_hide_transport">Прикажи или сакриј јавни превоз</string>
     <string name="quick_action_transport_descr">Дугме које приказује или скрива јавни превоз на карти.</string>
     <string name="parking_positions">Паркинг позиције</string>
     <string name="reset_deafult_order">Поврати подразумевани поредак ставки</string>
@@ -3587,7 +3579,6 @@
     <string name="keep_active">Држи активним</string>
     <string name="shared_string_uninstall">Избриши</string>
     <string name="speed_cameras_alert">Упозорења за радаре су законом забрањене у неким државама.</string>
-    <string name="quick_action_showhide_mapillary_title">Прикажи/сакриј Mapillary</string>
     <string name="quick_action_mapillary_hide">Сакриј Mapillary</string>
     <string name="quick_action_mapillary_show">Прикажи Mapillary</string>
     <string name="lang_yo">Јоруба</string>
