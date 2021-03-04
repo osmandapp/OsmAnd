@@ -481,7 +481,7 @@ public class ConfigureMapMenu {
 				.setId(MAP_LANGUAGE_ID)
 				.setDescription(localeDescr).setLayout(R.layout.list_item_single_line_descrition_narrow)
 				.setIcon(R.drawable.ic_action_map_language)
-				.setListener(new ContextMenuAdapter.ItemClickListener() {
+				.setListener(new ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> ad, int itemId,
 													  final int pos, boolean isChecked, int[] viewCoordinates) {
@@ -518,7 +518,8 @@ public class ConfigureMapMenu {
 							@Override
 							public View getView(int position, View convertView, ViewGroup parent) {
 								View v = super.getView(position, convertView, parent);
-								AppCompatCheckedTextView checkedTextView = (AppCompatCheckedTextView) v.findViewById(R.id.text1);
+								AppCompatCheckedTextView checkedTextView = v.findViewById(R.id.text1);
+								SwitchCompat check = v.findViewById(R.id.check);
 								if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
 									UiUtilities.setupCompoundButtonDrawable(app, nightMode, selectedProfileColor, checkedTextView.getCheckMarkDrawable());
 								}
@@ -527,13 +528,13 @@ public class ConfigureMapMenu {
 									v.findViewById(R.id.topDivider).setVisibility(View.VISIBLE);
 									v.findViewById(R.id.bottomDivider).setVisibility(View.VISIBLE);
 									v.findViewById(R.id.switchLayout).setVisibility(View.VISIBLE);
-									TextView switchText = (TextView) v.findViewById(R.id.switchText);
+									TextView switchText = v.findViewById(R.id.switchText);
 									switchText.setText(activity.getString(R.string.translit_name_if_miss, txtValues[position]));
-									SwitchCompat check = (SwitchCompat) v.findViewById(R.id.check);
-									check.setChecked(transliterateNames);
+									check.setChecked(txtIds[position].equals("en") != transliterateNames);
 									check.setOnCheckedChangeListener(translitChangdListener);
 									UiUtilities.setupCompoundButton(nightMode, selectedProfileColor, check);
 								} else {
+									check.setChecked(false);
 									checkedTextView.setChecked(position == selectedLanguageIndex);
 									v.findViewById(R.id.topDivider).setVisibility(View.GONE);
 									v.findViewById(R.id.bottomDivider).setVisibility(View.GONE);
