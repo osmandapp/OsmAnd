@@ -6,14 +6,10 @@ import android.view.View;
 import android.widget.ImageView;
 
 import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.ColorUtils;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.material.internal.FlowLayout;
-
-import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -32,11 +28,6 @@ import org.apache.commons.logging.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.ColorInt;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.ColorUtils;
-import androidx.fragment.app.Fragment;
-
 public class ColorsCard extends BaseCard implements ColorPickerListener {
 
 	public static final int MAX_CUSTOM_COLORS = 6;
@@ -46,13 +37,13 @@ public class ColorsCard extends BaseCard implements ColorPickerListener {
 
 	public static final int INVALID_VALUE = -1;
 
-	private Fragment targetFragment;
+	private final Fragment targetFragment;
 
 	private ApplicationMode appMode;
 	private ListStringPreference colorsListPreference;
 
-	private List<Integer> colors;
-	private List<Integer> customColors;
+	private final List<Integer> colors;
+	private final List<Integer> customColors;
 
 	private int selectedColor;
 
