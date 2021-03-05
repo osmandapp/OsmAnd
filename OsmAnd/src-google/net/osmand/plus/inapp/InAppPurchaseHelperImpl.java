@@ -200,7 +200,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 
 					BillingManager billingManager = getBillingManager();
 					if (billingManager != null) {
-						storeUserInfo(billingManager);
+						setupUserInfo(billingManager);
 						billingManager.initiatePurchaseFlow(activity, skuDetails);
 					} else {
 						throw new IllegalStateException("BillingManager disposed");
@@ -228,7 +228,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 					}
 					BillingManager billingManager = getBillingManager();
 					if (billingManager != null) {
-						storeUserInfo(billingManager);
+						setupUserInfo(billingManager);
 						billingManager.initiatePurchaseFlow(activity, skuDetails);
 					} else {
 						throw new IllegalStateException("BillingManager disposed");
@@ -568,7 +568,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 					if (AndroidUtils.isActivityNotDestroyed(a) && skuDetails != null) {
 						BillingManager billingManager = getBillingManager();
 						if (billingManager != null) {
-							storeUserInfo(billingManager);
+							setupUserInfo(billingManager);
 							billingManager.initiatePurchaseFlow(a, skuDetails);
 						} else {
 							throw new IllegalStateException("BillingManager disposed");
@@ -620,10 +620,10 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 		onPurchaseDone(getPurchaseInfo(purchase));
 	}
 
-	private void storeUserInfo(BillingManager billingManager) {
+	private void setupUserInfo(BillingManager billingManager) {
 		OsmandSettings settings = ctx.getSettings();
-		billingManager.setUserId(settings.BILLING_USER_ID.get());
-		billingManager.setUserToken(settings.BILLING_USER_TOKEN.get());
+		billingManager.setObfuscatedAccountId(settings.BILLING_USER_ID.get());
+		billingManager.setObfuscatedProfileId(settings.BILLING_USER_TOKEN.get());
 	}
 
 	@Override

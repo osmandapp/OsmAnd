@@ -58,8 +58,8 @@ public class BillingManager implements PurchasesUpdatedListener {
 
 	// Public key for verifying signature, in base64 encoding
 	private String mSignatureBase64;
-	private String mUserId;
-	private String mUserToken;
+	private String mObfuscatedAccountId;
+	private String mObfuscatedProfileId;
 
 	private final BillingUpdatesListener mBillingUpdatesListener;
 	private final List<Purchase> mPurchases = new ArrayList<>();
@@ -149,11 +149,11 @@ public class BillingManager implements PurchasesUpdatedListener {
 				LOG.debug("Launching in-app purchase flow. Replace old SKU? " + (oldSku != null && purchaseToken != null));
 				BillingFlowParams.Builder paramsBuilder = BillingFlowParams.newBuilder()
 						.setSkuDetails(skuDetails);
-				if (!TextUtils.isEmpty(mUserId)) {
-					paramsBuilder.setObfuscatedAccountId(mUserId);
+				if (!TextUtils.isEmpty(mObfuscatedAccountId)) {
+					paramsBuilder.setObfuscatedAccountId(mObfuscatedAccountId);
 				}
-				if (!TextUtils.isEmpty(mUserToken)) {
-					paramsBuilder.setObfuscatedProfileId(mUserToken);
+				if (!TextUtils.isEmpty(mObfuscatedProfileId)) {
+					paramsBuilder.setObfuscatedProfileId(mObfuscatedProfileId);
 				}
 				if (oldSku != null && purchaseToken != null) {
 					paramsBuilder.setOldSku(oldSku, purchaseToken);
@@ -405,12 +405,12 @@ public class BillingManager implements PurchasesUpdatedListener {
 		});
 	}
 
-	public void setUserId(String userId) {
-		mUserId = userId;
+	public void setObfuscatedAccountId(String obfuscatedAccountId) {
+		mObfuscatedAccountId = obfuscatedAccountId;
 	}
 
-	public void setUserToken(String userToken) {
-		mUserToken = userToken;
+	public void setObfuscatedProfileId(String obfuscatedProfileId) {
+		mObfuscatedProfileId = obfuscatedProfileId;
 	}
 
 	private void executeServiceRequest(Runnable runnable) {
