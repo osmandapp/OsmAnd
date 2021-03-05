@@ -2,6 +2,7 @@ package net.osmand.util;
 
 import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
+import net.osmand.data.LatLon;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
@@ -116,6 +117,46 @@ public class Algorithms {
 			}
 		}
 		return def;
+	}
+
+	public static class Point2D {
+		public double x;
+		public double y;
+	}
+
+	public static Point2D[] createPoint2DArrayFromLatLon(List<LatLon> latLons) {
+		Point2D[] array = new Point2D[latLons.size()];
+		for (int i = 0; i < array.length; i++) {
+			Point2D point = new Point2D();
+			point.x = latLons.get(i).getLatitude();
+			point.y = latLons.get(i).getLongitude();
+			array[i] = point;
+		}
+		return array;
+	}
+
+	public static boolean isFirstPolygonInsideTheSecond(Point2D[] first,
+	                                                    Point2D[] second) {
+		for (Point2D point : first) {
+			if (!isPointInsideTheBoundary(point, second)) {
+				// if at least one point is not inside the boundary, return false
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public static boolean isPointInsideTheBoundary(Point2D point,
+	                                               Point2D[] polygon) {
+		boolean result = false;
+		for (int i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
+			if ((polygon[i].y > point.y) != (polygon[j].y > point.y)
+					&& (point.x < (polygon[j].x - polygon[i].x) * (point.y - polygon[i].y) /
+					(polygon[j].y-polygon[i].y) + polygon[i].x)) {
+				result = !result;
+			}
+		}
+		return result;
 	}
 	
 	public static int parseIntSilently(String input, int def) {

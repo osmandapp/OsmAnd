@@ -3,6 +3,7 @@ package net.osmand.map;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.util.Algorithms;
+import net.osmand.util.Algorithms.Point2D;
 
 import java.io.Serializable;
 import java.util.LinkedList;
@@ -187,37 +188,27 @@ public class WorldRegion implements Serializable {
 	}
 
 	public boolean containsRegion(WorldRegion region) {
-		boolean isBoundingAvailable = this.boundingBox != null && region.boundingBox != null;
-		boolean isPolygonsAvailable = this.polygon != null && region.polygon != null;
-
-		boolean containsBox = false;
-		if (isBoundingAvailable) {
-			containsBox = this.boundingBox.contains(region.boundingBox);
-		}
-		if (containsBox && isPolygonsAvailable) {
-			boolean allPointsInsideThePolygon = true;
-			List<LatLon> regionPolygon = region.polygon;
-			for (int i = 0; i < regionPolygon.size(); i++) {
-				allPointsInsideThePolygon = isPointInsideThePolygon(regionPolygon.get(i));
-				if (!allPointsInsideThePolygon) {
-					return false;
-				}
-			}
-			return true;
+		if (containsBoundingBox(region.boundingBox)) {
+			// check polygon only if bounding box match
+			return containsPolygon(region.polygon);
 		}
 		return false;
 	}
 
-	private boolean isPointInsideThePolygon(LatLon test) {
-		boolean result = false;
-		for (int i = 0, j = polygon.size() - 1; i < polygon.size(); j = i++) {
-			if ((polygon.get(i).getLongitude() > test.getLongitude()) != (polygon.get(j).getLongitude() > test.getLongitude()) &&
-					(test.getLatitude() < (polygon.get(j).getLatitude() - polygon.get(i).getLatitude()) * (test.getLongitude() - polygon.get(i).getLongitude())
-							/ (polygon.get(j).getLongitude()-polygon.get(i).getLongitude()) + polygon.get(i).getLatitude())) {
-				result = !result;
-			}
+	private boolean containsBoundingBox(QuadRect rectangle) {
+		if (boundingBox != null && rectangle != null) {
+			return boundingBox.contains(rectangle);
 		}
-		return result;
+		return false;
+	}
+
+	private boolean containsPolygon(List<LatLon> another) {
+		if (polygon != null && another != null) {
+			Point2D[] inner = Algorithms.createPoint2DArrayFromLatLon(polygon);
+			Point2D[] outer = Algorithms.createPoint2DArrayFromLatLon(another);
+			return Algorithms.isFirstPolygonInsideTheSecond(outer, inner);
+		}
+		return false;
 	}
 
 	public boolean isContinent() {
