@@ -5,57 +5,11 @@
 	android:layout_height="match_parent"
 	android:orientation="vertical">
 
-	<RadioGroup
-		android:id="@+id/split_type"
+	<View
 		android:layout_width="match_parent"
-		android:layout_height="@dimen/dialog_button_height"
-		android:layout_marginStart="@dimen/content_padding"
-		android:layout_marginTop="@dimen/text_margin_small"
-		android:layout_marginEnd="@dimen/content_padding"
-		android:layout_marginBottom="@dimen/content_padding_small"
-		android:background="?attr/btn_bg_border_inactive"
-		android:baselineAligned="false"
-		android:orientation="horizontal">
+		android:layout_height="@dimen/content_padding" />
 
-		<RadioButton
-			android:id="@+id/no_split"
-			android:layout_width="0dp"
-			android:layout_height="match_parent"
-			android:layout_weight="1"
-			android:background="?attr/btn_radio_button_left"
-			android:button="@android:color/transparent"
-			android:checked="true"
-			android:foreground="?attr/selectableItemBackground"
-			android:gravity="center"
-			android:text="@string/shared_string_none"
-			android:textColor="@drawable/radio_flat_text_selector_light" />
-
-		<RadioButton
-			android:id="@+id/time_split"
-			android:layout_width="0dp"
-			android:layout_height="match_parent"
-			android:layout_weight="1"
-			android:background="?attr/btn_radio_button_center"
-			android:button="@android:color/transparent"
-			android:foreground="?attr/selectableItemBackground"
-			android:gravity="center"
-			android:text="@string/shared_string_time"
-			android:textColor="@drawable/radio_flat_text_selector_light" />
-
-		<RadioButton
-			android:id="@+id/distance_split"
-			android:layout_width="0dp"
-			android:layout_height="match_parent"
-			android:layout_weight="1"
-			android:background="?attr/btn_radio_button_right"
-			android:button="@android:color/transparent"
-			android:foreground="?attr/selectableItemBackground"
-			android:gravity="center"
-			android:text="@string/distance"
-			android:textColor="@drawable/radio_flat_text_selector_light"
-			android:textSize="@dimen/default_desc_text_size" />
-
-	</RadioGroup>
+	<include layout="@layout/custom_radio_buttons" />
 
 	<LinearLayout
 		android:id="@+id/slider_container"
@@ -77,7 +31,7 @@
 				android:layout_weight="1"
 				android:gravity="start"
 				android:lineSpacingExtra="@dimen/line_spacing_extra_description"
-				android:text="@string/gpx_split_interval"
+				android:text="@string/shared_string_interval"
 				android:textColor="?android:textColorPrimary"
 				android:textSize="@dimen/default_list_text_size" />
 
@@ -143,6 +97,7 @@
 		android:layout_marginStart="@dimen/content_padding"
 		android:layout_marginEnd="@dimen/content_padding"
 		android:layout_marginBottom="@dimen/content_padding"
+		android:layout_marginTop="@dimen/content_padding_half"
 		android:lineSpacingExtra="@dimen/line_spacing_extra_description"
 		android:text="@string/gpx_split_interval_none_descr"
 		android:textColor="?android:textColorSecondary"
