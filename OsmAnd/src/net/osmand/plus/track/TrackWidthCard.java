@@ -45,6 +45,7 @@ public class TrackWidthCard extends BaseCard {
 
 	private GpxWidthAdapter widthAdapter;
 	private View sliderContainer;
+	private RecyclerView groupRecyclerView;
 
 	public TrackWidthCard(MapActivity mapActivity, TrackDrawInfo trackDrawInfo,
 	                      OnNeedScrollListener onNeedScrollListener) {
@@ -65,9 +66,10 @@ public class TrackWidthCard extends BaseCard {
 		updateCustomWidthSlider();
 
 		widthAdapter = new GpxWidthAdapter(appearanceItems);
-		RecyclerView groupRecyclerView = view.findViewById(R.id.recycler_view);
+		groupRecyclerView = view.findViewById(R.id.recycler_view);
 		groupRecyclerView.setAdapter(widthAdapter);
 		groupRecyclerView.setLayoutManager(new LinearLayoutManager(app, RecyclerView.HORIZONTAL, false));
+		scrollMenuToSelectedItem();
 
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.top_divider), isShowDivider());
 	}
@@ -155,7 +157,7 @@ public class TrackWidthCard extends BaseCard {
 					}
 				}
 			});
-			UiUtilities.setupSlider(widthSlider, nightMode, null);
+			UiUtilities.setupSlider(widthSlider, nightMode, null, true);
 			ScrollUtils.addOnGlobalLayoutListener(sliderContainer, new Runnable() {
 				@Override
 				public void run() {
@@ -173,6 +175,11 @@ public class TrackWidthCard extends BaseCard {
 	private void setGpxWidth(String width) {
 		trackDrawInfo.setWidth(width);
 		mapActivity.refreshMap();
+	}
+
+	private void scrollMenuToSelectedItem() {
+		int position = widthAdapter.getItemPosition(selectedItem);
+		groupRecyclerView.scrollToPosition(position);
 	}
 
 	private class GpxWidthAdapter extends RecyclerView.Adapter<TrackAppearanceViewHolder> {
@@ -219,6 +226,7 @@ public class TrackWidthCard extends BaseCard {
 
 					updateHeader();
 					updateCustomWidthSlider();
+					scrollMenuToSelectedItem();
 
 					CardListener listener = getListener();
 					if (listener != null) {
