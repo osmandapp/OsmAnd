@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.ColorUtils;
 import androidx.fragment.app.Fragment;
@@ -34,7 +35,7 @@ import androidx.fragment.app.Fragment;
 public class ColorsCard extends BaseCard implements ColorPickerListener {
 
 	public static final int MAX_CUSTOM_COLORS = 6;
-	public static final int MINIMUM_CONTRAST_RATIO = 3;
+	public static final double MINIMUM_CONTRAST_RATIO = 1.5;
 
 	private static final Log log = PlatformUtil.getLog(TrackColoringCard.class);
 
@@ -136,7 +137,8 @@ public class ColorsCard extends BaseCard implements ColorPickerListener {
 		Drawable transparencyIcon = getTransparencyIcon(app, color);
 		Drawable colorIcon = app.getUIUtilities().getPaintedIcon(R.drawable.bg_point_circle, color);
 		Drawable layeredIcon = UiUtilities.getLayeredIcon(transparencyIcon, colorIcon);
-		double contrastRatio = ColorUtils.calculateContrast(color, ContextCompat.getColor(app, nightMode ? R.color.card_and_list_background_dark : R.color.card_and_list_background_light));
+		int listBgColor = ContextCompat.getColor(app, getListBackgroundColorId());
+		double contrastRatio = ColorUtils.calculateContrast(color, listBgColor);
 		if (contrastRatio < MINIMUM_CONTRAST_RATIO) {
 			backgroundCircle.setBackgroundResource(nightMode ? R.drawable.circle_contour_bg_dark : R.drawable.circle_contour_bg_light);
 		}
@@ -267,5 +269,12 @@ public class ColorsCard extends BaseCard implements ColorPickerListener {
 		} else {
 			colorsListPreference.setStringsListForProfile(appMode, colorNames);
 		}
+	}
+
+	@ColorRes
+	private int getListBackgroundColorId() {
+		return nightMode ?
+				R.color.card_and_list_background_dark :
+				R.color.card_and_list_background_light;
 	}
 }
