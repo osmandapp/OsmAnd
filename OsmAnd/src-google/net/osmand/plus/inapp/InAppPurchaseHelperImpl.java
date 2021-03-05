@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.widget.Toast;
 
-import com.android.billingclient.api.AccountIdentifiers;
 import com.android.billingclient.api.BillingClient;
 import com.android.billingclient.api.BillingResult;
 import com.android.billingclient.api.Purchase;
@@ -200,7 +199,6 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 
 					BillingManager billingManager = getBillingManager();
 					if (billingManager != null) {
-						setupUserInfo(billingManager);
 						billingManager.initiatePurchaseFlow(activity, skuDetails);
 					} else {
 						throw new IllegalStateException("BillingManager disposed");
@@ -228,7 +226,6 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 					}
 					BillingManager billingManager = getBillingManager();
 					if (billingManager != null) {
-						setupUserInfo(billingManager);
 						billingManager.initiatePurchaseFlow(activity, skuDetails);
 					} else {
 						throw new IllegalStateException("BillingManager disposed");
@@ -462,41 +459,25 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 	};
 
 	private void restoreUserInfo(OsmandSettings settings, Purchase purchase) {
-		boolean restored = restoreUserInfoUsingPayload(settings, purchase);
+		boolean restored = restoreUserInfoFromString(settings, purchase.getDeveloperPayload());
 		if (!restored) {
-			restoreUserInfoUsingAccountIdentifiers(settings, purchase);
+			restoreUserInfoFromString(settings, purchase.getAccountIdentifiers().getObfuscatedAccountId());
 		}
 	}
 
-	private boolean restoreUserInfoUsingPayload(OsmandSettings settings, Purchase purchase) {
-		String payload = purchase.getDeveloperPayload();
-		if (Algorithms.isEmpty(payload)) {
+	private boolean restoreUserInfoFromString(OsmandSettings settings, String userInfo) {
+		if (Algorithms.isEmpty(userInfo)) {
 			return false;
 		}
-		String[] arr = payload.split(" ");
-		if (arr.length > 0) {
+		String[] arr = userInfo.split(" ");
+		if (arr.length > 0 && !Algorithms.isEmpty(settings.BILLING_USER_ID.get())) {
 			settings.BILLING_USER_ID.set(arr[0]);
 		}
-		if (arr.length > 1) {
+		if (arr.length > 1 && !Algorithms.isEmpty(settings.BILLING_USER_TOKEN.get())) {
 			token = arr[1];
 			settings.BILLING_USER_TOKEN.set(token);
 		}
 		return needRestoreUserInfo(settings);
-	}
-
-	private void restoreUserInfoUsingAccountIdentifiers(OsmandSettings settings, Purchase purchase) {
-		AccountIdentifiers accountInfo = purchase.getAccountIdentifiers();
-		if (accountInfo != null) {
-			String userId = accountInfo.getObfuscatedAccountId();
-			String userToken = accountInfo.getObfuscatedProfileId();
-			if (Algorithms.isEmpty(settings.BILLING_USER_ID.get()) && !Algorithms.isEmpty(userId)) {
-				settings.BILLING_USER_ID.set(userId);
-			}
-			if (Algorithms.isEmpty(settings.BILLING_USER_TOKEN.get()) && !Algorithms.isEmpty(userToken)) {
-				token = userToken;
-				settings.BILLING_USER_TOKEN.set(userToken);
-			}
-		}
 	}
 
 	private boolean needRestoreUserInfo(OsmandSettings settings) {
@@ -568,7 +549,9 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 					if (AndroidUtils.isActivityNotDestroyed(a) && skuDetails != null) {
 						BillingManager billingManager = getBillingManager();
 						if (billingManager != null) {
-							setupUserInfo(billingManager);
+							OsmandSettings settings = ctx.getSettings();
+							String userCredential = settings.BILLING_USER_ID.get() + settings.BILLING_USER_TOKEN.get();
+							billingManager.setObfuscatedAccountId(userCredential);
 							billingManager.initiatePurchaseFlow(a, skuDetails);
 						} else {
 							throw new IllegalStateException("BillingManager disposed");
@@ -618,12 +601,6 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 		}
 
 		onPurchaseDone(getPurchaseInfo(purchase));
-	}
-
-	private void setupUserInfo(BillingManager billingManager) {
-		OsmandSettings settings = ctx.getSettings();
-		billingManager.setObfuscatedAccountId(settings.BILLING_USER_ID.get());
-		billingManager.setObfuscatedProfileId(settings.BILLING_USER_TOKEN.get());
 	}
 
 	@Override
