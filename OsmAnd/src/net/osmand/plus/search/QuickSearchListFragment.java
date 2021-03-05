@@ -100,7 +100,8 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 							|| sr.objectType == ObjectType.FAVORITE
 							|| sr.objectType == ObjectType.RECENT_OBJ
 							|| sr.objectType == ObjectType.WPT
-							|| sr.objectType == ObjectType.STREET_INTERSECTION) {
+							|| sr.objectType == ObjectType.STREET_INTERSECTION
+							|| sr.objectType == ObjectType.GPX_TRACK) {
 
 						showResult(sr);
 					} else {
@@ -170,7 +171,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 
 	public void showResult(SearchResult searchResult) {
 		showResult = false;
-		if (searchResult.relatedObject instanceof GPXInfo) {
+		if (searchResult.objectType == ObjectType.GPX_TRACK) {
 			showTrackMenuFragment((GPXInfo) searchResult.relatedObject);
 		} else if (searchResult.location != null) {
 			OsmandApplication app = getMyApplication();

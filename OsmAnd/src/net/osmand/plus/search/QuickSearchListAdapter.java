@@ -40,6 +40,7 @@ import net.osmand.plus.search.listitems.QuickSearchListItemType;
 import net.osmand.plus.search.listitems.QuickSearchMoreListItem;
 import net.osmand.plus.search.listitems.QuickSearchSelectAllListItem;
 import net.osmand.search.SearchUICore;
+import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchWord;
@@ -401,7 +402,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	                                          @Nullable View convertView,
 	                                          @NonNull QuickSearchListItem listItem) {
 		SearchResult sr = listItem.getSearchResult();
-		if (sr != null && sr.relatedObject instanceof GPXInfo) {
+		if (sr != null && sr.objectType == ObjectType.GPX_TRACK) {
 			return bindGpxTrack(position, convertView, listItem, (GPXInfo) sr.relatedObject);
 		} else {
 			return bindSearchResult(position, convertView, listItem);

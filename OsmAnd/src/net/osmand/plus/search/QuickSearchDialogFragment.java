@@ -513,8 +513,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						List<HistoryEntry> historyEntries = new ArrayList<HistoryEntry>();
 						List<QuickSearchListItem> selectedItems = historySearchFragment.getListAdapter().getSelectedItems();
 						for (QuickSearchListItem searchListItem : selectedItems) {
-							SearchResult sr = searchListItem.getSearchResult();
-							Object object = sr.object;
+							Object object = searchListItem.getSearchResult().object;;
 							if (object instanceof HistoryEntry) {
 								historyEntries.add((HistoryEntry) object);
 							}

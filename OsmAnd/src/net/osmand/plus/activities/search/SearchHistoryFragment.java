@@ -305,8 +305,6 @@ public class SearchHistoryFragment extends OsmAndListFragment implements SearchA
 			iconId = R.drawable.ic_type_video;
 		} else if (pd.isPhotoNote()) {
 			iconId = R.drawable.ic_type_img;
-		} else if (pd.isGpxFile()) {
-			iconId = R.drawable.ic_action_polygom_dark;
 		} else {
 			iconId = R.drawable.ic_action_street_name;
 		}
