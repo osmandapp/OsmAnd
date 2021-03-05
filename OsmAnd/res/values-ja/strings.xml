@@ -2141,10 +2141,8 @@ POIの更新は利用できません</string>
     <string name="quick_action_duplicate">クイックアクション名の重複</string>
     <string name="quick_action_showhide_favorites_descr">マップ画面でのお気に入り地点の表示/非表示の切替が出来ます。</string>
     <string name="quick_action_showhide_poi_descr">マップ画面でのPOIの表示/非表示の切替が出来ます。</string>
-    <string name="quick_action_showhide_favorites_title">お気に入りの表示/非表示</string>
     <string name="quick_action_favorites_show">お気に入りを表示</string>
     <string name="quick_action_favorites_hide">お気に入りを非表示</string>
-    <string name="quick_action_showhide_poi_title">POIの表示/非表示</string>
     <string name="quick_action_poi_show">%1$sを表示</string>
     <string name="quick_action_poi_hide">%1$sを非表示</string>
     <string name="quick_action_add_category">カテゴリーを追加</string>
@@ -2349,7 +2347,6 @@ POIの更新は利用できません</string>
  • オプションで速度と標高表示ができます
  • 等高線と山陰の表示(要追加プラグイン）
  "</string>
-    <string name="quick_action_showhide_osmbugs_title">OSMメモの表示/非表示</string>
     <string name="quick_action_osmbugs_show">OSMメモを表示</string>
     <string name="quick_action_osmbugs_hide">OSMメモを非表示</string>
     <string name="quick_action_showhide_osmbugs_descr">マップ画面でのOSMメモの表示/非表示を切り替えるボタンです。</string>
@@ -2792,7 +2789,6 @@ POIの更新は利用できません</string>
     <string name="shared_string_swap">入れ替え</string>
     <string name="show_more">さらに表示</string>
     <string name="tracks_on_map">マップ上の経路</string>
-    <string name="quick_action_show_hide_gpx_tracks">GPX経路の表示/非表示</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">マップ上にある選択したGPX経路の表示/非表示を切り替えるボタンです。</string>
     <string name="quick_action_gpx_tracks_hide">経路の非表示</string>
     <string name="quick_action_gpx_tracks_show">経路の表示</string>
@@ -3269,11 +3265,9 @@ POIの更新は利用できません</string>
     <string name="quick_action_contour_lines_descr">マップ上の等高線の表示/非表示を切り替えられるボタンです。</string>
     <string name="quick_action_contour_lines_show">等高線を表示</string>
     <string name="quick_action_contour_lines_hide">等高線を非表示</string>
-    <string name="quick_action_show_hide_contour_lines">等高線を表示/非表示</string>
     <string name="quick_action_hillshade_descr">マップ上の陰影起伏図の表示/非表示を切り替えられるボタンです。</string>
     <string name="quick_action_hillshade_show">陰影起伏図を表示</string>
     <string name="quick_action_hillshade_hide">陰影起伏図を非表示</string>
-    <string name="quick_action_show_hide_hillshade">陰影起伏図の表示/非表示</string>
     <string name="tts_initialization_error">テキスト読み上げエンジンを起動できません。</string>
     <string name="export_profile">プロファイルのエクスポート</string>
     <string name="exported_osmand_profile">OsmAndプロファイル:%1$s</string>
@@ -3497,7 +3491,6 @@ POIの更新は利用できません</string>
     <string name="shared_string_zoom_levels">ズームレベル</string>
     <string name="shared_string_hillshade">陰影起伏図</string>
     <string name="download_slope_maps">勾配</string>
-    <string name="quick_action_show_hide_terrain">地形を表示/非表示</string>
     <string name="quick_action_terrain_hide">地形を非表示</string>
     <string name="quick_action_terrain_show">地形を表示</string>
     <string name="quick_action_terrain_descr">マップ上の地形レイヤーの表示/非表示を切り替えるボタンです。</string>
@@ -3510,7 +3503,6 @@ POIの更新は利用できません</string>
     <string name="shared_string_min">最小</string>
     <string name="quick_action_transport_hide">公共交通機関を非表示</string>
     <string name="quick_action_transport_show">公共交通機関を表示</string>
-    <string name="quick_action_show_hide_transport">公共交通機関の表示/非表示</string>
     <string name="quick_action_transport_descr">マップ内公共交通機関の表示/非表示を切り替えるボタンです。</string>
     <string name="create_edit_poi">POIの作成/編集</string>
     <string name="parking_positions">駐車位置</string>
@@ -3737,7 +3729,6 @@ POIの更新は利用できません</string>
     <string name="vessel_height_warning">低い橋を避けるために船の高さを調整できます。橋が可動式の場合は、開いた状態の高さが参照されます。</string>
     <string name="vessel_height_limit_description">低い橋を避けるために船の高さを設定します。注：橋が可動式の場合は、開いた状態の高さが参照されます。</string>
     <string name="vessel_width_limit_description">狭い橋を避けるために船の幅を設定します</string>
-    <string name="quick_action_showhide_mapillary_title">Mapillaryの表示切替</string>
     <string name="quick_action_mapillary_hide">Mapillaryを非表示</string>
     <string name="quick_action_mapillary_show">Mapillaryを表示</string>
     <string name="quick_action_showhide_mapillary_descr">マップ上のMapillaryレイヤーの表示/非表示を切り替えるトグルボタンです。</string>

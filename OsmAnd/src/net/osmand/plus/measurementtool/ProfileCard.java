@@ -49,7 +49,7 @@ public class ProfileCard extends BaseCard {
 		for (int i = 0; i < modes.size(); i++) {
 			ApplicationMode mode = modes.get(i);
 			LinearLayout container = view.findViewById(R.id.content_container);
-			Drawable icon = app.getUIUtilities().getIcon(mode.getIconRes(), mode.getIconColorInfo().getColor(nightMode));
+			Drawable icon = app.getUIUtilities().getPaintedIcon(mode.getIconRes(), mode.getProfileColor(nightMode));
 			String title = mode.toHumanString();
 			View.OnClickListener onClickListener = new View.OnClickListener() {
 				@Override

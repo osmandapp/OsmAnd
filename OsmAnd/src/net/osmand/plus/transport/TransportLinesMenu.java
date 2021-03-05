@@ -80,8 +80,7 @@ public class TransportLinesMenu {
 
 		final boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		final Context themedCtx = UiUtilities.getThemedContext(mapActivity, nightMode);
-		final int profileColorResId = appMode.getIconColorInfo().getColor(nightMode);
-		final int profileColor = ContextCompat.getColor(themedCtx, profileColorResId);
+		final int profileColor = appMode.getProfileColor(nightMode);
 
 		final AlertDialog.Builder b = new AlertDialog.Builder(themedCtx);
 		b.setTitle(themedCtx.getString(R.string.rendering_category_transport));
@@ -123,7 +122,7 @@ public class TransportLinesMenu {
 				View v = super.getView(position, convertView, parent);
 				final ImageView icon = (ImageView) v.findViewById(R.id.icon);
 				if (checkedItems[position]) {
-					icon.setImageDrawable(app.getUIUtilities().getIcon(iconIds[position], profileColorResId));
+					icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(iconIds[position], profileColor));
 				} else {
 					icon.setImageDrawable(app.getUIUtilities().getThemedIcon(iconIds[position]));
 				}
@@ -138,7 +137,7 @@ public class TransportLinesMenu {
 					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 						checkedItems[position] = isChecked;
 						if (checkedItems[position]) {
-							icon.setImageDrawable(app.getUIUtilities().getIcon(iconIds[position], profileColorResId));
+							icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(iconIds[position], profileColor));
 						} else {
 							icon.setImageDrawable(app.getUIUtilities().getThemedIcon(iconIds[position]));
 						}

@@ -2113,10 +2113,8 @@
     <string name="quick_action_duplicate">El nom de l\'acció directa està duplicat</string>
     <string name="quick_action_showhide_favorites_descr">Un commutador per mostrar o amagar els punts Preferits en el mapa.</string>
     <string name="quick_action_showhide_poi_descr">Un commutador per mostrar o amagar els PDIs en el mapa.</string>
-    <string name="quick_action_showhide_favorites_title">Mostra/amaga Preferits</string>
     <string name="quick_action_favorites_show">Mostra Preferits</string>
     <string name="quick_action_favorites_hide">Amaga Preferits</string>
-    <string name="quick_action_showhide_poi_title">Mostra/amaga PDI</string>
     <string name="quick_action_poi_show">Mostra %1$s</string>
     <string name="quick_action_poi_hide">Amaga %1$s</string>
     <string name="quick_action_add_category">Afegeix una categoria</string>
@@ -2382,7 +2380,6 @@
     <string name="srtm_purchase_header">Compreu i instal·leu el connector \'Corbes de nivell\' per visualitzar una gradació vertical d\'àrees.</string>
     <string name="srtm_menu_download_descr">Baixeu el mapa \'Corbes de nivell\' per utilitzar-les en aquesta zona.</string>
     <string name="hide_from_zoom_level">Amaga començant pel nivell d\'escala</string>
-    <string name="quick_action_showhide_osmbugs_title">Mostra o amaga notes OSM</string>
     <string name="quick_action_osmbugs_show">Mostra notes OSM</string>
     <string name="quick_action_osmbugs_hide">Amaga notes OSM</string>
     <string name="quick_action_showhide_osmbugs_descr">Botó que mostra o amaga notes OSM al mapa.</string>
@@ -2839,7 +2836,6 @@
     <string name="step_by_step">Totes les cruïlles</string>
     <string name="routeInfo_road_types_name">Tipus de carretera</string>
     <string name="exit_at">Sortida a</string>
-    <string name="quick_action_show_hide_gpx_tracks">Mostra/amaga traces</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Un botó per mostrar o amagar les traces seleccionades al mapa.</string>
     <string name="quick_action_gpx_tracks_hide">Amaga les traces</string>
     <string name="quick_action_gpx_tracks_show">Mostra les traces</string>
@@ -3215,11 +3211,9 @@
     <string name="quick_action_contour_lines_descr">Botó per a mostrar o amagar les corbes de nivell en el mapa.</string>
     <string name="quick_action_contour_lines_show">Mostra les corbes de nivell</string>
     <string name="quick_action_contour_lines_hide">Amaga les corbes de nivell</string>
-    <string name="quick_action_show_hide_contour_lines">Mostra/amaga les corbes de nivell</string>
     <string name="quick_action_hillshade_descr">Botó per a mostrar o amagar l\'ombrejat de relleu al mapa.</string>
     <string name="quick_action_hillshade_show">Mostra l\'ombrejat de relleu</string>
     <string name="quick_action_hillshade_hide">Amaga l\'ombrejat de relleu</string>
-    <string name="quick_action_show_hide_hillshade">Mostra/amaga l\'ombrejat de relleu</string>
     <string name="tts_initialization_error">No es pot iniciar el sistema text a veu.</string>
     <string name="utm_format_descr">L\'OsmAnd utilitza l\'estàndard UTM, que és molt similar però no idèntic al format UTM NATO.</string>
     <string name="coordinates_format_info">El format seleccionat s\'aplicarà a tota l\'aplicació.</string>
@@ -3463,7 +3457,6 @@
     <string name="quick_action_terrain_descr">Un botó per mostrar o amagar la capa de terreny al mapa.</string>
     <string name="quick_action_terrain_show">Mostra el terreny</string>
     <string name="quick_action_terrain_hide">Amaga el terreny</string>
-    <string name="quick_action_show_hide_terrain">Mostra o amaga el relleu</string>
     <string name="shared_string_hillshade">Ombrejat del relleu</string>
     <string name="shared_string_legend">Llegenda</string>
     <string name="shared_string_zoom_levels">Nivells de zoom</string>
@@ -3560,7 +3553,6 @@
     <string name="vessel_height_warning">Podeu indicar l\'alçada del vaixell per evitar ponts baixos. Penseu que si el pont és mòbil, li aplicarem l\'alçada de quan estigui obert.</string>
     <string name="vessel_height_limit_description">Indiqueu l\'alçada del vaixell per evitar ponts baixos. Penseu que si el pont és mòbil, li aplicarem l\'alçada de quan estigui obert.</string>
     <string name="vessel_width_limit_description">Indiqueu l\'amplada del vaixell per evitar ponts ajustats</string>
-    <string name="quick_action_showhide_mapillary_title">Mostra/amaga Mapil·lary</string>
     <string name="quick_action_mapillary_hide">Amaga Mapillary</string>
     <string name="quick_action_mapillary_show">Mostra Mapillary</string>
     <string name="quick_action_showhide_mapillary_descr">Un commutador per mostrar o amagar la capa de Mapillary al mapa.</string>
@@ -3637,7 +3629,6 @@
     <string name="osmand_purchases_item">Compres OsmAnd</string>
     <string name="navigation_profiles_item">Perfils de navegació</string>
     <string name="quick_action_transport_hide">Amaga el transport públic</string>
-    <string name="quick_action_show_hide_transport">Mostra o amaga el transport públic</string>
     <string name="quick_action_transport_descr">Botó que mostra o oculta el transport públic al mapa.</string>
     <string name="create_edit_poi">Crea o edita PDI</string>
     <string name="parking_positions">Posicions d’aparcament</string>

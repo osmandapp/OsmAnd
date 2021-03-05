@@ -55,7 +55,7 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 				icon = getContentIcon(R.drawable.ic_action_split_interval);
 			} else {
 				description = routeAppMode.toHumanString();
-				icon = getIcon(routeAppMode.getIconRes(), routeAppMode.getIconColorInfo().getColor(nightMode));
+				icon = getPaintedIcon(routeAppMode.getIconRes(), routeAppMode.getProfileColor(nightMode));
 			}
 		} else {
 			description = getString(R.string.shared_string_undefined);

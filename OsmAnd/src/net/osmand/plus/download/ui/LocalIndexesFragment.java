@@ -516,13 +516,13 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				.setTitleId(R.string.shared_string_refresh, getContext())
 				.setIcon(R.drawable.ic_action_refresh_dark)
 				.setListener(listener)
-				.setColor(iconColorResId)
+				.setColor(getContext(), iconColorResId)
 				.createItem());
 		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.shared_string_delete, getContext())
 				.setIcon(R.drawable.ic_action_delete_dark)
 				.setListener(listener)
-				.setColor(iconColorResId)
+				.setColor(getContext(), iconColorResId)
 				.createItem());
 		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.local_index_mi_backup, getContext())
@@ -554,7 +554,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 			}
 			if (contextMenuItem.getIcon() != -1) {
-				Drawable icMenuItem = getMyApplication().getUIUtilities().getIcon(contextMenuItem.getIcon(), contextMenuItem.getColorRes());
+				Drawable icMenuItem = getMyApplication().getUIUtilities().getPaintedIcon(contextMenuItem.getIcon(), contextMenuItem.getColor());
 				item.setIcon(icMenuItem);
 			}
 

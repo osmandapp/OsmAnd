@@ -6,13 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-import androidx.core.widget.CompoundButtonCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.IndexConstants;
@@ -61,12 +54,19 @@ import net.osmand.plus.settings.fragments.ExportSettingsAdapter.OnItemSelectedLi
 import net.osmand.util.Algorithms;
 import net.osmand.view.ThreeStateCheckbox;
 
-import org.apache.commons.logging.Log;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.core.widget.CompoundButtonCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import static net.osmand.view.ThreeStateCheckbox.State.CHECKED;
 import static net.osmand.view.ThreeStateCheckbox.State.MISC;
@@ -306,7 +306,10 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			}
 			int profileIconRes = AndroidUtils.getDrawableId(app, modeBean.iconName);
 			ProfileIconColors iconColor = modeBean.iconColor;
-			builder.setIcon(uiUtilities.getIcon(profileIconRes, iconColor.getColor(nightMode)));
+			Integer customIconColor = modeBean.customIconColor;
+			int actualIconColor = customIconColor != null ?
+					customIconColor : ContextCompat.getColor(app, iconColor.getColor(nightMode));
+			builder.setIcon(uiUtilities.getPaintedIcon(profileIconRes, actualIconColor));
 		} else if (object instanceof QuickAction) {
 			QuickAction quickAction = (QuickAction) object;
 			builder.setTitle(quickAction.getName(app));

@@ -2093,10 +2093,8 @@
     <string name="quick_actions_delete">Вилучити дію</string>
     <string name="quick_actions_delete_text">Ви впевнені, що хочете вилучити дію „%s“?</string>
     <string name="favorite_empty_place_name">Місце</string>
-    <string name="quick_action_showhide_favorites_title">Показати/приховати Закладки</string>
     <string name="quick_action_favorites_show">Показати Закладки</string>
     <string name="quick_action_favorites_hide">Приховати Закладки</string>
-    <string name="quick_action_showhide_poi_title">Показати/приховати POI</string>
     <string name="quick_action_poi_show">Показати %1$s</string>
     <string name="quick_action_poi_hide">Приховати %1$s</string>
     <string name="quick_action_add_category">Додати категорію</string>
@@ -2210,7 +2208,6 @@
     <string name="nothing_found">Нічого не знайдено</string>
     <string name="private_access_routing_req">Місце призначення розташовано в області з приватним доступом. Дозволити доступ до приватних доріг у цій подорожі\?</string>
     <string name="nothing_found_descr">Змініть пошуковий запит або ж розширте пошуковий радіус.</string>
-    <string name="quick_action_showhide_osmbugs_title">Показати/приховати примітки OSM</string>
     <string name="quick_action_osmbugs_show">Показати примітки OSM</string>
     <string name="quick_action_osmbugs_hide">Приховати примітки OSM</string>
     <string name="quick_action_showhide_osmbugs_descr">Натискання на кнопку дії покаже чи приховає примітки OSM на мапі.</string>
@@ -2804,7 +2801,6 @@
     <string name="shared_string_swap">Поміняти</string>
     <string name="show_more">Показати більше</string>
     <string name="tracks_on_map">Показані треки</string>
-    <string name="quick_action_show_hide_gpx_tracks">Показати/Приховати треки</string>
     <string name="quick_action_gpx_tracks_hide">Приховати треки</string>
     <string name="quick_action_gpx_tracks_show">Показати треки</string>
     <string name="add_destination_query">Спершу додайте пункт призначення</string>
@@ -3267,11 +3263,9 @@
     <string name="quick_action_contour_lines_descr">Увімк/вимк показ горизонталей.</string>
     <string name="quick_action_contour_lines_show">Показати горизонталі</string>
     <string name="quick_action_contour_lines_hide">Сховати горизонталі</string>
-    <string name="quick_action_show_hide_contour_lines">Показати/приховати горизонталі</string>
     <string name="quick_action_hillshade_descr">Кнопка, що показує чи приховує горизонталі на мапі.</string>
     <string name="quick_action_hillshade_show">Показати затемнення рельєфу</string>
     <string name="quick_action_hillshade_hide">Приховати затемнення рельєфу</string>
-    <string name="quick_action_show_hide_hillshade">Показати/приховати затемнення рельєфу</string>
     <string name="tts_initialization_error">Не вдається запустити рушій мовлення.</string>
     <string name="simulate_your_location_gpx_descr">Відтворити свою позицію за допомогою записаного треку GPX.</string>
     <string name="export_profile">Експорт профілю</string>
@@ -3496,7 +3490,6 @@
     <string name="shared_string_hillshade">Пагорб</string>
     <string name="n_items_of_z">%1$s з %2$s</string>
     <string name="download_slope_maps">Схили</string>
-    <string name="quick_action_show_hide_terrain">Показати чи приховати рельєф</string>
     <string name="quick_action_terrain_hide">Сховати місцевість</string>
     <string name="quick_action_terrain_show">Показати місцевість</string>
     <string name="quick_action_terrain_descr">Кнопка для відображення або приховування шару місцевості на мапі.</string>
@@ -3612,7 +3605,6 @@
     <string name="parking_positions">Розташування припаркованого авто</string>
     <string name="quick_action_transport_hide">Приховати громадський транспорт</string>
     <string name="quick_action_transport_show">Показати громадський транспорт</string>
-    <string name="quick_action_show_hide_transport">Показати чи приховати громадський транспорт</string>
     <string name="quick_action_transport_descr">Кнопка показу або приховування громадського транспорту на мапі.</string>
     <string name="create_edit_poi">Створити чи змінити POI</string>
     <string name="add_edit_favorite">Додати чи змінити закладку</string>
@@ -3681,7 +3673,6 @@
     <string name="vessel_height_warning">Ви можете встановити висоту судна, щоб уникнути низьких мостів. Майте на увазі, якщо міст рухомий, використовуватиметься його висота у відкритому стані.</string>
     <string name="vessel_height_limit_description">Встановіть висоту судна, щоб уникнути низьких мостів. Майте на увазі, якщо міст рухомий, використовуватиметься його висота у відкритому стані.</string>
     <string name="vessel_width_limit_description">Встановіть ширину судна, щоб уникнути вузьких мостів</string>
-    <string name="quick_action_showhide_mapillary_title">Увімкнути/вимкнути Mapillary</string>
     <string name="quick_action_mapillary_hide">Вимкнути Mapillary</string>
     <string name="quick_action_mapillary_show">Показати Mapillary</string>
     <string name="quick_action_showhide_mapillary_descr">Перемикач показує/приховує шар Mapillary на мапі.</string>

@@ -7,8 +7,8 @@ import androidx.annotation.NonNull;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import net.osmand.plus.onlinerouting.engine.EngineType;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
+import net.osmand.plus.onlinerouting.engine.EngineType;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONArray;
@@ -60,10 +60,10 @@ public class OnlineRoutingUtils {
 		for (int i = 0; i < itemsJson.length(); i++) {
 			JSONObject object = itemsJson.getJSONObject(i);
 			if (object.has(TYPE) && object.has(PARAMS)) {
-				EngineType type = EngineType.getTypeByName(object.getString(TYPE));
+				OnlineRoutingEngine type = EngineType.getTypeByName(object.getString(TYPE));
 				String paramsString = object.getString(PARAMS);
 				HashMap<String, String> params = gson.fromJson(paramsString, typeToken);
-				OnlineRoutingEngine engine = OnlineRoutingFactory.createEngine(type, params);
+				OnlineRoutingEngine engine = type.newInstance(params);
 				if (!Algorithms.isEmpty(engine.getStringKey())) {
 					engines.add(engine);
 				}
@@ -82,7 +82,7 @@ public class OnlineRoutingUtils {
 				continue;
 			}
 			JSONObject jsonObject = new JSONObject();
-			jsonObject.put(TYPE, engine.getType().name());
+			jsonObject.put(TYPE, engine.getTypeName());
 			jsonObject.put(PARAMS, gson.toJson(engine.getParams(), type));
 			jsonArray.put(jsonObject);
 		}

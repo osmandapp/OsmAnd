@@ -360,7 +360,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	@Override
 	public void onColorSelected(Integer prevColor, int newColor) {
 		if (prevColor != null) {
-			List<Integer> customColors = ColorsCard.getCustomColors(app);
+			List<Integer> customColors = ColorsCard.getCustomColors(app.getSettings().CUSTOM_TRACK_COLORS);
 			int index = customColors.indexOf(prevColor);
 			if (index != ColorsCard.INVALID_VALUE) {
 				saveCustomColorsToTracks(prevColor, newColor);
@@ -670,7 +670,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			List<Integer> colors = getTrackColors();
-			colorsCard = new ColorsCard(mapActivity, trackDrawInfo.getColor(), this, colors);
+			colorsCard = new ColorsCard(mapActivity, trackDrawInfo.getColor(), this, colors, app.getSettings().CUSTOM_TRACK_COLORS, null);
 			colorsCard.setListener(this);
 			cardsContainer.addView(colorsCard.build(mapActivity));
 		}
