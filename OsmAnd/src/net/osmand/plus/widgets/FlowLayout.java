@@ -12,22 +12,6 @@ public class FlowLayout extends ViewGroup {
 	private int line_height;
 	private boolean horizontalAutoSpacing;
 
-	public static class LayoutParams extends ViewGroup.LayoutParams {
-
-		final int horizontalSpacing;
-		final int verticalSpacing;
-
-		/**
-		 * @param horizontalSpacing Pixels between items, horizontally
-		 * @param verticalSpacing   Pixels between items, vertically
-		 */
-		public LayoutParams(int horizontalSpacing, int verticalSpacing) {
-			super(0, 0);
-			this.horizontalSpacing = horizontalSpacing;
-			this.verticalSpacing = verticalSpacing;
-		}
-	}
-
 	public FlowLayout(Context context) {
 		super(context);
 	}
@@ -36,7 +20,7 @@ public class FlowLayout extends ViewGroup {
 		super(context, attrs);
 	}
 
-	// If true available horizontal space is added to items horizontalSpacing.
+	// If true, available horizontal space is added to items horizontalSpacing to fit the screen width.
 	public void setHorizontalAutoSpacing(boolean horizontalAutoSpacing) {
 		this.horizontalAutoSpacing = horizontalAutoSpacing;
 	}
@@ -100,56 +84,61 @@ public class FlowLayout extends ViewGroup {
 	protected void onLayout(boolean changed, int l, int t, int r, int b) {
 		final int count = getChildCount();
 		final int width = r - l;
-		int freeSizeSpacing;
 		boolean isLayoutRtl = AndroidUtils.isLayoutRtl(getContext());
 		int horizontalPosition = isLayoutRtl ? width - getPaddingRight() : getPaddingLeft();
 		int verticalPosition = getPaddingTop();
 		for (int i = 0; i < count; i++) {
 			final View child = getChildAt(i);
 			if (child.getVisibility() != GONE) {
+				final LayoutParams lp = (LayoutParams) child.getLayoutParams();
 				final int childWidth = child.getMeasuredWidth();
 				final int childHeight = child.getMeasuredHeight();
-				final LayoutParams lp = (LayoutParams) child.getLayoutParams();
-				int itemsCount = width / childWidth;
-				if (itemsCount > 1) {
-					freeSizeSpacing = width % childWidth / (itemsCount - 1);
-				} else {
-					freeSizeSpacing = width % childWidth / itemsCount;
-				}
-				if (horizontalAutoSpacing) {
-					if (isLayoutRtl) {
-						if (horizontalPosition - childWidth < getPaddingLeft()) {
-							horizontalPosition = width - getPaddingRight();
-							verticalPosition += line_height;
-						}
-						child.layout(horizontalPosition - childWidth, verticalPosition, horizontalPosition, verticalPosition + childHeight);
-						horizontalPosition -= childWidth + lp.horizontalSpacing + freeSizeSpacing;
-					} else {
-						if (horizontalPosition + childWidth > width) {
-							horizontalPosition = getPaddingLeft();
-							verticalPosition += line_height;
-						}
-						child.layout(horizontalPosition, verticalPosition, horizontalPosition + childWidth, verticalPosition + childHeight);
-						horizontalPosition += childWidth + lp.horizontalSpacing + freeSizeSpacing;
+				int freeSizeSpacing = getFreeSizeSpacing(width, lp, childWidth);
+				if (isLayoutRtl) {
+					if (horizontalPosition - childWidth < getPaddingLeft()) {
+						horizontalPosition = width - getPaddingRight();
+						verticalPosition += line_height;
 					}
+					child.layout(horizontalPosition - childWidth, verticalPosition, horizontalPosition, verticalPosition + childHeight);
+					horizontalPosition -= childWidth + freeSizeSpacing;
 				} else {
-					if (isLayoutRtl) {
-						if (horizontalPosition - childWidth < l) {
-							horizontalPosition = width - getPaddingRight();
-							verticalPosition += line_height;
-						}
-						child.layout(horizontalPosition - childWidth, verticalPosition, horizontalPosition, verticalPosition + childHeight);
-						horizontalPosition -= childWidth + lp.horizontalSpacing;
-					} else {
-						if (horizontalPosition + childWidth > width) {
-							horizontalPosition = getPaddingLeft();
-							verticalPosition += line_height;
-						}
-						child.layout(horizontalPosition, verticalPosition, horizontalPosition + childWidth, verticalPosition + childHeight);
-						horizontalPosition += childWidth + lp.horizontalSpacing;
+					if (horizontalPosition + childWidth > width) {
+						horizontalPosition = getPaddingLeft();
+						verticalPosition += line_height;
 					}
+					child.layout(horizontalPosition, verticalPosition, horizontalPosition + childWidth, verticalPosition + childHeight);
+					horizontalPosition += childWidth + freeSizeSpacing;
 				}
 			}
+		}
+	}
+
+	private int getFreeSizeSpacing(int width, LayoutParams lp, int childWidth) {
+		int freeSizeSpacing;
+		int itemsCount = width / (childWidth + lp.horizontalSpacing);
+		if (itemsCount > 1 && horizontalAutoSpacing) {
+			freeSizeSpacing = (width % childWidth / (itemsCount - 1)) + lp.horizontalSpacing;
+		} else if (!horizontalAutoSpacing) {
+			freeSizeSpacing = lp.horizontalSpacing;
+		} else {
+			freeSizeSpacing = (width % childWidth / itemsCount) + lp.horizontalSpacing;
+		}
+		return freeSizeSpacing;
+	}
+
+	public static class LayoutParams extends ViewGroup.LayoutParams {
+
+		final int horizontalSpacing;
+		final int verticalSpacing;
+
+		/**
+		 * @param horizontalSpacing Pixels between items, horizontally
+		 * @param verticalSpacing   Pixels between items, vertically
+		 */
+		public LayoutParams(int horizontalSpacing, int verticalSpacing) {
+			super(0, 0);
+			this.horizontalSpacing = horizontalSpacing;
+			this.verticalSpacing = verticalSpacing;
 		}
 	}
 }

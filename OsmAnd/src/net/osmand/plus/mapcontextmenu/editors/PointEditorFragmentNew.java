@@ -645,7 +645,8 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 			horizontalSelectionAdapter.notifyDataSetChanged();
 			iconCategoriesRecyclerView.smoothScrollToPosition(horizontalSelectionAdapter.getItemPositionByTitle(selectedIconCategory));
 			for (String name : iconNameList) {
-				selectIcon.addView(createIconItemView(name, selectIcon), new FlowLayout.LayoutParams(0, 0));
+				int minimalPaddingBetweenIcon = app.getResources().getDimensionPixelSize(R.dimen.favorites_select_icon_button_right_padding);
+				selectIcon.addView(createIconItemView(name, selectIcon), new FlowLayout.LayoutParams(minimalPaddingBetweenIcon, 0));
 				selectIcon.setHorizontalAutoSpacing(true);
 			}
 		}
