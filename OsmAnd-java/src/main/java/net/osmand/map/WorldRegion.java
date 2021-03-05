@@ -42,6 +42,7 @@ public class WorldRegion implements Serializable {
 	protected boolean regionMapDownload;
 	protected LatLon regionCenter;
 	protected QuadRect boundingBox;
+	protected List<LatLon> polygon;
 
 	public static class RegionParams {
 		protected String regionLeftHandDriving;
@@ -186,10 +187,37 @@ public class WorldRegion implements Serializable {
 	}
 
 	public boolean containsRegion(WorldRegion region) {
-		if (this.boundingBox != null && region.boundingBox != null) {
-			return this.boundingBox.contains(region.boundingBox);
+		boolean isBoundingAvailable = this.boundingBox != null && region.boundingBox != null;
+		boolean isPolygonsAvailable = this.polygon != null && region.polygon != null;
+
+		boolean containsBox = false;
+		if (isBoundingAvailable) {
+			containsBox = this.boundingBox.contains(region.boundingBox);
+		}
+		if (containsBox && isPolygonsAvailable) {
+			boolean allPointsInsideThePolygon = true;
+			List<LatLon> regionPolygon = region.polygon;
+			for (int i = 0; i < regionPolygon.size(); i++) {
+				allPointsInsideThePolygon = isPointInsideThePolygon(regionPolygon.get(i));
+				if (!allPointsInsideThePolygon) {
+					return false;
+				}
+			}
+			return true;
 		}
 		return false;
+	}
+
+	private boolean isPointInsideThePolygon(LatLon test) {
+		boolean result = false;
+		for (int i = 0, j = polygon.size() - 1; i < polygon.size(); j = i++) {
+			if ((polygon.get(i).getLongitude() > test.getLongitude()) != (polygon.get(j).getLongitude() > test.getLongitude()) &&
+					(test.getLatitude() < (polygon.get(j).getLatitude() - polygon.get(i).getLatitude()) * (test.getLongitude() - polygon.get(i).getLongitude())
+							/ (polygon.get(j).getLongitude()-polygon.get(i).getLongitude()) + polygon.get(i).getLatitude())) {
+				result = !result;
+			}
+		}
+		return result;
 	}
 
 	public boolean isContinent() {

@@ -436,7 +436,7 @@ public class OsmandRegions {
 			cx /= object.getPointsLength();
 			cy /= object.getPointsLength();
 			rd.regionCenter = new LatLon(MapUtils.get31LatitudeY((int) cy), MapUtils.get31LongitudeX((int) cx));
-			rd.boundingBox = findBoundingBox(object);
+			findBoundaries(rd, object);
 		}
 
 		rd.regionParentFullName = mapIndexFields.get(mapIndexFields.parentFullName, object);
@@ -462,13 +462,15 @@ public class OsmandRegions {
 		return rd;
 	}
 
-	private QuadRect findBoundingBox(BinaryMapDataObject object) {
+	private void findBoundaries(WorldRegion rd, BinaryMapDataObject object) {
 		if (object.getPointsLength() == 0) {
-			return new QuadRect(0, 0, 0, 0);
+			return;
 		}
 
+		List<LatLon> polygon = new ArrayList<>();
 		double currentX = object.getPoint31XTile(0);
 		double currentY = object.getPoint31YTile(0);
+		polygon.add(new LatLon(currentX, currentY));
 		double minX = currentX;
 		double maxX = currentX;
 		double minY = currentY;
@@ -476,8 +478,10 @@ public class OsmandRegions {
 
 		if (object.getPointsLength() > 1) {
 			for (int i = 1; i < object.getPointsLength(); i++) {
-				currentX = object.getPoint31XTile(i);
-				currentY = object.getPoint31YTile(i);
+				int tileX = object.getPoint31XTile(i);
+				int tileY = object.getPoint31YTile(i);
+				currentX = tileX;
+				currentY = tileY;
 				if (currentX > maxX) {
 					maxX = currentX;
 				} else if (currentX < minX) {
@@ -488,6 +492,7 @@ public class OsmandRegions {
 				} else if (currentY < minY) {
 					minY = currentY;
 				}
+				polygon.add(new LatLon(currentX, currentY));
 			}
 		}
 
@@ -496,7 +501,8 @@ public class OsmandRegions {
 		double revertedMinY = MapUtils.get31LatitudeY((int) maxY);
 		double revertedMaxY = MapUtils.get31LatitudeY((int) minY);
 
-		return new QuadRect(minX, revertedMinY, maxX, revertedMaxY);
+		rd.boundingBox = new QuadRect(minX, revertedMinY, maxX, revertedMaxY);
+		rd.polygon = polygon;
 	}
 
 	private String getSearchIndex(BinaryMapDataObject object) {
