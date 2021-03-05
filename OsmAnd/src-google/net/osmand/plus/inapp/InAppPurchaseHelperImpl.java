@@ -550,7 +550,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 						BillingManager billingManager = getBillingManager();
 						if (billingManager != null) {
 							OsmandSettings settings = ctx.getSettings();
-							String userCredential = settings.BILLING_USER_ID.get() + settings.BILLING_USER_TOKEN.get();
+							String userCredential = settings.BILLING_USER_ID.get() + " " + settings.BILLING_USER_TOKEN.get();
 							billingManager.setObfuscatedAccountId(userCredential);
 							billingManager.initiatePurchaseFlow(a, skuDetails);
 						} else {
