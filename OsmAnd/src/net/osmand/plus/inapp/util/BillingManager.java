@@ -2,6 +2,7 @@ package net.osmand.plus.inapp.util;
 
 import android.app.Activity;
 import android.content.Context;
+import android.text.TextUtils;
 
 import com.android.billingclient.api.AcknowledgePurchaseParams;
 import com.android.billingclient.api.AcknowledgePurchaseResponseListener;
@@ -22,8 +23,6 @@ import com.android.billingclient.api.SkuDetailsParams;
 import com.android.billingclient.api.SkuDetailsResponseListener;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -59,6 +58,8 @@ public class BillingManager implements PurchasesUpdatedListener {
 
 	// Public key for verifying signature, in base64 encoding
 	private String mSignatureBase64;
+	private String mUserId;
+	private String mUserToken;
 
 	private final BillingUpdatesListener mBillingUpdatesListener;
 	private final List<Purchase> mPurchases = new ArrayList<>();
@@ -146,11 +147,14 @@ public class BillingManager implements PurchasesUpdatedListener {
 			@Override
 			public void run() {
 				LOG.debug("Launching in-app purchase flow. Replace old SKU? " + (oldSku != null && purchaseToken != null));
-				OsmandSettings settings = getSettings(activity);
 				BillingFlowParams.Builder paramsBuilder = BillingFlowParams.newBuilder()
-						.setSkuDetails(skuDetails)
-						.setObfuscatedAccountId(settings.BILLING_USER_ID.get())
-						.setObfuscatedProfileId(settings.BILLING_USER_TOKEN.get());
+						.setSkuDetails(skuDetails);
+				if (!TextUtils.isEmpty(mUserId)) {
+					paramsBuilder.setObfuscatedAccountId(mUserId);
+				}
+				if (!TextUtils.isEmpty(mUserToken)) {
+					paramsBuilder.setObfuscatedProfileId(mUserToken);
+				}
 				if (oldSku != null && purchaseToken != null) {
 					paramsBuilder.setOldSku(oldSku, purchaseToken);
 				}
@@ -401,6 +405,14 @@ public class BillingManager implements PurchasesUpdatedListener {
 		});
 	}
 
+	public void setUserId(String userId) {
+		mUserId = userId;
+	}
+
+	public void setUserToken(String userToken) {
+		mUserToken = userToken;
+	}
+
 	private void executeServiceRequest(Runnable runnable) {
 		if (mIsServiceConnected) {
 			runnable.run();
@@ -412,10 +424,6 @@ public class BillingManager implements PurchasesUpdatedListener {
 
 	private boolean verifyValidSignature(String signedData, String signature) {
 		return Security.verifyPurchase(mSignatureBase64, signedData, signature);
-	}
-
-	private OsmandSettings getSettings(Activity activity) {
-		return  ((OsmandApplication) activity.getApplication()).getSettings();
 	}
 }
 
