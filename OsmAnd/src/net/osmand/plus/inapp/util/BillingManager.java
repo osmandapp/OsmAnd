@@ -145,12 +145,13 @@ public class BillingManager implements PurchasesUpdatedListener {
 		Runnable purchaseFlowRequest = new Runnable() {
 			@Override
 			public void run() {
+				LOG.debug("Launching in-app purchase flow. Replace old SKU? " + (oldSku != null && purchaseToken != null));
 				OsmandSettings settings = getSettings(activity);
 				BillingFlowParams.Builder paramsBuilder = BillingFlowParams.newBuilder()
 						.setSkuDetails(skuDetails)
 						.setObfuscatedAccountId(settings.BILLING_USER_ID.get())
 						.setObfuscatedProfileId(settings.BILLING_USER_TOKEN.get());
-				if (oldSku != null) {
+				if (oldSku != null && purchaseToken != null) {
 					paramsBuilder.setOldSku(oldSku, purchaseToken);
 				}
 				BillingFlowParams purchaseParams = paramsBuilder.build();
