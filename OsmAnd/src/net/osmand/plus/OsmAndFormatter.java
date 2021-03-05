@@ -121,13 +121,19 @@ public class OsmAndFormatter {
 	}
 
 	public static String getFormattedTimeInterval(OsmandApplication app, double interval) {
+		String units;
+		double intervalInUnits;
 		if (interval < 60) {
-			return interval + " " + app.getString(R.string.int_seconds);
+			units = app.getString(R.string.shared_string_sec);
+			intervalInUnits = interval;
 		} else if (interval % 60 == 0) {
-			return (interval / 60) + " " + app.getString(R.string.int_min);
+			units = app.getString(R.string.int_min);
+			intervalInUnits = (interval / 60);
 		} else {
-			return (interval / 60f) + " " + app.getString(R.string.int_min);
+			units = app.getString(R.string.int_min);
+			intervalInUnits = (interval / 60f);
 		}
+		return Algorithms.formatDoubleWithoutAdditionalZeros(intervalInUnits) + " " + units;
 	}
 
 	public static String getFormattedDistanceInterval(OsmandApplication app, double interval) {

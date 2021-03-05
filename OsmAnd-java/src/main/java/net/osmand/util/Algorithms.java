@@ -117,6 +117,13 @@ public class Algorithms {
 		}
 		return def;
 	}
+
+	public static String formatDoubleWithoutAdditionalZeros(double d) {
+		if(d == (long) d)
+			return String.format(Locale.US, "%d",(long)d);
+		else
+			return String.format("%s",d);
+	}
 	
 	public static int parseIntSilently(String input, int def) {
 		if (input != null && input.length() > 0) {
