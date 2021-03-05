@@ -74,7 +74,7 @@ public class WikipediaPoiMenu {
 				.setTitleId(toggleActionStringId, mapActivity)
 				.setDescription(summary)
 				.setIcon(toggleIconId)
-				.setColor(toggleIconColorId)
+				.setColor(app, toggleIconColorId)
 				.setListener(l)
 				.setSelected(enabled).createItem());
 

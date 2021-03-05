@@ -6,6 +6,7 @@ import net.osmand.osm.AbstractPoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
+import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.util.Algorithms;
 
@@ -15,6 +16,8 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static net.osmand.data.PointDescription.POINT_TYPE_GPX_FILE;
 
 public class SearchHistoryHelper {
 
@@ -53,6 +56,10 @@ public class SearchHistoryHelper {
 		context.getPoiFilters().markHistory(filter.getFilterId(), true);
 	}
 
+	public void addNewItemToHistory(GPXInfo gpxInfo) {
+		addNewItemToHistory(new HistoryEntry(0, 0, createPointDescription(gpxInfo)));
+	}
+
 	public List<HistoryEntry> getHistoryEntries(boolean onlyPoints) {
 		if (loadedEntries == null) {
 			checkLoadedEntries();
@@ -75,6 +82,10 @@ public class SearchHistoryHelper {
 		return new PointDescription(PointDescription.POINT_TYPE_CUSTOM_POI_FILTER, filter.getFilterId());
 	}
 
+	private PointDescription createPointDescription(GPXInfo gpxInfo) {
+		return new PointDescription(PointDescription.POINT_TYPE_GPX_FILE, gpxInfo.getFileName());
+	}
+
 	public void remove(Object item) {
 		PointDescription pd = null;
 		if (item instanceof HistoryEntry) {
@@ -83,6 +94,8 @@ public class SearchHistoryHelper {
 			pd = createPointDescription((AbstractPoiType) item);
 		} else if (item instanceof PoiUIFilter) {
 			pd = createPointDescription((PoiUIFilter) item);
+		} else if (item instanceof GPXInfo) {
+			pd = createPointDescription((GPXInfo) item);
 		}
 		if (pd != null) {
 			remove(pd);

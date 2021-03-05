@@ -11,10 +11,6 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Environment;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.util.Pair;
-
 import net.osmand.FileUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -35,8 +31,8 @@ import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.api.SettingsAPI.SettingsEditor;
 import net.osmand.plus.api.SettingsAPIImpl;
 import net.osmand.plus.audionotes.NotesSortByMode;
-import net.osmand.plus.dialogs.RateUsBottomSheetDialogFragment.RateUsState;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
+import net.osmand.plus.helpers.RateUsHelper.RateUsState;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.enums.AngularConstants;
 import net.osmand.plus.helpers.enums.AutoZoomMap;
@@ -52,7 +48,7 @@ import net.osmand.plus.profiles.NavigationIcon;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.rastermaps.LayerTransparencySeekbarMode;
 import net.osmand.plus.render.RendererRegistry;
-import net.osmand.plus.routing.RouteProvider.RouteService;
+import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.srtmplugin.TerrainMode;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
 import net.osmand.plus.voice.CommandPlayer;
@@ -79,6 +75,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.util.Pair;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONFIGURE_MAP_ITEM_ID_SCHEME;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
@@ -848,7 +848,8 @@ public class OsmandSettings {
 	public final OsmandPreference<DrivingRegion> DRIVING_REGION = new EnumStringPreference<DrivingRegion>(this,
 			"default_driving_region", DrivingRegion.EUROPE_ASIA, DrivingRegion.values()) {
 		public boolean setValue(Object prefs, DrivingRegion val) {
-			if (val != null) {
+			boolean overrideMetricSystem = !DRIVING_REGION_AUTOMATIC.getValue(prefs, DRIVING_REGION_AUTOMATIC.getDefaultValue());
+			if (overrideMetricSystem && val != null) {
 				METRIC_SYSTEM.set(val.defMetrics);
 			}
 			return super.setValue(prefs, val);
@@ -981,6 +982,10 @@ public class OsmandSettings {
 
 	public final CommonPreference<ProfileIconColors> ICON_COLOR = new EnumStringPreference<>(this,
 			"app_mode_icon_color", ProfileIconColors.DEFAULT, ProfileIconColors.values()).makeProfile().cache();
+
+	public final ListStringPreference CUSTOM_ICON_COLORS = (ListStringPreference) new ListStringPreference(this, "custom_icon_colors", null, ",").makeProfile().cache();
+
+	public final CommonPreference<String> CUSTOM_ICON_COLOR = new StringPreference(this, "custom_icon_color", null).makeProfile().cache();
 
 	public final CommonPreference<String> USER_PROFILE_NAME = new StringPreference(this, "user_profile_name", "").makeProfile().cache();
 

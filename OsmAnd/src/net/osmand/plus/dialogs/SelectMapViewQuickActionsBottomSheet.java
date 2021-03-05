@@ -174,8 +174,8 @@ public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogF
 				if (appMode != null) {
 					boolean selected = key.equals(selectedItem);
 					int iconId = appMode.getIconRes();
-					int colorId = appMode.getIconColorInfo().getColor(nightMode);
-					Drawable icon = getIcon(iconId, colorId);
+					int color = appMode.getProfileColor(nightMode);
+					Drawable icon = getPaintedIcon(iconId, color);
 					String translatedName = appMode.toHumanString();
 					createItemRow(selected, counter, icon, translatedName, key);
 					counter++;

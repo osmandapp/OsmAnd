@@ -38,15 +38,18 @@ public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implem
 	public static final String TAG = MoveGpxFileBottomSheet.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(MoveGpxFileBottomSheet.class);
 	private static final String FILE_PATH_KEY = "file_path_key";
+	private static final String SHOW_ALL_FOLDERS_KEY = "show_all_folders_key";
 
 	private OsmandApplication app;
 	private String filePath;
+	private boolean showAllFolders = false;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		app = requiredMyApplication();
 		if (savedInstanceState != null) {
 			filePath = savedInstanceState.getString(FILE_PATH_KEY);
+			showAllFolders = savedInstanceState.getBoolean(SHOW_ALL_FOLDERS_KEY);
 		}
 		if (filePath == null) {
 			return;
@@ -74,7 +77,7 @@ public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implem
 						FragmentActivity activity = getActivity();
 						if (activity != null) {
 							AddNewTrackFolderBottomSheet.showInstance(activity.getSupportFragmentManager(),
-									MoveGpxFileBottomSheet.this, fileDir.getName(), usedOnMap);
+									MoveGpxFileBottomSheet.this, usedOnMap);
 						}
 					}
 				})
@@ -87,8 +90,8 @@ public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implem
 		items.add(dividerItem);
 
 		final List<File> dirs = new ArrayList<>();
-		collectDirs(app.getAppPath(IndexConstants.GPX_INDEX_DIR), dirs, fileDir);
-		if (!Algorithms.objectEquals(fileDir, app.getAppPath(IndexConstants.GPX_INDEX_DIR))) {
+		collectDirs(app.getAppPath(IndexConstants.GPX_INDEX_DIR), dirs, showAllFolders ? null : fileDir);
+		if (showAllFolders || !Algorithms.objectEquals(fileDir, app.getAppPath(IndexConstants.GPX_INDEX_DIR))) {
 			dirs.add(0, app.getAppPath(IndexConstants.GPX_INDEX_DIR));
 		}
 		String gpxDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR).getPath();
@@ -135,6 +138,7 @@ public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implem
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putString(FILE_PATH_KEY, filePath);
+		outState.putBoolean(SHOW_ALL_FOLDERS_KEY, showAllFolders);
 	}
 
 	@Override
@@ -163,12 +167,13 @@ public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implem
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable Fragment target,
-									@NonNull String filePath, boolean usedOnMap) {
+									@NonNull String filePath, boolean usedOnMap, boolean showAllFolders) {
 		try {
 			if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(MoveGpxFileBottomSheet.TAG) == null) {
 				MoveGpxFileBottomSheet fragment = new MoveGpxFileBottomSheet();
 				fragment.filePath = filePath;
 				fragment.setUsedOnMap(usedOnMap);
+				fragment.showAllFolders = showAllFolders;
 				fragment.setTargetFragment(target, 0);
 				fragment.show(fragmentManager, MoveGpxFileBottomSheet.TAG);
 			}

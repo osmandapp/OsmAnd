@@ -280,7 +280,7 @@ public class TravelObfHelper implements TravelHelper {
 		res.originalId = 0;
 		res.lang = lang;
 		res.contentsJson = Algorithms.emptyIfNull(amenity.getTagContent(Amenity.CONTENT_JSON, lang));
-		res.aggregatedPartOf = Algorithms.emptyIfNull(amenity.getTagContent(Amenity.IS_AGGR_PART, lang));
+		res.aggregatedPartOf = Algorithms.emptyIfNull(amenity.getStrictTagContent(Amenity.IS_AGGR_PART, lang));
 		return res;
 	}
 
@@ -948,6 +948,7 @@ public class TravelObfHelper implements TravelHelper {
 			}
 			if (!Algorithms.isEmpty(amenities)) {
 				article = cacheTravelArticles(reader.getFile(), amenities.get(0), lang, readGpx, callback);
+				break;
 			}
 		}
 		return article;

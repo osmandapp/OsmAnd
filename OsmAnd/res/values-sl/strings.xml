@@ -2095,10 +2095,8 @@
     <string name="quick_actions_delete_text">Ali ste prepričani, da želite izbrisati dejanje »%s«?</string>
     <string name="shared_string_action_name">Ime dejanja</string>
     <string name="favorite_empty_place_name">Mesto</string>
-    <string name="quick_action_showhide_favorites_title">Pokaži/Skrij priljubljene</string>
     <string name="quick_action_favorites_show">Pokaži priljubljene</string>
     <string name="quick_action_favorites_hide">Skrij priljubljene</string>
-    <string name="quick_action_showhide_poi_title">Pokaži/Skrij točke POI</string>
     <string name="quick_action_poi_show">Pokaži %1$s</string>
     <string name="quick_action_poi_hide">Skrij %1$s</string>
     <string name="quick_action_add_category">Dodaj kategorijo</string>
@@ -2258,7 +2256,6 @@
     <string name="increase_search_radius">Povečaj območje iskanja</string>
     <string name="nothing_found">Ni zadetkov</string>
     <string name="nothing_found_descr">Poskusite zamenjati iskalni niz ali pa povečajte obseg iskanja.</string>
-    <string name="quick_action_showhide_osmbugs_title">Preklopi vidnost opomb OSM</string>
     <string name="quick_action_osmbugs_show">Pokaži Opombe OSM</string>
     <string name="quick_action_osmbugs_hide">Skrij Opombe OSM</string>
     <string name="sorted_by_distance">Razvrščeno po razdalji</string>
@@ -2874,7 +2871,6 @@
     <string name="shared_string_swap">Zamenjaj</string>
     <string name="show_more">Pokaži več</string>
     <string name="tracks_on_map">Prikazane sledi</string>
-    <string name="quick_action_show_hide_gpx_tracks">Pokaži/Skrij sledi GPX</string>
     <string name="quick_action_gpx_tracks_hide">Skrij sledi GPX</string>
     <string name="quick_action_gpx_tracks_show">Pokaži sledi GPX</string>
     <string name="add_destination_query">Najprej je treba dodati cilj</string>
@@ -3241,7 +3237,6 @@
     <string name="quick_action_mapillary_hide">Skrij Mapillary</string>
     <string name="quick_action_mapillary_show">Prikaži mapillary</string>
     <string name="add_online_source">Dodaj spletni vir</string>
-    <string name="quick_action_showhide_mapillary_title">Prikaži/skrij Mapillary</string>
     <string name="shared_string_uninstall_and_restart">Odstrani in ponovno zaženi</string>
     <string name="use_volume_buttons_as_zoom">Uporabi gumbe za glasnost za približevanje</string>
     <string name="search_download_wikipedia_maps">Prejmi zemljevide Wikipedije</string>

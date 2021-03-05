@@ -359,6 +359,8 @@ public class QuickSearchListItem {
 				} else {
 					return icon;
 				}
+			case GPX_TRACK:
+				return getIcon(app, R.drawable.ic_action_polygom_dark);
 			case LOCATION:
 				return getIcon(app, R.drawable.ic_action_world_globe);
 			case FAVORITE:

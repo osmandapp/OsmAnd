@@ -1,6 +1,5 @@
 package net.osmand.plus.wikivoyage.explore;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -80,10 +79,6 @@ public class SavedArticlesTabFragment extends BaseOsmAndFragment implements Trav
 		if (dataHelper != null) {
 			dataHelper.addListener(this);
 		}
-		WikivoyageExploreActivity exploreActivity = getExploreActivity();
-		if (exploreActivity != null) {
-			exploreActivity.onTabFragmentResume(this);
-		}
 	}
 
 	@Override
@@ -102,16 +97,6 @@ public class SavedArticlesTabFragment extends BaseOsmAndFragment implements Trav
 			DiffUtil.DiffResult diffRes = DiffUtil.calculateDiff(diffCallback);
 			adapter.setItems(newItems);
 			diffRes.dispatchUpdatesTo(adapter);
-		}
-	}
-
-	@Nullable
-	private WikivoyageExploreActivity getExploreActivity() {
-		Activity activity = getActivity();
-		if (activity != null && activity instanceof WikivoyageExploreActivity) {
-			return (WikivoyageExploreActivity) activity;
-		} else {
-			return null;
 		}
 	}
 

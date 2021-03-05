@@ -4,6 +4,7 @@ import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
+import net.osmand.data.LatLon;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import net.osmand.util.TransliterationHelper;
@@ -37,7 +38,9 @@ public class RouteDataObject {
 	public int[] nameIds;
 	// mixed array [0, height, cumulative_distance height, cumulative_distance, height, ...] - length is length(points)*2
 	public float[] heightDistanceArray = null;
+	public float heightByCurrentLocation;
 	private static final Log LOG = PlatformUtil.getLog(RouteDataObject.class);
+
 	public RouteDataObject(RouteRegion region) {
 		this.region = region;
 	}
@@ -124,7 +127,7 @@ public class RouteDataObject {
 							equals = this.pointTypes[i] == thatObj.pointTypes[i];
 						} else if (pointTypes[i].length != thatObj.pointTypes[i].length) {
 							equals = false;
-						} else  {
+						} else {
 							for (int j = 0; j < this.pointTypes[i].length && equals; j++) {
 								String thisTag = region.routeEncodingRules.get(pointTypes[i][j]).getTag();
 								String thisValue = region.routeEncodingRules.get(pointTypes[i][j]).getValue();
@@ -147,7 +150,7 @@ public class RouteDataObject {
 							equals = this.pointNameTypes[i] == thatObj.pointNameTypes[i];
 						} else if (pointNameTypes[i].length != thatObj.pointNameTypes[i].length) {
 							equals = false;
-						} else  {
+						} else {
 							for (int j = 0; j < this.pointNameTypes[i].length && equals; j++) {
 								String thisTag = region.routeEncodingRules.get(pointNameTypes[i][j]).getTag();
 								String thisValue = pointNames[i][j];
@@ -165,53 +168,67 @@ public class RouteDataObject {
 	}
 
 	public float[] calculateHeightArray() {
-		if(heightDistanceArray != null) {
+		return calculateHeightArray(null);
+	}
+
+	public float[] calculateHeightArray(LatLon currentLocation) {
+		if (heightDistanceArray != null) {
 			return heightDistanceArray;
 		}
 		int startHeight = Algorithms.parseIntSilently(getValue("osmand_ele_start"), HEIGHT_UNDEFINED);
 		int endHeight = Algorithms.parseIntSilently(getValue("osmand_ele_end"), startHeight);
-		if(startHeight == HEIGHT_UNDEFINED) {
+		if (startHeight == HEIGHT_UNDEFINED) {
 			heightDistanceArray = new float[0];
 			return heightDistanceArray;
 		}
 
-		heightDistanceArray = new float[2*getPointsLength()];
+		heightDistanceArray = new float[2 * getPointsLength()];
 		double plon = 0;
 		double plat = 0;
-		float prevHeight = startHeight;
-		for(int k = 0; k < getPointsLength(); k++) {
+		float prevHeight = heightByCurrentLocation = startHeight;
+		double prevDistance = 0;
+		for (int k = 0; k < getPointsLength(); k++) {
 			double lon = MapUtils.get31LongitudeX(getPoint31XTile(k));
 			double lat = MapUtils.get31LatitudeY(getPoint31YTile(k));
-			if(k > 0) {
+			if (k > 0) {
 				double dd = MapUtils.getDistance(plat, plon, lat, lon);
 				float height = HEIGHT_UNDEFINED;
-				if(k == getPointsLength() - 1) {
+				if (k == getPointsLength() - 1) {
 					height = endHeight;
 				} else {
 					String asc = getValue(k, "osmand_ele_asc");
-					if(asc != null && asc.length() > 0) {
+					if (asc != null && asc.length() > 0) {
 						height = (prevHeight + Float.parseFloat(asc));
 					} else {
 						String desc = getValue(k, "osmand_ele_desc");
-						if(desc != null && desc.length() > 0) {
+						if (desc != null && desc.length() > 0) {
 							height = (prevHeight - Float.parseFloat(desc));
 						}
 					}
 				}
-				heightDistanceArray[2*k] = (float) dd;
-				heightDistanceArray[2*k+1] = height;
-				if(height != HEIGHT_UNDEFINED) {
+				heightDistanceArray[2 * k] = (float) dd;
+				heightDistanceArray[2 * k + 1] = height;
+
+				if (currentLocation != null) {
+					double distance = MapUtils.getDistance(currentLocation, lat, lon);
+					if (height != HEIGHT_UNDEFINED && distance < prevDistance) {
+						prevDistance = distance;
+						heightByCurrentLocation = height;
+					}
+				}
+
+				if (height != HEIGHT_UNDEFINED) {
 					// interpolate undefined
 					double totalDistance = dd;
 					int startUndefined = k;
-					while(startUndefined - 1 >= 0 && heightDistanceArray[2*(startUndefined - 1)+1] == HEIGHT_UNDEFINED) {
-						startUndefined --;
-						totalDistance += heightDistanceArray[2*(startUndefined)];
+					while (startUndefined - 1 >= 0 && heightDistanceArray[2 * (startUndefined - 1) + 1] == HEIGHT_UNDEFINED) {
+						startUndefined--;
+						totalDistance += heightDistanceArray[2 * (startUndefined)];
 					}
-					if(totalDistance > 0) {
+					if (totalDistance > 0) {
 						double angle = (height - prevHeight) / totalDistance;
-						for(int j = startUndefined; j < k; j++) {
-							heightDistanceArray[2*j+1] = (float) ((heightDistanceArray[2*j] * angle) + heightDistanceArray[2*j-1]);
+						for (int j = startUndefined; j < k; j++) {
+							heightDistanceArray[2 * j + 1] = (float) ((heightDistanceArray[2 * j] * angle) + heightDistanceArray[2 * j - 1]);
 						}
 					}
 					prevHeight = height;
@@ -223,6 +240,9 @@ public class RouteDataObject {
 			}
 			plat = lat;
 			plon = lon;
+			if (currentLocation != null) {
+				prevDistance = MapUtils.getDistance(currentLocation, plat, plon);
+			}
 		}
 		return heightDistanceArray;
 	}
@@ -231,34 +251,34 @@ public class RouteDataObject {
 		return id;
 	}
 
-	public String getName(){
-		if(names != null ) {
+	public String getName() {
+		if (names != null) {
 			return names.get(region.nameTypeRule);
 		}
 		return null;
 	}
 
 
-	public String getName(String lang){
+	public String getName(String lang) {
 		return getName(lang, false);
 	}
 
-	public String getName(String lang, boolean transliterate){
-		if(names != null ) {
-			if(Algorithms.isEmpty(lang)) {
+	public String getName(String lang, boolean transliterate) {
+		if (names != null) {
+			if (Algorithms.isEmpty(lang)) {
 				return names.get(region.nameTypeRule);
 			}
 			int[] kt = names.keys();
-			for(int i = 0 ; i < kt.length; i++) {
+			for (int i = 0; i < kt.length; i++) {
 				int k = kt[i];
-				if(region.routeEncodingRules.size() > k) {
-					if(("name:"+lang).equals(region.routeEncodingRules.get(k).getTag())) {
+				if (region.routeEncodingRules.size() > k) {
+					if (("name:" + lang).equals(region.routeEncodingRules.get(k).getTag())) {
 						return names.get(k);
 					}
 				}
 			}
 			String nmDef = names.get(region.nameTypeRule);
-			if(transliterate && nmDef != null && nmDef.length() > 0) {
+			if (transliterate && nmDef != null && nmDef.length() > 0) {
 				return TransliterationHelper.transliterate(nmDef);
 			}
 			return nmDef;
@@ -279,20 +299,20 @@ public class RouteDataObject {
 		//	return getDestinationRef(direction);
 		//}
 		if (names != null) {
-			if(Algorithms.isEmpty(lang)) {
+			if (Algorithms.isEmpty(lang)) {
 				return names.get(region.refTypeRule);
 			}
 			int[] kt = names.keys();
-			for(int i = 0 ; i < kt.length; i++) {
+			for (int i = 0; i < kt.length; i++) {
 				int k = kt[i];
-				if(region.routeEncodingRules.size() > k) {
-					if(("ref:"+lang).equals(region.routeEncodingRules.get(k).getTag())) {
+				if (region.routeEncodingRules.size() > k) {
+					if (("ref:" + lang).equals(region.routeEncodingRules.get(k).getTag())) {
 						return names.get(k);
 					}
 				}
 			}
 			String refDefault = names.get(region.refTypeRule);
-			if(transliterate && refDefault != null && refDefault.length() > 0) {
+			if (transliterate && refDefault != null && refDefault.length() > 0) {
 				return TransliterationHelper.transliterate(refDefault);
 			}
 			return refDefault;
@@ -307,13 +327,13 @@ public class RouteDataObject {
 			String refTagDefault = "destination:ref";
 			String refDefault = null;
 
-			for(int i = 0 ; i < kt.length; i++) {
+			for (int i = 0; i < kt.length; i++) {
 				int k = kt[i];
-				if(region.routeEncodingRules.size() > k) {
-					if(refTag.equals(region.routeEncodingRules.get(k).getTag())) {
+				if (region.routeEncodingRules.size() > k) {
+					if (refTag.equals(region.routeEncodingRules.get(k).getTag())) {
 						return names.get(k);
 					}
-					if(refTagDefault.equals(region.routeEncodingRules.get(k).getTag())) {
+					if (refTagDefault.equals(region.routeEncodingRules.get(k).getTag())) {
 						refDefault = names.get(k);
 					}
 				}
@@ -326,12 +346,12 @@ public class RouteDataObject {
 		return null;
 	}
 
-	public String getDestinationName(String lang, boolean transliterate, boolean direction){
+	public String getDestinationName(String lang, boolean transliterate, boolean direction) {
 		//Issue #3289: Treat destination:ref like a destination, not like a ref
 		String destRef = ((getDestinationRef(direction) == null) || getDestinationRef(direction).equals(getRef(lang, transliterate, direction))) ? "" : getDestinationRef(direction);
 		String destRef1 = Algorithms.isEmpty(destRef) ? "" : destRef + ", ";
 
-		if(names != null) {
+		if (names != null) {
 			int[] kt = names.keys();
 
 			// Issue #3181: Parse destination keys in this order:
@@ -341,35 +361,35 @@ public class RouteDataObject {
 			//              destination
 
 			String destinationTagLangFB = "destination:lang:XX";
-			if(!Algorithms.isEmpty(lang)) {
+			if (!Algorithms.isEmpty(lang)) {
 				destinationTagLangFB = (direction == true) ? "destination:lang:" + lang + ":forward" : "destination:lang:" + lang + ":backward";
 			}
 			String destinationTagFB = (direction == true) ? "destination:forward" : "destination:backward";
 			String destinationTagLang = "destination:lang:XX";
-			if(!Algorithms.isEmpty(lang)) {
+			if (!Algorithms.isEmpty(lang)) {
 				destinationTagLang = "destination:lang:" + lang;
 			}
 			String destinationTagDefault = "destination";
 			String destinationDefault = null;
 
-			for(int i = 0 ; i < kt.length; i++) {
+			for (int i = 0; i < kt.length; i++) {
 				int k = kt[i];
-				if(region.routeEncodingRules.size() > k) {
-					if(!Algorithms.isEmpty(lang) && destinationTagLangFB.equals(region.routeEncodingRules.get(k).getTag())) {
+				if (region.routeEncodingRules.size() > k) {
+					if (!Algorithms.isEmpty(lang) && destinationTagLangFB.equals(region.routeEncodingRules.get(k).getTag())) {
 						return destRef1 + ((transliterate) ? TransliterationHelper.transliterate(names.get(k)) : names.get(k));
 					}
-					if(destinationTagFB.equals(region.routeEncodingRules.get(k).getTag())) {
+					if (destinationTagFB.equals(region.routeEncodingRules.get(k).getTag())) {
 						return destRef1 + ((transliterate) ? TransliterationHelper.transliterate(names.get(k)) : names.get(k));
 					}
-					if(!Algorithms.isEmpty(lang) && destinationTagLang.equals(region.routeEncodingRules.get(k).getTag())) {
+					if (!Algorithms.isEmpty(lang) && destinationTagLang.equals(region.routeEncodingRules.get(k).getTag())) {
 						return destRef1 + ((transliterate) ? TransliterationHelper.transliterate(names.get(k)) : names.get(k));
 					}
-					if(destinationTagDefault.equals(region.routeEncodingRules.get(k).getTag())) {
+					if (destinationTagDefault.equals(region.routeEncodingRules.get(k).getTag())) {
 						destinationDefault = names.get(k);
 					}
 				}
 			}
-			if(destinationDefault != null) {
+			if (destinationDefault != null) {
 				return destRef1 + ((transliterate) ? TransliterationHelper.transliterate(destinationDefault) : destinationDefault);
 			}
 		}
@@ -400,14 +420,14 @@ public class RouteDataObject {
 		RestrictionInfo ri = new RestrictionInfo();
 		ri.toWay = getRestrictionId(k);
 		ri.type = getRestrictionType(k);
-		if(restrictionsVia != null && k < restrictionsVia.length) {
+		if (restrictionsVia != null && k < restrictionsVia.length) {
 			ri.viaWay = restrictionsVia[k];
 		}
 		return ri;
 	}
 
 	public long getRestrictionVia(int i) {
-		if(restrictionsVia != null && restrictionsVia.length > i) {
+		if (restrictionsVia != null && restrictionsVia.length > i) {
 			return restrictionsVia[i];
 		}
 		return 0;
@@ -441,7 +461,7 @@ public class RouteDataObject {
 		}
 		if (insNames) {
 			pointNames = new String[opointNames.length + 1][];
-			pointNameTypes = new int[opointNameTypes.length +1][];
+			pointNameTypes = new int[opointNameTypes.length + 1][];
 		}
 		int i = 0;
 		for (; i < pos; i++) {
@@ -498,6 +518,24 @@ public class RouteDataObject {
 			return null;
 		}
 		return pointTypes[ind];
+	}
+	
+	public void removePointType(int ind, int type) {
+		if (pointTypes != null || ind < pointTypes.length) {
+			int[] typesArr = pointTypes[ind];
+
+			for (int i = 0; i < typesArr.length; i++) {
+				if (typesArr[i] == type) {
+					int[] result = new int[typesArr.length - 1];
+					System.arraycopy(typesArr, 0, result, 0, i);
+					if (typesArr.length != i) {
+						System.arraycopy(typesArr, i + 1, result, i, typesArr.length - 1 - i);
+						pointTypes[ind] = result;
+						break;
+					}
+				}
+			}
+		}
 	}
 
 	public int[] getTypes() {
@@ -590,7 +628,7 @@ public class RouteDataObject {
 	}
 
 	public static float parseSpeed(String v, float def) {
-		if(v.equals("none")) {
+		if (v.equals("none")) {
 			return RouteDataObject.NONE_MAX_SPEED;
 		} else {
 			int i = Algorithms.findFirstNumberEndIndex(v);
@@ -614,20 +652,20 @@ public class RouteDataObject {
 			f += Float.parseFloat(v.substring(0, i));
 			String pref = v.substring(i, v.length()).trim();
 			float add = 0;
-			for(int ik = 0; ik < pref.length(); ik++) {
-				if(Algorithms.isDigit(pref.charAt(ik)) || pref.charAt(ik) == '.' || pref.charAt(ik) == '-') {
+			for (int ik = 0; ik < pref.length(); ik++) {
+				if (Algorithms.isDigit(pref.charAt(ik)) || pref.charAt(ik) == '.' || pref.charAt(ik) == '-') {
 					int first = Algorithms.findFirstNumberEndIndex(pref.substring(ik));
-					if(first != -1) {
+					if (first != -1) {
 						add = parseLength(pref.substring(ik), 0);
 						pref = pref.substring(0, ik);
 					}
 					break;
 				}
 			}
-			if(pref.contains("km")) {
+			if (pref.contains("km")) {
 				f *= 1000;
 			}
-			if(pref.contains("\"") ||  pref.contains("in")) {
+			if (pref.contains("\"") || pref.contains("in")) {
 				f *= 0.0254;
 			} else if (pref.contains("\'") || pref.contains("ft") || pref.contains("feet")) {
 				// foot to meters
@@ -673,27 +711,27 @@ public class RouteDataObject {
 		return false;
 	}
 
-	public boolean roundabout(){
+	public boolean roundabout() {
 		int sz = types.length;
-		for(int i=0; i<sz; i++) {
+		for (int i = 0; i < sz; i++) {
 			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
-			if(r.roundabout()) {
+			if (r.roundabout()) {
 				return true;
-			} else if(r.onewayDirection() != 0 && loop()) {
+			} else if (r.onewayDirection() != 0 && loop()) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public boolean tunnel(){
+	public boolean tunnel() {
 		int sz = types.length;
-		for(int i=0; i<sz; i++) {
+		for (int i = 0; i < sz; i++) {
 			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
-			if(r.getTag().equals("tunnel") && r.getValue().equals("yes")) {
+			if (r.getTag().equals("tunnel") && r.getValue().equals("yes")) {
 				return true;
 			}
-			if(r.getTag().equals("layer") && r.getValue().equals("-1")) {
+			if (r.getTag().equals("layer") && r.getValue().equals("-1")) {
 				return true;
 			}
 		}
@@ -882,7 +920,7 @@ public class RouteDataObject {
 
 	public boolean bearingVsRouteDirection(Location loc) {
 		boolean direction = true;
-		if(loc != null && loc.hasBearing()) {
+		if (loc != null && loc.hasBearing()) {
 			double diff = MapUtils.alignAngleDifference(directionRoute(0, true) - loc.getBearing() / 180f * Math.PI);
 			direction = Math.abs(diff) < Math.PI / 2f;
 		}
@@ -932,13 +970,13 @@ public class RouteDataObject {
 	}
 
 	public double distance(int startPoint, int endPoint) {
-		if(startPoint > endPoint) {
+		if (startPoint > endPoint) {
 			int k = endPoint;
 			endPoint = startPoint;
 			startPoint = k;
 		}
 		double d = 0;
-		for(int k = startPoint; k < endPoint && k < getPointsLength() -1; k++) {
+		for (int k = startPoint; k < endPoint && k < getPointsLength() - 1; k++) {
 			int x = getPoint31XTile(k);
 			int y = getPoint31YTile(k);
 			int kx = getPoint31XTile(k + 1);
@@ -974,16 +1012,16 @@ public class RouteDataObject {
 			// translate into meters
 			total += simplifyDistance(x, y, px, py);
 		} while (total < dist);
-		return -Math.atan2( x - px, y - py );
+		return -Math.atan2(x - px, y - py);
 	}
 
 	private double simplifyDistance(int x, int y, int px, int py) {
 		return Math.abs(px - x) * 0.011d + Math.abs(py - y) * 0.01863d;
 	}
 
-	private static void assertTrueLength(String vl, float exp){
+	private static void assertTrueLength(String vl, float exp) {
 		float dest = parseLength(vl, 0);
-		if(exp != dest) {
+		if (exp != dest) {
 			System.err.println("FAIL " + vl + " " + dest);
 		} else {
 			System.out.println("OK " + vl);
@@ -992,24 +1030,24 @@ public class RouteDataObject {
 
 	public static void main(String[] args) {
 		assertTrueLength("10 km", 10000);
-  		assertTrueLength("0.01 km", 10);
-  		assertTrueLength("0.01 km 10 m", 20);
-  		assertTrueLength("10 m", 10);
-  		assertTrueLength("10m", 10);
-  		assertTrueLength("3.4 m", 3.4f);
- 		assertTrueLength("3.40 m", 3.4f);
- 		assertTrueLength("10 m 10m", 20);
-  		assertTrueLength("14'10\"", 4.5212f);
-  		assertTrueLength("14.5'", 4.4196f);
- 		assertTrueLength("14.5 ft", 4.4196f);
- 		assertTrueLength("14'0\"", 4.2672f);
-  		assertTrueLength("15ft", 4.572f);
- 		assertTrueLength("15 ft 1 in", 4.5974f);
- 		assertTrueLength("4.1 metres", 4.1f);
- 		assertTrueLength("14'0''", 4.2672f);
- 		assertTrueLength("14 feet", 4.2672f);
- 		assertTrueLength("14 mile", 22530.76f);
- 		assertTrueLength("14 cm", 0.14f);
+		assertTrueLength("0.01 km", 10);
+		assertTrueLength("0.01 km 10 m", 20);
+		assertTrueLength("10 m", 10);
+		assertTrueLength("10m", 10);
+		assertTrueLength("3.4 m", 3.4f);
+		assertTrueLength("3.40 m", 3.4f);
+		assertTrueLength("10 m 10m", 20);
+		assertTrueLength("14'10\"", 4.5212f);
+		assertTrueLength("14.5'", 4.4196f);
+		assertTrueLength("14.5 ft", 4.4196f);
+		assertTrueLength("14'0\"", 4.2672f);
+		assertTrueLength("15ft", 4.572f);
+		assertTrueLength("15 ft 1 in", 4.5974f);
+		assertTrueLength("4.1 metres", 4.1f);
+		assertTrueLength("14'0''", 4.2672f);
+		assertTrueLength("14 feet", 4.2672f);
+		assertTrueLength("14 mile", 22530.76f);
+		assertTrueLength("14 cm", 0.14f);
 
 // 		float badValue = -1;
 // 		assertTrueLength("none", badValue);
@@ -1054,7 +1092,7 @@ public class RouteDataObject {
 		public RestrictionInfo next; // optional to simulate linked list
 
 		public int length() {
-			if(next == null) {
+			if (next == null) {
 				return 1;
 			}
 			return next.length() + 1;
@@ -1064,16 +1102,16 @@ public class RouteDataObject {
 	public void setRestriction(int k, long to, int type, long viaWay) {
 		long valto = (to << RouteDataObject.RESTRICTION_SHIFT) | ((long) type & RouteDataObject.RESTRICTION_MASK);
 		restrictions[k] = valto;
-		if(viaWay != 0) {
+		if (viaWay != 0) {
 			setRestrictionVia(k, viaWay);
 		}
 	}
 
 	public void setRestrictionVia(int k, long viaWay) {
-		if(restrictionsVia != null) {
+		if (restrictionsVia != null) {
 			long[] nrestrictionsVia = new long[Math.max(k + 1, restrictions.length)];
 			System.arraycopy(restrictions, 0, nrestrictionsVia, 0, restrictions.length);
-			restrictionsVia  = nrestrictionsVia;
+			restrictionsVia = nrestrictionsVia;
 		} else {
 			restrictionsVia = new long[k + 1];
 		}

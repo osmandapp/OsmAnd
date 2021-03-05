@@ -279,6 +279,19 @@ public class Amenity extends MapObject {
 	}
 
 	public String getTagContent(String tag, String lang) {
+		String translateName = getStrictTagContent(tag, lang);
+		if (translateName != null) {
+			return translateName;
+		}
+		for (String nm : getAdditionalInfoKeys()) {
+			if (nm.startsWith(tag + ":")) {
+				return getAdditionalInfo(nm);
+			}
+		}
+		return null;
+	}
+
+	public String getStrictTagContent(String tag, String lang) {
 		if (lang != null) {
 			String translateName = getAdditionalInfo(tag + ":" + lang);
 			if (!Algorithms.isEmpty(translateName)) {
@@ -292,11 +305,6 @@ public class Amenity extends MapObject {
 		String enName = getAdditionalInfo(tag + ":en");
 		if (!Algorithms.isEmpty(enName)) {
 			return enName;
-		}
-		for (String nm : getAdditionalInfoKeys()) {
-			if (nm.startsWith(tag + ":")) {
-				return getAdditionalInfo(nm);
-			}
 		}
 		return null;
 	}

@@ -9,6 +9,7 @@
 
 	<LinearLayout
 		android:layout_width="match_parent"
+		android:id="@+id/descriptionContainer"
 		android:layout_height="@dimen/bottom_sheet_large_list_item_height"
 		android:gravity="center_vertical"
 		android:orientation="horizontal"

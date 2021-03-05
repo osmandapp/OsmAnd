@@ -64,6 +64,7 @@ import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
 import static net.osmand.plus.dialogs.GpxAppearanceAdapter.TRACK_WIDTH_BOLD;
 import static net.osmand.plus.dialogs.GpxAppearanceAdapter.TRACK_WIDTH_MEDIUM;
 import static net.osmand.plus.dialogs.GpxAppearanceAdapter.getAppearanceItems;
+import static net.osmand.plus.monitoring.TripRecordingActiveBottomSheet.UPDATE_TRACK_ICON;
 
 public class TrackAppearanceFragment extends ContextMenuScrollFragment implements CardListener, ColorPickerListener {
 
@@ -359,7 +360,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	@Override
 	public void onColorSelected(Integer prevColor, int newColor) {
 		if (prevColor != null) {
-			List<Integer> customColors = ColorsCard.getCustomColors(app);
+			List<Integer> customColors = ColorsCard.getCustomColors(app.getSettings().CUSTOM_TRACK_COLORS);
 			int index = customColors.indexOf(prevColor);
 			if (index != ColorsCard.INVALID_VALUE) {
 				saveCustomColorsToTracks(prevColor, newColor);
@@ -385,7 +386,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		if (target instanceof TripRecordingBottomSheet) {
 			((TripRecordingBottomSheet) target).show();
 		} else if (target instanceof TripRecordingActiveBottomSheet) {
-			((TripRecordingActiveBottomSheet) target).show(true);
+			((TripRecordingActiveBottomSheet) target).show(UPDATE_TRACK_ICON);
 		}
 	}
 
@@ -669,7 +670,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			List<Integer> colors = getTrackColors();
-			colorsCard = new ColorsCard(mapActivity, trackDrawInfo.getColor(), this, colors);
+			colorsCard = new ColorsCard(mapActivity, trackDrawInfo.getColor(), this, colors, app.getSettings().CUSTOM_TRACK_COLORS, null);
 			colorsCard.setListener(this);
 			cardsContainer.addView(colorsCard.build(mapActivity));
 		}

@@ -53,7 +53,13 @@ public class AddQuickActionDialog extends MenuBottomSheetDialogFragment {
                         null, false);
                 TextView title = itemView.findViewById(R.id.title);
                 ImageView icon = itemView.findViewById(R.id.image);
-                title.setText(action.getNameRes());
+                if (action.getActionNameRes() != 0) {
+                    String name = getString(action.getNameRes());
+                    String actionName =  getString(action.getActionNameRes());
+                    title.setText(getString(R.string.ltr_or_rtl_combine_via_dash, actionName, name));
+                } else {
+                    title.setText(action.getNameRes());
+                }
                 icon.setImageResource(action.getIconRes());
                 items.add(new BaseBottomSheetItem.Builder()
                         .setCustomView(itemView)

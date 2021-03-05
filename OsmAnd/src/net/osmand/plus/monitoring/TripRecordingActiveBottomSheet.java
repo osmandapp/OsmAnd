@@ -1,6 +1,5 @@
 package net.osmand.plus.monitoring;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -38,6 +37,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
@@ -61,6 +61,7 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -71,6 +72,7 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 	public static final String TAG = TripRecordingActiveBottomSheet.class.getSimpleName();
 	private static final Log log = PlatformUtil.getLog(TripRecordingActiveBottomSheet.class);
 	private static final String UPDATE_CURRENT_GPX_FILE = "update_current_gpx_file";
+	public static final String UPDATE_TRACK_ICON = "update_track_icon";
 	private static final int GENERAL_UPDATE_GPS_INTERVAL = 1000;
 	private static final int GENERAL_UPDATE_SAVE_INTERVAL = 1000;
 
@@ -131,7 +133,7 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 
 		View buttonClear = itemView.findViewById(R.id.button_clear);
 		final View buttonOnline = itemView.findViewById(R.id.button_online);
-		View buttonSegment = itemView.findViewById(R.id.button_segment);
+		final View buttonSegment = itemView.findViewById(R.id.button_segment);
 		buttonSave = itemView.findViewById(R.id.button_save);
 		final View buttonPause = itemView.findViewById(R.id.button_pause);
 		View buttonStop = itemView.findViewById(R.id.button_stop);
@@ -274,6 +276,7 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 				settings.SAVE_GLOBAL_TRACK_TO_GPX.set(wasTrackMonitored);
 				updateStatus();
 				createItem(buttonPause, wasTrackMonitored ? ItemType.PAUSE : ItemType.RESUME, true);
+				createItem(buttonSegment, ItemType.START_SEGMENT, wasTrackMonitored);
 			}
 		});
 
@@ -443,16 +446,21 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 
 			@Override
 			public void gpxSavingFinished(Exception errorMessage) {
-				String gpxFileName = Algorithms.getFileWithoutDirs(getGPXFile().path);
 				final MapActivity mapActivity = getMapActivity();
 				final Context context = getContext();
 				final SaveGpxResult result = helper.saveDataToGpx(app.getAppCustomization().getTracksDir());
+				ArrayList<String> filenames = new ArrayList<>(result.getFilenames());
+				String fileName = "";
+				if (filenames.size() > 0) {
+					fileName = filenames.get(filenames.size() - 1) + IndexConstants.GPX_FILE_EXT;
+				}
+				String message = fileName + " " + app.getResources().getString(R.string.shared_string_is_saved) + ". "
+						+ app.getResources().getString(R.string.track_recording_will_be_continued);
 				if (mapActivity != null && context != null) {
 					final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 					final FragmentManager fragmentManager = mapActivityRef.get().getSupportFragmentManager();
-					@SuppressLint({"StringFormatInvalid", "LocalSuppress"})
 					Snackbar snackbar = Snackbar.make(getView(),
-							app.getResources().getString(R.string.shared_string_file_is_saved, gpxFileName),
+							message,
 							Snackbar.LENGTH_LONG)
 							.setAction(R.string.shared_string_rename, new View.OnClickListener() {
 								@Override
@@ -492,10 +500,12 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 		}
 	}
 
-	public void show(boolean updateTrackIcon) {
+	public void show(String... keys) {
 		show();
-		if (updateTrackIcon && buttonAppearance != null) {
-			updateTrackIcon(buttonAppearance);
+		for (String key : keys) {
+			if (key.equals(UPDATE_TRACK_ICON)) {
+				updateTrackIcon(buttonAppearance);
+			}
 		}
 	}
 

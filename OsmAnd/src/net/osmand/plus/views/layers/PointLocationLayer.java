@@ -1,5 +1,6 @@
 package net.osmand.plus.views.layers;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -11,6 +12,7 @@ import android.graphics.PorterDuffColorFilter;
 import android.graphics.RectF;
 import android.graphics.drawable.LayerDrawable;
 
+import androidx.annotation.ColorInt;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
@@ -48,7 +50,8 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 	private OsmandMapTileView view;
 
 	private ApplicationMode appMode;
-	private int colorId;
+	@ColorInt
+	private int color;
 	private LayerDrawable navigationIcon;
 	private int navigationIconId;
 	private LayerDrawable locationIcon;
@@ -160,30 +163,32 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 	}
 
 	private void updateIcons(ApplicationMode appMode, boolean nighMode, boolean locationOutdated) {
-		int colorId = locationOutdated ? ProfileIconColors.getOutdatedLocationColor(nighMode) : appMode.getIconColorInfo().getColor(nighMode);
+		Context ctx = view.getContext();
+		int color = locationOutdated ?
+				ContextCompat.getColor(ctx, ProfileIconColors.getOutdatedLocationColor(nighMode)) :
+				appMode.getProfileColor(nighMode);
 		int locationIconId = appMode.getLocationIcon().getIconId();
 		int navigationIconId = appMode.getNavigationIcon().getIconId();
 		int headingIconId = appMode.getLocationIcon().getHeadingIconId();
 		if (appMode != this.appMode || this.nm != nighMode || this.locationOutdated != locationOutdated
-				|| this.colorId != colorId
+				|| this.color != color
 				|| this.locationIconId != locationIconId
 				|| this.headingIconId != headingIconId
 				|| this.navigationIconId != navigationIconId) {
 			this.appMode = appMode;
-			this.colorId = colorId;
+			this.color = color;
 			this.nm = nighMode;
 			this.locationOutdated = locationOutdated;
 			this.locationIconId = locationIconId;
 			this.headingIconId = headingIconId;
 			this.navigationIconId = navigationIconId;
-			int color = ContextCompat.getColor(view.getContext(), colorId);
-			navigationIcon = (LayerDrawable) AppCompatResources.getDrawable(view.getContext(), navigationIconId);
+			navigationIcon = (LayerDrawable) AppCompatResources.getDrawable(ctx, navigationIconId);
 			if (navigationIcon != null) {
 				DrawableCompat.setTint(navigationIcon.getDrawable(1), color);
 			}
 			headingIcon = BitmapFactory.decodeResource(view.getResources(), headingIconId);
 			headingPaint.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN));
-			locationIcon = (LayerDrawable) AppCompatResources.getDrawable(view.getContext(), locationIconId);
+			locationIcon = (LayerDrawable) AppCompatResources.getDrawable(ctx, locationIconId);
 			if (locationIcon != null) {
 				DrawableCompat.setTint(DrawableCompat.wrap(locationIcon.getDrawable(1)), color);
 			}

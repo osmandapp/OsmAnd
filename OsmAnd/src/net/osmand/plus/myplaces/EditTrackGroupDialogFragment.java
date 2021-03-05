@@ -121,7 +121,7 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 		final ApplicationMode mode = app.getSettings().getApplicationMode();
 		final BottomSheetItemWithCompoundButton[] showOnMapItem = new BottomSheetItemWithCompoundButton[1];
 		showOnMapItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
-				.setCompoundButtonColorId(mode.getIconColorInfo().getColor(nightMode))
+				.setCompoundButtonColor(mode.getProfileColor(nightMode))
 				.setChecked(checked)
 				.setTitle(getString(R.string.shared_string_show_on_map))
 				.setCustomView(getCustomButtonView(app, mode, checked, nightMode))

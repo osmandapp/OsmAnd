@@ -14,11 +14,11 @@ import net.osmand.plus.quickaction.QuickActionType;
 public class ShowHideFavoritesAction extends QuickAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(4,
-			"favorites.showhide", ShowHideFavoritesAction.class).
-			nameRes(R.string.quick_action_showhide_favorites_title).iconRes(R.drawable.ic_action_favorite).nonEditable().
-			category(QuickActionType.CONFIGURE_MAP);
-
-
+			"favorites.showhide", ShowHideFavoritesAction.class)
+			.nameActionRes(R.string.quick_action_showhide_title)
+			.nameRes(R.string.shared_string_favorites)
+			.iconRes(R.drawable.ic_action_favorite).nonEditable()
+			.category(QuickActionType.CONFIGURE_MAP);
 
 	public ShowHideFavoritesAction() {
 		super(TYPE);

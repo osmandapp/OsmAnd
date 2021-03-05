@@ -31,6 +31,7 @@ public enum ProfileIconColors {
 		return name;
 	}
 
+	@ColorRes
 	public int getColor(boolean nightMode) {
 		return nightMode ? nightColor : dayColor;
 	}

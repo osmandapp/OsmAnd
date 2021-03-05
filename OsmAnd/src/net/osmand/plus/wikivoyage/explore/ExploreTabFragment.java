@@ -49,7 +49,6 @@ import java.util.List;
 
 import static net.osmand.plus.download.DownloadResources.WIKIVOYAGE_FILE_FILTER;
 import static net.osmand.plus.resources.ResourceManager.DEFAULT_WIKIVOYAGE_TRAVEL_OBF;
-import static net.osmand.plus.wikivoyage.explore.WikivoyageExploreActivity.*;
 
 public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEvents, TravelLocalDataHelper.Listener {
 
@@ -95,10 +94,6 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 		if (app != null) {
 			app.getTravelHelper().getBookmarksHelper().addListener(this);
 		}
-		WikivoyageExploreActivity exploreActivity = getExploreActivity();
-		if (exploreActivity != null) {
-			exploreActivity.onTabFragmentResume(this);
-		}
 	}
 
 	@Override
@@ -141,7 +136,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 				app.getTravelHelper().initializeDataOnAppStartup();
 				WikivoyageExploreActivity exploreActivity = getExploreActivity();
 				if (exploreActivity != null) {
-					exploreActivity.populateData();
+					exploreActivity.populateData(true);
 				}
 			} else {
 				removeRedundantCards();
@@ -194,8 +189,9 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 				travelButtonCard.setListener(new TravelNeededMapsCard.CardListener() {
 					@Override
 					public void onPrimaryButtonClick() {
-						if (activity instanceof WikivoyageExploreActivity) {
-							new LoadWikivoyageData((WikivoyageExploreActivity) activity, false).execute();
+						WikivoyageExploreActivity exploreActivity = getExploreActivity();
+						if (exploreActivity != null) {
+							exploreActivity.populateData(false);
 						}
 					}
 

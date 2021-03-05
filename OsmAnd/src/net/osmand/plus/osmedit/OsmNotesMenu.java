@@ -46,7 +46,7 @@ public class OsmNotesMenu {
 
 		final boolean nightMode = isNightMode(app);
 		final int themeRes = getThemeRes(app);
-		final int selectedModeColor = ContextCompat.getColor(app, settings.getApplicationMode().getIconColorInfo().getColor(nightMode));
+		final int selectedModeColor = settings.getApplicationMode().getProfileColor(nightMode);
 
 		final int osmNotesStringId = R.string.layer_osm_bugs;
 		final int showZoomLevelStringId = R.string.show_from_zoom_level;
@@ -110,7 +110,7 @@ public class OsmNotesMenu {
 				.setTitleId(osmNotesStringId, mapActivity)
 				.setDescription(mapActivity.getString(R.string.switch_osm_notes_visibility_desc))
 				.setIcon(R.drawable.ic_action_osm_note)
-				.setColor(toggleIconColorId)
+				.setColor(app, toggleIconColorId)
 				.setListener(l)
 				.setSelected(showOsmBugs)
 				.createItem());

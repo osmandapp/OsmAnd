@@ -1036,6 +1036,8 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 						title = "";
 					}
 					String originObjectName = "";
+					double altitude = 0;
+					long timestamp = System.currentTimeMillis();
 					Object object = getObject();
 					if (object != null) {
 						if (object instanceof Amenity) {
@@ -1043,10 +1045,13 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 						} else if (object instanceof TransportStop) {
 							originObjectName = ((TransportStop) object).toStringEn();
 						}
+						if (object instanceof WptPt) {
+							altitude = ((WptPt) object).ele;
+						}
 					}
 					FavoritePointEditor favoritePointEditor = getFavoritePointEditor();
 					if (favoritePointEditor != null) {
-						favoritePointEditor.add(getLatLon(), title, getStreetStr(), originObjectName);
+						favoritePointEditor.add(getLatLon(), title, getStreetStr(), originObjectName, altitude, timestamp);
 					}
 				}
 			});
@@ -1074,7 +1079,8 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			for (OsmandMapLayer layer : mapActivity.getMapView().getLayers()) {
 				layer.populateObjectContextMenu(latLon, getObject(), menuAdapter, mapActivity);
 			}
-			mapActivity.getMapActions().addActionsToAdapter(configure ? 0 : latLon.getLatitude(), configure ? 0 : latLon.getLongitude(), menuAdapter, configure ? null : getObject(), configure);		}
+			mapActivity.getMapActions().addActionsToAdapter(configure ? 0 : latLon.getLatitude(), configure ? 0 : latLon.getLongitude(), menuAdapter, configure ? null : getObject(), configure);
+		}
 		return menuAdapter;
 	}
 

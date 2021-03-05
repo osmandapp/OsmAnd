@@ -11,6 +11,8 @@ import androidx.core.content.ContextCompat;
 import androidx.core.graphics.ColorUtils;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.internal.FlowLayout;
+
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -18,6 +20,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.ListStringPreference;
 import net.osmand.plus.track.CustomColorBottomSheet.ColorPickerListener;
 import net.osmand.plus.widgets.FlowLayout;
 import net.osmand.plus.widgets.FlowLayout.LayoutParams;
@@ -27,6 +31,11 @@ import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.ColorInt;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.ColorUtils;
+import androidx.fragment.app.Fragment;
 
 public class ColorsCard extends BaseCard implements ColorPickerListener {
 
@@ -39,6 +48,9 @@ public class ColorsCard extends BaseCard implements ColorPickerListener {
 
 	private Fragment targetFragment;
 
+	private ApplicationMode appMode;
+	private ListStringPreference colorsListPreference;
+
 	private List<Integer> colors;
 	private List<Integer> customColors;
 
@@ -49,12 +61,14 @@ public class ColorsCard extends BaseCard implements ColorPickerListener {
 		return R.layout.colors_card;
 	}
 
-	public ColorsCard(MapActivity mapActivity, int selectedColor, Fragment targetFragment, List<Integer> colors) {
+	public ColorsCard(MapActivity mapActivity, int selectedColor, Fragment targetFragment, List<Integer> colors, ListStringPreference colorsListPreference, ApplicationMode appMode) {
 		super(mapActivity);
 		this.targetFragment = targetFragment;
 		this.selectedColor = selectedColor;
 		this.colors = colors;
-		customColors = getCustomColors(app);
+		this.colorsListPreference = colorsListPreference;
+		this.customColors = getCustomColors(colorsListPreference, appMode);
+		this.appMode = appMode;
 	}
 
 	public int getSelectedColor() {
@@ -208,9 +222,18 @@ public class ColorsCard extends BaseCard implements ColorPickerListener {
 		return app.getUIUtilities().getPaintedIcon(R.drawable.ic_bg_transparency, transparencyColor);
 	}
 
-	public static List<Integer> getCustomColors(@NonNull OsmandApplication app) {
+	public static List<Integer> getCustomColors(ListStringPreference colorsListPreference) {
+		return getCustomColors(colorsListPreference, null);
+	}
+
+	public static List<Integer> getCustomColors(ListStringPreference colorsListPreference, ApplicationMode appMode) {
 		List<Integer> colors = new ArrayList<>();
-		List<String> colorNames = app.getSettings().CUSTOM_TRACK_COLORS.getStringsList();
+		List<String> colorNames;
+		if (appMode == null) {
+			colorNames = colorsListPreference.getStringsList();
+		} else {
+			colorNames = colorsListPreference.getStringsListForProfile(appMode);
+		}
 		if (colorNames != null) {
 			for (String colorHex : colorNames) {
 				try {
@@ -226,12 +249,24 @@ public class ColorsCard extends BaseCard implements ColorPickerListener {
 		return colors;
 	}
 
+	public int getIndexOfSelectedColor() {
+		return customColors.indexOf(selectedColor);
+	}
+
+	public boolean isBaseColor(int color) {
+		return colors.contains(color);
+	}
+
 	private void saveCustomColors() {
 		List<String> colorNames = new ArrayList<>();
 		for (Integer color : customColors) {
 			String colorHex = Algorithms.colorToString(color);
 			colorNames.add(colorHex);
 		}
-		app.getSettings().CUSTOM_TRACK_COLORS.setStringsList(colorNames);
+		if (appMode == null) {
+			colorsListPreference.setStringsList(colorNames);
+		} else {
+			colorsListPreference.setStringsListForProfile(appMode, colorNames);
+		}
 	}
 }

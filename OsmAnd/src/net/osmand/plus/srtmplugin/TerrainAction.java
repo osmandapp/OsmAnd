@@ -16,8 +16,8 @@ import net.osmand.plus.quickaction.QuickActionType;
 public class TerrainAction extends QuickAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(30,
-			"terrain.showhide", TerrainAction.class).
-			nameRes(R.string.quick_action_show_hide_terrain).iconRes(R.drawable.ic_action_hillshade_dark).nonEditable().
+			"terrain.showhide", TerrainAction.class).nameActionRes(R.string.quick_action_showhide_title).
+			nameRes(R.string.shared_string_terrain).iconRes(R.drawable.ic_action_hillshade_dark).nonEditable().
 			category(QuickActionType.CONFIGURE_MAP);
 
 

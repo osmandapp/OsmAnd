@@ -187,21 +187,9 @@ dependencies {
 	opengldebugImplementation "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
 	openglImplementation "net.osmand:OsmAndCore_androidNativeRelease:0.1-SNAPSHOT@aar"
 	openglImplementation "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
-	implementation ("com.getkeepsafe.taptargetview:taptargetview:1.12.0"){
-		exclude group: 'com.android.support'
-	}
-	implementation 'com.github.PhilJay:MPAndroidChart:v3.0.1'
-	implementation ("com.github.HITGIF:TextFieldBoxes:1.4.5"){
-		exclude group: 'com.android.support'
-	}
-	implementation('com.github.scribejava:scribejava-apis:7.1.1'){
-		exclude group: "com.fasterxml.jackson.core"
-	}
-	implementation 'com.jaredrummler:colorpicker:1.1.0'
-	implementation "org.bouncycastle:bcpkix-jdk15on:1.56"
 
 	huaweiImplementation 'com.huawei.hms:iap:5.0.2.300'
 
-	gplayFreeImplementation 'com.google.android.gms:play-services-location:17.1.0'
-	gplayFullImplementation 'com.google.android.gms:play-services-location:17.1.0'
+	gplayFreeImplementation 'com.google.android.gms:play-services-location:18.0.0'
+	gplayFullImplementation 'com.google.android.gms:play-services-location:18.0.0'
 }

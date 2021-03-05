@@ -18,7 +18,8 @@ public class ShowHideMapillaryAction extends QuickAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(33,
 			"mapillary.showhide", ShowHideMapillaryAction.class)
-			.nameRes(R.string.quick_action_showhide_mapillary_title)
+			.nameActionRes(R.string.quick_action_showhide_title)
+			.nameRes(R.string.mapillary)
 			.iconRes(R.drawable.ic_action_mapillary).nonEditable()
 			.category(QuickActionType.CONFIGURE_MAP);
 

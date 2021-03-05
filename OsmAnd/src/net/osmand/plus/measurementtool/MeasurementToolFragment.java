@@ -1350,7 +1350,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 					snapToRoadBtn.setVisibility(View.VISIBLE);
 					profileWithConfig.setVisibility(View.GONE);
 				} else {
-					icon = getIcon(appMode.getIconRes(), appMode.getIconColorInfo().getColor(nightMode));
+					icon = getPaintedContentIcon(appMode.getIconRes(), appMode.getProfileColor(nightMode));
 					snapToRoadBtn.setVisibility(View.GONE);
 					profileWithConfig.setVisibility(View.VISIBLE);
 				}
@@ -2073,7 +2073,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private void startTrackNavigation() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			if (editingCtx.hasRoute()) {
+			if (editingCtx.hasRoute() || editingCtx.hasChanges()) {
 				String trackName = getSuggestedFileName();
 				GPXFile gpx = editingCtx.exportGpx(trackName);
 				if (gpx != null) {

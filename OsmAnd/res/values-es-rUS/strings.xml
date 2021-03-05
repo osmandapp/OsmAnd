@@ -2120,10 +2120,8 @@
     <string name="quick_action_duplicate">Nombre de la acción rápida duplicado</string>
     <string name="quick_action_showhide_favorites_descr">Un botón que muestra u oculta los puntos favoritos en el mapa.</string>
     <string name="quick_action_showhide_poi_descr">Un botón que muestra u oculta los PDI en el mapa.</string>
-    <string name="quick_action_showhide_favorites_title">Mostrar u ocultar Favoritos</string>
     <string name="quick_action_favorites_show">Mostrar Favoritos</string>
     <string name="quick_action_favorites_hide">Ocultar Favoritos</string>
-    <string name="quick_action_showhide_poi_title">Mostrar u ocultar PDI</string>
     <string name="quick_action_poi_show">Mostrar %1$s</string>
     <string name="quick_action_poi_hide">Ocultar %1$s</string>
     <string name="quick_action_add_category">Añadir una categoría</string>
@@ -2388,7 +2386,6 @@
     <string name="hillshade_menu_download_descr">Descarga la capa superpuesta del mapa «Sombreado» para mostrar el sombreado vertical.</string>
     <string name="hillshade_purchase_header">Instala el complemento «Curvas de nivel» para mostrar las áreas verticales graduadas.</string>
     <string name="hide_from_zoom_level">Ocultar desde el nivel de zoom</string>
-    <string name="quick_action_showhide_osmbugs_title">Mostrar u ocultar notas de OSM</string>
     <string name="quick_action_osmbugs_show">Mostrar notas de OSM</string>
     <string name="quick_action_osmbugs_hide">Ocultar notas de OSM</string>
     <string name="quick_action_showhide_osmbugs_descr">Un botón que muestra u oculta las notas de OSM en el mapa.</string>
@@ -2846,7 +2843,6 @@
     <string name="routeInfo_road_types_name">Tipos de caminos</string>
     <string name="exit_at">Bajar en</string>
     <string name="sit_on_the_stop">Esperar en la parada</string>
-    <string name="quick_action_show_hide_gpx_tracks">Mostrar u ocultar trazas</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Un botón que muestra u oculta las trazas elegidas en el mapa.</string>
     <string name="quick_action_gpx_tracks_hide">Ocultar trazas</string>
     <string name="quick_action_gpx_tracks_show">Mostrar trazas</string>
@@ -3266,11 +3262,9 @@
     <string name="quick_action_contour_lines_descr">Un botón que muestra u oculta las curvas de nivel en el mapa.</string>
     <string name="quick_action_contour_lines_show">Mostrar curvas de nivel</string>
     <string name="quick_action_contour_lines_hide">Ocultar curvas de nivel</string>
-    <string name="quick_action_show_hide_contour_lines">Mostrar u ocultar curvas de nivel</string>
     <string name="quick_action_hillshade_descr">Un botón que muestra u oculta el sombreado de las colinas en el mapa.</string>
     <string name="quick_action_hillshade_show">Mostrar el sombreado</string>
     <string name="quick_action_hillshade_hide">Ocultar el sombreado</string>
-    <string name="quick_action_show_hide_hillshade">Mostrar u ocultar el sombreado</string>
     <string name="tts_initialization_error">Imposible iniciar el motor de habla sintetizada.</string>
     <string name="simulate_your_location_gpx_descr">Simular la ubicación usando una traza GPX grabada.</string>
     <string name="export_profile">Exportar perfil</string>
@@ -3496,7 +3490,6 @@
     <string name="recalculate_route_distance_promo">La ruta será recalculada si la distancia a la ubicación actual es mayor que el valor elegido.</string>
     <string name="n_items_of_z">%1$s de %2$s</string>
     <string name="download_slope_maps">Pendientes</string>
-    <string name="quick_action_show_hide_terrain">Mostrar u ocultar terreno</string>
     <string name="quick_action_terrain_hide">Ocultar terreno</string>
     <string name="quick_action_terrain_show">Mostrar terreno</string>
     <string name="quick_action_terrain_descr">Un botón que muestra u oculta la capa del terreno en el mapa.</string>
@@ -3614,7 +3607,6 @@
     <string name="additional_actions_descr">Puedes acceder a estas acciones pulsando el botón «%1$s».</string>
     <string name="quick_action_transport_hide">Ocultar transporte público</string>
     <string name="quick_action_transport_show">Mostrar transporte público</string>
-    <string name="quick_action_show_hide_transport">Mostrar u ocultar transporte público</string>
     <string name="quick_action_transport_descr">Botón que muestra u oculta el transporte público en el mapa.</string>
     <string name="create_edit_poi">Crear o editar PDI</string>
     <string name="parking_positions">Puestos de estacionamiento</string>
@@ -3695,7 +3687,6 @@
 \nPulsa en «%2$s», para borrar todos los datos relacionados con los radares de velocidad (alertas, notificaciones y PDI) hasta reinstalar OsmAnd completamente.</string>
     <string name="keep_active">Mantener</string>
     <string name="shared_string_uninstall">Desinstalar</string>
-    <string name="quick_action_showhide_mapillary_title">Mostrar u ocultar Mapillary</string>
     <string name="quick_action_mapillary_hide">Ocultar Mapillary</string>
     <string name="quick_action_mapillary_show">Mostrar Mapillary</string>
     <string name="quick_action_showhide_mapillary_descr">Un botón que alterna la capa de Mapillary en el mapa.</string>
