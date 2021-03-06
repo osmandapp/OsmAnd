@@ -310,9 +310,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		outState.putString(PROFILE_STRINGKEY_KEY, changedProfile.stringKey);
 		outState.putInt(PROFILE_ICON_RES_KEY, changedProfile.iconRes);
 		outState.putSerializable(PROFILE_COLOR_KEY, changedProfile.color);
-		if (changedProfile.customColor != null) {
-			outState.putInt(PROFILE_CUSTOM_COLOR_KEY, changedProfile.customColor);
-		}
+		outState.putSerializable(PROFILE_CUSTOM_COLOR_KEY, changedProfile.customColor);
 		if (changedProfile.parent != null) {
 			outState.putString(PROFILE_PARENT_KEY, changedProfile.parent.getStringKey());
 		}
@@ -327,15 +325,13 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		changedProfile.stringKey = savedInstanceState.getString(PROFILE_STRINGKEY_KEY);
 		changedProfile.iconRes = savedInstanceState.getInt(PROFILE_ICON_RES_KEY);
 		changedProfile.color = (ProfileIconColors) savedInstanceState.getSerializable(PROFILE_COLOR_KEY);
+		changedProfile.customColor = (Integer) savedInstanceState.getSerializable(PROFILE_CUSTOM_COLOR_KEY);
 		String parentStringKey = savedInstanceState.getString(PROFILE_PARENT_KEY);
 		changedProfile.parent = ApplicationMode.valueOfStringKey(parentStringKey, null);
 		isBaseProfileImported = savedInstanceState.getBoolean(IS_BASE_PROFILE_IMPORTED);
 		changedProfile.locationIcon = (LocationIcon) savedInstanceState.getSerializable(PROFILE_LOCATION_ICON_KEY);
 		changedProfile.navigationIcon = (NavigationIcon) savedInstanceState.getSerializable(PROFILE_NAVIGATION_ICON_KEY);
 		isNewProfile = savedInstanceState.getBoolean(IS_NEW_PROFILE_KEY);
-		if (savedInstanceState.containsKey(PROFILE_CUSTOM_COLOR_KEY)) {
-			changedProfile.customColor = savedInstanceState.getInt(PROFILE_CUSTOM_COLOR_KEY);
-		}
 	}
 
 	@Override
