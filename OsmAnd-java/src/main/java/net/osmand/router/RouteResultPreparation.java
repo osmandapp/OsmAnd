@@ -186,32 +186,22 @@ public class RouteResultPreparation {
 	
 	public RouteSegmentResult filterMinorStops(RouteSegmentResult seg) {
 		List<Integer> stops = null;
-		int startPoint = seg.getStartPointIndex();
-		int endPoint = seg.getEndPointIndex();
-		int start;
-		int end;
+		boolean plus = seg.getStartPointIndex() < seg.getEndPointIndex();
+		int next;
 
-		if (startPoint < endPoint) {
-			start = startPoint;
-			end = endPoint;
-		} else {
-			start = endPoint;
-			end = startPoint;
-		}
-
-		while (start <= end) {
-			int[] pointTypes = seg.getObject().getPointTypes(start);
+		for (int i = seg.getStartPointIndex(); i != seg.getEndPointIndex(); i = next) {
+			next = plus ? i + 1 : i - 1;
+			int[] pointTypes = seg.getObject().getPointTypes(i);
 			if (pointTypes != null) {
 				for (int j = 0; j < pointTypes.length; j++) {
 					if (pointTypes[j] == seg.getObject().region.stopMinor) {
 						if (stops == null) {
 							stops = new ArrayList<>();
 						}
-						stops.add(start);
+						stops.add(i);
 					}
 				}
 			}
-			start++;
 		}
 
 		if (stops != null) {

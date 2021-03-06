@@ -276,7 +276,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 		}
 	}
 
-	protected InAppCommand getPurchaseLiveUpdatesCommand(final WeakReference<Activity> activity, final String sku, final String payload) {
+	protected InAppCommand getPurchaseLiveUpdatesCommand(final WeakReference<Activity> activity, final String sku, final String userInfo) {
 		return new InAppCommand() {
 			@Override
 			public void run(InAppPurchaseHelper helper) {
@@ -285,7 +285,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 					ProductInfo productInfo = getProductInfo(sku);
 					if (AndroidUtils.isActivityNotDestroyed(a) && productInfo != null) {
 						IapRequestHelper.createPurchaseIntent(getIapClient(), sku,
-								IapClient.PriceType.IN_APP_SUBSCRIPTION, payload, new IapApiCallback<PurchaseIntentResult>() {
+								IapClient.PriceType.IN_APP_SUBSCRIPTION, userInfo, new IapApiCallback<PurchaseIntentResult>() {
 									@Override
 									public void onSuccess(PurchaseIntentResult result) {
 										if (result == null) {

@@ -41,6 +41,8 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 	private final Set<EngineParameter> allowedParameters = new HashSet<>();
 
 	public OnlineRoutingEngine(@Nullable Map<String, String> params) {
+		// Params represents the entire state of an engine object.
+		// An engine object with null params used only to provide information about the engine type
 		if (!isEmpty(params)) {
 			this.params.putAll(params);
 		}

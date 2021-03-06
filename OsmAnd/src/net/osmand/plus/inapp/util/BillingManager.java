@@ -2,9 +2,7 @@ package net.osmand.plus.inapp.util;
 
 import android.app.Activity;
 import android.content.Context;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import android.text.TextUtils;
 
 import com.android.billingclient.api.AcknowledgePurchaseParams;
 import com.android.billingclient.api.AcknowledgePurchaseResponseListener;
@@ -25,13 +23,15 @@ import com.android.billingclient.api.SkuDetailsParams;
 import com.android.billingclient.api.SkuDetailsResponseListener;
 
 import net.osmand.PlatformUtil;
-import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 /**
  * Handles all the interactions with Play Store (via Billing library), maintains connection to
@@ -58,7 +58,9 @@ public class BillingManager implements PurchasesUpdatedListener {
 
 	// Public key for verifying signature, in base64 encoding
 	private String mSignatureBase64;
-	private String mPayload;
+
+	private String mObfuscatedAccountId;
+	private String mObfuscatedProfileId;
 
 	private final BillingUpdatesListener mBillingUpdatesListener;
 	private final List<Purchase> mPurchases = new ArrayList<>();
@@ -135,18 +137,29 @@ public class BillingManager implements PurchasesUpdatedListener {
 	 * Start a purchase flow
 	 */
 	public void initiatePurchaseFlow(final Activity activity, final SkuDetails skuDetails) {
-		initiatePurchaseFlow(activity, skuDetails, null);
+		initiatePurchaseFlow(activity, skuDetails, null, null);
 	}
 
 	/**
 	 * Start a purchase or subscription replace flow
 	 */
-	public void initiatePurchaseFlow(final Activity activity, final SkuDetails skuDetails, final String oldSku) {
+	public void initiatePurchaseFlow(final Activity activity, final SkuDetails skuDetails, final String oldSku, final String purchaseToken) {
 		Runnable purchaseFlowRequest = new Runnable() {
 			@Override
 			public void run() {
-				LOG.debug("Launching in-app purchase flow. Replace old SKU? " + (oldSku != null));
-				BillingFlowParams purchaseParams = BillingFlowParams.newBuilder().setSkuDetails(skuDetails).setOldSku(oldSku).build();
+				LOG.debug("Launching in-app purchase flow. Replace old SKU? " + (oldSku != null && purchaseToken != null));
+				BillingFlowParams.Builder paramsBuilder = BillingFlowParams.newBuilder()
+						.setSkuDetails(skuDetails);
+				if (!TextUtils.isEmpty(mObfuscatedAccountId)) {
+					paramsBuilder.setObfuscatedAccountId(mObfuscatedAccountId);
+				}
+				if (!TextUtils.isEmpty(mObfuscatedProfileId)) {
+					paramsBuilder.setObfuscatedProfileId(mObfuscatedProfileId);
+				}
+				if (oldSku != null && purchaseToken != null) {
+					paramsBuilder.setOldSku(oldSku, purchaseToken);
+				}
+				BillingFlowParams purchaseParams = paramsBuilder.build();
 				mBillingClient.launchBillingFlow(activity, purchaseParams);
 			}
 		};
@@ -177,9 +190,11 @@ public class BillingManager implements PurchasesUpdatedListener {
 			@Override
 			public void run() {
 				// Query the purchase async
-				SkuDetailsParams.Builder params = SkuDetailsParams.newBuilder();
-				params.setSkusList(skuList).setType(itemType);
-				mBillingClient.querySkuDetailsAsync(params.build(),
+				SkuDetailsParams params = SkuDetailsParams.newBuilder()
+						.setSkusList(skuList)
+						.setType(itemType)
+						.build();
+				mBillingClient.querySkuDetailsAsync(params,
 						new SkuDetailsResponseListener() {
 							@Override
 							public void onSkuDetailsResponse(BillingResult billingResult, List<SkuDetails> skuDetailsList) {
@@ -247,15 +262,6 @@ public class BillingManager implements PurchasesUpdatedListener {
 		return Collections.unmodifiableList(mPurchases);
 	}
 
-
-	public String getPayload() {
-		return mPayload;
-	}
-
-	public void setPayload(String payload) {
-		this.mPayload = payload;
-	}
-
 	/**
 	 * Handles the purchase
 	 * <p>Note: Notice that for each purchase, we check if signature is valid on the client.
@@ -274,13 +280,9 @@ public class BillingManager implements PurchasesUpdatedListener {
 		if (purchase.getPurchaseState() == Purchase.PurchaseState.PURCHASED) {
 			// Acknowledge the purchase if it hasn't already been acknowledged.
 			if (!purchase.isAcknowledged()) {
-				AcknowledgePurchaseParams.Builder builder =
-						AcknowledgePurchaseParams.newBuilder()
-								.setPurchaseToken(purchase.getPurchaseToken());
-				if (!Algorithms.isEmpty(mPayload)) {
-					builder.setDeveloperPayload(mPayload);
-				}
-				AcknowledgePurchaseParams acknowledgePurchaseParams = builder.build();
+				AcknowledgePurchaseParams acknowledgePurchaseParams = AcknowledgePurchaseParams.newBuilder()
+						.setPurchaseToken(purchase.getPurchaseToken())
+						.build();
 				mBillingClient.acknowledgePurchase(acknowledgePurchaseParams, new AcknowledgePurchaseResponseListener() {
 					@Override
 					public void onAcknowledgePurchaseResponse(BillingResult billingResult) {
@@ -402,6 +404,14 @@ public class BillingManager implements PurchasesUpdatedListener {
 				mBillingUpdatesListener.onBillingClientSetupFinished();
 			}
 		});
+	}
+
+	public void setObfuscatedAccountId(String obfuscatedAccountId) {
+		mObfuscatedAccountId = obfuscatedAccountId;
+	}
+
+	public void setObfuscatedProfileId(String obfuscatedProfileId) {
+		mObfuscatedProfileId = obfuscatedProfileId;
 	}
 
 	private void executeServiceRequest(Runnable runnable) {
