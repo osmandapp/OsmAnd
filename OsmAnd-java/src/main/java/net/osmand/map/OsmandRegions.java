@@ -478,10 +478,8 @@ public class OsmandRegions {
 
 		if (object.getPointsLength() > 1) {
 			for (int i = 1; i < object.getPointsLength(); i++) {
-				int tileX = object.getPoint31XTile(i);
-				int tileY = object.getPoint31YTile(i);
-				currentX = tileX;
-				currentY = tileY;
+				currentX = object.getPoint31XTile(i);
+				currentY = object.getPoint31YTile(i);
 				if (currentX > maxX) {
 					maxX = currentX;
 				} else if (currentX < minX) {
