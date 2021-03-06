@@ -262,7 +262,7 @@ public class LiveUpdatesSettingsDialogFragmentNew extends MenuBottomSheetDialogF
 		AndroidUtils.setMargins(itemUpdateNowParams, AndroidUtils.dpToPx(app, 12), AndroidUtils.dpToPx(app, 12), AndroidUtils.dpToPx(app, 16), AndroidUtils.dpToPx(app, 12));
 		itemUpdateNowButton.setLayoutParams(itemUpdateNowParams);
 		((AppCompatImageView) itemUpdateNowButton.findViewById(R.id.button_icon)).setImageDrawable(
-				ContextCompat.getDrawable(app, R.drawable.ic_action_refresh_dark));
+				ContextCompat.getDrawable(app, R.drawable.ic_action_update));
 		UiUtilities.setupDialogButton(nightMode, itemUpdateNowButton, UiUtilities.DialogButtonType.SECONDARY, app.getResources().getString(R.string.update_now));
 		itemUpdateNowButton.setMinimumHeight(AndroidUtils.dpToPx(app, app.getResources().getDimension(R.dimen.dialog_button_height)));
 

@@ -393,7 +393,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 						AndroidUtils.setTextPrimaryColor(app, tvTitle, nightMode);
 						countView = view.findViewById(R.id.description);
 						AndroidUtils.setTextSecondaryColor(app, countView, nightMode);
-						Drawable additionalIconDrawable = AppCompatResources.getDrawable(app, R.drawable.ic_action_refresh_dark);
+						Drawable additionalIconDrawable = AppCompatResources.getDrawable(app, R.drawable.ic_action_update);
 						UiUtilities.tintDrawable(additionalIconDrawable, ContextCompat.getColor(app, getDefaultIconColorId(nightMode)));
 						((ImageView) view.findViewById(R.id.additional_button_icon)).setImageDrawable(additionalIconDrawable);
 						LinearLayout additionalButton = view.findViewById(R.id.additional_button);
