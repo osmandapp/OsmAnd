@@ -431,7 +431,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 			ArrayList<Integer> icons = ProfileIcons.getIcons();
 			for (int iconRes : icons) {
 				View iconItem = createIconItemView(iconRes, iconItems);
-				iconItems.addView(iconItem, new FlowLayout.LayoutParams(0, 0));
+				int minimalPaddingBetweenIcon = app.getResources().getDimensionPixelSize(R.dimen.favorites_select_icon_button_right_padding);
+				iconItems.addView(iconItem, new FlowLayout.LayoutParams(minimalPaddingBetweenIcon, 0));
 				iconItems.setHorizontalAutoSpacing(true);
 			}
 			setIconColor(changedProfile.iconRes);

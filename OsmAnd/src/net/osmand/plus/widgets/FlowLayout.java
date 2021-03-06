@@ -100,14 +100,14 @@ public class FlowLayout extends ViewGroup {
 						verticalPosition += line_height;
 					}
 					child.layout(horizontalPosition - childWidth, verticalPosition, horizontalPosition, verticalPosition + childHeight);
-					horizontalPosition -= childWidth + freeSizeSpacing;
+					horizontalPosition -= freeSizeSpacing;
 				} else {
 					if (horizontalPosition + childWidth > width) {
 						horizontalPosition = getPaddingLeft();
 						verticalPosition += line_height;
 					}
 					child.layout(horizontalPosition, verticalPosition, horizontalPosition + childWidth, verticalPosition + childHeight);
-					horizontalPosition += childWidth + freeSizeSpacing;
+					horizontalPosition += freeSizeSpacing;
 				}
 			}
 		}
@@ -117,11 +117,11 @@ public class FlowLayout extends ViewGroup {
 		int freeSizeSpacing;
 		int itemsCount = width / (childWidth + lp.horizontalSpacing);
 		if (itemsCount > 1 && horizontalAutoSpacing) {
-			freeSizeSpacing = (width % childWidth / (itemsCount - 1)) + lp.horizontalSpacing;
+			freeSizeSpacing = (width - childWidth) / (itemsCount-1);
 		} else if (!horizontalAutoSpacing) {
-			freeSizeSpacing = lp.horizontalSpacing;
+			freeSizeSpacing = childWidth + lp.horizontalSpacing;
 		} else {
-			freeSizeSpacing = (width % childWidth / itemsCount) + lp.horizontalSpacing;
+			freeSizeSpacing = (width % childWidth / itemsCount);
 		}
 		return freeSizeSpacing;
 	}
