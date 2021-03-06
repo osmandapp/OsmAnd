@@ -2119,10 +2119,8 @@
     <string name="quick_action_interim_dialog">Ammustra una ventana intermèdia</string>
     <string name="quick_action_showhide_favorites_descr">Unu butone pro ammustrare o cuare sos puntos preferidos in sa mapa.</string>
     <string name="quick_action_showhide_poi_descr">Unu butone pro ammustrare o cuare sos PDI in sa mapa.</string>
-    <string name="quick_action_showhide_favorites_title">Ammustra/cua sos preferidos</string>
     <string name="quick_action_favorites_show">Ammustra sos preferidos</string>
     <string name="quick_action_favorites_hide">Cua sos preferidos</string>
-    <string name="quick_action_showhide_poi_title">Ammustra/cua sos PDI</string>
     <string name="quick_action_poi_show">Ammustra %1$s</string>
     <string name="quick_action_poi_hide">Cua %1$s</string>
     <string name="quick_action_add_category">Annanghe una categoria</string>
@@ -2389,7 +2387,6 @@
     <string name="srtm_purchase_header">Còmpora e installa s\'estensione \'Curvas de Livellu\' pro ammustrare sas àreas verticales graduadas.</string>
     <string name="search_favorites">Chirca in sos preferidos</string>
     <string name="sorted_by_distance">Ordinados pro distàntzia</string>
-    <string name="quick_action_showhide_osmbugs_title">Ammustra/cua sas notas OSM</string>
     <string name="quick_action_osmbugs_show">Ammustra sas notas OSM</string>
     <string name="quick_action_osmbugs_hide">Cua sas notas OSM</string>
     <string name="quick_action_showhide_osmbugs_descr">Unu butone pro ammustrare o cuare sas Notas OSM in sa mapa.</string>
@@ -2844,7 +2841,6 @@
     <string name="routeInfo_road_types_name">Castas de àndalas</string>
     <string name="exit_at">Essi in</string>
     <string name="sit_on_the_stop">Àrtzia in sa firmada</string>
-    <string name="quick_action_show_hide_gpx_tracks">Ammustra/cua sas rastas</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Unu butone pro ammustrare o cuare sas rastas ischertadas in sa mapa.</string>
     <string name="quick_action_gpx_tracks_hide">Istichi sas rastas</string>
     <string name="quick_action_gpx_tracks_show">Ammustra sas rastas</string>
@@ -3264,11 +3260,9 @@
     <string name="quick_action_contour_lines_descr">Butone chi ammustrat o cuat sas curvas de livellu in sa mapa.</string>
     <string name="quick_action_contour_lines_show">Ammustra sas curvas de livellu</string>
     <string name="quick_action_contour_lines_hide">Cua sas curvas de livellu</string>
-    <string name="quick_action_show_hide_contour_lines">Ammustra/cua sas curvas de livellu</string>
     <string name="quick_action_hillshade_descr">Unu butone pro ammustrare o cuare sas umbraduras de sos rilievos in sa mapa.</string>
     <string name="quick_action_hillshade_show">Ammustra sas umbraduras de sos rilievos</string>
     <string name="quick_action_hillshade_hide">Cua sas umbraduras de sos rilievos</string>
-    <string name="quick_action_show_hide_hillshade">Ammustra/cua sas umbraduras de sos rilievos</string>
     <string name="tts_initialization_error">Allughidura de su motore de sìntesi vocale fallida.</string>
     <string name="simulate_your_location_gpx_descr">Sìmula sa positzione tua impreende una rasta GPX registrada.</string>
     <string name="export_profile">Esporta su profilu</string>
@@ -3494,7 +3488,6 @@
     <string name="shared_string_hillshade">Umbraduras de sos rilievos</string>
     <string name="n_items_of_z">%1$s de %2$s</string>
     <string name="download_slope_maps">Pistas</string>
-    <string name="quick_action_show_hide_terrain">Ammustra o cua su terrinu</string>
     <string name="quick_action_terrain_hide">Cua su terrinu</string>
     <string name="quick_action_terrain_show">Ammustra su terrinu</string>
     <string name="quick_action_terrain_descr">Unu butone pro ammustrare o cuare s\'istratu de su terrinu in sa mapa.</string>
@@ -3612,7 +3605,6 @@
     <string name="additional_actions_descr">Podes atzèdere a custas atziones incarchende su butone \"%1$s\".</string>
     <string name="quick_action_transport_hide">Cua sos trasportos pùblicos</string>
     <string name="quick_action_transport_show">Ammustra sos trasportos pùblicos</string>
-    <string name="quick_action_show_hide_transport">Ammustra o cua sos trasportos pùblicos</string>
     <string name="quick_action_transport_descr">Butone pro ammustrare o cuare sos trasportos pùblicos in sa mapa.</string>
     <string name="create_edit_poi">Crea o modìfica unu PDI</string>
     <string name="parking_positions">Logos de parchègiu</string>
@@ -3680,7 +3672,6 @@
     <string name="vessel_height_warning">Podes impostare s\'artària de sa barca pro evitare sos pontes bassos. Ammenta·ti chi, si su ponte est mòbile, amus a impreare s\'artària sua de cando est abertu.</string>
     <string name="vessel_height_limit_description">Imposta s\'artària de sa barca pro evitare sos pontes bassos. Ammenta·ti chi, si su ponte est mòbile, amus a impreare s\'artària sua de cando est abertu.</string>
     <string name="vessel_width_limit_description">Imposta sa largària de sa barca pro evitare pontes astrintos</string>
-    <string name="quick_action_showhide_mapillary_title">Ammustra/cua Mapillary</string>
     <string name="quick_action_mapillary_hide">Cua Mapillary</string>
     <string name="quick_action_mapillary_show">Ammustra Mapillary</string>
     <string name="quick_action_showhide_mapillary_descr">Unu butone pro ammustrare o cuare s\'istratu de Mapillary in sa mapa.</string>

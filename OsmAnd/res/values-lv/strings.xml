@@ -2072,10 +2072,8 @@ Apraksta laukumu: %1$s x %2$s</string>
     <string name="favorite_empty_place_name">Vieta</string>
     <string name="quick_action_showhide_favorites_descr">Spiežot darbības pogu, tiks rādīti vai slēpti favorīti.</string>
     <string name="quick_action_showhide_poi_descr">Spiežot darbības pogu, tiks rādīti vai slēpti POI.</string>
-    <string name="quick_action_showhide_favorites_title">Rādīt/nerādīt izlasi</string>
     <string name="quick_action_favorites_show">Rādīt favorītus</string>
     <string name="quick_action_favorites_hide">Nerādīt izlasi</string>
-    <string name="quick_action_showhide_poi_title">Rādīt/slēpt POI</string>
     <string name="quick_action_poi_show">Rādīt %1$s</string>
     <string name="quick_action_poi_hide">Paslēpt %1$s</string>
     <string name="quick_action_add_category">Pievienot kategoriju</string>
@@ -2202,7 +2200,6 @@ Apraksta laukumu: %1$s x %2$s</string>
     <string name="increase_search_radius">Paplašināt meklēšanas rādiusu</string>
     <string name="nothing_found">Neko neatrada</string>
     <string name="nothing_found_descr">Meklējiet pēc cita vārda vai palieliniet meklēšanas rādiusu.</string>
-    <string name="quick_action_showhide_osmbugs_title">Rādīt/nerādīt OSM piezīmes</string>
     <string name="routing_attr_allow_private_description">Atļaut piekļūšanu privātajām teritorijām.</string>
     <string name="animate_my_location_desc">Maršruta gaitā iespējot kartes pagriešanas animāciju no manas atrašanās vietas.</string>
     <string name="quick_action_auto_zoom_desc">Ieslēdz vai izslēdz automātisko tālummaiņu, atkarībā no kustības ātruma.</string>
@@ -2670,7 +2667,6 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="step_by_step">Soli pa solim</string>
     <string name="exit_at">Iziet pie</string>
     <string name="sit_on_the_stop">Soliņš pieturā</string>
-    <string name="quick_action_show_hide_gpx_tracks">Rādīt/Slēpt GPX trekus</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Nospiežot šo pogu, tiek parādīti vai slēpti izvēlētie GPX treki uz kartes</string>
     <string name="quick_action_gpx_tracks_hide">Paslēpt GPX trekus</string>
     <string name="quick_action_gpx_tracks_show">Parādīt GPX trekus</string>

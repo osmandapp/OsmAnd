@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import net.osmand.GPXUtilities;
+import net.osmand.IndexConstants;
 import net.osmand.data.Amenity;
 import net.osmand.data.City;
 import net.osmand.data.FavouritePoint;
@@ -23,6 +24,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.OsmAndListFragment;
+import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
+import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
 import net.osmand.plus.search.listitems.QuickSearchBottomShadowListItem;
@@ -30,10 +33,12 @@ import net.osmand.plus.search.listitems.QuickSearchButtonListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItemType;
 import net.osmand.plus.search.listitems.QuickSearchTopShadowListItem;
+import net.osmand.plus.track.TrackMenuFragment;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -95,7 +100,8 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 							|| sr.objectType == ObjectType.FAVORITE
 							|| sr.objectType == ObjectType.RECENT_OBJ
 							|| sr.objectType == ObjectType.WPT
-							|| sr.objectType == ObjectType.STREET_INTERSECTION) {
+							|| sr.objectType == ObjectType.STREET_INTERSECTION
+							|| sr.objectType == ObjectType.GPX_TRACK) {
 
 						showResult(sr);
 					} else {
@@ -165,7 +171,9 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 
 	public void showResult(SearchResult searchResult) {
 		showResult = false;
-		if (searchResult.location != null) {
+		if (searchResult.objectType == ObjectType.GPX_TRACK) {
+			showTrackMenuFragment((GPXInfo) searchResult.relatedObject);
+		} else if (searchResult.location != null) {
 			OsmandApplication app = getMyApplication();
 			String lang = searchResult.requiredSearchPhrase.getSettings().getLang();
 			boolean transliterate = searchResult.requiredSearchPhrase.getSettings().isTransliterate();
@@ -290,6 +298,16 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 				dialogFragment.reloadHistory();
 			}
 		}
+	}
+
+	private void showTrackMenuFragment(GPXInfo gpxInfo) {
+		OsmandApplication app = getMyApplication();
+		MapActivity mapActivity = getMapActivity();
+		SearchHistoryHelper.getInstance(app).addNewItemToHistory(gpxInfo);
+		File file = new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR), gpxInfo.getFileName());
+		String path = file.getAbsolutePath();
+		TrackMenuFragment.showInstance(mapActivity, path, false, null, QuickSearchDialogFragment.TAG);
+		dialogFragment.dismiss();
 	}
 
 	public MapActivity getMapActivity() {

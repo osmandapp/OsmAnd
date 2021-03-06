@@ -364,8 +364,8 @@ public abstract class InAppPurchaseHelper {
 			notifyDismissProgress(InAppPurchaseTaskType.PURCHASE_LIVE_UPDATES);
 			if (!Algorithms.isEmpty(userId) && !Algorithms.isEmpty(token)) {
 				logDebug("Launching purchase flow for live updates subscription for userId=" + userId);
-				final String payload = userId + " " + token;
-				exec(InAppPurchaseTaskType.PURCHASE_LIVE_UPDATES, getPurchaseLiveUpdatesCommand(activity, sku, payload));
+				final String userInfo = userId + " " + token;
+				exec(InAppPurchaseTaskType.PURCHASE_LIVE_UPDATES, getPurchaseLiveUpdatesCommand(activity, sku, userInfo));
 			} else {
 				notifyError(InAppPurchaseTaskType.PURCHASE_LIVE_UPDATES, "Empty userId");
 				stop(true);
@@ -374,7 +374,7 @@ public abstract class InAppPurchaseHelper {
 	}
 
 	protected abstract InAppCommand getPurchaseLiveUpdatesCommand(final WeakReference<Activity> activity,
-																  final String sku, final String payload) throws UnsupportedOperationException;
+																  final String sku, final String userInfo) throws UnsupportedOperationException;
 
 	@SuppressLint("StaticFieldLeak")
 	private class RequestInventoryTask extends AsyncTask<Void, Void, String[]> {

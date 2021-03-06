@@ -47,6 +47,7 @@ public class PointDescription {
 	public static final String POINT_TYPE_OSM_BUG = "bug";
 	public static final String POINT_TYPE_WORLD_REGION = "world_region";
 	public static final String POINT_TYPE_GPX_ITEM = "gpx_item";
+	public static final String POINT_TYPE_GPX_FILE = "gpx_file";
 	public static final String POINT_TYPE_WORLD_REGION_SHOW_ON_MAP = "world_region_show_on_map";
 	public static final String POINT_TYPE_BLOCKED_ROAD = "blocked_road";
 	public static final String POINT_TYPE_TRANSPORT_ROUTE = "transport_route";
@@ -295,6 +296,10 @@ public class PointDescription {
 
 	public boolean isGpxPoint() {
 		return POINT_TYPE_GPX.equals(type);
+	}
+
+	public boolean isGpxFile() {
+		return POINT_TYPE_GPX_FILE.equals(type);
 	}
 
 	@Override

@@ -2099,10 +2099,8 @@
     <string name="favorite_empty_place_name">Emplacement</string>
     <string name="quick_action_duplicates">Ce nom existe déjà, l\'action rapide a été renommée en %1$s.</string>
     <string name="quick_action_duplicate">Nom d\'action rapide en double</string>
-    <string name="quick_action_showhide_favorites_title">Afficher / masquer les favoris</string>
     <string name="quick_action_favorites_show">Afficher les favoris</string>
     <string name="quick_action_favorites_hide">Masquer les favoris</string>
-    <string name="quick_action_showhide_poi_title">Afficher / masquer les points d\'intérêt</string>
     <string name="quick_action_poi_show">Afficher %1$s</string>
     <string name="quick_action_poi_hide">Masquer %1$s</string>
     <string name="quick_action_add_category">Ajouter une catégorie</string>
@@ -2305,7 +2303,6 @@
     <string name="hillshade_purchase_header">Téléchargez le greffon \'Courbes de niveaux\' pour mieux visualiser le relief.</string>
     <string name="hide_from_zoom_level">Masquer à partir du niveau de zoom</string>
     <string name="hillshade_menu_download_descr">Téléchargez la sur-couche \'Ombrage du relief\' pour mieux visualiser le relief.</string>
-    <string name="quick_action_showhide_osmbugs_title">Afficher ou masquer les notes OSM</string>
     <string name="quick_action_osmbugs_show">Afficher les notes OSM</string>
     <string name="quick_action_osmbugs_hide">Masquer les notes OSM</string>
     <string name="quick_action_showhide_osmbugs_descr">Bouton pour afficher ou masquer les notes OSM sur la carte.</string>
@@ -2834,7 +2831,6 @@
     <string name="step_by_step">Instructions pas à pas</string>
     <string name="routeInfo_road_types_name">Types de route</string>
     <string name="exit_at">Sortir à</string>
-    <string name="quick_action_show_hide_gpx_tracks">Afficher / masquer les traces</string>
     <string name="quick_action_gpx_tracks_hide">Masquer les traces</string>
     <string name="quick_action_gpx_tracks_show">Afficher les traces</string>
     <string name="use_osm_live_public_transport_description">Activer les modifications de transports publics en temps réel avec OsmAnd Live.</string>
@@ -3255,11 +3251,9 @@
     <string name="quick_action_contour_lines_descr">Bouton affichant ou masquant les courbes de niveaux sur la carte.</string>
     <string name="quick_action_contour_lines_show">Afficher les courbes de niveaux</string>
     <string name="quick_action_contour_lines_hide">Masquer les courbes de niveaux</string>
-    <string name="quick_action_show_hide_contour_lines">Afficher / masquer les courbes de niveaux</string>
     <string name="quick_action_hillshade_descr">Bouton affichant ou masquant l\'ombrage du relief sur la carte.</string>
     <string name="quick_action_hillshade_show">Afficher l\'ombrage du relief</string>
     <string name="quick_action_hillshade_hide">Masquer l\'ombrage du relief</string>
-    <string name="quick_action_show_hide_hillshade">Afficher / masquer l\'ombrage du relief</string>
     <string name="tts_initialization_error">Impossible de démarrer le moteur de synthèse vocale.</string>
     <string name="simulate_your_location_gpx_descr">Simulez votre position à l\'aide d\'une trace GPX enregistrée.</string>
     <string name="export_profile">Exporter le profil</string>
@@ -3486,7 +3480,6 @@
     <string name="terrain_empty_state_text">Active l\'affichage de l\'ombrage du relief et l\'inclinaison. Vous pouvez en savoir plus sur ces types de cartes sur notre site.</string>
     <string name="shared_string_hillshade">Ombrage du relief</string>
     <string name="download_slope_maps">Pentes</string>
-    <string name="quick_action_show_hide_terrain">Affiche ou masque le terrain</string>
     <string name="quick_action_terrain_hide">Masquer le terrain</string>
     <string name="quick_action_terrain_show">Afficher le terrain</string>
     <string name="quick_action_terrain_descr">Un bouton pour afficher ou masquer la couche terrain sur la carte.</string>
@@ -3602,7 +3595,6 @@
     <string name="additional_actions_descr">Vous pouvez accéder à ces actions en appuyant sur le bouton \"%1$s\".</string>
     <string name="quick_action_transport_hide">Masquer les transports publics</string>
     <string name="quick_action_transport_show">Afficher les transports publics</string>
-    <string name="quick_action_show_hide_transport">Affiche ou masque les transports publics</string>
     <string name="quick_action_transport_descr">Bouton pour afficher ou masquer les transports publics sur la carte.</string>
     <string name="create_edit_poi">Créer ou modifier un PI</string>
     <string name="parking_positions">Emplacements de stationnement</string>
@@ -3671,7 +3663,6 @@
     <string name="vessel_height_warning">Vous pouvez définir la hauteur du navire pour éviter les ponts bas. Souvenez-vous que si le pont est mobile, nous utiliserons sa hauteur en position ouverte.</string>
     <string name="vessel_height_limit_description">Définir la hauteur du navire afin d\'éviter les ponts bas. Souvenez-vous que si le pont est mobile, nous utiliserons sa hauteur en position ouverte.</string>
     <string name="vessel_width_limit_description">Définir la largeur du navire pour éviter les ponts étroits</string>
-    <string name="quick_action_showhide_mapillary_title">Afficher/masquer Mapillary</string>
     <string name="quick_action_mapillary_hide">Masquer Mapillary</string>
     <string name="quick_action_mapillary_show">Afficher Mapillary</string>
     <string name="quick_action_showhide_mapillary_descr">Bouton pour afficher ou masquer la couche Mapillary sur la carte.</string>

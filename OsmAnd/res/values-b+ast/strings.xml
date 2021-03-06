@@ -539,7 +539,6 @@
     <string name="increase_search_radius">Aumentar el radiu de gueta</string>
     <string name="nothing_found">Nun s\'alcontró nada</string>
     <string name="nothing_found_descr">Modifica la consulta o aumenta\'l radiu de gueta.</string>
-    <string name="quick_action_showhide_osmbugs_title">Alternar notes d\'OSM</string>
     <string name="quick_action_showhide_osmbugs_descr">Tocar esti botón d\'aición amuesa/anubre nel mapa les notes d\'OSM.</string>
     <string name="shared_string_plugin">Plugin</string>
     <string name="srtm_color_scheme">Esquema de colores</string>
@@ -1114,7 +1113,6 @@
     <string name="quick_action_switch_night_mode">Mou nocherniegu</string>
     <string name="quick_action_showhide_favorites_descr">Tocar esti botón d\'aición amuesa/anubre nel mapa los puntos favoritos.</string>
     <string name="quick_action_showhide_poi_descr">Tocar esti botón d\'aición amuesa/anubre nel mapa los PdI.</string>
-    <string name="quick_action_showhide_favorites_title">Amosar/anubrir Favoritos</string>
     <string name="quick_action_add_navigation">Navegación</string>
     <string name="quick_action_bug_descr">Esti mensaxe inclúise nel campu de comentarios.</string>
     <string name="quick_action_gpx_category_descr">Esbilla una estaya opcional.</string>
@@ -1308,7 +1306,6 @@
     <string name="update_all">Anovar too (%1$sMB)</string>
     <string name="quick_action_map_style">Camudar l\'estilu del mapa</string>
     <string name="quick_action_day_night_switch_mode">Cambiar al mou día/nueche</string>
-    <string name="quick_action_showhide_poi_title">Amosar/anubrir PdI</string>
     <string name="quick_action_add_create_items">Creación d\'elementos</string>
     <string name="quick_action_add_configure_map">Configuración del mapa</string>
     <string name="waypoint_one">Puntu 1</string>
