@@ -3,8 +3,12 @@ package net.osmand.plus.download.ui;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,17 +17,31 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.ColorRes;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.MenuItemCompat;
 
+import net.osmand.AndroidUtils;
 import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.UiUtilities;
+import net.osmand.plus.activities.LocalIndexHelper;
+import net.osmand.plus.activities.LocalIndexInfo;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.liveupdates.LiveUpdatesClearDialogFragment.OnRefreshLiveUpdates;
+import net.osmand.plus.liveupdates.LiveUpdatesFragmentNew;
+import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.base.OsmAndListFragment;
@@ -35,20 +53,32 @@ import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.util.Algorithms;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class UpdatesIndexFragment extends OsmAndListFragment implements DownloadEvents {
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceForLocalIndex;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLiveUpdatesOn;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.runLiveUpdate;
+
+public class UpdatesIndexFragment extends OsmAndListFragment implements DownloadEvents, OnRefreshLiveUpdates {
 	private static final int RELOAD_ID = 5;
 	private UpdateIndexAdapter listAdapter;
 	private String errorMessage;
+	private OsmandApplication app;
+	private OsmandSettings settings;
+	private boolean nightMode;
+	private LoadLiveMapsTask loadLiveMapsTask;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
+		app = getMyApplication();
+		settings = app.getSettings();
+		nightMode = !app.getSettings().isLightContent();
 	}
-	
+
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -62,29 +92,31 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 		super.onActivityCreated(savedInstanceState);
 		updateErrorMessage();
 	}
-	
+
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 		invalidateListView(activity);
+		startLoadLiveMapsAsyncTask();
 	}
 
 	@Override
 	public ArrayAdapter<?> getAdapter() {
 		return listAdapter;
 	}
-	
+
 	@Override
 	public void downloadHasFinished() {
 		invalidateListView(getMyActivity());
 		updateUpdateAllButton();
+		startLoadLiveMapsAsyncTask();
 	}
-	
+
 	@Override
 	public void downloadInProgress() {
 		listAdapter.notifyDataSetChanged();
 	}
-	
+
 	@Override
 	public void newDownloadIndexes() {
 		invalidateListView(getMyActivity());
@@ -104,13 +136,12 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 		listAdapter.sort(new Comparator<IndexItem>() {
 			@Override
 			public int compare(IndexItem indexItem, IndexItem indexItem2) {
-				return collator.compare(indexItem.getVisibleName(getMyApplication(), osmandRegions), 
+				return collator.compare(indexItem.getVisibleName(getMyApplication(), osmandRegions),
 						indexItem2.getVisibleName(getMyApplication(), osmandRegions));
 			}
 		});
 		setListAdapter(listAdapter);
 		updateErrorMessage();
-
 	}
 
 	private void updateErrorMessage() {
@@ -130,7 +161,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 	}
 
 	private void updateUpdateAllButton() {
-		
+
 		View view = getView();
 		if (view == null) {
 			return;
@@ -186,11 +217,32 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 	}
 
 	@Override
+	public void onPause() {
+		super.onPause();
+		stopLoadLiveMapsAsyncTask();
+	}
+
+	private void startLoadLiveMapsAsyncTask() {
+		loadLiveMapsTask = new LoadLiveMapsTask(listAdapter, this);
+		loadLiveMapsTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+
+	private void stopLoadLiveMapsAsyncTask() {
+		if (loadLiveMapsTask != null) {
+			loadLiveMapsTask.cancel(true);
+		}
+	}
+
+	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		if (listAdapter.isShowOsmLiveBanner() && position == 0) {
+		if (position == 0) {
 			DownloadActivity activity = getMyActivity();
 			if (activity != null) {
-				ChoosePlanDialogFragment.showOsmLiveInstance(activity.getSupportFragmentManager());
+				if (listAdapter.isNotSubscribed()) {
+					ChoosePlanDialogFragment.showOsmLiveInstance(activity.getSupportFragmentManager());
+				} else {
+					LiveUpdatesFragmentNew.showInstance(activity.getSupportFragmentManager(), this);
+				}
 			}
 		} else {
 			final IndexItem e = (IndexItem) getListAdapter().getItem(position);
@@ -234,75 +286,218 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 		return super.onOptionsItemSelected(item);
 	}
 
+	@Override
+	public void onUpdateStates() {
+		startLoadLiveMapsAsyncTask();
+	}
+
 	private class UpdateIndexAdapter extends ArrayAdapter<IndexItem> {
 
 		static final int INDEX_ITEM = 0;
 		static final int OSM_LIVE_BANNER = 1;
-
 		List<IndexItem> items;
-		boolean showOsmLiveBanner;
+		private final ArrayList<LocalIndexInfo> mapsList = new ArrayList<>();
+		private final boolean isNotSubscribed;
+		private TextView countView;
+		private int countAll = 0;
+		private int countEnabled = 0;
 
-		public UpdateIndexAdapter(Context context, int resource, List<IndexItem> items, boolean showOsmLiveBanner) {
-			super(context, resource, items);
-			this.items = items;
-			this.showOsmLiveBanner = showOsmLiveBanner;
+		public void clearLii() {
+			mapsList.clear();
 		}
 
-		public boolean isShowOsmLiveBanner() {
-			return showOsmLiveBanner;
+		public void addLii(LocalIndexInfo info) {
+			mapsList.add(info);
+		}
+
+		public void updateCountEnabled() {
+			countAll = 0;
+			countEnabled = 0;
+			if (countView != null) {
+				for (LocalIndexInfo map : mapsList) {
+					countAll++;
+					CommonPreference<Boolean> preference = preferenceForLocalIndex(map.getFileName(), settings);
+					if (preference.get()) {
+						countEnabled++;
+					}
+				}
+				String countText = countEnabled + "/" + countAll;
+				countView.setText(countText);
+			}
+		}
+
+		public UpdateIndexAdapter(Context context, int resource, List<IndexItem> items, boolean isNotSubscribed) {
+			super(context, resource, items);
+			this.items = items;
+			this.isNotSubscribed = isNotSubscribed;
+		}
+
+		public boolean isNotSubscribed() {
+			return isNotSubscribed;
 		}
 
 		@Override
 		public int getCount() {
-			return super.getCount() + (showOsmLiveBanner ? 1 : 0);
+			return super.getCount() + 1;
 		}
 
 		@Override
 		public IndexItem getItem(int position) {
-			if (showOsmLiveBanner && position == 0) {
+			if (position == 0) {
 				return null;
 			} else {
-				return super.getItem(position - (showOsmLiveBanner ? 1 : 0));
+				return super.getItem(position - 1);
 			}
 		}
 
 		@Override
 		public int getPosition(IndexItem item) {
-			return super.getPosition(item) + (showOsmLiveBanner ? 1 : 0);
+			return super.getPosition(item) + 1;
 		}
 
 		@Override
 		public int getViewTypeCount() {
-			return showOsmLiveBanner ? 2 : 1;
+			return 2;
 		}
 
 		@Override
 		public int getItemViewType(int position) {
-			return showOsmLiveBanner && position == 0 ? OSM_LIVE_BANNER : INDEX_ITEM;
+			return position == 0 ? OSM_LIVE_BANNER : INDEX_ITEM;
 		}
 
 		@Override
 		public View getView(final int position, final View convertView, final ViewGroup parent) {
-			View v = convertView;
+			View view = convertView;
 			int viewType = getItemViewType(position);
-			if (v == null) {
+			if (view == null) {
+				LayoutInflater inflater = LayoutInflater.from(getMyActivity());
 				if (viewType == INDEX_ITEM) {
-					LayoutInflater inflater = LayoutInflater.from(getMyActivity());
-					v = inflater.inflate(R.layout.two_line_with_images_list_item, parent, false);
-					v.setTag(new ItemViewHolder(v, getMyActivity()));
+					view = inflater.inflate(R.layout.two_line_with_images_list_item, parent, false);
+					view.setTag(new ItemViewHolder(view, getMyActivity()));
 				} else if (viewType == OSM_LIVE_BANNER) {
-					LayoutInflater inflater = LayoutInflater.from(getMyActivity());
-					v = inflater.inflate(R.layout.osm_live_banner_list_item, parent, false);
+					if (isNotSubscribed) {
+						view = inflater.inflate(R.layout.osm_live_banner_list_item, parent, false);
+						ColorStateList stateList = AndroidUtils.createPressedColorStateList(app, nightMode,
+								R.color.switch_button_active_light, R.color.switch_button_active_stroke_light,
+								R.color.switch_button_active_dark, R.color.switch_button_active_stroke_dark);
+						((CardView) view.findViewById(R.id.card_view)).setCardBackgroundColor(stateList);
+					} else {
+						view = inflater.inflate(R.layout.bottom_sheet_item_with_descr_switch_and_additional_button_56dp, parent, false);
+						if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+							view.setBackground(null);
+						}
+						AndroidUiHelper.setVisibility(View.GONE, view.findViewById(R.id.compound_button));
+						((ImageView) view.findViewById(R.id.icon)).setImageResource(R.drawable.ic_action_subscription_osmand_live);
+						TextView tvTitle = view.findViewById(R.id.title);
+						tvTitle.setText(R.string.download_live_updates);
+						AndroidUtils.setTextPrimaryColor(app, tvTitle, nightMode);
+						countView = view.findViewById(R.id.description);
+						AndroidUtils.setTextSecondaryColor(app, countView, nightMode);
+						Drawable additionalIconDrawable = AppCompatResources.getDrawable(app, R.drawable.ic_action_refresh_dark);
+						UiUtilities.tintDrawable(additionalIconDrawable, ContextCompat.getColor(app, getDefaultIconColorId(nightMode)));
+						((ImageView) view.findViewById(R.id.additional_button_icon)).setImageDrawable(additionalIconDrawable);
+						LinearLayout additionalButton = view.findViewById(R.id.additional_button);
+						TypedValue typedValue = new TypedValue();
+						app.getTheme().resolveAttribute(android.R.attr.selectableItemBackground, typedValue, true);
+						additionalButton.setBackgroundResource(typedValue.resourceId);
+						additionalButton.setOnClickListener(new OnClickListener() {
+							@Override
+							public void onClick(View v) {
+								showUpdateDialog();
+							}
+						});
+					}
 				}
 			}
 			if (viewType == INDEX_ITEM) {
-				ItemViewHolder holder = (ItemViewHolder) v.getTag();
+				ItemViewHolder holder = (ItemViewHolder) view.getTag();
 				holder.setShowRemoteDate(true);
 				holder.setShowTypeInDesc(true);
 				holder.setShowParentRegionName(true);
 				holder.bindIndexItem(getItem(position));
 			}
-			return v;
+			return view;
 		}
 	}
+
+	public static class LoadLiveMapsTask
+			extends AsyncTask<Void, LocalIndexInfo, List<LocalIndexInfo>>
+			implements AbstractLoadLocalIndexTask {
+
+		//private List<LocalIndexInfo> result;
+		private final UpdateIndexAdapter adapter;
+		private final LocalIndexHelper helper;
+
+		public LoadLiveMapsTask(UpdateIndexAdapter adapter,
+								UpdatesIndexFragment fragment) {
+			this.adapter = adapter;
+			helper = new LocalIndexHelper(fragment.getMyApplication());
+		}
+
+		@Override
+		protected void onPreExecute() {
+			adapter.clearLii();
+		}
+
+		@Override
+		protected List<LocalIndexInfo> doInBackground(Void... params) {
+			return helper.getLocalFullMaps(this);
+		}
+
+		@Override
+		public void loadFile(LocalIndexInfo... loaded) {
+			publishProgress(loaded);
+		}
+
+		@Override
+		protected void onProgressUpdate(LocalIndexInfo... values) {
+			String fileNameL;
+			for (LocalIndexInfo localIndexInfo : values) {
+				fileNameL = localIndexInfo.getFileName().toLowerCase();
+				if (localIndexInfo.getType() == LocalIndexHelper.LocalIndexType.MAP_DATA
+						&& !fileNameL.contains("world") && !fileNameL.startsWith("depth_")) {
+					adapter.addLii(localIndexInfo);
+				}
+			}
+		}
+
+		@Override
+		protected void onPostExecute(List<LocalIndexInfo> result) {
+			//this.result = result;
+			adapter.updateCountEnabled();
+
+		}
+	}
+
+	private void showUpdateDialog() {
+		if (!Algorithms.isEmpty(listAdapter.mapsList)) {
+			if (listAdapter.countEnabled == 1) {
+				LocalIndexInfo li = listAdapter.mapsList.get(0);
+				runLiveUpdate(getActivity(), li.getFileName(), false);
+			} else if (listAdapter.countEnabled > 1) {
+				AlertDialog.Builder bld = new AlertDialog.Builder(getMyActivity());
+				bld.setMessage(R.string.update_all_maps_now);
+				bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						for (LocalIndexInfo li : listAdapter.mapsList) {
+							CommonPreference<Boolean> localUpdateOn = preferenceLiveUpdatesOn(li.getFileName(), settings);
+							if (localUpdateOn.get()) {
+								runLiveUpdate(getActivity(), li.getFileName(), false);
+							}
+						}
+					}
+				});
+				bld.setNegativeButton(R.string.shared_string_no, null);
+				bld.show();
+			}
+		}
+	}
+
+	@ColorRes
+	public static int getDefaultIconColorId(boolean nightMode) {
+		return nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
+	}
+
 }

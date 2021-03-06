@@ -5,18 +5,22 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.text.format.DateUtils;
+import android.text.format.Time;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.liveupdates.PerformLiveUpdateAsyncTask.AsyncResponse;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
 
 public class LiveUpdatesHelper {
 	private static final String UPDATE_TIMES_POSTFIX = "_update_times";
@@ -25,6 +29,7 @@ public class LiveUpdatesHelper {
 	private static final String LIVE_UPDATES_ON_POSTFIX = "_live_updates_on";
 	private static final String LAST_UPDATE_ATTEMPT_ON_POSTFIX = "_last_update_attempt";
 	public static final String LOCAL_INDEX_INFO = "local_index_info";
+	public static final String LIVE_UPDATES_LAST_AVAILABLE = "live_updates_last_available";
 
 
 	private static final int MORNING_UPDATE_TIME = 8;
@@ -45,6 +50,7 @@ public class LiveUpdatesHelper {
 		}
 		return p;
 	}
+
 	public static CommonPreference<Boolean> preferenceForLocalIndex(
 			String fileName, OsmandSettings settings) {
 		final String settingId = fileName + LIVE_UPDATES_ON_POSTFIX;
@@ -81,9 +87,19 @@ public class LiveUpdatesHelper {
 		return checkPref(settings.registerLongPreference(settingId, DEFAULT_LAST_CHECK));
 	}
 
-	public static String getNameToDisplay(String fileName, OsmandActionBarActivity activity) {
-		return FileNameTranslationHelper.getFileName(activity,
-				activity.getMyApplication().getResourceManager().getOsmandRegions(),
+	public static CommonPreference<Long> preferenceLatestUpdateAvailable(
+			String fileName, OsmandSettings settings) {
+		final String settingId = fileName + LIVE_UPDATES_LAST_AVAILABLE;
+		return checkPref(settings.registerLongPreference(settingId, DEFAULT_LAST_CHECK));
+	}
+
+	public static CommonPreference<Long> preferenceLatestUpdateAvailable(OsmandSettings settings) {
+		return checkPref(settings.registerLongPreference(LIVE_UPDATES_LAST_AVAILABLE, DEFAULT_LAST_CHECK));
+	}
+
+	public static String getNameToDisplay(String fileName, OsmandApplication context) {
+		return FileNameTranslationHelper.getFileName(context,
+				context.getResourceManager().getOsmandRegions(),
 				fileName);
 	}
 
@@ -91,6 +107,72 @@ public class LiveUpdatesHelper {
 		java.text.DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(ctx);
 		java.text.DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(ctx);
 		return dateFormat.format(dateTime) + " " + timeFormat.format(dateTime);
+	}
+
+	public static String formatShortDateTime(Context ctx, long dateTime) {
+		if (dateTime == -1) {
+			return ctx.getResources().getString(R.string.shared_string_never);
+		} else {
+			StringBuilder result = new StringBuilder();
+			if (DateUtils.isToday(dateTime)) {
+				result.append(ctx.getResources().getString(R.string.today));
+			} else {
+				int flags = DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_MONTH;
+				Time time = new Time();
+				time.set(dateTime);
+				int thenYear = time.year;
+				time.set(System.currentTimeMillis());
+				if (thenYear == time.year) {
+					flags = flags | DateUtils.FORMAT_NO_YEAR;
+				}
+				result.append(DateUtils.formatDateTime(ctx, dateTime, flags));
+			}
+			result.append(" - ").append(DateUtils.formatDateTime(ctx, dateTime, DateUtils.FORMAT_SHOW_TIME));
+			return result.toString();
+		}
+	}
+
+	public static String formatHelpDateTime(Context ctx, UpdateFrequency updateFrequency, TimeOfDay timeOfDay, long lastDateTime) {
+		if (lastDateTime == -1) {
+			lastDateTime = System.currentTimeMillis();
+		}
+		switch (updateFrequency) {
+			case DAILY: {
+				return helpDateTimeBuilder(ctx, R.string.live_update_frequency_day_variant, lastDateTime, 1, TimeUnit.DAYS, timeOfDay);
+			}
+			case WEEKLY: {
+				return helpDateTimeBuilder(ctx, R.string.live_update_frequency_week_variant, lastDateTime, 7, TimeUnit.DAYS, timeOfDay);
+			}
+			default:
+			case HOURLY: {
+				return helpDateTimeBuilder(ctx, R.string.live_update_frequency_hour_variant, lastDateTime, 1, TimeUnit.HOURS, timeOfDay);
+			}
+		}
+	}
+
+	private static String helpDateTimeBuilder(Context ctx, int stringResId, long lastDateTime, long sourceDuration, TimeUnit sourceUnit, TimeOfDay timeOfDay) {
+		long nextDateTime = lastDateTime + TimeUnit.MILLISECONDS.convert(sourceDuration, sourceUnit);
+
+		if (sourceUnit != TimeUnit.HOURS) {
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTimeInMillis(nextDateTime);
+			calendar.set(Calendar.HOUR_OF_DAY, timeOfDay == TimeOfDay.MORNING ? MORNING_UPDATE_TIME : NIGHT_UPDATE_TIME);
+			nextDateTime = calendar.getTimeInMillis();
+		}
+
+		int flagsBase = DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_MONTH;
+		int flagsBaseNoYear = flagsBase | DateUtils.FORMAT_NO_YEAR;
+		int flagsTime = DateUtils.FORMAT_SHOW_TIME;
+
+		Time checkYearTime = new Time();
+		checkYearTime.set(nextDateTime);
+		int thenYear = checkYearTime.year;
+		checkYearTime.set(System.currentTimeMillis());
+
+		String date = DateUtils.formatDateTime(ctx, nextDateTime, thenYear == checkYearTime.year ? flagsBaseNoYear : flagsBase);
+		String time = DateUtils.formatDateTime(ctx, nextDateTime, flagsTime);
+
+		return ctx.getResources().getString(stringResId, DateUtils.isToday(nextDateTime) ? "" : " " + date, time);
 	}
 
 	public static PendingIntent getPendingIntent(@NonNull Context context,
@@ -168,6 +250,7 @@ public class LiveUpdatesHelper {
 		public int getLocalizedId() {
 			return localizedId;
 		}
+
 		public long getTime() {
 			return time;
 		}
@@ -176,5 +259,10 @@ public class LiveUpdatesHelper {
 	public static void runLiveUpdate(Context context, final String fileName, boolean userRequested) {
 		final String fnExt = Algorithms.getFileNameWithoutExtension(new File(fileName));
 		new PerformLiveUpdateAsyncTask(context, fileName, userRequested).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, fnExt);
+	}
+
+	public static void runLiveUpdate(Context context, final String fileName, boolean userRequested, final AsyncResponse runOnPost) {
+		final String fnExt = Algorithms.getFileNameWithoutExtension(new File(fileName));
+		new PerformLiveUpdateAsyncTask(context, fileName, userRequested, runOnPost).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, fnExt);
 	}
 }

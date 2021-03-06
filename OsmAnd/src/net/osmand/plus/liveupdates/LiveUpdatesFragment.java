@@ -575,7 +575,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 					preferenceLiveUpdatesOn(item, fragment.getSettings());
 			IncrementalChangesManager changesManager = context.getResourceManager().getChangesManager();
 
-			nameTextView.setText(getNameToDisplay(item, fragment.getMyActivity()));
+			nameTextView.setText(getNameToDisplay(item, fragment.getMyActivity().getMyApplication()));
 			if (shouldUpdatePreference.get()) {
 				final Integer frequencyId = preferenceUpdateFrequency(item, fragment.getSettings()).get();
 				final Integer timeOfDateToUpdateId = preferenceTimeOfDayToUpdate(item, fragment.getSettings()).get();

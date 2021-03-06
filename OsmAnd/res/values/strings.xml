@@ -12,6 +12,16 @@
 
 -->
 
+    <string name="purchases">Purchases</string>
+    <string name="live_update_delete_updates_msg">Are you sure you want to delete all %s live updates?</string>
+    <string name="delete_updates">Delete updates</string>
+    <string name="live_update_frequency_hour_variant">Map updates will be checked every hour. Next time%s in %s.</string>
+    <string name="live_update_frequency_day_variant">Map updates will be checked every day. Next time%s in %s.</string>
+    <string name="live_update_frequency_week_variant">Map updates will be checked every week. Next time%s in %s.</string>
+    <string name="update_frequency">Update frequency</string>
+    <string name="last_time_checked">Last time checked: %s</string>
+    <string name="updated">Updated: %s</string>
+    <string name="latest_openstreetmap_update">Latest OpenStreetMap update available:</string>
     <string name="map_widget_distance_by_tap">Distance by tap</string>
     <string name="quick_action_coordinates_widget_descr">A toggle to show or hide the Coordinates widget on the map.</string>
     <string name="quick_action_coordinates_widget_show">Show Coordinates widget</string>

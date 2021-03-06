@@ -1,8 +1,34 @@
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/activity_background_color"
+	android:orientation="vertical">
+
+	<com.google.android.material.appbar.AppBarLayout
+		android:id="@+id/app_bar"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
+
+		<androidx.appcompat.widget.Toolbar
+			android:id="@+id/toolbar"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/dashboard_map_toolbar"
+			android:background="?attr/pstsTabBackground"
+			android:minHeight="@dimen/dashboard_map_toolbar"
+			android:theme="?attr/toolbar_theme"
+			app:contentInsetEnd="0dp"
+			app:contentInsetLeft="@dimen/settings_divider_margin_start"
+			app:contentInsetRight="0dp"
+			app:contentInsetStart="@dimen/settings_divider_margin_start" />
+
+		<include layout="@layout/preference_toolbar_switch" />
+
+		<include layout="@layout/list_item_import" />
+
+	</com.google.android.material.appbar.AppBarLayout>
 
 	<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 		android:id="@+id/swipe_refresh"
@@ -19,18 +45,8 @@
 			android:groupIndicator="@null"
 			android:headerDividersEnabled="false"
 			android:orientation="vertical"
-			tools:context=".liveupdates.LiveUpdatesFragment" />
-		
+			tools:context=".liveupdates.LiveUpdatesFragmentNew" />
+
 	</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <ProgressBar
-        android:id="@+id/progress"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="8dp"
-        android:layout_gravity="top"
-        android:indeterminate="true"
-        android:padding="0dp"
-        android:visibility="invisible"/>
-
-</FrameLayout>
+</LinearLayout>

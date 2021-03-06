@@ -54,10 +54,10 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 	private static final String LOCAL_INDEX_FILE_NAME = "local_index_file_name";
 
 	private TextView sizeTextView;
-	
+
 	private String fileName;
 	private String fileNameWithoutExtension;
-	
+
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -77,7 +77,7 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 		final View updateTimesOfDayLayout = view.findViewById(R.id.updateTimesOfDayLayout);
 		sizeTextView = (TextView) view.findViewById(R.id.sizeTextView);
 
-		regionNameTextView.setText(getNameToDisplay(fileName, getMyActivity()));
+		regionNameTextView.setText(getNameToDisplay(fileName, getMyActivity().getMyApplication()));
 		fileNameWithoutExtension = Algorithms.getFileNameWithoutExtension(new File(fileName));
 		final IncrementalChangesManager changesManager = getMyApplication().getResourceManager().getChangesManager();
 		final long timestamp = changesManager.getTimestamp(fileNameWithoutExtension);

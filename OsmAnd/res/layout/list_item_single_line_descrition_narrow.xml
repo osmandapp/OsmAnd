@@ -21,6 +21,7 @@
         android:layout_marginStart="@dimen/content_padding">
 
         <LinearLayout
+            android:id="@+id/text_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="@dimen/context_menu_action_buttons_height"
