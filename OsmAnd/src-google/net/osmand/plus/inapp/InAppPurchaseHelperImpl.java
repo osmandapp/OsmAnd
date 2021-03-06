@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.widget.Toast;
 
+import com.android.billingclient.api.AccountIdentifiers;
 import com.android.billingclient.api.BillingClient;
 import com.android.billingclient.api.BillingResult;
 import com.android.billingclient.api.Purchase;
@@ -76,6 +77,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 		return billingManager;
 	}
 
+	@Override
 	protected void execImpl(@NonNull final InAppPurchaseTaskType taskType, @NonNull final InAppCommand runnable) {
 		billingManager = new BillingManager(ctx, BASE64_ENCODED_PUBLIC_KEY, new BillingManager.BillingUpdatesListener() {
 
@@ -125,7 +127,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 					}
 					billingManager.querySkuDetailsAsync(BillingClient.SkuType.INAPP, skuInApps, new SkuDetailsResponseListener() {
 						@Override
-						public void onSkuDetailsResponse(BillingResult billingResult, final List<SkuDetails> skuDetailsListInApps) {
+						public void onSkuDetailsResponse(@NonNull BillingResult billingResult, final List<SkuDetails> skuDetailsListInApps) {
 							// Is it a failure?
 							if (billingResult.getResponseCode() != BillingClient.BillingResponseCode.OK) {
 								logError("Failed to query inapps sku details: " + billingResult.getResponseCode());
@@ -152,7 +154,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 
 							billingManager.querySkuDetailsAsync(BillingClient.SkuType.SUBS, skuSubscriptions, new SkuDetailsResponseListener() {
 								@Override
-								public void onSkuDetailsResponse(BillingResult billingResult, final List<SkuDetails> skuDetailsListSubscriptions) {
+								public void onSkuDetailsResponse(@NonNull BillingResult billingResult, final List<SkuDetails> skuDetailsListSubscriptions) {
 									// Is it a failure?
 									if (billingResult.getResponseCode() != BillingClient.BillingResponseCode.OK) {
 										logError("Failed to query subscriptipons sku details: " + billingResult.getResponseCode());
@@ -321,7 +323,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 		}
 
 		@Override
-		public void onSkuDetailsResponse(BillingResult billingResult, List<SkuDetails> skuDetailsList) {
+		public void onSkuDetailsResponse(@NonNull BillingResult billingResult, List<SkuDetails> skuDetailsList) {
 
 			logDebug("Query sku details finished.");
 
@@ -442,8 +444,8 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 			if (liveUpdatesPurchases.size() > 0) {
 				List<String> tokensSent = Arrays.asList(settings.BILLING_PURCHASE_TOKENS_SENT.get().split(";"));
 				for (Purchase purchase : liveUpdatesPurchases) {
-					if (needRestoreUserInfo(settings)) {
-						restoreUserInfo(settings, purchase);
+					if (needRestoreUserInfo()) {
+						restoreUserInfo(purchase);
 					}
 					if (!tokensSent.contains(purchase.getSku())) {
 						tokensToSend.add(purchase);
@@ -458,29 +460,34 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 		}
 	};
 
-	private void restoreUserInfo(OsmandSettings settings, Purchase purchase) {
-		boolean restored = restoreUserInfoFromString(settings, purchase.getDeveloperPayload());
+	private void restoreUserInfo(Purchase purchase) {
+		boolean restored = restoreUserInfoFromString(purchase.getDeveloperPayload());
 		if (!restored) {
-			restoreUserInfoFromString(settings, purchase.getAccountIdentifiers().getObfuscatedAccountId());
+			AccountIdentifiers accountIdentifiers = purchase.getAccountIdentifiers();
+			if (accountIdentifiers != null) {
+				restoreUserInfoFromString(accountIdentifiers.getObfuscatedAccountId());
+			}
 		}
 	}
 
-	private boolean restoreUserInfoFromString(OsmandSettings settings, String userInfo) {
+	private boolean restoreUserInfoFromString(String userInfo) {
 		if (Algorithms.isEmpty(userInfo)) {
 			return false;
 		}
+		OsmandSettings settings = ctx.getSettings();
 		String[] arr = userInfo.split(" ");
-		if (arr.length > 0 && !Algorithms.isEmpty(settings.BILLING_USER_ID.get())) {
+		if (arr.length > 0) {
 			settings.BILLING_USER_ID.set(arr[0]);
 		}
-		if (arr.length > 1 && !Algorithms.isEmpty(settings.BILLING_USER_TOKEN.get())) {
+		if (arr.length > 1) {
 			token = arr[1];
 			settings.BILLING_USER_TOKEN.set(token);
 		}
-		return needRestoreUserInfo(settings);
+		return needRestoreUserInfo();
 	}
 
-	private boolean needRestoreUserInfo(OsmandSettings settings) {
+	private boolean needRestoreUserInfo() {
+		OsmandSettings settings = ctx.getSettings();
 		return Algorithms.isEmpty(settings.BILLING_USER_ID.get()) || Algorithms.isEmpty(settings.BILLING_USER_TOKEN.get());
 	}
 
@@ -539,7 +546,8 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 		}
 	}
 
-	protected InAppCommand getPurchaseLiveUpdatesCommand(final WeakReference<Activity> activity, final String sku) {
+	@Override
+	protected InAppCommand getPurchaseLiveUpdatesCommand(final WeakReference<Activity> activity, final String sku, final String userInfo) {
 		return new InAppCommand() {
 			@Override
 			public void run(InAppPurchaseHelper helper) {
@@ -549,9 +557,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 					if (AndroidUtils.isActivityNotDestroyed(a) && skuDetails != null) {
 						BillingManager billingManager = getBillingManager();
 						if (billingManager != null) {
-							OsmandSettings settings = ctx.getSettings();
-							String userCredential = settings.BILLING_USER_ID.get() + " " + settings.BILLING_USER_TOKEN.get();
-							billingManager.setObfuscatedAccountId(userCredential);
+							billingManager.setObfuscatedAccountId(userInfo);
 							billingManager.initiatePurchaseFlow(a, skuDetails);
 						} else {
 							throw new IllegalStateException("BillingManager disposed");
@@ -568,6 +574,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 		};
 	}
 
+	@Override
 	protected InAppCommand getRequestInventoryCommand() {
 		return new InAppCommand() {
 			@Override

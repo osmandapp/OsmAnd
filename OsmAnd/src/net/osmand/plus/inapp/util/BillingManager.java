@@ -58,7 +58,9 @@ public class BillingManager implements PurchasesUpdatedListener {
 
 	// Public key for verifying signature, in base64 encoding
 	private String mSignatureBase64;
+
 	private String mObfuscatedAccountId;
+	private String mObfuscatedProfileId;
 
 	private final BillingUpdatesListener mBillingUpdatesListener;
 	private final List<Purchase> mPurchases = new ArrayList<>();
@@ -150,6 +152,9 @@ public class BillingManager implements PurchasesUpdatedListener {
 						.setSkuDetails(skuDetails);
 				if (!TextUtils.isEmpty(mObfuscatedAccountId)) {
 					paramsBuilder.setObfuscatedAccountId(mObfuscatedAccountId);
+				}
+				if (!TextUtils.isEmpty(mObfuscatedProfileId)) {
+					paramsBuilder.setObfuscatedProfileId(mObfuscatedProfileId);
 				}
 				if (oldSku != null && purchaseToken != null) {
 					paramsBuilder.setOldSku(oldSku, purchaseToken);
@@ -403,6 +408,10 @@ public class BillingManager implements PurchasesUpdatedListener {
 
 	public void setObfuscatedAccountId(String obfuscatedAccountId) {
 		mObfuscatedAccountId = obfuscatedAccountId;
+	}
+
+	public void setObfuscatedProfileId(String obfuscatedProfileId) {
+		mObfuscatedProfileId = obfuscatedProfileId;
 	}
 
 	private void executeServiceRequest(Runnable runnable) {
