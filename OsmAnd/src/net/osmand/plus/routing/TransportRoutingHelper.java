@@ -18,7 +18,6 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.routing.RouteCalculationParams.RouteCalculationResultListener;
-import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -237,12 +236,7 @@ public class TransportRoutingHelper {
 	private void startProgress(final TransportRouteCalculationParams params) {
 		final TransportRouteCalculationProgressCallback progressRoute = this.progressRoute;
 		if (progressRoute != null) {
-			app.runInUIThread(new Runnable() {
-				@Override
-				public void run() {
-					progressRoute.start();
-				}
-			}, 300);
+			progressRoute.start();
 		}
 		setCurrentRoute(-1);
 	}

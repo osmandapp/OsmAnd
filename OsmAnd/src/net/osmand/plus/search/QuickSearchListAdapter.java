@@ -10,12 +10,10 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
@@ -32,8 +30,9 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
 import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
+import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.search.listitems.QuickSearchBannerListItem;
-import net.osmand.plus.search.listitems.QuickSearchFreeBannerListItem;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.search.listitems.QuickSearchHeaderListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
@@ -41,7 +40,9 @@ import net.osmand.plus.search.listitems.QuickSearchListItemType;
 import net.osmand.plus.search.listitems.QuickSearchMoreListItem;
 import net.osmand.plus.search.listitems.QuickSearchSelectAllListItem;
 import net.osmand.search.SearchUICore;
+import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchPhrase;
+import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchWord;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
@@ -209,143 +210,326 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	public View getView(final int position, View convertView, @NonNull ViewGroup parent) {
 		final QuickSearchListItem listItem = getItem(position);
 		QuickSearchListItemType type = listItem.getType();
+
 		LinearLayout view;
 		if (type == QuickSearchListItemType.BANNER) {
-			final QuickSearchBannerListItem banner = (QuickSearchBannerListItem) listItem;
-			if (convertView == null) {
-				view = (LinearLayout) inflater.inflate(R.layout.search_banner_list_item, null);
-			} else {
-				view = (LinearLayout) convertView;
-			}
-
-			((TextView) view.findViewById(R.id.empty_search_description)).setText(R.string.nothing_found_descr);
-
-			SearchUICore searchUICore = app.getSearchUICore().getCore();
-			SearchPhrase searchPhrase = searchUICore.getPhrase();
-
-			String textTitle;
-			int minimalSearchRadius = searchUICore.getMinimalSearchRadius(searchPhrase);
-			if (searchUICore.isSearchMoreAvailable(searchPhrase) && minimalSearchRadius != Integer.MAX_VALUE) {
-				double rd = OsmAndFormatter.calculateRoundedDist(minimalSearchRadius, app);
-				textTitle = app.getString(R.string.nothing_found_in_radius) + " "
-						+ OsmAndFormatter.getFormattedDistance((float) rd, app, false);
-			} else {
-				textTitle = app.getString(R.string.search_nothing_found);
-			}
-			((TextView) view.findViewById(R.id.empty_search_title)).setText(textTitle);
-
-			ViewGroup buttonContainer = view.findViewById(R.id.buttons_container);
-			if (buttonContainer != null) {
-				buttonContainer.removeAllViews();
-				for (ButtonItem button : banner.getButtonItems()) {
-					View v = inflater.inflate(R.layout.search_banner_button_list_item, null);
-					TextView title = v.findViewById(R.id.title);
-					title.setText(button.getTitle());
-					ImageView icon = v.findViewById(R.id.icon);
-					if (button.getIconId() != INVALID_ID) {
-						icon.setImageResource(button.getIconId());
-						icon.setVisibility(View.VISIBLE);
-					} else {
-						icon.setVisibility(View.GONE);
-					}
-					v.setOnClickListener(button.getListener());
-					buttonContainer.addView(v);
-				}
-			}
+			view = bindBannerItem(convertView, listItem);
 		} else if (type == QuickSearchListItemType.FREE_VERSION_BANNER) {
-			if (convertView == null) {
-				view = (LinearLayout) inflater.inflate(
-						R.layout.read_wikipedia_ofline_banner, null);
-			} else {
-				view = (LinearLayout) convertView;
-			}
-
-			View btnGet = view.findViewById(R.id.btn_get);
-			if (btnGet != null) {
-				btnGet.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						ChoosePlanDialogFragment.showWikipediaInstance(
-								activity.getSupportFragmentManager());
-					}
-				});
-			}
+			view = bindFreeVersionBannerItem(convertView);
 		} else if (type == QuickSearchListItemType.SEARCH_MORE) {
-			if (convertView == null) {
-				view = (LinearLayout) inflater.inflate(R.layout.search_more_list_item, null);
-			} else {
-				view = (LinearLayout) convertView;
-			}
-
-			if (listItem.getSpannableName() != null) {
-				((TextView) view.findViewById(R.id.title)).setText(listItem.getSpannableName());
-			} else {
-				((TextView) view.findViewById(R.id.title)).setText(listItem.getName());
-			}
-
-			final QuickSearchMoreListItem searchMoreItem = (QuickSearchMoreListItem) listItem;
-			int emptyDescId = searchMoreItem.isSearchMoreAvailable() ? R.string.nothing_found_descr : R.string.modify_the_search_query;
-			((TextView) view.findViewById(R.id.empty_search_description)).setText(emptyDescId);
-
-			boolean emptySearchVisible = searchMoreItem.isEmptySearch() && !searchMoreItem.isInterruptedSearch();
-			boolean moreDividerVisible = emptySearchVisible && searchMoreItem.isSearchMoreAvailable();
-			view.findViewById(R.id.empty_search).setVisibility(emptySearchVisible ? View.VISIBLE : View.GONE);
-			view.findViewById(R.id.more_divider).setVisibility(moreDividerVisible ? View.VISIBLE : View.GONE);
-			SearchUICore searchUICore = app.getSearchUICore().getCore();
-			SearchPhrase searchPhrase = searchUICore.getPhrase();
-
-			String textTitle;
-			int minimalSearchRadius = searchUICore.getMinimalSearchRadius(searchPhrase);
-			if (searchUICore.isSearchMoreAvailable(searchPhrase) && minimalSearchRadius != Integer.MAX_VALUE) {
-				double rd = OsmAndFormatter.calculateRoundedDist(minimalSearchRadius, app);
-				textTitle = app.getString(R.string.nothing_found_in_radius) + " "
-						+ OsmAndFormatter.getFormattedDistance((float) rd, app, false);
-			} else {
-				textTitle = app.getString(R.string.search_nothing_found);
-			}
-			((TextView) view.findViewById(R.id.empty_search_title)).setText(textTitle);
-			View primaryButton = view.findViewById(R.id.primary_button);
-
-			((TextView) view.findViewById(R.id.title)).setText(getIncreaseSearchButtonTitle(app, searchPhrase));
-			
-			primaryButton.setVisibility(searchMoreItem.isSearchMoreAvailable() ? View.VISIBLE : View.GONE);
-			primaryButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					((QuickSearchMoreListItem) listItem).onPrimaryButtonClick();
-				}
-			});
-
-			View secondaryButton = view.findViewById(R.id.secondary_button);
-			secondaryButton.setVisibility(searchMoreItem.isSecondaryButtonVisible() ?
-					View.VISIBLE : View.GONE);
-			secondaryButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					searchMoreItem.onSecondaryButtonClick();
-				}
-			});
+			view = bindSearchMoreItem(convertView, listItem);
 		} else if (type == QuickSearchListItemType.BUTTON) {
-			if (convertView == null) {
-				view = (LinearLayout) inflater.inflate(R.layout.search_custom_list_item, null);
-			} else {
-				view = (LinearLayout) convertView;
-			}
-			((ImageView) view.findViewById(R.id.imageView)).setImageDrawable(listItem.getIcon());
-			if (listItem.getSpannableName() != null) {
-				((TextView) view.findViewById(R.id.title)).setText(listItem.getSpannableName());
-			} else {
-				((TextView) view.findViewById(R.id.title)).setText(listItem.getName());
-			}
+			view = bindButtonItem(convertView, listItem);
 		} else if (type == QuickSearchListItemType.SELECT_ALL) {
-			if (convertView == null) {
-				view = (LinearLayout) inflater.inflate(R.layout.select_all_list_item, null);
-			} else {
-				view = (LinearLayout) convertView;
+			view = bindSelectAllItem(position, convertView);
+		} else if (type == QuickSearchListItemType.HEADER) {
+			view = bindHeaderItem(convertView, listItem);
+		} else if (type == QuickSearchListItemType.TOP_SHADOW) {
+			return bindTopShadowItem(convertView);
+		} else if (type == QuickSearchListItemType.BOTTOM_SHADOW) {
+			return bindBottomShadowItem(convertView);
+		} else {
+			view = bindSearchResultItem(position, convertView, listItem);
+		}
+
+		setupBackground(view);
+		setupDivider(position, view, listItem);
+		ViewCompat.setAccessibilityDelegate(view, accessibilityAssistant);
+		return view;
+	}
+
+	private LinearLayout bindBannerItem(@Nullable View convertView,
+	                                    @NonNull QuickSearchListItem listItem) {
+		QuickSearchBannerListItem banner = (QuickSearchBannerListItem) listItem;
+		LinearLayout view = getLinearLayout(convertView, R.layout.search_banner_list_item);
+		((TextView) view.findViewById(R.id.empty_search_description)).setText(R.string.nothing_found_descr);
+
+		SearchUICore searchUICore = app.getSearchUICore().getCore();
+		SearchPhrase searchPhrase = searchUICore.getPhrase();
+
+		String textTitle;
+		int minimalSearchRadius = searchUICore.getMinimalSearchRadius(searchPhrase);
+		if (searchUICore.isSearchMoreAvailable(searchPhrase) && minimalSearchRadius != Integer.MAX_VALUE) {
+			double rd = OsmAndFormatter.calculateRoundedDist(minimalSearchRadius, app);
+			textTitle = app.getString(R.string.nothing_found_in_radius) + " "
+					+ OsmAndFormatter.getFormattedDistance((float) rd, app, false);
+		} else {
+			textTitle = app.getString(R.string.search_nothing_found);
+		}
+		((TextView) view.findViewById(R.id.empty_search_title)).setText(textTitle);
+
+		ViewGroup buttonContainer = view.findViewById(R.id.buttons_container);
+		if (buttonContainer != null) {
+			buttonContainer.removeAllViews();
+			for (ButtonItem button : banner.getButtonItems()) {
+				View v = inflater.inflate(R.layout.search_banner_button_list_item, null);
+				TextView title = v.findViewById(R.id.title);
+				title.setText(button.getTitle());
+				ImageView icon = v.findViewById(R.id.icon);
+				if (button.getIconId() != INVALID_ID) {
+					icon.setImageResource(button.getIconId());
+					icon.setVisibility(View.VISIBLE);
+				} else {
+					icon.setVisibility(View.GONE);
+				}
+				v.setOnClickListener(button.getListener());
+				buttonContainer.addView(v);
 			}
-			final CheckBox ch = (CheckBox) view.findViewById(R.id.toggle_item);
+		}
+		return view;
+	}
+
+	private LinearLayout bindFreeVersionBannerItem(@Nullable View convertView) {
+		LinearLayout view = getLinearLayout(convertView, R.layout.read_wikipedia_ofline_banner);
+		View btnGet = view.findViewById(R.id.btn_get);
+		if (btnGet != null) {
+			btnGet.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					ChoosePlanDialogFragment.showWikipediaInstance(
+							activity.getSupportFragmentManager());
+				}
+			});
+		}
+		return view;
+	}
+
+	private LinearLayout bindSearchMoreItem(@Nullable View convertView,
+	                                        @NonNull final QuickSearchListItem listItem) {
+		LinearLayout view = getLinearLayout(convertView, R.layout.search_more_list_item);
+
+		if (listItem.getSpannableName() != null) {
+			((TextView) view.findViewById(R.id.title)).setText(listItem.getSpannableName());
+		} else {
+			((TextView) view.findViewById(R.id.title)).setText(listItem.getName());
+		}
+
+		final QuickSearchMoreListItem searchMoreItem = (QuickSearchMoreListItem) listItem;
+		int emptyDescId = searchMoreItem.isSearchMoreAvailable() ? R.string.nothing_found_descr : R.string.modify_the_search_query;
+		((TextView) view.findViewById(R.id.empty_search_description)).setText(emptyDescId);
+
+		boolean emptySearchVisible = searchMoreItem.isEmptySearch() && !searchMoreItem.isInterruptedSearch();
+		boolean moreDividerVisible = emptySearchVisible && searchMoreItem.isSearchMoreAvailable();
+		view.findViewById(R.id.empty_search).setVisibility(emptySearchVisible ? View.VISIBLE : View.GONE);
+		view.findViewById(R.id.more_divider).setVisibility(moreDividerVisible ? View.VISIBLE : View.GONE);
+		SearchUICore searchUICore = app.getSearchUICore().getCore();
+		SearchPhrase searchPhrase = searchUICore.getPhrase();
+
+		String textTitle;
+		int minimalSearchRadius = searchUICore.getMinimalSearchRadius(searchPhrase);
+		if (searchUICore.isSearchMoreAvailable(searchPhrase) && minimalSearchRadius != Integer.MAX_VALUE) {
+			double rd = OsmAndFormatter.calculateRoundedDist(minimalSearchRadius, app);
+			textTitle = app.getString(R.string.nothing_found_in_radius) + " "
+					+ OsmAndFormatter.getFormattedDistance((float) rd, app, false);
+		} else {
+			textTitle = app.getString(R.string.search_nothing_found);
+		}
+		((TextView) view.findViewById(R.id.empty_search_title)).setText(textTitle);
+		View primaryButton = view.findViewById(R.id.primary_button);
+
+		((TextView) view.findViewById(R.id.title)).setText(getIncreaseSearchButtonTitle(app, searchPhrase));
+
+		primaryButton.setVisibility(searchMoreItem.isSearchMoreAvailable() ? View.VISIBLE : View.GONE);
+		primaryButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				((QuickSearchMoreListItem) listItem).onPrimaryButtonClick();
+			}
+		});
+
+		View secondaryButton = view.findViewById(R.id.secondary_button);
+		secondaryButton.setVisibility(searchMoreItem.isSecondaryButtonVisible() ?
+				View.VISIBLE : View.GONE);
+		secondaryButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				searchMoreItem.onSecondaryButtonClick();
+			}
+		});
+		return view;
+	}
+
+	private LinearLayout bindButtonItem(@Nullable View convertView,
+	                                    @NonNull QuickSearchListItem listItem) {
+		LinearLayout view = getLinearLayout(convertView, R.layout.search_custom_list_item);
+		((ImageView) view.findViewById(R.id.imageView)).setImageDrawable(listItem.getIcon());
+		if (listItem.getSpannableName() != null) {
+			((TextView) view.findViewById(R.id.title)).setText(listItem.getSpannableName());
+		} else {
+			((TextView) view.findViewById(R.id.title)).setText(listItem.getName());
+		}
+		return view;
+	}
+
+	private LinearLayout bindSelectAllItem(final int position,
+	                                       @Nullable View convertView) {
+		LinearLayout view = getLinearLayout(convertView, R.layout.select_all_list_item);
+		final CheckBox ch = (CheckBox) view.findViewById(R.id.toggle_item);
+		ch.setVisibility(View.VISIBLE);
+		ch.setChecked(selectAll);
+		ch.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				toggleCheckbox(position, ch);
+			}
+		});
+		return view;
+	}
+
+	private LinearLayout bindHeaderItem(@Nullable View convertView,
+	                                    @NonNull QuickSearchListItem listItem) {
+		LinearLayout view = getLinearLayout(convertView, R.layout.search_header_list_item);
+		view.findViewById(R.id.top_divider)
+				.setVisibility(((QuickSearchHeaderListItem)listItem).isShowTopDivider() ? View.VISIBLE : View.GONE);
+		if (listItem.getSpannableName() != null) {
+			((TextView) view.findViewById(R.id.title)).setText(listItem.getSpannableName());
+		} else {
+			((TextView) view.findViewById(R.id.title)).setText(listItem.getName());
+		}
+		return view;
+	}
+
+	private LinearLayout bindTopShadowItem(@Nullable View convertView) {
+		return getLinearLayout(convertView, R.layout.list_shadow_header);
+	}
+
+	private LinearLayout bindBottomShadowItem(@Nullable View convertView) {
+		return getLinearLayout(convertView, R.layout.list_shadow_footer);
+	}
+
+	private LinearLayout bindSearchResultItem(int position,
+	                                          @Nullable View convertView,
+	                                          @NonNull QuickSearchListItem listItem) {
+		SearchResult sr = listItem.getSearchResult();
+		if (sr != null && sr.objectType == ObjectType.GPX_TRACK) {
+			return bindGpxTrack(position, convertView, listItem, (GPXInfo) sr.relatedObject);
+		} else {
+			return bindSearchResult(position, convertView, listItem);
+		}
+	}
+
+	private LinearLayout bindGpxTrack(int position,
+	                                  @Nullable View convertView,
+	                                  @NonNull QuickSearchListItem listItem,
+	                                  @NonNull GPXInfo gpxInfo) {
+		LinearLayout view = getLinearLayout(convertView, R.layout.search_gpx_list_item);
+		SearchResult sr = listItem.getSearchResult();
+		setupCheckBox(position, view, listItem);
+		GpxUiHelper.updateGpxInfoView(app, view, sr.localeName, listItem.getIcon(), gpxInfo);
+		return view;
+	}
+
+	private LinearLayout bindSearchResult(int position,
+	                                      @Nullable View convertView,
+	                                      @NonNull QuickSearchListItem listItem) {
+		LinearLayout view = getLinearLayout(convertView, R.layout.search_list_item);
+		setupCheckBox(position, view, listItem);
+
+		ImageView imageView = (ImageView) view.findViewById(R.id.imageView);
+		TextView title = (TextView) view.findViewById(R.id.title);
+		TextView subtitle = (TextView) view.findViewById(R.id.subtitle);
+
+		imageView.setImageDrawable(listItem.getIcon());
+		String name = listItem.getName();
+		if (listItem.getSpannableName() != null) {
+			title.setText(listItem.getSpannableName());
+		} else {
+			title.setText(name);
+		}
+
+		String desc = listItem.getTypeName();
+		Object searchResultObject = listItem.getSearchResult().object;
+		if (searchResultObject instanceof AbstractPoiType) {
+			AbstractPoiType abstractPoiType = (AbstractPoiType) searchResultObject;
+			String synonyms[] = abstractPoiType.getSynonyms().split(";");
+			QuickSearchHelper searchHelper = app.getSearchUICore();
+			SearchUICore searchUICore = searchHelper.getCore();
+			String searchPhrase = searchUICore.getPhrase().getText(true);
+			SearchPhrase.NameStringMatcher nm = new SearchPhrase.NameStringMatcher(searchPhrase,
+					CollatorStringMatcher.StringMatcherMode.CHECK_STARTS_FROM_SPACE);
+
+			if (!searchPhrase.isEmpty() && !nm.matches(abstractPoiType.getTranslation())) {
+				if (nm.matches(abstractPoiType.getEnTranslation())) {
+					desc = listItem.getTypeName() + " (" + abstractPoiType.getEnTranslation() + ")";
+				} else {
+					for (String syn : synonyms) {
+						if (nm.matches(syn)) {
+							desc = listItem.getTypeName() + " (" + syn + ")";
+							break;
+						}
+					}
+				}
+			}
+		}
+
+		boolean hasDesc = false;
+		if (!Algorithms.isEmpty(desc) && !desc.equals(name)) {
+			subtitle.setText(desc);
+			subtitle.setVisibility(View.VISIBLE);
+			hasDesc = true;
+		} else {
+			subtitle.setVisibility(View.GONE);
+		}
+
+		Drawable typeIcon = listItem.getTypeIcon();
+		ImageView group = (ImageView) view.findViewById(R.id.type_name_icon);
+		if (typeIcon != null && hasDesc) {
+			group.setImageDrawable(typeIcon);
+			group.setVisibility(View.VISIBLE);
+		} else {
+			group.setVisibility(View.GONE);
+		}
+
+		LinearLayout timeLayout = (LinearLayout) view.findViewById(R.id.time_layout);
+		TextView timeText = (TextView) view.findViewById(R.id.time);
+		ImageView timeIcon = (ImageView) view.findViewById(R.id.time_icon);
+		if (listItem.getSearchResult().object instanceof Amenity
+				&& ((Amenity) listItem.getSearchResult().object).getOpeningHours() != null) {
+			Amenity amenity = (Amenity) listItem.getSearchResult().object;
+			OpeningHoursParser.OpeningHours rs = OpeningHoursParser.parseOpenedHours(amenity.getOpeningHours());
+			if (rs != null && rs.getInfo() != null) {
+				int colorOpen = R.color.ctx_menu_amenity_opened_text_color;
+				int colorClosed = R.color.ctx_menu_amenity_closed_text_color;
+				SpannableString openHours = MenuController.getSpannableOpeningHours(
+						rs.getInfo(),
+						ContextCompat.getColor(app, colorOpen),
+						ContextCompat.getColor(app, colorClosed));
+				int colorId = rs.isOpenedForTime(Calendar.getInstance()) ? colorOpen : colorClosed;
+				timeLayout.setVisibility(View.VISIBLE);
+				timeIcon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_opening_hour_16, colorId));
+				timeText.setText(openHours);
+			} else {
+				timeLayout.setVisibility(View.GONE);
+			}
+		} else {
+			timeLayout.setVisibility(View.GONE);
+		}
+
+		updateCompassVisibility(view, listItem);
+
+		return view;
+	}
+
+	private LinearLayout getLinearLayout(@Nullable View convertView, int layoutId) {
+		if (convertView == null || isLayoutIdChanged(convertView, layoutId)) {
+			convertView = inflater.inflate(layoutId, null);
+			convertView.setTag(layoutId);
+		}
+		return (LinearLayout) convertView;
+	}
+
+	private boolean isLayoutIdChanged(@NonNull View view, int layoutId) {
+		return !Algorithms.objectEquals(view.getTag(), layoutId);
+	}
+
+	private void setupCheckBox(final int position,
+	                           @NonNull View rootView,
+	                           @NonNull QuickSearchListItem listItem) {
+		final CheckBox ch = (CheckBox) rootView.findViewById(R.id.toggle_item);
+		if (selectionMode) {
 			ch.setVisibility(View.VISIBLE);
-			ch.setChecked(selectAll);
+			ch.setChecked(selectedItems.contains(listItem));
 			ch.setOnClickListener(new View.OnClickListener() {
 
 				@Override
@@ -353,139 +537,21 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 					toggleCheckbox(position, ch);
 				}
 			});
-		} else if (type == QuickSearchListItemType.HEADER) {
-			if (convertView == null) {
-				view = (LinearLayout) inflater.inflate(R.layout.search_header_list_item, null);
-			} else {
-				view = (LinearLayout) convertView;
-			}
-			view.findViewById(R.id.top_divider)
-					.setVisibility(((QuickSearchHeaderListItem)listItem).isShowTopDivider() ? View.VISIBLE : View.GONE);
-			if (listItem.getSpannableName() != null) {
-				((TextView) view.findViewById(R.id.title)).setText(listItem.getSpannableName());
-			} else {
-				((TextView) view.findViewById(R.id.title)).setText(listItem.getName());
-			}
-		} else if (type == QuickSearchListItemType.TOP_SHADOW) {
-			if (convertView == null) {
-				view = (LinearLayout) inflater.inflate(R.layout.list_shadow_header, null);
-			} else {
-				view = (LinearLayout) convertView;
-			}
-			return view;
-		} else if (type == QuickSearchListItemType.BOTTOM_SHADOW) {
-			if (convertView == null) {
-				view = (LinearLayout) inflater.inflate(R.layout.list_shadow_footer, null);
-			} else {
-				view = (LinearLayout) convertView;
-			}
-			return view;
 		} else {
-			if (convertView == null) {
-				view = (LinearLayout) inflater.inflate(R.layout.search_list_item, null);
-			} else {
-				view = (LinearLayout) convertView;
-			}
-
-			final CheckBox ch = (CheckBox) view.findViewById(R.id.toggle_item);
-			if (selectionMode) {
-				ch.setVisibility(View.VISIBLE);
-				ch.setChecked(selectedItems.contains(listItem));
-				ch.setOnClickListener(new View.OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						toggleCheckbox(position, ch);
-					}
-				});
-			} else {
-				ch.setVisibility(View.GONE);
-			}
-
-			ImageView imageView = (ImageView) view.findViewById(R.id.imageView);
-			TextView title = (TextView) view.findViewById(R.id.title);
-			TextView subtitle = (TextView) view.findViewById(R.id.subtitle);
-
-			imageView.setImageDrawable(listItem.getIcon());
-			String name = listItem.getName();
-			if (listItem.getSpannableName() != null) {
-				title.setText(listItem.getSpannableName());
-			} else {
-				title.setText(name);
-			}
-
-			String desc = listItem.getTypeName();
-			Object searchResultObject = listItem.getSearchResult().object;
-			if (searchResultObject instanceof AbstractPoiType) {
-				AbstractPoiType abstractPoiType = (AbstractPoiType) searchResultObject;
-				String synonyms[] = abstractPoiType.getSynonyms().split(";");
-				QuickSearchHelper searchHelper = app.getSearchUICore();
-				SearchUICore searchUICore = searchHelper.getCore();
-				String searchPhrase = searchUICore.getPhrase().getText(true);
-				SearchPhrase.NameStringMatcher nm = new SearchPhrase.NameStringMatcher(searchPhrase,
-						CollatorStringMatcher.StringMatcherMode.CHECK_STARTS_FROM_SPACE);
-
-				if (!searchPhrase.isEmpty() && !nm.matches(abstractPoiType.getTranslation())) {
-					if (nm.matches(abstractPoiType.getEnTranslation())) {
-						desc = listItem.getTypeName() + " (" + abstractPoiType.getEnTranslation() + ")";
-					} else {
-						for (String syn : synonyms) {
-							if (nm.matches(syn)) {
-								desc = listItem.getTypeName() + " (" + syn + ")";
-								break;
-							}
-						}
-					}
-				}
-			}
-
-			boolean hasDesc = false;
-			if (!Algorithms.isEmpty(desc) && !desc.equals(name)) {
-				subtitle.setText(desc);
-				subtitle.setVisibility(View.VISIBLE);
-				hasDesc = true;
-			} else {
-				subtitle.setVisibility(View.GONE);
-			}
-
-			Drawable typeIcon = listItem.getTypeIcon();
-			ImageView group = (ImageView) view.findViewById(R.id.type_name_icon);
-			if (typeIcon != null && hasDesc) {
-				group.setImageDrawable(typeIcon);
-				group.setVisibility(View.VISIBLE);
-			} else {
-				group.setVisibility(View.GONE);
-			}
-
-			LinearLayout timeLayout = (LinearLayout) view.findViewById(R.id.time_layout);
-			TextView timeText = (TextView) view.findViewById(R.id.time);
-			ImageView timeIcon = (ImageView) view.findViewById(R.id.time_icon);
-			if (listItem.getSearchResult().object instanceof Amenity
-					&& ((Amenity) listItem.getSearchResult().object).getOpeningHours() != null) {
-				Amenity amenity = (Amenity) listItem.getSearchResult().object;
-				OpeningHoursParser.OpeningHours rs = OpeningHoursParser.parseOpenedHours(amenity.getOpeningHours());
-				if (rs != null && rs.getInfo() != null) {
-					int colorOpen = R.color.ctx_menu_amenity_opened_text_color;
-					int colorClosed = R.color.ctx_menu_amenity_closed_text_color;
-					SpannableString openHours = MenuController.getSpannableOpeningHours(
-							rs.getInfo(),
-							ContextCompat.getColor(app, colorOpen),
-							ContextCompat.getColor(app, colorClosed));
-					int colorId = rs.isOpenedForTime(Calendar.getInstance()) ? colorOpen : colorClosed;
-					timeLayout.setVisibility(View.VISIBLE);
-					timeIcon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_opening_hour_16, colorId));
-					timeText.setText(openHours);
-				} else {
-					timeLayout.setVisibility(View.GONE);
-				}
-			} else {
-				timeLayout.setVisibility(View.GONE);
-			}
-
-			updateCompassVisibility(view, listItem);
+			ch.setVisibility(View.GONE);
 		}
-		view.setBackgroundColor(app.getResources().getColor(
-						app.getSettings().isLightContent() ? R.color.list_background_color_light : R.color.list_background_color_dark));
+	}
+
+	private void setupBackground(View view) {
+		int bgColorResId = isNightMode() ?
+				R.color.list_background_color_dark :
+				R.color.list_background_color_light;
+		view.setBackgroundColor(app.getResources().getColor(bgColorResId));
+	}
+
+	private void setupDivider(final int position,
+	                          @NonNull View view,
+	                          @NonNull QuickSearchListItem listItem) {
 		View divider = view.findViewById(R.id.divider);
 		if (divider != null) {
 			if (position == getCount() - 1 || getItem(position + 1).getType() == QuickSearchListItemType.HEADER
@@ -494,7 +560,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			} else {
 				divider.setVisibility(View.VISIBLE);
 				if (getItem(position + 1).getType() == QuickSearchListItemType.SEARCH_MORE
-						|| type == QuickSearchListItemType.SELECT_ALL) {
+						|| listItem.getType() == QuickSearchListItemType.SELECT_ALL) {
 					LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp1);
 					p.setMargins(0, 0, 0 ,0);
 					divider.setLayoutParams(p);
@@ -505,8 +571,6 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 				}
 			}
 		}
-		ViewCompat.setAccessibilityDelegate(view, accessibilityAssistant);
-		return view;
 	}
 
 	public static String getIncreaseSearchButtonTitle(OsmandApplication app, SearchPhrase searchPhrase) {
@@ -575,5 +639,9 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		}
 		LatLon toloc = listItem.getSearchResult().location;
 		app.getUIUtilities().updateLocationView(updateLocationViewCache, direction, distanceText, toloc);
+	}
+
+	private boolean isNightMode() {
+		return !app.getSettings().isLightContent();
 	}
 }

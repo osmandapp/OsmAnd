@@ -2025,10 +2025,8 @@ Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt s
     <string name="quick_action_add_favorite">Lägg till favorit</string>
     <string name="favorite_autofill_toast_text">" har sparats i "</string>
     <string name="favorite_empty_place_name">Plats</string>
-    <string name="quick_action_showhide_favorites_title">Visa/Dölj favoriter</string>
     <string name="quick_action_favorites_show">Visa favoriter</string>
     <string name="quick_action_favorites_hide">Dölj favoriter</string>
-    <string name="quick_action_showhide_poi_title">Visa/Dölj POI</string>
     <string name="quick_action_poi_show">Visa %1$s</string>
     <string name="quick_action_poi_hide">Dölj %1$s</string>
     <string name="quick_action_add_category">Lägg till en kategori</string>
@@ -2125,7 +2123,6 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="select_city">Välj stad</string>
     <string name="select_postcode">Välj postnummer</string>
     <string name="quick_action_auto_zoom">Autozoomning på/av</string>
-    <string name="quick_action_showhide_osmbugs_title">Visa/Dölj OSM-anteckningar</string>
     <string name="quick_action_osmbugs_show">Visa OSM-anteckningar</string>
     <string name="quick_action_osmbugs_hide">Dölj OSM-anteckningar</string>
     <string name="quick_action_showhide_osmbugs_descr">Ett tryck på denna åtgärdsknapp visar eller döljer OSM-anteckningar på kartan.</string>

@@ -61,8 +61,7 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
         final int backgroundColor = ContextCompat.getColor(getActivity(),
                 nightMode ? R.color.activity_background_color_dark : R.color.activity_background_color_light);
         final DateFormat dateFormat = SimpleDateFormat.getDateInstance(DateFormat.MEDIUM);
-        final int currentModeColorRes = getMyApplication().getSettings().getApplicationMode().getIconColorInfo().getColor(nightMode);
-        final int currentModeColor = ContextCompat.getColor(getActivity(), currentModeColorRes);
+        final int currentModeColor = getMyApplication().getSettings().getApplicationMode().getProfileColor(nightMode);
 
         final View view = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_mapillary_filters, null);
         view.findViewById(R.id.mapillary_filters_linear_layout).setBackgroundColor(backgroundColor);
@@ -71,17 +70,17 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
         final View toggleRow = view.findViewById(R.id.toggle_row);
         final boolean selected = settings.SHOW_MAPILLARY.get();
         final int toggleActionStringId = selected ? R.string.shared_string_on : R.string.shared_string_off;
-        int toggleIconColorId;
+        int toggleIconColor;
         int toggleIconId;
         if (selected) {
             toggleIconId = R.drawable.ic_action_view;
-            toggleIconColorId = currentModeColorRes;
+            toggleIconColor = currentModeColor;
         } else {
             toggleIconId = R.drawable.ic_action_hide;
-            toggleIconColorId = nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
+            toggleIconColor = ContextCompat.getColor(getContext(), nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light);
         }
         ((AppCompatTextView) toggleRow.findViewById(R.id.toggle_row_title)).setText(toggleActionStringId);
-        final Drawable drawable = getIcon(toggleIconId, toggleIconColorId);
+        final Drawable drawable = getPaintedContentIcon(toggleIconId, toggleIconColor);
         ((AppCompatImageView) toggleRow.findViewById(R.id.toggle_row_icon)).setImageDrawable(drawable);
         final CompoundButton toggle = (CompoundButton) toggleRow.findViewById(R.id.toggle_row_toggle);
 		toggle.setOnCheckedChangeListener(null);

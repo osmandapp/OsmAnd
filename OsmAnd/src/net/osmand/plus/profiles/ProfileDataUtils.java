@@ -33,7 +33,7 @@ public class ProfileDataUtils {
 				description = getAppModeDescription(app, mode);
 			}
 			profiles.add(new ProfileDataObject(mode.toHumanString(), description,
-					mode.getStringKey(), mode.getIconRes(), false, mode.getIconColorInfo()));
+					mode.getStringKey(), mode.getIconRes(), false, mode.getProfileColor(false), mode.getProfileColor(true)));
 		}
 		return profiles;
 	}

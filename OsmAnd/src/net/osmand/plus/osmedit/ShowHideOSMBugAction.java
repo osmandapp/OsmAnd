@@ -15,10 +15,10 @@ import net.osmand.plus.quickaction.QuickActionType;
 public class ShowHideOSMBugAction extends QuickAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(24,
-			"osmbug.showhide", ShowHideOSMBugAction.class).
-			nameRes(R.string.quick_action_showhide_osmbugs_title).iconRes(R.drawable.ic_action_osm_note).nonEditable().
-			category(QuickActionType.CONFIGURE_MAP);
-
+			"osmbug.showhide", ShowHideOSMBugAction.class)
+			.nameActionRes(R.string.quick_action_showhide_title)
+			.nameRes(R.string.osm_notes).iconRes(R.drawable.ic_action_osm_note).nonEditable()
+			.category(QuickActionType.CONFIGURE_MAP);
 
 	public ShowHideOSMBugAction() {
 		super(TYPE);

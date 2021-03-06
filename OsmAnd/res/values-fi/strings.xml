@@ -1920,10 +1920,8 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="quick_action_poi_list">KP lista</string>
     <string name="quick_action_bug_message">Viesti</string>
     <string name="quick_action_add_configure_map">Konfiguroi kartta</string>
-    <string name="quick_action_showhide_favorites_title">Näytä/piilota suosikit</string>
     <string name="quick_action_favorites_show">Näytä suosikit</string>
     <string name="quick_action_favorites_hide">Piilota suosikit</string>
-    <string name="quick_action_showhide_poi_title">Näytä/piilota KP:t</string>
     <string name="quick_action_poi_show">Näytä %1$s</string>
     <string name="quick_action_poi_hide">Piilota %1$s</string>
     <string name="quick_action_add_category">Lisää luokka</string>
@@ -2002,7 +2000,6 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="mapillary">Mapillary</string>
     <string name="restart_search">Käynnistä haku uudelleen</string>
     <string name="nothing_found">Mitään ei löytynyt</string>
-    <string name="quick_action_showhide_osmbugs_title">Näytä/piilota OSM-huomautukset</string>
     <string name="quick_action_osmbugs_show">Näytä OSM-huomautukset</string>
     <string name="quick_action_osmbugs_hide">Piilota OSM-huomautukset</string>
     <string name="sorted_by_distance">Lajiteltu etäisyyden perusteella</string>
@@ -2275,7 +2272,6 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="shared_string_swap">Muuta</string>
     <string name="show_more">Näytä lisää</string>
     <string name="tracks_on_map">Näytetyt jäljet</string>
-    <string name="quick_action_show_hide_gpx_tracks">Näytä/piilota GPX jäljet</string>
     <string name="configure_profile_info">Profiilin asetukset:</string>
     <string name="configure_profile">Määritä profiili</string>
     <string name="switch_profile">Vaihda profiilia</string>
@@ -2306,10 +2302,8 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="layer_osm_edits">OSM-muokkaukset</string>
     <string name="quick_action_contour_lines_show">Näytä korkeuskäyrät</string>
     <string name="quick_action_contour_lines_hide">Piilota korkeuskäyrät</string>
-    <string name="quick_action_show_hide_contour_lines">Näytä/piilota korkeuskäyrät</string>
     <string name="quick_action_hillshade_show">Näytä rinnevarjostus</string>
     <string name="quick_action_hillshade_hide">Piilota rinnevarjostus</string>
-    <string name="quick_action_show_hide_hillshade">Näytä/piilota rinnevarjostus</string>
     <string name="export_profile">Vie profiili</string>
     <string name="exported_osmand_profile">OsmAnd profiili: %1$s</string>
     <string name="overwrite_profile_q">\'%1$s\' on jo olemassa. Korvataanko\?</string>

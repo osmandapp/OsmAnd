@@ -171,7 +171,7 @@ public class AnnouncementTimeBottomSheet extends BasePreferenceBottomSheet
 	}
 
 	private void setProfileColorToSeekBar() {
-		int color = ContextCompat.getColor(app, getAppMode().getIconColorInfo().getColor(nightMode));
+		int color = getAppMode().getProfileColor(nightMode);
 
 		LayerDrawable seekBarProgressLayer =
 				(LayerDrawable) ContextCompat.getDrawable(app, R.drawable.seekbar_progress_announcement_time);

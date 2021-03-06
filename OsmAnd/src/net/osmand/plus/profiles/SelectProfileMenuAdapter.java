@@ -6,25 +6,25 @@ import android.graphics.drawable.LayerDrawable;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.ColorRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.view.ContextThemeWrapper;
-import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.RecyclerView;
-
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class SelectProfileMenuAdapter extends AbstractProfileMenuAdapter<SelectProfileMenuAdapter.SelectProfileViewHolder> {
 
@@ -33,8 +33,8 @@ public class SelectProfileMenuAdapter extends AbstractProfileMenuAdapter<SelectP
 	private List<Object> items = new ArrayList<>();
 	private final OsmandApplication app;
 	private ApplicationMode appMode;
-	@ColorRes
-	private int selectedIconColorRes;
+	@ColorInt
+	private int selectedIconColor;
 	private boolean bottomButton;
 	private String bottomButtonText;
 	private static final String BUTTON_ITEM = "button_item";
@@ -53,9 +53,8 @@ public class SelectProfileMenuAdapter extends AbstractProfileMenuAdapter<SelectP
 		this.bottomButton = !Algorithms.isEmpty(bottomButtonText);
 		this.bottomButtonText = bottomButtonText;
 		this.nightMode = nightMode;
-		selectedIconColorRes = nightMode
-				? R.color.active_color_primary_dark
-				: R.color.active_color_primary_light;
+		int selectedIconColorRes = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+		selectedIconColor = ContextCompat.getColor(app, selectedIconColorRes);
 	}
 
 	public List<Object> getItems() {
@@ -100,11 +99,10 @@ public class SelectProfileMenuAdapter extends AbstractProfileMenuAdapter<SelectP
 			holder.title.setText(item.toHumanString());
 			holder.descr.setText(ProfileDataUtils.getAppModeDescription(app, item));
 
-			int profileColorResId = item.getIconColorInfo().getColor(nightMode);
-			holder.icon.setImageDrawable(app.getUIUtilities().getIcon(profileColorResId, selectedIconColorRes));
+			int colorNoAlpha = item.getProfileColor(nightMode);
+			holder.icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(item.getIconRes(), colorNoAlpha));
 			
 			//set up cell color
-			int colorNoAlpha = ContextCompat.getColor(app, profileColorResId);
 			boolean selectedMode = appMode == item;
 			Drawable drawable = UiUtilities.getColoredSelectableDrawable(app, colorNoAlpha, 0.3f);
 
@@ -146,8 +144,8 @@ public class SelectProfileMenuAdapter extends AbstractProfileMenuAdapter<SelectP
 		if (iconRes == 0 || iconRes == -1) {
 			iconRes = R.drawable.ic_action_world_globe;
 		}
-		selectedIconColorRes = mode.getIconColorInfo().getColor(nightMode);
-		holder.icon.setImageDrawable(app.getUIUtilities().getIcon(iconRes, selectedIconColorRes));
+		selectedIconColor = mode.getProfileColor(nightMode);
+		holder.icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(iconRes, selectedIconColor));
 	}
 
 	class SelectProfileViewHolder extends ProfileAbstractViewHolder {

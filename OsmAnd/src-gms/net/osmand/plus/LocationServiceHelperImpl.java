@@ -1,7 +1,6 @@
 package net.osmand.plus;
 
 import android.location.Location;
-import android.os.HandlerThread;
 import android.os.Looper;
 
 import androidx.annotation.NonNull;
@@ -14,7 +13,6 @@ import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.Tasks;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.helpers.DayNightHelper;
@@ -23,17 +21,12 @@ import net.osmand.plus.helpers.LocationServiceHelper;
 import org.apache.commons.logging.Log;
 
 import java.util.Collections;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 public class LocationServiceHelperImpl extends LocationServiceHelper {
 
 	private static final Log LOG = PlatformUtil.getLog(DayNightHelper.class);
 
 	private final OsmandApplication app;
-
-	private final HandlerThread mHandlerThread = new HandlerThread("LocationServiceHelperThread");
 
 	// FusedLocationProviderClient - Main class for receiving location updates.
 	private final FusedLocationProviderClient fusedLocationProviderClient;
@@ -49,7 +42,6 @@ public class LocationServiceHelperImpl extends LocationServiceHelper {
 
 	public LocationServiceHelperImpl(@NonNull OsmandApplication app) {
 		this.app = app;
-		mHandlerThread.start();
 
 		fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(app);
 
@@ -104,7 +96,7 @@ public class LocationServiceHelperImpl extends LocationServiceHelper {
 		// request location updates
 		try {
 			fusedLocationProviderClient.requestLocationUpdates(
-					fusedLocationRequest, fusedLocationCallback, mHandlerThread.getLooper());
+					fusedLocationRequest, fusedLocationCallback, Looper.myLooper());
 		} catch (SecurityException e) {
 			LOG.debug("Location service permission not granted");
 			throw e;

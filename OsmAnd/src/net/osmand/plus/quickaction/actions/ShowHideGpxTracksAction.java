@@ -16,10 +16,10 @@ public class ShowHideGpxTracksAction extends QuickAction {
 
 
 	public static final QuickActionType TYPE = new QuickActionType(28,
-			"gpx.showhide", ShowHideGpxTracksAction.class).
-			nameRes(R.string.quick_action_show_hide_gpx_tracks).iconRes(R.drawable.ic_action_polygom_dark).nonEditable().
-			category(QuickActionType.CONFIGURE_MAP);
-
+			"gpx.showhide", ShowHideGpxTracksAction.class)
+			.nameActionRes(R.string.quick_action_showhide_title)
+			.nameRes(R.string.show_gpx).iconRes(R.drawable.ic_action_polygom_dark).nonEditable()
+			.category(QuickActionType.CONFIGURE_MAP);
 
 	public ShowHideGpxTracksAction() {
 		super(TYPE);

@@ -39,12 +39,11 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionItem;
 import net.osmand.plus.onlinerouting.EngineParameter;
-import net.osmand.plus.onlinerouting.OnlineRoutingFactory;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.onlinerouting.OnlineRoutingUtils;
 import net.osmand.plus.onlinerouting.VehicleType;
-import net.osmand.plus.onlinerouting.engine.EngineType;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
+import net.osmand.plus.onlinerouting.engine.EngineType;
 import net.osmand.plus.onlinerouting.ui.OnlineRoutingCard.OnTextChangedListener;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -54,7 +53,9 @@ import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.CUSTOM_VEHICLE;
 
@@ -201,15 +202,15 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		typeCard = new OnlineRoutingCard(mapActivity, isNightMode(), appMode);
 		typeCard.build(mapActivity);
 		typeCard.setHeaderTitle(getString(R.string.shared_string_type));
-		List<HorizontalSelectionItem> serverItems = new ArrayList<>();
-		for (EngineType server : EngineType.values()) {
-			serverItems.add(new HorizontalSelectionItem(server.getTitle(), server));
+		List<HorizontalSelectionItem> typeItems = new ArrayList<>();
+		for (OnlineRoutingEngine type : EngineType.values()) {
+			typeItems.add(new HorizontalSelectionItem(type.getTitle(), type));
 		}
-		typeCard.setSelectionMenu(serverItems, engine.getType().getTitle(),
+		typeCard.setSelectionMenu(typeItems, engine.getType().getTitle(),
 				new CallbackWithObject<HorizontalSelectionItem>() {
 					@Override
 					public boolean processResult(HorizontalSelectionItem result) {
-						EngineType type = (EngineType) result.getObject();
+						OnlineRoutingEngine type = (OnlineRoutingEngine) result.getObject();
 						if (engine.getType() != type) {
 							changeEngineType(type);
 							return true;
@@ -366,9 +367,9 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		});
 	}
 
-	private void changeEngineType(EngineType type) {
+	private void changeEngineType(OnlineRoutingEngine type) {
 		OnlineRoutingEngine tmp = (OnlineRoutingEngine) engine.clone();
-		engine = OnlineRoutingFactory.createEngine(type, tmp.getParams());
+		engine = type.newInstance(tmp.getParams());
 
 		// after changing the type, select the vehicle
 		// with the same name that was selected before
@@ -462,7 +463,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 				boolean resultOk = false;
 				try {
 					String response = helper.makeRequest(exampleCard.getEditedText());
-					resultOk = requestedEngine.checkServerResponse(errorMessage, response);
+					resultOk = requestedEngine.isResultOk(errorMessage, response);
 				} catch (IOException | JSONException e) {
 					errorMessage.append(e.toString());
 				}
@@ -513,6 +514,12 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 					apiKeyCard.show();
 				} else {
 					apiKeyCard.hide();
+				}
+				if (engine.isParameterAllowed(EngineParameter.VEHICLE_KEY)) {
+					vehicleCard.show();
+				} else {
+
+					vehicleCard.hide();
 				}
 
 			} else if (vehicleCard.equals(card)) {
@@ -609,7 +616,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	}
 
 	private void saveState(@NonNull Bundle outState) {
-		outState.putString(ENGINE_TYPE_KEY, engine.getType().name());
+		outState.putString(ENGINE_TYPE_KEY, engine.getTypeName());
 		for (EngineParameter key : EngineParameter.values()) {
 			String value = engine.get(key);
 			if (value != null) {
@@ -626,14 +633,15 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		editedEngineKey = savedState.getString(EngineParameter.KEY.name());
 		initEngine = createInitStateEngine();
 		String typeKey = savedState.getString(ENGINE_TYPE_KEY);
-		EngineType type = EngineType.getTypeByName(typeKey);
-		engine = OnlineRoutingFactory.createEngine(type);
+		OnlineRoutingEngine type = EngineType.getTypeByName(typeKey);
+		Map<String, String> params = new HashMap<>();
 		for (EngineParameter key : EngineParameter.values()) {
 			String value = savedState.getString(key.name());
 			if (value != null) {
-				engine.put(key, value);
+				params.put(key.name(), value);
 			}
 		}
+		engine = type.newInstance(params);
 		customVehicleKey = savedState.getString(ENGINE_CUSTOM_VEHICLE_KEY);
 		selectedLocation = ExampleLocation.valueOf(savedState.getString(EXAMPLE_LOCATION_KEY));
 		appMode = ApplicationMode.valueOfStringKey(savedState.getString(APP_MODE_KEY), null);
@@ -656,7 +664,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		if (editedEngine != null) {
 			engine = (OnlineRoutingEngine) editedEngine.clone();
 		} else {
-			engine = OnlineRoutingFactory.createEngine(EngineType.values()[0]);
+			engine = EngineType.values()[0].newInstance(null);
 			String vehicle = engine.getAllowedVehicles().get(0).getKey();
 			engine.put(EngineParameter.VEHICLE_KEY, vehicle);
 			if (editedEngineKey != null) {

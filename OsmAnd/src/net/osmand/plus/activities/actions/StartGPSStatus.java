@@ -121,7 +121,7 @@ public class StartGPSStatus extends OsmAndAction {
 		cb.setLayoutParams(lp);
 		cb.setPadding(dp8, 0, 0, 0);
 		int textColorPrimary = ContextCompat.getColor(activity, isNightMode() ? R.color.text_color_primary_dark : R.color.text_color_primary_light);
-		int selectedModeColor = ContextCompat.getColor(activity, getSettings().getApplicationMode().getIconColorInfo().getColor(isNightMode()));
+		int selectedModeColor = getSettings().getApplicationMode().getProfileColor(isNightMode());
 		cb.setTextColor(textColorPrimary);
 		UiUtilities.setupCompoundButton(isNightMode(), selectedModeColor, cb);
 		

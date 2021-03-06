@@ -99,8 +99,7 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 		final TextView maxZoomValue = sliderView.findViewById(R.id.zoom_value_max);
 		maxZoomValue.setText(String.valueOf(maxZoom));
 		RangeSlider slider = sliderView.findViewById(R.id.zoom_slider);
-		int colorProfileRes = app.getSettings().getApplicationMode().getIconColorInfo().getColor(nightMode);
-		int colorProfile = ContextCompat.getColor(app, colorProfileRes);
+		int colorProfile = app.getSettings().getApplicationMode().getProfileColor(nightMode);
 		UiUtilities.setupSlider(slider, nightMode, colorProfile, true);
 		slider.setValueFrom(SLIDER_FROM);
 		slider.setValueTo(SLIDER_TO);

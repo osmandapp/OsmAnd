@@ -10,11 +10,13 @@ public class QuickActionType {
 	public static final int CREATE_CATEGORY = 0;
 	public static final int CONFIGURE_MAP = 1;
 	public static final int NAVIGATION = 2;
+	public static final int CONFIGURE_SCREEN = 3;
 
 	private final int id;
 	private final String stringId;
 	private boolean actionEditable;
 	private @StringRes int nameRes;
+	private @StringRes int nameActionRes;
 	private @DrawableRes int iconRes;
 	private Class<? extends QuickAction> cl;
 	private int category;
@@ -33,6 +35,11 @@ public class QuickActionType {
 
 	public QuickActionType nameRes(int nameRes) {
 		this.nameRes = nameRes;
+		return this;
+	}
+
+	public QuickActionType nameActionRes(int nameActionRes) {
+		this.nameActionRes = nameActionRes;
 		return this;
 	}
 
@@ -99,6 +106,10 @@ public class QuickActionType {
 
 	public int getNameRes() {
 		return nameRes;
+	}
+
+	public int getActionNameRes() {
+		return nameActionRes;
 	}
 
 	public int getIconRes() {

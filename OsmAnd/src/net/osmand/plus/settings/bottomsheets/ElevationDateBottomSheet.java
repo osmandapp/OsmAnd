@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -65,6 +66,7 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 	private int checkedColor;
 	private int uncheckedColor;
 	private int disabledColor;
+	@ColorInt
 	private int appModeColor;
 
 	@Override
@@ -101,7 +103,7 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 
 		on = getString(R.string.shared_string_enabled);
 		off = getString(R.string.shared_string_disabled);
-		appModeColor = appMode.getIconColorInfo().getColor(nightMode);
+		appModeColor = appMode.getProfileColor(nightMode);
 		activeColor = AndroidUtils.resolveAttribute(themedCtx, R.attr.active_color_basic);
 		disabledColor = AndroidUtils.resolveAttribute(themedCtx, android.R.attr.textColorSecondary);
 		checkedColor = (nightMode ? app.getResources().getColor(R.color.text_color_primary_dark) : app.getResources().getColor(R.color.text_color_primary_light));
@@ -122,7 +124,7 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 	private void createUseHeightButton(Context context) {
 		boolean checked = useHeightPref.getModeValue(appMode);
 		useHeightButton = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
-				.setCompoundButtonColorId(appModeColor)
+				.setCompoundButtonColor(appModeColor)
 				.setChecked(checked)
 				.setTitle(checked ? on : off)
 				.setTitleColorId(checked ? activeColor : disabledColor)

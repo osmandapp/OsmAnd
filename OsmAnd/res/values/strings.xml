@@ -12,6 +12,10 @@
 
 -->
 
+    <string name="quick_action_showhide_title">Show/hide</string>
+    <string name="copy_poi_name">Copy POI name</string>
+    <string name="track_recording_will_be_continued">The recording will be continued.</string>
+    <string name="select_category_descr">Select category or add new one</string>
     <string name="purchases">Purchases</string>
     <string name="live_update_delete_updates_msg">Are you sure you want to delete all %s live updates?</string>
     <string name="delete_updates">Delete updates</string>

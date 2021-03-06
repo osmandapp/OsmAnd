@@ -8,7 +8,7 @@ public enum ObjectType {
 	// LOCATION
 	LOCATION(true), PARTIAL_LOCATION(false),
 	// UI OBJECTS
-	FAVORITE(true), FAVORITE_GROUP(false), WPT(true), RECENT_OBJ(true),
+	FAVORITE(true), FAVORITE_GROUP(false), WPT(true), RECENT_OBJ(true), GPX_TRACK(false),
 
 	// ONLINE SEARCH
 	ONLINE_SEARCH(true),

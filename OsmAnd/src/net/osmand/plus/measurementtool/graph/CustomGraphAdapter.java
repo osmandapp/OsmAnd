@@ -22,10 +22,10 @@ import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.helpers.CustomBarChartRenderer;
-import net.osmand.router.RouteStatisticsHelper;
-import net.osmand.router.RouteStatisticsHelper.RouteStatistics;
 import net.osmand.router.RouteStatisticsHelper.RouteSegmentAttribute;
+import net.osmand.router.RouteStatisticsHelper.RouteStatistics;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -140,7 +140,7 @@ public class CustomGraphAdapter extends BaseGraphAdapter<HorizontalBarChart, Bar
 	private void attachLegend(List<RouteSegmentAttribute> list,
 	                          String propertyNameToFullSpan) {
 		OsmandApplication app = getMyApplication();
-		LayoutInflater inflater = LayoutInflater.from(app);
+		LayoutInflater inflater = UiUtilities.getInflater(app, isNightMode());
 		for (RouteSegmentAttribute segment : list) {
 			View view = inflater.inflate(R.layout.route_details_legend, legendContainer, false);
 			int segmentColor = segment.getColor();

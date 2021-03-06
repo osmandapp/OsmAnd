@@ -78,7 +78,7 @@ public class OnlineRoutingCard extends BaseCard {
 		bottomDivider = view.findViewById(R.id.bottom_divider);
 		button = view.findViewById(R.id.button);
 
-		int activeColor = ContextCompat.getColor(app, appMode.getIconColorInfo().getColor(nightMode));
+		int activeColor = appMode.getProfileColor(nightMode);
 		textFieldBoxes.setPrimaryColor(activeColor);
 		textFieldBoxes.setGravityFloatingLabel(Gravity.START);
 

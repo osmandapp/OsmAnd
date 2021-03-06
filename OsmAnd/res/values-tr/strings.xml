@@ -1981,7 +1981,6 @@
     <string name="rendering_value_low_name">Düşük</string>
     <string name="rendering_attr_hideWaterPolygons_description">Su</string>
     <string name="shared_string_action_name">İşlem Adı</string>
-    <string name="quick_action_showhide_osmbugs_title">OSM notlarını göster ya da gizle</string>
     <string name="quick_action_osmbugs_show">OSM notlarını göster</string>
     <string name="quick_action_osmbugs_hide">OSM notlarını gizle</string>
     <string name="quick_action_showhide_osmbugs_descr">OSM notlarını haritada göstermek veya gizlemek için bir düğme.</string>
@@ -2443,7 +2442,6 @@
     <string name="routeInfo_road_types_name">Yol türleri</string>
     <string name="shared_string_swap">Takas</string>
     <string name="show_more">Daha fazla görüntüle</string>
-    <string name="quick_action_show_hide_gpx_tracks">Yolları göster/gizle</string>
     <string name="quick_action_gpx_tracks_hide">Yolları Gizle</string>
     <string name="quick_action_gpx_tracks_show">Yolları Göster</string>
     <string name="add_home">Ev ekle</string>
@@ -2964,10 +2962,8 @@
     <string name="favorite_autofill_toast_text">" kaydedildi "</string>
     <string name="favorite_empty_place_name">Yer</string>
     <string name="quick_action_duplicate">Hızlı eylem adı yinelenen</string>
-    <string name="quick_action_showhide_favorites_title">Sık Kullanılanları göster/gizle</string>
     <string name="quick_action_favorites_show">Sık Kullanılanları göster</string>
     <string name="quick_action_favorites_hide">Sık Kullanılanları gizle</string>
-    <string name="quick_action_showhide_poi_title">POI göster/gizle</string>
     <string name="quick_action_poi_show">%1$s göster</string>
     <string name="quick_action_poi_hide">%1$s gizle</string>
     <string name="quick_action_add_category">Kategori ekle</string>
@@ -3267,11 +3263,9 @@
     <string name="quick_action_contour_lines_descr">Eş yükselti eğrilerini haritada gösterme veya gizleme düğmesi.</string>
     <string name="quick_action_contour_lines_show">Eş yükselti eğrilerini göster</string>
     <string name="quick_action_contour_lines_hide">Eş yükselti eğrilerini gizle</string>
-    <string name="quick_action_show_hide_contour_lines">Eş yükselti eğrilerini göster/gizle</string>
     <string name="quick_action_hillshade_descr">Haritada tepe gölgelerini göstermek veya gizlemek için bir düğme.</string>
     <string name="quick_action_hillshade_show">Tepe gölgesini göster</string>
     <string name="quick_action_hillshade_hide">Tepe gölgesini gizle</string>
-    <string name="quick_action_show_hide_hillshade">Tepe gölgesini göster/gizle</string>
     <string name="tts_initialization_error">Metinden konuşmaya motoru başlatılamıyor.</string>
     <string name="simulate_your_location_gpx_descr">Kayıtlı bir GPX yolu kullanarak konumunuzu simüle edin.</string>
     <string name="export_profile">Profili dışa aktar</string>
@@ -3497,7 +3491,6 @@
     <string name="recalculate_route_distance_promo">Güzergahtan geçerli konuma olan mesafe seçilen değerden fazla ise güzergah yeniden hesaplanacaktır.</string>
     <string name="n_items_of_z">%1$s / %2$s</string>
     <string name="download_slope_maps">Yamaçlar</string>
-    <string name="quick_action_show_hide_terrain">Araziyi göster veya gizle</string>
     <string name="quick_action_terrain_hide">Araziyi gizle</string>
     <string name="quick_action_terrain_show">Araziyi göster</string>
     <string name="quick_action_terrain_descr">Haritada arazi katmanını göstermek veya gizlemek için bir düğme.</string>
@@ -3615,7 +3608,6 @@
     <string name="additional_actions_descr">Bu eylemlere “%1$s” düğmesine dokunarak erişebilirsiniz.</string>
     <string name="quick_action_transport_hide">Toplu taşıma araçlarını gizle</string>
     <string name="quick_action_transport_show">Toplu taşıma araçlarını göster</string>
-    <string name="quick_action_show_hide_transport">Toplu taşıma araçlarını göster veya gizle</string>
     <string name="quick_action_transport_descr">Haritada toplu taşıma araçlarını gösteren veya gizleyen düğme.</string>
     <string name="create_edit_poi">POI oluştur veya düzenle</string>
     <string name="parking_positions">Park etme alanları</string>
@@ -3683,7 +3675,6 @@
     <string name="vessel_height_warning">Alçak köprülerden kaçınmak için gemi yüksekliğini ayarlayabilirsiniz. Köprü hareket edebiliyorsa, açık durumdaki yüksekliğini kullanacağımızı unutmayın.</string>
     <string name="vessel_height_limit_description">Alçak köprülerden kaçınmak için gemi yüksekliğini ayarlayın. Köprü hareket edebiliyorsa, açık durumdaki yüksekliğini kullanacağımızı unutmayın.</string>
     <string name="vessel_width_limit_description">Dar köprülerden kaçınmak için gemi genişliğini ayarlayın</string>
-    <string name="quick_action_showhide_mapillary_title">Mapillary\'i göster/gizle</string>
     <string name="quick_action_mapillary_hide">Mapillary\'i gizle</string>
     <string name="quick_action_mapillary_show">Mapillary\'i göster</string>
     <string name="quick_action_showhide_mapillary_descr">Harita üzerinde Mapillary katmanını göstermek veya gizlemek için bir geçiş.</string>
