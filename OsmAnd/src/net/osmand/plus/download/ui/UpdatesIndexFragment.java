@@ -23,6 +23,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.ColorRes;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.content.res.AppCompatResources;
@@ -97,7 +98,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 		invalidateListView(activity);
-		startLoadLiveMapsAsyncTask();
+		startLoadLiveMapsAsyncTask(getMyApplication());
 	}
 
 	@Override
@@ -109,7 +110,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 	public void downloadHasFinished() {
 		invalidateListView(getMyActivity());
 		updateUpdateAllButton();
-		startLoadLiveMapsAsyncTask();
+		startLoadLiveMapsAsyncTask(getMyApplication());
 	}
 
 	@Override
@@ -222,8 +223,8 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 		stopLoadLiveMapsAsyncTask();
 	}
 
-	private void startLoadLiveMapsAsyncTask() {
-		loadLiveMapsTask = new LoadLiveMapsTask(listAdapter, this);
+	private void startLoadLiveMapsAsyncTask(OsmandApplication app) {
+		loadLiveMapsTask = new LoadLiveMapsTask(listAdapter, app);
 		loadLiveMapsTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
@@ -256,6 +257,11 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 		return (DownloadActivity) getActivity();
 	}
 
+	@Nullable
+	public OsmandApplication getMyApplication() {
+		return getMyActivity().getMyApplication();
+	}
+
 	@SuppressWarnings("deprecation")
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -272,10 +278,6 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 		}
 	}
 
-	public OsmandApplication getMyApplication() {
-		return getMyActivity().getMyApplication();
-	}
-
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == RELOAD_ID) {
@@ -287,8 +289,8 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 	}
 
 	@Override
-	public void onUpdateStates() {
-		startLoadLiveMapsAsyncTask();
+	public void onUpdateStates(OsmandApplication app) {
+		startLoadLiveMapsAsyncTask(app);
 	}
 
 	private class UpdateIndexAdapter extends ArrayAdapter<IndexItem> {
@@ -428,10 +430,9 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 		private final UpdateIndexAdapter adapter;
 		private final LocalIndexHelper helper;
 
-		public LoadLiveMapsTask(UpdateIndexAdapter adapter,
-								UpdatesIndexFragment fragment) {
+		public LoadLiveMapsTask(UpdateIndexAdapter adapter, OsmandApplication app) {
 			this.adapter = adapter;
-			helper = new LocalIndexHelper(fragment.getMyApplication());
+			helper = new LocalIndexHelper(app);
 		}
 
 		@Override

@@ -222,7 +222,7 @@ public class LiveUpdatesFragmentNew extends BaseOsmAndDialogFragment implements 
 		super.onDismiss(dialog);
 		Fragment target = getTargetFragment();
 		if (target instanceof OnRefreshLiveUpdates) {
-			((OnRefreshLiveUpdates) target).onUpdateStates();
+			((OnRefreshLiveUpdates) target).onUpdateStates(app);
 		}
 	}
 

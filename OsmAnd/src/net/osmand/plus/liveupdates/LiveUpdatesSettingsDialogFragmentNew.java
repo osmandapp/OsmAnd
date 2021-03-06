@@ -475,7 +475,7 @@ public class LiveUpdatesSettingsDialogFragmentNew extends MenuBottomSheetDialogF
 	}
 
 	@Override
-	public void onUpdateStates() {
+	public void onUpdateStates(OsmandApplication app) {
 		final OnLiveUpdatesForLocalChange confirmationInterface = (OnLiveUpdatesForLocalChange) getTargetFragment();
 		if (confirmationInterface != null) {
 			confirmationInterface.updateList();

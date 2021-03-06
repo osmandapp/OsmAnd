@@ -96,7 +96,7 @@ public class LiveUpdatesClearDialogFragment extends MenuBottomSheetDialogFragmen
 	}
 
 	public interface OnRefreshLiveUpdates {
-		void onUpdateStates();
+		void onUpdateStates(OsmandApplication app);
 	}
 
 	@Override
@@ -105,7 +105,7 @@ public class LiveUpdatesClearDialogFragment extends MenuBottomSheetDialogFragmen
 
 		Fragment fragment = getTargetFragment();
 		if (fragment instanceof OnRefreshLiveUpdates) {
-			((OnRefreshLiveUpdates) fragment).onUpdateStates();
+			((OnRefreshLiveUpdates) fragment).onUpdateStates(app);
 		}
 
 		dismiss();
