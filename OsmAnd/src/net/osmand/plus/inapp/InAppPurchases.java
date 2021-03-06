@@ -405,16 +405,12 @@ public abstract class InAppPurchases {
 												 String introductoryPrice,
 												 long introductoryPriceAmountMicros,
 												 String introductoryPeriodString,
-												 String introductoryCycles) throws ParseException {
+												 int introductoryCycles) throws ParseException {
 			this.subscription = subscription;
 			this.introductoryPrice = introductoryPrice;
 			this.introductoryPriceAmountMicros = introductoryPriceAmountMicros;
 			this.introductoryPeriodString = introductoryPeriodString;
-			try {
-				this.introductoryCycles = Integer.parseInt(introductoryCycles);
-			} catch (NumberFormatException e) {
-				throw new ParseException("Cannot parse introductoryCycles = " + introductoryCycles, 0);
-			}
+			this.introductoryCycles = introductoryCycles;
 			introductoryPriceValue = introductoryPriceAmountMicros / 1000000d;
 			introductoryPeriod = Period.parse(introductoryPeriodString);
 		}
