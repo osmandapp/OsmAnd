@@ -20,9 +20,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:orientation="horizontal"
-		android:paddingTop="@dimen/context_menu_padding_margin_tiny"
-		android:visibility="gone"
-		android:paddingBottom="@dimen/content_padding">
+		android:paddingTop="@dimen/context_menu_buttons_padding_bottom">
 
 		<androidx.recyclerview.widget.RecyclerView
 			android:id="@+id/recycler_view"
@@ -40,14 +38,5 @@
 			tools:orientation="horizontal" />
 
 	</LinearLayout>
-
-	<com.google.android.material.internal.FlowLayout
-		android:id="@+id/select_color"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_marginStart="@dimen/content_padding_small"
-		android:layout_marginLeft="@dimen/content_padding_small"
-		android:layout_marginTop="@dimen/context_menu_padding_margin_tiny"
-		android:layout_marginBottom="@dimen/content_padding_half" />
 
 </LinearLayout>

@@ -12,6 +12,9 @@
 
 -->
 
+    <string name="select_another_colorization">Please select another type of colorization.</string>
+    <string name="track_has_no_speed">The track does not contain speed data.</string>
+    <string name="track_has_no_altitude">The track does not contain altitude data.</string>
     <string name="track_recording_will_be_continued">The recording will be continued.</string>
     <string name="map_widget_distance_by_tap">Distance by tap</string>
     <string name="quick_action_coordinates_widget_descr">A toggle to show or hide the Coordinates widget on the map.</string>
