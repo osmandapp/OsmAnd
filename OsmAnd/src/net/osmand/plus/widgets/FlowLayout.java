@@ -114,16 +114,11 @@ public class FlowLayout extends ViewGroup {
 	}
 
 	private int getFreeSizeSpacing(int width, LayoutParams lp, int childWidth) {
-		int freeSizeSpacing;
 		int itemsCount = width / (childWidth + lp.horizontalSpacing);
 		if (itemsCount > 1 && horizontalAutoSpacing) {
-			freeSizeSpacing = (width % childWidth / (itemsCount - 1)) + lp.horizontalSpacing;
-		} else if (!horizontalAutoSpacing) {
-			freeSizeSpacing = lp.horizontalSpacing;
-		} else {
-			freeSizeSpacing = (width % childWidth / itemsCount) + lp.horizontalSpacing;
+			return (width % childWidth / (itemsCount - 1)) + lp.horizontalSpacing;
 		}
-		return freeSizeSpacing;
+		return lp.horizontalSpacing;
 	}
 
 	public static class LayoutParams extends ViewGroup.LayoutParams {
