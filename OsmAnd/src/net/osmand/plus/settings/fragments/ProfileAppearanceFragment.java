@@ -432,6 +432,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 			for (int iconRes : icons) {
 				View iconItem = createIconItemView(iconRes, iconItems);
 				iconItems.addView(iconItem, new FlowLayout.LayoutParams(0, 0));
+				iconItems.setHorizontalAutoSpacing(true);
 			}
 			setIconColor(changedProfile.iconRes);
 		} else if (LOCATION_ICON_ITEMS.equals(preference.getKey())) {

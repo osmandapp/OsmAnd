@@ -50,7 +50,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
@@ -68,6 +67,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -126,7 +126,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 	@SuppressLint("ClickableViewAccessibility")
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-	                         Bundle savedInstanceState) {
+							 Bundle savedInstanceState) {
 
 		app = requireMyApplication();
 		nightMode = app.getDaynightHelper().isNightModeForMapControls();
@@ -146,7 +146,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 		selectedShape = getBackgroundType();
 		selectedIcon = getIconId();
 
-		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+		Toolbar toolbar = view.findViewById(R.id.toolbar);
 		toolbar.setBackgroundColor(ContextCompat.getColor(requireContext(),
 				nightMode ? R.color.app_bar_color_dark : R.color.list_background_color_light));
 		toolbar.setTitle(getToolbarTitle());
@@ -161,7 +161,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 			}
 		});
 
-		final ScrollView scrollView = (ScrollView) view.findViewById(R.id.editor_scroll_view);
+		final ScrollView scrollView = view.findViewById(R.id.editor_scroll_view);
 		scrollViewY = scrollView.getScrollY();
 		scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
 			@Override
@@ -177,14 +177,14 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 		});
 
 		final int activeColorResId = getActiveColorRes();
-		ImageView toolbarAction = (ImageView) view.findViewById(R.id.toolbar_action);
+		ImageView toolbarAction = view.findViewById(R.id.toolbar_action);
 		view.findViewById(R.id.background_layout).setBackgroundResource(nightMode
 				? R.color.app_bar_color_dark : R.color.list_background_color_light);
-		ImageView replaceIcon = (ImageView) view.findViewById(R.id.replace_action_icon);
+		ImageView replaceIcon = view.findViewById(R.id.replace_action_icon);
 		replaceIcon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_replace, activeColorResId));
-		ImageView deleteIcon = (ImageView) view.findViewById(R.id.delete_action_icon);
+		ImageView deleteIcon = view.findViewById(R.id.delete_action_icon);
 		deleteIcon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_delete_dark, activeColorResId));
-		ImageView groupListIcon = (ImageView) view.findViewById(R.id.group_list_button_icon);
+		ImageView groupListIcon = view.findViewById(R.id.group_list_button_icon);
 		groupListIcon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_group_select_all, activeColorResId));
 		addToHiddenGroupInfo = view.findViewById(R.id.add_hidden_group_info);
 		addToHiddenGroupInfo.setText(getString(R.string.add_hidden_group_info, getString(R.string.shared_string_my_places)));
@@ -193,7 +193,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 			@Override
 			public void onClick(View v) {
 				FragmentManager fragmentManager = getFragmentManager();
-				DialogFragment dialogFragment  = createSelectCategoryDialog();
+				DialogFragment dialogFragment = createSelectCategoryDialog();
 				if (fragmentManager != null && dialogFragment != null) {
 					dialogFragment.show(fragmentManager, SelectFavoriteCategoryBottomSheet.class.getSimpleName());
 				}
@@ -220,10 +220,10 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 		UiUtilities.setupDialogButton(nightMode, cancelButton, UiUtilities.DialogButtonType.SECONDARY, R.string.shared_string_cancel);
 		UiUtilities.setupDialogButton(nightMode, saveButton, UiUtilities.DialogButtonType.PRIMARY, R.string.shared_string_save);
 
-		final TextInputLayout nameCaption = (TextInputLayout) view.findViewById(R.id.name_caption);
+		final TextInputLayout nameCaption = view.findViewById(R.id.name_caption);
 		nameCaption.setHint(getString(R.string.shared_string_name));
 
-		nameEdit = (EditText) view.findViewById(R.id.name_edit);
+		nameEdit = view.findViewById(R.id.name_edit);
 		nameEdit.setText(getNameInitValue());
 		nameEdit.addTextChangedListener(new TextWatcher() {
 			@Override
@@ -241,15 +241,15 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 		});
 
 		checkEmptyName(nameEdit.getText(), nameCaption, saveButton);
-		nameIcon = (ImageView) view.findViewById(R.id.name_icon);
+		nameIcon = view.findViewById(R.id.name_icon);
 		TextView categoryEdit = view.findViewById(R.id.groupName);
 		if (categoryEdit != null) {
 			AndroidUtils.setTextPrimaryColor(view.getContext(), categoryEdit, nightMode);
 			categoryEdit.setText(getCategoryInitValue());
 		}
 
-		descriptionEdit = (EditText) view.findViewById(R.id.description_edit);
-		addressEdit = (EditText) view.findViewById(R.id.address_edit);
+		descriptionEdit = view.findViewById(R.id.description_edit);
+		addressEdit = view.findViewById(R.id.address_edit);
 		AndroidUtils.setTextPrimaryColor(view.getContext(), descriptionEdit, nightMode);
 		AndroidUtils.setTextPrimaryColor(view.getContext(), addressEdit, nightMode);
 		AndroidUtils.setHintTextSecondaryColor(view.getContext(), descriptionEdit, nightMode);
@@ -260,7 +260,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 
 		descriptionCaption = view.findViewById(R.id.description);
 		addressCaption = view.findViewById(R.id.address);
-		addDelDescription = (TextView) view.findViewById(R.id.description_button);
+		addDelDescription = view.findViewById(R.id.description_button);
 		addAddressBtn = view.findViewById(R.id.address_button);
 		deleteAddressIcon = view.findViewById(R.id.delete_address_icon);
 		deleteAddressIcon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_trash_basket_16, activeColorResId));
@@ -524,6 +524,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 			if (backgroundType.isSelected()) {
 				selectShape.addView(createShapeItemView(backgroundType, selectShape),
 						new FlowLayout.LayoutParams(0, 0));
+				selectShape.setHorizontalAutoSpacing(true);
 			}
 		}
 	}
@@ -564,7 +565,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 		((TextView) rootView.findViewById(R.id.shape_name)).setText(backgroundType.getNameId());
 		ImageView background = newShape.findViewById(R.id.background);
 		background.setImageDrawable(UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, backgroundType.getIconId()),
-						selectedColor));
+				selectedColor));
 		selectedShape = backgroundType;
 		setBackgroundType(backgroundType);
 		updateNameIcon();
@@ -572,9 +573,9 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 
 	private void setShapeSelectorBackground(BackgroundType backgroundType, ImageView background) {
 		background.setImageDrawable(UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, backgroundType.getIconId()),
-						ContextCompat.getColor(app,
-								nightMode ? R.color.inactive_buttons_and_links_bg_dark
-										: R.color.inactive_buttons_and_links_bg_light)));
+				ContextCompat.getColor(app,
+						nightMode ? R.color.inactive_buttons_and_links_bg_dark
+								: R.color.inactive_buttons_and_links_bg_light)));
 	}
 
 	private String getInitCategory() {
@@ -646,7 +647,9 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 			horizontalSelectionAdapter.notifyDataSetChanged();
 			iconCategoriesRecyclerView.smoothScrollToPosition(horizontalSelectionAdapter.getItemPositionByTitle(selectedIconCategory));
 			for (String name : iconNameList) {
-				selectIcon.addView(createIconItemView(name, selectIcon), new FlowLayout.LayoutParams(0, 0));
+				int minimalPaddingBetweenIcon = app.getResources().getDimensionPixelSize(R.dimen.favorites_select_icon_button_right_padding);
+				selectIcon.addView(createIconItemView(name, selectIcon), new FlowLayout.LayoutParams(minimalPaddingBetweenIcon, 0));
+				selectIcon.setHorizontalAutoSpacing(true);
 			}
 		}
 	}
@@ -704,9 +707,9 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 
 	private void setIconSelectorBackground(ImageView backgroundCircle) {
 		backgroundCircle.setImageDrawable(UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, R.drawable.bg_point_circle),
-						ContextCompat.getColor(app, nightMode
-								? R.color.inactive_buttons_and_links_bg_dark
-								: R.color.inactive_buttons_and_links_bg_light)));
+				ContextCompat.getColor(app, nightMode
+						? R.color.inactive_buttons_and_links_bg_dark
+						: R.color.inactive_buttons_and_links_bg_light)));
 	}
 
 	private void updateNameIcon() {
@@ -723,7 +726,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 			byte[] buffer = new byte[size];
 			is.read(buffer);
 			is.close();
-			json = new String(buffer, "UTF-8");
+			json = new String(buffer, StandardCharsets.UTF_8);
 		} catch (IOException ex) {
 			ex.printStackTrace();
 			return null;
