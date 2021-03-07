@@ -518,6 +518,10 @@ public class LiveUpdatesSettingsDialogFragmentNew extends MenuBottomSheetDialogF
 		if (confirmationInterface != null) {
 			confirmationInterface.updateList();
 		}
+		if (indexLastCheckItem != -1) {
+			((BottomSheetItemWithDescription) items.get(indexLastCheckItem))
+					.setDescription(getLastCheckString());
+		}
 		if (indexClearItem != -1) {
 			((BottomSheetItemWithDescription) items.get(indexClearItem))
 					.setDescription(getUpdatesSizeStr());
@@ -535,8 +539,8 @@ public class LiveUpdatesSettingsDialogFragmentNew extends MenuBottomSheetDialogF
 		void updateList();
 	}
 
-	public String getStateText(boolean state) {
-		return app.getResources().getString(state ? R.string.shared_string_enabled : R.string.shared_string_disabled);
+	public String getStateText(boolean isEnabled) {
+		return app.getResources().getString(isEnabled ? R.string.shared_string_enabled : R.string.shared_string_disabled);
 	}
 
 	@ColorRes

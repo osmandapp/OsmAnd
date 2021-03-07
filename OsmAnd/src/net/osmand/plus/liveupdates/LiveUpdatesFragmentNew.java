@@ -217,6 +217,7 @@ public class LiveUpdatesFragmentNew extends BaseOsmAndDialogFragment implements 
 		stopUpdateDateAsyncTask();
 		stopLoadLiveMapsAsyncTask();
 	}
+
 	@Override
 	public void onDismiss(@NonNull DialogInterface dialog) {
 		super.onDismiss(dialog);
@@ -262,7 +263,6 @@ public class LiveUpdatesFragmentNew extends BaseOsmAndDialogFragment implements 
 			@Override
 			public void onClick(View view) {
 				boolean visible = !isChecked;
-
 				if (visible) {
 					if (InAppPurchaseHelper.isSubscribedToLiveUpdates(app)) {
 						switchOnLiveUpdates();
@@ -291,7 +291,7 @@ public class LiveUpdatesFragmentNew extends BaseOsmAndDialogFragment implements 
 	}
 
 	private void showUpdateDialog() {
-		final AsyncResponse runListSort = new AsyncResponse() {
+		final AsyncResponse refreshAfterUpdate = new AsyncResponse() {
 			@Override
 			public void processFinish() {
 				adapter.notifyDataSetChanged();
@@ -300,7 +300,7 @@ public class LiveUpdatesFragmentNew extends BaseOsmAndDialogFragment implements 
 		if (!Algorithms.isEmpty(adapter.mapsList)) {
 			if (adapter.countEnabled == 1) {
 				LocalIndexInfo li = adapter.mapsList.get(0);
-				runLiveUpdate(getActivity(), li.getFileName(), false, runListSort);
+				runLiveUpdate(getActivity(), li.getFileName(), false, refreshAfterUpdate);
 			} else if (adapter.countEnabled > 1) {
 				AlertDialog.Builder bld = new AlertDialog.Builder(getMyActivity());
 				bld.setMessage(R.string.update_all_maps_now);
@@ -311,14 +311,10 @@ public class LiveUpdatesFragmentNew extends BaseOsmAndDialogFragment implements 
 						for (LocalIndexInfo li : adapter.mapsList) {
 							CommonPreference<Boolean> localUpdateOn = preferenceForLocalIndex(li.getFileName(), settings);
 							if (localUpdateOn.get()) {
-								if (adapter.mapsList.indexOf(li) == adapter.mapsList.size() - 1) {
-									runLiveUpdate(getActivity(), li.getFileName(), false, runListSort);
-								} else {
-									runLiveUpdate(getActivity(), li.getFileName(), false);
-								}
+								runLiveUpdate(getActivity(), li.getFileName(), false, refreshAfterUpdate);
 							}
-							startUpdateDateAsyncTask();
 						}
+						startUpdateDateAsyncTask();
 					}
 				});
 				bld.setNegativeButton(R.string.shared_string_no, null);
