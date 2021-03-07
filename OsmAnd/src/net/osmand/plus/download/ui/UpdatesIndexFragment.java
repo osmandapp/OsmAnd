@@ -289,8 +289,10 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 	}
 
 	@Override
-	public void onUpdateStates(OsmandApplication app) {
-		startLoadLiveMapsAsyncTask(app);
+	public void onUpdateStates(Context context) {
+		if (context instanceof OsmandApplication) {
+			startLoadLiveMapsAsyncTask((OsmandApplication) context);
+		}
 	}
 
 	private class UpdateIndexAdapter extends ArrayAdapter<IndexItem> {
@@ -471,7 +473,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 	}
 
 	private void showUpdateDialog() {
-		if (!Algorithms.isEmpty(listAdapter.mapsList)) {
+		if (!listAdapter.isNotSubscribed() && !Algorithms.isEmpty(listAdapter.mapsList)) {
 			if (listAdapter.countEnabled == 1) {
 				LocalIndexInfo li = listAdapter.mapsList.get(0);
 				runLiveUpdate(getActivity(), li.getFileName(), false);

@@ -1,5 +1,6 @@
 package net.osmand.plus.liveupdates;
 
+import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -96,7 +97,7 @@ public class LiveUpdatesClearDialogFragment extends MenuBottomSheetDialogFragmen
 	}
 
 	public interface OnRefreshLiveUpdates {
-		void onUpdateStates(OsmandApplication app);
+		void onUpdateStates(Context context);
 	}
 
 	@Override
