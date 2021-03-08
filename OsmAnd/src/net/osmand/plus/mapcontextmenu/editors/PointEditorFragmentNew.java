@@ -522,8 +522,9 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 		FlowLayout selectShape = view.findViewById(R.id.select_shape);
 		for (BackgroundType backgroundType : BackgroundType.values()) {
 			if (backgroundType.isSelected()) {
+				int minimalPaddingBetweenIcon = app.getResources().getDimensionPixelSize(R.dimen.favorites_select_icon_button_right_padding);
 				selectShape.addView(createShapeItemView(backgroundType, selectShape),
-						new FlowLayout.LayoutParams(0, 0));
+						new FlowLayout.LayoutParams(minimalPaddingBetweenIcon, 0));
 				selectShape.setHorizontalAutoSpacing(true);
 			}
 		}

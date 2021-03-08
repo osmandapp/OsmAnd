@@ -100,25 +100,30 @@ public class FlowLayout extends ViewGroup {
 						verticalPosition += line_height;
 					}
 					child.layout(horizontalPosition - childWidth, verticalPosition, horizontalPosition, verticalPosition + childHeight);
-					horizontalPosition -= childWidth + freeSizeSpacing;
+					horizontalPosition -= freeSizeSpacing;
 				} else {
 					if (horizontalPosition + childWidth > width) {
 						horizontalPosition = getPaddingLeft();
 						verticalPosition += line_height;
 					}
 					child.layout(horizontalPosition, verticalPosition, horizontalPosition + childWidth, verticalPosition + childHeight);
-					horizontalPosition += childWidth + freeSizeSpacing;
+					horizontalPosition += freeSizeSpacing;
 				}
 			}
 		}
 	}
 
 	private int getFreeSizeSpacing(int width, LayoutParams lp, int childWidth) {
+		int freeSizeSpacing;
 		int itemsCount = width / (childWidth + lp.horizontalSpacing);
 		if (itemsCount > 1 && horizontalAutoSpacing) {
-			return (width % childWidth / (itemsCount - 1)) + lp.horizontalSpacing;
+			freeSizeSpacing = (width - childWidth) / (itemsCount-1);
+		} else if (!horizontalAutoSpacing) {
+			freeSizeSpacing = childWidth + lp.horizontalSpacing;
+		} else {
+			freeSizeSpacing = (width % childWidth / itemsCount);
 		}
-		return lp.horizontalSpacing;
+		return freeSizeSpacing;
 	}
 
 	public static class LayoutParams extends ViewGroup.LayoutParams {
