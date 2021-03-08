@@ -14,7 +14,7 @@ import net.osmand.plus.quickaction.QuickActionType;
 public class ShowHideCoordinatesWidgetAction extends QuickAction {
 	public static final QuickActionType TYPE = new QuickActionType(35,
 			"coordinates.showhide", ShowHideCoordinatesWidgetAction.class)
-			.nameActionRes(R.string.quick_action_showhide_title)
+			.nameActionRes(R.string.quick_action_show_hide_title)
 			.nameRes(R.string.coordinates_widget)
 			.iconRes(R.drawable.ic_action_coordinates_widget).nonEditable()
 			.category(QuickActionType.CONFIGURE_SCREEN);
@@ -50,10 +50,9 @@ public class ShowHideCoordinatesWidgetAction extends QuickAction {
 
 	@Override
 	public String getActionText(OsmandApplication application) {
-
-		return application.getSettings().SHOW_COORDINATES_WIDGET.get()
-				? application.getString(R.string.quick_action_coordinates_widget_hide)
-				: application.getString(R.string.quick_action_coordinates_widget_show);
+		String nameRes = application.getString(getNameRes());
+		String actionName = isActionWithSlash(application) ? application.getString(R.string.shared_string_hide) : application.getString(R.string.shared_string_show);
+		return application.getString(R.string.ltr_or_rtl_combine_via_dash, actionName, nameRes);
 	}
 
 	@Override

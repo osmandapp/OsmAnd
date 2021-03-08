@@ -1801,8 +1801,6 @@
     <string name="quick_favorites_name_preset">Forstilling á nafni</string>
     <string name="favorite_autofill_toast_text">" vistað í "</string>
     <string name="favorite_empty_place_name">Staður</string>
-    <string name="quick_action_favorites_show">Birta eftirlæti</string>
-    <string name="quick_action_favorites_hide">Fela eftirlæti</string>
     <string name="quick_action_poi_show">Sýna %1$s</string>
     <string name="quick_action_poi_hide">Fela %1$s</string>
     <string name="quick_action_add_category">Bæta við flokki</string>
@@ -2047,8 +2045,6 @@
     <string name="restart_search">Byrja leit aftur</string>
     <string name="increase_search_radius">Stækka radíus leitar</string>
     <string name="nothing_found">Ekkert fannst</string>
-    <string name="quick_action_osmbugs_show">Birta OSM-minnispunkta</string>
-    <string name="quick_action_osmbugs_hide">Fela OSM-minnispunkta</string>
     <string name="sorted_by_distance">Raðað eftir vegalengd</string>
     <string name="search_favorites">Leita í eftirlætum</string>
     <string name="shared_string_plugin">Viðbót</string>
@@ -2848,8 +2844,6 @@
     <string name="exit_at">Fara útaf við</string>
     <string name="sit_on_the_stop">Fara um borð við stöðvunina</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Hnappur til að birta eða fela valda ferla á kortinu.</string>
-    <string name="quick_action_gpx_tracks_hide">Fela ferla</string>
-    <string name="quick_action_gpx_tracks_show">Birta ferla</string>
     <string name="use_osm_live_public_transport_description">Virkja breytingar á almenningssamgöngum í OsmAnd Live.</string>
     <string name="use_osm_live_public_transport">Almenningssamgöngur OsmAnd Live</string>
     <string name="public_transport_warning_descr_blog">Lestu meira á blogginu okkar um hvernig OsmAnd reiknar leiðir.</string>
@@ -3264,11 +3258,7 @@
     <string name="routing_attr_driving_style_prefer_unpaved_description">Velja frekar vegi með óbundnu slitlagi við leiðagerð.</string>
     <string name="layer_osm_edits">OSM-breytingar</string>
     <string name="quick_action_contour_lines_descr">Hnappur til að birta eða fela hæðarlínur á kortinu.</string>
-    <string name="quick_action_contour_lines_show">Birta hæðarlínur</string>
-    <string name="quick_action_contour_lines_hide">Fela hæðarlínur</string>
     <string name="quick_action_hillshade_descr">Hnappur til að birta eða fela hæðaskyggingu á kortinu.</string>
-    <string name="quick_action_hillshade_show">Birta hæðaskyggingu</string>
-    <string name="quick_action_hillshade_hide">Fela hæðaskyggingu</string>
     <string name="tts_initialization_error">Gat ekki ræst talgervil.</string>
     <string name="simulate_your_location_gpx_descr">Herma eftir staðsetningu þinni með áður skráðum GPX-ferli.</string>
     <string name="export_profile">Flytja út snið</string>
@@ -3491,8 +3481,6 @@
     <string name="terrain_empty_state_text">Virkja til að sjá hæðaskyggingar eða brekkur á korti. Þú getur lesið meira um þessa eiginleika á vefnum okkar.</string>
     <string name="shared_string_hillshade">Hæðaskygging</string>
     <string name="download_slope_maps">Brekkur</string>
-    <string name="quick_action_terrain_hide">Fela yfirborð</string>
-    <string name="quick_action_terrain_show">Sýna yfirborð</string>
     <string name="quick_action_terrain_descr">Hnappur til að birta eða fela yfirborðslag á kortinu.</string>
     <string name="recalculate_route_in_deviation">Endurreikna leið ef farið er út af fyrirfram gefinni leið</string>
     <string name="select_distance_route_will_recalc">Veldu þá vegalengd sem þarf til að leiðin verði endurreiknuð.</string>
@@ -3590,7 +3578,6 @@
     <string name="profiles_for_action_not_found">Gat ekki fundið nein slík snið.</string>
     <string name="online_map_url_helper_text">Settu inn eða afritaðu og límdu slóð á nettengdan kortagjafa.</string>
     <string name="map_markers_item">Kortamerki</string>
-    <string name="quick_action_transport_hide">Fela almenningssamgöngur</string>
     <string name="system_screen_timeout">Nota tímamörk kerfis fyrir skjá</string>
     <string name="edit_online_source">Breyta nettengdum gagnagjafa</string>
     <string name="tracker_item">OsmAnd rekjari</string>
@@ -3612,7 +3599,6 @@
     <string name="shared_string_resume">Halda áfram</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>
     <string name="add_edit_favorite">Bæta við eða breyta eftirlæti</string>
-    <string name="quick_action_transport_show">Birta almenningssamgöngur</string>
     <string name="default_screen_timeout">Sjálfgefin tímamörk fyrir skjá</string>
     <string name="quick_action_transport_descr">Hnappur til að birta eða fela almenningssamgöngur á kortinu.</string>
     <string name="turn_screen_on_proximity_sensor">Nálægðarskynjari</string>
@@ -3664,8 +3650,6 @@
     <string name="speed_camera_pois">Merktar hraðamyndavélar</string>
     <string name="keep_active">Halda virku</string>
     <string name="speed_cameras_alert">Aðvaranir vegna hraðamyndavéla eru bannaðar með lögum í sumum löndum.</string>
-    <string name="quick_action_mapillary_hide">Fela Mapillary</string>
-    <string name="quick_action_mapillary_show">Sýna Mapillary</string>
     <string name="quick_action_showhide_mapillary_descr">Víxlhnappur til að birta eða fela Mapillary-lagið á kortinu.</string>
     <string name="shared_string_bearing">Stefna</string>
     <string name="item_deleted">%1$s eytt</string>

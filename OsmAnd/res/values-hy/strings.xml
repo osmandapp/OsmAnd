@@ -247,8 +247,6 @@
     <string name="increase_search_radius">Ավելացնել որոնման շառավղը</string>
     <string name="nothing_found">Ոչինչ չի գտնվել</string>
     <string name="nothing_found_descr">Փոխել հարցումը կամ ավելացնել որոնման շառավիղը։</string>
-    <string name="quick_action_osmbugs_show">Ցույց տալ OSM նշումները</string>
-    <string name="quick_action_osmbugs_hide">Թաքցնել OSM նշումները</string>
     <string name="quick_action_showhide_osmbugs_descr">Քարտեզի վրա ցույց տալ կամ թաքցնել OSM նշումները կոճակը:</string>
     <string name="sorted_by_distance">Դասավորված է ըստ հեռավորության</string>
     <string name="search_favorites">Որոնում Սիրվածում</string>
@@ -2483,8 +2481,6 @@
     <string name="quick_action_duplicate">Կրկնօրինակ անուն գտնվեց</string>
     <string name="quick_action_showhide_favorites_descr">Սեղմելով գործողության կոճակը ցույց կտա կամ կթաքցնի «Սիրված» կետերը քարտեզի վրա:</string>
     <string name="quick_action_showhide_poi_descr">Սեղմելով գործողության կոճակը ցույց կտա կամ կթաքցնի POI կետերը քարտեզի վրա:</string>
-    <string name="quick_action_favorites_show">Ցուցադրել «Սիրված»-ը</string>
-    <string name="quick_action_favorites_hide">Թաքցնել «Սիրված»-ը</string>
     <string name="quick_action_poi_show">Ցուցադրել %1$s</string>
     <string name="quick_action_poi_hide">Թաքցնել %1$s</string>
     <string name="quick_action_add_category">Ավելացնել կատեգորիա</string>
@@ -2867,8 +2863,6 @@
     <string name="keep_active">Պահել ակտիվ</string>
     <string name="shared_string_uninstall">Ջնջել</string>
     <string name="speed_cameras_alert">Որոշ երկրներում արագության վերահսկողության տեսախցիկների ծանուցումը արգելված է օրենքով ։</string>
-    <string name="quick_action_mapillary_hide">Թաքցնել</string>
-    <string name="quick_action_mapillary_show">Ցույց տալ Mapillary</string>
     <string name="quick_action_showhide_mapillary_descr">Անջատիչ - Mapillary շերտը ցույց տալու կամ թաքցնել ու քարտեզի վրա:</string>
     <string name="shared_string_bearing">Կողմնորոշում</string>
     <string name="item_deleted">%1$s ջնջվեց</string>
@@ -2955,8 +2949,6 @@
     <string name="osmand_purchases_item">OsmAnd-ի գնումները</string>
     <string name="legend_item_description">Տեղեկանք քարտեզի խորհրդանիշներին:</string>
     <string name="navigation_profiles_item">Նավիգացիոն պրոֆիլներ</string>
-    <string name="quick_action_transport_hide">Թաքցնել հասարակական տրանսպորտը</string>
-    <string name="quick_action_transport_show">Ցույց տալ հասարակական տրանսպորտը</string>
     <string name="quick_action_transport_descr">Կոճակ, որը ցույց է տալիս կամ թաքցնում է հասարակական տրանսպորտը քարտեզի վրա:</string>
     <string name="create_edit_poi">Ստեղծել / Խմբագրել POI</string>
     <string name="add_edit_favorite">Ավելացնել / Խմբագրել Սիրվածն-րը</string>

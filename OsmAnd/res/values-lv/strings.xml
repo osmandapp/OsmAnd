@@ -2072,8 +2072,6 @@ Apraksta laukumu: %1$s x %2$s</string>
     <string name="favorite_empty_place_name">Vieta</string>
     <string name="quick_action_showhide_favorites_descr">Spiežot darbības pogu, tiks rādīti vai slēpti favorīti.</string>
     <string name="quick_action_showhide_poi_descr">Spiežot darbības pogu, tiks rādīti vai slēpti POI.</string>
-    <string name="quick_action_favorites_show">Rādīt favorītus</string>
-    <string name="quick_action_favorites_hide">Nerādīt izlasi</string>
     <string name="quick_action_poi_show">Rādīt %1$s</string>
     <string name="quick_action_poi_hide">Paslēpt %1$s</string>
     <string name="quick_action_add_category">Pievienot kategoriju</string>
@@ -2168,8 +2166,6 @@ Apraksta laukumu: %1$s x %2$s</string>
     <string name="relief_smoothness_factor_descr">Ieteicamais reljefs: līdzens vai kalnains.</string>
     <string name="shared_string_slope">Slīpums</string>
     <string name="lang_ber">Berberu</string>
-    <string name="quick_action_osmbugs_show">Rādīt OSM piezīmes</string>
-    <string name="quick_action_osmbugs_hide">Nerādīt OSM piezīmes</string>
     <string name="quick_action_showhide_osmbugs_descr">Nospiežot darbības pogu, tiek rādītas vai slēptas OEM piezīmes uz kartes.</string>
     <string name="sorted_by_distance">Sakārtots pēc distances</string>
     <string name="search_favorites">Meklēt Izlasē</string>
@@ -2668,8 +2664,6 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="exit_at">Iziet pie</string>
     <string name="sit_on_the_stop">Soliņš pieturā</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Nospiežot šo pogu, tiek parādīti vai slēpti izvēlētie GPX treki uz kartes</string>
-    <string name="quick_action_gpx_tracks_hide">Paslēpt GPX trekus</string>
-    <string name="quick_action_gpx_tracks_show">Parādīt GPX trekus</string>
     <string name="add_destination_query">Vispirms pievienojiet galapunktu</string>
     <string name="use_osm_live_public_transport_description">Iespējot sabiedrisko transportu OsmAnd Live.</string>
     <string name="use_osm_live_public_transport">OsmAnd Live sabiedriskais transports</string>

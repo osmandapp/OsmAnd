@@ -2137,8 +2137,6 @@
     <string name="quick_action_map_source_action">Kartenquelle hinzufügen</string>
     <string name="quick_action_map_source_switch">Die Kartenquelle wurde in „%s“ geändert.</string>
     <string name="quick_action_btn_tutorial_title">Schaltflächenposition ändern</string>
-    <string name="quick_action_favorites_show">Favoriten anzeigen</string>
-    <string name="quick_action_favorites_hide">Favoriten ausblenden</string>
     <string name="quick_action_category_descr">Kategorie, in der der Favorit gespeichert werden soll:</string>
     <string name="quick_action_gpx_category_descr">Wählen Sie eine beliebige Kategorie.</string>
     <string name="configure_screen_quick_action">Schnellaktion</string>
@@ -2384,8 +2382,6 @@
     <string name="routing_attr_allow_private_name">Privatzugang erlauben</string>
     <string name="routing_attr_allow_private_description">Zugang zu Privatgrund erlauben.</string>
     <string name="srtm_color_scheme">Farbschema</string>
-    <string name="quick_action_osmbugs_show">OSM-Hinweise einblenden</string>
-    <string name="quick_action_osmbugs_hide">OSM-Hinweise ausblenden</string>
     <string name="quick_action_showhide_osmbugs_descr">Schaltfläche zum Ein- oder Ausblenden von OSM-Hinweisen auf der Karte.</string>
     <string name="sorted_by_distance">Nach Entfernung sortiert</string>
     <string name="search_favorites">In Favoriten suchen</string>
@@ -2851,8 +2847,6 @@
     <string name="step_by_step">Schritt für Schritt</string>
     <string name="routeInfo_road_types_name">Straßentypen</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Eine Schaltfläche zum Ein- oder Ausblenden ausgewählter Tracks auf der Karte.</string>
-    <string name="quick_action_gpx_tracks_hide">Tracks ausblenden</string>
-    <string name="quick_action_gpx_tracks_show">Tracks einblenden</string>
     <string name="exit_at">Aussteigen bei</string>
     <string name="sit_on_the_stop">Zusteigen an Haltestelle</string>
     <string name="use_osm_live_public_transport_description">Aktivierung von OsmAnd Live für Änderungen bei öffentlichen Verkehrsmitteln.</string>
@@ -3267,11 +3261,7 @@
     <string name="routing_attr_driving_style_prefer_unpaved_description">Bei der Navigation unbefestigte Straßen gegenüber befestigten bevorzugen.</string>
     <string name="layer_osm_edits">OSM-Bearbeitungen</string>
     <string name="quick_action_contour_lines_descr">Schaltfläche zum Ein- und Ausblenden von Höhenlinien auf der Karte.</string>
-    <string name="quick_action_contour_lines_show">Höhenlinien anzeigen</string>
-    <string name="quick_action_contour_lines_hide">Höhenlinien ausblenden</string>
     <string name="quick_action_hillshade_descr">Schaltfläche zum Ein- oder Ausblenden der Reliefdarstellung.</string>
-    <string name="quick_action_hillshade_show">Relief anzeigen</string>
-    <string name="quick_action_hillshade_hide">Relief ausblenden</string>
     <string name="tts_initialization_error">Text-to-Speech-Engine kann nicht gestartet werden.</string>
     <string name="simulate_your_location_gpx_descr">Simulation Ihrer Position mit einem aufgezeichneten GPX-Track.</string>
     <string name="export_profile">Profil exportieren</string>
@@ -3490,8 +3480,6 @@
     <string name="add_description">Beschreibung hinzufügen</string>
     <string name="delete_description">Beschreibung löschen</string>
     <string name="quick_action_terrain_descr">Eine Schaltfläche zum Ein- und Ausblenden der Geländeebene auf der Karte.</string>
-    <string name="quick_action_terrain_show">Gelände einblenden</string>
-    <string name="quick_action_terrain_hide">Gelände ausblenden</string>
     <string name="shared_string_hillshade">Relief</string>
     <string name="shared_string_zoom_levels">Zoomstufen</string>
     <string name="shared_string_transparency">Transparenz</string>
@@ -3607,8 +3595,6 @@
 \n</string>
     <string name="shared_string_resume">Fortfahren</string>
     <string name="additional_actions_descr">Sie können auf diese Aktionen zugreifen, indem Sie auf die Schaltfläche \"%1$s\" tippen.</string>
-    <string name="quick_action_transport_hide">Öffentliche Verkehrsmittel ausblenden</string>
-    <string name="quick_action_transport_show">Öffentliche Verkehrsmittel anzeigen</string>
     <string name="quick_action_transport_descr">Schaltfläche zum Ein- oder Ausblenden der öffentlichen Verkehrsmittel auf der Karte.</string>
     <string name="create_edit_poi">POI erstellen oder bearbeiten</string>
     <string name="parking_positions">Parkpositionen</string>
@@ -3681,8 +3667,6 @@
     <string name="vessel_height_warning">Sie können die Schiffshöhe einstellen, um niedrige Brücken zu vermeiden. Denken Sie daran, wenn die Brücke beweglich ist, werden wir ihre Höhe im offenen Zustand verwenden.</string>
     <string name="vessel_height_limit_description">Schiffshöhe einstellen, um niedrige Brücken zu vermeiden. Beachten Sie: Wenn die Brücke beweglich ist, verwendet die Berechnung ihre Höhe im geöffneten Zustand.</string>
     <string name="vessel_width_limit_description">Stellen Sie die Schiffsbreite ein, um schmale Brücken zu vermeiden</string>
-    <string name="quick_action_mapillary_hide">Mapillary ausblenden</string>
-    <string name="quick_action_mapillary_show">Mapillary anzeigen</string>
     <string name="quick_action_showhide_mapillary_descr">Eine Umschaltfläche zum Ein- oder Ausblenden des Mapillary-Layers auf der Karte.</string>
     <string name="uninstall_speed_cameras">Blitzer deinstallieren</string>
     <string name="shared_string_legal">Rechtliches</string>

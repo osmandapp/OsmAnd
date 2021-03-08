@@ -1969,10 +1969,8 @@
     <string name="quick_action_add_navigation">Navigering</string>
     <string name="quick_action_add_configure_map">Kartinnstilling</string>
     <string name="quick_action_add_category">Legg til en kategori</string>
-    <string name="quick_action_favorites_hide">Skjul favoritter</string>
     <string name="quick_action_poi_show">Vis %1$s</string>
     <string name="quick_action_poi_hide">Skjul %1$s</string>
-    <string name="quick_action_favorites_show">Vis favoritter</string>
     <string name="favorite_empty_place_name">Sted</string>
     <string name="quick_action_add_favorite">Legg til favoritt</string>
     <string name="quick_action_navigation_voice">Tale på/av</string>
@@ -2130,8 +2128,6 @@
     <string name="mapillary_menu_filter_description">Filtrer bilder etter innsender, dato eller type. Kun aktivt på nærgående forstørrelsesnivå.</string>
     <string name="improve_coverage_install_mapillary_desc">Installer Mapillary for å legge til bilder i denne kartposisjonen.</string>
     <string name="plugin_mapillary_descr">Foto på gatenivå for alle. Oppdag plasser, samarbeid, fang inn verden.</string>
-    <string name="quick_action_osmbugs_show">Vis OSM-notater</string>
-    <string name="quick_action_osmbugs_hide">Skjul OSM-notater</string>
     <string name="quick_action_showhide_osmbugs_descr">Knapp til å vise eller skjule OSM-notater på kartet.</string>
     <string name="sea_depth_thanks">Takk for at du kjøpte \'Havdybdekonturer\'</string>
     <string name="index_item_depth_contours_osmand_ext">Havdybdekonturer</string>
@@ -2850,8 +2846,6 @@
     <string name="exit_at">Gå av på</string>
     <string name="sit_on_the_stop">Sitt på stoppet</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Knapp for å vise eller skjule valgte spor på kartet.</string>
-    <string name="quick_action_gpx_tracks_hide">Skjul spor</string>
-    <string name="quick_action_gpx_tracks_show">Vis spor</string>
     <string name="use_osm_live_public_transport_description">Skru på offentlig transport i OsmAnd Live-endringer.</string>
     <string name="use_osm_live_public_transport">Offentlig transport i OsmAnd Live</string>
     <string name="transfers_size">%1$d overføringer</string>
@@ -3158,11 +3152,7 @@
     <string name="update_all_maps_q">Er du sikker på at du vil oppdatere alle (%1$d) kart\?</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Foretrekk veier uten fast dekke</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Foretrekk veier uten fast dekke framfor med fast dekke for ruting.</string>
-    <string name="quick_action_contour_lines_show">Vis koter</string>
-    <string name="quick_action_contour_lines_hide">Skjul koter</string>
     <string name="quick_action_hillshade_descr">En knapp for å vise eller skjule relieffskygger på kartet.</string>
-    <string name="quick_action_hillshade_show">Vis relieffskygge</string>
-    <string name="quick_action_hillshade_hide">Skjul relieffskygge</string>
     <string name="tts_initialization_error">Kan ikke starte tekst-til-tale-motor.</string>
     <string name="simulate_your_location_gpx_descr">Simuler posisjonen din ved bruk av et innspilt GPX-spor.</string>
     <string name="exported_osmand_profile">OsmAnd-profil: %1$s</string>
@@ -3387,8 +3377,6 @@
     <string name="open_settings">Åpne innstillinger</string>
     <string name="shared_string_terrain">Terreng</string>
     <string name="n_items_of_z">%1$s av %2$s</string>
-    <string name="quick_action_terrain_hide">Skjul terreng</string>
-    <string name="quick_action_terrain_show">Vis terreng</string>
     <string name="delete_description">Slett beskrivelse</string>
     <string name="add_description">Legg til beskrivelse</string>
     <string name="select_group">Velg gruppe</string>
@@ -3444,8 +3432,6 @@
     <string name="measure_distance_item">Mål avstand</string>
     <string name="travel_item">Reising (Wikivoyage og Wikipedia)</string>
     <string name="navigation_profiles_item">Navigasjonsprofiler</string>
-    <string name="quick_action_transport_hide">Skjul offentlig transport</string>
-    <string name="quick_action_transport_show">Vis offentlig transport</string>
     <string name="back_to_editing">Tilbake til redigering</string>
     <string name="create_edit_poi">Opprett eller rediger interessepunkt</string>
     <string name="shared_string_add_profile">Legg til profil</string>
@@ -3574,8 +3560,6 @@
     <string name="vessel_height_warning">Du kan sette fartøyhøyde for å unngå lave broer. Hvis broen endrer høyde, brukes høyden i åpen tilstand.</string>
     <string name="quick_action_remove_next_destination">Slett nærmeste målpunkt</string>
     <string name="please_provide_point_name_error">Navngi punktet</string>
-    <string name="quick_action_mapillary_hide">Skjul Mapillary</string>
-    <string name="quick_action_mapillary_show">Vis Mapillary</string>
     <string name="shared_string_bearing">Peiling</string>
     <string name="item_deleted">%1$s slettet</string>
     <string name="use_volume_buttons_as_zoom">Lydstyrkeknapper til forstørring</string>
