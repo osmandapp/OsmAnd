@@ -2125,8 +2125,6 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="quick_action_add_parking_descr">Pantailaren erdian aparkaleku bat gehitzeko botoia.</string>
     <string name="favorite_autofill_toast_text">" hona gorde da: "</string>
     <string name="favorite_empty_place_name">Tokia</string>
-    <string name="quick_action_favorites_show">Erakutsi gogokoak</string>
-    <string name="quick_action_favorites_hide">Ezkutatu gogokoak</string>
     <string name="quick_action_poi_show">Erakutsi %1$s</string>
     <string name="quick_action_poi_hide">Ezkutatu %1$s</string>
     <string name="quick_action_add_category">Gehitu kategoria bat</string>
@@ -2267,8 +2265,6 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="increase_search_radius">Handitu bilaketaren erradioa</string>
     <string name="nothing_found">Ez da ezer aurkitu</string>
     <string name="nothing_found_descr">Aldatu bilaketa edo handitu erradioa.</string>
-    <string name="quick_action_osmbugs_show">Erakutsi OSM oharrak</string>
-    <string name="quick_action_osmbugs_hide">Ezkutatu OSM oharrak</string>
     <string name="quick_action_showhide_osmbugs_descr">Mapan OSM oharrak erakutsi edo ezkutatzeko botoia.</string>
     <string name="sorted_by_distance">Distantziaren arabera ordenatuta</string>
     <string name="search_favorites">Bilatu gogokoetan</string>
@@ -2880,8 +2876,6 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="rendering_attr_highway_class_steps_name">Eskailera</string>
     <string name="rendering_attr_highway_class_path_name">Bidea</string>
     <string name="rendering_attr_undefined_name">Zehaztu gabea</string>
-    <string name="quick_action_gpx_tracks_hide">Ezkutatu lorratzak</string>
-    <string name="quick_action_gpx_tracks_show">Erakutsi lorratzak</string>
     <string name="add_destination_query">Gehitu helburua aurretik</string>
     <string name="previous_route">Aurreko ibilbidea</string>
     <string name="shared_string_degrees">Graduak</string>
@@ -3261,11 +3255,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Hobetsi asfaltatu gabeko bideak ibilbideetan.</string>
     <string name="layer_osm_edits">OSM edizioak</string>
     <string name="quick_action_contour_lines_descr">Sestra-kurbak mapan erakusteko edo ezkutatzeko botoia.</string>
-    <string name="quick_action_contour_lines_show">Erakutsi sestra-kurbak</string>
-    <string name="quick_action_contour_lines_hide">Ezkutatu sestra-kurbak</string>
     <string name="quick_action_hillshade_descr">Erliebe-itzalak mapan erakutsi edo ezkutatzeko botoia.</string>
-    <string name="quick_action_hillshade_show">Erakutsi erliebe-itzalak</string>
-    <string name="quick_action_hillshade_hide">Ezkutatu erliebe-itzalak</string>
     <string name="tts_initialization_error">Ezin da testu-ahots motorra abiarazi.</string>
     <string name="simulate_your_location_gpx_descr">Simulatu zure posizioa grabatutako GPX lorratz bat erabiliz.</string>
     <string name="export_profile">Esportatu profila</string>
@@ -3483,8 +3473,6 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="add_description">Gehitu deskripzioa</string>
     <string name="delete_description">Ezabatu deskripzioa</string>
     <string name="quick_action_terrain_descr">Mapako terreno geruza erakutsi edo ezkutatzeko botoia.</string>
-    <string name="quick_action_terrain_show">Erakutsi terrenoa</string>
-    <string name="quick_action_terrain_hide">Ezkutatu terrenoa</string>
     <string name="download_slope_maps">Maldak</string>
     <string name="shared_string_hillshade">Erliebea</string>
     <string name="terrain_empty_state_text">Gaitu erliebea edo malda mapa ikusteko. Mapa mota hauei buruz gehiago irakur dezakezu gure gunean</string>
@@ -3546,8 +3534,6 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="osmand_purchases_item">OsmAnd erosketak</string>
     <string name="legend_item_description">Maparen sinbologiari gida.</string>
     <string name="navigation_profiles_item">Nabigazio profilak</string>
-    <string name="quick_action_transport_hide">Ezkutatu garraio publikoa</string>
-    <string name="quick_action_transport_show">Erakutsi garraio publikoa</string>
     <string name="tracker_item">OsmAnd aztarnaria</string>
     <string name="shared_string_resume">Jarraitu</string>
     <string name="ui_customization_description">Pertsonalizatu \"Tiradera\", \"Konfiguratu mapa\" eta \"Laster-menua\" ataletan dauden elementu kopurua.
@@ -3667,8 +3653,6 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="shared_string_meters">metro</string>
     <string name="details_dialog_decr">Erakutsi edo ezkutatu maparen xehetasun gehigarriak</string>
     <string name="shared_string_night_map">Gauerako mapa</string>
-    <string name="quick_action_mapillary_hide">Ezkutatu Mapillary</string>
-    <string name="quick_action_mapillary_show">Erakutsi Mapillary</string>
     <string name="shared_string_done">Egina</string>
     <string name="quick_action_remove_next_destination">Ezabatu hurrengo norako puntua.</string>
     <string name="use_volume_buttons_as_zoom">Bolumen botoiak zoom egiteko</string>

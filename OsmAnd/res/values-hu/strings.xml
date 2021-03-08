@@ -2112,8 +2112,6 @@
     <string name="quick_action_duplicate">A gyorsművelet neve kétszer szerepel</string>
     <string name="quick_action_showhide_favorites_descr">Gomb, amely a térképen megjeleníti vagy elrejti a Kedvenc helyeket.</string>
     <string name="quick_action_showhide_poi_descr">Gomb, amely a térképen megjeleníti vagy elrejti az érdekes pontokat (POI-kat).</string>
-    <string name="quick_action_favorites_show">Kedvencek megjelenítése</string>
-    <string name="quick_action_favorites_hide">Kedvencek elrejtése</string>
     <string name="quick_action_poi_show">%1$s megjelenítése</string>
     <string name="quick_action_poi_hide">%1$s elrejtése</string>
     <string name="quick_action_add_category">Kategória hozzáadása</string>
@@ -2237,8 +2235,6 @@
     <string name="select_street">Utca kijelölése</string>
     <string name="shared_string_in_name">itt: %1$s</string>
     <string name="type_address">Cím megadása</string>
-    <string name="quick_action_osmbugs_show">OSM-jegyzetek megjelenítése</string>
-    <string name="quick_action_osmbugs_hide">OSM-jegyzetek elrejtése</string>
     <string name="quick_action_showhide_osmbugs_descr">Gomb, amely a térképen megjeleníti vagy elrejti az OSM-jegyzeteket.</string>
     <string name="sorted_by_distance">Távolság szerinti sorrendben</string>
     <string name="search_favorites">Keresés a Kedvencekben</string>
@@ -2795,8 +2791,6 @@
     <string name="routeInfo_road_types_name">Úttípusok</string>
     <string name="exit_at">Szálljon le itt:</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Gomb, amely a térképen megjeleníti vagy elrejti a nyomvonalakat.</string>
-    <string name="quick_action_gpx_tracks_hide">Nyomvonalak elrejtése</string>
-    <string name="quick_action_gpx_tracks_show">Nyomvonalak megjelenítése</string>
     <string name="add_destination_query">Először adjon meg egy célpontot</string>
     <string name="use_osm_live_public_transport_description">Tömegközlekedés engedélyezése OsmAnd Live frissítésekkel.</string>
     <string name="use_osm_live_public_transport">OsmAnd Live tömegközlekedés</string>
@@ -3091,10 +3085,6 @@
     <string name="shared_string_memory_kb_desc">%1$s kB</string>
     <string name="update_all_maps">Összes térkép frissítése</string>
     <string name="update_all_maps_q">Biztos, hogy az összes (%1$d) térképet frissíti\?</string>
-    <string name="quick_action_contour_lines_show">Szintvonalak megjelenítése</string>
-    <string name="quick_action_contour_lines_hide">Szintvonalak elrejtése</string>
-    <string name="quick_action_hillshade_show">Domborzatárnyékolás megjelenítése</string>
-    <string name="quick_action_hillshade_hide">Domborzatárnyékolás elrejtése</string>
     <string name="track_storage_directory">Nyomvonal tárolási mappája</string>
     <string name="track_storage_directory_descrp">A nyomvonalak tárolhatók a \'rec\' mappában, illetve havi vagy napi bontás szerinti mappákban.</string>
     <string name="store_tracks_in_rec_directory">Nyomvonalak felvétele a \'rec\' mappába</string>
@@ -3408,8 +3398,6 @@
     <string name="recalculate_route_distance_promo">Az útvonal újraszámításra kerül, amennyiben az útvonal és a jelenlegi helyzet közötti távolság nagyobb, mint a kiválasztott érték.</string>
     <string name="n_items_of_z">%1$s a %2$s-ból</string>
     <string name="download_slope_maps">Lejtők</string>
-    <string name="quick_action_terrain_hide">Domborzat elrejtése</string>
-    <string name="quick_action_terrain_show">Domborzat megjelenítése</string>
     <string name="quick_action_terrain_descr">Váltógomb, amely a térképen megjeleníti vagy elrejti a domborzati réteget.</string>
     <string name="delete_description">Leírás törlése</string>
     <string name="add_description">Leírás hozzáadása</string>
@@ -3504,8 +3492,6 @@
     <string name="additional_actions_descr">Ezekhez a műveletekhez a \"%1$s\" gombra koppintva férhet hozzá.</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="download_unsupported_action">Nem támogatott művelet: %1$s</string>
-    <string name="quick_action_transport_hide">Tömegközlekedés elrejtése</string>
-    <string name="quick_action_transport_show">Tömegközlekedés megjelenítése</string>
     <string name="create_edit_poi">POI készítése vagy módosítása</string>
     <string name="parking_positions">Parkolási pozíció</string>
     <string name="add_edit_favorite">Kedvenc hozzáadása vagy módosítása</string>
@@ -3594,8 +3580,6 @@
     <string name="vessel_height_limit_description">Adja meg a hajómagasságot az alacsony hidak elkerüléséhez. Ne feledje, amennyiben a híd mozdítható, a nyitott állapotú magasságát vesszük figyelembe.</string>
     <string name="vessel_height_warning">Megadhatja a hajómagasságot az alacsony hidak elkerüléséhez. Ne feledje, amennyiben a híd mozdítható, a nyitott állapotú magasságát vesszük figyelembe.</string>
     <string name="vessel_width_limit_description">Adja meg a hajószélességet a keskeny hidak elkerüléséhez</string>
-    <string name="quick_action_mapillary_hide">Mapillary elrejtése</string>
-    <string name="quick_action_mapillary_show">Mapillary megjelenítése</string>
     <string name="quick_action_showhide_mapillary_descr">Váltógomb, amely a térképen megjeleníti vagy elrejti a Mapillary réteget.</string>
     <string name="uninstall_speed_cameras">Traffipaxok eltávolítása</string>
     <string name="shared_string_legal">Jogi</string>

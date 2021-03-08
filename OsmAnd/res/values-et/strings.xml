@@ -162,8 +162,6 @@
     <string name="improve_coverage_install_mapillary_desc">Paigalda Mapillary piltide lisamiseks sellesse asukohta kaardil.</string>
     <string name="no_photos_descr">Siin puuduvad fotod.</string>
     <string name="restart_search">Taaskäivita otsing</string>
-    <string name="quick_action_osmbugs_show">Näita OSM märkmed</string>
-    <string name="quick_action_osmbugs_hide">Peida OSM Notes</string>
     <string name="thank_you_for_feedback">Täname sind tagasiside eest</string>
     <string name="poi_cannot_be_found">Sõlme või teed ei leidunud.</string>
     <string name="search_no_results_feedback">Otsingutulemused puuduvad\?
@@ -601,8 +599,6 @@
     <string name="exit_at">Välju</string>
     <string name="sit_on_the_stop">Sisene peatuses</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Nupp valitud radade kaardil kuvamiseks või peitmiseks.</string>
-    <string name="quick_action_gpx_tracks_hide">Peida rajad</string>
-    <string name="quick_action_gpx_tracks_show">Kuva rajad</string>
     <string name="add_destination_query">Palun määra esmalt sihtkoht</string>
     <string name="use_osm_live_public_transport_description">Luba ühistransport OsmAnd Live muudatustele.</string>
     <string name="use_osm_live_public_transport">OsmAnd Live ühistransport</string>
@@ -989,11 +985,7 @@
     <string name="routing_attr_driving_style_prefer_unpaved_description">Teekonna koostamisel eelista katteta teid pinnatud teedele.</string>
     <string name="layer_osm_edits">OSM muudatused</string>
     <string name="quick_action_contour_lines_descr">Nupp kõrgusjoonte kuvamiseks või peitmiseks kaardil.</string>
-    <string name="quick_action_contour_lines_show">Kuva kõrgusjooned</string>
-    <string name="quick_action_contour_lines_hide">Peida kõrgusjooned</string>
     <string name="quick_action_hillshade_descr">Nupp künkavarjutuste kuvamiseks või peitmiseks kaardil.</string>
-    <string name="quick_action_hillshade_show">Kuva künkavarjutus</string>
-    <string name="quick_action_hillshade_hide">Peida künkavarjutus</string>
     <string name="tts_initialization_error">Kõnesünteesi mootorit ei saa käivitada.</string>
     <string name="export_profile">Ekspordi profiil</string>
     <string name="exported_osmand_profile">OsmAnd profiil: %1$s</string>
@@ -3123,8 +3115,6 @@
     <string name="favorite_empty_place_name">Koht</string>
     <string name="quick_action_duplicates">Dubleerimise vältimiseks nimetati kiirtegevus ümber %1$s.</string>
     <string name="quick_action_duplicate">Kiirtegevuse nime duplikaat</string>
-    <string name="quick_action_favorites_show">Kuva lemmikud</string>
-    <string name="quick_action_favorites_hide">Peida lemmikud</string>
     <string name="quick_action_poi_show">Kuva %1$s</string>
     <string name="quick_action_poi_hide">Peida %1$s</string>
     <string name="quick_action_add_category">Lisa kategooria</string>
@@ -3435,8 +3425,6 @@
     <string name="recalculate_route_distance_promo">Teekonna ümberarvutus, kui kaugus teekonnast praegusesse asukohta on suurem valitud väärtusest.</string>
     <string name="n_items_of_z">%1$s %2$s-st</string>
     <string name="download_slope_maps">Nõlvad</string>
-    <string name="quick_action_terrain_hide">Peida maastik</string>
-    <string name="quick_action_terrain_show">Kuva maastik</string>
     <string name="quick_action_terrain_descr">Nupp maastikukihi kuvamiseks või peitmiseks kaardil.</string>
     <string name="delete_description">Kustuta kirjeldus</string>
     <string name="add_description">Lisa kirjeldus</string>
@@ -3521,8 +3509,6 @@
     <string name="select_wikipedia_article_langs">Valige kaardil olevad Vikipeedia artiklite keeled. Artikli lugemise ajal kasuta ükskõik millist saadaolevat keelt.</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="search_poi_types">Otsi huvipunktide tüüpe</string>
-    <string name="quick_action_transport_hide">Peida ühistranspordi teave</string>
-    <string name="quick_action_transport_show">Näita ühistranspordi teavet</string>
     <string name="quick_action_transport_descr">Nupp, mis kuvab või peidab ühistranspordiandmed kaardil.</string>
     <string name="create_edit_poi">Lisa või muuda huvipunkti</string>
     <string name="shared_string_night_map">Öine kaart</string>
@@ -3533,8 +3519,6 @@
     <string name="vessel_height_warning">Madalate sildade vältimiseks saad kirjeldada laeva kõrguse. Palun arvesta, et liikuva silla puhul me kasutame seda kõrgust ka siis, kui sild on avatud.</string>
     <string name="vessel_height_limit_description">Madalate sildade vältimiseks kirjelda laeva kõrgus. Palun arvesta, et liikuva silla puhul me kasutame seda kõrgust ka siis, kui sild on avatud.</string>
     <string name="vessel_width_limit_description">Lühikeste sildade vältimiseks kirjelda laeva laius</string>
-    <string name="quick_action_mapillary_hide">Peida Mapillary andmed</string>
-    <string name="quick_action_mapillary_show">Näita Mapillary andmeid</string>
     <string name="quick_action_showhide_mapillary_descr">Nupp, mis näitab või peidab kaardil Mapillary kihti.</string>
     <string name="shared_string_uninstall_and_restart">Eemalda ja taaskäivita</string>
     <string name="app_mode_inline_skates">Rulluisud</string>

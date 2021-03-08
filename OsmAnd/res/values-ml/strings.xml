@@ -1695,8 +1695,6 @@
     <string name="restart_search">"വീണ്ടും തെരയുക "</string>
     <string name="increase_search_radius">"തെരച്ചില്‍ വൃത്തം വലുതാക്കുക "</string>
     <string name="nothing_found">"ഒന്നും കണ്ടെത്താനായില്ല "</string>
-    <string name="quick_action_osmbugs_show">ഓഎസ് എം കുറിപ്പുകള്‍ (നോട്ട്സ്) കാണിക്കുക</string>
-    <string name="quick_action_osmbugs_hide">"ഓഎസ് എം കുറിപ്പുകള്‍ (നോട്ട്സ്) കാണിക്കാതിരിക്കുക "</string>
     <string name="quick_action_showhide_osmbugs_descr">ഓഎസ് എം കുറിപ്പുകള്‍ (നോട്ട്സ്) കാണാന്‍/കാണാതിരിക്കാന്‍ ഈ ആക്ഷന്‍ ബട്ടണ്‍ അമത്തുക</string>
     <string name="sorted_by_distance">"ദൂരക്രമത്തിലടുക്കുക "</string>
     <string name="search_favorites">"താല്‍പര്യമുള്ളവയില്‍ തെരയുക "</string>
@@ -2342,8 +2340,6 @@
     <string name="favorite_empty_place_name">സ്ഥലം</string>
     <string name="quick_action_duplicates">"അതിവേഗ പ്രവൃത്തിയുടെ നാമം  ഉപയോഗത്തിലുണ്ട്, ഡ്യൂപ്ലിക്കേഷൻ ഒഴിവാക്കുന്നതിന്  %1$s  എന്നാക്കി മാറ്റി."</string>
     <string name="quick_action_duplicate">ദ്രുത പ്രവർത്തനത്തിന്റെ പേര് ഒന്നിലധികം പകര്‍പ്പിലുണ്ട്</string>
-    <string name="quick_action_favorites_show">പ്രിയപ്പെട്ടവ കാണിക്കുക</string>
-    <string name="quick_action_favorites_hide">പ്രിയങ്കരങ്ങൾ മറയ്ക്കുക</string>
     <string name="quick_action_poi_show">%1$s കാണിക്കുക</string>
     <string name="quick_action_poi_hide">%1$s മറയ്ക്കുക</string>
     <string name="quick_action_add_category">ഒരു വിഭാഗം ചേർക്കുക</string>
@@ -2648,8 +2644,6 @@
     <string name="exit_at">പുറത്തേക്ക് എത്തുക</string>
     <string name="sit_on_the_stop">സ്റ്റോപ്പിൽ നിന്ന് കയറുക</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">"ഈ  ബട്ടണ്‍ തെരഞ്ഞെടുത്ത GPX ട്രാക്കുകൾ മാപ്പില്‍ കാണിക്കാന്‍ /മറയ്ക്കാന്‍ ഉപയോഗിക്കാം"</string>
-    <string name="quick_action_gpx_tracks_hide">GPX ട്രാക്കുകൾ മറയ്ക്കുക</string>
-    <string name="quick_action_gpx_tracks_show">GPX ട്രാക്കുകൾ കാണിക്കുക</string>
     <string name="add_destination_query">ആദ്യം ലക്ഷ്യസ്ഥാനം ചേർക്കുക</string>
     <string name="use_osm_live_public_transport_description">"OsmAnd ലൈവ് മാറ്റങ്ങൾക്കായി പൊതു ഗതാഗത സംവിധാനത്തെ  പ്രാപ്തമാക്കുക."</string>
     <string name="use_osm_live_public_transport">"ഓഎസ്എംആന്റ്  ലൈവ് പൊതു ഗതാഗതം"</string>
