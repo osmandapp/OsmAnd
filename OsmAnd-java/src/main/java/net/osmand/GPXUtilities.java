@@ -1662,16 +1662,16 @@ public class GPXUtilities {
 			return new QuadRect(left, top, right, bottom);
 		}
 
-		public int getGradientScaleColor(String gradientScaleType, int defColor) {
+		public int[] getGradientScaleColor(String gradientScaleType) {
 			String clrValue = null;
 			if (extensions != null) {
 				clrValue = extensions.get(gradientScaleType);
 			}
-			return parseColor(clrValue, defColor);
+			return Algorithms.stringToGradientPalette(clrValue);
 		}
 
-		public void setGradientScaleColor(String gradientScaleType, int gradientScaleColor) {
-			getExtensionsToWrite().put(gradientScaleType, Algorithms.colorToString(gradientScaleColor));
+		public void setGradientScaleColor(String gradientScaleType, int[] gradientScalePalette) {
+			getExtensionsToWrite().put(gradientScaleType, Algorithms.gradientPaletteToString(gradientScalePalette));
 		}
 
 		public String getGradientScaleType() {

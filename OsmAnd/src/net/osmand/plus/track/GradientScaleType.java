@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
+import net.osmand.router.RouteColorize.ColorizationType;
 
 public enum GradientScaleType {
 
@@ -42,6 +43,18 @@ public enum GradientScaleType {
 
 	public String getHumanString(@NonNull Context ctx) {
 		return ctx.getString(resId);
+	}
+
+	public ColorizationType toColorizationType() {
+		if (this == SPEED) {
+			return ColorizationType.SPEED;
+		} else if (this == ALTITUDE) {
+			return ColorizationType.ELEVATION;
+		} else if (this == SLOPE) {
+			return ColorizationType.SLOPE;
+		} else {
+			return ColorizationType.NONE;
+		}
 	}
 
 	public static GradientScaleType getGradientTypeByName(@NonNull String name) {

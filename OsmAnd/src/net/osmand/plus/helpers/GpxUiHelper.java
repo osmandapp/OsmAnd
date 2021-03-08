@@ -2246,15 +2246,9 @@ public class GpxUiHelper {
 		if (dataItem.getWidth() != null) {
 			gpxFile.setWidth(dataItem.getWidth());
 		}
-		if (dataItem.getGradientSpeedColor() != 0) {
-			gpxFile.setGradientScaleColor(GradientScaleType.SPEED.getColorTypeName(), dataItem.getGradientSpeedColor());
-		}
-		if (dataItem.getGradientSlopeColor() != 0) {
-			gpxFile.setGradientScaleColor(GradientScaleType.SLOPE.getColorTypeName(), dataItem.getGradientSlopeColor());
-		}
-		if (dataItem.getGradientAltitudeColor() != 0) {
-			gpxFile.setGradientScaleColor(GradientScaleType.ALTITUDE.getColorTypeName(), dataItem.getGradientAltitudeColor());
-		}
+		gpxFile.setGradientScaleColor(GradientScaleType.SPEED.getColorTypeName(), dataItem.getGradientSpeedPalette());
+		gpxFile.setGradientScaleColor(GradientScaleType.SLOPE.getColorTypeName(), dataItem.getGradientSlopePalette());
+		gpxFile.setGradientScaleColor(GradientScaleType.ALTITUDE.getColorTypeName(), dataItem.getGradientAltitudePalette());
 		if (dataItem.getGradientScaleType() != null) {
 			gpxFile.setGradientScaleType(dataItem.getGradientScaleType().name());
 		}
