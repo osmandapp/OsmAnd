@@ -96,10 +96,6 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		items.add(new TitleItem(getString(R.string.gpx_split_interval)));
-		items.add(new LongDescriptionItem.Builder()
-				.setDescription(getString(R.string.gpx_split_interval_descr))
-				.setLayoutId(R.layout.bottom_sheet_item_description_long_without_min_height)
-				.create());
 
 		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
 		View view = themedInflater.inflate(R.layout.track_split_interval, null);

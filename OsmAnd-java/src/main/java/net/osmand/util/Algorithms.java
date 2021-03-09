@@ -119,16 +119,6 @@ public class Algorithms {
 		return def;
 	}
 
-	public static String formatDoubleWithoutExtraZeros(double d) {
-		return isInt(d) ?
-				String.format(Locale.US, "%d", (long) d) :
-				String.format("%s", d);
-	}
-
-	public static boolean isInt(double d) {
-		return (d == Math.floor(d)) && !Double.isInfinite(d);
-	}
-
 	public static int parseIntSilently(String input, int def) {
 		if (input != null && input.length() > 0) {
 			try {
@@ -796,6 +786,10 @@ public class Algorithms {
 			}
 		}
 		return false;
+	}
+
+	public static boolean isInt(double d) {
+		return (d == Math.floor(d)) && !Double.isInfinite(d);
 	}
 
 	public static boolean isInt(String value) {

@@ -145,7 +145,10 @@ public class ColorsCard extends BaseCard implements ColorPickerListener {
 		Drawable transparencyIcon = getTransparencyIcon(app, color);
 		Drawable colorIcon = app.getUIUtilities().getPaintedIcon(R.drawable.bg_point_circle, color);
 		Drawable layeredIcon = UiUtilities.getLayeredIcon(transparencyIcon, colorIcon);
-		int listBgColor = ContextCompat.getColor(app, getListBackgroundColorId());
+		int listBgColorId = nightMode ?
+				R.color.card_and_list_background_dark :
+				R.color.card_and_list_background_light;
+		int listBgColor = getResolvedColor(listBgColorId);
 		double contrastRatio = ColorUtils.calculateContrast(color, listBgColor);
 		if (contrastRatio < MINIMUM_CONTRAST_RATIO) {
 			backgroundCircle.setBackgroundResource(nightMode ? R.drawable.circle_contour_bg_dark : R.drawable.circle_contour_bg_light);
@@ -266,12 +269,5 @@ public class ColorsCard extends BaseCard implements ColorPickerListener {
 		} else {
 			colorsListPreference.setStringsListForProfile(appMode, colorNames);
 		}
-	}
-
-	@ColorRes
-	private int getListBackgroundColorId() {
-		return nightMode ?
-				R.color.card_and_list_background_dark :
-				R.color.card_and_list_background_light;
 	}
 }
