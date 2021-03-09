@@ -2180,8 +2180,6 @@
     <string name="quick_action_duplicate">نام تکراری برای کنش فوری</string>
     <string name="quick_action_showhide_favorites_descr">دکمه‌ای برای پنهان/آشکارکردن علاقه‌مندی‌ها روی نقشه.</string>
     <string name="quick_action_showhide_poi_descr">دکمه‌ای برای پنهان/آشکارکردن POIها روی نقشه.</string>
-    <string name="quick_action_favorites_show">نشان‌دادن علاقه‌مندی‌ها</string>
-    <string name="quick_action_favorites_hide">مخفی‌کردن علاقه‌مندی‌ها</string>
     <string name="quick_action_poi_show">نشان‌دادن %1$s</string>
     <string name="quick_action_poi_hide">پنهان‌کردن %1$s</string>
     <string name="quick_action_add_category">افزودن دسته</string>
@@ -2286,8 +2284,6 @@
     <string name="private_access_routing_req">مقصد شما در ناحیه‌ای با دسترسی خصوصی قرار دارد. دسترسی به جاده‌های خصوصی برای این سفر مجاز شود؟</string>
     <string name="restart_search">شروع مجدد جست‌وجو</string>
     <string name="nothing_found">چیزی پیدا نشد</string>
-    <string name="quick_action_osmbugs_show">آشکارکردن یادداشت‌های OSM</string>
-    <string name="quick_action_osmbugs_hide">پنهان‌کردن یادداشت‌های OSM</string>
     <string name="quick_action_showhide_osmbugs_descr">دکمه‌ای برای آشکار/پنهان کردن یادداشت‌های OSM بر روی نقشه.</string>
     <string name="sorted_by_distance">مرتب‌شده بر اساس مسافت</string>
     <string name="search_favorites">جست‌وجو در علاقه‌مندی‌ها</string>
@@ -2864,8 +2860,6 @@
     <string name="exit_at">ایستگاه پیاده‌شدن</string>
     <string name="sit_on_the_stop">ایستگاه سوارشدن</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">دکمه‌ای برای آشکار/پنهان کردن ردهای انتخابی بر روی نقشه.</string>
-    <string name="quick_action_gpx_tracks_hide">پنهان‌کردن ردها</string>
-    <string name="quick_action_gpx_tracks_show">آشکارکردن ردها</string>
     <string name="use_osm_live_public_transport_description">حمل‌ونقل عمومی با استفاده از به‌روزرسانی‌های OsmAnd Live فعال شود.</string>
     <string name="use_osm_live_public_transport">حمل‌ونقل عمومی با OsmAnd Live</string>
     <string name="transfers_size">%1$d انتقال</string>
@@ -3280,11 +3274,7 @@
     <string name="routing_attr_driving_style_prefer_unpaved_description">در مسیریابی، جاده‌های روسازی‌نشده را به روسازی‌شده ترجیح می‌دهد.</string>
     <string name="layer_osm_edits">ویرایش‌های OSM</string>
     <string name="quick_action_contour_lines_descr">دکمه‌ای برای آشکار/پنهان کردن منحنی‌های میزان روی نقشه.</string>
-    <string name="quick_action_contour_lines_show">نشان‌دادن منحنی‌های میزان</string>
-    <string name="quick_action_contour_lines_hide">پنهان‌کردن منحنی‌های میزان</string>
     <string name="quick_action_hillshade_descr">دکمه‌ای برای آشکار/پنهان کردن سایه‌روشن‌ها روی نقشه.</string>
-    <string name="quick_action_hillshade_show">نشان‌دادن سایه‌روشن‌ها</string>
-    <string name="quick_action_hillshade_hide">پنهان‌کردن سایه‌روشن‌ها</string>
     <string name="tts_initialization_error">شروع موتور متن به گفتار ناموفق بود.</string>
     <string name="simulate_your_location_gpx_descr">موقعیت خود را با استفاده از یک رد GPX ضبط‌شده شبیه‌سازی کنید.</string>
     <string name="exported_osmand_profile">پروفایل OsmAnd:‏ %1$s</string>
@@ -3517,8 +3507,6 @@
     <string name="shared_string_hillshade">سایه‌روشن</string>
     <string name="n_items_of_z">%1$s از %2$s</string>
     <string name="download_slope_maps">شیب‌ها</string>
-    <string name="quick_action_terrain_hide">پنهان‌کردن ناهمواری‌ها</string>
-    <string name="quick_action_terrain_show">نمایش ناهمواری‌ها</string>
     <string name="quick_action_terrain_descr">دکمه‌ای برای آشکار یا پنهان کردن لایهٔ ناهمواری‌ها روی نقشه.</string>
     <string name="shared_string_circle">دایره</string>
     <string name="delete_description">حذف توضیحات</string>
@@ -3631,8 +3619,6 @@
     <string name="create_edit_poi">ایجاد یا ویرایش POI</string>
     <string name="add_edit_favorite">افزودن یا ویرایش علاقه‌مندی</string>
     <string name="additional_actions_descr">برای دسترسی به این کنش‌ها می‌توانید روی دکمهٔ «%1$s» بزنید.</string>
-    <string name="quick_action_transport_hide">مخفی‌کردن حمل‌ونقل عمومی</string>
-    <string name="quick_action_transport_show">نمایش حمل‌ونقل عمومی</string>
     <string name="quick_action_transport_descr">دکمه‌ای برای آشکار یا پنهان کردن حمل‌ونقل عمومی روی نقشه.</string>
     <string name="quick_action_switch_profile_descr">با لمس دکمهٔ عملیاتی بین پروفایل‌های انتخاب‌شده جابه‌جا شوید.</string>
     <string name="shared_string_add_profile">افزودن پروفایل</string>
@@ -3702,8 +3688,6 @@
     <string name="vessel_height_warning">می‌توانید ارتفاع کشتی را برای پرهیز از پل‌های کوتاه وارد کنید. به یاد داشته باشید که اگر پل متحرک است، در حالت باز نیز ارتفاع کشتی را در نظر می‌گیریم.</string>
     <string name="vessel_height_limit_description">ارتفاع کشتی را برای پرهیز از پل‌های کوتاه وارد کنید. به یاد داشته باشید که اگر پل متحرک است، در حالت باز نیز ارتفاع کشتی را در نظر می‌گیریم.</string>
     <string name="vessel_width_limit_description">عرض کشتی را برای پرهیز از پل های باریک وارد کنید</string>
-    <string name="quick_action_mapillary_show">آشکارکردن مپیلاری</string>
-    <string name="quick_action_mapillary_hide">پنهان‌کردن مپیلاری</string>
     <string name="quick_action_showhide_mapillary_descr">دکمه‌ای برای آشکار/پنهان کردن لایهٔ مپیلاری روی نقشه.</string>
     <string name="uninstall_speed_cameras">حذف نصب دوربین‌های سرعت</string>
     <string name="shared_string_uninstall_and_restart">حذف نصب و شروع دوباره</string>

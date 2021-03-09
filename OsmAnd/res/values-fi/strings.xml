@@ -1920,8 +1920,6 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="quick_action_poi_list">KP lista</string>
     <string name="quick_action_bug_message">Viesti</string>
     <string name="quick_action_add_configure_map">Konfiguroi kartta</string>
-    <string name="quick_action_favorites_show">Näytä suosikit</string>
-    <string name="quick_action_favorites_hide">Piilota suosikit</string>
     <string name="quick_action_poi_show">Näytä %1$s</string>
     <string name="quick_action_poi_hide">Piilota %1$s</string>
     <string name="quick_action_add_category">Lisää luokka</string>
@@ -2000,8 +1998,6 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="mapillary">Mapillary</string>
     <string name="restart_search">Käynnistä haku uudelleen</string>
     <string name="nothing_found">Mitään ei löytynyt</string>
-    <string name="quick_action_osmbugs_show">Näytä OSM-huomautukset</string>
-    <string name="quick_action_osmbugs_hide">Piilota OSM-huomautukset</string>
     <string name="sorted_by_distance">Lajiteltu etäisyyden perusteella</string>
     <string name="search_favorites">Etsi suosikeista</string>
     <string name="hide_from_zoom_level">Piilota zoomaustasosta</string>
@@ -2300,10 +2296,6 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="shared_string_by_default">Oletuksena</string>
     <string name="track_storage_directory">Jälkien tallennuskansio</string>
     <string name="layer_osm_edits">OSM-muokkaukset</string>
-    <string name="quick_action_contour_lines_show">Näytä korkeuskäyrät</string>
-    <string name="quick_action_contour_lines_hide">Piilota korkeuskäyrät</string>
-    <string name="quick_action_hillshade_show">Näytä rinnevarjostus</string>
-    <string name="quick_action_hillshade_hide">Piilota rinnevarjostus</string>
     <string name="export_profile">Vie profiili</string>
     <string name="exported_osmand_profile">OsmAnd profiili: %1$s</string>
     <string name="overwrite_profile_q">\'%1$s\' on jo olemassa. Korvataanko\?</string>
@@ -2323,8 +2315,6 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="shared_string_gpx_track">Jälki</string>
     <string name="shared_string_gpx_tracks">Jäljet</string>
     <string name="choose_track_file_to_follow">Valitse seurattava jälki tiedosto</string>
-    <string name="quick_action_gpx_tracks_hide">Piilota GPX jäljet</string>
-    <string name="quick_action_gpx_tracks_show">Näytä GPX jäljet</string>
     <string name="app_mode_skiing">Hiihto</string>
     <string name="base_profile_descr_ski">Hiihto</string>
     <string name="routing_profile_ski">Hiihto</string>
@@ -2596,8 +2586,6 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="icon_group_service">Palvelu</string>
     <string name="icon_group_emergency">Hätätapaus</string>
     <string name="icon_group_transport">Liikenne</string>
-    <string name="quick_action_transport_show">Näytä julkinen liikenne</string>
-    <string name="quick_action_transport_hide">Piilota julkinen liikenne</string>
     <string name="icon_group_symbols">Symbolit</string>
     <string name="replace_point_descr">Korvaa toinen kohde tällä.</string>
     <string name="shared_string_folders">Kansiot</string>

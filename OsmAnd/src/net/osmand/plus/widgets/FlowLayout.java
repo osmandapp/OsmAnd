@@ -1,7 +1,6 @@
 package net.osmand.plus.widgets;
 
 import android.content.Context;
-import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,22 +10,7 @@ import net.osmand.AndroidUtils;
 public class FlowLayout extends ViewGroup {
 
 	private int line_height;
-
-	public static class LayoutParams extends ViewGroup.LayoutParams {
-
-		final int horizontal_spacing;
-		final int vertical_spacing;
-
-		/**
-		 * @param horizontal_spacing Pixels between items, horizontally
-		 * @param vertical_spacing   Pixels between items, vertically
-		 */
-		public LayoutParams(int horizontal_spacing, int vertical_spacing) {
-			super(0, 0);
-			this.horizontal_spacing = horizontal_spacing;
-			this.vertical_spacing = vertical_spacing;
-		}
-	}
+	private boolean horizontalAutoSpacing;
 
 	public FlowLayout(Context context) {
 		super(context);
@@ -36,16 +20,22 @@ public class FlowLayout extends ViewGroup {
 		super(context, attrs);
 	}
 
+	// If true, available horizontal space is added to items horizontalSpacing to fit the screen width.
+	public void setHorizontalAutoSpacing(boolean horizontalAutoSpacing) {
+		this.horizontalAutoSpacing = horizontalAutoSpacing;
+	}
+
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-		if ((MeasureSpec.getMode(widthMeasureSpec) == MeasureSpec.UNSPECIFIED)) throw new AssertionError();
+		if ((MeasureSpec.getMode(widthMeasureSpec) == MeasureSpec.UNSPECIFIED))
+			throw new AssertionError();
 
 		final int width = MeasureSpec.getSize(widthMeasureSpec) - getPaddingLeft() - getPaddingRight();
 		int height = MeasureSpec.getSize(heightMeasureSpec) - getPaddingTop() - getPaddingBottom();
 		final int count = getChildCount();
 		int line_height = 0;
-		int xpos = getPaddingLeft();
-		int ypos = getPaddingTop();
+		int horizontalPosition = getPaddingLeft();
+		int verticalPosition = getPaddingTop();
 		int childHeightMeasureSpec;
 
 		if (MeasureSpec.getMode(heightMeasureSpec) == MeasureSpec.AT_MOST) {
@@ -59,22 +49,22 @@ public class FlowLayout extends ViewGroup {
 			if (child.getVisibility() != GONE) {
 				final LayoutParams lp = (LayoutParams) child.getLayoutParams();
 				child.measure(MeasureSpec.makeMeasureSpec(width, MeasureSpec.AT_MOST), childHeightMeasureSpec);
-				final int childw = child.getMeasuredWidth();
-				line_height = Math.max(line_height, child.getMeasuredHeight() + lp.vertical_spacing);
-				if (xpos + childw > width) {
-					xpos = getPaddingLeft();
-					ypos += line_height;
+				final int childWidth = child.getMeasuredWidth();
+				line_height = Math.max(line_height, child.getMeasuredHeight() + lp.verticalSpacing);
+				if (horizontalPosition + childWidth > width) {
+					horizontalPosition = getPaddingLeft();
+					verticalPosition += line_height;
 				}
-				xpos += childw + lp.horizontal_spacing;
+				horizontalPosition += childWidth + lp.horizontalSpacing;
 			}
 		}
 
 		this.line_height = line_height;
 		if (MeasureSpec.getMode(heightMeasureSpec) == MeasureSpec.UNSPECIFIED) {
-			height = ypos + line_height;
+			height = verticalPosition + line_height;
 		} else if (MeasureSpec.getMode(heightMeasureSpec) == MeasureSpec.AT_MOST) {
-			if (ypos + line_height < height) {
-				height = ypos + line_height;
+			if (verticalPosition + line_height < height) {
+				height = verticalPosition + line_height;
 			}
 		}
 		setMeasuredDimension(width, height);
@@ -95,30 +85,60 @@ public class FlowLayout extends ViewGroup {
 		final int count = getChildCount();
 		final int width = r - l;
 		boolean isLayoutRtl = AndroidUtils.isLayoutRtl(getContext());
-		int xpos = isLayoutRtl ? width - getPaddingRight() : getPaddingLeft();
-		int ypos = getPaddingTop();
+		int horizontalPosition = isLayoutRtl ? width - getPaddingRight() : getPaddingLeft();
+		int verticalPosition = getPaddingTop();
 		for (int i = 0; i < count; i++) {
 			final View child = getChildAt(i);
 			if (child.getVisibility() != GONE) {
-				final int childw = child.getMeasuredWidth();
-				final int childh = child.getMeasuredHeight();
 				final LayoutParams lp = (LayoutParams) child.getLayoutParams();
+				final int childWidth = child.getMeasuredWidth();
+				final int childHeight = child.getMeasuredHeight();
+				int freeSizeSpacing = getFreeSizeSpacing(width, lp, childWidth);
 				if (isLayoutRtl) {
-					if (xpos - childw < l) {
-						xpos = width - getPaddingRight();
-						ypos += line_height;
+					if (horizontalPosition - childWidth < getPaddingLeft()) {
+						horizontalPosition = width - getPaddingRight();
+						verticalPosition += line_height;
 					}
-					child.layout(xpos - childw, ypos, xpos, ypos + childh);
-					xpos -= childw + lp.horizontal_spacing;
+					child.layout(horizontalPosition - childWidth, verticalPosition, horizontalPosition, verticalPosition + childHeight);
+					horizontalPosition -= freeSizeSpacing;
 				} else {
-					if (xpos + childw > width) {
-						xpos = getPaddingLeft();
-						ypos += line_height;
+					if (horizontalPosition + childWidth > width) {
+						horizontalPosition = getPaddingLeft();
+						verticalPosition += line_height;
 					}
-					child.layout(xpos, ypos, xpos + childw, ypos + childh);
-					xpos += childw + lp.horizontal_spacing;
+					child.layout(horizontalPosition, verticalPosition, horizontalPosition + childWidth, verticalPosition + childHeight);
+					horizontalPosition += freeSizeSpacing;
 				}
 			}
+		}
+	}
+
+	private int getFreeSizeSpacing(int width, LayoutParams lp, int childWidth) {
+		int freeSizeSpacing;
+		int itemsCount = width / (childWidth + lp.horizontalSpacing);
+		if (itemsCount > 1 && horizontalAutoSpacing) {
+			freeSizeSpacing = (width - childWidth) / (itemsCount-1);
+		} else if (!horizontalAutoSpacing) {
+			freeSizeSpacing = childWidth + lp.horizontalSpacing;
+		} else {
+			freeSizeSpacing = (width % childWidth / itemsCount);
+		}
+		return freeSizeSpacing;
+	}
+
+	public static class LayoutParams extends ViewGroup.LayoutParams {
+
+		final int horizontalSpacing;
+		final int verticalSpacing;
+
+		/**
+		 * @param horizontalSpacing Pixels between items, horizontally
+		 * @param verticalSpacing   Pixels between items, vertically
+		 */
+		public LayoutParams(int horizontalSpacing, int verticalSpacing) {
+			super(0, 0);
+			this.horizontalSpacing = horizontalSpacing;
+			this.verticalSpacing = verticalSpacing;
 		}
 	}
 }

@@ -153,35 +153,34 @@ public class OsmMapUtils {
 		}
 		boolean area = w.getFirstNodeId() == w.getLastNodeId();
 		// double check for area (could be negative all)
-		if(area) {
+		if (area) {
 			Node fn = w.getFirstNode();
 			Node ln = w.getLastNode();
-			if(fn != null && fn != null && MapUtils.getDistance(fn.getLatLon(), ln.getLatLon()) < 50) {
+			if (fn != null && fn != null && MapUtils.getDistance(fn.getLatLon(), ln.getLatLon()) < 50) {
 				area = true;
 			} else {
 				area = false;
 			}
 		}
 		LatLon ll = area ? getComplexPolyCenter(nodes, null) : getWeightCenterForNodes(nodes);
-		if(ll == null) {
+		if (ll == null) {
 			return null;
 		}
 		double flat = ll.getLatitude();
 		double flon = ll.getLongitude();
-		if(!area || !MapAlgorithms.containsPoint(nodes, ll.getLatitude(), ll.getLongitude())) {
+		if (!area || !MapAlgorithms.containsPoint(nodes, ll.getLatitude(), ll.getLongitude())) {
 			double minDistance = Double.MAX_VALUE;
 			for (Node n : nodes) {
 				if (n != null) {
 					double d = MapUtils.getDistance(n.getLatitude(), n.getLongitude(), ll.getLatitude(), ll.getLongitude());
-					if(d < minDistance) {
+					if (d < minDistance) {
 						flat = n.getLatitude();
 						flon = n.getLongitude();
 						minDistance = d;
 					}
 				}
-			}	
+			}
 		}
-		
 		return new LatLon(flat, flon);
 
 	}

@@ -178,17 +178,19 @@
 									</xsl:otherwise>
 								</xsl:choose>
 							</xsl:variable>
-							<trkpt lon="{$lon}" lat="{$lat}">
-								<xsl:choose>
-									<xsl:when test="contains($latele,' ')">
-										<ele><xsl:value-of select="substring-after($latele,' ')"/></ele>
-									</xsl:when>
-								</xsl:choose>
-								<xsl:variable name="ts" select="../kml:when[$i]"/>
-								<xsl:if test="$ts">
-									<time><xsl:value-of select="$ts"/></time>
-								</xsl:if>
-							</trkpt>
+							<xsl:if test="$lon">
+								<trkpt lon="{$lon}" lat="{$lat}">
+									<xsl:choose>
+										<xsl:when test="contains($latele,' ')">
+											<ele><xsl:value-of select="substring-after($latele,' ')"/></ele>
+										</xsl:when>
+									</xsl:choose>
+									<xsl:variable name="ts" select="../kml:when[$i]"/>
+									<xsl:if test="$ts">
+										<time><xsl:value-of select="$ts"/></time>
+									</xsl:if>
+								</trkpt>
+							</xsl:if>
 						</xsl:for-each>
 					</trkseg>
 				</trk>

@@ -2117,8 +2117,6 @@
     <string name="quick_action_duplicate">Nombre de la acción rápida duplicado</string>
     <string name="quick_action_showhide_favorites_descr">Un botón que muestra u oculta los Favoritos en el mapa.</string>
     <string name="quick_action_showhide_poi_descr">Un botón que muestra u oculta los PDI en el mapa.</string>
-    <string name="quick_action_favorites_show">Mostrar Favoritos</string>
-    <string name="quick_action_favorites_hide">Ocultar Favoritos</string>
     <string name="quick_action_poi_show">Mostrar %1$s</string>
     <string name="quick_action_poi_hide">Ocultar %1$s</string>
     <string name="quick_action_add_category">Añadir una categoría</string>
@@ -2380,8 +2378,6 @@
     <string name="routing_attr_allow_private_description">Permite acceder a áreas privadas.</string>
     <string name="display_zoom_level">Nivel de zoom de pantalla: %1$s</string>
     <string name="route_is_too_long_v2">Para largas distancias: Añada destinos intermedios si no se encuentra ninguna ruta en 10 minutos.</string>
-    <string name="quick_action_osmbugs_show">Mostrar notas de OSM</string>
-    <string name="quick_action_osmbugs_hide">Ocultar notas de OSM</string>
     <string name="quick_action_showhide_osmbugs_descr">Botón para mostrar u ocultar las notas de OSM en el mapa.</string>
     <string name="sorted_by_distance">Ordenados por distancia</string>
     <string name="search_favorites">Buscar en Favoritos</string>
@@ -2841,8 +2837,6 @@
     <string name="exit_at">Bajarse en</string>
     <string name="sit_on_the_stop">Esperar en la parada</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Un botón que muestra u oculta las trazas elegidas en el mapa.</string>
-    <string name="quick_action_gpx_tracks_hide">Ocultar trazas</string>
-    <string name="quick_action_gpx_tracks_show">Mostrar trazas</string>
     <string name="use_osm_live_public_transport_description">Activar el transporte público para los cambios de OsmAnd Live.</string>
     <string name="use_osm_live_public_transport">Transporte público en OsmAnd Live</string>
     <string name="transfers_size">%1$d transbordo(s)</string>
@@ -3254,11 +3248,7 @@
     <string name="routing_attr_driving_style_prefer_unpaved_description">Prefiere carreteras sin pavimentar sobre las pavimentadas para el enrutamiento.</string>
     <string name="layer_osm_edits">Ediciones de OSM</string>
     <string name="quick_action_contour_lines_descr">Un botón que muestra u oculta las curvas de nivel en el mapa.</string>
-    <string name="quick_action_contour_lines_show">Mostrar curvas de nivel</string>
-    <string name="quick_action_contour_lines_hide">Ocultar curvas de nivel</string>
     <string name="quick_action_hillshade_descr">Un botón que muestra u oculta la sombra de una colina en el mapa.</string>
-    <string name="quick_action_hillshade_show">Mostrar el sombreado</string>
-    <string name="quick_action_hillshade_hide">Ocultar el sombreado</string>
     <string name="tts_initialization_error">Imposible iniciar el motor de habla sintetizada.</string>
     <string name="export_profile">Exportar perfil</string>
     <string name="exported_osmand_profile">Perfil de OsmAnd: %1$s</string>
@@ -3458,8 +3448,6 @@
     <string name="recalculate_route_in_deviation">Recalcular ruta en caso de desvío</string>
     <string name="n_items_of_z">%1$s de %2$s</string>
     <string name="download_slope_maps">Cuestas</string>
-    <string name="quick_action_terrain_hide">Esconder terreno</string>
-    <string name="quick_action_terrain_show">Mostrar terreno</string>
     <string name="quick_action_terrain_descr">Un botón para mostrar o esconder una capa de terreno en el mapa.</string>
     <string name="delete_description">Borra descripción</string>
     <string name="add_description">Añade descripción</string>
@@ -3506,8 +3494,6 @@
     <string name="map_markers_item">Marcadores de mapa</string>
     <string name="favorites_item">Favoritos</string>
     <string name="navigation_profiles_item">Perfiles de navegación</string>
-    <string name="quick_action_transport_hide">Ocultar transporte público</string>
-    <string name="quick_action_transport_show">Mostrar transporte público</string>
     <string name="create_edit_poi">Crear o editar POI</string>
     <string name="add_edit_favorite">Agregar o editar Favorito</string>
     <string name="shared_string_add_profile">Agregar perfil</string>
@@ -3684,8 +3670,6 @@
     <string name="vessel_height_warning">Puedes establecer la altura del navío para evitar los puentes bajos. Ten en cuenta que si el puente es móvil, usaremos su altura en estado abierto.</string>
     <string name="vessel_height_limit_description">Fija la altura del navío para evitar los puentes bajos. Ten en cuenta que si el puente es móvil, usaremos su altura en estado abierto.</string>
     <string name="vessel_width_limit_description">Fija el ancho del navío para evitar puentes estrechos</string>
-    <string name="quick_action_mapillary_hide">Ocultar Mapillary</string>
-    <string name="quick_action_mapillary_show">Mostrar Mapillary</string>
     <string name="quick_action_showhide_mapillary_descr">Un conmutador para mostrar u ocultar la capa de Mapillary en el mapa.</string>
     <string name="routing_attr_length_description">Especifica la longitud del vehículo que se permitirá en las rutas.</string>
     <string name="routing_attr_length_name">Límite de longitud</string>

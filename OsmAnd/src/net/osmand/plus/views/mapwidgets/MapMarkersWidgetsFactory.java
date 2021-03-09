@@ -33,7 +33,6 @@ public class MapMarkersWidgetsFactory {
 
 	private final MapActivity map;
 	private MapMarkersHelper helper;
-	private int screenOrientation;
 	private boolean portraitMode;
 
 	private View topBar;
@@ -59,7 +58,6 @@ public class MapMarkersWidgetsFactory {
 	public MapMarkersWidgetsFactory(final MapActivity map) {
 		this.map = map;
 		helper = map.getMyApplication().getMapMarkersHelper();
-		screenOrientation = map.getMyApplication().getUIUtilities().getScreenOrientation();
 		portraitMode = AndroidUiHelper.isOrientationPortrait(map);
 
 		addressTopBar = map.findViewById(R.id.map_top_bar);
@@ -245,7 +243,7 @@ public class MapMarkersWidgetsFactory {
 		}
 		dd.setImage(R.drawable.ic_arrow_marker_diretion, MapMarker.getColorId(marker.colorIndex));
 		if (heading != null && loc != null) {
-			dd.setAngle(mes[1] - heading + 180 + screenOrientation);
+			dd.setAngle(mes[1] - heading + 180);
 		}
 		if (newImage) {
 			arrowImg.setImageDrawable(dd);

@@ -1,17 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:orientation="vertical">
 
-	<com.google.android.material.internal.FlowLayout
-		android:id="@+id/select_color"
-		android:layout_width="match_parent"
+	<net.osmand.plus.widgets.FlowLayout
+		android:id="@+id/select_custom_color"
+		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_marginStart="@dimen/content_padding_small"
-		android:layout_marginLeft="@dimen/content_padding_small"
+		android:layout_marginStart="@dimen/list_content_padding"
+		android:layout_marginLeft="@dimen/list_content_padding"
+		android:layout_marginEnd="@dimen/list_content_padding"
+		android:layout_marginRight="@dimen/list_content_padding" />
+
+	<include
+		layout="@layout/simple_divider_item"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_marginStart="@dimen/list_content_padding"
+		android:layout_marginLeft="@dimen/list_content_padding"
 		android:layout_marginTop="@dimen/context_menu_padding_margin_tiny"
 		android:layout_marginBottom="@dimen/content_padding_half" />
+
+	<net.osmand.plus.widgets.FlowLayout
+		android:id="@+id/select_default_color"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/list_content_padding"
+		android:layout_marginLeft="@dimen/list_content_padding"
+		android:layout_marginEnd="@dimen/list_content_padding"
+		android:layout_marginRight="@dimen/list_content_padding" />
 
 </LinearLayout>

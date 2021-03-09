@@ -23,12 +23,24 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
+import androidx.recyclerview.widget.RecyclerView;
+
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.routing.RouteService;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.DialogButtonType;
@@ -42,7 +54,7 @@ import net.osmand.plus.profiles.SelectProfileBottomSheet.DialogMode;
 import net.osmand.plus.profiles.SelectProfileBottomSheet.OnSelectProfileCallback;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
-import net.osmand.plus.routing.RouteProvider;
+import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.backup.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
@@ -58,21 +70,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
-import androidx.recyclerview.widget.RecyclerView;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILES_LIST_UPDATED_ARG;
@@ -313,7 +310,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		outState.putString(PROFILE_STRINGKEY_KEY, changedProfile.stringKey);
 		outState.putInt(PROFILE_ICON_RES_KEY, changedProfile.iconRes);
 		outState.putSerializable(PROFILE_COLOR_KEY, changedProfile.color);
-		outState.putInt(PROFILE_CUSTOM_COLOR_KEY, changedProfile.customColor);
+		outState.putSerializable(PROFILE_CUSTOM_COLOR_KEY, changedProfile.customColor);
 		if (changedProfile.parent != null) {
 			outState.putString(PROFILE_PARENT_KEY, changedProfile.parent.getStringKey());
 		}
@@ -328,7 +325,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		changedProfile.stringKey = savedInstanceState.getString(PROFILE_STRINGKEY_KEY);
 		changedProfile.iconRes = savedInstanceState.getInt(PROFILE_ICON_RES_KEY);
 		changedProfile.color = (ProfileIconColors) savedInstanceState.getSerializable(PROFILE_COLOR_KEY);
-		changedProfile.customColor = savedInstanceState.getInt(PROFILE_CUSTOM_COLOR_KEY);
+		changedProfile.customColor = (Integer) savedInstanceState.getSerializable(PROFILE_CUSTOM_COLOR_KEY);
 		String parentStringKey = savedInstanceState.getString(PROFILE_PARENT_KEY);
 		changedProfile.parent = ApplicationMode.valueOfStringKey(parentStringKey, null);
 		isBaseProfileImported = savedInstanceState.getBoolean(IS_BASE_PROFILE_IMPORTED);
@@ -387,7 +384,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 			profileName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 				@Override
 				public void onFocusChange(View v, boolean hasFocus) {
-					if(hasFocus){
+					if (hasFocus) {
 						profileName.setSelection(profileName.getText().length());
 						AndroidUtils.showSoftKeyboard(getMyActivity(), profileName);
 					}
@@ -434,7 +431,9 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 			ArrayList<Integer> icons = ProfileIcons.getIcons();
 			for (int iconRes : icons) {
 				View iconItem = createIconItemView(iconRes, iconItems);
-				iconItems.addView(iconItem, new FlowLayout.LayoutParams(0, 0));
+				int minimalPaddingBetweenIcon = app.getResources().getDimensionPixelSize(R.dimen.favorites_select_icon_button_right_padding);
+				iconItems.addView(iconItem, new FlowLayout.LayoutParams(minimalPaddingBetweenIcon, 0));
+				iconItems.setHorizontalAutoSpacing(true);
 			}
 			setIconColor(changedProfile.iconRes);
 		} else if (LOCATION_ICON_ITEMS.equals(preference.getKey())) {
@@ -511,7 +510,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		ImageView coloredCircle = iconItemView.findViewById(R.id.background);
 		AndroidUtils.setBackground(coloredCircle,
 				UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, R.drawable.circle_background_light),
-				UiUtilities.getColorWithAlpha(ContextCompat.getColor(app, R.color.icon_color_default_light), 0.1f)));
+						UiUtilities.getColorWithAlpha(ContextCompat.getColor(app, R.color.icon_color_default_light), 0.1f)));
 		coloredCircle.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -859,11 +858,11 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		}
 		return false;
 	}
-	
+
 	private boolean nameIsEmpty() {
 		return changedProfile.name.trim().isEmpty();
 	}
-	
+
 	private void disableSaveButtonWithErrorMessage(String errorMessage) {
 		saveButton.setEnabled(false);
 		profileNameOtfb.setError(errorMessage, true);
@@ -1039,7 +1038,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 			if (parent != null ? !parent.equals(that.parent) : that.parent != null) return false;
 			if (name != null ? !name.equals(that.name) : that.name != null) return false;
 			if (color != that.color) return false;
-			if (customColor != null ? !customColor.equals(that.customColor) : that.customColor != null) return false;
+			if (customColor != null ? !customColor.equals(that.customColor) : that.customColor != null)
+				return false;
 			if (routingProfile != null ? !routingProfile.equals(that.routingProfile) : that.routingProfile != null)
 				return false;
 			if (routeService != that.routeService) return false;

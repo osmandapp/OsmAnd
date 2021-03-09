@@ -2117,8 +2117,6 @@
     <string name="quick_action_duplicate">Duplicitní název rychlé akce</string>
     <string name="quick_action_showhide_favorites_descr">Tlačítko pro zobrazení nebo skrytí Oblíbených míst na mapě.</string>
     <string name="quick_action_showhide_poi_descr">Tlačítko pro zobrazení nebo skrytí bodů zájmu na mapě.</string>
-    <string name="quick_action_favorites_show">Zobrazit oblíbená místa</string>
-    <string name="quick_action_favorites_hide">Skrýt Oblíbená místa</string>
     <string name="quick_action_poi_show">Zobrazit %1$s</string>
     <string name="quick_action_poi_hide">Skrýt %1$s</string>
     <string name="quick_action_add_category">Přidat kategorii</string>
@@ -2225,8 +2223,6 @@
     <string name="quick_action_add_destination">Zadat cíl</string>
     <string name="quick_action_replace_destination">Nahradit cíl</string>
     <string name="quick_action_add_first_intermediate">Přidat první mezicíl</string>
-    <string name="quick_action_osmbugs_show">Zobrazit OSM poznámky</string>
-    <string name="quick_action_osmbugs_hide">Skrýt OSM poznámky</string>
     <string name="quick_action_showhide_osmbugs_descr">Tlačítko pro zobrazení nebo skrytí OpenStreetMap poznámek na mapě.</string>
     <string name="sorted_by_distance">Seřazeno podle vzdálenosti</string>
     <string name="search_favorites">Hledat v Oblíbených</string>
@@ -2841,8 +2837,6 @@
     <string name="exit_at">Výjezd na</string>
     <string name="shared_string_swap">Vyměnit</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Tlačítko pro zobrazení nebo skrytí vybraných stop na mapě.</string>
-    <string name="quick_action_gpx_tracks_hide">Skrýt stopy</string>
-    <string name="quick_action_gpx_tracks_show">Zobrazit stopy</string>
     <string name="transfers_size">%1$d přenosů</string>
     <string name="add_start_and_end_points">Přidat počáteční a cílový bod</string>
     <string name="route_add_start_point">Přidat počáteční bod</string>
@@ -3251,8 +3245,6 @@
     <string name="recalculate_route_distance_promo">Trasa bude přepočítána, pokud vzdálenost od trasy k aktuální poloze je větší než zvolená hodnota.</string>
     <string name="n_items_of_z">%1$s z %2$s</string>
     <string name="download_slope_maps">Svahy</string>
-    <string name="quick_action_terrain_hide">Skrýt terén</string>
-    <string name="quick_action_terrain_show">Zobrazit terén</string>
     <string name="quick_action_terrain_descr">Tlačítko pro zobrazení nebo skrytí vrstvy terénu na mapě.</string>
     <string name="delete_description">Smazat popis</string>
     <string name="add_description">Přidat popis</string>
@@ -3454,8 +3446,6 @@
     <string name="video_notes">Video poznámky</string>
     <string name="vessel_height_limit_description">Nastavte výšku plavidla, abyste se vyhnuli nízkým mostům. Mějte na paměti, že u pohyblivých mostů se zohledňuje jejich výška v otevřeném stavu.</string>
     <string name="vessel_width_limit_description">Nastavte šířku plavidla, abyste se vyhnuli úzkým mostům</string>
-    <string name="quick_action_mapillary_hide">Skrýt Mapillary</string>
-    <string name="quick_action_mapillary_show">Zobrazit Mapillary</string>
     <string name="quick_action_showhide_mapillary_descr">Přepínač pro zobrazení nebo skrytí mapové vrstvy Mapillary.</string>
     <string name="routing_attr_length_description">Zadejte délku vozidla, která musí být na trase povolená.</string>
     <string name="routing_attr_length_name">Omezení délky</string>
@@ -3633,8 +3623,6 @@
     <string name="ui_customization_short_descr">Položky v úvodním panelu a kontextovém menu</string>
     <string name="ui_customization">Nastavení uživatelského rozhraní</string>
     <string name="shared_string_drawer">Úvodní panel</string>
-    <string name="quick_action_transport_hide">Skrýt veřejnou dopravu</string>
-    <string name="quick_action_transport_show">Zobrazit veřejnou dopravu</string>
     <string name="quick_action_transport_descr">Tlačítko pro zobrazení nebo skrytí veřejné dopravy na mapě.</string>
     <string name="create_edit_poi">Vytvořit nebo upravit bod zájmu</string>
     <string name="parking_positions">Parkovací místa</string>
@@ -3751,11 +3739,7 @@
 \n
 \n</string>
     <string name="apply_preference_to_all_profiles">Tuto změnu můžete aplikovat na všechny profily nebo jen na vybraný profil.</string>
-    <string name="quick_action_hillshade_hide">Skrýt stínování svahů</string>
-    <string name="quick_action_hillshade_show">Zobrazit stínování svahů</string>
     <string name="quick_action_hillshade_descr">Tlačítko pro zobrazení nebo skrytí stínování svahů na mapě.</string>
-    <string name="quick_action_contour_lines_hide">Skrýt vrstevnice</string>
-    <string name="quick_action_contour_lines_show">Zobrazit vrstevnice</string>
     <string name="quick_action_contour_lines_descr">Tlačítko pro zobrazení nebo skrytí vrstevnic na mapě.</string>
     <string name="tts_initialization_error">Nepodařilo se spustit modul převodu textu na řeč.</string>
     <string name="rendering_value_white_name">Bílá</string>

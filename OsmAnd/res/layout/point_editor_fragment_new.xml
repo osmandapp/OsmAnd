@@ -84,6 +84,7 @@
 								android:drawableEnd="@drawable/btn_circle_transparent_full"
 								android:drawableRight="@drawable/btn_circle_transparent_full"
 								android:drawablePadding="@dimen/favorites_list_item_height"
+								android:imeOptions="actionDone"
 								android:inputType="textMultiLine"
 								android:maxLines="4"
 								android:minHeight="@dimen/favorites_list_item_height"
@@ -93,7 +94,6 @@
 								android:paddingRight="@dimen/content_padding_small"
 								android:scrollHorizontally="false"
 								android:textSize="@dimen/default_list_text_size"
-								android:imeOptions="actionDone"
 								tools:text="@string/lorem_ipsum" />
 
 						</com.google.android.material.textfield.TextInputLayout>
@@ -137,6 +137,7 @@
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
 							android:gravity="start"
+							android:imeOptions="actionDone"
 							android:maxLines="4"
 							android:minHeight="@dimen/favorites_list_item_height"
 							android:paddingStart="@dimen/content_padding_small"
@@ -144,7 +145,6 @@
 							android:paddingEnd="@dimen/content_padding_small"
 							android:paddingRight="@dimen/content_padding_small"
 							android:textSize="@dimen/default_list_text_size"
-							android:imeOptions="actionDone"
 							tools:text="@string/lorem_ipsum" />
 
 					</com.google.android.material.textfield.TextInputLayout>
@@ -248,6 +248,7 @@
 					android:drawablePadding="8dp"
 					android:duplicateParentState="true"
 					android:gravity="center"
+					android:imeOptions="actionDone"
 					android:paddingStart="@dimen/content_padding_half"
 					android:paddingLeft="@dimen/content_padding_half"
 					android:paddingEnd="@dimen/content_padding_half"
@@ -255,7 +256,6 @@
 					android:text="@string/add_description"
 					android:textSize="@dimen/default_desc_text_size"
 					osmand:typeface="@string/font_roboto_medium"
-					android:imeOptions="actionDone"
 					tools:text="@string/add_description" />
 
 				<View
@@ -402,9 +402,11 @@
 					android:id="@+id/select_icon"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_marginStart="@dimen/content_padding_small"
-					android:layout_marginLeft="@dimen/content_padding_small"
+					android:layout_marginStart="@dimen/content_padding"
+					android:layout_marginLeft="@dimen/content_padding"
 					android:layout_marginTop="@dimen/context_menu_padding_margin_tiny"
+					android:layout_marginEnd="@dimen/content_padding"
+					android:layout_marginRight="@dimen/content_padding"
 					android:layout_marginBottom="@dimen/content_padding_half" />
 
 				<View
@@ -451,10 +453,9 @@
 					android:id="@+id/select_color"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:layout_marginStart="@dimen/content_padding_small"
-					android:layout_marginLeft="@dimen/content_padding_small"
 					android:layout_marginTop="@dimen/context_menu_padding_margin_tiny"
-					android:layout_marginBottom="@dimen/content_padding_half" />
+					android:layout_marginBottom="@dimen/content_padding_half"
+					android:orientation="horizontal" />
 
 				<View
 					android:layout_width="match_parent"
@@ -500,9 +501,11 @@
 					android:id="@+id/select_shape"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_marginStart="@dimen/content_padding_small"
-					android:layout_marginLeft="@dimen/content_padding_small"
+					android:layout_marginStart="@dimen/content_padding"
+					android:layout_marginLeft="@dimen/content_padding"
 					android:layout_marginTop="@dimen/context_menu_padding_margin_tiny"
+					android:layout_marginEnd="@dimen/content_padding"
+					android:layout_marginRight="@dimen/content_padding"
 					android:layout_marginBottom="@dimen/content_padding_half"
 					android:gravity="start" />
 
