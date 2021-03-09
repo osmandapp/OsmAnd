@@ -179,7 +179,9 @@ public class TrackWidthCard extends BaseCard {
 
 	private void scrollMenuToSelectedItem() {
 		int position = widthAdapter.getItemPosition(selectedItem);
-		groupRecyclerView.scrollToPosition(position);
+		if (position != -1) {
+			groupRecyclerView.scrollToPosition(position);
+		}
 	}
 
 	private class GpxWidthAdapter extends RecyclerView.Adapter<TrackAppearanceViewHolder> {

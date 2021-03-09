@@ -118,11 +118,14 @@ public class Algorithms {
 		return def;
 	}
 
-	public static String formatDoubleWithoutAdditionalZeros(double d) {
-		if(d == (long) d)
-			return String.format(Locale.US, "%d",(long)d);
-		else
-			return String.format("%s",d);
+	public static String formatDoubleWithoutExtraZeros(double d) {
+		return isInt(d) ?
+				String.format(Locale.US, "%d", (long) d) :
+				String.format("%s", d);
+	}
+
+	public static boolean isInt(double d) {
+		return (d == Math.floor(d)) && !Double.isInfinite(d);
 	}
 	
 	public static int parseIntSilently(String input, int def) {

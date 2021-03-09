@@ -22,7 +22,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
-import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionStandardHeightItem;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.widgets.MultiStateToggleButton;
@@ -96,7 +96,10 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		items.add(new TitleItem(getString(R.string.gpx_split_interval)));
-		items.add(new LongDescriptionStandardHeightItem(getString(R.string.gpx_split_interval_descr)));
+		items.add(new LongDescriptionItem.Builder()
+				.setDescription(getString(R.string.gpx_split_interval_descr))
+				.setLayoutId(R.layout.bottom_sheet_item_description_long_without_min_height)
+				.create());
 
 		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
 		View view = themedInflater.inflate(R.layout.track_split_interval, null);

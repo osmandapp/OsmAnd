@@ -133,7 +133,7 @@ public class OsmAndFormatter {
 			units = app.getString(R.string.int_min);
 			intervalInUnits = (interval / 60f);
 		}
-		return Algorithms.formatDoubleWithoutAdditionalZeros(intervalInUnits) + " " + units;
+		return Algorithms.formatDoubleWithoutExtraZeros(intervalInUnits) + " " + units;
 	}
 
 	public static String getFormattedDistanceInterval(OsmandApplication app, double interval) {
