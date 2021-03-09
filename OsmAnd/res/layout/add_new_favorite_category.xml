@@ -21,7 +21,10 @@
 		android:paddingLeft="@dimen/content_padding"
 		android:paddingEnd="@dimen/content_padding"
 		android:paddingRight="@dimen/content_padding"
-		app:startIconDrawable="@drawable/ic_action_folder">
+		app:startIconDrawable="@drawable/ic_action_folder"
+		app:boxBackgroundColor="?attr/text_input_background"
+		app:boxStrokeColor="@color/osmand_orange"
+		app:hintTextColor="@color/text_color_secondary_light">
 
 		<com.google.android.material.textfield.TextInputEditText
 			android:id="@+id/name_edit_text"
