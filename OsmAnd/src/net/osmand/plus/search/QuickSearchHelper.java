@@ -23,6 +23,8 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.poi.NominatimPoiFilter;
@@ -455,6 +457,15 @@ public class QuickSearchHelper implements ResourceListener {
 						sr.localeName = filter.getName();
 						sr.object = filter;
 						sr.objectType = ObjectType.POI_TYPE;
+						publish = true;
+					}
+				} else if (pd.isGpxFile()) {
+					GPXInfo gpxInfo = GpxUiHelper.getGpxInfoByFileName(app, pd.getName());
+					if (gpxInfo != null) {
+						sr.localeName = gpxInfo.getFileName();
+						sr.object = point;
+						sr.objectType = ObjectType.GPX_TRACK;
+						sr.relatedObject = gpxInfo;
 						publish = true;
 					}
 				} else {

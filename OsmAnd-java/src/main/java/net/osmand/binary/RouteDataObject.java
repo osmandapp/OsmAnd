@@ -519,6 +519,24 @@ public class RouteDataObject {
 		}
 		return pointTypes[ind];
 	}
+	
+	public void removePointType(int ind, int type) {
+		if (pointTypes != null || ind < pointTypes.length) {
+			int[] typesArr = pointTypes[ind];
+
+			for (int i = 0; i < typesArr.length; i++) {
+				if (typesArr[i] == type) {
+					int[] result = new int[typesArr.length - 1];
+					System.arraycopy(typesArr, 0, result, 0, i);
+					if (typesArr.length != i) {
+						System.arraycopy(typesArr, i + 1, result, i, typesArr.length - 1 - i);
+						pointTypes[ind] = result;
+						break;
+					}
+				}
+			}
+		}
+	}
 
 	public int[] getTypes() {
 		return types;

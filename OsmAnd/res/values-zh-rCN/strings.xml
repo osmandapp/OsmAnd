@@ -1249,9 +1249,6 @@
     <string name="increase_search_radius">增加搜索范围</string>
     <string name="nothing_found">什么都没找到</string>
     <string name="nothing_found_descr">更改搜索或增加其半径。</string>
-    <string name="quick_action_showhide_osmbugs_title">显示/隐藏 OSM 注记</string>
-    <string name="quick_action_osmbugs_show">显示 OSM 注记</string>
-    <string name="quick_action_osmbugs_hide">隐藏 OSM 注记</string>
     <string name="shared_string_add_photos">添加照片</string>
     <string name="routing_attr_allow_private_description">允许进入私有土地。</string>
     <string name="download_tab_downloads">全部下载</string>
@@ -2382,10 +2379,6 @@
     <string name="quick_action_duplicate">快速动作名称重复</string>
     <string name="quick_action_showhide_favorites_descr">轻触动作按钮将会在地图上显示或隐收藏夹标点。</string>
     <string name="quick_action_showhide_poi_descr">轻触动作按钮将会在地图上显示或隐藏 POI。</string>
-    <string name="quick_action_showhide_favorites_title">显示/隐藏收藏夹</string>
-    <string name="quick_action_favorites_show">显示收藏夹</string>
-    <string name="quick_action_favorites_hide">隐藏收藏夹</string>
-    <string name="quick_action_showhide_poi_title">显示/隐藏 POI</string>
     <string name="quick_action_poi_show">显示 %1$s</string>
     <string name="quick_action_poi_hide">隐藏 %1$s</string>
     <string name="quick_action_add_category">添加类别</string>
@@ -2732,10 +2725,7 @@
     <string name="step_by_step">逐步</string>
     <string name="routeInfo_road_types_name">道路类型</string>
     <string name="exit_at">退出于</string>
-    <string name="quick_action_show_hide_gpx_tracks">显示/隐藏GPX轨迹</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">在地图中显示或隐藏已选中的GPX轨迹的按钮。</string>
-    <string name="quick_action_gpx_tracks_hide">隐藏GPX轨迹</string>
-    <string name="quick_action_gpx_tracks_show">显示GPX路径</string>
     <string name="add_destination_query">请先设置目的地</string>
     <string name="use_osm_live_public_transport_description">为OsmAnd Live启用公共交通的变更情况。</string>
     <string name="add_start_and_end_points">添加出发地和目的地</string>
@@ -2894,9 +2884,6 @@
     <string name="shared_string_transparency">透明度</string>
     <string name="shared_string_zoom_levels">缩放等级</string>
     <string name="shared_string_legend">图例</string>
-    <string name="quick_action_show_hide_terrain">显示/隐藏地形</string>
-    <string name="quick_action_terrain_hide">隐藏地形</string>
-    <string name="quick_action_terrain_show">显示地形</string>
     <string name="delete_description">删除描述</string>
     <string name="add_description">添加描述</string>
     <string name="select_shape">选择形状</string>
@@ -2917,9 +2904,6 @@
     <string name="search_poi_types">搜索兴趣点类型</string>
     <string name="radius_ruler_item">半径尺</string>
     <string name="subscription_osmandlive_item">订阅 - OsmAnd Live</string>
-    <string name="quick_action_transport_hide">隐藏公共交通</string>
-    <string name="quick_action_transport_show">显示公共交通</string>
-    <string name="quick_action_show_hide_transport">显示/隐藏公共交通</string>
     <string name="create_edit_poi">创建/编辑兴趣点</string>
     <string name="edit_online_source">编辑在线资源</string>
     <string name="mercator_projection">正轴等角圆柱投影</string>
@@ -2934,9 +2918,6 @@
     <string name="vessel_height_warning">您可以设置船只高度，以避免过低桥梁。请记住，如果桥是可移动的，我们将使用它在打开状态下的高度。</string>
     <string name="vessel_height_limit_description">设置船只高度，以避免过低桥梁。请记住，如果桥是可移动的，我们将使用它在打开状态下的高度。</string>
     <string name="vessel_width_limit_description">设置船只宽度以避免狭窄的桥梁</string>
-    <string name="quick_action_showhide_mapillary_title">显示/隐藏Mapillary</string>
-    <string name="quick_action_mapillary_hide">隐藏Mapillary</string>
-    <string name="quick_action_mapillary_show">显示Mapillary</string>
     <string name="item_deleted">%1$s 已删除</string>
     <string name="shared_string_uninstall_and_restart">卸载并重新启动</string>
     <string name="quick_action_remove_next_destination">删除下一个目的地</string>
@@ -2959,10 +2940,6 @@
     <string name="routing_attr_allow_expert_name">允许专家路线</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">节点网络</string>
     <string name="hide_compass_ruler">隐藏罗盘标尺</string>
-    <string name="quick_action_show_hide_hillshade">显示/隐藏山体阴影</string>
-    <string name="quick_action_hillshade_hide">隐藏山体阴影</string>
-    <string name="quick_action_show_hide_contour_lines">显示/隐藏轮廓线</string>
-    <string name="quick_action_contour_lines_hide">隐藏轮廓线</string>
     <string name="quick_action_terrain_descr">在地图上显示或隐藏地形图层的按钮。</string>
     <string name="details_dialog_decr">显示或隐藏其他地图细节</string>
     <string name="quick_action_showhide_mapillary_descr">在地图上显示或隐藏Mapillary图层的开关。</string>

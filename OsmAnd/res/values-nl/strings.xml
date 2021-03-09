@@ -2118,10 +2118,6 @@
     <string name="quick_action_duplicate">Sneltoets-duplicaat</string>
     <string name="quick_action_showhide_favorites_descr">Een schakelknop om Favorieten al dan niet te tonen op de kaart.</string>
     <string name="quick_action_showhide_poi_descr">Een schakelknop om POI’s al dan niet op de kaart te tonen.</string>
-    <string name="quick_action_showhide_favorites_title">Favorieten tonen /verbergen</string>
-    <string name="quick_action_favorites_show">Favorieten tonen</string>
-    <string name="quick_action_favorites_hide">Favorieten verbergen</string>
-    <string name="quick_action_showhide_poi_title">POI’s tonen/verbergen</string>
     <string name="quick_action_poi_show">%1$s tonen</string>
     <string name="quick_action_poi_hide">%1$s verbergen</string>
     <string name="quick_action_add_category">Categorie toevoegen</string>
@@ -2327,9 +2323,6 @@
 \n</string>
     <string name="save_poi_too_many_uppercase">Naam bevat erg veel hoofdletters, toch doorgaan?</string>
     <string name="search_favorites">Zoek in Favorieten</string>
-    <string name="quick_action_showhide_osmbugs_title">OSM-opmerkingen tonen of verbergen</string>
-    <string name="quick_action_osmbugs_show">OSM-opmerkingen tonen</string>
-    <string name="quick_action_osmbugs_hide">OSM-opmerkingen verbergen</string>
     <string name="quick_action_showhide_osmbugs_descr">Knop om OSM-opmerkingen al dan niet te tonen.</string>
     <string name="sorted_by_distance">Gesorteerd op afstand</string>
     <string name="private_access_routing_req">Uw bestemming ligt in een gebied dat particulier eigendom is. Wilt u gebruik van particuliere wegen voor deze route toestaan\?</string>
@@ -2859,10 +2852,7 @@
     <string name="shared_string_swap">Wissel</string>
     <string name="show_more">Toon meer</string>
     <string name="tracks_on_map">Getoonde tracks</string>
-    <string name="quick_action_show_hide_gpx_tracks">GPX-tracks tonen/verbergen</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Een knop om geselecteerde GPX-tracks al dan niet te tonen op de kaart.</string>
-    <string name="quick_action_gpx_tracks_hide">GPX-tracks verbergen</string>
-    <string name="quick_action_gpx_tracks_show">GPX-tracks tonen</string>
     <string name="add_destination_query">Voeg a.u.b. eerst de Bestemming in</string>
     <string name="previous_route">Vorige route</string>
     <string name="add_home">Thuisadres toevoegen</string>
@@ -3129,13 +3119,7 @@
     <string name="app_mode_utv">Naast elkaar</string>
     <string name="shared_string_maps">Kaarten</string>
     <string name="quick_action_contour_lines_descr">Knop om hoogtelijnen al dan niet te tonen op de kaart.</string>
-    <string name="quick_action_contour_lines_show">Hoogtelijnen tonen</string>
-    <string name="quick_action_contour_lines_hide">Hoogtelijnen verbergen</string>
-    <string name="quick_action_show_hide_contour_lines">Hoogtelijnen tonen/verbergen</string>
     <string name="quick_action_hillshade_descr">Knop om de reliëfschaduw al dan niet te tonen op de kaart.</string>
-    <string name="quick_action_hillshade_show">Reliëfschaduw tonen</string>
-    <string name="quick_action_hillshade_hide">Reliëfschaduw verbergen</string>
-    <string name="quick_action_show_hide_hillshade">Reliëfschaduw tonen/verbergen</string>
     <string name="track_saved">Track opgeslagen</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Toon knooppunt van de fietsroutes</string>
     <string name="contour_lines_and_hillshade">Hoogtelijnen en reliëfschaduw</string>
@@ -3408,9 +3392,6 @@
     <string name="profile_backup_failed">Kan profiel niet back-uppen.</string>
     <string name="n_items_of_z">%1$s van %2$s</string>
     <string name="download_slope_maps">Hellingen</string>
-    <string name="quick_action_show_hide_terrain">Terrein tonen / verbergen</string>
-    <string name="quick_action_terrain_hide">Terrein verbergen</string>
-    <string name="quick_action_terrain_show">Terrein tonen</string>
     <string name="quick_action_terrain_descr">Een knop om de terreinlaag al dan niet te tonen op de kaart.</string>
     <string name="delete_description">Beschrijving verwijderen</string>
     <string name="add_description">Beschrijving toevoegen</string>
@@ -3445,9 +3426,6 @@
     <string name="clear_tiles_warning">Het toepassen van deze wijzigingen wist de cache van deze rasterkaartbron</string>
     <string name="vessel_height_warning_link">Stel de hoogte van het vaartuig in</string>
     <string name="vessel_height_warning">Stel de hoogte van het vaartuig in om lage bruggen te vermijden. Let op, als de brug beweegbaar is, gebruiken we de hoogte in geopende toestand.</string>
-    <string name="quick_action_showhide_mapillary_title">Mapillary tonen/verbergen</string>
-    <string name="quick_action_mapillary_hide">Mapillary verbergen</string>
-    <string name="quick_action_mapillary_show">Mapillary tonen</string>
     <string name="quick_action_showhide_mapillary_descr">Een schakelknop om de Mapillary-laag al dan niet te tonen op de kaart.</string>
     <string name="routing_attr_length_description">Geef de toegestane voertuiglengte op voor routes.</string>
     <string name="routing_attr_length_name">Maximale lengte</string>
@@ -3561,9 +3539,6 @@
     <string name="custom_color">Aangepaste kleur</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="search_poi_types">POI-types zoeken</string>
-    <string name="quick_action_transport_hide">OV-informatie verbergen</string>
-    <string name="quick_action_transport_show">OV-informatie tonen</string>
-    <string name="quick_action_show_hide_transport">OV-informatie tonen/verbergen</string>
     <string name="quick_action_transport_descr">Knop om OV-informatie al dan niet te tonen op de kaart.</string>
     <string name="add_edit_favorite">Favoriet toevoegen / bewerken</string>
     <string name="create_edit_poi">POI toevoegen / bewerken</string>

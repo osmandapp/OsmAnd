@@ -240,8 +240,6 @@
     <string name="shared_string_add_photos">ಚಿತ್ರಗಳನ್ನು ಸೇರಿಸಿ</string>
     <string name="mapillary">ಮ್ಯಾಪಿಲರಿ</string>
     <string name="nothing_found">ಏನೂ ಸಿಗಲಿಲ್ಲ :(</string>
-    <string name="quick_action_osmbugs_show">ಒಎಸ್ಎಂ ಟಿಪ್ಪಣಿಗಳನ್ನು ತೋರಿಸು</string>
-    <string name="quick_action_osmbugs_hide">ಒಎಸ್ಎಂ ಟಿಪ್ಪಣಿಗಳನ್ನು ಅಡಗಿಸು</string>
     <string name="change_color">ಬಣ್ಣವನ್ನು ಬದಲಿಸು</string>
     <string name="edit_name">ಹೆಸರನ್ನು ಸಂಪಾದಿಸು</string>
     <string name="type_address">ವಿಳಾಸವನ್ನು ಟೈಪಿಸು</string>
@@ -320,13 +318,7 @@
     <string name="routing_attr_driving_style_prefer_unpaved_description">ಸುಸಜ್ಜಿತ ರಸ್ತೆಗಳಿಗೆ ಆದ್ಯತೆ ನೀಡಿ.</string>
     <string name="layer_osm_edits">OSM ಪರಿಶಲನೆಗಳು</string>
     <string name="quick_action_contour_lines_descr">ನಕ್ಷೆಯಲ್ಲಿ ಬಾಹ್ಯರೇಖೆಗಳನ್ನು ತೋರಿಸಲು ಅಥವಾ ಮರೆಮಾಡಲು ಟಾಗಲ್.</string>
-    <string name="quick_action_contour_lines_show">ಬಾಹ್ಯರೇಖೆ ರೇಖೆಗಳನ್ನು ತೋರಿಸಿ</string>
-    <string name="quick_action_contour_lines_hide">ಬಾಹ್ಯರೇಖೆ ರೇಖೆಗಳನ್ನು ಮರೆಮಾಡಿ</string>
-    <string name="quick_action_show_hide_contour_lines">ಬಾಹ್ಯರೇಖೆಗಳನ್ನು ತೋರಿಸಿ / ಮರೆಮಾಡಿ</string>
     <string name="quick_action_hillshade_descr">ನಕ್ಷೆಯಲ್ಲಿ \'ಹಿಲ್ಶೇಡ್\' ಅನ್ನು ತೋರಿಸಲು ಅಥವಾ ಮರೆಮಾಡಲು ಟಾಗಲ್ ಮಾಡಿ.</string>
-    <string name="quick_action_hillshade_show">ಹಿಲ್ಶೇಡ್ ತೋರಿಸು</string>
-    <string name="quick_action_hillshade_hide">ಹಿಲ್ಶೇಡ್ ಅನ್ನು ಮರೆಮಾಡಿ</string>
-    <string name="quick_action_show_hide_hillshade">ಹಿಲ್ಶೇಡ್ ಅನ್ನು ತೋರಿಸಿ / ಮರೆಮಾಡಿ</string>
     <string name="tts_initialization_error">text-to-speech ಎಂಜಿನ್ ಅನ್ನು ಪ್ರಾರಂಭಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ</string>
     <string name="export_profile">ಪ್ರೊಫೈಲನ್ನು ಬೇರೆಡೆಗೆ ರಫ್ತುಮಾಡಿ</string>
     <string name="exported_osmand_profile">OsmAnd ಪ್ರೊಫೈಲ್:%1$s</string>

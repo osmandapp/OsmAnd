@@ -912,9 +912,6 @@
     <string name="increase_search_radius">Pytanski radius powjetšić</string>
     <string name="nothing_found">Žadyn pytanski wuslědk</string>
     <string name="nothing_found_descr">Změń pytanje abo powjetš jeho radius.</string>
-    <string name="quick_action_showhide_osmbugs_title">OSM-noticy pokazać/schować</string>
-    <string name="quick_action_osmbugs_show">OSM-noticy pokazać</string>
-    <string name="quick_action_osmbugs_hide">OSM-noticy schować</string>
     <string name="sorted_by_distance">Sortěrowane po zdalenosći</string>
     <string name="search_favorites">W faworitach pytać</string>
     <string name="hillshade_menu_download_descr">Sćehń reliefowu kartu, zo by so relief pokazał.</string>
@@ -1021,10 +1018,6 @@
     <string name="add_point_before">Předchadny dypk dodać</string>
     <string name="add_point_after">Přichodny dypk dodać</string>
     <string name="quick_action_start_stop_navigation">Nawigaciju zahajić/přetorhnyć</string>
-    <string name="quick_action_showhide_favorites_title">Fawority pokazać/schować</string>
-    <string name="quick_action_favorites_show">Fawority pokazać</string>
-    <string name="quick_action_favorites_hide">Fawority schować</string>
-    <string name="quick_action_showhide_poi_title">POI pokazać/schować</string>
     <string name="quick_action_poi_show">%1$s pokazać</string>
     <string name="quick_action_poi_hide">%1$s schować</string>
     <string name="quick_action_add_category">Kategoriju dodać</string>
@@ -1581,12 +1574,6 @@
     <string name="update_all_maps">Wšě karty aktualizować</string>
     <string name="update_all_maps_q">Chceš woprawdźe wšě (%1$d) karty aktualizować\?</string>
     <string name="layer_osm_edits">Změny na OSM</string>
-    <string name="quick_action_contour_lines_show">Pokazaj wysokostne linije</string>
-    <string name="quick_action_contour_lines_hide">Schowaj wysokostne linije</string>
-    <string name="quick_action_show_hide_contour_lines">Wysokostne linije pokazać/schować</string>
-    <string name="quick_action_hillshade_show">Pokazaj relief</string>
-    <string name="quick_action_hillshade_hide">Schowaj relief</string>
-    <string name="quick_action_show_hide_hillshade">Relief pokazać/schować</string>
     <string name="export_profile">Profil eksportować</string>
     <string name="exported_osmand_profile">OsmAnd-profil: %1$s</string>
     <string name="overwrite_profile_q">Profil \'%1$s\' hižo eksistuje. Chceš jón přepisać\?</string>

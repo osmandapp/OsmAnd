@@ -96,9 +96,6 @@
     <string name="quick_action_add_marker_descr">Tapping the action button will add a map marker at the screen centre location.</string>
     <string name="quick_action_add_gpx_descr">Tapping the action button will add a GPX waypoint at the screen centre location.</string>
     <string name="quick_action_showhide_favorites_descr">Tapping the action button will show or hide the favourite points on the map.</string>
-    <string name="quick_action_showhide_favorites_title">Show/hide favourites</string>
-    <string name="quick_action_favorites_show">Show Favourites</string>
-    <string name="quick_action_favorites_hide">Hide Favourites</string>
     <string name="quick_action_category_descr">Category to save the Favourite in:</string>
     <string name="analyze_on_map">Analyse on map</string>
     <string name="purchase_cancelled_dialog_title">You have cancelled your OsmAnd Live subscription</string>

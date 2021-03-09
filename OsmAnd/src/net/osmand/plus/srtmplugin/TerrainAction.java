@@ -16,8 +16,8 @@ import net.osmand.plus.quickaction.QuickActionType;
 public class TerrainAction extends QuickAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(30,
-			"terrain.showhide", TerrainAction.class).
-			nameRes(R.string.quick_action_show_hide_terrain).iconRes(R.drawable.ic_action_hillshade_dark).nonEditable().
+			"terrain.showhide", TerrainAction.class).nameActionRes(R.string.quick_action_show_hide_title).
+			nameRes(R.string.shared_string_terrain).iconRes(R.drawable.ic_action_hillshade_dark).nonEditable().
 			category(QuickActionType.CONFIGURE_MAP);
 
 
@@ -62,7 +62,13 @@ public class TerrainAction extends QuickAction {
 
 	@Override
 	public String getActionText(OsmandApplication application) {
-		return application.getSettings().TERRAIN.get() ? application.getString(R.string.quick_action_terrain_hide)
-				: application.getString(R.string.quick_action_terrain_show);
+		String nameRes = application.getString(getNameRes());
+		String actionName = isActionWithSlash(application) ? application.getString(R.string.shared_string_hide) : application.getString(R.string.shared_string_show);
+		return application.getString(R.string.ltr_or_rtl_combine_via_dash, actionName, nameRes);
+	}
+
+	@Override
+	public boolean isActionWithSlash(OsmandApplication application) {
+		return application.getSettings().TERRAIN.get();
 	}
 }

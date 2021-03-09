@@ -1911,9 +1911,6 @@
     <string name="increase_search_radius">Aumentar raio de pesquisa</string>
     <string name="nothing_found">Nada encontrado</string>
     <string name="nothing_found_descr">Altere a pesquisa ou aumente o raio dela.</string>
-    <string name="quick_action_showhide_osmbugs_title">Mostrar ou ocultar anotações do OSM</string>
-    <string name="quick_action_osmbugs_show">Mostrar anotações OSM</string>
-    <string name="quick_action_osmbugs_hide">Ocultar anotações do OSM</string>
     <string name="quick_action_showhide_osmbugs_descr">Botão para mostrar ou ocultar anotações OSM no mapa.</string>
     <string name="sorted_by_distance">Ordenar por distância</string>
     <string name="search_favorites">Pesquisar em Favoritos</string>
@@ -2725,10 +2722,6 @@
     <string name="quick_action_duplicate">Nome de ação rápida duplicado</string>
     <string name="quick_action_showhide_favorites_descr">Uma alternância para mostrar ou ocultar os pontos favoritos no mapa.</string>
     <string name="quick_action_showhide_poi_descr">Uma alternância para mostrar ou ocultar PIs no mapa.</string>
-    <string name="quick_action_showhide_favorites_title">Mostrar/esconder favoritos</string>
-    <string name="quick_action_favorites_show">Mostrar Favoritos</string>
-    <string name="quick_action_favorites_hide">Esconder favoritos</string>
-    <string name="quick_action_showhide_poi_title">Mostrar/esconder POI</string>
     <string name="quick_action_poi_show">Mostrar %1$s</string>
     <string name="quick_action_poi_hide">Esconder %1$s</string>
     <string name="quick_action_add_category">Adicionar uma categoria</string>
@@ -2894,9 +2887,7 @@
     <string name="shared_string_swap">Trocar</string>
     <string name="show_more">Mostrar mais</string>
     <string name="tracks_on_map">Trilhos mostrados</string>
-    <string name="quick_action_show_hide_gpx_tracks">Mostrar/ocultar trilhos</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Um botão para mostrar ou ocultar trilhos selecionados no mapa.</string>
-    <string name="quick_action_gpx_tracks_hide">Ocultar trilhos</string>
     <string name="routing_attr_avoid_tram_name">Sem elétricos</string>
     <string name="routing_attr_avoid_tram_description">Evita elétricos</string>
     <string name="routing_attr_avoid_bus_name">Sem autocarros</string>
@@ -2913,7 +2904,6 @@
     <string name="rendering_attr_surface_sett_name">Paralelos</string>
     <string name="rendering_attr_surface_pebblestone_name">Seixos</string>
     <string name="rendering_attr_highway_class_bridleway_name">Caminho para cavaleiros</string>
-    <string name="quick_action_gpx_tracks_show">Mostrar trilhos</string>
     <string name="add_destination_query">Por favor defina primeiro o destino</string>
     <string name="previous_route">Rota anterior</string>
     <string name="add_home">Adicionar casa</string>
@@ -3284,13 +3274,7 @@
     <string name="profile_appearance">Aspeto do perfil</string>
     <string name="layer_osm_edits">Edições OSM</string>
     <string name="quick_action_contour_lines_descr">Botão que mostra ou oculta curvas de nível no mapa.</string>
-    <string name="quick_action_contour_lines_show">Mostrar curvas de nível</string>
-    <string name="quick_action_contour_lines_hide">Ocultar curvas de nível</string>
-    <string name="quick_action_show_hide_contour_lines">Mostrar/ocultar curvas de nível</string>
     <string name="quick_action_hillshade_descr">Um botão para mostrar ou ocultar sombras de relevo.</string>
-    <string name="quick_action_hillshade_show">Mostrar sombras de relevo</string>
-    <string name="quick_action_hillshade_hide">Ocultar sombras de relevo</string>
-    <string name="quick_action_show_hide_hillshade">Mostrar/ocultar sombras de relevo</string>
     <string name="tts_initialization_error">Não é possível iniciar o mecanismo de conversão de texto em fala.</string>
     <string name="simulate_your_location_gpx_descr">Simule a sua posição usando um caminho GPX gravado.</string>
     <string name="export_profile">Exportar o perfil</string>
@@ -3345,9 +3329,6 @@
     <string name="shared_string_hillshade">Sombras de relevo</string>
     <string name="n_items_of_z">%1$s de %2$s</string>
     <string name="download_slope_maps">Pistas</string>
-    <string name="quick_action_show_hide_terrain">Mostrar ou ocultar terrenos</string>
-    <string name="quick_action_terrain_hide">Ocultar terreno</string>
-    <string name="quick_action_terrain_show">Mostrar terreno</string>
     <string name="quick_action_terrain_descr">Um botão para mostrar ou esconder a camada do terreno no mapa.</string>
     <string name="delete_description">Apagar descrição</string>
     <string name="add_description">Adicionar descrição</string>
@@ -3591,9 +3572,6 @@
     <string name="lang_lmo">Lombardo</string>
     <string name="custom_color">Cor customizada</string>
     <string name="search_poi_types_descr">Combinar categorias de POI de categorias diferentes. Toque em trocar para selecionar tudo, toque no lado esquerdo para seleção da categoria.</string>
-    <string name="quick_action_transport_hide">Ocultar o transporte público</string>
-    <string name="quick_action_transport_show">Mostrar transporte público</string>
-    <string name="quick_action_show_hide_transport">Mostrar ou ocultar transportes públicos</string>
     <string name="quick_action_transport_descr">Botão que mostra ou oculta o transporte público no mapa.</string>
     <string name="create_edit_poi">Criar ou editar um POI</string>
     <string name="parking_positions">Posições de estacionamento</string>
@@ -3658,7 +3636,6 @@
     <string name="app_mode_go_cart">Go-cart</string>
     <string name="speed_cameras_alert">Os alertas de radares de velocidade em alguns países são proibidos por lei.</string>
     <string name="keep_active">Manter ativo</string>
-    <string name="quick_action_mapillary_hide">Ocultar Mapillary</string>
     <string name="please_provide_point_name_error">Forneça um nome para o ponto</string>
     <string name="clear_tiles_warning">A aplicação dessas alterações limpará os dados em cache dessa origem de bloco</string>
     <string name="speed_cameras_removed_descr">Este aparelho não possui câmeras de velocidade.</string>
@@ -3681,7 +3658,6 @@
     <string name="item_deleted">%1$s apagado</string>
     <string name="quick_action_showhide_mapillary_descr">Uma alternância para mostrar ou ocultar a camada Mapillary no mapa.</string>
     <string name="vessel_height_warning_link">Definir altura da embarcação</string>
-    <string name="quick_action_mapillary_show">Mostrar Mapillary</string>
     <string name="app_mode_enduro_motorcycle">Motocicleta enduro</string>
     <string name="app_mode_inline_skates">Patins em linha</string>
     <string name="turn_screen_on_power_button_disabled">Desativado. Requer \'manter o ecrã ligadp\' em \'tempo limite após a ativação\'.</string>
@@ -3712,7 +3688,6 @@
     <string name="vessel_height_warning">Pode definir a altura da embarcação para evitar pontes baixas. Lembre-se, se a ponte for móvel, usaremos sua altura no estado aberto.</string>
     <string name="app_mode_wheelchair_forward">Cadeira de rodas para a frente</string>
     <string name="use_volume_buttons_as_zoom_descr">Controlar o nível de ampliação do mapa pelos botões de volume do aparelho.</string>
-    <string name="quick_action_showhide_mapillary_title">Mostrar/ocultar Mapillary</string>
     <string name="uninstall_speed_cameras">Desinstalar radares de velocidade</string>
     <string name="osm_edit_closed_note">Anotaçaõ OSM fechada</string>
     <string name="shared_string_uninstall_and_restart">Desinstalar e reiniciar</string>

@@ -1,25 +1,9 @@
 package net.osmand.binary;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.logging.Log;
-
 import com.google.protobuf.CodedInputStream;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.WireFormat;
 
-import gnu.trove.iterator.TLongObjectIterator;
-import gnu.trove.list.array.TIntArrayList;
-import gnu.trove.list.array.TLongArrayList;
-import gnu.trove.map.hash.TIntObjectHashMap;
-import gnu.trove.map.hash.TLongObjectHashMap;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
@@ -33,6 +17,23 @@ import net.osmand.binary.RouteDataObject.RestrictionInfo;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import net.osmand.util.OpeningHoursParser;
+
+import org.apache.commons.logging.Log;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import gnu.trove.iterator.TLongObjectIterator;
+import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.list.array.TLongArrayList;
+import gnu.trove.map.hash.TIntObjectHashMap;
+import gnu.trove.map.hash.TLongObjectHashMap;
 
 public class BinaryMapRouteReaderAdapter {
 	protected static final Log LOG = PlatformUtil.getLog(BinaryMapRouteReaderAdapter.class);
@@ -303,6 +304,7 @@ public class BinaryMapRouteReaderAdapter {
 		public int directionTrafficSignalsBackward = -1;
 		public int trafficSignals = -1;
 		public int stopSign = -1;
+		public int stopMinor = -1;
 		public int giveWaySign = -1;
 		
 		int nameTypeRule = -1;
@@ -363,6 +365,8 @@ public class BinaryMapRouteReaderAdapter {
 				destinationRefTypeRule = id;
 			} else if (tags.equals("highway") && val.equals("traffic_signals")){
 				trafficSignals = id;
+			} else if (tags.equals("stop") && val.equals("minor")) {
+				stopMinor = id;
 			} else if (tags.equals("highway") && val.equals("stop")){
 				stopSign = id;
 			} else if (tags.equals("highway") && val.equals("give_way")){

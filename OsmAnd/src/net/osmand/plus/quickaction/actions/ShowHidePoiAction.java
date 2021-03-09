@@ -37,10 +37,11 @@ public class ShowHidePoiAction extends QuickAction {
 
 
 	public static final QuickActionType TYPE = new QuickActionType(5,
-			"poi.showhide", ShowHidePoiAction.class).
-			nameRes(R.string.quick_action_showhide_poi_title).iconRes(R.drawable.ic_action_info_dark).
-			category(QuickActionType.CONFIGURE_MAP);
-
+			"poi.showhide", ShowHidePoiAction.class)
+			.nameActionRes(R.string.quick_action_show_hide_title)
+			.nameRes(R.string.poi)
+			.iconRes(R.drawable.ic_action_info_dark)
+			.category(QuickActionType.CONFIGURE_MAP);
 
 	public static final String KEY_FILTERS = "filters";
 
@@ -56,10 +57,8 @@ public class ShowHidePoiAction extends QuickAction {
 
 	@Override
 	public String getActionText(OsmandApplication application) {
-
-		return !isCurrentFilters(application)
-				? application.getString(R.string.quick_action_poi_show, getName(application))
-				: application.getString(R.string.quick_action_poi_hide, getName(application));
+		String actionName = isActionWithSlash(application) ? application.getString(R.string.shared_string_hide) : application.getString(R.string.shared_string_show);
+		return application.getString(R.string.ltr_or_rtl_combine_via_dash, actionName, getName(application));
 	}
 
 	@Override

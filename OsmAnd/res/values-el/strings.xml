@@ -1532,9 +1532,6 @@
     <string name="online_photos">Φωτογραφίες με σύνδεση</string>
     <string name="shared_string_add_photos">Προσθήκη φωτογραφιών</string>
     <string name="nothing_found">Δεν βρέθηκε τίποτα</string>
-    <string name="quick_action_showhide_osmbugs_title">Εμφάνιση ή απόκρυψη σημειώσεων OSM</string>
-    <string name="quick_action_osmbugs_show">Εμφάνιση σημειώσεων OSM</string>
-    <string name="quick_action_osmbugs_hide">Απόκρυψη σημειώσεων OSM</string>
     <string name="shared_string_to">Προς</string>
     <string name="rendering_attr_hidePOILabels_name">Ετικέτες POI</string>
     <string name="shared_string_without_name">Χωρίς όνομα</string>
@@ -2635,10 +2632,6 @@
     <string name="quick_action_duplicate">Διπλό όνομα γρήγορης ενέργειας</string>
     <string name="quick_action_showhide_favorites_descr">Εναλλαγή εμφάνισης ή απόκρυψης των αγαπημένων σημείων στον χάρτη.</string>
     <string name="quick_action_showhide_poi_descr">Εναλλαγή εμφάνισης ή απόκρυψης ΣΕ στον χάρτη.</string>
-    <string name="quick_action_showhide_favorites_title">Εμφάνιση/απόκρυψη αγαπημένων</string>
-    <string name="quick_action_favorites_show">Εμφάνιση αγαπημένων</string>
-    <string name="quick_action_favorites_hide">Απόκρυψη αγαπημένων</string>
-    <string name="quick_action_showhide_poi_title">Εμφάνιση/απόκρυψη ΣΕ</string>
     <string name="quick_action_poi_show">Εμφάνιση %1$s</string>
     <string name="quick_action_poi_hide">Απόκρυψη %1$s</string>
     <string name="quick_action_add_category">Προσθήκη κατηγορίας</string>
@@ -2901,10 +2894,7 @@
     <string name="shared_string_swap">Αλλαγή</string>
     <string name="show_more">Εμφάνιση περισσοτέρων</string>
     <string name="tracks_on_map">Εμφανιζόμενα ίχνη</string>
-    <string name="quick_action_show_hide_gpx_tracks">Εμφάνιση/απόκρυψη ιχνών GPX</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Πλήκτρο εμφάνισης ή απόκρυψης επιλεγμένων ιχνών GPX στον χάρτη.</string>
-    <string name="quick_action_gpx_tracks_hide">Απόκρυψη ιχνών GPX</string>
-    <string name="quick_action_gpx_tracks_show">Εμφάνιση ιχνών GPX</string>
     <string name="add_destination_query">Παρακαλούμε ορίστε τον προορισμό πρώτα</string>
     <string name="previous_route">Προηγούμενη διαδρομή</string>
     <string name="add_home">Προσθήκη κατοικίας</string>
@@ -3273,13 +3263,7 @@
     <string name="routing_attr_driving_style_prefer_unpaved_description">Να προτιμώνται μη στρωμένοι δρόμοι για δρομολόγηση.</string>
     <string name="layer_osm_edits">Επεξεργασίες OSM</string>
     <string name="quick_action_contour_lines_descr">Πλήκτρο εμφάνισης ή απόκρυψης ισοϋψών γραμμών στον χάρτη.</string>
-    <string name="quick_action_contour_lines_show">Εμφάνιση ισοϋψών γραμμών</string>
-    <string name="quick_action_contour_lines_hide">Απόκρυψη ισοϋψών γραμμών</string>
-    <string name="quick_action_show_hide_contour_lines">Εμφάνιση/Απόκρυψη ισοϋψών γραμμών</string>
     <string name="quick_action_hillshade_descr">Εμφάνιση ή απόκρυψη πλήκτρου σκίασης αναγλύφου στον χάρτη.</string>
-    <string name="quick_action_hillshade_show">Εμφάνιση σκίασης ανάγλυφου</string>
-    <string name="quick_action_hillshade_hide">Απόκρυψη σκίασης ανάγλυφου</string>
-    <string name="quick_action_show_hide_hillshade">Εμφάνιση/Απόκρυψη σκίασης ανάγλυφου</string>
     <string name="tts_initialization_error">Αδυναμία εκκίνησης μηχανής κειμένου σε ομιλία.</string>
     <string name="simulate_your_location_gpx_descr">Προσομοίωση της θέσης σας χρησιμοποιώντας καταγεγραμμένη διαδρομή GPX.</string>
     <string name="export_profile">Εξαγωγή κατατομής (προφίλ)</string>
@@ -3497,9 +3481,6 @@
     <string name="vessel_height_warning">Μπορείτε να ορίσετε ύψος σκάφους για να αποφύγετε χαμηλές γέφυρες. Σημειώστε ότι εάν η γέφυρα είναι κινητή, θα χρησιμοποιηθεί το ύψος της ανοικτής κατάστασης.</string>
     <string name="vessel_height_limit_description">Ορίστε ύψος σκάφος για αποφυγή χαμηλών γεφυρών. Σημειώστε ότι εάν η γέφυρα είναι κινητή, θα χρησιμοποιηθεί το ύψος της στην ανοικτή κατάσταση.</string>
     <string name="vessel_width_limit_description">Ορίστε πλάτος σκάφους για αποφυγή στενών γεφυρών</string>
-    <string name="quick_action_showhide_mapillary_title">Εμφάνιση/Απόκρυψη Mapillary</string>
-    <string name="quick_action_mapillary_hide">Απόκρυψη Mapillary</string>
-    <string name="quick_action_mapillary_show">Εμφάνιση Mapillary</string>
     <string name="quick_action_showhide_mapillary_descr">Εναλλαγή εμφάνισης ή απόκρυψης της στρώσης Mapillary του χάρτη.</string>
     <string name="routing_attr_length_description">Καθορίστε μήκος οχήματος που επιτρέπεται στους δρόμους.</string>
     <string name="routing_attr_length_name">Όριο μήκους</string>
@@ -3601,9 +3582,6 @@
 \n • Διόρθωση σφαλμάτων με RTL
 \n
 \n</string>
-    <string name="quick_action_transport_hide">Απόκρυψη δημόσιων συγκοινωνιών</string>
-    <string name="quick_action_transport_show">Εμφάνιση δημόσιων συγκοινωνιών</string>
-    <string name="quick_action_show_hide_transport">Εμφάνιση/απόκρυψη δημόσιων συγκοινωνιών</string>
     <string name="quick_action_transport_descr">Πλήκτρο εμφάνισης ή απόκρυψης δημόσιων συγκοινωνιών στον χάρτη.</string>
     <string name="create_edit_poi">Δημιουργία / Επεξεργασία ΣΕ</string>
     <string name="parking_positions">Θέσεις στάθμευσης</string>
@@ -3715,9 +3693,6 @@
     <string name="recalculate_route_distance_promo">Η διαδρομή θα επανυπολογιστεί εάν η απόσταση από τη διαδρομή στην τρέχουσα θέση είναι μεγαλύτερη από την επιλεγμένη τιμή.</string>
     <string name="n_items_of_z">%1$s από %2$s</string>
     <string name="download_slope_maps">Πλαγιές</string>
-    <string name="quick_action_show_hide_terrain">Εμφάνιση / απόκρυψη εδάφους</string>
-    <string name="quick_action_terrain_hide">Απόκρυψη εδάφους</string>
-    <string name="quick_action_terrain_show">Εμφάνιση εδάφους</string>
     <string name="quick_action_terrain_descr">Ένα πλήκτρο εμφάνισης ή απόκρυψης της στρώσης εδάφους στον χάρτη.</string>
     <string name="delete_description">Διαγραφή περιγραφής</string>
     <string name="add_description">Προσθήκη περιγραφής</string>
