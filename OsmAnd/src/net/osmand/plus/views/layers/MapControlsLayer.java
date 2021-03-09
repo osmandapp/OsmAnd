@@ -876,9 +876,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 		routePlanningBtn.updateVisibility(showBottomMenuButtons);
 		menuControl.updateVisibility(showBottomMenuButtons);
 
-		boolean showZoomButtons = !routeDialogOpened && !shouldHideTopControls && !isInTrackAppearanceMode()
-				&& (!isInGpxApproximationMode() || !isPotrait())
-				&& !isInFollowTrackMode() && (!isInChoosingRoutesMode() || !isInWaypointsChoosingMode() || !portrait);
+		boolean showZoomButtons = !routeDialogOpened && !shouldHideTopControls
+				&& !isInFollowTrackMode()
+				&& (!isInGpxApproximationMode() || !isInTrackAppearanceMode()
+				|| !isInChoosingRoutesMode() || !isInWaypointsChoosingMode() || !portrait);
 		mapZoomIn.updateVisibility(showZoomButtons);
 		mapZoomOut.updateVisibility(showZoomButtons);
 
@@ -1022,7 +1023,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		boolean tracked = mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation();
 		boolean visible = !(tracked && rh.isFollowingMode()) && (!isInGpxApproximationMode() || !isPotrait());
 		backToLocationControl.updateVisibility(visible && !dialogOpened && !isInPlanRouteMode()
-				&& !isInTrackAppearanceMode() && (!isInChoosingRoutesMode() || !isInWaypointsChoosingMode() || !isInFollowTrackMode() || !isPotrait()));
+				&& (!isInTrackAppearanceMode() || !isInChoosingRoutesMode() || !isInWaypointsChoosingMode() || !isInFollowTrackMode() || !isPotrait()));
 	}
 
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
