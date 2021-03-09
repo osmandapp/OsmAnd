@@ -119,6 +119,28 @@ public class Algorithms {
 		return def;
 	}
 
+	public static int parseIntSilently(String input, int def) {
+		if (input != null && input.length() > 0) {
+			try {
+				return Integer.parseInt(input);
+			} catch (NumberFormatException e) {
+				return def;
+			}
+		}
+		return def;
+	}
+
+	public static double parseDoubleSilently(String input, double def) {
+		if (input != null && input.length() > 0) {
+			try {
+				return Double.parseDouble(input);
+			} catch (NumberFormatException e) {
+				return def;
+			}
+		}
+		return def;
+	}
+
 	public static boolean isFirstPolygonInsideSecond(List<LatLon> firstPolygon,
 	                                                 List<LatLon> secondPolygon) {
 		for (LatLon point : firstPolygon) {
@@ -146,28 +168,6 @@ public class Algorithms {
 			}
 		}
 		return result;
-	}
-	
-	public static int parseIntSilently(String input, int def) {
-		if (input != null && input.length() > 0) {
-			try {
-				return Integer.parseInt(input);
-			} catch (NumberFormatException e) {
-				return def;
-			}
-		}
-		return def;
-	}
-
-	public static double parseDoubleSilently(String input, double def) {
-		if (input != null && input.length() > 0) {
-			try {
-				return Double.parseDouble(input);
-			} catch (NumberFormatException e) {
-				return def;
-			}
-		}
-		return def;
 	}
 
 	public static String getFileNameWithoutExtension(File f) {
@@ -786,6 +786,10 @@ public class Algorithms {
 			}
 		}
 		return false;
+	}
+
+	public static boolean isInt(double d) {
+		return (d == Math.floor(d)) && !Double.isInfinite(d);
 	}
 
 	public static boolean isInt(String value) {
