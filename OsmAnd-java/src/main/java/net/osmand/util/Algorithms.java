@@ -119,26 +119,10 @@ public class Algorithms {
 		return def;
 	}
 
-	public static class Point2D {
-		public double x;
-		public double y;
-	}
-
-	public static Point2D[] createPoint2DArrayFromLatLon(List<LatLon> latLons) {
-		Point2D[] array = new Point2D[latLons.size()];
-		for (int i = 0; i < array.length; i++) {
-			Point2D point = new Point2D();
-			point.x = latLons.get(i).getLatitude();
-			point.y = latLons.get(i).getLongitude();
-			array[i] = point;
-		}
-		return array;
-	}
-
-	public static boolean isFirstPolygonInsideTheSecond(Point2D[] first,
-	                                                    Point2D[] second) {
-		for (Point2D point : first) {
-			if (!isPointInsideTheBoundary(point, second)) {
+	public static boolean isFirstPolygonInsideSecond(List<LatLon> firstPolygon,
+	                                                 List<LatLon> secondPolygon) {
+		for (LatLon point : firstPolygon) {
+			if (!isPointInsidePolygon(point, secondPolygon)) {
 				// if at least one point is not inside the boundary, return false
 				return false;
 			}
@@ -146,13 +130,18 @@ public class Algorithms {
 		return true;
 	}
 
-	public static boolean isPointInsideTheBoundary(Point2D point,
-	                                               Point2D[] polygon) {
+	public static boolean isPointInsidePolygon(LatLon point,
+	                                           List<LatLon> polygon) {
+		double pointX = point.getLongitude();
+		double pointY = point.getLatitude();
 		boolean result = false;
-		for (int i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
-			if ((polygon[i].y > point.y) != (polygon[j].y > point.y)
-					&& (point.x < (polygon[j].x - polygon[i].x) * (point.y - polygon[i].y) /
-					(polygon[j].y-polygon[i].y) + polygon[i].x)) {
+		for (int i = 0, j = polygon.size() - 1; i < polygon.size(); j = i++) {
+			double x1 = polygon.get(i).getLongitude();
+			double y1 = polygon.get(i).getLatitude();
+			double x2 = polygon.get(j).getLongitude();
+			double y2 = polygon.get(j).getLatitude();
+			if ((y1 > pointY) != (y2 > pointY)
+					&& (pointX < (x2 - x1) * (pointY - y1) / (y2-y1) + x1)) {
 				result = !result;
 			}
 		}

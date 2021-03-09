@@ -3,7 +3,6 @@ package net.osmand.map;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.util.Algorithms;
-import net.osmand.util.Algorithms.Point2D;
 
 import java.io.Serializable;
 import java.util.LinkedList;
@@ -196,19 +195,13 @@ public class WorldRegion implements Serializable {
 	}
 
 	private boolean containsBoundingBox(QuadRect rectangle) {
-		if (boundingBox != null && rectangle != null) {
-			return boundingBox.contains(rectangle);
-		}
-		return false;
+		return (boundingBox != null && rectangle != null) &&
+				boundingBox.contains(rectangle);
 	}
 
 	private boolean containsPolygon(List<LatLon> another) {
-		if (polygon != null && another != null) {
-			Point2D[] inner = Algorithms.createPoint2DArrayFromLatLon(polygon);
-			Point2D[] outer = Algorithms.createPoint2DArrayFromLatLon(another);
-			return Algorithms.isFirstPolygonInsideTheSecond(outer, inner);
-		}
-		return false;
+		return (polygon != null && another != null) &&
+				Algorithms.isFirstPolygonInsideSecond(another, polygon);
 	}
 
 	public boolean isContinent() {
