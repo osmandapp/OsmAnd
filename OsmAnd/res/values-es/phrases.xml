@@ -3881,4 +3881,14 @@
     <string name="poi_diplomatic_embassy">Embajada</string>
     <string name="poi_consulate_filter">Consulado</string>
     <string name="poi_embassy_filter">Embajada</string>
+    <string name="poi_mobile_library">Biblioteca móvil (parada)</string>
+    <string name="poi_summit_register_no">Registro de cumbre: no</string>
+    <string name="poi_summit_register_yes">Registro de cumbre: sí</string>
+    <string name="poi_piste_status_closed">Estado de la pista: cerrada</string>
+    <string name="poi_piste_status_open">Estado de la pista: abierta</string>
+    <string name="poi_patrolled_no">Patrullado: no</string>
+    <string name="poi_patrolled_yes">Patrullado: sí</string>
+    <string name="poi_gladed_yes">Arbolado: sí</string>
+    <string name="poi_piste_name">Nombre de la pista</string>
+    <string name="poi_piste_ski_jump">Salto con esquís</string>
 </resources>
