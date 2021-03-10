@@ -1049,7 +1049,7 @@ public class Algorithms {
 	}
 
 	public static String gradientPaletteToString(int[] colors) {
-		int[] src = colors.length == 3 ? colors : RouteColorize.colors;
+		int[] src = (colors != null && colors.length == 3) ? colors : RouteColorize.colors;
 		return Algorithms.colorToString(src[0]) + " " +
 				Algorithms.colorToString(src[1]) + " " +
 				Algorithms.colorToString(src[2]);
