@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
@@ -225,7 +226,10 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 				pluginDescription.setText(plugin.getDescription());
 
 				int color = AndroidUtils.getColorFromAttr(context, R.attr.list_background_color);
-				pluginLogo.setImageDrawable(UiUtilities.tintDrawable(plugin.getLogoResource(), color));
+
+				Drawable pluginIcon = plugin.getLogoResource();
+				pluginIcon.clearColorFilter();
+				pluginLogo.setImageDrawable(UiUtilities.tintDrawable(pluginIcon, color));
 				pluginLogo.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
