@@ -224,8 +224,10 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 				pluginDescription.setText(plugin.getDescription());
 
 				int color = AndroidUtils.getColorFromAttr(context, R.attr.list_background_color);
-
 				Drawable pluginIcon = plugin.getLogoResource();
+				if (pluginIcon.getConstantState() != null) {
+					pluginIcon = pluginIcon.getConstantState().newDrawable().mutate();
+				}
 				pluginLogo.setImageDrawable(UiUtilities.tintDrawable(pluginIcon, color));
 				pluginLogo.setOnClickListener(new View.OnClickListener() {
 					@Override
