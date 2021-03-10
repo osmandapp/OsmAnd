@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,7 +22,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.PopupMenu;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -228,7 +226,6 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 				int color = AndroidUtils.getColorFromAttr(context, R.attr.list_background_color);
 
 				Drawable pluginIcon = plugin.getLogoResource();
-				pluginIcon.clearColorFilter();
 				pluginLogo.setImageDrawable(UiUtilities.tintDrawable(pluginIcon, color));
 				pluginLogo.setOnClickListener(new View.OnClickListener() {
 					@Override
@@ -253,7 +250,7 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 			if (active) {
 				pluginLogo.setBackgroundResource(nightMode ? R.drawable.bg_plugin_logo_enabled_dark : R.drawable.bg_plugin_logo_enabled_light);
 			} else {
-				TypedArray attributes = context.getTheme().obtainStyledAttributes(new int[] {R.attr.bg_plugin_logo_disabled});
+				TypedArray attributes = context.getTheme().obtainStyledAttributes(new int[]{R.attr.bg_plugin_logo_disabled});
 				pluginLogo.setBackgroundDrawable(attributes.getDrawable(0));
 				attributes.recycle();
 			}

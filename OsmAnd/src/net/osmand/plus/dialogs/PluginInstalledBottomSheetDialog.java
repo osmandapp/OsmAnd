@@ -2,7 +2,6 @@ package net.osmand.plus.dialogs;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -91,8 +90,11 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 		SpannableString pluginTitleSpan = new SpannableString(plugin.getName());
 		pluginTitleSpan.setSpan(new CustomTypefaceSpan(typeface), 0, pluginTitleSpan.length(), 0);
 		Drawable pluginIcon = plugin.getLogoResource();
-		pluginIcon.setColorFilter(ContextCompat.getColor(
-				context, nightMode ? R.color.icon_color_default_light : R.color.icon_color_default_dark), PorterDuff.Mode.MULTIPLY);
+		if (pluginIcon.getConstantState() != null) {
+			pluginIcon = pluginIcon.getConstantState().newDrawable().mutate();
+		}
+		pluginIcon = UiUtilities.tintDrawable(pluginIcon, ContextCompat.getColor(
+				context, nightMode ? R.color.icon_color_default_light : R.color.icon_color_default_dark));
 
 		BaseBottomSheetItem pluginTitle = new SimpleBottomSheetItem.Builder()
 				.setTitle(pluginTitleSpan)
