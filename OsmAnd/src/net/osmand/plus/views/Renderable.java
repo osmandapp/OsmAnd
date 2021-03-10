@@ -102,7 +102,14 @@ public class Renderable {
 
         protected abstract void startCuller(double newZoom);
 
-        protected void drawSingleSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {}
+        protected void drawSingleSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {
+            if (scaleType != null) {
+                drawGradient(getPointsForDrawing(), p, canvas, tileBox);
+                scaleType = null;
+            } else {
+                drawSolid(getPointsForDrawing(), p, canvas, tileBox);
+            }
+        }
 
 
         public void drawSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {
@@ -230,15 +237,6 @@ public class Renderable {
                 }
             }
         }
-
-        @Override public void drawSingleSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {
-            if (scaleType != null) {
-                drawGradient(getPointsForDrawing(), p, canvas, tileBox);
-                scaleType = null;
-            } else {
-                drawSolid(getPointsForDrawing(), p, canvas, tileBox);
-            }
-        }
     }
 
     public static class CurrentTrack extends RenderableSegment {
@@ -257,9 +255,5 @@ public class Renderable {
         }
 
         @Override protected void startCuller(double newZoom) {}
-
-        @Override public void drawSingleSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {
-            drawSolid(points, p, canvas, tileBox);
-        }
     }
 }

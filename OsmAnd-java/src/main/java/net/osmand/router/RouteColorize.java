@@ -204,7 +204,7 @@ public class RouteColorize {
     }
 
     public void setPalette(int[] gradientPalette) {
-        if (gradientPalette.length != 3) {
+        if (gradientPalette == null || gradientPalette.length != 3) {
             return;
         }
         setPalette(new double[][] {

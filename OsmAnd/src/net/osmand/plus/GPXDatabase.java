@@ -176,8 +176,8 @@ public class GPXDatabase {
 		private File file;
 		private GPXTrackAnalysis analysis;
 		private String width;
-		private GradientScaleType gradientScaleType;
 		private int color;
+		private GradientScaleType gradientScaleType;
 		private int[] gradientSpeedPalette;
 		private int[] gradientAltitudePalette;
 		private int[] gradientSlopePalette;
@@ -884,7 +884,7 @@ public class GPXDatabase {
 		item.gradientSlopePalette = Algorithms.stringToGradientPalette(gradientSlopePalette);
 
 		try {
-			item.gradientScaleType = Algorithms.isEmpty(gradientScaleType) ? null : GradientScaleType.valueOf(gradientScaleType);
+			item.gradientScaleType = Algorithms.isEmpty(gradientScaleType) ? null : GradientScaleType.valueOf(gradientScaleType.toUpperCase());
 		} catch (IllegalArgumentException e) {
 			item.gradientScaleType = null;
 		}

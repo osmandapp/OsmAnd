@@ -47,8 +47,8 @@ public class TrackDrawInfo {
 	public TrackDrawInfo(@NonNull OsmandApplication app, @NonNull GpxDataItem gpxDataItem, boolean currentRecording) {
 		filePath = gpxDataItem.getFile().getPath();
 		width = gpxDataItem.getWidth();
-		gradientScaleType = gpxDataItem.getGradientScaleType();
 		color = gpxDataItem.getColor();
+		gradientScaleType = gpxDataItem.getGradientScaleType();
 		speedGradientPalette = gpxDataItem.getGradientSpeedPalette();
 		altitudeGradientPalette = gpxDataItem.getGradientAltitudePalette();
 		slopeGradientPalette = gpxDataItem.getGradientSlopePalette();
