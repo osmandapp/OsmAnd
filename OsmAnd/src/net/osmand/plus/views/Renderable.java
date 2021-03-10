@@ -1,8 +1,10 @@
 package net.osmand.plus.views;
 
 import android.graphics.Canvas;
+import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.Shader;
 
 import androidx.annotation.NonNull;
 
@@ -10,7 +12,7 @@ import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.views.layers.geometry.GeometryWay;
+import net.osmand.plus.track.GradientScaleType;
 import net.osmand.plus.views.layers.geometry.GpxGeometryWay;
 import net.osmand.util.Algorithms;
 
@@ -65,6 +67,7 @@ public class Renderable {
         protected double zoom = -1;
         protected AsynchronousResampler culler = null;                        // The currently active resampler
         protected Paint paint = null;                               // MUST be set by 'updateLocalPaint' before use
+        protected GradientScaleType scaleType = null;
 
         protected GpxGeometryWay geometryWay;
 
@@ -83,6 +86,10 @@ public class Renderable {
             }
             paint.setColor(p.getColor());
             paint.setStrokeWidth(p.getStrokeWidth());
+        }
+
+        public void setGradientScaleType(GradientScaleType type) {
+            this.scaleType = type;
         }
 
         public GpxGeometryWay getGeometryWay() {
@@ -124,7 +131,7 @@ public class Renderable {
             }
         }
 
-        protected void draw(List<WptPt> pts, Paint p, Canvas canvas, RotatedTileBox tileBox) {
+        protected void drawSolid(List<WptPt> pts, Paint p, Canvas canvas, RotatedTileBox tileBox) {
             if (pts.size() > 1) {
                 updateLocalPaint(p);
                 canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
@@ -160,6 +167,38 @@ public class Renderable {
                 canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
             }
         }
+
+        protected void drawGradient(List<WptPt> pts, Paint p, Canvas canvas, RotatedTileBox tileBox) {
+            if (pts.size() < 2) {
+                return;
+            }
+
+            updateLocalPaint(p);
+            canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+            QuadRect tileBounds = tileBox.getLatLonBounds();
+            WptPt prevPt = pts.get(0);
+            for (int i = 1; i < pts.size(); i++) {
+                WptPt currentPt = pts.get(i);
+                if (Math.min(currentPt.lon, prevPt.lon) < tileBounds.right && Math.max(currentPt.lon, prevPt.lon) > tileBounds.left
+                        && Math.min(currentPt.lat, prevPt.lat) < tileBounds.top && Math.max(currentPt.lat, prevPt.lat) > tileBounds.bottom) {
+                    float startX = tileBox.getPixXFromLatLon(prevPt.lat, prevPt.lon);
+                    float startY = tileBox.getPixYFromLatLon(prevPt.lat, prevPt.lon);
+                    float endX = tileBox.getPixXFromLatLon(currentPt.lat, currentPt.lon);
+                    float endY = tileBox.getPixYFromLatLon(currentPt.lat, currentPt.lon);
+                    int prevColor = prevPt.getColor(scaleType.toColorizationType());
+                    int currentColor = currentPt.getColor(scaleType.toColorizationType());
+                    LinearGradient gradient = new LinearGradient(startX, startY, endX, endY, prevColor, currentColor, Shader.TileMode.CLAMP);
+                    Paint paint = new Paint(this.paint);
+                    paint.setShader(gradient);
+                    Path path = new Path();
+                    path.moveTo(startX, startY);
+                    path.lineTo(endX, endY);
+                    canvas.drawPath(path, paint);
+                }
+                prevPt = currentPt;
+            }
+            canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+        }
     }
 
     public static class StandardTrack extends RenderableSegment {
@@ -193,7 +232,12 @@ public class Renderable {
         }
 
         @Override public void drawSingleSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {
-            draw(culled.isEmpty() ? points : culled, p, canvas, tileBox);
+            if (scaleType != null) {
+                drawGradient(getPointsForDrawing(), p, canvas, tileBox);
+                scaleType = null;
+            } else {
+                drawSolid(getPointsForDrawing(), p, canvas, tileBox);
+            }
         }
     }
 
@@ -215,7 +259,7 @@ public class Renderable {
         @Override protected void startCuller(double newZoom) {}
 
         @Override public void drawSingleSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {
-            draw(points, p, canvas, tileBox);
+            drawSolid(points, p, canvas, tileBox);
         }
     }
 }

@@ -26,6 +26,9 @@ public class TrackDrawInfo {
 	private String width;
 	private GradientScaleType gradientScaleType;
 	private int color;
+	private int[] speedGradientPalette;
+	private int[] altitudeGradientPalette;
+	private int[] slopeGradientPalette;
 	private int splitType;
 	private double splitInterval;
 	private boolean joinSegments;
@@ -46,6 +49,9 @@ public class TrackDrawInfo {
 		width = gpxDataItem.getWidth();
 		gradientScaleType = gpxDataItem.getGradientScaleType();
 		color = gpxDataItem.getColor();
+		speedGradientPalette = gpxDataItem.getGradientSpeedPalette();
+		altitudeGradientPalette = gpxDataItem.getGradientAltitudePalette();
+		slopeGradientPalette = gpxDataItem.getGradientSlopePalette();
 		splitType = gpxDataItem.getSplitType();
 		splitInterval = gpxDataItem.getSplitInterval();
 		joinSegments = gpxDataItem.isJoinSegments();
@@ -80,6 +86,16 @@ public class TrackDrawInfo {
 
 	public void setColor(int color) {
 		this.color = color;
+	}
+
+	public int[] getGradientPalette(@NonNull GradientScaleType scaleType) {
+		if (scaleType == GradientScaleType.SPEED) {
+			return speedGradientPalette;
+		} else if (scaleType == GradientScaleType.ALTITUDE) {
+			return altitudeGradientPalette;
+		} else {
+			return slopeGradientPalette;
+		}
 	}
 
 	public int getSplitType() {

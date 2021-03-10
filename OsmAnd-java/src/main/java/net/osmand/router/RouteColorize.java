@@ -5,6 +5,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.OsmMapUtils;
 import net.osmand.util.MapUtils;
+
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
@@ -24,9 +25,9 @@ public class RouteColorize {
 
     public static final int DARK_GREY = rgbaToDecimal(92, 92, 92, 255);
     public static final int LIGHT_GREY = rgbaToDecimal(200, 200, 200, 255);
-    public static final int GREEN = rgbaToDecimal(90, 220, 95, 1);
-    public static final int YELLOW = rgbaToDecimal(212, 239, 50, 1);
-    public static final int RED = rgbaToDecimal(243, 55, 77, 1);
+    public static final int GREEN = rgbaToDecimal(90, 220, 95, 255);
+    public static final int YELLOW = rgbaToDecimal(212, 239, 50, 255);
+    public static final int RED = rgbaToDecimal(243, 55, 77, 255);
     public static final int[] colors = new int[] {GREEN, YELLOW, RED};
 
     public enum ColorizationType {
@@ -200,6 +201,17 @@ public class RouteColorize {
         this.palette = palette;
         checkPalette();
         sortPalette();
+    }
+
+    public void setPalette(int[] gradientPalette) {
+        if (gradientPalette.length != 3) {
+            return;
+        }
+        setPalette(new double[][] {
+                {minValue, gradientPalette[0]},
+                {colorizationType == ColorizationType.SLOPE ? 12.5 : (minValue + maxValue) / 2},
+                {maxValue, gradientPalette[0]}
+        });
     }
 
     private int getDefaultColor() {

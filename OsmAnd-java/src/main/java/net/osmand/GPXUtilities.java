@@ -6,6 +6,7 @@ import net.osmand.binary.StringBundle;
 import net.osmand.binary.StringBundleWriter;
 import net.osmand.binary.StringBundleXmlWriter;
 import net.osmand.data.QuadRect;
+import net.osmand.router.RouteColorize.ColorizationType;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -227,6 +228,9 @@ public class GPXUtilities {
 		public double hdop = Double.NaN;
 		public float heading = Float.NaN;
 		public boolean deleted = false;
+		public int speedColor = 0;
+		public int altitudeColor = 0;
+		public int slopeColor = 0;
 		public int colourARGB = 0;                    // point colour (used for altitude/speed colouring)
 		public double distance = 0.0;                // cumulative distance, if in a track
 
@@ -249,6 +253,9 @@ public class GPXUtilities {
 			this.hdop = wptPt.hdop;
 			this.heading = wptPt.heading;
 			this.deleted = wptPt.deleted;
+			this.speedColor = wptPt.speedColor;
+			this.altitudeColor = wptPt.altitudeColor;
+			this.slopeColor = wptPt.slopeColor;
 			this.colourARGB = wptPt.colourARGB;
 			this.distance = wptPt.distance;
 		}
@@ -309,6 +316,16 @@ public class GPXUtilities {
 
 		public void setIconName(String iconName) {
 			getExtensionsToWrite().put(ICON_NAME_EXTENSION, iconName);
+		}
+
+		public int getColor(ColorizationType type) {
+			if (type == ColorizationType.SPEED) {
+				return speedColor;
+			} else if (type == ColorizationType.ELEVATION) {
+				return altitudeColor;
+			} else {
+				return slopeColor;
+			}
 		}
 
 		public String getBackgroundType() {
