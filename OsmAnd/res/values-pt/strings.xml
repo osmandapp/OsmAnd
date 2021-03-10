@@ -3932,4 +3932,25 @@
     <string name="edit_track">Editar trilho</string>
     <string name="rename_track">Renomear trilho</string>
     <string name="change_folder">Mudar pasta</string>
+    <string name="hillshade_slope_contour_lines">Sombras de relevo / Pistas / Curvas de nível</string>
+    <string name="open_place_reviews_plugin_description">OpenPlaceReviews é um projeto comunitário sobre lugares públicos como restaurantes, hotéis, museus, pontos de passagem. Recolhe toda a informação pública sobre eles, como fotos, resenhas, ligações para outros sistemas OpenStreetMap, Wikipedia.
+\n
+\nTodos os dados OpenPlaceReview estão abertos e disponíveis para todos: http://openplacereviews.org/data.
+\n
+\nPode ler mais em: http://openplacereviews.org</string>
+    <string name="open_place_reviews">OpenPlaceReviews</string>
+    <string name="opr_use_dev_url">Usar test.openplacereviews.org</string>
+    <string name="login_open_place_reviews">Fazer login no OpenPlaceReviews</string>
+    <string name="activity_type_water_name">Água</string>
+    <string name="activity_type_winter_name">Inverno</string>
+    <string name="activity_type_snowmobile_name">Moto de neve</string>
+    <string name="activity_type_riding_name">Equitação</string>
+    <string name="activity_type_racing_name">Corrida</string>
+    <string name="activity_type_mountainbike_name">Mountainbike</string>
+    <string name="activity_type_cycling_name">Ciclismo</string>
+    <string name="activity_type_running_name">A correr</string>
+    <string name="activity_type_walking_name">Caminhando</string>
+    <string name="activity_type_offroad_name">Fora da estrada</string>
+    <string name="activity_type_motorbike_name">Motocicleta</string>
+    <string name="activity_type_car_name">Carro</string>
 </resources>

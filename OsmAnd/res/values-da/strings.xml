@@ -3564,7 +3564,7 @@
     <string name="turn_screen_on_navigation_instructions_descr">Hver navigationsinstruktion tænder skærmen.</string>
     <string name="turn_screen_on_navigation_instructions">Navigationsinstruktioner</string>
     <string name="turn_screen_on_power_button">Tænd/sluk-knap</string>
-    <string name="turn_screen_on_proximity_sensor">Nærhedssensor</string>
+    <string name="turn_screen_on_proximity_sensor">Nærhedsføler</string>
     <string name="keep_screen_on">Hold skærmen tændt</string>
     <string name="keep_screen_off">Hold skærmen slukket</string>
     <string name="pseudo_mercator_projection">Pseudo-Mercatorprojektion</string>
@@ -3763,4 +3763,28 @@
     <string name="plan_route_split_before">Opdel før</string>
     <string name="plan_route_split_after">Opdel efter</string>
     <string name="plan_route_add_new_segment">Tilføj et nyt segment</string>
+    <string name="start_recording">Start optagelse</string>
+    <string name="routing_engine_vehicle_type_wheelchair">Kørestol</string>
+    <string name="routing_engine_vehicle_type_walking">Gå</string>
+    <string name="routing_engine_vehicle_type_small_truck">Varevogn</string>
+    <string name="routing_engine_vehicle_type_hgv">Tung gods transport</string>
+    <string name="routing_engine_vehicle_type_cycling_electric">Elektrisk cykling</string>
+    <string name="routing_engine_vehicle_type_cycling_mountain">Bjerg cykling</string>
+    <string name="routing_engine_vehicle_type_cycling_regular">Normal cykling</string>
+    <string name="routing_engine_vehicle_type_racingbike">Racercykel</string>
+    <string name="routing_engine_vehicle_type_truck">Lastbil</string>
+    <string name="message_server_error">Server fejl: %1$s</string>
+    <string name="context_menu_edit_descr">Redigere beskrivelse</string>
+    <string name="upload_photo_completed">Send afsluttet</string>
+    <string name="uploading_count">Sender %1$d af %2$d</string>
+    <string name="uploaded_count">Sendt %1$d af %2$d</string>
+    <string name="upload_photo">Sender</string>
+    <string name="opr_use_dev_url">Brug test.openplacereviews.org</string>
+    <string name="activity_type_winter_name">Vinter</string>
+    <string name="activity_type_riding_name">Ride</string>
+    <string name="activity_type_cycling_name">Cykle</string>
+    <string name="activity_type_running_name">Løbe</string>
+    <string name="activity_type_walking_name">Gå</string>
+    <string name="activity_type_motorbike_name">Motorcykel</string>
+    <string name="activity_type_car_name">Bil</string>
 </resources>

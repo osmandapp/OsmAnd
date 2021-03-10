@@ -9,6 +9,7 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
+
 import net.osmand.plus.ContextMenuAdapter.OnItemDeleteAction;
 
 public class ContextMenuItem {
@@ -164,7 +165,9 @@ public class ContextMenuItem {
 		return description;
 	}
 
-	public OnItemDeleteAction getItemDeleteAction() { return itemDeleteAction; }
+	public OnItemDeleteAction getItemDeleteAction() {
+		return itemDeleteAction;
+	}
 
 	public ContextMenuAdapter.ItemClickListener getItemClickListener() {
 		return itemClickListener;
@@ -207,9 +210,7 @@ public class ContextMenuItem {
 	}
 
 	public void setColor(Context context, @ColorRes int colorRes) {
-		if (colorRes != INVALID_ID) {
-			this.color = ContextCompat.getColor(context, colorRes);
-		}
+		color = colorRes != INVALID_ID ? ContextCompat.getColor(context, colorRes) : null;
 	}
 
 	public void setSelected(boolean selected) {

@@ -2976,7 +2976,7 @@
     <string name="profile_alert_need_save_title">Änderungen speichern</string>
     <string name="profile_alert_need_save_msg">Änderungen am Profil zuerst speichern</string>
     <string name="profile_alert_delete_title">Profil löschen</string>
-    <string name="profile_alert_delete_msg">Möchten Sie das Profil „%s“ wirklich löschen\?</string>
+    <string name="profile_alert_delete_msg">Möchten Sie das Profil „%s“ wirklich löschen</string>
     <string name="select_base_profile_dialog_title">Wählen Sie zunächst ein Profil aus</string>
     <string name="select_base_profile_dialog_message">Bauen Sie ein eigenes Anwendungsprofil auf einem der Standardprofile der App auf. Dieses bestimmt die Grundeinstellungen wie Voreinstellungen zur Sichtbarkeit von Widgets und die Einheiten für Geschwindigkeit und Entfernungen. Dies sind die App-Standardprofile zusammen mit Beispielen für eigene Anwendungsprofile, die erweitert werden können:</string>
     <string name="select_nav_profile_dialog_title">Navigationsart auswählen</string>
