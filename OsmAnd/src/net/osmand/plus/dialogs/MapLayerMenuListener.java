@@ -193,8 +193,8 @@ final class MapLayerMenuListener extends OnRowItemClick {
 						adapter.notifyDataSetChanged();
 					}
 				};
-		boolean isCategoryMultichoose = poiFiltersHelper.getSelectedPoiFilters(wiki).size() > 1;
-		if (isCategoryMultichoose) {
+		boolean isMultichoose = poiFiltersHelper.getSelectedPoiFilters(wiki).size() > 1;
+		if (isMultichoose) {
 			mapActivity.getMapLayers().showMultichoicePoiFilterDialog(mapActivity.getMapView(),
 					dismissListener);
 		} else {
