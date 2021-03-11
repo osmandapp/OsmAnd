@@ -91,7 +91,7 @@ public class SelectFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		app = requiredMyApplication();
-		if (savedInstanceState != null && selectedCategory == null) {
+		if (savedInstanceState != null) {
 			restoreState(savedInstanceState);
 		} else if (getArguments() != null) {
 			restoreState(getArguments());
@@ -151,7 +151,7 @@ public class SelectFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 					if (Algorithms.isEmpty(pointsCategories.get(e.getKey()))) {
 						favoriteCategoryCount = app.getString(R.string.shared_string_empty);
 					} else {
-						favoriteCategoryCount = String.valueOf(gpxFile.getPointsByCategories().get(e.getKey()).size());
+						favoriteCategoryCount = String.valueOf(pointsCategories.get(e.getKey()).size());
 					}
 					favoriteCategoryContainer.addView(createCategoryItem(activity, nightMode, e.getKey(), e.getValue(), favoriteCategoryCount, false));
 				}
@@ -207,7 +207,7 @@ public class SelectFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 		TextView description = itemView.findViewById(R.id.description);
 		text.setText(name);
 		description.setText(String.valueOf(categoryPointCount));
-		descriptionContainer.setOnClickListener(new View.OnClickListener() {
+		itemView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				FragmentActivity a = getActivity();
