@@ -737,7 +737,9 @@ public class GpxSelectionHelper {
 			String rootGpxDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR).getAbsolutePath() + '/';
 			String fileName = path.replace(rootGpxDir, "");
 			GPXInfo gpxInfo = GpxUiHelper.getGpxInfoByFileName(app, fileName);
-			SearchHistoryHelper.getInstance(app).addNewItemToHistory(gpxInfo);
+			if (gpxInfo != null) {
+				SearchHistoryHelper.getInstance(app).addNewItemToHistory(gpxInfo);
+			}
 		}
 		return sf;
 	}

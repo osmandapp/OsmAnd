@@ -137,8 +137,6 @@
     <string name="show_more">Mostrar mai</string>
     <string name="tracks_on_map">Traças vesedoiras</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">De quichar sus lo boton mòstra ò amaga la traça GPS sus la mapa</string>
-    <string name="quick_action_gpx_tracks_hide">Amagar la traça GPS</string>
-    <string name="quick_action_gpx_tracks_show">Mostrar la traça GPS</string>
     <string name="add_destination_query">Començatz per indicar una destinacion</string>
     <string name="previous_route">Itinerari precedent</string>
     <string name="add_home">Ajustar lo domicile</string>
@@ -481,11 +479,7 @@
     <string name="routing_attr_driving_style_prefer_unpaved_description">Preferissi lei rotas sensa quitran.</string>
     <string name="layer_osm_edits">Edicions d\'OSM</string>
     <string name="quick_action_contour_lines_descr">Un commutador per mostrar o amagar lei corbas de nivèu sus la mapa.</string>
-    <string name="quick_action_contour_lines_show">Mostrar lei corbas de nivèu</string>
-    <string name="quick_action_contour_lines_hide">Amagar lei corbas de nivèu</string>
     <string name="quick_action_hillshade_descr">Un commutador per mostrar o amagar l\'ombrejat de relèu de la mapa.</string>
-    <string name="quick_action_hillshade_show">Mostrar l’ombrejat de relèu</string>
-    <string name="quick_action_hillshade_hide">Amagar l’ombrejat de relèu</string>
     <string name="export_profile">Exportar lo perfiu</string>
     <string name="exported_osmand_profile">Perfiu d\'OsmAnd: %1$s</string>
     <string name="overwrite_profile_q">Lo perfiu \'%1$s\' existís ja. Lo volètz subrescriure\?</string>

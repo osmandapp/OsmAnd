@@ -123,7 +123,7 @@
     <string name="poi_vehicle_inspection">Пункт тэхагляду</string>
     <string name="poi_car_wash">Аўтамыйка</string>
     <string name="poi_fuel">Запраўка;АЗС;Аўтазаправачная станцыя</string>
-    <string name="poi_electricity_combined_charging">Станцыя сілкавання</string>
+    <string name="poi_electricity_combined_charging">Станцыя зарадкі; Станцыя зарадкі для электрамабіля; Станцыя зарадкі для электрамабіляў; Кропка электрычнай зарадкі; Кропка зарадкі; Электронная зарадная станцыя; Абсталяванне для электрамабіляў</string>
     <string name="poi_vehicle_ramp">Рамонтная эстакада/яма</string>
     <string name="poi_compressed_air">Кампрэсар для падпампоўкі шын</string>
     <string name="poi_parking">Паркоўка</string>
@@ -3604,7 +3604,7 @@
     <string name="poi_vehicle_military">Доступ для транспартных сродкаў: для вайскоўцаў</string>
     <string name="poi_vehicle_delivery">Доступ для транспартных сродкаў: кур’еры / дастаўка</string>
     <string name="poi_vehicle_forestry">Доступ для транспартных сродкаў: лясная гаспадарка</string>
-    <string name="poi_motorcar_yes">Доступ для аўтамабіляў:</string>
+    <string name="poi_motorcar_yes">Доступ для аўтамабіляў: так</string>
     <string name="poi_motorcar_private">Доступ для аўтамабіляў: прыватны</string>
     <string name="poi_motorcar_no">Доступ для аўтамабіляў: няма</string>
     <string name="poi_motorcar_destination">Доступ для аўтамабіляў: пункт прызначэння</string>
@@ -3804,7 +3804,7 @@
     <string name="poi_tactile_paving_primitive">Прымітыўнае</string>
     <string name="poi_tactile_paving_contrasted">Кантраснае</string>
     <string name="poi_traffic_signals_sound_locate">Толькі калі дазволеная хада</string>
-    <string name="poi_internet_access_fee_customers">Доступ да сеціва</string>
+    <string name="poi_internet_access_fee_customers">Доступ да сеціва: кліенты</string>
     <string name="poi_video_no">Не</string>
     <string name="poi_video_yes">Так</string>
     <string name="poi_booth">Тып стэнда</string>
@@ -3823,11 +3823,22 @@
     <string name="poi_recycling_small_electrical_appliances">Маленькія электрапрыборы</string>
     <string name="poi_beehive">Вулей</string>
     <string name="poi_nuts">Крама арэхаў</string>
-    <string name="poi_fuel_lng"/>
+    <string name="poi_fuel_lng">ЗПГ</string>
     <string name="poi_diplomatic_services_citizen_services_filter">Паслугі для грамадзян</string>
     <string name="poi_diplomatic_services_immigrant_visas_filter">Іміграцыйныя візы</string>
     <string name="poi_diplomatic_services_non_immigrant_visas_filter">Неіміграцыйныя візы</string>
     <string name="poi_liaison_filter">Сувязь</string>
     <string name="poi_consulate_filter">Консульства</string>
     <string name="poi_embassy_filter">Амбасада</string>
+    <string name="poi_embassy_high_commission">Вярхоўны камісарыят</string>
+    <string name="poi_embassy_delegation">Дэлегацыя</string>
+    <string name="poi_embassy_branch_embassy">Аддзяленне</string>
+    <string name="poi_embassy_yes">На чале з амбасадарам</string>
+    <string name="poi_diplomatic_liaison">Сувязь</string>
+    <string name="poi_diplomatic_embassy">Амбасада</string>
+    <string name="poi_radar_tower">Радыёлакацыйная вежа</string>
+    <string name="poi_parking_layby">Прыдарожная стаянка</string>
+    <string name="poi_parking_sheds">Навесы</string>
+    <string name="poi_parking_rooftop">Дах</string>
+    <string name="poi_gpx_point">Пункт GPX</string>
 </resources>

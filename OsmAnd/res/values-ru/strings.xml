@@ -40,8 +40,6 @@
     <string name="increase_search_radius">Увеличить радиус поиска</string>
     <string name="nothing_found">Ничего не найдено</string>
     <string name="nothing_found_descr">Изменить запрос или увеличить радиус поиска.</string>
-    <string name="quick_action_osmbugs_show">Показать OSM-заметки</string>
-    <string name="quick_action_osmbugs_hide">Скрыть OSM-заметки</string>
     <string name="quick_action_showhide_osmbugs_descr">Переключатель отображения OSM-заметок на карте.</string>
     <string name="sorted_by_distance">Отсортировано по расстоянию</string>
     <string name="search_favorites">Поиск в избранных</string>
@@ -2256,8 +2254,6 @@
     <string name="dialog_add_action_title">Добавить</string>
     <string name="quick_actions_delete">Удалить действие</string>
     <string name="quick_actions_delete_text">Вы уверены, что хотите удалить действие «%s»\?</string>
-    <string name="quick_action_favorites_show">Показать избранные</string>
-    <string name="quick_action_favorites_hide">Скрыть избранные</string>
     <string name="quick_action_poi_show">Показать %1$s</string>
     <string name="quick_action_poi_hide">Скрыть %1$s</string>
     <string name="quick_action_add_configure_map">Настройки карты</string>
@@ -2865,8 +2861,6 @@
     <string name="shared_string_swap">Поменять</string>
     <string name="show_more">Показать больше</string>
     <string name="tracks_on_map">Отображаемые треки</string>
-    <string name="quick_action_gpx_tracks_hide">Скрыть треки</string>
-    <string name="quick_action_gpx_tracks_show">Показать треки</string>
     <string name="time_of_day">Время суток</string>
     <string name="step_by_step">По шагам</string>
     <string name="routeInfo_road_types_name">Типы дорог</string>
@@ -3224,11 +3218,7 @@
     <string name="apply_preference_to_all_profiles">Вы можете применить это ко всем или только к выбранному профилю.</string>
     <string name="shared_preference">Общий</string>
     <string name="quick_action_contour_lines_descr">Переключатель, показывающая или скрывающая контурные линии на карте.</string>
-    <string name="quick_action_contour_lines_show">Показать контурные линии</string>
-    <string name="quick_action_contour_lines_hide">Скрыть контурные линии</string>
     <string name="quick_action_hillshade_descr">Переключатель, чтобы показать или скрыть затенение рельефа на карте.</string>
-    <string name="quick_action_hillshade_show">Показать затенение рельефа</string>
-    <string name="quick_action_hillshade_hide">Скрыть затенение рельефа</string>
     <string name="export_profile">Экспорт профиля</string>
     <string name="exported_osmand_profile">Профиль OsmAnd: %1$s</string>
     <string name="overwrite_profile_q">«%1$s» уже существует. Перезаписать\?</string>
@@ -3477,8 +3467,6 @@
     <string name="n_items_of_z">%1$s из %2$s</string>
     <string name="terrain_slider_description">Настройка минимального и максимального уровней масштабирования, при которых слой будет отображаться.</string>
     <string name="quick_action_terrain_descr">Переключатель, чтобы показать или скрыть слой рельефа местности на карте.</string>
-    <string name="quick_action_terrain_show">Показать рельеф</string>
-    <string name="quick_action_terrain_hide">Скрыть рельеф</string>
     <string name="shared_string_terrain">Рельеф</string>
     <string name="app_mode_ski_touring">Лыжный туризм</string>
     <string name="app_mode_ski_snowmobile">Снегоход</string>
@@ -3602,8 +3590,6 @@
 \n
 \n</string>
     <string name="additional_actions_descr">Функции, доступные при нажатии кнопки «%1$s».</string>
-    <string name="quick_action_transport_hide">Скрыть общественный транспорт</string>
-    <string name="quick_action_transport_show">Показать общественный транспорт</string>
     <string name="add_edit_favorite">Добавить или изменить избранное</string>
     <string name="create_edit_poi">Создать или изменить POI</string>
     <string name="back_to_editing">Возврат к редактированию</string>
@@ -3672,8 +3658,6 @@
     <string name="vessel_height_warning">Вы можете указать высоту судна, чтобы избегать низких мостов. Имейте в виду, что если мост раздвижной, будет использована его высота в открытом состоянии.</string>
     <string name="vessel_height_limit_description">Укажите высоту судна, чтобы избежать низких мостов. Имейте в виду, что если мост раздвижной, будет использована его высота в открытом состоянии.</string>
     <string name="vessel_width_limit_description">Укажите ширину судна, чтобы избежать узких мостов</string>
-    <string name="quick_action_mapillary_hide">Скрыть Mapillary</string>
-    <string name="quick_action_mapillary_show">Показать Mapillary</string>
     <string name="quick_action_showhide_mapillary_descr">Переключатель, чтобы показать или скрыть слой Mapillary на карте.</string>
     <string name="shared_string_legal">Законодательство</string>
     <string name="speed_cameras_legal_descr">В некоторых странах и регионах использование предупреждений о камерах контроля скорости запрещено законом. 
@@ -4006,4 +3990,13 @@
     <string name="activity_type_water_name">Вода</string>
     <string name="activity_type_winter_name">Зима</string>
     <string name="activity_type_riding_name">Верховая езда</string>
+    <string name="reverse_all_points">Инвертировать все точки</string>
+    <string name="routing_attr_allow_streams_description">Разрешить ручьи и стоки</string>
+    <string name="routing_attr_allow_streams_name">Разрешить ручьи и стоки</string>
+    <string name="open_place_reviews_plugin_description">OpenPlaceReviews - это управляемый сообществом проект об общественных местах, таких как рестораны, отели, музеи, путевые точки. Он собирает всю общедоступную информацию о них, такую как фотографии, обзоры, ссылки на другие системы, ссылки OpenStreetMap, Wikipedia.
+\n
+\nВсе данные OpenPlaceReview открыты и доступны всем: http://openplacereviews.org/data.
+\n
+\nВы можете узнать больше на: http://openplacereviews.org</string>
+    <string name="activity_type_racing_name">Гонки</string>
 </resources>

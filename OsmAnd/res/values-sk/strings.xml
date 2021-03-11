@@ -2124,8 +2124,6 @@
     <string name="quick_action_duplicate">Duplicitný názov rýchlej akcie</string>
     <string name="quick_action_showhide_favorites_descr">Prepínač pre zobrazenie alebo skrytie Obľúbených bodov na mape.</string>
     <string name="quick_action_showhide_poi_descr">Prepínač pre zobrazenie alebo skrytie bodov záujmu na mape.</string>
-    <string name="quick_action_favorites_show">Zobraziť Obľúbené body</string>
-    <string name="quick_action_favorites_hide">Skryť Obľúbené body</string>
     <string name="quick_action_poi_show">Zobraziť %1$s</string>
     <string name="quick_action_poi_hide">Skryť %1$s</string>
     <string name="quick_action_add_category">Pridať kategóriu</string>
@@ -2385,8 +2383,6 @@
     <string name="srtm_menu_download_descr">Stiahnite mapu \"Vrstevnice\" pre tento región.</string>
     <string name="sorted_by_distance">Zoradené podľa vzdialenosti</string>
     <string name="search_favorites">Hľadať v Obľúbených bodoch</string>
-    <string name="quick_action_osmbugs_show">Zobraziť OSM poznámky</string>
-    <string name="quick_action_osmbugs_hide">Skryť OSM poznámky</string>
     <string name="quick_action_showhide_osmbugs_descr">Tlačidlo pre zobrazenie alebo skrytie OSM poznámok na mape.</string>
     <string name="private_access_routing_req">Váš cieľ je v oblasti so súkromným prístupom. Povoliť vstup na súkromné cesty pre tento výlet\?</string>
     <string name="restart_search">Znovu začať hľadanie</string>
@@ -2842,8 +2838,6 @@
     <string name="exit_at">Vystúpte na</string>
     <string name="sit_on_the_stop">Nastúpte na zastávke</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Tlačidlo pre zobrazenie alebo skrytie zvolených stôp na mape.</string>
-    <string name="quick_action_gpx_tracks_hide">Skryť stopy</string>
-    <string name="quick_action_gpx_tracks_show">Zobraziť stopy</string>
     <string name="transfers_size">%1$d prestup(y)</string>
     <string name="add_start_and_end_points">Pridať východzí a cieľový bod</string>
     <string name="route_add_start_point">Pridať východzí bod</string>
@@ -3268,11 +3262,7 @@
     <string name="clear_confirmation_msg">Vymazať %1$s\?</string>
     <string name="layer_osm_edits">Úpravy OSM</string>
     <string name="quick_action_contour_lines_descr">Tlačidlo pre zobrazenie alebo skrytie vrstevníc na mape.</string>
-    <string name="quick_action_contour_lines_show">Zobraziť vrstevnice</string>
-    <string name="quick_action_contour_lines_hide">Skryť vrstevnice</string>
     <string name="quick_action_hillshade_descr">Tlačidlo pre zobrazenie alebo skrytie tieňovaných svahov na mape.</string>
-    <string name="quick_action_hillshade_show">Zobraziť tieňované svahy</string>
-    <string name="quick_action_hillshade_hide">Skryť tieňované svahy</string>
     <string name="tts_initialization_error">Nepodarilo sa spustiť modul prevodu textu na reč.</string>
     <string name="simulate_your_location_gpx_descr">Simulovať polohu pomocou zaznamenanej stopy GPX.</string>
     <string name="profile_import">Importovať profil</string>
@@ -3486,8 +3476,6 @@
     <string name="recalculate_route_distance_promo">Trasa bude prepočítaná ak vzdialenosť od trasy k aktuálnej polohe je väčšia ako zvolená hodnota.</string>
     <string name="n_items_of_z">%1$s z %2$s</string>
     <string name="download_slope_maps">Sklony svahov</string>
-    <string name="quick_action_terrain_hide">Skryť terén</string>
-    <string name="quick_action_terrain_show">Zobraziť terén</string>
     <string name="quick_action_terrain_descr">Tlačidlo pre zobrazenie alebo skrytie vrstvy terénu na mape.</string>
     <string name="delete_description">Vymazať popis</string>
     <string name="add_description">Pridať popis</string>
@@ -3599,8 +3587,6 @@
 \n • Opravy chýb pre jazyky písané sprava doľava
 \n
 \n</string>
-    <string name="quick_action_transport_hide">Skryť verejnú dopravu</string>
-    <string name="quick_action_transport_show">Zobraziť verejnú dopravu</string>
     <string name="quick_action_transport_descr">Tlačidlo na zobrazenie alebo skrytie verejnej dopravy na mape.</string>
     <string name="create_edit_poi">Vytvoriť alebo upraviť bod záujmu</string>
     <string name="parking_positions">Parkovacie miesta</string>
@@ -3681,8 +3667,6 @@
 \nZvoľte %2$s a všetky údaje o rýchlostných radaroch budú odstránené, až kým nebude OsmAnd znovu preinštalovaný.</string>
     <string name="keep_active">Ponechať aktívne</string>
     <string name="speed_cameras_alert">V niektorých krajinách je varovanie pred rýchlostnými radarmi zakázané zákonom.</string>
-    <string name="quick_action_mapillary_hide">Skryť Mapillary</string>
-    <string name="quick_action_mapillary_show">Zobraziť Mapillary</string>
     <string name="quick_action_showhide_mapillary_descr">Prepínač pre zobrazenie alebo skrytie vrstvy Mapillary na mape.</string>
     <string name="shared_string_bearing">Smerovanie</string>
     <string name="item_deleted">%1$s vymazané</string>

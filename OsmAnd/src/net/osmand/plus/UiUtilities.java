@@ -1,6 +1,7 @@
 package net.osmand.plus;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -369,13 +370,14 @@ public class UiUtilities {
 				break;
 		}
 		//Looks like screenOrientation correction must not be applied for devices without compass?
-		Sensor compass = ((SensorManager) app.getSystemService(Context.SENSOR_SERVICE)).getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
-		if (compass == null) {
+		PackageManager manager = app.getPackageManager();
+		boolean hasCompass = manager.hasSystemFeature(PackageManager.FEATURE_SENSOR_COMPASS);
+		if (!hasCompass) {
 			screenOrientation = 0;
 		}
 		return screenOrientation;
 	}
-
+	
 	public static void setupSnackbar(Snackbar snackbar, boolean nightMode) {
 		setupSnackbar(snackbar, nightMode, null, null, null, null);
 	}
@@ -633,8 +635,9 @@ public class UiUtilities {
 		}
 		int activeDisableColor = getColorWithAlpha(activeColor, 0.25f);
 		ColorStateList activeCsl = new ColorStateList(states, new int[] {activeColor, activeDisableColor});
-		int inactiveColor = ContextCompat.getColor(ctx, nightMode ? R.color.icon_color_default_dark : R.color.icon_color_secondary_light);
-		ColorStateList inactiveCsl = new ColorStateList(states, new int[] {inactiveColor, inactiveColor});
+		int inactiveColor = getColorWithAlpha(activeColor, 0.5f);
+		int inactiveDisableColor = ContextCompat.getColor(ctx, nightMode ? R.color.icon_color_default_dark : R.color.icon_color_secondary_light);
+		ColorStateList inactiveCsl = new ColorStateList(states, new int[] {inactiveColor, inactiveDisableColor});
 		slider.setTrackActiveTintList(activeCsl);
 		slider.setTrackInactiveTintList(inactiveCsl);
 		slider.setHaloTintList(activeCsl);

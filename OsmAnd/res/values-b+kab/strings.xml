@@ -1044,8 +1044,6 @@
     <string name="quick_action_add_configure_map">Swel…</string>
     <string name="quick_action_poi_hide">Ffer %1$S</string>
     <string name="quick_action_poi_show">Sken %1$S</string>
-    <string name="quick_action_favorites_hide">Inurifen</string>
-    <string name="quick_action_favorites_show">Sken inurifen</string>
     <string name="quick_actions_delete">Kkes tigawt</string>
     <string name="quick_action_edit_action">Tigawt</string>
     <string name="quick_action_navigation_voice_on">Taɣect:</string>
@@ -1254,8 +1252,6 @@
     <string name="select_distance_route_will_recalc">Fren ameccaq ugar n wanida ara d-yettwasiden ubrid.</string>
     <string name="recalculate_route_distance_promo">Abrid ad yettwasiḍen ticki ameccaq gar ubrid akked wadig-ik yugar azal i d-yettwammlen.</string>
     <string name="download_slope_maps">Iberdan isnawanen</string>
-    <string name="quick_action_terrain_hide">Ffer akal</string>
-    <string name="quick_action_terrain_show">Sken akal</string>
     <string name="quick_action_terrain_descr">Taqeffalt i uskan neɣ tuffra n tissi n wakal n tkarḍa.</string>
     <string name="delete_description">Kkes aglam</string>
     <string name="select_group">Fren agraw</string>

@@ -380,10 +380,10 @@
     <string name="error_avoid_specific_road">No se ha encontrado un desvío</string>
     <string name="map_update">Actualización disponible para %1$s mapa(s)</string>
     <string name="wake_on_voice">Encender pantalla</string>
-    <string name="osmand_rastermaps_plugin_description">Accede a tantos tipos de mapas en línea (llamados teselas o ráster) que desees, desde teselas predefinidas de OSM (como Mapnik) a imágenes satelitales y capas de propósito especial como mapas del tiempo, mapas del clima, mapas geológicos, capas de sombreado, etc.
-\n 
-\nCualquiera de estos mapas puede usarse como el mapa predefinido que se mostrará, o como una superposición o subyacencia de otro mapa base (como los mapas estándar de OsmAnd en línea). Ciertos elementos de los mapas vectoriales de OsmAnd pueden ocultarse a través del menú «Configurar mapa» para hacer cualquier subyacencia mas visible. 
-\n 
+    <string name="osmand_rastermaps_plugin_description">Accede a tantos tipos de mapas en línea (llamados teselas o ráster) que desees, desde teselas predefinidas de OSM (como Mapnik) a imágenes satelitales y capas de propósito especial como mapas meteorológicos, mapas del clima, mapas geológicos, capas de sombreado, etc.
+\n
+\nCualquiera de estos mapas puede usarse como el mapa predefinido que se mostrará, o como una superposición o subyacencia de otro mapa base (como los mapas estándar de OsmAnd en línea). Ciertos elementos de los mapas vectoriales de OsmAnd pueden ocultarse a través del menú «Configurar mapa» para hacer cualquier subyacencia mas visible.
+\n
 \nDescarga las teselas de los mapas directamente en línea, o prepáralo para su uso sin conexión (copiar manualmente en la carpeta de datos OsmAnd) como una base de datos SQLite que puede ser producida por una variedad de herramientas de preparación de mapas de terceros.</string>
     <string name="record_plugin_description">Activa la funcionalidad para registrar y guardar tus trazas manualmente pulsando el widget de grabación GPX en el mapa, o automáticamente registrando todas tus rutas navegadas en un archivo GPX.
 \n
@@ -418,7 +418,7 @@
     <string name="osmand_parking_plugin_description">Registra dónde se ha estacionado el automóvil, incluyendo cuánto tiempo queda. 
 \n Tanto la ubicación como el tiempo del estacionamiento se muestran en el menú principal y en un widget sobre el mapa. Se puede añadir una alarma de recordatorio al calendario de Android.</string>
     <string name="osmand_distance_planning_plugin_description">Crea caminos pulsando el mapa, usando o modificando archivos GPX existentes, para planificar un viaje y medir la distancia entre puntos. El resultado puede guardarse como un archivo GPX y usarse luego para la orientación.</string>
-    <string name="osmand_accessibility_description">Activa las funciones de accesibilidad del dispositivo, directamente en OsmAnd. Facilita por ejemplo, el ajuste de la velocidad de la voz para voces de texto a voz, la configuración de navegación D-pad, usando la rueda de desplazamiento para el control del zoom, o la retroalimentación de texto a voz, por ejemplo, para anunciar la ubicación automáticamente.</string>
+    <string name="osmand_accessibility_description">Activa las funciones de accesibilidad del dispositivo, directamente en OsmAnd. Facilita por ejemplo, el ajuste de la velocidad de la voz para voces de texto a voz, la configuración de navegación del pad direccional, usando la rueda de desplazamiento para el control del zoom, o la retroalimentación de texto a voz, por ejemplo, para anunciar la ubicación automáticamente.</string>
     <string name="osm_editing_plugin_description">Haz contribuciones en OSM, como el crear o modificar objetos PDI, abrir o comentar notas de OSM y contribuir con archivos de trazas GPX grabados en OsmAnd, proporcionando tu nombre de usuario y contraseña. OpenStreetMap.org es un proyecto de mapeo de dominio público, global, libre e impulsado por la comunidad.</string>
     <string name="osmand_development_plugin_description">Ajusta las funciones de desarrollo y depuración, como la simulación de navegación, el rendimiento del renderizado o las indicaciones por voz. Destinado para desarrolladores, no es necesario para el normal uso de la aplicación.</string>
     <string name="world_ski_missing">Descargar el mapa especial sin conexión para mostrar las instalaciones de esquí.</string>
@@ -1056,8 +1056,8 @@
     <string name="delete_confirmation_msg">¿Borrar «%1$s»?</string>
     <string name="city_type_suburb">Suburbio</string>
     <string name="city_type_hamlet">Aldea</string>
-    <string name="city_type_village">Villa</string>
-    <string name="city_type_town">Pueblo</string>
+    <string name="city_type_village">Pueblo</string>
+    <string name="city_type_town">Ciudad pequeña</string>
     <string name="city_type_city">Ciudad</string>
     <string name="animate_route_off">Parar simulación</string>
     <string name="animate_route">Iniciar simulación</string>
@@ -1662,7 +1662,7 @@
     <string name="shared_string_navigation">Navegación</string>
     <string name="osmand_running_in_background">Ejecutar en modo reposo</string>
     <string name="favourites_edit_dialog_title">Información del favorito</string>
-    <string name="favourites_context_menu_add">Añadir a Favoritos</string>
+    <string name="favourites_context_menu_add">Añadir favorito</string>
     <string name="roads">Caminos</string>
     <string name="default_speed_system_descr">Define la unidad de velocidad.</string>
     <string name="default_speed_system">Unidad de velocidad</string>
@@ -2120,8 +2120,6 @@
     <string name="quick_action_duplicate">Nombre de la acción rápida duplicado</string>
     <string name="quick_action_showhide_favorites_descr">Un botón que muestra u oculta los puntos favoritos en el mapa.</string>
     <string name="quick_action_showhide_poi_descr">Un botón que muestra u oculta los PDI en el mapa.</string>
-    <string name="quick_action_favorites_show">Mostrar Favoritos</string>
-    <string name="quick_action_favorites_hide">Ocultar Favoritos</string>
     <string name="quick_action_poi_show">Mostrar %1$s</string>
     <string name="quick_action_poi_hide">Ocultar %1$s</string>
     <string name="quick_action_add_category">Añadir una categoría</string>
@@ -2386,8 +2384,6 @@
     <string name="hillshade_menu_download_descr">Descarga la capa superpuesta del mapa «Sombreado» para mostrar el sombreado vertical.</string>
     <string name="hillshade_purchase_header">Instala el complemento «Curvas de nivel» para mostrar las áreas verticales graduadas.</string>
     <string name="hide_from_zoom_level">Ocultar desde el nivel de zoom</string>
-    <string name="quick_action_osmbugs_show">Mostrar notas de OSM</string>
-    <string name="quick_action_osmbugs_hide">Ocultar notas de OSM</string>
     <string name="quick_action_showhide_osmbugs_descr">Un botón que muestra u oculta las notas de OSM en el mapa.</string>
     <string name="sorted_by_distance">Ordenados por distancia</string>
     <string name="search_favorites">Buscar en Favoritos</string>
@@ -2672,7 +2668,7 @@
     <string name="shared_string_wikivoyage">Wikiviajes</string>
     <string name="index_item_world_wikivoyage">Artículos de Wikiviajes en todo el mundo</string>
     <string name="online_webpage_warning">La página sólo está disponible en línea. ¿Abrirla en el navegador web?</string>
-    <string name="images_cache">Caché de imágenes</string>
+    <string name="images_cache">Almacén de imágenes</string>
     <string name="delete_search_history">Borrar historial de búsquedas</string>
     <string name="show_images">Mostrar imágenes</string>
     <string name="shared_string_dont">No</string>
@@ -2844,8 +2840,6 @@
     <string name="exit_at">Bajar en</string>
     <string name="sit_on_the_stop">Esperar en la parada</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Un botón que muestra u oculta las trazas elegidas en el mapa.</string>
-    <string name="quick_action_gpx_tracks_hide">Ocultar trazas</string>
-    <string name="quick_action_gpx_tracks_show">Mostrar trazas</string>
     <string name="use_osm_live_public_transport_description">Activar el transporte público para los cambios de OsmAnd Live.</string>
     <string name="use_osm_live_public_transport">Transporte público en OsmAnd Live</string>
     <string name="transfers_size">%1$d transbordo(s)</string>
@@ -3261,11 +3255,7 @@
     <string name="routing_attr_driving_style_prefer_unpaved_description">Prefiere los caminos sin pavimentar a los pavimentados para el trazado de rutas.</string>
     <string name="layer_osm_edits">Ediciones de OSM</string>
     <string name="quick_action_contour_lines_descr">Un botón que muestra u oculta las curvas de nivel en el mapa.</string>
-    <string name="quick_action_contour_lines_show">Mostrar curvas de nivel</string>
-    <string name="quick_action_contour_lines_hide">Ocultar curvas de nivel</string>
     <string name="quick_action_hillshade_descr">Un botón que muestra u oculta el sombreado de las colinas en el mapa.</string>
-    <string name="quick_action_hillshade_show">Mostrar el sombreado</string>
-    <string name="quick_action_hillshade_hide">Ocultar el sombreado</string>
     <string name="tts_initialization_error">Imposible iniciar el motor de habla sintetizada.</string>
     <string name="simulate_your_location_gpx_descr">Simular la ubicación usando una traza GPX grabada.</string>
     <string name="export_profile">Exportar perfil</string>
@@ -3313,7 +3303,7 @@
     <string name="select_color">Elegir el color</string>
     <string name="edit_profiles_descr">Los perfiles predefinidos de OsmAnd no se pueden borrar, sino desactivar (en la pantalla anterior) u ordenarse en la parte inferior.</string>
     <string name="edit_profiles">Editar perfiles</string>
-    <string name="select_nav_profile_dialog_message">El «Tipo de navegación» rige la forma en que se calculan las rutas.</string>
+    <string name="select_nav_profile_dialog_message">El «Tipo de navegación» determina cómo se calculan las rutas.</string>
     <string name="profile_appearance">Aspecto del perfil</string>
     <string name="choose_icon_color_name">Icono, color y nombre</string>
     <string name="reorder_profiles">Editar la lista de perfiles</string>
@@ -3489,8 +3479,6 @@
     <string name="terrain_empty_state_text">Permite ver el sombreado o el mapa de pendientes. Puedes leer más sobre estos tipos de mapas en nuestro sitio.</string>
     <string name="shared_string_hillshade">Sombreado</string>
     <string name="download_slope_maps">Pendientes</string>
-    <string name="quick_action_terrain_hide">Ocultar terreno</string>
-    <string name="quick_action_terrain_show">Mostrar terreno</string>
     <string name="quick_action_terrain_descr">Un botón que muestra u oculta la capa del terreno en el mapa.</string>
     <string name="delete_description">Borrar descripción</string>
     <string name="add_description">Añadir descripción</string>
@@ -3555,7 +3543,7 @@
     <string name="lang_ky">Kirguís</string>
     <string name="lang_kk">Kazajo</string>
     <string name="lang_jv">Javanés</string>
-    <string name="lang_gu">Gujarati</string>
+    <string name="lang_gu">Gujaratí</string>
     <string name="lang_cv">Chuvash</string>
     <string name="lang_ce">Checheno</string>
     <string name="lang_bar">Bávaro</string>
@@ -3582,7 +3570,7 @@
     <string name="map_markers_item">Marcadores del mapa</string>
     <string name="favorites_item">Favoritos</string>
     <string name="subscription_osmandlive_item">Suscripción - OsmAnd Live</string>
-    <string name="osmand_purchases_item">Compras de OsmAnd</string>
+    <string name="osmand_purchases_item">Compras en OsmAnd</string>
     <string name="legend_item_description">La guía para la simbología de un mapa.</string>
     <string name="navigation_profiles_item">Perfiles de navegación</string>
     <string name="release_3_7">• Nuevos mapas sin conexión de las pendientes
@@ -3605,8 +3593,6 @@
 \n
 \n</string>
     <string name="additional_actions_descr">Puedes acceder a estas acciones pulsando el botón «%1$s».</string>
-    <string name="quick_action_transport_hide">Ocultar transporte público</string>
-    <string name="quick_action_transport_show">Mostrar transporte público</string>
     <string name="quick_action_transport_descr">Botón que muestra u oculta el transporte público en el mapa.</string>
     <string name="create_edit_poi">Crear o editar PDI</string>
     <string name="parking_positions">Puestos de estacionamiento</string>
@@ -3689,8 +3675,6 @@
     <string name="shared_string_legal">Legal</string>
     <string name="keep_active">Mantener</string>
     <string name="shared_string_uninstall">Desinstalar</string>
-    <string name="quick_action_mapillary_hide">Ocultar Mapillary</string>
-    <string name="quick_action_mapillary_show">Mostrar Mapillary</string>
     <string name="quick_action_showhide_mapillary_descr">Un botón que alterna la capa de Mapillary en el mapa.</string>
     <string name="shared_string_bearing">Rumbo</string>
     <string name="item_deleted">%1$s borrado</string>
@@ -3910,7 +3894,7 @@
     <string name="select_picture">Elegir imagen</string>
     <string name="lang_de_casual">Alemán (casual)</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
-    <string name="app_mode_light_aircraft">Avión ligero</string>
+    <string name="app_mode_light_aircraft">Aeronave ligera</string>
     <string name="plan_route_join_segments">Unir segmentos</string>
     <string name="plan_route_split_before">Dividir antes</string>
     <string name="plan_route_split_after">Dividir después</string>

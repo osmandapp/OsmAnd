@@ -48,6 +48,10 @@ public class QuickAction {
     	return actionType == null ? 0 : actionType.getNameRes();
     }
 
+	public int getActionNameRes() {
+		return actionType == null ? 0 : actionType.getActionNameRes();
+	}
+
     public int getIconRes() {
 		return actionType == null ? 0 : actionType.getIconRes();
     }

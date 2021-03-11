@@ -4345,4 +4345,6 @@
 	<string name="poi_conference_centre">Conference centre</string>
 	<string name="poi_geodesist">Geodesist</string>
 
+	<string name="poi_local_ref">Local ref</string>
+
 </resources>

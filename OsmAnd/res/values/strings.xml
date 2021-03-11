@@ -12,7 +12,8 @@
 
 -->
 
-    <string name="quick_action_showhide_title">Show/hide</string>
+    <string name="shared_string_interval">Interval</string>
+    <string name="quick_action_show_hide_title">Show/hide</string>
     <string name="copy_poi_name">Copy POI name</string>
     <string name="track_recording_will_be_continued">The recording will be continued.</string>
     <string name="select_category_descr">Select category or add new one</string>
@@ -28,8 +29,6 @@
     <string name="latest_openstreetmap_update">Latest OpenStreetMap update available:</string>
     <string name="map_widget_distance_by_tap">Distance by tap</string>
     <string name="quick_action_coordinates_widget_descr">A toggle to show or hide the Coordinates widget on the map.</string>
-    <string name="quick_action_coordinates_widget_show">Show Coordinates widget</string>
-    <string name="quick_action_coordinates_widget_hide">Hide Coordinates widget</string>
     <string name="routing_attr_height_obstacles_description">Routing could avoid strong uphills.</string>
     <string name="app_restart_required">Application restart required to apply some settings.</string>
     <string name="on_pause">On pause</string>
@@ -352,8 +351,6 @@
     <string name="routing_attr_length_name">Length limit</string>
     <string name="routing_attr_length_description">Specify vehicle length to be permitted on routes.</string>
     <string name="quick_action_showhide_mapillary_descr">A toggle to show or hide the Mapillary layer on the map.</string>
-    <string name="quick_action_mapillary_show">Show Mapillary</string>
-    <string name="quick_action_mapillary_hide">Hide Mapillary</string>
     <string name="vessel_width_limit_description">Set vessel width to avoid narrow bridges</string>
     <string name="vessel_height_limit_description">Set vessel height to avoid low bridges. Keep in mind, if the bridge is movable, we will use its height in the open state.</string>
     <string name="vessel_height_warning">You can set vessel height to avoid low bridges. Keep in mind, if the bridge is movable, we will use its height in the open state.</string>
@@ -430,8 +427,6 @@
     <string name="parking_positions">Parking positions</string>
     <string name="create_edit_poi">Create or edit POI</string>
     <string name="quick_action_transport_descr">Button showing or hiding public transport on the map.</string>
-    <string name="quick_action_transport_show">Show public transport</string>
-    <string name="quick_action_transport_hide">Hide public transport</string>
     <string name="release_3_7">
     • New offline Slope maps\n\n
     • Full customization of Favorites and GPX Waypoints – custom colors, icons, shapes\n\n
@@ -529,8 +524,6 @@
     <string name="add_description">Add description</string>
     <string name="delete_description">Delete description</string>
     <string name="quick_action_terrain_descr">A button to show or hide terrain layer on the map.</string>
-    <string name="quick_action_terrain_show">Show terrain</string>
-    <string name="quick_action_terrain_hide">Hide terrain</string>
     <string name="download_slope_maps">Slopes</string>
     <string name="n_items_of_z">%1$s of %2$s</string>
     <string name="recalculate_route_distance_promo">The route will be recalculated if the distance from the route to the current location is more than selected value.</string>
@@ -731,11 +724,7 @@
     <string name="tts_initialization_error">Cannot start text-to-speech engine.</string>
     <string name="layer_osm_edits">OSM edits</string>
     <string name="quick_action_contour_lines_descr">Button showing or hiding contour lines on the map.</string>
-    <string name="quick_action_contour_lines_show">Show contour lines</string>
-    <string name="quick_action_contour_lines_hide">Hide contour lines</string>
     <string name="quick_action_hillshade_descr">A button to show or hide hillshades on the map.</string>
-    <string name="quick_action_hillshade_show">Show hillshade</string>
-    <string name="quick_action_hillshade_hide">Hide hillshade</string>
     <string name="apply_preference_to_all_profiles">You can apply this change to all or only the selected profile.</string>
     <string name="shared_preference">Shared</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Prefer unpaved roads</string>
@@ -1123,8 +1112,6 @@
     <string name="show_more">Show more</string>
     <string name="tracks_on_map">Displayed tracks</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">A button to show or hide selected tracks on the map.</string>
-    <string name="quick_action_gpx_tracks_hide">Hide Tracks</string>
-    <string name="quick_action_gpx_tracks_show">Show Tracks</string>
     <string name="add_destination_query">Please set the destination first</string>
     <string name="previous_route">Previous route</string>
     <string name="add_home">Add home</string>
@@ -1534,8 +1521,6 @@
     <string name="increase_search_radius">Increase search radius</string>
     <string name="nothing_found">Nothing found</string>
     <string name="nothing_found_descr">Change the search or increase its radius.</string>
-    <string name="quick_action_osmbugs_show">Show OSM notes</string>
-    <string name="quick_action_osmbugs_hide">Hide OSM notes</string>
     <string name="quick_action_showhide_osmbugs_descr">Button to show or hide OSM notes on the map.</string>
     <string name="sorted_by_distance">Sorted by distance</string>
     <string name="search_favorites">Search in Favorites</string>
@@ -4017,8 +4002,6 @@
     <string name="quick_action_duplicate">Quick action name duplicate</string>
     <string name="quick_action_showhide_favorites_descr">A toggle to show or hide the Favorite points on the map.</string>
     <string name="quick_action_showhide_poi_descr">A toggle to show or hide POIs on the map.</string>
-    <string name="quick_action_favorites_show">Show Favorites</string>
-    <string name="quick_action_favorites_hide">Hide Favorites</string>
     <string name="quick_action_poi_show">Show %1$s</string>
     <string name="quick_action_poi_hide">Hide %1$s</string>
     <string name="quick_action_add_category">Add a category</string>

@@ -16,7 +16,7 @@ public class ShowHideOSMBugAction extends QuickAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(24,
 			"osmbug.showhide", ShowHideOSMBugAction.class)
-			.nameActionRes(R.string.quick_action_showhide_title)
+			.nameActionRes(R.string.quick_action_show_hide_title)
 			.nameRes(R.string.osm_notes).iconRes(R.drawable.ic_action_osm_note).nonEditable()
 			.category(QuickActionType.CONFIGURE_MAP);
 
@@ -55,10 +55,9 @@ public class ShowHideOSMBugAction extends QuickAction {
 
 	@Override
 	public String getActionText(OsmandApplication application) {
-
-		return application.getSettings().SHOW_OSM_BUGS.get()
-				? application.getString(R.string.quick_action_osmbugs_hide)
-				: application.getString(R.string.quick_action_osmbugs_show);
+		String nameRes = application.getString(getNameRes());
+		String actionName = isActionWithSlash(application) ? application.getString(R.string.shared_string_hide) : application.getString(R.string.shared_string_show);
+		return application.getString(R.string.ltr_or_rtl_combine_via_dash, actionName, nameRes);
 	}
 
 	@Override
