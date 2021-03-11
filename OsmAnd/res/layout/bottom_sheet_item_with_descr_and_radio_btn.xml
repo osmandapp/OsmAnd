@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="@dimen/bottom_sheet_large_list_item_height"
@@ -8,9 +7,10 @@
 	android:orientation="vertical">
 
 	<LinearLayout
-		android:layout_width="match_parent"
 		android:id="@+id/descriptionContainer"
+		android:layout_width="match_parent"
 		android:layout_height="@dimen/bottom_sheet_large_list_item_height"
+		android:background="?attr/selectableItemBackground"
 		android:gravity="center_vertical"
 		android:orientation="horizontal"
 		android:paddingStart="@dimen/list_content_padding"
@@ -61,7 +61,7 @@
 			android:id="@+id/compound_button"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:background="@null"
+			android:background="?attr/selectableItemBackground"
 			android:clickable="false"
 			android:focusable="false"
 			android:saveEnabled="false" />
