@@ -80,6 +80,7 @@ import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayT
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.runLiveUpdate;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.setAlarmForPendingIntent;
+import static net.osmand.plus.liveupdates.LiveUpdatesSettingsDialogFragmentNew.getTertiaryTextColorId;
 import static net.osmand.plus.monitoring.TripRecordingActiveBottomSheet.getActiveTextColorId;
 import static net.osmand.plus.monitoring.TripRecordingActiveBottomSheet.getOsmandIconColorId;
 import static net.osmand.plus.monitoring.TripRecordingActiveBottomSheet.getSecondaryIconColorId;
@@ -520,8 +521,12 @@ public class LiveUpdatesFragmentNew extends BaseOsmAndDialogFragment implements 
 			boolean liveUpdateOn = settings.IS_LIVE_UPDATES_ON.get();
 			CommonPreference<Boolean> localUpdateOn = preferenceForLocalIndex(item, settings);
 //			IncrementalChangesManager changesManager = app.getResourceManager().getChangesManager();
-			UiUtilities.setupCompoundButton(option, nightMode, CompoundButtonType.GLOBAL);
 			option.setChecked(localUpdateOn.get());
+			if (!liveUpdateOn && localUpdateOn.get()) {
+				UiUtilities.setupCompoundButton(nightMode, ContextCompat.getColor(app, getTertiaryTextColorId(nightMode)), option);
+			} else {
+				UiUtilities.setupCompoundButton(option, nightMode, CompoundButtonType.GLOBAL);
+			}
 
 			title.setText(getNameToDisplay(item, app));
 
