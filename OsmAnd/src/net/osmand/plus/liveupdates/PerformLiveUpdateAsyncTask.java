@@ -46,20 +46,20 @@ public class PerformLiveUpdateAsyncTask
 	@NonNull
 	private final String localIndexFileName;
 	private final boolean userRequested;
-	private final AsyncResponse runOnPost;
+	private final LiveUpdateListener listener;
 
-	public interface AsyncResponse {
+	public interface LiveUpdateListener {
 		void processFinish();
 	}
 
 	public PerformLiveUpdateAsyncTask(@NonNull Context context,
 									  @NonNull String localIndexFileName,
 									  boolean userRequested,
-									  @Nullable AsyncResponse runOnPost) {
+									  @Nullable LiveUpdateListener listener) {
 		this.context = context;
 		this.localIndexFileName = localIndexFileName;
 		this.userRequested = userRequested;
-		this.runOnPost = runOnPost;
+		this.listener = listener;
 	}
 
 	@Override
@@ -149,8 +149,8 @@ public class PerformLiveUpdateAsyncTask
 								((DownloadIndexesThread.DownloadEvents) context).downloadInProgress();
 							}
 							updateLatestAvailability(application, localIndexFileName);
-							if (runOnPost != null) {
-								runOnPost.processFinish();
+							if (listener != null) {
+								listener.processFinish();
 							}
 						} else {
 							LOG.debug("onPostExecute: Not enough space for updates");
@@ -163,8 +163,8 @@ public class PerformLiveUpdateAsyncTask
 					((DownloadIndexesThread.DownloadEvents) context).downloadInProgress();
 					if (userRequested && context instanceof DownloadActivity) {
 						updateLatestAvailability(application, localIndexFileName);
-						if (runOnPost != null) {
-							runOnPost.processFinish();
+						if (listener != null) {
+							listener.processFinish();
 						}
 						application.showShortToastMessage(R.string.no_updates_available);
 					}

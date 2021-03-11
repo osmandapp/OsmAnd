@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.liveupdates.PerformLiveUpdateAsyncTask.AsyncResponse;
+import net.osmand.plus.liveupdates.PerformLiveUpdateAsyncTask.LiveUpdateListener;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
@@ -254,8 +254,8 @@ public class LiveUpdatesHelper {
 		}
 	}
 
-	public static void runLiveUpdate(Context context, final String fileName, boolean userRequested, @Nullable final AsyncResponse runOnPost) {
+	public static void runLiveUpdate(Context context, final String fileName, boolean userRequested, @Nullable final LiveUpdateListener listener) {
 		final String fnExt = Algorithms.getFileNameWithoutExtension(new File(fileName));
-		new PerformLiveUpdateAsyncTask(context, fileName, userRequested, runOnPost).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, fnExt);
+		new PerformLiveUpdateAsyncTask(context, fileName, userRequested, listener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, fnExt);
 	}
 }

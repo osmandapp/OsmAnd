@@ -52,7 +52,7 @@ import net.osmand.plus.liveupdates.LiveUpdatesHelper.TimeOfDay;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper.UpdateFrequency;
 import net.osmand.plus.liveupdates.LiveUpdatesSettingsDialogFragmentNew.OnLiveUpdatesForLocalChange;
 import net.osmand.plus.liveupdates.LoadLiveMapsTask.LocalIndexInfoAdapter;
-import net.osmand.plus.liveupdates.PerformLiveUpdateAsyncTask.AsyncResponse;
+import net.osmand.plus.liveupdates.PerformLiveUpdateAsyncTask.LiveUpdateListener;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.widgets.TextViewEx;
@@ -309,7 +309,7 @@ public class LiveUpdatesFragmentNew extends BaseOsmAndDialogFragment implements 
 	private void showUpdateDialog() {
 		startUpdateDateAsyncTask();
 		if (!Algorithms.isEmpty(adapter.mapsList)) {
-			final AsyncResponse refreshAfterUpdate = new AsyncResponse() {
+			final LiveUpdateListener listener = new LiveUpdateListener() {
 				@Override
 				public void processFinish() {
 					adapter.notifyDataSetChanged();
@@ -317,7 +317,7 @@ public class LiveUpdatesFragmentNew extends BaseOsmAndDialogFragment implements 
 			};
 			if (adapter.countEnabled == 1) {
 				LocalIndexInfo li = adapter.mapsList.get(0);
-				runLiveUpdate(getActivity(), li.getFileName(), false, refreshAfterUpdate);
+				runLiveUpdate(getActivity(), li.getFileName(), false, listener);
 			} else if (adapter.countEnabled > 1) {
 				AlertDialog.Builder bld = new AlertDialog.Builder(getMyActivity());
 				bld.setMessage(R.string.update_all_maps_now);
@@ -328,7 +328,7 @@ public class LiveUpdatesFragmentNew extends BaseOsmAndDialogFragment implements 
 						for (LocalIndexInfo li : adapter.mapsList) {
 							CommonPreference<Boolean> localUpdateOn = preferenceForLocalIndex(li.getFileName(), settings);
 							if (localUpdateOn.get()) {
-								runLiveUpdate(getActivity(), li.getFileName(), false, refreshAfterUpdate);
+								runLiveUpdate(getActivity(), li.getFileName(), false, listener);
 							}
 						}
 					}
@@ -650,7 +650,7 @@ public class LiveUpdatesFragmentNew extends BaseOsmAndDialogFragment implements 
 		final CommonPreference<Boolean> liveUpdatePreference = preferenceForLocalIndex(fileName, settings);
 		liveUpdatePreference.set(newValue);
 		if (settings.IS_LIVE_UPDATES_ON.get() && liveUpdatePreference.get()) {
-			runLiveUpdate(getActivity(), fileName, true, new AsyncResponse() {
+			runLiveUpdate(getActivity(), fileName, true, new LiveUpdateListener() {
 				@Override
 				public void processFinish() {
 					runSort();
@@ -673,7 +673,7 @@ public class LiveUpdatesFragmentNew extends BaseOsmAndDialogFragment implements 
 	@Override
 	public void forceUpdateLocal(String fileName, boolean userRequested, final Runnable callback) {
 		if (settings.IS_LIVE_UPDATES_ON.get()) {
-			runLiveUpdate(getActivity(), fileName, userRequested, new AsyncResponse() {
+			runLiveUpdate(getActivity(), fileName, userRequested, new LiveUpdateListener() {
 				@Override
 				public void processFinish() {
 					updateList();
