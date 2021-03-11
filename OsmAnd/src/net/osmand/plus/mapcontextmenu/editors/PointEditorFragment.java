@@ -32,7 +32,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.widgets.AutoCompleteTextViewEx;
 import net.osmand.util.Algorithms;
 
@@ -77,7 +76,7 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 				dismiss();
 			}
 		});
-		
+
 		int activeColorResId = !editor.isLight() ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
 
 		Button saveButton = (Button) view.findViewById(R.id.save_button);
@@ -182,7 +181,7 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 	protected DialogFragment createSelectCategoryDialog() {
 		PointEditor editor = getEditor();
 		if (editor != null) {
-			return SelectFavoriteCategoryBottomSheet.createInstance(editor.getFragmentTag());
+			return SelectFavoriteCategoryBottomSheet.createInstance(editor.getFragmentTag(), "");
 		} else {
 			return null;
 		}
@@ -364,7 +363,7 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 		if (isPersonalCategoryDisplayName(requireContext(), name)) {
 			return PERSONAL_CATEGORY;
 		}
-		if(name.equals(getDefaultCategoryName())) {
+		if (name.equals(getDefaultCategoryName())) {
 			return "";
 		}
 		return name;

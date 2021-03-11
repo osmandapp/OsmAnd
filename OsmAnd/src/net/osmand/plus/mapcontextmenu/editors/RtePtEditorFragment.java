@@ -23,7 +23,7 @@ public class RtePtEditorFragment extends WptPtEditorFragment {
 	@Override
 	protected DialogFragment createSelectCategoryDialog() {
 		PointEditor editor = getEditor();
-		return editor != null ? SelectFavoriteCategoryBottomSheet.createInstance(editor.getFragmentTag()) : null;
+		return editor != null ? SelectFavoriteCategoryBottomSheet.createInstance(editor.getFragmentTag(), "") : null;
 	}
 
 	public static void showInstance(final MapActivity mapActivity) {

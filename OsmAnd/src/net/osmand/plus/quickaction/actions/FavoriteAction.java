@@ -176,7 +176,7 @@ public class FavoriteAction extends QuickAction {
 			@Override
 			public void onClick(final View view) {
 
-				SelectFavoriteCategoryBottomSheet dialogFragment = SelectFavoriteCategoryBottomSheet.createInstance("");
+				SelectFavoriteCategoryBottomSheet dialogFragment = SelectFavoriteCategoryBottomSheet.createInstance("", "");
 
 				dialogFragment.show(
 						activity.getSupportFragmentManager(),
