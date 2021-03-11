@@ -22,7 +22,22 @@
 			app:contentInsetEnd="0dp"
 			app:contentInsetLeft="@dimen/settings_divider_margin_start"
 			app:contentInsetRight="0dp"
-			app:contentInsetStart="@dimen/settings_divider_margin_start" />
+			app:contentInsetStart="@dimen/settings_divider_margin_start">
+
+			<ImageButton
+				android:id="@+id/toolbar_action"
+				android:layout_width="@dimen/standard_icon_size"
+				android:layout_height="@dimen/standard_icon_size"
+				android:layout_gravity="end"
+				android:layout_marginTop="@dimen/content_padding"
+				android:layout_marginEnd="@dimen/content_padding"
+				android:layout_marginRight="@dimen/content_padding"
+				android:layout_marginBottom="@dimen/content_padding"
+				android:background="@null"
+				android:contentDescription="@string/shared_string_help"
+				tools:src="@drawable/ic_action_help" />
+
+		</androidx.appcompat.widget.Toolbar>
 
 		<include layout="@layout/preference_toolbar_switch" />
 

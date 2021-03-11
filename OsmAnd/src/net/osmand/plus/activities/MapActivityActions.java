@@ -1033,7 +1033,7 @@ public class MapActivityActions implements DialogProvider {
 		if (Version.isGooglePlayEnabled() || Version.isHuawei() || Version.isDeveloperVersion(app)) {
 			optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.purchases, mapActivity)
 					.setId(DRAWER_OSMAND_LIVE_ID)
-					.setIcon(R.drawable.ic_action_osm_live)
+					.setIcon(R.drawable.ic_action_purchases)
 					.setListener(new ItemClickListener() {
 						@Override
 						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {

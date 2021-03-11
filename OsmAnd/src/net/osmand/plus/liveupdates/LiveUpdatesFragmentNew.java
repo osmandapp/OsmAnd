@@ -4,9 +4,11 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ExpandableListView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -37,6 +40,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.UiUtilities.CompoundButtonType;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
@@ -66,8 +70,6 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import static net.osmand.plus.UiUtilities.CompoundButtonType.GLOBAL;
-import static net.osmand.plus.UiUtilities.CompoundButtonType.TOOLBAR;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.formatShortDateTime;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getNameToDisplay;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getPendingIntent;
@@ -88,6 +90,7 @@ public class LiveUpdatesFragmentNew extends BaseOsmAndDialogFragment implements 
 	public static final String URL = "https://osmand.net/api/osmlive_status";
 	public static final String TAG = LiveUpdatesFragmentNew.class.getSimpleName();
 	private final static Log LOG = PlatformUtil.getLog(LiveUpdatesFragmentNew.class);
+	private static final String SUBSCRIPTION_URL = "https://osmand.net/features/subscription";
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
@@ -135,6 +138,18 @@ public class LiveUpdatesFragmentNew extends BaseOsmAndDialogFragment implements 
 				dismiss();
 			}
 		});
+		ImageButton iconHelp = toolbar.findViewById(R.id.toolbar_action);
+		Drawable helpDrawable = app.getUIUtilities().getIcon(R.drawable.ic_action_help, iconColorResId);
+		iconHelp.setImageDrawable(helpDrawable);
+		iconHelp.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(SUBSCRIPTION_URL));
+				if (AndroidUtils.isIntentSafe(app, intent)) {
+					startActivity(intent);
+				}
+			}
+		});
 
 		listView = (ExpandableListView) view.findViewById(android.R.id.list);
 		adapter = new LiveMapsAdapter();
@@ -149,7 +164,8 @@ public class LiveUpdatesFragmentNew extends BaseOsmAndDialogFragment implements 
 				if (InAppPurchaseHelper.isSubscribedToLiveUpdates(app) && settings.IS_LIVE_UPDATES_ON.get()) {
 					if (getFragmentManager() != null) {
 						LiveUpdatesSettingsDialogFragmentNew
-								.showInstance(getFragmentManager(), LiveUpdatesFragmentNew.this, adapter.getChild(groupPosition, childPosition).getFileName());
+								.showInstance(getFragmentManager(), LiveUpdatesFragmentNew.this,
+										adapter.getChild(groupPosition, childPosition).getFileName());
 					}
 					return true;
 				} else {
@@ -250,12 +266,13 @@ public class LiveUpdatesFragmentNew extends BaseOsmAndDialogFragment implements 
 	}
 
 	private void updateToolbarSwitch(final boolean isChecked) {
-		int switchColor = ContextCompat.getColor(app, isChecked ? getActiveTextColorId(nightMode) : getSecondaryTextColorId(nightMode));
+		int switchColor = ContextCompat.getColor(app,
+				isChecked ? getActiveTextColorId(nightMode) : getSecondaryTextColorId(nightMode));
 		AndroidUtils.setBackground(toolbarSwitchContainer, new ColorDrawable(switchColor));
 
 		SwitchCompat switchView = toolbarSwitchContainer.findViewById(R.id.switchWidget);
 		switchView.setChecked(isChecked);
-		UiUtilities.setupCompoundButton(switchView, nightMode, TOOLBAR);
+		UiUtilities.setupCompoundButton(switchView, nightMode, CompoundButtonType.TOOLBAR);
 
 		toolbarSwitchContainer.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -503,7 +520,7 @@ public class LiveUpdatesFragmentNew extends BaseOsmAndDialogFragment implements 
 			boolean liveUpdateOn = settings.IS_LIVE_UPDATES_ON.get();
 			CommonPreference<Boolean> localUpdateOn = preferenceForLocalIndex(item, settings);
 //			IncrementalChangesManager changesManager = app.getResourceManager().getChangesManager();
-			UiUtilities.setupCompoundButton(option, nightMode, GLOBAL);
+			UiUtilities.setupCompoundButton(option, nightMode, CompoundButtonType.GLOBAL);
 			option.setChecked(localUpdateOn.get());
 
 			title.setText(getNameToDisplay(item, app));
@@ -525,7 +542,8 @@ public class LiveUpdatesFragmentNew extends BaseOsmAndDialogFragment implements 
 			}
 
 			Drawable statusDrawable = ContextCompat.getDrawable(app, R.drawable.ic_map);
-			int resColorId = !localUpdateOn.get() ? getSecondaryIconColorId(nightMode) : !liveUpdateOn ? getDefaultIconColorId(nightMode) : getOsmandIconColorId(nightMode);
+			int resColorId = !localUpdateOn.get() ? getSecondaryIconColorId(nightMode) :
+					!liveUpdateOn ? getDefaultIconColorId(nightMode) : getOsmandIconColorId(nightMode);
 			int statusColor = ContextCompat.getColor(app, resColorId);
 			if (statusDrawable != null) {
 				DrawableCompat.setTint(statusDrawable, statusColor);
@@ -561,7 +579,8 @@ public class LiveUpdatesFragmentNew extends BaseOsmAndDialogFragment implements 
 		@Override
 		protected String doInBackground(Void... params) {
 			try {
-				return AndroidNetworkUtils.sendRequest(app, URL, null, "Requesting map updates info...", false, false);
+				return AndroidNetworkUtils.sendRequest(app, URL, null,
+						"Requesting map updates info...", false, false);
 			} catch (Exception e) {
 				LOG.error("Error: " + "Requesting map updates info error", e);
 				return null;
