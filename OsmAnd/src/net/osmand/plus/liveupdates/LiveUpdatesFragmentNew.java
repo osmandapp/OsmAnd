@@ -37,18 +37,17 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.activities.LocalIndexHelper;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
-import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
-import net.osmand.plus.liveupdates.LiveUpdatesClearDialogFragment.OnRefreshLiveUpdates;
+import net.osmand.plus.liveupdates.LiveUpdatesClearDialogFragment.RefreshLiveUpdates;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper.TimeOfDay;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper.UpdateFrequency;
 import net.osmand.plus.liveupdates.LiveUpdatesSettingsDialogFragmentNew.OnLiveUpdatesForLocalChange;
+import net.osmand.plus.liveupdates.LoadLiveMapsTask.LocalIndexInfoAdapter;
 import net.osmand.plus.liveupdates.PerformLiveUpdateAsyncTask.AsyncResponse;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -64,7 +63,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -76,7 +74,6 @@ import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getPendingIntent;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceForLocalIndex;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastCheck;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLatestUpdateAvailable;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLiveUpdatesOn;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayToUpdate;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.runLiveUpdate;
@@ -128,7 +125,7 @@ public class LiveUpdatesFragmentNew extends BaseOsmAndDialogFragment implements 
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
 		toolbar.setTitle(R.string.osm_live);
 		int iconColorResId = nightMode ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light;
-		Drawable icBack = getMyApplication().getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(app), iconColorResId);
+		Drawable icBack = app.getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(app), iconColorResId);
 		DrawableCompat.setTint(icBack, ContextCompat.getColor(app, iconColorResId));
 		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
@@ -195,7 +192,7 @@ public class LiveUpdatesFragmentNew extends BaseOsmAndDialogFragment implements 
 
 		descriptionTime = timeContainer.findViewById(R.id.sub_title);
 		AndroidUtils.setTextPrimaryColor(app, descriptionTime, nightMode);
-		Typeface typeface = FontCache.getFont(app, app.getResources().getString(R.string.font_roboto_medium));
+		Typeface typeface = FontCache.getFont(app, getString(R.string.font_roboto_medium));
 		descriptionTime.setTypeface(typeface);
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 			descriptionTime.setLetterSpacing(AndroidUtils.getFloatValueFromRes(app, R.dimen.description_letter_spacing));
@@ -222,8 +219,8 @@ public class LiveUpdatesFragmentNew extends BaseOsmAndDialogFragment implements 
 	public void onDismiss(@NonNull DialogInterface dialog) {
 		super.onDismiss(dialog);
 		Fragment target = getTargetFragment();
-		if (target instanceof OnRefreshLiveUpdates) {
-			((OnRefreshLiveUpdates) target).onUpdateStates(app);
+		if (target instanceof RefreshLiveUpdates) {
+			((RefreshLiveUpdates) target).onUpdateStates(app);
 		}
 	}
 
@@ -240,14 +237,15 @@ public class LiveUpdatesFragmentNew extends BaseOsmAndDialogFragment implements 
 
 	private void startLoadLiveMapsAsyncTask() {
 		if (loadLiveMapsTask == null) {
-			loadLiveMapsTask = new LoadLiveMapsTask(adapter, this);
+			loadLiveMapsTask = new LoadLiveMapsTask(adapter, app);
+			loadLiveMapsTask.setSort(true);
 			loadLiveMapsTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
 	}
 
 	private void stopLoadLiveMapsAsyncTask() {
-		if (loadLiveMapsTask != null) {
-			loadLiveMapsTask.cancel(true);
+		if (loadLiveMapsTask != null && loadLiveMapsTask.getStatus() == AsyncTask.Status.RUNNING) {
+			loadLiveMapsTask.cancel(false);
 		}
 	}
 
@@ -291,13 +289,14 @@ public class LiveUpdatesFragmentNew extends BaseOsmAndDialogFragment implements 
 	}
 
 	private void showUpdateDialog() {
-		final AsyncResponse refreshAfterUpdate = new AsyncResponse() {
-			@Override
-			public void processFinish() {
-				adapter.notifyDataSetChanged();
-			}
-		};
+		startUpdateDateAsyncTask();
 		if (!Algorithms.isEmpty(adapter.mapsList)) {
+			final AsyncResponse refreshAfterUpdate = new AsyncResponse() {
+				@Override
+				public void processFinish() {
+					adapter.notifyDataSetChanged();
+				}
+			};
 			if (adapter.countEnabled == 1) {
 				LocalIndexInfo li = adapter.mapsList.get(0);
 				runLiveUpdate(getActivity(), li.getFileName(), false, refreshAfterUpdate);
@@ -314,7 +313,6 @@ public class LiveUpdatesFragmentNew extends BaseOsmAndDialogFragment implements 
 								runLiveUpdate(getActivity(), li.getFileName(), false, refreshAfterUpdate);
 							}
 						}
-						startUpdateDateAsyncTask();
 					}
 				});
 				bld.setNegativeButton(R.string.shared_string_no, null);
@@ -327,7 +325,7 @@ public class LiveUpdatesFragmentNew extends BaseOsmAndDialogFragment implements 
 		if (!Algorithms.isEmpty(adapter.mapsList)) {
 			AlarmManager alarmMgr = (AlarmManager) app.getSystemService(Context.ALARM_SERVICE);
 			for (LocalIndexInfo li : adapter.mapsList) {
-				CommonPreference<Boolean> localUpdateOn = preferenceLiveUpdatesOn(li.getFileName(), settings);
+				CommonPreference<Boolean> localUpdateOn = preferenceForLocalIndex(li.getFileName(), settings);
 				if (localUpdateOn.get()) {
 					String fileName = li.getFileName();
 					PendingIntent alarmIntent = getPendingIntent(app, fileName);
@@ -359,20 +357,21 @@ public class LiveUpdatesFragmentNew extends BaseOsmAndDialogFragment implements 
 		}
 	}
 
-	protected class LiveMapsAdapter extends OsmandBaseExpandableListAdapter {
+	protected class LiveMapsAdapter extends OsmandBaseExpandableListAdapter implements LocalIndexInfoAdapter {
 		private final ArrayList<LocalIndexInfo> mapsList = new ArrayList<>();
 		private int countEnabled = 0;
 		private TextViewEx countView;
 
+		@Override
 		public void addData(LocalIndexInfo info) {
 			mapsList.add(info);
 		}
 
 		@Override
-		public void notifyDataSetInvalidated() {
-			super.notifyDataSetInvalidated();
+		public void clearData() {
 		}
 
+		@Override
 		public void sort() {
 			countEnabled = 0;
 			for (LocalIndexInfo map : mapsList) {
@@ -395,6 +394,7 @@ public class LiveUpdatesFragmentNew extends BaseOsmAndDialogFragment implements 
 			notifyDataSetInvalidated();
 		}
 
+		@Override
 		public void updateCountEnabled() {
 			if (countView != null) {
 				String countText = countEnabled + "/" + mapsList.size();
@@ -496,16 +496,15 @@ public class LiveUpdatesFragmentNew extends BaseOsmAndDialogFragment implements 
 			title = (TextView) view.findViewById(R.id.title);
 			subTitle = (TextView) view.findViewById(R.id.sub_title);
 			description = (TextView) view.findViewById(R.id.description);
-			option = (CompoundButton) view.findViewById(R.id.toggle_item);
+			option = (CompoundButton) view.findViewById(R.id.compound_button);
 		}
 
 		public void bindLocalIndexInfo(@NonNull final String item) {
 			boolean liveUpdateOn = settings.IS_LIVE_UPDATES_ON.get();
-			final CommonPreference<Boolean> localUpdateOn = preferenceLiveUpdatesOn(item, settings);
+			CommonPreference<Boolean> localUpdateOn = preferenceForLocalIndex(item, settings);
 //			IncrementalChangesManager changesManager = app.getResourceManager().getChangesManager();
 			UiUtilities.setupCompoundButton(option, nightMode, GLOBAL);
-			CommonPreference<Boolean> liveUpdatePreference = preferenceForLocalIndex(item, settings);
-			option.setChecked(liveUpdatePreference.get());
+			option.setChecked(localUpdateOn.get());
 
 			title.setText(getNameToDisplay(item, app));
 
@@ -513,15 +512,15 @@ public class LiveUpdatesFragmentNew extends BaseOsmAndDialogFragment implements 
 			if (localUpdateOn.get()) {
 				int frequencyId = preferenceUpdateFrequency(item, settings).get();
 				final UpdateFrequency frequency = UpdateFrequency.values()[frequencyId];
-				String subTitleText = app.getResources().getString(frequency.getLocalizedId());
+				String subTitleText = getString(frequency.getLocalizedId());
 				/*int timeOfDateToUpdateId = preferenceTimeOfDayToUpdate(item, settings).get();
 				final TimeOfDay timeOfDay = TimeOfDay.values()[timeOfDateToUpdateId];
 				if (frequency != UpdateFrequency.HOURLY) {
-					subTitleText += " • " + app.getResources().getString(timeOfDay.getLocalizedId());
+					subTitleText += " • " + getString(timeOfDay.getLocalizedId());
 				}*/
 				subTitle.setText(subTitleText);
 				subTitle.setTextColor(ContextCompat.getColor(app, liveUpdateOn ? getActiveTextColorId(nightMode) : getSecondaryTextColorId(nightMode)));
-				Typeface typeface = FontCache.getFont(app, app.getResources().getString(R.string.font_roboto_medium));
+				Typeface typeface = FontCache.getFont(app, getString(R.string.font_roboto_medium));
 				subTitle.setTypeface(typeface);
 			}
 
@@ -592,49 +591,6 @@ public class LiveUpdatesFragmentNew extends BaseOsmAndDialogFragment implements 
 					}
 				}
 			}
-		}
-	}
-
-	public static class LoadLiveMapsTask
-			extends AsyncTask<Void, LocalIndexInfo, List<LocalIndexInfo>>
-			implements AbstractLoadLocalIndexTask {
-
-		//private List<LocalIndexInfo> result;
-		private final LiveMapsAdapter adapter;
-		private final LocalIndexHelper helper;
-
-		public LoadLiveMapsTask(LiveMapsAdapter adapter,
-								LiveUpdatesFragmentNew fragment) {
-			this.adapter = adapter;
-			helper = new LocalIndexHelper(fragment.getMyApplication());
-		}
-
-		@Override
-		protected List<LocalIndexInfo> doInBackground(Void... params) {
-			return helper.getLocalFullMaps(this);
-		}
-
-		@Override
-		public void loadFile(LocalIndexInfo... loaded) {
-			publishProgress(loaded);
-		}
-
-		@Override
-		protected void onProgressUpdate(LocalIndexInfo... values) {
-			String fileNameL;
-			for (LocalIndexInfo localIndexInfo : values) {
-				fileNameL = localIndexInfo.getFileName().toLowerCase();
-				if (localIndexInfo.getType() == LocalIndexHelper.LocalIndexType.MAP_DATA
-						&& !fileNameL.contains("world") && !fileNameL.startsWith("depth_")) {
-					adapter.addData(localIndexInfo);
-				}
-			}
-		}
-
-		@Override
-		protected void onPostExecute(List<LocalIndexInfo> result) {
-			//this.result = result;
-			adapter.sort();
 		}
 	}
 

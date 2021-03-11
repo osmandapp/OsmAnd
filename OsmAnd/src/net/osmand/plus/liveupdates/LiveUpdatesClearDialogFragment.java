@@ -56,20 +56,18 @@ public class LiveUpdatesClearDialogFragment extends MenuBottomSheetDialogFragmen
 		app = getMyApplication();
 		settings = app.getSettings();
 
-		if (savedInstanceState != null) {
-			if (savedInstanceState.containsKey(LOCAL_INDEX_FILE_NAME)) {
-				fileName = savedInstanceState.getString(LOCAL_INDEX_FILE_NAME);
-			}
+		if (savedInstanceState != null && savedInstanceState.containsKey(LOCAL_INDEX_FILE_NAME)) {
+			fileName = savedInstanceState.getString(LOCAL_INDEX_FILE_NAME);
 		}
 
 		items.add(new SimpleBottomSheetItem.Builder()
-				.setTitle(app.getResources().getString(R.string.delete_updates))
+				.setTitle(getString(R.string.delete_updates))
 				.setTitleColorId(getPrimaryTextColorId(nightMode))
 				.setLayoutId(R.layout.bottom_sheet_item_title)
 				.create());
 
 		String nameToDisplay = getNameToDisplay(fileName, app);
-		String text = app.getResources().getString(R.string.live_update_delete_updates_msg, nameToDisplay);
+		String text = getString(R.string.live_update_delete_updates_msg, nameToDisplay);
 		SpannableString message = UiUtilities.createSpannableString(text, new StyleSpan(Typeface.BOLD), nameToDisplay);
 
 		items.add(new LongDescriptionItem.Builder()
@@ -96,20 +94,20 @@ public class LiveUpdatesClearDialogFragment extends MenuBottomSheetDialogFragmen
 		preferenceLatestUpdateAvailable(fileName, settings).resetToDefault();
 	}
 
-	public interface OnRefreshLiveUpdates {
-		void onUpdateStates(Context context);
-	}
-
 	@Override
 	protected void onRightBottomButtonClick() {
 		deleteUpdates();
 
 		Fragment fragment = getTargetFragment();
-		if (fragment instanceof OnRefreshLiveUpdates) {
-			((OnRefreshLiveUpdates) fragment).onUpdateStates(app);
+		if (fragment instanceof RefreshLiveUpdates) {
+			((RefreshLiveUpdates) fragment).onUpdateStates(app);
 		}
 
 		dismiss();
+	}
+
+	public interface RefreshLiveUpdates {
+		void onUpdateStates(Context context);
 	}
 
 	@Override

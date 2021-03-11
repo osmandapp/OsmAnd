@@ -167,7 +167,7 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 						timeOfDayPreference.set(timeOfDayInt);
 
 						if (liveUpdatesSwitch.isChecked() && getSettings().IS_LIVE_UPDATES_ON.get()) {
-							runLiveUpdate(getActivity(), fileName, false);
+							runLiveUpdate(getActivity(), fileName, false, null);
 							UpdateFrequency updateFrequency = UpdateFrequency.values()[updateFrequencyInt];
 							TimeOfDay timeOfDayToUpdate = TimeOfDay.values()[timeOfDayInt];
 							setAlarmForPendingIntent(alarmIntent, alarmMgr, updateFrequency, timeOfDayToUpdate);
@@ -194,7 +194,7 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 					if (!getSettings().isInternetConnectionAvailable()) {
 						getMyApplication().showShortToastMessage(R.string.no_internet_connection);
 					} else {
-						runLiveUpdate(getActivity(), fileName, true);
+						runLiveUpdate(getActivity(), fileName, true, null);
 						final IncrementalChangesManager changesManager = getMyApplication().getResourceManager().getChangesManager();
 						sizeTextView.setText(getUpdatesSize(getMyActivity(), fileNameWithoutExtension, changesManager));
 						dialog.dismiss();

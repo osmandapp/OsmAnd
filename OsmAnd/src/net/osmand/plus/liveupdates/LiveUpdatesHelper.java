@@ -6,9 +6,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.text.format.DateUtils;
-import android.text.format.Time;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.liveupdates.PerformLiveUpdateAsyncTask.AsyncResponse;
@@ -109,31 +109,34 @@ public class LiveUpdatesHelper {
 		return dateFormat.format(dateTime) + " " + timeFormat.format(dateTime);
 	}
 
+	public static boolean isCurrentYear(long dateTime) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTimeInMillis(dateTime);
+		return calendar.get(Calendar.YEAR) == Calendar.getInstance().get(Calendar.YEAR);
+	}
+
 	public static String formatShortDateTime(Context ctx, long dateTime) {
-		if (dateTime == -1) {
+		if (dateTime == DEFAULT_LAST_CHECK) {
 			return ctx.getResources().getString(R.string.shared_string_never);
 		} else {
-			StringBuilder result = new StringBuilder();
+			String date, times;
 			if (DateUtils.isToday(dateTime)) {
-				result.append(ctx.getResources().getString(R.string.today));
+				date = ctx.getResources().getString(R.string.today);
 			} else {
 				int flags = DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_MONTH;
-				Time time = new Time();
-				time.set(dateTime);
-				int thenYear = time.year;
-				time.set(System.currentTimeMillis());
-				if (thenYear == time.year) {
+				if (isCurrentYear(dateTime)) {
 					flags = flags | DateUtils.FORMAT_NO_YEAR;
 				}
-				result.append(DateUtils.formatDateTime(ctx, dateTime, flags));
+				date = DateUtils.formatDateTime(ctx, dateTime, flags);
 			}
-			result.append(" - ").append(DateUtils.formatDateTime(ctx, dateTime, DateUtils.FORMAT_SHOW_TIME));
-			return result.toString();
+			times = DateUtils.formatDateTime(ctx, dateTime, DateUtils.FORMAT_SHOW_TIME);
+			String pattern = ctx.getString(R.string.ltr_or_rtl_combine_via_dash);
+			return String.format(pattern, date, times);
 		}
 	}
 
 	public static String formatHelpDateTime(Context ctx, UpdateFrequency updateFrequency, TimeOfDay timeOfDay, long lastDateTime) {
-		if (lastDateTime == -1) {
+		if (lastDateTime == DEFAULT_LAST_CHECK) {
 			lastDateTime = System.currentTimeMillis();
 		}
 		switch (updateFrequency) {
@@ -164,12 +167,7 @@ public class LiveUpdatesHelper {
 		int flagsBaseNoYear = flagsBase | DateUtils.FORMAT_NO_YEAR;
 		int flagsTime = DateUtils.FORMAT_SHOW_TIME;
 
-		Time checkYearTime = new Time();
-		checkYearTime.set(nextDateTime);
-		int thenYear = checkYearTime.year;
-		checkYearTime.set(System.currentTimeMillis());
-
-		String date = DateUtils.formatDateTime(ctx, nextDateTime, thenYear == checkYearTime.year ? flagsBaseNoYear : flagsBase);
+		String date = DateUtils.formatDateTime(ctx, nextDateTime, isCurrentYear(nextDateTime) ? flagsBaseNoYear : flagsBase);
 		String time = DateUtils.formatDateTime(ctx, nextDateTime, flagsTime);
 
 		return ctx.getResources().getString(stringResId, DateUtils.isToday(nextDateTime) ? "" : " " + date, time);
@@ -256,12 +254,7 @@ public class LiveUpdatesHelper {
 		}
 	}
 
-	public static void runLiveUpdate(Context context, final String fileName, boolean userRequested) {
-		final String fnExt = Algorithms.getFileNameWithoutExtension(new File(fileName));
-		new PerformLiveUpdateAsyncTask(context, fileName, userRequested).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, fnExt);
-	}
-
-	public static void runLiveUpdate(Context context, final String fileName, boolean userRequested, final AsyncResponse runOnPost) {
+	public static void runLiveUpdate(Context context, final String fileName, boolean userRequested, @Nullable final AsyncResponse runOnPost) {
 		final String fnExt = Algorithms.getFileNameWithoutExtension(new File(fileName));
 		new PerformLiveUpdateAsyncTask(context, fileName, userRequested, runOnPost).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, fnExt);
 	}

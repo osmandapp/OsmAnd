@@ -6,8 +6,10 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.AndroidNetworkUtils;
+import net.osmand.AndroidNetworkUtils.OnRequestResultListener;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.download.DownloadActivity;
@@ -44,7 +46,7 @@ public class PerformLiveUpdateAsyncTask
 	@NonNull
 	private final String localIndexFileName;
 	private final boolean userRequested;
-	private AsyncResponse runOnPost;
+	private final AsyncResponse runOnPost;
 
 	public interface AsyncResponse {
 		void processFinish();
@@ -52,16 +54,8 @@ public class PerformLiveUpdateAsyncTask
 
 	public PerformLiveUpdateAsyncTask(@NonNull Context context,
 									  @NonNull String localIndexFileName,
-									  boolean userRequested) {
-		this.context = context;
-		this.localIndexFileName = localIndexFileName;
-		this.userRequested = userRequested;
-	}
-
-	public PerformLiveUpdateAsyncTask(@NonNull Context context,
-									  @NonNull String localIndexFileName,
 									  boolean userRequested,
-									  AsyncResponse runOnPost) {
+									  @Nullable AsyncResponse runOnPost) {
 		this.context = context;
 		this.localIndexFileName = localIndexFileName;
 		this.userRequested = userRequested;
@@ -204,24 +198,29 @@ public class PerformLiveUpdateAsyncTask
 		}
 	}
 
-	private void updateLatestAvailability(OsmandApplication app, @NonNull String localIndexFileName) {
-		OsmandSettings settings = app.getSettings();
-		try {
-			String latestUpdateAvailable = AndroidNetworkUtils.sendRequest(
-					app, LiveUpdatesFragmentNew.URL, null, "Requesting map updates info...", false, false);
-			if (!Algorithms.isEmpty(latestUpdateAvailable)) {
-				SimpleDateFormat source = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.US);
-				source.setTimeZone(TimeZone.getTimeZone("UTC"));
-				Date parsed = source.parse(latestUpdateAvailable);
-				if (parsed != null) {
-					long dateTime = parsed.getTime();
-					preferenceLatestUpdateAvailable(settings).set(dateTime);
-				}
-			}
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		long latestUpdateAvailable = preferenceLatestUpdateAvailable(settings).get();
-		preferenceLatestUpdateAvailable(localIndexFileName, settings).set(latestUpdateAvailable);
+	private void updateLatestAvailability(OsmandApplication app, @NonNull final String localIndexFileName) {
+		final OsmandSettings settings = app.getSettings();
+		AndroidNetworkUtils.sendRequestAsync(
+				app, LiveUpdatesFragmentNew.URL, null, "Requesting map updates info...", false, false, new OnRequestResultListener() {
+					@Override
+					public void onResult(String result) {
+						if (!Algorithms.isEmpty(result)) {
+							SimpleDateFormat source = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.US);
+							source.setTimeZone(TimeZone.getTimeZone("UTC"));
+							try {
+								Date parsed = source.parse(result);
+								if (parsed != null) {
+									long dateTime = parsed.getTime();
+									preferenceLatestUpdateAvailable(settings).set(dateTime);
+									preferenceLatestUpdateAvailable(localIndexFileName, settings).set(dateTime);
+								}
+							} catch (ParseException e) {
+								long dateTime = preferenceLatestUpdateAvailable(settings).get();
+								preferenceLatestUpdateAvailable(localIndexFileName, settings).set(dateTime);
+								LOG.error(e.getMessage(), e);
+							}
+						}
+					}
+				});
 	}
 }

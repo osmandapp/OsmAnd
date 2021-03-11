@@ -5,7 +5,6 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:background="?attr/list_background_color"
-	android:descendantFocusability="blocksDescendants"
 	android:orientation="vertical"
 	android:paddingStart="@dimen/list_content_padding"
 	android:paddingLeft="@dimen/list_content_padding"
@@ -52,13 +51,13 @@
 				android:textColor="?android:textColorSecondary"
 				android:textSize="@dimen/default_desc_text_size" />
 
-			<androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+			<androidx.cardview.widget.CardView
 				android:id="@+id/card_view"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"
 				android:layout_marginTop="@dimen/content_padding_small"
-				card_view:cardCornerRadius="3dp"
+				osmand:cardCornerRadius="3dp"
 				osmand:cardElevation="0dp"
 				tools:cardBackgroundColor="@color/active_buttons_and_links_trans_dark">
 
@@ -66,6 +65,7 @@
 					android:id="@+id/card_container"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
+					android:background="?attr/selectableItemBackground"
 					android:gravity="center_vertical"
 					android:minHeight="@dimen/dialog_button_height"
 					android:orientation="horizontal"

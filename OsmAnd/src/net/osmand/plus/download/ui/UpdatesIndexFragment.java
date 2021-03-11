@@ -23,7 +23,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.ColorRes;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.content.res.AppCompatResources;
@@ -37,11 +36,12 @@ import net.osmand.OsmAndCollator;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.activities.LocalIndexHelper;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.liveupdates.LiveUpdatesClearDialogFragment.OnRefreshLiveUpdates;
+import net.osmand.plus.liveupdates.LiveUpdatesClearDialogFragment.RefreshLiveUpdates;
 import net.osmand.plus.liveupdates.LiveUpdatesFragmentNew;
+import net.osmand.plus.liveupdates.LoadLiveMapsTask;
+import net.osmand.plus.liveupdates.LoadLiveMapsTask.LocalIndexInfoAdapter;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
@@ -59,25 +59,20 @@ import java.util.Comparator;
 import java.util.List;
 
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceForLocalIndex;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLiveUpdatesOn;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.runLiveUpdate;
 
-public class UpdatesIndexFragment extends OsmAndListFragment implements DownloadEvents, OnRefreshLiveUpdates {
+public class UpdatesIndexFragment extends OsmAndListFragment implements DownloadEvents, RefreshLiveUpdates {
 	private static final int RELOAD_ID = 5;
 	private UpdateIndexAdapter listAdapter;
 	private String errorMessage;
-	private OsmandApplication app;
 	private OsmandSettings settings;
-	private boolean nightMode;
 	private LoadLiveMapsTask loadLiveMapsTask;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
-		app = getMyApplication();
-		settings = app.getSettings();
-		nightMode = !app.getSettings().isLightContent();
+		settings = getMyApplication().getSettings();
 	}
 
 
@@ -125,20 +120,20 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 	}
 
 	public void invalidateListView(Activity a) {
-		DownloadResources indexes = getMyApplication().getDownloadThread().getIndexes();
+		final OsmandApplication app = getMyApplication();
+		OsmandSettings settings = app.getSettings();
+		DownloadResources indexes = app.getDownloadThread().getIndexes();
 		List<IndexItem> indexItems = indexes.getItemsToUpdate();
 
-		final OsmandRegions osmandRegions =
-				getMyApplication().getResourceManager().getOsmandRegions();
-		OsmandSettings settings = getMyApplication().getSettings();
+		final OsmandRegions osmandRegions = app.getResourceManager().getOsmandRegions();
 		listAdapter = new UpdateIndexAdapter(a, R.layout.download_index_list_item, indexItems,
-				!InAppPurchaseHelper.isSubscribedToLiveUpdates(getMyApplication()) || settings.SHOULD_SHOW_FREE_VERSION_BANNER.get());
+				!InAppPurchaseHelper.isSubscribedToLiveUpdates(app) || settings.SHOULD_SHOW_FREE_VERSION_BANNER.get());
 		final Collator collator = OsmAndCollator.primaryCollator();
 		listAdapter.sort(new Comparator<IndexItem>() {
 			@Override
 			public int compare(IndexItem indexItem, IndexItem indexItem2) {
-				return collator.compare(indexItem.getVisibleName(getMyApplication(), osmandRegions),
-						indexItem2.getVisibleName(getMyApplication(), osmandRegions));
+				return collator.compare(indexItem.getVisibleName(app, osmandRegions),
+						indexItem2.getVisibleName(app, osmandRegions));
 			}
 		});
 		setListAdapter(listAdapter);
@@ -185,26 +180,27 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 			for (IndexItem indexItem : indexItems) {
 				downloadsSize += indexItem.getSize();
 			}
-			String updateAllText = getActivity().getString(
+			String updateAllText = getString(
 					R.string.update_all, String.valueOf(downloadsSize >> 20));
 			updateAllButton.setText(updateAllText);
 			updateAllButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
+					final DownloadActivity activity = getMyActivity();
 					if (indexItems.size() > 3) {
-						AlertDialog.Builder dialog = new AlertDialog.Builder(getMyActivity());
+						AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
 						dialog.setTitle(R.string.update_all_maps);
 						dialog.setMessage(getString(R.string.update_all_maps_q, indexItems.size()));
 						dialog.setNegativeButton(R.string.shared_string_cancel, null);
 						dialog.setPositiveButton(R.string.shared_string_update, new DialogInterface.OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
-								getMyActivity().startDownload(indexItems.toArray(new IndexItem[0]));
+								activity.startDownload(indexItems.toArray(new IndexItem[0]));
 							}
 						});
 						dialog.create().show();
 					} else {
-						getMyActivity().startDownload(indexItems.toArray(new IndexItem[0]));
+						activity.startDownload(indexItems.toArray(new IndexItem[0]));
 					}
 				}
 			});
@@ -225,12 +221,13 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 
 	private void startLoadLiveMapsAsyncTask(OsmandApplication app) {
 		loadLiveMapsTask = new LoadLiveMapsTask(listAdapter, app);
+		loadLiveMapsTask.setUpdateCount(true);
 		loadLiveMapsTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	private void stopLoadLiveMapsAsyncTask() {
-		if (loadLiveMapsTask != null) {
-			loadLiveMapsTask.cancel(true);
+		if (loadLiveMapsTask != null && loadLiveMapsTask.getStatus() == AsyncTask.Status.RUNNING) {
+			loadLiveMapsTask.cancel(false);
 		}
 	}
 
@@ -239,9 +236,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 		if (position == 0) {
 			DownloadActivity activity = getMyActivity();
 			if (activity != null) {
-				if (listAdapter.isNotSubscribed()) {
-					ChoosePlanDialogFragment.showOsmLiveInstance(activity.getSupportFragmentManager());
-				} else {
+				if (!listAdapter.isNotSubscribed()) {
 					LiveUpdatesFragmentNew.showInstance(activity.getSupportFragmentManager(), this);
 				}
 			}
@@ -255,11 +250,6 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 
 	public DownloadActivity getMyActivity() {
 		return (DownloadActivity) getActivity();
-	}
-
-	@Nullable
-	public OsmandApplication getMyApplication() {
-		return getMyActivity().getMyApplication();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -295,7 +285,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 		}
 	}
 
-	private class UpdateIndexAdapter extends ArrayAdapter<IndexItem> {
+	private class UpdateIndexAdapter extends ArrayAdapter<IndexItem> implements LocalIndexInfoAdapter {
 
 		static final int INDEX_ITEM = 0;
 		static final int OSM_LIVE_BANNER = 1;
@@ -306,14 +296,21 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 		private int countAll = 0;
 		private int countEnabled = 0;
 
-		public void clearLii() {
-			mapsList.clear();
-		}
-
-		public void addLii(LocalIndexInfo info) {
+		@Override
+		public void addData(LocalIndexInfo info) {
 			mapsList.add(info);
 		}
 
+		@Override
+		public void clearData() {
+			mapsList.clear();
+		}
+
+		@Override
+		public void sort() {
+		}
+
+		@Override
 		public void updateCountEnabled() {
 			countAll = 0;
 			countEnabled = 0;
@@ -379,12 +376,21 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 					view = inflater.inflate(R.layout.two_line_with_images_list_item, parent, false);
 					view.setTag(new ItemViewHolder(view, getMyActivity()));
 				} else if (viewType == OSM_LIVE_BANNER) {
+					OsmandApplication app = getMyApplication();
+					boolean nightMode = !app.getSettings().isLightContent();
 					if (isNotSubscribed) {
 						view = inflater.inflate(R.layout.osm_live_banner_list_item, parent, false);
 						ColorStateList stateList = AndroidUtils.createPressedColorStateList(app, nightMode,
 								R.color.switch_button_active_light, R.color.switch_button_active_stroke_light,
 								R.color.switch_button_active_dark, R.color.switch_button_active_stroke_dark);
-						((CardView) view.findViewById(R.id.card_view)).setCardBackgroundColor(stateList);
+						CardView cardView = ((CardView) view.findViewById(R.id.card_view));
+						cardView.setCardBackgroundColor(stateList);
+						cardView.setOnClickListener(new OnClickListener() {
+							@Override
+							public void onClick(View v) {
+								ChoosePlanDialogFragment.showOsmLiveInstance(getMyActivity().getSupportFragmentManager());
+							}
+						});
 					} else {
 						view = inflater.inflate(R.layout.bottom_sheet_item_with_descr_switch_and_additional_button_56dp, parent, false);
 						if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
@@ -424,59 +430,11 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 		}
 	}
 
-	public static class LoadLiveMapsTask
-			extends AsyncTask<Void, LocalIndexInfo, List<LocalIndexInfo>>
-			implements AbstractLoadLocalIndexTask {
-
-		//private List<LocalIndexInfo> result;
-		private final UpdateIndexAdapter adapter;
-		private final LocalIndexHelper helper;
-
-		public LoadLiveMapsTask(UpdateIndexAdapter adapter, OsmandApplication app) {
-			this.adapter = adapter;
-			helper = new LocalIndexHelper(app);
-		}
-
-		@Override
-		protected void onPreExecute() {
-			adapter.clearLii();
-		}
-
-		@Override
-		protected List<LocalIndexInfo> doInBackground(Void... params) {
-			return helper.getLocalFullMaps(this);
-		}
-
-		@Override
-		public void loadFile(LocalIndexInfo... loaded) {
-			publishProgress(loaded);
-		}
-
-		@Override
-		protected void onProgressUpdate(LocalIndexInfo... values) {
-			String fileNameL;
-			for (LocalIndexInfo localIndexInfo : values) {
-				fileNameL = localIndexInfo.getFileName().toLowerCase();
-				if (localIndexInfo.getType() == LocalIndexHelper.LocalIndexType.MAP_DATA
-						&& !fileNameL.contains("world") && !fileNameL.startsWith("depth_")) {
-					adapter.addLii(localIndexInfo);
-				}
-			}
-		}
-
-		@Override
-		protected void onPostExecute(List<LocalIndexInfo> result) {
-			//this.result = result;
-			adapter.updateCountEnabled();
-
-		}
-	}
-
 	private void showUpdateDialog() {
 		if (!listAdapter.isNotSubscribed() && !Algorithms.isEmpty(listAdapter.mapsList)) {
 			if (listAdapter.countEnabled == 1) {
 				LocalIndexInfo li = listAdapter.mapsList.get(0);
-				runLiveUpdate(getActivity(), li.getFileName(), false);
+				runLiveUpdate(getActivity(), li.getFileName(), false, null);
 			} else if (listAdapter.countEnabled > 1) {
 				AlertDialog.Builder bld = new AlertDialog.Builder(getMyActivity());
 				bld.setMessage(R.string.update_all_maps_now);
@@ -485,9 +443,9 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						for (LocalIndexInfo li : listAdapter.mapsList) {
-							CommonPreference<Boolean> localUpdateOn = preferenceLiveUpdatesOn(li.getFileName(), settings);
+							CommonPreference<Boolean> localUpdateOn = preferenceForLocalIndex(li.getFileName(), getMyApplication().getSettings());
 							if (localUpdateOn.get()) {
-								runLiveUpdate(getActivity(), li.getFileName(), false);
+								runLiveUpdate(getActivity(), li.getFileName(), false, null);
 							}
 						}
 					}

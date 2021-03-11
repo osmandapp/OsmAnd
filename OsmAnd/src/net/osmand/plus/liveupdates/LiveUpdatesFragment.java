@@ -448,7 +448,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 		private void showUpdateDialog() {
 			if(dataShouldUpdate.size() > 0) {
 				if (dataShouldUpdate.size() == 1) {
-					runLiveUpdate(app, dataShouldUpdate.get(0).getFileName(), false);
+					runLiveUpdate(app, dataShouldUpdate.get(0).getFileName(), false, null);
 				} else {
 					Builder bld = new AlertDialog.Builder(ctx);
 					bld.setMessage(R.string.update_all_maps_now);
@@ -457,7 +457,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							for (LocalIndexInfo li : dataShouldUpdate) {
-								runLiveUpdate(app, li.getFileName(), false);
+								runLiveUpdate(app, li.getFileName(), false, null);
 							}
 							notifyDataSetChanged();
 						}
@@ -575,7 +575,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 					preferenceLiveUpdatesOn(item, fragment.getSettings());
 			IncrementalChangesManager changesManager = context.getResourceManager().getChangesManager();
 
-			nameTextView.setText(getNameToDisplay(item, fragment.getMyActivity().getMyApplication()));
+			nameTextView.setText(getNameToDisplay(item, context));
 			if (shouldUpdatePreference.get()) {
 				final Integer frequencyId = preferenceUpdateFrequency(item, fragment.getSettings()).get();
 				final Integer timeOfDateToUpdateId = preferenceTimeOfDayToUpdate(item, fragment.getSettings()).get();

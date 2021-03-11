@@ -11,22 +11,21 @@
 	android:layout_marginRight="@dimen/content_padding"
 	android:orientation="vertical">
 
-	<RelativeLayout
+	<LinearLayout
 		android:id="@+id/button_container"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:layout_gravity="center_vertical"
+		android:gravity="center"
+		android:orientation="horizontal"
 		tools:ignore="UselessParent">
 
 		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/button_icon"
 			android:layout_width="@dimen/map_widget_icon"
 			android:layout_height="@dimen/map_widget_icon"
-			android:layout_centerVertical="true"
 			android:layout_marginEnd="@dimen/content_padding_small"
 			android:layout_marginRight="@dimen/content_padding_small"
-			android:layout_toStartOf="@id/button_text"
-			android:layout_toLeftOf="@id/button_text"
 			android:tint="?attr/active_color_basic"
 			tools:srcCompat="@drawable/ic_action_appearance" />
 
@@ -34,13 +33,14 @@
 			android:id="@+id/button_text"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_centerInParent="true"
+			android:layout_marginEnd="@dimen/context_menu_controller_height"
+			android:layout_marginRight="@dimen/context_menu_controller_height"
 			android:letterSpacing="@dimen/description_letter_spacing"
 			android:textColor="?attr/active_color_basic"
 			android:textSize="@dimen/default_desc_text_size"
 			osmand:typeface="@string/font_roboto_medium"
 			tools:text="Button" />
 
-	</RelativeLayout>
+	</LinearLayout>
 
 </LinearLayout>

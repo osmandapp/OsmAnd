@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:background="?attr/bg_color"
+	android:gravity="center_vertical"
 	android:minHeight="@dimen/setting_list_item_large_height"
 	tools:layout_height="@dimen/list_item_triple_row_height">
 
@@ -12,7 +13,6 @@
 		android:id="@+id/icon"
 		android:layout_width="@dimen/standard_icon_size"
 		android:layout_height="@dimen/standard_icon_size"
-		android:layout_centerVertical="true"
 		android:layout_gravity="center_vertical"
 		android:layout_marginStart="@dimen/content_padding"
 		android:layout_marginLeft="@dimen/content_padding"
@@ -22,15 +22,11 @@
 		tools:tint="@color/icon_color_osmand_light" />
 
 	<LinearLayout
-		android:layout_width="wrap_content"
+		android:layout_width="0dp"
 		android:layout_height="match_parent"
-		android:layout_centerVertical="true"
 		android:layout_marginStart="@dimen/content_padding"
 		android:layout_marginLeft="@dimen/content_padding"
-		android:layout_toStartOf="@+id/toggle_item"
-		android:layout_toLeftOf="@+id/toggle_item"
-		android:layout_toEndOf="@+id/icon"
-		android:layout_toRightOf="@+id/icon"
+		android:layout_weight="1"
 		android:orientation="horizontal">
 
 		<LinearLayout
@@ -44,8 +40,8 @@
 				android:id="@+id/title"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:lines="1"
 				android:ellipsize="end"
+				android:lines="1"
 				android:textAppearance="@style/TextAppearance.ListItemTitle"
 				tools:text="Title" />
 
@@ -53,9 +49,9 @@
 				android:id="@+id/sub_title"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
+				android:ellipsize="end"
 				android:letterSpacing="@dimen/description_letter_spacing"
 				android:lines="1"
-				android:ellipsize="end"
 				android:textColor="?attr/active_color_basic"
 				android:textSize="@dimen/default_desc_text_size"
 				tools:text="Sub" />
@@ -86,12 +82,9 @@
 	</LinearLayout>
 
 	<androidx.appcompat.widget.SwitchCompat
-		android:id="@+id/toggle_item"
+		android:id="@+id/compound_button"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_alignParentEnd="true"
-		android:layout_alignParentRight="true"
-		android:layout_centerVertical="true"
 		android:layout_marginStart="@dimen/content_padding"
 		android:layout_marginLeft="@dimen/content_padding"
 		android:layout_marginEnd="@dimen/content_padding"
@@ -99,4 +92,4 @@
 		android:focusable="false"
 		tools:checked="true" />
 
-</RelativeLayout>
+</LinearLayout>

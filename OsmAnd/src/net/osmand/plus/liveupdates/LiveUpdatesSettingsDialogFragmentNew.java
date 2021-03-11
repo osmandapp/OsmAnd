@@ -5,8 +5,6 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.SpannableString;
-import android.text.TextUtils;
-import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +34,8 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.ShortDescriptionItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.liveupdates.LiveUpdatesClearDialogFragment.OnRefreshLiveUpdates;
+import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.liveupdates.LiveUpdatesClearDialogFragment.RefreshLiveUpdates;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper.TimeOfDay;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper.UpdateFrequency;
 import net.osmand.plus.resources.IncrementalChangesManager;
@@ -46,6 +45,7 @@ import net.osmand.plus.widgets.MultiStateToggleButton;
 import net.osmand.plus.widgets.MultiStateToggleButton.OnRadioItemClickListener;
 import net.osmand.plus.widgets.MultiStateToggleButton.RadioItem;
 import net.osmand.plus.widgets.TextViewEx;
+import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -65,7 +65,7 @@ import static net.osmand.plus.monitoring.TripRecordingActiveBottomSheet.getSecon
 import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.getCustomButtonView;
 import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.updateCustomButtonView;
 
-public class LiveUpdatesSettingsDialogFragmentNew extends MenuBottomSheetDialogFragment implements OnRefreshLiveUpdates {
+public class LiveUpdatesSettingsDialogFragmentNew extends MenuBottomSheetDialogFragment implements RefreshLiveUpdates {
 
 	public static final String TAG = LiveUpdatesSettingsDialogFragmentNew.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(LiveUpdatesSettingsDialogFragmentNew.class);
@@ -103,13 +103,13 @@ public class LiveUpdatesSettingsDialogFragmentNew extends MenuBottomSheetDialogF
 		if (getTargetFragment() instanceof OnLiveUpdatesForLocalChange) {
 			onLiveUpdatesForLocalChange = (OnLiveUpdatesForLocalChange) getTargetFragment();
 		}
-		final CommonPreference<Boolean> localUpdatePreference = preferenceForLocalIndex(fileName, settings);
-		final CommonPreference<Boolean> downloadViaWiFiPreference = preferenceDownloadViaWiFi(fileName, settings);
-		final CommonPreference<Integer> frequencyPreference = preferenceUpdateFrequency(fileName, settings);
-		final CommonPreference<Integer> timeOfDayPreference = preferenceTimeOfDayToUpdate(fileName, settings);
-		int dp4 = getResources().getDimensionPixelSize(R.dimen.context_menu_buttons_padding_bottom);
-		int dp6 = getResources().getDimensionPixelSize(R.dimen.context_menu_padding_margin_tiny);
-		int dp8 = getResources().getDimensionPixelSize(R.dimen.context_menu_padding_margin_small);
+		if (savedInstanceState != null && savedInstanceState.containsKey(LOCAL_INDEX_FILE_NAME)) {
+			fileName = savedInstanceState.getString(LOCAL_INDEX_FILE_NAME);
+		}
+		CommonPreference<Boolean> localUpdatePreference = preferenceForLocalIndex(fileName, settings);
+		CommonPreference<Boolean> downloadViaWiFiPreference = preferenceDownloadViaWiFi(fileName, settings);
+		CommonPreference<Integer> frequencyPreference = preferenceUpdateFrequency(fileName, settings);
+		CommonPreference<Integer> timeOfDayPreference = preferenceTimeOfDayToUpdate(fileName, settings);
 		int dp10 = getResources().getDimensionPixelSize(R.dimen.context_menu_padding_margin_medium);
 		int dp12 = getResources().getDimensionPixelSize(R.dimen.content_padding_small);
 		int dp16 = getResources().getDimensionPixelSize(R.dimen.content_padding);
@@ -118,12 +118,6 @@ public class LiveUpdatesSettingsDialogFragmentNew extends MenuBottomSheetDialogF
 		int dp40 = getResources().getDimensionPixelSize(R.dimen.list_header_height);
 		int dp48 = getResources().getDimensionPixelSize(R.dimen.context_menu_buttons_bottom_height);
 		int dp56 = getResources().getDimensionPixelSize(R.dimen.bottom_sheet_selected_item_title_height);
-
-		if (savedInstanceState != null) {
-			if (savedInstanceState.containsKey(LOCAL_INDEX_FILE_NAME)) {
-				fileName = savedInstanceState.getString(LOCAL_INDEX_FILE_NAME);
-			}
-		}
 
 		items.add(new SimpleBottomSheetItem.Builder()
 				.setTitle(getNameToDisplay(fileName, app))
@@ -144,39 +138,6 @@ public class LiveUpdatesSettingsDialogFragmentNew extends MenuBottomSheetDialogF
 		itemLiveUpdateButton.setMinimumHeight(dp56);
 		items.add(new BottomSheetItemWithCompoundButton.Builder()
 				.setChecked(localUpdatePreference.get())
-				.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-					@Override
-					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-						if (onLiveUpdatesForLocalChange != null
-								&& onLiveUpdatesForLocalChange.onUpdateLocalIndex(fileName, isChecked, new Runnable() {
-							@Override
-							public void run() {
-								if (indexLastCheckItem != -1) {
-									((BottomSheetItemWithDescription) items.get(indexLastCheckItem))
-											.setDescription(getLastCheckString());
-								}
-								if (indexFrequencyHelpMessageItem != -1) {
-									((BottomSheetItemWithDescription) items.get(indexFrequencyHelpMessageItem))
-											.setDescription(getFrequencyHelpMessage());
-								}
-								if (indexClearItem != -1) {
-									((BottomSheetItemWithDescription) items.get(indexClearItem))
-											.setDescription(getUpdatesSizeStr());
-								}
-							}
-						})) {
-							if (indexSwitchLiveUpdateItem != -1) {
-								BottomSheetItemWithCompoundButton button = (BottomSheetItemWithCompoundButton) items.get(indexSwitchLiveUpdateItem);
-								button.setTitle(getStateText(isChecked));
-								button.setChecked(isChecked);
-								updateCustomButtonView(app, null, button.getView(), isChecked, nightMode);
-							}
-							frequencyToggleButton.updateView(localUpdatePreference.get());
-							timeOfDayToggleButton.updateView(localUpdatePreference.get());
-							setStateViaWiFiButton(localUpdatePreference);
-						}
-					}
-				})
 				.setTitle(getStateText(localUpdatePreference.get()))
 				.setTitleColorId(getActiveTabTextColorId(nightMode))
 				.setCustomView(itemLiveUpdate)
@@ -186,6 +147,33 @@ public class LiveUpdatesSettingsDialogFragmentNew extends MenuBottomSheetDialogF
 						if (indexSwitchLiveUpdateItem != -1) {
 							BottomSheetItemWithCompoundButton button = (BottomSheetItemWithCompoundButton) items.get(indexSwitchLiveUpdateItem);
 							button.setChecked(!button.isChecked());
+							if (onLiveUpdatesForLocalChange != null
+									&& onLiveUpdatesForLocalChange.onUpdateLocalIndex(fileName, button.isChecked(), new Runnable() {
+								@Override
+								public void run() {
+									if (indexLastCheckItem != -1 && items.size() > 0) {
+										((BottomSheetItemWithDescription) items.get(indexLastCheckItem))
+												.setDescription(getLastCheckString());
+									}
+									if (indexFrequencyHelpMessageItem != -1 && items.size() > 0) {
+										((BottomSheetItemWithDescription) items.get(indexFrequencyHelpMessageItem))
+												.setDescription(getFrequencyHelpMessage());
+									}
+									if (indexClearItem != -1 && items.size() > 0) {
+										((BottomSheetItemWithDescription) items.get(indexClearItem))
+												.setDescription(getUpdatesSizeStr());
+									}
+								}
+							})) {
+								if (indexSwitchLiveUpdateItem != -1 && items.size() > 0) {
+									button.setTitle(getStateText(button.isChecked()));
+									updateCustomButtonView(app, null, button.getView(), button.isChecked(), nightMode);
+								}
+								CommonPreference<Boolean> localUpdatePreference = preferenceForLocalIndex(fileName, settings);
+								frequencyToggleButton.updateView(localUpdatePreference.get());
+								timeOfDayToggleButton.updateView(localUpdatePreference.get());
+								setStateViaWiFiButton(localUpdatePreference);
+							}
 						}
 					}
 				})
@@ -273,7 +261,7 @@ public class LiveUpdatesSettingsDialogFragmentNew extends MenuBottomSheetDialogF
 		itemUpdateNowButton.setLayoutParams(itemUpdateNowParams);
 		((AppCompatImageView) itemUpdateNowButton.findViewById(R.id.button_icon)).setImageDrawable(
 				ContextCompat.getDrawable(app, R.drawable.ic_action_update));
-		UiUtilities.setupDialogButton(nightMode, itemUpdateNowButton, UiUtilities.DialogButtonType.SECONDARY, app.getResources().getString(R.string.update_now));
+		UiUtilities.setupDialogButton(nightMode, itemUpdateNowButton, UiUtilities.DialogButtonType.SECONDARY, getString(R.string.update_now));
 		itemUpdateNowButton.setMinimumHeight(AndroidUtils.dpToPx(app, app.getResources().getDimension(R.dimen.dialog_button_height)));
 
 		items.add(new BaseBottomSheetItem.Builder()
@@ -288,15 +276,15 @@ public class LiveUpdatesSettingsDialogFragmentNew extends MenuBottomSheetDialogF
 								onLiveUpdatesForLocalChange.forceUpdateLocal(fileName, true, new Runnable() {
 									@Override
 									public void run() {
-										if (indexLastCheckItem != -1) {
+										if (indexLastCheckItem != -1 && items.size() > 0) {
 											((BottomSheetItemWithDescription) items.get(indexLastCheckItem))
 													.setDescription(getLastCheckString());
 										}
-										if (indexFrequencyHelpMessageItem != -1) {
+										if (indexFrequencyHelpMessageItem != -1 && items.size() > 0) {
 											((BottomSheetItemWithDescription) items.get(indexFrequencyHelpMessageItem))
 													.setDescription(getFrequencyHelpMessage());
 										}
-										if (indexClearItem != -1) {
+										if (indexClearItem != -1 && items.size() > 0) {
 											((BottomSheetItemWithDescription) items.get(indexClearItem))
 													.setDescription(getUpdatesSizeStr());
 										}
@@ -317,7 +305,7 @@ public class LiveUpdatesSettingsDialogFragmentNew extends MenuBottomSheetDialogF
 				new BottomSheetItemWithDescription.Builder()
 						.setDescription(getUpdatesSizeStr())
 						.setIcon(UiUtilities.tintDrawable(iconDelete, iconDeleteColor))
-						.setTitle(app.getResources().getString(R.string.updates_size))
+						.setTitle(getString(R.string.updates_size))
 						.setLayoutId(R.layout.bottom_sheet_item_with_descr_icon_right)
 						.setOnClickListener(new View.OnClickListener() {
 							@Override
@@ -340,23 +328,18 @@ public class LiveUpdatesSettingsDialogFragmentNew extends MenuBottomSheetDialogF
 		items.add(
 				new BottomSheetItemWithCompoundButton.Builder()
 						.setChecked(downloadViaWiFiPreference.get())
-						.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-							@Override
-							public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-								downloadViaWiFiPreference.set(isChecked);
-							}
-						})
 						.setDescription(getStateText(downloadViaWiFiPreference.get()))
 						.setIconHidden(true)
-						.setTitle(app.getResources().getString(R.string.only_download_over_wifi))
+						.setTitle(getString(R.string.only_download_over_wifi))
 						.setLayoutId(R.layout.bottom_sheet_item_with_descr_and_switch_56dp)
 						.setOnClickListener(new View.OnClickListener() {
 							@Override
 							public void onClick(View v) {
-								if (localUpdatePreference.get() && indexViaWiFiItem != -1) {
+								if (preferenceForLocalIndex(fileName, settings).get() && indexViaWiFiItem != -1 && items.size() > 0) {
 									BottomSheetItemWithCompoundButton button = (BottomSheetItemWithCompoundButton) items.get(indexViaWiFiItem);
 									button.setChecked(!button.isChecked());
 									button.setDescription(getStateText(button.isChecked()));
+									preferenceDownloadViaWiFi(fileName, settings).set(button.isChecked());
 								}
 							}
 						})
@@ -384,7 +367,7 @@ public class LiveUpdatesSettingsDialogFragmentNew extends MenuBottomSheetDialogF
 	}
 
 	private void setStateViaWiFiButton(CommonPreference<Boolean> localUpdatePreference) {
-		if (indexViaWiFiItem != -1) {
+		if (indexViaWiFiItem != -1 && items.size() > 0) {
 			BottomSheetItemWithCompoundButton button = (BottomSheetItemWithCompoundButton) items.get(indexViaWiFiItem);
 			if (button.getView() != null) {
 				TextView title = button.getView().findViewById(R.id.title);
@@ -405,22 +388,26 @@ public class LiveUpdatesSettingsDialogFragmentNew extends MenuBottomSheetDialogF
 
 	protected SpannableString getLastCheckString() {
 		final long lastUpdate = preferenceLatestUpdateAvailable(fileName, settings).get();
-		String updatedTimeStr = app.getResources().getString(R.string.updated, formatShortDateTime(app, lastUpdate));
-		SpannableString updatedTimeSpannable = SpannableString.valueOf(updatedTimeStr);
-
-		if (!updatedTimeStr.contains(app.getResources().getString(R.string.shared_string_never))) {
-			SpannableString fullUpdatedTimeSpannable = UiUtilities.createSpannableString(updatedTimeStr,
-					new StyleSpan(Typeface.BOLD), updatedTimeStr.substring(updatedTimeStr.indexOf(" - "), updatedTimeStr.length() - 1));
-
+		String updatedTimeStr = getString(R.string.updated, formatShortDateTime(app, lastUpdate));
+		if (!updatedTimeStr.contains(getString(R.string.shared_string_never))) {
 			final long lastCheck = preferenceLastCheck(fileName, settings).get();
-			String lastCheckStr = "\n" + app.getResources().getString(R.string.last_time_checked, formatShortDateTime(app, lastCheck));
-
-			SpannableString lastCheckTimeSpannable = UiUtilities.createSpannableString(lastCheckStr,
-					new StyleSpan(Typeface.BOLD), lastCheckStr.substring(lastCheckStr.lastIndexOf(" - ")));
-
-			return SpannableString.valueOf(TextUtils.concat(fullUpdatedTimeSpannable, lastCheckTimeSpannable));
+			String lastCheckStr = getString(R.string.last_time_checked, formatShortDateTime(app, lastCheck));
+			updatedTimeStr = updatedTimeStr.concat("\n").concat(lastCheckStr);
+			SpannableString spanStr = new SpannableString(updatedTimeStr);
+			Typeface typeface = FontCache.getRobotoMedium(getContext());
+			int start = updatedTimeStr.indexOf(" — ");
+			if (start != -1) {
+				int end = updatedTimeStr.indexOf(lastCheckStr) - 1;
+				spanStr.setSpan(new CustomTypefaceSpan(typeface), start, end, 0);
+				start = updatedTimeStr.lastIndexOf(" — ");
+				if (start != -1) {
+					end = updatedTimeStr.length() - 1;
+					spanStr.setSpan(new CustomTypefaceSpan(typeface), start, end, 0);
+				}
+			}
+			return spanStr;
 		}
-		return updatedTimeSpannable;
+		return new SpannableString(updatedTimeStr);
 	}
 
 	protected String getFrequencyHelpMessage() {
@@ -440,7 +427,7 @@ public class LiveUpdatesSettingsDialogFragmentNew extends MenuBottomSheetDialogF
 		long updatesSize = getUpdatesSize();
 		return updatesSize > 0
 				? AndroidUtils.formatSize(app, updatesSize)
-				: app.getResources().getString(R.string.ltr_or_rtl_combine_via_space, "0.0", "kB");
+				: getString(R.string.ltr_or_rtl_combine_via_space, "0.0", "kB");
 	}
 
 
@@ -501,7 +488,7 @@ public class LiveUpdatesSettingsDialogFragmentNew extends MenuBottomSheetDialogF
 			if (!Algorithms.isEmpty(Arrays.asList(timeOfDayLayouts))) {
 				refreshTimeOfDayLayout(newValue, timeOfDayLayouts);
 			}
-			if (indexFrequencyHelpMessageItem != -1) {
+			if (indexFrequencyHelpMessageItem != -1 && items.size() > 0) {
 				((BottomSheetItemWithDescription) items.get(indexFrequencyHelpMessageItem))
 						.setDescription(getFrequencyHelpMessage());
 			}
@@ -518,11 +505,11 @@ public class LiveUpdatesSettingsDialogFragmentNew extends MenuBottomSheetDialogF
 		if (confirmationInterface != null) {
 			confirmationInterface.updateList();
 		}
-		if (indexLastCheckItem != -1) {
+		if (indexLastCheckItem != -1 && items.size() > 0) {
 			((BottomSheetItemWithDescription) items.get(indexLastCheckItem))
 					.setDescription(getLastCheckString());
 		}
-		if (indexClearItem != -1) {
+		if (indexClearItem != -1 && items.size() > 0) {
 			((BottomSheetItemWithDescription) items.get(indexClearItem))
 					.setDescription(getUpdatesSizeStr());
 		}
@@ -540,7 +527,7 @@ public class LiveUpdatesSettingsDialogFragmentNew extends MenuBottomSheetDialogF
 	}
 
 	public String getStateText(boolean isEnabled) {
-		return app.getResources().getString(isEnabled ? R.string.shared_string_enabled : R.string.shared_string_disabled);
+		return getString(isEnabled ? R.string.shared_string_enabled : R.string.shared_string_disabled);
 	}
 
 	@ColorRes
