@@ -1386,6 +1386,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				mapActivity.getChooseRouteFragment().dismiss();
 			}
 			updateLocationViewCache = mapActivity.getMyApplication().getUIUtilities().getUpdateLocationViewCache();
+			updateLocationViewCache.setScreenOrientation(0);
 			mapActivity.getMapViewTrackingUtilities().setContextMenu(menu);
 			mapActivity.getMapViewTrackingUtilities().setMapLinkedToLocation(false);
 			wasDrawerDisabled = mapActivity.isDrawerDisabled();

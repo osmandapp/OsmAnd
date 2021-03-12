@@ -18,6 +18,7 @@ import android.text.Spanned;
 import android.text.style.StyleSpan;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
@@ -66,12 +67,8 @@ public class UiUtilities {
 
 	private static final Log LOG = PlatformUtil.getLog(UiUtilities.class);
 
-	private TLongObjectHashMap<Drawable> drawableCache = new TLongObjectHashMap<>();
-	private OsmandApplication app;
-	private static final int ORIENTATION_0 = 0;
-	private static final int ORIENTATION_90 = 3;
-	private static final int ORIENTATION_270 = 1;
-	private static final int ORIENTATION_180 = 2;
+	private final TLongObjectHashMap<Drawable> drawableCache = new TLongObjectHashMap<>();
+	private final OsmandApplication app;
 	private static final int INVALID_ID = -1;
 
 	public enum DialogButtonType {
@@ -259,6 +256,10 @@ public class UiUtilities {
 	}
 
 	public static class UpdateLocationViewCache {
+		public void setScreenOrientation(int screenOrientation) {
+			this.screenOrientation = screenOrientation;
+		}
+
 		int screenOrientation;
 		public boolean paintTxt = true;
 		public int arrowResId;
@@ -356,16 +357,16 @@ public class UiUtilities {
 	public int getScreenOrientation() {
 		int screenOrientation = ((WindowManager) app.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRotation();
 		switch (screenOrientation) {
-			case ORIENTATION_0:   // Device default (normally portrait)
+			case Surface.ROTATION_0:   // Device default (normally portrait)
 				screenOrientation = 0;
 				break;
-			case ORIENTATION_90:  // Landscape right
+			case Surface.ROTATION_90:  // Landscape right
 				screenOrientation = 90;
 				break;
-			case ORIENTATION_270: // Landscape left
+			case Surface.ROTATION_270: // Landscape left
 				screenOrientation = 270;
 				break;
-			case ORIENTATION_180: // Upside down
+			case Surface.ROTATION_180: // Upside down
 				screenOrientation = 180;
 				break;
 		}
