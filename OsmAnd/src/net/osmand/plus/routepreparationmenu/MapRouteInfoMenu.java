@@ -98,9 +98,9 @@ import net.osmand.plus.routepreparationmenu.cards.PublicTransportNotFoundSetting
 import net.osmand.plus.routepreparationmenu.cards.PublicTransportNotFoundWarningCard;
 import net.osmand.plus.routepreparationmenu.cards.SimpleRouteCard;
 import net.osmand.plus.routepreparationmenu.cards.TracksCard;
+import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RouteCalculationResult;
-import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.routing.TransportRoutingHelper;
@@ -1831,6 +1831,13 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		});
 
 		FrameLayout fromButton = (FrameLayout) mainView.findViewById(R.id.from_button);
+		boolean isFollowTrack = app.getRoutingHelper().getCurrentGPXRoute() != null;
+
+		if (isFollowTrack) {
+			fromButton.setVisibility(View.GONE);
+		} else {
+			fromButton.setVisibility(View.VISIBLE);
+		}
 		LinearLayout fromButtonContainer = (LinearLayout) mainView.findViewById(R.id.from_button_container);
 		setupButtonBackground(fromButton, fromButtonContainer);
 
