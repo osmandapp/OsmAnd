@@ -1,5 +1,6 @@
 package net.osmand.plus.track;
 
+import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.view.LayoutInflater;
@@ -188,6 +189,7 @@ public class TrackColoringCard extends BaseCard {
 		private void updateButtonBg(TrackAppearanceViewHolder holder, TrackAppearanceItem item) {
 			GradientDrawable rectContourDrawable = (GradientDrawable) AppCompatResources.getDrawable(app, R.drawable.bg_select_group_button_outline);
 			if (rectContourDrawable != null) {
+				Context ctx = holder.itemView.getContext();
 				boolean itemSelected = getSelectedAppearanceItem() != null && getSelectedAppearanceItem().equals(item);
 
 				int strokeColor;
@@ -195,39 +197,40 @@ public class TrackColoringCard extends BaseCard {
 				int strokeWidth;
 
 				if (itemSelected) {
-					strokeColor = AndroidUtils.getColorFromAttr(app, R.attr.pstsIndicatorColor);
+					strokeColor = AndroidUtils.getColorFromAttr(ctx, R.attr.colorPrimary);
 					backgroundColor = 0;
 					strokeWidth = 2;
 				} else if (!item.isActive()) {
-					strokeColor = AndroidUtils.getColorFromAttr(app, R.attr.stroked_buttons_and_links_outline);
-					backgroundColor = AndroidUtils.getColorFromAttr(app, R.attr.ctx_menu_card_btn);
+					strokeColor = AndroidUtils.getColorFromAttr(ctx, R.attr.stroked_buttons_and_links_outline);
+					backgroundColor = AndroidUtils.getColorFromAttr(ctx, R.attr.ctx_menu_card_btn);
 					strokeWidth = 2;
 				} else {
-					strokeColor = AndroidUtils.getColorFromAttr(app, R.attr.stroked_buttons_and_links_outline);
+					strokeColor = AndroidUtils.getColorFromAttr(ctx, R.attr.stroked_buttons_and_links_outline);
 					backgroundColor = 0;
 					strokeWidth = 1;
 				}
 
 				rectContourDrawable.mutate();
 				rectContourDrawable.setColor(backgroundColor);
-				rectContourDrawable.setStroke(AndroidUtils.dpToPx(app, strokeWidth), strokeColor);
+				rectContourDrawable.setStroke(AndroidUtils.dpToPx(ctx, strokeWidth), strokeColor);
 				holder.button.setImageDrawable(rectContourDrawable);
 			}
 		}
 
 		private void updateTextAndIconColor(TrackAppearanceViewHolder holder, TrackAppearanceItem item) {
+			Context ctx = holder.itemView.getContext();
 			boolean isSelected = item.getAttrName().equals(getSelectedAppearanceItem().getAttrName());
 			int iconColorId;
 			int textColorId;
 
 			if (isSelected) {
-				iconColorId = AndroidUtils.getColorFromAttr(app, R.attr.default_icon_color);
-				textColorId = AndroidUtils.getColorFromAttr(app, android.R.attr.textColor);
+				iconColorId = AndroidUtils.getColorFromAttr(ctx, R.attr.default_icon_color);
+				textColorId = AndroidUtils.getColorFromAttr(ctx, android.R.attr.textColor);
 			} else if (!item.isActive()) {
-				iconColorId = AndroidUtils.getColorFromAttr(app, R.attr.default_icon_color);
-				textColorId = AndroidUtils.getColorFromAttr(app, android.R.attr.textColorSecondary);
+				iconColorId = AndroidUtils.getColorFromAttr(ctx, R.attr.default_icon_color);
+				textColorId = AndroidUtils.getColorFromAttr(ctx, android.R.attr.textColorSecondary);
 			} else {
-				iconColorId = AndroidUtils.getColorFromAttr(app, R.attr.pstsIndicatorColor);
+				iconColorId = AndroidUtils.getColorFromAttr(ctx, R.attr.colorPrimary);
 				textColorId = iconColorId;
 			}
 

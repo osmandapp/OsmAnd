@@ -14,15 +14,17 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public class GradientCard extends BaseCard {
 
 	private GPXTrackAnalysis gpxTrackAnalysis;
-	private GradientScaleType selectedScaleType = null;
+	private GradientScaleType selectedScaleType;
 
-	public GradientCard(@NonNull MapActivity mapActivity, @NonNull GPXTrackAnalysis gpxTrackAnalysis) {
+	public GradientCard(@NonNull MapActivity mapActivity, @NonNull GPXTrackAnalysis gpxTrackAnalysis, @Nullable GradientScaleType selectedScaleType) {
 		super(mapActivity);
 		this.gpxTrackAnalysis = gpxTrackAnalysis;
+		this.selectedScaleType = selectedScaleType;
 	}
 
 	@Override
@@ -72,10 +74,11 @@ public class GradientCard extends BaseCard {
 			return (int) value + " %";
 		}
 		String speed = OsmAndFormatter.getFormattedSpeed(value, app);
+		String speedUnit = app.getSettings().SPEED_SYSTEM.get().toShortString(app);
 		Spannable formattedSpeed = new SpannableString(speed);
 		formattedSpeed.setSpan(
 				new ForegroundColorSpan(AndroidUtils.getColorFromAttr(app, android.R.attr.textColorSecondary)),
-				speed.indexOf(" "), speed.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+				speed.indexOf(speedUnit), speed.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		return formattedSpeed;
 	}
 }

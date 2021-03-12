@@ -209,7 +209,7 @@ public class RouteColorize {
         }
         setPalette(new double[][] {
                 {minValue, gradientPalette[0]},
-                {colorizationType == ColorizationType.SLOPE ? 0 : (minValue + maxValue) / 2},
+                {colorizationType == ColorizationType.SLOPE ? 0 : (minValue + maxValue) / 2, gradientPalette[1]},
                 {maxValue, gradientPalette[2]}
         });
     }

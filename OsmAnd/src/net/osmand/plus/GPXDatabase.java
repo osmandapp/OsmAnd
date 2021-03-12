@@ -1,8 +1,5 @@
 package net.osmand.plus;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.IndexConstants;
@@ -15,6 +12,9 @@ import net.osmand.util.Algorithms;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public class GPXDatabase {
 
@@ -751,7 +751,9 @@ public class GPXDatabase {
 					new Object[] {fileName, fileDir, color, 0, item.splitType, item.splitInterval,
 							item.apiImported ? 1 : 0, item.showAsMarkers ? 1 : 0, item.joinSegments ? 1 : 0,
 							item.showArrows ? 1 : 0, item.showStartFinish ? 1 : 0, item.width,
-							item.gradientSpeedPalette, item.gradientAltitudePalette, item.gradientSlopePalette, gradientScaleType});
+							Algorithms.gradientPaletteToString(item.gradientSpeedPalette),
+							Algorithms.gradientPaletteToString(item.gradientAltitudePalette),
+							Algorithms.gradientPaletteToString(item.gradientSlopePalette), gradientScaleType});
 		}
 	}
 
@@ -884,7 +886,7 @@ public class GPXDatabase {
 		item.gradientSlopePalette = Algorithms.stringToGradientPalette(gradientSlopePalette);
 
 		try {
-			item.gradientScaleType = Algorithms.isEmpty(gradientScaleType) ? null : GradientScaleType.valueOf(gradientScaleType.toUpperCase());
+			item.gradientScaleType = GradientScaleType.getGradientTypeByName(gradientScaleType);
 		} catch (IllegalArgumentException e) {
 			item.gradientScaleType = null;
 		}

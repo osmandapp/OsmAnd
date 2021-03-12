@@ -145,6 +145,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	private CommonPreference<Integer> currentTrackColorPref;
 	private CommonPreference<GradientScaleType> currentTrackScaleType;
+	private CommonPreference<String> currentTrackSpeedGradientPalette;
+	private CommonPreference<String> currentTrackAltitudeGradientPalette;
+	private CommonPreference<String> currentTrackSlopeGradientPalette;
 	private CommonPreference<String> currentTrackWidthPref;
 	private CommonPreference<Boolean> currentTrackShowArrowsPref;
 	private CommonPreference<Boolean> currentTrackShowStartFinishPref;
@@ -159,6 +162,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 		currentTrackColorPref = view.getSettings().CURRENT_TRACK_COLOR;
 		currentTrackScaleType = view.getSettings().CURRENT_TRACK_COLORIZATION;
+		currentTrackSpeedGradientPalette = view.getSettings().CURRENT_TRACK_SPEED_GRADIENT_PALETTE;
+		currentTrackAltitudeGradientPalette = view.getSettings().CURRENT_TRACK_ALTITUDE_GRADIENT_PALETTE;
+		currentTrackSlopeGradientPalette = view.getSettings().CURRENT_TRACK_SLOPE_GRADIENT_PALETTE;
 		currentTrackWidthPref = view.getSettings().CURRENT_TRACK_WIDTH;
 		currentTrackShowArrowsPref = view.getSettings().CURRENT_TRACK_SHOW_ARROWS;
 		currentTrackShowStartFinishPref = view.getSettings().CURRENT_TRACK_SHOW_START_FINISH;
@@ -694,9 +700,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			updatePaints(color, width, selectedGpxFile.isRoutePoints(), currentTrack, settings, tileBox);
 			if (ts.renderer instanceof Renderable.RenderableSegment) {
 				Renderable.RenderableSegment renderableSegment = (Renderable.RenderableSegment) ts.renderer;
-				if (scaleType != null) {
-					renderableSegment.setGradientScaleType(scaleType);
-				}
+				renderableSegment.setGradientScaleType(scaleType);
 				renderableSegment.drawSegment(view.getZoom(), paint, canvas, tileBox);
 			}
 		}
@@ -769,6 +773,16 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private int[] getColorizationPalette(GPXFile gpxFile, GradientScaleType scaleType) {
 		if (hasTrackDrawInfoForTrack(gpxFile)) {
 			return trackDrawInfo.getGradientPalette(scaleType);
+		} else if (gpxFile.showCurrentTrack) {
+			String palette;
+			if (scaleType == GradientScaleType.SPEED) {
+				palette = currentTrackSpeedGradientPalette.get();
+			} else if (scaleType == GradientScaleType.ALTITUDE) {
+				palette = currentTrackAltitudeGradientPalette.get();
+			} else {
+				palette = currentTrackSlopeGradientPalette.get();
+			}
+			return Algorithms.stringToArray(palette);
 		}
 		GpxDataItem dataItem = gpxDbHelper.getItem(new File(gpxFile.path));
 		if (dataItem == null) {

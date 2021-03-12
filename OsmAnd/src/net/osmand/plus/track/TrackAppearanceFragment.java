@@ -160,6 +160,9 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 				trackDrawInfo = new TrackDrawInfo(true);
 				trackDrawInfo.setColor(app.getSettings().CURRENT_TRACK_COLOR.get());
 				trackDrawInfo.setGradientScaleType(app.getSettings().CURRENT_TRACK_COLORIZATION.get());
+				trackDrawInfo.setSpeedGradientPalette(Algorithms.stringToArray(app.getSettings().CURRENT_TRACK_SPEED_GRADIENT_PALETTE.get()));
+				trackDrawInfo.setAltitudeGradientPalette(Algorithms.stringToArray(app.getSettings().CURRENT_TRACK_ALTITUDE_GRADIENT_PALETTE.get()));
+				trackDrawInfo.setSlopeGradientPalette(Algorithms.stringToArray(app.getSettings().CURRENT_TRACK_SLOPE_GRADIENT_PALETTE.get()));
 				trackDrawInfo.setWidth(app.getSettings().CURRENT_TRACK_WIDTH.get());
 				trackDrawInfo.setShowArrows(app.getSettings().CURRENT_TRACK_SHOW_ARROWS.get());
 				trackDrawInfo.setShowStartFinish(app.getSettings().CURRENT_TRACK_SHOW_START_FINISH.get());
@@ -579,12 +582,18 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		if (gpxFile.showCurrentTrack) {
 			app.getSettings().CURRENT_TRACK_COLOR.set(trackDrawInfo.getColor());
 			app.getSettings().CURRENT_TRACK_COLORIZATION.set(trackDrawInfo.getGradientScaleType());
+			app.getSettings().CURRENT_TRACK_SPEED_GRADIENT_PALETTE.set(Algorithms.arrayToString(trackDrawInfo.getSpeedGradientPalette()));
+			app.getSettings().CURRENT_TRACK_ALTITUDE_GRADIENT_PALETTE.set(Algorithms.arrayToString(trackDrawInfo.getAltitudeGradientPalette()));
+			app.getSettings().CURRENT_TRACK_SLOPE_GRADIENT_PALETTE.set(Algorithms.arrayToString(trackDrawInfo.getSlopeGradientPalette()));
 			app.getSettings().CURRENT_TRACK_WIDTH.set(trackDrawInfo.getWidth());
 			app.getSettings().CURRENT_TRACK_SHOW_ARROWS.set(trackDrawInfo.isShowArrows());
 			app.getSettings().CURRENT_TRACK_SHOW_START_FINISH.set(trackDrawInfo.isShowStartFinish());
 		} else if (gpxDataItem != null) {
 			GpxSplitType splitType = GpxSplitType.getSplitTypeByTypeId(trackDrawInfo.getSplitType());
 			gpxDbHelper.updateColor(gpxDataItem, trackDrawInfo.getColor());
+			gpxDbHelper.updateGradientScalePalette(gpxDataItem, GradientScaleType.SPEED, trackDrawInfo.getSpeedGradientPalette());
+			gpxDbHelper.updateGradientScalePalette(gpxDataItem, GradientScaleType.ALTITUDE, trackDrawInfo.getAltitudeGradientPalette());
+			gpxDbHelper.updateGradientScalePalette(gpxDataItem, GradientScaleType.SLOPE, trackDrawInfo.getSlopeGradientPalette());
 			gpxDbHelper.updateWidth(gpxDataItem, trackDrawInfo.getWidth());
 			gpxDbHelper.updateShowArrows(gpxDataItem, trackDrawInfo.isShowArrows());
 //			gpxDbHelper.updateShowStartFinish(gpxDataItem, trackDrawInfo.isShowStartFinish());
@@ -662,9 +671,8 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 			setupColorsCard(cardsContainer);
 
-			gradientCard = new GradientCard(mapActivity, selectedGpxFile.getTrackAnalysis(app));
-			AndroidUiHelper.updateVisibility(gradientCard.build(mapActivity), false);
-			cardsContainer.addView(gradientCard.getView());
+			gradientCard = new GradientCard(mapActivity, selectedGpxFile.getTrackAnalysis(app), trackDrawInfo.getGradientScaleType());
+			cardsContainer.addView(gradientCard.build(mapActivity));
 
 			trackWidthCard = new TrackWidthCard(mapActivity, trackDrawInfo, new OnNeedScrollListener() {
 
@@ -692,7 +700,8 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			List<Integer> colors = getTrackColors();
 			colorsCard = new ColorsCard(mapActivity, trackDrawInfo.getColor(), this, colors, app.getSettings().CUSTOM_TRACK_COLORS, null);
 			colorsCard.setListener(this);
-			cardsContainer.addView(colorsCard.build(mapActivity));
+			AndroidUiHelper.updateVisibility(colorsCard.build(mapActivity), trackDrawInfo.getGradientScaleType() == null);
+			cardsContainer.addView(colorsCard.getView());
 		}
 	}
 

@@ -98,6 +98,30 @@ public class TrackDrawInfo {
 		}
 	}
 
+	public int[] getSpeedGradientPalette() {
+		return speedGradientPalette;
+	}
+
+	public int[] getAltitudeGradientPalette() {
+		return altitudeGradientPalette;
+	}
+
+	public int[] getSlopeGradientPalette() {
+		return slopeGradientPalette;
+	}
+
+	public void setSpeedGradientPalette(int[] palette) {
+		this.speedGradientPalette = palette;
+	}
+
+	public void setAltitudeGradientPalette(int[] palette) {
+		this.altitudeGradientPalette = palette;
+	}
+
+	public void setSlopeGradientPalette(int[] palette) {
+		this.slopeGradientPalette = palette;
+	}
+
 	public int getSplitType() {
 		return splitType;
 	}

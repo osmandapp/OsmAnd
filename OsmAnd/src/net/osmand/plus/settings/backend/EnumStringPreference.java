@@ -12,7 +12,8 @@ public class EnumStringPreference<E extends Enum<E>> extends CommonPreference<E>
 	@Override
 	protected E getValue(Object prefs, E defaultValue) {
 		try {
-			String name = getSettingsAPI().getString(prefs, getId(), defaultValue.name());
+			String defaultValueName = defaultValue == null ? null : defaultValue.name();
+			String name = getSettingsAPI().getString(prefs, getId(), defaultValueName);
 			E value = parseString(name);
 			return value != null ? value : defaultValue;
 		} catch (ClassCastException ex) {
@@ -23,7 +24,8 @@ public class EnumStringPreference<E extends Enum<E>> extends CommonPreference<E>
 
 	@Override
 	public boolean setValue(Object prefs, E val) {
-		return getSettingsAPI().edit(prefs).putString(getId(), val.name()).commit();
+		String name = val == null ? null : val.name();
+		return getSettingsAPI().edit(prefs).putString(getId(), name).commit();
 	}
 
 	@Override

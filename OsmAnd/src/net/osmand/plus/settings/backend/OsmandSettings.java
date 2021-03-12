@@ -1409,29 +1409,10 @@ public class OsmandSettings {
 	public final OsmandPreference<Long> LAST_UPDATES_CARD_REFRESH = new LongPreference(this, "last_updates_card_refresh", 0).makeGlobal();
 
 	public final CommonPreference<Integer> CURRENT_TRACK_COLOR = new IntPreference(this, "current_track_color", 0).makeGlobal().makeShared().cache();
-	public final CommonPreference<GradientScaleType> CURRENT_TRACK_COLORIZATION = new CommonPreference<GradientScaleType>(this, "current_track_colorization", null) {
-		@Override
-		protected GradientScaleType getValue(Object prefs, GradientScaleType defaultValue) {
-			String name = getSettingsAPI().getString(prefs, getId(), null);
-			return parseString(name);
-		}
-
-		@Override
-		protected boolean setValue(Object prefs, GradientScaleType val) {
-			String name = val == null ? null : val.getTypeName();
-			return getSettingsAPI().edit(prefs).putString(getId(), name).commit();
-		}
-
-		@Override
-		public GradientScaleType parseString(String s) {
-			for (GradientScaleType value : GradientScaleType.values()) {
-				if (value.name().equals(s)) {
-					return value;
-				}
-			}
-			return null;
-		}
-	}.makeGlobal().makeShared().cache();
+	public final CommonPreference<GradientScaleType> CURRENT_TRACK_COLORIZATION = new EnumStringPreference<>(this, "current_track_colorization", null, GradientScaleType.values()).makeGlobal().makeShared().cache();
+	public final CommonPreference<String> CURRENT_TRACK_SPEED_GRADIENT_PALETTE = new StringPreference(this, "current_track_speed_gradient_palette", null).makeGlobal().makeShared().cache();
+	public final CommonPreference<String> CURRENT_TRACK_ALTITUDE_GRADIENT_PALETTE = new StringPreference(this, "current_track_altitude_gradient_palette", null).makeGlobal().makeShared().cache();
+	public final CommonPreference<String> CURRENT_TRACK_SLOPE_GRADIENT_PALETTE = new StringPreference(this, "current_track_slope_gradient_palette", null).makeGlobal().makeShared().cache();
 	public final CommonPreference<String> CURRENT_TRACK_WIDTH = new StringPreference(this, "current_track_width", "").makeGlobal().makeShared().cache();
 	public final CommonPreference<Boolean> CURRENT_TRACK_SHOW_ARROWS = new BooleanPreference(this, "current_track_show_arrows", false).makeGlobal().makeShared().cache();
 	public final CommonPreference<Boolean> CURRENT_TRACK_SHOW_START_FINISH = new BooleanPreference(this, "current_track_show_start_finish", true).makeGlobal().makeShared().cache();
