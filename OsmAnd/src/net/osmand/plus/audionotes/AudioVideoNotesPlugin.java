@@ -782,8 +782,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				@Override
 				public boolean updateInfo(DrawSettings drawSettings) {
 					boolean recording = isRecording();
-					if (!Algorithms.objectEquals(recording, cachedRecording)) {
-						cachedRecording = recording;
+					cachedRecording = recording;
 						if (recording) {
 							setText(app.getString(R.string.shared_string_control_stop), null);
 							setIcons(R.drawable.widget_icon_av_active, R.drawable.widget_icon_av_active_night);
@@ -805,7 +804,6 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 									break;
 							}
 						}
-					}
 					return false;
 				};
 			};
