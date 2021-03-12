@@ -154,6 +154,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	private String gpxTitle;
 	private String returnScreenName;
+	private String callingFragmentTag;
 	private TrackChartPoints trackChartPoints;
 
 	private Float heading;
@@ -272,7 +273,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 						if (contextMenu.isActive() && contextMenu.getPointDescription() != null
 								&& contextMenu.getPointDescription().isGpxPoint()) {
 							contextMenu.show();
-						} else if (Algorithms.objectEquals(returnScreenName, QuickSearchDialogFragment.TAG)) {
+						} else if (Algorithms.objectEquals(callingFragmentTag, QuickSearchDialogFragment.TAG)) {
 							mapActivity.showQuickSearch(ShowQuickSearchMode.CURRENT, false);
 						} else {
 							mapActivity.launchPrevActivityIntent();
@@ -309,6 +310,10 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	public void setReturnScreenName(String returnScreenName) {
 		this.returnScreenName = returnScreenName;
+	}
+
+	public void setCallingFragmentTag(String callingFragmentTag) {
+		this.callingFragmentTag = callingFragmentTag;
 	}
 
 	@Override
@@ -1259,7 +1264,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		boolean currentRecording = file == null;
 		String path = file != null ? file.getAbsolutePath() : null;
 		if (context instanceof MapActivity) {
-			TrackMenuFragment.showInstance((MapActivity) context, path, currentRecording, null, null);
+			TrackMenuFragment.showInstance((MapActivity) context, path, currentRecording, null, null, null);
 		} else {
 			Bundle bundle = new Bundle();
 			bundle.putString(TRACK_FILE_NAME, path);
@@ -1307,23 +1312,30 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		}
 	}
 
-	public static void showInstance(@NonNull MapActivity mapActivity, @Nullable String path,
-									boolean showCurrentTrack, @Nullable final LatLon latLon, @Nullable final String returnScreenName) {
+	public static void showInstance(@NonNull MapActivity mapActivity,
+	                                @Nullable String path,
+									boolean showCurrentTrack,
+									@Nullable final LatLon latLon,
+									@Nullable final String returnScreenName,
+									@Nullable final String callingFragmentTag) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		loadSelectedGpxFile(mapActivity, path, showCurrentTrack, new CallbackWithObject<SelectedGpxFile>() {
 			@Override
 			public boolean processResult(SelectedGpxFile selectedGpxFile) {
 				MapActivity mapActivity = mapActivityRef.get();
 				if (mapActivity != null && selectedGpxFile != null) {
-					showInstance(mapActivity, selectedGpxFile, latLon, returnScreenName);
+					showInstance(mapActivity, selectedGpxFile, latLon, returnScreenName, callingFragmentTag);
 				}
 				return true;
 			}
 		});
 	}
 
-	public static boolean showInstance(@NonNull MapActivity mapActivity, @NonNull SelectedGpxFile selectedGpxFile,
-									   @Nullable LatLon latLon, @Nullable String returnScreenName) {
+	public static boolean showInstance(@NonNull MapActivity mapActivity,
+	                                   @NonNull SelectedGpxFile selectedGpxFile,
+									   @Nullable LatLon latLon,
+									   @Nullable String returnScreenName,
+									   @Nullable String callingFragmentTag) {
 		try {
 			Bundle args = new Bundle();
 			args.putInt(ContextMenuFragment.MENU_STATE_KEY, MenuState.HEADER_ONLY);
@@ -1333,6 +1345,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			fragment.setRetainInstance(true);
 			fragment.setSelectedGpxFile(selectedGpxFile);
 			fragment.setReturnScreenName(returnScreenName);
+			fragment.setCallingFragmentTag(callingFragmentTag);
 
 			if (latLon != null) {
 				fragment.setLatLon(latLon);

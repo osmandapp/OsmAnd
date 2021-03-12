@@ -163,9 +163,7 @@ public class Multipolygon {
 	 * @return true if this multipolygon is correct and contains the point
 	 */
 	public boolean containsPoint(LatLon point) {
-
 		return containsPoint(point.getLatitude(), point.getLongitude());
-
 	}
 
 	public int countOuterPolygons() {

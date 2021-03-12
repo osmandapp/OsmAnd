@@ -416,7 +416,8 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		LinearLayout view = getLinearLayout(convertView, R.layout.search_gpx_list_item);
 		SearchResult sr = listItem.getSearchResult();
 		setupCheckBox(position, view, listItem);
-		GpxUiHelper.updateGpxInfoView(app, view, sr.localeName, listItem.getIcon(), gpxInfo);
+		String gpxTitle = GpxUiHelper.getGpxTitle(sr.localeName);
+		GpxUiHelper.updateGpxInfoView(app, view, gpxTitle, listItem.getIcon(), gpxInfo);
 		return view;
 	}
 
