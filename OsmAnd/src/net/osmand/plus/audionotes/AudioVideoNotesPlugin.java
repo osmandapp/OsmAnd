@@ -776,36 +776,29 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
 		if (mapInfoLayer != null) {
 			recordControl = new TextInfoWidget(activity) {
-
-				private Boolean cachedRecording;
-
 				@Override
 				public boolean updateInfo(DrawSettings drawSettings) {
-					boolean recording = isRecording();
-					cachedRecording = recording;
-						if (recording) {
-							setText(app.getString(R.string.shared_string_control_stop), null);
-							setIcons(R.drawable.widget_icon_av_active, R.drawable.widget_icon_av_active_night);
+					Integer action = AV_DEFAULT_ACTION.get();
+					boolean isVideoAction = action.equals(AV_DEFAULT_ACTION_VIDEO);
+					boolean isTakePictureAction = action.equals(AV_DEFAULT_ACTION_TAKEPICTURE);
+					boolean isAudioAction = action.equals(AV_DEFAULT_ACTION_AUDIO);
+					if (isRecording()) {
+						setText(app.getString(R.string.shared_string_control_stop), null);
+						setIcons(R.drawable.widget_icon_av_active, R.drawable.widget_icon_av_active_night);
+					} else {
+						setText(app.getString(R.string.shared_string_control_start), null);
+						if (isVideoAction) {
+							setIcons(R.drawable.widget_av_video_day, R.drawable.widget_av_video_night);
+						} else if (isTakePictureAction) {
+							setIcons(R.drawable.widget_av_photo_day, R.drawable.widget_av_photo_night);
+						} else if (isAudioAction) {
+							setIcons(R.drawable.widget_av_audio_day, R.drawable.widget_av_audio_night);
 						} else {
-							setText(app.getString(R.string.shared_string_control_start), null);
-							Integer action = AV_DEFAULT_ACTION.get();
-							switch (action) {
-								case AV_DEFAULT_ACTION_VIDEO:
-									setIcons(R.drawable.widget_av_video_day, R.drawable.widget_av_video_night);
-									break;
-								case AV_DEFAULT_ACTION_TAKEPICTURE:
-									setIcons(R.drawable.widget_av_photo_day, R.drawable.widget_av_photo_night);
-									break;
-								case AV_DEFAULT_ACTION_AUDIO:
-									setIcons(R.drawable.widget_av_audio_day, R.drawable.widget_av_audio_night);
-									break;
-								default:
-									setIcons(R.drawable.widget_icon_av_inactive_day, R.drawable.widget_icon_av_inactive_night);
-									break;
-							}
+							setIcons(R.drawable.widget_icon_av_inactive_day, R.drawable.widget_icon_av_inactive_night);
 						}
+					}
 					return false;
-				};
+				}
 			};
 			recordControl.setOnClickListener(new View.OnClickListener() {
 				@Override
