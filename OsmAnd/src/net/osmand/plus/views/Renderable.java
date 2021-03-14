@@ -3,6 +3,8 @@ package net.osmand.plus.views;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
 
 import androidx.annotation.NonNull;
 
@@ -10,12 +12,12 @@ import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.views.layers.geometry.GeometryWay;
 import net.osmand.plus.views.layers.geometry.GpxGeometryWay;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executor;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -24,6 +26,8 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 
 
 public class Renderable {
@@ -160,6 +164,11 @@ public class Renderable {
                 canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
             }
         }
+
+        protected boolean arePointsInsideTile(WptPt first, WptPt second, QuadRect tileBounds) {
+            return Math.min(first.lon, second.lon) < tileBounds.right && Math.max(first.lon, second.lon) > tileBounds.left
+                    && Math.min(first.lat, second.lat) < tileBounds.top && Math.max(first.lat, second.lat) > tileBounds.bottom;
+        }
     }
 
     public static class StandardTrack extends RenderableSegment {
@@ -194,6 +203,113 @@ public class Renderable {
 
         @Override public void drawSingleSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {
             draw(culled.isEmpty() ? points : culled, p, canvas, tileBox);
+        }
+    }
+
+    public static class MultiProfileTrack extends StandardTrack {
+
+        private Map<String, Integer> profileColors;
+
+        private DisplayMetrics displayMetrics;
+
+        private int userPtIdx = 0;
+        private int leftPtIdx = 0;
+        private int rightPtIdx = 0;
+
+        public MultiProfileTrack(List<WptPt> routePoints, Map<String, Integer> profileColors,
+                                 DisplayMetrics displayMetrics, double base) {
+            super(routePoints, base);
+            this.profileColors = profileColors;
+            this.displayMetrics = displayMetrics;
+        }
+
+        @Override
+        protected void draw(List<WptPt> points, Paint p, Canvas canvas, RotatedTileBox tileBox) {
+            if (this.points.size() < 2) {
+                return;
+            }
+
+            canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+
+            updateLocalPaint(p);
+            Paint paint = new Paint(this.paint);
+            paint.setPathEffect(null);
+            paint.setStrokeWidth(dpToPx(8));
+
+            QuadRect tileBounds = tileBox.getLatLonBounds();
+            Path path = new Path();
+
+            WptPt prevPt = points.get(0);
+            WptPt leftUserPt = getLeftUserPt(points);
+            WptPt rightUserPt = getRightUserPt(points);
+            String currentProfile = leftUserPt.getProfileType();
+            paint.setColor(profileColors.get(currentProfile));
+
+            for (int i = 1; i < points.size(); i++) {
+                WptPt currentPt = points.get(i);
+                if (arePointsInsideTile(currentPt, prevPt, tileBounds)) {
+                    float startX = tileBox.getPixXFromLatLon(prevPt.lat, prevPt.lon);
+                    float startY = tileBox.getPixYFromLatLon(prevPt.lat, prevPt.lon);
+                    float endX = tileBox.getPixXFromLatLon(currentPt.lat, currentPt.lon);
+                    float endY = tileBox.getPixYFromLatLon(currentPt.lat, currentPt.lon);
+                    path.reset();
+                    path.moveTo(startX, startY);
+                    path.lineTo(endX, endY);
+                    canvas.drawPath(path, paint);
+                }
+                if (currentPt.hasProfile()) {
+                    leftUserPt = getLeftUserPt(points);
+                    rightUserPt = getRightUserPt(points);
+                    currentProfile = leftUserPt.getProfileType();
+                    paint.setColor(profileColors.get(currentProfile));
+                }
+                prevPt = currentPt;
+            }
+
+            canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+        }
+
+        private WptPt getLeftUserPt(List<WptPt> points) {
+            return updateLeftIdx() == -1 ? null : points.get(leftPtIdx);
+        }
+
+        private WptPt getRightUserPt(List<WptPt> points) {
+            return updateRightIdx() == -1 ? null : points.get(rightPtIdx);
+        }
+
+        private int updateLeftIdx() {
+            leftPtIdx = updateUserPtIdx();
+            return leftPtIdx;
+        }
+
+        private int updateRightIdx() {
+            userPtIdx++;
+            rightPtIdx = updateUserPtIdx();
+            return rightPtIdx;
+        }
+
+        private int updateUserPtIdx() {
+            for (int i = userPtIdx; i < points.size(); i++) {
+                if (points.get(i).hasProfile()) {
+                    userPtIdx = i;
+                    return userPtIdx;
+                }
+            }
+            userPtIdx = -1;
+            return userPtIdx;
+        }
+
+        private float dpToPx(float dp) {
+            return (int) TypedValue.applyDimension(COMPLEX_UNIT_DIP, dp, displayMetrics);
+        }
+
+        @Override
+        public void drawSingleSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {
+            draw(points, p, canvas, tileBox);
+        }
+
+        @Override
+        public void startCuller(double newZoom) {
         }
     }
 

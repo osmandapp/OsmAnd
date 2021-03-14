@@ -38,10 +38,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode.WHOLE_TRACK;
@@ -409,9 +411,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 	private void preAddPoint(int position, AdditionMode additionMode, WptPt point) {
 		switch (additionMode) {
 			case UNDEFINED: {
-				if (appMode != MeasurementEditingContext.DEFAULT_APP_MODE) {
-					point.setProfileType(appMode.getStringKey());
-				}
+				point.setProfileType(appMode.getStringKey());
 				break;
 			}
 			case ADD_AFTER: {
@@ -420,9 +420,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 					WptPt prevPt = points.get(position - 1);
 					if (prevPt.isGap()) {
 						if (position == points.size() && getAfterPoints().size() == 0) {
-							if (appMode != MeasurementEditingContext.DEFAULT_APP_MODE) {
-								point.setProfileType(appMode.getStringKey());
-							}
+							point.setProfileType(appMode.getStringKey());
 						} else {
 							point.setGap();
 							if (position > 1) {
@@ -437,7 +435,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 					} else if (prevPt.hasProfile()) {
 						point.setProfileType(prevPt.getProfileType());
 					}
-				} else if (appMode != MeasurementEditingContext.DEFAULT_APP_MODE) {
+				} else {
 					point.setProfileType(appMode.getStringKey());
 				}
 				break;
@@ -449,7 +447,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 					if (nextPt.hasProfile()) {
 						point.setProfileType(nextPt.getProfileType());
 					}
-				} else if (appMode != MeasurementEditingContext.DEFAULT_APP_MODE) {
+				} else {
 					point.setProfileType(appMode.getStringKey());
 				}
 				break;
@@ -743,6 +741,12 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 					RoadSegmentData data = this.roadSegmentData.get(pair);
 					List<WptPt> pts = data != null ? data.getPoints() : null;
 					if (pts != null) {
+						if (pts.size() > 0) {
+							pts.get(0).setProfileType(data.getStart().getProfileType());
+						}
+						if (pts.size() > 1) {
+							pts.get(pts.size() - 1).setProfileType(data.getEnd().getProfileType());
+						}
 						segmentForSnap.points.addAll(pts);
 					} else {
 						if (calculateIfNeeded && roadSegmentIndexes.contains(segmentsForSnap.size())) {
@@ -1109,6 +1113,29 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 			firstPointIndex = lastPointIndex + 1;
 		}
 		return res;
+	}
+
+	public boolean hasMultipleProfiles() {
+		List<TrkSegment> allUserSegments = new ArrayList<>();
+		if (beforeSegments != null) {
+			allUserSegments.addAll(beforeSegments);
+		}
+		if (afterSegments != null) {
+			allUserSegments.addAll(afterSegments);
+		}
+
+		Set<String> profiles = new HashSet<>();
+		for (TrkSegment segment : allUserSegments) {
+			for (WptPt point : segment.points) {
+				if (!"gap".equals(point.getProfileType())) {
+					profiles.add(point.getProfileType());
+				}
+				if (profiles.size() >= 2) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	@Override

@@ -726,6 +726,15 @@ public class ApplicationMode {
 		return builder;
 	}
 
+	public static ApplicationMode getApplicationModeByKey(String key) {
+		for (ApplicationMode appMode : allPossibleValues()) {
+			if (appMode.getStringKey().equals(key)) {
+				return appMode;
+			}
+		}
+		return null;
+	}
+
 	public static class ApplicationModeBuilder {
 
 		private ApplicationMode applicationMode;
