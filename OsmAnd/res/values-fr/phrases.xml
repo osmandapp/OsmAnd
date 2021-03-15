@@ -2737,7 +2737,7 @@
     <string name="poi_animal_shelter_fish">Poissons</string>
     <string name="poi_information_trail_blaze">Balise de chemin</string>
     <string name="poi_traffic_signals_sound_walk">Seulement quand la traversée est autorisée</string>
-    <string name="poi_piste_grooming_backcountry">Arrière-pays</string>
+    <string name="poi_piste_grooming_backcountry">Non damée</string>
     <string name="poi_aerialway_occupancy">Cabine/Siège/capacité de voiture</string>
     <string name="poi_payment_account_cards_yes">Cartes de comptes</string>
     <string name="poi_payment_account_cards_no">Cartes de compte non acceptées</string>
@@ -3881,4 +3881,9 @@
     <string name="poi_waste_transfer_station">Station de traitement des déchets</string>
     <string name="poi_weightbridge">Pont de levage</string>
     <string name="poi_ranger_station">Poste de garde forestier</string>
+    <string name="poi_conference_centre">Centre de conférence</string>
+    <string name="poi_piste_status_closed">Statut de la piste : fermée</string>
+    <string name="poi_piste_status_open">Statut de la piste : ouvert</string>
+    <string name="poi_piste_name">Nom de la piste</string>
+    <string name="poi_piste_ski_jump">Saut à ski</string>
 </resources>
