@@ -27,6 +27,7 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
@@ -374,12 +375,6 @@ public class LiveUpdatesFragmentNew extends BaseOsmAndDialogFragment implements 
 		}
 	}
 
-	public void notifyLiveUpdatesChanged() {
-		if (getActivity() != null) {
-			runSort();
-		}
-	}
-
 	public static int updateCountEnabled(TextView countView, ArrayList<LocalIndexInfo> mapsList, OsmandSettings settings) {
 		int countEnabled = 0;
 		if (countView != null) {
@@ -544,12 +539,13 @@ public class LiveUpdatesFragmentNew extends BaseOsmAndDialogFragment implements 
 					subTitleText += " • " + getString(timeOfDay.getLocalizedId());
 				}*/
 				subTitle.setText(subTitleText);
-				subTitle.setTextColor(ContextCompat.getColor(app, liveUpdateOn ? getActiveTextColorId(nightMode) : getSecondaryTextColorId(nightMode)));
+				subTitle.setTextColor(ContextCompat.getColor(app, liveUpdateOn
+						? getActiveTextColorId(nightMode) : getSecondaryTextColorId(nightMode)));
 				Typeface typeface = FontCache.getFont(app, getString(R.string.font_roboto_medium));
 				subTitle.setTypeface(typeface);
 			}
 
-			Drawable statusDrawable = ContextCompat.getDrawable(app, R.drawable.ic_map);
+			Drawable statusDrawable = AppCompatResources.getDrawable(app, R.drawable.ic_map);
 			int resColorId = !localUpdateOn.get() ? getSecondaryIconColorId(nightMode) :
 					!liveUpdateOn ? getDefaultIconColorId(nightMode) : getOsmandIconColorId(nightMode);
 			int statusColor = ContextCompat.getColor(app, resColorId);
