@@ -132,6 +132,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private ImageView mainIcon;
 	private String fileName;
 	private OnBackPressedCallback onBackPressedCallback;
+	private boolean isShowSnapWarning;
+	private static final String SHOW_SNAP_WARNING = "show_snap_warning";
 
 	private InfoType currentInfoType;
 
@@ -234,6 +236,11 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		MapActivity mapActivity = (MapActivity) getActivity();
 		if (mapActivity == null) {
 			return null;
+		}
+		if (savedInstanceState != null) {
+			restoreState(savedInstanceState);
+		} else if (getArguments() != null) {
+			restoreState(getArguments());
 		}
 		final MeasurementToolLayer measurementLayer = mapActivity.getMapLayers().getMeasurementToolLayer();
 		final OsmandApplication app = mapActivity.getMyApplication();
@@ -348,7 +355,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				applyMovePointMode();
 			}
 		});
-
 
 		View applyPointBeforeAfterButton = mainView.findViewById(R.id.apply_point_before_after_point_button);
 		UiUtilities.setupDialogButton(nightMode, applyPointBeforeAfterButton,
@@ -553,6 +559,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			}
 		});
 
+		isShowSnapWarning = getArguments().getBoolean(SHOW_SNAP_WARNING);
 		initMeasurementMode(gpxData, savedInstanceState == null);
 		if (savedInstanceState == null) {
 			if (fileName != null) {
@@ -1963,7 +1970,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		fragment.setEditingCtx(editingCtx);
 		fragment.setMode(FOLLOW_TRACK_MODE, followTrackMode);
 		Bundle bundle = new Bundle();
-		bundle.putBoolean("isShowSnapWarning", isShowSnapWarning);
+		bundle.putBoolean(SHOW_SNAP_WARNING, isShowSnapWarning);
 		fragment.setArguments(bundle);
 		return showFragment(fragment, fragmentManager);
 	}
@@ -2107,7 +2114,9 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			manager.beginTransaction()
 					.hide(this).commit();
 			layer.setTapsDisabled(true);
-			SnapTrackWarningFragment.showInstance(mapActivity.getSupportFragmentManager(), this);
+			if (isShowSnapWarning) {
+				SnapTrackWarningFragment.showInstance(mapActivity.getSupportFragmentManager(), this);
+			}
 			AndroidUiHelper.setVisibility(mapActivity, View.GONE, R.id.map_ruler_container);
 		}
 	}
@@ -2131,5 +2140,9 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	public interface OnUpdateInfoListener {
 		void onUpdateInfo();
+	}
+
+	public void restoreState(Bundle bundle) {
+		isShowSnapWarning = bundle.getBoolean(SHOW_SNAP_WARNING);
 	}
 }
