@@ -367,7 +367,7 @@
     <string name="poi_context_menu_delete">Smazat POI</string>
     <string name="rotate_map_compass_opt">Směr kompasu</string>
     <string name="rotate_map_bearing_opt">Směr pohybu</string>
-    <string name="rotate_map_none_opt">Neotáčet (sever vždy nahoru)</string>
+    <string name="rotate_map_none_opt">Neotáčet (sever vždy nahoře)</string>
     <string name="rotate_map_to_bearing_descr">Směr natočení mapy:</string>
     <string name="rotate_map_to_bearing">Natočení mapy</string>
     <string name="show_route">Ukázat cestu</string>
