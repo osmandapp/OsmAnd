@@ -89,7 +89,6 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 		defaultValues.put(mode, defValue);
 	}
 
-	// TODO final
 	@Override
 	public boolean setModeValue(ApplicationMode mode, T obj) {
 		if (global) {
@@ -106,7 +105,6 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 		return valueSaved;
 	}
 
-	// TODO final
 	public T getProfileDefaultValue(ApplicationMode mode) {
 		if (global) {
 			return defaultValue;
@@ -129,7 +127,6 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 		return defaultValues != null && defaultValues.containsKey(mode);
 	}
 
-	// TODO final
 	protected T getDefaultValue() {
 		return getProfileDefaultValue(settings.APPLICATION_MODE.get());
 	}
@@ -139,7 +136,6 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 		this.defaultValue = newDefaultValue;
 	}
 
-	// TODO final
 	@Override
 	public T getModeValue(ApplicationMode mode) {
 		if (global) {
@@ -149,14 +145,13 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 		return getValue(settings.getProfilePreferences(mode), defaultV);
 	}
 
-	// TODO final
 	@Override
 	public T get() {
 		if (cache && cachedValue != null && cachedPreference == getPreferences()) {
 			return cachedValue;
 		}
 		cachedPreference = getPreferences();
-		cachedValue = getValue(cachedPreference, getProfileDefaultValue(settings.APPLICATION_MODE.get()));
+		cachedValue = getValue(cachedPreference, getDefaultValue());
 		return cachedValue;
 	}
 
@@ -181,7 +176,6 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 		}
 	}
 
-	// TODO final
 	@Override
 	public boolean set(T obj) {
 		Object prefs = getPreferences();
@@ -210,7 +204,6 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 		return shared;
 	}
 
-	// TODO final
 	@Override
 	public boolean writeToJson(JSONObject json, ApplicationMode appMode) throws JSONException {
 		if (appMode != null) {
@@ -231,7 +224,6 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 		return false;
 	}
 
-	// TODO final
 	@Override
 	public void readFromJson(JSONObject json, ApplicationMode appMode) throws JSONException {
 		if (appMode != null) {
