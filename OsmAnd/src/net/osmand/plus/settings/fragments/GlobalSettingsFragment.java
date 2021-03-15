@@ -21,6 +21,8 @@ import net.osmand.plus.profiles.SelectProfileBottomSheet;
 import net.osmand.plus.profiles.SelectProfileBottomSheet.DialogMode;
 import net.osmand.plus.profiles.SelectProfileBottomSheet.OnSelectProfileCallback;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.BooleanPreference;
+import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.datastorage.DataStorageHelper;
 import net.osmand.plus.settings.datastorage.item.StorageItem;
@@ -38,6 +40,8 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 
 	private static final String SEND_ANONYMOUS_DATA_PREF_ID = "send_anonymous_data";
 	private static final String DIALOGS_AND_NOTIFICATIONS_PREF_ID = "dialogs_and_notifications";
+	private static final String DONT_SHOW_STARTUP_MESSAGES = "do_not_show_startup_messages";
+	private static final String SHOW_DOWNLOAD_MAP_DIALOG = "show_download_map_dialog";
 
 	@Override
 	protected void setupPreferences() {
@@ -213,6 +217,20 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 	private void setupDialogsAndNotificationsPref() {
 		Preference dialogsAndNotifications = (Preference) findPreference(DIALOGS_AND_NOTIFICATIONS_PREF_ID);
 		dialogsAndNotifications.setIcon(getPersistentPrefIcon(R.drawable.ic_action_notification));
+		if (getSettings() == null) {
+			return;
+		}
+		CommonPreference<Boolean> startupMessages = (BooleanPreference) getSettings().getPreference(DONT_SHOW_STARTUP_MESSAGES);
+		CommonPreference<Boolean> downloadMapDialog = (BooleanPreference) getSettings().getPreference(SHOW_DOWNLOAD_MAP_DIALOG);
+		String summary;
+		if (!startupMessages.get() && downloadMapDialog.get()) {
+			summary = app.getString(R.string.shared_string_all);
+		} else if (!startupMessages.get() || downloadMapDialog.get()) {
+			summary = "1/2";
+		} else {
+			summary = app.getString(R.string.shared_string_disabled);
+		}
+		dialogsAndNotifications.setSummary(summary);
 	}
 
 	private void setupEnableProxyPref() {
