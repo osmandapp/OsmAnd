@@ -65,6 +65,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static net.osmand.AndroidUtils.getSecondaryTextColorId;
 import static net.osmand.plus.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
 
 public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragment {
@@ -610,11 +611,6 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 	@ColorRes
 	public static int getActiveTextColorId(boolean nightMode) {
 		return nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
-	}
-
-	@ColorRes
-	public static int getSecondaryTextColorId(boolean nightMode) {
-		return nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light;
 	}
 
 	@ColorRes

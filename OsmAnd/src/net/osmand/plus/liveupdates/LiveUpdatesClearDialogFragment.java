@@ -25,17 +25,17 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
+import static net.osmand.AndroidUtils.getPrimaryTextColorId;
+import static net.osmand.AndroidUtils.getSecondaryTextColorId;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getNameToDisplay;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastCheck;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLatestUpdateAvailable;
-import static net.osmand.plus.liveupdates.LiveUpdatesSettingsDialogFragmentNew.LOCAL_INDEX_FILE_NAME;
-import static net.osmand.plus.liveupdates.LiveUpdatesSettingsDialogFragmentNew.getPrimaryTextColorId;
-import static net.osmand.plus.monitoring.TripRecordingActiveBottomSheet.getSecondaryTextColorId;
 
 public class LiveUpdatesClearDialogFragment extends MenuBottomSheetDialogFragment {
 
 	public static final String TAG = LiveUpdatesClearDialogFragment.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(LiveUpdatesClearDialogFragment.class);
+	private static final String LOCAL_INDEX_FILE_NAME = "local_index_file_name";
 
 	private OsmandApplication app;
 	private OsmandSettings settings;

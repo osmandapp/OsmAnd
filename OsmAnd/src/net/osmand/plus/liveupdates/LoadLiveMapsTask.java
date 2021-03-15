@@ -7,10 +7,8 @@ import net.osmand.plus.activities.LocalIndexHelper;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 
-import java.util.List;
-
 public class LoadLiveMapsTask
-		extends AsyncTask<Void, LocalIndexInfo, List<LocalIndexInfo>>
+		extends AsyncTask<Void, LocalIndexInfo, Void>
 		implements AbstractLoadLocalIndexTask {
 
 	public interface LocalIndexInfoAdapter {
@@ -21,7 +19,6 @@ public class LoadLiveMapsTask
 		void onDataUpdated();
 	}
 
-	//private List<LocalIndexInfo> result;
 	private final LocalIndexInfoAdapter adapter;
 	private final LocalIndexHelper helper;
 
@@ -36,8 +33,9 @@ public class LoadLiveMapsTask
 	}
 
 	@Override
-	protected List<LocalIndexInfo> doInBackground(Void... params) {
-		return helper.getLocalFullMaps(this);
+	protected Void doInBackground(Void... params) {
+		helper.getLocalFullMaps(this);
+		return null;
 	}
 
 	@Override
@@ -58,8 +56,7 @@ public class LoadLiveMapsTask
 	}
 
 	@Override
-	protected void onPostExecute(List<LocalIndexInfo> result) {
-		//this.result = result;
+	protected void onPostExecute(Void result) {
 		adapter.onDataUpdated();
 	}
 }

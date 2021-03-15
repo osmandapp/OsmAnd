@@ -72,6 +72,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import static net.osmand.AndroidUtils.getSecondaryTextColorId;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.formatShortDateTime;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getNameToDisplay;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getPendingIntent;
@@ -86,7 +87,6 @@ import static net.osmand.plus.liveupdates.LiveUpdatesSettingsDialogFragmentNew.g
 import static net.osmand.plus.monitoring.TripRecordingActiveBottomSheet.getActiveTextColorId;
 import static net.osmand.plus.monitoring.TripRecordingActiveBottomSheet.getOsmandIconColorId;
 import static net.osmand.plus.monitoring.TripRecordingActiveBottomSheet.getSecondaryIconColorId;
-import static net.osmand.plus.monitoring.TripRecordingActiveBottomSheet.getSecondaryTextColorId;
 
 public class LiveUpdatesFragmentNew extends BaseOsmAndDialogFragment implements OnLiveUpdatesForLocalChange {
 
@@ -614,7 +614,7 @@ public class LiveUpdatesFragmentNew extends BaseOsmAndDialogFragment implements 
 							descriptionTime.setText(dest.format(parsed));
 						}
 					} catch (ParseException e) {
-						e.printStackTrace();
+						LOG.error(e.getMessage());
 					}
 				}
 			}
@@ -630,13 +630,13 @@ public class LiveUpdatesFragmentNew extends BaseOsmAndDialogFragment implements 
 
 		final long lastUpdate = preferenceLatestUpdateAvailable(fileName, settings).get();
 		String lastUpdateString = formatShortDateTime(app, lastUpdate);
-		String description = app.getResources().getString(R.string.updated, lastUpdateString);
+		String description = app.getString(R.string.updated, lastUpdateString);
 
 		if (lastTimeChecked) {
 			final long lastCheck = preferenceLastCheck(fileName, settings).get();
 			String lastCheckString = formatShortDateTime(app, lastCheck);
-			if (!lastUpdateString.equals(app.getResources().getString(R.string.shared_string_never))) {
-				description = description.concat("\n" + app.getResources().getString(R.string.last_time_checked, lastCheckString));
+			if (!lastUpdateString.equals(app.getString(R.string.shared_string_never))) {
+				description = description.concat("\n" + app.getString(R.string.last_time_checked, lastCheckString));
 			}
 		}
 		return description;

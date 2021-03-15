@@ -53,6 +53,8 @@ import org.apache.commons.logging.Log;
 
 import java.util.Arrays;
 
+import static net.osmand.AndroidUtils.getPrimaryTextColorId;
+import static net.osmand.AndroidUtils.getSecondaryTextColorId;
 import static net.osmand.plus.UiUtilities.CompoundButtonType.TOOLBAR;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.formatHelpDateTime;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.formatShortDateTime;
@@ -63,7 +65,6 @@ import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastCheck;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLatestUpdateAvailable;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayToUpdate;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
-import static net.osmand.plus.monitoring.TripRecordingActiveBottomSheet.getSecondaryTextColorId;
 import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.getCustomButtonView;
 import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.updateCustomButtonView;
 
@@ -71,7 +72,7 @@ public class LiveUpdatesSettingsDialogFragmentNew extends MenuBottomSheetDialogF
 
 	public static final String TAG = LiveUpdatesSettingsDialogFragmentNew.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(LiveUpdatesSettingsDialogFragmentNew.class);
-	public static final String LOCAL_INDEX_FILE_NAME = "local_index_file_name";
+	private static final String LOCAL_INDEX_FILE_NAME = "local_index_file_name";
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
@@ -522,11 +523,6 @@ public class LiveUpdatesSettingsDialogFragmentNew extends MenuBottomSheetDialogF
 
 	public String getStateText(boolean isEnabled) {
 		return getString(isEnabled ? R.string.shared_string_enabled : R.string.shared_string_disabled);
-	}
-
-	@ColorRes
-	public static int getPrimaryTextColorId(boolean nightMode) {
-		return nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light;
 	}
 
 	@ColorRes

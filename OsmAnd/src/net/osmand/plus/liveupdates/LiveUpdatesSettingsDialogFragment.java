@@ -48,10 +48,10 @@ import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayT
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.runLiveUpdate;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.setAlarmForPendingIntent;
-import static net.osmand.plus.liveupdates.LiveUpdatesSettingsDialogFragmentNew.LOCAL_INDEX_FILE_NAME;
 
 public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 	private static final Log LOG = PlatformUtil.getLog(LiveUpdatesSettingsDialogFragment.class);
+	private static final String LOCAL_INDEX_FILE_NAME = "local_index_file_name";
 
 	private TextView sizeTextView;
 
