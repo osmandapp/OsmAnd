@@ -282,10 +282,12 @@ public class GeocodingUtilities {
 		} else {
 			Collections.sort(streetsList, DISTANCE_COMPARATOR);
 			double streetDistance = 0;
+			boolean isBuildingFound = knownMinBuildingDistance > 0;
 			for (GeocodingResult street : streetsList) {
-				if (streetDistance == 0) {
+				boolean skipStreet = streetDistance > 0 && street.getDistance() > streetDistance + DISTANCE_STREET_FROM_CLOSEST_WITH_SAME_NAME;
+				if (streetDistance == 0 || !isBuildingFound) {
 					streetDistance = street.getDistance();
-				} else if (street.getDistance() > streetDistance + DISTANCE_STREET_FROM_CLOSEST_WITH_SAME_NAME) {
+				} else if (skipStreet) {
 					continue;
 				}
 				street.connectionPoint = road.connectionPoint;
@@ -306,6 +308,9 @@ public class GeocodingUtilities {
 						}
 						res.add(nextBld);
 					}
+				}
+				if (skipStreet) {
+					continue;
 				}
 				res.add(street);
 			}
