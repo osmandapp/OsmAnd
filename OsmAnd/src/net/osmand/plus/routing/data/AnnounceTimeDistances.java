@@ -12,6 +12,8 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.voice.AbstractPrologCommandPlayer;
 
+import java.util.Arrays;
+
 public class AnnounceTimeDistances {
 	// Avoids false negatives: Pre-pone close announcements by this distance to allow for the possible over-estimation of the 'true' lead distance due to positioning error.
 	// A smaller value will increase the timing precision, but at the risk of missing prompts which do not meet the precision limit.
@@ -26,6 +28,8 @@ public class AnnounceTimeDistances {
 	public final static int STATE_LONG_ALARM_ANNOUNCE = 5;
 	public final static int STATE_SHORT_PNT_APPROACH = 6;
 	public final static int STATE_LONG_PNT_APPROACH = 7;
+
+	public final static Float[] ARRIVAL_VALUES = new Float[] {1.5f, 1f, 0.5f, 0.25f};
 
 	// Default speed to have comfortable announcements (m/s)
 	// initial value is updated from default speed settings anyway
@@ -73,13 +77,13 @@ public class AnnounceTimeDistances {
 		PREPARE_DISTANCE_END = (int) (DEFAULT_SPEED * 90);
 
 		// 22 s: car 275 m, bicycle 61 m, pedestrian 24 m
-		TURN_IN_DISTANCE = (int) (DEFAULT_SPEED  * 22);
+		TURN_IN_DISTANCE = (int) (DEFAULT_SPEED * 22);
 		// 15 s: car 189 m, bicycle 42 m, pedestrian 17 m
 		TURN_IN_DISTANCE_END = (int) (DEFAULT_SPEED * 15);
 
 		// Do not play prepare: for pedestrian and slow transport
 		// same check as speed < 150/(90-22) m/s = 2.2 m/s = 8 km/h
-			// if (DEFAULT_SPEED < 2.3) {
+		// if (DEFAULT_SPEED < 2.3) {
 		if (PREPARE_DISTANCE_END - TURN_IN_DISTANCE < 150) {
 			PREPARE_DISTANCE_END = PREPARE_DISTANCE * 2;
 		}
@@ -108,10 +112,15 @@ public class AnnounceTimeDistances {
 		TURN_NOW_SPEED = TURN_NOW_DISTANCE / TURN_NOW_TIME;
 
 		// 5 s: car 63 m, bicycle 14 m, pedestrian 6 m -> 12 m (capped by POSITIONING_TOLERANCE)
-		ARRIVAL_DISTANCE =  (int) (Math.max(POSITIONING_TOLERANCE, DEFAULT_SPEED * 5.) * arrivalDistanceFactor);
+		ARRIVAL_DISTANCE = (int) (Math.max(POSITIONING_TOLERANCE, DEFAULT_SPEED * 5.) * arrivalDistanceFactor);
 
+		float offRouteDistanceFactor = arrivalDistanceFactor;
+		int index = Arrays.asList(ARRIVAL_VALUES).indexOf(arrivalDistanceFactor);
+		if (index != -1) {
+			offRouteDistanceFactor = ARRIVAL_VALUES[ARRIVAL_VALUES.length - 1 - index];
+		}
 		// 20 s: car 250 m, bicycle 56 m, pedestrian 22 m
-		OFF_ROUTE_DISTANCE = DEFAULT_SPEED * 20 * arrivalDistanceFactor; // 20 seconds
+		OFF_ROUTE_DISTANCE = DEFAULT_SPEED * 20 * offRouteDistanceFactor; // 20 seconds
 
 		// assume for backward compatibility speed - 10 m/s
 		SHORT_ALARM_ANNOUNCE_RADIUS = (int) (7 * DEFAULT_SPEED * arrivalDistanceFactor); // 70 m
@@ -175,7 +184,7 @@ public class AnnounceTimeDistances {
 	}
 
 	private boolean isDistanceLess(float currentSpeed, double dist, double etalon, float defSpeed) {
-	// Check triggers:
+		// Check triggers:
 		// (1) distance < etalon?
 		if (dist - voicePromptDelayTimeSec * currentSpeed <= etalon) {
 			return true;

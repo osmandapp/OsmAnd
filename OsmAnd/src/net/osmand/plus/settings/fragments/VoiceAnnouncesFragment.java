@@ -20,7 +20,6 @@ import androidx.preference.SwitchPreferenceCompat;
 import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
 import net.osmand.plus.download.DownloadActivity;
@@ -35,6 +34,7 @@ import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import java.util.Set;
 
 import static net.osmand.plus.UiUtilities.CompoundButtonType.TOOLBAR;
+import static net.osmand.plus.routing.data.AnnounceTimeDistances.ARRIVAL_VALUES;
 import static net.osmand.plus.settings.backend.OsmandSettings.VOICE_PROVIDER_NOT_USE;
 
 public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPreferenceChanged {
@@ -140,7 +140,6 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 	}
 
 	private void setupArrivalAnnouncementPref() {
-		Float[] arrivalValues = new Float[] {1.5f, 1f, 0.5f, 0.25f};
 		String[] arrivalNames = new String[] {
 				getString(R.string.arrival_distance_factor_early),
 				getString(R.string.arrival_distance_factor_normally),
@@ -150,7 +149,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 
 		ListPreferenceEx arrivalDistanceFactor = (ListPreferenceEx) findPreference(settings.ARRIVAL_DISTANCE_FACTOR.getId());
 		arrivalDistanceFactor.setEntries(arrivalNames);
-		arrivalDistanceFactor.setEntryValues(arrivalValues);
+		arrivalDistanceFactor.setEntryValues(ARRIVAL_VALUES);
 	}
 
 	private void setupVoiceProviderPref() {
