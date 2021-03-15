@@ -482,4 +482,8 @@
 	<color name="text_input_background_dark">#1AFFFFFF</color>
 	<color name="mtrl_textinput_default_box_stroke_color">#67727272</color>
 
+	<color name="track_gradient_start">#5ADC5F</color>
+	<color name="track_gradient_center">#D4EF32</color>
+	<color name="track_gradient_end">#F3374D</color>
+
 </resources>

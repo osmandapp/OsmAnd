@@ -20,7 +20,7 @@
 			android:layout_marginLeft="@dimen/content_padding"
 			android:layout_marginTop="@dimen/content_padding"
 			android:layout_marginRight="@dimen/content_padding"
-			android:src="@drawable/ic_action_sdcard_warning_colored" />
+			app:srcCompat="@drawable/ic_action_sdcard_warning_colored" />
 
 		<LinearLayout
 			android:layout_width="match_parent"

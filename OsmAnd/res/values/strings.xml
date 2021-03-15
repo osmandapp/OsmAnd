@@ -12,6 +12,9 @@
 
 -->
 
+    <string name="select_another_colorization">Please select another type of colorization.</string>
+    <string name="track_has_no_speed">The track does not contain speed data.</string>
+    <string name="track_has_no_altitude">The track does not contain altitude data.</string>
     <string name="shared_string_interval">Interval</string>
     <string name="quick_action_show_hide_title">Show/hide</string>
     <string name="copy_poi_name">Copy POI name</string>

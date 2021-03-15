@@ -3626,7 +3626,7 @@
     <string name="save_global_track_interval_descr">Specificeer het registratie-interval voor de algemene trackregistratie (ingeschakeld via de track-widget op de kaart).</string>
     <string name="gpx_monitoring_stop">Pauzeer track opname</string>
     <string name="gpx_monitoring_start">Hervat track opnemen</string>
-    <string name="street_level_imagery">Beelden op srraatniveau</string>
+    <string name="street_level_imagery">Beelden op straatniveau</string>
     <string name="select_track_width">Selecteer dikte</string>
     <string name="track_show_start_finish_icons">Toon start en aankomst pictogrammen</string>
     <string name="gpx_direction_arrows">Richtingaanwijzers</string>

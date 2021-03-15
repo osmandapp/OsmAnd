@@ -169,7 +169,6 @@ public class AddNewFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 
 		view = UiUtilities.getInflater(app, nightMode).inflate(R.layout.add_new_favorite_category, null);
 		nameTextBox = view.findViewById(R.id.name_text_box);
-		nameTextBox.setBoxBackgroundColorResource(nightMode ? R.color.list_background_color_dark : R.color.activity_background_color_light);
 		nameTextBox.setHint(app.getResources().getString(R.string.favorite_category_name));
 		ColorStateList colorStateList = ColorStateList.valueOf(ContextCompat
 				.getColor(app, nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light));
@@ -179,7 +178,6 @@ public class AddNewFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 		editText.requestFocus();
 		AndroidUtils.softKeyboardDelayed(getActivity(), editText);
 		nameTextBox.setStartIconTintList(ColorStateList.valueOf(selectedColor));
-		nameTextBox.setBoxStrokeColorStateList(ColorStateList.valueOf(selectedColor));
 
 		BaseBottomSheetItem editFolderName = new BaseBottomSheetItem.Builder()
 				.setCustomView(view)
@@ -200,7 +198,6 @@ public class AddNewFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 		((TextView) view.findViewById(R.id.color_name)).setText(ColorDialogs.getColorName(color));
 		selectedColor = color;
 		nameTextBox.setStartIconTintList(ColorStateList.valueOf(selectedColor));
-		nameTextBox.setBoxStrokeColorStateList(ColorStateList.valueOf(selectedColor));
 	}
 
 	@Override

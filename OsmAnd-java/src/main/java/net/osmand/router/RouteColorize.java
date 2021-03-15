@@ -5,6 +5,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.OsmMapUtils;
 import net.osmand.util.MapUtils;
+
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
@@ -24,11 +25,12 @@ public class RouteColorize {
 
     public static final int DARK_GREY = rgbaToDecimal(92, 92, 92, 255);
     public static final int LIGHT_GREY = rgbaToDecimal(200, 200, 200, 255);
-    public static final int RED = rgbaToDecimal(255,1,1,255);
-    public static final int GREEN = rgbaToDecimal(46,185,0,191);
-    public static final int YELLOW = rgbaToDecimal(255,222,2,227);
+    public static final int GREEN = rgbaToDecimal(90, 220, 95, 255);
+    public static final int YELLOW = rgbaToDecimal(212, 239, 50, 255);
+    public static final int RED = rgbaToDecimal(243, 55, 77, 255);
+    public static final int[] colors = new int[] {GREEN, YELLOW, RED};
 
-    public enum ValueType {
+    public enum ColorizationType {
         ELEVATION,
         SPEED,
         SLOPE,
@@ -42,7 +44,7 @@ public class RouteColorize {
     private final int BLUE_COLOR_INDEX = 3;//RGB
     private final int ALPHA_COLOR_INDEX = 4;//RGBA
 
-    private ValueType valueType;
+    private ColorizationType colorizationType;
 
     public static int SLOPE_RANGE = 150;//150 meters
     private static final double MIN_DIFFERENCE_SLOPE = 0.05d;//5%
@@ -73,7 +75,7 @@ public class RouteColorize {
     /**
      * @param type ELEVATION, SPEED, SLOPE
      */
-    public RouteColorize(int zoom, GPXUtilities.GPXFile gpxFile, ValueType type) {
+    public RouteColorize(int zoom, GPXUtilities.GPXFile gpxFile, ColorizationType type) {
 
         if (!gpxFile.hasTrkPt()) {
             LOG.warn("GPX file is not consist of track points");
@@ -88,7 +90,7 @@ public class RouteColorize {
                 for (GPXUtilities.WptPt p : ts.points) {
                     latList.add(p.lat);
                     lonList.add(p.lon);
-                    if (type == ValueType.SPEED) {
+                    if (type == ColorizationType.SPEED) {
                         valList.add(p.speed);
                     } else {
                         valList.add(p.ele);
@@ -101,14 +103,14 @@ public class RouteColorize {
         latitudes = listToArray(latList);
         longitudes = listToArray(lonList);
 
-        if (type == ValueType.SLOPE) {
+        if (type == ColorizationType.SLOPE) {
             values = calculateSlopesByElevations(latitudes, longitudes, listToArray(valList), SLOPE_RANGE);
         } else {
             values = listToArray(valList);
         }
 
         calculateMinMaxValue();
-        valueType = type;
+        colorizationType = type;
         checkPalette();
         sortPalette();
     }
@@ -201,6 +203,17 @@ public class RouteColorize {
         sortPalette();
     }
 
+    public void setPalette(int[] gradientPalette) {
+        if (gradientPalette == null || gradientPalette.length != 3) {
+            return;
+        }
+        setPalette(new double[][] {
+                {minValue, gradientPalette[0]},
+                {colorizationType == ColorizationType.SLOPE ? 0 : (minValue + maxValue) / 2, gradientPalette[1]},
+                {maxValue, gradientPalette[2]}
+        });
+    }
+
     private int getDefaultColor() {
         return rgbaToDecimal(0, 0, 0, 0);
     }
@@ -282,7 +295,7 @@ public class RouteColorize {
 
             double[][] defaultPalette = {
                     {minValue, GREEN},
-                    {valueType == ValueType.SLOPE ? 0 : (minValue + maxValue) / 2, YELLOW},
+                    {colorizationType == ColorizationType.SLOPE ? 0 : (minValue + maxValue) / 2, YELLOW},
                     {maxValue, RED}
             };
             palette = defaultPalette;

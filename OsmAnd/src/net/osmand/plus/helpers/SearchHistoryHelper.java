@@ -57,7 +57,9 @@ public class SearchHistoryHelper {
 	}
 
 	public void addNewItemToHistory(GPXInfo gpxInfo) {
-		addNewItemToHistory(new HistoryEntry(0, 0, createPointDescription(gpxInfo)));
+		if(gpxInfo != null) {
+			addNewItemToHistory(new HistoryEntry(0, 0, createPointDescription(gpxInfo)));
+		}
 	}
 
 	public List<HistoryEntry> getHistoryEntries(boolean onlyPoints) {

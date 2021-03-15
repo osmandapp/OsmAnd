@@ -218,13 +218,13 @@ public class MapMarkersDialogFragment extends DialogFragment implements OnGroupS
 	@Override
 	public void onResume() {
 		super.onResume();
-		getMyApplication().getMapMarkersHelper().addSyncListener(this);
+		getMyApplication().getItineraryHelper().addSyncListener(this);
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		getMyApplication().getMapMarkersHelper().removeSyncListener(this);
+		getMyApplication().getItineraryHelper().removeSyncListener(this);
 	}
 
 	@Override
