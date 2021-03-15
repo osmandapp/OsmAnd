@@ -1079,7 +1079,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private void syncGpx(GPXFile gpxFile) {
 		MapMarkersGroup group = view.getApplication().getMapMarkersHelper().getMarkersGroup(gpxFile);
 		if (group != null) {
-			mapMarkersHelper.runSynchronization(group);
+			view.getApplication().getItineraryHelper().runSynchronization(group);
 		}
 	}
 }
