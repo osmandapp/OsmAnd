@@ -263,10 +263,6 @@ public class UiUtilities {
 	}
 
 	public static class UpdateLocationViewCache {
-		public void setScreenOrientation(int screenOrientation) {
-			this.screenOrientation = screenOrientation;
-		}
-
 		int screenOrientation;
 		public boolean paintTxt = true;
 		public int arrowResId;
