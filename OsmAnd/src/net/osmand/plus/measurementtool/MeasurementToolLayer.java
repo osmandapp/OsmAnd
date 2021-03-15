@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PointF;
@@ -30,6 +31,7 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.Renderable;
 import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.plus.views.layers.geometry.GeometryWay;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -47,6 +49,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 
 	private OsmandMapTileView view;
 	private boolean inMeasurementMode;
+	private boolean multipleProfileMode = false;
 	private Bitmap centerIconDay;
 	private Bitmap centerIconNight;
 	private Bitmap pointIcon;
@@ -195,6 +198,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tb, DrawSettings settings) {
 		if (inMeasurementMode) {
 			lineAttrs.updatePaints(view.getApplication(), settings, tb);
+			multipleProfileMode = editingCtx.hasMultipleProfiles();
 
 			if (editingCtx.isInApproximationMode()) {
 				List<List<WptPt>> originalPointsList = editingCtx.getOriginalSegmentPointsList();
@@ -208,19 +212,17 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 				}
 			}
 
-			boolean hasMultipleProfiles = editingCtx.hasMultipleProfiles();
-			drawSegments(canvas, tb, settings, editingCtx.getBeforeTrkSegmentLine(), hasMultipleProfiles);
-			drawSegments(canvas, tb, settings, editingCtx.getAfterTrkSegmentLine(), hasMultipleProfiles);
+			drawSegments(canvas, tb, settings, editingCtx.getBeforeTrkSegmentLine());
+			drawSegments(canvas, tb, settings, editingCtx.getAfterTrkSegmentLine());
 			drawPoints(canvas, tb);
 		}
 	}
 
-	private void drawSegments(Canvas canvas, RotatedTileBox tb, DrawSettings settings,
-							  List<TrkSegment> segments, boolean hasMultipleProfiles) {
+	private void drawSegments(Canvas canvas, RotatedTileBox tb, DrawSettings settings, List<TrkSegment> segments) {
 		for (int i = 0; i < segments.size(); i++) {
 			List<WptPt> points = segments.get(i).points;
 			Renderable.RenderableSegment renderable;
-			if (hasMultipleProfiles) {
+			if (multipleProfileMode) {
 				Map<String, Pair<Integer, Bitmap>> profileValues = getProfileValues(settings.isNightMode());
 				DisplayMetrics displayMetrics = view.getContext().getResources().getDisplayMetrics();
 				renderable = new Renderable.MultiProfileTrack(new ArrayList<>(points),
@@ -313,13 +315,21 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 			if (pt != lastBeforePoint && pt != firstAfterPoint && isInTileBox(tb, pt)) {
 				float locX = tb.getPixXFromLatLon(pt.lat, pt.lon);
 				float locY = tb.getPixYFromLatLon(pt.lat, pt.lon);
-				canvas.drawBitmap(pointIcon, locX - marginPointIconX, locY - marginPointIconY, bitmapPaint);
+				if (multipleProfileMode) {
+					drawMultiProfilePointIcon(canvas, locX, locY);
+				} else {
+					canvas.drawBitmap(pointIcon, locX - marginPointIconX, locY - marginPointIconY, bitmapPaint);
+				}
 			}
 			pt = points.get(points.size() - 1);
 			if (pt != lastBeforePoint && pt != firstAfterPoint && isInTileBox(tb, pt)) {
 				float locX = tb.getPixXFromLatLon(pt.lat, pt.lon);
 				float locY = tb.getPixYFromLatLon(pt.lat, pt.lon);
-				canvas.drawBitmap(pointIcon, locX - marginPointIconX, locY - marginPointIconY, bitmapPaint);
+				if (multipleProfileMode) {
+					drawMultiProfilePointIcon(canvas, locX, locY);
+				} else {
+					canvas.drawBitmap(pointIcon, locX - marginPointIconX, locY - marginPointIconY, bitmapPaint);
+				}
 			}
 		} else {
 			for (int i = 0; i < points.size(); i++) {
@@ -327,7 +337,11 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 				if (pt != lastBeforePoint && pt != firstAfterPoint && isInTileBox(tb, pt)) {
 					float locX = tb.getPixXFromLatLon(pt.lat, pt.lon);
 					float locY = tb.getPixYFromLatLon(pt.lat, pt.lon);
-					canvas.drawBitmap(pointIcon, locX - marginPointIconX, locY - marginPointIconY, bitmapPaint);
+					if (multipleProfileMode) {
+						drawMultiProfilePointIcon(canvas, locX, locY);
+					} else {
+						canvas.drawBitmap(pointIcon, locX - marginPointIconX, locY - marginPointIconY, bitmapPaint);
+					}
 				}
 			}
 		}
@@ -335,17 +349,36 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 	}
 
+	// Will be replaced with icon in Bitmap
+	private void drawMultiProfilePointIcon(Canvas canvas, float centerX, float centerY) {
+		Context ctx = view.getContext();
+		Path path = new Path();
+		Paint paint = new Paint();
+		paint.setStyle(Paint.Style.FILL);
+		path.addCircle(centerX, centerY, AndroidUtils.dpToPx(ctx, 12.5f), Path.Direction.CW);
+		paint.setColor(Color.BLACK);
+		canvas.drawPath(path, paint);
+		path.reset();
+		path.addCircle(centerX, centerY, AndroidUtils.dpToPx(ctx, 12), Path.Direction.CW);
+		paint.setColor(Color.WHITE);
+		canvas.drawPath(path, paint);
+		path.reset();
+		path.addCircle(centerX, centerY, AndroidUtils.dpToPx(ctx, 8), Path.Direction.CW);
+		paint.setColor(Algorithms.parseColor("#637EFB"));
+		canvas.drawPath(path, paint);
+	}
+
 	private Map<String, Pair<Integer, Bitmap>> getProfileValues(boolean night) {
 		Map<String, Pair<Integer, Bitmap>> profileColors = new HashMap<>();
-		int iconSize = 28;
 		int splitColor = ContextCompat.getColor(view.getContext(), ProfileIconColors.DARK_YELLOW.getColor(night));
 		profileColors.put(ApplicationMode.DEFAULT.getStringKey(),
-				new Pair<>(splitColor, getSizedBitmap(R.drawable.ic_action_split_interval, splitColor, iconSize)));
+				new Pair<>(splitColor, getSizedBitmap(R.drawable.ic_action_split_interval, splitColor, 28)));
 		String[] profiles = new String[]{ApplicationMode.CAR.getStringKey(),
 				ApplicationMode.BICYCLE.getStringKey(), ApplicationMode.PEDESTRIAN.getStringKey()};
 		for (String profile : profiles) {
 			ApplicationMode appMode = ApplicationMode.getApplicationModeByKey(profile);
 			if (appMode != null) {
+				int iconSize = appMode.getStringKey().equals(ApplicationMode.BICYCLE.getStringKey()) ? 24 : 28;
 				profileColors.put(profile, new Pair<>(appMode.getProfileColor(night),
 						getSizedBitmap(appMode.getIconRes(), appMode.getProfileColor(night), iconSize)));
 			}
@@ -433,7 +466,11 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		float locX = tb.getPixXFromLatLon(pt.lat, pt.lon);
 		float locY = tb.getPixYFromLatLon(pt.lat, pt.lon);
 		if (tb.containsPoint(locX, locY, 0)) {
-			canvas.drawBitmap(pointIcon, locX - marginPointIconX, locY - marginPointIconY, bitmapPaint);
+			if (multipleProfileMode) {
+				drawMultiProfilePointIcon(canvas, locX, locY);
+			} else {
+				canvas.drawBitmap(pointIcon, locX - marginPointIconX, locY - marginPointIconY, bitmapPaint);
+			}
 		}
 		canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 	}

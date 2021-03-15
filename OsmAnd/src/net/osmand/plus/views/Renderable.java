@@ -296,14 +296,17 @@ public class Renderable {
             canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
         }
 
-        private void drawProfileIcons(Canvas canvas) {
+        private void drawProfileIcons(Canvas canvas, RotatedTileBox tileBox) {
             for (String profile : profileIconsPositions.keySet()) {
                 List<PointF> positions = profileIconsPositions.get(profile);
-                if (!Algorithms.isEmpty(positions)) {
-                    for (PointF center : positions) {
-                        drawProfileCircle(canvas, center, profile);
-                    }
+                if (Algorithms.isEmpty(positions)) {
+                    continue;
                 }
+                for (PointF center : positions) {
+                    if (tileBox.containsPoint(center.x, center.y, dpToPx(20)))
+                    drawProfileCircle(canvas, center, profile);
+                }
+
             }
         }
 
@@ -417,7 +420,7 @@ public class Renderable {
         @Override
         public void drawSingleSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {
             draw(points, p, canvas, tileBox);
-            drawProfileIcons(canvas);
+            drawProfileIcons(canvas, tileBox);
         }
 
         @Override
