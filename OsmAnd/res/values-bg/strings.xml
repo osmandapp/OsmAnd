@@ -2063,9 +2063,6 @@
     <string name="recalculate_route_distance_promo">Маршрутът ще бъде преизчислен, ако разстоянието от маршрута до текущото местоположение е повече от избраната стойност.</string>
     <string name="n_items_of_z">%1$s от %2$s</string>
     <string name="download_slope_maps">Склонове</string>
-    <string name="quick_action_show_hide_terrain">Показване/скриване на терена</string>
-    <string name="quick_action_terrain_hide">Скриване на терена</string>
-    <string name="quick_action_terrain_show">Показване на терена</string>
     <string name="quick_action_terrain_descr">Бутон за показване или скриване на терена върху картата.</string>
     <string name="delete_description">Изтриване на описанието</string>
     <string name="add_description">Добавете описание</string>

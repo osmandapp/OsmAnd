@@ -18,7 +18,8 @@ public class ShowHideMapillaryAction extends QuickAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(33,
 			"mapillary.showhide", ShowHideMapillaryAction.class)
-			.nameRes(R.string.quick_action_showhide_mapillary_title)
+			.nameActionRes(R.string.quick_action_show_hide_title)
+			.nameRes(R.string.mapillary)
 			.iconRes(R.drawable.ic_action_mapillary).nonEditable()
 			.category(QuickActionType.CONFIGURE_MAP);
 
@@ -56,10 +57,9 @@ public class ShowHideMapillaryAction extends QuickAction {
 
 	@Override
 	public String getActionText(OsmandApplication application) {
-
-		return application.getSettings().SHOW_MAPILLARY.get()
-				? application.getString(R.string.quick_action_mapillary_hide)
-				: application.getString(R.string.quick_action_mapillary_show);
+		String nameRes = application.getString(getNameRes());
+		String actionName = isActionWithSlash(application) ? application.getString(R.string.shared_string_hide) : application.getString(R.string.shared_string_show);
+		return application.getString(R.string.ltr_or_rtl_combine_via_dash, actionName, nameRes);
 	}
 
 	@Override

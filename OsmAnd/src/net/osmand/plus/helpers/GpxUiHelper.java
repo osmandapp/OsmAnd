@@ -93,7 +93,6 @@ import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.ActivityResultListener.OnActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.PluginsFragment;
-import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter.AppearanceListItem;
 import net.osmand.plus.helpers.enums.MetricsConstants;
@@ -751,13 +750,53 @@ public class GpxUiHelper {
 		gpxDbHelper.updateShowStartFinish(item, showStartFinish);
 	}
 
-	public static void updateGpxInfoView(View v, String itemTitle, GPXInfo info, GpxDataItem dataItem, boolean currentlyRecordingTrack, OsmandApplication app) {
+	public static void updateGpxInfoView(final @NonNull OsmandApplication app,
+	                                     final @NonNull View v,
+	                                     final @NonNull String itemTitle,
+	                                     final @Nullable Drawable iconDrawable,
+	                                     final @NonNull GPXInfo info) {
+		GpxDataItem item = getDataItem(app, info, new GpxDataItemCallback() {
+			@Override
+			public boolean isCancelled() {
+				return false;
+			}
+
+			@Override
+			public void onGpxDataItemReady(GpxDataItem item) {
+				updateGpxInfoView(app, v, itemTitle, iconDrawable, info, item);
+			}
+		});
+		if (item != null) {
+			updateGpxInfoView(app, v, itemTitle, iconDrawable, info, item);
+		}
+	}
+
+	private static void updateGpxInfoView(@NonNull OsmandApplication app,
+	                                      @NonNull View v,
+	                                      @NonNull String itemTitle,
+	                                      @Nullable Drawable iconDrawable,
+	                                      @NonNull GPXInfo info,
+	                                      @NonNull GpxDataItem dataItem) {
+		updateGpxInfoView(v, itemTitle, info, dataItem, false, app);
+		if (iconDrawable != null) {
+			ImageView icon = (ImageView) v.findViewById(R.id.icon);
+			icon.setImageDrawable(iconDrawable);
+			icon.setVisibility(View.VISIBLE);
+		}
+	}
+
+	public static void updateGpxInfoView(View v,
+	                                     String itemTitle,
+	                                     GPXInfo info,
+	                                     GpxDataItem dataItem,
+	                                     boolean currentlyRecordingTrack,
+	                                     OsmandApplication app) {
 		TextView viewName = ((TextView) v.findViewById(R.id.name));
 		viewName.setText(itemTitle.replace("/", " • ").trim());
+		viewName.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 		ImageView icon = (ImageView) v.findViewById(R.id.icon);
 		icon.setVisibility(View.GONE);
 		//icon.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_polygom_dark));
-		viewName.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 
 		GPXTrackAnalysis analysis = null;
 		if (currentlyRecordingTrack) {
@@ -809,9 +848,23 @@ public class GpxUiHelper {
 		}
 
 		TextView descr = ((TextView) v.findViewById(R.id.description));
-		descr.setVisibility(View.GONE);
+		if (descr != null) {
+			descr.setVisibility(View.GONE);
+		}
 
-		v.findViewById(R.id.check_item).setVisibility(View.GONE);
+		View checkbox = v.findViewById(R.id.check_item);
+		if (checkbox != null) {
+			checkbox.setVisibility(View.GONE);
+		}
+	}
+
+	private static GpxDataItem getDataItem(@NonNull OsmandApplication app,
+	                                       @NonNull GPXInfo info,
+	                                       @Nullable GpxDataItemCallback callback) {
+		File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
+		String fileName = info.getFileName();
+		File file = new File(dir, fileName);
+		return app.getGpxDbHelper().getItem(file, callback);
 	}
 
 	@TargetApi(Build.VERSION_CODES.KITKAT)
@@ -884,6 +937,17 @@ public class GpxUiHelper {
 		return list;
 	}
 
+	@Nullable
+	public static GPXInfo getGpxInfoByFileName(@NonNull OsmandApplication app, @NonNull String fileName) {
+		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
+		List<GPXInfo> infoList = getSortedGPXFilesInfo(dir, null, false);
+		for (GPXInfo info : infoList) {
+			if (Algorithms.objectEquals(info.getFileName(), fileName)) {
+				return info;
+			}
+		}
+		return null;
+	}
 
 	public static List<GPXInfo> getSortedGPXFilesInfo(File dir, final List<String> selectedGpxList, boolean absolutePath) {
 		final List<GPXInfo> list = new ArrayList<>();

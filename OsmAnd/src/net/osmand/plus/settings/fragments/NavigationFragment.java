@@ -14,14 +14,13 @@ import net.osmand.plus.profiles.ProfileDataObject;
 import net.osmand.plus.profiles.ProfileDataUtils;
 import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet;
 import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet.DialogMode;
-import net.osmand.plus.routing.RouteProvider.RouteService;
+import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.profiles.RoutingProfileDataObject.RoutingProfilesResources;
 import net.osmand.plus.profiles.SelectProfileBottomSheet;
 import net.osmand.plus.profiles.SelectProfileBottomSheet.OnSelectProfileCallback;
-import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.util.Algorithms;
 
@@ -151,17 +150,17 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 		navigationType.setIcon(getActiveIcon(selectedRoutingProfileDataObject.getIconRes()));
 
 		ApplicationMode appMode = getSelectedAppMode();
-		RouteProvider.RouteService routeService;
+		RouteService routeService;
 		if (profileKey.equals(RoutingProfilesResources.STRAIGHT_LINE_MODE.name())) {
-			routeService = RouteProvider.RouteService.STRAIGHT;
+			routeService = RouteService.STRAIGHT;
 		} else if (profileKey.equals(RoutingProfilesResources.DIRECT_TO_MODE.name())) {
-			routeService = RouteProvider.RouteService.DIRECT_TO;
+			routeService = RouteService.DIRECT_TO;
 		} else if (profileKey.equals(RoutingProfilesResources.BROUTER_MODE.name())) {
-			routeService = RouteProvider.RouteService.BROUTER;
+			routeService = RouteService.BROUTER;
 		} else if (profileKey.startsWith(ONLINE_ROUTING_ENGINE_PREFIX)) {
 			routeService = RouteService.ONLINE;
 		} else {
-			routeService = RouteProvider.RouteService.OSMAND;
+			routeService = RouteService.OSMAND;
 		}
 		appMode.setRouteService(routeService);
 		appMode.setRoutingProfile(profileKey);

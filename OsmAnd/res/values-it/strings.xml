@@ -2120,10 +2120,6 @@
     <string name="quick_action_duplicate">Nome dell\'azione veloce duplicato</string>
     <string name="quick_action_showhide_favorites_descr">Questo pulsante d’azione mostra o nasconde i preferiti sulla mappa.</string>
     <string name="quick_action_showhide_poi_descr">Questo pulsante azione mostra o nasconde i PDI sulla mappa.</string>
-    <string name="quick_action_showhide_favorites_title">Mostra/nascondi preferiti</string>
-    <string name="quick_action_favorites_show">Mostra preferiti</string>
-    <string name="quick_action_favorites_hide">Nascondi preferiti</string>
-    <string name="quick_action_showhide_poi_title">Mostra/nascondi PDI</string>
     <string name="quick_action_poi_show">Mostra %1$s</string>
     <string name="quick_action_poi_hide">Nascondi %1$s</string>
     <string name="quick_action_add_category">Aggiungi una categoria</string>
@@ -2250,9 +2246,6 @@
     <string name="increase_search_radius">Aumenta il raggio di ricerca</string>
     <string name="nothing_found">Nessun risultato</string>
     <string name="nothing_found_descr">Cambia la ricerca o aumenta il raggio.</string>
-    <string name="quick_action_showhide_osmbugs_title">Mostra/nascondi le Note OSM</string>
-    <string name="quick_action_osmbugs_show">Mostra le note OSM</string>
-    <string name="quick_action_osmbugs_hide">Nascondi le note OSM</string>
     <string name="quick_action_showhide_osmbugs_descr">Toccando il pulsante azione verranno mostrate o nascoste le note OSM sulla mappa.</string>
     <string name="sorted_by_distance">Ordinato per distanza</string>
     <string name="search_favorites">Cerca nei Preferiti</string>
@@ -2829,9 +2822,6 @@
     <string name="routeInfo_road_types_name">Tipi di strade</string>
     <string name="show_more">Mostra di più</string>
     <string name="tracks_on_map">Tracciati visualizzati</string>
-    <string name="quick_action_show_hide_gpx_tracks">Mostra/nascondi tracce GPX</string>
-    <string name="quick_action_gpx_tracks_hide">Nascondi Tracciati GPX</string>
-    <string name="quick_action_gpx_tracks_show">Mostra Tracciati GPX</string>
     <string name="quick_action_day_night_mode">Modalità %s</string>
     <string name="avoid_pt_types">Evita tipi di trasporto…</string>
     <string name="shared_string_walk">A piedi</string>
@@ -3252,13 +3242,7 @@
     <string name="routing_attr_driving_style_prefer_unpaved_description">Preferisci le strade pavimentate.</string>
     <string name="layer_osm_edits">Modifiche OSM</string>
     <string name="quick_action_contour_lines_descr">Un controllo per mostrare o nascondere nella mappa le linee isoipse.</string>
-    <string name="quick_action_contour_lines_show">Mostra le linee isoipse</string>
-    <string name="quick_action_contour_lines_hide">Nascondi le linee isoipse</string>
-    <string name="quick_action_show_hide_contour_lines">Mostra/nascondi le linee isoipse</string>
     <string name="quick_action_hillshade_descr">Un controllo per mostrare o nascondere nella mappa le ombreggiature dei rilievi.</string>
-    <string name="quick_action_hillshade_show">Mostra l\'ombreggiatura dei rilievi</string>
-    <string name="quick_action_hillshade_hide">Nascondi l\'ombreggiatura dei rilievi</string>
-    <string name="quick_action_show_hide_hillshade">Mostra/nascondi l\'ombreggiatura dei rilievi</string>
     <string name="tts_initialization_error">Impossibile avviare il motore dal-testo-alla-voce.</string>
     <string name="simulate_your_location_gpx_descr">Simula la mia posizione utilizzando una traccia GPX registrata.</string>
     <string name="default_speed_dialog_msg">Utilizzata per stimare l\'orario d\'arrivo per le strade di tipo sconosciute e come limite di velocità per tutte le strade (può influenzare il calcolo del percorso)</string>
@@ -3476,9 +3460,6 @@
     <string name="add_description">Aggiungi descrizione</string>
     <string name="delete_description">Elimina descrizione</string>
     <string name="quick_action_terrain_descr">Un bottone per mostrare o nascondere la vista rilievo sulla mappa.</string>
-    <string name="quick_action_terrain_show">Mostra rilievo</string>
-    <string name="quick_action_terrain_hide">Nascondi rilievo</string>
-    <string name="quick_action_show_hide_terrain">Mostra/nascondi rilievo</string>
     <string name="download_slope_maps">Pendenze</string>
     <string name="shared_string_hillshade">Ombreggiatura rilievi</string>
     <string name="slope_read_more">Puoi avere maggiori informazioni sulle Pendenze in %1$s.</string>
@@ -3514,9 +3495,6 @@
     <string name="shared_string_all_languages">Tutte le lingue</string>
     <string name="developer_plugin">Plugin sviluppatore</string>
     <string name="shared_string_items">Oggetti</string>
-    <string name="quick_action_transport_hide">Nascondi i trasporti pubblici</string>
-    <string name="quick_action_transport_show">Mostra i trasporti pubblici</string>
-    <string name="quick_action_show_hide_transport">Mostra/nascondi i trasporti pubblici</string>
     <string name="quick_action_transport_descr">Il pulsante mostra o nasconde nella mappa i trasporti pubblici.</string>
     <string name="create_edit_poi">Crea/Modifica PDI</string>
     <string name="parking_positions">Posizione di parcheggio</string>
@@ -3672,9 +3650,6 @@
     <string name="vessel_height_warning">Puoi mpostare l\'altezza dell\'imbarcazione per evitare ponti bassi. Ricorda che, se il ponte è mobile, useremo la sua altezza da aperto.</string>
     <string name="vessel_height_limit_description">Imposta l\'altezza dell\'imbarcazione per evitare ponti bassi. Ricorda che, se il ponte è mobile, useremo la sua altezza da aperto.</string>
     <string name="vessel_width_limit_description">Imposta la larghezza della\"imbarcazione per evitare i ponti stretti</string>
-    <string name="quick_action_showhide_mapillary_title">Mostra/nascondi Mapillary</string>
-    <string name="quick_action_mapillary_hide">Nascondi Mapillary</string>
-    <string name="quick_action_mapillary_show">Mostra Mapillary</string>
     <string name="quick_action_showhide_mapillary_descr">Un pulsante per visualizzare nella mappa o nascondere il livello Mapillary .</string>
     <string name="lenght_limit_description">Fornisci la lunghezza del tuo veicolo, alcune restrizioni di percorso potrebbero essere applicate per veicoli.</string>
     <string name="uninstall_speed_cameras">Disinstalla autovelox</string>

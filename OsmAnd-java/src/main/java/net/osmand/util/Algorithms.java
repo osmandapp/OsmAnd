@@ -3,6 +3,7 @@ package net.osmand.util;
 import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
 import net.osmand.router.RouteColorize;
+import net.osmand.data.LatLon;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
@@ -118,7 +119,7 @@ public class Algorithms {
 		}
 		return def;
 	}
-	
+
 	public static int parseIntSilently(String input, int def) {
 		if (input != null && input.length() > 0) {
 			try {
@@ -139,6 +140,35 @@ public class Algorithms {
 			}
 		}
 		return def;
+	}
+
+	public static boolean isFirstPolygonInsideSecond(List<LatLon> firstPolygon,
+	                                                 List<LatLon> secondPolygon) {
+		for (LatLon point : firstPolygon) {
+			if (!isPointInsidePolygon(point, secondPolygon)) {
+				// if at least one point is not inside the boundary, return false
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public static boolean isPointInsidePolygon(LatLon point,
+	                                           List<LatLon> polygon) {
+		double pointX = point.getLongitude();
+		double pointY = point.getLatitude();
+		boolean result = false;
+		for (int i = 0, j = polygon.size() - 1; i < polygon.size(); j = i++) {
+			double x1 = polygon.get(i).getLongitude();
+			double y1 = polygon.get(i).getLatitude();
+			double x2 = polygon.get(j).getLongitude();
+			double y2 = polygon.get(j).getLatitude();
+			if ((y1 > pointY) != (y2 > pointY)
+					&& (pointX < (x2 - x1) * (pointY - y1) / (y2-y1) + x1)) {
+				result = !result;
+			}
+		}
+		return result;
 	}
 
 	public static String getFileNameWithoutExtension(File f) {
@@ -757,6 +787,10 @@ public class Algorithms {
 			}
 		}
 		return false;
+	}
+
+	public static boolean isInt(double d) {
+		return (d == Math.floor(d)) && !Double.isInfinite(d);
 	}
 
 	public static boolean isInt(String value) {

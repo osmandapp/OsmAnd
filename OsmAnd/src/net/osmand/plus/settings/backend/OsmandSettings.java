@@ -48,7 +48,7 @@ import net.osmand.plus.profiles.NavigationIcon;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.rastermaps.LayerTransparencySeekbarMode;
 import net.osmand.plus.render.RendererRegistry;
-import net.osmand.plus.routing.RouteProvider.RouteService;
+import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.srtmplugin.TerrainMode;
 import net.osmand.plus.track.GradientScaleType;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;

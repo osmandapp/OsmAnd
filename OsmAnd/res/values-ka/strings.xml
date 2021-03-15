@@ -1223,9 +1223,6 @@
     <string name="saving_new_profile">ახალი პროფილის ჩაწერა</string>
     <string name="n_items_of_z">%1$s %2$s-დან</string>
     <string name="download_slope_maps">დაქანებები</string>
-    <string name="quick_action_show_hide_terrain">რელიეფის ჩვენება/დამალვა</string>
-    <string name="quick_action_terrain_hide">რელიეფის დამალვა</string>
-    <string name="quick_action_terrain_show">რელიეფის ჩვენება</string>
     <string name="quick_action_terrain_descr">რელიეფის შრის საჩვენებელი ღილაკი.</string>
     <string name="delete_description">აღწერის წაშლა</string>
     <string name="add_description">აღწერის დამატება</string>
@@ -1797,9 +1794,6 @@
     <string name="shared_string_revert">შემობრუნება</string>
     <string name="rendering_value_white_name">თეთრი</string>
     <string name="transfers_size">%1$d გადმოწერა</string>
-    <string name="quick_action_gpx_tracks_show">ბილიკების ჩვენება</string>
-    <string name="quick_action_gpx_tracks_hide">ბილიკების დამალვა</string>
-    <string name="quick_action_show_hide_gpx_tracks">ბილიკების ჩვენება/დამალვა</string>
     <string name="exit_at">გამოსვლა</string>
     <string name="by_transport_type">%1$s-ით</string>
     <string name="tracks_on_map">ნაჩვენები ბილიკები</string>
@@ -1959,10 +1953,6 @@
     <string name="quick_action_add_configure_map">რუკის გამართვა</string>
     <string name="quick_action_poi_hide">%1$s-ის დამალვა</string>
     <string name="quick_action_poi_show">%1$s-ის ჩვენება</string>
-    <string name="quick_action_showhide_poi_title">POI-ს ჩვენება/დამალვა</string>
-    <string name="quick_action_favorites_hide">რჩეულების დამალვა</string>
-    <string name="quick_action_favorites_show">რჩეულების ჩვენება</string>
-    <string name="quick_action_showhide_favorites_title">რჩეულების ჩვენება/დამალვა</string>
     <string name="quick_actions_delete">მოქმედების წაშლა</string>
     <string name="dialog_add_action_title">მოქმედების დამატება</string>
     <string name="quick_action_add_favorite">რჩეულის დამატება</string>
@@ -2220,9 +2210,6 @@
     <string name="gpx_direction_arrows">მიმართულების ისრები</string>
     <string name="app_mode_enduro_motorcycle">მოტოციკლი Enduro</string>
     <string name="app_mode_motor_scooter">მოტორიანი სკუტერი</string>
-    <string name="quick_action_showhide_mapillary_title">Mapillary-ის ჩვენება/დამალვა</string>
-    <string name="quick_action_mapillary_hide">Mapillary-ის დამალვა</string>
-    <string name="quick_action_mapillary_show">Mapillary-ის ჩვენება</string>
     <string name="shared_string_delete_all_q">წავშალოთ ყველა\?</string>
     <string name="screen_control">ეკრანის კონტროლი</string>
     <string name="turn_screen_on_navigation_instructions">ნავიგაციის ინსტრუქციები</string>
@@ -2287,9 +2274,6 @@
     <string name="route_start_point">საწყისი წერტილი</string>
     <string name="profile_import">პროფილის იმპორტი</string>
     <string name="export_profile">პროფილის ექსპორტი</string>
-    <string name="quick_action_show_hide_hillshade">ბორცვების დამალვა/ჩვენება</string>
-    <string name="quick_action_hillshade_hide">ბორცვების დამალვა</string>
-    <string name="quick_action_hillshade_show">ბორცვების ჩვენება</string>
     <string name="shared_string_memory_kb_desc">%1$s კბ</string>
     <string name="shared_string_memory_mb_desc">%1$s მბ</string>
     <string name="shared_string_memory_gb_desc">%1$s გბ</string>
@@ -2365,7 +2349,6 @@
     <string name="how_to_open_wiki_title">როგორ გავხსნათ Wikipedia-ს სტატიები\?</string>
     <string name="welcome_to_open_beta">მოგესალმებით სატესტო ვერსიაში</string>
     <string name="show_arrows_on_the_map">რუკაზე ისრების ჩვენება</string>
-    <string name="quick_action_showhide_osmbugs_title">OSM-ჩანაწერების ჩვენება ან დამალვა</string>
     <string name="search_hint">აკრიფეთ ქალაქის სახელი ან მისამართი</string>
     <string name="show_something_on_map">%1$s-ის რუკაზე ჩვენება</string>
     <string name="location_on_map">მდებარეობა:
@@ -2540,8 +2523,6 @@
     <string name="plan_a_route">გზის დაგეგმვა</string>
     <string name="search_download_wikipedia_maps">Wikipedia-ის რუკების გადმოწერა</string>
     <string name="change_application_profile">აპის პროფილის შეცვლა</string>
-    <string name="quick_action_transport_hide">საზოგადოებრივი ტრანსპორტის დამალვა</string>
-    <string name="quick_action_transport_show">საზოგადოებრივი ტრანსპორტის ჩვენება</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="download_unsupported_action">მოქმედების შეცდომა %1$s</string>
@@ -2561,9 +2542,6 @@
     <string name="dialogs_and_notifications_title">შეტყობნებები</string>
     <string name="download_map_dialog">რუკის დიალოგის ფანჯარა</string>
     <string name="exported_osmand_profile">OsmAnd-ის პროფილი: %1$s</string>
-    <string name="quick_action_show_hide_contour_lines">კონტურული ხაზების ჩვენება/დამალვა</string>
-    <string name="quick_action_contour_lines_hide">კონტურული ხაზების დამალვა</string>
-    <string name="quick_action_contour_lines_show">კონტურული ხაზების ჩვენება</string>
     <string name="update_all_maps">ყველა რუკის განახლება</string>
     <string name="shared_string_memory_used_kb_desc">გამოყენებულია %1$s კბ</string>
     <string name="shared_string_memory_used_mb_desc">გამოყენებულია %1$s მბ</string>

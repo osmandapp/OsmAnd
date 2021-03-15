@@ -176,10 +176,48 @@ public class RouteResultPreparation {
 		combineWayPointsForAreaRouting(ctx, result);
 		validateAllPointsConnected(result);
 		splitRoadsAndAttachRoadSegments(ctx, result, recalculation);
+		for (int i = 0; i < result.size(); i++) {
+			filterMinorStops(result.get(i));
+		}
 		calculateTimeSpeed(ctx, result);
-		
 		prepareTurnResults(ctx, result);
 		return result;
+	}
+	
+	public RouteSegmentResult filterMinorStops(RouteSegmentResult seg) {
+		List<Integer> stops = null;
+		boolean plus = seg.getStartPointIndex() < seg.getEndPointIndex();
+		int next;
+
+		for (int i = seg.getStartPointIndex(); i != seg.getEndPointIndex(); i = next) {
+			next = plus ? i + 1 : i - 1;
+			int[] pointTypes = seg.getObject().getPointTypes(i);
+			if (pointTypes != null) {
+				for (int j = 0; j < pointTypes.length; j++) {
+					if (pointTypes[j] == seg.getObject().region.stopMinor) {
+						if (stops == null) {
+							stops = new ArrayList<>();
+						}
+						stops.add(i);
+					}
+				}
+			}
+		}
+
+		if (stops != null) {
+			for (int stop : stops) {
+				List<RouteSegmentResult> attachedRoutes = seg.getAttachedRoutes(stop);
+				for (RouteSegmentResult attached : attachedRoutes) {
+					int attStopPriority = highwaySpeakPriority(attached.getObject().getHighway());
+					int segStopPriority = highwaySpeakPriority(seg.getObject().getHighway());
+					if (segStopPriority < attStopPriority) {
+						seg.getObject().removePointType(stop, seg.getObject().region.stopSign);
+						break;
+					}
+				}
+			}
+		}
+		return seg;
 	}
 
 	public void prepareTurnResults(RoutingContext ctx, List<RouteSegmentResult> result) {

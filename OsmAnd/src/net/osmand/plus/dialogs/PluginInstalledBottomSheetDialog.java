@@ -3,6 +3,7 @@ package net.osmand.plus.dialogs;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.view.View;
@@ -11,12 +12,11 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.profiles.ProfileDataUtils;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -34,6 +34,8 @@ import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.profiles.ProfileDataUtils;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
 import org.apache.commons.logging.Log;
@@ -87,11 +89,17 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 		Typeface typeface = FontCache.getRobotoMedium(getContext());
 		SpannableString pluginTitleSpan = new SpannableString(plugin.getName());
 		pluginTitleSpan.setSpan(new CustomTypefaceSpan(typeface), 0, pluginTitleSpan.length(), 0);
+		Drawable pluginIcon = plugin.getLogoResource();
+		if (pluginIcon.getConstantState() != null) {
+			pluginIcon = pluginIcon.getConstantState().newDrawable().mutate();
+		}
+		pluginIcon = UiUtilities.tintDrawable(pluginIcon, ContextCompat.getColor(
+				context, nightMode ? R.color.icon_color_default_light : R.color.icon_color_default_dark));
 
 		BaseBottomSheetItem pluginTitle = new SimpleBottomSheetItem.Builder()
 				.setTitle(pluginTitleSpan)
 				.setTitleColorId(nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light)
-				.setIcon(plugin.getLogoResource())
+				.setIcon(pluginIcon)
 				.setLayoutId(R.layout.bottom_sheet_item_simple_56dp)
 				.create();
 		items.add(pluginTitle);

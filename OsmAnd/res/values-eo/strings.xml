@@ -2117,10 +2117,6 @@
     <string name="quick_action_duplicate">Duplikata nomo de rapida ago</string>
     <string name="quick_action_showhide_favorites_descr">Butono por montri/kaŝi ŝatatajn ejojn sur la mapo.</string>
     <string name="quick_action_showhide_poi_descr">Butono por montri/kaŝi interesejojn sur la mapo.</string>
-    <string name="quick_action_showhide_favorites_title">Montri/kaŝi ŝatatajn</string>
-    <string name="quick_action_favorites_show">Montri ŝatatajn</string>
-    <string name="quick_action_favorites_hide">Kaŝi ŝatatajn</string>
-    <string name="quick_action_showhide_poi_title">Montri/kaŝi interesejojn</string>
     <string name="quick_action_poi_show">Montri %1$s</string>
     <string name="quick_action_poi_hide">Kaŝi %1$s</string>
     <string name="quick_action_add_category">Aldoni kategorion</string>
@@ -2386,9 +2382,6 @@
     <string name="hide_from_zoom_level">Kaŝi komence de skal‑nivelo</string>
     <string name="sorted_by_distance">Ordigitaj laŭ distanco</string>
     <string name="search_favorites">Serĉi en ŝatataj</string>
-    <string name="quick_action_showhide_osmbugs_title">Montri aŭ kaŝi OSM-rimarkojn</string>
-    <string name="quick_action_osmbugs_show">Montri OSM-rimarkojn</string>
-    <string name="quick_action_osmbugs_hide">Kaŝi OSM-rimarkojn</string>
     <string name="quick_action_showhide_osmbugs_descr">Butono por montri/kaŝi OSM‑rimarkojn sur la mapo.</string>
     <string name="restart_search">Rekomenci serĉon</string>
     <string name="increase_search_radius">Pliigi serĉan radiuson</string>
@@ -2842,10 +2835,7 @@
     <string name="routeInfo_road_types_name">Specoj de vojoj</string>
     <string name="exit_at">Eliru ĉe</string>
     <string name="sit_on_the_stop">Atendu ĉe haltejo</string>
-    <string name="quick_action_show_hide_gpx_tracks">Montri/kaŝi spurojn</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Butono por montri/kaŝi elektitajn spurojn sur la mapo.</string>
-    <string name="quick_action_gpx_tracks_hide">Kaŝi spurojn</string>
-    <string name="quick_action_gpx_tracks_show">Montri spurojn</string>
     <string name="use_osm_live_public_transport_description">Aktivigi publikan transporton por ŝanĝoj OsmAnd Live.</string>
     <string name="use_osm_live_public_transport">Publika transporto OsmAnd Live</string>
     <string name="public_transport_warning_descr_blog">Pliaj informoj pri kiel OsmAnd difinas kursojn estas legeblaj ĉe nia taglibro.</string>
@@ -3261,13 +3251,7 @@
     <string name="routing_attr_driving_style_prefer_unpaved_description">Preferi vojojn sen firma pavimo.</string>
     <string name="layer_osm_edits">OSM‑redaktoj</string>
     <string name="quick_action_contour_lines_descr">Butono por montri/kaŝi nivelkurbojn sur la mapo.</string>
-    <string name="quick_action_contour_lines_show">Montri nivelkurbojn</string>
-    <string name="quick_action_contour_lines_hide">Kaŝi nivelkurbojn</string>
-    <string name="quick_action_show_hide_contour_lines">Montri/kaŝi nivelkurbojn</string>
     <string name="quick_action_hillshade_descr">Butono por montri/kaŝi nivelombrumon (reliefon) sur la mapo.</string>
-    <string name="quick_action_hillshade_show">Montri nivelombrumon</string>
-    <string name="quick_action_hillshade_hide">Kaŝi nivelombrumon</string>
-    <string name="quick_action_show_hide_hillshade">Montri/kaŝi nivelombrumon</string>
     <string name="default_speed_dialog_msg">Antaŭkalkulas tempon de alveno por vojoj de nekonata speco kaj limigas rapidon por ĉiuj vojoj (povas influi kurs‑difinadon).</string>
     <string name="tts_initialization_error">Ne povas ekigi parolsintezilon.</string>
     <string name="export_profile">Elporti profilon</string>
@@ -3493,9 +3477,6 @@
     <string name="shared_string_legend">Mapklarigo</string>
     <string name="shared_string_hillshade">Nivelombrumo</string>
     <string name="n_items_of_z">%1$s el %2$s</string>
-    <string name="quick_action_show_hide_terrain">Montri aŭ kaŝi teren‑formon</string>
-    <string name="quick_action_terrain_hide">Kaŝi teren‑formon</string>
-    <string name="quick_action_terrain_show">Montri teren‑formon</string>
     <string name="quick_action_terrain_descr">Butono por montri/kaŝi tavolon de formo de tereno sur la mapo.</string>
     <string name="delete_description">Forigi priskribon</string>
     <string name="add_description">Aldoni priskribon</string>
@@ -3608,9 +3589,6 @@
 \n
 \n</string>
     <string name="additional_actions_descr">Vi povas ekigi tiujn agojn per frapeti la butonon “%1$s”.</string>
-    <string name="quick_action_transport_hide">Kaŝi publikan transporton</string>
-    <string name="quick_action_transport_show">Montri publikan transporton</string>
-    <string name="quick_action_show_hide_transport">Montri aŭ kaŝi publikan transporton</string>
     <string name="quick_action_transport_descr">Butono por montri/kaŝi publikan transporton sur la mapo.</string>
     <string name="create_edit_poi">Krei aŭ redakti interesejon</string>
     <string name="add_edit_favorite">Aldoni aŭ forigi ŝatatan ejojn</string>
@@ -3679,9 +3657,6 @@
     <string name="vessel_height_warning">Vi povas enigi alton de via akvoveturilo por eviti malaltajn pontojn. Estu konscia, ke se ponto estas movebla, la alto en ĝia malfermita stato estos uzata.</string>
     <string name="vessel_height_limit_description">Enigu alton de akvoveturilo por eviti malaltajn pontojn. Estu konscia, ke se ponto estas movebla, la alto en ĝia malfermita stato estos uzata.</string>
     <string name="vessel_width_limit_description">Enigu larĝon de akvoveturilo por eviti mallarĝajn pontojn</string>
-    <string name="quick_action_showhide_mapillary_title">Montri/kaŝi Mapillary</string>
-    <string name="quick_action_mapillary_hide">Kaŝi Mapillary</string>
-    <string name="quick_action_mapillary_show">Montri Mapillary</string>
     <string name="quick_action_showhide_mapillary_descr">Ŝaltilo por montri aŭ kaŝi tavolon de Mapillary sur la mapo.</string>
     <string name="uninstall_speed_cameras">Malinstali informojn pri rapidkontroliloj</string>
     <string name="shared_string_legal">Leĝaj</string>

@@ -59,6 +59,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
 import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.ContextMenuScrollFragment;
@@ -81,7 +82,8 @@ import net.osmand.plus.myplaces.TrackActivityFragmentAdapter;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
-import net.osmand.plus.routing.RouteProvider;
+import net.osmand.plus.search.QuickSearchDialogFragment;
+import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.plus.track.TrackSelectSegmentBottomSheet.OnSegmentSelectedListener;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
@@ -270,6 +272,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 						if (contextMenu.isActive() && contextMenu.getPointDescription() != null
 								&& contextMenu.getPointDescription().isGpxPoint()) {
 							contextMenu.show();
+						} else if (Algorithms.objectEquals(returnScreenName, QuickSearchDialogFragment.TAG)) {
+							mapActivity.showQuickSearch(ShowQuickSearchMode.CURRENT, false);
 						} else {
 							mapActivity.launchPrevActivityIntent();
 						}
@@ -1156,7 +1160,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			startNavigationForGPX(gpxFile, mapActivity.getMapActions());
-			RouteProvider.GPXRouteParamsBuilder paramsBuilder = app.getRoutingHelper().getCurrentGPXRoute();
+			GPXRouteParamsBuilder paramsBuilder = app.getRoutingHelper().getCurrentGPXRoute();
 			if (paramsBuilder != null) {
 				paramsBuilder.setSelectedSegment(selectedSegment);
 				app.getRoutingHelper().onSettingsChanged(true);

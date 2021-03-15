@@ -2134,10 +2134,6 @@
     <string name="quick_action_duplicate">Kopia nazwy szybkiej czynności</string>
     <string name="quick_action_showhide_favorites_descr">Przełącznik wyświetlania lub ukrywania ulubionych miejsc na mapie.</string>
     <string name="quick_action_showhide_poi_descr">Przełącznik wyświetlania lub ukrywania użytecznych miejsc na mapie.</string>
-    <string name="quick_action_showhide_favorites_title">Przełącz widoczność ulubionych</string>
-    <string name="quick_action_favorites_show">Pokaż Ulubione</string>
-    <string name="quick_action_favorites_hide">Ukryj Ulubione</string>
-    <string name="quick_action_showhide_poi_title">Przełącz widoczność użytecznych miejsc</string>
     <string name="quick_action_add_create_items">Tworzenie elementów</string>
     <string name="quick_action_bug_descr">Ta wiadomość uzupełni się w polu komentarza.</string>
     <string name="quick_action_bug_message">Wiadomość</string>
@@ -2282,9 +2278,6 @@
     <string name="hillshade_purchase_header">Zainstaluj wtyczkę \'Poziomice\', aby pokazać stopniowane obszary pionowe.</string>
     <string name="hillshade_menu_download_descr">Pobierz mapę \"Cieniowanie Rzeźby Terenu\", by wyświetlić cieniowanie pionowe.</string>
     <string name="srtm_purchase_header">Kup i zainstaluj wtyczkę \'Poziomice\', aby pokazać stopniowane obszary pionowe.</string>
-    <string name="quick_action_showhide_osmbugs_title">Pokaż lub ukryj uwagi OSM</string>
-    <string name="quick_action_osmbugs_show">Pokaż uwagi OSM</string>
-    <string name="quick_action_osmbugs_hide">Ukryj uwagi OSM</string>
     <string name="osmand_plus_extended_description_part8">Przybliżony zasięg i jakość mapy: 
 \n • Europa Zachodnia: **** 
 \n • Europa Wschodnia: *** 
@@ -2845,10 +2838,7 @@
     <string name="shared_string_swap">Wymień</string>
     <string name="show_more">Wyświetl więcej</string>
     <string name="tracks_on_map">Wyświetlane ślady</string>
-    <string name="quick_action_show_hide_gpx_tracks">Pokaż/Ukryj ślady</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Przycisk do pokazywania lub ukrywania wybranych śladów na mapie.</string>
-    <string name="quick_action_gpx_tracks_hide">Ukryj ślady</string>
-    <string name="quick_action_gpx_tracks_show">Pokaż ślady</string>
     <string name="add_destination_query">Proszę najpierw ustalić cel</string>
     <string name="previous_route">Poprzednia trasa</string>
     <string name="public_transport_warning_descr_blog">Dowiedz się więcej na naszym blogu, jak OsmAnd wyznacza trasy.</string>
@@ -3264,12 +3254,6 @@
     <string name="routing_attr_driving_style_prefer_unpaved_description">Preferuje drogi nieutwardzone.</string>
     <string name="layer_osm_edits">Zmiany OSM</string>
     <string name="quick_action_contour_lines_descr">Przełącza wyświetlenie poziomic na mapie.</string>
-    <string name="quick_action_contour_lines_show">Wyświetl poziomice</string>
-    <string name="quick_action_contour_lines_hide">Ukryj poziomice</string>
-    <string name="quick_action_show_hide_contour_lines">Przełącz widoczność poziomic</string>
-    <string name="quick_action_hillshade_show">Wyświetl cieniowanie terenu</string>
-    <string name="quick_action_hillshade_hide">Ukryj cieniowanie terenu</string>
-    <string name="quick_action_show_hide_hillshade">Przełącz widoczność cieniowania terenu</string>
     <string name="quick_action_hillshade_descr">Przycisk do pokazywania lub ukrywania cieniowania terenu na mapie.</string>
     <string name="tts_initialization_error">Nie można uruchomić mechanizmu zamiany tekstu na mowę.</string>
     <string name="shared_preference">Wspólne</string>
@@ -3484,9 +3468,6 @@
     <string name="add_description">Dodaj opis</string>
     <string name="delete_description">Usuń opis</string>
     <string name="quick_action_terrain_descr">Przycisk do wyświetlania lub ukrywania warstwy terenu na mapie.</string>
-    <string name="quick_action_terrain_show">Pokaż teren</string>
-    <string name="quick_action_terrain_hide">Ukryj teren</string>
-    <string name="quick_action_show_hide_terrain">Pokaż lub ukryj teren</string>
     <string name="download_slope_maps">Nachylenie</string>
     <string name="terrain_empty_state_text">Włącz, aby wyświetlić cieniowanie wzniesień lub stoków. Możesz przeczytać więcej o tego rodzaju mapach na naszej stronie.</string>
     <string name="shared_string_legend">Legenda</string>
@@ -3611,9 +3592,6 @@
 \n
 \n</string>
     <string name="back_to_editing">Powrót do edycji</string>
-    <string name="quick_action_transport_hide">Ukryj transport publiczny</string>
-    <string name="quick_action_transport_show">Pokaż transport publiczny</string>
-    <string name="quick_action_show_hide_transport">Pokaż lub ukryj transport publiczny</string>
     <string name="create_edit_poi">Utwórz lub edytuj użyteczne miejsce</string>
     <string name="add_edit_favorite">Dodaj lub edytuj ulubione miejsce</string>
     <string name="quick_action_switch_profile_descr">Przycisk akcji przełącza między wybranymi profilami.</string>
@@ -3665,9 +3643,6 @@
     <string name="vessel_height_limit_description">Ustaw wysokość statku, by unikać niskich mostów. Uwaga: dla mostów zwodzonych liczymy wysokość podniesionego mostu.</string>
     <string name="vessel_height_warning_link">Ustaw wysokość statku</string>
     <string name="vessel_width_limit_description">Ustaw szerokość statku, by unikać wąskich mostów</string>
-    <string name="quick_action_showhide_mapillary_title">Pokaż/ukryj Mapillary</string>
-    <string name="quick_action_mapillary_hide">Ukryj Mapillary</string>
-    <string name="quick_action_mapillary_show">Pokaż Mapillary</string>
     <string name="width_limit_description">Wprowadź szerokość pojazdu, niektóre restrykcje dróg mogą dotyczyć szerokich pojazdów.</string>
     <string name="height_limit_description">Wprowadź wysokość pojazdu, niektóre restrykcje dróg mogą dotyczyć wysokich pojazdów.</string>
     <string name="weight_limit_description">Wprowadź wagę pojazdu, niektóre restrykcje dróg mogą dotyczyć ciężkich pojazdów.</string>

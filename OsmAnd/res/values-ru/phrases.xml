@@ -3885,4 +3885,5 @@
     <string name="poi_patrolled_yes">Патрулируется: да</string>
     <string name="poi_piste_name">Название трассы</string>
     <string name="poi_piste_ski_jump">Лыжный трамплин</string>
+    <string name="poi_gladed_yes">По лесу: да</string>
 </resources>

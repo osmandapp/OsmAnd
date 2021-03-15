@@ -316,8 +316,8 @@
     <string name="poi_office_administrative">Oficina administrativa</string>
     <string name="poi_customs">Aduana</string>
     <string name="poi_city">Ciudad</string>
-    <string name="poi_town">Pueblo</string>
-    <string name="poi_village">Pueblito;Villa</string>
+    <string name="poi_town">Ciudad pequeña</string>
+    <string name="poi_village">Pueblo;Villa</string>
     <string name="poi_hamlet">Aldea</string>
     <string name="poi_isolated_dwelling">Vivienda aislada</string>
     <string name="poi_suburb">Barrio;Suburbio</string>

@@ -598,7 +598,7 @@
     <string name="map_version_changed_info">Спампаваць новую версію праграмы, каб мець магчымасць выкарыстоўваць новыя файлы мапаў.</string>
     <string name="poi_filter_nominatim">Сеціўны Nominatim</string>
     <string name="search_position_current_location_search">Вызначэнне становішча…</string>
-    <string name="search_position_current_location_found">Маё становішча (знойдзена)</string>
+    <string name="search_position_current_location_found">Маё месцазнаходжанне (знойдзена)</string>
     <string name="search_position_address">Адрас…</string>
     <string name="search_position_favorites">Улюбёныя мясціны…</string>
     <string name="shared_string_undefined">Нявызначана</string>
@@ -2137,10 +2137,6 @@
     <string name="quick_actions_delete">Выдаліць дзеянне</string>
     <string name="quick_actions_delete_text">Сапраўды выдаліць дзеянне \"%s\"\?</string>
     <string name="favorite_empty_place_name">Месца</string>
-    <string name="quick_action_showhide_favorites_title">Паказаць/схаваць улюбёныя мясціны</string>
-    <string name="quick_action_favorites_show">Паказаць улюбёныя мясціны</string>
-    <string name="quick_action_favorites_hide">Схаваць улюбёныя мясціны</string>
-    <string name="quick_action_showhide_poi_title">Паказаць/схаваць POI</string>
     <string name="quick_action_poi_show">Паказаць %1$s</string>
     <string name="quick_action_poi_hide">Схаваць %1$s</string>
     <string name="quick_action_add_category">Дадаць катэгорыю</string>
@@ -2310,9 +2306,6 @@
     <string name="increase_search_radius">Павялічыць радыус пошуку</string>
     <string name="nothing_found">Нічога не знойдзена</string>
     <string name="nothing_found_descr">Змяніць пошукавы запыт альбо павялічыць радыус пошуку.</string>
-    <string name="quick_action_showhide_osmbugs_title">Паказаць/схаваць OSM-нататкі</string>
-    <string name="quick_action_osmbugs_show">Паказаць OSM-нататкі</string>
-    <string name="quick_action_osmbugs_hide">Схаваць OSM-нататкі</string>
     <string name="quick_action_showhide_osmbugs_descr">Кнопка для паказу / хавання OSM-нататак на мапе.</string>
     <string name="sorted_by_distance">Адсартавана па адлегласці</string>
     <string name="search_favorites">Пошук ва ўлюбёных мясцінах</string>
@@ -2554,7 +2547,7 @@
     <string name="hide_passed">Схаваць пройдзеныя</string>
     <string name="use_location">Выкарыстоўваць становішча</string>
     <string name="add_location_as_first_point_descr">Дадаць ваша становішча як пункт адпраўлення пры планаванні маршруту.</string>
-    <string name="my_location">Маё становішча</string>
+    <string name="my_location">Маё месцазнаходжанне</string>
     <string name="shared_string_finish">Фініш</string>
     <string name="plan_route">Планаваць маршрут</string>
     <string name="shared_string_sort">Упарадкаваць</string>
@@ -2892,10 +2885,7 @@
     <string name="shared_string_swap">Памяняць</string>
     <string name="show_more">Паказаць больш</string>
     <string name="tracks_on_map">Адлюстроўваемыя сляды</string>
-    <string name="quick_action_show_hide_gpx_tracks">Паказаць/схаваць сляды</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Кнопка для адлюстравання/хавання абраных слядоў на мапе.</string>
-    <string name="quick_action_gpx_tracks_hide">Схаваць сляды</string>
-    <string name="quick_action_gpx_tracks_show">Паказаць сляды</string>
     <string name="use_osm_live_public_transport_description">Уключыць грамадскі транспарт для змен OsmAnd Live.</string>
     <string name="use_osm_live_public_transport">Грамадскі транспарт OsmAnd Live</string>
     <string name="transfers_size">%1$d перасадак</string>
@@ -3314,13 +3304,7 @@
     <string name="routing_attr_driving_style_prefer_unpaved_description">Аддаваць перавагу дарогам без пакрыцця.</string>
     <string name="layer_osm_edits">Змены OSM</string>
     <string name="quick_action_contour_lines_descr">Кнопка для адлюстравання/хавання контурных ліній на мапе.</string>
-    <string name="quick_action_contour_lines_show">Паказаць контурныя лініі</string>
-    <string name="quick_action_contour_lines_hide">Схаваць контурныя лініі</string>
-    <string name="quick_action_show_hide_contour_lines">Паказаць/схаваць контурныя лініі</string>
     <string name="quick_action_hillshade_descr">Кнопка для адлюстравання/хавання зацянення рэльефу на мапе.</string>
-    <string name="quick_action_hillshade_show">Паказаць зацяненне рэльефу</string>
-    <string name="quick_action_hillshade_hide">Схаваць зацяненне рэльефу</string>
-    <string name="quick_action_show_hide_hillshade">Паказаць/схаваць зацяненне рэльефу</string>
     <string name="tts_initialization_error">Немагчыма запусціць механізм пераўтварэння тэксту ў гаворку.</string>
     <string name="export_profile">Экспарт профілю</string>
     <string name="exported_osmand_profile">Профіль OsmAnd: %1$s</string>
@@ -3432,14 +3416,10 @@
     <string name="add_edit_favorite">Дадаць ці рэдагаваць улюбёнае</string>
     <string name="reset_deafult_order">Аднавіць прадвызначаны парадак элементаў</string>
     <string name="back_to_editing">Вярнуцца да рэдагавання</string>
-    <string name="quick_action_transport_show">Паказаць грамадскі транспарт</string>
     <string name="quick_action_transport_descr">Кнопка для паказу ці хавання грамадскага транспарту на мапе.</string>
     <string name="shared_string_add_profile">Дадаць профіль</string>
     <string name="n_items_of_z">%1$s з %2$s</string>
     <string name="download_slope_maps">Схілы</string>
-    <string name="quick_action_show_hide_terrain">Паказаць ці схаваць рэльеф</string>
-    <string name="quick_action_terrain_hide">Схаваць рэльеф</string>
-    <string name="quick_action_terrain_show">Паказаць рэльеф</string>
     <string name="delete_description">Выдаліць апісанне</string>
     <string name="add_description">Дадаць апісанне</string>
     <string name="select_group">Абраць групу</string>
@@ -3514,14 +3494,9 @@
     <string name="search_poi_types_descr">Можна спалучаць тыпы POI з розных катэгорый. Націсніце \"Пераключыць\", каб абраць усе ці націсніце злева, каб абраць катэгорыю.</string>
     <string name="change_application_profile">Змяніць профіль праграмы</string>
     <string name="index_item_world_basemap_detailed">Аглядная мапа свету (падрабязная)</string>
-    <string name="quick_action_transport_hide">Схаваць грамадскі транспарт</string>
-    <string name="quick_action_show_hide_transport">Паказаць ці схаваць грамадскі транспарт</string>
     <string name="recalculate_route_in_deviation">Пералічыць маршрут у выпадку адхілення</string>
     <string name="shared_string_uninstall">Выдаліць</string>
     <string name="vessel_width_limit_description">Вызначце шырыню судна, каб пазбягаць вузкіх мастоў</string>
-    <string name="quick_action_showhide_mapillary_title">Паказаць/схаваць Mapillary</string>
-    <string name="quick_action_mapillary_hide">Схаваць Mapillary</string>
-    <string name="quick_action_mapillary_show">Паказаць Mapillary</string>
     <string name="quick_action_showhide_mapillary_descr">Пераключальнік для паказу альбо хавання пласта Mapillary.</string>
     <string name="routing_attr_length_description">Пазначце даўжыню транспартнага сродку, дазволеную для руху па маршрутах.</string>
     <string name="routing_attr_length_name">Ліміт даўжыні</string>
@@ -3979,15 +3954,15 @@
     <string name="plan_route_split_after">Падзяліць пасля</string>
     <string name="plan_route_add_new_segment">Дадаць новы сегмент</string>
     <string name="profile_type_user_string">Профіль карыстальніка</string>
-    <string name="release_3_9">"• Дададзена магчымасць экспарту і імпарту ўсіх даных, уключаючы налады, рэсурсы, мае месцы.
+    <string name="release_3_9">• Дададзена магчымасць экспарту і імпарту ўсіх даных, уключаючы налады, рэсурсы і мясціны.
 \n
-\n • Планаванне маршруту: графікі для сегментаў трэка з маршрутам, дададзена магчымасць ствараць і рэдагаваць некалькі сегментаў трэка.
+\n • Планаванне маршруту: графікі для сегментаў следу з маршрутам, дададзена магчымасць ствараць і рэдагаваць некалькі сегментаў следу.
 \n
-\n • Дададзены OAuth метад аўтэнтыфікацыі для OpenStreetMap, палепшаны інтэрфейс дыялогаў OSM.
+\n • Дададзены метад аўтэнтыфікацыі для OpenStreetMap OAuth, палепшаны інтэрфейс дыялогаў OSM.
 \n
-\n  • Падтрымка карыстальніцкіх колераў для абранага і маршрутных пунктаў трэка.
+\n • Падтрымка адвольных колераў для ўлюбёных мясцін і пунктаў следу.
 \n
-\n"</string>
+\n</string>
     <string name="reverse_all_points">Вярнуць назад усе пункты</string>
     <string name="profile_by_default_description">Выберыце профіль, які будзе выкарыстоўвацца падчас запуску прыкладання.</string>
     <string name="shared_string_last_used">Апошні раз выкарыстоўвалася</string>
@@ -4019,10 +3994,10 @@
     <string name="select_folder_descr">Выберыце папку або стварыце новую</string>
     <string name="shared_string_empty">Пуста</string>
     <string name="analyze_by_intervals">Аналіз паводле інтэрвалаў</string>
-    <string name="upload_to_openstreetmap">Выгрузіць на OpenStreetMap</string>
-    <string name="edit_track">Змяніць трэк</string>
-    <string name="rename_track">Перайменаваць трэк</string>
-    <string name="change_folder">Змяніць папку</string>
+    <string name="upload_to_openstreetmap">Адправіць на OpenStreetMap</string>
+    <string name="edit_track">Змяніць след</string>
+    <string name="rename_track">Змяніць назву следу</string>
+    <string name="change_folder">Змяніць каталог</string>
     <string name="shared_string_sec">сек.</string>
     <string name="announcement_time_passing">Пры праходжанні</string>
     <string name="announcement_time_approach">Набліжэнне</string>
@@ -4034,48 +4009,48 @@
     <string name="announcement_time_intervals">Інтэрвалы часу і адлегласці</string>
     <string name="profile_type_osmand_string">Профіль OsmAnd</string>
     <string name="announcement_time_title">Час абвяшчэння</string>
-    <string name="announcement_time_descr">Час розных галасавых падказак залежыць ад тыпу запыту, бягучай хуткасці навігацыі і хуткасці навігацыі па змаўчанні.</string>
+    <string name="announcement_time_descr">Час вываду розных галасавых падказак залежыць ад тыпу падказкі, бягучай хуткасці навігацыі і прадвызначанай хуткасці навігацыі.</string>
     <string name="start_recording">Пачаць запіс</string>
-    <string name="show_track_on_map">Паказаць трэк на мапе</string>
+    <string name="show_track_on_map">Паказаць след на мапе</string>
     <string name="routing_engine_vehicle_type_wheelchair">Інвалідны вазок</string>
     <string name="routing_engine_vehicle_type_hiking">Пешы турызм</string>
-    <string name="routing_engine_vehicle_type_walking">Хадзьба</string>
-    <string name="routing_engine_vehicle_type_cycling_electric">Электраровар</string>
+    <string name="routing_engine_vehicle_type_walking">Хада</string>
+    <string name="routing_engine_vehicle_type_cycling_electric">Электрычны ровар</string>
     <string name="routing_engine_vehicle_type_cycling_mountain">Горны ровар</string>
     <string name="routing_engine_vehicle_type_cycling_road">Дарожны ровар</string>
     <string name="routing_engine_vehicle_type_cycling_regular">Звычайны ровар</string>
     <string name="routing_engine_vehicle_type_hgv">Грузавік</string>
     <string name="routing_engine_vehicle_type_small_truck">Малы грузавік</string>
     <string name="routing_engine_vehicle_type_truck">Грузавік</string>
-    <string name="routing_engine_vehicle_type_scooter">Скутэр</string>
+    <string name="routing_engine_vehicle_type_scooter">Скутар</string>
     <string name="routing_engine_vehicle_type_racingbike">Гоначны ровар</string>
     <string name="routing_engine_vehicle_type_mtb">Горны ровар</string>
     <string name="message_server_error">Памылка сервера: %1$s</string>
     <string name="message_name_is_already_exists">Назва ўжо існуе</string>
-    <string name="delete_online_routing_engine">Выдаліць анлайн-маршрутызатар\?</string>
+    <string name="delete_online_routing_engine">Выдаліць сеціўную сістэму маршрутызацыі\?</string>
     <string name="context_menu_read_full">Чытаць цалкам</string>
     <string name="context_menu_edit_descr">Змяніць апісанне</string>
-    <string name="delete_waypoints">Выдаліць маршрутныя пункты</string>
-    <string name="copy_to_map_markers">Капіраваць да пазнак мапы</string>
-    <string name="copy_to_map_favorites">Капіраваць да абранага</string>
-    <string name="upload_photo">Выгрузка</string>
-    <string name="upload_photo_completed">Выгрузка завершана</string>
-    <string name="uploading_count">Выгрузка %1$d з %2$d</string>
-    <string name="uploaded_count">Выгружана %1$d з %2$d</string>
-    <string name="toast_select_edits_for_upload">Выберыце змены для выгрузкі</string>
-    <string name="hillshade_slope_contour_lines">Рэльеф мясцовасці / Схілы / Гарызанталі</string>
-    <string name="open_place_reviews_plugin_description">OpenPlaceReviews — гэта грамадскі праект пра месцы агульнага карыстання, такія як, рэстараны, гатэлі, музеі, пункты шляху. Ён збірае ўсе агульнадаступныя даныя пра іх, такія як, выявы, водгукі, спасылкі на іншыя сістэмы, спасылкі OpenStreetMap, Вікіпедыя.
+    <string name="delete_waypoints">Выдаліць пункты шляху</string>
+    <string name="copy_to_map_markers">Скапіяваць у адзнакі</string>
+    <string name="copy_to_map_favorites">Скапіяваць ва ўлюбёныя</string>
+    <string name="upload_photo">Адпраўленне</string>
+    <string name="upload_photo_completed">Паспяхова адпраўлена</string>
+    <string name="uploading_count">Адпраўленне %1$d з %2$d</string>
+    <string name="uploaded_count">Адпраўлена %1$d з %2$d</string>
+    <string name="toast_select_edits_for_upload">Абярыце змены для адпраўлення</string>
+    <string name="hillshade_slope_contour_lines">Рэльеф мясцовасці / Схілы / Контурныя лініі</string>
+    <string name="open_place_reviews_plugin_description">OpenPlaceReviews — гэта грамадскі праект пра месцы агульнага карыстання, такія як рэстараны, гатэлі, музеі, пункты шляху. Ён збірае ўсе агульнадаступныя даныя пра іх, такія як, выявы, водгукі, спасылкі на іншыя сістэмы, спасылкі OpenStreetMap, Вікіпедыя.
 \n
-\nУсе даныя OpenPlaceReview з\'яўляюцца адкрытымі і даступны тут: http://openplacereviews.org/data.
+\nУсе даныя OpenPlaceReview адкрытыя і даступныя тут: http://openplacereviews.org/data.
 \n
-\nВы можаце прачытаць больш па адрасу: http://openplacereviews.org</string>
+\nВы можаце прачытаць больш па адрасе: http://openplacereviews.org</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">Выкарыстаць test.openplacereviews.org</string>
     <string name="login_open_place_reviews">Увайсці ў OpenPlaceReviews</string>
     <string name="activity_type_water_name">Вада</string>
     <string name="activity_type_winter_name">Зіма</string>
     <string name="activity_type_snowmobile_name">Снегаход</string>
-    <string name="activity_type_riding_name">Язда</string>
+    <string name="activity_type_riding_name">Верхавая язда</string>
     <string name="activity_type_racing_name">Гонка</string>
     <string name="activity_type_mountainbike_name">Горны ровар</string>
     <string name="activity_type_cycling_name">Язда на ровары</string>

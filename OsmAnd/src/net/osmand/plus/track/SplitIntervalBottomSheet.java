@@ -3,7 +3,7 @@ package net.osmand.plus.track;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.RadioGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -25,6 +25,9 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.widgets.MultiStateToggleButton;
+import net.osmand.plus.widgets.MultiStateToggleButton.OnRadioItemClickListener;
+import net.osmand.plus.widgets.MultiStateToggleButton.RadioItem;
 
 import org.apache.commons.logging.Log;
 
@@ -93,7 +96,6 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		items.add(new TitleItem(getString(R.string.gpx_split_interval)));
-		items.add(new LongDescriptionItem(getString(R.string.gpx_split_interval_descr)));
 
 		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
 		View view = themedInflater.inflate(R.layout.track_split_interval, null);
@@ -106,34 +108,44 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 		selectedSplitValue = view.findViewById(R.id.split_value_tv);
 		splitIntervalNoneDescr = view.findViewById(R.id.split_interval_none_descr);
 
-		UiUtilities.setupSlider(slider, nightMode, null);
+		UiUtilities.setupSlider(slider, nightMode, null, true);
 
-		RadioGroup splitTypeGroup = view.findViewById(R.id.split_type);
-		if (selectedSplitType == GpxSplitType.NO_SPLIT) {
-			splitTypeGroup.check(R.id.no_split);
-		} else if (selectedSplitType == GpxSplitType.TIME) {
-			splitTypeGroup.check(R.id.time_split);
-		} else if (selectedSplitType == GpxSplitType.DISTANCE) {
-			splitTypeGroup.check(R.id.distance_split);
-		}
-		splitTypeGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-			@Override
-			public void onCheckedChanged(RadioGroup group, int checkedId) {
-				if (checkedId == R.id.no_split) {
-					selectedSplitType = GpxSplitType.NO_SPLIT;
-				} else if (checkedId == R.id.time_split) {
-					selectedSplitType = GpxSplitType.TIME;
-				} else if (checkedId == R.id.distance_split) {
-					selectedSplitType = GpxSplitType.DISTANCE;
-				}
-				updateSlider();
-			}
-		});
+		LinearLayout radioGroup = (LinearLayout) view.findViewById(R.id.custom_radio_buttons);
+		setupTypeRadioGroup(radioGroup);
 
 		SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
 				.setCustomView(view)
 				.create();
 		items.add(titleItem);
+	}
+
+	private void setupTypeRadioGroup(LinearLayout buttonsContainer) {
+		RadioItem none = createRadioButton(GpxSplitType.NO_SPLIT, R.string.shared_string_none);
+		RadioItem time = createRadioButton(GpxSplitType.TIME, R.string.shared_string_time);
+		RadioItem distance = createRadioButton(GpxSplitType.DISTANCE, R.string.distance);
+
+		MultiStateToggleButton radioGroup = new MultiStateToggleButton(app, buttonsContainer, nightMode);
+		radioGroup.setItems(none, time, distance);
+
+		if (selectedSplitType == GpxSplitType.NO_SPLIT) {
+			radioGroup.setSelectedItem(none);
+		} else {
+			radioGroup.setSelectedItem(selectedSplitType == GpxSplitType.TIME ? time : distance);
+		}
+	}
+
+	private RadioItem createRadioButton(final GpxSplitType splitType, int titleId) {
+		String title = app.getString(titleId);
+		RadioItem item = new RadioItem(title);
+		item.setOnClickListener(new OnRadioItemClickListener() {
+			@Override
+			public boolean onRadioItemClick(RadioItem radioItem, View view) {
+				selectedSplitType = splitType;
+				updateSlider();
+				return true;
+			}
+		});
+		return item;
 	}
 
 	@Override

@@ -2087,10 +2087,6 @@ Lon %2$s</string>
     <string name="quick_action_duplicate">Duplicidade do nome da acción rápida</string>
     <string name="quick_action_showhide_favorites_descr">Un botón que amosa ou agocha os Favoritos no mapa.</string>
     <string name="quick_action_showhide_poi_descr">Un botón que amosa ou agocha os PDI no mapa.</string>
-    <string name="quick_action_showhide_favorites_title">Amosar/Agochar os Favoritos</string>
-    <string name="quick_action_favorites_show">Amosar Favoritos</string>
-    <string name="quick_action_favorites_hide">Agochar os Favoritos</string>
-    <string name="quick_action_showhide_poi_title">Amosar/Agochar os PDI</string>
     <string name="quick_action_poi_show">Amosar %1$s</string>
     <string name="quick_action_poi_hide">Agochar %1$s</string>
     <string name="quick_action_add_category">Engadir unha categoría</string>
@@ -2228,9 +2224,6 @@ Lon %2$s</string>
     <string name="restart_search">Reiniciar procura</string>
     <string name="increase_search_radius">Aumentar o raio de procura</string>
     <string name="nothing_found">Non se atopou ren</string>
-    <string name="quick_action_showhide_osmbugs_title">Amosar ou agochar as notas do OSM</string>
-    <string name="quick_action_osmbugs_show">Amosar notas do OSM</string>
-    <string name="quick_action_osmbugs_hide">Agochar notas do OSM</string>
     <string name="sorted_by_distance">Ordenado por distancia</string>
     <string name="search_favorites">Procurar nos Favoritos</string>
     <string name="shared_string_road">Estrada</string>
@@ -2853,10 +2846,7 @@ Lon %2$s</string>
     <string name="shared_string_swap">Trocar</string>
     <string name="show_more">Amosar máis</string>
     <string name="tracks_on_map">Pistas amosadas</string>
-    <string name="quick_action_show_hide_gpx_tracks">Amosar/agochar pistas</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Un botón que amosa ou agocha as pistas escollidas no mapa.</string>
-    <string name="quick_action_gpx_tracks_hide">Agochar pistas</string>
-    <string name="quick_action_gpx_tracks_show">Amosar pistas</string>
     <string name="transfers_size">%1$d transferencias</string>
     <string name="add_start_and_end_points">Engadir orixe e destino</string>
     <string name="route_add_start_point">Engadir punto de comezo</string>
@@ -3271,13 +3261,7 @@ Lon %2$s</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Preferir as estradas sen pavimentar aos pavimentados para o trazado de rutas.</string>
     <string name="layer_osm_edits">Edicións do OSM</string>
     <string name="quick_action_contour_lines_descr">Un botón que amosa ou agocha as curvas de nivel no mapa.</string>
-    <string name="quick_action_contour_lines_show">Amosar curvas de nivel</string>
-    <string name="quick_action_contour_lines_hide">Agochar curvas de nivel</string>
-    <string name="quick_action_show_hide_contour_lines">Amosar/agochar curvas de nivel</string>
     <string name="quick_action_hillshade_descr">Un botón que amosa ou agocha a sombra dos outeiros no mapa.</string>
-    <string name="quick_action_hillshade_show">Amosar sombreados</string>
-    <string name="quick_action_hillshade_hide">Agochar sombreados</string>
-    <string name="quick_action_show_hide_hillshade">Amosar/agochar sombreados</string>
     <string name="tts_initialization_error">Non é posíbel comezar o motor de síntese de voz.</string>
     <string name="simulate_your_location_gpx_descr">Simular a túa posición empregando unha pista GPX gravada.</string>
     <string name="export_profile">Exportar o perfil</string>
@@ -3552,9 +3536,6 @@ Lon %2$s</string>
     <string name="recalculate_route_distance_promo">A ruta será recalculada se a distancia á localización actual é maior que o valor escollido.</string>
     <string name="n_items_of_z">%1$s de %2$s</string>
     <string name="download_slope_maps">Pendentes</string>
-    <string name="quick_action_show_hide_terrain">Amosar ou agochar terreo</string>
-    <string name="quick_action_terrain_hide">Agochar terreo</string>
-    <string name="quick_action_terrain_show">Amosar terreo</string>
     <string name="quick_action_terrain_descr">Un botón que amosa ou agocha a capa do terreo no mapa.</string>
     <string name="delete_description">Eliminar descrición</string>
     <string name="add_description">Engadir descrición</string>
@@ -3619,9 +3600,6 @@ Lon %2$s</string>
 \n</string>
     <string name="shared_string_resume">Retomar</string>
     <string name="additional_actions_descr">Podes acceder a estas accións premendo no botón “%1$s”.</string>
-    <string name="quick_action_transport_hide">Agochar transporte público</string>
-    <string name="quick_action_transport_show">Amosar transporte público</string>
-    <string name="quick_action_show_hide_transport">Amosar ou agochar transporte público</string>
     <string name="quick_action_transport_descr">Botón que amosa ou agocha o transporte público no mapa.</string>
     <string name="create_edit_poi">Crear ou editar PDI</string>
     <string name="parking_positions">Posicións de aparcamento</string>
@@ -3691,10 +3669,7 @@ Lon %2$s</string>
     <string name="vessel_height_warning">Podes definir a altura da embarcación para evitar pontes baixas. Lémbrate se a ponte é móbil, empregaremos a súa altura no estado aberto.</string>
     <string name="vessel_height_limit_description">Define o alto da embarcación para evitar pontes baixas. Lémbrate se a ponte é móbil, empregaremos a súa altura no estado aberto.</string>
     <string name="vessel_width_limit_description">Estabelecer o largo da embarcación para evitar pontes estreitas</string>
-    <string name="quick_action_showhide_mapillary_title">Amosar/agochar o Mapillary</string>
-    <string name="quick_action_mapillary_hide">Agochar o Mapillary</string>
     <string name="quick_action_showhide_mapillary_descr">Un botón para amosar ou agochar a capa do Mapillary no mapa.</string>
-    <string name="quick_action_mapillary_show">Amosar o Mapillary</string>
     <string name="uninstall_speed_cameras">Desinstalar radares de velocidade</string>
     <string name="shared_string_legal">Legal</string>
     <string name="speed_camera_pois">PDI de radares de velocidade</string>

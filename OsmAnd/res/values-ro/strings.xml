@@ -1803,9 +1803,6 @@
     <string name="increase_search_radius">Măriți aria de căutare</string>
     <string name="nothing_found">Nimic găsit</string>
     <string name="nothing_found_descr">Modifică criteriile de căutare sau mărește aria de căutare.</string>
-    <string name="quick_action_showhide_osmbugs_title">Comutare note OSM</string>
-    <string name="quick_action_osmbugs_show">Arată notele OSM</string>
-    <string name="quick_action_osmbugs_hide">Ascunde notele OSM</string>
     <string name="quick_action_showhide_osmbugs_descr">Atingând acest buton de acțiune, se afișează sau se ascund notele OSM de pe hartă.</string>
     <string name="sorted_by_distance">Sortat după distanță</string>
     <string name="search_favorites">Caută Favorite</string>
@@ -2204,9 +2201,6 @@
     <string name="shared_string_swap">Schimbați</string>
     <string name="show_more">Afișați mai multe</string>
     <string name="tracks_on_map">Trasee afișate</string>
-    <string name="quick_action_show_hide_gpx_tracks">Afișați/Ascundeți traseele GPX</string>
-    <string name="quick_action_gpx_tracks_hide">Ascundeți traseele GPX</string>
-    <string name="quick_action_gpx_tracks_show">Afișați traseele GPX</string>
     <string name="add_destination_query">Selectați destinația mai întâi</string>
     <string name="previous_route">Ruta anterioară</string>
     <string name="add_home">Adăugați acasă</string>
@@ -2381,13 +2375,7 @@
     <string name="routing_attr_driving_style_prefer_unpaved_description">Prefer drumurile nepavate.</string>
     <string name="layer_osm_edits">Editare OSM</string>
     <string name="quick_action_contour_lines_descr">Comută pentru a afișa sau ascunde liniile de contur pe hartă.</string>
-    <string name="quick_action_contour_lines_show">Afişează conturul liniilor</string>
-    <string name="quick_action_contour_lines_hide">Ascunde conturul liniilor</string>
-    <string name="quick_action_show_hide_contour_lines">Afişează-ascunde conturul liniilor</string>
     <string name="quick_action_hillshade_descr">Comută pentru a arăta sau ascunde umbrele de pe hartă.</string>
-    <string name="quick_action_hillshade_show">Arata si umbrele</string>
-    <string name="quick_action_hillshade_hide">Ascunde afisarea umbrelor</string>
-    <string name="quick_action_show_hide_hillshade">Afişează/ascunde umbrele</string>
     <string name="tts_initialization_error">Motorul text-to-speech nu porneste.</string>
     <string name="export_profile">Exportă profilul</string>
     <string name="exported_osmand_profile">Profil osmand exportat %1$s</string>
@@ -2825,9 +2813,6 @@
     <string name="shared_string_tones">tone</string>
     <string name="shared_string_meters">metrii</string>
     <string name="add_online_source">Adăugare surse online</string>
-    <string name="quick_action_showhide_mapillary_title">Afișare/ascundere Mapillary</string>
-    <string name="quick_action_mapillary_hide">Ascundere Mapillary</string>
-    <string name="quick_action_mapillary_show">Afișare Mapillary</string>
     <string name="quick_action_showhide_mapillary_descr">O comutare pentru a afișa sau ascunde stratul Mapillary pe hartă.</string>
     <string name="routing_attr_length_description">Specificați lungimea vehiculului care trebuie permisă pe rute.</string>
     <string name="routing_attr_length_name">Limită lungime</string>

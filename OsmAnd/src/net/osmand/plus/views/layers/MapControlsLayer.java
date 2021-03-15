@@ -876,9 +876,13 @@ public class MapControlsLayer extends OsmandMapLayer {
 		routePlanningBtn.updateVisibility(showBottomMenuButtons);
 		menuControl.updateVisibility(showBottomMenuButtons);
 
-		boolean showZoomButtons = !routeDialogOpened && !shouldHideTopControls && !isInTrackAppearanceMode()
-				&& (!isInGpxApproximationMode() || !isPotrait())
-				&& !isInFollowTrackMode() && (!isInChoosingRoutesMode() || !isInWaypointsChoosingMode() || !portrait);
+		boolean additionalDialogsHide = !isInGpxApproximationMode()
+				&& !isInTrackAppearanceMode()
+				&& !isInChoosingRoutesMode()
+				&& !isInWaypointsChoosingMode();
+		boolean showZoomButtons = !routeDialogOpened && !shouldHideTopControls
+				&& !isInFollowTrackMode()
+				&& (additionalDialogsHide || !portrait);
 		mapZoomIn.updateVisibility(showZoomButtons);
 		mapZoomOut.updateVisibility(showZoomButtons);
 
@@ -1020,9 +1024,14 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	public void updateMyLocationVisibility(MapHudButton backToLocationControl, RoutingHelper rh, boolean dialogOpened) {
 		boolean tracked = mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation();
-		boolean visible = !(tracked && rh.isFollowingMode()) && (!isInGpxApproximationMode() || !isPotrait());
+		boolean visible = !(tracked && rh.isFollowingMode());
+		boolean additionalDialogsHide = !isInTrackAppearanceMode()
+				&& !isInGpxApproximationMode()
+				&& !isInChoosingRoutesMode()
+				&& !isInWaypointsChoosingMode()
+				&& !isInFollowTrackMode();
 		backToLocationControl.updateVisibility(visible && !dialogOpened && !isInPlanRouteMode()
-				&& !isInTrackAppearanceMode() && (!isInChoosingRoutesMode() || !isInWaypointsChoosingMode() || !isInFollowTrackMode() || !isPotrait()));
+				&& (additionalDialogsHide || !isPotrait()));
 	}
 
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {

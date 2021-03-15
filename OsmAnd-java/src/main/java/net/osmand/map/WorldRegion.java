@@ -42,6 +42,7 @@ public class WorldRegion implements Serializable {
 	protected boolean regionMapDownload;
 	protected LatLon regionCenter;
 	protected QuadRect boundingBox;
+	protected List<LatLon> polygon;
 
 	public static class RegionParams {
 		protected String regionLeftHandDriving;
@@ -186,10 +187,21 @@ public class WorldRegion implements Serializable {
 	}
 
 	public boolean containsRegion(WorldRegion region) {
-		if (this.boundingBox != null && region.boundingBox != null) {
-			return this.boundingBox.contains(region.boundingBox);
+		if (containsBoundingBox(region.boundingBox)) {
+			// check polygon only if bounding box match
+			return containsPolygon(region.polygon);
 		}
 		return false;
+	}
+
+	private boolean containsBoundingBox(QuadRect rectangle) {
+		return (boundingBox != null && rectangle != null) &&
+				boundingBox.contains(rectangle);
+	}
+
+	private boolean containsPolygon(List<LatLon> another) {
+		return (polygon != null && another != null) &&
+				Algorithms.isFirstPolygonInsideSecond(another, polygon);
 	}
 
 	public boolean isContinent() {

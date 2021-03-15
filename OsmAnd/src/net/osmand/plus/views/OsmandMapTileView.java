@@ -638,8 +638,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		} else if (mapPosition == OsmandSettings.LANDSCAPE_MIDDLE_RIGHT_CONSTANT) {
 			ratiox = 0.7f;
 		} else {
-			boolean isLayoutRtl = AndroidUtils.isLayoutRtl(application);
-			ratiox = mapPositionX == 0 ? 0.5f : (isLayoutRtl ? 0.25f : 0.75f);
+			ratiox = mapPositionX == 0 ? 0.5f : (isLayoutRtl() ? 0.25f : 0.75f);
 		}
 		final int cy = (int) (ratioy * view.getHeight());
 		final int cx = (int) (ratiox * view.getWidth());
@@ -959,7 +958,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		if (tileBoxWidthPx > 0) {
 			tbw = (int) (tileBoxWidthPx * border);
 			if (marginLeftPx > 0) {
-				dx = (tb.getPixWidth() - tileBoxWidthPx) / 2 - marginLeftPx;
+				int offset = (tb.getPixWidth() - tileBoxWidthPx) / 2 - marginLeftPx;
+				dx = isLayoutRtl() ? -offset : offset;
 			}
 		} else if (tileBoxHeightPx > 0) {
 			tbh = (int) (tileBoxHeightPx * border);
@@ -1424,5 +1424,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public Context getContext() {
 		return activity;
+	}
+
+	public boolean isLayoutRtl() {
+		return AndroidUtils.isLayoutRtl(application);
 	}
 }

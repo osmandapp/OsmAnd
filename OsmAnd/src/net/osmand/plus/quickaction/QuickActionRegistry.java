@@ -66,6 +66,8 @@ public class QuickActionRegistry {
 			nameRes(R.string.quick_action_add_configure_map).category(QuickActionType.CONFIGURE_MAP);
 	public static final QuickActionType TYPE_NAVIGATION = new QuickActionType(0, "").
 			nameRes(R.string.quick_action_add_navigation).category(QuickActionType.NAVIGATION);
+	public static final QuickActionType TYPE_CONFIGURE_SCREEN = new QuickActionType(0, "").
+			nameRes(R.string.map_widget_config).category(QuickActionType.CONFIGURE_SCREEN);
 
 
 	private final OsmandSettings settings;
@@ -248,6 +250,7 @@ public class QuickActionRegistry {
 		filterQuickActions(TYPE_ADD_ITEMS, result);
 		filterQuickActions(TYPE_CONFIGURE_MAP, result);
 		filterQuickActions(TYPE_NAVIGATION, result);
+		filterQuickActions(TYPE_CONFIGURE_SCREEN, result);
 		return result;
 	}
 

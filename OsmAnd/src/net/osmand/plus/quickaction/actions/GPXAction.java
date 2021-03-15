@@ -16,6 +16,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.editors.EditCategoryDialogFragment;
 import net.osmand.plus.mapcontextmenu.editors.SelectCategoryDialogFragment;
+import net.osmand.plus.mapcontextmenu.editors.SelectFavoriteCategoryBottomSheet;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.widgets.AutoCompleteTextViewEx;
@@ -119,13 +120,13 @@ public class GPXAction extends QuickAction {
 			@Override
 			public void onClick(final View view) {
 
-				SelectCategoryDialogFragment dialogFragment = SelectCategoryDialogFragment.createInstance("");
+				SelectFavoriteCategoryBottomSheet dialogFragment = SelectFavoriteCategoryBottomSheet.createInstance("");
 
 				dialogFragment.show(
 						activity.getSupportFragmentManager(),
-						SelectCategoryDialogFragment.TAG);
+						SelectFavoriteCategoryBottomSheet.TAG);
 
-				dialogFragment.setSelectionListener(new SelectCategoryDialogFragment.CategorySelectionListener() {
+				dialogFragment.setSelectionListener(new SelectFavoriteCategoryBottomSheet.CategorySelectionListener() {
 					@Override
 					public void onCategorySelected(String category, int color) {
 
@@ -135,12 +136,12 @@ public class GPXAction extends QuickAction {
 			}
 		});
 
-		SelectCategoryDialogFragment dialogFragment = (SelectCategoryDialogFragment)
+		SelectFavoriteCategoryBottomSheet dialogFragment = (SelectFavoriteCategoryBottomSheet)
 				activity.getSupportFragmentManager().findFragmentByTag(SelectCategoryDialogFragment.TAG);
 
 		if (dialogFragment != null) {
 
-			dialogFragment.setSelectionListener(new SelectCategoryDialogFragment.CategorySelectionListener() {
+			dialogFragment.setSelectionListener(new SelectFavoriteCategoryBottomSheet.CategorySelectionListener() {
 				@Override
 				public void onCategorySelected(String category, int color) {
 
@@ -155,7 +156,7 @@ public class GPXAction extends QuickAction {
 
 			if (dialog != null) {
 
-				dialogFragment.setSelectionListener(new SelectCategoryDialogFragment.CategorySelectionListener() {
+				dialogFragment.setSelectionListener(new SelectFavoriteCategoryBottomSheet.CategorySelectionListener() {
 					@Override
 					public void onCategorySelected(String category, int color) {
 
