@@ -40,6 +40,7 @@ public class AnimateDraggingMapThread {
 	private double targetFloatZoom = 0;
 
 	private boolean isAnimatingZoom;
+	private boolean isAnimatingMapMove;
 
 	public AnimateDraggingMapThread(OsmandMapTileView tileView) {
 		this.tileView = tileView;
@@ -158,6 +159,7 @@ public class AnimateDraggingMapThread {
 
 			@Override
 			public void run() {
+				isAnimatingMapMove = true;
 				setTargetValues(zoom, zoomFP, finalLat, finalLon);
 
 				boolean animateZoom = finalZoom != null && (zoom != startZoom || startZoomFP != 0);
@@ -171,6 +173,7 @@ public class AnimateDraggingMapThread {
 				}
 
 				animatingMoveInThread(mMoveX, mMoveY, NAV_ANIMATION_TIME, notifyListener, null);
+				isAnimatingMapMove = false;
 			}
 		});
 	}
@@ -217,6 +220,7 @@ public class AnimateDraggingMapThread {
 
 			@Override
 			public void run() {
+				isAnimatingMapMove = true;
 				setTargetValues(endZoom, 0, finalLat, finalLon);
 
 				if (moveZoom != startZoom) {
@@ -243,6 +247,7 @@ public class AnimateDraggingMapThread {
 				tileView.setFractionalZoom(endZoom, 0, notifyListener);
 
 				pendingRotateAnimation();
+				isAnimatingMapMove = false;
 			}
 		});
 	}
@@ -371,6 +376,10 @@ public class AnimateDraggingMapThread {
 
 	public boolean isAnimatingZoom() {
 		return isAnimatingZoom;
+	}
+
+	public boolean isAnimatingMapMove() {
+		return isAnimatingMapMove;
 	}
 
 	public void startZooming(final int zoomEnd, final double zoomPart, final boolean notifyListener) {
