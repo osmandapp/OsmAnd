@@ -174,6 +174,6 @@ public class LocalIndexInfo implements Comparable<LocalIndexInfo> {
 
 	@Override
 	public int compareTo(LocalIndexInfo o) {
-		return getName().compareTo(o.getName());
+		return getFileName().compareTo(o.getFileName());
 	}
 }

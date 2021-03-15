@@ -1,5 +1,6 @@
 package net.osmand.plus.liveupdates;
 
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -24,6 +25,7 @@ import android.widget.TextView;
 
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.SwitchCompat;
@@ -105,6 +107,13 @@ public class LiveUpdatesFragmentNew extends BaseOsmAndDialogFragment implements 
 	private GetLastUpdateDateTask getLastUpdateDateTask;
 	private LoadLiveMapsTask loadLiveMapsTask;
 
+	private final LiveUpdateListener liveUpdateListener = new LiveUpdateListener() {
+		@Override
+		public void processFinish() {
+			adapter.notifyDataSetChanged();
+		}
+	};
+
 	public static void showInstance(@NonNull FragmentManager fragmentManager, Fragment target) {
 		if (!fragmentManager.isStateSaved()) {
 			LiveUpdatesFragmentNew fragment = new LiveUpdatesFragmentNew();
@@ -182,7 +191,8 @@ public class LiveUpdatesFragmentNew extends BaseOsmAndDialogFragment implements 
 			@Override
 			public void onRefresh() {
 				if (settings.IS_LIVE_UPDATES_ON.get()) {
-					showUpdateDialog();
+					showUpdateDialog(getActivity(), settings, adapter.mapsList, adapter.countEnabled, liveUpdateListener);
+					startUpdateDateAsyncTask();
 				}
 				swipeRefresh.setRefreshing(false);
 			}
@@ -255,7 +265,6 @@ public class LiveUpdatesFragmentNew extends BaseOsmAndDialogFragment implements 
 	private void startLoadLiveMapsAsyncTask() {
 		if (loadLiveMapsTask == null) {
 			loadLiveMapsTask = new LoadLiveMapsTask(adapter, app);
-			loadLiveMapsTask.setSort(true);
 			loadLiveMapsTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
 	}
@@ -303,32 +312,28 @@ public class LiveUpdatesFragmentNew extends BaseOsmAndDialogFragment implements 
 	private void switchOnLiveUpdates() {
 		settings.IS_LIVE_UPDATES_ON.set(true);
 		enableLiveUpdates(true);
-		showUpdateDialog();
+		showUpdateDialog(getMyActivity(), settings, adapter.mapsList, adapter.countEnabled, liveUpdateListener);
+		startUpdateDateAsyncTask();
 	}
 
-	private void showUpdateDialog() {
-		startUpdateDateAsyncTask();
-		if (!Algorithms.isEmpty(adapter.mapsList)) {
-			final LiveUpdateListener listener = new LiveUpdateListener() {
-				@Override
-				public void processFinish() {
-					adapter.notifyDataSetChanged();
-				}
-			};
-			if (adapter.countEnabled == 1) {
-				LocalIndexInfo li = adapter.mapsList.get(0);
-				runLiveUpdate(getActivity(), li.getFileName(), false, listener);
-			} else if (adapter.countEnabled > 1) {
-				AlertDialog.Builder bld = new AlertDialog.Builder(getMyActivity());
+	public static void showUpdateDialog(final Activity context, final OsmandSettings settings,
+										final ArrayList<LocalIndexInfo> mapsList, int countEnabled,
+										@Nullable final LiveUpdateListener listener) {
+		if (!Algorithms.isEmpty(mapsList)) {
+			if (countEnabled == 1) {
+				LocalIndexInfo li = mapsList.get(0);
+				runLiveUpdate(context, li.getFileName(), false, listener);
+			} else if (countEnabled > 1) {
+				AlertDialog.Builder bld = new AlertDialog.Builder(context);
 				bld.setMessage(R.string.update_all_maps_now);
 				bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						for (LocalIndexInfo li : adapter.mapsList) {
+						for (LocalIndexInfo li : mapsList) {
 							CommonPreference<Boolean> localUpdateOn = preferenceForLocalIndex(li.getFileName(), settings);
 							if (localUpdateOn.get()) {
-								runLiveUpdate(getActivity(), li.getFileName(), false, listener);
+								runLiveUpdate(context, li.getFileName(), false, listener);
 							}
 						}
 					}
@@ -375,6 +380,21 @@ public class LiveUpdatesFragmentNew extends BaseOsmAndDialogFragment implements 
 		}
 	}
 
+	public static int updateCountEnabled(TextView countView, ArrayList<LocalIndexInfo> mapsList, OsmandSettings settings) {
+		int countEnabled = 0;
+		if (countView != null) {
+			for (LocalIndexInfo map : mapsList) {
+				CommonPreference<Boolean> preference = preferenceForLocalIndex(map.getFileName(), settings);
+				if (preference.get()) {
+					countEnabled++;
+				}
+			}
+			String countText = countEnabled + "/" + mapsList.size();
+			countView.setText(countText);
+		}
+		return countEnabled;
+	}
+
 	protected class LiveMapsAdapter extends OsmandBaseExpandableListAdapter implements LocalIndexInfoAdapter {
 		private final ArrayList<LocalIndexInfo> mapsList = new ArrayList<>();
 		private int countEnabled = 0;
@@ -387,19 +407,16 @@ public class LiveUpdatesFragmentNew extends BaseOsmAndDialogFragment implements 
 
 		@Override
 		public void clearData() {
+			mapsList.clear();
 		}
 
 		@Override
-		public void sort() {
-			countEnabled = 0;
-			for (LocalIndexInfo map : mapsList) {
-				CommonPreference<Boolean> preference = preferenceForLocalIndex(map.getFileName(), getSettings());
-				if (preference.get()) {
-					countEnabled++;
-				}
-			}
-			updateCountEnabled();
+		public void onDataUpdated() {
+			sort();
+			countEnabled = updateCountEnabled(countView, mapsList, settings);
+		}
 
+		public void sort() {
 			Collections.sort(mapsList);
 			Collections.sort(mapsList, new Comparator<LocalIndexInfo>() {
 				@Override
@@ -410,14 +427,6 @@ public class LiveUpdatesFragmentNew extends BaseOsmAndDialogFragment implements 
 				}
 			});
 			notifyDataSetInvalidated();
-		}
-
-		@Override
-		public void updateCountEnabled() {
-			if (countView != null) {
-				String countText = countEnabled + "/" + mapsList.size();
-				countView.setText(countText);
-			}
 		}
 
 		@Override
@@ -433,15 +442,10 @@ public class LiveUpdatesFragmentNew extends BaseOsmAndDialogFragment implements 
 		@Override
 		public View getChildView(final int groupPosition, final int childPosition,
 								 boolean isLastChild, View convertView, ViewGroup parent) {
-			LiveMapsViewHolder viewHolder;
-//			if (convertView == null) {
 			LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
 			convertView = inflater.inflate(R.layout.list_item_triple_row_icon_and_menu, parent, false);
-			viewHolder = new LiveMapsViewHolder(convertView);
+			LiveMapsViewHolder viewHolder = new LiveMapsViewHolder(convertView);
 			convertView.setTag(viewHolder);
-//			} else {
-//				viewHolder = (LiveMapsViewHolder) convertView.getTag();
-//			}
 			viewHolder.bindLocalIndexInfo(getChild(groupPosition, childPosition).getFileName());
 			return convertView;
 		}
@@ -466,7 +470,6 @@ public class LiveUpdatesFragmentNew extends BaseOsmAndDialogFragment implements 
 
 			countView = ((TextViewEx) view.findViewById(R.id.description));
 			AndroidUtils.setTextSecondaryColor(app, countView, nightMode);
-			updateCountEnabled();
 
 			return view;
 		}
@@ -688,7 +691,7 @@ public class LiveUpdatesFragmentNew extends BaseOsmAndDialogFragment implements 
 	@Override
 	public void runSort() {
 		if (adapter != null) {
-			adapter.sort();
+			adapter.onDataUpdated();
 		}
 	}
 

@@ -131,10 +131,6 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 	public static View getCustomButtonView(OsmandApplication app, ApplicationMode mode, boolean checked, boolean nightMode) {
 		View customView = UiUtilities.getInflater(app, nightMode).inflate(R.layout.bottom_sheet_item_preference_switch, null);
 		updateCustomButtonView(app, mode, customView, checked, nightMode);
-		if (mode == null) {
-			CompoundButton button = (CompoundButton) customView.findViewById(R.id.compound_button);
-			UiUtilities.setupCompoundButton(button, nightMode, TOOLBAR);
-		}
 		return customView;
 	}
 

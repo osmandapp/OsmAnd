@@ -14,29 +14,16 @@ public class LoadLiveMapsTask
 		implements AbstractLoadLocalIndexTask {
 
 	public interface LocalIndexInfoAdapter {
-
 		void addData(LocalIndexInfo localIndexInfo);
 
 		void clearData();
 
-		void sort();
-
-		void updateCountEnabled();
+		void onDataUpdated();
 	}
 
 	//private List<LocalIndexInfo> result;
 	private final LocalIndexInfoAdapter adapter;
 	private final LocalIndexHelper helper;
-	private boolean updateCount = false;
-	private boolean sort = false;
-
-	public void setUpdateCount(boolean updateCount) {
-		this.updateCount = updateCount;
-	}
-
-	public void setSort(boolean sort) {
-		this.sort = sort;
-	}
 
 	public LoadLiveMapsTask(LocalIndexInfoAdapter adapter, OsmandApplication app) {
 		this.adapter = adapter;
@@ -73,11 +60,6 @@ public class LoadLiveMapsTask
 	@Override
 	protected void onPostExecute(List<LocalIndexInfo> result) {
 		//this.result = result;
-		if (sort) {
-			adapter.sort();
-		}
-		if (updateCount) {
-			adapter.updateCountEnabled();
-		}
+		adapter.onDataUpdated();
 	}
 }
