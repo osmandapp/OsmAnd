@@ -156,7 +156,7 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 			return cachedValue;
 		}
 		cachedPreference = getPreferences();
-		cachedValue = getValue(cachedPreference, getProfileDefaultValue(settings.APPLICATION_MODE.get()));
+		cachedValue = getValue(cachedPreference, getDefaultValue());
 		return cachedValue;
 	}
 
