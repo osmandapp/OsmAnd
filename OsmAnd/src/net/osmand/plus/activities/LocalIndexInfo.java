@@ -8,7 +8,7 @@ import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
 
 import java.io.File;
 
-public class LocalIndexInfo {
+public class LocalIndexInfo implements Comparable<LocalIndexInfo> {
 
 	private LocalIndexType type;
 	private String description = "";
@@ -46,11 +46,11 @@ public class LocalIndexInfo {
 	public void setAttachedObject(Object attachedObject) {
 		this.attachedObject = attachedObject;
 	}
-	
+
 	public Object getAttachedObject() {
 		return attachedObject;
 	}
-	
+
 	private String formatName(String name) {
 		int ext = name.indexOf('.');
 		if (ext != -1) {
@@ -172,8 +172,8 @@ public class LocalIndexInfo {
 		return type.getBasename(this);
 	}
 
-  
-	
-
-	
+	@Override
+	public int compareTo(LocalIndexInfo o) {
+		return getFileName().compareTo(o.getFileName());
+	}
 }

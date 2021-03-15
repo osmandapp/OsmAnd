@@ -54,10 +54,10 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 	private static final String LOCAL_INDEX_FILE_NAME = "local_index_file_name";
 
 	private TextView sizeTextView;
-	
+
 	private String fileName;
 	private String fileNameWithoutExtension;
-	
+
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -77,7 +77,7 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 		final View updateTimesOfDayLayout = view.findViewById(R.id.updateTimesOfDayLayout);
 		sizeTextView = (TextView) view.findViewById(R.id.sizeTextView);
 
-		regionNameTextView.setText(getNameToDisplay(fileName, getMyActivity()));
+		regionNameTextView.setText(getNameToDisplay(fileName, getMyActivity().getMyApplication()));
 		fileNameWithoutExtension = Algorithms.getFileNameWithoutExtension(new File(fileName));
 		final IncrementalChangesManager changesManager = getMyApplication().getResourceManager().getChangesManager();
 		final long timestamp = changesManager.getTimestamp(fileNameWithoutExtension);
@@ -167,7 +167,7 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 						timeOfDayPreference.set(timeOfDayInt);
 
 						if (liveUpdatesSwitch.isChecked() && getSettings().IS_LIVE_UPDATES_ON.get()) {
-							runLiveUpdate(getActivity(), fileName, false);
+							runLiveUpdate(getActivity(), fileName, false, null);
 							UpdateFrequency updateFrequency = UpdateFrequency.values()[updateFrequencyInt];
 							TimeOfDay timeOfDayToUpdate = TimeOfDay.values()[timeOfDayInt];
 							setAlarmForPendingIntent(alarmIntent, alarmMgr, updateFrequency, timeOfDayToUpdate);
@@ -194,7 +194,7 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 					if (!getSettings().isInternetConnectionAvailable()) {
 						getMyApplication().showShortToastMessage(R.string.no_internet_connection);
 					} else {
-						runLiveUpdate(getActivity(), fileName, true);
+						runLiveUpdate(getActivity(), fileName, true, null);
 						final IncrementalChangesManager changesManager = getMyApplication().getResourceManager().getChangesManager();
 						sizeTextView.setText(getUpdatesSize(getMyActivity(), fileNameWithoutExtension, changesManager));
 						dialog.dismiss();

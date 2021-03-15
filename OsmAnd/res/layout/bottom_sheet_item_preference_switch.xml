@@ -13,11 +13,11 @@
 		android:layout_marginEnd="@dimen/content_padding"
 		android:layout_marginRight="@dimen/content_padding"
 		android:minHeight="@dimen/bottom_sheet_list_item_height"
+		android:paddingStart="@dimen/content_padding"
 		android:paddingLeft="@dimen/content_padding"
-		android:paddingRight="@dimen/content_padding"
-		tools:background="@drawable/rectangle_rounded_right"
 		android:paddingEnd="@dimen/content_padding"
-		android:paddingStart="@dimen/content_padding">
+		android:paddingRight="@dimen/content_padding"
+		tools:background="@drawable/rectangle_rounded_right">
 
 		<net.osmand.plus.widgets.TextViewEx
 			android:id="@+id/title"
@@ -41,7 +41,8 @@
 			android:background="@null"
 			android:clickable="false"
 			android:focusable="false"
-			android:focusableInTouchMode="false" />
+			android:focusableInTouchMode="false"
+			android:saveEnabled="false" />
 
 	</LinearLayout>
 

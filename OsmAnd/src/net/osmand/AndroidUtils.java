@@ -92,12 +92,12 @@ public class AndroidUtils {
 	public static final MessageFormat formatKb = new MessageFormat("{0, number,##.#}", Locale.US);
 	public static final MessageFormat formatGb = new MessageFormat("{0, number,#.##}", Locale.US);
 	public static final MessageFormat formatMb = new MessageFormat("{0, number,##.#}", Locale.US);
-	
+
 	/**
 	 * @param context
 	 * @return true if Hardware keyboard is available
 	 */
-	
+
 	public static boolean isHardwareKeyboardAvailable(Context context) {
 		return context.getResources().getConfiguration().keyboard != Configuration.KEYBOARD_NOKEYS;
 	}
@@ -480,6 +480,16 @@ public class AndroidUtils {
 				: ctx.getResources().getColor(R.color.text_color_secondary_light));
 	}
 
+	@ColorRes
+	public static int getPrimaryTextColorId(boolean nightMode) {
+		return nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light;
+	}
+
+	@ColorRes
+	public static int getSecondaryTextColorId(boolean nightMode) {
+		return nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light;
+	}
+
 	public static int getTextMaxWidth(float textSize, List<String> titles) {
 		int width = 0;
 		for (String title : titles) {
@@ -761,7 +771,7 @@ public class AndroidUtils {
 			tv.setTextDirection(textDirection);
 		}
 	}
-	
+
 	public static int getLayoutDirection(@NonNull Context ctx) {
 		Locale currentLocale = ctx.getResources().getConfiguration().locale;
 		return TextUtilsCompat.getLayoutDirectionFromLocale(currentLocale);
@@ -909,7 +919,7 @@ public class AndroidUtils {
 	public static boolean isRTL() {
 		return TextUtilsCompat.getLayoutDirectionFromLocale(Locale.getDefault()) == ViewCompat.LAYOUT_DIRECTION_RTL;
 	}
-	
+
 	public static String createNewFileName(String oldName) {
 		int firstDotIndex = oldName.indexOf('.');
 		String nameWithoutExt = oldName.substring(0, firstDotIndex);
@@ -931,7 +941,7 @@ public class AndroidUtils {
 			i--;
 		} while (i >= 0);
 		int newNumberValue = Integer.parseInt(hasNameNumberSection ? numberSection.toString() : "0") + 1;
-		
+
 		String newName;
 		if (newNumberValue == 1) {
 			newName = nameWithoutExt + " " + newNumberValue + ext;

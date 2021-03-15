@@ -37,7 +37,7 @@ public class MultiStateToggleButton {
 		this.nightMode = nightMode;
 	}
 
-	public void setItems(RadioItem firstBtn, RadioItem secondBtn, RadioItem ... other) {
+	public void setItems(RadioItem firstBtn, RadioItem secondBtn, RadioItem... other) {
 		items.clear();
 		items.add(firstBtn);
 		items.add(secondBtn);
@@ -101,12 +101,16 @@ public class MultiStateToggleButton {
 	}
 
 	private void updateView() {
+		updateView(true);
+	}
+
+	public void updateView(boolean isEnabled) {
 		int activeColor = ContextCompat.getColor(app, nightMode
-				? R.color.active_color_primary_dark
-				: R.color.active_color_primary_light);
+				? isEnabled ? R.color.active_color_primary_dark : R.color.icon_color_default_dark
+				: isEnabled ? R.color.active_color_primary_light : R.color.icon_color_default_light);
 		int textColor = ContextCompat.getColor(app, nightMode
-				? R.color.text_color_primary_dark
-				: R.color.text_color_primary_light);
+				? isEnabled ? R.color.text_color_primary_dark : R.color.text_color_secondary_dark
+				: isEnabled ? R.color.text_color_primary_light : R.color.text_color_secondary_light);
 		int radius = AndroidUtils.dpToPx(app, 4);
 		float[] leftBtnRadii = new float[]{radius, radius, 0, 0, 0, 0, radius, radius};
 		float[] rightBtnRadii = new float[]{0, 0, radius, radius, radius, radius, 0, 0};
@@ -121,6 +125,7 @@ public class MultiStateToggleButton {
 		for (int i = 0; i < items.size(); i++) {
 			RadioItem item = items.get(i);
 			ViewGroup container = buttons.get(i);
+			container.setEnabled(isEnabled);
 			TextView tvTitle = (TextView) container.findViewById(R.id.title);
 			if (selectedItem == item) {
 				if (i == 0) {
@@ -148,7 +153,7 @@ public class MultiStateToggleButton {
 		}
 	}
 
-	private void hideDividers(int ... dividerIndexes) {
+	private void hideDividers(int... dividerIndexes) {
 		for (int dividerIndex : dividerIndexes) {
 			if (dividerIndex >= 0 && dividerIndex < dividers.size()) {
 				dividers.get(dividerIndex).setVisibility(View.GONE);
