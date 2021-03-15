@@ -2011,7 +2011,6 @@
     <string name="add_new_folder">Legg til ny mappe</string>
     <string name="shared_string_gpx_track">Spor</string>
     <string name="routing_attr_height_obstacles_name">Bruk høydedata</string>
-
     <string name="quick_action_bug_message">Melding</string>
     <string name="shared_string_permissions">Tillatelser</string>
     <string name="import_gpx_failed_descr">Kunne ikke importere filen. Kontroller at OsmAnd har tillatelse til å lese den.</string>
@@ -3905,4 +3904,27 @@
     <string name="context_menu_edit_descr">Rediger beskrivelse</string>
     <string name="copy_to_map_markers">Kopier til kartmarkører</string>
     <string name="copy_to_map_favorites">Kopier til favoritter</string>
+    <string name="uploading_count">Laster opp %1$d av %2$d</string>
+    <string name="select_segments">Velg segmenter</string>
+    <string name="segments_count">Segment %1$d</string>
+    <string name="opr_use_dev_url">Bruk test.openplacereviews.org</string>
+    <string name="activity_type_water_name">Vann</string>
+    <string name="activity_type_winter_name">Vinter</string>
+    <string name="activity_type_snowmobile_name">Snøskuter</string>
+    <string name="activity_type_mountainbike_name">Terrengsykkel</string>
+    <string name="activity_type_cycling_name">Sykling</string>
+    <string name="activity_type_motorbike_name">Motorsykkel</string>
+    <string name="activity_type_car_name">Bil</string>
+    <string name="delete_number_files_question">Slett %1$d filer\?</string>
+    <string name="updated">Oppdatert: %s</string>
+    <string name="delete_updates">Slett oppdateringer</string>
+    <string name="purchases">Kjøp</string>
+    <string name="select_category_descr">Velg kategori eller legg til en ny</string>
+    <string name="track_recording_will_be_continued">Opptaket vil fortsette.</string>
+    <string name="copy_poi_name">Kopier POI-navn</string>
+    <string name="quick_action_show_hide_title">Vis/skjul</string>
+    <string name="shared_string_interval">Intervall</string>
+    <string name="track_has_no_altitude">Sporet inneholder ikke høydedata.</string>
+    <string name="track_has_no_speed">Sporet inneholder ikke hastighetsdata.</string>
+    <string name="select_another_colorization">Velg en annen type fargelegging.</string>
 </resources>
