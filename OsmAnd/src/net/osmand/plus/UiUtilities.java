@@ -10,15 +10,12 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.RippleDrawable;
-import android.hardware.Sensor;
-import android.hardware.SensorManager;
 import android.os.Build;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.StyleSpan;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
@@ -67,6 +64,10 @@ public class UiUtilities {
 
 	private static final Log LOG = PlatformUtil.getLog(UiUtilities.class);
 
+	private static final int ORIENTATION_0 = 0;
+	private static final int ORIENTATION_90 = 3;
+	private static final int ORIENTATION_270 = 1;
+	private static final int ORIENTATION_180 = 2;
 	private final TLongObjectHashMap<Drawable> drawableCache = new TLongObjectHashMap<>();
 	private final OsmandApplication app;
 	private static final int INVALID_ID = -1;
@@ -249,9 +250,15 @@ public class UiUtilities {
 		return a << ALPHA_CHANNEL | r << RED_CHANNEL | g << GREEN_CHANNEL | b << BLUE_CHANNEL;
 	}
 
-	public UpdateLocationViewCache getUpdateLocationViewCache(){
+	public UpdateLocationViewCache getUpdateLocationViewCache() {
+		return getUpdateLocationViewCache(true);
+	}
+
+	public UpdateLocationViewCache getUpdateLocationViewCache(boolean useScreenOrientation) {
 		UpdateLocationViewCache uvc = new UpdateLocationViewCache();
-		uvc.screenOrientation = getScreenOrientation();
+		if (useScreenOrientation) {
+			uvc.screenOrientation = getScreenOrientation();
+		}
 		return uvc;
 	}
 
@@ -357,16 +364,16 @@ public class UiUtilities {
 	public int getScreenOrientation() {
 		int screenOrientation = ((WindowManager) app.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRotation();
 		switch (screenOrientation) {
-			case Surface.ROTATION_0:   // Device default (normally portrait)
+			case ORIENTATION_0:   // Device default (normally portrait)
 				screenOrientation = 0;
 				break;
-			case Surface.ROTATION_90:  // Landscape right
+			case ORIENTATION_90:  // Landscape right
 				screenOrientation = 90;
 				break;
-			case Surface.ROTATION_270: // Landscape left
+			case ORIENTATION_270: // Landscape left
 				screenOrientation = 270;
 				break;
-			case Surface.ROTATION_180: // Upside down
+			case ORIENTATION_180: // Upside down
 				screenOrientation = 180;
 				break;
 		}
@@ -378,7 +385,7 @@ public class UiUtilities {
 		}
 		return screenOrientation;
 	}
-	
+
 	public static void setupSnackbar(Snackbar snackbar, boolean nightMode) {
 		setupSnackbar(snackbar, nightMode, null, null, null, null);
 	}
