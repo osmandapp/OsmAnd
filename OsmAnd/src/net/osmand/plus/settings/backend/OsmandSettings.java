@@ -50,6 +50,7 @@ import net.osmand.plus.rastermaps.LayerTransparencySeekbarMode;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.srtmplugin.TerrainMode;
+import net.osmand.plus.track.GradientScaleType;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.wikipedia.WikiArticleShowImages;
@@ -1408,6 +1409,10 @@ public class OsmandSettings {
 	public final OsmandPreference<Long> LAST_UPDATES_CARD_REFRESH = new LongPreference(this, "last_updates_card_refresh", 0).makeGlobal();
 
 	public final CommonPreference<Integer> CURRENT_TRACK_COLOR = new IntPreference(this, "current_track_color", 0).makeGlobal().makeShared().cache();
+	public final CommonPreference<GradientScaleType> CURRENT_TRACK_COLORIZATION = new EnumStringPreference<>(this, "current_track_colorization", null, GradientScaleType.values()).makeGlobal().makeShared().cache();
+	public final CommonPreference<String> CURRENT_TRACK_SPEED_GRADIENT_PALETTE = new StringPreference(this, "current_track_speed_gradient_palette", null).makeGlobal().makeShared().cache();
+	public final CommonPreference<String> CURRENT_TRACK_ALTITUDE_GRADIENT_PALETTE = new StringPreference(this, "current_track_altitude_gradient_palette", null).makeGlobal().makeShared().cache();
+	public final CommonPreference<String> CURRENT_TRACK_SLOPE_GRADIENT_PALETTE = new StringPreference(this, "current_track_slope_gradient_palette", null).makeGlobal().makeShared().cache();
 	public final CommonPreference<String> CURRENT_TRACK_WIDTH = new StringPreference(this, "current_track_width", "").makeGlobal().makeShared().cache();
 	public final CommonPreference<Boolean> CURRENT_TRACK_SHOW_ARROWS = new BooleanPreference(this, "current_track_show_arrows", false).makeGlobal().makeShared().cache();
 	public final CommonPreference<Boolean> CURRENT_TRACK_SHOW_START_FINISH = new BooleanPreference(this, "current_track_show_start_finish", true).makeGlobal().makeShared().cache();

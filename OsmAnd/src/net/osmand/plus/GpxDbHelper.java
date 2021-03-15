@@ -78,8 +78,8 @@ public class GpxDbHelper {
 		return res;
 	}
 
-	public boolean updateGradientScaleColor(@NonNull GpxDataItem item, @NonNull GradientScaleType gradientScaleType, int color) {
-		boolean res = db.updateGradientScaleColor(item, gradientScaleType, color);
+	public boolean updateGradientScalePalette(@NonNull GpxDataItem item, @NonNull GradientScaleType gradientScaleType, int[] palette) {
+		boolean res = db.updateGradientScaleColor(item, gradientScaleType, palette);
 		putToCache(item);
 		return res;
 	}
