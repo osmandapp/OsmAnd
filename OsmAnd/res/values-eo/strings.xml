@@ -4027,4 +4027,20 @@
     <string name="track_has_no_altitude">La spuro ne enhavas datumojn pri altitudo.</string>
     <string name="track_has_no_speed">La spuro ne enhavas datumojn pri rapido.</string>
     <string name="select_another_colorization">Elektu alian specon de kolorigo.</string>
+    <string name="routing_attr_short_way_description">Optimumigita pli mallonga kurso (energiŝpara)</string>
+    <string name="latest_openstreetmap_update">Lasta disponebla ĝisdatigo de OpenStreetMap:</string>
+    <string name="last_time_checked">Lastfoje kontrolita: %s</string>
+    <string name="segments_count">Segmento %1$d</string>
+    <string name="select_segments">Elektu segmentojn</string>
+    <string name="delete_number_files_question">Ĉu forigi %1$d dosierojn\?</string>
+    <string name="select_category_descr">Elektu kategorion aŭ aldonu novan</string>
+    <string name="copy_poi_name">Kopii nomon de interesejo</string>
+    <string name="update_frequency">Ofteco de ĝisdatigoj</string>
+    <string name="updated">Ĝisdatigita: %s</string>
+    <string name="delete_updates">Forigi ĝisdatigojn</string>
+    <string name="restart">Restartigi</string>
+    <string name="shared_strings_all_regions">Ĉiuj regionoj</string>
+    <string name="purchases">Aĉetoj</string>
+    <string name="quick_action_show_hide_title">Montri/kaŝi</string>
+    <string name="shared_string_interval">Intervalo</string>
 </resources>
