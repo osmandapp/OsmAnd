@@ -1,12 +1,15 @@
 package net.osmand.plus.views;
 
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PathMeasure;
+import android.graphics.PointF;
 import android.util.DisplayMetrics;
+import android.util.Pair;
 import android.util.TypedValue;
-
-import androidx.annotation.NonNull;
 
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.WptPt;
@@ -16,6 +19,7 @@ import net.osmand.plus.views.layers.geometry.GpxGeometryWay;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.BlockingQueue;
@@ -26,6 +30,9 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import androidx.annotation.NonNull;
+import androidx.core.graphics.ColorUtils;
 
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 
@@ -208,60 +215,80 @@ public class Renderable {
 
     public static class MultiProfileTrack extends StandardTrack {
 
-        private Map<String, Integer> profileColors;
+        private final Map<String, List<PointF>> profileIconsPositions = new HashMap<>();
+        private final Map<String, Pair<Integer, Bitmap>> profileValues;
 
-        private DisplayMetrics displayMetrics;
+        private final DisplayMetrics displayMetrics;
+
+        private Paint circlePaint;
+        private Paint borderPaint;
+
+        private final float circleSize;
+        private final float iconOffset;
 
         private int userPtIdx = 0;
         private int leftPtIdx = 0;
         private int rightPtIdx = 0;
 
-        public MultiProfileTrack(List<WptPt> routePoints, Map<String, Integer> profileColors,
+        public MultiProfileTrack(List<WptPt> routePoints, Map<String, Pair<Integer, Bitmap>> profileValues,
                                  DisplayMetrics displayMetrics, double base) {
             super(routePoints, base);
-            this.profileColors = profileColors;
+            this.profileValues = profileValues;
             this.displayMetrics = displayMetrics;
+            updateCirclePaint();
+            circleSize = dpToPx(18);
+            iconOffset = dpToPx(30) + circleSize / 2;
         }
 
         @Override
-        protected void draw(List<WptPt> points, Paint p, Canvas canvas, RotatedTileBox tileBox) {
+        protected void draw(List<WptPt> points, Paint linePaint, Canvas canvas, RotatedTileBox tileBox) {
             if (this.points.size() < 2) {
                 return;
             }
 
             canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 
-            updateLocalPaint(p);
-            Paint paint = new Paint(this.paint);
-            paint.setPathEffect(null);
-            paint.setStrokeWidth(dpToPx(8));
+            updateLocalPaint(linePaint);
+            linePaint = new Paint(paint);
 
             QuadRect tileBounds = tileBox.getLatLonBounds();
+            PathMeasure pathMeasure = new PathMeasure();
             Path path = new Path();
 
             WptPt prevPt = points.get(0);
-            WptPt leftUserPt = getLeftUserPt(points);
-            WptPt rightUserPt = getRightUserPt(points);
-            String currentProfile = leftUserPt.getProfileType();
-            paint.setColor(profileColors.get(currentProfile));
+            String currentProfile = getProfile(points);
+            linePaint.setColor(profileValues.get(currentProfile).first);
+            updateBorderPaint(linePaint.getColor(), linePaint.getStrokeWidth() + dpToPx(4));
+
+            float lengthRemaining = getRemainingLength(tileBox, points);
 
             for (int i = 1; i < points.size(); i++) {
                 WptPt currentPt = points.get(i);
+                PointF start = getPointFromWpt(tileBox, prevPt);
+                PointF end = getPointFromWpt(tileBox, currentPt);
+
+                path.reset();
+                path.moveTo(start.x, start.y);
+                path.lineTo(end.x, end.y);
                 if (arePointsInsideTile(currentPt, prevPt, tileBounds)) {
-                    float startX = tileBox.getPixXFromLatLon(prevPt.lat, prevPt.lon);
-                    float startY = tileBox.getPixYFromLatLon(prevPt.lat, prevPt.lon);
-                    float endX = tileBox.getPixXFromLatLon(currentPt.lat, currentPt.lon);
-                    float endY = tileBox.getPixYFromLatLon(currentPt.lat, currentPt.lon);
-                    path.reset();
-                    path.moveTo(startX, startY);
-                    path.lineTo(endX, endY);
-                    canvas.drawPath(path, paint);
+                    canvas.drawPath(path, borderPaint);
+                    canvas.drawPath(path, linePaint);
                 }
+
+                if (lengthRemaining >= 0) {
+                    pathMeasure.setPath(path, false);
+                    float pathLength = pathMeasure.getLength();
+                    if (lengthRemaining - pathLength <= 0) {
+                        addIconPosition(start, end, pathLength, lengthRemaining, currentProfile);
+                    }
+                    lengthRemaining -= pathLength;
+                }
+
                 if (currentPt.hasProfile()) {
-                    leftUserPt = getLeftUserPt(points);
-                    rightUserPt = getRightUserPt(points);
-                    currentProfile = leftUserPt.getProfileType();
-                    paint.setColor(profileColors.get(currentProfile));
+                    currentProfile = getProfile(points);
+                    linePaint.setColor(profileValues.get(currentProfile).first);
+                    updateBorderPaint(linePaint.getColor(), linePaint.getStrokeWidth() + dpToPx(2));
+                    lengthRemaining = getRemainingLength(tileBox, points);
                 }
                 prevPt = currentPt;
             }
@@ -269,12 +296,90 @@ public class Renderable {
             canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
         }
 
-        private WptPt getLeftUserPt(List<WptPt> points) {
-            return updateLeftIdx() == -1 ? null : points.get(leftPtIdx);
+        private void drawProfileIcons(Canvas canvas) {
+            for (String profile : profileIconsPositions.keySet()) {
+                List<PointF> positions = profileIconsPositions.get(profile);
+                if (!Algorithms.isEmpty(positions)) {
+                    for (PointF center : positions) {
+                        drawProfileCircle(canvas, center, profile);
+                    }
+                }
+            }
         }
 
-        private WptPt getRightUserPt(List<WptPt> points) {
-            return updateRightIdx() == -1 ? null : points.get(rightPtIdx);
+        private void drawProfileCircle(Canvas canvas, PointF center, String profile) {
+            canvas.drawCircle(center.x, center.y, circleSize, circlePaint);
+
+            Path ring = new Path();
+            ring.addCircle(center.x, center.y, circleSize, Path.Direction.CW);
+            updateBorderPaint(profileValues.get(profile).first, dpToPx(3));
+            canvas.drawPath(ring, borderPaint);
+
+            Bitmap icon = profileValues.get(profile).second;
+            int iconX = icon.getWidth() / 2;
+            int iconY = icon.getHeight() / 2;
+            canvas.drawBitmap(icon, center.x - iconX, center.y - iconY, null);
+        }
+
+        @Override
+        protected void updateLocalPaint(Paint p) {
+            super.updateLocalPaint(p);
+            paint.setPathEffect(null);
+            paint.setStrokeWidth(dpToPx(8));
+        }
+
+        private void updateCirclePaint() {
+            if (circlePaint == null) {
+                circlePaint = new Paint();
+                circlePaint.setColor(Color.WHITE);
+                circlePaint.setStyle(Paint.Style.FILL);
+            }
+        }
+
+        private void updateBorderPaint(int color, float pixWidth) {
+            if (borderPaint == null) {
+                borderPaint = new Paint();
+                borderPaint.setStyle(Paint.Style.STROKE);
+                borderPaint.setStrokeCap(Paint.Cap.BUTT);
+            }
+            borderPaint.setColor(ColorUtils.blendARGB(color, Color.BLACK, 0.2f));
+            borderPaint.setStrokeWidth(pixWidth);
+        }
+
+        private void addIconPosition(PointF start, PointF end, float pathLength, float lengthRemaining, String currentProfile) {
+            PointF iconPosition = getPointOnSection(start, end, pathLength, lengthRemaining);
+            List<PointF> positions = profileIconsPositions.get(currentProfile);
+            if (positions == null) {
+                positions = new ArrayList<>();
+                profileIconsPositions.put(currentProfile, positions);
+            }
+            positions.add(iconPosition);
+        }
+
+        private PointF getPointOnSection(PointF start, PointF end, float sectionLength, float remainingLength) {
+            float ratio = remainingLength / sectionLength;
+            float diffX = ratio * (end.x - start.x);
+            float diffY = ratio * (end.y - start.y);
+            return new PointF(start.x + diffX, start.y + diffY);
+        }
+
+        private float getRemainingLength(RotatedTileBox tileBox, List<WptPt> points) {
+            Path path = new Path();
+            PointF start = getPointFromWpt(tileBox, points.get(leftPtIdx));
+            path.moveTo(start.x, start.y);
+            for (int i = leftPtIdx + 1; i <= rightPtIdx; i++) {
+                PointF end = getPointFromWpt(tileBox, points.get(i));
+                path.lineTo(end.x, end.y);
+            }
+            float routeHalfLength = new PathMeasure(path, false).getLength() / 2;
+            return routeHalfLength < iconOffset ? -1 : routeHalfLength;
+        }
+
+        private String getProfile(List<WptPt> points) {
+            int idx = updateLeftIdx();
+            WptPt userWpt = idx == -1 ? null : points.get(leftPtIdx);
+            updateRightIdx();
+            return userWpt.getProfileType();
         }
 
         private int updateLeftIdx() {
@@ -299,6 +404,12 @@ public class Renderable {
             return userPtIdx;
         }
 
+        private PointF getPointFromWpt(RotatedTileBox tileBox, WptPt pt) {
+            float x = tileBox.getPixXFromLatLon(pt.lat, pt.lon);
+            float y = tileBox.getPixYFromLatLon(pt.lat, pt.lon);
+            return new PointF(x, y);
+        }
+
         private float dpToPx(float dp) {
             return (int) TypedValue.applyDimension(COMPLEX_UNIT_DIP, dp, displayMetrics);
         }
@@ -306,6 +417,7 @@ public class Renderable {
         @Override
         public void drawSingleSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {
             draw(points, p, canvas, tileBox);
+            drawProfileIcons(canvas);
         }
 
         @Override
