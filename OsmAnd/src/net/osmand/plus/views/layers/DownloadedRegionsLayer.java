@@ -253,7 +253,9 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		lastCheckMapZoom = zoom;
 
 		if (app.getSettings().SHOW_DOWNLOAD_MAP_DIALOG.get()
-				&& zoom >= ZOOM_MIN_TO_SHOW_DOWNLOAD_DIALOG && zoom <= ZOOM_MAX_TO_SHOW_DOWNLOAD_DIALOG
+				&& zoom >= ZOOM_MIN_TO_SHOW_DOWNLOAD_DIALOG
+				&& zoom <= ZOOM_MAX_TO_SHOW_DOWNLOAD_DIALOG
+				&& !view.isAnimatingMapMove()
 				&& currentObjects != null) {
 
 			Map<WorldRegion, BinaryMapDataObject> selectedObjects = new LinkedHashMap<>();
