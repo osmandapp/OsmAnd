@@ -6,11 +6,6 @@ import android.os.Bundle;
 import android.util.Pair;
 import android.widget.ImageView;
 
-import androidx.fragment.app.FragmentManager;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
-import androidx.preference.SwitchPreferenceCompat;
-
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
@@ -21,13 +16,16 @@ import net.osmand.plus.profiles.SelectProfileBottomSheet;
 import net.osmand.plus.profiles.SelectProfileBottomSheet.DialogMode;
 import net.osmand.plus.profiles.SelectProfileBottomSheet.OnSelectProfileCallback;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.BooleanPreference;
-import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.datastorage.DataStorageHelper;
 import net.osmand.plus.settings.datastorage.item.StorageItem;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
+
+import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
+import androidx.preference.SwitchPreferenceCompat;
 
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILE_KEY_ARG;
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.USE_LAST_PROFILE_ARG;
@@ -40,8 +38,6 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 
 	private static final String SEND_ANONYMOUS_DATA_PREF_ID = "send_anonymous_data";
 	private static final String DIALOGS_AND_NOTIFICATIONS_PREF_ID = "dialogs_and_notifications";
-	private static final String DONT_SHOW_STARTUP_MESSAGES = "do_not_show_startup_messages";
-	private static final String SHOW_DOWNLOAD_MAP_DIALOG = "show_download_map_dialog";
 
 	@Override
 	protected void setupPreferences() {
@@ -220,15 +216,15 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 		if (getSettings() == null) {
 			return;
 		}
-		CommonPreference<Boolean> startupMessages = (BooleanPreference) getSettings().getPreference(DONT_SHOW_STARTUP_MESSAGES);
-		CommonPreference<Boolean> downloadMapDialog = (BooleanPreference) getSettings().getPreference(SHOW_DOWNLOAD_MAP_DIALOG);
+		boolean showStartupMessages = !getSettings().DO_NOT_SHOW_STARTUP_MESSAGES.get();
+		boolean showDownloadMapDialog = getSettings().SHOW_DOWNLOAD_MAP_DIALOG.get();
 		String summary;
-		if (!startupMessages.get() && downloadMapDialog.get()) {
-			summary = app.getString(R.string.shared_string_all);
-		} else if (!startupMessages.get() || downloadMapDialog.get()) {
-			summary = "1/2";
+		if (showStartupMessages && showDownloadMapDialog) {
+			summary = getString(R.string.shared_string_all);
+		} else if (showStartupMessages || showDownloadMapDialog) {
+			summary = getString(R.string.ltr_or_rtl_combine_via_slash, "1", "2");
 		} else {
-			summary = app.getString(R.string.shared_string_disabled);
+			summary = getString(R.string.shared_string_disabled);
 		}
 		dialogsAndNotifications.setSummary(summary);
 	}
