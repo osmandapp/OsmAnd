@@ -32,7 +32,7 @@ import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
-import net.osmand.plus.mapmarkers.MapMarkersGroup;
+import net.osmand.plus.itinerary.ItineraryGroup;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.osmedit.OpenstreetmapPoint;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
@@ -355,8 +355,8 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			GlobalSettingsItem globalSettingsItem = (GlobalSettingsItem) object;
 			builder.setTitle(globalSettingsItem.getPublicName(app));
 			builder.setIcon(uiUtilities.getIcon(R.drawable.ic_action_settings, activeColorRes));
-		} else if (object instanceof MapMarkersGroup) {
-			MapMarkersGroup markersGroup = (MapMarkersGroup) object;
+		} else if (object instanceof ItineraryGroup) {
+			ItineraryGroup markersGroup = (ItineraryGroup) object;
 			if (ExportSettingsType.ACTIVE_MARKERS.name().equals(markersGroup.getId())) {
 				builder.setTitle(getString(R.string.map_markers));
 				builder.setIcon(uiUtilities.getIcon(R.drawable.ic_action_flag, activeColorRes));

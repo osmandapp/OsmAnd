@@ -30,7 +30,7 @@ import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.enums.MetricsConstants;
-import net.osmand.plus.mapmarkers.MapMarkersGroup;
+import net.osmand.plus.itinerary.ItineraryGroup;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.util.Algorithms;
@@ -795,7 +795,7 @@ public class GpxSelectionHelper {
 	                                     boolean addToHistory) {
 		GpxDataItem dataItem = app.getGpxDbHelper().getItem(new File(gpx.path));
 		if (canAddToMarkers && show && dataItem != null && dataItem.isShowAsMarkers()) {
-			app.getMapMarkersHelper().addOrEnableGroup(gpx);
+			app.getItineraryHelper().addOrEnableGroup(gpx);
 		}
 		return selectGpxFile(gpx, dataItem, show, notShowNavigationDialog, syncGroup, selectedByUser, addToHistory);
 	}
@@ -822,7 +822,7 @@ public class GpxSelectionHelper {
 	}
 
 	private void syncGpxWithMarkers(GPXFile gpxFile) {
-		MapMarkersGroup group = app.getMapMarkersHelper().getMarkersGroup(gpxFile);
+		ItineraryGroup group = app.getItineraryHelper().getMarkersGroup(gpxFile);
 		if (group != null) {
 			app.getItineraryHelper().runSynchronization(group);
 		}
