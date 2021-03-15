@@ -1,8 +1,12 @@
-package net.osmand.plus.mapmarkers;
+package net.osmand.plus.itinerary;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.mapmarkers.CategoriesSubHeader;
+import net.osmand.plus.mapmarkers.GroupHeader;
+import net.osmand.plus.mapmarkers.MapMarker;
+import net.osmand.plus.mapmarkers.ShowHideHistoryButton;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.util.Algorithms;
 
@@ -10,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class MapMarkersGroup {
+public class ItineraryGroup {
 
 	public static final int ANY_TYPE = -1;
 	public static final int FAVORITES_TYPE = 0;
@@ -34,11 +38,11 @@ public class MapMarkersGroup {
 	private CategoriesSubHeader categoriesSubHeader;
 	private ShowHideHistoryButton showHideHistoryButton;
 
-	public MapMarkersGroup() {
+	public ItineraryGroup() {
 
 	}
 
-	public MapMarkersGroup(@NonNull String id, @NonNull String name, int type) {
+	public ItineraryGroup(@NonNull String id, @NonNull String name, int type) {
 		this.id = id;
 		this.name = name;
 		this.type = type;
