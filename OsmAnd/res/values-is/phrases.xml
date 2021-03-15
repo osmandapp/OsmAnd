@@ -3891,4 +3891,6 @@
     <string name="poi_gladed_yes">Skafið: já</string>
     <string name="poi_piste_name">Heiti brautar</string>
     <string name="poi_piste_ski_jump">Skíðastökk</string>
+    <string name="poi_local_ref">Staðvær tilvísun</string>
+    <string name="poi_conference_centre">Ráðstefnumiðstöð</string>
 </resources>
