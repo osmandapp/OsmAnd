@@ -784,7 +784,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				public boolean updateInfo(DrawSettings drawSettings) {
 					boolean recording = isRecording();
 					Integer action = AV_DEFAULT_ACTION.get();
-					if (!Algorithms.objectEquals(recording, cachedAction) || !Algorithms.objectEquals(action, cachedRecording)) {
+					if (!Algorithms.objectEquals(recording, cachedRecording) || !Algorithms.objectEquals(action, cachedAction)) {
 						cachedAction = action;
 						cachedRecording = recording;
 						if (recording) {
