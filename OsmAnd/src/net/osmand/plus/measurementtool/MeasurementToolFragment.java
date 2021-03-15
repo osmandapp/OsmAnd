@@ -554,7 +554,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		});
 
 		initMeasurementMode(gpxData, savedInstanceState == null);
-
 		if (savedInstanceState == null) {
 			if (fileName != null) {
 				addNewGpxData(getGpxFile(fileName));
@@ -1959,10 +1958,13 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	public static boolean showInstance(FragmentManager fragmentManager, MeasurementEditingContext editingCtx,
-									   boolean followTrackMode) {
+									   boolean followTrackMode, boolean isShowSnapWarning) {
 		MeasurementToolFragment fragment = new MeasurementToolFragment();
 		fragment.setEditingCtx(editingCtx);
 		fragment.setMode(FOLLOW_TRACK_MODE, followTrackMode);
+		Bundle bundle = new Bundle();
+		bundle.putBoolean("isShowSnapWarning", isShowSnapWarning);
+		fragment.setArguments(bundle);
 		return showFragment(fragment, fragmentManager);
 	}
 

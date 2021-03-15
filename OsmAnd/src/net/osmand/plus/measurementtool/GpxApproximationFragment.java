@@ -21,6 +21,7 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.LocationsHolder;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
+import net.osmand.plus.LockableScrollView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -157,6 +158,15 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 			updateCardsLayout();
 		}
 		updateCards();
+		final LockableScrollView profileContainer = mainView.findViewById(R.id.route_menu_bottom_scroll);
+		profileContainer.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				if (snapToRoadAppMode.getOrder() > 4) {
+					profileContainer.fullScroll(View.FOCUS_DOWN);
+				}
+			}
+		}, 100);
 		updateButtons(mainView);
 
 		progressBar = mainView.findViewById(R.id.progress_bar);

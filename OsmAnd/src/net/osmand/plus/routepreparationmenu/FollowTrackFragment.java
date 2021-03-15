@@ -446,15 +446,18 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		if (mapActivity != null) {
 			if (card instanceof ImportTrackCard) {
 				importTrack();
-			} else if (card instanceof TrackEditCard || card instanceof AttachTrackToRoadsCard) {
-				openPlanRoute();
+			} else if (card instanceof AttachTrackToRoadsCard) {
+				openPlanRoute(true);
 				close();
-			} else if (card instanceof SelectTrackCard) {
-				updateSelectionMode(true);
-			} else if (card instanceof ReverseTrackCard
-					|| card instanceof NavigateTrackOptionsCard) {
-				updateMenu();
+			} else if (card instanceof TrackEditCard) {
+				openPlanRoute(false);
+				close();
 			}
+		} else if (card instanceof SelectTrackCard) {
+			updateSelectionMode(true);
+		} else if (card instanceof ReverseTrackCard
+				|| card instanceof NavigateTrackOptionsCard) {
+			updateMenu();
 		}
 	}
 
@@ -574,7 +577,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		}
 	}
 
-	public void openPlanRoute() {
+	public void openPlanRoute(boolean showSnapWarning) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null && gpxFile != null) {
 			editingTrack = true;
@@ -583,7 +586,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			editingContext.setGpxData(gpxData);
 			editingContext.setAppMode(app.getRoutingHelper().getAppMode());
 			editingContext.setSelectedSegment(app.getSettings().GPX_ROUTE_SEGMENT.get());
-			MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(), editingContext, true);
+			MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(), editingContext, true, showSnapWarning);
 		}
 	}
 
