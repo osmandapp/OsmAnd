@@ -236,7 +236,7 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 		} else {
 			mapMarkersHelper.updateGroupWptCategories(markersGroup, selectedCategories);
 			if (!groupCreated) {
-				mapMarkersHelper.runSynchronization(markersGroup);
+				app.getItineraryHelper().runSynchronization(markersGroup);
 			}
 		}
 	}
@@ -524,10 +524,9 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 		}
 
 		private void syncGpx(GPXFile gpxFile) {
-			MapMarkersHelper markersHelper = app.getMapMarkersHelper();
-			MapMarkersGroup group = markersHelper.getMarkersGroup(gpxFile);
+			MapMarkersGroup group = app.getMapMarkersHelper().getMarkersGroup(gpxFile);
 			if (group != null) {
-				markersHelper.runSynchronization(group);
+				app.getItineraryHelper().runSynchronization(group);
 			}
 		}
 	}

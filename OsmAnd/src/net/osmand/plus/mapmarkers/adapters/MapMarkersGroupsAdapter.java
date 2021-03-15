@@ -478,7 +478,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 						if(!disabled) {
 							mapMarkersHelper.enableGroup(group);
 						} else {
-							mapMarkersHelper.runSynchronization(group);
+							app.getItineraryHelper().runSynchronization(group);
 						}
 
 						if (disabled) {

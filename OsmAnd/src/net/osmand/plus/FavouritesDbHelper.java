@@ -272,10 +272,9 @@ public class FavouritesDbHelper {
 	}
 
 	private void runSyncWithMarkers(FavoriteGroup favGroup) {
-		MapMarkersHelper helper = context.getMapMarkersHelper();
-		MapMarkersGroup group = helper.getMarkersGroup(favGroup);
+		MapMarkersGroup group = context.getMapMarkersHelper().getMarkersGroup(favGroup);
 		if (group != null) {
-			helper.runSynchronization(group);
+			context.getItineraryHelper().runSynchronization(group);
 		}
 	}
 
