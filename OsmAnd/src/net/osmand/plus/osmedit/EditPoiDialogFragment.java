@@ -515,6 +515,10 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 					entity.putTagNoLC(poiType.getOsmTag2(), poiType.getOsmValue2());
 					entity.removeTag(Entity.REMOVE_TAG_PREFIX + poiType.getOsmTag2());
 				}
+				if (poiType.getEditOsmTag2() != null) {
+					entity.putTagNoLC(poiType.getEditOsmTag2(), poiType.getEditOsmValue2());
+					entity.removeTag(Entity.REMOVE_TAG_PREFIX + poiType.getEditOsmTag2());
+				}
 			} else if (!Algorithms.isEmpty(poiTypeTag)) {
 				PoiCategory category = editPoiData.getPoiCategory();
 				if (category != null) {

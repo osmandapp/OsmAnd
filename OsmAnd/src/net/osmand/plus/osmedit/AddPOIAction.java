@@ -147,6 +147,9 @@ public class AddPOIAction extends QuickAction {
 						if (poiType.getOsmTag2() != null) {
 							newNode.putTagNoLC(poiType.getOsmTag2(), poiType.getOsmValue2());
 						}
+						if (poiType.getEditOsmTag2() != null) {
+							newNode.putTagNoLC(poiType.getEditOsmTag2(), poiType.getEditOsmValue2());
+						}
 					} else if (!Algorithms.isEmpty(tag.getValue())) {
 						PoiCategory category = editPoiData.getPoiCategory();
 						if (category != null) {
