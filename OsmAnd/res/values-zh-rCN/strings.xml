@@ -1379,7 +1379,6 @@
     <string name="average_altitude">平均海拔</string>
     <string name="routing_attr_relief_smoothness_factor_name">选择海拔波动</string>
     <string name="routing_attr_height_obstacles_name">使用标高数据</string>
-
     <string name="rendering_attr_depthContours_description">显示等深线和标记。</string>
     <string name="rendering_attr_depthContours_name">航海等深线</string>
     <string name="auto_split_recording_title">自动拆分录音后的间隙</string>
@@ -3447,4 +3446,5 @@
     <string name="gpx_parse_error">OsmAnd GPX 格式不正确，请联系支持团队进一步调查。</string>
     <string name="simplified_track_description">只有路线线会被保存，航点会被删除。</string>
     <string name="shared_string_file_name">文件名</string>
+    <string name="months_3">三个月</string>
 </resources>
