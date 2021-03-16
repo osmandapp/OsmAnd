@@ -4042,4 +4042,6 @@
     <string name="track_has_no_altitude">Трек не містить даних про висоту.</string>
     <string name="track_has_no_speed">Трек не містить даних про швидкість.</string>
     <string name="select_another_colorization">Виберіть інший тип забарвлення.</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Сховати природні заповідники, заповідні території та межі національних парків</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_name">Межі природи</string>
 </resources>
