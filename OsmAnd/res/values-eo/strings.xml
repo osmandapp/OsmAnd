@@ -4043,4 +4043,6 @@
     <string name="purchases">Aĉetoj</string>
     <string name="quick_action_show_hide_title">Montri/kaŝi</string>
     <string name="shared_string_interval">Intertempo</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Kaŝi limojn de naturaj rezervejoj, protektataj areoj kaj naciaj parkoj</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_name">Limoj de rezervejoj</string>
 </resources>
