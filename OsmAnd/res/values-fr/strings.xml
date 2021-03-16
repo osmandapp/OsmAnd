@@ -4027,4 +4027,7 @@
     <string name="shared_string_interval">Intervalle</string>
     <string name="track_has_no_altitude">La trace ne contient aucune donnée d\'altitude.</string>
     <string name="track_has_no_speed">La trace ne contient aucune donnée de vitesse.</string>
+    <string name="routing_attr_short_way_description">Itinéraire court optimisé (plus économe en énergie)</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Masquer les limites des réserves naturelles, des zones protégées et des parcs nationaux</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_name">Limites naturelles</string>
 </resources>
