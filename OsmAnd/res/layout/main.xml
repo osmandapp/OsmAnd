@@ -48,6 +48,11 @@
             <include layout="@layout/map_hud_top"
                 android:id="@+id/MapHudButtonsOverlayTop"/>
 
+            <FrameLayout
+                android:id="@+id/left_side_menu"
+                android:layout_width="0dp"
+                android:layout_height="0dp"/>
+
             <include layout="@layout/map_hud_bottom"
                 android:id="@+id/MapHudButtonsOverlayBottom"/>
 
