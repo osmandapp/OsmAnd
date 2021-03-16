@@ -2162,7 +2162,6 @@
     <string name="rendering_attr_depthContours_description">Montri punktojn kaj kurbojn de profundo.</string>
     <string name="rendering_attr_depthContours_name">Maraj profundec-kurboj</string>
     <string name="routing_attr_height_obstacles_name">Uzi datumojn pri altitudo</string>
-
     <string name="route_altitude">Kursa altitudo</string>
     <string name="altitude_descent">Malsupreniro</string>
     <string name="altitude_ascent">Supreniro</string>
@@ -4005,4 +4004,27 @@
     <string name="activity_type_offroad_name">Ekstervoje</string>
     <string name="activity_type_motorbike_name">Motorciklo</string>
     <string name="activity_type_car_name">Aŭto</string>
+    <string name="select_segments_description">%1$s enhavas almenaŭ unu segmenton, vi devas elekti la necesan parton por navigi.</string>
+    <string name="temporary_conditional_routing_descr">Uzi vojajn limigojn, kiuj estas nun aktivaj sur la mapo</string>
+    <string name="routing_attr_driving_style_description">Elekti inter pli mallonga, pli rapida aŭ pli sekura kursoj</string>
+    <string name="snap_to_road_descr">Proksimigas emblemon de via pozicio al la nune navigata vojo</string>
+    <string name="map_orientation_threshold_descr">Aŭtomate turni la mapon nur kiam rapido estas pli alta ol la sojlo</string>
+    <string name="track_recording_stop_without_saving">Ĉesigi sen konservi</string>
+    <string name="track_recording_save_and_stop">Konservi kaj ĉesigi registri</string>
+    <string name="track_recording_title">Registrado de spuro ĉesigita</string>
+    <string name="track_recording_description">Ĉu vi certe volas ĉesigi registradon\?
+\nĈiuj nekonservitaj datumoj perdiĝos.</string>
+    <string name="on_pause">Paŭzigita</string>
+    <string name="app_restart_required">Restarto de aplikaĵo estas necesa por apliki kelkajn agordojn.</string>
+    <string name="routing_attr_height_obstacles_description">Eviti krutajn deklivojn dum navigi.</string>
+    <string name="quick_action_coordinates_widget_descr">Ŝaltilo por montri aŭ kaŝi la fenestraĵon de koordinatoj sur la mapo.</string>
+    <string name="map_widget_distance_by_tap">Distanco je frapeto</string>
+    <string name="live_update_frequency_week_variant">Kontrolos pri map‑ĝisdatigoj ĉiusemajne. Sekva ĝisdatigo okazos %1$s je %2$s.</string>
+    <string name="live_update_frequency_day_variant">Kontrolos pri map‑ĝisdatigoj ĉiutage. Sekva ĝisdatigo okazos %1$s je %2$s.</string>
+    <string name="live_update_frequency_hour_variant">Kontrolos pri map‑ĝisdatigoj ĉiuhore. Sekva ĝisdatigo okazos %1$s je %2$s.</string>
+    <string name="live_update_delete_updates_msg">Ĉu vi certe volas forigi ĉiujn %s ĝisdatigojn OsmAnd Live\?</string>
+    <string name="track_recording_will_be_continued">La registrado pluos.</string>
+    <string name="track_has_no_altitude">La spuro ne enhavas datumojn pri altitudo.</string>
+    <string name="track_has_no_speed">La spuro ne enhavas datumojn pri rapido.</string>
+    <string name="select_another_colorization">Elektu alian specon de kolorigo.</string>
 </resources>
