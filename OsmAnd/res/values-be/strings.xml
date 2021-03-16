@@ -1355,7 +1355,7 @@
     <string name="no_internet_connection">Немагчыма спампаваць. Калі ласка, праверце вашае Інтэрнэт-злучэнне.</string>
     <string name="download_tab_downloads">Усе спампоўкі</string>
     <string name="download_tab_updates">Абнаўленні</string>
-    <string name="download_tab_local">Лакальныя</string>
+    <string name="download_tab_local">Мясцовыя</string>
     <string name="navigate_point_zone">Зона</string>
     <string name="navigate_point_northing">Па шыраце</string>
     <string name="navigate_point_easting">Па даўгаце</string>
@@ -2190,7 +2190,6 @@
     <string name="shared_string_time">Час</string>
     <string name="total_distance">Агульная даўжыня</string>
     <string name="routing_attr_height_obstacles_name">Выкарыстоўваць даныя вышыні</string>
-
     <string name="auto_split_recording_title">Аўтаматычнае дзяленне запісаў пасля перапынку</string>
     <string name="auto_split_recording_descr">Пачаць новы сегмент пасля 6-хвіліннага перапынку, новы след — пасля 2-гадзіннага перапынку, ці новы файл пасля доўгага перапынку (як змяніляся дата).</string>
     <string name="lang_ber">Берберская</string>
@@ -3898,54 +3897,54 @@
     <string name="login_open_street_map">Увайсці ў OpenStreetMap</string>
     <string name="login_open_street_map_org">Увайсці ў OpenStreetMap.org</string>
     <string name="sign_in_with_open_street_map">Увайсці з дапамогай OpenStreetMap</string>
-    <string name="open_street_map_login_mode">Вам неабходна ўвайсці ў сістэму, каб загрузіць новыя або адрэдагаваныя змены.
+    <string name="open_street_map_login_mode">Вам неабходна ўвайсці ў сістэму, каб адправіць змены.
 \n
-\nВы можаце ўвайсці, выкарыстоўваючы бяспечны метад OAuth, або з дапамогай сваіх імя карыстальніка і пароля.</string>
-    <string name="use_login_password">Выкарыстоўваць імя карыстальніка і пароль</string>
-    <string name="login_account">Уліковы запіс</string>
-    <string name="user_login">Аўтарызавацца</string>
+\nВы можаце ўвайсці з дапамогай OAuth або лагіна і пароля.</string>
+    <string name="use_login_password">Выкарыстоўваць лагін і пароль</string>
+    <string name="login_account">Акаўнт</string>
+    <string name="user_login">Увайсці</string>
     <string name="manage_subscription">Кіраванне падпіскай</string>
     <string name="subscription_payment_issue_title">Націсніце кнопку, каб перайсці ў налады падпіскі Google Play і выправіць спосаб аплаты.</string>
-    <string name="subscription_expired_title">Мінуў тэрмін дзеяння падпіскі OsmAnd Live</string>
-    <string name="subscription_paused_title">Падпіска OsmAnd Live была прыпынена</string>
-    <string name="subscription_on_hold_title">Падпіска OsmAnd Live прыпынена</string>
-    <string name="markers_history">Гісторыя маркераў</string>
+    <string name="subscription_expired_title">Тэрмін дзеяння падпіскі OsmAnd Live сышоў</string>
+    <string name="subscription_paused_title">Падпіска OsmAnd Live была прыпыненая</string>
+    <string name="subscription_on_hold_title">Падпіска OsmAnd Live прыпыненая</string>
+    <string name="markers_history">Гісторыя адзнак</string>
     <string name="send_files_to_openstreetmap">Адправіць файл GPX на OpenStreetMap</string>
-    <string name="enter_text_separated">Увадзіце тэгі праз коску.</string>
-    <string name="gpx_upload_public_visibility_descr">\"Агульнадаступны\" азначае, што трасіроўка публічна адлюстроўваецца ў вашых GPS-трасіроўках і ў агульнадаступных спісах GPS-трасіровак, а таксама ў агульнадаступным спісе трасіровак з пазнакамі часу ў неапрацаваным выглядзе. Даныя, прадстаўленыя праз API, не спасылаюцца на вашу старонку трасіроўкі. Меткі часу трасіроўкі недаступныя праз агульнадаступны API GPS і не размяшчаюцца ў храналагічным парадку.</string>
-    <string name="gpx_upload_private_visibility_descr">\"Прыватны\" азначае, што след не з\'явіцца ў любым агульнадаступным спісе, але кантрольныя пункты з яго даступныя ў адвольным парадку праз агульнадаступны GPS API без пазнак часу.</string>
-    <string name="gpx_upload_identifiable_visibility_descr">\"Ідэнтыфікаваны\" азначае, што трасіроўка будзе публічна адлюстроўвацца ў вашай GPS-трасіроўкі і ў агульнадаступных спісах GPS-трасіровак, гэта значыць, што іншыя карыстальнікі змогуць загрузіць неапрацаваны след і звязаць яго з вашым імем карыстальніка. Агульнадаступныя даныя трасіроўкі з GPS API, якія абслугоўваюцца з дапамогай API пунктаў адсочвання, спасылаюцца на пачатковую старонку трасіроўкі.</string>
-    <string name="gpx_upload_trackable_visibility_descr">\"Адсочванне\" азначае, што трэк не з\'явіцца ў любым агульнадаступным спісе, але апрацоўка маршрутных пунктаў з яго (якія не могуць быць непасрэдна звязаны з вамі) ажыццяўляецца з выкарыстаннем загрузак з агульнадаступнага API GPS.</string>
+    <string name="enter_text_separated">Увадзіце пазнакі праз коску.</string>
+    <string name="gpx_upload_public_visibility_descr">\"Публічны\" азначае, што след публічна адлюстроўваецца ў вашых слядах і ў агульнадаступных спісах слядоў, а таксама ў агульнадаступным спісе слядоў з пазнакамі часу ў неапрацаваным выглядзе. Даныя з API, не спасылаюцца на вашу старонку слядоў. Пазнакі часу недаступныя праз агульнадаступны API GPS і не размяшчаюцца ў храналагічным парадку.</string>
+    <string name="gpx_upload_private_visibility_descr">\"Прыватны\" азначае, што след не з\'явіцца ў любым агульнадаступным спісе, але пункты следу з яго даступныя ў адвольным парадку праз агульнадаступны GPS API без пазнак часу.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">\"Можна ідэнтыфікаваць\" азначае, што след будзе публічна адлюстроўвацца ў вашых слядах і ў агульнадаступных спісах слядоў. Гэта азначае, што іншыя карыстальнікі змогуць спампаваць неапрацаваны след і звязаць яго з вашым імем карыстальніка. Агульнадаступныя даныя следу з GPS API, якія абслугоўваюцца з дапамогай API пунктаў следу, будуць спасылацца на пачатковую старонку следу.</string>
+    <string name="gpx_upload_trackable_visibility_descr">\"Можна адсачыць\" азначае, што след не з\'явіцца ў любым агульнадаступным спісе, але яго пункты (якія не могуць быць непасрэдна звязаныя з вамі) адпраўляюцца праз агульнадаступны API GPS.</string>
     <string name="osm_edit_close_note">Закрыць нататку OSM</string>
     <string name="osm_edit_comment_note">Каментаваць нататку OSM</string>
-    <string name="osm_login_descr">Вы можаце ўвайсці, выкарыстоўваючы бяспечны метад OAuth або з дапамогай сваіх імя карыстальніка і пароля.</string>
+    <string name="osm_login_descr">Вы можаце ўвайсці з дапамогай OAuth або лагіна і пароля.</string>
     <string name="shared_string_add_photo">Дадаць фотаздымак</string>
     <string name="register_on_openplacereviews">Зарэгістравацца на
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Фотаздымкі прадастаўлены праектам з адкрытымі данымі OpenPlaceReviews.org. Каб загрузіць фатаграфіі, зарэгіструйцеся на іх сайце.</string>
-    <string name="register_opr_create_new_account">Стварыць уліковы запіс</string>
-    <string name="register_opr_have_account">У мяне ўжо ёсць уліковы запіс</string>
+    <string name="register_on_openplacereviews_desc">Фотаздымкі падаюцца праектам з адкрытымі данымі OpenPlaceReviews.org. Каб запампаваць фотаздымкі, зарэгіструйцеся на іх сайце.</string>
+    <string name="register_opr_create_new_account">Стварыць акаўнт</string>
+    <string name="register_opr_have_account">У мяне ўжо ёсць акаўнт</string>
     <string name="shared_string_search_history">Гісторыя пошуку</string>
     <string name="app_mode_kayak">Каяк</string>
     <string name="app_mode_motorboat">Маторная лодка</string>
-    <string name="cannot_upload_image">Немагчыма загрузіць выяву, паўтарыце спробу пазней</string>
-    <string name="select_picture">Выберыце выявы</string>
+    <string name="cannot_upload_image">Немагчыма адправіць выяву, паўтарыце спробу пазней</string>
+    <string name="select_picture">Абярыце выявы</string>
     <string name="shared_string_resources">Рэсурсы</string>
     <string name="approximate_file_size">Прыблізны памер файла</string>
-    <string name="select_data_to_export">Выберыце даныя, якія вы хочаце экспартаваць у файл.</string>
+    <string name="select_data_to_export">Абярыце даныя, якія вы хочаце экспартаваць у файл.</string>
     <string name="file_size_needed_for_import">Неабходна для імпартавання</string>
-    <string name="export_not_enough_space_descr">На вашай прыладзе свабодна толькі %1$s. Вызваліце месца альбо зніміце пазнаку з некаторых элементаў для экспартавання.</string>
-    <string name="export_not_enough_space">Недастаткова месца</string>
-    <string name="select_groups_for_import">Выберыце групы, якія трэба імпартаваць.</string>
-    <string name="select_items_for_import">Выберыце элементы, якія трэба імпартаваць.</string>
+    <string name="export_not_enough_space_descr">На вашай прыладзе свабодна толькі %1$s. Вызваліце месца альбо прыбярыце пазнаку з некаторых элементаў.</string>
+    <string name="export_not_enough_space">Не стае вольнага месца</string>
+    <string name="select_groups_for_import">Абярыце групы, якія трэба імпартаваць.</string>
+    <string name="select_items_for_import">Абярыце элементы, якія трэба імпартаваць.</string>
     <string name="add_to_mapillary">Дадаць да Mapillary</string>
     <string name="add_to_opr">Дадаць да OpenPlaceReviews</string>
-    <string name="use_dev_url_descr">Пераключыцца на выкарыстанне dev.openstreetmap.org замест openstreetmap.org для тэсціравання адпраўкі нататак OSM / POI / GPX.</string>
+    <string name="use_dev_url_descr">Пераключыцца на выкарыстанне dev.openstreetmap.org замест openstreetmap.org для тэставання адпраўлення нататак OSM / POI / GPX.</string>
     <string name="use_dev_url">Выкарыстоўваць dev.openstreetmap.org</string>
     <string name="add_photos_descr">OsmAnd паказвае фотаздымкі з некалькіх крыніц;
 \nOpenPlaceReviews - фотаздымкі POI;
 \nMapillary - выявы вуліц;
-\nWeb / Wikimedia - фотаздымкі POI паводле дадзеных з OpenStreetMap.</string>
+\nWeb / Wikimedia - фотаздымкі POI паводле даных з OpenStreetMap.</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="elevation_data">Вы можаце выкарыстоўваць даныя пра вышыні, каб улічыць ўздымы/спускі падчас вашай паездкі</string>
     <string name="app_mode_light_aircraft">Лёгкі самалёт</string>
@@ -3964,16 +3963,16 @@
 \n
 \n</string>
     <string name="reverse_all_points">Вярнуць назад усе пункты</string>
-    <string name="profile_by_default_description">Выберыце профіль, які будзе выкарыстоўвацца падчас запуску прыкладання.</string>
+    <string name="profile_by_default_description">Абярыце профіль, які будзе выкарыстоўвацца падчас запуску праграмы.</string>
     <string name="shared_string_last_used">Апошні раз выкарыстоўвалася</string>
     <string name="routing_attr_prefer_hiking_routes_description">Аддаваць перавагу пешаходным маршрутам</string>
     <string name="routing_attr_prefer_hiking_routes_name">Аддаваць перавагу пешаходным маршрутам</string>
-    <string name="routing_attr_allow_streams_description">Дазвольце ручаі і меліярацыйныя каналы</string>
-    <string name="routing_attr_allow_streams_name">Дазвольце ручаі і меліярацыйныя каналы</string>
-    <string name="routing_attr_allow_intermittent_description">Дазволіць перарывістыя водныя маршруты</string>
-    <string name="routing_attr_allow_intermittent_name">Дазволіць перарывістыя водныя маршруты</string>
-    <string name="add_online_routing_engine">Дадаць анлайн-маршрутызатар</string>
-    <string name="edit_online_routing_engine">Рэдагаваць анлайн-маршрутызатар</string>
+    <string name="routing_attr_allow_streams_description">Дазволіць ручаі і меліярацыйныя каналы</string>
+    <string name="routing_attr_allow_streams_name">Дазволіць ручаі і меліярацыйныя каналы</string>
+    <string name="routing_attr_allow_intermittent_description">Дазволіць перапынныя водныя маршруты</string>
+    <string name="routing_attr_allow_intermittent_name">Дазволіць перапынныя водныя маршруты</string>
+    <string name="add_online_routing_engine">Дадаць сеціўную сістэму маршрутызацыі</string>
+    <string name="edit_online_routing_engine">Рэдагаваць сеціўную сістэму маршрутызацыі</string>
     <string name="shared_string_subtype">Падтып</string>
     <string name="shared_string_vehicle">Транспартны сродак</string>
     <string name="shared_string_api_key">Ключ API</string>
@@ -3981,17 +3980,17 @@
     <string name="shared_string_enter_param">Увядзіце параметр</string>
     <string name="keep_it_empty_if_not">Пакінуць пустым, калі не</string>
     <string name="online_routing_example_hint">URL-адрас з усімі параметрамі будзе выглядаць так:</string>
-    <string name="test_route_calculation">Тэст разліку маршруту</string>
-    <string name="routing_engine_vehicle_type_driving">Ваджэнне</string>
+    <string name="test_route_calculation">Тэставы разлік маршруту</string>
+    <string name="routing_engine_vehicle_type_driving">Кіраванне</string>
     <string name="routing_engine_vehicle_type_foot">Пешшу</string>
     <string name="routing_engine_vehicle_type_bike">Ровар</string>
     <string name="routing_engine_vehicle_type_car">Аўтамабіль</string>
-    <string name="copy_address">Капіраваць адрас</string>
-    <string name="online_routing_engine">Анлайн-маршрутызатар</string>
-    <string name="online_routing_engines">Анлайн-маршрутызатары</string>
-    <string name="shared_string_folders">Папкі</string>
-    <string name="select_folder">Выберыце папку</string>
-    <string name="select_folder_descr">Выберыце папку або стварыце новую</string>
+    <string name="copy_address">Скапіяваць адрас</string>
+    <string name="online_routing_engine">Сеціўная сістэма маршрутызацыі</string>
+    <string name="online_routing_engines">Сеціўныя сістэмы маршрутызацыі</string>
+    <string name="shared_string_folders">Каталогі</string>
+    <string name="select_folder">Абраць каталог</string>
+    <string name="select_folder_descr">Абярыце каталог або стварыце новы</string>
     <string name="shared_string_empty">Пуста</string>
     <string name="analyze_by_intervals">Аналіз паводле інтэрвалаў</string>
     <string name="upload_to_openstreetmap">Адправіць на OpenStreetMap</string>
@@ -4060,4 +4059,8 @@
     <string name="activity_type_offroad_name">Пазадарожнік</string>
     <string name="activity_type_motorbike_name">Матацыкл</string>
     <string name="activity_type_car_name">Аўтамабіль</string>
+    <string name="routing_attr_short_way_description">Аптымальны карацейшы маршрут</string>
+    <string name="snap_to_road_descr">Значок бягучага месцазнаходжання будзе прыаязвацца да бягучага маршруту навігацыі</string>
+    <string name="routing_attr_height_obstacles_description">Разлік маршруту дапаможа пазбегнуць вялікіх схілаў.</string>
+    <string name="purchases">Куплі</string>
 </resources>
