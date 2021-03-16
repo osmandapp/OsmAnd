@@ -3604,7 +3604,7 @@
     <string name="poi_vehicle_military">Adgang for køretøjer: militær</string>
     <string name="poi_vehicle_delivery">Adgang for køretøjer: levering</string>
     <string name="poi_vehicle_forestry">Adgang for køretøjer: skovbrug</string>
-    <string name="poi_motorcar_yes">Adgang for biler:</string>
+    <string name="poi_motorcar_yes">Adgang for biler: ja</string>
     <string name="poi_motorcar_private">Adgang for biler: privat</string>
     <string name="poi_motorcar_no">Adgang for biler: nej</string>
     <string name="poi_motorcar_destination">Adgang for biler: destination</string>
@@ -3861,4 +3861,23 @@
     <string name="poi_water_source_water_tank">Vandtank</string>
     <string name="poi_vaccination_covid19">Vaccination: COVID19</string>
     <string name="poi_health_specialty_vaccination_yes">Vaccination</string>
+    <string name="poi_local_ref">Lokal reference</string>
+    <string name="poi_conference_centre">Konferencecenter</string>
+    <string name="poi_piste_status_closed">Pistestatus: lukket</string>
+    <string name="poi_piste_status_open">Pistestatus: åben</string>
+    <string name="poi_patrolled_no">Patruljeret: nej</string>
+    <string name="poi_patrolled_yes">Patruljeret: ja</string>
+    <string name="poi_piste_name">Pistenavn</string>
+    <string name="poi_piste_ski_jump">Skihop</string>
+    <string name="poi_wildlife_crossing_bat_tunnel">Flagermustunnel</string>
+    <string name="poi_wildlife_crossing_bat_bridge">Flagermusbro</string>
+    <string name="poi_swimming_area">Svømmeområde</string>
+    <string name="poi_weightbridge">Vægtbro</string>
+    <string name="poi_ranger_station">Rangerstation</string>
+    <string name="poi_water_source_well">Brønd</string>
+    <string name="poi_water_source_powered_pump">Motordrevet pumpe</string>
+    <string name="poi_water_source_tap">Vandhane</string>
+    <string name="poi_water_source_water_works">Vandværk</string>
+    <string name="poi_water_source_tube_well">Rørformet brønd</string>
+    <string name="poi_lifeguard_base">Livredderbase</string>
 </resources>

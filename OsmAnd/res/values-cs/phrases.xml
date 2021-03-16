@@ -3881,13 +3881,13 @@
     <string name="poi_embassy_delegation">Delegace</string>
     <string name="poi_embassy_branch_embassy">Pobočka</string>
     <string name="poi_embassy_yes">Vedená velvyslancem</string>
-    <string name="poi_mobile_library"></string>
-    <string name="poi_summit_register_no"></string>
-    <string name="poi_summit_register_yes"></string>
-    <string name="poi_piste_status_closed"></string>
-    <string name="poi_piste_status_open"></string>
-    <string name="poi_patrolled_no"></string>
-    <string name="poi_patrolled_yes"></string>
-    <string name="poi_piste_name"></string>
-    <string name="poi_piste_ski_jump"></string>
+    <string name="poi_mobile_library"/>
+    <string name="poi_summit_register_no"/>
+    <string name="poi_summit_register_yes"/>
+    <string name="poi_piste_status_closed"/>
+    <string name="poi_piste_status_open"/>
+    <string name="poi_patrolled_no"/>
+    <string name="poi_patrolled_yes"/>
+    <string name="poi_piste_name"/>
+    <string name="poi_piste_ski_jump">Skoky na lyžích</string>
 </resources>

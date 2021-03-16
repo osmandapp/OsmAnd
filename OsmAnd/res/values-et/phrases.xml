@@ -406,7 +406,7 @@
     <string name="poi_construction">Ehitus</string>
     <string name="poi_works">Töökoht</string>
     <string name="poi_mineshaft">Kaevandusšaht</string>
-    <string name="poi_adit">Adit</string>
+    <string name="poi_adit">Stoll</string>
     <string name="poi_petroleum_well">Naftakaev</string>
     <string name="poi_survey_point">Vaatluspunkt</string>
     <string name="poi_windmill">Tuuleveski</string>
@@ -457,9 +457,9 @@
     <string name="poi_blood_bank">Verepank</string>
     <string name="poi_midwife">Ämmaemand</string>
     <string name="poi_occupational_therapist">Tööterapeut</string>
-    <string name="poi_optometrist">Optometrist</string>
+    <string name="poi_optometrist">Silmaarst</string>
     <string name="poi_physiotherapist">Füsioterapeut</string>
-    <string name="poi_podiatrist">Podiatrist</string>
+    <string name="poi_podiatrist">Jalaarst</string>
     <string name="poi_psychotherapist">Psühhoterapeut</string>
     <string name="poi_healthcare_rehabilitation">Taastusravi</string>
     <string name="poi_speech_therapist">Kõneterapeut</string>
@@ -676,7 +676,7 @@
     <string name="poi_horse_racing">Traavivõistlused</string>
     <string name="poi_ice_skating">Uisutamine</string>
     <string name="poi_ice_stock">Jäävaru</string>
-    <string name="poi_korfbal">Korfball</string>
+    <string name="poi_korfbal">Korfpall</string>
     <string name="poi_orienteering">Orienteerumine</string>
     <string name="poi_paddle_tennis">Mõlatennis</string>
     <string name="poi_paragliding">Paraliuglemine</string>
@@ -1154,7 +1154,7 @@
     <string name="poi_religion_bahai">Bahaism</string>
     <string name="poi_religion_scientologist">Saientologism</string>
     <string name="poi_religion_pagan">Paganlus</string>
-    <string name="poi_religion_tenrikyo">Tenrikyo</string>
+    <string name="poi_religion_tenrikyo">Tenrikyō</string>
     <string name="poi_religion_zoroastrian">Zoroastrism</string>
     <string name="poi_denomination_catholic">Katoliku</string>
     <string name="poi_denomination_baptist">Baptist</string>
@@ -1177,7 +1177,7 @@
     <string name="poi_denomination_new_apostolic">Uus apostliku</string>
     <string name="poi_denomination_church_of_england">Inglismaa kirik</string>
     <string name="poi_denomination_episcopal">Piiskoplik</string>
-    <string name="poi_denomination_shia">Shia</string>
+    <string name="poi_denomination_shia">Šiism</string>
     <string name="poi_denomination_united">Ühine</string>
     <string name="poi_denomination_greek_catholic">Kreeka katoliku</string>
     <string name="poi_denomination_tibetan">Tiibeti</string>
@@ -1197,7 +1197,7 @@
     <string name="poi_denomination_congregational">Koguduse</string>
     <string name="poi_denomination_old_believers">Vanausulised</string>
     <string name="poi_denomination_serbian_orthodox">Serbia õigeusu</string>
-    <string name="poi_denomination_spiritist">Spiritist</string>
+    <string name="poi_denomination_spiritist">Spiritistlik</string>
     <string name="poi_denomination_armenian_apostolic">Armeenia apostellik</string>
     <string name="poi_denomination_dutch_reformed">Hollandi reformitud</string>
     <string name="poi_denomination_apostolic">Apostellik</string>
@@ -2959,7 +2959,7 @@
     <string name="poi_cuisine_brasserie">Brasserie</string>
     <string name="poi_cuisine_bubble_tea">Mullitee</string>
     <string name="poi_cuisine_yakitori">Yakitori</string>
-    <string name="poi_cuisine_sagardotegia">Sagardotegia</string>
+    <string name="poi_cuisine_sagardotegia">Siidrimaja</string>
     <string name="poi_cuisine_meat">Liha</string>
     <string name="poi_cuisine_wings">Tiivad</string>
     <string name="poi_cuisine_waffle">Vahvlid</string>
@@ -3252,7 +3252,7 @@
     <string name="poi_water_supply_water_well">Veekaev</string>
     <string name="poi_water_supply_pipeline">Torustik</string>
     <string name="poi_water_supply_running_water">Jooksev vesi</string>
-    <string name="poi_water_supply_pump">Pump</string>
+    <string name="poi_water_supply_pump">Veepump</string>
     <string name="poi_water_supply_borehole">Puurauk</string>
     <string name="poi_water_supply_water_trucking">Veetransport</string>
     <string name="poi_water_supply_water_tank">Veemahuti</string>
@@ -3726,7 +3726,7 @@
     <string name="poi_cash_withdrawal_postfinance_card">Postfinance kaart</string>
     <string name="poi_cash_withdrawal_migros_bank">Migros pank</string>
     <string name="poi_cash_withdrawal_girocard">Girocard</string>
-    <string name="poi_cash_withdrawal_postbank">Postbank</string>
+    <string name="poi_cash_withdrawal_postbank">Postipank</string>
     <string name="poi_bath_type_hot_spring">Kuumaveeallikas</string>
     <string name="poi_bath_type_onsen">Onsen</string>
     <string name="poi_bath_type_hammam">Hammam</string>
@@ -3750,7 +3750,7 @@
     <string name="poi_url">URL</string>
     <string name="poi_volcano_type">Liik</string>
     <string name="poi_volcano_status">Olek</string>
-    <string name="poi_volcano_type_scoria">Scoria</string>
+    <string name="poi_volcano_type_scoria">Räbu</string>
     <string name="poi_volcano_type_stratovolcano">Kihtvulkaan</string>
     <string name="poi_volcano_type_shield">Kilp</string>
     <string name="poi_volcano_type_maar">Maar</string>
@@ -3881,4 +3881,17 @@
     <string name="poi_wildlife_crossing_bat_tunnel">Tunnel nahkhiirtele</string>
     <string name="poi_wildlife_crossing_bat_bridge">Sild nahkhiirtele</string>
     <string name="poi_wildlife_crossing">Metsloomade teeületuskoht</string>
+    <string name="poi_local_ref">Kohalik viide</string>
+    <string name="poi_geodesist">Geodeetik</string>
+    <string name="poi_conference_centre">Konverentsikeskus</string>
+    <string name="poi_mobile_library">Mobiilse raamatukogu peatus</string>
+    <string name="poi_summit_register_no">Tipu register: ei</string>
+    <string name="poi_summit_register_yes">Tipu register: jah</string>
+    <string name="poi_piste_status_closed">Nõlva olek: suletud</string>
+    <string name="poi_piste_status_open">Nõlva olek: avatud</string>
+    <string name="poi_patrolled_no">Patrullitud: ei</string>
+    <string name="poi_patrolled_yes">Patrullitud: jah</string>
+    <string name="poi_gladed_yes">Lagendikega: jah</string>
+    <string name="poi_piste_name">Nõlva nimi</string>
+    <string name="poi_piste_ski_jump">Suusahüpped</string>
 </resources>

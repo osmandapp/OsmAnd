@@ -2160,7 +2160,6 @@
     <string name="shared_string_time">Tiempo</string>
     <string name="total_distance">Distancia total</string>
     <string name="routing_attr_height_obstacles_name">Usar datos de elevación</string>
-
     <string name="rendering_attr_depthContours_description">Mostrar curvas y puntos de profundidad.</string>
     <string name="rendering_attr_depthContours_name">Curvas de profundidad náuticas</string>
     <string name="auto_split_recording_title">División automática de grabaciones en intervalos</string>
@@ -3698,7 +3697,7 @@
     <string name="simplified_track">Traza simplificada</string>
     <string name="simplified_track_description">Sólo se grabará la línea de la ruta, los puntos intermedios (waypoints) se borrarán.</string>
     <string name="shared_string_file_name">Nombre de archivo</string>
-    <string name="number_of_gpx_files_selected_pattern">%s archivo(s) de trazas marcado(s)</string>
+    <string name="number_of_gpx_files_selected_pattern">%s archivos de trazas marcados</string>
     <string name="monitoring_control_start">Grabar</string>
     <string name="save_global_track_interval_descr">Especifica el intervalo de grabación general para trazas (activado a través del widget de grabación en el mapa).</string>
     <string name="gpx_monitoring_stop">Pausar grabación del viaje</string>

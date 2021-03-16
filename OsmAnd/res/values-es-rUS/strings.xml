@@ -2056,11 +2056,11 @@
     <string name="shared_string_record">Grabar</string>
     <string name="gpx_logging_no_data">Sin datos</string>
     <string name="trip_rec_notification_settings">Activar la grabación rápida</string>
-    <string name="trip_rec_notification_settings_desc">Muestra una notificación del sistema que permite iniciar la grabación del viaje.</string>
+    <string name="trip_rec_notification_settings_desc">Muestra una notificación del sistema que permite iniciar la grabación de viaje.</string>
     <string name="shared_string_notifications">Notificaciones</string>
     <string name="gpx_no_tracks_title">Sin archivos de trazas aún</string>
     <string name="gpx_no_tracks_title_folder">También puedes añadir archivos de trazas a la carpeta</string>
-    <string name="gpx_add_track">Añadir más…</string>
+    <string name="gpx_add_track">Añadir</string>
     <string name="shared_string_appearance">Aspecto</string>
     <string name="rendering_value_fine_name">Muy fino</string>
     <string name="route_calculation">Cálculo de la ruta</string>
@@ -2171,7 +2171,6 @@
     <string name="shared_string_time">Tiempo</string>
     <string name="total_distance">Distancia total</string>
     <string name="routing_attr_height_obstacles_name">Usar datos de elevación</string>
-
     <string name="routing_attr_driving_style_name">Estilo de conducción</string>
     <string name="select_gpx_folder">Marcar la carpeta del archivo GPX</string>
     <string name="file_can_not_be_moved">No se pudo mover el archivo.</string>
@@ -2305,11 +2304,11 @@
 \n • (Opcional) Muestra la velocidad y altitud
 \n • Activa la visualización de las curvas de nivel y el sombreado de colinas (mediante un complemento adicional)</string>
     <string name="osmand_plus_extended_description_part7">Contribuye directamente con OSM
-\n • Informa sobre problemas de datos en el mapa
-\n • Sube trazas GPX a OSM directamente desde la aplicación
-\n • Añade PDI y súbelos directamente a OSM (o más tarde, si no estás conectado)
-\n • (Opcional) Grabación del viaje en modo reposo (mientras el dispositivo está bloqueado)
-\n OsmAnd es un software de código abierto, activamente desarrollado. Cualquiera puede contribuir con la aplicación informando sobre errores, mejorando las traducciones o desarrollando nuevas funciones. Además, el proyecto también depende de contribuciones financieras para desarrollar y probar nuevas funcionalidades.
+\n• Informa sobre problemas de datos en el mapa
+\n• Sube trazas GPX a OSM directamente desde la aplicación
+\n• Añade PDI y súbelos directamente a OSM (o más tarde, si no estás conectado)
+\n• (Opcional) Grabación de viaje en modo reposo (mientras el dispositivo está bloqueado)
+\nOsmAnd es un software de código abierto, activamente desarrollado. Cualquiera puede contribuir con la aplicación informando sobre errores, mejorando las traducciones o desarrollando nuevas funciones. Además, el proyecto también depende de contribuciones financieras para desarrollar y probar nuevas funcionalidades.
 \n</string>
     <string name="osmand_plus_extended_description_part8">Cobertura y calidad aproximada del mapa:
 \n • Europa Occidental: ****
@@ -3322,7 +3321,7 @@
     <string name="multimedia_notes_prefs_descr">Tamaño de imagen, calidad de audio y video</string>
     <string name="osm_editing_prefs_descr">Inicio de sesión, contraseña, edición sin conexión</string>
     <string name="accessibility_prefs_descr">Elegir icono, color y nombre</string>
-    <string name="live_monitoring_descr">Permite compartir la ubicación actual utilizando la grabación del viaje.</string>
+    <string name="live_monitoring_descr">Permite compartir la ubicación actual utilizando la grabación de viaje.</string>
     <string name="live_monitoring">Seguimiento en línea</string>
     <string name="save_track_logging_accuracy">Precisión de registro</string>
     <string name="tracks_view_descr">Puedes encontrar todas tus trazas grabadas en «%1$s» o en la carpeta OsmAnd usando el administrador de archivos.</string>
@@ -3708,7 +3707,7 @@
     <string name="app_mode_go_cart">Go-kart</string>
     <string name="add_to_a_track">Añadir a una traza</string>
     <string name="add_hidden_group_info">El punto añadido no será visible en el mapa, ya que el grupo elegido está oculto, se puede encontrar en «%s».</string>
-    <string name="number_of_gpx_files_selected_pattern">%s archivo(s) de trazas marcado(s)</string>
+    <string name="number_of_gpx_files_selected_pattern">Se muestran %s trazas</string>
     <string name="whole_track">Traza completa</string>
     <string name="threshold_distance">Distancia de umbral</string>
     <string name="system_default_theme">Predefinido del sistema</string>
@@ -3757,12 +3756,12 @@
     <string name="navigate_to_track_descr">Navegar desde mi ubicación a la traza</string>
     <string name="monitoring_control_start">Grabar</string>
     <string name="marker_save_as_track">Guardar como archivo de traza</string>
-    <string name="map_widget_monitoring">Grabación del viaje</string>
+    <string name="map_widget_monitoring">Grabación de viaje</string>
     <string name="layer_gpx_layer">Trazas</string>
     <string name="in_case_of_reverse_direction">En caso de dirección inversa</string>
     <string name="import_track_descr">Elige el archivo de la traza a seguir o impórtala desde el dispositivo.</string>
-    <string name="gpx_monitoring_stop">Pausar grabación del viaje</string>
-    <string name="gpx_monitoring_start">Reanudar grabación del viaje</string>
+    <string name="gpx_monitoring_stop">Pausar grabación de viaje</string>
+    <string name="gpx_monitoring_start">Reanudar grabación de viaje</string>
     <string name="follow_track_descr">Elige el archivo de la traza a seguir</string>
     <string name="follow_track">Seguir traza</string>
     <string name="empty_state_my_tracks_desc">Importa o graba archivos de trazas</string>

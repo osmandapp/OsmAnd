@@ -443,9 +443,10 @@
     <string name="local_index_gpx_info_show">"
 \n
 \nTryk og hold for valgmuligheder"</string>
-    <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions) 
+    <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions)
 \n
-\nOsmAnd er et open source-navigationsprogram med adgang til en lang række af globale OpenStreetMap (OSM)-data. Alle kortdata (vektorkort eller kortbrikker) kan gemmes på enhedens hukommelseskort til offline-brug. OsmAnd tilbyder også offline- og online-rutefunktionalitet inklusive sving-for-sving tale vejledning. 
+\nOsmAnd er et open source-navigationsprogram med adgang til en lang række af globale OpenStreetMap (OSM)-data. Alle kortdata (vektorkort eller kortbrikker) kan gemmes på enhedens hukommelseskort til offline-brug. OsmAnd tilbyder også offline- og online-rutefunktionalitet inklusive sving-for-sving tale vejledning.
+\n
 \n
 \nNogle af hovedfunktionerne:
 \n - Komplet offlinefunktionalitet (gemme hentede vektorkort eller kortbrikker i enhedens lager)
@@ -460,7 +461,7 @@
 \n - valgfri automatisk kortrotation efter kompas eller bevægelsesretning
 \n - valgfri vognbaneassistent
 \n - visning af hastighedsgrænse
-\n - optagede stemmer og tale syntese stemmer (tekst-til-tale)
+\n - optagede stemmer og talesyntese stemmer (tekst-til-tale)
 \n
 \n Begrænsninger i den gratis version af OsmAnd:
 \n - Antallet af kort der kan hentes er begrænset
@@ -937,7 +938,7 @@
     <string name="local_openstreetmap_act_title">OSM-modifikationer</string>
     <string name="download_using_mobile_internet">Ikke forbundet til Wi-Fi. Brug den aktuelle forbindelse til internettet for at hente?</string>
     <string name="cancel_navigation">Stop navigation</string>
-    <string name="cancel_route">Annuller rute</string>
+    <string name="cancel_route">Annuller rute\?</string>
     <string name="clear_destination">Slet destinationen</string>
     <string name="install_paid">Fuldversion</string>
     <string name="other_location">Andre</string>
@@ -2168,7 +2169,6 @@
     <string name="rendering_attr_depthContours_description">Vis dybdekonturer og -punkter.</string>
     <string name="rendering_attr_depthContours_name">Havdybdekonturer</string>
     <string name="routing_attr_height_obstacles_name">Brug højdedata</string>
-
     <string name="route_altitude">Rutehøjde</string>
     <string name="altitude_descent">Fald</string>
     <string name="altitude_ascent">Stigning</string>
@@ -3787,4 +3787,54 @@
     <string name="activity_type_walking_name">Gå</string>
     <string name="activity_type_motorbike_name">Motorcykel</string>
     <string name="activity_type_car_name">Bil</string>
+    <string name="announcement_time_title">Meddelelsestid</string>
+    <string name="show_track_on_map">Vis spor på kort</string>
+    <string name="routing_engine_vehicle_type_hiking">Vandring</string>
+    <string name="routing_engine_vehicle_type_cycling_road">Landevejscykling</string>
+    <string name="routing_engine_vehicle_type_scooter">Scooter</string>
+    <string name="routing_engine_vehicle_type_mtb">MTB</string>
+    <string name="message_name_is_already_exists">Navnet findes allerede</string>
+    <string name="delete_online_routing_engine">Slet online routing-motor\?</string>
+    <string name="delete_waypoints">Slet rutepunkt</string>
+    <string name="copy_to_map_markers">Kopier til kortmarkører</string>
+    <string name="copy_to_map_favorites">Kopier til favoritter</string>
+    <string name="select_segments">Vælg segmenter</string>
+    <string name="select_segments_description">%1$s indeholder mere end et segment, vælg den nødvendige del til navigationen.</string>
+    <string name="segments_count">Segment %1$d</string>
+    <string name="toast_select_edits_for_upload">Vælg redigeringer til overførsel</string>
+    <string name="open_place_reviews">OpenPlaceReviews</string>
+    <string name="login_open_place_reviews">Log på OpenPlaceReviews</string>
+    <string name="activity_type_water_name">Vand</string>
+    <string name="activity_type_snowmobile_name">Snescooter</string>
+    <string name="activity_type_mountainbike_name">Mountainbike</string>
+    <string name="activity_type_hiking_name">Vandring</string>
+    <string name="activity_type_offroad_name">Off-road</string>
+    <string name="routing_attr_short_way_description">Optimeret kortere rute (energibesparelser)</string>
+    <string name="routing_attr_driving_style_description">Vælg kørselsformål for at få en kortere, hurtigere eller mere sikker rute</string>
+    <string name="snap_to_road_descr">Det aktuelle placeringsikon fastgøres til den aktuelle navigationsrute</string>
+    <string name="restart">Genstart</string>
+    <string name="shared_strings_all_regions">Alle regioner</string>
+    <string name="delete_number_files_question">Slet %1$d filer\?</string>
+    <string name="track_recording_stop_without_saving">Stop uden at gemme</string>
+    <string name="track_recording_save_and_stop">Gem og stop optagelse</string>
+    <string name="track_recording_title">Optagelse af spor stoppet</string>
+    <string name="app_restart_required">Programgenstart kræves for at anvende nogle indstillinger.</string>
+    <string name="quick_action_coordinates_widget_descr">En til/fra-knap for at vise eller skjule Koordinat modul på kortet.</string>
+    <string name="latest_openstreetmap_update">Seneste OpenStreetMap opdatering tilgængelig:</string>
+    <string name="updated">Opdateret: %s</string>
+    <string name="last_time_checked">Sidst kontrolleret: %s</string>
+    <string name="update_frequency">Opdateringsfrekvens</string>
+    <string name="live_update_frequency_week_variant">Kortopdateringer kontrolleres hver uge. Næste gang %1$s i %2$s.</string>
+    <string name="live_update_frequency_day_variant">Kortopdateringer kontrolleres hver dag. Næste gang %1$s i %2$s.</string>
+    <string name="live_update_frequency_hour_variant">Kortopdateringer kontrolleres hver time. Næste gang %1$s i %2$s.</string>
+    <string name="delete_updates">Slet opdateringer</string>
+    <string name="purchases">Køb</string>
+    <string name="select_category_descr">Vælg kategori, eller tilføj en ny</string>
+    <string name="track_recording_will_be_continued">Optagelsen fortsættes.</string>
+    <string name="copy_poi_name">Kopier IP-navn</string>
+    <string name="quick_action_show_hide_title">Vis/skjul</string>
+    <string name="shared_string_interval">Interval</string>
+    <string name="track_has_no_altitude">Sporet indeholder ikke højdedata.</string>
+    <string name="track_has_no_speed">Sporet indeholder ikke hastighedsdata.</string>
+    <string name="select_another_colorization">Vælg en anden type farvelægning.</string>
 </resources>
