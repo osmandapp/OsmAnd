@@ -2167,7 +2167,6 @@
     <string name="navigate_point_olc">Offener Standortcode (OLC)</string>
     <string name="quick_action_page_list_descr">Eine Schaltfläche, um durch die Liste unten zu blättern.</string>
     <string name="routing_attr_height_obstacles_name">Höhendaten berücksichtigen</string>
-
     <string name="rendering_attr_depthContours_name">Nautische Tiefenlinien</string>
     <string name="rendering_attr_depthContours_description">Tiefenlinien und -punkte einblenden.</string>
     <string name="route_altitude">Routenhöhenprofil</string>
@@ -4010,4 +4009,20 @@
     <string name="shared_string_sec">sek</string>
     <string name="activity_type_racing_name">Rennsport</string>
     <string name="announcement_time_prepare_long">Erste Ankündigung (größere Distanz)</string>
+    <string name="restart">Neustart</string>
+    <string name="shared_strings_all_regions">Alle Regionen</string>
+    <string name="delete_number_files_question">%1$d Dateien löschen\?</string>
+    <string name="track_recording_stop_without_saving">Stoppen ohne zu speichern</string>
+    <string name="track_recording_save_and_stop">Speichern und Beenden der Aufzeichnung</string>
+    <string name="track_recording_title">Track-Aufnahme gestoppt</string>
+    <string name="updated">Aktualisiert: %s</string>
+    <string name="delete_updates">Updates löschen</string>
+    <string name="purchases">Käufe</string>
+    <string name="track_recording_will_be_continued">Die Aufzeichnung wird fortgesetzt.</string>
+    <string name="copy_poi_name">POI-Namen kopieren</string>
+    <string name="quick_action_show_hide_title">Ein-/Ausblenden</string>
+    <string name="shared_string_interval">Intervall</string>
+    <string name="track_has_no_altitude">Der Track enthält keine Höhendaten.</string>
+    <string name="track_has_no_speed">Der Track enthält keine Geschwindigkeitsdaten.</string>
+    <string name="select_another_colorization">Bitte wähle eine andere Art der Einfärbung aus.</string>
 </resources>

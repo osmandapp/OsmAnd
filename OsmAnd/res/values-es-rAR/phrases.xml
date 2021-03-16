@@ -3813,7 +3813,7 @@
     <string name="poi_borough">Municipio</string>
     <string name="poi_traffic_signals_arrow_no">Flecha: no</string>
     <string name="poi_elevator">Ascensor</string>
-    <string name="poi_departures_board_timetable">A horario</string>
+    <string name="poi_departures_board_timetable">Tabla de horarios</string>
     <string name="poi_departures_board_realtime">En tiempo real</string>
     <string name="poi_departures_board_delay">Con retraso</string>
     <string name="poi_departures_board_yes">Sí</string>
@@ -3891,4 +3891,7 @@
     <string name="poi_gladed_yes">Arboleda: sí</string>
     <string name="poi_piste_name">Nombre de la pista</string>
     <string name="poi_piste_ski_jump">Salto con esquís</string>
+    <string name="poi_local_ref">Referencia local</string>
+    <string name="poi_geodesist">Geodésico</string>
+    <string name="poi_conference_centre">Centro de conferencias</string>
 </resources>

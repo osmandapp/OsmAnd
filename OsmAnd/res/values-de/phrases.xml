@@ -209,7 +209,7 @@
     <string name="poi_food_court">Markthalle</string>
     <string name="poi_ford">Furt</string>
     <string name="poi_fort">Festung</string>
-    <string name="poi_fountain">Brunnen</string>
+    <string name="poi_fountain">Zierbrunnen</string>
     <string name="poi_frame">Bilderrahmengeschäft</string>
     <string name="poi_fuel">Tankstelle;Tankanlage;Tankstation</string>
     <string name="poi_funeral_directors">Bestatter</string>
@@ -3213,7 +3213,7 @@
     <string name="poi_water_purification_chlorine">Chlor</string>
     <string name="poi_water_purification_reverse_osmosis">Umkehrosmose</string>
     <string name="poi_water_purification_aquatabs">Aquatabs</string>
-    <string name="poi_water_supply_water_well">Brunnen</string>
+    <string name="poi_water_supply_water_well">Ziehbrunnen</string>
     <string name="poi_water_supply_pipeline">Rohrleitung</string>
     <string name="poi_water_supply_running_water">Fließendes Wasser</string>
     <string name="poi_water_supply_pump">Pumpe</string>

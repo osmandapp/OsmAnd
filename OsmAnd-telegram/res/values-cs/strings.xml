@@ -74,4 +74,5 @@
     <string name="shared_string_appearance">Vzhled</string>
     <string name="logcat_buffer">Zásobník logcat</string>
     <string name="logcat_buffer_descr">Zkontrolovat a sdílet podrobné záznamy aplikace</string>
+    <string name="by_name">Podle názvu</string>
 </resources>

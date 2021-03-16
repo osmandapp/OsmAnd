@@ -3,7 +3,7 @@
     <string name="shared_string_topbar">Supra breto</string>
     <string name="recalculate_route">Rekalkuli kurson</string>
     <string name="donations">Donacoj</string>
-    <string name="number_of_recipients">Nombro da ricevontoj</string>
+    <string name="number_of_recipients">Nombro de ricevontoj</string>
     <string name="osm_user_stat">Redaktoj: %1$s, rango: %2$s, ĉiuj redaktoj: %3$s</string>
     <string name="osm_editors_ranking">Ranglisto de OSM-redaktantoj</string>
     <string name="osm_live_subscription">Abono al OsmAnd-Live</string>
@@ -458,7 +458,7 @@
     <string name="shared_string_io_error">En/eliga eraro okazis</string>
     <string name="shared_string_unexpected_error">Neatendita eraro okazis</string>
     <string name="shared_string_action_template">Agado {0}</string>
-    <string name="shared_string_show_on_map">Montri en mapo</string>
+    <string name="shared_string_show_on_map">Montri sur mapo</string>
     <string name="shared_string_collapse">Maletendi</string>
     <string name="shared_string_add_to_favorites">Aldoni al “ŝatataj”</string>
     <string name="shared_string_my_location">Mia pozicio</string>
@@ -1876,14 +1876,14 @@
     <string name="contact_info">Kontaktaj informoj</string>
     <string name="add_opening_hours">Aldoni horojn de malfermo</string>
     <string name="poi_dialog_poi_type">Speco de interesejo</string>
-    <string name="number_of_rows_in_dash">Nombro da linioj sur ĉefekrano %1$s</string>
+    <string name="number_of_rows_in_dash">Nombro de linioj sur ĉefekrano %1$s</string>
     <string name="please_specify_poi_type">Bonvolu precizigi specon de interesejo.</string>
     <string name="working_days">Labortagoj</string>
     <string name="recent_places">Lastaj ejoj</string>
     <string name="favourites">Ŝatataj ejoj</string>
     <string name="saved_at_time">Konservita je: %1$s</string>
     <string name="poi_deleted_localy">Interesejo estos forigita kiam vi alŝutos viajn ŝanĝojn</string>
-    <string name="count_of_lines">Nombro da linioj</string>
+    <string name="count_of_lines">Nombro de linioj</string>
     <string name="are_you_sure">Ĉu vi certas?</string>
     <string name="unsaved_changes_will_be_lost">Ĉiuj nekonservitaj ŝanĝoj estos forigitaj. Ĉu pluigi?</string>
     <string name="downloads_left_template">ankoraŭ %1$s elŝutoj</string>
@@ -1901,7 +1901,7 @@
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Ĝisdatigi ĉiujn (%1$s MB)</string>
     <string name="free_downloads_used">Senpagaj elŝutoj uzitaj</string>
-    <string name="free_downloads_used_description">Montras nombron da pluaj senpagaj elŝutoj.</string>
+    <string name="free_downloads_used_description">Montras nombron de pluaj senpagaj elŝutoj.</string>
     <string name="application_dir_description">Bonvolu elekti kie vi volas konservi mapoj kaj aliaj datum-dosieroj.</string>
     <string name="enter_country_name">Enigu nomon de lando</string>
     <string name="new_version">Nova versio</string>
@@ -1941,8 +1941,8 @@
     <string name="morning">Matene</string>
     <string name="night">Nokte</string>
     <string name="select_month_and_country">Monato kaj lando:</string>
-    <string name="number_of_contributors">Nombro da kontribuintoj</string>
-    <string name="number_of_edits">Nombro da redaktoj</string>
+    <string name="number_of_contributors">Nombro de kontribuintoj</string>
+    <string name="number_of_edits">Nombro de redaktoj</string>
     <string name="reports_for">Raportoj por</string>
     <string name="file_name_containes_illegal_char">Malpermesata signo en dosiernomo</string>
     <string name="items_were_selected">{0} elemento(j) elektita(j)</string>
@@ -2536,7 +2536,7 @@
     <string name="tap_on_map_to_hide_interface">Plenekrana reĝimo</string>
     <string name="mark_passed">Marki kiel pasigitan</string>
     <string name="rename_marker">Alinomi markon</string>
-    <string name="digits_quantity">Nombro da dekumaj pozicioj</string>
+    <string name="digits_quantity">Nombro de dekumaj pozicioj</string>
     <string name="shared_string_right">Dekstre</string>
     <string name="shared_string_left">Maldekstre</string>
     <string name="show_number_pad">Montri nombran klavaron</string>
@@ -2559,7 +2559,7 @@
     <string name="show_guide_line_descr">Vidigi direktantan linion el via pozicio al pozicioj de aktivaj map-markoj.</string>
     <string name="show_arrows_descr">Vidigi unu aŭ du sagetojn indikantajn direkton al map-markoj.</string>
     <string name="distance_indication_descr">Elekti kiel vidigi distancon al aktivaj map-markoj.</string>
-    <string name="active_markers_descr">Nombro da indikiloj de direkto por vidigi.</string>
+    <string name="active_markers_descr">Nombro de indikiloj de direkto por vidigi.</string>
     <string name="looking_for_tracks_with_waypoints">Serĉado de kursoj kun navigadpunktoj</string>
     <string name="shared_string_more_without_dots">Pli</string>
     <string name="empty_state_osm_edits">Krei aŭ redakti OSM-objektojn</string>
@@ -3059,8 +3059,8 @@
     <string name="edit_profile_setup_map_subtitle">Elekti agordojn pri mapo por la profilo</string>
     <string name="edit_profile_screen_options_subtitle">Elekti agordojn pri ekrano por la profilo</string>
     <string name="edit_profile_nav_settings_subtitle">Elekti agordojn pri navigado por la profilo</string>
-    <string name="routing_attr_max_num_changes_description">Difini maksimuman nombron da ŝanĝoj de transportiloj</string>
-    <string name="routing_attr_max_num_changes_name">Nombro da transveturiliĝoj</string>
+    <string name="routing_attr_max_num_changes_description">Difini maksimuman nombron de ŝanĝoj de transportiloj</string>
+    <string name="routing_attr_max_num_changes_name">Nombro de transveturiliĝoj</string>
     <string name="turn_screen_on_router">Teni ekranon ŝaltita</string>
     <string name="turn_screen_on_time_descr">Agordi por kiom longe la ekrano estos ŝaltita.</string>
     <string name="turn_screen_on_sensor">Uzi proksimec‑sentilon</string>
@@ -4042,5 +4042,5 @@
     <string name="shared_strings_all_regions">Ĉiuj regionoj</string>
     <string name="purchases">Aĉetoj</string>
     <string name="quick_action_show_hide_title">Montri/kaŝi</string>
-    <string name="shared_string_interval">Intervalo</string>
+    <string name="shared_string_interval">Intertempo</string>
 </resources>

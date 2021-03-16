@@ -3889,4 +3889,7 @@
     <string name="poi_piste_status_open">Pálya állapota: nyitva</string>
     <string name="poi_piste_name">Pálya neve</string>
     <string name="poi_piste_ski_jump">Síugrósánc</string>
+    <string name="poi_local_ref">Vágány / kocsiállás</string>
+    <string name="poi_geodesist">Földmérő</string>
+    <string name="poi_conference_centre">Konferencia-központ</string>
 </resources>

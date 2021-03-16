@@ -3891,4 +3891,7 @@
     <string name="poi_summit_register_yes">Реєстр вершин: так</string>
     <string name="poi_gladed_yes">Розчищена поляна: так</string>
     <string name="poi_mobile_library">Місце зупинка мобільної бібліотеки</string>
+    <string name="poi_local_ref">Локальне посилання</string>
+    <string name="poi_geodesist">Геодезист</string>
+    <string name="poi_conference_centre">Конференц-центр</string>
 </resources>

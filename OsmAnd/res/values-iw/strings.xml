@@ -2705,7 +2705,6 @@
 \n ניתן לקבל נווט אמין למדינה שלך - בין אם זו ישראל, צרפת, גרמניה, מקסיקו, אנגליה, ספרד, הולנד, ארה״ב, רוסיה, ברזיל או כל מדינה אחרת.</string>
     <string name="nm">מייל ימי</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">עיבוד מסלולים לפי עקבות OSMC.</string>
-
     <string name="plugin_nautical_descr">תוסף זה מעשיר את המפה ואת הניווט של יישומון OsmAnd ומאפשר לייצר מפות ימיות לחתירה, הפלגה וסוגים נוספים של ספורט ימי. 
 \n
 \nתוסף מפה מיוחד ל־OsmAnd יספק את כל סימוני הניווט הימיים והסימנים הימיים המוסכמים, לניווט במקווי מים פנימיים לרבות ניווט באזורים הקרובים לחוף. התיאור של כל סימון ניווט מספק את הפרטים הנדרשים כדי לזהות אותם ואת המשמעות שלהם (קטגוריה, צורה, צבע, רצף, הפניה וכו׳). 
@@ -4008,4 +4007,20 @@
     <string name="activity_type_offroad_name">שטח</string>
     <string name="activity_type_motorbike_name">אופנוע</string>
     <string name="activity_type_car_name">מכונית</string>
+    <string name="updated">עדכון: %s</string>
+    <string name="last_time_checked">מועד הבדיקה האחרונה: %s</string>
+    <string name="update_frequency">תדירות עדכון</string>
+    <string name="live_update_frequency_week_variant">בכל שבוע יתבצע חיפוש לעדכוני מפה. הפעם הבאה%1$s ב־%2$s.</string>
+    <string name="live_update_frequency_day_variant">בכל יום יתבצע חיפוש לעדכוני מפה. הפעם הבאה%1$s ב־%2$s.</string>
+    <string name="live_update_frequency_hour_variant">בכל שעה יתבצע חיפוש לעדכוני מפה. הפעם הבאה%1$s ב־%2$s.</string>
+    <string name="delete_updates">מחיקת עדכונים</string>
+    <string name="purchases">רכישות</string>
+    <string name="select_category_descr">נא לבחור קטגוריה או להוסיף אחת חדשה</string>
+    <string name="track_recording_will_be_continued">ההקלטה תמשיך.</string>
+    <string name="copy_poi_name">העתק שם הנ״ע</string>
+    <string name="quick_action_show_hide_title">הצגה/הסתרה</string>
+    <string name="shared_string_interval">הפרש</string>
+    <string name="track_has_no_altitude">המסלול אינו מכיל נתוני גובה.</string>
+    <string name="track_has_no_speed">המסלול אינו מכיל מהירות גבוהה.</string>
+    <string name="select_another_colorization">נא לבחור סוג אחר של צביעה.</string>
 </resources>
