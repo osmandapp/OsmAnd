@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -20,6 +19,18 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.content.ContextCompat;
+import androidx.core.widget.TextViewCompat;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.AndroidUtils;
@@ -84,17 +95,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.content.ContextCompat;
-import androidx.core.widget.TextViewCompat;
-import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.RecyclerView;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
@@ -303,11 +303,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		} else {
 			cardsContainer = mapActivity.findViewById(R.id.left_side_menu);
 			bottomMapControls = mapActivity.findViewById(R.id.bottom_controls_container);
-			mainView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+			ScrollUtils.addOnGlobalLayoutListener(mainView, new Runnable() {
 				@Override
-				public void onGlobalLayout() {
+				public void run() {
 					updateCardContainerSize();
-					mainView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
 				}
 			});
 		}
