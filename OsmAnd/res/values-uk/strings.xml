@@ -551,7 +551,7 @@
     <string name="follow">Почати супровід</string>
     <string name="recalculate_route_to_your_location">Режим пересування:</string>
     <string name="mark_final_location_first">Вкажіть точку призначення</string>
-    <string name="get_directions">Маршрут</string>
+    <string name="get_directions">Напрямки</string>
     <string name="opening_hours">Робочі години</string>
     <string name="opening_changeset">Відкривається набір змін…</string>
     <string name="closing_changeset">Закривається набір змін…</string>
@@ -1427,7 +1427,7 @@
     <string name="proxy_host_descr">Налаштуйте ім’я госту Вашого проксі-сервера (наприклад, 127.0.0.1).</string>
     <string name="proxy_port_title">Порт проксі-сервера</string>
     <string name="proxy_port_descr">Вкажіть номер порту Вашого проксі-сервера (наприклад, 8118).</string>
-    <string name="voices">Голосові повідомлення</string>
+    <string name="voices">Голосові оголошення</string>
     <string name="shared_string_export">Експорт</string>
     <string name="shared_string_disabled">Вимкнено</string>
     <string name="shared_string_enabled">Увімкнено</string>
@@ -2126,7 +2126,6 @@
     <string name="shared_string_time">Час</string>
     <string name="total_distance">Загальна відстань</string>
     <string name="routing_attr_height_obstacles_name">Використовувати дані висоти</string>
-
     <string name="rendering_attr_depthContours_description">Показати контури глибини і точки.</string>
     <string name="rendering_attr_depthContours_name">Контури морських глибин</string>
     <string name="auto_split_recording_title">Авто-розрив запису після перерви</string>
@@ -3154,7 +3153,7 @@
     <string name="vehicle_parameters_descr">Вага, висота, довжина, швидкість</string>
     <string name="vehicle_parameters">Параметри транспортного засобу</string>
     <string name="voice_announces_info">Голосові повідомлення відтворюються лише під час навігації.</string>
-    <string name="voice_announces">Навігаційні оголошення</string>
+    <string name="voice_announces">Голосові оголошення</string>
     <string name="screen_alerts">Екранні сповіщення</string>
     <string name="route_parameters_descr">Налаштування параметрів маршруту</string>
     <string name="route_parameters">Параметри маршруту</string>
@@ -3466,7 +3465,7 @@
     <string name="select_distance_route_will_recalc">Виберіть відстань, після якого маршрут буде перераховано.</string>
     <string name="recalculate_route_in_deviation">Перерахунок маршруту у випадку відхилення</string>
     <string name="shared_string_min">Хв</string>
-    <string name="shared_string_terrain">Місцевість</string>
+    <string name="shared_string_terrain">Рельєф</string>
     <string name="hillshade_description">Мапа пагорбів використовує темні відтінки для показу схилів, вершин і низин.</string>
     <string name="slope_description">У режимі Схил, рельєф місцевості візуалізується за допомогою кольорів.</string>
     <string name="terrain_slider_description">Встановіть найменший та найбільший рівні масштабування, при якому шар буде відображатися.</string>
@@ -4004,4 +4003,43 @@
     <string name="activity_type_running_name">Біг</string>
     <string name="activity_type_car_name">Автомобіль</string>
     <string name="activity_type_motorbike_name">Мотоцикл</string>
+    <string name="select_segments">Вибір сегментів</string>
+    <string name="select_segments_description">%1$s містить більше ніж один сегмент, потрібно вибрати необхідну частину для навігації.</string>
+    <string name="segments_count">Сегмент %1$d</string>
+    <string name="temporary_conditional_routing_descr">Застосовувати дорожні обмеження, які зараз діють на мапі</string>
+    <string name="routing_attr_short_way_description">Оптимізований коротший маршрут (енергоощадження)</string>
+    <string name="routing_attr_driving_style_description">Виберіть мету водіння, щоб отримати коротший, швидший або безпечніший маршрут</string>
+    <string name="snap_to_road_descr">Піктограма поточного місцеперебування буде прив\'язана до поточного маршруту навігації</string>
+    <string name="map_orientation_threshold_descr">Не обертати, якщо швидкість менше граничної</string>
+    <string name="restart">Перезапустити</string>
+    <string name="shared_strings_all_regions">Всі регіони</string>
+    <string name="delete_number_files_question">Видалити %1$d файли\?</string>
+    <string name="track_recording_stop_without_saving">Зупинити без збереження</string>
+    <string name="track_recording_save_and_stop">Зберегти і зупинити запис</string>
+    <string name="track_recording_title">Запис треку зупинено</string>
+    <string name="track_recording_description">Ви дійсно бажаєте припинити записування\?
+\nУсі незбережені дані буде втрачено.</string>
+    <string name="on_pause">Під час паузи</string>
+    <string name="app_restart_required">Щоб застосувати деякі налаштування, потрібно перезапустити програму.</string>
+    <string name="routing_attr_height_obstacles_description">Маршрут може уникнути крутих підйомів.</string>
+    <string name="quick_action_coordinates_widget_descr">Перемикач, щоб показати або приховати віджет Координати на мапі.</string>
+    <string name="map_widget_distance_by_tap">Відстань дотиком</string>
+    <string name="latest_openstreetmap_update">Доступне найновіше оновлення OpenStreetMap:</string>
+    <string name="updated">Оновлено: %s</string>
+    <string name="last_time_checked">Востаннє перевірено: %s</string>
+    <string name="update_frequency">Частота оновлень</string>
+    <string name="live_update_frequency_week_variant">Наявність оновлень мап перевірятиметься щотижня. Наступного разу%1$s в %2$s.</string>
+    <string name="live_update_frequency_hour_variant">Наявність оновлень мап перевірятиметься щогодини. Наступного разу%1$s в %2$s.</string>
+    <string name="live_update_frequency_day_variant">Наявність оновлень мап перевірятиметься щодня. Наступного разу%1$s в %2$s.</string>
+    <string name="delete_updates">Видалити оновлення</string>
+    <string name="live_update_delete_updates_msg">Ви впевнені, що хочете видалити всі %s поточні оновлення\?</string>
+    <string name="purchases">Покупки</string>
+    <string name="select_category_descr">Виберіть категорію або додайте нову</string>
+    <string name="track_recording_will_be_continued">Записування буде продовжено.</string>
+    <string name="copy_poi_name">Копіювати назву POI</string>
+    <string name="quick_action_show_hide_title">Показати/сховати</string>
+    <string name="shared_string_interval">Інтервал</string>
+    <string name="track_has_no_altitude">Трек не містить даних про висоту.</string>
+    <string name="track_has_no_speed">Трек не містить даних про швидкість.</string>
+    <string name="select_another_colorization">Виберіть інший тип забарвлення.</string>
 </resources>
