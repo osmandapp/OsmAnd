@@ -11,10 +11,11 @@
 	Thx - Hardy
 
 -->
-
     <string name="select_another_colorization">Please select another type of colorization.</string>
     <string name="track_has_no_speed">The track does not contain speed data.</string>
     <string name="track_has_no_altitude">The track does not contain altitude data.</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_name">Nature boundaries</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Hide nature reserve, protected areas and national park boundaries</string>
     <string name="shared_string_interval">Interval</string>
     <string name="quick_action_show_hide_title">Show/hide</string>
     <string name="copy_poi_name">Copy POI name</string>
