@@ -457,10 +457,10 @@ public class BinaryRoutePlanner {
 				directionAllowed = false;
 				continue;
 			}
-			boolean alreadyVisited = checkIfOppositeSegmentWasVisited(ctx, reverseWaySearch, graphSegments, segment, oppositeSegments,
-					segmentPoint, segmentDist, obstaclesTime);
 			obstaclesTime += obstacle;
 			obstaclesTime += heightObstacle;
+			boolean alreadyVisited = checkIfOppositeSegmentWasVisited(ctx, reverseWaySearch, graphSegments, segment, oppositeSegments,
+					segmentPoint, segmentDist, obstaclesTime);
 			if (alreadyVisited) {
 				directionAllowed = false;
 				continue;
