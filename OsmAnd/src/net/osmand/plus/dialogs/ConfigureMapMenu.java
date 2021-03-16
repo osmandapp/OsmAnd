@@ -530,7 +530,11 @@ public class ConfigureMapMenu {
 									TextView switchText = (TextView) v.findViewById(R.id.switchText);
 									switchText.setText(activity.getString(R.string.translit_name_if_miss, txtValues[position]));
 									SwitchCompat check = (SwitchCompat) v.findViewById(R.id.check);
-									check.setChecked(transliterateNames);
+									if (view.getSettings().MAP_TRANSLITERATE_NAMES.isSet()) {
+										check.setChecked(transliterateNames);
+									} else {
+										check.setChecked(txtIds[position].equals("en"));
+									}
 									check.setOnCheckedChangeListener(translitChangdListener);
 									UiUtilities.setupCompoundButton(nightMode, selectedProfileColor, check);
 								} else {
