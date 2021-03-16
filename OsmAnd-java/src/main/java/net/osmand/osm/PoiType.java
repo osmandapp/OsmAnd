@@ -16,9 +16,10 @@ public class PoiType extends AbstractPoiType {
 	
 	private String editTag;
 	private String editValue;
+	private String editTag2;
+	private String editValue2;
 	private boolean filterOnly;
 
-	
 	private String nameTag;
 	private boolean text;
 	private boolean nameOnly;
@@ -68,25 +69,44 @@ public class PoiType extends AbstractPoiType {
 		this.editTag = osmTag;
 		this.editValue = editValue;
 	}
-	
+
+	public void setOsmEditTagValue2(String osmTag, String editValue) {
+		this.editTag2 = osmTag;
+		this.editValue2 = editValue;
+	}
+
 	public String getEditOsmTag() {
-		if(isReference()) {
+		if (isReference()) {
 			return referenceType.getEditOsmTag();
 		}
-		if(editTag == null) {
+		if (editTag == null) {
 			return getOsmTag();
 		}
 		return editTag;
 	}
 	
 	public String getEditOsmValue() {
-		if(isReference()) {
+		if (isReference()) {
 			return referenceType.getEditOsmValue();
 		}
-		if(editValue == null) {
+		if (editValue == null) {
 			return getOsmValue();
 		}
 		return editValue;
+	}
+
+	public String getEditOsmTag2() {
+		if (isReference()) {
+			return referenceType.getEditOsmTag2();
+		}
+		return editTag2;
+	}
+
+	public String getEditOsmValue2() {
+		if (isReference()) {
+			return referenceType.getEditOsmValue2();
+		}
+		return editValue2;
 	}
 
 	public void setOsmTag(String osmTag) {
