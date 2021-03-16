@@ -4012,4 +4012,7 @@
     <string name="purchases">Покупки</string>
     <string name="quick_action_show_hide_title">Показать/скрыть</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">Природные границы</string>
+    <string name="track_has_no_altitude">Трек не содержит данных о высоте.</string>
+    <string name="track_has_no_speed">Трек не содержит данных о скорости.</string>
+    <string name="select_another_colorization">Выберите другой тип окраски.</string>
 </resources>
