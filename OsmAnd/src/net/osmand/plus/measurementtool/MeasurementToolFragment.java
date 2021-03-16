@@ -307,6 +307,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				@Override
 				public void onGlobalLayout() {
 					updateCardContainerSize();
+					mainView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
 				}
 			});
 		}
@@ -676,19 +677,36 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	private void updateCardContainerSize() {
+		if (portrait) {
+			return;
+		}
 		View measureModeControls = mainView.findViewById(R.id.measure_mode_controls);
 		int width = mainView.getWidth() - measureModeControls.getWidth();
-		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(width, -1);
 		int bottomMargin = measureModeControls.getHeight();
 		bottomMargin = progressBarVisible ? bottomMargin + mainView.findViewById(R.id.snap_to_road_progress_bar).getHeight() : bottomMargin;
-		params.setMargins(0, 0, 0, bottomMargin);
-		cardsContainer.setLayoutParams(params);
+		if (mainView.getParent() instanceof FrameLayout) {
+			FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(width, -1);
+			params.setMargins(0, 0, 0, bottomMargin);
+			cardsContainer.setLayoutParams(params);
+		} else if (mainView.getParent() instanceof LinearLayout) {
+			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, -1);
+			params.setMargins(0, 0, 0, bottomMargin);
+			cardsContainer.setLayoutParams(params);
+		}
 	}
 
 	private void shiftBottomMapControls(boolean toInitialPosition) {
+		if (portrait) {
+			return;
+		}
 		int leftMargin = toInitialPosition ? 0 : cardsContainer.getWidth();
-		LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) bottomMapControls.getLayoutParams();
-		params.setMargins(leftMargin, 0, 0, 0);
+		if (bottomMapControls.getParent() instanceof LinearLayout) {
+			LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) bottomMapControls.getLayoutParams();
+			params.setMargins(leftMargin, 0, 0, 0);
+		} else if (bottomMapControls.getParent() instanceof FrameLayout) {
+			FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) bottomMapControls.getLayoutParams();
+			params.setMargins(leftMargin, 0, 0, 0);
+		}
 	}
 
 	public boolean isInEditMode() {
