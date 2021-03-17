@@ -3972,7 +3972,7 @@
     <string name="track_recording_description">Weet u zeker dat u de opname wilt stoppen\?
 \n(Alle niet opgeslagen gegevens gaan verloren.).</string>
     <string name="select_segments">Selecteer segmenten</string>
-    <string name="select_segments_description">%1$s bevat meer dan één segment , je moet het noodzakelijke deel van de navigatie selecteren.</string>
+    <string name="select_segments_description">%1$s bevat meer dan één segment, je moet het noodzakelijke deel selecteren om te navigeren.</string>
     <string name="segments_count">Segment %1$d</string>
     <string name="hillshade_slope_contour_lines">Hillshade / Helling / Contourlijnen</string>
     <string name="open_place_reviews_plugin_description">OpenPlaceReviews is een gemeenschaps gestuurd project over openbare plaatsen zoals restaurants, hotels, musea, way-points. Het verzamelt alle openbare informatie over hen, zoals foto\'s, recensies, links naar andere systemen die OpenStreetMap, Wikipedia linken.
