@@ -2005,7 +2005,7 @@
     <string name="tts_missing_language_data">Kas läheme valitud keele alla laadimiseks rakendusepoodi\?</string>
     <string name="gpx_option_reverse_route">Raja vastupidine suund</string>
     <string name="gpx_option_destination_point">Kasuta olemasoleva sihtkohta</string>
-    <string name="gpx_option_from_start_point">Mööda kogu rada</string>
+    <string name="gpx_option_from_start_point">Järgi teekonda täielikult</string>
     <string name="choose_audio_stream">Hääljuhiste väljund</string>
     <string name="choose_audio_stream_descr">Vali kõlar hääljuhiste esitamiseks.</string>
     <string name="voice_stream_voice_call">Telefonikõne hääl (et katkestada auto Bluetooth raadioid)</string>
@@ -4050,4 +4050,6 @@
     <string name="shared_string_turn">Pööra</string>
     <string name="purchases">Ostud</string>
     <string name="map_widget_distance_by_tap">Kaugus toksamise järgi</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Peida (loodus)kaitsealade ja rahvusparkide piirid</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_name">Looduse piirid</string>
 </resources>

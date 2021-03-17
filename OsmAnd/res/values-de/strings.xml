@@ -3163,7 +3163,7 @@
     <string name="manage_profiles_descr">Profile erstellen, importieren, bearbeiten</string>
     <string name="manage_profiles">App-Profile verwalten …</string>
     <string name="osmand_settings_descr">Die gesamte App betreffend</string>
-    <string name="osmand_settings">OsmAnd-Einstellungen</string>
+    <string name="osmand_settings">OsmAnd Einstellungen</string>
     <string name="copy_from_other_profile">Aus anderem Profil kopieren</string>
     <string name="turn_screen_on">Bildschirm einschalten</string>
     <string name="map_during_navigation_info">Karte während Navigation</string>
@@ -4025,4 +4025,29 @@
     <string name="track_has_no_altitude">Der Track enthält keine Höhendaten.</string>
     <string name="track_has_no_speed">Der Track enthält keine Geschwindigkeitsdaten.</string>
     <string name="select_another_colorization">Bitte wähle eine andere Art der Einfärbung aus.</string>
+    <string name="map_widget_distance_by_tap">Entfernung durch Antippen</string>
+    <string name="select_segments">Segmente auswählen</string>
+    <string name="select_segments_description">%1$s enthält mehr als ein Segment, Sie müssen den benötigten Teil für die Navigation auswählen.</string>
+    <string name="segments_count">Segment %1$d</string>
+    <string name="temporary_conditional_routing_descr">Verwenden Sie Straßeneinschränkungen, die jetzt in der Karte aktiv sind</string>
+    <string name="routing_attr_short_way_description">Optimierte kürzere Route (energiesparend)</string>
+    <string name="routing_attr_driving_style_description">Wählen Sie den Fahrzweck, um eine kürzere, schnellere oder sicherere Route zu erhalten</string>
+    <string name="snap_to_road_descr">Das Symbol für den aktuellen Standort wird an die aktuelle Navigationsroute angehängt</string>
+    <string name="map_orientation_threshold_descr">Kartenansicht nicht drehen, wenn die Geschwindigkeit kleiner als ein Schwellenwert ist</string>
+    <string name="track_recording_description">Sind Sie sicher, dass Sie die Aufnahme beenden wollen\?
+\nAlle nicht gespeicherten Daten gehen verloren.</string>
+    <string name="on_pause">Pausiert</string>
+    <string name="app_restart_required">Neustart der Anwendung erforderlich, um einige Einstellungen zu übernehmen.</string>
+    <string name="routing_attr_height_obstacles_description">Die Streckenführung könnte starke Steigungen vermeiden.</string>
+    <string name="quick_action_coordinates_widget_descr">Ein Umschalter zum Ein- und Ausblenden des Koordinaten-Widgets auf der Karte.</string>
+    <string name="latest_openstreetmap_update">Aktuelles OpenStreetMap Update verfügbar:</string>
+    <string name="last_time_checked">Zuletzt geprüft: %s</string>
+    <string name="update_frequency">Aktualisierungsintervall</string>
+    <string name="live_update_frequency_week_variant">Die Kartenaktualisierung wird wöchentlich überprüft. Das nächste Mal%1$s in %2$s.</string>
+    <string name="live_update_frequency_day_variant">Die Kartenaktualisierung wird täglich überprüft. Das nächste Mal%1$s in %2$s.</string>
+    <string name="live_update_frequency_hour_variant">Die Kartenaktualisierung wird stündlich überprüft. Das nächste Mal%1$s in %2$s.</string>
+    <string name="live_update_delete_updates_msg">Sind Sie sicher, dass Sie alle %s Live-Updates löschen möchten\?</string>
+    <string name="select_category_descr">Kategorie auswählen oder neue hinzufügen</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Grenzen von Naturschutzgebieten, Schutzgebieten und Nationalparks ausblenden</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_name">Grenzen von Schutzgebieten</string>
 </resources>

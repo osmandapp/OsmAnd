@@ -1956,7 +1956,7 @@
     <string name="move_marker_bottom_sheet_title">Posuňte mapu pre zmenu pozície značky</string>
     <!-- string name="lat_lon_pattern">Šírka: %1$.5f Dĺžka: %2$.5f</string -->
     <string name="lang_hu_formal">Maďarsky (formálne)</string>
-    <string name="current_track">Súčasná stopa</string>
+    <string name="current_track">Aktuálna stopa</string>
     <string name="change_markers_position">Zmeniť polohu značky</string>
     <string name="lang_es_us">Španielsky (Americká)</string>
     <string name="lang_be_by">Bielorusky (Latinka)</string>
@@ -2161,7 +2161,6 @@
     <string name="rendering_attr_depthContours_description">Zobraziť hĺbkové úrovne a body.</string>
     <string name="rendering_attr_depthContours_name">Námorné hĺbkové vrstevnice</string>
     <string name="routing_attr_height_obstacles_name">Použiť údaje nadmorskej výšky</string>
-
     <string name="route_altitude">Prevýšenie trasy</string>
     <string name="altitude_descent">Klesanie</string>
     <string name="altitude_ascent">Stúpanie</string>
@@ -4000,4 +3999,45 @@
     <string name="activity_type_offroad_name">Jazda mimo cesty</string>
     <string name="activity_type_motorbike_name">Motorka</string>
     <string name="activity_type_car_name">Auto</string>
+    <string name="select_segments">Zvoliť úseky</string>
+    <string name="select_segments_description">%1$s obsahuje viac než jeden segment, pre navigáciu musíte zvoliť potrebnú časť.</string>
+    <string name="segments_count">Úsek %1$d</string>
+    <string name="temporary_conditional_routing_descr">Použiť cestné obmedzenia, ktoré sú teraz aktívne na mape</string>
+    <string name="routing_attr_driving_style_description">Zvoľte účel jazdy pre získanie kratšej, rýchlejšej alebo bezpečnejšej trasy</string>
+    <string name="map_orientation_threshold_descr">Neotáčať mapu, ak je rýchlosť nižšia ako hranica</string>
+    <string name="restart">Reštartovať</string>
+    <string name="shared_strings_all_regions">Všetky regióny</string>
+    <string name="delete_number_files_question">Zmazať %1$d súborov\?</string>
+    <string name="track_recording_stop_without_saving">Zastaviť bez uloženia</string>
+    <string name="track_recording_save_and_stop">Uložiť a zastaviť záznam</string>
+    <string name="track_recording_title">Záznam stopy zastavený</string>
+    <string name="track_recording_description">Naozaj chcete zastaviť záznam\?
+\nVšetky neuložené údaje budú stratené.</string>
+    <string name="on_pause">Pri pozastavení</string>
+    <string name="app_restart_required">Niektoré nastavenia vyžadujú reštart aplikácie.</string>
+    <string name="quick_action_coordinates_widget_descr">Prepínať na zobrazenie alebo skrytie nástroja Súradnice na mape.</string>
+    <string name="map_widget_distance_by_tap">Vzdialenosť stlačením</string>
+    <string name="latest_openstreetmap_update">Najnovšia dostupná aktualizácia OpenStreetMap:</string>
+    <string name="updated">Aktualizované: %s</string>
+    <string name="last_time_checked">Posledná kontrola: %s</string>
+    <string name="update_frequency">Frekvencia aktualizácií</string>
+    <string name="live_update_frequency_week_variant">Aktualizácie mapy budú kontrolované každý týždeň. Nasledujúca kontrola %1$s o %2$s.</string>
+    <string name="live_update_frequency_day_variant">Aktualizácie mapy budú kontrolované každý deň. Nasledujúca kontrola %1$s o %2$s.</string>
+    <string name="live_update_frequency_hour_variant">Aktualizácie mapy budú kontrolované každú hodinu. Nasledujúca kontrola %1$s o %2$s.</string>
+    <string name="delete_updates">Odstrániť aktualizácie</string>
+    <string name="live_update_delete_updates_msg">Naozaj chcete zmazať všetky živé aktualizácie (%s)\?</string>
+    <string name="select_category_descr">Zvoľte kategóriu alebo pridajte novú</string>
+    <string name="track_recording_will_be_continued">Záznam bude pokračovať.</string>
+    <string name="copy_poi_name">Kopírovať názov POI</string>
+    <string name="quick_action_show_hide_title">Zobraziť/skryť</string>
+    <string name="shared_string_interval">Interval</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Skryť hranice prírodných rezervácií, národných parkov a chránených oblastí</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_name">Hranice prírodných oblastí</string>
+    <string name="track_has_no_altitude">Stopa neobsahuje údaje o nadmorskej výške.</string>
+    <string name="track_has_no_speed">Stopa neobsahuje údaje o rýchlosti.</string>
+    <string name="select_another_colorization">Prosím zvoľte iný typ zafarbenia.</string>
+    <string name="purchases">Nákupy</string>
+    <string name="routing_attr_short_way_description">Optimalizovaná kratšia trasa (úspora energie)</string>
+    <string name="snap_to_road_descr">Ikona aktuálnej polohy bude prichytená k navigačnej trase</string>
+    <string name="routing_attr_height_obstacles_description">Výpočet trasy sa môže vyhnúť strmým stúpaniam.</string>
 </resources>

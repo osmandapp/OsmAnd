@@ -2565,7 +2565,6 @@ Lon %2$s</string>
     <string name="do_not_send_anonymous_app_usage_desc">O OsmAnd recompila información sobre as lapelas que abres na aplicación. Non estamos a recompilar datos da localización, datos inseridos na aplicación ou datos relacionados coas áreas que ollas, procuras ou baixas.</string>
     <string name="do_not_show_startup_messages_desc">Agocha os descontos da aplicación e as mensaxes especiais dos acontecementos locais.</string>
     <string name="routing_attr_relief_smoothness_factor_name">Escoller variación da altitude</string>
-
     <string name="rendering_attr_depthContours_description">Amosar curvas e puntos do afundimento.</string>
     <string name="rendering_attr_depthContours_name">Curvas do afundimento náuticos</string>
     <string name="auto_split_recording_title">División automática das gravacións en intres</string>
@@ -4001,4 +4000,37 @@ Lon %2$s</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">Empregar test.openplacereviews.org</string>
     <string name="login_open_place_reviews">Iniciar sesión ao OpenPlaceReviews</string>
+    <string name="snap_to_road_descr">A icona da localización actual será axustada á ruta de navegación actual</string>
+    <string name="map_orientation_threshold_descr">Non xirar a vista do mapa se a velocidade é inferior a un limiar</string>
+    <string name="restart">Reiniciar</string>
+    <string name="shared_strings_all_regions">Todas as rexións</string>
+    <string name="delete_number_files_question">Eliminar %1$d ficheiros\?</string>
+    <string name="track_recording_stop_without_saving">Deter ser gardar</string>
+    <string name="track_recording_save_and_stop">Gardar e deter a gravación</string>
+    <string name="track_recording_title">Gravación da pista detida</string>
+    <string name="track_recording_description">Deixar de gravar\?
+\nTodos os datos non gardados serán perdidos.</string>
+    <string name="on_pause">Detido</string>
+    <string name="app_restart_required">É necesario reiniciar a aplicación para aplicar algúns axustes.</string>
+    <string name="routing_attr_height_obstacles_description">A ruta podería evitar as fortes pendentes.</string>
+    <string name="quick_action_coordinates_widget_descr">Trocar para amosar ou agochar o trebello de coordenadas no mapa.</string>
+    <string name="map_widget_distance_by_tap">Distancia ao premer</string>
+    <string name="latest_openstreetmap_update">Última actualización do OpenStreetMap dispoñíbel:</string>
+    <string name="updated">Actualizado: %s</string>
+    <string name="last_time_checked">Última comprobación: %s</string>
+    <string name="update_frequency">Frecuencia de actualización</string>
+    <string name="live_update_frequency_week_variant">As actualizacións do mapa serán comprobadas cada semana. A seguinte vez %1$s en %2$s.</string>
+    <string name="live_update_frequency_day_variant">As actualizacións do mapa serán comprobadas cada día. A seguinte vez %1$s en %2$s.</string>
+    <string name="delete_updates">Eliminar actualizacións</string>
+    <string name="live_update_delete_updates_msg">Eliminar todas as actualizacións ao vivo de %s\?</string>
+    <string name="purchases">Compras</string>
+    <string name="select_category_descr">Escolle categoría ou engade unha nova</string>
+    <string name="track_recording_will_be_continued">A gravación continuará.</string>
+    <string name="copy_poi_name">Copiar nome do PDI</string>
+    <string name="quick_action_show_hide_title">Amosar/Agochar</string>
+    <string name="shared_string_interval">Intre</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_name">Espazos naturais</string>
+    <string name="track_has_no_altitude">A pista non contén datos de altitude.</string>
+    <string name="track_has_no_speed">A pista non contén datos de velocidade.</string>
+    <string name="select_another_colorization">Escolle outro tipo de cor.</string>
 </resources>

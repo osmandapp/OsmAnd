@@ -29,7 +29,7 @@
     <string name="poi_deli">Delikatesy</string>
     <string name="poi_farm">Poľnonákup</string>
     <string name="poi_greengrocer">Ovocie/Zelenina</string>
-    <string name="poi_seafood">Ryby</string>
+    <string name="poi_seafood">Ryby a morské plody</string>
     <string name="poi_confectionery">Sladkosti</string>
     <string name="poi_ice_cream">Zmrzlina</string>
     <string name="poi_supermarket">Supermarket</string>
@@ -237,9 +237,9 @@
     <string name="poi_government">Vládne orgány</string>
     <string name="poi_office_administrative">Lokálne úrady</string>
     <string name="poi_customs">Colná správa</string>
-    <string name="poi_city">Mesto (nad 100 tis.obyv.)</string>
-    <string name="poi_town">Mesto (10 tis.-100 tis.obyv.)</string>
-    <string name="poi_village">Obec (200-10 tis.obyv.)</string>
+    <string name="poi_city">Veľkomesto</string>
+    <string name="poi_town">Mesto</string>
+    <string name="poi_village">Obec</string>
     <string name="poi_hamlet">Osada</string>
     <string name="poi_isolated_dwelling">Samota/kopanica</string>
     <string name="poi_suburb">Mestský obvod</string>
@@ -269,7 +269,7 @@
     <string name="poi_lawyer">Právnik</string>
     <string name="poi_office_telecommunication">Telekomunikácie</string>
     <string name="poi_ngo">Nezisková organizácia</string>
-    <string name="poi_townhall">Radnica</string>
+    <string name="poi_townhall">Radnica/Obecný úrad</string>
     <string name="poi_employment_agency">Personálna agentúra</string>
     <string name="poi_research">Výskumný ústav</string>
     <string name="poi_it">Informačné technológie</string>
@@ -2013,7 +2013,7 @@
     <string name="poi_ramp_bicycle_no">Rampa pre bicykle: nie</string>
     <string name="poi_ramp_luggage_no">Rampa pre batožinu: nie</string>
     <string name="poi_defibrillator">Defibrilátor</string>
-    <string name="poi_site_type_city">Mesto</string>
+    <string name="poi_site_type_city">Veľkomesto</string>
     <string name="poi_prison_camp">Bývalý väzenský tábor</string>
     <string name="poi_concentration_camp">Typ: koncentračný tábor</string>
     <string name="poi_pow_camp">Typ: tábor vojnových zajatcov</string>
