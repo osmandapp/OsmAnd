@@ -31,7 +31,6 @@ import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscriptionIntroductoryInfo;
 import net.osmand.plus.inapp.InAppPurchasesImpl.InAppPurchaseLiveUpdatesOldSubscription;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.util.Algorithms;
 
 import java.lang.ref.WeakReference;
@@ -268,7 +267,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 				InAppSubscription s = (InAppSubscription) inAppPurchase;
 				try {
 					s.setIntroductoryInfo(new InAppSubscriptionIntroductoryInfo(s, introductoryPrice,
-							introductoryPriceAmountMicros, introductoryPricePeriod, String.valueOf(introductoryPriceCycles)));
+							introductoryPriceAmountMicros, introductoryPricePeriod, introductoryPriceCycles));
 				} catch (ParseException e) {
 					LOG.error(e);
 				}
@@ -542,20 +541,12 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 						}
 					}
 				}
-				OsmandPreference<Long> subscriptionCancelledTime = ctx.getSettings().LIVE_UPDATES_PURCHASE_CANCELLED_TIME;
 				if (!subscribedToLiveUpdates && ctx.getSettings().LIVE_UPDATES_PURCHASED.get()) {
-					if (subscriptionCancelledTime.get() == 0) {
-						subscriptionCancelledTime.set(System.currentTimeMillis());
-						ctx.getSettings().LIVE_UPDATES_PURCHASE_CANCELLED_FIRST_DLG_SHOWN.set(false);
-						ctx.getSettings().LIVE_UPDATES_PURCHASE_CANCELLED_SECOND_DLG_SHOWN.set(false);
-					} else if (System.currentTimeMillis() - subscriptionCancelledTime.get() > SUBSCRIPTION_HOLDING_TIME_MSEC) {
-						ctx.getSettings().LIVE_UPDATES_PURCHASED.set(false);
-						if (!isDepthContoursPurchased(ctx)) {
-							ctx.getSettings().getCustomRenderBooleanProperty("depthContours").set(false);
-						}
+					ctx.getSettings().LIVE_UPDATES_PURCHASED.set(false);
+					if (!isDepthContoursPurchased(ctx)) {
+						ctx.getSettings().getCustomRenderBooleanProperty("depthContours").set(false);
 					}
 				} else if (subscribedToLiveUpdates) {
-					subscriptionCancelledTime.set(0L);
 					ctx.getSettings().LIVE_UPDATES_PURCHASED.set(true);
 				}
 
