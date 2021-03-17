@@ -8,15 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.ColorInt;
-import androidx.annotation.ColorRes;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
@@ -38,6 +29,15 @@ import org.apache.commons.logging.Log;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class GpxBlockStatisticsBuilder {
 
@@ -116,12 +116,22 @@ public class GpxBlockStatisticsBuilder {
 
 	public void initItems() {
 		GPXFile gpxFile = getGPXFile();
-		GpxDisplayItem gpxDisplayItem = getDisplayItem(gpxFile);
+		if (app == null || gpxFile == null) {
+			return;
+		}
 		GPXTrackAnalysis analysis = null;
 		boolean withoutGaps = true;
-		if (gpxDisplayItem != null) {
-			analysis = gpxDisplayItem.analysis;
-			withoutGaps = !selectedGpxFile.isJoinSegments() && gpxDisplayItem.isGeneralTrack();
+		if (gpxFile.equals(app.getSavingTrackHelper().getCurrentGpx())) {
+			GPXFile currentGpx = app.getSavingTrackHelper().getCurrentTrack().getGpxFile();
+			analysis = currentGpx.getAnalysis(0);
+			withoutGaps = !selectedGpxFile.isJoinSegments()
+					&& (Algorithms.isEmpty(currentGpx.tracks) || currentGpx.tracks.get(0).generalTrack);
+		} else {
+			GpxDisplayItem gpxDisplayItem = getDisplayItem(gpxFile);
+			if (gpxDisplayItem != null) {
+				analysis = gpxDisplayItem.analysis;
+				withoutGaps = !selectedGpxFile.isJoinSegments() && gpxDisplayItem.isGeneralTrack();
+			}
 		}
 		if (analysis != null) {
 			float totalDistance = withoutGaps ? analysis.totalDistanceWithoutGaps : analysis.totalDistance;
