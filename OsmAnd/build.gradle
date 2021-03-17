@@ -91,7 +91,7 @@ android {
 			java.srcDirs = ["src-nogms", "src-google"]
 		}
 		huawei {
-			java.srcDirs = ["src-nogms", "src-google"]
+			java.srcDirs = ["src-nogms", "src-huawei"]
 			manifest.srcFile "AndroidManifest-huawei.xml"
 		}
 
