@@ -495,7 +495,7 @@
     <string name="follow">Start route begeleiding</string>
     <string name="recalculate_route_to_your_location">Soort vervoer:</string>
     <string name="mark_final_location_first">Kies eerst een bestemming</string>
-    <string name="get_directions">Route</string>
+    <string name="get_directions">Routebeschrijving</string>
     <string name="opening_hours">Openingstijden</string>
     <string name="opening_changeset">Wijzigingenset openen…</string>
     <string name="closing_changeset">Wijzigingenset sluiten…</string>
@@ -1341,7 +1341,7 @@
     <string name="proxy_pref_descr">Stel een proxy voor Internetcommunicatie in.</string>
     <string name="settings_privacy">Privacy</string>
     <string name="shared_string_gpx_points">Punten</string>
-    <string name="navigation_over_track">Navigatie langs GPX-track starten?</string>
+    <string name="navigation_over_track">Navigatie langs GPX-track starten\?</string>
     <string name="avoid_roads_msg">Je kan een alternatieve route vinden door aan te geven welke wegen niet gebruikt mogen worden</string>
     <string name="save_track_to_gpx_globally_headline">GPX-tracks opnemen op aanvraag</string>
     <string name="enable_proxy_title">HTTP-proxy aanzetten</string>
@@ -1912,7 +1912,7 @@
     <string name="rendering_value_thin_name">Dun</string>
     <string name="rendering_value_medium_name">Gemiddeld</string>
     <string name="rendering_value_bold_name">Vet</string>
-    <string name="map_mode">Dag-Nacht stijl</string>
+    <string name="map_mode">Dag/Nacht stijl</string>
     <string name="access_default_color">Standaardkleur</string>
     <string name="access_category_choice">Kies categorie</string>
     <string name="access_hint_enter_name">Voer naam in</string>
