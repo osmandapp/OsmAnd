@@ -3841,7 +3841,7 @@
     <string name="perform_oauth_authorization_description">برای استفاده از قابلیت‌های ویرایشی، از طریق OAuth ثبت ورود کنید</string>
     <string name="perform_oauth_authorization">ثبت ورود از طریق OAuth</string>
     <string name="clear_osm_token">پاک‌سازی توکن OAuth اوپن‌استریت‌مپ</string>
-    <string name="osm_edit_logout_success">خروج ثبت شد</string>
+    <string name="osm_edit_logout_success">خارج شدید</string>
     <string name="file_already_imported">فایل قبلاً در OsmAnd درون‌برد شده است</string>
     <string name="use_two_phase_routing">استفاده از الگوریتم مسیریابی دومرحله‌ای A*‎</string>
     <string name="shared_string_graph">نمودار</string>
@@ -3901,7 +3901,7 @@
     <string name="enter_text_separated">برچسب‌ها را بنویسید و با کاما جدا کنید.</string>
     <string name="osm_edit_close_note">بستن یادداشت OSM</string>
     <string name="osm_edit_comment_note">نظردادن به یادداشت OSM</string>
-    <string name="osm_login_descr">می‌توانید با روش ایمن OAuth وارد شوید یا از نام‌کاربری و گذرواژه‌تان استفاده کنید.</string>
+    <string name="osm_login_descr">می‌توانید با روش ایمن OAuth وارد شوید یا از نام کاربری و گذرواژه‌تان استفاده کنید.</string>
     <string name="app_mode_motorboat">قایق‌موتوری</string>
     <string name="cannot_upload_image">آپلود عکس ناموفق بود، لطفاً بعداً دوباره امتحان کنید</string>
     <string name="select_picture">انتخاب تصویر</string>
@@ -3928,9 +3928,9 @@
     <string name="last_time_checked">آخرین زمان بررسی: %s</string>
     <string name="latest_openstreetmap_update">آخرین روزآمدسازهٔ اوپن‌استریت‌مپ:</string>
     <string name="updated">روزآمدشده: %s</string>
-    <string name="live_update_frequency_week_variant">برای روزآمدسازی نقشه هر هفته بررسی می‌شود. زمان بعدی %1$s در %2$s.</string>
-    <string name="live_update_frequency_day_variant">برای روزآمدسازی نقشه هر روز بررسی می‌شود. زمان بعدی %1$s در %2$s.</string>
-    <string name="live_update_frequency_hour_variant">برای روزآمدسازی نقشه هر ساعت بررسی می‌شود. زمان بعدی %1$s در %2$s.</string>
+    <string name="live_update_frequency_week_variant">روزآمدی نقشه هر هفته بررسی می‌شود. زمان بعدی %1$s در %2$s.</string>
+    <string name="live_update_frequency_day_variant">روزآمدی نقشه هر روز بررسی می‌شود. زمان بعدی %1$s در %2$s.</string>
+    <string name="live_update_frequency_hour_variant">روزآمدی نقشه هر ساعت بررسی می‌شود. زمان بعدی %1$s در %2$s.</string>
     <string name="delete_updates">حذف روزآمدسازه‌ها</string>
     <string name="live_update_delete_updates_msg">آیا از حذف هر %s روزآمدسازهٔ زنده مطمئن هستید؟</string>
     <string name="update_frequency">تکرار روزآمدسازی</string>
@@ -3945,4 +3945,64 @@
     <string name="snap_to_road_descr">نماد موقعیتِ کنونی به مسیر ناوبریِ جاری می‌چسبد</string>
     <string name="routing_attr_height_obstacles_description">مسیریاب از سربالایی‌های شدید دوری می‌کند.</string>
     <string name="purchases">خریدها</string>
+    <string name="start_recording">شروع ضبط</string>
+    <string name="show_track_on_map">نمایش رد روی نقشه</string>
+    <string name="routing_engine_vehicle_type_wheelchair">صندلی چرخ‌دار</string>
+    <string name="routing_engine_vehicle_type_hiking">پیاده‌گردی</string>
+    <string name="routing_engine_vehicle_type_walking">پیاده‌روی</string>
+    <string name="routing_engine_vehicle_type_cycling_electric">دوچرخه‌سواری برقی</string>
+    <string name="routing_engine_vehicle_type_cycling_mountain">دوچرخه‌سواری کوهستان</string>
+    <string name="routing_engine_vehicle_type_cycling_road">دوچرخه‌سواری جاده</string>
+    <string name="routing_engine_vehicle_type_cycling_regular">دوچرخه‌سواری منظم</string>
+    <string name="routing_engine_vehicle_type_hgv">وسیلهٔ نقلیهٔ سنگین</string>
+    <string name="routing_engine_vehicle_type_small_truck">کامیونت</string>
+    <string name="routing_engine_vehicle_type_truck">کامیون</string>
+    <string name="routing_engine_vehicle_type_racingbike">دوچرخهٔ مسابقه‌ای</string>
+    <string name="message_server_error">خطای کارساز: %1$s</string>
+    <string name="message_name_is_already_exists">این نام وجود دارد</string>
+    <string name="delete_online_routing_engine">این موتور مسیریابی آنلاین حذف شود؟</string>
+    <string name="context_menu_edit_descr">ویرایش توضیحات</string>
+    <string name="delete_waypoints">حذف راه‌نشان‌ها</string>
+    <string name="copy_to_map_markers">کپی در نشانه‌های نقشه</string>
+    <string name="copy_to_map_favorites">کپی در علاقه‌مندی‌ها</string>
+    <string name="upload_photo">در حال آپلود</string>
+    <string name="upload_photo_completed">آپلود کامل شد</string>
+    <string name="uploading_count">در حال آپلود %1$d از %2$d</string>
+    <string name="select_segments">انتخاب پاره‌ها</string>
+    <string name="select_segments_description">‏%1$s بیش از یک پاره دارد و باید بخش مورد نیاز برای ناوبری را انتخاب کنید.</string>
+    <string name="segments_count">پارهٔ %1$d</string>
+    <string name="uploaded_count">%1$d از %2$d آپلود شد</string>
+    <string name="toast_select_edits_for_upload">ویرایش‌ها را برای آپلود انتخاب کنید</string>
+    <string name="hillshade_slope_contour_lines">سایه‌روشن / شیب / منحنی‌های میزان</string>
+    <string name="open_place_reviews_plugin_description">‏OpenPlaceReviews پروژه‌ای جامعه‌محور با موضوع مکان‌های عمومی مانند رستوران‌ها، هتل‌ها، موزه‌ها و نقاط بین‌راهی است که همهٔ اطلاعات عمومی دربارهٔ آن‌ها را جمع‌آوری می‌کند؛ اطلاعاتی مانند نگاره، دیدگاه و پیوند به سایر سامانه‌ها همچون اوپن‌استریت‌مپ و ویکی‌پدیا.
+\n
+\nتمام دادهٔ OpenPlaceReview باز و در دسترس همگان است: http://openplacereviews.org/data.
+\n
+\nاینجا بیشتر بخوانید: http://openplacereviews.org</string>
+    <string name="open_place_reviews">OpenPlaceReviews</string>
+    <string name="opr_use_dev_url">استفاده از test.openplacereviews.org</string>
+    <string name="login_open_place_reviews">ورود به OpenPlaceReviews</string>
+    <string name="activity_type_water_name">آب</string>
+    <string name="activity_type_winter_name">زمستان</string>
+    <string name="activity_type_snowmobile_name">برف‌رو</string>
+    <string name="activity_type_riding_name">سوارکاری</string>
+    <string name="activity_type_racing_name">مسابقه</string>
+    <string name="activity_type_mountainbike_name">دوچرخهٔ کوهستان</string>
+    <string name="activity_type_cycling_name">دوچرخه‌سواری</string>
+    <string name="activity_type_hiking_name">پیاده‌گردی</string>
+    <string name="activity_type_running_name">دویدن</string>
+    <string name="activity_type_walking_name">پیاده‌روی</string>
+    <string name="activity_type_offroad_name">آفرود</string>
+    <string name="activity_type_motorbike_name">موتورسیکلت</string>
+    <string name="activity_type_car_name">خودرو</string>
+    <string name="temporary_conditional_routing_descr">محدودیت‌های جاده که اکنون روی نقشه فعال هستند را لحاظ کن</string>
+    <string name="routing_attr_driving_style_description">هدف رانندگی را انتخاب نمایید تا مسیری کوتاه‌تر، سریع‌تر یا ایمن‌تر دریافت کنید</string>
+    <string name="map_orientation_threshold_descr">اگر سرعت پایین‌تر از حدی است نمای نقشه را نچرخان</string>
+    <string name="shared_strings_all_regions">همهٔ مناطق</string>
+    <string name="delete_number_files_question">%1$d فایل را حذف می‌کنید؟</string>
+    <string name="track_recording_stop_without_saving">توقف بدون ذخیره‌سازی</string>
+    <string name="track_recording_save_and_stop">ذخیره‌سازی و توقف ضبط</string>
+    <string name="track_recording_title">ضبط رد متوقف شد</string>
+    <string name="track_recording_description">آیا برای توقف ضبط مطمئن هستید؟
+\nهرچه که ذخیره نشده، از دست خواهد رفت.</string>
 </resources>

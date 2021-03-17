@@ -2158,7 +2158,6 @@
     <string name="rendering_attr_depthContours_description">Mostra isòbates i fondàries puntuals.</string>
     <string name="rendering_attr_depthContours_name">Isòbates</string>
     <string name="routing_attr_height_obstacles_name">Utilitza les cotes d\'elevació</string>
-
     <string name="route_altitude">Alçat de la ruta</string>
     <string name="altitude_descent">Descens</string>
     <string name="altitude_ascent">Ascens</string>
@@ -3815,4 +3814,15 @@
     <string name="routing_attr_allow_streams_name">Permet rierols i torrents</string>
     <string name="routing_attr_allow_intermittent_description">Permet les vies navegables no permanents</string>
     <string name="routing_attr_allow_intermittent_name">Permet les vies navegables no permanents</string>
+    <string name="purchases">Compres</string>
+    <string name="select_category_descr">Seleccioneu una categoria o afegiu-ne una de nova</string>
+    <string name="track_recording_will_be_continued">L\'enregistrament continuarà.</string>
+    <string name="copy_poi_name">Copia el nom del PDI</string>
+    <string name="quick_action_show_hide_title">Mostra/amaga</string>
+    <string name="shared_string_interval">Interval</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Amaga reserves naturals, àrees protegides i delimitacions de parcs nacionals</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_name">Fronteres naturals</string>
+    <string name="track_has_no_altitude">La traça no conté dades d\'altitud.</string>
+    <string name="track_has_no_speed">La traça no conté dades de velocitat.</string>
+    <string name="select_another_colorization">Seleccioneu un altre tipus de coloració.</string>
 </resources>

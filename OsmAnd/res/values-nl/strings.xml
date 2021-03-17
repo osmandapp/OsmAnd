@@ -3137,8 +3137,8 @@
     <string name="visited_screens_collect_descr">Help ons begrijpen welke OsmAnd functies het populairst zijn.</string>
     <string name="privacy_and_security_change_descr">Toets \"Toestaan\" als u akkoord gaat met onze %1$s</string>
     <string name="app_mode_shuttle_bus">Shuttlebus</string>
-    <string name="show_compass_ruler">Toon kompas wijzer</string>
-    <string name="hide_compass_ruler">Verberg kompas wijzer</string>
+    <string name="show_compass_ruler">Toon kompasliniaal</string>
+    <string name="hide_compass_ruler">Verberg kompasliniaal</string>
     <string name="settings_routing_mode_string">Modus: %s</string>
     <string name="settings_derived_routing_mode_string">Gebruikers modus, afgeleid van: %s</string>
     <string name="select_base_profile_dialog_message">Baseer uw aangepaste profiel op één van de standaard profielen, dit bepaalt de algemene opzet zoals standaard zichtbaarheid van widgets en eenheden van snelheid en afstand. Dit zijn de standaard profielen samen met voorbeelden van aangepaste profielen die uitgebreid kunnen worden:</string>
@@ -3634,7 +3634,7 @@
     <string name="route_between_points">Route tussen punten</string>
     <string name="route_between_points_warning_desc">Vervolgens, zet uw track vast op de dichtstbijzijnde toegestane weg met een van uw navigatieprofielen om deze optie te gebruiken.</string>
     <string name="message_need_calculate_route_before_show_graph">%1$s gegevens alleen beschikbaar op wegen, u moet een route berekenen met behulp van \"Route tussen punten\" om deze gegevens te krijgen.</string>
-    <string name="route_between_points_desc">Selecteer hoe de punten verbonden worden, via een rechte lijn, of een route berekenen tussen de punten zoals hieronder aangegeven.</string>
+    <string name="route_between_points_desc">Kies hoe de punten verbonden worden: via een rechte lijn, of een route berekenen tussen de punten zoals hieronder aangegeven.</string>
     <string name="route_between_points_next_segment_button_desc">Alleen het volgende segment wordt opnieuw berekend met het geselecteerde profiel.</string>
     <string name="next_segment">Volgende segment</string>
     <string name="all_next_segments">Alle volgende segmenten</string>
@@ -3701,7 +3701,7 @@
     <string name="message_graph_will_be_available_after_recalculation">Wacht totdat route herberekend is.
 \nNa herberekening is de grafiek zichtbaar.</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
-    <string name="import_track_descr">Kies een trackbestand om te volgen of importeer het, vanaf uw apparaat.</string>
+    <string name="import_track_descr">Kies een trackbestand om te volgen of importeer het vanaf uw apparaat.</string>
     <string name="app_mode_gap">Onderbreking</string>
     <string name="shared_string_custom">Aangepast</string>
     <string name="perform_oauth_authorization_description">Voer een OAuth-login uit om osm edit functies te gebruiken</string>
@@ -3972,7 +3972,7 @@
     <string name="track_recording_description">Weet u zeker dat u de opname wilt stoppen\?
 \n(Alle niet opgeslagen gegevens gaan verloren.).</string>
     <string name="select_segments">Selecteer segmenten</string>
-    <string name="select_segments_description">%1$s meer dan één segment bevat, moet u het nodigde deel van de navigatie selecteren.</string>
+    <string name="select_segments_description">%1$s bevat meer dan één segment, je moet het noodzakelijke deel selecteren om te navigeren.</string>
     <string name="segments_count">Segment %1$d</string>
     <string name="hillshade_slope_contour_lines">Hillshade / Helling / Contourlijnen</string>
     <string name="open_place_reviews_plugin_description">OpenPlaceReviews is een gemeenschaps gestuurd project over openbare plaatsen zoals restaurants, hotels, musea, way-points. Het verzamelt alle openbare informatie over hen, zoals foto\'s, recensies, links naar andere systemen die OpenStreetMap, Wikipedia linken.
@@ -3996,7 +3996,7 @@
     <string name="activity_type_offroad_name">Off-road</string>
     <string name="activity_type_motorbike_name">Bromfiets</string>
     <string name="activity_type_car_name">Auto\'s</string>
-    <string name="temporary_conditional_routing_descr">Gebruik wegbeperkingen die nu actief zijn op de kaart</string>
+    <string name="temporary_conditional_routing_descr">Gebruik de wegen beperkingen die nu actief zijn op de kaart</string>
     <string name="routing_attr_short_way_description">Geoptimaliseerde kortere route (energiebesparing)</string>
     <string name="routing_attr_driving_style_description">Selecteer een tussenpunt om een kortere, snellere of veiligere route te krijgen</string>
     <string name="snap_to_road_descr">Het huidige locatiepictogram wordt vastgeklikt aan de huidige navigatieroute</string>
@@ -4005,10 +4005,10 @@
     <string name="shared_strings_all_regions">Alle regio\'s</string>
     <string name="delete_number_files_question">Wis %1$d bestanden\?</string>
     <string name="track_recording_stop_without_saving">Stop zonder opslaan</string>
-    <string name="track_recording_save_and_stop">Bewaar en stop met opnemen</string>
+    <string name="track_recording_save_and_stop">Bewaar en stop de opname</string>
     <string name="track_recording_title">Trackopname gestopt</string>
     <string name="on_pause">Pauze</string>
-    <string name="app_restart_required">Opnieuw opstarten van applicatie vereist om bepaalde instellingen toe te passen.</string>
+    <string name="app_restart_required">Herstarten van de applicatie is vereist om bepaalde instellingen toe te passen.</string>
     <string name="routing_attr_height_obstacles_description">Routebepaling kan sterke hellingen vermijden.</string>
     <string name="quick_action_coordinates_widget_descr">Een schuifschakelaar om de coördinaten-widget op de kaart weer te geven of te verbergen.</string>
     <string name="map_widget_distance_by_tap">Afstand bij het tikken</string>
