@@ -3437,7 +3437,7 @@
     <string name="restore_all_profile_settings">Восстановить все настройки профиля\?</string>
     <string name="saving_new_profile">Сохранение нового профиля</string>
     <string name="profile_backup_failed">Не удалось создать резервную копию профиля.</string>
-    <string name="clear_recorded_data_warning">Очистить записанные данные\?</string>
+    <string name="clear_recorded_data_warning">Вы уверены, что хотите очистить записанные данные\?</string>
     <string name="monitoring_min_speed_descr_side_effect">Побочный эффект: в треке будут отсутствовать все участки, где не соблюдён критерий минимальной скорости (например где вы толкаете велосипед вверх по крутому склону). Также не будет информации о периодах покоя, например во время отдыха. Это влияет на любой анализ или последующую обработку, например при попытке определить общую продолжительность поездки, время в движении или среднюю скорость.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Побочный эффект: в результате фильтрации по точности, точки могут быть полностью пропущены, например, под мостами, под деревьями, между высокими зданиями или при определённых погодных условиях.</string>
     <string name="monitoring_min_accuracy_descr_remark">Примечание: при включении GPS непосредственно перед записью точность определения первой точки может быть снижена, поэтому мы рассматриваем добавление секундной задержки перед записью точки (либо записи лучшей из трёх последовательных точек и т. д.), но пока это не реализовано.</string>
@@ -3724,7 +3724,7 @@
     <string name="route_between_points_warning_desc">Далее необходимо выбрать профиль навигации для определения порогового расстояния и привязки маршрута к ближайшей разрешённой дороге.</string>
     <string name="route_between_points_desc">Выберите, как соединять точки: прямой линией или строить маршрут по заданному профилю.</string>
     <string name="in_case_of_reverse_direction">При обратном направлении</string>
-    <string name="plan_route_exit_dialog_descr">Все изменения будут утеряны.</string>
+    <string name="plan_route_exit_dialog_descr">Вы уверены, что хотите отменить все изменения в запланированном маршруте\?</string>
     <string name="street_level_imagery">Уличная фотосъёмка</string>
     <string name="shared_string_save_as_gpx">Сохранить как новый файл трека</string>
     <string name="add_segment_to_the_track">Добавить в файл трека</string>
@@ -4004,9 +4004,9 @@
     <string name="updated">Обновлено: %s</string>
     <string name="last_time_checked">Последний раз проверено: %s</string>
     <string name="update_frequency">Частота обновления</string>
-    <string name="live_update_frequency_week_variant">Обновления карт будут проверяться каждую неделю. В следующий раз%1$s в %2$s.</string>
-    <string name="live_update_frequency_day_variant">Обновления карт будут проверяться каждый день. Следующий раз%1$s в %2$s.</string>
-    <string name="live_update_frequency_hour_variant">Обновления карт будут проверяться каждый час. Следующий раз%1$s в %2$s.</string>
+    <string name="live_update_frequency_week_variant">Обновления карт будут проверяться каждую неделю. В следующий раз %1$s в %2$s.</string>
+    <string name="live_update_frequency_day_variant">Обновления карт будут проверяться каждый день. Следующий раз %1$s в %2$s.</string>
+    <string name="live_update_frequency_hour_variant">Обновления карт будут проверяться каждый час. Следующий раз %1$s в %2$s.</string>
     <string name="delete_updates">Удалить обновления</string>
     <string name="live_update_delete_updates_msg">Вы уверены, что хотите удалить все live обновления для %s\?</string>
     <string name="purchases">Покупки</string>
@@ -4015,4 +4015,25 @@
     <string name="track_has_no_altitude">Трек не содержит данных о высоте.</string>
     <string name="track_has_no_speed">Трек не содержит данных о скорости.</string>
     <string name="select_another_colorization">Выберите другой тип окраски.</string>
+    <string name="snap_to_road_descr">Значок текущего местоположения будет привязан к маршруту навигации</string>
+    <string name="track_recording_will_be_continued">Запись будет продолжена.</string>
+    <string name="select_segments">Выберите сегменты</string>
+    <string name="select_segments_description">%1$s содержит более одного сегмента, необходимо выбрать нужную часть для навигации.</string>
+    <string name="segments_count">Сегмент %1$d</string>
+    <string name="temporary_conditional_routing_descr">Использовать дорожные ограничения, которые сейчас активны на карте</string>
+    <string name="routing_attr_short_way_description">Оптимизированный более короткий маршрут (экономия топлива/энергии)</string>
+    <string name="map_orientation_threshold_descr">Не менять ориентацию карты, если скорость меньше порогового значения</string>
+    <string name="restart">Перезапустить</string>
+    <string name="shared_strings_all_regions">Все регионы</string>
+    <string name="track_recording_stop_without_saving">Остановить без сохранения</string>
+    <string name="track_recording_save_and_stop">Сохранить и остановить запись</string>
+    <string name="track_recording_title">Запись трека остановлена</string>
+    <string name="track_recording_description">Вы уверены, что хотите остановить запись\?
+\nВсе несохраненные данные будут потеряны.</string>
+    <string name="on_pause">На паузе</string>
+    <string name="routing_attr_height_obstacles_description">Позволяет избегать больших подъемов при навигации.</string>
+    <string name="quick_action_coordinates_widget_descr">Переключатель для отображения или скрытия виджета координат.</string>
+    <string name="select_category_descr">Выберите категорию или добавьте новую</string>
+    <string name="copy_poi_name">Копировать имя POI</string>
+    <string name="shared_string_interval">Интервал</string>
 </resources>
