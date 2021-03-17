@@ -3666,7 +3666,7 @@
     <string name="add_to_a_track">Voeg toe aan een track</string>
     <string name="add_segment_to_the_track">Voeg toe aan een trackbestand</string>
     <string name="simplified_track">Vereenvoudigde track</string>
-    <string name="simplified_track_description">Alleen de routelijn wordt opgeslagen, de waypoints worden verwijderd.</string>
+    <string name="simplified_track_description">Alleen de routetrack wordt opgeslagen, de waypoints worden verwijderd.</string>
     <string name="shared_string_done">Bewaar</string>
     <string name="reverse_route">Route omkeren</string>
     <string name="route_between_points_add_track_desc">Selecteer een track waaraan je een nieuw segment wil toevoegen.</string>
@@ -3676,9 +3676,9 @@
     <string name="plan_route_trim_after">Alles wegknippen na dit punt</string>
     <string name="plan_route_change_route_type_before">Wijzig het routetype voor</string>
     <string name="plan_route_change_route_type_after">Wijzig het routetype na</string>
-    <string name="release_3_8">• Bijgewerkt Plan een route functie: maakt het mogelijk om verschillende navigatietypes per segment te gebruiken en tracks op te nemen
+    <string name="release_3_8">• Bijgewerkte Plan een route functie: maakt het mogelijk om verschillende navigatietypes per segment te gebruiken en tracks te gebruiken
 \n
-\n • Nieuw menu voor tracks: selecteer kleur, dikte, weergeven van richtingspijlen, start / finish-pictogrammen.
+\n • Nieuw weergavemenu voor tracks: selecteer kleur, dikte, weergeven van richtingspijlen, start / finish-pictogrammen.
 \n
 \n • Verbeterde zichtbaarheid van fietsknooppunten.
 \n
@@ -3768,15 +3768,15 @@
     <string name="follow_track_descr">Kies een trackbestand om te volgen</string>
     <string name="select_another_track">Selecteer een andere track</string>
     <string name="navigate_to_track_descr">Navigeer vanaf mijn positie naar de track</string>
-    <string name="start_of_the_track">Track starten</string>
+    <string name="start_of_the_track">Begin van de track</string>
     <string name="nearest_point">Dichtstbijzijnde punt</string>
     <string name="attach_to_the_roads">Aan wegen koppelen</string>
     <string name="delete_address">Adres verwijderen</string>
-    <string name="add_address">Adres ingeven</string>
-    <string name="access_hint_enter_address">Adres ingeven</string>
+    <string name="add_address">Geef adres in</string>
+    <string name="access_hint_enter_address">Geef adres in</string>
     <string name="shared_string_file_name">Bestandsnaam</string>
     <string name="number_of_gpx_files_selected_pattern">%s trackbestanden geselecteerd</string>
-    <string name="disable_recording_once_app_killed_descrp">Zal trackregistratie onderbreken wanneer de app wordt uitgeschakeld (via recente apps). (OsmAnd-achtergrondindicatie verdwijnt uit de Android-berichtenbalk.)</string>
+    <string name="disable_recording_once_app_killed_descrp">Trackregistratie wordt onderbroken als de app wordt uitgeschakeld (via recente apps). (OsmAnd-achtergrondindicatie verdwijnt uit de Android-berichtenbalk.)</string>
     <string name="previous_segment">Vorig segment</string>
     <string name="all_previous_segments">Alle voorgaande segmenten</string>
     <string name="only_selected_segment_recalc">Alleen het geselecteerde segment wordt opnieuw berekend met het geselecteerde profiel.</string>
@@ -3786,7 +3786,7 @@
     <string name="one_point_error">Voeg ten minste twee punten toe.</string>
     <string name="shared_string_redo">Opnieuw doen</string>
     <string name="sort_last_modified">Laatst gewijzigd</string>
-    <string name="sort_name_descending">Naam: A – Z</string>
+    <string name="sort_name_descending">Naam: Z - A</string>
     <string name="sort_name_ascending">Naam: A – Z</string>
     <string name="start_finish_icons">Start/stop iconen</string>
     <string name="contour_lines_thanks">Bedankt voor het kopen van \'Contourlijnen\'</string>
@@ -3801,7 +3801,7 @@
     <string name="development">Ontwikkeling</string>
     <string name="use_live_public_transport">OsmAnd Live gegevens</string>
     <string name="use_live_routing">OsmAnd Live gegevens</string>
-    <string name="complex_routing_descr">Twee stappen routeberekening voor autonavigatie.</string>
+    <string name="complex_routing_descr">Twee-staps routeberekening voor autonavigatie.</string>
     <string name="use_native_pt">Eigen ontwikkeling van het openbaar vervoer</string>
     <string name="use_native_pt_desc">Schakel over naar Java (veilige) routeberekening voor het openbaar vervoer</string>
     <string name="perform_oauth_authorization">Inloggen via OAuth</string>
