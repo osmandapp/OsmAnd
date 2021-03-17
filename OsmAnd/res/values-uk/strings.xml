@@ -4028,9 +4028,9 @@
     <string name="updated">Оновлено: %s</string>
     <string name="last_time_checked">Востаннє перевірено: %s</string>
     <string name="update_frequency">Частота оновлень</string>
-    <string name="live_update_frequency_week_variant">Наявність оновлень мап перевірятиметься щотижня. Наступного разу%1$s в %2$s.</string>
-    <string name="live_update_frequency_hour_variant">Наявність оновлень мап перевірятиметься щогодини. Наступного разу%1$s в %2$s.</string>
-    <string name="live_update_frequency_day_variant">Наявність оновлень мап перевірятиметься щодня. Наступного разу%1$s в %2$s.</string>
+    <string name="live_update_frequency_week_variant">Наявність оновлень мап перевірятиметься щотижня. Наступного разу %1$s в %2$s.</string>
+    <string name="live_update_frequency_hour_variant">Наявність оновлень мап перевірятиметься щогодини. Наступного разу %1$s в %2$s.</string>
+    <string name="live_update_frequency_day_variant">Наявність оновлень мап перевірятиметься щодня. Наступного разу %1$s в %2$s.</string>
     <string name="delete_updates">Видалити оновлення</string>
     <string name="live_update_delete_updates_msg">Ви впевнені, що хочете видалити всі %s поточні оновлення\?</string>
     <string name="purchases">Покупки</string>
