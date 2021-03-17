@@ -331,7 +331,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		if (hasDataToSave() || wasTrackMonitored()) {
 			TripRecordingActiveBottomSheet.showInstance(fragmentManager, getCurrentTrack());
 		} else {
-			TripRecordingBottomSheet.showInstance(fragmentManager);
+			TripRecordingStartingBottomSheet.showInstance(fragmentManager);
 		}
 
 		/*final boolean wasTrackMonitored = settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
@@ -523,7 +523,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 			runnable.run();
 		} else if (map instanceof FragmentActivity) {
 			FragmentActivity activity = (FragmentActivity) map;
-			TripRecordingBottomSheet.showInstance(activity.getSupportFragmentManager());
+			TripRecordingStartingBottomSheet.showInstance(activity.getSupportFragmentManager());
 		}
 	}
 

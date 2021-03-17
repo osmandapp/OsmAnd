@@ -418,4 +418,5 @@
 	<dimen name="descriptionLineSpacingExtra">3sp</dimen>
 
 	<dimen name="list_item_triple_row_height">80dp</dimen>
+	<dimen name="button_triple_center_width">160dp</dimen>
 </resources>

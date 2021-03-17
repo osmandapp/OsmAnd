@@ -4,80 +4,96 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	android:layout_marginStart="@dimen/content_padding"
+	android:layout_marginLeft="@dimen/content_padding"
+	android:layout_marginEnd="@dimen/content_padding"
+	android:layout_marginRight="@dimen/content_padding"
 	android:baselineAligned="false"
 	android:gravity="center_vertical"
-	android:minHeight="@dimen/bottom_sheet_selected_item_title_height">
+	android:minHeight="@dimen/bottom_sheet_list_item_height">
 
-	<LinearLayout
-		android:id="@+id/basic_item_body"
+	<androidx.cardview.widget.CardView
+		android:id="@+id/compound_container"
 		android:layout_width="0dp"
-		android:layout_height="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginEnd="@dimen/content_padding_half"
+		android:layout_marginRight="@dimen/content_padding_half"
 		android:layout_weight="1"
-		android:background="?attr/selectableItemBackground"
-		android:paddingStart="@dimen/content_padding"
-		android:paddingLeft="@dimen/content_padding"
-		android:paddingEnd="@dimen/content_padding"
-		android:paddingRight="@dimen/content_padding">
+		android:gravity="center_vertical"
+		app:cardBackgroundColor="?attr/switch_button_active"
+		app:cardCornerRadius="4dp"
+		app:cardElevation="0dp">
 
 		<LinearLayout
-			android:layout_width="0dp"
-			android:layout_height="wrap_content"
-			android:layout_gravity="center_vertical"
-			android:layout_weight="1"
-			android:orientation="vertical">
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:background="?attr/selectableItemBackground"
+			android:orientation="horizontal">
 
-			<TextView
+			<net.osmand.plus.widgets.TextViewEx
 				android:id="@+id/title"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/content_padding"
+				android:layout_marginLeft="@dimen/content_padding"
+				android:layout_marginTop="@dimen/context_menu_first_line_top_margin"
+				android:layout_marginBottom="@dimen/context_menu_first_line_top_margin"
+				android:layout_weight="1"
+				android:ellipsize="end"
+				android:letterSpacing="@dimen/description_letter_spacing"
+				android:maxLines="1"
+				android:textColor="?attr/active_color_basic"
+				android:textSize="@dimen/default_desc_text_size"
+				app:typeface="@string/font_roboto_medium"
+				tools:text="Some title" />
+
+			<com.google.android.material.switchmaterial.SwitchMaterial
+				android:id="@+id/compound_button"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:ellipsize="end"
-				android:maxLines="1"
-				android:paddingTop="@dimen/content_padding_small"
-				android:paddingBottom="@dimen/content_padding"
-				android:textAppearance="@style/TextAppearance.ListItemTitle"
-				tools:text="Some title" />
+				android:layout_gravity="center_vertical"
+				android:layout_marginStart="@dimen/bottom_sheet_content_margin"
+				android:layout_marginLeft="@dimen/bottom_sheet_content_margin"
+				android:layout_marginEnd="@dimen/bottom_sheet_content_margin"
+				android:layout_marginRight="@dimen/bottom_sheet_content_margin"
+				android:clickable="false"
+				android:focusable="false"
+				android:focusableInTouchMode="false"
+				tools:checked="true" />
 
 		</LinearLayout>
 
-		<com.google.android.material.switchmaterial.SwitchMaterial
-			android:id="@+id/switch_button"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_gravity="center_vertical"
-			android:layout_marginStart="@dimen/bottom_sheet_content_margin"
-			android:layout_marginLeft="@dimen/bottom_sheet_content_margin"
-			android:clickable="false"
-			android:focusable="false"
-			android:focusableInTouchMode="false"
-			tools:checked="true" />
+	</androidx.cardview.widget.CardView>
 
-	</LinearLayout>
-
-	<LinearLayout
-		android:id="@+id/additional_button"
+	<androidx.cardview.widget.CardView
 		android:layout_width="wrap_content"
 		android:layout_height="match_parent"
-		android:orientation="horizontal">
+		app:cardBackgroundColor="?attr/switch_button_active"
+		app:cardCornerRadius="4dp"
+		app:cardElevation="0dp">
 
-		<View
-			android:layout_width="1dp"
+		<LinearLayout
+			android:id="@+id/additional_button"
+			android:layout_width="match_parent"
 			android:layout_height="match_parent"
-			android:layout_marginTop="@dimen/content_padding_half"
-			android:layout_marginBottom="@dimen/content_padding_half"
-			android:background="?attr/divider_color_basic" />
+			android:background="?android:attr/selectableItemBackground"
+			android:clickable="true"
+			android:focusable="true"
+			android:gravity="center">
 
-		<androidx.appcompat.widget.AppCompatImageView
-			android:id="@+id/icon_after_divider"
-			style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
-			android:layout_width="@dimen/favorites_icon_right_margin"
-			android:layout_height="@dimen/favorites_icon_right_margin"
-			android:layout_gravity="center"
-			android:layout_marginStart="@dimen/content_padding"
-			android:layout_marginLeft="@dimen/content_padding"
-			android:layout_marginEnd="@dimen/content_padding"
-			android:layout_marginRight="@dimen/content_padding"
-			app:srcCompat="@drawable/ic_action_track_line_bold_color" />
+			<androidx.appcompat.widget.AppCompatImageView
+				android:id="@+id/additional_button_icon"
+				android:layout_width="@dimen/favorites_icon_right_margin"
+				android:layout_height="@dimen/favorites_icon_right_margin"
+				android:layout_marginStart="@dimen/content_padding"
+				android:layout_marginLeft="@dimen/content_padding"
+				android:layout_marginEnd="@dimen/content_padding"
+				android:layout_marginRight="@dimen/content_padding"
+				app:srcCompat="@drawable/ic_action_track_line_bold_color"
+				tools:tint="?attr/active_color_basic" />
 
-	</LinearLayout>
+		</LinearLayout>
+
+	</androidx.cardview.widget.CardView>
 
 </LinearLayout>

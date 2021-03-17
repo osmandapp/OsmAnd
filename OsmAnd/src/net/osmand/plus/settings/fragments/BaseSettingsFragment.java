@@ -61,6 +61,7 @@ import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
 import net.osmand.plus.audionotes.MultimediaNotesFragment;
 import net.osmand.plus.development.DevelopmentSettingsFragment;
 import net.osmand.plus.monitoring.MonitoringSettingsFragment;
+import net.osmand.plus.monitoring.TripRecordingStartingBottomSheet;
 import net.osmand.plus.openplacereviews.OprSettingsFragment;
 import net.osmand.plus.osmedit.OsmEditingFragment;
 import net.osmand.plus.profiles.SelectAppModesBottomSheetDialogFragment;
@@ -85,6 +86,7 @@ import java.io.Serializable;
 import java.util.Set;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
+import static net.osmand.plus.monitoring.TripRecordingStartingBottomSheet.UPDATE_LOGGING_INTERVAL;
 
 public abstract class BaseSettingsFragment extends PreferenceFragmentCompat implements OnPreferenceChangeListener,
 		OnPreferenceClickListener, AppModeChangedListener, OnConfirmPreferenceChange {
@@ -288,6 +290,15 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 					activity.getWindow().setStatusBarColor(statusBarColor);
 				}
 			}
+		}
+	}
+
+	@Override
+	public void onDestroyView() {
+		super.onDestroyView();
+		Fragment target = getTargetFragment();
+		if (target instanceof TripRecordingStartingBottomSheet) {
+			((TripRecordingStartingBottomSheet) target).show(UPDATE_LOGGING_INTERVAL);
 		}
 	}
 
@@ -884,21 +895,37 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	}
 
 	public static boolean showInstance(FragmentActivity activity, SettingsScreenType screenType) {
-		return showInstance(activity, screenType, null);
+		return showInstance(activity, screenType, (ApplicationMode) null);
+	}
+
+	public static boolean showInstance(FragmentActivity activity, SettingsScreenType screenType, Fragment target) {
+		return showInstance(activity, screenType, null, target);
 	}
 
 	public static boolean showInstance(FragmentActivity activity, SettingsScreenType screenType, @Nullable ApplicationMode appMode) {
 		return showInstance(activity, screenType, appMode, new Bundle());
 	}
 
+	public static boolean showInstance(FragmentActivity activity, SettingsScreenType screenType, @Nullable ApplicationMode appMode, Fragment target) {
+		return showInstance(activity, screenType, appMode, new Bundle(), target);
+	}
+
 	public static boolean showInstance(FragmentActivity activity, SettingsScreenType screenType,
 									   @Nullable ApplicationMode appMode, @NonNull Bundle args) {
+		return showInstance(activity, screenType, appMode, args, null);
+	}
+
+	public static boolean showInstance(FragmentActivity activity, SettingsScreenType screenType,
+									   @Nullable ApplicationMode appMode, @NonNull Bundle args, @Nullable Fragment target) {
 		try {
 			Fragment fragment = Fragment.instantiate(activity, screenType.fragmentName);
 			if (appMode != null) {
 				args.putString(APP_MODE_KEY, appMode.getStringKey());
 			}
 			fragment.setArguments(args);
+			if (target != null) {
+				fragment.setTargetFragment(target, 0);
+			}
 			activity.getSupportFragmentManager().beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, screenType.fragmentName)
 					.addToBackStack(DRAWER_SETTINGS_ID + ".new")

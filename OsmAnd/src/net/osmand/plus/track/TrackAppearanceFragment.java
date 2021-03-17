@@ -37,7 +37,7 @@ import net.osmand.plus.dialogs.GpxAppearanceAdapter.AppearanceListItem;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter.GpxAppearanceAdapterType;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.monitoring.TripRecordingActiveBottomSheet;
-import net.osmand.plus.monitoring.TripRecordingBottomSheet;
+import net.osmand.plus.monitoring.TripRecordingStartingBottomSheet;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.settings.backend.CommonPreference;
@@ -398,8 +398,8 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	@Override
 	public void onContextMenuDismiss(@NonNull ContextMenuFragment fragment) {
 		Fragment target = getTargetFragment();
-		if (target instanceof TripRecordingBottomSheet) {
-			((TripRecordingBottomSheet) target).show();
+		if (target instanceof TripRecordingStartingBottomSheet) {
+			((TripRecordingStartingBottomSheet) target).show(UPDATE_TRACK_ICON);
 		} else if (target instanceof TripRecordingActiveBottomSheet) {
 			((TripRecordingActiveBottomSheet) target).show(UPDATE_TRACK_ICON);
 		}

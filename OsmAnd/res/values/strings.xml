@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="trip_recording_logging_interval_info">Logging interval set time period in which OsmAnd will ask for the current location position data.</string>
     <string name="select_another_colorization">Please select another type of colorization.</string>
     <string name="track_has_no_speed">The track does not contain speed data.</string>
     <string name="track_has_no_altitude">The track does not contain altitude data.</string>
