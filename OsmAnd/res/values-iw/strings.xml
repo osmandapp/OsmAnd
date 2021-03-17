@@ -4023,4 +4023,12 @@
     <string name="track_has_no_altitude">המסלול אינו מכיל נתוני גובה.</string>
     <string name="track_has_no_speed">המסלול אינו מכיל מהירות גבוהה.</string>
     <string name="select_another_colorization">נא לבחור סוג אחר של צביעה.</string>
+    <string name="restart">הפעלה מחדש</string>
+    <string name="shared_strings_all_regions">כל האזורים</string>
+    <string name="delete_number_files_question">למחוק %1$d קבצים\?</string>
+    <string name="track_recording_stop_without_saving">לעצור בלי לשמור</string>
+    <string name="track_recording_save_and_stop">לשמור ולעצור את ההקלטה</string>
+    <string name="track_recording_title">הקלטת המסלול נעצרה</string>
+    <string name="track_recording_description">לעצור את ההקלטה\?
+\nכל הנתונים שלא יישמרו יאבדו.</string>
 </resources>
