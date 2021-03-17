@@ -4043,9 +4043,9 @@
     <string name="latest_openstreetmap_update">Aktuelles OpenStreetMap Update verfügbar:</string>
     <string name="last_time_checked">Zuletzt geprüft: %s</string>
     <string name="update_frequency">Aktualisierungsintervall</string>
-    <string name="live_update_frequency_week_variant">Die Kartenaktualisierung wird wöchentlich überprüft. Das nächste Mal%1$s in %2$s.</string>
-    <string name="live_update_frequency_day_variant">Die Kartenaktualisierung wird täglich überprüft. Das nächste Mal%1$s in %2$s.</string>
-    <string name="live_update_frequency_hour_variant">Die Kartenaktualisierung wird stündlich überprüft. Das nächste Mal%1$s in %2$s.</string>
+    <string name="live_update_frequency_week_variant">Die Kartenaktualisierung wird wöchentlich überprüft. Das nächste Mal %1$s in %2$s.</string>
+    <string name="live_update_frequency_day_variant">Die Kartenaktualisierung wird täglich überprüft. Das nächste Mal %1$s in %2$s.</string>
+    <string name="live_update_frequency_hour_variant">Die Kartenaktualisierung wird stündlich überprüft. Das nächste Mal %1$s in %2$s.</string>
     <string name="live_update_delete_updates_msg">Sind Sie sicher, dass Sie alle %s Live-Updates löschen möchten\?</string>
     <string name="select_category_descr">Kategorie auswählen oder neue hinzufügen</string>
     <string name="rendering_attr_noNatureReserveBoundaries_description">Grenzen von Naturschutzgebieten, Schutzgebieten und Nationalparks ausblenden</string>
