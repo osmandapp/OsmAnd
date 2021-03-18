@@ -33,7 +33,7 @@ public class QuadRect {
 		return Math.min(this.left, this.right) <= Math.min(left, right)
 				&& Math.max(this.left, this.right) >= Math.max(left, right)
 				&& Math.min(this.top, this.bottom) <= Math.min(top, bottom)
-				&& Math.max(this.top, this.bottom) <= Math.max(top, bottom);
+				&& Math.max(this.top, this.bottom) >= Math.max(top, bottom);
 	}
 
 	public boolean contains(QuadRect box) {
