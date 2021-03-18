@@ -807,6 +807,13 @@ public class AndroidUtils {
 		return bitmap;
 	}
 
+	public static Bitmap createScaledBitmap(Context ctx, Drawable drawable, int dpWidth, int dpHeight) {
+		Bitmap src = drawableToBitmap(drawable);
+		Bitmap dst = Bitmap.createScaledBitmap(src, dpToPx(ctx, dpWidth), dpToPx(ctx, dpHeight), true);
+		src.recycle();
+		return dst;
+	}
+
 	public static Bitmap flipBitmapHorizontally(Bitmap source) {
 		Matrix matrix = new Matrix();
 		matrix.preScale(-1.0f, 1.0f, source.getWidth() / 2f, source.getHeight() / 2f);

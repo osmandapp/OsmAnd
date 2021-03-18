@@ -76,6 +76,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 	private int pointsToCalculateSize;
 	private CalculationMode lastCalculationMode = WHOLE_TRACK;
 	private ApplicationMode appMode = DEFAULT_APP_MODE;
+	private final Set<String> profileSet = new HashSet<>();
 
 	private SnapToRoadProgressListener progressListener;
 	private RouteCalculationProgress calculationProgress;
@@ -305,7 +306,8 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		for (WptPt point : allPoints) {
 			String profileType = point.getProfileType();
 			boolean isGap = point.isGap();
-			boolean plainPoint = Algorithms.isEmpty(profileType) || (isGap && Algorithms.isEmpty(prevProfileType));
+			boolean plainPoint = ApplicationMode.DEFAULT.getStringKey().equals(profileType)
+					|| Algorithms.isEmpty(profileType) || isGap && Algorithms.isEmpty(prevProfileType);
 			boolean routePoint = !plainPoint;
 			if (plain && plainPoint || route && routePoint) {
 				segment.add(point);
@@ -738,6 +740,12 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 				TrkSegment segmentForSnap = new TrkSegment();
 				for (int i = 0; i < segment.points.size() - 1; i++) {
 					Pair<WptPt, WptPt> pair = new Pair<>(segment.points.get(i), segment.points.get(i + 1));
+					if (!pair.first.isGap()) {
+						profileSet.add(pair.first.getProfileType());
+					}
+					if (!pair.second.isGap()) {
+						profileSet.add(pair.second.getProfileType());
+					}
 					RoadSegmentData data = this.roadSegmentData.get(pair);
 					List<WptPt> pts = data != null ? data.getPoints() : null;
 					if (pts != null) {
@@ -907,6 +915,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 	}
 
 	private void updateSegmentsForSnap(boolean both) {
+		profileSet.clear();
 		recreateSegments(beforeSegments = new ArrayList<>(),
 				beforeSegmentsForSnap = new ArrayList<>(), before.points, true);
 		if (both) {
@@ -916,6 +925,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 	}
 
 	private void updateSegmentsForSnap(boolean both, boolean calculateIfNeeded) {
+		profileSet.clear();
 		recreateSegments(beforeSegments = new ArrayList<>(),
 				beforeSegmentsForSnap = new ArrayList<>(), before.points, calculateIfNeeded);
 		if (both) {
@@ -1116,26 +1126,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 	}
 
 	public boolean hasMultipleProfiles() {
-		List<TrkSegment> allUserSegments = new ArrayList<>();
-		if (beforeSegments != null) {
-			allUserSegments.addAll(beforeSegments);
-		}
-		if (afterSegments != null) {
-			allUserSegments.addAll(afterSegments);
-		}
-
-		Set<String> profiles = new HashSet<>();
-		for (TrkSegment segment : allUserSegments) {
-			for (WptPt point : segment.points) {
-				if (!"gap".equals(point.getProfileType())) {
-					profiles.add(point.getProfileType());
-				}
-				if (profiles.size() >= 2) {
-					return true;
-				}
-			}
-		}
-		return false;
+		return profileSet.size() > 1;
 	}
 
 	@Override

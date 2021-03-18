@@ -278,16 +278,14 @@ public class Renderable {
 
         @Override
         protected void drawSolid(List<WptPt> points, Paint linePaint, Canvas canvas, RotatedTileBox tileBox) {
-            linePaint = new Paint(paint);
-
             QuadRect tileBounds = tileBox.getLatLonBounds();
             PathMeasure pathMeasure = new PathMeasure();
             Path path = new Path();
 
             WptPt prevPt = points.get(0);
             String currentProfile = getProfile(points);
-            linePaint.setColor(profileValues.get(currentProfile).first);
-            updateBorderPaint(linePaint.getColor(), linePaint.getStrokeWidth() + dpToPx(4));
+            paint.setColor(profileValues.get(currentProfile).first);
+            updateBorderPaint(paint.getColor(), paint.getStrokeWidth() + dpToPx(4));
 
             float lengthRemaining = getRemainingLength(tileBox, points);
 
@@ -301,7 +299,7 @@ public class Renderable {
                 path.lineTo(end.x, end.y);
                 if (arePointsInsideTile(currentPt, prevPt, tileBounds)) {
                     canvas.drawPath(path, borderPaint);
-                    canvas.drawPath(path, linePaint);
+                    canvas.drawPath(path, paint);
                 }
 
                 if (lengthRemaining >= 0) {
@@ -315,8 +313,8 @@ public class Renderable {
 
                 if (currentPt.hasProfile()) {
                     currentProfile = getProfile(points);
-                    linePaint.setColor(profileValues.get(currentProfile).first);
-                    updateBorderPaint(linePaint.getColor(), linePaint.getStrokeWidth() + dpToPx(2));
+                    paint.setColor(profileValues.get(currentProfile).first);
+                    updateBorderPaint(paint.getColor(), paint.getStrokeWidth() + dpToPx(2));
                     lengthRemaining = getRemainingLength(tileBox, points);
                 }
                 prevPt = currentPt;
@@ -409,7 +407,7 @@ public class Renderable {
             int idx = updateLeftIdx();
             WptPt userWpt = idx == -1 ? null : points.get(leftPtIdx);
             updateRightIdx();
-            return userWpt.getProfileType();
+            return userWpt == null ? "default" : userWpt.getProfileType();
         }
 
         private int updateLeftIdx() {
