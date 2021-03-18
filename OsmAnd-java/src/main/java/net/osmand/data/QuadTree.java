@@ -103,18 +103,16 @@ public class QuadTree<T> {
 	void splitBox(QuadRect node_extent, QuadRect[] n) {
 		// coord2d c=node_extent.center();
 
-		double width = node_extent.width();
-		double height = node_extent.height();
 
-		double lox = node_extent.left;
-		double loy = node_extent.top;
-		double hix = node_extent.right;
-		double hiy = node_extent.bottom;
+		double lx = node_extent.left;
+		double ly = node_extent.top;
+		double hx = node_extent.right;
+		double hy = node_extent.bottom;
 
-		n[0] = new QuadRect(lox, loy, lox + width * ratio, loy + height * ratio);
-		n[1] = new QuadRect(hix - width * ratio, loy, hix, loy + height * ratio);
-		n[2] = new QuadRect(lox, hiy - height * ratio, lox + width * ratio, hiy);
-		n[3] = new QuadRect(hix - width * ratio, hiy - height * ratio, hix, hiy);
+		n[0] = new QuadRect(lx, ly, lx + (hx - lx) * ratio, ly + (hy - ly) * ratio);
+		n[1] = new QuadRect(lx + (hx - lx) * (1 - ratio), ly, hx, ly + (hy - ly) * ratio);
+		n[2] = new QuadRect(lx, ly + (hy - ly) * (1 - ratio), lx + (hx - lx) * ratio, hy);
+		n[3] = new QuadRect(lx + (hx - lx) * (1 - ratio), ly + (hy - ly) * (1 - ratio), hx, hy);
 	}
 
 }
