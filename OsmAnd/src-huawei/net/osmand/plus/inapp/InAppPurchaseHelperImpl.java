@@ -267,7 +267,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 				InAppSubscription s = (InAppSubscription) inAppPurchase;
 				try {
 					s.setIntroductoryInfo(new InAppSubscriptionIntroductoryInfo(s, introductoryPrice,
-							introductoryPriceAmountMicros, introductoryPricePeriod, introductoryPriceCycles));
+							introductoryPriceAmountMicros, introductoryPricePeriod, String.valueOf(introductoryPriceCycles)));
 				} catch (ParseException e) {
 					LOG.error(e);
 				}
