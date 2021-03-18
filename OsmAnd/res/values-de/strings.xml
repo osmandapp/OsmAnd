@@ -675,8 +675,8 @@
     <string name="uploading_data">Daten hochladen …</string>
     <string name="uploading">Hochladen …</string>
     <string name="search_nothing_found">Kein Treffer</string>
-    <string name="searching">Suchen …</string>
-    <string name="searching_address">Adresse suchen …</string>
+    <string name="searching">Suche…</string>
+    <string name="searching_address">Suche Adresse…</string>
     <string name="search_osm_nominatim">Online-Suche mit OSM Nominatim</string>
     <string name="hint_search_online">Online-Suche: Hausnummer, Straße, Ort</string>
     <string name="search_offline_address">Offline-Suche</string>
