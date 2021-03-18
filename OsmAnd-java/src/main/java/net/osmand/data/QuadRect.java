@@ -41,11 +41,15 @@ public class QuadRect {
 	}
 
 	public static boolean intersects(QuadRect a, QuadRect b) {
-		return Math.min(a.left, a.right) < Math.max(b.left, b.right)
-				&& Math.max(a.left, a.right) > Math.min(b.left, b.right)
-				&& Math.min(a.bottom, a.top) < Math.max(b.bottom, b.top)
-				&& Math.max(a.bottom, a.top) > Math.min(b.bottom, b.top);
+		return Math.min(a.left, a.right) <= Math.max(b.left, b.right)
+				&& Math.max(a.left, a.right) >= Math.min(b.left, b.right)
+				&& Math.min(a.bottom, a.top) <= Math.max(b.bottom, b.top)
+				&& Math.max(a.bottom, a.top) >= Math.min(b.bottom, b.top);
 	}
+	
+	 public static boolean trivialOverlap(QuadRect a, QuadRect b) {
+		 return intersects(a, b);
+	 }
 
 	public double centerX() {
 		return (left + right) / 2;
