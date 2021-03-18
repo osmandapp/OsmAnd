@@ -4,12 +4,10 @@ import net.osmand.plus.OsmandApplication;
 
 public class InAppPurchasesImpl extends InAppPurchases {
 
-	private static final InAppSubscription[] LIVE_UPDATES_FREE = new InAppSubscription[] {};
-
 	public InAppPurchasesImpl(OsmandApplication ctx) {
 		super(ctx);
 		inAppPurchases = new InAppPurchase[] {};
-		liveUpdates = new LiveUpdatesInAppPurchasesFree();
+		liveUpdates = new EmptyLiveUpdatesList();
 	}
 
 	@Override
@@ -32,10 +30,10 @@ public class InAppPurchasesImpl extends InAppPurchases {
 		return false;
 	}
 
-	private static class LiveUpdatesInAppPurchasesFree extends InAppSubscriptionList {
+	private static class EmptyLiveUpdatesList extends InAppSubscriptionList {
 
-		public LiveUpdatesInAppPurchasesFree() {
-			super(LIVE_UPDATES_FREE);
+		public EmptyLiveUpdatesList() {
+			super(new InAppSubscription[] {});
 		}
 	}
 }
