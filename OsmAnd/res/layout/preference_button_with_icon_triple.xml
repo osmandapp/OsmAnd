@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
-	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:layout_marginStart="@dimen/content_padding"
@@ -17,7 +15,7 @@
 		layout="@layout/preference_button_with_icon"
 		android:layout_width="wrap_content"
 		android:layout_height="match_parent"
-		android:layout_weight="0.25"
+		android:layout_weight="0.1"
 		android:minWidth="@dimen/context_menu_top_right_button_min_width"
 		android:minHeight="@dimen/setting_list_item_large_height" />
 
@@ -28,7 +26,7 @@
 		android:layout_height="match_parent"
 		android:layout_marginStart="@dimen/content_padding_half"
 		android:layout_marginLeft="@dimen/content_padding_half"
-		android:layout_weight="0.5"
+		android:layout_weight="0.8"
 		android:minWidth="@dimen/button_triple_center_width"
 		android:minHeight="@dimen/setting_list_item_large_height" />
 
@@ -39,7 +37,7 @@
 		android:layout_height="match_parent"
 		android:layout_marginStart="@dimen/content_padding_half"
 		android:layout_marginLeft="@dimen/content_padding_half"
-		android:layout_weight="0.25"
+		android:layout_weight="0.1"
 		android:minWidth="@dimen/context_menu_top_right_button_min_width"
 		android:minHeight="@dimen/setting_list_item_large_height" />
 

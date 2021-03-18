@@ -4,12 +4,10 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Typeface;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -22,7 +20,6 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.slider.RangeSlider;
 
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -37,13 +34,13 @@ import net.osmand.plus.monitoring.TripRecordingActiveBottomSheet.ItemType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
-import net.osmand.plus.track.TrackAppearanceFragment;
 
 import static net.osmand.plus.UiUtilities.CompoundButtonType.GLOBAL;
 import static net.osmand.plus.monitoring.OsmandMonitoringPlugin.MINUTES;
 import static net.osmand.plus.monitoring.OsmandMonitoringPlugin.SECONDS;
 import static net.osmand.plus.monitoring.TripRecordingActiveBottomSheet.UPDATE_TRACK_ICON;
 import static net.osmand.plus.monitoring.TripRecordingActiveBottomSheet.createItem;
+import static net.osmand.plus.monitoring.TripRecordingActiveBottomSheet.createShowTrackItem;
 import static net.osmand.plus.monitoring.TripRecordingActiveBottomSheet.setShowOnMapBackground;
 import static net.osmand.plus.monitoring.TripRecordingActiveBottomSheet.updateTrackIcon;
 
@@ -60,6 +57,7 @@ public class TripRecordingStartingBottomSheet extends MenuBottomSheetDialogFragm
 	private CardView confirmContainer;
 	private SwitchCompat confirmCompound;
 	private TextView intervalValueView;
+	private LinearLayout showTrackContainer;
 	private LinearLayout intervalContainer;
 	private RangeSlider intervalSlider;
 
@@ -100,6 +98,7 @@ public class TripRecordingStartingBottomSheet extends MenuBottomSheetDialogFragm
 
 		confirmContainer = itemView.findViewById(R.id.confirm_container);
 		confirmCompound = confirmContainer.findViewById(R.id.confirm_compound_button);
+		UiUtilities.setupCompoundButton(confirmCompound, nightMode, GLOBAL);
 		updateGlobalRemember();
 		confirmContainer.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -111,42 +110,15 @@ public class TripRecordingStartingBottomSheet extends MenuBottomSheetDialogFragm
 			}
 		});
 
-		LinearLayout showTrackContainer = itemView.findViewById(R.id.show_track_on_map);
-
-		final CardView buttonShow = itemView.findViewById(R.id.compound_container);
-		TextView showTrackTitle = buttonShow.findViewById(R.id.title);
-		showTrackTitle.setText(R.string.show_track_on_map);
-		final CompoundButton showTrackCompound = buttonShow.findViewById(R.id.compound_button);
-		showTrackCompound.setChecked(app.getSelectedGpxHelper().getSelectedCurrentRecordingTrack() != null);
-		UiUtilities.setupCompoundButton(showTrackCompound, nightMode, GLOBAL);
-
-		LinearLayout buttonAppearance = showTrackContainer.findViewById(R.id.additional_button);
+		showTrackContainer = itemView.findViewById(R.id.show_track_on_map);
 		trackAppearanceIcon = showTrackContainer.findViewById(R.id.additional_button_icon);
-		updateTrackIcon(app, trackAppearanceIcon);
-		buttonAppearance.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				MapActivity mapActivity = getMapActivity();
-				if (mapActivity != null) {
-					hide();
-					SelectedGpxFile selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
-					TrackAppearanceFragment.showInstance(mapActivity, selectedGpxFile, TripRecordingStartingBottomSheet.this);
-				}
-			}
-		});
-		setShowOnMapBackground(buttonShow, showTrackCompound.isChecked(), nightMode);
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-			buttonShow.setBackgroundTintList(null);
-		}
-		buttonShow.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				boolean checked = !showTrackCompound.isChecked();
-				showTrackCompound.setChecked(checked);
-				app.getSelectedGpxHelper().selectGpxFile(app.getSavingTrackHelper().getCurrentGpx(), checked, false);
-				setShowOnMapBackground(buttonShow, checked, nightMode);
-			}
-		});
+		createShowTrackItem(app, getMapActivity(), nightMode, showTrackContainer, trackAppearanceIcon,
+				R.string.show_track_on_map, TripRecordingStartingBottomSheet.this, new Runnable() {
+					@Override
+					public void run() {
+						hide();
+					}
+				});
 
 		updateUpDownBtn();
 

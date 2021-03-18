@@ -66,25 +66,23 @@
 	</androidx.cardview.widget.CardView>
 
 	<androidx.cardview.widget.CardView
+		android:id="@+id/additional_button_container"
 		android:layout_width="wrap_content"
 		android:layout_height="match_parent"
-		app:cardBackgroundColor="?attr/switch_button_active"
 		app:cardCornerRadius="4dp"
-		app:cardElevation="0dp">
+		app:cardElevation="0dp"
+		tools:cardBackgroundColor="?attr/switch_button_active">
 
-		<LinearLayout
-			android:id="@+id/additional_button"
+		<FrameLayout
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
-			android:background="?android:attr/selectableItemBackground"
-			android:clickable="true"
-			android:focusable="true"
-			android:gravity="center">
+			android:background="?android:attr/selectableItemBackground">
 
 			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/additional_button_icon"
 				android:layout_width="@dimen/favorites_icon_right_margin"
 				android:layout_height="@dimen/favorites_icon_right_margin"
+				android:layout_gravity="center"
 				android:layout_marginStart="@dimen/content_padding"
 				android:layout_marginLeft="@dimen/content_padding"
 				android:layout_marginEnd="@dimen/content_padding"
@@ -92,7 +90,7 @@
 				app:srcCompat="@drawable/ic_action_track_line_bold_color"
 				tools:tint="?attr/active_color_basic" />
 
-		</LinearLayout>
+		</FrameLayout>
 
 	</androidx.cardview.widget.CardView>
 
