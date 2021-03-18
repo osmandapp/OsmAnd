@@ -137,6 +137,10 @@ public class Renderable {
             }
         }
 
+        protected AsynchronousResampler getCuller(double cullDistance) {
+            return new AsynchronousResampler.RamerDouglasPeucer(this, cullDistance);
+        }
+
         public void setRDP(List<WptPt> cull) {
             culled = cull;
         }
@@ -239,7 +243,7 @@ public class Renderable {
                 }
 
                 double cullDistance = Math.pow(2.0, segmentSize - zoom);    // segmentSize == epsilon
-                culler = new AsynchronousResampler.RamerDouglasPeucer(this, cullDistance);
+                culler = getCuller(cullDistance);
                 try {
                     culler.executeOnExecutor(THREAD_POOL_EXECUTOR, "");
                 } catch (RejectedExecutionException e) {
@@ -314,7 +318,7 @@ public class Renderable {
                 if (currentPt.hasProfile()) {
                     currentProfile = getProfile(points);
                     paint.setColor(profileValues.get(currentProfile).first);
-                    updateBorderPaint(paint.getColor(), paint.getStrokeWidth() + dpToPx(2));
+                    updateBorderPaint(paint.getColor(), paint.getStrokeWidth() + dpToPx(4));
                     lengthRemaining = getRemainingLength(tileBox, points);
                 }
                 prevPt = currentPt;
@@ -331,7 +335,6 @@ public class Renderable {
                     if (tileBox.containsPoint(center.x, center.y, dpToPx(20)))
                     drawProfileCircle(canvas, center, profile);
                 }
-
             }
         }
 
@@ -449,7 +452,8 @@ public class Renderable {
         }
 
         @Override
-        public void startCuller(double newZoom) {
+        protected AsynchronousResampler getCuller(double cullDistance) {
+            return new AsynchronousResampler.MultiProfileRamerDouglasPeucer(this, cullDistance);
         }
     }
 

@@ -34,7 +34,8 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
             this.epsilon = epsilon;
         }
 
-        @Override protected String doInBackground(String... params) {
+        @Override
+        protected String doInBackground(String... params) {
 
             int nsize = rs.points.size();
             if (nsize > 0) {
@@ -53,7 +54,7 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
             return null;
         }
 
-        private void cullRamerDouglasPeucer(boolean survivor[], int start, int end) {
+        protected void cullRamerDouglasPeucer(boolean survivor[], int start, int end) {
 
             double dmax = Double.NEGATIVE_INFINITY;
             int index = -1;
@@ -75,6 +76,32 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
             } else {
                 survivor[end] = true;
             }
+        }
+    }
+
+    public static class MultiProfileRamerDouglasPeucer extends RamerDouglasPeucer {
+
+        public MultiProfileRamerDouglasPeucer(Renderable.RenderableSegment rs, double epsilon) {
+            super(rs, epsilon);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            int nsize = rs.points.size();
+            if (nsize > 0) {
+                boolean survivor[] = new boolean[nsize];
+                cullRamerDouglasPeucer(survivor, 0, nsize - 1);
+                if (!isCancelled()) {
+                    culled = new ArrayList<>();
+                    survivor[0] = true;
+                    for (int i = 0; i < nsize; i++) {
+                        if (survivor[i] || rs.points.get(i).hasProfile()) {
+                            culled.add(rs.points.get(i));
+                        }
+                    }
+                }
+            }
+            return null;
         }
     }
 }
