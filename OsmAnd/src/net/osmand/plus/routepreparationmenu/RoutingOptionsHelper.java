@@ -250,10 +250,10 @@ public class RoutingOptionsHelper {
 						Location firstLoc = ps.get(0);
 						LatLon firstLatLon = new LatLon(firstLoc.getLatitude(), firstLoc.getLongitude());
 						LatLon endLocation = endPoint != null ? endPoint.point : new LatLon(lastLoc.getLatitude(), lastLoc.getLongitude());
-						LatLon startLoc = selected ? firstLatLon : (pointToNavigate != null ? pointToNavigate.point : firstLatLon);
-                    	tg.navigateToPoint(endLocation, false, -1);
+						LatLon startLocation = selected ? firstLatLon : (pointToNavigate != null ? pointToNavigate.point : firstLatLon);
+						tg.navigateToPoint(endLocation, false, -1);
 						if (pointToStart != null) {
-							tg.setStartPoint(startLoc, false, null);
+							tg.setStartPoint(startLocation, false, null);
 						}
 						tg.updateRouteAndRefresh(true);
 					} else {
