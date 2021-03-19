@@ -23,7 +23,7 @@ public class Version {
 		return getBuildFlavor().contains("huawei");
 	}
 
-	private static boolean isAmazon() {
+	public static boolean isAmazon() {
 		return getBuildFlavor().contains("amazon");
 	}
 
