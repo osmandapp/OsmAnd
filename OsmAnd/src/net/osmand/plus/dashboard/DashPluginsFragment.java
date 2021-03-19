@@ -21,6 +21,7 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.PluginsFragment;
 import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
+import net.osmand.plus.chooseplan.ChoosePlanDialogFragment.ChoosePlanDialogType;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
@@ -55,7 +56,7 @@ public class DashPluginsFragment extends DashBaseFragment {
 				if (plugin instanceof SRTMPlugin) {
 					FragmentManager fragmentManager = getFragmentManager();
 					if (fragmentManager != null) {
-						ChoosePlanDialogFragment.showHillshadeSrtmPluginInstance(fragmentManager);
+						ChoosePlanDialogFragment.showDialogInstance(getMyApplication(), fragmentManager, ChoosePlanDialogType.HILLSHADE_SRTM_PLUGIN);
 					}
 				} else {
 					startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL())));

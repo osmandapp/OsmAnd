@@ -35,6 +35,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.chooseplan.ChoosePlanDialogFragment.ChoosePlanDialogType;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
@@ -213,7 +214,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 				subscriptionsButton.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						ChoosePlanDialogFragment.showOsmLiveInstance(getActivity().getSupportFragmentManager());
+						ChoosePlanDialogFragment.showDialogInstance(app, getActivity().getSupportFragmentManager(), ChoosePlanDialogType.OSM_LIVE);
 					}
 				});
 				if (isDonationSupported()) {
@@ -249,7 +250,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 					public void onClick(View v) {
 						FragmentActivity activity = getActivity();
 						if (activity != null) {
-							ChoosePlanDialogFragment.showOsmLiveInstance(activity.getSupportFragmentManager());
+							ChoosePlanDialogFragment.showDialogInstance(app, activity.getSupportFragmentManager(), ChoosePlanDialogType.OSM_LIVE);
 						}
 					}
 				});

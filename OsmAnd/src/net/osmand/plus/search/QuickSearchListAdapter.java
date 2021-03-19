@@ -10,12 +10,9 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
@@ -32,9 +29,9 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
 import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
-import net.osmand.plus.search.listitems.QuickSearchBannerListItem;
-import net.osmand.plus.search.listitems.QuickSearchFreeBannerListItem;
+import net.osmand.plus.chooseplan.ChoosePlanDialogFragment.ChoosePlanDialogType;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.search.listitems.QuickSearchBannerListItem;
 import net.osmand.plus.search.listitems.QuickSearchHeaderListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItemType;
@@ -50,9 +47,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import static net.osmand.plus.search.listitems.QuickSearchBannerListItem.ButtonItem;
 import static net.osmand.plus.search.listitems.QuickSearchBannerListItem.INVALID_ID;
 import static net.osmand.search.core.ObjectType.POI_TYPE;
-import static net.osmand.plus.search.listitems.QuickSearchBannerListItem.ButtonItem;
 
 public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 
@@ -265,8 +262,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 				btnGet.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						ChoosePlanDialogFragment.showWikipediaInstance(
-								activity.getSupportFragmentManager());
+						ChoosePlanDialogFragment.showDialogInstance(app, activity.getSupportFragmentManager(), ChoosePlanDialogType.WIKIPEDIA);
 					}
 				});
 			}

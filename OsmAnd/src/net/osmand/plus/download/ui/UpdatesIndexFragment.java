@@ -24,6 +24,7 @@ import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.chooseplan.ChoosePlanDialogFragment.ChoosePlanDialogType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.base.OsmAndListFragment;
@@ -190,7 +191,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 		if (listAdapter.isShowOsmLiveBanner() && position == 0) {
 			DownloadActivity activity = getMyActivity();
 			if (activity != null) {
-				ChoosePlanDialogFragment.showOsmLiveInstance(activity.getSupportFragmentManager());
+				ChoosePlanDialogFragment.showDialogInstance(activity.getMyApplication(), activity.getSupportFragmentManager(), ChoosePlanDialogType.OSM_LIVE);
 			}
 		} else {
 			final IndexItem e = (IndexItem) getListAdapter().getItem(position);

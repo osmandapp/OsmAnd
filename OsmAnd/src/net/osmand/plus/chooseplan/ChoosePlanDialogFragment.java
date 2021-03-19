@@ -5,6 +5,8 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -27,6 +29,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -34,7 +37,6 @@ import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
@@ -48,6 +50,7 @@ import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscriptionIntroductoryInfo;
 import net.osmand.plus.liveupdates.SubscriptionFragment;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
@@ -709,57 +712,41 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 		}
 	}
 
-	public static void showFreeVersionInstance(@NonNull FragmentManager fm) {
-		try {
-			ChoosePlanFreeBannerDialogFragment fragment = new ChoosePlanFreeBannerDialogFragment();
-			fragment.show(fm, ChoosePlanFreeBannerDialogFragment.TAG);
-		} catch (RuntimeException e) {
-			LOG.error("showFreeVersionInstance", e);
+	public enum ChoosePlanDialogType {
+
+		FREE_VERSION("showFreeVersionInstance", ChoosePlanFreeBannerDialogFragment.TAG, ChoosePlanFreeBannerDialogFragment.class),
+		WIKIPEDIA("showWikipediaInstance", ChoosePlanWikipediaDialogFragment.TAG, ChoosePlanWikipediaDialogFragment.class),
+		WIKIVOYAGE("showWikivoyageInstance", ChoosePlanWikivoyageDialogFragment.TAG, ChoosePlanWikivoyageDialogFragment.class),
+		SEA_DEPTH_MAPS("showSeaDepthMapsInstance", ChoosePlanSeaDepthMapsDialogFragment.TAG, ChoosePlanSeaDepthMapsDialogFragment.class),
+		HILLSHADE_SRTM_PLUGIN("showHillshadeSrtmPluginInstance", ChoosePlanHillshadeSrtmDialogFragment.TAG, ChoosePlanHillshadeSrtmDialogFragment.class),
+		OSM_LIVE("showOsmLiveInstance", ChoosePlanOsmLiveBannerDialogFragment.TAG, ChoosePlanOsmLiveBannerDialogFragment.class);
+
+		private final String tag;
+		private final String errorName;
+		private final Class<? extends ChoosePlanDialogFragment> fragmentClass;
+
+		ChoosePlanDialogType(String errorName, String tag, Class<? extends ChoosePlanDialogFragment> fragmentClass) {
+			this.tag = tag;
+			this.errorName = errorName;
+			this.fragmentClass = fragmentClass;
 		}
 	}
 
-	public static void showWikipediaInstance(@NonNull FragmentManager fm) {
-		try {
-			ChoosePlanWikipediaDialogFragment fragment = new ChoosePlanWikipediaDialogFragment();
-			fragment.show(fm, ChoosePlanWikipediaDialogFragment.TAG);
-		} catch (RuntimeException e) {
-			LOG.error("showWikipediaInstance", e);
-		}
-	}
-
-	public static void showWikivoyageInstance(@NonNull FragmentManager fm) {
-		try {
-			ChoosePlanWikivoyageDialogFragment fragment = new ChoosePlanWikivoyageDialogFragment();
-			fragment.show(fm, ChoosePlanWikivoyageDialogFragment.TAG);
-		} catch (RuntimeException e) {
-			LOG.error("showWikivoyageInstance", e);
-		}
-	}
-
-	public static void showSeaDepthMapsInstance(@NonNull FragmentManager fm) {
-		try {
-			ChoosePlanSeaDepthMapsDialogFragment fragment = new ChoosePlanSeaDepthMapsDialogFragment();
-			fragment.show(fm, ChoosePlanSeaDepthMapsDialogFragment.TAG);
-		} catch (RuntimeException e) {
-			LOG.error("showSeaDepthMapsInstance", e);
-		}
-	}
-
-	public static void showHillshadeSrtmPluginInstance(@NonNull FragmentManager fm) {
-		try {
-			ChoosePlanHillshadeSrtmDialogFragment fragment = new ChoosePlanHillshadeSrtmDialogFragment();
-			fragment.show(fm, ChoosePlanHillshadeSrtmDialogFragment.TAG);
-		} catch (RuntimeException e) {
-			LOG.error("showHillshadeSrtmPluginInstance", e);
-		}
-	}
-
-	public static void showOsmLiveInstance(@NonNull FragmentManager fm) {
-		try {
-			ChoosePlanOsmLiveBannerDialogFragment fragment = new ChoosePlanOsmLiveBannerDialogFragment();
-			fragment.show(fm, ChoosePlanOsmLiveBannerDialogFragment.TAG);
-		} catch (RuntimeException e) {
-			LOG.error("showOsmLiveInstance", e);
+	public static void showDialogInstance(@NonNull OsmandApplication app, @NonNull FragmentManager manager,
+										  @NonNull ChoosePlanDialogType dialogType) {
+		if (Version.isAmazon() && !Version.isPaidVersion(app)) {
+			Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Version.getUrlWithUtmRef(app, "net.osmand.plus")));
+			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			if (AndroidUtils.isIntentSafe(app, intent)) {
+				app.startActivity(intent);
+			}
+		} else {
+			try {
+				ChoosePlanDialogFragment fragment = (ChoosePlanDialogFragment) Fragment.instantiate(app, dialogType.fragmentClass.getName());
+				fragment.show(manager, dialogType.tag);
+			} catch (RuntimeException e) {
+				LOG.error(dialogType.errorName, e);
+			}
 		}
 	}
 }
