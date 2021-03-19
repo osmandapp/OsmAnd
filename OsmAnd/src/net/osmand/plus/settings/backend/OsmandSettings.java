@@ -84,6 +84,7 @@ import java.util.StringTokenizer;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONFIGURE_MAP_ITEM_ID_SCHEME;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ACTIONS;
+import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
 
 public class OsmandSettings {
 
@@ -998,7 +999,7 @@ public class OsmandSettings {
 		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.CAR, "car");
 		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.BICYCLE, "bicycle");
 		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.PEDESTRIAN, "pedestrian");
-		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.PUBLIC_TRANSPORT, "public_transport");
+		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.PUBLIC_TRANSPORT, PUBLIC_TRANSPORT_KEY);
 		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.BOAT, "boat");
 		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.AIRCRAFT, "STRAIGHT_LINE_MODE");
 		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.SKI, "ski");

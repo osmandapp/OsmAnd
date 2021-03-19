@@ -10,8 +10,6 @@ import net.osmand.router.GeneralRouter.RouteDataObjectAttribute;
 
 public class TransportRoutingConfiguration {
 
-	public static final String KEY = "public_transport";
-	
 	public int ZOOM_TO_LOAD_TILES = 15;
 	
 	public int walkRadius = 1500; // ? 3000
