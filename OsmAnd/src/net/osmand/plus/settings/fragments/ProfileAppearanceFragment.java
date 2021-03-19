@@ -74,6 +74,7 @@ import java.util.List;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILES_LIST_UPDATED_ARG;
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILE_KEY_ARG;
+import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
 
 public class ProfileAppearanceFragment extends BaseSettingsFragment implements OnSelectProfileCallback, CardListener, ColorPickerListener {
 
@@ -91,6 +92,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 	private static final String LOCATION_ICON_ITEMS = "location_icon_items";
 	private static final String SELECT_NAV_ICON = "select_nav_icon";
 	private static final String NAV_ICON_ITEMS = "nav_icon_items";
+	private static final String CUSTOMIZE_ROUTE_LINE = "customize_route_line";
 
 	private static final String PROFILE_NAME_KEY = "profile_name_key";
 	private static final String PROFILE_STRINGKEY_KEY = "profile_stringkey_key";
@@ -235,10 +237,13 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		findPreference(SELECT_ICON).setIconSpaceReserved(false);
 		findPreference(SELECT_LOCATION_ICON).setIconSpaceReserved(false);
 		findPreference(SELECT_NAV_ICON).setIconSpaceReserved(false);
+		findPreference(CUSTOMIZE_ROUTE_LINE).setIcon(
+				getIcon(R.drawable.ic_action_route_distance, getActiveColorRes()));
 		if (getSelectedAppMode().equals(ApplicationMode.DEFAULT) && !isNewProfile) {
 			findPreference(SELECT_ICON).setVisible(false);
 			findPreference(ICON_ITEMS).setVisible(false);
 		}
+		updateRouteLinePreference();
 	}
 
 	@SuppressLint("InlinedApi")
@@ -709,11 +714,21 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		changedProfile.routingProfile = changedProfile.parent.getRoutingProfile();
 		changedProfile.routeService = changedProfile.parent.getRouteService();
 		this.isBaseProfileImported = isBaseProfileImported;
+		updateRouteLinePreference();
 	}
 
 	private void setupBaseProfileView(String stringKey) {
 		ApplicationMode mode = ApplicationMode.valueOfStringKey(stringKey, ApplicationMode.DEFAULT);
 		baseProfileName.setText(Algorithms.capitalizeFirstLetter(mode.toHumanString()));
+	}
+
+	private void updateRouteLinePreference() {
+		Preference preference = findPreference(CUSTOMIZE_ROUTE_LINE);
+		if (preference != null) {
+			boolean isDefaultProfile = getSelectedAppMode().equals(ApplicationMode.DEFAULT);
+			boolean isPublicTransport = PUBLIC_TRANSPORT_KEY.equals(changedProfile.routingProfile);
+			preference.setVisible(!isDefaultProfile && !isPublicTransport);
+		}
 	}
 
 	private boolean checkProfileName() {
@@ -965,6 +980,19 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 			updatePreference(findPreference(NAV_ICON_ITEMS));
 			setVerticalScrollBarEnabled(true);
 		}
+	}
+
+	@Override
+	public boolean onPreferenceClick(Preference preference) {
+		String prefId = preference.getKey();
+		if (CUSTOMIZE_ROUTE_LINE.equals(prefId)) {
+			MapActivity mapActivity = getMapActivity();
+			ApplicationMode appMode = getSelectedAppMode();
+			if (mapActivity != null && appMode != null) {
+				RouteLineAppearanceFragment.showInstance(mapActivity, appMode, this);
+			}
+		}
+		return super.onPreferenceClick(preference);
 	}
 
 	@Override
