@@ -72,13 +72,6 @@ public class TripRecordingBottomFragment extends MenuBottomSheetDialogFragment {
 	private GpxBlockStatisticsBuilder blockStatisticsBuilder;
 
 	private SelectedGpxFile selectedGpxFile;
-
-	private View statusContainer;
-	private LinearLayout showTrackContainer;
-	private AppCompatImageView trackAppearanceIcon;
-	private View buttonSave;
-	private GpxBlockStatisticsBuilder blockStatisticsBuilder;
-
 	private final Handler handler = new Handler();
 	private Runnable updatingGPS;
 
