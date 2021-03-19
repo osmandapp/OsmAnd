@@ -202,18 +202,32 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 				canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 			}
 		}
-	
+
 	}
 
 	private boolean isPlanRouteGraphsAvailable() {
-		if (view.getContext() instanceof MapActivity) {
-			MapActivity mapActivity = (MapActivity) view.getContext();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
 			MeasurementToolFragment fragment = mapActivity.getMeasurementToolFragment();
 			if (fragment != null) {
 				return fragment.hasVisibleGraph();
 			}
 		}
 		return false;
+	}
+
+	public boolean isInRouteLineAppearanceMode() {
+		MapActivity mapActivity = getMapActivity();
+		return mapActivity != null
+				&& mapActivity.getRouteLineAppearanceFragment() != null
+				&& mapActivity.getRouteLineAppearanceFragment().isVisible();
+	}
+
+	private MapActivity getMapActivity() {
+		if (view.getContext() instanceof MapActivity) {
+			return (MapActivity) view.getContext();
+		}
+		return null;
 	}
 
 	private void updateAttrs(DrawSettings settings, RotatedTileBox tileBox) {
@@ -636,12 +650,12 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 
 	@Override
 	public boolean disableSingleTap() {
-		return false;
+		return isInRouteLineAppearanceMode();
 	}
 
 	@Override
 	public boolean disableLongPressOnMap() {
-		return false;
+		return isInRouteLineAppearanceMode();
 	}
 
 	@Override
