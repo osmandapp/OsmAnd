@@ -41,13 +41,16 @@ import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
+import net.osmand.plus.track.TrackMenuFragment;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
 
+import java.io.File;
 import java.lang.ref.WeakReference;
+import java.util.Collections;
 import java.util.List;
 
 import static net.osmand.plus.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
@@ -329,9 +332,9 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	public void controlDialog(final Activity activity, final boolean showTrackSelection) {
 		FragmentManager fragmentManager = ((FragmentActivity) activity).getSupportFragmentManager();
 		if (hasDataToSave() || wasTrackMonitored()) {
-			TripRecordingActiveBottomSheet.showInstance(fragmentManager, getCurrentTrack());
+			TripRecordingBottomFragment.showInstance(fragmentManager, getCurrentTrack());
 		} else {
-			TripRecordingStartingBottomSheet.showInstance(fragmentManager);
+			TripRecordingStartingBottomFragment.showInstance(fragmentManager);
 		}
 
 		/*final boolean wasTrackMonitored = settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
@@ -436,16 +439,22 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	}
 
 	public void saveCurrentTrack() {
-		saveCurrentTrack(null, null);
+		saveCurrentTrack(null, null, true, false);
 	}
 
 	public void saveCurrentTrack(@Nullable final Runnable onComplete) {
-		saveCurrentTrack(onComplete, null);
+		saveCurrentTrack(onComplete, null, true, false);
 	}
 
 	public void saveCurrentTrack(@Nullable final Runnable onComplete, @Nullable Activity activity) {
-		stopRecording();
+		saveCurrentTrack(onComplete, activity, true, false);
+	}
 
+	public void saveCurrentTrack(@Nullable final Runnable onComplete, @Nullable Activity activity,
+								 final boolean stopRecording, final boolean openTrack) {
+		if (stopRecording) {
+			stopRecording();
+		}
 		final WeakReference<Activity> activityRef = activity != null ? new WeakReference<>(activity) : null;
 
 		app.getTaskManager().runInBackground(new OsmAndTaskRunnable<Void, Void, SaveGpxResult>() {
@@ -461,7 +470,9 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				try {
 					SavingTrackHelper helper = app.getSavingTrackHelper();
 					SaveGpxResult result = helper.saveDataToGpx(app.getAppCustomization().getTracksDir());
-					helper.close();
+					if (stopRecording) {
+						helper.close();
+					}
 					return result;
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -474,10 +485,31 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				isSaving = false;
 				app.getNotificationHelper().refreshNotifications();
 				updateControl();
-				if (activityRef != null && !Algorithms.isEmpty(result.getFilenames())) {
-					final Activity a = activityRef.get();
-					if (a instanceof FragmentActivity && !a.isFinishing()) {
-						SaveGPXBottomSheetFragment.showInstance(((FragmentActivity) a).getSupportFragmentManager(), result.getFilenames());
+
+				File file = null;
+				File dir = app.getAppCustomization().getTracksDir();
+				File[] children = dir.listFiles();
+				if (children != null && !Algorithms.isEmpty(result.getFilenames())) {
+					SavingTrackHelper helper = app.getSavingTrackHelper();
+					for (File child : children) {
+						if (child.getName().startsWith(result.getFilenames().get(0))
+								&& child.lastModified() == helper.getLastTimeFileSaved()) {
+							file = child;
+						}
+					}
+				}
+				if (file != null && file.exists()) {
+					if (!openTrack) {
+						if (activityRef != null) {
+							final Activity a = activityRef.get();
+							if (a instanceof FragmentActivity && !a.isFinishing()) {
+								List<String> singleName = Collections.singletonList(Algorithms.getFileNameWithoutExtension(file));
+								SaveGPXBottomSheetFragment.showInstance(((FragmentActivity) a)
+										.getSupportFragmentManager(), singleName);
+							}
+						}
+					} else {
+						TrackMenuFragment.openTrack(mapActivity, file, null);
 					}
 				}
 
@@ -523,7 +555,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 			runnable.run();
 		} else if (map instanceof FragmentActivity) {
 			FragmentActivity activity = (FragmentActivity) map;
-			TripRecordingStartingBottomSheet.showInstance(activity.getSupportFragmentManager());
+			TripRecordingStartingBottomFragment.showInstance(activity.getSupportFragmentManager());
 		}
 	}
 

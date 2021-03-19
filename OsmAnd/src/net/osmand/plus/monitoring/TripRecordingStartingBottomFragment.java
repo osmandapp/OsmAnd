@@ -29,21 +29,21 @@ import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.monitoring.TripRecordingActiveBottomSheet.ItemType;
+import net.osmand.plus.monitoring.TripRecordingBottomFragment.ItemType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 
 import static net.osmand.plus.monitoring.OsmandMonitoringPlugin.MINUTES;
 import static net.osmand.plus.monitoring.OsmandMonitoringPlugin.SECONDS;
-import static net.osmand.plus.monitoring.TripRecordingActiveBottomSheet.UPDATE_TRACK_ICON;
-import static net.osmand.plus.monitoring.TripRecordingActiveBottomSheet.createItem;
-import static net.osmand.plus.monitoring.TripRecordingActiveBottomSheet.createShowTrackItem;
-import static net.osmand.plus.monitoring.TripRecordingActiveBottomSheet.updateTrackIcon;
+import static net.osmand.plus.monitoring.TripRecordingBottomFragment.UPDATE_TRACK_ICON;
+import static net.osmand.plus.monitoring.TripRecordingBottomFragment.createItem;
+import static net.osmand.plus.monitoring.TripRecordingBottomFragment.createShowTrackItem;
+import static net.osmand.plus.monitoring.TripRecordingBottomFragment.updateTrackIcon;
 
-public class TripRecordingStartingBottomSheet extends MenuBottomSheetDialogFragment {
+public class TripRecordingStartingBottomFragment extends MenuBottomSheetDialogFragment {
 
-	public static final String TAG = TripRecordingStartingBottomSheet.class.getSimpleName();
+	public static final String TAG = TripRecordingStartingBottomFragment.class.getSimpleName();
 	public static final String UPDATE_LOGGING_INTERVAL = "update_logging_interval";
 
 	private OsmandApplication app;
@@ -52,7 +52,6 @@ public class TripRecordingStartingBottomSheet extends MenuBottomSheetDialogFragm
 	private AppCompatImageView upDownBtn;
 	private AppCompatImageView trackAppearanceIcon;
 	private TextView intervalValueView;
-	private LinearLayout showTrackContainer;
 	private LinearLayout intervalContainer;
 	private RangeSlider intervalSlider;
 
@@ -60,7 +59,7 @@ public class TripRecordingStartingBottomSheet extends MenuBottomSheetDialogFragm
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager) {
 		if (!fragmentManager.isStateSaved()) {
-			TripRecordingStartingBottomSheet fragment = new TripRecordingStartingBottomSheet();
+			TripRecordingStartingBottomFragment fragment = new TripRecordingStartingBottomFragment();
 			fragment.show(fragmentManager, TAG);
 		}
 	}
@@ -91,10 +90,10 @@ public class TripRecordingStartingBottomSheet extends MenuBottomSheetDialogFragm
 		intervalSlider = itemView.findViewById(R.id.interval_slider);
 		updateIntervalValue();
 
-		showTrackContainer = itemView.findViewById(R.id.show_track_on_map);
+		LinearLayout showTrackContainer = itemView.findViewById(R.id.show_track_on_map);
 		trackAppearanceIcon = showTrackContainer.findViewById(R.id.additional_button_icon);
 		createShowTrackItem(app, getMapActivity(), nightMode, showTrackContainer, trackAppearanceIcon,
-				R.string.shared_string_show_on_map, TripRecordingStartingBottomSheet.this, new Runnable() {
+				R.string.shared_string_show_on_map, TripRecordingStartingBottomFragment.this, new Runnable() {
 					@Override
 					public void run() {
 						hide();
@@ -104,6 +103,7 @@ public class TripRecordingStartingBottomSheet extends MenuBottomSheetDialogFragm
 		updateUpDownBtn();
 
 		CardView cardLeft = itemView.findViewById(R.id.button_left);
+
 		createItem(app, nightMode, cardLeft, ItemType.CANCEL, true, null);
 		cardLeft.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -113,6 +113,7 @@ public class TripRecordingStartingBottomSheet extends MenuBottomSheetDialogFragm
 		});
 
 		CardView cardCenter = itemView.findViewById(R.id.button_center);
+
 		createItem(app, nightMode, cardCenter, ItemType.START_RECORDING, true, null);
 		cardCenter.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -122,6 +123,7 @@ public class TripRecordingStartingBottomSheet extends MenuBottomSheetDialogFragm
 		});
 
 		CardView cardRight = itemView.findViewById(R.id.button_right);
+
 		createItem(app, nightMode, cardRight, ItemType.SETTINGS, true, null);
 		cardRight.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -129,7 +131,7 @@ public class TripRecordingStartingBottomSheet extends MenuBottomSheetDialogFragm
 				MapActivity mapActivity = getMapActivity();
 				if (mapActivity != null) {
 					hide();
-					BaseSettingsFragment.showInstance(mapActivity, SettingsScreenType.MONITORING_SETTINGS, TripRecordingStartingBottomSheet.this);
+					BaseSettingsFragment.showInstance(mapActivity, SettingsScreenType.MONITORING_SETTINGS, TripRecordingStartingBottomFragment.this);
 				}
 			}
 		});
@@ -214,7 +216,7 @@ public class TripRecordingStartingBottomSheet extends MenuBottomSheetDialogFragm
 		app.startNavigationService(NavigationService.USED_BY_GPX);
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			TripRecordingActiveBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), helper.getCurrentTrack());
+			TripRecordingBottomFragment.showInstance(mapActivity.getSupportFragmentManager(), helper.getCurrentTrack());
 		}
 		dismiss();
 	}

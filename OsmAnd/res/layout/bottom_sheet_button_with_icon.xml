@@ -3,14 +3,13 @@
 	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
-	android:layout_height="wrap_content">
+	android:layout_height="wrap_content"
+	tools:background="@drawable/btn_background_inactive_dark">
 
 	<LinearLayout
-		android:id="@+id/button_container"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:clickable="true"
-		android:focusable="true"
+		android:background="?attr/selectableItemBackground"
 		android:gravity="center_vertical"
 		android:minHeight="@dimen/bottom_sheet_list_item_height"
 		android:orientation="horizontal"
@@ -20,7 +19,6 @@
 		android:paddingEnd="@dimen/content_padding_small"
 		android:paddingRight="@dimen/content_padding_small"
 		android:paddingBottom="@dimen/text_margin_small"
-		tools:background="@drawable/btn_background_inactive_dark"
 		tools:ignore="UselessParent">
 
 		<LinearLayout
