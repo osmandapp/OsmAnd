@@ -3,6 +3,9 @@ package net.osmand.router;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataObject;
+import net.osmand.data.LatLon;
+import net.osmand.data.QuadRect;
+import net.osmand.data.QuadTree;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -59,8 +62,10 @@ public class GeneralRouter implements VehicleRouter {
 	private String filename = null;
 	private String profileName = "";
 
-	private Map<RouteRegion, Map<Integer, Integer>> regionConvert = new LinkedHashMap<RouteRegion, Map<Integer,Integer>>();
-	
+	private Map<RouteRegion, Map<Integer, Integer>> regionConvert = new LinkedHashMap<RouteRegion, Map<Integer, Integer>>();
+
+	private QuadTree<LatLon> avoidRoads;
+
 	// cached values
 	private boolean restrictionsAware = true;
 	private float sharpTurn;
@@ -177,6 +182,11 @@ public class GeneralRouter implements VehicleRouter {
 		parameters = new LinkedHashMap<String, GeneralRouter.RoutingParameter>();
 		
 		initCaches();
+
+	}
+
+	private void setAvoidRoad(QuadTree<LatLon> avoidRoads) {
+		this.avoidRoads = avoidRoads;
 
 	}
 
@@ -346,7 +356,23 @@ public class GeneralRouter implements VehicleRouter {
 		}
 		return res;
 	}
-	
+
+	@Override
+	public boolean isAvoidRoadObstacle(int left, int top, int right, int bottom) {
+		List<LatLon> result = new ArrayList<>();
+		avoidRoads.queryInBox(new QuadRect(left, top, right, bottom), result);
+//		System.out.println(left + " " + right + " " + top + " " + bottom);
+//		if(left < 1153625984 && 1153625984 < right ) {
+//			System.out.println(left + " r " + right + " t " + top + " b " + bottom);
+//			704371968
+//		}
+		if (!result.isEmpty()) {
+			System.out.println(left + " r " + right + " t " + top + " b " + bottom);
+			return true;
+		}
+		return false;
+	}
+
 	@Override
 	public GeneralRouter build(Map<String, String> params) {
 		return new GeneralRouter(this, params);

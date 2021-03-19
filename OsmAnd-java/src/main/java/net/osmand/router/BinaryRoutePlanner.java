@@ -445,7 +445,10 @@ public class BinaryRoutePlanner {
 			segmentDist += squareRootDist(x, y, prevx, prevy);
 
 			// 2.1 calculate possible obstacle plus time
-			
+			if (ctx.getRouter().isAvoidRoadObstacle(x, y, prevx, prevy)) {
+				directionAllowed = false;
+				continue;
+			}
 			double obstacle = ctx.getRouter().defineRoutingObstacle(road, segmentPoint, (dir && !reverseWaySearch));
 			if (obstacle < 0) {
 				directionAllowed = false;

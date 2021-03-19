@@ -97,8 +97,5 @@ public interface VehicleRouter {
 		
 	public VehicleRouter build(Map<String, String> params);
 
-	
-
-	
-	
+	boolean isAvoidRoadObstacle(int x, int y, int prevx, int prevy);
 }
