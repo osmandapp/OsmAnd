@@ -686,6 +686,11 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	}
 
 	@ColorRes
+	protected int getActiveColorRes() {
+		return isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+	}
+
+	@ColorRes
 	protected int getBackgroundColorRes() {
 		return isNightMode() ? R.color.list_background_color_dark : R.color.list_background_color_light;
 	}
