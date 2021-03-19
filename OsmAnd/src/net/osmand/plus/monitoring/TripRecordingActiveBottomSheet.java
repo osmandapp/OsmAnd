@@ -579,8 +579,9 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 	}
 
 	public static void setShowOnMapBackground(View view, boolean checked, boolean nightMode) {
-		int background = checked ? getActiveTransparentBackgroundId(nightMode) : getInactiveStrokedBackgroundId(nightMode);
-		view.setBackgroundResource(background);
+		Drawable background = AppCompatResources.getDrawable(view.getContext(),
+				checked ? getActiveTransparentBackgroundId(nightMode) : getInactiveStrokedBackgroundId(nightMode));
+		view.setBackgroundDrawable(background);
 	}
 
 	public static void setTextColor(Context context, TextView tv, boolean enabled, boolean nightMode, ItemType type) {
