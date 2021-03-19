@@ -734,7 +734,7 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 
 	public static void showDialogInstance(@NonNull OsmandApplication app, @NonNull FragmentManager manager,
 										  @NonNull ChoosePlanDialogType dialogType) {
-		if (Version.isAmazon() && !Version.isPaidVersion(app)) {
+		if (Version.isAmazon()) {
 			Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Version.getUrlWithUtmRef(app, "net.osmand.plus")));
 			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			if (AndroidUtils.isIntentSafe(app, intent)) {
