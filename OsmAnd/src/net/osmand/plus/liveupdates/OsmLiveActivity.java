@@ -22,6 +22,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
 import net.osmand.plus.chooseplan.ChoosePlanDialogFragment.ChoosePlanDialogListener;
+import net.osmand.plus.chooseplan.ChoosePlanDialogFragment.ChoosePlanDialogType;
 import net.osmand.plus.download.AbstractDownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
@@ -95,7 +96,7 @@ public class OsmLiveActivity extends AbstractDownloadActivity implements Downloa
 	protected void onResume() {
 		super.onResume();
 		if (!InAppPurchaseHelper.isSubscribedToLiveUpdates(getMyApplication()) && showSettingOnly) {
-			ChoosePlanDialogFragment.showOsmLiveInstance(getSupportFragmentManager());
+			ChoosePlanDialogFragment.showDialogInstance(getMyApplication(), getSupportFragmentManager(), ChoosePlanDialogType.OSM_LIVE);
 		}
 	}
 
