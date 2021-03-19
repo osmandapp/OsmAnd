@@ -11,6 +11,11 @@
 	Thx - Hardy
 
 -->
+
+    <string name="specify_color_for_map_mode">Specify color for map mode: %1$s.</string>
+    <string name="route_line_use_map_style_appearance">Route line would be use %1$s specified on selected map style: %2$s.</string>
+    <string name="shared_string_route_line">Route line</string>
+    <string name="customize_route_line">Customize route line</string>
     <string name="select_another_colorization">Please select another type of colorization.</string>
     <string name="track_has_no_speed">The track does not contain speed data.</string>
     <string name="track_has_no_altitude">The track does not contain altitude data.</string>
