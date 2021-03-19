@@ -14,7 +14,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
-import androidx.appcompat.widget.SwitchCompat;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentManager;
 
@@ -35,13 +34,11 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 
-import static net.osmand.plus.UiUtilities.CompoundButtonType.GLOBAL;
 import static net.osmand.plus.monitoring.OsmandMonitoringPlugin.MINUTES;
 import static net.osmand.plus.monitoring.OsmandMonitoringPlugin.SECONDS;
 import static net.osmand.plus.monitoring.TripRecordingActiveBottomSheet.UPDATE_TRACK_ICON;
 import static net.osmand.plus.monitoring.TripRecordingActiveBottomSheet.createItem;
 import static net.osmand.plus.monitoring.TripRecordingActiveBottomSheet.createShowTrackItem;
-import static net.osmand.plus.monitoring.TripRecordingActiveBottomSheet.setShowOnMapBackground;
 import static net.osmand.plus.monitoring.TripRecordingActiveBottomSheet.updateTrackIcon;
 
 public class TripRecordingStartingBottomSheet extends MenuBottomSheetDialogFragment {
@@ -54,8 +51,6 @@ public class TripRecordingStartingBottomSheet extends MenuBottomSheetDialogFragm
 
 	private AppCompatImageView upDownBtn;
 	private AppCompatImageView trackAppearanceIcon;
-	private CardView confirmContainer;
-	private SwitchCompat confirmCompound;
 	private TextView intervalValueView;
 	private LinearLayout showTrackContainer;
 	private LinearLayout intervalContainer;
@@ -96,24 +91,10 @@ public class TripRecordingStartingBottomSheet extends MenuBottomSheetDialogFragm
 		intervalSlider = itemView.findViewById(R.id.interval_slider);
 		updateIntervalValue();
 
-		confirmContainer = itemView.findViewById(R.id.confirm_container);
-		confirmCompound = confirmContainer.findViewById(R.id.confirm_compound_button);
-		UiUtilities.setupCompoundButton(confirmCompound, nightMode, GLOBAL);
-		updateGlobalRemember();
-		confirmContainer.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				boolean checked = !confirmCompound.isChecked();
-				confirmCompound.setChecked(checked);
-				settings.SAVE_GLOBAL_TRACK_REMEMBER.set(checked);
-				setShowOnMapBackground(confirmContainer, checked, nightMode);
-			}
-		});
-
 		showTrackContainer = itemView.findViewById(R.id.show_track_on_map);
 		trackAppearanceIcon = showTrackContainer.findViewById(R.id.additional_button_icon);
 		createShowTrackItem(app, getMapActivity(), nightMode, showTrackContainer, trackAppearanceIcon,
-				R.string.show_track_on_map, TripRecordingStartingBottomSheet.this, new Runnable() {
+				R.string.shared_string_show_on_map, TripRecordingStartingBottomSheet.this, new Runnable() {
 					@Override
 					public void run() {
 						hide();
@@ -221,13 +202,6 @@ public class TripRecordingStartingBottomSheet extends MenuBottomSheetDialogFragm
 		updateUpDownBtn();
 	}
 
-	private void updateGlobalRemember() {
-		if (confirmContainer != null && confirmCompound != null) {
-			confirmCompound.setChecked(settings.SAVE_GLOBAL_TRACK_REMEMBER.get());
-			setShowOnMapBackground(confirmContainer, confirmCompound.isChecked(), nightMode);
-		}
-	}
-
 	private void updateUpDownBtn() {
 		int iconId = infoExpanded ? R.drawable.ic_action_arrow_down : R.drawable.ic_action_arrow_up;
 		upDownBtn.setImageDrawable(getContentIcon(iconId));
@@ -254,7 +228,6 @@ public class TripRecordingStartingBottomSheet extends MenuBottomSheetDialogFragm
 					updateTrackIcon(app, trackAppearanceIcon);
 				}
 				if (key.equals(UPDATE_LOGGING_INTERVAL)) {
-					updateGlobalRemember();
 					updateIntervalValue();
 					AndroidUiHelper.updateVisibility(intervalContainer, infoExpanded);
 				}

@@ -92,55 +92,10 @@
 			app:trackHeight="@dimen/slider_track_height"
 			tools:visibility="visible" />
 
-		<androidx.cardview.widget.CardView
-			android:id="@+id/confirm_container"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			app:cardBackgroundColor="?attr/switch_button_active"
-			app:cardCornerRadius="4dp"
-			app:cardElevation="0dp">
-
-			<LinearLayout
-				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:background="?attr/selectableItemBackground"
-				android:orientation="horizontal">
-
-				<net.osmand.plus.widgets.TextViewEx
-					android:layout_width="0dp"
-					android:layout_height="wrap_content"
-					android:layout_marginStart="@dimen/content_padding_small"
-					android:layout_marginLeft="@dimen/content_padding_small"
-					android:layout_marginTop="@dimen/context_menu_first_line_top_margin"
-					android:layout_marginBottom="@dimen/context_menu_first_line_top_margin"
-					android:layout_weight="1"
-					android:ellipsize="end"
-					android:letterSpacing="@dimen/description_letter_spacing"
-					android:maxLines="1"
-					android:text="@string/confirm_every_run"
-					android:textColor="?attr/active_color_basic"
-					android:textSize="@dimen/default_list_text_size"
-					app:typeface="@string/font_roboto_regular" />
-
-				<com.google.android.material.switchmaterial.SwitchMaterial
-					android:id="@+id/confirm_compound_button"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_gravity="center_vertical"
-					android:layout_marginStart="@dimen/bottom_sheet_content_margin"
-					android:layout_marginLeft="@dimen/bottom_sheet_content_margin"
-					android:layout_marginEnd="@dimen/content_padding_small"
-					android:layout_marginRight="@dimen/content_padding_small"
-					tools:checked="true" />
-
-			</LinearLayout>
-
-		</androidx.cardview.widget.CardView>
-
 		<TextView
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_marginTop="@dimen/content_padding_small_half"
+			android:paddingBottom="@dimen/content_padding_small"
 			android:letterSpacing="@dimen/description_letter_spacing"
 			android:text="@string/trip_recording_logging_interval_info"
 			android:textColor="?attr/dialog_text_description_color" />
@@ -149,7 +104,7 @@
 
 	<Space
 		android:layout_width="match_parent"
-		android:layout_height="@dimen/content_padding" />
+		android:layout_height="@dimen/context_menu_first_line_top_margin" />
 
 	<include layout="@layout/preference_button_with_icon_triple" />
 
