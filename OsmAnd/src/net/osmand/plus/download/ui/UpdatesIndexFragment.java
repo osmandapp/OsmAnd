@@ -370,7 +370,8 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 						cardView.setOnClickListener(new OnClickListener() {
 							@Override
 							public void onClick(View v) {
-								ChoosePlanDialogFragment.showOsmLiveInstance(getMyActivity().getSupportFragmentManager());
+								ChoosePlanDialogFragment.showDialogInstance(getMyApplication(),
+										getMyActivity().getSupportFragmentManager(), ChoosePlanDialogType.OSM_LIVE);
 							}
 						});
 					} else {
