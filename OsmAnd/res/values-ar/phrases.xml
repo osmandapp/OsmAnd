@@ -3702,4 +3702,5 @@
     <string name="poi_piste_ski_jump">القفز على الجليد</string>
     <string name="poi_geodesist">الجيوديسيا (شكل الأرض ومساحتها)</string>
     <string name="poi_local_ref">المرجع المحلي</string>
+    <string name="poi_piste">الزحلقه</string>
 </resources>
