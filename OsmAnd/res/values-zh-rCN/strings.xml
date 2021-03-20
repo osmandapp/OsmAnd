@@ -2903,7 +2903,7 @@
     <string name="search_poi_types">搜索兴趣点类型</string>
     <string name="radius_ruler_item">半径尺</string>
     <string name="subscription_osmandlive_item">订阅 - OsmAnd Live</string>
-    <string name="create_edit_poi">创建/编辑兴趣点</string>
+    <string name="create_edit_poi">创建或编辑兴趣点</string>
     <string name="edit_online_source">编辑在线资源</string>
     <string name="mercator_projection">正轴等角圆柱投影</string>
     <string name="storage_format">储存格式</string>
@@ -3538,4 +3538,28 @@
     <string name="select_another_colorization">请选择另一种颜色。</string>
     <string name="delete_updates">删除更新</string>
     <string name="live_update_delete_updates_msg">您确认想要删除所有 %s 实时更新吗？</string>
+    <string name="keep_both_desc">导入的项目将添加前缀</string>
+    <string name="replace_all">全部替换</string>
+    <string name="recalc_angle_dialog_title">我的位置和路线之间的最小角度</string>
+    <string name="profile_type_custom_string">自定义配置文件</string>
+    <string name="shared_string_import_complete">导入完成</string>
+    <string name="items_added">已添加项目</string>
+    <string name="profile_backup_failed">无法备份配置文件。</string>
+    <string name="restore_all_profile_settings">恢复所有的配置文件设置？</string>
+    <string name="clear_recorded_data_warning">是否确定要清除录制的数据？</string>
+    <string name="shared_string_drawer">抽屉</string>
+    <string name="context_menu_actions">上下文菜单操作</string>
+    <string name="divider_descr">该点以下的元素用分隔线隔开。</string>
+    <string name="hidden_items_descr">这些项目从菜单中被隐藏，但所代表的选项或插件将继续工作。</string>
+    <string name="reset_items_descr">隐藏设置会将其重置为原始状态。</string>
+    <string name="main_actions_descr">只有四个按钮。</string>
+    <string name="main_actions">主要动作</string>
+    <string name="app_mode_ski_touring">滑雪旅游</string>
+    <string name="custom_osmand_plugin">自定义 OsmAnd 插件</string>
+    <string name="settings_item_read_error">无法从 \'%1$s\' 中读取。</string>
+    <string name="settings_item_write_error">无法写到 \'%1$s\'。</string>
+    <string name="settings_item_import_error">无法从 \'%1$s\' 导入。</string>
+    <string name="select_track_file">选择轨迹文件</string>
+    <string name="wiki_menu_download_descr">需要其他地图才能在地图上查看维基百科兴趣点。</string>
+    <string name="quick_action_switch_profile_descr">操作按钮在选定的配置文件之间切换。</string>
 </resources>
