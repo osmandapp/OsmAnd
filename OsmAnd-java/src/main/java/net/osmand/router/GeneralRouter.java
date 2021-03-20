@@ -64,7 +64,7 @@ public class GeneralRouter implements VehicleRouter {
 
 	private Map<RouteRegion, Map<Integer, Integer>> regionConvert = new LinkedHashMap<RouteRegion, Map<Integer, Integer>>();
 
-	private QuadTree<LatLon> avoidRoads;
+	private QuadTree<double[]> avoidRoads;
 
 	// cached values
 	private boolean restrictionsAware = true;
@@ -185,9 +185,8 @@ public class GeneralRouter implements VehicleRouter {
 
 	}
 
-	private void setAvoidRoad(QuadTree<LatLon> avoidRoads) {
+	public void setAvoidRoad(QuadTree<double[]> avoidRoads) {
 		this.avoidRoads = avoidRoads;
-
 	}
 
 	@SuppressWarnings("unchecked")
@@ -359,16 +358,15 @@ public class GeneralRouter implements VehicleRouter {
 
 	@Override
 	public boolean isAvoidRoadObstacle(int left, int top, int right, int bottom) {
-		List<LatLon> result = new ArrayList<>();
+		List<double[]> result = new ArrayList<>();
 		avoidRoads.queryInBox(new QuadRect(left, top, right, bottom), result);
-//		System.out.println(left + " " + right + " " + top + " " + bottom);
-//		if(left < 1153625984 && 1153625984 < right ) {
-//			System.out.println(left + " r " + right + " t " + top + " b " + bottom);
-//			704371968
-//		}
 		if (!result.isEmpty()) {
-			System.out.println(left + " r " + right + " t " + top + " b " + bottom);
-			return true;
+			for (double[] res : result) {
+				if ((int) res[0] == left && (int) res[1] == top && (int) res[2] == right && (int) res[3] == bottom) {
+					System.out.println("l " + left + " t " + top + " r " + right + " b " + bottom);
+					return true;
+				}
+			}
 		}
 		return false;
 	}
