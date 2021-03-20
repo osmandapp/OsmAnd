@@ -2567,7 +2567,7 @@ Lon %2$s</string>
     <string name="routing_attr_relief_smoothness_factor_name">Escoller variación da altitude</string>
     <string name="rendering_attr_depthContours_description">Amosar curvas e puntos do afundimento.</string>
     <string name="rendering_attr_depthContours_name">Curvas do afundimento náuticos</string>
-    <string name="auto_split_recording_title">División automática das gravacións en intres</string>
+    <string name="auto_split_recording_title">Dividir gravacións após unha pausa</string>
     <string name="auto_split_recording_descr">Comezar novo segmento despois dun intre de 6 min, nova pista despois dun intre de 2 h, ou novo ficheiro despois dun intre máis longo se mudaches a data.</string>
     <string name="shared_string_paused">Detido</string>
     <string name="save_track_min_distance">Mínimo desprazamento para o rexistro</string>
@@ -3695,9 +3695,9 @@ Lon %2$s</string>
     <string name="lenght_limit_description">Fornece a lonxitude do teu vehículo. Algunhas restricións de ruta poden ser aplicadas a vehículos longos.</string>
     <string name="quick_action_remove_next_destination">Eliminar punto de destino máis preto</string>
     <string name="please_provide_point_name_error">Fornece un nome para o punto</string>
-    <string name="quick_action_remove_next_destination_descr">O punto de destino actual na ruta será eliminado. Se fora o destino, a navegación sería interrompida.</string>
+    <string name="quick_action_remove_next_destination_descr">Elimina o seguinte destino da ruta. Se é o destino final, a navegación será detida.</string>
     <string name="search_download_wikipedia_maps">Baixar mapas da Wikipedia</string>
-    <string name="plugin_wikipedia_description">Obter información sobre os puntos de interese da Wikipedia. É o teu guía de peto sen conexión - só activar o complemento da Wikipedia e desfrutar dos artigos sobre os elementos ó teu redor.</string>
+    <string name="plugin_wikipedia_description">Obtén información sobre os puntos de interese da Wikipedia, unha guía de peto sen conexión que inclúe artigos sobre obxectos e destinos.</string>
     <string name="app_mode_enduro_motorcycle">Enduro</string>
     <string name="app_mode_motor_scooter">Scooter</string>
     <string name="app_mode_wheelchair">Cadeira de rodas</string>
@@ -3808,11 +3808,11 @@ Lon %2$s</string>
     <string name="start_finish_icons">Iconas de inicio e fin</string>
     <string name="contour_lines_thanks">Grazas por mercar \'Curvas de nivel\'</string>
     <string name="osm_live_payment_desc_hw">A subscrición é cobrada por período escollido. Cancélaa na AppGallery en calquera intre.</string>
-    <string name="osm_live_payment_subscription_management_hw">O pagamento será cargado na túa conta da AppGallery no mesmo intre da confirmación da compra.
+    <string name="osm_live_payment_subscription_management_hw">O pagamento será cobrado á túa conta do AppGallery ao confirmar a compra.
 \n
-\nA subscrición é renovada de xeito automático a menos que sexa cancelada antes da data de renovación. A túa conta será cargada polo período de renovación (mes/trimestre/ano) só na data de renovación.
+\nA subscrición é renovada de xeito automático a menos que se cancele antes da data de renovación. A conta será cobrada polo período de renovación (mes/trimestre/ano) só na data de renovación.
 \n
-\nPodes xestionar e cancelar as túas subscricións indo ós axustes da AppGallery.</string>
+\nPodes administrar e desbotar as subscricións nos axustes do AppGallery.</string>
     <string name="routing_attr_avoid_footways_description">Evitar sendas peonís, camiños e beirarrúas</string>
     <string name="routing_attr_avoid_footways_name">Evitar sendas peonís</string>
     <string name="development">Desenvolvemento</string>
@@ -4033,4 +4033,25 @@ Lon %2$s</string>
     <string name="track_has_no_altitude">A pista non contén datos de altitude.</string>
     <string name="track_has_no_speed">A pista non contén datos de velocidade.</string>
     <string name="select_another_colorization">Escolle outro tipo de cor.</string>
+    <string name="live_update_frequency_hour_variant">As actualizacións de mapas serán comprobadas cada hora. A seguinte vez %1$s en %2$s.</string>
+    <string name="select_segments">Escoller segmentos</string>
+    <string name="select_segments_description">%1$s contén máis dun segmento, precisas selecionar a parte necesaria para a navegación.</string>
+    <string name="segments_count">Segmento %1$d</string>
+    <string name="activity_type_water_name">Auga</string>
+    <string name="activity_type_winter_name">Inverno</string>
+    <string name="activity_type_snowmobile_name">Motoneve</string>
+    <string name="activity_type_riding_name">Equitación</string>
+    <string name="activity_type_racing_name">Carreira</string>
+    <string name="activity_type_mountainbike_name">Bicicleta de montaña</string>
+    <string name="activity_type_cycling_name">Bicicleta</string>
+    <string name="activity_type_hiking_name">Sendeirismo</string>
+    <string name="activity_type_running_name">Correndo</string>
+    <string name="activity_type_walking_name">A pé</string>
+    <string name="activity_type_offroad_name">Todo terreo</string>
+    <string name="activity_type_motorbike_name">Motocicleta</string>
+    <string name="activity_type_car_name">Automóbil</string>
+    <string name="temporary_conditional_routing_descr">Empregar as restricións de estrada que están activas agora no mapa</string>
+    <string name="routing_attr_short_way_description">Ruta optimizada máis curta (baixo consumo)</string>
+    <string name="routing_attr_driving_style_description">Escolle o propósito da condución para obter unha ruta máis curta, máis rápida ou máis segura</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Agochar reservas naturais, áreas protexidas e de parques nacionais</string>
 </resources>

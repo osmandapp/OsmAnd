@@ -3881,4 +3881,17 @@
     <string name="poi_wildlife_crossing_bat_bridge">Ponte para morcegos</string>
     <string name="poi_wildlife_crossing">Paso de fauna</string>
     <string name="poi_swimming_area">Área de natación</string>
+    <string name="poi_local_ref">Referencia local</string>
+    <string name="poi_geodesist">Xeodésico</string>
+    <string name="poi_conference_centre">Centro de conferencias</string>
+    <string name="poi_mobile_library">Posición de parada de biblioteca móbil</string>
+    <string name="poi_summit_register_no">Rexistro do cumio: no</string>
+    <string name="poi_summit_register_yes">Rexistro do cumio: si</string>
+    <string name="poi_piste_status_closed">Estado da pista: pechada</string>
+    <string name="poi_piste_status_open">Estado da pista: aberta</string>
+    <string name="poi_patrolled_no">Patrullado: non</string>
+    <string name="poi_patrolled_yes">Patrullado: si</string>
+    <string name="poi_gladed_yes">Arborado: si</string>
+    <string name="poi_piste_name">Nome da pista</string>
+    <string name="poi_piste_ski_jump">Salto de esquí</string>
 </resources>

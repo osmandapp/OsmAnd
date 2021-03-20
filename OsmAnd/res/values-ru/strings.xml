@@ -4036,4 +4036,5 @@
     <string name="select_category_descr">Выберите категорию или добавьте новую</string>
     <string name="copy_poi_name">Копировать имя POI</string>
     <string name="shared_string_interval">Интервал</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Скрыть природный заповедник, особо охраняемые природные территории и границы национального парка</string>
 </resources>
