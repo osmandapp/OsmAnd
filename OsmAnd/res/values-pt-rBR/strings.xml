@@ -4038,4 +4038,6 @@
     <string name="track_has_no_altitude">A trilha não contém dados de altitude.</string>
     <string name="track_has_no_speed">A trilha não contém dados de velocidade.</string>
     <string name="select_another_colorization">Selecione outro tipo de colorização.</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_name">Limites naturais</string>
+    <string name="segments_count">Segmento %1$d</string>
 </resources>
