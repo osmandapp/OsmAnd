@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 
@@ -25,11 +24,8 @@ public class GpxGeometryWayDrawer extends GeometryWayDrawer<GpxGeometryWayContex
 
 	private static class ArrowPathPoint extends PathPoint {
 
-		private Bitmap circleBitmap;
-
 		ArrowPathPoint(float x, float y, double angle, GeometryWayStyle<?> style) {
 			super(x, y, angle, style);
-			createCircleBitmap((GeometryArrowsStyle) style);
 		}
 
 		@Override
@@ -63,32 +59,14 @@ public class GpxGeometryWayDrawer extends GeometryWayDrawer<GpxGeometryWayContex
 		}
 
 		private void drawCircle(Canvas canvas, GeometryArrowsStyle style) {
-			float offset = circleBitmap.getWidth() / 2f;
-			float angleOffset = AndroidUtils.dpToPx(style.getCtx(), 1);
 			double rad = Math.toRadians(angle + 90);
-			float x = (float) (this.x - offset - angleOffset * Math.cos(rad));
-			float y = (float) (this.y - offset - angleOffset * Math.sin(rad));
-			canvas.drawBitmap(circleBitmap, x, y, null);
-		}
-
-		private void createCircleBitmap(GeometryArrowsStyle style) {
-			Context ctx = style.getCtx();
-			int size = AndroidUtils.dpToPx(ctx, 16);
-			circleBitmap = Bitmap.createBitmap(size, size, style.getPointBitmap().getConfig());
-			Paint paint = new Paint(Paint.DITHER_FLAG | Paint.ANTI_ALIAS_FLAG);
-			paint.setStyle(Paint.Style.FILL);
-
-			Canvas c = new Canvas(circleBitmap);
-
-			paint.setColor(0x33000000);
-			Path path = new Path();
-			path.addCircle(size / 2f, size / 2f, AndroidUtils.dpToPx(ctx, 8), Path.Direction.CW);
-			c.drawPath(path, paint);
-
+			float x = (float) (this.x - style.getCircleAngleOffset() * Math.cos(rad));
+			float y = (float) (this.y - style.getCircleAngleOffset() * Math.sin(rad));
+			Paint paint = style.getContext().getCirclePaint();
+			paint.setColor(GeometryArrowsStyle.OUTER_CIRCLE_COLOR);
+			canvas.drawCircle(x, y, style.getOuterCircleRadius(), paint);
 			paint.setColor(style.getTrackColor());
-			path.reset();
-			path.addCircle(size / 2f, size / 2f, AndroidUtils.dpToPx(ctx, 7), Path.Direction.CW);
-			c.drawPath(path, paint);
+			canvas.drawCircle(x, y, style.getInnerCircleRadius(), paint);
 		}
 	}
 }
