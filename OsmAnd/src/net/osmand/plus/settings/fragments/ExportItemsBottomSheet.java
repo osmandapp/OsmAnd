@@ -6,6 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.core.widget.CompoundButtonCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.IndexConstants;
@@ -60,13 +67,6 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-import androidx.core.widget.CompoundButtonCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import static net.osmand.view.ThreeStateCheckbox.State.CHECKED;
 import static net.osmand.view.ThreeStateCheckbox.State.MISC;
@@ -142,13 +142,19 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 								selectedItems.remove(item[0].getTag());
 							}
 							updateTitleView();
+							setupBottomSheetItem(item[0], item[0].getTag());
 						}
 					})
 					.setTag(object);
-			setupBottomSheetItem(builder, object);
 			item[0] = builder.create();
 			items.add(item[0]);
 		}
+	}
+
+	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		updateItems();
 	}
 
 	@Override
@@ -177,7 +183,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 					selectedItems.clear();
 				}
 				updateTitleView();
-				updateItems(checked);
+				updateItems();
 			}
 		});
 		setupDescription(view);
@@ -221,10 +227,12 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 		return itemsSize;
 	}
 
-	private void updateItems(boolean checked) {
+	private void updateItems() {
 		for (BaseBottomSheetItem item : items) {
-			if (item instanceof BottomSheetItemWithCompoundButton) {
-				((BottomSheetItemWithCompoundButton) item).setChecked(checked);
+			if (item instanceof BottomSheetItemWithCompoundButton && item.getTag() != null) {
+				BottomSheetItemWithCompoundButton bottomSheetItem = (BottomSheetItemWithCompoundButton) item;
+				setupBottomSheetItem(bottomSheetItem, item.getTag());
+				bottomSheetItem.setChecked(selectedItems.contains(item.getTag()));
 			}
 		}
 	}
@@ -274,7 +282,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 		return null;
 	}
 
-	private void setupBottomSheetItem(Builder builder, Object object) {
+	private void setupBottomSheetItem(BottomSheetItemWithCompoundButton item, Object object) {
 		if (object instanceof ApplicationModeBean) {
 			ApplicationModeBean modeBean = (ApplicationModeBean) object;
 			String profileName = modeBean.userProfileName;
@@ -286,7 +294,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 					profileName = StringUtils.capitalize(modeBean.stringKey);
 				}
 			}
-			builder.setTitle(profileName);
+			item.setTitle(profileName);
 
 			String routingProfile = "";
 			String routingProfileValue = modeBean.routingProfile;
@@ -300,122 +308,135 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 				}
 			}
 			if (!Algorithms.isEmpty(routingProfile)) {
-				builder.setDescription(getString(R.string.ltr_or_rtl_combine_via_colon, getString(R.string.nav_type_hint), routingProfile));
+				item.setDescription(getString(R.string.ltr_or_rtl_combine_via_colon, getString(R.string.nav_type_hint), routingProfile));
 			} else {
-				builder.setDescription(getString(R.string.profile_type_osmand_string));
+				item.setDescription(getString(R.string.profile_type_osmand_string));
 			}
 			int profileIconRes = AndroidUtils.getDrawableId(app, modeBean.iconName);
 			ProfileIconColors iconColor = modeBean.iconColor;
 			Integer customIconColor = modeBean.customIconColor;
-			int actualIconColor = customIconColor != null ?
-					customIconColor : ContextCompat.getColor(app, iconColor.getColor(nightMode));
-			builder.setIcon(uiUtilities.getPaintedIcon(profileIconRes, actualIconColor));
+			int actualIconColor;
+			if (selectedItems.contains(object)) {
+				actualIconColor = customIconColor != null ? customIconColor : ContextCompat.getColor(app, iconColor.getColor(nightMode));
+			} else {
+				actualIconColor = ContextCompat.getColor(app, secondaryColorRes);
+			}
+			item.setIcon(uiUtilities.getPaintedIcon(profileIconRes, actualIconColor));
 		} else if (object instanceof QuickAction) {
 			QuickAction quickAction = (QuickAction) object;
-			builder.setTitle(quickAction.getName(app));
-			builder.setIcon(uiUtilities.getIcon(quickAction.getIconRes(), activeColorRes));
+			item.setTitle(quickAction.getName(app));
+			item.setIcon(uiUtilities.getIcon(quickAction.getIconRes(), getItemIconColor(object)));
 		} else if (object instanceof PoiUIFilter) {
 			PoiUIFilter poiUIFilter = (PoiUIFilter) object;
-			builder.setTitle(poiUIFilter.getName());
+			item.setTitle(poiUIFilter.getName());
 			int iconRes = RenderingIcons.getBigIconResourceId(poiUIFilter.getIconId());
-			builder.setIcon(uiUtilities.getIcon(iconRes != 0 ? iconRes : R.drawable.ic_action_user, activeColorRes));
+			item.setIcon(uiUtilities.getIcon(iconRes != 0 ? iconRes : R.drawable.ic_action_user, activeColorRes));
 		} else if (object instanceof TileSourceTemplate || object instanceof SQLiteTileSource) {
 			ITileSource tileSource = (ITileSource) object;
-			builder.setTitle(tileSource.getName());
-			builder.setIcon(uiUtilities.getIcon(R.drawable.ic_map, activeColorRes));
+			item.setTitle(tileSource.getName());
+			item.setIcon(uiUtilities.getIcon(R.drawable.ic_map, getItemIconColor(object)));
 		} else if (object instanceof File) {
-			setupBottomSheetItemForFile(builder, (File) object);
+			setupBottomSheetItemForFile(item, (File) object);
 		} else if (object instanceof GpxSettingsItem) {
-			GpxSettingsItem item = (GpxSettingsItem) object;
-			setupBottomSheetItemForGpx(builder, item.getFile(), item.getAppearanceInfo());
+			GpxSettingsItem settingsItem = (GpxSettingsItem) object;
+			setupBottomSheetItemForGpx(item, settingsItem.getFile(), settingsItem.getAppearanceInfo());
 		} else if (object instanceof FileSettingsItem) {
-			FileSettingsItem item = (FileSettingsItem) object;
-			setupBottomSheetItemForFile(builder, item.getFile());
+			FileSettingsItem settingsItem = (FileSettingsItem) object;
+			setupBottomSheetItemForFile(item, settingsItem.getFile());
 		} else if (object instanceof AvoidRoadInfo) {
 			AvoidRoadInfo avoidRoadInfo = (AvoidRoadInfo) object;
-			builder.setTitle(avoidRoadInfo.name);
-			builder.setIcon(uiUtilities.getIcon(R.drawable.ic_action_alert, activeColorRes));
+			item.setTitle(avoidRoadInfo.name);
+			item.setIcon(uiUtilities.getIcon(R.drawable.ic_action_alert, getItemIconColor(object)));
 		} else if (object instanceof OsmNotesPoint) {
 			OsmNotesPoint osmNotesPoint = (OsmNotesPoint) object;
-			builder.setTitle(osmNotesPoint.getText());
-			builder.setIcon(uiUtilities.getIcon(R.drawable.ic_action_osm_note_add, activeColorRes));
+			item.setTitle(osmNotesPoint.getText());
+			item.setIcon(uiUtilities.getIcon(R.drawable.ic_action_osm_note_add, getItemIconColor(object)));
 		} else if (object instanceof OpenstreetmapPoint) {
 			OpenstreetmapPoint openstreetmapPoint = (OpenstreetmapPoint) object;
-			builder.setTitle(OsmEditingPlugin.getTitle(openstreetmapPoint, app));
-			builder.setIcon(uiUtilities.getIcon(R.drawable.ic_action_info_dark, activeColorRes));
+			item.setTitle(OsmEditingPlugin.getTitle(openstreetmapPoint, app));
+			item.setIcon(uiUtilities.getIcon(R.drawable.ic_action_info_dark, getItemIconColor(object)));
 		} else if (object instanceof FavoriteGroup) {
 			FavoriteGroup group = (FavoriteGroup) object;
-			builder.setTitle(group.getDisplayName(app));
-			int color = group.getColor() == 0 ? ContextCompat.getColor(app, R.color.color_favorite) : group.getColor();
-			builder.setIcon(uiUtilities.getPaintedIcon(R.drawable.ic_action_folder, color));
+			item.setTitle(group.getDisplayName(app));
+			int color;
+			if (selectedItems.contains(object)) {
+				color = group.getColor() == 0 ? ContextCompat.getColor(app, R.color.color_favorite) : group.getColor();
+			} else {
+				color = ContextCompat.getColor(app, secondaryColorRes);
+			}
+			item.setIcon(uiUtilities.getPaintedIcon(R.drawable.ic_action_folder, color));
 			int points = group.getPoints().size();
 			String itemsDescr = getString(R.string.shared_string_gpx_points);
-			builder.setDescription(getString(R.string.ltr_or_rtl_combine_via_colon, itemsDescr, points));
+			item.setDescription(getString(R.string.ltr_or_rtl_combine_via_colon, itemsDescr, points));
 		} else if (object instanceof GlobalSettingsItem) {
 			GlobalSettingsItem globalSettingsItem = (GlobalSettingsItem) object;
-			builder.setTitle(globalSettingsItem.getPublicName(app));
-			builder.setIcon(uiUtilities.getIcon(R.drawable.ic_action_settings, activeColorRes));
+			item.setTitle(globalSettingsItem.getPublicName(app));
+			item.setIcon(uiUtilities.getIcon(R.drawable.ic_action_settings, getItemIconColor(object)));
 		} else if (object instanceof ItineraryGroup) {
 			ItineraryGroup markersGroup = (ItineraryGroup) object;
 			if (ExportSettingsType.ACTIVE_MARKERS.name().equals(markersGroup.getId())) {
-				builder.setTitle(getString(R.string.map_markers));
-				builder.setIcon(uiUtilities.getIcon(R.drawable.ic_action_flag, activeColorRes));
+				item.setTitle(getString(R.string.map_markers));
+				item.setIcon(uiUtilities.getIcon(R.drawable.ic_action_flag, getItemIconColor(object)));
 			} else if (ExportSettingsType.HISTORY_MARKERS.name().equals(markersGroup.getId())) {
-				builder.setTitle(getString(R.string.markers_history));
-				builder.setIcon(uiUtilities.getIcon(R.drawable.ic_action_history, activeColorRes));
+				item.setTitle(getString(R.string.markers_history));
+				item.setIcon(uiUtilities.getIcon(R.drawable.ic_action_history, getItemIconColor(object)));
 			}
 			int selectedMarkers = markersGroup.getMarkers().size();
 			String itemsDescr = getString(R.string.shared_string_items);
-			builder.setDescription(getString(R.string.ltr_or_rtl_combine_via_colon, itemsDescr, selectedMarkers));
+			item.setDescription(getString(R.string.ltr_or_rtl_combine_via_colon, itemsDescr, selectedMarkers));
 		} else if (object instanceof HistoryEntry) {
 			HistoryEntry historyEntry = (HistoryEntry) object;
-			builder.setTitle(historyEntry.getName().getName());
-			builder.setIcon(uiUtilities.getIcon(R.drawable.ic_action_history, activeColorRes));
+			item.setTitle(historyEntry.getName().getName());
+			item.setIcon(uiUtilities.getIcon(R.drawable.ic_action_history, getItemIconColor(object)));
 		} else if (object instanceof OnlineRoutingEngine) {
 			OnlineRoutingEngine onlineRoutingEngine = (OnlineRoutingEngine) object;
-			builder.setTitle(onlineRoutingEngine.getName(app));
-			builder.setIcon(uiUtilities.getIcon(R.drawable.ic_world_globe_dark, activeColorRes));
+			item.setTitle(onlineRoutingEngine.getName(app));
+			item.setIcon(uiUtilities.getIcon(R.drawable.ic_world_globe_dark, getItemIconColor(object)));
 		}
 	}
 
-	private void setupBottomSheetItemForFile(Builder builder, File file) {
+	private void setupBottomSheetItemForFile(BottomSheetItemWithCompoundButton item, File file) {
 		FileSubtype fileSubtype = FileSubtype.getSubtypeByPath(app, file.getPath());
-		builder.setTitle(file.getName());
+		item.setTitle(file.getName());
 		if (file.getAbsolutePath().contains(IndexConstants.RENDERERS_DIR)) {
-			builder.setIcon(uiUtilities.getIcon(R.drawable.ic_action_map_style, activeColorRes));
+			item.setIcon(uiUtilities.getIcon(R.drawable.ic_action_map_style, getItemIconColor(item.getTag())));
 		} else if (file.getAbsolutePath().contains(IndexConstants.ROUTING_PROFILES_DIR)) {
-			builder.setIcon(uiUtilities.getIcon(R.drawable.ic_action_route_distance, activeColorRes));
+			item.setIcon(uiUtilities.getIcon(R.drawable.ic_action_route_distance, getItemIconColor(item.getTag())));
 		} else if (file.getAbsolutePath().contains(IndexConstants.GPX_INDEX_DIR)) {
-			setupBottomSheetItemForGpx(builder, file, null);
+			setupBottomSheetItemForGpx(item, file, null);
 		} else if (file.getAbsolutePath().contains(IndexConstants.AV_INDEX_DIR)) {
 			int iconId = AudioVideoNotesPlugin.getIconIdForRecordingFile(file);
 			if (iconId == -1) {
 				iconId = R.drawable.ic_action_photo_dark;
 			}
-			builder.setIcon(uiUtilities.getIcon(iconId, activeColorRes));
-			builder.setDescription(AndroidUtils.formatSize(app, file.length()));
+			item.setIcon(uiUtilities.getIcon(iconId, getItemIconColor(item.getTag())));
+			item.setDescription(AndroidUtils.formatSize(app, file.length()));
 		} else if (fileSubtype.isMap()
 				|| fileSubtype == FileSettingsItem.FileSubtype.TTS_VOICE
 				|| fileSubtype == FileSettingsItem.FileSubtype.VOICE) {
-			builder.setTitle(FileNameTranslationHelper.getFileNameWithRegion(app, file.getName()));
-			builder.setIcon(uiUtilities.getIcon(fileSubtype.getIconId(), activeColorRes));
+			item.setTitle(FileNameTranslationHelper.getFileNameWithRegion(app, file.getName()));
+			item.setIcon(uiUtilities.getIcon(fileSubtype.getIconId(), getItemIconColor(item.getTag())));
 
 			if (fileSubtype.isMap()) {
 				String mapDescription = getMapDescription(file);
 				String formattedSize = AndroidUtils.formatSize(app, file.length());
 				if (mapDescription != null) {
-					builder.setDescription(getString(R.string.ltr_or_rtl_combine_via_bold_point, mapDescription, formattedSize));
+					item.setDescription(getString(R.string.ltr_or_rtl_combine_via_bold_point, mapDescription, formattedSize));
 				} else {
-					builder.setDescription(formattedSize);
+					item.setDescription(formattedSize);
 				}
 			}
 		}
 	}
 
-	private void setupBottomSheetItemForGpx(Builder builder, File file, @Nullable GpxAppearanceInfo appearanceInfo) {
-		builder.setTitle(GpxUiHelper.getGpxTitle(file.getName()));
-		builder.setDescription(getTrackDescr(file, file.lastModified(), file.length(), appearanceInfo));
-		builder.setIcon(uiUtilities.getIcon(R.drawable.ic_action_route_distance, activeColorRes));
+	private void setupBottomSheetItemForGpx(BottomSheetItemWithCompoundButton item, File file, @Nullable GpxAppearanceInfo appearanceInfo) {
+		item.setTitle(GpxUiHelper.getGpxTitle(file.getName()));
+		item.setDescription(getTrackDescr(file, file.lastModified(), file.length(), appearanceInfo));
+		item.setIcon(uiUtilities.getIcon(R.drawable.ic_action_route_distance, getItemIconColor(item.getTag())));
+	}
+
+	private int getItemIconColor(Object object) {
+		return selectedItems.contains(object) ? activeColorRes : secondaryColorRes;
 	}
 
 	private final GpxDataItemCallback gpxDataItemCallback = new GpxDataItemCallback() {
