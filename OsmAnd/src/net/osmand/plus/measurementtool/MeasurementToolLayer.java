@@ -71,6 +71,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	private boolean tapsDisabled;
 	private MeasurementEditingContext editingCtx;
 	private UiUtilities iconsCache;
+	private Map<String, Bitmap> profileIconsBitmapCache;
 
 	@Override
 	public void initLayer(OsmandMapTileView view) {
@@ -93,6 +94,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		marginApplyingPointIconX = applyingPointIcon.getWidth() / 2;
 
 		iconsCache = new UiUtilities(view.getApplication());
+		profileIconsBitmapCache = new HashMap<>();
 	}
 
 	void setOnSingleTapListener(OnSingleTapListener listener) {
@@ -355,22 +357,29 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		Map<String, Pair<Integer, Bitmap>> profileColors = new HashMap<>();
 		int splitColor = ContextCompat.getColor(view.getContext(), ProfileIconColors.DARK_YELLOW.getColor(night));
 		profileColors.put(ApplicationMode.DEFAULT.getStringKey(),
-				new Pair<>(splitColor, getSizedBitmap(R.drawable.ic_action_split_interval, splitColor, 28)));
+				new Pair<>(splitColor, getSizedBitmap(ApplicationMode.DEFAULT.getStringKey(),
+						R.drawable.ic_action_split_interval, splitColor, 28)));
 		List<ApplicationMode> modes = new ArrayList<>(ApplicationMode.values(view.getApplication()));
 		modes.remove(ApplicationMode.DEFAULT);
 		for (ApplicationMode mode : modes) {
 			if (!"public_transport".equals(mode.getRoutingProfile())) {
 				int color = mode.getProfileColor(night);
 				int iconSize = mode.getStringKey().equals(ApplicationMode.BICYCLE.getStringKey()) ? 24 : 28;
-				profileColors.put(mode.getStringKey(), new Pair<>(color, getSizedBitmap(mode.getIconRes(), color, iconSize)));
+				profileColors.put(mode.getStringKey(),
+						new Pair<>(color, getSizedBitmap(mode.getStringKey(), mode.getIconRes(), color, iconSize)));
 			}
 		}
 		return profileColors;
 	}
 
-	private Bitmap getSizedBitmap(@DrawableRes int res, @ColorInt int color, int dp) {
-		Drawable drawable = iconsCache.getPaintedIcon(res, color);
-		return AndroidUtils.createScaledBitmap(view.getContext(), drawable, dp, dp);
+	private Bitmap getSizedBitmap(String modeKey, @DrawableRes int iconRes, @ColorInt int color, int dp) {
+		String key = modeKey + color;
+		if (!profileIconsBitmapCache.containsKey(key)) {
+			Drawable drawable = iconsCache.getPaintedIcon(iconRes, color);
+			Bitmap bitmap = AndroidUtils.createScaledBitmap(view.getContext(), drawable, dp, dp, false);
+			profileIconsBitmapCache.put(key, bitmap);
+		}
+		return profileIconsBitmapCache.get(key);
 	}
 
 	private void drawBeforeAfterPath(Canvas canvas, RotatedTileBox tb) {
