@@ -32,6 +32,7 @@ import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteDirectionInfo;
+import net.osmand.plus.routing.RouteLineDrawInfo;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
@@ -67,6 +68,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 
 	private LayerDrawable selectedPoint;
 	private TrackChartPoints trackChartPoints;
+	private RouteLineDrawInfo routeLineDrawInfo;
 
 	private RenderingLineAttributes attrs;
 	private RenderingLineAttributes attrsPT;
@@ -217,10 +219,11 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 	}
 
 	public boolean isInRouteLineAppearanceMode() {
-		MapActivity mapActivity = getMapActivity();
-		return mapActivity != null
-				&& mapActivity.getRouteLineAppearanceFragment() != null
-				&& mapActivity.getRouteLineAppearanceFragment().isVisible();
+		return routeLineDrawInfo != null;
+	}
+
+	public void setRouteLineDrawInfo(RouteLineDrawInfo routeLineDrawInfo) {
+		this.routeLineDrawInfo = routeLineDrawInfo;
 	}
 
 	private MapActivity getMapActivity() {
@@ -277,9 +280,13 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 			}
 		}
 	}
-	
+
 	@Override
-	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {}
+	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+		if (routeLineDrawInfo != null) {
+			// draw route line on map
+		}
+	}
 
 	private void drawAction(RotatedTileBox tb, Canvas canvas, List<Location> actionPoints) {
 		if (actionPoints.size() > 0) {

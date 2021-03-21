@@ -10,6 +10,7 @@ import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
@@ -19,25 +20,44 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.LockableScrollView;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuScrollFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.enums.DayNightMode;
+import net.osmand.plus.routing.RouteLineDrawInfo;
+import net.osmand.plus.routing.cards.RouteLineColorCard;
+import net.osmand.plus.routing.cards.RouteLineColorCard.OnMapThemeUpdateListener;
+import net.osmand.plus.routing.cards.RouteLineColorCard.OnSelectedColorChangeListener;
+import net.osmand.plus.routing.cards.RouteLineWidthCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.track.CustomColorBottomSheet.ColorPickerListener;
+import net.osmand.plus.track.TrackAppearanceFragment.OnNeedScrollListener;
 
-public class RouteLineAppearanceFragment extends ContextMenuScrollFragment {
+public class RouteLineAppearanceFragment extends ContextMenuScrollFragment implements ColorPickerListener, OnSelectedColorChangeListener, OnMapThemeUpdateListener {
 
-	public final static String TAG = RouteLineAppearanceFragment.class.getName();
+	public static final String TAG = RouteLineAppearanceFragment.class.getName();
+
+	private static final String INIT_MAP_THEME = "init_map_theme";
+	private static final String SELECTED_MAP_THEME = "selected_map_theme";
 
 	private ApplicationMode appMode;
 
+	private RouteLineDrawInfo routeLineDrawInfo;
+
 	private int toolbarHeightPx;
+	private DayNightMode initMapTheme;
+	private DayNightMode selectedMapTheme;
 
 	private View buttonsShadow;
 	private View controlButtons;
 	private View toolbarContainer;
+
+	private RouteLineColorCard colorCard;
+	private RouteLineWidthCard widthCard;
 
 	@Override
 	public int getMainLayoutId() {
@@ -82,8 +102,19 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment {
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
 		toolbarHeightPx = getResources().getDimensionPixelSize(R.dimen.dashboard_map_toolbar);
-		requireMyActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+
+		if (savedInstanceState != null) {
+			routeLineDrawInfo = new RouteLineDrawInfo(savedInstanceState);
+			initMapTheme = DayNightMode.valueOf(savedInstanceState.getString(INIT_MAP_THEME));
+			selectedMapTheme = DayNightMode.valueOf(savedInstanceState.getString(SELECTED_MAP_THEME));
+		} else {
+			initMapTheme = getMyApplication().getSettings().DAYNIGHT_MODE.get();
+			selectedMapTheme = initMapTheme;
+		}
+
+		requireMapActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
 			public void handleOnBackPressed() {
 				dismiss();
 			}
@@ -136,6 +167,36 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment {
 	private void setupCards() {
 		MapActivity mapActivity = requireMapActivity();
 		ViewGroup cardsContainer = getCardsContainer();
+
+		colorCard = new RouteLineColorCard(mapActivity, this, routeLineDrawInfo, appMode, initMapTheme, selectedMapTheme);
+		cardsContainer.addView(colorCard.build(mapActivity));
+
+		widthCard = new RouteLineWidthCard(mapActivity, routeLineDrawInfo, createScrollListener());
+		cardsContainer.addView(widthCard.build(mapActivity));
+	}
+
+	private OnNeedScrollListener createScrollListener() {
+		return new OnNeedScrollListener() {
+
+			@Override
+			public void onVerticalScrollNeeded(int y) {
+				View view = widthCard.getView();
+				if (view != null) {
+					int resultYPosition = view.getTop() + y;
+					int dialogHeight = getInnerScrollableHeight();
+					ScrollView scrollView = (ScrollView) getBottomScrollView();
+					if (resultYPosition > (scrollView.getScrollY() + dialogHeight)) {
+						scrollView.smoothScrollTo(0, resultYPosition - dialogHeight);
+					}
+				}
+			}
+
+			private int getInnerScrollableHeight() {
+				int totalScreenHeight = getViewHeight() - getMenuStatePosY(getCurrentMenuState());
+				int frameTotalHeight = controlButtons.getHeight() + buttonsShadow.getHeight();
+				return totalScreenHeight - frameTotalHeight;
+			}
+		};
 	}
 
 	private void setupToolbar() {
@@ -143,7 +204,6 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment {
 		closeButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// discard changes
 				dismiss();
 			}
 		});
@@ -172,7 +232,9 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment {
 		saveButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// save changes
+				if (getTargetFragment() instanceof OnApplyRouteLineListener) {
+					((OnApplyRouteLineListener) getTargetFragment()).applyRouteLineAppearance(routeLineDrawInfo);
+				}
 				dismiss();
 			}
 		});
@@ -181,7 +243,6 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment {
 		cancelButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// discard changes
 				FragmentActivity activity = getActivity();
 				if (activity != null) {
 					activity.onBackPressed();
@@ -226,6 +287,33 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment {
 	}
 
 	@Override
+	public void onResume() {
+		super.onResume();
+		setDrawInfoOnRouteLayer(routeLineDrawInfo);
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		setDrawInfoOnRouteLayer(null);
+	}
+
+	private void setDrawInfoOnRouteLayer(@Nullable RouteLineDrawInfo drawInfo) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getMapLayers().getRouteLayer().setRouteLineDrawInfo(drawInfo);
+		}
+	}
+
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putString(INIT_MAP_THEME, initMapTheme.name());
+		outState.putString(SELECTED_MAP_THEME, selectedMapTheme.name());
+		routeLineDrawInfo.saveToBundle(outState);
+	}
+
+	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
 		exitAppearanceMode();
@@ -250,6 +338,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment {
 					R.id.map_right_widgets_panel,
 					R.id.map_center_info,
 					R.id.map_search_button);
+			changeMapTheme(initMapTheme);
 		}
 	}
 
@@ -271,13 +360,30 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment {
 		}
 	}
 
+	@Override
+	public void onColorSelected(Integer prevColor, int newColor) {
+		colorCard.onColorSelected(prevColor, newColor);
+	}
+
+	@Override
+	public void onSelectedColorChanged() {
+		if (widthCard != null) {
+			widthCard.updateItems();
+		}
+		if (getMapActivity() != null) {
+			getMapActivity().refreshMap();
+		}
+	}
+
 	public static boolean showInstance(@NonNull MapActivity mapActivity,
+	                                   @NonNull RouteLineDrawInfo drawInfo,
 	                                   @NonNull ApplicationMode appMode,
 	                                   @NonNull Fragment target) {
 		try {
 			RouteLineAppearanceFragment fragment = new RouteLineAppearanceFragment();
 			fragment.setRetainInstance(true);
 			fragment.setTargetFragment(target, 0);
+			fragment.routeLineDrawInfo = new RouteLineDrawInfo(drawInfo);
 			fragment.appMode = appMode;
 
 			mapActivity.getSupportFragmentManager()
@@ -289,5 +395,22 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment {
 		} catch (RuntimeException e) {
 			return false;
 		}
+	}
+
+	@Override
+	public void onMapThemeUpdated(@NonNull DayNightMode mapTheme) {
+		changeMapTheme(mapTheme);
+	}
+
+	private void changeMapTheme(@NonNull DayNightMode mapTheme) {
+		OsmandApplication app = getMyApplication();
+		if (app != null) {
+			app.getSettings().DAYNIGHT_MODE.set(mapTheme);
+			selectedMapTheme = mapTheme;
+		}
+	}
+
+	public interface OnApplyRouteLineListener {
+		void applyRouteLineAppearance(@NonNull RouteLineDrawInfo routeLineDrawInfo);
 	}
 }
