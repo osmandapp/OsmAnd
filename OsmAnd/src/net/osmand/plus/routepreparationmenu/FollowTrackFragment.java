@@ -57,8 +57,8 @@ import net.osmand.plus.routepreparationmenu.cards.ReverseTrackCard;
 import net.osmand.plus.routepreparationmenu.cards.SelectTrackCard;
 import net.osmand.plus.routepreparationmenu.cards.TrackEditCard;
 import net.osmand.plus.routepreparationmenu.cards.TracksToFollowCard;
-import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
+import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -452,12 +452,12 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			} else if (card instanceof TrackEditCard) {
 				openPlanRoute(false);
 				close();
+			} else if (card instanceof SelectTrackCard) {
+				updateSelectionMode(true);
+			} else if (card instanceof ReverseTrackCard
+					|| card instanceof NavigateTrackOptionsCard) {
+				updateMenu();
 			}
-		} else if (card instanceof SelectTrackCard) {
-			updateSelectionMode(true);
-		} else if (card instanceof ReverseTrackCard
-				|| card instanceof NavigateTrackOptionsCard) {
-			updateMenu();
 		}
 	}
 
