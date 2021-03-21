@@ -28,6 +28,7 @@ import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
+import net.osmand.plus.chooseplan.ChoosePlanDialogFragment.ChoosePlanDialogType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -322,7 +323,7 @@ public class DiscountHelper {
 				} else {
 					for (InAppPurchase p : purchaseHelper.getLiveUpdates().getAllSubscriptions()) {
 						if (url.contains(p.getSku())) {
-							ChoosePlanDialogFragment.showOsmLiveInstance(mapActivity.getSupportFragmentManager());
+							ChoosePlanDialogFragment.showDialogInstance(app, mapActivity.getSupportFragmentManager(), ChoosePlanDialogType.OSM_LIVE);
 							break;
 						}
 					}
@@ -367,17 +368,17 @@ public class DiscountHelper {
 		} else if (url.startsWith(SHOW_CHOOSE_PLAN_PREFIX)) {
 			String planType = url.substring(SHOW_CHOOSE_PLAN_PREFIX.length()).trim();
 			if (CHOOSE_PLAN_TYPE_FREE.equals(planType)) {
-				ChoosePlanDialogFragment.showFreeVersionInstance(mapActivity.getSupportFragmentManager());
+				ChoosePlanDialogFragment.showDialogInstance(mapActivity.getMyApplication(), mapActivity.getSupportFragmentManager(), ChoosePlanDialogType.FREE_VERSION);
 			} else if (CHOOSE_PLAN_TYPE_LIVE.equals(planType)) {
-				ChoosePlanDialogFragment.showOsmLiveInstance(mapActivity.getSupportFragmentManager());
+				ChoosePlanDialogFragment.showDialogInstance(mapActivity.getMyApplication(), mapActivity.getSupportFragmentManager(), ChoosePlanDialogType.OSM_LIVE);
 			} else if (CHOOSE_PLAN_TYPE_SEA_DEPTH.equals(planType)) {
-				ChoosePlanDialogFragment.showSeaDepthMapsInstance(mapActivity.getSupportFragmentManager());
+				ChoosePlanDialogFragment.showDialogInstance(mapActivity.getMyApplication(), mapActivity.getSupportFragmentManager(), ChoosePlanDialogType.SEA_DEPTH_MAPS);
 			} else if (CHOOSE_PLAN_TYPE_HILLSHADE.equals(planType)) {
-				ChoosePlanDialogFragment.showHillshadeSrtmPluginInstance(mapActivity.getSupportFragmentManager());
+				ChoosePlanDialogFragment.showDialogInstance(mapActivity.getMyApplication(), mapActivity.getSupportFragmentManager(), ChoosePlanDialogType.HILLSHADE_SRTM_PLUGIN);
 			} else if (CHOOSE_PLAN_TYPE_WIKIPEDIA.equals(planType)) {
-				ChoosePlanDialogFragment.showWikipediaInstance(mapActivity.getSupportFragmentManager());
+				ChoosePlanDialogFragment.showDialogInstance(mapActivity.getMyApplication(), mapActivity.getSupportFragmentManager(), ChoosePlanDialogType.WIKIPEDIA);
 			} else if (CHOOSE_PLAN_TYPE_WIKIVOYAGE.equals(planType)) {
-				ChoosePlanDialogFragment.showWikivoyageInstance(mapActivity.getSupportFragmentManager());
+				ChoosePlanDialogFragment.showDialogInstance(mapActivity.getMyApplication(), mapActivity.getSupportFragmentManager(), ChoosePlanDialogType.WIKIVOYAGE);
 			}
 		} else {
 			Intent intent = new Intent(Intent.ACTION_VIEW);

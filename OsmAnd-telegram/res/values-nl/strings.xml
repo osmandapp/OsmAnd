@@ -258,7 +258,7 @@
     <string name="unit_of_speed_system_descr">Definieer de eenheid voor snelheid.</string>
     <string name="unit_of_speed_system">Eenheid van snelheid</string>
     <string name="send_report">Stuur rapport</string>
-    <string name="shared_string_export">Exporteer naar OSM</string>
+    <string name="shared_string_export">Exporteer</string>
     <string name="logcat_buffer">Logcat buffer</string>
     <string name="logcat_buffer_descr">Controleer en deel gedetailleerde logs van de app</string>
 </resources>

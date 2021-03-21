@@ -237,11 +237,13 @@ public class EditPoiData {
 	private void removeTypeTagWithPrefix(boolean needRemovePrefix) {
 		if (currentPoiType != null) {
 			if (needRemovePrefix) {
-				tagValues.put(Entity.REMOVE_TAG_PREFIX + currentPoiType.getEditOsmTag(), REMOVE_TAG_VALUE);
 				tagValues.put(Entity.REMOVE_TAG_PREFIX + currentPoiType.getOsmTag2(), REMOVE_TAG_VALUE);
+				tagValues.put(Entity.REMOVE_TAG_PREFIX + currentPoiType.getEditOsmTag(), REMOVE_TAG_VALUE);
+				tagValues.put(Entity.REMOVE_TAG_PREFIX + currentPoiType.getEditOsmTag2(), REMOVE_TAG_VALUE);
 			} else {
-				tagValues.remove(Entity.REMOVE_TAG_PREFIX + currentPoiType.getEditOsmTag());
 				tagValues.remove(Entity.REMOVE_TAG_PREFIX + currentPoiType.getOsmTag2());
+				tagValues.remove(Entity.REMOVE_TAG_PREFIX + currentPoiType.getEditOsmTag());
+				tagValues.remove(Entity.REMOVE_TAG_PREFIX + currentPoiType.getEditOsmTag2());
 			}
 			removeCurrentTypeTag();
 		}
@@ -249,9 +251,10 @@ public class EditPoiData {
 
 	private void removeCurrentTypeTag() {
 		if (currentPoiType != null) {
-			tagValues.remove(currentPoiType.getEditOsmTag());
 			tagValues.remove(currentPoiType.getOsmTag2());
-			changedTags.removeAll(Arrays.asList(currentPoiType.getEditOsmTag(), currentPoiType.getOsmTag2()));
+			tagValues.remove(currentPoiType.getEditOsmTag());
+			tagValues.remove(currentPoiType.getEditOsmTag2());
+			changedTags.removeAll(Arrays.asList(currentPoiType.getEditOsmTag(),currentPoiType.getEditOsmTag2(), currentPoiType.getOsmTag2()));
 		}
 	}
 

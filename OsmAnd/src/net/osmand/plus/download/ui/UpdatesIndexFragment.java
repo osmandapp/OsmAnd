@@ -42,6 +42,7 @@ import net.osmand.plus.liveupdates.LiveUpdatesClearDialogFragment.RefreshLiveUpd
 import net.osmand.plus.liveupdates.LiveUpdatesFragmentNew;
 import net.osmand.plus.liveupdates.LoadLiveMapsTask;
 import net.osmand.plus.liveupdates.LoadLiveMapsTask.LocalIndexInfoAdapter;
+import net.osmand.plus.chooseplan.ChoosePlanDialogFragment.ChoosePlanDialogType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.base.OsmAndListFragment;
@@ -369,7 +370,8 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 						cardView.setOnClickListener(new OnClickListener() {
 							@Override
 							public void onClick(View v) {
-								ChoosePlanDialogFragment.showOsmLiveInstance(getMyActivity().getSupportFragmentManager());
+								ChoosePlanDialogFragment.showDialogInstance(getMyApplication(),
+										getMyActivity().getSupportFragmentManager(), ChoosePlanDialogType.OSM_LIVE);
 							}
 						});
 					} else {

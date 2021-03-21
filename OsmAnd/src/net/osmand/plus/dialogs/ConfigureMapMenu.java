@@ -33,17 +33,17 @@ import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.helpers.enums.DayNightMode;
-import net.osmand.plus.settings.backend.OsmandPreference;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.CommonPreference;
-import net.osmand.plus.settings.backend.ListStringPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.enums.DayNightMode;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RendererRegistry;
+import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.ListStringPreference;
+import net.osmand.plus.settings.backend.OsmandPreference;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.transport.TransportLinesMenu;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -504,7 +504,7 @@ public class ConfigureMapMenu {
 							}
 						}
 						selectedLanguageIndex = selected;
-						transliterateNames = view.getSettings().MAP_TRANSLITERATE_NAMES.get();
+						transliterateNames = settings.MAP_TRANSLITERATE_NAMES.get();
 
 						final OnCheckedChangeListener translitChangdListener = new OnCheckedChangeListener() {
 							@Override
@@ -530,7 +530,7 @@ public class ConfigureMapMenu {
 									TextView switchText = (TextView) v.findViewById(R.id.switchText);
 									switchText.setText(activity.getString(R.string.translit_name_if_miss, txtValues[position]));
 									SwitchCompat check = (SwitchCompat) v.findViewById(R.id.check);
-									check.setChecked(transliterateNames);
+									check.setChecked(settings.MAP_TRANSLITERATE_NAMES.isSet() ? transliterateNames : txtIds[position].equals("en"));
 									check.setOnCheckedChangeListener(translitChangdListener);
 									UiUtilities.setupCompoundButton(nightMode, selectedProfileColor, check);
 								} else {
