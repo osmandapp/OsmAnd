@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
@@ -21,7 +22,6 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.LocationsHolder;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
-import net.osmand.plus.LockableScrollView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -176,13 +176,15 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 
 		calculateGpxApproximation(true);
 
-		final LockableScrollView profileView = mainView.findViewById(R.id.route_menu_bottom_scroll);
-		final LinearLayout profileContainer = mainView.findViewById(R.id.route_menu_cards_container);
+		final ScrollView profileView = (ScrollView) getBottomScrollView();
 		profileView.postDelayed(new Runnable() {
 			@Override
 			public void run() {
-				int selectedProfilePosition = profileContainer.getHeight() / ApplicationMode.values(getMyApplication()).size() * snapToRoadAppMode.getOrder();
-				profileView.scrollTo(0, selectedProfilePosition);
+				View view = profileView.findViewWithTag(snapToRoadAppMode.getStringKey());
+				if (view != null) {
+					int headerHeight = getResources().getDimensionPixelSize(R.dimen.measurement_tool_button_height);
+					profileView.scrollTo(0, view.getTop() + headerHeight);
+				}
 			}
 		}, 100);
 
