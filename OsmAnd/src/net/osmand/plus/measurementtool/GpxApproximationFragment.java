@@ -158,15 +158,6 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 			updateCardsLayout();
 		}
 		updateCards();
-		final LockableScrollView profileContainer = mainView.findViewById(R.id.route_menu_bottom_scroll);
-		profileContainer.postDelayed(new Runnable() {
-			@Override
-			public void run() {
-				if (snapToRoadAppMode.getOrder() > 4) {
-					profileContainer.fullScroll(View.FOCUS_DOWN);
-				}
-			}
-		}, 100);
 		updateButtons(mainView);
 
 		progressBar = mainView.findViewById(R.id.progress_bar);
@@ -184,6 +175,16 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 		runLayoutListener();
 
 		calculateGpxApproximation(true);
+
+		final LockableScrollView profileView = mainView.findViewById(R.id.route_menu_bottom_scroll);
+		final LinearLayout profileContainer = mainView.findViewById(R.id.route_menu_cards_container);
+		profileView.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				int selectedProfilePosition = profileContainer.getHeight() / ApplicationMode.values(getMyApplication()).size() * snapToRoadAppMode.getOrder();
+				profileView.scrollTo(0, selectedProfilePosition);
+			}
+		}, 100);
 
 		return mainView;
 	}

@@ -132,8 +132,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private ImageView mainIcon;
 	private String fileName;
 	private OnBackPressedCallback onBackPressedCallback;
-	private boolean isShowSnapWarning;
-	private static final String SHOW_SNAP_WARNING = "show_snap_warning";
+	private boolean showSnapWarning;
 
 	private InfoType currentInfoType;
 
@@ -237,11 +236,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		if (mapActivity == null) {
 			return null;
 		}
-		if (savedInstanceState != null) {
-			restoreState(savedInstanceState);
-		} else if (getArguments() != null) {
-			restoreState(getArguments());
-		}
+
 		final MeasurementToolLayer measurementLayer = mapActivity.getMapLayers().getMeasurementToolLayer();
 		final OsmandApplication app = mapActivity.getMyApplication();
 
@@ -559,12 +554,11 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			}
 		});
 
-		isShowSnapWarning = getArguments().getBoolean(SHOW_SNAP_WARNING);
 		initMeasurementMode(gpxData, savedInstanceState == null);
 		if (savedInstanceState == null) {
 			if (fileName != null) {
 				addNewGpxData(getGpxFile(fileName));
-			} else if (editingCtx.isApproximationNeeded() && isFollowTrackMode()) {
+			} else if (editingCtx.isApproximationNeeded() && isFollowTrackMode() && showSnapWarning) {
 				enterApproximationMode(mapActivity);
 			}
 		} else {
@@ -671,6 +665,15 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
+	}
+
+
+	public boolean isShowSnapWarning() {
+		return this.showSnapWarning;
+	}
+
+	public void setShowSnapWarning(boolean showSnapWarning) {
+		this.showSnapWarning = showSnapWarning;
 	}
 
 	public MeasurementEditingContext getEditingCtx() {
@@ -1965,13 +1968,11 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	public static boolean showInstance(FragmentManager fragmentManager, MeasurementEditingContext editingCtx,
-									   boolean followTrackMode, boolean isShowSnapWarning) {
+									   boolean followTrackMode, boolean showSnapWarning) {
 		MeasurementToolFragment fragment = new MeasurementToolFragment();
 		fragment.setEditingCtx(editingCtx);
 		fragment.setMode(FOLLOW_TRACK_MODE, followTrackMode);
-		Bundle bundle = new Bundle();
-		bundle.putBoolean(SHOW_SNAP_WARNING, isShowSnapWarning);
-		fragment.setArguments(bundle);
+		fragment.setShowSnapWarning(showSnapWarning);
 		return showFragment(fragment, fragmentManager);
 	}
 
@@ -2114,9 +2115,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			manager.beginTransaction()
 					.hide(this).commit();
 			layer.setTapsDisabled(true);
-			if (isShowSnapWarning) {
-				SnapTrackWarningFragment.showInstance(mapActivity.getSupportFragmentManager(), this);
-			}
+			SnapTrackWarningFragment.showInstance(mapActivity.getSupportFragmentManager(), this);
 			AndroidUiHelper.setVisibility(mapActivity, View.GONE, R.id.map_ruler_container);
 		}
 	}
@@ -2142,7 +2141,4 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		void onUpdateInfo();
 	}
 
-	public void restoreState(Bundle bundle) {
-		isShowSnapWarning = bundle.getBoolean(SHOW_SNAP_WARNING);
-	}
 }
