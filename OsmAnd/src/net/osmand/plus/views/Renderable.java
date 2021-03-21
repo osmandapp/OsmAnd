@@ -284,7 +284,8 @@ public class Renderable {
         protected void drawSolid(List<WptPt> points, Paint linePaint, Canvas canvas, RotatedTileBox tileBox) {
             QuadRect tileBounds = tileBox.getLatLonBounds();
             PathMeasure pathMeasure = new PathMeasure();
-            Path path = new Path();
+            Path pathToDraw = new Path();
+            Path pathToMeasure = new Path();
 
             WptPt prevPt = points.get(0);
             String currentProfile = getProfile(points);
@@ -298,16 +299,15 @@ public class Renderable {
                 PointF start = getPointFromWpt(tileBox, prevPt);
                 PointF end = getPointFromWpt(tileBox, currentPt);
 
-                path.reset();
-                path.moveTo(start.x, start.y);
-                path.lineTo(end.x, end.y);
+                pathToMeasure.reset();
+                pathToMeasure.moveTo(start.x, start.y);
+                pathToMeasure.lineTo(end.x, end.y);
                 if (arePointsInsideTile(currentPt, prevPt, tileBounds)) {
-                    canvas.drawPath(path, borderPaint);
-                    canvas.drawPath(path, paint);
+                    pathToDraw.addPath(pathToMeasure);
                 }
 
                 if (lengthRemaining >= 0) {
-                    pathMeasure.setPath(path, false);
+                    pathMeasure.setPath(pathToMeasure, false);
                     float pathLength = pathMeasure.getLength();
                     if (lengthRemaining - pathLength <= 0) {
                         addIconPosition(start, end, pathLength, lengthRemaining, currentProfile);
@@ -316,6 +316,10 @@ public class Renderable {
                 }
 
                 if (currentPt.hasProfile()) {
+                    canvas.drawPath(pathToDraw, borderPaint);
+                    canvas.drawPath(pathToDraw, paint);
+                    pathToDraw.reset();
+
                     currentProfile = getProfile(points);
                     paint.setColor(profileValues.get(currentProfile).first);
                     updateBorderPaint(paint.getColor(), paint.getStrokeWidth() + dpToPx(4));
@@ -371,7 +375,8 @@ public class Renderable {
             if (borderPaint == null) {
                 borderPaint = new Paint();
                 borderPaint.setStyle(Paint.Style.STROKE);
-                borderPaint.setStrokeCap(Paint.Cap.BUTT);
+                borderPaint.setStrokeCap(Paint.Cap.ROUND);
+                borderPaint.setStrokeJoin(Paint.Join.ROUND);
             }
             borderPaint.setColor(ColorUtils.blendARGB(color, Color.BLACK, 0.2f));
             borderPaint.setStrokeWidth(pixWidth);
