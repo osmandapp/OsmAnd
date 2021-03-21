@@ -281,10 +281,26 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 		}
 	}
 
+	private Paint routeLinePaint = new Paint();
+
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		if (routeLineDrawInfo != null) {
 			// draw route line on map
+			updateAttrs(settings, tileBox);
+			Integer color = routeLineDrawInfo.getColor();
+			if (color == null) {
+				color = attrs.paint.getColor();
+			}
+			Integer width = routeLineDrawInfo.getWidth();
+			if (width == null) {
+				width = (int) attrs.paint.getStrokeWidth();
+			}
+			routeLinePaint.setColor(color);
+			routeLinePaint.setStrokeWidth(width);
+			int screenCenter = AndroidUtils.getScreenWidth(getMapActivity())/2;
+			int screenHeight = AndroidUtils.getScreenHeight(getMapActivity());
+			canvas.drawLine(screenCenter, 0, screenCenter, screenHeight, routeLinePaint);
 		}
 	}
 
