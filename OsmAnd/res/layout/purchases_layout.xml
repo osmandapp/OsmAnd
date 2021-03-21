@@ -11,20 +11,15 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content">
 
+		<include layout="@layout/profile_preference_toolbar_with_icon" />
+
 	</com.google.android.material.appbar.AppBarLayout>
+
 
 	<View
 		android:layout_width="match_parent"
 		android:layout_height="16dp"
 		android:background="?attr/activity_background_color" />
-
-	<include
-		android:id="@+id/osmand_live"
-		layout="@layout/osm_live_banner_list_item" />
-
-	<include
-		android:id="@+id/dismiss_button"
-		layout="@layout/divider_half_item" />
 
 	<LinearLayout
 		android:id="@+id/report_container"
@@ -106,7 +101,7 @@
 		layout="@layout/divider_half_item" />
 
 	<LinearLayout
-		android:id="@+id/support_link_container1"
+		android:id="@+id/manage_subscription_container"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:background="@android:drawable/list_selector_background"
@@ -117,7 +112,7 @@
 		android:paddingRight="@dimen/list_content_padding">
 
 		<androidx.appcompat.widget.AppCompatImageView
-			android:id="@+id/support_link_icon1"
+			android:id="@+id/manage_subscription_icon"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_gravity="center_vertical"
@@ -127,7 +122,7 @@
 			app:tint="?attr/active_color_basic" />
 
 		<net.osmand.plus.widgets.TextViewEx
-			android:id="@+id/support_link_title1"
+			android:id="@+id/manage_subscription_title"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:layout_gravity="center_vertical"
@@ -168,8 +163,9 @@
 			android:layout_gravity="center_vertical"
 			android:layout_marginEnd="@dimen/map_widget_height"
 			android:layout_marginRight="@dimen/map_widget_height"
+			android:paddingBottom="@dimen/dialog_content_bottom_margin"
 			app:srcCompat="@drawable/ic_action_help"
-			app:tint="?attr/active_color_basic" />
+			app:tint="?attr/active_color_basic_green" />
 
 		<net.osmand.plus.widgets.TextViewEx
 			android:id="@+id/troubleshooting_title"
@@ -178,8 +174,8 @@
 			android:layout_marginEnd="@dimen/card_button_progress_size_small"
 			android:layout_marginRight="@dimen/card_button_progress_size_small"
 			android:letterSpacing="@dimen/text_button_letter_spacing"
-			android:text="@string/live_updates"
-			android:textColor="?attr/active_color_basic"
+			android:text="@string/troubleshooting"
+			android:textColor="?android:textColorPrimary"
 			android:textSize="@dimen/default_list_text_size"
 			app:typeface="@string/font_roboto_medium" />
 
@@ -189,17 +185,13 @@
 			android:layout_height="wrap_content"
 			android:layout_marginEnd="@dimen/card_button_progress_size_small"
 			android:layout_marginRight="@dimen/card_button_progress_size_small"
-			android:letterSpacing="@dimen/text_button_letter_spacing"
-			android:text="@string/live_updates"
-			android:textColor="?attr/active_color_basic"
-			android:textSize="@dimen/default_list_text_size"
-			app:typeface="@string/font_roboto_medium" />
+			android:letterSpacing="@dimen/description_letter_spacing"
+			android:text="@string/troubleshooting_description"
+			android:textColor="?android:textColorSecondary"
+			android:textSize="@dimen/default_desc_text_size"
+			app:typeface="@string/font_roboto_regular" />
 
 	</LinearLayout>
-
-	<include
-		android:id="@+id/dismiss_button"
-		layout="@layout/divider_half_item" />
 
 	<LinearLayout
 		android:id="@+id/restore_purchases"
@@ -235,6 +227,10 @@
 
 	</LinearLayout>
 
+	<include
+		android:id="@+id/dismiss_button"
+		layout="@layout/divider_half_item" />
+
 	<LinearLayout
 		android:id="@+id/new_device_account_container"
 		android:layout_width="match_parent"
@@ -269,6 +265,10 @@
 
 	</LinearLayout>
 
+	<include
+		android:id="@+id/dismiss_button"
+		layout="@layout/divider" />
+
 	<LinearLayout
 		android:id="@+id/support_link_container"
 		android:layout_width="match_parent"
@@ -297,6 +297,7 @@
 			android:layout_gravity="center_vertical"
 			android:layout_marginEnd="@dimen/card_button_progress_size_small"
 			android:layout_marginRight="@dimen/card_button_progress_size_small"
+			android:paddingTop="@dimen/contex_menu_top_shadow_height"
 			android:layout_weight="1"
 			android:letterSpacing="@dimen/text_button_letter_spacing"
 			android:text="@string/contact_support_description"

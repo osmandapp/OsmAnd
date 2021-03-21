@@ -65,7 +65,9 @@ public class PurchasesFragmentEmpty extends BaseOsmAndFragment {
 		osmandLive.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ChoosePlanDialogFragment.showDialogInstance(getMyApplication(), getMyActivity().getSupportFragmentManager(), ChoosePlanDialogFragment.ChoosePlanDialogType.OSM_LIVE);
+				if (getMyApplication() != null && getMyActivity() != null) {
+					ChoosePlanDialogFragment.showDialogInstance(getMyApplication(), getMyActivity().getSupportFragmentManager(), ChoosePlanDialogFragment.ChoosePlanDialogType.OSM_LIVE);
+				}
 			}
 		});
 		setFormatLink();
