@@ -59,9 +59,6 @@ public class GpxGeometryWayDrawer extends GeometryWayDrawer<GpxGeometryWayContex
 		}
 
 		private void drawCircle(Canvas canvas, GeometryArrowsStyle style) {
-			double rad = Math.toRadians(angle + 90);
-			float x = (float) (this.x - style.getCircleAngleOffset() * Math.cos(rad));
-			float y = (float) (this.y - style.getCircleAngleOffset() * Math.sin(rad));
 			Paint paint = style.getContext().getCirclePaint();
 			paint.setColor(GeometryArrowsStyle.OUTER_CIRCLE_COLOR);
 			canvas.drawCircle(x, y, style.getOuterCircleRadius(), paint);

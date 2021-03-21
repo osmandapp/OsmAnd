@@ -89,13 +89,11 @@ public class GpxGeometryWay extends GeometryWay<GpxGeometryWayContext, GeometryW
 		protected int trackColor;
 		protected float trackWidth;
 
-		private float circleAngleOffset;
 		private float outerCircleRadius;
 		private float innerCircleRadius;
 
 		GeometryArrowsStyle(GpxGeometryWayContext context, int arrowColor, int trackColor, float trackWidth) {
 			this(context, null, arrowColor, trackColor, trackWidth);
-			circleAngleOffset = AndroidUtils.dpToPx(context.getCtx(), 1);
 			outerCircleRadius = AndroidUtils.dpToPx(context.getCtx(), 8);
 			innerCircleRadius = AndroidUtils.dpToPx(context.getCtx(), 7);
 		}
@@ -144,10 +142,6 @@ public class GpxGeometryWay extends GeometryWay<GpxGeometryWayContext, GeometryW
 
 		public float getTrackWidth() {
 			return trackWidth;
-		}
-
-		public float getCircleAngleOffset() {
-			return circleAngleOffset;
 		}
 
 		public float getOuterCircleRadius() {
