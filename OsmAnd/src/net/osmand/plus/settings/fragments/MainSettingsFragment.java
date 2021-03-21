@@ -70,10 +70,12 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 		availableAppModes = new LinkedHashSet<>(ApplicationMode.values(getMyApplication()));
 		Preference globalSettings = findPreference("global_settings");
 		globalSettings.setIcon(getContentIcon(R.drawable.ic_action_settings));
-		PreferenceCategory selectedProfile = (PreferenceCategory) findPreference(SELECTED_PROFILE);
+		Preference purchasesSettings = findPreference("purchases_settings");
+		purchasesSettings.setIcon(getContentIcon(R.drawable.ic_action_purchases));
+		PreferenceCategory selectedProfile = findPreference(SELECTED_PROFILE);
 		selectedProfile.setIconSpaceReserved(false);
 		setupConfigureProfilePref();
-		PreferenceCategory appProfiles = (PreferenceCategory) findPreference(APP_PROFILES);
+		PreferenceCategory appProfiles = findPreference(APP_PROFILES);
 		appProfiles.setIconSpaceReserved(false);
 		setupAppProfiles(appProfiles);
 		profileManagementPref();

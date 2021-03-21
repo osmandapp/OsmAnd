@@ -11,6 +11,13 @@
 	Thx - Hardy
 
 -->
+
+    <string name="contact_support_mail">support@osmand.net</string>
+    <string name="contact_support">Contact support</string>
+    <string name="empty_purchases_description">If your purchases don\'t show up here, tap on “Restore purchases”, or contact our support team.</string>
+    <string name="contact_support_description">If you have any questions, please contact us at %1$s.</string>
+    <string name="new_device_account">New device / new account</string>
+    <string name="no_purchases">You don\'t have any purchases</string>
     <string name="select_another_colorization">Please select another type of colorization.</string>
     <string name="track_has_no_speed">The track does not contain speed data.</string>
     <string name="track_has_no_altitude">The track does not contain altitude data.</string>

@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/bg_color"
+	android:orientation="vertical">
+
+	<com.google.android.material.appbar.AppBarLayout
+		android:id="@+id/appbar"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+	</com.google.android.material.appbar.AppBarLayout>
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="16dp"
+		android:background="?attr/activity_background_color" />
+
+	<include
+		android:id="@+id/osmand_live"
+		layout="@layout/osm_live_banner_list_item" />
+
+	<include
+		android:id="@+id/dismiss_button"
+		layout="@layout/divider_half_item" />
+
+	<LinearLayout
+		android:id="@+id/report_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="@android:drawable/list_selector_background"
+		android:minHeight="@dimen/list_item_height"
+		android:paddingStart="@dimen/list_content_padding"
+		android:paddingLeft="@dimen/list_content_padding"
+		android:paddingEnd="@dimen/list_content_padding"
+		android:paddingRight="@dimen/list_content_padding">
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/report_icon"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_marginEnd="@dimen/map_widget_height"
+			android:layout_marginRight="@dimen/map_widget_height"
+			app:srcCompat="@drawable/ic_action_file_report"
+			app:tint="?attr/active_color_basic" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/report_title"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_weight="1"
+			android:text="@string/report"
+			android:textColor="?attr/active_color_basic"
+			android:textSize="@dimen/default_list_text_size"
+			app:typeface="@string/font_roboto_medium" />
+
+	</LinearLayout>
+
+	<include
+		android:id="@+id/dismiss_button"
+		layout="@layout/divider_half_item" />
+
+	<LinearLayout
+		android:id="@+id/live_updates_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="@android:drawable/list_selector_background"
+		android:minHeight="@dimen/list_item_height"
+		android:paddingStart="@dimen/list_content_padding"
+		android:paddingLeft="@dimen/list_content_padding"
+		android:paddingEnd="@dimen/list_content_padding"
+		android:paddingRight="@dimen/list_content_padding">
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/live_updates_icon"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_marginEnd="@dimen/map_widget_height"
+			android:layout_marginRight="@dimen/map_widget_height"
+			app:srcCompat="@drawable/ic_action_at_mail"
+			app:tint="?attr/active_color_basic" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/live_updates_title"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_marginEnd="@dimen/card_button_progress_size_small"
+			android:layout_marginRight="@dimen/card_button_progress_size_small"
+			android:layout_weight="1"
+			android:letterSpacing="@dimen/text_button_letter_spacing"
+			android:text="@string/live_updates"
+			android:textColor="?attr/active_color_basic"
+			android:textSize="@dimen/default_list_text_size"
+			app:typeface="@string/font_roboto_medium" />
+
+	</LinearLayout>
+
+	<include
+		android:id="@+id/dismiss_button"
+		layout="@layout/divider_half_item" />
+
+	<LinearLayout
+		android:id="@+id/support_link_container1"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="@android:drawable/list_selector_background"
+		android:minHeight="@dimen/list_item_height"
+		android:paddingStart="@dimen/list_content_padding"
+		android:paddingLeft="@dimen/list_content_padding"
+		android:paddingEnd="@dimen/list_content_padding"
+		android:paddingRight="@dimen/list_content_padding">
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/support_link_icon1"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_marginEnd="@dimen/map_widget_height"
+			android:layout_marginRight="@dimen/map_widget_height"
+			app:srcCompat="@drawable/ic_action_purchases"
+			app:tint="?attr/active_color_basic" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/support_link_title1"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_marginEnd="@dimen/card_button_progress_size_small"
+			android:layout_marginRight="@dimen/card_button_progress_size_small"
+			android:layout_weight="1"
+			android:letterSpacing="@dimen/text_button_letter_spacing"
+			android:text="@string/manage_subscription"
+			android:textColor="?attr/active_color_basic"
+			android:textSize="@dimen/default_list_text_size"
+			app:typeface="@string/font_roboto_medium" />
+
+	</LinearLayout>
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="16dp"
+		android:background="?attr/activity_background_color" />
+
+	<LinearLayout
+		android:id="@+id/troubleshooting_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="@android:drawable/list_selector_background"
+		android:minHeight="@dimen/list_item_height"
+		android:orientation="vertical"
+		android:paddingStart="@dimen/list_content_padding"
+		android:paddingLeft="@dimen/list_content_padding"
+		android:paddingTop="14dp"
+		android:paddingEnd="@dimen/list_content_padding"
+		android:paddingRight="@dimen/list_content_padding"
+		android:paddingBottom="6dp">
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/troubleshooting_icon"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_marginEnd="@dimen/map_widget_height"
+			android:layout_marginRight="@dimen/map_widget_height"
+			app:srcCompat="@drawable/ic_action_help"
+			app:tint="?attr/active_color_basic" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/troubleshooting_title"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginEnd="@dimen/card_button_progress_size_small"
+			android:layout_marginRight="@dimen/card_button_progress_size_small"
+			android:letterSpacing="@dimen/text_button_letter_spacing"
+			android:text="@string/live_updates"
+			android:textColor="?attr/active_color_basic"
+			android:textSize="@dimen/default_list_text_size"
+			app:typeface="@string/font_roboto_medium" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/troubleshooting_description"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginEnd="@dimen/card_button_progress_size_small"
+			android:layout_marginRight="@dimen/card_button_progress_size_small"
+			android:letterSpacing="@dimen/text_button_letter_spacing"
+			android:text="@string/live_updates"
+			android:textColor="?attr/active_color_basic"
+			android:textSize="@dimen/default_list_text_size"
+			app:typeface="@string/font_roboto_medium" />
+
+	</LinearLayout>
+
+	<include
+		android:id="@+id/dismiss_button"
+		layout="@layout/divider_half_item" />
+
+	<LinearLayout
+		android:id="@+id/restore_purchases"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="@android:drawable/list_selector_background"
+		android:minHeight="@dimen/list_item_height"
+		android:paddingStart="@dimen/list_content_padding"
+		android:paddingLeft="@dimen/list_content_padding"
+		android:paddingEnd="@dimen/list_content_padding"
+		android:paddingRight="@dimen/list_content_padding">
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/icon"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_marginEnd="@dimen/map_widget_height"
+			android:layout_marginRight="@dimen/map_widget_height"
+			app:srcCompat="@drawable/ic_action_reset_to_default_dark"
+			app:tint="?attr/active_color_basic" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/title"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_weight="1"
+			android:text="@string/restore_purchases"
+			android:textColor="?attr/active_color_basic"
+			android:textSize="@dimen/default_list_text_size"
+			app:typeface="@string/font_roboto_medium" />
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/new_device_account_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="@android:drawable/list_selector_background"
+		android:minHeight="@dimen/list_item_height"
+		android:paddingStart="@dimen/list_content_padding"
+		android:paddingLeft="@dimen/list_content_padding"
+		android:paddingEnd="@dimen/list_content_padding"
+		android:paddingRight="@dimen/list_content_padding">
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/icon_new_device_account"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_marginEnd="@dimen/map_widget_height"
+			android:layout_marginRight="@dimen/map_widget_height"
+			app:srcCompat="@drawable/ic_action_help_online"
+			app:tint="?attr/active_color_basic" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/new_device_account_title"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_weight="1"
+			android:text="@string/new_device_account"
+			android:textColor="?attr/active_color_basic"
+			android:textSize="@dimen/default_list_text_size"
+			app:typeface="@string/font_roboto_medium" />
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/support_link_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="@android:drawable/list_selector_background"
+		android:minHeight="@dimen/list_item_height"
+		android:paddingStart="@dimen/list_content_padding"
+		android:paddingLeft="@dimen/list_content_padding"
+		android:paddingEnd="@dimen/list_content_padding"
+		android:paddingRight="@dimen/list_content_padding">
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/support_link_icon"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_marginEnd="@dimen/map_widget_height"
+			android:layout_marginRight="@dimen/map_widget_height"
+			app:srcCompat="@drawable/ic_action_at_mail"
+			app:tint="?attr/active_color_basic" />
+
+		<TextView
+			android:id="@+id/support_link_title"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_marginEnd="@dimen/card_button_progress_size_small"
+			android:layout_marginRight="@dimen/card_button_progress_size_small"
+			android:layout_weight="1"
+			android:letterSpacing="@dimen/text_button_letter_spacing"
+			android:text="@string/contact_support_description"
+			android:textColor="?android:textColorPrimary"
+			android:textSize="@dimen/default_list_text_size" />
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/contact_support_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="@android:drawable/list_selector_background"
+		android:paddingStart="@dimen/action_bar_image_side_margin"
+		android:paddingLeft="@dimen/action_bar_image_side_margin"
+		android:paddingTop="@dimen/card_padding"
+		android:paddingEnd="@dimen/action_bar_image_side_margin"
+		android:paddingRight="@dimen/action_bar_image_side_margin"
+		android:paddingBottom="@dimen/card_padding">
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/contact_support_title"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_weight="1"
+			android:text="@string/contact_support"
+			android:textColor="?attr/active_color_basic"
+			android:textSize="@dimen/default_list_text_size"
+			app:typeface="@string/font_roboto_medium" />
+
+	</LinearLayout>
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?attr/activity_background_color" />
+
+</LinearLayout>

@@ -14,6 +14,14 @@
 		tools:icon="@drawable/ic_action_settings" />
 
 	<Preference
+		android:key="purchases_settings"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:title="@string/purchases"
+		app:fragment="net.osmand.plus.settings.fragments.PurchasesFragmentEmpty"
+		tools:icon="@drawable/ic_action_purchases" />
+
+	<Preference
 		android:layout="@layout/list_item_divider"
 		android:selectable="false" />
 
