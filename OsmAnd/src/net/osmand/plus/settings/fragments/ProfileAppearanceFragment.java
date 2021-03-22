@@ -57,6 +57,7 @@ import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routing.RouteLineDrawInfo;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.backup.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.fragments.RouteLineAppearanceFragment.OnApplyRouteLineListener;
@@ -1018,28 +1019,30 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 	}
 
 	private RouteLineDrawInfo createRouteLineDrawInfo(@NonNull ApplicationMode appMode) {
-		Integer color = null;
-		Integer width = null;
-		if (settings.ROUTE_LINE_COLOR.isSetForMode(appMode)) {
-			color = settings.ROUTE_LINE_COLOR.getModeValue(appMode);
-		}
-		if (settings.ROUTE_LINE_WIDTH.isSetForMode(appMode)) {
-			width = settings.ROUTE_LINE_WIDTH.getModeValue(appMode);
-		}
+		Integer color = getRouteLineAttribute(appMode, settings.ROUTE_LINE_COLOR);
+		Integer width = getRouteLineAttribute(appMode, settings.ROUTE_LINE_WIDTH);
 		return new RouteLineDrawInfo(color, width);
 	}
 
+	private Integer getRouteLineAttribute(@NonNull ApplicationMode appMode,
+	                                      @NonNull CommonPreference<Integer> preference) {
+		int value = preference.getModeValue(appMode);
+		return value != 0 ? value : null;
+	}
+
 	private void saveRouteLineAppearance(@NonNull ApplicationMode appMode,
-	                                     @NonNull RouteLineDrawInfo routeLineDrawInfo) {
-		if (routeLineDrawInfo.getColor() != null) {
-			settings.ROUTE_LINE_COLOR.setModeValue(appMode, routeLineDrawInfo.getColor());
+	                                     @NonNull RouteLineDrawInfo drawInfo) {
+		saveRouteLineAttribute(appMode, settings.ROUTE_LINE_COLOR, drawInfo.getColor());
+		saveRouteLineAttribute(appMode, settings.ROUTE_LINE_WIDTH, drawInfo.getWidth());
+	}
+
+	private void saveRouteLineAttribute(@NonNull ApplicationMode appMode,
+	                                    @NonNull CommonPreference<Integer> preference,
+	                                    @Nullable Integer value) {
+		if (value != null) {
+			preference.setModeValue(appMode, value);
 		} else {
-			settings.ROUTE_LINE_COLOR.resetToDefault();
-		}
-		if (routeLineDrawInfo.getWidth() != null) {
-			settings.ROUTE_LINE_WIDTH.setModeValue(appMode, routeLineDrawInfo.getWidth());
-		} else {
-			settings.ROUTE_LINE_WIDTH.resetToDefault();
+			preference.resetModeToDefault(appMode);
 		}
 	}
 
