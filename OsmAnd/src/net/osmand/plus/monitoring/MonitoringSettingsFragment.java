@@ -117,7 +117,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 	}
 
 	private void setupSaveTrackIntervalPref() {
-		HashMap<Object, String> entry = getTimeValues(false);
+		HashMap<Object, String> entry = getTimeValues();
 		ListPreferenceEx saveTrackInterval = (ListPreferenceEx) findPreference(settings.SAVE_TRACK_INTERVAL.getId());
 		saveTrackInterval.setEntries(entry.values().toArray(new String[0]));
 		saveTrackInterval.setEntryValues(entry.keySet().toArray());
@@ -126,25 +126,18 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 	}
 
 	private void setupSaveGlobalTrackIntervalPref() {
-		HashMap<Object, String> entry = getTimeValues(true);
+		HashMap<Object, String> entry = getTimeValues();
 		ListPreferenceEx saveTrackInterval = (ListPreferenceEx) findPreference(settings.SAVE_GLOBAL_TRACK_INTERVAL.getId());
 		saveTrackInterval.setEntries(entry.values().toArray(new String[0]));
 		saveTrackInterval.setEntryValues(entry.keySet().toArray());
 		ApplicationMode selectedAppMode = getSelectedAppMode();
-		if (!settings.SAVE_GLOBAL_TRACK_REMEMBER.getModeValue(selectedAppMode)) {
-			saveTrackInterval.setValue(settings.SAVE_GLOBAL_TRACK_REMEMBER.getModeValue(selectedAppMode));
-		} else {
-			saveTrackInterval.setValue(settings.SAVE_GLOBAL_TRACK_INTERVAL.getModeValue(selectedAppMode));
-		}
+		saveTrackInterval.setValue(settings.SAVE_GLOBAL_TRACK_INTERVAL.getModeValue(selectedAppMode));
 		saveTrackInterval.setIcon(getActiveIcon(R.drawable.ic_action_time_span));
 		saveTrackInterval.setDescription(R.string.save_global_track_interval_descr);
 	}
 
-	private HashMap<Object, String> getTimeValues(boolean alwaysAskEntry) {
+	private HashMap<Object, String> getTimeValues() {
 		HashMap<Object, String> entry = new LinkedHashMap<>();
-		if (alwaysAskEntry) {
-			entry.put(settings.SAVE_GLOBAL_TRACK_REMEMBER.getModeValue(getSelectedAppMode()), getString(R.string.confirm_every_run));
-		}
 		for (int second : SECONDS) {
 			entry.put(second * 1000, second + " " + getString(R.string.int_seconds));
 		}
