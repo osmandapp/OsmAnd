@@ -225,6 +225,10 @@ public class TripRecordingBottomFragment extends MenuBottomSheetDialogFragment i
 		super.onResume();
 		blockStatisticsBuilder.runUpdatingStatBlocksIfNeeded();
 		runUpdatingGPS();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getMapLayers().getGpxLayer().setTrackChartPoints(trackChartPoints);
+		}
 	}
 
 	@Override
@@ -235,7 +239,8 @@ public class TripRecordingBottomFragment extends MenuBottomSheetDialogFragment i
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.getMapLayers().getGpxLayer().setTrackChartPoints(null);
-		}}
+		}
+	}
 
 	public void show() {
 		Dialog dialog = getDialog();
