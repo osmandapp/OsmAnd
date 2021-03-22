@@ -22,6 +22,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
+import net.osmand.plus.chooseplan.ChoosePlanDialogFragment.ChoosePlanDialogType;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
@@ -146,8 +147,15 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 
 	@Override
 	public void savedArticlesUpdated() {
-		if (isAdded()) {
-			adapter.notifyDataSetChanged();
+		OsmandApplication app = getMyApplication();
+		if (app != null) {
+			DownloadIndexesThread downloadThread = app.getDownloadThread();
+			if (!downloadThread.getIndexes().isDownloadedFromInternet) {
+				waitForIndexes = true;
+				downloadThread.runReloadIndexFilesSilent();
+			} else {
+				checkDownloadIndexes();
+			}
 		}
 	}
 
@@ -300,7 +308,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 							|| item.getType() == DownloadActivityType.TRAVEL_FILE) && !Version.isPaidVersion(app)) {
 						FragmentManager fm = getFragmentManager();
 						if (fm != null) {
-							ChoosePlanDialogFragment.showWikipediaInstance(fm);
+							ChoosePlanDialogFragment.showDialogInstance(app, fm, ChoosePlanDialogType.WIKIPEDIA);
 						}
 					} else {
 						DownloadIndexesThread downloadThread = app.getDownloadThread();
@@ -356,7 +364,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 							|| item.getType() == DownloadActivityType.TRAVEL_FILE) && !Version.isPaidVersion(app)) {
 						FragmentManager fm = getFragmentManager();
 						if (fm != null) {
-							ChoosePlanDialogFragment.showWikipediaInstance(fm);
+							ChoosePlanDialogFragment.showDialogInstance(app, fm, ChoosePlanDialogType.WIKIPEDIA);
 						}
 					} else {
 						DownloadIndexesThread downloadThread = app.getDownloadThread();
@@ -442,8 +450,12 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 		@Override
 		protected void onPostExecute(Pair<List<IndexItem>, List<IndexItem>> res) {
 			ExploreTabFragment fragment = weakFragment.get();
-			if (res != null && fragment != null && fragment.isResumed()) {
+			if (res != null && fragment != null && fragment.isAdded()) {
 				fragment.addIndexItemCards(res.first, res.second);
+				fragment.removeRedundantCards();
+				if (!fragment.isResumed()) {
+					fragment.invalidateAdapter();
+				}
 			}
 		}
 	}

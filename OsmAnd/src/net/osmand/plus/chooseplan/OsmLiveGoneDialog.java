@@ -28,6 +28,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.chooseplan.ChoosePlanDialogFragment.ChoosePlanDialogType;
 import net.osmand.plus.chooseplan.ChoosePlanDialogFragment.OsmAndFeature;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
@@ -235,7 +236,7 @@ public abstract class OsmLiveGoneDialog extends BaseOsmAndDialogFragment {
 							dismiss();
 							FragmentActivity activity = getActivity();
 							if (activity != null) {
-								ChoosePlanDialogFragment.showOsmLiveInstance(activity.getSupportFragmentManager());
+								ChoosePlanDialogFragment.showDialogInstance(app, activity.getSupportFragmentManager(), ChoosePlanDialogType.OSM_LIVE);
 							}
 						}
 					});

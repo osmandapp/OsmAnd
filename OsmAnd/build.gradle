@@ -84,14 +84,14 @@ android {
 			manifest.srcFile "AndroidManifest-nightlyFree.xml"
 		}
 		amazonFree {
-			java.srcDirs = ["src-nogms", "src-google"]
+			java.srcDirs = ["src-nogms", "src-amazon"]
 			manifest.srcFile "AndroidManifest-gplayFree.xml"
 		}
 		amazonFull {
-			java.srcDirs = ["src-nogms", "src-google"]
+			java.srcDirs = ["src-nogms", "src-amazon"]
 		}
 		huawei {
-			java.srcDirs = ["src-nogms", "src-google"]
+			java.srcDirs = ["src-nogms", "src-huawei"]
 			manifest.srcFile "AndroidManifest-huawei.xml"
 		}
 

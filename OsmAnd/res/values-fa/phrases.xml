@@ -8,10 +8,10 @@
     <string name="poi_beverages">فروشگاه نوشیدنی</string>
     <string name="poi_butcher">فروشگاه گوشت</string>
     <string name="poi_deli">بقالی</string>
-    <string name="poi_farm">فروشگاه محصولات دامی</string>
+    <string name="poi_farm">فروشگاه محصولات مزرعه</string>
     <string name="poi_greengrocer">میوه و سبزی‌فروشی</string>
     <string name="poi_seafood">فروشگاه غذاهای دریایی</string>
-    <string name="poi_confectionery">شیرینی و آجیل فروشی</string>
+    <string name="poi_confectionery">شیرینی و آب‌نبات فروشی</string>
     <string name="poi_ice_cream">بستنی فروشی</string>
     <string name="poi_supermarket">فروشگاه بزرگ</string>
     <string name="poi_tea">فروشگاه چای</string>
@@ -19,18 +19,18 @@
     <string name="poi_vending_machine">دستگاه فروش خودکار</string>
     <string name="poi_books">کتابفروشی</string>
     <string name="poi_bicycle">فروشگاه دوچرخه</string>
-    <string name="poi_anime">فروشگاه کارتون</string>
+    <string name="poi_anime">فروشگاه انیمه</string>
     <string name="poi_antiques">عتیقه فروشی</string>
     <string name="poi_art">فروشگاه هنر</string>
     <string name="poi_baby_goods">کالای کودک</string>
-    <string name="poi_bag">فروشگاه کیف</string>
+    <string name="poi_bag">کیف فروشی</string>
     <string name="poi_bathroom_furnishing">لوازم حمام</string>
     <string name="poi_bed">مبلمان اتاق خواب</string>
     <string name="poi_boutique">بوتیک</string>
-    <string name="poi_carpet">فروشگاه فرش</string>
+    <string name="poi_carpet">فرش فروشی</string>
     <string name="poi_chemist">فروشگاه محصولات بهداشتی و آرایشی</string>
     <string name="poi_clothes">فروشگاه پوشاک</string>
-    <string name="poi_clothes_children">\فروشگاه پوشاک کودکان</string>
+    <string name="poi_clothes_children">فروشگاه پوشاک کودک</string>
     <string name="poi_shoes">کفش فروشی</string>
     <string name="poi_computer">فروشگاه کامپیوتر</string>
     <string name="poi_copyshop">فروشگاه چاپ و تکثیر</string>
@@ -63,7 +63,7 @@
     <string name="poi_musical_instrument">فروشگاه لوزم موسیقی</string>
     <string name="poi_newsagent">روزنامه فروشی</string>
     <string name="poi_optician">عینک سازی</string>
-    <string name="poi_organic">مواد غذایی ارگانیک</string>
+    <string name="poi_organic">محصولات ارگانیک</string>
     <string name="poi_outdoor">بازار روز</string>
     <string name="poi_paint">رنگ فروشی</string>
     <string name="poi_pet">فروشگاه حیوانات خانگی</string>
@@ -72,8 +72,8 @@
     <string name="poi_ship_chandler">کشتی</string>
     <string name="poi_sports">لوازم ورزشی</string>
     <string name="poi_stationery">فروشگاه نوشت افزار</string>
-    <string name="poi_tableware">فروشگاه کارد و چنگال</string>
-    <string name="poi_ticket">فروشگاه بلیط</string>
+    <string name="poi_tableware">فروشگاه ظروف غذاخوری</string>
+    <string name="poi_ticket">بلیت فروشی</string>
     <string name="poi_tobacco">دخانیات</string>
     <string name="poi_toys">اسباب بازی فروشی</string>
     <string name="poi_trade"/>
@@ -121,7 +121,7 @@
     <string name="poi_vehicle_inspection">معاینه فنی خودرو</string>
     <string name="poi_car_wash">کارواش</string>
     <string name="poi_fuel">جایگاه سوخت; جایگاه سوخت‌گیری; پمپ بنزین; پمپ گاز</string>
-    <string name="poi_electricity_combined_charging">ایستگاه شارژ</string>
+    <string name="poi_electricity_combined_charging">ایستگاه شارژ; ایستگاه شارژ خودروی برقی</string>
     <string name="poi_vehicle_ramp">سطح شیب دار خودرو</string>
     <string name="poi_compressed_air">هوای فشرده</string>
     <string name="poi_parking">پارکینگ</string>
@@ -196,7 +196,7 @@
     <string name="poi_pier">اسکله</string>
     <string name="poi_surveillance">نظارت</string>
     <string name="poi_observatory">رصد خانه</string>
-    <string name="poi_astronomical_observatory">رصدخانه نجوم</string>
+    <string name="poi_astronomical_observatory">نجومی</string>
     <string name="poi_construction">ساخت و ساز</string>
     <string name="poi_works">کارگاه</string>
     <string name="poi_mineshaft">معدن</string>
@@ -317,7 +317,7 @@
     <string name="poi_ice_skating">اسکیت روی یخ</string>
     <string name="poi_ice_stock">زمین یخ</string>
     <string name="poi_korfbal">زمین بسکتبال اسکاتلندی</string>
-    <string name="poi_sport_motor">پیست موتور سواری</string>
+    <string name="poi_sport_motor">ورزش موتورسواری</string>
     <string name="poi_sport_multi">چندورزشی</string>
     <string name="poi_orienteering">ورزش جهت یابی</string>
     <string name="poi_paddle_tennis">تنیس پدالی</string>
@@ -428,11 +428,11 @@
     <string name="poi_club_tourism">باشگاه گردشگری</string>
     <string name="poi_club_charity">کلوپ خیریه</string>
     <string name="poi_library">کتابخانه</string>
-    <string name="poi_arts_centre">مرکز هنر</string>
+    <string name="poi_arts_centre">مرکز هنری</string>
     <string name="poi_cinema">سینما</string>
     <string name="poi_casino">کازینو</string>
     <string name="poi_community_centre">مرکز اجتماع</string>
-    <string name="poi_social_centre">مرکز سوسیال</string>
+    <string name="poi_social_centre">مرکز اجتماعی</string>
     <string name="poi_theatre">تئاتر</string>
     <string name="poi_theatre_genre_circus">سیرک</string>
     <string name="poi_dance_floor">رقص</string>
@@ -446,7 +446,7 @@
     <string name="poi_marina">لنگرگاه تفریحی</string>
     <string name="poi_miniature_golf">گلف کوچک</string>
     <string name="poi_playground">زمین بازی</string>
-    <string name="poi_swimming_pool">استخر</string>
+    <string name="poi_swimming_pool">استخر شنا</string>
     <string name="poi_water_park">پارک آبی</string>
     <string name="poi_park">پارک</string>
     <string name="poi_cafe">کافه</string>
@@ -509,7 +509,7 @@
     <string name="poi_funeral_directors">قبرکن</string>
     <string name="poi_craft_computer">صنایع کامپیوتر</string>
     <string name="poi_beauty">سالن زیبایی</string>
-    <string name="poi_beauty_salon_nails">کاشت ناخن</string>
+    <string name="poi_beauty_salon_nails">کاشت ناخن; مانیکور</string>
     <string name="poi_hairdresser">آرایشگر</string>
     <string name="poi_massage">سالن ماساژ</string>
     <string name="poi_tattoo">سالن تاتو</string>
@@ -519,7 +519,7 @@
     <string name="poi_car_sharing">جمعه بازار خودرو</string>
     <string name="poi_boat_sharing">جمعه بازار قایق</string>
     <string name="poi_dock">بارانداز</string>
-    <string name="poi_toilets">سرویس بهداشتی</string>
+    <string name="poi_toilets">سرویس بهداشتی; دستشویی; مستراح</string>
     <string name="poi_sauna">سونا</string>
     <string name="poi_brothel"/>
     <string name="poi_mortuary">سردخانه مردگان</string>
@@ -667,7 +667,7 @@
     <string name="poi_clock_option">تنظیمات ساعت</string>
     <string name="poi_scout_camp">کمپ گردشگری</string>
     <string name="poi_backcountry">کمپ بدون امکانات</string>
-    <string name="poi_piste_grooming">مراقبت از پیست</string>
+    <string name="poi_piste_grooming">آماده‌سازی پیست</string>
     <string name="poi_outdoor_seating">نشستن بیرون</string>
     <string name="poi_smoking">دخانیات</string>
     <string name="poi_delivery">تحویل</string>
@@ -766,7 +766,7 @@
     <string name="poi_office">دفتر</string>
     <string name="poi_tourism">گردشگری</string>
     <string name="poi_sightseeing">دیدنی‌ها</string>
-    <string name="poi_accomodation">محل اسکان</string>
+    <string name="poi_accomodation">محل اسکان; اقامت</string>
     <string name="poi_internet_access">دسترسی اینترنت</string>
     <string name="poi_entertainment">اوقات فراغت</string>
     <string name="poi_club">باشگاه</string>
@@ -1070,13 +1070,13 @@
     <string name="poi_cuisine_soup">سوپ</string>
     <string name="poi_tourism_yes">نقطهٔ گردشگری</string>
     <string name="poi_internet_access_no">دسترسی اینترنت: ندارد</string>
-    <string name="poi_internet_access_fee_no">دسترسی اینترنت - رایگان</string>
+    <string name="poi_internet_access_fee_no">دسترسی اینترنت: رایگان</string>
     <string name="poi_fee_no">خیر</string>
     <string name="poi_drinking_water_no">خیر</string>
     <string name="poi_seasonal_no">خیر</string>
-    <string name="poi_traffic_signals_sound_no">خیر</string>
+    <string name="poi_traffic_signals_sound_no">صدا: خیر</string>
     <string name="poi_piste_grooming_no">خیر</string>
-    <string name="poi_historic_quarry">"معدن تاریخی سنگ "</string>
+    <string name="poi_historic_quarry">معدن تاریخی سنگ</string>
     <string name="poi_diet_vegetarian_filter_yes">گیاه‌خواری</string>
     <string name="poi_diet_vegetarian_only">فقط گیاه‌خواری</string>
     <string name="poi_diet_vegetarian_yes">گیاه‌خواری</string>
@@ -1188,7 +1188,7 @@
     <string name="poi_internet_access_public">دسترسی اینترنت: عمومی</string>
     <string name="poi_internet_access_service">دسترسی اینترنت: با خدمات</string>
     <string name="poi_internet_access_yes">دسترسی اینترنت: دارد</string>
-    <string name="poi_internet_access_fee_yes">دسترسی اینترنت - پولی</string>
+    <string name="poi_internet_access_fee_yes">دسترسی اینترنت: پولی</string>
     <string name="poi_smoking_separated">در اتاق جداگانه</string>
     <string name="poi_smoking_isolated">در یک اتاق جدا</string>
     <string name="poi_piste_grooming_scooter">اسکوتر</string>
@@ -1448,4 +1448,5 @@
     <string name="poi_climbing_crag">بله</string>
     <string name="poi_protected_area">منطقهٔ حفاظت‌شده</string>
     <string name="poi_badminton">بدمینتون</string>
+    <string name="poi_service_car">خدمات خودرو; مکانیکی</string>
 </resources>

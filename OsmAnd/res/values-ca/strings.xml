@@ -174,7 +174,7 @@
     <string name="general_settings">Paràmetres generals</string>
     <string name="general_settings_descr">Configureu els paràmetres generals i de visualització de l\'aplicació.</string>
     <string name="user_name">El vostre nom d\'usuari d\'OSM</string>
-    <string name="user_password">La vostra contrasenya a OSM</string>
+    <string name="user_password">Contrasenya</string>
     <string name="download_files_not_enough_space">No hi ha prou espai lliure per baixar %1$s MB (lliure: %2$s).</string>
     <string name="download_files_question_space">Voleu baixar {0} fitxer(s)\? 
 \nS\'ocuparà {1} MB (de {2} MB).</string>
@@ -1532,7 +1532,7 @@
     <string name="routing_attr_height_name">Límit d\'alçada</string>
     <string name="routing_attr_height_description">Indiqueu l\'alçada del vehicle que les rutes han d\'admetre.</string>
     <string name="use_fast_recalculation">Recàlcul intel·ligent de la ruta</string>
-    <string name="use_fast_recalculation_desc">Actualitza només la part inicial de la ruta. Pot ser usat per a viatges llargs.</string>
+    <string name="use_fast_recalculation_desc">Actualitza només la part inicial de la ruta. Útil per a viatges llargs.</string>
     <string name="shared_string_logoff">Surt</string>
     <string name="rendering_value_disabled_name">Desactivat</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Acoloreix segons el tipus de xarxa</string>
@@ -2158,7 +2158,6 @@
     <string name="rendering_attr_depthContours_description">Mostra isòbates i fondàries puntuals.</string>
     <string name="rendering_attr_depthContours_name">Isòbates</string>
     <string name="routing_attr_height_obstacles_name">Utilitza les cotes d\'elevació</string>
-
     <string name="route_altitude">Alçat de la ruta</string>
     <string name="altitude_descent">Descens</string>
     <string name="altitude_ascent">Ascens</string>
@@ -3324,9 +3323,9 @@
     <string name="route_recalculation">Recàlcul de la ruta</string>
     <string name="accessibility_announce">Anunci</string>
     <string name="login_and_pass">Nom d\'usuari i contrasenya</string>
-    <string name="plugin_global_prefs_info">Aquest paràmetre de connectors és global i afecta tots els perfils</string>
+    <string name="plugin_global_prefs_info">Aquests paràmetres de connectors són global i afecten tots els perfils</string>
     <string name="osm_editing">Edició OSM</string>
-    <string name="osm_edits_view_descr">Consulteu les vostres edicions o errors OSM encara no pujats a %1$s. Els punts enviats ja no es veuran més.</string>
+    <string name="osm_edits_view_descr">Consulteu totes les vostres edicions o errors OSM que encara no s\'han pujat a %1$s. Els canvis ja enviats no es veuran més.</string>
     <string name="select_nav_icon_descr">La icona es mostra mentre navegueu o us mogueu.</string>
     <string name="select_map_icon_descr">La icona es mostra en repòs.</string>
     <string name="logcat_buffer_descr">Valida i comparteix enregistraments detallats de l\'aplicació</string>
@@ -3753,7 +3752,7 @@
     <string name="lenght_limit_description">Proporcioneu la llargada del vostre vehicle, pot haver-hi rutes restringides als vehicles llargs.</string>
     <string name="gpx_parse_error">No s\'ha generat correctament l\'arxiu GPX. Indiqueu-ho a l\'equip de suport per continuar investigant.</string>
     <string name="save_track_to_gpx">Enregistra automàticament la traça durant la navegació</string>
-    <string name="message_you_need_add_two_points_to_show_graphs">Cal afegir almenys dos punts</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">Afegiu almenys dos punts</string>
     <string name="use_dev_url_descr">Canvieu per utilitzar dev.openstreetmap.org en lloc d\'openstreetmap.org en provar la pujada de nota OSM / PDI / GPX.</string>
     <string name="osm_edit_close_note">Tanca la nota d\'OSM</string>
     <string name="osm_edit_comment_note">Comentari de la nota d\'OSM</string>
@@ -3815,4 +3814,15 @@
     <string name="routing_attr_allow_streams_name">Permet rierols i torrents</string>
     <string name="routing_attr_allow_intermittent_description">Permet les vies navegables no permanents</string>
     <string name="routing_attr_allow_intermittent_name">Permet les vies navegables no permanents</string>
+    <string name="purchases">Compres</string>
+    <string name="select_category_descr">Seleccioneu una categoria o afegiu-ne una de nova</string>
+    <string name="track_recording_will_be_continued">L\'enregistrament continuarà.</string>
+    <string name="copy_poi_name">Copia el nom del PDI</string>
+    <string name="quick_action_show_hide_title">Mostra/amaga</string>
+    <string name="shared_string_interval">Interval</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Amaga reserves naturals, àrees protegides i delimitacions de parcs nacionals</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_name">Fronteres naturals</string>
+    <string name="track_has_no_altitude">La traça no conté dades d\'altitud.</string>
+    <string name="track_has_no_speed">La traça no conté dades de velocitat.</string>
+    <string name="select_another_colorization">Seleccioneu un altre tipus de coloració.</string>
 </resources>
