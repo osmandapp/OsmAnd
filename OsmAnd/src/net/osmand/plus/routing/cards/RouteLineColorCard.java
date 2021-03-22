@@ -203,9 +203,8 @@ public class RouteLineColorCard extends BaseCard implements CardListener, ColorP
 	private void updateColorName() {
 		if (selectedMode == ColorMode.DEFAULT) {
 			tvColorName.setText(app.getString(R.string.map_widget_renderer));
-		} else {
-			int selectedColor = routeLineDrawInfo.getColor();
-			int colorNameId = ColorDialogs.getColorName(selectedColor);
+		} else if (routeLineDrawInfo.getColor() != null) {
+			int colorNameId = ColorDialogs.getColorName(routeLineDrawInfo.getColor());
 			tvColorName.setText(app.getString(colorNameId));
 		}
 	}
