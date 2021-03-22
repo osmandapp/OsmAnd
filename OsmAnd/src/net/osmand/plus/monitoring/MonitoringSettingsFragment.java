@@ -40,7 +40,6 @@ import java.util.LinkedHashMap;
 import static net.osmand.plus.activities.PluginInfoFragment.PLUGIN_INFO;
 import static net.osmand.plus.monitoring.OsmandMonitoringPlugin.MINUTES;
 import static net.osmand.plus.monitoring.OsmandMonitoringPlugin.SECONDS;
-import static net.osmand.plus.monitoring.TripRecordingStartingBottomFragment.UPDATE_LOGGING_INTERVAL;
 import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
 import static net.osmand.plus.settings.backend.OsmandSettings.MONTHLY_DIRECTORY;
 import static net.osmand.plus.settings.backend.OsmandSettings.REC_DIRECTORY;
@@ -301,7 +300,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 		if (activity != null && !activity.isChangingConfigurations()) {
 			Fragment target = getTargetFragment();
 			if (target instanceof TripRecordingStartingBottomFragment) {
-				((TripRecordingStartingBottomFragment) target).show(UPDATE_LOGGING_INTERVAL);
+				((TripRecordingStartingBottomFragment) target).show();
 			}
 		}
 		super.onDestroy();
