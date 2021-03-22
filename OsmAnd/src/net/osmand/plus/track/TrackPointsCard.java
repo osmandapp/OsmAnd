@@ -184,7 +184,13 @@ public class TrackPointsCard extends BaseCard implements OnChildClickListener, O
 	}
 
 	private List<GpxDisplayGroup> getDisplayGroups() {
-		return selectedGroup != null ? Collections.singletonList(selectedGroup) : getOriginalGroups();
+		if (selectedGroup != null) {
+			List<GpxDisplayGroup> res = new ArrayList<>();
+			res.add(selectedGroup);
+			return res;
+		} else {
+			return getOriginalGroups();
+		}
 	}
 
 	@Override

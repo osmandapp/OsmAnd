@@ -245,10 +245,16 @@ public class RoutingOptionsHelper {
 					TargetPoint pointToStart = tg.getPointToStart();
 					TargetPoint pointToNavigate = tg.getPointToNavigate();
 					if (rp.getFile().hasRoute()) {
-						tg.clearStartPoint(false);
-						Location finishLoc = ps.get(ps.size() - 1);
-						tg.navigateToPoint(new LatLon(finishLoc.getLatitude(), finishLoc.getLongitude()),
-								false, -1, pointToNavigate != null ? pointToNavigate.getOriginalPointDescription() : null);
+						TargetPoint endPoint = selected ? pointToStart : null;
+						Location lastLoc = ps.get(ps.size() - 1);
+						Location firstLoc = ps.get(0);
+						LatLon firstLatLon = new LatLon(firstLoc.getLatitude(), firstLoc.getLongitude());
+						LatLon endLocation = endPoint != null ? endPoint.point : new LatLon(lastLoc.getLatitude(), lastLoc.getLongitude());
+						LatLon startLocation = selected ? firstLatLon : (pointToNavigate != null ? pointToNavigate.point : firstLatLon);
+						tg.navigateToPoint(endLocation, false, -1);
+						if (pointToStart != null) {
+							tg.setStartPoint(startLocation, false, null);
+						}
 						tg.updateRouteAndRefresh(true);
 					} else {
 						Location first = ps.get(0);

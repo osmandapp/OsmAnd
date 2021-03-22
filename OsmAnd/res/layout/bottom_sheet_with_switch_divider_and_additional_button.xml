@@ -20,9 +20,9 @@
 		android:layout_marginRight="@dimen/content_padding_half"
 		android:layout_weight="1"
 		android:gravity="center_vertical"
-		app:cardBackgroundColor="?attr/switch_button_active"
 		app:cardCornerRadius="4dp"
-		app:cardElevation="0dp">
+		app:cardElevation="0dp"
+		tools:cardBackgroundColor="?attr/switch_button_active">
 
 		<LinearLayout
 			android:layout_width="match_parent"

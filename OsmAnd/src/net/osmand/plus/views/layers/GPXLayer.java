@@ -927,7 +927,11 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		}
 	}
 
+	@Nullable
 	public static Pair<WptPt, WptPt> findPointsNearSegment(RotatedTileBox tb, List<WptPt> points, int r, int mx, int my) {
+		if (Algorithms.isEmpty(points)) {
+			return null;
+		}
 		WptPt prevPoint = points.get(0);
 		int ppx = (int) tb.getPixXFromLatLon(prevPoint.lat, prevPoint.lon);
 		int ppy = (int) tb.getPixYFromLatLon(prevPoint.lat, prevPoint.lon);

@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -20,6 +19,18 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.content.ContextCompat;
+import androidx.core.widget.TextViewCompat;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.AndroidUtils;
@@ -85,17 +96,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.content.ContextCompat;
-import androidx.core.widget.TextViewCompat;
-import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.RecyclerView;
-
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode;
@@ -135,6 +135,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private ImageView mainIcon;
 	private String fileName;
 	private OnBackPressedCallback onBackPressedCallback;
+	private boolean showSnapWarning;
 
 	private InfoType currentInfoType;
 
@@ -238,6 +239,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		if (mapActivity == null) {
 			return null;
 		}
+
 		final MeasurementToolLayer measurementLayer = mapActivity.getMapLayers().getMeasurementToolLayer();
 		final OsmandApplication app = mapActivity.getMyApplication();
 
@@ -303,9 +305,9 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		} else {
 			cardsContainer = mapActivity.findViewById(R.id.left_side_menu);
 			bottomMapControls = mapActivity.findViewById(R.id.bottom_controls_container);
-			mainView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+			ScrollUtils.addOnGlobalLayoutListener(mainView, new Runnable() {
 				@Override
-				public void onGlobalLayout() {
+				public void run() {
 					updateCardContainerSize();
 				}
 			});
@@ -361,7 +363,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				applyMovePointMode();
 			}
 		});
-
 
 		View applyPointBeforeAfterButton = mainView.findViewById(R.id.apply_point_before_after_point_button);
 		UiUtilities.setupDialogButton(nightMode, applyPointBeforeAfterButton,
@@ -567,11 +568,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		});
 
 		initMeasurementMode(gpxData, savedInstanceState == null);
-
 		if (savedInstanceState == null) {
 			if (fileName != null) {
 				addNewGpxData(getGpxFile(fileName));
-			} else if (editingCtx.isApproximationNeeded() && isFollowTrackMode()) {
+			} else if (editingCtx.isApproximationNeeded() && isFollowTrackMode() && isShowSnapWarning()) {
 				enterApproximationMode(mapActivity);
 			}
 		} else {
@@ -676,19 +676,36 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	private void updateCardContainerSize() {
+		if (portrait) {
+			return;
+		}
 		View measureModeControls = mainView.findViewById(R.id.measure_mode_controls);
 		int width = mainView.getWidth() - measureModeControls.getWidth();
-		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(width, -1);
 		int bottomMargin = measureModeControls.getHeight();
 		bottomMargin = progressBarVisible ? bottomMargin + mainView.findViewById(R.id.snap_to_road_progress_bar).getHeight() : bottomMargin;
-		params.setMargins(0, 0, 0, bottomMargin);
-		cardsContainer.setLayoutParams(params);
+		if (mainView.getParent() instanceof FrameLayout) {
+			FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(width, -1);
+			params.setMargins(0, 0, 0, bottomMargin);
+			cardsContainer.setLayoutParams(params);
+		} else if (mainView.getParent() instanceof LinearLayout) {
+			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, -1);
+			params.setMargins(0, 0, 0, bottomMargin);
+			cardsContainer.setLayoutParams(params);
+		}
 	}
 
 	private void shiftBottomMapControls(boolean toInitialPosition) {
+		if (portrait) {
+			return;
+		}
 		int leftMargin = toInitialPosition ? 0 : cardsContainer.getWidth();
-		LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) bottomMapControls.getLayoutParams();
-		params.setMargins(leftMargin, 0, 0, 0);
+		if (bottomMapControls.getParent() instanceof LinearLayout) {
+			LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) bottomMapControls.getLayoutParams();
+			params.setMargins(leftMargin, 0, 0, 0);
+		} else if (bottomMapControls.getParent() instanceof FrameLayout) {
+			FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) bottomMapControls.getLayoutParams();
+			params.setMargins(leftMargin, 0, 0, 0);
+		}
 	}
 
 	public boolean isInEditMode() {
@@ -697,6 +714,15 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
+	}
+
+
+	public boolean isShowSnapWarning() {
+		return this.showSnapWarning;
+	}
+
+	public void setShowSnapWarning(boolean showSnapWarning) {
+		this.showSnapWarning = showSnapWarning;
 	}
 
 	public MeasurementEditingContext getEditingCtx() {
@@ -1991,10 +2017,11 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	public static boolean showInstance(FragmentManager fragmentManager, MeasurementEditingContext editingCtx,
-									   boolean followTrackMode) {
+									   boolean followTrackMode, boolean showSnapWarning) {
 		MeasurementToolFragment fragment = new MeasurementToolFragment();
 		fragment.setEditingCtx(editingCtx);
 		fragment.setMode(FOLLOW_TRACK_MODE, followTrackMode);
+		fragment.setShowSnapWarning(showSnapWarning);
 		return showFragment(fragment, fragmentManager);
 	}
 
@@ -2162,4 +2189,5 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	public interface OnUpdateInfoListener {
 		void onUpdateInfo();
 	}
+
 }

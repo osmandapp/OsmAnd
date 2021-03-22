@@ -4035,9 +4035,9 @@
     <string name="updated">Uppfært: %s</string>
     <string name="last_time_checked">Síðast athugað: %s</string>
     <string name="update_frequency">Uppfærslutíðni</string>
-    <string name="live_update_frequency_week_variant">Uppfærslur korta verða athugaðar í hverri viku. Næsta skipti%1$s eftir %2$s.</string>
-    <string name="live_update_frequency_day_variant">Uppfærslur korta verða athugaðar á hverjum degi. Næsta skipti%1$s eftir %2$s.</string>
-    <string name="live_update_frequency_hour_variant">Uppfærslur korta verða athugaðar á klukkustundar fresti. Næsta skipti%1$s eftir %2$s.</string>
+    <string name="live_update_frequency_week_variant">Uppfærslur korta verða athugaðar í hverri viku. Næsta skipti %1$s eftir %2$s.</string>
+    <string name="live_update_frequency_day_variant">Uppfærslur korta verða athugaðar á hverjum degi. Næsta skipti %1$s eftir %2$s.</string>
+    <string name="live_update_frequency_hour_variant">Uppfærslur korta verða athugaðar á klukkustundar fresti. Næsta skipti %1$s eftir %2$s.</string>
     <string name="delete_updates">Eyða uppfærslum</string>
     <string name="live_update_delete_updates_msg">Ertu viss um að þú viljir eyða öllum %s raunuppfærslum\?</string>
     <string name="purchases">Innkaup</string>
@@ -4048,4 +4048,6 @@
     <string name="track_has_no_altitude">Ferillinn inniheldur ekki hæðargögn.</string>
     <string name="track_has_no_speed">Ferillinn inniheldur ekki hraðagögn.</string>
     <string name="select_another_colorization">Veldu aðra tegund litunar.</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Fela mörk friðlanda, verndaðra svæða og þjóðgarða</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_name">Mörk náttúru</string>
 </resources>

@@ -6,6 +6,7 @@ public class QuadRect {
 	public double top;
 	public double bottom;
 
+	// left & right / top & bottom could be flipped (so it's useful for latlon bbox) 
 	public QuadRect(double left, double top, double right, double bottom) {
 		this.left = left;
 		this.right = right;
@@ -21,16 +22,18 @@ public class QuadRect {
 	}
 
 	public double width() {
-		return right - left;
+		return Math.abs(right - left);
 	}
 
 	public double height() {
-		return bottom - top;
+		return Math.abs(bottom - top);
 	}
 
 	public boolean contains(double left, double top, double right, double bottom) {
-		return this.left < this.right && this.top < this.bottom && this.left <= left && this.top <= top && this.right >= right
-				&& this.bottom >= bottom;
+		return Math.min(this.left, this.right) <= Math.min(left, right)
+				&& Math.max(this.left, this.right) >= Math.max(left, right)
+				&& Math.min(this.top, this.bottom) <= Math.min(top, bottom)
+				&& Math.max(this.top, this.bottom) >= Math.max(top, bottom);
 	}
 
 	public boolean contains(QuadRect box) {
@@ -38,12 +41,15 @@ public class QuadRect {
 	}
 
 	public static boolean intersects(QuadRect a, QuadRect b) {
-		return a.left < b.right && b.left < a.right && a.top < b.bottom && b.top < a.bottom;
+		return Math.min(a.left, a.right) <= Math.max(b.left, b.right)
+				&& Math.max(a.left, a.right) >= Math.min(b.left, b.right)
+				&& Math.min(a.bottom, a.top) <= Math.max(b.bottom, b.top)
+				&& Math.max(a.bottom, a.top) >= Math.min(b.bottom, b.top);
 	}
-
-	public static boolean trivialOverlap(QuadRect a, QuadRect b) {
-		return !((a.right < b.left) || (a.left > b.right) || (a.top < b.bottom) || (a.bottom > b.top));
-	}
+	
+	 public static boolean trivialOverlap(QuadRect a, QuadRect b) {
+		 return intersects(a, b);
+	 }
 
 	public double centerX() {
 		return (left + right) / 2;
