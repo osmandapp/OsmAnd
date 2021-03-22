@@ -11,6 +11,8 @@
 	Thx - Hardy
 
 -->
+    <string name="lost_data_warning">All unsaved data will be lost.</string>
+    <string name="trip_recording_save_and_continue">Save and continue</string>
     <string name="trip_recording_logging_interval_info">Logging interval set time period in which OsmAnd will ask for the current location position data.</string>
     <string name="select_another_colorization">Please select another type of colorization.</string>
     <string name="track_has_no_speed">The track does not contain speed data.</string>
