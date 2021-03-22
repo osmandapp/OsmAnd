@@ -63,7 +63,7 @@ import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.StartPlanRouteBottomSheet;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.monitoring.TripRecordingActiveBottomSheet;
-import net.osmand.plus.monitoring.TripRecordingBottomSheet;
+import net.osmand.plus.monitoring.TripRecordingStartingBottomSheet;
 import net.osmand.plus.osmedit.dialogs.DismissRouteBottomSheetFragment;
 import net.osmand.plus.profiles.ProfileDataObject;
 import net.osmand.plus.profiles.ProfileDataUtils;
@@ -856,7 +856,7 @@ public class MapActivityActions implements DialogProvider {
 							if (monitoringPlugin.hasDataToSave() || monitoringPlugin.wasTrackMonitored()) {
 								TripRecordingActiveBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), monitoringPlugin.getCurrentTrack());
 							} else {
-								TripRecordingBottomSheet.showInstance(mapActivity.getSupportFragmentManager());
+								TripRecordingStartingBottomSheet.showInstance(mapActivity.getSupportFragmentManager());
 							}
 							return true;
 						}
