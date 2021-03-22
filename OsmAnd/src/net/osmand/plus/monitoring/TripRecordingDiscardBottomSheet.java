@@ -12,24 +12,24 @@ import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
-import net.osmand.plus.monitoring.TripRecordingBottomFragment.ItemType;
+import net.osmand.plus.monitoring.TripRecordingBottomSheet.ItemType;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import static net.osmand.AndroidUtils.getPrimaryTextColorId;
-import static net.osmand.plus.monitoring.TripRecordingOptionsBottomFragment.ACTION_STOP_AND_DISMISS;
+import static net.osmand.plus.monitoring.TripRecordingOptionsBottomSheet.ACTION_STOP_AND_DISMISS;
 
-public class TripRecordingDiscardBottomFragment extends MenuBottomSheetDialogFragment implements TripRecordingBottomFragment.DismissTargetFragment {
+public class TripRecordingDiscardBottomSheet extends MenuBottomSheetDialogFragment implements TripRecordingBottomSheet.DismissTargetFragment {
 
-	public static final String TAG = TripRecordingDiscardBottomFragment.class.getSimpleName();
+	public static final String TAG = TripRecordingDiscardBottomSheet.class.getSimpleName();
 
 	private OsmandApplication app;
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, @NonNull Fragment target) {
 		if (!fragmentManager.isStateSaved()) {
-			TripRecordingDiscardBottomFragment fragment = new TripRecordingDiscardBottomFragment();
+			TripRecordingDiscardBottomSheet fragment = new TripRecordingDiscardBottomSheet();
 			fragment.setTargetFragment(target, 0);
 			fragment.show(fragmentManager, TAG);
 		}
@@ -93,15 +93,15 @@ public class TripRecordingDiscardBottomFragment extends MenuBottomSheetDialogFra
 	}
 
 	private View createItem(LayoutInflater inflater, ItemType type) {
-		return TripRecordingBottomFragment.createItem(app, nightMode, inflater, type);
+		return TripRecordingBottomSheet.createItem(app, nightMode, inflater, type);
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
 		Fragment target = getTargetFragment();
-		if (target instanceof TripRecordingOptionsBottomFragment) {
-			((TripRecordingOptionsBottomFragment) target).hide();
+		if (target instanceof TripRecordingOptionsBottomSheet) {
+			((TripRecordingOptionsBottomSheet) target).hide();
 		}
 	}
 
@@ -109,16 +109,16 @@ public class TripRecordingDiscardBottomFragment extends MenuBottomSheetDialogFra
 	public void onPause() {
 		super.onPause();
 		Fragment target = getTargetFragment();
-		if (target instanceof TripRecordingOptionsBottomFragment) {
-			((TripRecordingOptionsBottomFragment) target).show();
+		if (target instanceof TripRecordingOptionsBottomSheet) {
+			((TripRecordingOptionsBottomSheet) target).show();
 		}
 	}
 
 	@Override
 	public void dismissTarget() {
 		Fragment target = getTargetFragment();
-		if (target instanceof TripRecordingOptionsBottomFragment) {
-			((TripRecordingOptionsBottomFragment) target).dismiss();
+		if (target instanceof TripRecordingOptionsBottomSheet) {
+			((TripRecordingOptionsBottomSheet) target).dismiss();
 		}
 	}
 

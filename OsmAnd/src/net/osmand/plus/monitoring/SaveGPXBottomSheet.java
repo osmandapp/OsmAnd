@@ -42,10 +42,10 @@ import java.util.List;
 
 import static net.osmand.FileUtils.ILLEGAL_FILE_NAME_CHARACTERS;
 
-public class SaveGPXBottomSheetFragment extends MenuBottomSheetDialogFragment {
+public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 	public static final String TAG = "SaveGPXBottomSheetFragment";
 	public static final String SAVED_TRACKS_KEY = "saved_track_filename";
-	private static final Log LOG = PlatformUtil.getLog(SaveGPXBottomSheetFragment.class);
+	private static final Log LOG = PlatformUtil.getLog(SaveGPXBottomSheet.class);
 
 	private boolean openTrack = false;
 	private File file;
@@ -227,7 +227,7 @@ public class SaveGPXBottomSheetFragment extends MenuBottomSheetDialogFragment {
 		if (fragmentManager.isStateSaved()) {
 			return;
 		}
-		SaveGPXBottomSheetFragment f = new SaveGPXBottomSheetFragment();
+		SaveGPXBottomSheet f = new SaveGPXBottomSheet();
 		Bundle b = new Bundle();
 		b.putStringArrayList(SAVED_TRACKS_KEY, new ArrayList<>(filenames));
 		f.setArguments(b);

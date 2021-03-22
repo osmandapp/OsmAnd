@@ -24,26 +24,24 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.monitoring.TripRecordingBottomFragment.ItemType;
+import net.osmand.plus.monitoring.TripRecordingBottomSheet.ItemType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 
 import static net.osmand.plus.monitoring.OsmandMonitoringPlugin.MINUTES;
 import static net.osmand.plus.monitoring.OsmandMonitoringPlugin.SECONDS;
-import static net.osmand.plus.monitoring.TripRecordingBottomFragment.UPDATE_TRACK_ICON;
-import static net.osmand.plus.monitoring.TripRecordingBottomFragment.createItem;
-import static net.osmand.plus.monitoring.TripRecordingBottomFragment.createShowTrackItem;
-import static net.osmand.plus.monitoring.TripRecordingBottomFragment.updateTrackIcon;
+import static net.osmand.plus.monitoring.TripRecordingBottomSheet.createItem;
+import static net.osmand.plus.monitoring.TripRecordingBottomSheet.createShowTrackItem;
+import static net.osmand.plus.monitoring.TripRecordingBottomSheet.updateTrackIcon;
 
-public class TripRecordingStartingBottomFragment extends MenuBottomSheetDialogFragment {
+public class TripRecordingStartingBottomSheet extends MenuBottomSheetDialogFragment {
 
-	public static final String TAG = TripRecordingStartingBottomFragment.class.getSimpleName();
+	public static final String TAG = TripRecordingStartingBottomSheet.class.getSimpleName();
 	public static final String UPDATE_LOGGING_INTERVAL = "update_logging_interval";
 
 	private OsmandApplication app;
@@ -59,8 +57,21 @@ public class TripRecordingStartingBottomFragment extends MenuBottomSheetDialogFr
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager) {
 		if (!fragmentManager.isStateSaved()) {
-			TripRecordingStartingBottomFragment fragment = new TripRecordingStartingBottomFragment();
+			TripRecordingStartingBottomSheet fragment = new TripRecordingStartingBottomSheet();
 			fragment.show(fragmentManager, TAG);
+		}
+	}
+
+	public static void showTripRecordingDialog(@NonNull FragmentManager fragmentManager, OsmandApplication app) {
+		if (!fragmentManager.isStateSaved()) {
+			OsmandSettings settings = app.getSettings();
+			boolean showStartDialog = settings.SHOW_TRIP_REC_START_DIALOG.get();
+			if (showStartDialog) {
+				showInstance(fragmentManager);
+			} else {
+				startRecording(app);
+				TripRecordingBottomSheet.showInstance(fragmentManager);
+			}
 		}
 	}
 
@@ -93,7 +104,7 @@ public class TripRecordingStartingBottomFragment extends MenuBottomSheetDialogFr
 		LinearLayout showTrackContainer = itemView.findViewById(R.id.show_track_on_map);
 		trackAppearanceIcon = showTrackContainer.findViewById(R.id.additional_button_icon);
 		createShowTrackItem(showTrackContainer, trackAppearanceIcon, R.string.shared_string_show_on_map,
-				TripRecordingStartingBottomFragment.this, nightMode, new Runnable() {
+				TripRecordingStartingBottomSheet.this, nightMode, new Runnable() {
 					@Override
 					public void run() {
 						hide();
@@ -129,7 +140,7 @@ public class TripRecordingStartingBottomFragment extends MenuBottomSheetDialogFr
 				if (mapActivity != null) {
 					hide();
 					BaseSettingsFragment.showInstance(mapActivity, SettingsScreenType.MONITORING_SETTINGS,
-							null, new Bundle(), TripRecordingStartingBottomFragment.this);
+							null, new Bundle(), TripRecordingStartingBottomSheet.this);
 				}
 			}
 		});
@@ -207,14 +218,17 @@ public class TripRecordingStartingBottomFragment extends MenuBottomSheetDialogFr
 		upDownBtn.setImageDrawable(getContentIcon(iconId));
 	}
 
-	private void startRecording() {
-		SavingTrackHelper helper = app.getSavingTrackHelper();
-		helper.startNewSegment();
-		settings.SAVE_GLOBAL_TRACK_TO_GPX.set(true);
+	private static void startRecording(OsmandApplication app) {
+		app.getSavingTrackHelper().startNewSegment();
+		app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.set(true);
 		app.startNavigationService(NavigationService.USED_BY_GPX);
+	}
+
+	private void startRecording() {
+		startRecording(app);
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			TripRecordingBottomFragment.showInstance(mapActivity.getSupportFragmentManager(), helper.getCurrentTrack());
+			TripRecordingBottomSheet.showInstance(mapActivity.getSupportFragmentManager());
 		}
 		dismiss();
 	}

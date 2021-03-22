@@ -86,6 +86,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		pluginPreferences.add(settings.DISABLE_RECORDING_ONCE_APP_KILLED);
 		pluginPreferences.add(settings.SAVE_HEADING_TO_GPX);
 		pluginPreferences.add(settings.SHOW_TRIP_REC_NOTIFICATION);
+		pluginPreferences.add(settings.SHOW_TRIP_REC_START_DIALOG);
 		pluginPreferences.add(settings.TRACK_STORAGE_DIRECTORY);
 		pluginPreferences.add(settings.LIVE_MONITORING);
 		pluginPreferences.add(settings.LIVE_MONITORING_URL);
@@ -336,9 +337,9 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	public void controlDialog(final Activity activity, final boolean showTrackSelection) {
 		FragmentManager fragmentManager = ((FragmentActivity) activity).getSupportFragmentManager();
 		if (hasDataToSave() || wasTrackMonitored()) {
-			TripRecordingBottomFragment.showInstance(fragmentManager, getCurrentTrack());
+			TripRecordingBottomSheet.showInstance(fragmentManager);
 		} else {
-			TripRecordingStartingBottomFragment.showInstance(fragmentManager);
+			TripRecordingStartingBottomSheet.showTripRecordingDialog(fragmentManager, app);
 		}
 
 		/*final boolean wasTrackMonitored = settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
@@ -506,7 +507,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 							final Activity a = activityRef.get();
 							if (a instanceof FragmentActivity && !a.isFinishing()) {
 								List<String> singleName = Collections.singletonList(Algorithms.getFileNameWithoutExtension(file));
-								SaveGPXBottomSheetFragment.showInstance(((FragmentActivity) a)
+								SaveGPXBottomSheet.showInstance(((FragmentActivity) a)
 										.getSupportFragmentManager(), singleName);
 							}
 						}
@@ -557,7 +558,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 			runnable.run();
 		} else if (map instanceof FragmentActivity) {
 			FragmentActivity activity = (FragmentActivity) map;
-			TripRecordingStartingBottomFragment.showInstance(activity.getSupportFragmentManager());
+			TripRecordingStartingBottomSheet.showTripRecordingDialog(activity.getSupportFragmentManager(), app);
 		}
 	}
 

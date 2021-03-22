@@ -4,6 +4,14 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:title="@string/monitoring_settings">
 
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="show_trip_recording_start_dialog"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/show_start_dialog"
+		tools:icon="@drawable/ic_action_dialog" />
+
 	<PreferenceCategory
 		android:key="navigation"
 		android:layout="@layout/preference_category_with_descr"
@@ -36,8 +44,8 @@
 	<net.osmand.plus.settings.preferences.ListPreferenceEx
 		android:key="save_global_track_interval"
 		android:layout="@layout/preference_with_descr"
-		android:title="@string/save_global_track_interval"
 		android:persistent="false"
+		android:title="@string/save_global_track_interval"
 		tools:icon="@drawable/ic_action_time_span"
 		tools:summary="3 seconds" />
 

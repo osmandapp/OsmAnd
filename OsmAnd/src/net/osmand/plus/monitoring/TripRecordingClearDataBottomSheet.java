@@ -11,7 +11,7 @@ import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
-import net.osmand.plus.monitoring.TripRecordingBottomFragment.ItemType;
+import net.osmand.plus.monitoring.TripRecordingBottomSheet.ItemType;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -19,15 +19,15 @@ import androidx.fragment.app.FragmentManager;
 
 import static net.osmand.AndroidUtils.getPrimaryTextColorId;
 
-public class TripRecordingClearDataBottomFragment extends MenuBottomSheetDialogFragment implements TripRecordingBottomFragment.DismissTargetFragment {
+public class TripRecordingClearDataBottomSheet extends MenuBottomSheetDialogFragment implements TripRecordingBottomSheet.DismissTargetFragment {
 
-	public static final String TAG = TripRecordingClearDataBottomFragment.class.getSimpleName();
+	public static final String TAG = TripRecordingClearDataBottomSheet.class.getSimpleName();
 
 	private OsmandApplication app;
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, @NonNull Fragment target) {
 		if (!fragmentManager.isStateSaved()) {
-			TripRecordingClearDataBottomFragment fragment = new TripRecordingClearDataBottomFragment();
+			TripRecordingClearDataBottomSheet fragment = new TripRecordingClearDataBottomSheet();
 			fragment.setTargetFragment(target, 0);
 			fragment.show(fragmentManager, TAG);
 		}
@@ -81,15 +81,15 @@ public class TripRecordingClearDataBottomFragment extends MenuBottomSheetDialogF
 	}
 
 	private View createItem(LayoutInflater inflater, ItemType type) {
-		return TripRecordingBottomFragment.createItem(app, nightMode, inflater, type);
+		return TripRecordingBottomSheet.createItem(app, nightMode, inflater, type);
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
 		Fragment target = getTargetFragment();
-		if (target instanceof TripRecordingOptionsBottomFragment) {
-			((TripRecordingOptionsBottomFragment) target).hide();
+		if (target instanceof TripRecordingOptionsBottomSheet) {
+			((TripRecordingOptionsBottomSheet) target).hide();
 		}
 	}
 
@@ -97,8 +97,8 @@ public class TripRecordingClearDataBottomFragment extends MenuBottomSheetDialogF
 	public void onPause() {
 		super.onPause();
 		Fragment target = getTargetFragment();
-		if (target instanceof TripRecordingOptionsBottomFragment) {
-			((TripRecordingOptionsBottomFragment) target).show();
+		if (target instanceof TripRecordingOptionsBottomSheet) {
+			((TripRecordingOptionsBottomSheet) target).show();
 		}
 	}
 
@@ -110,8 +110,8 @@ public class TripRecordingClearDataBottomFragment extends MenuBottomSheetDialogF
 	@Override
 	public void dismissTarget() {
 		Fragment target = getTargetFragment();
-		if (target instanceof TripRecordingOptionsBottomFragment) {
-			((TripRecordingOptionsBottomFragment) target).dismiss();
+		if (target instanceof TripRecordingOptionsBottomSheet) {
+			((TripRecordingOptionsBottomSheet) target).dismiss();
 		}
 	}
 }

@@ -34,7 +34,7 @@ import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import org.apache.commons.logging.Log;
 
 import static net.osmand.plus.liveupdates.LiveUpdatesSettingsDialogFragmentNew.getActivePrimaryColorId;
-import static net.osmand.plus.monitoring.TripRecordingBottomFragment.getSecondaryIconColorId;
+import static net.osmand.plus.monitoring.TripRecordingBottomSheet.getSecondaryIconColorId;
 
 public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 
