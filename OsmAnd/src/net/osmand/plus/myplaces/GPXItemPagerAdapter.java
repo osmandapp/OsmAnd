@@ -61,6 +61,8 @@ import java.util.Map;
 import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.ALTITUDE;
 import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.SLOPE;
 import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.SPEED;
+import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_ALTITUDE;
+import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_SPEED;
 
 public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvider, ViewAtPositionInterface {
 
@@ -85,14 +87,6 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 							   @NonNull GpxDisplayItem gpxItem,
 							   @NonNull TrackDisplayHelper displayHelper,
 							   boolean nightMode,
-							   @NonNull SegmentActionsListener actionsListener) {
-		this(app, gpxItem, displayHelper, nightMode, actionsListener, false);
-	}
-
-	public GPXItemPagerAdapter(@NonNull OsmandApplication app,
-							   @NonNull GpxDisplayItem gpxItem,
-							   @NonNull TrackDisplayHelper displayHelper,
-							   boolean nightMode,
 							   @NonNull SegmentActionsListener actionsListener,
 							   boolean onlyGraphs) {
 		super();
@@ -111,10 +105,10 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		tabTypeList.add(GPXTabItemType.GPX_TAB_ITEM_GENERAL);
 		if (gpxItem != null && gpxItem.analysis != null) {
 			if (gpxItem.analysis.hasElevationData) {
-				tabTypeList.add(GPXTabItemType.GPX_TAB_ITEM_ALTITUDE);
+				tabTypeList.add(GPX_TAB_ITEM_ALTITUDE);
 			}
 			if (gpxItem.analysis.isSpeedSpecified()) {
-				tabTypeList.add(GPXTabItemType.GPX_TAB_ITEM_SPEED);
+				tabTypeList.add(GPX_TAB_ITEM_SPEED);
 			}
 		}
 		tabTypes = tabTypeList.toArray(new GPXTabItemType[0]);
@@ -228,41 +222,21 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 
 	private View getViewForTab(@NonNull ViewGroup container, @NonNull GPXTabItemType tabType) {
 		LayoutInflater inflater = LayoutInflater.from(container.getContext());
-		View view;
-		switch (tabType) {
-			case GPX_TAB_ITEM_ALTITUDE:
-				view = inflater.inflate(R.layout.gpx_item_altitude, container, false);
-				if (onlyGraphs) {
-					AndroidUiHelper.setVisibility(View.GONE,
-							view.findViewById(R.id.average_range),
-							view.findViewById(R.id.ascent_descent)
-					);
-				}
-				break;
-			case GPX_TAB_ITEM_SPEED:
-				view = inflater.inflate(R.layout.gpx_item_speed, container, false);
-				if (onlyGraphs) {
-					AndroidUiHelper.setVisibility(View.GONE,
-							view.findViewById(R.id.average_max),
-							view.findViewById(R.id.time_distance)
-					);
-				}
-				break;
-			case GPX_TAB_ITEM_GENERAL:
-			default:
-				view = inflater.inflate(R.layout.gpx_item_general, container, false);
-				if (onlyGraphs) {
-					AndroidUiHelper.setVisibility(View.GONE,
-							view.findViewById(R.id.distance_time_span),
-							view.findViewById(R.id.start_end_time)
-					);
-				}
-				break;
+		int layoutResId;
+		if (tabType == GPX_TAB_ITEM_ALTITUDE) {
+			layoutResId = R.layout.gpx_item_altitude;
+		} else if (tabType == GPX_TAB_ITEM_SPEED) {
+			layoutResId = R.layout.gpx_item_speed;
+		} else {
+			layoutResId = R.layout.gpx_item_general;
 		}
+		View view = inflater.inflate(layoutResId, container, false);
 		if (onlyGraphs) {
 			AndroidUiHelper.setVisibility(View.GONE,
 					view.findViewById(R.id.gpx_join_gaps_container),
+					view.findViewById(R.id.top_line_blocks),
 					view.findViewById(R.id.list_divider),
+					view.findViewById(R.id.bottom_line_blocks),
 					view.findViewById(R.id.details_divider),
 					view.findViewById(R.id.details_view)
 			);
@@ -274,7 +248,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		if (analysis != null && analysis.isSpeedSpecified()) {
 			if (analysis.hasSpeedData) {
 				GpxUiHelper.setupGPXChart(app, chart, 4);
-				chart.setData(new LineData(getDataSets(chart, GPXTabItemType.GPX_TAB_ITEM_SPEED, SPEED, null)));
+				chart.setData(new LineData(getDataSets(chart, GPX_TAB_ITEM_SPEED, SPEED, null)));
 				updateChart(chart);
 				chart.setVisibility(View.VISIBLE);
 			} else {
@@ -311,16 +285,16 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 			}
 		} else {
 			chart.setVisibility(View.GONE);
-			view.findViewById(R.id.average_max).setVisibility(View.GONE);
+			view.findViewById(R.id.top_line_blocks).setVisibility(View.GONE);
 			view.findViewById(R.id.list_divider).setVisibility(View.GONE);
-			view.findViewById(R.id.time_distance).setVisibility(View.GONE);
+			view.findViewById(R.id.bottom_line_blocks).setVisibility(View.GONE);
 		}
 		if (!onlyGraphs) {
 			updateJoinGapsInfo(view, position);
 			view.findViewById(R.id.analyze_on_map).setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					openAnalyzeOnMap(GPXTabItemType.GPX_TAB_ITEM_SPEED);
+					openAnalyzeOnMap(GPX_TAB_ITEM_SPEED);
 				}
 			});
 			TextView overflowMenu = view.findViewById(R.id.overflow_menu);
@@ -346,7 +320,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		if (analysis != null) {
 			if (analysis.hasElevationData) {
 				GpxUiHelper.setupGPXChart(app, chart, 4);
-				chart.setData(new LineData(getDataSets(chart, GPXTabItemType.GPX_TAB_ITEM_ALTITUDE, ALTITUDE, SLOPE)));
+				chart.setData(new LineData(getDataSets(chart, GPX_TAB_ITEM_ALTITUDE, ALTITUDE, SLOPE)));
 				updateChart(chart);
 				chart.setVisibility(View.VISIBLE);
 			} else {
@@ -388,16 +362,16 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 			}
 		} else {
 			chart.setVisibility(View.GONE);
-			view.findViewById(R.id.average_range).setVisibility(View.GONE);
+			view.findViewById(R.id.top_line_blocks).setVisibility(View.GONE);
 			view.findViewById(R.id.list_divider).setVisibility(View.GONE);
-			view.findViewById(R.id.ascent_descent).setVisibility(View.GONE);
+			view.findViewById(R.id.bottom_line_blocks).setVisibility(View.GONE);
 		}
 		if (!onlyGraphs) {
 			updateJoinGapsInfo(view, position);
 			view.findViewById(R.id.analyze_on_map).setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					openAnalyzeOnMap(GPXTabItemType.GPX_TAB_ITEM_ALTITUDE);
+					openAnalyzeOnMap(GPX_TAB_ITEM_ALTITUDE);
 				}
 			});
 			TextView overflowMenu = view.findViewById(R.id.overflow_menu);
@@ -453,14 +427,14 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 					((TextView) view.findViewById(R.id.end_date_text)).setText(df.format(end));
 				} else {
 					view.findViewById(R.id.list_divider).setVisibility(View.GONE);
-					view.findViewById(R.id.start_end_time).setVisibility(View.GONE);
+					view.findViewById(R.id.bottom_line_blocks).setVisibility(View.GONE);
 				}
 			}
 		} else {
 			chart.setVisibility(View.GONE);
-			view.findViewById(R.id.distance_time_span).setVisibility(View.GONE);
+			view.findViewById(R.id.top_line_blocks).setVisibility(View.GONE);
 			view.findViewById(R.id.list_divider).setVisibility(View.GONE);
-			view.findViewById(R.id.start_end_time).setVisibility(View.GONE);
+			view.findViewById(R.id.bottom_line_blocks).setVisibility(View.GONE);
 		}
 		updateJoinGapsInfo(view, position);
 		if (!onlyGraphs) {
@@ -698,7 +672,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 
 					((TextView) view.findViewById(R.id.distance_text)).setText(OsmAndFormatter.getFormattedDistance(totalDistance, app));
 					((TextView) view.findViewById(R.id.duration_text)).setText(Algorithms.formatDuration((int) (timeSpan / 1000), app.accessibilityEnabled()));
-				} else if (tabType.equals(GPXTabItemType.GPX_TAB_ITEM_SPEED)) {
+				} else if (tabType.equals(GPX_TAB_ITEM_SPEED)) {
 					long timeMoving = !joinSegments && gpxItem.isGeneralTrack() ? analysis.timeMovingWithoutGaps : analysis.timeMoving;
 					float totalDistanceMoving = !joinSegments && gpxItem.isGeneralTrack() ? analysis.totalDistanceMovingWithoutGaps : analysis.totalDistanceMoving;
 

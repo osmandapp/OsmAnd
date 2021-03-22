@@ -457,7 +457,7 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 	}
 	
 	public float getBearingBegin() {
-		return getBearingBegin(startPointIndex, DIST_BEARING_DETECT);
+		return getBearingBegin(startPointIndex, distance > 0 && distance < DIST_BEARING_DETECT ? distance : DIST_BEARING_DETECT);
 	}
 	
 	public float getBearingBegin(int point, float dist) {
@@ -465,7 +465,7 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 	}
 	
 	public float getBearingEnd() {
-		return getBearingEnd(endPointIndex, DIST_BEARING_DETECT);
+		return getBearingEnd(endPointIndex, distance > 0 && distance < DIST_BEARING_DETECT ? distance : DIST_BEARING_DETECT);
 	}
 	
 	public float getBearingEnd(int point, float dist) {

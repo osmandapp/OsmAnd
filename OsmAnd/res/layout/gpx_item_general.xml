@@ -52,7 +52,7 @@
 	</LinearLayout>
 
 	<LinearLayout
-		android:id="@+id/distance_time_span"
+		android:id="@+id/top_line_blocks"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:orientation="horizontal"
@@ -171,7 +171,7 @@
 	</LinearLayout>
 
 	<LinearLayout
-		android:id="@+id/start_end_time"
+		android:id="@+id/bottom_line_blocks"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:orientation="horizontal"

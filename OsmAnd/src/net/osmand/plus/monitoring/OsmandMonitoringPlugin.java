@@ -25,6 +25,7 @@ import com.google.android.material.slider.Slider;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
+import net.osmand.PlatformUtil;
 import net.osmand.ValueHolder;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.NavigationService;
@@ -48,6 +49,8 @@ import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
+
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.Collections;
@@ -57,6 +60,7 @@ import static net.osmand.plus.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
 
 public class OsmandMonitoringPlugin extends OsmandPlugin {
 
+	private static final Log LOG = PlatformUtil.getLog(OsmandMonitoringPlugin.class);
 	public static final String ID = "osmand.monitoring";
 	public final static String OSMAND_SAVE_SERVICE_ACTION = "OSMAND_SAVE_SERVICE_ACTION";
 	public static final int REQUEST_LOCATION_PERMISSION_FOR_GPX_RECORDING = 208;
@@ -471,12 +475,10 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				try {
 					SavingTrackHelper helper = app.getSavingTrackHelper();
 					SaveGpxResult result = helper.saveDataToGpx(app.getAppCustomization().getTracksDir());
-					if (stopRecording) {
-						helper.close();
-					}
+					helper.close();
 					return result;
 				} catch (Exception e) {
-					e.printStackTrace();
+					LOG.error(e.getMessage(), e);
 				}
 				return null;
 			}

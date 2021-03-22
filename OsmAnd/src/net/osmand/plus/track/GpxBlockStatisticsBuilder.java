@@ -152,8 +152,8 @@ public class GpxBlockStatisticsBuilder {
 				withoutGaps = !selectedGpxFile.isJoinSegments() && gpxDisplayItem.isGeneralTrack();
 			}
 		}
+		items.clear();
 		if (analysis != null) {
-			items.clear();
 			switch (initBlocksKey) {
 				case INIT_BLOCKS_GENERAL: {
 					float totalDistance = withoutGaps ? analysis.totalDistanceWithoutGaps : analysis.totalDistance;
@@ -283,51 +283,52 @@ public class GpxBlockStatisticsBuilder {
 
 	public void prepareData(String title, String value, @DrawableRes int imageResId, @ColorRes int imageColorId,
 							GPXDataSetType firstType, GPXDataSetType secondType, ItemType itemType) {
-		if (analysis != null) {
-			StatBlock statBlock = new StatBlock(title, value, imageResId, imageColorId, firstType, secondType, itemType);
-			switch (statBlock.itemType) {
-				case ITEM_DISTANCE: {
-					if (analysis.totalDistance != 0f) {
-						items.add(statBlock);
-					}
-					break;
+		if (analysis == null) {
+			return;
+		}
+		StatBlock statBlock = new StatBlock(title, value, imageResId, imageColorId, firstType, secondType, itemType);
+		switch (statBlock.itemType) {
+			case ITEM_DISTANCE: {
+				if (analysis.totalDistance != 0f) {
+					items.add(statBlock);
 				}
-				case ITEM_DISTANCE_MOVING: {
-					if (analysis.totalDistanceMoving != 0f) {
-						items.add(statBlock);
-					}
-					break;
+				break;
+			}
+			case ITEM_DISTANCE_MOVING: {
+				if (analysis.totalDistanceMoving != 0f) {
+					items.add(statBlock);
 				}
-				case ITEM_ALTITUDE: {
-					if (analysis.hasElevationData) {
-						items.add(statBlock);
-					}
-					break;
+				break;
+			}
+			case ITEM_ALTITUDE: {
+				if (analysis.hasElevationData) {
+					items.add(statBlock);
 				}
-				case ITEM_SPEED: {
-					if (analysis.isSpeedSpecified()) {
-						items.add(statBlock);
-					}
-					break;
+				break;
+			}
+			case ITEM_SPEED: {
+				if (analysis.isSpeedSpecified()) {
+					items.add(statBlock);
 				}
-				case ITEM_TIME: {
-					if (analysis.timeSpan > 0) {
-						items.add(statBlock);
-					}
-					break;
+				break;
+			}
+			case ITEM_TIME: {
+				if (analysis.timeSpan > 0) {
+					items.add(statBlock);
 				}
-				case ITEM_TIME_SPAN: {
-					if (analysis.hasSpeedData) {
-						items.add(statBlock);
-					}
-					break;
+				break;
+			}
+			case ITEM_TIME_SPAN: {
+				if (analysis.hasSpeedData) {
+					items.add(statBlock);
 				}
-				case ITEM_TIME_MOVING: {
-					if (analysis.isTimeMoving()) {
-						items.add(statBlock);
-					}
-					break;
+				break;
+			}
+			case ITEM_TIME_MOVING: {
+				if (analysis.isTimeMoving()) {
+					items.add(statBlock);
 				}
+				break;
 			}
 		}
 	}
