@@ -9,25 +9,27 @@ import android.text.SpannableStringBuilder;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 
-import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.CommonPreference;
-import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
-import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.OsmAndAppCustomization;
+import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet.ResetAppModePrefsListener;
 import net.osmand.plus.settings.bottomsheets.SingleSelectPreferenceBottomSheet;
+import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
@@ -36,11 +38,12 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 import static net.osmand.plus.activities.PluginInfoFragment.PLUGIN_INFO;
-import static net.osmand.plus.settings.backend.OsmandSettings.MONTHLY_DIRECTORY;
-import static net.osmand.plus.settings.backend.OsmandSettings.REC_DIRECTORY;
 import static net.osmand.plus.monitoring.OsmandMonitoringPlugin.MINUTES;
 import static net.osmand.plus.monitoring.OsmandMonitoringPlugin.SECONDS;
+import static net.osmand.plus.monitoring.TripRecordingStartingBottomSheet.UPDATE_LOGGING_INTERVAL;
 import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
+import static net.osmand.plus.settings.backend.OsmandSettings.MONTHLY_DIRECTORY;
+import static net.osmand.plus.settings.backend.OsmandSettings.REC_DIRECTORY;
 
 public class MonitoringSettingsFragment extends BaseSettingsFragment
 		implements CopyAppModePrefsListener, ResetAppModePrefsListener {
@@ -290,6 +293,18 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 	private void setupResetToDefaultPref() {
 		Preference resetToDefault = findPreference(RESET_TO_DEFAULT);
 		resetToDefault.setIcon(getActiveIcon(R.drawable.ic_action_reset_to_default_dark));
+	}
+
+	@Override
+	public void onDestroy() {
+		FragmentActivity activity = getActivity();
+		if (activity != null && !activity.isChangingConfigurations()) {
+			Fragment target = getTargetFragment();
+			if (target instanceof TripRecordingStartingBottomSheet) {
+				((TripRecordingStartingBottomSheet) target).show(UPDATE_LOGGING_INTERVAL);
+			}
+		}
+		super.onDestroy();
 	}
 
 	@Override

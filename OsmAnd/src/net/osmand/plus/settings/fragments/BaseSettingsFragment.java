@@ -61,7 +61,6 @@ import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
 import net.osmand.plus.audionotes.MultimediaNotesFragment;
 import net.osmand.plus.development.DevelopmentSettingsFragment;
 import net.osmand.plus.monitoring.MonitoringSettingsFragment;
-import net.osmand.plus.monitoring.TripRecordingStartingBottomSheet;
 import net.osmand.plus.openplacereviews.OprSettingsFragment;
 import net.osmand.plus.osmedit.OsmEditingFragment;
 import net.osmand.plus.profiles.SelectAppModesBottomSheetDialogFragment;
@@ -86,7 +85,6 @@ import java.io.Serializable;
 import java.util.Set;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
-import static net.osmand.plus.monitoring.TripRecordingStartingBottomSheet.UPDATE_LOGGING_INTERVAL;
 
 public abstract class BaseSettingsFragment extends PreferenceFragmentCompat implements OnPreferenceChangeListener,
 		OnPreferenceClickListener, AppModeChangedListener, OnConfirmPreferenceChange {
@@ -290,15 +288,6 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 					activity.getWindow().setStatusBarColor(statusBarColor);
 				}
 			}
-		}
-	}
-
-	@Override
-	public void onDestroyView() {
-		super.onDestroyView();
-		Fragment target = getTargetFragment();
-		if (target instanceof TripRecordingStartingBottomSheet) {
-			((TripRecordingStartingBottomSheet) target).show(UPDATE_LOGGING_INTERVAL);
 		}
 	}
 
@@ -895,24 +884,11 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	}
 
 	public static boolean showInstance(FragmentActivity activity, SettingsScreenType screenType) {
-		return showInstance(activity, screenType, (ApplicationMode) null);
-	}
-
-	public static boolean showInstance(FragmentActivity activity, SettingsScreenType screenType, Fragment target) {
-		return showInstance(activity, screenType, null, target);
+		return showInstance(activity, screenType, null);
 	}
 
 	public static boolean showInstance(FragmentActivity activity, SettingsScreenType screenType, @Nullable ApplicationMode appMode) {
-		return showInstance(activity, screenType, appMode, new Bundle());
-	}
-
-	public static boolean showInstance(FragmentActivity activity, SettingsScreenType screenType, @Nullable ApplicationMode appMode, Fragment target) {
-		return showInstance(activity, screenType, appMode, new Bundle(), target);
-	}
-
-	public static boolean showInstance(FragmentActivity activity, SettingsScreenType screenType,
-									   @Nullable ApplicationMode appMode, @NonNull Bundle args) {
-		return showInstance(activity, screenType, appMode, args, null);
+		return showInstance(activity, screenType, appMode, new Bundle(), null);
 	}
 
 	public static boolean showInstance(FragmentActivity activity, SettingsScreenType screenType,

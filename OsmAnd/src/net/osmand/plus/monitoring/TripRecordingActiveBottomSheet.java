@@ -29,6 +29,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -81,7 +82,6 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 	private SelectedGpxFile selectedGpxFile;
 
 	private View statusContainer;
-	private LinearLayout showTrackContainer;
 	private AppCompatImageView trackAppearanceIcon;
 	private View buttonSave;
 	private GpxBlockStatisticsBuilder blockStatisticsBuilder;
@@ -161,10 +161,10 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 		blockStatisticsBuilder.setBlocksClickable(false);
 		blockStatisticsBuilder.initStatBlocks(null, ContextCompat.getColor(app, getActiveTextColorId(nightMode)), nightMode);
 
-		showTrackContainer = itemView.findViewById(R.id.show_track_on_map);
+		LinearLayout showTrackContainer = itemView.findViewById(R.id.show_track_on_map);
 		trackAppearanceIcon = showTrackContainer.findViewById(R.id.additional_button_icon);
-		createShowTrackItem(app, getMapActivity(), nightMode, showTrackContainer, trackAppearanceIcon,
-				ItemType.SHOW_TRACK.getTitleId(), TripRecordingActiveBottomSheet.this, new Runnable() {
+		createShowTrackItem(showTrackContainer, trackAppearanceIcon, ItemType.SHOW_TRACK.getTitleId(),
+				TripRecordingActiveBottomSheet.this, nightMode, new Runnable() {
 					@Override
 					public void run() {
 						hide();
@@ -275,10 +275,15 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 		}
 	}
 
-	public static void createShowTrackItem(final OsmandApplication app, final MapActivity mapActivity,
-										   final boolean nightMode, LinearLayout showTrackContainer,
-										   AppCompatImageView trackAppearanceIcon, Integer showTrackId,
-										   final Fragment target, final Runnable hideOnClickButtonAppearance) {
+	public static void createShowTrackItem(LinearLayout showTrackContainer, AppCompatImageView trackAppearanceIcon,
+										   Integer showTrackId, final Fragment target,
+										   final boolean nightMode, final Runnable hideOnClickButtonAppearance) {
+		FragmentActivity activity = target.getActivity();
+		if (!(activity instanceof MapActivity)) {
+			return;
+		}
+		final MapActivity mapActivity = (MapActivity) activity;
+		final OsmandApplication app = mapActivity.getMyApplication();
 		final CardView buttonShowTrack = showTrackContainer.findViewById(R.id.compound_container);
 		final CardView buttonAppearance = showTrackContainer.findViewById(R.id.additional_button_container);
 
@@ -308,11 +313,9 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 			@Override
 			public void onClick(View v) {
 				if (showTrackCompound.isChecked()) {
-					if (mapActivity != null) {
-						hideOnClickButtonAppearance.run();
-						SelectedGpxFile selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
-						TrackAppearanceFragment.showInstance(mapActivity, selectedGpxFile, target);
-					}
+					hideOnClickButtonAppearance.run();
+					SelectedGpxFile selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
+					TrackAppearanceFragment.showInstance(mapActivity, selectedGpxFile, target);
 				}
 			}
 		});

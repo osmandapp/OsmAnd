@@ -93,8 +93,8 @@ public class TripRecordingStartingBottomSheet extends MenuBottomSheetDialogFragm
 
 		showTrackContainer = itemView.findViewById(R.id.show_track_on_map);
 		trackAppearanceIcon = showTrackContainer.findViewById(R.id.additional_button_icon);
-		createShowTrackItem(app, getMapActivity(), nightMode, showTrackContainer, trackAppearanceIcon,
-				R.string.shared_string_show_on_map, TripRecordingStartingBottomSheet.this, new Runnable() {
+		createShowTrackItem(showTrackContainer, trackAppearanceIcon, R.string.shared_string_show_on_map,
+				TripRecordingStartingBottomSheet.this, nightMode, new Runnable() {
 					@Override
 					public void run() {
 						hide();
@@ -129,7 +129,8 @@ public class TripRecordingStartingBottomSheet extends MenuBottomSheetDialogFragm
 				MapActivity mapActivity = getMapActivity();
 				if (mapActivity != null) {
 					hide();
-					BaseSettingsFragment.showInstance(mapActivity, SettingsScreenType.MONITORING_SETTINGS, TripRecordingStartingBottomSheet.this);
+					BaseSettingsFragment.showInstance(mapActivity, SettingsScreenType.MONITORING_SETTINGS,
+							null, new Bundle(), TripRecordingStartingBottomSheet.this);
 				}
 			}
 		});
@@ -255,5 +256,4 @@ public class TripRecordingStartingBottomSheet extends MenuBottomSheetDialogFragm
 	protected boolean hideButtonsContainer() {
 		return true;
 	}
-
 }
