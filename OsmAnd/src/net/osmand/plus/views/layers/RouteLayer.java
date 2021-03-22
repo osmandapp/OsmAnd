@@ -27,6 +27,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportStop;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.profiles.LocationIcon;
@@ -298,9 +299,16 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 			}
 			routeLinePaint.setColor(color);
 			routeLinePaint.setStrokeWidth(width);
-			int screenCenter = AndroidUtils.getScreenWidth(getMapActivity())/2;
-			int screenHeight = AndroidUtils.getScreenHeight(getMapActivity());
-			canvas.drawLine(screenCenter, 0, screenCenter, screenHeight, routeLinePaint);
+			MapActivity mapActivity = getMapActivity();
+			int screenWidth = AndroidUtils.getScreenWidth(mapActivity);
+			int screenHeight = AndroidUtils.getScreenHeight(mapActivity);
+			int x;
+			if (AndroidUiHelper.isOrientationPortrait(mapActivity)) {
+				x = screenWidth / 2;
+			} else {
+				x = (int) (AndroidUtils.isLayoutRtl(mapActivity) ? screenWidth/4 : screenWidth * 0.75);
+			}
+			canvas.drawLine(x, 0, x, screenHeight, routeLinePaint);
 		}
 	}
 
