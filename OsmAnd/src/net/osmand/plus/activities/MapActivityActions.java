@@ -62,8 +62,8 @@ import net.osmand.plus.mapmarkers.MarkersPlanRouteContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.StartPlanRouteBottomSheet;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
-import net.osmand.plus.monitoring.TripRecordingBottomSheetFragment;
-import net.osmand.plus.monitoring.TripRecordingStartingBottomSheetFragment;
+import net.osmand.plus.monitoring.TripRecordingBottomSheet;
+import net.osmand.plus.monitoring.TripRecordingStartingBottomSheet;
 import net.osmand.plus.osmedit.dialogs.DismissRouteBottomSheetFragment;
 import net.osmand.plus.profiles.ProfileDataObject;
 import net.osmand.plus.profiles.ProfileDataUtils;
@@ -854,9 +854,9 @@ public class MapActivityActions implements DialogProvider {
 							app.logEvent("trip_recording_open");
 							MapActivity.clearPrevActivityIntent();
 							if (monitoringPlugin.hasDataToSave() || monitoringPlugin.wasTrackMonitored()) {
-								TripRecordingBottomSheetFragment.showInstance(mapActivity.getSupportFragmentManager(), monitoringPlugin.getCurrentTrack());
+								TripRecordingBottomSheet.showInstance(mapActivity.getSupportFragmentManager());
 							} else {
-								TripRecordingStartingBottomSheetFragment.showInstance(mapActivity.getSupportFragmentManager(), app, monitoringPlugin.getCurrentTrack());
+								TripRecordingStartingBottomSheet.showTripRecordingDialog(mapActivity.getSupportFragmentManager(), app);
 							}
 							return true;
 						}

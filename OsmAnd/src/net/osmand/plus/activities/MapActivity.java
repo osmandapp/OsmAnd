@@ -104,7 +104,7 @@ import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.SnapTrackWarningFragment;
-import net.osmand.plus.monitoring.TripRecordingStartingBottomSheetFragment;
+import net.osmand.plus.monitoring.TripRecordingStartingBottomSheet;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
@@ -2241,8 +2241,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return getFragment(MeasurementToolFragment.TAG);
 	}
 
-	public TripRecordingStartingBottomSheetFragment getTripRecordingBottomSheet() {
-		return getFragment(TripRecordingStartingBottomSheetFragment.TAG);
+	public TripRecordingStartingBottomSheet getTripRecordingBottomSheet() {
+		return getFragment(TripRecordingStartingBottomSheet.TAG);
 	}
 
 	public ChooseRouteFragment getChooseRouteFragment() {

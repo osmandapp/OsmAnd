@@ -337,9 +337,9 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	public void controlDialog(final Activity activity, final boolean showTrackSelection) {
 		FragmentManager fragmentManager = ((FragmentActivity) activity).getSupportFragmentManager();
 		if (hasDataToSave() || wasTrackMonitored()) {
-			TripRecordingBottomSheetFragment.showInstance(fragmentManager, getCurrentTrack());
+			TripRecordingBottomSheet.showInstance(fragmentManager);
 		} else {
-			TripRecordingStartingBottomSheetFragment.showInstance(fragmentManager, app, getCurrentTrack());
+			TripRecordingStartingBottomSheet.showTripRecordingDialog(fragmentManager, app);
 		}
 
 		/*final boolean wasTrackMonitored = settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
@@ -507,7 +507,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 							final Activity a = activityRef.get();
 							if (a instanceof FragmentActivity && !a.isFinishing()) {
 								List<String> singleName = Collections.singletonList(Algorithms.getFileNameWithoutExtension(file));
-								SaveGPXBottomSheetFragment.showInstance(((FragmentActivity) a)
+								SaveGPXBottomSheet.showInstance(((FragmentActivity) a)
 										.getSupportFragmentManager(), singleName);
 							}
 						}
@@ -558,7 +558,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 			runnable.run();
 		} else if (map instanceof FragmentActivity) {
 			FragmentActivity activity = (FragmentActivity) map;
-			TripRecordingStartingBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), app, getCurrentTrack());
+			TripRecordingStartingBottomSheet.showTripRecordingDialog(activity.getSupportFragmentManager(), app);
 		}
 	}
 
