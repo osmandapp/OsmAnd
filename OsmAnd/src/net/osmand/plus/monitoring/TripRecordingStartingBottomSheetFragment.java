@@ -30,21 +30,20 @@ import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.monitoring.TripRecordingBottomFragment.ItemType;
+import net.osmand.plus.monitoring.TripRecordingBottomSheetFragment.ItemType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 
 import static net.osmand.plus.monitoring.OsmandMonitoringPlugin.MINUTES;
 import static net.osmand.plus.monitoring.OsmandMonitoringPlugin.SECONDS;
-import static net.osmand.plus.monitoring.TripRecordingBottomFragment.UPDATE_TRACK_ICON;
-import static net.osmand.plus.monitoring.TripRecordingBottomFragment.createItem;
-import static net.osmand.plus.monitoring.TripRecordingBottomFragment.createShowTrackItem;
-import static net.osmand.plus.monitoring.TripRecordingBottomFragment.updateTrackIcon;
+import static net.osmand.plus.monitoring.TripRecordingBottomSheetFragment.createItem;
+import static net.osmand.plus.monitoring.TripRecordingBottomSheetFragment.createShowTrackItem;
+import static net.osmand.plus.monitoring.TripRecordingBottomSheetFragment.updateTrackIcon;
 
-public class TripRecordingStartingBottomFragment extends MenuBottomSheetDialogFragment {
+public class TripRecordingStartingBottomSheetFragment extends MenuBottomSheetDialogFragment {
 
-	public static final String TAG = TripRecordingStartingBottomFragment.class.getSimpleName();
+	public static final String TAG = TripRecordingStartingBottomSheetFragment.class.getSimpleName();
 	public static final String UPDATE_LOGGING_INTERVAL = "update_logging_interval";
 
 	private OsmandApplication app;
@@ -60,7 +59,7 @@ public class TripRecordingStartingBottomFragment extends MenuBottomSheetDialogFr
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager) {
 		if (!fragmentManager.isStateSaved()) {
-			TripRecordingStartingBottomFragment fragment = new TripRecordingStartingBottomFragment();
+			TripRecordingStartingBottomSheetFragment fragment = new TripRecordingStartingBottomSheetFragment();
 			fragment.show(fragmentManager, TAG);
 		}
 	}
@@ -73,7 +72,7 @@ public class TripRecordingStartingBottomFragment extends MenuBottomSheetDialogFr
 				showInstance(fragmentManager);
 			} else {
 				startRecording(app);
-				TripRecordingBottomFragment.showInstance(fragmentManager, selectedGpxFile);
+				TripRecordingBottomSheetFragment.showInstance(fragmentManager, selectedGpxFile);
 			}
 		}
 	}
@@ -107,7 +106,7 @@ public class TripRecordingStartingBottomFragment extends MenuBottomSheetDialogFr
 		LinearLayout showTrackContainer = itemView.findViewById(R.id.show_track_on_map);
 		trackAppearanceIcon = showTrackContainer.findViewById(R.id.additional_button_icon);
 		createShowTrackItem(showTrackContainer, trackAppearanceIcon, R.string.shared_string_show_on_map,
-				TripRecordingStartingBottomFragment.this, nightMode, new Runnable() {
+				TripRecordingStartingBottomSheetFragment.this, nightMode, new Runnable() {
 					@Override
 					public void run() {
 						hide();
@@ -143,7 +142,7 @@ public class TripRecordingStartingBottomFragment extends MenuBottomSheetDialogFr
 				if (mapActivity != null) {
 					hide();
 					BaseSettingsFragment.showInstance(mapActivity, SettingsScreenType.MONITORING_SETTINGS,
-							null, new Bundle(), TripRecordingStartingBottomFragment.this);
+							null, new Bundle(), TripRecordingStartingBottomSheetFragment.this);
 				}
 			}
 		});
@@ -234,7 +233,7 @@ public class TripRecordingStartingBottomFragment extends MenuBottomSheetDialogFr
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			SavingTrackHelper helper = app.getSavingTrackHelper();
-			TripRecordingBottomFragment.showInstance(mapActivity.getSupportFragmentManager(), helper.getCurrentTrack());
+			TripRecordingBottomSheetFragment.showInstance(mapActivity.getSupportFragmentManager(), helper.getCurrentTrack());
 		}
 		dismiss();
 	}

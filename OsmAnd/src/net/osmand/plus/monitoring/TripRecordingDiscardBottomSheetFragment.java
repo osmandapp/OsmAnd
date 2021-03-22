@@ -5,29 +5,31 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
-import net.osmand.plus.monitoring.TripRecordingBottomFragment.ItemType;
+import net.osmand.plus.monitoring.TripRecordingBottomSheetFragment.ItemType;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import static net.osmand.AndroidUtils.getPrimaryTextColorId;
+import static net.osmand.plus.monitoring.TripRecordingOptionsBottomSheetFragment.ACTION_STOP_AND_DISMISS;
 
-public class TripRecordingClearDataBottomFragment extends MenuBottomSheetDialogFragment implements TripRecordingBottomFragment.DismissTargetFragment {
+public class TripRecordingDiscardBottomSheetFragment extends MenuBottomSheetDialogFragment implements TripRecordingBottomSheetFragment.DismissTargetFragment {
 
-	public static final String TAG = TripRecordingClearDataBottomFragment.class.getSimpleName();
+	public static final String TAG = TripRecordingDiscardBottomSheetFragment.class.getSimpleName();
 
 	private OsmandApplication app;
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, @NonNull Fragment target) {
 		if (!fragmentManager.isStateSaved()) {
-			TripRecordingClearDataBottomFragment fragment = new TripRecordingClearDataBottomFragment();
+			TripRecordingDiscardBottomSheetFragment fragment = new TripRecordingDiscardBottomSheetFragment();
 			fragment.setTargetFragment(target, 0);
 			fragment.show(fragmentManager, TAG);
 		}
@@ -36,30 +38,40 @@ public class TripRecordingClearDataBottomFragment extends MenuBottomSheetDialogF
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		app = requiredMyApplication();
+		final OsmandMonitoringPlugin plugin = OsmandPlugin.getPlugin(OsmandMonitoringPlugin.class);
 		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
 		int verticalBig = getResources().getDimensionPixelSize(R.dimen.dialog_content_margin);
 		int verticalNormal = getResources().getDimensionPixelSize(R.dimen.content_padding);
-		String description = getString(R.string.clear_recorded_data_warning)
-				.concat("\n").concat(getString(R.string.lost_data_warning));
-		final View buttonClear = createItem(inflater, ItemType.CLEAR_DATA);
+		final View buttonDiscard = createItem(inflater, ItemType.STOP_AND_DISCARD);
 		final View buttonCancel = createItem(inflater, ItemType.CANCEL);
 
 		items.add(new BottomSheetItemWithDescription.Builder()
-				.setDescription(description)
+				.setDescription(getString(R.string.track_recording_description))
 				.setDescriptionColorId(getPrimaryTextColorId(nightMode))
-				.setTitle(app.getString(R.string.clear_recorded_data))
+				.setTitle(app.getString(R.string.track_recording_title))
 				.setLayoutId(R.layout.bottom_sheet_item_title_with_description)
 				.create());
 
 		items.add(new DividerSpaceItem(app, verticalBig));
 
 		items.add(new BaseBottomSheetItem.Builder()
-				.setCustomView(buttonClear)
+				.setCustomView(buttonDiscard)
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
+						if (plugin != null && app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get()) {
+							plugin.stopRecording();
+							app.getNotificationHelper().refreshNotifications();
+						}
 						app.getSavingTrackHelper().clearRecordedData(true);
 						dismiss();
+
+						Fragment target = getTargetFragment();
+						if (target != null) {
+							Bundle args = new Bundle();
+							args.putBoolean(ACTION_STOP_AND_DISMISS, true);
+							target.setArguments(args);
+						}
 						dismissTarget();
 					}
 				})
@@ -81,15 +93,15 @@ public class TripRecordingClearDataBottomFragment extends MenuBottomSheetDialogF
 	}
 
 	private View createItem(LayoutInflater inflater, ItemType type) {
-		return TripRecordingBottomFragment.createItem(app, nightMode, inflater, type);
+		return TripRecordingBottomSheetFragment.createItem(app, nightMode, inflater, type);
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
 		Fragment target = getTargetFragment();
-		if (target instanceof TripRecordingOptionsBottomFragment) {
-			((TripRecordingOptionsBottomFragment) target).hide();
+		if (target instanceof TripRecordingOptionsBottomSheetFragment) {
+			((TripRecordingOptionsBottomSheetFragment) target).hide();
 		}
 	}
 
@@ -97,21 +109,21 @@ public class TripRecordingClearDataBottomFragment extends MenuBottomSheetDialogF
 	public void onPause() {
 		super.onPause();
 		Fragment target = getTargetFragment();
-		if (target instanceof TripRecordingOptionsBottomFragment) {
-			((TripRecordingOptionsBottomFragment) target).show();
+		if (target instanceof TripRecordingOptionsBottomSheetFragment) {
+			((TripRecordingOptionsBottomSheetFragment) target).show();
+		}
+	}
+
+	@Override
+	public void dismissTarget() {
+		Fragment target = getTargetFragment();
+		if (target instanceof TripRecordingOptionsBottomSheetFragment) {
+			((TripRecordingOptionsBottomSheetFragment) target).dismiss();
 		}
 	}
 
 	@Override
 	protected boolean hideButtonsContainer() {
 		return true;
-	}
-
-	@Override
-	public void dismissTarget() {
-		Fragment target = getTargetFragment();
-		if (target instanceof TripRecordingOptionsBottomFragment) {
-			((TripRecordingOptionsBottomFragment) target).dismiss();
-		}
 	}
 }

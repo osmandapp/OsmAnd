@@ -27,7 +27,7 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.monitoring.TripRecordingBottomFragment.ItemType;
+import net.osmand.plus.monitoring.TripRecordingBottomSheetFragment.ItemType;
 import net.osmand.plus.myplaces.SaveCurrentTrackTask;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
@@ -35,9 +35,9 @@ import net.osmand.util.Algorithms;
 
 import static net.osmand.AndroidUtils.getPrimaryTextColorId;
 
-public class TripRecordingOptionsBottomFragment extends MenuBottomSheetDialogFragment implements TripRecordingBottomFragment.DismissTargetFragment {
+public class TripRecordingOptionsBottomSheetFragment extends MenuBottomSheetDialogFragment implements TripRecordingBottomSheetFragment.DismissTargetFragment {
 
-	public static final String TAG = TripRecordingOptionsBottomFragment.class.getSimpleName();
+	public static final String TAG = TripRecordingOptionsBottomSheetFragment.class.getSimpleName();
 	public static final String ACTION_STOP_AND_DISMISS = "action_stop_and_discard";
 	private static final int SAVE_UPDATE_INTERVAL = 1000;
 
@@ -72,7 +72,7 @@ public class TripRecordingOptionsBottomFragment extends MenuBottomSheetDialogFra
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, @NonNull Fragment target) {
 		if (!fragmentManager.isStateSaved()) {
-			TripRecordingOptionsBottomFragment fragment = new TripRecordingOptionsBottomFragment();
+			TripRecordingOptionsBottomSheetFragment fragment = new TripRecordingOptionsBottomSheetFragment();
 			fragment.setTargetFragment(target, 0);
 			fragment.show(fragmentManager, TAG);
 		}
@@ -109,7 +109,7 @@ public class TripRecordingOptionsBottomFragment extends MenuBottomSheetDialogFra
 					@Override
 					public void onClick(View v) {
 						if (fragmentManager != null && hasDataToSave()) {
-							TripRecordingClearDataBottomFragment.showInstance(fragmentManager, TripRecordingOptionsBottomFragment.this);
+							TripRecordingClearDataBottomSheetFragment.showInstance(fragmentManager, TripRecordingOptionsBottomSheetFragment.this);
 						}
 					}
 				})
@@ -123,7 +123,7 @@ public class TripRecordingOptionsBottomFragment extends MenuBottomSheetDialogFra
 					@Override
 					public void onClick(View v) {
 						if (fragmentManager != null) {
-							TripRecordingDiscardBottomFragment.showInstance(fragmentManager, TripRecordingOptionsBottomFragment.this);
+							TripRecordingDiscardBottomSheetFragment.showInstance(fragmentManager, TripRecordingOptionsBottomSheetFragment.this);
 						}
 					}
 				})
@@ -189,8 +189,8 @@ public class TripRecordingOptionsBottomFragment extends MenuBottomSheetDialogFra
 		super.onResume();
 		runUpdatingTimeTrackSaved();
 		Fragment target = getTargetFragment();
-		if (target instanceof TripRecordingBottomFragment) {
-			((TripRecordingBottomFragment) target).hide();
+		if (target instanceof TripRecordingBottomSheetFragment) {
+			((TripRecordingBottomSheetFragment) target).hide();
 		}
 	}
 
@@ -224,8 +224,8 @@ public class TripRecordingOptionsBottomFragment extends MenuBottomSheetDialogFra
 			@Override
 			public void run() {
 				String time = getTimeTrackSaved();
-				TripRecordingBottomFragment.createItem(app, nightMode, buttonSave, ItemType.SAVE, hasDataToSave(), !Algorithms.isEmpty(time) ? time : null);
-				TripRecordingBottomFragment.createItem(app, nightMode, buttonClear, ItemType.CLEAR_DATA, hasDataToSave(), null);
+				TripRecordingBottomSheetFragment.createItem(app, nightMode, buttonSave, ItemType.SAVE, hasDataToSave(), !Algorithms.isEmpty(time) ? time : null);
+				TripRecordingBottomSheetFragment.createItem(app, nightMode, buttonClear, ItemType.CLEAR_DATA, hasDataToSave(), null);
 				handler.postDelayed(this, SAVE_UPDATE_INTERVAL);
 			}
 		};
@@ -244,11 +244,11 @@ public class TripRecordingOptionsBottomFragment extends MenuBottomSheetDialogFra
 	}
 
 	private View createItem(LayoutInflater inflater, ItemType type, boolean enabled) {
-		return TripRecordingBottomFragment.createItem(app, nightMode, inflater, type, enabled, null);
+		return TripRecordingBottomSheetFragment.createItem(app, nightMode, inflater, type, enabled, null);
 	}
 
 	private View createItem(LayoutInflater inflater, ItemType type) {
-		return TripRecordingBottomFragment.createItem(app, nightMode, inflater, type);
+		return TripRecordingBottomSheetFragment.createItem(app, nightMode, inflater, type);
 	}
 
 	private SaveGpxListener createSaveListener() {
@@ -286,11 +286,11 @@ public class TripRecordingOptionsBottomFragment extends MenuBottomSheetDialogFra
 	@Override
 	public void dismissTarget() {
 		Fragment target = getTargetFragment();
-		if (target instanceof TripRecordingBottomFragment) {
+		if (target instanceof TripRecordingBottomSheetFragment) {
 			if (isDiscard()) {
-				((TripRecordingBottomFragment) target).dismiss();
+				((TripRecordingBottomSheetFragment) target).dismiss();
 			} else {
-				((TripRecordingBottomFragment) target).show();
+				((TripRecordingBottomSheetFragment) target).show();
 			}
 		}
 	}

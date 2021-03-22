@@ -73,10 +73,10 @@ import static net.osmand.plus.track.GpxBlockStatisticsBuilder.INIT_BLOCKS_ALTITU
 import static net.osmand.plus.track.GpxBlockStatisticsBuilder.INIT_BLOCKS_GENERAL;
 import static net.osmand.plus.track.GpxBlockStatisticsBuilder.INIT_BLOCKS_SPEED;
 
-public class TripRecordingBottomFragment extends MenuBottomSheetDialogFragment implements SegmentActionsListener {
+public class TripRecordingBottomSheetFragment extends MenuBottomSheetDialogFragment implements SegmentActionsListener {
 
-	public static final String TAG = TripRecordingBottomFragment.class.getSimpleName();
-	private static final Log LOG = PlatformUtil.getLog(TripRecordingBottomFragment.class);
+	public static final String TAG = TripRecordingBottomSheetFragment.class.getSimpleName();
+	private static final Log LOG = PlatformUtil.getLog(TripRecordingBottomSheetFragment.class);
 	public static final String UPDATE_TRACK_ICON = "update_track_icon";
 	private static final int GPS_UPDATE_INTERVAL = 1000;
 	private static final String[] INIT_BLOCKS_KEYS =
@@ -122,7 +122,7 @@ public class TripRecordingBottomFragment extends MenuBottomSheetDialogFragment i
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, SelectedGpxFile selectedGpxFile) {
 		if (!fragmentManager.isStateSaved()) {
-			TripRecordingBottomFragment fragment = new TripRecordingBottomFragment();
+			TripRecordingBottomSheetFragment fragment = new TripRecordingBottomSheetFragment();
 			fragment.setSelectedGpxFile(selectedGpxFile);
 			fragment.show(fragmentManager, TAG);
 		}
@@ -149,7 +149,7 @@ public class TripRecordingBottomFragment extends MenuBottomSheetDialogFragment i
 		LinearLayout showTrackContainer = itemView.findViewById(R.id.show_track_on_map);
 		trackAppearanceIcon = showTrackContainer.findViewById(R.id.additional_button_icon);
 		createShowTrackItem(showTrackContainer, trackAppearanceIcon, ItemType.SHOW_TRACK.getTitleId(),
-				TripRecordingBottomFragment.this, nightMode, new Runnable() {
+				TripRecordingBottomSheetFragment.this, nightMode, new Runnable() {
 					@Override
 					public void run() {
 						hide();
@@ -213,7 +213,7 @@ public class TripRecordingBottomFragment extends MenuBottomSheetDialogFragment i
 			@Override
 			public void onClick(View v) {
 				if (fragmentManager != null) {
-					TripRecordingOptionsBottomFragment.showInstance(fragmentManager, TripRecordingBottomFragment.this);
+					TripRecordingOptionsBottomSheetFragment.showInstance(fragmentManager, TripRecordingBottomSheetFragment.this);
 				}
 			}
 		});

@@ -337,9 +337,9 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	public void controlDialog(final Activity activity, final boolean showTrackSelection) {
 		FragmentManager fragmentManager = ((FragmentActivity) activity).getSupportFragmentManager();
 		if (hasDataToSave() || wasTrackMonitored()) {
-			TripRecordingBottomFragment.showInstance(fragmentManager, getCurrentTrack());
+			TripRecordingBottomSheetFragment.showInstance(fragmentManager, getCurrentTrack());
 		} else {
-			TripRecordingStartingBottomFragment.showInstance(fragmentManager, app, getCurrentTrack());
+			TripRecordingStartingBottomSheetFragment.showInstance(fragmentManager, app, getCurrentTrack());
 		}
 
 		/*final boolean wasTrackMonitored = settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
@@ -558,7 +558,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 			runnable.run();
 		} else if (map instanceof FragmentActivity) {
 			FragmentActivity activity = (FragmentActivity) map;
-			TripRecordingStartingBottomFragment.showInstance(activity.getSupportFragmentManager(), app, getCurrentTrack());
+			TripRecordingStartingBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), app, getCurrentTrack());
 		}
 	}
 

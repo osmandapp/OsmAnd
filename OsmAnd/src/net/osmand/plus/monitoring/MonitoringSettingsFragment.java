@@ -300,8 +300,8 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 		FragmentActivity activity = getActivity();
 		if (activity != null && !activity.isChangingConfigurations()) {
 			Fragment target = getTargetFragment();
-			if (target instanceof TripRecordingStartingBottomFragment) {
-				((TripRecordingStartingBottomFragment) target).show();
+			if (target instanceof TripRecordingStartingBottomSheetFragment) {
+				((TripRecordingStartingBottomSheetFragment) target).show();
 			}
 		}
 		super.onDestroy();
