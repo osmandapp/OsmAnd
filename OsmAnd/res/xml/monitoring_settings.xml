@@ -9,7 +9,8 @@
 		android:layout="@layout/preference_with_descr_dialog_and_switch"
 		android:summaryOff="@string/shared_string_disabled"
 		android:summaryOn="@string/shared_string_enabled"
-		android:title="@string/show_start_dialog" />
+		android:title="@string/show_start_dialog"
+		tools:icon="@drawable/ic_action_dialog" />
 
 	<PreferenceCategory
 		android:key="navigation"
