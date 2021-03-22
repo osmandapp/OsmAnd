@@ -19,7 +19,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.AndroidUtils;
-import net.osmand.plus.LockableScrollView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -135,10 +134,6 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment imple
 				FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(widthNoShadow, ViewGroup.LayoutParams.WRAP_CONTENT);
 				params.gravity = Gravity.BOTTOM | Gravity.START;
 				controlButtons.setLayoutParams(params);
-			}
-			View bottomScrollView = getBottomScrollView();
-			if (bottomScrollView instanceof LockableScrollView) {
-				((LockableScrollView) bottomScrollView).setScrollingEnabled(false);
 			}
 			initContent(view);
 		}
