@@ -380,10 +380,10 @@
     <string name="error_avoid_specific_road">No se ha encontrado un desvío</string>
     <string name="map_update">Actualización disponible para %1$s mapa(s)</string>
     <string name="wake_on_voice">Encender pantalla</string>
-    <string name="osmand_rastermaps_plugin_description">Accede a tantos tipos de mapas en línea (llamados teselas o ráster) que desees, desde teselas predefinidas de OSM (como Mapnik) a imágenes satelitales y capas de propósito especial como mapas del tiempo, mapas del clima, mapas geológicos, capas de sombreado, etc. 
-\n 
-\nCualquiera de estos mapas puede usarse como el mapa predefinido que se mostrará, o como una superposición o subyacencia de otro mapa base (como los mapas estándar de OsmAnd en línea). Ciertos elementos de los mapas vectoriales de OsmAnd pueden ocultarse a través del menú «Configurar mapa» para hacer cualquier subyacencia mas visible. 
-\n 
+    <string name="osmand_rastermaps_plugin_description">Accede a tantos tipos de mapas en línea (llamados teselas o ráster) que desees, desde teselas predefinidas de OSM (como Mapnik) a imágenes satelitales y capas de propósito especial como mapas meteorológicos, mapas del clima, mapas geológicos, capas de sombreado, etc.
+\n
+\nCualquiera de estos mapas puede usarse como el mapa predefinido que se mostrará, o como una superposición o subyacencia de otro mapa base (como los mapas estándar de OsmAnd en línea). Ciertos elementos de los mapas vectoriales de OsmAnd pueden ocultarse a través del menú «Configurar mapa» para hacer cualquier subyacencia mas visible.
+\n
 \nDescarga las teselas de los mapas directamente en línea, o prepáralo para su uso sin conexión (copiar manualmente en la carpeta de datos OsmAnd) como una base de datos SQLite que puede ser producida por una variedad de herramientas de preparación de mapas de terceros.</string>
     <string name="record_plugin_description">Activa la funcionalidad para registrar y guardar tus trazas manualmente pulsando el widget de grabación GPX en el mapa, o automáticamente registrando todas tus rutas navegadas en un archivo GPX.
 \n
@@ -418,7 +418,7 @@
     <string name="osmand_parking_plugin_description">Registra dónde se ha estacionado el automóvil, incluyendo cuánto tiempo queda. 
 \n Tanto la ubicación como el tiempo del estacionamiento se muestran en el menú principal y en un widget sobre el mapa. Se puede añadir una alarma de recordatorio al calendario de Android.</string>
     <string name="osmand_distance_planning_plugin_description">Crea caminos pulsando el mapa, usando o modificando archivos GPX existentes, para planificar un viaje y medir la distancia entre puntos. El resultado puede guardarse como un archivo GPX y usarse luego para la orientación.</string>
-    <string name="osmand_accessibility_description">Activa las funciones de accesibilidad del dispositivo, directamente en OsmAnd. Facilita por ejemplo, el ajuste de la velocidad de la voz para voces de texto a voz, la configuración de navegación D-pad, usando la rueda de desplazamiento para el control del zoom, o la retroalimentación de texto a voz, por ejemplo, para anunciar la ubicación automáticamente.</string>
+    <string name="osmand_accessibility_description">Activa las funciones de accesibilidad del dispositivo, directamente en OsmAnd. Facilita por ejemplo, el ajuste de la velocidad de la voz para voces de texto a voz, la configuración de navegación del pad direccional, usando la rueda de desplazamiento para el control del zoom, o la retroalimentación de texto a voz, por ejemplo, para anunciar la ubicación automáticamente.</string>
     <string name="osm_editing_plugin_description">Haz contribuciones en OSM, como el crear o modificar objetos PDI, abrir o comentar notas de OSM y contribuir con archivos de trazas GPX grabados en OsmAnd, proporcionando tu nombre de usuario y contraseña. OpenStreetMap.org es un proyecto de mapeo de dominio público, global, libre e impulsado por la comunidad.</string>
     <string name="osmand_development_plugin_description">Ajusta las funciones de desarrollo y depuración, como la simulación de navegación, el rendimiento del renderizado o las indicaciones por voz. Destinado para desarrolladores, no es necesario para el normal uso de la aplicación.</string>
     <string name="world_ski_missing">Descargar el mapa especial sin conexión para mostrar las instalaciones de esquí.</string>
@@ -1057,7 +1057,7 @@
     <string name="city_type_suburb">Suburbio</string>
     <string name="city_type_hamlet">Aldea</string>
     <string name="city_type_village">Villa</string>
-    <string name="city_type_town">Pueblo</string>
+    <string name="city_type_town">Ciudad pequeña</string>
     <string name="city_type_city">Ciudad</string>
     <string name="animate_route_off">Parar simulación</string>
     <string name="animate_route">Iniciar simulación</string>
@@ -1662,7 +1662,7 @@
     <string name="shared_string_navigation">Navegación</string>
     <string name="osmand_running_in_background">Ejecutar en modo reposo</string>
     <string name="favourites_edit_dialog_title">Información del favorito</string>
-    <string name="favourites_context_menu_add">Añadir a Favoritos</string>
+    <string name="favourites_context_menu_add">Añadir favorito</string>
     <string name="roads">Caminos</string>
     <string name="default_speed_system_descr">Define la unidad de velocidad.</string>
     <string name="default_speed_system">Unidad de velocidad</string>
@@ -2667,7 +2667,7 @@
     <string name="shared_string_wikivoyage">Wikiviajes</string>
     <string name="index_item_world_wikivoyage">Artículos de Wikiviajes en todo el mundo</string>
     <string name="online_webpage_warning">La página sólo está disponible en línea. ¿Abrirla en el navegador web?</string>
-    <string name="images_cache">Caché de imágenes</string>
+    <string name="images_cache">Almacén de imágenes</string>
     <string name="delete_search_history">Borrar historial de búsquedas</string>
     <string name="show_images">Mostrar imágenes</string>
     <string name="shared_string_dont">No</string>
@@ -3301,7 +3301,7 @@
     <string name="select_color">Elegir el color</string>
     <string name="edit_profiles_descr">Los perfiles predefinidos de OsmAnd no se pueden borrar, sino desactivar (en la pantalla anterior) u ordenarse en la parte inferior.</string>
     <string name="edit_profiles">Editar perfiles</string>
-    <string name="select_nav_profile_dialog_message">El «Tipo de navegación» rige la forma en que se calculan las rutas.</string>
+    <string name="select_nav_profile_dialog_message">El «Tipo de navegación» determina cómo se calculan las rutas.</string>
     <string name="profile_appearance">Aspecto del perfil</string>
     <string name="choose_icon_color_name">Icono, color y nombre</string>
     <string name="reorder_profiles">Editar la lista de perfiles</string>
@@ -3530,7 +3530,7 @@
     <string name="search_poi_types">Buscar por tipos de PDI</string>
     <string name="radius_ruler_item">Regla radial</string>
     <string name="quick_action_item">Acción rápida</string>
-    <string name="osmand_purchases_item">Compras de OsmAnd</string>
+    <string name="osmand_purchases_item">Compras en OsmAnd</string>
     <string name="osm_live_payment_subscription_management">El pago será cargado a la cuenta de Google Play al confirmar la compra. 
 \n 
 \nLa suscripción se renueva automáticamente a menos que se cancele antes de la fecha de renovación. Se le cobrará a su cuenta el período de renovación (mes/trimestre/año) sólo en la fecha de renovación. 
@@ -3561,7 +3561,7 @@
     <string name="lang_ky">Kirguís</string>
     <string name="lang_kk">Kazajo</string>
     <string name="lang_jv">Javanés</string>
-    <string name="lang_gu">Gujarati</string>
+    <string name="lang_gu">Gujaratí</string>
     <string name="lang_cv">Chuvash</string>
     <string name="lang_ce">Checheno</string>
     <string name="lang_bar">Bávaro</string>
@@ -3905,7 +3905,7 @@
     <string name="plan_route_add_new_segment">Añadir nuevo segmento</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="lang_de_casual">Alemán (casual)</string>
-    <string name="app_mode_light_aircraft">Avión ligero</string>
+    <string name="app_mode_light_aircraft">Aeronave ligera</string>
     <string name="shared_string_last_used">Usado por última vez</string>
     <string name="routing_attr_prefer_hiking_routes_name">Preferir rutas de senderismo</string>
     <string name="routing_attr_prefer_hiking_routes_description">Prefiere rutas de senderismo</string>
@@ -4006,4 +4006,45 @@
     <string name="activity_type_hiking_name">Senderismo</string>
     <string name="activity_type_cycling_name">Bicicleta</string>
     <string name="activity_type_car_name">Automóvil</string>
+    <string name="select_segments">Elegir segmentos</string>
+    <string name="select_segments_description">«%1$s» contiene más de un segmento, debe marcar la parte necesaria para la navegación.</string>
+    <string name="segments_count">Segmento %1$d</string>
+    <string name="temporary_conditional_routing_descr">Usar las restricciones viales que están activas ahora en el mapa</string>
+    <string name="routing_attr_short_way_description">Ruta optimizada más corta (bajo consumo)</string>
+    <string name="routing_attr_driving_style_description">Elige el propósito de la conducción para obtener la ruta más corta, más rápida o más segura</string>
+    <string name="snap_to_road_descr">El icono de la ubicación actual se ajustará a la ruta de navegación actual</string>
+    <string name="map_orientation_threshold_descr">No girar la vista del mapa si la velocidad es inferior a un umbral</string>
+    <string name="restart">Reiniciar</string>
+    <string name="shared_strings_all_regions">Todas las regiones</string>
+    <string name="delete_number_files_question">¿Borrar %1$d archivos\?</string>
+    <string name="track_recording_stop_without_saving">Parar sin guardar</string>
+    <string name="track_recording_save_and_stop">Guardar y parar la grabación</string>
+    <string name="track_recording_title">Grabación de la traza detenida</string>
+    <string name="track_recording_description">¿Dejar de grabar\?
+\nTodos los datos no guardados se perderán.</string>
+    <string name="on_pause">En pausa</string>
+    <string name="app_restart_required">Es necesario reiniciar la aplicación para aplicar algunos ajustes.</string>
+    <string name="routing_attr_height_obstacles_description">La ruta podría evitar las fuertes subidas.</string>
+    <string name="quick_action_coordinates_widget_descr">Alternar para mostrar u ocultar el widget de coordenadas en el mapa.</string>
+    <string name="map_widget_distance_by_tap">Distancia al pulsar</string>
+    <string name="latest_openstreetmap_update">Última actualización de OpenStreetMap disponible:</string>
+    <string name="updated">Actualizado: %s</string>
+    <string name="last_time_checked">Última comprobación: %s</string>
+    <string name="update_frequency">Frecuencia de actualización</string>
+    <string name="live_update_frequency_week_variant">Las actualizaciones del mapa serán comprobadas cada semana. Próxima vez el %1$s a las %2$s hs.</string>
+    <string name="live_update_frequency_day_variant">Las actualizaciones del mapa serán comprobadas cada día. Próxima vez el %1$s a las %2$s hs.</string>
+    <string name="live_update_frequency_hour_variant">Las actualizaciones del mapa serán comprobadas cada hora. Próxima vez el %1$s a las %2$s hs.</string>
+    <string name="delete_updates">Borrar actualizaciones</string>
+    <string name="live_update_delete_updates_msg">¿Borrar todas las actualizaciones en vivo de «%s»\?</string>
+    <string name="purchases">Compras</string>
+    <string name="select_category_descr">Marca una categoría o añade una nueva</string>
+    <string name="track_recording_will_be_continued">La grabación continuará.</string>
+    <string name="copy_poi_name">Copiar nombre del PDI</string>
+    <string name="quick_action_show_hide_title">Mostrar/Ocultar</string>
+    <string name="shared_string_interval">Intervalo</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Oculta fronteras de reservas naturales, áreas protegidas y parques nacionales</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_name">Fronteras naturales</string>
+    <string name="track_has_no_altitude">La traza no contiene datos de altitud.</string>
+    <string name="track_has_no_speed">La traza no contiene datos de velocidad.</string>
+    <string name="select_another_colorization">Elige otro tipo de color.</string>
 </resources>

@@ -1232,7 +1232,7 @@
     <string name="poi_material_metal">Material: Metall</string>
     <string name="poi_material_steel">Material: Stahl</string>
     <string name="poi_material_stone">Material: Stein</string>
-    <string name="poi_material_plastic">Martial: Plastik</string>
+    <string name="poi_material_plastic">Material: Plastik</string>
     <string name="poi_material_sandstone">Material: Sandstein</string>
     <string name="poi_material_granite_stone">Material: Granit</string>
     <string name="poi_material_metal_wood">Material: Metall, Holz</string>
@@ -1479,7 +1479,7 @@
     <string name="poi_material_reinforced_concrete">Material: Stahlbeton</string>
     <string name="poi_material_concrete">Material: Beton</string>
     <string name="poi_material_masonry">Material: Mauerwerk</string>
-    <string name="poi_material_brick">Martial: Ziegel</string>
+    <string name="poi_material_brick">Material: Ziegel</string>
     <string name="poi_material_composite">Material: Verbundstoff</string>
     <string name="poi_material_limestone">Material: Kalkstein</string>
     <string name="poi_material_marble">Material: Marmor</string>
@@ -3891,4 +3891,7 @@
     <string name="poi_gladed_yes">Geglättet: ja</string>
     <string name="poi_piste_name">Pistenname</string>
     <string name="poi_piste_ski_jump">Skispringen</string>
+    <string name="poi_local_ref">Lokale Referenz</string>
+    <string name="poi_geodesist">Geodät</string>
+    <string name="poi_conference_centre">Konferenzzentrum</string>
 </resources>

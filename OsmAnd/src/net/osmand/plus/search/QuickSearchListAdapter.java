@@ -33,7 +33,9 @@ import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.search.listitems.QuickSearchBannerListItem;
+import net.osmand.plus.chooseplan.ChoosePlanDialogFragment.ChoosePlanDialogType;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.search.listitems.QuickSearchBannerListItem;
 import net.osmand.plus.search.listitems.QuickSearchHeaderListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItemType;
@@ -51,9 +53,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import static net.osmand.plus.search.listitems.QuickSearchBannerListItem.ButtonItem;
 import static net.osmand.plus.search.listitems.QuickSearchBannerListItem.INVALID_ID;
 import static net.osmand.search.core.ObjectType.POI_TYPE;
-import static net.osmand.plus.search.listitems.QuickSearchBannerListItem.ButtonItem;
 
 public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 
@@ -286,8 +288,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			btnGet.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					ChoosePlanDialogFragment.showWikipediaInstance(
-							activity.getSupportFragmentManager());
+					ChoosePlanDialogFragment.showDialogInstance(app, activity.getSupportFragmentManager(), ChoosePlanDialogType.WIKIPEDIA);
 				}
 			});
 		}

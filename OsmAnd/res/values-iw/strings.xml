@@ -4010,9 +4010,9 @@
     <string name="updated">עדכון: %s</string>
     <string name="last_time_checked">מועד הבדיקה האחרונה: %s</string>
     <string name="update_frequency">תדירות עדכון</string>
-    <string name="live_update_frequency_week_variant">בכל שבוע יתבצע חיפוש לעדכוני מפה. הפעם הבאה%1$s ב־%2$s.</string>
-    <string name="live_update_frequency_day_variant">בכל יום יתבצע חיפוש לעדכוני מפה. הפעם הבאה%1$s ב־%2$s.</string>
-    <string name="live_update_frequency_hour_variant">בכל שעה יתבצע חיפוש לעדכוני מפה. הפעם הבאה%1$s ב־%2$s.</string>
+    <string name="live_update_frequency_week_variant">בכל שבוע יתבצע חיפוש לעדכוני מפה. הפעם הבאה %1$s ב־%2$s.</string>
+    <string name="live_update_frequency_day_variant">בכל יום יתבצע חיפוש לעדכוני מפה. הפעם הבאה %1$s ב־%2$s.</string>
+    <string name="live_update_frequency_hour_variant">בכל שעה יתבצע חיפוש לעדכוני מפה. הפעם הבאה %1$s ב־%2$s.</string>
     <string name="delete_updates">מחיקת עדכונים</string>
     <string name="purchases">רכישות</string>
     <string name="select_category_descr">נא לבחור קטגוריה או להוסיף אחת חדשה</string>
@@ -4023,4 +4023,28 @@
     <string name="track_has_no_altitude">המסלול אינו מכיל נתוני גובה.</string>
     <string name="track_has_no_speed">המסלול אינו מכיל מהירות גבוהה.</string>
     <string name="select_another_colorization">נא לבחור סוג אחר של צביעה.</string>
+    <string name="restart">הפעלה מחדש</string>
+    <string name="shared_strings_all_regions">כל האזורים</string>
+    <string name="delete_number_files_question">למחוק %1$d קבצים\?</string>
+    <string name="track_recording_stop_without_saving">לעצור בלי לשמור</string>
+    <string name="track_recording_save_and_stop">לשמור ולעצור את ההקלטה</string>
+    <string name="track_recording_title">הקלטת המסלול נעצרה</string>
+    <string name="track_recording_description">לעצור את ההקלטה\?
+\nכל הנתונים שלא יישמרו יאבדו.</string>
+    <string name="select_segments">נא לבחור מקטעים</string>
+    <string name="select_segments_description">%1$s מכיל יותר ממקטע אחד, עליך לבחור את החלקים הנחוצים לניווט.</string>
+    <string name="segments_count">מקטע %1$d</string>
+    <string name="temporary_conditional_routing_descr">להשתמש במגבלות הגביש שפעילות כעת על המפה</string>
+    <string name="routing_attr_short_way_description">מסלול מקוצר מרחק (לחסכון באנרגיה)</string>
+    <string name="routing_attr_driving_style_description">נא לבחור מטרת נסיעה כדי לקבל מסלול מהיר או בטוח יותר</string>
+    <string name="snap_to_road_descr">סמל המיקום הנוכחי יוצמד למסלול הניווט הנוכחי</string>
+    <string name="map_orientation_threshold_descr">לא לסובב את המפה אם המהירות קטנה מסף מסוים</string>
+    <string name="on_pause">בהשהיה</string>
+    <string name="app_restart_required">צריך להפעיל את היישומון מחדש כדי שכמה מהשינויים יחולו.</string>
+    <string name="routing_attr_height_obstacles_description">הרכבת המסלול יכולה להימנע מעליות תלולות.</string>
+    <string name="quick_action_coordinates_widget_descr">מפסק להצגה או הסתרה של וידג׳ט נקודות הציון במפה.</string>
+    <string name="map_widget_distance_by_tap">מרחק בנגיעה</string>
+    <string name="latest_openstreetmap_update">קיים עדכון ל־OpenStreetMap:</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">להסתיר גבולות של שמורות טבע, אזורים מוגנים ופארקים ציבוריים</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_name">גבולות טבעיים</string>
 </resources>

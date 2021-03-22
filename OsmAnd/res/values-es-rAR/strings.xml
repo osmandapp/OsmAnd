@@ -4032,9 +4032,9 @@
     <string name="updated">Actualizado: %s</string>
     <string name="last_time_checked">Última comprobación: %s</string>
     <string name="update_frequency">Frecuencia de actualización</string>
-    <string name="live_update_frequency_week_variant">Las actualizaciones del mapa serán comprobadas cada semana. La próxima vez %1$s en %2$s.</string>
-    <string name="live_update_frequency_day_variant">Las actualizaciones del mapa serán comprobadas cada día. La próxima vez %1$s en %2$s.</string>
-    <string name="live_update_frequency_hour_variant">Las actualizaciones del mapa serán comprobadas cada hora. La próxima vez %1$s en %2$s.</string>
+    <string name="live_update_frequency_week_variant">Las actualizaciones del mapa serán comprobadas cada semana. Próxima vez el %1$s a las %2$s hs.</string>
+    <string name="live_update_frequency_day_variant">Las actualizaciones del mapa serán comprobadas cada día. Próxima vez el %1$s a las %2$s hs.</string>
+    <string name="live_update_frequency_hour_variant">Las actualizaciones del mapa serán comprobadas cada hora. Próxima vez el %1$s a las %2$s hs.</string>
     <string name="delete_updates">Borrar actualizaciones</string>
     <string name="live_update_delete_updates_msg">¿Borrar todas las actualizaciones en vivo de «%s»\?</string>
     <string name="purchases">Compras</string>
@@ -4045,4 +4045,6 @@
     <string name="track_has_no_altitude">La traza no contiene datos de altitud.</string>
     <string name="track_has_no_speed">La traza no contiene datos de velocidad.</string>
     <string name="select_another_colorization">Elige otro tipo de color.</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_name">Fronteras naturales</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Oculta fronteras de reservas naturales, áreas protegidas y parques nacionales</string>
 </resources>

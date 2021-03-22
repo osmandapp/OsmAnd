@@ -2,12 +2,13 @@ package net.osmand.plus.views.layers.geometry;
 
 import android.graphics.Bitmap;
 
-import androidx.annotation.NonNull;
-
+import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.RotatedTileBox;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
 
 public class GpxGeometryWay extends GeometryWay<GpxGeometryWayContext, GeometryWayDrawer<GpxGeometryWayContext>> {
 
@@ -76,16 +77,25 @@ public class GpxGeometryWay extends GeometryWay<GpxGeometryWayContext, GeometryW
 
 	public static class GeometryArrowsStyle extends GeometryWayStyle<GpxGeometryWayContext> {
 
-		private static final double DIRECTION_ARROW_DISTANCE_MULTIPLIER = 10.0;
+		private static final float TRACK_WIDTH_THRESHOLD_DP = 8f;
+		private static final float ARROW_DISTANCE_MULTIPLIER = 1.5f;
+		private static final float SPECIAL_ARROW_DISTANCE_MULTIPLIER = 10f;
+		private final float TRACK_WIDTH_THRESHOLD_PIX;
 
 		private Bitmap arrowBitmap;
 
+		public static final int OUTER_CIRCLE_COLOR = 0x33000000;
 		protected int pointColor;
 		protected int trackColor;
 		protected float trackWidth;
 
+		private float outerCircleRadius;
+		private float innerCircleRadius;
+
 		GeometryArrowsStyle(GpxGeometryWayContext context, int arrowColor, int trackColor, float trackWidth) {
 			this(context, null, arrowColor, trackColor, trackWidth);
+			outerCircleRadius = AndroidUtils.dpToPx(context.getCtx(), 8);
+			innerCircleRadius = AndroidUtils.dpToPx(context.getCtx(), 7);
 		}
 
 		GeometryArrowsStyle(GpxGeometryWayContext context, Bitmap arrowBitmap, int arrowColor, int trackColor, float trackWidth) {
@@ -94,6 +104,7 @@ public class GpxGeometryWay extends GeometryWay<GpxGeometryWayContext, GeometryW
 			this.pointColor = arrowColor;
 			this.trackColor = trackColor;
 			this.trackWidth = trackWidth;
+			TRACK_WIDTH_THRESHOLD_PIX = AndroidUtils.dpToPx(context.getCtx(), TRACK_WIDTH_THRESHOLD_DP);
 		}
 
 		@Override
@@ -114,6 +125,9 @@ public class GpxGeometryWay extends GeometryWay<GpxGeometryWayContext, GeometryW
 
 		@Override
 		public Bitmap getPointBitmap() {
+			if (useSpecialArrow()) {
+				return getContext().getSpecialArrowBitmap();
+			}
 			return arrowBitmap != null ? arrowBitmap : getContext().getArrowBitmap();
 		}
 
@@ -130,9 +144,23 @@ public class GpxGeometryWay extends GeometryWay<GpxGeometryWayContext, GeometryW
 			return trackWidth;
 		}
 
+		public float getOuterCircleRadius() {
+			return outerCircleRadius;
+		}
+
+		public float getInnerCircleRadius() {
+			return innerCircleRadius;
+		}
+
+		public boolean useSpecialArrow() {
+			return trackWidth <= TRACK_WIDTH_THRESHOLD_PIX;
+		}
+
 		@Override
 		public double getPointStepPx(double zoomCoef) {
-			return getPointBitmap().getHeight() + trackWidth * 1.5f;
+			return useSpecialArrow() ?
+					getPointBitmap().getHeight() * SPECIAL_ARROW_DISTANCE_MULTIPLIER :
+					getPointBitmap().getHeight() + trackWidth * ARROW_DISTANCE_MULTIPLIER;
 		}
 	}
 }

@@ -1161,7 +1161,7 @@
     <string name="index_name_italy">Európa – Olaszország</string>
     <string name="index_name_gb">Európa – Nagy-Britannia</string>
     <string name="calculate_osmand_route_without_internet">OsmAnd útvonalszakasz számítása offline</string>
-    <string name="gpx_option_calculate_first_last_segment">OsmAnd útvonal számítása az első és utolsó útszakaszra</string>
+    <string name="gpx_option_calculate_first_last_segment">OsmAnd útvonal számítása az első és az utolsó útszakaszra</string>
     <string name="always_center_position_on_map">Pozíció megjelenítése mindig középen</string>
     <string name="voice_pref_title">Hang</string>
     <string name="misc_pref_title">Egyebek</string>
@@ -1366,7 +1366,7 @@
     <string name="navigate_point_zone">Zóna</string>
     <string name="download_tab_updates">Frissítések</string>
     <string name="download_tab_downloads">Letöltés</string>
-    <string name="download_tab_local">Helyi</string>
+    <string name="download_tab_local">Telepítve</string>
     <string name="no_internet_connection">A letöltés nem lehetséges, ellenőrizze az internetkapcsolatot.</string>
     <string name="shared_string_dismiss">Bezárás</string>
     <string name="everything_up_to_date">Minden fájl naprakész</string>
@@ -1396,7 +1396,7 @@
     <string name="settings_privacy">Adatvédelem</string>
     <string name="shared_string_gpx_points">Pontok</string>
     <string name="shared_string_my_location">Saját pozícióm</string>
-    <string name="navigation_over_track">Elindítod a navigációt a nyomvonal mentén?</string>
+    <string name="navigation_over_track">Elindítja a navigációt a nyomvonal mentén\?</string>
     <string name="avoid_roads_msg">Elkerülendő utak kijelölésével aktiválhat alternatív útvonalakat</string>
     <string name="enable_proxy_title">HTTP proxy engedélyezése</string>
     <string name="enable_proxy_descr">HTTP proxy beállítása minden hálózati kéréshez.</string>
@@ -1430,7 +1430,7 @@
     <string name="share_note">Jegyzet megosztása</string>
     <string name="shared_string_export">Exportálás</string>
     <string name="plugin_touringview_name">Turistatérkép-nézet</string>
-    <string name="track_segments">Nyomvonal szakaszok</string>
+    <string name="track_segments">Nyomvonalszakaszok</string>
     <string name="track_points">Nyomvonal pontok</string>
     <string name="shared_string_selected">Kijelölve</string>
     <string name="rename_failed">Az átnevezés nem sikerült.</string>
@@ -2164,11 +2164,10 @@
     <string name="shared_string_time">Idő</string>
     <string name="total_distance">Teljes táv</string>
     <string name="routing_attr_height_obstacles_name">Magasságadatok használata</string>
-
     <string name="rendering_attr_depthContours_description">Mélységvonalak és pontok megjelenítése.</string>
     <string name="rendering_attr_depthContours_name">Tengeri mélységvonalak</string>
     <string name="auto_split_recording_title">Felvételek automatikus szétvágása szünet után</string>
-    <string name="auto_split_recording_descr">Új szakasz kezdése 6 perc szünet után, új nyomvonal 2 óra szünet után, vagy új fájl hosszabb szünet után ha a dátum megváltozott.</string>
+    <string name="auto_split_recording_descr">Új szakasz kezdése 6 perc szünet után, új nyomvonal 2 óra szünet után vagy új fájl hosszabb szünet után ha a dátum megváltozott.</string>
     <string name="max_speed">Maximum sebesség</string>
     <string name="average_speed">Átlagsebesség</string>
     <string name="shared_string_time_moving">Mozgásban töltött idő</string>
@@ -2313,7 +2312,7 @@
     <string name="mapillary_menu_descr_username">Csak az általa hozzáadott képek megtekintése:</string>
     <string name="mapillary_menu_title_username">Felhasználónév</string>
     <string name="mapillary_menu_filter_description">A képek szűrése feltöltő, dátum vagy típus szerint. Csak magas nagyítási szinteknél lépnek érvénybe.</string>
-    <string name="map_widget_ruler_control">Sugaras vonalzó</string>
+    <string name="map_widget_ruler_control">Sugárirányú vonalzó</string>
     <string name="average">Átlag</string>
     <string name="of">%1$d / %2$d</string>
     <string name="ascent_descent">Emelkedő/Lejtő</string>
@@ -2914,8 +2913,8 @@
     <string name="osmand_routing_promo">Az ..osmand/routing mappában hozzáadhatja a routing.xml fájl saját módosított verzióját</string>
     <string name="app_mode_skiing">Síelés</string>
     <string name="base_profile_descr_ski">Síelés</string>
-    <string name="show_compass_ruler">Iránytűvonalzó megjelenítése</string>
-    <string name="hide_compass_ruler">Iránytűvonalzó elrejtése</string>
+    <string name="show_compass_ruler">Iránytű megjelenítése</string>
+    <string name="hide_compass_ruler">Iránytű elrejtése</string>
     <string name="select_icon_profile_dialog_title">Ikon kijelölése</string>
     <string name="settings_routing_mode_string">Mód: %s</string>
     <string name="settings_derived_routing_mode_string">Felhasználói mód, eredete: %s</string>
@@ -3202,7 +3201,7 @@
     <string name="added_profiles_descr">Bővítmény által hozzáadott profilok</string>
     <string name="shared_string_turn_off">Kikapcsolás</string>
     <string name="new_plugin_added">Új bővítmény hozzáadva</string>
-    <string name="join_segments">Szegmensek összekapcsolása</string>
+    <string name="join_segments">Szakaszok egyesítése</string>
     <string name="save_heading">Irány belefoglalása</string>
     <string name="save_heading_descr">Felvételkor az egyes útpontok irányát is menti.</string>
     <string name="select_navigation_icon">Pozíció ikon haladás közben</string>
@@ -3479,7 +3478,7 @@
     <string name="tracker_item">OsmAnd helymegosztás</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>
     <string name="quick_action_item">Gyorsművelet</string>
-    <string name="radius_ruler_item">Sugaras vonalzó</string>
+    <string name="radius_ruler_item">Sugárirányú vonalzó</string>
     <string name="measure_distance_item">Távolságmérés</string>
     <string name="travel_item">Utazás (Wikivoyage és Wikipédia)</string>
     <string name="map_markers_item">Térképjelölők</string>
@@ -3716,7 +3715,7 @@
     <string name="save_track_to_gpx">Nyomvonal automatikus felvétele navigáció közben</string>
     <string name="monitoring_min_speed_descr_side_effect">Mellékhatás: A nyomvonalból hiányozni fog minden olyan szakasz, ahol a legkisebb sebesség feltétele nem teljesült (pl. egy meredek dombra tolja fel a kerékpárt). Nem lesz információ az állásokról sem, például a pihenőkről. Ez hatással van minden elemzésre és utófeldolgozásra, például amikor megpróbálja meghatározni az utazás teljes hosszát, a mozgásban töltött időt vagy az átlagsebességét.</string>
     <string name="one_point_error">Adjon hozzá legalább két pontot.</string>
-    <string name="attach_to_the_roads">Csatolás az utakhoz</string>
+    <string name="attach_to_the_roads">Utakhoz igazítás</string>
     <string name="marker_save_as_track">Mentés nyomvonalfájlként</string>
     <string name="select_another_track">Másik nyomvonal kiválasztása</string>
     <string name="open_saved_track">Elmentett nyomvonal megnyitása</string>
@@ -3888,7 +3887,7 @@
     <string name="app_mode_light_aircraft">Könnyű légi jármű</string>
     <string name="plan_route_split_before">Elvágás előtte</string>
     <string name="plan_route_split_after">Elvágás utána</string>
-    <string name="plan_route_join_segments">Szakaszok egyesítése</string>
+    <string name="plan_route_join_segments">Szakaszok összekapcsolása</string>
     <string name="plan_route_add_new_segment">Új szakasz hozzáadása</string>
     <string name="release_3_9">• Lehetőség az összes adat exportálására és importálására, beleértve a beállításokat, erőforrásokat és a saját helyeket is
 \n
@@ -3999,4 +3998,45 @@
     <string name="activity_type_offroad_name">Terepjáró</string>
     <string name="activity_type_motorbike_name">Motorkerékpár</string>
     <string name="activity_type_car_name">Személyautó</string>
+    <string name="map_widget_distance_by_tap">Távolságmérés koppintással</string>
+    <string name="shared_string_interval">Intervallum</string>
+    <string name="update_frequency">Frissítés gyakorisága</string>
+    <string name="updated">Frissítésve: %s</string>
+    <string name="last_time_checked">Legutóbb ellenőrizve: %s</string>
+    <string name="latest_openstreetmap_update">Legutóbbi elérhető OpenStreetMap-frissítés:</string>
+    <string name="quick_action_coordinates_widget_descr">A térképen lévő koordináta-widgetet megjelenítő vagy elrejtő kapcsoló.</string>
+    <string name="routing_attr_height_obstacles_description">Az útvonaltervezés elkerülhetné a meredek emelkedőket.</string>
+    <string name="app_restart_required">Egyes beállítások alkalmazásához újra kell indítani az alkalmazást.</string>
+    <string name="on_pause">Szüneteltetve</string>
+    <string name="track_recording_description">Biztosan megszakítja a felvételt\?
+\nMinden el nem mentett adat el fog veszni.</string>
+    <string name="track_recording_title">Nyomvonal felvétele leállítva</string>
+    <string name="track_recording_save_and_stop">Mentés és felvétel leállítása</string>
+    <string name="track_recording_stop_without_saving">Leállítás mentés nélkül</string>
+    <string name="delete_number_files_question">Töröl %1$d fájlt\?</string>
+    <string name="shared_strings_all_regions">Az összes régió</string>
+    <string name="restart">Újraindítás</string>
+    <string name="map_orientation_threshold_descr">Küszöbérték alatti sebességnél ne forogjon a térkép</string>
+    <string name="snap_to_road_descr">A jelenlegi helyet jelző ikon bepattan az aktuális navigációs útvonalba</string>
+    <string name="routing_attr_driving_style_description">Vezetési mód kiválasztása rövidebb, gyorsabb vagy biztonságosabb útvonal tervezéséhez</string>
+    <string name="routing_attr_short_way_description">Optimalizált rövidebb útvonal (energiamegtakarítás)</string>
+    <string name="temporary_conditional_routing_descr">A térképen jelenleg aktív forgalomkorlátozások figyelembe vétele</string>
+    <string name="segments_count">%1$d szakasz</string>
+    <string name="select_segments_description">%1$s több szakaszt is tartalmaz. Válassza ki a navigációhoz szükséges részt.</string>
+    <string name="select_segments">Szakaszok kijelölése</string>
+    <string name="delete_updates">Frissítések törlése</string>
+    <string name="live_update_delete_updates_msg">Biztosan törölni szeretné az összes (%s) élő frissítést\?</string>
+    <string name="purchases">Vásárlások</string>
+    <string name="select_category_descr">Kategória kiválasztása vagy új hozzáadása</string>
+    <string name="track_recording_will_be_continued">A felvétel folytatódni fog.</string>
+    <string name="copy_poi_name">Érdekes pont nevének másolása</string>
+    <string name="quick_action_show_hide_title">Megjelenítés / elrejtés</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Természetvédelmi területek, védett területek és nemzeti parkok határainak elrejtése</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_name">Természetvédelmi területek határai</string>
+    <string name="track_has_no_altitude">A nyomvonal nem tartalmaz magassági adatokat.</string>
+    <string name="track_has_no_speed">A nyomvonal nem tartalmaz sebességadatokat.</string>
+    <string name="select_another_colorization">Kérjük, válasszon másik színezést.</string>
+    <string name="live_update_frequency_week_variant">Az alkalmazás hetente ellenőrzi a térképfrissítéseket. Következő ellenőrzés: %1$s (ennyi idő múlva: %2$s).</string>
+    <string name="live_update_frequency_day_variant">Az alkalmazás naponta ellenőrzi a térképfrissítéseket. Következő ellenőrzés: %1$s (ennyi idő múlva: %2$s).</string>
+    <string name="live_update_frequency_hour_variant">Az alkalmazás óránként ellenőrzi a térképfrissítéseket. Következő ellenőrzés: %1$s (ennyi idő múlva: %2$s).</string>
 </resources>
