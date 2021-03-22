@@ -131,21 +131,12 @@ public class RouteLineWidthCard extends BaseCard {
 		if (selectedMode == WidthMode.DEFAULT) {
 			String pattern = app.getString(R.string.route_line_use_map_style_appearance);
 			String width = app.getString(R.string.shared_string_color).toLowerCase();
-			String description = String.format(pattern, width, getMapStyleName());
+			String description = String.format(pattern, width, RendererRegistry.getMapStyleName(app));
 			tvDescription.setText(description);
 			tvDescription.setVisibility(View.VISIBLE);
 		} else {
 			tvDescription.setVisibility(View.GONE);
 		}
-	}
-
-	private String getMapStyleName() {
-		RendererRegistry rr = app.getRendererRegistry();
-		RenderingRulesStorage storage = rr.getCurrentSelectedRenderer();
-		if (storage == null) {
-			return "";
-		}
-		return RendererRegistry.getRendererName(app, storage.getName());
 	}
 
 	private void updateCustomWidthSlider() {

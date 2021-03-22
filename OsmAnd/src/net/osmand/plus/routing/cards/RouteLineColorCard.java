@@ -214,22 +214,13 @@ public class RouteLineColorCard extends BaseCard implements CardListener, ColorP
 		if (selectedMode == ColorMode.DEFAULT) {
 			String pattern = app.getString(R.string.route_line_use_map_style_appearance);
 			String color = app.getString(R.string.shared_string_color).toLowerCase();
-			description = String.format(pattern, color, getMapStyleName());
+			description = String.format(pattern, color, RendererRegistry.getMapStyleName(app));
 		} else {
 			String pattern = app.getString(R.string.specify_color_for_map_mode);
 			String mapModeTitle = app.getString(isNightMap() ? NIGHT_TITLE_ID : DAY_TITLE_ID);
 			description = String.format(pattern, mapModeTitle.toLowerCase());
 		}
 		tvDescription.setText(description);
-	}
-
-	private String getMapStyleName() {
-		RendererRegistry rr = app.getRendererRegistry();
-		RenderingRulesStorage storage = rr.getCurrentSelectedRenderer();
-		if (storage == null) {
-			return "";
-		}
-		return RendererRegistry.getRendererName(app, storage.getName());
 	}
 
 	private boolean isNightMap() {

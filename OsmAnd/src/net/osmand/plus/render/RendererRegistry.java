@@ -289,6 +289,15 @@ public class RendererRegistry {
 		return renderers;
 	}
 
+	public static String getMapStyleName(@NonNull OsmandApplication app) {
+		RendererRegistry rr = app.getRendererRegistry();
+		RenderingRulesStorage storage = rr.getCurrentSelectedRenderer();
+		if (storage == null) {
+			return "";
+		}
+		return RendererRegistry.getRendererName(app, storage.getName());
+	}
+
 	public static String getRendererName(@NonNull Context ctx, @NonNull String name) {
 		String translation = getTranslatedRendererName(ctx, name);
 		return translation != null ? translation :
