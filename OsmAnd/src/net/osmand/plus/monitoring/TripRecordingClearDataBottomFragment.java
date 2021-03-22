@@ -18,9 +18,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import static net.osmand.AndroidUtils.getPrimaryTextColorId;
-import static net.osmand.plus.monitoring.TripRecordingOptionsBottomFragment.*;
 
-public class TripRecordingClearDataBottomFragment extends MenuBottomSheetDialogFragment {
+public class TripRecordingClearDataBottomFragment extends MenuBottomSheetDialogFragment implements TripRecordingBottomFragment.DismissTargetFragment {
 
 	public static final String TAG = TripRecordingClearDataBottomFragment.class.getSimpleName();
 
@@ -41,7 +40,7 @@ public class TripRecordingClearDataBottomFragment extends MenuBottomSheetDialogF
 		int verticalBig = getResources().getDimensionPixelSize(R.dimen.dialog_content_margin);
 		int verticalNormal = getResources().getDimensionPixelSize(R.dimen.content_padding);
 		String description = getString(R.string.clear_recorded_data_warning)
-				.concat(getString(R.string.lost_data_warning));
+				.concat("\n").concat(getString(R.string.lost_data_warning));
 		final View buttonClear = createItem(inflater, ItemType.CLEAR_DATA);
 		final View buttonCancel = createItem(inflater, ItemType.CANCEL);
 
@@ -61,7 +60,7 @@ public class TripRecordingClearDataBottomFragment extends MenuBottomSheetDialogF
 					public void onClick(View v) {
 						app.getSavingTrackHelper().clearRecordedData(true);
 						dismiss();
-						dismissTargetDialog(TripRecordingClearDataBottomFragment.this, TripRecordingOptionsBottomFragment.class);
+						dismissTarget();
 					}
 				})
 				.create());
@@ -108,4 +107,11 @@ public class TripRecordingClearDataBottomFragment extends MenuBottomSheetDialogF
 		return true;
 	}
 
+	@Override
+	public void dismissTarget() {
+		Fragment target = getTargetFragment();
+		if (target instanceof TripRecordingOptionsBottomFragment) {
+			((TripRecordingOptionsBottomFragment) target).dismiss();
+		}
+	}
 }

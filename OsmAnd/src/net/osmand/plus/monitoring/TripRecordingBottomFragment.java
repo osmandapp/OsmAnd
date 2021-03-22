@@ -38,6 +38,7 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -60,12 +61,12 @@ public class TripRecordingBottomFragment extends MenuBottomSheetDialogFragment {
 
 	public static final String TAG = TripRecordingBottomFragment.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(TripRecordingBottomFragment.class);
-	private static final String SAVE_CURRENT_GPX_FILE = "save_current_gpx_file";
 	public static final String UPDATE_TRACK_ICON = "update_track_icon";
 	private static final int GPS_UPDATE_INTERVAL = 1000;
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
+	private SavingTrackHelper helper;
 	private OsmandMonitoringPlugin plugin;
 
 	private View statusContainer;
@@ -85,7 +86,7 @@ public class TripRecordingBottomFragment extends MenuBottomSheetDialogFragment {
 	}
 
 	private boolean hasDataToSave() {
-		return app.getSavingTrackHelper().hasDataToSave();
+		return helper.hasDataToSave();
 	}
 
 	private boolean searchingGPS() {
@@ -108,7 +109,9 @@ public class TripRecordingBottomFragment extends MenuBottomSheetDialogFragment {
 	public void createMenuItems(Bundle savedInstanceState) {
 		app = requiredMyApplication();
 		settings = app.getSettings();
+		helper = app.getSavingTrackHelper();
 		plugin = OsmandPlugin.getPlugin(OsmandMonitoringPlugin.class);
+		selectedGpxFile = helper.getCurrentTrack();
 		LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
 		final FragmentManager fragmentManager = getFragmentManager();
 
@@ -121,12 +124,6 @@ public class TripRecordingBottomFragment extends MenuBottomSheetDialogFragment {
 		updateStatus();
 
 		RecyclerView statBlocks = itemView.findViewById(R.id.block_statistics);
-		if (savedInstanceState != null) {
-			if (savedInstanceState.containsKey(SAVE_CURRENT_GPX_FILE)
-					&& savedInstanceState.getBoolean(SAVE_CURRENT_GPX_FILE)) {
-				selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
-			}
-		}
 		blockStatisticsBuilder = new GpxBlockStatisticsBuilder(app, selectedGpxFile);
 		blockStatisticsBuilder.setBlocksView(statBlocks);
 		blockStatisticsBuilder.setBlocksClickable(false);
@@ -174,7 +171,7 @@ public class TripRecordingBottomFragment extends MenuBottomSheetDialogFragment {
 			@Override
 			public void onClick(View v) {
 				MapActivity mapActivity = getMapActivity();
-				if (mapActivity != null && plugin != null && app.getSavingTrackHelper().hasDataToSave()) {
+				if (mapActivity != null && plugin != null && hasDataToSave()) {
 					plugin.saveCurrentTrack(null, mapActivity);
 					app.getNotificationHelper().refreshNotifications();
 					dismiss();
@@ -188,17 +185,11 @@ public class TripRecordingBottomFragment extends MenuBottomSheetDialogFragment {
 			@Override
 			public void onClick(View v) {
 				if (fragmentManager != null) {
-					TripRecordingOptionsBottomFragment.showInstance(fragmentManager, TripRecordingBottomFragment.this, selectedGpxFile);
+					TripRecordingOptionsBottomFragment.showInstance(fragmentManager, TripRecordingBottomFragment.this);
 				}
 			}
 		});
 
-	}
-
-	@Override
-	public void onSaveInstanceState(@NonNull Bundle outState) {
-		super.onSaveInstanceState(outState);
-		outState.putBoolean(SAVE_CURRENT_GPX_FILE, true);
 	}
 
 	@Override
@@ -387,18 +378,18 @@ public class TripRecordingBottomFragment extends MenuBottomSheetDialogFragment {
 	}
 
 	public static void setItemBackground(Context context, boolean nightMode, View view, boolean enabled) {
-		Drawable background = AppCompatResources.getDrawable(context, R.drawable.btn_background_inactive_light);
+		if (view instanceof CardView) {
+			int colorId = enabled ? getActiveTransparentColorId(nightMode) : getInactiveButtonColorId(nightMode);
+			((CardView) view).setCardBackgroundColor(AndroidUtils.createPressedColorStateList(
+					context, colorId, getActiveTextColorId(nightMode)
+			));
+			return;
+		}
+		Drawable background = AppCompatResources.getDrawable(context, getInactiveButtonBackgroundId(nightMode));
 		if (background != null && enabled) {
-			int normalColorId = view instanceof CardView
-					? getActiveTransparentColorId(nightMode) : getInactiveButtonColorId(nightMode);
-			ColorStateList iconColorStateList = AndroidUtils.createPressedColorStateList(
-					context, normalColorId, getActiveTextColorId(nightMode)
-			);
-			if (view instanceof CardView) {
-				((CardView) view).setCardBackgroundColor(iconColorStateList);
-				return;
-			}
-			DrawableCompat.setTintList(background, iconColorStateList);
+			DrawableCompat.setTintList(background, AndroidUtils.createPressedColorStateList(
+					context, getInactiveButtonColorId(nightMode), getActiveTextColorId(nightMode)
+			));
 		} else {
 			UiUtilities.tintDrawable(background, ContextCompat.getColor(context, getInactiveButtonColorId(nightMode)));
 		}
@@ -483,6 +474,10 @@ public class TripRecordingBottomFragment extends MenuBottomSheetDialogFragment {
 		}
 	}
 
+	public interface DismissTargetFragment {
+		void dismissTarget();
+	}
+
 	@ColorRes
 	public static int getActiveTextColorId(boolean nightMode) {
 		return nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
@@ -513,7 +508,7 @@ public class TripRecordingBottomFragment extends MenuBottomSheetDialogFragment {
 		return nightMode ? R.color.icon_color_osmand_dark : R.color.icon_color_osmand_light;
 	}
 
-	@DrawableRes
+	@ColorRes
 	public static int getActiveTransparentColorId(boolean nightMode) {
 		return nightMode ? R.color.switch_button_active_dark : R.color.switch_button_active_light;
 	}
@@ -533,6 +528,11 @@ public class TripRecordingBottomFragment extends MenuBottomSheetDialogFragment {
 		return nightMode ? R.drawable.btn_background_stroked_inactive_dark : R.drawable.btn_background_stroked_inactive_light;
 	}
 
+	@DrawableRes
+	public static int getInactiveButtonBackgroundId(boolean nightMode) {
+		return nightMode ? R.drawable.btn_background_inactive_dark : R.drawable.btn_background_inactive_light;
+	}
+
 	@Override
 	protected boolean hideButtonsContainer() {
 		return true;
@@ -546,5 +546,4 @@ public class TripRecordingBottomFragment extends MenuBottomSheetDialogFragment {
 		}
 		return null;
 	}
-
 }

@@ -301,7 +301,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 		if (activity != null && !activity.isChangingConfigurations()) {
 			Fragment target = getTargetFragment();
 			if (target instanceof TripRecordingStartingBottomFragment) {
-				((TripRecordingStartingBottomFragment) target).show(UPDATE_LOGGING_INTERVAL);
+				((TripRecordingStartingBottomFragment) target).show();
 			}
 		}
 		super.onDestroy();

@@ -19,10 +19,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import static net.osmand.AndroidUtils.getPrimaryTextColorId;
-import static net.osmand.plus.monitoring.TripRecordingOptionsBottomFragment.ACTION_STOP_AND_DISCARD;
-import static net.osmand.plus.monitoring.TripRecordingOptionsBottomFragment.dismissTargetDialog;
+import static net.osmand.plus.monitoring.TripRecordingOptionsBottomFragment.ACTION_STOP_AND_DISMISS;
 
-public class TripRecordingDiscardBottomFragment extends MenuBottomSheetDialogFragment {
+public class TripRecordingDiscardBottomFragment extends MenuBottomSheetDialogFragment implements TripRecordingBottomFragment.DismissTargetFragment {
 
 	public static final String TAG = TripRecordingDiscardBottomFragment.class.getSimpleName();
 
@@ -43,13 +42,11 @@ public class TripRecordingDiscardBottomFragment extends MenuBottomSheetDialogFra
 		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
 		int verticalBig = getResources().getDimensionPixelSize(R.dimen.dialog_content_margin);
 		int verticalNormal = getResources().getDimensionPixelSize(R.dimen.content_padding);
-		String description = getString(R.string.track_recording_description)
-				.concat(getString(R.string.lost_data_warning));
 		final View buttonDiscard = createItem(inflater, ItemType.STOP_AND_DISCARD);
 		final View buttonCancel = createItem(inflater, ItemType.CANCEL);
 
 		items.add(new BottomSheetItemWithDescription.Builder()
-				.setDescription(description)
+				.setDescription(getString(R.string.track_recording_description))
 				.setDescriptionColorId(getPrimaryTextColorId(nightMode))
 				.setTitle(app.getString(R.string.track_recording_title))
 				.setLayoutId(R.layout.bottom_sheet_item_title_with_description)
@@ -68,8 +65,14 @@ public class TripRecordingDiscardBottomFragment extends MenuBottomSheetDialogFra
 						}
 						app.getSavingTrackHelper().clearRecordedData(true);
 						dismiss();
-						dismissTargetDialog(TripRecordingDiscardBottomFragment.this,
-								TripRecordingOptionsBottomFragment.class, ACTION_STOP_AND_DISCARD, true);
+
+						Fragment target = getTargetFragment();
+						if (target != null) {
+							Bundle args = new Bundle();
+							args.putBoolean(ACTION_STOP_AND_DISMISS, true);
+							target.setArguments(args);
+						}
+						dismissTarget();
 					}
 				})
 				.create());
@@ -108,6 +111,14 @@ public class TripRecordingDiscardBottomFragment extends MenuBottomSheetDialogFra
 		Fragment target = getTargetFragment();
 		if (target instanceof TripRecordingOptionsBottomFragment) {
 			((TripRecordingOptionsBottomFragment) target).show();
+		}
+	}
+
+	@Override
+	public void dismissTarget() {
+		Fragment target = getTargetFragment();
+		if (target instanceof TripRecordingOptionsBottomFragment) {
+			((TripRecordingOptionsBottomFragment) target).dismiss();
 		}
 	}
 

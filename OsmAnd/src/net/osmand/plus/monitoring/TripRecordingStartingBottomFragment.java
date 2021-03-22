@@ -219,19 +219,13 @@ public class TripRecordingStartingBottomFragment extends MenuBottomSheetDialogFr
 		dismiss();
 	}
 
-	public void show(String... keys) {
+	public void show() {
 		Dialog dialog = getDialog();
 		if (dialog != null) {
 			dialog.show();
-			for (String key : keys) {
-				if (key.equals(UPDATE_TRACK_ICON)) {
-					updateTrackIcon(app, trackAppearanceIcon);
-				}
-				if (key.equals(UPDATE_LOGGING_INTERVAL)) {
-					updateIntervalValue();
-					AndroidUiHelper.updateVisibility(intervalContainer, infoExpanded);
-				}
-			}
+			updateTrackIcon(app, trackAppearanceIcon);
+			updateIntervalValue();
+			AndroidUiHelper.updateVisibility(intervalContainer, infoExpanded);
 		}
 	}
 
