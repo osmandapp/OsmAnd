@@ -72,7 +72,13 @@
 		android:layout_marginLeft="@dimen/content_padding"
 		android:layout_marginEnd="@dimen/content_padding"
 		android:layout_marginRight="@dimen/content_padding"
-		android:layout_marginBottom="@dimen/dialog_content_margin" />
+		android:layout_marginBottom="@dimen/context_menu_padding_margin_small" />
+
+	<LinearLayout
+		android:id="@+id/segments_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical" />
 
 	<androidx.recyclerview.widget.RecyclerView
 		android:id="@+id/block_statistics"

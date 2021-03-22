@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -31,7 +32,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.PlatformUtil;
+import net.osmand.data.LatLon;
+import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -42,27 +46,41 @@ import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
+import net.osmand.plus.myplaces.GPXItemPagerAdapter;
+import net.osmand.plus.myplaces.SegmentActionsListener;
+import net.osmand.plus.myplaces.SegmentGPXAdapter;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.GpxBlockStatisticsBuilder;
 import net.osmand.plus.track.TrackAppearanceFragment;
+import net.osmand.plus.track.TrackDisplayHelper;
+import net.osmand.plus.views.controls.PagerSlidingTabStrip;
+import net.osmand.plus.views.controls.WrapContentHeightViewPager;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
 import static net.osmand.AndroidUtils.getSecondaryTextColorId;
 import static net.osmand.AndroidUtils.setPadding;
 import static net.osmand.plus.UiUtilities.CompoundButtonType.GLOBAL;
+import static net.osmand.plus.track.GpxBlockStatisticsBuilder.INIT_BLOCKS_ALTITUDE;
+import static net.osmand.plus.track.GpxBlockStatisticsBuilder.INIT_BLOCKS_GENERAL;
+import static net.osmand.plus.track.GpxBlockStatisticsBuilder.INIT_BLOCKS_SPEED;
 
-public class TripRecordingBottomFragment extends MenuBottomSheetDialogFragment {
+public class TripRecordingBottomFragment extends MenuBottomSheetDialogFragment implements SegmentActionsListener {
 
 	public static final String TAG = TripRecordingBottomFragment.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(TripRecordingBottomFragment.class);
 	public static final String UPDATE_TRACK_ICON = "update_track_icon";
 	private static final int GPS_UPDATE_INTERVAL = 1000;
+	private static final String[] INIT_BLOCKS_KEYS =
+			new String[]{INIT_BLOCKS_GENERAL, INIT_BLOCKS_ALTITUDE, INIT_BLOCKS_SPEED};
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
@@ -71,8 +89,13 @@ public class TripRecordingBottomFragment extends MenuBottomSheetDialogFragment {
 
 	private View statusContainer;
 	private AppCompatImageView trackAppearanceIcon;
-	private GpxBlockStatisticsBuilder blockStatisticsBuilder;
+	private LinearLayout segmentsContainer;
 
+	private TrackDisplayHelper displayHelper;
+	private TrackChartPoints trackChartPoints;
+	private GPXItemPagerAdapter graphsAdapter;
+
+	private GpxBlockStatisticsBuilder blockStatisticsBuilder;
 	private SelectedGpxFile selectedGpxFile;
 	private final Handler handler = new Handler();
 	private Runnable updatingGPS;
@@ -123,12 +146,6 @@ public class TripRecordingBottomFragment extends MenuBottomSheetDialogFragment {
 		statusContainer = itemView.findViewById(R.id.status_container);
 		updateStatus();
 
-		RecyclerView statBlocks = itemView.findViewById(R.id.block_statistics);
-		blockStatisticsBuilder = new GpxBlockStatisticsBuilder(app, selectedGpxFile);
-		blockStatisticsBuilder.setBlocksView(statBlocks);
-		blockStatisticsBuilder.setBlocksClickable(false);
-		blockStatisticsBuilder.initStatBlocks(null, ContextCompat.getColor(app, getActiveTextColorId(nightMode)), nightMode);
-
 		LinearLayout showTrackContainer = itemView.findViewById(R.id.show_track_on_map);
 		trackAppearanceIcon = showTrackContainer.findViewById(R.id.additional_button_icon);
 		createShowTrackItem(showTrackContainer, trackAppearanceIcon, ItemType.SHOW_TRACK.getTitleId(),
@@ -138,6 +155,17 @@ public class TripRecordingBottomFragment extends MenuBottomSheetDialogFragment {
 						hide();
 					}
 				});
+
+		segmentsContainer = itemView.findViewById(R.id.segments_container);
+		createSegmentsTabs(segmentsContainer);
+
+		RecyclerView statBlocks = itemView.findViewById(R.id.block_statistics);
+		blockStatisticsBuilder = new GpxBlockStatisticsBuilder(app, selectedGpxFile, nightMode);
+		blockStatisticsBuilder.setBlocksView(statBlocks);
+		blockStatisticsBuilder.setBlocksClickable(false);
+		blockStatisticsBuilder.setInitBlocksKey(INIT_BLOCKS_GENERAL);
+		blockStatisticsBuilder.initStatBlocks(null,
+				ContextCompat.getColor(app, getActiveTextColorId(nightMode)));
 
 		CardView cardLeft = itemView.findViewById(R.id.button_left);
 		createItem(cardLeft, ItemType.CANCEL);
@@ -197,6 +225,10 @@ public class TripRecordingBottomFragment extends MenuBottomSheetDialogFragment {
 		super.onResume();
 		blockStatisticsBuilder.runUpdatingStatBlocksIfNeeded();
 		runUpdatingGPS();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getMapLayers().getGpxLayer().setTrackChartPoints(trackChartPoints);
+		}
 	}
 
 	@Override
@@ -204,6 +236,10 @@ public class TripRecordingBottomFragment extends MenuBottomSheetDialogFragment {
 		super.onPause();
 		blockStatisticsBuilder.stopUpdatingStatBlocks();
 		stopUpdatingGPS();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getMapLayers().getGpxLayer().setTrackChartPoints(null);
+		}
 	}
 
 	public void show() {
@@ -243,6 +279,51 @@ public class TripRecordingBottomFragment extends MenuBottomSheetDialogFragment {
 			}
 		};
 		handler.post(updatingGPS);
+	}
+
+	private void recreateStatBlocks(String initBlocksKey) {
+		blockStatisticsBuilder.stopUpdatingStatBlocks();
+		blockStatisticsBuilder.setInitBlocksKey(initBlocksKey);
+		blockStatisticsBuilder.runUpdatingStatBlocksIfNeeded();
+	}
+
+	private void setupDisplayHelper() {
+		displayHelper = new TrackDisplayHelper(app);
+		if (!selectedGpxFile.isShowCurrentTrack()) {
+			File file = new File(getGPXFile().path);
+			displayHelper.setFile(file);
+			displayHelper.setGpxDataItem(app.getGpxDbHelper().getItem(file));
+		}
+		displayHelper.setGpx(getGPXFile());
+	}
+
+	private void createSegmentsTabs(ViewGroup viewGroup) {
+		viewGroup.removeAllViews();
+		setupDisplayHelper();
+
+		View segmentView = SegmentGPXAdapter.createGpxTabsView(displayHelper, viewGroup, this, nightMode);
+		AndroidUiHelper.setVisibility(View.GONE, segmentView.findViewById(R.id.list_item_divider));
+		WrapContentHeightViewPager pager = segmentView.findViewById(R.id.pager);
+		PagerSlidingTabStrip tabLayout = segmentView.findViewById(R.id.sliding_tabs);
+		tabLayout.setOnTabReselectedListener(new PagerSlidingTabStrip.OnTabReselectedListener() {
+			@Override
+			public void onTabSelected(int position) {
+				recreateStatBlocks(INIT_BLOCKS_KEYS[position]);
+			}
+
+			@Override
+			public void onTabReselected(int position) {
+				recreateStatBlocks(INIT_BLOCKS_KEYS[position]);
+			}
+		});
+
+		graphsAdapter = new GPXItemPagerAdapter(app, GpxUiHelper.makeGpxDisplayItem(app,
+				displayHelper.getGpx()), displayHelper, nightMode, this, true);
+
+		pager.setAdapter(graphsAdapter);
+		tabLayout.setViewPager(pager);
+
+		viewGroup.addView(segmentView);
 	}
 
 	private void updateStatus() {
@@ -472,6 +553,46 @@ public class TripRecordingBottomFragment extends MenuBottomSheetDialogFragment {
 						context.getResources().getDimensionPixelSize(R.dimen.content_padding_half), container.getBottom());
 			}
 		}
+	}
+
+	@Override
+	public void onPointSelected(TrkSegment segment, double lat, double lon) {
+		if (trackChartPoints == null) {
+			trackChartPoints = new TrackChartPoints();
+			trackChartPoints.setGpx(displayHelper.getGpx());
+		}
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			int segmentColor = segment != null ? segment.getColor(0) : 0;
+			trackChartPoints.setSegmentColor(segmentColor);
+			trackChartPoints.setHighlightedPoint(new LatLon(lat, lon));
+			mapActivity.getMapLayers().getGpxLayer().setTrackChartPoints(trackChartPoints);
+			mapActivity.refreshMap();
+		}
+	}
+
+	@Override
+	public void updateContent() {
+	}
+
+	@Override
+	public void onChartTouch() {
+	}
+
+	@Override
+	public void scrollBy(int px) {
+	}
+
+	@Override
+	public void openSplitInterval(GpxDisplayItem gpxItem, TrkSegment trkSegment) {
+	}
+
+	@Override
+	public void showOptionsPopupMenu(View view, TrkSegment segment, boolean confirmDeletion, GpxDisplayItem gpxItem) {
+	}
+
+	@Override
+	public void openAnalyzeOnMap(GpxDisplayItem gpxItem) {
 	}
 
 	public interface DismissTargetFragment {
