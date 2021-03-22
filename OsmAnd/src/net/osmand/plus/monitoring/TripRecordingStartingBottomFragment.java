@@ -103,7 +103,6 @@ public class TripRecordingStartingBottomFragment extends MenuBottomSheetDialogFr
 		updateUpDownBtn();
 
 		CardView cardLeft = itemView.findViewById(R.id.button_left);
-
 		createItem(app, nightMode, cardLeft, ItemType.CANCEL, true, null);
 		cardLeft.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -113,7 +112,6 @@ public class TripRecordingStartingBottomFragment extends MenuBottomSheetDialogFr
 		});
 
 		CardView cardCenter = itemView.findViewById(R.id.button_center);
-
 		createItem(app, nightMode, cardCenter, ItemType.START_RECORDING, true, null);
 		cardCenter.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -123,7 +121,6 @@ public class TripRecordingStartingBottomFragment extends MenuBottomSheetDialogFr
 		});
 
 		CardView cardRight = itemView.findViewById(R.id.button_right);
-
 		createItem(app, nightMode, cardRight, ItemType.SETTINGS, true, null);
 		cardRight.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -222,19 +219,13 @@ public class TripRecordingStartingBottomFragment extends MenuBottomSheetDialogFr
 		dismiss();
 	}
 
-	public void show(String... keys) {
+	public void show() {
 		Dialog dialog = getDialog();
 		if (dialog != null) {
 			dialog.show();
-			for (String key : keys) {
-				if (key.equals(UPDATE_TRACK_ICON)) {
-					updateTrackIcon(app, trackAppearanceIcon);
-				}
-				if (key.equals(UPDATE_LOGGING_INTERVAL)) {
-					updateIntervalValue();
-					AndroidUiHelper.updateVisibility(intervalContainer, infoExpanded);
-				}
-			}
+			updateTrackIcon(app, trackAppearanceIcon);
+			updateIntervalValue();
+			AndroidUiHelper.updateVisibility(intervalContainer, infoExpanded);
 		}
 	}
 

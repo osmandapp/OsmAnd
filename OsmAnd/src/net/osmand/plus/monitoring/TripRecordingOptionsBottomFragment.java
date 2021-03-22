@@ -11,7 +11,6 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -36,11 +35,10 @@ import net.osmand.util.Algorithms;
 
 import static net.osmand.AndroidUtils.getPrimaryTextColorId;
 
-public class TripRecordingOptionsBottomFragment extends MenuBottomSheetDialogFragment {
+public class TripRecordingOptionsBottomFragment extends MenuBottomSheetDialogFragment implements TripRecordingBottomFragment.DismissTargetFragment {
 
 	public static final String TAG = TripRecordingOptionsBottomFragment.class.getSimpleName();
-	public static final String ACTION_STOP_AND_DISCARD = "action_stop_and_discard";
-	private static final String SAVE_CURRENT_GPX_FILE = "save_current_gpx_file";
+	public static final String ACTION_STOP_AND_DISMISS = "action_stop_and_discard";
 	private static final int SAVE_UPDATE_INTERVAL = 1000;
 
 	private OsmandApplication app;
@@ -72,11 +70,10 @@ public class TripRecordingOptionsBottomFragment extends MenuBottomSheetDialogFra
 		return settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
 	}
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager, @NonNull Fragment target, SelectedGpxFile selectedGpxFile) {
+	public static void showInstance(@NonNull FragmentManager fragmentManager, @NonNull Fragment target) {
 		if (!fragmentManager.isStateSaved()) {
 			TripRecordingOptionsBottomFragment fragment = new TripRecordingOptionsBottomFragment();
 			fragment.setTargetFragment(target, 0);
-			fragment.setSelectedGpxFile(selectedGpxFile);
 			fragment.show(fragmentManager, TAG);
 		}
 	}
@@ -86,17 +83,11 @@ public class TripRecordingOptionsBottomFragment extends MenuBottomSheetDialogFra
 		app = requiredMyApplication();
 		settings = app.getSettings();
 		helper = app.getSavingTrackHelper();
+		selectedGpxFile = helper.getCurrentTrack();
 		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
 		final FragmentManager fragmentManager = getFragmentManager();
 		int dp16 = getResources().getDimensionPixelSize(R.dimen.content_padding);
 		int dp36 = getResources().getDimensionPixelSize(R.dimen.context_menu_controller_height);
-
-		if (savedInstanceState != null) {
-			if (savedInstanceState.containsKey(SAVE_CURRENT_GPX_FILE)
-					&& savedInstanceState.getBoolean(SAVE_CURRENT_GPX_FILE)) {
-				selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
-			}
-		}
 
 		buttonClear = createItem(inflater, ItemType.CLEAR_DATA, hasDataToSave());
 		final View buttonDiscard = createItem(inflater, ItemType.STOP_AND_DISCARD);
@@ -194,12 +185,6 @@ public class TripRecordingOptionsBottomFragment extends MenuBottomSheetDialogFra
 	}
 
 	@Override
-	public void onSaveInstanceState(@NonNull Bundle outState) {
-		super.onSaveInstanceState(outState);
-		outState.putBoolean(SAVE_CURRENT_GPX_FILE, true);
-	}
-
-	@Override
 	public void onResume() {
 		super.onResume();
 		runUpdatingTimeTrackSaved();
@@ -213,14 +198,7 @@ public class TripRecordingOptionsBottomFragment extends MenuBottomSheetDialogFra
 	public void onPause() {
 		super.onPause();
 		stopUpdatingTimeTrackSaved();
-		Fragment target = getTargetFragment();
-		if (target instanceof TripRecordingBottomFragment) {
-			if (isDiscard()) {
-				((TripRecordingBottomFragment) target).dismiss();
-			} else {
-				((TripRecordingBottomFragment) target).show();
-			}
-		}
+		dismissTarget();
 	}
 
 	public void show() {
@@ -234,32 +212,6 @@ public class TripRecordingOptionsBottomFragment extends MenuBottomSheetDialogFra
 		Dialog dialog = getDialog();
 		if (dialog != null) {
 			dialog.hide();
-		}
-	}
-
-	private boolean isDiscard() {
-		Bundle args = getArguments();
-		if (args != null) {
-			return args.getBoolean(ACTION_STOP_AND_DISCARD);
-		}
-		return false;
-	}
-
-	protected static void dismissTargetDialog(Fragment current, Class<?> targetClass) {
-		dismissTargetDialog(current, targetClass, null, null);
-	}
-
-	protected static void dismissTargetDialog(Fragment current, Class<?> targetClass, String booleanKey, Boolean value) {
-		if (targetClass.isInstance(current.getTargetFragment())) {
-			Fragment target = current.getTargetFragment();
-			if (booleanKey != null && value != null) {
-				Bundle args = new Bundle();
-				args.putBoolean(booleanKey, value);
-				target.setArguments(args);
-			}
-			if (target instanceof DialogFragment) {
-				((DialogFragment) target).dismiss();
-			}
 		}
 	}
 
@@ -312,15 +264,35 @@ public class TripRecordingOptionsBottomFragment extends MenuBottomSheetDialogFra
 				OsmandMonitoringPlugin plugin = OsmandPlugin.getPlugin(OsmandMonitoringPlugin.class);
 				if (mapActivity != null && plugin != null) {
 					stopUpdatingTimeTrackSaved();
-					settings.SAVE_GLOBAL_TRACK_TO_GPX.set(false);
 					plugin.saveCurrentTrack(null, mapActivity, false, true);
+					Bundle args = new Bundle();
+					args.putBoolean(ACTION_STOP_AND_DISMISS, true);
+					setArguments(args);
 					dismiss();
-					dismissTargetDialog(TripRecordingOptionsBottomFragment.this, TripRecordingBottomFragment.class);
-					settings.SAVE_GLOBAL_TRACK_TO_GPX.set(true);
-					runUpdatingTimeTrackSaved();
+					dismissTarget();
 				}
 			}
 		};
+	}
+
+	private boolean isDiscard() {
+		Bundle args = getArguments();
+		if (args != null) {
+			return args.getBoolean(ACTION_STOP_AND_DISMISS);
+		}
+		return false;
+	}
+
+	@Override
+	public void dismissTarget() {
+		Fragment target = getTargetFragment();
+		if (target instanceof TripRecordingBottomFragment) {
+			if (isDiscard()) {
+				((TripRecordingBottomFragment) target).dismiss();
+			} else {
+				((TripRecordingBottomFragment) target).show();
+			}
+		}
 	}
 
 	@Nullable
@@ -346,5 +318,4 @@ public class TripRecordingOptionsBottomFragment extends MenuBottomSheetDialogFra
 	protected boolean useVerticalButtons() {
 		return true;
 	}
-
 }
