@@ -105,7 +105,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		private final Class<? extends LocalRoutingParameter>[] excludeParameters;
 
 		@SafeVarargs
-		DialogMode(Class<? extends LocalRoutingParameter> ... excludeParameters) {
+		DialogMode(Class<? extends LocalRoutingParameter>... excludeParameters) {
 			this.excludeParameters = excludeParameters;
 		}
 
@@ -693,9 +693,9 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	public static void showInstance(MapActivity mapActivity,
-	                                Fragment targetFragment,
-	                                DialogMode dialogMode,
-	                                String appModeKey) {
+									Fragment targetFragment,
+									DialogMode dialogMode,
+									String appModeKey) {
 		try {
 			FragmentManager fm = mapActivity.getSupportFragmentManager();
 			if (!fm.isStateSaved()) {

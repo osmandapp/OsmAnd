@@ -61,7 +61,6 @@ import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
 import net.osmand.plus.audionotes.MultimediaNotesFragment;
 import net.osmand.plus.development.DevelopmentSettingsFragment;
 import net.osmand.plus.monitoring.MonitoringSettingsFragment;
-import net.osmand.plus.monitoring.TripRecordingStartingBottomFragment;
 import net.osmand.plus.openplacereviews.OprSettingsFragment;
 import net.osmand.plus.osmedit.OsmEditingFragment;
 import net.osmand.plus.profiles.SelectAppModesBottomSheetDialogFragment;
@@ -86,7 +85,6 @@ import java.io.Serializable;
 import java.util.Set;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
-import static net.osmand.plus.monitoring.TripRecordingStartingBottomFragment.UPDATE_LOGGING_INTERVAL;
 
 public abstract class BaseSettingsFragment extends PreferenceFragmentCompat implements OnPreferenceChangeListener,
 		OnPreferenceClickListener, AppModeChangedListener, OnConfirmPreferenceChange {
@@ -290,15 +288,6 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 					activity.getWindow().setStatusBarColor(statusBarColor);
 				}
 			}
-		}
-	}
-
-	@Override
-	public void onDestroyView() {
-		super.onDestroyView();
-		Fragment target = getTargetFragment();
-		if (target instanceof TripRecordingStartingBottomFragment) {
-			((TripRecordingStartingBottomFragment) target).show(UPDATE_LOGGING_INTERVAL);
 		}
 	}
 
