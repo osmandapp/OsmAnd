@@ -150,10 +150,11 @@ public class RouteLineWidthCard extends BaseCard {
 
 	private void updateCustomWidthSlider() {
 		if (selectedMode == WidthMode.CUSTOM) {
-			Slider widthSlider = view.findViewById(R.id.width_slider);
+			Slider slider = view.findViewById(R.id.width_slider);
+			final TextView tvCustomWidth = view.findViewById(R.id.width_value_tv);
 
-			widthSlider.setValueTo(CUSTOM_WIDTH_MAX);
-			widthSlider.setValueFrom(CUSTOM_WIDTH_MIN);
+			slider.setValueTo(CUSTOM_WIDTH_MAX);
+			slider.setValueFrom(CUSTOM_WIDTH_MIN);
 
 			((TextView) view.findViewById(R.id.width_value_min)).setText(String.valueOf(CUSTOM_WIDTH_MIN));
 			((TextView) view.findViewById(R.id.width_value_max)).setText(String.valueOf(CUSTOM_WIDTH_MAX));
@@ -161,11 +162,12 @@ public class RouteLineWidthCard extends BaseCard {
 			Integer width = getRouteLineWidth();
 			if (width == null || width > CUSTOM_WIDTH_MAX || width < CUSTOM_WIDTH_MIN) {
 				width = CUSTOM_WIDTH_MIN;
+				setRouteLineWidth(width);
 			}
-			widthSlider.setValue(width);
+			tvCustomWidth.setText(String.valueOf(width));
+			slider.setValue(width);
 
-			final TextView tvCustomWidth = view.findViewById(R.id.width_value_tv);
-			widthSlider.addOnChangeListener(new Slider.OnChangeListener() {
+			slider.addOnChangeListener(new Slider.OnChangeListener() {
 				@Override
 				public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
 					if (fromUser) {
@@ -175,7 +177,7 @@ public class RouteLineWidthCard extends BaseCard {
 					}
 				}
 			});
-			UiUtilities.setupSlider(widthSlider, nightMode, null, true);
+			UiUtilities.setupSlider(slider, nightMode, null, true);
 			ScrollUtils.addOnGlobalLayoutListener(sliderContainer, new Runnable() {
 				@Override
 				public void run() {
