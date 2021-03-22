@@ -4033,4 +4033,6 @@
     <string name="select_segments_description">%1$s contient plus d\'un segment, vous devez sélectionner le tronçon nécessaire à la navigation.</string>
     <string name="routing_attr_driving_style_description">Sélectionnez le mode de conduite pour avoir l\'itinéraire le plus court, le plus rapide, ou le plus sûr</string>
     <string name="quick_action_coordinates_widget_descr">Appuyer pour afficher ou cacher le widget Coordonnées sur la carte.</string>
+    <string name="snap_to_road_descr">L’icône de localisation va se déplacer sur le trajet en cours.</string>
+    <string name="select_another_colorization">Veuillez sélectionner un autre type de colorisation.</string>
 </resources>
