@@ -79,18 +79,29 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 
 	private boolean chartClicked;
 	private boolean nightMode;
-
+	private boolean onlyGraphs;
 
 	public GPXItemPagerAdapter(@NonNull OsmandApplication app,
 							   @NonNull GpxDisplayItem gpxItem,
 							   @NonNull TrackDisplayHelper displayHelper,
-							   boolean nightMode, @NonNull SegmentActionsListener actionsListener) {
+							   boolean nightMode,
+							   @NonNull SegmentActionsListener actionsListener) {
+		this(app, gpxItem, displayHelper, nightMode, actionsListener, false);
+	}
+
+	public GPXItemPagerAdapter(@NonNull OsmandApplication app,
+							   @NonNull GpxDisplayItem gpxItem,
+							   @NonNull TrackDisplayHelper displayHelper,
+							   boolean nightMode,
+							   @NonNull SegmentActionsListener actionsListener,
+							   boolean onlyGraphs) {
 		super();
 		this.app = app;
 		this.gpxItem = gpxItem;
 		this.nightMode = nightMode;
 		this.displayHelper = displayHelper;
 		this.actionsListener = actionsListener;
+		this.onlyGraphs = onlyGraphs;
 		iconsCache = app.getUIUtilities();
 		fetchTabTypes();
 	}
@@ -217,15 +228,46 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 
 	private View getViewForTab(@NonNull ViewGroup container, @NonNull GPXTabItemType tabType) {
 		LayoutInflater inflater = LayoutInflater.from(container.getContext());
+		View view;
 		switch (tabType) {
 			case GPX_TAB_ITEM_ALTITUDE:
-				return inflater.inflate(R.layout.gpx_item_altitude, container, false);
+				view = inflater.inflate(R.layout.gpx_item_altitude, container, false);
+				if (onlyGraphs) {
+					AndroidUiHelper.setVisibility(View.GONE,
+							view.findViewById(R.id.average_range),
+							view.findViewById(R.id.ascent_descent)
+					);
+				}
+				break;
 			case GPX_TAB_ITEM_SPEED:
-				return inflater.inflate(R.layout.gpx_item_speed, container, false);
+				view = inflater.inflate(R.layout.gpx_item_speed, container, false);
+				if (onlyGraphs) {
+					AndroidUiHelper.setVisibility(View.GONE,
+							view.findViewById(R.id.average_max),
+							view.findViewById(R.id.time_distance)
+					);
+				}
+				break;
 			case GPX_TAB_ITEM_GENERAL:
 			default:
-				return inflater.inflate(R.layout.gpx_item_general, container, false);
+				view = inflater.inflate(R.layout.gpx_item_general, container, false);
+				if (onlyGraphs) {
+					AndroidUiHelper.setVisibility(View.GONE,
+							view.findViewById(R.id.distance_time_span),
+							view.findViewById(R.id.start_end_time)
+					);
+				}
+				break;
 		}
+		if (onlyGraphs) {
+			AndroidUiHelper.setVisibility(View.GONE,
+					view.findViewById(R.id.gpx_join_gaps_container),
+					view.findViewById(R.id.list_divider),
+					view.findViewById(R.id.details_divider),
+					view.findViewById(R.id.details_view)
+			);
+		}
+		return view;
 	}
 
 	private void setupSpeedTab(View view, LineChart chart, GPXTrackAnalysis analysis, GPXFile gpxFile, int position) {
@@ -238,51 +280,55 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 			} else {
 				chart.setVisibility(View.GONE);
 			}
-			((ImageView) view.findViewById(R.id.average_icon))
-					.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_speed));
-			((ImageView) view.findViewById(R.id.max_icon))
-					.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_max_speed));
-			((ImageView) view.findViewById(R.id.time_moving_icon))
-					.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_time_span));
-			((ImageView) view.findViewById(R.id.distance_icon))
-					.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_polygom_dark));
+			if (!onlyGraphs) {
+				((ImageView) view.findViewById(R.id.average_icon))
+						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_speed));
+				((ImageView) view.findViewById(R.id.max_icon))
+						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_max_speed));
+				((ImageView) view.findViewById(R.id.time_moving_icon))
+						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_time_span));
+				((ImageView) view.findViewById(R.id.distance_icon))
+						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_polygom_dark));
 
-			String avg = OsmAndFormatter.getFormattedSpeed(analysis.avgSpeed, app);
-			String max = OsmAndFormatter.getFormattedSpeed(analysis.maxSpeed, app);
+				String avg = OsmAndFormatter.getFormattedSpeed(analysis.avgSpeed, app);
+				String max = OsmAndFormatter.getFormattedSpeed(analysis.maxSpeed, app);
 
-			((TextView) view.findViewById(R.id.average_text)).setText(avg);
-			((TextView) view.findViewById(R.id.max_text)).setText(max);
+				((TextView) view.findViewById(R.id.average_text)).setText(avg);
+				((TextView) view.findViewById(R.id.max_text)).setText(max);
 
-			view.findViewById(R.id.gpx_join_gaps_container).setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					if (displayHelper.setJoinSegments(!displayHelper.isJoinSegments())) {
-						actionsListener.updateContent();
-						for (int i = 0; i < getCount(); i++) {
-							View view = getViewAtPosition(i);
-							updateJoinGapsInfo(view, i);
+				view.findViewById(R.id.gpx_join_gaps_container).setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						if (displayHelper.setJoinSegments(!displayHelper.isJoinSegments())) {
+							actionsListener.updateContent();
+							for (int i = 0; i < getCount(); i++) {
+								View view = getViewAtPosition(i);
+								updateJoinGapsInfo(view, i);
+							}
 						}
 					}
-				}
-			});
+				});
+			}
 		} else {
 			chart.setVisibility(View.GONE);
 			view.findViewById(R.id.average_max).setVisibility(View.GONE);
 			view.findViewById(R.id.list_divider).setVisibility(View.GONE);
 			view.findViewById(R.id.time_distance).setVisibility(View.GONE);
 		}
-		updateJoinGapsInfo(view, position);
-		view.findViewById(R.id.analyze_on_map).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				openAnalyzeOnMap(GPXTabItemType.GPX_TAB_ITEM_SPEED);
+		if (!onlyGraphs) {
+			updateJoinGapsInfo(view, position);
+			view.findViewById(R.id.analyze_on_map).setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					openAnalyzeOnMap(GPXTabItemType.GPX_TAB_ITEM_SPEED);
+				}
+			});
+			TextView overflowMenu = view.findViewById(R.id.overflow_menu);
+			if (!gpxItem.group.getTrack().generalTrack) {
+				setupOptionsPopupMenu(overflowMenu, false);
+			} else {
+				overflowMenu.setVisibility(View.GONE);
 			}
-		});
-		TextView overflowMenu = view.findViewById(R.id.overflow_menu);
-		if (!gpxItem.group.getTrack().generalTrack) {
-			setupOptionsPopupMenu(overflowMenu, false);
-		} else {
-			overflowMenu.setVisibility(View.GONE);
 		}
 	}
 
@@ -306,56 +352,60 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 			} else {
 				chart.setVisibility(View.GONE);
 			}
-			((ImageView) view.findViewById(R.id.average_icon))
-					.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_altitude_average));
-			((ImageView) view.findViewById(R.id.range_icon))
-					.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_altitude_average));
-			((ImageView) view.findViewById(R.id.ascent_icon))
-					.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_altitude_ascent));
-			((ImageView) view.findViewById(R.id.descent_icon))
-					.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_altitude_descent));
+			if (!onlyGraphs) {
+				((ImageView) view.findViewById(R.id.average_icon))
+						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_altitude_average));
+				((ImageView) view.findViewById(R.id.range_icon))
+						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_altitude_average));
+				((ImageView) view.findViewById(R.id.ascent_icon))
+						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_altitude_ascent));
+				((ImageView) view.findViewById(R.id.descent_icon))
+						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_altitude_descent));
 
-			String min = OsmAndFormatter.getFormattedAlt(analysis.minElevation, app);
-			String max = OsmAndFormatter.getFormattedAlt(analysis.maxElevation, app);
-			String asc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app);
-			String desc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app);
+				String min = OsmAndFormatter.getFormattedAlt(analysis.minElevation, app);
+				String max = OsmAndFormatter.getFormattedAlt(analysis.maxElevation, app);
+				String asc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app);
+				String desc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app);
 
-			((TextView) view.findViewById(R.id.average_text))
-					.setText(OsmAndFormatter.getFormattedAlt(analysis.avgElevation, app));
-			((TextView) view.findViewById(R.id.range_text)).setText(String.format("%s - %s", min, max));
-			((TextView) view.findViewById(R.id.ascent_text)).setText(asc);
-			((TextView) view.findViewById(R.id.descent_text)).setText(desc);
+				((TextView) view.findViewById(R.id.average_text))
+						.setText(OsmAndFormatter.getFormattedAlt(analysis.avgElevation, app));
+				((TextView) view.findViewById(R.id.range_text)).setText(String.format("%s - %s", min, max));
+				((TextView) view.findViewById(R.id.ascent_text)).setText(asc);
+				((TextView) view.findViewById(R.id.descent_text)).setText(desc);
 
-			view.findViewById(R.id.gpx_join_gaps_container).setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					if (displayHelper.setJoinSegments(!displayHelper.isJoinSegments())) {
-						actionsListener.updateContent();
-						for (int i = 0; i < getCount(); i++) {
-							View view = getViewAtPosition(i);
-							updateJoinGapsInfo(view, i);
+				view.findViewById(R.id.gpx_join_gaps_container).setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						if (displayHelper.setJoinSegments(!displayHelper.isJoinSegments())) {
+							actionsListener.updateContent();
+							for (int i = 0; i < getCount(); i++) {
+								View view = getViewAtPosition(i);
+								updateJoinGapsInfo(view, i);
+							}
 						}
 					}
-				}
-			});
+				});
+			}
 		} else {
 			chart.setVisibility(View.GONE);
 			view.findViewById(R.id.average_range).setVisibility(View.GONE);
 			view.findViewById(R.id.list_divider).setVisibility(View.GONE);
 			view.findViewById(R.id.ascent_descent).setVisibility(View.GONE);
 		}
-		updateJoinGapsInfo(view, position);
-		view.findViewById(R.id.analyze_on_map).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				openAnalyzeOnMap(GPXTabItemType.GPX_TAB_ITEM_ALTITUDE);
+		if (!onlyGraphs) {
+			updateJoinGapsInfo(view, position);
+			view.findViewById(R.id.analyze_on_map).setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					openAnalyzeOnMap(GPXTabItemType.GPX_TAB_ITEM_ALTITUDE);
+				}
+			});
+			TextView overflowMenu = view.findViewById(R.id.overflow_menu);
+			if (!gpxItem.group.getTrack().generalTrack) {
+				setupOptionsPopupMenu(overflowMenu, false);
+			} else {
+				overflowMenu.setVisibility(View.GONE);
 			}
-		});
-		TextView overflowMenu = view.findViewById(R.id.overflow_menu);
-		if (!gpxItem.group.getTrack().generalTrack) {
-			setupOptionsPopupMenu(overflowMenu, false);
-		} else {
-			overflowMenu.setVisibility(View.GONE);
 		}
 	}
 
@@ -369,41 +419,42 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 			} else {
 				chart.setVisibility(View.GONE);
 			}
+			if (!onlyGraphs) {
+				((ImageView) view.findViewById(R.id.distance_icon))
+						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_polygom_dark));
+				((ImageView) view.findViewById(R.id.duration_icon))
+						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_time_span));
+				((ImageView) view.findViewById(R.id.start_time_icon))
+						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_time_start));
+				((ImageView) view.findViewById(R.id.end_time_icon))
+						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_time_end));
 
-			((ImageView) view.findViewById(R.id.distance_icon))
-					.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_polygom_dark));
-			((ImageView) view.findViewById(R.id.duration_icon))
-					.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_time_span));
-			((ImageView) view.findViewById(R.id.start_time_icon))
-					.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_time_start));
-			((ImageView) view.findViewById(R.id.end_time_icon))
-					.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_time_end));
-
-			view.findViewById(R.id.gpx_join_gaps_container).setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					if (displayHelper.setJoinSegments(!displayHelper.isJoinSegments())) {
-						actionsListener.updateContent();
-						for (int i = 0; i < getCount(); i++) {
-							View view = getViewAtPosition(i);
-							updateJoinGapsInfo(view, i);
+				view.findViewById(R.id.gpx_join_gaps_container).setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						if (displayHelper.setJoinSegments(!displayHelper.isJoinSegments())) {
+							actionsListener.updateContent();
+							for (int i = 0; i < getCount(); i++) {
+								View view = getViewAtPosition(i);
+								updateJoinGapsInfo(view, i);
+							}
 						}
 					}
-				}
-			});
-			if (analysis.timeSpan > 0) {
-				DateFormat tf = SimpleDateFormat.getTimeInstance(DateFormat.SHORT);
-				DateFormat df = SimpleDateFormat.getDateInstance(DateFormat.MEDIUM);
+				});
+				if (analysis.timeSpan > 0) {
+					DateFormat tf = SimpleDateFormat.getTimeInstance(DateFormat.SHORT);
+					DateFormat df = SimpleDateFormat.getDateInstance(DateFormat.MEDIUM);
 
-				Date start = new Date(analysis.startTime);
-				((TextView) view.findViewById(R.id.start_time_text)).setText(tf.format(start));
-				((TextView) view.findViewById(R.id.start_date_text)).setText(df.format(start));
-				Date end = new Date(analysis.endTime);
-				((TextView) view.findViewById(R.id.end_time_text)).setText(tf.format(end));
-				((TextView) view.findViewById(R.id.end_date_text)).setText(df.format(end));
-			} else {
-				view.findViewById(R.id.list_divider).setVisibility(View.GONE);
-				view.findViewById(R.id.start_end_time).setVisibility(View.GONE);
+					Date start = new Date(analysis.startTime);
+					((TextView) view.findViewById(R.id.start_time_text)).setText(tf.format(start));
+					((TextView) view.findViewById(R.id.start_date_text)).setText(df.format(start));
+					Date end = new Date(analysis.endTime);
+					((TextView) view.findViewById(R.id.end_time_text)).setText(tf.format(end));
+					((TextView) view.findViewById(R.id.end_date_text)).setText(df.format(end));
+				} else {
+					view.findViewById(R.id.list_divider).setVisibility(View.GONE);
+					view.findViewById(R.id.start_end_time).setVisibility(View.GONE);
+				}
 			}
 		} else {
 			chart.setVisibility(View.GONE);
@@ -412,17 +463,19 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 			view.findViewById(R.id.start_end_time).setVisibility(View.GONE);
 		}
 		updateJoinGapsInfo(view, position);
-		view.findViewById(R.id.analyze_on_map).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				openAnalyzeOnMap(GPXTabItemType.GPX_TAB_ITEM_GENERAL);
+		if (!onlyGraphs) {
+			view.findViewById(R.id.analyze_on_map).setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					openAnalyzeOnMap(GPXTabItemType.GPX_TAB_ITEM_GENERAL);
+				}
+			});
+			TextView overflowMenu = view.findViewById(R.id.overflow_menu);
+			if (!gpxItem.group.getTrack().generalTrack) {
+				setupOptionsPopupMenu(overflowMenu, true);
+			} else {
+				overflowMenu.setVisibility(View.GONE);
 			}
-		});
-		TextView overflowMenu = view.findViewById(R.id.overflow_menu);
-		if (!gpxItem.group.getTrack().generalTrack) {
-			setupOptionsPopupMenu(overflowMenu, true);
-		} else {
-			overflowMenu.setVisibility(View.GONE);
 		}
 	}
 
@@ -598,7 +651,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	@Override
 	public void tabStylesUpdated(View tabsContainer, int currentPosition) {
 		ViewGroup.MarginLayoutParams params = (MarginLayoutParams) tabsContainer.getLayoutParams();
-		params.height = app.getResources().getDimensionPixelSize(R.dimen.dialog_button_height);
+		params.height = app.getResources().getDimensionPixelSize(!onlyGraphs ? R.dimen.dialog_button_height : R.dimen.context_menu_buttons_bottom_height);
 		tabsContainer.setLayoutParams(params);
 		UiUtilities.updateCustomRadioButtons(app, tabsContainer, nightMode, getCustomRadioButtonType(currentPosition));
 	}

@@ -291,6 +291,7 @@
 	</LinearLayout>
 
 	<View
+		android:id="@+id/details_divider"
 		android:layout_width="match_parent"
 		android:layout_height="1dp"
 		android:background="?attr/dashboard_divider" />

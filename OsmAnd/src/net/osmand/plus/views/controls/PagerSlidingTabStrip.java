@@ -66,12 +66,17 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
 	public interface CustomTabProvider {
 		public View getCustomTabView(@NonNull ViewGroup parent, int position);
+
 		public void select(View tab);
+
 		public void deselect(View tab);
+
 		public void tabStylesUpdated(View tabsContainer, int currentPosition);
 	}
 
 	public interface OnTabReselectedListener {
+		public void onTabSelected(int position);
+
 		public void onTabReselected(int position);
 	}
 
@@ -121,7 +126,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 	private int underlineHeight = 0;
 	@ColorInt
 	private int underlineColor;
-	
+
 
 	private int dividerWidth = 0;
 	private int dividerPadding = 0;
@@ -197,7 +202,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
 		//In case we have the padding they must be equal so we take the biggest
 		padding = Math.max(paddingLeft, paddingRight);
-		
+
 
 		// get custom attrs
 		a = context.obtainStyledAttributes(attrs, R.styleable.PagerSlidingTabStrip);
@@ -221,7 +226,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 		tabTypefaceSelectedStyle = a.getInt(R.styleable.PagerSlidingTabStrip_pstsTextSelectedStyle, Typeface.NORMAL);
 		tabTextAlpha = a.getFloat(R.styleable.PagerSlidingTabStrip_pstsTextAlpha, HALF_TRANSP);
 		tabTextSelectedAlpha = a.getFloat(R.styleable.PagerSlidingTabStrip_pstsTextSelectedAlpha, OPAQUE);
-        tabTypeface = FontCache.getRobotoMedium(context);
+		tabTypeface = FontCache.getRobotoMedium(context);
 		a.recycle();
 
 		setMarginBottomTabContainer();
@@ -326,6 +331,9 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 					View tab = tabsContainer.getChildAt(pager.getCurrentItem());
 					notSelected(tab);
 					pager.setCurrentItem(position);
+					if (tabReselectedListener != null) {
+						tabReselectedListener.onTabSelected(position);
+					}
 				} else if (tabReselectedListener != null) {
 					tabReselectedListener.onTabReselected(position);
 				}
@@ -470,7 +478,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 		// draw underline
 		rectPaint.setColor(underlineColor); //underlineColor
 		canvas.drawRect(padding, height - underlineHeight, tabsContainer.getWidth() + padding, height, rectPaint);
-	
+
 		// draw divider
 		if (dividerWidth != 0) {
 			dividerPaint.setStrokeWidth(dividerWidth);
