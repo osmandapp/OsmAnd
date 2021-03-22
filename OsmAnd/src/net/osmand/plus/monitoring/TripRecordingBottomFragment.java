@@ -79,6 +79,8 @@ public class TripRecordingBottomFragment extends MenuBottomSheetDialogFragment i
 	private static final Log LOG = PlatformUtil.getLog(TripRecordingBottomFragment.class);
 	public static final String UPDATE_TRACK_ICON = "update_track_icon";
 	private static final int GPS_UPDATE_INTERVAL = 1000;
+	private static final String[] INIT_BLOCKS_KEYS =
+			new String[]{INIT_BLOCKS_GENERAL, INIT_BLOCKS_ALTITUDE, INIT_BLOCKS_SPEED};
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
@@ -230,7 +232,10 @@ public class TripRecordingBottomFragment extends MenuBottomSheetDialogFragment i
 		super.onPause();
 		blockStatisticsBuilder.stopUpdatingStatBlocks();
 		stopUpdatingGPS();
-	}
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getMapLayers().getGpxLayer().setTrackChartPoints(null);
+		}}
 
 	public void show() {
 		Dialog dialog = getDialog();
@@ -295,16 +300,15 @@ public class TripRecordingBottomFragment extends MenuBottomSheetDialogFragment i
 		AndroidUiHelper.setVisibility(View.GONE, segmentView.findViewById(R.id.list_item_divider));
 		WrapContentHeightViewPager pager = segmentView.findViewById(R.id.pager);
 		PagerSlidingTabStrip tabLayout = segmentView.findViewById(R.id.sliding_tabs);
-		final String[] initBlocksKeys = new String[]{INIT_BLOCKS_GENERAL, INIT_BLOCKS_ALTITUDE, INIT_BLOCKS_SPEED};
 		tabLayout.setOnTabReselectedListener(new PagerSlidingTabStrip.OnTabReselectedListener() {
 			@Override
 			public void onTabSelected(int position) {
-				recreateStatBlocks(initBlocksKeys[position]);
+				recreateStatBlocks(INIT_BLOCKS_KEYS[position]);
 			}
 
 			@Override
 			public void onTabReselected(int position) {
-				recreateStatBlocks(initBlocksKeys[position]);
+				recreateStatBlocks(INIT_BLOCKS_KEYS[position]);
 			}
 		});
 

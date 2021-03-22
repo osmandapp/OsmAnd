@@ -52,7 +52,7 @@
 	</LinearLayout>
 
 	<LinearLayout
-		android:id="@+id/average_range"
+		android:id="@+id/top_line_blocks"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:orientation="horizontal"
@@ -171,7 +171,7 @@
 	</LinearLayout>
 
 	<LinearLayout
-		android:id="@+id/ascent_descent"
+		android:id="@+id/bottom_line_blocks"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:orientation="horizontal"
