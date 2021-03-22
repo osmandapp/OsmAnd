@@ -3886,4 +3886,10 @@
     <string name="poi_piste_status_open">Statut de la piste : ouvert</string>
     <string name="poi_piste_name">Nom de la piste</string>
     <string name="poi_piste_ski_jump">Saut à ski</string>
+    <string name="poi_summit_register_no">Livre d\'or au sommet : non</string>
+    <string name="poi_summit_register_yes">Livre d\'or au sommet : oui</string>
+    <string name="poi_patrolled_no">Surveillé : non</string>
+    <string name="poi_patrolled_yes">Surveillé : oui</string>
+    <string name="poi_local_ref">Référence locale</string>
+    <string name="poi_geodesist">Géodésien</string>
 </resources>
