@@ -15,19 +15,17 @@
 		layout="@layout/preference_button_with_icon"
 		android:layout_width="wrap_content"
 		android:layout_height="match_parent"
-		android:layout_weight="0.1"
 		android:minWidth="@dimen/context_menu_top_right_button_min_width"
 		android:minHeight="@dimen/setting_list_item_large_height" />
 
 	<include
 		android:id="@+id/button_center"
 		layout="@layout/preference_button_with_icon"
-		android:layout_width="wrap_content"
+		android:layout_width="0dp"
 		android:layout_height="match_parent"
 		android:layout_marginStart="@dimen/content_padding_half"
 		android:layout_marginLeft="@dimen/content_padding_half"
-		android:layout_weight="0.8"
-		android:minWidth="@dimen/button_triple_center_width"
+		android:layout_weight="1"
 		android:minHeight="@dimen/setting_list_item_large_height" />
 
 	<include
@@ -37,7 +35,6 @@
 		android:layout_height="match_parent"
 		android:layout_marginStart="@dimen/content_padding_half"
 		android:layout_marginLeft="@dimen/content_padding_half"
-		android:layout_weight="0.1"
 		android:minWidth="@dimen/context_menu_top_right_button_min_width"
 		android:minHeight="@dimen/setting_list_item_large_height" />
 

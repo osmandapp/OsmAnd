@@ -25,6 +25,7 @@ import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -133,8 +134,8 @@ public class TripRecordingBottomFragment extends MenuBottomSheetDialogFragment {
 
 		LinearLayout showTrackContainer = itemView.findViewById(R.id.show_track_on_map);
 		trackAppearanceIcon = showTrackContainer.findViewById(R.id.additional_button_icon);
-		createShowTrackItem(app, getMapActivity(), nightMode, showTrackContainer, trackAppearanceIcon,
-				ItemType.SHOW_TRACK.getTitleId(), TripRecordingBottomFragment.this, new Runnable() {
+		createShowTrackItem(showTrackContainer, trackAppearanceIcon, ItemType.SHOW_TRACK.getTitleId(),
+				TripRecordingBottomFragment.this, nightMode, new Runnable() {
 					@Override
 					public void run() {
 						hide();
@@ -285,10 +286,15 @@ public class TripRecordingBottomFragment extends MenuBottomSheetDialogFragment {
 		}
 	}
 
-	public static void createShowTrackItem(final OsmandApplication app, final MapActivity mapActivity,
-										   final boolean nightMode, LinearLayout showTrackContainer,
-										   AppCompatImageView trackAppearanceIcon, Integer showTrackId,
-										   final Fragment target, final Runnable hideOnClickButtonAppearance) {
+	public static void createShowTrackItem(LinearLayout showTrackContainer, AppCompatImageView trackAppearanceIcon,
+										   Integer showTrackId, final Fragment target,
+										   final boolean nightMode, final Runnable hideOnClickButtonAppearance) {
+		FragmentActivity activity = target.getActivity();
+		if (!(activity instanceof MapActivity)) {
+			return;
+		}
+		final MapActivity mapActivity = (MapActivity) activity;
+		final OsmandApplication app = mapActivity.getMyApplication();
 		final CardView buttonShowTrack = showTrackContainer.findViewById(R.id.compound_container);
 		final CardView buttonAppearance = showTrackContainer.findViewById(R.id.additional_button_container);
 
@@ -318,19 +324,18 @@ public class TripRecordingBottomFragment extends MenuBottomSheetDialogFragment {
 			@Override
 			public void onClick(View v) {
 				if (showTrackCompound.isChecked()) {
-					if (mapActivity != null) {
-						hideOnClickButtonAppearance.run();
-						SelectedGpxFile selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
-						TrackAppearanceFragment.showInstance(mapActivity, selectedGpxFile, target);
-					}
+					hideOnClickButtonAppearance.run();
+					SelectedGpxFile selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
+					TrackAppearanceFragment.showInstance(mapActivity, selectedGpxFile, target);
 				}
 			}
 		});
 	}
 
-	protected static void setShowTrackItemBackground(View view, boolean checked, boolean nightMode) {
-		int background = checked ? getActiveTransparentBackgroundId(nightMode) : getInactiveStrokedBackgroundId(nightMode);
-		view.setBackgroundResource(background);
+	public static void setShowTrackItemBackground(View view, boolean checked, boolean nightMode) {
+		Drawable background = AppCompatResources.getDrawable(view.getContext(),
+				checked ? getActiveTransparentBackgroundId(nightMode) : getInactiveStrokedBackgroundId(nightMode));
+		view.setBackgroundDrawable(background);
 	}
 
 	private void createItem(View view, ItemType type) {
