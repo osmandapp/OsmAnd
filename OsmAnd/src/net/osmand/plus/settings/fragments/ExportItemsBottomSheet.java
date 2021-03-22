@@ -28,6 +28,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
@@ -68,6 +69,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import static net.osmand.plus.audionotes.AudioVideoNotesPlugin.IMG_EXTENSION;
+import static net.osmand.plus.audionotes.AudioVideoNotesPlugin.MPEG4_EXTENSION;
+import static net.osmand.plus.audionotes.AudioVideoNotesPlugin.THREEGP_EXTENSION;
 import static net.osmand.view.ThreeStateCheckbox.State.CHECKED;
 import static net.osmand.view.ThreeStateCheckbox.State.MISC;
 import static net.osmand.view.ThreeStateCheckbox.State.UNCHECKED;
@@ -409,6 +413,12 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			if (iconId == -1) {
 				iconId = R.drawable.ic_action_photo_dark;
 			}
+			if (item.getTag() instanceof FileSettingsItem) {
+				FileSettingsItem settingsItem = (FileSettingsItem) item.getTag();
+				item.setTitle(getNameForMultimediaFile(settingsItem.getFile(), settingsItem.getLastModified()));
+			} else {
+				item.setTitle(new Recording(file).getName(app, true));
+			}
 			item.setIcon(uiUtilities.getIcon(iconId, getItemIconColor(item.getTag())));
 			item.setDescription(AndroidUtils.formatSize(app, file.length()));
 		} else if (fileSubtype.isMap()
@@ -433,6 +443,18 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 		item.setTitle(GpxUiHelper.getGpxTitle(file.getName()));
 		item.setDescription(getTrackDescr(file, file.lastModified(), file.length(), appearanceInfo));
 		item.setIcon(uiUtilities.getIcon(R.drawable.ic_action_route_distance, getItemIconColor(item.getTag())));
+	}
+
+	private String getNameForMultimediaFile(@NonNull File file, long lastModified) {
+		String fileName = file.getName();
+		if (fileName.endsWith(IMG_EXTENSION)) {
+			return getString(R.string.shared_string_photo) + " " + Recording.formatDateTime(app, lastModified);
+		} else if (fileName.endsWith(MPEG4_EXTENSION)) {
+			return getString(R.string.shared_string_video) + " " + Recording.formatDateTime(app, lastModified);
+		} else if (fileName.endsWith(THREEGP_EXTENSION)) {
+			return getString(R.string.shared_string_audio) + " " + Recording.formatDateTime(app, lastModified);
+		}
+		return "";
 	}
 
 	private int getItemIconColor(Object object) {

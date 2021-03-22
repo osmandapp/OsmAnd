@@ -900,11 +900,11 @@ public class SettingsHelper {
 		List<ITileSource> tileSourceTemplates = new ArrayList<>();
 		List<File> routingFilesList = new ArrayList<>();
 		List<File> renderFilesList = new ArrayList<>();
-		List<File> multimediaFilesList = new ArrayList<>();
 		List<File> ttsVoiceFilesList = new ArrayList<>();
 		List<File> voiceFilesList = new ArrayList<>();
 		List<FileSettingsItem> mapFilesList = new ArrayList<>();
 		List<FileSettingsItem> tracksFilesList = new ArrayList<>();
+		List<FileSettingsItem> multimediaFilesList = new ArrayList<>();
 		List<AvoidRoadInfo> avoidRoads = new ArrayList<>();
 		List<GlobalSettingsItem> globalSettingsItems = new ArrayList<>();
 		List<OsmNotesPoint> notesPointList = new ArrayList<>();
@@ -927,7 +927,7 @@ public class SettingsHelper {
 					} else if (fileItem.getSubtype() == FileSubtype.ROUTING_CONFIG) {
 						routingFilesList.add(fileItem.getFile());
 					} else if (fileItem.getSubtype() == FileSubtype.MULTIMEDIA_NOTES) {
-						multimediaFilesList.add(fileItem.getFile());
+						multimediaFilesList.add(fileItem);
 					} else if (fileItem.getSubtype() == FileSubtype.GPX) {
 						tracksFilesList.add(fileItem);
 					} else if (fileItem.getSubtype().isMap()) {
