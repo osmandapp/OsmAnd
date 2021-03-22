@@ -135,11 +135,21 @@ public class GpxBlockStatisticsBuilder {
 
 	public void initItems() {
 		GPXFile gpxFile = getGPXFile();
-		GpxDisplayItem gpxDisplayItem = getDisplayItem(gpxFile);
+		if (app == null || gpxFile == null) {
+			return;
+		}
 		boolean withoutGaps = true;
-		if (gpxDisplayItem != null) {
-			analysis = gpxDisplayItem.analysis;
-			withoutGaps = !selectedGpxFile.isJoinSegments() && gpxDisplayItem.isGeneralTrack();
+		if (gpxFile.equals(app.getSavingTrackHelper().getCurrentGpx())) {
+			GPXFile currentGpx = app.getSavingTrackHelper().getCurrentTrack().getGpxFile();
+			analysis = currentGpx.getAnalysis(0);
+			withoutGaps = !selectedGpxFile.isJoinSegments()
+					&& (Algorithms.isEmpty(currentGpx.tracks) || currentGpx.tracks.get(0).generalTrack);
+		} else {
+			GpxDisplayItem gpxDisplayItem = getDisplayItem(gpxFile);
+			if (gpxDisplayItem != null) {
+				analysis = gpxDisplayItem.analysis;
+				withoutGaps = !selectedGpxFile.isJoinSegments() && gpxDisplayItem.isGeneralTrack();
+			}
 		}
 		if (analysis != null) {
 			items.clear();

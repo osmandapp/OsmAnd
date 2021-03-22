@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
@@ -174,6 +175,18 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 		runLayoutListener();
 
 		calculateGpxApproximation(true);
+
+		final ScrollView profileView = (ScrollView) getBottomScrollView();
+		profileView.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				View view = profileView.findViewWithTag(snapToRoadAppMode.getStringKey());
+				if (view != null) {
+					int headerHeight = getResources().getDimensionPixelSize(R.dimen.measurement_tool_button_height);
+					profileView.scrollTo(0, view.getTop() + headerHeight);
+				}
+			}
+		}, 100);
 
 		return mainView;
 	}

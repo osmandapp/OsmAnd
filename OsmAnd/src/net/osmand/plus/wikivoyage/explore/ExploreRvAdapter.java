@@ -159,7 +159,7 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 		if (isCardExists(getNeededMapsCardPosition(), TravelNeededMapsCard.TYPE)) {
 			updateNeededMapsCard(false);
 		} else if (addItem(getNeededMapsCardPosition(), card)) {
-			notifyDataSetChanged();
+			notifyItemInserted(getNeededMapsCardPosition());
 		}
 	}
 

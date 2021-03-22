@@ -4099,7 +4099,7 @@
     <string name="latest_openstreetmap_update">آخر تحديث خريطة الشارع المفتوح المتاحة:</string>
     <string name="updated">تحديث: %s</string>
     <string name="last_time_checked">آخر مرة تم التحقق منها: %s</string>
-    <string name="update_frequency">تحديث التردد</string>
+    <string name="update_frequency">معدل التحديث</string>
     <string name="live_update_frequency_week_variant">سيتم فحص تحديثات الخريطة كل أسبوع. المرة القادمة %1$s في %2$s.</string>
     <string name="live_update_frequency_day_variant">سيتم التحقق من تحديثات الخرائط كل يوم. في المرة القادمة%1$s في %2$s.</string>
     <string name="live_update_frequency_hour_variant">سيتم التحقق من تحديثات الخرائط كل ساعة. في المرة القادمة%1$s في %2$s.</string>
@@ -4112,4 +4112,6 @@
     <string name="shared_string_interval">الفاصل الزمني</string>
     <string name="track_has_no_altitude">لا يحتوي المسار على بيانات الارتفاع.</string>
     <string name="track_has_no_speed">لا يحتوي المسار على بيانات السرعة.</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">إخفاء المحميات الطبيعية والمناطق المحمية وحدود المتنزهات الوطنية</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_name">حدود الطبيعة</string>
 </resources>

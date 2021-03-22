@@ -399,7 +399,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	public void onContextMenuDismiss(@NonNull ContextMenuFragment fragment) {
 		Fragment target = getTargetFragment();
 		if (target instanceof TripRecordingStartingBottomFragment) {
-			((TripRecordingStartingBottomFragment) target).show(UPDATE_TRACK_ICON);
+			((TripRecordingStartingBottomFragment) target).show();
 		} else if (target instanceof TripRecordingBottomFragment) {
 			((TripRecordingBottomFragment) target).show(UPDATE_TRACK_ICON);
 		}

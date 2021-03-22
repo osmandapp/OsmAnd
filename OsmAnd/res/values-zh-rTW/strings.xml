@@ -4036,4 +4036,6 @@
     <string name="track_has_no_altitude">軌跡不包含海拔資料。</string>
     <string name="track_has_no_speed">軌跡不包含速度資料。</string>
     <string name="select_another_colorization">請選擇另一種顏色。</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">隱藏自然保留區、保護區與國家公園界線</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_name">自然界線</string>
 </resources>

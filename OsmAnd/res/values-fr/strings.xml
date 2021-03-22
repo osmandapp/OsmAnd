@@ -4027,4 +4027,10 @@
     <string name="shared_string_interval">Intervalle</string>
     <string name="track_has_no_altitude">La trace ne contient aucune donnée d\'altitude.</string>
     <string name="track_has_no_speed">La trace ne contient aucune donnée de vitesse.</string>
+    <string name="routing_attr_short_way_description">Itinéraire court optimisé (plus économe en énergie)</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Masquer les limites des réserves naturelles, des zones protégées et des parcs nationaux</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_name">Limites naturelles</string>
+    <string name="select_segments_description">%1$s contient plus d\'un segment, vous devez sélectionner le tronçon nécessaire à la navigation.</string>
+    <string name="routing_attr_driving_style_description">Sélectionnez le mode de conduite pour avoir l\'itinéraire le plus court, le plus rapide, ou le plus sûr</string>
+    <string name="quick_action_coordinates_widget_descr">Appuyer pour afficher ou cacher le widget Coordonnées sur la carte.</string>
 </resources>
