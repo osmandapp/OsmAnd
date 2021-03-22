@@ -218,7 +218,7 @@
         <item name="divider_color_basic">@color/divider_color_light</item>
         <item name="main_font_color_basic">@color/text_color_primary_light</item>
         <item name="active_color_basic">@color/active_color_primary_light</item>
-        <item name="active_color_basic_green">@color/profile_icon_color_green_light</item>
+        <item name="profile_icon_color_green">@color/profile_icon_color_green_light</item>
         <item name="card_and_list_background_basic">@color/card_and_list_background_light</item>
         <item name="activity_background_basic">@color/activity_background_light</item>
         <item name="pages_bg">@drawable/pages_bg_light</item>
@@ -520,7 +520,7 @@
         <item name="divider_color_basic">@color/divider_color_dark</item>
         <item name="main_font_color_basic">@color/text_color_primary_dark</item>
         <item name="active_color_basic">@color/active_color_primary_dark</item>
-        <item name="active_color_basic_green">@color/profile_icon_color_green_dark</item>
+        <item name="profile_icon_color_green">@color/profile_icon_color_green_dark</item>
         <item name="card_and_list_background_basic">@color/card_and_list_background_dark</item>
         <item name="activity_background_basic">@color/activity_background_dark</item>
         <item name="pages_bg">@drawable/pages_bg_dark</item>
