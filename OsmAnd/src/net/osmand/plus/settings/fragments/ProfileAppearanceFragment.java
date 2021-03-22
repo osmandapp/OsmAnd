@@ -242,8 +242,6 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		findPreference(SELECT_ICON).setIconSpaceReserved(false);
 		findPreference(SELECT_LOCATION_ICON).setIconSpaceReserved(false);
 		findPreference(SELECT_NAV_ICON).setIconSpaceReserved(false);
-		findPreference(CUSTOMIZE_ROUTE_LINE).setIcon(
-				getIcon(R.drawable.ic_action_route_distance, getActiveColorRes()));
 		if (getSelectedAppMode().equals(ApplicationMode.DEFAULT) && !isNewProfile) {
 			findPreference(SELECT_ICON).setVisible(false);
 			findPreference(ICON_ITEMS).setVisible(false);
@@ -735,6 +733,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 			boolean isDefaultProfile = getSelectedAppMode().equals(ApplicationMode.DEFAULT);
 			boolean isPublicTransport = PUBLIC_TRANSPORT_KEY.equals(changedProfile.routingProfile);
 			preference.setVisible(!isDefaultProfile && !isPublicTransport);
+			preference.setIcon(getIcon(R.drawable.ic_action_route_distance, getActiveColorRes()));
 		}
 	}
 
@@ -1087,7 +1086,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 				return false;
 			if (routeService != that.routeService) return false;
 			if (navigationIcon != that.navigationIcon) return false;
-			if (routeLineDrawInfo != that.routeLineDrawInfo) return false;
+			if (routeLineDrawInfo != null ? !routeLineDrawInfo.equals(that.routeLineDrawInfo) : that.routeLineDrawInfo != null) return false;
 			return locationIcon == that.locationIcon;
 		}
 

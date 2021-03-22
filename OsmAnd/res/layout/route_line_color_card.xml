@@ -93,8 +93,6 @@
         android:id="@+id/colors_card_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingRight="@dimen/content_padding"
-        android:paddingLeft="@dimen/content_padding"
         android:paddingBottom="@dimen/content_padding_small"/>
 
 </LinearLayout>
