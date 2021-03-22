@@ -19,6 +19,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.slider.RangeSlider;
 
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -61,6 +62,19 @@ public class TripRecordingStartingBottomFragment extends MenuBottomSheetDialogFr
 		if (!fragmentManager.isStateSaved()) {
 			TripRecordingStartingBottomFragment fragment = new TripRecordingStartingBottomFragment();
 			fragment.show(fragmentManager, TAG);
+		}
+	}
+
+	public static void showInstance(@NonNull FragmentManager fragmentManager, OsmandApplication app, SelectedGpxFile selectedGpxFile) {
+		if (!fragmentManager.isStateSaved()) {
+			OsmandSettings settings = app.getSettings();
+			boolean showStartDialog = settings.SHOW_TRIP_REC_START_DIALOG.get();
+			if (showStartDialog) {
+				showInstance(fragmentManager);
+			} else {
+				startRecording(app);
+				TripRecordingBottomFragment.showInstance(fragmentManager, selectedGpxFile);
+			}
 		}
 	}
 
@@ -209,13 +223,19 @@ public class TripRecordingStartingBottomFragment extends MenuBottomSheetDialogFr
 		upDownBtn.setImageDrawable(getContentIcon(iconId));
 	}
 
-	private void startRecording() {
+	private static void startRecording(OsmandApplication app) {
+		OsmandSettings settings = app.getSettings();
 		SavingTrackHelper helper = app.getSavingTrackHelper();
 		helper.startNewSegment();
 		settings.SAVE_GLOBAL_TRACK_TO_GPX.set(true);
 		app.startNavigationService(NavigationService.USED_BY_GPX);
+	}
+
+	private void startRecording() {
+		startRecording(app);
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
+			SavingTrackHelper helper = app.getSavingTrackHelper();
 			TripRecordingBottomFragment.showInstance(mapActivity.getSupportFragmentManager(), helper.getCurrentTrack());
 		}
 		dismiss();

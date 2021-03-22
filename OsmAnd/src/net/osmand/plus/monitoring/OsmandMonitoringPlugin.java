@@ -82,6 +82,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		pluginPreferences.add(settings.DISABLE_RECORDING_ONCE_APP_KILLED);
 		pluginPreferences.add(settings.SAVE_HEADING_TO_GPX);
 		pluginPreferences.add(settings.SHOW_TRIP_REC_NOTIFICATION);
+		pluginPreferences.add(settings.SHOW_TRIP_REC_START_DIALOG);
 		pluginPreferences.add(settings.TRACK_STORAGE_DIRECTORY);
 		pluginPreferences.add(settings.LIVE_MONITORING);
 		pluginPreferences.add(settings.LIVE_MONITORING_URL);
@@ -334,7 +335,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		if (hasDataToSave() || wasTrackMonitored()) {
 			TripRecordingBottomFragment.showInstance(fragmentManager, getCurrentTrack());
 		} else {
-			TripRecordingStartingBottomFragment.showInstance(fragmentManager);
+			TripRecordingStartingBottomFragment.showInstance(fragmentManager, app, getCurrentTrack());
 		}
 
 		/*final boolean wasTrackMonitored = settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
@@ -555,7 +556,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 			runnable.run();
 		} else if (map instanceof FragmentActivity) {
 			FragmentActivity activity = (FragmentActivity) map;
-			TripRecordingStartingBottomFragment.showInstance(activity.getSupportFragmentManager());
+			TripRecordingStartingBottomFragment.showInstance(activity.getSupportFragmentManager(), app, getCurrentTrack());
 		}
 	}
 

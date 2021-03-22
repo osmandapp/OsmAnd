@@ -856,7 +856,7 @@ public class MapActivityActions implements DialogProvider {
 							if (monitoringPlugin.hasDataToSave() || monitoringPlugin.wasTrackMonitored()) {
 								TripRecordingBottomFragment.showInstance(mapActivity.getSupportFragmentManager(), monitoringPlugin.getCurrentTrack());
 							} else {
-								TripRecordingStartingBottomFragment.showInstance(mapActivity.getSupportFragmentManager());
+								TripRecordingStartingBottomFragment.showInstance(mapActivity.getSupportFragmentManager(), app, monitoringPlugin.getCurrentTrack());
 							}
 							return true;
 						}

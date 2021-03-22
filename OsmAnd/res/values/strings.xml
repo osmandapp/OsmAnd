@@ -11,7 +11,9 @@
 	Thx - Hardy
 
 -->
-    <string name="lost_data_warning">All unsaved data will be lost.</string>
+	<string name="trip_recording_show_start_dialog_setting">If disabled, recording will start right after tap on the widget or menu item, skipping the confirmation dialog.</string>
+	<string name="show_start_dialog">Show start dialog</string>
+	<string name="lost_data_warning">All unsaved data will be lost.</string>
     <string name="trip_recording_save_and_continue">Save and continue</string>
     <string name="trip_recording_logging_interval_info">Logging interval set time period in which OsmAnd will ask for the current location position data.</string>
     <string name="select_another_colorization">Please select another type of colorization.</string>
@@ -1177,7 +1179,7 @@
     <string name="search_no_results_feedback">No search results?\nProvide feedback</string>
     <!-- string name="release_3_2_pre">
     • Fixed crash on startup that occurred on some devices\n\n
-    • New Markers feature: Display already traversed markers\n\n 
+    • New Markers feature: Display already traversed markers\n\n
     • Search history now shows previously searched categories\n\n
     • Fixed crash on startup that occurred with non-latin maps\n\n
     • Improved rendering speed issues on Android 8.0 devices\n\n

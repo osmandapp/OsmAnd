@@ -81,6 +81,8 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 
 	@Override
 	protected void setupPreferences() {
+		setupShowStartDialog();
+
 		setupSaveTrackToGpxPref();
 		setupSaveTrackIntervalPref();
 
@@ -101,6 +103,11 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 
 		setupCopyProfileSettingsPref();
 		setupResetToDefaultPref();
+	}
+
+	private void setupShowStartDialog() {
+		SwitchPreferenceEx showStartDialog = (SwitchPreferenceEx) findPreference(settings.SHOW_TRIP_REC_START_DIALOG.getId());
+		showStartDialog.setDescription(getString(R.string.trip_recording_show_start_dialog_setting));
 	}
 
 	private void setupSaveTrackToGpxPref() {
