@@ -62,8 +62,8 @@ import net.osmand.plus.mapmarkers.MarkersPlanRouteContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.StartPlanRouteBottomSheet;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
-import net.osmand.plus.monitoring.TripRecordingActiveBottomSheet;
 import net.osmand.plus.monitoring.TripRecordingBottomSheet;
+import net.osmand.plus.monitoring.TripRecordingStartingBottomSheet;
 import net.osmand.plus.osmedit.dialogs.DismissRouteBottomSheetFragment;
 import net.osmand.plus.profiles.ProfileDataObject;
 import net.osmand.plus.profiles.ProfileDataUtils;
@@ -854,9 +854,9 @@ public class MapActivityActions implements DialogProvider {
 							app.logEvent("trip_recording_open");
 							MapActivity.clearPrevActivityIntent();
 							if (monitoringPlugin.hasDataToSave() || monitoringPlugin.wasTrackMonitored()) {
-								TripRecordingActiveBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), monitoringPlugin.getCurrentTrack());
-							} else {
 								TripRecordingBottomSheet.showInstance(mapActivity.getSupportFragmentManager());
+							} else {
+								TripRecordingStartingBottomSheet.showTripRecordingDialog(mapActivity.getSupportFragmentManager(), app);
 							}
 							return true;
 						}
@@ -926,22 +926,6 @@ public class MapActivityActions implements DialogProvider {
 						return true;
 					}
 				}).createItem());
-
-		if (Version.isGooglePlayEnabled() || Version.isHuawei() || Version.isDeveloperVersion(app)) {
-			optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.osm_live, mapActivity)
-					.setId(DRAWER_OSMAND_LIVE_ID)
-					.setIcon(R.drawable.ic_action_osm_live)
-					.setListener(new ItemClickListener() {
-						@Override
-						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
-							app.logEvent("drawer_osm_live_open");
-							Intent intent = new Intent(mapActivity, OsmLiveActivity.class);
-							intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-							mapActivity.startActivity(intent);
-							return true;
-						}
-					}).createItem());
-		}
 
 		optionsMenuHelper.addItem(new ItemBuilder().setTitle(getString(R.string.shared_string_travel_guides) + " (Beta)")
 				.setId(DRAWER_TRAVEL_GUIDES_ID)
@@ -1045,6 +1029,22 @@ public class MapActivityActions implements DialogProvider {
 					}
 				}).createItem());
 		*/
+
+		if (Version.isGooglePlayEnabled() || Version.isHuawei() || Version.isDeveloperVersion(app)) {
+			optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.purchases, mapActivity)
+					.setId(DRAWER_OSMAND_LIVE_ID)
+					.setIcon(R.drawable.ic_action_purchases)
+					.setListener(new ItemClickListener() {
+						@Override
+						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
+							app.logEvent("drawer_osm_live_open");
+							Intent intent = new Intent(mapActivity, OsmLiveActivity.class);
+							intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+							mapActivity.startActivity(intent);
+							return true;
+						}
+					}).createItem());
+		}
 
 		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.shared_string_help, mapActivity)
 				.setId(DRAWER_HELP_ID)

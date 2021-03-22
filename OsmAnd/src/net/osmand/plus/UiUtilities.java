@@ -10,8 +10,6 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.RippleDrawable;
-import android.hardware.Sensor;
-import android.hardware.SensorManager;
 import android.os.Build;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -66,12 +64,12 @@ public class UiUtilities {
 
 	private static final Log LOG = PlatformUtil.getLog(UiUtilities.class);
 
-	private TLongObjectHashMap<Drawable> drawableCache = new TLongObjectHashMap<>();
-	private OsmandApplication app;
 	private static final int ORIENTATION_0 = 0;
 	private static final int ORIENTATION_90 = 3;
 	private static final int ORIENTATION_270 = 1;
 	private static final int ORIENTATION_180 = 2;
+	private final TLongObjectHashMap<Drawable> drawableCache = new TLongObjectHashMap<>();
+	private final OsmandApplication app;
 	private static final int INVALID_ID = -1;
 
 	public enum DialogButtonType {
@@ -252,9 +250,15 @@ public class UiUtilities {
 		return a << ALPHA_CHANNEL | r << RED_CHANNEL | g << GREEN_CHANNEL | b << BLUE_CHANNEL;
 	}
 
-	public UpdateLocationViewCache getUpdateLocationViewCache(){
+	public UpdateLocationViewCache getUpdateLocationViewCache() {
+		return getUpdateLocationViewCache(true);
+	}
+
+	public UpdateLocationViewCache getUpdateLocationViewCache(boolean useScreenOrientation) {
 		UpdateLocationViewCache uvc = new UpdateLocationViewCache();
-		uvc.screenOrientation = getScreenOrientation();
+		if (useScreenOrientation) {
+			uvc.screenOrientation = getScreenOrientation();
+		}
 		return uvc;
 	}
 
@@ -377,7 +381,7 @@ public class UiUtilities {
 		}
 		return screenOrientation;
 	}
-	
+
 	public static void setupSnackbar(Snackbar snackbar, boolean nightMode) {
 		setupSnackbar(snackbar, nightMode, null, null, null, null);
 	}

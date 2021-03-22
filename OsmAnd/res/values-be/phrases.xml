@@ -3832,7 +3832,7 @@
     <string name="poi_embassy_filter">Амбасада</string>
     <string name="poi_embassy_high_commission">Вярхоўны камісарыят</string>
     <string name="poi_embassy_delegation">Дэлегацыя</string>
-    <string name="poi_embassy_branch_embassy">Аддзяленне</string>
+    <string name="poi_embassy_branch_embassy">Філіял</string>
     <string name="poi_embassy_yes">На чале з амбасадарам</string>
     <string name="poi_diplomatic_liaison">Сувязь</string>
     <string name="poi_diplomatic_embassy">Амбасада</string>
@@ -3841,4 +3841,22 @@
     <string name="poi_parking_sheds">Навесы</string>
     <string name="poi_parking_rooftop">Дах</string>
     <string name="poi_gpx_point">Пункт GPX</string>
+    <string name="poi_diplomatic_services_citizen_services_no">Не</string>
+    <string name="poi_diplomatic_services_citizen_services_yes">Так</string>
+    <string name="poi_diplomatic_services_immigrant_visas_no">Не</string>
+    <string name="poi_diplomatic_services_immigrant_visas_yes">Так</string>
+    <string name="poi_diplomatic_services_non_immigrant_visas_no">Не</string>
+    <string name="poi_diplomatic_services_non_immigrant_visas_yes">Так</string>
+    <string name="poi_liaison_subnational">Субнацыянальны</string>
+    <string name="poi_liaison_representative_office">Прадстаўніцтва</string>
+    <string name="poi_liaison_liaison_office">Офіс</string>
+    <string name="poi_consulate_honorary_consul">Ганаровы консул</string>
+    <string name="poi_consulate_consulate_general">Генеральнае консульства</string>
+    <string name="poi_consulate_consular_office">Консульскі офіс</string>
+    <string name="poi_consulate_consular_agency">Консульскае агенцтва</string>
+    <string name="poi_consulate_yes">На чале з консулам</string>
+    <string name="poi_embassy_residence">Рэзідэнцыя</string>
+    <string name="poi_embassy_nunciature">Нунцыятура</string>
+    <string name="poi_embassy_mission">Місія</string>
+    <string name="poi_embassy_interests_section">Аддзел інтарэсаў</string>
 </resources>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:layout_marginStart="@dimen/content_padding"
+	android:layout_marginLeft="@dimen/content_padding"
+	android:layout_marginEnd="@dimen/content_padding"
+	android:layout_marginRight="@dimen/content_padding"
+	android:baselineAligned="false"
+	android:minHeight="@dimen/setting_list_item_large_height"
+	android:orientation="horizontal">
+
+	<include
+		android:id="@+id/button_left"
+		layout="@layout/preference_button_with_icon"
+		android:layout_width="wrap_content"
+		android:layout_height="match_parent"
+		android:layout_weight="1"
+		android:minWidth="@dimen/context_menu_top_right_button_min_width"
+		android:minHeight="@dimen/setting_list_item_large_height" />
+
+	<include
+		android:id="@+id/button_center_left"
+		layout="@layout/preference_button_with_icon"
+		android:layout_width="wrap_content"
+		android:layout_height="match_parent"
+		android:layout_weight="1"
+		android:layout_marginStart="@dimen/content_padding_half"
+		android:layout_marginLeft="@dimen/content_padding_half"
+		android:minWidth="@dimen/context_menu_top_right_button_min_width"
+		android:minHeight="@dimen/setting_list_item_large_height" />
+
+	<include
+		android:id="@+id/button_center_right"
+		layout="@layout/preference_button_with_icon"
+		android:layout_width="wrap_content"
+		android:layout_height="match_parent"
+		android:layout_marginStart="@dimen/content_padding_half"
+		android:layout_weight="1"
+		android:layout_marginLeft="@dimen/content_padding_half"
+		android:minWidth="@dimen/context_menu_top_right_button_min_width"
+		android:minHeight="@dimen/setting_list_item_large_height" />
+
+	<include
+		android:id="@+id/button_right"
+		android:layout_weight="1"
+		layout="@layout/preference_button_with_icon"
+		android:layout_width="wrap_content"
+		android:layout_height="match_parent"
+		android:layout_marginStart="@dimen/content_padding_half"
+		android:layout_marginLeft="@dimen/content_padding_half"
+		android:minWidth="@dimen/context_menu_top_right_button_min_width"
+		android:minHeight="@dimen/setting_list_item_large_height" />
+
+</LinearLayout>

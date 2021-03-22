@@ -395,7 +395,7 @@
     <string name="poi_fuel_91ul">91UL polttoaine</string>
     <string name="poi_fuel_100ll">100LL polttoaine</string>
     <string name="poi_fuel_jeta1">Jet A-1 polttoaine</string>
-    <string name="poi_fuel_adblue">AdBlue polttoaine</string>
+    <string name="poi_fuel_adblue">Diesel-pakokaasuneste</string>
     <string name="poi_fuel_wood">Polttoaine: puu</string>
     <string name="poi_fuel_charcoal">Polttoaine: puuhiili</string>
     <string name="poi_fuel_coal">Polttoaine: hiili</string>
@@ -1233,7 +1233,7 @@
     <string name="poi_service_repair_no">Ei korjaamoa</string>
     <string name="poi_service_electrical">Sähköajoneuvojen korjaamo</string>
     <string name="poi_motorcycle_repair">Moottoripyöräkorjaamo</string>
-    <string name="poi_self_service_no">Ei itsepalvelua</string>
+    <string name="poi_self_service_no">Ei</string>
     <string name="poi_automated_no">Ei automaattinen</string>
     <string name="poi_full_service_yes">Täysi palvelu</string>
     <string name="poi_brushless_no">Ei harjatonta pesua</string>
@@ -1253,7 +1253,7 @@
     <string name="poi_diaper_yes">Vauvan vaihtopöytä</string>
     <string name="poi_diaper_no">Ei vauvan vaihtopöytää</string>
     <string name="poi_diaper_room">Vaipanvaihtohuone</string>
-    <string name="poi_car_wash_no">Ei autopesua</string>
+    <string name="poi_car_wash_no">Ei</string>
     <string name="poi_maxstay">Maksimipysäköintiaika</string>
     <string name="poi_vending_parking_tickets">Pysäköintilippuja</string>
     <string name="poi_vending_cigarettes">Savukkeita</string>
@@ -1522,4 +1522,11 @@
     <string name="poi_guest_house">Vieras talo</string>
     <string name="poi_lodging">Majapaikka</string>
     <string name="poi_attraction_roller_coaster">Vuoristorata</string>
+    <string name="poi_herbalist">Yrttikauppa</string>
+    <string name="poi_consulate_filter">Konsulaatti</string>
+    <string name="poi_traffic_signals_arrow">Nuoli</string>
+    <string name="poi_traffic_signals_vibration">Tärinä</string>
+    <string name="poi_fire_hydrant_pressure_filter">Paine</string>
+    <string name="poi_bicycle_parking_building">Erityinen rakennus</string>
+    <string name="poi_trade_building_supplies">Rakennustarvikkeet</string>
 </resources>

@@ -12,9 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
-import androidx.annotation.ColorRes;
 import androidx.appcompat.widget.SwitchCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -107,7 +105,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		private final Class<? extends LocalRoutingParameter>[] excludeParameters;
 
 		@SafeVarargs
-		DialogMode(Class<? extends LocalRoutingParameter> ... excludeParameters) {
+		DialogMode(Class<? extends LocalRoutingParameter>... excludeParameters) {
 			this.excludeParameters = excludeParameters;
 		}
 
@@ -556,7 +554,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 						Bundle args = new Bundle();
 						args.putString(DIALOG_MODE_KEY, dialogMode.name());
 						BaseSettingsFragment.showInstance(mapActivity,
-								SettingsScreenType.NAVIGATION, applicationMode, args);
+								SettingsScreenType.NAVIGATION, applicationMode, args, null);
 					}
 				})
 				.create();
@@ -695,9 +693,9 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	public static void showInstance(MapActivity mapActivity,
-	                                Fragment targetFragment,
-	                                DialogMode dialogMode,
-	                                String appModeKey) {
+									Fragment targetFragment,
+									DialogMode dialogMode,
+									String appModeKey) {
 		try {
 			FragmentManager fm = mapActivity.getSupportFragmentManager();
 			if (!fm.isStateSaved()) {

@@ -139,7 +139,6 @@
     <string name="routing_attr_driving_style_name">Стиль езды</string>
     <string name="routing_attr_relief_smoothness_factor_name">Колебания высоты ландшафта</string>
     <string name="routing_attr_height_obstacles_name">Использовать данные о высотах</string>
-
     <string name="quick_action_duplicates">Действие переименовано в %1$s, чтобы избежать дублирования.</string>
     <string name="quick_action_duplicate">Обнаружен дубликат имени</string>
     <string name="quick_action_showhide_favorites_descr">Переключатель, чтобы показать или скрыть избранные точки на карте.</string>
@@ -3438,7 +3437,7 @@
     <string name="restore_all_profile_settings">Восстановить все настройки профиля\?</string>
     <string name="saving_new_profile">Сохранение нового профиля</string>
     <string name="profile_backup_failed">Не удалось создать резервную копию профиля.</string>
-    <string name="clear_recorded_data_warning">Очистить записанные данные\?</string>
+    <string name="clear_recorded_data_warning">Вы уверены, что хотите очистить записанные данные\?</string>
     <string name="monitoring_min_speed_descr_side_effect">Побочный эффект: в треке будут отсутствовать все участки, где не соблюдён критерий минимальной скорости (например где вы толкаете велосипед вверх по крутому склону). Также не будет информации о периодах покоя, например во время отдыха. Это влияет на любой анализ или последующую обработку, например при попытке определить общую продолжительность поездки, время в движении или среднюю скорость.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Побочный эффект: в результате фильтрации по точности, точки могут быть полностью пропущены, например, под мостами, под деревьями, между высокими зданиями или при определённых погодных условиях.</string>
     <string name="monitoring_min_accuracy_descr_remark">Примечание: при включении GPS непосредственно перед записью точность определения первой точки может быть снижена, поэтому мы рассматриваем добавление секундной задержки перед записью точки (либо записи лучшей из трёх последовательных точек и т. д.), но пока это не реализовано.</string>
@@ -3725,7 +3724,7 @@
     <string name="route_between_points_warning_desc">Далее необходимо выбрать профиль навигации для определения порогового расстояния и привязки маршрута к ближайшей разрешённой дороге.</string>
     <string name="route_between_points_desc">Выберите, как соединять точки: прямой линией или строить маршрут по заданному профилю.</string>
     <string name="in_case_of_reverse_direction">При обратном направлении</string>
-    <string name="plan_route_exit_dialog_descr">Все изменения будут утеряны.</string>
+    <string name="plan_route_exit_dialog_descr">Вы уверены, что хотите отменить все изменения в запланированном маршруте\?</string>
     <string name="street_level_imagery">Уличная фотосъёмка</string>
     <string name="shared_string_save_as_gpx">Сохранить как новый файл трека</string>
     <string name="add_segment_to_the_track">Добавить в файл трека</string>
@@ -3903,7 +3902,7 @@
 \n
 \n• Добавлен OAuth метод аутентификации для OpenStreetMap, улучшен интерфейс диалоговых OSM.
 \n
-\n • Поддержка пользовательских цветов для избранного и путевых точек трека.
+\n• Поддержка пользовательских цветов для избранных и путевых точек.
 \n
 \n</string>
     <string name="copy_address">Скопировать адрес</string>
@@ -3999,4 +3998,49 @@
 \n
 \nВы можете узнать больше на: http://openplacereviews.org</string>
     <string name="activity_type_racing_name">Гонки</string>
+    <string name="app_restart_required">Для применения некоторых настроек необходимо перезапустить приложение.</string>
+    <string name="map_widget_distance_by_tap">Расстояние по нажатию</string>
+    <string name="latest_openstreetmap_update">Последнее доступное обновление OpenStreetMap:</string>
+    <string name="updated">Обновлено: %s</string>
+    <string name="last_time_checked">Последний раз проверено: %s</string>
+    <string name="update_frequency">Частота обновления</string>
+    <string name="live_update_frequency_week_variant">Обновления карт будут проверяться каждую неделю. В следующий раз %1$s в %2$s.</string>
+    <string name="live_update_frequency_day_variant">Обновления карт будут проверяться каждый день. Следующий раз %1$s в %2$s.</string>
+    <string name="live_update_frequency_hour_variant">Обновления карт будут проверяться каждый час. Следующий раз %1$s в %2$s.</string>
+    <string name="delete_updates">Удалить обновления</string>
+    <string name="live_update_delete_updates_msg">Вы уверены, что хотите удалить все live обновления для %s\?</string>
+    <string name="purchases">Покупки</string>
+    <string name="quick_action_show_hide_title">Показать/скрыть</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_name">Природные границы</string>
+    <string name="track_has_no_altitude">Трек не содержит данных о высоте.</string>
+    <string name="track_has_no_speed">Трек не содержит данных о скорости.</string>
+    <string name="select_another_colorization">Выберите другой тип окраски.</string>
+    <string name="snap_to_road_descr">Значок текущего местоположения будет привязан к маршруту навигации</string>
+    <string name="track_recording_will_be_continued">Запись будет продолжена.</string>
+    <string name="select_segments">Выберите сегменты</string>
+    <string name="select_segments_description">%1$s содержит более одного сегмента, необходимо выбрать нужную часть для навигации.</string>
+    <string name="segments_count">Сегмент %1$d</string>
+    <string name="temporary_conditional_routing_descr">Использовать дорожные ограничения, которые сейчас активны на карте</string>
+    <string name="routing_attr_short_way_description">Оптимизированный более короткий маршрут (экономия топлива/энергии)</string>
+    <string name="map_orientation_threshold_descr">Не менять ориентацию карты, если скорость меньше порогового значения</string>
+    <string name="restart">Перезапустить</string>
+    <string name="shared_strings_all_regions">Все регионы</string>
+    <string name="track_recording_stop_without_saving">Остановить без сохранения</string>
+    <string name="track_recording_save_and_stop">Сохранить и остановить запись</string>
+    <string name="track_recording_title">Запись трека остановлена</string>
+    <string name="track_recording_description">Вы уверены, что хотите остановить запись\?
+\nВсе несохраненные данные будут потеряны.</string>
+    <string name="on_pause">На паузе</string>
+    <string name="routing_attr_height_obstacles_description">Позволяет избегать больших подъемов при навигации.</string>
+    <string name="quick_action_coordinates_widget_descr">Переключатель для отображения или скрытия виджета координат.</string>
+    <string name="select_category_descr">Выберите категорию или добавьте новую</string>
+    <string name="copy_poi_name">Копировать имя POI</string>
+    <string name="shared_string_interval">Интервал</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Скрыть природный заповедник, особо охраняемые природные территории и границы национального парка</string>
+    <string name="gpx_upload_trackable_visibility_descr">«Отслеживаемый» означает, что трек не будет виден в любых общедоступных списках, но обработанные точки c отметками времени из него будут доступны через public GPS API (при этом трек не будет ассоциирован с вами). Другие пользователи смогут лишь загружать обработанные точки из вашего трека.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">«Идентифицируемый» означает, что трек будет виден всем в разделе треки пользователя, загрузившего трек и в общем списке треков, доступном на странице GPS-треки. Другие пользователи смогут загрузить данные трека и в свойствах трека будет указано имя пользователя, загрузившего трек. Отметки времени точек трека доступны через public GPS API будут ссылаться на страницу с вашим оригинальным треком.</string>
+    <string name="gpx_upload_public_visibility_descr">«Общедоступный» означает, что трек будет виден всем в разделе треки пользователя, загрузившего трек и в общем списке треков, доступном на странице GPS-треки. Отметки времени точек трека не доступны через public GPS API. Однако, другие пользователи по-прежнему могут загрузить файл трека из общего списка треков и данные трека будут иметь все отметки времени.</string>
+    <string name="gpx_upload_private_visibility_descr">«Частный» означает, что трек не будет виден в любых общедоступных списках, но точки из него будут доступны через public GPS API без отметок времени.</string>
+    <string name="routing_attr_driving_style_description">Выберите цель, чтобы проложить к ней короткий, быстрый или безопасный маршрут</string>
+    <string name="delete_number_files_question">Удалить %1$d файлов\?</string>
 </resources>

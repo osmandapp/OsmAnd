@@ -2157,7 +2157,6 @@
     <string name="rendering_attr_depthContours_description">顯示等深線和標記。</string>
     <string name="rendering_attr_depthContours_name">航海等深線</string>
     <string name="routing_attr_height_obstacles_name">使用海拔資料</string>
-
     <string name="route_altitude">路線的海拔</string>
     <string name="altitude_descent">下坡</string>
     <string name="altitude_ascent">上坡</string>
@@ -3977,4 +3976,66 @@
     <string name="uploaded_count">已上傳 %1$d，共 %2$d</string>
     <string name="toast_select_edits_for_upload">選取要上傳的檔案</string>
     <string name="hillshade_slope_contour_lines">地形陰影／斜坡／等高線</string>
+    <string name="select_segments">選取線段</string>
+    <string name="select_segments_description">%1$s 包含了多於一段，您必須為導航選取必要的部份。</string>
+    <string name="segments_count">線段 %1$d</string>
+    <string name="open_place_reviews_plugin_description">OpenPlaceReviews 是一個社群驅動的專案，其蒐集關於餐廳、飯店、博物館、航點等公共場所的資訊。其蒐集的資訊包含了照片、評論、其他系統的連結（如 OpenStreetMap、維基百科）。
+\n
+\n所有 OpenPlaceReview 資料都是開放的，並提供給所有人：http://openplacereviews.org/data
+\n
+\n您可以在此取得更多資訊：http://openplacereviews.org</string>
+    <string name="open_place_reviews">OpenPlaceReviews</string>
+    <string name="opr_use_dev_url">使用 test.openplacereviews.org</string>
+    <string name="login_open_place_reviews">登入至 OpenPlaceReviews</string>
+    <string name="activity_type_water_name">水</string>
+    <string name="activity_type_winter_name">冬天</string>
+    <string name="activity_type_snowmobile_name">雪地摩托車</string>
+    <string name="activity_type_riding_name">騎乘</string>
+    <string name="activity_type_racing_name">競速</string>
+    <string name="activity_type_mountainbike_name">山地腳踏車</string>
+    <string name="activity_type_cycling_name">腳踏車</string>
+    <string name="activity_type_hiking_name">健行</string>
+    <string name="activity_type_running_name">跑步</string>
+    <string name="activity_type_walking_name">步行</string>
+    <string name="activity_type_offroad_name">越野</string>
+    <string name="activity_type_motorbike_name">摩托車</string>
+    <string name="activity_type_car_name">汽車</string>
+    <string name="temporary_conditional_routing_descr">使用道路限制目前在地圖上已啟用</string>
+    <string name="routing_attr_short_way_description">最佳化的較短路線（節能）</string>
+    <string name="routing_attr_driving_style_description">選取駕駛目的來取得較短、較快或較安全的路線</string>
+    <string name="snap_to_road_descr">目前位置圖示將會貼齊到目前導航的路線</string>
+    <string name="map_orientation_threshold_descr">如果速度低於閾值時，不要旋轉地圖</string>
+    <string name="restart">重新啟動</string>
+    <string name="shared_strings_all_regions">所有區域</string>
+    <string name="delete_number_files_question">刪除 %1$d 檔案？</string>
+    <string name="track_recording_stop_without_saving">停止而不儲存</string>
+    <string name="track_recording_save_and_stop">儲存並停止錄製</string>
+    <string name="track_recording_title">軌跡錄製已停止</string>
+    <string name="track_recording_description">您確定您想要停止錄製嗎？
+\n所有未儲存的資料都將會遺失。</string>
+    <string name="on_pause">暫停</string>
+    <string name="app_restart_required">需要重新啟動應用程式才能套用某些設定。</string>
+    <string name="routing_attr_height_obstacles_description">路線安排可以避免上坡。</string>
+    <string name="quick_action_coordinates_widget_descr">在地圖上顯示或隱藏「座標」小工具的開關。</string>
+    <string name="map_widget_distance_by_tap">點擊距離</string>
+    <string name="latest_openstreetmap_update">可用的最新 OpenStreetMap 更新：</string>
+    <string name="updated">已更新：%s</string>
+    <string name="last_time_checked">上次檢查時間：%s</string>
+    <string name="update_frequency">更新頻率</string>
+    <string name="live_update_frequency_week_variant">地圖更新將每週檢查一次。下次 %1$s 於 %2$s。</string>
+    <string name="live_update_frequency_day_variant">地圖更新將每天檢查一次。下次 %1$s 於 %2$s。</string>
+    <string name="live_update_frequency_hour_variant">地圖更新將每小時檢查一次。下次 %1$s 於 %2$s。</string>
+    <string name="delete_updates">刪除更新</string>
+    <string name="live_update_delete_updates_msg">您確定您要刪除所有 %s 即時更新嗎？</string>
+    <string name="purchases">購買</string>
+    <string name="select_category_descr">選取分類或加入新的</string>
+    <string name="track_recording_will_be_continued">錄製將繼續。</string>
+    <string name="copy_poi_name">複製 POI 名稱</string>
+    <string name="quick_action_show_hide_title">顯示／隱藏</string>
+    <string name="shared_string_interval">間隔</string>
+    <string name="track_has_no_altitude">軌跡不包含海拔資料。</string>
+    <string name="track_has_no_speed">軌跡不包含速度資料。</string>
+    <string name="select_another_colorization">請選擇另一種顏色。</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">隱藏自然保留區、保護區與國家公園界線</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_name">自然界線</string>
 </resources>

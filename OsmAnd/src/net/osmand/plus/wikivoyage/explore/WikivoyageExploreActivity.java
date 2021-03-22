@@ -373,7 +373,13 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 
 	@Override
 	public void savedArticlesUpdated() {
-		updateFragments();
+		ExploreTabFragment exploreTabFragment = getExploreTabFragment();
+		SavedArticlesTabFragment savedArticlesTabFragment = getSavedArticlesTabFragment();
+		if (exploreTabFragment != null && savedArticlesTabFragment != null
+				&& exploreTabFragment.isAdded() && savedArticlesTabFragment.isAdded()) {
+			exploreTabFragment.savedArticlesUpdated();
+			savedArticlesTabFragment.savedArticlesUpdated();
+		}
 	}
 
 	public static class LoadWikivoyageData extends AsyncTask<Void, Void, Void> {

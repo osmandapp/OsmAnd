@@ -69,7 +69,7 @@
     <string name="mile">mi</string>
     <string name="km">km</string>
     <string name="m">m</string>
-    <string name="nm">nmi</string>
+    <string name="nm">M</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
@@ -249,7 +249,7 @@
     <string name="shared_string_authorization">Autoriseerimine</string>
     <string name="shared_string_authorization_descr">Palun sisesta oma Telegrami telefoninumber rahvusvahelises formaadis</string>
     <string name="shared_string_welcome">Tere tulemast</string>
-    <string name="nm_h">nmi/h</string>
+    <string name="nm_h">sõlme</string>
     <string name="si_nm_h">Meremiili tunnis (sõlm)</string>
     <string name="shared_string_hour_short">h</string>
     <string name="shared_string_minute_short">min</string>

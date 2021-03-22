@@ -11,6 +11,10 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Environment;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.util.Pair;
+
 import net.osmand.FileUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -50,6 +54,7 @@ import net.osmand.plus.rastermaps.LayerTransparencySeekbarMode;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.srtmplugin.TerrainMode;
+import net.osmand.plus.track.GradientScaleType;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.wikipedia.WikiArticleShowImages;
@@ -75,10 +80,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.util.Pair;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONFIGURE_MAP_ITEM_ID_SCHEME;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
@@ -1118,7 +1119,13 @@ public class OsmandSettings {
 	public final OsmandPreference<String> PREFERRED_LOCALE = new StringPreference(this, "preferred_locale", "").makeGlobal().makeShared();
 
 	public final OsmandPreference<String> MAP_PREFERRED_LOCALE = new StringPreference(this, "map_preferred_locale", "").makeGlobal().makeShared().cache();
-	public final OsmandPreference<Boolean> MAP_TRANSLITERATE_NAMES = new BooleanPreference(this, "map_transliterate_names", false).makeGlobal().makeShared().cache();
+	public final OsmandPreference<Boolean> MAP_TRANSLITERATE_NAMES = new BooleanPreference(this, "map_transliterate_names", false) {
+
+		protected Boolean getDefaultValue() {
+			return usingEnglishNames();
+		}
+
+	}.makeGlobal().makeShared().cache();
 
 	public boolean usingEnglishNames() {
 		return MAP_PREFERRED_LOCALE.get().equals("en");
@@ -1269,6 +1276,7 @@ public class OsmandSettings {
 	public final CommonPreference<Integer> SAVE_GLOBAL_TRACK_INTERVAL = new IntPreference(this, "save_global_track_interval", 5000).makeProfile().cache();
 	public final CommonPreference<Boolean> SAVE_GLOBAL_TRACK_REMEMBER = new BooleanPreference(this, "save_global_track_remember", false).makeProfile().cache();
 	public final CommonPreference<Boolean> SHOW_SAVED_TRACK_REMEMBER = new BooleanPreference(this, "show_saved_track_remember", true).makeGlobal().makeShared();
+	public final CommonPreference<Boolean> SHOW_TRIP_REC_START_DIALOG = new BooleanPreference(this, "show_trip_recording_start_dialog", true).makeGlobal().makeShared();
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Boolean> SAVE_TRACK_TO_GPX = new BooleanPreference(this, "save_track_to_gpx", false).makeProfile().cache();
 
@@ -1408,6 +1416,10 @@ public class OsmandSettings {
 	public final OsmandPreference<Long> LAST_UPDATES_CARD_REFRESH = new LongPreference(this, "last_updates_card_refresh", 0).makeGlobal();
 
 	public final CommonPreference<Integer> CURRENT_TRACK_COLOR = new IntPreference(this, "current_track_color", 0).makeGlobal().makeShared().cache();
+	public final CommonPreference<GradientScaleType> CURRENT_TRACK_COLORIZATION = new EnumStringPreference<>(this, "current_track_colorization", null, GradientScaleType.values()).makeGlobal().makeShared().cache();
+	public final CommonPreference<String> CURRENT_TRACK_SPEED_GRADIENT_PALETTE = new StringPreference(this, "current_track_speed_gradient_palette", null).makeGlobal().makeShared().cache();
+	public final CommonPreference<String> CURRENT_TRACK_ALTITUDE_GRADIENT_PALETTE = new StringPreference(this, "current_track_altitude_gradient_palette", null).makeGlobal().makeShared().cache();
+	public final CommonPreference<String> CURRENT_TRACK_SLOPE_GRADIENT_PALETTE = new StringPreference(this, "current_track_slope_gradient_palette", null).makeGlobal().makeShared().cache();
 	public final CommonPreference<String> CURRENT_TRACK_WIDTH = new StringPreference(this, "current_track_width", "").makeGlobal().makeShared().cache();
 	public final CommonPreference<Boolean> CURRENT_TRACK_SHOW_ARROWS = new BooleanPreference(this, "current_track_show_arrows", false).makeGlobal().makeShared().cache();
 	public final CommonPreference<Boolean> CURRENT_TRACK_SHOW_START_FINISH = new BooleanPreference(this, "current_track_show_start_finish", true).makeGlobal().makeShared().cache();

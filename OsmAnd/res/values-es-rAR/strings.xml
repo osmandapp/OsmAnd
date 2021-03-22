@@ -2056,11 +2056,11 @@
     <string name="shared_string_record">Grabar</string>
     <string name="gpx_logging_no_data">Sin datos</string>
     <string name="trip_rec_notification_settings">Activar la grabación rápida</string>
-    <string name="trip_rec_notification_settings_desc">Muestra una notificación del sistema que permite iniciar la grabación del viaje.</string>
+    <string name="trip_rec_notification_settings_desc">Muestra una notificación del sistema que permite iniciar la grabación de viaje.</string>
     <string name="shared_string_notifications">Notificaciones</string>
     <string name="gpx_no_tracks_title">Sin archivos de trazas aún</string>
     <string name="gpx_no_tracks_title_folder">También puedes añadir archivos de trazas a la carpeta</string>
-    <string name="gpx_add_track">Añadir más…</string>
+    <string name="gpx_add_track">Añadir</string>
     <string name="shared_string_appearance">Aspecto</string>
     <string name="rendering_value_fine_name">Muy fino</string>
     <string name="route_calculation">Cálculo de la ruta</string>
@@ -2171,7 +2171,6 @@
     <string name="shared_string_time">Tiempo</string>
     <string name="total_distance">Distancia total</string>
     <string name="routing_attr_height_obstacles_name">Usar datos de elevación</string>
-
     <string name="routing_attr_driving_style_name">Estilo de conducción</string>
     <string name="select_gpx_folder">Marcar la carpeta del archivo GPX</string>
     <string name="file_can_not_be_moved">No se pudo mover el archivo.</string>
@@ -2305,11 +2304,11 @@
 \n • (Opcional) Muestra la velocidad y altitud
 \n • Activa la visualización de las curvas de nivel y el sombreado de colinas (mediante un complemento adicional)</string>
     <string name="osmand_plus_extended_description_part7">Contribuye directamente con OSM
-\n • Informa sobre problemas de datos en el mapa
-\n • Sube trazas GPX a OSM directamente desde la aplicación
-\n • Añade PDI y súbelos directamente a OSM (o más tarde, si no estás conectado)
-\n • (Opcional) Grabación del viaje en modo reposo (mientras el dispositivo está bloqueado)
-\n OsmAnd es un software de código abierto, activamente desarrollado. Cualquiera puede contribuir con la aplicación informando sobre errores, mejorando las traducciones o desarrollando nuevas funciones. Además, el proyecto también depende de contribuciones financieras para desarrollar y probar nuevas funcionalidades.
+\n• Informa sobre problemas de datos en el mapa
+\n• Sube trazas GPX a OSM directamente desde la aplicación
+\n• Añade PDI y súbelos directamente a OSM (o más tarde, si no estás conectado)
+\n• (Opcional) Grabación de viaje en modo reposo (mientras el dispositivo está bloqueado)
+\nOsmAnd es un software de código abierto, activamente desarrollado. Cualquiera puede contribuir con la aplicación informando sobre errores, mejorando las traducciones o desarrollando nuevas funciones. Además, el proyecto también depende de contribuciones financieras para desarrollar y probar nuevas funcionalidades.
 \n</string>
     <string name="osmand_plus_extended_description_part8">Cobertura y calidad aproximada del mapa:
 \n • Europa Occidental: ****
@@ -3323,7 +3322,7 @@
     <string name="multimedia_notes_prefs_descr">Tamaño de imagen, calidad de audio y video</string>
     <string name="osm_editing_prefs_descr">Inicio de sesión, contraseña, edición sin conexión</string>
     <string name="accessibility_prefs_descr">Elegir icono, color y nombre</string>
-    <string name="live_monitoring_descr">Permite compartir la ubicación actual utilizando la grabación del viaje.</string>
+    <string name="live_monitoring_descr">Permite compartir la ubicación actual utilizando la grabación de viaje.</string>
     <string name="live_monitoring">Seguimiento en línea</string>
     <string name="save_track_logging_accuracy">Precisión de registro</string>
     <string name="tracks_view_descr">Puedes encontrar todas tus trazas grabadas en «%1$s» o en la carpeta OsmAnd usando el administrador de archivos.</string>
@@ -3742,7 +3741,7 @@
     <string name="empty_state_my_tracks">Añadir archivos de traza</string>
     <string name="context_menu_item_add_waypoint">Añadir punto de referencia de la traza</string>
     <string name="quick_action_add_gpx">Añadir punto de referencia de la traza</string>
-    <string name="map_widget_monitoring">Grabación del viaje</string>
+    <string name="map_widget_monitoring">Grabación de viaje</string>
     <string name="marker_save_as_track">Guardar como archivo de traza</string>
     <string name="follow_track">Seguir traza</string>
     <string name="follow_track_descr">Elige el archivo de la traza a seguir</string>
@@ -3765,8 +3764,8 @@
     <string name="monitoring_control_start">Grabar</string>
     <string name="disable_recording_once_app_killed_descrp">La grabación de la traza se pausará al cerrar la aplicación (mediante aplicaciones recientes). (La indicación de fondo de OsmAnd, desaparecerá de la barra de notificaciones de Android.)</string>
     <string name="save_global_track_interval_descr">Intervalo de registro para la grabación general de trazas (activado desde el widget «Grabación de viaje» en el mapa).</string>
-    <string name="gpx_monitoring_stop">Pausar grabación del viaje</string>
-    <string name="gpx_monitoring_start">Reanudar grabación del viaje</string>
+    <string name="gpx_monitoring_stop">Pausar grabación de viaje</string>
+    <string name="gpx_monitoring_start">Reanudar grabación de viaje</string>
     <string name="system_default_theme">Predefinido del sistema</string>
     <string name="all_next_segments">Todos los segmentos posteriores</string>
     <string name="previous_segment">Segmento anterior</string>
@@ -3777,7 +3776,7 @@
     <string name="open_saved_track">Abrir traza guardada</string>
     <string name="shared_string_is_saved">está guardado</string>
     <string name="simplified_track_description">Sólo se guardará la línea de la ruta, los puntos de referencia serán borrados.</string>
-    <string name="number_of_gpx_files_selected_pattern">%s archivo(s) de trazas marcado(s)</string>
+    <string name="number_of_gpx_files_selected_pattern">Se muestran %s trazas</string>
     <string name="one_point_error">Añade al menos dos puntos.</string>
     <string name="shared_string_redo">Rehacer</string>
     <string name="release_3_8">• Se ha actualizado la función «Planificar ruta»: permite utilizar diferentes tipos de navegación por segmento y la inclusión de trazas
@@ -4007,4 +4006,45 @@
     <string name="activity_type_offroad_name">Todo terreno</string>
     <string name="activity_type_motorbike_name">Motocicleta</string>
     <string name="activity_type_car_name">Automóvil</string>
+    <string name="map_widget_distance_by_tap">Distancia al pulsar</string>
+    <string name="quick_action_show_hide_title">Mostrar/Ocultar</string>
+    <string name="select_segments">Elegir segmentos</string>
+    <string name="select_segments_description">«%1$s» contiene más de un segmento, debe marcar la parte necesaria para la navegación.</string>
+    <string name="segments_count">Segmento %1$d</string>
+    <string name="temporary_conditional_routing_descr">Usar las restricciones viales que están activas ahora en el mapa</string>
+    <string name="routing_attr_short_way_description">Ruta optimizada más corta (bajo consumo)</string>
+    <string name="routing_attr_driving_style_description">Elige el propósito de la conducción para obtener la ruta más corta, más rápida o más segura</string>
+    <string name="snap_to_road_descr">El icono de la ubicación actual se ajustará a la ruta de navegación actual</string>
+    <string name="map_orientation_threshold_descr">No girar la vista del mapa si la velocidad es inferior a un umbral</string>
+    <string name="restart">Reiniciar</string>
+    <string name="shared_strings_all_regions">Todas las regiones</string>
+    <string name="delete_number_files_question">¿Borrar %1$d archivos\?</string>
+    <string name="track_recording_stop_without_saving">Parar sin guardar</string>
+    <string name="track_recording_save_and_stop">Guardar y parar la grabación</string>
+    <string name="track_recording_title">Grabación de la traza detenida</string>
+    <string name="track_recording_description">¿Dejar de grabar\?
+\nTodos los datos no guardados se perderán.</string>
+    <string name="on_pause">En pausa</string>
+    <string name="app_restart_required">Es necesario reiniciar la aplicación para aplicar algunos ajustes.</string>
+    <string name="routing_attr_height_obstacles_description">La ruta podría evitar las fuertes subidas.</string>
+    <string name="quick_action_coordinates_widget_descr">Alternar para mostrar u ocultar el widget de coordenadas en el mapa.</string>
+    <string name="latest_openstreetmap_update">Última actualización de OpenStreetMap disponible:</string>
+    <string name="updated">Actualizado: %s</string>
+    <string name="last_time_checked">Última comprobación: %s</string>
+    <string name="update_frequency">Frecuencia de actualización</string>
+    <string name="live_update_frequency_week_variant">Las actualizaciones del mapa serán comprobadas cada semana. Próxima vez el %1$s a las %2$s hs.</string>
+    <string name="live_update_frequency_day_variant">Las actualizaciones del mapa serán comprobadas cada día. Próxima vez el %1$s a las %2$s hs.</string>
+    <string name="live_update_frequency_hour_variant">Las actualizaciones del mapa serán comprobadas cada hora. Próxima vez el %1$s a las %2$s hs.</string>
+    <string name="delete_updates">Borrar actualizaciones</string>
+    <string name="live_update_delete_updates_msg">¿Borrar todas las actualizaciones en vivo de «%s»\?</string>
+    <string name="purchases">Compras</string>
+    <string name="select_category_descr">Marca una categoría o añade una nueva</string>
+    <string name="track_recording_will_be_continued">La grabación continuará.</string>
+    <string name="copy_poi_name">Copiar nombre del PDI</string>
+    <string name="shared_string_interval">Intervalo</string>
+    <string name="track_has_no_altitude">La traza no contiene datos de altitud.</string>
+    <string name="track_has_no_speed">La traza no contiene datos de velocidad.</string>
+    <string name="select_another_colorization">Elige otro tipo de color.</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_name">Fronteras naturales</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Oculta fronteras de reservas naturales, áreas protegidas y parques nacionales</string>
 </resources>

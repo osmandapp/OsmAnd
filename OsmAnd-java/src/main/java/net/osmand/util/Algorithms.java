@@ -2,6 +2,7 @@ package net.osmand.util;
 
 import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
+import net.osmand.router.RouteColorize;
 import net.osmand.data.LatLon;
 
 import org.apache.commons.logging.Log;
@@ -1060,5 +1061,31 @@ public class Algorithms {
 			return counter == 0;
 		}
 		return false;
+	}
+
+	public static int[] stringToGradientPalette(String str) {
+		if (Algorithms.isBlank(str)) {
+			return RouteColorize.colors;
+		}
+		String[] arr = str.split(" ");
+		if (arr.length != 3) {
+			return RouteColorize.colors;
+		}
+		int[] colors = new int[3];
+		try {
+			for (int i = 0; i < 3; i++) {
+				colors[i] = Algorithms.parseColor(arr[i]);
+			}
+		} catch (IllegalArgumentException e) {
+			return RouteColorize.colors;
+		}
+		return colors;
+	}
+
+	public static String gradientPaletteToString(int[] colors) {
+		int[] src = (colors != null && colors.length == 3) ? colors : RouteColorize.colors;
+		return Algorithms.colorToString(src[0]) + " " +
+				Algorithms.colorToString(src[1]) + " " +
+				Algorithms.colorToString(src[2]);
 	}
 }

@@ -2154,7 +2154,6 @@
     <string name="rendering_attr_depthContours_description">Afficher les lignes et points de sonde.</string>
     <string name="rendering_attr_depthContours_name">Lignes de sonde maritimes</string>
     <string name="routing_attr_height_obstacles_name">Utiliser les données d\'altitude</string>
-
     <string name="average_altitude">Altitude moyenne</string>
     <string name="total_distance">Distance totale</string>
     <string name="shared_string_time">Durée</string>
@@ -3995,4 +3994,45 @@
 \n
 \nPour en savoir, consultez http://openplacereviews.org.</string>
     <string name="activity_type_racing_name">Course automobile</string>
+    <string name="temporary_conditional_routing_descr">Utilisez les limitations routières actuellement actives sur la carte</string>
+    <string name="track_recording_description">Êtes-vous certain de vouloir interrompre l\'enregistrement \?
+\nToutes les données non sauvegardées seront perdues.</string>
+    <string name="live_update_delete_updates_msg">Êtes-vous certain de vouloir supprimer %s mises à jour temps réel \?</string>
+    <string name="map_orientation_threshold_descr">Ne pas pivoter la carte si la vitesse est inférieure à un seuil</string>
+    <string name="on_pause">En pause</string>
+    <string name="app_restart_required">Un redémarrage de l\'application est nécessaire pour appliquer certains paramètres.</string>
+    <string name="routing_attr_height_obstacles_description">Le routage peut éviter de fortes montées.</string>
+    <string name="map_widget_distance_by_tap">Distance par appui</string>
+    <string name="latest_openstreetmap_update">Dernière mise à jour d\'OpenStreetMap disponible :</string>
+    <string name="updated">Mis à jour : %s</string>
+    <string name="last_time_checked">Dernière vérification : %s</string>
+    <string name="segments_count">Segment %1$d</string>
+    <string name="restart">Redémarrer</string>
+    <string name="shared_strings_all_regions">Toutes les régions</string>
+    <string name="delete_number_files_question">Supprimer %1$d fichiers \?</string>
+    <string name="track_recording_stop_without_saving">Arrêter sans enregistrer</string>
+    <string name="track_recording_save_and_stop">Enregistrer et arrêter l\'enregistrement</string>
+    <string name="track_recording_title">Enregistrement de la trace arrêté</string>
+    <string name="select_segments">Sélectionnez les segments</string>
+    <string name="update_frequency">Fréquence de mise à jour</string>
+    <string name="live_update_frequency_week_variant">Les cartes seront vérifiées chaque semaine. La prochaine vérification de mise à jour s\'effectuera à %1$s dans %2$s.</string>
+    <string name="live_update_frequency_day_variant">Les cartes seront vérifiées tous les jours. La prochaine vérification de mise à jour s\'effectuera à %1$s dans %2$s.</string>
+    <string name="live_update_frequency_hour_variant">Les cartes seront vérifiées toutes les heures. La prochaine vérification de mise à jour s\'effectuera à %1$s dans %2$s.</string>
+    <string name="delete_updates">Supprimer les mises à jour</string>
+    <string name="purchases">Achats</string>
+    <string name="select_category_descr">Sélectionnez la catégorie ou ajoutez-en une nouvelle</string>
+    <string name="track_recording_will_be_continued">L\'enregistrement se poursuivra.</string>
+    <string name="copy_poi_name">Copier le nom du PI</string>
+    <string name="quick_action_show_hide_title">Afficher / masquer</string>
+    <string name="shared_string_interval">Intervalle</string>
+    <string name="track_has_no_altitude">La trace ne contient aucune donnée d\'altitude.</string>
+    <string name="track_has_no_speed">La trace ne contient aucune donnée de vitesse.</string>
+    <string name="routing_attr_short_way_description">Itinéraire court optimisé (plus économe en énergie)</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Masquer les limites des réserves naturelles, des zones protégées et des parcs nationaux</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_name">Limites naturelles</string>
+    <string name="select_segments_description">%1$s contient plus d\'un segment, vous devez sélectionner le tronçon nécessaire à la navigation.</string>
+    <string name="routing_attr_driving_style_description">Sélectionnez le mode de conduite pour avoir l\'itinéraire le plus court, le plus rapide, ou le plus sûr</string>
+    <string name="quick_action_coordinates_widget_descr">Appuyer pour afficher ou cacher le widget Coordonnées sur la carte.</string>
+    <string name="snap_to_road_descr">L’icône de localisation va se déplacer sur le trajet en cours.</string>
+    <string name="select_another_colorization">Veuillez sélectionner un autre type de colorisation.</string>
 </resources>

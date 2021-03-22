@@ -6,6 +6,7 @@ import android.graphics.drawable.LayerDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,6 +32,9 @@ import net.osmand.plus.settings.fragments.OnPreferenceChanged;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
 import org.apache.commons.logging.Log;
+
+import static net.osmand.plus.liveupdates.LiveUpdatesSettingsDialogFragmentNew.getActivePrimaryColorId;
+import static net.osmand.plus.monitoring.TripRecordingBottomSheet.getSecondaryIconColorId;
 
 public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 
@@ -125,17 +129,25 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 	public static View getCustomButtonView(OsmandApplication app, ApplicationMode mode, boolean checked, boolean nightMode) {
 		View customView = UiUtilities.getInflater(app, nightMode).inflate(R.layout.bottom_sheet_item_preference_switch, null);
 		updateCustomButtonView(app, mode, customView, checked, nightMode);
-
 		return customView;
 	}
 
 	public static void updateCustomButtonView(OsmandApplication app, ApplicationMode mode, View customView, boolean checked, boolean nightMode) {
 		Context themedCtx = UiUtilities.getThemedContext(app, nightMode);
-		View buttonView = customView.findViewById(R.id.button_container);
+		LinearLayout buttonView = customView.findViewById(R.id.button_container);
 
-		int color = checked ? mode.getProfileColor(nightMode) : AndroidUtils.getColorFromAttr(themedCtx, R.attr.divider_color_basic);
-		int bgColor = UiUtilities.getColorWithAlpha(color, checked ? 0.1f : 0.5f);
-		int selectedColor = UiUtilities.getColorWithAlpha(color, checked ? 0.3f : 0.5f);
+		int bgColor;
+		int selectedColor;
+		if (mode != null) {
+			int color = checked ? mode.getProfileColor(nightMode) : AndroidUtils.getColorFromAttr(themedCtx, R.attr.divider_color_basic);
+			bgColor = UiUtilities.getColorWithAlpha(color, checked ? 0.1f : 0.5f);
+			selectedColor = UiUtilities.getColorWithAlpha(color, checked ? 0.3f : 0.5f);
+		} else {
+			bgColor = ContextCompat.getColor(app, checked
+					? getActivePrimaryColorId(nightMode) : getSecondaryIconColorId(nightMode));
+			selectedColor = UiUtilities.getColorWithAlpha(
+					ContextCompat.getColor(app, getActivePrimaryColorId(nightMode)), checked ? 0.3f : 0.5f);
+		}
 
 		int bgResId = R.drawable.rectangle_rounded_right;
 		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {

@@ -127,6 +127,9 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 			if (poiType.getOsmTag2() != null) {
 				entity.putTagNoLC(poiType.getOsmTag2(), poiType.getOsmValue2());
 			}
+			if (poiType.getEditOsmTag2() != null) {
+				entity.putTagNoLC(poiType.getEditOsmTag2(), poiType.getEditOsmValue2());
+			}
 		}
 		if (!Algorithms.isEmpty(mapObject.getName())) {
 			entity.putTagNoLC(OSMTagKey.NAME.getValue(), mapObject.getName());

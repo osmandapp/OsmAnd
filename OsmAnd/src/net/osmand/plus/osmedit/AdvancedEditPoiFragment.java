@@ -323,7 +323,9 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment
 				if (poiType.getOsmTag2() != null) {
 					stringSet.add(poiType.getOsmTag2());
 				}
-
+				if (poiType.getEditOsmTag2() != null) {
+					stringSet.add(poiType.getEditOsmTag2());
+				}
 			}
 			if (poiType.getEditOsmValue() != null) {
 				values.add(poiType.getEditOsmValue());

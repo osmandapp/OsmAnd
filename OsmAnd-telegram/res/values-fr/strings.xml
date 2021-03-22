@@ -213,7 +213,7 @@
     <string name="by_group">Par groupe</string>
     <string name="by_distance">Par distance</string>
     <string name="logout_from_osmand_telegram">Se déconnecter d\'OsmAnd Tracker \?</string>
-    <string name="logout_from_osmand_telegram_descr">Êtes-vous sûr·e de vouloir vous déconnecter d\'OsmAnd Tracker ; vous ne pourrez pas partager votre position ni vous la position des autres \?</string>
+    <string name="logout_from_osmand_telegram_descr">Êtes-vous certain de vouloir vous déconnecter d\'OsmAnd Tracker \? Vous ne pourrez pas partager votre position ni voir la position des autres.</string>
     <string name="live_now_description">Contacts et groupes partageant leur position avec vous.</string>
     <string name="share_location_as">Partager la position comme</string>
     <string name="add_device">Ajouter un périphérique</string>

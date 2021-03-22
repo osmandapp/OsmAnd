@@ -167,7 +167,7 @@
     <string name="use_fluorescent_overlays">Fluorescerende overlegg</string>
     <string name="use_fluorescent_overlays_descr">Bruk fluorescerende farger til å vise spor og ruter.</string>
     <string name="offline_edition">Frakoblet redigering</string>
-    <string name="offline_edition_descr">Bruk alltid frakoblet redigering.</string>
+    <string name="offline_edition_descr">Hvis redigering uten nett er aktivert, lagres endringer lokalt først og lastes opp på forespørsel, ellers vil endringer bli lastet opp umiddelbart.</string>
     <string name="free_version_message">Du kan laste ned eller oppdatere %1$s kart.</string>
     <string name="free_version_title">Gratisversjon</string>
     <string name="poi_context_menu_showdescription">Vis interessepunkt-beskrivelse.</string>
@@ -401,7 +401,7 @@
     <string name="search_offline_address">Offline-søk</string>
     <string name="search_online_address">Nettbasert søk</string>
     <string name="max_level_download_tile">Maks. nettbasert zoom</string>
-    <string name="max_level_download_tile_descr">Ikke bla gjennom nettbaserte kartfliser for zoomnivåer utover dette.</string>
+    <string name="max_level_download_tile_descr">Ikke bla gjennom nettbaserte kart for zoomnivåer utover dette.</string>
     <string name="route_general_information">Total distanse %1$s, reisetid %2$d t %3$d min.</string>
     <string name="router_service_descr">Nettbasert eller frakoblet navigeringstjeneste.</string>
     <string name="router_service">Navigeringstjeneste</string>
@@ -699,7 +699,7 @@
     <string name="save_global_track_interval">Generelt loggeintervall</string>
     <string name="int_hour">t</string>
     <string name="duration">Varighet</string>
-    <string name="distance">Avstand</string>
+    <string name="distance">Distanse</string>
     <string name="index_tours">Turer</string>
     <string name="shared_string_all">Alle</string>
     <string name="shared_string_more">Mer…</string>
@@ -796,7 +796,7 @@
     <string name="loading_cities">Laster byer…</string>
     <string name="invalid_locations">Ugyldige koordinater</string>
     <string name="go_back_to_osmand">Tilbake til kartet</string>
-    <string name="osb_comment_dialog_success">Kommentar er lagt til</string>
+    <string name="osb_comment_dialog_success">Kommentar lagt til</string>
     <string name="no_buildings_found">Ingen bygninger funnet.</string>
     <string name="loading_streets_buildings">Laster gater/bygninger…</string>
     <string name="fav_point_dublicate_message">Favorittnavn endret til \"%1$s\" for å unngå duplisering.</string>
@@ -924,7 +924,7 @@
     <string name="copying_osmand_files">Kopierer OsmAnd-datafiler…</string>
     <string name="route_descr_destination">Reisemål</string>
     <string name="gpx_file_name">GPX-filnavn</string>
-    <string name="osmand_distance_planning_plugin_name">Distansekalkulator &amp; planleggingsverktøy</string>
+    <string name="osmand_distance_planning_plugin_name">Distansekalkulator og planleggingsverktøy</string>
     <string name="layer_hillshade">Relieffskyggelag</string>
     <string name="download_hillshade_maps">Relieffskygger</string>
     <string name="local_indexes_cat_av">Audio/Video-data</string>
@@ -1339,7 +1339,7 @@
     <string name="osn_comment_dialog_title">Legg til kommentar</string>
     <string name="navigation_item_description">Navigeringsoppsett.</string>
     <string name="free_downloads_used_description">Viser hvor mange gratis nedlastinger som er igjen.</string>
-    <string name="route_distance">Avstand:</string>
+    <string name="route_distance">Distanse:</string>
     <string name="route_duration">Tid:</string>
     <string name="shared_string_sound">Lyd</string>
     <string name="available_maps">Tilgjengelige kart</string>
@@ -1492,7 +1492,7 @@
     <string name="wait_current_task_finished">Vent til gjeldende oppgave er ferdig</string>
     <string name="recording_delete_confirm">Slett dette elementet\?</string>
     <string name="osmand_parking_delete">Slett parkeringsplassmarkør</string>
-    <string name="local_openstreetmap_delete">Slett endring</string>
+    <string name="local_openstreetmap_delete">Slett redigering</string>
     <string name="poi_dialog_reopen">Gjenåpne</string>
     <string name="do_you_like_osmand">Liker du OsmAnd\?</string>
     <string name="building_number">Bygningsnummer</string>
@@ -1520,7 +1520,7 @@
     <string name="lang_kn">Kannada</string>
     <string name="app_mode_bus">Buss</string>
     <string name="app_mode_train">Tog</string>
-    <string name="voice_data_unavailable">Valgte taledata er ikke tilgjengelig</string>
+    <string name="voice_data_unavailable">Valgte talemeldingspakke er ikke tilgjengelig</string>
     <string name="voice_data_corrupted">Spesifisert taledata er ødelagt</string>
     <string name="voice_data_not_supported">Taledataversjon som ikke støttes</string>
     <string name="background_router_service_descr">Sporer posisjonen din mens skjermen er slått av.</string>
@@ -1878,7 +1878,7 @@
     <string name="context_menu_item_add_parking_point">Marker som parkeringsplass</string>
     <string name="route_roundabout">Rundkjøring: Ta avkjøring %1$d og fortsett</string>
     <string name="support_new_features">Støtt nye funksjoner</string>
-    <string name="max_speed">Maksimumshastighet</string>
+    <string name="max_speed">Maksimumsfart</string>
     <string name="shared_string_start_time">Starttid</string>
     <string name="shared_string_end_time">Sluttid</string>
     <string name="shared_string_color">Farge</string>
@@ -2011,7 +2011,6 @@
     <string name="add_new_folder">Legg til ny mappe</string>
     <string name="shared_string_gpx_track">Spor</string>
     <string name="routing_attr_height_obstacles_name">Bruk høydedata</string>
-
     <string name="quick_action_bug_message">Melding</string>
     <string name="shared_string_permissions">Tillatelser</string>
     <string name="import_gpx_failed_descr">Kunne ikke importere filen. Kontroller at OsmAnd har tillatelse til å lese den.</string>
@@ -2174,7 +2173,7 @@
     <string name="validate_gpx_upload_name_pwd">Angi ditt OSM-brukernavn og passord for å laste opp GPX-filer.</string>
     <string name="support_new_features_descr">Doner for å se nye funksjoner implementert i programmet.</string>
     <string name="local_openstreetmap_uploadall">Last opp alle</string>
-    <string name="local_openstreetmap_upload">Last opp endring til OSM</string>
+    <string name="local_openstreetmap_upload">Last opp redigering til OSM</string>
     <string name="local_openstreetmap_descr_title">Asynkron OSM-redigering:</string>
     <string name="live_monitoring_interval_descr">Oppgi det nettbaserte sporingsintervallet.</string>
     <string name="live_monitoring_interval">Nettbasert sporingsintervall</string>
@@ -2240,7 +2239,7 @@
     <string name="quick_action_add_parking">Legg til parkeringsplass</string>
     <string name="quick_action_edit_action">Rediger handling</string>
     <string name="quick_actions_delete">Slett handling</string>
-    <string name="quick_favorites_name_preset">Navneforvalg</string>
+    <string name="quick_favorites_name_preset">Forhåndsinnstilt navn</string>
     <string name="quick_action_add_marker_descr">En knapp for å legge til en kartmarkør i skjermsenteret.</string>
     <string name="quick_action_add_gpx_descr">En knapp for å legge til et GPX-rutepunkt i midten av skjermen.</string>
     <string name="quick_action_take_audio_note_descr">En knapp for å legge til et lydnotat i midten av skjermen.</string>
@@ -2830,7 +2829,7 @@
     <string name="routeInfo_roadClass_name">Veitype</string>
     <string name="routeInfo_surface_name">Overflate</string>
     <string name="routeInfo_smoothness_name">Jevnhet</string>
-    <string name="routeInfo_steepness_name">Stigning</string>
+    <string name="routeInfo_steepness_name">Bratthet</string>
     <string name="add_home">Legg til bosted</string>
     <string name="add_work">Legg til arbeidssted</string>
     <string name="work_button">Arbeid</string>
@@ -2866,9 +2865,9 @@
     <string name="rendering_attr_surface_paved_name">Fast dekke</string>
     <string name="rendering_attr_surface_concrete_name">Betong</string>
     <string name="rendering_attr_surface_sett_name">Brostein</string>
-    <string name="rendering_attr_surface_cobblestone_name">Naturlig brostein</string>
-    <string name="rendering_attr_surface_paving_stones_name">Steinbelagt</string>
-    <string name="rendering_attr_surface_pebblestone_name">Rullestein</string>
+    <string name="rendering_attr_surface_cobblestone_name">Kuppelstein</string>
+    <string name="rendering_attr_surface_paving_stones_name">Belegningsstein</string>
+    <string name="rendering_attr_surface_pebblestone_name">Rullestein (liten)</string>
     <string name="rendering_attr_surface_stone_name">Stein</string>
     <string name="rendering_attr_surface_metal_name">Metall</string>
     <string name="rendering_attr_surface_wood_name">Tre</string>
@@ -2908,8 +2907,8 @@
     <string name="shared_string_milliradians">Milliradianer</string>
     <string name="angular_measeurement">Vinkel-måleenheter</string>
     <string name="angular_measeurement_descr">Endre hva asimut måles i.</string>
-    <string name="routing_attr_avoid_sett_name">Ingen rustikk brostein eller brostein</string>
-    <string name="routing_attr_avoid_sett_description">Unngår rustikk brostein og brostein</string>
+    <string name="routing_attr_avoid_sett_name">Ingen kuppelstein eller brostein</string>
+    <string name="routing_attr_avoid_sett_description">Unngår kuppelstein og brostein</string>
     <string name="routing_attr_avoid_tram_name">Ingen trikk</string>
     <string name="routing_attr_avoid_tram_description">Unngår trikk</string>
     <string name="routing_attr_avoid_bus_name">Ingen buss</string>
@@ -2946,7 +2945,7 @@
     <string name="choose_data_to_share">Velg typen data du vil dele:</string>
     <string name="downloaded_maps">Nedlastede kart</string>
     <string name="visited_screens">Besøkte skjermer</string>
-    <string name="collected_data_descr">Definer hvilken data du ønsker å dele med OsmAnd.</string>
+    <string name="collected_data_descr">Bestem hvilke data OsmAnd kan dele.</string>
     <string name="downloaded_maps_collect_descr">Hjelp oss å forstå hvilke land- og regionkart som er mest populære.</string>
     <string name="visited_screens_collect_descr">Hjelp oss å forstå hvilke OsmAnd-funksjoner som er mest populære.</string>
     <string name="privacy_and_security_change_descr">Trykk \"Tillat\" hvis du er enig med vår %1$s</string>
@@ -3146,7 +3145,8 @@
     <string name="shared_string_other">Annet</string>
     <string name="shared_preference">Delt</string>
     <string name="layer_osm_edits">OSM-redigeringer</string>
-    <string name="new_route_calculated_dist_dbg">Rute: Distanse %1$s, rutingstid %2$s \nUtregning: %3$.1f sec, %4$d veier, %5$d flis)</string>
+    <string name="new_route_calculated_dist_dbg">Rute: Distanse %1$s, rutetid %2$s
+\nBeregning: %3$.1f sek., %4$d veier, %5$d fliser)</string>
     <string name="contour_lines_and_hillshade">Koter og relieffskygge</string>
     <string name="update_all_maps">Oppdater alle kart</string>
     <string name="update_all_maps_q">Er du sikker på at du vil oppdatere alle (%1$d) kart\?</string>
@@ -3833,7 +3833,7 @@
     <string name="shared_string_resources">Ressurser</string>
     <string name="profile_by_default_description">Velg profilen som skal brukes når programmet starter.</string>
     <string name="shared_string_last_used">Sist brukt</string>
-    <string name="routing_attr_allow_streams_name">Tillat bekker og avløp</string>
+    <string name="routing_attr_allow_streams_name">Tillat bekker og dreneringsgrøfter</string>
     <string name="routing_attr_allow_intermittent_name">Tillat periodiske vannveier</string>
     <string name="routing_attr_allow_intermittent_description">Tillat periodiske vannveier</string>
     <string name="shared_string_vehicle">Kjøretøy</string>
@@ -3855,7 +3855,7 @@
     <string name="change_folder">Endre mappe</string>
     <string name="select_data_to_export">Velg data å eksportere til filen.</string>
     <string name="export_not_enough_space_descr">Din enhet har kun %1$s ledig. Frigjør litt plass eller velg bort noen elementer fra eksporten.</string>
-    <string name="select_groups_for_import">ffffffffff|</string>
+    <string name="select_groups_for_import">Velg grupper som skal importeres.</string>
     <string name="reverse_all_points">Reverser alle punkter</string>
     <string name="routing_engine_vehicle_type_small_truck">Liten lastebil</string>
     <string name="routing_engine_vehicle_type_truck">Lastebil</string>
@@ -3875,18 +3875,18 @@
     <string name="announcement_time_prepare">Forberedelse</string>
     <string name="announcement_time_arrive">Ankom målet</string>
     <string name="shared_string_turn">Sving</string>
-    <string name="announcement_time_intervals">Tid og avstansintervaller</string>
-    <string name="announcement_time_descr">kunngjøringstid for forskjellige stemmeforespørsler avhenger av forespørselstype, nåværende navigasjonshastighet og forvalgt navigasjonshastighet.</string>
+    <string name="announcement_time_intervals">Tid og avstandsintervaller</string>
+    <string name="announcement_time_descr">Kunngjøringstid for forskjellige talemeldinger avhenger av meldingstype, gjeldende navigasjonshastighet og standard-navigasjonshastighet.</string>
     <string name="routing_engine_vehicle_type_hiking">Turgåing</string>
-    <string name="routing_engine_vehicle_type_walking">Fotgjengeri</string>
+    <string name="routing_engine_vehicle_type_walking">Gåing</string>
     <string name="shared_string_sec">sek</string>
     <string name="announcement_time_title">Kunngjøringstid</string>
     <string name="start_recording">Start opptak</string>
     <string name="show_track_on_map">Vis spor på kart</string>
     <string name="routing_engine_vehicle_type_wheelchair">Rullestol</string>
     <string name="routing_engine_vehicle_type_cycling_electric">El-sykkel</string>
-    <string name="routing_engine_vehicle_type_cycling_mountain">Terrengsykkel</string>
-    <string name="routing_engine_vehicle_type_racingbike">Temposykkel</string>
+    <string name="routing_engine_vehicle_type_cycling_mountain">Terrengsykling</string>
+    <string name="routing_engine_vehicle_type_racingbike">Racersykkel</string>
     <string name="routing_engine_vehicle_type_cycling_road">Landeveissykling</string>
     <string name="routing_engine_vehicle_type_cycling_regular">Vanlig sykling</string>
     <string name="message_server_error">Tjenerfeil: %1$s</string>
@@ -3896,7 +3896,7 @@
     <string name="routing_engine_vehicle_type_hgv">Stor lastebil</string>
     <string name="delete_online_routing_engine">Slett denne nettbaserte rutingsmotoren\?</string>
     <string name="context_menu_read_full">Les hele</string>
-    <string name="delete_waypoints">Slett rutepunkt</string>
+    <string name="delete_waypoints">Slett rutepunkter</string>
     <string name="app_mode_gap">Luke</string>
     <string name="login_open_street_map">Logg inn på OpenStreetMap</string>
     <string name="user_login">Logg inn</string>
@@ -3905,4 +3905,38 @@
     <string name="context_menu_edit_descr">Rediger beskrivelse</string>
     <string name="copy_to_map_markers">Kopier til kartmarkører</string>
     <string name="copy_to_map_favorites">Kopier til favoritter</string>
+    <string name="uploading_count">Laster opp %1$d av %2$d</string>
+    <string name="select_segments">Velg segmenter</string>
+    <string name="segments_count">Segment %1$d</string>
+    <string name="opr_use_dev_url">Bruk test.openplacereviews.org</string>
+    <string name="activity_type_water_name">Vann</string>
+    <string name="activity_type_winter_name">Vinter</string>
+    <string name="activity_type_snowmobile_name">Snøskuter</string>
+    <string name="activity_type_mountainbike_name">Terrengsykkel</string>
+    <string name="activity_type_cycling_name">Sykling</string>
+    <string name="activity_type_motorbike_name">Motorsykkel</string>
+    <string name="activity_type_car_name">Bil</string>
+    <string name="delete_number_files_question">Slett %1$d filer\?</string>
+    <string name="updated">Oppdatert: %s</string>
+    <string name="delete_updates">Slett oppdateringer</string>
+    <string name="purchases">Kjøp</string>
+    <string name="select_category_descr">Velg kategori eller legg til en ny</string>
+    <string name="track_recording_will_be_continued">Opptaket vil fortsette.</string>
+    <string name="copy_poi_name">Kopier interessepunktnavn</string>
+    <string name="quick_action_show_hide_title">Vis/skjul</string>
+    <string name="shared_string_interval">Intervall</string>
+    <string name="track_has_no_altitude">Sporet inneholder ikke høydedata.</string>
+    <string name="track_has_no_speed">Sporet inneholder ikke hastighetsdata.</string>
+    <string name="select_another_colorization">Velg en annen type fargelegging.</string>
+    <string name="shared_strings_all_regions">Alle regioner</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Skjul grenser for naturreservat, beskyttede områder og nasjonalparker</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_name">Naturgrenser</string>
+    <string name="hillshade_slope_contour_lines">Relieffskygge / Bakkehelling / Koter</string>
+    <string name="activity_type_riding_name">Ridning</string>
+    <string name="activity_type_hiking_name">Turgåing</string>
+    <string name="activity_type_running_name">Løping</string>
+    <string name="activity_type_walking_name">Gåing</string>
+    <string name="routing_attr_short_way_description">Optimalisert kortere rute (energisparende)</string>
+    <string name="snap_to_road_descr">Aktuelle posisjonsikon vil bli festet til gjeldende navigeringsrute</string>
+    <string name="routing_attr_height_obstacles_description">Ruting kan unngå kraftige oppoverbakker.</string>
 </resources>

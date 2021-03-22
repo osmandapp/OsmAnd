@@ -1370,7 +1370,7 @@
     <string name="no_internet_connection">Impossìbile iscarrigare. Pro praghere còmpida sa connessione tua pro sighire.</string>
     <string name="download_tab_downloads">Totu sos iscarrigamentos</string>
     <string name="download_tab_updates">Agiornamentos</string>
-    <string name="download_tab_local">Iscarrigadas</string>
+    <string name="download_tab_local">Installadas</string>
     <string name="navigate_point_zone">Zona</string>
     <string name="navigate_point_northing">In diretzione Nord</string>
     <string name="navigate_point_easting">In diretzione Est</string>
@@ -2163,7 +2163,6 @@
     <string name="rendering_attr_depthContours_name">Curvas de profondidade nàuticas</string>
     <string name="rendering_attr_depthContours_description">Ammustra sas lìnias de profondidade.</string>
     <string name="routing_attr_height_obstacles_name">Imprea sos datos de s\'artària</string>
-
     <string name="routing_attr_driving_style_name">Istile de ghia</string>
     <string name="route_altitude">Artària de su caminu</string>
     <string name="altitude_descent">Falada</string>
@@ -3163,7 +3162,7 @@
     <string name="vehicle_parameters">Paràmetros de su veìculu</string>
     <string name="voice_announces_info">Sos annùntzios vocales benint riproduidos petzi durante sa navigatzione.</string>
     <string name="voice_announces_descr">Istrutziones e annùntzios de navigatzione</string>
-    <string name="voice_announces">Annùntzios vocales</string>
+    <string name="voice_announces">Indicatziones vocales</string>
     <string name="screen_alerts">Avisos in s\'ischermu</string>
     <string name="route_parameters_descr">Cunfigura sos paràmetros de s\'àndala</string>
     <string name="route_parameters">Paràmetros de s\'àndala</string>
@@ -4002,4 +4001,45 @@
     <string name="activity_type_offroad_name">Foras de camineras</string>
     <string name="activity_type_motorbike_name">Moto</string>
     <string name="activity_type_car_name">Màchina</string>
+    <string name="select_segments">Ischerta sos segmentos</string>
+    <string name="select_segments_description">%1$s cuntenet prus de unu segmentu. Depes ischertare sa parte chi serbit pro sa navigatzione.</string>
+    <string name="segments_count">Segmentu %1$d</string>
+    <string name="temporary_conditional_routing_descr">Imprea sas restritziones de sos caminos chi sunt ativas como in sa mapa</string>
+    <string name="routing_attr_short_way_description">Àndala prus curtza otimizada (rispàrmiu energèticu)</string>
+    <string name="routing_attr_driving_style_description">Ischerta sa modalidade pro sa ghia pro otènnere un\'àndala prus curtza, prus lestra o prus segura</string>
+    <string name="snap_to_road_descr">S\'icona de sa positzione atuale s\'at a ligare a s\'àndala de navigatzione atuale</string>
+    <string name="map_orientation_threshold_descr">Non rodes sa vista de sa mapa si sa lestresa est in suta de unu lìmite</string>
+    <string name="restart">Torra a incumintzare</string>
+    <string name="shared_strings_all_regions">Totu sas regiones</string>
+    <string name="delete_number_files_question">Iscantzellare %1$d documentos\?</string>
+    <string name="track_recording_stop_without_saving">Acabba chene sarvare</string>
+    <string name="track_recording_save_and_stop">Sarva e acabba sa registratzione</string>
+    <string name="track_recording_title">Registratzione de sa rasta firmada</string>
+    <string name="track_recording_description">Ses seguru de chèrrere acabbare cun sa registratzione\?
+\nTotu sos datos non sarvados s\'ant a pèrdere.</string>
+    <string name="on_pause">In pàusa</string>
+    <string name="app_restart_required">Pro aplicare unas cantas impostatziones diat pòdere èssere netzessàriu torrare a allùghere s\'aplicatzione.</string>
+    <string name="routing_attr_height_obstacles_description">Su càrculu de s\'àndala diat pòdere evitare artziadas mannas.</string>
+    <string name="quick_action_coordinates_widget_descr">Unu butone pro ammustrare o cuare su widget de sas coordinadas in sa mapa.</string>
+    <string name="latest_openstreetmap_update">Ùrtimu agiornamentu de OpenStreetMap a disponimentu:</string>
+    <string name="updated">Agiornadu: %s</string>
+    <string name="last_time_checked">Ùrtima verìfica: %s</string>
+    <string name="update_frequency">Frecuèntzia de sos agiornamentos</string>
+    <string name="live_update_frequency_week_variant">Sos agiornamentos de sa mapa ant a èssere verificados cada chida. Sa borta chi benit: %1$s in %2$s.</string>
+    <string name="live_update_frequency_day_variant">Sos agiornamentos de sa mapa ant a èssere verificados cada die. Sa borta chi benit: %1$s in %2$s.</string>
+    <string name="live_update_frequency_hour_variant">Sos agiornamentos de sa mapa ant a èssere verificados cada ora. Sa borta chi benit: %1$s in %2$s.</string>
+    <string name="delete_updates">Iscantzella sos agiornamentos</string>
+    <string name="live_update_delete_updates_msg">Ses seguru de chèrrere iscantzellare totu sos %s agiornamentos in direta\?</string>
+    <string name="select_category_descr">Ischerta una categoria o annanghe·nde una noa</string>
+    <string name="track_recording_will_be_continued">Sa registratzione at a sighire.</string>
+    <string name="copy_poi_name">Còpia su nùmene de su PDI</string>
+    <string name="quick_action_show_hide_title">Ammustra/cua</string>
+    <string name="shared_string_interval">Intervallu</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Cua sas làcanas de sas riservas naturales, de sas àreas amparadas e de sos parcos natzionales</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_name">Làcanas naturales</string>
+    <string name="track_has_no_altitude">Sa rasta non cuntenet datos de artària.</string>
+    <string name="track_has_no_speed">Sa rasta non cuntenet datos de lestresa.</string>
+    <string name="select_another_colorization">Ischerta un\'àtera casta de coloratzione.</string>
+    <string name="purchases">Còmporas</string>
+    <string name="map_widget_distance_by_tap">Distàntzia pro tocu</string>
 </resources>

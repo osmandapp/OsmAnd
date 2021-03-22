@@ -1990,7 +1990,6 @@
     <string name="fonts_header">Letur fyrir kort</string>
     <string name="right_side_navigation">Ekið á hægri akrein</string>
     <string name="driving_region_automatic">Sjálfvirkt</string>
-
     <string name="auto_split_recording_title">Skipta skráningu sjálfvirkt eftir bil</string>
     <string name="incremental_search_city">Stigvaxandi leit í borg</string>
     <string name="rendering_attr_showRoadMaps_description">Veldu þegar birta á kort einungis með vegum:</string>
@@ -3684,7 +3683,7 @@
     <string name="route_between_points">Leið milli punkta</string>
     <string name="next_segment">Næsti bútur</string>
     <string name="search_download_wikipedia_maps">Sækja Wikipedia-kort</string>
-    <string name="street_level_imagery">Götumyndir</string>
+    <string name="street_level_imagery">Myndefni í götuhæð</string>
     <string name="routing_attr_length_name">Takmörk á lengd</string>
     <string name="plan_a_route">Skipuleggja leið</string>
     <string name="save_as_new_track">Vista sem nýjan feril</string>
@@ -4005,4 +4004,50 @@
     <string name="activity_type_offroad_name">Utanvegaakstur</string>
     <string name="activity_type_motorbike_name">Vélhjól</string>
     <string name="activity_type_car_name">Akandi</string>
+    <string name="routing_attr_height_obstacles_description">Leiðagerð gæti forðast miklar brekkur upp í mót.</string>
+    <string name="select_category_descr">Veldu flokk eða bættu við nýjum</string>
+    <string name="open_place_reviews_plugin_description">OpenPlaceReviews er samfélagsdrifið verkefni um opinbera staði eins og veitingastaði, hótel, söfn og ýmsa merkisstaði. Það safnar saman um þetta öllum opinberum upplýsingum á borð við ljósmyndir, umsagnir, tenglum í aðrar veitur eins og OpenStreetMap, Wikipedia, o.fl..
+\n
+\nÖll gögn OpenPlaceReview eru opin og öllum aðgengileg: http://openplacereviews.org/data.
+\n
+\nÞú getur lesið meira um verkefnið hér: http://openplacereviews.org</string>
+    <string name="map_widget_distance_by_tap">Vegalengd með því að ýta</string>
+    <string name="select_segments_description">%1$s inniheldur meira en einn bút, þú þarft að velja þann sem er nauðsynlegur fyrir leiðsögnina.</string>
+    <string name="routing_attr_driving_style_description">Veldu tilgang aksturs til að fá styttri, hraðari eða öruggari leið</string>
+    <string name="snap_to_road_descr">Táknið fyrir núverandi staðsetningu mun grípa í leiðina sem leiðsögn fylgir</string>
+    <string name="map_orientation_threshold_descr">Ekki snúa ásýnd á kortið ef hraði fer niður fyrir ákveðin mörk</string>
+    <string name="quick_action_coordinates_widget_descr">Víxlnappur til að birta eða fela hnitaglugga á kortinu.</string>
+    <string name="select_segments">Veldu búta</string>
+    <string name="segments_count">Bútur %1$d</string>
+    <string name="temporary_conditional_routing_descr">Nota vegtakmarkanir sem núna eru virkar á kortinu</string>
+    <string name="routing_attr_short_way_description">Bestuð styttri leið (orkusparandi)</string>
+    <string name="restart">Endurræsa</string>
+    <string name="shared_strings_all_regions">Öll svæði</string>
+    <string name="delete_number_files_question">Eyða %1$d skrám\?</string>
+    <string name="track_recording_stop_without_saving">Stöðva án þess að vista</string>
+    <string name="track_recording_save_and_stop">Vista og stöðva upptöku</string>
+    <string name="track_recording_title">Upptaka ferils stöðvuð</string>
+    <string name="track_recording_description">Ertu viss um að þú viljir stöðva þessa upptöku\?
+\nÖll óvistuð gögn munu tapast.</string>
+    <string name="on_pause">Við bið</string>
+    <string name="app_restart_required">Endurræsingar forrits er krafist til að virkja sumar stillingar.</string>
+    <string name="latest_openstreetmap_update">Síðasta tiltæka uppfærsla OpenStreetMap:</string>
+    <string name="updated">Uppfært: %s</string>
+    <string name="last_time_checked">Síðast athugað: %s</string>
+    <string name="update_frequency">Uppfærslutíðni</string>
+    <string name="live_update_frequency_week_variant">Uppfærslur korta verða athugaðar í hverri viku. Næsta skipti %1$s eftir %2$s.</string>
+    <string name="live_update_frequency_day_variant">Uppfærslur korta verða athugaðar á hverjum degi. Næsta skipti %1$s eftir %2$s.</string>
+    <string name="live_update_frequency_hour_variant">Uppfærslur korta verða athugaðar á klukkustundar fresti. Næsta skipti %1$s eftir %2$s.</string>
+    <string name="delete_updates">Eyða uppfærslum</string>
+    <string name="live_update_delete_updates_msg">Ertu viss um að þú viljir eyða öllum %s raunuppfærslum\?</string>
+    <string name="purchases">Innkaup</string>
+    <string name="track_recording_will_be_continued">Upptökunni verður haldið áfram.</string>
+    <string name="copy_poi_name">Afrita heiti POI-merkisstaðar</string>
+    <string name="quick_action_show_hide_title">Birta/Fela</string>
+    <string name="shared_string_interval">Millibil</string>
+    <string name="track_has_no_altitude">Ferillinn inniheldur ekki hæðargögn.</string>
+    <string name="track_has_no_speed">Ferillinn inniheldur ekki hraðagögn.</string>
+    <string name="select_another_colorization">Veldu aðra tegund litunar.</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Fela mörk friðlanda, verndaðra svæða og þjóðgarða</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_name">Mörk náttúru</string>
 </resources>

@@ -17,9 +17,9 @@ public class GpxAppearanceInfo {
 	public String width;
 	public GradientScaleType scaleType;
 	public int color;
-	public int gradientSpeedColor;
-	public int gradientAltitudeColor;
-	public int gradientSlopeColor;
+	public int[] gradientSpeedPalette;
+	public int[] gradientAltitudePalette;
+	public int[] gradientSlopePalette;
 	public int splitType;
 	public double splitInterval;
 	public boolean showArrows;
@@ -41,9 +41,9 @@ public class GpxAppearanceInfo {
 		splitType = dataItem.getSplitType();
 		splitInterval = dataItem.getSplitInterval();
 		scaleType = dataItem.getGradientScaleType();
-		gradientSpeedColor = dataItem.getGradientSpeedColor();
-		gradientSlopeColor = dataItem.getGradientSlopeColor();
-		gradientAltitudeColor = dataItem.getGradientAltitudeColor();
+		gradientSpeedPalette = dataItem.getGradientSpeedPalette();
+		gradientSlopePalette = dataItem.getGradientSlopePalette();
+		gradientAltitudePalette = dataItem.getGradientAltitudePalette();
 
 		GPXTrackAnalysis analysis = dataItem.getAnalysis();
 		if (analysis != null) {
@@ -61,9 +61,9 @@ public class GpxAppearanceInfo {
 		writeParam(json, "split_type", GpxSplitType.getSplitTypeByTypeId(splitType).getTypeName());
 		writeParam(json, "split_interval", splitInterval);
 		writeParam(json, "gradient_scale_type", scaleType);
-		writeParam(json, GradientScaleType.SPEED.getColorTypeName(), gradientSpeedColor);
-		writeParam(json, GradientScaleType.SLOPE.getColorTypeName(), gradientSlopeColor);
-		writeParam(json, GradientScaleType.ALTITUDE.getColorTypeName(), gradientAltitudeColor);
+		writeParam(json, GradientScaleType.SPEED.getColorTypeName(), Algorithms.gradientPaletteToString(gradientSpeedPalette));
+		writeParam(json, GradientScaleType.ALTITUDE.getColorTypeName(), Algorithms.gradientPaletteToString(gradientAltitudePalette));
+		writeParam(json, GradientScaleType.SLOPE.getColorTypeName(), Algorithms.gradientPaletteToString(gradientSlopePalette));
 
 		writeParam(json, "time_span", timeSpan);
 		writeParam(json, "wpt_points", wptPoints);
@@ -79,9 +79,9 @@ public class GpxAppearanceInfo {
 		gpxAppearanceInfo.splitType = GpxSplitType.getSplitTypeByName(json.optString("split_type")).getType();
 		gpxAppearanceInfo.splitInterval = json.optDouble("split_interval");
 		gpxAppearanceInfo.scaleType = getScaleType(json.optString("gradient_scale_type"));
-		gpxAppearanceInfo.gradientSpeedColor = json.optInt(GradientScaleType.SPEED.getColorTypeName());
-		gpxAppearanceInfo.gradientSlopeColor = json.optInt(GradientScaleType.SLOPE.getColorTypeName());
-		gpxAppearanceInfo.gradientAltitudeColor = json.optInt(GradientScaleType.ALTITUDE.getColorTypeName());
+		gpxAppearanceInfo.gradientSpeedPalette = getGradientPalette(json, GradientScaleType.SPEED);
+		gpxAppearanceInfo.gradientAltitudePalette = getGradientPalette(json, GradientScaleType.ALTITUDE);
+		gpxAppearanceInfo.gradientSlopePalette = getGradientPalette(json, GradientScaleType.SLOPE);
 
 		gpxAppearanceInfo.timeSpan = json.optLong("time_span");
 		gpxAppearanceInfo.wptPoints = json.optInt("wpt_points");
@@ -99,6 +99,10 @@ public class GpxAppearanceInfo {
 			}
 		}
 		return null;
+	}
+
+	private static int[] getGradientPalette(JSONObject json, GradientScaleType scaleType) {
+		return Algorithms.stringToGradientPalette(json.optString(scaleType.getColorTypeName()));
 	}
 
 	private static void writeParam(@NonNull JSONObject json, @NonNull String name, @Nullable Object value) throws JSONException {

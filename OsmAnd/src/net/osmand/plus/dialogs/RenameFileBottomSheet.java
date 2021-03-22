@@ -131,7 +131,10 @@ public class RenameFileBottomSheet extends MenuBottomSheetDialogFragment {
 		File dest;
 		int index = file.getName().lastIndexOf('.');
 		String ext = index == -1 ? "" : file.getName().substring(index);
-		String newName = Algorithms.getFileNameWithoutExtension(selectedFileName);
+		String newName = selectedFileName;
+		if (selectedFileName.endsWith(ext)) {
+			newName = selectedFileName.substring(0, selectedFileName.lastIndexOf(ext));
+		}
 		if (SQLiteTileSource.EXT.equals(ext)) {
 			dest = renameSQLiteFile(app, file, newName + ext, null);
 		} else if (IndexConstants.GPX_FILE_EXT.equals(ext)) {

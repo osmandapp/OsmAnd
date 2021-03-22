@@ -47,12 +47,13 @@ import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.mapmarkers.MapMarker;
-import net.osmand.plus.mapmarkers.MapMarkersGroup;
+import net.osmand.plus.itinerary.ItineraryGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.track.GradientScaleType;
 import net.osmand.plus.track.SaveGpxAsyncTask;
 import net.osmand.plus.track.TrackDrawInfo;
 import net.osmand.plus.views.OsmandMapLayer;
@@ -66,6 +67,7 @@ import net.osmand.plus.views.layers.geometry.GpxGeometryWayContext;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.router.RouteColorize;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -142,6 +144,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private CommonPreference<String> defaultTrackWidthPref;
 
 	private CommonPreference<Integer> currentTrackColorPref;
+	private CommonPreference<GradientScaleType> currentTrackScaleType;
+	private CommonPreference<String> currentTrackSpeedGradientPalette;
+	private CommonPreference<String> currentTrackAltitudeGradientPalette;
+	private CommonPreference<String> currentTrackSlopeGradientPalette;
 	private CommonPreference<String> currentTrackWidthPref;
 	private CommonPreference<Boolean> currentTrackShowArrowsPref;
 	private CommonPreference<Boolean> currentTrackShowStartFinishPref;
@@ -155,6 +161,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		osmandRenderer = view.getApplication().getResourceManager().getRenderer().getRenderer();
 
 		currentTrackColorPref = view.getSettings().CURRENT_TRACK_COLOR;
+		currentTrackScaleType = view.getSettings().CURRENT_TRACK_COLORIZATION;
+		currentTrackSpeedGradientPalette = view.getSettings().CURRENT_TRACK_SPEED_GRADIENT_PALETTE;
+		currentTrackAltitudeGradientPalette = view.getSettings().CURRENT_TRACK_ALTITUDE_GRADIENT_PALETTE;
+		currentTrackSlopeGradientPalette = view.getSettings().CURRENT_TRACK_SLOPE_GRADIENT_PALETTE;
 		currentTrackWidthPref = view.getSettings().CURRENT_TRACK_WIDTH;
 		currentTrackShowArrowsPref = view.getSettings().CURRENT_TRACK_SHOW_ARROWS;
 		currentTrackShowStartFinishPref = view.getSettings().CURRENT_TRACK_SHOW_START_FINISH;
@@ -512,7 +522,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			for (SelectedGpxFile g : selectedGPXFiles) {
 				List<Pair<WptPt, MapMarker>> fullObjects = new ArrayList<>();
 				int fileColor = getFileColor(g);
-				boolean synced = mapMarkersHelper.getMarkersGroup(g.getGpxFile()) != null;
+				boolean synced = view.getApplication().getItineraryHelper().getMarkersGroup(g.getGpxFile()) != null;
 				for (WptPt wpt : getListStarPoints(g)) {
 					if (wpt.lat >= latLonBounds.bottom && wpt.lat <= latLonBounds.top
 							&& wpt.lon >= latLonBounds.left && wpt.lon <= latLonBounds.right
@@ -661,10 +671,22 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	private void drawSelectedFileSegments(SelectedGpxFile selectedGpxFile, boolean currentTrack, Canvas canvas,
 										  RotatedTileBox tileBox, DrawSettings settings) {
+		GPXFile gpxFile = selectedGpxFile.getGpxFile();
 		List<TrkSegment> segments = selectedGpxFile.getPointsToDisplay();
+		GradientScaleType scaleType = getGradientScaleType(gpxFile);
+		List<RouteColorize.RouteColorizationPoint> colorsOfPoints = null;
+		if (scaleType != null) {
+			RouteColorize colorize = new RouteColorize(view.getZoom(), gpxFile, scaleType.toColorizationType());
+			colorize.setPalette(getColorizationPalette(gpxFile, scaleType));
+			colorsOfPoints = colorize.getResult(false);
+		}
+		int startIdx = 0;
 		for (TrkSegment ts : segments) {
-			String width = getTrackWidthName(selectedGpxFile.getGpxFile(), defaultTrackWidthPref.get());
-			int color = getTrackColor(selectedGpxFile.getGpxFile(), ts.getColor(cachedColor));
+			String width = getTrackWidthName(gpxFile, defaultTrackWidthPref.get());
+			int color = getTrackColor(gpxFile, ts.getColor(cachedColor));
+			if (colorsOfPoints != null) {
+				startIdx = setColorsToPoints(ts, colorsOfPoints, scaleType, startIdx);
+			}
 			if (ts.renderer == null && !ts.points.isEmpty()) {
 				Renderable.RenderableSegment renderer;
 				if (currentTrack) {
@@ -677,9 +699,41 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			}
 			updatePaints(color, width, selectedGpxFile.isRoutePoints(), currentTrack, settings, tileBox);
 			if (ts.renderer instanceof Renderable.RenderableSegment) {
-				((Renderable.RenderableSegment) ts.renderer).drawSegment(view.getZoom(), paint, canvas, tileBox);
+				Renderable.RenderableSegment renderableSegment = (Renderable.RenderableSegment) ts.renderer;
+				renderableSegment.setGradientScaleType(scaleType);
+				renderableSegment.drawSegment(view.getZoom(), paint, canvas, tileBox);
 			}
 		}
+	}
+
+	private int setColorsToPoints(TrkSegment segment, List<RouteColorize.RouteColorizationPoint> colors, GradientScaleType scaleType, int startIdx) {
+		int pointsSize = segment.points.size();
+		RouteColorize.RouteColorizationPoint startColor = colors.get(startIdx);
+		RouteColorize.RouteColorizationPoint endColor = colors.get(startIdx + pointsSize - 1);
+		WptPt firstPoint = segment.points.get(0);
+		WptPt lastPoint = segment.points.get(pointsSize - 1);
+		while (!compareCoordinates(firstPoint, startColor) && compareCoordinates(lastPoint, endColor)) {
+			startIdx++;
+			startColor = colors.get(startIdx);
+			endColor = colors.get(startIdx + pointsSize - 1);
+		}
+
+		for (int i = startIdx; i < startIdx + pointsSize; i++) {
+			WptPt currentPoint = segment.points.get(i - startIdx);
+			int currentColor = colors.get(i).color;
+			if (scaleType == GradientScaleType.SPEED) {
+				currentPoint.speedColor = currentColor;
+			} else if (scaleType == GradientScaleType.ALTITUDE) {
+				currentPoint.altitudeColor = currentColor;
+			} else {
+				currentPoint.slopeColor = currentColor;
+			}
+		}
+		return startIdx;
+	}
+
+	private boolean compareCoordinates(WptPt left, RouteColorize.RouteColorizationPoint right) {
+		return left.lat == right.lat && left.lon == right.lon;
 	}
 
 	private float getTrackWidth(String width, float defaultTrackWidth) {
@@ -700,6 +754,47 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			}
 		}
 		return color != 0 ? color : defaultColor;
+	}
+
+	private GradientScaleType getGradientScaleType(GPXFile gpxFile) {
+		if (hasTrackDrawInfoForTrack(gpxFile)) {
+			return trackDrawInfo.getGradientScaleType();
+		} else if (gpxFile.showCurrentTrack) {
+			return currentTrackScaleType.get();
+		} else {
+			GpxDataItem dataItem = gpxDbHelper.getItem(new File(gpxFile.path));
+			if (dataItem != null && dataItem.getGradientScaleType() != null) {
+				return dataItem.getGradientScaleType();
+			}
+		}
+		return null;
+	}
+
+	private int[] getColorizationPalette(GPXFile gpxFile, GradientScaleType scaleType) {
+		if (hasTrackDrawInfoForTrack(gpxFile)) {
+			return trackDrawInfo.getGradientPalette(scaleType);
+		} else if (gpxFile.showCurrentTrack) {
+			String palette;
+			if (scaleType == GradientScaleType.SPEED) {
+				palette = currentTrackSpeedGradientPalette.get();
+			} else if (scaleType == GradientScaleType.ALTITUDE) {
+				palette = currentTrackAltitudeGradientPalette.get();
+			} else {
+				palette = currentTrackSlopeGradientPalette.get();
+			}
+			return Algorithms.stringToArray(palette);
+		}
+		GpxDataItem dataItem = gpxDbHelper.getItem(new File(gpxFile.path));
+		if (dataItem == null) {
+			return RouteColorize.colors;
+		}
+		if (scaleType == GradientScaleType.SPEED) {
+			return dataItem.getGradientSpeedPalette();
+		} else if (scaleType == GradientScaleType.ALTITUDE) {
+			return dataItem.getGradientAltitudePalette();
+		} else {
+			return dataItem.getGradientSlopePalette();
+		}
 	}
 
 	private String getTrackWidthName(GPXFile gpxFile, String defaultWidth) {
@@ -832,7 +927,11 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		}
 	}
 
+	@Nullable
 	public static Pair<WptPt, WptPt> findPointsNearSegment(RotatedTileBox tb, List<WptPt> points, int r, int mx, int my) {
+		if (Algorithms.isEmpty(points)) {
+			return null;
+		}
 		WptPt prevPoint = points.get(0);
 		int ppx = (int) tb.getPixXFromLatLon(prevPoint.lat, prevPoint.lon);
 		int ppy = (int) tb.getPixYFromLatLon(prevPoint.lat, prevPoint.lon);
@@ -1077,9 +1176,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	private void syncGpx(GPXFile gpxFile) {
-		MapMarkersGroup group = view.getApplication().getMapMarkersHelper().getMarkersGroup(gpxFile);
+		ItineraryGroup group = view.getApplication().getItineraryHelper().getMarkersGroup(gpxFile);
 		if (group != null) {
-			mapMarkersHelper.runSynchronization(group);
+			view.getApplication().getItineraryHelper().runSynchronization(group);
 		}
 	}
 }

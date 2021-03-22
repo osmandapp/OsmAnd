@@ -4,7 +4,9 @@
 	android:layout_height="wrap_content"
 	android:orientation="vertical">
 
-	<include layout="@layout/list_item_divider" />
+	<include
+		android:id="@+id/list_item_divider"
+		layout="@layout/list_item_divider" />
 
 	<LinearLayout
 		android:layout_width="match_parent"

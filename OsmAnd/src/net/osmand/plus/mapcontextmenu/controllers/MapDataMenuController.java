@@ -118,7 +118,7 @@ public class MapDataMenuController extends MenuController {
 					} else if (!downloaded || indexItem.isOutdated()) {
 						new DownloadValidationManager(app).startDownload(activity, indexItem);
 					} else if (isLiveUpdatesOn()) {
-						LiveUpdatesHelper.runLiveUpdate(activity, indexItem.getTargetFileName(), true);
+						LiveUpdatesHelper.runLiveUpdate(activity, indexItem.getTargetFileName(), true, null);
 					}
 				}
 			}

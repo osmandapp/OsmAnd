@@ -82,25 +82,26 @@ public class TrackEditCard extends BaseCard {
 		}
 		GpxUiHelper.updateGpxInfoView(view, title, gpxInfo, dataItem, false, app);
 
-		if (gpxFile.getNonEmptySegmentsCount() > 1 && routeParams != null && routeParams.getSelectedSegment() != -1) {
-			TextView distanceView = view.findViewById(R.id.distance);
-			TextView timeView = view.findViewById(R.id.time);
-			ImageView timeIcon = view.findViewById(R.id.time_icon);
-			AndroidUiHelper.updateVisibility(view.findViewById(R.id.points_icon), false);
-			AndroidUiHelper.updateVisibility(view.findViewById(R.id.points_count), false);
-			List<GPXUtilities.TrkSegment> segments = gpxFile.getNonEmptyTrkSegments(false);
-			GPXUtilities.TrkSegment segment = segments.get(routeParams.getSelectedSegment());
-			double distance = TrackSelectSegmentAdapter.getDistance(segment);
-			long time = TrackSelectSegmentAdapter.getSegmentTime(segment);
-			boolean timeAvailable = time != 1;
-			if (timeAvailable) {
-				timeView.setText(Algorithms.formatDuration((int) (time / 1000),
-						app.accessibilityEnabled()));
-			}
-			AndroidUiHelper.updateVisibility(timeView, timeAvailable);
-			AndroidUiHelper.updateVisibility(timeIcon, timeAvailable);
-			distanceView.setText(OsmAndFormatter.getFormattedDistance((float) distance, app));
-		}
+		if (gpxFile.getNonEmptySegmentsCount() > 1 && routeParams != null)
+			if (routeParams.getSelectedSegment() != -1 && gpxFile.getNonEmptySegmentsCount() > routeParams.getSelectedSegment()) {
+					TextView distanceView = view.findViewById(R.id.distance);
+					TextView timeView = view.findViewById(R.id.time);
+					ImageView timeIcon = view.findViewById(R.id.time_icon);
+					AndroidUiHelper.updateVisibility(view.findViewById(R.id.points_icon), false);
+					AndroidUiHelper.updateVisibility(view.findViewById(R.id.points_count), false);
+					List<GPXUtilities.TrkSegment> segments = gpxFile.getNonEmptyTrkSegments(false);
+					GPXUtilities.TrkSegment segment = segments.get(routeParams.getSelectedSegment());
+					double distance = TrackSelectSegmentAdapter.getDistance(segment);
+					long time = TrackSelectSegmentAdapter.getSegmentTime(segment);
+					boolean timeAvailable = time != 1;
+					if (timeAvailable) {
+						timeView.setText(Algorithms.formatDuration((int) (time / 1000),
+								app.accessibilityEnabled()));
+					}
+					AndroidUiHelper.updateVisibility(timeView, timeAvailable);
+					AndroidUiHelper.updateVisibility(timeIcon, timeAvailable);
+					distanceView.setText(OsmAndFormatter.getFormattedDistance((float) distance, app));
+				}
 
 		ImageButton editButton = view.findViewById(R.id.show_on_map);
 		editButton.setVisibility(View.VISIBLE);

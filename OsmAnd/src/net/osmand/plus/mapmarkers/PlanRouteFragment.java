@@ -11,9 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -688,7 +688,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 				}
 			});
 			if (!portrait) {
-				LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) appModesBtn.getLayoutParams();
+				FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) appModesBtn.getLayoutParams();
 				params.leftMargin = mapActivity.getResources().getDimensionPixelSize(R.dimen.dashboard_land_width);
 				appModesBtn.setLayoutParams(params);
 			}

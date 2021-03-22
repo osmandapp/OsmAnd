@@ -824,7 +824,7 @@
     <string name="poi_craft_sculptor">نحات</string>
     <string name="poi_craft_shoemaker">إسكافي</string>
     <string name="poi_craft_tiler">مبلط</string>
-    <string name="poi_sinkhole">حفرة</string>
+    <string name="poi_sinkhole">دِحل/خفس/هبوط أرضي</string>
     <string name="poi_water">ماء</string>
     <string name="poi_wetland">أراضي رطبة</string>
     <string name="poi_wood">خشب و غابة</string>
@@ -3689,4 +3689,18 @@
     <string name="poi_denomination_united_methodist">الكنيسة الميثودية</string>
     <string name="poi_denomination_pentecostal">الخمسينية</string>
     <string name="poi_denomination_presbyterian">المشيخية</string>
+    <string name="poi_conference_centre">مركز مؤتمرات</string>
+    <string name="poi_mobile_library">موقف المكتبة المتنقلة</string>
+    <string name="poi_summit_register_no">تسجيل للوصول للقمة: لا</string>
+    <string name="poi_summit_register_yes">تسجيل للوصول للقمة: نعم</string>
+    <string name="poi_piste_status_closed">حالة الزحلقة: مغلقة</string>
+    <string name="poi_piste_status_open">حالة الزحلقة: مفتوحة</string>
+    <string name="poi_patrolled_no">محروس : لا</string>
+    <string name="poi_patrolled_yes">محروس: نعم</string>
+    <string name="poi_gladed_yes">التزلج عبر الأشجار</string>
+    <string name="poi_piste_name">اسم الزحلقة</string>
+    <string name="poi_piste_ski_jump">القفز على الجليد</string>
+    <string name="poi_geodesist">الجيوديسيا (شكل الأرض ومساحتها)</string>
+    <string name="poi_local_ref">المرجع المحلي</string>
+    <string name="poi_piste">الزحلقه</string>
 </resources>

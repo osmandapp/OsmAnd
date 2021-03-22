@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -26,8 +25,6 @@ import android.widget.TextView;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AlertDialog.Builder;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -35,6 +32,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.chooseplan.ChoosePlanDialogFragment.ChoosePlanDialogType;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
@@ -61,6 +59,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static net.osmand.plus.liveupdates.LiveUpdatesFragmentNew.showUpdateDialog;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.DEFAULT_LAST_CHECK;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.TimeOfDay;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.UpdateFrequency;
@@ -71,7 +70,6 @@ import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastCheck;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLiveUpdatesOn;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayToUpdate;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.runLiveUpdate;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.setAlarmForPendingIntent;
 
 public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurchaseListener {
@@ -131,11 +129,11 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 		swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 			@Override
 			public void onRefresh() {
-				adapter.showUpdateDialog();
+				showUpdateDialog(getActivity(), getSettings(), adapter.dataShouldUpdate, adapter.dataShouldUpdate.size(), null);
 				swipeRefresh.setRefreshing(false);
 			}
 		});
-		
+
 		View bottomShadowView = inflater.inflate(R.layout.card_bottom_divider, listView, false);
 		if (!showSettingsOnly) {
 			listView.addFooterView(bottomShadowView);
@@ -213,7 +211,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 				subscriptionsButton.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						ChoosePlanDialogFragment.showOsmLiveInstance(getActivity().getSupportFragmentManager());
+						ChoosePlanDialogFragment.showDialogInstance(app, getActivity().getSupportFragmentManager(), ChoosePlanDialogType.OSM_LIVE);
 					}
 				});
 				if (isDonationSupported()) {
@@ -249,7 +247,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 					public void onClick(View v) {
 						FragmentActivity activity = getActivity();
 						if (activity != null) {
-							ChoosePlanDialogFragment.showOsmLiveInstance(activity.getSupportFragmentManager());
+							ChoosePlanDialogFragment.showDialogInstance(app, activity.getSupportFragmentManager(), ChoosePlanDialogType.OSM_LIVE);
 						}
 					}
 				});
@@ -423,7 +421,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 						}
 					}
 
-					
+
 				});
 			} else {
 				topShadowView.setVisibility(View.VISIBLE);
@@ -442,32 +440,9 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 		private void switchOnLiveUpdates(final OsmandSettings settings) {
 			settings.IS_LIVE_UPDATES_ON.set(true);
 			enableLiveUpdates(true);
-			showUpdateDialog();
+			showUpdateDialog(getActivity(), getSettings(), adapter.dataShouldUpdate, adapter.dataShouldUpdate.size(), null);
 		}
-		
-		private void showUpdateDialog() {
-			if(dataShouldUpdate.size() > 0) {
-				if (dataShouldUpdate.size() == 1) {
-					runLiveUpdate(app, dataShouldUpdate.get(0).getFileName(), false);
-				} else {
-					Builder bld = new AlertDialog.Builder(ctx);
-					bld.setMessage(R.string.update_all_maps_now);
-					bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							for (LocalIndexInfo li : dataShouldUpdate) {
-								runLiveUpdate(app, li.getFileName(), false);
-							}
-							notifyDataSetChanged();
-						}
-					});
-					bld.setNegativeButton(R.string.shared_string_no, null);
-					bld.show();
-				}
-			}
-		}
-		
 		private void enableLiveUpdates(boolean enable) {
 			AlarmManager alarmMgr = (AlarmManager) ctx.getSystemService(Context.ALARM_SERVICE);
 			for (LocalIndexInfo li : dataShouldUpdate) {
@@ -491,7 +466,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 		public int getChildrenCount(int groupPosition) {
 			if (showSettingsOnly) {
 				return 0;
-			}else if (groupPosition == SHOULD_UPDATE_GROUP_POSITION) {
+			} else if (groupPosition == SHOULD_UPDATE_GROUP_POSITION) {
 				return dataShouldUpdate.size();
 			} else if (groupPosition == SHOULD_NOT_UPDATE_GROUP_POSITION) {
 				return dataShouldNotUpdate.size();
@@ -575,7 +550,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 					preferenceLiveUpdatesOn(item, fragment.getSettings());
 			IncrementalChangesManager changesManager = context.getResourceManager().getChangesManager();
 
-			nameTextView.setText(getNameToDisplay(item, fragment.getMyActivity()));
+			nameTextView.setText(getNameToDisplay(item, context));
 			if (shouldUpdatePreference.get()) {
 				final Integer frequencyId = preferenceUpdateFrequency(item, fragment.getSettings()).get();
 				final Integer timeOfDateToUpdateId = preferenceTimeOfDayToUpdate(item, fragment.getSettings()).get();
@@ -602,11 +577,11 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 			final long timestamp = changesManager.getTimestamp(fileNameWithoutExtension);
 			final long lastCheck = preferenceLastCheck(item, fragment.getSettings()).get();
 			CommonPreference<Boolean> liveUpdateOn = preferenceLiveUpdatesOn(item, fragment.getSettings());
-			if(liveUpdateOn.get() && lastCheck != DEFAULT_LAST_CHECK) {
-				String lastCheckString = formatDateTime(fragment.getActivity(), lastCheck );
+			if (liveUpdateOn.get() && lastCheck != DEFAULT_LAST_CHECK) {
+				String lastCheckString = formatDateTime(fragment.getActivity(), lastCheck);
 				descriptionTextView.setText(context.getString(R.string.last_update, lastCheckString));
 			} else {
-				String lastCheckString = formatDateTime(fragment.getActivity(), timestamp );
+				String lastCheckString = formatDateTime(fragment.getActivity(), timestamp);
 				descriptionTextView.setText(context.getString(R.string.last_map_change, lastCheckString));
 			}
 

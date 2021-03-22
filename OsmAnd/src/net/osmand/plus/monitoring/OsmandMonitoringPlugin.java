@@ -25,6 +25,7 @@ import com.google.android.material.slider.Slider;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
+import net.osmand.PlatformUtil;
 import net.osmand.ValueHolder;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.NavigationService;
@@ -41,19 +42,25 @@ import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
+import net.osmand.plus.track.TrackMenuFragment;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
+
+import java.io.File;
 import java.lang.ref.WeakReference;
+import java.util.Collections;
 import java.util.List;
 
 import static net.osmand.plus.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
 
 public class OsmandMonitoringPlugin extends OsmandPlugin {
 
+	private static final Log LOG = PlatformUtil.getLog(OsmandMonitoringPlugin.class);
 	public static final String ID = "osmand.monitoring";
 	public final static String OSMAND_SAVE_SERVICE_ACTION = "OSMAND_SAVE_SERVICE_ACTION";
 	public static final int REQUEST_LOCATION_PERMISSION_FOR_GPX_RECORDING = 208;
@@ -79,6 +86,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		pluginPreferences.add(settings.DISABLE_RECORDING_ONCE_APP_KILLED);
 		pluginPreferences.add(settings.SAVE_HEADING_TO_GPX);
 		pluginPreferences.add(settings.SHOW_TRIP_REC_NOTIFICATION);
+		pluginPreferences.add(settings.SHOW_TRIP_REC_START_DIALOG);
 		pluginPreferences.add(settings.TRACK_STORAGE_DIRECTORY);
 		pluginPreferences.add(settings.LIVE_MONITORING);
 		pluginPreferences.add(settings.LIVE_MONITORING_URL);
@@ -329,9 +337,9 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	public void controlDialog(final Activity activity, final boolean showTrackSelection) {
 		FragmentManager fragmentManager = ((FragmentActivity) activity).getSupportFragmentManager();
 		if (hasDataToSave() || wasTrackMonitored()) {
-			TripRecordingActiveBottomSheet.showInstance(fragmentManager, getCurrentTrack());
-		} else {
 			TripRecordingBottomSheet.showInstance(fragmentManager);
+		} else {
+			TripRecordingStartingBottomSheet.showTripRecordingDialog(fragmentManager, app);
 		}
 
 		/*final boolean wasTrackMonitored = settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
@@ -436,16 +444,22 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	}
 
 	public void saveCurrentTrack() {
-		saveCurrentTrack(null, null);
+		saveCurrentTrack(null, null, true, false);
 	}
 
 	public void saveCurrentTrack(@Nullable final Runnable onComplete) {
-		saveCurrentTrack(onComplete, null);
+		saveCurrentTrack(onComplete, null, true, false);
 	}
 
 	public void saveCurrentTrack(@Nullable final Runnable onComplete, @Nullable Activity activity) {
-		stopRecording();
+		saveCurrentTrack(onComplete, activity, true, false);
+	}
 
+	public void saveCurrentTrack(@Nullable final Runnable onComplete, @Nullable Activity activity,
+								 final boolean stopRecording, final boolean openTrack) {
+		if (stopRecording) {
+			stopRecording();
+		}
 		final WeakReference<Activity> activityRef = activity != null ? new WeakReference<>(activity) : null;
 
 		app.getTaskManager().runInBackground(new OsmAndTaskRunnable<Void, Void, SaveGpxResult>() {
@@ -464,7 +478,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 					helper.close();
 					return result;
 				} catch (Exception e) {
-					e.printStackTrace();
+					LOG.error(e.getMessage(), e);
 				}
 				return null;
 			}
@@ -474,10 +488,31 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				isSaving = false;
 				app.getNotificationHelper().refreshNotifications();
 				updateControl();
-				if (activityRef != null && !Algorithms.isEmpty(result.getFilenames())) {
-					final Activity a = activityRef.get();
-					if (a instanceof FragmentActivity && !a.isFinishing()) {
-						SaveGPXBottomSheetFragment.showInstance(((FragmentActivity) a).getSupportFragmentManager(), result.getFilenames());
+
+				File file = null;
+				File dir = app.getAppCustomization().getTracksDir();
+				File[] children = dir.listFiles();
+				if (children != null && !Algorithms.isEmpty(result.getFilenames())) {
+					SavingTrackHelper helper = app.getSavingTrackHelper();
+					for (File child : children) {
+						if (child.getName().startsWith(result.getFilenames().get(0))
+								&& child.lastModified() == helper.getLastTimeFileSaved()) {
+							file = child;
+						}
+					}
+				}
+				if (file != null && file.exists()) {
+					if (!openTrack) {
+						if (activityRef != null) {
+							final Activity a = activityRef.get();
+							if (a instanceof FragmentActivity && !a.isFinishing()) {
+								List<String> singleName = Collections.singletonList(Algorithms.getFileNameWithoutExtension(file));
+								SaveGPXBottomSheet.showInstance(((FragmentActivity) a)
+										.getSupportFragmentManager(), singleName);
+							}
+						}
+					} else {
+						TrackMenuFragment.openTrack(mapActivity, file, null);
 					}
 				}
 
@@ -523,7 +558,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 			runnable.run();
 		} else if (map instanceof FragmentActivity) {
 			FragmentActivity activity = (FragmentActivity) map;
-			TripRecordingBottomSheet.showInstance(activity.getSupportFragmentManager());
+			TripRecordingStartingBottomSheet.showTripRecordingDialog(activity.getSupportFragmentManager(), app);
 		}
 	}
 

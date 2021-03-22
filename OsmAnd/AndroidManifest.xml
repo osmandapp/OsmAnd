@@ -1064,7 +1064,7 @@
 
 		<activity android:name="net.osmand.plus.activities.PrintDialogActivity" />
         <activity android:name=".liveupdates.OsmLiveActivity"
-            android:label="@string/osm_live"/>
+            android:label="@string/purchases"/>
 		<activity android:name=".wikivoyage.explore.WikivoyageExploreActivity">
 
 			<intent-filter>
