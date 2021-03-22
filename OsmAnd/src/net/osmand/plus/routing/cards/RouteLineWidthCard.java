@@ -26,10 +26,8 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routing.RouteLineDrawInfo;
-import net.osmand.plus.routing.RouteLineHelper;
 import net.osmand.plus.track.AppearanceViewHolder;
 import net.osmand.plus.track.TrackAppearanceFragment.OnNeedScrollListener;
-import net.osmand.render.RenderingRulesStorage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -275,7 +273,13 @@ public class RouteLineWidthCard extends BaseCard {
 		}
 
 		private int getIconColor(@NonNull WidthMode mode, @ColorInt int defaultColor) {
-			return mode.width != null ? RouteLineHelper.getColor(routeLineDrawInfo) : defaultColor;
+			return mode.width != null ? getRouteLineColor() : defaultColor;
+		}
+
+		private int getRouteLineColor() {
+			Integer color = routeLineDrawInfo.getColor();
+			return color != null ? color :
+					mapActivity.getMapLayers().getRouteLayer().getRouteLineColor(nightMode);
 		}
 
 		private void updateButtonBg(AppearanceViewHolder holder, WidthMode item) {

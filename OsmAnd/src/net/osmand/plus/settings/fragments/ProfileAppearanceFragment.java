@@ -55,7 +55,6 @@ import net.osmand.plus.profiles.SelectProfileBottomSheet.OnSelectProfileCallback
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routing.RouteLineDrawInfo;
-import net.osmand.plus.routing.RouteLineHelper;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.backup.ProfileSettingsItem;
@@ -185,7 +184,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		profile.routeService = baseModeForNewProfile.getRouteService();
 		profile.locationIcon = baseModeForNewProfile.getLocationIcon();
 		profile.navigationIcon = baseModeForNewProfile.getNavigationIcon();
-		profile.routeLineDrawInfo = RouteLineHelper.createDrawInfoForAppMode(app, profile.parent);
+		profile.routeLineDrawInfo = createRouteLineDrawInfo(baseModeForNewProfile);
 	}
 
 	@Override
@@ -777,7 +776,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 			mode.setCustomIconColor(changedProfile.customColor);
 			mode.setLocationIcon(changedProfile.locationIcon);
 			mode.setNavigationIcon(changedProfile.navigationIcon);
-			RouteLineHelper.saveRouteLineAppearance(app, mode, changedProfile.routeLineDrawInfo);
+			saveRouteLineAppearance(mode, changedProfile.routeLineDrawInfo);
 
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
@@ -805,7 +804,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		if (!ApplicationMode.values(app).contains(mode)) {
 			ApplicationMode.changeProfileAvailability(mode, true, app);
 		}
-		RouteLineHelper.saveRouteLineAppearance(app, mode, changedProfile.routeLineDrawInfo);
+		saveRouteLineAppearance(mode, changedProfile.routeLineDrawInfo);
 		return mode;
 	}
 
@@ -1016,6 +1015,32 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 	@Override
 	public void applyRouteLineAppearance(@NonNull RouteLineDrawInfo routeLineDrawInfo) {
 		changedProfile.routeLineDrawInfo = routeLineDrawInfo;
+	}
+
+	private RouteLineDrawInfo createRouteLineDrawInfo(@NonNull ApplicationMode appMode) {
+		Integer color = null;
+		Integer width = null;
+		if (settings.ROUTE_LINE_COLOR.isSetForMode(appMode)) {
+			color = settings.ROUTE_LINE_COLOR.getModeValue(appMode);
+		}
+		if (settings.ROUTE_LINE_WIDTH.isSetForMode(appMode)) {
+			width = settings.ROUTE_LINE_WIDTH.getModeValue(appMode);
+		}
+		return new RouteLineDrawInfo(color, width);
+	}
+
+	private void saveRouteLineAppearance(@NonNull ApplicationMode appMode,
+	                                     @NonNull RouteLineDrawInfo routeLineDrawInfo) {
+		if (routeLineDrawInfo.getColor() != null) {
+			settings.ROUTE_LINE_COLOR.setModeValue(appMode, routeLineDrawInfo.getColor());
+		} else {
+			settings.ROUTE_LINE_COLOR.resetToDefault();
+		}
+		if (routeLineDrawInfo.getWidth() != null) {
+			settings.ROUTE_LINE_WIDTH.setModeValue(appMode, routeLineDrawInfo.getWidth());
+		} else {
+			settings.ROUTE_LINE_WIDTH.resetToDefault();
+		}
 	}
 
 	public static boolean showInstance(FragmentActivity activity, SettingsScreenType screenType, @Nullable String appMode, boolean imported) {
