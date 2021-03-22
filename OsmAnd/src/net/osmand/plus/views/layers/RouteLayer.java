@@ -38,6 +38,9 @@ import net.osmand.plus.routing.RouteLineDrawInfo;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.geometry.PublicTransportGeometryWay;
@@ -253,6 +256,37 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 			routeWayContext.updatePaints(nightMode, attrs);
 			publicTransportWayContext.updatePaints(nightMode, attrs, attrsPT, attrsW);
 		}
+
+		updateRouteLineAppearance();
+	}
+
+	private void updateRouteLineAppearance() {
+		OsmandSettings settings = view.getApplication().getSettings();
+		ApplicationMode appMode = settings.getApplicationMode();
+		Integer color = null;
+		Integer width = null;
+		if (routeLineDrawInfo != null) {
+			color = routeLineDrawInfo.getColor();
+			width = routeLineDrawInfo.getWidth();
+		}
+		if (color == null) {
+			color = getRouteLineAttribute(appMode, settings.ROUTE_LINE_COLOR);
+		}
+		if (width == null) {
+			width = getRouteLineAttribute(appMode, settings.ROUTE_LINE_WIDTH);
+		}
+		if (color != null) {
+			attrs.paint.setColor(color);
+		}
+		if (width != null) {
+			attrs.paint.setStrokeWidth(color);
+		}
+	}
+
+	private Integer getRouteLineAttribute(@NonNull ApplicationMode appMode,
+	                                      @NonNull CommonPreference<Integer> preference) {
+		int value = preference.getModeValue(appMode);
+		return value != 0 ? value : null;
 	}
 
 	private void drawXAxisPoints(Canvas canvas, RotatedTileBox tileBox) {
@@ -283,8 +317,6 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 		}
 	}
 
-	private Paint routeLinePaint = new Paint();
-
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		if (routeLineDrawInfo != null) {
@@ -304,17 +336,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 		int screenHeight = drawInfo.getScreenHeight();
 
 		// draw line
-		Integer color = drawInfo.getColor();
-		if (color == null) {
-			color = attrs.paint.getColor();
-		}
-		Integer width = drawInfo.getWidth();
-		if (width == null) {
-			width = (int) attrs.paint.getStrokeWidth();
-		}
-		routeLinePaint.setColor(color);
-		routeLinePaint.setStrokeWidth(width);
-		canvas.drawLine(x, 0, x, screenHeight, routeLinePaint);
+		canvas.drawLine(x, 0, x, screenHeight, attrs.paint);
 
 		// draw image
 		LayerDrawable navigationIcon = (LayerDrawable) AppCompatResources.getDrawable(mapActivity, drawInfo.getIconId());
