@@ -359,12 +359,14 @@ public class GeneralRouter implements VehicleRouter {
 	@Override
 	public boolean isAvoidRoadObstacle(int left, int top, int right, int bottom) {
 		List<double[]> result = new ArrayList<>();
-		avoidRoads.queryInBox(new QuadRect(left, top, right, bottom), result);
-		if (!result.isEmpty()) {
-			for (double[] res : result) {
-				if ((int) res[0] == left && (int) res[1] == top && (int) res[2] == right && (int) res[3] == bottom) {
-					System.out.println("l " + left + " t " + top + " r " + right + " b " + bottom);
-					return true;
+		if (avoidRoads != null) {
+			avoidRoads.queryInBox(new QuadRect(left, top, right, bottom), result);
+			if (!result.isEmpty()) {
+				for (double[] res : result) {
+					if ((int) res[0] == left && (int) res[1] == top && (int) res[2] == right && (int) res[3] == bottom) {
+						System.out.println("l " + left + " t " + top + " r " + right + " b " + bottom);
+						return true;
+					}
 				}
 			}
 		}
