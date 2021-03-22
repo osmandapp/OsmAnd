@@ -11,10 +11,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content">
 
-		<include layout="@layout/profile_preference_toolbar_with_icon" />
-
 	</com.google.android.material.appbar.AppBarLayout>
-
 
 	<View
 		android:layout_width="match_parent"
@@ -316,7 +313,9 @@
 		android:paddingTop="@dimen/card_padding"
 		android:paddingEnd="@dimen/action_bar_image_side_margin"
 		android:paddingRight="@dimen/action_bar_image_side_margin"
-		android:paddingBottom="@dimen/card_padding">
+		android:paddingBottom="@dimen/card_padding"
+		android:clickable="true"
+		android:focusable="true">
 
 		<net.osmand.plus.widgets.TextViewEx
 			android:id="@+id/contact_support_title"

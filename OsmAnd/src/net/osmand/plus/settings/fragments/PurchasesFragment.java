@@ -13,6 +13,7 @@ import android.text.method.LinkMovementMethod;
 import android.text.style.StyleSpan;
 import android.text.style.URLSpan;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -23,6 +24,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.appbar.AppBarLayout;
 
@@ -34,19 +36,33 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.liveupdates.LiveUpdatesFragmentNew;
 import net.osmand.plus.liveupdates.OsmLiveActivity;
+import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 
 public class PurchasesFragment extends BaseOsmAndFragment {
 
 	public static final String TAG = PurchasesFragment.class.getName();
+	private static final String PLAY_STORE_SUBSCRIPTION_URL = "https://play.google.com/store/account/subscriptions";
+	private static final String PLAY_STORE_SUBSCRIPTION_DEEPLINK_URL = "https://play.google.com/store/account/subscriptions?sku=%s&package=%s";
 	private InAppPurchaseHelper purchaseHelper;
 	private View mainView;
 	private Context context;
 	private OsmandApplication app;
 	private String url;
-	private static final String PLAY_STORE_SUBSCRIPTION_URL = "https://play.google.com/store/account/subscriptions";
-	private static final String PLAY_STORE_SUBSCRIPTION_DEEPLINK_URL = "https://play.google.com/store/account/subscriptions?sku=%s&package=%s";
 
+	public static boolean showInstance(FragmentManager fragmentManager) {
+		try {
+			PurchasesFragment fragment = new PurchasesFragment();
+			fragmentManager.beginTransaction()
+					.add(R.id.fragmentContainer, fragment, TAG)
+					.addToBackStack(TAG)
+					.commitAllowingStateLoss();
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -58,12 +74,20 @@ public class PurchasesFragment extends BaseOsmAndFragment {
 		app = getMyApplication();
 		context = requireContext();
 		purchaseHelper = getInAppPurchaseHelper();
+
+
 		final MapActivity mapActivity = (MapActivity) getActivity();
-		boolean nightMode = !getMyApplication().getSettings().isLightContent();
+		final boolean nightMode = !getMyApplication().getSettings().isLightContent();
 		LayoutInflater themedInflater = UiUtilities.getInflater(context, nightMode);
 		mainView = themedInflater.inflate(R.layout.purchases_layout, container, false);
-
+		AndroidUtils.addStatusBarPadding21v(getActivity(), mainView);
 		createToolbar(mainView, nightMode);
+		mainView.setOnTouchListener(new View.OnTouchListener() {
+			public boolean onTouch(View v, MotionEvent event) {
+				return true;
+			}
+		});
+
 		LinearLayout purchasesRestore = mainView.findViewById(R.id.restore_purchases);
 		purchasesRestore.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -88,12 +112,20 @@ public class PurchasesFragment extends BaseOsmAndFragment {
 		liveUpdatesContainer.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-//				Fragment parent = getParentFragment();
-//				if (parent != null) {
-//					((LiveUpdatesFragment) parent).updateSubscriptionHeader();
-//				}
+				FragmentActivity activity = getActivity();
+				if (activity != null) {
+					LiveUpdatesFragmentNew.showInstance(activity.getSupportFragmentManager(), PurchasesFragment.this);
+				}
 			}
 		});
+		LinearLayout newDeviceAccountContainer = mainView.findViewById(R.id.new_device_account_container);
+		newDeviceAccountContainer.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				WikipediaDialogFragment.showFullArticle(context, Uri.parse("https://docs.osmand.net/en/main@latest/osmand/purchases#new-device--new-account"), nightMode);
+			}
+		});
+
 		setFormatLink();
 		return mainView;
 	}
@@ -108,7 +140,7 @@ public class PurchasesFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	private void createToolbar(View mainView, boolean nightMode) {
+	private void createToolbar(View mainView, final boolean nightMode) {
 		AppBarLayout appbar = mainView.findViewById(R.id.appbar);
 		View toolbar = UiUtilities.getInflater(getContext(), nightMode).inflate(R.layout.profile_preference_toolbar_with_icon, appbar, false);
 
@@ -118,11 +150,7 @@ public class PurchasesFragment extends BaseOsmAndFragment {
 		icon.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Uri uri = Uri.parse("https://docs.osmand.net/en/main@latest/osmand/purchases");
-				Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-				if (AndroidUtils.isIntentSafe(context, intent)) {
-					startActivity(intent);
-				}
+				WikipediaDialogFragment.showFullArticle(context, Uri.parse("https://docs.osmand.net/en/main@latest/osmand/purchases"), nightMode);
 			}
 		});
 		ImageButton backButton = toolbar.findViewById(R.id.close_button);
@@ -153,17 +181,12 @@ public class PurchasesFragment extends BaseOsmAndFragment {
 	}
 
 	public void setFormatLink() {
-		TextView newDeviceAccountLink = mainView.findViewById(R.id.new_device_account_title);
 		TextView contactSupportLink = mainView.findViewById(R.id.contact_support_title);
 		TextView supportDescription = mainView.findViewById(R.id.support_link_title);
 
 		SpannableString spannableStringSupport = new SpannableString(getString(R.string.contact_support));
 		String urlSupport = "mailto:support@osmand.net";
 		spannableStringSupport.setSpan(new URLSpan(urlSupport), 0, spannableStringSupport.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-		SpannableString spannableStringNewDeviceAccount = new SpannableString(getString(R.string.new_device_account));
-		String urlNewDeviceAccount = "https://docs.osmand.net/en/main@latest/osmand/purchases#new-device--new-account";
-		spannableStringNewDeviceAccount.setSpan(new URLSpan(urlNewDeviceAccount), 0, spannableStringNewDeviceAccount.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 		String emailString = getString(R.string.contact_support_mail);
 		String supportDescriptionString = getString(R.string.contact_support_description, emailString);
@@ -174,14 +197,11 @@ public class PurchasesFragment extends BaseOsmAndFragment {
 		spannableStringMail.setSpan(boldSpan, startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 		contactSupportLink.setText(spannableStringSupport);
-		newDeviceAccountLink.setText(spannableStringNewDeviceAccount);
 		supportDescription.setText(spannableStringMail);
 
 		AndroidUtils.removeLinkUnderline(contactSupportLink);
-		AndroidUtils.removeLinkUnderline(newDeviceAccountLink);
 
 		contactSupportLink.setMovementMethod(LinkMovementMethod.getInstance());
-		newDeviceAccountLink.setMovementMethod(LinkMovementMethod.getInstance());
 	}
 
 	private void getSkuAppId() {

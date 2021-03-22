@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.ColorRes;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
@@ -151,7 +150,14 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 				FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 				ExportSettingsFragment.showInstance(fragmentManager, mode, true);
 			}
+		} else if (PURCHASES_SETTINGS.equals(prefId)) {
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+				PurchasesFragment.showInstance(fragmentManager);
+			}
 		}
+
 		return super.onPreferenceClick(preference);
 	}
 
