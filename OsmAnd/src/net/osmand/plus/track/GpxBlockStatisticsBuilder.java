@@ -138,6 +138,7 @@ public class GpxBlockStatisticsBuilder {
 		if (app == null || gpxFile == null) {
 			return;
 		}
+		analysis = null;
 		boolean withoutGaps = true;
 		if (gpxFile.equals(app.getSavingTrackHelper().getCurrentGpx())) {
 			GPXFile currentGpx = app.getSavingTrackHelper().getCurrentTrack().getGpxFile();
