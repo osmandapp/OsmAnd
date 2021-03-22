@@ -997,7 +997,10 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 			MapActivity mapActivity = getMapActivity();
 			ApplicationMode appMode = getSelectedAppMode();
 			if (mapActivity != null && appMode != null) {
-				RouteLineAppearanceFragment.showInstance(mapActivity, changedProfile.routeLineDrawInfo, appMode, this);
+				RouteLineDrawInfo drawInfo = changedProfile.routeLineDrawInfo;
+				drawInfo.setIconId(changedProfile.navigationIcon.getIconId());
+				drawInfo.setIconColor(changedProfile.getActualColor());
+				RouteLineAppearanceFragment.showInstance(mapActivity, drawInfo, appMode, this);
 			}
 		}
 		return super.onPreferenceClick(preference);

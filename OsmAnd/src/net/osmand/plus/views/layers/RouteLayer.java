@@ -17,6 +17,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.graphics.drawable.DrawableCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
@@ -287,29 +288,48 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		if (routeLineDrawInfo != null) {
-			// draw route line on map
-			updateAttrs(settings, tileBox);
-			Integer color = routeLineDrawInfo.getColor();
-			if (color == null) {
-				color = attrs.paint.getColor();
-			}
-			Integer width = routeLineDrawInfo.getWidth();
-			if (width == null) {
-				width = (int) attrs.paint.getStrokeWidth();
-			}
-			routeLinePaint.setColor(color);
-			routeLinePaint.setStrokeWidth(width);
-			MapActivity mapActivity = getMapActivity();
-			int screenWidth = AndroidUtils.getScreenWidth(mapActivity);
-			int screenHeight = AndroidUtils.getScreenHeight(mapActivity);
-			int x;
-			if (AndroidUiHelper.isOrientationPortrait(mapActivity)) {
-				x = screenWidth / 2;
-			} else {
-				x = (int) (AndroidUtils.isLayoutRtl(mapActivity) ? screenWidth/4 : screenWidth * 0.75);
-			}
-			canvas.drawLine(x, 0, x, screenHeight, routeLinePaint);
+			drawRouteLinePreview(canvas, tileBox, settings, routeLineDrawInfo);
 		}
+	}
+
+	private void drawRouteLinePreview(Canvas canvas,
+	                                  RotatedTileBox tileBox,
+	                                  DrawSettings settings,
+	                                  RouteLineDrawInfo drawInfo) {
+		MapActivity mapActivity = getMapActivity();
+		updateAttrs(settings, tileBox);
+
+		int x = drawInfo.getCenterX();
+		int y = drawInfo.getCenterY();
+		int screenHeight = drawInfo.getScreenHeight();
+
+		// draw line
+		Integer color = drawInfo.getColor();
+		if (color == null) {
+			color = attrs.paint.getColor();
+		}
+		Integer width = drawInfo.getWidth();
+		if (width == null) {
+			width = (int) attrs.paint.getStrokeWidth();
+		}
+		routeLinePaint.setColor(color);
+		routeLinePaint.setStrokeWidth(width);
+		canvas.drawLine(x, 0, x, screenHeight, routeLinePaint);
+
+		// draw image
+		LayerDrawable navigationIcon = (LayerDrawable) AppCompatResources.getDrawable(mapActivity, drawInfo.getIconId());
+		if (navigationIcon != null) {
+			DrawableCompat.setTint(navigationIcon.getDrawable(1), drawInfo.getIconColor());
+		}
+		int left = x - navigationIcon.getIntrinsicWidth() / 2;
+		int right = x + navigationIcon.getIntrinsicWidth() / 2;
+		int top = y - navigationIcon.getIntrinsicHeight() / 2;
+		int bottom = y + navigationIcon.getIntrinsicHeight() / 2;
+		navigationIcon.setBounds(left, top, right, bottom);
+		canvas.rotate(-90, x, y);
+		navigationIcon.draw(canvas);
+		canvas.save();
+		canvas.restore();
 	}
 
 	private void drawAction(RotatedTileBox tb, Canvas canvas, List<Location> actionPoints) {

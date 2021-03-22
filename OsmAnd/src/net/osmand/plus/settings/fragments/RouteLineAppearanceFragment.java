@@ -160,6 +160,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment imple
 			@Override
 			public void run() {
 				updateMapControlsPos(RouteLineAppearanceFragment.this, getViewY(), true);
+				initVisibleRect();
 			}
 		});
 	}
@@ -284,6 +285,25 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment imple
 		buttonsShadow.animate()
 				.alpha(0f)
 				.setDuration(200);
+	}
+
+	private void initVisibleRect() {
+		MapActivity ctx = getMapActivity();
+		int screenHeight = AndroidUtils.getScreenHeight(ctx);
+		int screenWidth = AndroidUtils.getScreenWidth(ctx);
+		int statusBarHeight = AndroidUtils.getStatusBarHeight(ctx);
+		int x;
+		int y;
+		if (AndroidUiHelper.isOrientationPortrait(ctx)) {
+			x = screenWidth / 2;
+			y = (getViewY() + toolbarContainer.getHeight() + statusBarHeight) / 2;
+		} else {
+			x = (int) (AndroidUtils.isLayoutRtl(ctx) ? screenWidth/4 : screenWidth * 0.75);
+			y = (screenHeight + statusBarHeight) / 2 ;
+		}
+		routeLineDrawInfo.setCenterX(x);
+		routeLineDrawInfo.setCenterY(y);
+		routeLineDrawInfo.setScreenHeight(screenHeight);
 	}
 
 	@Override
