@@ -151,7 +151,7 @@ public class TripRecordingBottomFragment extends MenuBottomSheetDialogFragment i
 		LinearLayout showTrackContainer = itemView.findViewById(R.id.show_track_on_map);
 		trackAppearanceIcon = showTrackContainer.findViewById(R.id.additional_button_icon);
 		createShowTrackItem(showTrackContainer, trackAppearanceIcon, ItemType.SHOW_TRACK.getTitleId(),
-				TripRecordingActiveBottomSheet.this, nightMode, new Runnable() {
+				TripRecordingBottomFragment.this, nightMode, new Runnable() {
 					@Override
 					public void run() {
 						hide();
