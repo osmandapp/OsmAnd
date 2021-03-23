@@ -271,24 +271,25 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 			routeWayContext.updatePaints(nightMode, attrs);
 			publicTransportWayContext.updatePaints(nightMode, attrs, attrsPT, attrsW);
 		}
-		updateRouteLineAppearance(tileBox, nightMode);
+		updateRouteLineAppearance(tileBox, updatePaints, nightMode);
 	}
 
-	private void updateRouteLineAppearance(RotatedTileBox tileBox, boolean night) {
+	private void updateRouteLineAppearance(RotatedTileBox tileBox, boolean defaultPaintUpdated, boolean night) {
 		OsmandSettings settings = view.getApplication().getSettings();
 		ApplicationMode appMode = settings.getApplicationMode();
 
-		int color = getRouteLineColor(settings, appMode);
+		int color = getRouteLineColor(settings, appMode, defaultPaintUpdated);
 		attrs.paint.setColor(color);
 
-		float width = getRouteLineWidth(settings, appMode, tileBox);
+		float width = getRouteLineWidth(settings, appMode, tileBox, defaultPaintUpdated);
 		attrs.paint.setStrokeWidth(width);
 	}
 
 	@ColorInt
 	private int getRouteLineColor(@NonNull OsmandSettings settings,
-	                              @NonNull ApplicationMode appMode) {
-		if (defaultRouteLineColor == null) {
+	                              @NonNull ApplicationMode appMode,
+	                              boolean defaultPaintUpdated) {
+		if (defaultPaintUpdated || defaultRouteLineColor == null) {
 			defaultRouteLineColor = attrs.paint.getColor();
 		}
 
@@ -307,8 +308,9 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 
 	private float getRouteLineWidth(@NonNull OsmandSettings settings,
 	                                @NonNull ApplicationMode appMode,
-	                                @NonNull RotatedTileBox tileBox) {
-		if (defaultRouteLineWidth == null) {
+	                                @NonNull RotatedTileBox tileBox,
+	                                boolean defaultPaintUpdated) {
+		if (defaultPaintUpdated || defaultRouteLineWidth == null) {
 			defaultRouteLineWidth = attrs.paint.getStrokeWidth();
 		}
 
