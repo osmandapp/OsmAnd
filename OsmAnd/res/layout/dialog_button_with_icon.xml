@@ -13,7 +13,8 @@
 		android:layout_marginRight="@dimen/content_padding"
 		android:layout_marginStart="@dimen/content_padding"
 		android:layout_marginBottom="@dimen/content_padding_small"
-		tools:ignore="UselessParent">
+		tools:ignore="UselessParent"
+		android:layout_marginEnd="@dimen/content_padding">
 
 		<FrameLayout
 			android:id="@+id/button_container"

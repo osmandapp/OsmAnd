@@ -1,6 +1,7 @@
 package net.osmand.plus.routing.data;
 
 import android.graphics.Typeface;
+import android.text.BidiFormatter;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.StyleSpan;
@@ -36,12 +37,12 @@ public class AnnounceTimeDistances {
 	private float OFF_ROUTE_DISTANCE;
 
 	private float TURN_NOW_SPEED;
-	private int PREPARE_LONG_DISTANCE;
+	private final int PREPARE_LONG_DISTANCE;
 	private int PREPARE_LONG_DISTANCE_END;
-	private int PREPARE_DISTANCE;
+	private final int PREPARE_DISTANCE;
 	private int PREPARE_DISTANCE_END;
-	private int TURN_IN_DISTANCE;
-	private int TURN_IN_DISTANCE_END;
+	private final int TURN_IN_DISTANCE;
+	private final int TURN_IN_DISTANCE_END;
 	private int TURN_NOW_DISTANCE;
 	private int LONG_PNT_ANNOUNCE_RADIUS;
 	private int SHORT_PNT_ANNOUNCE_RADIUS;
@@ -73,13 +74,13 @@ public class AnnounceTimeDistances {
 		PREPARE_DISTANCE_END = (int) (DEFAULT_SPEED * 90);
 
 		// 22 s: car 275 m, bicycle 61 m, pedestrian 24 m
-		TURN_IN_DISTANCE = (int) (DEFAULT_SPEED  * 22);
+		TURN_IN_DISTANCE = (int) (DEFAULT_SPEED * 22);
 		// 15 s: car 189 m, bicycle 42 m, pedestrian 17 m
 		TURN_IN_DISTANCE_END = (int) (DEFAULT_SPEED * 15);
 
 		// Do not play prepare: for pedestrian and slow transport
 		// same check as speed < 150/(90-22) m/s = 2.2 m/s = 8 km/h
-			// if (DEFAULT_SPEED < 2.3) {
+		// if (DEFAULT_SPEED < 2.3) {
 		if (PREPARE_DISTANCE_END - TURN_IN_DISTANCE < 150) {
 			PREPARE_DISTANCE_END = PREPARE_DISTANCE * 2;
 		}
@@ -108,7 +109,7 @@ public class AnnounceTimeDistances {
 		TURN_NOW_SPEED = TURN_NOW_DISTANCE / TURN_NOW_TIME;
 
 		// 5 s: car 63 m, bicycle 14 m, pedestrian 6 m -> 12 m (capped by POSITIONING_TOLERANCE)
-		ARRIVAL_DISTANCE =  (int) (Math.max(POSITIONING_TOLERANCE, DEFAULT_SPEED * 5.) * arrivalDistanceFactor);
+		ARRIVAL_DISTANCE = (int) (Math.max(POSITIONING_TOLERANCE, DEFAULT_SPEED * 5.) * arrivalDistanceFactor);
 
 		// 20 s: car 250 m, bicycle 56 m, pedestrian 22 m
 		OFF_ROUTE_DISTANCE = DEFAULT_SPEED * 20 * arrivalDistanceFactor; // 20 seconds
@@ -175,17 +176,14 @@ public class AnnounceTimeDistances {
 	}
 
 	private boolean isDistanceLess(float currentSpeed, double dist, double etalon, float defSpeed) {
-	// Check triggers:
+		// Check triggers:
 		// (1) distance < etalon?
 		if (dist - voicePromptDelayTimeSec * currentSpeed <= etalon) {
 			return true;
 		}
 		// (2) time_with_current_speed < etalon_time_with_default_speed?
 		// check only if speed > 0
-		if (currentSpeed > 0 && (dist / currentSpeed - voicePromptDelayTimeSec) <= etalon / defSpeed) {
-			return true;
-		}
-		return false;
+		return currentSpeed > 0 && (dist / currentSpeed - voicePromptDelayTimeSec) <= etalon / defSpeed;
 	}
 
 	public float getSpeed(Location loc) {
@@ -219,7 +217,8 @@ public class AnnounceTimeDistances {
 			// round to 5
 			time = (time / 5) * 5;
 		}
-		builder.append(String.format("\n%s: %d - %d %s, %d %s.", name, minDist, minDist + 5, meter, time, second));
+		BidiFormatter myBidiFormatter = BidiFormatter.getInstance();
+		builder.append(String.format("\n%s: %d - %d %s, %d %s.", name, minDist, minDist + 5, myBidiFormatter.unicodeWrap(meter), time, myBidiFormatter.unicodeWrap(second)));
 	}
 
 	public Spannable getIntervalsDescription(OsmandApplication app) {

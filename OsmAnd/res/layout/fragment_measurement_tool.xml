@@ -164,7 +164,9 @@
             android:paddingTop="@dimen/measurement_tool_button_margin"
             android:paddingBottom="@dimen/measurement_tool_button_margin"
             android:paddingLeft="@dimen/measurement_tool_button_margin"
-            android:paddingRight="@dimen/measurement_tool_button_margin">
+            android:paddingRight="@dimen/measurement_tool_button_margin"
+			android:paddingStart="@dimen/measurement_tool_button_margin"
+			android:paddingEnd="@dimen/measurement_tool_button_margin">
 
             <FrameLayout
                 android:layout_width="0dp"

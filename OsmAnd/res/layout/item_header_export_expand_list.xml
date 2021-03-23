@@ -22,7 +22,9 @@
 		android:text="@string/export_profile_dialog_description"
 		android:textColor="?android:textColorPrimary"
 		android:textSize="@dimen/default_list_text_size"
-		app:typeface="@string/font_roboto_regular" />
+		app:typeface="@string/font_roboto_regular"
+		android:paddingStart="@dimen/content_padding"
+		android:paddingEnd="@dimen/content_padding" />
 
 	<include
 		android:id="@+id/topSwitchDivider"

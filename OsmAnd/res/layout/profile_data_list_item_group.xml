@@ -32,7 +32,9 @@
 				android:layout_height="@dimen/standard_icon_size"
 				android:layout_marginLeft="@dimen/content_padding"
 				android:layout_marginRight="@dimen/content_padding"
-				osmand:srcCompat="@drawable/ic_action_arrow_down" />
+				osmand:srcCompat="@drawable/ic_action_arrow_down"
+				android:layout_marginEnd="@dimen/content_padding"
+				android:layout_marginStart="@dimen/content_padding" />
 
 			<LinearLayout
 				android:layout_width="0dp"
@@ -41,7 +43,9 @@
 				android:layout_marginRight="@dimen/content_padding"
 				android:layout_weight="1"
 				android:gravity="center_vertical"
-				android:orientation="vertical">
+				android:orientation="vertical"
+				android:layout_marginEnd="@dimen/content_padding"
+				android:layout_marginStart="@dimen/content_padding">
 
 				<net.osmand.plus.widgets.TextViewEx
 					android:id="@+id/title_tv"
