@@ -21,11 +21,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-
 import com.google.android.material.appbar.AppBarLayout;
 
 import net.osmand.AndroidUtils;
@@ -39,21 +34,37 @@ import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
+import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
+import net.osmand.plus.liveupdates.CountrySelectionFragment;
+import net.osmand.plus.liveupdates.CountrySelectionFragment.CountryItem;
+import net.osmand.plus.liveupdates.CountrySelectionFragment.OnFragmentInteractionListener;
 import net.osmand.plus.liveupdates.LiveUpdatesFragmentNew;
 import net.osmand.plus.liveupdates.OsmLiveActivity;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
+import net.osmand.util.Algorithms;
 
-public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurchaseListener {
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+
+public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurchaseListener, OnFragmentInteractionListener {
 
 	public static final String TAG = PurchasesFragment.class.getName();
 	public static final String KEY_IS_SUBSCRIBER = "action_is_new";
 	private static final String PLAY_STORE_SUBSCRIPTION_URL = "https://play.google.com/store/account/subscriptions";
 	private static final String PLAY_STORE_SUBSCRIPTION_DEEPLINK_URL = "https://play.google.com/store/account/subscriptions?sku=%s&package=%s";
+
+	private OsmandApplication app;
+	private Context context;
 	private InAppPurchaseHelper purchaseHelper;
+
 	private View mainView;
 	private SubscriptionsCard subscriptionsCard;
-	private Context context;
-	private OsmandApplication app;
+
+	private CountrySelectionFragment countrySelectionFragment = new CountrySelectionFragment();
+
 	private String url;
 	private Boolean isSubscriber;
 
@@ -79,20 +90,14 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		app = getMyApplication();
 		context = requireContext();
-		purchaseHelper = getInAppPurchaseHelper();
 		isSubscriber = Version.isPaidVersion(app);
-		final MapActivity mapActivity = (MapActivity) getActivity();
-		final boolean nightMode = !getMyApplication().getSettings().isLightContent();
+		final MapActivity mapActivity = getMapActivity();
+		final boolean nightMode = !app.getSettings().isLightContent();
 		LayoutInflater themedInflater = UiUtilities.getInflater(context, nightMode);
 
 		if (isSubscriber) {
 			mainView = themedInflater.inflate(R.layout.purchases_layout, container, false);
 			setSubscriptionClick(mapActivity);
-			if (mapActivity != null && purchaseHelper != null) {
-				ViewGroup subscriptionsCardContainer = mainView.findViewById(R.id.subscriptions_card_container);
-				subscriptionsCard = new SubscriptionsCard(mapActivity, purchaseHelper);
-				subscriptionsCardContainer.addView(subscriptionsCard.build(mapActivity));
-			}
 		} else {
 			mainView = themedInflater.inflate(R.layout.empty_purchases_layout, container, false);
 			LinearLayout osmandLive = mainView.findViewById(R.id.osmand_live);
@@ -136,6 +141,21 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 
 		setFormatStrings();
 		return mainView;
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		purchaseHelper = getInAppPurchaseHelper();
+		if (isSubscriber) {
+			MapActivity mapActivity = getMapActivity();
+			if (getMapActivity() != null && purchaseHelper != null) {
+				ViewGroup subscriptionsCardContainer = mainView.findViewById(R.id.subscriptions_card_container);
+				subscriptionsCard = new SubscriptionsCard(mapActivity, purchaseHelper);
+				subscriptionsCardContainer.addView(subscriptionsCard.build(mapActivity));
+			}
+			setupSupportRegion();
+		}
 	}
 
 	@Override
@@ -187,6 +207,54 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 			}
 		});
 
+	}
+
+	private void setupSupportRegion() {
+		String region = getSupportRegionName(app, purchaseHelper);
+		String header = getSupportRegionHeader(app, region);
+		TextView supportRegionHeader = mainView.findViewById(R.id.support_region_header);
+		TextView supportRegion = mainView.findViewById(R.id.support_region);
+		supportRegionHeader.setText(header);
+		supportRegion.setText(region);
+
+		View supportRegionContainer = mainView.findViewById(R.id.support_region_container);
+		supportRegionContainer.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				CountrySelectionFragment countryCountrySelectionFragment = countrySelectionFragment;
+				countryCountrySelectionFragment.show(getChildFragmentManager(), CountrySelectionFragment.TAG);
+			}
+		});
+
+		countrySelectionFragment.initCountries(app);
+	}
+
+	public static String getSupportRegionName(OsmandApplication app, InAppPurchaseHelper purchaseHelper) {
+		OsmandSettings settings = app.getSettings();
+		String countryName = settings.BILLING_USER_COUNTRY.get();
+		if (purchaseHelper != null) {
+			InAppSubscription monthlyPurchased = purchaseHelper.getPurchasedMonthlyLiveUpdates();
+			if (monthlyPurchased != null && monthlyPurchased.isDonationSupported()) {
+				if (Algorithms.isEmpty(countryName)) {
+					if (OsmandSettings.BILLING_USER_DONATION_NONE_PARAMETER.equals(settings.BILLING_USER_COUNTRY_DOWNLOAD_NAME.get())) {
+						countryName = app.getString(R.string.osmand_team);
+					} else {
+						countryName = app.getString(R.string.shared_string_world);
+					}
+				}
+			} else {
+				countryName = app.getString(R.string.osmand_team);
+			}
+		} else {
+			countryName = app.getString(R.string.osmand_team);
+		}
+		return countryName;
+	}
+
+	public static String getSupportRegionHeader(OsmandApplication app, String supportRegion) {
+		return supportRegion.equals(app.getString(R.string.osmand_team)) ?
+				app.getString(R.string.default_buttons_support) :
+				app.getString(R.string.osm_live_support_region);
 	}
 
 	@Nullable
@@ -264,6 +332,23 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 	}
 
 	@Override
+	public void onSearchResult(CountryItem selectedCountryItem) {
+		String countryName = selectedCountryItem != null ? selectedCountryItem.getLocalName() : "";
+		String countryDownloadName = selectedCountryItem != null ?
+				selectedCountryItem.getDownloadName() : OsmandSettings.BILLING_USER_DONATION_WORLD_PARAMETER;
+
+		OsmandApplication app = getMyApplication();
+		if (app != null) {
+			TextView supportRegionHeader = mainView.findViewById(R.id.support_region_header);
+			TextView supportRegion = mainView.findViewById(R.id.support_region);
+			supportRegionHeader.setText(getSupportRegionHeader(app, countryName));
+			supportRegion.setText(countryName);
+			app.getSettings().BILLING_USER_COUNTRY.set(countryName);
+			app.getSettings().BILLING_USER_COUNTRY_DOWNLOAD_NAME.set(countryDownloadName);
+		}
+	}
+
+	@Override
 	public void onError(InAppPurchaseHelper.InAppPurchaseTaskType taskType, String error) {
 	}
 
@@ -287,5 +372,9 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 
 	@Override
 	public void dismissProgress(InAppPurchaseHelper.InAppPurchaseTaskType taskType) {
+	}
+
+	private MapActivity getMapActivity() {
+		return (MapActivity) getActivity();
 	}
 }

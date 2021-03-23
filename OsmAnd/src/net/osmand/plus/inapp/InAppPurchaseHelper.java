@@ -198,6 +198,18 @@ public abstract class InAppPurchaseHelper {
 		isDeveloperVersion = Version.isDeveloperVersion(ctx);
 	}
 
+	@NonNull
+	public List<InAppSubscription> getEverMadeSubscriptions() {
+		List<InAppSubscription> subscriptions = new ArrayList<>();
+		for (InAppSubscription subscription : getLiveUpdates().getVisibleSubscriptions()) {
+			SubscriptionState state = subscription.getState();
+			if (state != null && !SubscriptionState.UNDEFINED.equals(state)) {
+				subscriptions.add(subscription);
+			}
+		}
+		return subscriptions;
+	}
+
 	public abstract void isInAppPurchaseSupported(@NonNull final Activity activity, @Nullable final InAppPurchaseInitCallback callback);
 
 	public boolean hasInventory() {

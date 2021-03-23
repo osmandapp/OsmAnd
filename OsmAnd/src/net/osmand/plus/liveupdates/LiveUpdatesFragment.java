@@ -49,6 +49,7 @@ import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.resources.IncrementalChangesManager;
+import net.osmand.plus.settings.fragments.PurchasesFragment;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -181,28 +182,9 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 				statusTextView.setText(getString(R.string.osm_live_active));
 				statusIcon.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_done));
 
-				regionNameHeaderTextView.setText(R.string.osm_live_support_region);
-				String countryName = app.getSettings().BILLING_USER_COUNTRY.get();
-				InAppPurchaseHelper purchaseHelper = getInAppPurchaseHelper();
-				if (purchaseHelper != null) {
-					InAppSubscription monthlyPurchased = purchaseHelper.getPurchasedMonthlyLiveUpdates();
-					if (monthlyPurchased != null && monthlyPurchased.isDonationSupported()) {
-						if (Algorithms.isEmpty(countryName)) {
-							if (app.getSettings().BILLING_USER_COUNTRY_DOWNLOAD_NAME.get().equals(OsmandSettings.BILLING_USER_DONATION_NONE_PARAMETER)) {
-								regionNameHeaderTextView.setText(R.string.default_buttons_support);
-								countryName = getString(R.string.osmand_team);
-							} else {
-								countryName = getString(R.string.shared_string_world);
-							}
-						}
-					} else {
-						regionNameHeaderTextView.setText(R.string.default_buttons_support);
-						countryName = getString(R.string.osmand_team);
-					}
-				} else {
-					regionNameHeaderTextView.setText(R.string.default_buttons_support);
-					countryName = getString(R.string.osmand_team);
-				}
+				String countryName = PurchasesFragment.getSupportRegionName(app, getInAppPurchaseHelper());
+				String header = PurchasesFragment.getSupportRegionHeader(app, countryName);
+				regionNameHeaderTextView.setText(header);
 				regionNameTextView.setText(countryName);
 
 				View subscriptionsButton = subscriptionHeader.findViewById(R.id.button_subscriptions);

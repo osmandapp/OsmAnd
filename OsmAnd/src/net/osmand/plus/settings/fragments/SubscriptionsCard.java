@@ -45,11 +45,11 @@ public class SubscriptionsCard extends BaseCard {
 
 	@Override
 	protected void updateContent() {
-		if (mapActivity == null) {
+		if (mapActivity == null || purchaseHelper == null) {
 			return;
 		}
 
-		List<InAppSubscription> subscriptions = getActiveAndCancelledSubscriptions();
+		List<InAppSubscription> subscriptions = purchaseHelper.getEverMadeSubscriptions();
 		if (Algorithms.isEmpty(subscriptions)) {
 			return;
 		}
@@ -161,19 +161,5 @@ public class SubscriptionsCard extends BaseCard {
 			}
 		}
 		return "";
-	}
-
-	private List<InAppSubscription> getActiveAndCancelledSubscriptions() {
-		List<InAppSubscription> subscriptions = new ArrayList<>();
-		for (InAppSubscription subscription : purchaseHelper.getLiveUpdates().getVisibleSubscriptions()) {
-			if (shouldShowSubscription(subscription)) {
-				subscriptions.add(subscription);
-			}
-		}
-		return subscriptions;
-	}
-
-	private boolean shouldShowSubscription(InAppSubscription s) {
-		return s.getState() != null && !SubscriptionState.UNDEFINED.equals(s.getState());
 	}
 }
