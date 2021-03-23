@@ -7,6 +7,7 @@ public abstract class GeometryWayStyle<T extends GeometryWayContext> {
 
 	private T context;
 	protected Integer color;
+	protected Float width;
 
 	public GeometryWayStyle(T context) {
 		this.context = context;
@@ -15,6 +16,12 @@ public abstract class GeometryWayStyle<T extends GeometryWayContext> {
 	public GeometryWayStyle(T context, Integer color) {
 		this.context = context;
 		this.color = color;
+	}
+
+	public GeometryWayStyle(T context, Integer color, Float width) {
+		this.context = context;
+		this.color = color;
+		this.width = width;
 	}
 
 	public T getContext() {
@@ -27,6 +34,10 @@ public abstract class GeometryWayStyle<T extends GeometryWayContext> {
 
 	public Integer getColor() {
 		return color;
+	}
+
+	public Float getWidth() {
+		return width;
 	}
 
 	public Integer getStrokeColor() {

@@ -95,6 +95,7 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 
 	public void drawPath(Canvas canvas, Path path, GeometryWayStyle<?> style) {
 		context.getAttrs().customColor = style.getColor();
+		context.getAttrs().customWidth = style.getWidth();
 		context.getAttrs().drawPath(canvas, path);
 	}
 
