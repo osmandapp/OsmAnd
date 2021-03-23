@@ -114,6 +114,12 @@ public class TrackPointsCard extends BaseCard implements OnChildClickListener, O
 		this.selectedGroup = selectedGroup;
 	}
 
+	public void updateGroups() {
+		selectedItems.clear();
+		selectedGroups.clear();
+		adapter.synchronizeGroups(getDisplayGroups());
+	}
+
 	public List<GpxDisplayGroup> getGroups() {
 		return adapter.groups;
 	}
@@ -263,9 +269,7 @@ public class TrackPointsCard extends BaseCard implements OnChildClickListener, O
 
 	@Override
 	public void onPointsDeleted() {
-		selectedItems.clear();
-		selectedGroups.clear();
-		adapter.synchronizeGroups(getDisplayGroups());
+		updateGroups();
 	}
 
 	public void filter(String text) {

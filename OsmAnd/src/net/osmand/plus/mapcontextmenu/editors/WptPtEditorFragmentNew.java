@@ -20,6 +20,7 @@ import net.osmand.data.FavouritePoint.BackgroundType;
 import net.osmand.data.LatLon;
 import net.osmand.data.WptLocationPoint;
 import net.osmand.plus.GpxSelectionHelper;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -403,7 +404,9 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 	}
 
 	@Override
-	public String getAddressInitValue() { return ""; }
+	public String getAddressInitValue() {
+		return "";
+	}
 
 	@Override
 	public Drawable getNameIcon() {
@@ -479,6 +482,20 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 			}
 		}
 		return 0;
+	}
+
+	@Override
+	protected boolean isCategoryVisible(String name) {
+		WptPtEditor editor = getWptPtEditor();
+		if (selectedGpxHelper == null || editor == null || editor.getGpxFile() == null) {
+			return true;
+		}
+		SelectedGpxFile selectedGpxFile = selectedGpxHelper.getSelectedFileByPath(editor.getGpxFile().path);
+		if (selectedGpxFile != null) {
+			Set<String> hiddenGroups = selectedGpxFile.getHiddenGroups();
+			return !hiddenGroups.contains(name);
+		}
+		return true;
 	}
 
 	private void saveGpx(final OsmandApplication app, final GPXFile gpxFile, final boolean gpxSelected) {
