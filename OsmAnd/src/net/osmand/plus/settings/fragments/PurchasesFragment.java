@@ -122,7 +122,7 @@ public class PurchasesFragment extends BaseOsmAndFragment {
 			}
 		});
 
-		setFormatLink();
+		setFormatStrings();
 		return mainView;
 	}
 
@@ -215,9 +215,14 @@ public class PurchasesFragment extends BaseOsmAndFragment {
 		appbar.addView(toolbar);
 	}
 
-	public void setFormatLink() {
+	public void setFormatStrings() {
 		TextView contactSupportLink = mainView.findViewById(R.id.contact_support_title);
 		TextView supportDescription = mainView.findViewById(R.id.support_link_title);
+		TextView infoDescription = mainView.findViewById(R.id.info_description);
+
+		String restorePurchases = getString(R.string.restore_purchases);
+		String infoPurchases = String.format(getString(R.string.empty_purchases_description), restorePurchases);
+		infoDescription.setText(infoPurchases);
 
 		SpannableString spannableStringSupport = new SpannableString(getString(R.string.contact_support));
 		String urlSupport = "mailto:support@osmand.net";
