@@ -213,6 +213,7 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 			String description = Algorithms.isEmpty(getDescriptionTextValue()) ? null : getDescriptionTextValue();
 			if (editor.isNew()) {
 				doAddWpt(name, category, description);
+				wpt = getWpt();
 			} else {
 				doUpdateWpt(name, category, description);
 			}
@@ -222,7 +223,7 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 			}
 
 			MapContextMenu menu = mapActivity.getContextMenu();
-			if (menu.getLatLon() != null && menu.isActive()) {
+			if (menu.getLatLon() != null && menu.isActive() && wpt != null) {
 				LatLon latLon = new LatLon(wpt.getLatitude(), wpt.getLongitude());
 				if (menu.getLatLon().equals(latLon)) {
 					menu.update(latLon, new WptLocationPoint(wpt).getPointDescription(mapActivity), wpt);
