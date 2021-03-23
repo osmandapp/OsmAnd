@@ -729,12 +729,10 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 
 	private void updateRouteLinePreference() {
 		Preference preference = findPreference(CUSTOMIZE_ROUTE_LINE);
-		if (preference != null) {
-			boolean isDefaultProfile = getSelectedAppMode().equals(ApplicationMode.DEFAULT) && !isNewProfile;
-			boolean isPublicTransport = PUBLIC_TRANSPORT_KEY.equals(changedProfile.routingProfile);
-			preference.setVisible(!isDefaultProfile && !isPublicTransport);
-			preference.setIcon(getIcon(R.drawable.ic_action_route_distance, getActiveColorRes()));
-		}
+		boolean isDefaultProfile = getSelectedAppMode().equals(ApplicationMode.DEFAULT) && !isNewProfile;
+		boolean isPublicTransport = PUBLIC_TRANSPORT_KEY.equals(changedProfile.routingProfile);
+		preference.setVisible(!isDefaultProfile && !isPublicTransport);
+		preference.setIcon(getIcon(R.drawable.ic_action_route_distance, getActiveColorRes()));
 	}
 
 	private boolean checkProfileName() {
@@ -999,7 +997,6 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 				RouteLineDrawInfo drawInfo = changedProfile.routeLineDrawInfo;
 				drawInfo.setIconId(changedProfile.navigationIcon.getIconId());
 				drawInfo.setIconColor(changedProfile.getActualColor());
-				drawInfo.setAppModeKey(profile.stringKey);
 				RouteLineAppearanceFragment.showInstance(mapActivity, drawInfo, this);
 			}
 		}
@@ -1031,7 +1028,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 	private void saveRouteLineAppearance(@NonNull ApplicationMode appMode,
 	                                     @NonNull RouteLineDrawInfo drawInfo) {
 		Integer color = drawInfo.getColor();
-		if (drawInfo.getColor() != null) {
+		if (color != null) {
 			settings.ROUTE_LINE_COLOR.setModeValue(appMode, color);
 		} else {
 			settings.ROUTE_LINE_COLOR.resetModeToDefault(appMode);

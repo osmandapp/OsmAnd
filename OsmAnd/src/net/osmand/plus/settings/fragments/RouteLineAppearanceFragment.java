@@ -161,6 +161,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment imple
 	private void setupCards() {
 		MapActivity mapActivity = requireMapActivity();
 		ViewGroup cardsContainer = getCardsContainer();
+		cardsContainer.removeAllViews();
 
 		colorCard = new RouteLineColorCard(mapActivity, this, routeLineDrawInfo, initMapTheme, selectedMapTheme);
 		cardsContainer.addView(colorCard.build(mapActivity));
@@ -285,17 +286,21 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment imple
 		int screenHeight = AndroidUtils.getScreenHeight(ctx);
 		int screenWidth = AndroidUtils.getScreenWidth(ctx);
 		int statusBarHeight = AndroidUtils.getStatusBarHeight(ctx);
-		int x;
-		int y;
-		if (AndroidUiHelper.isOrientationPortrait(ctx)) {
-			x = screenWidth / 2;
-			y = (getViewY() + toolbarContainer.getHeight() + statusBarHeight) / 2;
+		int centerX;
+		int centerY;
+		if (isPortrait()) {
+			centerX = screenWidth / 2;
+			centerY = (getViewY() + toolbarContainer.getHeight() + statusBarHeight) / 2;
 		} else {
-			x = (int) (AndroidUtils.isLayoutRtl(ctx) ? screenWidth/4 : screenWidth * 0.75);
-			y = (screenHeight + statusBarHeight) / 2 ;
+			boolean isRtl = AndroidUtils.isLayoutRtl(ctx);
+			int dialogWidth = getLandscapeNoShadowWidth();
+			int left = isRtl ? 0 : dialogWidth;
+			int right = isRtl ? screenWidth - dialogWidth : screenWidth;
+			centerX = (left + right) / 2;
+			centerY = (screenHeight + statusBarHeight) / 2 ;
 		}
-		routeLineDrawInfo.setCenterX(x);
-		routeLineDrawInfo.setCenterY(y);
+		routeLineDrawInfo.setCenterX(centerX);
+		routeLineDrawInfo.setCenterY(centerY);
 		routeLineDrawInfo.setScreenHeight(screenHeight);
 	}
 
@@ -393,7 +398,6 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment imple
 	                                   @NonNull Fragment target) {
 		try {
 			RouteLineAppearanceFragment fragment = new RouteLineAppearanceFragment();
-			fragment.setRetainInstance(true);
 			fragment.setTargetFragment(target, 0);
 			fragment.routeLineDrawInfo = new RouteLineDrawInfo(drawInfo);
 

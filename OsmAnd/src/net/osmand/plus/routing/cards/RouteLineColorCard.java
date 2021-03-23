@@ -26,7 +26,6 @@ import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routing.RouteLineDrawInfo;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ListStringPreference;
 import net.osmand.plus.track.AppearanceViewHolder;
 import net.osmand.plus.track.ColorsCard;
@@ -34,7 +33,6 @@ import net.osmand.plus.track.CustomColorBottomSheet.ColorPickerListener;
 import net.osmand.plus.widgets.MultiStateToggleButton;
 import net.osmand.plus.widgets.MultiStateToggleButton.OnRadioItemClickListener;
 import net.osmand.plus.widgets.MultiStateToggleButton.RadioItem;
-import net.osmand.render.RenderingRulesStorage;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -211,7 +209,7 @@ public class RouteLineColorCard extends BaseCard implements CardListener, ColorP
 		if (selectedMode == ColorMode.DEFAULT) {
 			String pattern = app.getString(R.string.route_line_use_map_style_appearance);
 			String color = app.getString(R.string.shared_string_color).toLowerCase();
-			description = String.format(pattern, color, RendererRegistry.getMapStyleName(app));
+			description = String.format(pattern, color, app.getRendererRegistry().getSelectedRendererName());
 		} else {
 			String pattern = app.getString(R.string.specify_color_for_map_mode);
 			String mapModeTitle = app.getString(isNightMap() ? NIGHT_TITLE_ID : DAY_TITLE_ID);

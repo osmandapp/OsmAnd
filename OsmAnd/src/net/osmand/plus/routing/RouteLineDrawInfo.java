@@ -17,7 +17,6 @@ public class RouteLineDrawInfo {
 	private static final String CENTER_X = "center_x";
 	private static final String CENTER_Y = "center_y";
 	private static final String SCREEN_HEIGHT = "screen_height";
-	private static final String APP_MODE_KEY = "app_mode_key";
 
 	// parameters to save
 	@ColorInt
@@ -31,7 +30,6 @@ public class RouteLineDrawInfo {
 	private int centerX;
 	private int centerY;
 	private int screenHeight;
-	private String appModeKey;
 
 	public RouteLineDrawInfo(@Nullable @ColorInt Integer color,
 	                         @Nullable String width) {
@@ -44,14 +42,13 @@ public class RouteLineDrawInfo {
 	}
 
 	public RouteLineDrawInfo(@NonNull RouteLineDrawInfo existed) {
-		this.color = existed.getColor();
-		this.width = existed.getWidth();
+		this.color = existed.color;
+		this.width = existed.width;
 		this.iconId = existed.iconId;
 		this.iconColor = existed.iconColor;
 		this.centerX = existed.centerX;
 		this.centerY = existed.centerY;
 		this.screenHeight = existed.screenHeight;
-		this.appModeKey = existed.appModeKey;
 	}
 
 	public void setColor(@Nullable Integer color) {
@@ -80,10 +77,6 @@ public class RouteLineDrawInfo {
 
 	public void setScreenHeight(int screenHeight) {
 		this.screenHeight = screenHeight;
-	}
-
-	public void setAppModeKey(@Nullable String appModeKey) {
-		this.appModeKey = appModeKey;
 	}
 
 	@Nullable
@@ -117,20 +110,16 @@ public class RouteLineDrawInfo {
 		return screenHeight;
 	}
 
-	@Nullable
-	public String getAppModeKey() {
-		return appModeKey;
-	}
-
 	private void readBundle(@NonNull Bundle bundle) {
-		color = bundle.getInt(LINE_COLOR);
+		if (bundle.containsKey(LINE_COLOR)) {
+			color = bundle.getInt(LINE_COLOR);
+		}
 		width = bundle.getString(LINE_WIDTH);
 		iconId = bundle.getInt(NAVIGATION_ICON_ID);
 		iconColor = bundle.getInt(NAVIGATION_ICON_COLOR);
 		centerX = bundle.getInt(CENTER_X);
 		centerY = bundle.getInt(CENTER_Y);
 		screenHeight = bundle.getInt(SCREEN_HEIGHT);
-		appModeKey = bundle.getString(APP_MODE_KEY);
 	}
 
 	public void saveToBundle(@NonNull Bundle bundle) {
@@ -142,10 +131,9 @@ public class RouteLineDrawInfo {
 		}
 		bundle.putInt(NAVIGATION_ICON_ID, iconId);
 		bundle.putInt(NAVIGATION_ICON_COLOR, iconColor);
-		bundle.putInt(CENTER_X, (int) centerX);
-		bundle.putInt(CENTER_Y, (int) centerY);
+		bundle.putInt(CENTER_X, centerX);
+		bundle.putInt(CENTER_Y, centerY);
 		bundle.putInt(SCREEN_HEIGHT, screenHeight);
-		bundle.putString(APP_MODE_KEY, appModeKey);
 	}
 
 	@Override

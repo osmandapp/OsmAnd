@@ -873,7 +873,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				&& !isInMovingMarkerMode() && !isInGpxDetailsMode() && !isInMeasurementToolMode()
 				&& !isInPlanRouteMode() && !shouldHideTopControls && !isInChoosingRoutesMode()
 				&& !isInWaypointsChoosingMode() && !isInFollowTrackMode() && !isInTrackAppearanceMode()
-				&& !isInRouteLineCustomizationMode();
+				&& !isInRouteLineAppearanceMode();
 		routePlanningBtn.updateVisibility(showBottomMenuButtons);
 		menuControl.updateVisibility(showBottomMenuButtons);
 
@@ -881,7 +881,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				&& !isInTrackAppearanceMode()
 				&& !isInChoosingRoutesMode()
 				&& !isInWaypointsChoosingMode()
-				&& !isInRouteLineCustomizationMode();
+				&& !isInRouteLineAppearanceMode();
 		boolean showZoomButtons = !routeDialogOpened && !shouldHideTopControls
 				&& !isInFollowTrackMode()
 				&& (additionalDialogsHide || !portrait);
@@ -891,7 +891,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		boolean forceHideCompass = routeDialogOpened || trackDialogOpened || isInMeasurementToolMode()
 				|| isInPlanRouteMode() || shouldHideTopControls || isInChoosingRoutesMode()
 				|| isInTrackAppearanceMode() || isInWaypointsChoosingMode() || isInFollowTrackMode()
-				|| isInRouteLineCustomizationMode();
+				|| isInRouteLineAppearanceMode();
 		compassHud.forceHideCompass = forceHideCompass;
 		compassHud.updateVisibility(!forceHideCompass && shouldShowCompass());
 
@@ -903,7 +903,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		boolean showTopButtons = !routeDialogOpened && !trackDialogOpened && !shouldHideTopControls
 				&& !isInMeasurementToolMode() && !isInPlanRouteMode() && !isInChoosingRoutesMode()
 				&& !isInTrackAppearanceMode() && !isInWaypointsChoosingMode() && !isInFollowTrackMode()
-				&& !isInRouteLineCustomizationMode();
+				&& !isInRouteLineAppearanceMode();
 		layersHud.updateVisibility(showTopButtons);
 		quickSearchHud.updateVisibility(showTopButtons);
 
@@ -1034,7 +1034,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				&& !isInChoosingRoutesMode()
 				&& !isInWaypointsChoosingMode()
 				&& !isInFollowTrackMode()
-				&& !isInRouteLineCustomizationMode();
+				&& !isInRouteLineAppearanceMode();
 		backToLocationControl.updateVisibility(visible && !dialogOpened && !isInPlanRouteMode()
 				&& (additionalDialogsHide || !isPotrait()));
 	}
@@ -1402,7 +1402,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		return MapRouteInfoMenu.waypointsVisible;
 	}
 
-	private boolean isInRouteLineCustomizationMode() {
+	private boolean isInRouteLineAppearanceMode() {
 		return mapActivity.getMapLayers().getRouteLayer().isInRouteLineAppearanceMode();
 	}
 

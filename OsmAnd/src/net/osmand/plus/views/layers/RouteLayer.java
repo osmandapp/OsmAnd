@@ -11,6 +11,7 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 
 import androidx.annotation.ColorInt;
@@ -41,8 +42,6 @@ import net.osmand.plus.routing.RouteLineDrawInfo;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.geometry.PublicTransportGeometryWay;
@@ -103,6 +102,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 	private PublicTransportGeometryWay publicTransportRouteGeometry;
 
 	private LayerDrawable projectionIcon;
+	private LayerDrawable previewIcon;
 
 	public RouteLayer(RoutingHelper helper) {
 		this.helper = helper;
@@ -246,8 +246,11 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 		return routeLineDrawInfo != null;
 	}
 
-	public void setRouteLineDrawInfo(RouteLineDrawInfo routeLineDrawInfo) {
-		this.routeLineDrawInfo = routeLineDrawInfo;
+	public void setRouteLineDrawInfo(RouteLineDrawInfo drawInfo) {
+		this.routeLineDrawInfo = drawInfo;
+		if (drawInfo == null) {
+			previewIcon = null;
+		}
 	}
 
 	private MapActivity getMapActivity() {
@@ -312,41 +315,30 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 			QuadPoint c = tileBox.getCenterPixelPoint();
 
 			canvas.rotate(-angle, c.x, c.y);
-			drawRouteLinePreview(canvas, tileBox, settings, routeLineDrawInfo);
+			drawRouteLinePreview(canvas, tileBox, routeLineDrawInfo);
 			canvas.rotate(angle, c.x, c.y);
 		}
 	}
 
 	private void drawRouteLinePreview(Canvas canvas,
 	                                  RotatedTileBox tileBox,
-	                                  DrawSettings settings,
 	                                  RouteLineDrawInfo drawInfo) {
-		MapActivity mapActivity = getMapActivity();
-		updateAttrs(settings, tileBox);
 		paintRouteLinePreview.setColor(getRouteLineColor(nightMode));
 		paintRouteLinePreview.setStrokeWidth(getRouteLineWidth(tileBox));
 
-		int x = drawInfo.getCenterX();
-		int y = drawInfo.getCenterY();
+		int centerX = drawInfo.getCenterX();
+		int centerY = drawInfo.getCenterY();
 		int screenHeight = drawInfo.getScreenHeight();
 
-		// draw line
-		canvas.drawLine(x, 0, x, screenHeight, paintRouteLinePreview);
+		canvas.drawLine(centerX, 0, centerX, screenHeight, paintRouteLinePreview);
 
-		// draw image
-		LayerDrawable navigationIcon = (LayerDrawable) AppCompatResources.getDrawable(mapActivity, drawInfo.getIconId());
-		if (navigationIcon != null) {
-			DrawableCompat.setTint(navigationIcon.getDrawable(1), drawInfo.getIconColor());
+		if (previewIcon == null) {
+			previewIcon = (LayerDrawable) AppCompatResources.getDrawable(view.getContext(), drawInfo.getIconId());
+			DrawableCompat.setTint(previewIcon.getDrawable(1), drawInfo.getIconColor());
 		}
-		int left = x - navigationIcon.getIntrinsicWidth() / 2;
-		int right = x + navigationIcon.getIntrinsicWidth() / 2;
-		int top = y - navigationIcon.getIntrinsicHeight() / 2;
-		int bottom = y + navigationIcon.getIntrinsicHeight() / 2;
-		navigationIcon.setBounds(left, top, right, bottom);
-		canvas.rotate(-90, x, y);
-		navigationIcon.draw(canvas);
-		canvas.save();
-		canvas.restore();
+		canvas.rotate(-90, centerX, centerY);
+		drawIcon(canvas, previewIcon, centerX, centerY);
+		canvas.rotate(90, centerX, centerY);
 	}
 
 	private void drawAction(RotatedTileBox tb, Canvas canvas, List<Location> actionPoints) {
@@ -410,25 +402,24 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 		}
 		int locationX = (int) projectionXY[0];
 		int locationY = (int) projectionXY[1];
+		drawIcon(canvas, projectionIcon, locationX, locationY);
+	}
 
-		projectionIcon.setBounds(locationX - projectionIcon.getIntrinsicWidth() / 2,
-						locationY - projectionIcon.getIntrinsicHeight() / 2,
-						locationX + projectionIcon.getIntrinsicWidth() / 2,
-						locationY + projectionIcon.getIntrinsicHeight() / 2);
-		projectionIcon.draw(canvas);
-
+	private static void drawIcon(Canvas canvas, Drawable drawable, int locationX, int locationY) {
+		drawable.setBounds(locationX - drawable.getIntrinsicWidth() / 2,
+				locationY - drawable.getIntrinsicHeight() / 2,
+				locationX + drawable.getIntrinsicWidth() / 2,
+				locationY + drawable.getIntrinsicHeight() / 2);
+		drawable.draw(canvas);
 	}
 
 	@ColorInt
 	public int getRouteLineColor(boolean night) {
-		OsmandSettings settings = view.getSettings();
-		ApplicationMode appMode = getApplicationMode();
-
 		Integer color;
 		if (routeLineDrawInfo != null) {
 			color = routeLineDrawInfo.getColor();
 		} else {
-			int storedValue = settings.ROUTE_LINE_COLOR.getModeValue(appMode);
+			int storedValue = view.getSettings().ROUTE_LINE_COLOR.getModeValue(helper.getAppMode());
 			color = storedValue != 0 ? storedValue : null;
 		}
 
@@ -440,14 +431,11 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 	}
 
 	private float getRouteLineWidth(@NonNull RotatedTileBox tileBox) {
-		OsmandSettings settings = view.getSettings();
-		ApplicationMode appMode = getApplicationMode();
-
 		String widthKey;
 		if (routeLineDrawInfo != null) {
 			widthKey = routeLineDrawInfo.getWidth();
 		} else {
-			widthKey = settings.ROUTE_LINE_WIDTH.getModeValue(appMode);
+			widthKey = view.getSettings().ROUTE_LINE_WIDTH.getModeValue(helper.getAppMode());
 		}
 		return widthKey != null ? getWidthByKey(tileBox, widthKey) : attrs.paint.getStrokeWidth();
 	}
@@ -470,9 +458,9 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 			RenderingRulesStorage rrs = view.getApplication().getRendererRegistry().getCurrentSelectedRenderer();
 			RenderingRuleSearchRequest req = new RenderingRuleSearchRequest(rrs);
 			req.setBooleanFilter(rrs.PROPS.R_NIGHT_MODE, nightMode);
-			RenderingRuleProperty ctWidth = rrs.PROPS.get(CURRENT_TRACK_WIDTH_ATTR);
 			req.setIntFilter(rrs.PROPS.R_MINZOOM, tileBox.getZoom());
 			req.setIntFilter(rrs.PROPS.R_MAXZOOM, tileBox.getZoom());
+			RenderingRuleProperty ctWidth = rrs.PROPS.get(CURRENT_TRACK_WIDTH_ATTR);
 			if (ctWidth != null) {
 				req.setStringFilter(ctWidth, widthKey);
 			}
@@ -486,18 +474,6 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 		return resultValue;
 	}
 
-	@NonNull
-	private ApplicationMode getApplicationMode() {
-		ApplicationMode appMode = null;
-		if (routeLineDrawInfo != null) {
-			String modeKey = routeLineDrawInfo.getAppModeKey();
-			if (modeKey != null) {
-				appMode = ApplicationMode.valueOfStringKey(modeKey, null);
-			}
-		}
-		return appMode != null ? appMode : helper.getAppMode();
-	}
-	
 	public void drawLocations(RotatedTileBox tb, Canvas canvas, double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude) {
 		if (helper.isPublicTransportMode()) {
 			int currentRoute = transportHelper.getCurrentRoute();

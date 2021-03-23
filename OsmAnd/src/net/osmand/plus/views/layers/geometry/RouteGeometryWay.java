@@ -5,6 +5,7 @@ import android.graphics.Paint;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.Location;
 import net.osmand.data.RotatedTileBox;
@@ -18,6 +19,7 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Geome
 
 	private RoutingHelper helper;
 	private RouteCalculationResult route;
+
 	private Integer customColor;
 	private Float customWidth;
 
@@ -26,8 +28,7 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Geome
 		this.helper = context.getApp().getRoutingHelper();
 	}
 
-	public void setRouteStyleParams(@ColorInt int color,
-	                                float width) {
+	public void setRouteStyleParams(@Nullable @ColorInt Integer color, @Nullable Float width) {
 		this.customColor = color;
 		this.customWidth = width;
 	}
@@ -36,10 +37,8 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Geome
 	@Override
 	public GeometryWayStyle<RouteGeometryWayContext> getDefaultWayStyle() {
 		Paint paint = getContext().getAttrs().paint;
-		int paintColor = paint.getColor();
-		int color = customColor != null ? customColor : paintColor;
-		float paintWidth = paint.getStrokeWidth();
-		float width = customWidth != null ? customWidth : paintWidth;
+		int color = customColor != null ? customColor : paint.getColor();
+		float width = customWidth != null ? customWidth : paint.getStrokeWidth();
 		return new GeometrySolidWayStyle(getContext(), color, width);
 	}
 

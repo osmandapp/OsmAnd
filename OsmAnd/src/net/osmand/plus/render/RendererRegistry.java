@@ -289,9 +289,8 @@ public class RendererRegistry {
 		return renderers;
 	}
 
-	public static String getMapStyleName(@NonNull OsmandApplication app) {
-		RendererRegistry rr = app.getRendererRegistry();
-		RenderingRulesStorage storage = rr.getCurrentSelectedRenderer();
+	public String getSelectedRendererName() {
+		RenderingRulesStorage storage = getCurrentSelectedRenderer();
 		if (storage == null) {
 			return "";
 		}
