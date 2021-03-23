@@ -38,11 +38,12 @@ import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.liveupdates.LiveUpdatesFragmentNew;
 import net.osmand.plus.liveupdates.OsmLiveActivity;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 
-public class PurchasesFragment extends BaseOsmAndFragment {
+public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurchaseListener {
 
 	public static final String TAG = PurchasesFragment.class.getName();
 	public static final String KEY_IS_SUBSCRIBER = "action_is_new";
@@ -50,6 +51,7 @@ public class PurchasesFragment extends BaseOsmAndFragment {
 	private static final String PLAY_STORE_SUBSCRIPTION_DEEPLINK_URL = "https://play.google.com/store/account/subscriptions?sku=%s&package=%s";
 	private InAppPurchaseHelper purchaseHelper;
 	private View mainView;
+	private SubscriptionsCard subscriptionsCard;
 	private Context context;
 	private OsmandApplication app;
 	private String url;
@@ -83,9 +85,14 @@ public class PurchasesFragment extends BaseOsmAndFragment {
 		final boolean nightMode = !getMyApplication().getSettings().isLightContent();
 		LayoutInflater themedInflater = UiUtilities.getInflater(context, nightMode);
 
-		if (!isSubscriber) {
+		if (isSubscriber) {
 			mainView = themedInflater.inflate(R.layout.purchases_layout, container, false);
 			setSubscriptionClick(mapActivity);
+			if (mapActivity != null && purchaseHelper != null) {
+				ViewGroup subscriptionsCardContainer = mainView.findViewById(R.id.subscriptions_card_container);
+				subscriptionsCard = new SubscriptionsCard(mapActivity, purchaseHelper);
+				subscriptionsCardContainer.addView(subscriptionsCard.build(mapActivity));
+			}
 		} else {
 			mainView = themedInflater.inflate(R.layout.empty_purchases_layout, container, false);
 			LinearLayout osmandLive = mainView.findViewById(R.id.osmand_live);
@@ -114,7 +121,7 @@ public class PurchasesFragment extends BaseOsmAndFragment {
 		purchasesRestore.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (purchaseHelper != null && !purchaseHelper.hasInventory()) {
+				if (purchaseHelper != null) {
 					purchaseHelper.requestInventory();
 				}
 			}
@@ -254,5 +261,31 @@ public class PurchasesFragment extends BaseOsmAndFragment {
 		} else {
 			url = PLAY_STORE_SUBSCRIPTION_URL;
 		}
+	}
+
+	@Override
+	public void onError(InAppPurchaseHelper.InAppPurchaseTaskType taskType, String error) {
+	}
+
+	@Override
+	public void onGetItems() {
+		if (subscriptionsCard != null) {
+			subscriptionsCard.update();
+		}
+	}
+
+	@Override
+	public void onItemPurchased(String sku, boolean active) {
+		if (purchaseHelper != null) {
+			purchaseHelper.requestInventory();
+		}
+	}
+
+	@Override
+	public void showProgress(InAppPurchaseHelper.InAppPurchaseTaskType taskType) {
+	}
+
+	@Override
+	public void dismissProgress(InAppPurchaseHelper.InAppPurchaseTaskType taskType) {
 	}
 }

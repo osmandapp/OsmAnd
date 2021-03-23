@@ -8,8 +8,10 @@ import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Period;
@@ -580,22 +582,38 @@ public abstract class InAppPurchases {
 		private InAppSubscriptionIntroductoryInfo introductoryInfo;
 
 		public enum SubscriptionState {
-			UNDEFINED("undefined"),
-			ACTIVE("active"),
-			CANCELLED("cancelled"),
-			IN_GRACE_PERIOD("in_grace_period"),
-			ON_HOLD("on_hold"),
-			PAUSED("paused"),
-			EXPIRED("expired");
+			UNDEFINED("undefined", 0, 0),
+			ACTIVE("active", R.string.osm_live_active, R.drawable.bg_osmand_live_active),
+			CANCELLED("cancelled", R.string.osmand_live_cancelled, R.drawable.bg_osmand_live_cancelled),
+			IN_GRACE_PERIOD("in_grace_period", R.string.in_grace_period, R.drawable.bg_osmand_live_active),
+			ON_HOLD("on_hold", R.string.on_hold, R.drawable.bg_osmand_live_cancelled),
+			PAUSED("paused", R.string.shared_string_paused, R.drawable.bg_osmand_live_cancelled),
+			EXPIRED("expired", R.string.expired, R.drawable.bg_osmand_live_cancelled);
 
 			private final String stateStr;
+			@StringRes
+			private final int stringRes;
+			@DrawableRes
+			private final int backgroundRes;
 
-			SubscriptionState(@NonNull String stateStr) {
+			SubscriptionState(@NonNull String stateStr, @StringRes int stringRes, @DrawableRes int backgroundRes) {
 				this.stateStr = stateStr;
+				this.stringRes = stringRes;
+				this.backgroundRes = backgroundRes;
 			}
 
 			public String getStateStr() {
 				return stateStr;
+			}
+
+			@StringRes
+			public int getStringRes() {
+				return stringRes;
+			}
+
+			@DrawableRes
+			public int getBackgroundRes() {
+				return backgroundRes;
 			}
 
 			@NonNull

@@ -12,6 +12,16 @@
 
 -->
 
+    <string name="expired">Expired</string>
+    <string name="on_hold">On hold</string>
+    <string name="in_grace_period">In grace period</string>
+    <string name="renew_subscription">Renew subscription</string>
+    <string name="osmand_live_cancelled">Cancelled</string>
+    <string name="next_billing_date">Next billing date: %1$s</string>
+    <string name="three_months_subscription">Three months subscription</string>
+    <string name="monthly_subscription">Monthly subscription</string>
+    <string name="annual_subscription">Annual subscription</string>
+    <string name="osmand_live">OsmAnd Live</string>
     <string name="troubleshooting_description">Please follow this link if you any issues with purchases.</string>
     <string name="troubleshooting">Troubleshooting</string>
     <string name="contact_support">Contact support</string>

@@ -110,9 +110,8 @@ public class GpxEditDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 	}
 
 	private void setupSaveButton(View view) {
-		View btnSave = view.findViewById(R.id.btn_save);
-
-		btnSave.setOnClickListener(new View.OnClickListener() {
+		View btnSaveContainer = view.findViewById(R.id.btn_save_container);
+		btnSaveContainer.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				Editable editable = editableHtml.getText();
@@ -122,12 +121,16 @@ public class GpxEditDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 			}
 		});
 
-		Context ctx = btnSave.getContext();
+		Context ctx = btnSaveContainer.getContext();
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-			AndroidUtils.setBackground(ctx, btnSave, isNightMode(true), R.drawable.ripple_light, R.drawable.ripple_dark);
+			AndroidUtils.setBackground(ctx, btnSaveContainer, isNightMode(true), R.drawable.ripple_light, R.drawable.ripple_dark);
 		} else {
-			AndroidUtils.setBackground(ctx, btnSave, isNightMode(true), R.drawable.btn_unstroked_light, R.drawable.btn_unstroked_dark);
+			AndroidUtils.setBackground(ctx, btnSaveContainer, isNightMode(true), R.drawable.btn_unstroked_light, R.drawable.btn_unstroked_dark);
 		}
+
+		View btnSave = view.findViewById(R.id.btn_save);
+		int drawableRes = isNightMode(true) ? R.drawable.btn_solid_border_dark : R.drawable.btn_solid_border_light;
+		btnSave.setBackgroundDrawable(ContextCompat.getDrawable(ctx, drawableRes));
 	}
 
 	private void showDismissDialog() {
