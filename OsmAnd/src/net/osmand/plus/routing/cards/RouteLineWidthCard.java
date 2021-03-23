@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -28,6 +29,7 @@ import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routing.RouteLineDrawInfo;
 import net.osmand.plus.track.AppearanceViewHolder;
 import net.osmand.plus.track.TrackAppearanceFragment.OnNeedScrollListener;
+import net.osmand.util.Algorithms;
 
 import java.util.Arrays;
 import java.util.List;
@@ -50,20 +52,20 @@ public class RouteLineWidthCard extends BaseCard {
 
 	private enum WidthMode {
 		DEFAULT(R.string.map_widget_renderer, R.drawable.ic_action_map_style, null),
-		THIN(R.string.rendering_value_thin_name, R.drawable.ic_action_track_line_thin_color, 5),
-		MEDIUM(R.string.rendering_value_medium_name, R.drawable.ic_action_track_line_medium_color, 13),
-		THICK(R.string.rendering_value_bold_name, R.drawable.ic_action_track_line_bold_color, 28),
+		THIN(R.string.rendering_value_thin_name, R.drawable.ic_action_track_line_thin_color, "thin"),
+		MEDIUM(R.string.rendering_value_medium_name, R.drawable.ic_action_track_line_medium_color, "medium"),
+		THICK(R.string.rendering_value_bold_name, R.drawable.ic_action_track_line_bold_color, "bold"),
 		CUSTOM(R.string.shared_string_custom, R.drawable.ic_action_settings, null);
 
-		WidthMode(int titleId, int iconId, Integer width) {
+		WidthMode(int titleId, int iconId, String widthKey) {
 			this.titleId = titleId;
 			this.iconId = iconId;
-			this.width = width;
+			this.widthKey = widthKey;
 		}
 
 		int titleId;
 		int iconId;
-		Integer width;
+		String widthKey;
 	}
 
 	public RouteLineWidthCard(@NonNull MapActivity mapActivity,
@@ -112,12 +114,12 @@ public class RouteLineWidthCard extends BaseCard {
 		}
 	}
 
-	private void setRouteLineWidth(Integer width) {
-		routeLineDrawInfo.setWidth(width);
+	private void setRouteLineWidth(String widthKey) {
+		routeLineDrawInfo.setWidth(widthKey);
 		mapActivity.refreshMap();
 	}
 
-	private Integer getRouteLineWidth() {
+	private String getRouteLineWidth() {
 		return routeLineDrawInfo.getWidth();
 	}
 
@@ -148,21 +150,20 @@ public class RouteLineWidthCard extends BaseCard {
 			((TextView) view.findViewById(R.id.width_value_min)).setText(String.valueOf(CUSTOM_WIDTH_MIN));
 			((TextView) view.findViewById(R.id.width_value_max)).setText(String.valueOf(CUSTOM_WIDTH_MAX));
 
-			Integer width = getRouteLineWidth();
-			if (width == null || width > CUSTOM_WIDTH_MAX || width < CUSTOM_WIDTH_MIN) {
-				width = CUSTOM_WIDTH_MIN;
-				setRouteLineWidth(width);
-			}
-			tvCustomWidth.setText(String.valueOf(width));
+			String widthKey = getRouteLineWidth();
+			int width = Algorithms.parseIntSilently(widthKey, 1);
+			widthKey = String.valueOf(width);
+			setRouteLineWidth(widthKey);
+			tvCustomWidth.setText(widthKey);
 			slider.setValue(width);
 
 			slider.addOnChangeListener(new Slider.OnChangeListener() {
 				@Override
 				public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
 					if (fromUser) {
-						Integer newWidth = (int) value;
+						String newWidth = String.valueOf((int) value);
 						setRouteLineWidth(newWidth);
-						tvCustomWidth.setText(String.valueOf(newWidth));
+						tvCustomWidth.setText(newWidth);
 					}
 				}
 			});
@@ -188,22 +189,16 @@ public class RouteLineWidthCard extends BaseCard {
 		}
 	}
 
-	private static WidthMode findAppropriateMode(Integer width) {
-		WidthMode result = null;
-		if (width != null) {
+	private static WidthMode findAppropriateMode(@Nullable String widthKey) {
+		if (widthKey != null) {
 			for (WidthMode mode : WidthMode.values()) {
-				if (mode.width != null && (int) width == mode.width) {
-					result = mode;
-					break;
+				if (mode.widthKey != null && mode.widthKey.equals(widthKey)) {
+					return mode;
 				}
 			}
-			if (result == null) {
-				result = WidthMode.CUSTOM;
-			}
-		} else {
-			result = WidthMode.DEFAULT;
+			return WidthMode.CUSTOM;
 		}
-		return result;
+		return WidthMode.DEFAULT;
 	}
 
 	private class WidthAdapter extends RecyclerView.Adapter<AppearanceViewHolder> {
@@ -243,7 +238,7 @@ public class RouteLineWidthCard extends BaseCard {
 					notifyItemChanged(prevSelectedPosition);
 
 					if (selectedMode != WidthMode.CUSTOM) {
-						setRouteLineWidth(selectedMode.width);
+						setRouteLineWidth(selectedMode.widthKey);
 					}
 					modeChanged();
 
@@ -273,7 +268,7 @@ public class RouteLineWidthCard extends BaseCard {
 		}
 
 		private int getIconColor(@NonNull WidthMode mode, @ColorInt int defaultColor) {
-			return mode.width != null ? getRouteLineColor() : defaultColor;
+			return mode.widthKey != null ? getRouteLineColor() : defaultColor;
 		}
 
 		private int getRouteLineColor() {

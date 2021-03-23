@@ -1022,31 +1022,21 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 	}
 
 	private RouteLineDrawInfo createRouteLineDrawInfo(@NonNull ApplicationMode appMode) {
-		Integer color = getRouteLineAttribute(appMode, settings.ROUTE_LINE_COLOR);
-		Integer width = getRouteLineAttribute(appMode, settings.ROUTE_LINE_WIDTH);
-		return new RouteLineDrawInfo(color, width);
-	}
-
-	private Integer getRouteLineAttribute(@NonNull ApplicationMode appMode,
-	                                      @NonNull CommonPreference<Integer> preference) {
-		int value = preference.getModeValue(appMode);
-		return value != 0 ? value : null;
+		int storedValue = settings.ROUTE_LINE_COLOR.getModeValue(appMode);
+		Integer color = storedValue != 0 ? storedValue : null;
+		String widthKey = settings.ROUTE_LINE_WIDTH.getModeValue(appMode);
+		return new RouteLineDrawInfo(color, widthKey);
 	}
 
 	private void saveRouteLineAppearance(@NonNull ApplicationMode appMode,
 	                                     @NonNull RouteLineDrawInfo drawInfo) {
-		saveRouteLineAttribute(appMode, settings.ROUTE_LINE_COLOR, drawInfo.getColor());
-		saveRouteLineAttribute(appMode, settings.ROUTE_LINE_WIDTH, drawInfo.getWidth());
-	}
-
-	private void saveRouteLineAttribute(@NonNull ApplicationMode appMode,
-	                                    @NonNull CommonPreference<Integer> preference,
-	                                    @Nullable Integer value) {
-		if (value != null) {
-			preference.setModeValue(appMode, value);
+		Integer color = drawInfo.getColor();
+		if (drawInfo.getColor() != null) {
+			settings.ROUTE_LINE_COLOR.setModeValue(appMode, color);
 		} else {
-			preference.resetModeToDefault(appMode);
+			settings.ROUTE_LINE_COLOR.resetModeToDefault(appMode);
 		}
+		settings.ROUTE_LINE_WIDTH.setModeValue(appMode, drawInfo.getWidth());
 	}
 
 	public static boolean showInstance(FragmentActivity activity, SettingsScreenType screenType, @Nullable String appMode, boolean imported) {

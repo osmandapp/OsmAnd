@@ -21,7 +21,7 @@ public class RouteLineDrawInfo {
 	// parameters to save
 	@ColorInt
 	private Integer color;
-	private Integer width;
+	private String width;
 
 	// temporally parameters to show in preview
 	@ColorInt
@@ -32,7 +32,7 @@ public class RouteLineDrawInfo {
 	private int screenHeight;
 
 	public RouteLineDrawInfo(@Nullable @ColorInt Integer color,
-	                         @Nullable Integer width) {
+	                         @Nullable String width) {
 		this.color = color;
 		this.width = width;
 	}
@@ -57,7 +57,7 @@ public class RouteLineDrawInfo {
 	}
 
 	@Nullable
-	public Integer getWidth() {
+	public String getWidth() {
 		return width;
 	}
 
@@ -65,7 +65,7 @@ public class RouteLineDrawInfo {
 		this.color = color;
 	}
 
-	public void setWidth(@Nullable Integer width) {
+	public void setWidth(@Nullable String width) {
 		this.width = width;
 	}
 
@@ -112,7 +112,7 @@ public class RouteLineDrawInfo {
 
 	private void readBundle(@NonNull Bundle bundle) {
 		color = bundle.getInt(LINE_COLOR);
-		width = bundle.getInt(LINE_WIDTH);
+		width = bundle.getString(LINE_WIDTH);
 		iconId = bundle.getInt(NAVIGATION_ICON_ID);
 		iconColor = bundle.getInt(NAVIGATION_ICON_COLOR);
 		centerX = bundle.getInt(CENTER_X);
@@ -125,7 +125,7 @@ public class RouteLineDrawInfo {
 			bundle.putInt(LINE_COLOR, color);
 		}
 		if (width != null) {
-			bundle.putInt(LINE_WIDTH, width);
+			bundle.putString(LINE_WIDTH, width);
 		}
 		bundle.putInt(NAVIGATION_ICON_ID, iconId);
 		bundle.putInt(NAVIGATION_ICON_COLOR, iconColor);
