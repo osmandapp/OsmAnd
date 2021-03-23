@@ -147,6 +147,7 @@ public class AddGpxPointBottomSheetHelper implements OnDismissListener {
 	private void onClose() {
 		TrackMenuFragment fragment = mapActivity.getTrackMenuFragment();
 		if (fragment != null) {
+			fragment.updateContent();
 			fragment.show();
 		} else {
 			TrackMenuFragment.openTrack(mapActivity, new File(newGpxPoint.getGpx().path), null);

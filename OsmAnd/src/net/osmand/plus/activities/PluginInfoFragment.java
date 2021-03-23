@@ -139,7 +139,7 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 					if (settingsScreenType != null) {
 						Bundle args = new Bundle();
 						args.putBoolean(PLUGIN_INFO, true);
-						BaseSettingsFragment.showInstance(activity, settingsScreenType, null, args);
+						BaseSettingsFragment.showInstance(activity, settingsScreenType, null, args, null);
 					}
 				}
 			}

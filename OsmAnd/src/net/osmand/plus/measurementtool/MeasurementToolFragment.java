@@ -136,6 +136,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private ImageView mainIcon;
 	private String fileName;
 	private OnBackPressedCallback onBackPressedCallback;
+	private boolean showSnapWarning;
 
 	private InfoType currentInfoType;
 
@@ -239,6 +240,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		if (mapActivity == null) {
 			return null;
 		}
+
 		final MeasurementToolLayer measurementLayer = mapActivity.getMapLayers().getMeasurementToolLayer();
 		final OsmandApplication app = mapActivity.getMyApplication();
 
@@ -362,7 +364,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				applyMovePointMode();
 			}
 		});
-
 
 		View applyPointBeforeAfterButton = mainView.findViewById(R.id.apply_point_before_after_point_button);
 		UiUtilities.setupDialogButton(nightMode, applyPointBeforeAfterButton,
@@ -568,11 +569,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		});
 
 		initMeasurementMode(gpxData, savedInstanceState == null);
-
 		if (savedInstanceState == null) {
 			if (fileName != null) {
 				addNewGpxData(getGpxFile(fileName));
-			} else if (editingCtx.isApproximationNeeded() && isFollowTrackMode()) {
+			} else if (editingCtx.isApproximationNeeded() && isFollowTrackMode() && isShowSnapWarning()) {
 				enterApproximationMode(mapActivity);
 			}
 		} else {
@@ -715,6 +715,15 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
+	}
+
+
+	public boolean isShowSnapWarning() {
+		return this.showSnapWarning;
+	}
+
+	public void setShowSnapWarning(boolean showSnapWarning) {
+		this.showSnapWarning = showSnapWarning;
 	}
 
 	public MeasurementEditingContext getEditingCtx() {
@@ -2009,10 +2018,11 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	public static boolean showInstance(FragmentManager fragmentManager, MeasurementEditingContext editingCtx,
-									   boolean followTrackMode) {
+									   boolean followTrackMode, boolean showSnapWarning) {
 		MeasurementToolFragment fragment = new MeasurementToolFragment();
 		fragment.setEditingCtx(editingCtx);
 		fragment.setMode(FOLLOW_TRACK_MODE, followTrackMode);
+		fragment.setShowSnapWarning(showSnapWarning);
 		return showFragment(fragment, fragmentManager);
 	}
 
@@ -2180,4 +2190,5 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	public interface OnUpdateInfoListener {
 		void onUpdateInfo();
 	}
+
 }

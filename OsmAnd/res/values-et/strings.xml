@@ -3925,9 +3925,9 @@
     <string name="upload_photo_completed">Sai üleslaaditud</string>
     <string name="upload_photo">Laadin üles</string>
     <string name="activity_type_offroad_name">Maastikul</string>
-    <string name="live_update_frequency_week_variant">Kaardi värskendusi kontrollitakse kord nädalas. Järgmine kord %1$s %2$s.</string>
-    <string name="live_update_frequency_day_variant">Kaardi värskendusi kontrollitakse kord päevas. Järgmine kord %1$s %2$s.</string>
-    <string name="live_update_frequency_hour_variant">Kaardi värskendusi kontrollitakse kord tunnis. Järgmine kord %1$s %2$s.</string>
+    <string name="live_update_frequency_week_variant">Kaardi värskendusi kontrollitakse kord nädalas. Järgmine kord: %1$s %2$s.</string>
+    <string name="live_update_frequency_day_variant">Kaardi värskendusi kontrollitakse kord päevas. Järgmine kord: %1$s %2$s.</string>
+    <string name="live_update_frequency_hour_variant">Kaardi värskendusi kontrollitakse kord tunnis. Järgmine kord: %1$s %2$s.</string>
     <string name="voice_prompts_timetable">Häälteavituste ajad</string>
     <string name="routing_attr_prefer_hiking_routes_description">Eelista matkaradu</string>
     <string name="routing_attr_prefer_hiking_routes_name">Eelista matkaradu</string>
@@ -4052,4 +4052,6 @@
     <string name="map_widget_distance_by_tap">Kaugus toksamise järgi</string>
     <string name="rendering_attr_noNatureReserveBoundaries_description">Peida (loodus)kaitsealade ja rahvusparkide piirid</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">Looduse piirid</string>
+    <string name="trip_recording_save_and_continue">Salvesta ja jätka</string>
+    <string name="lost_data_warning">Kõik salvestamata andmed lähevad kaotsi.</string>
 </resources>

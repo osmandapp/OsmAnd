@@ -51,7 +51,7 @@ public class OverviewCard extends BaseCard {
 		super(mapActivity);
 		this.actionsListener = actionsListener;
 		this.selectedGpxFile = selectedGpxFile;
-		blockStatisticsBuilder = new GpxBlockStatisticsBuilder(app, selectedGpxFile);
+		blockStatisticsBuilder = new GpxBlockStatisticsBuilder(app, selectedGpxFile, nightMode);
 	}
 
 	@Override
@@ -80,7 +80,7 @@ public class OverviewCard extends BaseCard {
 			initEditButton(iconColorDef, iconColorPres);
 			initDirectionsButton(iconColorDef, iconColorPres);
 		}
-		blockStatisticsBuilder.initStatBlocks(actionsListener, getActiveColor(), nightMode);
+		blockStatisticsBuilder.initStatBlocks(actionsListener, getActiveColor());
 	}
 
 	private GPXFile getGPXFile() {

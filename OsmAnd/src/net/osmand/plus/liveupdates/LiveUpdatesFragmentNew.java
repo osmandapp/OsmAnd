@@ -85,9 +85,9 @@ import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFreq
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.runLiveUpdate;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.setAlarmForPendingIntent;
 import static net.osmand.plus.liveupdates.LiveUpdatesSettingsDialogFragmentNew.getTertiaryTextColorId;
-import static net.osmand.plus.monitoring.TripRecordingActiveBottomSheet.getActiveTextColorId;
-import static net.osmand.plus.monitoring.TripRecordingActiveBottomSheet.getOsmandIconColorId;
-import static net.osmand.plus.monitoring.TripRecordingActiveBottomSheet.getSecondaryIconColorId;
+import static net.osmand.plus.monitoring.TripRecordingBottomSheet.getActiveTextColorId;
+import static net.osmand.plus.monitoring.TripRecordingBottomSheet.getOsmandIconColorId;
+import static net.osmand.plus.monitoring.TripRecordingBottomSheet.getSecondaryIconColorId;
 
 public class LiveUpdatesFragmentNew extends BaseOsmAndDialogFragment implements OnLiveUpdatesForLocalChange {
 

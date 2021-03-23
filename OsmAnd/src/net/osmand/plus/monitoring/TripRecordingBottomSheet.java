@@ -3,203 +3,253 @@ package net.osmand.plus.monitoring;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Typeface;
+import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.text.SpannableString;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.ImageView;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SwitchCompat;
+import androidx.annotation.StringRes;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
-
-import com.google.android.material.slider.RangeSlider;
+import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.TrkSegment;
+import net.osmand.PlatformUtil;
+import net.osmand.data.LatLon;
+import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
-import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
+import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
+import net.osmand.plus.myplaces.GPXItemPagerAdapter;
+import net.osmand.plus.myplaces.SegmentActionsListener;
+import net.osmand.plus.myplaces.SegmentGPXAdapter;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.track.GpxBlockStatisticsBuilder;
 import net.osmand.plus.track.TrackAppearanceFragment;
+import net.osmand.plus.track.TrackDisplayHelper;
+import net.osmand.plus.views.controls.PagerSlidingTabStrip;
+import net.osmand.plus.views.controls.WrapContentHeightViewPager;
+import net.osmand.plus.widgets.TextViewEx;
+import net.osmand.util.Algorithms;
 
-import static net.osmand.plus.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
-import static net.osmand.plus.monitoring.OsmandMonitoringPlugin.MINUTES;
-import static net.osmand.plus.monitoring.OsmandMonitoringPlugin.SECONDS;
+import org.apache.commons.logging.Log;
 
-public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment {
+import java.io.File;
+import java.util.Arrays;
+import java.util.List;
+
+import static net.osmand.AndroidUtils.getSecondaryTextColorId;
+import static net.osmand.AndroidUtils.setPadding;
+import static net.osmand.plus.UiUtilities.CompoundButtonType.GLOBAL;
+import static net.osmand.plus.track.GpxBlockStatisticsBuilder.INIT_BLOCKS_ALTITUDE;
+import static net.osmand.plus.track.GpxBlockStatisticsBuilder.INIT_BLOCKS_GENERAL;
+import static net.osmand.plus.track.GpxBlockStatisticsBuilder.INIT_BLOCKS_SPEED;
+
+public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment implements SegmentActionsListener {
 
 	public static final String TAG = TripRecordingBottomSheet.class.getSimpleName();
+	private static final Log LOG = PlatformUtil.getLog(TripRecordingBottomSheet.class);
+	public static final String UPDATE_TRACK_ICON = "update_track_icon";
+	private static final int GPS_UPDATE_INTERVAL = 1000;
+	private static final String[] INIT_BLOCKS_KEYS =
+			new String[]{INIT_BLOCKS_GENERAL, INIT_BLOCKS_ALTITUDE, INIT_BLOCKS_SPEED};
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
+	private SavingTrackHelper helper;
+	private OsmandMonitoringPlugin plugin;
 
-	private ImageView upDownBtn;
-	private SwitchCompat confirmEveryRun;
-	private TextView intervalValueView;
-	private LinearLayout container;
-	private View divider;
-	private boolean infoExpanded;
+	private View statusContainer;
+	private AppCompatImageView trackAppearanceIcon;
+	private LinearLayout segmentsContainer;
+
+	private TrackDisplayHelper displayHelper;
+	private TrackChartPoints trackChartPoints;
+	private GPXItemPagerAdapter graphsAdapter;
+
+	private GpxBlockStatisticsBuilder blockStatisticsBuilder;
+	private SelectedGpxFile selectedGpxFile;
+	private final Handler handler = new Handler();
+	private Runnable updatingGPS;
+
+	private GPXFile getGPXFile() {
+		return selectedGpxFile.getGpxFile();
+	}
+
+	private boolean hasDataToSave() {
+		return helper.hasDataToSave();
+	}
+
+	private boolean searchingGPS() {
+		return app.getLocationProvider().getLastKnownLocation() == null;
+	}
+
+	private boolean wasTrackMonitored() {
+		return settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
+	}
+
+	public static void showInstance(@NonNull FragmentManager fragmentManager) {
+		if (!fragmentManager.isStateSaved()) {
+			TripRecordingBottomSheet fragment = new TripRecordingBottomSheet();
+			fragment.show(fragmentManager, TAG);
+		}
+	}
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		app = requiredMyApplication();
 		settings = app.getSettings();
-		Context context = requireContext();
+		helper = app.getSavingTrackHelper();
+		plugin = OsmandPlugin.getPlugin(OsmandMonitoringPlugin.class);
+		selectedGpxFile = helper.getCurrentTrack();
+		LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
+		final FragmentManager fragmentManager = getFragmentManager();
 
-		LayoutInflater inflater = UiUtilities.getInflater(context, nightMode);
 		View itemView = inflater.inflate(R.layout.trip_recording_fragment, null, false);
-		items.add(new BottomSheetItemWithDescription.Builder()
+		items.add(new BaseBottomSheetItem.Builder()
 				.setCustomView(itemView)
 				.create());
 
-		final int paddingSmall = getResources().getDimensionPixelSize(R.dimen.content_padding_small);
+		statusContainer = itemView.findViewById(R.id.status_container);
+		updateStatus();
 
-		LinearLayout showTrackOnMapView = itemView.findViewById(R.id.show_track_on_map);
-		TextView showTrackOnMapTitle = showTrackOnMapView.findViewById(R.id.title);
-		showTrackOnMapTitle.setText(R.string.show_track_on_map);
+		LinearLayout showTrackContainer = itemView.findViewById(R.id.show_track_on_map);
+		trackAppearanceIcon = showTrackContainer.findViewById(R.id.additional_button_icon);
+		createShowTrackItem(showTrackContainer, trackAppearanceIcon, ItemType.SHOW_TRACK.getTitleId(),
+				TripRecordingBottomSheet.this, nightMode, new Runnable() {
+					@Override
+					public void run() {
+						hide();
+					}
+				});
 
-		ImageView trackAppearanceIcon = showTrackOnMapView.findViewById(R.id.icon_after_divider);
+		segmentsContainer = itemView.findViewById(R.id.segments_container);
+		createSegmentsTabs(segmentsContainer);
 
-		int color = settings.CURRENT_TRACK_COLOR.get();
-		String width = settings.CURRENT_TRACK_WIDTH.get();
-		boolean showArrows = settings.CURRENT_TRACK_SHOW_ARROWS.get();
-		Drawable drawable = TrackAppearanceFragment.getTrackIcon(app, width, showArrows, color);
+		RecyclerView statBlocks = itemView.findViewById(R.id.block_statistics);
+		blockStatisticsBuilder = new GpxBlockStatisticsBuilder(app, selectedGpxFile, nightMode);
+		blockStatisticsBuilder.setBlocksView(statBlocks);
+		blockStatisticsBuilder.setBlocksClickable(false);
+		blockStatisticsBuilder.setInitBlocksKey(INIT_BLOCKS_GENERAL);
+		blockStatisticsBuilder.initStatBlocks(null,
+				ContextCompat.getColor(app, getActiveTextColorId(nightMode)));
 
-		trackAppearanceIcon.setImageDrawable(drawable);
-		trackAppearanceIcon.setOnClickListener(new View.OnClickListener() {
+		CardView cardLeft = itemView.findViewById(R.id.button_left);
+		createItem(cardLeft, ItemType.CANCEL);
+		cardLeft.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				dismiss();
+			}
+		});
+
+		final CardView cardCenterLeft = itemView.findViewById(R.id.button_center_left);
+		createItem(cardCenterLeft, wasTrackMonitored() ? ItemType.PAUSE : ItemType.RESUME);
+		cardCenterLeft.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				boolean wasTrackMonitored = !wasTrackMonitored();
+				if (!wasTrackMonitored) {
+					blockStatisticsBuilder.stopUpdatingStatBlocks();
+				} else {
+					blockStatisticsBuilder.runUpdatingStatBlocksIfNeeded();
+				}
+				settings.SAVE_GLOBAL_TRACK_TO_GPX.set(wasTrackMonitored);
+				updateStatus();
+				createItem(cardCenterLeft, wasTrackMonitored ? ItemType.PAUSE : ItemType.RESUME);
+			}
+		});
+
+		CardView cardCenterRight = itemView.findViewById(R.id.button_center_right);
+		createItem(cardCenterRight, ItemType.FINISH);
+		cardCenterRight.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				MapActivity mapActivity = getMapActivity();
-				if (mapActivity != null) {
-					hide();
-					SelectedGpxFile selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
-					TrackAppearanceFragment.showInstance(mapActivity, selectedGpxFile, TripRecordingBottomSheet.this);
+				if (mapActivity != null && plugin != null && hasDataToSave()) {
+					plugin.saveCurrentTrack(null, mapActivity);
+					app.getNotificationHelper().refreshNotifications();
+					dismiss();
 				}
 			}
 		});
 
-		divider = itemView.findViewById(R.id.second_divider);
-		LinearLayout expandHideIntervalContainer = itemView.findViewById(R.id.interval_view_container);
-		upDownBtn = itemView.findViewById(R.id.up_down_button);
-		expandHideIntervalContainer.setOnClickListener(new View.OnClickListener() {
-
+		CardView cardRight = itemView.findViewById(R.id.button_right);
+		createItem(cardRight, ItemType.OPTIONS);
+		cardRight.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				toggleInfoView();
-			}
-		});
-
-		final int secondsLength = SECONDS.length;
-		final int minutesLength = MINUTES.length;
-
-		intervalValueView = itemView.findViewById(R.id.interval_value);
-		updateIntervalLegend();
-
-		container = itemView.findViewById(R.id.always_ask_and_range_slider_container);
-		RangeSlider intervalSlider = itemView.findViewById(R.id.interval_slider);
-		intervalSlider.setValueTo(secondsLength + minutesLength - 1);
-		int currentModeColor = app.getSettings().getApplicationMode().getProfileColor(nightMode);
-		UiUtilities.setupSlider(intervalSlider, nightMode, currentModeColor, true);
-		container.setVisibility(View.GONE);
-		intervalSlider.addOnChangeListener(new RangeSlider.OnChangeListener() {
-
-			@Override
-			public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser) {
-				int progress = (int) value;
-				if (progress == 0) {
-					settings.SAVE_GLOBAL_TRACK_INTERVAL.set(0);
-				} else if (progress < secondsLength) {
-					settings.SAVE_GLOBAL_TRACK_INTERVAL.set(SECONDS[progress] * 1000);
-				} else {
-					settings.SAVE_GLOBAL_TRACK_INTERVAL.set(MINUTES[progress - secondsLength] * 60 * 1000);
-				}
-				updateIntervalLegend();
-			}
-		});
-
-		for (int i = 0; i < secondsLength + minutesLength; i++) {
-			if (i < secondsLength) {
-				if (settings.SAVE_GLOBAL_TRACK_INTERVAL.get() <= SECONDS[i] * 1000) {
-					intervalSlider.setValues((float) i);
-					break;
-				}
-			} else {
-				if (settings.SAVE_GLOBAL_TRACK_INTERVAL.get() <= MINUTES[i - secondsLength] * 1000 * 60) {
-					intervalSlider.setValues((float) i);
-					break;
+				if (fragmentManager != null) {
+					TripRecordingOptionsBottomSheet.showInstance(fragmentManager, TripRecordingBottomSheet.this);
 				}
 			}
-		}
-		boolean checked = !settings.SAVE_GLOBAL_TRACK_REMEMBER.get();
-		confirmEveryRun = itemView.findViewById(R.id.confirm_every_run);
-		confirmEveryRun.setChecked(checked);
-		setBackgroundAndPadding(checked, paddingSmall);
-		confirmEveryRun.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				setBackgroundAndPadding(isChecked, paddingSmall);
-				settings.SAVE_GLOBAL_TRACK_REMEMBER.set(!isChecked);
-			}
 		});
 
-		final SwitchCompat showTrackOnMapButton = showTrackOnMapView.findViewById(R.id.switch_button);
-		showTrackOnMapButton.setChecked(app.getSelectedGpxHelper().getSelectedCurrentRecordingTrack() != null);
-		View basicItem = itemView.findViewById(R.id.basic_item_body);
-		basicItem.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				boolean checked = !showTrackOnMapButton.isChecked();
-				showTrackOnMapButton.setChecked(checked);
-				app.getSelectedGpxHelper().selectGpxFile(app.getSavingTrackHelper().getCurrentGpx(), checked, false);
-			}
-		});
-		UiUtilities.setupCompoundButton(showTrackOnMapButton, nightMode, PROFILE_DEPENDENT);
-
-		updateUpDownBtn();
 	}
 
-	private void updateIntervalLegend() {
-		String text = getString(R.string.save_track_interval_globally);
-		String textValue;
-		int interval = settings.SAVE_GLOBAL_TRACK_INTERVAL.get();
-		if (interval == 0) {
-			textValue = getString(R.string.int_continuosly);
-		} else {
-			int seconds = interval / 1000;
-			if (seconds <= SECONDS[SECONDS.length - 1]) {
-				textValue = seconds + " " + getString(R.string.int_seconds);
-			} else {
-				textValue = (seconds / 60) + " " + getString(R.string.int_min);
-			}
+	@Override
+	public void onResume() {
+		super.onResume();
+		blockStatisticsBuilder.runUpdatingStatBlocksIfNeeded();
+		runUpdatingGPS();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getMapLayers().getGpxLayer().setTrackChartPoints(trackChartPoints);
 		}
-		String textAll = getString(R.string.ltr_or_rtl_combine_via_colon, text, textValue);
-		Typeface typeface = FontCache.getRobotoMedium(app);
-		SpannableString spannableString = UiUtilities.createCustomFontSpannable(typeface, textAll, textValue);
-		intervalValueView.setText(spannableString);
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		blockStatisticsBuilder.stopUpdatingStatBlocks();
+		stopUpdatingGPS();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getMapLayers().getGpxLayer().setTrackChartPoints(null);
+		}
 	}
 
 	public void show() {
 		Dialog dialog = getDialog();
 		if (dialog != null) {
 			dialog.show();
+		}
+	}
+
+	public void show(String... keys) {
+		show();
+		for (String key : keys) {
+			if (key.equals(UPDATE_TRACK_ICON)) {
+				updateTrackIcon(app, trackAppearanceIcon);
+			}
 		}
 	}
 
@@ -210,82 +260,398 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 	}
 
-	private void setBackgroundAndPadding(boolean isChecked, int paddingSmall) {
-		if (nightMode) {
-			confirmEveryRun.setBackgroundResource(
-					isChecked ? R.drawable.layout_bg_dark_solid : R.drawable.layout_bg_dark);
-		} else {
-			confirmEveryRun.setBackgroundResource(
-					isChecked ? R.drawable.layout_bg_solid : R.drawable.layout_bg);
+	public void stopUpdatingGPS() {
+		handler.removeCallbacks(updatingGPS);
+	}
+
+	public void runUpdatingGPS() {
+		updatingGPS = new Runnable() {
+			@Override
+			public void run() {
+				int interval = app.getSettings().SAVE_GLOBAL_TRACK_INTERVAL.get();
+				updateStatus();
+				handler.postDelayed(this, Math.max(GPS_UPDATE_INTERVAL, interval));
+			}
+		};
+		handler.post(updatingGPS);
+	}
+
+	private void recreateStatBlocks(String initBlocksKey) {
+		blockStatisticsBuilder.stopUpdatingStatBlocks();
+		blockStatisticsBuilder.setInitBlocksKey(initBlocksKey);
+		blockStatisticsBuilder.runUpdatingStatBlocksIfNeeded();
+	}
+
+	private void setupDisplayHelper() {
+		displayHelper = new TrackDisplayHelper(app);
+		if (!selectedGpxFile.isShowCurrentTrack()) {
+			File file = new File(getGPXFile().path);
+			displayHelper.setFile(file);
+			displayHelper.setGpxDataItem(app.getGpxDbHelper().getItem(file));
 		}
-		confirmEveryRun.setPadding(paddingSmall, 0, paddingSmall, 0);
+		displayHelper.setGpx(getGPXFile());
 	}
 
-	private void updateUpDownBtn() {
-		int iconId = infoExpanded ? R.drawable.ic_action_arrow_down : R.drawable.ic_action_arrow_up;
-		upDownBtn.setImageDrawable(getContentIcon(iconId));
+	private void createSegmentsTabs(ViewGroup viewGroup) {
+		viewGroup.removeAllViews();
+		setupDisplayHelper();
+
+		View segmentView = SegmentGPXAdapter.createGpxTabsView(displayHelper, viewGroup, this, nightMode);
+		AndroidUiHelper.setVisibility(View.GONE, segmentView.findViewById(R.id.list_item_divider));
+		WrapContentHeightViewPager pager = segmentView.findViewById(R.id.pager);
+		PagerSlidingTabStrip tabLayout = segmentView.findViewById(R.id.sliding_tabs);
+		tabLayout.setOnTabReselectedListener(new PagerSlidingTabStrip.OnTabReselectedListener() {
+			@Override
+			public void onTabSelected(int position) {
+				recreateStatBlocks(INIT_BLOCKS_KEYS[position]);
+			}
+
+			@Override
+			public void onTabReselected(int position) {
+				recreateStatBlocks(INIT_BLOCKS_KEYS[position]);
+			}
+		});
+
+		graphsAdapter = new GPXItemPagerAdapter(app, GpxUiHelper.makeGpxDisplayItem(app,
+				displayHelper.getGpx()), displayHelper, nightMode, this, true);
+
+		pager.setAdapter(graphsAdapter);
+		tabLayout.setViewPager(pager);
+
+		viewGroup.addView(segmentView);
 	}
 
-	private void toggleInfoView() {
-		infoExpanded = !infoExpanded;
-		ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) divider.getLayoutParams();
-		final int dp8 = AndroidUtils.dpToPx(app, 8f);
-		final int dp16 = AndroidUtils.dpToPx(app, 16f);
-		if (infoExpanded) {
-			AndroidUtils.setMargins(marginParams, 0, dp16, 0, dp8);
-		} else {
-			AndroidUtils.setMargins(marginParams, 0, 0, 0, dp8);
+	private void updateStatus() {
+		TextView statusTitle = statusContainer.findViewById(R.id.text_status);
+		AppCompatImageView statusIcon = statusContainer.findViewById(R.id.icon_status);
+		ItemType status = searchingGPS() ? ItemType.SEARCHING_GPS : !wasTrackMonitored() ? ItemType.ON_PAUSE : ItemType.RECORDING;
+		Integer titleId = status.getTitleId();
+		if (titleId != null) {
+			statusTitle.setText(titleId);
 		}
-		AndroidUiHelper.updateVisibility(container, infoExpanded);
-		updateUpDownBtn();
+		int colorText = status.equals(ItemType.SEARCHING_GPS) ? getSecondaryTextColorId(nightMode) : getOsmandIconColorId(nightMode);
+		statusTitle.setTextColor(ContextCompat.getColor(app, colorText));
+		Integer iconId = status.getIconId();
+		if (iconId != null) {
+			int colorDrawable = ContextCompat.getColor(app,
+					status.equals(ItemType.SEARCHING_GPS) ? getSecondaryIconColorId(nightMode) : getOsmandIconColorId(nightMode));
+			Drawable statusDrawable = UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, iconId), colorDrawable);
+			statusIcon.setImageDrawable(statusDrawable);
+		}
+	}
+
+	public static void updateTrackIcon(OsmandApplication app, AppCompatImageView appearanceIcon) {
+		if (appearanceIcon != null) {
+			OsmandSettings settings = app.getSettings();
+			String width = settings.CURRENT_TRACK_WIDTH.get();
+			boolean showArrows = settings.CURRENT_TRACK_SHOW_ARROWS.get();
+			int color = settings.CURRENT_TRACK_COLOR.get();
+			Drawable appearanceDrawable = TrackAppearanceFragment.getTrackIcon(app, width, showArrows, color);
+			int marginTrackIconH = app.getResources().getDimensionPixelSize(R.dimen.content_padding_small);
+			UiUtilities.setMargins(appearanceIcon, marginTrackIconH, 0, marginTrackIconH, 0);
+			appearanceIcon.setImageDrawable(appearanceDrawable);
+		}
+	}
+
+	public static void createShowTrackItem(LinearLayout showTrackContainer, AppCompatImageView trackAppearanceIcon,
+										   Integer showTrackId, final Fragment target,
+										   final boolean nightMode, final Runnable hideOnClickButtonAppearance) {
+		FragmentActivity activity = target.getActivity();
+		if (!(activity instanceof MapActivity)) {
+			return;
+		}
+		final MapActivity mapActivity = (MapActivity) activity;
+		final OsmandApplication app = mapActivity.getMyApplication();
+		final CardView buttonShowTrack = showTrackContainer.findViewById(R.id.compound_container);
+		final CardView buttonAppearance = showTrackContainer.findViewById(R.id.additional_button_container);
+
+		TextView showTrackTextView = buttonShowTrack.findViewById(R.id.title);
+		if (showTrackId != null) {
+			showTrackTextView.setText(showTrackId);
+		}
+		final CompoundButton showTrackCompound = buttonShowTrack.findViewById(R.id.compound_button);
+		showTrackCompound.setChecked(app.getSelectedGpxHelper().getSelectedCurrentRecordingTrack() != null);
+		UiUtilities.setupCompoundButton(showTrackCompound, nightMode, GLOBAL);
+
+		setShowTrackItemBackground(buttonShowTrack, showTrackCompound.isChecked(), nightMode);
+		buttonShowTrack.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				boolean checked = !showTrackCompound.isChecked();
+				showTrackCompound.setChecked(checked);
+				app.getSelectedGpxHelper().selectGpxFile(app.getSavingTrackHelper().getCurrentGpx(), checked, false);
+				setShowTrackItemBackground(buttonShowTrack, checked, nightMode);
+				createItem(app, nightMode, buttonAppearance, ItemType.APPEARANCE, checked, null);
+			}
+		});
+
+		updateTrackIcon(app, trackAppearanceIcon);
+		createItem(app, nightMode, buttonAppearance, ItemType.APPEARANCE, showTrackCompound.isChecked(), null);
+		buttonAppearance.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (showTrackCompound.isChecked()) {
+					hideOnClickButtonAppearance.run();
+					SelectedGpxFile selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
+					TrackAppearanceFragment.showInstance(mapActivity, selectedGpxFile, target);
+				}
+			}
+		});
+	}
+
+	public static void setShowTrackItemBackground(View view, boolean checked, boolean nightMode) {
+		Drawable background = AppCompatResources.getDrawable(view.getContext(),
+				checked ? getActiveTransparentBackgroundId(nightMode) : getInactiveStrokedBackgroundId(nightMode));
+		view.setBackgroundDrawable(background);
+	}
+
+	private void createItem(View view, ItemType type) {
+		createItem(app, nightMode, view, type, true, null);
+	}
+
+	public static View createItem(Context context, boolean nightMode, LayoutInflater inflater, ItemType type) {
+		return createItem(context, nightMode, inflater, type, true, null);
+	}
+
+	public static View createItem(Context context, boolean nightMode, LayoutInflater inflater, ItemType type, boolean enabled, String description) {
+		View button = inflater.inflate(R.layout.bottom_sheet_button_with_icon, null);
+		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+		int horizontal = context.getResources().getDimensionPixelSize(R.dimen.content_padding);
+		params.setMargins(horizontal, 0, horizontal, 0);
+		button.setLayoutParams(params);
+		createItem(context, nightMode, button, type, enabled, description);
+		return button;
+	}
+
+	public static void createItem(Context context, boolean nightMode, View view, ItemType type, boolean enabled, @Nullable String description) {
+		view.setTag(type);
+
+		AppCompatImageView icon = view.findViewById(R.id.icon);
+		if (icon != null) {
+			setTintedIcon(context, icon, enabled, nightMode, type);
+		}
+
+		TextView title = view.findViewById(R.id.button_text);
+		Integer titleId = type.getTitleId();
+		if (title != null && titleId != null) {
+			title.setText(titleId);
+			setTextColor(context, title, enabled, nightMode, type);
+		}
+
+		TextViewEx desc = view.findViewById(R.id.desc);
+		if (desc != null) {
+			boolean isShowDesc = !Algorithms.isBlank(description);
+			int marginDesc = isShowDesc ? 0 : context.getResources().getDimensionPixelSize(R.dimen.context_menu_padding_margin_medium);
+			AndroidUiHelper.updateVisibility(desc, isShowDesc);
+			if (title != null) {
+				UiUtilities.setMargins(title, 0, marginDesc, 0, marginDesc);
+			}
+			desc.setText(description);
+			setTextColor(context, desc, false, nightMode, type);
+		}
+
+		setItemBackground(context, nightMode, view, enabled);
+	}
+
+	public static void setItemBackground(Context context, boolean nightMode, View view, boolean enabled) {
+		if (view instanceof CardView) {
+			int colorId = enabled ? getActiveTransparentColorId(nightMode) : getInactiveButtonColorId(nightMode);
+			((CardView) view).setCardBackgroundColor(AndroidUtils.createPressedColorStateList(
+					context, colorId, getActiveTextColorId(nightMode)
+			));
+			return;
+		}
+		Drawable background = AppCompatResources.getDrawable(context, getInactiveButtonBackgroundId(nightMode));
+		if (background != null && enabled) {
+			DrawableCompat.setTintList(background, AndroidUtils.createPressedColorStateList(
+					context, getInactiveButtonColorId(nightMode), getActiveTextColorId(nightMode)
+			));
+		} else {
+			UiUtilities.tintDrawable(background, ContextCompat.getColor(context, getInactiveButtonColorId(nightMode)));
+		}
+		view.setBackgroundDrawable(background);
+	}
+
+	public enum ItemType {
+		SHOW_TRACK(R.string.shared_string_show_on_map, null),
+		APPEARANCE(null, null),
+		SEARCHING_GPS(R.string.searching_gps, R.drawable.ic_action_gps_info),
+		RECORDING(R.string.recording_default_name, R.drawable.ic_action_track_recordable),
+		ON_PAUSE(R.string.on_pause, R.drawable.ic_pause),
+		CLEAR_DATA(R.string.clear_recorded_data, R.drawable.ic_action_delete_dark),
+		START_NEW_SEGMENT(R.string.gpx_start_new_segment, R.drawable.ic_action_new_segment),
+		SAVE(R.string.trip_recording_save_and_continue, R.drawable.ic_action_save_to_file),
+		PAUSE(R.string.shared_string_pause, R.drawable.ic_pause),
+		RESUME(R.string.shared_string_resume, R.drawable.ic_play_dark),
+		STOP(R.string.shared_string_control_stop, R.drawable.ic_action_rec_stop),
+		STOP_AND_DISCARD(R.string.track_recording_stop_without_saving, R.drawable.ic_action_rec_stop),
+		STOP_AND_SAVE(R.string.track_recording_save_and_stop, R.drawable.ic_action_save_to_file),
+		STOP_ONLINE(R.string.live_monitoring_stop, R.drawable.ic_world_globe_dark),
+		CANCEL(R.string.shared_string_cancel, R.drawable.ic_action_close),
+		START_RECORDING(R.string.shared_string_control_start, R.drawable.ic_action_direction_movement),
+		SETTINGS(R.string.shared_string_settings, R.drawable.ic_action_settings),
+		FINISH(R.string.shared_string_finish, R.drawable.ic_action_point_destination),
+		OPTIONS(R.string.shared_string_options, R.drawable.ic_overflow_menu_with_background);
+
+		@StringRes
+		private final Integer titleId;
+		@DrawableRes
+		private final Integer iconId;
+		private static final List<ItemType> negative = Arrays.asList(CLEAR_DATA, STOP_AND_DISCARD);
+
+		ItemType(@Nullable @StringRes Integer titleId, @Nullable @DrawableRes Integer iconId) {
+			this.titleId = titleId;
+			this.iconId = iconId;
+		}
+
+		@Nullable
+		public Integer getTitleId() {
+			return titleId;
+		}
+
+		@Nullable
+		public Integer getIconId() {
+			return iconId;
+		}
+
+		public boolean isNegative() {
+			return negative.contains(this);
+		}
+	}
+
+	protected static void setTextColor(Context context, TextView tv, boolean enabled, boolean nightMode, ItemType type) {
+		if (tv != null) {
+			int activeColorId = type.isNegative() ? R.color.color_osm_edit_delete : getActiveTextColorId(nightMode);
+			int normalColorId = enabled ? activeColorId : getSecondaryTextColorId(nightMode);
+			ColorStateList textColorStateList = AndroidUtils.createPressedColorStateList(context, normalColorId, getPressedColorId(nightMode));
+			tv.setTextColor(textColorStateList);
+		}
+	}
+
+	protected static void setTintedIcon(Context context, AppCompatImageView iv, boolean enabled, boolean nightMode, ItemType type) {
+		Integer iconId = type.getIconId();
+		if (iv != null && iconId != null) {
+			Drawable icon = AppCompatResources.getDrawable(context, iconId);
+			int activeColorId = type.isNegative() ? R.color.color_osm_edit_delete : getActiveIconColorId(nightMode);
+			int normalColorId = enabled ? activeColorId : getSecondaryIconColorId(nightMode);
+			ColorStateList iconColorStateList = AndroidUtils.createPressedColorStateList(context, normalColorId, getPressedColorId(nightMode));
+			if (icon != null) {
+				DrawableCompat.setTintList(icon, iconColorStateList);
+			}
+			iv.setImageDrawable(icon);
+			if (type.iconId == R.drawable.ic_action_rec_stop) {
+				int stopSize = iv.getResources().getDimensionPixelSize(R.dimen.bottom_sheet_icon_margin_large);
+				LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(stopSize, stopSize);
+				iv.setLayoutParams(params);
+				View container = (View) iv.getParent();
+				setPadding(container, container.getPaddingLeft(), container.getTop(),
+						context.getResources().getDimensionPixelSize(R.dimen.content_padding_half), container.getBottom());
+			}
+		}
 	}
 
 	@Override
-	protected boolean useVerticalButtons() {
-		return true;
-	}
-
-	@Override
-	protected int getRightButtonHeight() {
-		return getResources().getDimensionPixelSize(R.dimen.bottom_sheet_cancel_button_height);
-	}
-
-	@Override
-	protected int getDismissButtonHeight() {
-		return getResources().getDimensionPixelSize(R.dimen.bottom_sheet_cancel_button_height);
-	}
-
-	@Override
-	protected int getRightBottomButtonTextId() {
-		return R.string.start_recording;
-	}
-
-	@Override
-	protected int getDismissButtonTextId() {
-		return R.string.shared_string_cancel;
-	}
-
-	@Override
-	protected DialogButtonType getRightBottomButtonType() {
-		return DialogButtonType.PRIMARY;
-	}
-
-	@Override
-	public int getSecondDividerHeight() {
-		return getResources().getDimensionPixelSize(R.dimen.bottom_sheet_icon_margin);
-	}
-
-	@Override
-	protected void onRightBottomButtonClick() {
-		SavingTrackHelper helper = app.getSavingTrackHelper();
-		helper.startNewSegment();
-		settings.SAVE_GLOBAL_TRACK_TO_GPX.set(true);
-		app.startNavigationService(NavigationService.USED_BY_GPX);
+	public void onPointSelected(TrkSegment segment, double lat, double lon) {
+		if (trackChartPoints == null) {
+			trackChartPoints = new TrackChartPoints();
+			trackChartPoints.setGpx(displayHelper.getGpx());
+		}
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			TripRecordingActiveBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), helper.getCurrentTrack());
+			int segmentColor = segment != null ? segment.getColor(0) : 0;
+			trackChartPoints.setSegmentColor(segmentColor);
+			trackChartPoints.setHighlightedPoint(new LatLon(lat, lon));
+			mapActivity.getMapLayers().getGpxLayer().setTrackChartPoints(trackChartPoints);
+			mapActivity.refreshMap();
 		}
-		dismiss();
+	}
+
+	@Override
+	public void updateContent() {
+	}
+
+	@Override
+	public void onChartTouch() {
+	}
+
+	@Override
+	public void scrollBy(int px) {
+	}
+
+	@Override
+	public void openSplitInterval(GpxDisplayItem gpxItem, TrkSegment trkSegment) {
+	}
+
+	@Override
+	public void showOptionsPopupMenu(View view, TrkSegment segment, boolean confirmDeletion, GpxDisplayItem gpxItem) {
+	}
+
+	@Override
+	public void openAnalyzeOnMap(GpxDisplayItem gpxItem) {
+	}
+
+	public interface DismissTargetFragment {
+		void dismissTarget();
+	}
+
+	@ColorRes
+	public static int getActiveTextColorId(boolean nightMode) {
+		return nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+	}
+
+	@ColorRes
+	public static int getActiveIconColorId(boolean nightMode) {
+		return nightMode ? R.color.icon_color_active_dark : R.color.icon_color_active_light;
+	}
+
+	@ColorRes
+	public static int getSecondaryIconColorId(boolean nightMode) {
+		return nightMode ? R.color.icon_color_secondary_dark : R.color.icon_color_secondary_light;
+	}
+
+	@ColorRes
+	public static int getActiveButtonColorId(boolean nightMode) {
+		return nightMode ? R.color.active_buttons_and_links_bg_pressed_dark : R.color.active_buttons_and_links_bg_pressed_light;
+	}
+
+	@ColorRes
+	public static int getInactiveButtonColorId(boolean nightMode) {
+		return nightMode ? R.color.inactive_buttons_and_links_bg_dark : R.color.inactive_buttons_and_links_bg_light;
+	}
+
+	@ColorRes
+	public static int getOsmandIconColorId(boolean nightMode) {
+		return nightMode ? R.color.icon_color_osmand_dark : R.color.icon_color_osmand_light;
+	}
+
+	@ColorRes
+	public static int getActiveTransparentColorId(boolean nightMode) {
+		return nightMode ? R.color.switch_button_active_dark : R.color.switch_button_active_light;
+	}
+
+	@ColorRes
+	public static int getPressedColorId(boolean nightMode) {
+		return nightMode ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light;
+	}
+
+	@DrawableRes
+	public static int getActiveTransparentBackgroundId(boolean nightMode) {
+		return nightMode ? R.drawable.btn_background_active_transparent_dark : R.drawable.btn_background_active_transparent_light;
+	}
+
+	@DrawableRes
+	public static int getInactiveStrokedBackgroundId(boolean nightMode) {
+		return nightMode ? R.drawable.btn_background_stroked_inactive_dark : R.drawable.btn_background_stroked_inactive_light;
+	}
+
+	@DrawableRes
+	public static int getInactiveButtonBackgroundId(boolean nightMode) {
+		return nightMode ? R.drawable.btn_background_inactive_dark : R.drawable.btn_background_inactive_light;
+	}
+
+	@Override
+	protected boolean hideButtonsContainer() {
+		return true;
 	}
 
 	@Nullable
@@ -295,12 +661,5 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment {
 			return (MapActivity) activity;
 		}
 		return null;
-	}
-
-	public static void showInstance(@NonNull FragmentManager fragmentManager) {
-		if (!fragmentManager.isStateSaved()) {
-			TripRecordingBottomSheet fragment = new TripRecordingBottomSheet();
-			fragment.show(fragmentManager, TAG);
-		}
 	}
 }

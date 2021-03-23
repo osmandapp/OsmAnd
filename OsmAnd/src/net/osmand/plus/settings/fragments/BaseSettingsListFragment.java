@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
@@ -17,6 +19,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
+
+import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
@@ -129,6 +133,7 @@ public abstract class BaseSettingsListFragment extends BaseOsmAndFragment implem
 		adapter = new ExportSettingsAdapter(app, exportMode, this, nightMode);
 		adapter.updateSettingsItems(dataList, selectedItemsMap);
 		expandableList.setAdapter(adapter);
+		setupListView(expandableList);
 		updateAvailableSpace();
 
 		return root;
@@ -193,6 +198,22 @@ public abstract class BaseSettingsListFragment extends BaseOsmAndFragment implem
 				}
 			}
 		});
+	}
+
+	private void setupListView(@NonNull final ListView listView) {
+		if (listView.getFooterViewsCount() == 0) {
+			int padding = getResources().getDimensionPixelSize(R.dimen.toolbar_height_expanded);
+
+			View emptyView = new View(listView.getContext());
+			emptyView.setLayoutParams(new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, padding));
+			listView.addFooterView(emptyView);
+			ScrollUtils.addOnGlobalLayoutListener(listView, new Runnable() {
+				@Override
+				public void run() {
+					listView.requestLayout();
+				}
+			});
+		}
 	}
 
 	protected void updateAvailableSpace() {
