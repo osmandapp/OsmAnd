@@ -49,7 +49,7 @@ public class SimpleBottomSheetItem extends BaseBottomSheetItem {
 
 	}
 
-	public void setTitle(String title) {
+	public void setTitle(CharSequence title) {
 		this.title = title;
 		titleTv.setText(title);
 	}

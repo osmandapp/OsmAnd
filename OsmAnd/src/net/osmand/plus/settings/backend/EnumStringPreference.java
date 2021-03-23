@@ -30,7 +30,7 @@ public class EnumStringPreference<E extends Enum<E>> extends CommonPreference<E>
 
 	@Override
 	protected String toString(E o) {
-		return o.name();
+		return o == null ? null : o.name();
 	}
 
 	@Override

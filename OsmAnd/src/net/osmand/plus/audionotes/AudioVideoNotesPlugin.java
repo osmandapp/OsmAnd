@@ -317,7 +317,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			}
 		}
 
-		private String formatDateTime(Context ctx, long dateTime) {
+		public static String formatDateTime(Context ctx, long dateTime) {
 			DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(ctx);
 			DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(ctx);
 			return dateFormat.format(dateTime) + " " + timeFormat.format(dateTime);
