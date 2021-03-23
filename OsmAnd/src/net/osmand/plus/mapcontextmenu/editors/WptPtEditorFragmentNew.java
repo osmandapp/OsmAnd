@@ -27,9 +27,9 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.base.PointImageDrawable;
+import net.osmand.plus.itinerary.ItineraryGroup;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor.OnDismissListener;
-import net.osmand.plus.itinerary.ItineraryGroup;
 import net.osmand.plus.track.SaveGpxAsyncTask;
 import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.util.Algorithms;
@@ -490,7 +490,12 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 		if (selectedGpxHelper == null || editor == null || editor.getGpxFile() == null) {
 			return true;
 		}
-		SelectedGpxFile selectedGpxFile = selectedGpxHelper.getSelectedFileByPath(editor.getGpxFile().path);
+		SelectedGpxFile selectedGpxFile;
+		if (editor.getGpxFile().showCurrentTrack) {
+			selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
+		} else {
+			selectedGpxFile = selectedGpxHelper.getSelectedFileByPath(editor.getGpxFile().path);
+		}
 		if (selectedGpxFile != null) {
 			Set<String> hiddenGroups = selectedGpxFile.getHiddenGroups();
 			return !hiddenGroups.contains(name);
