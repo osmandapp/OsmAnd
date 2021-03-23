@@ -1207,6 +1207,7 @@ public class MapInfoWidgetsFactory {
 			boolean visible = settings.SHOW_COORDINATES_WIDGET.get() && !map.shouldHideTopControls()
 					&& map.getMapRouteInfoMenu().shouldShowTopControls() && !map.isTopToolbarActive()
 					&& !map.getMapLayers().getGpxLayer().isInTrackAppearanceMode()
+					&& !map.getMapLayers().getRouteLayer().isInRouteLineAppearanceMode()
 					&& !MapRouteInfoMenu.chooseRoutesVisible && !MapRouteInfoMenu.waypointsVisible
 					&& !MapRouteInfoMenu.followTrackVisible;
 

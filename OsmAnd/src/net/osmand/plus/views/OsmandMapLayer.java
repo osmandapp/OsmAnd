@@ -377,6 +377,7 @@ public abstract class OsmandMapLayer {
 		public Paint paint;
 		public Paint customColorPaint;
 		public int customColor = 0;
+		public float customWidth = 0;
 		public int defaultWidth = 0;
 		public int defaultColor = 0;
 		public boolean isPaint2;
@@ -481,8 +482,13 @@ public abstract class OsmandMapLayer {
 			if (isShadowPaint) {
 				canvas.drawPath(path, shadowPaint);
 			}
-			if (customColor != 0) {
-				customColorPaint.setColor(customColor);
+			if (customColor != 0 || customWidth != 0) {
+				if (customColor != 0) {
+					customColorPaint.setColor(customColor);
+				}
+				if (customWidth != 0) {
+					customColorPaint.setStrokeWidth(customWidth);
+				}
 				canvas.drawPath(path, customColorPaint);
 			} else {
 				canvas.drawPath(path, paint);
