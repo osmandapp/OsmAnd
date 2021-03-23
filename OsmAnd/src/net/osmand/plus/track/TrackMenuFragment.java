@@ -1250,9 +1250,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			if (mapActivity != null) {
 				FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 				fragmentManager.beginTransaction().show(this).commit();
-				if (pointsCard != null && menuType == TrackMenuType.POINTS) {
-					pointsCard.updateGroups();
-				}
 			}
 		} catch (Exception e) {
 			log.error(e);
