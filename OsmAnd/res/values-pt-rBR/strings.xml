@@ -4040,4 +4040,6 @@
     <string name="select_another_colorization">Selecione outro tipo de colorização.</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">Limites naturais</string>
     <string name="segments_count">Segmento %1$d</string>
+    <string name="trip_recording_save_and_continue">Salvar e continuar</string>
+    <string name="lost_data_warning">Todos os dados não salvos serão perdidos.</string>
 </resources>

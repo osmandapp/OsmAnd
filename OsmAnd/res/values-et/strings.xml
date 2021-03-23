@@ -4052,4 +4052,6 @@
     <string name="map_widget_distance_by_tap">Kaugus toksamise järgi</string>
     <string name="rendering_attr_noNatureReserveBoundaries_description">Peida (loodus)kaitsealade ja rahvusparkide piirid</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">Looduse piirid</string>
+    <string name="trip_recording_save_and_continue">Salvesta ja jätka</string>
+    <string name="lost_data_warning">Kõik salvestamata andmed lähevad kaotsi.</string>
 </resources>

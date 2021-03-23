@@ -4044,4 +4044,7 @@
     <string name="select_another_colorization">Виберіть інший тип забарвлення.</string>
     <string name="rendering_attr_noNatureReserveBoundaries_description">Сховати природні заповідники, заповідні території та межі національних парків</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">Межі природи</string>
+    <string name="trip_recording_logging_interval_info">Інтервал журналювання встановлює проміжок часу, впродовж якого OsmAnd запитуватиме дані про поточне розташування.</string>
+    <string name="trip_recording_save_and_continue">Зберегти й продовжити</string>
+    <string name="lost_data_warning">Усі незбережені дані буде втрачено.</string>
 </resources>
