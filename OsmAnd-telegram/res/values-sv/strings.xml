@@ -13,7 +13,7 @@
     <string name="si_km_m">Kilomter/meter</string>
     <string name="si_mi_yard">Miles/yard</string>
     <string name="si_mi_feet">Miles/fot</string>
-    <string name="si_nm_h">Distansminuter per timme (knop)</string>
+    <string name="si_nm_h">Sjömil per timme (knop)</string>
     <string name="si_min_m">Minuter per mile</string>
     <string name="si_min_km">Minuter per kilometer</string>
     <string name="si_m_s">Meter per sekund</string>
