@@ -276,7 +276,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 
 	private void updateRouteLineAppearance(RotatedTileBox tileBox, boolean defaultPaintUpdated, boolean night) {
 		OsmandSettings settings = view.getApplication().getSettings();
-		ApplicationMode appMode = settings.getApplicationMode();
+		ApplicationMode appMode = getApplicationMode();
 
 		int color = getRouteLineColor(settings, appMode, defaultPaintUpdated);
 		attrs.paint.setColor(color);
@@ -293,15 +293,12 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 			defaultRouteLineColor = attrs.paint.getColor();
 		}
 
-		int storedValue = settings.ROUTE_LINE_COLOR.getModeValue(appMode);
-		Integer fromSettings = storedValue != 0 ? storedValue : null;
-
-		Integer color = null;
+		Integer color;
 		if (routeLineDrawInfo != null) {
 			color = routeLineDrawInfo.getColor();
-		}
-		if (color == null) {
-			color = fromSettings;
+		} else {
+			int storedValue = settings.ROUTE_LINE_COLOR.getModeValue(appMode);
+			color = storedValue != 0 ? storedValue : null;
 		}
 		return color != null ? color : defaultRouteLineColor;
 	}
@@ -314,13 +311,11 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 			defaultRouteLineWidth = attrs.paint.getStrokeWidth();
 		}
 
-		String fromSettings = settings.ROUTE_LINE_WIDTH.getModeValue(appMode);
-		String widthKey = null;
+		String widthKey;
 		if (routeLineDrawInfo != null) {
 			widthKey = routeLineDrawInfo.getWidth();
-		}
-		if (widthKey == null) {
-			widthKey = fromSettings;
+		} else {
+			widthKey = settings.ROUTE_LINE_WIDTH.getModeValue(appMode);
 		}
 		return widthKey != null ? getWidthByKey(tileBox, widthKey) : defaultRouteLineWidth;
 	}
@@ -350,6 +345,18 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 			}
 		}
 		return DEFAULT_WIDTH_MULTIPLIER * view.getDensity();
+	}
+
+	@NonNull
+	private ApplicationMode getApplicationMode() {
+		ApplicationMode appMode = null;
+		if (routeLineDrawInfo != null) {
+			String modeKey = routeLineDrawInfo.getAppModeKey();
+			if (modeKey != null) {
+				appMode = ApplicationMode.valueOfStringKey(modeKey, null);
+			}
+		}
+		return appMode != null ? appMode : helper.getAppMode();
 	}
 
 	private void drawXAxisPoints(Canvas canvas, RotatedTileBox tileBox) {

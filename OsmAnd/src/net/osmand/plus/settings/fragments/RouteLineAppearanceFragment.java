@@ -43,8 +43,6 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment imple
 	private static final String INIT_MAP_THEME = "init_map_theme";
 	private static final String SELECTED_MAP_THEME = "selected_map_theme";
 
-	private ApplicationMode appMode;
-
 	private RouteLineDrawInfo routeLineDrawInfo;
 
 	private int toolbarHeightPx;
@@ -164,7 +162,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment imple
 		MapActivity mapActivity = requireMapActivity();
 		ViewGroup cardsContainer = getCardsContainer();
 
-		colorCard = new RouteLineColorCard(mapActivity, this, routeLineDrawInfo, appMode, initMapTheme, selectedMapTheme);
+		colorCard = new RouteLineColorCard(mapActivity, this, routeLineDrawInfo, initMapTheme, selectedMapTheme);
 		cardsContainer.addView(colorCard.build(mapActivity));
 
 		widthCard = new RouteLineWidthCard(mapActivity, routeLineDrawInfo, createScrollListener());
@@ -392,14 +390,12 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment imple
 
 	public static boolean showInstance(@NonNull MapActivity mapActivity,
 	                                   @NonNull RouteLineDrawInfo drawInfo,
-	                                   @NonNull ApplicationMode appMode,
 	                                   @NonNull Fragment target) {
 		try {
 			RouteLineAppearanceFragment fragment = new RouteLineAppearanceFragment();
 			fragment.setRetainInstance(true);
 			fragment.setTargetFragment(target, 0);
 			fragment.routeLineDrawInfo = new RouteLineDrawInfo(drawInfo);
-			fragment.appMode = appMode;
 
 			mapActivity.getSupportFragmentManager()
 					.beginTransaction()

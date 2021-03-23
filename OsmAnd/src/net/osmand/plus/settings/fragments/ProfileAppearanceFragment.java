@@ -730,7 +730,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 	private void updateRouteLinePreference() {
 		Preference preference = findPreference(CUSTOMIZE_ROUTE_LINE);
 		if (preference != null) {
-			boolean isDefaultProfile = getSelectedAppMode().equals(ApplicationMode.DEFAULT);
+			boolean isDefaultProfile = getSelectedAppMode().equals(ApplicationMode.DEFAULT) && !isNewProfile;
 			boolean isPublicTransport = PUBLIC_TRANSPORT_KEY.equals(changedProfile.routingProfile);
 			preference.setVisible(!isDefaultProfile && !isPublicTransport);
 			preference.setIcon(getIcon(R.drawable.ic_action_route_distance, getActiveColorRes()));
@@ -995,12 +995,12 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		String prefId = preference.getKey();
 		if (CUSTOMIZE_ROUTE_LINE.equals(prefId)) {
 			MapActivity mapActivity = getMapActivity();
-			ApplicationMode appMode = getSelectedAppMode();
-			if (mapActivity != null && appMode != null) {
+			if (mapActivity != null) {
 				RouteLineDrawInfo drawInfo = changedProfile.routeLineDrawInfo;
 				drawInfo.setIconId(changedProfile.navigationIcon.getIconId());
 				drawInfo.setIconColor(changedProfile.getActualColor());
-				RouteLineAppearanceFragment.showInstance(mapActivity, drawInfo, appMode, this);
+				drawInfo.setAppModeKey(profile.stringKey);
+				RouteLineAppearanceFragment.showInstance(mapActivity, drawInfo, this);
 			}
 		}
 		return super.onPreferenceClick(preference);

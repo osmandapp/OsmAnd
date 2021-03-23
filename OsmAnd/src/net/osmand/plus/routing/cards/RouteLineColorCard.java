@@ -47,7 +47,6 @@ public class RouteLineColorCard extends BaseCard implements CardListener, ColorP
 	private static final int NIGHT_TITLE_ID = R.string.night;
 
 	private final Fragment targetFragment;
-	private ApplicationMode appMode;
 
 	private ColorsCard colorsCard;
 	private ColorTypeAdapter colorAdapter;
@@ -78,13 +77,11 @@ public class RouteLineColorCard extends BaseCard implements CardListener, ColorP
 	public RouteLineColorCard(@NonNull MapActivity mapActivity,
 	                          @NonNull Fragment targetFragment,
 	                          @NonNull RouteLineDrawInfo routeLineDrawInfo,
-	                          @NonNull ApplicationMode appMode,
 	                          @NonNull DayNightMode initMapTheme,
 	                          @NonNull DayNightMode selectedMapTheme) {
 		super(mapActivity);
 		this.targetFragment = targetFragment;
 		this.routeLineDrawInfo = routeLineDrawInfo;
-		this.appMode = appMode;
 		this.initMapTheme = initMapTheme;
 		this.selectedMapTheme = selectedMapTheme;
 	}
@@ -179,7 +176,7 @@ public class RouteLineColorCard extends BaseCard implements CardListener, ColorP
 				selectedColor = colors.get(0);
 			}
 			ListStringPreference preference = app.getSettings().CUSTOM_ROUTE_LINE_COLORS;
-			colorsCard = new ColorsCard(mapActivity, selectedColor, targetFragment, colors, preference, appMode);
+			colorsCard = new ColorsCard(mapActivity, selectedColor, targetFragment, colors, preference, null);
 			colorsCard.setListener(this);
 			container.addView(colorsCard.build(mapActivity));
 		}

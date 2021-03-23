@@ -17,6 +17,7 @@ public class RouteLineDrawInfo {
 	private static final String CENTER_X = "center_x";
 	private static final String CENTER_Y = "center_y";
 	private static final String SCREEN_HEIGHT = "screen_height";
+	private static final String APP_MODE_KEY = "app_mode_key";
 
 	// parameters to save
 	@ColorInt
@@ -30,6 +31,7 @@ public class RouteLineDrawInfo {
 	private int centerX;
 	private int centerY;
 	private int screenHeight;
+	private String appModeKey;
 
 	public RouteLineDrawInfo(@Nullable @ColorInt Integer color,
 	                         @Nullable String width) {
@@ -49,16 +51,7 @@ public class RouteLineDrawInfo {
 		this.centerX = existed.centerX;
 		this.centerY = existed.centerY;
 		this.screenHeight = existed.screenHeight;
-	}
-
-	@Nullable
-	public Integer getColor() {
-		return color;
-	}
-
-	@Nullable
-	public String getWidth() {
-		return width;
+		this.appModeKey = existed.appModeKey;
 	}
 
 	public void setColor(@Nullable Integer color) {
@@ -89,6 +82,20 @@ public class RouteLineDrawInfo {
 		this.screenHeight = screenHeight;
 	}
 
+	public void setAppModeKey(@Nullable String appModeKey) {
+		this.appModeKey = appModeKey;
+	}
+
+	@Nullable
+	public Integer getColor() {
+		return color;
+	}
+
+	@Nullable
+	public String getWidth() {
+		return width;
+	}
+
 	public int getIconId() {
 		return iconId;
 	}
@@ -110,6 +117,11 @@ public class RouteLineDrawInfo {
 		return screenHeight;
 	}
 
+	@Nullable
+	public String getAppModeKey() {
+		return appModeKey;
+	}
+
 	private void readBundle(@NonNull Bundle bundle) {
 		color = bundle.getInt(LINE_COLOR);
 		width = bundle.getString(LINE_WIDTH);
@@ -118,6 +130,7 @@ public class RouteLineDrawInfo {
 		centerX = bundle.getInt(CENTER_X);
 		centerY = bundle.getInt(CENTER_Y);
 		screenHeight = bundle.getInt(SCREEN_HEIGHT);
+		appModeKey = bundle.getString(APP_MODE_KEY);
 	}
 
 	public void saveToBundle(@NonNull Bundle bundle) {
@@ -132,6 +145,7 @@ public class RouteLineDrawInfo {
 		bundle.putInt(CENTER_X, (int) centerX);
 		bundle.putInt(CENTER_Y, (int) centerY);
 		bundle.putInt(SCREEN_HEIGHT, screenHeight);
+		bundle.putString(APP_MODE_KEY, appModeKey);
 	}
 
 	@Override
