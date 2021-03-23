@@ -4047,4 +4047,6 @@
     <string name="trip_recording_logging_interval_info">Інтервал журналювання встановлює проміжок часу, впродовж якого OsmAnd запитуватиме дані про поточне розташування.</string>
     <string name="trip_recording_save_and_continue">Зберегти й продовжити</string>
     <string name="lost_data_warning">Усі незбережені дані буде втрачено.</string>
+    <string name="show_start_dialog">Показати діалогове вікно запуску</string>
+    <string name="trip_recording_show_start_dialog_setting">Якщо вимкнено, запис почнеться відразу після торкання до віджета або пункту меню, пропускаючи діалогове вікно підтвердження.</string>
 </resources>
