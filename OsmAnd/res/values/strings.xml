@@ -12,6 +12,12 @@
 
 -->
 
+    <string name="release_4_0_beta">
+    • OsmAnd Live updates moved to \"Downloads > Updates\"\n\n
+    • Tracks now could be colorizing by altitude, speed, or slope.\n\n
+    • Added option to change the appearance of the navigation route line\n\n
+    • Updated \"Trip recording\" dialog\n\n
+    </string>
     <string name="specify_color_for_map_mode">Specify color for map mode: %1$s.</string>
     <string name="route_line_use_map_style_appearance">Route line would be use %1$s specified on selected map style: %2$s.</string>
     <string name="shared_string_route_line">Route line</string>
