@@ -217,8 +217,13 @@ public class AnnounceTimeDistances {
 			// round to 5
 			time = (time / 5) * 5;
 		}
-		BidiFormatter myBidiFormatter = BidiFormatter.getInstance();
-		builder.append(String.format("\n%s: %d - %d %s, %d %s.", name, minDist, minDist + 5, myBidiFormatter.unicodeWrap(meter), time, myBidiFormatter.unicodeWrap(second)));
+		BidiFormatter myBidiFormatter;
+		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN_MR2) {
+			myBidiFormatter = BidiFormatter.getInstance();
+			builder.append(String.format("\n%s: %d - %d %s, %d %s.", name, minDist, minDist + 5, myBidiFormatter.unicodeWrap(meter), time, myBidiFormatter.unicodeWrap(second)));
+		}else{
+			builder.append(String.format("\n%s: %d - %d %s, %d %s.", name, minDist, minDist + 5, "\u200F"+meter, time, "\u200F"+second));
+		}
 	}
 
 	public Spannable getIntervalsDescription(OsmandApplication app) {
