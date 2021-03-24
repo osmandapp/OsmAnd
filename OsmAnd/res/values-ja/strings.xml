@@ -3950,4 +3950,7 @@ POIの更新は利用できません</string>
     <string name="track_has_no_altitude">経路には標高データは含まれていません。</string>
     <string name="track_has_no_speed">経路には速度データは含まれていません。</string>
     <string name="select_another_colorization">別タイプのカラーを選択してください。</string>
+    <string name="trip_recording_logging_interval_info">ログ記録間隔は、OsmAndが現在の位置データを要求する期間を設定します。</string>
+    <string name="trip_recording_save_and_continue">保存して続行</string>
+    <string name="lost_data_warning">保存されていないデータはすべて失われます。</string>
 </resources>

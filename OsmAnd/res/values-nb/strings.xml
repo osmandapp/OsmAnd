@@ -3939,4 +3939,6 @@
     <string name="routing_attr_short_way_description">Optimalisert kortere rute (energisparende)</string>
     <string name="snap_to_road_descr">Aktuelle posisjonsikon vil bli festet til gjeldende navigeringsrute</string>
     <string name="routing_attr_height_obstacles_description">Ruting kan unngå kraftige oppoverbakker.</string>
+    <string name="trip_recording_save_and_continue">Lagre og fortsett</string>
+    <string name="lost_data_warning">All ulagret data vil gå tapt.</string>
 </resources>

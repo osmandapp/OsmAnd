@@ -102,9 +102,7 @@ public class MapStyleAction extends SwitchableAction<String> {
 
 	@Override
 	public String getTranslatedItemName(Context context, String item) {
-		String translation = RendererRegistry.getTranslatedRendererName(context, item);
-		return translation != null ? translation
-				: item.replace('_', ' ').replace('-', ' ');
+		return RendererRegistry.getRendererName(context, item);
 	}
 
 	public List<String> getFilteredStyles() {
@@ -175,9 +173,8 @@ public class MapStyleAction extends SwitchableAction<String> {
 				List<String> visibleNamesList = new ArrayList<>();
 				final List<String> items = new ArrayList<>(renderers.keySet());
 				for (String item : items) {
-					String translation = RendererRegistry.getTranslatedRendererName(activity, item);
-					visibleNamesList.add(translation != null ? translation
-							: item.replace('_', ' ').replace('-', ' '));
+					String name = RendererRegistry.getRendererName(activity, item);
+					visibleNamesList.add(name);
 				}
 
 				final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(themedContext, R.layout.dialog_text_item);

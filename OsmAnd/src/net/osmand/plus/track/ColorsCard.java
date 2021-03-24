@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.ImageView;
 
 import androidx.annotation.ColorInt;
-import androidx.core.content.ContextCompat;
 import androidx.core.graphics.ColorUtils;
 import androidx.fragment.app.Fragment;
 
@@ -27,12 +26,6 @@ import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.ColorInt;
-import androidx.annotation.ColorRes;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.ColorUtils;
-import androidx.fragment.app.Fragment;
 
 public class ColorsCard extends BaseCard implements ColorPickerListener {
 
@@ -58,7 +51,12 @@ public class ColorsCard extends BaseCard implements ColorPickerListener {
 		return R.layout.colors_card;
 	}
 
-	public ColorsCard(MapActivity mapActivity, int selectedColor, Fragment targetFragment, List<Integer> colors, ListStringPreference colorsListPreference, ApplicationMode appMode) {
+	public ColorsCard(MapActivity mapActivity,
+	                  int selectedColor,
+	                  Fragment targetFragment,
+	                  List<Integer> colors,
+	                  ListStringPreference colorsListPreference,
+	                  ApplicationMode appMode) {
 		super(mapActivity);
 		this.targetFragment = targetFragment;
 		this.selectedColor = selectedColor;

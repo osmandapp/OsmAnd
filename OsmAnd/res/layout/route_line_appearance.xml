@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_transparent">
+
+    <LinearLayout
+        android:id="@+id/main_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/context_menu_top_shadow" />
+
+        <LinearLayout
+            android:id="@+id/route_menu_top_shadow_all"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/bg_color"
+            android:minHeight="@dimen/bottom_sheet_title_height"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/content_padding"
+            android:paddingRight="@dimen/content_padding">
+
+            <View
+                android:layout_width="@dimen/content_padding"
+                android:layout_height="2dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/context_menu_padding_margin_tiny"
+                android:layout_marginBottom="@dimen/list_item_button_padding"
+                android:background="?attr/bg_dash_line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <net.osmand.plus.widgets.TextViewEx
+                    android:id="@+id/header_title"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:letterSpacing="@dimen/text_button_letter_spacing"
+                    android:textColor="?android:textColorPrimary"
+                    android:textSize="@dimen/default_list_text_size"
+                    osmand:typeface="@string/font_roboto_medium" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/bottom_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:foreground="@drawable/bg_contextmenu_shadow"
+            android:foregroundGravity="top|fill_horizontal">
+
+            <net.osmand.plus.LockableScrollView
+                android:id="@+id/route_menu_bottom_scroll"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?attr/route_info_bg">
+
+                <LinearLayout
+                    android:id="@+id/route_menu_cards_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/route_info_bg"
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/dialog_button_ex_height" />
+
+            </net.osmand.plus.LockableScrollView>
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/context_menu_toolbar_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:alpha="0">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/card_and_list_background_basic"
+            android:minHeight="@dimen/toolbar_height"
+            android:padding="0dp"
+            osmand:contentInsetEnd="0dp"
+            osmand:contentInsetLeft="0dp"
+            osmand:contentInsetRight="0dp"
+            osmand:contentInsetStart="0dp"
+            osmand:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:minHeight="@dimen/toolbar_height">
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/close_button"
+                    style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+                    android:layout_width="@dimen/toolbar_height"
+                    android:layout_height="@dimen/toolbar_height"
+                    android:tint="?android:textColorPrimary"
+                    android:contentDescription="@string/access_shared_string_navigate_up"
+                    osmand:srcCompat="@drawable/ic_arrow_back" />
+
+                <net.osmand.plus.widgets.TextViewEx
+                    android:id="@+id/toolbar_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/content_padding"
+                    android:layout_marginLeft="@dimen/content_padding"
+                    android:layout_marginEnd="@dimen/content_padding"
+                    android:layout_marginRight="@dimen/content_padding"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:letterSpacing="@dimen/text_button_letter_spacing"
+                    android:maxLines="2"
+                    android:textColor="?android:textColorPrimary"
+                    android:textSize="@dimen/dialog_header_text_size"
+                    osmand:typeface="@string/font_roboto_medium"
+                    android:text="@string/shared_string_route_line" />
+
+            </LinearLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <include layout="@layout/context_menu_controls" />
+
+    <LinearLayout
+        android:id="@+id/control_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/buttons_shadow"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:layout_gravity="bottom"
+            android:background="@drawable/shadow" />
+
+        <include
+            layout="@layout/bottom_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dialog_button_ex_height"
+            android:layout_gravity="bottom" />
+
+    </LinearLayout>
+
+</FrameLayout>

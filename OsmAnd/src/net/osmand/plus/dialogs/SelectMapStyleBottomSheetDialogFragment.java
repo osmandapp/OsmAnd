@@ -193,10 +193,7 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 
 		List<String> names = new ArrayList<>(renderers.keySet());
 		for (String name : names) {
-			String translation = RendererRegistry.getTranslatedRendererName(context, name);
-			if (translation == null) {
-				translation = name.replace('_', ' ').replace('-', ' ');
-			}
+			String translation = RendererRegistry.getRendererName(context, name);
 			res.put(translation, name);
 		}
 
