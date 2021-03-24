@@ -453,6 +453,21 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 		setItemBackground(context, nightMode, view, enabled);
 	}
 
+	public static void createItemActive(Context context, boolean nightMode, View view, ItemType type) {
+		view.setTag(type);
+		AppCompatImageView icon = view.findViewById(R.id.icon);
+		if (icon != null) {
+			setTintedIconActive(context, icon, nightMode, type);
+		}
+		TextView title = view.findViewById(R.id.button_text);
+		Integer titleId = type.getTitleId();
+		if (title != null && titleId != null) {
+			title.setText(titleId);
+			setTextColorActive(context, title, nightMode, type);
+		}
+		setItemBackgroundActive(context, nightMode, view);
+	}
+
 	public static void setItemBackground(Context context, boolean nightMode, View view, boolean enabled) {
 		if (view instanceof CardView) {
 			int colorId = enabled ? getActiveTransparentColorId(nightMode) : getInactiveButtonColorId(nightMode);
@@ -470,6 +485,12 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 			UiUtilities.tintDrawable(background, ContextCompat.getColor(context, getInactiveButtonColorId(nightMode)));
 		}
 		view.setBackgroundDrawable(background);
+	}
+
+	public static void setItemBackgroundActive(Context context, boolean nightMode, View view) {
+		if (view instanceof CardView) {
+			((CardView) view).setCardBackgroundColor(ContextCompat.getColor(context, getActiveTextColorId(nightMode)));
+		}
 	}
 
 	public enum ItemType {
@@ -528,6 +549,12 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 		}
 	}
 
+	protected static void setTextColorActive(Context context, TextView tv, boolean nightMode, ItemType type) {
+		if (tv != null) {
+			tv.setTextColor(ContextCompat.getColor(context, getPressedColorId(nightMode)));
+		}
+	}
+
 	protected static void setTintedIcon(Context context, AppCompatImageView iv, boolean enabled, boolean nightMode, ItemType type) {
 		Integer iconId = type.getIconId();
 		if (iv != null && iconId != null) {
@@ -547,6 +574,17 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 				setPadding(container, container.getPaddingLeft(), container.getTop(),
 						context.getResources().getDimensionPixelSize(R.dimen.content_padding_half), container.getBottom());
 			}
+		}
+	}
+
+	protected static void setTintedIconActive(Context context, AppCompatImageView iv, boolean nightMode, ItemType type) {
+		Integer iconId = type.getIconId();
+		if (iv != null && iconId != null) {
+			Drawable icon = AppCompatResources.getDrawable(context, iconId);
+			if (icon != null) {
+				DrawableCompat.setTint(icon, ContextCompat.getColor(context, getPressedColorId(nightMode)));
+			}
+			iv.setImageDrawable(icon);
 		}
 	}
 
