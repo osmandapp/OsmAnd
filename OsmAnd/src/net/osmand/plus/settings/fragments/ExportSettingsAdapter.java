@@ -58,7 +58,6 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 	private final int secondaryColorRes;
 	private final int groupViewHeight;
 	private final int childViewHeight;
-	private final int listBottomPadding;
 
 	ExportSettingsAdapter(OsmandApplication app, boolean exportMode, OnItemSelectedListener listener, boolean nightMode) {
 		this.app = app;
@@ -71,7 +70,6 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		secondaryColorRes = nightMode ? R.color.icon_color_secondary_dark : R.color.icon_color_secondary_light;
 		groupViewHeight = app.getResources().getDimensionPixelSize(R.dimen.setting_list_item_group_height);
 		childViewHeight = app.getResources().getDimensionPixelSize(R.dimen.setting_list_item_large_height);
-		listBottomPadding = app.getResources().getDimensionPixelSize(R.dimen.fab_recycler_view_padding_bottom);
 	}
 
 	@Override
@@ -117,9 +115,6 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 				notifyDataSetChanged();
 			}
 		});
-
-		boolean addPadding = !isExpanded && groupPosition == getGroupCount() - 1;
-		group.setPadding(0, 0, 0, addPadding ? listBottomPadding : 0);
 
 		adjustIndicator(app, groupPosition, isExpanded, group, nightMode);
 		AndroidUiHelper.updateVisibility(group.findViewById(R.id.divider), isExpanded);
@@ -188,8 +183,6 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 				notifyDataSetChanged();
 			}
 		});
-		boolean addPadding = isLastChild && groupPosition == getGroupCount() - 1;
-		child.setPadding(0, 0, 0, addPadding ? listBottomPadding : 0);
 		AndroidUiHelper.updateVisibility(child.findViewById(R.id.card_bottom_divider), isLastChild);
 
 		return child;

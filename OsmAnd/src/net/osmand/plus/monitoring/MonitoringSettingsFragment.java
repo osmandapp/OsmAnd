@@ -9,25 +9,27 @@ import android.text.SpannableStringBuilder;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 
-import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.CommonPreference;
-import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
-import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.OsmAndAppCustomization;
+import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet.ResetAppModePrefsListener;
 import net.osmand.plus.settings.bottomsheets.SingleSelectPreferenceBottomSheet;
+import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
@@ -36,11 +38,11 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 import static net.osmand.plus.activities.PluginInfoFragment.PLUGIN_INFO;
-import static net.osmand.plus.settings.backend.OsmandSettings.MONTHLY_DIRECTORY;
-import static net.osmand.plus.settings.backend.OsmandSettings.REC_DIRECTORY;
 import static net.osmand.plus.monitoring.OsmandMonitoringPlugin.MINUTES;
 import static net.osmand.plus.monitoring.OsmandMonitoringPlugin.SECONDS;
 import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
+import static net.osmand.plus.settings.backend.OsmandSettings.MONTHLY_DIRECTORY;
+import static net.osmand.plus.settings.backend.OsmandSettings.REC_DIRECTORY;
 
 public class MonitoringSettingsFragment extends BaseSettingsFragment
 		implements CopyAppModePrefsListener, ResetAppModePrefsListener {
@@ -81,6 +83,8 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 
 	@Override
 	protected void setupPreferences() {
+		setupShowStartDialog();
+
 		setupSaveTrackToGpxPref();
 		setupSaveTrackIntervalPref();
 
@@ -103,6 +107,12 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 		setupResetToDefaultPref();
 	}
 
+	private void setupShowStartDialog() {
+		SwitchPreferenceEx showStartDialog = (SwitchPreferenceEx) findPreference(settings.SHOW_TRIP_REC_START_DIALOG.getId());
+		showStartDialog.setDescription(getString(R.string.trip_recording_show_start_dialog_setting));
+		showStartDialog.setIcon(getPersistentPrefIcon(R.drawable.ic_action_dialog));
+	}
+
 	private void setupSaveTrackToGpxPref() {
 		SwitchPreferenceEx saveTrackToGpx = (SwitchPreferenceEx) findPreference(settings.SAVE_TRACK_TO_GPX.getId());
 		saveTrackToGpx.setDescription(getString(R.string.save_track_to_gpx_descrp));
@@ -110,7 +120,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 	}
 
 	private void setupSaveTrackIntervalPref() {
-		HashMap<Object, String> entry = getTimeValues(false);
+		HashMap<Object, String> entry = getTimeValues();
 		ListPreferenceEx saveTrackInterval = (ListPreferenceEx) findPreference(settings.SAVE_TRACK_INTERVAL.getId());
 		saveTrackInterval.setEntries(entry.values().toArray(new String[0]));
 		saveTrackInterval.setEntryValues(entry.keySet().toArray());
@@ -119,25 +129,18 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 	}
 
 	private void setupSaveGlobalTrackIntervalPref() {
-		HashMap<Object, String> entry = getTimeValues(true);
+		HashMap<Object, String> entry = getTimeValues();
 		ListPreferenceEx saveTrackInterval = (ListPreferenceEx) findPreference(settings.SAVE_GLOBAL_TRACK_INTERVAL.getId());
 		saveTrackInterval.setEntries(entry.values().toArray(new String[0]));
 		saveTrackInterval.setEntryValues(entry.keySet().toArray());
 		ApplicationMode selectedAppMode = getSelectedAppMode();
-		if (!settings.SAVE_GLOBAL_TRACK_REMEMBER.getModeValue(selectedAppMode)) {
-			saveTrackInterval.setValue(settings.SAVE_GLOBAL_TRACK_REMEMBER.getModeValue(selectedAppMode));
-		} else {
-			saveTrackInterval.setValue(settings.SAVE_GLOBAL_TRACK_INTERVAL.getModeValue(selectedAppMode));
-		}
+		saveTrackInterval.setValue(settings.SAVE_GLOBAL_TRACK_INTERVAL.getModeValue(selectedAppMode));
 		saveTrackInterval.setIcon(getActiveIcon(R.drawable.ic_action_time_span));
 		saveTrackInterval.setDescription(R.string.save_global_track_interval_descr);
 	}
 
-	private HashMap<Object, String> getTimeValues(boolean alwaysAskEntry) {
+	private HashMap<Object, String> getTimeValues() {
 		HashMap<Object, String> entry = new LinkedHashMap<>();
-		if (alwaysAskEntry) {
-			entry.put(settings.SAVE_GLOBAL_TRACK_REMEMBER.getModeValue(getSelectedAppMode()), getString(R.string.confirm_every_run));
-		}
 		for (int second : SECONDS) {
 			entry.put(second * 1000, second + " " + getString(R.string.int_seconds));
 		}
@@ -290,6 +293,18 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 	private void setupResetToDefaultPref() {
 		Preference resetToDefault = findPreference(RESET_TO_DEFAULT);
 		resetToDefault.setIcon(getActiveIcon(R.drawable.ic_action_reset_to_default_dark));
+	}
+
+	@Override
+	public void onDestroy() {
+		FragmentActivity activity = getActivity();
+		if (activity != null && !activity.isChangingConfigurations()) {
+			Fragment target = getTargetFragment();
+			if (target instanceof TripRecordingStartingBottomSheet) {
+				((TripRecordingStartingBottomSheet) target).show();
+			}
+		}
+		super.onDestroy();
 	}
 
 	@Override

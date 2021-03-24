@@ -289,6 +289,20 @@ public class RendererRegistry {
 		return renderers;
 	}
 
+	public String getSelectedRendererName() {
+		RenderingRulesStorage storage = getCurrentSelectedRenderer();
+		if (storage == null) {
+			return "";
+		}
+		return RendererRegistry.getRendererName(app, storage.getName());
+	}
+
+	public static String getRendererName(@NonNull Context ctx, @NonNull String name) {
+		String translation = getTranslatedRendererName(ctx, name);
+		return translation != null ? translation :
+				name.replace('_', ' ').replace('-', ' ');
+	}
+
 	@Nullable
 	public static String getTranslatedRendererName(@NonNull Context ctx, @NonNull String key) {
 		switch (key) {

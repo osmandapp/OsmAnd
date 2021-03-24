@@ -686,6 +686,11 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	}
 
 	@ColorRes
+	protected int getActiveColorRes() {
+		return isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+	}
+
+	@ColorRes
 	protected int getBackgroundColorRes() {
 		return isNightMode() ? R.color.list_background_color_dark : R.color.list_background_color_light;
 	}
@@ -888,17 +893,18 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	}
 
 	public static boolean showInstance(FragmentActivity activity, SettingsScreenType screenType, @Nullable ApplicationMode appMode) {
-		return showInstance(activity, screenType, appMode, new Bundle());
+		return showInstance(activity, screenType, appMode, new Bundle(), null);
 	}
 
 	public static boolean showInstance(FragmentActivity activity, SettingsScreenType screenType,
-									   @Nullable ApplicationMode appMode, @NonNull Bundle args) {
+									   @Nullable ApplicationMode appMode, @NonNull Bundle args, @Nullable Fragment target) {
 		try {
 			Fragment fragment = Fragment.instantiate(activity, screenType.fragmentName);
 			if (appMode != null) {
 				args.putString(APP_MODE_KEY, appMode.getStringKey());
 			}
 			fragment.setArguments(args);
+			fragment.setTargetFragment(target, 0);
 			activity.getSupportFragmentManager().beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, screenType.fragmentName)
 					.addToBackStack(DRAWER_SETTINGS_ID + ".new")

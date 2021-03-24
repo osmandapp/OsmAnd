@@ -4039,4 +4039,7 @@
     <string name="live_update_frequency_week_variant">Az alkalmazás hetente ellenőrzi a térképfrissítéseket. Következő ellenőrzés: %1$s (ennyi idő múlva: %2$s).</string>
     <string name="live_update_frequency_day_variant">Az alkalmazás naponta ellenőrzi a térképfrissítéseket. Következő ellenőrzés: %1$s (ennyi idő múlva: %2$s).</string>
     <string name="live_update_frequency_hour_variant">Az alkalmazás óránként ellenőrzi a térképfrissítéseket. Következő ellenőrzés: %1$s (ennyi idő múlva: %2$s).</string>
+    <string name="trip_recording_logging_interval_info">A naplózási intervallum az az időköz, amelyben az OsmAnd lekéri az aktuális helyadatokat.</string>
+    <string name="trip_recording_save_and_continue">Mentés és folytatás</string>
+    <string name="lost_data_warning">Minden nem mentett adat törlődni fog.</string>
 </resources>

@@ -872,14 +872,16 @@ public class MapControlsLayer extends OsmandMapLayer {
 		boolean showBottomMenuButtons = (showRouteCalculationControls || !routeFollowingMode)
 				&& !isInMovingMarkerMode() && !isInGpxDetailsMode() && !isInMeasurementToolMode()
 				&& !isInPlanRouteMode() && !shouldHideTopControls && !isInChoosingRoutesMode()
-				&& !isInWaypointsChoosingMode() && !isInFollowTrackMode() && !isInTrackAppearanceMode();
+				&& !isInWaypointsChoosingMode() && !isInFollowTrackMode() && !isInTrackAppearanceMode()
+				&& !isInRouteLineAppearanceMode();
 		routePlanningBtn.updateVisibility(showBottomMenuButtons);
 		menuControl.updateVisibility(showBottomMenuButtons);
 
 		boolean additionalDialogsHide = !isInGpxApproximationMode()
 				&& !isInTrackAppearanceMode()
 				&& !isInChoosingRoutesMode()
-				&& !isInWaypointsChoosingMode();
+				&& !isInWaypointsChoosingMode()
+				&& !isInRouteLineAppearanceMode();
 		boolean showZoomButtons = !routeDialogOpened && !shouldHideTopControls
 				&& !isInFollowTrackMode()
 				&& (additionalDialogsHide || !portrait);
@@ -888,7 +890,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 		boolean forceHideCompass = routeDialogOpened || trackDialogOpened || isInMeasurementToolMode()
 				|| isInPlanRouteMode() || shouldHideTopControls || isInChoosingRoutesMode()
-				|| isInTrackAppearanceMode() || isInWaypointsChoosingMode() || isInFollowTrackMode();
+				|| isInTrackAppearanceMode() || isInWaypointsChoosingMode() || isInFollowTrackMode()
+				|| isInRouteLineAppearanceMode();
 		compassHud.forceHideCompass = forceHideCompass;
 		compassHud.updateVisibility(!forceHideCompass && shouldShowCompass());
 
@@ -899,7 +902,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 		boolean showTopButtons = !routeDialogOpened && !trackDialogOpened && !shouldHideTopControls
 				&& !isInMeasurementToolMode() && !isInPlanRouteMode() && !isInChoosingRoutesMode()
-				&& !isInTrackAppearanceMode() && !isInWaypointsChoosingMode() && !isInFollowTrackMode();
+				&& !isInTrackAppearanceMode() && !isInWaypointsChoosingMode() && !isInFollowTrackMode()
+				&& !isInRouteLineAppearanceMode();
 		layersHud.updateVisibility(showTopButtons);
 		quickSearchHud.updateVisibility(showTopButtons);
 
@@ -1029,7 +1033,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 				&& !isInGpxApproximationMode()
 				&& !isInChoosingRoutesMode()
 				&& !isInWaypointsChoosingMode()
-				&& !isInFollowTrackMode();
+				&& !isInFollowTrackMode()
+				&& !isInRouteLineAppearanceMode();
 		backToLocationControl.updateVisibility(visible && !dialogOpened && !isInPlanRouteMode()
 				&& (additionalDialogsHide || !isPotrait()));
 	}
@@ -1395,6 +1400,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	private boolean isInWaypointsChoosingMode() {
 		return MapRouteInfoMenu.waypointsVisible;
+	}
+
+	private boolean isInRouteLineAppearanceMode() {
+		return mapActivity.getMapLayers().getRouteLayer().isInRouteLineAppearanceMode();
 	}
 
 	private boolean isInFollowTrackMode() {

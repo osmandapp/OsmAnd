@@ -6,7 +6,6 @@ import android.graphics.drawable.LayerDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
@@ -34,9 +33,8 @@ import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
 import org.apache.commons.logging.Log;
 
-import static net.osmand.plus.UiUtilities.CompoundButtonType.TOOLBAR;
 import static net.osmand.plus.liveupdates.LiveUpdatesSettingsDialogFragmentNew.getActivePrimaryColorId;
-import static net.osmand.plus.monitoring.TripRecordingActiveBottomSheet.getSecondaryIconColorId;
+import static net.osmand.plus.monitoring.TripRecordingBottomSheet.getSecondaryIconColorId;
 
 public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical"
+	android:paddingBottom="@dimen/content_padding">
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:id="@+id/title"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:letterSpacing="@dimen/text_button_letter_spacing"
+		android:paddingStart="@dimen/content_padding"
+		android:paddingLeft="@dimen/content_padding"
+		android:paddingTop="@dimen/content_padding_small"
+		android:paddingEnd="@dimen/content_padding"
+		android:paddingRight="@dimen/content_padding"
+		android:paddingBottom="@dimen/content_padding_small"
+		android:text="@string/monitoring_settings"
+		android:textSize="@dimen/default_list_text_size"
+		app:typeface="@string/font_roboto_medium" />
+
+	<include
+		android:id="@+id/show_track_on_map"
+		layout="@layout/bottom_sheet_with_switch_divider_and_additional_button" />
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_marginTop="@dimen/content_padding"
+		android:background="?attr/dashboard_divider" />
+
+	<LinearLayout
+		android:id="@+id/interval_view_container"
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_gravity="center_vertical"
+		android:layout_weight="1"
+		android:background="?attr/selectableItemBackground"
+		android:orientation="horizontal"
+		android:paddingStart="@dimen/content_padding"
+		android:paddingLeft="@dimen/content_padding"
+		android:paddingTop="@dimen/bottom_sheet_content_margin"
+		android:paddingEnd="@dimen/content_padding"
+		android:paddingRight="@dimen/content_padding"
+		android:paddingBottom="@dimen/bottom_sheet_content_margin">
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/interval_value"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:ellipsize="end"
+			android:maxLines="1"
+			android:textSize="@dimen/default_list_text_size"
+			tools:text="Interval value" />
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/up_down_button"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:background="@null"
+			app:srcCompat="@drawable/ic_action_arrow_down" />
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/always_ask_and_range_slider_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:paddingStart="@dimen/content_padding"
+		android:paddingLeft="@dimen/content_padding"
+		android:paddingEnd="@dimen/content_padding"
+		android:paddingRight="@dimen/content_padding">
+
+		<com.google.android.material.slider.RangeSlider
+			android:id="@+id/interval_slider"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:contentDescription="@string/save_track_interval_globally"
+			android:stepSize="1"
+			app:haloRadius="@dimen/content_padding_small"
+			app:labelBehavior="gone"
+			app:thumbColor="@color/profile_icon_color_blue_light"
+			app:thumbRadius="@dimen/content_padding_small_half"
+			app:tickColorInactive="#007EB3"
+			app:trackColorActive="@color/profile_icon_color_blue_light"
+			app:trackColorInactive="#4D007EB3"
+			app:trackHeight="@dimen/slider_track_height"
+			tools:visibility="visible" />
+
+		<TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:paddingBottom="@dimen/content_padding_small"
+			android:letterSpacing="@dimen/description_letter_spacing"
+			android:text="@string/trip_recording_logging_interval_info"
+			android:textColor="?attr/dialog_text_description_color" />
+
+	</LinearLayout>
+
+	<Space
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/context_menu_first_line_top_margin" />
+
+	<include layout="@layout/preference_button_with_icon_triple" />
+
+</LinearLayout>

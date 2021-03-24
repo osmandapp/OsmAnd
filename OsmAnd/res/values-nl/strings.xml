@@ -3748,7 +3748,7 @@
 \n
 \n</string>
     <string name="what_is_new">Wat is er nieuw</string>
-    <string name="snowmobile_render_descr">Voor sneeuwscooter, rijden met speciale wegen en tracks.</string>
+    <string name="snowmobile_render_descr">Voor sneeuwscooter, rijden op speciale wegen en tracks.</string>
     <string name="set_working_days_to_continue">Stel werkdagen in om door te gaan</string>
     <string name="gpx_split_interval_descr">Selecteer het interval waarmee markeringen met afstand of tijd op de track worden weergegeven.</string>
     <string name="gpx_split_interval_none_descr">Selecteer de gewenste splitsingsoptie: op tijd of op afstand.</string>

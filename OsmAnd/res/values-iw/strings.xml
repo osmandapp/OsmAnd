@@ -9,7 +9,7 @@
     <string name="map_widget_show_destination_arrow">הצגת הכיוון ליעד</string>
     <string name="enable_plugin_monitoring_services">יש להפעיל את תוסף „מעקב הטיול” כדי להשתמש בשירותי רישום מיקום (מעקב חי, רישום GPX)</string>
     <string name="non_optimal_route_calculation">יש לחשב מסלול בלתי יעיל למרחקים ארוכים</string>
-    <string name="gps_not_available">נא להפעיל את רכיב האיכון (GPS) בהגדרות</string>
+    <string name="gps_not_available">נא להפעיל את ה־GPS בהגדרות</string>
     <string name="map_widget_monitoring_services">שירותי רישום</string>
     <string name="no_route">אין מסלול</string>
     <string name="delete_target_point">הסרת יעד</string>
@@ -1881,7 +1881,7 @@
     <string name="si_m_s">מטרים לשנייה</string>
     <string name="si_min_km">דקות לקילומטר</string>
     <string name="si_min_m">דקות למייל</string>
-    <string name="si_nm_h">מיל ימי לשעה (קשר)</string>
+    <string name="si_nm_h">מייל ימי לשעה (קשר)</string>
     <string name="nm_h">קשר</string>
     <string name="m_s">מ/שנ׳</string>
     <string name="shared_string_trip_recording">הקלטת טיול</string>
@@ -4047,4 +4047,8 @@
     <string name="latest_openstreetmap_update">קיים עדכון ל־OpenStreetMap:</string>
     <string name="rendering_attr_noNatureReserveBoundaries_description">להסתיר גבולות של שמורות טבע, אזורים מוגנים ופארקים ציבוריים</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">גבולות טבעיים</string>
+    <string name="live_update_delete_updates_msg">למחוק את כל העדכונים החיים של %s\?</string>
+    <string name="trip_recording_logging_interval_info">הגדרת הפרש קבוע בין הבקשות של OsmAnd לקבלת נתוני המיקום הנוכחיים.</string>
+    <string name="trip_recording_save_and_continue">לשמור ולהמשיך</string>
+    <string name="lost_data_warning">כל הנתונים שלא נשמרו יאבדו.</string>
 </resources>

@@ -1192,11 +1192,11 @@
     <string name="gpx_file_is_empty">Fichier GPX vide</string>
     <string name="shared_string_tracks">Traces</string>
     <string name="shared_string_my_favorites">Favoris</string>
-    <string name="shared_string_my_places">Mes lieux favoris</string>
+    <string name="shared_string_my_places">Lieux favoris</string>
     <string name="selected_gpx_info_show">\n\nAppui long pour afficher sur la carte</string>
     <string name="delay_navigation_start">Démarrer la navigation pas à pas automatiquement</string>
     <string name="shared_string_selected_lowercase">sélectionné(s)</string>
-    <string name="gpx_split_interval">Intervalle de division</string>
+    <string name="gpx_split_interval">Intervalle de fractionnement</string>
     <string name="local_index_gpx_info_show">\n\nAppui long pour afficher les options</string>
     <string name="gpx_info_subtracks">Sections : %1$s </string>
     <string name="gpx_info_waypoints">Points de passage : %1$s</string>
@@ -4033,4 +4033,9 @@
     <string name="select_segments_description">%1$s contient plus d\'un segment, vous devez sélectionner le tronçon nécessaire à la navigation.</string>
     <string name="routing_attr_driving_style_description">Sélectionnez le mode de conduite pour avoir l\'itinéraire le plus court, le plus rapide, ou le plus sûr</string>
     <string name="quick_action_coordinates_widget_descr">Appuyer pour afficher ou cacher le widget Coordonnées sur la carte.</string>
+    <string name="snap_to_road_descr">L’icône de localisation va se déplacer sur le trajet en cours.</string>
+    <string name="select_another_colorization">Veuillez sélectionner un autre type de colorisation.</string>
+    <string name="trip_recording_logging_interval_info">L\'intervalle d’enregistrement définit la fréquence à laquelle OsmAnd récupérera les données de localisation.</string>
+    <string name="trip_recording_save_and_continue">Enregistrer et continuer</string>
+    <string name="lost_data_warning">Toutes les données non enregistrées seront perdues.</string>
 </resources>

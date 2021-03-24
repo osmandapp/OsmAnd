@@ -1449,4 +1449,7 @@
     <string name="poi_protected_area">منطقهٔ حفاظت‌شده</string>
     <string name="poi_badminton">بدمینتون</string>
     <string name="poi_service_car">خدمات خودرو; مکانیکی</string>
+    <string name="poi_substation_type">نوع</string>
+    <string name="poi_mini_roundabout">فلکهٔ کوچک</string>
+    <string name="poi_square">میدان</string>
 </resources>

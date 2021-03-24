@@ -8,13 +8,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.R;
 
-public class TrackAppearanceViewHolder extends RecyclerView.ViewHolder {
+public class AppearanceViewHolder extends RecyclerView.ViewHolder {
 
-	final TextView title;
-	final ImageView icon;
-	final ImageView button;
+	public final TextView title;
+	public final ImageView icon;
+	public final ImageView button;
 
-	TrackAppearanceViewHolder(View itemView) {
+	public AppearanceViewHolder(View itemView) {
 		super(itemView);
 		title = itemView.findViewById(R.id.groupName);
 		icon = itemView.findViewById(R.id.groupIcon);

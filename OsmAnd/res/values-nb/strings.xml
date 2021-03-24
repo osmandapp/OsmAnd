@@ -167,7 +167,7 @@
     <string name="use_fluorescent_overlays">Fluorescerende overlegg</string>
     <string name="use_fluorescent_overlays_descr">Bruk fluorescerende farger til å vise spor og ruter.</string>
     <string name="offline_edition">Frakoblet redigering</string>
-    <string name="offline_edition_descr">Bruk alltid frakoblet redigering.</string>
+    <string name="offline_edition_descr">Hvis redigering uten nett er aktivert, lagres endringer lokalt først og lastes opp på forespørsel, ellers vil endringer bli lastet opp umiddelbart.</string>
     <string name="free_version_message">Du kan laste ned eller oppdatere %1$s kart.</string>
     <string name="free_version_title">Gratisversjon</string>
     <string name="poi_context_menu_showdescription">Vis interessepunkt-beskrivelse.</string>
@@ -401,7 +401,7 @@
     <string name="search_offline_address">Offline-søk</string>
     <string name="search_online_address">Nettbasert søk</string>
     <string name="max_level_download_tile">Maks. nettbasert zoom</string>
-    <string name="max_level_download_tile_descr">Ikke bla gjennom nettbaserte kartfliser for zoomnivåer utover dette.</string>
+    <string name="max_level_download_tile_descr">Ikke bla gjennom nettbaserte kart for zoomnivåer utover dette.</string>
     <string name="route_general_information">Total distanse %1$s, reisetid %2$d t %3$d min.</string>
     <string name="router_service_descr">Nettbasert eller frakoblet navigeringstjeneste.</string>
     <string name="router_service">Navigeringstjeneste</string>
@@ -1492,7 +1492,7 @@
     <string name="wait_current_task_finished">Vent til gjeldende oppgave er ferdig</string>
     <string name="recording_delete_confirm">Slett dette elementet\?</string>
     <string name="osmand_parking_delete">Slett parkeringsplassmarkør</string>
-    <string name="local_openstreetmap_delete">Slett endring</string>
+    <string name="local_openstreetmap_delete">Slett redigering</string>
     <string name="poi_dialog_reopen">Gjenåpne</string>
     <string name="do_you_like_osmand">Liker du OsmAnd\?</string>
     <string name="building_number">Bygningsnummer</string>
@@ -1520,7 +1520,7 @@
     <string name="lang_kn">Kannada</string>
     <string name="app_mode_bus">Buss</string>
     <string name="app_mode_train">Tog</string>
-    <string name="voice_data_unavailable">Valgte taledata er ikke tilgjengelig</string>
+    <string name="voice_data_unavailable">Valgte talemeldingspakke er ikke tilgjengelig</string>
     <string name="voice_data_corrupted">Spesifisert taledata er ødelagt</string>
     <string name="voice_data_not_supported">Taledataversjon som ikke støttes</string>
     <string name="background_router_service_descr">Sporer posisjonen din mens skjermen er slått av.</string>
@@ -2173,7 +2173,7 @@
     <string name="validate_gpx_upload_name_pwd">Angi ditt OSM-brukernavn og passord for å laste opp GPX-filer.</string>
     <string name="support_new_features_descr">Doner for å se nye funksjoner implementert i programmet.</string>
     <string name="local_openstreetmap_uploadall">Last opp alle</string>
-    <string name="local_openstreetmap_upload">Last opp endring til OSM</string>
+    <string name="local_openstreetmap_upload">Last opp redigering til OSM</string>
     <string name="local_openstreetmap_descr_title">Asynkron OSM-redigering:</string>
     <string name="live_monitoring_interval_descr">Oppgi det nettbaserte sporingsintervallet.</string>
     <string name="live_monitoring_interval">Nettbasert sporingsintervall</string>
@@ -2239,7 +2239,7 @@
     <string name="quick_action_add_parking">Legg til parkeringsplass</string>
     <string name="quick_action_edit_action">Rediger handling</string>
     <string name="quick_actions_delete">Slett handling</string>
-    <string name="quick_favorites_name_preset">Navneforvalg</string>
+    <string name="quick_favorites_name_preset">Forhåndsinnstilt navn</string>
     <string name="quick_action_add_marker_descr">En knapp for å legge til en kartmarkør i skjermsenteret.</string>
     <string name="quick_action_add_gpx_descr">En knapp for å legge til et GPX-rutepunkt i midten av skjermen.</string>
     <string name="quick_action_take_audio_note_descr">En knapp for å legge til et lydnotat i midten av skjermen.</string>
@@ -2829,7 +2829,7 @@
     <string name="routeInfo_roadClass_name">Veitype</string>
     <string name="routeInfo_surface_name">Overflate</string>
     <string name="routeInfo_smoothness_name">Jevnhet</string>
-    <string name="routeInfo_steepness_name">Stigning</string>
+    <string name="routeInfo_steepness_name">Bratthet</string>
     <string name="add_home">Legg til bosted</string>
     <string name="add_work">Legg til arbeidssted</string>
     <string name="work_button">Arbeid</string>
@@ -2865,9 +2865,9 @@
     <string name="rendering_attr_surface_paved_name">Fast dekke</string>
     <string name="rendering_attr_surface_concrete_name">Betong</string>
     <string name="rendering_attr_surface_sett_name">Brostein</string>
-    <string name="rendering_attr_surface_cobblestone_name">Naturlig brostein</string>
-    <string name="rendering_attr_surface_paving_stones_name">Steinbelagt</string>
-    <string name="rendering_attr_surface_pebblestone_name">Rullestein</string>
+    <string name="rendering_attr_surface_cobblestone_name">Kuppelstein</string>
+    <string name="rendering_attr_surface_paving_stones_name">Belegningsstein</string>
+    <string name="rendering_attr_surface_pebblestone_name">Rullestein (liten)</string>
     <string name="rendering_attr_surface_stone_name">Stein</string>
     <string name="rendering_attr_surface_metal_name">Metall</string>
     <string name="rendering_attr_surface_wood_name">Tre</string>
@@ -2907,8 +2907,8 @@
     <string name="shared_string_milliradians">Milliradianer</string>
     <string name="angular_measeurement">Vinkel-måleenheter</string>
     <string name="angular_measeurement_descr">Endre hva asimut måles i.</string>
-    <string name="routing_attr_avoid_sett_name">Ingen rustikk brostein eller brostein</string>
-    <string name="routing_attr_avoid_sett_description">Unngår rustikk brostein og brostein</string>
+    <string name="routing_attr_avoid_sett_name">Ingen kuppelstein eller brostein</string>
+    <string name="routing_attr_avoid_sett_description">Unngår kuppelstein og brostein</string>
     <string name="routing_attr_avoid_tram_name">Ingen trikk</string>
     <string name="routing_attr_avoid_tram_description">Unngår trikk</string>
     <string name="routing_attr_avoid_bus_name">Ingen buss</string>
@@ -3145,7 +3145,8 @@
     <string name="shared_string_other">Annet</string>
     <string name="shared_preference">Delt</string>
     <string name="layer_osm_edits">OSM-redigeringer</string>
-    <string name="new_route_calculated_dist_dbg">Rute: Distanse %1$s, rutingstid %2$s \nUtregning: %3$.1f sec, %4$d veier, %5$d flis)</string>
+    <string name="new_route_calculated_dist_dbg">Rute: Distanse %1$s, rutetid %2$s
+\nBeregning: %3$.1f sek., %4$d veier, %5$d fliser)</string>
     <string name="contour_lines_and_hillshade">Koter og relieffskygge</string>
     <string name="update_all_maps">Oppdater alle kart</string>
     <string name="update_all_maps_q">Er du sikker på at du vil oppdatere alle (%1$d) kart\?</string>
@@ -3938,4 +3939,6 @@
     <string name="routing_attr_short_way_description">Optimalisert kortere rute (energisparende)</string>
     <string name="snap_to_road_descr">Aktuelle posisjonsikon vil bli festet til gjeldende navigeringsrute</string>
     <string name="routing_attr_height_obstacles_description">Ruting kan unngå kraftige oppoverbakker.</string>
+    <string name="trip_recording_save_and_continue">Lagre og fortsett</string>
+    <string name="lost_data_warning">All ulagret data vil gå tapt.</string>
 </resources>

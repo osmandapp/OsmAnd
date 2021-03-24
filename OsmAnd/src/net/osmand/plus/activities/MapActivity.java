@@ -93,7 +93,6 @@ import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.builders.cards.dialogs.ContextMenuCardDialogFragment;
-import net.osmand.plus.mapcontextmenu.editors.SelectFavoriteCategoryBottomSheet;
 import net.osmand.plus.mapcontextmenu.other.DestinationReachedMenu;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.mapmarkers.MapMarker;
@@ -105,7 +104,7 @@ import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.SnapTrackWarningFragment;
-import net.osmand.plus.monitoring.TripRecordingBottomSheet;
+import net.osmand.plus.monitoring.TripRecordingStartingBottomSheet;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
@@ -126,6 +125,7 @@ import net.osmand.plus.settings.datastorage.DataStorageFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.settings.fragments.ConfigureProfileFragment;
+import net.osmand.plus.settings.fragments.RouteLineAppearanceFragment;
 import net.osmand.plus.track.TrackAppearanceFragment;
 import net.osmand.plus.track.TrackMenuFragment;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
@@ -2242,8 +2242,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return getFragment(MeasurementToolFragment.TAG);
 	}
 
-	public TripRecordingBottomSheet getTripRecordingBottomSheet() {
-		return getFragment(TripRecordingBottomSheet.TAG);
+	public TripRecordingStartingBottomSheet getTripRecordingBottomSheet() {
+		return getFragment(TripRecordingStartingBottomSheet.TAG);
 	}
 
 	public ChooseRouteFragment getChooseRouteFragment() {
@@ -2264,6 +2264,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public TrackMenuFragment getTrackMenuFragment() {
 		return getFragment(TrackMenuFragment.TAG);
+	}
+
+	public RouteLineAppearanceFragment getRouteLineAppearanceFragment() {
+		return getFragment(RouteLineAppearanceFragment.TAG);
 	}
 
 	public void backToConfigureProfileFragment() {

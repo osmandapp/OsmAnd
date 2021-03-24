@@ -1,8 +1,11 @@
 package net.osmand.plus.views.layers.geometry;
 
 import android.graphics.Bitmap;
+import android.graphics.Paint;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.Location;
 import net.osmand.data.RotatedTileBox;
@@ -17,15 +20,26 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Geome
 	private RoutingHelper helper;
 	private RouteCalculationResult route;
 
+	private Integer customColor;
+	private Float customWidth;
+
 	public RouteGeometryWay(RouteGeometryWayContext context) {
 		super(context, new GeometryWayDrawer<>(context));
 		this.helper = context.getApp().getRoutingHelper();
 	}
 
+	public void setRouteStyleParams(@Nullable @ColorInt Integer color, @Nullable Float width) {
+		this.customColor = color;
+		this.customWidth = width;
+	}
+
 	@NonNull
 	@Override
 	public GeometryWayStyle<RouteGeometryWayContext> getDefaultWayStyle() {
-		return new GeometrySolidWayStyle(getContext(), getContext().getAttrs().paint.getColor());
+		Paint paint = getContext().getAttrs().paint;
+		int color = customColor != null ? customColor : paint.getColor();
+		float width = customWidth != null ? customWidth : paint.getStrokeWidth();
+		return new GeometrySolidWayStyle(getContext(), color, width);
 	}
 
 	public void updateRoute(RotatedTileBox tb, RouteCalculationResult route) {
@@ -50,8 +64,8 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Geome
 
 	private static class GeometrySolidWayStyle extends GeometryWayStyle<RouteGeometryWayContext> {
 
-		GeometrySolidWayStyle(RouteGeometryWayContext context, Integer color) {
-			super(context, color);
+		GeometrySolidWayStyle(RouteGeometryWayContext context, Integer color, Float width) {
+			super(context, color, width);
 		}
 
 		@Override
