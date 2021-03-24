@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import static net.osmand.AndroidUtils.getPrimaryTextColorId;
+import static net.osmand.plus.monitoring.TripRecordingOptionsBottomSheet.ACTION_CLEAR_DATA;
 
 public class TripRecordingClearDataBottomSheet extends MenuBottomSheetDialogFragment implements TripRecordingBottomSheet.DismissTargetFragment {
 
@@ -110,6 +111,9 @@ public class TripRecordingClearDataBottomSheet extends MenuBottomSheetDialogFrag
 	@Override
 	public void dismissTarget() {
 		Fragment target = getTargetFragment();
+		Bundle args = new Bundle();
+		args.putBoolean(ACTION_CLEAR_DATA, true);
+		target.setArguments(args);
 		if (target instanceof TripRecordingOptionsBottomSheet) {
 			((TripRecordingOptionsBottomSheet) target).dismiss();
 		}

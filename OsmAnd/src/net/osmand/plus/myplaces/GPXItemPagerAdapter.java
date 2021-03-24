@@ -49,6 +49,8 @@ import net.osmand.plus.views.controls.WrapContentHeightViewPager.ViewAtPositionI
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import org.apache.commons.lang3.ArrayUtils;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -62,9 +64,12 @@ import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.ALTITUDE;
 import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.SLOPE;
 import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.SPEED;
 import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_ALTITUDE;
+import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_GENERAL;
 import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_SPEED;
 
 public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvider, ViewAtPositionInterface {
+
+	private static final int CHART_LABEL_COUNT = 4;
 
 	private OsmandApplication app;
 	private UiUtilities iconsCache;
@@ -82,6 +87,10 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	private boolean chartClicked;
 	private boolean nightMode;
 	private boolean onlyGraphs;
+
+	public void setGpxItem(GpxDisplayItem gpxItem) {
+		this.gpxItem = gpxItem;
+	}
 
 	public GPXItemPagerAdapter(@NonNull OsmandApplication app,
 							   @NonNull GpxDisplayItem gpxItem,
@@ -117,12 +126,17 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	private List<ILineDataSet> getDataSets(LineChart chart, GPXTabItemType tabType,
 										   LineGraphType firstType, LineGraphType secondType) {
 		List<ILineDataSet> dataSets = dataSetsMap.get(tabType);
-		if (dataSets == null && chart != null) {
+		if (gpxItem != null) {
 			GPXTrackAnalysis analysis = gpxItem.analysis;
 			GpxDataItem gpxDataItem = displayHelper.getGpxDataItem();
 			boolean calcWithoutGaps = gpxItem.isGeneralTrack() && gpxDataItem != null && !gpxDataItem.isJoinSegments();
-			dataSets = GpxUiHelper.getDataSets(chart, app, analysis, firstType, secondType, calcWithoutGaps);
-			dataSetsMap.put(tabType, dataSets);
+			if (chart != null) {
+				dataSets = GpxUiHelper.getDataSets(chart, app, analysis, firstType, secondType, calcWithoutGaps);
+				if (dataSets != null) {
+					dataSetsMap.remove(tabType);
+				}
+				dataSetsMap.put(tabType, dataSets);
+			}
 		}
 		return dataSets;
 	}
@@ -247,7 +261,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	private void setupSpeedTab(View view, LineChart chart, GPXTrackAnalysis analysis, GPXFile gpxFile, int position) {
 		if (analysis != null && analysis.isSpeedSpecified()) {
 			if (analysis.hasSpeedData) {
-				GpxUiHelper.setupGPXChart(app, chart, 4);
+				GpxUiHelper.setupGPXChart(app, chart, CHART_LABEL_COUNT);
 				chart.setData(new LineData(getDataSets(chart, GPX_TAB_ITEM_SPEED, SPEED, null)));
 				updateChart(chart);
 				chart.setVisibility(View.VISIBLE);
@@ -319,7 +333,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	private void setupAltitudeTab(View view, LineChart chart, GPXTrackAnalysis analysis, GPXFile gpxFile, int position) {
 		if (analysis != null) {
 			if (analysis.hasElevationData) {
-				GpxUiHelper.setupGPXChart(app, chart, 4);
+				GpxUiHelper.setupGPXChart(app, chart, CHART_LABEL_COUNT);
 				chart.setData(new LineData(getDataSets(chart, GPX_TAB_ITEM_ALTITUDE, ALTITUDE, SLOPE)));
 				updateChart(chart);
 				chart.setVisibility(View.VISIBLE);
@@ -386,7 +400,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	private void setupGeneralTab(View view, LineChart chart, GPXTrackAnalysis analysis, GPXFile gpxFile, int position) {
 		if (analysis != null) {
 			if (analysis.hasElevationData || analysis.hasSpeedData) {
-				GpxUiHelper.setupGPXChart(app, chart, 4);
+				GpxUiHelper.setupGPXChart(app, chart, CHART_LABEL_COUNT);
 				chart.setData(new LineData(getDataSets(chart, GPXTabItemType.GPX_TAB_ITEM_GENERAL, ALTITUDE, SPEED)));
 				updateChart(chart);
 				chart.setVisibility(View.VISIBLE);
@@ -685,13 +699,61 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 
 	void updateChart(LineChart chart) {
 		if (chart != null && !chart.isEmpty()) {
-			if (gpxItem.chartMatrix != null) {
-				chart.getViewPortHandler().refresh(new Matrix(gpxItem.chartMatrix), chart, true);
-			}
-			if (gpxItem.chartHighlightPos != -1) {
-				chart.highlightValue(gpxItem.chartHighlightPos, 0);
+			if (gpxItem != null) {
+				if (gpxItem.chartMatrix != null) {
+					chart.getViewPortHandler().refresh(new Matrix(gpxItem.chartMatrix), chart, true);
+				}
+				if (gpxItem.chartHighlightPos != -1) {
+					chart.highlightValue(gpxItem.chartHighlightPos, 0);
+				}
 			} else {
 				chart.highlightValue(null);
+			}
+		}
+	}
+
+	public boolean isVisible() {
+		for (int i = 0; i < views.size(); i++) {
+			if (views.get(i).findViewById(R.id.chart).getVisibility() == View.VISIBLE) {
+				if (tabTypes[i] == GPX_TAB_ITEM_GENERAL && (gpxItem == null || gpxItem.analysis == null)) {
+					return false;
+				}
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public void updateGraph(int position) {
+		LineGraphType firstType = tabTypes[position] == GPX_TAB_ITEM_SPEED ? SPEED : ALTITUDE;
+		LineGraphType secondType = null;
+		if (tabTypes[position] == GPX_TAB_ITEM_ALTITUDE) {
+			secondType = SLOPE;
+		} else if (tabTypes[position] == GPX_TAB_ITEM_GENERAL) {
+			secondType = SPEED;
+		}
+
+		LineChart chart = getViewAtPosition(position).findViewById(R.id.chart);
+		List<ILineDataSet> dataSets = getDataSets(chart, tabTypes[position], firstType, secondType);
+		boolean isEmptyDataSets = Algorithms.isEmpty(dataSets);
+		AndroidUiHelper.updateVisibility(chart, !isEmptyDataSets);
+		chart.clear();
+		if (!isEmptyDataSets) {
+			chart.setData(new LineData(dataSets));
+		}
+		if (chart.getAxisRight().getLabelCount() != CHART_LABEL_COUNT
+				|| chart.getAxisLeft().getLabelCount() != CHART_LABEL_COUNT) {
+			GpxUiHelper.setupGPXChart(app, chart, CHART_LABEL_COUNT);
+		}
+		updateChart(chart);
+		notifyDataSetChanged();
+	}
+
+	public void fetchTabTypesIfNeeded(GPXTabItemType[] tabTypes) {
+		if (!ArrayUtils.isEquals(this.tabTypes, tabTypes)) {
+			fetchTabTypes();
+			for (int i = 0; i < this.tabTypes.length; i++) {
+				updateGraph(i);
 			}
 		}
 	}

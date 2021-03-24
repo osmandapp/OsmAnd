@@ -34,11 +34,13 @@ import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.util.Algorithms;
 
 import static net.osmand.AndroidUtils.getPrimaryTextColorId;
+import static net.osmand.plus.monitoring.TripRecordingBottomSheet.UPDATE_DYNAMIC_ITEMS;
 
 public class TripRecordingOptionsBottomSheet extends MenuBottomSheetDialogFragment implements TripRecordingBottomSheet.DismissTargetFragment {
 
 	public static final String TAG = TripRecordingOptionsBottomSheet.class.getSimpleName();
 	public static final String ACTION_STOP_AND_DISMISS = "action_stop_and_discard";
+	public static final String ACTION_CLEAR_DATA = "action_clear_data";
 	private static final int SAVE_UPDATE_INTERVAL = 1000;
 
 	private OsmandApplication app;
@@ -283,12 +285,22 @@ public class TripRecordingOptionsBottomSheet extends MenuBottomSheetDialogFragme
 		return false;
 	}
 
+	private boolean isCleared() {
+		Bundle args = getArguments();
+		if (args != null) {
+			return args.getBoolean(ACTION_CLEAR_DATA);
+		}
+		return false;
+	}
+
 	@Override
 	public void dismissTarget() {
 		Fragment target = getTargetFragment();
 		if (target instanceof TripRecordingBottomSheet) {
 			if (isDiscard()) {
 				((TripRecordingBottomSheet) target).dismiss();
+			} else if (isCleared()) {
+				((TripRecordingBottomSheet) target).show(UPDATE_DYNAMIC_ITEMS);
 			} else {
 				((TripRecordingBottomSheet) target).show();
 			}

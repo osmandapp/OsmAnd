@@ -49,6 +49,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.myplaces.GPXItemPagerAdapter;
+import net.osmand.plus.myplaces.GPXTabItemType;
 import net.osmand.plus.myplaces.SegmentActionsListener;
 import net.osmand.plus.myplaces.SegmentGPXAdapter;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -69,18 +70,19 @@ import java.util.List;
 import static net.osmand.AndroidUtils.getSecondaryTextColorId;
 import static net.osmand.AndroidUtils.setPadding;
 import static net.osmand.plus.UiUtilities.CompoundButtonType.GLOBAL;
-import static net.osmand.plus.track.GpxBlockStatisticsBuilder.INIT_BLOCKS_ALTITUDE;
-import static net.osmand.plus.track.GpxBlockStatisticsBuilder.INIT_BLOCKS_GENERAL;
-import static net.osmand.plus.track.GpxBlockStatisticsBuilder.INIT_BLOCKS_SPEED;
+import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_ALTITUDE;
+import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_GENERAL;
+import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_SPEED;
 
 public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment implements SegmentActionsListener {
 
 	public static final String TAG = TripRecordingBottomSheet.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(TripRecordingBottomSheet.class);
 	public static final String UPDATE_TRACK_ICON = "update_track_icon";
+	public static final String UPDATE_DYNAMIC_ITEMS = "update_dynamic_items";
 	private static final int GPS_UPDATE_INTERVAL = 1000;
-	private static final String[] INIT_BLOCKS_KEYS =
-			new String[]{INIT_BLOCKS_GENERAL, INIT_BLOCKS_ALTITUDE, INIT_BLOCKS_SPEED};
+	public static final GPXTabItemType[] INIT_TAB_ITEMS =
+			new GPXTabItemType[]{GPX_TAB_ITEM_GENERAL, GPX_TAB_ITEM_ALTITUDE, GPX_TAB_ITEM_SPEED};
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
@@ -89,16 +91,18 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 
 	private View statusContainer;
 	private AppCompatImageView trackAppearanceIcon;
-	private LinearLayout segmentsContainer;
 
 	private TrackDisplayHelper displayHelper;
 	private TrackChartPoints trackChartPoints;
 	private GPXItemPagerAdapter graphsAdapter;
+	private int graphTabPosition = 0;
+	private ViewGroup segmentsTabs;
 
 	private GpxBlockStatisticsBuilder blockStatisticsBuilder;
 	private SelectedGpxFile selectedGpxFile;
 	private final Handler handler = new Handler();
 	private Runnable updatingGPS;
+	private Runnable updatingGraph;
 
 	private GPXFile getGPXFile() {
 		return selectedGpxFile.getGpxFile();
@@ -151,14 +155,15 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 					}
 				});
 
-		segmentsContainer = itemView.findViewById(R.id.segments_container);
-		createSegmentsTabs(segmentsContainer);
+		setupDisplayHelper();
+		segmentsTabs = itemView.findViewById(R.id.segments_container);
+		createSegmentsTabs(segmentsTabs);
 
 		RecyclerView statBlocks = itemView.findViewById(R.id.block_statistics);
 		blockStatisticsBuilder = new GpxBlockStatisticsBuilder(app, selectedGpxFile, nightMode);
 		blockStatisticsBuilder.setBlocksView(statBlocks);
 		blockStatisticsBuilder.setBlocksClickable(false);
-		blockStatisticsBuilder.setInitBlocksKey(INIT_BLOCKS_GENERAL);
+		blockStatisticsBuilder.setTabItem(GPX_TAB_ITEM_GENERAL);
 		blockStatisticsBuilder.initStatBlocks(null,
 				ContextCompat.getColor(app, getActiveTextColorId(nightMode)));
 
@@ -220,6 +225,7 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 		super.onResume();
 		blockStatisticsBuilder.runUpdatingStatBlocksIfNeeded();
 		runUpdatingGPS();
+		runUpdatingGraph();
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.getMapLayers().getGpxLayer().setTrackChartPoints(trackChartPoints);
@@ -231,24 +237,27 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 		super.onPause();
 		blockStatisticsBuilder.stopUpdatingStatBlocks();
 		stopUpdatingGPS();
+		stopUpdatingGraph();
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.getMapLayers().getGpxLayer().setTrackChartPoints(null);
 		}
 	}
 
-	public void show() {
+	public void show(String... keys) {
 		Dialog dialog = getDialog();
 		if (dialog != null) {
 			dialog.show();
 		}
-	}
-
-	public void show(String... keys) {
-		show();
 		for (String key : keys) {
 			if (key.equals(UPDATE_TRACK_ICON)) {
 				updateTrackIcon(app, trackAppearanceIcon);
+			}
+			if (key.equals(UPDATE_DYNAMIC_ITEMS)) {
+				blockStatisticsBuilder.stopUpdatingStatBlocks();
+				blockStatisticsBuilder.runUpdatingStatBlocksIfNeeded();
+				stopUpdatingGraph();
+				runUpdatingGraph();
 			}
 		}
 	}
@@ -276,26 +285,37 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 		handler.post(updatingGPS);
 	}
 
-	private void recreateStatBlocks(String initBlocksKey) {
-		blockStatisticsBuilder.stopUpdatingStatBlocks();
-		blockStatisticsBuilder.setInitBlocksKey(initBlocksKey);
-		blockStatisticsBuilder.runUpdatingStatBlocksIfNeeded();
+	public void stopUpdatingGraph() {
+		handler.removeCallbacks(updatingGraph);
+	}
+
+	public void runUpdatingGraph() {
+		updatingGraph = new Runnable() {
+			@Override
+			public void run() {
+				int interval = app.getSettings().SAVE_GLOBAL_TRACK_INTERVAL.get();
+				graphsAdapter.setGpxItem(GpxUiHelper.makeGpxDisplayItem(app, displayHelper.getGpx()));
+				graphsAdapter.fetchTabTypesIfNeeded(INIT_TAB_ITEMS);
+				graphsAdapter.updateGraph(graphTabPosition);
+				AndroidUiHelper.updateVisibility(segmentsTabs, graphsAdapter.isVisible());
+				handler.postDelayed(this, Math.max(GPS_UPDATE_INTERVAL, interval));
+			}
+		};
+		handler.post(updatingGraph);
 	}
 
 	private void setupDisplayHelper() {
 		displayHelper = new TrackDisplayHelper(app);
+		GPXFile gpxFile = getGPXFile();
 		if (!selectedGpxFile.isShowCurrentTrack()) {
-			File file = new File(getGPXFile().path);
+			File file = new File(gpxFile.path);
 			displayHelper.setFile(file);
 			displayHelper.setGpxDataItem(app.getGpxDbHelper().getItem(file));
 		}
-		displayHelper.setGpx(getGPXFile());
+		displayHelper.setGpx(gpxFile);
 	}
 
 	private void createSegmentsTabs(ViewGroup viewGroup) {
-		viewGroup.removeAllViews();
-		setupDisplayHelper();
-
 		View segmentView = SegmentGPXAdapter.createGpxTabsView(displayHelper, viewGroup, this, nightMode);
 		AndroidUiHelper.setVisibility(View.GONE, segmentView.findViewById(R.id.list_item_divider));
 		WrapContentHeightViewPager pager = segmentView.findViewById(R.id.pager);
@@ -303,17 +323,19 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 		tabLayout.setOnTabReselectedListener(new PagerSlidingTabStrip.OnTabReselectedListener() {
 			@Override
 			public void onTabSelected(int position) {
-				recreateStatBlocks(INIT_BLOCKS_KEYS[position]);
+				graphTabPosition = position;
+				blockStatisticsBuilder.setTabItem(INIT_TAB_ITEMS[graphTabPosition]);
 			}
 
 			@Override
 			public void onTabReselected(int position) {
-				recreateStatBlocks(INIT_BLOCKS_KEYS[position]);
+				graphTabPosition = position;
+				blockStatisticsBuilder.setTabItem(INIT_TAB_ITEMS[graphTabPosition]);
 			}
 		});
 
-		graphsAdapter = new GPXItemPagerAdapter(app, GpxUiHelper.makeGpxDisplayItem(app,
-				displayHelper.getGpx()), displayHelper, nightMode, this, true);
+		graphsAdapter = new GPXItemPagerAdapter(app, GpxUiHelper.makeGpxDisplayItem(app, displayHelper.getGpx()),
+				displayHelper, nightMode, this, true);
 
 		pager.setAdapter(graphsAdapter);
 		tabLayout.setViewPager(pager);
