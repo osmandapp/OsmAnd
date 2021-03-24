@@ -36,6 +36,8 @@ import net.osmand.util.MapUtils;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLocationListener,
 		OsmAndCompassListener, MapMarkerChangedListener {
@@ -59,6 +61,8 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	private Float heading;
 	private boolean drivingRegionUpdated = false;
 	private boolean movingToMyLocation = false;
+
+	private ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 
 	public MapViewTrackingUtilities(OsmandApplication app){
 		this.app = app;
@@ -167,7 +171,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	}
 
 	public void detectDrivingRegion(final LatLon latLon) {
-		new DetectDrivingRegionTask(app).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, latLon);
+		new DetectDrivingRegionTask(app).executeOnExecutor(singleThreadExecutor, latLon);
 	}
 
 	@Override
