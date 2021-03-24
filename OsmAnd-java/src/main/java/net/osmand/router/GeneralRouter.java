@@ -1,8 +1,10 @@
 package net.osmand.router;
 
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataObject;
+import net.osmand.data.QuadTree;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -76,6 +78,7 @@ public class GeneralRouter implements VehicleRouter {
 	private float maxVehicleSpeed;
 
 	private TLongHashSet impassableRoads;
+	
 	private GeneralRouterProfile profile;
 	
 	Map<RouteRegion, Map<IntHolder, Float>>[] evalCache;	
@@ -268,11 +271,11 @@ public class GeneralRouter implements VehicleRouter {
 	@Override
 	public boolean acceptLine(RouteDataObject way) {
 		Float res = getCache(RouteDataObjectAttribute.ACCESS, way);
-		if(res == null) {
+		if (res == null) {
 			res = (float) getObjContext(RouteDataObjectAttribute.ACCESS).evaluateInt(way, 0);
 			putCache(RouteDataObjectAttribute.ACCESS, way, res);
 		}
-		if(impassableRoads != null && impassableRoads.contains(way.id)) {
+		if (impassableRoads != null && impassableRoads.contains(way.id)) {
 			return false;
 		}
 		return res >= 0;

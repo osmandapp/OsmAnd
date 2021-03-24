@@ -1,14 +1,5 @@
 package net.osmand.router;
 
-import net.osmand.PlatformUtil;
-import net.osmand.router.GeneralRouter.GeneralRouterProfile;
-import net.osmand.router.GeneralRouter.RouteAttributeContext;
-import net.osmand.router.GeneralRouter.RouteDataObjectAttribute;
-import net.osmand.util.Algorithms;
-
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashSet;
@@ -16,6 +7,17 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
+import net.osmand.GPXUtilities.WptPt;
+import net.osmand.PlatformUtil;
+import net.osmand.data.QuadTree;
+import net.osmand.router.GeneralRouter.GeneralRouterProfile;
+import net.osmand.router.GeneralRouter.RouteAttributeContext;
+import net.osmand.router.GeneralRouter.RouteDataObjectAttribute;
+import net.osmand.util.Algorithms;
 
 public class RoutingConfiguration {
 
@@ -48,6 +50,11 @@ public class RoutingConfiguration {
 	
 	// 1.6 Time to calculate all access restrictions based on conditions
 	public long routeCalculationTime = 0;
+	
+	
+	// extra points to be inserted in ways (quad tree is based on 31 coords)
+	public QuadTree<WptPt> directionPoints;
+	public int directionPointsRadius = 30; // 30 m
 	
 	public static class Builder {
 		// Design time storage

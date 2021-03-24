@@ -1117,4 +1117,15 @@ public class RouteDataObject {
 		}
 		restrictionsVia[k] = viaWay;
 	}
+
+	public void setPointTypes(int pntInd, int[] array) {
+		if (pointTypes == null || pointTypes.length < pntInd) {
+			int[][] npointTypes = new int[pntInd + 1][];
+			for (int k = 0; pointTypes != null && k < pointTypes.length; k++) {
+				npointTypes[k] = pointTypes[k];
+			}
+			pointTypes = npointTypes;
+		}
+		pointTypes[pntInd] = array;
+	}
 }

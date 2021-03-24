@@ -11,14 +11,17 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import org.apache.commons.logging.Log;
 
 import gnu.trove.iterator.TIntObjectIterator;
 import gnu.trove.iterator.TLongIterator;
+import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.TLongObjectMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import gnu.trove.set.hash.TLongHashSet;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.NativeLibrary;
 import net.osmand.NativeLibrary.NativeRouteSearchResult;
 import net.osmand.PlatformUtil;
@@ -28,10 +31,12 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
 import net.osmand.binary.RouteDataObject;
+import net.osmand.data.QuadRect;
 import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentVisitor;
 import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
+import net.osmand.util.MapUtils;
 
 
 public class RoutingContext {
@@ -277,22 +282,22 @@ public class RoutingContext {
 				ts.setLoadedNonNative();
 				List<RouteDataObject> res = reader.loadRouteIndexData(ts.subregion);
 				
-				if(toLoad != null) {
+				if (toLoad != null) {
 					toLoad.addAll(res);
 				} else {
-					for(RouteDataObject ro : res){
-						if(ro != null) {
-							if(config.routeCalculationTime != 0) {
+					for (RouteDataObject ro : res) {
+						if (ro != null) {
+							if (config.routeCalculationTime != 0) {
 								ro.processConditionalTags(config.routeCalculationTime);
 							}
-							if(config.router.acceptLine(ro)) {
-								if(excludeNotAllowed != null && !excludeNotAllowed.contains(ro.getId())) {
+							if (config.router.acceptLine(ro)) {
+								if (excludeNotAllowed != null && !excludeNotAllowed.contains(ro.getId())) {
 									ts.add(ro);
 								}
 							}
-							if(excludeNotAllowed != null && ro.getId() > 0){
+							if (excludeNotAllowed != null && ro.getId() > 0) {
 								excludeNotAllowed.add(ro.getId());
-								if(ts.excludedIds == null ){
+								if (ts.excludedIds == null) {
 									ts.excludedIds = new TLongHashSet();
 								}
 								ts.excludedIds.add(ro.getId());
@@ -451,8 +456,9 @@ public class RoutingContext {
 	@SuppressWarnings("unused")
 	private long getRoutingTile(int x31, int y31, long memoryLimit) {
 		// long now = System.nanoTime();
-		long xloc = x31 >> (31 - config.ZOOM_TO_LOAD_TILES);
-		long yloc = y31 >> (31 - config.ZOOM_TO_LOAD_TILES);
+		int zmShift = 31 - config.ZOOM_TO_LOAD_TILES;
+		long xloc = x31 >> zmShift;
+		long yloc = y31 >> zmShift;
 		long tileId = (xloc << config.ZOOM_TO_LOAD_TILES) + yloc;
 		if (memoryLimit == 0) {
 			memoryLimit = config.memoryLimitation;
@@ -505,6 +511,11 @@ public class RoutingContext {
 							excludeIds.addAll(ts.excludedIds);
 						}
 					}
+					// connect direction points
+					if(config.directionPoints != null) {
+						connectDirectionPoints(ts, (int) (xloc << zmShift), (int) (yloc << zmShift), 
+							(int) ((xloc + 1) << zmShift), (int) ((yloc + 1) << zmShift));
+					}
 				}
 			}
 		}
@@ -513,7 +524,67 @@ public class RoutingContext {
 	}
 
 	
-	
+	private static final String ATTACHED_ID = "AID";
+	private void connectDirectionPoints(RoutingSubregionTile ts, int minx, int miny, int maxx, int maxy) {
+		List<WptPt> points = config.directionPoints.queryInBox(new QuadRect(minx, miny, maxx, maxy), new ArrayList<>());
+		for (WptPt connectPoint : points) {
+			TIntArrayList types = new TIntArrayList();
+			for (Entry<String, String> e : connectPoint.getExtensionsToRead().entrySet()) {
+				if(e.getKey().equals(ATTACHED_ID)) {
+					types.clear();
+					break;
+				}
+				int type = ts.subregion.routeReg.searchRouteEncodingRule(e.getKey(), e.getValue());
+				if(type != -1) {
+					types.add(type);
+				}
+			}
+			// don't attach empty points
+			if(types.size() == 0) {
+				continue;
+			}
+			int y = MapUtils.get31TileNumberY(connectPoint.lat);
+			int x = MapUtils.get31TileNumberX(connectPoint.lon);
+			double closest = Integer.MAX_VALUE;
+			int xc = 0, yc = 0;
+			long[] keys = ts.routes.keys();
+			for (long k : keys) {
+				// long k = (((long) x31) << 31) + (long) y31;
+				int xp = (int) (k >> 31);
+				int yp = (int) (k - (xp << 31));
+				double dist = MapUtils.squareRootDist31(x, y, xp, yp);
+				if (dist < closest) {
+					xc = xp;
+					yc = yp;
+					closest = dist;
+				}
+			}
+			// config.directionPointsRadius
+			if (closest < config.directionPointsRadius) {
+				long k = (((long) xc) << 31) + (long) yc;
+				RouteSegment segment = ts.routes.get(k);
+				int pntInd = -1;
+				for(int i = 0; i < segment.getRoad().getPointsLength() - 1; i ++) {
+					if(xc == segment.getRoad().getPoint31XTile(i) && yc == segment.getRoad().getPoint31YTile(i)) {
+						pntInd = i;
+					}
+				}
+				if (pntInd != -1) {
+					System.out.println(
+							"INSERT INTO " + segment.getRoad() + " " + connectPoint.getLatitude() + " " + connectPoint.getLongitude());
+					segment.getRoad().insert(pntInd, x, y);
+					connectPoint.getExtensionsToWrite().put(ATTACHED_ID, segment.getRoad().getId() +"");
+					if (types.size() > 0) {
+						System.out.println(" >>> INSERT INTO " + segment.getRoad() + " " + connectPoint.getLatitude() + " "
+								+ connectPoint.getLongitude());
+						segment.getRoad().setPointTypes(pntInd, types.toArray());
+					}
+				}
+				
+			}
+		}
+	}
+
 	public boolean checkIfMemoryLimitCritical(long memoryLimit) {
 		return getCurrentEstimatedSize() > 0.9 * memoryLimit;
 	}
