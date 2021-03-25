@@ -385,6 +385,10 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment imple
 
 	@Override
 	public void onSelectedColorChanged() {
+		updateColorItems();
+	}
+
+	private void updateColorItems() {
 		if (widthCard != null) {
 			widthCard.updateItems();
 		}
@@ -415,6 +419,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment imple
 	@Override
 	public void onMapThemeUpdated(@NonNull DayNightMode mapTheme) {
 		changeMapTheme(mapTheme);
+		updateColorItems();
 	}
 
 	private void changeMapTheme(@NonNull DayNightMode mapTheme) {

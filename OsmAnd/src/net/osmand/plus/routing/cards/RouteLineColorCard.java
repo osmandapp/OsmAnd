@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -22,7 +23,6 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.enums.DayNightMode;
-import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routing.RouteLineDrawInfo;
@@ -110,7 +110,7 @@ public class RouteLineColorCard extends BaseCard implements CardListener, ColorP
 	}
 
 	private void initSelectedMode() {
-		selectedMode = routeLineDrawInfo.getColor() == null ? ColorMode.DEFAULT : ColorMode.CUSTOM;
+		selectedMode = getRouteLineColor() == null ? ColorMode.DEFAULT : ColorMode.CUSTOM;
 		modeChanged();
 	}
 
@@ -118,13 +118,15 @@ public class RouteLineColorCard extends BaseCard implements CardListener, ColorP
 		if (selectedMode == ColorMode.DEFAULT) {
 			themeToggleContainer.setVisibility(View.GONE);
 			cardsContainer.setVisibility(View.GONE);
+			routeLineDrawInfo.setUseDefaultColor(true);
 			changeMapTheme(initMapTheme);
 		} else {
 			themeToggleContainer.setVisibility(View.VISIBLE);
 			cardsContainer.setVisibility(View.VISIBLE);
+			routeLineDrawInfo.setUseDefaultColor(false);
 			changeMapTheme(isNightMap() ? DayNightMode.NIGHT : DayNightMode.DAY);
 		}
-		updateSelectedColor();
+		updateColorItems();
 		updateDescription();
 	}
 
@@ -156,6 +158,12 @@ public class RouteLineColorCard extends BaseCard implements CardListener, ColorP
 		if (targetFragment instanceof OnMapThemeUpdateListener) {
 			((OnMapThemeUpdateListener) targetFragment).onMapThemeUpdated(mapTheme);
 		}
+		if (selectedMode == ColorMode.CUSTOM) {
+			Integer color = getRouteLineColor();
+			if (color != null) {
+				colorsCard.setSelectedColor(color);
+			}
+		}
 	}
 
 	private void createColorSelector(ViewGroup container) {
@@ -165,19 +173,28 @@ public class RouteLineColorCard extends BaseCard implements CardListener, ColorP
 			for (int color : ColorDialogs.pallette) {
 				colors.add(color);
 			}
-			Integer selectedColor = routeLineDrawInfo.getColor();
-			if (selectedColor != null) {
-				if (!ColorDialogs.isPaletteColor(selectedColor)) {
-					colors.add(selectedColor);
-				}
-			} else {
-				selectedColor = colors.get(0);
-			}
+			int selectedColorDay = getSelectedColorForTheme(colors, false);
+			int selectedColorNight = getSelectedColorForTheme(colors, true);
+			int selectedColor = isNightMap() ? selectedColorNight : selectedColorDay;
 			ListStringPreference preference = app.getSettings().CUSTOM_ROUTE_LINE_COLORS;
 			colorsCard = new ColorsCard(mapActivity, selectedColor, targetFragment, colors, preference, null);
 			colorsCard.setListener(this);
 			container.addView(colorsCard.build(mapActivity));
 		}
+	}
+
+	private int getSelectedColorForTheme(List<Integer> colors, boolean nightMode) {
+		Integer color = routeLineDrawInfo.getColorIgnoreDefault(nightMode);
+		if (color != null) {
+			if (!ColorDialogs.isPaletteColor(color)) {
+				colors.add(color);
+			}
+		} else {
+			color = colors.get(0);
+			routeLineDrawInfo.setUseDefaultColor(true);
+			routeLineDrawInfo.setColor(color, nightMode);
+		}
+		return color;
 	}
 
 	@Override
@@ -186,20 +203,29 @@ public class RouteLineColorCard extends BaseCard implements CardListener, ColorP
 		updateSelectedColor();
 	}
 
+	@Nullable
+	private Integer getRouteLineColor() {
+		return routeLineDrawInfo.getColor(isNightMap());
+	}
+
 	private void updateSelectedColor() {
-		Integer color = selectedMode == ColorMode.CUSTOM ? colorsCard.getSelectedColor() : null;
-		routeLineDrawInfo.setColor(color);
-		updateColorName();
+		int selectedColor = colorsCard.getSelectedColor();
+		routeLineDrawInfo.setColor(selectedColor, isNightMap());
+		updateColorItems();
+	}
+
+	private void updateColorItems() {
 		if (targetFragment instanceof OnSelectedColorChangeListener) {
 			((OnSelectedColorChangeListener) targetFragment).onSelectedColorChanged();
 		}
+		updateColorName();
 	}
 
 	private void updateColorName() {
 		if (selectedMode == ColorMode.DEFAULT) {
 			tvColorName.setText(app.getString(R.string.map_widget_renderer));
-		} else if (routeLineDrawInfo.getColor() != null) {
-			int colorNameId = ColorDialogs.getColorName(routeLineDrawInfo.getColor());
+		} else if (getRouteLineColor() != null) {
+			int colorNameId = ColorDialogs.getColorName(getRouteLineColor());
 			tvColorName.setText(app.getString(colorNameId));
 		}
 	}
