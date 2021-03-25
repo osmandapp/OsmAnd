@@ -512,9 +512,9 @@ public class RoutingContext {
 						}
 					}
 					// connect direction points
-					if(config.getDirectionPoints() != null) {
-						connectDirectionPoints(ts, (int) (xloc << zmShift), (int) (yloc << zmShift), 
-							(int) ((xloc + 1) << zmShift), (int) ((yloc + 1) << zmShift));
+					if (config.getDirectionPoints() != null) {
+						connectDirectionPoints(ts, (int) (xloc << zmShift), (int) (yloc << zmShift),
+								(int) ((xloc + 1) << zmShift), (int) ((yloc + 1) << zmShift));
 					}
 				}
 			}
@@ -565,7 +565,6 @@ public class RoutingContext {
 	}
 
 	private void searchRoadToInsert(RoutingSubregionTile ts, WptPt connectPoint) {
-		long roadId = -1;
 		int wptX = MapUtils.get31TileNumberX(connectPoint.lon);
 		int wptY = MapUtils.get31TileNumberY(connectPoint.lat);
 		double closest = Integer.MAX_VALUE;
@@ -578,11 +577,14 @@ public class RoutingContext {
 			int xp = (int) (k >> 31);
 			int yp = (int) (k - (xp << 31));
 			RouteSegment sg = ts.routes.get(k);
+			if (MapUtils.squareRootDist31(wptX, wptY, xp, yp) > config.directionPointsRadius * 50) {
+				continue;
+			}
 			while (sg != null) {
-				if (sg.getRoad().getPointsLength() > sg.segStart + 1) {
-					QuadPoint pnt = MapUtils.getProjectionPoint31(wptX, wptY, sg.getRoad().getPoint31XTile(sg.segStart),
-							sg.getRoad().getPoint31YTile(sg.segStart), sg.getRoad().getPoint31XTile(sg.segStart + 1),
-							sg.getRoad().getPoint31YTile(sg.segStart + 1));
+				if (sg.segStart + 1 < sg.getRoad().getPointsLength()) {
+					QuadPoint pnt = MapUtils.getProjectionPoint31(wptX, wptY, 
+							sg.getRoad().getPoint31XTile(sg.segStart), sg.getRoad().getPoint31YTile(sg.segStart), 
+							sg.getRoad().getPoint31XTile(sg.segStart + 1), sg.getRoad().getPoint31YTile(sg.segStart + 1));
 					double dist = MapUtils.squareRootDist31(wptX, wptY, (int) pnt.x, (int) pnt.y);
 					if (dist < closest) {
 						cl = sg;
