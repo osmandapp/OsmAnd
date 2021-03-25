@@ -4074,7 +4074,7 @@
     <string name="activity_type_motorbike_name">دراجة نارية</string>
     <string name="activity_type_car_name">سيارة</string>
     <string name="copy_poi_name">نسخ اسم POI</string>
-    <string name="select_another_colorization">الرجاء اختيار أنواع أخرى من التلوين</string>
+    <string name="select_another_colorization">الرجاء اختيار أنواع أخرى من التلوين.</string>
     <string name="snap_to_road_descr">سيتم التقاط الرمز إلى مسار التنقل الحالي</string>
     <string name="select_segments">حدد الجزء</string>
     <string name="select_segments_description">%1$s يحتوي على أكثر من مقطع ، تحتاج إلى تحديد الجزء المطلوب للتنقل.</string>
@@ -4114,4 +4114,9 @@
     <string name="track_has_no_speed">لا يحتوي المسار على بيانات السرعة.</string>
     <string name="rendering_attr_noNatureReserveBoundaries_description">إخفاء المحميات الطبيعية والمناطق المحمية وحدود المتنزهات الوطنية</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">حدود الطبيعة</string>
+    <string name="trip_recording_show_start_dialog_setting">إذا تم تعطيله، فسيبدأ التسجيل مباشرة بعد النقر على الويدجيت أو عنصر القائمة ، متخطيا لمربع حوار التأكيد.</string>
+    <string name="trip_recording_logging_interval_info">الفاصل الزمني للتسجيل يحدد الفترة الزمنية التي سيسأل فيها OsmAnd عن بيانات الموقع الحالي.</string>
+    <string name="lost_data_warning">سيتم فقدان كافة البيانات غير المحفوظة.</string>
+    <string name="show_start_dialog">إظهار مربع حوار البدء</string>
+    <string name="trip_recording_save_and_continue">حفظ ومتابعة</string>
 </resources>

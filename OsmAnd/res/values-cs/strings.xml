@@ -1195,7 +1195,7 @@
     <string name="share_fav_subject">Oblíbené body sdílené přes OsmAnd</string>
     <string name="navigation_intent_invalid">Neplatný formát: %s</string>
     <string name="gpx_file_is_empty">Prázdný soubor GPX</string>
-    <string name="shared_string_tracks">Všechny trasy</string>
+    <string name="shared_string_tracks">Stopy</string>
     <string name="shared_string_my_favorites">Oblíbené</string>
     <string name="shared_string_my_places">Moje místa</string>
     <string name="loading_smth">Načítání %1$s…</string>
@@ -2174,7 +2174,7 @@
     <string name="select_gpx_folder">Vyberte složku pro soubor GPX</string>
     <string name="file_can_not_be_moved">Soubor se nepodařilo přesunout.</string>
     <string name="shared_string_move">Přesunout</string>
-    <string name="shared_string_gpx_tracks">Trasy</string>
+    <string name="shared_string_gpx_tracks">Stopy</string>
     <string name="shared_string_time_moving">Doba pohybu</string>
     <string name="shared_string_time_span">Časový rozsah</string>
     <string name="shared_string_max">Maximum</string>
@@ -2267,7 +2267,7 @@
     <string name="private_access_routing_req">Váš cíl se nachází v oblasti se soukromým přístupem. Povolit vstup na soukromé pozemky pro tuto cestu?</string>
     <string name="restart_search">Spustit hledání znovu</string>
     <string name="increase_search_radius">Zvětšit okruh hledání</string>
-    <string name="nothing_found">Nic nalezeno</string>
+    <string name="nothing_found">Nic nebylo nalezeno</string>
     <string name="nothing_found_descr">Změňte vyhledávací dotaz nebo zvětšete okruh hledání.</string>
     <string name="shared_string_permissions">Oprávnění</string>
     <string name="import_gpx_failed_descr">Nepodařilo se naimportovat soubor. Prosím zkontrolujte, zda má OsmAnd oprávnění ke čtení souboru.</string>
@@ -2496,8 +2496,8 @@
     <string name="map_import_error">Chyba při importu mapy</string>
     <string name="map_imported_successfully">Mapa byla importována</string>
     <string name="shared_string_current">Aktuální</string>
-    <string name="last_intermediate_dest_description">Přidá poslední mezizastávku</string>
-    <string name="first_intermediate_dest_description">Přidá první mezizastávku</string>
+    <string name="last_intermediate_dest_description">Přidá poslední mezicíl</string>
+    <string name="first_intermediate_dest_description">Přidá první mezicíl</string>
     <string name="subsequent_dest_description">Přesune cíl nahoru a vytvoří ho</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) je mapová a navigační aplikace s přístupem k volným a kvalitním celosvětovým údajům z OpenStreetMap (OSM).
 \n
@@ -2829,7 +2829,7 @@
     <string name="routeInfo_smoothness_name">Hladkost povrchu</string>
     <string name="routeInfo_steepness_name">Strmost</string>
     <string name="show_more">Ukázat více</string>
-    <string name="tracks_on_map">Zobrazené trasy</string>
+    <string name="tracks_on_map">Zobrazené stopy</string>
     <string name="time_of_day">Denní doba</string>
     <string name="step_by_step">Krok za krokem</string>
     <string name="routeInfo_road_types_name">Typy silnic</string>
@@ -3853,7 +3853,7 @@
     <string name="sunrise_at">Východ slunce v %1$s</string>
     <string name="sunset_at">Západ slunce v %1$s</string>
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
-    <string name="profile_prefs_reset_successful">Všechna nastavení profilu obnovena do základního nastavení.</string>
+    <string name="profile_prefs_reset_successful">Všechna nastavení profilu obnovena do výchozího stavu.</string>
     <string name="plugin_prefs_reset_successful">Všechna nastavení modulů obnovena do výchozího stavu.</string>
     <string name="rendering_attr_streetLightingNight_name">Zobrazit pouze v noci</string>
     <string name="add_custom_category">Přidat vlastní kategorii</string>
@@ -4045,4 +4045,9 @@
     <string name="select_another_colorization">Vyberte prosím jiný typ obarvení.</string>
     <string name="rendering_attr_noNatureReserveBoundaries_description">Skrýt hranice přírodních rezervací, chráněných území a národních parků</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">Hranice přírody</string>
+    <string name="trip_recording_logging_interval_info">Interval záznamu nastaví, jak často bude OsmAnd zjišťovat aktuální polohu.</string>
+    <string name="trip_recording_save_and_continue">Uložit a pokračovat</string>
+    <string name="lost_data_warning">Všechna neuložená data budou ztracena.</string>
+    <string name="show_start_dialog">Zobrazit úvodní okno</string>
+    <string name="trip_recording_show_start_dialog_setting">Pokud je vypnuto, záznam začne hned po klepnutí na nástroj nebo položku v menu, přeskočí tedy potvrzovací okno.</string>
 </resources>

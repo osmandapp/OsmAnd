@@ -4042,4 +4042,6 @@
     <string name="trip_recording_logging_interval_info">A naplózási intervallum az az időköz, amelyben az OsmAnd lekéri az aktuális helyadatokat.</string>
     <string name="trip_recording_save_and_continue">Mentés és folytatás</string>
     <string name="lost_data_warning">Minden nem mentett adat törlődni fog.</string>
+    <string name="show_start_dialog">Kezdő párbeszéd megjelenítése</string>
+    <string name="trip_recording_show_start_dialog_setting">Ha le van tiltva, akkor a felvétel közvetlenül a widget vagy a menüelem megérintése után elindul, kihagyva a megerősítő párbeszédpanelt.</string>
 </resources>

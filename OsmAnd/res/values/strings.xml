@@ -12,6 +12,12 @@
 
 -->
 
+    <string name="release_4_0_beta">
+    • OsmAnd Live updates moved to \"Downloads > Updates\"\n\n
+    • Tracks now could be colorizing by altitude, speed, or slope.\n\n
+    • Added option to change the appearance of the navigation route line\n\n
+    • Updated \"Trip recording\" dialog\n\n
+    </string>
     <string name="expired">Expired</string>
     <string name="on_hold">On hold</string>
     <string name="in_grace_period">In grace period</string>

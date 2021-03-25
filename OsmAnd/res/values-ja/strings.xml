@@ -3953,4 +3953,85 @@ POIの更新は利用できません</string>
     <string name="trip_recording_logging_interval_info">ログ記録間隔は、OsmAndが現在の位置データを要求する期間を設定します。</string>
     <string name="trip_recording_save_and_continue">保存して続行</string>
     <string name="lost_data_warning">保存されていないデータはすべて失われます。</string>
+    <string name="osm_edit_close_note">OSMメモを閉じる</string>
+    <string name="osm_edit_comment_note">OSMメモへのコメント</string>
+    <string name="osm_login_descr">安全なOAuth方式を使用してログインするか、アプリから直接ログインする方法を選べます。</string>
+    <string name="shared_string_add_photo">写真の追加</string>
+    <string name="register_on_openplacereviews">OpenPlaceReviews.orgに登録</string>
+    <string name="register_on_openplacereviews_desc">写真はOpenPlaceReviews.orgオープンデータプロジェクトを介して提供されています。そのため写真をアップロードするためには前述のウェブサイトにログインする必要があります。</string>
+    <string name="register_opr_create_new_account">新しいアカウントを作成</string>
+    <string name="register_opr_have_account">私はすでにアカウントを持っています</string>
+    <string name="shared_string_search_history">検索履歴</string>
+    <string name="app_mode_kayak">カヤック</string>
+    <string name="app_mode_motorboat">モーターボート</string>
+    <string name="cannot_upload_image">画像をアップロードできません。しばらくしてからもう一度お試しください</string>
+    <string name="select_picture">写真を選択</string>
+    <string name="shared_string_resources">リソース</string>
+    <string name="approximate_file_size">おおよそのファイルサイズ</string>
+    <string name="select_data_to_export">ファイルとしてエクスポートしたいデータを選択します。</string>
+    <string name="file_size_needed_for_import">インポートに必要</string>
+    <string name="export_not_enough_space_descr">お使いの端末には%1$sしか容量がありません。空き容量を確保するか、エクスポートするアイテムの選択を減らしてください。</string>
+    <string name="export_not_enough_space">十分な空き容量がありません</string>
+    <string name="select_groups_for_import">インポートするグループを選択します。</string>
+    <string name="select_items_for_import">インポートするアイテムを選択します。</string>
+    <string name="add_to_mapillary">Mapillaryに追加</string>
+    <string name="add_to_opr">OpenPlaceReviewsに追加</string>
+    <string name="add_photos_descr">OsmAndは、いくつかのソースからの写真を表示します:
+\nOpenPlaceReviewsはPOIの写真;
+\nMapillaryは投稿されたストリート画像;
+\nWeb / WikimediaはOpenStreetMapデータのPOIの写真を利用しています。</string>
+    <string name="plan_route_split_before">この前で分割</string>
+    <string name="plan_route_split_after">この後で分割</string>
+    <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
+    <string name="app_mode_light_aircraft">軽飛行機</string>
+    <string name="plan_route_join_segments">セグメントの結合</string>
+    <string name="plan_route_add_new_segment">新規セグメントの追加</string>
+    <string name="profile_type_osmand_string">OsmAndプロファイル</string>
+    <string name="profile_type_user_string">ユーザープロファイル</string>
+    <string name="release_3_9">• 設定、リソース、お気に入りを含むすべてのデータをエクスポートおよびインポートするオプションを追加
+\n
+\n• ルートの計画：ルートを含むトラックセグメントのグラフ、および複数のトラックセグメントを作成および編集する機能を追加
+\n
+\n• OpenStreetMapのOAuth認証方法を追加し、OSMダイアログのUIを改善
+\n
+\n• お気に入りのカスタムカラーのサポート、経由地点の追跡など
+\n
+\n</string>
+    <string name="reverse_all_points">すべての地点を逆転</string>
+    <string name="profile_by_default_description">アプリ起動時に適用されるプロファイルを選択します。</string>
+    <string name="shared_string_last_used">最後に利用</string>
+    <string name="routing_attr_prefer_hiking_routes_description">ハイキング向けのルートを選択します</string>
+    <string name="routing_attr_prefer_hiking_routes_name">ハイキングコースを優先</string>
+    <string name="routing_attr_allow_streams_description">小川と排水溝も水路とみなします</string>
+    <string name="routing_attr_allow_streams_name">小川と排水溝も許可</string>
+    <string name="routing_attr_allow_intermittent_name">常に水が流れているわけではない水路も許可</string>
+    <string name="routing_attr_allow_intermittent_description">常に水の流れがあるわけではない場所も水路として見なします</string>
+    <string name="add_online_routing_engine">オンラインルーティングエンジンの追加</string>
+    <string name="edit_online_routing_engine">オンラインルーティングエンジンの編集</string>
+    <string name="shared_string_subtype">サブタイプ</string>
+    <string name="shared_string_vehicle">車両</string>
+    <string name="shared_string_api_key">APIキー</string>
+    <string name="shared_string_server_url">サーバーURL</string>
+    <string name="shared_string_enter_param">パラメーターの入力</string>
+    <string name="keep_it_empty_if_not">APIキーがない場合は空白のままにします</string>
+    <string name="online_routing_example_hint">パラメータを含むURLは次のようになります:</string>
+    <string name="test_route_calculation">ルート計算のテスト</string>
+    <string name="routing_engine_vehicle_type_driving">ドライブ</string>
+    <string name="routing_engine_vehicle_type_foot">徒歩</string>
+    <string name="routing_engine_vehicle_type_bike">自転車</string>
+    <string name="routing_engine_vehicle_type_car">車</string>
+    <string name="copy_address">住所をコピー</string>
+    <string name="online_routing_engine">オンラインルーティングエンジン</string>
+    <string name="online_routing_engines">オンラインルーティングエンジン</string>
+    <string name="shared_string_folders">フォルダー</string>
+    <string name="select_folder_descr">フォルダーを選択、または新しいフォルダを追加します</string>
+    <string name="select_folder">フォルダーの選択</string>
+    <string name="shared_string_empty">空</string>
+    <string name="analyze_by_intervals">分割間隔を分析評価する</string>
+    <string name="upload_to_openstreetmap">OpenStreetMapにアップロード</string>
+    <string name="edit_track">経路の編集</string>
+    <string name="rename_track">経路名の変更</string>
+    <string name="change_folder">フォルダーの変更</string>
+    <string name="show_start_dialog">開始ダイアログを表示</string>
+    <string name="trip_recording_show_start_dialog_setting">無効にした場合、ウィジェットまたはメニュー項目をタップするとすぐに記録が始まり、確認のダイアログは表示されません。</string>
 </resources>

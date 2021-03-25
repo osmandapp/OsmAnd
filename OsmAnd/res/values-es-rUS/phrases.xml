@@ -3145,7 +3145,7 @@
     <string name="poi_reservation_no">Reservación: no</string>
     <string name="poi_reservation_members_only">Reservación: sólo miembros</string>
     <string name="poi_beds">Camas</string>
-    <string name="poi_boat_rental_type">Barcos de alquiler</string>
+    <string name="poi_boat_rental_type">Barcos alquilados</string>
     <string name="poi_boat_rental">Alquiler de barcos</string>
     <string name="poi_boat_motorboat_rental_yes">Lanchas de motor: sí</string>
     <string name="poi_boat_motorboat_rental_no">Lanchas de motor: no</string>
