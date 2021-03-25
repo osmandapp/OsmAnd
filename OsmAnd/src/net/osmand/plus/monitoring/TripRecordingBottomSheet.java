@@ -314,6 +314,7 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 
 		graphsAdapter = new GPXItemPagerAdapter(app, GpxUiHelper.makeGpxDisplayItem(app,
 				displayHelper.getGpx()), displayHelper, nightMode, this, true);
+		graphsAdapter.setChartHMargin(getResources().getDimensionPixelSize(R.dimen.content_padding));
 
 		pager.setAdapter(graphsAdapter);
 		tabLayout.setViewPager(pager);
