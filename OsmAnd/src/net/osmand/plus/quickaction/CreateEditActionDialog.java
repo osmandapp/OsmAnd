@@ -222,13 +222,10 @@ public class CreateEditActionDialog extends DialogFragment
 
         if (savedInstanceState == null) {
             String name = action.getName(getContext());
-            if (action.getActionNameRes() != 0 && !action.isActionEditable()) {
-                if (!name.contains(getString(R.string.quick_action_show_hide_title))) {
-                    String actionName = getString(action.getActionNameRes());
-                    nameEditText.setText(getString(R.string.ltr_or_rtl_combine_via_dash, actionName, name));
-                } else {
-                    nameEditText.setText(name);
-                }
+            if (!action.isActionEditable() && action.getActionNameRes() != 0
+                    && !name.contains(getString(action.getActionNameRes()))) {
+                String actionName = getString(action.getActionNameRes());
+                nameEditText.setText(getString(R.string.ltr_or_rtl_combine_via_dash, actionName, name));
             } else {
                 nameEditText.setText(name);
             }
