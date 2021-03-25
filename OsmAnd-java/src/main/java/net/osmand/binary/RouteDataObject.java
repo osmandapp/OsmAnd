@@ -583,8 +583,8 @@ public class RouteDataObject {
 									String nonCondTag = rtr.getTag();
 									int ks;
 									for (ks = 0; ks < pointTypes[i].length; ks++) {
-										RouteTypeRule toReplace = region.quickGetEncodingRule(pointTypes[i][j]);
-										if (toReplace != null && toReplace.getTag().contentEquals(nonCondTag)) {
+										RouteTypeRule toReplace = region.quickGetEncodingRule(pointTypes[i][ks]);
+										if (toReplace != null && toReplace.getNonConditionalTag().contentEquals(nonCondTag)) {
 											break;
 										}
 									}
