@@ -5,11 +5,13 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -688,6 +690,36 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 	@DrawableRes
 	public static int getInactiveButtonBackgroundId(boolean nightMode) {
 		return nightMode ? R.drawable.btn_background_inactive_dark : R.drawable.btn_background_inactive_light;
+	}
+
+	@Override
+	protected void setupHeightAndBackground(final View mainView) {
+		final Activity activity = getActivity();
+		if (activity == null) {
+			return;
+		}
+		if (AndroidUiHelper.isOrientationPortrait(activity)) {
+			super.setupHeightAndBackground(mainView);
+			return;
+		}
+
+		mainView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+			@Override
+			public void onGlobalLayout() {
+				ViewTreeObserver obs = mainView.getViewTreeObserver();
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+					obs.removeOnGlobalLayoutListener(this);
+				} else {
+					obs.removeGlobalOnLayoutListener(this);
+				}
+				final View contentView = mainView.findViewById(R.id.scroll_view);
+				contentView.getLayoutParams().height = ViewGroup.LayoutParams.MATCH_PARENT;
+				contentView.requestLayout();
+				boolean showTopShadow = AndroidUtils.getScreenHeight(activity) - AndroidUtils.getStatusBarHeight(activity)
+						- mainView.getHeight() >= AndroidUtils.dpToPx(activity, 8);
+				drawTopShadow(showTopShadow);
+			}
+		});
 	}
 
 	@Override
