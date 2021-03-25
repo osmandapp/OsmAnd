@@ -21,8 +21,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
-import net.osmand.plus.routepreparationmenu.FollowTrackFragment;
-import net.osmand.plus.routepreparationmenu.MapRouteInfoMenuFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.track.TrackMenuFragment;
 import net.osmand.plus.track.TrackSelectSegmentBottomSheet;
@@ -81,7 +79,7 @@ public class TracksCard extends BaseCard {
 			}
 		});
 
-		LinearLayout tracks = (LinearLayout) view.findViewById(R.id.items);
+		LinearLayout tracks = view.findViewById(R.id.items);
 		tracks.removeAllViews();
 
 		int minCardHeight = app.getResources().getDimensionPixelSize(R.dimen.route_info_card_item_height);
@@ -115,10 +113,10 @@ public class TracksCard extends BaseCard {
 			((TextView) v.findViewById(R.id.points_count)).setTextColor(descriptionColor);
 			((TextView) v.findViewById(R.id.time)).setTextColor(descriptionColor);
 
-			ImageView img = (ImageView) v.findViewById(R.id.icon);
+			ImageView img = v.findViewById(R.id.icon);
 			img.setImageDrawable(getActiveIcon(R.drawable.ic_action_polygom_dark));
 			img.setVisibility(View.VISIBLE);
-			LinearLayout container = (LinearLayout) v.findViewById(R.id.container);
+			LinearLayout container = v.findViewById(R.id.container);
 			container.setMinimumHeight(minCardHeight);
 			AndroidUtils.setPadding(container, listContentPadding, 0, 0, 0);
 			v.setOnClickListener(new View.OnClickListener() {
@@ -134,7 +132,7 @@ public class TracksCard extends BaseCard {
 					}
 					if (item.file.getNonEmptySegmentsCount() > 1) {
 						Fragment f = mapActivity.getSupportFragmentManager().findFragmentByTag(TrackMenuFragment.TAG);
-						TrackSelectSegmentBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), item.file,  f);
+						TrackSelectSegmentBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), item.file, f);
 					} else {
 						mapActivity.getMapActions().setGPXRouteParams(item.file);
 						app.getTargetPointsHelper().updateRouteAndRefresh(true);
