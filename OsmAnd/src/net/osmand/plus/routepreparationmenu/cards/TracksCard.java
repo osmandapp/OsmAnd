@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
@@ -20,7 +21,11 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
+import net.osmand.plus.routepreparationmenu.FollowTrackFragment;
+import net.osmand.plus.routepreparationmenu.MapRouteInfoMenuFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.track.TrackMenuFragment;
+import net.osmand.plus.track.TrackSelectSegmentBottomSheet;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -30,7 +35,7 @@ import java.util.List;
 
 public class TracksCard extends BaseCard {
 
-	private List<GPXFile> gpxFiles;
+	private final List<GPXFile> gpxFiles;
 	private boolean showLimited = true;
 
 	private static class GpxItem {
@@ -127,8 +132,13 @@ public class TracksCard extends BaseCard {
 							app.initVoiceCommandPlayer(mapActivity, mode, true, null, false, false, true);
 						}
 					}
-					mapActivity.getMapActions().setGPXRouteParams(item.file);
-					app.getTargetPointsHelper().updateRouteAndRefresh(true);
+					if (item.file.getNonEmptySegmentsCount() > 1) {
+						Fragment f = mapActivity.getSupportFragmentManager().findFragmentByTag(TrackMenuFragment.TAG);
+						TrackSelectSegmentBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), item.file,  f);
+					} else {
+						mapActivity.getMapActions().setGPXRouteParams(item.file);
+						app.getTargetPointsHelper().updateRouteAndRefresh(true);
+					}
 				}
 			});
 			tracks.addView(v);
