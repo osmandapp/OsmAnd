@@ -1070,8 +1070,8 @@ public class RouteDataObject {
 	public String toString() {
 		String name = getName();
 		String rf = getRef("", false, true);
-//		return String.format("Road [%d, '%s', '%s']", id / 64, name, rf, poin);
-		return String.format("Road [%d, '%s', '%s'] - [%s, %s]", id / 64, name, rf, Arrays.toString(pointsX), Arrays.toString(pointsY));
+		return String.format("Road id (%d), name ('%s'), ref ('%s')", id / 64, name, rf);
+//		return String.format("Road [%d, '%s', '%s'] - [%s, %s]", id / 64, name, rf, Arrays.toString(pointsX), Arrays.toString(pointsY));
 	}
 
 	public boolean hasNameTagStartsWith(String tagStartsWith) {

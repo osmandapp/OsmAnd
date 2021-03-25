@@ -13,19 +13,21 @@ import java.util.Stack;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
-import net.osmand.GPXUtilities.WptPt;
+import gnu.trove.list.array.TIntArrayList;
 import net.osmand.PlatformUtil;
+import net.osmand.binary.RouteDataObject;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
+import net.osmand.osm.edit.Node;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.router.GeneralRouter.RouteAttributeContext;
 import net.osmand.router.GeneralRouter.RouteDataObjectAttribute;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 public class RoutingConfiguration {
 
 	public static final int DEFAULT_MEMORY_LIMIT = 30;
-	static final String ATTACHED_INFO_WPT_ID = "AID";
 	public final float DEVIATION_RADIUS = 3000;
 	public Map<String, String> attributes = new LinkedHashMap<String, String>();
 
@@ -57,11 +59,25 @@ public class RoutingConfiguration {
 	
 	
 	// extra points to be inserted in ways (quad tree is based on 31 coords)
-	private QuadTree<WptPt> directionPoints;
+	private QuadTree<DirectionPoint> directionPoints;
+	
 	public int directionPointsRadius = 30; // 30 m
 	
-	public QuadTree<WptPt> getDirectionPoints() {
+	public QuadTree<DirectionPoint> getDirectionPoints() {
 		return directionPoints;
+	}
+
+	public static class DirectionPoint extends Node {
+		private static final long serialVersionUID = -7496599771204656505L;
+		public double distance = Double.MAX_VALUE;
+		public RouteDataObject connected;
+		public int pointIndex;
+		public TIntArrayList types = new TIntArrayList();
+
+		public DirectionPoint(Node n) {
+			super(n, n.getId());
+		}
+		
 	}
 	
 	public static class Builder {
@@ -70,7 +86,7 @@ public class RoutingConfiguration {
 		private Map<String, GeneralRouter> routers = new LinkedHashMap<>();
 		private Map<String, String> attributes = new LinkedHashMap<>();
 		private Set<Long> impassableRoadLocations = new HashSet<>();
-		private QuadTree<WptPt> directionPointsBuilder;
+		private QuadTree<Node> directionPointsBuilder;
 
 		public Builder() {
 		}
@@ -121,21 +137,22 @@ public class RoutingConfiguration {
 				i.memoryLimitation = memoryLimitMB * (1l << 20);
 			}
 			i.planRoadDirection = parseSilentInt(getAttribute(i.router, "planRoadDirection"), i.planRoadDirection);
-			i.directionPoints = this.directionPointsBuilder;
+			if (directionPointsBuilder != null) {
+				QuadRect rect = new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE);
+				List<net.osmand.osm.edit.Node> lst = directionPointsBuilder.queryInBox(rect, new ArrayList<Node>());
+				i.directionPoints = new QuadTree<>(rect, 14, 0.5f);
+				for(Node n : lst) {
+					DirectionPoint dp = new DirectionPoint(n);
+					int x = MapUtils.get31TileNumberX(dp.getLongitude());
+					int y = MapUtils.get31TileNumberY(dp.getLatitude());
+					i.directionPoints.insert(dp, new QuadRect(x, y, x, y));
+				}
+			}
 //			i.planRoadDirection = 1;
 			return i;
 		}
 		
-		public Builder setDirectionPoints(QuadTree<WptPt> directionPoints) {
-			if (directionPoints != null) {
-				List<WptPt> lst = directionPoints.queryInBox(new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE),
-						new ArrayList<WptPt>());
-				for (WptPt l : lst) {
-					if (l.getExtensionsToRead().containsKey(ATTACHED_INFO_WPT_ID)) {
-						l.getExtensionsToWrite().remove(ATTACHED_INFO_WPT_ID);
-					}
-				}
-			}
+		public Builder setDirectionPoints(QuadTree<Node> directionPoints) {
 			this.directionPointsBuilder = directionPoints;
 			return this;
 		}
