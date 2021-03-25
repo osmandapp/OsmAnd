@@ -193,15 +193,20 @@ public class GpxBlockStatisticsBuilder {
 					float totalDistance = withoutGaps ? analysis.totalDistanceWithoutGaps : analysis.totalDistance;
 					String asc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app);
 					String desc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app);
+					String minElevation = OsmAndFormatter.getFormattedAlt(analysis.minElevation, app);
+					String maxElevation = OsmAndFormatter.getFormattedAlt(analysis.maxElevation, app);
 					String avg = OsmAndFormatter.getFormattedSpeed(analysis.avgSpeed, app);
-					String max = OsmAndFormatter.getFormattedSpeed(analysis.maxSpeed, app);
+					String maxSpeed = OsmAndFormatter.getFormattedSpeed(analysis.maxSpeed, app);
 					float timeSpan = withoutGaps ? analysis.timeSpanWithoutGaps : analysis.timeSpan;
+					long timeMoving = withoutGaps ? analysis.timeMovingWithoutGaps : analysis.timeMoving;
 					prepareDataDistance(totalDistance);
 					prepareDataAscent(asc);
 					prepareDataDescent(desc);
+					prepareDataAltitudeRange(minElevation, maxElevation);
 					prepareDataAverageSpeed(avg);
-					prepareDataMaximumSpeed(max);
+					prepareDataMaximumSpeed(maxSpeed);
 					prepareDataTimeSpan(timeSpan);
+					prepareDataTimeMoving(timeMoving);
 					break;
 				}
 			}
@@ -219,8 +224,7 @@ public class GpxBlockStatisticsBuilder {
 	}
 
 	public void prepareDataAltitudeRange(String min, String max) {
-		String pattern = app.getString(R.string.ltr_or_rtl_combine_via_dash);
-		prepareData(app.getString(R.string.altitude_range), String.format(pattern, min, max),
+		prepareData(app.getString(R.string.altitude_range), min + " - " + max,
 				R.drawable.ic_action_altitude_range_16, GPXDataSetType.ALTITUDE, null, ItemType.ITEM_ALTITUDE);
 	}
 
@@ -247,9 +251,10 @@ public class GpxBlockStatisticsBuilder {
 	}
 
 	public void prepareDataTimeMoving(long timeMoving) {
-		prepareData(app.getString(R.string.shared_string_time_moving),
+		prepareData(app.getString(initBlocksKey.equals(INIT_BLOCKS_SPEED) ? R.string.shared_string_time_moving : R.string.moving_time),
 				Algorithms.formatDuration((int) (timeMoving / 1000), app.accessibilityEnabled()),
-				R.drawable.ic_action_time_span_16, GPXDataSetType.SPEED, null, ItemType.ITEM_TIME_MOVING);
+				initBlocksKey.equals(INIT_BLOCKS_SPEED) ? R.drawable.ic_action_time_span_16 : R.drawable.ic_action_time_moving_16,
+				GPXDataSetType.SPEED, null, ItemType.ITEM_TIME_MOVING);
 	}
 
 	public void prepareDataDistanceCorrected(float totalDistanceMoving) {
