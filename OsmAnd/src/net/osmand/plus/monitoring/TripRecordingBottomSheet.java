@@ -163,7 +163,7 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 				ContextCompat.getColor(app, getActiveTextColorId(nightMode)));
 
 		CardView cardLeft = itemView.findViewById(R.id.button_left);
-		createItem(cardLeft, ItemType.CANCEL);
+		createItem(cardLeft, ItemType.CLOSE);
 		cardLeft.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -296,7 +296,7 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 		viewGroup.removeAllViews();
 		setupDisplayHelper();
 
-		View segmentView = SegmentGPXAdapter.createGpxTabsView(displayHelper, viewGroup, this, nightMode);
+		View segmentView = SegmentGPXAdapter.createGpxTabsView(displayHelper, viewGroup, this, nightMode, true);
 		AndroidUiHelper.setVisibility(View.GONE, segmentView.findViewById(R.id.list_item_divider));
 		WrapContentHeightViewPager pager = segmentView.findViewById(R.id.pager);
 		PagerSlidingTabStrip tabLayout = segmentView.findViewById(R.id.sliding_tabs);
@@ -509,6 +509,7 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 		STOP_AND_SAVE(R.string.track_recording_save_and_stop, R.drawable.ic_action_save_to_file),
 		STOP_ONLINE(R.string.live_monitoring_stop, R.drawable.ic_world_globe_dark),
 		CANCEL(R.string.shared_string_cancel, R.drawable.ic_action_close),
+		CLOSE(R.string.shared_string_close, R.drawable.ic_action_close),
 		START_RECORDING(R.string.shared_string_control_start, R.drawable.ic_action_direction_movement),
 		SETTINGS(R.string.shared_string_settings, R.drawable.ic_action_settings),
 		FINISH(R.string.shared_string_finish, R.drawable.ic_action_point_destination),

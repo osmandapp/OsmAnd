@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
@@ -48,7 +49,7 @@ public class SegmentGPXAdapter extends ArrayAdapter<GpxDisplayItem> {
 		boolean create = false;
 		if (row == null) {
 			create = true;
-			row = createGpxTabsView(displayHelper, parent, listener, nightMode);
+			row = createGpxTabsView(displayHelper, parent, listener, nightMode, false);
 		}
 		GpxDisplayItem item = getItem(position);
 		if (item != null) {
@@ -66,7 +67,7 @@ public class SegmentGPXAdapter extends ArrayAdapter<GpxDisplayItem> {
 	}
 
 	public static View createGpxTabsView(TrackDisplayHelper displayHelper, ViewGroup root,
-										 SegmentActionsListener listener, boolean nightMode) {
+										 SegmentActionsListener listener, boolean nightMode, boolean withDivider) {
 		Context context = root.getContext();
 		View row = UiUtilities.getInflater(context, nightMode).inflate(R.layout.gpx_list_item_tab_content, root, false);
 
@@ -74,6 +75,11 @@ public class SegmentGPXAdapter extends ArrayAdapter<GpxDisplayItem> {
 		tabLayout.setTabBackground(AndroidUtils.resolveAttribute(context, R.attr.btn_bg_border_inactive));
 		tabLayout.setIndicatorHeight(0);
 		tabLayout.setShouldExpand(true);
+		if (withDivider) {
+			tabLayout.setDividerWidth(AndroidUtils.dpToPx(context, 1.0f));
+			tabLayout.setDividerColor(ContextCompat.getColor(context, nightMode ?
+					R.color.stroked_buttons_and_links_outline_dark : R.color.stroked_buttons_and_links_outline_light));
+		}
 		WrapContentHeightViewPager pager = row.findViewById(R.id.pager);
 		pager.setSwipeable(false);
 		pager.setOffscreenPageLimit(2);
