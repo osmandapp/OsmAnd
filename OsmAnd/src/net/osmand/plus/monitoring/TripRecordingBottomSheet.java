@@ -239,15 +239,11 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 		}
 	}
 
-	public void show() {
+	public void show(String... keys) {
 		Dialog dialog = getDialog();
 		if (dialog != null) {
 			dialog.show();
 		}
-	}
-
-	public void show(String... keys) {
-		show();
 		for (String key : keys) {
 			if (key.equals(UPDATE_TRACK_ICON)) {
 				updateTrackIcon(app, trackAppearanceIcon);

@@ -178,10 +178,6 @@ public class TripRecordingOptionsBottomSheet extends MenuBottomSheetDialogFragme
 	public void onResume() {
 		super.onResume();
 		runUpdatingTimeTrackSaved();
-		Fragment target = getTargetFragment();
-		if (target instanceof TripRecordingBottomSheet) {
-			((TripRecordingBottomSheet) target).hide();
-		}
 	}
 
 	@Override
