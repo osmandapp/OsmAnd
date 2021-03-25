@@ -424,7 +424,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 		} else {
 			CommonPreference<Integer> colorPreference = night ?
 					view.getSettings().ROUTE_LINE_COLOR_NIGHT :
-					view.getSettings().ROUTE_LINE_COLOR;
+					view.getSettings().ROUTE_LINE_COLOR_DAY;
 			int storedValue = colorPreference.getModeValue(helper.getAppMode());
 			color = storedValue != 0 ? storedValue : null;
 		}

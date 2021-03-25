@@ -1019,7 +1019,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 	}
 
 	private RouteLineDrawInfo createRouteLineDrawInfo(@NonNull ApplicationMode appMode) {
-		Integer colorDay = getRouteLineColor(appMode, settings.ROUTE_LINE_COLOR);
+		Integer colorDay = getRouteLineColor(appMode, settings.ROUTE_LINE_COLOR_DAY);
 		Integer colorNight = getRouteLineColor(appMode, settings.ROUTE_LINE_COLOR_NIGHT);
 		String widthKey = settings.ROUTE_LINE_WIDTH.getModeValue(appMode);
 		return new RouteLineDrawInfo(colorDay, colorNight, widthKey);
@@ -1033,7 +1033,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 
 	private void saveRouteLineAppearance(@NonNull ApplicationMode appMode,
 	                                     @NonNull RouteLineDrawInfo drawInfo) {
-		saveRouteLineColor(appMode, settings.ROUTE_LINE_COLOR, drawInfo.getColor(false));
+		saveRouteLineColor(appMode, settings.ROUTE_LINE_COLOR_DAY, drawInfo.getColor(false));
 		saveRouteLineColor(appMode, settings.ROUTE_LINE_COLOR_NIGHT, drawInfo.getColor(true));
 		settings.ROUTE_LINE_WIDTH.setModeValue(appMode, drawInfo.getWidth());
 	}
