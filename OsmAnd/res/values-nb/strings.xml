@@ -3941,4 +3941,8 @@
     <string name="routing_attr_height_obstacles_description">Ruting kan unngå kraftige oppoverbakker.</string>
     <string name="trip_recording_save_and_continue">Lagre og fortsett</string>
     <string name="lost_data_warning">All ulagret data vil gå tapt.</string>
+    <string name="show_start_dialog">Vis startdialog</string>
+    <string name="customize_route_line">Tilpass rutelinje</string>
+    <string name="shared_string_route_line">Rutelinje</string>
+    <string name="specify_color_for_map_mode">Angi farge for kartmodus: %1$s.</string>
 </resources>
