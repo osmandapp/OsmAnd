@@ -4047,5 +4047,5 @@
     <string name="lost_data_warning">Все несохраненные данные будут потеряны.</string>
     <string name="show_start_dialog">Показывать начальный диалог</string>
     <string name="trip_recording_show_start_dialog_setting">Если выключено, запись начнется сразу после нажатия на виджет или пункт меню, пропуская диалоговое окно подтверждения.</string>
-    <string name="trip_recording_logging_interval_info">Интервал записи трека указывает период времени, через которое OsmAnd будет запрашивать данные о текущем местоположении.</string>
+    <string name="trip_recording_logging_interval_info">Интервал записи трека указывает период времени, через который OsmAnd будет запрашивать данные о текущем местоположении.</string>
 </resources>
