@@ -1,10 +1,12 @@
 package net.osmand.plus.routing.data;
 
 import android.graphics.Typeface;
-import android.text.BidiFormatter;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.StyleSpan;
+
+import androidx.core.text.TextUtilsCompat;
+import androidx.core.view.ViewCompat;
 
 import net.osmand.Location;
 import net.osmand.plus.OsmandApplication;
@@ -12,6 +14,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.voice.AbstractPrologCommandPlayer;
+
+import java.util.Locale;
 
 public class AnnounceTimeDistances {
 	// Avoids false negatives: Pre-pone close announcements by this distance to allow for the possible over-estimation of the 'true' lead distance due to positioning error.
@@ -217,12 +221,12 @@ public class AnnounceTimeDistances {
 			// round to 5
 			time = (time / 5) * 5;
 		}
-		BidiFormatter myBidiFormatter;
-		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN_MR2) {
-			myBidiFormatter = BidiFormatter.getInstance();
-			builder.append(String.format("\n%s: %d - %d %s, %d %s.", name, minDist, minDist + 5, myBidiFormatter.unicodeWrap(meter), time, myBidiFormatter.unicodeWrap(second)));
-		}else{
-			builder.append(String.format("\n%s: %d - %d %s, %d %s.", name, minDist, minDist + 5, "\u200F"+meter, time, "\u200F"+second));
+		boolean isLeftToRight = TextUtilsCompat.getLayoutDirectionFromLocale(Locale.getDefault()) == ViewCompat.LAYOUT_DIRECTION_LTR;
+		if (isLeftToRight) {
+			builder.append(String.format("\n%s: %d - %d %s, %d %s.", name, minDist, minDist + 5, meter, time, second));
+		} else {
+			builder.append(String.format("\n%s: %s  %d, %s %d - %d.", name, second, time, meter, minDist, minDist + 5));
+
 		}
 	}
 
