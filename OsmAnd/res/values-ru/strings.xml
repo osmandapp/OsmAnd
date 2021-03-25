@@ -3893,7 +3893,7 @@
     <string name="profile_type_user_string">Профиль пользователя</string>
     <string name="profile_type_osmand_string">Профиль OsmAnd</string>
     <string name="profile_by_default_description">Выберите профиль, который будет использоваться при запуске приложения.</string>
-    <string name="shared_string_last_used">Последний раз использовалось</string>
+    <string name="shared_string_last_used">Последний используемый</string>
     <string name="routing_attr_allow_intermittent_description">Разрешить прерывистые водные пути</string>
     <string name="routing_attr_allow_intermittent_name">Разрешить прерывистые водные пути</string>
     <string name="release_3_9">• Добавлена возможность экспорта и импорта всех данных, включая настройки, ресурсы, мои места.
@@ -4043,4 +4043,8 @@
     <string name="gpx_upload_private_visibility_descr">«Частный» означает, что трек не будет виден в любых общедоступных списках, но точки из него будут доступны через public GPS API без отметок времени.</string>
     <string name="routing_attr_driving_style_description">Выберите цель, чтобы проложить к ней короткий, быстрый или безопасный маршрут</string>
     <string name="delete_number_files_question">Удалить %1$d файлов\?</string>
+    <string name="trip_recording_save_and_continue">Сохранить и продолжить</string>
+    <string name="lost_data_warning">Все несохраненные данные будут потеряны.</string>
+    <string name="show_start_dialog">Показывать начальный диалог</string>
+    <string name="trip_recording_show_start_dialog_setting">Если выключено, запись начнется сразу после нажатия на виджет или пункт меню, пропуская диалоговое окно подтверждения.</string>
 </resources>
