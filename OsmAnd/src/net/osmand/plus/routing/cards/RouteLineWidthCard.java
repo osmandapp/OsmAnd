@@ -24,7 +24,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routing.RouteLineDrawInfo;
 import net.osmand.plus.track.AppearanceViewHolder;
@@ -201,6 +200,10 @@ public class RouteLineWidthCard extends BaseCard {
 		return WidthMode.DEFAULT;
 	}
 
+	private boolean isNightMode() {
+		return app.getDaynightHelper().isNightModeForMapControls();
+	}
+
 	private class WidthAdapter extends RecyclerView.Adapter<AppearanceViewHolder> {
 
 		private final List<WidthMode> items = Arrays.asList(WidthMode.values());
@@ -268,13 +271,9 @@ public class RouteLineWidthCard extends BaseCard {
 		}
 
 		private int getIconColor(@NonNull WidthMode mode, @ColorInt int defaultColor) {
-			return mode.widthKey != null ? getRouteLineColor() : defaultColor;
-		}
-
-		private int getRouteLineColor() {
-			Integer color = routeLineDrawInfo.getColor();
-			return color != null ? color :
-					mapActivity.getMapLayers().getRouteLayer().getRouteLineColor(nightMode);
+			return mode.widthKey != null ?
+					mapActivity.getMapLayers().getRouteLayer().getRouteLineColor(isNightMode()) :
+					defaultColor;
 		}
 
 		private void updateButtonBg(AppearanceViewHolder holder, WidthMode item) {

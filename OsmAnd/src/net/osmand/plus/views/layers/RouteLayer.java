@@ -42,6 +42,7 @@ import net.osmand.plus.routing.RouteLineDrawInfo;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
+import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.geometry.PublicTransportGeometryWay;
@@ -315,14 +316,16 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 			QuadPoint c = tileBox.getCenterPixelPoint();
 
 			canvas.rotate(-angle, c.x, c.y);
-			drawRouteLinePreview(canvas, tileBox, routeLineDrawInfo);
+			drawRouteLinePreview(canvas, tileBox, settings, routeLineDrawInfo);
 			canvas.rotate(angle, c.x, c.y);
 		}
 	}
 
 	private void drawRouteLinePreview(Canvas canvas,
 	                                  RotatedTileBox tileBox,
+	                                  DrawSettings settings,
 	                                  RouteLineDrawInfo drawInfo) {
+		updateAttrs(settings, tileBox);
 		paintRouteLinePreview.setColor(getRouteLineColor(nightMode));
 		paintRouteLinePreview.setStrokeWidth(getRouteLineWidth(tileBox));
 
@@ -417,12 +420,14 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 	public int getRouteLineColor(boolean night) {
 		Integer color;
 		if (routeLineDrawInfo != null) {
-			color = routeLineDrawInfo.getColor();
+			color = routeLineDrawInfo.getColor(night);
 		} else {
-			int storedValue = view.getSettings().ROUTE_LINE_COLOR.getModeValue(helper.getAppMode());
+			CommonPreference<Integer> colorPreference = night ?
+					view.getSettings().ROUTE_LINE_COLOR_NIGHT :
+					view.getSettings().ROUTE_LINE_COLOR_DAY;
+			int storedValue = colorPreference.getModeValue(helper.getAppMode());
 			color = storedValue != 0 ? storedValue : null;
 		}
-
 		if (color == null) {
 			updateAttrs(new DrawSettings(night), view.getCurrentRotatedTileBox());
 			color = attrs.paint.getColor();
