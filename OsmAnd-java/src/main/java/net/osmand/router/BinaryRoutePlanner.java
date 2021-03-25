@@ -903,7 +903,7 @@ public class BinaryRoutePlanner {
 	}
 
 	public static class RouteSegment {
-		final short segStart;
+		short segStart;
 		final RouteDataObject road;
 		// needed to store intersection of routes
 		RouteSegment next = null;

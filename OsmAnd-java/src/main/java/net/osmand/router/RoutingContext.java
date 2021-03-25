@@ -11,7 +11,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import org.apache.commons.logging.Log;
 
@@ -31,6 +30,7 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
 import net.osmand.binary.RouteDataObject;
+import net.osmand.data.QuadPoint;
 import net.osmand.data.QuadRect;
 import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
@@ -512,7 +512,7 @@ public class RoutingContext {
 						}
 					}
 					// connect direction points
-					if(config.directionPoints != null) {
+					if(config.getDirectionPoints() != null) {
 						connectDirectionPoints(ts, (int) (xloc << zmShift), (int) (yloc << zmShift), 
 							(int) ((xloc + 1) << zmShift), (int) ((yloc + 1) << zmShift));
 					}
@@ -524,65 +524,132 @@ public class RoutingContext {
 	}
 
 	
-	private static final String ATTACHED_ID = "AID";
 	private void connectDirectionPoints(RoutingSubregionTile ts, int minx, int miny, int maxx, int maxy) {
-		List<WptPt> points = config.directionPoints.queryInBox(new QuadRect(minx, miny, maxx, maxy), new ArrayList<>());
+		List<WptPt> points = config.getDirectionPoints().queryInBox(new QuadRect(minx, miny, maxx, maxy), new ArrayList<>());
 		for (WptPt connectPoint : points) {
 			TIntArrayList types = new TIntArrayList();
 			for (Entry<String, String> e : connectPoint.getExtensionsToRead().entrySet()) {
-				if(e.getKey().equals(ATTACHED_ID)) {
-					types.clear();
-					break;
-				}
+				if (e.getKey().equals(RoutingConfiguration.ATTACHED_INFO_WPT_ID)) {
+					continue;
+				} 
 				int type = ts.subregion.routeReg.searchRouteEncodingRule(e.getKey(), e.getValue());
-				if(type != -1) {
+				if (type != -1) {
 					types.add(type);
 				}
 			}
 			// don't attach empty points
-			if(types.size() == 0) {
+			if (types.size() == 0) {
 				continue;
 			}
-			int y = MapUtils.get31TileNumberY(connectPoint.lat);
-			int x = MapUtils.get31TileNumberX(connectPoint.lon);
-			double closest = Integer.MAX_VALUE;
-			int xc = 0, yc = 0;
-			long[] keys = ts.routes.keys();
-			for (long k : keys) {
-				// long k = (((long) x31) << 31) + (long) y31;
-				int xp = (int) (k >> 31);
-				int yp = (int) (k - (xp << 31));
-				double dist = MapUtils.squareRootDist31(x, y, xp, yp);
-				if (dist < closest) {
-					xc = xp;
-					yc = yp;
-					closest = dist;
-				}
+			// search road to insert
+			if (!connectPoint.getExtensionsToRead().containsKey(RoutingConfiguration.ATTACHED_INFO_WPT_ID)) {
+				searchRoadToInsert(ts, connectPoint);
 			}
-			// config.directionPointsRadius
-			if (closest < config.directionPointsRadius) {
-				long k = (((long) xc) << 31) + (long) yc;
-				RouteSegment segment = ts.routes.get(k);
-				int pntInd = -1;
-				for(int i = 0; i < segment.getRoad().getPointsLength() - 1; i ++) {
-					if(xc == segment.getRoad().getPoint31XTile(i) && yc == segment.getRoad().getPoint31YTile(i)) {
-						pntInd = i;
-					}
-				}
-				if (pntInd != -1) {
-					System.out.println(
-							"INSERT INTO " + segment.getRoad() + " " + connectPoint.getLatitude() + " " + connectPoint.getLongitude());
-					segment.getRoad().insert(pntInd, x, y);
-					connectPoint.getExtensionsToWrite().put(ATTACHED_ID, segment.getRoad().getId() +"");
-					if (types.size() > 0) {
-						System.out.println(" >>> INSERT INTO " + segment.getRoad() + " " + connectPoint.getLatitude() + " "
-								+ connectPoint.getLongitude());
-						segment.getRoad().setPointTypes(pntInd, types.toArray());
-					}
-				}
-				
+			if (!connectPoint.getExtensionsToRead().containsKey(RoutingConfiguration.ATTACHED_INFO_WPT_ID)) {
+				continue;
+			}
+			String[] vls = connectPoint.getExtensionsToRead().get(RoutingConfiguration.ATTACHED_INFO_WPT_ID).split(":");
+			if (vls.length != 3) {
+				continue;
+			}
+			long roadId = Long.parseLong(vls[0]);
+			int xins = Integer.parseInt(vls[1]);
+			int yins = Integer.parseInt(vls[2]);
+			// insert points if needed 
+			if (roadId != -1) {
+				int wptX = MapUtils.get31TileNumberX(connectPoint.lon);
+				int wptY = MapUtils.get31TileNumberY(connectPoint.lat);
+				insertPoint(ts, roadId, xins, yins, xins, yins, types, wptX, wptY);
 			}
 		}
+	}
+
+	private void searchRoadToInsert(RoutingSubregionTile ts, WptPt connectPoint) {
+		long roadId = -1;
+		int wptX = MapUtils.get31TileNumberX(connectPoint.lon);
+		int wptY = MapUtils.get31TileNumberY(connectPoint.lat);
+		double closest = Integer.MAX_VALUE;
+		int xc = 0, yc = 0;
+		long[] keys = ts.routes.keys();
+		RouteSegment cl = null;
+		// faster search via all roadObjects?
+		for (long k : keys) {
+			// long k = (((long) x31) << 31) + (long) y31;
+			int xp = (int) (k >> 31);
+			int yp = (int) (k - (xp << 31));
+			RouteSegment sg = ts.routes.get(k);
+			while (sg != null) {
+				if (sg.getRoad().getPointsLength() > sg.segStart + 1) {
+					QuadPoint pnt = MapUtils.getProjectionPoint31(wptX, wptY, sg.getRoad().getPoint31XTile(sg.segStart),
+							sg.getRoad().getPoint31YTile(sg.segStart), sg.getRoad().getPoint31XTile(sg.segStart + 1),
+							sg.getRoad().getPoint31YTile(sg.segStart + 1));
+					double dist = MapUtils.squareRootDist31(wptX, wptY, (int) pnt.x, (int) pnt.y);
+					if (dist < closest) {
+						cl = sg;
+						xc = xp;
+						yc = yp;
+						closest = dist;
+					}
+
+				}
+				sg = sg.next;
+			}
+			
+		}
+		// TODO search proper where insert
+		if (closest < config.directionPointsRadius) {
+			System.out.println(cl.getRoad() + " " + closest);
+			connectPoint.getExtensionsToWrite().put(RoutingConfiguration.ATTACHED_INFO_WPT_ID,
+					cl.getRoad().getId() + ":" + xc + ":" + yc);
+		}
+	}
+
+	private RouteSegment insertPoint(RoutingSubregionTile ts, long roadId, int xat, int yat, 
+			int xins, int yins, TIntArrayList wptTypes, int wptX, int wptY) {
+		long k = (((long) xat) << 31) + (long) yat;
+		RouteSegment s = ts.routes.get(k);
+		RouteSegment res = null;
+		while (s != null) {
+			if (s.getRoad().getId() == roadId) {
+				res = s;
+				break;
+			}
+			s = s.next;
+		}
+		if (res != null) {
+			for (int i = 0; i < res.getRoad().getPointsLength(); i++) {
+				if (xins == res.getRoad().getPoint31XTile(i) && yins == res.getRoad().getPoint31YTile(i)) {
+					// TODO not correct for multiple points
+					boolean after = i != res.getRoad().getPointsLength() - 1;
+					if (wptX != res.getRoad().getPoint31XTile(after ? i + 1 : i - 1) || wptY != res.getRoad().getPoint31YTile(after ? i + 1 : i - 1)) {
+						System.out.println(String.format("INSERT %s %s [%.5f, %.5f] ", ts.subregion.hashCode() + "",  res.getRoad(), MapUtils.get31LatitudeY(wptY), MapUtils.get31LongitudeX(wptX)));
+						res.getRoad().insert(after ? i + 1 : i, wptX, wptY);
+						res.getRoad().setPointTypes(after ? i + 1 : i, wptTypes.toArray());
+						// iterate and insert in all segment points if needed
+						for (int j = i + 1; j < res.getRoad().getPointsLength(); j++) {
+							int xts = res.getRoad().getPoint31XTile(j);
+							int yts = res.getRoad().getPoint31YTile(j);
+							long ks = (((long) xts) << 31) + (long) yts;
+							RouteSegment ss = ts.routes.get(ks);
+							RouteSegment sres = null;
+							while (ss != null) {
+								if (ss.getRoad().getId() == roadId) {
+									sres = ss;
+									break;
+								}
+								ss = ss.next;
+							}
+							if (sres != null) {
+								sres.segStart++;
+							}
+						}
+						System.out.println(String.format("INSERA %s %s [%.5f, %.5f] ", ts.subregion.hashCode() + "",  res.getRoad(), MapUtils.get31LatitudeY(wptY), MapUtils.get31LongitudeX(wptX)));
+					}
+					break;
+				}
+			}
+		}
+		return res;
 	}
 
 	public boolean checkIfMemoryLimitCritical(long memoryLimit) {
