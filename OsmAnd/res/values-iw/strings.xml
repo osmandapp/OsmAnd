@@ -4051,4 +4051,6 @@
     <string name="trip_recording_logging_interval_info">הגדרת הפרש קבוע בין הבקשות של OsmAnd לקבלת נתוני המיקום הנוכחיים.</string>
     <string name="trip_recording_save_and_continue">לשמור ולהמשיך</string>
     <string name="lost_data_warning">כל הנתונים שלא נשמרו יאבדו.</string>
+    <string name="show_start_dialog">להציג חלונית פתיחה</string>
+    <string name="trip_recording_show_start_dialog_setting">אם האפשרות מושבתת, ההקלטה תתחיל מיד לאחר הנגיעה בווידג׳ט או בפריט שבתפריט תוך דילוג על חלונית האישור.</string>
 </resources>
