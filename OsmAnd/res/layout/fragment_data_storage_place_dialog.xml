@@ -107,7 +107,6 @@
 							android:id="@+id/deviceMemoryTitle"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:layout_gravity="fill_horizontal"
 							android:gravity="center_vertical"
 							android:text="@string/storage_directory_external"
 							android:textColor="?android:attr/textColorPrimary" />
@@ -116,7 +115,6 @@
 							android:id="@+id/deviceMemoryDescription"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:layout_gravity="fill_horizontal"
 							android:textColor="?android:attr/textColorSecondary"
 							tools:text="Free: 568 Mb" />
 
@@ -154,14 +152,12 @@
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
 						android:layout_gravity="center_vertical"
-
 						android:orientation="vertical">
 
 						<TextView
 							android:id="@+id/sharedMemoryTitle"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:layout_gravity="fill_horizontal"
 							android:text="@string/storage_directory_shared"
 							android:textColor="?android:attr/textColorPrimary" />
 
@@ -169,7 +165,6 @@
 							android:id="@+id/sharedMemoryDescription"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:layout_gravity="fill_horizontal"
 							android:textColor="?android:attr/textColorSecondary"
 							tools:text="Free: 9 Gb" />
 
@@ -212,7 +207,6 @@
 							android:id="@+id/memoryStickTitle"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:layout_gravity="fill_horizontal"
 							android:text="@string/storage_directory_card"
 							android:textColor="?android:attr/textColorPrimary" />
 
@@ -220,7 +214,6 @@
 							android:id="@+id/memoryStickDescription"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:layout_gravity="fill_horizontal"
 							android:textColor="?android:attr/textColorSecondary"
 							tools:text="Free: 9 Gb" />
 
