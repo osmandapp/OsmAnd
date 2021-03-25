@@ -6,7 +6,6 @@ import net.osmand.NativeLibrary;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.binary.BinaryMapRouteReaderAdapter;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
@@ -689,15 +688,15 @@ public class RoutePlannerFrontEnd {
 			}
 		}
 		if (ctx.calculationMode == RouteCalculationMode.COMPLEX && routeDirection == null
-				&& maxDistance > ctx.config.DEVIATION_RADIUS * 6) {
+				&& maxDistance > RoutingConfiguration.DEVIATION_RADIUS * 6) {
 			ctx.calculationProgress.totalIterations++;
 			RoutingContext nctx = buildRoutingContext(ctx.config, ctx.nativeLib, ctx.getMaps(), RouteCalculationMode.BASE);
 			nctx.calculationProgress = ctx.calculationProgress;
 			List<RouteSegmentResult> ls = searchRoute(nctx, start, end, intermediates);
-			if(ls == null) {
+			if (ls == null) {
 				return null;
 			}
-			routeDirection = PrecalculatedRouteDirection.build(ls, ctx.config.DEVIATION_RADIUS, ctx.getRouter().getMaxSpeed());
+			routeDirection = PrecalculatedRouteDirection.build(ls, RoutingConfiguration.DEVIATION_RADIUS, ctx.getRouter().getMaxSpeed());
 		}
 		List<RouteSegmentResult> res ;
 		if (intermediatesEmpty && ctx.nativeLib != null) {
