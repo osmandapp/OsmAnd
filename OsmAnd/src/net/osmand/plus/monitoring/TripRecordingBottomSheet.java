@@ -519,7 +519,7 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 		private final Integer titleId;
 		@DrawableRes
 		private final Integer iconId;
-		private static final List<ItemType> negative = Arrays.asList(CLEAR_DATA, STOP_AND_DISCARD);
+		private static final List<ItemType> negative = Arrays.asList(CLEAR_DATA, STOP, STOP_AND_DISCARD);
 
 		ItemType(@Nullable @StringRes Integer titleId, @Nullable @DrawableRes Integer iconId) {
 			this.titleId = titleId;
