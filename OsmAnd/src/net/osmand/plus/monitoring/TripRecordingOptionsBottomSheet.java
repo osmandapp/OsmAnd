@@ -51,8 +51,6 @@ public class TripRecordingOptionsBottomSheet extends MenuBottomSheetDialogFragme
 	private SelectedGpxFile selectedGpxFile;
 	private final Handler handler = new Handler();
 	private Runnable updatingTimeTrackSaved;
-	private int indexButtonOnline = -1;
-	private int indexButtonOnlineDivider = -1;
 
 	private GPXFile getGPXFile() {
 		return selectedGpxFile.getGpxFile();
@@ -91,7 +89,8 @@ public class TripRecordingOptionsBottomSheet extends MenuBottomSheetDialogFragme
 
 		buttonClear = createItem(inflater, ItemType.CLEAR_DATA, hasDataToSave());
 		final View buttonDiscard = createItem(inflater, ItemType.STOP_AND_DISCARD);
-		final View buttonOnline = createItem(inflater, ItemType.STOP_ONLINE, hasDataToSave());
+		final View buttonOnline = createItem(inflater, settings.LIVE_MONITORING.get()
+				? ItemType.STOP_ONLINE : ItemType.START_ONLINE);
 		buttonSave = createItem(inflater, ItemType.SAVE, hasDataToSave());
 		final View buttonSegment = createItem(inflater, ItemType.START_NEW_SEGMENT, wasTrackMonitored());
 
@@ -131,27 +130,19 @@ public class TripRecordingOptionsBottomSheet extends MenuBottomSheetDialogFragme
 
 		items.add(new DividerSpaceItem(app, dp36));
 
-		if (app.getLiveMonitoringHelper().isLiveMonitoringEnabled()) {
-			items.add(new BaseBottomSheetItem.Builder()
-					.setCustomView(buttonOnline)
-					.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							settings.LIVE_MONITORING.set(false);
-							if (indexButtonOnline != -1) {
-								AndroidUiHelper.updateVisibility(items.get(indexButtonOnline).getView(), false);
-							}
-							if (indexButtonOnlineDivider != -1) {
-								AndroidUiHelper.updateVisibility(items.get(indexButtonOnlineDivider).getView(), false);
-							}
-						}
-					})
-					.create());
-			indexButtonOnline = items.size() - 1;
+		items.add(new BaseBottomSheetItem.Builder()
+				.setCustomView(buttonOnline)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						boolean wasOnlineMonitored = !settings.LIVE_MONITORING.get();
+						settings.LIVE_MONITORING.set(wasOnlineMonitored);
+						createItem(buttonOnline, wasOnlineMonitored ? ItemType.STOP_ONLINE : ItemType.START_ONLINE);
+					}
+				})
+				.create());
 
-			items.add(new DividerSpaceItem(app, dp36));
-			indexButtonOnlineDivider = items.size() - 1;
-		}
+		items.add(new DividerSpaceItem(app, dp36));
 
 		items.add(new BaseBottomSheetItem.Builder()
 				.setCustomView(buttonSave)
@@ -181,7 +172,6 @@ public class TripRecordingOptionsBottomSheet extends MenuBottomSheetDialogFragme
 				.create());
 
 		items.add(new DividerSpaceItem(app, getResources().getDimensionPixelSize(R.dimen.content_padding_small)));
-
 	}
 
 	@Override
@@ -241,6 +231,10 @@ public class TripRecordingOptionsBottomSheet extends MenuBottomSheetDialogFragme
 		} else {
 			return null;
 		}
+	}
+
+	private void createItem(View view, ItemType type) {
+		TripRecordingBottomSheet.createItem(app, nightMode, view, type, true, null);
 	}
 
 	private View createItem(LayoutInflater inflater, ItemType type, boolean enabled) {
