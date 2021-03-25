@@ -294,10 +294,13 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 		viewGroup.removeAllViews();
 		setupDisplayHelper();
 
-		View segmentView = SegmentGPXAdapter.createGpxTabsView(displayHelper, viewGroup, this, nightMode, true);
+		View segmentView = SegmentGPXAdapter.createGpxTabsView(displayHelper, viewGroup, this, nightMode);
 		AndroidUiHelper.setVisibility(View.GONE, segmentView.findViewById(R.id.list_item_divider));
 		WrapContentHeightViewPager pager = segmentView.findViewById(R.id.pager);
 		PagerSlidingTabStrip tabLayout = segmentView.findViewById(R.id.sliding_tabs);
+		tabLayout.setDividerWidth(AndroidUtils.dpToPx(app, 1));
+		tabLayout.setDividerColor(ContextCompat.getColor(app, nightMode ?
+				R.color.stroked_buttons_and_links_outline_dark : R.color.stroked_buttons_and_links_outline_light));
 		tabLayout.setOnTabReselectedListener(new PagerSlidingTabStrip.OnTabReselectedListener() {
 			@Override
 			public void onTabSelected(int position) {

@@ -42,7 +42,7 @@ public class SegmentsCard extends BaseCard {
 		container.removeAllViews();
 		List<GpxDisplayItem> items = TrackDisplayHelper.flatten(displayHelper.getOriginalGroups(filterTypes));
 		for (GpxDisplayItem displayItem : items) {
-			View segmentView = SegmentGPXAdapter.createGpxTabsView(displayHelper, container, listener, nightMode, false);
+			View segmentView = SegmentGPXAdapter.createGpxTabsView(displayHelper, container, listener, nightMode);
 
 			WrapContentHeightViewPager pager = segmentView.findViewById(R.id.pager);
 			PagerSlidingTabStrip tabLayout = segmentView.findViewById(R.id.sliding_tabs);
