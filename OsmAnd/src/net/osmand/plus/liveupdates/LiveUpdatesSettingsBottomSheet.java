@@ -77,6 +77,7 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 	private OsmandApplication app;
 	private OsmandSettings settings;
 
+	private BaseBottomSheetItem itemTitle;
 	private BaseBottomSheetItem itemLastCheck;
 	private BaseBottomSheetItem itemSwitchLiveUpdate;
 	private BaseBottomSheetItem itemFrequencyHelpMessage;
@@ -117,11 +118,12 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 		int dp40 = getDimen(R.dimen.list_header_height);
 		int dp48 = getDimen(R.dimen.context_menu_buttons_bottom_height);
 
-		items.add(new SimpleBottomSheetItem.Builder()
+		itemTitle = new SimpleBottomSheetItem.Builder()
 				.setTitle(getNameToDisplay(fileName, app))
 				.setTitleColorId(getPrimaryTextColorId(nightMode))
 				.setLayoutId(R.layout.bottom_sheet_item_title_big)
-				.create());
+				.create();
+		items.add(itemTitle);
 
 		itemLastCheck = new ShortDescriptionItem.Builder()
 				.setDescription(getLastCheckString())
@@ -334,6 +336,19 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 		View view = super.onCreateView(inflater, parent, savedInstanceState);
+
+		int titleHeight = getResources().getDimensionPixelSize(R.dimen.bottom_sheet_descr_height);
+		TextViewEx titleView = (TextViewEx) itemTitle.getView();
+		titleView.setMinimumHeight(titleHeight);
+		titleView.getLayoutParams().height = titleHeight;
+		titleView.setPadding(titleView.getPaddingLeft(), getResources().getDimensionPixelSize(R.dimen.bottom_sheet_title_padding_top),
+				titleView.getPaddingRight(), titleView.getPaddingBottom());
+
+		int descriptionHeight = getResources().getDimensionPixelSize(R.dimen.bottom_sheet_title_height);
+		TextViewEx descriptionView = (TextViewEx) itemLastCheck.getView();
+		descriptionView.setMinimumHeight(descriptionHeight);
+		descriptionView.getLayoutParams().height = descriptionHeight;
+
 		CommonPreference<Boolean> localUpdatePreference = preferenceForLocalIndex(fileName, settings);
 		setStateViaWiFiButton(localUpdatePreference);
 		return view;
