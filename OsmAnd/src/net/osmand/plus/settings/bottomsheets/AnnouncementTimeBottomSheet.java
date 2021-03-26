@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -140,6 +141,9 @@ public class AnnouncementTimeBottomSheet extends BasePreferenceBottomSheet
 		tvIntervalsDescr = rootView.findViewById(R.id.tv_interval_descr);
 
 		setProfileColorToSeekBar();
+		if (AndroidUtils.isRTL()) {
+			seekBarArrival.setScaleX(-1);
+		}
 		seekBarArrival.setOnSeekBarChangeListener(this);
 		seekBarArrival.setProgress(selectedEntryIndex);
 		seekBarArrival.setMax(listPreference.getEntries().length - 1);
