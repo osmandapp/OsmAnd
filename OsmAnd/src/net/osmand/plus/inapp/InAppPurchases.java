@@ -7,12 +7,6 @@ import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 
-import androidx.annotation.ColorInt;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-
 import net.osmand.AndroidUtils;
 import net.osmand.Period;
 import net.osmand.Period.PeriodUnit;
@@ -33,6 +27,12 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 
 public abstract class InAppPurchases {
 
@@ -645,6 +645,9 @@ public abstract class InAppPurchases {
 			this.skuNoVersion = sku;
 		}
 
+		@StringRes
+		public abstract int getPeriodTypeString();
+
 		@NonNull
 		private List<InAppSubscription> getUpgrades() {
 			return new ArrayList<>(upgrades.values());
@@ -836,6 +839,11 @@ public abstract class InAppPurchases {
 		}
 
 		@Override
+		public int getPeriodTypeString() {
+			return R.string.monthly_subscription;
+		}
+
+		@Override
 		public void setPriceValue(double priceValue) {
 			super.setPriceValue(priceValue);
 			monthlyPriceValue = priceValue;
@@ -884,6 +892,11 @@ public abstract class InAppPurchases {
 		}
 
 		@Override
+		public int getPeriodTypeString() {
+			return R.string.three_months_subscription;
+		}
+
+		@Override
 		public void setPriceValue(double priceValue) {
 			super.setPriceValue(priceValue);
 			monthlyPriceValue = priceValue / 3d;
@@ -924,6 +937,11 @@ public abstract class InAppPurchases {
 
 		InAppPurchaseLiveUpdatesAnnual(@NonNull String sku) {
 			super(sku, false);
+		}
+
+		@Override
+		public int getPeriodTypeString() {
+			return R.string.annual_subscription;
 		}
 
 		@Override

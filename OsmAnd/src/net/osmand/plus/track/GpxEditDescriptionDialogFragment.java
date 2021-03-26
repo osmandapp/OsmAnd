@@ -130,7 +130,7 @@ public class GpxEditDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 
 		View btnSave = view.findViewById(R.id.btn_save);
 		int drawableRes = isNightMode(true) ? R.drawable.btn_solid_border_dark : R.drawable.btn_solid_border_light;
-		btnSave.setBackgroundDrawable(ContextCompat.getDrawable(ctx, drawableRes));
+		AndroidUtils.setBackground(btnSave, getMyApplication().getUIUtilities().getIcon(drawableRes));
 	}
 
 	private void showDismissDialog() {

@@ -24,6 +24,7 @@ import android.widget.TextView;
 import com.google.android.material.appbar.AppBarLayout;
 
 import net.osmand.AndroidUtils;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -44,6 +45,8 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
@@ -51,10 +54,17 @@ import androidx.fragment.app.FragmentManager;
 
 public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurchaseListener, OnFragmentInteractionListener {
 
+	private static final Log log = PlatformUtil.getLog(PurchasesFragment.class);
 	public static final String TAG = PurchasesFragment.class.getName();
+
 	public static final String KEY_IS_SUBSCRIBER = "action_is_new";
+
 	private static final String PLAY_STORE_SUBSCRIPTION_URL = "https://play.google.com/store/account/subscriptions";
 	private static final String PLAY_STORE_SUBSCRIPTION_DEEPLINK_URL = "https://play.google.com/store/account/subscriptions?sku=%s&package=%s";
+	private static final String EMAIL_DEEPLINK_URI = "mailto:support@osmand.net";
+	private static final String OSMAND_EMAIL = "support@osmand.net";
+	private static final String OSMAND_NEW_DEVICE_URL = "https://docs.osmand.net/en/main@latest/osmand/purchases#new-device--new-account";
+	private static final String OSMAND_PURCHASES_URL = "https://docs.osmand.net/en/main@latest/osmand/purchases";
 
 	private OsmandApplication app;
 	private Context context;
@@ -66,17 +76,18 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 	private CountrySelectionFragment countrySelectionFragment = new CountrySelectionFragment();
 
 	private String url;
-	private Boolean isSubscriber;
+	private Boolean isPaidVersion;
 
 	public static boolean showInstance(FragmentManager fragmentManager) {
 		try {
 			PurchasesFragment fragment = new PurchasesFragment();
 			fragmentManager.beginTransaction()
-					.add(R.id.fragmentContainer, fragment, TAG)
+					.replace(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
 			return true;
 		} catch (Exception e) {
+			log.error(e);
 			return false;
 		}
 	}
@@ -90,12 +101,12 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		app = getMyApplication();
 		context = requireContext();
-		isSubscriber = Version.isPaidVersion(app);
+		isPaidVersion = Version.isPaidVersion(app);
 		final MapActivity mapActivity = getMapActivity();
 		final boolean nightMode = !app.getSettings().isLightContent();
 		LayoutInflater themedInflater = UiUtilities.getInflater(context, nightMode);
 
-		if (isSubscriber) {
+		if (isPaidVersion) {
 			mainView = themedInflater.inflate(R.layout.purchases_layout, container, false);
 			setSubscriptionClick(mapActivity);
 		} else {
@@ -117,11 +128,6 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 		}
 		AndroidUtils.addStatusBarPadding21v(getActivity(), mainView);
 		createToolbar(mainView, nightMode);
-		mainView.setOnTouchListener(new View.OnTouchListener() {
-			public boolean onTouch(View v, MotionEvent event) {
-				return true;
-			}
-		});
 		LinearLayout purchasesRestore = mainView.findViewById(R.id.restore_purchases);
 		purchasesRestore.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -135,7 +141,7 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 		newDeviceAccountContainer.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				WikipediaDialogFragment.showFullArticle(context, Uri.parse("https://docs.osmand.net/en/main@latest/osmand/purchases#new-device--new-account"), nightMode);
+				WikipediaDialogFragment.showFullArticle(context, Uri.parse(OSMAND_NEW_DEVICE_URL), nightMode);
 			}
 		});
 
@@ -147,10 +153,11 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 	public void onResume() {
 		super.onResume();
 		purchaseHelper = getInAppPurchaseHelper();
-		if (isSubscriber) {
+		if (isPaidVersion) {
 			MapActivity mapActivity = getMapActivity();
 			if (getMapActivity() != null && purchaseHelper != null) {
 				ViewGroup subscriptionsCardContainer = mainView.findViewById(R.id.subscriptions_card_container);
+				subscriptionsCardContainer.removeAllViews();
 				subscriptionsCard = new SubscriptionsCard(mapActivity, purchaseHelper);
 				subscriptionsCardContainer.addView(subscriptionsCard.build(mapActivity));
 			}
@@ -161,7 +168,7 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putBoolean(KEY_IS_SUBSCRIBER, isSubscriber);
+		outState.putBoolean(KEY_IS_SUBSCRIBER, isPaidVersion);
 	}
 
 	@Override
@@ -277,7 +284,7 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 		icon.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				WikipediaDialogFragment.showFullArticle(context, Uri.parse("https://docs.osmand.net/en/main@latest/osmand/purchases"), nightMode);
+				WikipediaDialogFragment.showFullArticle(context, Uri.parse(OSMAND_PURCHASES_URL), nightMode);
 			}
 		});
 		ImageButton backButton = toolbar.findViewById(R.id.close_button);
@@ -301,14 +308,12 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 		TextView supportDescription = mainView.findViewById(R.id.support_link_title);
 
 		SpannableString spannableStringSupport = new SpannableString(getString(R.string.contact_support));
-		String urlSupport = "mailto:support@osmand.net";
-		spannableStringSupport.setSpan(new URLSpan(urlSupport), 0, spannableStringSupport.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+		spannableStringSupport.setSpan(new URLSpan(EMAIL_DEEPLINK_URI), 0, spannableStringSupport.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-		String emailString = "support@osmand.net";
-		String supportDescriptionString = getString(R.string.contact_support_description, emailString);
+		String supportDescriptionString = getString(R.string.contact_support_description, OSMAND_EMAIL);
 		SpannableString spannableStringMail = new SpannableString(supportDescriptionString);
-		int startIndex = supportDescriptionString.indexOf(emailString);
-		int endIndex = startIndex + emailString.length();
+		int startIndex = supportDescriptionString.indexOf(OSMAND_EMAIL);
+		int endIndex = startIndex + OSMAND_EMAIL.length();
 		StyleSpan boldSpan = new StyleSpan(Typeface.BOLD);
 		spannableStringMail.setSpan(boldSpan, startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
@@ -322,7 +327,7 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 
 	private void getSkuAppId() {
 		InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
-		if (purchaseHelper != null) {
+		if (purchaseHelper != null && purchaseHelper.getFullVersion() != null) {
 			String sku = purchaseHelper.getFullVersion().getSku();
 			url = String.format(PLAY_STORE_SUBSCRIPTION_DEEPLINK_URL,
 					sku, context.getPackageName());
