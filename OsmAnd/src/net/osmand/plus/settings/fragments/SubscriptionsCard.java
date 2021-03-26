@@ -1,121 +1,146 @@
 package net.osmand.plus.settings.fragments;
 
-import android.os.Build;
-import android.view.LayoutInflater;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
-import net.osmand.Period;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
-import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
-import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
+import net.osmand.plus.liveupdates.CountrySelectionFragment;
+import net.osmand.plus.liveupdates.LiveUpdatesFragment;
+import net.osmand.plus.liveupdates.LiveUpdatesFragmentNew;
+import net.osmand.plus.liveupdates.OsmLiveActivity;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 public class SubscriptionsCard extends BaseCard {
 
-	private final InAppPurchaseHelper purchaseHelper;
+	private static final String PLAY_STORE_SUBSCRIPTION_URL = "https://play.google.com/store/account/subscriptions";
+	private static final String PLAY_STORE_SUBSCRIPTION_DEEPLINK_URL = "https://play.google.com/store/account/subscriptions?sku=%s&package=%s";
 
-	private final SimpleDateFormat dateFormat;
+	private Fragment target;
+	private CountrySelectionFragment countrySelectionFragment = new CountrySelectionFragment();
+	private SubscriptionsListCard subscriptionsListCard;
+
+	private InAppPurchaseHelper purchaseHelper;
 
 	@Override
 	public int getCardLayoutId() {
 		return R.layout.subscriptions_card;
 	}
 
-	public SubscriptionsCard(@NonNull MapActivity mapActivity, @NonNull InAppPurchaseHelper purchaseHelper) {
+	public SubscriptionsCard(@NonNull MapActivity mapActivity, @NonNull Fragment target, @NonNull InAppPurchaseHelper purchaseHelper) {
 		super(mapActivity);
+		this.target = target;
 		this.purchaseHelper = purchaseHelper;
-		this.dateFormat = new SimpleDateFormat("MMM d, yyyy", Locale.getDefault());
 	}
 
 	@Override
 	protected void updateContent() {
 		if (purchaseHelper == null || Algorithms.isEmpty(purchaseHelper.getEverMadeSubscriptions())) {
+			AndroidUiHelper.updateVisibility(view, false);
 			return;
+		} else {
+			AndroidUiHelper.updateVisibility(view, true);
 		}
 
-		LayoutInflater inflater = UiUtilities.getInflater(mapActivity, nightMode);
-		((ViewGroup) view).removeAllViews();
+		updateSubscriptionsListCard();
+		setupSupportRegion();
 
-		List<InAppSubscription> subscriptions = purchaseHelper.getEverMadeSubscriptions();
-		for (int i = 0; i < subscriptions.size(); i++) {
-			InAppSubscription subscription = subscriptions.get(i);
-			SubscriptionState state = subscription.getState();
-			boolean autoRenewed = state == SubscriptionState.ACTIVE || state == SubscriptionState.IN_GRACE_PERIOD;
-
-			View card = inflater.inflate(R.layout.subscription_layout, null, false);
-			((ViewGroup) view).addView(card);
-
-			TextView subscriptionPeriod = card.findViewById(R.id.subscription_type);
-			String period = app.getString(subscription.getPeriodTypeString());
-			if (!Algorithms.isEmpty(period)) {
-				subscriptionPeriod.setText(period);
-				AndroidUiHelper.updateVisibility(subscriptionPeriod, true);
+		LinearLayout reportContainer = view.findViewById(R.id.report_container);
+		reportContainer.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(mapActivity, OsmLiveActivity.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+				mapActivity.startActivity(intent);
 			}
+		});
 
-			if (autoRenewed) {
-				TextView nextBillingDate = card.findViewById(R.id.next_billing_date);
-				String date = getHumanDate(subscription.getPurchaseTime(), subscription.getSubscriptionPeriod());
-				if (!Algorithms.isEmpty(date)) {
-					nextBillingDate.setText(app.getString(R.string.next_billing_date, date));
-					AndroidUiHelper.updateVisibility(nextBillingDate, true);
-				}
-			} else {
-				View renewContainer = card.findViewById(R.id.renewContainer);
-				AndroidUiHelper.updateVisibility(renewContainer, true);
-				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-					AndroidUtils.setBackground(mapActivity, renewContainer, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
-				} else {
-					AndroidUtils.setBackground(mapActivity, renewContainer, nightMode, R.drawable.btn_unstroked_light, R.drawable.btn_unstroked_dark);
-				}
-				final String sku = subscription.getSku();
-				renewContainer.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						ChoosePlanDialogFragment.subscribe(app, mapActivity, purchaseHelper, sku);
-					}
-				});
-
-				View renew = card.findViewById(R.id.renew);
-				AndroidUtils.setBackground(mapActivity, renew, nightMode,
-						R.drawable.btn_solid_border_light, R.drawable.btn_solid_border_dark);
+		LinearLayout liveUpdatesContainer = view.findViewById(R.id.live_updates_container);
+		liveUpdatesContainer.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				LiveUpdatesFragmentNew.showInstance(mapActivity.getSupportFragmentManager(), target);
 			}
+		});
 
-			TextView status = card.findViewById(R.id.status);
-			status.setText(app.getString(state.getStringRes()));
-			AndroidUtils.setBackground(status, app.getUIUtilities().getIcon(state.getBackgroundRes()));
+		final String subscriptionUrl = getSubscriptionUrl();
+		LinearLayout manageSubscriptionContainer = view.findViewById(R.id.manage_subscription_container);
+		manageSubscriptionContainer.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(Intent.ACTION_VIEW);
+				intent.setData(Uri.parse(subscriptionUrl));
+				if (AndroidUtils.isIntentSafe(mapActivity, intent)) {
+					target.startActivity(intent);
+				}
+			}
+		});
+	}
 
-			int dividerLayout = i + 1 == subscriptions.size() ? R.layout.simple_divider_item : R.layout.divider_half_item;
-			View divider = inflater.inflate(dividerLayout, (ViewGroup) view, false);
-			((ViewGroup) view).addView(divider);
+	public void updateSubscriptionsListCard() {
+		if (subscriptionsListCard == null) {
+			ViewGroup subscriptionsListContainer = view.findViewById(R.id.subscriptions_list_container);
+			subscriptionsListContainer.removeAllViews();
+			subscriptionsListCard = new SubscriptionsListCard(mapActivity, purchaseHelper);
+			subscriptionsListContainer.addView(subscriptionsListCard.build(mapActivity));
+		} else {
+			subscriptionsListCard.update();
 		}
 	}
 
-	private String getHumanDate(long time, Period period) {
-		if (period == null || period.getUnit() == null) {
-			return "";
+	private void setupSupportRegion() {
+		String region = LiveUpdatesFragment.getSupportRegionName(app, purchaseHelper);
+		String header = LiveUpdatesFragment.getSupportRegionHeader(app, region);
+		TextView supportRegionHeader = view.findViewById(R.id.support_region_header);
+		TextView supportRegion = view.findViewById(R.id.support_region);
+		supportRegionHeader.setText(header);
+		supportRegion.setText(region);
+
+		View supportRegionContainer = view.findViewById(R.id.support_region_container);
+		supportRegionContainer.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				CountrySelectionFragment countryCountrySelectionFragment = countrySelectionFragment;
+				countryCountrySelectionFragment.show(target.getChildFragmentManager(), CountrySelectionFragment.TAG);
+			}
+		});
+
+		countrySelectionFragment.initCountries(app);
+	}
+
+	private String getSubscriptionUrl() {
+		InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
+		if (purchaseHelper != null && purchaseHelper.getFullVersion() != null) {
+			String sku = purchaseHelper.getFullVersion().getSku();
+			return String.format(PLAY_STORE_SUBSCRIPTION_DEEPLINK_URL,
+					sku, mapActivity.getPackageName());
+		} else {
+			return PLAY_STORE_SUBSCRIPTION_URL;
 		}
-		Date date = new Date(time);
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(date);
-		calendar.add(period.getUnit().getCalendarIdx(), period.getNumberOfUnits());
-		date = calendar.getTime();
-		return dateFormat.format(date);
+	}
+
+	public void onSupportRegionSelected(CountrySelectionFragment.CountryItem selectedCountryItem) {
+		String countryName = selectedCountryItem != null ? selectedCountryItem.getLocalName() : "";
+		String countryDownloadName = selectedCountryItem != null ?
+				selectedCountryItem.getDownloadName() : OsmandSettings.BILLING_USER_DONATION_WORLD_PARAMETER;
+
+		TextView supportRegionHeader = view.findViewById(R.id.support_region_header);
+		TextView supportRegion = view.findViewById(R.id.support_region);
+		supportRegionHeader.setText(LiveUpdatesFragment.getSupportRegionHeader(app, countryName));
+		supportRegion.setText(countryName);
+		app.getSettings().BILLING_USER_COUNTRY.set(countryName);
+		app.getSettings().BILLING_USER_COUNTRY_DOWNLOAD_NAME.set(countryDownloadName);
 	}
 }
