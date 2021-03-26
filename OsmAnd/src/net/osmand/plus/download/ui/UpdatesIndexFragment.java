@@ -382,7 +382,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 						}
 						AndroidUiHelper.setVisibility(View.GONE, view.findViewById(R.id.compound_button));
 						((ImageView) view.findViewById(R.id.icon)).setImageResource(R.drawable.ic_action_subscription_osmand_live);
-						TextViewEx tvTitle = view.findViewById(R.id.title);
+						TextView tvTitle = view.findViewById(R.id.title);
 						tvTitle.setText(R.string.download_live_updates);
 						AndroidUtils.setTextPrimaryColor(app, tvTitle, nightMode);
 						countView = view.findViewById(R.id.description);

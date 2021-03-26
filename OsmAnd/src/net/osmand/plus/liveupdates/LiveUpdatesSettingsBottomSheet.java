@@ -168,10 +168,12 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 				.create();
 		items.add(itemSwitchLiveUpdate);
 
+		Typeface typefaceRegular = FontCache.getRobotoRegular(app);
 		TextViewEx frequencyTitle = (TextViewEx) inflater.inflate(R.layout.bottom_sheet_item_title, null);
 		frequencyTitle.setHeight(dp48);
 		frequencyTitle.setMinimumHeight(dp48);
 		frequencyTitle.setText(R.string.update_frequency);
+		frequencyTitle.setTypeface(typefaceRegular);
 		AndroidUtils.setPadding(frequencyTitle, frequencyTitle.getPaddingLeft(), 0, frequencyTitle.getPaddingRight(), 0);
 		AndroidUtils.setTextPrimaryColor(app, frequencyTitle, nightMode);
 		items.add(new BaseBottomSheetItem.Builder()
@@ -203,6 +205,7 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 		timeOfDayTitle.setHeight(dp40);
 		timeOfDayTitle.setMinimumHeight(dp40);
 		timeOfDayTitle.setText(R.string.update_time);
+		timeOfDayTitle.setTypeface(typefaceRegular);
 		AndroidUtils.setPadding(timeOfDayTitle, timeOfDayTitle.getPaddingLeft(), 0, timeOfDayTitle.getPaddingRight(), 0);
 		AndroidUtils.setTextPrimaryColor(app, timeOfDayTitle, nightMode);
 		items.add(new BaseBottomSheetItem.Builder()
