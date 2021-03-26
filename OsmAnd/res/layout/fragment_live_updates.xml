@@ -41,8 +41,6 @@
 
 		<include layout="@layout/preference_toolbar_switch" />
 
-		<include layout="@layout/list_item_import" />
-
 	</com.google.android.material.appbar.AppBarLayout>
 
 	<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -59,6 +57,8 @@
 			android:footerDividersEnabled="false"
 			android:groupIndicator="@null"
 			android:headerDividersEnabled="false"
+			android:paddingBottom="@dimen/bottom_sheet_list_item_height"
+			android:clipToPadding="false"
 			android:orientation="vertical"
 			tools:context=".liveupdates.LiveUpdatesFragment" />
 

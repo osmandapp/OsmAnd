@@ -203,8 +203,11 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 		toolbarSwitchContainer = view.findViewById(R.id.toolbar_switch_container);
 		updateToolbarSwitch(settings.IS_LIVE_UPDATES_ON.get());
 
-		View timeContainer = view.findViewById(R.id.item_import_container);
+		View headerView = inflater.inflate(R.layout.list_item_import, listView, false);
+		View timeContainer = headerView.findViewById(R.id.item_import_container);
 		AndroidUtils.setListItemBackground(app, timeContainer, nightMode);
+		AndroidUiHelper.setVisibility(View.VISIBLE, headerView.findViewById(R.id.bottom_divider));
+		listView.addHeaderView(headerView);
 
 		AppCompatImageView descriptionIcon = timeContainer.findViewById(R.id.icon);
 		Drawable icon = UiUtilities.createTintedDrawable(app, R.drawable.ic_action_time,
