@@ -4032,4 +4032,7 @@
     <string name="track_has_no_altitude">De track bevat geen hoogtegegevens.</string>
     <string name="track_has_no_speed">De track bevat geen snelheidsgegevens.</string>
     <string name="select_another_colorization">Selecteer een ander inkleuring.</string>
+    <string name="trip_recording_show_start_dialog_setting">Indien uitgeschakeld zal de opname starten na een tik op de widget of het menu-item, waarbij er geen bevestiging zal worden gevraagd.</string>
+    <string name="trip_recording_save_and_continue">Opslaan en doorgaan</string>
+    <string name="lost_data_warning">Niet-opgeslagen gegevens zullen verloren gaan.</string>
 </resources>

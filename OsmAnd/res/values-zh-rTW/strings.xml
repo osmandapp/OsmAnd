@@ -4041,4 +4041,6 @@
     <string name="trip_recording_logging_interval_info">紀錄間隔設定的時段，OsmAnd 將會要求目前位置的位置資料。</string>
     <string name="trip_recording_save_and_continue">儲存並繼續</string>
     <string name="lost_data_warning">所有未儲存的資料都將會遺失。</string>
+    <string name="show_start_dialog">顯示開始對話框</string>
+    <string name="trip_recording_show_start_dialog_setting">若停用，則在點擊小工具或選單項目後將跳過確認對話框，立刻開始。</string>
 </resources>

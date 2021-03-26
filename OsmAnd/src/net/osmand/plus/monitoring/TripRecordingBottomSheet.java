@@ -5,11 +5,13 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -163,7 +165,7 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 				ContextCompat.getColor(app, getActiveTextColorId(nightMode)));
 
 		CardView cardLeft = itemView.findViewById(R.id.button_left);
-		createItem(cardLeft, ItemType.CANCEL);
+		createItem(cardLeft, ItemType.CLOSE);
 		cardLeft.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -237,15 +239,11 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 		}
 	}
 
-	public void show() {
+	public void show(String... keys) {
 		Dialog dialog = getDialog();
 		if (dialog != null) {
 			dialog.show();
 		}
-	}
-
-	public void show(String... keys) {
-		show();
 		for (String key : keys) {
 			if (key.equals(UPDATE_TRACK_ICON)) {
 				updateTrackIcon(app, trackAppearanceIcon);
@@ -300,6 +298,9 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 		AndroidUiHelper.setVisibility(View.GONE, segmentView.findViewById(R.id.list_item_divider));
 		WrapContentHeightViewPager pager = segmentView.findViewById(R.id.pager);
 		PagerSlidingTabStrip tabLayout = segmentView.findViewById(R.id.sliding_tabs);
+		tabLayout.setDividerWidth(AndroidUtils.dpToPx(app, 1));
+		tabLayout.setDividerColor(ContextCompat.getColor(app, nightMode ?
+				R.color.stroked_buttons_and_links_outline_dark : R.color.stroked_buttons_and_links_outline_light));
 		tabLayout.setOnTabReselectedListener(new PagerSlidingTabStrip.OnTabReselectedListener() {
 			@Override
 			public void onTabSelected(int position) {
@@ -314,6 +315,7 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 
 		graphsAdapter = new GPXItemPagerAdapter(app, GpxUiHelper.makeGpxDisplayItem(app,
 				displayHelper.getGpx()), displayHelper, nightMode, this, true);
+		graphsAdapter.setChartHMargin(getResources().getDimensionPixelSize(R.dimen.content_padding));
 
 		pager.setAdapter(graphsAdapter);
 		tabLayout.setViewPager(pager);
@@ -453,6 +455,21 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 		setItemBackground(context, nightMode, view, enabled);
 	}
 
+	public static void createItemActive(Context context, boolean nightMode, View view, ItemType type) {
+		view.setTag(type);
+		AppCompatImageView icon = view.findViewById(R.id.icon);
+		if (icon != null) {
+			setTintedIconActive(context, icon, nightMode, type);
+		}
+		TextView title = view.findViewById(R.id.button_text);
+		Integer titleId = type.getTitleId();
+		if (title != null && titleId != null) {
+			title.setText(titleId);
+			setTextColorActive(context, title, nightMode, type);
+		}
+		setItemBackgroundActive(context, nightMode, view);
+	}
+
 	public static void setItemBackground(Context context, boolean nightMode, View view, boolean enabled) {
 		if (view instanceof CardView) {
 			int colorId = enabled ? getActiveTransparentColorId(nightMode) : getInactiveButtonColorId(nightMode);
@@ -472,6 +489,12 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 		view.setBackgroundDrawable(background);
 	}
 
+	public static void setItemBackgroundActive(Context context, boolean nightMode, View view) {
+		if (view instanceof CardView) {
+			((CardView) view).setCardBackgroundColor(ContextCompat.getColor(context, getActiveTextColorId(nightMode)));
+		}
+	}
+
 	public enum ItemType {
 		SHOW_TRACK(R.string.shared_string_show_on_map, null),
 		APPEARANCE(null, null),
@@ -486,8 +509,10 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 		STOP(R.string.shared_string_control_stop, R.drawable.ic_action_rec_stop),
 		STOP_AND_DISCARD(R.string.track_recording_stop_without_saving, R.drawable.ic_action_rec_stop),
 		STOP_AND_SAVE(R.string.track_recording_save_and_stop, R.drawable.ic_action_save_to_file),
-		STOP_ONLINE(R.string.live_monitoring_stop, R.drawable.ic_world_globe_dark),
+		START_ONLINE(R.string.live_monitoring_start, R.drawable.ic_world_globe_dark),
+		STOP_ONLINE(R.string.live_monitoring_stop, R.drawable.ic_action_offline),
 		CANCEL(R.string.shared_string_cancel, R.drawable.ic_action_close),
+		CLOSE(R.string.shared_string_close, R.drawable.ic_action_close),
 		START_RECORDING(R.string.shared_string_control_start, R.drawable.ic_action_direction_movement),
 		SETTINGS(R.string.shared_string_settings, R.drawable.ic_action_settings),
 		FINISH(R.string.shared_string_finish, R.drawable.ic_action_point_destination),
@@ -497,7 +522,7 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 		private final Integer titleId;
 		@DrawableRes
 		private final Integer iconId;
-		private static final List<ItemType> negative = Arrays.asList(CLEAR_DATA, STOP_AND_DISCARD);
+		private static final List<ItemType> negative = Arrays.asList(CLEAR_DATA, STOP, STOP_AND_DISCARD);
 
 		ItemType(@Nullable @StringRes Integer titleId, @Nullable @DrawableRes Integer iconId) {
 			this.titleId = titleId;
@@ -528,6 +553,12 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 		}
 	}
 
+	protected static void setTextColorActive(Context context, TextView tv, boolean nightMode, ItemType type) {
+		if (tv != null) {
+			tv.setTextColor(ContextCompat.getColor(context, getPressedColorId(nightMode)));
+		}
+	}
+
 	protected static void setTintedIcon(Context context, AppCompatImageView iv, boolean enabled, boolean nightMode, ItemType type) {
 		Integer iconId = type.getIconId();
 		if (iv != null && iconId != null) {
@@ -547,6 +578,17 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 				setPadding(container, container.getPaddingLeft(), container.getTop(),
 						context.getResources().getDimensionPixelSize(R.dimen.content_padding_half), container.getBottom());
 			}
+		}
+	}
+
+	protected static void setTintedIconActive(Context context, AppCompatImageView iv, boolean nightMode, ItemType type) {
+		Integer iconId = type.getIconId();
+		if (iv != null && iconId != null) {
+			Drawable icon = AppCompatResources.getDrawable(context, iconId);
+			if (icon != null) {
+				DrawableCompat.setTint(icon, ContextCompat.getColor(context, getPressedColorId(nightMode)));
+			}
+			iv.setImageDrawable(icon);
 		}
 	}
 
@@ -647,6 +689,36 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 	@DrawableRes
 	public static int getInactiveButtonBackgroundId(boolean nightMode) {
 		return nightMode ? R.drawable.btn_background_inactive_dark : R.drawable.btn_background_inactive_light;
+	}
+
+	@Override
+	protected void setupHeightAndBackground(final View mainView) {
+		final Activity activity = getActivity();
+		if (activity == null) {
+			return;
+		}
+		if (AndroidUiHelper.isOrientationPortrait(activity)) {
+			super.setupHeightAndBackground(mainView);
+			return;
+		}
+
+		mainView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+			@Override
+			public void onGlobalLayout() {
+				ViewTreeObserver obs = mainView.getViewTreeObserver();
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+					obs.removeOnGlobalLayoutListener(this);
+				} else {
+					obs.removeGlobalOnLayoutListener(this);
+				}
+				final View contentView = mainView.findViewById(R.id.scroll_view);
+				contentView.getLayoutParams().height = ViewGroup.LayoutParams.MATCH_PARENT;
+				contentView.requestLayout();
+				boolean showTopShadow = AndroidUtils.getScreenHeight(activity) - AndroidUtils.getStatusBarHeight(activity)
+						- mainView.getHeight() >= AndroidUtils.dpToPx(activity, 8);
+				drawTopShadow(showTopShadow);
+			}
+		});
 	}
 
 	@Override

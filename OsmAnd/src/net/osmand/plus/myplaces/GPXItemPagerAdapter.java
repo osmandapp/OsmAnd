@@ -24,6 +24,7 @@ import com.github.mikephil.charting.listener.ChartTouchListener.ChartGesture;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
+import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
@@ -82,6 +83,11 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	private boolean chartClicked;
 	private boolean nightMode;
 	private boolean onlyGraphs;
+	private int chartHMargin = 0;
+
+	public void setChartHMargin(int chartHMargin) {
+		this.chartHMargin = chartHMargin;
+	}
 
 	public GPXItemPagerAdapter(@NonNull OsmandApplication app,
 							   @NonNull GpxDisplayItem gpxItem,
@@ -201,6 +207,8 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		if (gpxFile != null && gpxItem != null) {
 			GPXTrackAnalysis analysis = gpxItem.analysis;
 			LineChart chart = view.findViewById(R.id.chart);
+			ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) chart.getLayoutParams();
+			AndroidUtils.setMargins(lp, chartHMargin, lp.topMargin, chartHMargin, lp.bottomMargin);
 			setupChart(view, chart);
 
 			switch (tabType) {
@@ -436,8 +444,8 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 			view.findViewById(R.id.list_divider).setVisibility(View.GONE);
 			view.findViewById(R.id.bottom_line_blocks).setVisibility(View.GONE);
 		}
-		updateJoinGapsInfo(view, position);
 		if (!onlyGraphs) {
+			updateJoinGapsInfo(view, position);
 			view.findViewById(R.id.analyze_on_map).setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {

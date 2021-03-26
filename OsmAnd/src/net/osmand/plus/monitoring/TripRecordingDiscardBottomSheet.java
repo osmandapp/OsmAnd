@@ -42,13 +42,13 @@ public class TripRecordingDiscardBottomSheet extends MenuBottomSheetDialogFragme
 		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
 		int verticalBig = getResources().getDimensionPixelSize(R.dimen.dialog_content_margin);
 		int verticalNormal = getResources().getDimensionPixelSize(R.dimen.content_padding);
-		final View buttonDiscard = createItem(inflater, ItemType.STOP_AND_DISCARD);
+		final View buttonDiscard = createItem(inflater, ItemType.STOP);
 		final View buttonCancel = createItem(inflater, ItemType.CANCEL);
 
 		items.add(new BottomSheetItemWithDescription.Builder()
 				.setDescription(getString(R.string.track_recording_description))
 				.setDescriptionColorId(getPrimaryTextColorId(nightMode))
-				.setTitle(app.getString(R.string.track_recording_title))
+				.setTitle(app.getString(R.string.track_recording_stop_without_saving))
 				.setLayoutId(R.layout.bottom_sheet_item_title_with_description)
 				.create());
 

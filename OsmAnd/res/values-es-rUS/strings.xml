@@ -4047,4 +4047,9 @@
     <string name="track_has_no_altitude">La traza no contiene datos de altitud.</string>
     <string name="track_has_no_speed">La traza no contiene datos de velocidad.</string>
     <string name="select_another_colorization">Elige otro tipo de color.</string>
+    <string name="trip_recording_logging_interval_info">El intervalo de registro define el período de tiempo en el que OsmAnd pedirá los datos de la ubicación actual.</string>
+    <string name="trip_recording_save_and_continue">Guardar y continuar</string>
+    <string name="lost_data_warning">Se perderán todos los datos no guardados.</string>
+    <string name="show_start_dialog">Mostrar el diálogo inicial</string>
+    <string name="trip_recording_show_start_dialog_setting">Si se desactiva, la grabación será iniciada al pulsar el widget o el elemento del menú, saltándose el diálogo de confirmación.</string>
 </resources>

@@ -4050,4 +4050,8 @@
     <string name="select_category_descr">Kategorie auswählen oder neue hinzufügen</string>
     <string name="rendering_attr_noNatureReserveBoundaries_description">Grenzen von Naturschutzgebieten, Schutzgebieten und Nationalparks ausblenden</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">Grenzen von Schutzgebieten</string>
+    <string name="trip_recording_save_and_continue">Speichern und fortfahren</string>
+    <string name="lost_data_warning">Alle nicht gespeicherten Daten gehen verloren.</string>
+    <string name="show_start_dialog">Startdialog anzeigen</string>
+    <string name="trip_recording_show_start_dialog_setting">Wenn deaktiviert, beginnt die Aufnahme direkt nach dem Tippen auf das Widget oder den Menüpunkt und überspringt den Bestätigungsdialog.</string>
 </resources>
