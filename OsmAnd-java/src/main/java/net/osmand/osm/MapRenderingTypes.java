@@ -717,7 +717,10 @@ public abstract class MapRenderingTypes {
 				return false;
 			return true;
 		}
-		
+
+		public Map<String, String> getRelationNames() {
+			return relationNames;
+		}
 		
 	}
 

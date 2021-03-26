@@ -154,7 +154,7 @@ public class BinaryMapDataObject {
 		this.id = id;
 	}
 	
-	protected void setTypes(int[] types) {
+	public void setTypes(int[] types) {
 		this.types = types;
 	}
 	
