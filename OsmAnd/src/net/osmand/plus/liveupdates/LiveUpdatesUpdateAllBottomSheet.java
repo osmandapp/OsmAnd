@@ -40,6 +40,9 @@ public class LiveUpdatesUpdateAllBottomSheet extends MenuBottomSheetDialogFragme
 	private OsmandApplication app;
 	private OsmandSettings settings;
 
+	private BaseBottomSheetItem itemTitle;
+	private BaseBottomSheetItem itemDescription;
+
 	private List<LocalIndexInfo> mapsList;
 	private LiveUpdateListener listener;
 
@@ -60,9 +63,6 @@ public class LiveUpdatesUpdateAllBottomSheet extends MenuBottomSheetDialogFragme
 			fragment.show(fragmentManager, TAG);
 		}
 	}
-
-	BaseBottomSheetItem itemTitle;
-	BaseBottomSheetItem itemDescription;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
