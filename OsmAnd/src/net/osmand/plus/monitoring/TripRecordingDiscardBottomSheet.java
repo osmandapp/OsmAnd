@@ -12,6 +12,7 @@ import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
+import net.osmand.plus.monitoring.TripRecordingBottomSheet.DismissTargetFragment;
 import net.osmand.plus.monitoring.TripRecordingBottomSheet.ItemType;
 
 import androidx.annotation.NonNull;
@@ -21,7 +22,7 @@ import androidx.fragment.app.FragmentManager;
 import static net.osmand.AndroidUtils.getPrimaryTextColorId;
 import static net.osmand.plus.monitoring.TripRecordingOptionsBottomSheet.ACTION_STOP_AND_DISMISS;
 
-public class TripRecordingDiscardBottomSheet extends MenuBottomSheetDialogFragment implements TripRecordingBottomSheet.DismissTargetFragment {
+public class TripRecordingDiscardBottomSheet extends MenuBottomSheetDialogFragment implements DismissTargetFragment {
 
 	public static final String TAG = TripRecordingDiscardBottomSheet.class.getSimpleName();
 
