@@ -60,7 +60,7 @@
 			android:groupIndicator="@null"
 			android:headerDividersEnabled="false"
 			android:orientation="vertical"
-			tools:context=".liveupdates.LiveUpdatesFragmentNew" />
+			tools:context=".liveupdates.LiveUpdatesFragment" />
 
 	</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

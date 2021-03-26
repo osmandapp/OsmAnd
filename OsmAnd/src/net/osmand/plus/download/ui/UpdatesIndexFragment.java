@@ -38,8 +38,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.liveupdates.LiveUpdatesClearDialogFragment.RefreshLiveUpdates;
-import net.osmand.plus.liveupdates.LiveUpdatesFragmentNew;
+import net.osmand.plus.liveupdates.LiveUpdatesClearBottomSheet.RefreshLiveUpdates;
+import net.osmand.plus.liveupdates.LiveUpdatesFragment;
 import net.osmand.plus.liveupdates.LoadLiveMapsTask;
 import net.osmand.plus.liveupdates.LoadLiveMapsTask.LocalIndexInfoAdapter;
 import net.osmand.plus.chooseplan.ChoosePlanDialogFragment.ChoosePlanDialogType;
@@ -58,8 +58,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import static net.osmand.plus.liveupdates.LiveUpdatesFragmentNew.showUpdateDialog;
-import static net.osmand.plus.liveupdates.LiveUpdatesFragmentNew.updateCountEnabled;
+import static net.osmand.plus.liveupdates.LiveUpdatesFragment.showUpdateDialog;
+import static net.osmand.plus.liveupdates.LiveUpdatesFragment.updateCountEnabled;
 
 public class UpdatesIndexFragment extends OsmAndListFragment implements DownloadEvents, RefreshLiveUpdates {
 	private static final int RELOAD_ID = 5;
@@ -236,7 +236,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 			DownloadActivity activity = getMyActivity();
 			if (activity != null) {
 				if (!listAdapter.isShowOsmLivePurchaseBanner()) {
-					LiveUpdatesFragmentNew.showInstance(activity.getSupportFragmentManager(), this);
+					LiveUpdatesFragment.showInstance(activity.getSupportFragmentManager(), this);
 				}
 			}
 		} else {
@@ -397,7 +397,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 							@Override
 							public void onClick(View v) {
 								if (!listAdapter.isShowOsmLivePurchaseBanner()) {
-									showUpdateDialog(getActivity(), getMyApplication().getSettings(),
+									showUpdateDialog(getActivity(), getFragmentManager(),
 											listAdapter.mapsList, listAdapter.countEnabled, null);
 								}
 							}

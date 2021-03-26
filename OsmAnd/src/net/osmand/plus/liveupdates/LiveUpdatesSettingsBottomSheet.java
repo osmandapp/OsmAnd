@@ -36,7 +36,7 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.ShortDescriptionItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.liveupdates.LiveUpdatesClearDialogFragment.RefreshLiveUpdates;
+import net.osmand.plus.liveupdates.LiveUpdatesClearBottomSheet.RefreshLiveUpdates;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper.TimeOfDay;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper.UpdateFrequency;
 import net.osmand.plus.resources.IncrementalChangesManager;
@@ -68,10 +68,10 @@ import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFreq
 import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.getCustomButtonView;
 import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.updateCustomButtonView;
 
-public class LiveUpdatesSettingsDialogFragmentNew extends MenuBottomSheetDialogFragment implements RefreshLiveUpdates {
+public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragment implements RefreshLiveUpdates {
 
-	public static final String TAG = LiveUpdatesSettingsDialogFragmentNew.class.getSimpleName();
-	private static final Log LOG = PlatformUtil.getLog(LiveUpdatesSettingsDialogFragmentNew.class);
+	public static final String TAG = LiveUpdatesSettingsBottomSheet.class.getSimpleName();
+	private static final Log LOG = PlatformUtil.getLog(LiveUpdatesSettingsBottomSheet.class);
 	private static final String LOCAL_INDEX_FILE_NAME = "local_index_file_name";
 
 	private OsmandApplication app;
@@ -89,7 +89,7 @@ public class LiveUpdatesSettingsDialogFragmentNew extends MenuBottomSheetDialogF
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, Fragment target, String fileName) {
 		if (!fragmentManager.isStateSaved()) {
-			LiveUpdatesSettingsDialogFragmentNew fragment = new LiveUpdatesSettingsDialogFragmentNew();
+			LiveUpdatesSettingsBottomSheet fragment = new LiveUpdatesSettingsBottomSheet();
 			fragment.setTargetFragment(target, 0);
 			fragment.fileName = fileName;
 			fragment.show(fragmentManager, TAG);
@@ -292,9 +292,8 @@ public class LiveUpdatesSettingsDialogFragmentNew extends MenuBottomSheetDialogF
 							public void onClick(View v) {
 								if (getUpdatesSize() > 0) {
 									if (getFragmentManager() != null) {
-										LiveUpdatesClearDialogFragment
-												.showInstance(getFragmentManager(),
-														LiveUpdatesSettingsDialogFragmentNew.this, fileName);
+										LiveUpdatesClearBottomSheet.showInstance(getFragmentManager(),
+												LiveUpdatesSettingsBottomSheet.this, fileName);
 									}
 								}
 							}

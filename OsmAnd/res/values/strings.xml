@@ -12,6 +12,7 @@
 
 -->
 
+    <string name="live_update_all_maps">Update all maps added to \"OsmAnd Live\"?</string>
     <string name="release_4_0_beta">
     • OsmAnd Live updates moved to \"Downloads > Updates\"\n\n
     • Tracks now could be colorizing by altitude, speed, or slope.\n\n

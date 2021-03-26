@@ -201,7 +201,7 @@ public class PerformLiveUpdateAsyncTask
 	private void updateLatestAvailability(OsmandApplication app, @NonNull final String localIndexFileName) {
 		final OsmandSettings settings = app.getSettings();
 		AndroidNetworkUtils.sendRequestAsync(
-				app, LiveUpdatesFragmentNew.URL, null, "Requesting map updates info...", false, false, new OnRequestResultListener() {
+				app, LiveUpdatesFragment.URL, null, "Requesting map updates info...", false, false, new OnRequestResultListener() {
 					@Override
 					public void onResult(String result) {
 						if (!Algorithms.isEmpty(result)) {

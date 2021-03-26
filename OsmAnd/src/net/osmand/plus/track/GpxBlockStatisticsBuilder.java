@@ -43,7 +43,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import static net.osmand.plus.liveupdates.LiveUpdatesFragmentNew.getDefaultIconColorId;
+import static net.osmand.plus.liveupdates.LiveUpdatesFragment.getDefaultIconColorId;
 
 public class GpxBlockStatisticsBuilder {
 
