@@ -52,6 +52,7 @@ import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -381,7 +382,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 						}
 						AndroidUiHelper.setVisibility(View.GONE, view.findViewById(R.id.compound_button));
 						((ImageView) view.findViewById(R.id.icon)).setImageResource(R.drawable.ic_action_subscription_osmand_live);
-						TextView tvTitle = view.findViewById(R.id.title);
+						TextViewEx tvTitle = view.findViewById(R.id.title);
 						tvTitle.setText(R.string.download_live_updates);
 						AndroidUtils.setTextPrimaryColor(app, tvTitle, nightMode);
 						countView = view.findViewById(R.id.description);
