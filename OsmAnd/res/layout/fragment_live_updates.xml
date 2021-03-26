@@ -1,5 +1,4 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
@@ -10,38 +9,7 @@
 		android:id="@+id/app_bar"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:orientation="vertical">
-
-		<androidx.appcompat.widget.Toolbar
-			android:id="@+id/toolbar"
-			android:layout_width="match_parent"
-			android:layout_height="@dimen/dashboard_map_toolbar"
-			android:background="?attr/pstsTabBackground"
-			android:minHeight="@dimen/dashboard_map_toolbar"
-			android:theme="?attr/toolbar_theme"
-			app:contentInsetEnd="0dp"
-			app:contentInsetLeft="@dimen/settings_divider_margin_start"
-			app:contentInsetRight="0dp"
-			app:contentInsetStart="@dimen/settings_divider_margin_start">
-
-			<ImageButton
-				android:id="@+id/toolbar_action"
-				android:layout_width="@dimen/acceptable_touch_radius"
-				android:layout_height="@dimen/acceptable_touch_radius"
-				android:layout_gravity="end"
-				android:layout_marginStart="@dimen/list_item_button_padding"
-				android:layout_marginLeft="@dimen/list_item_button_padding"
-				android:layout_marginEnd="@dimen/list_item_button_padding"
-				android:layout_marginRight="@dimen/list_item_button_padding"
-				android:background="@null"
-				android:contentDescription="@string/shared_string_help"
-				tools:src="@drawable/ic_action_help" />
-
-		</androidx.appcompat.widget.Toolbar>
-
-		<include layout="@layout/preference_toolbar_switch" />
-
-	</com.google.android.material.appbar.AppBarLayout>
+		android:orientation="vertical" />
 
 	<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 		android:id="@+id/swipe_refresh"

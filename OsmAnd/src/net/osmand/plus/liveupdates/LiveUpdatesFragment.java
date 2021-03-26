@@ -5,7 +5,6 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -19,7 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ExpandableListView;
-import android.widget.ImageButton;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,6 +26,7 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
+import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
@@ -35,6 +35,8 @@ import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import com.google.android.material.appbar.AppBarLayout;
 
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.AndroidUtils;
@@ -136,32 +138,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_live_updates, container, false);
-
-		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-		toolbar.setTitle(R.string.osm_live);
-		int iconColorResId = nightMode ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light;
-		Drawable icBack = app.getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(app), iconColorResId);
-		DrawableCompat.setTint(icBack, ContextCompat.getColor(app, iconColorResId));
-		toolbar.setNavigationIcon(icBack);
-		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
-		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dismiss();
-			}
-		});
-		ImageButton iconHelp = toolbar.findViewById(R.id.toolbar_action);
-		Drawable helpDrawable = app.getUIUtilities().getIcon(R.drawable.ic_action_help_online, iconColorResId);
-		iconHelp.setImageDrawable(helpDrawable);
-		iconHelp.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				Activity activity = getActivity();
-				if (activity != null) {
-					WikipediaDialogFragment.showFullArticle(activity, Uri.parse(SUBSCRIPTION_URL), nightMode);
-				}
-			}
-		});
+		createToolbar((ViewGroup) view.findViewById(R.id.app_bar));
 
 		listView = (ExpandableListView) view.findViewById(android.R.id.list);
 		adapter = new LiveMapsAdapter();
@@ -200,9 +177,6 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 				swipeRefresh.setRefreshing(false);
 			}
 		});
-
-		toolbarSwitchContainer = view.findViewById(R.id.toolbar_switch_container);
-		updateToolbarSwitch(settings.IS_LIVE_UPDATES_ON.get());
 
 		View headerView = inflater.inflate(R.layout.list_item_import, listView, false);
 		View timeContainer = headerView.findViewById(R.id.item_import_container);
@@ -279,6 +253,43 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 		if (loadLiveMapsTask != null && loadLiveMapsTask.getStatus() == AsyncTask.Status.RUNNING) {
 			loadLiveMapsTask.cancel(false);
 		}
+	}
+
+	protected void createToolbar(ViewGroup appBar) {
+		AppBarLayout appBarLayout = (AppBarLayout) UiUtilities.getInflater(getActivity(), nightMode)
+				.inflate(R.layout.global_preferences_toolbar_with_switch, appBar);
+
+		Toolbar toolbar = (Toolbar) appBarLayout.findViewById(R.id.toolbar);
+		TextViewEx toolbarTitle = (TextViewEx) toolbar.findViewById(R.id.toolbar_title);
+		toolbarTitle.setText(R.string.osm_live);
+		int iconColorResId = nightMode ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light;
+		Drawable icBack = app.getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(app), iconColorResId);
+		DrawableCompat.setTint(icBack, ContextCompat.getColor(app, iconColorResId));
+
+		View closeButton = toolbar.findViewById(R.id.close_button);
+		closeButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				dismiss();
+			}
+		});
+
+		FrameLayout iconHelpContainer = toolbar.findViewById(R.id.action_button);
+		AppCompatImageButton iconHelp = toolbar.findViewById(R.id.action_button_icon);
+		Drawable helpDrawable = app.getUIUtilities().getIcon(R.drawable.ic_action_help_online, iconColorResId);
+		iconHelp.setImageDrawable(helpDrawable);
+		iconHelpContainer.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Activity activity = getActivity();
+				if (activity != null) {
+					WikipediaDialogFragment.showFullArticle(activity, Uri.parse(SUBSCRIPTION_URL), nightMode);
+				}
+			}
+		});
+
+		toolbarSwitchContainer = appBarLayout.findViewById(R.id.toolbar_switch_container);
+		updateToolbarSwitch(settings.IS_LIVE_UPDATES_ON.get());
 	}
 
 	private void updateToolbarSwitch(final boolean isChecked) {
