@@ -4054,4 +4054,16 @@
     <string name="lost_data_warning">Alle nicht gespeicherten Daten gehen verloren.</string>
     <string name="show_start_dialog">Startdialog anzeigen</string>
     <string name="trip_recording_show_start_dialog_setting">Wenn deaktiviert, beginnt die Aufnahme direkt nach dem Tippen auf das Widget oder den Menüpunkt und überspringt den Bestätigungsdialog.</string>
+    <string name="customize_route_line">Routenlinie anpassen</string>
+    <string name="shared_string_route_line">Routenlinie</string>
+    <string name="specify_color_for_map_mode">Legen Sie die Farbe für den Kartenmodus fest: %1$s.</string>
+    <string name="release_4_0_beta">• OsmAnd Live-Updates nach \"Downloads &gt; Updates\" verschoben
+\n
+\n• Tracks können nun nach Höhe, Geschwindigkeit oder Steigung eingefärbt werden.
+\n
+\n• Option zugefügt, um das Aussehen der Navigationsrouten-Linie zu ändern
+\n
+\n• Dialog \"Streckenaufzeichnung\" aktualisiert
+\n
+\n</string>
 </resources>

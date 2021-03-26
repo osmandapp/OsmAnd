@@ -4119,4 +4119,17 @@
     <string name="lost_data_warning">سيتم فقدان كافة البيانات غير المحفوظة.</string>
     <string name="show_start_dialog">إظهار مربع حوار البدء</string>
     <string name="trip_recording_save_and_continue">حفظ ومتابعة</string>
+    <string name="customize_route_line">تخصيص خط المسار</string>
+    <string name="shared_string_route_line">خط المسار</string>
+    <string name="route_line_use_map_style_appearance">سيستخدم خط الطريق %1$s المحدد في نمط الخريطة المحدد: %2$s.</string>
+    <string name="specify_color_for_map_mode">حدد لونًا لوضع الخريطة: %1$s.</string>
+    <string name="release_4_0_beta">• تم نقل تحديثات OsmAnd Live إلى \"التنزيلات&gt; التحديثات\"
+\n
+\n • يمكن تلوين المسارات الآن حسب الارتفاع، السرعة أو المنحدر.
+\n
+\n • خيار مضاف لتغيير مظهر خط مسار الملاحة
+\n
+\n • تحديث مربع حوار \"تسجيل الرحلة\"
+\n
+\n</string>
 </resources>

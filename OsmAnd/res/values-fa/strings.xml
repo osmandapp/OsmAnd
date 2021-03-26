@@ -594,8 +594,8 @@
     <string name="osm_settings">ویرایش OpenStreetMap</string>
     <string name="save_current_track_descr">رد جاری را همین حالا در قالب فایل GPX ذخیره کن.</string>
     <string name="save_current_track">ذخیرهٔ رد جاری</string>
-    <string name="save_track_interval">بازهٔ زمانی ثبت هنگام ناوبری</string>
-    <string name="save_track_interval_descr">مشخص کنید برای ضبط رد در هنگام ناوبری، فاصلهٔ زمانی ردنگاری چقدر باشد</string>
+    <string name="save_track_interval">تناوب ردنگاری هنگام ناوبری</string>
+    <string name="save_track_interval_descr">مشخص کنید برای ضبط رد در هنگام ناوبری، تناوب ردنگاری چقدر باشد</string>
     <string name="save_track_to_gpx_descrp">هنگام ناوبری، یک رد GPX به‌صورت خودکار ضبط و در پوشهٔ ردها (tracks) ذخیره می‌شود.</string>
     <string name="osm_settings_descr">تنظیمات لازم برای ارتباط با (OpenStreetMap.org (OSM را مشخص کنید.</string>
     <string name="data_settings_descr">زبان را مشخص و داده را دانلود/دوباره بار کنید.</string>
@@ -615,7 +615,7 @@
     <string name="map_widget_lock_screen">قفل</string>
     <string name="bg_service_screen_lock">قفل</string>
     <string name="bg_service_screen_unlock">قفل‌گشایی</string>
-    <string name="bg_service_interval">تنظیم فواصل بیدارباش:</string>
+    <string name="bg_service_interval">تنظیم تناوب بیدارباش:</string>
     <string name="select_animate_speedup">سرعت شبیه‌سازی مسیر:</string>
     <string name="native_app_allocated_memory_descr">کل حافظهٔ native اختصاص‌یافته به برنامه %1$s مگابایت (دالویک %2$s مگابایت، بقیه %3$s مگابایت).
 \nحافظهٔ proportional ‏%4$s مگابایت (حد اندروید %5$s مگابایت، دالویک %6$s مگابایت).</string>
@@ -835,8 +835,8 @@
     <string name="sd_mounted_ro">کارت حافظه در حالت فقط‌خواندنی است. 
 \nفقط می‌توانید نقشه‌هایی را ببینید که قبلاً دریافت شده‌اند و نمی‌توانید مناطق جدیدی را دانلود کنید.</string>
     <string name="process_navigation_service">خدمات ناوبری OsmAnd</string>
-    <string name="background_service_int_descr">بازهٔ بیدارباش سرویس پس‌زمینه:</string>
-    <string name="background_service_int">بازهٔ زمانی بیدارباش GPS</string>
+    <string name="background_service_int_descr">تناوب بیدارباش برای سرویس پس‌زمینه:</string>
+    <string name="background_service_int">تناوب بیدارباش GPS</string>
     <string name="background_service_provider_descr">شیوهٔ موقعیت‌یابی سرویس پس‌زمینه:</string>
     <string name="background_service_provider">ارائه‌دهندهٔ موقعیت</string>
     <string name="background_router_service_descr">زمانی که صفحه خاموش است موقعیت شما را ردگیری می‌کند.</string>
@@ -913,8 +913,8 @@
     <string name="use_fluorescent_overlays">لایه‌های شب‌نما</string>
     <string name="local_openstreetmap_settings">یادداشت‌ها یا POIهای OSMای ذخیره‌شده روی دستگاه</string>
     <string name="local_openstreetmap_settings_descr">مشاهده و مدیریت POIها یا یادداشت‌های OSMای که روی دستگاه شما قرار دارند.</string>
-    <string name="live_monitoring_interval_descr">بازهٔ زمانی ردیابی آنلاین را مشخص کنید.</string>
-    <string name="live_monitoring_interval">بازهٔ زمانی ردیابی آنلاین</string>
+    <string name="live_monitoring_interval_descr">تناوب ردیابی آنلاین را مشخص کنید.</string>
+    <string name="live_monitoring_interval">تناوب ردیابی آنلاین</string>
     <string name="osmand_long_description_1000_chars">برنامهٔ OsmAnd (مخفف OSM Automated Navigation Directions به‌معنی راهنمای خودکار ناوبری بر پایهٔ OSM) یک نرم‌افزار ناوبری متن‌باز است که به گسترهٔ وسیعی از دادهٔ جهانی OSM دسترسی دارد. 
 \n 
 \nتمام دادهٔ نقشه (بُرداری یا کاشی) را می‌توانید برای استفادهٔ آفلاین روی کارت حافظه ذخیره کنید. 
@@ -1198,7 +1198,7 @@
     <string name="share_route_as_gpx">هم‌رسانی مسیر در قالب فایل GPX</string>
     <string name="share_route_subject">مسیر از طریق OsmAnd هم‌رسانی شد</string>
     <string name="keep_informing_never">دستی (روی فِلِش بزنید)</string>
-    <string name="keep_informing_descr">فرمان‌های ناوبری در بازه‌های منظم بازگو می‌شود.</string>
+    <string name="keep_informing_descr">فرمان‌های ناوبری در فاصله‌های زمانی منظم بازگو می‌شود.</string>
     <string name="keep_informing">تکرار فرمان‌های ناوبری</string>
     <string name="navigation_intent_invalid">قالب نامعتبر: %s</string>
     <string name="arrival_distance">اعلام رسیدن</string>
@@ -1258,7 +1258,7 @@
     <string name="keep_navigation_service">نگه‌داشتن</string>
     <string name="stop_navigation_service">توقف</string>
     <string name="enable_sleep_mode">فعال‌کردن حالت پس‌زمینهٔ GPS</string>
-    <string name="gps_wake_up_timer">بازهٔ بیدارباش GPS</string>
+    <string name="gps_wake_up_timer">تناوب بیدارباش GPS</string>
     <string name="sleep_mode_stop_dialog">حالت پس‌زمینهٔ GPS متوقف شود؟</string>
     <string name="map_preferred_locale">زبان ارجح برای نقشه</string>
     <string name="lang_sw">سواحیلی</string>
@@ -1306,9 +1306,9 @@
     <string name="rendering_attr_showSurfaceGrade_name">کیفیت راه</string>
     <string name="rendering_attr_showSurfaces_name">سطح راه</string>
     <string name="rendering_attr_showCycleRoutes_name">مسیرهای دوچرخه</string>
-    <string name="save_global_track_interval">بازهٔ زمانی ثبت (سراسری)</string>
+    <string name="save_global_track_interval">تناوب ردنگاری عمومی</string>
     <string name="save_track_to_gpx_globally_descr">می‌توانید با استفاده از ابزارک ضبط GPX روی نقشه، ردنگاری در فایل GPX را خاموش یا روشن کنید.</string>
-    <string name="save_track_interval_globally">بازهٔ زمانی ثبت</string>
+    <string name="save_track_interval_globally">تناوب ردنگاری</string>
     <string name="record_plugin_description">این افزونه یک ابزارک ضبط GPX روی نقشه اضافه می‌کند و با انتخاب آن می‌توانید رد خود را ضبط و در قالب فایل GPX ذخیره کنید. همچنین این امکان را فراهم می‌کند که هنگام مسیریابی، به‌طور خودکار این کار برای شما انجام شود. 
 \n 
 \nردهای ضبط‌شده را با دوستان یا برای استفاده در مشارکت‌های OSM هم‌رسانی کنید. 
@@ -1689,7 +1689,7 @@
     <string name="access_smart_autoannounce">اعلام هوشمند خودکار</string>
     <string name="access_smart_autoannounce_descr">فقط اگر جهتم از سمت نقطهٔ مقصد منحرف شد، اعلام شود.</string>
     <string name="access_autoannounce_period">بازهٔ زمانی اعلام خودکار</string>
-    <string name="access_autoannounce_period_descr">بازهٔ زمانی کمینی بین اعلام پیام‌ها.</string>
+    <string name="access_autoannounce_period_descr">تناوب زمانی کمینی بین اعلام پیام‌ها.</string>
     <string name="access_default_color">رنگ پیش‌فرض</string>
     <string name="access_category_choice">انتخاب دسته</string>
     <string name="access_hint_enter_name">نام</string>
@@ -3374,7 +3374,7 @@
     <string name="monitoring_min_distance_descr_side_effect">اثرات جانبی: بازه‌های توقف یا اصلاً ضبط نخواهند شد یا فقط یک نقطه به‌ازای هر کدام ضبط می‌شود. جابه‌جایی‌های واقعیِ کوچک احتمالاً حذف می‌شود. فایل نهایی اطلاعات کمتری برای پس‌پردازش خواهد داشت و همچنین با حذف نقاط زائد در هنگام ضبط و حفظ بالقوهٔ نقاط غیرواقعی (ناشی از گیرایی ضعیف یا اثرات چیپست GPS) اطلاعات آماریِ فایل بدتر می‌شود.</string>
     <string name="monitoring_min_distance_descr_recommendation">توصیه: اگر به جزئیات بیشتر از ۵ متر نیاز ندارید و در زمان توقف نمی‌خواهید داده ضبط کنید، تنظیم حدود ۵ متر احتمالاً خوب جواب بدهد.</string>
     <string name="live_monitoring_time_buffer">مدت حافظهٔ تأخیری</string>
-    <string name="live_monitoring_tracking_interval">بازهٔ زمانی ردیابی</string>
+    <string name="live_monitoring_tracking_interval">تناوب ردیابی</string>
     <string name="live_monitoring_adress">نشانی وب</string>
     <string name="live_monitoring_adress_descr">نشانی اینترنتی را با این پارامترها تعریف کنید: 
 \nlat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
@@ -3813,7 +3813,7 @@
     <string name="number_of_gpx_files_selected_pattern">%s فایل رد انتخاب شده است</string>
     <string name="monitoring_control_start">ضبط</string>
     <string name="disable_recording_once_app_killed_descrp">هنگامی که برنامه را از طریق برنامه‌های اخیر ببندید ضبط رد به‌طور موقت می‌ایستد. (نشانگر اجرای پس‌زمینه از نوار اعلان حذف می‌شود.)</string>
-    <string name="save_global_track_interval_descr">بازهٔ زمانی برای ضبط رد را انتخاب کنید (که از طریق ابزارک ضبط سفر روی نقشه روشن می‌شود).</string>
+    <string name="save_global_track_interval_descr">تناوب ردنگاری عمومی را انتخاب کنید (که از طریق ابزارک ضبط سفر روی نقشه روشن می‌شود).</string>
     <string name="gpx_monitoring_stop">نگه‌داشتن ضبط سفر</string>
     <string name="gpx_monitoring_start">ازسرگیری ضبط سفر</string>
     <string name="app_mode_inline_skates">اسکیت این‌لاین</string>
@@ -4061,7 +4061,7 @@
     <string name="announcement_time_prepare">آمادگی</string>
     <string name="announcement_time_off_route">خروج از مسیر</string>
     <string name="announcement_time_arrive">رسیدن به مقصد</string>
-    <string name="announcement_time_intervals">بازه‌های زمانی و مسافتی</string>
+    <string name="announcement_time_intervals">تناوب زمانی و مسافتی</string>
     <string name="announcement_time_descr">زمان اعلام پیام‌های گفتاری به نوع پیام، سرعت ناوبری جاری و سرعت ناوبری پیش‌فرض بستگی دارد.</string>
     <string name="announcement_time_title">زمان اعلام پیام</string>
     <string name="restart">شروع دوباره</string>
@@ -4073,4 +4073,18 @@
     <string name="show_start_dialog">نمایش کادر آغاز</string>
     <string name="trip_recording_show_start_dialog_setting">اگر غیرفعال باشد، بلافاصله پس از لمس ابزارک یا آیتم منو، ضبط آغاز می‌شود و کادر تأیید ظاهر نمی‌شود.</string>
     <string name="lost_data_warning">تمام دادهٔ ذخیره‌نشده از دست خواهد رفت.</string>
+    <string name="route_line_use_map_style_appearance">برای خط مسیر از %1$s استفاده می‌شود که در سبک انتخاب‌شده برای نقشه (%2$s) مشخص شده است.</string>
+    <string name="specify_color_for_map_mode">رنگ حالت نقشهٔ %1$s را مشخص کنید.</string>
+    <string name="trip_recording_logging_interval_info">تناوب ردنگاری مشخص می‌کند OsmAnd هر چند وقت یک بار دادهٔ مربوط به موقعیت جاری را درخواست کند.</string>
+    <string name="customize_route_line">سفارشی‌سازی خط مسیر</string>
+    <string name="shared_string_route_line">خط مسیر</string>
+    <string name="release_4_0_beta">• روزآمدسازه‌های OsmAnd Live منتقل شد به Downloads ‏&gt; Updates
+\n
+\n• اکنون می‌توانید رنگ‌بندی ردها را بر اساس ارتفاع، سرعت یا شیب انجام دهید.
+\n
+\n• گزینه‌ای برای تغییر ظاهر خط مسیر هنگام ناوبری اضافه شد.
+\n
+\n• کادر «ضبط سفر» روزآمد شد.
+\n
+\n</string>
 </resources>

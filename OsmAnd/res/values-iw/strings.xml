@@ -4053,4 +4053,16 @@
     <string name="lost_data_warning">כל הנתונים שלא נשמרו יאבדו.</string>
     <string name="show_start_dialog">להציג חלונית פתיחה</string>
     <string name="trip_recording_show_start_dialog_setting">אם האפשרות מושבתת, ההקלטה תתחיל מיד לאחר הנגיעה בווידג׳ט או בפריט שבתפריט תוך דילוג על חלונית האישור.</string>
+    <string name="customize_route_line">להתאים קו מסלול אישית</string>
+    <string name="shared_string_route_line">קו מסלול</string>
+    <string name="specify_color_for_map_mode">לציין צבע למצב מפה: %1$s.</string>
+    <string name="release_4_0_beta">• העדכונים החיים של OsmAnd הועברו אל „הורדות &gt; עדכונים”
+\n
+\n • אפשר לצבוע מסלולים לפי גובה, מהירות או שיפוע.
+\n
+\n • נוספה אפשרות לשנות את מראה קו מסלול הניווט
+\n
+\n • החלונית „הקלטת מסלול” עודכנה
+\n
+\n</string>
 </resources>

@@ -4040,4 +4040,17 @@
     <string name="lost_data_warning">Toutes les données non enregistrées seront perdues.</string>
     <string name="show_start_dialog">Afficher la boîte de dialogue de démarrage</string>
     <string name="trip_recording_show_start_dialog_setting">Si désactivé, l\'enregistrement débutera dès appui sur le gadget ou dans le menu (sans demande de confirmation).</string>
+    <string name="release_4_0_beta">- Les mises à jour d\'OsmAnd Live ont été déplacées vers \"Téléchargements &gt; Mises à jour\"
+\n
+\n - Les traces peuvent maintenant être colorées par altitude, vitesse ou pente.
+\n
+\n - Ajout d\'une option pour modifier l\'apparence de la ligne d\'itinéraire en navigation
+\n
+\n - Mise à jour de la fenêtre \"Enregistrement du trajet\".
+\n
+\n</string>
+    <string name="route_line_use_map_style_appearance">La ligne d\'itinéraire utilisera le %1$s pour le style de carte : %2$s.</string>
+    <string name="customize_route_line">Personnaliser la ligne d\'itinéraire</string>
+    <string name="shared_string_route_line">Ligne d\'itinéraire</string>
+    <string name="specify_color_for_map_mode">Définissez une couleur pour le mode de carte : %1$s.</string>
 </resources>
