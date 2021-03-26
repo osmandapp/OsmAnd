@@ -35,6 +35,7 @@ import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenTyp
 
 import static net.osmand.plus.monitoring.OsmandMonitoringPlugin.MINUTES;
 import static net.osmand.plus.monitoring.OsmandMonitoringPlugin.SECONDS;
+import static net.osmand.plus.monitoring.TripRecordingBottomSheet.createItemActive;
 import static net.osmand.plus.monitoring.TripRecordingBottomSheet.createItem;
 import static net.osmand.plus.monitoring.TripRecordingBottomSheet.createShowTrackItem;
 import static net.osmand.plus.monitoring.TripRecordingBottomSheet.updateTrackIcon;
@@ -123,7 +124,7 @@ public class TripRecordingStartingBottomSheet extends MenuBottomSheetDialogFragm
 		});
 
 		CardView cardCenter = itemView.findViewById(R.id.button_center);
-		createItem(app, nightMode, cardCenter, ItemType.START_RECORDING, true, null);
+		createItemActive(app, nightMode, cardCenter, ItemType.START_RECORDING);
 		cardCenter.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

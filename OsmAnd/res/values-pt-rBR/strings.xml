@@ -4042,4 +4042,20 @@
     <string name="segments_count">Segmento %1$d</string>
     <string name="trip_recording_save_and_continue">Salvar e continuar</string>
     <string name="lost_data_warning">Todos os dados não salvos serão perdidos.</string>
+    <string name="trip_recording_logging_interval_info">O intervalo de registro define o período de tempo no qual OsmAnd solicitará os dados de posição de localização atual.</string>
+    <string name="show_start_dialog">Mostrar caixa de diálogo inicial</string>
+    <string name="trip_recording_show_start_dialog_setting">Se desativado, a gravação começará logo após tocar no widget ou item de menu, pulando a caixa de diálogo de confirmação.</string>
+    <string name="customize_route_line">Personalizar linha de rota</string>
+    <string name="shared_string_route_line">Linha de rota</string>
+    <string name="route_line_use_map_style_appearance">A linha de rota seria usada %1$s especificado no estilo de mapa selecionado: %2$s.</string>
+    <string name="specify_color_for_map_mode">Especifique a cor para o modo de mapa: %1$s.</string>
+    <string name="release_4_0_beta">"• As atualizações do OsmAnd Live foram movidas para \"Downloads &gt; Atualizações\"
+\n
+\n • As trilhas agora podem ser coloridas por altitude, velocidade ou inclinação.
+\n
+\n  • Adicionada opção para alterar a aparência da linha da rota de navegação
+\n
+\n  • Caixa de diálogo \"Gravação de viagem\" atualizada
+\n
+\n"</string>
 </resources>

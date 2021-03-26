@@ -3082,7 +3082,7 @@ POIの更新は利用できません</string>
     <string name="quick_action_need_to_add_item_to_list">『クイックアクション』のリストに最低ひとつは項目を設定する必要があります</string>
     <string name="routing_attr_piste_type_downhill_name">アルペン/ダウンヒルスキー</string>
     <string name="routing_attr_piste_type_downhill_description">アルペンスキーまたはダウンヒルスキーに用の斜面(ゲレンデ)やスキーリフトへの道</string>
-    <string name="routing_attr_piste_type_nordic_name">クロスカントリー/ノルディックスキー</string>
+    <string name="routing_attr_piste_type_nordic_name">クロスカントリースキーとノルディックスキー</string>
     <string name="routing_attr_piste_type_nordic_description">ノルディックスキーやクロスカントリースキー用コースやそれらに用いられる小道などです。</string>
     <string name="routing_attr_piste_type_skitour_name">スキーツーリング</string>
     <string name="routing_attr_piste_type_skitour_description">スキーツーリング用ルートです。</string>
@@ -3354,9 +3354,9 @@ POIの更新は利用できません</string>
     <string name="route_recalculation">ルート再計算</string>
     <string name="accessibility_announce">案内</string>
     <string name="login_and_pass">ユーザー名とパスワード</string>
-    <string name="plugin_global_prefs_info">これらの設定はアプリ全般に関するもので、すべてのプロファイルに適用されます</string>
+    <string name="plugin_global_prefs_info">これらのプラグイン設定はアプリ全般に関するもので、すべてのプロファイルに適用されます</string>
     <string name="osm_editing">OSM編集</string>
-    <string name="osm_edits_view_descr">まだアップロードしていない編集やOSMバグを%1$sで表示できます。アップロードされた後にはOsmAndに表示されません。</string>
+    <string name="osm_edits_view_descr">まだアップロードしていない編集やOSMバグを%1$sで表示できます。アップロードされた変更部分は表示されなくなります。</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">ナビゲーションまたは移動中に表示されるアイコンです。</string>
     <string name="select_map_icon_descr">静止時に表示されるアイコンです。</string>
@@ -3799,8 +3799,8 @@ POIの更新は利用できません</string>
     <string name="sort_last_modified">最終更新日</string>
     <string name="sort_name_descending">名称: 降順(Z-A)</string>
     <string name="sort_name_ascending">名称: 昇順(A-Z)</string>
-    <string name="use_native_pt_desc">Java(セーフモード)での公共交通機関ルーティング計算に切り替えます</string>
-    <string name="perform_oauth_authorization_description">OsmEdit機能を利用するには、OAuthでのログインが必要です。</string>
+    <string name="use_native_pt_desc">Java(セーフモード)での公共交通機関ルート計算に切り替えます</string>
+    <string name="perform_oauth_authorization_description">OsmEdit機能を利用するには、OAuth方式でのログインが必要です。</string>
     <string name="perform_oauth_authorization">OAuthでログイン</string>
     <string name="clear_osm_token">OpenStreetMapOAuthトークンを消去する</string>
     <string name="osm_edit_logout_success">ログアウトしました</string>
@@ -3832,20 +3832,20 @@ POIの更新は利用できません</string>
     <string name="use_login_password">ユーザー名とパスワードを使用する</string>
     <string name="user_login">ログイン</string>
     <string name="manage_subscription">サブスクリプションの管理</string>
-    <string name="subscription_payment_issue_title">サブスクリプションに際し問題が発生しています。ボタンをタップしてGooglePlayサブスクリプション設定に移動し、お支払い方法を確認してください。</string>
+    <string name="subscription_payment_issue_title">ボタンをタップしてGoogle Playで支払い方法を設定し、サブスクリプションを修正します。</string>
     <string name="subscription_expired_title">OsmAndLiveサブスクリプションの有効期限が切れました</string>
     <string name="subscription_paused_title">OsmAndLiveサブスクリプションが一時停止されました</string>
     <string name="subscription_on_hold_title">OsmAndLiveサブスクリプションは保留中です</string>
     <string name="markers_history">マーカーの履歴</string>
     <string name="send_files_to_openstreetmap">GPXファイルをOpenStreetMapに送信</string>
     <string name="enter_text_separated">タグはカンマで区切って入力してください。</string>
-    <string name="gpx_upload_public_visibility_descr">パブリック状態は、経路がGPS経路およびGPS経路リストに公開を目的として表示されることを示唆しています。 APIを介して提供されるデータは、経路ページを参照していません。経路ポイントのタイムスタンプは、パブリックGPS APIからは入手できず、各地点は時系列で並べられることはありません。ただし他のユーザーは、公開経路リストとその中のタイムスタンプから生の経路データをダウンロードすることができます。</string>
-    <string name="gpx_upload_identifiable_visibility_descr">識別可能状態は、経路がGPS経路およびパブリックGPS経路リストに表示されることを示唆しています。他のユーザーは現在の経路をダウンロードして、ユーザー名とリンクできます。 trackpoints APIを介して配信されるデータは、元の経路追跡ページを参照します。経路ポイントのタイムスタンプは、パブリックGPSAPIを介して入手できます。</string>
-    <string name="gpx_upload_private_visibility_descr">プライベート状態は、経路がパブリックリストに表示されないことを示唆しています。経路ポイントは、タイムスタンプなしでパブリックGPS APIを介して引き続き利用できますが、時系列で並べられることはありません。</string>
-    <string name="gpx_upload_trackable_visibility_descr">追跡可能状態にある場合は経路が公開リストに表示されないことを示唆していますが、経路ポイントは自体はタイムスタンプ付きの公開GPSAPIを介して引き続き利用できます。他のユーザーからはあなたに直接関連付けることはできず、自身の処理済み経路ポイントのみをダウンロードできます。</string>
+    <string name="gpx_upload_public_visibility_descr">\"公開 \"状態は、追跡機能にてユーザーのGPS追跡、公開GPS追跡リスト、および生データのタイムスタンプ付き公開追跡リストに公開されることを意味します。APIを介して提供されるデータはユーザーの追跡ページを参照しません。追跡ポイントのタイムスタンプはパブリックGPS APIでは利用できず、また追跡ポイントは時系列に並んでいません。</string>
+    <string name="gpx_upload_identifiable_visibility_descr">\"識別可能\"状態は、経路がGPS経路およびパブリックGPS経路リストに表示されることを示唆しています。他のユーザーは現在の経路をダウンロードして、ユーザー名とリンクできます。経路ポイント APIを介して配信されるデータは、元の経路追跡ページを参照します。経路ポイントのタイムスタンプは、公開されているGPS APIを通じて入手できます。</string>
+    <string name="gpx_upload_private_visibility_descr">\"プライベート\"状態は、経路が公開リストに表示されないことを示唆しています。経路ポイントはタイムスタンプなしでパブリックGPS APIを介して引き続き利用できますが、時系列で並べられることはありません。</string>
+    <string name="gpx_upload_trackable_visibility_descr">\"追跡可能\"状態は、経路が公開リストに表示されることはありませんが、公開されているGPS APIからのダウンロードを通じて、タイムスタンプ付きの経路ポイント(個人と直接関連付けることはできません)を処理出来ることを意味します。</string>
     <string name="login_account">アカウント</string>
-    <string name="message_graph_will_be_available_after_recalculation">ルートが再計算されるのを待ちます。
-\nグラフは再計算後に利用できるようになります。</string>
+    <string name="message_graph_will_be_available_after_recalculation">しばらくお待ち下さい。
+\nグラフはルートが再計算された後に利用できるようになります。</string>
     <string name="use_dev_url_descr">OSM通知/ POI / GPXのアップロードをテストする場合、openstreetmap.orgではなくdev.openstreetmap.orgを使用するよう切り替えます。</string>
     <string name="use_dev_url">dev.openstreetmap.orgを使用</string>
     <string name="announcement_time_prepare">次々回案内(中距離)</string>
@@ -3953,4 +3953,103 @@ POIの更新は利用できません</string>
     <string name="trip_recording_logging_interval_info">ログ記録間隔は、OsmAndが現在の位置データを要求する期間を設定します。</string>
     <string name="trip_recording_save_and_continue">保存して続行</string>
     <string name="lost_data_warning">保存されていないデータはすべて失われます。</string>
+    <string name="osm_edit_close_note">OSMメモを閉じる</string>
+    <string name="osm_edit_comment_note">OSMメモへのコメント</string>
+    <string name="osm_login_descr">安全なOAuth方式を使用してログインするか、アプリから直接ログインする方法を選べます。</string>
+    <string name="shared_string_add_photo">写真の追加</string>
+    <string name="register_on_openplacereviews">OpenPlaceReviews.orgに登録</string>
+    <string name="register_on_openplacereviews_desc">写真はOpenPlaceReviews.orgオープンデータプロジェクトを介して提供されています。そのため写真をアップロードするためには前述のウェブサイトにログインする必要があります。</string>
+    <string name="register_opr_create_new_account">新しいアカウントを作成</string>
+    <string name="register_opr_have_account">私はすでにアカウントを持っています</string>
+    <string name="shared_string_search_history">検索履歴</string>
+    <string name="app_mode_kayak">カヤック</string>
+    <string name="app_mode_motorboat">モーターボート</string>
+    <string name="cannot_upload_image">画像をアップロードできません。しばらくしてからもう一度お試しください</string>
+    <string name="select_picture">写真を選択</string>
+    <string name="shared_string_resources">リソース</string>
+    <string name="approximate_file_size">おおよそのファイルサイズ</string>
+    <string name="select_data_to_export">ファイルとしてエクスポートしたいデータを選択します。</string>
+    <string name="file_size_needed_for_import">インポートに必要</string>
+    <string name="export_not_enough_space_descr">お使いの端末には%1$sしか容量がありません。空き容量を確保するか、エクスポートするアイテムの選択を減らしてください。</string>
+    <string name="export_not_enough_space">十分な空き容量がありません</string>
+    <string name="select_groups_for_import">インポートするグループを選択します。</string>
+    <string name="select_items_for_import">インポートするアイテムを選択します。</string>
+    <string name="add_to_mapillary">Mapillaryに追加</string>
+    <string name="add_to_opr">OpenPlaceReviewsに追加</string>
+    <string name="add_photos_descr">OsmAndは、いくつかのソースからの写真を表示します:
+\nOpenPlaceReviewsはPOIの写真;
+\nMapillaryは投稿されたストリート画像;
+\nWeb / WikimediaはOpenStreetMapデータのPOIの写真を利用しています。</string>
+    <string name="plan_route_split_before">この前で分割</string>
+    <string name="plan_route_split_after">この後で分割</string>
+    <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
+    <string name="app_mode_light_aircraft">軽飛行機</string>
+    <string name="plan_route_join_segments">セグメントの結合</string>
+    <string name="plan_route_add_new_segment">新規セグメントの追加</string>
+    <string name="profile_type_osmand_string">OsmAndプロファイル</string>
+    <string name="profile_type_user_string">ユーザープロファイル</string>
+    <string name="release_3_9">• 設定、リソース、お気に入りを含むすべてのデータをエクスポートおよびインポートするオプションを追加
+\n
+\n• ルートの計画：ルートを含むトラックセグメントのグラフ、および複数のトラックセグメントを作成および編集する機能を追加
+\n
+\n• OpenStreetMapのOAuth認証方法を追加し、OSMダイアログのUIを改善
+\n
+\n• お気に入りのカスタムカラーのサポート、経由地点の追跡など
+\n
+\n</string>
+    <string name="reverse_all_points">すべての地点を逆転</string>
+    <string name="profile_by_default_description">アプリ起動時に適用されるプロファイルを選択します。</string>
+    <string name="shared_string_last_used">最後に利用</string>
+    <string name="routing_attr_prefer_hiking_routes_description">ハイキング向けのルートを選択します</string>
+    <string name="routing_attr_prefer_hiking_routes_name">ハイキングコースを優先</string>
+    <string name="routing_attr_allow_streams_description">小川と排水溝も水路とみなします</string>
+    <string name="routing_attr_allow_streams_name">小川と排水溝も許可</string>
+    <string name="routing_attr_allow_intermittent_name">常に水が流れているわけではない水路も許可</string>
+    <string name="routing_attr_allow_intermittent_description">常に水の流れがあるわけではない場所も水路として見なします</string>
+    <string name="add_online_routing_engine">オンラインルーティングエンジンの追加</string>
+    <string name="edit_online_routing_engine">オンラインルーティングエンジンの編集</string>
+    <string name="shared_string_subtype">サブタイプ</string>
+    <string name="shared_string_vehicle">車両</string>
+    <string name="shared_string_api_key">APIキー</string>
+    <string name="shared_string_server_url">サーバーURL</string>
+    <string name="shared_string_enter_param">パラメーターの入力</string>
+    <string name="keep_it_empty_if_not">APIキーがない場合は空白のままにします</string>
+    <string name="online_routing_example_hint">パラメータを含むURLは次のようになります:</string>
+    <string name="test_route_calculation">ルート計算のテスト</string>
+    <string name="routing_engine_vehicle_type_driving">ドライブ</string>
+    <string name="routing_engine_vehicle_type_foot">徒歩</string>
+    <string name="routing_engine_vehicle_type_bike">自転車</string>
+    <string name="routing_engine_vehicle_type_car">車</string>
+    <string name="copy_address">住所をコピー</string>
+    <string name="online_routing_engine">オンラインルーティングエンジン</string>
+    <string name="online_routing_engines">オンラインルーティングエンジン</string>
+    <string name="shared_string_folders">フォルダー</string>
+    <string name="select_folder_descr">フォルダーを選択、または新しいフォルダを追加します</string>
+    <string name="select_folder">フォルダーの選択</string>
+    <string name="shared_string_empty">空</string>
+    <string name="analyze_by_intervals">分割間隔を分析評価する</string>
+    <string name="upload_to_openstreetmap">OpenStreetMapにアップロード</string>
+    <string name="edit_track">経路の編集</string>
+    <string name="rename_track">経路名の変更</string>
+    <string name="change_folder">フォルダーの変更</string>
+    <string name="show_start_dialog">開始ダイアログを表示</string>
+    <string name="trip_recording_show_start_dialog_setting">無効にした場合、ウィジェットまたはメニュー項目をタップするとすぐに記録が始まり、確認のダイアログは表示されません。</string>
+    <string name="use_native_pt">ネイティブ公共交通機関モードの展開</string>
+    <string name="shared_string_graph">グラフ</string>
+    <string name="message_need_calculate_route_before_show_graph">%1$sデータは道路でのみ利用可能です。グラフを表示するには、\"地点間ルート\"を使用してルートを計算する必要があります。</string>
+    <string name="app_mode_gap">ギャップ</string>
+    <string name="voice_prompts_timetable">音声アナウンスの間隔</string>
+    <string name="customize_route_line">ルートラインのカスタマイズ</string>
+    <string name="shared_string_route_line">ルートライン</string>
+    <string name="route_line_use_map_style_appearance">ルートライン指定は%1$s、選択したマップスタイルは:%2$s</string>
+    <string name="specify_color_for_map_mode">マップモードの色指定: %1$s</string>
+    <string name="release_4_0_beta">• OsmAndLiveのアップデートは\"ダウンロード\"＞\"更新\"に移動
+\n
+\n• 経路は、高度、速度、または傾斜によって色付けされる可能性あり
+\n
+\n• ナビゲーションルートラインの外観を変更するオプションが追加
+\n
+\n• \"旅程記録\"ダイアログを更新
+\n
+\n</string>
 </resources>

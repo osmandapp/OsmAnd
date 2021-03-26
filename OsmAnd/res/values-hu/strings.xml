@@ -4042,4 +4042,18 @@
     <string name="trip_recording_logging_interval_info">A naplózási intervallum az az időköz, amelyben az OsmAnd lekéri az aktuális helyadatokat.</string>
     <string name="trip_recording_save_and_continue">Mentés és folytatás</string>
     <string name="lost_data_warning">Minden nem mentett adat törlődni fog.</string>
+    <string name="show_start_dialog">Kezdő párbeszéd megjelenítése</string>
+    <string name="trip_recording_show_start_dialog_setting">Ha le van tiltva, akkor a felvétel közvetlenül a widget vagy a menüelem megérintése után elindul, kihagyva a megerősítő párbeszédpanelt.</string>
+    <string name="release_4_0_beta">• Az OsmAnd Live frissítések átköltöztek a „Letöltések&gt; Frissítések” helyre
+\n
+\n• A nyomvonalak színezhetők magasság, sebesség vagy lejtés szerint.
+\n
+\n• Módoítható a navigációs útvonal megjelenése
+\n
+\n• Frissült az „Utazás felvétele” párbeszédpanel
+\n
+\n</string>
+    <string name="shared_string_route_line">Útvonal</string>
+    <string name="customize_route_line">Útvonal testreszabása</string>
+    <string name="specify_color_for_map_mode">Szín meghatározása a következő térképmódhoz: %1$s.</string>
 </resources>

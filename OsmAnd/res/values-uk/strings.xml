@@ -4047,4 +4047,19 @@
     <string name="trip_recording_logging_interval_info">Інтервал журналювання встановлює проміжок часу, впродовж якого OsmAnd запитуватиме дані про поточне розташування.</string>
     <string name="trip_recording_save_and_continue">Зберегти й продовжити</string>
     <string name="lost_data_warning">Усі незбережені дані буде втрачено.</string>
+    <string name="show_start_dialog">Показати діалогове вікно запуску</string>
+    <string name="trip_recording_show_start_dialog_setting">Якщо вимкнено, запис почнеться відразу після торкання до віджета або пункту меню, пропускаючи діалогове вікно підтвердження.</string>
+    <string name="customize_route_line">Налаштувати лінію маршруту</string>
+    <string name="shared_string_route_line">Лінія маршруту</string>
+    <string name="route_line_use_map_style_appearance">Лінія маршруту застосовуватиме %1$s, вказаний у вибраному стилі мапи: %2$s.</string>
+    <string name="specify_color_for_map_mode">Вкажіть колір для режиму мапи: %1$s.</string>
+    <string name="release_4_0_beta">• Оновлення OsmAnd Live переміщено до «Завантаження &gt;Оновлення»
+\n
+\n• Тепер треки можуть бути забарвлені за висотою, швидкістю або нахилом.
+\n
+\n• Додано можливість зміни зовнішнього вигляду лінії навігації маршрутом
+\n
+\n• Оновлено діалогове вікно «Запис поїздки»
+\n
+\n</string>
 </resources>

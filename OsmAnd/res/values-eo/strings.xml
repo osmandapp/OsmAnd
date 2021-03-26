@@ -4048,4 +4048,19 @@
     <string name="trip_recording_logging_interval_info">Agordita periodo de intertempo de registrado, dum kiu OsmAnd petos la nunajn poziciajn datumojn.</string>
     <string name="lost_data_warning">Ĉiuj nekonservitaj datumoj perdiĝos.</string>
     <string name="trip_recording_save_and_continue">Konservi kaj daŭrigi</string>
+    <string name="trip_recording_show_start_dialog_setting">Se malŝaltita, registrado komenciĝos tuj post frapeto sur la fenestraĵo aŭ menuero, preterlasante la konfirman dialogon.</string>
+    <string name="show_start_dialog">Montri komencan dialogon</string>
+    <string name="specify_color_for_map_mode">Elektu koloron por map‑reĝimo: %1$s.</string>
+    <string name="customize_route_line">Alĝustigi linion de kurso</string>
+    <string name="shared_string_route_line">Linio de kurso</string>
+    <string name="route_line_use_map_style_appearance">Por la linio de kurso estos uzata %1$s difinita por la map‑stilo: %2$s.</string>
+    <string name="release_4_0_beta">• ĝisdatigoj OsmAnd Live movitaj al “elŝutoj” → “ĝisdatigoj”
+\n
+\n• eblo kolorigi spurojn laŭ altitudo, rapido aŭ dekliveco
+\n
+\n• eblo ŝanĝi aspekton de linio de la navigata kurso
+\n
+\n• plibonigita ekrano “registri spuron”
+\n
+\n</string>
 </resources>

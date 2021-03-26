@@ -4041,4 +4041,19 @@
     <string name="trip_recording_logging_interval_info">紀錄間隔設定的時段，OsmAnd 將會要求目前位置的位置資料。</string>
     <string name="trip_recording_save_and_continue">儲存並繼續</string>
     <string name="lost_data_warning">所有未儲存的資料都將會遺失。</string>
+    <string name="show_start_dialog">顯示開始對話框</string>
+    <string name="trip_recording_show_start_dialog_setting">若停用，則在點擊小工具或選單項目後將跳過確認對話框，立刻開始。</string>
+    <string name="customize_route_line">自訂路線</string>
+    <string name="shared_string_route_line">路線</string>
+    <string name="route_line_use_map_style_appearance">路線將會使用 %1$s 在選定的地圖樣式上指定的：%2$s。</string>
+    <string name="specify_color_for_map_mode">指定地圖模式的顏色：%1$s。</string>
+    <string name="release_4_0_beta">• OsmAnd Live 更新移動至「下載 &gt; 更新」
+\n
+\n • 軌跡現在可以使用海拔、速度或坡度來填色
+\n
+\n • 新增了變更導航路線外觀的選項
+\n
+\n • 更新「旅程錄製」對話框
+\n
+\n</string>
 </resources>

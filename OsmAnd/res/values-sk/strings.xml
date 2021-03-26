@@ -4040,4 +4040,22 @@
     <string name="routing_attr_short_way_description">Optimalizovaná kratšia trasa (úspora energie)</string>
     <string name="snap_to_road_descr">Ikona aktuálnej polohy bude prichytená k navigačnej trase</string>
     <string name="routing_attr_height_obstacles_description">Výpočet trasy sa môže vyhnúť strmým stúpaniam.</string>
+    <string name="trip_recording_logging_interval_info">Interval zaznamenávania nastaví ako často bude OsmAnd zisťovať aktuálnu polohu.</string>
+    <string name="trip_recording_save_and_continue">Uložiť a pokračovať</string>
+    <string name="lost_data_warning">Všetky neuložené údaje budú stratené.</string>
+    <string name="show_start_dialog">Zobraziť úvodné okno</string>
+    <string name="trip_recording_show_start_dialog_setting">Ak je vypnuté, záznam začne hneď po stlačení nástroja alebo položky v menu a preskočí okno nastavenia.</string>
+    <string name="release_4_0_beta">• Aktualizácie OsmAnd Live presunuté do \"Sťahovania &gt; Aktualizácie\"
+\n
+\n • Stopy je teraz možné vyfarbiť podľa nadmorskej výšky, rýchlosti alebo sklonu svahu.
+\n
+\n • Pridaná možnosť zmeny vzhľadu navigačnej trasy
+\n
+\n • Vylepšené okno \"Záznam výletu\"
+\n
+\n</string>
+    <string name="customize_route_line">Upraviť navigačnú trasu</string>
+    <string name="shared_string_route_line">Navigačná trasa</string>
+    <string name="route_line_use_map_style_appearance">Navigačná trasa použije %1$s, zadané na zvolenom štýle mapy: %2$s.</string>
+    <string name="specify_color_for_map_mode">Zadajte farbu pre režim mapy: %1$s.</string>
 </resources>

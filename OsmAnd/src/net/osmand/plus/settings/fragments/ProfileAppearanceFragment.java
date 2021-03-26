@@ -1019,21 +1019,33 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 	}
 
 	private RouteLineDrawInfo createRouteLineDrawInfo(@NonNull ApplicationMode appMode) {
-		int storedValue = settings.ROUTE_LINE_COLOR.getModeValue(appMode);
-		Integer color = storedValue != 0 ? storedValue : null;
+		Integer colorDay = getRouteLineColor(appMode, settings.ROUTE_LINE_COLOR_DAY);
+		Integer colorNight = getRouteLineColor(appMode, settings.ROUTE_LINE_COLOR_NIGHT);
 		String widthKey = settings.ROUTE_LINE_WIDTH.getModeValue(appMode);
-		return new RouteLineDrawInfo(color, widthKey);
+		return new RouteLineDrawInfo(colorDay, colorNight, widthKey);
+	}
+
+	private Integer getRouteLineColor(@NonNull ApplicationMode appMode,
+	                                  @NonNull CommonPreference<Integer> preference) {
+		int storedValue = preference.getModeValue(appMode);
+		return storedValue != 0 ? storedValue : null;
 	}
 
 	private void saveRouteLineAppearance(@NonNull ApplicationMode appMode,
 	                                     @NonNull RouteLineDrawInfo drawInfo) {
-		Integer color = drawInfo.getColor();
-		if (color != null) {
-			settings.ROUTE_LINE_COLOR.setModeValue(appMode, color);
-		} else {
-			settings.ROUTE_LINE_COLOR.resetModeToDefault(appMode);
-		}
+		saveRouteLineColor(appMode, settings.ROUTE_LINE_COLOR_DAY, drawInfo.getColor(false));
+		saveRouteLineColor(appMode, settings.ROUTE_LINE_COLOR_NIGHT, drawInfo.getColor(true));
 		settings.ROUTE_LINE_WIDTH.setModeValue(appMode, drawInfo.getWidth());
+	}
+
+	private void saveRouteLineColor(@NonNull ApplicationMode appMode,
+	                                @NonNull CommonPreference<Integer> preference,
+	                                @Nullable @ColorInt Integer color) {
+		if (color != null) {
+			preference.setModeValue(appMode, color);
+		} else {
+			preference.resetModeToDefault(appMode);
+		}
 	}
 
 	public static boolean showInstance(FragmentActivity activity, SettingsScreenType screenType, @Nullable String appMode, boolean imported) {
