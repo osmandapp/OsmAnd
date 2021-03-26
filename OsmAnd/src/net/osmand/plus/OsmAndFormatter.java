@@ -5,6 +5,7 @@ import android.text.format.DateUtils;
 
 import androidx.core.text.TextUtilsCompat;
 import androidx.core.view.ViewCompat;
+
 import com.jwetherell.openmap.common.LatLonPoint;
 import com.jwetherell.openmap.common.MGRSPoint;
 import com.jwetherell.openmap.common.UTMPoint;
@@ -509,19 +510,14 @@ public class OsmAndFormatter {
 			result.append(formatCoordinate(lat, outputFormat)).append(" ").append(formatCoordinate(lon, outputFormat));
 		} else if (outputFormat == FORMAT_DEGREES || outputFormat == FORMAT_MINUTES || outputFormat == FORMAT_SECONDS) {
 			boolean isLeftToRight = TextUtilsCompat.getLayoutDirectionFromLocale(Locale.getDefault()) == ViewCompat.LAYOUT_DIRECTION_LTR;
-			if (isLeftToRight) {
-				result
-						.append(formatCoordinate(lat, outputFormat)).append(" ")
-						.append(lat > 0 ? NORTH : SOUTH).append(", ")
-						.append(formatCoordinate(lon, outputFormat)).append(" ")
-						.append(lon > 0 ? EAST : WEST);
-			} else {
-				result
-						.append(formatCoordinate(lat, outputFormat)).append(" ")
-						.append(lon > 0 ? EAST : WEST).append(" ")
-						.append(formatCoordinate(lon, outputFormat)).append(", ")
-						.append(lat > 0 ? NORTH : SOUTH);
-			}
+			String rtlCoordinates = isLeftToRight ? "" : "\u200f";
+			String rtlCoordinatesPunctuation = isLeftToRight ? ", " : " ,";
+			result
+					.append(rtlCoordinates)
+					.append(formatCoordinate(lat, outputFormat)).append(rtlCoordinates).append(" ").append(rtlCoordinates)
+					.append(lat > 0 ? NORTH : SOUTH).append(rtlCoordinates).append(rtlCoordinatesPunctuation).append(rtlCoordinates)
+					.append(formatCoordinate(lon, outputFormat)).append(rtlCoordinates).append(" ").append(rtlCoordinates)
+					.append(lon > 0 ? EAST : WEST);
 		} else if (outputFormat == UTM_FORMAT) {
 			UTMPoint pnt = new UTMPoint(new LatLonPoint(lat, lon));
 			result
