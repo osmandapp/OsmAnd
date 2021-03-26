@@ -58,6 +58,7 @@ import net.osmand.plus.liveupdates.PerformLiveUpdateAsyncTask.LiveUpdateListener
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.widgets.TextViewEx;
+import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -155,9 +156,9 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 		iconHelp.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(SUBSCRIPTION_URL));
-				if (AndroidUtils.isIntentSafe(app, intent)) {
-					startActivity(intent);
+				Activity activity = getActivity();
+				if (activity != null) {
+					WikipediaDialogFragment.showFullArticle(activity, Uri.parse(SUBSCRIPTION_URL), nightMode);
 				}
 			}
 		});

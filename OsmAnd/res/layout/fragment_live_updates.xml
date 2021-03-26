@@ -26,13 +26,13 @@
 
 			<ImageButton
 				android:id="@+id/toolbar_action"
-				android:layout_width="@dimen/standard_icon_size"
-				android:layout_height="@dimen/standard_icon_size"
+				android:layout_width="@dimen/acceptable_touch_radius"
+				android:layout_height="@dimen/acceptable_touch_radius"
 				android:layout_gravity="end"
-				android:layout_marginTop="@dimen/content_padding"
-				android:layout_marginEnd="@dimen/content_padding"
-				android:layout_marginRight="@dimen/content_padding"
-				android:layout_marginBottom="@dimen/content_padding"
+				android:layout_marginStart="@dimen/list_item_button_padding"
+				android:layout_marginLeft="@dimen/list_item_button_padding"
+				android:layout_marginEnd="@dimen/list_item_button_padding"
+				android:layout_marginRight="@dimen/list_item_button_padding"
 				android:background="@null"
 				android:contentDescription="@string/shared_string_help"
 				tools:src="@drawable/ic_action_help" />
@@ -52,14 +52,14 @@
 			android:id="@android:id/list"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
+			android:clipToPadding="false"
 			android:divider="@null"
 			android:drawSelectorOnTop="true"
 			android:footerDividersEnabled="false"
 			android:groupIndicator="@null"
 			android:headerDividersEnabled="false"
-			android:paddingBottom="@dimen/bottom_sheet_list_item_height"
-			android:clipToPadding="false"
 			android:orientation="vertical"
+			android:paddingBottom="@dimen/bottom_sheet_list_item_height"
 			tools:context=".liveupdates.LiveUpdatesFragment" />
 
 	</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
