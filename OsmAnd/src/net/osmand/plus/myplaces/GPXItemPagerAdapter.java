@@ -33,11 +33,13 @@ import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.CustomRadioButtonType;
+import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
@@ -132,17 +134,26 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	private List<ILineDataSet> getDataSets(LineChart chart, GPXTabItemType tabType,
 										   LineGraphType firstType, LineGraphType secondType) {
 		List<ILineDataSet> dataSets = dataSetsMap.get(tabType);
-		if (gpxItem != null) {
-			GPXTrackAnalysis analysis = gpxItem.analysis;
+		GPXTrackAnalysis analysis = null;
+		boolean withoutGaps = true;
+		SavingTrackHelper helper = app.getSavingTrackHelper();
+		if (displayHelper.getGpx().equals(helper.getCurrentGpx())) {
+			SelectedGpxFile selectedGpxFile = helper.getCurrentTrack();
+			GPXFile currentGpx = selectedGpxFile.getGpxFile();
+			analysis = currentGpx.getAnalysis(0);
+			withoutGaps = !selectedGpxFile.isJoinSegments()
+					&& (Algorithms.isEmpty(currentGpx.tracks) || currentGpx.tracks.get(0).generalTrack);
+		} else if (gpxItem != null) {
+			analysis = gpxItem.analysis;
 			GpxDataItem gpxDataItem = displayHelper.getGpxDataItem();
-			boolean calcWithoutGaps = gpxItem.isGeneralTrack() && gpxDataItem != null && !gpxDataItem.isJoinSegments();
-			if (chart != null) {
-				dataSets = GpxUiHelper.getDataSets(chart, app, analysis, firstType, secondType, calcWithoutGaps);
-				if (dataSets != null) {
-					dataSetsMap.remove(tabType);
-				}
-				dataSetsMap.put(tabType, dataSets);
+			withoutGaps = gpxItem.isGeneralTrack() && gpxDataItem != null && !gpxDataItem.isJoinSegments();
+		}
+		if (chart != null && analysis != null) {
+			dataSets = GpxUiHelper.getDataSets(chart, app, analysis, firstType, secondType, withoutGaps);
+			if (dataSets != null) {
+				dataSetsMap.remove(tabType);
 			}
+			dataSetsMap.put(tabType, dataSets);
 		}
 		return dataSets;
 	}
@@ -217,12 +228,12 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	public Object instantiateItem(@NonNull ViewGroup container, int position) {
 		GPXTabItemType tabType = tabTypes[position];
 		View view = getViewForTab(container, tabType);
+		LineChart chart = view.findViewById(R.id.chart);
+		ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) chart.getLayoutParams();
+		AndroidUtils.setMargins(lp, chartHMargin, lp.topMargin, chartHMargin, lp.bottomMargin);
 		GPXFile gpxFile = displayHelper.getGpx();
 		if (gpxFile != null && gpxItem != null) {
 			GPXTrackAnalysis analysis = gpxItem.analysis;
-			LineChart chart = view.findViewById(R.id.chart);
-			ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) chart.getLayoutParams();
-			AndroidUtils.setMargins(lp, chartHMargin, lp.topMargin, chartHMargin, lp.bottomMargin);
 			setupChart(view, chart);
 
 			switch (tabType) {
