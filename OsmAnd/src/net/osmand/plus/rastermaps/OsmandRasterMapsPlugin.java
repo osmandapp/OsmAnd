@@ -369,8 +369,10 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			settings.MAP_OVERLAY_PREVIOUS.set(null);
 		}
 		if (underlayLayer.getMap() == null) {
+			settings.MAP_UNDERLAY.removeListener(underlayListener);
 			settings.MAP_UNDERLAY.set(null);
 			settings.MAP_UNDERLAY_PREVIOUS.set(null);
+			settings.MAP_UNDERLAY.addListener(underlayListener);
 		}
 		String overlayMapDescr = settings.MAP_OVERLAY.get();
 		if (overlayMapDescr!=null && overlayMapDescr.contains(".sqlitedb")) {
