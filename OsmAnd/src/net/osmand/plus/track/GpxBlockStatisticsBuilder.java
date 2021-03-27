@@ -131,6 +131,11 @@ public class GpxBlockStatisticsBuilder {
 		}
 	}
 
+	public void restartUpdatingStatBlocks() {
+		stopUpdatingStatBlocks();
+		runUpdatingStatBlocksIfNeeded();
+	}
+
 	public void initItems() {
 		GPXFile gpxFile = getGPXFile();
 		if (app == null || gpxFile == null) {
