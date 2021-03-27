@@ -1394,7 +1394,7 @@
     <string name="downloading_list_indexes">Descargando lista de regiones disponibles…</string>
     <string name="list_index_files_was_not_loaded">No se pudo obtener la lista de regiones desde https://osmand.net.</string>
     <string name="fav_points_edited">Punto favorito editado</string>
-    <string name="fav_points_not_exist">Sin puntos de Favoritos</string>
+    <string name="fav_points_not_exist">No existen puntos favoritos</string>
     <string name="update_existing">Reemplazar</string>
     <string name="only_show">Mostrar ruta</string>
     <string name="follow">Iniciar la guía</string>

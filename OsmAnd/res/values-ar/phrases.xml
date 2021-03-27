@@ -3703,4 +3703,12 @@
     <string name="poi_geodesist">الجيوديسيا (شكل الأرض ومساحتها)</string>
     <string name="poi_local_ref">المرجع المحلي</string>
     <string name="poi_piste">الزحلقه</string>
+    <string name="poi_training_hairdressing">التدريب: تصفيف الشعر</string>
+    <string name="poi_training_aviation">التدريب: الطيران</string>
+    <string name="poi_training_yoga">التدريب: اليوغا</string>
+    <string name="poi_training_computer">التدريب: الحاسوب</string>
+    <string name="poi_training_art">التدريب: فن</string>
+    <string name="poi_training_sport">التدريب: رياضة</string>
+    <string name="poi_memorial_stupa">نصب تذكاري بوذي</string>
+    <string name="poi_piste_nordic">ممر زحلقة الشمالي</string>
 </resources>

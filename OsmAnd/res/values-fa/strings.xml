@@ -680,7 +680,7 @@
 \n {1} مگابایت (از {2} مگابایت) استفاده خواهد شد.</string>
     <string name="use_transparent_map_theme">پوستهٔ شفاف</string>
     <string name="native_library_not_supported">کتابخانهٔ native بر روی این دستگاه پشتیبانی نمی‌شود.</string>
-    <string name="init_native_library">مقداردهی اولیهٔ کتابخانهٔ native…</string>
+    <string name="init_native_library">در حال مقداردهی اولیهٔ کتابخانهٔ native…</string>
     <string name="choose_auto_follow_route">نمای نقشه خودکار-مرکز</string>
     <string name="choose_auto_follow_route_descr">مدت‌زمانی که طول می‌کشد تا نقشه با موقعیت کنونی همگام شود.</string>
     <string name="auto_follow_route_navigation">ناوبری فقط با حالت خودکار-مرکز</string>
@@ -706,7 +706,7 @@
     <string name="favorite_delete_multiple">آیا از حذف %1$d علاقه‌مندی و %2$d گروه علاقه‌مندی مطمئن هستید؟</string>
     <string name="basemap_missing">نقشه پایهٔ جهان را دانلود کنید تا نمایی از سراسر جهان در زوم‌های کم داشته باشید.</string>
     <string name="local_index_installed">نسخهٔ محلی</string>
-    <string name="installing_new_resources">گشودن دادهٔ جدید…</string>
+    <string name="installing_new_resources">در حال گشودن دادهٔ جدید…</string>
     <string name="internet_connection_required_for_online_route">ناوبری آنلاین به‌طور آفلاین کار نمی‌کند.</string>
     <string name="tts_missing_language_data_title">داده وجود ندارد</string>
     <string name="gpx_option_reverse_route">برعکس‌کردن جهت رد</string>
@@ -744,7 +744,7 @@
     <string name="context_menu_item_share_location">هم‌رسانی مکان</string>
     <string name="indexing_address">در حال نمایه‌کردن نشانی…</string>
     <string name="indexing_map">در حال نمایه‌کردن نقشه…</string>
-    <string name="indexing_poi">نمایه‌کردن POI‏…</string>
+    <string name="indexing_poi">در حال نمایه‌کردن نقاط توجه…</string>
     <string name="indexing_transport">در حال نمایه‌کردن حمل‌ونقل…</string>
     <string name="shared_string_io_error">خطای ورودی/خروجی</string>
     <string name="km">km</string>
@@ -787,8 +787,8 @@
     <string name="converting_names">در حال تبدیل اسامی محلی/انگلیسی…</string>
     <string name="failed_op">ناموفق</string>
     <string name="auth_failed">اجازهٔ دسترسی احراز نشد</string>
-    <string name="closing_changeset">بستن بستهٔ تغییر…</string>
-    <string name="opening_changeset">بازکردن بستهٔ تغییر…</string>
+    <string name="closing_changeset">در حال بستن بستهٔ تغییر…</string>
+    <string name="opening_changeset">در حال بازکردن بستهٔ تغییر…</string>
     <string name="list_index_files_was_not_loaded">دریافت لیست مناطق از https://osmand.net ناموفق بود.</string>
     <string name="downloading_list_indexes">در حال دانلود لیست مناطق موجود…</string>
     <string name="download_question_exist">دادهٔ آفلاینِ {0} از قبل وجود دارد ({1}). آن را روزآمد می‌کنید ({2})؟</string>
@@ -1633,7 +1633,7 @@
     <string name="skip_map_downloading">صرف‌نظر از دانلود نقشه‌ها</string>
     <string name="skip_map_downloading_desc">نقشهٔ آفلاینی نصب نکرده‌اید. نقشه‌ای را از لیست انتخاب نمایید یا بعداً از طریق «منو ← %1$s»، آن را دانلود کنید.</string>
     <string name="search_another_country">منطقهٔ دیگری را انتخاب کنید</string>
-    <string name="search_map">جست‌وجوی نقشه‌ها…</string>
+    <string name="search_map">در حال جست‌وجوی نقشه‌ها…</string>
     <string name="first_usage_wizard_desc">اجازه دهید برنامه موقعیت شما را پیدا کند تا نقشهٔ آنجا را برای دانلود پیشنهاد بدهد.</string>
     <string name="location_not_found">موقعیت پیدا نشد</string>
     <string name="no_inet_connection">اتصال اینترنت برقرار نیست</string>
@@ -2375,7 +2375,7 @@
     <string name="import_track">درون‌برد فایل GPX</string>
     <string name="fast_coordinates_input">ورود فوری مختصات</string>
     <string name="show_guide_line">نمایش خطوط جهت‌دار</string>
-    <string name="keep_showing_on_map">به نمایشش روی نقشه ادامه بده</string>
+    <string name="keep_showing_on_map">روی نقشه نمایان بماند</string>
     <string name="save_as_route_point">ذخیره به‌عنوان نقاط مسیر</string>
     <string name="route_point">نقطهٔ مسیر</string>
     <string name="routing_attr_relief_smoothness_factor_name">میزان اُفت‌وخیز ارتفاع را انتخاب کنید</string>
@@ -2824,7 +2824,7 @@
     <string name="on_foot">پیاده</string>
     <string name="route_way">طول مسیر</string>
     <string name="points_of_interests">نقاط توجه (POI)</string>
-    <string name="waiting_for_route_calculation">محاسبهٔ مسیر…</string>
+    <string name="waiting_for_route_calculation">در حال محاسبهٔ مسیر…</string>
     <string name="app_mode_public_transport">حمل‌ونقل عمومی</string>
     <string name="avoid_roads_descr">جاده‌ای که می‌خواهید هنگام ناوبری از آن بپرهیزید، روی نقشه یا از لیست زیر انتخاب کنید:</string>
     <string name="show_along_the_route">در امتداد مسیر نشان بده</string>
@@ -2947,7 +2947,7 @@
     <string name="public_transport_calc_pedestrian">محاسبهٔ مسیر پیاده</string>
     <string name="public_transport_type">نوع حمل‌ونقل</string>
     <string name="send_log">ارسال گزارش</string>
-    <string name="searching_gps">جست‌وجوی GPS‏</string>
+    <string name="searching_gps">در حال جست‌وجوی GPS‏</string>
     <string name="coordinates_widget">ابزارک مختصات</string>
     <string name="rate_dialog_descr">لطفاً در گوگل‌پلی دربارهٔ کار ما نظر و امتیاز بدهید.</string>
     <string name="shared_string_privacy_policy">سیاست حریم خصوصی</string>

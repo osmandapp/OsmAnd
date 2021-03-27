@@ -2884,7 +2884,7 @@
     <string name="quick_action_day_night_switch_mode">Wissel tussen dag-/nachtmodus</string>
     <string name="routeInfo_surface_name">Oppervlakte</string>
     <string name="routeInfo_smoothness_name">Kwaliteit wegdek</string>
-    <string name="routeInfo_steepness_name">Steilte</string>
+    <string name="routeInfo_steepness_name">Helling</string>
     <string name="run_full_osmand_msg">U gebruikt {0} kaart geleverd door OsmAnd. Wilt u de \"OsmAnd full\" versie openen\?</string>
     <string name="run_full_osmand_header">Open OsmAnd\?</string>
     <string name="angular_measeurement">Eenheid hoeken</string>

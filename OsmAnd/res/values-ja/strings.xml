@@ -3080,7 +3080,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_track_is_saved">経路%sを保存しました</string>
     <string name="temporary_conditional_routing">一時的な制限の検討</string>
     <string name="quick_action_need_to_add_item_to_list">『クイックアクション』のリストに最低ひとつは項目を設定する必要があります</string>
-    <string name="routing_attr_piste_type_downhill_name">アルペン/ダウンヒルスキー</string>
+    <string name="routing_attr_piste_type_downhill_name">アルペンスキーとダウンヒルスキー</string>
     <string name="routing_attr_piste_type_downhill_description">アルペンスキーまたはダウンヒルスキーに用の斜面(ゲレンデ)やスキーリフトへの道</string>
     <string name="routing_attr_piste_type_nordic_name">クロスカントリースキーとノルディックスキー</string>
     <string name="routing_attr_piste_type_nordic_description">ノルディックスキーやクロスカントリースキー用コースやそれらに用いられる小道などです。</string>
@@ -3776,7 +3776,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_redo">繰り返し</string>
     <string name="release_3_8">• ルート計画機能を更新 : セグメントごとに異なるナビゲーションタイプを使用し、経路として反映することが可能に
 \n
-\n• 経路の新しい外観オプション : 色、太さ、表示方向矢印、開始/終了アイコン選択
+\n• 経路の新しい外観オプション : 色、太さ、表示方向矢印、開始と終了アイコンの選択
 \n
 \n• 自転車ノードの視認性を向上
 \n
@@ -4052,4 +4052,12 @@ POIの更新は利用できません</string>
 \n• \"旅程記録\"ダイアログを更新
 \n
 \n</string>
+    <string name="start_finish_icons">開始・終了アイコン</string>
+    <string name="contour_lines_thanks">\'等高線(Contour lines)\'をご購入いただきありがとうございます</string>
+    <string name="osm_live_payment_desc_hw">サブスクリプションは選択した期間に応じて課金されます。 AppGalleryからいつでもキャンセルできます。</string>
+    <string name="osm_live_payment_subscription_management_hw">購入確認後に利用者のAppGalleryアカウントへ請求されます。
+\n
+\nサブスクリプションは更新日前にキャンセルされない限り自動的に延長されます。アカウントには更新日に更新期間分(月/ 3ヶ月/年)の金額が請求されます。
+\n
+\nAppGallery設定でサブスクリプションの管理およびキャンセルができます。</string>
 </resources>
