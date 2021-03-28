@@ -16,7 +16,9 @@
 		android:paddingRight="@dimen/content_padding"
 		android:textAppearance="@style/TextAppearance.ListItemTitle"
 		osmand:typeface="@string/font_roboto_regular"
-		tools:text="@string/pass_whole_track_descr" />
+		tools:text="@string/pass_whole_track_descr"
+		android:paddingStart="@dimen/content_padding"
+		android:paddingEnd="@dimen/content_padding" />
 
 	<include layout="@layout/custom_radio_buttons" />
 

@@ -160,7 +160,9 @@
                     android:paddingRight="@dimen/measurement_tool_text_button_padding_small"
                     android:text="@string/shared_string_options"
                     android:textColor="?attr/color_dialog_buttons"
-                    osmand:typeface="@string/font_roboto_medium" />
+                    osmand:typeface="@string/font_roboto_medium"
+					android:paddingEnd="@dimen/measurement_tool_text_button_padding_small"
+					android:paddingStart="@dimen/measurement_tool_text_button_padding_small" />
 
                 <RelativeLayout
                     android:layout_width="wrap_content"

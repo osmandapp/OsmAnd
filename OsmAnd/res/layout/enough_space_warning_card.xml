@@ -20,7 +20,9 @@
 			android:layout_marginLeft="@dimen/content_padding"
 			android:layout_marginTop="@dimen/content_padding"
 			android:layout_marginRight="@dimen/content_padding"
-			app:srcCompat="@drawable/ic_action_sdcard_warning_colored" />
+			app:srcCompat="@drawable/ic_action_sdcard_warning_colored"
+			android:layout_marginStart="@dimen/content_padding"
+			android:layout_marginEnd="@dimen/content_padding" />
 
 		<LinearLayout
 			android:layout_width="match_parent"
@@ -29,7 +31,9 @@
 			android:layout_marginTop="@dimen/measurement_tool_menu_title_padding_top"
 			android:layout_marginRight="@dimen/content_padding"
 			android:layout_marginBottom="@dimen/measurement_tool_menu_title_padding_top"
-			android:orientation="vertical">
+			android:orientation="vertical"
+			android:layout_marginStart="@dimen/content_padding"
+			android:layout_marginEnd="@dimen/content_padding">
 
 			<net.osmand.plus.widgets.TextViewEx
 				android:id="@+id/warning_title"

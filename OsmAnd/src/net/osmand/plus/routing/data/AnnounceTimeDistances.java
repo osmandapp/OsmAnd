@@ -5,12 +5,17 @@ import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.StyleSpan;
 
+import androidx.core.text.TextUtilsCompat;
+import androidx.core.view.ViewCompat;
+
 import net.osmand.Location;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.voice.AbstractPrologCommandPlayer;
+
+import java.util.Locale;
 
 public class AnnounceTimeDistances {
 	// Avoids false negatives: Pre-pone close announcements by this distance to allow for the possible over-estimation of the 'true' lead distance due to positioning error.
@@ -36,12 +41,12 @@ public class AnnounceTimeDistances {
 	private float OFF_ROUTE_DISTANCE;
 
 	private float TURN_NOW_SPEED;
-	private int PREPARE_LONG_DISTANCE;
+	private final int PREPARE_LONG_DISTANCE;
 	private int PREPARE_LONG_DISTANCE_END;
-	private int PREPARE_DISTANCE;
+	private final int PREPARE_DISTANCE;
 	private int PREPARE_DISTANCE_END;
-	private int TURN_IN_DISTANCE;
-	private int TURN_IN_DISTANCE_END;
+	private final int TURN_IN_DISTANCE;
+	private final int TURN_IN_DISTANCE_END;
 	private int TURN_NOW_DISTANCE;
 	private int LONG_PNT_ANNOUNCE_RADIUS;
 	private int SHORT_PNT_ANNOUNCE_RADIUS;
@@ -73,13 +78,13 @@ public class AnnounceTimeDistances {
 		PREPARE_DISTANCE_END = (int) (DEFAULT_SPEED * 90);
 
 		// 22 s: car 275 m, bicycle 61 m, pedestrian 24 m
-		TURN_IN_DISTANCE = (int) (DEFAULT_SPEED  * 22);
+		TURN_IN_DISTANCE = (int) (DEFAULT_SPEED * 22);
 		// 15 s: car 189 m, bicycle 42 m, pedestrian 17 m
 		TURN_IN_DISTANCE_END = (int) (DEFAULT_SPEED * 15);
 
 		// Do not play prepare: for pedestrian and slow transport
 		// same check as speed < 150/(90-22) m/s = 2.2 m/s = 8 km/h
-			// if (DEFAULT_SPEED < 2.3) {
+		// if (DEFAULT_SPEED < 2.3) {
 		if (PREPARE_DISTANCE_END - TURN_IN_DISTANCE < 150) {
 			PREPARE_DISTANCE_END = PREPARE_DISTANCE * 2;
 		}
@@ -108,7 +113,7 @@ public class AnnounceTimeDistances {
 		TURN_NOW_SPEED = TURN_NOW_DISTANCE / TURN_NOW_TIME;
 
 		// 5 s: car 63 m, bicycle 14 m, pedestrian 6 m -> 12 m (capped by POSITIONING_TOLERANCE)
-		ARRIVAL_DISTANCE =  (int) (Math.max(POSITIONING_TOLERANCE, DEFAULT_SPEED * 5.) * arrivalDistanceFactor);
+		ARRIVAL_DISTANCE = (int) (Math.max(POSITIONING_TOLERANCE, DEFAULT_SPEED * 5.) * arrivalDistanceFactor);
 
 		// 20 s: car 250 m, bicycle 56 m, pedestrian 22 m
 		OFF_ROUTE_DISTANCE = DEFAULT_SPEED * 20 * arrivalDistanceFactor; // 20 seconds
@@ -175,17 +180,14 @@ public class AnnounceTimeDistances {
 	}
 
 	private boolean isDistanceLess(float currentSpeed, double dist, double etalon, float defSpeed) {
-	// Check triggers:
+		// Check triggers:
 		// (1) distance < etalon?
 		if (dist - voicePromptDelayTimeSec * currentSpeed <= etalon) {
 			return true;
 		}
 		// (2) time_with_current_speed < etalon_time_with_default_speed?
 		// check only if speed > 0
-		if (currentSpeed > 0 && (dist / currentSpeed - voicePromptDelayTimeSec) <= etalon / defSpeed) {
-			return true;
-		}
-		return false;
+		return currentSpeed > 0 && (dist / currentSpeed - voicePromptDelayTimeSec) <= etalon / defSpeed;
 	}
 
 	public float getSpeed(Location loc) {
@@ -208,18 +210,21 @@ public class AnnounceTimeDistances {
 		return (int) (dist - voicePromptDelayTimeSec * speed);
 	}
 
-	private void appendTurnDesc(SpannableStringBuilder builder, String name, int dist, String meter, String second) {
-		appendTurnDesc(builder, name, dist, DEFAULT_SPEED, meter, second);
+	private void appendTurnDesc(OsmandApplication app, SpannableStringBuilder builder, String name, int dist, String meter, String second) {
+		appendTurnDesc(app, builder, name, dist, DEFAULT_SPEED, meter, second);
 	}
 
-	private void appendTurnDesc(SpannableStringBuilder builder, String name, int dist, float speed, String meter, String second) {
+	private void appendTurnDesc(OsmandApplication app, SpannableStringBuilder builder, String name, int dist, float speed, String meter, String second) {
 		int minDist = (dist / 5) * 5;
 		int time = (int) (dist / speed);
 		if (time > 15) {
 			// round to 5
 			time = (time / 5) * 5;
 		}
-		builder.append(String.format("\n%s: %d - %d %s, %d %s.", name, minDist, minDist + 5, meter, time, second));
+		String distStr = String.format("\n%s: %d - %d %s", name, minDist, minDist + 5, meter);
+		String timeStr = String.format("%d %s.", time, second);
+		builder.append(app.getString(R.string.ltr_or_rtl_combine_via_comma, distStr, timeStr));
+
 	}
 
 	public Spannable getIntervalsDescription(OsmandApplication app) {
@@ -245,35 +250,35 @@ public class AnnounceTimeDistances {
 		builder.append(turn);
 		makeBold(builder, turn);
 		if (PREPARE_DISTANCE_END <= PREPARE_DISTANCE) {
-			appendTurnDesc(builder, prepare, PREPARE_DISTANCE, meter, second);
+			appendTurnDesc(app, builder, prepare, PREPARE_DISTANCE, meter, second);
 		}
 		if (PREPARE_LONG_DISTANCE_END <= PREPARE_LONG_DISTANCE) {
-			appendTurnDesc(builder, longPrepare, PREPARE_LONG_DISTANCE, meter, second);
+			appendTurnDesc(app, builder, longPrepare, PREPARE_LONG_DISTANCE, meter, second);
 		}
-		appendTurnDesc(builder, approach, TURN_IN_DISTANCE, meter, second);
-		appendTurnDesc(builder, passing, TURN_NOW_DISTANCE, TURN_NOW_SPEED, meter, second);
+		appendTurnDesc(app, builder, approach, TURN_IN_DISTANCE, meter, second);
+		appendTurnDesc(app, builder, passing, TURN_NOW_DISTANCE, TURN_NOW_SPEED, meter, second);
 
 		// Arrive at destination
-		appendTurnDesc(builder, arrive, (int) (getArrivalDistance()), meter, second);
+		appendTurnDesc(app, builder, arrive, (int) (getArrivalDistance()), meter, second);
 		makeBoldFormatted(builder, arrive);
 
 		// Off-route
 		if (getOffRouteDistance() > 0) {
-			appendTurnDesc(builder, offRoute, (int) getOffRouteDistance(), meter, second);
+			appendTurnDesc(app, builder, offRoute, (int) getOffRouteDistance(), meter, second);
 			makeBoldFormatted(builder, offRoute);
 		}
 
 		// Traffic warnings
 		builder.append(traffic);
 		makeBold(builder, traffic);
-		appendTurnDesc(builder, approach, LONG_ALARM_ANNOUNCE_RADIUS, meter, second);
-		appendTurnDesc(builder, passing, SHORT_ALARM_ANNOUNCE_RADIUS, meter, second);
+		appendTurnDesc(app, builder, approach, LONG_ALARM_ANNOUNCE_RADIUS, meter, second);
+		appendTurnDesc(app, builder, passing, SHORT_ALARM_ANNOUNCE_RADIUS, meter, second);
 
 		// Waypoint / Favorite / POI
 		builder.append(point);
 		makeBold(builder, point);
-		appendTurnDesc(builder, approach, LONG_PNT_ANNOUNCE_RADIUS, meter, second);
-		appendTurnDesc(builder, passing, SHORT_PNT_ANNOUNCE_RADIUS, meter, second);
+		appendTurnDesc(app, builder, approach, LONG_PNT_ANNOUNCE_RADIUS, meter, second);
+		appendTurnDesc(app, builder, passing, SHORT_PNT_ANNOUNCE_RADIUS, meter, second);
 
 		return builder;
 	}

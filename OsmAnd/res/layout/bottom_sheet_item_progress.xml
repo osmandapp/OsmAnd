@@ -7,4 +7,6 @@
 	android:paddingLeft="@dimen/content_padding"
 	android:paddingRight="@dimen/content_padding"
 	android:paddingTop="@dimen/content_padding_small"
-	android:paddingBottom="@dimen/content_padding_small" />
+	android:paddingBottom="@dimen/content_padding_small"
+	android:paddingEnd="@dimen/content_padding"
+	android:paddingStart="@dimen/content_padding" />

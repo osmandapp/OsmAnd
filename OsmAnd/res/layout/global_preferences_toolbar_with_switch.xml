@@ -45,7 +45,9 @@
 				android:textColor="?attr/app_bar_primary_item_color"
 				android:textSize="@dimen/dialog_header_text_size"
 				app:typeface="@string/font_roboto_medium"
-				tools:text="@string/routing_settings_2" />
+				tools:text="@string/routing_settings_2"
+				android:layout_marginStart="@dimen/content_padding"
+				android:layout_marginEnd="@dimen/content_padding" />
 
 			<FrameLayout
 				android:id="@+id/action_button"

@@ -16,7 +16,9 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/content_padding"
-            android:layout_marginRight="@dimen/content_padding">
+            android:layout_marginRight="@dimen/content_padding"
+			android:layout_marginStart="@dimen/content_padding"
+			android:layout_marginEnd="@dimen/content_padding">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="wrap_content"
@@ -76,7 +78,9 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/content_padding"
             android:layout_marginRight="@dimen/content_padding"
-            android:visibility="invisible">
+            android:visibility="invisible"
+			android:layout_marginEnd="@dimen/content_padding"
+			android:layout_marginStart="@dimen/content_padding">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="wrap_content"

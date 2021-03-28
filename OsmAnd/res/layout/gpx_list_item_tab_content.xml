@@ -21,7 +21,9 @@
 			android:layout_marginLeft="@dimen/content_padding"
 			android:layout_marginRight="@dimen/content_padding"
 			android:minHeight="@dimen/dialog_button_height"
-			android:paddingTop="@dimen/content_padding" />
+			android:paddingTop="@dimen/content_padding"
+			android:layout_marginStart="@dimen/content_padding"
+			android:layout_marginEnd="@dimen/content_padding" />
 
 		<net.osmand.plus.views.controls.WrapContentHeightViewPager
 			android:id="@+id/pager"
