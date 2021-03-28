@@ -21,8 +21,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
+import net.osmand.plus.routepreparationmenu.MapRouteInfoMenuFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.track.TrackMenuFragment;
 import net.osmand.plus.track.TrackSelectSegmentBottomSheet;
 
 import java.io.File;
@@ -131,8 +131,8 @@ public class TracksCard extends BaseCard {
 						}
 					}
 					if (item.file.getNonEmptySegmentsCount() > 1) {
-						Fragment f = mapActivity.getSupportFragmentManager().findFragmentByTag(TrackMenuFragment.TAG);
-						TrackSelectSegmentBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), item.file, f);
+						Fragment targetFragment = mapActivity.getSupportFragmentManager().findFragmentByTag(MapRouteInfoMenuFragment.TAG);
+						TrackSelectSegmentBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), item.file, targetFragment);
 					} else {
 						mapActivity.getMapActions().setGPXRouteParams(item.file);
 						app.getTargetPointsHelper().updateRouteAndRefresh(true);
