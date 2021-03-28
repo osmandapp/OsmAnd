@@ -210,24 +210,21 @@ public class AnnounceTimeDistances {
 		return (int) (dist - voicePromptDelayTimeSec * speed);
 	}
 
-	private void appendTurnDesc(SpannableStringBuilder builder, String name, int dist, String meter, String second) {
-		appendTurnDesc(builder, name, dist, DEFAULT_SPEED, meter, second);
+	private void appendTurnDesc(OsmandApplication app, SpannableStringBuilder builder, String name, int dist, String meter, String second) {
+		appendTurnDesc(app, builder, name, dist, DEFAULT_SPEED, meter, second);
 	}
 
-	private void appendTurnDesc(SpannableStringBuilder builder, String name, int dist, float speed, String meter, String second) {
+	private void appendTurnDesc(OsmandApplication app, SpannableStringBuilder builder, String name, int dist, float speed, String meter, String second) {
 		int minDist = (dist / 5) * 5;
 		int time = (int) (dist / speed);
 		if (time > 15) {
 			// round to 5
 			time = (time / 5) * 5;
 		}
-		boolean isLeftToRight = TextUtilsCompat.getLayoutDirectionFromLocale(Locale.getDefault()) == ViewCompat.LAYOUT_DIRECTION_LTR;
-		if (isLeftToRight) {
-			builder.append(String.format("\n%s: %d - %d %s, %d %s.", name, minDist, minDist + 5, meter, time, second));
-		} else {
-			builder.append(String.format("\n%s: %s  %d, %s %d - %d.", name, second, time, meter, minDist, minDist + 5));
+		String distStr = String.format("\n%s: %d - %d %s", name, minDist, minDist + 5, meter);
+		String timeStr = String.format("%d %s.", time, second);
+		builder.append(app.getString(R.string.ltr_or_rtl_combine_via_comma, distStr, timeStr));
 
-		}
 	}
 
 	public Spannable getIntervalsDescription(OsmandApplication app) {
@@ -253,35 +250,35 @@ public class AnnounceTimeDistances {
 		builder.append(turn);
 		makeBold(builder, turn);
 		if (PREPARE_DISTANCE_END <= PREPARE_DISTANCE) {
-			appendTurnDesc(builder, prepare, PREPARE_DISTANCE, meter, second);
+			appendTurnDesc(app, builder, prepare, PREPARE_DISTANCE, meter, second);
 		}
 		if (PREPARE_LONG_DISTANCE_END <= PREPARE_LONG_DISTANCE) {
-			appendTurnDesc(builder, longPrepare, PREPARE_LONG_DISTANCE, meter, second);
+			appendTurnDesc(app, builder, longPrepare, PREPARE_LONG_DISTANCE, meter, second);
 		}
-		appendTurnDesc(builder, approach, TURN_IN_DISTANCE, meter, second);
-		appendTurnDesc(builder, passing, TURN_NOW_DISTANCE, TURN_NOW_SPEED, meter, second);
+		appendTurnDesc(app, builder, approach, TURN_IN_DISTANCE, meter, second);
+		appendTurnDesc(app, builder, passing, TURN_NOW_DISTANCE, TURN_NOW_SPEED, meter, second);
 
 		// Arrive at destination
-		appendTurnDesc(builder, arrive, (int) (getArrivalDistance()), meter, second);
+		appendTurnDesc(app, builder, arrive, (int) (getArrivalDistance()), meter, second);
 		makeBoldFormatted(builder, arrive);
 
 		// Off-route
 		if (getOffRouteDistance() > 0) {
-			appendTurnDesc(builder, offRoute, (int) getOffRouteDistance(), meter, second);
+			appendTurnDesc(app, builder, offRoute, (int) getOffRouteDistance(), meter, second);
 			makeBoldFormatted(builder, offRoute);
 		}
 
 		// Traffic warnings
 		builder.append(traffic);
 		makeBold(builder, traffic);
-		appendTurnDesc(builder, approach, LONG_ALARM_ANNOUNCE_RADIUS, meter, second);
-		appendTurnDesc(builder, passing, SHORT_ALARM_ANNOUNCE_RADIUS, meter, second);
+		appendTurnDesc(app, builder, approach, LONG_ALARM_ANNOUNCE_RADIUS, meter, second);
+		appendTurnDesc(app, builder, passing, SHORT_ALARM_ANNOUNCE_RADIUS, meter, second);
 
 		// Waypoint / Favorite / POI
 		builder.append(point);
 		makeBold(builder, point);
-		appendTurnDesc(builder, approach, LONG_PNT_ANNOUNCE_RADIUS, meter, second);
-		appendTurnDesc(builder, passing, SHORT_PNT_ANNOUNCE_RADIUS, meter, second);
+		appendTurnDesc(app, builder, approach, LONG_PNT_ANNOUNCE_RADIUS, meter, second);
+		appendTurnDesc(app, builder, passing, SHORT_PNT_ANNOUNCE_RADIUS, meter, second);
 
 		return builder;
 	}
