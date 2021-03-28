@@ -844,7 +844,7 @@
     <string name="favorite_home_category">Domo</string>
     <string name="favorite_friends_category">Amigos</string>
     <string name="favorite_places_category">Logos</string>
-    <string name="shared_string_others">Àteru</string>
+    <string name="shared_string_others">Àteros</string>
     <string name="shared_string_name">Nùmene</string>
     <string name="favourites_edit_dialog_category">Categoria</string>
     <string name="shared_string_no_thanks">No, gràtzias</string>
@@ -4042,4 +4042,8 @@
     <string name="select_another_colorization">Ischerta un\'àtera casta de coloratzione.</string>
     <string name="purchases">Còmporas</string>
     <string name="map_widget_distance_by_tap">Distàntzia pro tocu</string>
+    <string name="trip_recording_save_and_continue">Sarva e sighi</string>
+    <string name="lost_data_warning">Totu sos datos non sarvados s\'ant a pèrdere.</string>
+    <string name="show_start_dialog">Ammustra su diàlogu de incumintzu</string>
+    <string name="specify_color_for_map_mode">Dislinda unu colore pro sa modalidade pro sa mapa: %1$s.</string>
 </resources>
