@@ -50,6 +50,7 @@ import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.liveupdates.LiveUpdatesClearBottomSheet.RefreshLiveUpdates;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper.TimeOfDay;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper.UpdateFrequency;
@@ -694,6 +695,41 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 		if (adapter != null) {
 			adapter.notifyDataSetChanged();
 		}
+	}
+
+	public static String getSupportRegionName(OsmandApplication app, InAppPurchaseHelper purchaseHelper) {
+		OsmandSettings settings = app.getSettings();
+		String countryName = settings.BILLING_USER_COUNTRY.get();
+		if (purchaseHelper != null) {
+			List<InAppSubscription> subscriptions = purchaseHelper.getLiveUpdates().getVisibleSubscriptions();
+			boolean donationSupported = false;
+			for (InAppSubscription s : subscriptions) {
+				if (s.isDonationSupported()) {
+					donationSupported = true;
+					break;
+				}
+			}
+			if (donationSupported) {
+				if (Algorithms.isEmpty(countryName)) {
+					if (OsmandSettings.BILLING_USER_DONATION_NONE_PARAMETER.equals(settings.BILLING_USER_COUNTRY_DOWNLOAD_NAME.get())) {
+						countryName = app.getString(R.string.osmand_team);
+					} else {
+						countryName = app.getString(R.string.shared_string_world);
+					}
+				}
+			} else {
+				countryName = app.getString(R.string.osmand_team);
+			}
+		} else {
+			countryName = app.getString(R.string.osmand_team);
+		}
+		return countryName;
+	}
+
+	public static String getSupportRegionHeader(OsmandApplication app, String supportRegion) {
+		return supportRegion.equals(app.getString(R.string.osmand_team)) ?
+				app.getString(R.string.default_buttons_support) :
+				app.getString(R.string.osm_live_support_region);
 	}
 
 	@ColorRes

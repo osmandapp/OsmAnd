@@ -14,7 +14,6 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.liveupdates.CountrySelectionFragment;
 import net.osmand.plus.liveupdates.LiveUpdatesFragment;
-import net.osmand.plus.liveupdates.LiveUpdatesFragmentNew;
 import net.osmand.plus.liveupdates.OsmLiveActivity;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -71,7 +70,7 @@ public class SubscriptionsCard extends BaseCard {
 		liveUpdatesContainer.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				LiveUpdatesFragmentNew.showInstance(mapActivity.getSupportFragmentManager(), target);
+				LiveUpdatesFragment.showInstance(mapActivity.getSupportFragmentManager(), target);
 			}
 		});
 
