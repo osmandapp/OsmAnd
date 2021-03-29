@@ -656,7 +656,6 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 
 	@Override
 	public boolean onUpdateLocalIndex(String fileName, boolean newValue, final Runnable callback) {
-
 		int frequencyId = preferenceUpdateFrequency(fileName, settings).get();
 		int timeOfDateToUpdateId = preferenceTimeOfDayToUpdate(fileName, settings).get();
 		final AlarmManager alarmManager = (AlarmManager) app.getSystemService(Context.ALARM_SERVICE);
@@ -673,7 +672,6 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 			alarmManager.cancel(alarmIntent);
 			runSort();
 		}
-
 		return true;
 	}
 
