@@ -140,6 +140,7 @@ import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
+import net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.GeneralRouter;
 import net.osmand.util.Algorithms;
@@ -210,6 +211,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	private MapActivityActions mapActions;
 	private MapActivityLayers mapLayers;
+	private WidgetsVisibilityHelper mapWidgetsVisibilityHelper;
 
 	// App variables
 	private OsmandApplication app;
@@ -305,6 +307,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		mapActions = new MapActivityActions(this);
 		mapLayers = new MapActivityLayers(this);
+		mapWidgetsVisibilityHelper = new WidgetsVisibilityHelper(this);
 		dashboardOnMap.createDashboardView();
 		checkAppInitialization();
 
@@ -1595,6 +1598,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public MapActivityLayers getMapLayers() {
 		return mapLayers;
+	}
+
+	public WidgetsVisibilityHelper getWidgetsVisibilityHelper() {
+		return mapWidgetsVisibilityHelper;
 	}
 
 	public static void launchMapActivityMoveToTop(Context activity, Bundle prevIntentParams, Uri intentData, Bundle intentParams) {
