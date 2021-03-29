@@ -39,7 +39,7 @@ public class SubscriptionsCard extends BaseCard {
 	}
 
 	public SubscriptionsCard(@NonNull MapActivity mapActivity, @NonNull Fragment target, @NonNull InAppPurchaseHelper purchaseHelper) {
-		super(mapActivity);
+		super(mapActivity, false);
 		this.target = target;
 		this.purchaseHelper = purchaseHelper;
 	}
