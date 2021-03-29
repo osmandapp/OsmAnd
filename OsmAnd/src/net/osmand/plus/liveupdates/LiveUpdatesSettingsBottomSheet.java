@@ -36,7 +36,7 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.ShortDescriptionItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.liveupdates.LiveUpdatesClearDialogFragment.RefreshLiveUpdates;
+import net.osmand.plus.liveupdates.LiveUpdatesClearBottomSheet.RefreshLiveUpdates;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper.TimeOfDay;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper.UpdateFrequency;
 import net.osmand.plus.resources.IncrementalChangesManager;
@@ -68,28 +68,30 @@ import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFreq
 import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.getCustomButtonView;
 import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.updateCustomButtonView;
 
-public class LiveUpdatesSettingsDialogFragmentNew extends MenuBottomSheetDialogFragment implements RefreshLiveUpdates {
+public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragment implements RefreshLiveUpdates {
 
-	public static final String TAG = LiveUpdatesSettingsDialogFragmentNew.class.getSimpleName();
-	private static final Log LOG = PlatformUtil.getLog(LiveUpdatesSettingsDialogFragmentNew.class);
+	public static final String TAG = LiveUpdatesSettingsBottomSheet.class.getSimpleName();
+	private static final Log LOG = PlatformUtil.getLog(LiveUpdatesSettingsBottomSheet.class);
 	private static final String LOCAL_INDEX_FILE_NAME = "local_index_file_name";
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
-	private OnLiveUpdatesForLocalChange onLiveUpdatesForLocalChange;
+
+	private BaseBottomSheetItem itemTitle;
+	private BaseBottomSheetItem itemLastCheck;
+	private BaseBottomSheetItem itemSwitchLiveUpdate;
+	private BaseBottomSheetItem itemFrequencyHelpMessage;
+	private BaseBottomSheetItem itemClear;
+	private BaseBottomSheetItem itemViaWiFi;
 	private MultiStateToggleButton frequencyToggleButton;
 	private MultiStateToggleButton timeOfDayToggleButton;
 
 	private String fileName;
-	private int indexLastCheckItem = -1;
-	private int indexSwitchLiveUpdateItem = -1;
-	private int indexFrequencyHelpMessageItem = -1;
-	private int indexClearItem = -1;
-	private int indexViaWiFiItem = -1;
+	private OnLiveUpdatesForLocalChange onLiveUpdatesForLocalChange;
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, Fragment target, String fileName) {
 		if (!fragmentManager.isStateSaved()) {
-			LiveUpdatesSettingsDialogFragmentNew fragment = new LiveUpdatesSettingsDialogFragmentNew();
+			LiveUpdatesSettingsBottomSheet fragment = new LiveUpdatesSettingsBottomSheet();
 			fragment.setTargetFragment(target, 0);
 			fragment.fileName = fileName;
 			fragment.show(fragmentManager, TAG);
@@ -111,31 +113,33 @@ public class LiveUpdatesSettingsDialogFragmentNew extends MenuBottomSheetDialogF
 		CommonPreference<Boolean> downloadViaWiFiPreference = preferenceDownloadViaWiFi(fileName, settings);
 		CommonPreference<Integer> frequencyPreference = preferenceUpdateFrequency(fileName, settings);
 		CommonPreference<Integer> timeOfDayPreference = preferenceTimeOfDayToUpdate(fileName, settings);
+		int dp4 = getDimen(R.dimen.list_item_button_padding);
 		int dp12 = getDimen(R.dimen.content_padding_small);
 		int dp16 = getDimen(R.dimen.content_padding);
-		int dp40 = getDimen(R.dimen.list_header_height);
+		int dp36 = getDimen(R.dimen.dialog_button_height);
 		int dp48 = getDimen(R.dimen.context_menu_buttons_bottom_height);
 
-		items.add(new SimpleBottomSheetItem.Builder()
+		itemTitle = new SimpleBottomSheetItem.Builder()
 				.setTitle(getNameToDisplay(fileName, app))
 				.setTitleColorId(getPrimaryTextColorId(nightMode))
 				.setLayoutId(R.layout.bottom_sheet_item_title_big)
-				.create());
+				.create();
+		items.add(itemTitle);
 
-		items.add(new ShortDescriptionItem.Builder()
+		itemLastCheck = new ShortDescriptionItem.Builder()
 				.setDescription(getLastCheckString())
 				.setDescriptionColorId(getSecondaryTextColorId(nightMode))
 				.setDescriptionMaxLines(2)
 				.setLayoutId(R.layout.bottom_sheet_item_description)
-				.create());
-		indexLastCheckItem = items.size() - 1;
+				.create();
+		items.add(itemLastCheck);
 
 		View itemLiveUpdate = getCustomButtonView(app, null, localUpdatePreference.get(), nightMode);
 		View itemLiveUpdateButton = itemLiveUpdate.findViewById(R.id.button_container);
 		CompoundButton button = (CompoundButton) itemLiveUpdateButton.findViewById(R.id.compound_button);
 		UiUtilities.setupCompoundButton(button, nightMode, TOOLBAR);
 		itemLiveUpdateButton.setMinimumHeight(getDimen(R.dimen.bottom_sheet_selected_item_title_height));
-		items.add(new BottomSheetItemWithCompoundButton.Builder()
+		itemSwitchLiveUpdate = new BottomSheetItemWithCompoundButton.Builder()
 				.setChecked(localUpdatePreference.get())
 				.setTitle(getStateText(localUpdatePreference.get()))
 				.setTitleColorId(getActiveTabTextColorId(nightMode))
@@ -143,45 +147,84 @@ public class LiveUpdatesSettingsDialogFragmentNew extends MenuBottomSheetDialogF
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						if (indexSwitchLiveUpdateItem != -1) {
-							BottomSheetItemWithCompoundButton button = (BottomSheetItemWithCompoundButton) items.get(indexSwitchLiveUpdateItem);
-							button.setChecked(!button.isChecked());
-							if (onLiveUpdatesForLocalChange != null
-									&& onLiveUpdatesForLocalChange.onUpdateLocalIndex(fileName, button.isChecked(), new Runnable() {
-								@Override
-								public void run() {
-									updateLastCheck();
-									updateFrequencyHelpMessage();
-									updateFileSize();
+						BottomSheetItemWithCompoundButton item = (BottomSheetItemWithCompoundButton) itemSwitchLiveUpdate;
+						boolean checked = item.isChecked();
+						item.setChecked(!checked);
+						if (onLiveUpdatesForLocalChange != null
+								&& onLiveUpdatesForLocalChange.onUpdateLocalIndex(fileName, !checked, new Runnable() {
+							@Override
+							public void run() {
+								updateLastCheck();
+								updateFrequencyHelpMessage();
+								updateFileSize();
+								Fragment target = getTargetFragment();
+								if (target instanceof LiveUpdatesFragment) {
+									((LiveUpdatesFragment) target).runSort();
 								}
-							})) {
-								if (indexSwitchLiveUpdateItem != -1 && items.size() > 0) {
-									button.setTitle(getStateText(button.isChecked()));
-									updateCustomButtonView(app, null, button.getView(), button.isChecked(), nightMode);
-								}
-								CommonPreference<Boolean> localUpdatePreference = preferenceForLocalIndex(fileName, settings);
-								frequencyToggleButton.updateView(localUpdatePreference.get());
-								timeOfDayToggleButton.updateView(localUpdatePreference.get());
-								setStateViaWiFiButton(localUpdatePreference);
 							}
+						})) {
+							item.setTitle(getStateText(!checked));
+							updateCustomButtonView(app, null, item.getView(), !checked, nightMode);
+							CommonPreference<Boolean> localUpdatePreference = preferenceForLocalIndex(fileName, settings);
+							frequencyToggleButton.updateView(localUpdatePreference.get());
+							timeOfDayToggleButton.updateView(localUpdatePreference.get());
+							setStateViaWiFiButton(localUpdatePreference);
 						}
 					}
 				})
+				.create();
+		items.add(itemSwitchLiveUpdate);
+
+		Typeface typefaceRegular = FontCache.getRobotoRegular(app);
+		TextViewEx timeOfDayTitle = (TextViewEx) inflater.inflate(R.layout.bottom_sheet_item_title, null);
+		timeOfDayTitle.setHeight(dp48);
+		timeOfDayTitle.setMinimumHeight(dp48);
+		timeOfDayTitle.setText(R.string.update_time);
+		timeOfDayTitle.setTypeface(typefaceRegular);
+		AndroidUtils.setPadding(timeOfDayTitle, timeOfDayTitle.getPaddingLeft(), dp4, timeOfDayTitle.getPaddingRight(), dp4);
+		AndroidUtils.setTextPrimaryColor(app, timeOfDayTitle, nightMode);
+		items.add(new BaseBottomSheetItem.Builder()
+				.setCustomView(timeOfDayTitle)
 				.create());
-		indexSwitchLiveUpdateItem = items.size() - 1;
+
+		LinearLayout itemTimeOfDayButtons = (LinearLayout) inflater.inflate(R.layout.custom_radio_buttons, null);
+		LinearLayout.MarginLayoutParams itemTimeOfDayParams = new LinearLayout.MarginLayoutParams(
+				LinearLayout.MarginLayoutParams.MATCH_PARENT, LinearLayout.MarginLayoutParams.WRAP_CONTENT);
+		AndroidUtils.setMargins(itemTimeOfDayParams, dp16, 0, dp16, 0);
+		itemTimeOfDayButtons.setLayoutParams(itemTimeOfDayParams);
+
+		String morning = getString(R.string.morning);
+		String night = getString(R.string.night);
+		RadioItem morningButton = new RadioItem(morning);
+		RadioItem nightButton = new RadioItem(night);
+		timeOfDayToggleButton = new MultiStateToggleButton(app, itemTimeOfDayButtons, nightMode);
+		timeOfDayToggleButton.setItems(morningButton, nightButton);
+		setSelectedRadioItem(timeOfDayToggleButton, timeOfDayPreference.get(), morningButton, nightButton);
+		timeOfDayToggleButton.updateView(localUpdatePreference.get());
+		refreshTimeOfDayLayout(frequencyPreference.get(), itemTimeOfDayButtons, timeOfDayTitle);
+
+		morningButton.setOnClickListener(getTimeOfDayButtonListener(TimeOfDay.MORNING));
+		nightButton.setOnClickListener(getTimeOfDayButtonListener(TimeOfDay.NIGHT));
+
+		items.add(new BaseBottomSheetItem.Builder()
+				.setCustomView(itemTimeOfDayButtons)
+				.create()
+		);
 
 		TextViewEx frequencyTitle = (TextViewEx) inflater.inflate(R.layout.bottom_sheet_item_title, null);
 		frequencyTitle.setHeight(dp48);
 		frequencyTitle.setMinimumHeight(dp48);
 		frequencyTitle.setText(R.string.update_frequency);
-		AndroidUtils.setPadding(frequencyTitle, frequencyTitle.getPaddingLeft(), 0, frequencyTitle.getPaddingRight(), 0);
+		frequencyTitle.setTypeface(typefaceRegular);
+		AndroidUtils.setPadding(frequencyTitle, frequencyTitle.getPaddingLeft(), dp4, frequencyTitle.getPaddingRight(), dp4);
 		AndroidUtils.setTextPrimaryColor(app, frequencyTitle, nightMode);
 		items.add(new BaseBottomSheetItem.Builder()
 				.setCustomView(frequencyTitle)
 				.create());
 
 		LinearLayout itemFrequencyButtons = (LinearLayout) inflater.inflate(R.layout.custom_radio_buttons, null);
-		LinearLayout.MarginLayoutParams itemFrequencyParams = new LinearLayout.MarginLayoutParams(LinearLayout.MarginLayoutParams.MATCH_PARENT, LinearLayout.MarginLayoutParams.WRAP_CONTENT);
+		LinearLayout.MarginLayoutParams itemFrequencyParams = new LinearLayout.MarginLayoutParams(
+				LinearLayout.MarginLayoutParams.MATCH_PARENT, LinearLayout.MarginLayoutParams.WRAP_CONTENT);
 		AndroidUtils.setMargins(itemFrequencyParams, dp16, 0, dp16, dp12);
 		itemFrequencyButtons.setLayoutParams(itemFrequencyParams);
 
@@ -200,58 +243,27 @@ public class LiveUpdatesSettingsDialogFragmentNew extends MenuBottomSheetDialogF
 				.setCustomView(itemFrequencyButtons)
 				.create());
 
-		TextViewEx timeOfDayTitle = (TextViewEx) inflater.inflate(R.layout.bottom_sheet_item_title, null);
-		timeOfDayTitle.setHeight(dp40);
-		timeOfDayTitle.setMinimumHeight(dp40);
-		timeOfDayTitle.setText(R.string.update_time);
-		AndroidUtils.setPadding(timeOfDayTitle, timeOfDayTitle.getPaddingLeft(), 0, timeOfDayTitle.getPaddingRight(), 0);
-		AndroidUtils.setTextPrimaryColor(app, timeOfDayTitle, nightMode);
-		items.add(new BaseBottomSheetItem.Builder()
-				.setCustomView(timeOfDayTitle)
-				.create());
-
-		LinearLayout itemTimeOfDayButtons = (LinearLayout) inflater.inflate(R.layout.custom_radio_buttons, null);
-		LinearLayout.MarginLayoutParams itemTimeOfDayParams = new LinearLayout.MarginLayoutParams(LinearLayout.MarginLayoutParams.MATCH_PARENT, LinearLayout.MarginLayoutParams.WRAP_CONTENT);
-		AndroidUtils.setMargins(itemTimeOfDayParams, dp16, 0, dp16, getDimen(R.dimen.context_menu_padding_margin_medium));
-		itemTimeOfDayButtons.setLayoutParams(itemTimeOfDayParams);
-
-		String morning = getString(R.string.morning);
-		String night = getString(R.string.night);
-		RadioItem morningButton = new RadioItem(morning);
-		RadioItem nightButton = new RadioItem(night);
-		timeOfDayToggleButton = new MultiStateToggleButton(app, itemTimeOfDayButtons, nightMode);
-		timeOfDayToggleButton.setItems(morningButton, nightButton);
-		setSelectedRadioItem(timeOfDayToggleButton, timeOfDayPreference.get(), morningButton, nightButton);
-		timeOfDayToggleButton.updateView(localUpdatePreference.get());
-		refreshTimeOfDayLayout(frequencyPreference.get(), itemTimeOfDayButtons, timeOfDayTitle);
-
 		hourlyButton.setOnClickListener(getFrequencyButtonListener(UpdateFrequency.HOURLY, itemTimeOfDayButtons, timeOfDayTitle));
 		dailyButton.setOnClickListener(getFrequencyButtonListener(UpdateFrequency.DAILY, itemTimeOfDayButtons, timeOfDayTitle));
 		weeklyButton.setOnClickListener(getFrequencyButtonListener(UpdateFrequency.WEEKLY, itemTimeOfDayButtons, timeOfDayTitle));
-		morningButton.setOnClickListener(getTimeOfDayButtonListener(TimeOfDay.MORNING));
-		nightButton.setOnClickListener(getTimeOfDayButtonListener(TimeOfDay.NIGHT));
 
-		items.add(new BaseBottomSheetItem.Builder()
-				.setCustomView(itemTimeOfDayButtons)
-				.create()
-		);
-
-		items.add(new ShortDescriptionItem.Builder()
+		itemFrequencyHelpMessage = new ShortDescriptionItem.Builder()
 				.setDescription(getFrequencyHelpMessage())
 				.setDescriptionColorId(getSecondaryTextColorId(nightMode))
 				.setLayoutId(R.layout.bottom_sheet_item_description)
-				.create());
-		indexFrequencyHelpMessageItem = items.size() - 1;
+				.create();
+		items.add(itemFrequencyHelpMessage);
 
-		LinearLayout itemUpdateNowButton = (LinearLayout) inflater.inflate(R.layout.bottom_sheet_button_with_icon_center, null);
+		LinearLayout itemUpdateNowButton =
+				(LinearLayout) inflater.inflate(R.layout.bottom_sheet_button_with_icon_center, null);
 		LinearLayout.MarginLayoutParams itemUpdateNowParams = new LinearLayout.MarginLayoutParams(
-				LinearLayout.MarginLayoutParams.MATCH_PARENT, getDimen(R.dimen.measurement_tool_button_height));
-		AndroidUtils.setMargins(itemUpdateNowParams, dp12, dp12, dp16, dp12);
+				LinearLayout.MarginLayoutParams.MATCH_PARENT, dp36);
+		AndroidUtils.setMargins(itemUpdateNowParams, dp12, 0, dp16, dp12);
 		itemUpdateNowButton.setLayoutParams(itemUpdateNowParams);
 		((AppCompatImageView) itemUpdateNowButton.findViewById(R.id.button_icon)).setImageDrawable(
 				AppCompatResources.getDrawable(app, R.drawable.ic_action_update));
 		UiUtilities.setupDialogButton(nightMode, itemUpdateNowButton, UiUtilities.DialogButtonType.SECONDARY, getString(R.string.update_now));
-		itemUpdateNowButton.setMinimumHeight(AndroidUtils.dpToPx(app, app.getResources().getDimension(R.dimen.dialog_button_height)));
+		itemUpdateNowButton.setMinimumHeight(AndroidUtils.dpToPx(app, dp36));
 
 		items.add(new BaseBottomSheetItem.Builder()
 				.setCustomView(itemUpdateNowButton)
@@ -268,6 +280,10 @@ public class LiveUpdatesSettingsDialogFragmentNew extends MenuBottomSheetDialogF
 										updateLastCheck();
 										updateFrequencyHelpMessage();
 										updateFileSize();
+										Fragment target = getTargetFragment();
+										if (target instanceof LiveUpdatesFragment) {
+											((LiveUpdatesFragment) target).updateList();
+										}
 									}
 								});
 							}
@@ -281,51 +297,47 @@ public class LiveUpdatesSettingsDialogFragmentNew extends MenuBottomSheetDialogF
 		int iconDeleteColor = ContextCompat.getColor(app, R.color.color_osm_edit_delete);
 		Drawable iconDelete = AppCompatResources.getDrawable(app, R.drawable.ic_action_delete_dark);
 
-		items.add(
-				new BottomSheetItemWithDescription.Builder()
-						.setDescription(getUpdatesSizeStr())
-						.setIcon(UiUtilities.tintDrawable(iconDelete, iconDeleteColor))
-						.setTitle(getString(R.string.updates_size))
-						.setLayoutId(R.layout.bottom_sheet_item_with_descr_icon_right)
-						.setOnClickListener(new View.OnClickListener() {
-							@Override
-							public void onClick(View v) {
-								if (getUpdatesSize() > 0) {
-									if (getFragmentManager() != null) {
-										LiveUpdatesClearDialogFragment
-												.showInstance(getFragmentManager(),
-														LiveUpdatesSettingsDialogFragmentNew.this, fileName);
-									}
-								}
+		itemClear = new BottomSheetItemWithDescription.Builder()
+				.setDescription(getUpdatesSizeStr())
+				.setIcon(UiUtilities.tintDrawable(iconDelete, iconDeleteColor))
+				.setTitle(getString(R.string.updates_size))
+				.setLayoutId(R.layout.bottom_sheet_item_with_descr_icon_right)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						if (getUpdatesSize() > 0) {
+							if (getFragmentManager() != null) {
+								LiveUpdatesClearBottomSheet.showInstance(getFragmentManager(),
+										LiveUpdatesSettingsBottomSheet.this, fileName);
 							}
-						})
-						.create()
-		);
-		indexClearItem = items.size() - 1;
+						}
+					}
+				})
+				.create();
+		items.add(itemClear);
 
 		items.add(createDividerItem());
 
-		items.add(
-				new BottomSheetItemWithCompoundButton.Builder()
-						.setChecked(downloadViaWiFiPreference.get())
-						.setDescription(getStateText(downloadViaWiFiPreference.get()))
-						.setIconHidden(true)
-						.setTitle(getString(R.string.only_download_over_wifi))
-						.setLayoutId(R.layout.bottom_sheet_item_with_descr_and_switch_56dp)
-						.setOnClickListener(new View.OnClickListener() {
-							@Override
-							public void onClick(View v) {
-								if (preferenceForLocalIndex(fileName, settings).get() && indexViaWiFiItem != -1 && items.size() > 0) {
-									BottomSheetItemWithCompoundButton button = (BottomSheetItemWithCompoundButton) items.get(indexViaWiFiItem);
-									button.setChecked(!button.isChecked());
-									button.setDescription(getStateText(button.isChecked()));
-									preferenceDownloadViaWiFi(fileName, settings).set(button.isChecked());
-								}
-							}
-						})
-						.create()
-		);
-		indexViaWiFiItem = items.size() - 1;
+		itemViaWiFi = new BottomSheetItemWithCompoundButton.Builder()
+				.setChecked(downloadViaWiFiPreference.get())
+				.setDescription(getStateText(downloadViaWiFiPreference.get()))
+				.setIconHidden(true)
+				.setTitle(getString(R.string.only_download_over_wifi))
+				.setLayoutId(R.layout.bottom_sheet_item_with_descr_and_switch_56dp)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						if (preferenceForLocalIndex(fileName, settings).get()) {
+							BottomSheetItemWithCompoundButton item = (BottomSheetItemWithCompoundButton) itemViaWiFi;
+							boolean checked = item.isChecked();
+							item.setChecked(!checked);
+							item.setDescription(getStateText(!checked));
+							preferenceDownloadViaWiFi(fileName, settings).set(!checked);
+						}
+					}
+				})
+				.create();
+		items.add(itemViaWiFi);
 
 		items.add(new DividerSpaceItem(app, getDimen(R.dimen.context_menu_padding_margin_large)));
 	}
@@ -334,6 +346,24 @@ public class LiveUpdatesSettingsDialogFragmentNew extends MenuBottomSheetDialogF
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 		View view = super.onCreateView(inflater, parent, savedInstanceState);
+
+		int titleHeight = getDimen(R.dimen.bottom_sheet_descr_height);
+		TextViewEx titleView = (TextViewEx) itemTitle.getView();
+		titleView.setMinimumHeight(titleHeight);
+		titleView.getLayoutParams().height = titleHeight;
+		titleView.setPadding(titleView.getPaddingLeft(), getDimen(R.dimen.content_padding_small),
+				titleView.getPaddingRight(), getDimen(R.dimen.list_item_button_padding));
+
+		int descriptionHeight = getDimen(R.dimen.bottom_sheet_title_height);
+		TextView descriptionView = (TextView) itemLastCheck.getView();
+		descriptionView.setMinimumHeight(descriptionHeight);
+		descriptionView.getLayoutParams().height = descriptionHeight;
+
+		int frequencyHelpMessageHeight = getDimen(R.dimen.context_menu_progress_min_height);
+		TextView frequencyHelpMessageView = (TextView) itemFrequencyHelpMessage.getView();
+		frequencyHelpMessageView.setMinimumHeight(frequencyHelpMessageHeight);
+		frequencyHelpMessageView.getLayoutParams().height = frequencyHelpMessageHeight;
+
 		CommonPreference<Boolean> localUpdatePreference = preferenceForLocalIndex(fileName, settings);
 		setStateViaWiFiButton(localUpdatePreference);
 		return view;
@@ -346,12 +376,12 @@ public class LiveUpdatesSettingsDialogFragmentNew extends MenuBottomSheetDialogF
 	}
 
 	private void setStateViaWiFiButton(CommonPreference<Boolean> localUpdatePreference) {
-		if (indexViaWiFiItem != -1 && items.size() > 0) {
-			BottomSheetItemWithCompoundButton button = (BottomSheetItemWithCompoundButton) items.get(indexViaWiFiItem);
-			if (button.getView() != null) {
-				TextView title = button.getView().findViewById(R.id.title);
-				TextView description = button.getView().findViewById(R.id.description);
-				CompoundButton compoundButton = button.getView().findViewById(R.id.compound_button);
+		if (itemViaWiFi != null) {
+			BottomSheetItemWithCompoundButton item = (BottomSheetItemWithCompoundButton) itemViaWiFi;
+			if (item.getView() != null) {
+				TextView title = item.getView().findViewById(R.id.title);
+				TextView description = item.getView().findViewById(R.id.description);
+				CompoundButton compoundButton = item.getView().findViewById(R.id.compound_button);
 				if (localUpdatePreference.get()) {
 					AndroidUtils.setTextPrimaryColor(app, title, nightMode);
 					AndroidUtils.setTextSecondaryColor(app, description, nightMode);
@@ -366,23 +396,20 @@ public class LiveUpdatesSettingsDialogFragmentNew extends MenuBottomSheetDialogF
 	}
 
 	private void updateLastCheck() {
-		if (indexLastCheckItem != -1 && items.size() > 0) {
-			((BottomSheetItemWithDescription) items.get(indexLastCheckItem))
-					.setDescription(getLastCheckString());
+		if (itemLastCheck != null) {
+			((BottomSheetItemWithDescription) itemLastCheck).setDescription(getLastCheckString());
 		}
 	}
 
 	private void updateFrequencyHelpMessage() {
-		if (indexFrequencyHelpMessageItem != -1 && items.size() > 0) {
-			((BottomSheetItemWithDescription) items.get(indexFrequencyHelpMessageItem))
-					.setDescription(getFrequencyHelpMessage());
+		if (itemFrequencyHelpMessage != null) {
+			((BottomSheetItemWithDescription) itemFrequencyHelpMessage).setDescription(getFrequencyHelpMessage());
 		}
 	}
 
 	private void updateFileSize() {
-		if (indexClearItem != -1 && items.size() > 0) {
-			((BottomSheetItemWithDescription) items.get(indexClearItem))
-					.setDescription(getUpdatesSizeStr());
+		if (itemClear != null) {
+			((BottomSheetItemWithDescription) itemClear).setDescription(getUpdatesSizeStr());
 		}
 	}
 
@@ -414,7 +441,8 @@ public class LiveUpdatesSettingsDialogFragmentNew extends MenuBottomSheetDialogF
 		CommonPreference<Integer> updateFrequency = preferenceUpdateFrequency(fileName, settings);
 		CommonPreference<Integer> timeOfDayToUpdate = preferenceTimeOfDayToUpdate(fileName, settings);
 		final long lastUpdate = preferenceLatestUpdateAvailable(fileName, settings).get();
-		return formatHelpDateTime(app, UpdateFrequency.values()[updateFrequency.get()], TimeOfDay.values()[timeOfDayToUpdate.get()], lastUpdate);
+		return formatHelpDateTime(app, UpdateFrequency.values()[updateFrequency.get()],
+				TimeOfDay.values()[timeOfDayToUpdate.get()], lastUpdate);
 	}
 
 	private long getUpdatesSize() {
@@ -433,8 +461,8 @@ public class LiveUpdatesSettingsDialogFragmentNew extends MenuBottomSheetDialogF
 
 	private BaseBottomSheetItem createDividerItem() {
 		DividerItem dividerItem = new DividerItem(app);
-		int start = app.getResources().getDimensionPixelSize(R.dimen.content_padding);
-		int vertical = getResources().getDimensionPixelSize(R.dimen.content_padding_small_half);
+		int start = getDimen(R.dimen.content_padding);
+		int vertical = getDimen(R.dimen.content_padding_small_half);
 		dividerItem.setMargins(start, vertical, 0, vertical);
 		return dividerItem;
 	}
@@ -459,7 +487,8 @@ public class LiveUpdatesSettingsDialogFragmentNew extends MenuBottomSheetDialogF
 		}
 	}
 
-	private OnRadioItemClickListener getFrequencyButtonListener(@NonNull final UpdateFrequency type, final View... timeOfDayLayouts) {
+	private OnRadioItemClickListener getFrequencyButtonListener(
+			@NonNull final UpdateFrequency type, final View... timeOfDayLayouts) {
 		return new OnRadioItemClickListener() {
 			@Override
 			public boolean onRadioItemClick(RadioItem radioItem, View view) {
@@ -544,5 +573,4 @@ public class LiveUpdatesSettingsDialogFragmentNew extends MenuBottomSheetDialogF
 	protected int getDismissButtonTextId() {
 		return R.string.shared_string_close;
 	}
-
 }

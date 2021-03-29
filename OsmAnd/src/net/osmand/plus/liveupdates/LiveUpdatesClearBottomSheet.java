@@ -31,10 +31,10 @@ import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getNameToDisplay;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastCheck;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLatestUpdateAvailable;
 
-public class LiveUpdatesClearDialogFragment extends MenuBottomSheetDialogFragment {
+public class LiveUpdatesClearBottomSheet extends MenuBottomSheetDialogFragment {
 
-	public static final String TAG = LiveUpdatesClearDialogFragment.class.getSimpleName();
-	private static final Log LOG = PlatformUtil.getLog(LiveUpdatesClearDialogFragment.class);
+	public static final String TAG = LiveUpdatesClearBottomSheet.class.getSimpleName();
+	private static final Log LOG = PlatformUtil.getLog(LiveUpdatesClearBottomSheet.class);
 	private static final String LOCAL_INDEX_FILE_NAME = "local_index_file_name";
 
 	private OsmandApplication app;
@@ -44,7 +44,7 @@ public class LiveUpdatesClearDialogFragment extends MenuBottomSheetDialogFragmen
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, Fragment target, String fileName) {
 		if (!fragmentManager.isStateSaved()) {
-			LiveUpdatesClearDialogFragment fragment = new LiveUpdatesClearDialogFragment();
+			LiveUpdatesClearBottomSheet fragment = new LiveUpdatesClearBottomSheet();
 			fragment.setTargetFragment(target, 0);
 			fragment.fileName = fileName;
 			fragment.show(fragmentManager, TAG);
