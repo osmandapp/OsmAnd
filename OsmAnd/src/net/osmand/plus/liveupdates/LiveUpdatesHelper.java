@@ -278,7 +278,5 @@ public class LiveUpdatesHelper {
 		void processFinish();
 
 		List<LocalIndexInfo> getMapsToUpdate();
-
-		Fragment currentFragment();
 	}
 }

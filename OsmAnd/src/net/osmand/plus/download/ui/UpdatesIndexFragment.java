@@ -29,7 +29,6 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.MenuItemCompat;
-import androidx.fragment.app.Fragment;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Collator;
@@ -424,11 +423,6 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 	@Override
 	public List<LocalIndexInfo> getMapsToUpdate() {
 		return LiveUpdatesFragment.getMapsToUpdate(listAdapter.mapsList, settings);
-	}
-
-	@Override
-	public Fragment currentFragment() {
-		return this;
 	}
 
 	@ColorRes
