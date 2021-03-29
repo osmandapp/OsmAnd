@@ -26,7 +26,7 @@ import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
-import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.monitoring.TripRecordingBottomSheet.DismissTargetFragment;
 import net.osmand.plus.monitoring.TripRecordingBottomSheet.ItemType;
 import net.osmand.plus.myplaces.SaveCurrentTrackTask;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -34,11 +34,13 @@ import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.util.Algorithms;
 
 import static net.osmand.AndroidUtils.getPrimaryTextColorId;
+import static net.osmand.plus.monitoring.TripRecordingBottomSheet.UPDATE_DYNAMIC_ITEMS;
 
-public class TripRecordingOptionsBottomSheet extends MenuBottomSheetDialogFragment implements TripRecordingBottomSheet.DismissTargetFragment {
+public class TripRecordingOptionsBottomSheet extends MenuBottomSheetDialogFragment implements DismissTargetFragment {
 
 	public static final String TAG = TripRecordingOptionsBottomSheet.class.getSimpleName();
 	public static final String ACTION_STOP_AND_DISMISS = "action_stop_and_discard";
+	public static final String ACTION_CLEAR_DATA = "action_clear_data";
 	private static final int SAVE_UPDATE_INTERVAL = 1000;
 
 	private OsmandApplication app;
@@ -210,8 +212,10 @@ public class TripRecordingOptionsBottomSheet extends MenuBottomSheetDialogFragme
 			@Override
 			public void run() {
 				String time = getTimeTrackSaved();
-				TripRecordingBottomSheet.createItem(app, nightMode, buttonSave, ItemType.SAVE, hasDataToSave(), !Algorithms.isEmpty(time) ? time : null);
-				TripRecordingBottomSheet.createItem(app, nightMode, buttonClear, ItemType.CLEAR_DATA, hasDataToSave(), null);
+				TripRecordingBottomSheet.createItem(app, nightMode, buttonSave, ItemType.SAVE,
+						hasDataToSave(), !Algorithms.isEmpty(time) ? time : null);
+				TripRecordingBottomSheet.createItem(app, nightMode, buttonClear, ItemType.CLEAR_DATA,
+						hasDataToSave(), null);
 				handler.postDelayed(this, SAVE_UPDATE_INTERVAL);
 			}
 		};
@@ -255,9 +259,14 @@ public class TripRecordingOptionsBottomSheet extends MenuBottomSheetDialogFragme
 				if (mapActivity != null && plugin != null) {
 					stopUpdatingTimeTrackSaved();
 					plugin.saveCurrentTrack(null, mapActivity, false, true);
-					Bundle args = new Bundle();
-					args.putBoolean(ACTION_STOP_AND_DISMISS, true);
-					setArguments(args);
+					Bundle args = getArguments();
+					if (args != null) {
+						args.putBoolean(ACTION_STOP_AND_DISMISS, true);
+					} else {
+						args = new Bundle();
+						args.putBoolean(ACTION_STOP_AND_DISMISS, true);
+						setArguments(args);
+					}
 					dismiss();
 					dismissTarget();
 				}
@@ -273,12 +282,22 @@ public class TripRecordingOptionsBottomSheet extends MenuBottomSheetDialogFragme
 		return false;
 	}
 
+	private boolean isCleared() {
+		Bundle args = getArguments();
+		if (args != null) {
+			return args.getBoolean(ACTION_CLEAR_DATA);
+		}
+		return false;
+	}
+
 	@Override
 	public void dismissTarget() {
 		Fragment target = getTargetFragment();
 		if (target instanceof TripRecordingBottomSheet) {
 			if (isDiscard()) {
 				((TripRecordingBottomSheet) target).dismiss();
+			} else if (isCleared()) {
+				((TripRecordingBottomSheet) target).show(UPDATE_DYNAMIC_ITEMS);
 			} else {
 				((TripRecordingBottomSheet) target).show();
 			}
