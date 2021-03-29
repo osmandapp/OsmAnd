@@ -35,6 +35,8 @@ import java.util.List;
 
 public class CountrySelectionFragment extends BaseOsmAndDialogFragment {
 
+	public static final String TAG = CountrySelectionFragment.class.getSimpleName();
+
 	private List<CountryItem> countryItems = new ArrayList<>();
 	private OnFragmentInteractionListener mListener;
 

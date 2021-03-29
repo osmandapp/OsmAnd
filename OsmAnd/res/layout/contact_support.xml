@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:id="@+id/support_link_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?android:attr/selectableItemBackground"
+		android:minHeight="@dimen/list_item_height"
+		android:paddingStart="@dimen/list_content_padding"
+		android:paddingLeft="@dimen/list_content_padding"
+		android:paddingEnd="@dimen/list_content_padding"
+		android:paddingRight="@dimen/list_content_padding">
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/support_link_icon"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_marginEnd="@dimen/map_widget_height"
+			android:layout_marginRight="@dimen/map_widget_height"
+			app:srcCompat="@drawable/ic_action_at_mail"
+			app:tint="?attr/active_color_basic" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/support_link_title"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_marginEnd="@dimen/title_padding"
+			android:layout_marginRight="@dimen/title_padding"
+			android:paddingTop="@dimen/contex_menu_top_shadow_height"
+			android:letterSpacing="@dimen/text_button_letter_spacing"
+			android:text="@string/contact_support_description"
+			android:textColor="?android:textColorPrimary"
+			android:textSize="@dimen/default_list_text_size"
+			osmand:typeface="@string/font_roboto_regular"/>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/contact_support_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?android:attr/selectableItemBackground"
+		android:paddingStart="@dimen/action_bar_image_side_margin"
+		android:paddingLeft="@dimen/action_bar_image_side_margin"
+		android:paddingTop="@dimen/card_padding"
+		android:paddingEnd="@dimen/action_bar_image_side_margin"
+		android:paddingRight="@dimen/action_bar_image_side_margin"
+		android:paddingBottom="@dimen/card_padding"
+		android:clickable="true"
+		android:focusable="true">
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/contact_support_title"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_weight="1"
+			android:text="@string/contact_support"
+			android:textColor="?attr/active_color_basic"
+			android:textSize="@dimen/default_list_text_size"
+			osmand:typeface="@string/font_roboto_medium" />
+
+	</LinearLayout>
+
+</LinearLayout>

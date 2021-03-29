@@ -22,19 +22,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SwitchCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.chooseplan.ChoosePlanDialogFragment.ChoosePlanDialogType;
-import net.osmand.plus.settings.backend.CommonPreference;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.LocalIndexHelper;
@@ -43,12 +31,15 @@ import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
+import net.osmand.plus.chooseplan.ChoosePlanDialogFragment.ChoosePlanDialogType;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.resources.IncrementalChangesManager;
+import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -58,6 +49,15 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import static net.osmand.plus.liveupdates.LiveUpdatesFragmentNew.showUpdateDialog;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.DEFAULT_LAST_CHECK;
@@ -181,28 +181,9 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 				statusTextView.setText(getString(R.string.osm_live_active));
 				statusIcon.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_done));
 
-				regionNameHeaderTextView.setText(R.string.osm_live_support_region);
-				String countryName = app.getSettings().BILLING_USER_COUNTRY.get();
-				InAppPurchaseHelper purchaseHelper = getInAppPurchaseHelper();
-				if (purchaseHelper != null) {
-					InAppSubscription monthlyPurchased = purchaseHelper.getPurchasedMonthlyLiveUpdates();
-					if (monthlyPurchased != null && monthlyPurchased.isDonationSupported()) {
-						if (Algorithms.isEmpty(countryName)) {
-							if (app.getSettings().BILLING_USER_COUNTRY_DOWNLOAD_NAME.get().equals(OsmandSettings.BILLING_USER_DONATION_NONE_PARAMETER)) {
-								regionNameHeaderTextView.setText(R.string.default_buttons_support);
-								countryName = getString(R.string.osmand_team);
-							} else {
-								countryName = getString(R.string.shared_string_world);
-							}
-						}
-					} else {
-						regionNameHeaderTextView.setText(R.string.default_buttons_support);
-						countryName = getString(R.string.osmand_team);
-					}
-				} else {
-					regionNameHeaderTextView.setText(R.string.default_buttons_support);
-					countryName = getString(R.string.osmand_team);
-				}
+				String countryName = getSupportRegionName(app, getInAppPurchaseHelper());
+				String header = getSupportRegionHeader(app, countryName);
+				regionNameHeaderTextView.setText(header);
 				regionNameTextView.setText(countryName);
 
 				View subscriptionsButton = subscriptionHeader.findViewById(R.id.button_subscriptions);
@@ -295,6 +276,41 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 	private void showDonationSettings() {
 		SubscriptionFragment subscriptionFragment = new SubscriptionFragment();
 		subscriptionFragment.show(getChildFragmentManager(), SubscriptionFragment.TAG);
+	}
+
+	public static String getSupportRegionName(OsmandApplication app, InAppPurchaseHelper purchaseHelper) {
+		OsmandSettings settings = app.getSettings();
+		String countryName = settings.BILLING_USER_COUNTRY.get();
+		if (purchaseHelper != null) {
+			List<InAppSubscription> subscriptions = purchaseHelper.getLiveUpdates().getVisibleSubscriptions();
+			boolean donationSupported = false;
+			for (InAppSubscription s : subscriptions) {
+				if (s.isDonationSupported()) {
+					donationSupported = true;
+					break;
+				}
+			}
+			if (donationSupported) {
+				if (Algorithms.isEmpty(countryName)) {
+					if (OsmandSettings.BILLING_USER_DONATION_NONE_PARAMETER.equals(settings.BILLING_USER_COUNTRY_DOWNLOAD_NAME.get())) {
+						countryName = app.getString(R.string.osmand_team);
+					} else {
+						countryName = app.getString(R.string.shared_string_world);
+					}
+				}
+			} else {
+				countryName = app.getString(R.string.osmand_team);
+			}
+		} else {
+			countryName = app.getString(R.string.osmand_team);
+		}
+		return countryName;
+	}
+
+	public static String getSupportRegionHeader(OsmandApplication app, String supportRegion) {
+		return supportRegion.equals(app.getString(R.string.osmand_team)) ?
+				app.getString(R.string.default_buttons_support) :
+				app.getString(R.string.osm_live_support_region);
 	}
 
 	protected class LocalIndexesAdapter extends OsmandBaseExpandableListAdapter {

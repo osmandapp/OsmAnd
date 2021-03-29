@@ -18,6 +18,23 @@
     • Added option to change the appearance of the navigation route line\n\n
     • Updated \"Trip recording\" dialog\n\n
     </string>
+    <string name="expired">Expired</string>
+    <string name="on_hold">On hold</string>
+    <string name="in_grace_period">In grace period</string>
+    <string name="renew_subscription">Renew subscription</string>
+    <string name="osmand_live_cancelled">Cancelled</string>
+    <string name="next_billing_date">Next billing date: %1$s</string>
+    <string name="three_months_subscription">Three months subscription</string>
+    <string name="monthly_subscription">Monthly subscription</string>
+    <string name="annual_subscription">Annual subscription</string>
+    <string name="osmand_live">OsmAnd Live</string>
+    <string name="troubleshooting_description">Please follow this link if you any issues with purchases.</string>
+    <string name="troubleshooting">Troubleshooting</string>
+    <string name="contact_support">Contact support</string>
+    <string name="empty_purchases_description">If your purchases don\'t show up here, tap on “%1$s”, or contact our support team.</string>
+    <string name="contact_support_description">If you have any questions, please contact us at %1$s.</string>
+    <string name="new_device_account">New device / new account</string>
+    <string name="no_purchases">You don\'t have any purchases</string>
     <string name="specify_color_for_map_mode">Specify color for map mode: %1$s.</string>
     <string name="route_line_use_map_style_appearance">Route line would be use %1$s specified on selected map style: %2$s.</string>
     <string name="shared_string_route_line">Route line</string>

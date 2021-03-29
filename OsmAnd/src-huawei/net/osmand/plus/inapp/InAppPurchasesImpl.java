@@ -166,6 +166,11 @@ public class InAppPurchasesImpl extends InAppPurchases {
 		}
 
 		@Override
+		public int getPeriodTypeString() {
+			return R.string.monthly_subscription;
+		}
+
+		@Override
 		public String getDefaultPrice(Context ctx) {
 			return "";
 		}

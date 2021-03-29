@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.ColorRes;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
@@ -44,6 +43,7 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 
 	private static final String CONFIGURE_PROFILE = "configure_profile";
 	private static final String APP_PROFILES = "app_profiles";
+	private static final String PURCHASES_SETTINGS = "purchases_settings";
 	private static final String SELECTED_PROFILE = "selected_profile";
 	private static final String CREATE_PROFILE = "create_profile";
 	private static final String IMPORT_PROFILE = "import_profile";
@@ -70,10 +70,12 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 		availableAppModes = new LinkedHashSet<>(ApplicationMode.values(getMyApplication()));
 		Preference globalSettings = findPreference("global_settings");
 		globalSettings.setIcon(getContentIcon(R.drawable.ic_action_settings));
-		PreferenceCategory selectedProfile = (PreferenceCategory) findPreference(SELECTED_PROFILE);
+		Preference purchasesSettings = findPreference(PURCHASES_SETTINGS);
+		purchasesSettings.setIcon(getContentIcon(R.drawable.ic_action_purchases));
+		PreferenceCategory selectedProfile = findPreference(SELECTED_PROFILE);
 		selectedProfile.setIconSpaceReserved(false);
 		setupConfigureProfilePref();
-		PreferenceCategory appProfiles = (PreferenceCategory) findPreference(APP_PROFILES);
+		PreferenceCategory appProfiles = findPreference(APP_PROFILES);
 		appProfiles.setIconSpaceReserved(false);
 		setupAppProfiles(appProfiles);
 		profileManagementPref();
@@ -148,7 +150,14 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 				FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 				ExportSettingsFragment.showInstance(fragmentManager, mode, true);
 			}
+		} else if (PURCHASES_SETTINGS.equals(prefId)) {
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+				PurchasesFragment.showInstance(fragmentManager);
+			}
 		}
+
 		return super.onPreferenceClick(preference);
 	}
 

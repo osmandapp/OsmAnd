@@ -69,6 +69,7 @@
         </LinearLayout>
 
         <include
+            android:id="@+id/icon_toolbar"
             layout="@layout/profile_button_small"
             android:layout_width="@dimen/route_info_toolbar_button_size"
             android:layout_height="@dimen/route_info_toolbar_button_size"
