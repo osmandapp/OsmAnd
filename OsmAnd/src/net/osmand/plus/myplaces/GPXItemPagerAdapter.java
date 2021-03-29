@@ -102,31 +102,18 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 
 	public GPXItemPagerAdapter(@NonNull OsmandApplication app,
 							   @Nullable GpxDisplayItem gpxItem,
-							   @Nullable TrackDisplayHelper displayHelper,
+							   @NonNull TrackDisplayHelper displayHelper,
 							   boolean nightMode,
 							   @NonNull SegmentActionsListener actionsListener,
 							   boolean onlyGraphs) {
 		super();
 		this.app = app;
 		this.gpxItem = gpxItem;
+		this.displayHelper = displayHelper;
 		this.nightMode = nightMode;
 		this.actionsListener = actionsListener;
 		this.onlyGraphs = onlyGraphs;
 		iconsCache = app.getUIUtilities();
-
-		if (displayHelper == null) {
-			this.displayHelper = new TrackDisplayHelper(app);
-			SelectedGpxFile currentTrack = app.getSavingTrackHelper().getCurrentTrack();
-			GPXFile gpxFile = currentTrack.getGpxFile();
-			if (currentTrack.isShowCurrentTrack()) {
-				File file = new File(gpxFile.path);
-				this.displayHelper.setFile(file);
-				this.displayHelper.setGpxDataItem(app.getGpxDbHelper().getItem(file));
-			}
-			this.displayHelper.setGpx(gpxFile);
-		} else {
-			this.displayHelper = displayHelper;
-		}
 
 		updateAnalysis();
 		fetchTabTypes();

@@ -329,7 +329,14 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 			}
 		});
 
-		graphsAdapter = new GPXItemPagerAdapter(app, null, null, nightMode, this, true);
+		TrackDisplayHelper displayHelper = new TrackDisplayHelper(app);
+		GPXFile gpxFile = getGPXFile();
+		File file = new File(gpxFile.path);
+		displayHelper.setFile(file);
+		displayHelper.setGpxDataItem(app.getGpxDbHelper().getItem(file));
+		displayHelper.setGpx(gpxFile);
+
+		graphsAdapter = new GPXItemPagerAdapter(app, null, displayHelper, nightMode, this, true);
 		graphsAdapter.setChartHMargin(getResources().getDimensionPixelSize(R.dimen.content_padding));
 
 		pager.setAdapter(graphsAdapter);
