@@ -52,11 +52,11 @@ import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.liveupdates.LiveUpdatesClearBottomSheet.RefreshLiveUpdates;
+import net.osmand.plus.liveupdates.LiveUpdatesHelper.LiveUpdateListener;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper.TimeOfDay;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper.UpdateFrequency;
 import net.osmand.plus.liveupdates.LiveUpdatesSettingsBottomSheet.OnLiveUpdatesForLocalChange;
 import net.osmand.plus.liveupdates.LoadLiveMapsTask.LocalIndexInfoAdapter;
-import net.osmand.plus.liveupdates.LiveUpdatesHelper.LiveUpdateListener;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.widgets.TextViewEx;
@@ -393,8 +393,6 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 
 	protected class LiveMapsAdapter extends OsmandBaseExpandableListAdapter implements LocalIndexInfoAdapter {
 		private final ArrayList<LocalIndexInfo> mapsList = new ArrayList<>();
-		private int countEnabled = 0;
-		private TextViewEx countView;
 
 		@Override
 		public void addData(LocalIndexInfo info) {
@@ -409,11 +407,9 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 		@Override
 		public void onDataUpdated() {
 			sort();
-			countEnabled = updateCountEnabled(countView, mapsList, settings);
 		}
 
 		public void sort() {
-			Collections.sort(mapsList);
 			Collections.sort(mapsList, new Comparator<LocalIndexInfo>() {
 				@Override
 				public int compare(LocalIndexInfo o1, LocalIndexInfo o2) {
@@ -464,7 +460,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 			TextViewEx titleView = ((TextViewEx) view.findViewById(R.id.title));
 			titleView.setText(getGroup(groupPosition));
 
-			countView = ((TextViewEx) view.findViewById(R.id.description));
+			TextViewEx countView = ((TextViewEx) view.findViewById(R.id.description));
 			AndroidUtils.setTextSecondaryColor(app, countView, nightMode);
 
 			return view;
