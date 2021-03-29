@@ -1290,13 +1290,14 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				// local_indexes_cat_gpx now obsolete in new UI screen which shows only GPX data
 				// if (Algorithms.objectEquals(getActivity().getString(R.string.local_indexes_cat_gpx) + " " +
 				// g.subfolder, cat)) {
-				if (objectEquals("" + g.subfolder, cat)) {
+				if (objectEquals(g.subfolder, cat)) {
 					found = i;
 					break;
 				}
 			}
 			if (found != -1) {
 				data.get(category.get(found)).remove(g);
+				selected.remove(g);
 			}
 		}
 	}
