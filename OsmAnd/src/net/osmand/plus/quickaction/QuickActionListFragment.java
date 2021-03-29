@@ -72,6 +72,8 @@ public class QuickActionListFragment extends BaseOsmAndFragment
 
     private static final int ITEMS_IN_GROUP = 6;
 
+    public static final int GROUP_POI_ID = 5;
+
     private RecyclerView rv;
     private FloatingActionButton fab;
     private View bottomPanel;
@@ -593,8 +595,8 @@ public class QuickActionListFragment extends BaseOsmAndFragment
                 List<QuickAction> actions = getQuickActions();
                 int actionGlobalPosition = actions.indexOf(action);
                 int actionPosition = actionGlobalPosition % ITEMS_IN_GROUP + 1;
-                int test = action.getType();
-                if (test == 5) {
+                int actionType = action.getType();
+                if (actionType == GROUP_POI_ID) {
                     String prefAction = getString(R.string.quick_action_show_hide_title);
                     h.title.setText(getString(R.string.ltr_or_rtl_combine_via_dash, prefAction, action.getName(app)));
                 } else {
