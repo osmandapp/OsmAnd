@@ -46,13 +46,12 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 	private static final String OSMAND_PURCHASES_URL = "https://docs.osmand.net/en/main@latest/osmand/purchases";
 
 	private OsmandApplication app;
-	private Context context;
 	private InAppPurchaseHelper purchaseHelper;
 
-	private View mainView;
-	ViewGroup cardsContainer;
+	private ViewGroup cardsContainer;
 	private SubscriptionsCard subscriptionsCard;
 
+	private boolean nightMode;
 	private Boolean isPaidVersion;
 
 	public static boolean showInstance(FragmentManager fragmentManager) {
@@ -77,12 +76,11 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		app = getMyApplication();
-		context = requireContext();
 		isPaidVersion = Version.isPaidVersion(app);
-		final boolean nightMode = !app.getSettings().isLightContent();
-		LayoutInflater themedInflater = UiUtilities.getInflater(context, nightMode);
+		nightMode = !app.getSettings().isLightContent();
+		LayoutInflater themedInflater = UiUtilities.getInflater(getContext(), nightMode);
 
-		mainView = themedInflater.inflate(R.layout.purchases_layout, container, false);
+		View mainView = themedInflater.inflate(R.layout.purchases_layout, container, false);
 		AndroidUtils.addStatusBarPadding21v(getActivity(), mainView);
 		createToolbar(mainView, nightMode);
 		cardsContainer = mainView.findViewById(R.id.cards_container);
@@ -148,7 +146,9 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 		icon.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				WikipediaDialogFragment.showFullArticle(context, Uri.parse(OSMAND_PURCHASES_URL), nightMode);
+				if (getContext() != null) {
+					WikipediaDialogFragment.showFullArticle(getContext(), Uri.parse(OSMAND_PURCHASES_URL), nightMode);
+				}
 			}
 		});
 		ImageButton backButton = toolbar.findViewById(R.id.close_button);
