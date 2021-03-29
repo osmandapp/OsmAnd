@@ -858,30 +858,25 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 		boolean routePlanningMode = isInRoutePlanningMode();
 		boolean routeFollowingMode = !routePlanningMode && rh.isFollowingMode();
-		boolean trackDialogOpened = mapActivity.getTrackDetailsMenu().isVisible();
-		boolean shouldHideTopControls = mapActivity.shouldHideTopControls();
-		boolean showRouteCalculationControls = routePlanningMode ||
-				((app.accessibilityEnabled() || (System.currentTimeMillis() - touchEvent < TIMEOUT_TO_SHOW_BUTTONS)) && routeFollowingMode);
+		boolean timeToShowButtons = System.currentTimeMillis() - touchEvent < TIMEOUT_TO_SHOW_BUTTONS;
+		boolean showRouteCalculationControls = routePlanningMode || ((app.accessibilityEnabled() || timeToShowButtons) && routeFollowingMode);
 		boolean routeDialogOpened = mapRouteInfoMenu.isVisible() || (showRouteCalculationControls && mapRouteInfoMenu.needShowMenu());
 
-		boolean dialogOpened = routeDialogOpened || shouldHideTopControls;
-		boolean showBackToLocation = mapActivity.getWidgetsVisibilityHelper().shouldShowBackToLocationButton();
-		backToLocationControl.updateVisibility(!dialogOpened && showBackToLocation);
+		boolean showBackToLocation = !routeDialogOpened && mapActivity.getWidgetsVisibilityHelper().shouldShowBackToLocationButton();
+		backToLocationControl.updateVisibility(showBackToLocation);
 
 		//routePlanningBtn.setIconResId(routeFollowingMode ? R.drawable.ic_action_info_dark : R.drawable.ic_action_gdirections_dark);
 		updateRoutePlaningButton(rh, routePlanningMode);
 
-		boolean showBottomMenuButtons =
-				(showRouteCalculationControls || !routeFollowingMode) && vh.shouldShowBottomMenuButtons();
+		boolean showBottomMenuButtons = (showRouteCalculationControls || !routeFollowingMode) && vh.shouldShowBottomMenuButtons();
 		routePlanningBtn.updateVisibility(showBottomMenuButtons);
 		menuControl.updateVisibility(showBottomMenuButtons);
 
-
-		boolean showZoomButtons = !routeDialogOpened && !shouldHideTopControls && vh.shouldShowZoomButtons();
+		boolean showZoomButtons = !routeDialogOpened && vh.shouldShowZoomButtons();
 		mapZoomIn.updateVisibility(showZoomButtons);
 		mapZoomOut.updateVisibility(showZoomButtons);
 
-		boolean forceHideCompass = routeDialogOpened || trackDialogOpened || vh.shouldHideCompass();
+		boolean forceHideCompass = routeDialogOpened || vh.shouldHideCompass();
 		compassHud.forceHideCompass = forceHideCompass;
 		compassHud.updateVisibility(!forceHideCompass && shouldShowCompass());
 
@@ -890,8 +885,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		if (layersHud.setIconResId(appMode.getIconRes())) {
 			layersHud.update(app, isNight);
 		}
-		boolean showTopButtons = !routeDialogOpened && !trackDialogOpened
-				&& !shouldHideTopControls && vh.shouldShowTopButtons();
+		boolean showTopButtons = !routeDialogOpened && vh.shouldShowTopButtons();
 		layersHud.updateVisibility(showTopButtons);
 		quickSearchHud.updateVisibility(showTopButtons);
 

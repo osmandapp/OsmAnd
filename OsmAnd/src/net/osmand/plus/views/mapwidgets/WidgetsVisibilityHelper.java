@@ -93,11 +93,14 @@ public class WidgetsVisibilityHelper {
 				&& !isInChoosingRoutesMode()
 				&& !isInWaypointsChoosingMode()
 				&& !isInRouteLineAppearanceMode();
-		return !isInFollowTrackMode() && (additionalDialogsHide || !isPortrait());
+		return !mapActivity.shouldHideTopControls()
+				&& !isInFollowTrackMode()
+				&& (additionalDialogsHide || !isPortrait());
 	}
 
 	public boolean shouldHideCompass() {
 		return mapActivity.shouldHideTopControls()
+				|| isTrackDetailsMenuOpened()
 				|| isInMeasurementToolMode()
 				|| isInPlanRouteMode()
 				|| isInChoosingRoutesMode()
@@ -108,7 +111,9 @@ public class WidgetsVisibilityHelper {
 	}
 
 	public boolean shouldShowTopButtons() {
-		return !isInMeasurementToolMode()
+		return !mapActivity.shouldHideTopControls()
+				&& !isTrackDetailsMenuOpened()
+				&& !isInMeasurementToolMode()
 				&& !isInPlanRouteMode()
 				&& !isInChoosingRoutesMode()
 				&& !isInTrackAppearanceMode()
@@ -124,7 +129,8 @@ public class WidgetsVisibilityHelper {
 				&& !isInWaypointsChoosingMode()
 				&& !isInFollowTrackMode()
 				&& !isInRouteLineAppearanceMode();
-		return !isInPlanRouteMode()
+		return !mapActivity.shouldHideTopControls()
+				&& !isInPlanRouteMode()
 				&& !(isMapLinkedToLocation() && routingHelper.isFollowingMode())
 				&& (additionalDialogsHide || !isPortrait());
 	}
@@ -213,6 +219,10 @@ public class WidgetsVisibilityHelper {
 
 	private boolean isMapLinkedToLocation() {
 		return mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation();
+	}
+
+	private boolean isTrackDetailsMenuOpened() {
+		return mapActivity.getTrackDetailsMenu().isVisible();
 	}
 
 	private boolean isPortrait() {
