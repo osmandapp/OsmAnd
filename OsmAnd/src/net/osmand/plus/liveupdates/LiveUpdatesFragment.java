@@ -131,7 +131,11 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 					}
 				});
 			} else if (countEnabled > 1) {
-				LiveUpdatesUpdateAllBottomSheet.showInstance(fragmentManager, listener.currentFragment());
+				Fragment target = null;
+				if (listener instanceof Fragment) {
+					target = (Fragment) listener;
+				}
+				LiveUpdatesUpdateAllBottomSheet.showInstance(fragmentManager, target);
 			}
 		}
 	}
@@ -648,11 +652,6 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 	@Override
 	public List<LocalIndexInfo> getMapsToUpdate() {
 		return getMapsToUpdate(adapter.mapsList, settings);
-	}
-
-	@Override
-	public Fragment currentFragment() {
-		return this;
 	}
 
 	@Override
