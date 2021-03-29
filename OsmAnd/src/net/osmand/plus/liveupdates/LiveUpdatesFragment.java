@@ -212,7 +212,6 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 			descriptionTime.setLetterSpacing(AndroidUtils.getFloatValueFromRes(app, R.dimen.description_letter_spacing));
 		}
-
 		return view;
 	}
 

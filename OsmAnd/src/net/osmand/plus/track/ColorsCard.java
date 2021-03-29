@@ -72,6 +72,7 @@ public class ColorsCard extends BaseCard implements ColorPickerListener {
 
 	public void setSelectedColor(int selectedColor) {
 		this.selectedColor = selectedColor;
+		updateContent();
 	}
 
 	@Override

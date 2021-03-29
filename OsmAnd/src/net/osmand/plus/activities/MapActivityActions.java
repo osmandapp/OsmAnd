@@ -1030,22 +1030,6 @@ public class MapActivityActions implements DialogProvider {
 				}).createItem());
 		*/
 
-		if (Version.isGooglePlayEnabled() || Version.isHuawei() || Version.isDeveloperVersion(app)) {
-			optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.purchases, mapActivity)
-					.setId(DRAWER_OSMAND_LIVE_ID)
-					.setIcon(R.drawable.ic_action_purchases)
-					.setListener(new ItemClickListener() {
-						@Override
-						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
-							app.logEvent("drawer_osm_live_open");
-							Intent intent = new Intent(mapActivity, OsmLiveActivity.class);
-							intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-							mapActivity.startActivity(intent);
-							return true;
-						}
-					}).createItem());
-		}
-
 		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.shared_string_help, mapActivity)
 				.setId(DRAWER_HELP_ID)
 				.setIcon(R.drawable.ic_action_help)

@@ -1394,7 +1394,7 @@
     <string name="downloading_list_indexes">Descargando lista de regiones disponibles…</string>
     <string name="list_index_files_was_not_loaded">No se pudo obtener la lista de regiones desde https://osmand.net.</string>
     <string name="fav_points_edited">Punto favorito editado</string>
-    <string name="fav_points_not_exist">Sin puntos de Favoritos</string>
+    <string name="fav_points_not_exist">No existen puntos favoritos</string>
     <string name="update_existing">Reemplazar</string>
     <string name="only_show">Mostrar ruta</string>
     <string name="follow">Iniciar la guía</string>
@@ -4052,4 +4052,17 @@
     <string name="lost_data_warning">Se perderán todos los datos no guardados.</string>
     <string name="show_start_dialog">Mostrar el diálogo inicial</string>
     <string name="trip_recording_show_start_dialog_setting">Si se desactiva, la grabación será iniciada al pulsar el widget o el elemento del menú, saltándose el diálogo de confirmación.</string>
+    <string name="customize_route_line">Personalizar línea de ruta</string>
+    <string name="shared_string_route_line">Línea de ruta</string>
+    <string name="route_line_use_map_style_appearance">La línea de la ruta sería el uso %1$s especificado en el estilo de mapa seleccionado: %2$s.</string>
+    <string name="specify_color_for_map_mode">Define el color para el modo de mapa: %1$s.</string>
+    <string name="release_4_0_beta">• Las actualizaciones de OsmAnd Live se movieron a «Descargas &gt; Actualizaciones»
+\n
+\n • Las trazas ahora se pueden colorear por altitud, velocidad o pendiente.
+\n
+\n • Se añade opción para cambiar la apariencia de la línea de ruta de navegación
+\n
+\n • Se actualiza el cuadro de diálogo «Grabación de viaje»
+\n
+\n</string>
 </resources>

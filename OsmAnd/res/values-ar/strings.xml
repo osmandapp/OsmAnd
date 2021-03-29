@@ -1010,7 +1010,7 @@
     <string name="fav_saved_sucessfully">المفضلة تم حفظها بنجاح إلى {0}</string>
     <string name="no_fav_to_save">لم يتم العثور على نقاط أماكن مفضلة للقيام بالاحتفاظ بها</string>
     <string name="fav_points_edited">تم تعديل النقطة المفضلة</string>
-    <string name="fav_points_not_exist">لا وجود لأية نقطة مفضلة</string>
+    <string name="fav_points_not_exist">لا يوجد نقاط مفضلة</string>
     <string name="favourites_context_menu_edit">تعديل المفضلة</string>
     <string name="favourites_context_menu_delete">حذف المفضلة</string>
     <string name="favourites_remove_dialog_msg">إزالة النقطة المفضلة \'%s\' ؟</string>
@@ -3536,7 +3536,7 @@
     <string name="shared_string_square">مربع</string>
     <string name="shared_string_circle">دائرة</string>
     <string name="select_shape">تحديد الشكل</string>
-    <string name="select_group">تحديد المجموعة</string>
+    <string name="select_group">تحديد مجموعة</string>
     <string name="add_description">إضافة وصف</string>
     <string name="delete_description">حذف الوصف</string>
     <string name="quick_action_terrain_descr">زر لإظهار طبقة التضاريس أو إخفائها على الخريطة.</string>
@@ -4119,4 +4119,17 @@
     <string name="lost_data_warning">سيتم فقدان كافة البيانات غير المحفوظة.</string>
     <string name="show_start_dialog">إظهار مربع حوار البدء</string>
     <string name="trip_recording_save_and_continue">حفظ ومتابعة</string>
+    <string name="customize_route_line">تخصيص خط المسار</string>
+    <string name="shared_string_route_line">خط المسار</string>
+    <string name="route_line_use_map_style_appearance">سيستخدم خط الطريق %1$s المحدد في نمط الخريطة المحدد: %2$s.</string>
+    <string name="specify_color_for_map_mode">حدد لونًا لوضع الخريطة: %1$s.</string>
+    <string name="release_4_0_beta">• تم نقل تحديثات OsmAnd Live إلى \"التنزيلات&gt; التحديثات\"
+\n
+\n • يمكن تلوين المسارات الآن حسب الارتفاع، السرعة أو المنحدر.
+\n
+\n • خيار مضاف لتغيير مظهر خط مسار الملاحة
+\n
+\n • تحديث مربع حوار \"تسجيل الرحلة\"
+\n
+\n</string>
 </resources>

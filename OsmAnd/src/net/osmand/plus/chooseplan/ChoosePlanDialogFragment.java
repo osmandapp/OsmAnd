@@ -22,17 +22,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.ColorRes;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -58,6 +47,17 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.util.List;
+
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment implements InAppPurchaseListener {
 	public static final String TAG = ChoosePlanDialogFragment.class.getSimpleName();
@@ -489,14 +489,18 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 						buttonView.setOnClickListener(new OnClickListener() {
 							@Override
 							public void onClick(View v) {
-								subscribe(s.getSku());
+								if (getActivity() != null) {
+									subscribe(app, getActivity(), purchaseHelper, s.getSku());
+								}
 							}
 						});
 					} else {
 						buttonExView.setOnClickListener(new OnClickListener() {
 							@Override
 							public void onClick(View v) {
-								subscribe(s.getSku());
+								if (getActivity() != null) {
+									subscribe(app, getActivity(), purchaseHelper, s.getSku());
+								}
 							}
 						});
 					}
@@ -526,14 +530,14 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 		}
 	}
 
-	private void subscribe(String sku) {
+	public static void subscribe(@NonNull OsmandApplication app, Activity activity,
+								 InAppPurchaseHelper purchaseHelper, String sku) {
 		if (!app.getSettings().isInternetConnectionAvailable(true)) {
 			Toast.makeText(app, R.string.internet_not_available, Toast.LENGTH_LONG).show();
 		} else {
-			FragmentActivity ctx = getActivity();
-			if (ctx != null && purchaseHelper != null) {
+			if (activity != null && purchaseHelper != null) {
 				OsmandSettings settings = app.getSettings();
-				purchaseHelper.purchaseLiveUpdates(ctx, sku,
+				purchaseHelper.purchaseLiveUpdates(activity, sku,
 						settings.BILLING_USER_EMAIL.get(),
 						settings.BILLING_USER_NAME.get(),
 						settings.BILLING_USER_COUNTRY_DOWNLOAD_NAME.get(),

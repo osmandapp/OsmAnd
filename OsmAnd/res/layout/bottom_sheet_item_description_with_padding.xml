@@ -8,7 +8,9 @@
     android:paddingBottom="@dimen/content_padding_small"
     android:minHeight="@dimen/card_row_min_height"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+	android:paddingEnd="@dimen/content_padding"
+	android:paddingStart="@dimen/content_padding">
 
     <TextView
         android:id="@+id/description"

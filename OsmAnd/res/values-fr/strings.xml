@@ -715,7 +715,7 @@
     <string name="osmand_parking_plugin_description">Enregistrez l\'emplacement de stationnement de votre véhicule et, si besoin, mesurez la durée de stationnement restante.
 \nCes informations sont visibles sur le Tableau de bord comme sur la carte. Un rappel peut même être ajouté à votre calendrier.</string>
     <string name="osmand_parking_plugin_name">Stationnement</string>
-    <string name="context_menu_item_add_parking_point">Marquer comme stationnement</string>
+    <string name="context_menu_item_add_parking_point">Stationnement</string>
     <string name="context_menu_item_delete_parking_point">Supprimer l\'emplacement de stationnement</string>
     <string name="starting_point_too_far">Point de départ trop éloigné de la route la plus proche.</string>
     <string name="shared_location">Lieu partagé</string>
@@ -1217,7 +1217,7 @@
 \nPoints de passage %2$s</string>
     <string name="gpx_selection_points">%1$s \nPoints</string>
     <string name="gpx_selection_track">%1$s \nTrace %2$s</string>
-    <string name="shared_string_waypoint">Itinéraire</string>
+    <string name="shared_string_waypoint">Point de passage</string>
     <string name="map_widget_plain_time">Heure actuelle</string>
     <string name="loading_smth">Chargement de %1$s…</string>
     <string name="save_as_favorites_points">Enregistrer comme groupe de favoris</string>
@@ -3722,7 +3722,7 @@
     <string name="access_hint_enter_address">Saisissez l\'adresse</string>
     <string name="add_segment_to_the_track">Ajouter à un fichier de trace</string>
     <string name="empty_state_my_tracks">Ajouter des fichiers de trace</string>
-    <string name="context_menu_item_add_waypoint">Ajouter un point de passage</string>
+    <string name="context_menu_item_add_waypoint">Ajouter une étape</string>
     <string name="quick_action_add_gpx">Ajouter un point de passage à la trace</string>
     <string name="start_of_the_track">Début de la trace</string>
     <string name="attach_to_the_roads">Déplacer sur les routes</string>
@@ -4040,4 +4040,17 @@
     <string name="lost_data_warning">Toutes les données non enregistrées seront perdues.</string>
     <string name="show_start_dialog">Afficher la boîte de dialogue de démarrage</string>
     <string name="trip_recording_show_start_dialog_setting">Si désactivé, l\'enregistrement débutera dès appui sur le gadget ou dans le menu (sans demande de confirmation).</string>
+    <string name="release_4_0_beta">- Les mises à jour d\'OsmAnd Live ont été déplacées vers \"Téléchargements &gt; Mises à jour\"
+\n
+\n - Les traces peuvent maintenant être colorées par altitude, vitesse ou pente.
+\n
+\n - Ajout d\'une option pour modifier l\'apparence de la ligne d\'itinéraire en navigation
+\n
+\n - Mise à jour de la fenêtre \"Enregistrement du trajet\".
+\n
+\n</string>
+    <string name="route_line_use_map_style_appearance">La ligne d\'itinéraire utilisera le %1$s pour le style de carte : %2$s.</string>
+    <string name="customize_route_line">Personnaliser la ligne d\'itinéraire</string>
+    <string name="shared_string_route_line">Ligne d\'itinéraire</string>
+    <string name="specify_color_for_map_mode">Définissez une couleur pour le mode de carte : %1$s.</string>
 </resources>

@@ -177,7 +177,7 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 					CountrySelectionFragment countryCountrySelectionFragment =
 							countrySelectionFragment;
 					countryCountrySelectionFragment
-							.show(getChildFragmentManager(), "CountriesSearchSelectionFragment");
+							.show(getChildFragmentManager(), CountrySelectionFragment.TAG);
 				}
 				return false;
 			}

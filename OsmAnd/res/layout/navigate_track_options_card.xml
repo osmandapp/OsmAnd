@@ -26,7 +26,9 @@
 			android:text="@string/navigate_to_track_descr"
 			android:textColor="@color/preference_category_title"
 			android:textSize="@dimen/default_desc_text_size"
-			osmand:typeface="@string/font_roboto_medium" />
+			osmand:typeface="@string/font_roboto_medium"
+			android:paddingEnd="@dimen/content_padding"
+			android:paddingStart="@dimen/content_padding" />
 
 		<include
 			android:id="@+id/pass_whole_route_container"

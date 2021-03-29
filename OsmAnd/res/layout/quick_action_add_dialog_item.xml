@@ -10,7 +10,9 @@
     android:paddingLeft="@dimen/content_padding"
 	android:paddingRight="@dimen/content_padding"
     android:background="?attr/selectableItemBackground"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+	android:paddingStart="@dimen/content_padding"
+	android:paddingEnd="@dimen/content_padding">
 
 
     <androidx.appcompat.widget.AppCompatImageView

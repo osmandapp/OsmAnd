@@ -95,6 +95,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private OsmandMapTileView view;
 
 	private Paint paint;
+	private Paint borderPaint;
 	private Paint shadowPaint;
 	private Paint paintIcon;
 
@@ -190,6 +191,13 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		paint = new Paint();
 		paint.setStyle(Style.STROKE);
 		paint.setAntiAlias(true);
+
+		borderPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+		borderPaint.setStyle(Style.STROKE);
+		borderPaint.setStrokeJoin(Paint.Join.ROUND);
+		borderPaint.setStrokeCap(Paint.Cap.ROUND);
+		borderPaint.setColor(0x80000000);
+
 		shadowPaint = new Paint();
 		shadowPaint.setStyle(Style.STROKE);
 		shadowPaint.setAntiAlias(true);
@@ -341,6 +349,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		}
 		paint.setColor(color == 0 ? cachedColor : color);
 		paint.setStrokeWidth(getTrackWidth(width, defaultTrackWidth));
+		borderPaint.setStrokeWidth(paint.getStrokeWidth() + AndroidUtils.dpToPx(view.getContext(), 2));
 	}
 
 	private void acquireTrackWidth(String widthKey, RenderingRulesStorage rrs, RenderingRuleSearchRequest req, RenderingContext rc) {
@@ -700,6 +709,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			updatePaints(color, width, selectedGpxFile.isRoutePoints(), currentTrack, settings, tileBox);
 			if (ts.renderer instanceof Renderable.RenderableSegment) {
 				Renderable.RenderableSegment renderableSegment = (Renderable.RenderableSegment) ts.renderer;
+				renderableSegment.setBorderPaint(borderPaint);
 				renderableSegment.setGradientScaleType(scaleType);
 				renderableSegment.drawSegment(view.getZoom(), paint, canvas, tileBox);
 			}

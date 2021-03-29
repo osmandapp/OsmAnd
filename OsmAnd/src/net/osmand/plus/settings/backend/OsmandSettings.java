@@ -2691,8 +2691,10 @@ public class OsmandSettings {
 
 	public final CommonPreference<Float> ROUTE_RECALCULATION_DISTANCE = new FloatPreference(this, "routing_recalc_distance", 0.f).makeProfile();
 	public final CommonPreference<Float> ROUTE_STRAIGHT_ANGLE = new FloatPreference(this, "routing_straight_angle", 30.f).makeProfile();
+
 	public final ListStringPreference CUSTOM_ROUTE_LINE_COLORS = (ListStringPreference) new ListStringPreference(this, "custom_route_line_colors", null, ",").makeShared().makeGlobal();
-	public final CommonPreference<Integer> ROUTE_LINE_COLOR = new IntPreference(this, "route_line_color", 0).makeProfile();
+	public final CommonPreference<Integer> ROUTE_LINE_COLOR_DAY = new IntPreference(this, "route_line_color", 0).cache().makeProfile();
+	public final CommonPreference<Integer> ROUTE_LINE_COLOR_NIGHT = new IntPreference(this, "route_line_color_night", 0).cache().makeProfile();
 	public final CommonPreference<String> ROUTE_LINE_WIDTH = new StringPreference(this, "route_line_width", null).makeProfile();
 
 	public final OsmandPreference<Boolean> USE_OSM_LIVE_FOR_ROUTING = new BooleanPreference(this, "enable_osmc_routing", true).makeProfile();

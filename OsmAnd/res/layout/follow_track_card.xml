@@ -27,7 +27,9 @@
 		android:paddingBottom="@dimen/content_padding_half"
 		tools:itemCount="3"
 		tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-		tools:listitem="@layout/point_editor_icon_category_item" />
+		tools:listitem="@layout/point_editor_icon_category_item"
+		android:paddingStart="@dimen/content_padding"
+		android:paddingEnd="@dimen/content_padding" />
 
 	<androidx.recyclerview.widget.RecyclerView
 		android:id="@+id/track_list"

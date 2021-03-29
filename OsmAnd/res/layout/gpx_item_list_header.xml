@@ -120,7 +120,9 @@
 		    android:paddingLeft="@dimen/content_padding"
 		    android:paddingTop="@dimen/content_padding_half"
 		    android:paddingRight="@dimen/content_padding"
-		    android:paddingBottom="@dimen/content_padding_half">
+		    android:paddingBottom="@dimen/content_padding_half"
+			android:paddingEnd="@dimen/content_padding"
+			android:paddingStart="@dimen/content_padding">
 
 		    <TextView
 			    android:layout_width="0dp"

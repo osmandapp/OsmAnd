@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/bg_color"
+	android:orientation="vertical">
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/list_content_padding"
+		android:background="?attr/activity_background_color" />
+
+	<include
+		layout="@layout/divider" />
+
+	<LinearLayout
+		android:id="@+id/troubleshooting_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?android:attr/selectableItemBackground"
+		android:minHeight="@dimen/list_item_height"
+		android:orientation="vertical"
+		android:paddingStart="@dimen/list_content_padding"
+		android:paddingLeft="@dimen/list_content_padding"
+		android:paddingTop="14dp"
+		android:paddingEnd="@dimen/list_content_padding"
+		android:paddingRight="@dimen/list_content_padding"
+		android:paddingBottom="6dp">
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/troubleshooting_icon"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_marginEnd="@dimen/map_widget_height"
+			android:layout_marginRight="@dimen/map_widget_height"
+			android:paddingBottom="@dimen/dialog_content_bottom_margin"
+			app:srcCompat="@drawable/ic_action_help"
+			app:tint="?attr/profile_icon_color_green" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/troubleshooting_title"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginEnd="@dimen/card_button_progress_size_small"
+			android:layout_marginRight="@dimen/card_button_progress_size_small"
+			android:letterSpacing="@dimen/text_button_letter_spacing"
+			android:text="@string/troubleshooting"
+			android:textColor="?android:textColorPrimary"
+			android:textSize="@dimen/default_list_text_size"
+			app:typeface="@string/font_roboto_medium" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/troubleshooting_description"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginEnd="@dimen/card_button_progress_size_small"
+			android:layout_marginRight="@dimen/card_button_progress_size_small"
+			android:letterSpacing="@dimen/description_letter_spacing"
+			android:text="@string/troubleshooting_description"
+			android:textColor="?android:textColorSecondary"
+			android:textSize="@dimen/default_desc_text_size"
+			app:typeface="@string/font_roboto_regular" />
+
+	</LinearLayout>
+
+	<include
+		android:id="@+id/restore_purchases"
+		layout="@layout/restore_purchases_button" />
+
+	<include
+		android:id="@+id/dismiss_button"
+		layout="@layout/divider_half_item" />
+
+	<include
+		android:id="@+id/new_device_account_container"
+		layout="@layout/new_device_or_account_button" />
+
+	<include
+		android:id="@+id/dismiss_button"
+		layout="@layout/divider" />
+
+	<include
+		android:id="@+id/contact_support_container"
+		layout="@layout/contact_support" />
+
+	<include
+		layout="@layout/divider"/>
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/dialog_button_ex_min_width"
+		android:background="?attr/activity_background_color" />
+
+</LinearLayout>

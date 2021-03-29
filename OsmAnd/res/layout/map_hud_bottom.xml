@@ -76,7 +76,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="@dimen/dashPadding"
-                android:layout_marginRight="@dimen/dashPadding"/>
+                android:layout_marginRight="@dimen/dashPadding"
+				android:layout_marginStart="@dimen/dashPadding"
+				android:layout_marginEnd="@dimen/dashPadding" />
 
         </LinearLayout>
 

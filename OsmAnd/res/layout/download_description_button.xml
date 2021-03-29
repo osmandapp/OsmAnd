@@ -14,4 +14,6 @@
 	android:textColor="?attr/active_color_basic"
 	android:textSize="@dimen/default_desc_text_size"
 	app:typeface="@string/font_roboto_medium"
-	tools:text="@string/read_more" />
+	tools:text="@string/read_more"
+	android:paddingStart="@dimen/content_padding_half"
+	android:paddingEnd="@dimen/content_padding_half" />
