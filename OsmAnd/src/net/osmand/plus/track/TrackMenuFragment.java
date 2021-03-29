@@ -866,7 +866,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 						R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
-								if (FileUtils.removeGpxFile(app, new File((gpxFile.path)))) {
+								if (FileUtils.removeGpxFile(app, new File(gpxFile.path))) {
 									dismiss();
 								}
 							}

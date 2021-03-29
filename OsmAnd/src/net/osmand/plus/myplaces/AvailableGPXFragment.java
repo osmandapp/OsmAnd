@@ -1507,17 +1507,15 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			int total = 0;
 			for (GpxInfo info : params) {
 				if (!isCancelled() && (info.gpx == null || !info.gpx.showCurrentTrack)) {
-					boolean successfull;
-					successfull = removeAllFiles(info.file);
-					app.getGpxDbHelper().remove(info.file);
+					boolean successful = FileUtils.removeGpxFile(app, info.file);
 					total++;
-					if (successfull) {
+					if (successful) {
 						count++;
 						publishProgress(info);
 					}
 				}
 			}
-			return app.getString(R.string.local_index_items_deleted, count, total);
+			return getString(R.string.local_index_items_deleted, count, total);
 		}
 
 		@Override
