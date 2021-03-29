@@ -31,6 +31,8 @@ import net.osmand.plus.track.TrackMenuFragment;
 import net.osmand.plus.track.TrackSelectSegmentBottomSheet;
 import net.osmand.plus.widgets.TextViewExProgress;
 
+import static net.osmand.plus.track.TrackMenuFragment.startNavigationForGPX;
+
 public class MapRouteInfoMenuFragment extends ContextMenuFragment implements TrackSelectSegmentBottomSheet.OnSegmentSelectedListener {
 	public static final String TAG = MapRouteInfoMenuFragment.class.getName();
 
@@ -508,18 +510,16 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment implements Tra
 
 	@Override
 	public void onSegmentSelect(GPXUtilities.GPXFile gpxFile, int selectedSegment) {
-		if (getMyApplication() != null) {
-			getMyApplication().getSettings().GPX_ROUTE_SEGMENT.set(selectedSegment);
-			MapActivity mapActivity = getMapActivity();
-			if (mapActivity != null) {
-				TrackMenuFragment.startNavigationForGPX(gpxFile, mapActivity.getMapActions(), mapActivity);
-				GPXRouteParams.GPXRouteParamsBuilder paramsBuilder = getMyApplication().getRoutingHelper().getCurrentGPXRoute();
-				if (paramsBuilder != null) {
-					paramsBuilder.setSelectedSegment(selectedSegment);
-					getMyApplication().getRoutingHelper().onSettingsChanged(true);
-				}
-				dismiss();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getMyApplication().getSettings().GPX_ROUTE_SEGMENT.set(selectedSegment);
+			startNavigationForGPX(gpxFile, mapActivity.getMapActions(), mapActivity);
+			GPXRouteParams.GPXRouteParamsBuilder paramsBuilder = getMyApplication().getRoutingHelper().getCurrentGPXRoute();
+			if (paramsBuilder != null) {
+				paramsBuilder.setSelectedSegment(selectedSegment);
+				getMyApplication().getRoutingHelper().onSettingsChanged(true);
 			}
+			dismiss();
 		}
 	}
 }

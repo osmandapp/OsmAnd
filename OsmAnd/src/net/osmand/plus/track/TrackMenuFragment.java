@@ -906,11 +906,13 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	public static void startNavigationForGPX(final GPXFile gpxFile, MapActivityActions mapActions, final MapActivity mapActivity) {
 		if (mapActivity.getMyApplication().getRoutingHelper().isFollowingMode()) {
+			final WeakReference<MapActivity> activityRef = new WeakReference<>(mapActivity);
 			mapActions.stopNavigationActionConfirm(null, new Runnable() {
 				@Override
 				public void run() {
-					if (mapActivity != null) {
-						mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(gpxFile, null,
+					MapActivity activity = activityRef.get();
+					if (activity != null) {
+						activity.getMapActions().enterRoutePlanningModeGivenGpx(gpxFile, null,
 								null, null, true, true, MenuState.HEADER_ONLY);
 					}
 				}
