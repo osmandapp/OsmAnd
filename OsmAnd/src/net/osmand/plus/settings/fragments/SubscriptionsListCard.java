@@ -39,7 +39,7 @@ public class SubscriptionsListCard extends BaseCard {
 	}
 
 	public SubscriptionsListCard(@NonNull MapActivity mapActivity, @NonNull InAppPurchaseHelper purchaseHelper) {
-		super(mapActivity);
+		super(mapActivity, false);
 		this.purchaseHelper = purchaseHelper;
 		this.dateFormat = new SimpleDateFormat("MMM d, yyyy", Locale.getDefault());
 	}
