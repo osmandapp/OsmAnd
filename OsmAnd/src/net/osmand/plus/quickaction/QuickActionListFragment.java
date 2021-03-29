@@ -593,7 +593,13 @@ public class QuickActionListFragment extends BaseOsmAndFragment
                 List<QuickAction> actions = getQuickActions();
                 int actionGlobalPosition = actions.indexOf(action);
                 int actionPosition = actionGlobalPosition % ITEMS_IN_GROUP + 1;
-                h.title.setText(action.getName(app));
+                int test = action.getType();
+                if (test == 5) {
+                    String prefAction = getString(R.string.quick_action_show_hide_title);
+                    h.title.setText(getString(R.string.ltr_or_rtl_combine_via_dash, prefAction, action.getName(app)));
+                } else {
+                    h.title.setText(action.getName(app));
+                }
                 h.subTitle.setText(getResources().getString(R.string.quick_action_item_action, actionPosition));
                 h.icon.setImageDrawable(getContentIcon(action.getIconRes(app)));
 
