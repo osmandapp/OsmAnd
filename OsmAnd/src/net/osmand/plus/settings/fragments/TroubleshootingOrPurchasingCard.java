@@ -20,7 +20,6 @@ import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 
-import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
@@ -41,15 +40,15 @@ public class TroubleshootingOrPurchasingCard extends BaseCard {
 	}
 
 	public TroubleshootingOrPurchasingCard(@NonNull MapActivity mapActivity, @NonNull InAppPurchaseHelper purchaseHelper, boolean isPaidVersion) {
-		super(mapActivity);
+		super(mapActivity, false);
 		this.purchaseHelper = purchaseHelper;
 		this.isPaidVersion = isPaidVersion;
 	}
 
 	@Override
 	protected void updateContent() {
-		setupRestorePurchasesBtn(R.id.restore_purchases);
-		setupNewDeviceOrAccountBtn(R.id.new_device_account_container);
+		setupRestorePurchasesBtn();
+		setupNewDeviceOrAccountBtn();
 		setupSupportDescription();
 		setupContactUsLink();
 
@@ -82,8 +81,8 @@ public class TroubleshootingOrPurchasingCard extends BaseCard {
 		}
 	}
 
-	protected void setupRestorePurchasesBtn(@IdRes int btnId) {
-		View purchasesRestore = view.findViewById(btnId);
+	protected void setupRestorePurchasesBtn() {
+		View purchasesRestore = view.findViewById(R.id.restore_purchases);
 		purchasesRestore.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -94,8 +93,8 @@ public class TroubleshootingOrPurchasingCard extends BaseCard {
 		});
 	}
 
-	protected void setupNewDeviceOrAccountBtn(@IdRes int btnId) {
-		View newDeviceAccountContainer = view.findViewById(btnId);
+	protected void setupNewDeviceOrAccountBtn() {
+		View newDeviceAccountContainer = view.findViewById(R.id.new_device_account_container);
 		newDeviceAccountContainer.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
