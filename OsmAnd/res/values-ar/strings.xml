@@ -1010,7 +1010,7 @@
     <string name="fav_saved_sucessfully">المفضلة تم حفظها بنجاح إلى {0}</string>
     <string name="no_fav_to_save">لم يتم العثور على نقاط أماكن مفضلة للقيام بالاحتفاظ بها</string>
     <string name="fav_points_edited">تم تعديل النقطة المفضلة</string>
-    <string name="fav_points_not_exist">لا وجود لأية نقطة مفضلة</string>
+    <string name="fav_points_not_exist">لا يوجد نقاط مفضلة</string>
     <string name="favourites_context_menu_edit">تعديل المفضلة</string>
     <string name="favourites_context_menu_delete">حذف المفضلة</string>
     <string name="favourites_remove_dialog_msg">إزالة النقطة المفضلة \'%s\' ؟</string>
@@ -3536,7 +3536,7 @@
     <string name="shared_string_square">مربع</string>
     <string name="shared_string_circle">دائرة</string>
     <string name="select_shape">تحديد الشكل</string>
-    <string name="select_group">تحديد المجموعة</string>
+    <string name="select_group">تحديد مجموعة</string>
     <string name="add_description">إضافة وصف</string>
     <string name="delete_description">حذف الوصف</string>
     <string name="quick_action_terrain_descr">زر لإظهار طبقة التضاريس أو إخفائها على الخريطة.</string>
