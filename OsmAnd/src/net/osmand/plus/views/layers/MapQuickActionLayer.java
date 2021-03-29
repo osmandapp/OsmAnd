@@ -397,7 +397,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
 	}
 
     private void setupQuickActionBtnVisibility() {
-	    boolean visible = mapActivity.getWidgetsVisibilityHelper().shouldShowQuickActionButton();
+        boolean visible = mapActivity.getWidgetsVisibilityHelper().shouldShowQuickActionButton();
         quickActionButton.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
 
