@@ -556,7 +556,7 @@ POIの更新は利用できません</string>
     <string name="files_limit">%1$d ファイルが残っています</string>
     <string name="available_downloads_left">あと%1$d個のファイルがダウンロード可能です</string>
     <string name="install_paid">フルバージョン</string>
-    <string name="cancel_route">ルートをキャンセル</string>
+    <string name="cancel_route">ルートを破棄しますか？</string>
     <string name="cancel_navigation">ナビゲーションの停止</string>
     <string name="clear_destination">選択した目的地、経由地点を削除します、よろしいですか？</string>
     <string name="download_using_mobile_internet">Wi-Fiに接続されていません。現在の接続を利用してインターネットからダウンロードを行いますか？</string>
@@ -1941,7 +1941,7 @@ POIの更新は利用できません</string>
     <string name="access_direction_haptic_feedback_descr">進行方向を振動で示して案内します。</string>
     <string name="use_osm_live_routing_description">OsmAnd Live更新でのナビゲーションを有効化します。</string>
     <string name="use_osm_live_routing">OsmAnd Liveナビゲーション</string>
-    <string name="access_no_destination">目的地が設定されていません</string>
+    <string name="access_no_destination">アクセシビリティプラグイン: ターゲットが設定されていません</string>
     <string name="access_disable_offroute_recalc">指定の道を外れた後にルート再計算を行わない</string>
     <string name="access_disable_wrong_direction_recalc">反対方向へ向かった場合ルートを変更しない</string>
     <string name="access_disable_wrong_direction_recalc_descr">ルートと反対方向に移動しても、自動的にルートの再計算をしないようにします。</string>
@@ -2294,13 +2294,20 @@ POIの更新は利用できません</string>
  • GPX経路情報をアプリから直接OSMにアップロードできます
  • POIを追加してOSMに直接アップロードできます(オフラインの場合は後で行うことができます)
  "</string>
-    <string name="osmand_extended_description_part8">OsmAndはオープンソースで積極的に開発されています。バグを報告したり、翻訳を改善したり、新しい機能をコーディングすることで、誰もがアプリケーションの開発に貢献できます。このような開発者とユーザーとのやりとりによって、プロジェクトは継続的に改善されています。プロジェクトの進捗状況は、資金調達と新しい機能のテストに大きく左右されます。
-\n
-\n地図のおおよそのエリアとその品質(※注 *の数が多いほど充実しています):
-\n • 西ヨーロッパ: ****  • 東ヨーロッパ: ***  • ロシア: ***  • 北アメリカ: ***  • 南アメリカ: **  • アジア: **  • 日本、韓国: ***  • 中東: **  • アフリカ: **  • 南極: *
-\n
-\n 世界中のほとんどの国の地図がダウンロード可能です！
-\n フランス、ドイツ、メキシコ、イギリス、スペイン、オランダ、アメリカ、ロシア、ブラジルなどの国の便利なナビゲーターを入手しましょう。</string>
+    <string name="osmand_extended_description_part8">OsmAndはオープンソースで現在も積極的に開発されています。バグを報告したり、翻訳を改善したり、新機能をコーディングしたりすることで、誰もがアプリの開発に貢献できます。またこのプロジェクトは、新機能のコーディングとテストに要する金銭面での貢献によっても支えられています。
+\n地図のおおよその範囲と品質(※注 *の数が多いほど内容が充実しています):
+\n• 西ヨーロッパ：****
+\n• 東ヨーロッパ：***
+\n• ロシア：***
+\n• 北アメリカ：***
+\n• 南アメリカ：**
+\n• アジア：**
+\n• 日本、韓国：***
+\n• 中東：**
+\n• アフリカ：**
+\n• 南極大陸：*
+\n世界中のほとんどの国がダウンロード可能です！
+\nフランス、ドイツ、メキシコ、イギリス、スペイン、オランダ、アメリカ、ロシア、ブラジルなど、各国において頼りとなるナビゲーターを手に入れましょう。</string>
     <string name="osmand_plus_extended_description_part1">OsmAnd(OSM Automated Navigation Directions～自動ナビ案内)は、『無償利用可、ワールドワイド対応、高品質のOSM』データを使用した、地図＆ナビゲーションアプリです。 
 \n音声と視覚による案内、POI(Point Of Interest～興味的地点)表示、GPX経路の作成と管理、等高線を使った地形情報(要プラグイン)、ドライブ、サイクリング、徒歩移動各移動手段別のモード、OSMの編集等々に対応。 
 \n OsmAnd+は有料のアプリケーションです。購入することで同プロジェクトの資金、新機能開発への援助となり、最新アップデートも利用可能になります。 
@@ -2347,7 +2354,7 @@ POIの更新は利用できません</string>
     <string name="quick_action_showhide_osmbugs_descr">マップ画面でのOSMメモの表示/非表示を切り替えるボタンです。</string>
     <string name="sorted_by_distance">距離順で並べ替え</string>
     <string name="search_favorites">お気に入りで検索</string>
-    <string name="hillshade_menu_download_descr">標高の高低をグラデーション表示するには、陰影起伏図(Hillshade Overlay)マップのダウンロードが必要です。</string>
+    <string name="hillshade_menu_download_descr">標高の高低をグラデーション表示するには、\'Hillshade(陰影起伏図)\'マップのダウンロードが必要です。</string>
     <string name="hillshade_purchase_header">等高線プラグイン『Contour lines plugin — OsmAnd』をインストールすることで、陰影起伏図(高低差を陰影で表したもの)をマップ上に表示できます。</string>
     <string name="hide_from_zoom_level">ズームレベルを非表示</string>
     <string name="srtm_menu_download_descr">この地域用の等高線マップをダウンロードします。</string>
@@ -2369,20 +2376,20 @@ POIの更新は利用できません</string>
     <string name="increase_search_radius">検索範囲を拡大</string>
     <string name="restart_search">再検索</string>
     <string name="srtm_color_scheme">配色</string>
-    <string name="osmand_plus_extended_description_part8">" 地図のおおよそのエリアとその品質(※注 *の数が多いほど充実しています):
-\n • 西ヨーロッパ: ****
-\n • 東ヨーロッパ: ***
-\n • ロシア: ***
-\n • 北米: ***
-\n • 南アメリカ: **
-\n • アジア: **
-\n • 日本、韓国: ***
-\n • 中東: **
-\n • アフリカ: **
-\n • 南極: *
-\n
-\n 世界中のほとんどの国の地図がダウンロード可能です！
-\n アフガニスタンからジンバブエ、オーストラリアからアメリカ、 アルゼンチン、ブラジル、カナダ、フランス、ドイツ、メキシコ、イギリス、スペイン、... "</string>
+    <string name="osmand_plus_extended_description_part8">地図のおおよその範囲と品質:(※注 *の数が多いほど内容が充実しています):
+\n• 西ヨーロッパ：****
+\n• 東ヨーロッパ：***
+\n• ロシア：***
+\n• 北アメリカ：***
+\n• 南アメリカ： **
+\n• アジア：**
+\n• 日本、韓国：***
+\n• 中東：**
+\n•アフリカ：**
+\n•南極大陸：*
+\n世界中のほとんどの国がダウンロード可能です！
+\nアフガニスタンからジンバブエへ、オーストラリアからアメリカへも…またアルゼンチン、ブラジル、カナダ、フランス、ドイツ、メキシコ、イギリス、スペイン等々…
+\n</string>
     <string name="osmand_plus_extended_description_part7">"
  直接OSMに寄与
  • データ、バグの報告ができます
@@ -2812,7 +2819,7 @@ POIの更新は利用できません</string>
     <string name="powered_by_osmand">By OsmAnd</string>
     <string name="osm_live_plan_pricing">プランと料金</string>
     <string name="osm_live_payment_monthly_title">月間</string>
-    <string name="osm_live_payment_3_months_title">3ヶ月間</string>
+    <string name="osm_live_payment_3_months_title">3ヶ月毎</string>
     <string name="osm_live_payment_annual_title">年間</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / 月</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / 月</string>
@@ -3489,9 +3496,9 @@ POIの更新は利用できません</string>
     <string name="shared_string_square">四角形</string>
     <string name="shared_string_min">最小</string>
     <string name="quick_action_transport_descr">マップ内公共交通機関の表示/非表示を切り替えるボタンです。</string>
-    <string name="create_edit_poi">POIの作成/編集</string>
+    <string name="create_edit_poi">POIの作成・編集</string>
     <string name="parking_positions">駐車位置</string>
-    <string name="add_edit_favorite">お気に入りの追加/編集</string>
+    <string name="add_edit_favorite">お気に入りの追加・編集</string>
     <string name="reset_deafult_order">アイテム順序を初期状態に戻します</string>
     <string name="back_to_editing">編集に戻る</string>
     <string name="quick_action_switch_profile_descr">選択したプロファイルを切り替えるボタンです。</string>
@@ -3518,7 +3525,7 @@ POIの更新は利用できません</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="osm_live_payment_subscription_management">お支払いは、購入の確認後にGoogle Playアカウントに請求されます。
 \n
-\nサブスクリプションは更新日より前にキャンセルしない限り、自動的に更新されます。アカウントの更新期間(月/ 3ヶ月/年)に準じた更新日に請求されます。
+\nサブスクリプションは更新日前にキャンセルしない限り、自動的に延長されます。アカウントには更新日に更新期間(月/ 3ヶ月/年)に応じた金額が請求されます。
 \n
 \nサブスクリプションの管理およびキャンセルはGoogle Playの設定からおこなえます。</string>
     <string name="search_poi_types">POIのタイプで検索</string>
@@ -3661,7 +3668,7 @@ POIの更新は利用できません</string>
     <string name="height_limit_description">車高を入力してください。一部のルートにおいては、車高の高い車両では通行できない場合があります。</string>
     <string name="weight_limit_description">車両の重量を入力してください。一部のルートにおいては、大型車両では通行できない場合があります。</string>
     <string name="lenght_limit_description">車の長さを入力してください。一部のルートにおいては、長い車両では通行できない場合があります。</string>
-    <string name="shared_string_always">常に</string>
+    <string name="shared_string_always">常時</string>
     <string name="screen_control">画面の制御</string>
     <string name="turn_screen_on_power_button_disabled">現在無効。 \'画面を表示する時間\'の下にある\'画面を常に表示\'への設定が必要です。</string>
     <string name="keep_screen_off">画面オフを維持</string>
@@ -3725,9 +3732,9 @@ POIの更新は利用できません</string>
     <string name="app_mode_inline_skates">インラインスケート</string>
     <string name="quick_action_remove_next_destination">最も近い目的地を削除</string>
     <string name="please_provide_point_name_error">地点の名前を入力してください</string>
-    <string name="quick_action_remove_next_destination_descr">ルート上の現在の目的地点が削除されます。目的地に着いた場合はナビは停止します。</string>
+    <string name="quick_action_remove_next_destination_descr">ルート上の次の目的地を削除します。それが最終目的地の場合は、ナビゲーションが停止します。</string>
     <string name="search_download_wikipedia_maps">Wikipediaマップのダウンロード</string>
-    <string name="plugin_wikipedia_description">Wikipediaから興味のあるポイントに関する情報を取得します。それがあなたのモバイルオフラインガイドになります - Wikipediaプラグインを有効にして、周囲の名所に関する記事を楽しんでください。</string>
+    <string name="plugin_wikipedia_description">場所や目的地に関する記事が掲載されたWikipediaのオフラインポケットガイドを活用し、ランドマークや観光名所の詳しい情報を入手しましょう。</string>
     <string name="add_hidden_group_info">追加した地点はマップ上に表示されません。選択したグループは非表示になっているため、\"%s\"から見つけることができます。</string>
     <string name="shared_string_save_as_gpx">新しい経路ファイルとして保存</string>
     <string name="add_segment_to_the_track">経路ファイルを追加</string>
@@ -3762,8 +3769,8 @@ POIの更新は利用できません</string>
     <string name="get_discount_second_part">次年度以降 %1$s</string>
     <string name="get_discount_first_few_part">初%2$s度 %1$s</string>
     <string name="get_discount_first_part">初%2$s度 %1$s</string>
-    <string name="gpx_monitoring_stop">ルート記録を一時停止</string>
-    <string name="gpx_monitoring_start">ルート記録を続行</string>
+    <string name="gpx_monitoring_stop">旅程の記録を一時停止</string>
+    <string name="gpx_monitoring_start">旅程の記録を続行</string>
     <string name="system_default_theme">システムのデフォルト</string>
     <string name="all_next_segments_will_be_recalc">以後のすべてのセグメントは、選択したプロファイルを使用して再計算されます。</string>
     <string name="all_next_segments">以後のすべてのセグメント</string>
@@ -3794,7 +3801,7 @@ POIの更新は利用できません</string>
     <string name="number_of_gpx_files_selected_pattern">%s個の経路ファイルが選択されました</string>
     <string name="shared_string_file_name">ファイル名</string>
     <string name="disable_recording_once_app_killed_descrp">(最近使用したアプリを介して) OsmAndを終了すると、GPXの記録が一時停止されます(バックグラウンドサービスインジケーターがAndroid通知バーから消えます。)</string>
-    <string name="save_global_track_interval_descr">一般的な経路記録の記録間隔を定義します(マップ画面の\'GPX\'ボタンを使用)</string>
+    <string name="save_global_track_interval_descr">一般的な経路記録の記録間隔を指定します(マップウィジェットの\'旅程の記録\'ボタンでONにします)</string>
     <string name="shared_string_is_saved">保存されました</string>
     <string name="sort_last_modified">最終更新日</string>
     <string name="sort_name_descending">名称: 降順(Z-A)</string>
@@ -4055,9 +4062,20 @@ POIの更新は利用できません</string>
     <string name="start_finish_icons">開始・終了アイコン</string>
     <string name="contour_lines_thanks">\'等高線(Contour lines)\'をご購入いただきありがとうございます</string>
     <string name="osm_live_payment_desc_hw">サブスクリプションは選択した期間に応じて課金されます。 AppGalleryからいつでもキャンセルできます。</string>
-    <string name="osm_live_payment_subscription_management_hw">購入確認後に利用者のAppGalleryアカウントへ請求されます。
+    <string name="osm_live_payment_subscription_management_hw">お支払いは、購入の確認後にAppGalleryアカウントへ請求されます。
 \n
-\nサブスクリプションは更新日前にキャンセルされない限り自動的に延長されます。アカウントには更新日に更新期間分(月/ 3ヶ月/年)の金額が請求されます。
+\nサブスクリプションは更新日前にキャンセルされない限り自動的に延長されます。アカウントには更新日に更新期間(月/ 3ヶ月/年)に応じた金額が請求されます。
 \n
-\nAppGallery設定でサブスクリプションの管理およびキャンセルができます。</string>
+\nサブスクリプションの管理およびキャンセルはAppGalleryの設定からおこなえます。</string>
+    <string name="lang_de_casual">ドイツ語(話し言葉)</string>
+    <string name="navigate_point_mgrs">MGRS(Military Grid Reference System)</string>
+    <string name="what_is_new">新着情報</string>
+    <string name="snowmobile_render_descr">スノーモービルレジャー用の専用道路や通路です。</string>
+    <string name="navigate_point_format_mgrs">MGRS(Military Grid Reference System)</string>
+    <string name="mgrs_format_descr">OsmAndは、UTM NATO形式類似のMGRSを使用します。</string>
+    <string name="shared_string_legend">凡例</string>
+    <string name="n_items_of_z">%2$sの%1$s</string>
+    <string name="app_mode_wheelchair_forward">基本前進のみの車椅子</string>
+    <string name="track_coloring_solid">通常色</string>
+    <string name="in_case_of_reverse_direction">逆方向の場合</string>
 </resources>
