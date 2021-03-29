@@ -11,6 +11,7 @@ import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
+import net.osmand.plus.monitoring.TripRecordingBottomSheet.DismissTargetFragment;
 import net.osmand.plus.monitoring.TripRecordingBottomSheet.ItemType;
 
 import androidx.annotation.NonNull;
@@ -18,8 +19,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import static net.osmand.AndroidUtils.getPrimaryTextColorId;
+import static net.osmand.plus.monitoring.TripRecordingOptionsBottomSheet.ACTION_CLEAR_DATA;
 
-public class TripRecordingClearDataBottomSheet extends MenuBottomSheetDialogFragment implements TripRecordingBottomSheet.DismissTargetFragment {
+public class TripRecordingClearDataBottomSheet extends MenuBottomSheetDialogFragment implements DismissTargetFragment {
 
 	public static final String TAG = TripRecordingClearDataBottomSheet.class.getSimpleName();
 
@@ -111,6 +113,14 @@ public class TripRecordingClearDataBottomSheet extends MenuBottomSheetDialogFrag
 	public void dismissTarget() {
 		Fragment target = getTargetFragment();
 		if (target instanceof TripRecordingOptionsBottomSheet) {
+			Bundle args = target.getArguments();
+			if (args != null) {
+				args.putBoolean(ACTION_CLEAR_DATA, true);
+			} else {
+				args = new Bundle();
+				args.putBoolean(ACTION_CLEAR_DATA, true);
+				target.setArguments(args);
+			}
 			((TripRecordingOptionsBottomSheet) target).dismiss();
 		}
 	}
