@@ -106,7 +106,7 @@ public class DataStorageHelper {
 
 			//shared storage
 			dir = settings.getDefaultInternalStorage();
-			path = "\u200e" + dir.getAbsolutePath();
+			path = dir.getAbsolutePath();
 			iconId = R.drawable.ic_action_phone;
 
 			StorageItem sharedStorageItem = StorageItem.builder()

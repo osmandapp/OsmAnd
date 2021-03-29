@@ -699,8 +699,8 @@ public class MGRSPoint extends ZonedUTMPoint {
                         String zero = "";
                     }
                     
-                    all.add(String.format(java.util.Locale.US,"%0" + accuracy + "d", roundedEasting));
-                    all.add(String.format(java.util.Locale.US,"%0" + accuracy + "d", roundedNorthing));
+                    all.add(String.format(Locale.US,"%0" + accuracy + "d", roundedEasting));
+                    all.add(String.format(Locale.US,"%0" + accuracy + "d", roundedNorthing));
                     break;
                 }
             }

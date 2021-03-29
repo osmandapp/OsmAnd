@@ -46,6 +46,7 @@ import java.util.ArrayList;
 import static net.osmand.plus.settings.datastorage.DataStorageHelper.INTERNAL_STORAGE;
 import static net.osmand.plus.settings.datastorage.DataStorageHelper.MANUALLY_SPECIFIED;
 import static net.osmand.plus.settings.datastorage.DataStorageHelper.OTHER_MEMORY;
+import static net.osmand.plus.settings.datastorage.DataStorageHelper.SHARED_STORAGE;
 import static net.osmand.plus.settings.datastorage.DataStorageHelper.TILES_MEMORY;
 import static net.osmand.plus.settings.bottomsheets.ChangeDataStorageBottomSheet.CHOSEN_DIRECTORY;
 import static net.osmand.plus.settings.bottomsheets.ChangeDataStorageBottomSheet.MOVE_DATA;
@@ -226,7 +227,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 
 				int defaultIconColor = isNightMode() ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
 				int chosenIconColor = isNightMode() ? R.color.icon_color_osmand_dark : R.color.icon_color_osmand_light;
-				Drawable icon = app.getUIUtilities().getIcon(item.getIconResId(), 
+				Drawable icon = app.getUIUtilities().getIcon(item.getIconResId(),
 						isCurrent ? chosenIconColor : defaultIconColor);
 				ivIcon.setImageDrawable(icon);
 
@@ -249,6 +250,8 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 					}
 					if (currentKey.equals(INTERNAL_STORAGE)) {
 						tvAdditionalDescription.setText(item.getDescription());
+					} else  if(currentKey.equals(SHARED_STORAGE)){
+						tvAdditionalDescription.setText(String.format("\u200E%s", item.getDirectory()));
 					} else {
 						tvAdditionalDescription.setText(item.getDirectory());
 					}
