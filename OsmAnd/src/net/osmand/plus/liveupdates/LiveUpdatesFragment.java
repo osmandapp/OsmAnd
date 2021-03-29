@@ -24,7 +24,6 @@ import android.widget.TextView;
 
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.AppCompatImageView;
@@ -56,7 +55,7 @@ import net.osmand.plus.liveupdates.LiveUpdatesHelper.TimeOfDay;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper.UpdateFrequency;
 import net.osmand.plus.liveupdates.LiveUpdatesSettingsBottomSheet.OnLiveUpdatesForLocalChange;
 import net.osmand.plus.liveupdates.LoadLiveMapsTask.LocalIndexInfoAdapter;
-import net.osmand.plus.liveupdates.PerformLiveUpdateAsyncTask.LiveUpdateListener;
+import net.osmand.plus.liveupdates.LiveUpdatesHelper.LiveUpdateListener;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.widgets.TextViewEx;
@@ -92,7 +91,7 @@ import static net.osmand.plus.monitoring.TripRecordingBottomSheet.getActiveTextC
 import static net.osmand.plus.monitoring.TripRecordingBottomSheet.getOsmandIconColorId;
 import static net.osmand.plus.monitoring.TripRecordingBottomSheet.getSecondaryIconColorId;
 
-public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnLiveUpdatesForLocalChange {
+public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnLiveUpdatesForLocalChange, LiveUpdateListener {
 
 	public static final String URL = "https://osmand.net/api/osmlive_status";
 	public static final String TAG = LiveUpdatesFragment.class.getSimpleName();
@@ -111,18 +110,28 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 	private GetLastUpdateDateTask getLastUpdateDateTask;
 	private LoadLiveMapsTask loadLiveMapsTask;
 
-	private final LiveUpdateListener liveUpdateListener = new LiveUpdateListener() {
-		@Override
-		public void processFinish() {
-			adapter.notifyDataSetChanged();
-		}
-	};
-
 	public static void showInstance(@NonNull FragmentManager fragmentManager, Fragment target) {
 		if (!fragmentManager.isStateSaved()) {
 			LiveUpdatesFragment fragment = new LiveUpdatesFragment();
 			fragment.setTargetFragment(target, 0);
 			fragment.show(fragmentManager, TAG);
+		}
+	}
+
+	public static void showUpdateDialog(Activity context, FragmentManager fragmentManager, final LiveUpdateListener listener) {
+		List<LocalIndexInfo> mapsToUpdate = listener.getMapsToUpdate();
+		if (!Algorithms.isEmpty(mapsToUpdate)) {
+			int countEnabled = listener.getMapsToUpdate().size();
+			if (countEnabled == 1) {
+				runLiveUpdate(context, mapsToUpdate.get(0).getFileName(), false, new Runnable() {
+					@Override
+					public void run() {
+						listener.processFinish();
+					}
+				});
+			} else if (countEnabled > 1) {
+				LiveUpdatesUpdateAllBottomSheet.showInstance(fragmentManager, listener.currentFragment());
+			}
 		}
 	}
 
@@ -170,7 +179,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 			@Override
 			public void onRefresh() {
 				if (settings.IS_LIVE_UPDATES_ON.get()) {
-					showUpdateDialog(getActivity(), getFragmentManager(), settings, adapter.mapsList, liveUpdateListener);
+					showUpdateDialog(getActivity(), getFragmentManager(), LiveUpdatesFragment.this);
 					startUpdateDateAsyncTask();
 				}
 				swipeRefresh.setRefreshing(false);
@@ -326,21 +335,8 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 	private void switchOnLiveUpdates() {
 		settings.IS_LIVE_UPDATES_ON.set(true);
 		enableLiveUpdates(true);
-		showUpdateDialog(getMyActivity(), getFragmentManager(), settings, adapter.mapsList, liveUpdateListener);
+		showUpdateDialog(getMyActivity(), getFragmentManager(), this);
 		startUpdateDateAsyncTask();
-	}
-
-	public static void showUpdateDialog(Activity context, FragmentManager fragmentManager, OsmandSettings settings,
-										List<LocalIndexInfo> mapsList, @Nullable LiveUpdateListener listener) {
-		if (!Algorithms.isEmpty(mapsList)) {
-			int countEnabled = updateCountEnabled(null, mapsList, settings);
-			if (countEnabled == 1) {
-				LocalIndexInfo li = mapsList.get(0);
-				runLiveUpdate(context, li.getFileName(), false, listener);
-			} else if (countEnabled > 1) {
-				LiveUpdatesUpdateAllBottomSheet.showInstance(fragmentManager, getMapsToUpdate(mapsList, settings), listener);
-			}
-		}
 	}
 
 	private void enableLiveUpdates(boolean enable) {
@@ -562,7 +558,12 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 				compoundButton.setOnCheckedChangeListener(new SwitchCompat.OnCheckedChangeListener() {
 					@Override
 					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-						onUpdateLocalIndex(item, isChecked, null);
+						onUpdateLocalIndex(item, isChecked, new Runnable() {
+							@Override
+							public void run() {
+								runSort();
+							}
+						});
 					}
 				});
 			} else {
@@ -640,6 +641,21 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 	}
 
 	@Override
+	public void processFinish() {
+		adapter.notifyDataSetChanged();
+	}
+
+	@Override
+	public List<LocalIndexInfo> getMapsToUpdate() {
+		return getMapsToUpdate(adapter.mapsList, settings);
+	}
+
+	@Override
+	public Fragment currentFragment() {
+		return this;
+	}
+
+	@Override
 	public boolean onUpdateLocalIndex(String fileName, boolean newValue, final Runnable callback) {
 
 		int frequencyId = preferenceUpdateFrequency(fileName, settings).get();
@@ -650,15 +666,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 		final CommonPreference<Boolean> liveUpdatePreference = preferenceForLocalIndex(fileName, settings);
 		liveUpdatePreference.set(newValue);
 		if (settings.IS_LIVE_UPDATES_ON.get() && liveUpdatePreference.get()) {
-			runLiveUpdate(getActivity(), fileName, true, new LiveUpdateListener() {
-				@Override
-				public void processFinish() {
-					runSort();
-					if (callback != null) {
-						callback.run();
-					}
-				}
-			});
+			runLiveUpdate(getActivity(), fileName, true, callback);
 			UpdateFrequency updateFrequency = UpdateFrequency.values()[frequencyId];
 			TimeOfDay timeOfDayToUpdate = TimeOfDay.values()[timeOfDateToUpdateId];
 			setAlarmForPendingIntent(alarmIntent, alarmManager, updateFrequency, timeOfDayToUpdate);
@@ -673,15 +681,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 	@Override
 	public void forceUpdateLocal(String fileName, boolean userRequested, final Runnable callback) {
 		if (settings.IS_LIVE_UPDATES_ON.get()) {
-			runLiveUpdate(getActivity(), fileName, userRequested, new LiveUpdateListener() {
-				@Override
-				public void processFinish() {
-					updateList();
-					if (callback != null) {
-						callback.run();
-					}
-				}
-			});
+			runLiveUpdate(getActivity(), fileName, userRequested, callback);
 		}
 	}
 
@@ -703,5 +703,4 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 	public static int getDefaultIconColorId(boolean nightMode) {
 		return nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
 	}
-
 }

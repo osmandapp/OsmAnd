@@ -1,8 +1,5 @@
 package net.osmand.plus.activities;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import androidx.annotation.NonNull;
 
 import net.osmand.GPXUtilities.GPXFile;
@@ -10,9 +7,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
 
 import java.io.File;
-import java.io.Serializable;
 
-public class LocalIndexInfo implements Comparable<LocalIndexInfo>, Parcelable {
+public class LocalIndexInfo implements Comparable<LocalIndexInfo> {
 
 	private LocalIndexType type;
 	private String description = "";
@@ -46,22 +42,6 @@ public class LocalIndexInfo implements Comparable<LocalIndexInfo>, Parcelable {
 		}
 		this.backupedData = backuped;
 	}
-
-	protected LocalIndexInfo(Parcel in) {
-		readFromParcel(in);
-	}
-
-	public static final Creator<LocalIndexInfo> CREATOR = new Creator<LocalIndexInfo>() {
-		@Override
-		public LocalIndexInfo createFromParcel(Parcel in) {
-			return new LocalIndexInfo(in);
-		}
-
-		@Override
-		public LocalIndexInfo[] newArray(int size) {
-			return new LocalIndexInfo[size];
-		}
-	};
 
 	public void setAttachedObject(Object attachedObject) {
 		this.attachedObject = attachedObject;
@@ -195,47 +175,5 @@ public class LocalIndexInfo implements Comparable<LocalIndexInfo>, Parcelable {
 	@Override
 	public int compareTo(LocalIndexInfo o) {
 		return getFileName().compareTo(o.getFileName());
-	}
-
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeSerializable(type);
-		dest.writeString(description);
-		dest.writeString(name);
-		dest.writeByte((byte) (backupedData ? 1 : 0));
-		dest.writeByte((byte) (corrupted ? 1 : 0));
-		dest.writeByte((byte) (notSupported ? 1 : 0));
-		dest.writeByte((byte) (loaded ? 1 : 0));
-		dest.writeString(subfolder);
-		dest.writeString(pathToData);
-		dest.writeString(fileName);
-		dest.writeByte((byte) (singleFile ? 1 : 0));
-		dest.writeInt(kbSize);
-		dest.writeSerializable((Serializable) attachedObject);
-		dest.writeByte((byte) (expanded ? 1 : 0));
-		dest.writeValue(gpxFile);
-	}
-
-	private void readFromParcel(Parcel in) {
-		type = (LocalIndexType) in.readSerializable();
-		description = in.readString();
-		name = in.readString();
-		backupedData = in.readByte() != 0;
-		corrupted = in.readByte() != 0;
-		notSupported = in.readByte() != 0;
-		loaded = in.readByte() != 0;
-		subfolder = in.readString();
-		pathToData = in.readString();
-		fileName = in.readString();
-		singleFile = in.readByte() != 0;
-		kbSize = in.readInt();
-		attachedObject = in.readSerializable();
-		expanded = in.readByte() != 0;
-		gpxFile = (GPXFile) in.readSerializable();
-	}
-
-	@Override
-	public int describeContents() {
-		return 0;
 	}
 }

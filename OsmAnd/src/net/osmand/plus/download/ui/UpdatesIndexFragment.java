@@ -29,6 +29,7 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.MenuItemCompat;
+import androidx.fragment.app.Fragment;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Collator;
@@ -40,6 +41,7 @@ import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.liveupdates.LiveUpdatesClearBottomSheet.RefreshLiveUpdates;
 import net.osmand.plus.liveupdates.LiveUpdatesFragment;
+import net.osmand.plus.liveupdates.LiveUpdatesHelper.LiveUpdateListener;
 import net.osmand.plus.liveupdates.LoadLiveMapsTask;
 import net.osmand.plus.liveupdates.LoadLiveMapsTask.LocalIndexInfoAdapter;
 import net.osmand.plus.chooseplan.ChoosePlanDialogFragment.ChoosePlanDialogType;
@@ -52,7 +54,6 @@ import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
-import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -62,7 +63,7 @@ import java.util.List;
 import static net.osmand.plus.liveupdates.LiveUpdatesFragment.showUpdateDialog;
 import static net.osmand.plus.liveupdates.LiveUpdatesFragment.updateCountEnabled;
 
-public class UpdatesIndexFragment extends OsmAndListFragment implements DownloadEvents, RefreshLiveUpdates {
+public class UpdatesIndexFragment extends OsmAndListFragment implements DownloadEvents, RefreshLiveUpdates, LiveUpdateListener {
 	private static final int RELOAD_ID = 5;
 	private UpdateIndexAdapter listAdapter;
 	private String errorMessage;
@@ -398,8 +399,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 							@Override
 							public void onClick(View v) {
 								if (!listAdapter.isShowOsmLivePurchaseBanner()) {
-									showUpdateDialog(getActivity(), getFragmentManager(),
-											settings, listAdapter.mapsList, null);
+									showUpdateDialog(getActivity(), getFragmentManager(), UpdatesIndexFragment.this);
 								}
 							}
 						});
@@ -417,9 +417,22 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 		}
 	}
 
+	@Override
+	public void processFinish() {
+	}
+
+	@Override
+	public List<LocalIndexInfo> getMapsToUpdate() {
+		return LiveUpdatesFragment.getMapsToUpdate(listAdapter.mapsList, settings);
+	}
+
+	@Override
+	public Fragment currentFragment() {
+		return this;
+	}
+
 	@ColorRes
 	public static int getDefaultIconColorId(boolean nightMode) {
 		return nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
 	}
-
 }

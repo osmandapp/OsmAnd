@@ -157,6 +157,10 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 								updateLastCheck();
 								updateFrequencyHelpMessage();
 								updateFileSize();
+								Fragment target = getTargetFragment();
+								if (target instanceof LiveUpdatesFragment) {
+									((LiveUpdatesFragment) target).runSort();
+								}
 							}
 						})) {
 							item.setTitle(getStateText(!checked));
@@ -276,6 +280,10 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 										updateLastCheck();
 										updateFrequencyHelpMessage();
 										updateFileSize();
+										Fragment target = getTargetFragment();
+										if (target instanceof LiveUpdatesFragment) {
+											((LiveUpdatesFragment) target).updateList();
+										}
 									}
 								});
 							}
