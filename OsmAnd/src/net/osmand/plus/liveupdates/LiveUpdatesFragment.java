@@ -170,8 +170,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 			@Override
 			public void onRefresh() {
 				if (settings.IS_LIVE_UPDATES_ON.get()) {
-					showUpdateDialog(getActivity(), getFragmentManager(), adapter.mapsList,
-							adapter.countEnabled, liveUpdateListener);
+					showUpdateDialog(getActivity(), getFragmentManager(), settings, adapter.mapsList, liveUpdateListener);
 					startUpdateDateAsyncTask();
 				}
 				swipeRefresh.setRefreshing(false);
@@ -262,9 +261,6 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 		Toolbar toolbar = (Toolbar) appBarLayout.findViewById(R.id.toolbar);
 		TextViewEx toolbarTitle = (TextViewEx) toolbar.findViewById(R.id.toolbar_title);
 		toolbarTitle.setText(R.string.osm_live);
-		int iconColorResId = nightMode ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light;
-		Drawable icBack = app.getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(app), iconColorResId);
-		DrawableCompat.setTint(icBack, ContextCompat.getColor(app, iconColorResId));
 
 		View closeButton = toolbar.findViewById(R.id.close_button);
 		closeButton.setOnClickListener(new View.OnClickListener() {
@@ -275,6 +271,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 		});
 
 		FrameLayout iconHelpContainer = toolbar.findViewById(R.id.action_button);
+		int iconColorResId = nightMode ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light;
 		AppCompatImageButton iconHelp = toolbar.findViewById(R.id.action_button_icon);
 		Drawable helpDrawable = app.getUIUtilities().getIcon(R.drawable.ic_action_help_online, iconColorResId);
 		iconHelp.setImageDrawable(helpDrawable);
@@ -329,18 +326,19 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 	private void switchOnLiveUpdates() {
 		settings.IS_LIVE_UPDATES_ON.set(true);
 		enableLiveUpdates(true);
-		showUpdateDialog(getMyActivity(), getFragmentManager(), adapter.mapsList, adapter.countEnabled, liveUpdateListener);
+		showUpdateDialog(getMyActivity(), getFragmentManager(), settings, adapter.mapsList, liveUpdateListener);
 		startUpdateDateAsyncTask();
 	}
 
-	public static void showUpdateDialog(Activity context, FragmentManager fragmentManager, List<LocalIndexInfo> mapsList,
-										int countEnabled, @Nullable LiveUpdateListener listener) {
+	public static void showUpdateDialog(Activity context, FragmentManager fragmentManager, OsmandSettings settings,
+										List<LocalIndexInfo> mapsList, @Nullable LiveUpdateListener listener) {
 		if (!Algorithms.isEmpty(mapsList)) {
+			int countEnabled = updateCountEnabled(null, mapsList, settings);
 			if (countEnabled == 1) {
 				LocalIndexInfo li = mapsList.get(0);
 				runLiveUpdate(context, li.getFileName(), false, listener);
 			} else if (countEnabled > 1) {
-				LiveUpdatesUpdateAllBottomSheet.showInstance(fragmentManager, mapsList, listener);
+				LiveUpdatesUpdateAllBottomSheet.showInstance(fragmentManager, getMapsToUpdate(mapsList, settings), listener);
 			}
 		}
 	}
@@ -348,22 +346,20 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 	private void enableLiveUpdates(boolean enable) {
 		if (!Algorithms.isEmpty(adapter.mapsList)) {
 			AlarmManager alarmMgr = (AlarmManager) app.getSystemService(Context.ALARM_SERVICE);
-			for (LocalIndexInfo li : adapter.mapsList) {
-				CommonPreference<Boolean> localUpdateOn = preferenceForLocalIndex(li.getFileName(), settings);
-				if (localUpdateOn.get()) {
-					String fileName = li.getFileName();
-					PendingIntent alarmIntent = getPendingIntent(app, fileName);
-					if (enable) {
-						final CommonPreference<Integer> updateFrequencyPreference =
-								preferenceUpdateFrequency(fileName, settings);
-						final CommonPreference<Integer> timeOfDayPreference =
-								preferenceTimeOfDayToUpdate(fileName, settings);
-						UpdateFrequency updateFrequency = UpdateFrequency.values()[updateFrequencyPreference.get()];
-						TimeOfDay timeOfDayToUpdate = TimeOfDay.values()[timeOfDayPreference.get()];
-						setAlarmForPendingIntent(alarmIntent, alarmMgr, updateFrequency, timeOfDayToUpdate);
-					} else {
-						alarmMgr.cancel(alarmIntent);
-					}
+			List<LocalIndexInfo> mapsToUpdate = getMapsToUpdate(adapter.mapsList, settings);
+			for (LocalIndexInfo li : mapsToUpdate) {
+				String fileName = li.getFileName();
+				PendingIntent alarmIntent = getPendingIntent(app, fileName);
+				if (enable) {
+					final CommonPreference<Integer> updateFrequencyPreference =
+							preferenceUpdateFrequency(fileName, settings);
+					final CommonPreference<Integer> timeOfDayPreference =
+							preferenceTimeOfDayToUpdate(fileName, settings);
+					UpdateFrequency updateFrequency = UpdateFrequency.values()[updateFrequencyPreference.get()];
+					TimeOfDay timeOfDayToUpdate = TimeOfDay.values()[timeOfDayPreference.get()];
+					setAlarmForPendingIntent(alarmIntent, alarmMgr, updateFrequency, timeOfDayToUpdate);
+				} else {
+					alarmMgr.cancel(alarmIntent);
 				}
 			}
 		}
@@ -375,19 +371,24 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 		}
 	}
 
-	public static int updateCountEnabled(TextView countView, ArrayList<LocalIndexInfo> mapsList, OsmandSettings settings) {
-		int countEnabled = 0;
+	public static int updateCountEnabled(TextView countView, List<LocalIndexInfo> mapsList, OsmandSettings settings) {
+		int countEnabled = getMapsToUpdate(mapsList, settings).size();
 		if (countView != null) {
-			for (LocalIndexInfo map : mapsList) {
-				CommonPreference<Boolean> preference = preferenceForLocalIndex(map.getFileName(), settings);
-				if (preference.get()) {
-					countEnabled++;
-				}
-			}
 			String countText = countEnabled + "/" + mapsList.size();
 			countView.setText(countText);
 		}
 		return countEnabled;
+	}
+
+	public static List<LocalIndexInfo> getMapsToUpdate(List<LocalIndexInfo> mapsList, OsmandSettings settings) {
+		List<LocalIndexInfo> listToUpdate = new ArrayList<>();
+		for (LocalIndexInfo mapToUpdate : mapsList) {
+			CommonPreference<Boolean> preference = preferenceForLocalIndex(mapToUpdate.getFileName(), settings);
+			if (preference.get()) {
+				listToUpdate.add(mapToUpdate);
+			}
+		}
+		return listToUpdate;
 	}
 
 	protected class LiveMapsAdapter extends OsmandBaseExpandableListAdapter implements LocalIndexInfoAdapter {

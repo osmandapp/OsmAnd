@@ -1,6 +1,7 @@
 package net.osmand.plus.liveupdates;
 
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.LocalIndexInfo;
@@ -20,25 +20,22 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.liveupdates.PerformLiveUpdateAsyncTask.LiveUpdateListener;
-import net.osmand.plus.settings.backend.CommonPreference;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.widgets.TextViewEx;
 
 import org.apache.commons.logging.Log;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static net.osmand.AndroidUtils.getPrimaryTextColorId;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceForLocalIndex;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.runLiveUpdate;
 
 public class LiveUpdatesUpdateAllBottomSheet extends MenuBottomSheetDialogFragment {
 
 	public static final String TAG = LiveUpdatesUpdateAllBottomSheet.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(LiveUpdatesUpdateAllBottomSheet.class);
-
-	private OsmandApplication app;
-	private OsmandSettings settings;
+	private static final String MAPS_TO_UPDATE = "maps_to_update";
+	private static final String LIVE_UPDATE_LISTENER = "live_update_listener";
 
 	private BaseBottomSheetItem itemTitle;
 	private BaseBottomSheetItem itemDescription;
@@ -66,8 +63,10 @@ public class LiveUpdatesUpdateAllBottomSheet extends MenuBottomSheetDialogFragme
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		app = getMyApplication();
-		settings = app.getSettings();
+		if (savedInstanceState != null) {
+			mapsList = savedInstanceState.getParcelableArrayList(MAPS_TO_UPDATE);
+			listener = (LiveUpdateListener) savedInstanceState.getSerializable(LIVE_UPDATE_LISTENER);
+		}
 
 		updateBottomButtons();
 
@@ -78,8 +77,9 @@ public class LiveUpdatesUpdateAllBottomSheet extends MenuBottomSheetDialogFragme
 				.create();
 		items.add(itemTitle);
 
+		String osmAndLive = "\"" + getString(R.string.osm_live) + "\"";
 		itemDescription = new LongDescriptionItem.Builder()
-				.setDescription(getString(R.string.live_update_all_maps))
+				.setDescription(getString(R.string.update_all_maps_added, osmAndLive))
 				.setDescriptionMaxLines(5)
 				.setDescriptionColorId(getPrimaryTextColorId(nightMode))
 				.setLayoutId(R.layout.bottom_sheet_item_description_long)
@@ -97,14 +97,17 @@ public class LiveUpdatesUpdateAllBottomSheet extends MenuBottomSheetDialogFragme
 		return view;
 	}
 
+	@Override
+	@SuppressWarnings("unchecked")
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putParcelableArrayList(MAPS_TO_UPDATE, (ArrayList<? extends Parcelable>) mapsList);
+		outState.putSerializable(LIVE_UPDATE_LISTENER, listener);
+	}
+
 	private void updateAll() {
-		if (settings != null) {
-			for (LocalIndexInfo li : mapsList) {
-				CommonPreference<Boolean> localUpdateOn = preferenceForLocalIndex(li.getFileName(), settings);
-				if (localUpdateOn.get()) {
-					runLiveUpdate(getActivity(), li.getFileName(), false, listener);
-				}
-			}
+		for (LocalIndexInfo li : mapsList) {
+			runLiveUpdate(getActivity(), li.getFileName(), false, listener);
 		}
 	}
 
@@ -128,5 +131,4 @@ public class LiveUpdatesUpdateAllBottomSheet extends MenuBottomSheetDialogFragme
 	protected DialogButtonType getRightBottomButtonType() {
 		return DialogButtonType.PRIMARY;
 	}
-
 }

@@ -399,7 +399,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 							public void onClick(View v) {
 								if (!listAdapter.isShowOsmLivePurchaseBanner()) {
 									showUpdateDialog(getActivity(), getFragmentManager(),
-											listAdapter.mapsList, listAdapter.countEnabled, null);
+											settings, listAdapter.mapsList, null);
 								}
 							}
 						});

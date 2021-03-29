@@ -25,6 +25,7 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -48,7 +49,7 @@ public class PerformLiveUpdateAsyncTask
 	private final boolean userRequested;
 	private final LiveUpdateListener listener;
 
-	public interface LiveUpdateListener {
+	public interface LiveUpdateListener extends Serializable {
 		void processFinish();
 	}
 
