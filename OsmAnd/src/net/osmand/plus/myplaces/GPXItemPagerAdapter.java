@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.viewpager.widget.PagerAdapter;
 
@@ -89,50 +90,19 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	private boolean chartClicked;
 	private boolean nightMode;
 	private boolean onlyGraphs;
-	private boolean recordingTrack = false;
 	private int chartHMargin = 0;
 
 	public void setChartHMargin(int chartHMargin) {
 		this.chartHMargin = chartHMargin;
 	}
 
-	private SelectedGpxFile getCurrentTrack() {
-		return app.getSavingTrackHelper().getCurrentTrack();
-	}
-
-	private GPXFile getGpxFile() {
-		return recordingTrack ? getCurrentTrack().getGpxFile() : displayHelper.getGpx();
+	private boolean isShowCurrentTrack() {
+		return displayHelper.getGpx() != null && displayHelper.getGpx().showCurrentTrack;
 	}
 
 	public GPXItemPagerAdapter(@NonNull OsmandApplication app,
-							   boolean nightMode,
-							   @NonNull SegmentActionsListener actionsListener,
-							   boolean onlyGraphs,
-							   boolean recordingTrack) {
-		super();
-		this.app = app;
-		this.nightMode = nightMode;
-		this.actionsListener = actionsListener;
-		this.onlyGraphs = onlyGraphs;
-		this.recordingTrack = recordingTrack;
-		iconsCache = app.getUIUtilities();
-
-		displayHelper = new TrackDisplayHelper(app);
-		GPXFile gpxFile = getGpxFile();
-		if (!getCurrentTrack().isShowCurrentTrack()) {
-			File file = new File(gpxFile.path);
-			displayHelper.setFile(file);
-			displayHelper.setGpxDataItem(app.getGpxDbHelper().getItem(file));
-		}
-		displayHelper.setGpx(gpxFile);
-
-		updateAnalysis();
-		fetchTabTypes();
-	}
-
-	public GPXItemPagerAdapter(@NonNull OsmandApplication app,
-							   @NonNull GpxDisplayItem gpxItem,
-							   @NonNull TrackDisplayHelper displayHelper,
+							   @Nullable GpxDisplayItem gpxItem,
+							   @Nullable TrackDisplayHelper displayHelper,
 							   boolean nightMode,
 							   @NonNull SegmentActionsListener actionsListener,
 							   boolean onlyGraphs) {
@@ -140,22 +110,36 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		this.app = app;
 		this.gpxItem = gpxItem;
 		this.nightMode = nightMode;
-		this.displayHelper = displayHelper;
 		this.actionsListener = actionsListener;
 		this.onlyGraphs = onlyGraphs;
 		iconsCache = app.getUIUtilities();
+
+		if (displayHelper == null) {
+			this.displayHelper = new TrackDisplayHelper(app);
+			SelectedGpxFile currentTrack = app.getSavingTrackHelper().getCurrentTrack();
+			GPXFile gpxFile = currentTrack.getGpxFile();
+			if (currentTrack.isShowCurrentTrack()) {
+				File file = new File(gpxFile.path);
+				this.displayHelper.setFile(file);
+				this.displayHelper.setGpxDataItem(app.getGpxDbHelper().getItem(file));
+			}
+			this.displayHelper.setGpx(gpxFile);
+		} else {
+			this.displayHelper = displayHelper;
+		}
+
 		updateAnalysis();
 		fetchTabTypes();
 	}
 
 	private void updateAnalysis() {
 		analysis = null;
-		if (recordingTrack) {
-			GPXFile currentGpx = getCurrentTrack().getGpxFile();
-			if (!currentGpx.isEmpty()) {
-				analysis = currentGpx.getAnalysis(0);
+		if (isShowCurrentTrack()) {
+			GPXFile gpxFile = displayHelper.getGpx();
+			if (gpxFile != null && !gpxFile.isEmpty()) {
+				analysis = gpxFile.getAnalysis(0);
+				gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpxFile);
 			}
-			gpxItem = GpxUiHelper.makeGpxDisplayItem(app, currentGpx);
 		} else {
 			if (gpxItem != null) {
 				analysis = gpxItem.analysis;
@@ -165,7 +149,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 
 	private void fetchTabTypes() {
 		List<GPXTabItemType> tabTypeList = new ArrayList<>();
-		if (recordingTrack) {
+		if (isShowCurrentTrack()) {
 			if (analysis != null && (analysis.hasElevationData || analysis.hasSpeedData)) {
 				tabTypeList.add(GPXTabItemType.GPX_TAB_ITEM_GENERAL);
 			}
@@ -187,17 +171,17 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 										   LineGraphType firstType, LineGraphType secondType) {
 		List<ILineDataSet> dataSets = dataSetsMap.get(tabType);
 		boolean withoutGaps = true;
-		if (recordingTrack) {
-			GPXFile currentGpx = getGpxFile();
-			withoutGaps = !getCurrentTrack().isJoinSegments()
-					&& (Algorithms.isEmpty(currentGpx.tracks) || currentGpx.tracks.get(0).generalTrack);
+		if (isShowCurrentTrack()) {
+			GPXFile gpxFile = displayHelper.getGpx();
+			withoutGaps = !app.getSavingTrackHelper().getCurrentTrack().isJoinSegments() && gpxFile != null
+					&& (Algorithms.isEmpty(gpxFile.tracks) || gpxFile.tracks.get(0).generalTrack);
 		} else if (gpxItem != null) {
 			GpxDataItem gpxDataItem = displayHelper.getGpxDataItem();
 			withoutGaps = gpxItem.isGeneralTrack() && gpxDataItem != null && !gpxDataItem.isJoinSegments();
 		}
 		if (chart != null && analysis != null) {
 			dataSets = GpxUiHelper.getDataSets(chart, app, analysis, firstType, secondType, withoutGaps);
-			if (dataSets != null) {
+			if (!Algorithms.isEmpty(dataSets)) {
 				dataSetsMap.remove(tabType);
 			}
 			dataSetsMap.put(tabType, dataSets);
@@ -212,7 +196,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 			if (ds != null && ds.size() > 0) {
 				for (GPXUtilities.Track t : gpxItem.group.getGpx().tracks) {
 					for (TrkSegment s : t.segments) {
-						if (s.points.size() > 0 && s.points.get(0).equals(gpxItem.analysis.locationStart)) {
+						if (s.points.size() > 0 && s.points.get(0).equals(analysis.locationStart)) {
 							segment = s;
 							break;
 						}
@@ -236,7 +220,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 			if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME) {
 				float time = pos * 1000;
 				for (WptPt p : segment.points) {
-					if (p.time - gpxItem.analysis.startTime >= time) {
+					if (p.time - analysis.startTime >= time) {
 						wpt = p;
 						break;
 					}
@@ -739,20 +723,21 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	void updateJoinGapsInfo(View view, int position) {
 		if (view != null) {
 			GPXTabItemType tabType = tabTypes[position];
-			boolean visible = gpxItem.isGeneralTrack() && analysis != null && tabType.equals(GPXTabItemType.GPX_TAB_ITEM_GENERAL);
-			AndroidUiHelper.updateVisibility(view.findViewById(R.id.gpx_join_gaps_container), visible);
+			boolean generalTrack = gpxItem.isGeneralTrack();
 			boolean joinSegments = displayHelper.isJoinSegments();
+			boolean visible = generalTrack && analysis != null && tabType.equals(GPXTabItemType.GPX_TAB_ITEM_GENERAL);
+			AndroidUiHelper.updateVisibility(view.findViewById(R.id.gpx_join_gaps_container), visible);
 			((SwitchCompat) view.findViewById(R.id.gpx_join_gaps_switch)).setChecked(joinSegments);
 			if (analysis != null) {
 				if (tabType.equals(GPXTabItemType.GPX_TAB_ITEM_GENERAL)) {
-					float totalDistance = !joinSegments && gpxItem.isGeneralTrack() ? analysis.totalDistanceWithoutGaps : analysis.totalDistance;
-					float timeSpan = !joinSegments && gpxItem.isGeneralTrack() ? analysis.timeSpanWithoutGaps : analysis.timeSpan;
+					float totalDistance = !joinSegments && generalTrack ? analysis.totalDistanceWithoutGaps : analysis.totalDistance;
+					float timeSpan = !joinSegments && generalTrack ? analysis.timeSpanWithoutGaps : analysis.timeSpan;
 
 					((TextView) view.findViewById(R.id.distance_text)).setText(OsmAndFormatter.getFormattedDistance(totalDistance, app));
 					((TextView) view.findViewById(R.id.duration_text)).setText(Algorithms.formatDuration((int) (timeSpan / 1000), app.accessibilityEnabled()));
 				} else if (tabType.equals(GPX_TAB_ITEM_SPEED)) {
-					long timeMoving = !joinSegments && gpxItem.isGeneralTrack() ? analysis.timeMovingWithoutGaps : analysis.timeMoving;
-					float totalDistanceMoving = !joinSegments && gpxItem.isGeneralTrack() ? analysis.totalDistanceMovingWithoutGaps : analysis.totalDistanceMoving;
+					long timeMoving = !joinSegments && generalTrack ? analysis.timeMovingWithoutGaps : analysis.timeMoving;
+					float totalDistanceMoving = !joinSegments && generalTrack ? analysis.totalDistanceMovingWithoutGaps : analysis.totalDistanceMoving;
 
 					((TextView) view.findViewById(R.id.time_moving_text)).setText(Algorithms.formatDuration((int) (timeMoving / 1000), app.accessibilityEnabled()));
 					((TextView) view.findViewById(R.id.distance_text)).setText(OsmAndFormatter.getFormattedDistance(totalDistanceMoving, app));
@@ -777,10 +762,11 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	}
 
 	public boolean isTabsVisible() {
-		if (getCount() > 0 && views.size() > 0) {
+		GPXFile gpxFile = displayHelper.getGpx();
+		if (gpxFile != null && getCount() > 0 && views.size() > 0) {
 			for (int i = 0; i < getCount(); i++) {
 				LineChart lc = getViewAtPosition(i).findViewById(R.id.chart);
-				if (!lc.isEmpty() && !getGpxFile().isEmpty()) {
+				if (!lc.isEmpty() && !gpxFile.isEmpty()) {
 					return true;
 				}
 			}

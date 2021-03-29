@@ -329,7 +329,7 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 			}
 		});
 
-		graphsAdapter = new GPXItemPagerAdapter(app, nightMode, this, true, true);
+		graphsAdapter = new GPXItemPagerAdapter(app, null, null, nightMode, this, true);
 		graphsAdapter.setChartHMargin(getResources().getDimensionPixelSize(R.dimen.content_padding));
 
 		pager.setAdapter(graphsAdapter);
@@ -607,23 +607,11 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 		}
 	}
 
-	private TrackDisplayHelper getDisplayHelper() {
-		TrackDisplayHelper displayHelper = new TrackDisplayHelper(app);
-		GPXFile gpxFile = getGPXFile();
-		if (!selectedGpxFile.isShowCurrentTrack()) {
-			File file = new File(gpxFile.path);
-			displayHelper.setFile(file);
-			displayHelper.setGpxDataItem(app.getGpxDbHelper().getItem(file));
-		}
-		displayHelper.setGpx(gpxFile);
-		return displayHelper;
-	}
-
 	@Override
 	public void onPointSelected(TrkSegment segment, double lat, double lon) {
 		if (trackChartPoints == null) {
 			trackChartPoints = new TrackChartPoints();
-			trackChartPoints.setGpx(getDisplayHelper().getGpx());
+			trackChartPoints.setGpx(getGPXFile());
 		}
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {

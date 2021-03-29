@@ -112,10 +112,15 @@ public class TripRecordingClearDataBottomSheet extends MenuBottomSheetDialogFrag
 	@Override
 	public void dismissTarget() {
 		Fragment target = getTargetFragment();
-		Bundle args = new Bundle();
-		args.putBoolean(ACTION_CLEAR_DATA, true);
-		target.setArguments(args);
 		if (target instanceof TripRecordingOptionsBottomSheet) {
+			Bundle args = target.getArguments();
+			if (args != null) {
+				args.putBoolean(ACTION_CLEAR_DATA, true);
+			} else {
+				args = new Bundle();
+				args.putBoolean(ACTION_CLEAR_DATA, true);
+				target.setArguments(args);
+			}
 			((TripRecordingOptionsBottomSheet) target).dismiss();
 		}
 	}

@@ -68,10 +68,15 @@ public class TripRecordingDiscardBottomSheet extends MenuBottomSheetDialogFragme
 						dismiss();
 
 						Fragment target = getTargetFragment();
-						if (target != null) {
-							Bundle args = new Bundle();
-							args.putBoolean(ACTION_STOP_AND_DISMISS, true);
-							target.setArguments(args);
+						if (target instanceof TripRecordingOptionsBottomSheet) {
+							Bundle args = target.getArguments();
+							if (args != null) {
+								args.putBoolean(ACTION_STOP_AND_DISMISS, true);
+							} else {
+								args = new Bundle();
+								args.putBoolean(ACTION_STOP_AND_DISMISS, true);
+								target.setArguments(args);
+							}
 						}
 						dismissTarget();
 					}

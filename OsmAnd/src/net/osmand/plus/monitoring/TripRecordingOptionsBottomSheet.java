@@ -259,9 +259,14 @@ public class TripRecordingOptionsBottomSheet extends MenuBottomSheetDialogFragme
 				if (mapActivity != null && plugin != null) {
 					stopUpdatingTimeTrackSaved();
 					plugin.saveCurrentTrack(null, mapActivity, false, true);
-					Bundle args = new Bundle();
-					args.putBoolean(ACTION_STOP_AND_DISMISS, true);
-					setArguments(args);
+					Bundle args = getArguments();
+					if (args != null) {
+						args.putBoolean(ACTION_STOP_AND_DISMISS, true);
+					} else {
+						args = new Bundle();
+						args.putBoolean(ACTION_STOP_AND_DISMISS, true);
+						setArguments(args);
+					}
 					dismiss();
 					dismissTarget();
 				}
