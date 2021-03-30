@@ -4065,4 +4065,22 @@
 \n • החלונית „הקלטת מסלול” עודכנה
 \n
 \n</string>
+    <string name="osmand_live">OsmAnd חי</string>
+    <string name="osmand_live_cancelled">בוטל</string>
+    <string name="renew_subscription">חידוש מינוי</string>
+    <string name="in_grace_period">בתקופת חסד</string>
+    <string name="on_hold">מוקפא</string>
+    <string name="expired">פג</string>
+    <string name="annual_subscription">מינוי שנתי</string>
+    <string name="monthly_subscription">מינוי חודשי</string>
+    <string name="three_months_subscription">מינוי לשלושה חודשים</string>
+    <string name="next_billing_date">מועד החיוב הבא: %1$s</string>
+    <string name="new_device_account">מכשיר חדש / חשבון חדש</string>
+    <string name="contact_support_description">אם יש לך שאלות, נא ליצור אתנו קשר דרך %1$s.</string>
+    <string name="empty_purchases_description">אם הרכישות לא מופיעות כאן, יש לגעת ב־„%1$s” או ליצור קשר עם צוות התמיכה שלנו.</string>
+    <string name="contact_support">יצירת קשר עם התמיכה</string>
+    <string name="troubleshooting">פתרון בעיות</string>
+    <string name="troubleshooting_description">נא לעקוב אחר הקישור אם נתקלת בבעיות ברכישות.</string>
+    <string name="no_purchases">אין לך רכישות</string>
+    <string name="update_all_maps_added">לעדכן את כל המפות שנוספו אל %1$s\?</string>
 </resources>
