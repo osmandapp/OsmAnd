@@ -4352,5 +4352,31 @@
 	<string name="poi_hoops">Hoops</string>
 	<string name="poi_karate">Karate</string>
 	<string name="poi_jiu_jitsu">Jiu-jitsu</string>
+	<string name="poi_pilates">Pilates</string>
+	<string name="poi_shot_put">Shot put</string>
+	<string name="poi_snooker">Snooker</string>
+	<string name="poi_speedway">Speedway</string>
+	<string name="poi_sumo">Sumo</string>
+	<string name="poi_table_soccer">Table soccer</string>
+	<string name="poi_taekwondo">Taekwondo</string>
+	<string name="poi_ultimate">Ultimate</string>
+	<string name="poi_wakeboarding">Wakeboarding</string>
+	<string name="poi_weightlifting">Weightlifting</string>
+	<string name="poi_wrestling">Wrestling</string>
+	<string name="poi_zurkhaneh_sport">Zurkhaneh sport</string>
+	<string name="poi_water_polo">Water polo</string>
+	<string name="poi_water_ski">Water ski</string>
+	<string name="poi_aikido">Aikido</string>
+	<string name="poi_biathlon">Biathlon</string>
+	<string name="poi_bobsleigh">Bobsleigh</string>
+	<string name="poi_bullfighting">Bullfighting</string>
+	<string name="poi_cliff_diving">Cliff diving</string>
+	<string name="poi_cockfighting">Cockfighting</string>
+	<string name="poi_crossfit">Crossfit</string>
+	<string name="poi_curling">Curling</string>
+	<string name="poi_cycle_polo">Cycle polo</string>
+	<string name="poi_fencing">Fencing</string>
+	<string name="poi_horseshoes">Horseshoes</string>
+	<string name="poi_kickboxing">Kickboxing</string>
 
 </resources>
