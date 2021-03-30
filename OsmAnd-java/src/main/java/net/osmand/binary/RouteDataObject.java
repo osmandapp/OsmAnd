@@ -38,7 +38,7 @@ public class RouteDataObject {
 	public int[] nameIds;
 	// mixed array [0, height, cumulative_distance height, cumulative_distance, height, ...] - length is length(points)*2
 	public float[] heightDistanceArray = null;
-	public float heightByCurrentLocation;
+	public float heightByCurrentLocation = Float.NaN;
 	private static final Log LOG = PlatformUtil.getLog(RouteDataObject.class);
 
 	public RouteDataObject(RouteRegion region) {
@@ -185,7 +185,8 @@ public class RouteDataObject {
 		heightDistanceArray = new float[2 * getPointsLength()];
 		double plon = 0;
 		double plat = 0;
-		float prevHeight = heightByCurrentLocation = startHeight;
+		float prevHeight = startHeight;
+		heightByCurrentLocation = Float.NaN;
 		double prevDistance = 0;
 		for (int k = 0; k < getPointsLength(); k++) {
 			double lon = MapUtils.get31LongitudeX(getPoint31XTile(k));

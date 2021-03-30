@@ -1036,7 +1036,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 						title = "";
 					}
 					String originObjectName = "";
-					double altitude = 0;
+					double altitude = Double.NaN;
 					long timestamp = System.currentTimeMillis();
 					Object object = getObject();
 					if (object != null) {
