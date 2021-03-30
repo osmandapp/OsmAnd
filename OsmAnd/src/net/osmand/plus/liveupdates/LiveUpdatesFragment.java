@@ -415,7 +415,11 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 				public int compare(LocalIndexInfo o1, LocalIndexInfo o2) {
 					CommonPreference<Boolean> preference1 = preferenceForLocalIndex(o1.getFileName(), getSettings());
 					CommonPreference<Boolean> preference2 = preferenceForLocalIndex(o2.getFileName(), getSettings());
-					return preference2.get().compareTo(preference1.get());
+					int prefSort = preference2.get().compareTo(preference1.get());
+					if (prefSort != 0) {
+						return prefSort;
+					}
+					return o1.compareTo(o2);
 				}
 			});
 			notifyDataSetInvalidated();
