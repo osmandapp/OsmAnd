@@ -856,7 +856,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			if (rememberPreviousTitle) {
 				previousToolBarTitle = toolBarController.getTitle();
 			}
-			toolBarController.setTitle(getString(R.string.route_between_points));
+			String fileNameNoExt = Algorithms.getFileNameWithoutExtension(fileName);
+			toolBarController.setTitle(fileNameNoExt);
 			mapActivity.refreshMap();
 
 			if (editingCtx.isApproximationNeeded()) {
