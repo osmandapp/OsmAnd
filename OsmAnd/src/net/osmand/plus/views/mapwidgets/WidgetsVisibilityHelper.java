@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MapContextMenuFragment;
@@ -23,11 +24,13 @@ public class WidgetsVisibilityHelper {
 	private MapActivity mapActivity;
 	private OsmandSettings settings;
 	private RoutingHelper routingHelper;
+	private MapActivityLayers mapLayers;
 
 	public WidgetsVisibilityHelper(@NonNull MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
 		this.settings = mapActivity.getMyApplication().getSettings();
 		this.routingHelper = mapActivity.getRoutingHelper();
+		this.mapLayers = mapActivity.getMapLayers();
 	}
 
 	public boolean shouldShowQuickActionButton() {
@@ -136,7 +139,7 @@ public class WidgetsVisibilityHelper {
 	}
 
 	private boolean isQuickActionLayerOn() {
-		return mapActivity.getMapLayers().getMapQuickActionLayer().isLayerOn();
+		return mapLayers.getMapQuickActionLayer().isLayerOn();
 	}
 
 	private boolean isMapRouteInfoMenuVisible() {
@@ -144,37 +147,37 @@ public class WidgetsVisibilityHelper {
 	}
 
 	private boolean isInMovingMarkerMode() {
-		MapQuickActionLayer quickActionLayer = mapActivity.getMapLayers().getMapQuickActionLayer();
+		MapQuickActionLayer quickActionLayer = mapLayers.getMapQuickActionLayer();
 		boolean isInMovingMarkerMode = quickActionLayer != null && quickActionLayer.isInMovingMarkerMode();
 		return isInMovingMarkerMode || isInChangeMarkerPositionMode() || isInAddGpxPointMode();
 	}
 
 	private boolean isInGpxDetailsMode() {
-		return mapActivity.getMapLayers().getContextMenuLayer().isInGpxDetailsMode();
+		return mapLayers.getContextMenuLayer().isInGpxDetailsMode();
 	}
 
 	private boolean isInAddGpxPointMode() {
-		return mapActivity.getMapLayers().getContextMenuLayer().isInAddGpxPointMode();
+		return mapLayers.getContextMenuLayer().isInAddGpxPointMode();
 	}
 
 	private boolean isInChangeMarkerPositionMode() {
-		return mapActivity.getMapLayers().getContextMenuLayer().isInChangeMarkerPositionMode();
+		return mapLayers.getContextMenuLayer().isInChangeMarkerPositionMode();
 	}
 
 	private boolean isInMeasurementToolMode() {
-		return mapActivity.getMapLayers().getMeasurementToolLayer().isInMeasurementMode();
+		return mapLayers.getMeasurementToolLayer().isInMeasurementMode();
 	}
 
 	private boolean isInPlanRouteMode() {
-		return mapActivity.getMapLayers().getMapMarkersLayer().isInPlanRouteMode();
+		return mapLayers.getMapMarkersLayer().isInPlanRouteMode();
 	}
 
 	private boolean isInTrackAppearanceMode() {
-		return mapActivity.getMapLayers().getGpxLayer().isInTrackAppearanceMode();
+		return mapLayers.getGpxLayer().isInTrackAppearanceMode();
 	}
 
 	private boolean isInGpxApproximationMode() {
-		return mapActivity.getMapLayers().getMeasurementToolLayer().isTapsDisabled();
+		return mapLayers.getMeasurementToolLayer().isTapsDisabled();
 	}
 
 	public boolean isInTrackMenuMode() {
@@ -190,7 +193,7 @@ public class WidgetsVisibilityHelper {
 	}
 
 	private boolean isInRouteLineAppearanceMode() {
-		return mapActivity.getMapLayers().getRouteLayer().isInRouteLineAppearanceMode();
+		return mapLayers.getRouteLayer().isInRouteLineAppearanceMode();
 	}
 
 	private boolean isInFollowTrackMode() {
