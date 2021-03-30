@@ -308,7 +308,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 				((ImageView) view.findViewById(R.id.max_icon))
 						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_max_speed));
 				((ImageView) view.findViewById(R.id.time_moving_icon))
-						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_time_span));
+						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_time_moving_16));
 				((ImageView) view.findViewById(R.id.distance_icon))
 						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_polygom_dark));
 
