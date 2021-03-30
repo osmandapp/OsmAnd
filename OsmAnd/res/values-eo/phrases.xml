@@ -3894,4 +3894,5 @@
     <string name="poi_local_ref">Loka referenco</string>
     <string name="poi_geodesist">Oficejo de geodeziisto</string>
     <string name="poi_conference_centre">Konferenca centro</string>
+    <string name="poi_camp_pitch">Loko por kampadveturilo/tendo</string>
 </resources>

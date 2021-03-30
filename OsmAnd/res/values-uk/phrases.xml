@@ -3894,4 +3894,5 @@
     <string name="poi_local_ref">Локальне посилання</string>
     <string name="poi_geodesist">Геодезист</string>
     <string name="poi_conference_centre">Конференц-центр</string>
+    <string name="poi_camp_pitch">Місце для табору</string>
 </resources>
