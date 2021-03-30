@@ -64,7 +64,9 @@
 					android:textColor="?android:textColorPrimary"
 					android:textSize="@dimen/default_list_text_size"
 					app:typeface="@string/font_roboto_regular"
-					tools:text="@string/plugin_disabled_descr" />
+					tools:text="@string/plugin_disabled_descr"
+					android:paddingStart="@dimen/content_padding"
+					android:paddingEnd="@dimen/content_padding" />
 
 				<include layout="@layout/card_bottom_divider" />
 

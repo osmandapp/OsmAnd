@@ -3894,4 +3894,5 @@
     <string name="poi_local_ref">Referencia local</string>
     <string name="poi_geodesist">Geodésico</string>
     <string name="poi_conference_centre">Centro de conferencias</string>
+    <string name="poi_camp_pitch">Parcela de campamento</string>
 </resources>

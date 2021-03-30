@@ -8,9 +8,6 @@ import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.AndroidNetworkUtils.OnRequestResultListener;
 import net.osmand.AndroidNetworkUtils.OnRequestsResultListener;
@@ -42,6 +39,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public abstract class InAppPurchaseHelper {
 	// Debug tag, for logging
@@ -196,6 +196,18 @@ public abstract class InAppPurchaseHelper {
 	public InAppPurchaseHelper(OsmandApplication ctx) {
 		this.ctx = ctx;
 		isDeveloperVersion = Version.isDeveloperVersion(ctx);
+	}
+
+	@NonNull
+	public List<InAppSubscription> getEverMadeSubscriptions() {
+		List<InAppSubscription> subscriptions = new ArrayList<>();
+		for (InAppSubscription subscription : getLiveUpdates().getVisibleSubscriptions()) {
+			SubscriptionState state = subscription.getState();
+			if (state != SubscriptionState.UNDEFINED) {
+				subscriptions.add(subscription);
+			}
+		}
+		return subscriptions;
 	}
 
 	public abstract void isInAppPurchaseSupported(@NonNull final Activity activity, @Nullable final InAppPurchaseInitCallback callback);

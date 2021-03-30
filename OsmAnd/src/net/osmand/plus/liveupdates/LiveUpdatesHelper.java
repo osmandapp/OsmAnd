@@ -9,9 +9,10 @@ import android.text.format.DateUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.liveupdates.PerformLiveUpdateAsyncTask.LiveUpdateListener;
+import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
@@ -20,6 +21,7 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.Calendar;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class LiveUpdatesHelper {
@@ -254,8 +256,27 @@ public class LiveUpdatesHelper {
 		}
 	}
 
-	public static void runLiveUpdate(Context context, final String fileName, boolean userRequested, @Nullable final LiveUpdateListener listener) {
+	public static void runLiveUpdate(Context context, final String fileName, boolean userRequested, @Nullable final Runnable runOnSuccess) {
 		final String fnExt = Algorithms.getFileNameWithoutExtension(new File(fileName));
-		new PerformLiveUpdateAsyncTask(context, fileName, userRequested, listener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, fnExt);
+		PerformLiveUpdateAsyncTask task = new PerformLiveUpdateAsyncTask(context, fileName, userRequested);
+		task.setRunOnSuccess(runOnSuccess);
+		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, fnExt);
+	}
+
+	public static void runLiveUpdate(Context context, boolean userRequested, final LiveUpdateListener listener) {
+		for (LocalIndexInfo mapToUpdate : listener.getMapsToUpdate()) {
+			runLiveUpdate(context, mapToUpdate.getFileName(), userRequested, new Runnable() {
+				@Override
+				public void run() {
+					listener.processFinish();
+				}
+			});
+		}
+	}
+
+	public interface LiveUpdateListener {
+		void processFinish();
+
+		List<LocalIndexInfo> getMapsToUpdate();
 	}
 }

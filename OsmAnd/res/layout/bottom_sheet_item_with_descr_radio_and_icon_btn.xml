@@ -90,7 +90,9 @@
             android:paddingLeft="@dimen/content_padding"
             android:paddingRight="@dimen/content_padding"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+			android:paddingEnd="@dimen/content_padding"
+			android:paddingStart="@dimen/content_padding">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/end_button_icon"

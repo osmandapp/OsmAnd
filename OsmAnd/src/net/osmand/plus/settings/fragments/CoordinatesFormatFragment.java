@@ -146,7 +146,7 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 
 			return spannableBuilder;
 		}
-		return getString(R.string.ltr_or_rtl_combine_via_colon, getString(R.string.shared_string_example), formattedCoordinates);
+		return  formattedCoordinates;
 	}
 
 	@Override

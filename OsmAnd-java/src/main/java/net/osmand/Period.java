@@ -1,25 +1,32 @@
 package net.osmand;
 
 import java.text.ParseException;
+import java.util.Calendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Period {
 
 	public enum PeriodUnit {
-		YEAR("Y"),
-		MONTH("M"),
-		WEEK("W"),
-		DAY("D");
+		YEAR("Y", Calendar.YEAR),
+		MONTH("M", Calendar.MONTH),
+		WEEK("W", Calendar.WEEK_OF_YEAR),
+		DAY("D", Calendar.DATE);
 
 		private String unitStr;
+		private int calendarIdx;
 
-		PeriodUnit(String unitStr) {
+		PeriodUnit(String unitStr, int calendarIdx) {
+			this.calendarIdx = calendarIdx;
 			this.unitStr = unitStr;
 		}
 
 		public String getUnitStr() {
 			return unitStr;
+		}
+
+		public int getCalendarIdx() {
+			return calendarIdx;
 		}
 
 		public double getMonthsValue() {

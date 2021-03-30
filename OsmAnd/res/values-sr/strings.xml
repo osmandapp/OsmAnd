@@ -1604,7 +1604,7 @@
     <string name="average">Просек</string>
     <string name="of">%1$d од %2$d</string>
     <string name="ascent_descent">Успон/Спуст</string>
-    <string name="moving_time">Време кретања</string>
+    <string name="moving_time">Време у покрету</string>
     <string name="max_min">Макс/Мин</string>
     <string name="min_max">Мин/Макс</string>
     <string name="index_tours">Туре</string>
@@ -3861,7 +3861,7 @@
     <string name="icon_group_sport">Спорт</string>
     <string name="icon_group_emergency">Хитна помоћ</string>
     <string name="icon_group_travel">Путовање</string>
-    <string name="message_you_need_add_two_points_to_show_graphs">Треба да додате најмање две тачке</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">Додајте најмање две тачке</string>
     <string name="login_open_street_map">Пријавите се на OpenStreetMap.org</string>
     <string name="login_open_street_map_org">Пријавите се на OpenStreetMap.org</string>
     <string name="sign_in_with_open_street_map">Пријавите се помоћу ОпенСтритМап</string>
@@ -3979,4 +3979,13 @@
     <string name="segments_count">Сегмент %1$d</string>
     <string name="uploaded_count">Отпремљено %1$d од %2$d</string>
     <string name="toast_select_edits_for_upload">Одаберите измене за отпремање</string>
+    <string name="shared_string_subtype">Подврста</string>
+    <string name="shared_string_vehicle">Возило</string>
+    <string name="routing_engine_vehicle_type_bike">Бицикл</string>
+    <string name="routing_engine_vehicle_type_car">Аутомобил</string>
+    <string name="shared_string_empty">Празно</string>
+    <string name="edit_track">Уреди путању</string>
+    <string name="rename_track">Преименуј путању</string>
+    <string name="trip_recording_save_and_continue">Сачувај и настави</string>
+    <string name="lost_data_warning">Сви несачувани подаци ће бити изгубљени.</string>
 </resources>

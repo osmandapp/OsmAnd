@@ -177,7 +177,7 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 					CountrySelectionFragment countryCountrySelectionFragment =
 							countrySelectionFragment;
 					countryCountrySelectionFragment
-							.show(getChildFragmentManager(), "CountriesSearchSelectionFragment");
+							.show(getChildFragmentManager(), CountrySelectionFragment.TAG);
 				}
 				return false;
 			}
@@ -228,12 +228,6 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 												}
 												String preferredCountry = obj.getString("preferredCountry");
 												app.getSettings().BILLING_USER_COUNTRY_DOWNLOAD_NAME.set(preferredCountry);
-
-												Fragment parent = getParentFragment();
-												if (parent instanceof LiveUpdatesFragment) {
-													((LiveUpdatesFragment) parent).updateSubscriptionHeader();
-												}
-
 												dismiss();
 											} else {
 												app.showToastMessage("Error: " + obj.getString("error"));

@@ -17,6 +17,7 @@ package com.jwetherell.openmap.common;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 public class MGRSPoint extends ZonedUTMPoint {
 
@@ -697,10 +698,9 @@ public class MGRSPoint extends ZonedUTMPoint {
                         all.set(1, shiftChar(all.get(1), eastShift, northShift));
                         String zero = "";
                     }
-
-
-                    all.add(String.format("%0" + accuracy + "d", roundedEasting));
-                    all.add(String.format("%0" + accuracy + "d", roundedNorthing));
+                    
+                    all.add(String.format(Locale.US,"%0" + accuracy + "d", roundedEasting));
+                    all.add(String.format(Locale.US,"%0" + accuracy + "d", roundedNorthing));
                     break;
                 }
             }

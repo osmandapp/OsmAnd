@@ -23,7 +23,9 @@
             android:layout_marginLeft="@dimen/dashCardMargin"
             android:layout_marginRight="@dimen/dashCardMargin"
             android:layout_gravity="center"
-            android:padding="@dimen/content_padding_small">
+            android:padding="@dimen/content_padding_small"
+			android:layout_marginEnd="@dimen/dashCardMargin"
+			android:layout_marginStart="@dimen/dashCardMargin">
 
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/action_icon"
@@ -115,7 +117,9 @@
                     android:layout_marginLeft="@dimen/dashCardMargin"
                     android:layout_marginRight="@dimen/dashCardMargin"
                     android:layout_gravity="center"
-                    android:padding="@dimen/content_padding_small">
+                    android:padding="@dimen/content_padding_small"
+					android:layout_marginEnd="@dimen/dashCardMargin"
+					android:layout_marginStart="@dimen/dashCardMargin">
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/move_icon"

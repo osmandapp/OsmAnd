@@ -1290,13 +1290,14 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				// local_indexes_cat_gpx now obsolete in new UI screen which shows only GPX data
 				// if (Algorithms.objectEquals(getActivity().getString(R.string.local_indexes_cat_gpx) + " " +
 				// g.subfolder, cat)) {
-				if (objectEquals("" + g.subfolder, cat)) {
+				if (objectEquals(g.subfolder, cat)) {
 					found = i;
 					break;
 				}
 			}
 			if (found != -1) {
 				data.get(category.get(found)).remove(g);
+				selected.remove(g);
 			}
 		}
 	}
@@ -1507,17 +1508,15 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			int total = 0;
 			for (GpxInfo info : params) {
 				if (!isCancelled() && (info.gpx == null || !info.gpx.showCurrentTrack)) {
-					boolean successfull;
-					successfull = removeAllFiles(info.file);
-					app.getGpxDbHelper().remove(info.file);
+					boolean successful = FileUtils.removeGpxFile(app, info.file);
 					total++;
-					if (successfull) {
+					if (successful) {
 						count++;
 						publishProgress(info);
 					}
 				}
 			}
-			return app.getString(R.string.local_index_items_deleted, count, total);
+			return getString(R.string.local_index_items_deleted, count, total);
 		}
 
 		@Override

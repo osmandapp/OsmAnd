@@ -176,7 +176,9 @@
 								android:textSize="@dimen/default_desc_text_size"
 								osmand:typeface="@string/font_roboto_medium"
 								tools:drawableTint="?attr/wikivoyage_active_color"
-								tools:text="@string/mapillary_menu_title_username" />
+								tools:text="@string/mapillary_menu_title_username"
+								android:paddingStart="@dimen/content_padding_small_half"
+								android:paddingEnd="@dimen/content_padding_small_half" />
 						</LinearLayout>
 
 						<LinearLayout
@@ -214,7 +216,9 @@
 								android:textSize="@dimen/default_desc_text_size"
 								osmand:typeface="@string/font_roboto_medium"
 								tools:drawableTint="?attr/wikivoyage_active_color"
-								tools:text="@string/shared_string_profiles" />
+								tools:text="@string/shared_string_profiles"
+								android:paddingStart="@dimen/content_padding_small_half"
+								android:paddingEnd="@dimen/content_padding_small_half" />
 						</LinearLayout>
 					</LinearLayout>
 

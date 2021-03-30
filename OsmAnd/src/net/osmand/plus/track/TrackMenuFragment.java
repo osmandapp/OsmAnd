@@ -82,8 +82,8 @@ import net.osmand.plus.myplaces.TrackActivityFragmentAdapter;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
-import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
+import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.plus.track.TrackSelectSegmentBottomSheet.OnSegmentSelectedListener;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
@@ -804,7 +804,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				if (gpxFile.getNonEmptySegmentsCount() > 1) {
 					TrackSelectSegmentBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), gpxFile, this);
 				} else {
-					startNavigationForGPX(gpxFile, mapActions);
+					startNavigationForGPX(gpxFile, mapActions, mapActivity);
 					dismiss();
 				}
 			}
@@ -827,7 +827,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 						segment = segments.get(0);
 					}
 				}
-				GpxDisplayItemType[] filterTypes = new GpxDisplayItemType[] {GpxDisplayItemType.TRACK_SEGMENT};
+				GpxDisplayItemType[] filterTypes = new GpxDisplayItemType[]{GpxDisplayItemType.TRACK_SEGMENT};
 				List<GpxDisplayItem> items = TrackDisplayHelper.flatten(displayHelper.getOriginalGroups(filterTypes));
 				if (segment != null && !Algorithms.isEmpty(items)) {
 					SplitSegmentDialogFragment.showInstance(fragmentManager, displayHelper, items.get(0), segment);
@@ -866,7 +866,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 						R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
-								if (FileUtils.removeGpxFile(app, new File((gpxFile.path)))) {
+								if (FileUtils.removeGpxFile(app, new File(gpxFile.path))) {
 									dismiss();
 								}
 							}
@@ -904,14 +904,15 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		}
 	}
 
-	private void startNavigationForGPX(final GPXFile gpxFile, MapActivityActions mapActions) {
-		if (app.getRoutingHelper().isFollowingMode()) {
+	public static void startNavigationForGPX(final GPXFile gpxFile, MapActivityActions mapActions, final MapActivity mapActivity) {
+		if (mapActivity.getMyApplication().getRoutingHelper().isFollowingMode()) {
+			final WeakReference<MapActivity> activityRef = new WeakReference<>(mapActivity);
 			mapActions.stopNavigationActionConfirm(null, new Runnable() {
 				@Override
 				public void run() {
-					MapActivity mapActivity = getMapActivity();
-					if (mapActivity != null) {
-						mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(gpxFile, null,
+					MapActivity activity = activityRef.get();
+					if (activity != null) {
+						activity.getMapActions().enterRoutePlanningModeGivenGpx(gpxFile, null,
 								null, null, true, true, MenuState.HEADER_ONLY);
 					}
 				}
@@ -1130,7 +1131,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				public boolean onMenuItemClick(MenuItem item) {
 					int i = item.getItemId();
 					if (i == R.id.action_edit) {
-						editSegment(segment);
+						editSegment();
 						return true;
 					} else if (i == R.id.action_delete) {
 						FragmentActivity activity = getActivity();
@@ -1164,7 +1165,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		app.getSettings().GPX_ROUTE_SEGMENT.set(selectedSegment);
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			startNavigationForGPX(gpxFile, mapActivity.getMapActions());
+			startNavigationForGPX(gpxFile, mapActivity.getMapActions(), mapActivity);
 			GPXRouteParamsBuilder paramsBuilder = app.getRoutingHelper().getCurrentGPXRoute();
 			if (paramsBuilder != null) {
 				paramsBuilder.setSelectedSegment(selectedSegment);
@@ -1174,7 +1175,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		}
 	}
 
-	private void editSegment(TrkSegment segment) {
+	private void editSegment() {
 		GPXFile gpxFile = getGpx();
 		openPlanRoute(new GpxData(gpxFile));
 		hide();
@@ -1219,7 +1220,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			@Override
 			public void gpxSavingFinished(Exception errorMessage) {
 				if (selectedGpxFile != null) {
-					List<GpxDisplayGroup> groups = displayHelper.getDisplayGroups(new GpxDisplayItemType[] {GpxDisplayItemType.TRACK_SEGMENT});
+					List<GpxDisplayGroup> groups = displayHelper.getDisplayGroups(new GpxDisplayItemType[]{GpxDisplayItemType.TRACK_SEGMENT});
 					selectedGpxFile.setDisplayGroups(groups, app);
 					selectedGpxFile.processPoints(app);
 				}
@@ -1313,7 +1314,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	public static void showInstance(@NonNull MapActivity mapActivity,
-	                                @Nullable String path,
+									@Nullable String path,
 									boolean showCurrentTrack,
 									@Nullable final LatLon latLon,
 									@Nullable final String returnScreenName,
@@ -1332,7 +1333,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	public static boolean showInstance(@NonNull MapActivity mapActivity,
-	                                   @NonNull SelectedGpxFile selectedGpxFile,
+									   @NonNull SelectedGpxFile selectedGpxFile,
 									   @Nullable LatLon latLon,
 									   @Nullable String returnScreenName,
 									   @Nullable String callingFragmentTag) {

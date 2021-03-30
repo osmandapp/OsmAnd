@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PointF;
 import android.graphics.Shader;
 
 import net.osmand.GPXUtilities;
@@ -67,6 +68,7 @@ public class Renderable {
         protected double zoom = -1;
         protected AsynchronousResampler culler = null;                        // The currently active resampler
         protected Paint paint = null;                               // MUST be set by 'updateLocalPaint' before use
+        protected Paint borderPaint;
         protected GradientScaleType scaleType = null;
 
         protected GpxGeometryWay geometryWay;
@@ -86,6 +88,10 @@ public class Renderable {
             }
             paint.setColor(p.getColor());
             paint.setStrokeWidth(p.getStrokeWidth());
+        }
+
+        public void setBorderPaint(@NonNull Paint paint) {
+            borderPaint = paint;
         }
 
         public void setGradientScaleType(GradientScaleType type) {
@@ -177,32 +183,73 @@ public class Renderable {
 
         protected void drawGradient(List<WptPt> pts, Paint p, Canvas canvas, RotatedTileBox tileBox) {
             QuadRect tileBounds = tileBox.getLatLonBounds();
-            Path path = new Path();
+            Path currentPath = new Path();
+            Path nextPath = new Path();
             Paint paint = new Paint(this.paint);
-            WptPt prevPt = pts.get(0);
+
+            WptPt prevWpt = pts.get(0);
+            WptPt currWpt = pts.get(1);
+
+            PointF prevXY = new PointF();
+            PointF currXY = new PointF();
+            PointF nextXY = new PointF();
+
+            boolean currLineVisible = arePointsInsideTile(prevWpt, currWpt, tileBounds);
+            boolean nextLineVisible;
+
+            if (currLineVisible) {
+                pixXYFromWptPt(tileBox, prevXY, prevWpt);
+                pixXYFromWptPt(tileBox, currXY, currWpt);
+                canvas.drawPath(pathFromStartEnd(currentPath, prevXY, currXY), borderPaint);
+            }
+
             for (int i = 1; i < pts.size(); i++) {
-                WptPt currentPt = pts.get(i);
-                if (arePointsInsideTile(currentPt, prevPt, tileBounds)) {
-                    float startX = tileBox.getPixXFromLatLon(prevPt.lat, prevPt.lon);
-                    float startY = tileBox.getPixYFromLatLon(prevPt.lat, prevPt.lon);
-                    float endX = tileBox.getPixXFromLatLon(currentPt.lat, currentPt.lon);
-                    float endY = tileBox.getPixYFromLatLon(currentPt.lat, currentPt.lon);
-                    int prevColor = prevPt.getColor(scaleType.toColorizationType());
-                    int currentColor = currentPt.getColor(scaleType.toColorizationType());
-                    LinearGradient gradient = new LinearGradient(startX, startY, endX, endY, prevColor, currentColor, Shader.TileMode.CLAMP);
-                    paint.setShader(gradient);
-                    path.reset();
-                    path.moveTo(startX, startY);
-                    path.lineTo(endX, endY);
-                    canvas.drawPath(path, paint);
+                currWpt = pts.get(i);
+                WptPt nextWpt = i + 1 == pts.size() ? null : pts.get(i + 1);
+
+                nextLineVisible = arePointsInsideTile(currWpt, nextWpt, tileBounds);
+                if (nextWpt != null && nextLineVisible) {
+                    pixXYFromWptPt(tileBox, currXY, currWpt);
+                    pixXYFromWptPt(tileBox, nextXY, nextWpt);
+                    canvas.drawPath(pathFromStartEnd(nextPath, currXY, nextXY), borderPaint);
                 }
-                prevPt = currentPt;
+
+                if (currLineVisible) {
+                    int prevColor = prevWpt.getColor(scaleType.toColorizationType());
+                    int currentColor = currWpt.getColor(scaleType.toColorizationType());
+                    LinearGradient gradient = new LinearGradient(prevXY.x, prevXY.y, currXY.x, currXY.y,
+                            prevColor, currentColor, Shader.TileMode.CLAMP);
+                    paint.setShader(gradient);
+                    canvas.drawPath(currentPath, paint);
+                }
+
+                prevWpt = currWpt;
+                currentPath.set(nextPath);
+                prevXY.set(currXY);
+                currXY.set(nextXY);
+                currLineVisible = nextLineVisible;
             }
         }
 
         protected boolean arePointsInsideTile(WptPt first, WptPt second, QuadRect tileBounds) {
+            if (first == null || second == null) {
+                return false;
+            }
             return Math.min(first.lon, second.lon) < tileBounds.right && Math.max(first.lon, second.lon) > tileBounds.left
                     && Math.min(first.lat, second.lat) < tileBounds.top && Math.max(first.lat, second.lat) > tileBounds.bottom;
+        }
+
+        protected PointF pixXYFromWptPt(RotatedTileBox tileBox, PointF pointF, WptPt wptPt) {
+            pointF.x = tileBox.getPixXFromLatLon(wptPt.lat, wptPt.lon);
+            pointF.y = tileBox.getPixYFromLatLon(wptPt.lat, wptPt.lon);
+            return pointF;
+        }
+
+        protected Path pathFromStartEnd(Path path, PointF start, PointF end) {
+            path.reset();
+            path.moveTo(start.x, start.y);
+            path.lineTo(end.x, end.y);
+            return path;
         }
     }
 
