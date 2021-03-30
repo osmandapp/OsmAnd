@@ -365,7 +365,7 @@
     <string name="poi_meadow">Rét</string>
     <string name="poi_landuse_railway">Vasúti terület</string>
     <string name="poi_canal">Csatorna</string>
-    <string name="poi_surveillance">Térfigyelő kamera</string>
+    <string name="poi_surveillance">Térfigyelő berendezés</string>
     <string name="poi_observatory">Obszervatórium</string>
     <string name="poi_astronomical_observatory">Csillagvizsgáló</string>
     <string name="poi_tower">Torony</string>
@@ -1069,7 +1069,7 @@
     <string name="poi_water_characteristic_mineral">Ásványi</string>
     <string name="poi_water_characteristic_mud">Iszapos</string>
     <string name="poi_water_characteristic_sulfuric">Kénes</string>
-    <string name="poi_water_point">Vízcsatlakozás lakókocsinak</string>
+    <string name="poi_water_point">Vízcsatlakozás (pl. lakókocsinak)</string>
     <string name="poi_information_guidepost">Útirányjelző tábla</string>
     <string name="poi_information_board">Tábla</string>
     <string name="poi_information_map">Térkép</string>
@@ -1963,7 +1963,7 @@
     <string name="poi_memorial_prasat">Praszat</string>
     <string name="poi_memorial_fassade_decoration">Homlokzatdíszítés</string>
     <string name="poi_route_share_taxi_ref">Iránytaxi</string>
-    <string name="poi_surveillance_yes">Térfigyelő kamera</string>
+    <string name="poi_surveillance_yes">Térfigyelő berendezés</string>
     <string name="poi_shop_additional_yes">Üzlet van</string>
     <string name="poi_service_bicycle_retail_yes">Kereskedés</string>
     <string name="poi_service_bicycle_retail_no">Kerékpár-kereskedés nincs</string>
@@ -2904,7 +2904,7 @@
     <string name="poi_netball">Netball</string>
     <string name="poi_judo">Cselgáncs</string>
     <string name="poi_shuffleboard">Shuffleboard</string>
-    <string name="poi_dyke">Árvízvédelmi gát</string>
+    <string name="poi_dyke">Árvízvédelmi töltés</string>
     <string name="poi_medical_system_kampo_yes">Hagyományos japán (kampo)</string>
     <string name="poi_medical_system_sidda_yes">Hagyományos dél-indiai tamil (sidda)</string>
     <string name="poi_medical_system_unani_yes">Hagyományos görög-iszlám (unani)</string>
@@ -3420,7 +3420,7 @@
     <string name="poi_socket_schuko_output_low">kicsi</string>
     <string name="poi_flooring">Parkettabolt</string>
     <string name="poi_pottery">Kerámiatermék-bolt</string>
-    <string name="poi_whitewater_rapid_name">Sellő neve</string>
+    <string name="poi_whitewater_rapid_name">Zúgó (sellő) neve</string>
     <string name="poi_service_car">Autós szolgáltatás</string>
     <string name="poi_barbecue_grill">Barbecue, grill</string>
     <string name="poi_water_utility">Vízmű irodája</string>
