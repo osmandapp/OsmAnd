@@ -175,8 +175,8 @@ public class RouteLineDrawInfo {
 
 		RouteLineDrawInfo that = (RouteLineDrawInfo) o;
 
-		if (!Algorithms.objectEquals(colorDay, that.colorDay)) return false;
-		if (!Algorithms.objectEquals(colorNight, that.colorNight)) return false;
+		if (!Algorithms.objectEquals(getColor(false), that.getColor(false))) return false;
+		if (!Algorithms.objectEquals(getColor(true), that.getColor(true))) return false;
 		return Algorithms.objectEquals(width, that.width);
 	}
 
