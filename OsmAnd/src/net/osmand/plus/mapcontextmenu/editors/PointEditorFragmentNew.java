@@ -635,6 +635,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 		RecyclerView iconCategoriesRecyclerView = view.findViewById(R.id.group_name_recycler_view);
 		iconCategoriesRecyclerView.setAdapter(horizontalSelectionAdapter);
 		iconCategoriesRecyclerView.setLayoutManager(new LinearLayoutManager(app, RecyclerView.HORIZONTAL, false));
+		iconCategoriesRecyclerView.scrollToPosition(horizontalSelectionAdapter.getItemPositionByTitle(selectedIconCategory));
 	}
 
 
