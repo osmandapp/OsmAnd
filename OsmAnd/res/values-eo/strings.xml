@@ -4080,4 +4080,5 @@
     <string name="osmand_live">OsmAnd Live</string>
     <string name="annual_subscription">Jara abono</string>
     <string name="monthly_subscription">Monata abono</string>
+    <string name="update_all_maps_added">Ĉu ĝisdatigi ĉiujn mapojn aldonitajn al %1$s\?</string>
 </resources>
