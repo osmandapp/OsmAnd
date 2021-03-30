@@ -4063,4 +4063,21 @@
 \n• plibonigita ekrano “registri spuron”
 \n
 \n</string>
+    <string name="empty_purchases_description">Se viaj aĉetoj ne aperas ĉi tie, frapetu “%1$s”, aŭ kontaktu nian subtenan teamon.</string>
+    <string name="troubleshooting">Problemsolvado</string>
+    <string name="troubleshooting_description">Bonvolu sekvi ĉi tiun ligilon, se vi spertas problemojn pri aĉetoj.</string>
+    <string name="three_months_subscription">Trimonata abono</string>
+    <string name="next_billing_date">Sekva faktura dato: %1$s</string>
+    <string name="osmand_live_cancelled">Nuligita</string>
+    <string name="renew_subscription">Renovigi abonon</string>
+    <string name="in_grace_period">En prokrastoperiodo</string>
+    <string name="on_hold">En atendo</string>
+    <string name="expired">Eksvalidiĝita</string>
+    <string name="contact_support_description">Se vi havas demandojn, bonvolu kontakti nin ĉe %1$s.</string>
+    <string name="contact_support">Kontakti subtenon</string>
+    <string name="no_purchases">Vi ne havas aĉetojn</string>
+    <string name="new_device_account">Nova aparato / nova konto</string>
+    <string name="osmand_live">OsmAnd Live</string>
+    <string name="annual_subscription">Jara abono</string>
+    <string name="monthly_subscription">Monata abono</string>
 </resources>
