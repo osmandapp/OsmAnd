@@ -45,7 +45,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	private boolean visible = true;
 	private SpecialPointType specialPointType = null;
 	private BackgroundType backgroundType = null;
-	private double altitude;
+	private double altitude = Double.NaN;
 	private long timestamp;
 
 	public FavouritePoint() {
