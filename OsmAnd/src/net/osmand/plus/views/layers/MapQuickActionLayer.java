@@ -19,7 +19,6 @@ import android.widget.ImageView;
 import androidx.annotation.DimenRes;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.util.Pair;
-import androidx.fragment.app.Fragment;
 
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetView;
@@ -33,18 +32,13 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
-import net.osmand.plus.mapcontextmenu.MapContextMenuFragment;
-import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
-import net.osmand.plus.measurementtool.MeasurementToolLayer;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.quickaction.QuickActionsWidget;
-import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,12 +50,6 @@ import static net.osmand.plus.views.layers.ContextMenuLayer.VIBRATE_SHORT;
 
 public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRegistry.QuickActionUpdatesListener, QuickAction.QuickActionSelectionListener {
 
-    private final ContextMenuLayer contextMenuLayer;
-    private final MeasurementToolLayer measurementToolLayer;
-    private final MapMarkersLayer mapMarkersLayer;
-    private final MapControlsLayer mapControlsLayer;
-    private final GPXLayer gpxLayer;
-    private final RouteLayer routeLayer;
     private ImageView contextMarker;
     private final MapActivity mapActivity;
     private final OsmandApplication app;
@@ -81,17 +69,11 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
     private boolean nightMode;
     private Boolean currentWidgetState;
 
-    public MapQuickActionLayer(MapActivity activity, ContextMenuLayer contextMenuLayer) {
+    public MapQuickActionLayer(MapActivity activity) {
         this.mapActivity = activity;
-        this.contextMenuLayer = contextMenuLayer;
         app = activity.getMyApplication();
         settings = activity.getMyApplication().getSettings();
         quickActionRegistry = app.getQuickActionRegistry();
-		measurementToolLayer = mapActivity.getMapLayers().getMeasurementToolLayer();
-        mapMarkersLayer = mapActivity.getMapLayers().getMapMarkersLayer();
-        gpxLayer = mapActivity.getMapLayers().getGpxLayer();
-        mapControlsLayer = mapActivity.getMapLayers().getMapControlsLayer();
-        routeLayer = mapActivity.getMapLayers().getRouteLayer();
     }
 
     @Override
@@ -415,29 +397,8 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
 	}
 
     private void setupQuickActionBtnVisibility() {
-        MapContextMenu contextMenu = mapActivity.getContextMenu();
-        MapRouteInfoMenu mapRouteInfoMenu = mapActivity.getMapRouteInfoMenu();
-        MapMultiSelectionMenu multiSelectionMenu = contextMenu.getMultiSelectionMenu();
-        WeakReference<MapContextMenuFragment> contextMenuMenuFragmentRef = contextMenu.findMenuFragment();
-        MapContextMenuFragment contextMenuMenuFragment = contextMenuMenuFragmentRef != null ? contextMenuMenuFragmentRef.get() : null;
-        Fragment multiMenuFragment = multiSelectionMenu.getFragmentByTag();
-        boolean hideQuickButton = !isLayerOn ||
-                contextMenuLayer.isInChangeMarkerPositionMode() ||
-				contextMenuLayer.isInGpxDetailsMode() ||
-				measurementToolLayer.isInMeasurementMode() ||
-                mapMarkersLayer.isInPlanRouteMode() ||
-                gpxLayer.isInTrackAppearanceMode() ||
-                mapControlsLayer.isInTrackMenuMode() ||
-                routeLayer.isInRouteLineAppearanceMode() ||
-                mapRouteInfoMenu.isVisible() ||
-                MapRouteInfoMenu.chooseRoutesVisible ||
-                MapRouteInfoMenu.waypointsVisible ||
-                MapRouteInfoMenu.followTrackVisible ||
-                contextMenu.isVisible() && contextMenuMenuFragment != null && !contextMenuMenuFragment.isRemoving() ||
-                contextMenu.isVisible() && contextMenuMenuFragment != null && contextMenuMenuFragment.isAdded() ||
-                multiSelectionMenu.isVisible() && multiMenuFragment != null && multiMenuFragment.isAdded() ||
-                multiSelectionMenu.isVisible() && multiMenuFragment != null && !multiMenuFragment.isRemoving();
-        quickActionButton.setVisibility(hideQuickButton ? View.GONE : View.VISIBLE);
+        boolean visible = mapActivity.getWidgetsVisibilityHelper().shouldShowQuickActionButton();
+        quickActionButton.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
 
     @Override
