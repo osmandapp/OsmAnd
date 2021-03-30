@@ -253,10 +253,8 @@ public class GpxBlockStatisticsBuilder {
 	}
 
 	public void prepareDataTimeMoving(long timeMoving) {
-		prepareData(app.getString(tabItem == GPX_TAB_ITEM_SPEED ? R.string.shared_string_time_moving : R.string.moving_time),
-				Algorithms.formatDuration((int) (timeMoving / 1000), app.accessibilityEnabled()),
-				tabItem == GPX_TAB_ITEM_SPEED ? R.drawable.ic_action_time_span_16 : R.drawable.ic_action_time_moving_16,
-				GPXDataSetType.SPEED, null, ItemType.ITEM_TIME_MOVING);
+		prepareData(app.getString(R.string.moving_time), Algorithms.formatDuration((int) (timeMoving / 1000), app.accessibilityEnabled()),
+				R.drawable.ic_action_time_moving_16, GPXDataSetType.SPEED, null, ItemType.ITEM_TIME_MOVING);
 	}
 
 	public void prepareDataDistanceCorrected(float totalDistanceMoving) {
