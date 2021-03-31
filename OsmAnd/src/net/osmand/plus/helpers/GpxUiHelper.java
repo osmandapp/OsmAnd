@@ -939,12 +939,10 @@ public class GpxUiHelper {
 
 	@Nullable
 	public static GPXInfo getGpxInfoByFileName(@NonNull OsmandApplication app, @NonNull String fileName) {
-		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
-		List<GPXInfo> infoList = getSortedGPXFilesInfo(dir, null, false);
-		for (GPXInfo info : infoList) {
-			if (Algorithms.objectEquals(info.getFileName(), fileName)) {
-				return info;
-			}
+		File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
+		File file = new File(dir, fileName);
+		if (file.exists() && file.getName().endsWith(GPX_FILE_EXT)) {
+			return new GPXInfo(fileName, file.lastModified(), file.length());
 		}
 		return null;
 	}
