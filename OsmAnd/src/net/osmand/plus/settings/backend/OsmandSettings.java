@@ -47,6 +47,7 @@ import net.osmand.plus.helpers.enums.SpeedConstants;
 import net.osmand.plus.helpers.enums.TracksSortByMode;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.Format;
 import net.osmand.plus.mapmarkers.MapMarkersMode;
+import net.osmand.plus.osmedit.OsmEditingPlugin.UploadVisibility;
 import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.profiles.NavigationIcon;
 import net.osmand.plus.profiles.ProfileIconColors;
@@ -1135,6 +1136,7 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<String> OSM_USER_NAME = new StringPreference(this, "user_name", "").makeGlobal().makeShared();
 	public final OsmandPreference<String> OSM_USER_DISPLAY_NAME = new StringPreference(this, "user_display_name", "").makeGlobal().makeShared();
+	public final CommonPreference<UploadVisibility> OSM_UPLOAD_VISIBILITY = new EnumStringPreference<>(this, "upload_visibility", UploadVisibility.PUBLIC, UploadVisibility.values()).makeGlobal().makeShared();
 
 	public static final String BILLING_USER_DONATION_WORLD_PARAMETER = "";
 	public static final String BILLING_USER_DONATION_NONE_PARAMETER = "none";

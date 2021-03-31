@@ -47,7 +47,7 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 	public static final String TAG = SendGpxBottomSheetFragment.class.getSimpleName();
 
 	private GpxInfo[] gpxInfos;
-	private UploadVisibility selectedUploadVisibility = UploadVisibility.PUBLIC;
+	private UploadVisibility selectedUploadVisibility;
 
 	private TextInputEditText tagsField;
 	private TextInputEditText messageField;
@@ -59,12 +59,15 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		OsmandApplication app = requiredMyApplication();
-		OsmandSettings settings = app.getSettings();
+		final OsmandSettings settings = app.getSettings();
 
 		LayoutInflater themedInflater = UiUtilities.getInflater(app, nightMode);
 		View sendGpxView = themedInflater.inflate(R.layout.send_gpx_fragment, null);
 		sendGpxView.getViewTreeObserver().addOnGlobalLayoutListener(getShadowLayoutListener());
 
+		if (selectedUploadVisibility == null) {
+			selectedUploadVisibility = settings.OSM_UPLOAD_VISIBILITY.get();
+		}
 		tagsField = sendGpxView.findViewById(R.id.tags_field);
 		messageField = sendGpxView.findViewById(R.id.message_field);
 
@@ -96,8 +99,9 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 		horizontalSelectionAdapter.setSelectedItemByTitle(getString(selectedUploadVisibility.getTitleId()));
 		horizontalSelectionAdapter.setListener(new HorizontalSelectionAdapterListener() {
 			@Override
-			public void onItemSelected(HorizontalSelectionAdapter.HorizontalSelectionItem item) {
+			public void onItemSelected(HorizontalSelectionItem item) {
 				selectedUploadVisibility = (OsmEditingPlugin.UploadVisibility) item.getObject();
+				settings.OSM_UPLOAD_VISIBILITY.set(selectedUploadVisibility);
 				visibilityName.setText(selectedUploadVisibility.getTitleId());
 				visibilityDescription.setText(selectedUploadVisibility.getDescriptionId());
 				horizontalSelectionAdapter.notifyDataSetChanged();
