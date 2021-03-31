@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -47,13 +48,15 @@ public class OptionsCard extends BaseCard {
 	public static final int DELETE_BUTTON_INDEX = 11;
 
 	private TrackDisplayHelper displayHelper;
+	private SelectedGpxFile selectedGpxFile;
 	private GPXFile gpxFile;
 	private List<BaseBottomSheetItem> items = new ArrayList<>();
 
-	public OptionsCard(@NonNull MapActivity mapActivity, TrackDisplayHelper displayHelper) {
+	public OptionsCard(@NonNull MapActivity mapActivity, TrackDisplayHelper displayHelper, SelectedGpxFile selectedGpxFile) {
 		super(mapActivity);
 		this.displayHelper = displayHelper;
 		this.gpxFile = displayHelper.getGpx();
+		this.selectedGpxFile = selectedGpxFile;
 	}
 
 	@Override
@@ -254,7 +257,7 @@ public class OptionsCard extends BaseCard {
 
 	private BaseBottomSheetItem createUploadOsmItem() {
 		OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
-		if (osmEditingPlugin != null) {
+		if (osmEditingPlugin != null && selectedGpxFile.getTrackAnalysis(app).isTimeMoving()) {
 			return new SimpleBottomSheetItem.Builder()
 					.setIcon(getActiveIcon(R.drawable.ic_action_export))
 					.setTitle(app.getString(R.string.upload_to_openstreetmap))

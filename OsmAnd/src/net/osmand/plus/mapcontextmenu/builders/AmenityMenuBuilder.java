@@ -13,6 +13,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
@@ -59,9 +62,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-
-import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 
 public class AmenityMenuBuilder extends MenuBuilder {
 
@@ -346,7 +346,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			boolean isWiki = false;
 			boolean isText = false;
 			boolean isDescription = false;
-			boolean needLinks = !("population".equals(key) || "height".equals(key));
+			boolean needLinks = !("population".equals(key) || "height".equals(key) || Amenity.OPENING_HOURS.equals(key));
 			boolean needIntFormatting = "population".equals(key);
 			boolean isPhoneNumber = false;
 			boolean isUrl = false;
@@ -371,7 +371,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 			if (vl.startsWith("http://") || vl.startsWith("https://") || vl.startsWith("HTTP://") || vl.startsWith("HTTPS://")) {
 				isUrl = true;
-			} else {
+			} else if (needLinks) {
 				socialMediaUrl = getSocialMediaUrl(key, vl);
 				if (socialMediaUrl != null) {
 					isUrl = true;
