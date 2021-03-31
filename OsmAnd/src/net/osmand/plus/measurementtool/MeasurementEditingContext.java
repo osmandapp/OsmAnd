@@ -1111,6 +1111,10 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		return res;
 	}
 
+	public boolean isInMultiProfileMode() {
+		return lastCalculationMode == CalculationMode.NEXT_SEGMENT;
+	}
+
 	@Override
 	public void onRouteSettingsChanged(@Nullable ApplicationMode mode) {
 		recalculateRouteSegments(mode);

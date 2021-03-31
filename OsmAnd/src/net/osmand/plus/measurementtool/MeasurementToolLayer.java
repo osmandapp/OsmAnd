@@ -23,6 +23,8 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.Renderable;
 import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.plus.views.layers.geometry.GeometryWay;
+import net.osmand.plus.views.layers.geometry.MultiProfileGeometryWay;
+import net.osmand.plus.views.layers.geometry.MultiProfileGeometryWayContext;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -33,20 +35,28 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 
 	private OsmandMapTileView view;
 	private boolean inMeasurementMode;
+
 	private Bitmap centerIconDay;
 	private Bitmap centerIconNight;
 	private Bitmap pointIcon;
 	private Bitmap applyingPointIcon;
 	private Paint bitmapPaint;
 	private final RenderingLineAttributes lineAttrs = new RenderingLineAttributes("measureDistanceLine");
+	private final RenderingLineAttributes multiProfileLineAttrs = new RenderingLineAttributes("multiProfileMeasureDistanceLine");
+
+	private MultiProfileGeometryWay multiProfileGeometry;
+	private MultiProfileGeometryWayContext multiProfileGeometryWayContext;
+
 	private int marginPointIconX;
 	private int marginPointIconY;
 	private int marginApplyingPointIconX;
 	private int marginApplyingPointIconY;
 	private final Path path = new Path();
+
 	private final List<Float> tx = new ArrayList<>();
 	private final List<Float> ty = new ArrayList<>();
 	private OnMeasureDistanceToCenter measureDistanceToCenterListener;
+
 	private OnSingleTapListener singleTapListener;
 	private OnEnterMovePointModeListener enterMovePointModeListener;
 	private LatLon pressedPointLatLon;
@@ -62,6 +72,18 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		centerIconNight = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_ruler_center_night);
 		pointIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_measure_point_day);
 		applyingPointIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_measure_point_move_day);
+
+		float density = view.getDensity();
+		multiProfileLineAttrs.isPaint_1 = false;
+		multiProfileLineAttrs.paint_1.setColor(0xFFFFFFFF);
+		multiProfileLineAttrs.paint_1.setStyle(Paint.Style.FILL);
+		multiProfileLineAttrs.paint.setStrokeWidth(density * 14);
+		multiProfileLineAttrs.paint2.setStrokeWidth(density * 10);
+		multiProfileLineAttrs.isPaint3 = false;
+		multiProfileLineAttrs.paint3.setStrokeWidth(density * 2);
+
+		multiProfileGeometryWayContext = new MultiProfileGeometryWayContext(view.getContext(), density);
+		multiProfileGeometry = new MultiProfileGeometryWay(multiProfileGeometryWayContext);
 
 		bitmapPaint = new Paint();
 		bitmapPaint.setAntiAlias(true);
@@ -194,15 +216,28 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 				}
 			}
 
-			List<TrkSegment> before = editingCtx.getBeforeTrkSegmentLine();
-			for (TrkSegment segment : before) {
-				new Renderable.StandardTrack(new ArrayList<>(segment.points), 17.2).
-						drawSegment(view.getZoom(), lineAttrs.paint, canvas, tb);
-			}
-			List<TrkSegment> after = editingCtx.getAfterTrkSegmentLine();
-			for (TrkSegment segment : after) {
-				new Renderable.StandardTrack(new ArrayList<>(segment.points), 17.2).
-						drawSegment(view.getZoom(), lineAttrs.paint, canvas, tb);
+			if (editingCtx.isInMultiProfileMode()) {
+				multiProfileGeometryWayContext.updatePaints(settings.isNightMode(), multiProfileLineAttrs);
+				for (int i = 0; i < editingCtx.getBeforeSegments().size(); i++) {
+					multiProfileGeometry.updateRoute(tb, editingCtx.getRoadSegmentData(), true, editingCtx.getBeforeSegments(), i);
+					multiProfileGeometry.drawSegments(canvas, tb);
+				}
+				for (int i = 0; i < editingCtx.getAfterSegments().size(); i++) {
+					multiProfileGeometry.updateRoute(tb, editingCtx.getRoadSegmentData(), false, editingCtx.getAfterSegments(), i);
+					multiProfileGeometry.drawSegments(canvas, tb);
+				}
+			} else {
+				List<TrkSegment> before = editingCtx.getBeforeTrkSegmentLine();
+				for (TrkSegment segment : before) {
+					new Renderable.StandardTrack(new ArrayList<>(segment.points), 17.2).
+							drawSegment(view.getZoom(), lineAttrs.paint, canvas, tb);
+				}
+
+				List<TrkSegment> after = editingCtx.getAfterTrkSegmentLine();
+				for (TrkSegment segment : after) {
+					new Renderable.StandardTrack(new ArrayList<>(segment.points), 17.2).
+							drawSegment(view.getZoom(), lineAttrs.paint, canvas, tb);
+				}
 			}
 
 			drawPoints(canvas, tb);

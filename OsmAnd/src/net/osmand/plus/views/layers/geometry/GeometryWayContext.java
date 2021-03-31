@@ -47,7 +47,8 @@ public abstract class GeometryWayContext {
 		paintIconCustom.setColor(Color.BLACK);
 		paintIconCustom.setStrokeWidth(1f * density);
 
-		arrowBitmap = RenderingIcons.getBitmapFromVectorDrawable(ctx, getArrowBitmapResId());
+		arrowBitmap = getArrowBitmapResId() == 0 ?
+				null : RenderingIcons.getBitmapFromVectorDrawable(ctx, getArrowBitmapResId());
 	}
 
 	public OsmandApplication getApp() {
