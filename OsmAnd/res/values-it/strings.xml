@@ -2356,7 +2356,7 @@
     <string name="mappilary_no_internet_desc">Hai bisogno di essere connesso a Internet per vedere le foto da Mapillary.</string>
     <string name="add_waypoint">Aggiungi punto intermedio</string>
     <string name="save_gpx_waypoint">Salva Waypoint GPX</string>
-    <string name="waypoint_one">Waypoint 1</string>
+    <string name="waypoint_one">Punto intermedio 1</string>
     <string name="line">Linea</string>
     <string name="save_as_route_point">Salva come punti di un percorso</string>
     <string name="save_as_line">Salva come linea</string>
@@ -3885,15 +3885,15 @@
     <string name="app_mode_light_aircraft">Ultraleggeri</string>
     <string name="plan_route_split_after">Spezza dopo</string>
     <string name="plan_route_add_new_segment">Aggiungi un nuovo segmento</string>
-    <string name="release_3_9">"• Aggiunta l\'opzione per esportare e importare tutti i dati incluse le impostazioni, le risorse e i preferiti
+    <string name="release_3_9">• Aggiunta l\'opzione per esportare e importare tutti i dati incluse le impostazioni, le risorse e i preferiti
 \n
 \n • Creazione del percorso: grafici per parti del percorso, aggiunta anche la possibilità di creare e modificare tracce composte da più segmenti
 \n
-\n • Aggiunto il metodi di autenticazione OAuth per  OpenStreetMap, migliorata la UI dei dialoghi OSM
+\n • Aggiunto il metodi di autenticazione OAuth per OpenStreetMap, migliorata la UI dei dialoghi OSM
 \n
 \n • Supporto alla personalizzazione dei colori per i preferiti e i punti intermedi delle tracce
 \n
-\n"</string>
+\n</string>
     <string name="plan_route_join_segments">Unisci segmenti</string>
     <string name="plan_route_split_before">Spezza</string>
     <string name="announcement_time_arrive">Arrivo a destinazione</string>
@@ -3944,7 +3944,7 @@
     <string name="shared_string_api_key">Chiave API</string>
     <string name="shared_string_server_url">URL del server</string>
     <string name="shared_string_enter_param">Immetti un parametro</string>
-    <string name="keep_it_empty_if_not">"Mantienilo vuoto se  non lo fosse"</string>
+    <string name="keep_it_empty_if_not">Mantienilo vuoto se non lo fosse</string>
     <string name="online_routing_example_hint">URL con tutti i parametri saranno come questo:</string>
     <string name="test_route_calculation">Prova il calcolo del percorso</string>
     <string name="routing_engine_vehicle_type_driving">Driving</string>
@@ -3994,11 +3994,11 @@
     <string name="activity_type_offroad_name">Fuoristrada</string>
     <string name="activity_type_motorbike_name">Moto</string>
     <string name="activity_type_car_name">Auto</string>
-    <string name="temporary_conditional_routing_descr">Utilizza le restrizioni stradali che sono attive attualmente sulla mappa</string>
-    <string name="routing_attr_short_way_description">Percorso più breve ottimizzato (risparmio energia)</string>
+    <string name="temporary_conditional_routing_descr">Utilizza le restrizioni stradali attualmente attive sulla mappa</string>
+    <string name="routing_attr_short_way_description">Percorso ottimizzato per brevità (risparmio energia)</string>
     <string name="routing_attr_driving_style_description">Scegli il tipo di guida per ottenere percorsi più brevi, veloci e sicuri</string>
     <string name="snap_to_road_descr">L\'icona della localizzazione attuale sarà incollata al percorso corrente</string>
-    <string name="map_orientation_threshold_descr">Non ruotare la visualizzazione della mappa se la velocità è inferiore a un valore</string>
+    <string name="map_orientation_threshold_descr">Non ruotare la visualizzazione della mappa se la velocità è inferiore a una soglia</string>
     <string name="restart">Riavvia</string>
     <string name="shared_strings_all_regions">Tutte le regioni</string>
     <string name="delete_number_files_question">Cancellare %1$d file\?</string>
@@ -4013,28 +4013,62 @@
     <string name="quick_action_coordinates_widget_descr">Un interruttore per mostrare o nascondere il widget delle coordinate sulla mappa.</string>
     <string name="map_widget_distance_by_tap">Distanza dal tocco</string>
     <string name="latest_openstreetmap_update">Ultimo aggiornamento OpenStreetMap disponibile:</string>
-    <string name="updated">Aggiornamento: %s</string>
+    <string name="updated">Aggiornata: %s</string>
     <string name="last_time_checked">Ultimo controllo: %s</string>
     <string name="update_frequency">Frequenza di aggiornamento</string>
-    <string name="live_update_frequency_week_variant">Gli aggiornamenti della mappa saranno controllati ogni settimana. Il prossimo %1$s in %2$s.</string>
-    <string name="live_update_frequency_day_variant">Gli aggiornamenti della mappa saranno controllati ogni giorno. La prossima volta %1$s in %2$s.</string>
-    <string name="live_update_frequency_hour_variant">Gli aggiornamenti alla mappa saranno controllati ogni ora. Il prossimo alle %1$s in %2$s.</string>
+    <string name="live_update_frequency_week_variant">Gli aggiornamenti della mappa saranno controllati ogni settimana. La prossima alle %2$s %1$s.</string>
+    <string name="live_update_frequency_day_variant">Gli aggiornamenti della mappa saranno controllati ogni giorno. La prossima alle %2$s %1$s.</string>
+    <string name="live_update_frequency_hour_variant">Gli aggiornamenti alla mappa saranno controllati ogni ora. Il prossimo alle %2$s %1$s.</string>
     <string name="delete_updates">Elimina aggiornamenti</string>
-    <string name="live_update_delete_updates_msg">Confermi di voler eliminare tutti %s gli aggiornamenti live\?</string>
+    <string name="live_update_delete_updates_msg">Confermi di voler eliminare tutti i %s aggiornamenti live\?</string>
     <string name="purchases">Acquisti</string>
     <string name="select_category_descr">Seleziona la categoria o aggiungine una nuova</string>
-    <string name="track_recording_will_be_continued">La registrazione sarà continuata.</string>
+    <string name="track_recording_will_be_continued">La registrazione proseguirà.</string>
     <string name="copy_poi_name">Copia il nome del PDI</string>
     <string name="quick_action_show_hide_title">Mostra/nascondi</string>
     <string name="shared_string_interval">Intervallo</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Nascondi i confini delle riserve naturali, delle aree protette e dei parchi naturali.</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Nascondi i confini delle riserve naturali, delle aree protette e dei parchi naturali</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">Confini naturali</string>
     <string name="track_has_no_altitude">La traccia non contiene i dati di altitudine.</string>
     <string name="track_has_no_speed">La traccia non contiene i dati di velocità.</string>
     <string name="select_another_colorization">Prego selezionare un altro tipo di colorazione.</string>
-    <string name="trip_recording_logging_interval_info">"L\'intervallo di registrazione imposta la frequenza con cui OsmAnd chiederà i dati della posizione  attuale."</string>
+    <string name="trip_recording_logging_interval_info">L\'intervallo di registrazione imposta la frequenza con cui OsmAnd chiederà i dati della posizione attuale.</string>
     <string name="trip_recording_save_and_continue">Salva e continua</string>
     <string name="lost_data_warning">Tutti i dati non salvati andranno persi.</string>
     <string name="show_start_dialog">Mostra la finestra di avvio</string>
     <string name="trip_recording_show_start_dialog_setting">Se disabilitato, la registrazione inizierà appena tappato sul widget o sul menu, saltando la finestra di configurazione.</string>
+    <string name="specify_color_for_map_mode">Specifica il colore per il tipo di mappa: %1$s.</string>
+    <string name="new_device_account">Nuovo dispositivo / nuovo account</string>
+    <string name="contact_support_description">Se hai delle domande, per favore contattaci al %1$s.</string>
+    <string name="next_billing_date">Nuova data di addebito: %1$s</string>
+    <string name="routing_attr_allow_streams_name">Permetti ruscelli e scoli</string>
+    <string name="release_4_0_beta">• Aggiornamenti OsmAnd Live spostati in \"Scarica mappe&gt; Aggiornabili\"
+\n
+\n • Le tracce adesso possono essere colorate in base all\'altitudine, velocità o pendenza.
+\n
+\n • Aggiunta l\'opzione per cambiare l\'aspetto della line del percorso di navigazione
+\n
+\n • Aggiornato la finestra di dialogo \"Registra il percorso\"
+\n
+\n</string>
+    <string name="routing_attr_allow_streams_description">Permetti ruscelli e scoli</string>
+    <string name="routing_attr_allow_intermittent_description">Permetti le vie d\'acqua intermittenti</string>
+    <string name="routing_attr_allow_intermittent_name">Permetti le vie d\'acqua intermittenti</string>
+    <string name="customize_route_line">Personalizza la linea del percorso</string>
+    <string name="shared_string_route_line">Linea del percorso</string>
+    <string name="route_line_use_map_style_appearance">Per la linea del percorso sarà utilizzato %1$s specificato nello stile della mappa selezionato %2$s.</string>
+    <string name="no_purchases">Non hai alcun acquisto</string>
+    <string name="empty_purchases_description">Se l\'acquisto non viene visualizzato qui, tappa su “%1$s”, o contatta il supporto.</string>
+    <string name="contact_support">Contatta il supporto</string>
+    <string name="troubleshooting">Risoluzione dei problemi</string>
+    <string name="troubleshooting_description">Per problemi con gli acquisti per favore segui il link.</string>
+    <string name="osmand_live">OsmAnd Live</string>
+    <string name="annual_subscription">Sottoscrizione annuale</string>
+    <string name="monthly_subscription">Sottoscrizione mensile</string>
+    <string name="three_months_subscription">Sottoscrizione trimestrale</string>
+    <string name="osmand_live_cancelled">Cancellato</string>
+    <string name="renew_subscription">Rinnova la sottoscrizione</string>
+    <string name="on_hold">In attesa</string>
+    <string name="expired">Scaduto</string>
+    <string name="update_all_maps_added">Aggiornare tutte le mappe aggiunte a %1$s\?</string>
 </resources>
