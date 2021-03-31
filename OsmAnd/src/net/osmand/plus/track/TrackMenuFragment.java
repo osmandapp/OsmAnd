@@ -242,7 +242,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			loadSelectedGpxFile(mapActivity, path, showCurrentTrack, new CallbackWithObject<SelectedGpxFile>() {
 				@Override
 				public boolean processResult(SelectedGpxFile result) {
-					selectedGpxFile = result;
+					setSelectedGpxFile(result);
 					setupDisplayHelper();
 					if (getView() != null) {
 						initContent(getView());
@@ -514,7 +514,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					}
 					cardsContainer.addView(optionsCard.getView());
 				} else {
-					optionsCard = new OptionsCard(mapActivity, displayHelper);
+					optionsCard = new OptionsCard(mapActivity, displayHelper, selectedGpxFile);
 					optionsCard.setListener(this);
 					cardsContainer.addView(optionsCard.build(mapActivity));
 				}
