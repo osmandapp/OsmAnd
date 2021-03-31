@@ -82,7 +82,7 @@
     <string name="no_location_permission">Der App fehlt die Berechtigung, auf Standortdaten zuzugreifen.</string>
     <string name="gps_not_available">Bitte schalten Sie \"Standort\" in den Systemeinstellungen ein</string>
     <string name="osmand_service">Hintergrundmodus</string>
-    <string name="osmand_service_descr">OsmAnd Tracker läuft im Hintergrund bei ausgeschaltetem Bildschirm.</string>
+    <string name="osmand_service_descr">OsmAnd Tracker läuft bei ausgeschaltetem Bildschirm im Hintergrund.</string>
     <string name="shared_string_distance">Distanz</string>
     <string name="share_location">Standort teilen</string>
     <string name="process_service">OsmAnd Tracker-Service</string>
