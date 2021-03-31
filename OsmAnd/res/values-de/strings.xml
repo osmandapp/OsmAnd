@@ -1664,7 +1664,7 @@
     <string name="si_m_s">Meter pro Sekunde</string>
     <string name="si_min_km">Minuten pro Kilometer</string>
     <string name="si_min_m">Minuten pro Meile</string>
-    <string name="si_nm_h">Nautische Meilen pro Stunde (Knoten)</string>
+    <string name="si_nm_h">Seemeilen pro Stunde (Knoten)</string>
     <string name="shared_string_navigation">Navigation</string>
     <string name="looking_up_address">Adresse wird gesucht</string>
     <string name="favourites_context_menu_add">Favorit hinzufügen</string>
@@ -4006,7 +4006,7 @@
     <string name="activity_type_motorbike_name">Motorrad</string>
     <string name="activity_type_car_name">Auto</string>
     <string name="announcement_time_prepare">Zweite Ankündigung (mittlere Distanz)</string>
-    <string name="shared_string_sec">sek</string>
+    <string name="shared_string_sec">Sek</string>
     <string name="activity_type_racing_name">Rennsport</string>
     <string name="announcement_time_prepare_long">Erste Ankündigung (größere Distanz)</string>
     <string name="restart">Neustart</string>
@@ -4066,4 +4066,22 @@
 \n• Dialog \"Streckenaufzeichnung\" aktualisiert
 \n
 \n</string>
+    <string name="route_line_use_map_style_appearance">Die Routenlinie würde %1$s verwenden, die für den ausgewählten Kartenstil angegeben ist: %2$s.</string>
+    <string name="no_purchases">Du hast keine Einkäufe</string>
+    <string name="new_device_account">Neues Gerät / neues Konto</string>
+    <string name="contact_support_description">Wenn du Fragen hast, kontaktiere uns bitte unter %1$s.</string>
+    <string name="empty_purchases_description">Wenn deine Einkäufe hier nicht angezeigt werden, tippe auf \"%1$s\", oder wende dich an unser Support-Team.</string>
+    <string name="contact_support">Support kontaktieren</string>
+    <string name="troubleshooting">Problemlösung</string>
+    <string name="troubleshooting_description">Bitte folge diesem Link, wenn du Probleme beim Kauf hast.</string>
+    <string name="osmand_live">OsmAnd Live</string>
+    <string name="annual_subscription">Jährliches Abonnement</string>
+    <string name="monthly_subscription">Monatliches Abo</string>
+    <string name="three_months_subscription">Drei-Monats-Abonnement</string>
+    <string name="next_billing_date">Nächstes Abrechnungsdatum: %1$s</string>
+    <string name="osmand_live_cancelled">Abgebrochen</string>
+    <string name="renew_subscription">Abonnement erneuern</string>
+    <string name="on_hold">In der Warteschleife</string>
+    <string name="expired">Abgelaufen</string>
+    <string name="update_all_maps_added">Alle zu %1$s hinzugefügten Maps aktualisieren\?</string>
 </resources>
