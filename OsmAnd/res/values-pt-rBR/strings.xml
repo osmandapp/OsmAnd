@@ -4058,4 +4058,22 @@
 \n  • Caixa de diálogo \"Gravação de viagem\" atualizada
 \n
 \n"</string>
+    <string name="no_purchases">Você não tem nenhuma compra</string>
+    <string name="new_device_account">Novo dispositivo / nova conta</string>
+    <string name="contact_support_description">Se você tiver alguma dúvida, entre em contato conosco em %1$s.</string>
+    <string name="empty_purchases_description">Se suas compras não aparecerem aqui, toque em \"%1$s\", ou entre em contato com nossa equipe de suporte.</string>
+    <string name="contact_support">Contato com o suporte</string>
+    <string name="troubleshooting">Solução de problemas</string>
+    <string name="troubleshooting_description">Por favor, siga este link se você tiver algum problema com compras.</string>
+    <string name="osmand_live">OsmAnd Live</string>
+    <string name="annual_subscription">Assinatura anual</string>
+    <string name="monthly_subscription">Assinatura mensal</string>
+    <string name="three_months_subscription">Três meses de assinatura</string>
+    <string name="next_billing_date">Próxima data de faturamento: %1$s</string>
+    <string name="osmand_live_cancelled">Cancelado</string>
+    <string name="renew_subscription">Renovar assinatura</string>
+    <string name="in_grace_period">No período de carência</string>
+    <string name="on_hold">Em espera</string>
+    <string name="expired">Expirado</string>
+    <string name="update_all_maps_added">Atualizar todos os mapas adicionados a %1$s\?</string>
 </resources>
