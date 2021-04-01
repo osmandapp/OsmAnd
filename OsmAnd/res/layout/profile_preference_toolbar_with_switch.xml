@@ -71,6 +71,7 @@
 			</LinearLayout>
 
 			<include
+				android:id="@+id/toolbar_icon"
 				layout="@layout/profile_button_small"
 				android:layout_width="@dimen/list_header_height"
 				android:layout_height="@dimen/list_header_height"

@@ -1358,6 +1358,7 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> SPEED_CAMERAS_UNINSTALLED = new BooleanPreference(this, "speed_cameras_uninstalled", false).makeGlobal().makeShared();
 	public final OsmandPreference<Boolean> SPEED_CAMERAS_ALERT_SHOWED = new BooleanPreference(this, "speed_cameras_alert_showed", false).makeGlobal().makeShared();
+	public final OsmandPreference<Boolean> EXIT_NUMBER_NAMES_SHOWED = new BooleanPreference(this, "exit_number_names", false).makeGlobal().makeShared();
 
 	public Set<String> getForbiddenTypes() {
 		Set<String> typeNames = new HashSet<>();

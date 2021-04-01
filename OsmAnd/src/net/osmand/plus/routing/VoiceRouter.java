@@ -27,6 +27,8 @@ import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -663,23 +665,28 @@ public class VoiceRouter {
 	}
 
 	private String getSpeakableExitRef(String exit) {
-		StringBuilder sb = new StringBuilder();
-		if (exit != null) {
-			exit = exit.replace('-', ' ');
-			exit = exit.replace(':', ' ');
-			//	Add spaces between digits and letters for better pronunciation
-			int length = exit.length();
-			for (int i = 0; i < length; i++) {
-				if (i + 1 < length && Character.isDigit(exit.charAt(i)) && Character.isLetter(exit.charAt(i + 1))) {
-					sb.append(exit.charAt(i));
-					sb.append(' ');
-				} else {
-					sb.append(exit.charAt(i));
+		boolean showStartDialog = settings.EXIT_NUMBER_NAMES_SHOWED.get();
+		if (showStartDialog) {
+			StringBuilder sb = new StringBuilder();
+			if (exit != null) {
+				exit = exit.replace('-', ' ');
+				exit = exit.replace(':', ' ');
+				//	Add spaces between digits and letters for better pronunciation
+				int length = exit.length();
+				for (int i = 0; i < length; i++) {
+					if (i + 1 < length && Character.isDigit(exit.charAt(i)) && Character.isLetter(exit.charAt(i + 1))) {
+						sb.append(exit.charAt(i));
+						sb.append(' ');
+					} else {
+						sb.append(exit.charAt(i));
+					}
 				}
 			}
+			return sb.toString();
 		}
-		return sb.toString();
+		return StringUtils.EMPTY;
 	}
+
 
 	private int getIntRef(String stringRef) {
 		int intRef = Algorithms.findFirstNumberEndIndex(stringRef);

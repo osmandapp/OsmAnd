@@ -5,22 +5,26 @@ import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 import androidx.preference.SwitchPreferenceCompat;
 
+import com.google.android.material.appbar.AppBarLayout;
+
 import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
 import net.osmand.plus.download.DownloadActivity;
@@ -31,6 +35,8 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.AnnouncementTimeBottomSheet;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
+import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
+import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 
 import java.util.Set;
 
@@ -43,11 +49,35 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 
 	private static final String MORE_VALUE = "MORE_VALUE";
 
+	private static final String OSMAND_VOICE_NAVIGATION_URL = "https://docs.osmand.net/en/main@latest/osmand/troubleshooting/navigation#voice-navigation";
+
 	@Override
 	protected void createToolbar(LayoutInflater inflater, View view) {
-		super.createToolbar(inflater, view);
+		AppBarLayout appbar = view.findViewById(R.id.appbar);
+		View toolbar = UiUtilities.getInflater(getContext(), isNightMode()).inflate(R.layout.profile_preference_toolbar_with_switch, appbar, false);
 
-		view.findViewById(R.id.toolbar_switch_container).setOnClickListener(new View.OnClickListener() {
+		View iconToolbarContainer = toolbar.findViewById(R.id.toolbar_icon);
+		ImageView icon = iconToolbarContainer.findViewById(R.id.profile_icon);
+		icon.setImageResource(R.drawable.ic_action_help_online);
+		icon.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (getContext() != null) {
+					WikipediaDialogFragment.showFullArticle(getContext(), Uri.parse(OSMAND_VOICE_NAVIGATION_URL), true);
+				}
+			}
+		});
+		ImageButton backButton = toolbar.findViewById(R.id.close_button);
+		backButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				FragmentActivity fragmentActivity = getActivity();
+				if (fragmentActivity != null) {
+					fragmentActivity.onBackPressed();
+				}
+			}
+		});
+		toolbar.findViewById(R.id.toolbar_switch_container).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				ApplicationMode selectedMode = getSelectedAppMode();
@@ -59,6 +89,9 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 				updateMenu();
 			}
 		});
+		TextView toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
+		toolbarTitle.setText(getString(R.string.voice_announces));
+		appbar.addView(toolbar);
 	}
 
 	@Override
@@ -78,7 +111,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 		View switchContainer = view.findViewById(R.id.toolbar_switch_container);
 		AndroidUtils.setBackground(switchContainer, new ColorDrawable(color));
 
-		SwitchCompat switchView = (SwitchCompat) switchContainer.findViewById(R.id.switchWidget);
+		SwitchCompat switchView = switchContainer.findViewById(R.id.switchWidget);
 		switchView.setChecked(checked);
 		UiUtilities.setupCompoundButton(switchView, isNightMode(), TOOLBAR);
 
@@ -102,13 +135,13 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 
 		enableDisablePreferences(!settings.VOICE_MUTE.getModeValue(getSelectedAppMode()));
 		setupSpeakCamerasPref();
-		setupSpeedCamerasAlert();
+		setupTurnScreenOnNavigationInstructionsPref();
 	}
 
 	private void setupSpeedLimitExceedPref() {
 		//array size must be equal!
-		Float[] valuesKmh = new Float[] {-10f, -7f, -5f, 0f, 5f, 7f, 10f, 15f, 20f};
-		Float[] valuesMph = new Float[] {-7f, -5f, -3f, 0f, 3f, 5f, 7f, 10f, 15f};
+		Float[] valuesKmh = new Float[]{-10f, -7f, -5f, 0f, 5f, 7f, 10f, 15f, 20f};
+		Float[] valuesMph = new Float[]{-7f, -5f, -3f, 0f, 3f, 5f, 7f, 10f, 15f};
 		String[] names;
 		if (settings.METRIC_SYSTEM.getModeValue(getSelectedAppMode()) == MetricsConstants.KILOMETERS_AND_METERS) {
 			names = new String[valuesKmh.length];
@@ -121,34 +154,34 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 				names[i] = valuesMph[i].intValue() + " " + getString(R.string.mile_per_hour);
 			}
 		}
-		ListPreferenceEx voiceProvider = (ListPreferenceEx) findPreference(settings.SPEED_LIMIT_EXCEED_KMH.getId());
+		ListPreferenceEx voiceProvider = findPreference(settings.SPEED_LIMIT_EXCEED_KMH.getId());
 		voiceProvider.setEntries(names);
 		voiceProvider.setEntryValues(valuesKmh);
 	}
 
 	private void setupKeepInformingPref() {
-		Integer[] keepInformingValues = new Integer[] {0, 1, 2, 3, 5, 7, 10, 15, 20, 25, 30};
+		Integer[] keepInformingValues = new Integer[]{0, 1, 2, 3, 5, 7, 10, 15, 20, 25, 30};
 		String[] keepInformingNames = new String[keepInformingValues.length];
 		keepInformingNames[0] = getString(R.string.keep_informing_never);
 		for (int i = 1; i < keepInformingValues.length; i++) {
 			keepInformingNames[i] = keepInformingValues[i] + " " + getString(R.string.int_min);
 		}
 
-		ListPreferenceEx keepInforming = (ListPreferenceEx) findPreference(settings.KEEP_INFORMING.getId());
+		ListPreferenceEx keepInforming = findPreference(settings.KEEP_INFORMING.getId());
 		keepInforming.setEntries(keepInformingNames);
 		keepInforming.setEntryValues(keepInformingValues);
 	}
 
 	private void setupArrivalAnnouncementPref() {
-		Float[] arrivalValues = new Float[] {1.5f, 1f, 0.5f, 0.25f};
-		String[] arrivalNames = new String[] {
+		Float[] arrivalValues = new Float[]{1.5f, 1f, 0.5f, 0.25f};
+		String[] arrivalNames = new String[]{
 				getString(R.string.arrival_distance_factor_early),
 				getString(R.string.arrival_distance_factor_normally),
 				getString(R.string.arrival_distance_factor_late),
 				getString(R.string.arrival_distance_factor_at_last)
 		};
 
-		ListPreferenceEx arrivalDistanceFactor = (ListPreferenceEx) findPreference(settings.ARRIVAL_DISTANCE_FACTOR.getId());
+		ListPreferenceEx arrivalDistanceFactor = findPreference(settings.ARRIVAL_DISTANCE_FACTOR.getId());
 		arrivalDistanceFactor.setEntries(arrivalNames);
 		arrivalDistanceFactor.setEntryValues(arrivalValues);
 	}
@@ -178,21 +211,21 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 		Drawable enabled = getActiveIcon(R.drawable.ic_action_volume_up);
 		Drawable icon = getPersistentPrefIcon(enabled, disabled);
 
-		ListPreferenceEx voiceProvider = (ListPreferenceEx) findPreference(settings.VOICE_PROVIDER.getId());
+		ListPreferenceEx voiceProvider = findPreference(settings.VOICE_PROVIDER.getId());
 		voiceProvider.setEntries(entries);
 		voiceProvider.setEntryValues(entryValues);
 		voiceProvider.setIcon(icon);
 	}
 
 	private void setupAudioStreamGuidancePref() {
-		String[] streamTypes = new String[] {
+		String[] streamTypes = new String[]{
 				getString(R.string.voice_stream_music),
 				getString(R.string.voice_stream_notification),
 				getString(R.string.voice_stream_voice_call)
 		};
 		//getString(R.string.shared_string_default)};
 
-		Integer[] streamIntTypes = new Integer[] {
+		Integer[] streamIntTypes = new Integer[]{
 				AudioManager.STREAM_MUSIC,
 				AudioManager.STREAM_NOTIFICATION,
 				AudioManager.STREAM_VOICE_CALL
@@ -206,6 +239,11 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 	private void setupInterruptMusicPref() {
 		Preference interruptMusicPref = createSwitchPreference(settings.INTERRUPT_MUSIC, R.string.interrupt_music, R.string.interrupt_music_descr, R.layout.preference_switch_with_descr);
 		getPreferenceScreen().addPreference(interruptMusicPref);
+	}
+
+	private void setupTurnScreenOnNavigationInstructionsPref() {
+		SwitchPreferenceEx turnScreenOnNavigationInstructions = findPreference(settings.TURN_SCREEN_ON_NAVIGATION_INSTRUCTIONS.getId());
+		turnScreenOnNavigationInstructions.setDescription(R.string.turn_screen_on_navigation_instructions_descr);
 	}
 
 	private void updateMenu() {
@@ -319,12 +357,11 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 	public void onPreferenceChanged(String prefId) {
 		if (prefId.equals(settings.SPEED_CAMERAS_UNINSTALLED.getId())) {
 			setupSpeakCamerasPref();
-			setupSpeedCamerasAlert();
 		}
 	}
 
 	private void setupSpeakCamerasPref() {
-		SwitchPreferenceCompat showCameras = (SwitchPreferenceCompat) findPreference(settings.SPEAK_SPEED_CAMERA.getId());
+		SwitchPreferenceCompat showCameras = findPreference(settings.SPEAK_SPEED_CAMERA.getId());
 		showCameras.setVisible(!settings.SPEED_CAMERAS_UNINSTALLED.get());
 	}
 }
