@@ -174,7 +174,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 			}
 			double lat = locationProvider.getLatitude(i);
 			double lon = locationProvider.getLongitude(i);
-			if (shouldAddLocation(leftLongitude, rightLongitude, bottomLatitude, topLatitude,
+			if (shouldAddLocation(tb, leftLongitude, rightLongitude, bottomLatitude, topLatitude,
 					locationProvider, i)) {
 				double dist = previous == -1 ? 0 : odistances.get(i);
 				if (!previousVisible) {
@@ -188,7 +188,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 						prevLon = lastProjection.getLongitude();
 					}
 					if (!Double.isNaN(prevLat) && !Double.isNaN(prevLon)) {
-						addLocation(tb, prevLat, prevLon, style, tx, ty, angles, distances, dist, styles); // first point
+						addLocation(tb, prevLat, prevLon, getStyle(i - 1, defaultWayStyle), tx, ty, angles, distances, dist, styles); // first point
 					}
 				}
 				addLocation(tb, lat, lon, style, tx, ty, angles, distances, dist, styles);
@@ -208,8 +208,8 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 		drawRouteSegment(tb, canvas, tx, ty, angles, distances, 0, styles);
 	}
 
-	protected boolean shouldAddLocation(double leftLon, double rightLon, double bottomLat, double topLat,
-										GeometryWayProvider provider, int currLocationIdx) {
+	protected boolean shouldAddLocation(RotatedTileBox tileBox, double leftLon, double rightLon, double bottomLat,
+										double topLat, GeometryWayProvider provider, int currLocationIdx) {
 		double lat = provider.getLatitude(currLocationIdx);
 		double lon = provider.getLongitude(currLocationIdx);
 		return leftLon <= lon && lon <= rightLon && bottomLat <= lat && lat <= topLat;
@@ -261,16 +261,20 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 		return x >= lx && x <= rx && y >= ty && y <= by;
 	}
 
+	public static boolean isIn(float x, float y, int lx, int ty, int rx, int by, float outMargin) {
+		return x >= lx - outMargin && x <= rx + outMargin && y >= ty - outMargin && y <= by + outMargin;
+	}
+
 	public static int calculatePath(RotatedTileBox tb, List<Float> xs, List<Float> ys, Path path) {
 		List<Pair<Path, GeometryWayStyle<?>>> paths = new ArrayList<>();
-		int res = calculatePath(tb, xs, ys, null, paths);
+		int res = calculatePath(tb, xs, ys, 0, null, paths);
 		if (paths.size() > 0) {
 			path.addPath(paths.get(0).first);
 		}
 		return res;
 	}
 
-	public static int calculatePath(RotatedTileBox tb, List<Float> xs, List<Float> ys, List<GeometryWayStyle<?>> styles, List<Pair<Path, GeometryWayStyle<?>>> paths) {
+	public static int calculatePath(RotatedTileBox tb, List<Float> xs, List<Float> ys, float outMargin, List<GeometryWayStyle<?>> styles, List<Pair<Path, GeometryWayStyle<?>>> paths) {
 		boolean segmentStarted = false;
 		float prevX = xs.get(0);
 		float prevY = ys.get(0);
@@ -280,11 +284,11 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 		boolean hasStyles = styles != null && styles.size() == xs.size();
 		GeometryWayStyle<?> style = hasStyles ? styles.get(0) : null;
 		Path path = new Path();
-		boolean prevIn = isIn(prevX, prevY, 0, 0, width, height);
+		boolean prevIn = isIn(prevX, prevY, 0, 0, width, height, outMargin);
 		for (int i = 1; i < xs.size(); i++) {
 			float currX = xs.get(i);
 			float currY = ys.get(i);
-			boolean currIn = isIn(currX, currY, 0, 0, width, height);
+			boolean currIn = isIn(currX, currY, 0, 0, width, height, outMargin);
 			boolean draw = false;
 			if (prevIn && currIn) {
 				draw = true;
@@ -356,7 +360,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 			if (hasPathLine) {
 				List<Pair<Path, GeometryWayStyle<?>>> paths = new ArrayList<>();
 				canvas.rotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
-				calculatePath(tb, tx, ty, styles, paths);
+				calculatePath(tb, tx, ty, 0, styles, paths);
 				for (Pair<Path, GeometryWayStyle<?>> pc : paths) {
 					GeometryWayStyle<?> style = pc.second;
 					if (style.hasPathLine()) {

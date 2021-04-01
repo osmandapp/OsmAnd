@@ -82,7 +82,8 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		multiProfileLineAttrs.isPaint3 = false;
 		multiProfileLineAttrs.paint3.setStrokeWidth(density * 2);
 
-		multiProfileGeometryWayContext = new MultiProfileGeometryWayContext(view.getContext(), density);
+		multiProfileGeometryWayContext = new MultiProfileGeometryWayContext(
+				view.getContext(), view.getApplication().getUIUtilities(),  density);
 		multiProfileGeometry = new MultiProfileGeometryWay(multiProfileGeometryWayContext);
 
 		bitmapPaint = new Paint();
@@ -227,6 +228,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 					multiProfileGeometry.drawSegments(canvas, tb);
 				}
 			} else {
+				multiProfileGeometry.clearWay();
 				List<TrkSegment> before = editingCtx.getBeforeTrkSegmentLine();
 				for (TrkSegment segment : before) {
 					new Renderable.StandardTrack(new ArrayList<>(segment.points), 17.2).

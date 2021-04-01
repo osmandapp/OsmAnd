@@ -6,25 +6,36 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
+import net.osmand.AndroidUtils;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.views.OsmandMapLayer.RenderingLineAttributes;
 import net.osmand.util.Algorithms;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 
 public class MultiProfileGeometryWayContext extends GeometryWayContext {
 
+	private final UiUtilities iconsCache;
+
+	public final float minIconMargin;
+	public final float circleSize;
+
 	private RenderingLineAttributes multiProfileAttrs;
 
 	private Bitmap pointIcon;
-
 	private final Map<String, Bitmap> profileIconsBitmapCache;
 
-	public MultiProfileGeometryWayContext(Context ctx, float density) {
+	public MultiProfileGeometryWayContext(Context ctx, UiUtilities iconsCache, float density) {
 		super(ctx, density);
+		this.iconsCache = iconsCache;
 		profileIconsBitmapCache = new HashMap<>();
+		minIconMargin = density * 30;
+		circleSize = density * 70;
 	}
 
 	public void updatePaints(boolean nightMode, @NonNull RenderingLineAttributes multiProfileAttrs) {
@@ -62,18 +73,24 @@ public class MultiProfileGeometryWayContext extends GeometryWayContext {
 	}
 
 	@NonNull
-	public Bitmap getProfileIconBitmap(@NonNull String profileKey, int profileColor) {
-		String key = profileKey + "_" + profileColor;
+	public Bitmap getProfileIconBitmap(String profileKey, @DrawableRes int iconRes, @ColorInt int color) {
+		String key = profileKey + "_" + iconRes + "_" + color;
 		Bitmap bitmap = profileIconsBitmapCache.get(key);
 		if (bitmap == null) {
-			float density = getDensity();
-			float diameter = density * 18;
-			bitmap = Bitmap.createBitmap((int) diameter, (int) diameter, Bitmap.Config.ARGB_8888);
-
+			bitmap = Bitmap.createBitmap((int) circleSize, (int) circleSize, Bitmap.Config.ARGB_8888);
 			Canvas canvas = new Canvas(bitmap);
-			canvas.drawCircle(diameter / 2, diameter / 2, diameter / 2, multiProfileAttrs.paint_1);
-			multiProfileAttrs.paint3.setColor(profileColor);
-			canvas.drawCircle(diameter / 2, diameter / 2, diameter / 2, multiProfileAttrs.paint3);
+			float center = bitmap.getWidth() / 2f;
+
+			canvas.drawCircle(center, center, center / 2, multiProfileAttrs.paint_1);
+			multiProfileAttrs.paint3.setColor(color);
+			canvas.drawCircle(center, center, center / 2, multiProfileAttrs.paint3);
+
+			float iconSize = center - getDensity() * 10;
+			Bitmap profileIconBitmap = AndroidUtils.createScaledBitmap(
+					iconsCache.getPaintedIcon(iconRes, color), (int) iconSize, (int) iconSize);
+			canvas.drawBitmap(profileIconBitmap, center - iconSize / 2, center - iconSize / 2, multiProfileAttrs.paint3);
+
+			profileIconsBitmapCache.put(key, bitmap);
 		}
 		return bitmap;
 	}
