@@ -4056,4 +4056,22 @@
 \n • 更新「旅程錄製」對話框
 \n
 \n</string>
+    <string name="no_purchases">您沒有任何購買</string>
+    <string name="new_device_account">新裝置／新帳號</string>
+    <string name="contact_support_description">如果您有任何問題，請於 %1$s 聯絡我們。</string>
+    <string name="empty_purchases_description">如果您的購買未在此顯示，請點擊「%1$s」，或聯絡我們的支援團隊。</string>
+    <string name="contact_support">聯絡支援</string>
+    <string name="troubleshooting">故障排除</string>
+    <string name="troubleshooting_description">如果您有任何購買問題，請點擊此連結。</string>
+    <string name="osmand_live">OsmAnd Live</string>
+    <string name="annual_subscription">年度訂閱</string>
+    <string name="monthly_subscription">每月訂閱</string>
+    <string name="three_months_subscription">訂閱三個月</string>
+    <string name="next_billing_date">下一個結算日：%1$s</string>
+    <string name="osmand_live_cancelled">已取消</string>
+    <string name="renew_subscription">續訂</string>
+    <string name="in_grace_period">在寬限期內</string>
+    <string name="on_hold">保留</string>
+    <string name="expired">過期</string>
+    <string name="update_all_maps_added">更新所有新增至 %1$s 的地圖？</string>
 </resources>

@@ -209,7 +209,7 @@
     <string name="poi_food_court">Markthalle</string>
     <string name="poi_ford">Furt</string>
     <string name="poi_fort">Festung</string>
-    <string name="poi_fountain">Zierbrunnen</string>
+    <string name="poi_fountain">Springbrunnen</string>
     <string name="poi_frame">Bilderrahmengeschäft</string>
     <string name="poi_fuel">Tankstelle;Tankanlage;Tankstation</string>
     <string name="poi_funeral_directors">Bestatter</string>
@@ -3894,4 +3894,5 @@
     <string name="poi_local_ref">Lokale Referenz</string>
     <string name="poi_geodesist">Geodät</string>
     <string name="poi_conference_centre">Konferenzzentrum</string>
+    <string name="poi_camp_pitch">Lagerplatz</string>
 </resources>

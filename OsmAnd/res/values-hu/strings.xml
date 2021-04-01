@@ -4056,4 +4056,22 @@
     <string name="shared_string_route_line">Útvonal</string>
     <string name="customize_route_line">Útvonal testreszabása</string>
     <string name="specify_color_for_map_mode">Szín meghatározása a következő térképmódhoz: %1$s.</string>
+    <string name="no_purchases">Ön nem vásárolt semmit</string>
+    <string name="new_device_account">Új készülék / új fiók</string>
+    <string name="contact_support_description">Ha kérdése van, lépjen kapcsolatba velünk: %1$s.</string>
+    <string name="empty_purchases_description">Ha a vásárlásai nem jelennek meg itt, lépjen kapcsolatba az ügyfélszolgálatunkkal, vagy koppintson ide: „%1$s”.</string>
+    <string name="contact_support">Kapcsolatfelvétel az ügyfélszolgálattal</string>
+    <string name="troubleshooting">Hibaelhárítás</string>
+    <string name="troubleshooting_description">Ha problémája akadt a vásrlással, kattintson erre a linkre.</string>
+    <string name="osmand_live">OsmAnd Live</string>
+    <string name="annual_subscription">Éves előfizetés</string>
+    <string name="monthly_subscription">Havi előfizetés</string>
+    <string name="three_months_subscription">Három hónapos előfizetés</string>
+    <string name="next_billing_date">Következő számla dátuma: %1$s</string>
+    <string name="osmand_live_cancelled">Törölve</string>
+    <string name="renew_subscription">Előfizetés megújítása</string>
+    <string name="in_grace_period">Türelmi időszakban</string>
+    <string name="on_hold">Várakoztatva</string>
+    <string name="expired">Lejárt</string>
+    <string name="update_all_maps_added">Frissüljön minden térkép, amely hozzá lett adva ehhez: %1$s\?</string>
 </resources>
