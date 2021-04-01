@@ -24,6 +24,7 @@ public class MultiProfileGeometryWayContext extends GeometryWayContext {
 
 	public final float minIconMargin;
 	public final float circleSize;
+	public final float pointIconSize;
 
 	private RenderingLineAttributes multiProfileAttrs;
 
@@ -36,6 +37,7 @@ public class MultiProfileGeometryWayContext extends GeometryWayContext {
 		profileIconsBitmapCache = new HashMap<>();
 		minIconMargin = density * 30;
 		circleSize = density * 70;
+		pointIconSize = density * 22f;
 	}
 
 	public void updatePaints(boolean nightMode, @NonNull RenderingLineAttributes multiProfileAttrs) {
@@ -46,13 +48,12 @@ public class MultiProfileGeometryWayContext extends GeometryWayContext {
 	@Override
 	protected void recreateBitmaps() {
 		float density = getDensity();
-		float size = density * 12.5f;
-		float outerRadius = density * 6.25f;
-		float centerRadius = density * 6;
-		float innerRadius = density * 4;
-		float centerXY = size / 2;
+		float outerRadius = density * 11f;
+		float centerRadius = density * 10.5f;
+		float innerRadius = density * 6.5f;
+		float centerXY = pointIconSize / 2;
 
-		pointIcon = Bitmap.createBitmap((int) size, (int) size, Bitmap.Config.ARGB_8888);
+		pointIcon = Bitmap.createBitmap((int) pointIconSize, (int) pointIconSize, Bitmap.Config.ARGB_8888);
 		Canvas canvas = new Canvas(pointIcon);
 		Paint paint = new Paint();
 		paint.setStyle(Paint.Style.FILL);

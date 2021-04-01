@@ -271,10 +271,10 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 			List<WptPt> beforePoints = editingCtx.getBeforePoints();
 			List<WptPt> afterPoints = editingCtx.getAfterPoints();
 			if (beforePoints.size() > 0) {
-				drawPointIcon(canvas, tb, beforePoints.get(beforePoints.size() - 1));
+				drawPointIcon(canvas, tb, beforePoints.get(beforePoints.size() - 1), true);
 			}
 			if (afterPoints.size() > 0) {
-				drawPointIcon(canvas, tb, afterPoints.get(0));
+				drawPointIcon(canvas, tb, afterPoints.get(0), true);
 			}
 
 			if (editingCtx.getSelectedPointPosition() != -1) {
@@ -321,25 +321,13 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		}
 		if (overlapped) {
 			WptPt pt = points.get(0);
-			if (pt != lastBeforePoint && pt != firstAfterPoint && isInTileBox(tb, pt)) {
-				float locX = tb.getPixXFromLatLon(pt.lat, pt.lon);
-				float locY = tb.getPixYFromLatLon(pt.lat, pt.lon);
-				canvas.drawBitmap(pointIcon, locX - marginPointIconX, locY - marginPointIconY, bitmapPaint);
-			}
+			drawPointIcon(canvas, tb, pt, false);
 			pt = points.get(points.size() - 1);
-			if (pt != lastBeforePoint && pt != firstAfterPoint && isInTileBox(tb, pt)) {
-				float locX = tb.getPixXFromLatLon(pt.lat, pt.lon);
-				float locY = tb.getPixYFromLatLon(pt.lat, pt.lon);
-				canvas.drawBitmap(pointIcon, locX - marginPointIconX, locY - marginPointIconY, bitmapPaint);
-			}
+			drawPointIcon(canvas, tb, pt, false);
 		} else {
 			for (int i = 0; i < points.size(); i++) {
 				WptPt pt = points.get(i);
-				if (pt != lastBeforePoint && pt != firstAfterPoint && isInTileBox(tb, pt)) {
-					float locX = tb.getPixXFromLatLon(pt.lat, pt.lon);
-					float locY = tb.getPixYFromLatLon(pt.lat, pt.lon);
-					canvas.drawBitmap(pointIcon, locX - marginPointIconX, locY - marginPointIconY, bitmapPaint);
-				}
+				drawPointIcon(canvas, tb, pt, false);
 			}
 		}
 
@@ -404,14 +392,23 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 	}
 
-	private void drawPointIcon(Canvas canvas, RotatedTileBox tb, WptPt pt) {
-		canvas.rotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
+	private void drawPointIcon(Canvas canvas, RotatedTileBox tb, WptPt pt, boolean rotate) {
+		if (rotate) {
+			canvas.rotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
+		}
 		float locX = tb.getPixXFromLatLon(pt.lat, pt.lon);
 		float locY = tb.getPixYFromLatLon(pt.lat, pt.lon);
-		if (tb.containsPoint(locX, locY, 0)) {
-			canvas.drawBitmap(pointIcon, locX - marginPointIconX, locY - marginPointIconY, bitmapPaint);
+		if (editingCtx.isInMultiProfileMode()) {
+			canvas.drawBitmap(multiProfileGeometryWayContext.getPointIcon(), locX - multiProfileGeometryWayContext.pointIconSize / 2,
+					locY - multiProfileGeometryWayContext.pointIconSize / 2, bitmapPaint);
+		} else {
+			if (tb.containsPoint(locX, locY, 0)) {
+				canvas.drawBitmap(pointIcon, locX - marginPointIconX, locY - marginPointIconY, bitmapPaint);
+			}
 		}
-		canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
+		if (rotate) {
+			canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
+		}
 	}
 
 	public WptPt addCenterPoint(boolean addPointBefore) {
