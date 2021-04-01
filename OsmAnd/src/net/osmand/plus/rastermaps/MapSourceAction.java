@@ -91,7 +91,7 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 			OsmandSettings settings = activity.getMyApplication().getSettings();
 			List<Pair<String, String>> sources = loadListFromParams();
 			if (sources.size() > 0) {
-				boolean showBottomSheetStyles = Boolean.valueOf(getParams().get(KEY_DIALOG));
+				boolean showBottomSheetStyles = Boolean.parseBoolean(getParams().get(KEY_DIALOG));
 				if (showBottomSheetStyles) {
 					showChooseDialog(activity.getSupportFragmentManager());
 					return;
@@ -213,5 +213,16 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 	public boolean fillParams(View root, MapActivity activity) {
 		getParams().put(KEY_DIALOG, Boolean.toString(((SwitchCompat) root.findViewById(R.id.saveButton)).isChecked()));
 		return super.fillParams(root, activity);
+	}
+
+	@Override
+	public String getActionText(OsmandApplication application) {
+		Pair<String, String> currentSource = application.getSettings().MAP_ONLINE_DATA.get()
+				? new Pair<>(application.getSettings().MAP_TILE_SOURCES.get(), application.getSettings().MAP_TILE_SOURCES.get())
+				: new Pair<>(LAYER_OSM_VECTOR, application.getString(R.string.vector_data));
+		final LinkedHashMap<String, String> entriesMap = new LinkedHashMap<>();
+		int mapCount = entriesMap.size() - 1;
+
+		return application.getString(R.string.ltr_or_rtl_combine_via_plus, currentSource, mapCount);
 	}
 }
