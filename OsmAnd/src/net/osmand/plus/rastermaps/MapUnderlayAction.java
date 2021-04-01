@@ -232,6 +232,6 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 		String currentSource = application.getSettings().MAP_UNDERLAY.get() == null ? KEY_NO_UNDERLAY
 				: application.getSettings().MAP_UNDERLAY.get();
 
-		return application.getString(R.string.map_quick_action_pattern, currentSource);
+		return application.getString(R.string.map_quick_action_pattern, getTranslatedItemName(application, currentSource));
 	}
 }

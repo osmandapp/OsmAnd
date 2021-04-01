@@ -230,6 +230,6 @@ public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 		String currentSource = application.getSettings().MAP_OVERLAY.get() == null ? KEY_NO_OVERLAY
 				: application.getSettings().MAP_OVERLAY.get();
 
-		return application.getString(R.string.map_quick_action_pattern, currentSource);
+		return application.getString(R.string.map_quick_action_pattern, getTranslatedItemName(application, currentSource));
 	}
 }
