@@ -219,14 +219,11 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 
 			if (editingCtx.isInMultiProfileMode()) {
 				multiProfileGeometryWayContext.updatePaints(settings.isNightMode(), multiProfileLineAttrs);
-				for (int i = 0; i < editingCtx.getBeforeSegments().size(); i++) {
-					multiProfileGeometry.updateRoute(tb, editingCtx.getRoadSegmentData(), true, editingCtx.getBeforeSegments(), i);
-					multiProfileGeometry.drawSegments(canvas, tb);
-				}
-				for (int i = 0; i < editingCtx.getAfterSegments().size(); i++) {
-					multiProfileGeometry.updateRoute(tb, editingCtx.getRoadSegmentData(), false, editingCtx.getAfterSegments(), i);
-					multiProfileGeometry.drawSegments(canvas, tb);
-				}
+				List<TrkSegment> allSegments = new ArrayList<>();
+				allSegments.addAll(editingCtx.getBeforeSegments());
+				allSegments.addAll(editingCtx.getAfterSegments());
+				multiProfileGeometry.updateRoute(tb, editingCtx.getRoadSegmentData(), allSegments);
+				multiProfileGeometry.drawSegments(canvas, tb);
 			} else {
 				multiProfileGeometry.clearWay();
 				List<TrkSegment> before = editingCtx.getBeforeTrkSegmentLine();

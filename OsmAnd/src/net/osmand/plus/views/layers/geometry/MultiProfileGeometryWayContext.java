@@ -73,8 +73,8 @@ public class MultiProfileGeometryWayContext extends GeometryWayContext {
 	}
 
 	@NonNull
-	public Bitmap getProfileIconBitmap(String profileKey, @DrawableRes int iconRes, @ColorInt int color) {
-		String key = profileKey + "_" + iconRes + "_" + color;
+	public Bitmap getProfileIconBitmap(@DrawableRes int iconRes, @ColorInt int color) {
+		String key = iconRes + "_" + color;
 		Bitmap bitmap = profileIconsBitmapCache.get(key);
 		if (bitmap == null) {
 			bitmap = Bitmap.createBitmap((int) circleSize, (int) circleSize, Bitmap.Config.ARGB_8888);

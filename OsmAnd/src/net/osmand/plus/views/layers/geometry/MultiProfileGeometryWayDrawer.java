@@ -34,9 +34,11 @@ public class MultiProfileGeometryWayDrawer extends GeometryWayDrawer<MultiProfil
 				style = (GeometryMultiProfileWayStyle) styles.get(i);
 				double lat = style.getIconLat();
 				double lon = style.getIconLon();
-				float x = tb.getPixXFromLatLon(lat, lon) - context.circleSize / 2;
-				float y = tb.getPixYFromLatLon(lat, lon) - context.circleSize / 2;
-				canvas.drawBitmap(style.getPointBitmap(), x, y, null);
+				if (!Double.isNaN(lat) && !Double.isNaN(lon)) {
+					float x = tb.getPixXFromLatLon(lat, lon) - context.circleSize / 2;
+					float y = tb.getPixYFromLatLon(lat, lon) - context.circleSize / 2;
+					canvas.drawBitmap(style.getPointBitmap(), x, y, null);
+				}
 			}
 		}
 	}
