@@ -248,10 +248,8 @@ public class MapStyleAction extends SwitchableAction<String> {
 
 	@Override
 	public String getActionText(OsmandApplication application) {
-		List<String> mapStyles = getFilteredStyles();
-		int mapCount = mapStyles.size() - 1;
-		String name = application.getSettings().RENDERER.get();
+		String currentSource = application.getSettings().RENDERER.get();
 
-		return application.getString(R.string.ltr_or_rtl_combine_via_plus, name, mapCount);
+		return application.getString(R.string.map_quick_action_pattern, currentSource);
 	}
 }

@@ -217,12 +217,10 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 
 	@Override
 	public String getActionText(OsmandApplication application) {
-		Pair<String, String> currentSource = application.getSettings().MAP_ONLINE_DATA.get()
-				? new Pair<>(application.getSettings().MAP_TILE_SOURCES.get(), application.getSettings().MAP_TILE_SOURCES.get())
-				: new Pair<>(LAYER_OSM_VECTOR, application.getString(R.string.vector_data));
-		final LinkedHashMap<String, String> entriesMap = new LinkedHashMap<>();
-		int mapCount = entriesMap.size() - 1;
+		String currentSource = application.getSettings().MAP_ONLINE_DATA.get()
+				?  application.getSettings().MAP_TILE_SOURCES.get()
+				:  application.getString(R.string.vector_data);
 
-		return application.getString(R.string.ltr_or_rtl_combine_via_plus, currentSource, mapCount);
+		return application.getString(R.string.map_quick_action_pattern, currentSource);
 	}
 }

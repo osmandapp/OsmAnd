@@ -229,10 +229,9 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 
 	@Override
 	public String getActionText(OsmandApplication application) {
-		List<Pair<String, String>> sources = loadListFromParams();
-		int mapCount = sources.size() - 1;
-		String name = application.getSettings().MAP_UNDERLAY.get();
+		String currentSource = application.getSettings().MAP_UNDERLAY.get() == null ? KEY_NO_UNDERLAY
+				: application.getSettings().MAP_UNDERLAY.get();
 
-		return application.getString(R.string.ltr_or_rtl_combine_via_plus, name, mapCount);
+		return application.getString(R.string.map_quick_action_pattern, currentSource);
 	}
 }

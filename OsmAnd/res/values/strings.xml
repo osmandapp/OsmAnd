@@ -12,7 +12,7 @@
 
 -->
 
-    <string name="ltr_or_rtl_combine_via_plus">%1$s + %2$d</string>
+    <string name="map_quick_action_pattern">%1$s → …</string>
     <string name="update_all_maps_added">Update all maps added to %1$s?</string>
     <string name="release_4_0_beta">
     • OsmAnd Live updates moved to \"Downloads > Updates\"\n\n
