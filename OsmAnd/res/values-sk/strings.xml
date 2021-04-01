@@ -4058,4 +4058,22 @@
     <string name="shared_string_route_line">Navigačná trasa</string>
     <string name="route_line_use_map_style_appearance">Navigačná trasa použije %1$s, zadané na zvolenom štýle mapy: %2$s.</string>
     <string name="specify_color_for_map_mode">Zadajte farbu pre režim mapy: %1$s.</string>
+    <string name="no_purchases">Nemáte žiadne nákupy</string>
+    <string name="new_device_account">Nové zariadenie / nový účet</string>
+    <string name="contact_support_description">Ak máte nejaké otázky, kontaktujte nás na %1$s.</string>
+    <string name="empty_purchases_description">Ak sa tu vaše nákupy nezobrazujú, stlačte “%1$s” alebo kontaktujte tím podpory.</string>
+    <string name="contact_support">Kontaktovať podporu</string>
+    <string name="troubleshooting">Riešenie problémov</string>
+    <string name="troubleshooting_description">Prosím nasledujte tento odkaz ak máte problémy s nákupom.</string>
+    <string name="osmand_live">OsmAnd Live</string>
+    <string name="annual_subscription">Ročné predplatné</string>
+    <string name="monthly_subscription">Mesačné predplatné</string>
+    <string name="three_months_subscription">3-mesačné predplatné</string>
+    <string name="next_billing_date">Nasledujúci dátum platby: %1$s</string>
+    <string name="osmand_live_cancelled">Zrušené</string>
+    <string name="renew_subscription">Obnoviť predplatné</string>
+    <string name="in_grace_period">V období tolerancie</string>
+    <string name="on_hold">Pozdržané</string>
+    <string name="expired">Expirované</string>
+    <string name="update_all_maps_added">Aktualizovať všetky mapy pridané do %1$s\?</string>
 </resources>
