@@ -272,7 +272,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	}
 
 	private void adjustGlobalVisibility() {
-		emptyState.setVisibility(View.VISIBLE);
+		emptyState.setVisibility(terrainEnabled ? View.GONE : View.VISIBLE);
 		titleBottomDivider.setVisibility(terrainEnabled ? View.GONE : View.VISIBLE);
 		contentContainer.setVisibility(terrainEnabled ? View.VISIBLE : View.GONE);
 	}
