@@ -29,7 +29,7 @@
     <string name="monthly_subscription">Monthly subscription</string>
     <string name="annual_subscription">Annual subscription</string>
     <string name="osmand_live">OsmAnd Live</string>
-    <string name="troubleshooting_description">Please follow this link if you any issues with purchases.</string>
+    <string name="troubleshooting_description">Please follow this link if you have any issues with purchases.</string>
     <string name="troubleshooting">Troubleshooting</string>
     <string name="contact_support">Contact support</string>
     <string name="empty_purchases_description">If your purchases don\'t show up here, tap on “%1$s”, or contact our support team.</string>
