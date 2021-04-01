@@ -92,6 +92,8 @@ public class MapActivityKeyListener implements KeyEvent.Callback {
 			return true;
 		} else if (keyCode == KeyEvent.KEYCODE_C) {
 			mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
+		} else if (keyCode == KeyEvent.KEYCODE_D) {
+			mapActivity.getMapViewTrackingUtilities().switchRotateMapMode();
 		} else if (settings.EXTERNAL_INPUT_DEVICE.get() == PARROT_EXTERNAL_DEVICE) {
 			// Parrot device has only dpad left and right
 			if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
