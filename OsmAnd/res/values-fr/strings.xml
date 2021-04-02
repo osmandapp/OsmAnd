@@ -4053,4 +4053,22 @@
     <string name="customize_route_line">Personnaliser la ligne d\'itinéraire</string>
     <string name="shared_string_route_line">Ligne d\'itinéraire</string>
     <string name="specify_color_for_map_mode">Définissez une couleur pour le mode de carte : %1$s.</string>
+    <string name="contact_support_description">Si vous avez des questions, veuillez nous contacter sur %1$s.</string>
+    <string name="empty_purchases_description">Si vos achats n\'apparaissent pas ici, appuyez sur \"%1$s\" ou contactez notre équipe d\'assistance.</string>
+    <string name="troubleshooting">Résolution de problèmes</string>
+    <string name="troubleshooting_description">Veuillez suivre ce lien si vous rencontrez des problèmes avec vos achats.</string>
+    <string name="in_grace_period">En période de grâce</string>
+    <string name="update_all_maps_added">Mettre à jour toutes les cartes ajoutées à %1$s \?</string>
+    <string name="no_purchases">Vous n\'avez fait aucun achat</string>
+    <string name="new_device_account">Nouvel appareil / nouveau compte</string>
+    <string name="contact_support">Contacter le support</string>
+    <string name="osmand_live">OsmAnd Live</string>
+    <string name="annual_subscription">Abonnement annuel</string>
+    <string name="monthly_subscription">Abonnement mensuel</string>
+    <string name="three_months_subscription">Abonnement pour 3 mois</string>
+    <string name="next_billing_date">Prochaine facture le : %1$s</string>
+    <string name="osmand_live_cancelled">Annulé</string>
+    <string name="renew_subscription">Renouveler l’abonnement</string>
+    <string name="on_hold">En attente</string>
+    <string name="expired">Expiré</string>
 </resources>

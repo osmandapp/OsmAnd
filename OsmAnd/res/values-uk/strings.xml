@@ -4062,4 +4062,22 @@
 \n• Оновлено діалогове вікно «Запис поїздки»
 \n
 \n</string>
+    <string name="no_purchases">У вас немає покупок</string>
+    <string name="new_device_account">Новий пристрій / новий обліковий запис</string>
+    <string name="contact_support_description">Якщо маєте будь-які питання, зв\'яжіться з нами за адресою %1$s.</string>
+    <string name="empty_purchases_description">Якщо ваші покупки не з\'явилися тут, натисніть «%1$s», або зв\'яжіться з нашою службою підтримки.</string>
+    <string name="contact_support">Звернутися до служби підтримки</string>
+    <string name="troubleshooting">Розв\'язання проблем</string>
+    <string name="troubleshooting_description">Перейдіть за цим посиланням, якщо у вас виникли проблеми з покупками.</string>
+    <string name="osmand_live">OsmAnd Live</string>
+    <string name="annual_subscription">Річна передплата</string>
+    <string name="monthly_subscription">Щомісячна передплата</string>
+    <string name="three_months_subscription">Тримісячна передплата</string>
+    <string name="next_billing_date">Наступна дата оплати: %1$s</string>
+    <string name="osmand_live_cancelled">Скасовано</string>
+    <string name="renew_subscription">Поновити передплату</string>
+    <string name="in_grace_period">У пільговий період</string>
+    <string name="on_hold">Утримується</string>
+    <string name="expired">Термін дії закінчився</string>
+    <string name="update_all_maps_added">Оновити всі мапи, додані до %1$s\?</string>
 </resources>

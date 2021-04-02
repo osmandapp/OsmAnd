@@ -2971,7 +2971,7 @@
 \n• عرض السمت في قياس المسافة
 \n
 \n</string-->
-    <string name="day">يوم</string>
+    <string name="day">نهار</string>
     <string name="days_2_4">أيام</string>
     <string name="days_5">أيام</string>
     <string name="week">أسبوع</string>
@@ -4132,4 +4132,22 @@
 \n • تحديث مربع حوار \"تسجيل الرحلة\"
 \n
 \n</string>
+    <string name="osmand_live">OsmAnd لايف</string>
+    <string name="next_billing_date">تاريخ الفاتورة التالية: %1$s</string>
+    <string name="in_grace_period">في فترة السماح</string>
+    <string name="no_purchases">ليس لديك أي مشتريات</string>
+    <string name="new_device_account">جهاز جديد / حساب جديد</string>
+    <string name="contact_support_description">إذا كان لديك أي أسئلة ، يرجى الاتصال بنا على %1$s.</string>
+    <string name="empty_purchases_description">إذا لم تظهر مشترياتك هنا ، فانقر على \"%1$s\" ، أو اتصل بفريق الدعم الخاص بنا.</string>
+    <string name="contact_support">الاتصال بالدعم</string>
+    <string name="troubleshooting">استكشاف الاخطاء</string>
+    <string name="troubleshooting_description">يرجى اتباع هذا الرابط إذا كان لديك أي مشاكل مع المشتريات.</string>
+    <string name="annual_subscription">اشتراك سنوي</string>
+    <string name="monthly_subscription">اشتراك شهري</string>
+    <string name="three_months_subscription">اشتراك ثلاثة اشهر</string>
+    <string name="osmand_live_cancelled">ملغاة</string>
+    <string name="renew_subscription">جدد الاشتراك</string>
+    <string name="on_hold">في الانتظار</string>
+    <string name="expired">منتهي الصلاحية</string>
+    <string name="update_all_maps_added">تحديث كافة الخرائط المضافة إلى %1$s؟</string>
 </resources>

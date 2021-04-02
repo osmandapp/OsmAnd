@@ -4065,4 +4065,22 @@
 \n • Se actualiza el cuadro de diálogo «Grabación de viaje»
 \n
 \n</string>
+    <string name="no_purchases">No tienes compras</string>
+    <string name="new_device_account">Nuevo dispositivo / nueva cuenta</string>
+    <string name="contact_support_description">Si tienes alguna duda, ponte en contacto con nosotros en %1$s.</string>
+    <string name="empty_purchases_description">Si tus compras no aparecen aquí, pulsa sobre «%1$s», o ponte en contacto con nuestro equipo de asistencia.</string>
+    <string name="contact_support">Soporte de contacto</string>
+    <string name="troubleshooting">Solución de problemas</string>
+    <string name="troubleshooting_description">Sigue este enlace si tienes algún problema con las compras.</string>
+    <string name="osmand_live">OsmAnd Live</string>
+    <string name="annual_subscription">Suscripción anual</string>
+    <string name="monthly_subscription">Suscripción mensual</string>
+    <string name="three_months_subscription">Suscripción trimestral</string>
+    <string name="next_billing_date">Próxima fecha de facturación: %1$s</string>
+    <string name="osmand_live_cancelled">Cancelado</string>
+    <string name="renew_subscription">Renovar suscripción</string>
+    <string name="in_grace_period">En período de gracia</string>
+    <string name="on_hold">En espera</string>
+    <string name="expired">Expirado</string>
+    <string name="update_all_maps_added">¿Actualizar todos los mapas añadidos a %1$s\?</string>
 </resources>

@@ -4051,4 +4051,18 @@
     <string name="show_start_dialog">Показывать начальный диалог</string>
     <string name="trip_recording_show_start_dialog_setting">Если выключено, запись начнётся сразу после нажатия на виджет или пункт меню, пропуская диалоговое окно подтверждения.</string>
     <string name="trip_recording_logging_interval_info">Интервал записи трека указывает период времени, через который OsmAnd будет запрашивать данные о текущем местоположении.</string>
+    <string name="three_months_subscription">Подписка на три месяца</string>
+    <string name="monthly_subscription">Подписка на месяц</string>
+    <string name="next_billing_date">Следующая дата оплаты: %1$s</string>
+    <string name="osmand_live">OsmAnd Live</string>
+    <string name="annual_subscription">Годовая подписка</string>
+    <string name="release_4_0_beta">• Обновления OsmAnd Live перемещены в «Загрузка карт» → «Обновления».
+\n
+\n• Теперь треки можно раскрашивать по высоте, скорости или уклону.
+\n
+\n• Добавлена возможность изменить внешний вид линии маршрута.
+\n
+\n• Обновлен диалог «Запись поездки».
+\n
+\n</string>
 </resources>

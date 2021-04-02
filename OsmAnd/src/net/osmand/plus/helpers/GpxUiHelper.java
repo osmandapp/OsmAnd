@@ -611,7 +611,7 @@ public class GpxUiHelper {
 						}
 					}
 					dialog.dismiss();
-					updateSelectedTracksAppearance(app, fileNames);
+					updateSelectedTracksAppearance(app, fileNames, gpxAppearanceParams);
 					loadGPXFileInDifferentThread(activity, callbackWithObject, dir, currentGPX,
 							fileNames.toArray(new String[0]));
 				}
@@ -718,13 +718,7 @@ public class GpxUiHelper {
 		return dlg;
 	}
 
-	private static void updateSelectedTracksAppearance(OsmandApplication app, List<String> fileNames) {
-		final GpxDbHelper gpxDbHelper = app.getGpxDbHelper();
-		final boolean showStartFinish = app.getSettings().SHOW_START_FINISH_ICONS.get();
-		final String savedWidth = app.getSettings().getCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR).get();
-		String savedColor = app.getSettings().getCustomRenderProperty(CURRENT_TRACK_COLOR_ATTR).get();
-		final int color = GpxAppearanceAdapter.parseTrackColor(app.getRendererRegistry().getCurrentSelectedRenderer(), savedColor);
-
+	private static void updateSelectedTracksAppearance(final OsmandApplication app, List<String> fileNames, final Map<String, String> params) {
 		GpxDataItemCallback callback = new GpxDataItemCallback() {
 			@Override
 			public boolean isCancelled() {
@@ -733,21 +727,34 @@ public class GpxUiHelper {
 
 			@Override
 			public void onGpxDataItemReady(GpxDataItem item) {
-				updateTrackAppearance(gpxDbHelper, item, savedWidth, color, showStartFinish);
+				updateTrackAppearance(app, item, params);
 			}
 		};
+		GpxDbHelper gpxDbHelper = app.getGpxDbHelper();
 		for (String name : fileNames) {
 			GpxDataItem item = gpxDbHelper.getItem(new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR), name), callback);
 			if (item != null) {
-				updateTrackAppearance(gpxDbHelper, item, savedWidth, color, showStartFinish);
+				updateTrackAppearance(app, item, params);
 			}
 		}
 	}
 
-	private static void updateTrackAppearance(GpxDbHelper gpxDbHelper, GpxDataItem item, String width, int color, boolean showStartFinish) {
-		gpxDbHelper.updateColor(item, color);
-		gpxDbHelper.updateWidth(item, width);
-		gpxDbHelper.updateShowStartFinish(item, showStartFinish);
+	private static void updateTrackAppearance(OsmandApplication app, GpxDataItem item, Map<String, String> params) {
+		OsmandSettings settings = app.getSettings();
+		GpxDbHelper gpxDbHelper = app.getGpxDbHelper();
+		if (params.containsKey(CURRENT_TRACK_COLOR_ATTR)) {
+			String savedColor = settings.getCustomRenderProperty(CURRENT_TRACK_COLOR_ATTR).get();
+			int color = GpxAppearanceAdapter.parseTrackColor(app.getRendererRegistry().getCurrentSelectedRenderer(), savedColor);
+			gpxDbHelper.updateColor(item, color);
+		}
+		if (params.containsKey(CURRENT_TRACK_WIDTH_ATTR)) {
+			String width = settings.getCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR).get();
+			gpxDbHelper.updateWidth(item, width);
+		}
+		if (params.containsKey(SHOW_START_FINISH_ATTR)) {
+			boolean showStartFinish = settings.SHOW_START_FINISH_ICONS.get();
+			gpxDbHelper.updateShowStartFinish(item, showStartFinish);
+		}
 	}
 
 	public static void updateGpxInfoView(final @NonNull OsmandApplication app,

@@ -31,9 +31,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
-import net.osmand.plus.routing.RouteProvider;
+import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.BooleanPreference;
@@ -357,15 +356,14 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 	}
 
 	private void setupReverseDirectionRecalculation(PreferenceScreen screen) {
-		SwitchPreferenceEx recalcRouteReverseDirectionPreference =
-				createSwitchPreferenceEx(settings.DISABLE_WRONG_DIRECTION_RECALC.getId(),
-						R.string.in_case_of_reverse_direction,
-						R.layout.preference_with_descr_dialog_and_switch);
-		recalcRouteReverseDirectionPreference.setIcon(
-				getRoutingPrefIcon(settings.DISABLE_WRONG_DIRECTION_RECALC.getId()));
-		recalcRouteReverseDirectionPreference.setSummaryOn(R.string.shared_string_enabled);
-		recalcRouteReverseDirectionPreference.setSummaryOff(R.string.shared_string_disabled);
-		screen.addPreference(recalcRouteReverseDirectionPreference);
+		OsmandPreference<Boolean> preference = settings.DISABLE_WRONG_DIRECTION_RECALC;
+		SwitchPreferenceEx switchPreference = createSwitchPreferenceEx(preference.getId(),
+				R.string.in_case_of_reverse_direction,
+				R.layout.preference_with_descr_dialog_and_switch);
+		switchPreference.setIcon(getRoutingPrefIcon(preference.getId()));
+		switchPreference.setSummaryOn(R.string.shared_string_enabled);
+		switchPreference.setSummaryOff(R.string.shared_string_disabled);
+		screen.addPreference(switchPreference);
 	}
 
 	private void setupRouteRecalcHeader(PreferenceScreen screen) {
@@ -546,7 +544,9 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
-		if (settings.DISABLE_COMPLEX_ROUTING.getId().equals(preference.getKey()) && newValue instanceof Boolean) {
+		if ((settings.DISABLE_COMPLEX_ROUTING.getId().equals(preference.getKey()) ||
+				settings.DISABLE_WRONG_DIRECTION_RECALC.getId().equals(preference.getKey())) &&
+				newValue instanceof Boolean) {
 			return onConfirmPreferenceChange(preference.getKey(), !(Boolean) newValue, getApplyQueryType()); // pref ui was inverted
 		}
 		return onConfirmPreferenceChange(preference.getKey(), newValue, getApplyQueryType());
@@ -573,8 +573,6 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 			applyPreference(ROUTING_RECALC_DISTANCE, applyToAllProfiles, valueToSave);
 			applyPreference(settings.DISABLE_OFFROUTE_RECALC.getId(), applyToAllProfiles, !enabled);
 			updateRouteRecalcDistancePref();
-		} else if (settings.DISABLE_WRONG_DIRECTION_RECALC.getId().equals(prefId)) {
-			applyPreference(settings.DISABLE_WRONG_DIRECTION_RECALC.getId(), applyToAllProfiles, newValue);
 		} else {
 			super.onApplyPreferenceChange(prefId, applyToAllProfiles, newValue);
 		}

@@ -4038,7 +4038,7 @@
 \nبرای مدیریت یا لغو اشتراک خود، به تنظیمات AppGallery بروید.</string>
     <string name="subscription_expired_title">اشتراک OsmAnd Live لغو شده است (expired)</string>
     <string name="subscription_paused_title">اشتراک OsmAnd Live موقتاً متوقف شده است (paused)</string>
-    <string name="subscription_on_hold_title">اشتراک OsmAnd Live در انتظار است (on hold)</string>
+    <string name="subscription_on_hold_title">اشتراک OsmAnd Live در وضعیت تعلیق است (on hold)</string>
     <string name="app_mode_kayak">کایاک</string>
     <string name="shared_string_server_url">Server URL</string>
     <string name="keep_it_empty_if_not">اگر نیاز ندارد خالی بگذارید</string>
@@ -4087,4 +4087,22 @@
 \n• کادر «ضبط سفر» روزآمد شد.
 \n
 \n</string>
+    <string name="on_hold">در تعلیق</string>
+    <string name="no_purchases">شما هیچ خریدی نکرده‌اید</string>
+    <string name="new_device_account">دستگاه جدید / حساب جدید</string>
+    <string name="contact_support_description">اگر هر گونه پرسشی دارید، لطفاً از طریق %1$s با ما تماس بگیرید.</string>
+    <string name="empty_purchases_description">اگر خریدهای شما اینجا نمایش داده نمی‌شود، روی «%1$s» بزنید یا با تیم پشتیبانی ما تماس بگیرید.</string>
+    <string name="contact_support">تماس با پشتیبانی</string>
+    <string name="troubleshooting">عیب‌یابی</string>
+    <string name="troubleshooting_description">اگر با مسئله‌ای در خرید مواجه شدید این پیوند را دنبال کنید.</string>
+    <string name="osmand_live">OsmAnd Live</string>
+    <string name="annual_subscription">اشتراک سالانه</string>
+    <string name="monthly_subscription">اشتراک ماهانه</string>
+    <string name="three_months_subscription">اشتراک سه‌ماهه</string>
+    <string name="next_billing_date">تاریخ صورت‌حساب بعدی: %1$s</string>
+    <string name="osmand_live_cancelled">لغو شده</string>
+    <string name="renew_subscription">تمدید اشتراک</string>
+    <string name="in_grace_period">در مهلت اضافه</string>
+    <string name="expired">منقضی شده</string>
+    <string name="update_all_maps_added">همهٔ نقشه‌های اضافه‌شده به %1$s روزآمد شود؟</string>
 </resources>
