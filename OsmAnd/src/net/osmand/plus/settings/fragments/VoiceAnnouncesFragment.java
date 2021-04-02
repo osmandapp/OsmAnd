@@ -8,19 +8,15 @@ import android.media.AudioManager;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 import androidx.preference.SwitchPreferenceCompat;
-
-import com.google.android.material.appbar.AppBarLayout;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
@@ -53,31 +49,9 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 
 	@Override
 	protected void createToolbar(LayoutInflater inflater, View view) {
-		AppBarLayout appbar = view.findViewById(R.id.appbar);
-		View toolbar = UiUtilities.getInflater(getContext(), isNightMode()).inflate(R.layout.profile_preference_toolbar_with_switch, appbar, false);
+		super.createToolbar(inflater, view);
 
-		View iconToolbarContainer = toolbar.findViewById(R.id.toolbar_icon);
-		ImageView icon = iconToolbarContainer.findViewById(R.id.profile_icon);
-		icon.setImageResource(R.drawable.ic_action_help_online);
-		icon.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (getContext() != null) {
-					WikipediaDialogFragment.showFullArticle(getContext(), Uri.parse(OSMAND_VOICE_NAVIGATION_URL), true);
-				}
-			}
-		});
-		ImageButton backButton = toolbar.findViewById(R.id.close_button);
-		backButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				FragmentActivity fragmentActivity = getActivity();
-				if (fragmentActivity != null) {
-					fragmentActivity.onBackPressed();
-				}
-			}
-		});
-		toolbar.findViewById(R.id.toolbar_switch_container).setOnClickListener(new View.OnClickListener() {
+		view.findViewById(R.id.toolbar_switch_container).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				ApplicationMode selectedMode = getSelectedAppMode();
@@ -89,14 +63,25 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 				updateMenu();
 			}
 		});
-		TextView toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
-		toolbarTitle.setText(getString(R.string.voice_announces));
-		appbar.addView(toolbar);
 	}
 
 	@Override
 	protected void updateToolbar() {
 		super.updateToolbar();
+		View view = getView();
+		final boolean nightMode = !settings.isLightContentForMode(getSelectedAppMode());
+		int iconColor = getResources().getColor(nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light);
+		ImageView profileIcon = (ImageView) view.findViewById(R.id.profile_icon);
+		profileIcon.setImageResource(R.drawable.ic_action_help_online);
+		profileIcon.setColorFilter(iconColor);
+		profileIcon.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (getContext() != null) {
+					WikipediaDialogFragment.showFullArticle(getContext(), Uri.parse(OSMAND_VOICE_NAVIGATION_URL), nightMode);
+				}
+			}
+		});
 		updateToolbarSwitch();
 	}
 
