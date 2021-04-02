@@ -684,11 +684,16 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		List<TrkSegment> segments = selectedGpxFile.getPointsToDisplay();
 		GradientScaleType scaleType = getGradientScaleType(gpxFile);
 		List<RouteColorize.RouteColorizationPoint> colorsOfPoints = null;
-		if (scaleType != null) {
-			RouteColorize colorize = new RouteColorize(view.getZoom(), gpxFile, scaleType.toColorizationType());
+		boolean needCalculateColors = scaleType != null && segments.get(0).points.get(0)
+				.getColor(scaleType.toColorizationType()) == 0;
+
+		if (scaleType != null && currentTrack || needCalculateColors) {
+			RouteColorize colorize = new RouteColorize(view.getZoom(), gpxFile,
+					scaleType.toColorizationType(), view.getApplication().getSettings().getApplicationMode().getMaxSpeed());
 			colorize.setPalette(getColorizationPalette(gpxFile, scaleType));
 			colorsOfPoints = colorize.getResult(false);
 		}
+
 		int startIdx = 0;
 		for (TrkSegment ts : segments) {
 			String width = getTrackWidthName(gpxFile, defaultTrackWidthPref.get());

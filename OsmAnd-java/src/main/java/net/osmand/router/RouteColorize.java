@@ -4,6 +4,7 @@ import net.osmand.GPXUtilities;
 import net.osmand.PlatformUtil;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.OsmMapUtils;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -29,6 +30,8 @@ public class RouteColorize {
     public static final int YELLOW = rgbaToDecimal(212, 239, 50, 255);
     public static final int RED = rgbaToDecimal(243, 55, 77, 255);
     public static final int[] colors = new int[] {GREEN, YELLOW, RED};
+
+    private static final int MAX_SLOPE_VALUE = 25;
 
     public enum ColorizationType {
         ELEVATION,
@@ -75,7 +78,7 @@ public class RouteColorize {
     /**
      * @param type ELEVATION, SPEED, SLOPE
      */
-    public RouteColorize(int zoom, GPXUtilities.GPXFile gpxFile, ColorizationType type) {
+    public RouteColorize(int zoom, GPXUtilities.GPXFile gpxFile, ColorizationType type, float maxProfileSpeed) {
 
         if (!gpxFile.hasTrkPt()) {
             LOG.warn("GPX file is not consist of track points");
@@ -85,21 +88,27 @@ public class RouteColorize {
         List<Double> latList = new ArrayList<>();
         List<Double> lonList = new ArrayList<>();
         List<Double> valList = new ArrayList<>();
+
+        GPXUtilities.GPXTrackAnalysis analysis = Algorithms.isEmpty(gpxFile.path) ?
+                gpxFile.getAnalysis(System.currentTimeMillis()) : gpxFile.getAnalysis(gpxFile.modifiedTime);
+        int wptIdx = 0;
         for (GPXUtilities.Track t : gpxFile.tracks) {
             for (GPXUtilities.TrkSegment ts : t.segments) {
                 for (GPXUtilities.WptPt p : ts.points) {
                     latList.add(p.lat);
                     lonList.add(p.lon);
                     if (type == ColorizationType.SPEED) {
-                        valList.add(p.speed);
+                        valList.add((double) analysis.speedData.get(wptIdx).speed);
                     } else {
-                        valList.add(p.ele);
+                        valList.add((double) analysis.elevationData.get(wptIdx).elevation);
                     }
+                    wptIdx++;
                 }
             }
         }
 
         this.zoom = zoom;
+        colorizationType = type;
         latitudes = listToArray(latList);
         longitudes = listToArray(lonList);
 
@@ -108,9 +117,8 @@ public class RouteColorize {
         } else {
             values = listToArray(valList);
         }
-
         calculateMinMaxValue();
-        colorizationType = type;
+        maxValue = getMaxValue(colorizationType, analysis, minValue, maxProfileSpeed);
         checkPalette();
         sortPalette();
     }
@@ -194,7 +202,7 @@ public class RouteColorize {
                 return rgbaToDecimal((int) resultRed, (int) resultGreen, (int) resultBlue, (int) resultAlpha);
             }
         }
-        return getDefaultColor();
+        return getTransparentColor();
     }
 
     public void setPalette(double[][] palette) {
@@ -209,12 +217,12 @@ public class RouteColorize {
         }
         setPalette(new double[][] {
                 {minValue, gradientPalette[0]},
-                {colorizationType == ColorizationType.SLOPE ? 0 : (minValue + maxValue) / 2, gradientPalette[1]},
+                {(minValue + maxValue) / 2, gradientPalette[1]},
                 {maxValue, gradientPalette[2]}
         });
     }
 
-    private int getDefaultColor() {
+    private int getTransparentColor() {
         return rgbaToDecimal(0, 0, 0, 0);
     }
 
@@ -295,7 +303,7 @@ public class RouteColorize {
 
             double[][] defaultPalette = {
                     {minValue, GREEN},
-                    {colorizationType == ColorizationType.SLOPE ? 0 : (minValue + maxValue) / 2, YELLOW},
+                    {(minValue + maxValue) / 2, YELLOW},
                     {maxValue, RED}
             };
             palette = defaultPalette;
@@ -397,6 +405,20 @@ public class RouteColorize {
         return result;
     }
 
+    public static double getMinValue(ColorizationType type, GPXUtilities.GPXTrackAnalysis analysis) {
+        return type == ColorizationType.ELEVATION ? analysis.minElevation : 0.0;
+    }
+
+    public static double getMaxValue(ColorizationType type, GPXUtilities.GPXTrackAnalysis analysis, double minValue, double maxProfileSpeed) {
+        if (type == ColorizationType.SPEED) {
+            return Math.max(analysis.maxSpeed, maxProfileSpeed);
+        } else if (type == ColorizationType.ELEVATION) {
+            return Math.max(analysis.maxElevation, minValue + 50);
+        } else {
+            return MAX_SLOPE_VALUE;
+        }
+    }
+
     private void calculateMinMaxValue() {
         if (values.length == 0)
             return;
@@ -457,5 +479,4 @@ public class RouteColorize {
             this.val = val;
         }
     }
-
 }
