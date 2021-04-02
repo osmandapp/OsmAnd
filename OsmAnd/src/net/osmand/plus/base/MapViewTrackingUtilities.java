@@ -39,6 +39,8 @@ import java.util.Map;
 
 public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLocationListener,
 		OsmAndCompassListener, MapMarkerChangedListener {
+
+	private static final int COMPASS_REQUEST_TIME_INTERVAL_MS = 5000;
 	private static final int AUTO_FOLLOW_MSG_ID = OsmAndConstants.UI_HANDLER_LOCATION_SERVICE + 4;
 
 	private long lastTimeAutoZooming = 0;
@@ -59,6 +61,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	private Float heading;
 	private boolean drivingRegionUpdated = false;
 	private boolean movingToMyLocation = false;
+	private long compassRequest;
 
 	public MapViewTrackingUtilities(OsmandApplication app){
 		this.app = app;
@@ -424,7 +427,22 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		setMapLinkedToLocation(false);
 	}
 
-	public void switchRotateMapMode(){
+	public void switchRotateMapMode() {
+		if (app.getRoutingHelper().isFollowingMode()) {
+			if (compassRequest + COMPASS_REQUEST_TIME_INTERVAL_MS > System.currentTimeMillis()) {
+				compassRequest = 0;
+				switchRotateMapModeImpl();
+			} else {
+				compassRequest = System.currentTimeMillis();
+				app.showShortToastMessage(app.getString(R.string.press_again_to_change_the_map_orientation));
+			}
+		} else {
+			compassRequest = 0;
+			switchRotateMapModeImpl();
+		}
+	}
+
+	private void switchRotateMapModeImpl(){
 		if (mapView != null) {
 			String rotMode = app.getString(R.string.rotate_map_none_opt);
 			if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_NONE && mapView.getRotate() != 0) {

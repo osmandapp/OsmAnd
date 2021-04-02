@@ -284,7 +284,6 @@
 	<string name="poi_ship_chandler">Ship chandler</string>
 	<string name="poi_sports">Sporting goods</string>
 	<string name="poi_stationery">Stationery store</string>
-	<string name="poi_tableware">Tableware store</string>
 	<string name="poi_ticket">Ticket sales</string>
 	<string name="poi_tobacco">Tobacco store</string>
 	<string name="poi_toys">Toyshop</string>
@@ -4378,5 +4377,7 @@
 	<string name="poi_fencing">Fencing</string>
 	<string name="poi_horseshoes">Horseshoes</string>
 	<string name="poi_kickboxing">Kickboxing</string>
+
+	<string name="poi_office_diplomatic">Diplomatic office</string>
 
 </resources>
