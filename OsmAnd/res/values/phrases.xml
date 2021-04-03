@@ -144,6 +144,7 @@
 	<string name="poi_diplomatic_services_non_immigrant_visas_filter">Non-immigrant visas</string>
 	<string name="poi_diplomatic_services_immigrant_visas_filter">Immigrant visas</string>
 	<string name="poi_diplomatic_services_citizen_services_filter">Citizen services</string>
+	<string name="poi_bay_filter">Bay type</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
