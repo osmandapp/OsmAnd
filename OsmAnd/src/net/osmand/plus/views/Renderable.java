@@ -61,6 +61,7 @@ public class Renderable {
 
         public List<WptPt> points = null;                           // Original list of points
         protected List<WptPt> culled = new ArrayList<>();           // Reduced/resampled list of points
+        protected List<WptPt> oldCulled = new ArrayList<>();
         protected int pointSize;
         protected double segmentSize;
 
@@ -116,7 +117,7 @@ public class Renderable {
             updateLocalPaint(p);
             canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
             if (scaleType != null) {
-                drawGradient(getPointsForDrawing(), p, canvas, tileBox);
+                drawGradient(getPointsForDrawingWithBorder(), p, canvas, tileBox);
             } else {
                 drawSolid(getPointsForDrawing(), p, canvas, tileBox);
             }
@@ -126,6 +127,9 @@ public class Renderable {
 
         public void drawSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {
             if (QuadRect.trivialOverlap(tileBox.getLatLonBounds(), trackBounds)) { // is visible?
+                if (tileBox.getZoomAnimation() > 0 && !Algorithms.isEmpty(culled) && scaleType != null) {
+                    oldCulled = new ArrayList<>(culled);
+                }
                 startCuller(zoom);
                 drawSingleSegment(zoom, p, canvas, tileBox);
             }
@@ -137,6 +141,16 @@ public class Renderable {
 
         public List<WptPt> getPointsForDrawing() {
             return culled.isEmpty() ? points : culled;
+        }
+
+        public List<WptPt> getPointsForDrawingWithBorder() {
+            if (!culled.isEmpty()) {
+                return culled;
+            } else if (!oldCulled.isEmpty()) {
+                return oldCulled;
+            } else {
+                return points;
+            }
         }
 
         public void drawGeometry(Canvas canvas, RotatedTileBox tileBox, QuadRect quadRect, int arrowColor, int trackColor, float trackWidth) {
@@ -290,7 +304,8 @@ public class Renderable {
             super(pt, 0);
         }
 
-        @Override public void drawSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {
+        @Override
+        public void drawSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {
             if (points.size() != pointSize) {
                 int prevSize = pointSize;
                 pointSize = points.size();
