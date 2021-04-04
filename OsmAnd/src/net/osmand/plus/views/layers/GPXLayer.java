@@ -680,16 +680,15 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	private void drawSelectedFileSegments(SelectedGpxFile selectedGpxFile, boolean currentTrack, Canvas canvas,
 										  RotatedTileBox tileBox, DrawSettings settings) {
+		OsmandApplication app = view.getApplication();
 		GPXFile gpxFile = selectedGpxFile.getGpxFile();
 		List<TrkSegment> segments = selectedGpxFile.getPointsToDisplay();
 		GradientScaleType scaleType = getGradientScaleType(gpxFile);
 		List<RouteColorize.RouteColorizationPoint> colorsOfPoints = null;
-		boolean needCalculateColors = scaleType != null && segments.get(0).points.get(0)
-				.getColor(scaleType.toColorizationType()) == 0;
 
-		if (scaleType != null && currentTrack || needCalculateColors) {
-			RouteColorize colorize = new RouteColorize(view.getZoom(), gpxFile,
-					scaleType.toColorizationType(), view.getApplication().getSettings().getApplicationMode().getMaxSpeed());
+		if (needCalculatePointsColors(segments, scaleType)) {
+			RouteColorize colorize = new RouteColorize(view.getZoom(), gpxFile, selectedGpxFile.getTrackAnalysis(app),
+					scaleType.toColorizationType(), app.getSettings().getApplicationMode().getMaxSpeed());
 			colorize.setPalette(getColorizationPalette(gpxFile, scaleType));
 			colorsOfPoints = colorize.getResult(false);
 		}
@@ -719,6 +718,25 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				renderableSegment.drawSegment(view.getZoom(), paint, canvas, tileBox);
 			}
 		}
+	}
+
+	private boolean needCalculatePointsColors(List<TrkSegment> segments, GradientScaleType scaleType) {
+		if (scaleType == null) {
+			return false;
+		}
+		RouteColorize.ColorizationType colorizationType = scaleType.toColorizationType();
+		for (int segIdx = segments.size() - 1; segIdx >= 0; segIdx--) {
+			List<WptPt> pts = segments.get(segIdx).points;
+			if (!Algorithms.isEmpty(pts)) {
+				for (int wptIdx = pts.size() - 1; wptIdx >= 0; wptIdx--) {
+					WptPt pt = pts.get(wptIdx);
+					if (pt.getColor(colorizationType) == 0) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 
 	private int setColorsToPoints(TrkSegment segment, List<RouteColorize.RouteColorizationPoint> colors, GradientScaleType scaleType, int startIdx) {
