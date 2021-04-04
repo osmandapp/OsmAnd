@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Path;
 import android.graphics.PathMeasure;
+import android.util.Log;
 import android.util.Pair;
 
 import net.osmand.GPXUtilities.TrkSegment;
@@ -36,7 +37,8 @@ public class MultiProfileGeometryWay extends GeometryWay<MultiProfileGeometryWay
 	private static final String DEFAULT_PROFILE_KEY = ApplicationMode.DEFAULT.getStringKey();
 
 	private Map<Pair<WptPt, WptPt>, RoadSegmentData> segmentData;
-	private List<TrkSegment> segments;
+	private List<TrkSegment> beforeSegments;
+	private List<TrkSegment> afterSegments;
 
 	public MultiProfileGeometryWay(MultiProfileGeometryWayContext context) {
 		super(context, new MultiProfileGeometryWayDrawer(context));
@@ -70,19 +72,25 @@ public class MultiProfileGeometryWay extends GeometryWay<MultiProfileGeometryWay
 		}
 	}
 
-	public void updateRoute(RotatedTileBox tileBox, Map<Pair<WptPt, WptPt>, RoadSegmentData> segmentData, List<TrkSegment> segments) {
+	public void updateRoute(RotatedTileBox tileBox, Map<Pair<WptPt, WptPt>, RoadSegmentData> segmentData,
+							List<TrkSegment> beforeSegments, List<TrkSegment> afterSegments) {
 		boolean shouldUpdateRoute = tileBox.getMapDensity() != getMapDensity() || segmentDataChanged(segmentData)
-				|| this.segments != segments || getLocationProvider() == null;
+				|| this.beforeSegments != beforeSegments || this.afterSegments != afterSegments || getLocationProvider() == null;
 		if (shouldUpdateRoute) {
 			this.segmentData = segmentData;
-			this.segments = segments;
+			this.beforeSegments = beforeSegments;
+			this.afterSegments = afterSegments;
+
 			List<Location> locations;
 			Map<Integer, GeometryWayStyle<?>> styleMap;
-
 			List<Way> ways = new ArrayList<>();
 			List<GeometryWayStyle<?>> styles = new ArrayList<>();
-			setStyles(tileBox, segments, ways, styles);
 			locations = new ArrayList<>();
+
+			List<TrkSegment> allSegments = new ArrayList<>();
+			allSegments.addAll(beforeSegments);
+			allSegments.addAll(afterSegments);
+			setStyles(tileBox, allSegments, ways, styles);
 
 			styleMap = new TreeMap<>();
 			int i = 0;
