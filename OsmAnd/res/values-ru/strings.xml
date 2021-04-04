@@ -4078,4 +4078,8 @@
     <string name="no_purchases">У вас нет покупок</string>
     <string name="new_device_account">Новое устройство / новый аккаунт</string>
     <string name="contact_support_description">Если у вас есть вопросы, свяжитесь с нами: %1$s.</string>
+    <string name="in_grace_period">В льготный период</string>
+    <string name="expired">Срок истёк</string>
+    <string name="on_hold">Приостановлено</string>
+    <string name="renew_subscription">Продление подписки</string>
 </resources>
