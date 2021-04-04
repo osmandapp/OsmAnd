@@ -15,6 +15,7 @@ import android.widget.ScrollView;
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
@@ -32,7 +33,6 @@ import net.osmand.plus.routing.cards.RouteLineColorCard;
 import net.osmand.plus.routing.cards.RouteLineColorCard.OnMapThemeUpdateListener;
 import net.osmand.plus.routing.cards.RouteLineColorCard.OnSelectedColorChangeListener;
 import net.osmand.plus.routing.cards.RouteLineWidthCard;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.track.CustomColorBottomSheet.ColorPickerListener;
 import net.osmand.plus.track.TrackAppearanceFragment.OnNeedScrollListener;
 
@@ -203,6 +203,8 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment imple
 			}
 		});
 		closeButton.setImageResource(AndroidUtils.getNavigationIconResId(toolbarContainer.getContext()));
+		int bgColorId = isNightMode() ? R.color.app_bar_color_dark : R.color.list_background_color_light;
+		toolbarContainer.setBackgroundColor(ContextCompat.getColor(requireContext(), bgColorId));
 		updateToolbarVisibility(toolbarContainer);
 	}
 
@@ -212,7 +214,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment imple
 		if (Build.VERSION.SDK_INT >= 23 && !isNightMode() && view != null) {
 			view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 		}
-		return isNightMode() ? R.color.divider_color_dark : R.color.divider_color_light;
+		return isNightMode() ? R.color.status_bar_color_dark : R.color.divider_color_light;
 	}
 
 	@Override
