@@ -853,7 +853,7 @@ public class OsmandSettings {
 		public boolean setValue(Object prefs, DrivingRegion val) {
 			boolean overrideMetricSystem = !DRIVING_REGION_AUTOMATIC.getValue(prefs, DRIVING_REGION_AUTOMATIC.getDefaultValue());
 			if (overrideMetricSystem && val != null) {
-				METRIC_SYSTEM.set(val.defMetrics);
+				METRIC_SYSTEM.setValue(prefs, val.defMetrics);
 			}
 			return super.setValue(prefs, val);
 		}
@@ -866,7 +866,7 @@ public class OsmandSettings {
 
 	// this value string is synchronized with settings_pref.xml preference name
 	// cache of metrics constants as they are used very often
-	public final OsmandPreference<MetricsConstants> METRIC_SYSTEM = new EnumStringPreference<MetricsConstants>(this,
+	public final EnumStringPreference<MetricsConstants> METRIC_SYSTEM = (EnumStringPreference<MetricsConstants>) new EnumStringPreference<MetricsConstants>(this,
 			"default_metric_system", MetricsConstants.KILOMETERS_AND_METERS, MetricsConstants.values()) {
 		protected MetricsConstants getDefaultValue() {
 			return DRIVING_REGION.get().defMetrics;

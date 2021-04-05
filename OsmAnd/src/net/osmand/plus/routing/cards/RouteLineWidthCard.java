@@ -36,7 +36,7 @@ import java.util.List;
 public class RouteLineWidthCard extends BaseCard {
 
 	private final static int CUSTOM_WIDTH_MIN = 1;
-	private final static int CUSTOM_WIDTH_MAX = 24;
+	private final static int CUSTOM_WIDTH_MAX = 36;
 
 	private RouteLineDrawInfo routeLineDrawInfo;
 	private OnNeedScrollListener onNeedScrollListener;

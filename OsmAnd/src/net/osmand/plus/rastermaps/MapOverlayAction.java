@@ -104,8 +104,8 @@ public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 				}
 
 				int index = -1;
-				final String currentSource = settings.MAP_OVERLAY.get() == null ? KEY_NO_OVERLAY
-					: settings.MAP_OVERLAY.get();
+				String currentSource = settings.MAP_OVERLAY.get() == null ? KEY_NO_OVERLAY
+						: settings.MAP_OVERLAY.get();
 
 				for (int idx = 0; idx < sources.size(); idx++) {
 					if (sources.get(idx).first.equals(currentSource)) {
@@ -223,5 +223,13 @@ public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 	public boolean fillParams(View root, MapActivity activity) {
 		getParams().put(KEY_DIALOG, Boolean.toString(((SwitchCompat) root.findViewById(R.id.saveButton)).isChecked()));
 		return super.fillParams(root, activity);
+	}
+
+	@Override
+	public String getActionText(OsmandApplication application) {
+		String currentSource = application.getSettings().MAP_OVERLAY.get() == null ? KEY_NO_OVERLAY
+				: application.getSettings().MAP_OVERLAY.get();
+
+		return application.getString(R.string.map_quick_action_pattern, getTranslatedItemName(application, currentSource));
 	}
 }
