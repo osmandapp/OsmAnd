@@ -30,6 +30,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportStop;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
@@ -104,6 +105,10 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 
 	private LayerDrawable projectionIcon;
 	private LayerDrawable previewIcon;
+
+	private int routeLineColor;
+	private float routeLineWidth;
+	private Integer directionArrowsColor;
 
 	public RouteLayer(RoutingHelper helper) {
 		this.helper = helper;
@@ -326,7 +331,8 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 	                                  DrawSettings settings,
 	                                  RouteLineDrawInfo drawInfo) {
 		updateAttrs(settings, tileBox);
-		paintRouteLinePreview.setColor(getRouteLineColor(nightMode));
+		updateRouteColors(nightMode);
+		paintRouteLinePreview.setColor(getRouteLineColor());
 		paintRouteLinePreview.setStrokeWidth(getRouteLineWidth(tileBox));
 
 		int centerX = drawInfo.getCenterX();
@@ -418,6 +424,22 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 
 	@ColorInt
 	public int getRouteLineColor(boolean night) {
+		updateRouteColors(night);
+		return routeLineColor;
+	}
+
+	@ColorInt
+	public int getRouteLineColor() {
+		return routeLineColor;
+	}
+
+	@Nullable
+	@ColorInt
+	public Integer getDirectionArrowsColor() {
+		return directionArrowsColor;
+	}
+
+	public void updateRouteColors(boolean night) {
 		Integer color;
 		if (routeLineDrawInfo != null) {
 			color = routeLineDrawInfo.getColor(night);
@@ -429,10 +451,13 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 			color = storedValue != 0 ? storedValue : null;
 		}
 		if (color == null) {
+			directionArrowsColor = null;
 			updateAttrs(new DrawSettings(night), view.getCurrentRotatedTileBox());
 			color = attrs.paint.getColor();
+		} else if (routeLineColor != color) {
+			directionArrowsColor = UiUtilities.getContrastColor(view.getContext(), color, false);
 		}
-		return color;
+		routeLineColor = color;
 	}
 
 	private float getRouteLineWidth(@NonNull RotatedTileBox tileBox) {
@@ -442,7 +467,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 		} else {
 			widthKey = view.getSettings().ROUTE_LINE_WIDTH.getModeValue(helper.getAppMode());
 		}
-		return widthKey != null ? getWidthByKey(tileBox, widthKey) : attrs.paint.getStrokeWidth();
+		return routeLineWidth = widthKey != null ? getWidthByKey(tileBox, widthKey) : attrs.paint.getStrokeWidth();
 	}
 
 	@Nullable
@@ -500,7 +525,8 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 			boolean straight = route.getRouteService() == RouteService.STRAIGHT;
 			publicTransportRouteGeometry.clearRoute();
 			routeGeometry.updateRoute(tb, route);
-			routeGeometry.setRouteStyleParams(getRouteLineColor(nightMode), getRouteLineWidth(tb));
+			updateRouteColors(nightMode);
+			routeGeometry.setRouteStyleParams(getRouteLineColor(), getRouteLineWidth(tb), getDirectionArrowsColor());
 			if (directTo) {
 				routeGeometry.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
 						null, 0);

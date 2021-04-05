@@ -8,6 +8,7 @@ public abstract class GeometryWayStyle<T extends GeometryWayContext> {
 	private T context;
 	protected Integer color;
 	protected Float width;
+	protected Integer pointColor;
 
 	public GeometryWayStyle(T context) {
 		this.context = context;
@@ -18,10 +19,11 @@ public abstract class GeometryWayStyle<T extends GeometryWayContext> {
 		this.color = color;
 	}
 
-	public GeometryWayStyle(T context, Integer color, Float width) {
+	public GeometryWayStyle(T context, Integer color, Float width, Integer pointColor) {
 		this.context = context;
 		this.color = color;
 		this.width = width;
+		this.pointColor = pointColor;
 	}
 
 	public T getContext() {
@@ -45,7 +47,7 @@ public abstract class GeometryWayStyle<T extends GeometryWayContext> {
 	}
 
 	public Integer getPointColor() {
-		return null;
+		return pointColor;
 	}
 
 	public boolean isNightMode() {
