@@ -4084,4 +4084,5 @@
     <string name="on_hold">In der Warteschleife</string>
     <string name="expired">Abgelaufen</string>
     <string name="update_all_maps_added">Alle zu %1$s hinzugefügten Maps aktualisieren\?</string>
+    <string name="trip_recording_logging_interval_info">Das Protokollierungsintervall legt den Zeitraum fest, in dem OsmAnd nach den aktuellen Positionsdaten des Standorts fragt.</string>
 </resources>
