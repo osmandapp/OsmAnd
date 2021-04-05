@@ -21,7 +21,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
-import androidx.core.content.ContextCompat;
 
 import com.github.ksoichiro.android.observablescrollview.ObservableListView;
 import com.google.android.material.slider.RangeSlider;
@@ -50,14 +49,16 @@ import org.apache.commons.logging.Log;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.List;
+import java.util.Locale;
 
-import static net.osmand.plus.UiUtilities.CustomRadioButtonType.*;
+import static net.osmand.plus.UiUtilities.CustomRadioButtonType.END;
+import static net.osmand.plus.UiUtilities.CustomRadioButtonType.START;
 import static net.osmand.plus.download.DownloadActivityType.HILLSHADE_FILE;
 import static net.osmand.plus.download.DownloadActivityType.SLOPE_FILE;
-import static net.osmand.plus.srtmplugin.TerrainMode.HILLSHADE;
-import static net.osmand.plus.srtmplugin.TerrainMode.SLOPE;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.TERRAIN_MAX_ZOOM;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.TERRAIN_MIN_ZOOM;
+import static net.osmand.plus.srtmplugin.TerrainMode.HILLSHADE;
+import static net.osmand.plus.srtmplugin.TerrainMode.SLOPE;
 
 
 public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickListener,
@@ -102,7 +103,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 
 	private ArrayAdapter<ContextMenuItem> listAdapter;
 
-	private Slider.OnChangeListener transparencySliderChangeListener = new Slider.OnChangeListener() {
+	private final Slider.OnChangeListener transparencySliderChangeListener = new Slider.OnChangeListener() {
 		@Override
 		public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
 			if (fromUser) {
@@ -114,7 +115,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		}
 	};
 
-	private RangeSlider.OnChangeListener zoomSliderChangeListener = new RangeSlider.OnChangeListener() {
+	private final RangeSlider.OnChangeListener zoomSliderChangeListener = new RangeSlider.OnChangeListener() {
 		@Override
 		public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser) {
 			List<Float> values = slider.getValues();
@@ -186,11 +187,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 				getString(R.string.slope_read_more),
 				wikiString
 		);
-		String emptyStateText = String.format(
-				getString(R.string.ltr_or_rtl_combine_via_space),
-				getString(R.string.terrain_empty_state_text),
-				PLUGIN_URL
-		);
+		String emptyStateText = getString(R.string.terrain_empty_state_text) + "\n" + PLUGIN_URL;
 		setupClickableText(slopeReadMoreTv, readMoreText, wikiString, SLOPES_WIKI_URL, false);
 		setupClickableText(emptyStateDescriptionTv, emptyStateText, PLUGIN_URL, PLUGIN_URL, true);
 
@@ -290,10 +287,10 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	}
 
 	private void setupClickableText(TextView textView,
-	                                String text,
-	                                String clickableText,
-	                                final String url,
-	                                final boolean medium) {
+									String text,
+									String clickableText,
+									final String url,
+									final boolean medium) {
 		SpannableString spannableString = new SpannableString(text);
 		ClickableSpan clickableSpan = new ClickableSpan() {
 			@Override
