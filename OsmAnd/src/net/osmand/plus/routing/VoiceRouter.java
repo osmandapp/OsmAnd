@@ -681,8 +681,6 @@ public class VoiceRouter {
 		return sb.toString();
 	}
 
-
-
 	private int getIntRef(String stringRef) {
 		int intRef = Algorithms.findFirstNumberEndIndex(stringRef);
 		if (intRef > 0) {
