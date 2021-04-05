@@ -11,6 +11,8 @@ import net.osmand.Location;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.util.MapAlgorithms;
 import net.osmand.util.MapUtils;
+import net.osmand.plus.views.layers.geometry.MultiProfileGeometryWay.GeometryMultiProfileWayStyle;
+
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -174,8 +176,8 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 			}
 			double lat = locationProvider.getLatitude(i);
 			double lon = locationProvider.getLongitude(i);
-			if (leftLongitude <= lon && lon <= rightLongitude && bottomLatitude <= lat
-					&& lat <= topLatitude) {
+			if (shouldAddLocation(tb, leftLongitude, rightLongitude, bottomLatitude, topLatitude,
+					locationProvider, i)) {
 				double dist = previous == -1 ? 0 : odistances.get(i);
 				if (!previousVisible) {
 					double prevLat = Double.NaN;
@@ -188,7 +190,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 						prevLon = lastProjection.getLongitude();
 					}
 					if (!Double.isNaN(prevLat) && !Double.isNaN(prevLon)) {
-						addLocation(tb, prevLat, prevLon, style, tx, ty, angles, distances, dist, styles); // first point
+						addLocation(tb, prevLat, prevLon, getStyle(i - 1, style), tx, ty, angles, distances, dist, styles); // first point
 					}
 				}
 				addLocation(tb, lat, lon, style, tx, ty, angles, distances, dist, styles);
@@ -206,6 +208,13 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 			previous = i;
 		}
 		drawRouteSegment(tb, canvas, tx, ty, angles, distances, 0, styles);
+	}
+
+	protected boolean shouldAddLocation(RotatedTileBox tileBox, double leftLon, double rightLon, double bottomLat,
+										double topLat, GeometryWayProvider provider, int currLocationIdx) {
+		double lat = provider.getLatitude(currLocationIdx);
+		double lon = provider.getLongitude(currLocationIdx);
+		return leftLon <= lon && lon <= rightLon && bottomLat <= lat && lat <= topLat;
 	}
 
 	private void addLocation(RotatedTileBox tb, double latitude, double longitude, GeometryWayStyle<?> style,
@@ -333,7 +342,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 		return cnt;
 	}
 
-	private void drawRouteSegment(RotatedTileBox tb, Canvas canvas, List<Float> tx, List<Float> ty,
+	protected void drawRouteSegment(RotatedTileBox tb, Canvas canvas, List<Float> tx, List<Float> ty,
 								  List<Double> angles, List<Double> distances, double distToFinish, List<GeometryWayStyle<?>> styles) {
 		if (tx.size() < 2) {
 			return;

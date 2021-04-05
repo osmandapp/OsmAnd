@@ -151,6 +151,10 @@ public class AndroidUtils {
 		return resizedBitmap;
 	}
 
+	public static Bitmap createScaledBitmap(Drawable drawable, int width, int height) {
+		return scaleBitmap(drawableToBitmap(drawable), width, height, false);
+	}
+
 	public static ColorStateList createBottomNavColorStateList(Context ctx, boolean nightMode) {
 		return AndroidUtils.createCheckedColorStateList(ctx, nightMode,
 				R.color.icon_color_default_light, R.color.wikivoyage_active_light,
