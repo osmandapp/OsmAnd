@@ -3,14 +3,12 @@ package net.osmand.plus.views.layers.geometry;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Path;
-import android.graphics.PathMeasure;
-import android.util.Log;
 import android.util.Pair;
 
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
+import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.osm.edit.Node;
@@ -67,7 +65,7 @@ public class MultiProfileGeometryWay extends GeometryWay<MultiProfileGeometryWay
 			List<TrkSegment> allSegments = new ArrayList<>();
 			allSegments.addAll(beforeSegments);
 			allSegments.addAll(afterSegments);
-			setStyles(tileBox, allSegments, ways, styles);
+			setStyles(allSegments, ways, styles);
 
 			styleMap = new TreeMap<>();
 			int i = 0;
@@ -97,16 +95,13 @@ public class MultiProfileGeometryWay extends GeometryWay<MultiProfileGeometryWay
 		}
 	}
 
-	private void setStyles(RotatedTileBox tileBox, List<TrkSegment> segments, List<Way> ways, List<GeometryWayStyle<?>> styles) {
-		Path path = new Path();
-		PathMeasure pathMeasure = new PathMeasure();
-
+	private void setStyles(List<TrkSegment> segments, List<Way> ways, List<GeometryWayStyle<?>> styles) {
 		for (TrkSegment segment : segments) {
 			List<WptPt> points = segment.points;
 			for (int i = 0; i < points.size() - 1; i++) {
-				setStylesInternal(tileBox, points, i, ways, styles, path, pathMeasure);
+				setStylesInternal(points, i, ways, styles);
 			}
-			styles.add(new GeometryMultiProfileWayStyle(getContext(), 0, 0, true));
+			styles.add(new GeometryMultiProfileWayStyle(getContext(), new ArrayList<LatLon>(), 0, 0, true));
 			Way way = new Way(-1);
 			WptPt last = points.get(points.size() - 1);
 			way.addNode(new Node(last.lat, last.lon, -1));
@@ -114,48 +109,42 @@ public class MultiProfileGeometryWay extends GeometryWay<MultiProfileGeometryWay
 		}
 	}
 
-	private void setStylesInternal(RotatedTileBox tileBox, List<WptPt> points, int idx, List<Way> ways,
-								   List<GeometryWayStyle<?>> styles, Path path, PathMeasure pathMeasure) {
-		MultiProfileGeometryWayContext context = getContext();
-		WptPt leftPt = points.get(idx);
-		Pair<WptPt, WptPt> userLine = new Pair<>(leftPt, points.get(idx + 1));
-		RoadSegmentData routeBetweenPoints = segmentData.get(userLine);
+	private void setStylesInternal(List<WptPt> points, int idx, List<Way> ways, List<GeometryWayStyle<?>> styles) {
+		WptPt startPt = points.get(idx);
+		WptPt endPt = points.get(idx + 1);
+		List<LatLon> routePoints = getRoutePoints(startPt, endPt);
 		boolean isSecondToLast = idx + 2 == points.size();
 
 		Way way = new Way(-1);
-		String currProfileKey = getProfileKey(leftPt);
+		String currProfileKey = getProfileKey(startPt);
 		Pair<Integer, Integer> profileData = getProfileData(currProfileKey);
 		GeometryMultiProfileWayStyle style = new GeometryMultiProfileWayStyle(
-				getContext(), profileData.first, profileData.second);
+				getContext(), routePoints, profileData.first, profileData.second);
 		styles.add(style);
 		ways.add(way);
 
-		path.reset();
-		if (routeBetweenPoints == null || Algorithms.isEmpty(routeBetweenPoints.getPoints())) {
-			way.addNode(new Node(userLine.first.lat, userLine.first.lon, -1));
-			if (isSecondToLast) {
-				way.addNode(new Node(userLine.second.lat, userLine.second.lon, -1));
-			}
-			movePathToWpt(path, tileBox, userLine.first);
-			pathLineToWpt(path, tileBox, userLine.second);
-		} else {
-			movePathToWpt(path, tileBox, routeBetweenPoints.getPoints().get(0));
-			for (WptPt pt : routeBetweenPoints.getPoints()) {
-				if (pt.lat != userLine.second.lat && pt.lon != userLine.second.lon || isSecondToLast) {
-					way.addNode(new Node(pt.lat, pt.lon, -1));
-				}
-				pathLineToWpt(path, tileBox, pt);
+		for (LatLon routePt : routePoints) {
+			if (isSecondToLast || routePt.getLatitude() != endPt.getLatitude()
+					&& routePt.getLongitude() != endPt.getLongitude()) {
+				way.addNode(new Node(routePt.getLatitude(), routePt.getLongitude(), -1));
 			}
 		}
+	}
 
-		float[] xy = new float[2];
-		pathMeasure.setPath(path, false);
-		float routeLength = pathMeasure.getLength();
-		if ((routeLength - context.circleSize) / 2 >= context.minIconMargin) {
-			pathMeasure.getPosTan(pathMeasure.getLength() * 0.5f, xy, null);
-			style.setIconLat(tileBox.getLatFromPixel(xy[0], xy[1]));
-			style.setIconLon(tileBox.getLonFromPixel(xy[0], xy[1]));
+	private List<LatLon> getRoutePoints(WptPt start, WptPt end) {
+		Pair<WptPt, WptPt> userLine = new Pair<>(start, end);
+		RoadSegmentData roadSegmentData = segmentData.get(userLine);
+		List<LatLon> routePoints = new ArrayList<>();
+
+		if (roadSegmentData == null || Algorithms.isEmpty(roadSegmentData.getPoints())) {
+			routePoints.add(new LatLon(start.lat, start.lon));
+			routePoints.add(new LatLon(end.lat, end.lon));
+		} else {
+			for (WptPt routePt : roadSegmentData.getPoints()) {
+				routePoints.add(new LatLon(routePt.lat, routePt.lon));
+			}
 		}
+		return routePoints;
 	}
 
 	@Override
@@ -184,14 +173,6 @@ public class MultiProfileGeometryWay extends GeometryWay<MultiProfileGeometryWay
 			}
 		}
 		return false;
-	}
-
-	private void movePathToWpt(Path path, RotatedTileBox tileBox, WptPt pt) {
-		path.moveTo(tileBox.getPixXFromLatLon(pt.lat, pt.lon), tileBox.getPixYFromLatLon(pt.lat, pt.lon));
-	}
-
-	private void pathLineToWpt(Path path, RotatedTileBox tileBox, WptPt pt) {
-		path.lineTo(tileBox.getPixXFromLatLon(pt.lat, pt.lon), tileBox.getPixYFromLatLon(pt.lat, pt.lon));
 	}
 
 	@NonNull
@@ -230,13 +211,13 @@ public class MultiProfileGeometryWay extends GeometryWay<MultiProfileGeometryWay
 
 		private final boolean isGap;
 
-		private double iconLat = Double.NaN;
-		private double iconLon = Double.NaN;
+		private final List<LatLon> routePoints;
 
-		public GeometryMultiProfileWayStyle(MultiProfileGeometryWayContext context,
+		public GeometryMultiProfileWayStyle(MultiProfileGeometryWayContext context, List<LatLon> routePoints,
 											@ColorInt int profileColor, @DrawableRes int profileIconRes,
 											boolean isGap) {
 			super(context);
+			this.routePoints = routePoints;
 			this.lineColor = profileColor;
 			this.borderColor = ColorUtils.blendARGB(profileColor, Color.BLACK, 0.2f);
 			this.profileIconRes = profileIconRes;
@@ -244,9 +225,9 @@ public class MultiProfileGeometryWay extends GeometryWay<MultiProfileGeometryWay
 		}
 
 
-		public GeometryMultiProfileWayStyle(MultiProfileGeometryWayContext context,
+		public GeometryMultiProfileWayStyle(MultiProfileGeometryWayContext context, List<LatLon> routePoints,
 											@ColorInt int profileColor, @DrawableRes int profileIconRes) {
-			this(context, profileColor, profileIconRes, false);
+			this(context, routePoints, profileColor, profileIconRes, false);
 		}
 
 		@ColorInt
@@ -264,20 +245,12 @@ public class MultiProfileGeometryWay extends GeometryWay<MultiProfileGeometryWay
 			return getContext().getProfileIconBitmap(profileIconRes, borderColor);
 		}
 
-		public void setIconLat(double lat) {
-			iconLat = lat;
+		public List<LatLon> getRoutePoints() {
+			return routePoints;
 		}
 
-		public void setIconLon(double lon) {
-			iconLon = lon;
-		}
-
-		public double getIconLat() {
-			return iconLat;
-		}
-
-		public double getIconLon() {
-			return iconLon;
+		public boolean isGap() {
+			return isGap;
 		}
 
 		@Override
