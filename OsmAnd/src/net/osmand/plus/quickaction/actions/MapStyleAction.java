@@ -245,4 +245,11 @@ public class MapStyleAction extends SwitchableAction<String> {
 				? filters.get(0) + " +" + (filters.size() - 1)
 				: filters.get(0);
 	}
+
+	@Override
+	public String getActionText(OsmandApplication application) {
+		String currentSource = application.getSettings().RENDERER.get();
+
+		return application.getString(R.string.map_quick_action_pattern, getTranslatedItemName(application, currentSource));
+	}
 }

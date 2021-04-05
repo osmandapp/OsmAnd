@@ -226,4 +226,12 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 		getParams().put(KEY_DIALOG, Boolean.toString(((SwitchCompat) root.findViewById(R.id.saveButton)).isChecked()));
 		return super.fillParams(root, activity);
 	}
+
+	@Override
+	public String getActionText(OsmandApplication application) {
+		String currentSource = application.getSettings().MAP_UNDERLAY.get() == null ? KEY_NO_UNDERLAY
+				: application.getSettings().MAP_UNDERLAY.get();
+
+		return application.getString(R.string.map_quick_action_pattern, getTranslatedItemName(application, currentSource));
+	}
 }
