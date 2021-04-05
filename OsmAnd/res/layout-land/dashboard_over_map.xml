@@ -50,6 +50,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="start"
                 android:layout_marginTop="@dimen/dashboard_map_toolbar"
+                android:background="?attr/activity_background_basic"
                 android:visibility="gone">
 
                 <net.osmand.plus.views.controls.DynamicListView
