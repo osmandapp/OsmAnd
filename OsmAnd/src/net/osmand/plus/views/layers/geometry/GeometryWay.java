@@ -11,6 +11,8 @@ import net.osmand.Location;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.util.MapAlgorithms;
 import net.osmand.util.MapUtils;
+import net.osmand.plus.views.layers.geometry.MultiProfileGeometryWay.GeometryMultiProfileWayStyle;
+
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -188,7 +190,9 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 						prevLon = lastProjection.getLongitude();
 					}
 					if (!Double.isNaN(prevLat) && !Double.isNaN(prevLon)) {
-						addLocation(tb, prevLat, prevLon, getStyle(i - 1, defaultWayStyle), tx, ty, angles, distances, dist, styles); // first point
+						GeometryWayStyle<?> prevStyle = style instanceof GeometryMultiProfileWayStyle ?
+								getStyle(i - 1, style) : style;
+						addLocation(tb, prevLat, prevLon, prevStyle, tx, ty, angles, distances, dist, styles); // first point
 					}
 				}
 				addLocation(tb, lat, lon, style, tx, ty, angles, distances, dist, styles);
@@ -360,7 +364,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 			if (hasPathLine) {
 				List<Pair<Path, GeometryWayStyle<?>>> paths = new ArrayList<>();
 				canvas.rotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
-				calculatePath(tb, tx, ty, 0, styles, paths);
+				calculatePath(tb, tx, ty, getOutMargin(), styles, paths);
 				for (Pair<Path, GeometryWayStyle<?>> pc : paths) {
 					GeometryWayStyle<?> style = pc.second;
 					if (style.hasPathLine()) {
@@ -375,6 +379,10 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 				canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 			}
 		}
+	}
+
+	protected float getOutMargin() {
+		return 0;
 	}
 
 	private static class PathGeometryZoom {

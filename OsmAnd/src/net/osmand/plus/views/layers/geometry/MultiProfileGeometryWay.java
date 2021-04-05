@@ -49,29 +49,6 @@ public class MultiProfileGeometryWay extends GeometryWay<MultiProfileGeometryWay
 		drawSegments(tileBox, canvas, bounds.top, bounds.left, bounds.bottom, bounds.right, null, 0);
 	}
 
-	@Override
-	protected void drawRouteSegment(RotatedTileBox tb, Canvas canvas, List<Float> tx, List<Float> ty, List<Double> angles, List<Double> distances, double distToFinish, List<GeometryWayStyle<?>> styles) {
-		if (tx.size() < 2) {
-			return;
-		}
-		try {
-			List<Pair<Path, GeometryWayStyle<?>>> pathStyles = new ArrayList<>();
-			canvas.rotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
-			calculatePath(tb, tx, ty, getContext().circleSize, styles, pathStyles);
-
-			for (int i = 0; i < pathStyles.size(); i++) {
-				Pair<Path, GeometryWayStyle<?>> currPathStyle = pathStyles.get(i);
-				if (!((GeometryMultiProfileWayStyle) currPathStyle.second).isGap) {
-					getDrawer().drawPathBorder(canvas, currPathStyle.first, currPathStyle.second);
-					getDrawer().drawPath(canvas, currPathStyle.first, currPathStyle.second);
-				}
-			}
-			getDrawer().drawArrowsOverPath(canvas, tb, tx, ty, angles, distances, distToFinish, styles);
-		} finally {
-			canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
-		}
-	}
-
 	public void updateRoute(RotatedTileBox tileBox, Map<Pair<WptPt, WptPt>, RoadSegmentData> segmentData,
 							List<TrkSegment> beforeSegments, List<TrkSegment> afterSegments) {
 		boolean shouldUpdateRoute = tileBox.getMapDensity() != getMapDensity() || segmentDataChanged(segmentData)
@@ -229,6 +206,11 @@ public class MultiProfileGeometryWay extends GeometryWay<MultiProfileGeometryWay
 		return ApplicationMode.DEFAULT.getStringKey().equals(mode.getStringKey()) ?
 				new Pair<>(ContextCompat.getColor(getContext().getCtx(), ProfileIconColors.DARK_YELLOW.getColor(night)), R.drawable.ic_action_split_interval) :
 				new Pair<>(mode.getProfileColor(night), mode.getIconRes());
+	}
+
+	@Override
+	protected float getOutMargin() {
+		return getContext().getAttrs().paint.getStrokeWidth() * 2;
 	}
 
 	@NonNull

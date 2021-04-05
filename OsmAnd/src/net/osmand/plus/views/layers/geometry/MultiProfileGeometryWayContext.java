@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.views.OsmandMapLayer.RenderingLineAttributes;
 import net.osmand.util.Algorithms;
@@ -25,6 +26,8 @@ public class MultiProfileGeometryWayContext extends GeometryWayContext {
 	public final float minIconMargin;
 	public final float circleSize;
 	public final float pointIconSize;
+
+	private static final String pointColorHex = "#637EFB";
 
 	private RenderingLineAttributes multiProfileAttrs;
 
@@ -64,13 +67,8 @@ public class MultiProfileGeometryWayContext extends GeometryWayContext {
 		paint.setColor(Color.WHITE);
 		canvas.drawCircle(centerXY, centerXY, centerRadius, paint);
 
-		paint.setColor(Algorithms.parseColor("#637EFB"));
+		paint.setColor(Algorithms.parseColor(pointColorHex));
 		canvas.drawCircle(centerXY, centerXY, innerRadius, paint);
-	}
-
-	@Override
-	protected int getArrowBitmapResId() {
-		return 0;
 	}
 
 	@NonNull
@@ -99,5 +97,10 @@ public class MultiProfileGeometryWayContext extends GeometryWayContext {
 	@NonNull
 	public Bitmap getPointIcon() {
 		return pointIcon;
+	}
+
+	@Override
+	protected int getArrowBitmapResId() {
+		return R.drawable.ic_action_split_interval;
 	}
 }

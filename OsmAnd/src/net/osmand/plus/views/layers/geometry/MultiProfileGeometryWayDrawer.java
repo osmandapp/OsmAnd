@@ -19,6 +19,10 @@ public class MultiProfileGeometryWayDrawer extends GeometryWayDrawer<MultiProfil
 	public void drawPath(Canvas canvas, Path path, GeometryWayStyle<?> style) {
 		if (style instanceof GeometryMultiProfileWayStyle) {
 			RenderingLineAttributes attrs = getContext().getAttrs();
+
+			attrs.paint.setColor(((GeometryMultiProfileWayStyle) style).getBorderColor());
+			canvas.drawPath(path, attrs.paint);
+
 			attrs.paint2.setColor(((GeometryMultiProfileWayStyle) style).getLineColor());
 			canvas.drawPath(path, attrs.paint2);
 		}
@@ -40,14 +44,6 @@ public class MultiProfileGeometryWayDrawer extends GeometryWayDrawer<MultiProfil
 					canvas.drawBitmap(style.getPointBitmap(), x, y, null);
 				}
 			}
-		}
-	}
-
-	public void drawPathBorder(Canvas canvas, Path path, GeometryWayStyle<?> style) {
-		if (style instanceof GeometryMultiProfileWayStyle) {
-			RenderingLineAttributes attrs = getContext().getAttrs();
-			attrs.paint.setColor(((GeometryMultiProfileWayStyle) style).getBorderColor());
-			canvas.drawPath(path, attrs.paint);
 		}
 	}
 }

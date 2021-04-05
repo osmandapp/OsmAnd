@@ -2,9 +2,6 @@ package net.osmand.plus.measurementtool;
 
 import android.util.Pair;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
@@ -38,12 +35,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode.NEXT_SEGMENT;
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode.WHOLE_TRACK;
 import static net.osmand.plus.measurementtool.command.MeasurementModeCommand.MeasurementCommandType.APPROXIMATE_POINTS;
 
@@ -1112,7 +1115,25 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 	}
 
 	public boolean isInMultiProfileMode() {
-		return lastCalculationMode == CalculationMode.NEXT_SEGMENT;
+		if (lastCalculationMode == CalculationMode.NEXT_SEGMENT) {
+			return true;
+		}
+		Set<String> profiles = new HashSet<>();
+		List<TrkSegment> segments = new ArrayList<>();
+		segments.addAll(beforeSegments);
+		segments.addAll(afterSegments);
+		for (TrkSegment segment : segments) {
+			if (Algorithms.isEmpty(segment.points)) {
+				continue;
+			}
+			for (WptPt pt : segment.points) {
+				if (!pt.isGap()) {
+					profiles.add(pt.getProfileType());
+				}
+			}
+		}
+		lastCalculationMode = profiles.size() >= 2 ? NEXT_SEGMENT : WHOLE_TRACK;
+		return profiles.size() >= 2;
 	}
 
 	@Override
