@@ -14,6 +14,10 @@
 		tools:icon="@drawable/ic_action_settings" />
 
 	<Preference
+		android:layout="@layout/divider_half_item_with_background"
+		android:selectable="false" />
+
+	<Preference
 		android:key="purchases_settings"
 		android:layout="@layout/preference_with_descr"
 		android:persistent="false"

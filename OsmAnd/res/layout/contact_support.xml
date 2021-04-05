@@ -25,7 +25,7 @@
 			android:layout_marginEnd="@dimen/map_widget_height"
 			android:layout_marginRight="@dimen/map_widget_height"
 			app:srcCompat="@drawable/ic_action_at_mail"
-			app:tint="?attr/active_color_basic" />
+			app:tint="?attr/default_icon_color" />
 
 		<net.osmand.plus.widgets.TextViewEx
 			android:id="@+id/support_link_title"
@@ -44,7 +44,7 @@
 	</LinearLayout>
 
 	<LinearLayout
-		android:id="@+id/contact_support_container"
+		android:id="@+id/contact_support_title_container"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:background="?android:attr/selectableItemBackground"
@@ -59,10 +59,9 @@
 
 		<net.osmand.plus.widgets.TextViewEx
 			android:id="@+id/contact_support_title"
-			android:layout_width="0dp"
+			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_gravity="center_vertical"
-			android:layout_weight="1"
 			android:text="@string/contact_support"
 			android:textColor="?attr/active_color_basic"
 			android:textSize="@dimen/default_list_text_size"

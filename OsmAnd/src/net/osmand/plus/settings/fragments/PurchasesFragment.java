@@ -1,7 +1,6 @@
 package net.osmand.plus.settings.fragments;
 
 import android.app.Activity;
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -142,7 +141,8 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 
 		View iconToolbarContainer = toolbar.findViewById(R.id.icon_toolbar);
 		ImageView icon = iconToolbarContainer.findViewById(R.id.profile_icon);
-		icon.setImageResource(R.drawable.ic_action_help_online);
+		int iconColorRes = nightMode ? R.color.icon_color_primary_dark : R.color.active_buttons_and_links_text_light;
+		icon.setImageDrawable(getIcon(R.drawable.ic_action_help_online, iconColorRes));
 		icon.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -200,6 +200,11 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 		if (subscriptionsCard != null) {
 			subscriptionsCard.onSupportRegionSelected(name);
 		}
+	}
+
+	@Override
+	public int getStatusBarColorId() {
+		return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
 	}
 
 	private MapActivity getMapActivity() {
