@@ -5,10 +5,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.text.Spannable;
 import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.method.LinkMovementMethod;
 import android.text.style.StyleSpan;
-import android.text.style.URLSpan;
 import android.view.View;
 import android.widget.TextView;
 
@@ -28,7 +25,6 @@ public class TroubleshootingOrPurchasingCard extends BaseCard {
 
 	private static final String OSMAND_NEW_DEVICE_URL = "https://docs.osmand.net/en/main@latest/osmand/purchases#new-device--new-account";
 	private static final String OSMAND_EMAIL = "support@osmand.net";
-	private static final String EMAIL_DEEPLINK_URI = "mailto:support@osmand.net";
 
 	protected InAppPurchaseHelper purchaseHelper;
 
@@ -114,12 +110,13 @@ public class TroubleshootingOrPurchasingCard extends BaseCard {
 		supportDescription.setText(spannableStringMail);
 	}
 
-	protected void setupContactUsLink() {
-		TextView contactSupportLink = view.findViewById(R.id.contact_support_title);
-		SpannableString spannableStringSupport = new SpannableString(app.getString(R.string.contact_support));
-		spannableStringSupport.setSpan(new URLSpan(EMAIL_DEEPLINK_URI), 0, spannableStringSupport.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-		contactSupportLink.setText(spannableStringSupport);
-		AndroidUtils.removeLinkUnderline(contactSupportLink);
-		contactSupportLink.setMovementMethod(LinkMovementMethod.getInstance());
+	private void setupContactUsLink() {
+		View contactSupportLinkContainer = view.findViewById(R.id.contact_support_title_container);
+		contactSupportLinkContainer.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				app.sendSupportEmail(app.getString(R.string.purchases));
+			}
+		});
 	}
 }
