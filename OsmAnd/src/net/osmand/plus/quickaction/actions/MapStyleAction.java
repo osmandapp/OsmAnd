@@ -250,6 +250,6 @@ public class MapStyleAction extends SwitchableAction<String> {
 	public String getActionText(OsmandApplication application) {
 		String currentSource = application.getSettings().RENDERER.get();
 
-		return application.getString(R.string.map_quick_action_pattern, currentSource);
+		return application.getString(R.string.map_quick_action_pattern, getTranslatedItemName(application, currentSource));
 	}
 }

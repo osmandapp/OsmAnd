@@ -221,6 +221,6 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 				?  application.getSettings().MAP_TILE_SOURCES.get()
 				:  application.getString(R.string.vector_data);
 
-		return application.getString(R.string.map_quick_action_pattern, currentSource);
+		return application.getString(R.string.map_quick_action_pattern, getTranslatedItemName(application, currentSource));
 	}
 }
