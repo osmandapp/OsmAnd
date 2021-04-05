@@ -746,19 +746,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	@Override
 	public int getStatusBarColorId() {
-		View view = getView();
-		if (view != null) {
-			boolean nightMode = isNightMode();
-			if (getViewY() <= getFullScreenTopPosY() || !isPortrait()) {
-				if (Build.VERSION.SDK_INT >= 23 && !nightMode) {
-					view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-				}
-				return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
-			} else {
-				if (Build.VERSION.SDK_INT >= 23 && !nightMode) {
-					view.setSystemUiVisibility(view.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-				}
-			}
+		if (getViewY() <= getFullScreenTopPosY() || !isPortrait()) {
+			return isNightMode() ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
 		}
 		return -1;
 	}
@@ -827,7 +816,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 						segment = segments.get(0);
 					}
 				}
-				GpxDisplayItemType[] filterTypes = new GpxDisplayItemType[]{GpxDisplayItemType.TRACK_SEGMENT};
+				GpxDisplayItemType[] filterTypes = new GpxDisplayItemType[] {GpxDisplayItemType.TRACK_SEGMENT};
 				List<GpxDisplayItem> items = TrackDisplayHelper.flatten(displayHelper.getOriginalGroups(filterTypes));
 				if (segment != null && !Algorithms.isEmpty(items)) {
 					SplitSegmentDialogFragment.showInstance(fragmentManager, displayHelper, items.get(0), segment);
@@ -1220,7 +1209,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			@Override
 			public void gpxSavingFinished(Exception errorMessage) {
 				if (selectedGpxFile != null) {
-					List<GpxDisplayGroup> groups = displayHelper.getDisplayGroups(new GpxDisplayItemType[]{GpxDisplayItemType.TRACK_SEGMENT});
+					List<GpxDisplayGroup> groups = displayHelper.getDisplayGroups(new GpxDisplayItemType[] {GpxDisplayItemType.TRACK_SEGMENT});
 					selectedGpxFile.setDisplayGroups(groups, app);
 					selectedGpxFile.processPoints(app);
 				}
