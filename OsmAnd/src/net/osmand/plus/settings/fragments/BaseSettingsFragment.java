@@ -924,12 +924,6 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		}
 	}
 
-	public void setupSpeedCamerasAlert() {
-		Preference speedCamerasAlert = findPreference(settings.SPEED_CAMERAS_UNINSTALLED.getId());
-		speedCamerasAlert.setIcon(getContentIcon(R.drawable.ic_action_alert));
-		speedCamerasAlert.setVisible(!settings.SPEED_CAMERAS_UNINSTALLED.get());
-	}
-
 	public void setupPrefRoundedBg(PreferenceViewHolder holder) {
 		View selectableView = holder.itemView.findViewById(R.id.selectable_list_item);
 		if (selectableView != null) {

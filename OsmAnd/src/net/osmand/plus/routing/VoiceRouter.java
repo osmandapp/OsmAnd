@@ -700,7 +700,7 @@ public class VoiceRouter {
 			boolean isPlay = true;
 			ExitInfo exitInfo = next.getExitInfo();
 			if (tParam != null) {
-				if (exitInfo != null && !Algorithms.isEmpty(exitInfo.getRef())) {
+				if (exitInfo != null && !Algorithms.isEmpty(exitInfo.getRef()) && settings.SPEAK_EXIT_NUMBER_NAMES.get()) {
 					String stringRef = getSpeakableExitRef(exitInfo.getRef());
 					p.takeExit(tParam, dist, stringRef, getIntRef(exitInfo.getRef()), getSpeakableExitName(next, exitInfo, true));
 				} else {
@@ -775,7 +775,7 @@ public class VoiceRouter {
 			ExitInfo exitInfo = next.getExitInfo();
 			boolean isplay = true;
 			if (tParam != null) {
-				if (exitInfo != null && !Algorithms.isEmpty(exitInfo.getRef())) {
+				if (exitInfo != null && !Algorithms.isEmpty(exitInfo.getRef()) && settings.SPEAK_EXIT_NUMBER_NAMES.get()) {
 					String stringRef = getSpeakableExitRef(exitInfo.getRef());
 					p.takeExit(tParam, stringRef, getIntRef(exitInfo.getRef()), getSpeakableExitName(next, exitInfo, !suppressDest));
 				} else {
