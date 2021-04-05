@@ -3892,4 +3892,27 @@
     <string name="poi_patrolled_yes">Surveillé : oui</string>
     <string name="poi_local_ref">Référence locale</string>
     <string name="poi_geodesist">Géodésien</string>
+    <string name="poi_bobsleigh">Bobsleigh</string>
+    <string name="poi_water_polo">Water polo</string>
+    <string name="poi_ultimate">Ultimate</string>
+    <string name="poi_taekwondo">Taekwondo</string>
+    <string name="poi_kickboxing">Kick-boxing</string>
+    <string name="poi_fencing">Escrime</string>
+    <string name="poi_curling">Curling</string>
+    <string name="poi_crossfit">Crossfit</string>
+    <string name="poi_cockfighting">Combats de coqs</string>
+    <string name="poi_bullfighting">Corrida</string>
+    <string name="poi_biathlon">Biathlon</string>
+    <string name="poi_aikido">Aïkido</string>
+    <string name="poi_water_ski">Ski nautique</string>
+    <string name="poi_wrestling">Lutte</string>
+    <string name="poi_weightlifting">Haltérophilie</string>
+    <string name="poi_wakeboarding">Wakeboard</string>
+    <string name="poi_table_soccer">Babyfoot</string>
+    <string name="poi_sumo">Sumo</string>
+    <string name="poi_snooker">Billard</string>
+    <string name="poi_shot_put">Lancer de poids</string>
+    <string name="poi_pilates">Pilates</string>
+    <string name="poi_jiu_jitsu">Ju-jitsu</string>
+    <string name="poi_karate">Karaté</string>
 </resources>
