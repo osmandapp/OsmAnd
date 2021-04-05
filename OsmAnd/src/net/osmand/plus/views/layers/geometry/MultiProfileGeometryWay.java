@@ -189,11 +189,6 @@ public class MultiProfileGeometryWay extends GeometryWay<MultiProfileGeometryWay
 				new Pair<>(mode.getProfileColor(night), mode.getIconRes());
 	}
 
-	@Override
-	protected float getOutMargin() {
-		return getContext().getAttrs().paint.getStrokeWidth() * 2;
-	}
-
 	@NonNull
 	@Override
 	public GeometryWayStyle<?> getDefaultWayStyle() {

@@ -265,20 +265,16 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 		return x >= lx && x <= rx && y >= ty && y <= by;
 	}
 
-	public static boolean isIn(float x, float y, int lx, int ty, int rx, int by, float outMargin) {
-		return x >= lx - outMargin && x <= rx + outMargin && y >= ty - outMargin && y <= by + outMargin;
-	}
-
 	public static int calculatePath(RotatedTileBox tb, List<Float> xs, List<Float> ys, Path path) {
 		List<Pair<Path, GeometryWayStyle<?>>> paths = new ArrayList<>();
-		int res = calculatePath(tb, xs, ys, 0, null, paths);
+		int res = calculatePath(tb, xs, ys, null, paths);
 		if (paths.size() > 0) {
 			path.addPath(paths.get(0).first);
 		}
 		return res;
 	}
 
-	public static int calculatePath(RotatedTileBox tb, List<Float> xs, List<Float> ys, float outMargin, List<GeometryWayStyle<?>> styles, List<Pair<Path, GeometryWayStyle<?>>> paths) {
+	public static int calculatePath(RotatedTileBox tb, List<Float> xs, List<Float> ys, List<GeometryWayStyle<?>> styles, List<Pair<Path, GeometryWayStyle<?>>> paths) {
 		boolean segmentStarted = false;
 		float prevX = xs.get(0);
 		float prevY = ys.get(0);
@@ -288,11 +284,11 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 		boolean hasStyles = styles != null && styles.size() == xs.size();
 		GeometryWayStyle<?> style = hasStyles ? styles.get(0) : null;
 		Path path = new Path();
-		boolean prevIn = isIn(prevX, prevY, 0, 0, width, height, outMargin);
+		boolean prevIn = isIn(prevX, prevY, 0, 0, width, height);
 		for (int i = 1; i < xs.size(); i++) {
 			float currX = xs.get(i);
 			float currY = ys.get(i);
-			boolean currIn = isIn(currX, currY, 0, 0, width, height, outMargin);
+			boolean currIn = isIn(currX, currY, 0, 0, width, height);
 			boolean draw = false;
 			if (prevIn && currIn) {
 				draw = true;
@@ -364,7 +360,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 			if (hasPathLine) {
 				List<Pair<Path, GeometryWayStyle<?>>> paths = new ArrayList<>();
 				canvas.rotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
-				calculatePath(tb, tx, ty, getOutMargin(), styles, paths);
+				calculatePath(tb, tx, ty, styles, paths);
 				for (Pair<Path, GeometryWayStyle<?>> pc : paths) {
 					GeometryWayStyle<?> style = pc.second;
 					if (style.hasPathLine()) {
@@ -379,10 +375,6 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 				canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 			}
 		}
-	}
-
-	protected float getOutMargin() {
-		return 0;
 	}
 
 	private static class PathGeometryZoom {
