@@ -27,6 +27,9 @@ import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routing.RouteLineDrawInfo;
 import net.osmand.plus.settings.backend.ListStringPreference;
+import net.osmand.plus.settings.fragments.RouteLineAppearanceFragment;
+import net.osmand.plus.settings.fragments.RouteLineAppearanceFragment.HeaderInfo;
+import net.osmand.plus.settings.fragments.RouteLineAppearanceFragment.HeaderUiAdapter;
 import net.osmand.plus.track.AppearanceViewHolder;
 import net.osmand.plus.track.ColorsCard;
 import net.osmand.plus.track.CustomColorBottomSheet.ColorPickerListener;
@@ -39,17 +42,17 @@ import java.util.Arrays;
 import java.util.List;
 
 
-public class RouteLineColorCard extends BaseCard implements CardListener, ColorPickerListener {
+public class RouteLineColorCard extends BaseCard implements CardListener, ColorPickerListener, HeaderInfo {
 
 	private static final int DAY_TITLE_ID = R.string.day;
 	private static final int NIGHT_TITLE_ID = R.string.night;
 
 	private final Fragment targetFragment;
+	private HeaderUiAdapter headerUiAdapter;
 
 	private ColorsCard colorsCard;
 	private ColorTypeAdapter colorAdapter;
 	private RecyclerView groupRecyclerView;
-	private TextView tvColorName;
 	private TextView tvDescription;
 	private View themeToggleContainer;
 	private ViewGroup cardsContainer;
@@ -76,12 +79,14 @@ public class RouteLineColorCard extends BaseCard implements CardListener, ColorP
 	                          @NonNull Fragment targetFragment,
 	                          @NonNull RouteLineDrawInfo routeLineDrawInfo,
 	                          @NonNull DayNightMode initMapTheme,
-	                          @NonNull DayNightMode selectedMapTheme) {
+	                          @NonNull DayNightMode selectedMapTheme,
+	                          @NonNull HeaderUiAdapter headerUiAdapter) {
 		super(mapActivity);
 		this.targetFragment = targetFragment;
 		this.routeLineDrawInfo = routeLineDrawInfo;
 		this.initMapTheme = initMapTheme;
 		this.selectedMapTheme = selectedMapTheme;
+		this.headerUiAdapter = headerUiAdapter;
 	}
 
 	@Override
@@ -91,7 +96,6 @@ public class RouteLineColorCard extends BaseCard implements CardListener, ColorP
 
 	@Override
 	protected void updateContent() {
-		tvColorName = view.findViewById(R.id.color_name);
 		tvDescription = view.findViewById(R.id.description);
 
 		colorAdapter = new ColorTypeAdapter();
@@ -155,8 +159,8 @@ public class RouteLineColorCard extends BaseCard implements CardListener, ColorP
 	}
 
 	private void changeMapTheme(DayNightMode mapTheme) {
-		if (targetFragment instanceof OnMapThemeUpdateListener) {
-			((OnMapThemeUpdateListener) targetFragment).onMapThemeUpdated(mapTheme);
+		if (targetFragment instanceof RouteLineAppearanceFragment) {
+			((RouteLineAppearanceFragment) targetFragment).onMapThemeUpdated(mapTheme);
 		}
 		if (selectedMode == ColorMode.CUSTOM) {
 			Integer color = getRouteLineColor();
@@ -215,19 +219,27 @@ public class RouteLineColorCard extends BaseCard implements CardListener, ColorP
 	}
 
 	private void updateColorItems() {
-		if (targetFragment instanceof OnSelectedColorChangeListener) {
-			((OnSelectedColorChangeListener) targetFragment).onSelectedColorChanged();
+		if (targetFragment instanceof RouteLineAppearanceFragment) {
+			((RouteLineAppearanceFragment) targetFragment).onSelectedColorChanged();
 		}
 		updateColorName();
 	}
 
+	@Override
+	public void onNeedHeaderUpdate() {
+		updateColorName();
+	}
+
 	private void updateColorName() {
+		String title = app.getString(R.string.shared_string_color);
+		String colorName = "";
 		if (selectedMode == ColorMode.DEFAULT) {
-			tvColorName.setText(app.getString(R.string.map_widget_renderer));
+			colorName = app.getString(R.string.map_widget_renderer);
 		} else if (getRouteLineColor() != null) {
 			int colorNameId = ColorDialogs.getColorName(getRouteLineColor());
-			tvColorName.setText(app.getString(colorNameId));
+			colorName = app.getString(colorNameId);
 		}
+		headerUiAdapter.onHeaderUpdate(this, title, colorName);
 	}
 
 	private void updateDescription() {
@@ -348,11 +360,4 @@ public class RouteLineColorCard extends BaseCard implements CardListener, ColorP
 		}
 	}
 
-	public interface OnSelectedColorChangeListener {
-		void onSelectedColorChanged();
-	}
-
-	public interface OnMapThemeUpdateListener {
-		void onMapThemeUpdated(@NonNull DayNightMode mapTheme);
-	}
 }
