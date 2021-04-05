@@ -51,7 +51,14 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.List;
+
+import static net.osmand.plus.download.DownloadActivityType.SRTM_COUNTRY_FILE;
+import static net.osmand.plus.download.DownloadActivityType.isSRTMItem;
+import static net.osmand.plus.download.MultipleIndexesUiHelper.getSRTMAbbrev;
+import static net.osmand.plus.download.MultipleIndexesUiHelper.isBaseSRTMItem;
+import static net.osmand.plus.download.MultipleIndexesUiHelper.isBaseSRTMMetricSystem;
 
 public class ItemViewHolder {
 
@@ -160,20 +167,20 @@ public class ItemViewHolder {
 		boolean disabled = checkDisabledAndClickAction(downloadItem);
 		/// name and left item
 		String name;
-		if(showTypeInName) {
+		if (showTypeInName) {
 			name = downloadItem.getType().getString(context);
 		} else {
 			name = downloadItem.getVisibleName(context, context.getMyApplication().getRegions(), showParentRegionName);
 		}
 		String text = (!Algorithms.isEmpty(cityName) && !cityName.equals(name) ? cityName + "\n" : "") + name;
 		nameTextView.setText(text);
-		if(!disabled) {
+		if (!disabled) {
 			nameTextView.setTextColor(textColorPrimary);
 		} else {
 			nameTextView.setTextColor(textColorSecondary);
 		}
 		int color = textColorSecondary;
-		if(downloadItem.isDownloaded() && !isDownloading) {
+		if (downloadItem.isDownloaded() && !isDownloading) {
 			int colorId = downloadItem.isOutdated() ? R.color.color_distance : R.color.color_ok;
 			color = context.getResources().getColor(colorId);
 		}
@@ -189,6 +196,8 @@ public class ItemViewHolder {
 		}
 		descrTextView.setTextColor(textColorSecondary);
 		if (!isDownloading) {
+			boolean srtmItem = isSRTMItem(downloadItem);
+			boolean baseMetricSystem = isBaseSRTMMetricSystem(context.getMyApplication());
 			progressBar.setVisibility(View.GONE);
 			descrTextView.setVisibility(View.VISIBLE);
 			if (downloadItem instanceof CustomIndexItem && (((CustomIndexItem) downloadItem).getSubName(context) != null)) {
@@ -207,31 +216,55 @@ public class ItemViewHolder {
 				MultipleIndexItem item = (MultipleIndexItem) downloadItem;
 				String allRegionsHeader = context.getString(R.string.shared_strings_all_regions);
 				String regionsHeader = context.getString(R.string.regions);
-				String allRegionsCount = String.valueOf(item.getAllIndexes().size());
-				String leftToDownloadCount = String.valueOf(item.getIndexesToDownload().size());
+				String allRegionsCountStr;
+				String leftToDownloadCountStr;
+				if (isSRTMItem(item)) {
+					List<IndexItem> items = new ArrayList<>();
+					for (IndexItem indexItem : item.getAllIndexes()) {
+						boolean baseItem = isBaseSRTMItem(indexItem);
+						if (baseMetricSystem && baseItem || !baseMetricSystem && !baseItem) {
+							items.add(indexItem);
+						}
+					}
+					allRegionsCountStr = String.valueOf(items.size());
+					items.clear();
+					for (IndexItem indexItem : item.getIndexesToDownload()) {
+						boolean baseItem = isBaseSRTMItem(indexItem);
+						if (!indexItem.isDownloaded()
+								&& (baseMetricSystem && baseItem || !baseMetricSystem && !baseItem)) {
+							items.add(indexItem);
+						}
+					}
+					leftToDownloadCountStr = String.valueOf(items.size());
+				} else {
+					allRegionsCountStr = String.valueOf(item.getAllIndexes().size());
+					leftToDownloadCountStr = String.valueOf(item.getIndexesToDownload().size());
+				}
 				String header;
 				String count;
 				if (item.hasActualDataToDownload()) {
 					if (!item.isDownloaded()) {
 						header = allRegionsHeader;
-						count = leftToDownloadCount;
+						count = leftToDownloadCountStr;
 					} else {
 						header = regionsHeader;
 						count = String.format(
 								context.getString(R.string.ltr_or_rtl_combine_via_slash),
-								leftToDownloadCount,
-								allRegionsCount);
+								leftToDownloadCountStr,
+								allRegionsCountStr);
 					}
 				} else {
 					header = allRegionsHeader;
-					count = allRegionsCount;
+					count = allRegionsCountStr;
 				}
-				String fullDescription =
-						context.getString(R.string.ltr_or_rtl_combine_via_colon, header, count);
+				String fullDescription = context.getString(R.string.ltr_or_rtl_combine_via_colon, header, count);
+				if (srtmItem) {
+					fullDescription += " (" + getSRTMAbbrev(context, baseMetricSystem) + ")";
+				}
 				if (item.hasActualDataToDownload()) {
 					fullDescription = context.getString(
-							R.string.ltr_or_rtl_combine_via_bold_point, fullDescription,
-							item.getSizeDescription(context));
+							R.string.ltr_or_rtl_combine_via_bold_point, fullDescription, srtmItem
+									? item.getSizeDescription(context, baseMetricSystem) : item.getSizeDescription(context));
 				}
 				descrTextView.setText(fullDescription);
 			} else {
@@ -239,6 +272,9 @@ public class ItemViewHolder {
 				String pattern = context.getString(R.string.ltr_or_rtl_combine_via_bold_point);
 				String type = item.getType().getString(context);
 				String size = item.getSizeDescription(context);
+				if (srtmItem) {
+					size += " (" + getSRTMAbbrev(context, isBaseSRTMItem(item)) + ")";
+				}
 				String date = item.getDate(dateFormat, showRemoteDate);
 				String fullDescription = String.format(pattern, size, date);
 				if (showTypeInDesc) {
@@ -254,14 +290,14 @@ public class ItemViewHolder {
 
 			if (showProgressInDesc) {
 				double mb = downloadItem.getArchiveSizeMB();
-				String v ;
+				String v;
 				if (progress != -1) {
 					v = context.getString(R.string.value_downloaded_of_max, mb * progress / 100, mb);
 				} else {
 					v = context.getString(R.string.file_size_in_mb, mb);
 				}
 				String fullDescription = v;
-				if(showTypeInDesc && downloadItem.getType() == DownloadActivityType.ROADS_FILE) {
+				if (showTypeInDesc && downloadItem.getType() == DownloadActivityType.ROADS_FILE) {
 					fullDescription = context.getString(R.string.ltr_or_rtl_combine_via_bold_point,
 							downloadItem.getType().getString(context), fullDescription);
 				}
@@ -302,7 +338,7 @@ public class ItemViewHolder {
 			if (isDownloading) {
 				rightImageButton.setImageDrawable(getContentIcon(context, R.drawable.ic_action_remove_dark));
 				rightImageButton.setContentDescription(context.getString(R.string.shared_string_cancel));
-			} else if(!item.hasActualDataToDownload()) {
+			} else if (!item.hasActualDataToDownload()) {
 				rightImageButton.setImageDrawable(getContentIcon(context, R.drawable.ic_overflow_menu_white));
 				rightImageButton.setContentDescription(context.getString(R.string.shared_string_more));
 			} else {
@@ -318,7 +354,7 @@ public class ItemViewHolder {
 	private int getDownloadActionIconId(@NonNull DownloadItem item) {
 		return item instanceof MultipleIndexItem ?
 				R.drawable.ic_action_multi_download :
-				R.drawable.ic_action_import;
+				R.drawable.ic_action_gsave_dark;
 	}
 
 	@SuppressLint("DefaultLocale")
@@ -389,13 +425,13 @@ public class ItemViewHolder {
 			return new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					if(isDownloading) {
-						if(silentCancelDownload) {
+					if (isDownloading) {
+						if (silentCancelDownload) {
 							context.getDownloadThread().cancelDownload(item);
 						} else {
 							context.makeSureUserCancelDownload(item);
 						}
-					} else if(!item.hasActualDataToDownload()){
+					} else if (!item.hasActualDataToDownload()) {
 						showContextMenu(v, item, item.getRelatedGroup());
 					} else {
 						download(item, item.getRelatedGroup());
@@ -406,8 +442,8 @@ public class ItemViewHolder {
 	}
 
 	protected void showContextMenu(View v,
-	                               final DownloadItem downloadItem,
-	                               final DownloadResourceGroup parentOptional) {
+								   final DownloadItem downloadItem,
+								   final DownloadResourceGroup parentOptional) {
 		OsmandApplication app = context.getMyApplication();
 		PopupMenu optionsMenu = new PopupMenu(context, v);
 		MenuItem item;
@@ -455,10 +491,11 @@ public class ItemViewHolder {
 				}
 			}
 		}
-		if(!handled) {
+		if (!handled) {
 			startDownload(item);
 		}
 	}
+
 	private void confirmDownload(final DownloadItem item) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(context);
 		builder.setTitle(R.string.are_you_sure);
@@ -476,15 +513,15 @@ public class ItemViewHolder {
 	}
 
 	private void startDownload(DownloadItem item) {
-		if (item instanceof MultipleIndexItem) {
-			selectIndexesToDownload((MultipleIndexItem) item);
+		if (item instanceof MultipleIndexItem || item.getType() == SRTM_COUNTRY_FILE) {
+			selectIndexesToDownload(item);
 		} else if (item instanceof IndexItem) {
 			IndexItem indexItem = (IndexItem) item;
 			context.startDownload(indexItem);
 		}
 	}
 
-	private void selectIndexesToDownload(MultipleIndexItem item) {
+	private void selectIndexesToDownload(DownloadItem item) {
 		OsmandApplication app = context.getMyApplication();
 		MultipleIndexesUiHelper.showDialog(item, context, app, dateFormat, showRemoteDate,
 				new SelectItemsToDownloadListener() {
@@ -498,7 +535,7 @@ public class ItemViewHolder {
 	}
 
 	private void confirmRemove(@NonNull final DownloadItem downloadItem,
-	                           @NonNull final List<File> downloadedFiles) {
+							   @NonNull final List<File> downloadedFiles) {
 		OsmandApplication app = context.getMyApplication();
 		AlertDialog.Builder confirm = new AlertDialog.Builder(context);
 
@@ -526,7 +563,7 @@ public class ItemViewHolder {
 	}
 
 	private void remove(@NonNull LocalIndexType type,
-	                    @NonNull List<File> filesToDelete) {
+						@NonNull List<File> filesToDelete) {
 		OsmandApplication app = context.getMyApplication();
 		LocalIndexOperationTask removeTask = new LocalIndexOperationTask(
 				context,

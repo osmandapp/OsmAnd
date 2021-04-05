@@ -264,7 +264,7 @@ public class DownloadResources extends DownloadResourceGroup {
 	}
 
 	private Map<String, String> listWithAlternatives(final java.text.DateFormat dateFormat, File file,
-	                                                 final String ext, final Map<String, String> files) {
+													 final String ext, final Map<String, String> files) {
 		if (file.isDirectory()) {
 			file.list(new FilenameFilter() {
 				@Override
@@ -518,7 +518,7 @@ public class DownloadResources extends DownloadResourceGroup {
 
 	@Nullable
 	private List<IndexItem> collectIndexesOfType(@NonNull List<WorldRegion> regions,
-	                                             @NonNull DownloadActivityType type) {
+												 @NonNull DownloadActivityType type) {
 		List<IndexItem> collectedIndexes = new ArrayList<>();
 		for (WorldRegion region : regions) {
 			List<IndexItem> regionIndexes = getIndexItems(region);
@@ -528,7 +528,6 @@ public class DownloadResources extends DownloadResourceGroup {
 					if (index.getType() == type) {
 						found = true;
 						collectedIndexes.add(index);
-						break;
 					}
 				}
 			}
@@ -646,10 +645,10 @@ public class DownloadResources extends DownloadResourceGroup {
 	}
 
 	public static List<IndexItem> findIndexItemsAt(OsmandApplication app,
-	                                               List<String> names,
-	                                               DownloadActivityType type,
-	                                               boolean includeDownloaded,
-	                                               int limit) {
+												   List<String> names,
+												   DownloadActivityType type,
+												   boolean includeDownloaded,
+												   int limit) {
 		List<IndexItem> res = new ArrayList<>();
 		OsmandRegions regions = app.getRegions();
 		DownloadIndexesThread downloadThread = app.getDownloadThread();
@@ -666,9 +665,9 @@ public class DownloadResources extends DownloadResourceGroup {
 	}
 
 	private static boolean isIndexItemDownloaded(DownloadIndexesThread downloadThread,
-	                                             DownloadActivityType type,
-	                                             WorldRegion downloadRegion,
-	                                             List<IndexItem> res) {
+												 DownloadActivityType type,
+												 WorldRegion downloadRegion,
+												 List<IndexItem> res) {
 		List<IndexItem> otherIndexItems =
 				new ArrayList<>(downloadThread.getIndexes().getIndexItems(downloadRegion));
 		for (IndexItem indexItem : otherIndexItems) {
@@ -681,7 +680,7 @@ public class DownloadResources extends DownloadResourceGroup {
 	}
 
 	private boolean doesListContainIndexWithType(List<IndexItem> indexItems,
-	                                             DownloadActivityType type) {
+												 DownloadActivityType type) {
 		if (indexItems != null) {
 			for (IndexItem indexItem : indexItems) {
 				if (indexItem.getType() == type) {
@@ -693,9 +692,9 @@ public class DownloadResources extends DownloadResourceGroup {
 	}
 
 	private static boolean addIndexItem(DownloadIndexesThread downloadThread,
-	                                    DownloadActivityType type,
-	                                    WorldRegion downloadRegion,
-	                                    List<IndexItem> res) {
+										DownloadActivityType type,
+										WorldRegion downloadRegion,
+										List<IndexItem> res) {
 		List<IndexItem> otherIndexItems =
 				new ArrayList<>(downloadThread.getIndexes().getIndexItems(downloadRegion));
 		for (IndexItem indexItem : otherIndexItems) {

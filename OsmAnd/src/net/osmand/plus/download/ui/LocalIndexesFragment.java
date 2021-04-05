@@ -74,6 +74,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import static net.osmand.plus.download.DownloadActivityType.isSRTMItem;
+import static net.osmand.plus.download.MultipleIndexesUiHelper.getSRTMAbbrev;
+import static net.osmand.plus.download.MultipleIndexesUiHelper.isBaseSRTMItem;
+
 public class LocalIndexesFragment extends OsmandExpandableListFragment implements DownloadEvents,
 		OnMapSourceUpdateListener, RenameCallback {
 	private LoadLocalIndexTask asyncLoader;
@@ -351,10 +355,10 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 							getMyApplication().getResourceManager().closeFile(info.getFileName());
 							File tShm = new File(f.getParentFile(), f.getName() + "-shm");
 							File tWal = new File(f.getParentFile(), f.getName() + "-wal");
-							if(tShm.exists()) {
+							if (tShm.exists()) {
 								Algorithms.removeAllFiles(tShm);
 							}
-							if(tWal.exists()) {
+							if (tWal.exists()) {
 								Algorithms.removeAllFiles(tWal);
 							}
 						}
@@ -370,8 +374,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 							getMyApplication().getResourceManager().closeFile(info.getFileName());
 						}
 					} else if (operation == CLEAR_TILES_OPERATION) {
-						ITileSource src =  (ITileSource) info.getAttachedObject();
-						if(src != null) {
+						ITileSource src = (ITileSource) info.getAttachedObject();
+						if (src != null) {
 							src.deleteTiles(info.getPathToData());
 						}
 					}
@@ -419,10 +423,10 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		@Override
 		protected void onPostExecute(String result) {
 			a.setProgressBarIndeterminateVisibility(false);
-			if(result != null && result.length() > 0) {
+			if (result != null && result.length() > 0) {
 				Toast.makeText(a, result, Toast.LENGTH_LONG).show();
 			}
-			
+
 			if (operation == RESTORE_OPERATION || operation == BACKUP_OPERATION || operation == CLEAR_TILES_OPERATION) {
 				a.reloadLocalIndexes();
 			} else {
@@ -878,8 +882,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		private String getNameToDisplay(LocalIndexInfo child) {
 			return child.getType() == LocalIndexType.VOICE_DATA ? FileNameTranslationHelper.getVoiceName(ctx, child.getFileName()) :
 					FileNameTranslationHelper.getFileName(ctx,
-					ctx.getMyApplication().getResourceManager().getOsmandRegions(),
-					child.getFileName());
+							ctx.getMyApplication().getResourceManager().getOsmandRegions(),
+							child.getFileName());
 		}
 
 		@Override
@@ -963,7 +967,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				return ctx.getString(R.string.download_roads_only_item);
 			} else if (child.isBackupedData() && child.getFileName().endsWith(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT)) {
 				return ctx.getString(R.string.download_wikipedia_maps);
-			} else if (child.isBackupedData() && child.getFileName().endsWith(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT)) {
+			} else if (child.isBackupedData() && (child.getFileName().endsWith(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT)
+					|| child.getFileName().endsWith(IndexConstants.BINARY_SRTM_FEET_MAP_INDEX_EXT))) {
 				return ctx.getString(R.string.download_srtm_maps);
 			}
 			return "";
@@ -1027,6 +1032,10 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 						builder.append(" • ");
 					}
 					builder.append(AndroidUtils.formatSize(ctx, child.getSize() * 1024l));
+				}
+
+				if (isSRTMItem(child)) {
+					builder.append(" (").append(getSRTMAbbrev(ctx, isBaseSRTMItem(child))).append(")");
 				}
 
 				if (!Algorithms.isEmpty(child.getDescription())) {
@@ -1150,5 +1159,4 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 	private DownloadActivity getDownloadActivity() {
 		return (DownloadActivity) getActivity();
 	}
-
 }

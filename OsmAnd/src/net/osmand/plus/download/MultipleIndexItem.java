@@ -1,5 +1,7 @@
 package net.osmand.plus.download;
 
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 
 import net.osmand.map.WorldRegion;
@@ -9,13 +11,16 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import static net.osmand.plus.download.DownloadActivityType.SRTM_COUNTRY_FILE;
+import static net.osmand.plus.download.MultipleIndexesUiHelper.isBaseSRTMItem;
+
 public class MultipleIndexItem extends DownloadItem {
 
 	private final List<IndexItem> items;
 
 	public MultipleIndexItem(@NonNull WorldRegion region,
-	                         @NonNull List<IndexItem> items,
-	                         @NonNull DownloadActivityType type) {
+							 @NonNull List<IndexItem> items,
+							 @NonNull DownloadActivityType type) {
 		super(type);
 		this.items = items;
 	}
@@ -110,6 +115,22 @@ public class MultipleIndexItem extends DownloadItem {
 		return totalSizeMb;
 	}
 
+	@NonNull
+	public String getSizeDescription(Context ctx, boolean baseSRTM) {
+		double totalSizeMb = 0.0d;
+		if (this.type == SRTM_COUNTRY_FILE) {
+			for (IndexItem item : items) {
+				if (item.hasActualDataToDownload()) {
+					if (baseSRTM && isBaseSRTMItem(item) || !baseSRTM && !isBaseSRTMItem(item)) {
+						totalSizeMb += item.getSizeToDownloadInMb();
+					}
+				}
+			}
+			return getFormattedMb(ctx, totalSizeMb);
+		}
+		return getFormattedMb(ctx, getSizeToDownloadInMb());
+	}
+
 	@Override
 	public double getArchiveSizeMB() {
 		double result = 0.0d;
@@ -118,5 +139,4 @@ public class MultipleIndexItem extends DownloadItem {
 		}
 		return result;
 	}
-
 }

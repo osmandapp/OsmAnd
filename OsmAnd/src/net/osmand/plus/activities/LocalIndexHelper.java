@@ -143,8 +143,6 @@ public class LocalIndexHelper {
 		return null;
 	}
 
-	
-
 	public List<LocalIndexInfo> getLocalIndexInfos(String downloadName) {
 		List<LocalIndexInfo> list = new ArrayList<>();
 		LocalIndexInfo info = getLocalIndexInfo(LocalIndexType.MAP_DATA, downloadName, false, false);
@@ -313,7 +311,7 @@ public class LocalIndexHelper {
 			}
 		}
 	}
-	
+
 	private void loadTravelData(File mapPath, List<LocalIndexInfo> result, AbstractLoadLocalIndexTask loadTask) {
 		if (mapPath.canRead()) {
 			for (File mapFile : listFilesSorted(mapPath)) {
@@ -334,7 +332,8 @@ public class LocalIndexHelper {
 			for (File mapFile : listFilesSorted(mapPath)) {
 				if (mapFile.isFile() && mapFile.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
 					LocalIndexType lt = LocalIndexType.MAP_DATA;
-					if (mapFile.getName().endsWith(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT)) {
+					if (mapFile.getName().endsWith(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT)
+							|| mapFile.getName().endsWith(IndexConstants.BINARY_SRTM_FEET_MAP_INDEX_EXT)) {
 						lt = LocalIndexType.SRTM_DATA;
 					} else if (mapFile.getName().endsWith(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT)) {
 						lt = LocalIndexType.WIKI_DATA;
@@ -403,7 +402,7 @@ public class LocalIndexHelper {
 			if (fileName.endsWith(IndexConstants.SQLITE_EXT)) {
 				return fileName.substring(0, fileName.length() - IndexConstants.SQLITE_EXT.length());
 			}
-			if (localIndexInfo.getType() == TRAVEL_DATA && 
+			if (localIndexInfo.getType() == TRAVEL_DATA &&
 					fileName.endsWith(IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT)) {
 				return fileName.substring(0, fileName.length() - IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT.length());
 			}
@@ -430,5 +429,4 @@ public class LocalIndexHelper {
 			return fileName;
 		}
 	}
-
 }

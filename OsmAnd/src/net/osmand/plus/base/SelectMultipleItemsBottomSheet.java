@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,8 +22,14 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton.Builder;
+import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.SimpleDividerItem;
+import net.osmand.plus.download.MultipleIndexesUiHelper.SelectedItemsListener;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.widgets.MultiStateToggleButton;
+import net.osmand.plus.widgets.MultiStateToggleButton.OnRadioItemClickListener;
+import net.osmand.plus.widgets.MultiStateToggleButton.RadioItem;
 import net.osmand.util.Algorithms;
 import net.osmand.view.ThreeStateCheckbox;
 
@@ -35,6 +42,8 @@ import static net.osmand.view.ThreeStateCheckbox.State.UNCHECKED;
 
 public class SelectMultipleItemsBottomSheet extends MenuBottomSheetDialogFragment {
 
+	public static final String TAG = SelectMultipleItemsBottomSheet.class.getSimpleName();
+
 	private OsmandApplication app;
 	private UiUtilities uiUtilities;
 
@@ -45,15 +54,57 @@ public class SelectMultipleItemsBottomSheet extends MenuBottomSheetDialogFragmen
 	private TextView selectedSize;
 	private ThreeStateCheckbox checkBox;
 
+	private int sizeAboveList = 0;
 	private int activeColorRes;
 	private int secondaryColorRes;
+	private String addDescriptionText;
+	private String leftRadioButtonText;
+	private String rightRadioButtonText;
+	private boolean customOptionsVisible;
+	private boolean leftButtonSelected;
 
 	private final List<SelectableItem> allItems = new ArrayList<>();
 	private final List<SelectableItem> selectedItems = new ArrayList<>();
 	private SelectionUpdateListener selectionUpdateListener;
 	private OnApplySelectionListener onApplySelectionListener;
+	private OnRadioButtonSelectListener onRadioButtonSelectListener;
+	private SelectedItemsListener selectedItemsListener;
 
-	public static final String TAG = SelectMultipleItemsBottomSheet.class.getSimpleName();
+	public static SelectMultipleItemsBottomSheet showInstance(@NonNull AppCompatActivity activity,
+															  @NonNull List<SelectableItem> items,
+															  @Nullable List<SelectableItem> selected,
+															  boolean usedOnMap) {
+		SelectMultipleItemsBottomSheet fragment = new SelectMultipleItemsBottomSheet();
+		fragment.setUsedOnMap(usedOnMap);
+		fragment.setItems(items);
+		fragment.setSelectedItems(selected);
+		FragmentManager fm = activity.getSupportFragmentManager();
+		fragment.show(fm, TAG);
+		return fragment;
+	}
+
+	public static SelectMultipleItemsBottomSheet showInstance(@NonNull AppCompatActivity activity,
+															  @NonNull List<SelectableItem> items,
+															  @Nullable List<SelectableItem> selected,
+															  boolean usedOnMap,
+															  String addDescription,
+															  boolean customOptionsVisible,
+															  boolean leftButtonSelected,
+															  String leftRadioButtonText,
+															  String rightRadioButtonText) {
+		SelectMultipleItemsBottomSheet fragment = new SelectMultipleItemsBottomSheet();
+		fragment.setUsedOnMap(usedOnMap);
+		fragment.setItems(items);
+		fragment.setSelectedItems(selected);
+		fragment.setAddDescriptionText(addDescription);
+		fragment.setCustomOptionsVisible(customOptionsVisible);
+		fragment.setLeftButtonSelected(leftButtonSelected);
+		fragment.setLeftRadioButtonText(leftRadioButtonText);
+		fragment.setRightRadioButtonText(rightRadioButtonText);
+		FragmentManager fm = activity.getSupportFragmentManager();
+		fragment.show(fm, TAG);
+		return fragment;
+	}
 
 	@Nullable
 	@Override
@@ -72,7 +123,16 @@ public class SelectMultipleItemsBottomSheet extends MenuBottomSheetDialogFragmen
 
 		items.add(createTitleItem());
 		items.add(new SimpleDividerItem(app));
+		sizeAboveList = items.size();
 		createListItems();
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		if (requireActivity().isChangingConfigurations()) {
+			dismiss();
+		}
 	}
 
 	private BaseBottomSheetItem createTitleItem() {
@@ -85,64 +145,109 @@ public class SelectMultipleItemsBottomSheet extends MenuBottomSheetDialogFragmen
 		selectedSize = view.findViewById(R.id.selected_size);
 		title = view.findViewById(R.id.title);
 		View selectAllButton = view.findViewById(R.id.select_all_button);
-		selectAllButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				checkBox.performClick();
-				boolean checked = checkBox.getState() == CHECKED;
-				if (checked) {
-					selectedItems.addAll(allItems);
-				} else {
-					selectedItems.clear();
+		TextView addDescription = view.findViewById(R.id.additional_description);
+		LinearLayout customRadioButtons = view.findViewById(R.id.custom_radio_buttons);
+
+		if (!isMultipleItem()) {
+			AndroidUiHelper.setVisibility(View.GONE, description, selectedSize, selectAllButton);
+		} else {
+			selectAllButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					checkBox.performClick();
+					boolean checked = checkBox.getState() == CHECKED;
+					if (checked) {
+						selectedItems.addAll(allItems);
+					} else {
+						selectedItems.clear();
+					}
+					onSelectedItemsChanged();
+					updateItems(checked);
 				}
-				onSelectedItemsChanged();
-				updateItems(checked);
-			}
-		});
+			});
+		}
+
+		if (!Algorithms.isEmpty(addDescriptionText)) {
+			addDescription.setText(addDescriptionText);
+			AndroidUiHelper.setVisibility(View.VISIBLE, addDescription);
+		}
+
+		if (customOptionsVisible) {
+			AndroidUiHelper.setVisibility(View.VISIBLE, customRadioButtons);
+			RadioItem leftRadioButton = new RadioItem(leftRadioButtonText);
+			RadioItem rightRadioButton = new RadioItem(rightRadioButtonText);
+			MultiStateToggleButton toggleButtons =
+					new MultiStateToggleButton(app, customRadioButtons, nightMode);
+			toggleButtons.setItems(leftRadioButton, rightRadioButton);
+			toggleButtons.updateView(true);
+			leftRadioButton.setOnClickListener(new OnRadioItemClickListener() {
+				@Override
+				public boolean onRadioItemClick(RadioItem radioItem, View view) {
+					onRadioButtonSelectListener.onSelect(leftButtonSelected = true);
+					updateSelectedSizeView();
+					updateSelectAllButton();
+					updateApplyButtonEnable();
+					return true;
+				}
+			});
+			rightRadioButton.setOnClickListener(new OnRadioItemClickListener() {
+				@Override
+				public boolean onRadioItemClick(RadioItem radioItem, View view) {
+					onRadioButtonSelectListener.onSelect(leftButtonSelected = false);
+					updateSelectedSizeView();
+					updateSelectAllButton();
+					updateApplyButtonEnable();
+					return true;
+				}
+			});
+			toggleButtons.setSelectedItem(leftButtonSelected ? leftRadioButton : rightRadioButton);
+		}
+
 		return new SimpleBottomSheetItem.Builder().setCustomView(view).create();
 	}
 
 	private void createListItems() {
-		for (final SelectableItem item : allItems) {
-			boolean checked = selectedItems.contains(item);
-			final BottomSheetItemWithCompoundButton[] uiItem = new BottomSheetItemWithCompoundButton[1];
-			final Builder builder = (BottomSheetItemWithCompoundButton.Builder) new Builder();
-			builder.setChecked(checked)
-					.setButtonTintList(AndroidUtils.createCheckedColorStateList(app, secondaryColorRes, activeColorRes))
-					.setLayoutId(R.layout.bottom_sheet_item_with_descr_and_checkbox_56dp)
-					.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							boolean checked = !uiItem[0].isChecked();
-							uiItem[0].setChecked(checked);
-							SelectableItem tag = (SelectableItem) uiItem[0].getTag();
-							if (checked) {
-								selectedItems.add(tag);
-							} else {
-								selectedItems.remove(tag);
+		if (isMultipleItem()) {
+			for (int i = 0; i < allItems.size(); i++) {
+				final SelectableItem item = allItems.get(i);
+				boolean checked = selectedItems.contains(item);
+				final int finalI = i;
+				items.add(new Builder()
+						.setChecked(checked)
+						.setButtonTintList(AndroidUtils.createCheckedColorStateList(app, secondaryColorRes, activeColorRes))
+						.setDescription(item.description)
+						.setIcon(uiUtilities.getIcon(item.iconId, activeColorRes))
+						.setTitle(item.title)
+						.setLayoutId(R.layout.bottom_sheet_item_with_descr_and_checkbox_56dp)
+						.setTag(item)
+						.setOnClickListener(new View.OnClickListener() {
+							@Override
+							public void onClick(View view) {
+								BottomSheetItemWithCompoundButton item = (BottomSheetItemWithCompoundButton) items.get(finalI + sizeAboveList);
+								boolean checked = item.isChecked();
+								item.setChecked(!checked);
+								SelectableItem tag = (SelectableItem) item.getTag();
+								if (!checked) {
+									selectedItems.add(tag);
+								} else {
+									selectedItems.remove(tag);
+								}
+								onSelectedItemsChanged();
 							}
-							onSelectedItemsChanged();
-						}
-					})
-					.setTag(item);
-			setupListItem(builder, item);
-			uiItem[0] = builder.create();
-			items.add(uiItem[0]);
+						})
+						.create());
+			}
+		} else if (allItems.size() == 1) {
+			final SelectableItem item = allItems.get(0);
+			items.add(new Builder()
+					.setDescription(item.description)
+					.setDescriptionColorId(AndroidUtils.getSecondaryTextColorId(nightMode))
+					.setIcon(uiUtilities.getIcon(item.iconId, activeColorRes))
+					.setTitle(item.title)
+					.setLayoutId(R.layout.bottom_sheet_item_with_descr_56dp)
+					.setTag(item)
+					.create());
 		}
-	}
-
-	@Override
-	protected void setupRightButton() {
-		super.setupRightButton();
-		applyButtonTitle = rightButton.findViewById(R.id.button_text);
-	}
-
-	@Override
-	protected void onRightBottomButtonClick() {
-		if (onApplySelectionListener != null) {
-			onApplySelectionListener.onSelectionApplied(selectedItems);
-		}
-		dismiss();
 	}
 
 	private void onSelectedItemsChanged() {
@@ -154,48 +259,32 @@ public class SelectMultipleItemsBottomSheet extends MenuBottomSheetDialogFragmen
 		}
 	}
 
-	@Override
-	protected int getRightBottomButtonTextId() {
-		return R.string.shared_string_apply;
-	}
-
-	@Override
-	protected boolean useVerticalButtons() {
-		return true;
-	}
-
-	private void setupListItem(Builder builder, SelectableItem item) {
-		builder.setTitle(item.title);
-		builder.setDescription(item.description);
-		builder.setIcon(uiUtilities.getIcon(item.iconId, activeColorRes));
-	}
-
 	private void updateSelectAllButton() {
-		String checkBoxTitle;
-		if (Algorithms.isEmpty(selectedItems)) {
-			checkBox.setState(UNCHECKED);
-			checkBoxTitle = getString(R.string.shared_string_select_all);
-		} else {
-			checkBox.setState(selectedItems.containsAll(allItems) ? CHECKED : MISC);
-			checkBoxTitle = getString(R.string.shared_string_deselect_all);
+		if (isMultipleItem()) {
+			String checkBoxTitle;
+			if (Algorithms.isEmpty(selectedItems)) {
+				checkBox.setState(UNCHECKED);
+				checkBoxTitle = getString(R.string.shared_string_select_all);
+			} else {
+				checkBox.setState(selectedItems.containsAll(allItems) ? CHECKED : MISC);
+				checkBoxTitle = getString(R.string.shared_string_deselect_all);
+			}
+			int checkBoxColor = checkBox.getState() == UNCHECKED ? secondaryColorRes : activeColorRes;
+			CompoundButtonCompat.setButtonTintList(checkBox, ColorStateList.valueOf(ContextCompat.getColor(app, checkBoxColor)));
+			this.checkBoxTitle.setText(checkBoxTitle);
 		}
-		int checkBoxColor = checkBox.getState() == UNCHECKED ? secondaryColorRes : activeColorRes;
-		CompoundButtonCompat.setButtonTintList(checkBox, ColorStateList.valueOf(ContextCompat.getColor(app, checkBoxColor)));
-		this.checkBoxTitle.setText(checkBoxTitle);
 	}
 
 	private void updateSelectedSizeView() {
-		String selected = String.valueOf(selectedItems.size());
-		String all = String.valueOf(allItems.size());
-		selectedSize.setText(getString(R.string.ltr_or_rtl_combine_via_slash, selected, all));
+		if (isMultipleItem()) {
+			String selected = String.valueOf(selectedItems.size());
+			String all = String.valueOf(allItems.size());
+			selectedSize.setText(getString(R.string.ltr_or_rtl_combine_via_slash, selected, all));
+		}
 	}
 
 	private void updateApplyButtonEnable() {
-		if (Algorithms.isEmpty(selectedItems)) {
-			rightButton.setEnabled(false);
-		} else {
-			rightButton.setEnabled(true);
-		}
+		rightButton.setEnabled(!Algorithms.isEmpty(selectedItems));
 	}
 
 	private void updateItems(boolean checked) {
@@ -206,6 +295,59 @@ public class SelectMultipleItemsBottomSheet extends MenuBottomSheetDialogFragmen
 		}
 	}
 
+	public void setItems(List<SelectableItem> allItems) {
+		this.allItems.clear();
+		if (!Algorithms.isEmpty(allItems)) {
+			this.allItems.addAll(allItems);
+		}
+	}
+
+	private void setSelectedItems(List<SelectableItem> selected) {
+		this.selectedItems.clear();
+		if (!Algorithms.isEmpty(selected)) {
+			/*List<SelectableItem> prevDownloadItems = new ArrayList<>(this.selectedItems);
+			for (SelectableItem prevDownloadItem : selected) {
+				Object object = prevDownloadItem.getObject();
+				if (object instanceof IndexItem && ((IndexItem) object).isDownloaded()) {
+					prevDownloadItems.add(prevDownloadItem);
+				}
+			}
+			selected.removeAll(prevDownloadItems);*/
+			this.selectedItems.addAll(selected);
+		}
+	}
+
+	public void recreateList(List<SelectableItem> allItems) {
+		setItems(allItems);
+		if (selectedItemsListener != null) {
+			setSelectedItems(selectedItemsListener.createSelectedItems(this.allItems, leftButtonSelected));
+		}
+		if (items.size() > sizeAboveList) {
+			for (int i = 0; i < this.allItems.size(); i++) {
+				SelectableItem item = this.allItems.get(i);
+				BottomSheetItemWithDescription button = (BottomSheetItemWithDescription) items.get(i + sizeAboveList);
+				button.setDescription(item.description);
+				button.setTitle(item.title);
+				button.setTag(item);
+				if (isMultipleItem()) {
+					((BottomSheetItemWithCompoundButton) button).setChecked(selectedItems.contains(item));
+				}
+			}
+		}
+	}
+
+	public boolean isMultipleItem() {
+		return allItems.size() > 1;
+	}
+
+	public List<SelectableItem> getSelectedItems() {
+		return selectedItems;
+	}
+
+	public void setConfirmButtonTitle(@NonNull String confirmButtonTitle) {
+		applyButtonTitle.setText(confirmButtonTitle);
+	}
+
 	public void setTitle(@NonNull String title) {
 		this.title.setText(title);
 	}
@@ -214,45 +356,24 @@ public class SelectMultipleItemsBottomSheet extends MenuBottomSheetDialogFragmen
 		this.description.setText(description);
 	}
 
-	public void setConfirmButtonTitle(@NonNull String confirmButtonTitle) {
-		applyButtonTitle.setText(confirmButtonTitle);
+	public void setAddDescriptionText(String addDescriptionText) {
+		this.addDescriptionText = addDescriptionText;
 	}
 
-	private void setItems(List<SelectableItem> allItems) {
-		if (!Algorithms.isEmpty(allItems)) {
-			this.allItems.addAll(allItems);
-		}
+	public void setLeftRadioButtonText(String leftRadioButtonText) {
+		this.leftRadioButtonText = leftRadioButtonText;
 	}
 
-	private void setSelectedItems(List<SelectableItem> selected) {
-		if (!Algorithms.isEmpty(selected)) {
-			this.selectedItems.addAll(selected);
-		}
+	public void setRightRadioButtonText(String rightRadioButtonText) {
+		this.rightRadioButtonText = rightRadioButtonText;
 	}
 
-	public List<SelectableItem> getSelectedItems() {
-		return selectedItems;
+	public void setCustomOptionsVisible(boolean customOptionsVisible) {
+		this.customOptionsVisible = customOptionsVisible;
 	}
 
-	@Override
-	public void onPause() {
-		super.onPause();
-		if (requireActivity().isChangingConfigurations()) {
-			dismiss();
-		}
-	}
-
-	public static SelectMultipleItemsBottomSheet showInstance(@NonNull AppCompatActivity activity,
-	                                                          @NonNull List<SelectableItem> items,
-	                                                          @Nullable List<SelectableItem> selected,
-	                                                          boolean usedOnMap) {
-		SelectMultipleItemsBottomSheet fragment = new SelectMultipleItemsBottomSheet();
-		fragment.setUsedOnMap(usedOnMap);
-		fragment.setItems(items);
-		fragment.setSelectedItems(selected);
-		FragmentManager fm = activity.getSupportFragmentManager();
-		fragment.show(fm, TAG);
-		return fragment;
+	public void setLeftButtonSelected(boolean leftButtonSelected) {
+		this.leftButtonSelected = leftButtonSelected;
 	}
 
 	public void setSelectionUpdateListener(SelectionUpdateListener selectionUpdateListener) {
@@ -263,12 +384,24 @@ public class SelectMultipleItemsBottomSheet extends MenuBottomSheetDialogFragmen
 		this.onApplySelectionListener = onApplySelectionListener;
 	}
 
+	public void setOnRadioButtonSelectListener(OnRadioButtonSelectListener onRadioButtonSelectListener) {
+		this.onRadioButtonSelectListener = onRadioButtonSelectListener;
+	}
+
+	public void setSelectedItemsListener(SelectedItemsListener selectedItemsListener) {
+		this.selectedItemsListener = selectedItemsListener;
+	}
+
 	public interface SelectionUpdateListener {
 		void onSelectionUpdate();
 	}
 
 	public interface OnApplySelectionListener {
 		void onSelectionApplied(List<SelectableItem> selectedItems);
+	}
+
+	public interface OnRadioButtonSelectListener {
+		void onSelect(boolean leftButton);
 	}
 
 	public static class SelectableItem {
@@ -279,6 +412,10 @@ public class SelectMultipleItemsBottomSheet extends MenuBottomSheetDialogFragmen
 
 		public void setTitle(String title) {
 			this.title = title;
+		}
+
+		public String getDescription() {
+			return description;
 		}
 
 		public void setDescription(String description) {
@@ -298,4 +435,27 @@ public class SelectMultipleItemsBottomSheet extends MenuBottomSheetDialogFragmen
 		}
 	}
 
+	@Override
+	protected void setupRightButton() {
+		super.setupRightButton();
+		applyButtonTitle = rightButton.findViewById(R.id.button_text);
+	}
+
+	@Override
+	protected void onRightBottomButtonClick() {
+		if (onApplySelectionListener != null) {
+			onApplySelectionListener.onSelectionApplied(selectedItems);
+		}
+		dismiss();
+	}
+
+	@Override
+	protected int getRightBottomButtonTextId() {
+		return R.string.shared_string_apply;
+	}
+
+	@Override
+	protected boolean useVerticalButtons() {
+		return true;
+	}
 }
