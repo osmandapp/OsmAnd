@@ -187,13 +187,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 				getString(R.string.slope_read_more),
 				wikiString
 		);
-		boolean isArabicLocale = Locale.getDefault().getLanguage().equals("ar");
-		String emptyStateText;
-		if (isArabicLocale) {
-			emptyStateText = getString(R.string.terrain_empty_state_text) + "\n" + PLUGIN_URL;
-		} else {
-			emptyStateText = String.format(getString(R.string.ltr_or_rtl_combine_via_space), getString(R.string.terrain_empty_state_text), PLUGIN_URL);
-		}
+		String emptyStateText = getString(R.string.terrain_empty_state_text) + "\n" + PLUGIN_URL;
 		setupClickableText(slopeReadMoreTv, readMoreText, wikiString, SLOPES_WIKI_URL, false);
 		setupClickableText(emptyStateDescriptionTv, emptyStateText, PLUGIN_URL, PLUGIN_URL, true);
 
