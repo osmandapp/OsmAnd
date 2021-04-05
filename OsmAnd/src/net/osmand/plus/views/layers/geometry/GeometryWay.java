@@ -190,9 +190,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 						prevLon = lastProjection.getLongitude();
 					}
 					if (!Double.isNaN(prevLat) && !Double.isNaN(prevLon)) {
-						GeometryWayStyle<?> prevStyle = style instanceof GeometryMultiProfileWayStyle ?
-								getStyle(i - 1, style) : style;
-						addLocation(tb, prevLat, prevLon, prevStyle, tx, ty, angles, distances, dist, styles); // first point
+						addLocation(tb, prevLat, prevLon, getStyle(i - 1, style), tx, ty, angles, distances, dist, styles); // first point
 					}
 				}
 				addLocation(tb, lat, lon, style, tx, ty, angles, distances, dist, styles);

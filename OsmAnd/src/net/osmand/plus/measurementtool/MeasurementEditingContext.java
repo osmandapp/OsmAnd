@@ -1119,21 +1119,17 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 			return true;
 		}
 		Set<String> profiles = new HashSet<>();
-		List<TrkSegment> segments = new ArrayList<>();
-		segments.addAll(beforeSegments);
-		segments.addAll(afterSegments);
-		for (TrkSegment segment : segments) {
-			if (Algorithms.isEmpty(segment.points)) {
-				continue;
-			}
-			for (WptPt pt : segment.points) {
-				if (!pt.isGap()) {
-					profiles.add(pt.getProfileType());
+		for (RoadSegmentData segmentData : roadSegmentData.values()) {
+			String profile = segmentData.getAppMode().getStringKey();
+			if (!DEFAULT_APP_MODE.getStringKey().equals(profile)) {
+				profiles.add(profile);
+				if (profiles.size() >= 2) {
+					lastCalculationMode = NEXT_SEGMENT;
+					return true;
 				}
 			}
 		}
-		lastCalculationMode = profiles.size() >= 2 ? NEXT_SEGMENT : WHOLE_TRACK;
-		return profiles.size() >= 2;
+		return false;
 	}
 
 	@Override
