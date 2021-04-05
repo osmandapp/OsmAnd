@@ -27,9 +27,8 @@ import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routing.RouteLineDrawInfo;
 import net.osmand.plus.settings.backend.ListStringPreference;
-import net.osmand.plus.settings.fragments.RouteLineAppearanceFragment;
-import net.osmand.plus.settings.fragments.RouteLineAppearanceFragment.HeaderInfo;
-import net.osmand.plus.settings.fragments.RouteLineAppearanceFragment.HeaderUiAdapter;
+import net.osmand.plus.settings.fragments.HeaderInfo;
+import net.osmand.plus.settings.fragments.HeaderUiAdapter;
 import net.osmand.plus.track.AppearanceViewHolder;
 import net.osmand.plus.track.ColorsCard;
 import net.osmand.plus.track.CustomColorBottomSheet.ColorPickerListener;
@@ -159,8 +158,8 @@ public class RouteLineColorCard extends BaseCard implements CardListener, ColorP
 	}
 
 	private void changeMapTheme(DayNightMode mapTheme) {
-		if (targetFragment instanceof RouteLineAppearanceFragment) {
-			((RouteLineAppearanceFragment) targetFragment).onMapThemeUpdated(mapTheme);
+		if (targetFragment instanceof OnMapThemeUpdateListener) {
+			((OnMapThemeUpdateListener) targetFragment).onMapThemeUpdated(mapTheme);
 		}
 		if (selectedMode == ColorMode.CUSTOM) {
 			Integer color = getRouteLineColor();
@@ -219,14 +218,14 @@ public class RouteLineColorCard extends BaseCard implements CardListener, ColorP
 	}
 
 	private void updateColorItems() {
-		if (targetFragment instanceof RouteLineAppearanceFragment) {
-			((RouteLineAppearanceFragment) targetFragment).onSelectedColorChanged();
+		if (targetFragment instanceof OnSelectedColorChangeListener) {
+			((OnSelectedColorChangeListener) targetFragment).onSelectedColorChanged();
 		}
 		updateColorName();
 	}
 
 	@Override
-	public void onNeedHeaderUpdate() {
+	public void onNeedUpdateHeader() {
 		updateColorName();
 	}
 
@@ -239,7 +238,7 @@ public class RouteLineColorCard extends BaseCard implements CardListener, ColorP
 			int colorNameId = ColorDialogs.getColorName(getRouteLineColor());
 			colorName = app.getString(colorNameId);
 		}
-		headerUiAdapter.onHeaderUpdate(this, title, colorName);
+		headerUiAdapter.onUpdateHeader(this, title, colorName);
 	}
 
 	private void updateDescription() {
@@ -358,6 +357,14 @@ public class RouteLineColorCard extends BaseCard implements CardListener, ColorP
 		public int getItemCount() {
 			return items.size();
 		}
+	}
+
+	public interface OnSelectedColorChangeListener {
+		void onSelectedColorChanged();
+	}
+
+	public interface OnMapThemeUpdateListener {
+		void onMapThemeUpdated(@NonNull DayNightMode mapTheme);
 	}
 
 }

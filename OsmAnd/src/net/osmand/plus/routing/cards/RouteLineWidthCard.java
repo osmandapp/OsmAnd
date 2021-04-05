@@ -26,8 +26,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routing.RouteLineDrawInfo;
-import net.osmand.plus.settings.fragments.RouteLineAppearanceFragment.HeaderInfo;
-import net.osmand.plus.settings.fragments.RouteLineAppearanceFragment.HeaderUiAdapter;
+import net.osmand.plus.settings.fragments.HeaderInfo;
+import net.osmand.plus.settings.fragments.HeaderUiAdapter;
 import net.osmand.plus.track.AppearanceViewHolder;
 import net.osmand.plus.track.TrackAppearanceFragment.OnNeedScrollListener;
 import net.osmand.util.Algorithms;
@@ -129,7 +129,7 @@ public class RouteLineWidthCard extends BaseCard implements HeaderInfo {
 	}
 
 	@Override
-	public void onNeedHeaderUpdate() {
+	public void onNeedUpdateHeader() {
 		updateHeader();
 	}
 
@@ -137,7 +137,7 @@ public class RouteLineWidthCard extends BaseCard implements HeaderInfo {
 		String title = app.getString(R.string.select_track_width);
 		String description = app.getString(selectedMode.titleId);
 		tvSelectedType.setText(description);
-		headerUiAdapter.onHeaderUpdate(this, title, description);
+		headerUiAdapter.onUpdateHeader(this, title, description);
 	}
 
 	private void updateDescription() {

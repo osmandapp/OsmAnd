@@ -31,13 +31,17 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.enums.DayNightMode;
 import net.osmand.plus.routing.RouteLineDrawInfo;
 import net.osmand.plus.routing.cards.RouteLineColorCard;
+import net.osmand.plus.routing.cards.RouteLineColorCard.OnMapThemeUpdateListener;
+import net.osmand.plus.routing.cards.RouteLineColorCard.OnSelectedColorChangeListener;
 import net.osmand.plus.routing.cards.RouteLineWidthCard;
 import net.osmand.plus.track.CustomColorBottomSheet.ColorPickerListener;
 import net.osmand.plus.track.TrackAppearanceFragment.OnNeedScrollListener;
 
 import static net.osmand.util.Algorithms.objectEquals;
 
-public class RouteLineAppearanceFragment extends ContextMenuScrollFragment implements ColorPickerListener {
+public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
+		implements ColorPickerListener, OnMapThemeUpdateListener, OnSelectedColorChangeListener,
+		HeaderUiAdapter {
 
 	public static final String TAG = RouteLineAppearanceFragment.class.getName();
 
@@ -172,31 +176,24 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment imple
 		ViewGroup cardsContainer = getCardsContainer();
 		cardsContainer.removeAllViews();
 
-		colorCard = new RouteLineColorCard(mapActivity, this, routeLineDrawInfo, initMapTheme, selectedMapTheme, getHeaderUiAdapter());
+		colorCard = new RouteLineColorCard(mapActivity, this, routeLineDrawInfo, initMapTheme, selectedMapTheme, this);
 		cardsContainer.addView(colorCard.build(mapActivity));
 
-		widthCard = new RouteLineWidthCard(mapActivity, routeLineDrawInfo, createScrollListener(), getHeaderUiAdapter());
+		widthCard = new RouteLineWidthCard(mapActivity, routeLineDrawInfo, createScrollListener(), this);
 		cardsContainer.addView(widthCard.build(mapActivity));
 	}
 
-	private HeaderUiAdapter getHeaderUiAdapter() {
-		if (headerUiAdapter == null) {
-			headerUiAdapter = new HeaderUiAdapter() {
-				@Override
-				public void onHeaderUpdate(@NonNull HeaderInfo headerInfo,
-				                           @NonNull String title,
-				                           @NonNull String description) {
-					if (selectedHeader == null) {
-						selectedHeader = headerInfo;
-					}
-					if (objectEquals(selectedHeader, headerInfo)) {
-						headerTitle.setText(title);
-						headerDescr.setText(description);
-					}
-				}
-			};
+	@Override
+	public void onUpdateHeader(@NonNull HeaderInfo headerInfo,
+	                           @NonNull String title,
+	                           @NonNull String description) {
+		if (selectedHeader == null) {
+			selectedHeader = headerInfo;
 		}
-		return headerUiAdapter;
+		if (objectEquals(selectedHeader, headerInfo)) {
+			headerTitle.setText(title);
+			headerDescr.setText(description);
+		}
 	}
 
 	private OnNeedScrollListener createScrollListener() {
@@ -319,7 +316,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment imple
 		} else {
 			selectedHeader = colorCard;
 		}
-		selectedHeader.onNeedHeaderUpdate();
+		selectedHeader.onNeedUpdateHeader();
 	}
 
 	private void initVisibleRect() {
@@ -473,13 +470,4 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment imple
 		void applyRouteLineAppearance(@NonNull RouteLineDrawInfo routeLineDrawInfo);
 	}
 
-	public interface HeaderUiAdapter {
-		void onHeaderUpdate(@NonNull HeaderInfo headerInfo,
-		                    @NonNull String title,
-		                    @NonNull String description);
-	}
-
-	public interface HeaderInfo {
-		void onNeedHeaderUpdate();
-	}
 }
