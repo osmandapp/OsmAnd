@@ -92,7 +92,8 @@ public class FileSettingsItem extends StreamSettingsItem {
 					case OTHER:
 						break;
 					case SRTM_MAP:
-						if (name.endsWith(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT)) {
+						if (name.endsWith(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT)
+								|| name.endsWith(IndexConstants.BINARY_SRTM_FEET_MAP_INDEX_EXT)) {
 							return subtype;
 						}
 						break;
@@ -257,6 +258,8 @@ public class FileSettingsItem extends StreamSettingsItem {
 			prefix = oldPath.substring(0, oldPath.lastIndexOf(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT));
 		} else if (oldPath.endsWith(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT)) {
 			prefix = oldPath.substring(0, oldPath.lastIndexOf(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT));
+		} else if (oldPath.endsWith(IndexConstants.BINARY_SRTM_FEET_MAP_INDEX_EXT)) {
+			prefix = oldPath.substring(0, oldPath.lastIndexOf(IndexConstants.BINARY_SRTM_FEET_MAP_INDEX_EXT));
 		} else if (oldPath.endsWith(IndexConstants.BINARY_ROAD_MAP_INDEX_EXT)) {
 			prefix = oldPath.substring(0, oldPath.lastIndexOf(IndexConstants.BINARY_ROAD_MAP_INDEX_EXT));
 		} else {

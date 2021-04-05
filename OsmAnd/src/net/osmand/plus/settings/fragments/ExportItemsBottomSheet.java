@@ -530,7 +530,8 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			return getString(R.string.download_roads_only_item);
 		} else if (file.getName().endsWith(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT)) {
 			return getString(R.string.download_wikipedia_maps);
-		} else if (file.getName().endsWith(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT)) {
+		} else if (file.getName().endsWith(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT)
+				|| file.getName().endsWith(IndexConstants.BINARY_SRTM_FEET_MAP_INDEX_EXT)) {
 			return getString(R.string.download_srtm_maps);
 		} else if (file.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
 			return getString(R.string.download_regular_maps);
