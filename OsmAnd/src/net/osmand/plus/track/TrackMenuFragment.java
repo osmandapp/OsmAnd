@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -270,8 +269,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					MapActivity mapActivity = getMapActivity();
 					if (mapActivity != null) {
 						MapContextMenu contextMenu = mapActivity.getContextMenu();
-						if (contextMenu.isActive() && contextMenu.getPointDescription() != null
-								&& contextMenu.getPointDescription().isGpxPoint()) {
+						PointDescription pointDescription = contextMenu.getPointDescription();
+						if (pointDescription != null && pointDescription.isGpxPoint()) {
+							contextMenu.init(contextMenu.getLatLon(), pointDescription, contextMenu.getObject());
 							contextMenu.show();
 						} else if (Algorithms.objectEquals(callingFragmentTag, QuickSearchDialogFragment.TAG)) {
 							mapActivity.showQuickSearch(ShowQuickSearchMode.CURRENT, false);
@@ -294,6 +294,10 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		String fileName = Algorithms.getFileWithoutDirs(getGpx().path);
 		gpxTitle = !isCurrentRecordingTrack() ? GpxUiHelper.getGpxTitle(fileName)
 				: app.getResources().getString(R.string.shared_string_currently_recording_track);
+	}
+
+	public LatLon getLatLon() {
+		return latLon;
 	}
 
 	public GPXFile getGpx() {

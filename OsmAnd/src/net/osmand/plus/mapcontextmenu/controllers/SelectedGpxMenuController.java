@@ -42,7 +42,7 @@ public class SelectedGpxMenuController extends MenuController {
 		leftTitleButtonController = new TitleButtonController() {
 			@Override
 			public void buttonPressed() {
-				mapContextMenu.hide(false);
+				mapContextMenu.close();
 				WptPt wptPt = selectedGpxPoint.selectedPoint;
 				LatLon latLon = new LatLon(wptPt.lat, wptPt.lon);
 				SelectedGpxFile selectedGpxFile = selectedGpxPoint.getSelectedGpxFile();
