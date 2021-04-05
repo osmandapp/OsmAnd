@@ -234,7 +234,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 				ivIcon.setImageDrawable(icon);
 
 				if (currentKey.equals(MANUALLY_SPECIFIED)) {
-					tvSummary.setText(item.getDirectory());
+					setFormattedPath(item, tvSummary);
 					secondPart.setVisibility(View.GONE);
 					tvAdditionalDescription.setVisibility(View.GONE);
 					divider.setVisibility(View.GONE);
@@ -252,15 +252,8 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 					}
 					if (currentKey.equals(INTERNAL_STORAGE)) {
 						tvAdditionalDescription.setText(item.getDescription());
-					} else if (currentKey.equals(SHARED_STORAGE)) {
-						if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
-							BidiFormatter rtlFormatter = BidiFormatter.getInstance();
-							tvAdditionalDescription.setText(rtlFormatter.unicodeWrap(item.getDirectory()));
-						} else {
-							tvAdditionalDescription.setText(String.format("\u200E%s", item.getDirectory()));
-						}
 					} else {
-						tvAdditionalDescription.setText(item.getDirectory());
+						setFormattedPath(item, tvAdditionalDescription);
 					}
 				}
 			}
@@ -307,6 +300,15 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 					tvMemory.setText(summary);
 				}
 			}
+		}
+	}
+
+	private void setFormattedPath(StorageItem item, TextView tvAdditionalDescription) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+			BidiFormatter pathRtlFormatter = BidiFormatter.getInstance();
+			tvAdditionalDescription.setText(pathRtlFormatter.unicodeWrap(item.getDirectory()));
+		} else {
+			tvAdditionalDescription.setText(String.format("\u200E%s", item.getDirectory()));
 		}
 	}
 
