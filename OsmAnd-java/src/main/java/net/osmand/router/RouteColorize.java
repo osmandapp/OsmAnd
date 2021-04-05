@@ -8,6 +8,7 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.PlatformUtil;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.OsmMapUtils;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -81,6 +82,10 @@ public class RouteColorize {
     /**
      * @param type ELEVATION, SPEED, SLOPE
      */
+    public RouteColorize(int zoom, GPXFile gpxFile, ColorizationType type) {
+        this(zoom, gpxFile, null, type, 0);
+    }
+
     public RouteColorize(int zoom, GPXFile gpxFile, GPXTrackAnalysis analysis, ColorizationType type, float maxProfileSpeed) {
 
         if (!gpxFile.hasTrkPt()) {
@@ -91,8 +96,13 @@ public class RouteColorize {
         List<Double> latList = new ArrayList<>();
         List<Double> lonList = new ArrayList<>();
         List<Double> valList = new ArrayList<>();
-
         int wptIdx = 0;
+
+        if (analysis == null) {
+            analysis = Algorithms.isEmpty(gpxFile.path)
+                    ? gpxFile.getAnalysis(System.currentTimeMillis())
+                    : gpxFile.getAnalysis(gpxFile.modifiedTime);
+        }
         for (Track t : gpxFile.tracks) {
             for (TrkSegment ts : t.segments) {
                 for (WptPt p : ts.points) {
