@@ -69,16 +69,13 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 	protected void updateToolbar() {
 		super.updateToolbar();
 		View view = getView();
-		final boolean nightMode = !settings.isLightContentForMode(getSelectedAppMode());
-		int iconColor = getResources().getColor(nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light);
-		ImageView profileIcon = (ImageView) view.findViewById(R.id.profile_icon);
-		profileIcon.setImageResource(R.drawable.ic_action_help_online);
-		profileIcon.setColorFilter(iconColor);
+		ImageView profileIcon = view.findViewById(R.id.profile_icon);
+		profileIcon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_help_online, isNightMode() ? R.color.icon_color_default_dark : R.color.icon_color_default_light));
 		profileIcon.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				if (getContext() != null) {
-					WikipediaDialogFragment.showFullArticle(getContext(), Uri.parse(OSMAND_VOICE_NAVIGATION_URL), nightMode);
+					WikipediaDialogFragment.showFullArticle(getContext(), Uri.parse(OSMAND_VOICE_NAVIGATION_URL), isNightMode());
 				}
 			}
 		});
