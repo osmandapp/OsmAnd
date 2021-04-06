@@ -3,11 +3,10 @@ package net.osmand.plus.measurementtool;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PointF;
-
-import androidx.core.content.ContextCompat;
 
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
@@ -25,10 +24,13 @@ import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.plus.views.layers.geometry.GeometryWay;
 import net.osmand.plus.views.layers.geometry.MultiProfileGeometryWay;
 import net.osmand.plus.views.layers.geometry.MultiProfileGeometryWayContext;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.core.content.ContextCompat;
 
 public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
 	private static final int POINTS_TO_DRAW = 50;
@@ -39,6 +41,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	private Bitmap centerIconDay;
 	private Bitmap centerIconNight;
 	private Bitmap pointIcon;
+	private Bitmap multiProfilePointIcon;
 	private Bitmap applyingPointIcon;
 	private Paint bitmapPaint;
 	private final RenderingLineAttributes lineAttrs = new RenderingLineAttributes("measureDistanceLine");
@@ -49,6 +52,8 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 
 	private int marginPointIconX;
 	private int marginPointIconY;
+	private int marginMultiProfilePointIconX;
+	private int marginMultiProfilePointIconY;
 	private int marginApplyingPointIconX;
 	private int marginApplyingPointIconY;
 	private final Path path = new Path();
@@ -71,6 +76,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		centerIconDay = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_ruler_center_day);
 		centerIconNight = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_ruler_center_night);
 		pointIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_measure_point_day);
+		createMultiProfilePointIcon();
 		applyingPointIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_measure_point_move_day);
 
 		float density = view.getDensity();
@@ -93,6 +99,9 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 
 		marginPointIconY = pointIcon.getHeight() / 2;
 		marginPointIconX = pointIcon.getWidth() / 2;
+
+		marginMultiProfilePointIconX = multiProfilePointIcon.getWidth() / 2;
+		marginMultiProfilePointIconY = multiProfilePointIcon.getHeight() / 2;
 
 		marginApplyingPointIconY = applyingPointIcon.getHeight() / 2;
 		marginApplyingPointIconX = applyingPointIcon.getWidth() / 2;
@@ -395,11 +404,11 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		}
 		float locX = tb.getPixXFromLatLon(pt.lat, pt.lon);
 		float locY = tb.getPixYFromLatLon(pt.lat, pt.lon);
-		if (editingCtx.isInMultiProfileMode()) {
-			canvas.drawBitmap(multiProfileGeometryWayContext.getPointIcon(), locX - multiProfileGeometryWayContext.pointIconSize / 2,
-					locY - multiProfileGeometryWayContext.pointIconSize / 2, bitmapPaint);
-		} else {
-			if (tb.containsPoint(locX, locY, 0)) {
+		if (tb.containsPoint(locX, locY, 0)) {
+			if (editingCtx.isInMultiProfileMode()) {
+				canvas.drawBitmap(multiProfilePointIcon, locX - marginMultiProfilePointIconX,
+						locY - marginMultiProfilePointIconY, bitmapPaint);
+			} else {
 				canvas.drawBitmap(pointIcon, locX - marginPointIconX, locY - marginPointIconY, bitmapPaint);
 			}
 		}
@@ -465,6 +474,27 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 			WptPt pt = editingCtx.getPoints().get(pos);
 			moveMapToLatLon(pt.getLatitude(), pt.getLongitude());
 		}
+	}
+
+	private void createMultiProfilePointIcon() {
+		float density = view.getDensity();
+		float outerRadius = density * 11f;
+		float centerRadius = density * 10.5f;
+		float innerRadius = density * 6.5f;
+
+		multiProfilePointIcon = Bitmap.createBitmap((int) (outerRadius * 2), (int) (outerRadius * 2), Bitmap.Config.ARGB_8888);
+		Canvas canvas = new Canvas(multiProfilePointIcon);
+		Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+		paint.setStyle(Paint.Style.FILL);
+
+		paint.setColor(Color.BLACK);
+		canvas.drawCircle(outerRadius, outerRadius, outerRadius, paint);
+
+		paint.setColor(Color.WHITE);
+		canvas.drawCircle(outerRadius, outerRadius, centerRadius, paint);
+
+		paint.setColor(Algorithms.parseColor("#637EFB"));
+		canvas.drawCircle(outerRadius, outerRadius, innerRadius, paint);
 	}
 
 	public void refreshMap() {
