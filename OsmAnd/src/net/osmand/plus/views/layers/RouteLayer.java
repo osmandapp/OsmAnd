@@ -107,7 +107,6 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 	private LayerDrawable previewIcon;
 
 	private int routeLineColor;
-	private float routeLineWidth;
 	private Integer directionArrowsColor;
 
 	public RouteLayer(RoutingHelper helper) {
@@ -467,7 +466,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 		} else {
 			widthKey = view.getSettings().ROUTE_LINE_WIDTH.getModeValue(helper.getAppMode());
 		}
-		return routeLineWidth = widthKey != null ? getWidthByKey(tileBox, widthKey) : attrs.paint.getStrokeWidth();
+		return widthKey != null ? getWidthByKey(tileBox, widthKey) : attrs.paint.getStrokeWidth();
 	}
 
 	@Nullable

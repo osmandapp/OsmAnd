@@ -53,7 +53,6 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 	private int toolbarHeightPx;
 	private DayNightMode initMapTheme;
 	private DayNightMode selectedMapTheme;
-	private HeaderUiAdapter headerUiAdapter;
 	private HeaderInfo selectedHeader;
 
 	private View buttonsShadow;
@@ -311,12 +310,16 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 	}
 
 	private void updateHeaderState() {
+		HeaderInfo header;
 		if (getBottomScrollView().getScrollY() > colorCard.getViewHeight() + headerTitle.getBottom()) {
-			selectedHeader = widthCard;
+			header = widthCard;
 		} else {
-			selectedHeader = colorCard;
+			header = colorCard;
 		}
-		selectedHeader.onNeedUpdateHeader();
+		if (header != selectedHeader) {
+			selectedHeader = header;
+			selectedHeader.onNeedUpdateHeader();
+		}
 	}
 
 	private void initVisibleRect() {
