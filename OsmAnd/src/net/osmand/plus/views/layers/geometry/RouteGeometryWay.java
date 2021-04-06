@@ -68,14 +68,22 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Geome
 
 	private static class GeometrySolidWayStyle extends GeometryWayStyle<RouteGeometryWayContext> {
 
+		private Integer pointColor;
+
 		GeometrySolidWayStyle(RouteGeometryWayContext context, Integer color, Float width,
 		                      Integer pointColor) {
-			super(context, color, width, pointColor);
+			super(context, color, width);
+			this.pointColor = pointColor;
 		}
 
 		@Override
 		public Bitmap getPointBitmap() {
 			return getContext().getArrowBitmap();
+		}
+
+		@Override
+		public Integer getPointColor() {
+			return pointColor;
 		}
 
 		@Override
