@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -270,8 +269,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					MapActivity mapActivity = getMapActivity();
 					if (mapActivity != null) {
 						MapContextMenu contextMenu = mapActivity.getContextMenu();
-						if (contextMenu.isActive() && contextMenu.getPointDescription() != null
-								&& contextMenu.getPointDescription().isGpxPoint()) {
+						PointDescription pointDescription = contextMenu.getPointDescription();
+						if (pointDescription != null && pointDescription.isGpxPoint()) {
+							contextMenu.init(contextMenu.getLatLon(), pointDescription, contextMenu.getObject());
 							contextMenu.show();
 						} else if (Algorithms.objectEquals(callingFragmentTag, QuickSearchDialogFragment.TAG)) {
 							mapActivity.showQuickSearch(ShowQuickSearchMode.CURRENT, false);
@@ -294,6 +294,10 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		String fileName = Algorithms.getFileWithoutDirs(getGpx().path);
 		gpxTitle = !isCurrentRecordingTrack() ? GpxUiHelper.getGpxTitle(fileName)
 				: app.getResources().getString(R.string.shared_string_currently_recording_track);
+	}
+
+	public LatLon getLatLon() {
+		return latLon;
 	}
 
 	public GPXFile getGpx() {
@@ -746,19 +750,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	@Override
 	public int getStatusBarColorId() {
-		View view = getView();
-		if (view != null) {
-			boolean nightMode = isNightMode();
-			if (getViewY() <= getFullScreenTopPosY() || !isPortrait()) {
-				if (Build.VERSION.SDK_INT >= 23 && !nightMode) {
-					view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-				}
-				return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
-			} else {
-				if (Build.VERSION.SDK_INT >= 23 && !nightMode) {
-					view.setSystemUiVisibility(view.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-				}
-			}
+		if (getViewY() <= getFullScreenTopPosY() || !isPortrait()) {
+			return isNightMode() ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
 		}
 		return -1;
 	}
@@ -827,7 +820,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 						segment = segments.get(0);
 					}
 				}
-				GpxDisplayItemType[] filterTypes = new GpxDisplayItemType[]{GpxDisplayItemType.TRACK_SEGMENT};
+				GpxDisplayItemType[] filterTypes = new GpxDisplayItemType[] {GpxDisplayItemType.TRACK_SEGMENT};
 				List<GpxDisplayItem> items = TrackDisplayHelper.flatten(displayHelper.getOriginalGroups(filterTypes));
 				if (segment != null && !Algorithms.isEmpty(items)) {
 					SplitSegmentDialogFragment.showInstance(fragmentManager, displayHelper, items.get(0), segment);
@@ -1220,7 +1213,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			@Override
 			public void gpxSavingFinished(Exception errorMessage) {
 				if (selectedGpxFile != null) {
-					List<GpxDisplayGroup> groups = displayHelper.getDisplayGroups(new GpxDisplayItemType[]{GpxDisplayItemType.TRACK_SEGMENT});
+					List<GpxDisplayGroup> groups = displayHelper.getDisplayGroups(new GpxDisplayItemType[] {GpxDisplayItemType.TRACK_SEGMENT});
 					selectedGpxFile.setDisplayGroups(groups, app);
 					selectedGpxFile.processPoints(app);
 				}

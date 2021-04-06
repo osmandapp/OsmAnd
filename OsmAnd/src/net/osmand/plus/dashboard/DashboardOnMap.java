@@ -578,6 +578,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 		if (visible) {
 			mapActivity.dismissCardDialog();
+			mapActivity.dismissTrackMenu();
 			mapActivity.getContextMenu().hideMenues();
 			mapViewLocation = mapActivity.getMapLocation();
 			mapRotation = mapActivity.getMapRotate();

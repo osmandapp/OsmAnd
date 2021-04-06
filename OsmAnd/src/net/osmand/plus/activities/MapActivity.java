@@ -30,6 +30,21 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback;
+import androidx.core.content.ContextCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentManager.BackStackEntry;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceFragmentCompat.OnPreferenceStartFragmentCallback;
+
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.Location;
@@ -156,21 +171,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.core.app.ActivityCompat;
-import androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback;
-import androidx.core.content.ContextCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentManager.BackStackEntry;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.PreferenceFragmentCompat.OnPreferenceStartFragmentCallback;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
 
@@ -2074,7 +2074,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void showQuickSearch(double latitude, double longitude) {
-		hideContextMenu();
+		hideVisibleMenu();
 		QuickSearchDialogFragment fragment = getQuickSearchDialogFragment();
 		if (fragment != null) {
 			fragment.dismiss();
@@ -2085,7 +2085,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void showQuickSearch(String searchQuery) {
-		hideContextMenu();
+		hideVisibleMenu();
 		QuickSearchDialogFragment fragment = getQuickSearchDialogFragment();
 		if (fragment != null) {
 			fragment.dismiss();
@@ -2096,7 +2096,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void showQuickSearch(Object object) {
-		hideContextMenu();
+		hideVisibleMenu();
 		QuickSearchDialogFragment fragment = getQuickSearchDialogFragment();
 		if (fragment != null) {
 			fragment.dismiss();
@@ -2119,7 +2119,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (mode == ShowQuickSearchMode.CURRENT) {
 			mapContextMenu.close();
 		} else {
-			hideContextMenu();
+			hideVisibleMenu();
 		}
 		QuickSearchDialogFragment fragment = getQuickSearchDialogFragment();
 		if (mode.isPointSelection()) {
@@ -2172,7 +2172,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (mode == ShowQuickSearchMode.CURRENT) {
 			mapContextMenu.close();
 		} else {
-			hideContextMenu();
+			hideVisibleMenu();
 		}
 		QuickSearchDialogFragment fragment = getQuickSearchDialogFragment();
 		if (mode.isPointSelection()) {
@@ -2221,11 +2221,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		BaseSettingsFragment.showInstance(this, SettingsScreenType.MAIN_SETTINGS);
 	}
 
-	private void hideContextMenu() {
+	private void hideVisibleMenu() {
 		if (mapContextMenu.isVisible()) {
 			mapContextMenu.hide();
 		} else if (mapContextMenu.getMultiSelectionMenu().isVisible()) {
 			mapContextMenu.getMultiSelectionMenu().hide();
+		} else if (getTrackMenuFragment() != null) {
+			dismissTrackMenu();
 		}
 	}
 
@@ -2275,6 +2277,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public RouteLineAppearanceFragment getRouteLineAppearanceFragment() {
 		return getFragment(RouteLineAppearanceFragment.TAG);
+	}
+
+	public void dismissTrackMenu() {
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		if (!fragmentManager.isStateSaved()) {
+			fragmentManager.popBackStack(TrackMenuFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+		}
 	}
 
 	public void backToConfigureProfileFragment() {
