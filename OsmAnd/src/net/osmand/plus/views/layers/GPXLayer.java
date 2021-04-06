@@ -44,10 +44,10 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.PointImageDrawable;
+import net.osmand.plus.itinerary.ItineraryGroup;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.mapmarkers.MapMarker;
-import net.osmand.plus.itinerary.ItineraryGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
@@ -56,6 +56,7 @@ import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.track.GradientScaleType;
 import net.osmand.plus.track.SaveGpxAsyncTask;
 import net.osmand.plus.track.TrackDrawInfo;
+import net.osmand.plus.track.TrackMenuFragment;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.Renderable;
@@ -1098,8 +1099,16 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	@Override
-	public boolean runExclusiveAction(Object o, boolean unknownLocation) {
-		return false;
+	public boolean runExclusiveAction(Object object, boolean unknownLocation) {
+		if (unknownLocation || !(object instanceof SelectedGpxPoint)) {
+			return false;
+		}
+		MapActivity mapActivity = (MapActivity) view.getContext();
+		SelectedGpxPoint point = (SelectedGpxPoint) object;
+		WptPt wptPt = point.getSelectedPoint();
+		TrackMenuFragment.showInstance(mapActivity, point.getSelectedGpxFile(),
+				new LatLon(wptPt.lat, wptPt.lon), null, null);
+		return true;
 	}
 
 	@Override
