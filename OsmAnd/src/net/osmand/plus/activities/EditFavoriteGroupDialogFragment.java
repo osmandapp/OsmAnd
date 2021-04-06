@@ -27,8 +27,6 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.AndroidUtils;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
-import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.itinerary.ItineraryGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -40,6 +38,8 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.ColorDialogs;
+import net.osmand.plus.itinerary.ItineraryGroup;
+import net.osmand.plus.itinerary.ItineraryHelper;
 import net.osmand.util.Algorithms;
 
 public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragment {
@@ -177,7 +177,7 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 		if (group.getPoints().size() > 0) {
 			items.add(new DividerHalfItem(getContext()));
 
-			final MapMarkersHelper markersHelper = app.getMapMarkersHelper();
+			final ItineraryHelper itineraryHelper = app.getItineraryHelper();
 			final FavoriteGroup favGroup = this.group;
 			final ItineraryGroup markersGr = app.getItineraryHelper().getMarkersGroup(this.group);
 			final boolean synced = markersGr != null;
@@ -190,7 +190,7 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 						@Override
 						public void onClick(View view) {
 							if (synced) {
-								markersHelper.removeMarkersGroup(markersGr);
+								itineraryHelper.removeMarkersGroup(markersGr);
 							} else {
 								app.getItineraryHelper().addOrEnableGroup(favGroup);
 							}

@@ -1119,6 +1119,7 @@ public class GPXUtilities {
 		public List<Track> tracks = new ArrayList<>();
 		private List<WptPt> points = new ArrayList<>();
 		public List<Route> routes = new ArrayList<>();
+		public List<ItineraryGroupItem> itineraryGroups = new ArrayList<>();
 
 		public Exception error = null;
 		public String path = "";
@@ -2156,6 +2157,24 @@ public class GPXUtilities {
 		}
 	}
 
+	public static class ItineraryGroupItem {
+		public String id;
+		public String name;
+		public String categories;
+		public String type;
+		public String disabled;
+
+		public StringBundle toStringBundle() {
+			StringBundle bundle = new StringBundle();
+			bundle.putString("id", id);
+			bundle.putString("name", name);
+			bundle.putString("categories", categories);
+			bundle.putString("type", type);
+			bundle.putString("disabled", disabled);
+			return bundle;
+		}
+	}
+
 	public static GPXFile loadGPXFile(InputStream f) {
 		GPXFile gpxFile = new GPXFile(null);
 		SimpleDateFormat format = new SimpleDateFormat(GPX_TIME_FORMAT, Locale.US);
@@ -2174,8 +2193,10 @@ public class GPXUtilities {
 			boolean routePointExtension = false;
 			List<RouteSegment> routeSegments = new ArrayList<>();
 			List<RouteType> routeTypes = new ArrayList<>();
+			List<ItineraryGroupItem> itineraryGroups = new ArrayList<>();
 			boolean routeExtension = false;
 			boolean typesExtension = false;
+			boolean itineraryExtension = false;
 			parserState.push(gpxFile);
 			int tok;
 			while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
@@ -2194,6 +2215,11 @@ public class GPXUtilities {
 								RouteType type = parseRouteTypeAttributes(parser);
 								routeTypes.add(type);
 							}
+						} else if (itineraryExtension) {
+							if (tagName.equals("itinerary_group")) {
+								ItineraryGroupItem type = parseItineraryGroupAttributes(parser);
+								itineraryGroups.add(type);
+							}
 						}
 						switch (tagName) {
 							case "routepointextension":
@@ -2209,6 +2235,10 @@ public class GPXUtilities {
 
 							case "types":
 								typesExtension = true;
+								break;
+
+							case "itinerary_groups":
+								itineraryExtension = true;
 								break;
 
 							default:
@@ -2441,6 +2471,10 @@ public class GPXUtilities {
 						typesExtension = false;
 						continue;
 					}
+					if (extensionReadMode && tag.equals("itinerary_groups")) {
+						itineraryExtension = false;
+						continue;
+					}
 
 					if (tag.equals("metadata")) {
 						Object pop = parserState.pop();
@@ -2498,12 +2532,23 @@ public class GPXUtilities {
 				firstSegment.routeSegments = routeSegments;
 				firstSegment.routeTypes = routeTypes;
 			}
-		gpxFile.addGeneralTrack();
+			gpxFile.itineraryGroups = itineraryGroups;
+			gpxFile.addGeneralTrack();
 		} catch (Exception e) {
 			gpxFile.error = e;
 			log.error("Error reading gpx", e); //$NON-NLS-1$
 		}
 		return gpxFile;
+	}
+
+	private static ItineraryGroupItem parseItineraryGroupAttributes(XmlPullParser parser) {
+		ItineraryGroupItem itineraryGroup = new ItineraryGroupItem();
+		itineraryGroup.id = parser.getAttributeValue("", "id");
+		itineraryGroup.name = parser.getAttributeValue("", "name");
+		itineraryGroup.categories = parser.getAttributeValue("", "categories");
+		itineraryGroup.type = parser.getAttributeValue("", "type");
+		itineraryGroup.disabled = parser.getAttributeValue("", "disabled");
+		return itineraryGroup;
 	}
 
 	private static Reader getUTF8Reader(InputStream f) throws IOException {
