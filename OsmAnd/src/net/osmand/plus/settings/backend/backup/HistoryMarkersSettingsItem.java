@@ -10,9 +10,10 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.itinerary.ItineraryGroup;
+import net.osmand.plus.itinerary.ItineraryGroup.ItineraryType;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
-import net.osmand.plus.itinerary.ItineraryGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.util.Algorithms;
@@ -125,7 +126,7 @@ public class HistoryMarkersSettingsItem extends CollectionSettingsItem<MapMarker
 	public ItineraryGroup getMarkersGroup() {
 		String name = app.getString(R.string.markers_history);
 		String groupId = ExportSettingsType.HISTORY_MARKERS.name();
-		ItineraryGroup markersGroup = new ItineraryGroup(groupId, name, ItineraryGroup.ANY_TYPE);
+		ItineraryGroup markersGroup = new ItineraryGroup(groupId, name, ItineraryType.MARKERS);
 		markersGroup.setMarkers(items);
 		return markersGroup;
 	}

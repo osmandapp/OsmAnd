@@ -505,7 +505,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 		final boolean markersRemoved;
 		if (markersSearch != null) {
 			markersGr = markersSearch;
-			markersHelper.removeMarkersGroup(markersGr);
+			app.getItineraryHelper().removeMarkersGroup(markersGr);
 			markersRemoved = true;
 		} else if (gpxFile != null) {
 			markersGr = app.getItineraryHelper().addOrEnableGroup(gpxFile);
@@ -539,7 +539,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 								} else {
 									ItineraryGroup group = app.getItineraryHelper().getMarkersGroup(gpxFile);
 									if (group != null) {
-										markersHelper.removeMarkersGroup(group);
+										app.getItineraryHelper().removeMarkersGroup(group);
 									}
 								}
 								trackActivity.invalidateOptionsMenu();

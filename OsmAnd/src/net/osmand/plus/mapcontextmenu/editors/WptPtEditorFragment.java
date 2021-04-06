@@ -24,7 +24,6 @@ import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor.OnDismissListener;
-import net.osmand.plus.itinerary.ItineraryGroup;
 import net.osmand.plus.track.SaveGpxAsyncTask;
 import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.util.Algorithms;
@@ -219,10 +218,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 	private void syncGpx(GPXFile gpxFile) {
 		OsmandApplication app = getMyApplication();
 		if (app != null) {
-			ItineraryGroup group = app.getItineraryHelper().getMarkersGroup(gpxFile);
-			if (group != null) {
-				app.getItineraryHelper().runSynchronization(group);
-			}
+			app.getItineraryHelper().runSynchronization(gpxFile);
 		}
 	}
 

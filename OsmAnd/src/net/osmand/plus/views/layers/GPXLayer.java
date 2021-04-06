@@ -47,7 +47,6 @@ import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.mapmarkers.MapMarker;
-import net.osmand.plus.itinerary.ItineraryGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
@@ -1181,7 +1180,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 						position.getLongitude(), System.currentTimeMillis(), objectInMotion.desc,
 						objectInMotion.name, objectInMotion.category, objectInMotion.getColor(),
 						objectInMotion.getIconName(), objectInMotion.getBackgroundType());
-				syncGpx(gpxFile);
+
+				view.getApplication().getItineraryHelper().runSynchronization(gpxFile);
 				if (gpxFile.showCurrentTrack) {
 					if (callback != null) {
 						callback.onApplyMovedObject(true, objectInMotion);
@@ -1205,13 +1205,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			}
 		} else if (callback != null) {
 			callback.onApplyMovedObject(false, o);
-		}
-	}
-
-	private void syncGpx(GPXFile gpxFile) {
-		ItineraryGroup group = view.getApplication().getItineraryHelper().getMarkersGroup(gpxFile);
-		if (group != null) {
-			view.getApplication().getItineraryHelper().runSynchronization(group);
 		}
 	}
 }

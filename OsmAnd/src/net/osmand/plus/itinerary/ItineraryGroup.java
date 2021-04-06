@@ -16,18 +16,15 @@ import java.util.Set;
 
 public class ItineraryGroup {
 
-	public static final int ANY_TYPE = -1;
-	public static final int FAVORITES_TYPE = 0;
-	public static final int GPX_TYPE = 1;
-
 	public static final String MARKERS_SYNC_GROUP_ID = "markers_sync_group_id";
 
 	private String id;
 	private String name;
-	private int type = ANY_TYPE;
+	private ItineraryType type = ItineraryType.MARKERS;
 	private Set<String> wptCategories;
-	private long creationDate;
 	private boolean disabled;
+
+	private long creationDate;
 	private boolean visible = true;
 	private boolean wasShown = false;
 	private boolean visibleUntilRestart;
@@ -38,11 +35,51 @@ public class ItineraryGroup {
 	private CategoriesSubHeader categoriesSubHeader;
 	private ShowHideHistoryButton showHideHistoryButton;
 
+	public enum ItineraryType {
+		MARKERS("markers", -1),
+		FAVOURITES("favourites", 0),
+		TRACK("track", 1);
+
+		private int typeId;
+		private String typeName;
+
+		ItineraryType(@NonNull String typeName, int typeId) {
+			this.typeName = typeName;
+			this.typeId = typeId;
+		}
+
+		public int getTypeId() {
+			return typeId;
+		}
+
+		public String getTypeName() {
+			return typeName;
+		}
+
+		public static ItineraryType findTypeForId(int typeId) {
+			for (ItineraryType type : values()) {
+				if (type.getTypeId() == typeId) {
+					return type;
+				}
+			}
+			return ItineraryType.MARKERS;
+		}
+
+		public static ItineraryType findTypeForName(String typeName) {
+			for (ItineraryType type : values()) {
+				if (type.getTypeName().equalsIgnoreCase(typeName)) {
+					return type;
+				}
+			}
+			return ItineraryType.MARKERS;
+		}
+	}
+
 	public ItineraryGroup() {
 
 	}
 
-	public ItineraryGroup(@NonNull String id, @NonNull String name, int type) {
+	public ItineraryGroup(@NonNull String id, @NonNull String name, @NonNull ItineraryType type) {
 		this.id = id;
 		this.name = name;
 		this.type = type;
@@ -104,7 +141,7 @@ public class ItineraryGroup {
 		return name;
 	}
 
-	public int getType() {
+	public ItineraryType getType() {
 		return type;
 	}
 

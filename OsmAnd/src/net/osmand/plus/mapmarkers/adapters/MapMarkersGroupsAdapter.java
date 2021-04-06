@@ -21,20 +21,21 @@ import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.itinerary.ItineraryHelper;
-import net.osmand.plus.mapmarkers.CategoriesSubHeader;
-import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.mapmarkers.GroupHeader;
-import net.osmand.plus.mapmarkers.MapMarker;
-import net.osmand.plus.itinerary.ItineraryGroup;
-import net.osmand.plus.mapmarkers.ShowHideHistoryButton;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.itinerary.ItineraryGroup;
+import net.osmand.plus.itinerary.ItineraryGroup.ItineraryType;
+import net.osmand.plus.itinerary.ItineraryHelper;
+import net.osmand.plus.mapmarkers.CategoriesSubHeader;
+import net.osmand.plus.mapmarkers.GroupHeader;
+import net.osmand.plus.mapmarkers.MapMarker;
+import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.mapmarkers.SelectWptCategoriesBottomSheetDialogFragment;
+import net.osmand.plus.mapmarkers.ShowHideHistoryButton;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
@@ -221,7 +222,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 
 	public int getGroupHeaderPosition(String groupId) {
 		int pos = -1;
-		ItineraryGroup group = app.getItineraryHelper().getMapMarkerGroupById(groupId, ItineraryGroup.ANY_TYPE);
+		ItineraryGroup group = app.getItineraryHelper().getMapMarkerGroupById(groupId, ItineraryType.MARKERS);
 		if (group != null) {
 			pos = items.indexOf(group.getGroupHeader());
 		}
@@ -406,7 +407,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				String groupName = group.getName();
 				if (groupName.isEmpty()) {
 					groupName = app.getString(R.string.shared_string_favorites);
-				} else if (group.getType() == ItineraryGroup.GPX_TYPE) {
+				} else if (group.getType() == ItineraryType.TRACK) {
 					groupName = groupName.replace(IndexConstants.GPX_FILE_EXT, "").replace("/", " ").replace("_", " ");
 				}
 				if (group.isDisabled()) {
@@ -464,7 +465,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 							fragment.show(mapActivity.getSupportFragmentManager(), SelectWptCategoriesBottomSheetDialogFragment.TAG);
 						}
 						app.getItineraryHelper().updateGroupDisabled(group, disabled);
-						if (group.getType() == ItineraryGroup.GPX_TYPE) {
+						if (group.getType() == ItineraryType.TRACK) {
 							group.setVisibleUntilRestart(disabled);
 							String gpxPath = group.getGpxPath();
 							SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxPath);
@@ -487,7 +488,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 									.setAction(R.string.shared_string_undo, new View.OnClickListener() {
 										@Override
 										public void onClick(View view) {
-											if (group.getType() == ItineraryGroup.GPX_TYPE && gpxFile[0] != null) {
+											if (group.getType() == ItineraryType.TRACK && gpxFile[0] != null) {
 												switchGpxVisibility(gpxFile[0], null, true);
 											}
 											app.getItineraryHelper().enableGroup(group);

@@ -232,7 +232,7 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 			selectedCategories.add(group.getName());
 		}
 		if (Algorithms.isEmpty(selectedCategories)) {
-			mapMarkersHelper.removeMarkersGroup(markersGroup);
+			app.getItineraryHelper().removeMarkersGroup(markersGroup);
 		} else {
 			app.getItineraryHelper().updateGroupWptCategories(markersGroup, selectedCategories);
 			if (!groupCreated) {
@@ -504,7 +504,7 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 		protected void onPostExecute(Void aVoid) {
 			GPXFile gpxFile = group.getGpx();
 			if (gpxFile != null && wasUpdated) {
-				syncGpx(gpxFile);
+				app.getItineraryHelper().runSynchronization(gpxFile);
 			}
 
 			if (progressDialog != null && progressDialog.isShowing()) {
@@ -520,13 +520,6 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 				if (fragment != null) {
 					fragment.updateContent();
 				}
-			}
-		}
-
-		private void syncGpx(GPXFile gpxFile) {
-			ItineraryGroup group = app.getItineraryHelper().getMarkersGroup(gpxFile);
-			if (group != null) {
-				app.getItineraryHelper().runSynchronization(group);
 			}
 		}
 	}

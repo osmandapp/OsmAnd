@@ -32,8 +32,9 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
-import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.itinerary.ItineraryGroup;
+import net.osmand.plus.itinerary.ItineraryGroup.ItineraryType;
+import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.osmedit.OpenstreetmapPoint;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
@@ -609,7 +610,7 @@ public class SettingsHelper {
 		if (!mapMarkers.isEmpty()) {
 			String name = app.getString(R.string.map_markers);
 			String groupId = ExportSettingsType.ACTIVE_MARKERS.name();
-			ItineraryGroup markersGroup = new ItineraryGroup(groupId, name, ItineraryGroup.ANY_TYPE);
+			ItineraryGroup markersGroup = new ItineraryGroup(groupId, name, ItineraryType.MARKERS);
 			markersGroup.setMarkers(mapMarkers);
 			myPlacesItems.put(ExportSettingsType.ACTIVE_MARKERS, Collections.singletonList(markersGroup));
 		}
@@ -617,7 +618,7 @@ public class SettingsHelper {
 		if (!markersHistory.isEmpty()) {
 			String name = app.getString(R.string.shared_string_history);
 			String groupId = ExportSettingsType.HISTORY_MARKERS.name();
-			ItineraryGroup markersGroup = new ItineraryGroup(groupId, name, ItineraryGroup.ANY_TYPE);
+			ItineraryGroup markersGroup = new ItineraryGroup(groupId, name, ItineraryType.MARKERS);
 			markersGroup.setMarkers(markersHistory);
 			myPlacesItems.put(ExportSettingsType.HISTORY_MARKERS, Collections.singletonList(markersGroup));
 		}

@@ -9,6 +9,7 @@ import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.itinerary.ItineraryGroup;
+import net.osmand.plus.itinerary.ItineraryGroup.ItineraryType;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -203,7 +204,7 @@ public class MapMarkersDbHelper {
 		boolean disabled = query.getInt(3) == 1;
 		String categories = query.getString(4);
 
-		ItineraryGroup res = new ItineraryGroup(id, name, type);
+		ItineraryGroup res = new ItineraryGroup(id, name, ItineraryType.findTypeForId(type));
 		res.setDisabled(disabled);
 		res.setWptCategories(categories == null ? null : Algorithms.decodeStringSet(categories));
 

@@ -30,7 +30,6 @@ import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.enums.MetricsConstants;
-import net.osmand.plus.itinerary.ItineraryGroup;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.util.Algorithms;
@@ -686,12 +685,12 @@ public class GpxSelectionHelper {
 	}
 
 	private SelectedGpxFile selectGpxFileImpl(GPXFile gpx,
-	                                          GpxDataItem dataItem,
-	                                          boolean show,
-	                                          boolean notShowNavigationDialog,
-	                                          boolean syncGroup,
-	                                          boolean selectedByUser,
-	                                          boolean addToHistory) {
+											  GpxDataItem dataItem,
+											  boolean show,
+											  boolean notShowNavigationDialog,
+											  boolean syncGroup,
+											  boolean selectedByUser,
+											  boolean addToHistory) {
 		boolean displayed;
 		SelectedGpxFile sf;
 		if (gpx != null && gpx.showCurrentTrack) {
@@ -726,7 +725,7 @@ public class GpxSelectionHelper {
 			}
 		}
 		if (syncGroup) {
-			syncGpxWithMarkers(gpx);
+			syncGpxWithItinerary(gpx);
 		}
 		if (sf != null) {
 			sf.splitProcessed = false;
@@ -766,33 +765,33 @@ public class GpxSelectionHelper {
 	}
 
 	public SelectedGpxFile selectGpxFile(GPXFile gpx,
-	                                     GpxDataItem dataItem,
-	                                     boolean show,
-	                                     boolean notShowNavigationDialog,
-	                                     boolean syncGroup,
-	                                     boolean selectedByUser,
-	                                     boolean addToHistory) {
+										 GpxDataItem dataItem,
+										 boolean show,
+										 boolean notShowNavigationDialog,
+										 boolean syncGroup,
+										 boolean selectedByUser,
+										 boolean addToHistory) {
 		SelectedGpxFile sf = selectGpxFileImpl(gpx, dataItem, show, notShowNavigationDialog, syncGroup, selectedByUser, addToHistory);
 		saveCurrentSelections();
 		return sf;
 	}
 
 	public SelectedGpxFile selectGpxFile(GPXFile gpx,
-	                                     boolean show,
-	                                     boolean notShowNavigationDialog,
-	                                     boolean syncGroup,
-	                                     boolean selectedByUser,
-	                                     boolean canAddToMarkers) {
+										 boolean show,
+										 boolean notShowNavigationDialog,
+										 boolean syncGroup,
+										 boolean selectedByUser,
+										 boolean canAddToMarkers) {
 		return selectGpxFile(gpx, show, notShowNavigationDialog, syncGroup, selectedByUser, canAddToMarkers, true);
 	}
 
 	public SelectedGpxFile selectGpxFile(GPXFile gpx,
-	                                     boolean show,
-	                                     boolean notShowNavigationDialog,
-	                                     boolean syncGroup,
-	                                     boolean selectedByUser,
-	                                     boolean canAddToMarkers,
-	                                     boolean addToHistory) {
+										 boolean show,
+										 boolean notShowNavigationDialog,
+										 boolean syncGroup,
+										 boolean selectedByUser,
+										 boolean canAddToMarkers,
+										 boolean addToHistory) {
 		GpxDataItem dataItem = app.getGpxDbHelper().getItem(new File(gpx.path));
 		if (canAddToMarkers && show && dataItem != null && dataItem.isShowAsMarkers()) {
 			app.getItineraryHelper().addOrEnableGroup(gpx);
@@ -802,30 +801,27 @@ public class GpxSelectionHelper {
 
 	public void clearPoints(GPXFile gpxFile) {
 		gpxFile.clearPoints();
-		syncGpxWithMarkers(gpxFile);
+		syncGpxWithItinerary(gpxFile);
 	}
 
 	public void addPoint(WptPt point, GPXFile gpxFile) {
 		gpxFile.addPoint(point);
-		syncGpxWithMarkers(gpxFile);
+		syncGpxWithItinerary(gpxFile);
 	}
 
 	public void addPoints(Collection<? extends WptPt> collection, GPXFile gpxFile) {
 		gpxFile.addPoints(collection);
-		syncGpxWithMarkers(gpxFile);
+		syncGpxWithItinerary(gpxFile);
 	}
 
 	public boolean removePoint(WptPt point, GPXFile gpxFile) {
 		boolean res = gpxFile.deleteWptPt(point);
-		syncGpxWithMarkers(gpxFile);
+		syncGpxWithItinerary(gpxFile);
 		return res;
 	}
 
-	private void syncGpxWithMarkers(GPXFile gpxFile) {
-		ItineraryGroup group = app.getItineraryHelper().getMarkersGroup(gpxFile);
-		if (group != null) {
-			app.getItineraryHelper().runSynchronization(group);
-		}
+	private void syncGpxWithItinerary(GPXFile gpxFile) {
+		app.getItineraryHelper().runSynchronization(gpxFile);
 	}
 
 	public static class SelectedGpxFile {
