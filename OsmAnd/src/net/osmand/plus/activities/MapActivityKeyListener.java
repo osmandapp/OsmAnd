@@ -53,7 +53,13 @@ public class MapActivityKeyListener implements KeyEvent.Callback {
 				uiHandler.sendMessageDelayed(msg, LONG_KEYPRESS_DELAY);
 			}
 			return true;
-		} else if (settings.USE_VOLUME_BUTTONS_AS_ZOOM.get()) {
+		} else if (settings.EXTERNAL_INPUT_DEVICE.get() != NO_EXTERNAL_DEVICE) {
+			return true;
+		} else if (mapScrollHelper.isScrollingDirectionKeyCode(keyCode)) {
+			return mapScrollHelper.onKeyDown(keyCode, event);
+		}
+
+		if (settings.USE_VOLUME_BUTTONS_AS_ZOOM.get()) {
 			if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
 				mapActivity.changeZoom(-1);
 				return true;
@@ -61,10 +67,6 @@ public class MapActivityKeyListener implements KeyEvent.Callback {
 				mapActivity.changeZoom(1);
 				return true;
 			}
-		} else if (settings.EXTERNAL_INPUT_DEVICE.get() != NO_EXTERNAL_DEVICE) {
-			return true;
-		} else if (mapScrollHelper.isScrollingDirectionKeyCode(keyCode)) {
-			return mapScrollHelper.onKeyDown(keyCode, event);
 		}
 		return app.getAidlApi().onKeyEvent(event);
 	}
