@@ -3,11 +3,15 @@ package net.osmand.plus.helpers;
 import android.view.KeyEvent;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.settings.backend.OsmandSettings;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static net.osmand.plus.settings.backend.OsmandSettings.PARROT_EXTERNAL_DEVICE;
+import static net.osmand.plus.settings.backend.OsmandSettings.WUNDERLINQ_EXTERNAL_DEVICE;
 
 public class ScrollHelper {
 
@@ -135,8 +139,21 @@ public class ScrollHelper {
 		this.onScrollEventListener = onScrollEventListener;
 	}
 
-	public boolean isScrollingDirectionKeyCode(int keyCode) {
-		return availableDirections.containsKey(keyCode);
+	public boolean isAvailableKeyCode(int keyCode) {
+		return availableDirections.containsKey(keyCode)
+				&& !isOverrideBySelectedExternalDevice(keyCode);
+	}
+
+	public boolean isOverrideBySelectedExternalDevice(int keyCode) {
+		OsmandSettings settings = app.getSettings();
+
+		if (settings.EXTERNAL_INPUT_DEVICE.get() == PARROT_EXTERNAL_DEVICE) {
+			return keyCode == KeyEvent.KEYCODE_DPAD_LEFT || keyCode == KeyEvent.KEYCODE_DPAD_RIGHT;
+
+		} else if (settings.EXTERNAL_INPUT_DEVICE.get() == WUNDERLINQ_EXTERNAL_DEVICE) {
+			return keyCode == KeyEvent.KEYCODE_DPAD_UP || keyCode == KeyEvent.KEYCODE_DPAD_DOWN;
+		}
+		return false;
 	}
 
 	public List<Direction> getLastDirections() {
