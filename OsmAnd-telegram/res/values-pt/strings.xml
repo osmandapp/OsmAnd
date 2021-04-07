@@ -204,7 +204,7 @@
     <string name="no_location_permission">A app não tem permissão para acessar os dados de localização.</string>
     <string name="gps_not_available">Por favor, ligue \"Localização\" nas configurações do sistema</string>
     <string name="location_service_no_gps_available">Selecione um dos provedores de localização para compartilhar sua localização.</string>
-    <string name="osmand_service">Modo de fundo</string>
+    <string name="osmand_service">Modo em segundo plano</string>
     <string name="osmand_service_descr">OsmAnd Tracker é executado em segundo plano com o ecrã desligado.</string>
     <string name="shared_string_distance">Distância</string>
     <string name="share_location">Compartilhar localização</string>
@@ -229,7 +229,7 @@
     <string name="nm_h">mn/h</string>
     <string name="m_s">m/s</string>
     <string name="km_h">km/h</string>
-    <string name="mile_per_hour">mph</string>
+    <string name="mile_per_hour">mi/h</string>
     <string name="si_kmh">Quilómetros por hora</string>
     <string name="si_mph">Milhas por hora</string>
     <string name="si_m_s">Metros por segundo</string>
@@ -270,5 +270,5 @@
     <string name="send_report">Enviar o relatório</string>
     <string name="shared_string_export">Exportar</string>
     <string name="logcat_buffer">Buffer de logcat</string>
-    <string name="logcat_buffer_descr">Verifique e compartilhe registos detalhados da app</string>
+    <string name="logcat_buffer_descr">Verifique e partilhe registos detalhados da aplicação</string>
 </resources>
