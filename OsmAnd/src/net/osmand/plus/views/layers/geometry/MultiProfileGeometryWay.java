@@ -29,6 +29,7 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.ColorUtils;
+import gnu.trove.list.array.TByteArrayList;
 
 public class MultiProfileGeometryWay extends GeometryWay<MultiProfileGeometryWayContext, MultiProfileGeometryWayDrawer> {
 
@@ -140,27 +141,40 @@ public class MultiProfileGeometryWay extends GeometryWay<MultiProfileGeometryWay
 			routePoints.add(new LatLon(start.lat, start.lon));
 			routePoints.add(new LatLon(end.lat, end.lon));
 		} else {
+			List<WptPt> points = roadSegmentData.getPoints();
+			if (points.get(0).getLatitude() != start.getLatitude() && points.get(0).getLongitude() != start.getLongitude()) {
+				routePoints.add(new LatLon(start.lat, start.lon));
+			}
 			for (WptPt routePt : roadSegmentData.getPoints()) {
 				routePoints.add(new LatLon(routePt.lat, routePt.lon));
+			}
+			int lastIdx = routePoints.size() - 1;
+			if (routePoints.get(lastIdx).getLatitude() != end.getLatitude()
+					&& routePoints.get(lastIdx).getLongitude() != end.getLongitude()) {
+				routePoints.add(new LatLon(end.lat, end.lon));
 			}
 		}
 		return routePoints;
 	}
 
 	@Override
-	protected boolean shouldAddLocation(RotatedTileBox tileBox, double leftLon, double rightLon,
+	protected boolean shouldAddLocation(TByteArrayList simplification, double leftLon, double rightLon,
 										double bottomLat, double topLat, GeometryWayProvider provider,
 										int currLocationIdx) {
-		float currX = tileBox.getPixXFromLatLon(provider.getLatitude(currLocationIdx), provider.getLongitude(currLocationIdx));
-		float currY = tileBox.getPixYFromLatLon(provider.getLatitude(currLocationIdx), provider.getLongitude(currLocationIdx));
-		if (tileBox.containsPoint(currX, currY, getContext().circleSize)) {
-			return true;
-		} else if (currLocationIdx + 1 >= provider.getSize()) {
-			return false;
+		double currLat = provider.getLatitude(currLocationIdx);
+		double currLon = provider.getLongitude(currLocationIdx);
+
+		int nextIdx = currLocationIdx;
+		for (int i = nextIdx + 1; i < simplification.size(); i++) {
+			if (simplification.getQuick(i) == 1) {
+				nextIdx = i;
+			}
 		}
-		float nextX = tileBox.getPixXFromLatLon(provider.getLatitude(currLocationIdx + 1), provider.getLongitude(currLocationIdx + 1));
-		float nextY = tileBox.getPixXFromLatLon(provider.getLatitude(currLocationIdx + 1), provider.getLongitude(currLocationIdx + 1));
-		return tileBox.containsPoint(nextX, nextY, getContext().circleSize);
+
+		double nextLat = provider.getLatitude(nextIdx);
+		double nextLon = provider.getLongitude(nextIdx);
+		return Math.min(currLon, nextLon) < rightLon && Math.max(currLon, nextLon) > leftLon
+				&& Math.min(currLat, nextLat) < topLat && Math.max(currLat, nextLat) > bottomLat;
 	}
 
 	private boolean segmentDataChanged(Map<Pair<WptPt, WptPt>, RoadSegmentData> other) {

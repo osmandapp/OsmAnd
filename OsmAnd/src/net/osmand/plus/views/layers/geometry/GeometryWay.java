@@ -4,15 +4,10 @@ import android.graphics.Canvas;
 import android.graphics.Path;
 import android.util.Pair;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import net.osmand.Location;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.util.MapAlgorithms;
 import net.osmand.util.MapUtils;
-import net.osmand.plus.views.layers.geometry.MultiProfileGeometryWay.GeometryMultiProfileWayStyle;
-
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,6 +15,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import gnu.trove.list.array.TByteArrayList;
 
 public abstract class GeometryWay<T extends GeometryWayContext, D extends GeometryWayDrawer<T>> {
@@ -176,7 +173,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 			}
 			double lat = locationProvider.getLatitude(i);
 			double lon = locationProvider.getLongitude(i);
-			if (shouldAddLocation(tb, leftLongitude, rightLongitude, bottomLatitude, topLatitude,
+			if (shouldAddLocation(simplification, leftLongitude, rightLongitude, bottomLatitude, topLatitude,
 					locationProvider, i)) {
 				double dist = previous == -1 ? 0 : odistances.get(i);
 				if (!previousVisible) {
@@ -210,7 +207,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 		drawRouteSegment(tb, canvas, tx, ty, angles, distances, 0, styles);
 	}
 
-	protected boolean shouldAddLocation(RotatedTileBox tileBox, double leftLon, double rightLon, double bottomLat,
+	protected boolean shouldAddLocation(TByteArrayList simplification, double leftLon, double rightLon, double bottomLat,
 										double topLat, GeometryWayProvider provider, int currLocationIdx) {
 		double lat = provider.getLatitude(currLocationIdx);
 		double lon = provider.getLongitude(currLocationIdx);
