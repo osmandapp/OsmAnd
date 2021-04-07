@@ -2,6 +2,7 @@ package net.osmand.plus.measurementtool;
 
 import android.util.Pair;
 
+import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
@@ -1115,16 +1116,26 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 	}
 
 	public boolean isInMultiProfileMode() {
-		if (lastCalculationMode == CalculationMode.NEXT_SEGMENT) {
-			return true;
-		}
 		Set<String> profiles = new HashSet<>();
-		for (RoadSegmentData segmentData : roadSegmentData.values()) {
-			String profile = segmentData.getAppMode().getStringKey();
-			if (!DEFAULT_APP_MODE.getStringKey().equals(profile)) {
-				profiles.add(profile);
+		List<TrkSegment> allSegments = new ArrayList<>();
+		allSegments.addAll(beforeSegments);
+		allSegments.addAll(afterSegments);
+		for (TrkSegment segment : allSegments) {
+			List<WptPt> points = segment.points;
+			if (Algorithms.isEmpty(points)) {
+				continue;
+			}
+			for (int i = 0; i < points.size() / 2 + 1; i++) {
+				WptPt left = points.get(i);
+				int rightIdx = points.size() - 1 - i;
+				WptPt right = points.get(rightIdx);
+				if (!left.isGap() && i + 1 < points.size()) {
+					profiles.add(left.getProfileType());
+				}
+				if (!right.isGap() && rightIdx + 1 < points.size()) {
+					profiles.add(right.getProfileType());
+				}
 				if (profiles.size() >= 2) {
-					lastCalculationMode = NEXT_SEGMENT;
 					return true;
 				}
 			}
