@@ -68,6 +68,8 @@ import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RouteColorize;
+import net.osmand.router.RouteColorize.ColorizationType;
+import net.osmand.router.RouteColorize.RouteColorizationPoint;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -680,26 +682,29 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	private void drawSelectedFileSegments(SelectedGpxFile selectedGpxFile, boolean currentTrack, Canvas canvas,
 										  RotatedTileBox tileBox, DrawSettings settings) {
+		boolean visible = QuadRect.trivialOverlap(tileBox.getLatLonBounds(), GPXUtilities.calculateTrackBounds(selectedGpxFile.getModifiablePointsToDisplay()));
+		if (!selectedGpxFile.getGpxFile().hasTrkPt() || !visible) {
+			return;
+		}
+
 		OsmandApplication app = view.getApplication();
 		GPXFile gpxFile = selectedGpxFile.getGpxFile();
-		List<TrkSegment> segments = selectedGpxFile.getPointsToDisplay();
 		GradientScaleType scaleType = getGradientScaleType(gpxFile);
-		List<RouteColorize.RouteColorizationPoint> colorsOfPoints = null;
+		List<TrkSegment> segments = new ArrayList<>();
 
-		if (needCalculatePointsColors(segments, scaleType)) {
+		if (scaleType == null) {
+			segments.addAll(selectedGpxFile.getModifiablePointsToDisplay());
+		} else {
 			RouteColorize colorize = new RouteColorize(view.getZoom(), gpxFile, selectedGpxFile.getTrackAnalysis(app),
 					scaleType.toColorizationType(), app.getSettings().getApplicationMode().getMaxSpeed());
 			colorize.setPalette(getColorizationPalette(gpxFile, scaleType));
-			colorsOfPoints = colorize.getResult(false);
+			List<RouteColorizationPoint> colorsOfPoints = colorize.getResult(true);
+			segments.addAll(createSimplifiedSegmentsFromColorizedPoints(gpxFile, colorsOfPoints, scaleType));
 		}
 
-		int startIdx = 0;
 		for (TrkSegment ts : segments) {
 			String width = getTrackWidthName(gpxFile, defaultTrackWidthPref.get());
 			int color = getTrackColor(gpxFile, ts.getColor(cachedColor));
-			if (colorsOfPoints != null) {
-				startIdx = setColorsToPoints(ts, colorsOfPoints, scaleType, startIdx);
-			}
 			if (ts.renderer == null && !ts.points.isEmpty()) {
 				Renderable.RenderableSegment renderer;
 				if (currentTrack) {
@@ -720,53 +725,34 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		}
 	}
 
-	private boolean needCalculatePointsColors(List<TrkSegment> segments, GradientScaleType scaleType) {
-		if (scaleType == null) {
-			return false;
-		}
-		RouteColorize.ColorizationType colorizationType = scaleType.toColorizationType();
-		for (int segIdx = segments.size() - 1; segIdx >= 0; segIdx--) {
-			List<WptPt> pts = segments.get(segIdx).points;
-			if (!Algorithms.isEmpty(pts)) {
-				for (int wptIdx = pts.size() - 1; wptIdx >= 0; wptIdx--) {
-					WptPt pt = pts.get(wptIdx);
-					if (pt.getColor(colorizationType) == 0) {
-						return true;
+	private List<TrkSegment> createSimplifiedSegmentsFromColorizedPoints(GPXFile gpxFile,
+																		 List<RouteColorizationPoint> colorizationPoints,
+																		 GradientScaleType scaleType) {
+		List<TrkSegment> simplifiedSegments = new ArrayList<>();
+		ColorizationType colorizationType = scaleType.toColorizationType();
+		int id = 0;
+		int colorPointIdx = 0;
+
+		for (GPXUtilities.Track track : gpxFile.tracks) {
+			for (TrkSegment segment : track.segments) {
+				TrkSegment simplifiedSegment = new TrkSegment();
+				simplifiedSegments.add(simplifiedSegment);
+				for (WptPt pt : segment.points) {
+					if (colorPointIdx >= colorizationPoints.size()) {
+						return simplifiedSegments;
 					}
+					RouteColorizationPoint colorPoint = colorizationPoints.get(colorPointIdx);
+					if (colorPoint.id == id) {
+						simplifiedSegment.points.add(pt);
+						pt.setColor(colorizationType, colorPoint.color);
+						colorPointIdx++;
+					}
+					id++;
 				}
 			}
 		}
-		return false;
-	}
 
-	private int setColorsToPoints(TrkSegment segment, List<RouteColorize.RouteColorizationPoint> colors, GradientScaleType scaleType, int startIdx) {
-		int pointsSize = segment.points.size();
-		RouteColorize.RouteColorizationPoint startColor = colors.get(startIdx);
-		RouteColorize.RouteColorizationPoint endColor = colors.get(startIdx + pointsSize - 1);
-		WptPt firstPoint = segment.points.get(0);
-		WptPt lastPoint = segment.points.get(pointsSize - 1);
-		while (!compareCoordinates(firstPoint, startColor) && compareCoordinates(lastPoint, endColor)) {
-			startIdx++;
-			startColor = colors.get(startIdx);
-			endColor = colors.get(startIdx + pointsSize - 1);
-		}
-
-		for (int i = startIdx; i < startIdx + pointsSize; i++) {
-			WptPt currentPoint = segment.points.get(i - startIdx);
-			int currentColor = colors.get(i).color;
-			if (scaleType == GradientScaleType.SPEED) {
-				currentPoint.speedColor = currentColor;
-			} else if (scaleType == GradientScaleType.ALTITUDE) {
-				currentPoint.altitudeColor = currentColor;
-			} else {
-				currentPoint.slopeColor = currentColor;
-			}
-		}
-		return startIdx;
-	}
-
-	private boolean compareCoordinates(WptPt left, RouteColorize.RouteColorizationPoint right) {
-		return left.lat == right.lat && left.lon == right.lon;
+		return simplifiedSegments;
 	}
 
 	private float getTrackWidth(String width, float defaultTrackWidth) {

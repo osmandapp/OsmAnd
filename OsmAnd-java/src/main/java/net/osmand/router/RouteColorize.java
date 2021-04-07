@@ -477,7 +477,7 @@ public class RouteColorize {
     }
 
     public static class RouteColorizationPoint {
-        int id;
+        public int id;
         public double lat;
         public double lon;
         public double val;

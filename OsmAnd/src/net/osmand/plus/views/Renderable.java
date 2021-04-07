@@ -28,7 +28,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import androidx.annotation.NonNull;
 
-
 public class Renderable {
 
     private static final int CPU_COUNT = Runtime.getRuntime().availableProcessors();
@@ -61,7 +60,6 @@ public class Renderable {
 
         public List<WptPt> points = null;                           // Original list of points
         protected List<WptPt> culled = new ArrayList<>();           // Reduced/resampled list of points
-        protected List<WptPt> oldCulled = new ArrayList<>();
         protected int pointSize;
         protected double segmentSize;
 
@@ -89,6 +87,9 @@ public class Renderable {
             }
             paint.setColor(p.getColor());
             paint.setStrokeWidth(p.getStrokeWidth());
+            if (scaleType != null) {
+                paint.setAlpha(0xFF);
+            }
         }
 
         public void setBorderPaint(@NonNull Paint paint) {
@@ -117,20 +118,18 @@ public class Renderable {
             updateLocalPaint(p);
             canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
             if (scaleType != null) {
-                drawGradient(getPointsForDrawingWithBorder(), p, canvas, tileBox);
+                drawGradient(points, p, canvas, tileBox);
             } else {
                 drawSolid(getPointsForDrawing(), p, canvas, tileBox);
             }
             canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
         }
 
-
         public void drawSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {
             if (QuadRect.trivialOverlap(tileBox.getLatLonBounds(), trackBounds)) { // is visible?
-                if (tileBox.getZoomAnimation() > 0 && !Algorithms.isEmpty(culled) && scaleType != null) {
-                    oldCulled = new ArrayList<>(culled);
+                if (scaleType == null) {
+                    startCuller(zoom);
                 }
-                startCuller(zoom);
                 drawSingleSegment(zoom, p, canvas, tileBox);
             }
         }
@@ -141,16 +140,6 @@ public class Renderable {
 
         public List<WptPt> getPointsForDrawing() {
             return culled.isEmpty() ? points : culled;
-        }
-
-        public List<WptPt> getPointsForDrawingWithBorder() {
-            if (!culled.isEmpty()) {
-                return culled;
-            } else if (!oldCulled.isEmpty()) {
-                return oldCulled;
-            } else {
-                return points;
-            }
         }
 
         public void drawGeometry(Canvas canvas, RotatedTileBox tileBox, QuadRect quadRect, int arrowColor, int trackColor, float trackWidth) {
