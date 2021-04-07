@@ -141,8 +141,17 @@ public class MultiProfileGeometryWay extends GeometryWay<MultiProfileGeometryWay
 			routePoints.add(new LatLon(start.lat, start.lon));
 			routePoints.add(new LatLon(end.lat, end.lon));
 		} else {
+			List<WptPt> points = roadSegmentData.getPoints();
+			if (points.get(0).getLatitude() != start.getLatitude() && points.get(0).getLongitude() != start.getLongitude()) {
+				routePoints.add(new LatLon(start.lat, start.lon));
+			}
 			for (WptPt routePt : roadSegmentData.getPoints()) {
 				routePoints.add(new LatLon(routePt.lat, routePt.lon));
+			}
+			int lastIdx = routePoints.size() - 1;
+			if (routePoints.get(lastIdx).getLatitude() != end.getLatitude()
+					&& routePoints.get(lastIdx).getLongitude() != end.getLongitude()) {
+				routePoints.add(new LatLon(end.lat, end.lon));
 			}
 		}
 		return routePoints;
