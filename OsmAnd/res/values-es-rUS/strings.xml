@@ -4052,4 +4052,35 @@
     <string name="lost_data_warning">Se perderán todos los datos no guardados.</string>
     <string name="show_start_dialog">Mostrar el diálogo inicial</string>
     <string name="trip_recording_show_start_dialog_setting">Si se desactiva, la grabación será iniciada al pulsar el widget o el elemento del menú, saltándose el diálogo de confirmación.</string>
+    <string name="customize_route_line">Personalizar línea de ruta</string>
+    <string name="shared_string_route_line">Línea de ruta</string>
+    <string name="route_line_use_map_style_appearance">La línea de la ruta sería el uso %1$s especificado en el estilo de mapa seleccionado: %2$s.</string>
+    <string name="specify_color_for_map_mode">Define el color para el modo de mapa: %1$s.</string>
+    <string name="no_purchases">No tienes compras</string>
+    <string name="new_device_account">Nuevo dispositivo / nueva cuenta</string>
+    <string name="contact_support_description">Si tienes alguna duda, ponte en contacto con nosotros en %1$s.</string>
+    <string name="empty_purchases_description">Si tus compras no aparecen aquí, pulsa sobre «%1$s», o ponte en contacto con nuestro equipo de asistencia.</string>
+    <string name="contact_support">Contacto con soporte</string>
+    <string name="troubleshooting">Solución de problemas</string>
+    <string name="troubleshooting_description">Sigue este enlace si tienes algún problema con las compras.</string>
+    <string name="osmand_live">OsmAnd Live</string>
+    <string name="annual_subscription">Suscripción anual</string>
+    <string name="monthly_subscription">Suscripción mensual</string>
+    <string name="three_months_subscription">Suscripción trimestral</string>
+    <string name="next_billing_date">Próxima facturación: %1$s</string>
+    <string name="osmand_live_cancelled">Cancelado</string>
+    <string name="renew_subscription">Renovar suscripción</string>
+    <string name="in_grace_period">En período de gracia</string>
+    <string name="on_hold">En espera</string>
+    <string name="expired">Expirado</string>
+    <string name="release_4_0_beta">• Las actualizaciones de OsmAnd Live se han movido a «Descargas &gt; Actualizaciones».
+\n
+\n• Las trazas ahora pueden colorearse por altitud, velocidad o pendiente.
+\n
+\n• Se ha añadido la opción de cambiar el aspecto a la línea de ruta de la navegación
+\n
+\n• Se ha actualizado el cuadro de diálogo «Grabación de viaje»
+\n
+\n</string>
+    <string name="update_all_maps_added">¿Actualizar todos los mapas añadidos a %1$s\?</string>
 </resources>
