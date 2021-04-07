@@ -29,6 +29,7 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.ColorUtils;
+import gnu.trove.list.array.TByteArrayList;
 
 public class MultiProfileGeometryWay extends GeometryWay<MultiProfileGeometryWayContext, MultiProfileGeometryWayDrawer> {
 
@@ -148,19 +149,23 @@ public class MultiProfileGeometryWay extends GeometryWay<MultiProfileGeometryWay
 	}
 
 	@Override
-	protected boolean shouldAddLocation(RotatedTileBox tileBox, double leftLon, double rightLon,
+	protected boolean shouldAddLocation(TByteArrayList simplification, double leftLon, double rightLon,
 										double bottomLat, double topLat, GeometryWayProvider provider,
 										int currLocationIdx) {
-		float currX = tileBox.getPixXFromLatLon(provider.getLatitude(currLocationIdx), provider.getLongitude(currLocationIdx));
-		float currY = tileBox.getPixYFromLatLon(provider.getLatitude(currLocationIdx), provider.getLongitude(currLocationIdx));
-		if (tileBox.containsPoint(currX, currY, getContext().circleSize)) {
-			return true;
-		} else if (currLocationIdx + 1 >= provider.getSize()) {
-			return false;
+		double currLat = provider.getLatitude(currLocationIdx);
+		double currLon = provider.getLongitude(currLocationIdx);
+
+		int nextIdx = currLocationIdx;
+		for (int i = nextIdx + 1; i < simplification.size(); i++) {
+			if (simplification.getQuick(i) == 1) {
+				nextIdx = i;
+			}
 		}
-		float nextX = tileBox.getPixXFromLatLon(provider.getLatitude(currLocationIdx + 1), provider.getLongitude(currLocationIdx + 1));
-		float nextY = tileBox.getPixXFromLatLon(provider.getLatitude(currLocationIdx + 1), provider.getLongitude(currLocationIdx + 1));
-		return tileBox.containsPoint(nextX, nextY, getContext().circleSize);
+
+		double nextLat = provider.getLatitude(nextIdx);
+		double nextLon = provider.getLongitude(nextIdx);
+		return Math.min(currLon, nextLon) < rightLon && Math.max(currLon, nextLon) > leftLon
+				&& Math.min(currLat, nextLat) < topLat && Math.max(currLat, nextLat) > bottomLat;
 	}
 
 	private boolean segmentDataChanged(Map<Pair<WptPt, WptPt>, RoadSegmentData> other) {
