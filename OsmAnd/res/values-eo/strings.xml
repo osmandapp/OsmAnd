@@ -219,7 +219,7 @@
     <string name="favorite_category_select">Elekti kategorion</string>
     <string name="default_speed_system_descr">Difini unuon de rapido.</string>
     <string name="default_speed_system">Unuo de rapido</string>
-    <string name="nm">nm</string>
+    <string name="nm">marmejlo</string>
     <string name="si_nm">Marmejloj</string>
     <string name="si_kmh">Kilometroj en horo</string>
     <string name="si_mph">Mejloj en horo</string>
@@ -340,7 +340,7 @@
     <string name="shared_string_off">Malaktiva</string>
     <string name="shared_string_previous">Antaŭa</string>
     <string name="shared_string_next">Sekva</string>
-    <string name="shared_string_enable">Aktivigi</string>
+    <string name="shared_string_enable">Ŝalti</string>
     <string name="shared_string_disable">Malaktivigi</string>
     <string name="shared_string_enabled">Aktiva</string>
     <string name="shared_string_disabled">Malaktiva</string>
@@ -2047,7 +2047,7 @@
     <string name="christmas_poi">Kristnaskaj interesejoj</string>
     <string name="christmas_desc">Atendante Kristnaskon kaj la novan jaron, vi povas aktivigi vidigadon de interesejoj rilataj al Kristnasko: kristnaskaj arbetoj, foiroj, ktp.</string>
     <string name="christmas_desc_q">Ĉu montri Kristnaskajn interesejojn\?</string>
-    <string name="shared_string_continue">Pluigi</string>
+    <string name="shared_string_continue">Daŭrigi</string>
     <string name="shared_string_pause">Paŭzigi</string>
     <string name="shared_string_trip">Spuro</string>
     <string name="shared_string_recorded">Registrita</string>
@@ -4081,4 +4081,9 @@
     <string name="annual_subscription">Jara abono</string>
     <string name="monthly_subscription">Monata abono</string>
     <string name="update_all_maps_added">Ĉu ĝisdatigi ĉiujn mapojn aldonitajn al %1$s\?</string>
+    <string name="announce_when_exceeded">Anonci kiam superita</string>
+    <string name="exit_number">Numero de elirejo</string>
+    <string name="user_points">Poentoj de uzanto</string>
+    <string name="output">Eligo</string>
+    <string name="map_quick_action_pattern">%1$s → …</string>
 </resources>
