@@ -4071,4 +4071,9 @@
     <string name="renew_subscription">Renouveler l’abonnement</string>
     <string name="on_hold">En attente</string>
     <string name="expired">Expiré</string>
+    <string name="user_points">Points utilisateur</string>
+    <string name="exit_number">Numéro de sortie</string>
+    <string name="announce_when_exceeded">Annoncer en cas de dépassement</string>
+    <string name="output">Sortie</string>
+    <string name="map_quick_action_pattern">%1$s → …</string>
 </resources>
