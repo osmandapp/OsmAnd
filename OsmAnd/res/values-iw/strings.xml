@@ -4083,4 +4083,9 @@
     <string name="troubleshooting_description">נא לעקוב אחר הקישור אם נתקלת בבעיות ברכישות.</string>
     <string name="no_purchases">אין לך רכישות</string>
     <string name="update_all_maps_added">לעדכן את כל המפות שנוספו אל %1$s\?</string>
+    <string name="exit_number">יציאה מספר</string>
+    <string name="announce_when_exceeded">להכריז בחריגה</string>
+    <string name="user_points">נקודות משתמש</string>
+    <string name="output">פלט</string>
+    <string name="map_quick_action_pattern">%1$s ← …</string>
 </resources>
