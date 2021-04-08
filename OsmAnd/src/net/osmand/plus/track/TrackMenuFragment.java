@@ -165,7 +165,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private int menuTitleHeight;
 	private int menuHeaderHeight;
 	private int toolbarHeightPx;
-	private boolean mapPositionAdjusted;
+	private boolean adjustMapPosition = true;
 
 
 	public enum TrackMenuType {
@@ -596,7 +596,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			boolean backButtonVisible = !Algorithms.isEmpty(returnScreenName) && currentMenuState == MenuState.HALF_SCREEN;
 			AndroidUiHelper.updateVisibility(backButtonContainer, backButtonVisible);
 		}
-		if (currentMenuState != MenuState.FULL_SCREEN && (changed || !mapPositionAdjusted)) {
+		if (currentMenuState != MenuState.FULL_SCREEN && (changed || adjustMapPosition)) {
 			adjustMapPosition(getMenuStatePosY(currentMenuState));
 		}
 	}
@@ -971,7 +971,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			if (r.left != 0 && r.right != 0) {
 				mapActivity.getMapView().fitRectToMap(r.left, r.right, r.top, r.bottom, tileBoxWidthPx, tileBoxHeightPx, 0);
 			}
-			mapPositionAdjusted = true;
+			adjustMapPosition = false;
 		}
 	}
 
@@ -1318,7 +1318,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			public boolean processResult(SelectedGpxFile selectedGpxFile) {
 				MapActivity mapActivity = mapActivityRef.get();
 				if (mapActivity != null && selectedGpxFile != null) {
-					showInstance(mapActivity, selectedGpxFile, latLon, returnScreenName, callingFragmentTag);
+					showInstance(mapActivity, selectedGpxFile, latLon, returnScreenName, callingFragmentTag, true);
 				}
 				return true;
 			}
@@ -1329,7 +1329,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 									   @NonNull SelectedGpxFile selectedGpxFile,
 									   @Nullable LatLon latLon,
 									   @Nullable String returnScreenName,
-									   @Nullable String callingFragmentTag) {
+									   @Nullable String callingFragmentTag,
+									   boolean adjustMapPosition) {
 		try {
 			Bundle args = new Bundle();
 			args.putInt(ContextMenuFragment.MENU_STATE_KEY, MenuState.HEADER_ONLY);
@@ -1340,6 +1341,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			fragment.setSelectedGpxFile(selectedGpxFile);
 			fragment.setReturnScreenName(returnScreenName);
 			fragment.setCallingFragmentTag(callingFragmentTag);
+			fragment.adjustMapPosition = adjustMapPosition;
 
 			if (latLon != null) {
 				fragment.setLatLon(latLon);

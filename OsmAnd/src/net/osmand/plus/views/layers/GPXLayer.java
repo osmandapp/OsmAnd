@@ -1115,7 +1115,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		SelectedGpxPoint point = (SelectedGpxPoint) object;
 		WptPt wptPt = point.getSelectedPoint();
 		TrackMenuFragment.showInstance(mapActivity, point.getSelectedGpxFile(),
-				new LatLon(wptPt.lat, wptPt.lon), null, null);
+				new LatLon(wptPt.lat, wptPt.lon), null, null, false);
 		return true;
 	}
 
