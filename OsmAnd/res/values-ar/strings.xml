@@ -4150,4 +4150,9 @@
     <string name="on_hold">في الانتظار</string>
     <string name="expired">منتهي الصلاحية</string>
     <string name="update_all_maps_added">تحديث كافة الخرائط المضافة إلى %1$s؟</string>
+    <string name="exit_number">رقم الخروج</string>
+    <string name="announce_when_exceeded">الإعلان عند التجاوز</string>
+    <string name="user_points">نقاط المستخدم</string>
+    <string name="output">المخرج</string>
+    <string name="map_quick_action_pattern">%1$s ← …</string>
 </resources>
