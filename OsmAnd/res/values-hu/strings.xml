@@ -1285,7 +1285,7 @@
     <string name="shared_string_all">Minden</string>
     <string name="shared_string_waypoints">Útpontok</string>
     <string name="way_alarms">Forgalmi figyelmeztetések</string>
-    <string name="speak_favorites">Kedvencek a közelben</string>
+    <string name="speak_favorites">Közeli kedvencek</string>
     <string name="speak_poi">Közeli érdekes helyek (POI)</string>
     <string name="download_additional_maps">Letöltöd a hiányzó térképeket %1$s (%2$d MB)?</string>
     <string name="rendering_value_browse_map_name">Térképböngészés</string>
@@ -4062,7 +4062,7 @@
     <string name="empty_purchases_description">Ha a vásárlásai nem jelennek meg itt, lépjen kapcsolatba az ügyfélszolgálatunkkal, vagy koppintson ide: „%1$s”.</string>
     <string name="contact_support">Kapcsolatfelvétel az ügyfélszolgálattal</string>
     <string name="troubleshooting">Hibaelhárítás</string>
-    <string name="troubleshooting_description">Ha problémája akadt a vásrlással, kattintson erre a linkre.</string>
+    <string name="troubleshooting_description">Ha problémája akad a vásrlással, kattintson erre a linkre.</string>
     <string name="osmand_live">OsmAnd Live</string>
     <string name="annual_subscription">Éves előfizetés</string>
     <string name="monthly_subscription">Havi előfizetés</string>
@@ -4074,4 +4074,9 @@
     <string name="on_hold">Várakoztatva</string>
     <string name="expired">Lejárt</string>
     <string name="update_all_maps_added">Frissüljön minden térkép, amely hozzá lett adva ehhez: %1$s\?</string>
+    <string name="map_quick_action_pattern">%1$s → …</string>
+    <string name="exit_number">Kijárat száma</string>
+    <string name="announce_when_exceeded">Értesítés túllépéskor</string>
+    <string name="user_points">Felhasználói pontok</string>
+    <string name="output">Teljesítmény</string>
 </resources>
