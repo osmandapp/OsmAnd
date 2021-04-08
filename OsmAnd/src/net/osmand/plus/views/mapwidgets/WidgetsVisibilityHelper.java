@@ -104,7 +104,6 @@ public class WidgetsVisibilityHelper {
 	public boolean shouldHideCompass() {
 		return mapActivity.shouldHideTopControls()
 				|| isTrackDetailsMenuOpened()
-				|| isInMeasurementToolMode()
 				|| isInPlanRouteMode()
 				|| isInChoosingRoutesMode()
 				|| isInTrackAppearanceMode()
@@ -116,7 +115,6 @@ public class WidgetsVisibilityHelper {
 	public boolean shouldShowTopButtons() {
 		return !mapActivity.shouldHideTopControls()
 				&& !isTrackDetailsMenuOpened()
-				&& !isInMeasurementToolMode()
 				&& !isInPlanRouteMode()
 				&& !isInChoosingRoutesMode()
 				&& !isInTrackAppearanceMode()
