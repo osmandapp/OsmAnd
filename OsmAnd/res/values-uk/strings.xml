@@ -4080,4 +4080,9 @@
     <string name="on_hold">Утримується</string>
     <string name="expired">Термін дії закінчився</string>
     <string name="update_all_maps_added">Оновити всі мапи, додані до %1$s\?</string>
+    <string name="exit_number">Номер виходу</string>
+    <string name="announce_when_exceeded">Повідомляти про перевищення</string>
+    <string name="user_points">Користувацькі точки</string>
+    <string name="output">Вивід</string>
+    <string name="map_quick_action_pattern">%1$s → …</string>
 </resources>
