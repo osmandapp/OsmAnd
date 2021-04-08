@@ -1217,32 +1217,39 @@ public class MenuBuilder {
 		return new CollapsableView(textView, this, collapsed);
 	}
 
-	protected CollapsableView getCollapsableView(Context context, boolean collapsed, List<Amenity> nearestAmenities, String nearestPoiType) {
-		LinearLayout view = buildCollapsableContentView(context, collapsed, true);
+	protected CollapsableView getCollapsableView(final Context context, boolean collapsed, List<Amenity> nearestAmenities, String nearestPoiType) {
+		final LinearLayout view = buildCollapsableContentView(context, collapsed, true);
 
 		for (final Amenity poi : nearestAmenities) {
 			TextViewEx button = buildButtonInCollapsableView(context, false, false);
-			String name = poi.getName(preferredMapAppLang, transliterateNames);
+			final PointDescription pointDescription = mapActivity.getMapLayers().getPoiMapLayer().getObjectName(poi);
+			String name = mapActivity.getMapLayers().getPoiMapLayer().getObjectName(poi).getName();
 			if (Algorithms.isBlank(name)) {
 				name = AmenityMenuController.getTypeStr(poi);
 			}
 			float dist = (float) MapUtils.getDistance(latLon, poi.getLocation());
 			name += " (" + OsmAndFormatter.getFormattedDistance(dist, app) + ")";
 			button.setText(name);
-
 			button.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					LatLon latLon = new LatLon(poi.getLocation().getLatitude(), poi.getLocation().getLongitude());
-					PointDescription pointDescription = mapActivity.getMapLayers().getPoiMapLayer().getObjectName(poi);
 					mapActivity.getContextMenu().show(latLon, pointDescription, poi);
+					mapActivity.getContextMenu().update(latLon, pointDescription, poi);
+					mapActivity.setMapLocation(poi.getLocation().getLatitude(), poi.getLocation().getLongitude());
 				}
 			});
 			view.addView(button);
+
 		}
+		
 		PoiUIFilter filter = getPoiFilterForType(nearestPoiType);
-		if (filter != null) {
+		boolean isPoiFilter = nearestPoiType.equals(NEAREST_POI_KEY);
+		if (filter != null && nearestPoi.size() > 0) {
 			view.addView(createShowAllButton(context, filter));
+		}
+		if (isPoiFilter && nearestPoi.size() == 0) {
+			view.addView(createSearchMoreButton(context, filter));
 		}
 		return new CollapsableView(view, this, collapsed);
 	}
@@ -1285,6 +1292,18 @@ public class MenuBuilder {
 				mapActivity.refreshMap();
 			}
 		});
+		return buttonShowAll;
+	}
+
+	private View createSearchMoreButton(Context context, final PoiUIFilter filter) {
+		TextViewEx buttonShowAll = buildButtonInCollapsableView(context, false, false);
+		buttonShowAll.setText(app.getString(R.string.search_more));
+		buttonShowAll.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+						mapActivity.showQuickSearch(filter);
+					}
+				});
 		return buttonShowAll;
 	}
 
@@ -1381,8 +1400,8 @@ public class MenuBuilder {
 	}
 
 	private List<Amenity> getSortedAmenities(PoiUIFilter filter, final LatLon latLon) {
-		QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), 250);
-
+		boolean isWikiFilter = filter.getFilterId().equals("std_osmwiki");
+		QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), isWikiFilter ? 250 : 1000);
 		List<Amenity> nearestAmenities = getAmenities(rect, filter);
 		nearestAmenities.remove(amenity);
 
@@ -1395,8 +1414,11 @@ public class MenuBuilder {
 				return Double.compare(d1, d2);
 			}
 		});
-
-		return nearestAmenities;
+		if (isWikiFilter) {
+			return nearestAmenities;
+		} else {
+			return nearestAmenities.subList(0, Math.min(10, nearestAmenities.size()));
+		}
 	}
 
 	private List<Amenity> getAmenities(QuadRect rect, PoiUIFilter filter) {

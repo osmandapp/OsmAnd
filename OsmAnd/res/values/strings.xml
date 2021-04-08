@@ -12,6 +12,7 @@
 
 -->
 
+    <string name="search_more">Search more…</string>
     <string name="map_quick_action_pattern">%1$s → …</string>
     <string name="output">Output</string>
     <string name="user_points">User points</string>

@@ -28,6 +28,7 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.helpers.enums.MetricsConstants;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
@@ -68,7 +69,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	private static final String WIKI_LINK = ".wikipedia.org/w";
 	public final static Log LOG = PlatformUtil.getLog(AmenityMenuBuilder.class);
 	private final static DecimalFormat DF = new DecimalFormat("#.##");
-	private MetricsConstants metricSystem;
+	private final MetricsConstants metricSystem;
 	private final Amenity amenity;
 
 
@@ -417,7 +418,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			} else if (Amenity.OPENING_HOURS.equals(key)) {
 				iconId = R.drawable.ic_action_time;
 				collapsableView = getCollapsableTextView(view.getContext(), true,
-					amenity.getAdditionalInfo(key).replace("; ", "\n").replace(",", ", "));
+						amenity.getAdditionalInfo(key).replace("; ", "\n").replace(",", ", "));
 				collapsable = true;
 				OpeningHoursParser.OpeningHours rs = OpeningHoursParser.parseOpenedHours(amenity.getAdditionalInfo(key));
 				if (rs != null) {
@@ -459,7 +460,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				vl = sb.toString();
 			} else if (key.contains(Amenity.ROUTE)
 					|| key.equals(Amenity.WIKIDATA)
-					|| key.equals(Amenity.WIKIMEDIA_COMMONS))  {
+					|| key.equals(Amenity.WIKIMEDIA_COMMONS)) {
 				continue;
 			} else {
 				if (key.contains(Amenity.DESCRIPTION)) {
@@ -661,7 +662,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			buildAmenityRow(view, wikiInfo);
 		}
 
-		if (processNearestPoi() && nearestPoi.size() > 0) {
+		if (processNearestPoi()) {
 			AmenityInfoRow poiInfo = new AmenityInfoRow(
 					NEAREST_POI_KEY, AmenityMenuController.getRightIconId(amenity), null,
 					app.getString(R.string.speak_poi) + " \"" + AmenityMenuController.getTypeStr(amenity) + "\" (" + nearestPoi.size() + ")",
@@ -725,35 +726,35 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				}
 				break;
 			case "distance":
-				if(Algorithms.isFloat(value)) {
+				if (Algorithms.isFloat(value)) {
 					float valueAsFloatInMeters = Float.parseFloat(value) * 1000;
 					if (metricSystem == MetricsConstants.KILOMETERS_AND_METERS) {
 						formattedValue =
-							value + " " + mapActivity.getResources().getString(R.string.km);
+								value + " " + mapActivity.getResources().getString(R.string.km);
 					} else {
 						formattedValue = OsmAndFormatter.getFormattedDistance(valueAsFloatInMeters,
-							mapActivity.getMyApplication());
+								mapActivity.getMyApplication());
 					}
 					formattedPrefix = formatPrefix(prefix,
-						mapActivity.getResources().getString(R.string.distance));
+							mapActivity.getResources().getString(R.string.distance));
 					break;
 				}
 			case "capacity":
 				if (amenity.getSubType().equals("water_tower") || amenity.getSubType().equals("storage_tank")) {
-					if(Algorithms.isFloat(value)) {
+					if (Algorithms.isFloat(value)) {
 						formattedValue = value + " " + mapActivity.getResources().getString(R.string.cubic_m);
 					}
 				}
 				break;
 			case "maxweight":
-				if(Algorithms.isInt(value)) {
+				if (Algorithms.isInt(value)) {
 					formattedValue = value + " " + mapActivity.getResources().getString(R.string.metric_ton);
 				}
 				break;
 			case "students":
 			case "spots":
 			case "seats":
-				if(Algorithms.isInt(value)) {
+				if (Algorithms.isInt(value)) {
 					formattedPrefix = formatPrefix(prefix, mapActivity.getResources().getString(R.string.shared_string_capacity));
 				}
 				break;
@@ -764,7 +765,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	}
 
 	private String formatPrefix(String prefix, String units) {
-		return (!prefix.isEmpty()) ? (prefix + ", " + units): units;
+		return (!prefix.isEmpty()) ? (prefix + ", " + units) : units;
 	}
 
 	public void buildAmenityRow(View view, AmenityInfoRow info) {
