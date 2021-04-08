@@ -226,7 +226,7 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 	}
 
 	@Override
-	public boolean disableLongPressOnMap() {
+	public boolean disableLongPressOnMap(PointF point, RotatedTileBox tileBox) {
 		return false;
 	}
 

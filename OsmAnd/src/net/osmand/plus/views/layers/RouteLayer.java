@@ -802,7 +802,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 	}
 
 	@Override
-	public boolean disableLongPressOnMap() {
+	public boolean disableLongPressOnMap(PointF point, RotatedTileBox tileBox) {
 		return isInRouteLineAppearanceMode();
 	}
 

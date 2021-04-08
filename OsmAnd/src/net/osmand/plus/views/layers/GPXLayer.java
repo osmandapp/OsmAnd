@@ -1089,8 +1089,16 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	@Override
-	public boolean disableLongPressOnMap() {
-		return isInTrackAppearanceMode();
+	public boolean disableLongPressOnMap(PointF point, RotatedTileBox tileBox) {
+		if (isInTrackAppearanceMode()) {
+			return true;
+		}
+		if (tileBox.getZoom() >= START_ZOOM) {
+			List<Object> res = new ArrayList<>();
+			getTracksFromPoint(tileBox, point, res);
+			return !Algorithms.isEmpty(res);
+		}
+		return false;
 	}
 
 	@Override
@@ -1143,6 +1151,20 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	@Override
 	public boolean onLongPressEvent(PointF point, RotatedTileBox tileBox) {
+		if (tileBox.getZoom() >= START_ZOOM) {
+			List<Object> trackPoints = new ArrayList<>();
+			getTracksFromPoint(tileBox, point, trackPoints);
+
+			if (!Algorithms.isEmpty(trackPoints)) {
+				MapActivity mapActivity = (MapActivity) view.getContext();
+				SelectedGpxPoint selectedGpxPoint = (SelectedGpxPoint) trackPoints.get(0);
+				WptPt wptPt = selectedGpxPoint.getSelectedPoint();
+				PointDescription description = getObjectName(selectedGpxPoint);
+				ContextMenuLayer contextMenuLayer = mapActivity.getMapLayers().getContextMenuLayer();
+				contextMenuLayer.showContextMenu(new LatLon(wptPt.lat, wptPt.lon), description, selectedGpxPoint, this);
+				return true;
+			}
+		}
 		return false;
 	}
 
