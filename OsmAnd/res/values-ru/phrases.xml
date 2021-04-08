@@ -3889,4 +3889,23 @@
     <string name="poi_wildlife_crossing_bat_tunnel">Туннель летучих мышей</string>
     <string name="poi_wildlife_crossing_bat_bridge">Мост летучих мышей</string>
     <string name="poi_conference_centre">Конференц-центр</string>
+    <string name="poi_kickboxing">Кикбоксинг</string>
+    <string name="poi_fencing">Фехтование</string>
+    <string name="poi_cycle_polo">Велосипедное поло</string>
+    <string name="poi_cockfighting">Петушиные бои</string>
+    <string name="poi_bullfighting">Коррида</string>
+    <string name="poi_bobsleigh">Бобслей</string>
+    <string name="poi_biathlon">Биатлон</string>
+    <string name="poi_aikido">Айкидо</string>
+    <string name="poi_water_ski">Водные лыжи</string>
+    <string name="poi_water_polo">Водное поло</string>
+    <string name="poi_wrestling">Борьба</string>
+    <string name="poi_weightlifting">Тяжёлая атлетика</string>
+    <string name="poi_taekwondo">Тхэквондо</string>
+    <string name="poi_table_soccer">Настольный футбол</string>
+    <string name="poi_sumo">Сумо</string>
+    <string name="poi_shot_put">Толкание ядра</string>
+    <string name="poi_pilates">Пилатес</string>
+    <string name="poi_karate">Каратэ</string>
+    <string name="poi_jiu_jitsu">Джиу-джитсу</string>
 </resources>

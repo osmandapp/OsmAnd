@@ -3341,4 +3341,21 @@
     <string name="trip_recording_logging_interval_info">Loggningsintervall ställde in den tidsperiod under vilken OsmAnd kommer att be om aktuell positionspositionsdata.</string>
     <string name="trip_recording_save_and_continue">Spara och fortsätt</string>
     <string name="lost_data_warning">All osparad data kommer att försvinna.</string>
+    <string name="specify_color_for_map_mode">Ange färg för kartläget: %1$s.</string>
+    <string name="no_purchases">Du har inga inköp</string>
+    <string name="new_device_account">Ny enhet / nytt konto</string>
+    <string name="contact_support_description">Om du har några frågor kan du kontakta oss på %1$s.</string>
+    <string name="empty_purchases_description">Om dina inköp inte visas här, tryck på \"%1$s\" eller kontakta vår support.</string>
+    <string name="contact_support">Kontakta supporten</string>
+    <string name="troubleshooting">Felsökning</string>
+    <string name="troubleshooting_description">Följ den här länken om du har problem med köpet.</string>
+    <string name="osmand_live">OsmAnd Live</string>
+    <string name="annual_subscription">Årlig prenumeration</string>
+    <string name="monthly_subscription">Månadspernumeration</string>
+    <string name="three_months_subscription">Tre månaders prenumeration</string>
+    <string name="next_billing_date">Nästa faktureringsdatum: %1$s</string>
+    <string name="osmand_live_cancelled">Avbruten</string>
+    <string name="renew_subscription">Förnya prenumerationen</string>
+    <string name="in_grace_period">I nådeperioden</string>
+    <string name="on_hold">Pausad</string>
 </resources>

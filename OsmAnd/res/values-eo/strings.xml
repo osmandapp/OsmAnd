@@ -642,7 +642,7 @@
     <string name="rendering_attr_showSurfaces_name">Pavimo de vojoj</string>
     <string name="rendering_attr_showCycleRoutes_name">Biciklovojoj</string>
     <string name="srtm_paid_version_title">Nivelkurba kromprogramo</string>
-    <string name="osmand_srtm_short_description_80_chars">OsmAnd-kromprogramo por desegni nivelkurbojn eksterrete</string>
+    <string name="osmand_srtm_short_description_80_chars">OsmAnd-kromprogramo por desegni nivelkurbojn malkonekte</string>
     <string name="srtm_plugin_name">Nivelkurboj</string>
     <string name="osmand_srtm_long_description_1000_chars">Tiu ĉi kromprogramo ebligas vidigi kaj tavolon de nivelkurboj kaj tavolon de nivelombrumo (reliefon) supre normaj OsmAnd‑mapoj. Tiu ĉi eblo estas dezirata de atletoj, migrantoj, turistoj kaj de ĉiuj scivolaj pri reliefa strukturo de tero. 
 \n 
@@ -814,7 +814,7 @@
     <string name="copying_osmand_one_file_descr">Kopiado de dosiero (%s) al la nova loko…</string>
     <string name="copying_osmand_files_descr">Kopiado de datum-dosieroj de OsmAnd al la nova dosierujo (%s)…</string>
     <string name="copying_osmand_files">Kopiado de datum-dosieroj de OsmAnd…</string>
-    <string name="calculate_osmand_route_gpx">Kalkuli kurson eksterrete en OsmAnd</string>
+    <string name="calculate_osmand_route_gpx">Kalkuli kurson malkonekte en OsmAnd</string>
     <string name="app_mode_truck">Kamiono</string>
     <string name="guidance_preferences_descr">Navigadaj agordoj</string>
     <string name="routing_preferences_descr">Difinado de vojo</string>
@@ -1310,7 +1310,7 @@
     <string name="index_name_wiki">Tutmondaj Vikipediaj interesejoj</string>
     <string name="index_name_voice">Voĉaj anoncoj (antaŭregistritaj, limigitaj ebloj)</string>
     <string name="index_name_tts_voice">Voĉaj anoncoj (parolsintezitaj, konsilindaj)</string>
-    <string name="amenity_type_osmwiki">Vikipedio (eksterrete)</string>
+    <string name="amenity_type_osmwiki">Vikipedio (malkonekte)</string>
     <string name="amenity_type_user_defined">Propra</string>
     <string name="fav_export_confirmation">Dosiero enhavanta antaŭelportitajn ŝatatajn punktojn jam ekzistas. Ĉu anstataŭigi ĝin?</string>
     <string name="routing_settings">Navigado</string>
@@ -1481,7 +1481,7 @@
     <string name="search_nothing_found">Trovis nenion</string>
     <string name="searching">Serĉado…</string>
     <string name="searching_address">Determinado de adreso…</string>
-    <string name="search_offline_address">Serĉi eksterrete</string>
+    <string name="search_offline_address">Serĉi malkonekte</string>
     <string name="search_online_address">Serĉi enrete</string>
     <string name="address">Adreso</string>
     <string name="poi">Interesejo</string>
@@ -1523,7 +1523,7 @@
     <string name="level_to_switch_vector_raster_descr">Uzi kahelajn mapojn de tiu ĉi pligrandigo.</string>
     <string name="level_to_switch_vector_raster">Minimuma vektora skal-nivelo</string>
     <string name="create_poi_link_to_osm_doc"><u>Enreta OSM</u> map-klasigo kun bildoj.</string>
-    <string name="error_doing_search">Ne povas serĉi eksterrete.</string>
+    <string name="error_doing_search">Okazis eraro dum malkonekta serĉado.</string>
     <string name="search_osm_offline">Serĉi per pozici-trova servo</string>
     <string name="preferred_locale_descr">Elekti lingvon de fasado (post ŝanĝi necesas restarti la aplikaĵon).</string>
     <string name="unit_of_length">Unuoj de longo</string>
@@ -2245,10 +2245,10 @@
 \n • GPS-navigado en piedirada reĝimo kalkulas kursojn uzante piediradajn kursojn 
 \n • Alŝuti kaj postsekvi GPX-spuron aŭ registri kaj diskonigi vian propran
 \n</string>
-    <string name="osmand_extended_description_part7">Kontribui al OSM 
-\n • Raporti erarojn pri datumoj 
-\n • Alŝuti GPX-spurojn al OSM senpere de la aplikaĵo 
-\n • Aldoni interesejojn kaj senpere alŝuti ilin al OSM (aŭ poste se eksterrete)
+    <string name="osmand_extended_description_part7">Kontribui al OSM
+\n • Raporti erarojn pri datumoj
+\n • Alŝuti GPX-spurojn al OSM senpere de la aplikaĵo
+\n • Aldoni interesejojn kaj senpere alŝuti ilin al OSM (aŭ poste se malkonekte)
 \n</string>
     <string name="osmand_extended_description_part8">OsmAnd estas malfermkoda kaj daŭre evoluigata programaro. Ĉiu povas kontribui al la aplikaĵo per raporti erarojn, plibonigi tradukojn aŭ programi novajn funkciojn. La projekto baziĝas sur monaj donacoj por fondi kodumadon kaj testi novajn funkciojn. 
 \n Proksimuma map-atingo kaj kvalito: 
@@ -2307,10 +2307,10 @@
 \n • malnepra vidigo de rapido kaj altitudo 
 \n • vidigado de nivelkurboj kaj nivel‑ombrumo (reliefo) (per kromprogramo)</string>
     <string name="osmand_plus_extended_description_part7">Senpere kontribui al OSM:
-\n • raporti erarojn pri datumoj 
-\n • alŝuti GPX-spurojn al OSM senpere de la aplikaĵo 
-\n • aldoni interesejojn kaj senpere alŝuti ilin al OSM (aŭ poste se eksterrete) 
-\n • malnepre registri kurson ankaŭ en fona reĝimo (kiam la aparato dormetas) 
+\n • raporti erarojn pri datumoj
+\n • alŝuti GPX-spurojn al OSM senpere de la aplikaĵo
+\n • aldoni interesejojn kaj senpere alŝuti ilin al OSM (aŭ poste se malkonekte)
+\n • malnepre registri kurson ankaŭ en fona reĝimo (kiam la aparato dormetas)
 \n OsmAnd estas malfermkoda kaj daŭre evoluigata programaro. Ĉiu povas kontribui al la aplikaĵo per raporti erarojn, plibonigi tradukojn aŭ programi novajn funkciojn. La projekto baziĝas sur monaj donacoj por fondi kodumadon kaj testi novajn funkciojn.
 \n</string>
     <string name="osmand_plus_extended_description_part8">Proksimuma map‑atingo kaj kvalito: 
@@ -2685,9 +2685,9 @@
     <string name="in_app_purchase_desc">Unufoja pago</string>
     <string name="in_app_purchase_desc_ex">Kiam aĉetita, por ĉiam estos disponebla por vi.</string>
     <string name="purchase_unlim_title">Aĉeti - %1$s</string>
-    <string name="wikivoyage_offline">Vikivojaĝo eksterrete</string>
+    <string name="wikivoyage_offline">Vikivojaĝo malkonekte</string>
     <string name="unlimited_downloads">Senlimaj elŝutoj</string>
-    <string name="wikipedia_offline">Vikipedio eksterrete</string>
+    <string name="wikipedia_offline">Vikipedio malkonekte</string>
     <string name="unlock_all_features">Malŝlosi ĉiujn eblojn de OsmAnd</string>
     <string name="monthly_map_updates">Ĉiumonataj map‑ĝisdatigoj</string>
     <string name="daily_map_updates">Ĉiuhoraj map‑ĝisdatigoj</string>
@@ -2706,7 +2706,7 @@
     <string name="get_unlimited_access">Akiri senliman atingon</string>
     <string name="welcome_to_open_beta">Bonvenon al malfermita beta-testado!</string>
     <string name="contour_lines_hillshade_maps">Nivelkurbaj kaj nivelombrumaj mapoj</string>
-    <string name="download_wikipedia_description">Elŝutu Vikipediajn artikolojn por %1$s, por legi ilin eksterrete.</string>
+    <string name="download_wikipedia_description">Elŝutu Vikipediajn artikolojn por %1$s, por legi ilin malkonekte.</string>
     <string name="download_wikipedia_label">Elŝuti datumojn de Vikipedio</string>
     <string name="open_in_browser_wiki">Malfermi artikolon enrete</string>
     <string name="open_in_browser_wiki_description">Vidigi artikolon en foliumilo.</string>
@@ -2729,9 +2729,9 @@
     <string name="default_render_descr">Ĝenerala map-stilo. Legebla en dense loĝataj urboj. Nivel-kurboj, vojoj, kvalito de vojoj, aliraj limigoj, ŝoseaj numeroj, turismaj kursoj laŭ SAC-skalo, objektoj por rapid-akvaj sportoj.</string>
     <string name="open_wikipedia_link_online">Malfermi Vikipedian ligilon enrete</string>
     <string name="open_wikipedia_link_online_description">La ligilo estos malfermita per ret-foliumilo.</string>
-    <string name="read_wikipedia_offline_description">Akiru abonon al OsmAnd-Live por legi artikolojn de Vikipedio kaj Vikivojaĝo eksterrete.</string>
+    <string name="read_wikipedia_offline_description">Akiru abonon al OsmAnd Live por legi artikolojn de Vikipedio kaj Vikivojaĝo malkonekte.</string>
     <string name="how_to_open_link">Kiel malfermi la ligilon?</string>
-    <string name="read_wikipedia_offline">Legi Vikipedion eksterrete</string>
+    <string name="read_wikipedia_offline">Legi Vikipedion malkonekte</string>
     <string name="download_all">Elŝuti ĉiujn</string>
     <string name="shared_string_bookmark">Al legosignoj</string>
     <string name="off_road_render_descr">Por ekstervoja veturado, bazita sur la stilo “Topo”, por uzi kun verdaj satelitaj fotoj kiel subtavola mapo. Malpliigita larĝo de ĉefaj vojoj, pliigita larĝo de kampaj vojoj, vojetoj, biciklaj kaj aliaj vojoj.</string>
@@ -3551,9 +3551,9 @@
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="osm_live_payment_subscription_management">La pago estos prenita el via konto Google Play post konfirmi aĉeton.
 \n
-\n La abono aŭtomate renoviĝos escepte se ĝi estos nuligita antaŭ la dato de renoviĝo. La pago estos prenita por la renoviĝa periodo (monato/tri monatoj/jaro) nur je la dato de renoviĝo.
+\nLa abono aŭtomate renoviĝos escepte se ĝi estos nuligita antaŭ la dato de renoviĝo. La pago estos prenita por la renoviĝa periodo (monato/tri monatoj/jaro) nur je la dato de renoviĝo.
 \n
-\n Vi povas administri kaj rezigni viajn abonojn per agordoj de Google Play.</string>
+\nVi povas administri kaj rezigni viajn abonojn per agordoj de Google Play.</string>
     <string name="search_poi_types_descr">Miksi specojn de interesejoj el diversaj kategorioj. Frapetu ŝaltilon por elekti la tutan kategorion, frapetu ĉe maldekstre por elekti detala(j)n objekto(j)n el la kategorio.</string>
     <string name="search_poi_types">Serĉi specojn de interesejoj</string>
     <string name="favorites_item">Ŝatataj ejoj</string>
@@ -3798,9 +3798,9 @@
     <string name="what_is_new">Kio estas nova</string>
     <string name="osm_live_payment_subscription_management_hw">La pago estos prenita el via konto AppGallery post konfirmi aĉeton.
 \n
-\n La abono aŭtomate renoviĝos escepte se ĝi estos nuligita antaŭ la dato de renoviĝo. La pago estos prenita por la renoviĝa periodo (monato/tri monatoj/jaro) nur je la dato de renoviĝo.
+\nLa abono aŭtomate renoviĝos escepte se ĝi estos nuligita antaŭ la dato de renoviĝo. La pago estos prenita por la renoviĝa periodo (monato/tri monatoj/jaro) nur je la dato de renoviĝo.
 \n
-\n Vi povas administri kaj rezigni viajn abonojn per la agordoj de AppGallery.</string>
+\nVi povas administri kaj rezigni viajn abonojn per la agordoj de AppGallery.</string>
     <string name="start_finish_icons">Emblemoj de komenco kaj fino</string>
     <string name="contour_lines_thanks">Dankon al vi por aĉeti la kromprogramon “nivelkurboj”</string>
     <string name="osm_live_payment_desc_hw">La abonpago estas prenita por la elektita periodo. VI ĉiam povas rezigni abonon ĉe AppGallery.</string>
