@@ -39,6 +39,7 @@ import net.osmand.FileUtils;
 import net.osmand.FileUtils.RenameCallback;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.TrkSegment;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
@@ -66,6 +67,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.OpenGpxDetailsTask;
+import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.measurementtool.GpxData;
@@ -154,6 +156,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private String gpxTitle;
 	private String returnScreenName;
 	private String callingFragmentTag;
+	private SelectedGpxPoint gpxPoint;
 	private TrackChartPoints trackChartPoints;
 
 	private Float heading;
@@ -318,6 +321,14 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	public void setCallingFragmentTag(String callingFragmentTag) {
 		this.callingFragmentTag = callingFragmentTag;
+	}
+
+	public void setGpxPoint(SelectedGpxPoint point) {
+		this.gpxPoint = point;
+	}
+
+	public void setAdjustMapPosition(boolean adjustMapPosition) {
+		this.adjustMapPosition = adjustMapPosition;
 	}
 
 	@Override
@@ -506,7 +517,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					}
 					cardsContainer.addView(segmentsCard.getView());
 				} else {
-					segmentsCard = new SegmentsCard(mapActivity, displayHelper, this);
+					segmentsCard = new SegmentsCard(mapActivity, displayHelper, gpxPoint, this);
 					segmentsCard.setListener(this);
 					cardsContainer.addView(segmentsCard.build(mapActivity));
 				}
@@ -1258,7 +1269,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		boolean currentRecording = file == null;
 		String path = file != null ? file.getAbsolutePath() : null;
 		if (context instanceof MapActivity) {
-			TrackMenuFragment.showInstance((MapActivity) context, path, currentRecording, null, null, null);
+			TrackMenuFragment.showInstance((MapActivity) context, path, currentRecording, null, null);
 		} else {
 			Bundle bundle = new Bundle();
 			bundle.putString(TRACK_FILE_NAME, path);
@@ -1309,7 +1320,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	public static void showInstance(@NonNull MapActivity mapActivity,
 									@Nullable String path,
 									boolean showCurrentTrack,
-									@Nullable final LatLon latLon,
 									@Nullable final String returnScreenName,
 									@Nullable final String callingFragmentTag) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
@@ -1318,7 +1328,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			public boolean processResult(SelectedGpxFile selectedGpxFile) {
 				MapActivity mapActivity = mapActivityRef.get();
 				if (mapActivity != null && selectedGpxFile != null) {
-					showInstance(mapActivity, selectedGpxFile, latLon, returnScreenName, callingFragmentTag, true);
+					showInstance(mapActivity, selectedGpxFile, null, returnScreenName, callingFragmentTag, true);
 				}
 				return true;
 			}
@@ -1327,7 +1337,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	public static boolean showInstance(@NonNull MapActivity mapActivity,
 									   @NonNull SelectedGpxFile selectedGpxFile,
-									   @Nullable LatLon latLon,
+									   @Nullable SelectedGpxPoint gpxPoint,
 									   @Nullable String returnScreenName,
 									   @Nullable String callingFragmentTag,
 									   boolean adjustMapPosition) {
@@ -1341,10 +1351,12 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			fragment.setSelectedGpxFile(selectedGpxFile);
 			fragment.setReturnScreenName(returnScreenName);
 			fragment.setCallingFragmentTag(callingFragmentTag);
-			fragment.adjustMapPosition = adjustMapPosition;
+			fragment.setAdjustMapPosition(adjustMapPosition);
 
-			if (latLon != null) {
-				fragment.setLatLon(latLon);
+			if (gpxPoint != null) {
+				WptPt wptPt = gpxPoint.getSelectedPoint();
+				fragment.setLatLon(new LatLon(wptPt.lat, wptPt.lon));
+				fragment.setGpxPoint(gpxPoint);
 			} else {
 				QuadRect rect = selectedGpxFile.getGpxFile().getRect();
 				LatLon latLonRect = new LatLon(rect.centerY(), rect.centerX());

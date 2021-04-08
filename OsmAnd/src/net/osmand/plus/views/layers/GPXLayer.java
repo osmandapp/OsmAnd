@@ -1025,7 +1025,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 		float bearing = prevPointLocation.bearingTo(nextPointLocation);
 
-		return new SelectedGpxPoint(selectedGpxFile, projectionPoint, bearing);
+		return new SelectedGpxPoint(selectedGpxFile, projectionPoint, prevPoint, nextPoint, bearing);
 	}
 
 	public static WptPt createProjectionPoint(WptPt prevPoint, WptPt nextPoint, LatLon latLon) {
@@ -1113,9 +1113,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		}
 		MapActivity mapActivity = (MapActivity) view.getContext();
 		SelectedGpxPoint point = (SelectedGpxPoint) object;
-		WptPt wptPt = point.getSelectedPoint();
-		TrackMenuFragment.showInstance(mapActivity, point.getSelectedGpxFile(),
-				new LatLon(wptPt.lat, wptPt.lon), null, null, false);
+		TrackMenuFragment.showInstance(mapActivity, point.getSelectedGpxFile(), point, null, null, false);
 		return true;
 	}
 

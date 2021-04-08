@@ -17,6 +17,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.track.TrackMenuFragment;
@@ -49,8 +50,8 @@ public class WptPtMenuController extends MenuController {
 					GpxSelectionHelper selectionHelper = mapActivity.getMyApplication().getSelectedGpxHelper();
 					SelectedGpxFile selectedGpxFile = selectionHelper.getSelectedGPXFile(wpt);
 					if (selectedGpxFile != null) {
-						String path = selectedGpxFile.getGpxFile().path;
-						TrackMenuFragment.showInstance(mapActivity, path, selectedGpxFile.isShowCurrentTrack(), new LatLon(wpt.lon, wpt.lat), null, null);
+						SelectedGpxPoint gpxPoint = new SelectedGpxPoint(selectedGpxFile, wpt, null, null, Float.NaN);
+						TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, gpxPoint, null, null, false);
 					}
 				}
 			}
