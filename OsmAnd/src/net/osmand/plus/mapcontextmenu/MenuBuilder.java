@@ -1235,8 +1235,6 @@ public class MenuBuilder {
 				public void onClick(View v) {
 					LatLon latLon = new LatLon(poi.getLocation().getLatitude(), poi.getLocation().getLongitude());
 					mapActivity.getContextMenu().show(latLon, pointDescription, poi);
-					mapActivity.getContextMenu().update(latLon, pointDescription, poi);
-					mapActivity.setMapLocation(poi.getLocation().getLatitude(), poi.getLocation().getLongitude());
 				}
 			});
 			view.addView(button);
@@ -1400,8 +1398,7 @@ public class MenuBuilder {
 	}
 
 	private List<Amenity> getSortedAmenities(PoiUIFilter filter, final LatLon latLon) {
-		boolean isWikiFilter = filter.getFilterId().equals("std_osmwiki");
-		QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), isWikiFilter ? 250 : 1000);
+		QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), 250);
 		List<Amenity> nearestAmenities = getAmenities(rect, filter);
 		nearestAmenities.remove(amenity);
 
@@ -1414,11 +1411,7 @@ public class MenuBuilder {
 				return Double.compare(d1, d2);
 			}
 		});
-		if (isWikiFilter) {
 			return nearestAmenities;
-		} else {
-			return nearestAmenities.subList(0, Math.min(10, nearestAmenities.size()));
-		}
 	}
 
 	private List<Amenity> getAmenities(QuadRect rect, PoiUIFilter filter) {
