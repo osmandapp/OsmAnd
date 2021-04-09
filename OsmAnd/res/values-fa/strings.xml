@@ -4094,7 +4094,7 @@
     <string name="empty_purchases_description">اگر خریدهای شما اینجا نمایش داده نمی‌شود، روی «%1$s» بزنید یا با تیم پشتیبانی ما تماس بگیرید.</string>
     <string name="contact_support">تماس با پشتیبانی</string>
     <string name="troubleshooting">عیب‌یابی</string>
-    <string name="troubleshooting_description">اگر با مسئله‌ای در خرید مواجه شدید این پیوند را دنبال کنید.</string>
+    <string name="troubleshooting_description">اگر در خرید با مسئله‌ای مواجه هستید این پیوند را دنبال کنید.</string>
     <string name="osmand_live">OsmAnd Live</string>
     <string name="annual_subscription">اشتراک سالانه</string>
     <string name="monthly_subscription">اشتراک ماهانه</string>
@@ -4105,4 +4105,6 @@
     <string name="in_grace_period">در مهلت اضافه</string>
     <string name="expired">منقضی شده</string>
     <string name="update_all_maps_added">همهٔ نقشه‌های اضافه‌شده به %1$s روزآمد شود؟</string>
+    <string name="exit_number">شمارهٔ خروج</string>
+    <string name="output">خروجی</string>
 </resources>
