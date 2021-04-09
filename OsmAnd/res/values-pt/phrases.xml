@@ -1409,7 +1409,7 @@
     <string name="poi_fireplace_yes">Sim</string>
     <string name="poi_fireplace_no">Sem lareira</string>
     <string name="poi_covered_yes">Sim</string>
-    <string name="poi_covered_no">Descoberto</string>
+    <string name="poi_covered_no">Não coberto</string>
     <string name="poi_smoking_no">Não permitido</string>
     <string name="poi_smoking_outside">Apenas do lado de fora</string>
     <string name="poi_smoking_yes">Permitido</string>
@@ -1959,8 +1959,8 @@
     <string name="poi_surface_paved">Superfície: pavimentada</string>
     <string name="poi_surface_asphalt">Superfície: asfalto</string>
     <string name="poi_surface_concrete">Superfície: cimento</string>
-    <string name="poi_surface_sett">Superfície: paralelepípedo</string>
-    <string name="poi_surface_cobblestone">Superfície: piso de seixos</string>
+    <string name="poi_surface_sett">Superfície: paralelos</string>
+    <string name="poi_surface_cobblestone">Superfície: pedras irregulares</string>
     <string name="poi_surface_paving_stones">Superfície: piso intertravado</string>
     <string name="poi_surface_pebblestone">Superfície: cascalho</string>
     <string name="poi_surface_stone">Superfície: pedra</string>
@@ -2789,7 +2789,7 @@
     <string name="poi_crossing_supervision_attendant">Cruzamento vigiado: pessoa física</string>
     <string name="poi_crossing_supervision_camera">Cruzamento vigiado: câmara</string>
     <string name="poi_dispensing_yes">Sim</string>
-    <string name="poi_dispensing_no">Emite receitas: não</string>
+    <string name="poi_dispensing_no">Não vende medicamentos sujeitos a receita médica</string>
     <string name="poi_aerodrome_type_international">Internacional</string>
     <string name="poi_aerodrome_type_regional">Regional</string>
     <string name="poi_aerodrome_type_public">Público</string>
@@ -3488,7 +3488,7 @@
     <string name="poi_checkpoint_type_electronic">Eletrónico</string>
     <string name="poi_course">Curso</string>
     <string name="poi_rock">Rocha</string>
-    <string name="poi_end_date">Data final</string>
+    <string name="poi_end_date">Data de fim</string>
     <string name="poi_appliance">Loja de eletrodomésticos</string>
     <string name="poi_outcrop">Afloramento</string>
     <string name="poi_payment_contactless_yes">Sem contacto</string>
@@ -3704,7 +3704,7 @@
     <string name="poi_craft_floorer">Assentador de piso</string>
     <string name="poi_craft_bakery">Padaria</string>
     <string name="poi_craft_cabinet_maker">Marceneiro</string>
-    <string name="poi_charge">Cobrança</string>
+    <string name="poi_charge">Custo</string>
     <string name="poi_pet_grooming">Banho e tosquia de animais</string>
     <string name="poi_atm_yes">Caixa automática: sim</string>
     <string name="poi_cash_withdrawal_bank_card">Levantamento de dinheiro</string>
