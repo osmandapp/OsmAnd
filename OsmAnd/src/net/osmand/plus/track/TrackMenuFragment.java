@@ -39,6 +39,7 @@ import net.osmand.FileUtils;
 import net.osmand.FileUtils.RenameCallback;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.TrkSegment;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
@@ -66,6 +67,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.OpenGpxDetailsTask;
+import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.measurementtool.GpxData;
@@ -154,6 +156,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private String gpxTitle;
 	private String returnScreenName;
 	private String callingFragmentTag;
+	private SelectedGpxPoint gpxPoint;
 	private TrackChartPoints trackChartPoints;
 
 	private Float heading;
@@ -165,7 +168,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private int menuTitleHeight;
 	private int menuHeaderHeight;
 	private int toolbarHeightPx;
-	private boolean mapPositionAdjusted;
+	private boolean adjustMapPosition = true;
 
 
 	public enum TrackMenuType {
@@ -318,6 +321,14 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	public void setCallingFragmentTag(String callingFragmentTag) {
 		this.callingFragmentTag = callingFragmentTag;
+	}
+
+	public void setGpxPoint(SelectedGpxPoint point) {
+		this.gpxPoint = point;
+	}
+
+	public void setAdjustMapPosition(boolean adjustMapPosition) {
+		this.adjustMapPosition = adjustMapPosition;
 	}
 
 	@Override
@@ -506,7 +517,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					}
 					cardsContainer.addView(segmentsCard.getView());
 				} else {
-					segmentsCard = new SegmentsCard(mapActivity, displayHelper, this);
+					segmentsCard = new SegmentsCard(mapActivity, displayHelper, gpxPoint, this);
 					segmentsCard.setListener(this);
 					cardsContainer.addView(segmentsCard.build(mapActivity));
 				}
@@ -596,7 +607,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			boolean backButtonVisible = !Algorithms.isEmpty(returnScreenName) && currentMenuState == MenuState.HALF_SCREEN;
 			AndroidUiHelper.updateVisibility(backButtonContainer, backButtonVisible);
 		}
-		if (currentMenuState != MenuState.FULL_SCREEN && (changed || !mapPositionAdjusted)) {
+		if (currentMenuState != MenuState.FULL_SCREEN && (changed || adjustMapPosition)) {
 			adjustMapPosition(getMenuStatePosY(currentMenuState));
 		}
 	}
@@ -750,7 +761,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	@Override
 	public int getStatusBarColorId() {
-		if (getViewY() <= getFullScreenTopPosY() || !isPortrait()) {
+		if (getView() != null && getViewY() <= getFullScreenTopPosY() || !isPortrait()) {
 			return isNightMode() ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
 		}
 		return -1;
@@ -971,7 +982,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			if (r.left != 0 && r.right != 0) {
 				mapActivity.getMapView().fitRectToMap(r.left, r.right, r.top, r.bottom, tileBoxWidthPx, tileBoxHeightPx, 0);
 			}
-			mapPositionAdjusted = true;
+			adjustMapPosition = false;
 		}
 	}
 
@@ -1258,7 +1269,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		boolean currentRecording = file == null;
 		String path = file != null ? file.getAbsolutePath() : null;
 		if (context instanceof MapActivity) {
-			TrackMenuFragment.showInstance((MapActivity) context, path, currentRecording, null, null, null);
+			TrackMenuFragment.showInstance((MapActivity) context, path, currentRecording, null, null);
 		} else {
 			Bundle bundle = new Bundle();
 			bundle.putString(TRACK_FILE_NAME, path);
@@ -1309,7 +1320,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	public static void showInstance(@NonNull MapActivity mapActivity,
 									@Nullable String path,
 									boolean showCurrentTrack,
-									@Nullable final LatLon latLon,
 									@Nullable final String returnScreenName,
 									@Nullable final String callingFragmentTag) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
@@ -1318,7 +1328,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			public boolean processResult(SelectedGpxFile selectedGpxFile) {
 				MapActivity mapActivity = mapActivityRef.get();
 				if (mapActivity != null && selectedGpxFile != null) {
-					showInstance(mapActivity, selectedGpxFile, latLon, returnScreenName, callingFragmentTag);
+					showInstance(mapActivity, selectedGpxFile, null, returnScreenName, callingFragmentTag, true);
 				}
 				return true;
 			}
@@ -1327,9 +1337,10 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	public static boolean showInstance(@NonNull MapActivity mapActivity,
 									   @NonNull SelectedGpxFile selectedGpxFile,
-									   @Nullable LatLon latLon,
+									   @Nullable SelectedGpxPoint gpxPoint,
 									   @Nullable String returnScreenName,
-									   @Nullable String callingFragmentTag) {
+									   @Nullable String callingFragmentTag,
+									   boolean adjustMapPosition) {
 		try {
 			Bundle args = new Bundle();
 			args.putInt(ContextMenuFragment.MENU_STATE_KEY, MenuState.HEADER_ONLY);
@@ -1340,9 +1351,12 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			fragment.setSelectedGpxFile(selectedGpxFile);
 			fragment.setReturnScreenName(returnScreenName);
 			fragment.setCallingFragmentTag(callingFragmentTag);
+			fragment.setAdjustMapPosition(adjustMapPosition);
 
-			if (latLon != null) {
-				fragment.setLatLon(latLon);
+			if (gpxPoint != null) {
+				WptPt wptPt = gpxPoint.getSelectedPoint();
+				fragment.setLatLon(new LatLon(wptPt.lat, wptPt.lon));
+				fragment.setGpxPoint(gpxPoint);
 			} else {
 				QuadRect rect = selectedGpxFile.getGpxFile().getRect();
 				LatLon latLonRect = new LatLon(rect.centerY(), rect.centerX());

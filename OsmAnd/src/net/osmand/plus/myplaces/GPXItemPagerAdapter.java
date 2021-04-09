@@ -26,7 +26,6 @@ import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
 import net.osmand.AndroidUtils;
-import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.GPXUtilities.Track;
@@ -34,7 +33,6 @@ import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -52,7 +50,6 @@ import net.osmand.plus.views.controls.WrapContentHeightViewPager.ViewAtPositionI
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
-import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -181,17 +178,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 			LineData lineData = chart.getLineData();
 			List<ILineDataSet> ds = lineData != null ? lineData.getDataSets() : null;
 			if (ds != null && ds.size() > 0) {
-				for (GPXUtilities.Track t : gpxItem.group.getGpx().tracks) {
-					for (TrkSegment s : t.segments) {
-						if (s.points.size() > 0 && s.points.get(0).equals(analysis.locationStart)) {
-							segment = s;
-							break;
-						}
-					}
-					if (segment != null) {
-						break;
-					}
-				}
+				segment = getSegmentForAnalysis(gpxItem, analysis);
 			}
 		}
 		return segment;
@@ -741,6 +728,14 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 				}
 				if (gpxItem.chartHighlightPos != -1) {
 					chart.highlightValue(gpxItem.chartHighlightPos, 0);
+				} else if (gpxItem.locationOnMap != null) {
+					LineData lineData = chart.getLineData();
+					List<ILineDataSet> ds = lineData != null ? lineData.getDataSets() : null;
+					if (ds != null && ds.size() > 0) {
+						OrderedLineDataSet dataSet = (OrderedLineDataSet) ds.get(0);
+						gpxItem.chartHighlightPos = (float) (gpxItem.locationOnMap.distance / dataSet.getDivX());
+						chart.highlightValue(gpxItem.chartHighlightPos, 0);
+					}
 				}
 			} else {
 				chart.highlightValue(null);
@@ -818,18 +813,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 				gpxItem.chartTypes[i] = orderedDataSet.getDataSetType();
 			}
 			if (gpxItem.chartHighlightPos != -1) {
-				TrkSegment segment = null;
-				for (Track t : gpxItem.group.getGpx().tracks) {
-					for (TrkSegment s : t.segments) {
-						if (s.points.size() > 0 && s.points.get(0).equals(gpxItem.analysis.locationStart)) {
-							segment = s;
-							break;
-						}
-					}
-					if (segment != null) {
-						break;
-					}
-				}
+				TrkSegment segment = getSegmentForAnalysis(gpxItem, gpxItem.analysis);
 				if (segment != null) {
 					OrderedLineDataSet dataSet = (OrderedLineDataSet) dataSets.get(0);
 					float distance = gpxItem.chartHighlightPos * dataSet.getDivX();
@@ -849,7 +833,16 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		}
 	}
 
-	private void openSplitIntervalScreen() {
-		actionsListener.openSplitInterval(gpxItem, getTrkSegment());
+	public static TrkSegment getSegmentForAnalysis(GpxDisplayItem gpxItem, GPXTrackAnalysis analysis) {
+		for (Track track : gpxItem.group.getGpx().tracks) {
+			for (TrkSegment segment : track.segments) {
+				int size = segment.points.size();
+				if (size > 0 && segment.points.get(0).equals(analysis.locationStart)
+						&& segment.points.get(size - 1).equals(analysis.locationEnd)) {
+					return segment;
+				}
+			}
+		}
+		return null;
 	}
 }
