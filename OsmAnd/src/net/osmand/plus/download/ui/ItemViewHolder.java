@@ -216,8 +216,8 @@ public class ItemViewHolder {
 				MultipleIndexItem item = (MultipleIndexItem) downloadItem;
 				String allRegionsHeader = context.getString(R.string.shared_strings_all_regions);
 				String regionsHeader = context.getString(R.string.regions);
-				String allRegionsCountStr;
-				String leftToDownloadCountStr;
+				String allRegionsCount;
+				String leftToDownloadCount;
 				if (isSRTMItem(item)) {
 					List<IndexItem> items = new ArrayList<>();
 					for (IndexItem indexItem : item.getAllIndexes()) {
@@ -226,7 +226,7 @@ public class ItemViewHolder {
 							items.add(indexItem);
 						}
 					}
-					allRegionsCountStr = String.valueOf(items.size());
+					allRegionsCount = String.valueOf(items.size());
 					items.clear();
 					for (IndexItem indexItem : item.getIndexesToDownload()) {
 						boolean baseItem = isBaseSRTMItem(indexItem);
@@ -235,27 +235,27 @@ public class ItemViewHolder {
 							items.add(indexItem);
 						}
 					}
-					leftToDownloadCountStr = String.valueOf(items.size());
+					leftToDownloadCount = String.valueOf(items.size());
 				} else {
-					allRegionsCountStr = String.valueOf(item.getAllIndexes().size());
-					leftToDownloadCountStr = String.valueOf(item.getIndexesToDownload().size());
+					allRegionsCount = String.valueOf(item.getAllIndexes().size());
+					leftToDownloadCount = String.valueOf(item.getIndexesToDownload().size());
 				}
 				String header;
 				String count;
 				if (item.hasActualDataToDownload()) {
 					if (!item.isDownloaded()) {
 						header = allRegionsHeader;
-						count = leftToDownloadCountStr;
+						count = leftToDownloadCount;
 					} else {
 						header = regionsHeader;
 						count = String.format(
 								context.getString(R.string.ltr_or_rtl_combine_via_slash),
-								leftToDownloadCountStr,
-								allRegionsCountStr);
+								leftToDownloadCount,
+								allRegionsCount);
 					}
 				} else {
 					header = allRegionsHeader;
-					count = allRegionsCountStr;
+					count = allRegionsCount;
 				}
 				String fullDescription = context.getString(R.string.ltr_or_rtl_combine_via_colon, header, count);
 				if (srtmItem) {

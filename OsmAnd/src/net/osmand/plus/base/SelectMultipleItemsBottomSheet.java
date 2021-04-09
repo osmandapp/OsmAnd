@@ -70,42 +70,6 @@ public class SelectMultipleItemsBottomSheet extends MenuBottomSheetDialogFragmen
 	private OnRadioButtonSelectListener onRadioButtonSelectListener;
 	private SelectedItemsListener selectedItemsListener;
 
-	public static SelectMultipleItemsBottomSheet showInstance(@NonNull AppCompatActivity activity,
-															  @NonNull List<SelectableItem> items,
-															  @Nullable List<SelectableItem> selected,
-															  boolean usedOnMap) {
-		SelectMultipleItemsBottomSheet fragment = new SelectMultipleItemsBottomSheet();
-		fragment.setUsedOnMap(usedOnMap);
-		fragment.setItems(items);
-		fragment.setSelectedItems(selected);
-		FragmentManager fm = activity.getSupportFragmentManager();
-		fragment.show(fm, TAG);
-		return fragment;
-	}
-
-	public static SelectMultipleItemsBottomSheet showInstance(@NonNull AppCompatActivity activity,
-															  @NonNull List<SelectableItem> items,
-															  @Nullable List<SelectableItem> selected,
-															  boolean usedOnMap,
-															  String addDescription,
-															  boolean customOptionsVisible,
-															  boolean leftButtonSelected,
-															  String leftRadioButtonText,
-															  String rightRadioButtonText) {
-		SelectMultipleItemsBottomSheet fragment = new SelectMultipleItemsBottomSheet();
-		fragment.setUsedOnMap(usedOnMap);
-		fragment.setItems(items);
-		fragment.setSelectedItems(selected);
-		fragment.setAddDescriptionText(addDescription);
-		fragment.setCustomOptionsVisible(customOptionsVisible);
-		fragment.setLeftButtonSelected(leftButtonSelected);
-		fragment.setLeftRadioButtonText(leftRadioButtonText);
-		fragment.setRightRadioButtonText(rightRadioButtonText);
-		FragmentManager fm = activity.getSupportFragmentManager();
-		fragment.show(fm, TAG);
-		return fragment;
-	}
-
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
@@ -392,6 +356,66 @@ public class SelectMultipleItemsBottomSheet extends MenuBottomSheetDialogFragmen
 		this.selectedItemsListener = selectedItemsListener;
 	}
 
+	@Override
+	protected void setupRightButton() {
+		super.setupRightButton();
+		applyButtonTitle = rightButton.findViewById(R.id.button_text);
+	}
+
+	@Override
+	protected void onRightBottomButtonClick() {
+		if (onApplySelectionListener != null) {
+			onApplySelectionListener.onSelectionApplied(selectedItems);
+		}
+		dismiss();
+	}
+
+	@Override
+	protected int getRightBottomButtonTextId() {
+		return R.string.shared_string_apply;
+	}
+
+	@Override
+	protected boolean useVerticalButtons() {
+		return true;
+	}
+
+	public static SelectMultipleItemsBottomSheet showInstance(@NonNull AppCompatActivity activity,
+	                                                          @NonNull List<SelectableItem> items,
+	                                                          @Nullable List<SelectableItem> selected,
+	                                                          boolean usedOnMap) {
+		SelectMultipleItemsBottomSheet fragment = new SelectMultipleItemsBottomSheet();
+		fragment.setUsedOnMap(usedOnMap);
+		fragment.setItems(items);
+		fragment.setSelectedItems(selected);
+		FragmentManager fm = activity.getSupportFragmentManager();
+		fragment.show(fm, TAG);
+		return fragment;
+	}
+
+	public static SelectMultipleItemsBottomSheet showInstance(@NonNull AppCompatActivity activity,
+	                                                          @NonNull List<SelectableItem> items,
+	                                                          @Nullable List<SelectableItem> selected,
+	                                                          boolean usedOnMap,
+	                                                          String addDescription,
+	                                                          boolean customOptionsVisible,
+	                                                          boolean leftButtonSelected,
+	                                                          String leftRadioButtonText,
+	                                                          String rightRadioButtonText) {
+		SelectMultipleItemsBottomSheet fragment = new SelectMultipleItemsBottomSheet();
+		fragment.setUsedOnMap(usedOnMap);
+		fragment.setItems(items);
+		fragment.setSelectedItems(selected);
+		fragment.setAddDescriptionText(addDescription);
+		fragment.setCustomOptionsVisible(customOptionsVisible);
+		fragment.setLeftButtonSelected(leftButtonSelected);
+		fragment.setLeftRadioButtonText(leftRadioButtonText);
+		fragment.setRightRadioButtonText(rightRadioButtonText);
+		FragmentManager fm = activity.getSupportFragmentManager();
+		fragment.show(fm, TAG);
+		return fragment;
+	}
+
 	public interface SelectionUpdateListener {
 		void onSelectionUpdate();
 	}
@@ -435,27 +459,4 @@ public class SelectMultipleItemsBottomSheet extends MenuBottomSheetDialogFragmen
 		}
 	}
 
-	@Override
-	protected void setupRightButton() {
-		super.setupRightButton();
-		applyButtonTitle = rightButton.findViewById(R.id.button_text);
-	}
-
-	@Override
-	protected void onRightBottomButtonClick() {
-		if (onApplySelectionListener != null) {
-			onApplySelectionListener.onSelectionApplied(selectedItems);
-		}
-		dismiss();
-	}
-
-	@Override
-	protected int getRightBottomButtonTextId() {
-		return R.string.shared_string_apply;
-	}
-
-	@Override
-	protected boolean useVerticalButtons() {
-		return true;
-	}
 }

@@ -511,7 +511,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
 			@Override
 			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter,
-											  int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
+			                                  int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 				localOptionsMenu(itemId);
 				return true;
 			}
@@ -612,7 +612,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 	}
 
 	private void openSelectionMode(final int actionResId, final int actionIconId,
-								   final DialogInterface.OnClickListener listener) {
+	                               final DialogInterface.OnClickListener listener) {
 		final int colorResId = getMyApplication().getSettings().isLightContent() ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark;
 		String value = getString(actionResId);
 		if (value.endsWith("...")) {
@@ -713,7 +713,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 	}
 
 	public void openSelectionMode(int stringRes, int darkIcon, DialogInterface.OnClickListener listener,
-								  EnumSet<LocalIndexType> filter) {
+	                              EnumSet<LocalIndexType> filter) {
 		if (filter != null) {
 			listAdapter.filterCategories(filter);
 		}
@@ -864,7 +864,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 
 		@Override
 		public View getChildView(final int groupPosition, final int childPosition,
-								 boolean isLastChild, View convertView, ViewGroup parent) {
+		                         boolean isLastChild, View convertView, ViewGroup parent) {
 			LocalIndexInfoViewHolder viewHolder;
 			if (convertView == null) {
 				LayoutInflater inflater = LayoutInflater.from(ctx);

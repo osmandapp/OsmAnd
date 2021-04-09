@@ -29,11 +29,11 @@ import static net.osmand.plus.download.DownloadActivityType.SRTM_COUNTRY_FILE;
 public class MultipleIndexesUiHelper {
 
 	public static void showDialog(@NonNull DownloadItem item,
-								  @NonNull AppCompatActivity activity,
-								  @NonNull final OsmandApplication app,
-								  @NonNull DateFormat dateFormat,
-								  boolean showRemoteDate,
-								  @NonNull final SelectItemsToDownloadListener listener) {
+	                              @NonNull AppCompatActivity activity,
+	                              @NonNull final OsmandApplication app,
+	                              @NonNull DateFormat dateFormat,
+	                              boolean showRemoteDate,
+	                              @NonNull final SelectItemsToDownloadListener listener) {
 		if (item.getType() == SRTM_COUNTRY_FILE) {
 			showSRTMDialog(item, activity, app, dateFormat, showRemoteDate, listener);
 		} else if (item instanceof MultipleIndexItem) {
@@ -42,11 +42,11 @@ public class MultipleIndexesUiHelper {
 	}
 
 	public static void showBaseDialog(@NonNull MultipleIndexItem multipleIndexItem,
-									  @NonNull AppCompatActivity activity,
-									  @NonNull final OsmandApplication app,
-									  @NonNull DateFormat dateFormat,
-									  boolean showRemoteDate,
-									  @NonNull final SelectItemsToDownloadListener listener) {
+	                                  @NonNull AppCompatActivity activity,
+	                                  @NonNull final OsmandApplication app,
+	                                  @NonNull DateFormat dateFormat,
+	                                  boolean showRemoteDate,
+	                                  @NonNull final SelectItemsToDownloadListener listener) {
 		List<IndexItem> indexesToDownload = getIndexesToDownload(multipleIndexItem);
 		List<SelectableItem> allItems = new ArrayList<>();
 		List<SelectableItem> selectedItems = new ArrayList<>();
@@ -80,11 +80,11 @@ public class MultipleIndexesUiHelper {
 	}
 
 	public static void showSRTMDialog(@NonNull final DownloadItem downloadItem,
-									  @NonNull AppCompatActivity activity,
-									  @NonNull final OsmandApplication app,
-									  @NonNull final DateFormat dateFormat,
-									  final boolean showRemoteDate,
-									  @NonNull final SelectItemsToDownloadListener listener) {
+	                                  @NonNull AppCompatActivity activity,
+	                                  @NonNull final OsmandApplication app,
+	                                  @NonNull final DateFormat dateFormat,
+	                                  final boolean showRemoteDate,
+	                                  @NonNull final SelectItemsToDownloadListener listener) {
 		List<SelectableItem> selectedItems = new ArrayList<>();
 		final List<SelectableItem> leftItems = new ArrayList<>();
 		final List<SelectableItem> rightItems = new ArrayList<>();
@@ -201,7 +201,7 @@ public class MultipleIndexesUiHelper {
 	}
 
 	private static boolean isListDialog(OsmandApplication app,
-										List<SelectableItem> leftItems, List<SelectableItem> rightItems) {
+	                                    List<SelectableItem> leftItems, List<SelectableItem> rightItems) {
 		return (isBaseSRTMMetricSystem(app) ? leftItems : rightItems).size() > 1;
 	}
 

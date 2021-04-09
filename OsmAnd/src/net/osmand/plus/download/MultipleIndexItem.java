@@ -19,8 +19,8 @@ public class MultipleIndexItem extends DownloadItem {
 	private final List<IndexItem> items;
 
 	public MultipleIndexItem(@NonNull WorldRegion region,
-							 @NonNull List<IndexItem> items,
-							 @NonNull DownloadActivityType type) {
+	                         @NonNull List<IndexItem> items,
+	                         @NonNull DownloadActivityType type) {
 		super(type);
 		this.items = items;
 	}
@@ -139,4 +139,5 @@ public class MultipleIndexItem extends DownloadItem {
 		}
 		return result;
 	}
+
 }

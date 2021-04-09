@@ -302,9 +302,9 @@ public class DataStorageHelper {
 	}
 
 	public DirectoryItem createDirectory(@NonNull String relativePath,
-										 boolean processInternalDirectories,
-										 CheckingType checkingType,
-										 boolean addUnmatchedToOtherMemory) {
+	                                     boolean processInternalDirectories,
+	                                     CheckingType checkingType,
+	                                     boolean addUnmatchedToOtherMemory) {
 		String path = app.getAppPath(relativePath).getAbsolutePath();
 		return new DirectoryItem(path, processInternalDirectories, checkingType, addUnmatchedToOtherMemory);
 	}

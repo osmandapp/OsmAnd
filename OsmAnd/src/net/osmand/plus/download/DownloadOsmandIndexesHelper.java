@@ -142,7 +142,7 @@ public class DownloadOsmandIndexesHelper {
 	}
 
 	private static void listVoiceAssets(IndexFileList result, AssetManager amanager, PackageManager pm,
-										OsmandSettings settings) {
+	                                    OsmandSettings settings) {
 		try {
 			File voicePath = settings.getContext().getAppPath(IndexConstants.VOICE_INDEX_DIR);
 			// list = amanager.list("voice");
@@ -207,9 +207,6 @@ public class DownloadOsmandIndexesHelper {
 					if (next == XmlPullParser.START_TAG) {
 						DownloadActivityType tp = DownloadActivityType.getIndexType(parser.getAttributeValue(null, "type"));
 						if (tp != null) {
-							if (tp == DownloadActivityType.SRTM_COUNTRY_FILE) {
-								log.debug("strUrl = " + strUrl);
-							}
 							IndexItem it = tp.parseIndexItem(ctx, parser);
 							if (it != null) {
 								result.add(it);
@@ -249,7 +246,7 @@ public class DownloadOsmandIndexesHelper {
 		private final long dateModified;
 
 		public AssetIndexItem(String fileName, String description, String date,
-							  long dateModified, String size, long sizeL, String assetName, String destFile, DownloadActivityType type) {
+		                      long dateModified, String size, long sizeL, String assetName, String destFile, DownloadActivityType type) {
 			super(fileName, description, dateModified, size, sizeL, sizeL, type);
 			this.dateModified = dateModified;
 			this.assetName = assetName;

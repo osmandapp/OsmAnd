@@ -871,7 +871,7 @@ public class ResourceManager {
 	}
 
 	public List<Amenity> searchAmenities(SearchPoiTypeFilter filter,
-										 double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, final ResultMatcher<Amenity> matcher) {
+	                                     double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, final ResultMatcher<Amenity> matcher) {
 		final List<Amenity> amenities = new ArrayList<Amenity>();
 		searchAmenitiesInProgress = true;
 		try {
@@ -901,7 +901,7 @@ public class ResourceManager {
 	}
 
 	public List<Amenity> searchAmenitiesOnThePath(List<Location> locations, double radius, SearchPoiTypeFilter filter,
-												  ResultMatcher<Amenity> matcher) {
+	                                              ResultMatcher<Amenity> matcher) {
 		searchAmenitiesInProgress = true;
 		final List<Amenity> amenities = new ArrayList<Amenity>();
 		try {
@@ -957,8 +957,8 @@ public class ResourceManager {
 	}
 
 	public List<Amenity> searchAmenitiesByName(String searchQuery,
-											   double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude,
-											   double lat, double lon, ResultMatcher<Amenity> matcher) {
+	                                           double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude,
+	                                           double lat, double lon, ResultMatcher<Amenity> matcher) {
 		List<Amenity> amenities = new ArrayList<Amenity>();
 		List<AmenityIndexRepositoryBinary> list = new ArrayList<AmenityIndexRepositoryBinary>();
 		int left = MapUtils.get31TileNumberX(leftLongitude);
@@ -1056,7 +1056,7 @@ public class ResourceManager {
 
 
 	public List<TransportStop> searchTransportSync(double topLat, double leftLon, double bottomLat, double rightLon,
-												   ResultMatcher<TransportStop> matcher) throws IOException {
+	                                               ResultMatcher<TransportStop> matcher) throws IOException {
 		TransportStopsRouteReader readers =
 				new TransportStopsRouteReader(getTransportRepositories(topLat, leftLon, bottomLat, rightLon));
 		List<TransportStop> stops = new ArrayList<>();
