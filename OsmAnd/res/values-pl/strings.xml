@@ -4065,4 +4065,5 @@
 \n • zaktualizowano okno \"Nagrywanie Trasy\"
 \n
 \n</string>
+    <string name="map_quick_action_pattern">%1$s → …</string>
 </resources>
