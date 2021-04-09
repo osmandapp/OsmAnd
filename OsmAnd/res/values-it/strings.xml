@@ -4071,4 +4071,9 @@
     <string name="on_hold">In attesa</string>
     <string name="expired">Scaduto</string>
     <string name="update_all_maps_added">Aggiornare tutte le mappe aggiunte a %1$s\?</string>
+    <string name="exit_number">Numero uscita</string>
+    <string name="announce_when_exceeded">Annuncia quando si supera</string>
+    <string name="user_points">Punti utente</string>
+    <string name="output">Output</string>
+    <string name="map_quick_action_pattern">%1$s → …</string>
 </resources>
