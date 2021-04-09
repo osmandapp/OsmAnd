@@ -998,7 +998,7 @@
     <string name="get_directions">التوجيه مع الطرق</string>
     <string name="show_point_options">استخدام الموقع…</string>
     <string name="favorite">مفضلة</string>
-    <string name="speak_favorites">نقاط مفضلة مجاورة</string>
+    <string name="speak_favorites">مفضلة مجاورة</string>
     <string name="save_as_favorites_points">حفظ كمجموعة مفضلة</string>
     <string name="add_favorite_dialog_top_text">أدخل اسم المفضلة</string>
     <string name="add_favorite_dialog_favourite_added_template">تم إضافة إحداثية المفضلة \'\'{0}\'\' بنجاح.</string>
@@ -4075,7 +4075,7 @@
     <string name="activity_type_car_name">سيارة</string>
     <string name="copy_poi_name">نسخ اسم POI</string>
     <string name="select_another_colorization">الرجاء اختيار أنواع أخرى من التلوين.</string>
-    <string name="snap_to_road_descr">سيتم التقاط الرمز إلى مسار التنقل الحالي</string>
+    <string name="snap_to_road_descr">سيتم القاط أيقونة المكان الحالي إلى مسار التنقل الحالي</string>
     <string name="select_segments">حدد الجزء</string>
     <string name="select_segments_description">%1$s يحتوي على أكثر من مقطع ، تحتاج إلى تحديد الجزء المطلوب للتنقل.</string>
     <string name="segments_count">الجزء %1$d</string>
@@ -4094,7 +4094,7 @@
     <string name="on_pause">عند الإيقاف المؤقت</string>
     <string name="app_restart_required">يلزم إعادة تشغيل التطبيق لتطبيق بعض الإعدادات.</string>
     <string name="routing_attr_height_obstacles_description">التوجيه يمكن أن يتجنب المرتفعات القوية.</string>
-    <string name="quick_action_coordinates_widget_descr">تبديل لإظهار أو إخفاء أداة الإحداثيات على الخريطة.</string>
+    <string name="quick_action_coordinates_widget_descr">مقبس لإظهار أو إخفاء أداة الإحداثيات على الخريطة.</string>
     <string name="map_widget_distance_by_tap">المسافة عن طريق الضغط</string>
     <string name="latest_openstreetmap_update">آخر تحديث خريطة الشارع المفتوح المتاحة:</string>
     <string name="updated">تحديث: %s</string>
@@ -4153,6 +4153,6 @@
     <string name="exit_number">رقم الخروج</string>
     <string name="announce_when_exceeded">الإعلان عند التجاوز</string>
     <string name="user_points">نقاط المستخدم</string>
-    <string name="output">المخرج</string>
+    <string name="output">الإخراج</string>
     <string name="map_quick_action_pattern">%1$s ← …</string>
 </resources>

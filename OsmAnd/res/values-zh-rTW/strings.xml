@@ -4074,4 +4074,9 @@
     <string name="on_hold">保留</string>
     <string name="expired">過期</string>
     <string name="update_all_maps_added">更新所有新增至 %1$s 的地圖？</string>
+    <string name="exit_number">出口編號</string>
+    <string name="announce_when_exceeded">超過時宣佈</string>
+    <string name="user_points">使用者點</string>
+    <string name="output">輸出</string>
+    <string name="map_quick_action_pattern">%1$s → …</string>
 </resources>
