@@ -15,18 +15,20 @@ import com.google.gson.reflect.TypeToken;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.quickaction.SwitchableAction;
+import net.osmand.plus.settings.backend.OsmandSettings;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import static net.osmand.AndroidUtils.isLayoutRtl;
 
 public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 
@@ -229,7 +231,8 @@ public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 	public String getActionText(OsmandApplication application) {
 		String currentSource = application.getSettings().MAP_OVERLAY.get() == null ? KEY_NO_OVERLAY
 				: application.getSettings().MAP_OVERLAY.get();
+		String arrowDirection = isLayoutRtl(application) ? "\u25c0" : "\u25b6";
 
-		return application.getString(R.string.map_quick_action_pattern, getTranslatedItemName(application, currentSource));
+		return application.getString(R.string.map_quick_action_arrow_direction_pattern, getTranslatedItemName(application, currentSource), arrowDirection);
 	}
 }

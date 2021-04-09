@@ -28,6 +28,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static net.osmand.AndroidUtils.isLayoutRtl;
+
 
 public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 
@@ -103,7 +105,7 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 
 				int index = -1;
 				final String currentSource = settings.MAP_UNDERLAY.get() == null ? KEY_NO_UNDERLAY
-					: settings.MAP_UNDERLAY.get();
+						: settings.MAP_UNDERLAY.get();
 
 				for (int idx = 0; idx < sources.size(); idx++) {
 					if (sources.get(idx).first.equals(currentSource)) {
@@ -157,7 +159,7 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 			return item;
 		}
 	}
-	
+
 	@Override
 	protected int getAddBtnText() {
 		return R.string.quick_action_map_underlay_action;
@@ -231,7 +233,8 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 	public String getActionText(OsmandApplication application) {
 		String currentSource = application.getSettings().MAP_UNDERLAY.get() == null ? KEY_NO_UNDERLAY
 				: application.getSettings().MAP_UNDERLAY.get();
+		String arrowDirection = isLayoutRtl(application) ? "\u25c0" : "\u25b6";
 
-		return application.getString(R.string.map_quick_action_pattern, getTranslatedItemName(application, currentSource));
+		return application.getString(R.string.map_quick_action_arrow_direction_pattern, getTranslatedItemName(application, currentSource), arrowDirection);
 	}
 }

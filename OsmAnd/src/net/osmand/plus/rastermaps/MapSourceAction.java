@@ -15,19 +15,21 @@ import com.google.gson.reflect.TypeToken;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.quickaction.SwitchableAction;
+import net.osmand.plus.settings.backend.OsmandSettings;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import static net.osmand.AndroidUtils.isLayoutRtl;
 
 public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 
@@ -98,8 +100,8 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 				}
 
 				Pair<String, String> currentSource = settings.MAP_ONLINE_DATA.get()
-					? new Pair<>(settings.MAP_TILE_SOURCES.get(), settings.MAP_TILE_SOURCES.get())
-					: new Pair<>(LAYER_OSM_VECTOR, activity.getString(R.string.vector_data));
+						? new Pair<>(settings.MAP_TILE_SOURCES.get(), settings.MAP_TILE_SOURCES.get())
+						: new Pair<>(LAYER_OSM_VECTOR, activity.getString(R.string.vector_data));
 
 				Pair<String, String> nextSource = sources.get(0);
 				int index = sources.indexOf(currentSource);
@@ -135,7 +137,7 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 			return item;
 		}
 	}
-	
+
 	@Override
 	protected int getAddBtnText() {
 		return R.string.quick_action_map_source_action;
@@ -218,9 +220,10 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 	@Override
 	public String getActionText(OsmandApplication application) {
 		String currentSource = application.getSettings().MAP_ONLINE_DATA.get()
-				?  application.getSettings().MAP_TILE_SOURCES.get()
-				:  application.getString(R.string.vector_data);
+				? application.getSettings().MAP_TILE_SOURCES.get()
+				: application.getString(R.string.vector_data);
+		String arrowDirection = isLayoutRtl(application) ? "\u25c0" : "\u25b6";
 
-		return application.getString(R.string.map_quick_action_pattern, getTranslatedItemName(application, currentSource));
+		return application.getString(R.string.map_quick_action_arrow_direction_pattern, getTranslatedItemName(application, currentSource), arrowDirection);
 	}
 }

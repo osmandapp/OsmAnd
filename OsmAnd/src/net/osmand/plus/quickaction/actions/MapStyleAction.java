@@ -30,6 +30,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import static net.osmand.AndroidUtils.isLayoutRtl;
+
 public class MapStyleAction extends SwitchableAction<String> {
 
 
@@ -54,7 +56,7 @@ public class MapStyleAction extends SwitchableAction<String> {
 		if (current != null) {
 			return current.getName();
 		} else {
-			return  RendererRegistry.DEFAULT_RENDER;
+			return RendererRegistry.DEFAULT_RENDER;
 		}
 	}
 
@@ -77,7 +79,7 @@ public class MapStyleAction extends SwitchableAction<String> {
 			executeWithParams(activity, nextStyle);
 		} else {
 			Toast.makeText(activity, R.string.quick_action_need_to_add_item_to_list,
-				Toast.LENGTH_LONG).show();
+					Toast.LENGTH_LONG).show();
 		}
 
 	}
@@ -249,7 +251,8 @@ public class MapStyleAction extends SwitchableAction<String> {
 	@Override
 	public String getActionText(OsmandApplication application) {
 		String currentSource = application.getSettings().RENDERER.get();
+		String arrowDirection = isLayoutRtl(application) ? "\u25c0" : "\u25b6";
 
-		return application.getString(R.string.map_quick_action_pattern, getTranslatedItemName(application, currentSource));
+		return application.getString(R.string.map_quick_action_arrow_direction_pattern, getTranslatedItemName(application, currentSource), arrowDirection);
 	}
 }
