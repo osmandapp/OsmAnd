@@ -3163,7 +3163,7 @@
     <string name="voice_announces_descr">Navigaj gvidiloj kaj anoncoj</string>
     <string name="voice_announces">Voĉaj anoncoj</string>
     <string name="screen_alerts">Ekranaj avertoj</string>
-    <string name="route_parameters_descr">Agordi parametroj de navigo</string>
+    <string name="route_parameters_descr">Agordi parametrojn de navigo</string>
     <string name="route_parameters">Parametroj de navigo</string>
     <string name="application_profile_changed">Profilo de aplikaĵo ŝanĝita al “%s”</string>
     <string name="logcat_buffer">Bufro logcat</string>
