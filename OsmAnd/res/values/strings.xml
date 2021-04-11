@@ -12,7 +12,6 @@
 
 -->
 
-    <string name="map_quick_action_arrow_direction_pattern">%1$s %2$s …</string>
     <string name="output">Output</string>
     <string name="user_points">User points</string>
     <string name="announce_when_exceeded">Announce when exceeded</string>

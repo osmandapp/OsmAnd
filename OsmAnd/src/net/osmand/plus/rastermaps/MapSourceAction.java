@@ -216,14 +216,4 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 		getParams().put(KEY_DIALOG, Boolean.toString(((SwitchCompat) root.findViewById(R.id.saveButton)).isChecked()));
 		return super.fillParams(root, activity);
 	}
-
-	@Override
-	public String getActionText(OsmandApplication application) {
-		String currentSource = application.getSettings().MAP_ONLINE_DATA.get()
-				? application.getSettings().MAP_TILE_SOURCES.get()
-				: application.getString(R.string.vector_data);
-		String arrowDirection = isLayoutRtl(application) ? "\u25c0" : "\u25b6";
-
-		return application.getString(R.string.map_quick_action_arrow_direction_pattern, getTranslatedItemName(application, currentSource), arrowDirection);
-	}
 }

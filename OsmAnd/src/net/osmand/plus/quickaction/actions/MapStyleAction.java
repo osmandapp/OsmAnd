@@ -248,11 +248,4 @@ public class MapStyleAction extends SwitchableAction<String> {
 				: filters.get(0);
 	}
 
-	@Override
-	public String getActionText(OsmandApplication application) {
-		String currentSource = application.getSettings().RENDERER.get();
-		String arrowDirection = isLayoutRtl(application) ? "\u25c0" : "\u25b6";
-
-		return application.getString(R.string.map_quick_action_arrow_direction_pattern, getTranslatedItemName(application, currentSource), arrowDirection);
-	}
 }

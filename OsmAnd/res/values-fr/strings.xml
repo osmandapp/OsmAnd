@@ -4075,5 +4075,4 @@
     <string name="exit_number">Numéro de sortie</string>
     <string name="announce_when_exceeded">Annoncer en cas de dépassement</string>
     <string name="output">Sortie</string>
-    <string name="map_quick_action_pattern">%1$s → …</string>
 </resources>

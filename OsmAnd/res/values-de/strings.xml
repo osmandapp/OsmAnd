@@ -4089,5 +4089,4 @@
     <string name="announce_when_exceeded">Meldung bei Überschreitung</string>
     <string name="user_points">Anwenderpunkte</string>
     <string name="output">Leistung</string>
-    <string name="map_quick_action_pattern">%1$s → …</string>
 </resources>

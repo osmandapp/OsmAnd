@@ -4084,5 +4084,4 @@
     <string name="announce_when_exceeded">Повідомляти про перевищення</string>
     <string name="user_points">Користувацькі точки</string>
     <string name="output">Вивід</string>
-    <string name="map_quick_action_pattern">%1$s → …</string>
 </resources>

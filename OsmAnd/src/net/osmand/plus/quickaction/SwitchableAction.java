@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
-import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
 import androidx.appcompat.widget.SwitchCompat;
@@ -32,11 +31,21 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static net.osmand.AndroidUtils.isLayoutRtl;
+
 public abstract class SwitchableAction<T> extends QuickAction {
 
 	public static final String KEY_ID = "id";
-	
+
 	protected static final String KEY_DIALOG = "dialog";
+
+	private final static String MAP_STYLE_ACTION = "mapstyle.change";
+	private final static String MAP_SOURCE_ACTION = "mapsource.change";
+	private final static String MAP_OVERLAY_ACTION = "mapoverlay.change";
+	private final static String MAP_UNDERLAY_ACTION = "mapunderlay.change";
+
+	private final static String KEY_NO_OVERLAY = "no_overlay";
+	private final static String KEY_NO_UNDERLAY = "no_underlay";
 
 	private transient EditText title;
 
@@ -62,7 +71,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 		View view = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.quick_action_switchable_action, parent, false);
 
-		final SwitchCompat showDialog = (SwitchCompat) view.findViewById(R.id.saveButton);
+		final SwitchCompat showDialog = view.findViewById(R.id.saveButton);
 		if (!getParams().isEmpty()) {
 			showDialog.setChecked(Boolean.valueOf(getParams().get(KEY_DIALOG)));
 		}
@@ -74,7 +83,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 			}
 		});
 
-		RecyclerView list = (RecyclerView) view.findViewById(R.id.list);
+		RecyclerView list = view.findViewById(R.id.list);
 		adapter = new Adapter(activity, new QuickActionListFragment.OnStartDragListener() {
 			@Override
 			public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
@@ -92,9 +101,9 @@ public abstract class SwitchableAction<T> extends QuickAction {
 
 		list.setAdapter(adapter);
 
-		TextView dscrTitle = (TextView) view.findViewById(R.id.textDscrTitle);
-		TextView dscrHint = (TextView) view.findViewById(R.id.textDscrHint);
-		Button addBtn = (Button) view.findViewById(R.id.btnAdd);
+		TextView dscrTitle = view.findViewById(R.id.textDscrTitle);
+		TextView dscrHint = view.findViewById(R.id.textDscrHint);
+		Button addBtn = view.findViewById(R.id.btnAdd);
 
 		dscrTitle.setText(parent.getContext().getString(getDiscrTitle()) + ":");
 		dscrHint.setText(getDiscrHint());
@@ -105,9 +114,35 @@ public abstract class SwitchableAction<T> extends QuickAction {
 	}
 
 	@Override
+	public String getActionText(OsmandApplication application) {
+		String currentSource = "";
+		switch (getActionType().getStringId()) {
+			case MAP_STYLE_ACTION:
+				currentSource = application.getSettings().RENDERER.get();
+				break;
+			case MAP_SOURCE_ACTION:
+				currentSource = application.getSettings().MAP_ONLINE_DATA.get()
+						? application.getSettings().MAP_TILE_SOURCES.get()
+						: application.getString(R.string.vector_data);
+				break;
+			case MAP_OVERLAY_ACTION:
+				currentSource = application.getSettings().MAP_OVERLAY.get() == null ? KEY_NO_OVERLAY
+						: application.getSettings().MAP_OVERLAY.get();
+				break;
+			case MAP_UNDERLAY_ACTION:
+				currentSource = application.getSettings().MAP_UNDERLAY.get() == null ? KEY_NO_UNDERLAY
+						: application.getSettings().MAP_UNDERLAY.get();
+				break;
+		}
+		String arrowDirection = isLayoutRtl(application) ? "\u25c0" : "\u25b6";
+
+		return application.getString(R.string.ltr_or_rtl_combine_via_space, getTranslatedItemName(application, currentSource), arrowDirection + "\u2026");
+	}
+
+	@Override
 	public boolean fillParams(View root, MapActivity activity) {
 
-		final RecyclerView list = (RecyclerView) root.findViewById(R.id.list);
+		final RecyclerView list = root.findViewById(R.id.list);
 		final Adapter adapter = (Adapter) list.getAdapter();
 
 		boolean hasParams = adapter.itemsList != null && !adapter.itemsList.isEmpty();
@@ -124,7 +159,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 	public abstract List<T> loadListFromParams();
 
 	public abstract void executeWithParams(MapActivity activity, String params);
-	
+
 	public abstract String getTranslatedItemName(Context context, String item);
 
 	protected void showChooseDialog(FragmentManager fm) {
@@ -143,7 +178,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 
 		private List<T> itemsList = new ArrayList<>();
 		private final QuickActionListFragment.OnStartDragListener onStartDragListener;
-		private Context context;
+		private final Context context;
 
 		public Adapter(Context context, QuickActionListFragment.OnStartDragListener onStartDragListener) {
 			this.context = context;
@@ -293,10 +328,10 @@ public abstract class SwitchableAction<T> extends QuickAction {
 			public ItemHolder(View itemView) {
 				super(itemView);
 
-				title = (TextView) itemView.findViewById(R.id.title);
-				handleView = (ImageView) itemView.findViewById(R.id.handle_view);
-				closeBtn = (ImageView) itemView.findViewById(R.id.closeImageButton);
-				icon = (ImageView) itemView.findViewById(R.id.imageView);
+				title = itemView.findViewById(R.id.title);
+				handleView = itemView.findViewById(R.id.handle_view);
+				closeBtn = itemView.findViewById(R.id.closeImageButton);
+				icon = itemView.findViewById(R.id.imageView);
 			}
 		}
 	}
