@@ -209,7 +209,7 @@
     <string name="traffic_warning_calming">Reductor de velocidad</string>
     <string name="traffic_warning_speed_camera">Radar de velocidad</string>
     <string name="traffic_warning">Aviso de tráfico</string>
-    <string name="speak_favorites">Favoritos cerca</string>
+    <string name="speak_favorites">Favoritos cercanos</string>
     <string name="speak_poi">PDI cercanos</string>
     <string name="way_alarms">Advertencias de tráfico</string>
     <string name="stop_navigation_service">Parar</string>
@@ -4054,7 +4054,7 @@
     <string name="trip_recording_show_start_dialog_setting">Si se desactiva, la grabación será iniciada al pulsar el widget o el elemento del menú, saltándose el diálogo de confirmación.</string>
     <string name="customize_route_line">Personalizar línea de ruta</string>
     <string name="shared_string_route_line">Línea de ruta</string>
-    <string name="route_line_use_map_style_appearance">La línea de la ruta sería el uso %1$s especificado en el estilo de mapa seleccionado: %2$s.</string>
+    <string name="route_line_use_map_style_appearance">La línea de ruta usará el %1$s definido en el estilo de mapa elegido: %2$s.</string>
     <string name="specify_color_for_map_mode">Define el color para el modo de mapa: %1$s.</string>
     <string name="no_purchases">No tienes compras</string>
     <string name="new_device_account">Nuevo dispositivo / nueva cuenta</string>
@@ -4083,4 +4083,9 @@
 \n
 \n</string>
     <string name="update_all_maps_added">¿Actualizar todos los mapas añadidos a %1$s\?</string>
+    <string name="exit_number">Número de salida</string>
+    <string name="announce_when_exceeded">Anunciar al excederse</string>
+    <string name="user_points">Puntos de usuario</string>
+    <string name="output">Salida</string>
+    <string name="map_quick_action_pattern">%1$s → …</string>
 </resources>
