@@ -619,6 +619,30 @@ public class OsmMapUtils {
         return new Cell(x / area, y / area, 0, rings);
     }
 
+	public static void simplifyDouglasPeucker(List<Node> nodes, int start, int end, List<Node> survivedNodes, double epsilon) {
+		double dmax = Double.NEGATIVE_INFINITY;
+		int index = -1;
+
+		Node startPt = nodes.get(start);
+		Node endPt = nodes.get(end);
+
+		for (int i = start + 1; i < end; i++) {
+			Node pt = nodes.get(i);
+			double d = MapUtils.getOrthogonalDistance(pt.getLatitude(), pt.getLongitude(),
+					startPt.getLatitude(), startPt.getLongitude(), endPt.getLatitude(), endPt.getLongitude());
+			if (d > dmax) {
+				dmax = d;
+				index = i;
+			}
+		}
+		if (dmax > epsilon) {
+			simplifyDouglasPeucker(nodes, start, index, survivedNodes, epsilon);
+			simplifyDouglasPeucker(nodes, index, end, survivedNodes, epsilon);
+		} else {
+			survivedNodes.add(nodes.get(end));
+		}
+	}
+
     private static class CellComparator implements Comparator<Cell> {
         @Override
         public int compare(Cell o1, Cell o2) {
