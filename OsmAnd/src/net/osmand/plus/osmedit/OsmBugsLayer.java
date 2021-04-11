@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.PlatformUtil;
@@ -464,6 +465,11 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 
 	@Override
 	public boolean runExclusiveAction(Object o, boolean unknownLocation) {
+		return false;
+	}
+
+	@Override
+	public boolean showMenuAction(@Nullable Object o) {
 		return false;
 	}
 

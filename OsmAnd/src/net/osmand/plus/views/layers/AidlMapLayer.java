@@ -24,13 +24,14 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
+import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
+import net.osmand.plus.views.layers.MapTextLayer.MapTextProvider;
 import net.osmand.plus.widgets.tools.CropCircleTransformation;
 
 import java.io.IOException;
@@ -46,7 +47,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import static net.osmand.aidl.ConnectedApp.AIDL_LAYERS_PREFIX;
 
-public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider, MapTextLayer.MapTextProvider<AidlMapPointWrapper> {
+public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider, MapTextProvider<AidlMapPointWrapper> {
 
 	private static final float POINT_IMAGE_VERTICAL_OFFSET = 0.91f;
 
@@ -278,6 +279,11 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 
 	@Override
 	public boolean runExclusiveAction(Object o, boolean unknownLocation) {
+		return false;
+	}
+
+	@Override
+	public boolean showMenuAction(@Nullable Object o) {
 		return false;
 	}
 

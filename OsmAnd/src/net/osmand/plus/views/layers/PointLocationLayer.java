@@ -13,6 +13,7 @@ import android.graphics.RectF;
 import android.graphics.drawable.LayerDrawable;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
@@ -22,14 +23,15 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.profiles.ProfileIconColors;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 
 import org.apache.commons.logging.Log;
 
@@ -38,7 +40,7 @@ import java.util.List;
 import static android.graphics.Paint.ANTI_ALIAS_FLAG;
 import static android.graphics.Paint.FILTER_BITMAP_FLAG;
 
-public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
+public class PointLocationLayer extends OsmandMapLayer implements IContextMenuProvider {
 	private static final Log LOG = PlatformUtil.getLog(PointLocationLayer.class);
 
 	protected final static int RADIUS = 7;
@@ -237,6 +239,11 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 
 	@Override
 	public boolean runExclusiveAction(Object o, boolean unknownLocation) {
+		return false;
+	}
+
+	@Override
+	public boolean showMenuAction(@Nullable Object o) {
 		return false;
 	}
 

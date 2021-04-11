@@ -46,6 +46,7 @@ import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.geometry.PublicTransportGeometryWay;
 import net.osmand.plus.views.layers.geometry.PublicTransportGeometryWayContext;
 import net.osmand.plus.views.layers.geometry.RouteGeometryWay;
@@ -67,7 +68,7 @@ import java.util.Map;
 
 import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
 
-public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
+public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 
 	private static final Log log = PlatformUtil.getLog(RouteLayer.class);
 
@@ -813,6 +814,11 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 
 	@Override
 	public boolean runExclusiveAction(@Nullable Object o, boolean unknownLocation) {
+		return false;
+	}
+
+	@Override
+	public boolean showMenuAction(@Nullable Object o) {
 		return false;
 	}
 }

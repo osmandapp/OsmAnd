@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PointF;
 
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.GPXUtilities.TrkSegment;
@@ -513,6 +514,11 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 
 	@Override
 	public boolean runExclusiveAction(Object o, boolean unknownLocation) {
+		return false;
+	}
+
+	@Override
+	public boolean showMenuAction(@Nullable Object o) {
 		return false;
 	}
 
