@@ -21,10 +21,10 @@ import java.lang.ref.WeakReference;
 
 public class WidgetsVisibilityHelper {
 
-	private MapActivity mapActivity;
-	private OsmandSettings settings;
-	private RoutingHelper routingHelper;
-	private MapActivityLayers mapLayers;
+	private final MapActivity mapActivity;
+	private final OsmandSettings settings;
+	private final RoutingHelper routingHelper;
+	private final MapActivityLayers mapLayers;
 
 	public WidgetsVisibilityHelper(@NonNull MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
@@ -104,7 +104,6 @@ public class WidgetsVisibilityHelper {
 	public boolean shouldHideCompass() {
 		return mapActivity.shouldHideTopControls()
 				|| isTrackDetailsMenuOpened()
-				|| isInMeasurementToolMode()
 				|| isInPlanRouteMode()
 				|| isInChoosingRoutesMode()
 				|| isInTrackAppearanceMode()
@@ -116,7 +115,6 @@ public class WidgetsVisibilityHelper {
 	public boolean shouldShowTopButtons() {
 		return !mapActivity.shouldHideTopControls()
 				&& !isTrackDetailsMenuOpened()
-				&& !isInMeasurementToolMode()
 				&& !isInPlanRouteMode()
 				&& !isInChoosingRoutesMode()
 				&& !isInTrackAppearanceMode()
