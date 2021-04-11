@@ -13,6 +13,7 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 
+import net.osmand.GPXUtilities;
 import net.osmand.PicassoUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -102,10 +103,12 @@ public class ArticleTravelCard extends BaseTravelCard {
 				public void onClick(View view) {
 					if (article != null) {
 						if (saved) {
+							GPXUtilities.GPXFile gpxFile = article.getGpxFile();
+							app.getSelectedGpxHelper().selectGpxFile(gpxFile, false, true);
 							helper.removeArticleFromSaved(article);
 						} else {
-							app.getTravelHelper().createGpxFile(article);
 							helper.addArticleToSaved(article);
+							app.getTravelHelper().createGpxFile(article);
 						}
 						updateSaveButton(holder);
 					}

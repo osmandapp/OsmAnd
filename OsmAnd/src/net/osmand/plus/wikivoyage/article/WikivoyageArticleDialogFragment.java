@@ -69,9 +69,9 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 	private static final String SELECTED_LANG_KEY = "selected_lang";
 
 	private static final String EMPTY_URL = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4//";
-	
+
 	private static final int MENU_ITEM_SHARE = 0;
-	
+
 	private TravelArticleIdentifier articleId;
 	private ArrayList<String> langs;
 	private String selectedLang;
@@ -256,6 +256,8 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 				public void onClick(View view) {
 					if (article != null) {
 						if (saved) {
+							GPXFile gpxFile = article.getGpxFile();
+							getMyApplication().getSelectedGpxHelper().selectGpxFile(gpxFile, false, true);
 							helper.removeArticleFromSaved(article);
 						} else {
 							getMyApplication().getTravelHelper().createGpxFile(article);
