@@ -118,6 +118,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private MapMarkersHelper mapMarkersHelper;
 	private GpxSelectionHelper selectedGpxHelper;
 
+	private final Map<String, Long> cachedModifiedTime = new HashMap<>();
+	private final Map<String, List<TrkSegment>> cachedZoomedSegments = new HashMap<>();
+
 	private List<WptPt> cache = new ArrayList<>();
 	private Map<WptPt, SelectedGpxFile> pointFileMap = new HashMap<>();
 	private MapTextLayer textLayer;
@@ -460,7 +463,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					float trackWidth = getTrackWidth(width, defaultTrackWidth);
 					int trackColor = getTrackColor(selectedGpxFile.getGpxFile(), cachedColor);
 					int arrowColor = UiUtilities.getContrastColor(view.getApplication(), trackColor, false);
-					for (TrkSegment segment : selectedGpxFile.getPointsToDisplay()) {
+					GradientScaleType scaleType = getGradientScaleType(selectedGpxFile.getGpxFile());
+					List<TrkSegment> segments = scaleType != null ?
+							getCachedSegments(selectedGpxFile, scaleType) : selectedGpxFile.getPointsToDisplay();
+					for (TrkSegment segment : segments) {
 						if (segment.renderer instanceof Renderable.RenderableSegment) {
 							((Renderable.RenderableSegment) segment.renderer)
 									.drawGeometry(canvas, tileBox, correctedQuadRect, arrowColor, trackColor, trackWidth);
@@ -687,7 +693,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			return;
 		}
 
-		OsmandApplication app = view.getApplication();
 		GPXFile gpxFile = selectedGpxFile.getGpxFile();
 		GradientScaleType scaleType = getGradientScaleType(gpxFile);
 		List<TrkSegment> segments = new ArrayList<>();
@@ -695,11 +700,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		if (scaleType == null) {
 			segments.addAll(selectedGpxFile.getModifiablePointsToDisplay());
 		} else {
-			RouteColorize colorize = new RouteColorize(view.getZoom(), gpxFile, selectedGpxFile.getTrackAnalysis(app),
-					scaleType.toColorizationType(), app.getSettings().getApplicationMode().getMaxSpeed());
-			colorize.setPalette(getColorizationPalette(gpxFile, scaleType));
-			List<RouteColorizationPoint> colorsOfPoints = colorize.getResult(true);
-			segments.addAll(createSimplifiedSegmentsFromColorizedPoints(gpxFile, colorsOfPoints, scaleType));
+			segments.addAll(getCachedSegments(selectedGpxFile, scaleType));
 		}
 
 		for (TrkSegment ts : segments) {
@@ -723,6 +724,43 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				renderableSegment.drawSegment(view.getZoom(), paint, canvas, tileBox);
 			}
 		}
+	}
+
+	private List<TrkSegment> getCachedSegments(SelectedGpxFile selectedGpxFile, GradientScaleType scaleType) {
+		GPXFile gpxFile = selectedGpxFile.getGpxFile();
+		String fileName = gpxFile.path;
+		String trackId = view.getZoom() + "_" + scaleType.toString() + "_" + fileName;
+
+		if (cachedModifiedTime.get(fileName) != null && cachedModifiedTime.get(fileName) == gpxFile.modifiedTime) {
+			List<TrkSegment> segments = cachedZoomedSegments.get(trackId);
+			if (segments == null) {
+				segments = calculateGradientTrack(selectedGpxFile, scaleType);
+				cachedZoomedSegments.put(trackId, segments);
+			}
+			return segments;
+		} else {
+			if (cachedModifiedTime.get(fileName) != null) {
+				for (String key : cachedZoomedSegments.keySet()) {
+					if (key.contains("_" + fileName)) {
+						cachedZoomedSegments.remove(key);
+					}
+				}
+			}
+			cachedModifiedTime.put(fileName, gpxFile.modifiedTime);
+			List<TrkSegment> segments = calculateGradientTrack(selectedGpxFile, scaleType);
+			cachedZoomedSegments.put(trackId, segments);
+			return segments;
+		}
+	}
+
+	private List<TrkSegment> calculateGradientTrack(SelectedGpxFile selectedGpxFile, GradientScaleType scaleType) {
+		OsmandApplication app = view.getApplication();
+		GPXFile gpxFile = selectedGpxFile.getGpxFile();
+		RouteColorize colorize = new RouteColorize(view.getZoom(), gpxFile, selectedGpxFile.getTrackAnalysis(app),
+				scaleType.toColorizationType(), app.getSettings().getApplicationMode().getMaxSpeed());
+		colorize.setPalette(getColorizationPalette(gpxFile, scaleType));
+		List<RouteColorizationPoint> colorsOfPoints =  colorize.getResult(true);
+		return createSimplifiedSegmentsFromColorizedPoints(selectedGpxFile.getGpxFile(), colorsOfPoints, scaleType);
 	}
 
 	private List<TrkSegment> createSimplifiedSegmentsFromColorizedPoints(GPXFile gpxFile,
