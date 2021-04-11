@@ -98,9 +98,10 @@ public class MenuBuilder {
 	private static final int PICK_IMAGE = 1231;
 	public static final float SHADOW_HEIGHT_TOP_DP = 17f;
 	public static final int TITLE_LIMIT = 60;
-	protected static final String[] arrowChars = new String[] {"=>", " - "};
+	protected static final String[] arrowChars = new String[]{"=>", " - "};
 	protected final String NEAREST_WIKI_KEY = "nearest_wiki_key";
 	protected final String NEAREST_POI_KEY = "nearest_poi_key";
+	private static final int LIMIT = 10000;
 
 	protected MapActivity mapActivity;
 	protected MapContextMenu mapContextMenu;
@@ -573,29 +574,29 @@ public class MenuBuilder {
 	}
 
 	public View buildRow(View view, int iconId, String buttonText, String text, int textColor,
-	                     boolean collapsable, final CollapsableView collapsableView,
-	                     boolean needLinks, int textLinesLimit, boolean isUrl, OnClickListener onClickListener, boolean matchWidthDivider) {
+						 boolean collapsable, final CollapsableView collapsableView,
+						 boolean needLinks, int textLinesLimit, boolean isUrl, OnClickListener onClickListener, boolean matchWidthDivider) {
 		return buildRow(view, iconId == 0 ? null : getRowIcon(iconId), buttonText, text, textColor, null, collapsable, collapsableView,
 				needLinks, textLinesLimit, isUrl, onClickListener, matchWidthDivider);
 	}
 
 	public View buildRow(final View view, Drawable icon, final String buttonText, final String text, int textColor, String secondaryText,
-	                     boolean collapsable, final CollapsableView collapsableView, boolean needLinks,
-	                     int textLinesLimit, boolean isUrl, OnClickListener onClickListener, boolean matchWidthDivider) {
+						 boolean collapsable, final CollapsableView collapsableView, boolean needLinks,
+						 int textLinesLimit, boolean isUrl, OnClickListener onClickListener, boolean matchWidthDivider) {
 		return buildRow(view, icon, buttonText, null, text, textColor, secondaryText, collapsable, collapsableView,
 				needLinks, textLinesLimit, isUrl, false, false, onClickListener, matchWidthDivider);
 	}
 
 	public View buildRow(View view, int iconId, String buttonText, String text, int textColor,
-	                     boolean collapsable, final CollapsableView collapsableView,
-	                     boolean needLinks, int textLinesLimit, boolean isUrl, boolean isNumber, boolean isEmail, OnClickListener onClickListener, boolean matchWidthDivider) {
+						 boolean collapsable, final CollapsableView collapsableView,
+						 boolean needLinks, int textLinesLimit, boolean isUrl, boolean isNumber, boolean isEmail, OnClickListener onClickListener, boolean matchWidthDivider) {
 		return buildRow(view, iconId == 0 ? null : getRowIcon(iconId), buttonText, null, text, textColor, null, collapsable, collapsableView,
 				needLinks, textLinesLimit, isUrl, isNumber, isEmail, onClickListener, matchWidthDivider);
 	}
 
 	public View buildRow(final View view, Drawable icon, final String buttonText, final String textPrefix, final String text,
-	                     int textColor, String secondaryText, boolean collapsable, final CollapsableView collapsableView, boolean needLinks,
-	                     int textLinesLimit, boolean isUrl, boolean isNumber, boolean isEmail, OnClickListener onClickListener, boolean matchWidthDivider) {
+						 int textColor, String secondaryText, boolean collapsable, final CollapsableView collapsableView, boolean needLinks,
+						 int textLinesLimit, boolean isUrl, boolean isNumber, boolean isEmail, OnClickListener onClickListener, boolean matchWidthDivider) {
 
 		if (!isFirstRow()) {
 			buildRowDivider(view);
@@ -1041,8 +1042,8 @@ public class MenuBuilder {
 	}
 
 	public void addPlainMenuItem(int iconId, String text, boolean needLinks, boolean isUrl,
-	                             boolean collapsable, CollapsableView collapsableView,
-	                             OnClickListener onClickListener) {
+								 boolean collapsable, CollapsableView collapsableView,
+								 OnClickListener onClickListener) {
 		plainMenuItems.add(new PlainMenuItem(iconId, null, text, needLinks, isUrl, collapsable, collapsableView, onClickListener));
 	}
 
@@ -1217,13 +1218,13 @@ public class MenuBuilder {
 		return new CollapsableView(textView, this, collapsed);
 	}
 
-	protected CollapsableView getCollapsableView(final Context context, boolean collapsed, List<Amenity> nearestAmenities, String nearestPoiType) {
-		final LinearLayout view = buildCollapsableContentView(context, collapsed, true);
+	protected CollapsableView getCollapsableView(Context context, boolean collapsed, List<Amenity> nearestAmenities, String nearestPoiType) {
+		LinearLayout view = buildCollapsableContentView(context, collapsed, true);
 
 		for (final Amenity poi : nearestAmenities) {
 			TextViewEx button = buildButtonInCollapsableView(context, false, false);
 			final PointDescription pointDescription = mapActivity.getMapLayers().getPoiMapLayer().getObjectName(poi);
-			String name = mapActivity.getMapLayers().getPoiMapLayer().getObjectName(poi).getName();
+			String name = pointDescription.getName();
 			if (Algorithms.isBlank(name)) {
 				name = AmenityMenuController.getTypeStr(poi);
 			}
@@ -1235,12 +1236,13 @@ public class MenuBuilder {
 				public void onClick(View v) {
 					LatLon latLon = new LatLon(poi.getLocation().getLatitude(), poi.getLocation().getLongitude());
 					mapActivity.getContextMenu().show(latLon, pointDescription, poi);
+					mapActivity.setMapLocation(poi.getLocation().getLatitude(), poi.getLocation().getLongitude());
 				}
 			});
 			view.addView(button);
 
 		}
-		
+
 		PoiUIFilter filter = getPoiFilterForType(nearestPoiType);
 		boolean isPoiFilter = nearestPoiType.equals(NEAREST_POI_KEY);
 		if (filter != null && nearestPoi.size() > 0) {
@@ -1299,9 +1301,9 @@ public class MenuBuilder {
 		buttonShowAll.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-						mapActivity.showQuickSearch(filter);
-					}
-				});
+				mapActivity.showQuickSearch(filter);
+			}
+		});
 		return buttonShowAll;
 	}
 
@@ -1398,9 +1400,18 @@ public class MenuBuilder {
 	}
 
 	private List<Amenity> getSortedAmenities(PoiUIFilter filter, final LatLon latLon) {
-		QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), 250);
+		int radius = 250;
+		QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), radius);
+
 		List<Amenity> nearestAmenities = getAmenities(rect, filter);
 		nearestAmenities.remove(amenity);
+
+		boolean isWikiFilter = filter.getFilterId().equals("std_osmwiki");
+
+		for (; nearestAmenities.size() < 10 && !isWikiFilter; radius += 10) {
+			rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), radius);
+			nearestAmenities = getAmenities(rect, filter);
+		}
 
 		Collections.sort(nearestAmenities, new Comparator<Amenity>() {
 
@@ -1411,7 +1422,8 @@ public class MenuBuilder {
 				return Double.compare(d1, d2);
 			}
 		});
-			return nearestAmenities;
+
+		return nearestAmenities;
 	}
 
 	private List<Amenity> getAmenities(QuadRect rect, PoiUIFilter filter) {
