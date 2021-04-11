@@ -26,6 +26,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routing.RouteLineDrawInfo;
+import net.osmand.plus.settings.fragments.HeaderInfo;
+import net.osmand.plus.settings.fragments.HeaderUiAdapter;
 import net.osmand.plus.track.AppearanceViewHolder;
 import net.osmand.plus.track.TrackAppearanceFragment.OnNeedScrollListener;
 import net.osmand.util.Algorithms;
@@ -33,20 +35,21 @@ import net.osmand.util.Algorithms;
 import java.util.Arrays;
 import java.util.List;
 
-public class RouteLineWidthCard extends BaseCard {
+public class RouteLineWidthCard extends BaseCard implements HeaderInfo {
 
 	private final static int CUSTOM_WIDTH_MIN = 1;
-	private final static int CUSTOM_WIDTH_MAX = 24;
+	private final static int CUSTOM_WIDTH_MAX = 36;
 
 	private RouteLineDrawInfo routeLineDrawInfo;
 	private OnNeedScrollListener onNeedScrollListener;
+	private HeaderUiAdapter headerUiAdapter;
 
 	private WidthMode selectedMode;
 
 	private WidthAdapter widthAdapter;
 	private View sliderContainer;
 	private RecyclerView groupRecyclerView;
-	private TextView tvModeType;
+	private TextView tvSelectedType;
 	private TextView tvDescription;
 
 	private enum WidthMode {
@@ -69,10 +72,12 @@ public class RouteLineWidthCard extends BaseCard {
 
 	public RouteLineWidthCard(@NonNull MapActivity mapActivity,
 	                          @NonNull RouteLineDrawInfo routeLineDrawInfo,
-	                          @NonNull OnNeedScrollListener onNeedScrollListener) {
+	                          @NonNull OnNeedScrollListener onNeedScrollListener,
+	                          @NonNull HeaderUiAdapter headerUiAdapter) {
 		super(mapActivity);
 		this.routeLineDrawInfo = routeLineDrawInfo;
 		this.onNeedScrollListener = onNeedScrollListener;
+		this.headerUiAdapter = headerUiAdapter;
 	}
 
 	@Override
@@ -87,7 +92,8 @@ public class RouteLineWidthCard extends BaseCard {
 		groupRecyclerView.setAdapter(widthAdapter);
 		groupRecyclerView.setLayoutManager(new LinearLayoutManager(app, RecyclerView.HORIZONTAL, false));
 
-		tvModeType = view.findViewById(R.id.width_type);
+		((TextView) view.findViewById(R.id.title)).setText(R.string.select_track_width);
+		tvSelectedType = view.findViewById(R.id.descr);
 		tvDescription = view.findViewById(R.id.description);
 		sliderContainer = view.findViewById(R.id.slider_container);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.top_divider), isShowDivider());
@@ -122,8 +128,16 @@ public class RouteLineWidthCard extends BaseCard {
 		return routeLineDrawInfo.getWidth();
 	}
 
+	@Override
+	public void onNeedUpdateHeader() {
+		updateHeader();
+	}
+
 	private void updateHeader() {
-		tvModeType.setText(app.getString(selectedMode.titleId));
+		String title = app.getString(R.string.select_track_width);
+		String description = app.getString(selectedMode.titleId);
+		tvSelectedType.setText(description);
+		headerUiAdapter.onUpdateHeader(this, title, description);
 	}
 
 	private void updateDescription() {

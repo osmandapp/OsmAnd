@@ -12,6 +12,11 @@
 
 -->
 
+    <string name="map_quick_action_pattern">%1$s → …</string>
+    <string name="output">Output</string>
+    <string name="user_points">User points</string>
+    <string name="announce_when_exceeded">Announce when exceeded</string>
+    <string name="exit_number">Exit number</string>
     <string name="update_all_maps_added">Update all maps added to %1$s?</string>
     <string name="release_4_0_beta">
     • OsmAnd Live updates moved to \"Downloads > Updates\"\n\n
@@ -2476,7 +2481,7 @@
     <string name="traffic_warning_calming">Traffic calming</string>
     <string name="traffic_warning_speed_camera">Speed camera</string>
     <string name="traffic_warning">Traffic warning</string>
-    <string name="speak_favorites">Favorites nearby</string>
+    <string name="speak_favorites">Nearby favorites</string>
     <string name="speak_poi">Nearby POI</string>
     <string name="way_alarms">Traffic warnings</string>
     <string name="background_service_is_enabled_question">OsmAnd background service still running. Stop it, too?</string>

@@ -11,10 +11,12 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
@@ -32,11 +34,14 @@ import net.osmand.plus.routing.cards.RouteLineColorCard;
 import net.osmand.plus.routing.cards.RouteLineColorCard.OnMapThemeUpdateListener;
 import net.osmand.plus.routing.cards.RouteLineColorCard.OnSelectedColorChangeListener;
 import net.osmand.plus.routing.cards.RouteLineWidthCard;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.track.CustomColorBottomSheet.ColorPickerListener;
 import net.osmand.plus.track.TrackAppearanceFragment.OnNeedScrollListener;
 
-public class RouteLineAppearanceFragment extends ContextMenuScrollFragment implements ColorPickerListener, OnSelectedColorChangeListener, OnMapThemeUpdateListener {
+import static net.osmand.util.Algorithms.objectEquals;
+
+public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
+		implements ColorPickerListener, OnMapThemeUpdateListener, OnSelectedColorChangeListener,
+		HeaderUiAdapter {
 
 	public static final String TAG = RouteLineAppearanceFragment.class.getName();
 
@@ -48,10 +53,14 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment imple
 	private int toolbarHeightPx;
 	private DayNightMode initMapTheme;
 	private DayNightMode selectedMapTheme;
+	private HeaderInfo selectedHeader;
 
 	private View buttonsShadow;
 	private View controlButtons;
 	private View toolbarContainer;
+	private View headerContainer;
+	private TextView headerTitle;
+	private TextView headerDescr;
 
 	private RouteLineColorCard colorCard;
 	private RouteLineWidthCard widthCard;
@@ -123,6 +132,9 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment imple
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		if (view != null) {
 			toolbarContainer = view.findViewById(R.id.context_menu_toolbar_container);
+			headerContainer = view.findViewById(R.id.header_container);
+			headerTitle = headerContainer.findViewById(R.id.title);
+			headerDescr = headerContainer.findViewById(R.id.descr);
 			buttonsShadow = view.findViewById(R.id.buttons_shadow);
 			controlButtons = view.findViewById(R.id.control_buttons);
 			if (isPortrait()) {
@@ -142,7 +154,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment imple
 		setupCards();
 		setupToolbar();
 		setupButtons(view);
-		setupScrollShadow();
+		setupScrollListener();
 		enterAppearanceMode();
 		openMenuHalfScreen();
 		calculateLayout();
@@ -163,11 +175,24 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment imple
 		ViewGroup cardsContainer = getCardsContainer();
 		cardsContainer.removeAllViews();
 
-		colorCard = new RouteLineColorCard(mapActivity, this, routeLineDrawInfo, initMapTheme, selectedMapTheme);
+		colorCard = new RouteLineColorCard(mapActivity, this, routeLineDrawInfo, initMapTheme, selectedMapTheme, this);
 		cardsContainer.addView(colorCard.build(mapActivity));
 
-		widthCard = new RouteLineWidthCard(mapActivity, routeLineDrawInfo, createScrollListener());
+		widthCard = new RouteLineWidthCard(mapActivity, routeLineDrawInfo, createScrollListener(), this);
 		cardsContainer.addView(widthCard.build(mapActivity));
+	}
+
+	@Override
+	public void onUpdateHeader(@NonNull HeaderInfo headerInfo,
+	                           @NonNull String title,
+	                           @NonNull String description) {
+		if (selectedHeader == null) {
+			selectedHeader = headerInfo;
+		}
+		if (objectEquals(selectedHeader, headerInfo)) {
+			headerTitle.setText(title);
+			headerDescr.setText(description);
+		}
 	}
 
 	private OnNeedScrollListener createScrollListener() {
@@ -203,6 +228,8 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment imple
 			}
 		});
 		closeButton.setImageResource(AndroidUtils.getNavigationIconResId(toolbarContainer.getContext()));
+		int bgColorId = isNightMode() ? R.color.app_bar_color_dark : R.color.list_background_color_light;
+		toolbarContainer.setBackgroundColor(ContextCompat.getColor(requireContext(), bgColorId));
 		updateToolbarVisibility(toolbarContainer);
 	}
 
@@ -212,7 +239,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment imple
 		if (Build.VERSION.SDK_INT >= 23 && !isNightMode() && view != null) {
 			view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 		}
-		return isNightMode() ? R.color.divider_color_dark : R.color.divider_color_light;
+		return isNightMode() ? R.color.status_bar_color_dark : R.color.divider_color_light;
 	}
 
 	@Override
@@ -252,7 +279,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment imple
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.buttons_divider), true);
 	}
 
-	private void setupScrollShadow() {
+	private void setupScrollListener() {
 		final View scrollView = getBottomScrollView();
 		scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
 			@Override
@@ -263,6 +290,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment imple
 				} else {
 					hideShadowButton();
 				}
+				updateHeaderState();
 			}
 		});
 	}
@@ -279,6 +307,19 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment imple
 		buttonsShadow.animate()
 				.alpha(0f)
 				.setDuration(200);
+	}
+
+	private void updateHeaderState() {
+		HeaderInfo header;
+		if (getBottomScrollView().getScrollY() > colorCard.getViewHeight() + headerTitle.getBottom()) {
+			header = widthCard;
+		} else {
+			header = colorCard;
+		}
+		if (header != selectedHeader) {
+			selectedHeader = header;
+			selectedHeader.onNeedUpdateHeader();
+		}
 	}
 
 	private void initVisibleRect() {
@@ -383,7 +424,6 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment imple
 		colorCard.onColorSelected(prevColor, newColor);
 	}
 
-	@Override
 	public void onSelectedColorChanged() {
 		updateColorItems();
 	}
@@ -416,7 +456,6 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment imple
 		}
 	}
 
-	@Override
 	public void onMapThemeUpdated(@NonNull DayNightMode mapTheme) {
 		changeMapTheme(mapTheme);
 		updateColorItems();
@@ -433,4 +472,5 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment imple
 	public interface OnApplyRouteLineListener {
 		void applyRouteLineAppearance(@NonNull RouteLineDrawInfo routeLineDrawInfo);
 	}
+
 }

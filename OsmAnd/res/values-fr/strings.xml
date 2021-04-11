@@ -951,7 +951,7 @@
     <string name="osmand_plus_play_title_30_chars">Cartes et navigation OsmAnd+</string>
     <string name="street_name">Nom de la rue</string>
     <string name="hno">Numéro de bâtiment</string>
-    <string name="monitoring_settings">Enregistrement de traces</string>
+    <string name="monitoring_settings">Enregistrer le parcours</string>
     <string name="monitoring_settings_descr">Configurez comment enregistrer vos itinéraires.</string>
     <string name="choose_osmand_theme_descr">Personnalisez l\'apparence de l\'application.</string>
     <string name="choose_osmand_theme">Thème de l\'application</string>
@@ -1388,7 +1388,7 @@
     <string name="speak_pedestrian">Passages piétons</string>
     <string name="avoid_roads_msg">Générez un itinéraire alternatif en sélectionnant les routes à éviter</string>
     <string name="navigation_over_track">Démarrer la navigation en suivant cette trace ?</string>
-    <string name="save_track_to_gpx_globally_headline">Enregistrement de traces à la demande</string>
+    <string name="save_track_to_gpx_globally_headline">Enregistrement de parcours à la demande</string>
     <string name="proxy_pref_title">Proxy</string>
     <string name="enable_proxy_descr">Configurer le mandataire HTTP (Proxy) pour toutes les requêtes réseau</string>
     <string name="proxy_host_title">Serveur mandataire (Proxy)</string>
@@ -3696,7 +3696,7 @@
     <string name="track_show_start_finish_icons">Afficher les icônes de départ et d\'arrivée</string>
     <string name="select_track_width">Sélectionner la largeur</string>
     <string name="gpx_direction_arrows">Flèches de direction</string>
-    <string name="plan_route_last_edited">Dernière modification</string>
+    <string name="plan_route_last_edited">Dernières modifications</string>
     <string name="plan_route_import_track">Importer une trace</string>
     <string name="plan_route_open_existing_track">Ouvrir une trace existante</string>
     <string name="plan_route_create_new_route">Créer un nouvel itinéraire</string>
@@ -3715,7 +3715,7 @@
     <string name="threshold_distance">Seuil de distance</string>
     <string name="navigation_profile">Profil de navigation</string>
     <string name="street_level_imagery">Photos des rues</string>
-    <string name="plan_route_exit_dialog_descr">Souhaitez-vous vraiment ignorer toutes les modifications apportées à l\'itinéraire planifié \?</string>
+    <string name="plan_route_exit_dialog_descr">Souhaitez-vous vraiment ignorer toutes les modifications apportées à cet itinéraire \?</string>
     <string name="in_case_of_reverse_direction">Si inversion du sens</string>
     <string name="pass_whole_track_descr">Point de la trace vers lequel naviguer</string>
     <string name="shared_string_gpx_route">Enregistrer le parcours</string>
@@ -3733,7 +3733,7 @@
     <string name="show_gpx">Traces</string>
     <string name="monitoring_control_start">ENR</string>
     <string name="save_track_to_gpx_globally">Enregistrer le parcours dans un fichier GPX</string>
-    <string name="map_widget_monitoring">Enregistrement du parcours</string>
+    <string name="map_widget_monitoring">Enregistrer le parcours</string>
     <string name="marker_save_as_track">Enregistrer comme fichier de trace</string>
     <string name="follow_track">Suivre la trace</string>
     <string name="follow_track_descr">Sélectionner un fichier de trace à suivre</string>
@@ -3782,7 +3782,7 @@
     <string name="plan_route_change_route_type_after">Modifier le type d’itinéraire après</string>
     <string name="simplified_track_description">Seule la ligne d\'itinéraire sera enregistrée, les points de passage seront supprimés.</string>
     <string name="shared_string_redo">Rétablir</string>
-    <string name="sort_last_modified">Dernière modification</string>
+    <string name="sort_last_modified">Dernières modifications</string>
     <string name="sort_name_descending">Nom : Z – A</string>
     <string name="sort_name_ascending">Nom : A – Z</string>
     <string name="start_finish_icons">Icônes de départ et d\'arrivée</string>
@@ -3833,7 +3833,7 @@
     <string name="subscription_paused_title">L\'abonnement OsmAnd Live a été suspendu</string>
     <string name="login_open_street_map">Se connecter à OpenStreetMap</string>
     <string name="login_open_street_map_org">Se connecter à OpenStreetMap.org</string>
-    <string name="user_login">Identifiant</string>
+    <string name="user_login">Se connecter</string>
     <string name="use_login_password">Utiliser un identifiant et un mot de passe</string>
     <string name="login_account">Compte</string>
     <string name="manage_subscription">Gérer l\'abonnement</string>
@@ -3893,7 +3893,7 @@
     <string name="plan_route_split_before">Couper avant</string>
     <string name="plan_route_split_after">Couper après</string>
     <string name="plan_route_add_new_segment">Ajouter un nouveau segment</string>
-    <string name="gpx_upload_identifiable_visibility_descr">« Identifiable » siginifie que la trace sera affichée publiquement dans « Mes traces GPS » ainsi que dans les listes de traces GPS publiques. Ainsi les autres utilisateurs peuvent télécharger la trace brute et l\'associer avec votre nom d\'utilisateur. Les données de points de passage horodatés fournis par l\'API GPS publique feront référence à la page d\'origine de votre trace.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">« Identifiable » signifie que la trace sera affichée publiquement dans « Mes traces GPS » ainsi que dans les listes de traces GPS publiques. Ainsi les autres utilisateurs pourront télécharger la trace brute et l\'associer avec votre nom d\'utilisateur. Les données de points de passage horodatés fournis par l\'API GPS publique feront référence à la page d\'origine de votre trace.</string>
     <string name="gpx_upload_public_visibility_descr">« Public » signifie que la trace est affichée publiquement dans vos traces GPS et dans les listes de traces GPS publiques. Les données diffusées via l\'API ne font pas référence à votre page de traces. Les horodatages des points de trace ne sont pas disponibles via l\'API GPS publique et les points de trace ne sont pas classés par ordre chronologique.</string>
     <string name="profile_type_osmand_string">Profil OsmAnd</string>
     <string name="profile_type_user_string">Profil utilisateur</string>
@@ -4071,4 +4071,9 @@
     <string name="renew_subscription">Renouveler l’abonnement</string>
     <string name="on_hold">En attente</string>
     <string name="expired">Expiré</string>
+    <string name="user_points">Points utilisateur</string>
+    <string name="exit_number">Numéro de sortie</string>
+    <string name="announce_when_exceeded">Annoncer en cas de dépassement</string>
+    <string name="output">Sortie</string>
+    <string name="map_quick_action_pattern">%1$s → …</string>
 </resources>

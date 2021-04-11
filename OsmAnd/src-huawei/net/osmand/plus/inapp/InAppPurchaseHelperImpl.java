@@ -233,7 +233,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 	}
 
 	private PurchaseInfo getPurchaseInfo(InAppPurchaseData purchase) {
-		return new PurchaseInfo(purchase.getProductId(), purchase.getOrderID(), purchase.getPurchaseToken());
+		return new PurchaseInfo(purchase.getProductId(), purchase.getSubscriptionId(), purchase.getPurchaseToken());
 	}
 
 	private void fetchInAppPurchase(@NonNull InAppPurchase inAppPurchase, @NonNull ProductInfo productInfo, @Nullable InAppPurchaseData purchaseData) {

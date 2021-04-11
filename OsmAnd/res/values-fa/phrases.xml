@@ -1452,4 +1452,12 @@
     <string name="poi_substation_type">نوع</string>
     <string name="poi_mini_roundabout">فلکهٔ کوچک</string>
     <string name="poi_square">میدان</string>
+    <string name="poi_second_hand_no">کالای دست دو: خیر</string>
+    <string name="poi_second_hand_only">فقط کالای دست دو</string>
+    <string name="poi_second_hand_yes">کالای دست دو</string>
+    <string name="poi_provided_for_woman_no">برای بانوان: خیر</string>
+    <string name="poi_provided_for_woman_yes">برای بانوان: بله</string>
+    <string name="poi_shoes_women">بانوان</string>
+    <string name="poi_clothes_women">بانوان</string>
+    <string name="poi_clothes_workwear">لباس کار</string>
 </resources>

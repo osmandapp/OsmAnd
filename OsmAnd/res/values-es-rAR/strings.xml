@@ -4056,20 +4056,20 @@
     <string name="shared_string_route_line">Línea de ruta</string>
     <string name="route_line_use_map_style_appearance">La línea de la ruta sería el uso %1$s especificado en el estilo de mapa seleccionado: %2$s.</string>
     <string name="specify_color_for_map_mode">Define el color para el modo de mapa: %1$s.</string>
-    <string name="release_4_0_beta">• Las actualizaciones de OsmAnd Live se movieron a «Descargas &gt; Actualizaciones»
+    <string name="release_4_0_beta">• Las actualizaciones de OsmAnd Live se han movido a «Descargas &gt; Actualizaciones».
 \n
-\n • Las trazas ahora se pueden colorear por altitud, velocidad o pendiente.
+\n• Las trazas ahora pueden colorearse por altitud, velocidad o pendiente.
 \n
-\n • Se añade opción para cambiar la apariencia de la línea de ruta de navegación
+\n• Se ha añadido la opción de cambiar el aspecto a la línea de ruta de la navegación
 \n
-\n • Se actualiza el cuadro de diálogo «Grabación de viaje»
+\n• Se ha actualizado el cuadro de diálogo «Grabación de viaje»
 \n
 \n</string>
     <string name="no_purchases">No tienes compras</string>
     <string name="new_device_account">Nuevo dispositivo / nueva cuenta</string>
     <string name="contact_support_description">Si tienes alguna duda, ponte en contacto con nosotros en %1$s.</string>
     <string name="empty_purchases_description">Si tus compras no aparecen aquí, pulsa sobre «%1$s», o ponte en contacto con nuestro equipo de asistencia.</string>
-    <string name="contact_support">Soporte de contacto</string>
+    <string name="contact_support">Contacto con soporte</string>
     <string name="troubleshooting">Solución de problemas</string>
     <string name="troubleshooting_description">Sigue este enlace si tienes algún problema con las compras.</string>
     <string name="osmand_live">OsmAnd Live</string>
@@ -4083,4 +4083,9 @@
     <string name="on_hold">En espera</string>
     <string name="expired">Expirado</string>
     <string name="update_all_maps_added">¿Actualizar todos los mapas añadidos a %1$s\?</string>
+    <string name="exit_number">Número de salida</string>
+    <string name="announce_when_exceeded">Anunciar al excederse</string>
+    <string name="user_points">Puntos de usuario</string>
+    <string name="output">Salida</string>
+    <string name="map_quick_action_pattern">%1$s → …</string>
 </resources>

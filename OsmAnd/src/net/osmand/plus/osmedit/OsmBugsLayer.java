@@ -41,6 +41,7 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
+import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
 import static net.osmand.plus.osmedit.OsmBugsUtil.*;
 
 public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider {
@@ -130,7 +131,8 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 							backgroundColorRes = R.color.osm_bug_resolved_icon_color;
 						}
 						PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(activity,
-								ContextCompat.getColor(activity, backgroundColorRes), true);
+								ContextCompat.getColor(activity, backgroundColorRes), true,
+								false, DEFAULT_UI_ICON_ID, BackgroundType.COMMENT);
 						pointImageDrawable.drawSmallPoint(canvas, x, y, textScale);
 					} else {
 						fullObjects.add(o);
@@ -451,7 +453,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	}
 
 	@Override
-	public boolean disableLongPressOnMap() {
+	public boolean disableLongPressOnMap(PointF point, RotatedTileBox tileBox) {
 		return false;
 	}
 

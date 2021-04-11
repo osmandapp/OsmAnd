@@ -234,9 +234,9 @@
     <string name="map_widget_magnetic_bearing">Магнитный пеленг</string>
     <string name="map_widget_bearing">Курсовой угол</string>
     <string name="map_mode">Режим карты</string>
-    <string name="rendering_value_thin_name">Тонко</string>
-    <string name="rendering_value_medium_name">Средне</string>
-    <string name="rendering_value_bold_name">Жирно</string>
+    <string name="rendering_value_thin_name">Тонкая</string>
+    <string name="rendering_value_medium_name">Средняя</string>
+    <string name="rendering_value_bold_name">Толстая</string>
     <string name="select_map_markers">Выберите маркеры</string>
     <string name="shared_string_topbar">Верхняя панель</string>
     <string name="osm_user_stat">Правок: %1$s, ранг: %2$s, всего правок: %3$s</string>
@@ -406,7 +406,7 @@
     <string name="live_monitoring_url">Web адрес онлайн-слежения</string>
     <string name="gpx_monitoring_disabled_warn">Записать трек можно с помощью виджета GPX или выбрав «Запись поездки» в настройках.</string>
     <string name="show_current_gpx_title">Показывать текущий путь</string>
-    <string name="free_version_message">Вы можете скачать или обновить карты %1$s.</string>
+    <string name="free_version_message">Вы можете скачать или обновить карт: %1$s шт.</string>
     <string name="free_version_title">Бесплатная версия</string>
     <string name="poi_context_menu_showdescription">Показать описание POI.</string>
     <string name="index_name_us">Северная Америка — США</string>
@@ -827,7 +827,7 @@
     <string name="osm_settings_descr">Укажите настройки для загрузки данных в Openstreetmap.org (OSM).</string>
     <string name="data_settings_descr">Настройка данных: язык, обновление данных.</string>
     <string name="data_settings">Данные</string>
-    <string name="osm_settings">Редактирование OSM</string>
+    <string name="osm_settings">Правки OSM</string>
     <string name="auto_zoom_map_descr">Масштабирование по скорости (при отображении позиции на карте).</string>
     <string name="auto_zoom_map">Автомасштаб</string>
     <string name="additional_settings">Дополнительные настройки</string>
@@ -1545,7 +1545,7 @@
     <string name="download_additional_maps">Скачать недостающие карты %1$s (%2$d МБ)\?</string>
     <string name="shared_string_waypoints">Путевые точки</string>
     <string name="way_alarms">Дорожные предупреждения</string>
-    <string name="speak_favorites">Мои места рядом</string>
+    <string name="speak_favorites">Ближайшие избранные</string>
     <string name="speak_poi">Ближайшие POI</string>
     <string name="index_tours">Туры</string>
     <string name="shared_string_all">Все</string>
@@ -2768,14 +2768,14 @@
     <string name="default_render_descr">Стиль общего назначения. Густонаселённые города показаны упрощённо. Выделяет контурные линии, маршруты, качество поверхности, ограничения доступа, дорожные щиты, визуализация пешеходных маршрутов по шкале SAC, объекты спортивных сплавов.</string>
     <string name="open_wikipedia_link_online">Открыть ссылку Википедии в онлайн</string>
     <string name="open_wikipedia_link_online_description">Ссылка будет открыта в веб-браузере.</string>
-    <string name="read_wikipedia_offline_description">Получите подписку на OsmAnd Live, чтобы читать статьи в Википедии и Викигиде в автономном режиме.</string>
+    <string name="read_wikipedia_offline_description">Подпишитесь на OsmAnd Live и читайте Википедию и Викигид в режиме офлайн.</string>
     <string name="how_to_open_link">Как открыть ссылку?</string>
     <string name="read_wikipedia_offline">Читать Википедию в автономном режиме</string>
     <string name="touring_view_render_descr">Туристический стиль с высоким контрастом и максимальной детализацией. Включает все функции стиля OsmAnd по умолчанию, отображая максимальное количество деталей, в частности дороги, тропы и другие пути передвижения. Чёткое различие между типами дорог (как в туристических атласах). Подходит для использования днём, ночью и при ярком освещении.</string>
     <string name="shared_string_bookmark">Сохранить</string>
     <string name="off_road_render_descr">Для езды по бездорожью, основано на топографическом стиле (англ. «Topo»), можно использовать с зелёными спутниковыми снимками в качестве подложки. Уменьшенная толщина основных дорог, увеличенная толщина путей, дорожек, велосипедных и других маршрутов.</string>
     <string name="unirs_render_descr">Модификация стиля по умолчанию для увеличения контраста пешеходных и велосипедных дорог. Использует старые цвета Mapnik.</string>
-    <string name="get_osmand_live">Получите OsmAnd Live, чтобы разблокировать все функции: ежедневные обновления карт с неограниченной загрузкой, все платные и бесплатные плагины, Википедия, Викигид и многое другое.</string>
+    <string name="get_osmand_live">Подпишитесь на OsmAnd Live и разблокируйте все функции: ежедневные обновления карт с неограниченной загрузкой, все платные и бесплатные плагины, Википедия, Викигид и многое другое.</string>
     <string name="access_intermediate_arrival_time">Промежуточное время прибытия</string>
     <string name="map_widget_intermediate_time">Прибытие в промежуточный пункт</string>
     <string name="quick_action_edit_actions">Редактировать действие</string>
@@ -3502,14 +3502,14 @@
     <string name="shared_string_language">Язык</string>
     <string name="shared_string_all_languages">Все языки</string>
     <string name="wiki_menu_download_descr">Для просмотра POI Википедии на карте необходимы дополнительные карты.</string>
-    <string name="ui_customization_description">Настройка элементов в разделах «Панель», «Настройка карты» и контекстном меню.
+    <string name="ui_customization_description">Настройка элементов в разделах «Боковая панель», «Настройки карты» и «Действия контекстного меню».
 \n
 \nОтключите неиспользуемые плагины, чтобы скрыть их элементы управления. %1$s.</string>
     <string name="ui_customization_short_descr">Элементы панели, контекстное меню</string>
     <string name="shared_string_drawer">Боковое меню</string>
     <string name="divider_descr">Элементы ниже разделённые делителем.</string>
     <string name="shared_string_items">Элементы</string>
-    <string name="ui_customization">Настройка интерфейса</string>
+    <string name="ui_customization">Настройки интерфейса</string>
     <string name="context_menu_actions">Действия контекстного меню</string>
     <string name="reorder_or_hide_from">Изменить порядок или скрыть элементы из %1$s.</string>
     <string name="shared_string_divider">Разделитель</string>
@@ -3702,10 +3702,10 @@
     <string name="plan_a_route">Составление маршрута</string>
     <string name="gpx_split_interval_none_descr">Выберите способ разбиения: по времени или по расстоянию.</string>
     <string name="gpx_split_interval_descr">Интервал между метками расстояния или времени на треке.</string>
-    <string name="shared_string_custom">Своё</string>
+    <string name="shared_string_custom">Заказная</string>
     <string name="add_hidden_group_info">Добавленная точка не будет видна на карте, так как выбранная группа скрыта, найти её можно в «%s».</string>
     <string name="track_show_start_finish_icons">Показывать значки старта и финиша</string>
-    <string name="select_track_width">Выберите ширину</string>
+    <string name="select_track_width">Выберите толщину линии</string>
     <string name="gpx_direction_arrows">Стрелки направления</string>
     <string name="track_coloring_solid">Сплошной</string>
     <string name="plan_route_last_edited">Последнее изменение</string>
@@ -3879,7 +3879,7 @@
     <string name="select_items_for_import">Выберите импортируемые элементы.</string>
     <string name="use_dev_url">Использовать dev.openstreetmap.org</string>
     <string name="osm_login_descr">Можно войти в систему с помощью безопасного метода OAuth или используя свои имя пользователя и пароль.</string>
-    <string name="subscription_payment_issue_title">Нажмите кнопку, чтобы перейти к настройкам подписки Google Play и исправить способ оплаты.</string>
+    <string name="subscription_payment_issue_title">Нажмите кнопку, чтобы перейти к настройкам подписки Google Play и исправить вашу подписку.</string>
     <string name="osm_edit_comment_note">Комментировать заметку OSM</string>
     <string name="use_dev_url_descr">Переключиться на использование dev.openstreetmap.org вместо openstreetmap.org для тестирования отправки заметок OSM / POI / GPX.</string>
     <string name="register_on_openplacereviews_desc">Фотографии предоставлены проектом открытых данных OpenPlaceReviews.org. Чтобы отправить свои фотографии, необходимо зарегистрироваться на этом сайте.</string>
@@ -4065,4 +4065,25 @@
 \n• Обновлен диалог «Запись поездки».
 \n
 \n</string>
+    <string name="empty_purchases_description">Если ваши покупки не отображаются здесь, нажмите на \"%1$s\" или свяжитесь с нашей службой поддержки.</string>
+    <string name="contact_support">Служба поддержки</string>
+    <string name="troubleshooting">Устранение неполадок</string>
+    <string name="troubleshooting_description">Перейдите по этой ссылке, если у вас есть какие-либо проблемы с покупками.</string>
+    <string name="osmand_live_cancelled">Отменено</string>
+    <string name="update_all_maps_added">Обновить все карты, добавленные в %1$s\?</string>
+    <string name="customize_route_line">Настройка линии маршрута</string>
+    <string name="shared_string_route_line">Линия маршрута</string>
+    <string name="route_line_use_map_style_appearance">Линия маршрута будет использовать %1$s, указанный в выбранном стиле карты: %2$s.</string>
+    <string name="specify_color_for_map_mode">Укажите цвет для режима карты: %1$s.</string>
+    <string name="no_purchases">У вас нет покупок</string>
+    <string name="new_device_account">Новое устройство / новый аккаунт</string>
+    <string name="contact_support_description">Если у вас есть вопросы, свяжитесь с нами: %1$s.</string>
+    <string name="in_grace_period">В льготный период</string>
+    <string name="expired">Срок истёк</string>
+    <string name="on_hold">Приостановлено</string>
+    <string name="renew_subscription">Продление подписки</string>
+    <string name="announce_when_exceeded">Объявлять о превышении</string>
+    <string name="user_points">Точки пользователя</string>
+    <string name="output">Вывод</string>
+    <string name="map_quick_action_pattern">%1$s → …</string>
 </resources>

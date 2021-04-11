@@ -25,7 +25,7 @@
     <string name="traffic_warning_calming">Verkehrsberuhigung</string>
     <string name="traffic_warning_speed_camera">Blitzer</string>
     <string name="traffic_warning">Verkehrswarnung</string>
-    <string name="speak_favorites">Favoriten in der Nähe</string>
+    <string name="speak_favorites">Nahegelegene Favoriten</string>
     <string name="speak_poi">Nahegelegene POI</string>
     <string name="confirm_every_run">Immer fragen</string>
     <string name="save_global_track_interval">Intervall für generelle Aufzeichnung</string>
@@ -4083,5 +4083,11 @@
     <string name="renew_subscription">Abonnement erneuern</string>
     <string name="on_hold">In der Warteschleife</string>
     <string name="expired">Abgelaufen</string>
-    <string name="update_all_maps_added">Alle zu %1$s hinzugefügten Maps aktualisieren\?</string>
+    <string name="update_all_maps_added">Alle zu %1$s hinzugefügten Karten aktualisieren\?</string>
+    <string name="trip_recording_logging_interval_info">Das Protokollierungsintervall legt den Zeitraum fest, in dem OsmAnd nach den aktuellen Positionsdaten des Standorts fragt.</string>
+    <string name="exit_number">Ausfahrtnummer</string>
+    <string name="announce_when_exceeded">Meldung bei Überschreitung</string>
+    <string name="user_points">Anwenderpunkte</string>
+    <string name="output">Leistung</string>
+    <string name="map_quick_action_pattern">%1$s → …</string>
 </resources>

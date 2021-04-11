@@ -322,7 +322,7 @@ POIの更新は利用できません</string>
     <string name="select_index_file_to_download">何も見つかりませんでした。自分の地域が見つからない場合、
 自分で作ることができます。 http://osmand.net を参照してください。</string>
     <string name="fav_points_edited">お気に入り地点が編集されました</string>
-    <string name="fav_points_not_exist">お気に入り地点はありません</string>
+    <string name="fav_points_not_exist">お気に入りはありません</string>
     <string name="update_existing">登録済みと置き換え</string>
     <string name="only_show">表示のみ</string>
     <string name="follow">ナビゲーション開始</string>
@@ -996,7 +996,7 @@ POIの更新は利用できません</string>
     <string name="favourites_delete_multiple_succesful">お気に入り地点は正常に削除されました。</string>
     <string name="favorite_delete_multiple">%1$d個のお気に入りと、%2$d個のお気に入りグループを削除してもよろしいですか？</string>
     <string name="favorite_home_category">自宅</string>
-    <string name="favorite_friends_category">友人宅</string>
+    <string name="favorite_friends_category">友人</string>
     <string name="favorite_places_category">場所</string>
     <string name="shared_string_others">その他</string>
     <string name="shared_string_name">名前</string>
@@ -1339,7 +1339,7 @@ POIの更新は利用できません</string>
     <string name="speed_limit_exceed_message">制限速度超過による警告音声の許容値を選択します</string>
     <string name="fav_point_emoticons_message">絵文字を含んだその名前は、ファイル保存時に『%1$s』という名前に変更されました。</string>
     <string name="print_route">経路印刷</string>
-    <string name="fav_point_dublicate">お気に入り地点名の重複</string>
+    <string name="fav_point_dublicate">指定したお気に入り名は重複しています</string>
     <string name="fav_point_dublicate_message">そのお気に入りは、重複を避けるために%1$sという名前に変更されました。</string>
     <string name="text_size_descr">マップ上の文字サイズを設定します。</string>
     <string name="text_size">文字サイズ</string>

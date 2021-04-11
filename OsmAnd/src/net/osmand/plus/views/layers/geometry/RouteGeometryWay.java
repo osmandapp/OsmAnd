@@ -22,15 +22,19 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Geome
 
 	private Integer customColor;
 	private Float customWidth;
+	private Integer customPointColor;
 
 	public RouteGeometryWay(RouteGeometryWayContext context) {
 		super(context, new GeometryWayDrawer<>(context));
 		this.helper = context.getApp().getRoutingHelper();
 	}
 
-	public void setRouteStyleParams(@Nullable @ColorInt Integer color, @Nullable Float width) {
+	public void setRouteStyleParams(@Nullable @ColorInt Integer color,
+	                                @Nullable Float width,
+	                                @Nullable @ColorInt Integer pointColor) {
 		this.customColor = color;
 		this.customWidth = width;
+		this.customPointColor = pointColor;
 	}
 
 	@NonNull
@@ -39,7 +43,7 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Geome
 		Paint paint = getContext().getAttrs().paint;
 		int color = customColor != null ? customColor : paint.getColor();
 		float width = customWidth != null ? customWidth : paint.getStrokeWidth();
-		return new GeometrySolidWayStyle(getContext(), color, width);
+		return new GeometrySolidWayStyle(getContext(), color, width, customPointColor);
 	}
 
 	public void updateRoute(RotatedTileBox tb, RouteCalculationResult route) {
@@ -64,13 +68,22 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Geome
 
 	private static class GeometrySolidWayStyle extends GeometryWayStyle<RouteGeometryWayContext> {
 
-		GeometrySolidWayStyle(RouteGeometryWayContext context, Integer color, Float width) {
+		private Integer pointColor;
+
+		GeometrySolidWayStyle(RouteGeometryWayContext context, Integer color, Float width,
+		                      Integer pointColor) {
 			super(context, color, width);
+			this.pointColor = pointColor;
 		}
 
 		@Override
 		public Bitmap getPointBitmap() {
 			return getContext().getArrowBitmap();
+		}
+
+		@Override
+		public Integer getPointColor() {
+			return pointColor;
 		}
 
 		@Override

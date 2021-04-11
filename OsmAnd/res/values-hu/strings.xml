@@ -321,7 +321,7 @@
     <string name="select_build_to_install">A telepítendő OsmAnd build kijelölése</string>
     <string name="contribution_activity">Verzió telepítése</string>
     <string name="gps_status_app_not_found">A GPS státusz alkalmazás nincs telepítve. Megkeresi a piactéren?</string>
-    <string name="voice_is_not_available_msg">A hangalapú navigáció nem érhető el. A „Beállítások” → „Navigációs beállítások”, profil kijelölése → „Hangutasítás” menüben választhatsz ki vagy tölthetsz le hangutasítás-csomagokat.</string>
+    <string name="voice_is_not_available_msg">A hangalapú navigáció nem érhető el. A „Beállítások” → „Navigációs beállítások”, profil kijelölése → „Hangutasítás” menüben választhat ki vagy tölthet le hangutasítás-csomagokat.</string>
     <string name="voice_is_not_available_title">Hangutasítás-csomag kijelölése</string>
     <string name="daynight_mode_day">Nappal</string>
     <string name="daynight_mode_night">Éjjel</string>
@@ -530,7 +530,7 @@
     <string name="shared_string_close">Bezárás</string>
     <string name="loading_data">Adatok betöltése…</string>
     <string name="reading_indexes">Helyi adatok olvasása…</string>
-    <string name="previous_run_crashed">Az OsmAnd legutóbb összeomlott. Naplófájl: {0}. Kérlek jelentsd a hibát és csatold hozzá a naplófájlt.</string>
+    <string name="previous_run_crashed">Az OsmAnd legutóbb összeomlott. Naplófájl: {0}. Kérjük jelentse be a hibát, és csatolja hozzá a naplófájlt.</string>
     <string name="saving_gpx_tracks">GPX fájl mentése…</string>
     <string name="finished_task">Befejezve</string>
     <string name="use_online_routing_descr">Internet használata útvonaltervezéshez.</string>
@@ -849,7 +849,7 @@
     <string name="no_route">Nincs út</string>
     <string name="delete_target_point">Célpont törlése</string>
     <string name="intermediate_point">%1$s köztes célpont</string>
-    <string name="gps_not_available">Kérlek engedélyezd a GPS-t a beállításokban</string>
+    <string name="gps_not_available">Kérjük, engedélyezze a GPS-t a beállításokban</string>
     <string name="map_widget_show_destination_arrow">Célpont irányának megjelenítése</string>
     <string name="enable_plugin_monitoring_services">A pozíciónaplózási szolgáltatások (GPX naplózás, online útvonalrögzítés) használatához engedélyed az „Utazás felvétele” bővítményt</string>
     <string name="non_optimal_route_calculation">Esetleg nem optimális útvonal kiszámítása nagyobb távolságokra</string>
@@ -919,7 +919,7 @@
     <string name="av_widget_action_descr">Alapértelmezett widgetművelet:</string>
     <string name="av_widget_action">Alapértelmezett widgetmód</string>
     <string name="recording_description">Felvétel %1$s %3$s %2$s</string>
-    <string name="srtm_paid_version_msg">Kérem, fontolja meg a „Szintvonalak” bővítmény megvásárlását, ezzel is támogatva a további fejlesztéseket.</string>
+    <string name="srtm_paid_version_msg">Kérjük, fontolja meg a „Szintvonalak” bővítmény megvásárlását, ezzel is támogatva a további fejlesztéseket.</string>
     <string name="srtm_paid_version_title">Szintvonal bővítmény</string>
     <string name="intermediate_points_change_order">Más sorrend</string>
     <string name="dropbox_plugin_description">Szinkronizálja a hang/videó jegyzeteket a Dropbox fiókjával.</string>
@@ -975,7 +975,7 @@
     <string name="use_kalman_filter_compass_descr">Csökkenti a zajt az iránytű olvasásakor, de hozzáadja a tehetetlenséget.</string>
     <string name="use_kalman_filter_compass">Kálmán-szűrő használata</string>
     <string name="local_indexes_cat_srtm">Szintvonalak</string>
-    <string name="wait_current_task_finished">Kérlek várd meg, amíg a jelenlegi feladat befejeződik</string>
+    <string name="wait_current_task_finished">Kérjük, várja meg, amíg a jelenlegi feladat befejeződik</string>
     <string name="shared_string_downloading">Letöltés…</string>
     <string name="plugin_distance_point_time">idő</string>
     <string name="plugin_distance_point_hdop">pontosság</string>
@@ -1060,7 +1060,7 @@
     <string name="maps_define_edit">Megad/Szerkeszt…</string>
     <string name="base_world_map">Föld alaptérkép</string>
     <string name="map_magnifier">Térképnagyító</string>
-    <string name="animate_routing_route_not_calculated">Előbb tervezz útvonalat</string>
+    <string name="animate_routing_route_not_calculated">Kérjük, először számolja ki az útvonalat</string>
     <string name="animate_routing_route">Szimuláció a tervezett útvonalon </string>
     <string name="animate_routing_gpx">Szimuláció GPX nyomvonalon</string>
     <string name="shared_string_remember_my_choice">Emlékezzen a választásra</string>
@@ -1285,7 +1285,7 @@
     <string name="shared_string_all">Minden</string>
     <string name="shared_string_waypoints">Útpontok</string>
     <string name="way_alarms">Forgalmi figyelmeztetések</string>
-    <string name="speak_favorites">Kedvencek a közelben</string>
+    <string name="speak_favorites">Közeli kedvencek</string>
     <string name="speak_poi">Közeli érdekes helyek (POI)</string>
     <string name="download_additional_maps">Letöltöd a hiányzó térképeket %1$s (%2$d MB)?</string>
     <string name="rendering_value_browse_map_name">Térképböngészés</string>
@@ -1604,7 +1604,7 @@
     <string name="rate_this_app">Értékeld az alkalmazást</string>
     <string name="user_hates_app_get_feedback">Mondd el, hogy miért.</string>
     <string name="user_hates_app_get_feedback_long">Mondja el javaslatait.</string>
-    <string name="rate_this_app_long">Pontozd az OsmAndot a Google Play áruházban</string>
+    <string name="rate_this_app_long">Kérjük, adjon pontszámot az OsmAndnak a Google Playen</string>
     <string name="download_live_updates">Élő frissítések</string>
     <string name="no_updates_available">Nem érhetők el frissítések</string>
     <string name="we_really_care_about_your_opinion">Véleménye és visszajelzése fontos számunkra.</string>
@@ -1685,7 +1685,7 @@
     <string name="get_full_version">Teljes verzió</string>
     <string name="downloads">Letöltések</string>
     <string name="downloading_number_of_files">Letöltés - %1$d fájl</string>
-    <string name="favorite_category_dublicate_message">Válassz olyan kategória nevet, ami még nem létezik.</string>
+    <string name="favorite_category_dublicate_message">Kérjük, olyan kategórianevet válasszon, amely még nem létezik.</string>
     <string name="favorite_category_name">Kategórianév</string>
     <string name="favorite_category_add_new_title">Új kategória hozzáadása</string>
     <string name="confirm_download_roadmaps">A csak utakat tartalmazó térkép nem szükséges, mert le van töltve a teljes térkép. Letöltöd ennek ellenére?</string>
@@ -2886,7 +2886,7 @@
     <string name="searching_gps">Műholdak keresése</string>
     <string name="coordinates_widget">Koordináta-widget</string>
     <string name="keep_passed_markers_descr">Az Kedvencek vagy GPX-útpontok csoportjaként hozzáadott és elhagyottként megjelölt jelölők a térképen maradnak. A jelölők akkor tűnnek el a térképről, ha a csoport nem aktív (ki van kapcsolva).</string>
-    <string name="rate_dialog_descr">Kérlek, adj visszajelzést vagy értékelést a Google Play-en.</string>
+    <string name="rate_dialog_descr">Kérjük, ossza meg visszajelzését, és értékelje munkánkat a Google Playen.</string>
     <string name="shared_string_privacy_policy">Adatvédelmi irányelvek</string>
     <string name="help_us_make_osmand_better">Segítsen, hogy jobbá tehessük az OsmAndot</string>
     <string name="make_osmand_better_descr">Engedélyezze, hogy az OsmAnd névtelen alkalmazáshasználati adatokat gyűjtsön és dolgozzon fel. Nem gyűjtünk vagy tárolunk adatokat a helyzetéről vagy az Ön által a térképen megtekintett helyekről. 
@@ -3304,7 +3304,7 @@
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
     <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
     <string name="button_rate">Értékelés</string>
-    <string name="file_does_not_contain_routing_rules">\'%1$s\': ez a fájl nem tartalmaz úttervezési szabályokat. Kérem, válasszon másik fájlt.</string>
+    <string name="file_does_not_contain_routing_rules">\'%1$s\': ez a fájl nem tartalmaz úttervezési szabályokat. Kérjük, válasszon másik fájlt.</string>
     <string name="not_support_file_type_with_ext">Válasszon egy támogatott, %1$s kiterjesztésű fájlt.</string>
     <string name="import_from_file">Importálás fájlból</string>
     <string name="import_routing_file">Úttervezési fájl importálása</string>
@@ -3376,7 +3376,7 @@
     <string name="plugin_disabled">Bővítmény kikapcsolva</string>
     <string name="open_settings">Beállítások megnyitása</string>
     <string name="no_recalculation_setting">Nincs újraszámítás</string>
-    <string name="please_provide_profile_name_message">Kérem, adjon nevet a profilnak</string>
+    <string name="please_provide_profile_name_message">Kérjük, adjon nevet a profilnak</string>
     <string name="select_data_to_import">Válassza ki az importálandó adatot.</string>
     <string name="keep_both">Mindkettő megtartása</string>
     <string name="replace_all">Az összes cseréje</string>
@@ -3559,7 +3559,7 @@
     <string name="width_limit_description">Adja meg a járműve szélességét (a széles járművekre útvonalkorlátozások vonatkozhatnak).</string>
     <string name="height_limit_description">Adja meg a járműve magasságát (a magas járművekre útvonalkorlátozások vonatkozhatnak).</string>
     <string name="weight_limit_description">Adja meg a járműve tömegét (a nehéz járművekre útvonalkorlátozások vonatkozhatnak).</string>
-    <string name="gpx_parse_error">Az OsmAnd GPX formázása helytelen, további vizsgálatért kérem, lépjen kapcsolatba a támogató csapattal.</string>
+    <string name="gpx_parse_error">Az OsmAnd GPX formázása helytelen. További vizsgálatért kérjük, lépjen kapcsolatba a támogató csapattal.</string>
     <string name="export_import_quick_actions_with_profiles_promo">Az alkalmazásprofilokkal exportálhat és importálhat gyorsműveleteket.</string>
     <string name="shared_string_delete_all_q">Összes törlése\?</string>
     <string name="delete_all_actions_message_q">Biztosan véglegesen törölni szeretne %d gyorsműveletet\?</string>
@@ -3624,7 +3624,7 @@
     <string name="use_volume_buttons_as_zoom_descr">A térképnagyítás szintjének vezérlése a készülék hangerőgombjaival.</string>
     <string name="use_volume_buttons_as_zoom">Hangerőgombok használata nagyításhoz</string>
     <string name="app_mode_inline_skates">Görkorcsolya</string>
-    <string name="please_provide_point_name_error">Kérem, adjon nevet a pontnak</string>
+    <string name="please_provide_point_name_error">Kérjük, adjon nevet a pontnak</string>
     <string name="lenght_limit_description">Adja meg a járműve hosszát (a hosszú járművekre útvonalkorlátozások vonatkozhatnak).</string>
     <string name="quick_action_remove_next_destination">Legközelebbi célpont törlése</string>
     <string name="search_download_wikipedia_maps">Wikipédia-térképek letöltése</string>
@@ -4062,7 +4062,7 @@
     <string name="empty_purchases_description">Ha a vásárlásai nem jelennek meg itt, lépjen kapcsolatba az ügyfélszolgálatunkkal, vagy koppintson ide: „%1$s”.</string>
     <string name="contact_support">Kapcsolatfelvétel az ügyfélszolgálattal</string>
     <string name="troubleshooting">Hibaelhárítás</string>
-    <string name="troubleshooting_description">Ha problémája akadt a vásrlással, kattintson erre a linkre.</string>
+    <string name="troubleshooting_description">Ha problémája akad a vásrlással, kattintson erre a linkre.</string>
     <string name="osmand_live">OsmAnd Live</string>
     <string name="annual_subscription">Éves előfizetés</string>
     <string name="monthly_subscription">Havi előfizetés</string>
@@ -4074,4 +4074,9 @@
     <string name="on_hold">Várakoztatva</string>
     <string name="expired">Lejárt</string>
     <string name="update_all_maps_added">Frissüljön minden térkép, amely hozzá lett adva ehhez: %1$s\?</string>
+    <string name="map_quick_action_pattern">%1$s → …</string>
+    <string name="exit_number">Kijárat száma</string>
+    <string name="announce_when_exceeded">Értesítés túllépéskor</string>
+    <string name="user_points">Felhasználói pontok</string>
+    <string name="output">Teljesítmény</string>
 </resources>

@@ -85,12 +85,14 @@
 		android:id="@+id/contact_support_container"
 		layout="@layout/contact_support" />
 
-	<include
-		layout="@layout/divider"/>
-
-	<View
+	<FrameLayout
 		android:layout_width="match_parent"
 		android:layout_height="@dimen/dialog_button_ex_min_width"
-		android:background="?attr/activity_background_color" />
+		android:background="?attr/activity_background_color">
+
+		<include
+			layout="@layout/card_bottom_divider" />
+
+	</FrameLayout>
 
 </LinearLayout>
