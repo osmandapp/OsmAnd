@@ -104,13 +104,14 @@ public class ArticleTravelCard extends BaseTravelCard {
 			holder.rightButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
+					app.getTravelHelper().createGpxFile(article);
+					GPXFile gpxFile = article.getGpxFile();
 					if (saved) {
-						GPXFile gpxFile = article.getGpxFile();
 						app.getSelectedGpxHelper().selectGpxFile(gpxFile, false, true);
 						helper.removeArticleFromSaved(article);
 					} else {
+						app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, true);
 						helper.addArticleToSaved(article);
-						app.getTravelHelper().createGpxFile(article);
 					}
 					updateSaveButton(holder);
 				}
