@@ -3,6 +3,7 @@ package net.osmand;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,8 +34,10 @@ import java.net.URLEncoder;
 import java.net.UnknownHostException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.zip.GZIPOutputStream;
 
 public class AndroidNetworkUtils {
@@ -44,6 +47,13 @@ public class AndroidNetworkUtils {
 
 	public interface OnRequestResultListener {
 		void onResult(String result);
+	}
+
+	public interface OnFilesUploadCallback {
+		@Nullable
+		Map<String, String> getAdditionalParams(@NonNull File file);
+		void onFileUploadProgress(@NonNull File file, int percent);
+		void onFilesUploadDone(@NonNull Map<File, String> errors);
 	}
 
 	public static class RequestResponse {
@@ -156,7 +166,7 @@ public class AndroidNetworkUtils {
 			String params = null;
 			if (parameters != null && parameters.size() > 0) {
 				StringBuilder sb = new StringBuilder();
-				for (Map.Entry<String, String> entry : parameters.entrySet()) {
+				for (Entry<String, String> entry : parameters.entrySet()) {
 					if (sb.length() > 0) {
 						sb.append("&");
 					}
@@ -296,16 +306,18 @@ public class AndroidNetworkUtils {
 
 	private static final String BOUNDARY = "CowMooCowMooCowCowCow";
 
-	public static String uploadFile(String urlText, File file, boolean gzip, Map<String, String> additionalParams) throws IOException {
-		return uploadFile(urlText, new FileInputStream(file), file.getName(), gzip, additionalParams);
+	public static String uploadFile(@NonNull String urlText, @NonNull File file, boolean gzip,
+									@NonNull Map<String, String> additionalParams, @Nullable Map<String, String> headers) throws IOException {
+		return uploadFile(urlText, new FileInputStream(file), file.getName(), gzip, additionalParams, headers);
 	}
 
-	public static String uploadFile(String urlText, InputStream inputStream, String fileName, boolean gzip, Map<String, String> additionalParams) {
+	public static String uploadFile(@NonNull String urlText, @NonNull InputStream inputStream, @NonNull String fileName, boolean gzip,
+									Map<String, String> additionalParams, @Nullable Map<String, String> headers) {
 		URL url;
 		try {
 			boolean firstPrm = !urlText.contains("?");
 			StringBuilder sb = new StringBuilder(urlText);
-			for (Map.Entry<String, String> entry : additionalParams.entrySet()) {
+			for (Entry<String, String> entry : additionalParams.entrySet()) {
 				sb.append(firstPrm ? "?" : "&").append(entry.getKey()).append("=").append(URLEncoder.encode(entry.getValue(), "UTF-8"));
 				firstPrm = false;
 			}
@@ -320,6 +332,11 @@ public class AndroidNetworkUtils {
 			conn.setRequestMethod("POST");
 			conn.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + BOUNDARY);
 			conn.setRequestProperty("User-Agent", "OsmAnd");
+			if (headers != null) {
+				for (Entry<String, String> header : headers.entrySet()) {
+					conn.setRequestProperty(header.getKey(), header.getValue());
+				}
+			}
 
 			OutputStream ous = conn.getOutputStream();
 			ous.write(("--" + BOUNDARY + "\r\n").getBytes());
@@ -374,6 +391,58 @@ public class AndroidNetworkUtils {
 			LOG.error(e.getMessage(), e);
 			return e.getMessage();
 		}
+	}
+
+	public static void uploadFilesAsync(final @NonNull String url,
+										final @NonNull List<File> files,
+										final boolean gzip,
+										final @NonNull Map<String, String> parameters,
+										final @Nullable Map<String, String> headers,
+										final OnFilesUploadCallback callback) {
+
+		new AsyncTask<Void, Object, Map<File, String>>() {
+
+			@Override
+			@NonNull
+			protected Map<File, String> doInBackground(Void... v) {
+				Map<File, String> errors = new HashMap<>();
+				for (File file : files) {
+					publishProgress(file, 0);
+					try {
+						Map<String, String> params = new HashMap<>(parameters);
+						if (callback != null) {
+							Map<String, String> additionalParams = callback.getAdditionalParams(file);
+							if (additionalParams != null) {
+								params.putAll(additionalParams);
+							}
+						}
+						String res = uploadFile(url, file, gzip, params, headers);
+						if (res != null) {
+							errors.put(file, res);
+						}
+					} catch (Exception e) {
+						errors.put(file, e.getMessage());
+					}
+					publishProgress(file, 100);
+				}
+				return errors;
+			}
+
+			@Override
+			protected void onProgressUpdate(Object... objects) {
+				if (callback != null) {
+					callback.onFileUploadProgress((File) objects[0], (Integer) objects[1]);
+				}
+			}
+
+			@Override
+			protected void onPostExecute(@NonNull Map<File, String> errors) {
+				if (callback != null) {
+					callback.onFilesUploadDone(errors);
+				}
+			}
+
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 	}
 
 	private static void showToast(OsmandApplication ctx, String message) {

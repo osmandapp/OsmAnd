@@ -44,10 +44,10 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.PointImageDrawable;
+import net.osmand.plus.itinerary.ItineraryGroup;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.mapmarkers.MapMarker;
-import net.osmand.plus.itinerary.ItineraryGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
@@ -56,6 +56,7 @@ import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.track.GradientScaleType;
 import net.osmand.plus.track.SaveGpxAsyncTask;
 import net.osmand.plus.track.TrackDrawInfo;
+import net.osmand.plus.track.TrackMenuFragment;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.Renderable;
@@ -1024,7 +1025,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 		float bearing = prevPointLocation.bearingTo(nextPointLocation);
 
-		return new SelectedGpxPoint(selectedGpxFile, projectionPoint, bearing);
+		return new SelectedGpxPoint(selectedGpxFile, projectionPoint, prevPoint, nextPoint, bearing);
 	}
 
 	public static WptPt createProjectionPoint(WptPt prevPoint, WptPt nextPoint, LatLon latLon) {
@@ -1088,8 +1089,16 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	@Override
-	public boolean disableLongPressOnMap() {
-		return isInTrackAppearanceMode();
+	public boolean disableLongPressOnMap(PointF point, RotatedTileBox tileBox) {
+		if (isInTrackAppearanceMode()) {
+			return true;
+		}
+		if (tileBox.getZoom() >= START_ZOOM) {
+			List<Object> res = new ArrayList<>();
+			getTracksFromPoint(tileBox, point, res);
+			return !Algorithms.isEmpty(res);
+		}
+		return false;
 	}
 
 	@Override
@@ -1098,8 +1107,14 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	@Override
-	public boolean runExclusiveAction(Object o, boolean unknownLocation) {
-		return false;
+	public boolean runExclusiveAction(Object object, boolean unknownLocation) {
+		if (unknownLocation || !(object instanceof SelectedGpxPoint)) {
+			return false;
+		}
+		MapActivity mapActivity = (MapActivity) view.getContext();
+		SelectedGpxPoint point = (SelectedGpxPoint) object;
+		TrackMenuFragment.showInstance(mapActivity, point.getSelectedGpxFile(), point, null, null, false);
+		return true;
 	}
 
 	@Override
@@ -1134,6 +1149,20 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	@Override
 	public boolean onLongPressEvent(PointF point, RotatedTileBox tileBox) {
+		if (tileBox.getZoom() >= START_ZOOM) {
+			List<Object> trackPoints = new ArrayList<>();
+			getTracksFromPoint(tileBox, point, trackPoints);
+
+			if (!Algorithms.isEmpty(trackPoints)) {
+				MapActivity mapActivity = (MapActivity) view.getContext();
+				SelectedGpxPoint selectedGpxPoint = (SelectedGpxPoint) trackPoints.get(0);
+				WptPt wptPt = selectedGpxPoint.getSelectedPoint();
+				PointDescription description = getObjectName(selectedGpxPoint);
+				ContextMenuLayer contextMenuLayer = mapActivity.getMapLayers().getContextMenuLayer();
+				contextMenuLayer.showContextMenu(new LatLon(wptPt.lat, wptPt.lon), description, selectedGpxPoint, this);
+				return true;
+			}
+		}
 		return false;
 	}
 

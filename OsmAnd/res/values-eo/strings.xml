@@ -1526,7 +1526,7 @@
     <string name="error_doing_search">Okazis eraro dum malkonekta serĉado.</string>
     <string name="search_osm_offline">Serĉi per pozici-trova servo</string>
     <string name="preferred_locale_descr">Elekti lingvon de fasado (post ŝanĝi necesas restarti la aplikaĵon).</string>
-    <string name="unit_of_length">Unuoj de longo</string>
+    <string name="unit_of_length">Mezurunuoj de longo</string>
     <string name="unit_of_length_descr">Ŝanĝi unuojn por reprezenti distancoj.</string>
     <string name="si_mi_feet">Mejloj/futoj</string>
     <string name="si_mi_yard">Mejloj/jardoj</string>
@@ -3137,7 +3137,7 @@
     <string name="turn_screen_on_info">Montri mapon sur la ŝlos‑ekrano dum navigado.</string>
     <string name="route_parameters_info">Agordoj pri kurs‑difinado por la elektita profilo: “%1$s”.</string>
     <string name="wake_time">Aktiveca periodo de ekrano</string>
-    <string name="units_and_formats">Unuoj kaj formoj</string>
+    <string name="units_and_formats">Mezurunuoj &amp; formoj</string>
     <string name="map_look_descr">Alĝustigi mapon</string>
     <string name="map_look">Map‑aspekto</string>
     <string name="list_of_installed_plugins">Instalitaj kromprogramoj</string>

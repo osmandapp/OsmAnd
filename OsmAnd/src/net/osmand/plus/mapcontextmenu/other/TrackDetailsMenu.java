@@ -23,7 +23,6 @@ import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
 import net.osmand.AndroidUtils;
-import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.GPXUtilities.TrkSegment;
@@ -43,6 +42,7 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
+import net.osmand.plus.myplaces.GPXItemPagerAdapter;
 import net.osmand.plus.views.layers.GPXLayer;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
@@ -299,18 +299,7 @@ public class TrackDetailsMenu {
 			List<ILineDataSet> ds = lineData != null ? lineData.getDataSets() : null;
 			GpxDisplayItem gpxItem = getGpxItem();
 			if (ds != null && ds.size() > 0 && gpxItem != null) {
-				for (GPXUtilities.Track t : gpxItem.group.getGpx().tracks) {
-					for (TrkSegment s : t.segments) {
-						if (s.points.size() > 0 && s.points.get(0).equals(gpxItem.analysis.locationStart)) {
-							segment = s;
-							break;
-						}
-					}
-					if (segment != null) {
-						break;
-					}
-				}
-				this.segment = segment;
+				this.segment = GPXItemPagerAdapter.getSegmentForAnalysis(gpxItem, gpxItem.analysis);
 			}
 		}
 		return segment;
@@ -755,21 +744,21 @@ public class TrackDetailsMenu {
 		final List<GPXDataSetType[]> availableTypes = new ArrayList<>();
 		boolean hasSlopeChart = false;
 		if (analysis.hasElevationData) {
-			availableTypes.add(new GPXDataSetType[]{GPXDataSetType.ALTITUDE});
+			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.ALTITUDE});
 			if (gpxItem.chartAxisType != GPXDataSetAxisType.TIME
 					&& gpxItem.chartAxisType != GPXDataSetAxisType.TIMEOFDAY) {
-				availableTypes.add(new GPXDataSetType[]{GPXDataSetType.SLOPE});
+				availableTypes.add(new GPXDataSetType[] {GPXDataSetType.SLOPE});
 			}
 		}
 		if (analysis.hasSpeedData) {
-			availableTypes.add(new GPXDataSetType[]{GPXDataSetType.SPEED});
+			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.SPEED});
 		}
 		if (analysis.hasElevationData && gpxItem.chartAxisType != GPXDataSetAxisType.TIME
 				&& gpxItem.chartAxisType != GPXDataSetAxisType.TIMEOFDAY) {
-			availableTypes.add(new GPXDataSetType[]{GPXDataSetType.ALTITUDE, GPXDataSetType.SLOPE});
+			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.ALTITUDE, GPXDataSetType.SLOPE});
 		}
 		if (analysis.hasElevationData && analysis.hasSpeedData) {
-			availableTypes.add(new GPXDataSetType[]{GPXDataSetType.ALTITUDE, GPXDataSetType.SPEED});
+			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.ALTITUDE, GPXDataSetType.SPEED});
 		}
 
 		for (GPXDataSetType t : gpxItem.chartTypes) {

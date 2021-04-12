@@ -320,7 +320,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	@Override
 	@RequiresPermission(Manifest.permission.VIBRATE)
 	public boolean onLongPressEvent(PointF point, RotatedTileBox tileBox) {
-		if (disableLongPressOnMap()) {
+		if (disableLongPressOnMap(point, tileBox)) {
 			return false;
 		}
 		if (pressedContextMarker(tileBox, point.x, point.y)) {
@@ -877,7 +877,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		return res;
 	}
 
-	public boolean disableLongPressOnMap() {
+	public boolean disableLongPressOnMap(PointF point, RotatedTileBox tileBox) {
 		if (mInChangeMarkerPositionMode || mInGpxDetailsMode || mInAddGpxPointMode ||
 				activity.getMapRouteInfoMenu().isVisible() || MapRouteInfoMenu.waypointsVisible
 				|| MapRouteInfoMenu.followTrackVisible) {
@@ -886,7 +886,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		boolean res = false;
 		for (OsmandMapLayer lt : view.getLayers()) {
 			if (lt instanceof IContextMenuProvider) {
-				if (((IContextMenuProvider) lt).disableLongPressOnMap()) {
+				if (((IContextMenuProvider) lt).disableLongPressOnMap(point, tileBox)) {
 					res = true;
 					break;
 				}
@@ -1101,7 +1101,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 		boolean disableSingleTap();
 
-		boolean disableLongPressOnMap();
+		boolean disableLongPressOnMap(PointF point, RotatedTileBox tileBox);
 
 		boolean isObjectClickable(Object o);
 
