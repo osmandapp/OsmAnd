@@ -4089,5 +4089,4 @@
     <string name="announce_when_exceeded">Anunciar quando ultrapassado</string>
     <string name="user_points">Pontos do utilizador</string>
     <string name="output">Saída</string>
-    <string name="map_quick_action_pattern">%1$s → …</string>
 </resources>

@@ -59,7 +59,7 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 
 	@Override
 	public String getSelectedItem(OsmandApplication app) {
-		return app.getSettings().MAP_UNDERLAY.get();
+		return app.getSettings().MAP_UNDERLAY.get() != null ? app.getSettings().MAP_UNDERLAY.get() : KEY_NO_UNDERLAY;
 	}
 
 	@Override
@@ -103,7 +103,7 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 
 				int index = -1;
 				final String currentSource = settings.MAP_UNDERLAY.get() == null ? KEY_NO_UNDERLAY
-					: settings.MAP_UNDERLAY.get();
+						: settings.MAP_UNDERLAY.get();
 
 				for (int idx = 0; idx < sources.size(); idx++) {
 					if (sources.get(idx).first.equals(currentSource)) {
@@ -157,7 +157,7 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 			return item;
 		}
 	}
-	
+
 	@Override
 	protected int getAddBtnText() {
 		return R.string.quick_action_map_underlay_action;
@@ -225,13 +225,5 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 	public boolean fillParams(View root, MapActivity activity) {
 		getParams().put(KEY_DIALOG, Boolean.toString(((SwitchCompat) root.findViewById(R.id.saveButton)).isChecked()));
 		return super.fillParams(root, activity);
-	}
-
-	@Override
-	public String getActionText(OsmandApplication application) {
-		String currentSource = application.getSettings().MAP_UNDERLAY.get() == null ? KEY_NO_UNDERLAY
-				: application.getSettings().MAP_UNDERLAY.get();
-
-		return application.getString(R.string.map_quick_action_pattern, getTranslatedItemName(application, currentSource));
 	}
 }

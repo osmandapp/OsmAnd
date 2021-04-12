@@ -4074,7 +4074,6 @@
     <string name="on_hold">Várakoztatva</string>
     <string name="expired">Lejárt</string>
     <string name="update_all_maps_added">Frissüljön minden térkép, amely hozzá lett adva ehhez: %1$s\?</string>
-    <string name="map_quick_action_pattern">%1$s → …</string>
     <string name="exit_number">Kijárat száma</string>
     <string name="announce_when_exceeded">Értesítés túllépéskor</string>
     <string name="user_points">Felhasználói pontok</string>

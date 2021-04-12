@@ -4154,5 +4154,4 @@
     <string name="announce_when_exceeded">الإعلان عند التجاوز</string>
     <string name="user_points">نقاط المستخدم</string>
     <string name="output">الإخراج</string>
-    <string name="map_quick_action_pattern">%1$s ← …</string>
 </resources>
