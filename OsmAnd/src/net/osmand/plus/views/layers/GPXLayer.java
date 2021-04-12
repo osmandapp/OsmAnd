@@ -1108,13 +1108,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	@Override
 	public boolean runExclusiveAction(Object object, boolean unknownLocation) {
-		if (unknownLocation || !(object instanceof SelectedGpxPoint)) {
-			return false;
-		}
-		MapActivity mapActivity = (MapActivity) view.getContext();
-		SelectedGpxPoint point = (SelectedGpxPoint) object;
-		TrackMenuFragment.showInstance(mapActivity, point.getSelectedGpxFile(), point, null, null, false);
-		return true;
+		return false;
 	}
 
 	@Override
@@ -1158,12 +1152,22 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				SelectedGpxPoint selectedGpxPoint = (SelectedGpxPoint) trackPoints.get(0);
 				WptPt wptPt = selectedGpxPoint.getSelectedPoint();
 				PointDescription description = getObjectName(selectedGpxPoint);
-				ContextMenuLayer contextMenuLayer = mapActivity.getMapLayers().getContextMenuLayer();
-				contextMenuLayer.showContextMenu(new LatLon(wptPt.lat, wptPt.lon), description, selectedGpxPoint, this);
+				mapActivity.getContextMenu().show(new LatLon(wptPt.lat, wptPt.lon), description, selectedGpxPoint);
 				return true;
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public boolean showMenuAction(@Nullable Object object) {
+		if (!(object instanceof SelectedGpxPoint)) {
+			return false;
+		}
+		MapActivity mapActivity = (MapActivity) view.getContext();
+		SelectedGpxPoint point = (SelectedGpxPoint) object;
+		TrackMenuFragment.showInstance(mapActivity, point.getSelectedGpxFile(), point, null, null, false);
+		return true;
 	}
 
 	@Override

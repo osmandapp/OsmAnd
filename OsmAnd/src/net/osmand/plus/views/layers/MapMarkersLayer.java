@@ -532,6 +532,11 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	@Override
+	public boolean showMenuAction(@Nullable Object o) {
+		return false;
+	}
+
+	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o, boolean unknownLocation) {
 		if (tileBox.getZoom() < 3 || !map.getMyApplication().getSettings().SHOW_MAP_MARKERS.get()) {
 			return;

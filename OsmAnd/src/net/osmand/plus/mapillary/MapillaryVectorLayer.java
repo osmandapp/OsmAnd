@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
 
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import com.vividsolutions.jts.geom.Coordinate;
@@ -343,6 +344,11 @@ class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer, ICont
 
 	@Override
 	public boolean runExclusiveAction(Object o, boolean unknownLocation) {
+		return false;
+	}
+
+	@Override
+	public boolean showMenuAction(@Nullable Object o) {
 		return false;
 	}
 

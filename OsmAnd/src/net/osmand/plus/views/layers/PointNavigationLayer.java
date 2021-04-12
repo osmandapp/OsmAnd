@@ -23,11 +23,13 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
+import net.osmand.plus.views.layers.ContextMenuLayer.IMoveObjectProvider;
 
 import java.util.List;
 
 public class PointNavigationLayer extends OsmandMapLayer implements
-		IContextMenuProvider, ContextMenuLayer.IMoveObjectProvider {
+		IContextMenuProvider, IMoveObjectProvider {
+
 	protected final static int DIST_TO_SHOW = 80;
 
 	private Paint mPoint;
@@ -183,6 +185,11 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 
 	@Override
 	public boolean runExclusiveAction(Object o, boolean unknownLocation) {
+		return false;
+	}
+
+	@Override
+	public boolean showMenuAction(@Nullable Object o) {
 		return false;
 	}
 

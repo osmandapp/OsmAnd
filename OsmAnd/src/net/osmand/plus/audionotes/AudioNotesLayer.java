@@ -170,6 +170,11 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 	}
 
 	@Override
+	public boolean showMenuAction(@Nullable Object o) {
+		return false;
+	}
+
+	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> objects, boolean unknownLocation) {
 		if (tileBox.getZoom() >= startZoom) {
 			getRecordingsFromPoint(point, tileBox, objects);
