@@ -4064,7 +4064,7 @@
     <string name="empty_purchases_description">Se suas compras não aparecerem aqui, toque em \"%1$s\", ou entre em contato com nossa equipe de suporte.</string>
     <string name="contact_support">Contato com o suporte</string>
     <string name="troubleshooting">Solução de problemas</string>
-    <string name="troubleshooting_description">Por favor, siga este link se você tiver algum problema com compras.</string>
+    <string name="troubleshooting_description">Por favor, siga este link se tiver problemas com as compras.</string>
     <string name="osmand_live">OsmAnd Live</string>
     <string name="annual_subscription">Assinatura anual</string>
     <string name="monthly_subscription">Assinatura mensal</string>
@@ -4076,4 +4076,9 @@
     <string name="on_hold">Em espera</string>
     <string name="expired">Expirado</string>
     <string name="update_all_maps_added">Atualizar todos os mapas adicionados a %1$s\?</string>
+    <string name="exit_number">Número de saída</string>
+    <string name="announce_when_exceeded">Anunciar quando ultrapassado</string>
+    <string name="user_points">Pontos do usuário</string>
+    <string name="output">Saída</string>
+    <string name="map_quick_action_pattern">%1$s → …</string>
 </resources>

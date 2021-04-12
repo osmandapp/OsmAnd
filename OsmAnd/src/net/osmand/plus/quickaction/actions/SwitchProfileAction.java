@@ -27,6 +27,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import static net.osmand.AndroidUtils.isLayoutRtl;
+
 public class SwitchProfileAction extends SwitchableAction<String> {
 
 	private final static String KEY_PROFILES = "profiles";
@@ -229,5 +231,10 @@ public class SwitchProfileAction extends SwitchableAction<String> {
 				adapter.addItem(key, ctx);
 			}
 		}
+	}
+
+	@Override
+	public String getActionText(OsmandApplication application) {
+		return getName(application);
 	}
 }
