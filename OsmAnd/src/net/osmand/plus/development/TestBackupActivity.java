@@ -44,7 +44,8 @@ import java.util.Map;
 
 public class TestBackupActivity extends OsmandActionBarActivity {
 
-	private static final String TEST_ORDER_ID = "460000687003939";
+	// TODO pass actual sub order id!
+	private static final String TEST_ORDER_ID = ""; 
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
