@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/activity_background_basic"
+	android:orientation="vertical">
+
+	<com.google.android.material.appbar.AppBarLayout
+		android:id="@+id/appbar"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<androidx.appcompat.widget.Toolbar
+			android:id="@+id/toolbar"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="?attr/colorPrimary"
+			android:minHeight="?attr/actionBarSize"
+			android:theme="?attr/toolbar_theme">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:gravity="right"
+				android:paddingStart="@dimen/content_padding"
+				android:paddingLeft="@dimen/content_padding"
+				android:paddingEnd="@dimen/content_padding"
+				android:paddingRight="@dimen/content_padding">
+
+				<ProgressBar
+					android:id="@+id/progress_bar"
+					android:layout_width="@dimen/card_button_progress_size"
+					android:layout_height="@dimen/card_button_progress_size"
+					android:visibility="gone" />
+
+			</LinearLayout>
+
+		</androidx.appcompat.widget.Toolbar>
+
+	</com.google.android.material.appbar.AppBarLayout>
+
+	<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_margin="@dimen/content_padding"
+			android:orientation="vertical"
+			android:paddingBottom="@dimen/content_padding">
+
+			<net.osmand.plus.widgets.OsmandTextFieldBoxes
+				android:id="@+id/edit_email_label"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:focusable="true"
+				android:focusableInTouchMode="true"
+				android:paddingBottom="@dimen/content_padding_small"
+				app:errorColor="@color/color_invalid"
+				app:hasClearButton="true"
+				app:labelText="Email"
+				app:primaryColor="@color/active_color_primary_dark"
+				app:secondaryColor="?android:textColorSecondary">
+
+				<studio.carbonylgroup.textfieldboxes.ExtendedEditText
+					android:id="@+id/edit_email"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:imeOptions="actionNext"
+					android:inputType="textEmailAddress"
+					android:maxLines="1"
+					tools:text="test@test.com" />
+
+			</net.osmand.plus.widgets.OsmandTextFieldBoxes>
+
+			<include
+				android:id="@+id/btn_register"
+				layout="@layout/bottom_sheet_dialog_button"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/dialog_button_height" />
+
+			<net.osmand.plus.widgets.OsmandTextFieldBoxes
+				android:id="@+id/edit_token_label"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:focusable="true"
+				android:focusableInTouchMode="true"
+				android:paddingTop="@dimen/content_padding_small"
+				android:paddingBottom="@dimen/content_padding_small"
+				app:errorColor="@color/color_invalid"
+				app:hasClearButton="true"
+				app:labelText="Token"
+				app:primaryColor="@color/active_color_primary_dark"
+				app:secondaryColor="?android:textColorSecondary">
+
+				<studio.carbonylgroup.textfieldboxes.ExtendedEditText
+					android:id="@+id/edit_token"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:imeOptions="actionNext"
+					android:inputType="numberDecimal"
+					android:maxLines="1"
+					tools:text="123456" />
+
+			</net.osmand.plus.widgets.OsmandTextFieldBoxes>
+
+			<include
+				android:id="@+id/btn_verify"
+				layout="@layout/bottom_sheet_dialog_button"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/dialog_button_height" />
+
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/content_padding"
+				android:text="Actions"
+				android:textColor="?android:textColorPrimary"
+				android:textSize="@dimen/default_list_text_size" />
+
+			<include
+				android:id="@+id/btn_backup"
+				layout="@layout/bottom_sheet_dialog_button"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/dialog_button_height"
+				android:layout_marginTop="@dimen/content_padding_half" />
+
+			<include
+				android:id="@+id/btn_restore"
+				layout="@layout/bottom_sheet_dialog_button"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/dialog_button_height"
+				android:layout_marginTop="@dimen/content_padding_half" />
+
+			<TextView
+				android:id="@+id/text_info"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/content_padding"
+				android:textColor="?android:textColorPrimary"
+				android:textSize="@dimen/default_list_text_size"
+				tools:text="Last backup time: 2021-04-01 10:10:00\nModified files: 3" />
+
+		</LinearLayout>
+
+	</ScrollView>
+
+</LinearLayout>

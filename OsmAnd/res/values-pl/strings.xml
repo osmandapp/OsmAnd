@@ -4044,4 +4044,26 @@
     <string name="osmand_live_cancelled">Anulowano</string>
     <string name="renew_subscription">Odnów subskrypcję</string>
     <string name="update_all_maps_added">Zaktualizować wszystkie mapy dodane do %1$s\?</string>
+    <string name="routing_attr_height_obstacles_description">Trasa mogłaby unikać silnych podjazdów.</string>
+    <string name="select_another_colorization">Proszę wybrać inny typ barwy.</string>
+    <string name="shared_string_interval">Interwał</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_name">Naturalne granice</string>
+    <string name="track_has_no_altitude">Ślady nie zawierają danych o wysokości.</string>
+    <string name="track_has_no_speed">Ślady nie zawierają informacji o prędkości.</string>
+    <string name="trip_recording_logging_interval_info">Interwały logowania ustala okres czasu, w któtym OsmAnd będzie prosił o dane obecnej lokalizacji pozycji.</string>
+    <string name="show_start_dialog">Pokaż okno rozpocznij</string>
+    <string name="trip_recording_show_start_dialog_setting">Gdy wyłączone, nagrywanie rozpocznie się niezwłocznie po naciśnięciu w widżet lub w menu, pomijając okno potwierdzenia.</string>
+    <string name="customize_route_line">Zmień trasę nawigacji</string>
+    <string name="shared_string_route_line">Trasa nawigacji</string>
+    <string name="expired">Wygasł</string>
+    <string name="release_4_0_beta">• OsmAnd Live aktualizacje przeniesiono do \"Pobrane &gt; Aktualizacje\"
+\n
+\n •Ślady mogą być pokolorowane względem wysokości, prędkości, wzniesień.
+\n
+\n • Dodano opcję zmiany wyglądu trasy nawigacji
+\n
+\n • zaktualizowano okno \"Nagrywanie Trasy\"
+\n
+\n</string>
+    <string name="map_quick_action_pattern">%1$s → …</string>
 </resources>

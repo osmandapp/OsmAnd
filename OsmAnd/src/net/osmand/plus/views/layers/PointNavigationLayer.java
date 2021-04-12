@@ -172,7 +172,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 	}
 
 	@Override
-	public boolean disableLongPressOnMap() {
+	public boolean disableLongPressOnMap(PointF point, RotatedTileBox tileBox) {
 		return false;
 	}
 

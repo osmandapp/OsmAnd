@@ -4076,4 +4076,9 @@
     <string name="on_hold">Pozdržané</string>
     <string name="expired">Expirované</string>
     <string name="update_all_maps_added">Aktualizovať všetky mapy pridané do %1$s\?</string>
+    <string name="exit_number">Číslo výjazdu</string>
+    <string name="announce_when_exceeded">Hlásiť keď je prekročené</string>
+    <string name="user_points">Body používateľa</string>
+    <string name="output">Výstup</string>
+    <string name="map_quick_action_pattern">%1$s → …</string>
 </resources>
