@@ -13,7 +13,6 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 
-import net.osmand.GPXUtilities;
 import net.osmand.PicassoUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -23,6 +22,8 @@ import net.osmand.plus.wikivoyage.WikivoyageUtils;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
+
+import static net.osmand.GPXUtilities.GPXFile;
 
 public class ArticleTravelCard extends BaseTravelCard {
 
@@ -93,6 +94,8 @@ public class ArticleTravelCard extends BaseTravelCard {
 
 	private void updateSaveButton(final ArticleTravelVH holder) {
 		if (article != null) {
+			article = app.getTravelHelper().getArticleById(article.generateIdentifier(), article.getLang(), true,
+					null);
 			final TravelLocalDataHelper helper = app.getTravelHelper().getBookmarksHelper();
 			final boolean saved = helper.isArticleSaved(article);
 			Drawable icon = getActiveIcon(saved ? R.drawable.ic_action_read_later_fill : R.drawable.ic_action_read_later);
@@ -101,17 +104,15 @@ public class ArticleTravelCard extends BaseTravelCard {
 			holder.rightButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					if (article != null) {
-						if (saved) {
-							GPXUtilities.GPXFile gpxFile = article.getGpxFile();
-							app.getSelectedGpxHelper().selectGpxFile(gpxFile, false, true);
-							helper.removeArticleFromSaved(article);
-						} else {
-							helper.addArticleToSaved(article);
-							app.getTravelHelper().createGpxFile(article);
-						}
-						updateSaveButton(holder);
+					if (saved) {
+						GPXFile gpxFile = article.getGpxFile();
+						app.getSelectedGpxHelper().selectGpxFile(gpxFile, false, true);
+						helper.removeArticleFromSaved(article);
+					} else {
+						helper.addArticleToSaved(article);
+						app.getTravelHelper().createGpxFile(article);
 					}
+					updateSaveButton(holder);
 				}
 			});
 		}
