@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static net.osmand.plus.download.DownloadActivityType.SRTM_COUNTRY_FILE;
-import static net.osmand.plus.download.SelectIndexesUiHelper.isBaseSRTMItem;
 
 public class MultipleIndexItem extends DownloadItem {
 
@@ -121,7 +120,8 @@ public class MultipleIndexItem extends DownloadItem {
 		if (this.type == SRTM_COUNTRY_FILE) {
 			for (IndexItem item : items) {
 				if (item.hasActualDataToDownload()) {
-					if (baseSRTM && isBaseSRTMItem(item) || !baseSRTM && !isBaseSRTMItem(item)) {
+					boolean isBase = SrtmDownloadItem.isMetersItem(item);
+					if (baseSRTM && isBase || !baseSRTM && !isBase) {
 						totalSizeMb += item.getSizeToDownloadInMb();
 					}
 				}

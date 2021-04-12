@@ -471,14 +471,49 @@ public class DownloadResources extends DownloadResourceGroup {
 		addGroup(otherGroup);
 
 		createHillshadeSRTMGroups();
-		collectMultipleIndexesItems();
+		replaceIndividualSrtmWithGroups(region);
+		collectMultipleIndexesItems(region);
 		trimEmptyGroups();
 		updateLoadedFiles();
 		return true;
 	}
 
-	private void collectMultipleIndexesItems() {
-		collectMultipleIndexesItems(region);
+	private void replaceIndividualSrtmWithGroups(@NonNull WorldRegion region) {
+		DownloadResourceGroup group = getRegionMapsGroup(region);
+		if (group != null) {
+			boolean useMetersByDefault = SrtmDownloadItem.shouldUseMetersByDefault(app);
+			boolean listModified = false;
+			DownloadActivityType srtmType = DownloadActivityType.SRTM_COUNTRY_FILE;
+			List<IndexItem> indexesList = group.getIndividualResources();
+			List<DownloadItem> individualDownloadItems = group.getIndividualDownloadItems();
+			if (doesListContainIndexWithType(indexesList, srtmType)) {
+				IndexItem meters = null;
+				IndexItem feet = null;
+				for (IndexItem item : indexesList) {
+					if (item.getType() == srtmType) {
+						if (SrtmDownloadItem.isMetersItem(item)) {
+							meters = item;
+						} else {
+							feet = item;
+						}
+					}
+				}
+				individualDownloadItems.remove(meters);
+				individualDownloadItems.remove(feet);
+				group.addItem(new SrtmDownloadItem(meters, feet, useMetersByDefault));
+				listModified = true;
+			}
+			if (listModified) {
+				sortDownloadItems(individualDownloadItems);
+			}
+		}
+
+		List<WorldRegion> subRegions = region.getSubregions();
+		if (!Algorithms.isEmpty(subRegions)) {
+			for (WorldRegion subRegion : subRegions) {
+				replaceIndividualSrtmWithGroups(subRegion);
+			}
+		}
 	}
 
 	private void collectMultipleIndexesItems(@NonNull WorldRegion region) {
