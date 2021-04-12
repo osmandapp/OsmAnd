@@ -28,8 +28,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static net.osmand.AndroidUtils.isLayoutRtl;
-
 public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 
 	private final static String KEY_OVERLAYS = "overlays";
@@ -61,7 +59,7 @@ public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 
 	@Override
 	public String getSelectedItem(OsmandApplication app) {
-		return app.getSettings().MAP_OVERLAY.get();
+		return app.getSettings().MAP_OVERLAY.get() != null ? app.getSettings().MAP_OVERLAY.get() : KEY_NO_OVERLAY;
 	}
 
 	@Override

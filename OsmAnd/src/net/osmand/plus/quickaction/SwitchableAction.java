@@ -39,14 +39,6 @@ public abstract class SwitchableAction<T> extends QuickAction {
 
 	protected static final String KEY_DIALOG = "dialog";
 
-	private final static String MAP_STYLE_ACTION = "mapstyle.change";
-	private final static String MAP_SOURCE_ACTION = "mapsource.change";
-	private final static String MAP_OVERLAY_ACTION = "mapoverlay.change";
-	private final static String MAP_UNDERLAY_ACTION = "mapunderlay.change";
-
-	private final static String KEY_NO_OVERLAY = "no_overlay";
-	private final static String KEY_NO_UNDERLAY = "no_underlay";
-
 	private transient EditText title;
 
 	private transient Adapter adapter;
@@ -115,28 +107,10 @@ public abstract class SwitchableAction<T> extends QuickAction {
 
 	@Override
 	public String getActionText(OsmandApplication application) {
-		String currentSource = "";
-		switch (getActionType().getStringId()) {
-			case MAP_STYLE_ACTION:
-				currentSource = application.getSettings().RENDERER.get();
-				break;
-			case MAP_SOURCE_ACTION:
-				currentSource = application.getSettings().MAP_ONLINE_DATA.get()
-						? application.getSettings().MAP_TILE_SOURCES.get()
-						: application.getString(R.string.vector_data);
-				break;
-			case MAP_OVERLAY_ACTION:
-				currentSource = application.getSettings().MAP_OVERLAY.get() == null ? KEY_NO_OVERLAY
-						: application.getSettings().MAP_OVERLAY.get();
-				break;
-			case MAP_UNDERLAY_ACTION:
-				currentSource = application.getSettings().MAP_UNDERLAY.get() == null ? KEY_NO_UNDERLAY
-						: application.getSettings().MAP_UNDERLAY.get();
-				break;
-		}
+		String item = getSelectedItem(application);
 		String arrowDirection = isLayoutRtl(application) ? "\u25c0" : "\u25b6";
 
-		return application.getString(R.string.ltr_or_rtl_combine_via_space, getTranslatedItemName(application, currentSource), arrowDirection + "\u2026");
+		return application.getString(R.string.ltr_or_rtl_combine_via_space, getTranslatedItemName(application, item), arrowDirection + "\u2026");
 	}
 
 	@Override
