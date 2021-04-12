@@ -235,8 +235,6 @@ public class SwitchProfileAction extends SwitchableAction<String> {
 
 	@Override
 	public String getActionText(OsmandApplication application) {
-		String item = getSelectedItem(application);
-
-		return application.getString(R.string.ltr_or_rtl_combine_via_space, getTranslatedItemName(application, item), "\u2026");
+		return getName(application);
 	}
 }
