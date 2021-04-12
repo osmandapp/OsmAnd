@@ -228,6 +228,11 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	@Override
+	public boolean showMenuAction(@Nullable Object o) {
+		return false;
+	}
+
+	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> res, boolean unknownLocation) {
 		if (this.settings.SHOW_FAVORITES.get() && tileBox.getZoom() >= startZoom) {
 			getFavoriteFromPoint(tileBox, point, res);

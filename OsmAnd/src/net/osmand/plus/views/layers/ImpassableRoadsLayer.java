@@ -143,6 +143,11 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 	}
 
 	@Override
+	public boolean showMenuAction(@Nullable Object o) {
+		return false;
+	}
+
+	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o, boolean unknownLocation) {
 		if (tileBox.getZoom() >= START_ZOOM) {
 			int ex = (int) point.x;

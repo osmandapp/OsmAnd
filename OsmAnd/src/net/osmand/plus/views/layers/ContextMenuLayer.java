@@ -609,7 +609,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			String title = pointDescription == null ? "" : pointDescription.getName();
 			mAddGpxPointBottomSheetHelper.setTitle(title);
 			view.getAnimatedDraggingThread().startMoving(latLon.getLatitude(), latLon.getLongitude(), view.getZoom(), true);
-		} else {
+		} else if (provider == null || !provider.showMenuAction(object)) {
 			selectedObjectContextMenuProvider = provider;
 			hideVisibleMenues();
 			activity.getMapViewTrackingUtilities().setMapLinkedToLocation(false);
@@ -1106,6 +1106,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		boolean isObjectClickable(Object o);
 
 		boolean runExclusiveAction(@Nullable Object o, boolean unknownLocation);
+
+		boolean showMenuAction(@Nullable Object o);
 	}
 
 	public interface IMoveObjectProvider {
