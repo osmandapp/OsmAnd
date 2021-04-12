@@ -29,8 +29,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import static net.osmand.AndroidUtils.isLayoutRtl;
-
 public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 
 	public static final String LAYER_OSM_VECTOR = "LAYER_OSM_VECTOR";
