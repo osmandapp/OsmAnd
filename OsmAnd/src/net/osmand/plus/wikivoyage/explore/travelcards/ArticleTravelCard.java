@@ -107,10 +107,11 @@ public class ArticleTravelCard extends BaseTravelCard {
 					app.getTravelHelper().createGpxFile(article);
 					GPXFile gpxFile = article.getGpxFile();
 					if (saved) {
-						app.getSelectedGpxHelper().selectGpxFile(gpxFile, false, true);
+						if (gpxFile != null) {
+							app.getSelectedGpxHelper().selectGpxFile(gpxFile, false, true);
+						}
 						helper.removeArticleFromSaved(article);
 					} else {
-						app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, true);
 						helper.addArticleToSaved(article);
 					}
 					updateSaveButton(holder);

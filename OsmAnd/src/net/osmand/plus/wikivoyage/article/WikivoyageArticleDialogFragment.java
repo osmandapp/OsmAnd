@@ -254,17 +254,18 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 			saveBtn.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-						getMyApplication().getTravelHelper().createGpxFile(article);
-						GPXFile gpxFile = article.getGpxFile();
-						if (saved) {
+					getMyApplication().getTravelHelper().createGpxFile(article);
+					GPXFile gpxFile = article.getGpxFile();
+					if (saved) {
+						if (gpxFile != null) {
 							getMyApplication().getSelectedGpxHelper().selectGpxFile(gpxFile, false, true);
-							helper.removeArticleFromSaved(article);
-						} else {
-							getMyApplication().getSelectedGpxHelper().selectGpxFile(gpxFile, true, true);
-							helper.addArticleToSaved(article);
 						}
-						updateSaveButton();
+						helper.removeArticleFromSaved(article);
+					} else {
+						helper.addArticleToSaved(article);
 					}
+					updateSaveButton();
+				}
 			});
 		}
 	}
