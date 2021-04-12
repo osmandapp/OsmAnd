@@ -3,6 +3,7 @@ package net.osmand.plus.development;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
@@ -20,6 +21,7 @@ import net.osmand.AndroidNetworkUtils;
 import net.osmand.AndroidNetworkUtils.OnFilesUploadCallback;
 import net.osmand.AndroidNetworkUtils.OnRequestResultListener;
 import net.osmand.AndroidUtils;
+import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.ProgressImplementation;
 import net.osmand.plus.R;
@@ -281,56 +283,79 @@ public class TestBackupActivity extends OsmandActionBarActivity {
 	}
 
 	private void uploadFiles() {
+		LoadGpxTask loadGpxTask = new LoadGpxTask(this, new LoadGpxTask.OnLoadGpxListener() {
+			@Override
+			public void onLoadGpxDone(@NonNull List<GpxInfo> result) {
+				uploadFiles(result);
+			}
+		});
+		loadGpxTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, this);
+	}
+
+	private void uploadFiles(List<GpxInfo> gpxFiles) {
 		//{"status":"ok"}
+		final WeakReference<TestBackupActivity> activityRef = new WeakReference<>(this);
+
 		Map<String, String> params = new HashMap<>();
 		params.put("deviceid", getDeviceId());
 		params.put("accessToken", getAccessToken());
 		Map<String, String> headers = new HashMap<>();
 		headers.put("Accept-Encoding", "deflate, gzip");
-		final List<File> files = new ArrayList<>();
 
-		final ProgressImplementation progress = ProgressImplementation.createProgressDialog(this,
-				"Uploading files to server", "Files count: " + files.size(), ProgressDialog.STYLE_HORIZONTAL);
-
+		final Map<File, GpxInfo> gpxInfos = new HashMap<>();
+		for (GpxInfo gpxFile : gpxFiles) {
+			gpxInfos.put(gpxFile.file, gpxFile);
+		}
+		final List<File> files = new ArrayList<>(gpxInfos.keySet());
 		File favoritesFile = app.getFavorites().getExternalFile();
 		files.add(favoritesFile);
+
+		final ProgressImplementation progress = ProgressImplementation.createProgressDialog(this,
+				"Create backup", "Uploading " + files.size() + " file(s) to server", ProgressDialog.STYLE_HORIZONTAL);
 
 		AndroidNetworkUtils.uploadFilesAsync("https://osmand.net/userdata/upload-file", files, true, params, headers, new OnFilesUploadCallback() {
 			@Nullable
 			@Override
 			public Map<String, String> getAdditionalParams(@NonNull File file) {
+				GpxInfo gpxInfo = gpxInfos.get(file);
 				Map<String, String> additionaParams = new HashMap<>();
-				additionaParams.put("name", file.getName());
+				additionaParams.put("name", gpxInfo == null ? file.getName() : gpxInfo.getFileName(true));
 				additionaParams.put("type", Algorithms.getFileExtension(file));
 				return additionaParams;
 			}
 
 			@Override
 			public void onFileUploadProgress(@NonNull File file, int percent) {
-				if (percent < 100) {
-					progress.startTask(file.getName(), percent);
-				} else {
-					progress.finishTask();
+				Activity a = activityRef.get();
+				if (AndroidUtils.isActivityNotDestroyed(a)) {
+					if (percent < 100) {
+						progress.startTask(file.getName(), percent);
+					} else {
+						progress.finishTask();
+					}
 				}
 			}
 
 			@Override
 			public void onFilesUploadDone(@NonNull Map<File, String> errors) {
-				app.runInUIThread(new Runnable() {
-					@Override
-					public void run() {
-						try {
-							if (progress.getDialog().isShowing()) {
-								progress.getDialog().dismiss();
+				Activity a = activityRef.get();
+				if (AndroidUtils.isActivityNotDestroyed(a)) {
+					app.runInUIThread(new Runnable() {
+						@Override
+						public void run() {
+							try {
+								if (progress.getDialog().isShowing()) {
+									progress.getDialog().dismiss();
+								}
+							} catch (Exception e) {
+								//ignored
 							}
-						} catch (Exception e) {
-							//ignored
 						}
-					}
-				}, 300);
-				app.showToastMessage("Uploaded " + (files.size() - errors.size() + " files" +
-						(errors.size() > 0 ? ". Errors: " + errors.size() : "")));
-				loadBackupInfo();
+					}, 300);
+					app.showToastMessage("Uploaded " + (files.size() - errors.size() + " files" +
+							(errors.size() > 0 ? ". Errors: " + errors.size() : "")));
+					loadBackupInfo();
+				}
 			}
 		});
 	}
@@ -396,5 +421,174 @@ public class TestBackupActivity extends OsmandActionBarActivity {
 		final TypedValue typedvalueattr = new TypedValue();
 		activity.getTheme().resolveAttribute(attr, typedvalueattr, true);
 		return typedvalueattr.resourceId;
+	}
+
+	private static class LoadGpxTask extends AsyncTask<Activity, GpxInfo, List<GpxInfo>> {
+
+		private final OsmandApplication app;
+		private final OnLoadGpxListener listener;
+		private final WeakReference<Activity> activityRef;
+		private List<GpxInfo> result;
+		private ProgressImplementation progress;
+
+		interface OnLoadGpxListener {
+			void onLoadGpxDone(@NonNull List<GpxInfo> result);
+		}
+
+		LoadGpxTask(@NonNull Activity activity, @Nullable OnLoadGpxListener listener) {
+			this.activityRef = new WeakReference<>(activity);
+			this.app = (OsmandApplication) activity.getApplication();
+			this.listener = listener;
+		}
+
+		public List<GpxInfo> getResult() {
+			return result;
+		}
+
+		@NonNull
+		@Override
+		protected List<GpxInfo> doInBackground(Activity... params) {
+			List<GpxInfo> result = new ArrayList<>();
+			loadGPXData(app.getAppPath(IndexConstants.GPX_INDEX_DIR), result, this);
+			return result;
+		}
+
+		public void loadFile(GpxInfo... loaded) {
+			publishProgress(loaded);
+		}
+
+		@Override
+		protected void onPreExecute() {
+			Activity a = activityRef.get();
+			if (AndroidUtils.isActivityNotDestroyed(a)) {
+				progress = ProgressImplementation.createProgressDialog(a,
+						"Create backup", "Collecting gpx files...", ProgressDialog.STYLE_HORIZONTAL);
+			}
+		}
+
+		@Override
+		protected void onProgressUpdate(GpxInfo... values) {
+			Activity a = activityRef.get();
+			if (AndroidUtils.isActivityNotDestroyed(a)) {
+				progress.startTask(values[0].getFileName(true), -1);
+			}
+		}
+
+		@Override
+		protected void onPostExecute(@NonNull List<GpxInfo> result) {
+			this.result = result;
+			if (listener != null) {
+				listener.onLoadGpxDone(result);
+			}
+			Activity a = activityRef.get();
+			if (AndroidUtils.isActivityNotDestroyed(a)) {
+				progress.finishTask();
+				app.runInUIThread(new Runnable() {
+					@Override
+					public void run() {
+						try {
+							if (progress.getDialog().isShowing()) {
+								progress.getDialog().dismiss();
+							}
+						} catch (Exception e) {
+							//ignored
+						}
+					}
+				}, 300);
+			}
+		}
+
+		private void loadGPXData(File mapPath, List<GpxInfo> result, LoadGpxTask loadTask) {
+			if (mapPath.canRead()) {
+				List<GpxInfo> progress = new ArrayList<>();
+				loadGPXFolder(mapPath, result, loadTask, progress, "");
+				if (!progress.isEmpty()) {
+					loadTask.loadFile(progress.toArray(new GpxInfo[0]));
+				}
+			}
+		}
+
+		private void loadGPXFolder(File mapPath, List<GpxInfo> result, LoadGpxTask loadTask, List<GpxInfo> progress,
+								   String gpxSubfolder) {
+			File[] listFiles = mapPath.listFiles();
+			if (listFiles != null) {
+				for (File gpxFile : listFiles) {
+					if (gpxFile.isDirectory()) {
+						String sub = gpxSubfolder.length() == 0 ? gpxFile.getName() : gpxSubfolder + "/"
+								+ gpxFile.getName();
+						loadGPXFolder(gpxFile, result, loadTask, progress, sub);
+					} else if (gpxFile.isFile() && gpxFile.getName().toLowerCase().endsWith(IndexConstants.GPX_FILE_EXT)) {
+						GpxInfo info = new GpxInfo();
+						info.subfolder = gpxSubfolder;
+						info.file = gpxFile;
+						result.add(info);
+						progress.add(info);
+						if (progress.size() > 7) {
+							loadTask.loadFile(progress.toArray(new GpxInfo[0]));
+							progress.clear();
+						}
+					}
+				}
+			}
+		}
+	}
+
+	private static class GpxInfo {
+		public File file;
+		public String subfolder;
+
+		private String name = null;
+		private int sz = -1;
+		private String fileName = null;
+
+		public String getName() {
+			if (name == null) {
+				name = formatName(file.getName());
+			}
+			return name;
+		}
+
+		private String formatName(String name) {
+			int ext = name.lastIndexOf('.');
+			if (ext != -1) {
+				name = name.substring(0, ext);
+			}
+			return name.replace('_', ' ');
+		}
+
+		// Usage: AndroidUtils.formatSize(v.getContext(), getSize() * 1024l);
+		public int getSize() {
+			if (sz == -1) {
+				if (file == null) {
+					return -1;
+				}
+				sz = (int) ((file.length() + 512) >> 10);
+			}
+			return sz;
+		}
+
+		public long getFileDate() {
+			if (file == null) {
+				return 0;
+			}
+			return file.lastModified();
+		}
+
+		public String getFileName(boolean includeSubfolder) {
+			String result;
+			if (fileName != null) {
+				result = fileName;
+			} else {
+				if (file == null) {
+					result = "";
+				} else {
+					result = fileName = file.getName();
+				}
+			}
+			if (includeSubfolder && !Algorithms.isEmpty(subfolder)) {
+				result = subfolder + "/" + result;
+			}
+			return result;
+		}
 	}
 }
