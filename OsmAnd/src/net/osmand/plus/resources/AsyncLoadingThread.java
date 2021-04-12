@@ -41,9 +41,11 @@ public class AsyncLoadingThread extends Thread {
 		while (true) {
 			try {
 				updateBitmapTilesCache();
+				int cacheCounter = 0;
 				boolean tileLoaded = false;
 				boolean mapLoaded = false;
 				while (!requests.isEmpty()) {
+					cacheCounter++;
 					Object req = requests.pop();
 					if (req instanceof TileLoadDownloadRequest) {
 						TileLoadDownloadRequest r = (TileLoadDownloadRequest) req;
@@ -57,6 +59,10 @@ public class AsyncLoadingThread extends Thread {
 								r.mapLoadedListener.onMapLoaded(!mapLoaded);
 							}
 						}
+					}
+					if (cacheCounter == 10) {
+						cacheCounter = 0;
+						updateBitmapTilesCache();
 					}
 				}
 				if (tileLoaded  || mapLoaded) {
