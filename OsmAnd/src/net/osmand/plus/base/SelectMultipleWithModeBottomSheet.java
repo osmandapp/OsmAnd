@@ -14,6 +14,8 @@ import java.util.List;
 
 public class SelectMultipleWithModeBottomSheet extends SelectMultipleItemsBottomSheet {
 
+	public static final String TAG = SelectMultipleWithModeBottomSheet.class.getSimpleName();
+
 	private List<RadioItem> modes;
 
 	@Override
