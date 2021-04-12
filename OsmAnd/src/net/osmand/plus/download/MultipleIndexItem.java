@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static net.osmand.plus.download.DownloadActivityType.SRTM_COUNTRY_FILE;
-import static net.osmand.plus.download.MultipleIndexesUiHelper.isBaseSRTMItem;
+import static net.osmand.plus.download.SelectIndexesUiHelper.isBaseSRTMItem;
 
 public class MultipleIndexItem extends DownloadItem {
 

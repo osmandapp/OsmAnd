@@ -41,8 +41,8 @@ import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadResourceGroup;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.download.MultipleIndexesUiHelper;
-import net.osmand.plus.download.MultipleIndexesUiHelper.SelectItemsToDownloadListener;
+import net.osmand.plus.download.SelectIndexesUiHelper;
+import net.osmand.plus.download.SelectIndexesUiHelper.SelectItemsToDownloadListener;
 import net.osmand.plus.download.MultipleIndexItem;
 import net.osmand.plus.download.ui.LocalIndexesFragment.LocalIndexOperationTask;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
@@ -56,9 +56,9 @@ import java.util.List;
 
 import static net.osmand.plus.download.DownloadActivityType.SRTM_COUNTRY_FILE;
 import static net.osmand.plus.download.DownloadActivityType.isSRTMItem;
-import static net.osmand.plus.download.MultipleIndexesUiHelper.getSRTMAbbrev;
-import static net.osmand.plus.download.MultipleIndexesUiHelper.isBaseSRTMItem;
-import static net.osmand.plus.download.MultipleIndexesUiHelper.isBaseSRTMMetricSystem;
+import static net.osmand.plus.download.SelectIndexesUiHelper.getSRTMAbbrev;
+import static net.osmand.plus.download.SelectIndexesUiHelper.isBaseSRTMItem;
+import static net.osmand.plus.download.SelectIndexesUiHelper.isBaseSRTMMetricSystem;
 
 public class ItemViewHolder {
 
@@ -523,7 +523,7 @@ public class ItemViewHolder {
 
 	private void selectIndexesToDownload(DownloadItem item) {
 		OsmandApplication app = context.getMyApplication();
-		MultipleIndexesUiHelper.showDialog(item, context, app, dateFormat, showRemoteDate,
+		SelectIndexesUiHelper.showDialog(item, context, app, dateFormat, showRemoteDate,
 				new SelectItemsToDownloadListener() {
 					@Override
 					public void onItemsToDownloadSelected(List<IndexItem> indexes) {

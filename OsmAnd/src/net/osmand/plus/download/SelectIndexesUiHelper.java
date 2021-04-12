@@ -1,6 +1,7 @@
 package net.osmand.plus.download;
 
 import android.content.Context;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,22 +12,28 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.base.SelectMultipleItemsBottomSheet;
-import net.osmand.plus.base.SelectMultipleItemsBottomSheet.OnApplySelectionListener;
-import net.osmand.plus.base.SelectMultipleItemsBottomSheet.OnRadioButtonSelectListener;
-import net.osmand.plus.base.SelectMultipleItemsBottomSheet.SelectableItem;
 import net.osmand.plus.base.SelectMultipleItemsBottomSheet.SelectionUpdateListener;
+import net.osmand.plus.base.SelectModeBottomSheet;
+import net.osmand.plus.base.SelectMultipleWithModeBottomSheet;
+import net.osmand.plus.base.SelectionBottomSheet;
+import net.osmand.plus.base.SelectionBottomSheet.OnApplySelectionListener;
+import net.osmand.plus.base.SelectionBottomSheet.OnUiInitializedListener;
+import net.osmand.plus.base.SelectionBottomSheet.SelectableItem;
 import net.osmand.plus.helpers.enums.MetricsConstants;
+import net.osmand.plus.widgets.MultiStateToggleButton.OnRadioItemClickListener;
+import net.osmand.plus.widgets.MultiStateToggleButton.RadioItem;
 import net.osmand.util.Algorithms;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static net.osmand.IndexConstants.BINARY_SRTM_MAP_INDEX_EXT;
 import static net.osmand.IndexConstants.BINARY_SRTM_MAP_INDEX_EXT_ZIP;
 import static net.osmand.plus.download.DownloadActivityType.SRTM_COUNTRY_FILE;
 
-public class MultipleIndexesUiHelper {
+public class SelectIndexesUiHelper {
 
 	public static void showDialog(@NonNull DownloadItem item,
 	                              @NonNull AppCompatActivity activity,
@@ -35,7 +42,11 @@ public class MultipleIndexesUiHelper {
 	                              boolean showRemoteDate,
 	                              @NonNull final SelectItemsToDownloadListener listener) {
 		if (item.getType() == SRTM_COUNTRY_FILE) {
-			showSRTMDialog(item, activity, app, dateFormat, showRemoteDate, listener);
+			if (item instanceof MultipleIndexItem) {
+				showMultipleSrtmDialog(item, activity, app, dateFormat, showRemoteDate, listener);
+			} else {
+				showSingleSrtmDialog(item, activity, app, dateFormat, showRemoteDate, listener);
+			}
 		} else if (item instanceof MultipleIndexItem) {
 			showBaseDialog((MultipleIndexItem) item, activity, app, dateFormat, showRemoteDate, listener);
 		}
@@ -70,24 +81,116 @@ public class MultipleIndexesUiHelper {
 		final SelectMultipleItemsBottomSheet dialog =
 				SelectMultipleItemsBottomSheet.showInstance(activity, allItems, selectedItems, true);
 
+		dialog.setUiInitializedListener(new OnUiInitializedListener() {
+			@Override
+			public void onUiInitialized() {
+				dialog.setTitle(app.getString(R.string.welmode_download_maps));
+			}
+		});
+
 		dialog.setSelectionUpdateListener(new SelectionUpdateListener() {
 			@Override
 			public void onSelectionUpdate() {
-				updateSize(app, dialog);
+				updateSize(app, dialog, true);
 			}
 		});
 		dialog.setOnApplySelectionListener(getOnApplySelectionListener(listener));
 	}
 
-	public static void showSRTMDialog(@NonNull final DownloadItem downloadItem,
-	                                  @NonNull AppCompatActivity activity,
-	                                  @NonNull final OsmandApplication app,
-	                                  @NonNull final DateFormat dateFormat,
-	                                  final boolean showRemoteDate,
-	                                  @NonNull final SelectItemsToDownloadListener listener) {
+	public static void showSingleSrtmDialog(@NonNull final DownloadItem downloadItem,
+	                                        @NonNull AppCompatActivity activity,
+	                                        @NonNull final OsmandApplication app,
+	                                        @NonNull final DateFormat dateFormat,
+	                                        final boolean showRemoteDate,
+	                                        @NonNull final SelectItemsToDownloadListener listener) {
+		List<IndexItem> allIndexes = getIndexesToDownload(downloadItem);
+		boolean baseSRTM = isBaseSRTMMetricSystem(app);
+
+		List<RadioItem> radioItems = new ArrayList<>();
+		final RadioItem meters = new RadioItem(Algorithms.capitalizeFirstLetter(app.getString(R.string.shared_string_meters)));
+		RadioItem feet = new RadioItem(Algorithms.capitalizeFirstLetter(app.getString(R.string.shared_string_feets)));
+		radioItems.add(meters);
+		radioItems.add(feet);
+		SelectableItem meterItem = null;
+		SelectableItem feetItem = null;
+		for (IndexItem indexItem : allIndexes) {
+			boolean baseItem = isBaseSRTMItem(indexItem);
+			SelectableItem selectableItem = new SelectableItem();
+			selectableItem.setTitle(indexItem.getVisibleName(app, app.getRegions(), false));
+			String size = indexItem.getSizeDescription(app);
+			size += " (" + getSRTMAbbrev(app, baseItem) + ")";
+			String date = indexItem.getDate(dateFormat, showRemoteDate);
+			String description = app.getString(R.string.ltr_or_rtl_combine_via_bold_point, size, date);
+			selectableItem.setDescription(description);
+			selectableItem.setIconId(indexItem.getType().getIconResource());
+			selectableItem.setObject(indexItem);
+			if (baseItem) {
+				meterItem = selectableItem;
+			} else {
+				feetItem = selectableItem;
+			}
+		}
+
+		final SelectableItem initMeter = meterItem;
+		final SelectableItem initFeet = feetItem;
+
+		final SelectModeBottomSheet dialog = SelectModeBottomSheet.showInstance(activity,
+				baseSRTM ? meterItem : feetItem, radioItems, true);
+
+		meters.setOnClickListener(new OnRadioItemClickListener() {
+			@Override
+			public boolean onRadioItemClick(RadioItem radioItem, View view) {
+				dialog.setPreviewItem(initMeter);
+				updateSize(app, dialog, false);
+				return true;
+			}
+		});
+
+		feet.setOnClickListener(new OnRadioItemClickListener() {
+			@Override
+			public boolean onRadioItemClick(RadioItem radioItem, View view) {
+				dialog.setPreviewItem(initFeet);
+
+				double sizeToDownload = getDownloadSizeInMb(Collections.singletonList(initFeet));
+				String size = DownloadItem.getFormattedMb(app, sizeToDownload);
+				String btnTitle = app.getString(R.string.shared_string_download);
+				if (sizeToDownload > 0) {
+					btnTitle = app.getString(R.string.ltr_or_rtl_combine_via_dash, btnTitle, size);
+				}
+				dialog.setApplyButtonTitle(btnTitle);
+				return true;
+			}
+		});
+
+		final RadioItem initRadio = baseSRTM ? meters : feet;
+		dialog.setUiInitializedListener(new OnUiInitializedListener() {
+			@Override
+			public void onUiInitialized() {
+				dialog.setTitle(app.getString(R.string.srtm_unit_format));
+				dialog.setDescription(app.getString(R.string.srtm_download_single_help_message));
+				double sizeToDownload = getDownloadSizeInMb(Collections.singletonList(initFeet));
+				String size = DownloadItem.getFormattedMb(app, sizeToDownload);
+				String btnTitle = app.getString(R.string.shared_string_download);
+				if (sizeToDownload > 0) {
+					btnTitle = app.getString(R.string.ltr_or_rtl_combine_via_dash, btnTitle, size);
+				}
+				dialog.setApplyButtonTitle(btnTitle);
+				dialog.setSelectedMode(initRadio);
+			}
+		});
+
+		dialog.setOnApplySelectionListener(getOnApplySelectionListener(listener));
+	}
+
+	public static void showMultipleSrtmDialog(@NonNull final DownloadItem downloadItem,
+	                                          @NonNull AppCompatActivity activity,
+	                                          @NonNull final OsmandApplication app,
+	                                          @NonNull final DateFormat dateFormat,
+	                                          final boolean showRemoteDate,
+	                                          @NonNull final SelectItemsToDownloadListener listener) {
 		List<SelectableItem> selectedItems = new ArrayList<>();
-		final List<SelectableItem> leftItems = new ArrayList<>();
-		final List<SelectableItem> rightItems = new ArrayList<>();
+		final List<SelectableItem> meterItems = new ArrayList<>();
+		final List<SelectableItem> feetItems = new ArrayList<>();
 		List<IndexItem> indexesToDownload = getIndexesToDownload(downloadItem);
 		boolean baseSRTM = isBaseSRTMMetricSystem(app);
 
@@ -115,9 +218,9 @@ public class MultipleIndexesUiHelper {
 			selectableItem.setObject(indexItem);
 
 			if (baseItem) {
-				leftItems.add(selectableItem);
+				meterItems.add(selectableItem);
 			} else {
-				rightItems.add(selectableItem);
+				feetItems.add(selectableItem);
 			}
 
 			if (indexesToDownload.contains(indexItem)
@@ -126,45 +229,48 @@ public class MultipleIndexesUiHelper {
 			}
 		}
 
-		String addDescription = app.getString(isListDialog(app, leftItems, rightItems)
-				? R.string.srtm_download_list_help_message : R.string.srtm_download_single_help_message);
-		final SelectMultipleItemsBottomSheet dialog = SelectMultipleItemsBottomSheet.showInstance(
-				activity, baseSRTM ? leftItems : rightItems, selectedItems, true,
-				addDescription, true, baseSRTM,
-				Algorithms.capitalizeFirstLetter(app.getString(R.string.shared_string_meters)),
-				Algorithms.capitalizeFirstLetter(app.getString(R.string.shared_string_feets)));
+		List<RadioItem> radioItems = new ArrayList<>();
+		RadioItem meters = new RadioItem(Algorithms.capitalizeFirstLetter(app.getString(R.string.shared_string_meters)));
+		RadioItem feet = new RadioItem(Algorithms.capitalizeFirstLetter(app.getString(R.string.shared_string_feets)));
+		final RadioItem selectedMode = isBaseSRTMItem(downloadItem) ? meters : feet;
+		radioItems.add(meters);
+		radioItems.add(feet);
+
+		final SelectMultipleWithModeBottomSheet dialog = SelectMultipleWithModeBottomSheet.showInstance(
+				activity, baseSRTM ? meterItems : feetItems, selectedItems, radioItems, true);
+
+		meters.setOnClickListener(new OnRadioItemClickListener() {
+			@Override
+			public boolean onRadioItemClick(RadioItem radioItem, View view) {
+//				dialog.recreateList(meterItems);
+				return true;
+			}
+		});
+
+		feet.setOnClickListener(new OnRadioItemClickListener() {
+			@Override
+			public boolean onRadioItemClick(RadioItem radioItem, View view) {
+//				dialog.recreateList(feetItems);
+				return true;
+			}
+		});
+
+		dialog.setUiInitializedListener(new OnUiInitializedListener() {
+			@Override
+			public void onUiInitialized() {
+				dialog.setTitle(app.getString(R.string.welmode_download_maps));
+				dialog.setSelectedMode(selectedMode);
+				dialog.setSecondaryDescription(app.getString(R.string.srtm_download_list_help_message));
+			}
+		});
 
 		dialog.setSelectionUpdateListener(new SelectionUpdateListener() {
 			@Override
 			public void onSelectionUpdate() {
-				updateSize(app, dialog);
+				updateSize(app, dialog, true);
 			}
 		});
 		dialog.setOnApplySelectionListener(getOnApplySelectionListener(listener));
-		dialog.setOnRadioButtonSelectListener(new OnRadioButtonSelectListener() {
-			@Override
-			public void onSelect(boolean leftButton) {
-				dialog.recreateList(leftButton ? leftItems : rightItems);
-				updateSize(app, dialog);
-			}
-		});
-		dialog.setSelectedItemsListener(new SelectedItemsListener() {
-			@Override
-			public List<SelectableItem> createSelectedItems(List<SelectableItem> currentAllItems, boolean baseSRTM) {
-				List<IndexItem> indexesToDownload = getIndexesToDownload(downloadItem);
-				List<SelectableItem> selectedItems = new ArrayList<>();
-
-				for (SelectableItem currentItem : currentAllItems) {
-					IndexItem indexItem = (IndexItem) currentItem.getObject();
-					boolean baseItem = isBaseSRTMItem(indexItem);
-					if (indexesToDownload.contains(indexItem)
-							&& (baseSRTM && baseItem || !baseSRTM && !baseItem)) {
-						selectedItems.add(currentItem);
-					}
-				}
-				return selectedItems;
-			}
-		});
 	}
 
 	private static OnApplySelectionListener getOnApplySelectionListener(final SelectItemsToDownloadListener listener) {
@@ -183,12 +289,12 @@ public class MultipleIndexesUiHelper {
 		};
 	}
 
-	private static void updateSize(OsmandApplication app, SelectMultipleItemsBottomSheet dialog) {
-		boolean isListDialog = dialog.isMultipleItem();
-		dialog.setTitle(app.getString(isListDialog ? R.string.welmode_download_maps : R.string.srtm_unit_format));
-		double sizeToDownload = getDownloadSizeInMb(dialog.getSelectedItems());
+	private static void updateSize(OsmandApplication app,
+	                               SelectionBottomSheet dialog,
+	                               boolean updateDescription) {
+		double sizeToDownload = getDownloadSizeInMb(dialog.getSelection());
 		String size = DownloadItem.getFormattedMb(app, sizeToDownload);
-		if (isListDialog) {
+		if (updateDescription) {
 			String total = app.getString(R.string.shared_string_total);
 			String description = app.getString(R.string.ltr_or_rtl_combine_via_colon, total, size);
 			dialog.setDescription(description);
@@ -197,12 +303,7 @@ public class MultipleIndexesUiHelper {
 		if (sizeToDownload > 0) {
 			btnTitle = app.getString(R.string.ltr_or_rtl_combine_via_dash, btnTitle, size);
 		}
-		dialog.setConfirmButtonTitle(btnTitle);
-	}
-
-	private static boolean isListDialog(OsmandApplication app,
-	                                    List<SelectableItem> leftItems, List<SelectableItem> rightItems) {
-		return (isBaseSRTMMetricSystem(app) ? leftItems : rightItems).size() > 1;
+		dialog.setApplyButtonTitle(btnTitle);
 	}
 
 	public static String getSRTMAbbrev(Context context, boolean base) {
@@ -266,7 +367,4 @@ public class MultipleIndexesUiHelper {
 		void onItemsToDownloadSelected(List<IndexItem> items);
 	}
 
-	public interface SelectedItemsListener {
-		List<SelectableItem> createSelectedItems(List<SelectableItem> currentAllItems, boolean base);
-	}
 }

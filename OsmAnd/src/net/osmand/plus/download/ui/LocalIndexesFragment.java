@@ -75,8 +75,8 @@ import java.util.Map;
 import java.util.Set;
 
 import static net.osmand.plus.download.DownloadActivityType.isSRTMItem;
-import static net.osmand.plus.download.MultipleIndexesUiHelper.getSRTMAbbrev;
-import static net.osmand.plus.download.MultipleIndexesUiHelper.isBaseSRTMItem;
+import static net.osmand.plus.download.SelectIndexesUiHelper.getSRTMAbbrev;
+import static net.osmand.plus.download.SelectIndexesUiHelper.isBaseSRTMItem;
 
 public class LocalIndexesFragment extends OsmandExpandableListFragment implements DownloadEvents,
 		OnMapSourceUpdateListener, RenameCallback {

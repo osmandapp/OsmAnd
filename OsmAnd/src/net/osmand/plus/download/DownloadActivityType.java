@@ -29,7 +29,7 @@ import java.util.Map;
 
 import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
 import static net.osmand.plus.activities.LocalIndexHelper.LocalIndexType.SRTM_DATA;
-import static net.osmand.plus.download.MultipleIndexesUiHelper.getSRTMExt;
+import static net.osmand.plus.download.SelectIndexesUiHelper.getSRTMExt;
 
 public class DownloadActivityType {
 	private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.US);
