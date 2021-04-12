@@ -81,12 +81,9 @@ public class AsyncLoadingThread extends Thread {
 			}
 		}
 		BitmapTilesCache bitmapTilesCache = resourceManger.getBitmapTilesCache();
-		if (maxCacheSize > 0 && maxCacheSize != bitmapTilesCache.getMaxCacheSize()) {
-			long freeMemory = Runtime.getRuntime().freeMemory() / (1024 * 1024L);
-			if ((freeMemory > 0 || maxCacheSize < bitmapTilesCache.getMaxCacheSize())) {
-				log.info("Bitmap tiles to load in memory : " + maxCacheSize);
-				bitmapTilesCache.setMaxCacheSize(maxCacheSize);
-			}
+		if (maxCacheSize > 0 && maxCacheSize * 1.2 < bitmapTilesCache.getMaxCacheSize()) {
+			log.info("Bitmap tiles to load in memory : " + maxCacheSize);
+			bitmapTilesCache.setMaxCacheSize(maxCacheSize);
 		}
 	}
 
