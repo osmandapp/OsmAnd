@@ -7,6 +7,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.map.ITileSource;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.plus.SQLiteTileSource;
+import net.osmand.plus.views.MapTileLayer;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -15,6 +16,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Map.Entry;
 import java.util.Stack;
 
 /**
@@ -38,6 +40,7 @@ public class AsyncLoadingThread extends Thread {
 	public void run() {
 		while (true) {
 			try {
+				updateBitmapTilesCache();
 				boolean tileLoaded = false;
 				boolean mapLoaded = false;
 				while (!requests.isEmpty()) {
@@ -65,6 +68,24 @@ public class AsyncLoadingThread extends Thread {
 				log.error(e, e);
 			} catch (RuntimeException e) {
 				log.error(e, e);
+			}
+		}
+	}
+
+	private void updateBitmapTilesCache() {
+		int maxCacheSize = 0;
+		for (Entry<MapTileLayer, Integer> entry : resourceManger.getMapTileLayerSizes().entrySet()) {
+			MapTileLayer layer = entry.getKey();
+			if (layer.isVisible()) {
+				maxCacheSize += entry.getValue();
+			}
+		}
+		BitmapTilesCache bitmapTilesCache = resourceManger.getBitmapTilesCache();
+		if (maxCacheSize > 0 && maxCacheSize != bitmapTilesCache.getMaxCacheSize()) {
+			long freeMemory = Runtime.getRuntime().freeMemory() / (1024 * 1024L);
+			if ((freeMemory > 0 || maxCacheSize < bitmapTilesCache.getMaxCacheSize())) {
+				log.info("Bitmap tiles to load in memory : " + maxCacheSize);
+				bitmapTilesCache.setMaxCacheSize(maxCacheSize);
 			}
 		}
 	}

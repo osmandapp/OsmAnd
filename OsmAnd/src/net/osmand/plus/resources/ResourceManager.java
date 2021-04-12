@@ -90,7 +90,6 @@ public class ResourceManager {
 	public static final String VECTOR_MAP = "#vector_map"; //$NON-NLS-1$
 	private static final String INDEXES_CACHE = "ind.cache";
 	public static final String DEFAULT_WIKIVOYAGE_TRAVEL_OBF = "Default_wikivoyage.travel.obf";
-	private static final int CACHE_SIZE_UPDATE_INTERVAL_MS = 10 * 1000;
 
 	private static final Log log = PlatformUtil.getLog(ResourceManager.class);
 	
@@ -101,8 +100,7 @@ public class ResourceManager {
 	private List<TilesCache> tilesCacheList = new ArrayList<>();
 	private BitmapTilesCache bitmapTilesCache;
 	private GeometryTilesCache geometryTilesCache;
-	private Map<MapTileLayer, Integer> mapTileLayerSizes = new HashMap<>();
-	private long lastCacheSizeUpdateTime;
+	private Map<MapTileLayer, Integer> mapTileLayerSizes = new ConcurrentHashMap<>();
 
 	private final OsmandApplication context;
 	private List<ResourceListener> resourceListeners = new ArrayList<>();
@@ -290,29 +288,16 @@ public class ResourceManager {
 		resourceListeners.remove(listener);
 	}
 
+	public Map<MapTileLayer, Integer> getMapTileLayerSizes() {
+		return mapTileLayerSizes;
+	}
+
 	public void setMapTileLayerSizes(MapTileLayer layer, int tiles) {
 		mapTileLayerSizes.put(layer, tiles);
-		updateBitmapTilesCache();
 	}
 
 	public void removeMapTileLayerSize(MapTileLayer layer) {
 		mapTileLayerSizes.remove(layer);
-		updateBitmapTilesCache();
-	}
-
-	private void updateBitmapTilesCache() {
-		if (System.currentTimeMillis() - lastCacheSizeUpdateTime > CACHE_SIZE_UPDATE_INTERVAL_MS) {
-			lastCacheSizeUpdateTime = System.currentTimeMillis();
-			int maxCacheSize = 0;
-			for (Integer layerTiles : mapTileLayerSizes.values()) {
-				maxCacheSize += layerTiles;
-			}
-			long freeMemory = Runtime.getRuntime().freeMemory() / (1024 * 1024L);
-			if (maxCacheSize != bitmapTilesCache.getMaxCacheSize() && (freeMemory > 0 || maxCacheSize < bitmapTilesCache.getMaxCacheSize())) {
-				log.info("Bitmap tiles to load in memory : " + maxCacheSize);
-				bitmapTilesCache.setMaxCacheSize(maxCacheSize);
-			}
-		}
 	}
 
 	public void resetStoreDirectory() {
