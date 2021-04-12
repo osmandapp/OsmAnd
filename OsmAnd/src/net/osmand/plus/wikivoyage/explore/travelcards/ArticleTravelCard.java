@@ -23,8 +23,6 @@ import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
 
-import static net.osmand.GPXUtilities.GPXFile;
-
 public class ArticleTravelCard extends BaseTravelCard {
 
 	public static final int TYPE = 2;
@@ -94,8 +92,6 @@ public class ArticleTravelCard extends BaseTravelCard {
 
 	private void updateSaveButton(final ArticleTravelVH holder) {
 		if (article != null) {
-			article = app.getTravelHelper().getArticleById(article.generateIdentifier(), article.getLang(), true,
-					null);
 			final TravelLocalDataHelper helper = app.getTravelHelper().getBookmarksHelper();
 			final boolean saved = helper.isArticleSaved(article);
 			Drawable icon = getActiveIcon(saved ? R.drawable.ic_action_read_later_fill : R.drawable.ic_action_read_later);
@@ -104,16 +100,7 @@ public class ArticleTravelCard extends BaseTravelCard {
 			holder.rightButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					app.getTravelHelper().createGpxFile(article);
-					GPXFile gpxFile = article.getGpxFile();
-					if (saved) {
-						if (gpxFile != null) {
-							app.getSelectedGpxHelper().selectGpxFile(gpxFile, false, true);
-						}
-						helper.removeArticleFromSaved(article);
-					} else {
-						helper.addArticleToSaved(article);
-					}
+					app.getTravelHelper().saveOrRemoveArticle(article, !saved);
 					updateSaveButton(holder);
 				}
 			});

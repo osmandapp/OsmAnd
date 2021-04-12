@@ -246,24 +246,15 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 
 	private void updateSaveButton() {
 		if (article != null) {
-			final TravelLocalDataHelper helper = getMyApplication().getTravelHelper().getBookmarksHelper();
-			final boolean saved = helper.isArticleSaved(article);
+			final TravelHelper helper = getMyApplication().getTravelHelper();
+			final boolean saved = helper.getBookmarksHelper().isArticleSaved(article);
 			Drawable icon = getActiveIcon(saved ? R.drawable.ic_action_read_later_fill : R.drawable.ic_action_read_later);
 			saveBtn.setText(getString(saved ? R.string.shared_string_remove : R.string.shared_string_bookmark));
 			saveBtn.setCompoundDrawablesWithIntrinsicBounds(null, null, icon, null);
 			saveBtn.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					getMyApplication().getTravelHelper().createGpxFile(article);
-					GPXFile gpxFile = article.getGpxFile();
-					if (saved) {
-						if (gpxFile != null) {
-							getMyApplication().getSelectedGpxHelper().selectGpxFile(gpxFile, false, true);
-						}
-						helper.removeArticleFromSaved(article);
-					} else {
-						helper.addArticleToSaved(article);
-					}
+					helper.saveOrRemoveArticle(article, !saved);
 					updateSaveButton();
 				}
 			});

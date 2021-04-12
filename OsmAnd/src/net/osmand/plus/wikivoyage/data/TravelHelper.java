@@ -70,4 +70,6 @@ public interface TravelHelper {
 	String getSelectedTravelBookName();
 
 	String getWikivoyageFileName();
+
+	void saveOrRemoveArticle(@NonNull TravelArticle article, boolean save);
 }
