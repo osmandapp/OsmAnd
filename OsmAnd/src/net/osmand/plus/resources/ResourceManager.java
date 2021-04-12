@@ -308,7 +308,7 @@ public class ResourceManager {
 				maxCacheSize += layerTiles;
 			}
 			long freeMemory = Runtime.getRuntime().freeMemory() / (1024 * 1024L);
-			if (freeMemory > 0 || maxCacheSize < bitmapTilesCache.getMaxCacheSize()) {
+			if (maxCacheSize != bitmapTilesCache.getMaxCacheSize() && (freeMemory > 0 || maxCacheSize < bitmapTilesCache.getMaxCacheSize())) {
 				log.info("Bitmap tiles to load in memory : " + maxCacheSize);
 				bitmapTilesCache.setMaxCacheSize(maxCacheSize);
 			}
