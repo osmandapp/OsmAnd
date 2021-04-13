@@ -101,7 +101,10 @@ public class MenuBuilder {
 	protected static final String[] arrowChars = new String[]{"=>", " - "};
 	protected final String NEAREST_WIKI_KEY = "nearest_wiki_key";
 	protected final String NEAREST_POI_KEY = "nearest_poi_key";
-	private static final int LIMIT = 10000;
+	private static final int POI_COUNT = 10;
+	private static final int MINIMUM_RADIUS = 100;
+	private static final int MAXIMUM_RADIUS = 1000;
+	private static final int FACTOR = 2;
 
 	protected MapActivity mapActivity;
 	protected MapContextMenu mapContextMenu;
@@ -1244,17 +1247,14 @@ public class MenuBuilder {
 		}
 
 		PoiUIFilter filter = getPoiFilterForType(nearestPoiType);
-		boolean isPoiFilter = nearestPoiType.equals(NEAREST_POI_KEY);
-		if (filter != null && nearestPoi.size() > 0) {
-			view.addView(createShowAllButton(context, filter));
+		if (filter != null && nearestAmenities.size() == POI_COUNT) {
+			view.addView(createShowOnMap(context, filter));
 		}
-		if (isPoiFilter && nearestPoi.size() == 0) {
-			view.addView(createSearchMoreButton(context, filter));
-		}
+		view.addView(createSearchMoreButton(context, filter));
 		return new CollapsableView(view, this, collapsed);
 	}
 
-	private View createShowAllButton(Context context, final PoiUIFilter filter) {
+	private View createShowOnMap(Context context, final PoiUIFilter filter) {
 		TextViewEx buttonShowAll = buildButtonInCollapsableView(context, false, false);
 		buttonShowAll.setText(app.getString(R.string.shared_string_show_on_map));
 		buttonShowAll.setOnClickListener(new View.OnClickListener() {
@@ -1400,18 +1400,15 @@ public class MenuBuilder {
 	}
 
 	private List<Amenity> getSortedAmenities(PoiUIFilter filter, final LatLon latLon) {
-		int radius = 250;
-		QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), radius);
+		QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), MINIMUM_RADIUS);
 
 		List<Amenity> nearestAmenities = getAmenities(rect, filter);
-		nearestAmenities.remove(amenity);
 
-		boolean isWikiFilter = filter.getFilterId().equals("std_osmwiki");
-
-		for (; nearestAmenities.size() < 10 && !isWikiFilter; radius += 10) {
+		for (int radius = MINIMUM_RADIUS; nearestAmenities.size() - 1 <= POI_COUNT && radius <= MAXIMUM_RADIUS; radius *= FACTOR) {
 			rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), radius);
 			nearestAmenities = getAmenities(rect, filter);
 		}
+		nearestAmenities.remove(amenity);
 
 		Collections.sort(nearestAmenities, new Comparator<Amenity>() {
 
@@ -1423,7 +1420,7 @@ public class MenuBuilder {
 			}
 		});
 
-		return nearestAmenities;
+		return nearestAmenities.subList(0, Math.min(POI_COUNT, nearestAmenities.size()));
 	}
 
 	private List<Amenity> getAmenities(QuadRect rect, PoiUIFilter filter) {
