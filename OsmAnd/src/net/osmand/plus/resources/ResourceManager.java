@@ -100,7 +100,7 @@ public class ResourceManager {
 	private List<TilesCache> tilesCacheList = new ArrayList<>();
 	private BitmapTilesCache bitmapTilesCache;
 	private GeometryTilesCache geometryTilesCache;
-	private Map<MapTileLayer, Integer> mapTileLayerSizes = new ConcurrentHashMap<>();
+	private List<MapTileLayerSize> mapTileLayerSizes = new ArrayList<>();
 
 	private final OsmandApplication context;
 	private List<ResourceListener> resourceListeners = new ArrayList<>();
@@ -121,7 +121,20 @@ public class ResourceManager {
 		ROUTING,
 		TRANSPORT_ROUTING
 	}
-	
+
+	public static class MapTileLayerSize {
+		final MapTileLayer layer;
+		Long markToGCTimestamp = null;
+		long activeTimestamp;
+		int tiles;
+
+		public MapTileLayerSize(MapTileLayer layer, int tiles, long activeTimestamp) {
+			this.layer = layer;
+			this.tiles = tiles;
+			this.activeTimestamp = activeTimestamp;
+		}
+	}
+
 	public static class BinaryMapReaderResource {
 		private BinaryMapIndexReader initialReader;
 		private File filename;
@@ -288,16 +301,41 @@ public class ResourceManager {
 		resourceListeners.remove(listener);
 	}
 
-	public Map<MapTileLayer, Integer> getMapTileLayerSizes() {
+	public List<MapTileLayerSize> getMapTileLayerSizes() {
 		return mapTileLayerSizes;
 	}
 
 	public void setMapTileLayerSizes(MapTileLayer layer, int tiles) {
-		mapTileLayerSizes.put(layer, tiles);
+		MapTileLayerSize layerSize = getMapTileLayerSize(layer);
+		if (layerSize != null) {
+			if (layerSize.markToGCTimestamp != null) {
+				layerSize.markToGCTimestamp = null;
+				layerSize.activeTimestamp = System.currentTimeMillis();
+			}
+			layerSize.tiles = tiles;
+		} else {
+			List<MapTileLayerSize> layerSizes = new ArrayList<>(mapTileLayerSizes);
+			layerSizes.add(new MapTileLayerSize(layer, tiles, System.currentTimeMillis()));
+			mapTileLayerSizes = layerSizes;
+		}
 	}
 
 	public void removeMapTileLayerSize(MapTileLayer layer) {
-		mapTileLayerSizes.remove(layer);
+		MapTileLayerSize layerSize = getMapTileLayerSize(layer);
+		if (layerSize != null) {
+			List<MapTileLayerSize> layerSizes = new ArrayList<>(mapTileLayerSizes);
+			layerSizes.remove(layerSize);
+			mapTileLayerSizes = layerSizes;
+		}
+	}
+
+	private MapTileLayerSize getMapTileLayerSize(MapTileLayer layer) {
+		for (MapTileLayerSize layerSize : mapTileLayerSizes) {
+			if (layerSize.layer == layer) {
+				return layerSize;
+			}
+		}
+		return null;
 	}
 
 	public void resetStoreDirectory() {
