@@ -3826,4 +3826,5 @@
     <string name="poi_content_beer">المحتوى: بيرة</string>
     <string name="poi_content_wine">المحتوى: نبيذ</string>
     <string name="poi_pawnbroker">مقرض مال</string>
+    <string name="poi_bay_filter">نوع الخليج</string>
 </resources>

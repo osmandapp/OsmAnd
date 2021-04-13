@@ -110,7 +110,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 		String item = getSelectedItem(application);
 		String arrowDirection = isLayoutRtl(application) ? "\u25c0" : "\u25b6";
 
-		return application.getString(R.string.ltr_or_rtl_combine_via_space, getTranslatedItemName(application, item), arrowDirection + "\u2026");
+		return getTranslatedItemName(application, item) + arrowDirection + "\u2026";
 	}
 
 	@Override

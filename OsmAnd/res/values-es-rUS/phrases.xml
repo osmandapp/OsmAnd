@@ -3924,4 +3924,6 @@
     <string name="poi_karate">Kárate</string>
     <string name="poi_hoops">Aros</string>
     <string name="poi_camp_pitch">Parcela de campamento</string>
+    <string name="poi_office_diplomatic">Oficina diplomática</string>
+    <string name="poi_bay_filter">Tipo de bahía</string>
 </resources>

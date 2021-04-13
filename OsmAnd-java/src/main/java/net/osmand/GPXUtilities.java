@@ -328,6 +328,16 @@ public class GPXUtilities {
 			}
 		}
 
+		public void setColor(ColorizationType type, int color) {
+			if (type == ColorizationType.SPEED) {
+				speedColor = color;
+			} else if (type == ColorizationType.ELEVATION) {
+				altitudeColor = color;
+			} else if (type == ColorizationType.SLOPE) {
+				slopeColor = color;
+			}
+		}
+
 		public String getBackgroundType() {
 			return getExtensionsToRead().get(BACKGROUND_TYPE_EXTENSION);
 		}
@@ -1100,6 +1110,15 @@ public class GPXUtilities {
 				Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
 		updateBounds(trackBounds, pts, 0);
 
+		return trackBounds;
+	}
+
+	public static QuadRect calculateTrackBounds(List<TrkSegment> segments) {
+		QuadRect trackBounds = new QuadRect(Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY,
+				Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
+		for (TrkSegment segment : segments) {
+			updateBounds(trackBounds, segment.points, 0);
+		}
 		return trackBounds;
 	}
 

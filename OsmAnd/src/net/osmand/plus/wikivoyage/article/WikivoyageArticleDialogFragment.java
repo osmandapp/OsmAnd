@@ -69,9 +69,9 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 	private static final String SELECTED_LANG_KEY = "selected_lang";
 
 	private static final String EMPTY_URL = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4//";
-	
+
 	private static final int MENU_ITEM_SHARE = 0;
-	
+
 	private TravelArticleIdentifier articleId;
 	private ArrayList<String> langs;
 	private String selectedLang;
@@ -246,23 +246,16 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 
 	private void updateSaveButton() {
 		if (article != null) {
-			final TravelLocalDataHelper helper = getMyApplication().getTravelHelper().getBookmarksHelper();
-			final boolean saved = helper.isArticleSaved(article);
+			final TravelHelper helper = getMyApplication().getTravelHelper();
+			final boolean saved = helper.getBookmarksHelper().isArticleSaved(article);
 			Drawable icon = getActiveIcon(saved ? R.drawable.ic_action_read_later_fill : R.drawable.ic_action_read_later);
 			saveBtn.setText(getString(saved ? R.string.shared_string_remove : R.string.shared_string_bookmark));
 			saveBtn.setCompoundDrawablesWithIntrinsicBounds(null, null, icon, null);
 			saveBtn.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					if (article != null) {
-						if (saved) {
-							helper.removeArticleFromSaved(article);
-						} else {
-							getMyApplication().getTravelHelper().createGpxFile(article);
-							helper.addArticleToSaved(article);
-						}
-						updateSaveButton();
-					}
+					helper.saveOrRemoveArticle(article, !saved);
+					updateSaveButton();
 				}
 			});
 		}

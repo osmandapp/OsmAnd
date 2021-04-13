@@ -56,10 +56,10 @@ import static net.osmand.GPXUtilities.WptPt;
 import static net.osmand.GPXUtilities.writeGpxFile;
 import static net.osmand.plus.helpers.GpxUiHelper.getGpxTitle;
 import static net.osmand.plus.wikivoyage.data.PopularArticles.ARTICLES_PER_PAGE;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.ACTIVITY_TYPE;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.DIFF_ELE_DOWN;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.DIFF_ELE_UP;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.DISTANCE;
-import static net.osmand.plus.wikivoyage.data.TravelGpx.ACTIVITY_TYPE;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.USER;
 import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 
@@ -1027,6 +1027,15 @@ public class TravelObfHelper implements TravelHelper {
 	@Override
 	public String getWikivoyageFileName() {
 		return WORLD_WIKIVOYAGE_FILE_NAME;
+	}
+
+	@Override
+	public void saveOrRemoveArticle(@NonNull TravelArticle article, boolean save) {
+		if (save) {
+			localDataHelper.addArticleToSaved(article);
+		} else {
+			localDataHelper.removeArticleFromSaved(article);
+		}
 	}
 
 	private class GpxFileReader extends AsyncTask<Void, Void, GPXFile> {

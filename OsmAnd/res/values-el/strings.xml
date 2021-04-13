@@ -1435,14 +1435,14 @@
     <string name="lang_ga">Ιρλανδικά</string>
     <string name="lang_la">Λατινικά</string>
     <string name="lang_ku">Κουρδικά</string>
-    <string name="lang_ta">Ταμιλικά</string>
+    <string name="lang_ta">Ταμίλ</string>
     <string name="lang_lb">Λουξεμβουργιανά</string>
     <string name="lang_os">Οσσετιανικά</string>
     <string name="lang_eo">Εσπεράντο</string>
     <string name="lang_es_ar">Ισπανικά (Αργεντινής)</string>
     <string name="lang_nb">Νορβηγικά Bokmål</string>
     <string name="lang_th">Ταϊλανδικά</string>
-    <string name="lang_te">τελούγκου</string>
+    <string name="lang_te">Τελούγκου</string>
     <string name="lang_nn">Νορβηγικά Nynorsk</string>
     <string name="lang_et">Εσθονικά</string>
     <string name="archive_wikipedia_data">Έχετε παλιά ασύμβατα δεδομένα της βικιπαίδειας. Να αρχειοθετηθούν;</string>
@@ -1709,7 +1709,7 @@
     <string name="today">Σήμερα</string>
     <string name="yesterday">Χθές</string>
     <string name="last_seven_days">Τις τελευταίες 7 ημέρες</string>
-    <string name="this_year">Εφέτος</string>
+    <string name="this_year">Αυτό το έτος</string>
     <string name="move_all_to_history">Μετακίνηση όλων στο ιστορικό</string>
     <string name="show_direction">Ένδειξη απόστασης</string>
     <string name="sort_by">Ταξινόμηση κατά</string>
@@ -2205,7 +2205,7 @@
     <string name="lang_bn">Βεγγαλέζικα</string>
     <string name="lang_tl">Ταγκαλόγκ</string>
     <string name="lang_br">Βρετονικά</string>
-    <string name="lang_ml">Μαλαγιαλαμικά</string>
+    <string name="lang_ml">Μαλαγιάλαμ</string>
     <string name="lang_lo">Λαοϊκά</string>
     <string name="share_geo">γεω:</string>
     <string name="routing_attr_avoid_shuttle_train_name">Αποφυγή τρένου κλειστής διαδρομής</string>
@@ -2582,9 +2582,9 @@
     <string name="update_time">Χρόνος ενημέρωσης</string>
     <string name="updates_size">Μέγεθος ενημέρωσης</string>
     <string name="last_map_change">Τελευταία αλλαγή χάρτη: %s</string>
-    <string name="hourly">Ανά ώρα</string>
-    <string name="daily">Ανά ημέρα</string>
-    <string name="weekly">Ανά εβδομάδα</string>
+    <string name="hourly">Ωριαία</string>
+    <string name="daily">Ημερήσια</string>
+    <string name="weekly">Εβδομαδιαία</string>
     <string name="morning">Πρωί</string>
     <string name="night">Βράδυ</string>
     <string name="select_month_and_country">Μήνας και χώρα:</string>

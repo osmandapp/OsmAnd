@@ -3853,7 +3853,7 @@
     <string name="subscription_on_hold_title">Áskrift að OsmAnd Live er í biðstöðu</string>
     <string name="login_account">Notandaaðgangur</string>
     <string name="login_open_street_map_org">Skrá inn á OpenStreetMap.org</string>
-    <string name="markers_history">Vinnsluferill kortamerkja</string>
+    <string name="markers_history">Ferill kortamerkja</string>
     <string name="message_you_need_add_two_points_to_show_graphs">Bættu við a.m.k. tveimur punktum</string>
     <string name="navigate_point_mgrs">MGRS</string>
     <string name="subscription_paused_title">Áskrift að OsmAnd Live hefur verið sett í bið</string>
@@ -4086,4 +4086,9 @@
     <string name="on_hold">Í bið</string>
     <string name="expired">Útrunnið</string>
     <string name="update_all_maps_added">Uppfæra öll kort sem bætt hefur verið við %1$s\?</string>
+    <string name="exit_number">Númer útkeyrslu</string>
+    <string name="output">Útkeyrsla</string>
+    <string name="announce_when_exceeded">Tilkynna þegar farið er yfir</string>
+    <string name="user_points">Punktar notanda</string>
+    <string name="map_quick_action_pattern">%1$s → …</string>
 </resources>

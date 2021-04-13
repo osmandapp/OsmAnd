@@ -124,7 +124,7 @@ public class MapActivityKeyListener implements KeyEvent.Callback {
 			if (keyCode == KeyEvent.KEYCODE_MINUS) {
 				mapActivity.changeZoom(-1);
 				return true;
-			} else if (keyCode == KeyEvent.KEYCODE_PLUS) {
+			} else if (keyCode == KeyEvent.KEYCODE_PLUS || keyCode == KeyEvent.KEYCODE_EQUALS) {
 				mapActivity.changeZoom(1);
 				return true;
 			}
