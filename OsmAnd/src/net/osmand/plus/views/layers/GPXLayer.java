@@ -1118,9 +1118,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			if (!Algorithms.isEmpty(trackPoints)) {
 				MapActivity mapActivity = (MapActivity) view.getContext();
 				SelectedGpxPoint selectedGpxPoint = (SelectedGpxPoint) trackPoints.get(0);
-				WptPt wptPt = selectedGpxPoint.getSelectedPoint();
+				LatLon latLon = tileBox.getLatLonFromPixel(point.x, point.y);
 				PointDescription description = getObjectName(selectedGpxPoint);
-				mapActivity.getContextMenu().show(new LatLon(wptPt.lat, wptPt.lon), description, selectedGpxPoint);
+				mapActivity.getContextMenu().show(latLon, description, selectedGpxPoint);
 				return true;
 			}
 		}
