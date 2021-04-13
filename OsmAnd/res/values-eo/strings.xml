@@ -219,7 +219,7 @@
     <string name="favorite_category_select">Elekti kategorion</string>
     <string name="default_speed_system_descr">Difini unuon de rapido.</string>
     <string name="default_speed_system">Unuo de rapido</string>
-    <string name="nm">marmejlo</string>
+    <string name="nm">nmi</string>
     <string name="si_nm">Marmejloj</string>
     <string name="si_kmh">Kilometroj en horo</string>
     <string name="si_mph">Mejloj en horo</string>
@@ -3163,7 +3163,7 @@
     <string name="voice_announces_descr">Navigaj gvidiloj kaj anoncoj</string>
     <string name="voice_announces">Voĉaj anoncoj</string>
     <string name="screen_alerts">Ekranaj avertoj</string>
-    <string name="route_parameters_descr">Agordi parametroj de navigo</string>
+    <string name="route_parameters_descr">Agordi parametrojn de navigo</string>
     <string name="route_parameters">Parametroj de navigo</string>
     <string name="application_profile_changed">Profilo de aplikaĵo ŝanĝita al “%s”</string>
     <string name="logcat_buffer">Bufro logcat</string>

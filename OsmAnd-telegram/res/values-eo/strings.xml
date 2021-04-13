@@ -32,7 +32,7 @@
     <string name="shared_string_welcome">Bonvenon</string>
     <string name="m">m</string>
     <string name="km">km</string>
-    <string name="nm">marmejlo</string>
+    <string name="nm">nmi</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
     <string name="my_location">Mia loko</string>
@@ -97,4 +97,26 @@
     <string name="install_osmand">Instali OsmAnd</string>
     <string name="shared_string_suggested">Sugestataj</string>
     <string name="average_speed">Mezuma rapido</string>
+    <string name="shared_string_back">Reen</string>
+    <string name="shared_string_share">Kunhavigi</string>
+    <string name="shared_string_install">Instali</string>
+    <string name="phone_number_descr">Telefonnumero en internacia formo</string>
+    <string name="phone_number_title">Telefonnumero</string>
+    <string name="shared_string_password">Pasvorto</string>
+    <string name="nm_h">kn</string>
+    <string name="mile">mi</string>
+    <string name="foot">ft</string>
+    <string name="yard">yd</string>
+    <string name="mile_per_hour">mi/h</string>
+    <string name="si_nm_h">Marmejloj en horo (nodoj)</string>
+    <string name="shared_string_sort_by">Ordigi laŭ</string>
+    <string name="shared_string_sort">Ordigi</string>
+    <string name="by_group">Laŭ grupo</string>
+    <string name="by_name">Laŭ nomo</string>
+    <string name="by_distance">Laŭ distanco</string>
+    <string name="shared_string_name">Nomo</string>
+    <string name="shared_string_enabled">Aktiva</string>
+    <string name="connecting_to_the_internet">Konektante al Interreto</string>
+    <string name="initializing">Komencante</string>
+    <string name="sending_location_messages">Sendante lokon</string>
 </resources>
