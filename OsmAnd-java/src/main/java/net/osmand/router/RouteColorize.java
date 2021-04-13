@@ -106,6 +106,10 @@ public class RouteColorize {
         }
         for (Track t : gpxFile.tracks) {
             for (TrkSegment ts : t.segments) {
+                if (ts.generalSegment || ts.points.size() < 2) {
+                    continue;
+                }
+
                 for (WptPt p : ts.points) {
                     latList.add(p.lat);
                     lonList.add(p.lon);
