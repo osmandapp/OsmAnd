@@ -301,8 +301,8 @@
     <string name="error_reading_gpx">Impossible de lire les données GPX.</string>
     <string name="vector_data">Cartes vectorielles OSM</string>
     <string name="transport_context_menu">Recherche de transport pour cet arrêt</string>
-    <string name="poi_context_menu_modify">Modifier point d\'intérêt</string>
-    <string name="poi_context_menu_delete">Supprimer point d\'intérêt</string>
+    <string name="poi_context_menu_modify">Modifier le point d\'intérêt</string>
+    <string name="poi_context_menu_delete">Supprimer le point d\'intérêt</string>
     <string name="rotate_map_compass_opt">D\'après la boussole</string>
     <string name="rotate_map_bearing_opt">Dans la direction du déplacement</string>
     <string name="rotate_map_none_opt">Aucune rotation (nord toujours en haut)</string>
