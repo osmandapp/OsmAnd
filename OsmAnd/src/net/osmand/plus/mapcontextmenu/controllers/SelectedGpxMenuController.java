@@ -42,12 +42,9 @@ public class SelectedGpxMenuController extends MenuController {
 		leftTitleButtonController = new TitleButtonController() {
 			@Override
 			public void buttonPressed() {
-				mapContextMenu.hide(false);
-				WptPt wptPt = selectedGpxPoint.selectedPoint;
-				LatLon latLon = new LatLon(wptPt.lat, wptPt.lon);
+				mapContextMenu.close();
 				SelectedGpxFile selectedGpxFile = selectedGpxPoint.getSelectedGpxFile();
-				String path = selectedGpxFile.getGpxFile().path;
-				TrackMenuFragment.showInstance(mapActivity, path, selectedGpxFile.isShowCurrentTrack(), latLon, null, null);
+				TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint, null, null, false);
 			}
 		};
 		leftTitleButtonController.caption = mapActivity.getString(R.string.shared_string_open_track);
@@ -215,11 +212,15 @@ public class SelectedGpxMenuController extends MenuController {
 
 	public static class SelectedGpxPoint {
 
+		private final WptPt prevPoint;
+		private final WptPt nextPoint;
 		private final WptPt selectedPoint;
 		private final SelectedGpxFile selectedGpxFile;
 		private final float bearing;
 
-		public SelectedGpxPoint(SelectedGpxFile selectedGpxFile, WptPt selectedPoint, float bearing) {
+		public SelectedGpxPoint(SelectedGpxFile selectedGpxFile, WptPt selectedPoint, WptPt prevPoint, WptPt nextPoint, float bearing) {
+			this.prevPoint = prevPoint;
+			this.nextPoint = nextPoint;
 			this.selectedPoint = selectedPoint;
 			this.selectedGpxFile = selectedGpxFile;
 			this.bearing = bearing;
@@ -235,6 +236,14 @@ public class SelectedGpxMenuController extends MenuController {
 
 		public float getBearing() {
 			return bearing;
+		}
+
+		public WptPt getPrevPoint() {
+			return prevPoint;
+		}
+
+		public WptPt getNextPoint() {
+			return nextPoint;
 		}
 	}
 }

@@ -30,6 +30,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportStop;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
@@ -45,6 +46,7 @@ import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.geometry.PublicTransportGeometryWay;
 import net.osmand.plus.views.layers.geometry.PublicTransportGeometryWayContext;
 import net.osmand.plus.views.layers.geometry.RouteGeometryWay;
@@ -66,7 +68,7 @@ import java.util.Map;
 
 import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
 
-public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
+public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 
 	private static final Log log = PlatformUtil.getLog(RouteLayer.class);
 
@@ -104,6 +106,9 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 
 	private LayerDrawable projectionIcon;
 	private LayerDrawable previewIcon;
+
+	private int routeLineColor;
+	private Integer directionArrowsColor;
 
 	public RouteLayer(RoutingHelper helper) {
 		this.helper = helper;
@@ -326,7 +331,8 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 	                                  DrawSettings settings,
 	                                  RouteLineDrawInfo drawInfo) {
 		updateAttrs(settings, tileBox);
-		paintRouteLinePreview.setColor(getRouteLineColor(nightMode));
+		updateRouteColors(nightMode);
+		paintRouteLinePreview.setColor(getRouteLineColor());
 		paintRouteLinePreview.setStrokeWidth(getRouteLineWidth(tileBox));
 
 		int centerX = drawInfo.getCenterX();
@@ -418,6 +424,22 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 
 	@ColorInt
 	public int getRouteLineColor(boolean night) {
+		updateRouteColors(night);
+		return routeLineColor;
+	}
+
+	@ColorInt
+	public int getRouteLineColor() {
+		return routeLineColor;
+	}
+
+	@Nullable
+	@ColorInt
+	public Integer getDirectionArrowsColor() {
+		return directionArrowsColor;
+	}
+
+	public void updateRouteColors(boolean night) {
 		Integer color;
 		if (routeLineDrawInfo != null) {
 			color = routeLineDrawInfo.getColor(night);
@@ -429,10 +451,13 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 			color = storedValue != 0 ? storedValue : null;
 		}
 		if (color == null) {
+			directionArrowsColor = null;
 			updateAttrs(new DrawSettings(night), view.getCurrentRotatedTileBox());
 			color = attrs.paint.getColor();
+		} else if (routeLineColor != color) {
+			directionArrowsColor = UiUtilities.getContrastColor(view.getContext(), color, false);
 		}
-		return color;
+		routeLineColor = color;
 	}
 
 	private float getRouteLineWidth(@NonNull RotatedTileBox tileBox) {
@@ -500,7 +525,8 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 			boolean straight = route.getRouteService() == RouteService.STRAIGHT;
 			publicTransportRouteGeometry.clearRoute();
 			routeGeometry.updateRoute(tb, route);
-			routeGeometry.setRouteStyleParams(getRouteLineColor(nightMode), getRouteLineWidth(tb));
+			updateRouteColors(nightMode);
+			routeGeometry.setRouteStyleParams(getRouteLineColor(), getRouteLineWidth(tb), getDirectionArrowsColor());
 			if (directTo) {
 				routeGeometry.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
 						null, 0);
@@ -777,7 +803,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 	}
 
 	@Override
-	public boolean disableLongPressOnMap() {
+	public boolean disableLongPressOnMap(PointF point, RotatedTileBox tileBox) {
 		return isInRouteLineAppearanceMode();
 	}
 
@@ -788,6 +814,11 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 
 	@Override
 	public boolean runExclusiveAction(@Nullable Object o, boolean unknownLocation) {
+		return false;
+	}
+
+	@Override
+	public boolean showMenuAction(@Nullable Object o) {
 		return false;
 	}
 }

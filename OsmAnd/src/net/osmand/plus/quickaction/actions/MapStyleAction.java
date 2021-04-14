@@ -54,7 +54,7 @@ public class MapStyleAction extends SwitchableAction<String> {
 		if (current != null) {
 			return current.getName();
 		} else {
-			return  RendererRegistry.DEFAULT_RENDER;
+			return RendererRegistry.DEFAULT_RENDER;
 		}
 	}
 
@@ -77,7 +77,7 @@ public class MapStyleAction extends SwitchableAction<String> {
 			executeWithParams(activity, nextStyle);
 		} else {
 			Toast.makeText(activity, R.string.quick_action_need_to_add_item_to_list,
-				Toast.LENGTH_LONG).show();
+					Toast.LENGTH_LONG).show();
 		}
 
 	}
@@ -246,10 +246,4 @@ public class MapStyleAction extends SwitchableAction<String> {
 				: filters.get(0);
 	}
 
-	@Override
-	public String getActionText(OsmandApplication application) {
-		String currentSource = application.getSettings().RENDERER.get();
-
-		return application.getString(R.string.map_quick_action_pattern, getTranslatedItemName(application, currentSource));
-	}
 }

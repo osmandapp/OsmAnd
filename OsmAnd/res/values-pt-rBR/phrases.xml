@@ -3895,4 +3895,27 @@
     <string name="poi_local_ref">Geodesia</string>
     <string name="poi_geodesist">Geodesia</string>
     <string name="poi_camp_pitch">Campo de acampamento</string>
+    <string name="poi_horseshoes">Ferradura</string>
+    <string name="poi_fencing">Esgrima</string>
+    <string name="poi_crossfit">Crossfit</string>
+    <string name="poi_cockfighting">Luta de galos</string>
+    <string name="poi_bullfighting">Tourada</string>
+    <string name="poi_bobsleigh">Bobsleigh</string>
+    <string name="poi_weightlifting">Halterofilismo</string>
+    <string name="poi_wakeboarding">Wakeboarding</string>
+    <string name="poi_biathlon">Biatlo</string>
+    <string name="poi_aikido">Aikido</string>
+    <string name="poi_water_ski">Polo aquático</string>
+    <string name="poi_water_polo">Polo aquático</string>
+    <string name="poi_wrestling">Luta profissional</string>
+    <string name="poi_taekwondo">Taekwondo</string>
+    <string name="poi_table_soccer">Futebol de mesa</string>
+    <string name="poi_sumo">Sumo</string>
+    <string name="poi_speedway">Pista de corrida</string>
+    <string name="poi_snooker">Snooker</string>
+    <string name="poi_shot_put">Arremesso de peso</string>
+    <string name="poi_pilates">Pilates</string>
+    <string name="poi_jiu_jitsu">Jiu-jitsu</string>
+    <string name="poi_karate">Karatê</string>
+    <string name="poi_hoops">Aros</string>
 </resources>

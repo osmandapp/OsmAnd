@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.Metadata;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
@@ -25,6 +26,7 @@ import net.osmand.plus.myplaces.SegmentActionsListener;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.util.Algorithms;
 
+import static net.osmand.AndroidUtils.dpToPx;
 import static net.osmand.plus.myplaces.TrackActivityFragmentAdapter.getMetadataImageLink;
 import static net.osmand.plus.myplaces.TrackActivityFragmentAdapter.isGpxFileSelected;
 import static net.osmand.plus.track.OptionsCard.APPEARANCE_BUTTON_INDEX;
@@ -39,6 +41,7 @@ public class OverviewCard extends BaseCard {
 	private View appearanceButton;
 	private View editButton;
 	private View directionsButton;
+	private TextView description;
 	private final SegmentActionsListener actionsListener;
 	private final SelectedGpxFile selectedGpxFile;
 	private final GpxBlockStatisticsBuilder blockStatisticsBuilder;
@@ -70,6 +73,7 @@ public class OverviewCard extends BaseCard {
 		appearanceButton = view.findViewById(R.id.appearance_button);
 		editButton = view.findViewById(R.id.edit_button);
 		directionsButton = view.findViewById(R.id.directions_button);
+		description = view.findViewById(R.id.description);
 		RecyclerView blocksView = view.findViewById(R.id.recycler_overview);
 		blockStatisticsBuilder.setBlocksView(blocksView);
 
@@ -81,6 +85,10 @@ public class OverviewCard extends BaseCard {
 			initDirectionsButton(iconColorDef, iconColorPres);
 		}
 		blockStatisticsBuilder.initStatBlocks(actionsListener, getActiveColor());
+
+		if (blocksView.getVisibility() == View.VISIBLE && description.getVisibility() == View.VISIBLE) {
+			AndroidUtils.setPadding(description, 0, 0, 0, dpToPx(app, 12));
+		}
 	}
 
 	private GPXFile getGPXFile() {
@@ -142,7 +150,6 @@ public class OverviewCard extends BaseCard {
 			gpxFile.metadata = new Metadata();
 		}
 
-		TextView description = view.findViewById(R.id.description);
 		final String descriptionHtml = gpxFile.metadata.getDescription();
 		if (Algorithms.isBlank(descriptionHtml)) {
 			AndroidUiHelper.updateVisibility(description, false);

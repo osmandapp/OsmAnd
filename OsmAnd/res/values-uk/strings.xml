@@ -425,7 +425,7 @@
     <string name="fav_file_to_load_not_found">GPX-файл з Закладками не знайдено в {0}</string>
     <string name="fav_saved_sucessfully">Закладки збережено в {0}</string>
     <string name="no_fav_to_save">Відсутні точки Закладок для збереження</string>
-    <string name="shared_string_import">Імпортувати</string>
+    <string name="shared_string_import">Імпорт</string>
     <string name="error_occurred_loading_gpx">Не вдалося завантажити GPX.</string>
     <string name="send_report">Надіслати звіт</string>
     <string name="none_region_found">Не знайдено завантаженої мапи на карті пам\'яті.</string>
@@ -3851,7 +3851,7 @@
     <string name="login_account">Обліковий запис</string>
     <string name="user_login">Ім\'я користувача</string>
     <string name="sign_in_with_open_street_map">Увійти за допомогою OpenStreetMap</string>
-    <string name="markers_history">Історія маркерів</string>
+    <string name="markers_history">Історія позначок</string>
     <string name="send_files_to_openstreetmap">Надіслати файл GPX на OpenStreetMap</string>
     <string name="enter_text_separated">Введіть мітки через коми.</string>
     <string name="gpx_upload_public_visibility_descr">«Загальнодоступне» означає, що трасування показано загальнодоступно у ваших GPS-трасуваннях та у загальнодоступних списках GPS-трасування, а також у загальнодоступному списку трасування з позначками часу в необробленому вигляді.. Дані, що подаються через API, не посилаються на вашу сторінку трасування. Мітки часу точок трасування недоступні через загальнодоступний API GPS і не впорядковані хронологічно.</string>
@@ -4022,7 +4022,7 @@
     <string name="on_pause">Під час паузи</string>
     <string name="app_restart_required">Щоб застосувати деякі налаштування, потрібно перезапустити програму.</string>
     <string name="routing_attr_height_obstacles_description">Маршрут може уникнути крутих підйомів.</string>
-    <string name="quick_action_coordinates_widget_descr">Перемикач, щоб показати або приховати віджет Координати на мапі.</string>
+    <string name="quick_action_coordinates_widget_descr">Перемикач для показу або приховання віджета Координати на мапі.</string>
     <string name="map_widget_distance_by_tap">Відстань дотиком</string>
     <string name="latest_openstreetmap_update">Доступне найновіше оновлення OpenStreetMap:</string>
     <string name="updated">Оновлено: %s</string>
@@ -4080,4 +4080,8 @@
     <string name="on_hold">Утримується</string>
     <string name="expired">Термін дії закінчився</string>
     <string name="update_all_maps_added">Оновити всі мапи, додані до %1$s\?</string>
+    <string name="exit_number">Номер виходу</string>
+    <string name="announce_when_exceeded">Повідомляти про перевищення</string>
+    <string name="user_points">Користувацькі точки</string>
+    <string name="output">Вивід</string>
 </resources>

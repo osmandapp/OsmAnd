@@ -31,7 +31,7 @@ public class MultiProfileGeometryWayContext extends GeometryWayContext {
 
 	private RenderingLineAttributes multiProfileAttrs;
 
-	private Bitmap pointIcon;
+	private final Bitmap pointIcon;
 	private final Map<String, Bitmap> profileIconsBitmapCache;
 
 	public MultiProfileGeometryWayContext(Context ctx, UiUtilities iconsCache, float density) {
@@ -41,34 +41,12 @@ public class MultiProfileGeometryWayContext extends GeometryWayContext {
 		minIconMargin = density * 30;
 		circleSize = density * 70;
 		pointIconSize = density * 22f;
+		pointIcon = createPointIcon();
 	}
 
 	public void updatePaints(boolean nightMode, @NonNull RenderingLineAttributes multiProfileAttrs) {
 		this.multiProfileAttrs = multiProfileAttrs;
 		super.updatePaints(nightMode, multiProfileAttrs);
-	}
-
-	@Override
-	protected void recreateBitmaps() {
-		float density = getDensity();
-		float outerRadius = density * 11f;
-		float centerRadius = density * 10.5f;
-		float innerRadius = density * 6.5f;
-		float centerXY = pointIconSize / 2;
-
-		pointIcon = Bitmap.createBitmap((int) pointIconSize, (int) pointIconSize, Bitmap.Config.ARGB_8888);
-		Canvas canvas = new Canvas(pointIcon);
-		Paint paint = new Paint();
-		paint.setStyle(Paint.Style.FILL);
-
-		paint.setColor(Color.BLACK);
-		canvas.drawCircle(centerXY, centerXY, outerRadius, paint);
-
-		paint.setColor(Color.WHITE);
-		canvas.drawCircle(centerXY, centerXY, centerRadius, paint);
-
-		paint.setColor(Algorithms.parseColor(pointColorHex));
-		canvas.drawCircle(centerXY, centerXY, innerRadius, paint);
 	}
 
 	@NonNull
@@ -91,6 +69,30 @@ public class MultiProfileGeometryWayContext extends GeometryWayContext {
 
 			profileIconsBitmapCache.put(key, bitmap);
 		}
+		return bitmap;
+	}
+
+	private Bitmap createPointIcon() {
+		float density = getDensity();
+		float outerRadius = density * 11f;
+		float centerRadius = density * 10.5f;
+		float innerRadius = density * 6.5f;
+		float centerXY = pointIconSize / 2;
+
+		Bitmap bitmap = Bitmap.createBitmap((int) pointIconSize, (int) pointIconSize, Bitmap.Config.ARGB_8888);
+		Canvas canvas = new Canvas(bitmap);
+		Paint paint = new Paint();
+		paint.setStyle(Paint.Style.FILL);
+
+		paint.setColor(Color.BLACK);
+		canvas.drawCircle(centerXY, centerXY, outerRadius, paint);
+
+		paint.setColor(Color.WHITE);
+		canvas.drawCircle(centerXY, centerXY, centerRadius, paint);
+
+		paint.setColor(Algorithms.parseColor(pointColorHex));
+		canvas.drawCircle(centerXY, centerXY, innerRadius, paint);
+
 		return bitmap;
 	}
 

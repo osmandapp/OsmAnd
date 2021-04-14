@@ -90,14 +90,14 @@
 		android:layout="@layout/preference_switch"
 		android:title="@string/speak_poi" />
 
+	<Preference
+		android:layout="@layout/divider_half_item"
+		android:selectable="false" />
+
 	<PreferenceCategory
 		android:key="language_and_output"
 		android:layout="@layout/preference_category_with_descr"
 		android:title="@string/speak_speed_limit" />
-
-	<Preference
-		android:layout="@layout/simple_divider_item"
-		android:selectable="false" />
 
 	<SwitchPreferenceCompat
 		android:key="speak_speed_limit"

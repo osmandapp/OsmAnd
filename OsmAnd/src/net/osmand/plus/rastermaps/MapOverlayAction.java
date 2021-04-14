@@ -15,13 +15,13 @@ import com.google.gson.reflect.TypeToken;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.quickaction.SwitchableAction;
+import net.osmand.plus.settings.backend.OsmandSettings;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -59,7 +59,7 @@ public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 
 	@Override
 	public String getSelectedItem(OsmandApplication app) {
-		return app.getSettings().MAP_OVERLAY.get();
+		return app.getSettings().MAP_OVERLAY.get() != null ? app.getSettings().MAP_OVERLAY.get() : KEY_NO_OVERLAY;
 	}
 
 	@Override
@@ -223,13 +223,5 @@ public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 	public boolean fillParams(View root, MapActivity activity) {
 		getParams().put(KEY_DIALOG, Boolean.toString(((SwitchCompat) root.findViewById(R.id.saveButton)).isChecked()));
 		return super.fillParams(root, activity);
-	}
-
-	@Override
-	public String getActionText(OsmandApplication application) {
-		String currentSource = application.getSettings().MAP_OVERLAY.get() == null ? KEY_NO_OVERLAY
-				: application.getSettings().MAP_OVERLAY.get();
-
-		return application.getString(R.string.map_quick_action_pattern, getTranslatedItemName(application, currentSource));
 	}
 }

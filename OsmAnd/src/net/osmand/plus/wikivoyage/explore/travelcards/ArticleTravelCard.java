@@ -100,15 +100,8 @@ public class ArticleTravelCard extends BaseTravelCard {
 			holder.rightButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					if (article != null) {
-						if (saved) {
-							helper.removeArticleFromSaved(article);
-						} else {
-							app.getTravelHelper().createGpxFile(article);
-							helper.addArticleToSaved(article);
-						}
-						updateSaveButton(holder);
-					}
+					app.getTravelHelper().saveOrRemoveArticle(article, !saved);
+					updateSaveButton(holder);
 				}
 			});
 		}
