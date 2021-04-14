@@ -175,7 +175,8 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 					});
 				}
 				for (Purchase purchase : purchases) {
-					if (!purchase.isAcknowledged()) {
+					InAppSubscription subscription = getLiveUpdates().getSubscriptionBySku(purchase.getSku());
+					if (!purchase.isAcknowledged() || (subscription != null && !subscription.isPurchased())) {
 						onPurchaseFinished(purchase);
 					}
 				}
