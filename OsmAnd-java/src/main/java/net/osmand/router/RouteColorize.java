@@ -186,7 +186,7 @@ public class RouteColorize {
     public List<RouteColorizationPoint> getResult(boolean simplify) {
         List<RouteColorizationPoint> result = new ArrayList<>();
         if (simplify) {
-            result = simplify();
+            result = simplify(zoom);
         } else {
             for (int i = 0; i < latitudes.length; i++) {
                 result.add(new RouteColorizationPoint(i, latitudes[i], longitudes[i], values[i]));
@@ -242,7 +242,7 @@ public class RouteColorize {
         return rgbaToDecimal(0, 0, 0, 0);
     }
 
-    private List<RouteColorizationPoint> simplify() {
+    public List<RouteColorizationPoint> simplify(int zoom) {
         if (dataList == null) {
             dataList = new ArrayList<>();
             for (int i = 0; i < latitudes.length; i++) {

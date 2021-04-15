@@ -126,7 +126,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 		zooms.clear();
 	}
 
-	private PathGeometryZoom getGeometryZoom(RotatedTileBox tb) {
+	protected PathGeometryZoom getGeometryZoom(RotatedTileBox tb, Map<Integer, PathGeometryZoom> zooms) {
 		int zoom = tb.getZoom();
 		PathGeometryZoom zm = zooms.size() > zoom ? zooms.get(zoom) : null;
 		if (zm == null) {
@@ -148,7 +148,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 		if (locationProvider == null || locationProvider.getSize() == 0) {
 			return;
 		}
-		PathGeometryZoom geometryZoom = getGeometryZoom(tb);
+		PathGeometryZoom geometryZoom = getGeometryZoom(tb, zooms);
 		TByteArrayList simplification = geometryZoom.getSimplifyPoints();
 		List<Double> odistances = geometryZoom.getDistances();
 
@@ -171,29 +171,24 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 			if (simplification.getQuick(i) == 0 && !styleMap.containsKey(i)) {
 				continue;
 			}
-			double lat = locationProvider.getLatitude(i);
-			double lon = locationProvider.getLongitude(i);
 			if (shouldAddLocation(simplification, leftLongitude, rightLongitude, bottomLatitude, topLatitude,
 					locationProvider, i)) {
 				double dist = previous == -1 ? 0 : odistances.get(i);
 				if (!previousVisible) {
-					double prevLat = Double.NaN;
-					double prevLon = Double.NaN;
 					if (previous != -1) {
-						prevLat = locationProvider.getLatitude(previous);
-						prevLon = locationProvider.getLongitude(previous);
+						addLocation(tb, previous, style, tx, ty, angles, distances, dist, styles);
 					} else if (lastProjection != null) {
-						prevLat = lastProjection.getLatitude();
-						prevLon = lastProjection.getLongitude();
-					}
-					if (!Double.isNaN(prevLat) && !Double.isNaN(prevLon)) {
-						addLocation(tb, prevLat, prevLon, getStyle(i - 1, style), tx, ty, angles, distances, dist, styles); // first point
+						double prevLat = lastProjection.getLatitude();
+						double prevLon = lastProjection.getLongitude();
+						if (!Double.isNaN(prevLat) && !Double.isNaN(prevLon)) {
+							addLocation(tb, prevLat, prevLon, getStyle(i - 1, style), tx, ty, angles, distances, dist, styles); // first point
+						}
 					}
 				}
-				addLocation(tb, lat, lon, style, tx, ty, angles, distances, dist, styles);
+				addLocation(tb, i, style, tx, ty, angles, distances, dist, styles);
 				previousVisible = true;
 			} else if (previousVisible) {
-				addLocation(tb, lat, lon, style, tx, ty, angles, distances, previous == -1 ? 0 : odistances.get(i), styles);
+				addLocation(tb, i, style, tx, ty, angles, distances, previous == -1 ? 0 : odistances.get(i), styles);
 				double distToFinish = 0;
 				for (int ki = i + 1; ki < odistances.size(); ki++) {
 					distToFinish += odistances.get(ki);
@@ -214,7 +209,14 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 		return leftLon <= lon && lon <= rightLon && bottomLat <= lat && lat <= topLat;
 	}
 
-	private void addLocation(RotatedTileBox tb, double latitude, double longitude, GeometryWayStyle<?> style,
+	protected void addLocation(RotatedTileBox tb, int locationIdx, GeometryWayStyle<?> style,
+							   List<Float> tx, List<Float> ty, List<Double> angles, List<Double> distances,
+							   double dist, List<GeometryWayStyle<?>> styles) {
+		addLocation(tb, locationProvider.getLatitude(locationIdx), locationProvider.getLongitude(locationIdx),
+				style, tx, ty, angles, distances, dist, styles);
+	}
+
+	protected void addLocation(RotatedTileBox tb, double latitude, double longitude, GeometryWayStyle<?> style,
 							 List<Float> tx, List<Float> ty, List<Double> angles, List<Double> distances,
 							 double dist, List<GeometryWayStyle<?>> styles) {
 		float x = tb.getPixXFromLatLon(latitude, longitude);
@@ -372,7 +374,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 		}
 	}
 
-	private static class PathGeometryZoom {
+	protected static class PathGeometryZoom {
 
 		private static final float EPSILON_IN_DPI = 2;
 
@@ -390,12 +392,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 			angles = new ArrayList<>(size);
 			if (simplify) {
 				simplifyPoints.fill(0, size, (byte) 0);
-				if (size > 0) {
-					simplifyPoints.set(0, (byte) 1);
-				}
-				double distInPix = (tb.getDistance(0, 0, tb.getPixWidth(), 0) / tb.getPixWidth());
-				double cullDistance = (distInPix * (EPSILON_IN_DPI * Math.max(1, tb.getDensity())));
-				cullRamerDouglasPeucker(simplifyPoints, locationProvider, 0, size - 1, cullDistance);
+				simplify(tb, locationProvider, simplifyPoints);
 			} else {
 				simplifyPoints.fill(0, size, (byte) 1);
 			}
@@ -420,6 +417,16 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 				distances.add(d);
 				angles.add(angle);
 			}
+		}
+
+		protected void simplify(RotatedTileBox tb, GeometryWayProvider locationProvider, TByteArrayList simplifyPoints) {
+			int size = locationProvider.getSize();
+			if (size > 0) {
+				simplifyPoints.set(0, (byte) 1);
+			}
+			double distInPix = (tb.getDistance(0, 0, tb.getPixWidth(), 0) / tb.getPixWidth());
+			double cullDistance = (distInPix * (EPSILON_IN_DPI * Math.max(1, tb.getDensity())));
+			cullRamerDouglasPeucker(simplifyPoints, locationProvider, 0, size - 1, cullDistance);
 		}
 
 		public List<Double> getDistances() {
