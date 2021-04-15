@@ -56,17 +56,21 @@ public class SearchResult {
 	public double getSumPhraseMatchWeight() {
 		// if result is a complete match in the search we prioritize it higher
 		boolean match = requiredSearchPhrase.countWords(localeName) <= getSelfWordCount();
-		if (match && otherNames != null) {
+		if (match && otherNames != null && otherNames.size() > 1) {
 			String[] words = localeName.split(" ");
 			int countWords = 0;
 			for (SearchWord wordResult : requiredSearchPhrase.getWords()) {
 				for (String word : words) {
-					if (word.equalsIgnoreCase(wordResult.toString())) {
+					if (word.equalsIgnoreCase(wordResult.getWord())) {
 						countWords++;
 					}
 				}
 			}
-			match = countWords == requiredSearchPhrase.getWords().size();
+			if (requiredSearchPhrase.getWords().isEmpty()) {
+				match = localeName.equals(requiredSearchPhrase.getFullSearchPhrase());
+			} else {
+				match = countWords == requiredSearchPhrase.getWords().size();
+			}
 		}
 		double res = ObjectType.getTypeWeight(match ? objectType : null);
 		if (parentSearchResult != null) {
