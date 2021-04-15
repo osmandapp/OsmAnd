@@ -84,6 +84,11 @@ public class WptPtMenuController extends MenuController {
 		return wpt;
 	}
 
+	@Override
+	protected Object getCorrespondingMapObject() {
+		return mapMarker;
+	}
+
 /*
 	@Override
 	public boolean handleSingleTapOnMap() {

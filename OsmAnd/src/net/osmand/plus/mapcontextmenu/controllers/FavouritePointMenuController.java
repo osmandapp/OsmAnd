@@ -14,8 +14,6 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.TransportStop;
 import net.osmand.plus.FavouritesDbHelper;
-import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -25,6 +23,8 @@ import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.builders.FavouritePointMenuBuilder;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditorFragmentNew;
+import net.osmand.plus.mapmarkers.MapMarker;
+import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
@@ -77,6 +77,11 @@ public class FavouritePointMenuController extends MenuController {
 	@Override
 	protected Object getObject() {
 		return fav;
+	}
+
+	@Override
+	protected Object getCorrespondingMapObject() {
+		return mapMarker;
 	}
 
 	@Override

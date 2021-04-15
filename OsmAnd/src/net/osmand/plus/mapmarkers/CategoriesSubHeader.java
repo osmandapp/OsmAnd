@@ -2,15 +2,13 @@ package net.osmand.plus.mapmarkers;
 
 import androidx.annotation.DrawableRes;
 
-import net.osmand.plus.itinerary.ItineraryGroup;
-
 public class CategoriesSubHeader {
 
 	@DrawableRes
 	private int iconRes;
-	private ItineraryGroup group;
+	private MapMarkersGroup group;
 
-	public CategoriesSubHeader(int iconRes, ItineraryGroup group) {
+	public CategoriesSubHeader(int iconRes, MapMarkersGroup group) {
 		this.iconRes = iconRes;
 		this.group = group;
 	}
@@ -20,7 +18,7 @@ public class CategoriesSubHeader {
 		return iconRes;
 	}
 
-	public ItineraryGroup getGroup() {
+	public MapMarkersGroup getGroup() {
 		return group;
 	}
 }

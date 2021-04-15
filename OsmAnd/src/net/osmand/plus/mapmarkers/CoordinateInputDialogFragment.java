@@ -71,7 +71,6 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.itinerary.ItineraryGroup;
 import net.osmand.plus.itinerary.ItineraryHelper;
 import net.osmand.plus.mapmarkers.CoordinateInputBottomSheetDialogFragment.CoordinateInputFormatChangeListener;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.DDM;
@@ -171,10 +170,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 	private void syncGpx(GPXFile gpxFile) {
 		ItineraryHelper helper = getMyApplication().getItineraryHelper();
-		ItineraryGroup group = helper.getMarkersGroup(gpxFile);
-		if (group != null) {
-			helper.runSynchronization(group);
-		}
+		helper.runSynchronizationAsync(gpxFile);
 	}
 
 	protected void addWpt(GPXFile gpx, String description, String name, String category, int color, double lat, double lon) {

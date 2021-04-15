@@ -63,7 +63,7 @@ import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment;
-import net.osmand.plus.itinerary.ItineraryGroup;
+import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.DeletePointsTask.OnPointsDeleteListener;
 import net.osmand.plus.myplaces.TrackBitmapDrawer.TrackBitmapDrawerListener;
@@ -500,12 +500,12 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 			return;
 		}
 		final GPXFile gpxFile = getGpx();
-		ItineraryGroup markersSearch = app.getItineraryHelper().getMarkersGroup(gpxFile);
-		final ItineraryGroup markersGr;
+		MapMarkersGroup markersSearch = app.getItineraryHelper().getMarkersGroup(gpxFile);
+		final MapMarkersGroup markersGr;
 		final boolean markersRemoved;
 		if (markersSearch != null) {
 			markersGr = markersSearch;
-			markersHelper.removeMarkersGroup(markersGr);
+			app.getItineraryHelper().removeMarkersGroup(markersGr);
 			markersRemoved = true;
 		} else if (gpxFile != null) {
 			markersGr = app.getItineraryHelper().addOrEnableGroup(gpxFile);
@@ -537,9 +537,9 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 										app.getItineraryHelper().addOrEnableGroup(gpxFile);
 									}
 								} else {
-									ItineraryGroup group = app.getItineraryHelper().getMarkersGroup(gpxFile);
+									MapMarkersGroup group = app.getItineraryHelper().getMarkersGroup(gpxFile);
 									if (group != null) {
-										markersHelper.removeMarkersGroup(group);
+										app.getItineraryHelper().removeMarkersGroup(group);
 									}
 								}
 								trackActivity.invalidateOptionsMenu();

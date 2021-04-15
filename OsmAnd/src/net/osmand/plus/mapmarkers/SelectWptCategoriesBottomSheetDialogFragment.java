@@ -20,7 +20,6 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.ShortDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.itinerary.ItineraryGroup;
 import net.osmand.plus.itinerary.ItineraryHelper;
 
 import java.io.File;
@@ -144,12 +143,12 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 		if (selectedGpxFile == null) {
 			gpxSelectionHelper.selectGpxFile(gpxFile, true, false, false, false, false);
 		}
-		ItineraryGroup group = helper.getMarkersGroup(gpxFile);
+		MapMarkersGroup group = helper.getMarkersGroup(gpxFile);
 		if (group == null) {
 			group = helper.addOrEnableGroup(gpxFile);
 		}
 		helper.updateGroupWptCategories(group, selectedCategories);
-		helper.runSynchronization(group);
+		helper.runSynchronizationAsync(group);
 	}
 
 	private boolean isAllChecked() {

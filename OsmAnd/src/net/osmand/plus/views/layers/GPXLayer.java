@@ -44,7 +44,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.PointImageDrawable;
-import net.osmand.plus.itinerary.ItineraryGroup;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.mapmarkers.MapMarker;
@@ -1210,10 +1209,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	private void syncGpx(GPXFile gpxFile) {
-		ItineraryGroup group = view.getApplication().getItineraryHelper().getMarkersGroup(gpxFile);
-		if (group != null) {
-			view.getApplication().getItineraryHelper().runSynchronization(group);
-		}
+		view.getApplication().getItineraryHelper().runSynchronizationAsync(gpxFile);
 	}
 
 	private static class CachedTrack {

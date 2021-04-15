@@ -27,7 +27,6 @@ public class MapMarkerMenuController extends MenuController {
 
 	public MapMarkerMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, @NonNull MapMarker mapMarker) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
-		final boolean useStateList = Build.VERSION.SDK_INT >= 21;
 		this.mapMarker = mapMarker;
 		builder.setShowNearestWiki(true);
 
