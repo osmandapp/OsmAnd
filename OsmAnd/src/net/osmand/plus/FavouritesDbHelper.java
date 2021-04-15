@@ -14,12 +14,13 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
+import net.osmand.data.FavouritePoint.SpecialPointType;
 import net.osmand.data.LatLon;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
-import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.itinerary.ItineraryHelper;
+import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.compress.compressors.bzip2.BZip2CompressorOutputStream;
@@ -238,7 +239,7 @@ public class FavouritesDbHelper {
 		});
 	}
 
-	public FavouritePoint getSpecialPoint(FavouritePoint.SpecialPointType pointType) {
+	public FavouritePoint getSpecialPoint(SpecialPointType pointType) {
 		for (FavouritePoint fp : cachedFavoritePoints) {
 			if (fp.getSpecialPointType() == pointType) {
 				return fp;
@@ -710,6 +711,17 @@ public class FavouritesDbHelper {
 		return null;
 	}
 
+	@Nullable
+	public FavouritePoint getFavByLatLon(@NonNull LatLon latLon, String name) {
+		for (FavouritePoint fav : cachedFavoritePoints) {
+			if (latLon.equals(new LatLon(fav.getLatitude(), fav.getLongitude()))
+					&& Algorithms.stringsEqual(fav.getName(), name)) {
+				return fav;
+			}
+		}
+		return null;
+	}
+
 	public List<FavoriteGroup> getFavoriteGroups() {
 		return favoriteGroups;
 	}
@@ -943,7 +955,7 @@ public class FavouritesDbHelper {
 	public void onUpgrade(SQLiteConnection db, int oldVersion, int newVersion) {
 		if (oldVersion == 1) {
 			db.execSQL("ALTER TABLE " + FAVOURITE_TABLE_NAME + " ADD " + FAVOURITE_COL_CATEGORY + " text");
-			db.execSQL("UPDATE " + FAVOURITE_TABLE_NAME + " SET category = ?", new Object[]{""}); //$NON-NLS-1$ //$NON-NLS-2$
+			db.execSQL("UPDATE " + FAVOURITE_TABLE_NAME + " SET category = ?", new Object[] {""}); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 
@@ -984,108 +996,4 @@ public class FavouritesDbHelper {
 			recalculateCachedFavPoints();
 		}
 	}
-
-	public boolean deleteFavouriteDB(FavouritePoint p) {
-		SQLiteConnection db = openConnection(false);
-		if (db != null) {
-			try {
-				db.execSQL(
-						"DELETE FROM " + FAVOURITE_TABLE_NAME + " WHERE category = ? AND " + whereNameLatLon(), new Object[]{p.getCategory(), p.getName(), p.getLatitude(), p.getLongitude()}); //$NON-NLS-1$ //$NON-NLS-2$
-				FavouritePoint fp = findFavoriteByAllProperties(p.getCategory(), p.getName(), p.getLatitude(), p.getLongitude());
-				if (fp != null) {
-					FavoriteGroup group = flatGroups.get(p.getCategory());
-					if (group != null) {
-						group.points.remove(fp);
-					}
-					cachedFavoritePoints.remove(fp);
-				}
-				saveCurrentPointsIntoFile();
-			} finally {
-				db.close();
-			}
-			return true;
-		}
-		return false;
-	}
-
-
-	public boolean addFavouriteDB(FavouritePoint p) {
-		if (p.getName().isEmpty() && flatGroups.containsKey(p.getCategory())) {
-			return true;
-		}
-		SQLiteConnection db = openConnection(false);
-		if (db != null) {
-			try {
-				db.execSQL(
-						"INSERT INTO " + FAVOURITE_TABLE_NAME + " (" + FAVOURITE_COL_NAME + ", " + FAVOURITE_COL_CATEGORY + ", "
-								+ FAVOURITE_COL_LAT + ", " + FAVOURITE_COL_LON + ")" + " VALUES (?, ?, ?, ?)", new Object[]{p.getName(), p.getCategory(), p.getLatitude(), p.getLongitude()}); //$NON-NLS-1$ //$NON-NLS-2$
-				FavoriteGroup group = getOrCreateGroup(p, 0);
-				if (!p.getName().isEmpty()) {
-					p.setVisible(group.visible);
-					p.setColor(group.color);
-					group.points.add(p);
-					cachedFavoritePoints.add(p);
-				}
-				saveCurrentPointsIntoFile();
-			} finally {
-				db.close();
-			}
-			return true;
-		}
-		return false;
-	}
-
-
-	public boolean editFavouriteNameDB(FavouritePoint p, String newName, String category) {
-		SQLiteConnection db = openConnection(false);
-		if (db != null) {
-			try {
-				String oldCategory = p.getCategory();
-				db.execSQL(
-						"UPDATE " + FAVOURITE_TABLE_NAME + " SET " + FAVOURITE_COL_NAME + " = ?, " + FAVOURITE_COL_CATEGORY + "= ? WHERE " + whereNameLatLon(), new Object[]{newName, category, p.getName(), p.getLatitude(), p.getLongitude()}); //$NON-NLS-1$ //$NON-NLS-2$
-				p.setName(newName);
-				p.setCategory(category);
-				if (!oldCategory.equals(category)) {
-					FavoriteGroup old = flatGroups.get(oldCategory);
-					if (old != null) {
-						old.points.remove(p);
-					}
-					FavoriteGroup pg = getOrCreateGroup(p, 0);
-					p.setVisible(pg.visible);
-					p.setColor(pg.color);
-					pg.points.add(p);
-				}
-				sortAll();
-			} finally {
-				db.close();
-			}
-			return true;
-		}
-		return false;
-	}
-
-
-	public boolean editFavouriteDB(FavouritePoint p, double lat, double lon) {
-		SQLiteConnection db = openConnection(false);
-		if (db != null) {
-			try {
-				db.execSQL(
-						"UPDATE " + FAVOURITE_TABLE_NAME + " SET latitude = ?, longitude = ? WHERE " + whereNameLatLon(), new Object[]{lat, lon, p.getName(), p.getLatitude(), p.getLongitude()}); //$NON-NLS-1$ //$NON-NLS-2$
-				p.setLatitude(lat);
-				p.setLongitude(lon);
-				saveCurrentPointsIntoFile();
-			} finally {
-				db.close();
-			}
-			return true;
-		}
-		return false;
-	}
-
-	private String whereNameLatLon() {
-		String singleFavourite = " " + FAVOURITE_COL_NAME + "= ? AND " + FAVOURITE_COL_LAT + " = ? AND " + FAVOURITE_COL_LON + " = ?";
-		return singleFavourite;
-	}
-
-
 }

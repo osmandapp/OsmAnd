@@ -80,11 +80,6 @@ public class FavouritePointMenuController extends MenuController {
 	}
 
 	@Override
-	protected Object getCorrespondingMapObject() {
-		return mapMarker;
-	}
-
-	@Override
 	public List<TransportStopRoute> getTransportStopRoutes() {
 		if (transportStopController != null) {
 			return transportStopController.getTransportStopRoutes();

@@ -499,7 +499,7 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 		return true;
 	}
 
-	private void saveGpx(final OsmandApplication app, final GPXFile gpxFile, final boolean gpxSelected) {
+	public static void saveGpx(final OsmandApplication app, final GPXFile gpxFile, final boolean gpxSelected) {
 		new SaveGpxAsyncTask(new File(gpxFile.path), gpxFile, new SaveGpxListener() {
 			@Override
 			public void gpxSavingStarted() {

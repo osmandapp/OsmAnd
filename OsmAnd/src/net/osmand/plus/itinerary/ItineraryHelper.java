@@ -12,6 +12,7 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxSelectionHelper;
@@ -51,6 +52,8 @@ public class ItineraryHelper {
 
 	private static final Log log = PlatformUtil.getLog(ItineraryHelper.class);
 
+	public static final String PASSED_TIMESTAMP = "passed_timestamp";
+
 	private static final String CATEGORIES_SPLIT = ",";
 	private static final String FILE_TO_SAVE = "itinerary.gpx";
 	private static final String FILE_TO_BACKUP = "itinerary_bak.gpx";
@@ -75,12 +78,14 @@ public class ItineraryHelper {
 
 	public static class ItineraryItem {
 
-		public Object object;
-		public ItineraryType type;
+		public final Object object;
+		public final ItineraryType type;
+		public final ItineraryGroup group;
 
-		public ItineraryItem(Object object, ItineraryType type) {
-			this.object = object;
+		public ItineraryItem(ItineraryGroup group, Object object, ItineraryType type) {
 			this.type = type;
+			this.group = group;
+			this.object = object;
 		}
 	}
 
@@ -88,7 +93,7 @@ public class ItineraryHelper {
 
 		public String id;
 		public String name;
-		public ItineraryType type = ItineraryType.MARKERS;
+		public ItineraryType type = ItineraryType.POINTS;
 		public Set<String> wptCategories;
 		public boolean disabled;
 
@@ -135,8 +140,10 @@ public class ItineraryHelper {
 		FavoriteGroup favoriteGroup = app.getFavorites().getGroup(markersGroup.getId());
 		if (favoriteGroup != null) {
 			for (FavouritePoint favouritePoint : favoriteGroup.getPoints()) {
-				ItineraryItem itineraryItem = new ItineraryItem(favouritePoint, ItineraryType.FAVOURITES);
-				itineraryGroup.itineraryItems.add(itineraryItem);
+				if (favouritePoint.getPassedTimestamp() == 0) {
+					ItineraryItem itineraryItem = new ItineraryItem(itineraryGroup, favouritePoint, ItineraryType.FAVOURITES);
+					itineraryGroup.itineraryItems.add(itineraryItem);
+				}
 			}
 			itineraryGroups.add(itineraryGroup);
 		}
@@ -155,7 +162,7 @@ public class ItineraryHelper {
 			if (gpxFile != null && gpxFile.error == null) {
 				for (WptPt wptPt : gpxFile.getPoints()) {
 					if (shouldAddWpt(wptPt, itineraryGroup.wptCategories)) {
-						ItineraryItem itineraryItem = new ItineraryItem(wptPt, ItineraryType.TRACK);
+						ItineraryItem itineraryItem = new ItineraryItem(itineraryGroup, wptPt, ItineraryType.TRACK);
 						itineraryGroup.itineraryItems.add(itineraryItem);
 					}
 				}
@@ -166,16 +173,22 @@ public class ItineraryHelper {
 
 	private void syncMarkersGroup(ItineraryGroup itineraryGroup, MapMarkersGroup markersGroup) {
 		for (MapMarker marker : markersGroup.getMarkers()) {
-			ItineraryItem itineraryItem = new ItineraryItem(marker, ItineraryType.MARKERS);
-			itineraryGroup.itineraryItems.add(itineraryItem);
+			if (!marker.history) {
+				PointDescription pointDescription = marker.getOriginalPointDescription();
+				if (pointDescription == null || !pointDescription.isWpt() && !pointDescription.isFavorite()) {
+					ItineraryItem itineraryItem = new ItineraryItem(itineraryGroup, marker, ItineraryType.MARKERS);
+					itineraryGroup.itineraryItems.add(itineraryItem);
+				}
+			}
 		}
 		itineraryGroups.add(itineraryGroup);
 	}
 
 	private boolean shouldAddWpt(WptPt wptPt, Set<String> wptCategories) {
 		boolean addAll = wptCategories == null || wptCategories.isEmpty();
-		return addAll || wptCategories.contains(wptPt.category)
-				|| wptPt.category == null && wptCategories.contains("");
+		boolean passed = wptPt.getExtensionsToRead().containsKey(PASSED_TIMESTAMP);
+		return !passed && (addAll || wptCategories.contains(wptPt.category)
+				|| wptPt.category == null && wptCategories.contains(""));
 	}
 
 	private void loadGroups() {
@@ -478,6 +491,31 @@ public class ItineraryHelper {
 				}
 			});
 		}
+	}
+
+	@Nullable
+	public ItineraryItem getItineraryItem(@NonNull Object object) {
+		for (ItineraryGroup group : itineraryGroups) {
+			for (ItineraryItem item : group.itineraryItems) {
+				if (Algorithms.objectEquals(item.object, object)) {
+					return item;
+				}
+			}
+		}
+		return null;
+	}
+
+	@Nullable
+	public ItineraryGroup getItineraryGroupById(String id, ItineraryType type) {
+		for (ItineraryGroup group : itineraryGroups) {
+			if ((id == null && group.id == null)
+					|| (group.id != null && group.id.equals(id))) {
+				if (type == ItineraryType.POINTS || type == group.type) {
+					return group;
+				}
+			}
+		}
+		return null;
 	}
 
 	@Nullable

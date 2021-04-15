@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 
@@ -24,12 +23,11 @@ import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor.OnDismissListener;
-import net.osmand.plus.track.SaveGpxAsyncTask;
-import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.util.Algorithms;
 
-import java.io.File;
 import java.util.Map;
+
+import static net.osmand.plus.mapcontextmenu.editors.WptPtEditorFragmentNew.saveGpx;
 
 public class WptPtEditorFragment extends PointEditorFragment {
 
@@ -371,21 +369,5 @@ public class WptPtEditorFragment extends PointEditorFragment {
 	@Override
 	public int getPointColor() {
 		return color == 0 ? defaultColor : color;
-	}
-
-	private void saveGpx(final OsmandApplication app, final GPXFile gpxFile, final boolean gpxSelected) {
-		new SaveGpxAsyncTask(new File(gpxFile.path), gpxFile, new SaveGpxListener() {
-			@Override
-			public void gpxSavingStarted() {
-
-			}
-
-			@Override
-			public void gpxSavingFinished(Exception errorMessage) {
-				if (errorMessage == null && !gpxSelected) {
-					app.getSelectedGpxHelper().setGpxFileToDisplay(gpxFile);
-				}
-			}
-		}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 }

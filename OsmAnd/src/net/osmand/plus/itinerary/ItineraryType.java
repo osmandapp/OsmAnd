@@ -5,7 +5,8 @@ import androidx.annotation.NonNull;
 public enum ItineraryType {
 	MARKERS("markers", -1),
 	FAVOURITES("favourites", 0),
-	TRACK("track", 1);
+	TRACK("track", 1),
+	POINTS("points", 2);
 
 	private int typeId;
 	private String typeName;
