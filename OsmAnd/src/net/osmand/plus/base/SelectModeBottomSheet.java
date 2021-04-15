@@ -28,10 +28,10 @@ public class SelectModeBottomSheet extends SelectionBottomSheet {
 	protected void initHeaderUi() {
 		radioGroup.setItems(modes);
 
-		AndroidUiHelper.setVisibility(View.VISIBLE, secondaryDescription, toggleContainer);
+		AndroidUiHelper.setVisibility(View.VISIBLE, primaryDescription, toggleContainer);
 
 		AndroidUiHelper.setVisibility(View.GONE, checkBox, checkBoxTitle,
-				primaryDescription, selectedSize, selectAllButton);
+				titleDescription, secondaryDescription, selectedSize, selectAllButton);
 	}
 
 	@Override
@@ -69,15 +69,15 @@ public class SelectModeBottomSheet extends SelectionBottomSheet {
 		}
 	}
 
-	@Override
-	public void setDescription(@NonNull String description) {
-		secondaryDescription.setText(description);
-	}
-
 	@NonNull
 	@Override
 	public List<SelectableItem> getSelection() {
 		return Collections.singletonList(previewItem);
+	}
+
+	@Override
+	protected boolean shouldShowDivider() {
+		return false;
 	}
 
 	public static SelectModeBottomSheet showInstance(@NonNull AppCompatActivity activity,

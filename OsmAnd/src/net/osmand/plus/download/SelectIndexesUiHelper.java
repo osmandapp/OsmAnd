@@ -1,6 +1,5 @@
 package net.osmand.plus.download;
 
-import android.content.Context;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -23,7 +22,6 @@ import net.osmand.util.Algorithms;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static net.osmand.plus.download.DownloadActivityType.SRTM_COUNTRY_FILE;
@@ -36,14 +34,14 @@ public class SelectIndexesUiHelper {
 	private DateFormat dateFormat;
 	private boolean showRemoteDate;
 	private DownloadItem downloadItem;
-	private SelectItemsToDownloadListener listener;
+	private ItemsToDownloadSelectedListener listener;
 	private SelectionBottomSheet dialog;
 
 	private SelectIndexesUiHelper(@NonNull DownloadItem item,
 	                              @NonNull AppCompatActivity activity,
 	                              @NonNull DateFormat dateFormat,
 	                              boolean showRemoteDate,
-	                              @NonNull SelectItemsToDownloadListener listener) {
+	                              @NonNull ItemsToDownloadSelectedListener listener) {
 		this.activity = activity;
 		this.app = (OsmandApplication) activity.getApplicationContext();
 		this.downloadItem = item;
@@ -56,7 +54,7 @@ public class SelectIndexesUiHelper {
 	                              @NonNull AppCompatActivity activity,
 	                              @NonNull DateFormat dateFormat,
 	                              boolean showRemoteDate,
-	                              @NonNull SelectItemsToDownloadListener listener) {
+	                              @NonNull ItemsToDownloadSelectedListener listener) {
 		SelectIndexesUiHelper helper =
 				new SelectIndexesUiHelper(item, activity, dateFormat, showRemoteDate, listener);
 		helper.showDialogInternal();
@@ -140,7 +138,7 @@ public class SelectIndexesUiHelper {
 			public void onUiInitialized() {
 				SelectModeBottomSheet dialog = (SelectModeBottomSheet) SelectIndexesUiHelper.this.dialog;
 				dialog.setTitle(app.getString(R.string.srtm_unit_format));
-				dialog.setDescription(app.getString(R.string.srtm_download_single_help_message));
+				dialog.setPrimaryDescription(app.getString(R.string.srtm_download_single_help_message));
 				updateSize(dialog, false);
 				dialog.setSelectedMode(initRadio);
 			}
@@ -154,7 +152,7 @@ public class SelectIndexesUiHelper {
 		SelectableItem selectableItem = new SelectableItem();
 		selectableItem.setTitle(indexItem.getVisibleName(app, app.getRegions(), false));
 		String size = indexItem.getSizeDescription(app);
-		size += " (" + SrtmDownloadItem.getAbbreviation(app, baseItem) + ")";
+		size += " " + SrtmDownloadItem.getAbbreviationInScopes(app, baseItem);
 		String date = indexItem.getDate(dateFormat, showRemoteDate);
 		String description = app.getString(R.string.ltr_or_rtl_combine_via_bold_point, size, date);
 		selectableItem.setDescription(description);
@@ -200,7 +198,7 @@ public class SelectIndexesUiHelper {
 			SelectableItem selectableItem = new SelectableItem();
 			selectableItem.setTitle(indexItem.getVisibleName(app, app.getRegions(), false));
 			String size = indexItem.getSizeDescription(app);
-			size += " (" + SrtmDownloadItem.getAbbreviation(app, baseItem) + ")";
+			size += " " + SrtmDownloadItem.getAbbreviationInScopes(app, baseItem);
 			String date = indexItem.getDate(dateFormat, showRemoteDate);
 			String description = app.getString(R.string.ltr_or_rtl_combine_via_bold_point, size, date);
 			selectableItem.setDescription(description);
@@ -263,7 +261,7 @@ public class SelectIndexesUiHelper {
 		dialog.setOnApplySelectionListener(getOnApplySelectionListener(listener));
 	}
 
-	private OnApplySelectionListener getOnApplySelectionListener(final SelectItemsToDownloadListener listener) {
+	private OnApplySelectionListener getOnApplySelectionListener(final ItemsToDownloadSelectedListener listener) {
 		return new OnApplySelectionListener() {
 			@Override
 			public void onSelectionApplied(List<SelectableItem> selectedItems) {
@@ -286,7 +284,7 @@ public class SelectIndexesUiHelper {
 		if (updateDescription) {
 			String total = app.getString(R.string.shared_string_total);
 			String description = app.getString(R.string.ltr_or_rtl_combine_via_colon, total, size);
-			dialog.setDescription(description);
+			dialog.setTitleDescription(description);
 		}
 		String btnTitle = app.getString(R.string.shared_string_download);
 		if (sizeToDownload > 0) {
@@ -330,7 +328,7 @@ public class SelectIndexesUiHelper {
 		return totalSizeMb;
 	}
 
-	public interface SelectItemsToDownloadListener {
+	public interface ItemsToDownloadSelectedListener {
 		void onItemsToDownloadSelected(List<IndexItem> items);
 	}
 

@@ -965,8 +965,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				return ctx.getString(R.string.download_roads_only_item);
 			} else if (child.isBackupedData() && child.getFileName().endsWith(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT)) {
 				return ctx.getString(R.string.download_wikipedia_maps);
-			} else if (child.isBackupedData() && (child.getFileName().endsWith(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT)
-					|| child.getFileName().endsWith(IndexConstants.BINARY_SRTM_FEET_MAP_INDEX_EXT))) {
+			} else if (child.isBackupedData() && (SrtmDownloadItem.isSrtmFile(child.getFileName()))) {
 				return ctx.getString(R.string.download_srtm_maps);
 			}
 			return "";
@@ -1033,7 +1032,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				}
 
 				if (SrtmDownloadItem.isSRTMItem(child)) {
-					builder.append(" (").append(SrtmDownloadItem.getAbbreviation(ctx, SrtmDownloadItem.isMetersItem(child))).append(")");
+					builder.append(" ").append(SrtmDownloadItem.getAbbreviationInScopes(ctx, SrtmDownloadItem.isMetersItem(child)));
 				}
 
 				if (!Algorithms.isEmpty(child.getDescription())) {

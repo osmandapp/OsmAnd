@@ -13,6 +13,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.Version;
+import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.voice.JSMediaCommandPlayerImpl;
 import net.osmand.plus.voice.JSTTSCommandPlayerImpl;
@@ -333,8 +334,7 @@ public class LocalIndexHelper {
 				if (mapFile.isFile() && mapFile.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
 					String fileName = mapFile.getName();
 					LocalIndexType lt = LocalIndexType.MAP_DATA;
-					if (fileName.endsWith(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT)
-							|| fileName.endsWith(IndexConstants.BINARY_SRTM_FEET_MAP_INDEX_EXT)) {
+					if (SrtmDownloadItem.isSrtmFile(fileName)) {
 						lt = LocalIndexType.SRTM_DATA;
 					} else if (fileName.endsWith(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT)) {
 						lt = LocalIndexType.WIKI_DATA;

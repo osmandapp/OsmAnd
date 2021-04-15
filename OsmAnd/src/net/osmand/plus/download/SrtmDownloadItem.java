@@ -3,6 +3,7 @@ package net.osmand.plus.download;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
@@ -21,38 +22,53 @@ import static net.osmand.plus.download.DownloadActivityType.SRTM_COUNTRY_FILE;
 
 public class SrtmDownloadItem extends DownloadItem {
 
-	private IndexItem meterItem;
-	private IndexItem feetItem;
+	private List<IndexItem> indexes;
+	private IndexItem meter;
+	private IndexItem feet;
 
-	private boolean useMetersByDefault;
+	private boolean shouldUseMeters;
 
-	public SrtmDownloadItem(IndexItem meterItem,
-	                        IndexItem feetItem,
-	                        boolean useMetersByDefault) {
+	public SrtmDownloadItem(List<IndexItem> indexes,
+	                        boolean shouldUseMeters) {
 		super(SRTM_COUNTRY_FILE);
-		this.meterItem = meterItem;
-		this.feetItem = feetItem;
-		this.useMetersByDefault = useMetersByDefault;
+		this.indexes = indexes;
+		this.shouldUseMeters = shouldUseMeters;
 	}
 
-	public boolean isUseMetersByDefault() {
-		return useMetersByDefault;
+	public boolean isShouldUseMeters() {
+		return shouldUseMeters;
 	}
 
-	public void setUseMetersByDefault(boolean useMetersByDefault) {
-		this.useMetersByDefault = useMetersByDefault;
+	public void setShouldUseMeters(boolean shouldUseMeters) {
+		this.shouldUseMeters = shouldUseMeters;
 	}
 
 	public IndexItem getIndexItem() {
-		return useMetersByDefault ? getMeterItem() : getFeetItem();
+		return shouldUseMeters ? getMeterItem() : getFeetItem();
 	}
 
+	@Nullable
 	public IndexItem getMeterItem() {
-		return meterItem;
+		if (meter == null && indexes != null) {
+			for (IndexItem index : indexes) {
+				if (isMetersItem(index)) {
+					meter = index;
+				}
+			}
+		}
+		return meter;
 	}
 
+	@Nullable
 	public IndexItem getFeetItem() {
-		return feetItem;
+		if (feet == null && indexes != null) {
+			for (IndexItem index : indexes) {
+				if (!isMetersItem(index)) {
+					feet = index;
+				}
+			}
+		}
+		return feet;
 	}
 
 	@Override
@@ -67,12 +83,12 @@ public class SrtmDownloadItem extends DownloadItem {
 
 	@Override
 	public boolean isDownloaded() {
-		return getIndexItem().isDownloaded();
+		return meter.isDownloaded() || feet.isDownloaded();
 	}
 
 	@Override
 	public boolean isOutdated() {
-		return getIndexItem().isOutdated();
+		return meter.isOutdated() || feet.isOutdated();
 	}
 
 	@Override
@@ -104,14 +120,14 @@ public class SrtmDownloadItem extends DownloadItem {
 		return app.getSettings().METRIC_SYSTEM.get() != MetricsConstants.MILES_AND_FEET;
 	}
 
-	public static String getAbbreviation(Context context, boolean base) {
-		return context.getString(base ? R.string.m : R.string.foot);
+	@NonNull
+	public static String getAbbreviationInScopes(Context ctx, boolean base) {
+		return "(" + getAbbreviation(ctx, base) + ")";
 	}
 
-	public static String getExtension(IndexItem indexItem) {
-		return isMetersItem(indexItem) ?
-				IndexConstants.BINARY_SRTM_MAP_INDEX_EXT :
-				IndexConstants.BINARY_SRTM_FEET_MAP_INDEX_EXT;
+	@NonNull
+	public static String getAbbreviation(Context context, boolean base) {
+		return context.getString(base ? R.string.m : R.string.foot);
 	}
 
 	public static boolean isMetersItem(Object item) {
@@ -121,6 +137,23 @@ public class SrtmDownloadItem extends DownloadItem {
 			return ((LocalIndexInfo) item).getFileName().endsWith(BINARY_SRTM_MAP_INDEX_EXT);
 		}
 		return false;
+	}
+
+	public static boolean containsSrtmExtension(@NonNull String fileName) {
+		return fileName.contains(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT)
+				|| fileName.contains(IndexConstants.BINARY_SRTM_FEET_MAP_INDEX_EXT);
+	}
+
+	public static boolean isSrtmFile(@NonNull String fileName) {
+		return fileName.endsWith(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT)
+				|| fileName.endsWith(IndexConstants.BINARY_SRTM_FEET_MAP_INDEX_EXT);
+	}
+
+	@NonNull
+	public static String getExtension(IndexItem indexItem) {
+		return isMetersItem(indexItem) ?
+				IndexConstants.BINARY_SRTM_MAP_INDEX_EXT :
+				IndexConstants.BINARY_SRTM_FEET_MAP_INDEX_EXT;
 	}
 
 	public static boolean isSRTMItem(Object item) {

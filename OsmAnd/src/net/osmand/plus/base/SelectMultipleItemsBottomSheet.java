@@ -122,11 +122,8 @@ public class SelectMultipleItemsBottomSheet extends SelectionBottomSheet {
 	}
 
 	private void updateApplyButtonEnable() {
-		if (Algorithms.isEmpty(selectedItems)) {
-			rightButton.setEnabled(false);
-		} else {
-			rightButton.setEnabled(true);
-		}
+		boolean noEmptySelection = !Algorithms.isEmpty(selectedItems);
+		rightButton.setEnabled(noEmptySelection);
 	}
 
 	private void updateItems(boolean checked) {

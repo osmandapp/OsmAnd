@@ -27,6 +27,7 @@ public abstract class SelectionBottomSheet extends MenuBottomSheetDialogFragment
 	protected UiUtilities uiUtilities;
 
 	protected TextView title;
+	protected TextView titleDescription;
 	protected TextView primaryDescription;
 	protected TextView secondaryDescription;
 	protected TextView selectedSize;
@@ -35,7 +36,7 @@ public abstract class SelectionBottomSheet extends MenuBottomSheetDialogFragment
 	protected View selectAllButton;
 	protected TextView checkBoxTitle;
 	protected ThreeStateCheckbox checkBox;
-	protected LinearLayout selectionListView;
+	protected LinearLayout listContainer;
 	protected TextView applyButtonTitle;
 
 	protected int activeColorRes;
@@ -60,7 +61,9 @@ public abstract class SelectionBottomSheet extends MenuBottomSheetDialogFragment
 		secondaryColorRes = nightMode ? R.color.icon_color_secondary_dark : R.color.icon_color_secondary_light;
 
 		items.add(createHeaderUi());
-		items.add(new SimpleDividerItem(app));
+		if (shouldShowDivider()) {
+			items.add(new SimpleDividerItem(app));
+		}
 		createSelectionUi();
 	}
 
@@ -77,8 +80,9 @@ public abstract class SelectionBottomSheet extends MenuBottomSheetDialogFragment
 		View view = themedInflater.inflate(R.layout.settings_group_title, null);
 
 		title = view.findViewById(R.id.title);
-		primaryDescription = view.findViewById(R.id.description);
-		secondaryDescription = view.findViewById(R.id.additional_description);
+		titleDescription = view.findViewById(R.id.title_description);
+		primaryDescription = view.findViewById(R.id.primary_description);
+		secondaryDescription = view.findViewById(R.id.secondary_description);
 		selectedSize = view.findViewById(R.id.selected_size);
 		toggleContainer = view.findViewById(R.id.custom_radio_buttons);
 		radioGroup = new MultiStateToggleButton(app, toggleContainer, nightMode);
@@ -94,6 +98,10 @@ public abstract class SelectionBottomSheet extends MenuBottomSheetDialogFragment
 
 	protected abstract void initHeaderUi();
 
+	protected boolean shouldShowDivider() {
+		return true;
+	}
+
 	@Override
 	protected void setupRightButton() {
 		super.setupRightButton();
@@ -104,12 +112,16 @@ public abstract class SelectionBottomSheet extends MenuBottomSheetDialogFragment
 		this.title.setText(title);
 	}
 
-	public void setDescription(@NonNull String description) {
-		this.primaryDescription.setText(description);
+	public void setTitleDescription(@NonNull String description) {
+		titleDescription.setText(description);
+	}
+
+	public void setPrimaryDescription(@NonNull String description) {
+		primaryDescription.setText(description);
 	}
 
 	public void setSecondaryDescription(@NonNull String description) {
-		this.secondaryDescription.setText(description);
+		secondaryDescription.setText(description);
 	}
 
 	public void setApplyButtonTitle(@NonNull String title) {

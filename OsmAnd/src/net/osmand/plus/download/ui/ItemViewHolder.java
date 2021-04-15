@@ -42,7 +42,7 @@ import net.osmand.plus.download.DownloadResourceGroup;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.download.SelectIndexesUiHelper;
-import net.osmand.plus.download.SelectIndexesUiHelper.SelectItemsToDownloadListener;
+import net.osmand.plus.download.SelectIndexesUiHelper.ItemsToDownloadSelectedListener;
 import net.osmand.plus.download.MultipleIndexItem;
 import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.download.ui.LocalIndexesFragment.LocalIndexOperationTask;
@@ -150,11 +150,11 @@ public class ItemViewHolder {
 		depthContoursPurchased = InAppPurchaseHelper.isDepthContoursPurchased(context.getMyApplication());
 	}
 
-	public void bindIndexItem(final DownloadItem downloadItem) {
-		bindIndexItem(downloadItem, null);
+	public void bindDownloadItem(final DownloadItem downloadItem) {
+		bindDownloadItem(downloadItem, null);
 	}
 
-	public void bindIndexItem(final DownloadItem downloadItem, final String cityName) {
+	public void bindDownloadItem(final DownloadItem downloadItem, final String cityName) {
 		initAppStatusVariables();
 		boolean isDownloading = downloadItem.isDownloading(context.getDownloadThread());
 		int progress = -1;
@@ -256,7 +256,7 @@ public class ItemViewHolder {
 				}
 				String fullDescription = context.getString(R.string.ltr_or_rtl_combine_via_colon, header, count);
 				if (srtmItem) {
-					fullDescription += " (" + SrtmDownloadItem.getAbbreviation(context, baseMetricSystem) + ")";
+					fullDescription += " " + SrtmDownloadItem.getAbbreviationInScopes(context, baseMetricSystem);
 				}
 				if (item.hasActualDataToDownload()) {
 					fullDescription = context.getString(
@@ -269,7 +269,7 @@ public class ItemViewHolder {
 				String pattern = context.getString(R.string.ltr_or_rtl_combine_via_bold_point);
 				String type = item.getType().getString(context);
 				String size = item.getSizeDescription(context)
-						+ " (" + SrtmDownloadItem.getAbbreviation(context, SrtmDownloadItem.isMetersItem(item)) + ")";
+						+ " " + SrtmDownloadItem.getAbbreviationInScopes(context, SrtmDownloadItem.isMetersItem(item));
 				String date = item.getDate(dateFormat, showRemoteDate);
 				String fullDescription = String.format(pattern, size, date);
 				if (showTypeInDesc) {
@@ -316,9 +316,9 @@ public class ItemViewHolder {
 		}
 	}
 
-	public void bindIndexItem(final CityItem cityItem) {
+	public void bindDownloadItem(final CityItem cityItem) {
 		if (cityItem.getIndexItem() != null) {
-			bindIndexItem(cityItem.getIndexItem(), cityItem.getName());
+			bindDownloadItem(cityItem.getIndexItem(), cityItem.getName());
 		} else {
 			nameTextView.setText(cityItem.getName());
 			nameTextView.setTextColor(textColorPrimary);
@@ -529,7 +529,7 @@ public class ItemViewHolder {
 
 	private void selectIndexesToDownload(DownloadItem item) {
 		SelectIndexesUiHelper.showDialog(item, context, dateFormat, showRemoteDate,
-				new SelectItemsToDownloadListener() {
+				new ItemsToDownloadSelectedListener() {
 					@Override
 					public void onItemsToDownloadSelected(List<IndexItem> indexes) {
 						IndexItem[] indexesArray = new IndexItem[indexes.size()];

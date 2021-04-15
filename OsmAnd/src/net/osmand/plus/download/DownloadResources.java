@@ -487,20 +487,14 @@ public class DownloadResources extends DownloadResourceGroup {
 			List<IndexItem> indexesList = group.getIndividualResources();
 			List<DownloadItem> individualDownloadItems = group.getIndividualDownloadItems();
 			if (doesListContainIndexWithType(indexesList, srtmType)) {
-				IndexItem meters = null;
-				IndexItem feet = null;
+				List<IndexItem> srtmIndexes = new ArrayList<>();
 				for (IndexItem item : indexesList) {
 					if (item.getType() == srtmType) {
-						if (SrtmDownloadItem.isMetersItem(item)) {
-							meters = item;
-						} else {
-							feet = item;
-						}
+						srtmIndexes.add(item);
 					}
 				}
-				individualDownloadItems.remove(meters);
-				individualDownloadItems.remove(feet);
-				group.addItem(new SrtmDownloadItem(meters, feet, useMetersByDefault));
+				individualDownloadItems.removeAll(srtmIndexes);
+				group.addItem(new SrtmDownloadItem(srtmIndexes, useMetersByDefault));
 				listModified = true;
 			}
 			if (listModified) {
@@ -563,6 +557,7 @@ public class DownloadResources extends DownloadResourceGroup {
 					if (index.getType() == type) {
 						found = true;
 						collectedIndexes.add(index);
+						if (!type.mayProvideSeveralIndexes()) break;
 					}
 				}
 			}

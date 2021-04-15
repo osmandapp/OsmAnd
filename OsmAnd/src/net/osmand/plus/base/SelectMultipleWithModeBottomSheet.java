@@ -24,7 +24,7 @@ public class SelectMultipleWithModeBottomSheet extends SelectMultipleItemsBottom
 		radioGroup.setItems(modes);
 
 		AndroidUiHelper.setVisibility(View.VISIBLE, secondaryDescription, toggleContainer,
-				checkBox, checkBoxTitle, primaryDescription, selectedSize, selectAllButton);
+				checkBox, checkBoxTitle, titleDescription, selectedSize, selectAllButton);
 	}
 
 	private void setModes(@NonNull List<RadioItem> modes) {

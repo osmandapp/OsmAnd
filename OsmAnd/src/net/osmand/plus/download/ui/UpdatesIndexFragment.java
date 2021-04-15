@@ -410,7 +410,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 				holder.setShowRemoteDate(true);
 				holder.setShowTypeInDesc(true);
 				holder.setShowParentRegionName(true);
-				holder.bindIndexItem(getItem(position));
+				holder.bindDownloadItem(getItem(position));
 			}
 			return view;
 		}

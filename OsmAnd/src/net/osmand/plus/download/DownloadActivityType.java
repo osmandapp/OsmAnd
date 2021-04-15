@@ -210,6 +210,10 @@ public class DownloadActivityType {
 		return this == VOICE_FILE && indexItem.fileName.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP);
 	}
 
+	public boolean mayProvideSeveralIndexes() {
+		return this == SRTM_COUNTRY_FILE;
+	}
+
 	public String getUnzipExtension(OsmandApplication ctx, IndexItem indexItem) {
 		if (NORMAL_FILE == this) {
 			if (indexItem.fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)) {
