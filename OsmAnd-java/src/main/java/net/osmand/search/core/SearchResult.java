@@ -11,7 +11,10 @@ import net.osmand.osm.PoiType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 public class SearchResult {
 	// search phrase that makes search result valid 
@@ -59,18 +62,22 @@ public class SearchResult {
 		if (match && otherNames != null && otherNames.size() > 1) {
 			String[] words = localeName.split(" ");
 			int countWords = 0;
-			for (SearchWord wordResult : requiredSearchPhrase.getWords()) {
+			List<String> searchWordList = new ArrayList<>();
+			if (requiredSearchPhrase.getWords().isEmpty()) {
+				searchWordList = Arrays.asList(requiredSearchPhrase.getFullSearchPhrase().split(" "));
+			} else {
+				for (SearchWord wordResult : requiredSearchPhrase.getWords()) {
+					searchWordList.add(wordResult.getWord());
+				}
+			}
+			for (String wordResult : searchWordList) {
 				for (String word : words) {
-					if (word.equalsIgnoreCase(wordResult.getWord())) {
+					if (word.equalsIgnoreCase(wordResult)) {
 						countWords++;
 					}
 				}
 			}
-			if (requiredSearchPhrase.getWords().isEmpty()) {
-				match = localeName.equals(requiredSearchPhrase.getFullSearchPhrase());
-			} else {
-				match = countWords == requiredSearchPhrase.getWords().size();
-			}
+			match = countWords != 0 && countWords <= searchWordList.size();
 		}
 		double res = ObjectType.getTypeWeight(match ? objectType : null);
 		if (parentSearchResult != null) {
