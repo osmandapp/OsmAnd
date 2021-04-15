@@ -231,80 +231,85 @@ public class RoutePlannerFrontEnd {
 
 	public GpxRouteApproximation searchGpxRoute(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints, ResultMatcher<GpxRouteApproximation> resultMatcher) throws IOException, InterruptedException {
 		long timeToCalculate = System.nanoTime();
-		gctx.ctx.keepNativeRoutingContext = true;
-		if (gctx.ctx.calculationProgress == null) {
-			gctx.ctx.calculationProgress = new RouteCalculationProgress();
-		}
-		GpxPoint start = null;
-		GpxPoint prev = null;
-		if (gpxPoints.size() > 0) {
-			gctx.ctx.calculationProgress.totalIterations = (int) (gpxPoints.get(gpxPoints.size() - 1).cumDist / gctx.MAXIMUM_STEP_APPROXIMATION + 1); 
-			start = gpxPoints.get(0); 
-		}
-		while (start != null && !gctx.ctx.calculationProgress.isCancelled) {
-			double routeDist = gctx.MAXIMUM_STEP_APPROXIMATION;
-			GpxPoint next = findNextGpxPointWithin(gctx, gpxPoints, start, routeDist);
-			boolean routeFound = false;
-			if (next != null && initRoutingPoint(start, gctx, gctx.MINIMUM_POINT_APPROXIMATION)) {
-				gctx.ctx.calculationProgress.totalEstimatedDistance = 0;
-				gctx.ctx.calculationProgress.iteration = (int) (next.cumDist / gctx.MAXIMUM_STEP_APPROXIMATION);
-				while (routeDist >= gctx.MINIMUM_STEP_APPROXIMATION && !routeFound) {
-					routeFound = initRoutingPoint(next, gctx, gctx.MINIMUM_POINT_APPROXIMATION);
-					if (routeFound) {
-						routeFound = findGpxRouteSegment(gctx, gpxPoints, start, next, prev != null);
+		NativeLibrary nativeLib = gctx.ctx.nativeLib;
+		if (nativeLib != null) {
+			gctx = nativeLib.searchGpxRouteNative(gctx, gpxPoints);
+		} else {
+			gctx.ctx.keepNativeRoutingContext = true;
+			if (gctx.ctx.calculationProgress == null) {
+				gctx.ctx.calculationProgress = new RouteCalculationProgress();
+			}
+			GpxPoint start = null;
+			GpxPoint prev = null;
+			if (gpxPoints.size() > 0) {
+				gctx.ctx.calculationProgress.totalIterations = (int) (gpxPoints.get(gpxPoints.size() - 1).cumDist / gctx.MAXIMUM_STEP_APPROXIMATION + 1);
+				start = gpxPoints.get(0);
+			}
+			while (start != null && !gctx.ctx.calculationProgress.isCancelled) {
+				double routeDist = gctx.MAXIMUM_STEP_APPROXIMATION;
+				GpxPoint next = findNextGpxPointWithin(gpxPoints, start, routeDist);
+				boolean routeFound = false;
+				if (next != null && initRoutingPoint(start, gctx, gctx.MINIMUM_POINT_APPROXIMATION)) {
+					gctx.ctx.calculationProgress.totalEstimatedDistance = 0;
+					gctx.ctx.calculationProgress.iteration = (int) (next.cumDist / gctx.MAXIMUM_STEP_APPROXIMATION);
+					while (routeDist >= gctx.MINIMUM_STEP_APPROXIMATION && !routeFound) {
+						routeFound = initRoutingPoint(next, gctx, gctx.MINIMUM_POINT_APPROXIMATION);
 						if (routeFound) {
-							// route is found - cut the end of the route and move to next iteration
+							routeFound = findGpxRouteSegment(gctx, gpxPoints, start, next, prev != null);
+							if (routeFound) {
+								// route is found - cut the end of the route and move to next iteration
 //							start.stepBackRoute = new ArrayList<RouteSegmentResult>();
 //							boolean stepBack = true;
-							boolean stepBack = stepBackAndFindPrevPointInRoute(gctx, gpxPoints, start, next);
-							if (!stepBack) {
-								// not supported case (workaround increase MAXIMUM_STEP_APPROXIMATION)
-								log.info("Consider to increase MAXIMUM_STEP_APPROXIMATION to: " + routeDist * 2);
-								start.routeToTarget = null;
-								routeFound = false;
-								break;
+								boolean stepBack = stepBackAndFindPrevPointInRoute(gctx, gpxPoints, start, next);
+								if (!stepBack) {
+									// not supported case (workaround increase MAXIMUM_STEP_APPROXIMATION)
+									log.info("Consider to increase MAXIMUM_STEP_APPROXIMATION to: " + routeDist * 2);
+									start.routeToTarget = null;
+									routeFound = false;
+									break;
+								}
+							}
+						}
+						if (!routeFound) {
+							// route is not found move next point closer to start point (distance / 2)
+							routeDist = routeDist / 2;
+							if (routeDist < gctx.MINIMUM_STEP_APPROXIMATION && routeDist > gctx.MINIMUM_STEP_APPROXIMATION / 2 + 1) {
+								routeDist = gctx.MINIMUM_STEP_APPROXIMATION;
+							}
+							next = findNextGpxPointWithin(gpxPoints, start, routeDist);
+							if (next != null) {
+								routeDist = Math.min(next.cumDist - start.cumDist, routeDist);
 							}
 						}
 					}
-					if (!routeFound) {
-						// route is not found move next point closer to start point (distance / 2)
-						routeDist = routeDist / 2;
-						if (routeDist < gctx.MINIMUM_STEP_APPROXIMATION && routeDist > gctx.MINIMUM_STEP_APPROXIMATION / 2 + 1) {
-							routeDist = gctx.MINIMUM_STEP_APPROXIMATION;
-						}
-						next = findNextGpxPointWithin(gctx, gpxPoints, start, routeDist);
+				}
+				// route is not found skip segment and keep it as straight line on display
+				if (!routeFound) {
+					// route is not found, move start point by
+					next = findNextGpxPointWithin(gpxPoints, start, gctx.MINIMUM_STEP_APPROXIMATION);
+					if (prev != null) {
+						prev.routeToTarget.addAll(prev.stepBackRoute);
+						makeSegmentPointPrecise(prev.routeToTarget.get(prev.routeToTarget.size() - 1), start.loc, false);
 						if (next != null) {
-							routeDist = Math.min(next.cumDist - start.cumDist, routeDist);
+							log.warn("NOT found route from: " + start.pnt.getRoad() + " at " + start.pnt.getSegmentStart());
 						}
 					}
+					prev = null;
+				} else {
+					prev = start;
 				}
+				start = next;
 			}
-			// route is not found skip segment and keep it as straight line on display
-			if (!routeFound) {
-				// route is not found, move start point by 
-				next = findNextGpxPointWithin(gctx, gpxPoints, start, gctx.MINIMUM_STEP_APPROXIMATION);
-				if (prev != null) {
-					prev.routeToTarget.addAll(prev.stepBackRoute);
-					makeSegmentPointPrecise(prev.routeToTarget.get(prev.routeToTarget.size() - 1), start.loc, false);
-					if (next != null) {
-						log.warn("NOT found route from: " + start.pnt.getRoad() + " at " + start.pnt.getSegmentStart());
-					}
-				}
-				prev = null;
-			} else {
-				prev = start;
+			if (gctx.ctx.calculationProgress != null) {
+				gctx.ctx.calculationProgress.timeToCalculate = System.nanoTime() - timeToCalculate;
 			}
-			start = next;
-		}
-		if (gctx.ctx.calculationProgress != null) {
-			gctx.ctx.calculationProgress.timeToCalculate = System.nanoTime() - timeToCalculate;
-		}
-		gctx.ctx.deleteNativeRoutingContext();
-		BinaryRoutePlanner.printDebugMemoryInformation(gctx.ctx);
-		calculateGpxRoute(gctx, gpxPoints);
-		if (!gctx.result.isEmpty() && !gctx.ctx.calculationProgress.isCancelled) {
-			new RouteResultPreparation().printResults(gctx.ctx, gpxPoints.get(0).loc, gpxPoints.get(gpxPoints.size() - 1).loc, gctx.result);
-			System.out.println(gctx);
+			gctx.ctx.deleteNativeRoutingContext();
+			BinaryRoutePlanner.printDebugMemoryInformation(gctx.ctx);
+			calculateGpxRoute(gctx, gpxPoints);
+			if (!gctx.result.isEmpty() && !gctx.ctx.calculationProgress.isCancelled) {
+				new RouteResultPreparation().printResults(gctx.ctx, gpxPoints.get(0).loc, gpxPoints.get(gpxPoints.size() - 1).loc, gctx.result);
+				System.out.println(gctx);
+			}
 		}
 		if (resultMatcher != null) {
 			resultMatcher.publish(gctx.ctx.calculationProgress.isCancelled ? null : gctx);
@@ -346,7 +351,7 @@ public class RoutePlannerFrontEnd {
 			// here all route segments - 1 is longer than needed distance to step back 
 			return false;
 		}
-		
+
 		while (start.routeToTarget.size() > segmendInd + 1) {
 			RouteSegmentResult removed = start.routeToTarget.remove(segmendInd + 1);
 			start.stepBackRoute.add(removed);
@@ -550,19 +555,18 @@ public class RoutePlannerFrontEnd {
 					start.pnt = rsp;
 				}
 			}
- 		} 
+		}
 		if (start != null && start.pnt != null) {
 			return true;
- 		}
+		}
 		return false;
 	}
-	
-	private GpxPoint findNextGpxPointWithin(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints,
-			GpxPoint start, double dist) {
+
+	private GpxPoint findNextGpxPointWithin(List<GpxPoint> gpxPoints, GpxPoint start, double dist) {
 		// returns first point with that has slightly more than dist or last point
 		int plus = dist > 0 ? 1 : -1;
 		int targetInd = start.ind + plus;
-		GpxPoint target = null; 
+		GpxPoint target = null;
 		while (targetInd < gpxPoints.size() && targetInd >= 0) {
 			target = gpxPoints.get(targetInd);
 			if (Math.abs(target.cumDist - start.cumDist) > Math.abs(dist)) {

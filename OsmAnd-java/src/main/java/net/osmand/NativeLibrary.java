@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
@@ -34,13 +35,15 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
+import static net.osmand.router.RoutePlannerFrontEnd.*;
+
 public class NativeLibrary {
 
 
-    public NativeLibrary() {
-    }
+	public NativeLibrary() {
+	}
 
-    public static class RenderingGenerationResult {
+	public static class RenderingGenerationResult {
 		public RenderingGenerationResult(ByteBuffer bitmap) {
 			bitmapBuffer = bitmap;
 		}
@@ -130,8 +133,8 @@ public class NativeLibrary {
 	}
 
 	public NativeTransportRoutingResult[] runNativePTRouting(int sx31, int sy31, int ex31, int ey31,
-		TransportRoutingConfiguration cfg, RouteCalculationProgress progress) {
-		return nativeTransportRouting(new int[] { sx31, sy31, ex31, ey31 }, cfg, progress);
+	                                                         TransportRoutingConfiguration cfg, RouteCalculationProgress progress) {
+		return nativeTransportRouting(new int[]{sx31, sy31, ex31, ey31}, cfg, progress);
 	}
 
 	public RouteSegmentResult[] runNativeRouting(RoutingContext c, RouteRegion[] regions, boolean basemap) {
@@ -140,6 +143,10 @@ public class NativeLibrary {
 				regions, basemap);
 	}
 
+	public GpxRouteApproximation searchGpxRouteNative(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints) {
+		RouteRegion[] regions = gctx.ctx.reverseMap.keySet().toArray(new RouteRegion[0]);
+		return searchGpxRoute(gctx, gpxPoints.toArray(new GpxPoint[0]), regions);
+	}
 
 	public NativeRouteSearchResult loadRouteRegion(RouteSubregion sub, boolean loadObjects) {
 		NativeRouteSearchResult lr = loadRoutingData(sub.routeReg, sub.routeReg.getName(), sub.routeReg.getFilePointer(), sub, loadObjects);
@@ -150,11 +157,13 @@ public class NativeLibrary {
 	}
 
 	/**/
+	protected static native GpxRouteApproximation searchGpxRoute(GpxRouteApproximation gctx, GpxPoint[] gpxPoints, RouteRegion[] regions);
+
 	protected static native NativeRouteSearchResult loadRoutingData(RouteRegion reg, String regName, int regfp, RouteSubregion subreg,
-			boolean loadObjects);
-	
+	                                                                boolean loadObjects);
+
 	public static native void deleteNativeRoutingContext(long handle);
-	
+
 	protected static native void deleteRenderingContextHandle(long handle);
 
 	protected static native void deleteRouteSearchResult(long searchResultHandle);
