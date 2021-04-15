@@ -52,21 +52,21 @@ public class SearchResult {
 		// if result is a complete match in the search we prioritize it higher
 		return getSumPhraseMatchWeight() / Math.pow(MAX_TYPE_WEIGHT, getDepth() - 1);
 	}
-	
+
 	public double getSumPhraseMatchWeight() {
 		// if result is a complete match in the search we prioritize it higher
 		boolean match = requiredSearchPhrase.countWords(localeName) <= getSelfWordCount();
-		if (match && !otherNames.isEmpty()) {
+		if (match && otherNames != null) {
 			String[] words = localeName.split(" ");
 			int countWords = 0;
-			for (String word : words) {
-				for (SearchWord wordResult : requiredSearchPhrase.getWords()) {
+			for (SearchWord wordResult : requiredSearchPhrase.getWords()) {
+				for (String word : words) {
 					if (word.equalsIgnoreCase(wordResult.toString())) {
 						countWords++;
 					}
 				}
 			}
-			match = countWords == words.length;
+			match = countWords == requiredSearchPhrase.getWords().size();
 		}
 		double res = ObjectType.getTypeWeight(match ? objectType : null);
 		if (parentSearchResult != null) {
