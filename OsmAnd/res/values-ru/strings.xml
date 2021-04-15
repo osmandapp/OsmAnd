@@ -4086,5 +4086,5 @@
     <string name="user_points">Точки пользователя</string>
     <string name="output">Вывод</string>
     <string name="map_quick_action_pattern">%1$s → …</string>
-    <string name="exit_number">Номер съезда</string>
+    <string name="exit_number">Номер выезда</string>
 </resources>
