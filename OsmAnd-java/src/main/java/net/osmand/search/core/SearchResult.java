@@ -56,6 +56,18 @@ public class SearchResult {
 	public double getSumPhraseMatchWeight() {
 		// if result is a complete match in the search we prioritize it higher
 		boolean match = requiredSearchPhrase.countWords(localeName) <= getSelfWordCount();
+		if (match && !otherNames.isEmpty()) {
+			String[] words = localeName.split(" ");
+			int countWords = 0;
+			for (String word : words) {
+				for (SearchWord wordResult : requiredSearchPhrase.getWords()) {
+					if (word.equalsIgnoreCase(wordResult.toString())) {
+						countWords++;
+					}
+				}
+			}
+			match = countWords == words.length;
+		}
 		double res = ObjectType.getTypeWeight(match ? objectType : null);
 		if (parentSearchResult != null) {
 			res = res + parentSearchResult.getSumPhraseMatchWeight() / MAX_TYPE_WEIGHT;
