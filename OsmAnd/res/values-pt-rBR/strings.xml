@@ -3758,7 +3758,7 @@
     <string name="shared_string_file_name">Nome do arquivo</string>
     <string name="number_of_gpx_files_selected_pattern">%s arquivos de trilha selecionados</string>
     <string name="disable_recording_once_app_killed_descrp">O registro de trilhas fará uma pausa quando o aplicativo for encerrado (por meio de aplicativos recentes). (A indicação de segundo plano do OsmAnd desaparece da barra de notificação do Android.)</string>
-    <string name="save_global_track_interval_descr">Especifique o intervalo de registro para a gravação geral da trilha (ligado por meio do widget de \'gravação de viagem\' no mapa).</string>
+    <string name="save_global_track_interval_descr">Especifique o intervalo de registro para o registro geral da trilha (ativado por meio do widget de \'gravação de viagem\' no mapa).</string>
     <string name="gpx_monitoring_stop">Pausar gravação de viagem</string>
     <string name="gpx_monitoring_start">Retomar a gravação da viagem</string>
     <string name="system_default_theme">Padrão do sistema</string>
@@ -4053,7 +4053,7 @@
 \n
 \n • As trilhas agora podem ser coloridas por altitude, velocidade ou inclinação.
 \n
-\n  • Adicionada opção para alterar a aparência da linha da rota de navegação
+\n • Adicionada opção para alterar a aparência da linha da rota de navegação
 \n
 \n  • Caixa de diálogo \"Gravação de viagem\" atualizada
 \n
