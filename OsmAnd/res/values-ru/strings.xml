@@ -4073,7 +4073,7 @@
     <string name="update_all_maps_added">Обновить все карты, добавленные в %1$s\?</string>
     <string name="customize_route_line">Настройка линии маршрута</string>
     <string name="shared_string_route_line">Линия маршрута</string>
-    <string name="route_line_use_map_style_appearance">Линия маршрута будет использовать %1$s, указанный в выбранном стиле карты: %2$s.</string>
+    <string name="route_line_use_map_style_appearance">Линия маршрута будет использовать %1$s из выбранного стиля карты: %2$s.</string>
     <string name="specify_color_for_map_mode">Укажите цвет для режима карты: %1$s.</string>
     <string name="no_purchases">У вас нет покупок</string>
     <string name="new_device_account">Новое устройство / новый аккаунт</string>

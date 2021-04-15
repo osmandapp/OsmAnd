@@ -1317,7 +1317,13 @@ public class SearchCoreFactory {
 							|| !phrase.isSearchTypeAllowed(ObjectType.HOUSE)) {
 						continue;
 					}
-					res.localeName = b.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
+					if(interpolation) {
+						res.localeName = lw;
+						res.location = b.getLocation(b.interpolation(lw));
+					} else {
+						res.localeName = b.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
+						res.location = b.getLocation();
+					}
 					res.otherNames = b.getAllNames(true);
 					res.object = b;
 					res.file = file;
@@ -1328,12 +1334,6 @@ public class SearchCoreFactory {
 					res.relatedObject = s;
 					res.localeRelatedObjectName = s.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
 					res.objectType = ObjectType.HOUSE;
-					if(interpolation) {
-						res.location = b.getLocation(b.interpolation(lw));
-						res.localeName = lw;
-					} else {
-						res.location = b.getLocation();
-					}
 					res.preferredZoom = 17;
 
 					resultMatcher.publish(res);
