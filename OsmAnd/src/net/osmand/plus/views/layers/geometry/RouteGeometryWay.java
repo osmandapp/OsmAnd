@@ -36,7 +36,7 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 	private GradientScaleType scaleType;
 
 	public RouteGeometryWay(RouteGeometryWayContext context) {
-		super(context, new RouteGeometryWayDrawer(context));
+		super(context, new RouteGeometryWayDrawer(context, true));
 		this.helper = context.getApp().getRoutingHelper();
 	}
 
@@ -48,6 +48,9 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 		this.customWidth = width;
 		this.customPointColor = pointColor;
 		this.scaleType = GradientScaleType.ALTITUDE;
+		if (width != null) {
+			getContext().getAttrs().shadowPaint.setStrokeWidth(width + getContext().getDensity() * 2);
+		}
 	}
 
 	public void updateRoute(RotatedTileBox tb, RouteCalculationResult route, OsmandApplication app) {
@@ -85,6 +88,13 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 		}
 
 		return styleMap;
+	}
+
+	@Override
+	protected boolean shouldSkipLocation(TByteArrayList simplification, Map<Integer, GeometryWayStyle<?>> styleMap, int locationIdx) {
+		return scaleType == null ?
+				super.shouldSkipLocation(simplification, styleMap, locationIdx) :
+				simplification.getQuick(locationIdx) == 0;
 	}
 
 	@Override

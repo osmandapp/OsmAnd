@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
+import android.util.Pair;
 
 import net.osmand.data.RotatedTileBox;
 
@@ -87,6 +88,12 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 				a.draw(canvas, context);
 			}
 		}
+	}
+
+	protected void drawFullBorder(Canvas canvas, int zoom, List<Pair<Path, GeometryWayStyle<?>>> paths) {
+	}
+
+	protected void drawSegmentBorder(Canvas canvas, int zoom, Path path, GeometryWayStyle<?> style) {
 	}
 
 	protected PathPoint getArrowPathPoint(float iconx, float icony, GeometryWayStyle<?> style, double angle) {

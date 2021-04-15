@@ -168,7 +168,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 		int previous = -1;
 		for (int i = startLocationIndex; i < locationProvider.getSize(); i++) {
 			style = getStyle(i, defaultWayStyle);
-			if (simplification.getQuick(i) == 0 && !styleMap.containsKey(i)) {
+			if (shouldSkipLocation(simplification, styleMap, i)) {
 				continue;
 			}
 			if (shouldAddLocation(simplification, leftLongitude, rightLongitude, bottomLatitude, topLatitude,
@@ -200,6 +200,10 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 			previous = i;
 		}
 		drawRouteSegment(tb, canvas, tx, ty, angles, distances, 0, styles);
+	}
+
+	protected boolean shouldSkipLocation(TByteArrayList simplification, Map<Integer, GeometryWayStyle<?>> styleMap, int locationIdx) {
+		return simplification.getQuick(locationIdx) == 0 && !styleMap.containsKey(locationIdx);
 	}
 
 	protected boolean shouldAddLocation(TByteArrayList simplification, double leftLon, double rightLon, double bottomLat,
@@ -358,7 +362,18 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 				List<Pair<Path, GeometryWayStyle<?>>> paths = new ArrayList<>();
 				canvas.rotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 				calculatePath(tb, tx, ty, styles, paths);
-				for (Pair<Path, GeometryWayStyle<?>> pc : paths) {
+
+				drawer.drawFullBorder(canvas, tb.getZoom(), paths);
+				drawer.drawSegmentBorder(canvas, tb.getZoom(), paths.get(0).first, paths.get(0).second);
+				for (int i = 1; i <= paths.size(); i++) {
+					if (i != paths.size()) {
+						Pair<Path, GeometryWayStyle<?>> prev = paths.get(i);
+						if (prev.second.hasPathLine()) {
+							drawer.drawSegmentBorder(canvas, tb.getZoom(), prev.first, prev.second);
+						}
+					}
+
+					Pair<Path, GeometryWayStyle<?>> pc = paths.get(i - 1);
 					GeometryWayStyle<?> style = pc.second;
 					if (style.hasPathLine()) {
 						drawer.drawPath(canvas, pc.first, style);
