@@ -685,7 +685,7 @@ public class AppInitializer implements IProgress {
 			// restore backuped favorites to normal file
 			restoreBackupForFavoritesFiles();
 			notifyEvent(InitEvents.RESTORE_BACKUPS);
-			app.itineraryHelper.syncItineraryGroups();
+			app.itineraryHelper.syncMarkersGroups();
 			app.searchUICore.initSearchUICore();
 
 			checkLiveUpdatesAlerts();
