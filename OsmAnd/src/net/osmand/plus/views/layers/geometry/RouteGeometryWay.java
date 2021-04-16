@@ -35,6 +35,7 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 	private Float customWidth;
 	private Integer customPointColor;
 	private GradientScaleType scaleType;
+	private GradientScaleType prevScaleType;
 
 	public RouteGeometryWay(RouteGeometryWayContext context) {
 		super(context, new RouteGeometryWayDrawer(context, true));
@@ -48,14 +49,16 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 		this.customColor = color;
 		this.customWidth = width;
 		this.customPointColor = pointColor;
-		this.scaleType = GradientScaleType.ALTITUDE;
+		this.prevScaleType = this.scaleType;
+		this.scaleType = scaleType;
 		if (width != null) {
 			getContext().getAttrs().shadowPaint.setStrokeWidth(width + getContext().getDensity() * 2);
 		}
+
 	}
 
 	public void updateRoute(RotatedTileBox tb, RouteCalculationResult route, OsmandApplication app) {
-		if (tb.getMapDensity() == getMapDensity() && this.route == route) {
+		if (tb.getMapDensity() == getMapDensity() && this.route == route && prevScaleType == scaleType) {
 			return;
 		}
 
@@ -66,10 +69,10 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 			updateWay(locations, tb);
 			return;
 		}
-
 		GPXFile gpxFile = GpxUiHelper.makeGpxFromRoute(route, app);
 		if (!gpxFile.hasAltitude) {
 			updateWay(locations, tb);
+			return;
 		}
 
 		// Start point can have wrong zero altitude

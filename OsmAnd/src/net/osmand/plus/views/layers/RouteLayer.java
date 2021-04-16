@@ -344,15 +344,17 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 		int centerY = drawInfo.getCenterY();
 		int screenHeight = drawInfo.getScreenHeight();
 
+		updateRouteColors(nightMode);
+		updateRouteGradient();
+
+		LinearGradient gradient = null;
 		if (gradientScaleType == GradientScaleType.ALTITUDE || gradientScaleType == GradientScaleType.SLOPE) {
 			int[] colors = new int[] {RouteColorize.RED, RouteColorize.YELLOW, RouteColorize.GREEN};
 			float[] positions = new float[] {0, 0.5f, 1};
-			LinearGradient gradient = new LinearGradient(centerX, 0, centerX, screenHeight, colors, positions, Shader.TileMode.CLAMP);
-			paintRouteLinePreview.setShader(gradient);
-		} else {
-			updateRouteColors(nightMode);
-			paintRouteLinePreview.setColor(getRouteLineColor());
+			gradient = new LinearGradient(centerX, 0, centerX, screenHeight, colors, positions, Shader.TileMode.CLAMP);
 		}
+		paintRouteLinePreview.setShader(gradient);
+		paintRouteLinePreview.setColor(getRouteLineColor());
 
 		canvas.drawLine(centerX, 0, centerX, screenHeight, paintRouteLinePreview);
 
@@ -475,6 +477,14 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 		routeLineColor = color;
 	}
 
+	private void updateRouteGradient() {
+		if (routeLineDrawInfo != null) {
+			gradientScaleType = routeLineDrawInfo.getGradientScaleType();
+		} else {
+			gradientScaleType = view.getSettings().ROUTE_LINE_GRADIENT.getModeValue(helper.getAppMode());
+		}
+	}
+
 	private float getRouteLineWidth(@NonNull RotatedTileBox tileBox) {
 		String widthKey;
 		if (routeLineDrawInfo != null) {
@@ -539,9 +549,10 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 			boolean directTo = route.getRouteService() == RouteService.DIRECT_TO;
 			boolean straight = route.getRouteService() == RouteService.STRAIGHT;
 			publicTransportRouteGeometry.clearRoute();
+			updateRouteColors(nightMode);
+			updateRouteGradient();
 			routeGeometry.setRouteStyleParams(getRouteLineColor(), getRouteLineWidth(tb), getDirectionArrowsColor(), gradientScaleType);
 			routeGeometry.updateRoute(tb, route, view.getApplication());
-			updateRouteColors(nightMode);
 			if (directTo) {
 				routeGeometry.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
 						null, 0);
