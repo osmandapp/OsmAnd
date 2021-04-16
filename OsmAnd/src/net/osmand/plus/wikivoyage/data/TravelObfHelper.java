@@ -72,7 +72,7 @@ public class TravelObfHelper implements TravelHelper {
 	public static final String ROUTE_TRACK = "route_track";
 	public static final int ARTICLE_SEARCH_RADIUS = 50 * 1000;
 	public static final int SAVED_ARTICLE_SEARCH_RADIUS = 30 * 1000;
-	public static final int MAX_SEARCH_RADIUS = 10000 * 1000;
+	public static final int MAX_SEARCH_RADIUS = 800 * 1000;
 	public static final String REF_TAG = "ref";
 	public static final String NAME_TAG = "name";
 
