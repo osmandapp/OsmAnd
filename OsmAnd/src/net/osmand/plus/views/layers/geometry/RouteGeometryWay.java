@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Paint;
 import android.graphics.PointF;
 
+import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.Location;
 import net.osmand.data.RotatedTileBox;
@@ -69,6 +70,13 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 		GPXFile gpxFile = GpxUiHelper.makeGpxFromRoute(route, app);
 		if (!gpxFile.hasAltitude) {
 			updateWay(locations, tb);
+		}
+
+		// Start point can have wrong zero altitude
+		List<GPXUtilities.WptPt> pts = gpxFile.tracks.get(0).segments.get(0).points;
+		GPXUtilities.WptPt firstPt = pts.get(0);
+		if (firstPt.ele == 0) {
+			firstPt.ele = pts.get(1).ele;
 		}
 
 		RouteColorize routeColorize = new RouteColorize(tb.getZoom(), gpxFile, null, scaleType.toColorizationType(), 0);

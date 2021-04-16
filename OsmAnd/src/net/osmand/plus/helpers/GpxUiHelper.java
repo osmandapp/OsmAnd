@@ -2139,15 +2139,28 @@ public class GpxUiHelper {
 					float h = (float) l.getAltitude();
 					point.ele = h;
 					if (lastHeight == HEIGHT_UNDEFINED && seg.points.size() > 0) {
-						for (GPXUtilities.WptPt pt : seg.points) {
+						for (int i = seg.points.size() - 1; i >= 0; i--) {
+							GPXUtilities.WptPt pt = seg.points.get(i);
 							if (Double.isNaN(pt.ele)) {
 								pt.ele = h;
 							}
 						}
 					}
 					lastHeight = h;
+				} else {
+					lastHeight = HEIGHT_UNDEFINED;
 				}
 				seg.points.add(point);
+			}
+			if (lastHeight == HEIGHT_UNDEFINED && gpx.hasAltitude) {
+				int start = seg.points.size() - 1;
+				while (start > 0 && Double.isNaN(seg.points.get(start).ele)) {
+					start--;
+				}
+				double ele = seg.points.get(start).ele;
+				for (int i = start + 1; i < seg.points.size(); i++) {
+					seg.points.get(i).ele = ele;
+				}
 			}
 			track.segments.add(seg);
 			gpx.tracks.add(track);
