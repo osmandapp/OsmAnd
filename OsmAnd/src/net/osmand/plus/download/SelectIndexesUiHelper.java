@@ -25,60 +25,60 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static net.osmand.plus.download.DownloadActivityType.SRTM_COUNTRY_FILE;
+import static net.osmand.plus.download.MultipleDownloadItem.getIndexItem;
 
 public class SelectIndexesUiHelper {
 
-	private OsmandApplication app;
-	private AppCompatActivity activity;
+	private final OsmandApplication app;
+	private final AppCompatActivity activity;
 
-	private DateFormat dateFormat;
-	private boolean showRemoteDate;
-	private DownloadItem downloadItem;
-	private ItemsToDownloadSelectedListener listener;
+	private final ItemsToDownloadSelectedListener listener;
+	private final DateFormat dateFormat;
+	private final boolean showRemoteDate;
+	private final DownloadItem downloadItem;
+
 	private SelectionBottomSheet dialog;
 
-	private SelectIndexesUiHelper(@NonNull DownloadItem item,
+	private SelectIndexesUiHelper(@NonNull DownloadItem downloadItem,
 	                              @NonNull AppCompatActivity activity,
 	                              @NonNull DateFormat dateFormat,
 	                              boolean showRemoteDate,
 	                              @NonNull ItemsToDownloadSelectedListener listener) {
-		this.activity = activity;
 		this.app = (OsmandApplication) activity.getApplicationContext();
-		this.downloadItem = item;
+		this.activity = activity;
+		this.downloadItem = downloadItem;
 		this.dateFormat = dateFormat;
 		this.showRemoteDate = showRemoteDate;
 		this.listener = listener;
 	}
 
-	public static void showDialog(@NonNull DownloadItem item,
-	                              @NonNull AppCompatActivity activity,
-	                              @NonNull DateFormat dateFormat,
+	public static void showDialog(@NonNull DownloadItem i,
+	                              @NonNull AppCompatActivity a,
+	                              @NonNull DateFormat df,
 	                              boolean showRemoteDate,
-	                              @NonNull ItemsToDownloadSelectedListener listener) {
-		SelectIndexesUiHelper helper =
-				new SelectIndexesUiHelper(item, activity, dateFormat, showRemoteDate, listener);
-		helper.showDialogInternal();
+	                              @NonNull ItemsToDownloadSelectedListener l) {
+		new SelectIndexesUiHelper(i, a, df, showRemoteDate, l).showDialogInternal();
 	}
 
 	private void showDialogInternal() {
 		if (downloadItem.getType() == SRTM_COUNTRY_FILE) {
-			if (downloadItem instanceof MultipleIndexItem) {
+			if (downloadItem instanceof MultipleDownloadItem) {
 				showMultipleSrtmDialog();
 			} else {
 				showSingleSrtmDialog();
 			}
-		} else if (downloadItem instanceof MultipleIndexItem) {
+		} else if (downloadItem instanceof MultipleDownloadItem) {
 			showBaseDialog();
 		}
 	}
 
 	private void showBaseDialog() {
-		MultipleIndexItem multipleIndexItem = (MultipleIndexItem) downloadItem;
-		List<IndexItem> indexesToDownload = getIndexesToDownload(multipleIndexItem);
+		MultipleDownloadItem multipleDownloadItem = (MultipleDownloadItem) downloadItem;
+		List<IndexItem> indexesToDownload = getIndexesToDownload(multipleDownloadItem);
 		List<SelectableItem> allItems = new ArrayList<>();
 		List<SelectableItem> selectedItems = new ArrayList<>();
 		OsmandRegions osmandRegions = app.getRegions();
-		for (IndexItem indexItem : multipleIndexItem.getAllIndexes()) {
+		for (IndexItem indexItem : multipleDownloadItem.getAllIndexes()) {
 			SelectableItem selectableItem = new SelectableItem();
 			selectableItem.setTitle(indexItem.getVisibleName(app, osmandRegions, false));
 
@@ -119,8 +119,11 @@ public class SelectIndexesUiHelper {
 		boolean baseSRTM = SrtmDownloadItem.shouldUseMetersByDefault(app);
 		SrtmDownloadItem srtmItem = (SrtmDownloadItem) downloadItem;
 
-		SelectableItem meterItem = createSrtmSelectableItem(srtmItem.getMeterItem());
-		SelectableItem feetItem = createSrtmSelectableItem(srtmItem.getFeetItem());
+		srtmItem.setUseMeters(true);
+		SelectableItem meterItem = createSrtmSelectableItem(srtmItem.getIndexItem());
+		srtmItem.setUseMeters(false);
+		SelectableItem feetItem = createSrtmSelectableItem(srtmItem.getIndexItem());
+		srtmItem.setUseMeters(baseSRTM);
 
 		List<RadioItem> radioItems = new ArrayList<>();
 		RadioItem meters = createRadioItem(meterItem, R.string.shared_string_meters);
@@ -148,11 +151,10 @@ public class SelectIndexesUiHelper {
 	}
 
 	private SelectableItem createSrtmSelectableItem(IndexItem indexItem) {
-		boolean baseItem = SrtmDownloadItem.isMetersItem(indexItem);
 		SelectableItem selectableItem = new SelectableItem();
 		selectableItem.setTitle(indexItem.getVisibleName(app, app.getRegions(), false));
 		String size = indexItem.getSizeDescription(app);
-		size += " " + SrtmDownloadItem.getAbbreviationInScopes(app, baseItem);
+		size += " " + SrtmDownloadItem.getAbbreviationInScopes(app, indexItem);
 		String date = indexItem.getDate(dateFormat, showRemoteDate);
 		String description = app.getString(R.string.ltr_or_rtl_combine_via_bold_point, size, date);
 		selectableItem.setDescription(description);
@@ -177,42 +179,26 @@ public class SelectIndexesUiHelper {
 
 	private void showMultipleSrtmDialog() {
 		List<SelectableItem> selectedItems = new ArrayList<>();
-		final List<SelectableItem> meterItems = new ArrayList<>();
-		final List<SelectableItem> feetItems = new ArrayList<>();
-		List<IndexItem> indexesToDownload = getIndexesToDownload(downloadItem);
-		boolean baseSRTM = SrtmDownloadItem.shouldUseMetersByDefault(app);
+		List<IndexItem> indexesToDownload = getIndexesToDownload((MultipleDownloadItem) downloadItem);
 
-		List<IndexItem> allIndexes = new ArrayList<>();
-		if (downloadItem instanceof MultipleIndexItem) {
-			allIndexes.addAll(((MultipleIndexItem) downloadItem).getAllIndexes());
-		} else {
-			for (IndexItem indexItem : downloadItem.getRelatedGroup().getIndividualResources()) {
-				if (indexItem.getType() == SRTM_COUNTRY_FILE) {
-					allIndexes.add(indexItem);
-				}
-			}
-		}
+		List<DownloadItem> allItems = new ArrayList<>(((MultipleDownloadItem) downloadItem).getItems());
+		List<SelectableItem> itemsList = new ArrayList<>();
 
-		for (IndexItem indexItem : allIndexes) {
-			boolean baseItem = SrtmDownloadItem.isMetersItem(indexItem);
+		for (DownloadItem downloadItem : allItems) {
+			SrtmDownloadItem srtmItem = (SrtmDownloadItem) downloadItem;
 			SelectableItem selectableItem = new SelectableItem();
-			selectableItem.setTitle(indexItem.getVisibleName(app, app.getRegions(), false));
-			String size = indexItem.getSizeDescription(app);
-			size += " " + SrtmDownloadItem.getAbbreviationInScopes(app, baseItem);
-			String date = indexItem.getDate(dateFormat, showRemoteDate);
+			selectableItem.setTitle(downloadItem.getVisibleName(app, app.getRegions(), false));
+			String size = downloadItem.getSizeDescription(app);
+			size += " " + SrtmDownloadItem.getAbbreviationInScopes(app, srtmItem);
+			String date = srtmItem.getDate(dateFormat, showRemoteDate);
 			String description = app.getString(R.string.ltr_or_rtl_combine_via_bold_point, size, date);
 			selectableItem.setDescription(description);
-			selectableItem.setIconId(indexItem.getType().getIconResource());
-			selectableItem.setObject(indexItem);
+			selectableItem.setIconId(downloadItem.getType().getIconResource());
+			selectableItem.setObject(downloadItem);
 
-			if (baseItem) {
-				meterItems.add(selectableItem);
-			} else {
-				feetItems.add(selectableItem);
-			}
+			itemsList.add(selectableItem);
 
-			if (indexesToDownload.contains(indexItem)
-					&& (baseSRTM && baseItem || !baseSRTM && !baseItem)) {
+			if (indexesToDownload.contains(downloadItem)) {
 				selectedItems.add(selectableItem);
 			}
 		}
@@ -225,7 +211,7 @@ public class SelectIndexesUiHelper {
 		radioItems.add(feet);
 
 		final SelectMultipleWithModeBottomSheet dialog = SelectMultipleWithModeBottomSheet.showInstance(
-				activity, baseSRTM ? meterItems : feetItems, selectedItems, radioItems, true);
+				activity, itemsList, selectedItems, radioItems, true);
 
 		meters.setOnClickListener(new OnRadioItemClickListener() {
 			@Override
@@ -267,9 +253,9 @@ public class SelectIndexesUiHelper {
 			public void onSelectionApplied(List<SelectableItem> selectedItems) {
 				List<IndexItem> indexItems = new ArrayList<>();
 				for (SelectableItem item : selectedItems) {
-					Object obj = item.getObject();
-					if (obj instanceof IndexItem) {
-						indexItems.add((IndexItem) obj);
+					IndexItem index = getIndexItem((DownloadItem) item.getObject());
+					if (index != null) {
+						indexItems.add(index);
 					}
 				}
 				listener.onItemsToDownloadSelected(indexItems);
@@ -293,39 +279,29 @@ public class SelectIndexesUiHelper {
 		dialog.setApplyButtonTitle(btnTitle);
 	}
 
-	private static List<IndexItem> getIndexesToDownload(DownloadItem downloadItem) {
-		if (downloadItem instanceof MultipleIndexItem) {
-			if (downloadItem.hasActualDataToDownload()) {
-				// download left regions
-				return ((MultipleIndexItem) downloadItem).getIndexesToDownload();
-			} else {
-				// download all regions again
-				return ((MultipleIndexItem) downloadItem).getAllIndexes();
-			}
-		} else {
-			List<IndexItem> indexesToDownload = new ArrayList<>();
-			for (IndexItem indexItem : downloadItem.getRelatedGroup().getIndividualResources()) {
-				if (indexItem.getType() == SRTM_COUNTRY_FILE && indexItem.hasActualDataToDownload()) {
-					indexesToDownload.add(indexItem);
-				}
-			}
-			return indexesToDownload;
-		}
-	}
-
-	private static double getDownloadSizeInMb(@NonNull List<SelectableItem> selectableItems) {
-		List<IndexItem> indexItems = new ArrayList<>();
+	private double getDownloadSizeInMb(@NonNull List<SelectableItem> selectableItems) {
+		List<DownloadItem> downloadItems = new ArrayList<>();
 		for (SelectableItem i : selectableItems) {
 			Object obj = i.getObject();
-			if (obj instanceof IndexItem) {
-				indexItems.add((IndexItem) obj);
+			if (obj instanceof DownloadItem) {
+				downloadItems.add((DownloadItem) obj);
 			}
 		}
 		double totalSizeMb = 0.0d;
-		for (IndexItem item : indexItems) {
+		for (DownloadItem item : downloadItems) {
 			totalSizeMb += item.getSizeToDownloadInMb();
 		}
 		return totalSizeMb;
+	}
+
+	private static List<IndexItem> getIndexesToDownload(MultipleDownloadItem multipleDownloadItem) {
+		if (multipleDownloadItem.hasActualDataToDownload()) {
+			// download left regions
+			return multipleDownloadItem.getIndexesToDownload();
+		} else {
+			// download all regions again
+			return multipleDownloadItem.getAllIndexes();
+		}
 	}
 
 	public interface ItemsToDownloadSelectedListener {

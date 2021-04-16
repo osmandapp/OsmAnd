@@ -1032,7 +1032,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				}
 
 				if (SrtmDownloadItem.isSRTMItem(child)) {
-					builder.append(" ").append(SrtmDownloadItem.getAbbreviationInScopes(ctx, SrtmDownloadItem.isMetersItem(child)));
+					builder.append(" ").append(SrtmDownloadItem.getAbbreviationInScopes(ctx, child));
 				}
 
 				if (!Algorithms.isEmpty(child.getDescription())) {
