@@ -62,6 +62,7 @@ public abstract class SelectionBottomSheet extends MenuBottomSheetDialogFragment
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 		View mainView = super.onCreateView(inflater, parent, savedInstanceState);
+		createSelectionListIfPossible();
 		notifyUiInitialized();
 		return mainView;
 	}
@@ -109,7 +110,6 @@ public abstract class SelectionBottomSheet extends MenuBottomSheetDialogFragment
 				ViewGroup.LayoutParams.MATCH_PARENT,
 				ViewGroup.LayoutParams.WRAP_CONTENT));
 		listContainer.setOrientation(LinearLayout.VERTICAL);
-		fillInSelectionList();
 		return new SimpleBottomSheetItem.Builder().setCustomView(listContainer).create();
 	}
 
@@ -148,7 +148,7 @@ public abstract class SelectionBottomSheet extends MenuBottomSheetDialogFragment
 		if (!Algorithms.isEmpty(allItems)) {
 			this.allItems.clear();
 			this.allItems.addAll(allItems);
-			fillInSelectionList();
+			createSelectionListIfPossible();
 		}
 	}
 
@@ -160,7 +160,7 @@ public abstract class SelectionBottomSheet extends MenuBottomSheetDialogFragment
 		this.applySelectionListener = onApplySelectionListener;
 	}
 
-	private void fillInSelectionList() {
+	private void createSelectionListIfPossible() {
 		if (listContainer != null && allItems != null) {
 			recreateList();
 		}
