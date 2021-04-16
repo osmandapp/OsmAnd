@@ -8,10 +8,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.base.SelectMultipleItemsBottomSheet;
-import net.osmand.plus.base.SelectMultipleItemsBottomSheet.SelectionUpdateListener;
-import net.osmand.plus.base.SelectModeBottomSheet;
-import net.osmand.plus.base.SelectMultipleWithModeBottomSheet;
+import net.osmand.plus.base.MultipleSelectionBottomSheet;
+import net.osmand.plus.base.MultipleSelectionBottomSheet.SelectionUpdateListener;
+import net.osmand.plus.base.ModeSelectionBottomSheet;
+import net.osmand.plus.base.MultipleWithModeBottomSheet;
 import net.osmand.plus.base.SelectionBottomSheet;
 import net.osmand.plus.base.SelectionBottomSheet.OnApplySelectionListener;
 import net.osmand.plus.base.SelectionBottomSheet.OnUiInitializedListener;
@@ -96,8 +96,8 @@ public class SelectIndexesUiHelper {
 			}
 		}
 
-		final SelectMultipleItemsBottomSheet dialog =
-				SelectMultipleItemsBottomSheet.showInstance(activity, allItems, selectedItems, true);
+		final MultipleSelectionBottomSheet dialog =
+				MultipleSelectionBottomSheet.showInstance(activity, allItems, selectedItems, true);
 
 		dialog.setUiInitializedListener(new OnUiInitializedListener() {
 			@Override
@@ -131,7 +131,7 @@ public class SelectIndexesUiHelper {
 		radioItems.add(meters);
 		radioItems.add(feet);
 
-		dialog = SelectModeBottomSheet.showInstance(activity,
+		dialog = ModeSelectionBottomSheet.showInstance(activity,
 				baseSRTM ? meterItem : feetItem, radioItems, true);
 
 		final RadioItem initRadio = baseSRTM ? meters : feet;
@@ -139,7 +139,7 @@ public class SelectIndexesUiHelper {
 		dialog.setUiInitializedListener(new OnUiInitializedListener() {
 			@Override
 			public void onUiInitialized() {
-				SelectModeBottomSheet dialog = (SelectModeBottomSheet) SelectIndexesUiHelper.this.dialog;
+				ModeSelectionBottomSheet dialog = (ModeSelectionBottomSheet) SelectIndexesUiHelper.this.dialog;
 				dialog.setTitle(app.getString(R.string.srtm_unit_format));
 				dialog.setPrimaryDescription(app.getString(R.string.srtm_download_single_help_message));
 				updateSize(dialog, false);
@@ -169,7 +169,7 @@ public class SelectIndexesUiHelper {
 		radioItem.setOnClickListener(new OnRadioItemClickListener() {
 			@Override
 			public boolean onRadioItemClick(RadioItem radioItem, View view) {
-				((SelectModeBottomSheet)dialog).setPreviewItem(selectableItem);
+				((ModeSelectionBottomSheet)dialog).setItem(selectableItem);
 				updateSize(dialog, false);
 				return true;
 			}
@@ -210,7 +210,7 @@ public class SelectIndexesUiHelper {
 		radioItems.add(meters);
 		radioItems.add(feet);
 
-		final SelectMultipleWithModeBottomSheet dialog = SelectMultipleWithModeBottomSheet.showInstance(
+		final MultipleWithModeBottomSheet dialog = MultipleWithModeBottomSheet.showInstance(
 				activity, itemsList, selectedItems, radioItems, true);
 
 		meters.setOnClickListener(new OnRadioItemClickListener() {
@@ -265,7 +265,7 @@ public class SelectIndexesUiHelper {
 
 	private void updateSize(SelectionBottomSheet dialog,
 	                        boolean updateDescription) {
-		double sizeToDownload = getDownloadSizeInMb(dialog.getSelection());
+		double sizeToDownload = getDownloadSizeInMb(dialog.getSelectedItems());
 		String size = DownloadItem.getFormattedMb(app, sizeToDownload);
 		if (updateDescription) {
 			String total = app.getString(R.string.shared_string_total);

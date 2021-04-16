@@ -1,7 +1,12 @@
 package net.osmand.plus.base;
 
 import android.content.res.ColorStateList;
+import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.CheckBox;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,9 +17,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
-import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
-import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
-import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton.Builder;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -24,16 +27,16 @@ import static net.osmand.view.ThreeStateCheckbox.State.CHECKED;
 import static net.osmand.view.ThreeStateCheckbox.State.MISC;
 import static net.osmand.view.ThreeStateCheckbox.State.UNCHECKED;
 
-public class SelectMultipleItemsBottomSheet extends SelectionBottomSheet {
+public class MultipleSelectionBottomSheet extends SelectionBottomSheet {
 
-	public static final String TAG = SelectMultipleItemsBottomSheet.class.getSimpleName();
+	public static final String TAG = MultipleSelectionBottomSheet.class.getSimpleName();
 
-	private final List<SelectableItem> allItems = new ArrayList<>();
 	private final List<SelectableItem> selectedItems = new ArrayList<>();
 	private SelectionUpdateListener selectionUpdateListener;
 
 	@Override
-	protected void initHeaderUi() {
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
 		selectAllButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -45,39 +48,49 @@ public class SelectMultipleItemsBottomSheet extends SelectionBottomSheet {
 					selectedItems.clear();
 				}
 				onSelectedItemsChanged();
-				updateItems(checked);
+				updateItemsSelection(checked);
 			}
 		});
 	}
 
 	@Override
-	protected void createSelectionUi() {
-		for (final SelectableItem item : allItems) {
-			boolean checked = selectedItems.contains(item);
-			final BottomSheetItemWithCompoundButton[] uiItem = new BottomSheetItemWithCompoundButton[1];
-			final Builder builder = (BottomSheetItemWithCompoundButton.Builder) new Builder();
-			builder.setChecked(checked)
-					.setButtonTintList(AndroidUtils.createCheckedColorStateList(app, secondaryColorRes, activeColorRes))
-					.setLayoutId(R.layout.bottom_sheet_item_with_descr_and_checkbox_56dp)
-					.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							boolean checked = !uiItem[0].isChecked();
-							uiItem[0].setChecked(checked);
-							SelectableItem tag = (SelectableItem) uiItem[0].getTag();
-							if (checked) {
-								selectedItems.add(tag);
-							} else {
-								selectedItems.remove(tag);
-							}
-							onSelectedItemsChanged();
-						}
-					})
-					.setTag(item);
-			setupListItem(builder, item);
-			uiItem[0] = builder.create();
-			items.add(uiItem[0]);
-		}
+	protected boolean shouldShowDivider() {
+		return true;
+	}
+
+	@Override
+	protected void updateItemView(final SelectableItem item, View view) {
+		boolean checked = selectedItems.contains(item);
+		ImageView imageView = view.findViewById(R.id.icon);
+		TextView title = view.findViewById(R.id.title);
+		TextView description = view.findViewById(R.id.description);
+		final CheckBox checkBox = view.findViewById(R.id.compound_button);
+		AndroidUiHelper.setVisibility(View.VISIBLE, imageView, title, description, checkBox);
+
+		checkBox.setChecked(checked);
+		CompoundButtonCompat.setButtonTintList(checkBox, AndroidUtils.createCheckedColorStateList(app, secondaryColorRes, activeColorRes));
+
+		view.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				boolean checked = !checkBox.isChecked();
+				checkBox.setChecked(checked);
+				if (checked) {
+					selectedItems.add(item);
+				} else {
+					selectedItems.remove(item);
+				}
+				onSelectedItemsChanged();
+			}
+		});
+		title.setText(item.getTitle());
+		description.setText(item.getDescription());
+		imageView.setImageDrawable(uiUtilities.getIcon(item.getIconId(), activeColorRes));
+	}
+
+	@Override
+	protected int getItemLayoutId() {
+		return R.layout.bottom_sheet_item_with_descr_and_checkbox_56dp;
 	}
 
 	@Override
@@ -93,12 +106,6 @@ public class SelectMultipleItemsBottomSheet extends SelectionBottomSheet {
 		if (selectionUpdateListener != null) {
 			selectionUpdateListener.onSelectionUpdate();
 		}
-	}
-
-	private void setupListItem(Builder builder, SelectableItem item) {
-		builder.setTitle(item.getTitle());
-		builder.setDescription(item.getDescription());
-		builder.setIcon(uiUtilities.getIcon(item.getIconId(), activeColorRes));
 	}
 
 	private void updateSelectAllButton() {
@@ -126,18 +133,13 @@ public class SelectMultipleItemsBottomSheet extends SelectionBottomSheet {
 		rightButton.setEnabled(noEmptySelection);
 	}
 
-	private void updateItems(boolean checked) {
-		for (BaseBottomSheetItem item : items) {
-			if (item instanceof BottomSheetItemWithCompoundButton) {
-				((BottomSheetItemWithCompoundButton) item).setChecked(checked);
+	private void updateItemsSelection(boolean checked) {
+		for (SelectableItem item : allItems) {
+			View v = listViews.get(item);
+			CheckBox checkBox = v != null ? (CheckBox) v.findViewById(R.id.compound_button) : null;
+			if (checkBox != null) {
+				checkBox.setChecked(checked);
 			}
-		}
-	}
-
-	protected void setItems(List<SelectableItem> allItems) {
-		if (!Algorithms.isEmpty(allItems)) {
-			this.allItems.clear();
-			this.allItems.addAll(allItems);
 		}
 	}
 
@@ -150,7 +152,7 @@ public class SelectMultipleItemsBottomSheet extends SelectionBottomSheet {
 
 	@NonNull
 	@Override
-	public List<SelectableItem> getSelection() {
+	public List<SelectableItem> getSelectedItems() {
 		return selectedItems;
 	}
 
@@ -158,11 +160,11 @@ public class SelectMultipleItemsBottomSheet extends SelectionBottomSheet {
 		this.selectionUpdateListener = selectionUpdateListener;
 	}
 
-	public static SelectMultipleItemsBottomSheet showInstance(@NonNull AppCompatActivity activity,
-	                                                          @NonNull List<SelectableItem> items,
-	                                                          @Nullable List<SelectableItem> selected,
-	                                                          boolean usedOnMap) {
-		SelectMultipleItemsBottomSheet fragment = new SelectMultipleItemsBottomSheet();
+	public static MultipleSelectionBottomSheet showInstance(@NonNull AppCompatActivity activity,
+	                                                        @NonNull List<SelectableItem> items,
+	                                                        @Nullable List<SelectableItem> selected,
+	                                                        boolean usedOnMap) {
+		MultipleSelectionBottomSheet fragment = new MultipleSelectionBottomSheet();
 		fragment.setUsedOnMap(usedOnMap);
 		fragment.setItems(items);
 		fragment.setSelectedItems(selected);
