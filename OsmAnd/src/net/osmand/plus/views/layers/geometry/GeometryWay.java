@@ -139,6 +139,11 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 	@NonNull
 	public abstract GeometryWayStyle<?> getDefaultWayStyle();
 
+	@NonNull
+	protected Map<Integer, GeometryWayStyle<?>> getStyleMap() {
+		return styleMap;
+	}
+
 	public Location getNextVisiblePoint() {
 		return null;
 	}
@@ -380,6 +385,8 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 					}
 				}
 				context.clearCustomColor();
+				context.clearCustomShader();
+
 			}
 			drawer.drawArrowsOverPath(canvas, tb, tx, ty, angles, distances, distToFinish, styles);
 		} finally {

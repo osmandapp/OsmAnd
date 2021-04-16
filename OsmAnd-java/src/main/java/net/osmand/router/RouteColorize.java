@@ -266,6 +266,8 @@ public class RouteColorize {
             List<RouteColorizationPoint> sublist = dataList.subList(prevId, currentId);
             simplified.addAll(getExtremums(sublist));
         }
+        Node lastSurvivedPoint = result.get(result.size() - 1);
+        simplified.add(dataList.get((int) lastSurvivedPoint.getId()));
         return simplified;
     }
 

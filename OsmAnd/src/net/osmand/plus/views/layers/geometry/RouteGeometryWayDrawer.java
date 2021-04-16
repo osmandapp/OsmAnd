@@ -44,7 +44,6 @@ public class RouteGeometryWayDrawer extends GeometryWayDrawer<RouteGeometryWayCo
 			LinearGradient gradient = new LinearGradient(style.startXY.x, style.startXY.y, style.endXY.x, style.endXY.y,
 					style.startColor, style.endColor, Shader.TileMode.CLAMP);
 			getContext().getAttrs().customColorPaint.setShader(gradient);
-			getContext().getAttrs().customColorPaint.setStrokeCap(Paint.Cap.ROUND);
 		}
 		super.drawPath(canvas, path, s);
 	}

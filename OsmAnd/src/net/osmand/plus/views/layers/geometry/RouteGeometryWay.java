@@ -15,6 +15,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.track.GradientScaleType;
 import net.osmand.router.RouteColorize;
 import net.osmand.router.RouteColorize.RouteColorizationPoint;
+import net.osmand.util.Algorithms;
 
 import java.util.Collections;
 import java.util.List;
@@ -46,6 +47,11 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 	                                @Nullable Float width,
 	                                @Nullable @ColorInt Integer pointColor,
 									@Nullable GradientScaleType scaleType) {
+		if (scaleType != null && !Algorithms.objectEquals(customWidth, width)) {
+			for (GeometryWayStyle<?> style : getStyleMap().values()) {
+				style.width = width;
+			}
+		}
 		this.customColor = color;
 		this.customWidth = width;
 		this.customPointColor = pointColor;
@@ -54,50 +60,46 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 		if (width != null) {
 			getContext().getAttrs().shadowPaint.setStrokeWidth(width + getContext().getDensity() * 2);
 		}
-
+		getContext().getAttrs().customColorPaint.setStrokeCap(scaleType != null ? Paint.Cap.ROUND : Paint.Cap.BUTT);
 	}
 
 	public void updateRoute(RotatedTileBox tb, RouteCalculationResult route, OsmandApplication app) {
-		if (tb.getMapDensity() == getMapDensity() && this.route == route && prevScaleType == scaleType) {
-			return;
+		if (tb.getMapDensity() != getMapDensity() || this.route != route || prevScaleType != scaleType) {
+			this.route = route;
+			List<Location> locations = route != null ? route.getImmutableAllLocations() : Collections.<Location>emptyList();
+
+			if (scaleType == null || locations.size() < 2) {
+				updateWay(locations, tb);
+				return;
+			}
+			GPXFile gpxFile = GpxUiHelper.makeGpxFromRoute(route, app);
+			if (!gpxFile.hasAltitude) {
+				updateWay(locations, tb);
+				return;
+			}
+
+			// Start point can have wrong zero altitude
+			List<GPXUtilities.WptPt> pts = gpxFile.tracks.get(0).segments.get(0).points;
+			GPXUtilities.WptPt firstPt = pts.get(0);
+			if (firstPt.ele == 0) {
+				firstPt.ele = pts.get(1).ele;
+			}
+
+			RouteColorize routeColorize = new RouteColorize(tb.getZoom(), gpxFile, null, scaleType.toColorizationType(), 0);
+			List<RouteColorizationPoint> points = routeColorize.getResult(false);
+
+			updateWay(new GradientGeometryWayProvider(routeColorize, points), createStyles(points), tb);
 		}
-
-		this.route = route;
-		List<Location> locations = route != null ? route.getImmutableAllLocations() : Collections.<Location>emptyList();
-
-		if (scaleType == null || locations.size() < 2) {
-			updateWay(locations, tb);
-			return;
-		}
-		GPXFile gpxFile = GpxUiHelper.makeGpxFromRoute(route, app);
-		if (!gpxFile.hasAltitude) {
-			updateWay(locations, tb);
-			return;
-		}
-
-		// Start point can have wrong zero altitude
-		List<GPXUtilities.WptPt> pts = gpxFile.tracks.get(0).segments.get(0).points;
-		GPXUtilities.WptPt firstPt = pts.get(0);
-		if (firstPt.ele == 0) {
-			firstPt.ele = pts.get(1).ele;
-		}
-
-		RouteColorize routeColorize = new RouteColorize(tb.getZoom(), gpxFile, null, scaleType.toColorizationType(), 0);
-		List<RouteColorizationPoint> points = routeColorize.getResult(false);
-
-		updateWay(new GradientGeometryWayProvider(routeColorize), createStyles(points), tb);
 	}
 
 	private Map<Integer, GeometryWayStyle<?>> createStyles(List<RouteColorizationPoint> points) {
 		Map<Integer, GeometryWayStyle<?>> styleMap = new TreeMap<>();
-
 		for (int i = 1; i < points.size(); i++) {
 			GeometryGradientWayStyle style = getGradientWayStyle();
 			style.startColor = points.get(i - 1).color;
 			style.endColor = points.get(i).color;
 			styleMap.put(i, style);
 		}
-
 		return styleMap;
 	}
 
@@ -183,9 +185,9 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 		private final RouteColorize routeColorize;
 		private final List<RouteColorizationPoint> locations;
 
-		public GradientGeometryWayProvider(RouteColorize routeColorize) {
+		public GradientGeometryWayProvider(RouteColorize routeColorize, List<RouteColorizationPoint> locations) {
 			this.routeColorize = routeColorize;
-			locations = routeColorize.getResult(false);
+			this.locations = locations;
 		}
 
 		public List<RouteColorizationPoint> simplify(int zoom) {
