@@ -10,11 +10,10 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.helpers.enums.MetricsConstants;
-import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.text.DateFormat;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 import static net.osmand.IndexConstants.BINARY_SRTM_MAP_INDEX_EXT;
@@ -105,7 +104,6 @@ public class SrtmDownloadItem extends DownloadItem {
 
 	@Override
 	public String getFileName() {
-		// may be check only downloaded items if any downloaded
 		return getIndexItem().getFileName();
 	}
 
@@ -113,14 +111,11 @@ public class SrtmDownloadItem extends DownloadItem {
 	@Override
 	public List<File> getDownloadedFiles(@NonNull OsmandApplication app) {
 		// may be check both indexes files
-		List<File> result;
+		List<File> result = new ArrayList<>();
 		for (IndexItem index : indexes) {
-			result = index.getDownloadedFiles(app);
-			if (!Algorithms.isEmpty(result)) {
-				return result;
-			}
+			result.addAll(index.getDownloadedFiles(app));
 		}
-		return Collections.emptyList();
+		return result;
 	}
 
 	public String getDate(@NonNull DateFormat dateFormat, boolean remote) {
