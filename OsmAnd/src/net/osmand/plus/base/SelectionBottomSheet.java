@@ -180,6 +180,10 @@ public abstract class SelectionBottomSheet extends MenuBottomSheetDialogFragment
 		listContainer.addView(view);
 	}
 
+	public List<SelectableItem> getAllItems() {
+		return allItems;
+	}
+
 	@NonNull
 	public abstract List<SelectableItem> getSelectedItems();
 

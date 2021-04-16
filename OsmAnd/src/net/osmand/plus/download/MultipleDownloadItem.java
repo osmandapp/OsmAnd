@@ -1,5 +1,7 @@
 package net.osmand.plus.download;
 
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -7,6 +9,7 @@ import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 
 import java.io.File;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +35,7 @@ public class MultipleDownloadItem extends DownloadItem {
 		return indexes;
 	}
 
-	public List<DownloadItem> getItems() {
+	public List<DownloadItem> getAllItems() {
 		return items;
 	}
 
@@ -96,19 +99,19 @@ public class MultipleDownloadItem extends DownloadItem {
 		return result;
 	}
 
-	public List<IndexItem> getIndexesToDownload() {
-		List<IndexItem> indexesToDownload = new ArrayList<>();
-		for (IndexItem item : getAllIndexes()) {
+	public List<DownloadItem> getItemsToDownload() {
+		List<DownloadItem> itemsToDownload = new ArrayList<>();
+		for (DownloadItem item : getAllItems()) {
 			if (item.hasActualDataToDownload()) {
-				indexesToDownload.add(item);
+				itemsToDownload.add(item);
 			}
 		}
-		return indexesToDownload;
+		return itemsToDownload;
 	}
 
 	@Override
 	public boolean hasActualDataToDownload() {
-		return getIndexesToDownload().size() > 0;
+		return getItemsToDownload().size() > 0;
 	}
 
 	@Override
@@ -140,5 +143,29 @@ public class MultipleDownloadItem extends DownloadItem {
 		}
 		return null;
 	}
+
+	@Override
+	public boolean isUseAbbreviation() {
+		for (DownloadItem item : items) {
+			if (item.isUseAbbreviation()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public String getAbbreviationInScopes(Context ctx) {
+		for (DownloadItem item : items) {
+			return item.getAbbreviationInScopes(ctx);
+		}
+		return "";
+	}
+
+	@Override
+	public String getDate(@NonNull DateFormat dateFormat, boolean remote) {
+		return "";
+	}
+
 
 }

@@ -38,6 +38,10 @@ public class SrtmDownloadItem extends DownloadItem {
 		this.useMeters = useMeters;
 	}
 
+	public boolean isUseMeters() {
+		return useMeters;
+	}
+
 	@Nullable
 	public IndexItem getIndexItem() {
 		for (IndexItem index : indexes) {
@@ -124,6 +128,16 @@ public class SrtmDownloadItem extends DownloadItem {
 		return getIndexItem().getDate(dateFormat, remote);
 	}
 
+	@Override
+	public boolean isUseAbbreviation() {
+		return true;
+	}
+
+	@Override
+	public String getAbbreviationInScopes(Context ctx) {
+		return getAbbreviationInScopes(ctx, this);
+	}
+
 	public static boolean shouldUseMetersByDefault(@NonNull OsmandApplication app) {
 		MetricsConstants metricSystem = app.getSettings().METRIC_SYSTEM.get();
 		return metricSystem != MetricsConstants.MILES_AND_FEET;
@@ -147,7 +161,9 @@ public class SrtmDownloadItem extends DownloadItem {
 		} else if (item instanceof SrtmDownloadItem) {
 			return ((SrtmDownloadItem) item).useMeters;
 		} else if (item instanceof MultipleDownloadItem) {
-			return isMetersItem(((MultipleDownloadItem) item).getItems().get(0));
+			for (DownloadItem downloadItem : ((MultipleDownloadItem) item).getAllItems()) {
+				return isMetersItem(downloadItem);
+			}
 		}
 		return false;
 	}

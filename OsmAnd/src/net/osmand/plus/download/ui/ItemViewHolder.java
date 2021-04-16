@@ -44,7 +44,6 @@ import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.download.SelectIndexesUiHelper;
 import net.osmand.plus.download.SelectIndexesUiHelper.ItemsToDownloadSelectedListener;
 import net.osmand.plus.download.MultipleDownloadItem;
-import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.download.ui.LocalIndexesFragment.LocalIndexOperationTask;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
@@ -52,10 +51,7 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.text.DateFormat;
-import java.util.ArrayList;
 import java.util.List;
-
-import static net.osmand.plus.download.DownloadActivityType.SRTM_COUNTRY_FILE;
 
 public class ItemViewHolder {
 
@@ -211,8 +207,8 @@ public class ItemViewHolder {
 				MultipleDownloadItem item = (MultipleDownloadItem) downloadItem;
 				String allRegionsHeader = context.getString(R.string.shared_strings_all_regions);
 				String regionsHeader = context.getString(R.string.regions);
-				String allRegionsCount = String.valueOf(item.getItems().size());
-				String leftToDownloadCount = String.valueOf(item.getIndexesToDownload().size());
+				String allRegionsCount = String.valueOf(item.getAllItems().size());
+				String leftToDownloadCount = String.valueOf(item.getItemsToDownload().size());
 				String header;
 				String count;
 				if (item.hasActualDataToDownload()) {
@@ -231,8 +227,8 @@ public class ItemViewHolder {
 					count = allRegionsCount;
 				}
 				String fullDescription = context.getString(R.string.ltr_or_rtl_combine_via_colon, header, count);
-				if (SrtmDownloadItem.isSRTMItem(downloadItem)) {
-					fullDescription += " " + SrtmDownloadItem.getAbbreviationInScopes(context, item);
+				if (item.isUseAbbreviation()) {
+					fullDescription += " " + item.getAbbreviationInScopes(context);
 				}
 				if (item.hasActualDataToDownload()) {
 					fullDescription = context.getString(
@@ -240,24 +236,14 @@ public class ItemViewHolder {
 							item.getSizeDescription(context));
 				}
 				descrTextView.setText(fullDescription);
-			} else if (downloadItem instanceof SrtmDownloadItem) {
-				SrtmDownloadItem item = (SrtmDownloadItem) downloadItem;
-				String pattern = context.getString(R.string.ltr_or_rtl_combine_via_bold_point);
-				String type = item.getType().getString(context);
-				String size = item.getSizeDescription(context)
-						+ " " + SrtmDownloadItem.getAbbreviationInScopes(context, item);
-				String date = item.getDate(dateFormat, showRemoteDate);
-				String fullDescription = String.format(pattern, size, date);
-				if (showTypeInDesc) {
-					fullDescription = String.format(pattern, type, fullDescription);
-				}
-				descrTextView.setText(fullDescription);
 			} else {
-				IndexItem item = (IndexItem) downloadItem;
 				String pattern = context.getString(R.string.ltr_or_rtl_combine_via_bold_point);
-				String type = item.getType().getString(context);
-				String size = item.getSizeDescription(context);
-				String date = item.getDate(dateFormat, showRemoteDate);
+				String type = downloadItem.getType().getString(context);
+				String size = downloadItem.getSizeDescription(context);
+				if (downloadItem.isUseAbbreviation()) {
+					size += " " + downloadItem.getAbbreviationInScopes(context);
+				}
+				String date = downloadItem.getDate(dateFormat, showRemoteDate);
 				String fullDescription = String.format(pattern, size, date);
 				if (showTypeInDesc) {
 					fullDescription = String.format(pattern, type, fullDescription);
