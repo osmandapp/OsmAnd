@@ -1965,7 +1965,7 @@ public class GPXUtilities {
 		}
 	}
 
-	private static void writeNotNullText(XmlSerializer serializer, String tag, String value) throws IOException {
+	public static void writeNotNullText(XmlSerializer serializer, String tag, String value) throws IOException {
 		if (value != null) {
 			serializer.startTag(null, tag);
 			serializer.text(value);
@@ -2173,6 +2173,14 @@ public class GPXUtilities {
 				// ignore
 			}
 		}
+	}
+
+	public static class ItineraryGroupItem {
+		public String name;
+		public String type;
+		public String path;
+		public String alias;
+		public String categories;
 	}
 
 	public static GPXFile loadGPXFile(InputStream f) {

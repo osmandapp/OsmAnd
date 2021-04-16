@@ -6,13 +6,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXExtensionsWriter;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.ItineraryGroupItem;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxSelectionHelper;
@@ -32,8 +35,10 @@ import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
+import org.xmlpull.v1.XmlSerializer;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -46,6 +51,7 @@ import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import static net.osmand.GPXUtilities.writeNotNullText;
 import static net.osmand.plus.mapmarkers.MapMarkersHelper.BY_DATE_ADDED_DESC;
 
 public class ItineraryHelper {
@@ -73,11 +79,12 @@ public class ItineraryHelper {
 		this.app = app;
 		markersHelper = app.getMapMarkersHelper();
 		markersDbHelper = app.getMapMarkersDbHelper();
-		loadGroups();
+		loadMarkersGroups();
 	}
 
 	public static class ItineraryItem {
 
+		public final String id;
 		public final Object object;
 		public final ItineraryType type;
 		public final ItineraryGroup group;
@@ -86,6 +93,18 @@ public class ItineraryHelper {
 			this.type = type;
 			this.group = group;
 			this.object = object;
+			this.id = acquireItemId(object);
+		}
+
+		private String acquireItemId(Object object) {
+			if (object instanceof MapMarker) {
+				return (((MapMarker) object)).id;
+			} else if (object instanceof WptPt) {
+				return (((WptPt) object)).name;
+			} else if (object instanceof FavouritePoint) {
+				return (((FavouritePoint) object)).getName();
+			}
+			return "";
 		}
 	}
 
@@ -95,7 +114,6 @@ public class ItineraryHelper {
 		public String name;
 		public ItineraryType type = ItineraryType.POINTS;
 		public Set<String> wptCategories;
-		public boolean disabled;
 
 		private List<ItineraryItem> itineraryItems = new ArrayList<>();
 
@@ -108,7 +126,6 @@ public class ItineraryHelper {
 			itineraryGroup.name = markersGroup.getName();
 			itineraryGroup.type = markersGroup.getType();
 			itineraryGroup.wptCategories = markersGroup.getWptCategories();
-			itineraryGroup.disabled = markersGroup.isDisabled();
 
 			if (markersGroup.getType() == ItineraryType.FAVOURITES) {
 				syncFavoriteGroup(itineraryGroup, markersGroup);
@@ -118,22 +135,17 @@ public class ItineraryHelper {
 				syncMarkersGroup(itineraryGroup, markersGroup);
 			}
 		}
-		if (trimEmptyGroups()) {
-
-		}
+		trimEmptyGroups();
 	}
 
-	public boolean trimEmptyGroups() {
-		boolean changed = false;
+	public void trimEmptyGroups() {
 		Iterator<ItineraryGroup> iterator = itineraryGroups.iterator();
 		while (iterator.hasNext()) {
 			ItineraryGroup group = iterator.next();
 			if (Algorithms.isEmpty(group.itineraryItems)) {
-				changed = true;
 				iterator.remove();
 			}
 		}
-		return changed;
 	}
 
 	private void syncFavoriteGroup(ItineraryGroup itineraryGroup, MapMarkersGroup markersGroup) {
@@ -186,12 +198,11 @@ public class ItineraryHelper {
 
 	private boolean shouldAddWpt(WptPt wptPt, Set<String> wptCategories) {
 		boolean addAll = wptCategories == null || wptCategories.isEmpty();
-		boolean passed = wptPt.getExtensionsToRead().containsKey(PASSED_TIMESTAMP);
-		return !passed && (addAll || wptCategories.contains(wptPt.category)
-				|| wptPt.category == null && wptCategories.contains(""));
+		return addAll || wptCategories.contains(wptPt.category)
+				|| wptPt.category == null && wptCategories.contains("");
 	}
 
-	private void loadGroups() {
+	private void loadMarkersGroups() {
 		Map<String, MapMarkersGroup> groupsMap = markersDbHelper.getAllGroupsMap();
 		List<MapMarker> allMarkers = new ArrayList<>(markersHelper.getMapMarkers());
 		allMarkers.addAll(markersHelper.getMapMarkersHistory());
@@ -236,17 +247,53 @@ public class ItineraryHelper {
 		}
 	}
 
+	private void assignRouteExtensionWriter(GPXFile gpx, final List<ItineraryGroupItem> groups) {
+		if (gpx.getExtensionsWriter() == null) {
+			gpx.setExtensionsWriter(new GPXExtensionsWriter() {
+				@Override
+				public void writeExtensions(XmlSerializer serializer) {
+					for (ItineraryGroupItem group : groups) {
+						try {
+							serializer.startTag(null, "itinerary_group");
+
+							writeNotNullText(serializer, "osmand:name", group.name);
+							writeNotNullText(serializer, "osmand:type", group.type);
+							writeNotNullText(serializer, "osmand:path", group.path);
+							writeNotNullText(serializer, "osmand:alias", group.alias);
+							writeNotNullText(serializer, "osmand:categories", group.categories);
+
+							serializer.endTag(null, "itinerary_group");
+						} catch (IOException e) {
+							log.error(e);
+						}
+					}
+				}
+			});
+		}
+	}
+
+	public File getExternalFile() {
+		return new File(app.getAppPath(null), FILE_TO_SAVE);
+	}
+
+	private File getInternalFile() {
+		return app.getFileStreamPath(FILE_TO_BACKUP);
+	}
+
+	public File getBackupFile() {
+		return FavouritesDbHelper.getBackupFile(app, "itinerary_bak_");
+	}
+
 	public List<MapMarkersGroup> getMapMarkersGroups() {
 		return mapMarkersGroups;
 	}
 
-	public void syncAllGroups() {
+	public void syncMarkersGroups() {
 		for (MapMarkersGroup group : mapMarkersGroups) {
-			if (group.getId() != null && group.getName() != null) {
+			if (group.getType() != ItineraryType.MARKERS) {
 				runGroupSynchronization(group);
 			}
 		}
-		syncItineraryGroups();
 	}
 
 	public void updateGroupWptCategories(@NonNull MapMarkersGroup group, Set<String> wptCategories) {
