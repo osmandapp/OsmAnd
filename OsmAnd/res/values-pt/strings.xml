@@ -497,7 +497,7 @@
     <string name="live_monitoring_interval">Intervalo de rastreamento online</string>
     <string name="live_monitoring_url_descr">Especifique o endereço web com a sintaxe de parâmetros: lat={0}, lon={1}, data/hora={2}, hdop={3}, altitude={4}, velocidade={5}, bearing={6}.</string>
     <string name="live_monitoring_url">Endereço web de rastreamento online</string>
-    <string name="gpx_monitoring_disabled_warn">Registo de trajeto usando widget GPX ou via \'Gravação de viagem\' nas configurações.</string>
+    <string name="gpx_monitoring_disabled_warn">Registo de trajeto usando widget GPX ou via \'Gravar viagem\' nas configurações.</string>
     <string name="show_current_gpx_title">Mostrar rota atual</string>
     <string name="free_version_message">Pode descarregar ou atualizar %1$s mapas.</string>
     <string name="free_version_title">Versão gratuita</string>
@@ -810,7 +810,7 @@
     <string name="rendering_attr_roadColors_description">Selecione um esquema de cores de estrada:</string>
     <string name="rendering_attr_roadColors_name">Esquema de cores</string>
     <string name="map_widget_show_destination_arrow">Ver direção para o destino</string>
-    <string name="enable_plugin_monitoring_services">Ative a extensão de \"Gravação de viagem\" para usar serviços de registo de posição (registo GPX, rastreamento online)</string>
+    <string name="enable_plugin_monitoring_services">Ative a extensão de \"Gravar viagem\" para usar serviços de registo de posição (registo GPX, rastreamento online)</string>
     <string name="non_optimal_route_calculation">Calcular rota possivelmente não ideal em longas distâncias</string>
     <string name="gps_not_available">Ative o GPS nas configurações</string>
     <string name="map_widget_monitoring_services">Serviços de registo</string>
@@ -852,7 +852,7 @@
     <string name="search_villages_and_postcodes">Pesquisar mais povoações/códigos postais</string>
     <string name="dropbox_plugin_description">Sincroniza trilhos e notas de vídeo/áudio com a sua conta Dropbox.</string>
     <string name="av_def_action_video">Gravar vídeo</string>
-    <string name="av_def_action_audio">Gravar audio</string>
+    <string name="av_def_action_audio">Gravar áudio</string>
     <string name="av_widget_action_descr">Ação predefinida do widget:</string>
     <string name="av_widget_action">Ação widget padrão</string>
     <string name="av_video_format">Formato de saída de vídeo</string>
@@ -1113,7 +1113,7 @@
     <string name="lang_en">Inglês</string>
     <string name="lang_af">Africâner</string>
     <string name="lang_hy">Arménio</string>
-    <string name="calculate_osmand_route_without_internet">Cálculo offline do segmento de rota OsmAnd</string>
+    <string name="calculate_osmand_route_without_internet">Calcular segmento de rota OsmAnd sem Internet</string>
     <string name="gpx_option_calculate_first_last_segment">Calcular rota de OsmAnd para o primeiro e último segmento da rota</string>
     <string name="use_displayed_track_for_navigation">Usar o trajeto indicado para a navegação\?</string>
     <string name="keep_and_add_destination_point">Adicionar como destino posterior</string>
@@ -1825,8 +1825,8 @@
     <string name="marker_save_as_track_descr">Exporte os seus marcadores para um ficheiro que pode especificar aqui:</string>
     <string name="move_to_history">Mover para histórico</string>
     <string name="group_will_be_removed_after_restart">O grupo terá desaparecido na próxima vez que iniciar a aplicação.</string>
-    <string name="show_guide_line">Mostrar linhas direcionais</string>
-    <string name="show_arrows_on_the_map">Mostrar setas no mapa</string>
+    <string name="show_guide_line">Mostrar linhas para marcadores</string>
+    <string name="show_arrows_on_the_map">Mostrar setas para marcadores</string>
     <string name="show_passed">Mostrar passado</string>
     <string name="hide_passed">Esconder o passado</string>
     <string name="remove_from_map_markers">Remover dos \'Marcadores do mapa\'</string>
@@ -2132,8 +2132,8 @@
     <string name="thank_you_for_feedback">Obrigado pelos seus comentários</string>
     <string name="search_street">Procurar rua</string>
     <string name="shared_string_restore">Restaurar</string>
-    <string name="keep_passed_markers_descr">Os marcadores adicionados como um grupo de favoritos ou ponto de rota GPX marcados como Passado permanecerão no mapa. Se o grupo não estiver ativo, os marcadores desaparecerão do mapa.</string>
-    <string name="keep_passed_markers">Manter marcadores passados no mapa</string>
+    <string name="keep_passed_markers_descr">Os marcadores adicionados como um grupo de favoritos ou ponto de rota GPX marcados como visitado (passado) permanecerão no mapa. Se o grupo não estiver ativo, os marcadores desaparecerão do mapa.</string>
+    <string name="keep_passed_markers">Manter marcadores visitados</string>
     <string name="more_transport_on_stop_hint">Outros transportes disponíveis nesta paragem.</string>
     <string name="ask_for_location_permission">Por favor, conceda ao OsmAnd o acesso à localização para continuar.</string>
     <string name="markers_remove_dialog_msg">Eliminar o marcador de mapa \'%s\'\?</string>
@@ -2240,11 +2240,11 @@
     <string name="enter_lon">Digite a longitude</string>
     <string name="enter_lat">Digite a latitude</string>
     <string name="enter_lat_and_lon">Digite a latitude e a longitude</string>
-    <string name="dd_mm_ss_format">DD°MM′SS″</string>
-    <string name="dd_dddddd_format">DD.DDDDDD°</string>
-    <string name="dd_ddddd_format">DD.DDDDD°</string>
-    <string name="dd_mm_mmmm_format">DD°MM.MMMM′</string>
-    <string name="dd_mm_mmm_format">DD°MM.MMM′</string>
+    <string name="dd_mm_ss_format">GG°MM′SS″</string>
+    <string name="dd_dddddd_format">GG.GGGGGG°</string>
+    <string name="dd_ddddd_format">GG.GGGGG°</string>
+    <string name="dd_mm_mmmm_format">GG°MM.MMMM′</string>
+    <string name="dd_mm_mmm_format">GG°MM.MMM′</string>
     <string name="east_abbreviation">E</string>
     <string name="west_abbreviation">O</string>
     <string name="south_abbreviation">S</string>
@@ -2321,7 +2321,7 @@
     <string name="shared_string_two">Dois</string>
     <string name="shared_string_one">Um</string>
     <string name="show_guide_line_descr">Mostrar linha direcional desde a sua posição até os locais dos marcadores ativos.</string>
-    <string name="show_arrows_descr">Mostrar uma ou duas setas indicando a direção para os marcadores ativos.</string>
+    <string name="show_arrows_descr">Mostrar uma ou duas setas indicando a direção em linha reta para os marcadores ativos.</string>
     <string name="distance_indication_descr">Escolher como mostrar a distância para os marcadores ativos.</string>
     <string name="active_markers_descr">Especifique a quantidade de indicadores de orientação.</string>
     <string name="digits_quantity">Número de casas decimais</string>
@@ -2602,11 +2602,11 @@
 \n• Visualização opcional de velocidade e altitudes
 \n• Visualização de curvas de nível e sombreamento de relevo (com uma extensão adicional)</string>
     <string name="osmand_plus_extended_description_part7">Contribua diretamente para o OpenStreetMap
-\n • Envie relatórios de erros.
-\n • Envie trilhos GPX para o OpenStreetMap diretamente da aplicação.
-\n • Adicione POIs e envie-os diretamente para o OpenStreetMap (ou mais tarde se estiver desconectado da Internet).
-\n • Gravação de viagem opcional também em plano de fundo (enquanto o dispositivo está no modo adormecido).
-\n O OsmAnd é um programa de fonte aberta desenvolvido ativamente. Todos podem contribuir para a aplicação reportando erros, a melhorar as traduções ou a programar novas funcionalidades. Além disso, o projeto conta com contribuições financeiras para financiar a programação e testes de novas funcionalidades.
+\n• Envie relatórios de erros.
+\n• Envie trilhos GPX para o OpenStreetMap diretamente da aplicação.
+\n• Adicione POIs e envie-os diretamente para o OpenStreetMap (ou mais tarde se estiver desconectado da Internet).
+\n• Gravar viagem opcional também em plano de fundo (enquanto o dispositivo está no modo adormecido).
+\n• O OsmAnd é um programa de fonte aberta desenvolvido ativamente. Todos podem contribuir para a aplicação reportando erros, a melhorar as traduções ou a programar novas funcionalidades. Além disso, o projeto conta com contribuições financeiras para financiar a programação e testes de novas funcionalidades.
 \n</string>
     <string name="osmand_plus_extended_description_part8">Cobertura de mapa e qualidade aproximada:
 \n• Europa Ocidental: ****
@@ -2685,7 +2685,7 @@
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Atualizar tudo (%1$s MB)</string>
     <string name="save_poi_too_many_uppercase">O nome contém demasiadas letras maiúsculas. Continuar\?</string>
-    <string name="configure_screen_quick_action">Ação rápida</string>
+    <string name="configure_screen_quick_action">Botão de ação rápida</string>
     <string name="quick_action_item_action">Ação %d</string>
     <string name="quick_action_item_screen">Ecrã %d</string>
     <string name="quick_action_add_marker">Adicionar marcador de mapa</string>
@@ -2701,11 +2701,11 @@
     <string name="quick_action_navigation_voice_on">Desativar voz</string>
     <string name="quick_action_add_parking">Adicionar local de estacionamento</string>
     <string name="quick_action_new_action">Adicionar ação</string>
-    <string name="quick_action_edit_action">Editar ação</string>
+    <string name="quick_action_edit_action">Editar botão de ação rápida</string>
     <string name="quick_action_add_favorite">Adicionar favorito</string>
     <string name="dialog_add_action_title">Adicionar ação</string>
-    <string name="quick_actions_delete">Eliminar ação</string>
-    <string name="quick_actions_delete_text">Tem a certeza de que quer eliminar a ação \"%s\"\?</string>
+    <string name="quick_actions_delete">Eliminar botão de ação rápida</string>
+    <string name="quick_actions_delete_text">Tem a certeza de que quer eliminar o botão de ação rápida \"%s\"\?</string>
     <string name="quick_favorites_show_favorites_dialog">Mostrar lista dos favoritos</string>
     <string name="quick_favorites_name_preset">Nome do modelo</string>
     <string name="quick_action_add_marker_descr">O botão é para adicionar um marcador de mapa no local do centro do ecrã.</string>
@@ -2720,8 +2720,8 @@
     <string name="quick_action_interim_dialog">Mostrar uma janela temporal</string>
     <string name="favorite_autofill_toast_text">" guardado em "</string>
     <string name="favorite_empty_place_name">Local</string>
-    <string name="quick_action_duplicates">O nome da ação rápida foi alterado para %1$s para evitar duplicação.</string>
-    <string name="quick_action_duplicate">Nome de ação rápida duplicado</string>
+    <string name="quick_action_duplicates">O nome do botão de ação rápida foi alterado para %1$s para evitar duplicação.</string>
+    <string name="quick_action_duplicate">Nome do botão de ação rápida duplicado</string>
     <string name="quick_action_showhide_favorites_descr">Uma alternância para mostrar ou ocultar os pontos favoritos no mapa.</string>
     <string name="quick_action_showhide_poi_descr">Uma alternância para mostrar ou ocultar POIs no mapa.</string>
     <string name="quick_action_poi_show">Mostrar %1$s</string>
@@ -2754,7 +2754,7 @@
     <string name="quick_action_map_source_action">Adicionar origem do mapa</string>
     <string name="quick_action_map_source_switch">A origem do mapa foi alterada para \"%s\".</string>
     <string name="quick_action_btn_tutorial_title">Mudar posição do botão</string>
-    <string name="quick_action_btn_tutorial_descr">Segure e arraste o botão para mudar a sua posição no ecrã.</string>
+    <string name="quick_action_btn_tutorial_descr">Pressione e segure arrastando o botão para mudar a sua posição no ecrã.</string>
     <string name="shared_string_action_name">Nome da ação</string>
     <string name="mappilary_no_internet_desc">As fotografias do Mapillary só estão disponíveis online.</string>
     <string name="retry">Repetir</string>
@@ -2997,7 +2997,7 @@
     <string name="third_party_routing_type">Roteamento de terceiros</string>
     <string name="application_profiles_descr">Escolha os perfis mostrados na aplicação.</string>
     <string name="application_profiles">Perfis da aplicação</string>
-    <string name="quick_action_need_to_add_item_to_list">Adicione pelo menos um item à lista nas configurações de \'Ação rápida\'</string>
+    <string name="quick_action_need_to_add_item_to_list">Adicione pelo menos um item à lista nas configurações de \'Botão de ações rápidas\'</string>
     <string name="routing_attr_piste_type_downhill_name">Esqui alpino e descendente</string>
     <string name="routing_attr_piste_type_downhill_description">Pistas para esqui alpino ou downhill e acesso a teleféricos de esqui.</string>
     <string name="routing_attr_piste_type_nordic_name">Esqui de travessia e nórdico</string>
@@ -3525,7 +3525,7 @@
     <string name="select_wikipedia_article_langs">Selecione as línguas dos artigos da Wikipédia no mapa. Mude para qualquer língua disponível enquanto lê o artigo.</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>
     <string name="tracker_item">OsmAnd Tracker</string>
-    <string name="quick_action_item">Ação rápida</string>
+    <string name="quick_action_item">Botão de ações rápidas</string>
     <string name="radius_ruler_item">Régua radial</string>
     <string name="measure_distance_item">Medir distância</string>
     <string name="travel_item">Viagem (Wikivoyage e Wikipédia)</string>
@@ -3759,9 +3759,9 @@
     <string name="save_track_to_gpx_globally">Registar o trilho num ficheiro GPX</string>
     <string name="layer_gpx_layer">Trilhos</string>
     <string name="context_menu_item_add_waypoint">Adicionar ponto de passagem de trilho</string>
-    <string name="map_widget_monitoring">Gravação de viagem</string>
+    <string name="map_widget_monitoring">Gravar viagem</string>
     <string name="monitoring_control_start">Gravar</string>
-    <string name="save_global_track_interval_descr">Especifique o intervalo de registo para a gravação geral do trilho (ligado através do widget de \'gravação de viagem\' no mapa).</string>
+    <string name="save_global_track_interval_descr">Especifique o intervalo de registo para a gravação geral do trilho (ligado através do widget de \'Gravar viagem\' no mapa).</string>
     <string name="gpx_monitoring_stop">Pausar a gravação da viagem</string>
     <string name="gpx_monitoring_start">Retomar a gravação da viagem</string>
     <string name="system_default_theme">Predefinição do sistema</string>
@@ -3962,11 +3962,11 @@
     <string name="live_update_delete_updates_msg">Tem a certeza que quer eliminar todas as %s atualizações OsmAnd Live\?</string>
     <string name="release_4_0_beta">• Atualizações OsmAnd Live movidas para \"Descarregamentos &gt; Atualizações\"
 \n
-\n • Os trilhos podem ser agora coloridos conforme a altitude, velocidade e declive.
+\n• Os trilhos podem ser agora coloridos conforme a altitude, velocidade e declive.
 \n
-\n • Adicionada opção para alterar a aparência da linha de rota de navegação
+\n• Adicionada opção para alterar a aparência da linha de rota de navegação
 \n
-\n • Janela de diálogo \"Gravação do trilho\" atualizada
+\n• Janela de diálogo \"Gravação do trilho\" atualizada
 \n
 \n</string>
     <string name="routing_attr_height_obstacles_description">O roteamento pode evitar subidas íngremes.</string>
