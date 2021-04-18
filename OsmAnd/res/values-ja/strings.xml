@@ -2818,9 +2818,9 @@ POIの更新は利用できません</string>
     <string name="osm_live_subscriptions">サブスクリプション</string>
     <string name="powered_by_osmand">By OsmAnd</string>
     <string name="osm_live_plan_pricing">プランと料金</string>
-    <string name="osm_live_payment_monthly_title">月間</string>
+    <string name="osm_live_payment_monthly_title">月毎</string>
     <string name="osm_live_payment_3_months_title">3ヶ月毎</string>
-    <string name="osm_live_payment_annual_title">年間</string>
+    <string name="osm_live_payment_annual_title">年毎</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / 月</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / 月</string>
     <string name="osm_live_payment_discount_descr">%1$s割引</string>
