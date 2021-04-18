@@ -106,6 +106,9 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 		Preference voiceAnnouncesInfo = findPreference("voice_announces_info");
 		voiceAnnouncesInfo.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
 
+		Preference languageSetting = findPreference("voice_provider");
+		languageSetting.setIcon(getContentIcon(R.drawable.ic_action_map_language));
+
 		setupSpeedLimitExceedPref();
 
 		setupKeepInformingPref();
@@ -116,7 +119,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 
 		enableDisablePreferences(!settings.VOICE_MUTE.getModeValue(getSelectedAppMode()));
 		setupSpeakCamerasPref();
-		setupTurnScreenOnNavigationInstructionsPref();
+		setupSpeedCamerasAlert();
 	}
 
 	private void setupSpeedLimitExceedPref() {
@@ -189,11 +192,6 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 	private void setupInterruptMusicPref() {
 		Preference interruptMusicPref = createSwitchPreference(settings.INTERRUPT_MUSIC, R.string.interrupt_music, R.string.interrupt_music_descr, R.layout.preference_switch_with_descr);
 		getPreferenceScreen().addPreference(interruptMusicPref);
-	}
-
-	private void setupTurnScreenOnNavigationInstructionsPref() {
-		SwitchPreferenceEx turnScreenOnNavigationInstructions = findPreference(settings.TURN_SCREEN_ON_NAVIGATION_INSTRUCTIONS.getId());
-		turnScreenOnNavigationInstructions.setDescription(R.string.turn_screen_on_navigation_instructions_descr);
 	}
 
 	private void updateMenu() {
@@ -277,6 +275,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 	public void onPreferenceChanged(String prefId) {
 		if (prefId.equals(settings.SPEED_CAMERAS_UNINSTALLED.getId())) {
 			setupSpeakCamerasPref();
+			setupSpeedCamerasAlert();
 		}
 	}
 
@@ -284,4 +283,5 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 		SwitchPreferenceCompat showCameras = findPreference(settings.SPEAK_SPEED_CAMERA.getId());
 		showCameras.setVisible(!settings.SPEED_CAMERAS_UNINSTALLED.get());
 	}
+
 }
