@@ -726,9 +726,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			updatePaints(color, width, selectedGpxFile.isRoutePoints(), currentTrack, settings, tileBox);
 			if (ts.renderer instanceof Renderable.RenderableSegment) {
 				Renderable.RenderableSegment renderableSegment = (Renderable.RenderableSegment) ts.renderer;
-				renderableSegment.setBorderPaint(borderPaint);
-				renderableSegment.setGradientScaleType(scaleType);
-				renderableSegment.shouldDrawBorder(true);
+				renderableSegment.setGradientTrackParams(scaleType, borderPaint, true);
 				renderableSegment.drawSegment(view.getZoom(), paint, canvas, tileBox);
 			}
 		}

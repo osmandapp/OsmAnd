@@ -95,16 +95,10 @@ public class Renderable {
             }
         }
 
-        public void setBorderPaint(@NonNull Paint paint) {
-            borderPaint = paint;
-        }
-
-        public void setGradientScaleType(GradientScaleType type) {
-            this.scaleType = type;
-        }
-
-        public void shouldDrawBorder(boolean drawBorder) {
-            this.drawBorder = drawBorder;
+        public void setGradientTrackParams(GradientScaleType gradientScaleType, @NonNull Paint borderPaint, boolean shouldDrawBorder) {
+            this.scaleType = gradientScaleType;
+            this.borderPaint = borderPaint;
+            this.drawBorder = shouldDrawBorder;
         }
 
         public GpxGeometryWay getGeometryWay() {
