@@ -277,7 +277,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			}
 		}
 		cache.clear();
-		fireUnselectedGpxFiles(selectedGPXFiles);
+		removeCachedUnselectedTracks(selectedGPXFiles);
 		if (!selectedGPXFiles.isEmpty()) {
 			drawSelectedFilesSegments(canvas, tileBox, selectedGPXFiles, settings);
 			canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
@@ -460,10 +460,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			QuadRect correctedQuadRect = getCorrectedQuadRect(tileBox.getLatLonBounds());
 			for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
 				boolean showArrows = isShowArrowsForTrack(selectedGpxFile.getGpxFile());
-				if (!showArrows) {
-					continue;
-				}
-				if (!QuadRect.trivialOverlap(correctedQuadRect, GPXUtilities.calculateTrackBounds(selectedGpxFile.getPointsToDisplay()))) {
+				if (!showArrows || !QuadRect.trivialOverlap(correctedQuadRect, GPXUtilities.calculateTrackBounds(selectedGpxFile.getPointsToDisplay()))) {
 					continue;
 				}
 				String width = getTrackWidthName(selectedGpxFile.getGpxFile(), defaultTrackWidthPref.get());
@@ -1056,15 +1053,15 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		return name.replace('_', ' ');
 	}
 
-	private void fireUnselectedGpxFiles(List<SelectedGpxFile> selectedGpxFiles) {
+	private void removeCachedUnselectedTracks(List<SelectedGpxFile> selectedGpxFiles) {
 		Set<String> cachedTracksPaths = segmentsCache.keySet();
 		List<String> selectedTracksPaths = new ArrayList<>();
 		for (SelectedGpxFile gpx : selectedGpxFiles) {
 			selectedTracksPaths.add(gpx.getGpxFile().path);
 		}
-		for (String cachedPath : cachedTracksPaths) {
-			if (!selectedTracksPaths.contains(cachedPath)) {
-				cachedTracksPaths.remove(cachedPath);
+		for (Iterator<String> iterator = cachedTracksPaths.iterator(); iterator.hasNext();) {
+			if (!selectedTracksPaths.contains(iterator.next())) {
+				iterator.remove();
 			}
 		}
 	}
