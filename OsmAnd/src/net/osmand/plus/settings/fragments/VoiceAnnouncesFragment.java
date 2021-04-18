@@ -110,7 +110,6 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 
 		setupKeepInformingPref();
 		setupArrivalAnnouncementPref();
-		setupVoiceProviderPref();
 
 		setupAudioStreamGuidancePref();
 		setupInterruptMusicPref();
@@ -168,37 +167,6 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 		arrivalDistanceFactor.setEntryValues(arrivalValues);
 	}
 
-	private void setupVoiceProviderPref() {
-		Activity activity = getActivity();
-		if (activity == null) {
-			return;
-		}
-		Set<String> voiceFiles = app.getRoutingOptionsHelper().getVoiceFiles(activity);
-		String[] entries = new String[voiceFiles.size() + 2];
-		String[] entryValues = new String[voiceFiles.size() + 2];
-
-		int k = 0;
-		// entries[k++] = getString(R.string.shared_string_none);
-		entryValues[k] = OsmandSettings.VOICE_PROVIDER_NOT_USE;
-		entries[k++] = getString(R.string.shared_string_do_not_use);
-		for (String s : voiceFiles) {
-			entries[k] = (s.contains("tts") ? getString(R.string.ttsvoice) + " " : "") + FileNameTranslationHelper.getVoiceName(activity, s);
-			entryValues[k] = s;
-			k++;
-		}
-		entryValues[k] = MORE_VALUE;
-		entries[k] = getString(R.string.install_more);
-
-		Drawable disabled = getContentIcon(R.drawable.ic_action_volume_mute);
-		Drawable enabled = getActiveIcon(R.drawable.ic_action_volume_up);
-		Drawable icon = getPersistentPrefIcon(enabled, disabled);
-
-		ListPreferenceEx voiceProvider = findPreference(settings.VOICE_PROVIDER.getId());
-		voiceProvider.setEntries(entries);
-		voiceProvider.setEntryValues(entryValues);
-		voiceProvider.setIcon(icon);
-	}
-
 	private void setupAudioStreamGuidancePref() {
 		String[] streamTypes = new String[]{
 				getString(R.string.voice_stream_music),
@@ -238,17 +206,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 	@Override
 	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
 		super.onBindPreferenceViewHolder(preference, holder);
-		if (settings.VOICE_PROVIDER.getId().equals(preference.getKey()) && preference instanceof ListPreferenceEx) {
-			TextView titleView = (TextView) holder.findViewById(android.R.id.title);
-			if (titleView != null) {
-				titleView.setTextColor(preference.isEnabled() ? getActiveTextColor() : getDisabledTextColor());
-			}
-			ImageView imageView = (ImageView) holder.findViewById(android.R.id.icon);
-			if (imageView != null) {
-				Object currentValue = ((ListPreferenceEx) preference).getValue();
-				imageView.setEnabled(preference.isEnabled() && !OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(currentValue));
-			}
-		} else if (settings.SPEED_CAMERAS_UNINSTALLED.getId().equals(preference.getKey())) {
+		 if (settings.SPEED_CAMERAS_UNINSTALLED.getId().equals(preference.getKey())) {
 			setupPrefRoundedBg(holder);
 		}
 	}
@@ -257,20 +215,6 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
 		String prefId = preference.getKey();
 		ApplicationMode selectedMode = getSelectedAppMode();
-
-		if (prefId.equals(settings.VOICE_PROVIDER.getId())) {
-			if (MORE_VALUE.equals(newValue)) {
-				// listPref.set(oldValue); // revert the change..
-				final Intent intent = new Intent(getContext(), DownloadActivity.class);
-				intent.putExtra(DownloadActivity.TAB_TO_OPEN, DownloadActivity.DOWNLOAD_TAB);
-				intent.putExtra(DownloadActivity.FILTER_CAT, DownloadActivityType.VOICE_FILE.getTag());
-				startActivity(intent);
-				return false;
-			} else if (newValue instanceof String) {
-				onConfirmPreferenceChange(settings.VOICE_PROVIDER.getId(), newValue, ApplyQueryType.SNACK_BAR);
-			}
-			return true;
-		}
 		if (prefId.equals(settings.SPEAK_SPEED_CAMERA.getId())) {
 			if (!settings.SPEAK_SPEED_CAMERA.getModeValue(selectedMode)) {
 				return onConfirmPreferenceChange(
@@ -290,15 +234,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 
 	@Override
 	public void onApplyPreferenceChange(String prefId, boolean applyToAllProfiles, Object newValue) {
-		if (prefId.equals(settings.VOICE_PROVIDER.getId()) && newValue instanceof String) {
-			if (VOICE_PROVIDER_NOT_USE.equals(newValue)) {
-				applyPreference(settings.VOICE_MUTE.getId(), applyToAllProfiles, true);
-				updateToolbar();
-			}
-			applyPreference(settings.VOICE_PROVIDER.getId(), applyToAllProfiles, newValue);
-			app.initVoiceCommandPlayer(getActivity(), getSelectedAppMode(),
-					false, null, true, false, applyToAllProfiles);
-		} else if (prefId.equals(settings.AUDIO_MANAGER_STREAM.getId())) {
+		 if (prefId.equals(settings.AUDIO_MANAGER_STREAM.getId())) {
 			// Sync DEFAULT value with CAR value, as we have other way to set it for now
 
 			if (getSelectedAppMode().equals(ApplicationMode.CAR) && newValue instanceof Integer) {
@@ -317,6 +253,8 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 		String prefId = preference.getKey();
 		if (settings.SPEED_CAMERAS_UNINSTALLED.getId().equals(prefId)) {
 			SpeedCamerasBottomSheet.showInstance(requireActivity().getSupportFragmentManager(), this);
+		} else if (settings.VOICE_PROVIDER.getId().equals(prefId)) {
+			VoiceLanguageBottomSheetFragment.showInstance(requireActivity().getSupportFragmentManager(), this);
 		}
 		return super.onPreferenceClick(preference);
 	}

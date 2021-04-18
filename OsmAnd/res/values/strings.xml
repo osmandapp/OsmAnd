@@ -12,6 +12,11 @@
 
 -->
 
+    <string name="use_system_language">Use system language</string>
+    <string name="recorded_description">Recorded voice sounds better, but can pronounce only prerecorded phrases: turn instructions. Can\'t announce street names or POI names.</string>
+    <string name="tts_title">TTS</string>
+    <string name="tts_description">Text-to-speech (TTS) can pronounce all types of instructions: street names, turn instruction, POI names etc.</string>
+    <string name="language_description">Select preferred language and type of voice guidance.</string>
     <string name="output">Output</string>
     <string name="user_points">User points</string>
     <string name="announce_when_exceeded">Announce when exceeded</string>

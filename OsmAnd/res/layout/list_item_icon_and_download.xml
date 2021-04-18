@@ -81,9 +81,11 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/secondary_icon"
-                    android:layout_width="@dimen/list_item_height"
-                    android:layout_height="@dimen/list_item_height"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:scaleType="center"
+                    android:layout_marginEnd="@dimen/title_padding"
+                    android:layout_marginRight="@dimen/title_padding"
                     android:layout_gravity="center_vertical"
                     android:visibility="gone"
                     tools:src="@drawable/ic_action_import"

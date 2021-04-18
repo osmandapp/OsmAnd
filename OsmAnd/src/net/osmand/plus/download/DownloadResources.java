@@ -645,6 +645,15 @@ public class DownloadResources extends DownloadResourceGroup {
 		return res;
 	}
 
+	public static List<DownloadItem> findIndexItemsAt(OsmandApplication app, String groupTypeVoice) throws IOException {
+		DownloadIndexesThread downloadThread = app.getDownloadThread();
+		DownloadResources indexes = downloadThread.getIndexes();
+		DownloadResourceGroup groupVoice = indexes.getGroupById(groupTypeVoice);
+		List<DownloadResourceGroup> groupList = groupVoice.getGroups();
+		List<DownloadItem> items = groupList.get(0).getIndividualDownloadItems();
+		return new ArrayList<>(items);
+	}
+
 	public static List<IndexItem> findIndexItemsAt(OsmandApplication app,
 	                                               List<String> names,
 	                                               DownloadActivityType type,
