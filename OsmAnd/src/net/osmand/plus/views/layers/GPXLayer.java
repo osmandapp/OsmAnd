@@ -721,6 +721,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				Renderable.RenderableSegment renderableSegment = (Renderable.RenderableSegment) ts.renderer;
 				renderableSegment.setBorderPaint(borderPaint);
 				renderableSegment.setGradientScaleType(scaleType);
+				renderableSegment.shouldDrawBorder(true);
 				renderableSegment.drawSegment(view.getZoom(), paint, canvas, tileBox);
 			}
 		}
