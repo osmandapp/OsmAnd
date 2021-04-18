@@ -16,13 +16,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 import java.util.zip.GZIPInputStream;
 
 
@@ -183,7 +181,8 @@ public abstract class MapObject implements Comparable<MapObject> {
 	public String getName(String lang, boolean transliterate) {
 		if (lang != null && lang.length() > 0) {
 			if (lang.equals("en")) {
-				return getEnName(transliterate);
+				String enName = getEnName(transliterate);
+				return !Algorithms.isEmpty(enName) ? enName : getEnName(true);
 			} else {
 				// get name
 				if (names != null) {
