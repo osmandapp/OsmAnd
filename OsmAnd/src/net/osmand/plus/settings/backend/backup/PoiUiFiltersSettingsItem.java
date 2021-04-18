@@ -10,6 +10,7 @@ import com.google.gson.reflect.TypeToken;
 
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -148,7 +149,21 @@ public class PoiUiFiltersSettingsItem extends CollectionSettingsItem<PoiUIFilter
 					JSONObject jsonObject = new JSONObject();
 					jsonObject.put("name", filter.getName());
 					jsonObject.put("filterId", filter.getFilterId());
-					jsonObject.put("acceptedTypes", gson.toJson(filter.getAcceptedTypes(), type));
+
+					Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = filter.getAcceptedTypes();
+					for (PoiCategory category : acceptedTypes.keySet()) {
+						LinkedHashSet<String> poiTypes = acceptedTypes.get(category);
+						if (poiTypes == null) {
+							poiTypes = new LinkedHashSet<>();
+							List<PoiType> types = category.getPoiTypes();
+							for (PoiType poiType : types) {
+								poiTypes.add(poiType.getKeyName());
+							}
+							acceptedTypes.put(category, poiTypes);
+						}
+					}
+
+					jsonObject.put("acceptedTypes", gson.toJson(acceptedTypes, type));
 					jsonArray.put(jsonObject);
 				}
 				json.put("items", jsonArray);

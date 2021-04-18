@@ -3926,4 +3926,6 @@
     <string name="poi_hoops">Aros</string>
     <string name="poi_office_diplomatic">Oficina diplomática</string>
     <string name="poi_bay_filter">Tipo de bahía</string>
+    <string name="poi_plateau">Meseta (altiplano)</string>
+    <string name="poi_club_social">Club social</string>
 </resources>
