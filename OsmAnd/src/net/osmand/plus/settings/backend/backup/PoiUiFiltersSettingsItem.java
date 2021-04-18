@@ -155,7 +155,8 @@ public class PoiUiFiltersSettingsItem extends CollectionSettingsItem<PoiUIFilter
 						LinkedHashSet<String> poiTypes = acceptedTypes.get(category);
 						if (poiTypes == null) {
 							poiTypes = new LinkedHashSet<>();
-							for (PoiType poiType : category.getPoiTypes()) {
+							List<PoiType> types = category.getPoiTypes();
+							for (PoiType poiType : types) {
 								poiTypes.add(poiType.getKeyName());
 							}
 							acceptedTypes.put(category, poiTypes);
