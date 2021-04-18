@@ -1494,7 +1494,7 @@
     <string name="local_osm_changes_upload_all_confirm">Naozaj chcete odoslať %1$d zmien do OSM\?</string>
     <string name="confirmation_to_clear_history">Vymazať históriu?</string>
     <string name="osmand_parking_overdue">prekročený čas</string>
-    <string name="confirm_usage_speed_cameras">Vo viacerých krajinách (ako Nemecko, Francúzsko, Taliansko) je použitie varovaní pred rýchlostnými radarmi/kamerami zakázané zákonom (nelegálne). OsmAnd nepreberá žiadnu zodpovednosť ak porušíte zákon. Stlačte \"Áno\" len ak ste na to oprávnený použiť túto funkciu.</string>
+    <string name="confirm_usage_speed_cameras">Vo viacerých krajinách (ako Nemecko, Francúzsko, Taliansko) je použitie varovaní pred rýchlostnými radarmi/kamerami zakázané zákonom. OsmAnd nepreberá žiadnu zodpovednosť ak porušíte zákon. Stlačte \"Áno\" len ak ste oprávnený použiť túto funkciu.</string>
     <string name="welmode_download_maps">Stiahnuť mapy</string>
     <string name="welcome_select_region">Vyberte svoj región, aby bolo možné správne nastaviť dopravné predpisy:</string>
     <string name="welcome_text">OsmAnd poskytuje celosvetové offline mapy a offline navigáciu.</string>
@@ -2729,7 +2729,7 @@
     <string name="wikipedia_offline">Wikipédia offline</string>
     <string name="contour_lines_hillshade_maps">Vrstevnice &amp; tieňované svahy</string>
     <string name="unlock_all_features">Odomknite všetky funkcie OsmAnd</string>
-    <string name="download_wikipedia_description">Stiahnite články Wikipédie pre %1$s pre ich čítanie offline.</string>
+    <string name="download_wikipedia_description">Stiahnite články Wikipédie pre %1$s na ich čítanie offline.</string>
     <string name="download_wikipedia_label">Stiahnuť údaje Wikipédie</string>
     <string name="open_in_browser_wiki">Otvoriť článok online</string>
     <string name="open_in_browser_wiki_description">Zobraziť článok vo webovom prehliadači.</string>

@@ -18,11 +18,12 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
+import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseState;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
+import net.osmand.plus.inapp.InAppPurchases.PurchaseInfo;
 import net.osmand.plus.inapp.InAppPurchasesImpl.InAppPurchaseLiveUpdatesOldSubscription;
 import net.osmand.plus.inapp.util.BillingManager;
-import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.util.Algorithms;
@@ -174,7 +175,8 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 					});
 				}
 				for (Purchase purchase : purchases) {
-					if (!purchase.isAcknowledged()) {
+					InAppSubscription subscription = getLiveUpdates().getSubscriptionBySku(purchase.getSku());
+					if (!purchase.isAcknowledged() || (subscription != null && !subscription.isPurchased())) {
 						onPurchaseFinished(purchase);
 					}
 				}
@@ -310,8 +312,8 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 					}
 				}
 			}
-			for (Entry<String, SubscriptionState> entry : subscriptionStateMap.entrySet()) {
-				SubscriptionState state = entry.getValue();
+			for (Entry<String, SubscriptionStateHolder> entry : subscriptionStateMap.entrySet()) {
+				SubscriptionState state = entry.getValue().state;
 				if (state == SubscriptionState.PAUSED || state == SubscriptionState.ON_HOLD) {
 					String sku = entry.getKey();
 					if (!result.contains(sku)) {
@@ -492,15 +494,17 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 	}
 
 	private PurchaseInfo getPurchaseInfo(Purchase purchase) {
-		return new PurchaseInfo(purchase.getSku(), purchase.getOrderId(), purchase.getPurchaseToken());
+		return new PurchaseInfo(purchase.getSku(), purchase.getOrderId(), purchase.getPurchaseToken(),
+				purchase.getPurchaseTime(), purchase.getPurchaseState(), purchase.isAcknowledged(), purchase.isAutoRenewing());
 	}
 
 	private void fetchInAppPurchase(@NonNull InAppPurchase inAppPurchase, @NonNull SkuDetails skuDetails, @Nullable Purchase purchase) {
 		if (purchase != null) {
-			inAppPurchase.setPurchaseState(InAppPurchase.PurchaseState.PURCHASED);
-			inAppPurchase.setPurchaseTime(purchase.getPurchaseTime());
+			inAppPurchase.setPurchaseState(PurchaseState.PURCHASED);
+			inAppPurchase.setPurchaseInfo(ctx, getPurchaseInfo(purchase));
 		} else {
-			inAppPurchase.setPurchaseState(InAppPurchase.PurchaseState.NOT_PURCHASED);
+			inAppPurchase.setPurchaseState(PurchaseState.NOT_PURCHASED);
+			inAppPurchase.restorePurchaseInfo(ctx);
 		}
 		inAppPurchase.setPrice(skuDetails.getPrice());
 		inAppPurchase.setPriceCurrencyCode(skuDetails.getPriceCurrencyCode());
@@ -519,18 +523,17 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 		}
 		if (inAppPurchase instanceof InAppSubscription) {
 			InAppSubscription s = (InAppSubscription) inAppPurchase;
-
-			SubscriptionState state = subscriptionStateMap.get(inAppPurchase.getSku());
-			s.setState(state == null ? SubscriptionState.UNDEFINED : state);
-			CommonPreference<String> statePref = ctx.getSettings().registerStringPreference(
-					s.getSku() + "_state", SubscriptionState.UNDEFINED.getStateStr()).makeGlobal();
-			s.setPrevState(SubscriptionState.getByStateStr(statePref.get()));
-			statePref.set(s.getState().getStateStr());
+			s.restoreState(ctx);
+			s.restoreExpireTime(ctx);
+			SubscriptionStateHolder stateHolder = subscriptionStateMap.get(s.getSku());
+			if (stateHolder != null) {
+				s.setState(ctx, stateHolder.state);
+				s.setExpireTime(ctx, stateHolder.expireTime);
+			}
 			if (s.getState().isGone() && s.hasStateChanged()) {
 				ctx.getSettings().LIVE_UPDATES_EXPIRED_FIRST_DLG_SHOWN_TIME.set(0L);
 				ctx.getSettings().LIVE_UPDATES_EXPIRED_SECOND_DLG_SHOWN_TIME.set(0L);
 			}
-
 			String introductoryPrice = skuDetails.getIntroductoryPrice();
 			String introductoryPricePeriod = skuDetails.getIntroductoryPricePeriod();
 			int introductoryPriceCycles = skuDetails.getIntroductoryPriceCycles();
