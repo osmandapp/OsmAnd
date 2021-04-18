@@ -14,7 +14,7 @@ import java.util.List;
 
 public class RouteGeometryWayDrawer extends GeometryWayDrawer<RouteGeometryWayContext> {
 
-	private final int BORDER_TYPE_ZOOM_THRESHOLD = MapTileLayer.DEFAULT_MIN_ZOOM;
+	private static final int BORDER_TYPE_ZOOM_THRESHOLD = MapTileLayer.DEFAULT_MAX_ZOOM + MapTileLayer.OVERZOOM_IN;
 
 	private final boolean drawBorder;
 
@@ -25,7 +25,7 @@ public class RouteGeometryWayDrawer extends GeometryWayDrawer<RouteGeometryWayCo
 
 	@Override
 	protected void drawFullBorder(Canvas canvas, int zoom, List<Pair<Path, GeometryWayStyle<?>>> paths) {
-		if (drawBorder && zoom > BORDER_TYPE_ZOOM_THRESHOLD) {
+		if (drawBorder && zoom < BORDER_TYPE_ZOOM_THRESHOLD) {
 			Paint borderPaint = getContext().getAttrs().shadowPaint;
 			Path fullPath = new Path();
 			for (Pair<Path, GeometryWayStyle<?>> path : paths) {
@@ -50,7 +50,7 @@ public class RouteGeometryWayDrawer extends GeometryWayDrawer<RouteGeometryWayCo
 
 	@Override
 	protected void drawSegmentBorder(Canvas canvas, int zoom, Path path, GeometryWayStyle<?> style) {
-		if (drawBorder && zoom < BORDER_TYPE_ZOOM_THRESHOLD) {
+		if (drawBorder && zoom >= BORDER_TYPE_ZOOM_THRESHOLD) {
 			canvas.drawPath(path, getContext().getAttrs().shadowPaint);
 		}
 	}
