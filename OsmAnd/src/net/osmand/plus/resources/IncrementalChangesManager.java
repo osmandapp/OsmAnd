@@ -5,6 +5,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.R;
+import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -45,8 +46,7 @@ public class IncrementalChangesManager {
 			Set<String> existingFiles = new HashSet<String>();
 			for (File f : files) {
 				if (!f.getName().endsWith(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT) &&
-						!f.getName().endsWith(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT) &&
-						!f.getName().endsWith(IndexConstants.BINARY_SRTM_FEET_MAP_INDEX_EXT)) {
+						!SrtmDownloadItem.isSrtmFile(f.getName())) {
 					existingFiles.add(Algorithms.getFileNameWithoutExtension(f));
 				}
 			}

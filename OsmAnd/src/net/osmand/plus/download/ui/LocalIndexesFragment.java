@@ -55,6 +55,7 @@ import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.mapsource.EditMapSourceDialogFragment.OnMapSourceUpdateListener;
@@ -74,9 +75,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static net.osmand.plus.download.DownloadActivityType.isSRTMItem;
-import static net.osmand.plus.download.MultipleIndexesUiHelper.getSRTMAbbrev;
-import static net.osmand.plus.download.MultipleIndexesUiHelper.isBaseSRTMItem;
 
 public class LocalIndexesFragment extends OsmandExpandableListFragment implements DownloadEvents,
 		OnMapSourceUpdateListener, RenameCallback {
@@ -967,8 +965,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				return ctx.getString(R.string.download_roads_only_item);
 			} else if (child.isBackupedData() && child.getFileName().endsWith(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT)) {
 				return ctx.getString(R.string.download_wikipedia_maps);
-			} else if (child.isBackupedData() && (child.getFileName().endsWith(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT)
-					|| child.getFileName().endsWith(IndexConstants.BINARY_SRTM_FEET_MAP_INDEX_EXT))) {
+			} else if (child.isBackupedData() && (SrtmDownloadItem.isSrtmFile(child.getFileName()))) {
 				return ctx.getString(R.string.download_srtm_maps);
 			}
 			return "";
@@ -1034,8 +1031,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 					builder.append(AndroidUtils.formatSize(ctx, child.getSize() * 1024l));
 				}
 
-				if (isSRTMItem(child)) {
-					builder.append(" (").append(getSRTMAbbrev(ctx, isBaseSRTMItem(child))).append(")");
+				if (SrtmDownloadItem.isSRTMItem(child)) {
+					builder.append(" ").append(SrtmDownloadItem.getAbbreviationInScopes(ctx, child));
 				}
 
 				if (!Algorithms.isEmpty(child.getDescription())) {

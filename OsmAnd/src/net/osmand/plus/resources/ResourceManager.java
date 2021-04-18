@@ -41,6 +41,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.AssetEntry;
+import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
@@ -701,8 +702,7 @@ public class ResourceManager {
 					log.error(String.format("File %s could not be read", f.getName()), e);
 				}
 				boolean wikiMap = (f.getName().contains("_wiki") || f.getName().contains(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT));
-				boolean srtmMap = f.getName().contains(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT)
-						|| f.getName().contains(IndexConstants.BINARY_SRTM_FEET_MAP_INDEX_EXT);
+				boolean srtmMap = SrtmDownloadItem.containsSrtmExtension(f.getName());
 				if (mapReader == null || (!Version.isPaidVersion(context) && wikiMap && !f.getName().equals(DEFAULT_WIKIVOYAGE_TRAVEL_OBF))) {
 					warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
 				} else {

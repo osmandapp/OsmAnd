@@ -9,6 +9,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 
 import java.io.File;
+import java.text.DateFormat;
 import java.util.List;
 import java.util.Locale;
 
@@ -55,6 +56,13 @@ public abstract class DownloadItem {
 		return type.getBasename(this);
 	}
 
+	@NonNull
+	public abstract List<File> getDownloadedFiles(@NonNull OsmandApplication app);
+
+	public abstract boolean isUseAbbreviation();
+
+	public abstract String getAbbreviationInScopes(Context ctx);
+
 	protected abstract double getSizeToDownloadInMb();
 
 	public abstract double getArchiveSizeMB();
@@ -69,8 +77,7 @@ public abstract class DownloadItem {
 
 	public abstract String getFileName();
 
-	@NonNull
-	public abstract List<File> getDownloadedFiles(@NonNull OsmandApplication app);
+	public abstract String getDate(@NonNull DateFormat dateFormat, boolean remote);
 
 	@NonNull
 	public static String getFormattedMb(@NonNull Context ctx, double sizeInMb) {

@@ -29,7 +29,6 @@ import java.util.Map;
 
 import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
 import static net.osmand.plus.activities.LocalIndexHelper.LocalIndexType.SRTM_DATA;
-import static net.osmand.plus.download.MultipleIndexesUiHelper.getSRTMExt;
 
 public class DownloadActivityType {
 	private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.US);
@@ -231,7 +230,7 @@ public class DownloadActivityType {
 		} else if (FONT_FILE == this) {
 			return IndexConstants.FONT_INDEX_EXT;
 		} else if (SRTM_COUNTRY_FILE == this) {
-			return getSRTMExt(indexItem);
+			return SrtmDownloadItem.getExtension(indexItem);
 		} else if (WIKIPEDIA_FILE == this) {
 			return IndexConstants.BINARY_WIKI_MAP_INDEX_EXT;
 		} else if (WIKIVOYAGE_FILE == this) {
@@ -427,7 +426,7 @@ public class DownloadActivityType {
 			}
 			String baseNameWithoutVersion = fileName.substring(0, l);
 			if (this == SRTM_COUNTRY_FILE) {
-				return baseNameWithoutVersion + getSRTMExt(item);
+				return baseNameWithoutVersion + SrtmDownloadItem.getExtension(item);
 			}
 			if (this == WIKIPEDIA_FILE) {
 				return baseNameWithoutVersion + IndexConstants.BINARY_WIKI_MAP_INDEX_EXT;
@@ -505,14 +504,4 @@ public class DownloadActivityType {
 		return fileName;
 	}
 
-	public static boolean isSRTMItem(Object item) {
-		if (item instanceof IndexItem) {
-			return ((IndexItem) item).getType() == SRTM_COUNTRY_FILE;
-		} else if (item instanceof DownloadItem) {
-			return ((DownloadItem) item).getType() == SRTM_COUNTRY_FILE;
-		} else if (item instanceof LocalIndexInfo) {
-			return ((LocalIndexInfo) item).getType() == SRTM_DATA;
-		}
-		return false;
-	}
 }

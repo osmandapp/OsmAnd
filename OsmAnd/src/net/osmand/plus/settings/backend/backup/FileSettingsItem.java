@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
@@ -92,8 +93,7 @@ public class FileSettingsItem extends StreamSettingsItem {
 					case OTHER:
 						break;
 					case SRTM_MAP:
-						if (name.endsWith(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT)
-								|| name.endsWith(IndexConstants.BINARY_SRTM_FEET_MAP_INDEX_EXT)) {
+						if (SrtmDownloadItem.isSrtmFile(name)) {
 							return subtype;
 						}
 						break;

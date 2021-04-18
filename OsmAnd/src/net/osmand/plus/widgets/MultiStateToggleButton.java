@@ -18,6 +18,7 @@ import net.osmand.plus.UiUtilities;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 public class MultiStateToggleButton {
@@ -35,6 +36,13 @@ public class MultiStateToggleButton {
 		this.app = app;
 		this.container = container;
 		this.nightMode = nightMode;
+	}
+
+	public void setItems(Collection<RadioItem> radioItems) {
+		if (radioItems == null || radioItems.size() < 2) return;
+		items.clear();
+		items.addAll(radioItems);
+		initView();
 	}
 
 	public void setItems(RadioItem firstBtn, RadioItem secondBtn, RadioItem... other) {
