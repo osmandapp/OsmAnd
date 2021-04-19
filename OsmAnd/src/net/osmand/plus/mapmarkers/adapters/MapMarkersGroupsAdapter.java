@@ -7,8 +7,10 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
@@ -36,6 +38,7 @@ import net.osmand.plus.mapmarkers.SelectWptCategoriesBottomSheetDialogFragment;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -54,10 +57,6 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 	private static final int SHOW_HIDE_HISTORY_TYPE = 3;
 	private static final int CATEGORIES_TYPE = 4;
 
-	private static final int TODAY_HEADER = 56;
-	private static final int YESTERDAY_HEADER = 57;
-	private static final int LAST_SEVEN_DAYS_HEADER = 58;
-	private static final int THIS_YEAR_HEADER = 59;
 
 	private MapActivity mapActivity;
 	private OsmandApplication app;
@@ -107,50 +106,85 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 		List<MapMarkersGroup> groups = new ArrayList<>(helper.getMapMarkersGroups());
 		groups.addAll(helper.getGroupsForDisplayedGpx());
 		groups.addAll(helper.getGroupsForSavedArticlesTravelBook());
+
+		// evaluate time constants
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		long currentTimeMillis = System.currentTimeMillis();
+		Calendar currentDateCalendar = Calendar.getInstance();
+		currentDateCalendar.setTimeInMillis(currentTimeMillis);
+		// evaluate today, yesterday, last 7 days
+		String today = dateFormat.format(currentDateCalendar.getTime());
+		currentDateCalendar.add(Calendar.DAY_OF_YEAR, -1);
+		String yesterday = dateFormat.format(currentDateCalendar.getTime());
+		currentDateCalendar.set(Calendar.HOUR_OF_DAY, 0);
+		currentDateCalendar.set(Calendar.MINUTE, 0);
+		currentDateCalendar.add(Calendar.DAY_OF_YEAR, -6);
+		long last7Days = currentDateCalendar.getTimeInMillis();
+		// evaluate this year & last 3 months
+		currentDateCalendar.setTimeInMillis(currentTimeMillis);
+		String thisYear = dateFormat.format(currentDateCalendar.getTime()).substring(0, 5);
+		currentDateCalendar.add(Calendar.MONTH, -1);
+		String monthMinus1 = dateFormat.format(currentDateCalendar.getTime()).substring(0, 8);
+		currentDateCalendar.add(Calendar.MONTH, -1);
+		String monthMinus2 = dateFormat.format(currentDateCalendar.getTime()).substring(0, 8);
+		currentDateCalendar.add(Calendar.MONTH, -1);
+		String monthMinus3 = dateFormat.format(currentDateCalendar.getTime()).substring(0, 8);
+
+
+		Calendar markerCalendar = Calendar.getInstance();
+
 		for (int i = 0; i < groups.size(); i++) {
 			MapMarkersGroup group = groups.get(i);
 			if (!group.isVisible()) {
 				continue;
 			}
 			String markerGroupName = group.getName();
-			if (markerGroupName == null) {
-				int previousDateHeader = -1;
-				int monthsDisplayed = 0;
 
-				Calendar currentDateCalendar = Calendar.getInstance();
-				currentDateCalendar.setTimeInMillis(System.currentTimeMillis());
-				int currentDay = currentDateCalendar.get(Calendar.DAY_OF_YEAR);
-				int currentMonth = currentDateCalendar.get(Calendar.MONTH);
-				int currentYear = currentDateCalendar.get(Calendar.YEAR);
-				Calendar markerCalendar = Calendar.getInstance();
+			if (markerGroupName == null) {
+				int previousGroupDateId = 0;
+				int monthsDisplayed = 0;
 				List<MapMarker> groupMarkers = group.getActiveMarkers();
 				for (int j = 0; j < groupMarkers.size(); j++) {
 					MapMarker marker = groupMarkers.get(j);
-					markerCalendar.setTimeInMillis(marker.creationDate);
-					int markerDay = markerCalendar.get(Calendar.DAY_OF_YEAR);
-					int markerMonth = markerCalendar.get(Calendar.MONTH);
-					int markerYear = markerCalendar.get(Calendar.YEAR);
-					if (markerYear == currentYear) {
-						if (markerDay == currentDay && previousDateHeader != TODAY_HEADER) {
-							items.add(TODAY_HEADER);
-							previousDateHeader = TODAY_HEADER;
-						} else if (markerDay == currentDay - 1 && previousDateHeader != YESTERDAY_HEADER) {
-							items.add(YESTERDAY_HEADER);
-							previousDateHeader = YESTERDAY_HEADER;
-						} else if (currentDay - markerDay >= 2 && currentDay - markerDay <= 8 && previousDateHeader != LAST_SEVEN_DAYS_HEADER) {
-							items.add(LAST_SEVEN_DAYS_HEADER);
-							previousDateHeader = LAST_SEVEN_DAYS_HEADER;
-						} else if (currentDay - markerDay > 8 && monthsDisplayed < 3 && previousDateHeader != markerMonth) {
-							items.add(markerMonth);
-							previousDateHeader = markerMonth;
-							monthsDisplayed += 1;
-						} else if (currentMonth - markerMonth >= 4 && previousDateHeader != markerMonth && previousDateHeader != THIS_YEAR_HEADER) {
-							items.add(THIS_YEAR_HEADER);
-							previousDateHeader = THIS_YEAR_HEADER;
+					String markerDate = dateFormat.format(new Date(marker.creationDate));
+					int currentGroupDateId;
+					MarkerGroupItem currentGroupItem = null ;
+					if (marker.creationDate >= currentTimeMillis || (today.equals(markerDate))) {
+						currentGroupDateId = -1;
+						currentGroupItem = MarkerGroupItem.TODAY_HEADER;
+					} else if (yesterday.equals(markerDate)) {
+						currentGroupDateId = -2;
+						currentGroupItem = MarkerGroupItem.YESTERDAY_HEADER;
+					} else if (marker.creationDate >= last7Days) {
+						currentGroupDateId = -3;
+						currentGroupItem = MarkerGroupItem.LAST_SEVEN_DAYS_HEADER;
+					} else if (markerDate.startsWith(monthMinus1)) {
+						currentGroupDateId = -5;
+					} else if (markerDate.startsWith(monthMinus2)) {
+						currentGroupDateId = -6;
+					} else if (markerDate.startsWith(monthMinus3)) {
+						currentGroupDateId = -7;
+					} else if (markerDate.startsWith(thisYear)) {
+						currentGroupItem = MarkerGroupItem.THIS_YEAR_HEADER;
+						currentGroupDateId = -4;
+					} else {
+						markerCalendar.setTimeInMillis(marker.creationDate);
+						currentGroupDateId = markerCalendar.get(Calendar.YEAR);
+					}
+					if (previousGroupDateId != currentGroupDateId) {
+						if (currentGroupItem != null) {
+							items.add(currentGroupItem);
+						} else if(currentGroupDateId < 0) {
+							SimpleDateFormat monthdateFormat = new SimpleDateFormat("LLLL", Locale.getDefault());
+							String monthStr = monthdateFormat.format(new Date(marker.creationDate));
+							if (monthStr.length() > 1) {
+								monthStr = Algorithms.capitalizeFirstLetter(monthStr);
+							}
+							items.add(new MarkerGroupItem(monthStr));
+						} else {
+							items.add(new MarkerGroupItem(currentGroupDateId + ""));
 						}
-					} else if (previousDateHeader != markerYear) {
-						items.add(markerYear);
-						previousDateHeader = markerYear;
+						previousGroupDateId = currentGroupDateId;
 					}
 					items.add(marker);
 				}
@@ -379,23 +413,10 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 			final MapMarkerHeaderViewHolder headerViewHolder = (MapMarkerHeaderViewHolder) holder;
 			final Object header = getItem(position);
 			String headerString;
-			if (header instanceof Integer) {
+			if (header instanceof MarkerGroupItem) {
 				headerViewHolder.icon.setVisibility(View.GONE);
 				headerViewHolder.iconSpace.setVisibility(View.VISIBLE);
-				Integer dateHeader = (Integer) header;
-				if (dateHeader == TODAY_HEADER) {
-					headerString = app.getString(R.string.today);
-				} else if (dateHeader == YESTERDAY_HEADER) {
-					headerString = app.getString(R.string.yesterday);
-				} else if (dateHeader == LAST_SEVEN_DAYS_HEADER) {
-					headerString = app.getString(R.string.last_seven_days);
-				} else if (dateHeader == THIS_YEAR_HEADER) {
-					headerString = app.getString(R.string.this_year);
-				} else if (dateHeader / 100 == 0) {
-					headerString = getMonth(dateHeader);
-				} else {
-					headerString = String.valueOf(dateHeader);
-				}
+				headerString = ((MarkerGroupItem) header).getName(app);
 				headerViewHolder.disableGroupSwitch.setVisibility(View.GONE);
 				headerViewHolder.articleDescription.setVisibility(View.GONE);
 			} else if (header instanceof GroupHeader) {
@@ -615,15 +636,30 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 		return items.get(position);
 	}
 
-	private String getMonth(int month) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("LLLL", Locale.getDefault());
-		Date date = new Date();
-		date.setMonth(month);
-		String monthStr = dateFormat.format(date);
-		if (monthStr.length() > 1) {
-			monthStr = Character.toUpperCase(monthStr.charAt(0)) + monthStr.substring(1);
+
+	public static class MarkerGroupItem {
+
+		static final MarkerGroupItem TODAY_HEADER = new MarkerGroupItem(R.string.today);
+		static final MarkerGroupItem YESTERDAY_HEADER = new MarkerGroupItem(R.string.yesterday);
+		static final MarkerGroupItem LAST_SEVEN_DAYS_HEADER = new MarkerGroupItem(R.string.last_seven_days);
+		static final MarkerGroupItem THIS_YEAR_HEADER = new MarkerGroupItem(R.string.this_year);
+		private @StringRes int iname;
+		protected String name;
+
+		public MarkerGroupItem(@StringRes int name) {
+			this.iname = name;
 		}
-		return monthStr;
+
+		public MarkerGroupItem(String name) {
+			this.name = name;
+		}
+
+		public String getName(OsmandApplication app) {
+			if (name == null && iname != 0) {
+				name = app.getString(iname);
+			}
+			return name;
+		}
 	}
 
 	public class CategoriesSubHeader {
