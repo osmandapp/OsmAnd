@@ -152,6 +152,7 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 			}
 		});
 		ImageButton backButton = toolbar.findViewById(R.id.close_button);
+		UiUtilities.rotateImageByLayoutDirection(backButton, getContext());
 		backButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

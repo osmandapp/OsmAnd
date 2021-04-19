@@ -442,14 +442,13 @@ public class UiUtilities {
 		} catch (Throwable e) { }
 	}
 
-	public static void rotateImageByLayoutDirection(ImageView image, int layoutDirection) {
-		if (image == null) {
+	public static void rotateImageByLayoutDirection(ImageView image, Context context) {
+		if (image == null || context == null) {
 			return;
 		}
-		int rotation = layoutDirection == ViewCompat.LAYOUT_DIRECTION_RTL ? 180 : 0;
+		int rotation = AndroidUtils.getLayoutDirection(context) == ViewCompat.LAYOUT_DIRECTION_RTL ? 180 : 0;
 		image.setRotationY(rotation);
 	}
-
 
 	public static void updateCustomRadioButtons(Context app, View buttonsView, boolean nightMode,
 	                                            CustomRadioButtonType buttonType) {

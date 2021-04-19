@@ -7,10 +7,12 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.StyleSpan;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
@@ -74,6 +76,9 @@ public class TroubleshootingOrPurchasingCard extends BaseCard {
 			} else {
 				AndroidUtils.setBackground(mapActivity, getItButton, nightMode, R.drawable.btn_unstroked_light, R.drawable.btn_unstroked_dark);
 			}
+
+			ImageView getItArrow = view.findViewById(R.id.additional_button_icon);
+			UiUtilities.rotateImageByLayoutDirection(getItArrow, app);
 		}
 	}
 
