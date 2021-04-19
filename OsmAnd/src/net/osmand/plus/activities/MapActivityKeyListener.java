@@ -94,7 +94,7 @@ public class MapActivityKeyListener implements KeyEvent.Callback {
 			mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
 		} else if (keyCode == KeyEvent.KEYCODE_D) {
 			mapActivity.getMapViewTrackingUtilities().switchRotateMapMode();
-		} if (keyCode == KeyEvent.KEYCODE_MINUS) {
+		} else if (keyCode == KeyEvent.KEYCODE_MINUS) {
 			mapActivity.changeZoom(-1);
 			return true;
 		} else if (keyCode == KeyEvent.KEYCODE_PLUS || keyCode == KeyEvent.KEYCODE_EQUALS) {
@@ -126,6 +126,8 @@ public class MapActivityKeyListener implements KeyEvent.Callback {
 				mapActivity.startActivity(intent);
 				return true;
 			}
+		} else if (settings.EXTERNAL_INPUT_DEVICE.get() == GENERIC_EXTERNAL_DEVICE) {
+			// currently doesn't process specific commands
 		} else if (OsmandPlugin.onMapActivityKeyUp(mapActivity, keyCode)) {
 			return true;
 		}
