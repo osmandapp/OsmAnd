@@ -2,6 +2,7 @@ package net.osmand.plus.settings.fragments;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,7 +50,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 
 import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType;
 import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.OTHER_GROUP;
@@ -225,7 +225,6 @@ public class VoiceLanguageBottomSheetFragment extends MenuBottomSheetDialogFragm
 	}
 
 	private void createSuggestedVoiceItems(List<DownloadItem> suggestedMaps) {
-		final OsmandApplication app = requiredMyApplication();
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		final ApplicationMode applicationMode = routingHelper.getAppMode();
 
@@ -245,9 +244,9 @@ public class VoiceLanguageBottomSheetFragment extends MenuBottomSheetDialogFragm
 			AndroidUtils.setBackground(view, UiUtilities.getSelectableDrawable(context));
 			view.findViewById(R.id.divider).setVisibility(View.GONE);
 
-			String systemLanguage = Locale.getDefault().getLanguage();
+			String systemLanguage = Resources.getSystem().getConfiguration().locale.getLanguage();
 			DateFormat df = SimpleDateFormat.getDateInstance(DateFormat.DEFAULT);
-			boolean isDefault = indexItem.isDownloaded() && indexItem.getBasename().contains(systemLanguage);
+			boolean isDefault = indexItem.isDownloaded() && indexItem.getBasename().equals(systemLanguage);
 			String title = isDefault ? getString(R.string.use_system_language) : indexItem.getVisibleName(app, app.getRegions(), false);
 			String dateUpdate = ((IndexItem) indexItem).getDate(df);
 			String description = isDefault ? indexItem.getVisibleName(app, app.getRegions(), false) : indexItem.getSizeDescription(app) + " • " + dateUpdate;
@@ -276,34 +275,28 @@ public class VoiceLanguageBottomSheetFragment extends MenuBottomSheetDialogFragm
 			if (indexItem.isDownloaded()) {
 				AndroidUiHelper.updateVisibility(compoundButton, true);
 				AndroidUiHelper.updateVisibility(secondaryIcon, false);
-				final BottomSheetItemWithCompoundButton[] voiceDownloadedItem = new BottomSheetItemWithCompoundButton[1];
-				voiceDownloadedItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
-						.setCompoundButtonColorId(activeColorResId)
-						.setChecked(settings.VOICE_PROVIDER.getModeValue(applicationMode).contains(indexItem.getBasename()))
-						.setDescription(description)
-						.setIconHidden(true)
-						.setTitle(title)
-						.setPosition(position)
-						.setOnClickListener(new View.OnClickListener() {
-							@Override
-							public void onClick(View v) {
+			} else {
+				AndroidUiHelper.updateVisibility(compoundButton, false);
+				AndroidUiHelper.updateVisibility(secondaryIcon, true);
+			}
+
+			final BottomSheetItemWithCompoundButton[] voiceDownloadedItem = new BottomSheetItemWithCompoundButton[1];
+			voiceDownloadedItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
+					.setCompoundButtonColorId(activeColorResId)
+					.setChecked(settings.VOICE_PROVIDER.getModeValue(applicationMode).contains(indexItem.getBasename()))
+					.setDescription(description)
+					.setIconHidden(true)
+					.setTitle(title)
+					.setPosition(position)
+					.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							if (indexItem.isDownloaded()) {
 								boolean checked = !voiceDownloadedItem[0].isChecked();
 								voiceDownloadedItem[0].setChecked(checked);
 								settings.VOICE_PROVIDER.setModeValue(applicationMode, indexItem.getBasename());
 								updateItems();
-							}
-						})
-						.setCustomView(view)
-						.create();
-				items.add(voiceDownloadedItem[0]);
-			} else {
-				BaseBottomSheetItem voiceItem = new BottomSheetItemWithDescription.Builder()
-						.setDescription(description)
-						.setTitle(title)
-						.setIconHidden(true)
-						.setOnClickListener(new View.OnClickListener() {
-							@Override
-							public void onClick(View v) {
+							} else {
 								if (downloadThread.isDownloading((IndexItem) indexItem)) {
 									downloadThread.cancelDownload(indexItem);
 									AndroidUiHelper.updateVisibility(progressBar, false);
@@ -317,12 +310,11 @@ public class VoiceLanguageBottomSheetFragment extends MenuBottomSheetDialogFragm
 									new DownloadValidationManager(app).startDownload(getActivity(), (IndexItem) indexItem);
 								}
 							}
-						})
-						.setTag(indexItem)
-						.setCustomView(view)
-						.create();
-				items.add(voiceItem);
-			}
+						}
+					})
+					.setCustomView(view)
+					.create();
+			items.add(voiceDownloadedItem[0]);
 		}
 	}
 
