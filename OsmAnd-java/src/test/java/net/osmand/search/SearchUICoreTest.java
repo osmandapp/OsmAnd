@@ -80,9 +80,9 @@ public class SearchUICoreTest {
     	if (files != null) {
 			for (File file : files) {
 				String fileName = file.getName();
-				if(fileName.endsWith(".json")) {
+				if (fileName.endsWith(".json")) {
 					String name = fileName.substring(0, fileName.length() - ".json".length());
-					arrayList.add(new Object[] {name, file});
+					arrayList.add(new Object[] { name, file });
 				}
 			}
 		}
@@ -191,10 +191,10 @@ public class SearchUICoreTest {
 				if (!Algorithms.stringsEqual(expected, present)) {
 					System.out.println(String.format("Phrase: %s", phrase));
 					System.out.println(String.format("Mismatch for '%s' != '%s'. Result: ", expected, present));
+				}
 					for (SearchResult r : searchResults) {
 						System.out.println(String.format("\t\"%s\",", formatResult(false, r, phrase)));
 					}
-				}
 				Assert.assertEquals(expected, present);
 			}
 		}
