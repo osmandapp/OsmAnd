@@ -10,6 +10,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
+
 import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -18,10 +22,6 @@ import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
-
-import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
-import androidx.core.content.ContextCompat;
 
 public class TroubleshootingOrPurchasingCard extends BaseCard {
 
@@ -78,7 +78,7 @@ public class TroubleshootingOrPurchasingCard extends BaseCard {
 			}
 
 			ImageView getItArrow = view.findViewById(R.id.additional_button_icon);
-			UiUtilities.rotateImageByLayoutDirection(getItArrow, app);
+			UiUtilities.rotateImageByLayoutDirection(getItArrow);
 		}
 	}
 

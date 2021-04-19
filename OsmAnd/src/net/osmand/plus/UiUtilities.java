@@ -442,11 +442,11 @@ public class UiUtilities {
 		} catch (Throwable e) { }
 	}
 
-	public static void rotateImageByLayoutDirection(ImageView image, Context context) {
-		if (image == null || context == null) {
+	public static void rotateImageByLayoutDirection(ImageView image) {
+		if (image == null) {
 			return;
 		}
-		int rotation = AndroidUtils.getLayoutDirection(context) == ViewCompat.LAYOUT_DIRECTION_RTL ? 180 : 0;
+		int rotation = AndroidUtils.getLayoutDirection(image.getContext()) == ViewCompat.LAYOUT_DIRECTION_RTL ? 180 : 0;
 		image.setRotationY(rotation);
 	}
 
