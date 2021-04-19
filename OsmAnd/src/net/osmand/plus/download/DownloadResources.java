@@ -648,9 +648,8 @@ public class DownloadResources extends DownloadResourceGroup {
 	public static List<DownloadItem> findIndexItemsAt(OsmandApplication app, String groupTypeVoice) throws IOException {
 		DownloadIndexesThread downloadThread = app.getDownloadThread();
 		DownloadResources indexes = downloadThread.getIndexes();
-		DownloadResourceGroup groupVoice = indexes.getGroupById(groupTypeVoice);
-		List<DownloadResourceGroup> groupList = groupVoice.getGroups();
-		List<DownloadItem> items = groupList.get(0).getIndividualDownloadItems();
+		DownloadResourceGroup groupVoice = indexes.getSubGroupById(groupTypeVoice);
+		List<DownloadItem> items = groupVoice.getIndividualDownloadItems();
 		return new ArrayList<>(items);
 	}
 

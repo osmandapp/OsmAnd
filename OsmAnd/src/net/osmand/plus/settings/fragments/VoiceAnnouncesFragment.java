@@ -1,9 +1,6 @@
 package net.osmand.plus.settings.fragments;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -23,21 +20,13 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
-import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.download.DownloadActivityType;
-import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.helpers.enums.MetricsConstants;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.AnnouncementTimeBottomSheet;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
-import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 
-import java.util.Set;
-
 import static net.osmand.plus.UiUtilities.CompoundButtonType.TOOLBAR;
-import static net.osmand.plus.settings.backend.OsmandSettings.VOICE_PROVIDER_NOT_USE;
 
 public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPreferenceChanged {
 
@@ -204,7 +193,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 	@Override
 	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
 		super.onBindPreferenceViewHolder(preference, holder);
-		 if (settings.SPEED_CAMERAS_UNINSTALLED.getId().equals(preference.getKey())) {
+		if (settings.SPEED_CAMERAS_UNINSTALLED.getId().equals(preference.getKey())) {
 			setupPrefRoundedBg(holder);
 		}
 	}
@@ -232,7 +221,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 
 	@Override
 	public void onApplyPreferenceChange(String prefId, boolean applyToAllProfiles, Object newValue) {
-		 if (prefId.equals(settings.AUDIO_MANAGER_STREAM.getId())) {
+		if (prefId.equals(settings.AUDIO_MANAGER_STREAM.getId())) {
 			// Sync DEFAULT value with CAR value, as we have other way to set it for now
 
 			if (getSelectedAppMode().equals(ApplicationMode.CAR) && newValue instanceof Integer) {
@@ -251,8 +240,6 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 		String prefId = preference.getKey();
 		if (settings.SPEED_CAMERAS_UNINSTALLED.getId().equals(prefId)) {
 			SpeedCamerasBottomSheet.showInstance(requireActivity().getSupportFragmentManager(), this);
-		} else if (settings.VOICE_PROVIDER.getId().equals(prefId)) {
-			VoiceLanguageBottomSheetFragment.showInstance(requireActivity().getSupportFragmentManager(), this);
 		}
 		return super.onPreferenceClick(preference);
 	}
@@ -260,12 +247,13 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 	@Override
 	public void onDisplayPreferenceDialog(Preference preference) {
 		String prefId = preference.getKey();
-
 		if (settings.ARRIVAL_DISTANCE_FACTOR.getId().equals(prefId)) {
 			FragmentManager fragmentManager = getFragmentManager();
 			if (fragmentManager != null) {
 				AnnouncementTimeBottomSheet.showInstance(fragmentManager, preference.getKey(), this, getSelectedAppMode(), false);
 			}
+		} else if (settings.VOICE_PROVIDER.getId().equals(prefId)) {
+			VoiceLanguageBottomSheetFragment.showInstance(requireActivity().getSupportFragmentManager(), this, preference.getKey(), false);
 		} else {
 			super.onDisplayPreferenceDialog(preference);
 		}

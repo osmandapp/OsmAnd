@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.DimenRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
@@ -17,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -24,7 +26,7 @@ import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
-import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadItem;
@@ -39,6 +41,8 @@ import net.osmand.plus.track.TrackSelectSegmentBottomSheet;
 import net.osmand.plus.widgets.MultiStateToggleButton;
 import net.osmand.plus.widgets.MultiStateToggleButton.RadioItem;
 
+import org.apache.commons.logging.Log;
+
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -47,23 +51,39 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
+import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType;
+import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.OTHER_GROUP;
+import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.VOICE_HEADER_REC;
+import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.VOICE_HEADER_TTS;
+import static net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet.PREFERENCE_ID;
+
 public class VoiceLanguageBottomSheetFragment extends MenuBottomSheetDialogFragment implements DownloadIndexesThread.DownloadEvents {
 	private static final String TAG = TrackSelectSegmentBottomSheet.class.getSimpleName();
-	private static final String VOICE_REC = "#other_group#voice_rec";
-	private static final String VOICE_TTS = "#other_group#voice_tts";
+	private static final String VOICE_REC = OTHER_GROUP.getDefaultId() + "#" + DownloadResourceGroupType.VOICE_TTS.getDefaultId() + "#" + VOICE_HEADER_TTS.getDefaultId();
+	private static final String VOICE_TTS = OTHER_GROUP.getDefaultId() + "#" + DownloadResourceGroupType.VOICE_REC.getDefaultId() + "#" + VOICE_HEADER_REC.getDefaultId();
 	private static final int DEFAULT_LANGUAGE_POSITION = 6;
+	private static final Log LOG = PlatformUtil.getLog(VoiceLanguageBottomSheetFragment.class);
 	protected OsmandSettings settings;
 	private OsmandApplication app;
 	private Context context;
-	private Context themedCtx;
 	private InfoType selectedVoiceType = InfoType.TTS;
 	private boolean isTtsDescription;
 	private int padding;
 
-	public static void showInstance(@NonNull FragmentManager fm, Fragment targetFragment) {
-		VoiceLanguageBottomSheetFragment fragment = new VoiceLanguageBottomSheetFragment();
-		fragment.setTargetFragment(targetFragment, 0);
-		fragment.show(fm, TAG);
+	public static void showInstance(@NonNull FragmentManager fm, Fragment targetFragment, String key, boolean usedOnMap) {
+		try {
+			if (!fm.isStateSaved()) {
+				Bundle args = new Bundle();
+				args.putString(PREFERENCE_ID, key);
+				VoiceLanguageBottomSheetFragment fragment = new VoiceLanguageBottomSheetFragment();
+				fragment.setArguments(args);
+				fragment.setUsedOnMap(usedOnMap);
+				fragment.setTargetFragment(targetFragment, 0);
+				fragment.show(fm, TAG);
+			}
+		} catch (RuntimeException e) {
+			LOG.error("showInstance", e);
+		}
 	}
 
 	@Override
@@ -73,7 +93,6 @@ public class VoiceLanguageBottomSheetFragment extends MenuBottomSheetDialogFragm
 
 	private void updateItems() {
 		Activity activity = getActivity();
-		themedCtx = UiUtilities.getThemedContext(activity, nightMode);
 		View mainView = getView();
 		if (activity != null && mainView != null) {
 			LinearLayout itemsContainer = (LinearLayout) mainView.findViewById(useScrollableItemsContainer()
@@ -84,7 +103,7 @@ public class VoiceLanguageBottomSheetFragment extends MenuBottomSheetDialogFragm
 			items.clear();
 			createMenuItems(null);
 			for (BaseBottomSheetItem item : items) {
-				item.inflate(themedCtx, itemsContainer, nightMode);
+				item.inflate(context, itemsContainer, nightMode);
 			}
 			setupHeightAndBackground(mainView);
 		}
@@ -126,7 +145,6 @@ public class VoiceLanguageBottomSheetFragment extends MenuBottomSheetDialogFragm
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		createVoiceView();
 	}
 
 	@Override
@@ -137,11 +155,9 @@ public class VoiceLanguageBottomSheetFragment extends MenuBottomSheetDialogFragm
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		app = requiredMyApplication();
 		context = requireContext();
-		themedCtx = UiUtilities.getThemedContext(app, nightMode);
 		settings = app.getSettings();
-		padding = getResources().getDimensionPixelSize(R.dimen.content_padding_small);
+		padding = getDimen(R.dimen.content_padding_small);
 
 		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
 		BaseBottomSheetItem titleItem = new BottomSheetItemWithDescription.Builder()
@@ -151,7 +167,7 @@ public class VoiceLanguageBottomSheetFragment extends MenuBottomSheetDialogFragm
 				.create();
 		items.add(titleItem);
 
-		items.add(new DividerSpaceItem(themedCtx, padding));
+		items.add(new DividerSpaceItem(context, padding));
 
 		LinearLayout voiceTypeButtons = (LinearLayout) inflater.inflate(R.layout.custom_radio_buttons, null);
 		LinearLayout.MarginLayoutParams itemTimeOfDayParams = new LinearLayout.MarginLayoutParams(
@@ -209,24 +225,23 @@ public class VoiceLanguageBottomSheetFragment extends MenuBottomSheetDialogFragm
 
 	private void createSuggestedVoiceItems(List<DownloadItem> suggestedMaps) {
 		final OsmandApplication app = requiredMyApplication();
-		themedCtx = UiUtilities.getThemedContext(app, nightMode);
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		final ApplicationMode applicationMode = routingHelper.getAppMode();
 
-		items.add(new DividerSpaceItem(themedCtx, padding));
+		items.add(new DividerSpaceItem(context, padding));
 		BaseBottomSheetItem switchStartAndEndItem = new BottomSheetItemWithDescription.Builder()
 				.setDescription(getString(isTtsDescription ? R.string.tts_description : R.string.recorded_description))
 				.setLayoutId(R.layout.bottom_sheet_item_description_long)
 				.create();
 		items.add(switchStartAndEndItem);
 
-		items.add(new DividerHalfItem(themedCtx));
+		items.add(createDividerItem());
 
 		final DownloadIndexesThread downloadThread = app.getDownloadThread();
 
 		for (final DownloadItem indexItem : suggestedMaps) {
-			View view = UiUtilities.getInflater(themedCtx, nightMode).inflate(R.layout.list_item_icon_and_download, null);
-			AndroidUtils.setBackground(view, UiUtilities.getSelectableDrawable(themedCtx));
+			View view = UiUtilities.getInflater(context, nightMode).inflate(R.layout.list_item_icon_and_download, null);
+			AndroidUtils.setBackground(view, UiUtilities.getSelectableDrawable(context));
 			view.findViewById(R.id.divider).setVisibility(View.GONE);
 
 			String systemLanguage = Locale.getDefault().getLanguage();
@@ -239,10 +254,12 @@ public class VoiceLanguageBottomSheetFragment extends MenuBottomSheetDialogFragm
 
 			final ImageView secondaryIcon = view.findViewById(R.id.secondary_icon);
 			int color = ContextCompat.getColor(context, nightMode ? R.color.wikivoyage_active_dark : R.color.wikivoyage_active_light);
+			int activeColorResId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
 			secondaryIcon.setColorFilter(color, android.graphics.PorterDuff.Mode.MULTIPLY);
 
 			final ProgressBar progressBar = view.findViewById(R.id.ProgressBar);
 			final TextView textDescription = view.findViewById(R.id.description);
+			final TextView compoundButton = view.findViewById(R.id.compound_button);
 
 			AndroidUiHelper.updateVisibility(secondaryIcon, true);
 			AndroidUiHelper.updateVisibility(progressBar, downloadThread.isDownloading((IndexItem) indexItem));
@@ -257,14 +274,16 @@ public class VoiceLanguageBottomSheetFragment extends MenuBottomSheetDialogFragm
 			}
 
 			if (indexItem.isDownloaded()) {
+				AndroidUiHelper.updateVisibility(compoundButton, true);
+				AndroidUiHelper.updateVisibility(secondaryIcon, false);
 				final BottomSheetItemWithCompoundButton[] voiceDownloadedItem = new BottomSheetItemWithCompoundButton[1];
 				voiceDownloadedItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
+						.setCompoundButtonColorId(activeColorResId)
 						.setChecked(settings.VOICE_PROVIDER.getModeValue(applicationMode).contains(indexItem.getBasename()))
 						.setDescription(description)
 						.setIconHidden(true)
 						.setTitle(title)
 						.setPosition(position)
-						.setLayoutId(R.layout.bottom_sheet_item_with_descr_and_radio_btn)
 						.setOnClickListener(new View.OnClickListener() {
 							@Override
 							public void onClick(View v) {
@@ -274,6 +293,7 @@ public class VoiceLanguageBottomSheetFragment extends MenuBottomSheetDialogFragm
 								updateItems();
 							}
 						})
+						.setCustomView(view)
 						.create();
 				items.add(voiceDownloadedItem[0]);
 			} else {
@@ -306,6 +326,18 @@ public class VoiceLanguageBottomSheetFragment extends MenuBottomSheetDialogFragm
 		}
 	}
 
+	public int getDimen(@DimenRes int id) {
+		return getResources().getDimensionPixelSize(id);
+	}
+
+	private BaseBottomSheetItem createDividerItem() {
+		DividerItem dividerItem = new DividerItem(app);
+		int start = getDimen(R.dimen.content_padding);
+		int vertical = getDimen(R.dimen.content_padding_small_half);
+		dividerItem.setMargins(start, vertical, 0, vertical);
+		return dividerItem;
+	}
+
 	public List<DownloadItem> getVoiceList(String type) {
 		List<DownloadItem> suggestedVoice = new ArrayList<>();
 
@@ -329,7 +361,7 @@ public class VoiceLanguageBottomSheetFragment extends MenuBottomSheetDialogFragm
 		try {
 			return DownloadResources.findIndexItemsAt(app, type);
 		} catch (IOException e) {
-			e.printStackTrace();
+			LOG.error(e);
 		}
 		return Collections.emptyList();
 	}
