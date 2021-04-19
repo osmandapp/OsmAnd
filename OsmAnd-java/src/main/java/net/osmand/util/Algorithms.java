@@ -26,8 +26,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -305,7 +305,7 @@ public class Algorithms {
 		if (isEmpty(s)) {
 			return Collections.emptySet();
 		}
-		return new HashSet<>(Arrays.asList(s.split(split)));
+		return new LinkedHashSet<>(Arrays.asList(s.split(split)));
 	}
 
 	public static String encodeStringSet(Set<String> set) {

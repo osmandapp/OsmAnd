@@ -24,12 +24,11 @@ import net.osmand.util.Algorithms;
 
 import java.io.Serializable;
 
-import static net.osmand.plus.itinerary.ItineraryHelper.PASSED_TIMESTAMP;
-
 
 public class FavouritePoint implements Serializable, LocationPoint {
 	private static final long serialVersionUID = 729654300829771466L;
 
+	private static final String PASSED_TIMESTAMP = "passed_timestamp";
 	private static final String HIDDEN = "hidden";
 	private static final String ADDRESS_EXTENSION = "address";
 	public static final BackgroundType DEFAULT_BACKGROUND_TYPE = BackgroundType.CIRCLE;
@@ -348,8 +347,8 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		result = prime * result + (int) Math.floor(latitude * 10000);
 		result = prime * result + (int) Math.floor(longitude * 10000);
 		result = prime * result + (int) Math.floor(altitude * 10000);
-		result = prime * result + (int) Math.floor(timestamp * 10000);
-		result = prime * result + (int) Math.floor(passedTimestamp * 10000);
+		result = prime * result + (int) (timestamp ^ (timestamp >>> 32));
+		result = prime * result + (int) (passedTimestamp ^ (passedTimestamp >>> 32));
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((category == null) ? 0 : category.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
@@ -487,7 +486,6 @@ public class FavouritePoint implements Serializable, LocationPoint {
 			String time = pt.getExtensionsToWrite().get(PASSED_TIMESTAMP);
 			fp.setPassedTimestamp(Algorithms.parseLongSilently(time, 0));
 		}
-
 		BackgroundType backgroundType = BackgroundType.getByTypeName(pt.getBackgroundType(), null);
 		fp.setBackgroundType(backgroundType);
 		return fp;

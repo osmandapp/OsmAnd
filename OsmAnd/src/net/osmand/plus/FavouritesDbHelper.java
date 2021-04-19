@@ -711,17 +711,6 @@ public class FavouritesDbHelper {
 		return null;
 	}
 
-	@Nullable
-	public FavouritePoint getFavByLatLon(@NonNull LatLon latLon, String name) {
-		for (FavouritePoint fav : cachedFavoritePoints) {
-			if (latLon.equals(new LatLon(fav.getLatitude(), fav.getLongitude()))
-					&& Algorithms.stringsEqual(fav.getName(), name)) {
-				return fav;
-			}
-		}
-		return null;
-	}
-
 	public List<FavoriteGroup> getFavoriteGroups() {
 		return favoriteGroups;
 	}
@@ -848,9 +837,7 @@ public class FavouritesDbHelper {
 		}
 		for (WptPt p : res.getPoints()) {
 			FavouritePoint fp = FavouritePoint.fromWpt(p, context);
-			if (fp != null) {
-				points.put(getKey(fp), fp);
-			}
+			points.put(getKey(fp), fp);
 		}
 		return true;
 	}

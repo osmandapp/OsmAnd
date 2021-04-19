@@ -3,6 +3,7 @@ package net.osmand.plus.mapmarkers;
 import android.content.Context;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.GPXUtilities.WptPt;
@@ -37,7 +38,7 @@ public class MapMarker implements LocationPoint {
 	public FavouritePoint favouritePoint;
 	public String mapObjectName;
 
-	public MapMarker(LatLon point, PointDescription name, int colorIndex, boolean selected, int index) {
+	public MapMarker(@NonNull LatLon point, @NonNull PointDescription name, int colorIndex, boolean selected, int index) {
 		this.point = point;
 		this.pointDescription = name;
 		this.colorIndex = colorIndex;
@@ -66,11 +67,12 @@ public class MapMarker implements LocationPoint {
 		return name;
 	}
 
+	@NonNull
 	public PointDescription getOriginalPointDescription() {
 		return pointDescription;
 	}
 
-	public void setOriginalPointDescription(PointDescription pointDescription) {
+	public void setOriginalPointDescription(@NonNull PointDescription pointDescription) {
 		this.pointDescription = pointDescription;
 	}
 

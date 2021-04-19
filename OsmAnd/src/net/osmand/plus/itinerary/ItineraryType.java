@@ -1,27 +1,19 @@
 package net.osmand.plus.itinerary;
 
-import androidx.annotation.NonNull;
-
 public enum ItineraryType {
-	MARKERS("markers", -1),
-	FAVOURITES("favourites", 0),
-	TRACK("track", 1),
-	POINTS("points", 2);
+	MARKERS(-1),
+	FAVOURITES(0),
+	TRACK(1),
+	POINTS(2);
 
 	private int typeId;
-	private String typeName;
 
-	ItineraryType(@NonNull String typeName, int typeId) {
-		this.typeName = typeName;
+	ItineraryType(int typeId) {
 		this.typeId = typeId;
 	}
 
 	public int getTypeId() {
 		return typeId;
-	}
-
-	public String getTypeName() {
-		return typeName;
 	}
 
 	public static ItineraryType findTypeForId(int typeId) {
@@ -30,15 +22,15 @@ public enum ItineraryType {
 				return type;
 			}
 		}
-		return ItineraryType.MARKERS;
+		return ItineraryType.POINTS;
 	}
 
 	public static ItineraryType findTypeForName(String typeName) {
 		for (ItineraryType type : values()) {
-			if (type.getTypeName().equalsIgnoreCase(typeName)) {
+			if (type.name().equalsIgnoreCase(typeName)) {
 				return type;
 			}
 		}
-		return ItineraryType.MARKERS;
+		return ItineraryType.POINTS;
 	}
 }
