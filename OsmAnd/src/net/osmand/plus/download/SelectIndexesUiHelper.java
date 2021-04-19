@@ -13,7 +13,7 @@ import net.osmand.plus.base.ModeSelectionBottomSheet;
 import net.osmand.plus.base.MultipleSelectionWithModeBottomSheet;
 import net.osmand.plus.base.SelectionBottomSheet;
 import net.osmand.plus.base.SelectionBottomSheet.OnApplySelectionListener;
-import net.osmand.plus.base.SelectionBottomSheet.OnUiInitializedListener;
+import net.osmand.plus.base.SelectionBottomSheet.OnUiInitializedAdapter;
 import net.osmand.plus.base.SelectionBottomSheet.SelectableItem;
 import net.osmand.plus.widgets.MultiStateToggleButton.OnRadioItemClickListener;
 import net.osmand.plus.widgets.MultiStateToggleButton.RadioItem;
@@ -80,7 +80,7 @@ public class SelectIndexesUiHelper {
 				activity, allItems, selectedItems, true);
 		this.dialog = msDialog;
 
-		msDialog.setUiInitializedListener(new OnUiInitializedListener() {
+		msDialog.setOnUiInitializedAdapter(new OnUiInitializedAdapter() {
 			@Override
 			public void onUiInitialized() {
 				dialog.setTitle(app.getString(R.string.welmode_download_maps));
@@ -103,14 +103,14 @@ public class SelectIndexesUiHelper {
 		prepareItems(allItems, selectedItems);
 
 		SrtmDownloadItem srtmItem = (SrtmDownloadItem) ((MultipleDownloadItem)downloadItem).getAllItems().get(0);
-		final int selectedModeOrder = srtmItem.isUseMeters() ? 0 : 1;
+		final int selectedModeOrder = srtmItem.isUseMetric() ? 0 : 1;
 		final List<RadioItem> radioItems = createSrtmRadioItems();
 
 		MultipleSelectionBottomSheet msDialog = MultipleSelectionWithModeBottomSheet.showInstance(
 				activity, allItems, selectedItems, radioItems, true);
 		this.dialog = msDialog;
 
-		msDialog.setUiInitializedListener(new OnUiInitializedListener() {
+		msDialog.setOnUiInitializedAdapter(new OnUiInitializedAdapter() {
 			@Override
 			public void onUiInitialized() {
 				dialog.setTitle(app.getString(R.string.welmode_download_maps));
@@ -131,14 +131,14 @@ public class SelectIndexesUiHelper {
 
 	private void showSrtmModeSelectionDialog() {
 		SrtmDownloadItem srtmItem = (SrtmDownloadItem) downloadItem;
-		final int selectedModeOrder = srtmItem.isUseMeters() ? 0 : 1;
+		final int selectedModeOrder = srtmItem.isUseMetric() ? 0 : 1;
 
 		final List<RadioItem> radioItems = createSrtmRadioItems();
 		SelectableItem preview = createSelectableItem(srtmItem);
 
 		dialog = ModeSelectionBottomSheet.showInstance(activity, preview, radioItems, true);
 
-		dialog.setUiInitializedListener(new OnUiInitializedListener() {
+		dialog.setOnUiInitializedAdapter(new OnUiInitializedAdapter() {
 			@Override
 			public void onUiInitialized() {
 				ModeSelectionBottomSheet dialog = (ModeSelectionBottomSheet) SelectIndexesUiHelper.this.dialog;
@@ -169,7 +169,7 @@ public class SelectIndexesUiHelper {
 	private List<RadioItem> createSrtmRadioItems() {
 		List<RadioItem> radioItems = new ArrayList<>();
 		radioItems.add(createSrtmRadioBtn(R.string.shared_string_meters, true));
-		radioItems.add(createSrtmRadioBtn(R.string.shared_string_feets, false));
+		radioItems.add(createSrtmRadioBtn(R.string.shared_string_feet, false));
 		return radioItems;
 	}
 
@@ -193,7 +193,7 @@ public class SelectIndexesUiHelper {
 		for (SelectableItem item : items) {
 			DownloadItem downloadItem = (DownloadItem) item.getObject();
 			if (downloadItem instanceof SrtmDownloadItem) {
-				((SrtmDownloadItem) downloadItem).setUseMeters(useMeters);
+				((SrtmDownloadItem) downloadItem).setUseMetric(useMeters);
 				updateSelectableItem(item, downloadItem);
 			}
 		}
@@ -208,12 +208,12 @@ public class SelectIndexesUiHelper {
 
 	private void updateSelectableItem(SelectableItem selectableItem,
 	                                  DownloadItem downloadItem) {
-		selectableItem.setTitle(
-				downloadItem.getVisibleName(app, app.getRegions(), false));
+		selectableItem.setTitle(downloadItem.getVisibleName(app, app.getRegions(), false));
 
 		String size = downloadItem.getSizeDescription(app);
-		if (downloadItem.isUseAbbreviation()) {
-			size += " " + downloadItem.getAbbreviationInScopes(app);
+		String addDescr = downloadItem.getAdditionalDescription(app);
+		if (addDescr != null) {
+			size += " " + addDescr;
 		}
 		String date = downloadItem.getDate(dateFormat, showRemoteDate);
 		String description = app.getString(R.string.ltr_or_rtl_combine_via_bold_point, size, date);

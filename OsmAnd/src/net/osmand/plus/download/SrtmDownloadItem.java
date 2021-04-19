@@ -10,6 +10,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.helpers.enums.MetricsConstants;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -24,31 +25,40 @@ import static net.osmand.plus.download.DownloadActivityType.SRTM_COUNTRY_FILE;
 public class SrtmDownloadItem extends DownloadItem {
 
 	private final List<IndexItem> indexes;
-	private boolean useMeters;
+	private boolean useMetric;
 
-	public SrtmDownloadItem(List<IndexItem> indexes,
-	                        boolean useMeters) {
+	public SrtmDownloadItem(List<IndexItem> indexes, boolean useMetric) {
 		super(SRTM_COUNTRY_FILE);
 		this.indexes = indexes;
-		this.useMeters = useMeters;
+		this.useMetric = useMetric;
 	}
 
-	public void setUseMeters(boolean useMeters) {
-		this.useMeters = useMeters;
+	public void setUseMetric(boolean useMetric) {
+		this.useMetric = useMetric;
 	}
 
-	public boolean isUseMeters() {
-		return useMeters;
+	public boolean isUseMetric() {
+		for (IndexItem index : indexes) {
+			if (index.isDownloaded()) {
+				return isMetricItem(index);
+			}
+		}
+		return useMetric;
 	}
 
-	@Nullable
+	@NonNull
 	public IndexItem getIndexItem() {
 		for (IndexItem index : indexes) {
-			if (useMeters && isMetersItem(index) || !useMeters && !isMetersItem(index)) {
+			if (index.isDownloaded()) {
 				return index;
 			}
 		}
-		return null;
+		for (IndexItem index : indexes) {
+			if (useMetric && isMetricItem(index) || !useMetric && !isMetricItem(index)) {
+				return index;
+			}
+		}
+		return indexes.get(0);
 	}
 
 	@Override
@@ -83,13 +93,12 @@ public class SrtmDownloadItem extends DownloadItem {
 
 	@Override
 	public boolean hasActualDataToDownload() {
-		// may be check only downloaded items if any downloaded
 		for (IndexItem item : indexes) {
-			if (item.hasActualDataToDownload()) {
-				return true;
+			if (!item.hasActualDataToDownload()) {
+				return false;
 			}
 		}
-		return false;
+		return true;
 	}
 
 	@Override
@@ -110,7 +119,6 @@ public class SrtmDownloadItem extends DownloadItem {
 	@NonNull
 	@Override
 	public List<File> getDownloadedFiles(@NonNull OsmandApplication app) {
-		// may be check both indexes files
 		List<File> result = new ArrayList<>();
 		for (IndexItem index : indexes) {
 			result.addAll(index.getDownloadedFiles(app));
@@ -119,17 +127,11 @@ public class SrtmDownloadItem extends DownloadItem {
 	}
 
 	public String getDate(@NonNull DateFormat dateFormat, boolean remote) {
-		// may be check only downloaded items if any downloaded
 		return getIndexItem().getDate(dateFormat, remote);
 	}
 
 	@Override
-	public boolean isUseAbbreviation() {
-		return true;
-	}
-
-	@Override
-	public String getAbbreviationInScopes(Context ctx) {
+	public @Nullable String getAdditionalDescription(Context ctx) {
 		return getAbbreviationInScopes(ctx, this);
 	}
 
@@ -140,27 +142,8 @@ public class SrtmDownloadItem extends DownloadItem {
 
 	@NonNull
 	public static String getAbbreviationInScopes(Context ctx, Object obj) {
-		return "(" + getAbbreviation(ctx, obj) + ")";
-	}
-
-	@NonNull
-	public static String getAbbreviation(Context context, Object obj) {
-		return context.getString(isMetersItem(obj) ? R.string.m : R.string.foot);
-	}
-
-	public static boolean isMetersItem(Object item) {
-		if (item instanceof IndexItem) {
-			return ((IndexItem) item).getFileName().endsWith(BINARY_SRTM_MAP_INDEX_EXT_ZIP);
-		} else if (item instanceof LocalIndexInfo) {
-			return ((LocalIndexInfo) item).getFileName().endsWith(BINARY_SRTM_MAP_INDEX_EXT);
-		} else if (item instanceof SrtmDownloadItem) {
-			return ((SrtmDownloadItem) item).useMeters;
-		} else if (item instanceof MultipleDownloadItem) {
-			for (DownloadItem downloadItem : ((MultipleDownloadItem) item).getAllItems()) {
-				return isMetersItem(downloadItem);
-			}
-		}
-		return false;
+		String abbreviation = ctx.getString(isMetricItem(obj) ? R.string.m : R.string.foot);
+		return "(" + abbreviation + ")";
 	}
 
 	public static boolean containsSrtmExtension(@NonNull String fileName) {
@@ -175,18 +158,32 @@ public class SrtmDownloadItem extends DownloadItem {
 
 	@NonNull
 	public static String getExtension(IndexItem indexItem) {
-		return isMetersItem(indexItem) ?
+		return isMetricItem(indexItem) ?
 				IndexConstants.BINARY_SRTM_MAP_INDEX_EXT :
 				IndexConstants.BINARY_SRTM_FEET_MAP_INDEX_EXT;
 	}
 
 	public static boolean isSRTMItem(Object item) {
-		if (item instanceof IndexItem) {
-			return ((IndexItem) item).getType() == SRTM_COUNTRY_FILE;
-		} else if (item instanceof DownloadItem) {
+		if (item instanceof DownloadItem) {
 			return ((DownloadItem) item).getType() == SRTM_COUNTRY_FILE;
 		} else if (item instanceof LocalIndexInfo) {
 			return ((LocalIndexInfo) item).getType() == SRTM_DATA;
+		}
+		return false;
+	}
+
+	private static boolean isMetricItem(Object item) {
+		if (item instanceof IndexItem) {
+			return ((IndexItem) item).getFileName().endsWith(BINARY_SRTM_MAP_INDEX_EXT_ZIP);
+		} else if (item instanceof LocalIndexInfo) {
+			return ((LocalIndexInfo) item).getFileName().endsWith(BINARY_SRTM_MAP_INDEX_EXT);
+		} else if (item instanceof SrtmDownloadItem) {
+			return isMetricItem(((SrtmDownloadItem) item).getIndexItem());
+		} else if (item instanceof MultipleDownloadItem) {
+			List<DownloadItem> items = ((MultipleDownloadItem) item).getAllItems();
+			if (!Algorithms.isEmpty(items)) {
+				return isMetricItem(items.get(0));
+			}
 		}
 		return false;
 	}

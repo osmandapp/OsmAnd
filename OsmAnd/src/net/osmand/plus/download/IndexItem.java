@@ -3,6 +3,7 @@ package net.osmand.plus.download;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -229,14 +230,10 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 		return format.format(new Date(timestamp));
 	}
 
+	@Nullable
 	@Override
-	public boolean isUseAbbreviation() {
-		return false;
-	}
-
-	@Override
-	public String getAbbreviationInScopes(Context ctx) {
-		return "";
+	public String getAdditionalDescription(Context ctx) {
+		return null;
 	}
 	
 	public static class DownloadEntry {

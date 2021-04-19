@@ -227,8 +227,9 @@ public class ItemViewHolder {
 					count = allRegionsCount;
 				}
 				String fullDescription = context.getString(R.string.ltr_or_rtl_combine_via_colon, header, count);
-				if (item.isUseAbbreviation()) {
-					fullDescription += " " + item.getAbbreviationInScopes(context);
+				String addDescr = item.getAdditionalDescription(context);
+				if (addDescr != null) {
+					fullDescription += " " + addDescr;
 				}
 				if (item.hasActualDataToDownload()) {
 					fullDescription = context.getString(
@@ -240,8 +241,9 @@ public class ItemViewHolder {
 				String pattern = context.getString(R.string.ltr_or_rtl_combine_via_bold_point);
 				String type = downloadItem.getType().getString(context);
 				String size = downloadItem.getSizeDescription(context);
-				if (downloadItem.isUseAbbreviation()) {
-					size += " " + downloadItem.getAbbreviationInScopes(context);
+				String addDescr = downloadItem.getAdditionalDescription(context);
+				if (addDescr != null) {
+					size += " " + addDescr;
 				}
 				String date = downloadItem.getDate(dateFormat, showRemoteDate);
 				String fullDescription = String.format(pattern, size, date);

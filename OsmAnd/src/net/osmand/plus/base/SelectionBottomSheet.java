@@ -51,8 +51,8 @@ public abstract class SelectionBottomSheet extends MenuBottomSheetDialogFragment
 	protected int activeColorRes;
 	protected int secondaryColorRes;
 
-	private OnUiInitializedListener uiInitializedListener;
-	private OnApplySelectionListener applySelectionListener;
+	private OnUiInitializedAdapter onUiInitializedAdapter;
+	private OnApplySelectionListener onApplySelectionListener;
 
 	protected List<SelectableItem> allItems = new ArrayList<>();
 	protected Map<SelectableItem, View> listViews = new HashMap<>();
@@ -145,19 +145,19 @@ public abstract class SelectionBottomSheet extends MenuBottomSheetDialogFragment
 	}
 
 	public void setItems(List<SelectableItem> allItems) {
+		this.allItems.clear();
 		if (!Algorithms.isEmpty(allItems)) {
-			this.allItems.clear();
 			this.allItems.addAll(allItems);
 			createSelectionListIfPossible();
 		}
 	}
 
-	public void setUiInitializedListener(OnUiInitializedListener uiInitializedListener) {
-		this.uiInitializedListener = uiInitializedListener;
+	public void setOnUiInitializedAdapter(OnUiInitializedAdapter onUiInitializedAdapter) {
+		this.onUiInitializedAdapter = onUiInitializedAdapter;
 	}
 
 	public void setOnApplySelectionListener(OnApplySelectionListener onApplySelectionListener) {
-		this.applySelectionListener = onApplySelectionListener;
+		this.onApplySelectionListener = onApplySelectionListener;
 	}
 
 	private void createSelectionListIfPossible() {
@@ -194,8 +194,8 @@ public abstract class SelectionBottomSheet extends MenuBottomSheetDialogFragment
 	protected abstract boolean shouldShowDivider();
 
 	protected void notifyUiInitialized() {
-		if (uiInitializedListener != null) {
-			uiInitializedListener.onUiInitialized();
+		if (onUiInitializedAdapter != null) {
+			onUiInitializedAdapter.onUiInitialized();
 		}
 	}
 
@@ -215,8 +215,8 @@ public abstract class SelectionBottomSheet extends MenuBottomSheetDialogFragment
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		if (applySelectionListener != null) {
-			applySelectionListener.onSelectionApplied(getSelectedItems());
+		if (onApplySelectionListener != null) {
+			onApplySelectionListener.onSelectionApplied(getSelectedItems());
 		}
 		dismiss();
 	}
@@ -239,7 +239,7 @@ public abstract class SelectionBottomSheet extends MenuBottomSheetDialogFragment
 		}
 	}
 
-	public interface OnUiInitializedListener {
+	public interface OnUiInitializedAdapter {
 		void onUiInitialized();
 	}
 

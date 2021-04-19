@@ -3,6 +3,7 @@ package net.osmand.plus.download;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
@@ -59,9 +60,8 @@ public abstract class DownloadItem {
 	@NonNull
 	public abstract List<File> getDownloadedFiles(@NonNull OsmandApplication app);
 
-	public abstract boolean isUseAbbreviation();
-
-	public abstract String getAbbreviationInScopes(Context ctx);
+	@Nullable
+	public abstract String getAdditionalDescription(Context ctx);
 
 	protected abstract double getSizeToDownloadInMb();
 

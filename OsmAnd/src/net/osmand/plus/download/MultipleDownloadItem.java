@@ -144,28 +144,17 @@ public class MultipleDownloadItem extends DownloadItem {
 		return null;
 	}
 
+	@Nullable
 	@Override
-	public boolean isUseAbbreviation() {
+	public String getAdditionalDescription(Context ctx) {
 		for (DownloadItem item : items) {
-			if (item.isUseAbbreviation()) {
-				return true;
-			}
+			return item.getAdditionalDescription(ctx);
 		}
-		return false;
-	}
-
-	@Override
-	public String getAbbreviationInScopes(Context ctx) {
-		for (DownloadItem item : items) {
-			return item.getAbbreviationInScopes(ctx);
-		}
-		return "";
+		return null;
 	}
 
 	@Override
 	public String getDate(@NonNull DateFormat dateFormat, boolean remote) {
 		return "";
 	}
-
-
 }

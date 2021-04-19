@@ -144,8 +144,8 @@ public class MultipleSelectionBottomSheet extends SelectionBottomSheet {
 	}
 
 	protected void setSelectedItems(List<SelectableItem> selected) {
+		selectedItems.clear();
 		if (!Algorithms.isEmpty(selected)) {
-			selectedItems.clear();
 			selectedItems.addAll(selected);
 		}
 	}

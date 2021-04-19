@@ -25,6 +25,7 @@ import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -121,7 +122,7 @@ public class DownloadResources extends DownloadResourceGroup {
 		if (group != null) {
 			return group.getIndividualDownloadItems();
 		}
-		return new LinkedList<>();
+		return Collections.emptyList();
 	}
 
 	@NonNull
@@ -132,7 +133,7 @@ public class DownloadResources extends DownloadResourceGroup {
 				return res;
 			}
 		}
-		return new LinkedList<>();
+		return Collections.emptyList();
 	}
 
 	public void updateLoadedFiles() {
@@ -500,7 +501,7 @@ public class DownloadResources extends DownloadResourceGroup {
 						srtmIndexes.add((IndexItem) item);
 					}
 				}
-				if (srtmIndexes.size() == 2) {
+				if (srtmIndexes.size() > 1) {
 					individualItems.removeAll(srtmIndexes);
 					group.addItem(new SrtmDownloadItem(srtmIndexes, useMetersByDefault));
 				}
