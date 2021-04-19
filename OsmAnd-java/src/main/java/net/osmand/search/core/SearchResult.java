@@ -55,10 +55,18 @@ public class SearchResult {
 	
 	public double getSumPhraseMatchWeight() {
 		// if result is a complete match in the search we prioritize it higher
-		int localWordsMatched = alternateName != null ? 
-				requiredSearchPhrase.countWords(alternateName)  : requiredSearchPhrase.countWords(localeName) ;
+		String name = alternateName != null? alternateName : localeName;
+		int localWordsMatched =  requiredSearchPhrase.countWords(name) ;
  		boolean match = localWordsMatched <= getSelfWordCount();
-		double res = ObjectType.getTypeWeight(match ? objectType : null);
+		boolean fullCompleteMatch = false;
+		double res = 1;
+		if (match) {
+			res = ObjectType.getTypeWeight(match ? objectType : null);
+			fullCompleteMatch = getSelfPhrase().equals(name);
+			if (fullCompleteMatch) {
+				res = res * 10;
+			}
+		}
 		if (parentSearchResult != null) {
 			res = res + parentSearchResult.getSumPhraseMatchWeight() / MAX_TYPE_WEIGHT;
 		}
@@ -80,6 +88,19 @@ public class SearchResult {
 		return inc;
 	}
 
+	private String getSelfPhrase() {
+		String ph = "";
+		if (firstUnknownWordMatches) {
+			ph = requiredSearchPhrase.getFirstUnknownSearchWord();
+		}
+		if (otherWordsMatch != null) {
+			for (String s : otherWordsMatch) {
+				ph += " " + s;
+			}
+		}
+		return ph;
+	}
+	
 	private int getSelfWordCount() {
 		int inc = 0;
 		if (firstUnknownWordMatches) {
