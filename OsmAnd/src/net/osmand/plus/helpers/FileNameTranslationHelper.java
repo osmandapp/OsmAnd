@@ -102,10 +102,7 @@ public class FileNameTranslationHelper {
 			wikiVoyageName = formattedName;
 		}
 		String wikiVoyageWord = ctx.getString(R.string.shared_string_wikivoyage);
-		int index = wikiVoyageWord.indexOf("(");
-		if (index >= 0) {
-			return ctx.getString(R.string.ltr_or_rtl_combine_via_space, wikiVoyageName, wikiVoyageWord.substring(0, index).trim());
-		}
+
 		return ctx.getString(R.string.ltr_or_rtl_combine_via_space, wikiVoyageName, wikiVoyageWord);
 	}
 
