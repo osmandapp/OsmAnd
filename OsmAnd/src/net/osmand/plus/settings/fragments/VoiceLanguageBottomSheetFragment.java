@@ -68,7 +68,7 @@ public class VoiceLanguageBottomSheetFragment extends MenuBottomSheetDialogFragm
 	private Context context;
 	private InfoType selectedVoiceType = InfoType.TTS;
 	private boolean isTtsDescription;
-	private int padding;
+	private DownloadIndexesThread downloadThread;
 
 	public static void showInstance(@NonNull FragmentManager fm, Fragment targetFragment, String key, boolean usedOnMap) {
 		try {
@@ -115,7 +115,6 @@ public class VoiceLanguageBottomSheetFragment extends MenuBottomSheetDialogFragm
 		if (app == null) {
 			return;
 		}
-		DownloadIndexesThread downloadThread = app.getDownloadThread();
 		IndexItem downloadIndexItem = downloadThread.getCurrentDownloadingItem();
 		if (downloadIndexItem != null) {
 			for (BaseBottomSheetItem item : items) {
@@ -157,7 +156,8 @@ public class VoiceLanguageBottomSheetFragment extends MenuBottomSheetDialogFragm
 	public void createMenuItems(Bundle savedInstanceState) {
 		context = requireContext();
 		settings = app.getSettings();
-		padding = getDimen(R.dimen.content_padding_small);
+		int padding = getDimen(R.dimen.content_padding_small);
+		downloadThread = app.getDownloadThread();
 
 		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
 		BaseBottomSheetItem titleItem = new BottomSheetItemWithDescription.Builder()
@@ -180,6 +180,16 @@ public class VoiceLanguageBottomSheetFragment extends MenuBottomSheetDialogFragm
 				.setCustomView(voiceTypeButtons)
 				.create()
 		);
+
+		items.add(new DividerSpaceItem(context, padding));
+		BaseBottomSheetItem switchStartAndEndItem = new BottomSheetItemWithDescription.Builder()
+				.setDescription(getString(isTtsDescription ? R.string.tts_description : R.string.recorded_description))
+				.setLayoutId(R.layout.bottom_sheet_item_description_long)
+				.create();
+		items.add(switchStartAndEndItem);
+
+		items.add(createDividerItem());
+
 		createVoiceView();
 	}
 
@@ -227,17 +237,6 @@ public class VoiceLanguageBottomSheetFragment extends MenuBottomSheetDialogFragm
 	private void createSuggestedVoiceItems(List<DownloadItem> suggestedMaps) {
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		final ApplicationMode applicationMode = routingHelper.getAppMode();
-
-		items.add(new DividerSpaceItem(context, padding));
-		BaseBottomSheetItem switchStartAndEndItem = new BottomSheetItemWithDescription.Builder()
-				.setDescription(getString(isTtsDescription ? R.string.tts_description : R.string.recorded_description))
-				.setLayoutId(R.layout.bottom_sheet_item_description_long)
-				.create();
-		items.add(switchStartAndEndItem);
-
-		items.add(createDividerItem());
-
-		final DownloadIndexesThread downloadThread = app.getDownloadThread();
 
 		for (final DownloadItem indexItem : suggestedMaps) {
 			View view = UiUtilities.getInflater(context, nightMode).inflate(R.layout.list_item_icon_and_download, null);
@@ -333,7 +332,6 @@ public class VoiceLanguageBottomSheetFragment extends MenuBottomSheetDialogFragm
 	public List<DownloadItem> getVoiceList(String type) {
 		List<DownloadItem> suggestedVoice = new ArrayList<>();
 
-		DownloadIndexesThread downloadThread = app.getDownloadThread();
 		if (!downloadThread.getIndexes().isDownloadedFromInternet && settings.isInternetConnectionAvailable()) {
 			downloadThread.runReloadIndexFiles();
 		}
