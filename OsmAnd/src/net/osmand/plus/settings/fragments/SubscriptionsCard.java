@@ -28,7 +28,7 @@ public class SubscriptionsCard extends BaseCard {
 	private static final String PLAY_STORE_SUBSCRIPTION_DEEPLINK_URL = "https://play.google.com/store/account/subscriptions?sku=%s&package=%s";
 
 	private Fragment target;
-	private CountrySelectionFragment countrySelectionFragment = new CountrySelectionFragment();
+//	private CountrySelectionFragment countrySelectionFragment = new CountrySelectionFragment();
 	private SubscriptionsListCard subscriptionsListCard;
 
 	private InAppPurchaseHelper purchaseHelper;
@@ -100,23 +100,23 @@ public class SubscriptionsCard extends BaseCard {
 	}
 
 	private void setupSupportRegion() {
-		String region = LiveUpdatesFragment.getSupportRegionName(app, purchaseHelper);
-		String header = LiveUpdatesFragment.getSupportRegionHeader(app, region);
-		TextView supportRegionHeader = view.findViewById(R.id.support_region_header);
-		TextView supportRegion = view.findViewById(R.id.support_region);
-		supportRegionHeader.setText(header);
-		supportRegion.setText(region);
-
-		View supportRegionContainer = view.findViewById(R.id.support_region_container);
-		supportRegionContainer.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				CountrySelectionFragment countryCountrySelectionFragment = countrySelectionFragment;
-				countryCountrySelectionFragment.show(target.getChildFragmentManager(), CountrySelectionFragment.TAG);
-			}
-		});
-
-		countrySelectionFragment.initCountries(app);
+//		String region = LiveUpdatesFragment.getSupportRegionName(app, purchaseHelper);
+//		String header = LiveUpdatesFragment.getSupportRegionHeader(app, region);
+//		TextView supportRegionHeader = view.findViewById(R.id.support_region_header);
+//		TextView supportRegion = view.findViewById(R.id.support_region);
+//		supportRegionHeader.setText(header);
+//		supportRegion.setText(region);
+//
+//		View supportRegionContainer = view.findViewById(R.id.support_region_container);
+//		supportRegionContainer.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				CountrySelectionFragment countryCountrySelectionFragment = countrySelectionFragment;
+//				countryCountrySelectionFragment.show(target.getChildFragmentManager(), CountrySelectionFragment.TAG);
+//			}
+//		});
+//
+//		countrySelectionFragment.initCountries(app);
 	}
 
 	private String getSubscriptionUrl() {
@@ -131,15 +131,15 @@ public class SubscriptionsCard extends BaseCard {
 	}
 
 	public void onSupportRegionSelected(CountrySelectionFragment.CountryItem selectedCountryItem) {
-		String countryName = selectedCountryItem != null ? selectedCountryItem.getLocalName() : "";
-		String countryDownloadName = selectedCountryItem != null ?
-				selectedCountryItem.getDownloadName() : OsmandSettings.BILLING_USER_DONATION_WORLD_PARAMETER;
-
-		TextView supportRegionHeader = view.findViewById(R.id.support_region_header);
-		TextView supportRegion = view.findViewById(R.id.support_region);
-		supportRegionHeader.setText(LiveUpdatesFragment.getSupportRegionHeader(app, countryName));
-		supportRegion.setText(countryName);
-		app.getSettings().BILLING_USER_COUNTRY.set(countryName);
-		app.getSettings().BILLING_USER_COUNTRY_DOWNLOAD_NAME.set(countryDownloadName);
+//		String countryName = selectedCountryItem != null ? selectedCountryItem.getLocalName() : "";
+//		String countryDownloadName = selectedCountryItem != null ?
+//				selectedCountryItem.getDownloadName() : OsmandSettings.BILLING_USER_DONATION_WORLD_PARAMETER;
+//
+//		TextView supportRegionHeader = view.findViewById(R.id.support_region_header);
+//		TextView supportRegion = view.findViewById(R.id.support_region);
+//		supportRegionHeader.setText(LiveUpdatesFragment.getSupportRegionHeader(app, countryName));
+//		supportRegion.setText(countryName);
+//		app.getSettings().BILLING_USER_COUNTRY.set(countryName);
+//		app.getSettings().BILLING_USER_COUNTRY_DOWNLOAD_NAME.set(countryDownloadName);
 	}
 }
