@@ -31,7 +31,6 @@ public class MapMarkersGroup {
 	private TravelArticle wikivoyageArticle;
 	// TODO should be removed from this class:
 	private GroupHeader header;
-	private CategoriesSubHeader categoriesSubHeader;
 	private ShowHideHistoryButton showHideHistoryButton;
 
 	public MapMarkersGroup() {
@@ -74,10 +73,6 @@ public class MapMarkersGroup {
 
 	public void setHeader(GroupHeader header) {
 		this.header = header;
-	}
-
-	public void setCategoriesSubHeader(CategoriesSubHeader categoriesSubHeader) {
-		this.categoriesSubHeader = categoriesSubHeader;
 	}
 
 	public void setShowHideHistoryButton(ShowHideHistoryButton showHideHistoryButton) {
@@ -142,10 +137,6 @@ public class MapMarkersGroup {
 
 	public GroupHeader getGroupHeader() {
 		return header;
-	}
-
-	public CategoriesSubHeader getCategoriesSubHeader() {
-		return categoriesSubHeader;
 	}
 
 	public ShowHideHistoryButton getShowHideHistoryButton() {

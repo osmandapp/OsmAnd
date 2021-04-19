@@ -21,7 +21,6 @@ import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.mapmarkers.CategoriesSubHeader;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.mapmarkers.GroupHeader;
 import net.osmand.plus.mapmarkers.MapMarker;
@@ -160,7 +159,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				items.add(header);
 				if (!group.isDisabled()) {
 					if (group.getWptCategories() != null && !group.getWptCategories().isEmpty()) {
-						CategoriesSubHeader categoriesSubHeader = group.getCategoriesSubHeader();
+						CategoriesSubHeader categoriesSubHeader = new CategoriesSubHeader(group);
 						items.add(categoriesSubHeader);
 					}
 					TravelHelper travelHelper = mapActivity.getMyApplication().getTravelHelper();
@@ -626,6 +625,20 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 		}
 		return monthStr;
 	}
+
+	public class CategoriesSubHeader {
+
+		private MapMarkersGroup group;
+
+		public CategoriesSubHeader(MapMarkersGroup group) {
+			this.group = group;
+		}
+
+		public MapMarkersGroup getGroup() {
+			return group;
+		}
+	}
+
 
 	public interface MapMarkersGroupsAdapterListener {
 

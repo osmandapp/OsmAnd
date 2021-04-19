@@ -481,17 +481,12 @@ public class MapMarkersHelper {
 	private void createHeadersInGroup(@NonNull MapMarkersGroup group) {
 		int type = group.getType();
 		int headerIconId = 0;
-		int subHeaderIconId = 0;
 		if (type != -1) {
 			headerIconId = type == MapMarkersGroup.FAVORITES_TYPE
 					? R.drawable.ic_action_favorite : R.drawable.ic_action_polygom_dark;
-			subHeaderIconId = R.drawable.ic_action_filter;
 		}
 		GroupHeader header = new GroupHeader(headerIconId, group);
-		CategoriesSubHeader categoriesSubHeader = new CategoriesSubHeader(subHeaderIconId, group);
-
 		group.setHeader(header);
-		group.setCategoriesSubHeader(categoriesSubHeader);
 	}
 
 	private void removeMarkerFromGroup(MapMarker marker) {
