@@ -6,7 +6,7 @@
 	android:layout_height="wrap_content"
 	android:background="?attr/list_background_color"
 	android:gravity="center_vertical"
-	android:minHeight="@dimen/bottom_sheet_list_item_height"
+	android:minHeight="@dimen/bottom_sheet_cancel_button_height_small"
 	android:orientation="horizontal">
 
 	<androidx.appcompat.widget.AppCompatImageView

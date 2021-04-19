@@ -162,6 +162,7 @@ public class VoiceLanguageBottomSheetFragment extends MenuBottomSheetDialogFragm
 		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
 		BaseBottomSheetItem titleItem = new BottomSheetItemWithDescription.Builder()
 				.setDescription(getString(R.string.language_description))
+				.setDescriptionColorId(nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light)
 				.setTitle(getString(R.string.shared_string_language))
 				.setLayoutId(R.layout.bottom_sheet_item_title_with_description)
 				.create();
@@ -253,9 +254,8 @@ public class VoiceLanguageBottomSheetFragment extends MenuBottomSheetDialogFragm
 			int position = isDefault ? DEFAULT_LANGUAGE_POSITION : -1;
 
 			final ImageView secondaryIcon = view.findViewById(R.id.secondary_icon);
-			int color = ContextCompat.getColor(context, nightMode ? R.color.wikivoyage_active_dark : R.color.wikivoyage_active_light);
 			int activeColorResId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
-			secondaryIcon.setColorFilter(color, android.graphics.PorterDuff.Mode.MULTIPLY);
+			secondaryIcon.setColorFilter(ContextCompat.getColor(context, activeColorResId));
 
 			final ProgressBar progressBar = view.findViewById(R.id.ProgressBar);
 			final TextView textDescription = view.findViewById(R.id.description);
