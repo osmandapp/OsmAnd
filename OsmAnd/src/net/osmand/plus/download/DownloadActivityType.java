@@ -361,6 +361,9 @@ public class DownloadActivityType {
 		if (basename.endsWith(FileNameTranslationHelper.WIKI_NAME)) {
 			return FileNameTranslationHelper.getWikiName(ctx, basename);
 		}
+		if (basename.endsWith(FileNameTranslationHelper.WIKIVOYAGE_NAME)) {
+			return FileNameTranslationHelper.getWikivoyageName(ctx, basename);
+		}
 //		if (this == HILLSHADE_FILE){
 //			return FileNameTranslationHelper.getHillShadeName(ctx, osmandRegions, bn);
 //		}
