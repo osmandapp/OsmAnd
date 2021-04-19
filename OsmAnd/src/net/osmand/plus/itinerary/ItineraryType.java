@@ -3,8 +3,7 @@ package net.osmand.plus.itinerary;
 public enum ItineraryType {
 	MARKERS(-1),
 	FAVOURITES(0),
-	TRACK(1),
-	POINTS(2);
+	TRACK(1);
 
 	private int typeId;
 
@@ -22,7 +21,7 @@ public enum ItineraryType {
 				return type;
 			}
 		}
-		return ItineraryType.POINTS;
+		return ItineraryType.MARKERS;
 	}
 
 	public static ItineraryType findTypeForName(String typeName) {
@@ -31,6 +30,6 @@ public enum ItineraryType {
 				return type;
 			}
 		}
-		return ItineraryType.POINTS;
+		return ItineraryType.MARKERS;
 	}
 }

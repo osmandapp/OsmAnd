@@ -13,7 +13,7 @@ public class ItineraryGroup {
 
 	public String id;
 	public String name;
-	public ItineraryType type = ItineraryType.POINTS;
+	public ItineraryType type = ItineraryType.MARKERS;
 	public Set<String> wptCategories;
 	public List<ItineraryItem> itineraryItems = new ArrayList<>();
 
