@@ -282,6 +282,9 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 				dismiss();
 			}
 		});
+		if (closeButton instanceof ImageView) {
+			UiUtilities.rotateImageByLayoutDirection((ImageView) closeButton);
+		}
 
 		FrameLayout iconHelpContainer = toolbar.findViewById(R.id.action_button);
 		int iconColorResId = nightMode ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light;
