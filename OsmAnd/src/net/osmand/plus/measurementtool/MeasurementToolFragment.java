@@ -261,7 +261,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 			@Override
 			public void hideProgressBar() {
-				((ProgressBar) mainView.findViewById(R.id.snap_to_road_progress_bar)).setVisibility(View.GONE);
+				((ProgressBar) mainView.findViewById(R.id.snap_to_road_progress_bar)).setVisibility(View.INVISIBLE);
 				progressBarVisible = false;
 				updateInfoView();
 				updateCardContainerSize();
@@ -287,7 +287,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				.inflate(R.layout.fragment_measurement_tool, container, false);
 
 		mainView = view.findViewById(R.id.main_view);
-		AndroidUtils.setBackground(mapActivity, mainView, nightMode, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
 		detailsMenu = new GraphDetailsMenu();
 		if (portrait) {
 			cardsContainer = mainView.findViewById(R.id.cards_container);
@@ -1390,7 +1389,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		editingCtx.cancelSnapToRoad();
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			mainView.findViewById(R.id.snap_to_road_progress_bar).setVisibility(View.GONE);
+			mainView.findViewById(R.id.snap_to_road_progress_bar).setVisibility(View.INVISIBLE);
 			mapActivity.refreshMap();
 		}
 	}

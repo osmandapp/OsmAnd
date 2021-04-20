@@ -16,20 +16,34 @@
         android:focusable="true"
         android:orientation="vertical"
         android:clickable="true"
-        tools:background="@drawable/bg_bottom_menu_dark">
+        tools:ignore="UselessParent">
 
-        <ProgressBar
-            android:id="@+id/snap_to_road_progress_bar"
-            style="?android:attr/progressBarStyleHorizontal"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="0dp"
-            android:visibility="gone"
-            tools:visibility="visible" />
+            android:layout_height="wrap_content">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@drawable/bg_contextmenu_shadow_top_light" />
+
+            <ProgressBar
+                android:id="@+id/snap_to_road_progress_bar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="0dp"
+                android:background="?attr/list_background_color"
+                android:visibility="invisible"
+                tools:visibility="visible" />
+
+        </FrameLayout>
 
         <LinearLayout
+            android:id="@+id/main_content"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="?attr/list_background_color">
 
             <RelativeLayout
                 android:id="@+id/up_down_row"
