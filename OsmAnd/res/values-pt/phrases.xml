@@ -411,10 +411,10 @@
     <string name="poi_water_tower">Reservatório elevado</string>
     <string name="poi_lock_gate">Comporta de eclusa</string>
     <string name="poi_waterway_turning_point">Ponto de viragem fluvial</string>
-    <string name="poi_weir">Represa;Açude</string>
+    <string name="poi_weir">Represa/açude;Represa;Açude</string>
     <string name="poi_dam">Barragem</string>
     <string name="poi_watermill">Moinho de água</string>
-    <string name="poi_breakwater">Quebra-mar;Molhe</string>
+    <string name="poi_breakwater">Quebra-mar/molhe;Quebra-mar;Molhe</string>
     <string name="poi_groyne">Espigão marítimo</string>
     <string name="poi_power_substation">Subestação</string>
     <string name="poi_power_transformer">Transformador</string>
@@ -565,14 +565,14 @@
     <string name="poi_capital">Sim</string>
     <string name="poi_town">Sede de concelho</string>
     <string name="poi_village">Sede de freguesia</string>
-    <string name="poi_hamlet">Aldeia;Lugar</string>
+    <string name="poi_hamlet">Aldeia/lugar;Aldeia;Lugar</string>
     <string name="poi_isolated_dwelling">Moradia isolada</string>
     <string name="poi_suburb">Subúrbio</string>
     <string name="poi_quarter">Zona de cidade</string>
     <string name="poi_neighbourhood">Bairro</string>
     <string name="poi_locality">Localidade</string>
     <string name="poi_place_allotments">Horta comunitária</string>
-    <string name="poi_place_farm">Quinta;Fazenda</string>
+    <string name="poi_place_farm">Quinta/fazenda;Quinta;Fazenda</string>
     <string name="poi_pharmacy">Farmácia</string>
     <string name="poi_hospital">Hospital</string>
     <string name="poi_doctors">Consultório médico</string>
@@ -694,7 +694,7 @@
     <string name="poi_boundary_stone">Marco de fronteira</string>
     <string name="poi_historic_cannon">Canhão histórico</string>
     <string name="poi_castle">Castelo</string>
-    <string name="poi_city_gate">Portão da cidade</string>
+    <string name="poi_city_gate">Portão/arco de cidade</string>
     <string name="poi_fort">Forte</string>
     <string name="poi_fountain">Chafariz</string>
     <string name="poi_historic_ruins">Ruínas históricas</string>
@@ -721,7 +721,7 @@
     <string name="poi_attraction_water_slide">Tobogã aquático</string>
     <string name="poi_lodging">Alojamento</string>
     <string name="poi_hotel">Hotel</string>
-    <string name="poi_guest_house">Pensão;Albergaria;Hospedaria;Estalagem;Residencial</string>
+    <string name="poi_guest_house">Pensão/albergaria/residenial;Estalagem;Residencial;Albergaria;Hospedaria;Casa de hóspedes</string>
     <string name="poi_hostel">Hostel</string>
     <string name="poi_motel">Hotel estrada</string>
     <string name="poi_alpine_hut">Abrigo de montanha</string>
@@ -890,7 +890,7 @@
     <string name="poi_theatre_genre_circus">Circo</string>
     <string name="poi_gallery">Galeria de arte</string>
     <string name="poi_dance_floor">Pista de dança</string>
-    <string name="poi_nightclub">Discoteca;Danceteria</string>
+    <string name="poi_nightclub">Discoteca/danceteria;Discoteca;Danceteria</string>
     <string name="poi_stripclub">Clube de striptease</string>
     <string name="poi_ski_resort">Resort de esqui</string>
     <string name="poi_beach_resort">Resort de praia</string>
@@ -912,9 +912,9 @@
     <string name="poi_restaurant">Restaurante</string>
     <string name="poi_fast_food">Comida rápida</string>
     <string name="poi_bar">Bar</string>
-    <string name="poi_pub">Taberna</string>
+    <string name="poi_pub">Taberna/pub/tasca;Taberna;Tasco;Tasca;Pub;Boteco;Buteco;Botequim</string>
     <string name="poi_food_court">Praça de alimentação</string>
-    <string name="poi_drinking_water">Bebedouro (água potável para beber)</string>
+    <string name="poi_drinking_water">Bebedouro (água potável)</string>
     <string name="poi_barbecue">Churrasqueira</string>
     <string name="poi_craft_agricultural_engines">Máquinas agrícolas</string>
     <string name="poi_craft_basket_maker">Cesteiro</string>
@@ -977,8 +977,8 @@
     <string name="poi_car_pooling">Ponto de boleia solidária de carro</string>
     <string name="poi_boat_sharing">Ponto de barcos partilhados</string>
     <string name="poi_dock">Doca</string>
-    <string name="poi_cutline">Linha de corte florestal;Atalhada;Linha corta-fogo</string>
-    <string name="poi_toilets">Casa de banho;Banheiros</string>
+    <string name="poi_cutline">Linha de corte florestal/atalhada;Atalhada;Linha corta-fogo;Linha de corte florestal</string>
+    <string name="poi_toilets">Casa de banho;Banheiros;WC</string>
     <string name="poi_shower">Chuveiros públicos</string>
     <string name="poi_sauna">Sauna</string>
     <string name="poi_brothel">Bordel</string>
@@ -1002,7 +1002,7 @@
     <string name="poi_ridge">Cumeeira</string>
     <string name="poi_glacier">Glaciar</string>
     <string name="poi_sinkhole">Sumidouro</string>
-    <string name="poi_waterfall">Queda de água;Cascata;Salto;Catarata</string>
+    <string name="poi_waterfall">Queda de água/cascata/catarata/salto;Cascata;Salto;Catarata;Queda de água</string>
     <string name="poi_river">Rio</string>
     <string name="poi_stream">Ribeiro(a)</string>
     <string name="poi_rapids">Rápidos</string>
@@ -1246,8 +1246,8 @@
     <string name="poi_fee_no">Não</string>
     <string name="poi_drinking_water_yes">Sim</string>
     <string name="poi_drinking_water_no">Não</string>
-    <string name="poi_supervised_yes">Vigiado</string>
-    <string name="poi_supervised_no">Não vigiado</string>
+    <string name="poi_supervised_yes">Vigiado: sim</string>
+    <string name="poi_supervised_no">Vigiado: não</string>
     <string name="poi_seasonal_yes">Sim</string>
     <string name="poi_seasonal_no">Não</string>
     <string name="poi_seasonal_dry_season">Estação seca</string>
@@ -1433,7 +1433,7 @@
     <string name="poi_horse_riding">Centro equestre</string>
     <string name="poi_leisure_common">Área de lazer comum</string>
     <string name="poi_garden">Jardim</string>
-    <string name="poi_heath">Charneca;Mato de vegetação rasteira</string>
+    <string name="poi_heath">Charneca/mato de vegetação rasteira;Charneca;Mato de vegetação rasteira</string>
     <string name="poi_grass">Relvado</string>
     <string name="poi_grassland">Pradaria</string>
     <string name="poi_scrub">Matagal</string>
@@ -1771,7 +1771,7 @@
     <string name="poi_vending_toys">Brinquedos</string>
     <string name="poi_vending_ice_cream">Gelados</string>
     <string name="poi_vending_sim_cards">Cartões de telemóvel (SIM)</string>
-    <string name="poi_branch">Filial;Sucursal</string>
+    <string name="poi_branch">Filial/sucursal;Filial;Sucursal</string>
     <string name="poi_memorial_war">Memorial de guerra</string>
     <string name="poi_memorial_plaque">Placa comemorativa</string>
     <string name="poi_memorial_statue">Estátua</string>
@@ -2242,7 +2242,7 @@
     <string name="poi_step_condition_even">Condição dos degraus: regular</string>
     <string name="poi_step_condition_uneven">Condição dos degraus: irregular</string>
     <string name="poi_step_condition_rough">Condição dos degraus: acidentada</string>
-    <string name="poi_cairn">Moledro;Moledo;Melédro;Mariola</string>
+    <string name="poi_cairn">Moledro/mariola;Moledo;Melédro;Mariola;Moledro</string>
     <string name="poi_defibrillator">Desfibrilhador</string>
     <string name="poi_defibrillator_yes">Desfibrilhador: sim</string>
     <string name="poi_tomb_war_grave">Tipo: túmulo de guerra</string>
@@ -2360,7 +2360,7 @@
     <string name="poi_fortification_type_sconce">Tipo de fortificação: arandela</string>
     <string name="poi_fortification_type_ring_ditch">Tipo de fortificação: vala circular</string>
     <string name="poi_pa">Pa (assentamento fortificado maori)</string>
-    <string name="poi_historic_farm">Quinta histórica;Fazenda histórica</string>
+    <string name="poi_historic_farm">Quinta/fazenda histórica;Quinta histórica;Fazenda histórica</string>
     <string name="poi_historic_railway_station">Estação ferroviária histórica</string>
     <string name="poi_historic_threshing_floor">Eira histórica</string>
     <string name="poi_historic_gallows">Forca histórica</string>
@@ -2476,7 +2476,7 @@
     <string name="poi_health_specialty_behavior_yes">Comportamental</string>
     <string name="poi_health_specialty_palliative_medicine_yes">Medicina paliativa</string>
     <string name="poi_building_type_pyramid">Tipo de edifício: pirâmide</string>
-    <string name="poi_fitness_centre">Ginásio;Academia desportiva</string>
+    <string name="poi_fitness_centre">Ginásio/academia desportiva;Ginásio;Academia desportiva</string>
     <string name="poi_fitness">Exercício físico</string>
     <string name="poi_billiards">Bilhar</string>
     <string name="poi_microwave_oven_yes">Forno microondas: sim</string>
@@ -3082,7 +3082,7 @@
     <string name="poi_nutrition_supplements">Suplementos alimentares</string>
     <string name="poi_photo_studio">Estúdio de fotografia</string>
     <string name="poi_cliff">Penhasco</string>
-    <string name="poi_animal_keeping">Cativeiro de animais;Refúgio de animais</string>
+    <string name="poi_animal_keeping">Refúgio de animais;Cativeiro de animais</string>
     <string name="poi_animal_keeping_horse">Cativeiro de animais: cavalos</string>
     <string name="poi_animal_keeping_sheep">Cativeiro de animais: ovelhas</string>
     <string name="poi_animal_keeping_type_paddock">Tipo: cercado</string>
@@ -3118,7 +3118,7 @@
     <string name="poi_stands">Estandes</string>
     <string name="poi_motorcycle_sales_yes">Vendas</string>
     <string name="poi_motorcycle_sales_no">Vendas: não</string>
-    <string name="poi_motorcycle_sales_yes_used">Vendas: sim; usados</string>
+    <string name="poi_motorcycle_sales_yes_used">Vendas: sim, usados</string>
     <string name="poi_motorcycle_sales_used">Vendas: usados</string>
     <string name="poi_motorcycle_rental_yes">Aluguer</string>
     <string name="poi_motorcycle_rental_no">Aluguer: não</string>
@@ -3203,7 +3203,7 @@
     <string name="poi_government_transportation">Instituição governamental de transportes</string>
     <string name="poi_government_legislative">Instituição legislativa governamental</string>
     <string name="poi_vhf">Canal VHF</string>
-    <string name="poi_gorge">Desfiladeiro;Canhão</string>
+    <string name="poi_gorge">Desfiladeiro/canhão;Desfiladeiro;Canhão</string>
     <string name="poi_couloir">Ravina</string>
     <string name="poi_mountain_area">Área montanhosa</string>
     <string name="poi_surface_clay">Argila</string>
@@ -3572,7 +3572,7 @@
     <string name="poi_changing_table_yes">Mesa muda-fraldas: sim</string>
     <string name="poi_changing_table_no">Mesa muda-fraldas: não</string>
     <string name="poi_changing_table_limited">Mesa muda-fraldas: limitada</string>
-    <string name="poi_changing_table_location_room">Mesa muda-fraldas; sala</string>
+    <string name="poi_changing_table_location_room">Mesa muda-fraldas: sala</string>
     <string name="poi_changing_table_location_male_toilet">Local da mesa muda-fraldas: WC masculino</string>
     <string name="poi_changing_table_location_female_toilet">Local da mesa muda-fraldas: WC feminino</string>
     <string name="poi_changing_table_location_unisex_toilet">Local da mesa muda-fraldas: WC unissexo</string>
@@ -3810,7 +3810,7 @@
     <string name="poi_traffic_signals_vibration">Vibração</string>
     <string name="poi_city_block">Quarteirão</string>
     <string name="poi_borough">Município</string>
-    <string name="poi_give_box">Caixa livre;Caixa de donativos;Give-box</string>
+    <string name="poi_give_box">Caixa livre/de donativos;Give-box;Caixa livre;Caixa de donativos</string>
     <string name="poi_traffic_signals_arrow_no">Seta: não</string>
     <string name="poi_elevator">Elevador</string>
     <string name="poi_departures_board_timetable">Horário</string>
@@ -3917,8 +3917,8 @@
     <string name="poi_mobile_library">Posição de paragem da biblioteca itinerante</string>
     <string name="poi_piste_status_closed">Estado da pista: fechada</string>
     <string name="poi_piste_status_open">Estado da pista: aberta</string>
-    <string name="poi_patrolled_no">Vigiado: não</string>
-    <string name="poi_patrolled_yes">Vigiado: sim</string>
+    <string name="poi_patrolled_no">Supervisionado: não</string>
+    <string name="poi_patrolled_yes">Supervisionado: sim</string>
     <string name="poi_piste_name">Nome da pista</string>
     <string name="poi_piste_ski_jump">Salto com esqui</string>
     <string name="poi_wildlife_crossing">Passagem de vida selvagem</string>

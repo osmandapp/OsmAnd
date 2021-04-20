@@ -3837,4 +3837,8 @@
     <string name="track_has_no_altitude">Sporet indeholder ikke højdedata.</string>
     <string name="track_has_no_speed">Sporet indeholder ikke hastighedsdata.</string>
     <string name="select_another_colorization">Vælg en anden type farvelægning.</string>
+    <string name="exit_number">Udgangsnummer</string>
+    <string name="announce_when_exceeded">Meddelelse ved overskridelse</string>
+    <string name="user_points">Bruger points</string>
+    <string name="output">Resultat</string>
 </resources>
