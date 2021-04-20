@@ -44,6 +44,7 @@ import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.download.SelectIndexesUiHelper;
 import net.osmand.plus.download.SelectIndexesUiHelper.ItemsToDownloadSelectedListener;
 import net.osmand.plus.download.MultipleDownloadItem;
+import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.download.ui.LocalIndexesFragment.LocalIndexOperationTask;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
@@ -51,6 +52,7 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ItemViewHolder {
@@ -487,20 +489,28 @@ public class ItemViewHolder {
 			IndexItem indexItem = (IndexItem) item;
 			context.startDownload(indexItem);
 		} else {
-			selectIndexesToDownload(item);
+			selectItemsToDownload(item);
 		}
 	}
 
-	private void selectIndexesToDownload(DownloadItem item) {
+	private void selectItemsToDownload(final DownloadItem item) {
 		SelectIndexesUiHelper.showDialog(item, context, dateFormat, showRemoteDate,
 				new ItemsToDownloadSelectedListener() {
 					@Override
-					public void onItemsToDownloadSelected(List<IndexItem> indexes) {
+					public void onItemsToDownloadSelected(List<DownloadItem> items) {
+						updateDownloadedFiles(item, items);
+						List<IndexItem> indexes = IndexItem.getIndexItems(items);
 						IndexItem[] indexesArray = new IndexItem[indexes.size()];
 						context.startDownload(indexes.toArray(indexesArray));
 					}
 				}
 		);
+	}
+
+	private void updateDownloadedFiles(DownloadItem main, List<DownloadItem> selected) {
+		if (main.getType() == DownloadActivityType.SRTM_COUNTRY_FILE) {
+			removeDownloadedFiles(getLocalIndexType(main), selected);
+		}
 	}
 
 	private void confirmRemove(@NonNull final DownloadItem downloadItem,
@@ -544,6 +554,19 @@ public class ItemViewHolder {
 			params[i] = new LocalIndexInfo(type, file, false, app);
 		}
 		removeTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
+	}
+
+	private void removeDownloadedFiles(LocalIndexType type, List<DownloadItem> items) {
+		OsmandApplication app = context.getMyApplication();
+		List<File> downloadedFiles = new ArrayList<>();
+		for (DownloadItem item : items) {
+			if (item.isDownloaded() && item instanceof SrtmDownloadItem) {
+				downloadedFiles.addAll(item.getDownloadedFiles(app));
+			}
+		}
+		if (!Algorithms.isEmpty(downloadedFiles)) {
+			remove(type, downloadedFiles);
+		}
 	}
 
 	@NonNull

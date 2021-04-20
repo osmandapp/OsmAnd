@@ -25,36 +25,43 @@ import static net.osmand.plus.download.DownloadActivityType.SRTM_COUNTRY_FILE;
 public class SrtmDownloadItem extends DownloadItem {
 
 	private final List<IndexItem> indexes;
-	private boolean useMetric;
+	private boolean useMeters;
+	private boolean forceUseMetersCheck;
 
-	public SrtmDownloadItem(List<IndexItem> indexes, boolean useMetric) {
+	public SrtmDownloadItem(List<IndexItem> indexes, boolean useMeters) {
 		super(SRTM_COUNTRY_FILE);
 		this.indexes = indexes;
-		this.useMetric = useMetric;
+		this.useMeters = useMeters;
 	}
 
-	public void setUseMetric(boolean useMetric) {
-		this.useMetric = useMetric;
+	public void setUseMeters(boolean useMeters) {
+		this.useMeters = useMeters;
 	}
 
-	public boolean isUseMetric() {
+	public void setForceUseMetersCheck(boolean forceUseMetersCheck) {
+		this.forceUseMetersCheck = forceUseMetersCheck;
+	}
+
+	public boolean isUseMeters() {
 		for (IndexItem index : indexes) {
 			if (index.isDownloaded()) {
 				return isMetricItem(index);
 			}
 		}
-		return useMetric;
+		return useMeters;
 	}
 
 	@NonNull
 	public IndexItem getIndexItem() {
-		for (IndexItem index : indexes) {
-			if (index.isDownloaded()) {
-				return index;
+		if (!forceUseMetersCheck) {
+			for (IndexItem index : indexes) {
+				if (index.isDownloaded()) {
+					return index;
+				}
 			}
 		}
 		for (IndexItem index : indexes) {
-			if (useMetric && isMetricItem(index) || !useMetric && !isMetricItem(index)) {
+			if (useMeters && isMetricItem(index) || !useMeters && !isMetricItem(index)) {
 				return index;
 			}
 		}

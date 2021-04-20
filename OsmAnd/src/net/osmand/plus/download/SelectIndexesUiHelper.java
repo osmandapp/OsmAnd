@@ -13,7 +13,7 @@ import net.osmand.plus.base.ModeSelectionBottomSheet;
 import net.osmand.plus.base.MultipleSelectionWithModeBottomSheet;
 import net.osmand.plus.base.SelectionBottomSheet;
 import net.osmand.plus.base.SelectionBottomSheet.OnApplySelectionListener;
-import net.osmand.plus.base.SelectionBottomSheet.OnUiInitializedAdapter;
+import net.osmand.plus.base.SelectionBottomSheet.DialogStateListener;
 import net.osmand.plus.base.SelectionBottomSheet.SelectableItem;
 import net.osmand.plus.widgets.MultiStateToggleButton.OnRadioItemClickListener;
 import net.osmand.plus.widgets.MultiStateToggleButton.RadioItem;
@@ -22,8 +22,6 @@ import net.osmand.util.Algorithms;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
-
-import static net.osmand.plus.download.MultipleDownloadItem.getIndexItem;
 
 public class SelectIndexesUiHelper {
 
@@ -64,7 +62,7 @@ public class SelectIndexesUiHelper {
 			if (downloadItem instanceof MultipleDownloadItem) {
 				showSrtmMultipleSelectionDialog();
 			} else {
-				showSrtmModeSelectionDialog();
+				showSrtmTypeSelectionDialog();
 			}
 		} else if (downloadItem instanceof MultipleDownloadItem) {
 			showMultipleSelectionDialog();
@@ -80,10 +78,14 @@ public class SelectIndexesUiHelper {
 				activity, allItems, selectedItems, true);
 		this.dialog = msDialog;
 
-		msDialog.setOnUiInitializedAdapter(new OnUiInitializedAdapter() {
+		msDialog.setDialogStateListener(new DialogStateListener() {
 			@Override
-			public void onUiInitialized() {
+			public void onDialogCreated() {
 				dialog.setTitle(app.getString(R.string.welmode_download_maps));
+			}
+
+			@Override
+			public void onCloseDialog() {
 			}
 		});
 
@@ -103,19 +105,24 @@ public class SelectIndexesUiHelper {
 		prepareItems(allItems, selectedItems);
 
 		SrtmDownloadItem srtmItem = (SrtmDownloadItem) ((MultipleDownloadItem)downloadItem).getAllItems().get(0);
-		final int selectedModeOrder = srtmItem.isUseMetric() ? 0 : 1;
+		final int selectedModeOrder = srtmItem.isUseMeters() ? 0 : 1;
 		final List<RadioItem> radioItems = createSrtmRadioItems();
 
 		MultipleSelectionBottomSheet msDialog = MultipleSelectionWithModeBottomSheet.showInstance(
 				activity, allItems, selectedItems, radioItems, true);
 		this.dialog = msDialog;
 
-		msDialog.setOnUiInitializedAdapter(new OnUiInitializedAdapter() {
+		msDialog.setDialogStateListener(new DialogStateListener() {
 			@Override
-			public void onUiInitialized() {
+			public void onDialogCreated() {
 				dialog.setTitle(app.getString(R.string.welmode_download_maps));
 				dialog.setSelectedMode(radioItems.get(selectedModeOrder));
 				dialog.setSecondaryDescription(app.getString(R.string.srtm_download_list_help_message));
+			}
+
+			@Override
+			public void onCloseDialog() {
+				resetSrtmForceMetersCheck();
 			}
 		});
 
@@ -129,23 +136,28 @@ public class SelectIndexesUiHelper {
 		msDialog.setOnApplySelectionListener(getOnApplySelectionListener(listener));
 	}
 
-	private void showSrtmModeSelectionDialog() {
+	private void showSrtmTypeSelectionDialog() {
 		SrtmDownloadItem srtmItem = (SrtmDownloadItem) downloadItem;
-		final int selectedModeOrder = srtmItem.isUseMetric() ? 0 : 1;
+		final int selectedModeOrder = srtmItem.isUseMeters() ? 0 : 1;
 
 		final List<RadioItem> radioItems = createSrtmRadioItems();
 		SelectableItem preview = createSelectableItem(srtmItem);
 
 		dialog = ModeSelectionBottomSheet.showInstance(activity, preview, radioItems, true);
 
-		dialog.setOnUiInitializedAdapter(new OnUiInitializedAdapter() {
+		dialog.setDialogStateListener(new DialogStateListener() {
 			@Override
-			public void onUiInitialized() {
+			public void onDialogCreated() {
 				ModeSelectionBottomSheet dialog = (ModeSelectionBottomSheet) SelectIndexesUiHelper.this.dialog;
 				dialog.setTitle(app.getString(R.string.srtm_unit_format));
 				dialog.setPrimaryDescription(app.getString(R.string.srtm_download_single_help_message));
 				updateSize();
 				dialog.setSelectedMode(radioItems.get(selectedModeOrder));
+			}
+
+			@Override
+			public void onCloseDialog() {
+				resetSrtmForceMetersCheck();
 			}
 		});
 
@@ -193,11 +205,23 @@ public class SelectIndexesUiHelper {
 		for (SelectableItem item : items) {
 			DownloadItem downloadItem = (DownloadItem) item.getObject();
 			if (downloadItem instanceof SrtmDownloadItem) {
-				((SrtmDownloadItem) downloadItem).setUseMetric(useMeters);
+				SrtmDownloadItem srtmItem = (SrtmDownloadItem) downloadItem;
+				srtmItem.setUseMeters(useMeters);
+				srtmItem.setForceUseMetersCheck(true);
 				updateSelectableItem(item, downloadItem);
 			}
 		}
 		dialog.setItems(items);
+	}
+
+	private void resetSrtmForceMetersCheck() {
+		for (SelectableItem item : dialog.getAllItems()) {
+			DownloadItem downloadItem = (DownloadItem) item.getObject();
+			if (downloadItem instanceof SrtmDownloadItem) {
+				SrtmDownloadItem srtmItem = (SrtmDownloadItem) downloadItem;
+				srtmItem.setForceUseMetersCheck(false);
+			}
+		}
 	}
 
 	private SelectableItem createSelectableItem(DownloadItem item) {
@@ -227,14 +251,13 @@ public class SelectIndexesUiHelper {
 		return new OnApplySelectionListener() {
 			@Override
 			public void onSelectionApplied(List<SelectableItem> selectedItems) {
-				List<IndexItem> indexes = new ArrayList<>();
+				List<DownloadItem> items = new ArrayList<>();
 				for (SelectableItem item : selectedItems) {
-					IndexItem index = getIndexItem((DownloadItem) item.getObject());
-					if (index != null) {
-						indexes.add(index);
+					if (item.getObject() instanceof DownloadItem) {
+						items.add((DownloadItem) item.getObject());
 					}
 				}
-				listener.onItemsToDownloadSelected(indexes);
+				listener.onItemsToDownloadSelected(items);
 			}
 		};
 	}
@@ -274,7 +297,7 @@ public class SelectIndexesUiHelper {
 	}
 
 	public interface ItemsToDownloadSelectedListener {
-		void onItemsToDownloadSelected(List<IndexItem> items);
+		void onItemsToDownloadSelected(List<DownloadItem> items);
 	}
 
 }

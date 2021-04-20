@@ -51,7 +51,7 @@ public abstract class SelectionBottomSheet extends MenuBottomSheetDialogFragment
 	protected int activeColorRes;
 	protected int secondaryColorRes;
 
-	private OnUiInitializedAdapter onUiInitializedAdapter;
+	private DialogStateListener dialogStateListener;
 	private OnApplySelectionListener onApplySelectionListener;
 
 	protected List<SelectableItem> allItems = new ArrayList<>();
@@ -152,8 +152,8 @@ public abstract class SelectionBottomSheet extends MenuBottomSheetDialogFragment
 		}
 	}
 
-	public void setOnUiInitializedAdapter(OnUiInitializedAdapter onUiInitializedAdapter) {
-		this.onUiInitializedAdapter = onUiInitializedAdapter;
+	public void setDialogStateListener(DialogStateListener dialogStateListener) {
+		this.dialogStateListener = dialogStateListener;
 	}
 
 	public void setOnApplySelectionListener(OnApplySelectionListener onApplySelectionListener) {
@@ -194,8 +194,14 @@ public abstract class SelectionBottomSheet extends MenuBottomSheetDialogFragment
 	protected abstract boolean shouldShowDivider();
 
 	protected void notifyUiInitialized() {
-		if (onUiInitializedAdapter != null) {
-			onUiInitializedAdapter.onUiInitialized();
+		if (dialogStateListener != null) {
+			dialogStateListener.onDialogCreated();
+		}
+	}
+
+	protected void notifyDismissDialog() {
+		if (dialogStateListener != null) {
+			dialogStateListener.onCloseDialog();
 		}
 	}
 
@@ -239,8 +245,15 @@ public abstract class SelectionBottomSheet extends MenuBottomSheetDialogFragment
 		}
 	}
 
-	public interface OnUiInitializedAdapter {
-		void onUiInitialized();
+	@Override
+	public void onDestroy() {
+		notifyDismissDialog();
+		super.onDestroy();
+	}
+
+	public interface DialogStateListener {
+		void onDialogCreated();
+		void onCloseDialog();
 	}
 
 	public interface OnApplySelectionListener {

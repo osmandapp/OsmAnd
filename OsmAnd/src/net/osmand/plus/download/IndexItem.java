@@ -17,6 +17,7 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -264,4 +265,25 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 		}
 	}
 
+	@Nullable
+	public static IndexItem getIndexItem(@NonNull DownloadItem obj) {
+		if (obj instanceof IndexItem) {
+			return (IndexItem) obj;
+		} else if (obj instanceof SrtmDownloadItem) {
+			return ((SrtmDownloadItem) obj).getIndexItem();
+		}
+		return null;
+	}
+
+	@NonNull
+	public static List<IndexItem> getIndexItems(@NonNull List<DownloadItem> downloadItems) {
+		List<IndexItem> indexItems = new ArrayList<>();
+		for (DownloadItem downloadItem : downloadItems) {
+			IndexItem indexItem = getIndexItem(downloadItem);
+			if (indexItem != null) {
+				indexItems.add(indexItem);
+			}
+		}
+		return indexItems;
+	}
 }

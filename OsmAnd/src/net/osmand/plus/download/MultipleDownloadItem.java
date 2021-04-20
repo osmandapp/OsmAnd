@@ -13,6 +13,8 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import static net.osmand.plus.download.IndexItem.getIndexItem;
+
 public class MultipleDownloadItem extends DownloadItem {
 
 	private final List<DownloadItem> items;
@@ -132,16 +134,6 @@ public class MultipleDownloadItem extends DownloadItem {
 			result += item.getArchiveSizeMB();
 		}
 		return result;
-	}
-
-	@Nullable
-	public static IndexItem getIndexItem(@NonNull DownloadItem obj) {
-		if (obj instanceof IndexItem) {
-			return (IndexItem) obj;
-		} else if (obj instanceof SrtmDownloadItem) {
-			return ((SrtmDownloadItem) obj).getIndexItem();
-		}
-		return null;
 	}
 
 	@Nullable
