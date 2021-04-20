@@ -41,8 +41,8 @@ import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadResourceGroup;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.download.SelectIndexesUiHelper;
-import net.osmand.plus.download.SelectIndexesUiHelper.ItemsToDownloadSelectedListener;
+import net.osmand.plus.download.SelectIndexesHelper;
+import net.osmand.plus.download.SelectIndexesHelper.ItemsToDownloadSelectedListener;
 import net.osmand.plus.download.MultipleDownloadItem;
 import net.osmand.plus.download.ui.LocalIndexesFragment.LocalIndexOperationTask;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
@@ -492,7 +492,7 @@ public class ItemViewHolder {
 	}
 
 	private void selectIndexesToDownload(DownloadItem item) {
-		SelectIndexesUiHelper.showDialog(item, context, dateFormat, showRemoteDate,
+		SelectIndexesHelper.showDialog(item, context, dateFormat, showRemoteDate,
 				new ItemsToDownloadSelectedListener() {
 					@Override
 					public void onItemsToDownloadSelected(List<IndexItem> indexes) {
