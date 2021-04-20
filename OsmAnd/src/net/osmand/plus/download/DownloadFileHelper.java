@@ -7,6 +7,7 @@ import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.download.IndexItem.DownloadEntry;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.util.Algorithms;
 
@@ -199,33 +200,35 @@ public class DownloadFileHelper {
 	public boolean isWifiConnected(){
 		return ctx.getSettings().isWifiConnected();
 	}
-	
-	public boolean downloadFile(IndexItem.DownloadEntry de, IProgress progress, 
-			List<File> toReIndex, DownloadFileShowWarning showWarningCallback, boolean forceWifi) throws InterruptedException {
+
+	public boolean downloadFile(IndexItem.DownloadEntry de, IProgress progress,
+								List<File> toReIndex, DownloadFileShowWarning showWarningCallback, boolean forceWifi) throws InterruptedException {
 		try {
 			final List<InputStream> downloadInputStreams = new ArrayList<InputStream>();
 			URL url = new URL(de.urlToDownload); //$NON-NLS-1$
 			log.info("Url downloading " + de.urlToDownload);
 			downloadInputStreams.add(getInputStreamToDownload(url, forceWifi));
 			de.fileToDownload = de.targetFile;
-			if(!de.unzipFolder) {
-				de.fileToDownload = new File(de.targetFile.getParentFile(), de.targetFile.getName() +".download");
+			if (!de.unzipFolder) {
+				de.fileToDownload = new File(de.targetFile.getParentFile(), de.targetFile.getName() + ".download");
 			}
 			unzipFile(de, progress, downloadInputStreams);
-			if(!de.targetFile.getAbsolutePath().equals(de.fileToDownload.getAbsolutePath())){
-				boolean successfull = Algorithms.removeAllFiles(de.targetFile);
-				if (successfull) {
+			if (!de.targetFile.getAbsolutePath().equals(de.fileToDownload.getAbsolutePath())) {
+				boolean successful = Algorithms.removeAllFiles(de.targetFile);
+				if (successful) {
 					ctx.getResourceManager().closeFile(de.targetFile.getName());
 				}
-				
+
 				boolean renamed = de.fileToDownload.renameTo(de.targetFile);
-				if(!renamed) {
+				if (!renamed) {
 					showWarningCallback.showWarning(ctx.getString(R.string.shared_string_io_error) + ": old file can't be deleted");
 					return false;
 				}
 			}
-			if (de.type == DownloadActivityType.VOICE_FILE){
+			if (de.type == DownloadActivityType.VOICE_FILE) {
 				copyVoiceConfig(de);
+			} else if (de.type == DownloadActivityType.SRTM_COUNTRY_FILE) {
+				removePreviousSrtmFile(de);
 			}
 			toReIndex.add(de.targetFile);
 			return true;
@@ -235,6 +238,26 @@ public class DownloadFileHelper {
 			// Possibly file is corrupted
 			Algorithms.removeAllFiles(de.fileToDownload);
 			return false;
+		}
+	}
+
+	private void removePreviousSrtmFile(DownloadEntry entry) {
+		String meterExt = IndexConstants.BINARY_SRTM_MAP_INDEX_EXT;
+		String feetExt = IndexConstants.BINARY_SRTM_FEET_MAP_INDEX_EXT;
+
+		String fileName = entry.targetFile.getAbsolutePath();
+		if (fileName.endsWith(meterExt)) {
+			fileName = fileName.replace(meterExt, feetExt);
+		} else if (fileName.endsWith(feetExt)) {
+			fileName = fileName.replace(feetExt, meterExt);
+		}
+
+		File previous = new File(fileName);
+		if (previous != null && previous.exists()) {
+			boolean successful = Algorithms.removeAllFiles(previous);
+			if (successful) {
+				ctx.getResourceManager().closeFile(previous.getName());
+			}
 		}
 	}
 
@@ -386,23 +409,20 @@ public class DownloadFileHelper {
 			}
 			return r;
 		}
-		
+
 		@Override
 		public int available() throws IOException {
 			int av = 0;
-			for(int i = currentRead; i < delegate.length; i++) {
+			for (int i = currentRead; i < delegate.length; i++) {
 				av += delegate[i].available();
 			}
 			return av;
 		}
-		
+
 		public int getAndClearReadCount() {
 			int last = count;
 			count = 0;
 			return last;
 		}
-		
-		
-
 	}
 }
