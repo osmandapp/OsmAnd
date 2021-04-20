@@ -36,7 +36,6 @@ import net.osmand.plus.settings.fragments.ExportSettingsAdapter.OnItemSelectedLi
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.LinkedHashMap;
@@ -221,8 +220,7 @@ public abstract class BaseSettingsListFragment extends BaseOsmAndFragment implem
 		if (calculatedSize != 0) {
 			selectedItemsSize.setText(AndroidUtils.formatSize(app, calculatedSize));
 
-			File dir = app.getAppPath("").getParentFile();
-			long availableSizeBytes = AndroidUtils.getAvailableSpace(dir);
+			long availableSizeBytes = AndroidUtils.getAvailableSpace(app);
 			if (calculatedSize > availableSizeBytes) {
 				String availableSize = AndroidUtils.formatSize(app, availableSizeBytes);
 				availableSpaceDescr.setText(getString(R.string.export_not_enough_space_descr, availableSize));

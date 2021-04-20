@@ -11,7 +11,6 @@ import android.media.CamcorderProfile;
 import android.media.MediaRecorder;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.StatFs;
 import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,7 +41,6 @@ import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
 import org.apache.commons.logging.Log;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -381,16 +379,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 	private void setupStorageSizePref(AudioVideoNotesPlugin plugin) {
 		ListPreferenceEx storageSize = (ListPreferenceEx) findPreference(plugin.AV_RS_STORAGE_SIZE.getId());
 
-		File dir = app.getAppPath("").getParentFile();
-		long size = 0;
-		if (dir.canRead()) {
-			try {
-				StatFs fs = new StatFs(dir.getAbsolutePath());
-				size = ((long) fs.getBlockSize() * (long) fs.getBlockCount()) / (1 << 30);
-			} catch (IllegalArgumentException e) {
-				log.error(e);
-			}
-		}
+		long size = AndroidUtils.getTotalSpace(app) / (1 << 30);
 		if (size > 0) {
 			int value = 1;
 			ArrayList<Integer> gbList = new ArrayList<>();
