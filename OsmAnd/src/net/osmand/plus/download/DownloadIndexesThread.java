@@ -240,9 +240,12 @@ public class DownloadIndexesThread {
 	}
 
 	public void cancelDownload(DownloadItem item) {
-		if (item instanceof MultipleIndexItem) {
-			MultipleIndexItem multipleIndexItem = (MultipleIndexItem) item;
-			cancelDownload(multipleIndexItem.getAllIndexes());
+		if (item instanceof MultipleDownloadItem) {
+			MultipleDownloadItem multipleDownloadItem = (MultipleDownloadItem) item;
+			cancelDownload(multipleDownloadItem.getAllIndexes());
+		} else if (item instanceof SrtmDownloadItem) {
+			IndexItem indexItem = ((SrtmDownloadItem) item).getIndexItem();
+			cancelDownload(indexItem);
 		} else if (item instanceof IndexItem) {
 			IndexItem indexItem = (IndexItem) item;
 			cancelDownload(indexItem);
