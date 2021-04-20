@@ -15,8 +15,9 @@ import net.osmand.plus.base.SelectionBottomSheet;
 import net.osmand.plus.base.SelectionBottomSheet.OnApplySelectionListener;
 import net.osmand.plus.base.SelectionBottomSheet.OnUiInitializedAdapter;
 import net.osmand.plus.base.SelectionBottomSheet.SelectableItem;
-import net.osmand.plus.widgets.MultiStateToggleButton.OnRadioItemClickListener;
-import net.osmand.plus.widgets.MultiStateToggleButton.RadioItem;
+import net.osmand.plus.widgets.multistatetoggle.RadioItem;
+import net.osmand.plus.widgets.multistatetoggle.RadioItem.OnRadioItemClickListener;
+import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
 import net.osmand.util.Algorithms;
 
 import java.text.DateFormat;
@@ -176,7 +177,7 @@ public class SelectIndexesUiHelper {
 	private RadioItem createSrtmRadioBtn(int titleId,
 	                                     final boolean useMeters) {
 		String title = Algorithms.capitalizeFirstLetter(app.getString(titleId));
-		RadioItem radioItem = new RadioItem(title);
+		RadioItem radioItem = new TextRadioItem(title);
 		radioItem.setOnClickListener(new OnRadioItemClickListener() {
 			@Override
 			public boolean onRadioItemClick(RadioItem radioItem, View view) {

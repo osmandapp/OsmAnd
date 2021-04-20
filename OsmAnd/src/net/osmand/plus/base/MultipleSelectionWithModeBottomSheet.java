@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.widgets.MultiStateToggleButton.RadioItem;
+import net.osmand.plus.widgets.multistatetoggle.RadioItem;
 
 import java.util.List;
 
