@@ -5,8 +5,11 @@ import net.osmand.data.QuadRect;
 import net.osmand.util.Algorithms;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 public class WorldRegion implements Serializable {
 
@@ -211,5 +214,23 @@ public class WorldRegion implements Serializable {
 			return WORLD.equals(superRegionId) && !RUSSIA_REGION_ID.equals(thisRegionId);
 		}
 		return false;
+	}
+
+	public static List<WorldRegion> removeDuplicates(List<WorldRegion> regions) {
+		List<WorldRegion> copy = new ArrayList<>(regions);
+		Set<WorldRegion> duplicates = new HashSet<>();
+		for (int i = 0; i < copy.size() - 1; i++) {
+			WorldRegion r1 = copy.get(i);
+			for (int j = i + 1; j < copy.size(); j++) {
+				WorldRegion r2 = copy.get(j);
+				if (r1.containsRegion(r2)) {
+					duplicates.add(r2);
+				} else if (r2.containsRegion(r1)) {
+					duplicates.add(r1);
+				}
+			}
+		}
+		copy.removeAll(duplicates);
+		return copy;
 	}
 }

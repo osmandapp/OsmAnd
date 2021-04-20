@@ -109,7 +109,7 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 				}
 			}
 		});
-		UiUtilities.rotateImageByLayoutDirection(closeButton, AndroidUtils.getLayoutDirection(app));
+		UiUtilities.rotateImageByLayoutDirection(closeButton);
 
 		Drawable pluginImage = plugin.getAssetResourceImage();
 		if (pluginImage != null) {

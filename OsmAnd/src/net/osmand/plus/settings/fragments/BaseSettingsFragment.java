@@ -492,8 +492,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 				}
 			});
 			if (closeButton instanceof ImageView) {
-				UiUtilities.rotateImageByLayoutDirection(
-						(ImageView) closeButton, AndroidUtils.getLayoutDirection(app));
+				UiUtilities.rotateImageByLayoutDirection((ImageView) closeButton);
 			}
 		}
 

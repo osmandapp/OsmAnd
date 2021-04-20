@@ -1,6 +1,9 @@
 package net.osmand.plus.download;
 
+import android.content.Context;
+
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -19,6 +22,7 @@ import java.util.Date;
 import java.util.List;
 
 public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
+
 	private static final Log log = PlatformUtil.getLog(IndexItem.class);
 	
 	String description;
@@ -225,6 +229,12 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 	public String getDate(java.text.DateFormat format) {
 		return format.format(new Date(timestamp));
 	}
+
+	@Nullable
+	@Override
+	public String getAdditionalDescription(Context ctx) {
+		return null;
+	}
 	
 	public static class DownloadEntry {
 		public long dateModified;
@@ -253,6 +263,5 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 			isAsset = true;
 		}
 	}
-
 
 }

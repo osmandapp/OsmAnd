@@ -32,9 +32,10 @@ import net.osmand.plus.settings.fragments.HeaderUiAdapter;
 import net.osmand.plus.track.AppearanceViewHolder;
 import net.osmand.plus.track.ColorsCard;
 import net.osmand.plus.track.CustomColorBottomSheet.ColorPickerListener;
-import net.osmand.plus.widgets.MultiStateToggleButton;
-import net.osmand.plus.widgets.MultiStateToggleButton.OnRadioItemClickListener;
-import net.osmand.plus.widgets.MultiStateToggleButton.RadioItem;
+import net.osmand.plus.widgets.multistatetoggle.RadioItem;
+import net.osmand.plus.widgets.multistatetoggle.RadioItem.OnRadioItemClickListener;
+import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
+import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -134,17 +135,17 @@ public class RouteLineColorCard extends BaseCard implements CardListener, ColorP
 	}
 
 	private void setupRadioGroup(LinearLayout buttonsContainer) {
-		RadioItem day = createMapThemeButton(false);
-		RadioItem night = createMapThemeButton(true);
+		TextRadioItem day = createMapThemeButton(false);
+		TextRadioItem night = createMapThemeButton(true);
 
-		MultiStateToggleButton radioGroup = new MultiStateToggleButton(app, buttonsContainer, nightMode);
+		TextToggleButton radioGroup = new TextToggleButton(app, buttonsContainer, nightMode);
 		radioGroup.setItems(day, night);
 
 		radioGroup.setSelectedItem(!isNightMap() ? day : night);
 	}
 
-	private RadioItem createMapThemeButton(final boolean isNight) {
-		RadioItem item = new RadioItem(app.getString(!isNight ? DAY_TITLE_ID : NIGHT_TITLE_ID));
+	private TextRadioItem createMapThemeButton(final boolean isNight) {
+		TextRadioItem item = new TextRadioItem(app.getString(!isNight ? DAY_TITLE_ID : NIGHT_TITLE_ID));
 		item.setOnClickListener(new OnRadioItemClickListener() {
 			@Override
 			public boolean onRadioItemClick(RadioItem radioItem, View view) {

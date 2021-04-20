@@ -382,10 +382,10 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 				if (obj instanceof IndexItem) {
 					IndexItem item = (IndexItem) obj;
 					viewHolder.setShowTypeInDesc(true);
-					viewHolder.bindIndexItem(item);
+					viewHolder.bindDownloadItem(item);
 				} else {
 					CityItem item = (CityItem) obj;
-					viewHolder.bindIndexItem(item);
+					viewHolder.bindDownloadItem(item);
 					if (item.getIndexItem() == null) {
 						new IndexItemResolverTask(viewHolder, item).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 					}
@@ -461,7 +461,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 				if (viewHolder != null) {
 					if (indexItem != null) {
 						cityItem.setIndexItem(indexItem);
-						viewHolder.bindIndexItem(indexItem, cityItem.getName());
+						viewHolder.bindDownloadItem(indexItem, cityItem.getName());
 					}
 				}
 			}
