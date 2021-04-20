@@ -14,7 +14,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
-import net.osmand.plus.widgets.MultiStateToggleButton.RadioItem;
+import net.osmand.plus.widgets.multistatetoggle.RadioItem;
 
 import java.util.Collections;
 import java.util.List;

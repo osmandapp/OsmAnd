@@ -19,8 +19,9 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.SimpleDividerItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.widgets.MultiStateToggleButton;
-import net.osmand.plus.widgets.MultiStateToggleButton.RadioItem;
+import net.osmand.plus.widgets.multistatetoggle.MultiStateToggleButton;
+import net.osmand.plus.widgets.multistatetoggle.RadioItem;
+import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
 import net.osmand.util.Algorithms;
 import net.osmand.view.ThreeStateCheckbox;
 
@@ -91,7 +92,7 @@ public abstract class SelectionBottomSheet extends MenuBottomSheetDialogFragment
 		secondaryDescription = view.findViewById(R.id.secondary_description);
 		selectedSize = view.findViewById(R.id.selected_size);
 		toggleContainer = view.findViewById(R.id.custom_radio_buttons);
-		radioGroup = new MultiStateToggleButton(app, toggleContainer, nightMode);
+		radioGroup = new TextToggleButton(app, toggleContainer, nightMode);
 		selectAllButton = view.findViewById(R.id.select_all_button);
 		checkBoxTitle = view.findViewById(R.id.check_box_title);
 		checkBox = view.findViewById(R.id.check_box);
