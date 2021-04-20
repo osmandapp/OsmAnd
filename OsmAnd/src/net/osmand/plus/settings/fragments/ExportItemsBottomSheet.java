@@ -278,7 +278,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	private String setupDescription(View view) {
-		TextView description = view.findViewById(R.id.description);
+		TextView description = view.findViewById(R.id.title_description);
 		if (type == ExportSettingsType.FAVORITES) {
 			description.setText(R.string.select_groups_for_import);
 		} else {
