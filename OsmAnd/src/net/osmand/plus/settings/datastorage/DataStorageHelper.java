@@ -200,7 +200,7 @@ public class DataStorageHelper {
 
 		terrainMemory = MemoryItem.builder()
 				.setKey(TERRAIN_MEMORY)
-				.setExtensions(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT)
+				.setExtensions(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT, IndexConstants.BINARY_SRTM_FEET_MAP_INDEX_EXT)
 				.setDirectories(
 						createDirectory(SRTM_INDEX_DIR, true, EXTENSIONS, true),
 						createDirectory(TILES_INDEX_DIR, false, PREFIX, false))
@@ -323,7 +323,7 @@ public class DataStorageHelper {
 	public interface UpdateMemoryInfoUIAdapter {
 
 		void onMemoryInfoUpdate();
-		
+
 		void onFinishUpdating(String tag);
 
 	}

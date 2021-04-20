@@ -20,6 +20,8 @@ import net.osmand.plus.widgets.multistatetoggle.RadioItem.OnRadioItemClickListen
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collection;
 import java.util.List;
 
 public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
@@ -43,6 +45,13 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 		this.uiUtilities = app.getUIUtilities();
 		this.container = container;
 		this.nightMode = nightMode;
+	}
+
+	public void setItems(Collection<_Radio> radioItems) {
+		if (radioItems == null || radioItems.size() < 2) return;
+		items.clear();
+		items.addAll(radioItems);
+		initView();
 	}
 
 	@SafeVarargs
