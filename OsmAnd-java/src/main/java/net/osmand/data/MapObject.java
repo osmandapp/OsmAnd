@@ -184,7 +184,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 		if (lang != null && lang.length() > 0) {
 			if (lang.equals("en")) {
 				// for some objects like wikipedia, english name is stored 'name' tag
-				if (Algorithms.isEmpty(enName)) {
+				if (!Algorithms.isEmpty(enName)) {
 					return getEnName(transliterate);
 				}
 			} else {
