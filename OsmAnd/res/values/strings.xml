@@ -22,6 +22,8 @@
     <string name="shared_string_feet">feet</string>
     <string name="update_all_maps_added">Update all maps added to %1$s?</string>
     <string name="release_4_0_beta">
+    • Added option to download Contour lines in feet\n\n
+    • Plan Route landscape: added tabs to switch between points or graphs\n\n
     • OsmAnd Live updates moved to \"Downloads > Updates\"\n\n
     • Tracks now could be colorizing by altitude, speed, or slope.\n\n
     • Added option to change the appearance of the navigation route line\n\n
