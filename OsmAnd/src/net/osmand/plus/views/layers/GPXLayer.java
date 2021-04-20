@@ -85,6 +85,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import static net.osmand.GPXUtilities.calculateTrackBounds;
 import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
 import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
 
@@ -460,7 +461,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			QuadRect correctedQuadRect = getCorrectedQuadRect(tileBox.getLatLonBounds());
 			for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
 				boolean showArrows = isShowArrowsForTrack(selectedGpxFile.getGpxFile());
-				if (!showArrows || !QuadRect.trivialOverlap(correctedQuadRect, GPXUtilities.calculateTrackBounds(selectedGpxFile.getPointsToDisplay()))) {
+				if (!showArrows || !QuadRect.trivialOverlap(correctedQuadRect, calculateTrackBounds(selectedGpxFile.getPointsToDisplay()))) {
 					continue;
 				}
 				String width = getTrackWidthName(selectedGpxFile.getGpxFile(), defaultTrackWidthPref.get());
@@ -689,18 +690,18 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		}
 	}
 
-	private void drawSelectedFileSegments(SelectedGpxFile selectedGpxFile, boolean currentTrack, Canvas canvas,
-										  RotatedTileBox tileBox, DrawSettings settings) {
-		boolean visible = QuadRect.trivialOverlap(tileBox.getLatLonBounds(), GPXUtilities.calculateTrackBounds(selectedGpxFile.getPointsToDisplay()));
-		if (!selectedGpxFile.getGpxFile().hasTrkPt() || !visible) {
+	private void drawSelectedFileSegments(SelectedGpxFile selectedGpxFile, boolean currentTrack,
+										  Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+		GPXFile gpxFile = selectedGpxFile.getGpxFile();
+		GradientScaleType scaleType = getGradientScaleType(gpxFile);
+
+		boolean visible = QuadRect.trivialOverlap(tileBox.getLatLonBounds(), calculateTrackBounds(selectedGpxFile.getPointsToDisplay()));
+		if (!gpxFile.hasTrkPt() && scaleType != null || !visible) {
 			segmentsCache.remove(selectedGpxFile.getGpxFile().path);
 			return;
 		}
 
-		GPXFile gpxFile = selectedGpxFile.getGpxFile();
-		GradientScaleType scaleType = getGradientScaleType(gpxFile);
 		List<TrkSegment> segments = new ArrayList<>();
-
 		if (scaleType == null) {
 			segments.addAll(selectedGpxFile.getPointsToDisplay());
 		} else {
@@ -1059,7 +1060,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		for (SelectedGpxFile gpx : selectedGpxFiles) {
 			selectedTracksPaths.add(gpx.getGpxFile().path);
 		}
-		for (Iterator<String> iterator = cachedTracksPaths.iterator(); iterator.hasNext();) {
+		for (Iterator<String> iterator = cachedTracksPaths.iterator(); iterator.hasNext(); ) {
 			if (!selectedTracksPaths.contains(iterator.next())) {
 				iterator.remove();
 			}
@@ -1271,7 +1272,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			RouteColorize colorize = new RouteColorize(zoom, gpxFile, selectedGpxFile.getTrackAnalysis(app),
 					scaleType.toColorizationType(), app.getSettings().getApplicationMode().getMaxSpeed());
 			colorize.setPalette(gradientPalette);
-			List<RouteColorizationPoint> colorsOfPoints =  colorize.getResult(true);
+			List<RouteColorizationPoint> colorsOfPoints = colorize.getResult(true);
 			return createSimplifiedSegments(selectedGpxFile.getGpxFile(), colorsOfPoints, scaleType);
 		}
 
