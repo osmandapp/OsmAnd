@@ -36,6 +36,7 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton.Bu
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.SimpleDividerItem;
+import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
@@ -277,7 +278,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	private String setupDescription(View view) {
-		TextView description = view.findViewById(R.id.description);
+		TextView description = view.findViewById(R.id.title_description);
 		if (type == ExportSettingsType.FAVORITES) {
 			description.setText(R.string.select_groups_for_import);
 		} else {
@@ -530,7 +531,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			return getString(R.string.download_roads_only_item);
 		} else if (file.getName().endsWith(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT)) {
 			return getString(R.string.download_wikipedia_maps);
-		} else if (file.getName().endsWith(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT)) {
+		} else if (SrtmDownloadItem.isSrtmFile(file.getName())) {
 			return getString(R.string.download_srtm_maps);
 		} else if (file.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
 			return getString(R.string.download_regular_maps);

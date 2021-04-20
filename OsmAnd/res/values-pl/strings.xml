@@ -4056,13 +4056,13 @@
     <string name="customize_route_line">Zmień trasę nawigacji</string>
     <string name="shared_string_route_line">Trasa nawigacji</string>
     <string name="expired">Wygasł</string>
-    <string name="release_4_0_beta">• OsmAnd Live aktualizacje przeniesiono do \"Pobrane &gt; Aktualizacje\"
+    <string name="release_4_0_beta">• Aktualizacje OsmAnd Live przeniesiono do \"Pobrane &gt; Aktualizacje\"
 \n
 \n •Ślady mogą być pokolorowane względem wysokości, prędkości, wzniesień.
 \n
 \n • Dodano opcję zmiany wyglądu trasy nawigacji
 \n
-\n • zaktualizowano okno \"Nagrywanie Trasy\"
+\n • Zaktualizowano okno \"Nagrywanie Trasy\"
 \n
 \n</string>
     <string name="map_quick_action_pattern">%1$s → …</string>

@@ -9,7 +9,6 @@ import android.net.TrafficStats;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
-import android.os.StatFs;
 import android.view.View;
 import android.widget.Toast;
 
@@ -17,13 +16,12 @@ import androidx.annotation.UiThread;
 import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.AndroidNetworkUtils;
+import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.map.WorldRegion;
 import net.osmand.map.WorldRegion.RegionParams;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.BasicProgressAsyncTask;
@@ -31,6 +29,8 @@ import net.osmand.plus.download.DownloadFileHelper.DownloadFileShowWarning;
 import net.osmand.plus.helpers.DatabaseHelper;
 import net.osmand.plus.notifications.OsmandNotification;
 import net.osmand.plus.resources.ResourceManager;
+import net.osmand.plus.settings.backend.OsmandPreference;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -240,9 +240,12 @@ public class DownloadIndexesThread {
 	}
 
 	public void cancelDownload(DownloadItem item) {
-		if (item instanceof MultipleIndexItem) {
-			MultipleIndexItem multipleIndexItem = (MultipleIndexItem) item;
-			cancelDownload(multipleIndexItem.getAllIndexes());
+		if (item instanceof MultipleDownloadItem) {
+			MultipleDownloadItem multipleDownloadItem = (MultipleDownloadItem) item;
+			cancelDownload(multipleDownloadItem.getAllIndexes());
+		} else if (item instanceof SrtmDownloadItem) {
+			IndexItem indexItem = ((SrtmDownloadItem) item).getIndexItem();
+			cancelDownload(indexItem);
 		} else if (item instanceof IndexItem) {
 			IndexItem indexItem = (IndexItem) item;
 			cancelDownload(indexItem);
@@ -299,19 +302,8 @@ public class DownloadIndexesThread {
 		return null;
 	}
 
-	@SuppressWarnings("deprecation")
 	public double getAvailableSpace() {
-		File dir = app.getAppPath("").getParentFile();
-		double asz = -1;
-		if (dir.canRead()) {
-			try {
-				StatFs fs = new StatFs(dir.getAbsolutePath());
-				asz = (((long) fs.getAvailableBlocks()) * fs.getBlockSize()) / (1 << 20);
-			} catch (IllegalArgumentException e) {
-				LOG.error(e);
-			}
-		}
-		return asz;
+		return AndroidUtils.getAvailableSpace(app) / (1 << 20);
 	}
 	
 	/// PRIVATE IMPL

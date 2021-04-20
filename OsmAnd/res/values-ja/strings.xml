@@ -1173,7 +1173,7 @@ POIの更新は利用できません</string>
     <string name="save_as_favorites_points">お気に入りのグループとして保存</string>
     <string name="select_destination_and_intermediate_points">目的地の設定</string>
     <string name="layer_amenity_label">施設の名称</string>
-    <string name="loading_smth">ロード中 %1$s …</string>
+    <string name="loading_smth">%1$sをロード中…</string>
     <string name="map_widget_plain_time">現在時刻</string>
     <string name="shared_string_waypoint">経由地点</string>
     <string name="selected_gpx_info_show">"
@@ -1446,7 +1446,7 @@ POIの更新は利用できません</string>
     <string name="routing_settings_2">ナビゲーション設定</string>
     <string name="general_settings_2">全般設定</string>
     <string name="shared_string_ellipsis">…</string>
-    <string name="shared_string_enable">有効</string>
+    <string name="shared_string_enable">有効化</string>
     <string name="shared_string_disable">無効化</string>
     <string name="shared_string_selected">選択済み</string>
     <string name="shared_string_deselect">選択解除</string>
@@ -2818,9 +2818,9 @@ POIの更新は利用できません</string>
     <string name="osm_live_subscriptions">サブスクリプション</string>
     <string name="powered_by_osmand">By OsmAnd</string>
     <string name="osm_live_plan_pricing">プランと料金</string>
-    <string name="osm_live_payment_monthly_title">月間</string>
+    <string name="osm_live_payment_monthly_title">月毎</string>
     <string name="osm_live_payment_3_months_title">3ヶ月毎</string>
-    <string name="osm_live_payment_annual_title">年間</string>
+    <string name="osm_live_payment_annual_title">年毎</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / 月</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / 月</string>
     <string name="osm_live_payment_discount_descr">%1$s割引</string>
@@ -3172,7 +3172,7 @@ POIの更新は利用できません</string>
     <string name="app_mode_utv">横並び(サイドバイサイド)形式</string>
     <string name="rendering_attr_piste_difficulty_aerialway_name">索道(リフトやロープウェイなど)</string>
     <string name="rendering_attr_piste_difficulty_connection_name">リフト間接続</string>
-    <string name="shared_string_calculate">計算</string>
+    <string name="shared_string_calculate">計算する</string>
     <string name="shared_string_osmand_usage">OsmAndの合計使用容量</string>
     <string name="shared_sting_tiles">タイル</string>
     <string name="shared_string_maps">マップ</string>
@@ -3703,9 +3703,9 @@ POIの更新は利用できません</string>
 \n
 \n国の法律に基づいて、使用を望むかどうかを決定する必要があります。
 \n
-\n%1$sを選択すると、スピードカメラに関するアラートと警告機能を使用できます。
+\n『%1$s』を選択すると、スピードカメラに関するアラートと警告機能を使用できます。
 \n
-\n%2$sを選択すると、スピードカメラに関するすべてのデータ(警告、通知、POI)が、OsmAndの再インストールを行うまで削除されます。</string>
+\n『%2$s』を選択すると、スピードカメラに関するすべてのデータ(警告、通知、POI)が、OsmAndの再インストールを行うまで削除されます。</string>
     <string name="keep_active">機能を維持</string>
     <string name="shared_string_uninstall">アンインストール</string>
     <string name="speed_cameras_alert">一部の国では、スピードカメラの事前警告は法律で禁止されています。</string>
@@ -4078,4 +4078,26 @@ POIの更新は利用できません</string>
     <string name="app_mode_wheelchair_forward">基本前進のみの車椅子</string>
     <string name="track_coloring_solid">通常色</string>
     <string name="in_case_of_reverse_direction">逆方向の場合</string>
+    <string name="no_purchases">購入済みの品目はありません</string>
+    <string name="new_device_account">新しい端末 / 新規アカウント</string>
+    <string name="contact_support_description">ご不明な点がございましたら、%1$sまでお問い合わせください。</string>
+    <string name="empty_purchases_description">購入した品目がここに表示されない場合は、\"%1$s\"をタップするか、サポートチームにお問い合わせください。</string>
+    <string name="contact_support">サポート問い合わせ先</string>
+    <string name="troubleshooting">トラブルシューティング</string>
+    <string name="troubleshooting_description">購入に関して問題が発生した場合は、このリンクを参照してください。</string>
+    <string name="osmand_live">OsmAnd Live</string>
+    <string name="next_billing_date">次回請求日: %1$s</string>
+    <string name="osmand_live_cancelled">キャンセル済み</string>
+    <string name="in_grace_period">猶予期間中</string>
+    <string name="on_hold">保留中</string>
+    <string name="expired">期限切れ</string>
+    <string name="update_all_maps_added">%1$sに追加された全マップを更新しますか？</string>
+    <string name="user_points">ユーザーポイント</string>
+    <string name="exit_number">出口番号</string>
+    <string name="announce_when_exceeded">超過した場合の通知</string>
+    <string name="output">出力</string>
+    <string name="annual_subscription">年毎のサブスクリプション</string>
+    <string name="monthly_subscription">月毎のサブスクリプション</string>
+    <string name="three_months_subscription">3ヶ月毎のサブスクリプション</string>
+    <string name="renew_subscription">サブスクリプションの更新</string>
 </resources>

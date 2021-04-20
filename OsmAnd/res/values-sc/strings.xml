@@ -1769,7 +1769,7 @@
     <string name="shared_string_commit">Imbia</string>
     <string name="osm_edit_modified_poi">PDI OSM modificadu</string>
     <string name="osm_edit_deleted_poi">PDI OSM iscantzelladu</string>
-    <string name="copied_to_clipboard">Copiadu in sos apuntos</string>
+    <string name="copied_to_clipboard">Copiadu in punta de billete</string>
     <string name="osm_save_offline">Sarva in sa memòria (impreu chene lìnia)</string>
     <string name="rendering_attr_currentTrackColor_description">Colore GPX</string>
     <string name="rendering_attr_currentTrackWidth_description">Largària GPX</string>
@@ -4046,4 +4046,41 @@
     <string name="lost_data_warning">Totu sos datos non sarvados s\'ant a pèrdere.</string>
     <string name="show_start_dialog">Ammustra su diàlogu de incumintzu</string>
     <string name="specify_color_for_map_mode">Dislinda unu colore pro sa modalidade pro sa mapa: %1$s.</string>
+    <string name="release_4_0_beta">• Agiornamentos de OsmAnd Live (OSmAnd in direta) tramudados cara a \"Iscarrigamentos &gt; Agiornamentos\"
+\n
+\n • Sas rastas como si podent colorizare pro artària, lestresa, o pendèntzia.
+\n
+\n • Annanghidura de s\'optzione pro mudare s\'aparèntzia de sa lìnia de navigatzione de s\'àndala
+\n
+\n • Agiornamentu de sa ventanedda de diàlogu \"Registratzione de su biàgiu\"
+\n
+\n</string>
+    <string name="in_grace_period">In perìodu de gràtzia</string>
+    <string name="osmand_live">OsmAnd in direta</string>
+    <string name="app_mode_gap">Divàriu</string>
+    <string name="trip_recording_logging_interval_info">S\'intervallu de registratzione impostat sa frecuèntzia cun sa cale OsmAnd at a pedire sos datos de sa positzione atuale.</string>
+    <string name="trip_recording_show_start_dialog_setting">Si est disabilitadu sa registratzione at a incumintzare a pustis de su tocu in subra de su widget o de s\'elementu de su menù, brinchende sa ventanedda de diàlogu de cunfirma.</string>
+    <string name="customize_route_line">Personaliza sa lìnia de s\'àndala</string>
+    <string name="shared_string_route_line">Lìnia de s\'àndala</string>
+    <string name="route_line_use_map_style_appearance">Pro sa lìnia de s\'àndala s\'at a impreare su %1$s dislindadu in s\'istile de sa mapa ischertadu: %2$s.</string>
+    <string name="no_purchases">Non tenes còmpora peruna</string>
+    <string name="new_device_account">Dispositivu nou / contu nou</string>
+    <string name="contact_support_description">Si tenes preguntas cuntata·nos a su %1$s.</string>
+    <string name="empty_purchases_description">Si sa còmpora tua non benit ammustrada inoghe toca in “%1$s” o cuntata su grupu de suportu nostru.</string>
+    <string name="contact_support">Cuntata su suportu</string>
+    <string name="troubleshooting">Risolutzione de problemas</string>
+    <string name="troubleshooting_description">Si tenes problemas cun sa còmpora sighi custu ligàmene, pro praghere.</string>
+    <string name="annual_subscription">Abbonamentu annuale</string>
+    <string name="monthly_subscription">Abbonamentu mensile</string>
+    <string name="three_months_subscription">Abbonamentu trimestrale</string>
+    <string name="next_billing_date">Data de addèbitu imbeniente: %1$s</string>
+    <string name="osmand_live_cancelled">Annulladu</string>
+    <string name="renew_subscription">Rinnova s\'abbonamentu</string>
+    <string name="on_hold">In isetu</string>
+    <string name="expired">Iscadidu</string>
+    <string name="update_all_maps_added">Agiornare totu sas mapas annànghidas a %1$s\?</string>
+    <string name="exit_number">Nùmeru de essida</string>
+    <string name="announce_when_exceeded">Avisa in casu de barigamentu</string>
+    <string name="user_points">Puntos de s\'impreadore</string>
+    <string name="output">Essida</string>
 </resources>

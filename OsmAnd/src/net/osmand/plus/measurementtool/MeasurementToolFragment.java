@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewGroup.MarginLayoutParams;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -82,9 +83,13 @@ import net.osmand.plus.views.layers.MapControlsLayer.MapControlsThemeInfoProvide
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarView;
-import net.osmand.plus.widgets.MultiStateToggleButton;
-import net.osmand.plus.widgets.MultiStateToggleButton.OnRadioItemClickListener;
-import net.osmand.plus.widgets.MultiStateToggleButton.RadioItem;
+import net.osmand.plus.widgets.multistatetoggle.IconToggleButton;
+import net.osmand.plus.widgets.multistatetoggle.IconToggleButton.IconRadioItem;
+import net.osmand.plus.widgets.multistatetoggle.MultiStateToggleButton;
+import net.osmand.plus.widgets.multistatetoggle.RadioItem;
+import net.osmand.plus.widgets.multistatetoggle.RadioItem.OnRadioItemClickListener;
+import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
+import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
 import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
 import net.osmand.util.Algorithms;
 
@@ -130,6 +135,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private RadioItem graphBtn;
 	private View mainView;
 	private View bottomMapControls;
+	private View topMapControls;
 	private ImageView upDownBtn;
 	private ImageView undoBtn;
 	private ImageView redoBtn;
@@ -251,7 +257,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			public void showProgressBar() {
 				MeasurementToolFragment.this.showProgressBar();
 				updateInfoView();
-				updateCardContainerSize();
+				updateInfoViewAppearance();
 			}
 
 			@Override
@@ -261,10 +267,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 			@Override
 			public void hideProgressBar() {
-				((ProgressBar) mainView.findViewById(R.id.snap_to_road_progress_bar)).setVisibility(View.GONE);
+				((ProgressBar) mainView.findViewById(R.id.snap_to_road_progress_bar)).setVisibility(View.INVISIBLE);
 				progressBarVisible = false;
 				updateInfoView();
-				updateCardContainerSize();
+				updateInfoViewAppearance();
 			}
 
 			@Override
@@ -287,32 +293,38 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				.inflate(R.layout.fragment_measurement_tool, container, false);
 
 		mainView = view.findViewById(R.id.main_view);
-		AndroidUtils.setBackground(mapActivity, mainView, nightMode, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
 		detailsMenu = new GraphDetailsMenu();
+		LinearLayout infoButtonsContainer = mainView.findViewById(R.id.custom_radio_buttons);
 		if (portrait) {
 			cardsContainer = mainView.findViewById(R.id.cards_container);
+			infoTypeBtn = new TextToggleButton(app, infoButtonsContainer, nightMode);
 
 			String pointsBtnTitle = getString(R.string.shared_string_gpx_points);
-			pointsBtn = new RadioItem(pointsBtnTitle);
-			pointsBtn.setOnClickListener(getInfoTypeBtnListener(InfoType.POINTS));
+			pointsBtn = new TextRadioItem(pointsBtnTitle);
 
 			String graphBtnTitle = getString(R.string.shared_string_graph);
-			graphBtn = new RadioItem(graphBtnTitle);
-			graphBtn.setOnClickListener(getInfoTypeBtnListener(InfoType.GRAPH));
+			graphBtn = new TextRadioItem(graphBtnTitle);
 
-			LinearLayout infoButtonsContainer = mainView.findViewById(R.id.custom_radio_buttons);
-			infoTypeBtn = new MultiStateToggleButton(app, infoButtonsContainer, nightMode);
-			infoTypeBtn.setItems(pointsBtn, graphBtn);
 		} else {
 			cardsContainer = mapActivity.findViewById(R.id.left_side_menu);
 			bottomMapControls = mapActivity.findViewById(R.id.bottom_controls_container);
+			topMapControls = mapActivity.findViewById(R.id.top_controls_container);
+
+			infoTypeBtn = new IconToggleButton(app, infoButtonsContainer, nightMode);
+			pointsBtn = new IconRadioItem(R.drawable.ic_action_plan_route_point_colored, true);
+			graphBtn = new IconRadioItem(R.drawable.ic_action_analyze_intervals);
+
 			ScrollUtils.addOnGlobalLayoutListener(mainView, new Runnable() {
 				@Override
 				public void run() {
-					updateCardContainerSize();
+					updateInfoViewAppearance();
 				}
 			});
 		}
+		pointsBtn.setOnClickListener(getInfoTypeBtnListener(InfoType.POINTS));
+		graphBtn.setOnClickListener(getInfoTypeBtnListener(InfoType.GRAPH));
+		infoTypeBtn.setItems(pointsBtn, graphBtn);
+
 		pointsCard = new PointsCard(mapActivity, this);
 		graphsCard = new GraphsCard(mapActivity, detailsMenu, this);
 
@@ -348,7 +360,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			public void onClick(View v) {
 				if (infoExpanded) {
 					collapseInfoView();
-				} else if (setInfoType(InfoType.POINTS) && portrait) {
+				} else if (setInfoType(InfoType.POINTS)) {
 					infoTypeBtn.setSelectedItem(pointsBtn);
 				}
 			}
@@ -626,7 +638,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		if (portrait) {
 			setMapPosition(OsmandSettings.MIDDLE_TOP_CONSTANT);
 		} else {
-			shiftBottomMapControls(false);
+			shiftMapControls(false);
 			setMapPosition(OsmandSettings.LANDSCAPE_MIDDLE_RIGHT_CONSTANT);
 		}
 		cardsContainer.setVisibility(View.VISIBLE);
@@ -640,15 +652,14 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	private void collapseInfoView() {
-		cardsContainer.setVisibility(View.GONE);
-		if (portrait) {
-			infoTypeBtn.setSelectedItem(null);
-		} else {
-			shiftBottomMapControls(true);
-		}
 		infoExpanded = false;
 		currentInfoType = null;
-		setDefaultMapPosition();
+		cardsContainer.setVisibility(View.GONE);
+		if (!portrait) {
+			shiftMapControls(true);
+		}
+		infoTypeBtn.setSelectedItem(null);
+		moveMapToDefaultPosition();
 		updateUpDownBtn();
 	}
 
@@ -676,37 +687,37 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		}
 	}
 
-	private void updateCardContainerSize() {
-		if (portrait) {
-			return;
+	private void updateInfoViewAppearance() {
+		if (portrait) return;
+
+		View toolsPanel = mainView.findViewById(R.id.measure_mode_controls);
+		View snapToRoadProgress = mainView.findViewById(R.id.snap_to_road_progress_bar);
+
+		int infoViewWidth = mainView.getWidth() - toolsPanel.getWidth();
+		int bottomMargin = toolsPanel.getHeight();
+		if (progressBarVisible) {
+			bottomMargin += snapToRoadProgress.getHeight();
 		}
-		View measureModeControls = mainView.findViewById(R.id.measure_mode_controls);
-		int width = mainView.getWidth() - measureModeControls.getWidth();
-		int bottomMargin = measureModeControls.getHeight();
-		bottomMargin = progressBarVisible ? bottomMargin + mainView.findViewById(R.id.snap_to_road_progress_bar).getHeight() : bottomMargin;
+
+		ViewGroup.MarginLayoutParams params = null;
 		if (mainView.getParent() instanceof FrameLayout) {
-			FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(width, -1);
-			params.setMargins(0, 0, 0, bottomMargin);
-			cardsContainer.setLayoutParams(params);
+			params = new FrameLayout.LayoutParams(infoViewWidth, -1);
 		} else if (mainView.getParent() instanceof LinearLayout) {
-			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, -1);
-			params.setMargins(0, 0, 0, bottomMargin);
+			params = new LinearLayout.LayoutParams(infoViewWidth, -1);
+		}
+		if (params != null) {
+			AndroidUtils.setMargins(params, 0, 0, 0, bottomMargin);
 			cardsContainer.setLayoutParams(params);
 		}
 	}
 
-	private void shiftBottomMapControls(boolean toInitialPosition) {
-		if (portrait) {
-			return;
-		}
-		int leftMargin = toInitialPosition ? 0 : cardsContainer.getWidth();
-		if (bottomMapControls.getParent() instanceof LinearLayout) {
-			LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) bottomMapControls.getLayoutParams();
-			params.setMargins(leftMargin, 0, 0, 0);
-		} else if (bottomMapControls.getParent() instanceof FrameLayout) {
-			FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) bottomMapControls.getLayoutParams();
-			params.setMargins(leftMargin, 0, 0, 0);
-		}
+	private void shiftMapControls(boolean toInitialPosition) {
+		boolean isLayoutRtl = AndroidUtils.isLayoutRtl(getContext());
+		int shiftPosition = toInitialPosition ? 0 : cardsContainer.getWidth();
+		int start = isLayoutRtl ? 0 : shiftPosition;
+		int end = isLayoutRtl ? shiftPosition : 0;
+		AndroidUtils.setMargins((MarginLayoutParams) bottomMapControls.getLayoutParams(), start, 0, end, 0);
+		AndroidUtils.setMargins((MarginLayoutParams) topMapControls.getLayoutParams(), start, 0, end, 0);
 	}
 
 	public boolean isInEditMode() {
@@ -772,7 +783,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			mapActivity.getMapLayers().getMapControlsLayer().addThemeInfoProviderTag(TAG);
 			mapActivity.getMapLayers().getMapControlsLayer().showMapControlsIfHidden();
 			cachedMapPosition = mapActivity.getMapView().getMapPosition();
-			setDefaultMapPosition();
+			moveMapToDefaultPosition();
 			addInitialPoint();
 		}
 	}
@@ -1196,7 +1207,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	@Override
 	public void onCloseMenu() {
-		setDefaultMapPosition();
+		moveMapToDefaultPosition();
 	}
 
 	@Override
@@ -1390,7 +1401,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		editingCtx.cancelSnapToRoad();
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			mainView.findViewById(R.id.snap_to_road_progress_bar).setVisibility(View.GONE);
+			mainView.findViewById(R.id.snap_to_road_progress_bar).setVisibility(View.INVISIBLE);
 			mapActivity.refreshMap();
 		}
 	}
@@ -1641,7 +1652,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		updateInfoView();
 	}
 
-	private void setDefaultMapPosition() {
+	private void moveMapToDefaultPosition() {
 		setMapPosition(OsmandSettings.CENTER_CONSTANT);
 	}
 

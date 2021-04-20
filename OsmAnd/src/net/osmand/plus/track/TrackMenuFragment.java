@@ -1131,7 +1131,10 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	@Override
-	public void openAnalyzeOnMap(GpxDisplayItem gpxItem) {
+	public void openAnalyzeOnMap(@NonNull GpxDisplayItem gpxItem) {
+		if (gpxPoint != null) {
+			gpxItem.locationOnMap = gpxPoint.getSelectedPoint();
+		}
 		TrackDetailsMenu trackDetailsMenu = getMapActivity().getTrackDetailsMenu();
 		trackDetailsMenu.setGpxItem(gpxItem);
 		trackDetailsMenu.setSelectedGpxFile(selectedGpxFile);

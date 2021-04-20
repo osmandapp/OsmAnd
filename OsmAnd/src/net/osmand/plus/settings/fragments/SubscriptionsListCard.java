@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
-import net.osmand.Period;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -20,11 +19,10 @@ import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.util.Algorithms;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 
 public class SubscriptionsListCard extends BaseCard {
@@ -60,7 +58,13 @@ public class SubscriptionsListCard extends BaseCard {
 		for (int i = 0; i < subscriptions.size(); i++) {
 			InAppSubscription subscription = subscriptions.get(i);
 			SubscriptionState state = subscription.getState();
-			boolean autoRenewed = state == SubscriptionState.ACTIVE || state == SubscriptionState.IN_GRACE_PERIOD;
+			boolean autoRenewing = false;
+			if (subscription.isPurchased() && subscription.getPurchaseInfo() != null) {
+				autoRenewing = subscription.getPurchaseInfo().isAutoRenewing();
+				state = SubscriptionState.ACTIVE;
+			} else if (state != SubscriptionState.UNDEFINED) {
+				autoRenewing = state == SubscriptionState.ACTIVE || state == SubscriptionState.IN_GRACE_PERIOD;
+			}
 
 			View card = inflater.inflate(R.layout.subscription_layout, null, false);
 			((ViewGroup) view).addView(card);
@@ -72,11 +76,18 @@ public class SubscriptionsListCard extends BaseCard {
 				AndroidUiHelper.updateVisibility(subscriptionPeriod, true);
 			}
 
-			if (autoRenewed) {
+			if (autoRenewing) {
 				TextView nextBillingDate = card.findViewById(R.id.next_billing_date);
-				String date = getHumanDate(subscription.getPurchaseTime(), subscription.getSubscriptionPeriod());
-				if (!Algorithms.isEmpty(date)) {
-					nextBillingDate.setText(app.getString(R.string.next_billing_date, date));
+				String expiredTimeStr = null;
+				long expiredTime = subscription.getExpireTime();
+				if (expiredTime == 0) {
+					expiredTime = subscription.getCalculatedExpiredTime();
+				}
+				if (expiredTime > 0) {
+					expiredTimeStr = dateFormat.format(expiredTime);
+				}
+				if (!Algorithms.isEmpty(expiredTimeStr)) {
+					nextBillingDate.setText(app.getString(R.string.next_billing_date, expiredTimeStr));
 					AndroidUiHelper.updateVisibility(nextBillingDate, true);
 				}
 			} else {
@@ -102,7 +113,7 @@ public class SubscriptionsListCard extends BaseCard {
 
 			TextView status = card.findViewById(R.id.status);
 			status.setText(app.getString(state.getStringRes()));
-			AndroidUtils.setBackground(status, app.getUIUtilities().getIcon(state.getBackgroundRes()));
+			AndroidUtils.setBackground(status, app.getUIUtilities().getIcon(getBackgroundRes(state)));
 
 			int dividerLayout = i + 1 == subscriptions.size() ? R.layout.simple_divider_item : R.layout.divider_half_item;
 			View divider = inflater.inflate(dividerLayout, (ViewGroup) view, false);
@@ -110,15 +121,9 @@ public class SubscriptionsListCard extends BaseCard {
 		}
 	}
 
-	private String getHumanDate(long time, Period period) {
-		if (period == null || period.getUnit() == null) {
-			return "";
-		}
-		Date date = new Date(time);
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(date);
-		calendar.add(period.getUnit().getCalendarIdx(), period.getNumberOfUnits());
-		date = calendar.getTime();
-		return dateFormat.format(date);
+	@DrawableRes
+	private int getBackgroundRes(@NonNull SubscriptionState state) {
+		return state == SubscriptionState.ACTIVE || state == SubscriptionState.IN_GRACE_PERIOD
+				? R.drawable.bg_osmand_live_active : R.drawable.bg_osmand_live_cancelled;
 	}
 }

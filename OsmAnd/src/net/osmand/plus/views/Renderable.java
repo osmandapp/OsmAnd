@@ -58,6 +58,7 @@ public class Renderable {
     public static abstract class RenderableSegment {
 
         protected static final int MIN_CULLER_ZOOM = 16;
+        protected static final int BORDER_TYPE_ZOOM_THRESHOLD = MapTileLayer.DEFAULT_MAX_ZOOM + MapTileLayer.OVERZOOM_IN;
 
         public List<WptPt> points = null;                           // Original list of points
         protected List<WptPt> culled = new ArrayList<>();           // Reduced/resampled list of points
@@ -70,6 +71,7 @@ public class Renderable {
         protected Paint paint = null;                               // MUST be set by 'updateLocalPaint' before use
         protected Paint borderPaint;
         protected GradientScaleType scaleType = null;
+        protected boolean drawBorder = false;
 
         protected GpxGeometryWay geometryWay;
 
@@ -93,12 +95,10 @@ public class Renderable {
             }
         }
 
-        public void setBorderPaint(@NonNull Paint paint) {
-            borderPaint = paint;
-        }
-
-        public void setGradientScaleType(GradientScaleType type) {
-            this.scaleType = type;
+        public void setGradientTrackParams(GradientScaleType gradientScaleType, @NonNull Paint borderPaint, boolean shouldDrawBorder) {
+            this.scaleType = gradientScaleType;
+            this.borderPaint = borderPaint;
+            this.drawBorder = shouldDrawBorder;
         }
 
         public GpxGeometryWay getGeometryWay() {
@@ -119,8 +119,10 @@ public class Renderable {
             updateLocalPaint(p);
             canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
             if (scaleType != null) {
-                drawSolid(points, borderPaint, canvas, tileBox);
-                drawGradient(points, paint, canvas, tileBox);
+                if (drawBorder && zoom < BORDER_TYPE_ZOOM_THRESHOLD) {
+                    drawSolid(points, borderPaint, canvas, tileBox);
+                }
+                drawGradient(zoom, points, paint, canvas, tileBox);
             } else {
                 drawSolid(getPointsForDrawing(), paint, canvas, tileBox);
             }
@@ -186,8 +188,9 @@ public class Renderable {
             }
         }
 
-        protected void drawGradient(List<WptPt> pts, Paint p, Canvas canvas, RotatedTileBox tileBox) {
+        protected void drawGradient(double zoom, List<WptPt> pts, Paint p, Canvas canvas, RotatedTileBox tileBox) {
             QuadRect tileBounds = tileBox.getLatLonBounds();
+            boolean drawSegmentBorder = drawBorder && zoom >= BORDER_TYPE_ZOOM_THRESHOLD;
             Path path = new Path();
             boolean recalculateLastXY = true;
             WptPt lastPt = pts.get(0);
@@ -195,6 +198,9 @@ public class Renderable {
             List<PointF> gradientPoints = new ArrayList<>();
             List<Integer> gradientColors = new ArrayList<>();
             float gradientAngle = 0;
+
+            List<Path> paths = new ArrayList<>();
+            List<LinearGradient> gradients = new ArrayList<>();
 
             for (int i = 1; i < pts.size(); i++) {
                 WptPt pt = pts.get(i);
@@ -209,8 +215,8 @@ public class Renderable {
                         lastX = tileBox.getPixXFromLatLon(lastPt.lat, lastPt.lon);
                         lastY = tileBox.getPixYFromLatLon(lastPt.lat, lastPt.lon);
                         if (!path.isEmpty()) {
-                            p.setShader(createGradient(gradientPoints, gradientColors));
-                            canvas.drawPath(path, p);
+                            paths.add(new Path(path));
+                            gradients.add(createGradient(gradientPoints, gradientColors));
                         }
                         path.reset();
                         path.moveTo(lastX, lastY);
@@ -241,8 +247,21 @@ public class Renderable {
                 lastPt = pt;
             }
             if (!path.isEmpty()) {
-                p.setShader(createGradient(gradientPoints, gradientColors));
-                canvas.drawPath(path, p);
+                paths.add(new Path(path));
+                gradients.add(createGradient(gradientPoints, gradientColors));
+            }
+
+            if (!paths.isEmpty()) {
+                if (drawSegmentBorder) {
+                    canvas.drawPath(paths.get(0), borderPaint);
+                }
+                for (int i = 0; i < paths.size(); i++) {
+                    if (drawSegmentBorder && i + 1 < paths.size()) {
+                        canvas.drawPath(paths.get(i + 1), borderPaint);
+                    }
+                    p.setShader(gradients.get(i));
+                    canvas.drawPath(paths.get(i), p);
+                }
             }
         }
 
