@@ -53,6 +53,11 @@ public class SrtmDownloadItem extends DownloadItem {
 				return index;
 			}
 		}
+		return getDefaultIndexItem();
+	}
+
+	@NonNull
+	public IndexItem getDefaultIndexItem() {
 		for (IndexItem index : indexes) {
 			if (useMetric && isMetricItem(index) || !useMetric && !isMetricItem(index)) {
 				return index;
@@ -135,7 +140,7 @@ public class SrtmDownloadItem extends DownloadItem {
 		return getAbbreviationInScopes(ctx, this);
 	}
 
-	public static boolean shouldUseMetersByDefault(@NonNull OsmandApplication app) {
+	public static boolean isUseMetricByDefault(@NonNull OsmandApplication app) {
 		MetricsConstants metricSystem = app.getSettings().METRIC_SYSTEM.get();
 		return metricSystem != MetricsConstants.MILES_AND_FEET;
 	}

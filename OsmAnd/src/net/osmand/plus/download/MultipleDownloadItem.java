@@ -147,9 +147,6 @@ public class MultipleDownloadItem extends DownloadItem {
 	@Nullable
 	@Override
 	public String getAdditionalDescription(Context ctx) {
-		for (DownloadItem item : items) {
-			return item.getAdditionalDescription(ctx);
-		}
 		return null;
 	}
 

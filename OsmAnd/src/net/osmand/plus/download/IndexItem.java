@@ -233,6 +233,9 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 	@Nullable
 	@Override
 	public String getAdditionalDescription(Context ctx) {
+		if (getType() == DownloadActivityType.SRTM_COUNTRY_FILE) {
+			return SrtmDownloadItem.getAbbreviationInScopes(ctx, this);
+		}
 		return null;
 	}
 	
