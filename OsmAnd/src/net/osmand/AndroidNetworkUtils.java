@@ -3,10 +3,10 @@ package net.osmand;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
 
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
@@ -38,6 +38,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
 public class AndroidNetworkUtils {
@@ -54,6 +55,15 @@ public class AndroidNetworkUtils {
 		Map<String, String> getAdditionalParams(@NonNull File file);
 		void onFileUploadProgress(@NonNull File file, int percent);
 		void onFilesUploadDone(@NonNull Map<File, String> errors);
+	}
+
+	public interface OnFilesDownloadCallback {
+		@Nullable
+		Map<String, String> getAdditionalParams(@NonNull File file);
+		void onFileDownloadProgress(@NonNull File file, int percent);
+		@WorkerThread
+		void onFileDownloadedAsync(@NonNull File file);
+		void onFilesDownloadDone(@NonNull Map<File, String> errors);
 	}
 
 	public static class RequestResponse {
@@ -74,35 +84,46 @@ public class AndroidNetworkUtils {
 		}
 	}
 
-	public interface OnRequestsResultListener {
-		void onResult(@NonNull List<RequestResponse> results);
+	public interface OnSendRequestsListener {
+		void onRequestSent(@NonNull RequestResponse response);
+		void onRequestsSent(@NonNull List<RequestResponse> results);
 	}
 
-	public static void sendRequestsAsync(final OsmandApplication ctx,
-										final List<Request> requests,
-										final OnRequestsResultListener listener) {
+	public static void sendRequestsAsync(@Nullable final OsmandApplication ctx,
+										 @NonNull final List<Request> requests,
+										 @Nullable final OnSendRequestsListener listener) {
 
-		new AsyncTask<Void, Void, List<RequestResponse>>() {
+		new AsyncTask<Void, RequestResponse, List<RequestResponse>>() {
 
 			@Override
 			protected List<RequestResponse> doInBackground(Void... params) {
 				List<RequestResponse> responses = new ArrayList<>();
 				for (Request request : requests) {
+					RequestResponse requestResponse;
 					try {
 						String response = sendRequest(ctx, request.getUrl(), request.getParameters(),
 								request.getUserOperation(), request.isToastAllowed(), request.isPost());
-						responses.add(new RequestResponse(request, response));
+						requestResponse = new RequestResponse(request, response);
 					} catch (Exception e) {
-						responses.add(new RequestResponse(request, null));
+						requestResponse = new RequestResponse(request, null);
 					}
+					responses.add(requestResponse);
+					publishProgress(requestResponse);
 				}
 				return responses;
 			}
 
 			@Override
+			protected void onProgressUpdate(RequestResponse... values) {
+				if (listener != null) {
+					listener.onRequestSent(values[0]);
+				}
+			}
+
+			@Override
 			protected void onPostExecute(@NonNull List<RequestResponse> results) {
 				if (listener != null) {
-					listener.onResult(results);
+					listener.onRequestsSent(results);
 				}
 			}
 
@@ -146,7 +167,7 @@ public class AndroidNetworkUtils {
 
 			@Override
 			protected String doInBackground(Void... params) {
-				return downloadFile(url, fileToSave);
+				return downloadFile(url, fileToSave, false, null);
 			}
 
 			@Override
@@ -158,8 +179,80 @@ public class AndroidNetworkUtils {
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 	}
 
-	public static String sendRequest(OsmandApplication ctx, String url, Map<String, String> parameters,
-									 String userOperation, boolean toastAllowed, boolean post) {
+	public static void downloadFilesAsync(final @NonNull String url,
+										  final @NonNull List<File> files,
+										  final @NonNull Map<String, String> parameters,
+										  final @Nullable OnFilesDownloadCallback callback) {
+
+		new AsyncTask<Void, Object, Map<File, String>>() {
+
+			@Override
+			@NonNull
+			protected Map<File, String> doInBackground(Void... v) {
+				Map<File, String> errors = new HashMap<>();
+				for (final File file : files) {
+					final int[] progressValue = {0};
+					publishProgress(file, 0);
+					IProgress progress = null;
+					if (callback != null) {
+						progress = new NetworkProgress() {
+							@Override
+							public void progress(int deltaWork) {
+								progressValue[0] += deltaWork;
+								publishProgress(file, progressValue[0]);
+							}
+						};
+					}
+					try {
+						Map<String, String> params = new HashMap<>(parameters);
+						if (callback != null) {
+							Map<String, String> additionalParams = callback.getAdditionalParams(file);
+							if (additionalParams != null) {
+								params.putAll(additionalParams);
+							}
+						}
+						boolean firstPrm = !url.contains("?");
+						StringBuilder sb = new StringBuilder(url);
+						for (Entry<String, String> entry : params.entrySet()) {
+							sb.append(firstPrm ? "?" : "&").append(entry.getKey()).append("=").append(URLEncoder.encode(entry.getValue(), "UTF-8"));
+							firstPrm = false;
+						}
+						String res = downloadFile(sb.toString(), file, true, progress);
+						if (res != null) {
+							errors.put(file, res);
+						} else {
+							if (callback != null) {
+								callback.onFileDownloadedAsync(file);
+							}
+						}
+					} catch (Exception e) {
+						errors.put(file, e.getMessage());
+					}
+					publishProgress(file, Integer.MAX_VALUE);
+				}
+				return errors;
+			}
+
+			@Override
+			protected void onProgressUpdate(Object... objects) {
+				if (callback != null) {
+					callback.onFileDownloadProgress((File) objects[0], (Integer) objects[1]);
+				}
+			}
+
+			@Override
+			protected void onPostExecute(@NonNull Map<File, String> errors) {
+				if (callback != null) {
+					callback.onFilesDownloadDone(errors);
+				}
+			}
+
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+	}
+
+	public static String sendRequest(@Nullable OsmandApplication ctx, @NonNull String url,
+									 @Nullable Map<String, String> parameters,
+									 @Nullable String userOperation, boolean toastAllowed, boolean post) {
 		HttpURLConnection connection = null;
 		try {
 			
@@ -177,7 +270,7 @@ public class AndroidNetworkUtils {
 			String paramsSeparator = url.indexOf('?') == -1 ? "?" : "&";
 			connection = NetworkUtils.getHttpURLConnection(params == null || post ? url : url + paramsSeparator + params);
 			connection.setRequestProperty("Accept-Charset", "UTF-8");
-			connection.setRequestProperty("User-Agent", Version.getFullVersion(ctx));
+			connection.setRequestProperty("User-Agent", ctx != null ? Version.getFullVersion(ctx) : "OsmAnd");
 			connection.setConnectTimeout(15000);
 			if (params != null && post) {
 				connection.setDoInput(true);
@@ -200,9 +293,10 @@ public class AndroidNetworkUtils {
 			}
 
 			if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
-				if (toastAllowed) {
-					String msg = userOperation
-							+ " " + ctx.getString(R.string.failed_op) + ": " + connection.getResponseMessage();
+				if (toastAllowed && ctx != null) {
+					String msg = (!Algorithms.isEmpty(userOperation) ? userOperation + " " : "")
+							+ ctx.getString(R.string.failed_op) + ": "
+							+ connection.getResponseMessage();
 					showToast(ctx, msg);
 				}
 			} else {
@@ -233,17 +327,17 @@ public class AndroidNetworkUtils {
 
 		} catch (NullPointerException e) {
 			// that's tricky case why NPE is thrown to fix that problem httpClient could be used
-			if (toastAllowed) {
+			if (toastAllowed && ctx != null) {
 				String msg = ctx.getString(R.string.auth_failed);
 				showToast(ctx, msg);
 			}
 		} catch (MalformedURLException e) {
-			if (toastAllowed) {
+			if (toastAllowed && ctx != null) {
 				showToast(ctx, MessageFormat.format(ctx.getResources().getString(R.string.shared_string_action_template)
 						+ ": " + ctx.getResources().getString(R.string.shared_string_unexpected_error), userOperation));
 			}
 		} catch (IOException e) {
-			if (toastAllowed) {
+			if (toastAllowed && ctx != null) {
 				showToast(ctx, MessageFormat.format(ctx.getResources().getString(R.string.shared_string_action_template)
 						+ ": " + ctx.getResources().getString(R.string.shared_string_io_error), userOperation));
 			}
@@ -277,18 +371,23 @@ public class AndroidNetworkUtils {
 		return res;
 	}
 
-	public static String downloadFile(@NonNull String url, @NonNull File fileToSave) {
+	public static String downloadFile(@NonNull String url, @NonNull File fileToSave, boolean gzip, @Nullable IProgress progress) {
 		String error = null;
 		try {
 			URLConnection connection = NetworkUtils.getHttpURLConnection(url);
 			connection.setConnectTimeout(CONNECTION_TIMEOUT);
 			connection.setReadTimeout(CONNECTION_TIMEOUT);
-			BufferedInputStream inputStream = new BufferedInputStream(connection.getInputStream(), 8 * 1024);
+			if (gzip) {
+				connection.setRequestProperty("Accept-Encoding", "deflate, gzip");
+			}
+			InputStream inputStream = gzip
+					? new GZIPInputStream(connection.getInputStream())
+					: new BufferedInputStream(connection.getInputStream(), 8 * 1024);
 			fileToSave.getParentFile().mkdirs();
 			OutputStream stream = null;
 			try {
 				stream = new FileOutputStream(fileToSave);
-				Algorithms.streamCopy(inputStream, stream);
+				Algorithms.streamCopy(inputStream, stream, progress, 1024);
 				stream.flush();
 			} finally {
 				Algorithms.closeStream(inputStream);
@@ -307,12 +406,17 @@ public class AndroidNetworkUtils {
 	private static final String BOUNDARY = "CowMooCowMooCowCowCow";
 
 	public static String uploadFile(@NonNull String urlText, @NonNull File file, boolean gzip,
-									@NonNull Map<String, String> additionalParams, @Nullable Map<String, String> headers) throws IOException {
-		return uploadFile(urlText, new FileInputStream(file), file.getName(), gzip, additionalParams, headers);
+									@NonNull Map<String, String> additionalParams,
+									@Nullable Map<String, String> headers,
+									@Nullable IProgress progress) throws IOException {
+		return uploadFile(urlText, new FileInputStream(file), file.getName(), gzip, additionalParams, headers, progress);
 	}
 
-	public static String uploadFile(@NonNull String urlText, @NonNull InputStream inputStream, @NonNull String fileName, boolean gzip,
-									Map<String, String> additionalParams, @Nullable Map<String, String> headers) {
+	public static String uploadFile(@NonNull String urlText, @NonNull InputStream inputStream,
+									@NonNull String fileName, boolean gzip,
+									@NonNull Map<String, String> additionalParams,
+									@Nullable Map<String, String> headers,
+									@Nullable IProgress progress) {
 		URL url;
 		try {
 			boolean firstPrm = !urlText.contains("?");
@@ -350,11 +454,11 @@ public class AndroidNetworkUtils {
 			ous.flush();
 			if (gzip) {
 				GZIPOutputStream gous = new GZIPOutputStream(ous, 1024);
-				Algorithms.streamCopy(bis, gous);
+				Algorithms.streamCopy(bis, gous, progress, 1024);
 				gous.flush();
 				gous.finish();
 			} else {
-				Algorithms.streamCopy(bis, ous);
+				Algorithms.streamCopy(bis, ous, progress, 1024);
 			}
 
 			ous.write(("\r\n--" + BOUNDARY + "--\r\n").getBytes());
@@ -406,8 +510,19 @@ public class AndroidNetworkUtils {
 			@NonNull
 			protected Map<File, String> doInBackground(Void... v) {
 				Map<File, String> errors = new HashMap<>();
-				for (File file : files) {
+				for (final File file : files) {
+					final int[] progressValue = {0};
 					publishProgress(file, 0);
+					IProgress progress = null;
+					if (callback != null) {
+						progress = new NetworkProgress() {
+							@Override
+							public void progress(int deltaWork) {
+								progressValue[0] += deltaWork;
+								publishProgress(file, progressValue[0]);
+							}
+						};
+					}
 					try {
 						Map<String, String> params = new HashMap<>(parameters);
 						if (callback != null) {
@@ -416,14 +531,14 @@ public class AndroidNetworkUtils {
 								params.putAll(additionalParams);
 							}
 						}
-						String res = uploadFile(url, file, gzip, params, headers);
+						String res = uploadFile(url, file, gzip, params, headers, progress);
 						if (res != null) {
 							errors.put(file, res);
 						}
 					} catch (Exception e) {
 						errors.put(file, e.getMessage());
 					}
-					publishProgress(file, 100);
+					publishProgress(file, Integer.MAX_VALUE);
 				}
 				return errors;
 			}
@@ -482,6 +597,41 @@ public class AndroidNetworkUtils {
 
 		public boolean isPost() {
 			return post;
+		}
+	}
+
+	private abstract static class NetworkProgress implements IProgress {
+		@Override
+		public void startTask(String taskName, int work) {
+		}
+
+		@Override
+		public void startWork(int work) {
+		}
+
+		@Override
+		public abstract void progress(int deltaWork);
+
+		@Override
+		public void remaining(int remainingWork) {
+		}
+
+		@Override
+		public void finishTask() {
+		}
+
+		@Override
+		public boolean isIndeterminate() {
+			return false;
+		}
+
+		@Override
+		public boolean isInterrupted() {
+			return false;
+		}
+
+		@Override
+		public void setGeneralProgress(String genProgress) {
 		}
 	}
 }

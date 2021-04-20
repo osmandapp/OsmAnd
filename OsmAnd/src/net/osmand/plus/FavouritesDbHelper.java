@@ -146,6 +146,14 @@ public class FavouritesDbHelper {
 		}
 	}
 
+	public long getLastUploadedTime() {
+		return context.getSettings().FAVORITES_LAST_UPLOADED_TIME.get();
+	}
+
+	public void setLastUploadedTime(long time) {
+		context.getSettings().FAVORITES_LAST_UPLOADED_TIME.set(time);
+	}
+
 	@Nullable
 	public Drawable getColoredIconForGroup(String groupName) {
 		String groupIdName = FavoriteGroup.convertDisplayNameToGroupIdName(context, groupName);

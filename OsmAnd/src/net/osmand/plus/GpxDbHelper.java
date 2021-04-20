@@ -78,6 +78,12 @@ public class GpxDbHelper {
 		return res;
 	}
 
+	public boolean updateLastUploadedTime(GpxDataItem item, long fileLastUploadedTime) {
+		boolean res = db.updateLastUploadedTime(item, fileLastUploadedTime);
+		putToCache(item);
+		return res;
+	}
+
 	public boolean updateGradientScalePalette(@NonNull GpxDataItem item, @NonNull GradientScaleType gradientScaleType, int[] palette) {
 		boolean res = db.updateGradientScaleColor(item, gradientScaleType, palette);
 		putToCache(item);

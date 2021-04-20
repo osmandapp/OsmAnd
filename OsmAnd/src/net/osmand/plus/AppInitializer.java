@@ -31,6 +31,7 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.plus.activities.LocalIndexHelper;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.SavingTrackHelper;
+import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
@@ -473,6 +474,7 @@ public class AppInitializer implements IProgress {
 		app.oprAuthHelper = startupInit(new OprAuthHelper(app), OprAuthHelper.class);
 		app.onlineRoutingHelper = startupInit(new OnlineRoutingHelper(app), OnlineRoutingHelper.class);
 		app.itineraryHelper = startupInit(new ItineraryHelper(app), ItineraryHelper.class);
+		app.backupHelper = startupInit(new BackupHelper(app), BackupHelper.class);
 
 		initOpeningHoursParser();
 	}
