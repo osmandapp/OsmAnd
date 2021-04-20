@@ -291,10 +291,12 @@ public class GpxSelectionHelper {
 		return group;
 	}
 
-	private String getGroupName(GPXFile g) {
+	public String getGroupName(GPXFile g) {
 		String name = g.path;
 		if (g.showCurrentTrack) {
 			name = getString(R.string.shared_string_currently_recording_track);
+		} else if (Algorithms.isEmpty(name)) {
+			name = getString(R.string.current_route);
 		} else {
 			int i = name.lastIndexOf('/');
 			if (i >= 0) {

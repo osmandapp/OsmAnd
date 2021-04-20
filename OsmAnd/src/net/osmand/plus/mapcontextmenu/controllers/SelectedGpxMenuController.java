@@ -7,12 +7,13 @@ import android.os.AsyncTask;
 import androidx.annotation.NonNull;
 
 import net.osmand.AndroidUtils;
-import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.GpxSelectionHelper;
+import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
+import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -24,7 +25,6 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.TrackMenuFragment;
 import net.osmand.util.Algorithms;
 
-import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
@@ -93,27 +93,14 @@ public class SelectedGpxMenuController extends MenuController {
 
 		@Override
 		protected GpxSelectionHelper.GpxDisplayItem doInBackground(Void... voids) {
-			GpxSelectionHelper.GpxDisplayGroup gpxDisplayGroup = null;
-			GPXUtilities.GPXFile gpxFile = null;
-			GPXUtilities.Track generalTrack = null;
-			if (selectedGpxFile.getGpxFile().path != null) {
-				gpxFile = GPXUtilities.loadGPXFile(new File(selectedGpxFile.getGpxFile().path));
-			}
-			if (gpxFile != null) {
-				generalTrack = gpxFile.getGeneralTrack();
-			}
-			if (generalTrack != null) {
-				gpxFile.addGeneralTrack();
-				gpxDisplayGroup = app.getSelectedGpxHelper().buildGeneralGpxDisplayGroup(gpxFile, generalTrack);
-			} else if (gpxFile != null && gpxFile.tracks.size() > 0) {
-				gpxDisplayGroup = app.getSelectedGpxHelper().buildGeneralGpxDisplayGroup(gpxFile, gpxFile.tracks.get(0));
-			}
-			List<GpxSelectionHelper.GpxDisplayItem> items = null;
-			if (gpxDisplayGroup != null) {
-				items = gpxDisplayGroup.getModifiableList();
-			}
-			if (items != null && items.size() > 0) {
-				return items.get(0);
+			GPXFile gpxFile = selectedGpxFile.getGpxFile();
+			if (gpxFile.tracks.size() > 0) {
+				GpxDisplayGroup gpxDisplayGroup = app.getSelectedGpxHelper().buildGeneralGpxDisplayGroup(gpxFile, gpxFile.tracks.get(0));
+
+				List<GpxDisplayItem> items = gpxDisplayGroup.getModifiableList();
+				if (!Algorithms.isEmpty(items)) {
+					return items.get(0);
+				}
 			}
 			return null;
 		}
