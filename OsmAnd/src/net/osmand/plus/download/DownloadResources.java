@@ -662,12 +662,12 @@ public class DownloadResources extends DownloadResourceGroup {
 		return res;
 	}
 
-	public static List<DownloadItem> findIndexItemsAt(OsmandApplication app, String groupTypeVoice) throws IOException {
-		DownloadIndexesThread downloadThread = app.getDownloadThread();
-		DownloadResources indexes = downloadThread.getIndexes();
-		DownloadResourceGroup groupVoice = indexes.getSubGroupById(groupTypeVoice);
-		List<DownloadItem> items = groupVoice.getIndividualDownloadItems();
-		return new ArrayList<>(items);
+	public List<DownloadItem> getDownloadItemsForGroup(String groupId) {
+		DownloadResourceGroup group = getSubGroupById(groupId);
+		if (group != null) {
+			return group.getIndividualDownloadItems();
+		}
+		return Collections.emptyList();
 	}
 
 	public static List<IndexItem> findIndexItemsAt(OsmandApplication app,
