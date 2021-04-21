@@ -8,7 +8,7 @@ import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.SavingTrackHelper;
-import net.osmand.plus.itinerary.ItineraryGroup;
+import net.osmand.plus.mapmarkers.MapMarkersGroup;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
@@ -64,7 +64,7 @@ public class DeletePointsTask extends AsyncTask<Void, Void, Void> {
 	}
 
 	private void syncGpx(GPXFile gpxFile) {
-		ItineraryGroup group = app.getItineraryHelper().getMarkersGroup(gpxFile);
+		MapMarkersGroup group = app.getMapMarkersHelper().getMarkersGroup(gpxFile);
 		if (group != null) {
 			app.getItineraryHelper().runSynchronization(group);
 		}

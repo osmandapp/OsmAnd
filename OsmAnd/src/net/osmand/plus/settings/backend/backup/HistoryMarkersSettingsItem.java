@@ -12,7 +12,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
-import net.osmand.plus.itinerary.ItineraryGroup;
+import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.util.Algorithms;
@@ -46,7 +46,7 @@ public class HistoryMarkersSettingsItem extends CollectionSettingsItem<MapMarker
 	protected void init() {
 		super.init();
 		markersHelper = app.getMapMarkersHelper();
-		existingItems = new ArrayList<>(app.getItineraryHelper().getMapMarkersFromDefaultGroups(true));
+		existingItems = new ArrayList<>(markersHelper.getMapMarkersFromDefaultGroups(true));
 	}
 
 	@NonNull
@@ -122,10 +122,10 @@ public class HistoryMarkersSettingsItem extends CollectionSettingsItem<MapMarker
 		}
 	}
 
-	public ItineraryGroup getMarkersGroup() {
+	public MapMarkersGroup getMarkersGroup() {
 		String name = app.getString(R.string.markers_history);
 		String groupId = ExportSettingsType.HISTORY_MARKERS.name();
-		ItineraryGroup markersGroup = new ItineraryGroup(groupId, name, ItineraryGroup.ANY_TYPE);
+		MapMarkersGroup markersGroup = new MapMarkersGroup(groupId, name, MapMarkersGroup.ANY_TYPE);
 		markersGroup.setMarkers(items);
 		return markersGroup;
 	}

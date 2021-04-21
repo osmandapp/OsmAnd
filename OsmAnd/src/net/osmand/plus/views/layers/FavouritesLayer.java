@@ -106,7 +106,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 				List<LatLon> smallObjectsLatLon = new ArrayList<>();
 				for (FavoriteGroup group : favouritesDbHelper.getFavoriteGroups()) {
 					List<Pair<FavouritePoint, MapMarker>> fullObjects = new ArrayList<>();
-					boolean synced = view.getApplication().getItineraryHelper().getMarkersGroup(group) != null;
+					boolean synced = mapMarkersHelper.getMarkersGroup(group) != null;
 					for (FavouritePoint favoritePoint : group.getPoints()) {
 						double lat = favoritePoint.getLatitude();
 						double lon = favoritePoint.getLongitude();
