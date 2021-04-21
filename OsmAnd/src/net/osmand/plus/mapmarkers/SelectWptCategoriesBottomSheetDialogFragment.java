@@ -147,7 +147,7 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 			group = mapMarkersHelper.addOrEnableGroup(gpxFile);
 		}
 		mapMarkersHelper.updateGroupWptCategories(group, selectedCategories);
-		app.getItineraryHelper().runSynchronization(group);
+		mapMarkersHelper.runSynchronization(group);
 	}
 
 	private boolean isAllChecked() {

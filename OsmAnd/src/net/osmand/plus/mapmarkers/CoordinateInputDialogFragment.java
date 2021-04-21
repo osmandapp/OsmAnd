@@ -171,7 +171,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		MapMarkersHelper helper = getMyApplication().getMapMarkersHelper();
 		MapMarkersGroup group = helper.getMarkersGroup(gpxFile);
 		if (group != null) {
-			getMyApplication().getItineraryHelper().runSynchronization(group);
+			helper.runSynchronization(group);
 		}
 	}
 

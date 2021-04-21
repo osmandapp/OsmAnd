@@ -20,6 +20,8 @@ import net.osmand.data.FavouritePoint.BackgroundType;
 import net.osmand.data.LatLon;
 import net.osmand.data.WptLocationPoint;
 import net.osmand.plus.GpxSelectionHelper;
+import net.osmand.plus.mapmarkers.MapMarkersHelper;
+import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -29,7 +31,6 @@ import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor.OnDismissListener;
-import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.track.SaveGpxAsyncTask;
 import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.util.Algorithms;
@@ -237,9 +238,10 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 	private void syncGpx(GPXFile gpxFile) {
 		OsmandApplication app = getMyApplication();
 		if (app != null) {
-			MapMarkersGroup group = app.getMapMarkersHelper().getMarkersGroup(gpxFile);
+			MapMarkersHelper helper = app.getMapMarkersHelper();
+			MapMarkersGroup group = helper.getMarkersGroup(gpxFile);
 			if (group != null) {
-				app.getItineraryHelper().runSynchronization(group);
+				helper.runSynchronization(group);
 			}
 		}
 	}
