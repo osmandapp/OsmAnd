@@ -42,6 +42,7 @@
 	</com.google.android.material.appbar.AppBarLayout>
 
 	<ScrollView
+		android:id="@+id/main_view"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent">
 
@@ -120,6 +121,13 @@
 				android:text="Actions"
 				android:textColor="?android:textColorPrimary"
 				android:textSize="@dimen/default_list_text_size" />
+
+			<include
+				android:id="@+id/btn_refresh"
+				layout="@layout/bottom_sheet_dialog_button"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/dialog_button_height"
+				android:layout_marginTop="@dimen/content_padding_half" />
 
 			<include
 				android:id="@+id/btn_backup"

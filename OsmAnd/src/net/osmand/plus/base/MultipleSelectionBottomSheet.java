@@ -94,9 +94,9 @@ public class MultipleSelectionBottomSheet extends SelectionBottomSheet {
 	}
 
 	@Override
-	protected void notifyUiInitialized() {
+	protected void notifyUiCreated() {
 		onSelectedItemsChanged();
-		super.notifyUiInitialized();
+		super.notifyUiCreated();
 	}
 
 	private void onSelectedItemsChanged() {

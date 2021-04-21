@@ -490,7 +490,7 @@ public class DownloadResources extends DownloadResourceGroup {
 	private void replaceIndividualSrtmWithGroups(@NonNull WorldRegion region) {
 		DownloadResourceGroup group = getRegionMapsGroup(region);
 		if (group != null) {
-			boolean useMetersByDefault = SrtmDownloadItem.shouldUseMetersByDefault(app);
+			boolean useMetersByDefault = SrtmDownloadItem.isUseMetricByDefault(app);
 			boolean listModified = false;
 			DownloadActivityType srtmType = DownloadActivityType.SRTM_COUNTRY_FILE;
 			List<DownloadItem> individualItems = group.getIndividualDownloadItems();

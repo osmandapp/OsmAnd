@@ -52,6 +52,7 @@ import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.actions.OsmAndDialogs;
 import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPIImpl;
+import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadService;
@@ -169,6 +170,7 @@ public class OsmandApplication extends MultiDexApplication {
 	MeasurementEditingContext measurementEditingContext;
 	OnlineRoutingHelper onlineRoutingHelper;
 	ItineraryHelper itineraryHelper;
+	BackupHelper backupHelper;
 
 	private Map<String, Builder> customRoutingConfigs = new ConcurrentHashMap<>();
 	private File externalStorageDirectory;
@@ -472,6 +474,10 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public ItineraryHelper getItineraryHelper() {
 		return itineraryHelper;
+	}
+
+	public BackupHelper getBackupHelper() {
+		return backupHelper;
 	}
 
 	public TransportRoutingHelper getTransportRoutingHelper() {

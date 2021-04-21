@@ -1172,6 +1172,9 @@ public class OsmandSettings {
 	public final OsmandPreference<String> BACKUP_ACCESS_TOKEN = new StringPreference(this, "backup_access_token", "").makeGlobal();
 	public final OsmandPreference<String> BACKUP_ACCESS_TOKEN_UPDATE_TIME = new StringPreference(this, "backup_access_token_update_time", "").makeGlobal();
 
+	public final OsmandPreference<Long> FAVORITES_LAST_UPLOADED_TIME = new LongPreference(this, "favorites_last_uploaded_time", 0L).makeGlobal();
+	public final OsmandPreference<Long> BACKUP_LAST_UPLOADED_TIME = new LongPreference(this, "backup_last_uploaded_time", 0L).makeGlobal();
+
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<String> USER_OSM_BUG_NAME =
 			new StringPreference(this, "user_osm_bug_name", "NoName/OsmAnd").makeGlobal().makeShared();

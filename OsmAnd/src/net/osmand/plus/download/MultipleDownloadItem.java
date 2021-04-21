@@ -139,7 +139,7 @@ public class MultipleDownloadItem extends DownloadItem {
 		if (obj instanceof IndexItem) {
 			return (IndexItem) obj;
 		} else if (obj instanceof SrtmDownloadItem) {
-			return ((SrtmDownloadItem) obj).getIndexItem();
+			return ((SrtmDownloadItem) obj).getDefaultIndexItem();
 		}
 		return null;
 	}
@@ -147,9 +147,6 @@ public class MultipleDownloadItem extends DownloadItem {
 	@Nullable
 	@Override
 	public String getAdditionalDescription(Context ctx) {
-		for (DownloadItem item : items) {
-			return item.getAdditionalDescription(ctx);
-		}
 		return null;
 	}
 
