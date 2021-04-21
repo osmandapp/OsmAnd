@@ -28,7 +28,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.itinerary.ItineraryGroup;
+import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -179,7 +179,7 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 
 			final MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 			final FavoriteGroup favGroup = this.group;
-			final ItineraryGroup markersGr = app.getItineraryHelper().getMarkersGroup(this.group);
+			final MapMarkersGroup markersGr = markersHelper.getMarkersGroup(this.group);
 			final boolean synced = markersGr != null;
 
 			BaseBottomSheetItem markersGroupItem = new SimpleBottomSheetItem.Builder()
@@ -192,7 +192,7 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 							if (synced) {
 								markersHelper.removeMarkersGroup(markersGr);
 							} else {
-								app.getItineraryHelper().addOrEnableGroup(favGroup);
+								markersHelper.addOrEnableGroup(favGroup);
 							}
 							dismiss();
 							MapActivity.launchMapActivityMoveToTop(getActivity());
