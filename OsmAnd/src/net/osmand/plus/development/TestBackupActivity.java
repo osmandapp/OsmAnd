@@ -3,12 +3,14 @@ package net.osmand.plus.development;
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Pair;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 
@@ -23,6 +25,7 @@ import net.osmand.plus.backup.BackupHelper.BackupInfo;
 import net.osmand.plus.backup.BackupHelper.OnRegisterUserListener;
 import net.osmand.plus.backup.BackupTask;
 import net.osmand.plus.backup.BackupTask.OnBackupListener;
+import net.osmand.plus.backup.GpxFileInfo;
 import net.osmand.plus.backup.PrepareBackupTask;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
 import net.osmand.plus.backup.UserFile;
@@ -32,10 +35,14 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.Map;
 import java.util.Map.Entry;
 
 public class TestBackupActivity extends OsmandActionBarActivity {
+
+	private static final DateFormat DF = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM);
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
@@ -196,7 +203,7 @@ public class TestBackupActivity extends OsmandActionBarActivity {
 								} else if (uploadErrors == null && downloadErrors == null) {
 									description = "No data";
 								} else {
-									description = getBackupDescription(uploadErrors, downloadErrors, deleteErrors, error);
+									description = getBackupErrorsDescription(uploadErrors, downloadErrors, deleteErrors, error);
 								}
 								a.infoView.setText(description);
 								a.infoView.requestFocus();
@@ -224,7 +231,7 @@ public class TestBackupActivity extends OsmandActionBarActivity {
 								} else if (uploadErrors == null && downloadErrors == null) {
 									description = "No data";
 								} else {
-									description = getBackupDescription(uploadErrors, downloadErrors, deleteErrors, error);
+									description = getBackupErrorsDescription(uploadErrors, downloadErrors, deleteErrors, error);
 								}
 								a.infoView.setText(description);
 								a.infoView.requestFocus();
@@ -240,7 +247,7 @@ public class TestBackupActivity extends OsmandActionBarActivity {
 		prepareBackup();
 	}
 
-	private String getBackupDescription(@Nullable Map<File, String> uploadErrors, @Nullable Map<File, String> downloadErrors, @Nullable Map<UserFile, String> deleteErrors, @Nullable String error) {
+	private String getBackupErrorsDescription(@Nullable Map<File, String> uploadErrors, @Nullable Map<File, String> downloadErrors, @Nullable Map<UserFile, String> deleteErrors, @Nullable String error) {
 		StringBuilder sb = new StringBuilder();
 		if (!Algorithms.isEmpty(uploadErrors)) {
 			sb.append("--- Upload errors ---").append("\n");
@@ -263,6 +270,48 @@ public class TestBackupActivity extends OsmandActionBarActivity {
 		return sb.length() == 0 ? "OK" : sb.toString();
 	}
 
+	private String getBackupDescription(@NonNull BackupInfo backupInfo) {
+		StringBuilder sb = new StringBuilder();
+		if (!Algorithms.isEmpty(backupInfo.filesToUpload)) {
+			sb.append("\n").append("--- Upload ---").append("\n");
+			for (GpxFileInfo info : backupInfo.filesToUpload) {
+				sb.append(info.getFileName(true))
+						.append(" L: ").append(DF.format(new Date(info.getFileDate())))
+						.append(" U: ").append(DF.format(new Date(info.uploadTime)))
+						.append("\n");
+			}
+		}
+		if (!Algorithms.isEmpty(backupInfo.filesToDownload)) {
+			sb.append("\n").append("--- Download ---").append("\n");
+			for (UserFile userFile : backupInfo.filesToDownload) {
+				sb.append(userFile.getName())
+						.append(" R: ").append(DF.format(new Date(userFile.getClienttimems())))
+						.append("\n");
+			}
+		}
+		if (!Algorithms.isEmpty(backupInfo.filesToDelete)) {
+			sb.append("\n").append("--- Delete ---").append("\n");
+			for (UserFile userFile : backupInfo.filesToDelete) {
+				sb.append(userFile.getName())
+						.append(" R: ").append(DF.format(new Date(userFile.getClienttimems())))
+						.append("\n");
+			}
+		}
+		if (!Algorithms.isEmpty(backupInfo.filesToMerge)) {
+			sb.append("\n").append("--- Conflicts ---").append("\n");
+			for (Pair<GpxFileInfo, UserFile> localRemote : backupInfo.filesToMerge) {
+				GpxFileInfo local = localRemote.first;
+				UserFile remote = localRemote.second;
+				sb.append(local.getFileName(true))
+						.append(" L: ").append(DF.format(new Date(local.getFileDate())))
+						.append(" U: ").append(DF.format(new Date(local.uploadTime)))
+						.append(" R: ").append(DF.format(new Date(remote.getClienttimems())))
+						.append("\n");
+			}
+		}
+		return sb.toString();
+	}
+
 	private void prepareBackup() {
 		final WeakReference<TestBackupActivity> activityRef = new WeakReference<>(this);
 		PrepareBackupTask prepareBackupTask = new PrepareBackupTask(this, new OnPrepareBackupListener() {
@@ -271,16 +320,17 @@ public class TestBackupActivity extends OsmandActionBarActivity {
 				TestBackupActivity.this.backupInfo = backupInfo;
 				TestBackupActivity a = activityRef.get();
 				if (AndroidUtils.isActivityNotDestroyed(a)) {
-					String description;
+					String description = "Last uploaded: " + DF.format(new Date(settings.BACKUP_LAST_UPLOADED_TIME.get())) + "\n\n";
 					if (error != null) {
-						description = error;
+						description += error;
 					} else if (backupInfo == null) {
-						description = "No data";
+						description += "No data";
 					} else {
-						description = "Files to upload: " + backupInfo.filesToUpload.size()
+						description += "Files to upload: " + backupInfo.filesToUpload.size()
 								+ "\nFiles to download: " + backupInfo.filesToDownload.size()
 								+ "\nFiles to delete: " + backupInfo.filesToDelete.size()
-								+ "\nConflicts: " + backupInfo.filesToMerge.size();
+								+ "\nConflicts: " + backupInfo.filesToMerge.size()
+								+ "\n" + getBackupDescription(backupInfo);
 					}
 					a.infoView.setText(description);
 					a.infoView.requestFocus();
