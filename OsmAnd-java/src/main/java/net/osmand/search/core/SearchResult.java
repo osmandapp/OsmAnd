@@ -62,7 +62,7 @@ public class SearchResult {
 		double res = 1;
 		if (match) {
 			res = ObjectType.getTypeWeight(match ? objectType : null);
-			fullCompleteMatch = getSelfPhrase().equals(name);
+			fullCompleteMatch = getSelfPhrase().equalsIgnoreCase(name);
 			if (fullCompleteMatch) {
 				res = res * 10;
 			}
