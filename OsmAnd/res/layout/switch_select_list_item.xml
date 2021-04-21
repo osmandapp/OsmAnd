@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center_vertical"
-    android:minHeight="48dp"
-    android:orientation="horizontal"
-    android:paddingLeft="@dimen/list_content_padding"
-    android:paddingRight="@dimen/list_content_padding"
+<LinearLayout xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:gravity="center_vertical"
+	android:minHeight="48dp"
+	android:orientation="horizontal"
+	android:paddingLeft="@dimen/list_content_padding"
+	android:paddingRight="@dimen/list_content_padding"
 	android:paddingEnd="@dimen/list_content_padding"
 	android:paddingStart="@dimen/list_content_padding">
 
@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="Avoid selected roads"
+            tools:text="Avoid selected roads"
             android:textSize="@dimen/default_list_text_size"/>
 
         <TextView
@@ -44,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="Select roads you want to avoid during navigation"
+            tools:text="Select roads you want to avoid during navigation"
             android:textSize="@dimen/default_desc_text_size"/>
 
     </LinearLayout>
