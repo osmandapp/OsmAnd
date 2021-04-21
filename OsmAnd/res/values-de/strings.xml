@@ -4057,7 +4057,11 @@
     <string name="customize_route_line">Routenlinie anpassen</string>
     <string name="shared_string_route_line">Routenlinie</string>
     <string name="specify_color_for_map_mode">Legen Sie die Farbe für den Kartenmodus fest: %1$s.</string>
-    <string name="release_4_0_beta">• OsmAnd Live-Updates nach \"Downloads &gt; Updates\" verschoben
+    <string name="release_4_0_beta">• Option zum Herunterladen von Höhenlinien in Fuß zugefügt
+\n
+\n• Routenplanung im Querformat: Registerkarten zum Umschalten zwischen Punkten oder Diagrammen hinzugefügt
+\n
+\n• OsmAnd Live-Updates nach \"Downloads &gt; Updates\" verschoben
 \n
 \n• Tracks können nun nach Höhe, Geschwindigkeit oder Steigung eingefärbt werden.
 \n
@@ -4089,4 +4093,8 @@
     <string name="announce_when_exceeded">Meldung bei Überschreitung</string>
     <string name="user_points">Anwenderpunkte</string>
     <string name="output">Leistung</string>
+    <string name="shared_string_feet">Fuß</string>
+    <string name="srtm_unit_format">Einheit der Höhenlinien</string>
+    <string name="srtm_download_list_help_message">OsmAnd liefert Höhenlinien-Daten in Metern und Fuß. Sie müssen die Datei erneut herunterladen, um das Format zu ändern.</string>
+    <string name="srtm_download_single_help_message">Bitte wählen Sie das gewünschte Format. Sie müssen die Datei erneut herunterladen, um das Format zu ändern.</string>
 </resources>

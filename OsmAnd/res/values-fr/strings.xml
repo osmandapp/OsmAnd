@@ -3275,7 +3275,7 @@
     <string name="add_new_profile_q">Ajouter le profil \'%1$s\' \?</string>
     <string name="save_heading">Inclure la direction</string>
     <string name="save_heading_descr">Inclure la direction de chaque point lors de l\'enregistrement d\'une trace.</string>
-    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Afficher le réseau de nœuds de pistes cyclables</string>
+    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Afficher les itinéraires cyclables du réseau de nœuds</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Nœuds de transport</string>
     <string name="personal_category_name">Personnel</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
@@ -4040,9 +4040,13 @@
     <string name="lost_data_warning">Toutes les données non enregistrées seront perdues.</string>
     <string name="show_start_dialog">Afficher la boîte de dialogue de démarrage</string>
     <string name="trip_recording_show_start_dialog_setting">Si désactivé, l\'enregistrement débutera dès appui sur le gadget ou dans le menu (sans demande de confirmation).</string>
-    <string name="release_4_0_beta">- Les mises à jour d\'OsmAnd Live ont été déplacées vers \"Téléchargements &gt; Mises à jour\"
+    <string name="release_4_0_beta">- Ajout d\'une option pour télécharger les Courbes de niveau en pieds
 \n
-\n - Les traces peuvent maintenant être colorées par altitude, vitesse ou pente.
+\n- Planification d\'itinéraires en paysage : ajout d’onglets pour basculer entre Points et Graphs 
+\n
+\n- Les mises à jour d\'OsmAnd Live ont été déplacées vers \"Téléchargements &gt; Mises à jour\"
+\n
+\n - Les traces peuvent maintenant être colorées par altitude, vitesse ou pente
 \n
 \n - Ajout d\'une option pour modifier l\'apparence de la ligne d\'itinéraire en navigation
 \n
@@ -4075,4 +4079,8 @@
     <string name="exit_number">Numéro de sortie</string>
     <string name="announce_when_exceeded">Annoncer en cas de dépassement</string>
     <string name="output">Sortie</string>
+    <string name="srtm_download_list_help_message">OsmAnd fournit des données sur les courbes de niveau en mètres et en pieds. Vous devrez à nouveau télécharger le fichier pour modifier le format.</string>
+    <string name="srtm_download_single_help_message">Veuillez sélectionner le format souhaité. Vous devrez à nouveau télécharger le fichier pour modifier le format.</string>
+    <string name="srtm_unit_format">Format d\'unité pour les courbes de niveau</string>
+    <string name="shared_string_feet">pieds</string>
 </resources>

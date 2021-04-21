@@ -109,7 +109,7 @@
     <string name="get_telegram_description_continue">Kérjük, telepítse a Telegramot és hozzon létre egy fiókot.</string>
     <string name="get_telegram_after_creating_account">Utána használhatja ezt az alkalmazást.</string>
     <string name="shared_string_all">Minden</string>
-    <string name="shared_string_off">Kikapcsolás</string>
+    <string name="shared_string_off">Kikapcsolva</string>
     <string name="hours_and_minutes_format">%1$d óra %2$d perc</string>
     <string name="minutes_format">%1$d perc</string>
     <string name="shared_string_install">Telepítés</string>

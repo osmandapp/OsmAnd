@@ -4047,7 +4047,11 @@
     <string name="shared_string_route_line">路線</string>
     <string name="route_line_use_map_style_appearance">路線將會使用 %1$s 在選定的地圖樣式上指定的：%2$s。</string>
     <string name="specify_color_for_map_mode">指定地圖模式的顏色：%1$s。</string>
-    <string name="release_4_0_beta">• OsmAnd Live 更新移動至「下載 &gt; 更新」
+    <string name="release_4_0_beta">• 新增以英呎為單位下載等高線
+\n
+\n • 規劃路線樣式：新增切換點與圖形的分頁
+\n
+\n • OsmAnd Live 更新移動至「下載 &gt; 更新」
 \n
 \n • 軌跡現在可以使用海拔、速度或坡度來填色
 \n
@@ -4079,4 +4083,8 @@
     <string name="user_points">使用者點</string>
     <string name="output">輸出</string>
     <string name="map_quick_action_pattern">%1$s → …</string>
+    <string name="shared_string_feet">英呎</string>
+    <string name="srtm_unit_format">等高線單位格式</string>
+    <string name="srtm_download_list_help_message">OsmAnd 提供以公尺與英呎為單位的等高線資料。您將必須重新下載檔案以變更格式。</string>
+    <string name="srtm_download_single_help_message">請選取需要格式。您將必須重新下載檔案以變更格式。</string>
 </resources>

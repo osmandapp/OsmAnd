@@ -4052,7 +4052,11 @@
     <string name="rendering_attr_noNatureReserveBoundaries_name">Mörk náttúru</string>
     <string name="trip_recording_logging_interval_info">Millibil skráninga stillir tímabilið milli þess sem OsmAnd biður um staðsetningargögn.</string>
     <string name="trip_recording_show_start_dialog_setting">Ef þetta er óvirkt, mun upptaka hefjast strax eftir að ýtt er á hnappinn eða valmyndarfærsluna og staðfestingarglugga er þá sleppt.</string>
-    <string name="release_4_0_beta">• Uppfærslur OsmAnd Live færðar í \"Sótt gögn &gt; Uppfærslur\"
+    <string name="release_4_0_beta">• Bætt við möguleika á að sækja hæðarlínur í fetum
+\n
+\n• Landslag í leiðaskipulagi: bætt við flipum til að skipta á milli punkta eða grafs
+\n
+\n• Uppfærslur OsmAnd Live færðar í \"Sótt gögn &gt; Uppfærslur\"
 \n
 \n • Ferla er nú hægt að lita eftir hæð, hraða eða halla.
 \n
@@ -4091,4 +4095,8 @@
     <string name="announce_when_exceeded">Tilkynna þegar farið er yfir</string>
     <string name="user_points">Punktar notanda</string>
     <string name="map_quick_action_pattern">%1$s → …</string>
+    <string name="shared_string_feet">fet</string>
+    <string name="srtm_unit_format">Snið eininga hæðarlína</string>
+    <string name="srtm_download_list_help_message">OsmAnd býður upp á hæðalínugögn í metrum og fetum. Þú þarft að sækja skrána aftur til að breyta sniðinu.</string>
+    <string name="srtm_download_single_help_message">Veldu rétt snið eininga. Þú þarft að sækja skrána aftur til að breyta sniðinu.</string>
 </resources>
