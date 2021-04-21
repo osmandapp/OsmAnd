@@ -2124,9 +2124,12 @@ public class GpxUiHelper {
 
 
 	public static GPXFile makeGpxFromRoute(RouteCalculationResult route, OsmandApplication app) {
+		return makeGpxFromLocations(route.getRouteLocations(), app);
+	}
+
+	public static GPXFile makeGpxFromLocations(List<Location> locations, OsmandApplication app) {
 		double lastHeight = HEIGHT_UNDEFINED;
 		GPXFile gpx = new GPXUtilities.GPXFile(Version.getFullVersion(app));
-		List<Location> locations = route.getRouteLocations();
 		if (locations != null) {
 			GPXUtilities.Track track = new GPXUtilities.Track();
 			GPXUtilities.TrkSegment seg = new GPXUtilities.TrkSegment();
@@ -2139,8 +2142,7 @@ public class GpxUiHelper {
 					float h = (float) l.getAltitude();
 					point.ele = h;
 					if (lastHeight == HEIGHT_UNDEFINED && seg.points.size() > 0) {
-						for (int i = seg.points.size() - 1; i >= 0; i--) {
-							GPXUtilities.WptPt pt = seg.points.get(i);
+						for (GPXUtilities.WptPt pt : seg.points) {
 							if (Double.isNaN(pt.ele)) {
 								pt.ele = h;
 							}
@@ -2151,16 +2153,6 @@ public class GpxUiHelper {
 					lastHeight = HEIGHT_UNDEFINED;
 				}
 				seg.points.add(point);
-			}
-			if (lastHeight == HEIGHT_UNDEFINED && gpx.hasAltitude) {
-				int start = seg.points.size() - 1;
-				while (start > 0 && Double.isNaN(seg.points.get(start).ele)) {
-					start--;
-				}
-				double ele = seg.points.get(start).ele;
-				for (int i = start + 1; i < seg.points.size(); i++) {
-					seg.points.get(i).ele = ele;
-				}
 			}
 			track.segments.add(seg);
 			gpx.tracks.add(track);

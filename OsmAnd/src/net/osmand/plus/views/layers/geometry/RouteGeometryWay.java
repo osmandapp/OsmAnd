@@ -72,7 +72,7 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 				updateWay(locations, tb);
 				return;
 			}
-			GPXFile gpxFile = GpxUiHelper.makeGpxFromRoute(route, app);
+			GPXFile gpxFile = GpxUiHelper.makeGpxFromLocations(locations, app);
 			if (!gpxFile.hasAltitude) {
 				updateWay(locations, tb);
 				return;
@@ -127,11 +127,9 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 		if (scaleType != null) {
 			int lastIdx = tx.size() - 1;
 			((GeometryGradientWayStyle) style).startXY = new PointF(tx.get(lastIdx), ty.get(lastIdx));
+			((GeometryGradientWayStyle) style).endXY = new PointF(tx.get(lastIdx), ty.get(lastIdx));
 			((GeometryGradientWayStyle) style).startColor = getGradientLocationProvider().getColor(0);
 			((GeometryGradientWayStyle) style).endColor = getGradientLocationProvider().getColor(0);
-			if (lastIdx != 0) {
-				((GeometryGradientWayStyle) styles.get(lastIdx - 1)).endXY = new PointF(tx.get(lastIdx - 1), ty.get(lastIdx - 1));
-			}
 		}
 	}
 
@@ -150,7 +148,7 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 		float width = customWidth != null ? customWidth : paint.getStrokeWidth();
 		return scaleType == null ?
 				new GeometrySolidWayStyle(getContext(), color, width, customPointColor) :
-				new GeometryGradientWayStyle(getContext(), width);
+				new GeometryGradientWayStyle(getContext(), color, width);
 	}
 
 	private GeometryGradientWayStyle getGradientWayStyle() {
@@ -240,8 +238,8 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 		public PointF startXY;
 		public PointF endXY;
 
-		public GeometryGradientWayStyle(RouteGeometryWayContext context, Float width) {
-			super(context, 0xFFFFFFFF, width);
+		public GeometryGradientWayStyle(RouteGeometryWayContext context, Integer color, Float width) {
+			super(context, color, width);
 		}
 
 		@Override
