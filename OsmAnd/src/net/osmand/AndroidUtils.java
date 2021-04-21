@@ -22,6 +22,8 @@ import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.StatFs;
@@ -262,6 +264,11 @@ public class AndroidUtils {
 			return ctx.getString(R.string.ltr_or_rtl_combine_via_space, size, numSuffix);
 		}
 		return "";
+	}
+
+	public static String getFreeSpace(Context ctx, File dir) {
+		long size = AndroidUtils.getAvailableSpace(dir);
+		return AndroidUtils.formatSize(ctx, size);
 	}
 
 	public static View findParentViewById(View view, int id) {
@@ -856,11 +863,39 @@ public class AndroidUtils {
 		return result;
 	}
 
+	public static long getAvailableSpace(@NonNull OsmandApplication app) {
+		return getAvailableSpace(app.getAppPath(null));
+	}
+
+	public static long getTotalSpace(@NonNull OsmandApplication app) {
+		return getTotalSpace(app.getAppPath(null));
+	}
+
 	public static long getAvailableSpace(@Nullable File dir) {
 		if (dir != null && dir.canRead()) {
 			try {
 				StatFs fs = new StatFs(dir.getAbsolutePath());
-				return fs.getAvailableBlocksLong() * fs.getBlockSize();
+				if (VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN_MR2) {
+					return fs.getAvailableBlocksLong() * fs.getBlockSizeLong();
+				} else {
+					return fs.getAvailableBlocks() * fs.getBlockSize();
+				}
+			} catch (IllegalArgumentException e) {
+				LOG.error(e);
+			}
+		}
+		return -1;
+	}
+
+	public static long getTotalSpace(@Nullable File dir) {
+		if (dir != null && dir.canRead()) {
+			try {
+				StatFs fs = new StatFs(dir.getAbsolutePath());
+				if (VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN_MR2) {
+					return fs.getBlockCountLong() * fs.getBlockSizeLong();
+				} else {
+					return fs.getBlockCount() * fs.getBlockSize();
+				}
 			} catch (IllegalArgumentException e) {
 				LOG.error(e);
 			}
@@ -883,13 +918,6 @@ public class AndroidUtils {
 	public static float getTotalSpaceGb(File dir) {
 		if (dir.canRead()) {
 			return (float) (dir.getTotalSpace()) / (1 << 30);
-		}
-		return -1;
-	}
-
-	public static float getUsedSpaceGb(File dir) {
-		if (dir.canRead()) {
-			return getTotalSpaceGb(dir) - getFreeSpaceGb(dir);
 		}
 		return -1;
 	}

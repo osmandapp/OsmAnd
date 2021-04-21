@@ -3918,4 +3918,13 @@
     <string name="poi_jiu_jitsu">Jiu-jitsu</string>
     <string name="poi_karate">Karatê</string>
     <string name="poi_hoops">Aros</string>
+    <string name="poi_club_social">Clube social</string>
+    <string name="poi_plateau">Planalto</string>
+    <string name="poi_office_diplomatic">Escritório diplomático</string>
+    <string name="poi_kickboxing">Kickboxe</string>
+    <string name="poi_cycle_polo">Polo de bicicleta</string>
+    <string name="poi_curling">Curling</string>
+    <string name="poi_cliff_diving">Mergulho de falésia</string>
+    <string name="poi_zurkhaneh_sport">Zurkhaneh</string>
+    <string name="poi_bay_filter">Tipo de baía</string>
 </resources>

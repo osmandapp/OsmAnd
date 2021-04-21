@@ -31,7 +31,7 @@
 			tools:text="Some title" />
 
 		<net.osmand.plus.widgets.TextViewEx
-			android:id="@+id/description"
+			android:id="@+id/title_description"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_below="@+id/title"
@@ -60,6 +60,54 @@
 
 	</RelativeLayout>
 
+	<net.osmand.plus.widgets.TextViewEx
+		android:id="@+id/primary_description"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginBottom="@dimen/dialog_content_margin"
+		android:letterSpacing="@dimen/description_letter_spacing"
+		android:orientation="vertical"
+		android:paddingStart="@dimen/content_padding"
+		android:paddingLeft="@dimen/content_padding"
+		android:paddingEnd="@dimen/content_padding"
+		android:paddingRight="@dimen/content_padding"
+		android:textColor="?android:textColorPrimary"
+		android:textSize="@dimen/default_list_text_size"
+		android:visibility="gone"
+		app:typeface="@string/font_roboto_regular"
+		tools:text="@string/srtm_download_single_help_message"
+		tools:visibility="visible" />
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:id="@+id/secondary_description"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginBottom="@dimen/content_padding_small"
+		android:letterSpacing="@dimen/description_letter_spacing"
+		android:orientation="vertical"
+		android:paddingStart="@dimen/content_padding"
+		android:paddingLeft="@dimen/content_padding"
+		android:paddingEnd="@dimen/content_padding"
+		android:paddingRight="@dimen/content_padding"
+		android:textColor="?android:textColorSecondary"
+		android:textSize="@dimen/default_desc_text_size"
+		android:visibility="gone"
+		app:typeface="@string/font_roboto_regular"
+		tools:text="@string/srtm_download_list_help_message"
+		tools:visibility="visible" />
+
+	<include
+		layout="@layout/custom_radio_buttons"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/content_padding"
+		android:layout_marginLeft="@dimen/content_padding"
+		android:layout_marginEnd="@dimen/content_padding"
+		android:layout_marginRight="@dimen/content_padding"
+		android:layout_marginBottom="@dimen/content_padding_half"
+		android:visibility="gone"
+		tools:visibility="visible" />
+
 	<LinearLayout
 		android:id="@+id/select_all_button"
 		android:layout_width="match_parent"
@@ -67,12 +115,12 @@
 		android:background="?attr/selectableItemBackground"
 		android:gravity="center_vertical"
 		android:minHeight="@dimen/bottom_sheet_list_item_height"
+		android:paddingStart="@dimen/content_padding"
 		android:paddingLeft="@dimen/content_padding"
 		android:paddingTop="@dimen/content_padding_small"
+		android:paddingEnd="@dimen/content_padding"
 		android:paddingRight="@dimen/content_padding"
-		android:paddingBottom="@dimen/content_padding_small"
-		android:paddingStart="@dimen/content_padding"
-		android:paddingEnd="@dimen/content_padding">
+		android:paddingBottom="@dimen/content_padding_small">
 
 		<net.osmand.plus.widgets.TextViewEx
 			android:id="@+id/check_box_title"

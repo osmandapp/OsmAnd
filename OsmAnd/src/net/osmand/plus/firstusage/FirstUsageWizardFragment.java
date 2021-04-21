@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.StatFs;
 import android.provider.Settings.Secure;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -37,7 +36,6 @@ import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
@@ -51,12 +49,12 @@ import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.download.ui.DataStoragePlaceDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.resources.ResourceManager;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import org.json.JSONObject;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -331,7 +329,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 					FragmentActivity activity = getActivity();
 					if (!OsmAndLocationProvider.isLocationPermissionAvailable(activity)) {
 						ActivityCompat.requestPermissions(activity,
-								new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+								new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
 								FIRST_USAGE_LOCATION_PERMISSION);
 					} else {
 						app.getLocationProvider().addLocationListener(this);
@@ -387,13 +385,13 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 	@Override
 	public void onResume() {
 		super.onResume();
-		((MapActivity)getActivity()).disableDrawer();
+		((MapActivity) getActivity()).disableDrawer();
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		((MapActivity)getActivity()).enableDrawer();
+		((MapActivity) getActivity()).enableDrawer();
 	}
 
 	@Override
@@ -697,7 +695,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 			TextView freeSpaceValue = (TextView) storageView.findViewById(R.id.storage_free_space_value);
 			String freeSpaceStr = getString(R.string.storage_free_space) + ": ";
 			freeSpace.setText(freeSpaceStr);
-			freeSpaceValue.setText(getFreeSpace(settings.getExternalStorageDirectory()));
+			freeSpaceValue.setText(AndroidUtils.getFreeSpace(storageView.getContext(), settings.getExternalStorageDirectory()));
 
 			AppCompatButton changeStorageButton = (AppCompatButton) storageView.findViewById(R.id.storage_change_button);
 			if (wizardType == WizardType.MAP_DOWNLOAD) {
@@ -709,7 +707,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 					public void onClick(View v) {
 						if (!DownloadActivity.hasPermissionToWriteExternalStorage(getContext())) {
 							ActivityCompat.requestPermissions(getActivity(),
-									new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+									new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE},
 									FIRST_USAGE_REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION);
 
 						} else {
@@ -735,18 +733,6 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 		} else {
 			return getString(R.string.storage_directory_manual);
 		}
-	}
-
-	private String getFreeSpace(File dir) {
-		if (dir.canRead()) {
-			try {
-				StatFs fs = new StatFs(dir.getAbsolutePath());
-				return AndroidUtils.formatSize(getActivity(), (long) fs.getAvailableBlocks() * fs.getBlockSize());
-			} catch (IllegalArgumentException e) {
-				LOG.error(e);
-			}
-		}
-		return "";
 	}
 
 	public static void showSearchLocationFragment(FragmentActivity activity, boolean searchByIp) {

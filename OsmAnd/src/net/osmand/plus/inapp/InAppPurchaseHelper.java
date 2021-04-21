@@ -10,7 +10,7 @@ import android.util.Log;
 
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.AndroidNetworkUtils.OnRequestResultListener;
-import net.osmand.AndroidNetworkUtils.OnRequestsResultListener;
+import net.osmand.AndroidNetworkUtils.OnSendRequestsListener;
 import net.osmand.AndroidNetworkUtils.RequestResponse;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -608,9 +608,14 @@ public abstract class InAppPurchaseHelper {
 				addUserInfo(parameters);
 				requests.add(new AndroidNetworkUtils.Request(url, parameters, userOperation, true, true));
 			}
-			AndroidNetworkUtils.sendRequestsAsync(ctx, requests, new OnRequestsResultListener() {
+			AndroidNetworkUtils.sendRequestsAsync(ctx, requests, new OnSendRequestsListener() {
+
 				@Override
-				public void onResult(@NonNull List<RequestResponse> results) {
+				public void onRequestSent(@NonNull RequestResponse response) {
+				}
+
+				@Override
+				public void onRequestsSent(@NonNull List<RequestResponse> results) {
 					for (RequestResponse rr : results) {
 						String sku = rr.getRequest().getParameters().get("sku");
 						PurchaseInfo info = getPurchaseInfo(sku);

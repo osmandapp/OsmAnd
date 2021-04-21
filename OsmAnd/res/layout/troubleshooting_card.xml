@@ -32,7 +32,6 @@
 			android:id="@+id/troubleshooting_icon"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_gravity="center_vertical"
 			android:layout_marginEnd="@dimen/map_widget_height"
 			android:layout_marginRight="@dimen/map_widget_height"
 			android:paddingBottom="@dimen/dialog_content_bottom_margin"

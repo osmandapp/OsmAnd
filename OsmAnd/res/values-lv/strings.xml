@@ -1802,7 +1802,7 @@ failu(s)?
     <string name="first_usage_item">Sākt lietot</string>
     <string name="first_usage_item_description">Kā lejupielādēt kartes un pamatiestatījumu lietošana</string>
     <string name="navigation_item_description">Navigācija</string>
-    <string name="planning_trip_item">Ceļa plānošana</string>
+    <string name="planning_trip_item">Ceļojuma plānošana</string>
     <string name="faq_item">BUJ</string>
     <string name="faq_item_description">Biežāk uzdotie jautājumi</string>
     <string name="map_viewing_item">Kartes skatīšana</string>
@@ -2162,7 +2162,6 @@ Apraksta laukumu: %1$s x %2$s</string>
     <string name="shared_string_time">Laiks</string>
     <string name="total_distance">Maršruta garums</string>
     <string name="routing_attr_height_obstacles_name">Lietot elevācijas datus</string>
-
     <string name="relief_smoothness_factor_descr">Ieteicamais reljefs: līdzens vai kalnains.</string>
     <string name="shared_string_slope">Slīpums</string>
     <string name="lang_ber">Berberu</string>
@@ -2415,7 +2414,7 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="show_map">Rādīt karti</string>
     <string name="route_is_calculated">Maršruts aprēķināts</string>
     <string name="round_trip">Turp un atpakaļ</string>
-    <string name="plan_route_no_markers_toast">Jums vajag pievienot vismaz vienu marķieri, lai lietotu šo funkciju.</string>
+    <string name="plan_route_no_markers_toast">Lai lietotu šo funkciju, vajag pievienot vismaz vienu marķieri.</string>
     <string name="osn_modify_dialog_error">Piezīmei nevarēja veikt izmaiņas</string>
     <string name="osn_modify_dialog_title">Labot piezīmi</string>
     <string name="context_menu_item_modify_note">!abot OSM piezīmi</string>
@@ -2429,7 +2428,7 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="routing_attr_avoid_ice_roads_fords_name">No ledus ceļiem un brasla</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Izvairīties no ledus ceļiem un brasliem.</string>
     <string name="use_location">Lietot pozīciju</string>
-    <string name="add_location_as_first_point_descr">Pievienot jūsu atrašanās vietu kā sākuma punktu maršrutam.</string>
+    <string name="add_location_as_first_point_descr">Pievienot patreizējo atrašanās vietu kā sākuma punktu ideālā maršruta izveidei.</string>
     <string name="my_location">Mana pozīcija</string>
     <string name="shared_string_finish">Finišs</string>
     <string name="plan_route">Plānot maršrutu</string>
@@ -3333,4 +3332,19 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="select_items_for_import">Izvēlieties lietas, ko importēt.</string>
     <string name="use_dev_url_descr">Lietot dev.openstreetmap.org nevis openstreetmap.org OSM piezīmju/ POI / GPX augšuielādei un testēšanai.</string>
     <string name="use_dev_url">Lietot dev.openstreetmap.org</string>
+    <string name="plan_a_route">Plānot maršrutu</string>
+    <string name="plan_route_last_edited">Pēdējo reizi labots</string>
+    <string name="plan_route_import_track">Importēt treku</string>
+    <string name="plan_route_open_existing_track">Atvērt saglabāto treku</string>
+    <string name="plan_route_create_new_route">Veidot jaunu maršrutu</string>
+    <string name="plan_route_select_track_file_for_open">Izvēlieties treka failu atvēršanai.</string>
+    <string name="plan_route_exit_dialog_descr">Vai tiešām gribat atmest visas izmaiņas ieplānotajā maršrutā\?</string>
+    <string name="plan_route_trim_before">Griezt pirms</string>
+    <string name="plan_route_trim_after">Griezt pēc</string>
+    <string name="plan_route_change_route_type_before">Mainīt maršruta veidu pirms</string>
+    <string name="plan_route_change_route_type_after">Mainīt maršruta veidu pēc</string>
+    <string name="plan_route_join_segments">Pievienot segmentus</string>
+    <string name="plan_route_split_before">Sadalīt pirms</string>
+    <string name="plan_route_split_after">Sadalīt pēc</string>
+    <string name="plan_route_add_new_segment">Pievienot jaunu segmentu</string>
 </resources>

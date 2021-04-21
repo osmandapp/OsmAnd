@@ -4006,7 +4006,7 @@
     <string name="routing_attr_driving_style_description">Zvoľte účel jazdy pre získanie kratšej, rýchlejšej alebo bezpečnejšej trasy</string>
     <string name="map_orientation_threshold_descr">Neotáčať mapu, ak je rýchlosť nižšia ako hranica</string>
     <string name="restart">Reštartovať</string>
-    <string name="shared_strings_all_regions">Všetky regióny</string>
+    <string name="shared_strings_all_regions">Všetky oblasti</string>
     <string name="delete_number_files_question">Zmazať %1$d súborov\?</string>
     <string name="track_recording_stop_without_saving">Zastaviť bez uloženia</string>
     <string name="track_recording_save_and_stop">Uložiť a zastaviť záznam</string>
