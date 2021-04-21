@@ -470,6 +470,10 @@ public class OsmandApplication extends MultiDexApplication {
 		return onlineRoutingHelper;
 	}
 
+	public BackupHelper getBackupHelper() {
+		return backupHelper;
+	}
+
 	public TransportRoutingHelper getTransportRoutingHelper() {
 		return transportRoutingHelper;
 	}
