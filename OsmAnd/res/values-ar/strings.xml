@@ -4123,7 +4123,11 @@
     <string name="shared_string_route_line">خط المسار</string>
     <string name="route_line_use_map_style_appearance">سيستخدم خط الطريق %1$s المحدد في نمط الخريطة المحدد: %2$s.</string>
     <string name="specify_color_for_map_mode">حدد لونًا لوضع الخريطة: %1$s.</string>
-    <string name="release_4_0_beta">• تم نقل تحديثات OsmAnd Live إلى \"التنزيلات&gt; التحديثات\"
+    <string name="release_4_0_beta">• خيار مضاف لتنزيل خطوط الكنتور بالقدم
+\n
+\n• مخطط الطريق الأفقي: علامات تبويب tabs مضافة للتبديل بين النقاط أو الرسوم البيانية
+\n
+\n• تم نقل تحديثات OsmAnd Live إلى \"التنزيلات&gt; التحديثات\"
 \n
 \n • يمكن تلوين المسارات الآن حسب الارتفاع، السرعة أو المنحدر.
 \n
@@ -4154,4 +4158,8 @@
     <string name="announce_when_exceeded">الإعلان عند التجاوز</string>
     <string name="user_points">نقاط المستخدم</string>
     <string name="output">الإخراج</string>
+    <string name="srtm_unit_format">تنسيق وحدة خطوط الكنتور</string>
+    <string name="srtm_download_list_help_message">OsmAnd يوفر بيانات الخطوط الكنتورية بالأمتار والقدم. ستحتاج إلى إعادة تنزيل الملف لتغيير التنسيق.</string>
+    <string name="srtm_download_single_help_message">الرجاء تحديد التنسيق المطلوب. ستحتاج إلى إعادة تنزيل الملف لتغيير التنسيق.</string>
+    <string name="shared_string_feet">قدم</string>
 </resources>

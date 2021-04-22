@@ -24,6 +24,7 @@ import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.LineGraphType;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
@@ -109,7 +110,14 @@ public class GraphsCard extends BaseCard implements OnUpdateInfoListener {
 
 		GraphAdapterHelper.bindGraphAdapters(commonGraphAdapter, Collections.singletonList((BaseGraphAdapter) customGraphAdapter), (ViewGroup) view);
 		refreshMapCallback = GraphAdapterHelper.bindToMap(commonGraphAdapter, mapActivity, trackDetailsMenu);
+		updateTopPadding();
 		fullUpdate();
+	}
+
+	private void updateTopPadding() {
+		int topPadding = AndroidUiHelper.isOrientationPortrait(mapActivity) ?
+				0 : app.getResources().getDimensionPixelSize(R.dimen.content_padding_small);
+		view.setPadding(0, topPadding, 0, 0);
 	}
 
 	@Override

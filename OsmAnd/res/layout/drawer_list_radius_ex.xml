@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="horizontal"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:paddingLeft="16dp"
-              android:paddingRight="16dp"
-              android:minHeight="50dp"
-              android:layout_marginBottom="5dp"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:orientation="horizontal"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:paddingLeft="16dp"
+	android:paddingRight="16dp"
+	android:minHeight="50dp"
+	android:layout_marginBottom="5dp"
 	android:paddingStart="16dp"
 	android:paddingEnd="16dp">
 
@@ -69,7 +70,7 @@
             android:textColor="@color/color_myloc_distance"
             android:layout_gravity="center_vertical"
             android:layout_marginTop="2dp"
-            android:text="Cinema"
+            tools:text="Cinema"
             android:layout_marginRight="16dp"
 	        android:layout_marginEnd="16dp" />
 

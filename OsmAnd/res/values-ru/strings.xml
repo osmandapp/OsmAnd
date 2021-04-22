@@ -141,8 +141,8 @@
     <string name="routing_attr_height_obstacles_name">Использовать данные о высотах</string>
     <string name="quick_action_duplicates">Действие переименовано в %1$s, чтобы избежать дублирования.</string>
     <string name="quick_action_duplicate">Обнаружен дубликат имени</string>
-    <string name="quick_action_showhide_favorites_descr">Переключатель, чтобы показать или скрыть избранные точки на карте.</string>
-    <string name="quick_action_showhide_poi_descr">Переключатель, чтобы показать или скрыть POI на карте.</string>
+    <string name="quick_action_showhide_favorites_descr">Переключатель для отображения или скрытия избранных точек на карте.</string>
+    <string name="quick_action_showhide_poi_descr">Переключатель для отображения или скрытия POI на карте.</string>
     <string name="quick_action_add_category">Категория</string>
     <string name="quick_action_add_create_items">Действия</string>
     <string name="quick_action_fav_name_descr">Если оставить это поле пустым, то оно будет автоматически заполнено адресом или названием места.</string>
@@ -3660,7 +3660,7 @@
     <string name="vessel_height_warning">Вы можете указать высоту судна, чтобы избегать низких мостов. Имейте в виду, что если мост раздвижной, будет использована его высота в открытом состоянии.</string>
     <string name="vessel_height_limit_description">Укажите высоту судна, чтобы избежать низких мостов. Имейте в виду, что если мост раздвижной, будет использована его высота в открытом состоянии.</string>
     <string name="vessel_width_limit_description">Укажите ширину судна, чтобы избежать узких мостов</string>
-    <string name="quick_action_showhide_mapillary_descr">Переключатель, чтобы показать или скрыть слой Mapillary на карте.</string>
+    <string name="quick_action_showhide_mapillary_descr">Переключатель для отображения или скрытия слоя Mapillary на карте.</string>
     <string name="shared_string_legal">Законодательство</string>
     <string name="speed_cameras_legal_descr">В некоторых странах и регионах использование предупреждений о камерах контроля скорости запрещено законом. 
 \n 
@@ -4073,7 +4073,7 @@
     <string name="update_all_maps_added">Обновить все карты, добавленные в %1$s\?</string>
     <string name="customize_route_line">Настройка линии маршрута</string>
     <string name="shared_string_route_line">Линия маршрута</string>
-    <string name="route_line_use_map_style_appearance">Линия маршрута будет использовать %1$s, указанный в выбранном стиле карты: %2$s.</string>
+    <string name="route_line_use_map_style_appearance">Линия маршрута будет использовать %1$s из выбранного стиля карты: %2$s.</string>
     <string name="specify_color_for_map_mode">Укажите цвет для режима карты: %1$s.</string>
     <string name="no_purchases">У вас нет покупок</string>
     <string name="new_device_account">Новое устройство / новый аккаунт</string>

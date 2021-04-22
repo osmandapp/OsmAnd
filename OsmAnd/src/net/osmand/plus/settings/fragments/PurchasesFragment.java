@@ -10,6 +10,11 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+
 import com.google.android.material.appbar.AppBarLayout;
 
 import net.osmand.AndroidUtils;
@@ -29,11 +34,6 @@ import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 
 public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurchaseListener, OnFragmentInteractionListener {
 
@@ -152,6 +152,7 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 			}
 		});
 		ImageButton backButton = toolbar.findViewById(R.id.close_button);
+		UiUtilities.rotateImageByLayoutDirection(backButton);
 		backButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -197,9 +198,7 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 
 	@Override
 	public void onSearchResult(CountrySelectionFragment.CountryItem name) {
-		if (subscriptionsCard != null) {
-			subscriptionsCard.onSupportRegionSelected(name);
-		}
+
 	}
 
 	@Override

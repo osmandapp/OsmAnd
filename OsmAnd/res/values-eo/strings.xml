@@ -4054,7 +4054,11 @@
     <string name="customize_route_line">Alĝustigi linion de kurso</string>
     <string name="shared_string_route_line">Linio de kurso</string>
     <string name="route_line_use_map_style_appearance">Por la linio de kurso estos uzata %1$s difinita por la map‑stilo: %2$s.</string>
-    <string name="release_4_0_beta">• ĝisdatigoj OsmAnd Live movitaj al “elŝutoj” → “ĝisdatigoj”
+    <string name="release_4_0_beta">• eblo elŝuti nivelkurbojn en futoj
+\n
+\n• horizontala vido por “plani kurson”: aldonitaj langetoj por baskuli inter punktoj kaj diagramoj
+\n
+\n• ĝisdatigoj OsmAnd Live movitaj al “elŝutoj” → “ĝisdatigoj”
 \n
 \n• eblo kolorigi spurojn laŭ altitudo, rapido aŭ dekliveco
 \n
@@ -4085,4 +4089,8 @@
     <string name="exit_number">Numero de elirejo</string>
     <string name="user_points">Poentoj de uzanto</string>
     <string name="output">Eligo</string>
+    <string name="shared_string_feet">futoj</string>
+    <string name="srtm_unit_format">Unuo por nivelkurboj</string>
+    <string name="srtm_download_list_help_message">OsmAnd liveras nivelkurbojn en metroj kaj en futoj. Ve devos reelŝuti la dosieron por ŝanĝi la formon.</string>
+    <string name="srtm_download_single_help_message">Elektu la deziratan formon. Vi devos reelŝuti la dosieron por ŝanĝi la formon.</string>
 </resources>

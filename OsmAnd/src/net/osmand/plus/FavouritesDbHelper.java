@@ -17,7 +17,7 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.itinerary.ItineraryGroup;
+import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.util.Algorithms;
@@ -146,6 +146,14 @@ public class FavouritesDbHelper {
 		}
 	}
 
+	public long getLastUploadedTime() {
+		return context.getSettings().FAVORITES_LAST_UPLOADED_TIME.get();
+	}
+
+	public void setLastUploadedTime(long time) {
+		context.getSettings().FAVORITES_LAST_UPLOADED_TIME.set(time);
+	}
+
 	@Nullable
 	public Drawable getColoredIconForGroup(String groupName) {
 		String groupIdName = FavoriteGroup.convertDisplayNameToGroupIdName(context, groupName);
@@ -272,15 +280,16 @@ public class FavouritesDbHelper {
 	}
 
 	private void runSyncWithMarkers(FavoriteGroup favGroup) {
-		ItineraryGroup group = context.getItineraryHelper().getMarkersGroup(favGroup);
+		MapMarkersHelper helper = context.getMapMarkersHelper();
+		MapMarkersGroup group = helper.getMarkersGroup(favGroup);
 		if (group != null) {
-			context.getItineraryHelper().runSynchronization(group);
+			helper.runSynchronization(group);
 		}
 	}
 
 	private boolean removeFromMarkers(FavoriteGroup favGroup) {
 		MapMarkersHelper helper = context.getMapMarkersHelper();
-		ItineraryGroup group = context.getItineraryHelper().getMarkersGroup(favGroup);
+		MapMarkersGroup group = helper.getMarkersGroup(favGroup);
 		if (group != null) {
 			helper.removeMarkersGroup(group);
 			return true;
@@ -289,7 +298,8 @@ public class FavouritesDbHelper {
 	}
 
 	private void addToMarkers(FavoriteGroup favGroup) {
-		context.getItineraryHelper().addOrEnableGroup(favGroup);
+		MapMarkersHelper helper = context.getMapMarkersHelper();
+		helper.addOrEnableGroup(favGroup);
 	}
 
 	private File getInternalFile() {

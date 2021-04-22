@@ -3915,4 +3915,17 @@
     <string name="poi_pilates">Pilates</string>
     <string name="poi_jiu_jitsu">Ju-jitsu</string>
     <string name="poi_karate">Karaté</string>
+    <string name="poi_zurkhaneh_sport">Gymnase Zurkhaneh</string>
+    <string name="poi_cliff_diving">Plongeon du haut d\'une falaise</string>
+    <string name="poi_hoops">Anneaux</string>
+    <string name="poi_club_social">Club social</string>
+    <string name="poi_plateau">Plateau</string>
+    <string name="poi_speedway">Voie express</string>
+    <string name="poi_gladed_yes">Satisfait : oui</string>
+    <string name="poi_camp_pitch">Emplacement de camping</string>
+    <string name="poi_mobile_library">Arrêt pour la bibliothèque mobile</string>
+    <string name="poi_office_diplomatic">Bureau diplomatique</string>
+    <string name="poi_horseshoes">Fers à cheval</string>
+    <string name="poi_cycle_polo">Polo-vélo</string>
+    <string name="poi_bay_filter">Type de baie</string>
 </resources>

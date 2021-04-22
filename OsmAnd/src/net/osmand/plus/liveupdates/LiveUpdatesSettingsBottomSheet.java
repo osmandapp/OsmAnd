@@ -42,9 +42,10 @@ import net.osmand.plus.liveupdates.LiveUpdatesHelper.UpdateFrequency;
 import net.osmand.plus.resources.IncrementalChangesManager;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.widgets.MultiStateToggleButton;
-import net.osmand.plus.widgets.MultiStateToggleButton.OnRadioItemClickListener;
-import net.osmand.plus.widgets.MultiStateToggleButton.RadioItem;
+import net.osmand.plus.widgets.multistatetoggle.RadioItem;
+import net.osmand.plus.widgets.multistatetoggle.RadioItem.OnRadioItemClickListener;
+import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
+import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
@@ -83,8 +84,8 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 	private BaseBottomSheetItem itemFrequencyHelpMessage;
 	private BaseBottomSheetItem itemClear;
 	private BaseBottomSheetItem itemViaWiFi;
-	private MultiStateToggleButton frequencyToggleButton;
-	private MultiStateToggleButton timeOfDayToggleButton;
+	private TextToggleButton frequencyToggleButton;
+	private TextToggleButton timeOfDayToggleButton;
 
 	private String fileName;
 	private OnLiveUpdatesForLocalChange onLiveUpdatesForLocalChange;
@@ -195,9 +196,9 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 
 		String morning = getString(R.string.morning);
 		String night = getString(R.string.night);
-		RadioItem morningButton = new RadioItem(morning);
-		RadioItem nightButton = new RadioItem(night);
-		timeOfDayToggleButton = new MultiStateToggleButton(app, itemTimeOfDayButtons, nightMode);
+		TextRadioItem morningButton = new TextRadioItem(morning);
+		TextRadioItem nightButton = new TextRadioItem(night);
+		timeOfDayToggleButton = new TextToggleButton(app, itemTimeOfDayButtons, nightMode);
 		timeOfDayToggleButton.setItems(morningButton, nightButton);
 		setSelectedRadioItem(timeOfDayToggleButton, timeOfDayPreference.get(), morningButton, nightButton);
 		timeOfDayToggleButton.updateView(localUpdatePreference.get());
@@ -231,10 +232,10 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 		String hourly = getString(R.string.hourly);
 		String daily = getString(R.string.daily);
 		String weekly = getString(R.string.weekly);
-		RadioItem hourlyButton = new RadioItem(hourly);
-		RadioItem dailyButton = new RadioItem(daily);
-		RadioItem weeklyButton = new RadioItem(weekly);
-		frequencyToggleButton = new MultiStateToggleButton(app, itemFrequencyButtons, nightMode);
+		TextRadioItem hourlyButton = new TextRadioItem(hourly);
+		TextRadioItem dailyButton = new TextRadioItem(daily);
+		TextRadioItem weeklyButton = new TextRadioItem(weekly);
+		frequencyToggleButton = new TextToggleButton(app, itemFrequencyButtons, nightMode);
 		frequencyToggleButton.setItems(hourlyButton, dailyButton, weeklyButton);
 		setSelectedRadioItem(frequencyToggleButton, frequencyPreference.get(), hourlyButton, dailyButton, weeklyButton);
 		frequencyToggleButton.updateView(localUpdatePreference.get());
@@ -467,7 +468,7 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 		return dividerItem;
 	}
 
-	private void setSelectedRadioItem(MultiStateToggleButton toggleButton, int position, RadioItem... buttons) {
+	private void setSelectedRadioItem(TextToggleButton toggleButton, int position, TextRadioItem... buttons) {
 		toggleButton.setSelectedItem(buttons[position]);
 	}
 
