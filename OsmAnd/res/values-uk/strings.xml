@@ -4053,7 +4053,11 @@
     <string name="shared_string_route_line">Лінія маршруту</string>
     <string name="route_line_use_map_style_appearance">Лінія маршруту застосовуватиме %1$s, вказаний у вибраному стилі мапи: %2$s.</string>
     <string name="specify_color_for_map_mode">Вкажіть колір для режиму мапи: %1$s.</string>
-    <string name="release_4_0_beta">• Оновлення OsmAnd Live переміщено до «Завантаження &gt;Оновлення»
+    <string name="release_4_0_beta">• Додана можливість завантаження контурних ліній у футах
+\n
+\n• Ландшафтне планування маршруту: додані вкладки для перемикання між точками або графіками
+\n
+\n• Оновлення OsmAnd Live переміщено до «Завантаження &gt;Оновлення»
 \n
 \n• Тепер треки можуть бути забарвлені за висотою, швидкістю або нахилом.
 \n
@@ -4084,4 +4088,8 @@
     <string name="announce_when_exceeded">Повідомляти про перевищення</string>
     <string name="user_points">Користувацькі точки</string>
     <string name="output">Вивід</string>
+    <string name="srtm_download_list_help_message">OsmAnd надає дані горизонталей в метрах і футах. Щоб змінити формат, потрібно повторно завантажити файл.</string>
+    <string name="srtm_unit_format">Формат одиниць вимірювання горизонталей</string>
+    <string name="shared_string_feet">фути</string>
+    <string name="srtm_download_single_help_message">Виберіть потрібний формат. Щоб змінити формат, потрібно повторно завантажувати файл.</string>
 </resources>

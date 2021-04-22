@@ -67,7 +67,6 @@ import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.helpers.enums.DrivingRegion;
 import net.osmand.plus.helpers.enums.MetricsConstants;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
-import net.osmand.plus.itinerary.ItineraryHelper;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
@@ -169,7 +168,6 @@ public class OsmandApplication extends MultiDexApplication {
 	OprAuthHelper oprAuthHelper;
 	MeasurementEditingContext measurementEditingContext;
 	OnlineRoutingHelper onlineRoutingHelper;
-	ItineraryHelper itineraryHelper;
 	BackupHelper backupHelper;
 
 	private Map<String, Builder> customRoutingConfigs = new ConcurrentHashMap<>();
@@ -470,10 +468,6 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public OnlineRoutingHelper getOnlineRoutingHelper() {
 		return onlineRoutingHelper;
-	}
-
-	public ItineraryHelper getItineraryHelper() {
-		return itineraryHelper;
 	}
 
 	public BackupHelper getBackupHelper() {

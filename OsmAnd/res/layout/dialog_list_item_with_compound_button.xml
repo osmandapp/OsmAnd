@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_height="wrap_content"
 	android:layout_width="match_parent"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:orientation="vertical">
 
 	<View
@@ -58,7 +59,7 @@
 			android:layout_gravity="center_vertical|start"
 			android:textColor="?android:textColorPrimary"
 			android:textSize="@dimen/default_list_text_size_large"
-			android:text="Item title"/>
+			tools:text="Item title"/>
 		
 	</LinearLayout>
 

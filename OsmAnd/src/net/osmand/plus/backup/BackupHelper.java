@@ -37,6 +37,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 public class BackupHelper {
 
@@ -44,6 +47,9 @@ public class BackupHelper {
 	private final OsmandSettings settings;
 	private final FavouritesDbHelper favouritesHelper;
 	private final GpxDbHelper gpxHelper;
+
+	private static final ThreadPoolExecutor EXECUTOR = new ThreadPoolExecutor(1, 1, 0L,
+			TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>());
 
 	private static final String SERVER_URL = "https://osmand.net";
 
@@ -131,10 +137,6 @@ public class BackupHelper {
 		return token.matches("[0-9]+");
 	}
 
-	public boolean hasOsmLiveUpdates() {
-		return InAppPurchaseHelper.isSubscribedToLiveUpdates(app);
-	}
-
 	@Nullable
 	public String getOrderId() {
 		InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
@@ -167,7 +169,10 @@ public class BackupHelper {
 	public void registerUser(@NonNull String email, @Nullable final OnRegisterUserListener listener) {
 		Map<String, String> params = new HashMap<>();
 		params.put("email", email);
-		params.put("orderid", getOrderId());
+		String orderId = getOrderId();
+		if (!Algorithms.isEmpty(orderId)) {
+			params.put("orderid", orderId);
+		}
 		params.put("deviceid", app.getUserAndroidId());
 		AndroidNetworkUtils.sendRequestAsync(app, USER_REGISTER_URL, params, "Register user", true, true, new OnRequestResultListener() {
 			@Override
@@ -197,7 +202,7 @@ public class BackupHelper {
 					listener.onRegisterUser(status, message);
 				}
 			}
-		});
+		}, EXECUTOR);
 	}
 
 	public void registerDevice(String token, @Nullable final OnRegisterDeviceListener listener) {
@@ -239,7 +244,7 @@ public class BackupHelper {
 					listener.onRegisterDevice(status, message);
 				}
 			}
-		});
+		}, EXECUTOR);
 	}
 
 	public void uploadFiles(@NonNull List<GpxFileInfo> gpxFiles, @Nullable final OnUploadFilesListener listener) throws UserNotRegisteredException {
@@ -295,7 +300,7 @@ public class BackupHelper {
 					listener.onFilesUploadDone(errors);
 				}
 			}
-		});
+		}, EXECUTOR);
 	}
 
 	public void deleteFiles(@NonNull List<UserFile> userFiles, @Nullable final OnDeleteFilesListener listener) throws UserNotRegisteredException {
@@ -350,7 +355,7 @@ public class BackupHelper {
 					listener.onFilesDeleteDone(errors);
 				}
 			}
-		});
+		}, EXECUTOR);
 	}
 
 	public void downloadFileList(@Nullable final OnDownloadFileListListener listener) throws UserNotRegisteredException {
@@ -392,7 +397,7 @@ public class BackupHelper {
 					listener.onDownloadFileList(status, message, userFiles);
 				}
 			}
-		});
+		}, EXECUTOR);
 	}
 
 	public void downloadFiles(@NonNull final Map<File, UserFile> filesMap, @Nullable final OnDownloadFileListener listener) throws UserNotRegisteredException {
@@ -433,7 +438,7 @@ public class BackupHelper {
 							listener.onFilesDownloadDone(errors);
 						}
 					}
-				});
+				}, EXECUTOR);
 	}
 
 	@SuppressLint("StaticFieldLeak")
@@ -515,7 +520,7 @@ public class BackupHelper {
 				}
 			}
 		};
-		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		task.executeOnExecutor(EXECUTOR);
 	}
 
 	@SuppressLint("StaticFieldLeak")
@@ -576,6 +581,6 @@ public class BackupHelper {
 				}
 			}
 		};
-		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		task.executeOnExecutor(EXECUTOR);
 	}
 }

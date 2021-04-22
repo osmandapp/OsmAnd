@@ -4072,7 +4072,11 @@
     <string name="in_grace_period">Ek süre içinde</string>
     <string name="on_hold">Beklemede</string>
     <string name="expired">Süresi doldu</string>
-    <string name="release_4_0_beta">• OsmAnd Live güncellemeleri \"İndirmeler&gt; Güncellemeler\" bölümüne taşındı
+    <string name="release_4_0_beta">• Eş yükselti eğrilerini fit cinsinden indirme seçeneği eklendi
+\n
+\n • Güzergah Planla görünümü: noktalar veya grafikler arasında geçiş yapmak için sekmeler eklendi
+\n
+\n • OsmAnd Live güncellemeleri \"İndirmeler &gt; Güncellemeler\" bölümüne taşındı
 \n
 \n • Yollar artık rakım, hız veya eğime göre renklendirilebilir
 \n
@@ -4087,4 +4091,8 @@
     <string name="user_points">Kullanıcı puanları</string>
     <string name="output">Çıkış</string>
     <string name="map_quick_action_pattern">%1$s → …</string>
+    <string name="shared_string_feet">fit</string>
+    <string name="srtm_unit_format">Eş yükselti eğrileri birimi biçimi</string>
+    <string name="srtm_download_list_help_message">OsmAnd, metre ve fit cinsinden eş yükselti eğrileri verileri sağlar. Biçimi değiştirmek için dosyayı yeniden indirmeniz gerekecek.</string>
+    <string name="srtm_download_single_help_message">Lütfen gerekli biçimi seçin. Biçimi değiştirmek için dosyayı yeniden indirmeniz gerekecek.</string>
 </resources>
