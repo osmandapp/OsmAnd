@@ -4049,15 +4049,19 @@
     <string name="shared_string_route_line">Linha de rota</string>
     <string name="route_line_use_map_style_appearance">A linha de rota seria usada %1$s especificado no estilo de mapa selecionado: %2$s.</string>
     <string name="specify_color_for_map_mode">Especifique a cor para o modo de mapa: %1$s.</string>
-    <string name="release_4_0_beta">• As atualizações do OsmAnd Live foram movidas para \"Downloads &gt; Atualizações\"
+    <string name="release_4_0_beta">"• Adicionada opção para baixar curvas de nível em pés
 \n
-\n• As trilhas agora podem ser coloridas por altitude, velocidade ou inclinação.
+\n  • Plano de paisagem da rota: guias adicionadas para alternar entre pontos ou gráficos
 \n
-\n• Adicionada opção para alterar a aparência da linha da rota de navegação
+\n  • As atualizações do OsmAnd Live foram movidas para \"Downloads&gt; Atualizações\"
 \n
-\n• Caixa de diálogo \"Gravação de viagem\" atualizada
+\n  • As trilhas agora podem ser coloridas por altitude, velocidade ou inclinação.
 \n
-\n</string>
+\n  • Adicionada opção para alterar a aparência da linha da rota de navegação
+\n
+\n  • Caixa de diálogo \"Gravação de viagem\" atualizada
+\n
+\n"</string>
     <string name="no_purchases">Você não tem nenhuma compra</string>
     <string name="new_device_account">Novo dispositivo / nova conta</string>
     <string name="contact_support_description">Se você tiver alguma dúvida, entre em contato conosco em %1$s.</string>
@@ -4081,4 +4085,8 @@
     <string name="user_points">Pontos do usuário</string>
     <string name="output">Saída</string>
     <string name="map_quick_action_pattern">%1$s → …</string>
+    <string name="shared_string_feet">pés</string>
+    <string name="srtm_unit_format">Formato da unidade de curvas de nível</string>
+    <string name="srtm_download_list_help_message">OsmAnd fornece dados de linhas de contorno em metros e pés. Você precisará baixar novamente o arquivo para alterar o formato.</string>
+    <string name="srtm_download_single_help_message">Selecione o formato necessário. Você precisará baixar novamente o arquivo para alterar o formato.</string>
 </resources>

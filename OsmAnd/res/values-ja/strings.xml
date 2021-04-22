@@ -3843,7 +3843,7 @@ POIの更新は利用できません</string>
     <string name="subscription_expired_title">OsmAndLiveサブスクリプションの有効期限が切れました</string>
     <string name="subscription_paused_title">OsmAndLiveサブスクリプションが一時停止されました</string>
     <string name="subscription_on_hold_title">OsmAndLiveサブスクリプションは保留中です</string>
-    <string name="markers_history">マーカーの履歴</string>
+    <string name="markers_history">マーカー履歴</string>
     <string name="send_files_to_openstreetmap">GPXファイルをOpenStreetMapに送信</string>
     <string name="enter_text_separated">タグはカンマで区切って入力してください。</string>
     <string name="gpx_upload_public_visibility_descr">\"公開 \"状態は、追跡機能にてユーザーのGPS追跡、公開GPS追跡リスト、および生データのタイムスタンプ付き公開追跡リストに公開されることを意味します。APIを介して提供されるデータはユーザーの追跡ページを参照しません。追跡ポイントのタイムスタンプはパブリックGPS APIでは利用できず、また追跡ポイントは時系列に並んでいません。</string>
