@@ -115,6 +115,8 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 	private Integer directionArrowsColor;
 	private GradientScaleType gradientScaleType = null;
 
+	private Integer defaultTurnArrowColor = null;
+
 	public RouteLayer(RoutingHelper helper) {
 		this.helper = helper;
 		this.transportHelper = helper.getTransportRoutingHelper();
@@ -286,7 +288,12 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 
 		nightMode = settings != null && settings.isNightMode();
 
-		if (updatePaints) {
+		if (updatePaints || defaultTurnArrowColor == null) {
+			defaultTurnArrowColor = attrs.paint3.getColor();
+		}
+
+		if (updatePaints || updateRouteGradient()) {
+			attrs.paint3.setColor(gradientScaleType == null ? defaultTurnArrowColor : Color.WHITE);
 			paintIconAction.setColorFilter(new PorterDuffColorFilter(attrs.paint3.getColor(), Mode.MULTIPLY));
 			routeWayContext.updatePaints(nightMode, attrs);
 			publicTransportWayContext.updatePaints(nightMode, attrs, attrsPT, attrsW);
@@ -345,7 +352,6 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 		int screenHeight = drawInfo.getScreenHeight();
 
 		updateRouteColors(nightMode);
-		updateRouteGradient();
 
 		LinearGradient gradient = null;
 		if (gradientScaleType == GradientScaleType.ALTITUDE || gradientScaleType == GradientScaleType.SLOPE) {
@@ -477,12 +483,14 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 		routeLineColor = color;
 	}
 
-	private void updateRouteGradient() {
+	private boolean updateRouteGradient() {
+		GradientScaleType prev = gradientScaleType;
 		if (routeLineDrawInfo != null) {
 			gradientScaleType = routeLineDrawInfo.getGradientScaleType();
 		} else {
 			gradientScaleType = view.getSettings().ROUTE_LINE_GRADIENT.getModeValue(helper.getAppMode());
 		}
+		return prev != gradientScaleType;
 	}
 
 	private float getRouteLineWidth(@NonNull RotatedTileBox tileBox) {
@@ -550,7 +558,6 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 			boolean straight = route.getRouteService() == RouteService.STRAIGHT;
 			publicTransportRouteGeometry.clearRoute();
 			updateRouteColors(nightMode);
-			updateRouteGradient();
 			routeGeometry.setRouteStyleParams(getRouteLineColor(), getRouteLineWidth(tb), getDirectionArrowsColor(), gradientScaleType);
 			routeGeometry.updateRoute(tb, route, view.getApplication());
 			if (directTo) {
