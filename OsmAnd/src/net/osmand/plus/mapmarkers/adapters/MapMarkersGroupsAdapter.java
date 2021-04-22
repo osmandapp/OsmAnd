@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -23,10 +22,11 @@ import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.mapmarkers.MapMarkersHelper;
+import net.osmand.plus.mapmarkers.ItineraryHelper;
 import net.osmand.plus.mapmarkers.GroupHeader;
+import net.osmand.plus.mapmarkers.ItineraryType;
 import net.osmand.plus.mapmarkers.MapMarker;
-import net.osmand.plus.mapmarkers.MapMarkersGroup;
+import net.osmand.plus.mapmarkers.ItineraryGroup;
 import net.osmand.plus.mapmarkers.ShowHideHistoryButton;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -34,7 +34,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.mapmarkers.SelectWptCategoriesBottomSheetDialogFragment;
+import net.osmand.plus.mapmarkers.bottomsheets.SelectWptCategoriesBottomSheetDialogFragment;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
@@ -84,7 +84,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 
 	private void updateShowDirectionMarkers() {
 		showDirectionEnabled = app.getSettings().MARKERS_DISTANCE_INDICATION_ENABLED.get();
-		List<MapMarker> mapMarkers = app.getMapMarkersHelper().getMapMarkers();
+		List<MapMarker> mapMarkers = app.getItineraryHelper().getMapMarkers();
 		int markersCount = mapMarkers.size();
 		showDirectionMarkers = new ArrayList<>(mapMarkers.subList(0, getToIndex(markersCount)));
 	}
@@ -101,9 +101,9 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 
 	private void createDisplayGroups() {
 		items = new ArrayList<>();
-		MapMarkersHelper helper = app.getMapMarkersHelper();
+		ItineraryHelper helper = app.getItineraryHelper();
 		helper.updateGroups();
-		List<MapMarkersGroup> groups = new ArrayList<>(helper.getMapMarkersGroups());
+		List<ItineraryGroup> groups = new ArrayList<>(helper.getItineraryGroups());
 		groups.addAll(helper.getGroupsForDisplayedGpx());
 		groups.addAll(helper.getGroupsForSavedArticlesTravelBook());
 
@@ -134,7 +134,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 		Calendar markerCalendar = Calendar.getInstance();
 
 		for (int i = 0; i < groups.size(); i++) {
-			MapMarkersGroup group = groups.get(i);
+			ItineraryGroup group = groups.get(i);
 			if (!group.isVisible()) {
 				continue;
 			}
@@ -228,7 +228,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 		return null;
 	}
 
-	private void populateAdapterWithGroupMarkers(MapMarkersGroup group, int position) {
+	private void populateAdapterWithGroupMarkers(ItineraryGroup group, int position) {
 		if (position != RecyclerView.NO_POSITION) {
 			ShowHideHistoryButton showHideHistoryButton = group.getShowHideHistoryButton();
 			if (!group.isDisabled()) {
@@ -253,7 +253,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 
 	public int getGroupHeaderPosition(String groupId) {
 		int pos = -1;
-		MapMarkersGroup group = app.getMapMarkersHelper().getMapMarkerGroupById(groupId, MapMarkersGroup.ANY_TYPE); 
+		ItineraryGroup group = app.getItineraryHelper().getMapMarkerGroupById(groupId, ItineraryType.MARKERS);
 		if (group != null) {
 			pos = items.indexOf(group.getGroupHeader());
 		}
@@ -376,9 +376,9 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 						return;
 					}
 					if (markerInHistory) {
-						app.getMapMarkersHelper().restoreMarkerFromHistory(marker, 0);
+						app.getItineraryHelper().restoreMarkerFromHistory(marker, 0);
 					} else {
-						app.getMapMarkersHelper().moveMapMarkerToHistory(marker);
+						app.getItineraryHelper().moveMapMarkerToHistory(marker);
 					}
 					updateDisplayedData();
 					if (!markerInHistory) {
@@ -386,7 +386,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 								.setAction(R.string.shared_string_undo, new View.OnClickListener() {
 									@Override
 									public void onClick(View view) {
-										mapActivity.getMyApplication().getMapMarkersHelper().restoreMarkerFromHistory(marker, 0);
+										mapActivity.getMyApplication().getItineraryHelper().restoreMarkerFromHistory(marker, 0);
 										updateDisplayedData();
 									}
 								});
@@ -421,11 +421,11 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				headerViewHolder.articleDescription.setVisibility(View.GONE);
 			} else if (header instanceof GroupHeader) {
 				final GroupHeader groupHeader = (GroupHeader) header;
-				final MapMarkersGroup group = groupHeader.getGroup();
+				final ItineraryGroup group = groupHeader.getGroup();
 				String groupName = group.getName();
 				if (groupName.isEmpty()) {
 					groupName = app.getString(R.string.shared_string_favorites);
-				} else if (group.getType() == MapMarkersGroup.GPX_TYPE) {
+				} else if (group.getType() == ItineraryType.TRACK) {
 					groupName = groupName.replace(IndexConstants.GPX_FILE_EXT, "").replace("/", " ").replace("_", " ");
 				}
 				if (group.isDisabled()) {
@@ -466,7 +466,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				CompoundButton.OnCheckedChangeListener checkedChangeListener = new CompoundButton.OnCheckedChangeListener() {
 					@Override
 					public void onCheckedChanged(CompoundButton compoundButton, boolean enabled) {
-						final MapMarkersHelper mapMarkersHelper = app.getMapMarkersHelper();
+						final ItineraryHelper itineraryHelper = app.getItineraryHelper();
 						final GPXFile[] gpxFile = new GPXFile[1];
 						boolean disabled = !enabled;
 
@@ -482,8 +482,8 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 							fragment.setUsedOnMap(false);
 							fragment.show(mapActivity.getSupportFragmentManager(), SelectWptCategoriesBottomSheetDialogFragment.TAG);
 						}
-						mapMarkersHelper.updateGroupDisabled(group, disabled);
-						if (group.getType() == MapMarkersGroup.GPX_TYPE) {
+						itineraryHelper.updateGroupDisabled(group, disabled);
+						if (group.getType() == ItineraryType.TRACK) {
 							group.setVisibleUntilRestart(disabled);
 							String gpxPath = group.getGpxPath();
 							SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxPath);
@@ -496,9 +496,9 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 							switchGpxVisibility(gpxFile[0], selectedGpxFile, !disabled);
 						}
 						if(!disabled) {
-							mapMarkersHelper.enableGroup(group);
+							itineraryHelper.enableGroup(group);
 						} else {
-							mapMarkersHelper.runSynchronization(group);
+							itineraryHelper.runSynchronization(group);
 						}
 
 						if (disabled) {
@@ -506,10 +506,10 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 									.setAction(R.string.shared_string_undo, new View.OnClickListener() {
 										@Override
 										public void onClick(View view) {
-											if (group.getType() == MapMarkersGroup.GPX_TYPE && gpxFile[0] != null) {
+											if (group.getType() == ItineraryType.TRACK && gpxFile[0] != null) {
 												switchGpxVisibility(gpxFile[0], null, true);
 											}
-											mapMarkersHelper.enableGroup(group);
+											itineraryHelper.enableGroup(group);
 										}
 									});
 							UiUtilities.setupSnackbar(snackbar, night);
@@ -549,7 +549,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 			final Object header = getItem(position);
 			if (header instanceof CategoriesSubHeader) {
 				final CategoriesSubHeader categoriesSubHeader = (CategoriesSubHeader) header;
-				final MapMarkersGroup group = categoriesSubHeader.getGroup();
+				final ItineraryGroup group = categoriesSubHeader.getGroup();
 				View.OnClickListener openChooseCategoriesDialog = new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
@@ -563,7 +563,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 							fragment.setUsedOnMap(false);
 							fragment.show(mapActivity.getSupportFragmentManager(), SelectWptCategoriesBottomSheetDialogFragment.TAG);
 						} else {
-							mapActivity.getMyApplication().getMapMarkersHelper().addOrEnableGpxGroup(new File(group.getGpxPath()));
+							mapActivity.getMyApplication().getItineraryHelper().addOrEnableGpxGroup(new File(group.getGpxPath()));
 						}
 					}
 				};
@@ -592,7 +592,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 		}
 	}
 
-	private String getGroupWptCategoriesString(MapMarkersGroup group) {
+	private String getGroupWptCategoriesString(ItineraryGroup group) {
 		StringBuilder sb = new StringBuilder();
 		Set<String> categories = group.getWptCategories();
 		if (categories != null && !categories.isEmpty()) {
@@ -616,7 +616,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 		Object item = items.get(position);
 		if (item instanceof MapMarker) {
 			return MARKER_TYPE;
-		} else if (item instanceof GroupHeader || item instanceof Integer) {
+		} else if (item instanceof GroupHeader || item instanceof MarkerGroupItem) {
 			return HEADER_TYPE;
 		} else if (item instanceof ShowHideHistoryButton) {
 			return SHOW_HIDE_HISTORY_TYPE;
@@ -664,13 +664,13 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 
 	public class CategoriesSubHeader {
 
-		private MapMarkersGroup group;
+		private ItineraryGroup group;
 
-		public CategoriesSubHeader(MapMarkersGroup group) {
+		public CategoriesSubHeader(ItineraryGroup group) {
 			this.group = group;
 		}
 
-		public MapMarkersGroup getGroup() {
+		public ItineraryGroup getGroup() {
 			return group;
 		}
 	}

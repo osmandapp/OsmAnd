@@ -19,7 +19,7 @@ import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.mapmarkers.MapMarker;
-import net.osmand.plus.mapmarkers.MapMarkersHelper;
+import net.osmand.plus.mapmarkers.ItineraryHelper;
 import net.osmand.plus.track.TrackMenuFragment;
 import net.osmand.plus.wikivoyage.menu.WikivoyageWptPtMenuBuilder;
 import net.osmand.util.Algorithms;
@@ -36,7 +36,7 @@ public class WptPtMenuController extends MenuController {
 							   @NonNull PointDescription pointDescription, @NonNull final WptPt wpt) {
 		super(menuBuilder, pointDescription, mapActivity);
 		this.wpt = wpt;
-		MapMarkersHelper markersHelper = mapActivity.getMyApplication().getMapMarkersHelper();
+		ItineraryHelper markersHelper = mapActivity.getMyApplication().getItineraryHelper();
 		mapMarker = markersHelper.getMapMarker(wpt);
 		if (mapMarker == null) {
 			mapMarker = markersHelper.getMapMarker(new LatLon(wpt.lat, wpt.lon));

@@ -14,7 +14,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.TransportStop;
 import net.osmand.plus.FavouritesDbHelper;
-import net.osmand.plus.mapmarkers.MapMarkersHelper;
+import net.osmand.plus.mapmarkers.ItineraryHelper;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -44,7 +44,7 @@ public class FavouritePointMenuController extends MenuController {
 		super(new FavouritePointMenuBuilder(mapActivity, fav), pointDescription, mapActivity);
 		this.fav = fav;
 
-		final MapMarkersHelper markersHelper = mapActivity.getMyApplication().getMapMarkersHelper();
+		final ItineraryHelper markersHelper = mapActivity.getMyApplication().getItineraryHelper();
 		mapMarker = markersHelper.getMapMarker(fav);
 		if (mapMarker == null) {
 			mapMarker = markersHelper.getMapMarker(new LatLon(fav.getLatitude(), fav.getLongitude()));

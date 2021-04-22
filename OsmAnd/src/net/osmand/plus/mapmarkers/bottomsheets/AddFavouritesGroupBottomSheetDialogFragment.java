@@ -1,4 +1,4 @@
-package net.osmand.plus.mapmarkers;
+package net.osmand.plus.mapmarkers.bottomsheets;
 
 import android.os.Bundle;
 
@@ -56,7 +56,7 @@ public class AddFavouritesGroupBottomSheetDialogFragment extends AddGroupBottomS
 		if (!group.isVisible()) {
 			favouritesDbHelper.editFavouriteGroup(group, group.getName(), group.getColor(), true);
 		}
-		getMyApplication().getMapMarkersHelper().addOrEnableGroup(group);
+		getMyApplication().getItineraryHelper().addOrEnableGroup(group);
 		dismiss();
 	}
 }

@@ -1,4 +1,4 @@
-package net.osmand.plus.mapmarkers;
+package net.osmand.plus.mapmarkers.fragments;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -71,11 +71,17 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.mapmarkers.CoordinateInputBottomSheetDialogFragment.CoordinateInputFormatChangeListener;
+import net.osmand.plus.mapmarkers.CoordinateInputFormats;
+import net.osmand.plus.mapmarkers.ItineraryGroup;
+import net.osmand.plus.mapmarkers.ItineraryHelper;
+import net.osmand.plus.mapmarkers.bottomsheets.CoordinateInputActionsBottomSheet;
+import net.osmand.plus.mapmarkers.bottomsheets.CoordinateInputBottomSheetDialogFragment;
+import net.osmand.plus.mapmarkers.bottomsheets.CoordinateInputBottomSheetDialogFragment.CoordinateInputFormatChangeListener;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.DDM;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.DMS;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.Format;
 import net.osmand.plus.mapmarkers.adapters.CoordinateInputAdapter;
+import net.osmand.plus.mapmarkers.bottomsheets.SaveAsTrackBottomSheetDialogFragment;
 import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.track.TrackMenuFragment;
 import net.osmand.plus.widgets.EditTextEx;
@@ -168,8 +174,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	}
 
 	private void syncGpx(GPXFile gpxFile) {
-		MapMarkersHelper helper = getMyApplication().getMapMarkersHelper();
-		MapMarkersGroup group = helper.getMarkersGroup(gpxFile);
+		ItineraryHelper helper = getMyApplication().getItineraryHelper();
+		ItineraryGroup group = helper.getMarkersGroup(gpxFile);
 		if (group != null) {
 			helper.runSynchronization(group);
 		}
@@ -1089,7 +1095,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			public void saveGpx(final String fileName) {
 				new SaveGpxAsyncTask(app, getGpx(),fileName, false).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 				hasUnsavedChanges = false;
-				app.getMapMarkersHelper().addOrEnableGroup(getGpx());
+				app.getItineraryHelper().addOrEnableGroup(getGpx());
 				if (listener != null) {
 					listener.onPointsSaved();
 				}

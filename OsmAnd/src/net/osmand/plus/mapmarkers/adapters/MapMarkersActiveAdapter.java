@@ -13,13 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.data.LatLon;
-import net.osmand.plus.mapmarkers.MapMarker;
-import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.mapmarkers.ItineraryGroup;
+import net.osmand.plus.mapmarkers.ItineraryType;
+import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.util.Algorithms;
 
 import java.util.Collections;
@@ -43,7 +44,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 		this.mapActivity = mapActivity;
 		uiUtilities = mapActivity.getMyApplication().getUIUtilities();
 		updateLocationViewCache = uiUtilities.getUpdateLocationViewCache();
-		markers = mapActivity.getMyApplication().getMapMarkersHelper().getMapMarkers();
+		markers = mapActivity.getMyApplication().getItineraryHelper().getMapMarkers();
 		night = !mapActivity.getMyApplication().getSettings().isLightContent();
 		showDirectionEnabled = mapActivity.getMyApplication().getSettings().MARKERS_DISTANCE_INDICATION_ENABLED.get();
 	}
@@ -151,7 +152,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 				}
 				final MapMarker marker = markers.get(position);
 
-				mapActivity.getMyApplication().getMapMarkersHelper().moveMapMarkerToHistory(marker);
+				mapActivity.getMyApplication().getItineraryHelper().moveMapMarkerToHistory(marker);
 				changeMarkers();
 				notifyDataSetChanged();
 
@@ -159,7 +160,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 						.setAction(R.string.shared_string_undo, new View.OnClickListener() {
 							@Override
 							public void onClick(View view) {
-								mapActivity.getMyApplication().getMapMarkersHelper().restoreMarkerFromHistory(marker, position);
+								mapActivity.getMyApplication().getItineraryHelper().restoreMarkerFromHistory(marker, position);
 								changeMarkers();
 								notifyDataSetChanged();
 							}
@@ -188,7 +189,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 	}
 
 	public void changeMarkers() {
-		markers = mapActivity.getMyApplication().getMapMarkersHelper().getMapMarkers();
+		markers = mapActivity.getMyApplication().getItineraryHelper().getMapMarkers();
 	}
 
 	public void hideSnackbar() {
@@ -213,11 +214,11 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 	public void onItemSwiped(RecyclerView.ViewHolder holder) {
 		final int pos = holder.getAdapterPosition();
 		final MapMarker marker = getItem(pos);
-		mapActivity.getMyApplication().getMapMarkersHelper().moveMapMarkerToHistory(marker);
-		MapMarkersGroup group = mapActivity.getMyApplication().getMapMarkersHelper().getMapMarkerGroupById(marker.groupKey,
-				MapMarkersGroup.ANY_TYPE);
+		mapActivity.getMyApplication().getItineraryHelper().moveMapMarkerToHistory(marker);
+		ItineraryGroup group = mapActivity.getMyApplication().getItineraryHelper().getMapMarkerGroupById(marker.groupKey,
+				ItineraryType.MARKERS);
 		if (group != null) {
-			mapActivity.getMyApplication().getMapMarkersHelper().updateGroup(group);
+			mapActivity.getMyApplication().getItineraryHelper().updateGroup(group);
 		}
 		changeMarkers();
 		notifyDataSetChanged();
@@ -225,7 +226,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 				.setAction(R.string.shared_string_undo, new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						mapActivity.getMyApplication().getMapMarkersHelper().restoreMarkerFromHistory(marker, pos);
+						mapActivity.getMyApplication().getItineraryHelper().restoreMarkerFromHistory(marker, pos);
 						changeMarkers();
 						notifyDataSetChanged();
 					}

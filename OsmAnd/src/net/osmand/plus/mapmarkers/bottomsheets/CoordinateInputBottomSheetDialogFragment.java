@@ -1,4 +1,4 @@
-package net.osmand.plus.mapmarkers;
+package net.osmand.plus.mapmarkers.bottomsheets;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -162,7 +162,7 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 		return R.string.shared_string_close;
 	}
 
-	interface CoordinateInputFormatChangeListener {
+	public interface CoordinateInputFormatChangeListener {
 
 		void onKeyboardChanged();
 

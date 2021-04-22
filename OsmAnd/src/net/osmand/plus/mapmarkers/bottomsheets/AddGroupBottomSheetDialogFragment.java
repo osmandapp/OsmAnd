@@ -1,4 +1,4 @@
-package net.osmand.plus.mapmarkers;
+package net.osmand.plus.mapmarkers.bottomsheets;
 
 import android.app.Dialog;
 import android.os.Bundle;

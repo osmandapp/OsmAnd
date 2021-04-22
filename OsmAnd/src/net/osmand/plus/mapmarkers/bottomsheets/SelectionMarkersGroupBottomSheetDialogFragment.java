@@ -1,4 +1,4 @@
-package net.osmand.plus.mapmarkers;
+package net.osmand.plus.mapmarkers.bottomsheets;
 
 import android.os.Bundle;
 import android.view.View;
@@ -64,7 +64,7 @@ public class SelectionMarkersGroupBottomSheetDialogFragment extends MenuBottomSh
 		return 	R.string.shared_string_close;
 	}
 
-	interface AddMarkersGroupFragmentListener {
+	public interface AddMarkersGroupFragmentListener {
 
 		void favouritesOnClick();
 

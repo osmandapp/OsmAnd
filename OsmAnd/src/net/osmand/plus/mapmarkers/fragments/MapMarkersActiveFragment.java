@@ -1,4 +1,4 @@
-package net.osmand.plus.mapmarkers;
+package net.osmand.plus.mapmarkers.fragments;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -26,6 +26,7 @@ import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.adapters.MapMarkersActiveAdapter;
 import net.osmand.plus.mapmarkers.adapters.MapMarkersActiveAdapter.MapMarkersActiveAdapterListener;
 import net.osmand.plus.mapmarkers.adapters.MapMarkersItemTouchHelperCallback;
@@ -66,7 +67,7 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 				MapMarker marker = adapter.getItem(pos);
 				OsmandApplication app = mapActivity.getMyApplication();
 				if (app.getSettings().SELECT_MARKER_ON_SINGLE_TAP.get()) {
-					app.getMapMarkersHelper().moveMarkerToTop(marker);
+					app.getItineraryHelper().moveMarkerToTop(marker);
 					updateAdapter();
 				} else {
 					FavouritePoint fav = marker.favouritePoint == null
@@ -113,7 +114,7 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 				toPosition = holder.getAdapterPosition();
 				if (toPosition >= 0 && fromPosition >= 0 && toPosition != fromPosition) {
 					hideSnackbar();
-					mapActivity.getMyApplication().getMapMarkersHelper().reorderActiveMarkersIfNeeded();
+					mapActivity.getMyApplication().getItineraryHelper().reorderActiveMarkersIfNeeded();
 					adapter.notifyDataSetChanged();
 				}
 			}

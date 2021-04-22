@@ -45,11 +45,11 @@ public class MarkersPlanRouteContext {
 	private boolean adjustMapOnStart = true;
 	private boolean navigationFromMarkers;
 
-	Map<Pair<WptPt, WptPt>, List<WptPt>> getSnappedToRoadPoints() {
+	public Map<Pair<WptPt, WptPt>, List<WptPt>> getSnappedToRoadPoints() {
 		return snappedToRoadPoints;
 	}
 
-	TrkSegment getSnapTrkSegment() {
+	public TrkSegment getSnapTrkSegment() {
 		return snapTrkSegment;
 	}
 
@@ -57,7 +57,7 @@ public class MarkersPlanRouteContext {
 		return snappedMode;
 	}
 
-	void setSnappedMode(ApplicationMode snappedMode) {
+	public void setSnappedMode(ApplicationMode snappedMode) {
 		this.snappedMode = snappedMode;
 	}
 
@@ -69,11 +69,11 @@ public class MarkersPlanRouteContext {
 		this.listener = listener;
 	}
 
-	boolean isProgressBarVisible() {
+	public boolean isProgressBarVisible() {
 		return progressBarVisible;
 	}
 
-	void setProgressBarVisible(boolean progressBarVisible) {
+	public void setProgressBarVisible(boolean progressBarVisible) {
 		this.progressBarVisible = progressBarVisible;
 	}
 
@@ -113,7 +113,7 @@ public class MarkersPlanRouteContext {
 		this.app = app;
 	}
 
-	void cancelSnapToRoad() {
+	public void cancelSnapToRoad() {
 		listener.hideProgressBar(true);
 		snapToRoadPairsToCalculate.clear();
 		if (calculationProgress != null) {
@@ -151,7 +151,7 @@ public class MarkersPlanRouteContext {
 		}
 	}
 
-	void recreateSnapTrkSegment(boolean adjustMap) {
+	public void recreateSnapTrkSegment(boolean adjustMap) {
 		snapTrkSegment.points.clear();
 		List<WptPt> points = getPointsToCalculate();
 		if (snappedMode == ApplicationMode.DEFAULT) {
@@ -178,7 +178,7 @@ public class MarkersPlanRouteContext {
 	}
 
 	private List<WptPt> getPointsToCalculate() {
-		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
+		ItineraryHelper markersHelper = app.getItineraryHelper();
 		List<WptPt> points = new LinkedList<>();
 		Location myLoc = app.getLocationProvider().getLastStaleKnownLocation();
 		if (markersHelper.isStartFromMyLocation() && myLoc != null) {
@@ -281,7 +281,7 @@ public class MarkersPlanRouteContext {
 		return params;
 	}
 
-	interface PlanRouteProgressListener {
+	public interface PlanRouteProgressListener {
 
 		void showProgressBar();
 

@@ -46,18 +46,16 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.Version;
 import net.osmand.plus.activities.actions.OsmAndDialogs;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.liveupdates.OsmLiveActivity;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment.ContextMenuItemClickListener;
 import net.osmand.plus.mapmarkers.MapMarker;
-import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
-import net.osmand.plus.mapmarkers.MapMarkersHelper;
+import net.osmand.plus.mapmarkers.fragments.MapMarkersDialogFragment;
+import net.osmand.plus.mapmarkers.ItineraryHelper;
 import net.osmand.plus.mapmarkers.MarkersPlanRouteContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.StartPlanRouteBottomSheet;
@@ -107,7 +105,6 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_HELP_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_MAP_MARKERS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_MEASURE_DISTANCE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_MY_PLACES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_OSMAND_LIVE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_PLUGINS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SEARCH_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
@@ -184,7 +181,7 @@ public class MapActivityActions implements DialogProvider {
 
 
 	public void addMapMarker(double latitude, double longitude, PointDescription pd, @Nullable String mapObjectName) {
-		MapMarkersHelper markersHelper = getMyApplication().getMapMarkersHelper();
+		ItineraryHelper markersHelper = getMyApplication().getItineraryHelper();
 		markersHelper.addMapMarker(new LatLon(latitude, longitude), pd, mapObjectName);
 	}
 
@@ -616,7 +613,7 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 	public ApplicationMode getRouteMode(LatLon from) {
-		MarkersPlanRouteContext planRouteContext = mapActivity.getMyApplication().getMapMarkersHelper().getPlanRouteContext();
+		MarkersPlanRouteContext planRouteContext = mapActivity.getMyApplication().getItineraryHelper().getPlanRouteContext();
 		if (planRouteContext.isNavigationFromMarkers() && planRouteContext.getSnappedMode() != ApplicationMode.DEFAULT) {
 			planRouteContext.setNavigationFromMarkers(false);
 			return planRouteContext.getSnappedMode();

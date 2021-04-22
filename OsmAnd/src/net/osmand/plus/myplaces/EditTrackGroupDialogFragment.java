@@ -49,8 +49,8 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.mapmarkers.MapMarkersGroup;
-import net.osmand.plus.mapmarkers.MapMarkersHelper;
+import net.osmand.plus.mapmarkers.ItineraryGroup;
+import net.osmand.plus.mapmarkers.ItineraryHelper;
 import net.osmand.plus.measurementtool.OptionsDividerItem;
 import net.osmand.plus.myplaces.DeletePointsTask.OnPointsDeleteListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -72,7 +72,7 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 
 	private OsmandApplication app;
 	private GpxSelectionHelper selectedGpxHelper;
-	private MapMarkersHelper mapMarkersHelper;
+	private ItineraryHelper itineraryHelper;
 
 	private GpxDisplayGroup group;
 
@@ -83,7 +83,7 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 		}
 		app = requiredMyApplication();
 		selectedGpxHelper = app.getSelectedGpxHelper();
-		mapMarkersHelper = app.getMapMarkersHelper();
+		itineraryHelper = app.getItineraryHelper();
 		items.add(new TitleItem(getCategoryName(app, group.getName())));
 
 		GPXFile gpxFile = group.getGpx();
@@ -192,7 +192,7 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 	}
 
 	private BaseBottomSheetItem createCopyToMarkersItem(final GPXFile gpxFile) {
-		MapMarkersGroup markersGroup = mapMarkersHelper.getMarkersGroup(gpxFile);
+		ItineraryGroup markersGroup = itineraryHelper.getMarkersGroup(gpxFile);
 		final boolean synced = markersGroup != null && (Algorithms.isEmpty(markersGroup.getWptCategories())
 				|| markersGroup.getWptCategories().contains(group.getName()));
 
@@ -216,10 +216,10 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 			selectedGpxHelper.selectGpxFile(gpxFile, true, false, false, false, false);
 		}
 		boolean groupCreated = false;
-		MapMarkersGroup markersGroup = mapMarkersHelper.getMarkersGroup(gpxFile);
+		ItineraryGroup markersGroup = itineraryHelper.getMarkersGroup(gpxFile);
 		if (markersGroup == null) {
 			groupCreated = true;
-			markersGroup = mapMarkersHelper.addOrEnableGroup(gpxFile);
+			markersGroup = itineraryHelper.addOrEnableGroup(gpxFile);
 		}
 		Set<String> categories = markersGroup.getWptCategories();
 		Set<String> selectedCategories = new HashSet<>();
@@ -232,11 +232,11 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 			selectedCategories.add(group.getName());
 		}
 		if (Algorithms.isEmpty(selectedCategories)) {
-			mapMarkersHelper.removeMarkersGroup(markersGroup);
+			itineraryHelper.removeMarkersGroup(markersGroup);
 		} else {
-			mapMarkersHelper.updateGroupWptCategories(markersGroup, selectedCategories);
+			itineraryHelper.updateGroupWptCategories(markersGroup, selectedCategories);
 			if (!groupCreated) {
-				mapMarkersHelper.runSynchronization(markersGroup);
+				itineraryHelper.runSynchronization(markersGroup);
 			}
 		}
 	}
@@ -524,8 +524,8 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 		}
 
 		private void syncGpx(GPXFile gpxFile) {
-			MapMarkersHelper markersHelper = app.getMapMarkersHelper();
-			MapMarkersGroup group = markersHelper.getMarkersGroup(gpxFile);
+			ItineraryHelper markersHelper = app.getItineraryHelper();
+			ItineraryGroup group = markersHelper.getMarkersGroup(gpxFile);
 			if (group != null) {
 				markersHelper.runSynchronization(group);
 			}

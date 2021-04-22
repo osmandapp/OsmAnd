@@ -31,7 +31,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.mapmarkers.MapMarkersHelper;
+import net.osmand.plus.mapmarkers.ItineraryHelper;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmAndFormatter;
@@ -251,7 +251,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		} else {
 			myLoc = app.getLocationProvider().getLastStaleKnownLocation();
 		}
-		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
+		ItineraryHelper markersHelper = app.getItineraryHelper();
 		List<MapMarker> activeMapMarkers = markersHelper.getMapMarkers();
 		int displayedWidgets = settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get();
 
@@ -340,7 +340,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 		int displayedWidgets = settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get();
 
-		MapMarkersHelper markersHelper = map.getMyApplication().getMapMarkersHelper();
+		ItineraryHelper markersHelper = map.getMyApplication().getItineraryHelper();
 
 		for (MapMarker marker : markersHelper.getMapMarkers()) {
 			if (isLocationVisible(tileBox, marker) && !overlappedByWaypoint(marker)
@@ -516,7 +516,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				|| !settings.SHOW_MAP_MARKERS.get()) {
 			return false;
 		}
-		final MapMarkersHelper helper = map.getMyApplication().getMapMarkersHelper();
+		final ItineraryHelper helper = map.getMyApplication().getItineraryHelper();
 		final MapMarker old = helper.getMapMarkers().get(0);
 		helper.moveMarkerToTop((MapMarker) o);
 		String title = map.getString(R.string.marker_activated, helper.getMapMarkers().get(0).getName(map));
@@ -546,7 +546,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		int r = getDefaultRadiusPoi(tileBox);
 		boolean selectMarkerOnSingleTap = app.getSettings().SELECT_MARKER_ON_SINGLE_TAP.get();
 
-		for (MapMarker marker : app.getMapMarkersHelper().getMapMarkers()) {
+		for (MapMarker marker : app.getItineraryHelper().getMapMarkers()) {
 			if ((!unknownLocation && selectMarkerOnSingleTap) || !isSynced(marker)) {
 				LatLon latLon = marker.point;
 				if (latLon != null) {
@@ -639,7 +639,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		boolean result = false;
 		MapMarker newObject = null;
 		if (o instanceof MapMarker) {
-			MapMarkersHelper markersHelper = map.getMyApplication().getMapMarkersHelper();
+			ItineraryHelper markersHelper = map.getMyApplication().getItineraryHelper();
 			MapMarker marker = (MapMarker) o;
 
 			PointDescription originalDescription = marker.getOriginalPointDescription();

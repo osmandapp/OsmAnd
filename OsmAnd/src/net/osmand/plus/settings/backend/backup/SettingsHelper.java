@@ -30,11 +30,11 @@ import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
-import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.mapmarkers.ItineraryGroup;
+import net.osmand.plus.mapmarkers.ItineraryType;
 import net.osmand.plus.mapmarkers.MapMarker;
-import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.osmedit.OpenstreetmapPoint;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
@@ -606,19 +606,19 @@ public class SettingsHelper {
 				myPlacesItems.put(ExportSettingsType.MULTIMEDIA_NOTES, files);
 			}
 		}
-		List<MapMarker> mapMarkers = app.getMapMarkersHelper().getMapMarkersFromDefaultGroups(false);
+		List<MapMarker> mapMarkers = app.getItineraryHelper().getMapMarkersFromDefaultGroups(false);
 		if (!mapMarkers.isEmpty()) {
 			String name = app.getString(R.string.map_markers);
 			String groupId = ExportSettingsType.ACTIVE_MARKERS.name();
-			MapMarkersGroup markersGroup = new MapMarkersGroup(groupId, name, MapMarkersGroup.ANY_TYPE);
+			ItineraryGroup markersGroup = new ItineraryGroup(groupId, name, ItineraryType.MARKERS);
 			markersGroup.setMarkers(mapMarkers);
 			myPlacesItems.put(ExportSettingsType.ACTIVE_MARKERS, Collections.singletonList(markersGroup));
 		}
-		List<MapMarker> markersHistory = app.getMapMarkersHelper().getMapMarkersFromDefaultGroups(true);
+		List<MapMarker> markersHistory = app.getItineraryHelper().getMapMarkersFromDefaultGroups(true);
 		if (!markersHistory.isEmpty()) {
 			String name = app.getString(R.string.shared_string_history);
 			String groupId = ExportSettingsType.HISTORY_MARKERS.name();
-			MapMarkersGroup markersGroup = new MapMarkersGroup(groupId, name, MapMarkersGroup.ANY_TYPE);
+			ItineraryGroup markersGroup = new ItineraryGroup(groupId, name, ItineraryType.MARKERS);
 			markersGroup.setMarkers(markersHistory);
 			myPlacesItems.put(ExportSettingsType.HISTORY_MARKERS, Collections.singletonList(markersGroup));
 		}
@@ -721,8 +721,8 @@ public class SettingsHelper {
 		List<FavoriteGroup> favoriteGroups = new ArrayList<>();
 		List<OsmNotesPoint> osmNotesPointList = new ArrayList<>();
 		List<OpenstreetmapPoint> osmEditsPointList = new ArrayList<>();
-		List<MapMarkersGroup> markersGroups = new ArrayList<>();
-		List<MapMarkersGroup> markersHistoryGroups = new ArrayList<>();
+		List<ItineraryGroup> markersGroups = new ArrayList<>();
+		List<ItineraryGroup> markersHistoryGroups = new ArrayList<>();
 		List<HistoryEntry> historyEntries = new ArrayList<>();
 		List<OnlineRoutingEngine> onlineRoutingEngines = new ArrayList<>();
 
@@ -756,12 +756,12 @@ public class SettingsHelper {
 				osmEditsPointList.add((OpenstreetmapPoint) object);
 			} else if (object instanceof FavoriteGroup) {
 				favoriteGroups.add((FavoriteGroup) object);
-			} else if (object instanceof MapMarkersGroup) {
-				MapMarkersGroup markersGroup = (MapMarkersGroup) object;
+			} else if (object instanceof ItineraryGroup) {
+				ItineraryGroup markersGroup = (ItineraryGroup) object;
 				if (ExportSettingsType.ACTIVE_MARKERS.name().equals(markersGroup.getId())) {
-					markersGroups.add((MapMarkersGroup) object);
+					markersGroups.add((ItineraryGroup) object);
 				} else if (ExportSettingsType.HISTORY_MARKERS.name().equals(markersGroup.getId())) {
-					markersHistoryGroups.add((MapMarkersGroup) object);
+					markersHistoryGroups.add((ItineraryGroup) object);
 				}
 			} else if (object instanceof HistoryEntry) {
 				historyEntries.add((HistoryEntry) object);
@@ -813,7 +813,7 @@ public class SettingsHelper {
 		}
 		if (!markersGroups.isEmpty()) {
 			List<MapMarker> mapMarkers = new ArrayList<>();
-			for (MapMarkersGroup group : markersGroups) {
+			for (ItineraryGroup group : markersGroups) {
 				mapMarkers.addAll(group.getMarkers());
 			}
 			MarkersSettingsItem baseItem = getBaseItem(SettingsItemType.ACTIVE_MARKERS, MarkersSettingsItem.class, settingsItems);
@@ -821,7 +821,7 @@ public class SettingsHelper {
 		}
 		if (!markersHistoryGroups.isEmpty()) {
 			List<MapMarker> mapMarkers = new ArrayList<>();
-			for (MapMarkersGroup group : markersHistoryGroups) {
+			for (ItineraryGroup group : markersHistoryGroups) {
 				mapMarkers.addAll(group.getMarkers());
 			}
 			HistoryMarkersSettingsItem baseItem = getBaseItem(SettingsItemType.HISTORY_MARKERS, HistoryMarkersSettingsItem.class, settingsItems);
@@ -911,8 +911,8 @@ public class SettingsHelper {
 		List<OsmNotesPoint> notesPointList = new ArrayList<>();
 		List<OpenstreetmapPoint> editsPointList = new ArrayList<>();
 		List<FavoriteGroup> favoriteGroups = new ArrayList<>();
-		List<MapMarkersGroup> markersGroups = new ArrayList<>();
-		List<MapMarkersGroup> markersHistoryGroups = new ArrayList<>();
+		List<ItineraryGroup> markersGroups = new ArrayList<>();
+		List<ItineraryGroup> markersHistoryGroups = new ArrayList<>();
 		List<HistoryEntry> historyEntries = new ArrayList<>();
 		List<OnlineRoutingEngine> onlineRoutingEngines = new ArrayList<>();
 

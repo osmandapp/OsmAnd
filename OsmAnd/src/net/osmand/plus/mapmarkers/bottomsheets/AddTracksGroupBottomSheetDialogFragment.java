@@ -1,4 +1,4 @@
-package net.osmand.plus.mapmarkers;
+package net.osmand.plus.mapmarkers.bottomsheets;
 
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
@@ -108,7 +108,7 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 					GPXFile res = GPXUtilities.loadGPXFile(gpx);
 					selectionHelper.selectGpxFile(res, true, false, false, false, false);
 				}
-				app.getMapMarkersHelper().addOrEnableGpxGroup(gpx);
+				app.getItineraryHelper().addOrEnableGpxGroup(gpx);
 			}
 		}
 		dismiss();

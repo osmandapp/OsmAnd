@@ -47,7 +47,7 @@ import net.osmand.plus.mapcontextmenu.editors.WptPtEditor;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.mapmarkers.MapMarker;
-import net.osmand.plus.mapmarkers.MapMarkersHelper.MapMarkerChangedListener;
+import net.osmand.plus.mapmarkers.ItineraryHelper.MapMarkerChangedListener;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -414,7 +414,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		mapActivity.refreshMap();
 
 		if (object instanceof MapMarker) {
-			app.getMapMarkersHelper().addListener(this);
+			app.getItineraryHelper().addListener(this);
 		} else if (object instanceof TargetPoint) {
 			app.getTargetPointsHelper().addPointListener(this);
 		}
@@ -518,7 +518,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			if (mapActivity != null) {
 				Object object = getObject();
 				if (object instanceof MapMarker) {
-					mapActivity.getMyApplication().getMapMarkersHelper().removeListener(this);
+					mapActivity.getMyApplication().getItineraryHelper().removeListener(this);
 				}
 				MenuController menuController = getMenuController();
 				if (menuController != null) {

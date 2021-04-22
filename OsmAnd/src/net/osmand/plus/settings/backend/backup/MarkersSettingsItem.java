@@ -10,10 +10,11 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.mapmarkers.ItineraryType;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
-import net.osmand.plus.mapmarkers.MapMarkersGroup;
-import net.osmand.plus.mapmarkers.MapMarkersHelper;
+import net.osmand.plus.mapmarkers.ItineraryGroup;
+import net.osmand.plus.mapmarkers.ItineraryHelper;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.util.Algorithms;
 
@@ -28,7 +29,7 @@ import static net.osmand.IndexConstants.GPX_FILE_EXT;
 
 public class MarkersSettingsItem extends CollectionSettingsItem<MapMarker> {
 
-	private MapMarkersHelper markersHelper;
+	private ItineraryHelper markersHelper;
 
 	public MarkersSettingsItem(@NonNull OsmandApplication app, @NonNull List<MapMarker> items) {
 		super(app, null, items);
@@ -45,7 +46,7 @@ public class MarkersSettingsItem extends CollectionSettingsItem<MapMarker> {
 	@Override
 	protected void init() {
 		super.init();
-		markersHelper = app.getMapMarkersHelper();
+		markersHelper = app.getItineraryHelper();
 		existingItems = new ArrayList<>(markersHelper.getMapMarkersFromDefaultGroups(false));
 	}
 
@@ -122,10 +123,10 @@ public class MarkersSettingsItem extends CollectionSettingsItem<MapMarker> {
 		}
 	}
 
-	public MapMarkersGroup getMarkersGroup() {
+	public ItineraryGroup getMarkersGroup() {
 		String name = app.getString(R.string.map_markers);
 		String groupId = ExportSettingsType.ACTIVE_MARKERS.name();
-		MapMarkersGroup markersGroup = new MapMarkersGroup(groupId, name, MapMarkersGroup.ANY_TYPE);
+		ItineraryGroup markersGroup = new ItineraryGroup(groupId, name, ItineraryType.MARKERS);
 		markersGroup.setMarkers(items);
 		return markersGroup;
 	}
@@ -142,7 +143,7 @@ public class MarkersSettingsItem extends CollectionSettingsItem<MapMarker> {
 					warnings.add(app.getString(R.string.settings_item_read_error, String.valueOf(getType())));
 					SettingsHelper.LOG.error("Failed read gpx file", gpxFile.error);
 				} else {
-					List<MapMarker> mapMarkers = markersHelper.readMarkersFromGpx(gpxFile, false);
+					List<MapMarker> mapMarkers = markersHelper.getSaveHelper().readMarkersFromGpx(gpxFile, false);
 					items.addAll(mapMarkers);
 				}
 			}
@@ -152,7 +153,7 @@ public class MarkersSettingsItem extends CollectionSettingsItem<MapMarker> {
 	@Nullable
 	@Override
 	SettingsItemWriter<? extends SettingsItem> getWriter() {
-		GPXFile gpxFile = markersHelper.generateGpx(items, true);
+		GPXFile gpxFile = markersHelper.getSaveHelper().generateGpx(items, true);
 		return getGpxWriter(gpxFile);
 	}
 }

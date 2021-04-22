@@ -1,4 +1,4 @@
-package net.osmand.plus.mapmarkers;
+package net.osmand.plus.mapmarkers.bottomsheets;
 
 import android.app.Activity;
 import android.os.Build;
@@ -17,6 +17,8 @@ import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.mapmarkers.fragments.MapMarkersDialogFragment;
+import net.osmand.plus.mapmarkers.MapMarkersMode;
 
 public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
@@ -220,7 +222,7 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 		return scrH - stBarH - nBarH - AndroidUtils.dpToPx(activity, 56);
 	}
 
-	interface MarkerOptionsFragmentListener {
+	public interface MarkerOptionsFragmentListener {
 
 		void sortByOnClick();
 

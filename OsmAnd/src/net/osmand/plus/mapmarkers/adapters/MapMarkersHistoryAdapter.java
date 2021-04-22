@@ -51,7 +51,7 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 	public void createHeaders() {
 		items = new ArrayList<>();
 		markerGroups = new HashMap<>();
-		List<MapMarker> markersHistory = app.getMapMarkersHelper().getMapMarkersHistory();
+		List<MapMarker> markersHistory = app.getItineraryHelper().getMapMarkersHistory();
 		int previousHeader = -1;
 		int monthsDisplayed = 0;
 
@@ -161,13 +161,13 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 					if (position < 0) {
 						return;
 					}
-					app.getMapMarkersHelper().restoreMarkerFromHistory(marker, 0);
+					app.getItineraryHelper().restoreMarkerFromHistory(marker, 0);
 
 					snackbar = Snackbar.make(itemViewHolder.itemView, app.getString(R.string.marker_moved_to_active), Snackbar.LENGTH_LONG)
 							.setAction(R.string.shared_string_undo, new View.OnClickListener() {
 								@Override
 								public void onClick(View view) {
-									app.getMapMarkersHelper().moveMapMarkerToHistory(marker);
+									app.getItineraryHelper().moveMapMarkerToHistory(marker);
 								}
 							});
 					UiUtilities.setupSnackbar(snackbar, night);
@@ -216,14 +216,14 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 						return;
 					}
 					for (MapMarker marker : group) {
-						app.getMapMarkersHelper().removeMarker((MapMarker) marker);
+						app.getItineraryHelper().removeMarker((MapMarker) marker);
 					}
 					snackbar = Snackbar.make(holder.itemView, app.getString(R.string.n_items_removed), Snackbar.LENGTH_LONG)
 							.setAction(R.string.shared_string_undo, new View.OnClickListener() {
 								@Override
 								public void onClick(View view) {
 									for (MapMarker marker : group) {
-										app.getMapMarkersHelper().addMarker(marker);
+										app.getItineraryHelper().addMarker(marker);
 									}
 								}
 							});

@@ -68,7 +68,7 @@ import net.osmand.plus.helpers.enums.DrivingRegion;
 import net.osmand.plus.helpers.enums.MetricsConstants;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
-import net.osmand.plus.mapmarkers.MapMarkersHelper;
+import net.osmand.plus.mapmarkers.ItineraryHelper;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.monitoring.LiveMonitoringHelper;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
@@ -147,7 +147,7 @@ public class OsmandApplication extends MultiDexApplication {
 	NotificationHelper notificationHelper;
 	LiveMonitoringHelper liveMonitoringHelper;
 	TargetPointsHelper targetPointsHelper;
-	MapMarkersHelper mapMarkersHelper;
+	ItineraryHelper itineraryHelper;
 	MapMarkersDbHelper mapMarkersDbHelper;
 	WaypointHelper waypointHelper;
 	RoutingOptionsHelper routingOptionsHelper;
@@ -688,8 +688,8 @@ public class OsmandApplication extends MultiDexApplication {
 		return targetPointsHelper;
 	}
 
-	public MapMarkersHelper getMapMarkersHelper() {
-		return mapMarkersHelper;
+	public ItineraryHelper getItineraryHelper() {
+		return itineraryHelper;
 	}
 
 	public MapMarkersDbHelper getMapMarkersDbHelper() {

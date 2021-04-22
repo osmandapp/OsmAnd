@@ -34,7 +34,7 @@ import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment;
+import net.osmand.plus.mapmarkers.fragments.CoordinateInputDialogFragment;
 import net.osmand.plus.measurementtool.GpxData;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.myplaces.SplitSegmentDialogFragment;

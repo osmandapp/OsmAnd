@@ -24,7 +24,7 @@ import net.osmand.plus.helpers.enums.DrivingRegion;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.mapmarkers.MapMarker;
-import net.osmand.plus.mapmarkers.MapMarkersHelper.MapMarkerChangedListener;
+import net.osmand.plus.mapmarkers.ItineraryHelper.MapMarkerChangedListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -90,7 +90,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	}
 
 	private void addMapMarkersListener(OsmandApplication app) {
-		app.getMapMarkersHelper().addListener(this);
+		app.getItineraryHelper().addListener(this);
 	}
 
 	@Override

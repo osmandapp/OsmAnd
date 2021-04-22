@@ -60,7 +60,7 @@ public class AmenityMenuController extends MenuController {
 		}
 
 		String mapNameForMarker = amenity.getName() + "_" + amenity.getType().getKeyName();
-		marker = mapActivity.getMyApplication().getMapMarkersHelper().getMapMarker(mapNameForMarker, amenity.getLocation());
+		marker = mapActivity.getMyApplication().getItineraryHelper().getMapMarker(mapNameForMarker, amenity.getLocation());
 		if (marker != null) {
 			MapMarkerMenuController markerMenuController =
 					new MapMarkerMenuController(mapActivity, marker.getPointDescription(mapActivity), marker);

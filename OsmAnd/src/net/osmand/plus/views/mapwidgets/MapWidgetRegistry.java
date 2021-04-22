@@ -20,7 +20,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
-import net.osmand.plus.mapmarkers.DirectionIndicationDialogFragment;
+import net.osmand.plus.mapmarkers.fragments.DirectionIndicationDialogFragment;
 import net.osmand.plus.quickaction.QuickActionListFragment;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.MapQuickActionLayer;

@@ -45,7 +45,7 @@ import net.osmand.plus.helpers.MapMarkerDialogHelper;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.mapcontextmenu.other.FavouritesBottomSheetMenuFragment;
 import net.osmand.plus.mapmarkers.MapMarker;
-import net.osmand.plus.mapmarkers.MapMarkersHelper;
+import net.osmand.plus.mapmarkers.ItineraryHelper;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.PointType;
 import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
@@ -306,7 +306,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 			List<Object> items = new ArrayList<>();
 			MarkersItemsAdapter adapter = new MarkersItemsAdapter(app, items);
 			adapter.setItemClickListener(getAdapterOnClickListener(items));
-			MapMarkersHelper helper = app.getMapMarkersHelper();
+			ItineraryHelper helper = app.getItineraryHelper();
 			items.add(MARKERS);
 			items.addAll(helper.getMapMarkers());
 			BaseBottomSheetItem scrollItem = new HorizontalRecyclerBottomSheetItem.Builder()

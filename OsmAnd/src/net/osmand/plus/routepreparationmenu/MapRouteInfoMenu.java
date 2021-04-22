@@ -71,7 +71,7 @@ import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenuFragment;
 import net.osmand.plus.mapmarkers.MapMarker;
-import net.osmand.plus.mapmarkers.MapMarkerSelectionFragment;
+import net.osmand.plus.mapmarkers.fragments.MapMarkerSelectionFragment;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.profiles.AppModesBottomSheetDialogFragment.UpdateMapRouteMenuListener;
 import net.osmand.plus.profiles.ConfigureAppModesBottomSheetDialogFragment;
@@ -715,7 +715,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			}
 
 			// Map markers card
-			List<MapMarker> mapMarkers = app.getMapMarkersHelper().getMapMarkers();
+			List<MapMarker> mapMarkers = app.getItineraryHelper().getMapMarkers();
 			if (mapMarkers.size() > 0) {
 				MapMarkersCard mapMarkersCard = new MapMarkersCard(mapActivity, mapMarkers);
 				menuCards.add(mapMarkersCard);
@@ -2054,7 +2054,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			MapMarker m = null;
-			List<MapMarker> mapMarkers = mapActivity.getMyApplication().getMapMarkersHelper().getMapMarkers();
+			List<MapMarker> mapMarkers = mapActivity.getMyApplication().getItineraryHelper().getMapMarkers();
 			if (index != -1 && mapMarkers.size() > index) {
 				m = mapMarkers.get(index);
 			}

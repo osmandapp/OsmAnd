@@ -1,4 +1,4 @@
-package net.osmand.plus.mapmarkers;
+package net.osmand.plus.mapmarkers.fragments;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -34,7 +34,13 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.mapmarkers.SelectionMarkersGroupBottomSheetDialogFragment.AddMarkersGroupFragmentListener;
+import net.osmand.plus.mapmarkers.MapMarker;
+import net.osmand.plus.mapmarkers.bottomsheets.AddFavouritesGroupBottomSheetDialogFragment;
+import net.osmand.plus.mapmarkers.bottomsheets.AddGroupBottomSheetDialogFragment;
+import net.osmand.plus.mapmarkers.bottomsheets.AddTracksGroupBottomSheetDialogFragment;
+import net.osmand.plus.mapmarkers.bottomsheets.HistoryMarkerMenuBottomSheetDialogFragment;
+import net.osmand.plus.mapmarkers.bottomsheets.SelectionMarkersGroupBottomSheetDialogFragment;
+import net.osmand.plus.mapmarkers.bottomsheets.SelectionMarkersGroupBottomSheetDialogFragment.AddMarkersGroupFragmentListener;
 import net.osmand.plus.mapmarkers.adapters.MapMarkerItemViewHolder;
 import net.osmand.plus.mapmarkers.adapters.MapMarkersGroupsAdapter;
 import net.osmand.plus.widgets.EmptyStateRecyclerView;
@@ -189,10 +195,10 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 					final MapMarker marker = (MapMarker) item;
 					int snackbarStringRes;
 					if (direction == ItemTouchHelper.RIGHT) {
-						app.getMapMarkersHelper().moveMapMarkerToHistory((MapMarker) item);
+						app.getItineraryHelper().moveMapMarkerToHistory((MapMarker) item);
 						snackbarStringRes = R.string.marker_moved_to_history;
 					} else {
-						app.getMapMarkersHelper().removeMarker((MapMarker) item);
+						app.getItineraryHelper().removeMarker((MapMarker) item);
 						snackbarStringRes = R.string.item_removed;
 					}
 					updateAdapter();
@@ -201,9 +207,9 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 								@Override
 								public void onClick(View view) {
 									if (direction == ItemTouchHelper.RIGHT) {
-										app.getMapMarkersHelper().restoreMarkerFromHistory(marker, 0);
+										app.getItineraryHelper().restoreMarkerFromHistory(marker, 0);
 									} else {
-										app.getMapMarkersHelper().addMarker(marker);
+										app.getItineraryHelper().addMarker(marker);
 									}
 									updateAdapter();
 								}
@@ -230,7 +236,7 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 					OsmandApplication app = mapActivity.getMyApplication();
 					if (!marker.history) {
 						if (app.getSettings().SELECT_MARKER_ON_SINGLE_TAP.get()) {
-							app.getMapMarkersHelper().moveMarkerToTop(marker);
+							app.getItineraryHelper().moveMarkerToTop(marker);
 							updateAdapter();
 						} else {
 							FavouritePoint fav = marker.favouritePoint == null
@@ -338,7 +344,7 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 				Object item = adapter.getItem(pos);
 				if (item instanceof MapMarker) {
 					if (getMyApplication() != null) {
-						getMyApplication().getMapMarkersHelper().restoreMarkerFromHistory((MapMarker) item, 0);
+						getMyApplication().getItineraryHelper().restoreMarkerFromHistory((MapMarker) item, 0);
 					}
 					updateAdapter();
 				}
@@ -349,7 +355,7 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 				Object item = adapter.getItem(pos);
 				if (item instanceof MapMarker) {
 					if (getMyApplication() != null) {
-						getMyApplication().getMapMarkersHelper().removeMarker((MapMarker) item);
+						getMyApplication().getItineraryHelper().removeMarker((MapMarker) item);
 					}
 					updateAdapter();
 				}

@@ -1,4 +1,4 @@
-package net.osmand.plus.mapmarkers;
+package net.osmand.plus.mapmarkers.bottomsheets;
 
 import android.os.Bundle;
 import android.view.View;
@@ -125,7 +125,7 @@ public class PlanRouteOptionsBottomSheetDialogFragment extends MenuBottomSheetDi
 		return R.string.shared_string_close;
 	}
 
-	interface PlanRouteOptionsFragmentListener {
+	public interface PlanRouteOptionsFragmentListener {
 
 		void selectOnClick();
 
