@@ -38,6 +38,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.Executor;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
@@ -92,6 +93,13 @@ public class AndroidNetworkUtils {
 	public static void sendRequestsAsync(@Nullable final OsmandApplication ctx,
 										 @NonNull final List<Request> requests,
 										 @Nullable final OnSendRequestsListener listener) {
+		sendRequestsAsync(ctx, requests, listener, AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+
+	public static void sendRequestsAsync(@Nullable final OsmandApplication ctx,
+										 @NonNull final List<Request> requests,
+										 @Nullable final OnSendRequestsListener listener,
+										 final Executor executor) {
 
 		new AsyncTask<Void, RequestResponse, List<RequestResponse>>() {
 
@@ -127,7 +135,7 @@ public class AndroidNetworkUtils {
 				}
 			}
 
-		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+		}.executeOnExecutor(executor, (Void) null);
 	}
 
 	public static void sendRequestAsync(final OsmandApplication ctx,
@@ -137,7 +145,18 @@ public class AndroidNetworkUtils {
 										final boolean toastAllowed,
 										final boolean post,
 										final OnRequestResultListener listener) {
+		sendRequestAsync(ctx, url, parameters, userOperation, toastAllowed, post, listener,
+				AsyncTask.THREAD_POOL_EXECUTOR);
+	}
 
+	public static void sendRequestAsync(final OsmandApplication ctx,
+										final String url,
+										final Map<String, String> parameters,
+										final String userOperation,
+										final boolean toastAllowed,
+										final boolean post,
+										final OnRequestResultListener listener,
+										final Executor executor) {
 		new AsyncTask<Void, Void, String>() {
 
 			@Override
@@ -156,7 +175,7 @@ public class AndroidNetworkUtils {
 				}
 			}
 
-		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+		}.executeOnExecutor(executor, (Void) null);
 	}
 
 	public static void downloadFileAsync(final String url,
@@ -183,6 +202,14 @@ public class AndroidNetworkUtils {
 										  final @NonNull List<File> files,
 										  final @NonNull Map<String, String> parameters,
 										  final @Nullable OnFilesDownloadCallback callback) {
+		downloadFilesAsync(url, files, parameters, callback, AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+
+	public static void downloadFilesAsync(final @NonNull String url,
+										  final @NonNull List<File> files,
+										  final @NonNull Map<String, String> parameters,
+										  final @Nullable OnFilesDownloadCallback callback,
+										  final Executor executor) {
 
 		new AsyncTask<Void, Object, Map<File, String>>() {
 
@@ -247,7 +274,7 @@ public class AndroidNetworkUtils {
 				}
 			}
 
-		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+		}.executeOnExecutor(executor, (Void) null);
 	}
 
 	public static String sendRequest(@Nullable OsmandApplication ctx, @NonNull String url,
@@ -503,6 +530,16 @@ public class AndroidNetworkUtils {
 										final @NonNull Map<String, String> parameters,
 										final @Nullable Map<String, String> headers,
 										final OnFilesUploadCallback callback) {
+		uploadFilesAsync(url, files, gzip, parameters, headers, callback, AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+
+	public static void uploadFilesAsync(final @NonNull String url,
+										final @NonNull List<File> files,
+										final boolean gzip,
+										final @NonNull Map<String, String> parameters,
+										final @Nullable Map<String, String> headers,
+										final OnFilesUploadCallback callback,
+										final Executor executor) {
 
 		new AsyncTask<Void, Object, Map<File, String>>() {
 
@@ -557,7 +594,7 @@ public class AndroidNetworkUtils {
 				}
 			}
 
-		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+		}.executeOnExecutor(executor, (Void) null);
 	}
 
 	private static void showToast(OsmandApplication ctx, String message) {

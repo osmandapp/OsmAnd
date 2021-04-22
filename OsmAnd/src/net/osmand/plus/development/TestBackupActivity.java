@@ -186,6 +186,7 @@ public class TestBackupActivity extends OsmandActionBarActivity {
 			@Override
 			public void onClick(View v) {
 				if (backupInfo != null) {
+					buttonBackup.setEnabled(false);
 					BackupTask task = new BackupTask(backupInfo, TestBackupActivity.this, new OnBackupListener() {
 						@Override
 						public void onBackupDone(@Nullable Map<File, String> uploadErrors, @Nullable Map<File, String> downloadErrors,
@@ -203,6 +204,7 @@ public class TestBackupActivity extends OsmandActionBarActivity {
 								a.infoView.setText(description);
 								a.infoView.requestFocus();
 								a.prepareBackup();
+								a.buttonBackup.setEnabled(true);
 							}
 						}
 					});
@@ -214,6 +216,7 @@ public class TestBackupActivity extends OsmandActionBarActivity {
 			@Override
 			public void onClick(View v) {
 				if (backupInfo != null) {
+					buttonRestore.setEnabled(false);
 					BackupTask task = new BackupTask(backupInfo, TestBackupActivity.this, new OnBackupListener() {
 						@Override
 						public void onBackupDone(@Nullable Map<File, String> uploadErrors, @Nullable Map<File, String> downloadErrors,
@@ -231,6 +234,7 @@ public class TestBackupActivity extends OsmandActionBarActivity {
 								a.infoView.setText(description);
 								a.infoView.requestFocus();
 								a.prepareBackup();
+								a.buttonRestore.setEnabled(true);
 							}
 						}
 					});
@@ -309,6 +313,7 @@ public class TestBackupActivity extends OsmandActionBarActivity {
 
 	private void prepareBackup() {
 		final WeakReference<TestBackupActivity> activityRef = new WeakReference<>(this);
+		buttonRefresh.setEnabled(false);
 		PrepareBackupTask prepareBackupTask = new PrepareBackupTask(this, new OnPrepareBackupListener() {
 			@Override
 			public void onBackupPrepared(@Nullable BackupInfo backupInfo, @Nullable String error) {
@@ -329,6 +334,7 @@ public class TestBackupActivity extends OsmandActionBarActivity {
 					}
 					a.infoView.setText(description);
 					a.infoView.requestFocus();
+					a.buttonRefresh.setEnabled(true);
 				}
 			}
 		});

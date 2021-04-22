@@ -11,7 +11,6 @@ import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
-import net.osmand.plus.GpxDbHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.ProgressImplementation;
 import net.osmand.plus.backup.BackupHelper.BackupInfo;
@@ -113,7 +112,7 @@ public class BackupTask {
 			tasks.push(backupTasks[i]);
 		}
 		this.runningTasks = tasks;
-		onTasksInit();
+		onBackupTasksInit();
 	}
 
 	private void initRestoreTasks() {
@@ -123,7 +122,7 @@ public class BackupTask {
 			tasks.push(restoreTasks[i]);
 		}
 		this.runningTasks = tasks;
-		onTasksInit();
+		onRestoreTasksInit();
 	}
 
 	private void initData() {
@@ -275,11 +274,19 @@ public class BackupTask {
 		}
 	}
 
-	private void onTasksInit() {
+	private void onBackupTasksInit() {
 		Context ctx = contextRef.get();
-		if (ctx instanceof Activity && AndroidUtils.isActivityNotDestroyed((Activity) ctx) && progress != null) {
+		if (ctx instanceof Activity && AndroidUtils.isActivityNotDestroyed((Activity) ctx)) {
 			progress = ProgressImplementation.createProgressDialog(ctx,
 					"Backup data", "Initializing...", ProgressDialog.STYLE_HORIZONTAL);
+		}
+	}
+
+	private void onRestoreTasksInit() {
+		Context ctx = contextRef.get();
+		if (ctx instanceof Activity && AndroidUtils.isActivityNotDestroyed((Activity) ctx)) {
+			progress = ProgressImplementation.createProgressDialog(ctx,
+					"Restore data", "Initializing...", ProgressDialog.STYLE_HORIZONTAL);
 		}
 	}
 
