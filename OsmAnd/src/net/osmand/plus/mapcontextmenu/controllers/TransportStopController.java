@@ -189,7 +189,24 @@ public class TransportStopController extends MenuController {
 		}
 	}
 
-	private static void sortTransportStops(@NonNull LatLon latLon, List<TransportStop> transportStops) {
+	private static void sortTransportStopsExits(@NonNull LatLon latLon, @NonNull List<TransportStop> transportStops) {
+		for (TransportStop transportStop : transportStops) {
+			for (TransportStopExit exit : transportStop.getExits()) {
+				int distance = (int) MapUtils.getDistance(latLon, exit.getLocation());
+				if (transportStop.distance > distance) {
+					transportStop.distance = distance;
+				}
+			}
+		}
+		Collections.sort(transportStops, new Comparator<TransportStop>() {
+			@Override
+			public int compare(TransportStop s1, TransportStop s2) {
+				return Algorithms.compare(s1.distance, s2.distance);
+			}
+		});
+	}
+
+	private static void sortTransportStops(@NonNull LatLon latLon, @NonNull List<TransportStop> transportStops) {
 		for (TransportStop transportStop : transportStops) {
 			transportStop.distance = (int) MapUtils.getDistance(latLon, transportStop.getLocation());
 		}
@@ -227,6 +244,8 @@ public class TransportStopController extends MenuController {
 
 		if (isSubwayEntrance) {
 			stopAggregated = processTransportStopsForAmenity(transportStops, amenity);
+			sortTransportStopsExits(loc, stopAggregated.getLocalTransportStops());
+			sortTransportStopsExits(loc, stopAggregated.getNearbyTransportStops());
 		} else {
 			stopAggregated = new TransportStopAggregated();
 			stopAggregated.setAmenity(amenity);

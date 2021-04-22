@@ -131,10 +131,6 @@ public class BackupHelper {
 		return token.matches("[0-9]+");
 	}
 
-	public boolean hasOsmLiveUpdates() {
-		return InAppPurchaseHelper.isSubscribedToLiveUpdates(app);
-	}
-
 	@Nullable
 	public String getOrderId() {
 		InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
@@ -167,7 +163,10 @@ public class BackupHelper {
 	public void registerUser(@NonNull String email, @Nullable final OnRegisterUserListener listener) {
 		Map<String, String> params = new HashMap<>();
 		params.put("email", email);
-		params.put("orderid", getOrderId());
+		String orderId = getOrderId();
+		if (!Algorithms.isEmpty(orderId)) {
+			params.put("orderid", orderId);
+		}
 		params.put("deviceid", app.getUserAndroidId());
 		AndroidNetworkUtils.sendRequestAsync(app, USER_REGISTER_URL, params, "Register user", true, true, new OnRequestResultListener() {
 			@Override
