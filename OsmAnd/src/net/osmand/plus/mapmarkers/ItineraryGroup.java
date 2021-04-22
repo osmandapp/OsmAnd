@@ -10,20 +10,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class MapMarkersGroup {
-
-	public static final int ANY_TYPE = -1;
-	public static final int FAVORITES_TYPE = 0;
-	public static final int GPX_TYPE = 1;
+public class ItineraryGroup {
 
 	public static final String MARKERS_SYNC_GROUP_ID = "markers_sync_group_id";
 
 	private String id;
 	private String name;
-	private int type = ANY_TYPE;
+	private ItineraryType type = ItineraryType.MARKERS;
 	private Set<String> wptCategories;
-	private long creationDate;
 	private boolean disabled;
+
+	private long creationDate;
 	private boolean visible = true;
 	private boolean wasShown = false;
 	private boolean visibleUntilRestart;
@@ -33,11 +30,11 @@ public class MapMarkersGroup {
 	private GroupHeader header;
 	private ShowHideHistoryButton showHideHistoryButton;
 
-	public MapMarkersGroup() {
+	public ItineraryGroup() {
 
 	}
 
-	public MapMarkersGroup(@NonNull String id, @NonNull String name, int type) {
+	public ItineraryGroup(@NonNull String id, @NonNull String name, @NonNull ItineraryType type) {
 		this.id = id;
 		this.name = name;
 		this.type = type;
@@ -95,7 +92,7 @@ public class MapMarkersGroup {
 		return name;
 	}
 
-	public int getType() {
+	public ItineraryType getType() {
 		return type;
 	}
 

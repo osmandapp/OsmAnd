@@ -16,10 +16,10 @@ import net.osmand.ResultMatcher;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.BooleanPreference;
-import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
+import net.osmand.plus.settings.backend.BooleanPreference;
+import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.util.Algorithms;
 
 import java.io.Serializable;
@@ -333,7 +333,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		result = prime * result + (int) Math.floor(latitude * 10000);
 		result = prime * result + (int) Math.floor(longitude * 10000);
 		result = prime * result + (int) Math.floor(altitude * 10000);
-		result = prime * result + (int) Math.floor(timestamp * 10000);
+		result = prime * result + (int) (timestamp ^ (timestamp >>> 32));
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((category == null) ? 0 : category.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
@@ -454,8 +454,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		if (name == null) {
 			name = "";
 		}
-		FavouritePoint fp;
-		fp = new FavouritePoint(pt.lat, pt.lon, name, categoryName, pt.ele, pt.time);
+		FavouritePoint fp = new FavouritePoint(pt.lat, pt.lon, name, categoryName, pt.ele, pt.time);
 		fp.setDescription(pt.desc);
 		if (pt.comment != null) {
 			fp.setOriginObjectName(pt.comment);
