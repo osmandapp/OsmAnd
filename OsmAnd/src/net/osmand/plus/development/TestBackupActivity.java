@@ -89,11 +89,6 @@ public class TestBackupActivity extends OsmandActionBarActivity {
 			}
 		});
 
-		if (!backupHelper.hasOsmLiveUpdates()) {
-			findViewById(R.id.main_view).setVisibility(View.GONE);
-			return;
-		}
-
 		buttonRegister = findViewById(R.id.btn_register);
 		UiUtilities.setupDialogButton(nightMode, buttonRegister, DialogButtonType.PRIMARY, "Register");
 		buttonVerify = findViewById(R.id.btn_verify);
