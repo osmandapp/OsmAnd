@@ -398,7 +398,6 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 				}
 				context.clearCustomColor();
 				context.clearCustomShader();
-
 			}
 			drawer.drawArrowsOverPath(canvas, tb, tx, ty, angles, distances, distToFinish, styles);
 		} finally {

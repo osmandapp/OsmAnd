@@ -91,7 +91,6 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 	private Paint paintIconAction;
 	private Paint paintGridOuterCircle;
 	private Paint paintGridCircle;
-	private Paint paintRouteLinePreview;
 
 	private LayerDrawable selectedPoint;
 	private TrackChartPoints trackChartPoints;
@@ -188,8 +187,6 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 		paintGridOuterCircle.setAntiAlias(true);
 		paintGridOuterCircle.setColor(Color.WHITE);
 		paintGridOuterCircle.setAlpha(204);
-
-		paintRouteLinePreview = new Paint();
 	}
 
 	@Override
@@ -345,31 +342,37 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 	                                  DrawSettings settings,
 	                                  RouteLineDrawInfo drawInfo) {
 		updateAttrs(settings, tileBox);
-		paintRouteLinePreview.setStrokeWidth(getRouteLineWidth(tileBox));
 
-		int centerX = drawInfo.getCenterX();
-		int centerY = drawInfo.getCenterY();
-		int screenHeight = drawInfo.getScreenHeight();
+		float startX = drawInfo.getStartX();
+		float startY = drawInfo.getStartY();
+		float endX = drawInfo.getEndX();
+		float endY = drawInfo.getEndY();
+		float centerX = drawInfo.getCenterX();
+		float centerY = drawInfo.getCenterY();
 
 		updateRouteColors(nightMode);
+		updateRouteGradient();
 
-		LinearGradient gradient = null;
-		if (gradientScaleType == GradientScaleType.ALTITUDE || gradientScaleType == GradientScaleType.SLOPE) {
-			int[] colors = new int[] {RouteColorize.RED, RouteColorize.YELLOW, RouteColorize.GREEN};
-			float[] positions = new float[] {0, 0.5f, 1};
-			gradient = new LinearGradient(centerX, 0, centerX, screenHeight, colors, positions, Shader.TileMode.CLAMP);
-		}
-		paintRouteLinePreview.setShader(gradient);
-		paintRouteLinePreview.setColor(getRouteLineColor());
+		List<Float> tx = new ArrayList<>();
+		List<Float> ty = new ArrayList<>();
+		tx.add(startX);
+		tx.add(centerX);
+		tx.add(centerX);
+		tx.add(endX);
+		ty.add(startY);
+		ty.add(startY);
+		ty.add(endY);
+		ty.add(endY);
 
-		canvas.drawLine(centerX, 0, centerX, screenHeight, paintRouteLinePreview);
+		routeGeometry.setRouteStyleParams(getRouteLineColor(), getRouteLineWidth(tileBox), getDirectionArrowsColor(), gradientScaleType);
+		routeGeometry.drawPreviewRouteLine(canvas, tileBox, tx, ty);
 
 		if (previewIcon == null) {
 			previewIcon = (LayerDrawable) AppCompatResources.getDrawable(view.getContext(), drawInfo.getIconId());
 			DrawableCompat.setTint(previewIcon.getDrawable(1), drawInfo.getIconColor());
 		}
 		canvas.rotate(-90, centerX, centerY);
-		drawIcon(canvas, previewIcon, centerX, centerY);
+		drawIcon(canvas, previewIcon, (int) centerX, (int) centerY);
 		canvas.rotate(90, centerX, centerY);
 	}
 

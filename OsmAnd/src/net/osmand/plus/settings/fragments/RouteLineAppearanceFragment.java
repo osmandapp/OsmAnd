@@ -324,22 +324,36 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 
 	private void initVisibleRect() {
 		MapActivity ctx = getMapActivity();
+		boolean isRtl = AndroidUtils.isLayoutRtl(ctx);
 		int screenHeight = AndroidUtils.getScreenHeight(ctx);
 		int screenWidth = AndroidUtils.getScreenWidth(ctx);
 		int statusBarHeight = AndroidUtils.getStatusBarHeight(ctx);
+		int bottomSheetStart = getViewY() + (int) getMainView().findViewById(R.id.route_menu_top_shadow_all).getY();
+		int pathMargin = AndroidUtils.dpToPx(ctx, 28);
+		int startX;
+		int startY;
+		int endX;
+		int endY;
 		int centerX;
 		int centerY;
 		if (isPortrait()) {
 			centerX = screenWidth / 2;
-			centerY = (getViewY() + toolbarContainer.getHeight() + statusBarHeight) / 2;
+			int totalHeight = getViewY() + toolbarContainer.getHeight() + statusBarHeight;
+			centerY = totalHeight / 2;
+			startY = bottomSheetStart - pathMargin;
+			startX = isRtl ? screenWidth : 0;
+			endX = isRtl ? 0 : screenWidth;
+			endY = toolbarContainer.getHeight() + statusBarHeight + pathMargin;
 		} else {
-			boolean isRtl = AndroidUtils.isLayoutRtl(ctx);
 			int dialogWidth = getLandscapeNoShadowWidth();
-			int left = isRtl ? 0 : dialogWidth;
-			int right = isRtl ? screenWidth - dialogWidth : screenWidth;
-			centerX = (left + right) / 2;
+			startX = isRtl ? 0 : dialogWidth;
+			startY = isRtl ? statusBarHeight + pathMargin : screenHeight - pathMargin;
+			endX = isRtl ? screenWidth - dialogWidth : screenWidth;
+			endY = isRtl ? screenHeight - pathMargin : statusBarHeight + pathMargin;
+			centerX = (startX + endX) / 2;
 			centerY = (screenHeight + statusBarHeight) / 2 ;
 		}
+		routeLineDrawInfo.setBounds(startX, startY, endX, endY);
 		routeLineDrawInfo.setCenterX(centerX);
 		routeLineDrawInfo.setCenterY(centerY);
 		routeLineDrawInfo.setScreenHeight(screenHeight);
@@ -472,5 +486,4 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 	public interface OnApplyRouteLineListener {
 		void applyRouteLineAppearance(@NonNull RouteLineDrawInfo routeLineDrawInfo);
 	}
-
 }

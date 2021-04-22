@@ -219,11 +219,7 @@ public class RouteColorize {
                 double minPaletteValue = palette[i][VALUE_INDEX];
                 double maxPaletteValue = palette[i + 1][VALUE_INDEX];
                 double percent = (value - minPaletteValue) / (maxPaletteValue - minPaletteValue);
-                double resultRed = getRed(minPaletteColor) + percent * (getRed(maxPaletteColor) - getRed(minPaletteColor));
-                double resultGreen = getGreen(minPaletteColor) + percent * (getGreen(maxPaletteColor) - getGreen(minPaletteColor));
-                double resultBlue = getBlue(minPaletteColor) + percent * (getBlue(maxPaletteColor) - getBlue(minPaletteColor));
-                double resultAlpha = getAlpha(minPaletteColor) + percent * (getAlpha(maxPaletteColor) - getAlpha(minPaletteColor));
-                return rgbaToDecimal((int) resultRed, (int) resultGreen, (int) resultBlue, (int) resultAlpha);
+                return getGradientColor(minPaletteColor, maxPaletteColor, percent);
             }
         }
         return getTransparentColor();
@@ -446,6 +442,14 @@ public class RouteColorize {
         }
     }
 
+    public static int getGradientColor(int minPaletteColor, int maxPaletteColor, double percent) {
+        double resultRed = getRed(minPaletteColor) + percent * (getRed(maxPaletteColor) - getRed(minPaletteColor));
+        double resultGreen = getGreen(minPaletteColor) + percent * (getGreen(maxPaletteColor) - getGreen(minPaletteColor));
+        double resultBlue = getBlue(minPaletteColor) + percent * (getBlue(maxPaletteColor) - getBlue(minPaletteColor));
+        double resultAlpha = getAlpha(minPaletteColor) + percent * (getAlpha(maxPaletteColor) - getAlpha(minPaletteColor));
+        return rgbaToDecimal((int) resultRed, (int) resultGreen, (int) resultBlue, (int) resultAlpha);
+    }
+
     private void calculateMinMaxValue() {
         if (values.length == 0)
             return;
@@ -476,19 +480,19 @@ public class RouteColorize {
         return value;
     }
 
-    private int getRed(int value) {
+    private static int getRed(int value) {
         return (value >> 16) & 0xFF;
     }
 
-    private int getGreen(int value) {
+    private static int getGreen(int value) {
         return (value >> 8) & 0xFF;
     }
 
-    private int getBlue(int value) {
+    private static int getBlue(int value) {
         return (value >> 0) & 0xFF;
     }
 
-    private int getAlpha(int value) {
+    private static int getAlpha(int value) {
         return (value >> 24) & 0xff;
     }
 

@@ -1,6 +1,7 @@
 package net.osmand.plus.views.layers.geometry;
 
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Paint;
 
 import androidx.annotation.ColorInt;
@@ -20,6 +21,7 @@ import net.osmand.router.RouteColorize;
 import net.osmand.router.RouteColorize.RouteColorizationPoint;
 import net.osmand.util.Algorithms;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -63,6 +65,46 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 			getContext().getAttrs().shadowPaint.setStrokeWidth(width + getContext().getDensity() * 2);
 		}
 		getContext().getAttrs().customColorPaint.setStrokeCap(scaleType != null ? Paint.Cap.ROUND : Paint.Cap.BUTT);
+	}
+
+	public void drawPreviewRouteLine(Canvas canvas, RotatedTileBox tileBox, List<Float> tx, List<Float> ty) {
+		List<Double> angles = new ArrayList<>();
+		List<Double> distances = new ArrayList<>();
+		angles.add(0d);
+		distances.add(0d);
+		for (int i = 1; i < tx.size(); i++) {
+			float x = tx.get(i);
+			float y = ty.get(i);
+			float px = tx.get(i - 1);
+			float py = ty.get(i - 1);
+			double angleRad = Math.atan2(y - py, x - px);
+			Double angle = (angleRad * 180 / Math.PI) + 90f;
+			angles.add(angle);
+			double dist = Math.sqrt((y - py) * (y - py) + (x - px) * (x - px));
+			distances.add(dist);
+		}
+
+		List<GeometryWayStyle<?>> styles = new ArrayList<>();
+		if (scaleType == null) {
+			for (int i = 0; i < tx.size(); i++) {
+				styles.add(getDefaultWayStyle());
+			}
+		} else {
+			for (int i = 1; i < tx.size(); i++) {
+				GeometryGradientWayStyle style = getGradientWayStyle();
+				styles.add(style);
+				style.startXY = new PointF(tx.get(i - 1), ty.get(i - 1));
+				style.endXY = new PointF(tx.get(i), ty.get(i));
+				double prevDist = distances.get(i - 1);
+				double currDist = distances.get(i);
+				double nextDist = i + 1 == distances.size() ? 0 : distances.get(i + 1);
+				style.startColor = getPreviewColor(i - 1, (prevDist + currDist / 2) / (prevDist + currDist));
+				style.endColor = getPreviewColor(i, (currDist + nextDist / 2) / (currDist + nextDist));
+			}
+			styles.add(styles.get(styles.size() - 1));
+		}
+
+		drawRouteSegment(tileBox, canvas, tx, ty, angles, distances, 0, styles);
 	}
 
 	public void updateRoute(RotatedTileBox tb, RouteCalculationResult route, OsmandApplication app) {
@@ -182,6 +224,18 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 			zooms.put(zoom, zm);
 		}
 		return zm;
+	}
+
+	private int getPreviewColor(int index, double offset) {
+		if (index == 0) {
+			return RouteColorize.GREEN;
+		} else if (index == 1) {
+			return RouteColorize.getGradientColor(RouteColorize.GREEN, RouteColorize.YELLOW, offset);
+		} else if (index == 2) {
+			return RouteColorize.getGradientColor(RouteColorize.YELLOW, RouteColorize.RED, offset);
+		} else {
+			return RouteColorize.RED;
+		}
 	}
 
 	private static class GradientGeometryWayProvider implements GeometryWayProvider {
