@@ -111,7 +111,7 @@ public class MapMarkersHelper {
 		saveHelper = new ItineraryDataHelper(app, this);
 		markersDbHelper = app.getMapMarkersDbHelper();
 		planRouteContext = new MarkersPlanRouteContext(app);
-		markersDbHelper.removeDisabledGroups();
+		markersDbHelper.getHelperLegacy().removeDisabledGroups();
 		loadMarkers();
 		loadGroups();
 	}
@@ -133,7 +133,7 @@ public class MapMarkersHelper {
 	}
 
 	private void loadGroups() {
-		Map<String, MapMarkersGroup> groupsMap = markersDbHelper.getAllGroupsMap();
+		Map<String, MapMarkersGroup> groupsMap = markersDbHelper.getHelperLegacy().getAllGroupsMap();
 		List<MapMarker> allMarkers = new ArrayList<>(mapMarkers);
 		allMarkers.addAll(mapMarkersHistory);
 
@@ -141,7 +141,7 @@ public class MapMarkersHelper {
 		while (iterator.hasNext()) {
 			MapMarkersGroup group = iterator.next().getValue();
 			if (group.getType() == ItineraryType.TRACK && !new File(group.getId()).exists()) {
-				markersDbHelper.removeMarkersGroup(group.getId());
+				markersDbHelper.getHelperLegacy().removeMarkersGroup(group.getId());
 				iterator.remove();
 			}
 		}
@@ -366,7 +366,7 @@ public class MapMarkersHelper {
 	}
 
 	private void addGroupInternally(MapMarkersGroup gr) {
-		markersDbHelper.addGroup(gr);
+		markersDbHelper.getHelperLegacy().addGroup(gr);
 		addHistoryMarkersToGroup(gr);
 		addToGroupsList(gr);
 	}
@@ -390,7 +390,7 @@ public class MapMarkersHelper {
 
 	public void removeMarkersGroup(MapMarkersGroup group) {
 		if (group != null) {
-			markersDbHelper.removeMarkersGroup(group.getId());
+			markersDbHelper.getHelperLegacy().removeMarkersGroup(group.getId());
 			removeGroupActiveMarkers(group, false);
 			removeFromGroupsList(group);
 		}
@@ -399,7 +399,7 @@ public class MapMarkersHelper {
 	public void updateGroupDisabled(@NonNull MapMarkersGroup group, boolean disabled) {
 		String id = group.getId();
 		if (id != null) {
-			markersDbHelper.updateGroupDisabled(id, disabled);
+			markersDbHelper.getHelperLegacy().updateGroupDisabled(id, disabled);
 			group.setDisabled(disabled);
 		}
 	}
@@ -409,7 +409,7 @@ public class MapMarkersHelper {
 		if (id != null) {
 			group.setWptCategories(wptCategories);
 			if (wptCategories != null) {
-				markersDbHelper.updateGroupCategories(id, group.getWptCategoriesString());
+				markersDbHelper.getHelperLegacy().updateGroupCategories(id, group.getWptCategoriesString());
 			}
 		}
 	}
@@ -642,7 +642,7 @@ public class MapMarkersHelper {
 		Iterator<MapMarker> iterator = groupMarkers.iterator();
 		while (iterator.hasNext()) {
 			MapMarker marker = iterator.next();
-			if (marker.id.equals(getMarkerId(app, marker))) {
+			if (marker.id.equals(getMarkerId(app, group, marker))) {
 				exists = true;
 				marker.favouritePoint = favouritePoint;
 				marker.wptPt = wptPt;
@@ -698,7 +698,9 @@ public class MapMarkersHelper {
 
 	public void addMarker(MapMarker marker) {
 		if (marker != null) {
-			markersDbHelper.addMarker(marker);
+			if (marker.groupKey == null) {
+				markersDbHelper.addMarker(marker);
+			}
 			if (marker.history) {
 				addToMapMarkersHistoryList(marker);
 				sortMarkers(mapMarkersHistory, true, BY_DATE_ADDED_DESC);
@@ -909,7 +911,7 @@ public class MapMarkersHelper {
 
 				MapMarker marker = new MapMarker(point, pointDescription, colorIndex, false, 0);
 				if (group != null) {
-					marker.id = getMarkerId(app, marker);
+					marker.id = getMarkerId(app, group, marker);
 					if (markersDbHelper.getMarker(marker.id) != null) {
 						continue;
 					}
@@ -921,7 +923,9 @@ public class MapMarkersHelper {
 				marker.favouritePoint = favouritePoint;
 				marker.wptPt = wptPt;
 				marker.mapObjectName = mapObjName;
-				markersDbHelper.addMarker(marker);
+				if (marker.groupKey == null) {
+					markersDbHelper.addMarker(marker);
+				}
 				addToMapMarkersList(0, marker);
 				addedMarkers.add(marker);
 				reorderActiveMarkersIfNeeded();
@@ -931,9 +935,8 @@ public class MapMarkersHelper {
 		}
 	}
 
-	public static String getMarkerId(OsmandApplication app, MapMarker marker) {
-		String groupId = marker.groupKey == null ? "" : marker.groupKey;
-		return groupId + marker.getName(app) + createShortLinkString(marker.point.getLatitude(), marker.point.getLongitude(), 15);
+	public static String getMarkerId(OsmandApplication app, MapMarkersGroup group, MapMarker marker) {
+		return group.getId() + marker.getName(app) + createShortLinkString(marker.point.getLatitude(), marker.point.getLongitude(), 15);
 	}
 
 	public void updateMapMarker(MapMarker marker, boolean refresh) {

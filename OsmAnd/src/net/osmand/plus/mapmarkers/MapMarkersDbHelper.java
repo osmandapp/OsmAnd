@@ -8,7 +8,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.helpers.SearchHistoryHelper;
-import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -16,26 +15,27 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 
 public class MapMarkersDbHelper {
 
-	private static final int DB_VERSION = 13;
+	static final int DB_VERSION = 13;
 	public static final String DB_NAME = "map_markers_db";
 
-	private static final String MARKERS_TABLE_NAME = "map_markers";
+	protected static final String MARKERS_TABLE_NAME = "map_markers";
 	private static final String MARKERS_COL_ID = "marker_id";
 	private static final String MARKERS_COL_LAT = "marker_lat";
 	private static final String MARKERS_COL_LON = "marker_lon";
 	private static final String MARKERS_COL_DESCRIPTION = "marker_description";
-	private static final String MARKERS_COL_ACTIVE = "marker_active";
+	protected static final String MARKERS_COL_ACTIVE = "marker_active";
 	private static final String MARKERS_COL_ADDED = "marker_added";
 	private static final String MARKERS_COL_VISITED = "marker_visited";
 	private static final String MARKERS_COL_GROUP_NAME = "group_name";
-	private static final String MARKERS_COL_GROUP_KEY = "group_key";
+	protected static final String MARKERS_COL_GROUP_KEY = "group_key";
 	private static final String MARKERS_COL_COLOR = "marker_color";
 	private static final String MARKERS_COL_NEXT_KEY = "marker_next_key";
-	private static final String MARKERS_COL_DISABLED = "marker_disabled";
+	protected static final String MARKERS_COL_DISABLED = "marker_disabled";
 	private static final String MARKERS_COL_SELECTED = "marker_selected";
 	private static final String MARKERS_COL_MAP_OBJECT_NAME = "marker_map_object_name";
 
@@ -73,54 +73,40 @@ public class MapMarkersDbHelper {
 			MARKERS_COL_MAP_OBJECT_NAME +
 			" FROM " + MARKERS_TABLE_NAME;
 
-	private static final String GROUPS_TABLE_NAME = "map_markers_groups";
-	private static final String GROUPS_COL_ID = "group_id";
-	private static final String GROUPS_COL_NAME = "group_name";
-	private static final String GROUPS_COL_TYPE = "group_type";
-	private static final String GROUPS_COL_DISABLED = "group_disabled";
-	private static final String GROUPS_COL_CATEGORIES = "group_categories";
-
-	private static final String GROUPS_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " +
-			GROUPS_TABLE_NAME + " (" +
-			GROUPS_COL_ID + " TEXT PRIMARY KEY, " +
-			GROUPS_COL_NAME + " TEXT, " +
-			GROUPS_COL_TYPE + " int, " +
-			GROUPS_COL_DISABLED + " int, " + // 1 = true, 0 = false
-			GROUPS_COL_CATEGORIES + " TEXT);";
-
-	private static final String GROUPS_TABLE_SELECT = "SELECT " +
-			GROUPS_COL_ID + ", " +
-			GROUPS_COL_NAME + ", " +
-			GROUPS_COL_TYPE + ", " +
-			GROUPS_COL_DISABLED + ", " +
-			GROUPS_COL_CATEGORIES +
-			" FROM " + GROUPS_TABLE_NAME;
 
 	public static final String TAIL_NEXT_VALUE = "tail_next";
 	public static final String HISTORY_NEXT_VALUE = "history_next";
 
-	private final OsmandApplication context;
+	private final OsmandApplication app;
+	private final MarkersDbHelperLegacy helperLegacy;
 
-	public MapMarkersDbHelper(OsmandApplication context) {
-		this.context = context;
+	public MapMarkersDbHelper(OsmandApplication app) {
+		this.app = app;
+		this.helperLegacy = new MarkersDbHelperLegacy(app, this);
 	}
 
-	private SQLiteConnection openConnection(boolean readonly) {
-		SQLiteConnection conn = context.getSQLiteAPI().getOrCreateDatabase(DB_NAME, readonly);
+	public MarkersDbHelperLegacy getHelperLegacy() {
+		return helperLegacy;
+	}
+
+	protected SQLiteConnection openConnection(boolean readonly) {
+		SQLiteConnection conn = app.getSQLiteAPI().getOrCreateDatabase(DB_NAME, readonly);
 		if (conn == null) {
 			return null;
 		}
 		if (conn.getVersion() < DB_VERSION) {
 			if (readonly) {
 				conn.close();
-				conn = context.getSQLiteAPI().getOrCreateDatabase(DB_NAME, false);
+				conn = app.getSQLiteAPI().getOrCreateDatabase(DB_NAME, false);
 			}
-			int version = conn.getVersion();
-			conn.setVersion(DB_VERSION);
-			if (version == 0) {
-				onCreate(conn);
-			} else {
-				onUpgrade(conn, version, DB_VERSION);
+			if (conn != null) {
+				int version = conn.getVersion();
+				conn.setVersion(DB_VERSION);
+				if (version == 0) {
+					onCreate(conn);
+				} else {
+					onUpgrade(conn, version, DB_VERSION);
+				}
 			}
 		}
 		return conn;
@@ -128,18 +114,15 @@ public class MapMarkersDbHelper {
 
 	private void onCreate(SQLiteConnection db) {
 		db.execSQL(MARKERS_TABLE_CREATE);
-		db.execSQL(GROUPS_TABLE_CREATE);
+		helperLegacy.onCreate(db);
 	}
 
 	private void onUpgrade(SQLiteConnection db, int oldVersion, int newVersion) {
+		helperLegacy.onUpgrade(db, oldVersion, newVersion);
 		if (oldVersion < 8) {
 			db.execSQL("ALTER TABLE " + MARKERS_TABLE_NAME + " ADD " + MARKERS_COL_DISABLED + " int");
-			db.execSQL("ALTER TABLE " + GROUPS_TABLE_NAME + " ADD " + GROUPS_COL_DISABLED + " int");
 		}
 		if (oldVersion < 9) {
-			db.execSQL("UPDATE " + GROUPS_TABLE_NAME +
-					" SET " + GROUPS_COL_DISABLED + " = ? " +
-					"WHERE " + GROUPS_COL_DISABLED + " IS NULL", new Object[]{0});
 			db.execSQL("UPDATE " + MARKERS_TABLE_NAME +
 					" SET " + MARKERS_COL_DISABLED + " = ? " +
 					"WHERE " + MARKERS_COL_DISABLED + " IS NULL", new Object[]{0});
@@ -155,68 +138,6 @@ public class MapMarkersDbHelper {
 		if (oldVersion < 12) {
 			db.execSQL("ALTER TABLE " + MARKERS_TABLE_NAME + " ADD " + MARKERS_COL_MAP_OBJECT_NAME + " TEXT");
 		}
-		if (oldVersion < 13) {
-			db.execSQL("ALTER TABLE " + GROUPS_TABLE_NAME + " ADD " + GROUPS_COL_CATEGORIES + " TEXT");
-		}
-	}
-
-	public void addGroup(MapMarkersGroup group) {
-		SQLiteConnection db = openConnection(false);
-		if (db != null) {
-			try {
-				db.execSQL("INSERT INTO " + GROUPS_TABLE_NAME + " VALUES (?, ?, ?, ?, ?)",
-						new Object[]{group.getId(), group.getName(), group.getType().getTypeId(), group.isDisabled(), group.getWptCategoriesString()});
-			} finally {
-				db.close();
-			}
-		}
-	}
-
-	public Map<String, MapMarkersGroup> getAllGroupsMap() {
-		Map<String, MapMarkersGroup> res = new LinkedHashMap<>();
-		SQLiteConnection db = openConnection(true);
-		if (db != null) {
-			try {
-				SQLiteCursor query = db.rawQuery(GROUPS_TABLE_SELECT, null);
-				if (query != null && query.moveToFirst()) {
-					do {
-						MapMarkersGroup group = readGroup(query);
-						res.put(group.getId(), group);
-					} while (query.moveToNext());
-				}
-				if(query != null) {
-					query.close();
-				}
-			} finally {
-				db.close();
-			}
-		}
-		return res;
-	}
-
-	private MapMarkersGroup readGroup(SQLiteCursor query) {
-		String id = query.getString(0);
-		String name = query.getString(1);
-		int type = query.getInt(2);
-		boolean disabled = query.getInt(3) == 1;
-		String categories = query.getString(4);
-
-		MapMarkersGroup res = new MapMarkersGroup(id, name, ItineraryType.findTypeForId(type));
-		res.setDisabled(disabled);
-		res.setWptCategories(categories == null ? null : Algorithms.decodeStringSet(categories));
-
-		return res;
-	}
-
-	public void removeMarkersGroup(String id) {
-		SQLiteConnection db = openConnection(false);
-		if (db != null) {
-			try {
-				db.execSQL("DELETE FROM " + GROUPS_TABLE_NAME + " WHERE " + GROUPS_COL_ID + " = ?", new Object[]{id});
-			} finally {
-				db.close();
-			}
-		}
 	}
 
 	public void removeActiveMarkersFromGroup(String groupId) {
@@ -226,49 +147,7 @@ public class MapMarkersDbHelper {
 				db.execSQL("DELETE FROM " + MARKERS_TABLE_NAME +
 								" WHERE " + MARKERS_COL_GROUP_KEY + " = ?" +
 								" AND " + MARKERS_COL_ACTIVE + " = ?",
-						new Object[]{groupId, 1});
-			} finally {
-				db.close();
-			}
-		}
-	}
-
-	public void updateGroupDisabled(String id, boolean disabled) {
-		SQLiteConnection db = openConnection(false);
-		if (db != null) {
-			try {
-				db.execSQL("UPDATE " + GROUPS_TABLE_NAME +
-						" SET " + GROUPS_COL_DISABLED + " = ? " +
-						"WHERE " + GROUPS_COL_ID + " = ?", new Object[]{disabled ? 1 : 0, id});
-				db.execSQL("UPDATE " + MARKERS_TABLE_NAME +
-						" SET " + MARKERS_COL_DISABLED + " = ? " +
-						"WHERE " + MARKERS_COL_GROUP_KEY + " = ?", new Object[]{disabled ? 1 : 0, id});
-			} finally {
-				db.close();
-			}
-		}
-	}
-
-	public void updateGroupCategories(String id, String categories) {
-		SQLiteConnection db = openConnection(false);
-		if (db != null) {
-			try {
-				db.execSQL("UPDATE " + GROUPS_TABLE_NAME +
-						" SET " + GROUPS_COL_CATEGORIES + " = ? " +
-						"WHERE " + GROUPS_COL_ID + " = ?", new Object[]{categories, id});
-			} finally {
-				db.close();
-			}
-		}
-	}
-
-	public void removeDisabledGroups() {
-		SQLiteConnection db = openConnection(false);
-		if (db != null) {
-			try {
-				db.execSQL("DELETE FROM " + GROUPS_TABLE_NAME + " WHERE " + GROUPS_COL_DISABLED + " = ? ", new Object[]{1});
-				db.execSQL("DELETE FROM " + MARKERS_TABLE_NAME
-						+ " WHERE " + MARKERS_COL_DISABLED + " = ? AND " + MARKERS_COL_ACTIVE + " = ?", new Object[]{1, 1});
+						new Object[] {groupId, 1});
 			} finally {
 				db.close();
 			}
@@ -280,7 +159,9 @@ public class MapMarkersDbHelper {
 		if (db != null) {
 			try {
 				for (MapMarker marker : markers) {
-					insertLast(db, marker);
+					if (marker.groupKey == null) {
+						insertLast(db, marker);
+					}
 				}
 			} finally {
 				db.close();
@@ -302,15 +183,15 @@ public class MapMarkersDbHelper {
 	private void insertLast(SQLiteConnection db, MapMarker marker) {
 		long currentTime = System.currentTimeMillis();
 		if (marker.id == null) {
-			marker.id = MapMarkersHelper.getMarkerId(context, marker);
+			marker.id = String.valueOf(currentTime) + String.valueOf(new Random().nextInt(900) + 100);
 		}
 		marker.creationDate = currentTime;
 		String descr = PointDescription.serializeToString(marker.getOriginalPointDescription());
 		int active = marker.history ? 0 : 1;
 
 		PointDescription pointDescription = marker.getOriginalPointDescription();
-		if (pointDescription != null && !pointDescription.isSearchingAddress(context)) {
-			SearchHistoryHelper.getInstance(context)
+		if (pointDescription != null && !pointDescription.isSearchingAddress(app)) {
+			SearchHistoryHelper.getInstance(app)
 					.addNewItemToHistory(marker.getLatitude(), marker.getLongitude(), pointDescription);
 		}
 
@@ -342,13 +223,18 @@ public class MapMarkersDbHelper {
 
 	@Nullable
 	public MapMarker getMarker(String id) {
+		return getMarker(id, false);
+	}
+
+	@Nullable
+	public MapMarker getMarker(String id, boolean legacy) {
 		MapMarker res = null;
 		SQLiteConnection db = openConnection(true);
 		if (db != null) {
 			try {
 				SQLiteCursor query = db.rawQuery(MARKERS_TABLE_SELECT + " WHERE " + MARKERS_COL_ID + " = ?", new String[]{id});
 				if (query != null && query.moveToFirst()) {
-					res = readItem(query);
+					res = readItem(query, legacy);
 				}
 				if(query != null) {
 					query.close();
@@ -361,6 +247,10 @@ public class MapMarkersDbHelper {
 	}
 
 	public List<MapMarker> getActiveMarkers() {
+		return getActiveMarkers(false);
+	}
+
+	public List<MapMarker> getActiveMarkers(boolean legacy) {
 		Map<String, MapMarker> markers = new LinkedHashMap<>();
 		Set<String> nextKeys = new HashSet<>();
 		SQLiteConnection db = openConnection(true);
@@ -370,9 +260,11 @@ public class MapMarkersDbHelper {
 						new String[]{String.valueOf(1)});
 				if (query != null && query.moveToFirst()) {
 					do {
-						MapMarker marker = readItem(query);
-						markers.put(marker.id, marker);
-						nextKeys.add(marker.nextKey);
+						MapMarker marker = readItem(query, legacy);
+						if (marker != null) {
+							markers.put(marker.id, marker);
+							nextKeys.add(marker.nextKey);
+						}
 					} while (query.moveToNext());
 				}
 				if(query != null) {
@@ -385,7 +277,13 @@ public class MapMarkersDbHelper {
 		return buildLinkedList(markers, nextKeys);
 	}
 
-	private MapMarker readItem(SQLiteCursor query) {
+	@Nullable
+	private MapMarker readItem(SQLiteCursor query, boolean legacy) {
+		String groupKey = query.getString(8);
+		if (groupKey != null && !legacy) {
+			return null;
+		}
+
 		String id = query.getString(0);
 		double lat = query.getDouble(1);
 		double lon = query.getDouble(2);
@@ -394,7 +292,6 @@ public class MapMarkersDbHelper {
 		long added = query.getLong(5);
 		long visited = query.getLong(6);
 		String groupName = query.getString(7);
-		String groupKey = query.getString(8);
 		int colorIndex = query.getInt(9);
 		String nextKey = query.getString(10);
 		boolean selected = query.getInt(12) == 1;
@@ -523,6 +420,10 @@ public class MapMarkersDbHelper {
 	}
 
 	public List<MapMarker> getMarkersHistory() {
+		return getMarkersHistory(false);
+	}
+
+	public List<MapMarker> getMarkersHistory(boolean legacy) {
 		List<MapMarker> markers = new ArrayList<>();
 		SQLiteConnection db = openConnection(true);
 		if (db != null) {
@@ -531,7 +432,10 @@ public class MapMarkersDbHelper {
 						new String[]{String.valueOf(0)});
 				if (query != null && query.moveToFirst()) {
 					do {
-						markers.add(readItem(query));
+						MapMarker marker = readItem(query, legacy);
+						if (marker != null) {
+							markers.add(marker);
+						}
 					} while (query.moveToNext());
 				}
 				if(query != null) {
