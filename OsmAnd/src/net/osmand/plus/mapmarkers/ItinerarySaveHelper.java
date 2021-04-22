@@ -105,7 +105,6 @@ public class ItinerarySaveHelper {
 							writeNotNullText(serializer, "osmand:name", group.name);
 							writeNotNullText(serializer, "osmand:type", group.type);
 							writeNotNullText(serializer, "osmand:path", group.path);
-							writeNotNullText(serializer, "osmand:alias", group.alias);
 							writeNotNullText(serializer, "osmand:categories", group.categories);
 
 							serializer.endTag(null, "osmand:" + ITINERARY_GROUP);
@@ -235,7 +234,6 @@ public class ItinerarySaveHelper {
 		public String name;
 		public String type;
 		public String path;
-		public String alias;
 		public String categories;
 
 		public static ItineraryGroupInfo createGroupInfo(OsmandApplication app, ItineraryGroup group) {
@@ -255,9 +253,6 @@ public class ItinerarySaveHelper {
 					path = path.substring(gpxDir.length() + 1);
 				}
 				groupInfo.path = path;
-				groupInfo.alias = groupInfo.type + ":" + path;
-			} else {
-				groupInfo.alias = groupInfo.type + (Algorithms.isEmpty(groupInfo.name) ? "" : ":" + groupInfo.name);
 			}
 			return groupInfo;
 		}
