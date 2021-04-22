@@ -43,6 +43,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import static net.osmand.data.PointDescription.POINT_TYPE_MAP_MARKER;
+import static net.osmand.util.MapUtils.createShortLinkString;
 
 public class MapMarkersHelper {
 
@@ -186,6 +187,7 @@ public class MapMarkersHelper {
 				runSynchronization(gr);
 			}
 		}
+		saveGroups();
 	}
 
 	public void lookupAddressAll() {
@@ -640,7 +642,7 @@ public class MapMarkersHelper {
 		Iterator<MapMarker> iterator = groupMarkers.iterator();
 		while (iterator.hasNext()) {
 			MapMarker marker = iterator.next();
-			if (marker.id.equals(group.getId() + name + MapUtils.createShortLinkString(latLon.getLatitude(), latLon.getLongitude(), 15))) {
+			if (marker.id.equals(getMarkerId(app, marker))) {
 				exists = true;
 				marker.favouritePoint = favouritePoint;
 				marker.wptPt = wptPt;
@@ -907,7 +909,7 @@ public class MapMarkersHelper {
 
 				MapMarker marker = new MapMarker(point, pointDescription, colorIndex, false, 0);
 				if (group != null) {
-					marker.id = group.getId() + marker.getName(app) + MapUtils.createShortLinkString(marker.point.getLatitude(), marker.point.getLongitude(), 15);
+					marker.id = getMarkerId(app, marker);
 					if (markersDbHelper.getMarker(marker.id) != null) {
 						continue;
 					}
@@ -927,6 +929,11 @@ public class MapMarkersHelper {
 			}
 			addMarkersToGroups(addedMarkers);
 		}
+	}
+
+	public static String getMarkerId(OsmandApplication app, MapMarker marker) {
+		String groupId = marker.groupKey == null ? "" : marker.groupKey;
+		return groupId + marker.getName(app) + createShortLinkString(marker.point.getLatitude(), marker.point.getLongitude(), 15);
 	}
 
 	public void updateMapMarker(MapMarker marker, boolean refresh) {

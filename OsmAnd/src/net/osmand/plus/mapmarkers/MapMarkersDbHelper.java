@@ -18,8 +18,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static net.osmand.util.MapUtils.createShortLinkString;
-
 public class MapMarkersDbHelper {
 
 	private static final int DB_VERSION = 13;
@@ -304,7 +302,7 @@ public class MapMarkersDbHelper {
 	private void insertLast(SQLiteConnection db, MapMarker marker) {
 		long currentTime = System.currentTimeMillis();
 		if (marker.id == null) {
-			marker.id = marker.getName(context) + createShortLinkString(marker.point.getLatitude(), marker.point.getLongitude(), 15);
+			marker.id = MapMarkersHelper.getMarkerId(context, marker);
 		}
 		marker.creationDate = currentTime;
 		String descr = PointDescription.serializeToString(marker.getOriginalPointDescription());

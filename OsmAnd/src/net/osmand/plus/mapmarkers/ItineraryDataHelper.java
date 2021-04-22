@@ -30,11 +30,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 import java.util.TimeZone;
 
 import static net.osmand.GPXUtilities.writeNotNullText;
 import static net.osmand.plus.FavouritesDbHelper.backup;
+import static net.osmand.util.MapUtils.createShortLinkString;
 
 public class ItineraryDataHelper {
 
@@ -48,8 +50,8 @@ public class ItineraryDataHelper {
 	private static final String FILE_TO_BACKUP = "itinerary_bak.gpx";
 	private static final String ITINERARY_ID = "itinerary_id";
 	private static final String ITINERARY_GROUP = "itinerary_group";
-	private static final String GPX_ORIGIN = "gpx_origin";
-	private static final String FAVOURITES_ORIGIN = "favourites_origin";
+	private static final String GPX_KEY = "gpx";
+	private static final String FAVOURITES_KEY = "favourites_group";
 
 	private static final SimpleDateFormat GPX_TIME_FORMAT = new SimpleDateFormat(GPXUtilities.GPX_TIME_FORMAT, Locale.US);
 
@@ -105,6 +107,7 @@ public class ItineraryDataHelper {
 							writeNotNullText(serializer, "osmand:name", group.name);
 							writeNotNullText(serializer, "osmand:type", group.type);
 							writeNotNullText(serializer, "osmand:path", group.path);
+							writeNotNullText(serializer, "osmand:alias", group.alias);
 							writeNotNullText(serializer, "osmand:categories", group.categories);
 
 							serializer.endTag(null, "osmand:" + ITINERARY_GROUP);
@@ -162,18 +165,17 @@ public class ItineraryDataHelper {
 			for (MapMarker marker : group.getMarkers()) {
 				WptPt wptPt = toWpt(marker);
 
-				String markerId = marker.id;
-				String name = marker.getName(app);
-				int index = markerId.indexOf(name);
-				if (index != -1) {
-					markerId = markerId.substring(index + name.length());
-				}
-				wptPt.getExtensionsToWrite().put(ITINERARY_ID, groupInfo.type + ":" + markerId);
-
-				if (group.getType() == ItineraryType.TRACK) {
-					wptPt.getExtensionsToWrite().put(GPX_ORIGIN, groupInfo.path);
+				Map<String, String> extensions = wptPt.getExtensionsToWrite();
+				if (group.getType() != ItineraryType.FAVOURITES) {
+					String itineraryId = createShortLinkString(wptPt.lat, wptPt.lon, 15);
+					extensions.put(ITINERARY_ID, groupInfo.alias + ":" + itineraryId);
 				} else {
-					wptPt.getExtensionsToWrite().put(FAVOURITES_ORIGIN, groupInfo.name);
+					extensions.put(ITINERARY_ID, groupInfo.alias + ":" + marker.getName(app));
+				}
+				if (group.getType() == ItineraryType.TRACK) {
+					extensions.put(GPX_KEY, groupInfo.path);
+				} else if (group.getType() == ItineraryType.FAVOURITES && !Algorithms.isEmpty(groupInfo.name)) {
+					extensions.put(FAVOURITES_KEY, groupInfo.name);
 				}
 				gpxFile.addPoint(wptPt);
 			}
@@ -234,12 +236,13 @@ public class ItineraryDataHelper {
 		public String name;
 		public String type;
 		public String path;
+		public String alias;
 		public String categories;
 
 		public static ItineraryGroupInfo createGroupInfo(OsmandApplication app, MapMarkersGroup group) {
 			ItineraryGroupInfo groupInfo = new ItineraryGroupInfo();
+			groupInfo.name = group.getName();
 			groupInfo.type = group.getType().getTypeName();
-			groupInfo.name = !Algorithms.isEmpty(group.getName()) ? group.getName() : null;
 
 			Set<String> wptCategories = group.getWptCategories();
 			if (!Algorithms.isEmpty(wptCategories)) {
@@ -253,6 +256,9 @@ public class ItineraryDataHelper {
 					path = path.substring(gpxDir.length() + 1);
 				}
 				groupInfo.path = path;
+				groupInfo.alias = groupInfo.type + ":" + path.replace(IndexConstants.GPX_FILE_EXT, "");
+			} else {
+				groupInfo.alias = groupInfo.type + (groupInfo.name == null ? "" : ":" + groupInfo.name);
 			}
 			return groupInfo;
 		}
