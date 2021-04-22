@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.data.PointDescription;
-import net.osmand.plus.mapmarkers.ItineraryHelper;
+import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.R;
@@ -36,7 +36,7 @@ public class MapMarkerMenuController extends MenuController {
 			public void buttonPressed() {
 				MapActivity activity = getMapActivity();
 				if (activity != null) {
-					ItineraryHelper markersHelper = activity.getMyApplication().getItineraryHelper();
+					MapMarkersHelper markersHelper = activity.getMyApplication().getMapMarkersHelper();
 					MapMarker marker = getMapMarker();
 					if (marker.history) {
 						markersHelper.restoreMarkerFromHistory(marker, 0);
@@ -62,7 +62,7 @@ public class MapMarkerMenuController extends MenuController {
 							indication.set(true);
 							activity.getMapLayers().getMapWidgetRegistry().updateMapMarkersMode(activity);
 						}
-						ItineraryHelper markersHelper = activity.getMyApplication().getItineraryHelper();
+						MapMarkersHelper markersHelper = activity.getMyApplication().getMapMarkersHelper();
 						markersHelper.moveMarkerToTop(getMapMarker());
 						activity.getContextMenu().close();
 					}

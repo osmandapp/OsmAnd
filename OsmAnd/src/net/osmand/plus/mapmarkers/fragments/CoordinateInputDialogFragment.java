@@ -72,8 +72,8 @@ import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats;
-import net.osmand.plus.mapmarkers.ItineraryGroup;
-import net.osmand.plus.mapmarkers.ItineraryHelper;
+import net.osmand.plus.mapmarkers.MapMarkersGroup;
+import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.mapmarkers.bottomsheets.CoordinateInputActionsBottomSheet;
 import net.osmand.plus.mapmarkers.bottomsheets.CoordinateInputBottomSheetDialogFragment;
 import net.osmand.plus.mapmarkers.bottomsheets.CoordinateInputBottomSheetDialogFragment.CoordinateInputFormatChangeListener;
@@ -174,8 +174,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	}
 
 	private void syncGpx(GPXFile gpxFile) {
-		ItineraryHelper helper = getMyApplication().getItineraryHelper();
-		ItineraryGroup group = helper.getMarkersGroup(gpxFile);
+		MapMarkersHelper helper = getMyApplication().getMapMarkersHelper();
+		MapMarkersGroup group = helper.getMarkersGroup(gpxFile);
 		if (group != null) {
 			helper.runSynchronization(group);
 		}
@@ -1095,7 +1095,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			public void saveGpx(final String fileName) {
 				new SaveGpxAsyncTask(app, getGpx(),fileName, false).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 				hasUnsavedChanges = false;
-				app.getItineraryHelper().addOrEnableGroup(getGpx());
+				app.getMapMarkersHelper().addOrEnableGroup(getGpx());
 				if (listener != null) {
 					listener.onPointsSaved();
 				}

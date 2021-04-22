@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class ItineraryGroup {
+public class MapMarkersGroup {
 
 	public static final String MARKERS_SYNC_GROUP_ID = "markers_sync_group_id";
 
@@ -30,11 +30,11 @@ public class ItineraryGroup {
 	private GroupHeader header;
 	private ShowHideHistoryButton showHideHistoryButton;
 
-	public ItineraryGroup() {
+	public MapMarkersGroup() {
 
 	}
 
-	public ItineraryGroup(@NonNull String id, @NonNull String name, @NonNull ItineraryType type) {
+	public MapMarkersGroup(@NonNull String id, @NonNull String name, @NonNull ItineraryType type) {
 		this.id = id;
 		this.name = name;
 		this.type = type;

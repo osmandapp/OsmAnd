@@ -4,8 +4,8 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 
-import net.osmand.plus.mapmarkers.ItineraryHelper;
-import net.osmand.plus.mapmarkers.ItineraryHelper.MapMarkersSortByDef;
+import net.osmand.plus.mapmarkers.MapMarkersHelper;
+import net.osmand.plus.mapmarkers.MapMarkersHelper.MapMarkersSortByDef;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -38,7 +38,7 @@ public class OrderByBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 					@Override
 					public void onClick(View v) {
 						if (listener != null) {
-							listener.onMapMarkersOrderByModeChanged(ItineraryHelper.BY_NAME);
+							listener.onMapMarkersOrderByModeChanged(MapMarkersHelper.BY_NAME);
 						}
 						dismiss();
 					}
@@ -56,7 +56,7 @@ public class OrderByBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 					@Override
 					public void onClick(View v) {
 						if (listener != null) {
-							listener.onMapMarkersOrderByModeChanged(ItineraryHelper.BY_DISTANCE_ASC);
+							listener.onMapMarkersOrderByModeChanged(MapMarkersHelper.BY_DISTANCE_ASC);
 						}
 						dismiss();
 					}
@@ -72,7 +72,7 @@ public class OrderByBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 					@Override
 					public void onClick(View v) {
 						if (listener != null) {
-							listener.onMapMarkersOrderByModeChanged(ItineraryHelper.BY_DISTANCE_DESC);
+							listener.onMapMarkersOrderByModeChanged(MapMarkersHelper.BY_DISTANCE_DESC);
 						}
 						dismiss();
 					}
@@ -90,7 +90,7 @@ public class OrderByBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 					@Override
 					public void onClick(View v) {
 						if (listener != null) {
-							listener.onMapMarkersOrderByModeChanged(ItineraryHelper.BY_DATE_ADDED_ASC);
+							listener.onMapMarkersOrderByModeChanged(MapMarkersHelper.BY_DATE_ADDED_ASC);
 						}
 						dismiss();
 					}
@@ -106,7 +106,7 @@ public class OrderByBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 					@Override
 					public void onClick(View v) {
 						if (listener != null) {
-							listener.onMapMarkersOrderByModeChanged(ItineraryHelper.BY_DATE_ADDED_DESC);
+							listener.onMapMarkersOrderByModeChanged(MapMarkersHelper.BY_DATE_ADDED_DESC);
 						}
 						dismiss();
 					}

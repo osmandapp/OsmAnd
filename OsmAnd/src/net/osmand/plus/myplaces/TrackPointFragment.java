@@ -63,8 +63,8 @@ import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.mapmarkers.fragments.CoordinateInputDialogFragment;
-import net.osmand.plus.mapmarkers.ItineraryGroup;
-import net.osmand.plus.mapmarkers.ItineraryHelper;
+import net.osmand.plus.mapmarkers.MapMarkersGroup;
+import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.DeletePointsTask.OnPointsDeleteListener;
 import net.osmand.plus.myplaces.TrackBitmapDrawer.TrackBitmapDrawerListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -399,7 +399,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 			createMenuItem(menu, SHARE_ID, R.string.shared_string_share, R.drawable.ic_action_gshare_dark, MenuItem.SHOW_AS_ACTION_NEVER, true);
 			GPXFile gpxFile = getGpx();
 			if (gpxFile != null && gpxFile.path != null) {
-				final ItineraryHelper markersHelper = app.getItineraryHelper();
+				final MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 				final boolean synced = markersHelper.getMarkersGroup(getGpx()) != null;
 				createMenuItem(menu, SELECT_MAP_MARKERS_ID, synced ? R.string.remove_from_map_markers
 						: R.string.shared_string_add_to_map_markers, R.drawable.ic_action_flag, MenuItem.SHOW_AS_ACTION_NEVER);
@@ -494,15 +494,15 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 	}
 
 	private void addOrRemoveMapMarkersSyncGroup() {
-		final ItineraryHelper markersHelper = app.getItineraryHelper();
+		final MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 
 		FragmentActivity activity = getActivity();
 		if (activity == null) {
 			return;
 		}
 		final GPXFile gpxFile = getGpx();
-		ItineraryGroup markersSearch = markersHelper.getMarkersGroup(gpxFile);
-		final ItineraryGroup markersGr;
+		MapMarkersGroup markersSearch = markersHelper.getMarkersGroup(gpxFile);
+		final MapMarkersGroup markersGr;
 		final boolean markersRemoved;
 		if (markersSearch != null) {
 			markersGr = markersSearch;
@@ -538,7 +538,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 										markersHelper.addOrEnableGroup(gpxFile);
 									}
 								} else {
-									ItineraryGroup group = markersHelper.getMarkersGroup(gpxFile);
+									MapMarkersGroup group = markersHelper.getMarkersGroup(gpxFile);
 									if (group != null) {
 										markersHelper.removeMarkersGroup(group);
 									}

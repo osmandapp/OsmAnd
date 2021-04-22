@@ -97,7 +97,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 		boolean firstSelectedMarker = pos == firstSelectedMarkerPos;
 		boolean roundTripFinishItem = finish && showRoundTripItem;
 
-		boolean useLocation = app.getItineraryHelper().isStartFromMyLocation() && showLocationItem;
+		boolean useLocation = app.getMapMarkersHelper().isStartFromMyLocation() && showLocationItem;
 
 		MapMarker marker = null;
 		Location location = null;
@@ -168,7 +168,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 
 		if (locationItem) {
 			holder.topDivider.setVisibility(View.VISIBLE);
-			holder.checkBox.setChecked(app.getItineraryHelper().isStartFromMyLocation());
+			holder.checkBox.setChecked(app.getMapMarkersHelper().isStartFromMyLocation());
 			holder.distance.setVisibility(View.GONE);
 			holder.description.setText(locDescription.getName());
 		} else if (roundTripFinishItem) {
@@ -270,7 +270,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 			return false;
 		}
 		int offset = showLocationItem ? 1 : 0;
-		Collections.swap(mapActivity.getMyApplication().getItineraryHelper().getMapMarkers(), from - offset, to - offset);
+		Collections.swap(mapActivity.getMyApplication().getMapMarkersHelper().getMapMarkers(), from - offset, to - offset);
 		Collections.swap(items, from, to);
 		notifyItemMoved(from, to);
 		return true;
@@ -310,7 +310,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 			lookupLocationAddress(app);
 			items.add(myLoc);
 		}
-		items.addAll(mapActivity.getMyApplication().getItineraryHelper().getMapMarkers());
+		items.addAll(mapActivity.getMyApplication().getMapMarkersHelper().getMapMarkers());
 		calculateStartAndFinishPos();
 		showRoundTripItem = inRoundTrip && !inDragAndDrop && startPos != -1;
 		if (showRoundTripItem) {
@@ -343,7 +343,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 		boolean startCalculated = false;
 		boolean finishCalculated = false;
 		boolean firstSelectedMarkerCalculated = false;
-		if (app.getItineraryHelper().isStartFromMyLocation() && showLocationItem) {
+		if (app.getMapMarkersHelper().isStartFromMyLocation() && showLocationItem) {
 			startPos = 0;
 			startCalculated = true;
 			if (inRoundTrip && !inDragAndDrop) {

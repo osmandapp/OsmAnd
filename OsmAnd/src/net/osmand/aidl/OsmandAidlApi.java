@@ -71,7 +71,7 @@ import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.IContextMenuButtonListener;
 import net.osmand.plus.mapmarkers.MapMarker;
-import net.osmand.plus.mapmarkers.ItineraryHelper;
+import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.myplaces.TrackBitmapDrawer;
 import net.osmand.plus.quickaction.QuickAction;
@@ -1061,7 +1061,7 @@ public class OsmandAidlApi {
 	boolean addMapMarker(String name, double latitude, double longitude) {
 		PointDescription pd = new PointDescription(
 				PointDescription.POINT_TYPE_MAP_MARKER, name != null ? name : "");
-		ItineraryHelper markersHelper = app.getItineraryHelper();
+		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 		markersHelper.addMapMarker(new LatLon(latitude, longitude), pd);
 		refreshMap();
 		return true;
@@ -1069,7 +1069,7 @@ public class OsmandAidlApi {
 
 	boolean removeMapMarker(String name, double latitude, double longitude, boolean ignoreCoordinates) {
 		LatLon latLon = new LatLon(latitude, longitude);
-		ItineraryHelper markersHelper = app.getItineraryHelper();
+		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 		List<MapMarker> mapMarkers = markersHelper.getMapMarkers();
 		for (MapMarker m : mapMarkers) {
 			if (m.getOnlyName().equals(name)) {
@@ -1085,7 +1085,7 @@ public class OsmandAidlApi {
 
 	boolean removeAllActiveMapMarkers() {
 		boolean refreshNeeded = false;
-		ItineraryHelper markersHelper = app.getItineraryHelper();
+		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 		List<MapMarker> mapMarkers = markersHelper.getMapMarkers();
 		for (MapMarker m : mapMarkers) {
 			markersHelper.moveMapMarkerToHistory(m);
@@ -1101,7 +1101,7 @@ public class OsmandAidlApi {
 	boolean updateMapMarker(String prevName, LatLon prevLatLon, String newName, LatLon newLatLon, boolean ignoreCoordinates) {
 		LatLon latLon = new LatLon(prevLatLon.getLatitude(), prevLatLon.getLongitude());
 		LatLon latLonNew = new LatLon(newLatLon.getLatitude(), newLatLon.getLongitude());
-		ItineraryHelper markersHelper = app.getItineraryHelper();
+		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 		List<MapMarker> mapMarkers = markersHelper.getMapMarkers();
 		for (MapMarker m : mapMarkers) {
 			if (m.getOnlyName().equals(prevName)) {

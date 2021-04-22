@@ -67,7 +67,7 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 				MapMarker marker = adapter.getItem(pos);
 				OsmandApplication app = mapActivity.getMyApplication();
 				if (app.getSettings().SELECT_MARKER_ON_SINGLE_TAP.get()) {
-					app.getItineraryHelper().moveMarkerToTop(marker);
+					app.getMapMarkersHelper().moveMarkerToTop(marker);
 					updateAdapter();
 				} else {
 					FavouritePoint fav = marker.favouritePoint == null
@@ -114,7 +114,7 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 				toPosition = holder.getAdapterPosition();
 				if (toPosition >= 0 && fromPosition >= 0 && toPosition != fromPosition) {
 					hideSnackbar();
-					mapActivity.getMyApplication().getItineraryHelper().reorderActiveMarkersIfNeeded();
+					mapActivity.getMyApplication().getMapMarkersHelper().reorderActiveMarkersIfNeeded();
 					adapter.notifyDataSetChanged();
 				}
 			}

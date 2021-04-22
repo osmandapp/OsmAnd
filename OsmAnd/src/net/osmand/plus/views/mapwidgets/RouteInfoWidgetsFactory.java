@@ -495,7 +495,7 @@ public class RouteInfoWidgetsFactory {
 				Location myLocation = getApplication().getLocationProvider().getLastKnownLocation();
 				LatLon l = getNextTargetPoint();
 				if (l == null) {
-					List<MapMarker> markers = getApplication().getItineraryHelper().getMapMarkers();
+					List<MapMarker> markers = getApplication().getMapMarkersHelper().getMapMarkers();
 					if (markers.size() > 0) {
 						l = markers.get(0).point;
 					}

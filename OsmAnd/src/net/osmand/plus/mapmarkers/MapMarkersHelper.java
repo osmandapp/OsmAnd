@@ -44,7 +44,7 @@ import java.util.concurrent.Executors;
 
 import static net.osmand.data.PointDescription.POINT_TYPE_MAP_MARKER;
 
-public class ItineraryHelper {
+public class MapMarkersHelper {
 
 	public static final int MAP_MARKERS_COLORS_COUNT = 7;
 
@@ -55,7 +55,7 @@ public class ItineraryHelper {
 
 	public static final int BY_DATE_ADDED_ASC = 4;
 
-	private static final Log LOG = PlatformUtil.getLog(ItineraryHelper.class);
+	private static final Log LOG = PlatformUtil.getLog(MapMarkersHelper.class);
 
 	@Retention(RetentionPolicy.SOURCE)
 	@IntDef({BY_NAME, BY_DISTANCE_DESC, BY_DISTANCE_ASC, BY_DATE_ADDED_DESC, BY_DATE_ADDED_ASC})
@@ -64,13 +64,13 @@ public class ItineraryHelper {
 
 	private OsmandApplication app;
 	private MapMarkersDbHelper markersDbHelper;
-	private ItinerarySaveHelper saveHelper;
+	private ItineraryDataHelper saveHelper;
 
 	private ExecutorService executorService = Executors.newSingleThreadExecutor();
 
 	private List<MapMarker> mapMarkers = new ArrayList<>();
 	private List<MapMarker> mapMarkersHistory = new ArrayList<>();
-	private List<ItineraryGroup> itineraryGroups = new ArrayList<>();
+	private List<MapMarkersGroup> mapMarkersGroups = new ArrayList<>();
 
 	private List<MapMarkerChangedListener> listeners = new ArrayList<>();
 	private Set<OnGroupSyncedListener> syncListeners = new HashSet<>();
@@ -85,8 +85,8 @@ public class ItineraryHelper {
 		return mapMarkersHistory;
 	}
 
-	public List<ItineraryGroup> getItineraryGroups() {
-		return itineraryGroups;
+	public List<MapMarkersGroup> getMapMarkersGroups() {
+		return mapMarkersGroups;
 	}
 
 	public boolean isStartFromMyLocation() {
@@ -101,13 +101,13 @@ public class ItineraryHelper {
 		return planRouteContext;
 	}
 
-	public ItinerarySaveHelper getSaveHelper() {
+	public ItineraryDataHelper getSaveHelper() {
 		return saveHelper;
 	}
 
-	public ItineraryHelper(OsmandApplication app) {
+	public MapMarkersHelper(OsmandApplication app) {
 		this.app = app;
-		saveHelper = new ItinerarySaveHelper(app, this);
+		saveHelper = new ItineraryDataHelper(app, this);
 		markersDbHelper = app.getMapMarkersDbHelper();
 		planRouteContext = new MarkersPlanRouteContext(app);
 		markersDbHelper.removeDisabledGroups();
@@ -132,26 +132,26 @@ public class ItineraryHelper {
 	}
 
 	private void loadGroups() {
-		Map<String, ItineraryGroup> groupsMap = markersDbHelper.getAllGroupsMap();
+		Map<String, MapMarkersGroup> groupsMap = markersDbHelper.getAllGroupsMap();
 		List<MapMarker> allMarkers = new ArrayList<>(mapMarkers);
 		allMarkers.addAll(mapMarkersHistory);
 
-		Iterator<Map.Entry<String, ItineraryGroup>> iterator = groupsMap.entrySet().iterator();
+		Iterator<Map.Entry<String, MapMarkersGroup>> iterator = groupsMap.entrySet().iterator();
 		while (iterator.hasNext()) {
-			ItineraryGroup group = iterator.next().getValue();
+			MapMarkersGroup group = iterator.next().getValue();
 			if (group.getType() == ItineraryType.TRACK && !new File(group.getId()).exists()) {
 				markersDbHelper.removeMarkersGroup(group.getId());
 				iterator.remove();
 			}
 		}
 
-		ItineraryGroup noGroup = null;
+		MapMarkersGroup noGroup = null;
 
 		for (MapMarker marker : allMarkers) {
-			ItineraryGroup group = groupsMap.get(marker.groupKey);
+			MapMarkersGroup group = groupsMap.get(marker.groupKey);
 			if (group == null) {
 				if (noGroup == null) {
-					noGroup = new ItineraryGroup();
+					noGroup = new MapMarkersGroup();
 					noGroup.setCreationDate(Long.MAX_VALUE);
 				}
 				noGroup.getMarkers().add(marker);
@@ -163,7 +163,7 @@ public class ItineraryHelper {
 			}
 		}
 
-		itineraryGroups = new ArrayList<>(groupsMap.values());
+		mapMarkersGroups = new ArrayList<>(groupsMap.values());
 		if (noGroup != null) {
 			sortMarkers(noGroup.getMarkers(), false, BY_DATE_ADDED_DESC);
 			addToGroupsList(noGroup);
@@ -171,7 +171,7 @@ public class ItineraryHelper {
 
 		sortGroups();
 
-		for (ItineraryGroup group : itineraryGroups) {
+		for (MapMarkersGroup group : mapMarkersGroups) {
 			updateGroup(group);
 		}
 	}
@@ -181,7 +181,7 @@ public class ItineraryHelper {
 	}
 
 	public void syncAllGroupsAsync() {
-		for (ItineraryGroup gr : itineraryGroups) {
+		for (MapMarkersGroup gr : mapMarkersGroups) {
 			if (gr.getId() != null && gr.getName() != null) {
 				runSynchronization(gr);
 			}
@@ -300,7 +300,7 @@ public class ItineraryHelper {
 		});
 	}
 
-	public void runSynchronization(final @NonNull ItineraryGroup group) {
+	public void runSynchronization(final @NonNull MapMarkersGroup group) {
 		app.runInUIThread(new Runnable() {
 			@Override
 			public void run() {
@@ -309,20 +309,20 @@ public class ItineraryHelper {
 		});
 	}
 
-	public ItineraryGroup getMarkersGroup(GPXFile gpx) {
+	public MapMarkersGroup getMarkersGroup(GPXFile gpx) {
 		if (gpx == null || gpx.path == null) {
 			return null;
 		}
 		return getMapMarkerGroupById(getMarkerGroupId(new File(gpx.path)), ItineraryType.TRACK);
 	}
 
-	public ItineraryGroup getMarkersGroup(FavoriteGroup favGroup) {
+	public MapMarkersGroup getMarkersGroup(FavoriteGroup favGroup) {
 		return getMapMarkerGroupById(getMarkerGroupId(favGroup), ItineraryType.FAVOURITES);
 	}
 
-	public ItineraryGroup addOrEnableGpxGroup(@NonNull File file) {
+	public MapMarkersGroup addOrEnableGpxGroup(@NonNull File file) {
 		updateGpxShowAsMarkers(file);
-		ItineraryGroup gr = getMapMarkerGroupById(getMarkerGroupId(file), ItineraryType.TRACK);
+		MapMarkersGroup gr = getMapMarkerGroupById(getMarkerGroupId(file), ItineraryType.TRACK);
 		if (gr == null) {
 			gr = createGPXMarkerGroup(file);
 			addGroupInternally(gr);
@@ -331,9 +331,9 @@ public class ItineraryHelper {
 		return gr;
 	}
 
-	public ItineraryGroup addOrEnableGroup(@NonNull GPXFile file) {
+	public MapMarkersGroup addOrEnableGroup(@NonNull GPXFile file) {
 		updateGpxShowAsMarkers(new File(file.path));
-		ItineraryGroup gr = getMarkersGroup(file);
+		MapMarkersGroup gr = getMarkersGroup(file);
 		if (gr == null) {
 			gr = createGPXMarkerGroup(new File(file.path));
 			addGroupInternally(gr);
@@ -342,8 +342,8 @@ public class ItineraryHelper {
 		return gr;
 	}
 
-	public ItineraryGroup addOrEnableGroup(@NonNull FavoriteGroup group) {
-		ItineraryGroup gr = getMarkersGroup(group);
+	public MapMarkersGroup addOrEnableGroup(@NonNull FavoriteGroup group) {
+		MapMarkersGroup gr = getMarkersGroup(group);
 		if (gr == null) {
 			gr = createFavMarkerGroup(group);
 			addGroupInternally(gr);
@@ -352,9 +352,9 @@ public class ItineraryHelper {
 		return gr;
 	}
 
-	public void enableGroup(@NonNull ItineraryGroup gr) {
+	public void enableGroup(@NonNull MapMarkersGroup gr) {
 		// check if group doesn't exist internally
-		if (!itineraryGroups.contains(gr)) {
+		if (!mapMarkersGroups.contains(gr)) {
 			addGroupInternally(gr);
 		}
 		if (gr.isDisabled()) {
@@ -363,7 +363,7 @@ public class ItineraryHelper {
 		runSynchronization(gr);
 	}
 
-	private void addGroupInternally(ItineraryGroup gr) {
+	private void addGroupInternally(MapMarkersGroup gr) {
 		markersDbHelper.addGroup(gr);
 		addHistoryMarkersToGroup(gr);
 		addToGroupsList(gr);
@@ -377,7 +377,7 @@ public class ItineraryHelper {
 		}
 	}
 
-	private void addHistoryMarkersToGroup(@NonNull ItineraryGroup group) {
+	private void addHistoryMarkersToGroup(@NonNull MapMarkersGroup group) {
 		List<MapMarker> historyMarkers = new ArrayList<>(mapMarkersHistory);
 		for (MapMarker m : historyMarkers) {
 			if (m.groupKey != null && group.getId() != null && m.groupKey.equals(group.getId())) {
@@ -386,7 +386,7 @@ public class ItineraryHelper {
 		}
 	}
 
-	public void removeMarkersGroup(ItineraryGroup group) {
+	public void removeMarkersGroup(MapMarkersGroup group) {
 		if (group != null) {
 			markersDbHelper.removeMarkersGroup(group.getId());
 			removeGroupActiveMarkers(group, false);
@@ -394,7 +394,7 @@ public class ItineraryHelper {
 		}
 	}
 
-	public void updateGroupDisabled(@NonNull ItineraryGroup group, boolean disabled) {
+	public void updateGroupDisabled(@NonNull MapMarkersGroup group, boolean disabled) {
 		String id = group.getId();
 		if (id != null) {
 			markersDbHelper.updateGroupDisabled(id, disabled);
@@ -402,7 +402,7 @@ public class ItineraryHelper {
 		}
 	}
 
-	public void updateGroupWptCategories(@NonNull ItineraryGroup group, Set<String> wptCategories) {
+	public void updateGroupWptCategories(@NonNull MapMarkersGroup group, Set<String> wptCategories) {
 		String id = group.getId();
 		if (id != null) {
 			group.setWptCategories(wptCategories);
@@ -412,7 +412,7 @@ public class ItineraryHelper {
 		}
 	}
 
-	private void removeGroupActiveMarkers(ItineraryGroup group, boolean updateGroup) {
+	private void removeGroupActiveMarkers(MapMarkersGroup group, boolean updateGroup) {
 		if (group != null) {
 			markersDbHelper.removeActiveMarkersFromGroup(group.getId());
 			removeFromMapMarkersList(group.getActiveMarkers());
@@ -426,26 +426,26 @@ public class ItineraryHelper {
 	}
 
 	public void updateGroups() {
-		for (ItineraryGroup group : itineraryGroups) {
+		for (MapMarkersGroup group : mapMarkersGroups) {
 			updateGroup(group);
 		}
 	}
 
-	public void updateGroup(ItineraryGroup itineraryGroup) {
-		if (itineraryGroup.getId() == null || itineraryGroup.getName() == null) {
+	public void updateGroup(MapMarkersGroup mapMarkersGroup) {
+		if (mapMarkersGroup.getId() == null || mapMarkersGroup.getName() == null) {
 			return;
 		}
-		createHeadersInGroup(itineraryGroup);
-		int historyMarkersCount = itineraryGroup.getHistoryMarkers().size();
-		ShowHideHistoryButton showHideHistoryButton = itineraryGroup.getShowHideHistoryButton();
+		createHeadersInGroup(mapMarkersGroup);
+		int historyMarkersCount = mapMarkersGroup.getHistoryMarkers().size();
+		ShowHideHistoryButton showHideHistoryButton = mapMarkersGroup.getShowHideHistoryButton();
 		if (showHideHistoryButton != null) {
 			if (historyMarkersCount == 0) {
-				itineraryGroup.setShowHideHistoryButton(null);
+				mapMarkersGroup.setShowHideHistoryButton(null);
 			}
 		} else if (historyMarkersCount > 0) {
 			showHideHistoryButton = new ShowHideHistoryButton();
 			showHideHistoryButton.showHistory = false;
-			itineraryGroup.setShowHideHistoryButton(showHideHistoryButton);
+			mapMarkersGroup.setShowHideHistoryButton(showHideHistoryButton);
 		}
 	}
 
@@ -458,25 +458,25 @@ public class ItineraryHelper {
 
 	private void addMarkerToGroup(MapMarker marker) {
 		if (marker != null) {
-			ItineraryGroup itineraryGroup = getMapMarkerGroupById(marker.groupKey, marker.getType());
-			if (itineraryGroup != null) {
-				itineraryGroup.getMarkers().add(marker);
-				updateGroup(itineraryGroup);
-				if (itineraryGroup.getName() == null) {
-					sortMarkers(itineraryGroup.getMarkers(), false, BY_DATE_ADDED_DESC);
+			MapMarkersGroup mapMarkersGroup = getMapMarkerGroupById(marker.groupKey, marker.getType());
+			if (mapMarkersGroup != null) {
+				mapMarkersGroup.getMarkers().add(marker);
+				updateGroup(mapMarkersGroup);
+				if (mapMarkersGroup.getName() == null) {
+					sortMarkers(mapMarkersGroup.getMarkers(), false, BY_DATE_ADDED_DESC);
 				}
 			} else {
-				itineraryGroup = new ItineraryGroup(marker.groupKey, marker.groupName, ItineraryType.MARKERS);
-				itineraryGroup.setCreationDate(Long.MAX_VALUE);
-				itineraryGroup.getMarkers().add(marker);
-				addToGroupsList(itineraryGroup);
+				mapMarkersGroup = new MapMarkersGroup(marker.groupKey, marker.groupName, ItineraryType.MARKERS);
+				mapMarkersGroup.setCreationDate(Long.MAX_VALUE);
+				mapMarkersGroup.getMarkers().add(marker);
+				addToGroupsList(mapMarkersGroup);
 				sortGroups();
-				updateGroup(itineraryGroup);
+				updateGroup(mapMarkersGroup);
 			}
 		}
 	}
 
-	private void createHeadersInGroup(@NonNull ItineraryGroup group) {
+	private void createHeadersInGroup(@NonNull MapMarkersGroup group) {
 		ItineraryType type = group.getType();
 		int headerIconId = 0;
 		if (type != ItineraryType.MARKERS) {
@@ -489,19 +489,19 @@ public class ItineraryHelper {
 
 	private void removeMarkerFromGroup(MapMarker marker) {
 		if (marker != null) {
-			ItineraryGroup itineraryGroup = getMapMarkerGroupById(marker.groupKey, marker.getType());
-			if (itineraryGroup != null) {
-				itineraryGroup.getMarkers().remove(marker);
-				updateGroup(itineraryGroup);
+			MapMarkersGroup mapMarkersGroup = getMapMarkerGroupById(marker.groupKey, marker.getType());
+			if (mapMarkersGroup != null) {
+				mapMarkersGroup.getMarkers().remove(marker);
+				updateGroup(mapMarkersGroup);
 			}
 		}
 	}
 
 	private void sortGroups() {
-		if (itineraryGroups.size() > 0) {
-			Collections.sort(itineraryGroups, new Comparator<ItineraryGroup>() {
+		if (mapMarkersGroups.size() > 0) {
+			Collections.sort(mapMarkersGroups, new Comparator<MapMarkersGroup>() {
 				@Override
-				public int compare(ItineraryGroup group1, ItineraryGroup group2) {
+				public int compare(MapMarkersGroup group1, MapMarkersGroup group2) {
 					long t1 = group1.getCreationDate();
 					long t2 = group2.getCreationDate();
 					return (t1 > t2) ? -1 : ((t1 == t2) ? 0 : 1);
@@ -511,8 +511,8 @@ public class ItineraryHelper {
 	}
 
 	@Nullable
-	public ItineraryGroup getMapMarkerGroupById(String id, ItineraryType type) {
-		for (ItineraryGroup group : itineraryGroups) {
+	public MapMarkersGroup getMapMarkerGroupById(String id, ItineraryType type) {
+		for (MapMarkersGroup group : mapMarkersGroups) {
 			if ((id == null && group.getId() == null)
 					|| (group.getId() != null && group.getId().equals(id))) {
 				if (type == ItineraryType.MARKERS || type == group.getType()) {
@@ -523,14 +523,14 @@ public class ItineraryHelper {
 		return null;
 	}
 
-	private ItineraryGroup createGPXMarkerGroup(File fl) {
-		return new ItineraryGroup(getMarkerGroupId(fl),
+	private MapMarkersGroup createGPXMarkerGroup(File fl) {
+		return new MapMarkersGroup(getMarkerGroupId(fl),
 				Algorithms.getFileNameWithoutExtension(fl.getName()),
 				ItineraryType.TRACK);
 	}
 
-	private ItineraryGroup createFavMarkerGroup(FavoriteGroup favGroup) {
-		return new ItineraryGroup(favGroup.getName(), favGroup.getName(), ItineraryType.FAVOURITES);
+	private MapMarkersGroup createFavMarkerGroup(FavoriteGroup favGroup) {
+		return new MapMarkersGroup(favGroup.getName(), favGroup.getName(), ItineraryType.FAVOURITES);
 	}
 
 	private String getMarkerGroupId(File gpx) {
@@ -542,13 +542,13 @@ public class ItineraryHelper {
 	}
 
 	@NonNull
-	public List<ItineraryGroup> getGroupsForDisplayedGpx() {
-		List<ItineraryGroup> res = new ArrayList<>();
+	public List<MapMarkersGroup> getGroupsForDisplayedGpx() {
+		List<MapMarkersGroup> res = new ArrayList<>();
 		List<SelectedGpxFile> selectedGpxFiles = app.getSelectedGpxHelper().getSelectedGPXFiles();
 		for (SelectedGpxFile selected : selectedGpxFiles) {
-			ItineraryGroup search = getMarkersGroup(selected.getGpxFile());
+			MapMarkersGroup search = getMarkersGroup(selected.getGpxFile());
 			if (search == null && selected.getGpxFile() != null && selected.getGpxFile().path != null) {
-				ItineraryGroup group = createGPXMarkerGroup(new File(selected.getGpxFile().path));
+				MapMarkersGroup group = createGPXMarkerGroup(new File(selected.getGpxFile().path));
 				group.setDisabled(true);
 				createHeadersInGroup(group);
 				res.add(group);
@@ -558,17 +558,17 @@ public class ItineraryHelper {
 	}
 
 	@NonNull
-	public List<ItineraryGroup> getGroupsForSavedArticlesTravelBook() {
-		List<ItineraryGroup> res = new ArrayList<>();
+	public List<MapMarkersGroup> getGroupsForSavedArticlesTravelBook() {
+		List<MapMarkersGroup> res = new ArrayList<>();
 		TravelHelper travelHelper = app.getTravelHelper();
 		if (travelHelper.isAnyTravelBookPresent()) {
 			List<TravelArticle> savedArticles = travelHelper.getBookmarksHelper().getSavedArticles();
 			for (TravelArticle art : savedArticles) {
 				String gpxName = travelHelper.getGPXName(art);
 				File path = app.getAppPath(IndexConstants.GPX_TRAVEL_DIR + gpxName);
-				ItineraryGroup search = getMapMarkerGroupById(getMarkerGroupId(path), ItineraryType.TRACK);
+				MapMarkersGroup search = getMapMarkerGroupById(getMarkerGroupId(path), ItineraryType.TRACK);
 				if (search == null) {
-					ItineraryGroup group = createGPXMarkerGroup(path);
+					MapMarkersGroup group = createGPXMarkerGroup(path);
 					group.setDisabled(true);
 					createHeadersInGroup(group);
 					res.add(group);
@@ -629,7 +629,7 @@ public class ItineraryHelper {
 		return null;
 	}
 
-	private void addNewMarkerIfNeeded(@NonNull ItineraryGroup group,
+	private void addNewMarkerIfNeeded(@NonNull MapMarkersGroup group,
 									  @NonNull List<MapMarker> groupMarkers,
 									  @NonNull LatLon latLon,
 									  @NonNull String name,
@@ -866,13 +866,13 @@ public class ItineraryHelper {
 
 	public void addMapMarkers(@NonNull List<LatLon> points,
 							  @NonNull List<PointDescription> historyNames,
-							  @Nullable ItineraryGroup group) {
+							  @Nullable MapMarkersGroup group) {
 		addMarkers(points, historyNames, group, null, null, null);
 	}
 
 	private void addMarkers(@NonNull List<LatLon> points,
 							@NonNull List<PointDescription> historyNames,
-							@Nullable ItineraryGroup group,
+							@Nullable MapMarkersGroup group,
 							@Nullable List<FavouritePoint> favouritePoints,
 							@Nullable List<WptPt> wptPts,
 							@Nullable List<String> mapObjNames) {
@@ -1006,7 +1006,7 @@ public class ItineraryHelper {
 
 	public List<MapMarker> getMapMarkersFromDefaultGroups(boolean history) {
 		List<MapMarker> mapMarkers = new ArrayList<>();
-		for (ItineraryGroup group : itineraryGroups) {
+		for (MapMarkersGroup group : mapMarkersGroups) {
 			if (group.getType() == ItineraryType.MARKERS) {
 				for (MapMarker marker : group.getMarkers()) {
 					if (history && marker.history || !history && !marker.history) {
@@ -1082,16 +1082,16 @@ public class ItineraryHelper {
 
 	// accessors to markers groups:
 
-	private void addToGroupsList(ItineraryGroup group) {
-		List<ItineraryGroup> copyList = new ArrayList<>(itineraryGroups);
+	private void addToGroupsList(MapMarkersGroup group) {
+		List<MapMarkersGroup> copyList = new ArrayList<>(mapMarkersGroups);
 		copyList.add(group);
-		itineraryGroups = copyList;
+		mapMarkersGroups = copyList;
 	}
 
-	private void removeFromGroupsList(ItineraryGroup group) {
-		List<ItineraryGroup> copyList = new ArrayList<>(itineraryGroups);
+	private void removeFromGroupsList(MapMarkersGroup group) {
+		List<MapMarkersGroup> copyList = new ArrayList<>(mapMarkersGroups);
 		copyList.remove(group);
-		itineraryGroups = copyList;
+		mapMarkersGroups = copyList;
 	}
 
 	// ---------------------------------------------------------------------------------------------
@@ -1113,9 +1113,9 @@ public class ItineraryHelper {
 
 	private class SyncGroupTask extends AsyncTask<Void, Void, Void> {
 
-		private ItineraryGroup group;
+		private MapMarkersGroup group;
 
-		SyncGroupTask(ItineraryGroup group) {
+		SyncGroupTask(MapMarkersGroup group) {
 			this.group = group;
 		}
 

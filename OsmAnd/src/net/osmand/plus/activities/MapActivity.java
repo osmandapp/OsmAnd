@@ -111,7 +111,7 @@ import net.osmand.plus.mapcontextmenu.builders.cards.dialogs.ContextMenuCardDial
 import net.osmand.plus.mapcontextmenu.other.DestinationReachedMenu;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.mapmarkers.MapMarker;
-import net.osmand.plus.mapmarkers.ItineraryHelper.MapMarkerChangedListener;
+import net.osmand.plus.mapmarkers.MapMarkersHelper.MapMarkerChangedListener;
 import net.osmand.plus.mapmarkers.fragments.PlanRouteFragment;
 import net.osmand.plus.measurementtool.GpxApproximationFragment;
 import net.osmand.plus.measurementtool.GpxData;
@@ -407,7 +407,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		if (removeFragment(PlanRouteFragment.TAG)) {
-			app.getItineraryHelper().getPlanRouteContext().setFragmentVisible(true);
+			app.getMapMarkersHelper().getPlanRouteContext().setFragmentVisible(true);
 		}
 		removeFragment(ImportGpxBottomSheetDialogFragment.TAG);
 		removeFragment(AdditionalActionsBottomSheetDialogFragment.TAG);
@@ -450,7 +450,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 							dashboardOnMap.updateLocation(true, true, false);
 						}
 						app.getTargetPointsHelper().lookupAddessAll();
-						app.getItineraryHelper().lookupAddressAll();
+						app.getMapMarkersHelper().lookupAddressAll();
 					}
 					if (event == InitEvents.FAVORITES_INITIALIZED) {
 						refreshMap();
@@ -723,7 +723,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		long tm = System.currentTimeMillis();
 
-		if (app.getItineraryHelper().getPlanRouteContext().isFragmentVisible()) {
+		if (app.getMapMarkersHelper().getPlanRouteContext().isFragmentVisible()) {
 			PlanRouteFragment.showInstance(this);
 		}
 
@@ -811,7 +811,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 
 		routingHelper.addListener(this);
-		app.getItineraryHelper().addListener(this);
+		app.getMapMarkersHelper().addListener(this);
 
 		QuickSearchDialogFragment searchDialogFragment = getQuickSearchDialogFragment();
 		if (searchDialogFragment != null) {
@@ -1402,7 +1402,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		pendingPause = false;
 		mapView.setOnDrawMapListener(null);
 		cancelSplashScreenTimer();
-		app.getItineraryHelper().removeListener(this);
+		app.getMapMarkersHelper().removeListener(this);
 		app.getRoutingHelper().removeListener(this);
 		app.getDownloadThread().resetUiActivity(this);
 		if (atlasMapRendererView != null) {

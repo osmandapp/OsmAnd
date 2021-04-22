@@ -32,12 +32,12 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.mapmarkers.ItineraryHelper;
+import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.fragments.CoordinateInputDialogFragment.OnPointsSavedListener;
 import net.osmand.plus.mapmarkers.fragments.DirectionIndicationDialogFragment.DirectionIndicationFragmentListener;
-import net.osmand.plus.mapmarkers.ItineraryHelper.MapMarkersSortByDef;
-import net.osmand.plus.mapmarkers.ItineraryHelper.OnGroupSyncedListener;
+import net.osmand.plus.mapmarkers.MapMarkersHelper.MapMarkersSortByDef;
+import net.osmand.plus.mapmarkers.MapMarkersHelper.OnGroupSyncedListener;
 import net.osmand.plus.mapmarkers.bottomsheets.OptionsBottomSheetDialogFragment;
 import net.osmand.plus.mapmarkers.bottomsheets.OptionsBottomSheetDialogFragment.MarkerOptionsFragmentListener;
 import net.osmand.plus.mapmarkers.bottomsheets.OrderByBottomSheetDialogFragment;
@@ -223,13 +223,13 @@ public class MapMarkersDialogFragment extends DialogFragment implements OnGroupS
 	@Override
 	public void onResume() {
 		super.onResume();
-		getMyApplication().getItineraryHelper().addSyncListener(this);
+		getMyApplication().getMapMarkersHelper().addSyncListener(this);
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		getMyApplication().getItineraryHelper().removeSyncListener(this);
+		getMyApplication().getMapMarkersHelper().removeSyncListener(this);
 	}
 
 	@Override
@@ -408,7 +408,7 @@ public class MapMarkersDialogFragment extends DialogFragment implements OnGroupS
 			@Override
 			public void buildRouteOnClick() {
 				if (mapActivity != null) {
-					if (mapActivity.getMyApplication().getItineraryHelper().getMapMarkers().isEmpty()) {
+					if (mapActivity.getMyApplication().getMapMarkersHelper().getMapMarkers().isEmpty()) {
 						Toast.makeText(mapActivity, getString(R.string.plan_route_no_markers_toast), Toast.LENGTH_SHORT).show();
 					} else {
 						PlanRouteFragment.showInstance(mapActivity);
@@ -420,7 +420,7 @@ public class MapMarkersDialogFragment extends DialogFragment implements OnGroupS
 			@Override
 			public void saveAsNewTrackOnClick() {
 				if (mapActivity != null) {
-					if (mapActivity.getMyApplication().getItineraryHelper().getMapMarkers().isEmpty()) {
+					if (mapActivity.getMyApplication().getMapMarkersHelper().getMapMarkers().isEmpty()) {
 						Toast.makeText(mapActivity, getString(R.string.plan_route_no_markers_toast), Toast.LENGTH_SHORT).show();
 					} else {
 						SaveAsTrackBottomSheetDialogFragment fragment = new SaveAsTrackBottomSheetDialogFragment();
@@ -433,7 +433,7 @@ public class MapMarkersDialogFragment extends DialogFragment implements OnGroupS
 			@Override
 			public void moveAllToHistoryOnClick() {
 				if (mapActivity != null) {
-					final ItineraryHelper helper = mapActivity.getMyApplication().getItineraryHelper();
+					final MapMarkersHelper helper = mapActivity.getMyApplication().getMapMarkersHelper();
 					final List<MapMarker> markers = new ArrayList<>(helper.getMapMarkers());
 					helper.moveAllActiveMarkersToHistory();
 					if (viewPager.getCurrentItem() == ACTIVE_MARKERS_POSITION) {
@@ -486,7 +486,7 @@ public class MapMarkersDialogFragment extends DialogFragment implements OnGroupS
 
 			@Override
 			public void saveGpx(final String fileName) {
-				final String gpxPath = mapActivity.getMyApplication().getItineraryHelper().getSaveHelper().saveMarkersToFile(fileName);
+				final String gpxPath = mapActivity.getMyApplication().getMapMarkersHelper().getSaveHelper().saveMarkersToFile(fileName);
 				snackbar = Snackbar.make(viewPager, String.format(getString(R.string.shared_string_file_is_saved), fileName) + ".", Snackbar.LENGTH_LONG)
 						.setAction(R.string.shared_string_show, new View.OnClickListener() {
 							@Override
@@ -511,7 +511,7 @@ public class MapMarkersDialogFragment extends DialogFragment implements OnGroupS
 				boolean useCenter = !(mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation() && location != null);
 				LatLon loc = useCenter ? mapActivity.getMapLocation() : new LatLon(location.getLatitude(), location.getLongitude());
 
-				app.getItineraryHelper().sortMarkers(sortByMode, loc);
+				app.getMapMarkersHelper().sortMarkers(sortByMode, loc);
 				activeFragment.updateAdapter();
 			}
 		};

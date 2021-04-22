@@ -178,7 +178,7 @@ public class MarkersPlanRouteContext {
 	}
 
 	private List<WptPt> getPointsToCalculate() {
-		ItineraryHelper markersHelper = app.getItineraryHelper();
+		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 		List<WptPt> points = new LinkedList<>();
 		Location myLoc = app.getLocationProvider().getLastStaleKnownLocation();
 		if (markersHelper.isStartFromMyLocation() && myLoc != null) {

@@ -48,7 +48,7 @@ import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.mapmarkers.ItineraryHelper;
+import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MarkersPlanRouteContext;
 import net.osmand.plus.mapmarkers.bottomsheets.PlanRouteOptionsBottomSheetDialogFragment;
@@ -77,7 +77,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 	public static final String TAG = "PlanRouteFragment";
 	private static final int MIN_DISTANCE_FOR_RECALCULATE = 50; // in meters
 
-	private ItineraryHelper markersHelper;
+	private MapMarkersHelper markersHelper;
 	private MarkersPlanRouteContext planRouteContext;
 
 	private MapMarkersListAdapter adapter;
@@ -116,7 +116,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		final MapActivity mapActivity = getMapActivity();
-		markersHelper = mapActivity.getMyApplication().getItineraryHelper();
+		markersHelper = mapActivity.getMyApplication().getMapMarkersHelper();
 		planRouteContext = markersHelper.getPlanRouteContext();
 		planRouteContext.setListener(new MarkersPlanRouteContext.PlanRouteProgressListener() {
 			@Override
@@ -351,7 +351,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 			public void onDragEnded(RecyclerView.ViewHolder holder) {
 				toPosition = holder.getAdapterPosition();
 				if (toPosition >= 0 && fromPosition >= 0) {
-					mapActivity.getMyApplication().getItineraryHelper().reorderActiveMarkersIfNeeded();
+					mapActivity.getMyApplication().getMapMarkersHelper().reorderActiveMarkersIfNeeded();
 					mapActivity.refreshMap();
 					adapter.reloadData();
 					try {
@@ -572,7 +572,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 				if (mapActivity != null) {
 					OsmandApplication app = mapActivity.getMyApplication();
 					Location myLoc = app.getLocationProvider().getLastStaleKnownLocation();
-					boolean startFromLocation = app.getItineraryHelper().isStartFromMyLocation() && myLoc != null;
+					boolean startFromLocation = app.getMapMarkersHelper().isStartFromMyLocation() && myLoc != null;
 					if (selectedCount > (startFromLocation ? 0 : 1)) {
 						sortSelectedMarkersDoorToDoor(mapActivity, startFromLocation, myLoc);
 					}
@@ -668,7 +668,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 			previousMapPosition = tileView.getMapPosition();
 			tileView.setMapPosition(portrait ? MIDDLE_TOP_CONSTANT : LANDSCAPE_MIDDLE_RIGHT_CONSTANT);
 
-			selectedCount = mapActivity.getMyApplication().getItineraryHelper().getSelectedMarkersCount();
+			selectedCount = mapActivity.getMyApplication().getMapMarkersHelper().getSelectedMarkersCount();
 			planRouteContext.recreateSnapTrkSegment(planRouteContext.isAdjustMapOnStart());
 			planRouteContext.setAdjustMapOnStart(true);
 			mapActivity.refreshMap();
@@ -825,7 +825,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 			double left = 0, right = 0;
 			double top = 0, bottom = 0;
 			Location myLocation = mapActivity.getMyApplication().getLocationProvider().getLastStaleKnownLocation();
-			if (mapActivity.getMyApplication().getItineraryHelper().isStartFromMyLocation() && myLocation != null) {
+			if (mapActivity.getMyApplication().getMapMarkersHelper().isStartFromMyLocation() && myLocation != null) {
 				left = myLocation.getLongitude();
 				right = myLocation.getLongitude();
 				top = myLocation.getLatitude();
@@ -879,7 +879,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 	public static boolean showInstance(MapActivity mapActivity) {
 		try {
 			boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
-			boolean fullscreen = portrait && mapActivity.getMyApplication().getItineraryHelper().getPlanRouteContext().isMarkersListOpened();
+			boolean fullscreen = portrait && mapActivity.getMyApplication().getMapMarkersHelper().getPlanRouteContext().isMarkersListOpened();
 			int containerRes = portrait ? (fullscreen ? R.id.fragmentContainer : R.id.bottomFragmentContainer) : R.id.topFragmentContainer;
 			FragmentManager fm = mapActivity.getSupportFragmentManager();
 			fm.beginTransaction()
@@ -909,7 +909,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 
 			@Override
 			protected List<MapMarker> doInBackground(Void... voids) {
-				ItineraryHelper markersHelper = mapActivity.getMyApplication().getItineraryHelper();
+				MapMarkersHelper markersHelper = mapActivity.getMyApplication().getMapMarkersHelper();
 				List<MapMarker> selectedMarkers = markersHelper.getSelectedMarkers();
 				List<LatLon> selectedLatLon = markersHelper.getSelectedMarkersLatLon();
 
@@ -945,7 +945,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 					}
 				}
 
-				mapActivity.getMyApplication().getItineraryHelper().addSelectedMarkersToTop(res);
+				mapActivity.getMyApplication().getMapMarkersHelper().addSelectedMarkersToTop(res);
 				adapter.reloadData();
 				adapter.notifyDataSetChanged();
 				planRouteContext.recreateSnapTrkSegment(false);

@@ -715,7 +715,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			}
 
 			// Map markers card
-			List<MapMarker> mapMarkers = app.getItineraryHelper().getMapMarkers();
+			List<MapMarker> mapMarkers = app.getMapMarkersHelper().getMapMarkers();
 			if (mapMarkers.size() > 0) {
 				MapMarkersCard mapMarkersCard = new MapMarkersCard(mapActivity, mapMarkers);
 				menuCards.add(mapMarkersCard);
@@ -2054,7 +2054,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			MapMarker m = null;
-			List<MapMarker> mapMarkers = mapActivity.getMyApplication().getItineraryHelper().getMapMarkers();
+			List<MapMarker> mapMarkers = mapActivity.getMyApplication().getMapMarkersHelper().getMapMarkers();
 			if (index != -1 && mapMarkers.size() > index) {
 				m = mapMarkers.get(index);
 			}

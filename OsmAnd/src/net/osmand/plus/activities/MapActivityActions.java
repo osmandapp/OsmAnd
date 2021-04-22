@@ -55,7 +55,7 @@ import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment.ContextMenuItemClickListener;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.fragments.MapMarkersDialogFragment;
-import net.osmand.plus.mapmarkers.ItineraryHelper;
+import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.mapmarkers.MarkersPlanRouteContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.StartPlanRouteBottomSheet;
@@ -181,7 +181,7 @@ public class MapActivityActions implements DialogProvider {
 
 
 	public void addMapMarker(double latitude, double longitude, PointDescription pd, @Nullable String mapObjectName) {
-		ItineraryHelper markersHelper = getMyApplication().getItineraryHelper();
+		MapMarkersHelper markersHelper = getMyApplication().getMapMarkersHelper();
 		markersHelper.addMapMarker(new LatLon(latitude, longitude), pd, mapObjectName);
 	}
 
@@ -613,7 +613,7 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 	public ApplicationMode getRouteMode(LatLon from) {
-		MarkersPlanRouteContext planRouteContext = mapActivity.getMyApplication().getItineraryHelper().getPlanRouteContext();
+		MarkersPlanRouteContext planRouteContext = mapActivity.getMyApplication().getMapMarkersHelper().getPlanRouteContext();
 		if (planRouteContext.isNavigationFromMarkers() && planRouteContext.getSnappedMode() != ApplicationMode.DEFAULT) {
 			planRouteContext.setNavigationFromMarkers(false);
 			return planRouteContext.getSnappedMode();

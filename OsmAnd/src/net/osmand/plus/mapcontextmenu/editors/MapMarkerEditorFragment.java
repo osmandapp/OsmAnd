@@ -54,7 +54,7 @@ public class MapMarkerEditorFragment extends PointEditorFragment {
 			marker.setOriginalPointDescription(new PointDescription(PointDescription.POINT_TYPE_MAP_MARKER, name));
 			OsmandApplication app = getMyApplication();
 			if (app != null) {
-				app.getItineraryHelper().updateMapMarker(marker, true);
+				app.getMapMarkersHelper().updateMapMarker(marker, true);
 			}
 			if (needDismiss) {
 				dismiss(true);
@@ -76,7 +76,7 @@ public class MapMarkerEditorFragment extends PointEditorFragment {
 					public void onClick(DialogInterface dialog, int which) {
 						OsmandApplication app = getMyApplication();
 						if (app != null) {
-							app.getItineraryHelper().removeMarker(marker);
+							app.getMapMarkersHelper().removeMarker(marker);
 						}
 						if (needDismiss) {
 							dismiss(true);

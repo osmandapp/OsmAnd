@@ -42,7 +42,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.FavouritesDbHelper.FavoritesListener;
-import net.osmand.plus.mapmarkers.ItineraryHelper;
+import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -520,7 +520,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 
 	private void selectMapMarkersImpl() {
 		if (getSelectedFavoritesCount() > 0) {
-			ItineraryHelper markersHelper = getMyApplication().getItineraryHelper();
+			MapMarkersHelper markersHelper = getMyApplication().getMapMarkersHelper();
 			List<LatLon> points = new ArrayList<>();
 			List<PointDescription> names = new ArrayList<>();
 			for (Map.Entry<String, Set<FavouritePoint>> entry : favoritesSelected.entrySet()) {

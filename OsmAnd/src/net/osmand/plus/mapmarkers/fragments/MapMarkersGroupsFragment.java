@@ -195,10 +195,10 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 					final MapMarker marker = (MapMarker) item;
 					int snackbarStringRes;
 					if (direction == ItemTouchHelper.RIGHT) {
-						app.getItineraryHelper().moveMapMarkerToHistory((MapMarker) item);
+						app.getMapMarkersHelper().moveMapMarkerToHistory((MapMarker) item);
 						snackbarStringRes = R.string.marker_moved_to_history;
 					} else {
-						app.getItineraryHelper().removeMarker((MapMarker) item);
+						app.getMapMarkersHelper().removeMarker((MapMarker) item);
 						snackbarStringRes = R.string.item_removed;
 					}
 					updateAdapter();
@@ -207,9 +207,9 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 								@Override
 								public void onClick(View view) {
 									if (direction == ItemTouchHelper.RIGHT) {
-										app.getItineraryHelper().restoreMarkerFromHistory(marker, 0);
+										app.getMapMarkersHelper().restoreMarkerFromHistory(marker, 0);
 									} else {
-										app.getItineraryHelper().addMarker(marker);
+										app.getMapMarkersHelper().addMarker(marker);
 									}
 									updateAdapter();
 								}
@@ -236,7 +236,7 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 					OsmandApplication app = mapActivity.getMyApplication();
 					if (!marker.history) {
 						if (app.getSettings().SELECT_MARKER_ON_SINGLE_TAP.get()) {
-							app.getItineraryHelper().moveMarkerToTop(marker);
+							app.getMapMarkersHelper().moveMarkerToTop(marker);
 							updateAdapter();
 						} else {
 							FavouritePoint fav = marker.favouritePoint == null
@@ -344,7 +344,7 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 				Object item = adapter.getItem(pos);
 				if (item instanceof MapMarker) {
 					if (getMyApplication() != null) {
-						getMyApplication().getItineraryHelper().restoreMarkerFromHistory((MapMarker) item, 0);
+						getMyApplication().getMapMarkersHelper().restoreMarkerFromHistory((MapMarker) item, 0);
 					}
 					updateAdapter();
 				}
@@ -355,7 +355,7 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 				Object item = adapter.getItem(pos);
 				if (item instanceof MapMarker) {
 					if (getMyApplication() != null) {
-						getMyApplication().getItineraryHelper().removeMarker((MapMarker) item);
+						getMyApplication().getMapMarkersHelper().removeMarker((MapMarker) item);
 					}
 					updateAdapter();
 				}

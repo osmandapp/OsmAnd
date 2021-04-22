@@ -19,8 +19,8 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
-import net.osmand.plus.mapmarkers.ItineraryGroup;
-import net.osmand.plus.mapmarkers.ItineraryHelper;
+import net.osmand.plus.mapmarkers.MapMarkersGroup;
+import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.compress.compressors.bzip2.BZip2CompressorOutputStream;
@@ -281,16 +281,16 @@ public class FavouritesDbHelper {
 	}
 
 	private void runSyncWithMarkers(FavoriteGroup favGroup) {
-		ItineraryHelper helper = context.getItineraryHelper();
-		ItineraryGroup group = helper.getMarkersGroup(favGroup);
+		MapMarkersHelper helper = context.getMapMarkersHelper();
+		MapMarkersGroup group = helper.getMarkersGroup(favGroup);
 		if (group != null) {
 			helper.runSynchronization(group);
 		}
 	}
 
 	private boolean removeFromMarkers(FavoriteGroup favGroup) {
-		ItineraryHelper helper = context.getItineraryHelper();
-		ItineraryGroup group = helper.getMarkersGroup(favGroup);
+		MapMarkersHelper helper = context.getMapMarkersHelper();
+		MapMarkersGroup group = helper.getMarkersGroup(favGroup);
 		if (group != null) {
 			helper.removeMarkersGroup(group);
 			return true;
@@ -299,7 +299,7 @@ public class FavouritesDbHelper {
 	}
 
 	private void addToMarkers(FavoriteGroup favGroup) {
-		ItineraryHelper helper = context.getItineraryHelper();
+		MapMarkersHelper helper = context.getMapMarkersHelper();
 		helper.addOrEnableGroup(favGroup);
 	}
 

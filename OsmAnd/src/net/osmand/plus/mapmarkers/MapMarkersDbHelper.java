@@ -162,7 +162,7 @@ public class MapMarkersDbHelper {
 		}
 	}
 
-	public void addGroup(ItineraryGroup group) {
+	public void addGroup(MapMarkersGroup group) {
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
@@ -174,15 +174,15 @@ public class MapMarkersDbHelper {
 		}
 	}
 
-	public Map<String, ItineraryGroup> getAllGroupsMap() {
-		Map<String, ItineraryGroup> res = new LinkedHashMap<>();
+	public Map<String, MapMarkersGroup> getAllGroupsMap() {
+		Map<String, MapMarkersGroup> res = new LinkedHashMap<>();
 		SQLiteConnection db = openConnection(true);
 		if (db != null) {
 			try {
 				SQLiteCursor query = db.rawQuery(GROUPS_TABLE_SELECT, null);
 				if (query != null && query.moveToFirst()) {
 					do {
-						ItineraryGroup group = readGroup(query);
+						MapMarkersGroup group = readGroup(query);
 						res.put(group.getId(), group);
 					} while (query.moveToNext());
 				}
@@ -196,14 +196,14 @@ public class MapMarkersDbHelper {
 		return res;
 	}
 
-	private ItineraryGroup readGroup(SQLiteCursor query) {
+	private MapMarkersGroup readGroup(SQLiteCursor query) {
 		String id = query.getString(0);
 		String name = query.getString(1);
 		int type = query.getInt(2);
 		boolean disabled = query.getInt(3) == 1;
 		String categories = query.getString(4);
 
-		ItineraryGroup res = new ItineraryGroup(id, name, ItineraryType.findTypeForId(type));
+		MapMarkersGroup res = new MapMarkersGroup(id, name, ItineraryType.findTypeForId(type));
 		res.setDisabled(disabled);
 		res.setWptCategories(categories == null ? null : Algorithms.decodeStringSet(categories));
 

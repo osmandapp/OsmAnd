@@ -15,7 +15,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.fragments.MapMarkersDialogFragment;
-import net.osmand.plus.mapmarkers.ItineraryHelper;
+import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.DirectionDrawable;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
@@ -32,7 +32,7 @@ public class MapMarkersWidgetsFactory {
 	public static final int MIN_DIST_2ND_ROW_SHOW = 150; // meters
 
 	private final MapActivity map;
-	private ItineraryHelper helper;
+	private MapMarkersHelper helper;
 	private boolean portraitMode;
 
 	private View topBar;
@@ -56,7 +56,7 @@ public class MapMarkersWidgetsFactory {
 
 	public MapMarkersWidgetsFactory(final MapActivity map) {
 		this.map = map;
-		helper = map.getMyApplication().getItineraryHelper();
+		helper = map.getMyApplication().getMapMarkersHelper();
 		portraitMode = AndroidUiHelper.isOrientationPortrait(map);
 
 		topBar = map.findViewById(R.id.map_markers_top_bar);
@@ -288,7 +288,7 @@ public class MapMarkersWidgetsFactory {
 		private boolean firstMarker;
 		private final OsmandMapTileView view;
 		private MapActivity map;
-		private ItineraryHelper helper;
+		private MapMarkersHelper helper;
 		private float[] calculations = new float[1];
 		private int cachedMeters;
 		private int cachedMarkerColorIndex = -1;
@@ -299,7 +299,7 @@ public class MapMarkersWidgetsFactory {
 			this.map = map;
 			this.firstMarker = firstMarker;
 			this.view = map.getMapView();
-			helper = map.getMyApplication().getItineraryHelper();
+			helper = map.getMyApplication().getMapMarkersHelper();
 			setText(null, null);
 			setOnClickListener(new View.OnClickListener() {
 

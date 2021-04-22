@@ -13,8 +13,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.mapmarkers.ItineraryType;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
-import net.osmand.plus.mapmarkers.ItineraryGroup;
-import net.osmand.plus.mapmarkers.ItineraryHelper;
+import net.osmand.plus.mapmarkers.MapMarkersGroup;
+import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.util.Algorithms;
 
@@ -29,7 +29,7 @@ import static net.osmand.IndexConstants.GPX_FILE_EXT;
 
 public class HistoryMarkersSettingsItem extends CollectionSettingsItem<MapMarker> {
 
-	private ItineraryHelper markersHelper;
+	private MapMarkersHelper markersHelper;
 
 	public HistoryMarkersSettingsItem(@NonNull OsmandApplication app, @NonNull List<MapMarker> items) {
 		super(app, null, items);
@@ -46,7 +46,7 @@ public class HistoryMarkersSettingsItem extends CollectionSettingsItem<MapMarker
 	@Override
 	protected void init() {
 		super.init();
-		markersHelper = app.getItineraryHelper();
+		markersHelper = app.getMapMarkersHelper();
 		existingItems = new ArrayList<>(markersHelper.getMapMarkersFromDefaultGroups(true));
 	}
 
@@ -123,10 +123,10 @@ public class HistoryMarkersSettingsItem extends CollectionSettingsItem<MapMarker
 		}
 	}
 
-	public ItineraryGroup getMarkersGroup() {
+	public MapMarkersGroup getMarkersGroup() {
 		String name = app.getString(R.string.markers_history);
 		String groupId = ExportSettingsType.HISTORY_MARKERS.name();
-		ItineraryGroup markersGroup = new ItineraryGroup(groupId, name, ItineraryType.MARKERS);
+		MapMarkersGroup markersGroup = new MapMarkersGroup(groupId, name, ItineraryType.MARKERS);
 		markersGroup.setMarkers(items);
 		return markersGroup;
 	}

@@ -56,7 +56,7 @@ public class AddFavouritesGroupBottomSheetDialogFragment extends AddGroupBottomS
 		if (!group.isVisible()) {
 			favouritesDbHelper.editFavouriteGroup(group, group.getName(), group.getColor(), true);
 		}
-		getMyApplication().getItineraryHelper().addOrEnableGroup(group);
+		getMyApplication().getMapMarkersHelper().addOrEnableGroup(group);
 		dismiss();
 	}
 }

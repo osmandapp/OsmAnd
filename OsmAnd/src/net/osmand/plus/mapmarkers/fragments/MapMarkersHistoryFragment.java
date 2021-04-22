@@ -24,7 +24,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.mapmarkers.ItineraryHelper.MapMarkerChangedListener;
+import net.osmand.plus.mapmarkers.MapMarkersHelper.MapMarkerChangedListener;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.adapters.MapMarkerHeaderViewHolder;
 import net.osmand.plus.mapmarkers.adapters.MapMarkerItemViewHolder;
@@ -152,10 +152,10 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkerChan
 					final MapMarker marker = (MapMarker) item;
 					int snackbarStringRes;
 					if (direction == ItemTouchHelper.LEFT) {
-						app.getItineraryHelper().restoreMarkerFromHistory((MapMarker) item, 0);
+						app.getMapMarkersHelper().restoreMarkerFromHistory((MapMarker) item, 0);
 						snackbarStringRes = R.string.marker_moved_to_active;
 					} else {
-						app.getItineraryHelper().removeMarker((MapMarker) item);
+						app.getMapMarkersHelper().removeMarker((MapMarker) item);
 						snackbarStringRes = R.string.item_removed;
 					}
 					snackbar = Snackbar.make(viewHolder.itemView, snackbarStringRes, Snackbar.LENGTH_LONG)
@@ -163,9 +163,9 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkerChan
 								@Override
 								public void onClick(View view) {
 									if (direction == ItemTouchHelper.LEFT) {
-										app.getItineraryHelper().moveMapMarkerToHistory(marker);
+										app.getMapMarkersHelper().moveMapMarkerToHistory(marker);
 									} else {
-										app.getItineraryHelper().addMarker(marker);
+										app.getMapMarkersHelper().addMarker(marker);
 									}
 								}
 							});
@@ -211,7 +211,7 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkerChan
 		recyclerView.setEmptyView(emptyView);
 		recyclerView.setAdapter(adapter);
 
-		app.getItineraryHelper().addListener(this);
+		app.getMapMarkersHelper().addListener(this);
 
 		return mainView;
 	}
@@ -231,7 +231,7 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkerChan
 			public void onMakeMarkerActive(int pos) {
 				Object item = adapter.getItem(pos);
 				if (item instanceof MapMarker) {
-					app.getItineraryHelper().restoreMarkerFromHistory((MapMarker) item, 0);
+					app.getMapMarkersHelper().restoreMarkerFromHistory((MapMarker) item, 0);
 				}
 			}
 
@@ -239,7 +239,7 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkerChan
 			public void onDeleteMarker(int pos) {
 				Object item = adapter.getItem(pos);
 				if (item instanceof MapMarker) {
-					app.getItineraryHelper().removeMarker((MapMarker) item);
+					app.getMapMarkersHelper().removeMarker((MapMarker) item);
 				}
 			}
 		};
@@ -247,7 +247,7 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkerChan
 
 	@Override
 	public void onDestroy() {
-		app.getItineraryHelper().removeListener(this);
+		app.getMapMarkersHelper().removeListener(this);
 		super.onDestroy();
 	}
 

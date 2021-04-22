@@ -36,9 +36,9 @@ import java.util.TimeZone;
 import static net.osmand.GPXUtilities.writeNotNullText;
 import static net.osmand.plus.FavouritesDbHelper.backup;
 
-public class ItinerarySaveHelper {
+public class ItineraryDataHelper {
 
-	private static final Log log = PlatformUtil.getLog(ItinerarySaveHelper.class);
+	private static final Log log = PlatformUtil.getLog(ItineraryDataHelper.class);
 
 	private static final String VISITED_DATE = "visited_date";
 	private static final String CREATION_DATE = "creation_date";
@@ -58,11 +58,11 @@ public class ItinerarySaveHelper {
 	}
 
 	private OsmandApplication app;
-	private ItineraryHelper itineraryHelper;
+	private MapMarkersHelper mapMarkersHelper;
 
-	public ItinerarySaveHelper(OsmandApplication app, ItineraryHelper itineraryHelper) {
+	public ItineraryDataHelper(OsmandApplication app, MapMarkersHelper mapMarkersHelper) {
 		this.app = app;
-		this.itineraryHelper = itineraryHelper;
+		this.mapMarkersHelper = mapMarkersHelper;
 	}
 
 	private File getInternalFile() {
@@ -88,7 +88,7 @@ public class ItinerarySaveHelper {
 	}
 
 	public Exception saveFile(File file) {
-		List<ItineraryGroup> groups = itineraryHelper.getItineraryGroups();
+		List<MapMarkersGroup> groups = mapMarkersHelper.getMapMarkersGroups();
 		GPXFile gpxFile = generateGpx(groups);
 		return GPXUtilities.writeGpxFile(file, gpxFile);
 	}
@@ -132,7 +132,7 @@ public class ItinerarySaveHelper {
 	}
 
 	public GPXFile generateGpx() {
-		return generateGpx(itineraryHelper.getMapMarkers(), false);
+		return generateGpx(mapMarkersHelper.getMapMarkers(), false);
 	}
 
 	public GPXFile generateGpx(List<MapMarker> markers, boolean completeBackup) {
@@ -153,10 +153,10 @@ public class ItinerarySaveHelper {
 		return gpxFile;
 	}
 
-	public GPXFile generateGpx(List<ItineraryGroup> itineraryGroups) {
+	public GPXFile generateGpx(List<MapMarkersGroup> mapMarkersGroups) {
 		GPXFile gpxFile = new GPXFile(Version.getFullVersion(app));
 		List<ItineraryGroupInfo> groups = new ArrayList<>();
-		for (ItineraryGroup group : itineraryGroups) {
+		for (MapMarkersGroup group : mapMarkersGroups) {
 			ItineraryGroupInfo groupInfo = ItineraryGroupInfo.createGroupInfo(app, group);
 
 			for (MapMarker marker : group.getMarkers()) {
@@ -236,7 +236,7 @@ public class ItinerarySaveHelper {
 		public String path;
 		public String categories;
 
-		public static ItineraryGroupInfo createGroupInfo(OsmandApplication app, ItineraryGroup group) {
+		public static ItineraryGroupInfo createGroupInfo(OsmandApplication app, MapMarkersGroup group) {
 			ItineraryGroupInfo groupInfo = new ItineraryGroupInfo();
 			groupInfo.type = group.getType().getTypeName();
 			groupInfo.name = !Algorithms.isEmpty(group.getName()) ? group.getName() : null;

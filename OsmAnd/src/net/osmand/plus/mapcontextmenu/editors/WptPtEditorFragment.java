@@ -17,8 +17,8 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.LatLon;
 import net.osmand.data.WptLocationPoint;
 import net.osmand.plus.GpxSelectionHelper;
-import net.osmand.plus.mapmarkers.ItineraryHelper;
-import net.osmand.plus.mapmarkers.ItineraryGroup;
+import net.osmand.plus.mapmarkers.MapMarkersHelper;
+import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -220,8 +220,8 @@ public class WptPtEditorFragment extends PointEditorFragment {
 	private void syncGpx(GPXFile gpxFile) {
 		OsmandApplication app = getMyApplication();
 		if (app != null) {
-			ItineraryHelper helper = app.getItineraryHelper();
-			ItineraryGroup group = helper.getMarkersGroup(gpxFile);
+			MapMarkersHelper helper = app.getMapMarkersHelper();
+			MapMarkersGroup group = helper.getMarkersGroup(gpxFile);
 			if (group != null) {
 				helper.runSynchronization(group);
 			}

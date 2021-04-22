@@ -20,7 +20,7 @@ import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.R;
 import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.mapmarkers.MapMarker;
-import net.osmand.plus.mapmarkers.ItineraryHelper;
+import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -39,7 +39,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	
 	protected OsmandMapTileView view;
 	private FavouritesDbHelper favouritesDbHelper;
-	private ItineraryHelper itineraryHelper;
+	private MapMarkersHelper mapMarkersHelper;
 	protected List<FavouritePoint> cache = new ArrayList<>();
 	private MapTextLayer textLayer;
 	@ColorInt
@@ -57,7 +57,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		this.view = view;
 		settings = view.getApplication().getSettings();
 		favouritesDbHelper = view.getApplication().getFavorites();
-		itineraryHelper = view.getApplication().getItineraryHelper();
+		mapMarkersHelper = view.getApplication().getMapMarkersHelper();
 		textLayer = view.getLayerByClass(MapTextLayer.class);
 		defaultColor = ContextCompat.getColor(view.getContext(), R.color.color_favorite);
 		grayColor = ContextCompat.getColor(view.getContext(), R.color.color_favorite_gray);
@@ -85,7 +85,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		if (contextMenuLayer.getMoveableObject() instanceof FavouritePoint) {
 			FavouritePoint objectInMotion = (FavouritePoint) contextMenuLayer.getMoveableObject();
 			PointF pf = contextMenuLayer.getMovableCenterPoint(tileBox);
-			MapMarker mapMarker = itineraryHelper.getMapMarker(objectInMotion);
+			MapMarker mapMarker = mapMarkersHelper.getMapMarker(objectInMotion);
 			float textScale = this.settings.TEXT_SCALE.get();
 			drawBigPoint(canvas, objectInMotion, pf.x, pf.y, mapMarker, textScale);
 		}
@@ -106,7 +106,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 				List<LatLon> smallObjectsLatLon = new ArrayList<>();
 				for (FavoriteGroup group : favouritesDbHelper.getFavoriteGroups()) {
 					List<Pair<FavouritePoint, MapMarker>> fullObjects = new ArrayList<>();
-					boolean synced = itineraryHelper.getMarkersGroup(group) != null;
+					boolean synced = mapMarkersHelper.getMarkersGroup(group) != null;
 					for (FavouritePoint favoritePoint : group.getPoints()) {
 						double lat = favoritePoint.getLatitude();
 						double lon = favoritePoint.getLongitude();
@@ -115,7 +115,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 								&& lon >= latLonBounds.left && lon <= latLonBounds.right) {
 							MapMarker marker = null;
 							if (synced) {
-								if ((marker = itineraryHelper.getMapMarker(favoritePoint)) == null) {
+								if ((marker = mapMarkersHelper.getMapMarker(favoritePoint)) == null) {
 									continue;
 								}
 							}

@@ -40,7 +40,7 @@ import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapmarkers.MapMarker;
-import net.osmand.plus.mapmarkers.ItineraryHelper;
+import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionRegistry;
@@ -515,7 +515,7 @@ public class ExternalApiHelper {
 				PointDescription pd = new PointDescription(
 						PointDescription.POINT_TYPE_MAP_MARKER, name != null ? name : "");
 
-				ItineraryHelper markersHelper = app.getItineraryHelper();
+				MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 				markersHelper.addMapMarker(new LatLon(lat, lon), pd);
 
 				MapMarker marker = markersHelper.getFirstMapMarker();
