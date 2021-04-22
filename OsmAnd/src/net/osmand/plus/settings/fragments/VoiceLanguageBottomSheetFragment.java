@@ -70,6 +70,8 @@ public class VoiceLanguageBottomSheetFragment extends MenuBottomSheetDialogFragm
 	private OsmandApplication app;
 	private OsmandSettings settings;
 	private DownloadIndexesThread downloadThread;
+	List<DownloadItem> voiceItems;
+	List<DownloadItem> voiceItemsRec;
 
 
 	private InfoType selectedVoiceType = InfoType.TTS;
@@ -220,13 +222,12 @@ public class VoiceLanguageBottomSheetFragment extends MenuBottomSheetDialogFragm
 	}
 
 	private void createVoiceView() {
-		List<DownloadItem> voiceItems;
-		if (selectedVoiceType == InfoType.TTS) {
+		if (selectedVoiceType == InfoType.TTS && voiceItems == null) {
 			voiceItems = getVoiceList(VOICE_TTS_KEY);
-		} else {
-			voiceItems = getVoiceList(VOICE_REC_KEY);
+		} else if(selectedVoiceType == InfoType.RECORDED && voiceItemsRec == null) {
+			voiceItemsRec = getVoiceList(VOICE_REC_KEY);
 		}
-		createSuggestedVoiceItemsView(voiceItems);
+		createSuggestedVoiceItemsView(selectedVoiceType == InfoType.TTS ? voiceItems : voiceItemsRec);
 	}
 
 	private void createSuggestedVoiceItemsView(List<DownloadItem> suggestedMaps) {
