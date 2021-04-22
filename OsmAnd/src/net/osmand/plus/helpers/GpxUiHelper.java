@@ -2125,9 +2125,12 @@ public class GpxUiHelper {
 
 
 	public static GPXFile makeGpxFromRoute(RouteCalculationResult route, OsmandApplication app) {
+		return makeGpxFromLocations(route.getRouteLocations(), app);
+	}
+
+	public static GPXFile makeGpxFromLocations(List<Location> locations, OsmandApplication app) {
 		double lastHeight = HEIGHT_UNDEFINED;
 		GPXFile gpx = new GPXUtilities.GPXFile(Version.getFullVersion(app));
-		List<Location> locations = route.getRouteLocations();
 		if (locations != null) {
 			GPXUtilities.Track track = new GPXUtilities.Track();
 			GPXUtilities.TrkSegment seg = new GPXUtilities.TrkSegment();
@@ -2147,6 +2150,8 @@ public class GpxUiHelper {
 						}
 					}
 					lastHeight = h;
+				} else {
+					lastHeight = HEIGHT_UNDEFINED;
 				}
 				seg.points.add(point);
 			}

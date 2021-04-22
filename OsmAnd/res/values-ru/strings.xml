@@ -2872,7 +2872,7 @@
     <string name="sit_on_the_stop">Посадка на остановке</string>
     <string name="use_osm_live_public_transport_description">Включить общественный транспорт с учётом автообновлений OsmAnd Live.</string>
     <string name="use_osm_live_public_transport">Общественный транспорт OsmAnd Live</string>
-    <string name="transfers_size">%1$d пересадки</string>
+    <string name="transfers_size">пересадки: %1$d</string>
     <string name="rendering_attr_surface_unpaved_name">Грунтовая</string>
     <string name="rendering_attr_surface_sand_name">Песок</string>
     <string name="rendering_attr_surface_grass_name">Трава</string>
@@ -3263,7 +3263,7 @@
     <string name="selected_profile">Выбранный профиль</string>
     <string name="personal_category_name">Персональный</string>
     <string name="shared_string_downloading_formatted">Скачивание %s</string>
-    <string name="rendering_value_thick_name">Толсто</string>
+    <string name="rendering_value_thick_name">Толстая</string>
     <string name="default_speed_dialog_msg">Используется для оценки времени прибытия для неизвестного типа дорог и ограничения скорости для всех дорог (может изменить маршрут)</string>
     <string name="routing_attr_allow_intermediate_name">Разрешить промежуточные маршруты</string>
     <string name="routing_attr_allow_advanced_name">Разрешить расширенные маршруты</string>
@@ -3302,7 +3302,7 @@
     <string name="rendering_attr_piste_difficulty_connection_name">Соединение</string>
     <string name="simulate_your_location_gpx_descr">Симулировать свою позицию используя записанный GPX трек.</string>
     <string name="route_start_point">Начало маршрута</string>
-    <string name="shared_string_revert">Вернуться</string>
+    <string name="shared_string_revert">Сброс</string>
     <string name="suggested_maps_descr">Эти карты необходимо использовать с плагином.</string>
     <string name="added_profiles">Добавленные профили</string>
     <string name="added_profiles_descr">Профили, добавленные плагином</string>
@@ -4056,7 +4056,11 @@
     <string name="next_billing_date">Следующая дата оплаты: %1$s</string>
     <string name="osmand_live">OsmAnd Live</string>
     <string name="annual_subscription">Годовая подписка</string>
-    <string name="release_4_0_beta">• Обновления OsmAnd Live перемещены в «Загрузка карт» → «Обновления».
+    <string name="release_4_0_beta">• Добавлена возможность скачать контурные линии в футах.
+\n
+\n• Планирование маршрута: добавлены вкладки для переключения между точками и графиками.
+\n
+\n• Обновления OsmAnd Live перемещены в «Загрузка карт» → «Обновления».
 \n
 \n• Теперь треки можно раскрашивать по высоте, скорости или уклону.
 \n
@@ -4087,4 +4091,8 @@
     <string name="output">Вывод</string>
     <string name="map_quick_action_pattern">%1$s → …</string>
     <string name="exit_number">Номер съезда</string>
+    <string name="srtm_unit_format">Формат единиц на контурных линиях</string>
+    <string name="srtm_download_single_help_message">Выберите необходимый формат. Для изменения формата потребуется повторно загрузить файл.</string>
+    <string name="shared_string_feet">футы</string>
+    <string name="srtm_download_list_help_message">OsmAnd предоставляет данные изолиний в метрах и футах. Вам нужно будет повторно загрузить файл, чтобы изменить формат.</string>
 </resources>

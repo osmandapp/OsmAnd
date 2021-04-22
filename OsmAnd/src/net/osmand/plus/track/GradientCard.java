@@ -19,13 +19,22 @@ import androidx.annotation.Nullable;
 
 public class GradientCard extends BaseCard {
 
-	private GPXTrackAnalysis gpxTrackAnalysis;
+	private final GPXTrackAnalysis gpxTrackAnalysis;
 	private GradientScaleType selectedScaleType;
+
+	private final int minSlope = 0;
+	private final int maxSlope = 60;
 
 	public GradientCard(@NonNull MapActivity mapActivity, @NonNull GPXTrackAnalysis gpxTrackAnalysis, @Nullable GradientScaleType selectedScaleType) {
 		super(mapActivity);
 		this.gpxTrackAnalysis = gpxTrackAnalysis;
 		this.selectedScaleType = selectedScaleType;
+	}
+
+	public GradientCard(@NonNull MapActivity mapActivity, @Nullable GradientScaleType scaleType) {
+		super(mapActivity);
+		this.gpxTrackAnalysis = null;
+		this.selectedScaleType = scaleType;
 	}
 
 	@Override
@@ -40,14 +49,27 @@ public class GradientCard extends BaseCard {
 			return;
 		}
 
-		AndroidUiHelper.updateVisibility(view, true);
 		TextView minValue = view.findViewById(R.id.min_value);
 		TextView maxValue = view.findViewById(R.id.max_value);
-		double min = RouteColorize.getMinValue(selectedScaleType.toColorizationType(), gpxTrackAnalysis);
-		double max = RouteColorize.getMaxValue(selectedScaleType.toColorizationType(),
-				gpxTrackAnalysis, min, app.getSettings().getApplicationMode().getMaxSpeed());
-		minValue.setText(formatValue(min));
-		maxValue.setText(formatValue(max));
+
+		if (gpxTrackAnalysis != null) {
+			AndroidUiHelper.updateVisibility(view, true);
+			double min = RouteColorize.getMinValue(selectedScaleType.toColorizationType(), gpxTrackAnalysis);
+			double max = RouteColorize.getMaxValue(selectedScaleType.toColorizationType(),
+					gpxTrackAnalysis, min, app.getSettings().getApplicationMode().getMaxSpeed());
+			minValue.setText(formatValue(min));
+			maxValue.setText(formatValue(max));
+			AndroidUiHelper.updateVisibility(view.findViewById(R.id.space), true);
+		} else {
+			if (selectedScaleType == GradientScaleType.ALTITUDE) {
+				minValue.setText(R.string.shared_string_min_height);
+				maxValue.setText(R.string.shared_string_max_height);
+			} else if (selectedScaleType == GradientScaleType.SLOPE) {
+				minValue.setText(formatValue(minSlope));
+				maxValue.setText(formatValue(maxSlope));
+			}
+			AndroidUiHelper.updateVisibility(view.findViewById(R.id.space), false);
+		}
 	}
 
 	public void setSelectedScaleType(GradientScaleType type) {
@@ -59,7 +81,7 @@ public class GradientCard extends BaseCard {
 		if (selectedScaleType == GradientScaleType.ALTITUDE) {
 			return OsmAndFormatter.getFormattedAlt(value, app);
 		} else if (selectedScaleType == GradientScaleType.SLOPE) {
-			return (int) value + " %";
+			return app.getString(R.string.ltr_or_rtl_combine_via_space, String.valueOf((int) value),  "%");
 		}
 		String speed = OsmAndFormatter.getFormattedSpeed((float) value, app);
 		String speedUnit = app.getSettings().SPEED_SYSTEM.get().toShortString(app);
