@@ -112,7 +112,7 @@ public class GPXUtilities {
 	}
 
 	public interface GPXExtensionsReader {
-		public boolean readExtensions(GPXFile res, XmlPullParser parser) throws Exception;
+		public boolean readExtensions(GPXFile res, XmlPullParser parser) throws IOException, XmlPullParserException;
 	}
 
 	public static class GPXExtensions {
@@ -1965,7 +1965,7 @@ public class GPXUtilities {
 		}
 	}
 
-	private static void writeNotNullText(XmlSerializer serializer, String tag, String value) throws IOException {
+	public static void writeNotNullText(XmlSerializer serializer, String tag, String value) throws IOException {
 		if (value != null) {
 			serializer.startTag(null, tag);
 			serializer.text(value);
@@ -2085,7 +2085,7 @@ public class GPXUtilities {
 		}
 	}
 
-	private static String readText(XmlPullParser parser, String key) throws XmlPullParserException, IOException {
+	public static String readText(XmlPullParser parser, String key) throws XmlPullParserException, IOException {
 		int tok;
 		StringBuilder text = null;
 		while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
@@ -2146,36 +2146,36 @@ public class GPXUtilities {
 		return time;
 	}
 
-	public static GPXFile loadGPXFile(File f) {
+	public static GPXFile loadGPXFile(File file) {
+		return loadGPXFile(file, null);
+	}
+
+	public static GPXFile loadGPXFile(File file, GPXExtensionsReader extensionsReader) {
 		FileInputStream fis = null;
 		try {
-			fis = new FileInputStream(f);
-			GPXFile file = loadGPXFile(fis);
-			file.path = f.getAbsolutePath();
-			file.modifiedTime = f.lastModified();
+			fis = new FileInputStream(file);
+			GPXFile gpxFile = loadGPXFile(fis, extensionsReader);
+			gpxFile.path = file.getAbsolutePath();
+			gpxFile.modifiedTime = file.lastModified();
 
-			try {
-				fis.close();
-			} catch (IOException e) {
-			}
-			return file;
+			Algorithms.closeStream(fis);
+			return gpxFile;
 		} catch (IOException e) {
-			GPXFile res = new GPXFile(null);
-			res.path = f.getAbsolutePath();
-			log.error("Error reading gpx " + res.path, e); //$NON-NLS-1$
-			res.error = e;
-			return res;
+			GPXFile gpxFile = new GPXFile(null);
+			gpxFile.path = file.getAbsolutePath();
+			log.error("Error reading gpx " + gpxFile.path, e); //$NON-NLS-1$
+			gpxFile.error = e;
+			return gpxFile;
 		} finally {
-			try {
-				if (fis != null)
-					fis.close();
-			} catch (IOException ignore) {
-				// ignore
-			}
+			Algorithms.closeStream(fis);
 		}
 	}
 
-	public static GPXFile loadGPXFile(InputStream f) {
+	public static GPXFile loadGPXFile(InputStream stream) {
+		return loadGPXFile(stream, null);
+	}
+
+	public static GPXFile loadGPXFile(InputStream stream, GPXExtensionsReader extensionsReader) {
 		GPXFile gpxFile = new GPXFile(null);
 		SimpleDateFormat format = new SimpleDateFormat(GPX_TIME_FORMAT, Locale.US);
 		format.setTimeZone(TimeZone.getTimeZone("UTC"));
@@ -2183,7 +2183,7 @@ public class GPXUtilities {
 		formatMillis.setTimeZone(TimeZone.getTimeZone("UTC"));
 		try {
 			XmlPullParser parser = PlatformUtil.newXMLPullParser();
-			parser.setInput(getUTF8Reader(f));
+			parser.setInput(getUTF8Reader(stream));
 			Track routeTrack = new Track();
 			TrkSegment routeTrackSegment = new TrkSegment();
 			routeTrack.segments.add(routeTrackSegment);
@@ -2231,17 +2231,19 @@ public class GPXUtilities {
 								break;
 
 							default:
-								Map<String, String> values = readTextMap(parser, tag);
-								if (values.size() > 0) {
-									for (Entry<String, String> entry : values.entrySet()) {
-										String t = entry.getKey().toLowerCase();
-										String value = entry.getValue();
-										parse.getExtensionsToWrite().put(t, value);
-										if (tag.equals("speed") && parse instanceof WptPt) {
-											try {
-												((WptPt) parse).speed = Float.parseFloat(value);
-											} catch (NumberFormatException e) {
-												log.debug(e.getMessage(), e);
+								if (extensionsReader == null || !extensionsReader.readExtensions(gpxFile, parser)) {
+									Map<String, String> values = readTextMap(parser, tag);
+									if (values.size() > 0) {
+										for (Entry<String, String> entry : values.entrySet()) {
+											String t = entry.getKey().toLowerCase();
+											String value = entry.getValue();
+											parse.getExtensionsToWrite().put(t, value);
+											if (tag.equals("speed") && parse instanceof WptPt) {
+												try {
+													((WptPt) parse).speed = Float.parseFloat(value);
+												} catch (NumberFormatException e) {
+													log.debug(e.getMessage(), e);
+												}
 											}
 										}
 									}

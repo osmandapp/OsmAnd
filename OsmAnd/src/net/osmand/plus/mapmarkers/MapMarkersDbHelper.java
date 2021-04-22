@@ -16,8 +16,9 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.Set;
+
+import static net.osmand.util.MapUtils.createShortLinkString;
 
 public class MapMarkersDbHelper {
 
@@ -303,7 +304,7 @@ public class MapMarkersDbHelper {
 	private void insertLast(SQLiteConnection db, MapMarker marker) {
 		long currentTime = System.currentTimeMillis();
 		if (marker.id == null) {
-			marker.id = String.valueOf(currentTime) + String.valueOf(new Random().nextInt(900) + 100);
+			marker.id = marker.getName(context) + createShortLinkString(marker.point.getLatitude(), marker.point.getLongitude(), 15);
 		}
 		marker.creationDate = currentTime;
 		String descr = PointDescription.serializeToString(marker.getOriginalPointDescription());
