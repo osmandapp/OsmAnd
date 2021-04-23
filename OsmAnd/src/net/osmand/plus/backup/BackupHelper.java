@@ -37,6 +37,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -65,10 +66,6 @@ public class BackupHelper {
 	public final static int STATUS_EMPTY_RESPONSE_ERROR = 2;
 	public final static int STATUS_SERVER_ERROR = 3;
 
-	public interface OnResultListener {
-		void onResult(int status, @Nullable String message, @Nullable JSONObject json);
-	}
-
 	public interface OnRegisterUserListener {
 		void onRegisterUser(int status, @Nullable String message);
 	}
@@ -83,7 +80,6 @@ public class BackupHelper {
 
 	public interface OnCollectLocalFilesListener {
 		void onFileCollected(@NonNull GpxFileInfo fileInfo);
-
 		void onFilesCollected(@NonNull List<GpxFileInfo> fileInfos);
 	}
 
@@ -93,20 +89,21 @@ public class BackupHelper {
 
 	public interface OnUploadFilesListener {
 		void onFileUploadProgress(@NonNull File file, int progress);
-
+		void onFileUploadDone(@NonNull File file);
 		void onFilesUploadDone(@NonNull Map<File, String> errors);
 	}
 
 	public interface OnDeleteFilesListener {
 		void onFileDeleteProgress(@NonNull UserFile file);
-
 		void onFilesDeleteDone(@NonNull Map<UserFile, String> errors);
 	}
 
 	public interface OnDownloadFileListener {
 		void onFileDownloadProgress(@NonNull UserFile userFile, int progress);
+
 		@WorkerThread
 		void onFileDownloadedAsync(@NonNull File file);
+		void onFileDownloaded(@NonNull File file);
 		void onFilesDownloadDone(@NonNull Map<File, String> errors);
 	}
 
@@ -174,20 +171,22 @@ public class BackupHelper {
 			params.put("orderid", orderId);
 		}
 		params.put("deviceid", app.getUserAndroidId());
-		AndroidNetworkUtils.sendRequestAsync(app, USER_REGISTER_URL, params, "Register user", true, true, new OnRequestResultListener() {
+		AndroidNetworkUtils.sendRequestAsync(app, USER_REGISTER_URL, params, "Register user", false, true, new OnRequestResultListener() {
 			@Override
-			public void onResult(String resultJson) {
+			public void onResult(@Nullable String resultJson, @Nullable String error) {
 				int status;
 				String message;
-				if (!Algorithms.isEmpty(resultJson)) {
+				if (!Algorithms.isEmpty(error)) {
+					message = "User registration error: " + parseServerError(error);
+					status = STATUS_SERVER_ERROR;
+				} else if (!Algorithms.isEmpty(resultJson)) {
 					try {
 						JSONObject result = new JSONObject(resultJson);
-						String statusStr = result.getString("status");
-						if (statusStr.equals("ok")) {
+						if (result.has("status") && "ok".equals(result.getString("status"))) {
 							message = "You have been registered successfully. Please check for email with activation code.";
 							status = STATUS_SUCCESS;
 						} else {
-							message = "User registration error: " + statusStr;
+							message = "User registration error: unknown";
 							status = STATUS_SERVER_ERROR;
 						}
 					} catch (JSONException e) {
@@ -217,12 +216,15 @@ public class BackupHelper {
 			params.put("deviceid", androidId);
 		}
 		params.put("token", token);
-		AndroidNetworkUtils.sendRequestAsync(app, DEVICE_REGISTER_URL, params, "Register device", true, true, new OnRequestResultListener() {
+		AndroidNetworkUtils.sendRequestAsync(app, DEVICE_REGISTER_URL, params, "Register device", false, true, new OnRequestResultListener() {
 			@Override
-			public void onResult(String resultJson) {
+			public void onResult(@Nullable String resultJson, @Nullable String error) {
 				int status;
 				String message;
-				if (!Algorithms.isEmpty(resultJson)) {
+				if (!Algorithms.isEmpty(error)) {
+					message = "Device registration error: " + parseServerError(error);
+					status = STATUS_SERVER_ERROR;
+				} else if (!Algorithms.isEmpty(resultJson)) {
 					try {
 						JSONObject result = new JSONObject(resultJson);
 						settings.BACKUP_DEVICE_ID.set(result.getString("id"));
@@ -230,8 +232,9 @@ public class BackupHelper {
 						settings.BACKUP_NATIVE_DEVICE_ID.set(result.getString("deviceid"));
 						settings.BACKUP_ACCESS_TOKEN.set(result.getString("accesstoken"));
 						settings.BACKUP_ACCESS_TOKEN_UPDATE_TIME.set(result.getString("udpatetime"));
-						status = STATUS_SUCCESS;
+
 						message = "Device have been registered successfully";
+						status = STATUS_SUCCESS;
 					} catch (JSONException e) {
 						message = "Device registration error: json parsing";
 						status = STATUS_PARSE_JSON_ERROR;
@@ -271,14 +274,6 @@ public class BackupHelper {
 					additionaParams.put("name", gpxFileInfo.getFileName(true));
 					additionaParams.put("type", Algorithms.getFileExtension(file));
 					gpxFileInfo.uploadTime = System.currentTimeMillis();
-					if (file.equals(favoritesFile)) {
-						favouritesHelper.setLastUploadedTime(gpxFileInfo.uploadTime);
-					} else {
-						GpxDataItem gpxItem = gpxHelper.getItem(file);
-						if (gpxItem != null) {
-							gpxHelper.updateLastUploadedTime(gpxItem, gpxFileInfo.uploadTime);
-						}
-					}
 					additionaParams.put("clienttime", String.valueOf(gpxFileInfo.uploadTime));
 				}
 				return additionaParams;
@@ -292,12 +287,30 @@ public class BackupHelper {
 			}
 
 			@Override
+			public void onFileUploadDone(@NonNull File file) {
+				if (listener != null) {
+					GpxFileInfo gpxFileInfo = gpxInfos.get(file);
+					if (gpxFileInfo != null) {
+						if (file.equals(favoritesFile)) {
+							favouritesHelper.setLastUploadedTime(gpxFileInfo.uploadTime);
+						} else {
+							GpxDataItem gpxItem = gpxHelper.getItem(file);
+							if (gpxItem != null) {
+								gpxHelper.updateLastUploadedTime(gpxItem, gpxFileInfo.uploadTime);
+							}
+						}
+					}
+					listener.onFileUploadDone(file);
+				}
+			}
+
+			@Override
 			public void onFilesUploadDone(@NonNull Map<File, String> errors) {
 				if (errors.isEmpty()) {
 					settings.BACKUP_LAST_UPLOADED_TIME.set(System.currentTimeMillis() + 1);
 				}
 				if (listener != null) {
-					listener.onFilesUploadDone(errors);
+					listener.onFilesUploadDone(resolveServerErrors(errors));
 				}
 			}
 		}, EXECUTOR);
@@ -338,17 +351,29 @@ public class BackupHelper {
 					for (RequestResponse response : results) {
 						UserFile userFile = filesMap.get(response.getRequest());
 						if (userFile != null) {
-							String responseStr = response.getResponse();
 							boolean success;
-							try {
-								JSONObject json = new JSONObject(responseStr);
-								String status = json.getString("status");
-								success = status.equalsIgnoreCase("ok");
-							} catch (JSONException e) {
+							String message = null;
+							String errorStr = response.getError();
+							if (!Algorithms.isEmpty(errorStr)) {
+								message = parseServerError(errorStr);
 								success = false;
+							} else {
+								String responseStr = response.getResponse();
+								try {
+									JSONObject result = new JSONObject(responseStr);
+									if (result.has("status") && "ok".equals(result.getString("status"))) {
+										success = true;
+									} else {
+										message = "Unknown error";
+										success = false;
+									}
+								} catch (JSONException e) {
+									message = "Json parsing error";
+									success = false;
+								}
 							}
 							if (!success) {
-								errors.put(userFile, responseStr);
+								errors.put(userFile, message);
 							}
 						}
 					}
@@ -364,13 +389,16 @@ public class BackupHelper {
 		Map<String, String> params = new HashMap<>();
 		params.put("deviceid", getDeviceId());
 		params.put("accessToken", getAccessToken());
-		AndroidNetworkUtils.sendRequestAsync(app, LIST_FILES_URL, params, "Download file list", true, false, new OnRequestResultListener() {
+		AndroidNetworkUtils.sendRequestAsync(app, LIST_FILES_URL, params, "Download file list", false, false, new OnRequestResultListener() {
 			@Override
-			public void onResult(String resultJson) {
+			public void onResult(@Nullable String resultJson, @Nullable String error) {
 				int status;
 				String message;
 				List<UserFile> userFiles = new ArrayList<>();
-				if (!Algorithms.isEmpty(resultJson)) {
+				if (!Algorithms.isEmpty(error)) {
+					status = STATUS_SERVER_ERROR;
+					message = "Download file list error: " + parseServerError(error);
+				} else if (!Algorithms.isEmpty(resultJson)) {
 					try {
 						JSONObject result = new JSONObject(resultJson);
 						String totalZipSize = result.getString("totalZipSize");
@@ -426,6 +454,13 @@ public class BackupHelper {
 					}
 
 					@Override
+					public void onFileDownloadDone(@NonNull File file) {
+						if (listener != null) {
+							listener.onFileDownloaded(file);
+						}
+					}
+
+					@Override
 					public void onFileDownloadedAsync(@NonNull File file) {
 						if (listener != null) {
 							listener.onFileDownloadedAsync(file);
@@ -435,7 +470,7 @@ public class BackupHelper {
 					@Override
 					public void onFilesDownloadDone(@NonNull Map<File, String> errors) {
 						if (listener != null) {
-							listener.onFilesDownloadDone(errors);
+							listener.onFilesDownloadDone(resolveServerErrors(errors));
 						}
 					}
 				}, EXECUTOR);
@@ -521,6 +556,36 @@ public class BackupHelper {
 			}
 		};
 		task.executeOnExecutor(EXECUTOR);
+	}
+
+	private Map<File, String> resolveServerErrors(@NonNull Map<File, String> errors) {
+		Map<File, String> resolvedErrors = new HashMap<>();
+		for (Entry<File, String> fileError : errors.entrySet()) {
+			File file = fileError.getKey();
+			String errorStr = fileError.getValue();
+			try {
+				JSONObject errorJson = new JSONObject(errorStr);
+				JSONObject error = errorJson.getJSONObject("error");
+				errorStr = "Error " + error.getInt("errorCode") + " (" + error.getString("message") + ")";
+			} catch (JSONException e) {
+				// ignore
+			}
+			resolvedErrors.put(file, errorStr);
+		}
+		return resolvedErrors;
+	}
+
+	private String parseServerError(@NonNull String error) {
+		try {
+			JSONObject resultError = new JSONObject(error);
+			if (resultError.has("error")) {
+				JSONObject errorObj = resultError.getJSONObject("error");
+				return errorObj.getInt("errorCode") + " (" + errorObj.getString("message") + ")";
+			}
+		} catch (JSONException e) {
+			// ignore
+		}
+		return error;
 	}
 
 	@SuppressLint("StaticFieldLeak")
