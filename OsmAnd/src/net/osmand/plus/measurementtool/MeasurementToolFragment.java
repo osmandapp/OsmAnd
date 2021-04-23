@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.MarginLayoutParams;
+import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -1883,7 +1884,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	private void enterMeasurementMode() {
-		MapActivity mapActivity = getMapActivity();
+		final MapActivity mapActivity = getMapActivity();
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (mapActivity != null && measurementLayer != null) {
 			measurementLayer.setInMeasurementMode(true);
@@ -1901,6 +1902,20 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 					R.id.map_layers_button,
 					R.id.map_search_button,
 					R.id.map_quick_actions_button);
+
+			final View widgetRight = mapActivity.findViewById(R.id.map_right_widgets_panel);
+			widgetRight.setTag(widgetRight.getVisibility());
+			widgetRight.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+				@Override
+				public void onGlobalLayout() {
+					int newVis = widgetRight.getVisibility();
+					if ((int) widgetRight.getTag() != newVis) {
+						widgetRight.setTag(widgetRight.getVisibility());
+						AndroidUiHelper.setVisibility(mapActivity, portrait ? View.INVISIBLE : View.GONE,
+								R.id.map_right_widgets_panel);
+					}
+				}
+			});
 
 			View collapseButton = mapActivity.findViewById(R.id.map_collapse_button);
 			if (collapseButton != null && collapseButton.getVisibility() == View.VISIBLE) {
