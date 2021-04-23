@@ -367,6 +367,22 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 		routeGeometry.setRouteStyleParams(getRouteLineColor(), getRouteLineWidth(tileBox), getDirectionArrowsColor(), gradientScaleType);
 		routeGeometry.drawPreviewRouteLine(canvas, tileBox, tx, ty);
 
+		Matrix matrix = new Matrix();
+		Path path = new Path();
+		int lineLength = AndroidUtils.dpToPx(view.getContext(), 24);
+		int offset = AndroidUtils.isLayoutRtl(view.getContext()) ? lineLength : -lineLength;
+		path.moveTo(centerX + offset, startY);
+		path.lineTo(centerX, startY);
+		path.lineTo(centerX, startY - lineLength);
+		canvas.drawPath(path, attrs.paint3);
+		drawDirectionArrow(canvas, matrix, centerX, startY - lineLength, centerX, startY);
+		path.reset();
+		path.moveTo(centerX, endY + lineLength);
+		path.lineTo(centerX, endY);
+		path.lineTo(centerX - offset, endY);
+		canvas.drawPath(path, attrs.paint3);
+		drawDirectionArrow(canvas, matrix, centerX - offset, endY, centerX, endY);
+
 		if (previewIcon == null) {
 			previewIcon = (LayerDrawable) AppCompatResources.getDrawable(view.getContext(), drawInfo.getIconId());
 			DrawableCompat.setTint(previewIcon.getDrawable(1), drawInfo.getIconColor());
@@ -389,26 +405,7 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 					if (o == null) {
 						first = true;
 						canvas.drawPath(pth, attrs.paint3);
-						double angleRad = Math.atan2(y - py, x - px);
-						double angle = (angleRad * 180 / Math.PI) + 90f;
-						double distSegment = Math.sqrt((y - py) * (y - py) + (x - px) * (x - px));
-						if (distSegment == 0) {
-							continue;
-						}
-						// int len = (int) (distSegment / pxStep);
-						float pdx = x - px;
-						float pdy = y - py;
-						float scale = attrs.paint3.getStrokeWidth() / ( actionArrow.getWidth() / 2.25f);
-						float scaledWidth = actionArrow.getWidth();
-						matrix.reset();
-						matrix.postTranslate(0, -actionArrow.getHeight() / 2f);
-						matrix.postRotate((float) angle, actionArrow.getWidth() / 2f, 0);
-						if (scale > 1.0f) {
-							matrix.postScale(scale, scale);
-							scaledWidth *= scale;
-						}
-						matrix.postTranslate(px + pdx - scaledWidth/ 2f, py + pdy);
-						canvas.drawBitmap(actionArrow, matrix, paintIconAction);
+						drawDirectionArrow(canvas, matrix, x, y, px, py);
 					} else {
 						px = x;
 						py = y;
@@ -428,6 +425,28 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 				canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 			}
 		}
+	}
+
+	private void drawDirectionArrow(Canvas canvas, Matrix matrix, float x, float y, float px, float py) {
+		double angleRad = Math.atan2(y - py, x - px);
+		double angle = (angleRad * 180 / Math.PI) + 90f;
+		double distSegment = Math.sqrt((y - py) * (y - py) + (x - px) * (x - px));
+		if (distSegment == 0) {
+			return;
+		}
+		float pdx = x - px;
+		float pdy = y - py;
+		float scale = attrs.paint3.getStrokeWidth() / ( actionArrow.getWidth() / 2.25f);
+		float scaledWidth = actionArrow.getWidth();
+		matrix.reset();
+		matrix.postTranslate(0, -actionArrow.getHeight() / 2f);
+		matrix.postRotate((float) angle, actionArrow.getWidth() / 2f, 0);
+		if (scale > 1.0f) {
+			matrix.postScale(scale, scale);
+			scaledWidth *= scale;
+		}
+		matrix.postTranslate(px + pdx - scaledWidth/ 2f, py + pdy);
+		canvas.drawBitmap(actionArrow, matrix, paintIconAction);
 	}
 
 	private void drawProjectionPoint(Canvas canvas, double[] projectionXY) {
