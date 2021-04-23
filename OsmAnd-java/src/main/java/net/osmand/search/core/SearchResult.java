@@ -74,23 +74,21 @@ public class SearchResult {
 		if (otherWordsMatch != null) {
 			searchPhraseNames.addAll(otherWordsMatch);
 		}
-		int idxMatchedWord = -1; 
+		int idxMatchedWord = -1;
 		boolean allWordsMatched = true;
-		if (!checkPhraseIsObjectType()) {
-			for (int i = 0; i < searchPhraseNames.size(); i++) {
-				boolean wordMatched = false;
-				for (int j = idxMatchedWord + 1; j < localResultNames.size(); j++) {
-					int r = requiredSearchPhrase.getCollator().compare(searchPhraseNames.get(i), localResultNames.get(j));
-					if (r == 0) {
-						wordMatched = true;
-						idxMatchedWord = j;
-						break;
-					}
-				}
-				if (!wordMatched) {
-					allWordsMatched = false;
+		for (int i = 0; i < searchPhraseNames.size(); i++) {
+			boolean wordMatched = false;
+			for (int j = idxMatchedWord + 1; j < localResultNames.size(); j++) {
+				int r = requiredSearchPhrase.getCollator().compare(searchPhraseNames.get(i), localResultNames.get(j));
+				if (r == 0) {
+					wordMatched = true;
+					idxMatchedWord = j;
 					break;
 				}
+			}
+			if (!wordMatched) {
+				allWordsMatched = false;
+				break;
 			}
 		}
 		double res = ObjectType.getTypeWeight(allWordsMatched ? objectType : null);
@@ -100,16 +98,6 @@ public class SearchResult {
 		return res;
 	}
 	
-	private boolean checkPhraseIsObjectType() {
-//		if (object instanceof Amenity) {
-//			String poiType = ((Amenity) object).getType().getKeyName();
-//			String poiSubType = ((Amenity) object).getSubType();
-//			boolean isType = poiType.equalsIgnoreCase(phrase);
-//			boolean isSubType = poiSubType.equalsIgnoreCase(phrase);
-//			return isType || isSubType;
-//		}
-		return false;
-	}
 	
 
 
