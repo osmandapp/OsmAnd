@@ -4056,7 +4056,11 @@
     <string name="shared_string_route_line">Línea de ruta</string>
     <string name="route_line_use_map_style_appearance">La línea de ruta usará el %1$s definido en el estilo de mapa elegido: %2$s.</string>
     <string name="specify_color_for_map_mode">Define el color para el modo de mapa: %1$s.</string>
-    <string name="release_4_0_beta">• Las actualizaciones de OsmAnd Live se han movido a «Descargas &gt; Actualizaciones».
+    <string name="release_4_0_beta">• Se ha añadido la opción para descargar las curvas de nivel en pies.
+\n
+\n• Paisaje del plan de ruta: se añadieron pestañas para alternar entre puntos o gráficos
+\n
+\n• Las actualizaciones de OsmAnd Live se han movido a «Descargas &gt; Actualizaciones».
 \n
 \n• Las trazas ahora pueden colorearse por altitud, velocidad o pendiente.
 \n
@@ -4087,4 +4091,8 @@
     <string name="announce_when_exceeded">Anunciar al excederse</string>
     <string name="user_points">Puntos de usuario</string>
     <string name="output">Salida</string>
+    <string name="shared_string_feet">pies</string>
+    <string name="srtm_unit_format">Formato de unidad de las curvas de nivel</string>
+    <string name="srtm_download_list_help_message">OsmAnd proporciona datos de curvas de nivel en metros y pies. Deberás volver a descargar el archivo para cambiar el formato.</string>
+    <string name="srtm_download_single_help_message">Marca el formato necesario. Deberás volver a descargar el archivo para cambiar el formato.</string>
 </resources>
