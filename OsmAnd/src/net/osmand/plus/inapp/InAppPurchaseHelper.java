@@ -8,6 +8,9 @@ import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.AndroidNetworkUtils.OnRequestResultListener;
 import net.osmand.AndroidNetworkUtils.OnSendRequestsListener;
@@ -40,9 +43,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 public abstract class InAppPurchaseHelper {
 	// Debug tag, for logging
@@ -466,7 +466,7 @@ public abstract class InAppPurchaseHelper {
 	protected void onSkuDetailsResponseDone(List<PurchaseInfo> purchaseInfoList) {
 		final AndroidNetworkUtils.OnRequestResultListener listener = new AndroidNetworkUtils.OnRequestResultListener() {
 			@Override
-			public void onResult(String result) {
+			public void onResult(@Nullable String result, @Nullable String error) {
 				notifyDismissProgress(InAppPurchaseTaskType.REQUEST_INVENTORY);
 				notifyGetItems();
 				stop(true);
@@ -477,7 +477,7 @@ public abstract class InAppPurchaseHelper {
 		if (purchaseInfoList.size() > 0) {
 			sendTokens(purchaseInfoList, listener);
 		} else {
-			listener.onResult("OK");
+			listener.onResult("OK", null);
 		}
 	}
 
@@ -503,7 +503,7 @@ public abstract class InAppPurchaseHelper {
 			liveUpdatesPurchase.setState(ctx, SubscriptionState.UNDEFINED);
 			sendTokens(Collections.singletonList(info), new OnRequestResultListener() {
 				@Override
-				public void onResult(String result) {
+				public void onResult(@Nullable String result, @Nullable String error) {
 					boolean active = ctx.getSettings().LIVE_UPDATES_PURCHASED.get();
 					ctx.getSettings().LIVE_UPDATES_PURCHASED.set(true);
 					ctx.getSettings().getCustomRenderBooleanProperty("depthContours").set(true);
@@ -642,7 +642,7 @@ public abstract class InAppPurchaseHelper {
 						}
 					}
 					if (listener != null) {
-						listener.onResult("OK");
+						listener.onResult("OK", null);
 					}
 				}
 
@@ -695,7 +695,7 @@ public abstract class InAppPurchaseHelper {
 		} catch (Exception e) {
 			logError("SendToken Error", e);
 			if (listener != null) {
-				listener.onResult("Error");
+				listener.onResult("Error", null);
 			}
 		}
 	}

@@ -137,6 +137,7 @@ public class TestBackupActivity extends OsmandActionBarActivity {
 								a.buttonVerify.setVisibility(View.VISIBLE);
 								a.buttonVerify.setEnabled(status == BackupHelper.STATUS_SUCCESS);
 								a.tokenEditText.requestFocus();
+								a.infoView.setText(message);
 							}
 						}
 					});
@@ -162,10 +163,11 @@ public class TestBackupActivity extends OsmandActionBarActivity {
 								a.progressBar.setVisibility(View.GONE);
 								a.buttonVerify.setEnabled(status != BackupHelper.STATUS_SUCCESS);
 								if (status == BackupHelper.STATUS_SUCCESS) {
-									tokenEdit.setVisibility(View.GONE);
-									buttonVerify.setVisibility(View.GONE);
+									a.tokenEdit.setVisibility(View.GONE);
+									a.buttonVerify.setVisibility(View.GONE);
+									a.prepareBackup();
 								}
-								a.prepareBackup();
+								a.infoView.setText(message);
 							}
 						}
 					});
@@ -196,15 +198,19 @@ public class TestBackupActivity extends OsmandActionBarActivity {
 								String description;
 								if (error != null) {
 									description = error;
-								} else if (uploadErrors == null && downloadErrors == null) {
+								} else if (uploadErrors == null && deleteErrors == null) {
 									description = "No data";
 								} else {
 									description = getBackupErrorsDescription(uploadErrors, downloadErrors, deleteErrors, error);
 								}
 								a.infoView.setText(description);
 								a.infoView.requestFocus();
-								a.prepareBackup();
 								a.buttonBackup.setEnabled(true);
+								if (Algorithms.isEmpty(description)) {
+									a.prepareBackup();
+								} else {
+									a.backupInfo = null;
+								}
 							}
 						}
 					});
@@ -233,8 +239,12 @@ public class TestBackupActivity extends OsmandActionBarActivity {
 								}
 								a.infoView.setText(description);
 								a.infoView.requestFocus();
-								a.prepareBackup();
 								a.buttonRestore.setEnabled(true);
+								if (Algorithms.isEmpty(description)) {
+									a.prepareBackup();
+								} else {
+									a.backupInfo = null;
+								}
 							}
 						}
 					});
@@ -249,21 +259,21 @@ public class TestBackupActivity extends OsmandActionBarActivity {
 	private String getBackupErrorsDescription(@Nullable Map<File, String> uploadErrors, @Nullable Map<File, String> downloadErrors, @Nullable Map<UserFile, String> deleteErrors, @Nullable String error) {
 		StringBuilder sb = new StringBuilder();
 		if (!Algorithms.isEmpty(uploadErrors)) {
-			sb.append("--- Upload errors ---").append("\n");
+			sb.append("--- Upload errors ---").append("\n\n");
 			for (Entry<File, String> uploadEntry : uploadErrors.entrySet()) {
-				sb.append(uploadEntry.getKey().getName()).append(": ").append(uploadEntry.getValue()).append("\n");
+				sb.append(uploadEntry.getKey().getName()).append(": ").append(uploadEntry.getValue()).append("\n\n");
 			}
 		}
 		if (!Algorithms.isEmpty(downloadErrors)) {
-			sb.append("--- Download errors ---").append("\n");
+			sb.append("--- Download errors ---").append("\n\n");
 			for (Entry<File, String> downloadEntry : downloadErrors.entrySet()) {
-				sb.append(downloadEntry.getKey().getName()).append(": ").append(downloadEntry.getValue()).append("\n");
+				sb.append(downloadEntry.getKey().getName()).append(": ").append(downloadEntry.getValue()).append("\n\n");
 			}
 		}
 		if (!Algorithms.isEmpty(deleteErrors)) {
-			sb.append("--- Delete errors ---").append("\n");
+			sb.append("--- Delete errors ---").append("\n\n");
 			for (Entry<UserFile, String> deleteEntry : deleteErrors.entrySet()) {
-				sb.append(deleteEntry.getKey().getName()).append(": ").append(deleteEntry.getValue()).append("\n");
+				sb.append(deleteEntry.getKey().getName()).append(": ").append(deleteEntry.getValue()).append("\n\n");
 			}
 		}
 		return sb.length() == 0 ? "OK" : sb.toString();
@@ -272,32 +282,32 @@ public class TestBackupActivity extends OsmandActionBarActivity {
 	private String getBackupDescription(@NonNull BackupInfo backupInfo) {
 		StringBuilder sb = new StringBuilder();
 		if (!Algorithms.isEmpty(backupInfo.filesToUpload)) {
-			sb.append("\n").append("--- Upload ---").append("\n");
+			sb.append("\n").append("--- Upload ---").append("\n\n");
 			for (GpxFileInfo info : backupInfo.filesToUpload) {
 				sb.append(info.getFileName(true))
 						.append(" L: ").append(DF.format(new Date(info.getFileDate())))
 						.append(" U: ").append(DF.format(new Date(info.uploadTime)))
-						.append("\n");
+						.append("\n\n");
 			}
 		}
 		if (!Algorithms.isEmpty(backupInfo.filesToDownload)) {
-			sb.append("\n").append("--- Download ---").append("\n");
+			sb.append("\n").append("--- Download ---").append("\n\n");
 			for (UserFile userFile : backupInfo.filesToDownload) {
 				sb.append(userFile.getName())
 						.append(" R: ").append(DF.format(new Date(userFile.getClienttimems())))
-						.append("\n");
+						.append("\n\n");
 			}
 		}
 		if (!Algorithms.isEmpty(backupInfo.filesToDelete)) {
-			sb.append("\n").append("--- Delete ---").append("\n");
+			sb.append("\n").append("--- Delete ---").append("\n\n");
 			for (UserFile userFile : backupInfo.filesToDelete) {
 				sb.append(userFile.getName())
 						.append(" R: ").append(DF.format(new Date(userFile.getClienttimems())))
-						.append("\n");
+						.append("\n\n");
 			}
 		}
 		if (!Algorithms.isEmpty(backupInfo.filesToMerge)) {
-			sb.append("\n").append("--- Conflicts ---").append("\n");
+			sb.append("\n").append("--- Conflicts ---").append("\n\n");
 			for (Pair<GpxFileInfo, UserFile> localRemote : backupInfo.filesToMerge) {
 				GpxFileInfo local = localRemote.first;
 				UserFile remote = localRemote.second;
@@ -305,7 +315,7 @@ public class TestBackupActivity extends OsmandActionBarActivity {
 						.append(" L: ").append(DF.format(new Date(local.getFileDate())))
 						.append(" U: ").append(DF.format(new Date(local.uploadTime)))
 						.append(" R: ").append(DF.format(new Date(remote.getClienttimems())))
-						.append("\n");
+						.append("\n\n");
 			}
 		}
 		return sb.toString();
