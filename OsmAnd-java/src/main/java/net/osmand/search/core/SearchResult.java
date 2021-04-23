@@ -1,5 +1,9 @@
 package net.osmand.search.core;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.City;
 import net.osmand.data.LatLon;
@@ -10,8 +14,6 @@ import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
-
-import java.util.Collection;
 
 public class SearchResult {
 	// search phrase that makes search result valid 
@@ -41,6 +43,8 @@ public class SearchResult {
 	public String localeRelatedObjectName;
 	public Object relatedObject;
 	public double distRelatedObjectName;
+	
+	private double unknownPhraseMatchWeight = 0;
 
 	public SearchResult(SearchPhrase sp) {
 		this.requiredSearchPhrase = sp;
@@ -49,29 +53,65 @@ public class SearchResult {
 
 	// maximum corresponds to the top entry
 	public double getUnknownPhraseMatchWeight() {
+		if (unknownPhraseMatchWeight != 0) {
+			return unknownPhraseMatchWeight;
+		}
 		// if result is a complete match in the search we prioritize it higher
-		return getSumPhraseMatchWeight() / Math.pow(MAX_TYPE_WEIGHT, getDepth() - 1);
+		double res = getSumPhraseMatchWeight() / Math.pow(MAX_TYPE_WEIGHT, getDepth() - 1);
+		unknownPhraseMatchWeight = res;
+		return res;
 	}
 	
 	public double getSumPhraseMatchWeight() {
 		// if result is a complete match in the search we prioritize it higher
-		String name = alternateName != null? alternateName : localeName;
-		int localWordsMatched =  requiredSearchPhrase.countWords(name) ;
- 		boolean match = localWordsMatched <= getSelfWordCount();
-		boolean fullCompleteMatch = false;
-		double res = 1;
-		if (match) {
-			res = ObjectType.getTypeWeight(match ? objectType : null);
-			fullCompleteMatch = getSelfPhrase().equalsIgnoreCase(name);
-			if (fullCompleteMatch) {
-				res = res * 10;
+		String name = alternateName != null ? alternateName : localeName;
+		List<String> localResultNames = new ArrayList<>();
+		SearchPhrase.splitWords(name, localResultNames);
+		List<String> searchPhraseNames = new ArrayList<String>();
+		if (firstUnknownWordMatches) {
+			searchPhraseNames.add(requiredSearchPhrase.getFirstUnknownSearchWord());
+		}
+		if (otherWordsMatch != null) {
+			searchPhraseNames.addAll(otherWordsMatch);
+		}
+		int idxMatchedWord = -1; 
+		boolean allWordsMatched = true;
+		if (!checkPhraseIsObjectType()) {
+			for (int i = 0; i < searchPhraseNames.size(); i++) {
+				boolean wordMatched = false;
+				for (int j = idxMatchedWord + 1; j < localResultNames.size(); j++) {
+					int r = requiredSearchPhrase.getCollator().compare(searchPhraseNames.get(i), localResultNames.get(j));
+					if (r == 0) {
+						wordMatched = true;
+						idxMatchedWord = j;
+						break;
+					}
+				}
+				if (!wordMatched) {
+					allWordsMatched = false;
+					break;
+				}
 			}
 		}
+		double res = ObjectType.getTypeWeight(allWordsMatched ? objectType : null);
 		if (parentSearchResult != null) {
 			res = res + parentSearchResult.getSumPhraseMatchWeight() / MAX_TYPE_WEIGHT;
 		}
 		return res;
 	}
+	
+	private boolean checkPhraseIsObjectType() {
+//		if (object instanceof Amenity) {
+//			String poiType = ((Amenity) object).getType().getKeyName();
+//			String poiSubType = ((Amenity) object).getSubType();
+//			boolean isType = poiType.equalsIgnoreCase(phrase);
+//			boolean isSubType = poiSubType.equalsIgnoreCase(phrase);
+//			return isType || isSubType;
+//		}
+		return false;
+	}
+	
+
 
 	public int getDepth() {
 		if (parentSearchResult != null) {

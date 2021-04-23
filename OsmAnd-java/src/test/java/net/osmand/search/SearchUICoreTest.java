@@ -132,6 +132,10 @@ public class SearchUICoreTest {
 
 			reader = new BinaryMapIndexReader(new RandomAccessFile(obfFile.getPath(), "r"), obfFile);
 		}
+		 boolean disabled = settingsJson.optBoolean("disabled", false);
+		 if (disabled) {
+			 return;
+		 }
 		List<List<String>> results = new ArrayList<>();
 		for (int i = 0; i < phrases.size(); i++) {
 			results.add(new ArrayList<String>());
@@ -199,7 +203,6 @@ public class SearchUICoreTest {
 					System.out.println("EXPECTED : ");
 					for (String r : result) {
 						System.out.println(String.format("\t\"%s\",", r));
-					
 					}
 				}
 				Assert.assertEquals(expected, present);
