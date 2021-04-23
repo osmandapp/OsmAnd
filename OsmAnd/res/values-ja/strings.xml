@@ -10,7 +10,7 @@
     <string name="gpx_option_reverse_route">経路を反転</string>
     <string name="gpx_option_destination_point">現在の目的地を使用</string>
     <string name="gpx_option_from_start_point">経路全体を通過する</string>
-    <string name="switch_to_raster_map_to_see">メニューの[マップダウンロード]などから、この場所のオフラインベクターマップをダウンロードするか『オンラインマップ』プラグインを有効にしてください。</string>
+    <string name="switch_to_raster_map_to_see">メニューの『マップダウンロード』などから、この場所のオフラインベクターマップをダウンロードするか『オンラインマップ』プラグインを有効にしてください。</string>
     <string name="switch_to_vector_map_to_see">現在地のベクターマップを見るには\n\t\n\t\'メニュー\' →\'マップ設定\' →\'マップソース…\' →\'オフラインベクターマップ\'を有効にします。</string>
     <string name="choose_audio_stream">音声案内出力</string>
     <string name="choose_audio_stream_descr">音声案内を再生するチャンネルを選択します。</string>
@@ -899,7 +899,7 @@ POIの更新は利用できません</string>
     <string name="osmand_srtm_long_description_1000_chars">このプラグインは等高線と陰影起伏図(山間や盆地などの起伏が視覚的に把握できる図)の両方を、OsmAndの標準マップ上にオーバーレイ表示できるようになるものです。 この機能は地形の構造を知る必要のあるアスリート、ハイカー、登山者はもちろん、その他多くの人々の助けとなるでしょう。 
 \n 
 \nこのグローバルデータ(北緯70°から南緯70°の間)はSRTM(スペースシャトル立体地形データ)とNASAの地球観測衛星であるテラ(Terra)に搭載されたASTER(資源探査用将来型センサ)と呼ばれる機器の観測結果をベースにしたものです。 ASTERはNASAと日本の経済産業省(METI)、そして宇宙システム開発利用推進機構(J-spacesystems)の共同作業によるものです。</string>
-    <string name="audionotes_location_not_defined">マップ上を長押しでメニューを開き、右端のボタン『その他』から任意の形式のメモを取ることができます。</string>
+    <string name="audionotes_location_not_defined">マップ上を長押しでメニューを開き、右端のボタン[その他]から任意の形式のメモを取ることができます。</string>
     <string name="map_widget_audionotes">音声メモ</string>
     <string name="audionotes_plugin_description">旅行中にマップ画面のウィジェットボタンまたはコンテキストメニューを使用して、音声/写真/ビデオのメモを作成します。</string>
     <string name="audionotes_plugin_name">音声/動画メモ</string>
@@ -2258,16 +2258,15 @@ POIの更新は利用できません</string>
 \n • 目的地を住所、種類(駐車場、レストラン、ホテル、ガソリンスタンド、博物館など)、座標の数値でも検索することもできます 
 \n • 旅程上の経由地点をサポートします。 
 \n • GPX経路を自分で使う為の記録や、アップロードしたり等の機能も備えています "</string>
-    <string name="osmand_extended_description_part3">"
- マップ機能
- • 周囲のPOI(Point Of Interests～興味を引く施設)を表示できます
- • 進行方向に応じてマップの表示向きの変更も出来ます(コンパスを基本にも出来ます)
- • あなたがいる場所やあなたが見ている場所も表示できます
- • 友人があなたを見つけることが出来るように、あなたの場所を共有することができます
- • 大事な場所は『お気に入り』として保存できます
- • 地図上の名前(地名)を表示する方法を英語、現地語、または表音のつづりで選択できます
- • 特殊なオンラインタイル、衛星写真(Bingを利用)、ツーリング/ナビゲーションGPX経路などを異なるレイヤーに、またカスタマイズ可能な透明度などを追加レイヤーに指定できます
- "</string>
+    <string name="osmand_extended_description_part3">マップ機能
+\n • 周囲のPOI(Point Of Interests～興味を引く施設)を表示できます
+\n • 進行方向に応じてマップの表示向きの変更も出来ます(コンパスを基本にも出来ます)
+\n • あなたがいる場所やあなたが見ている場所も表示できます
+\n • 友人があなたを見つけることが出来るように、あなたの場所を共有することができます
+\n • 大事な場所は『お気に入り』として保存できます
+\n • 地図上の名前(地名)を表示する方法を英語、現地語、または表音のつづりで選択できます
+\n • 特殊なオンラインタイル、衛星写真(Bingを利用)、ツーリング/ナビゲーションGPX経路などを異なるレイヤーに、またカスタマイズ可能な透明度などを追加レイヤーに指定できます
+\n</string>
     <string name="osmand_extended_description_part4">"
  スキー
  OsmAndスキーマッププラグインを使用すると、難度も含めたスキー用経路や、リフトや他の施設の場所などの追加情報を確認することができます。
@@ -2308,9 +2307,11 @@ POIの更新は利用できません</string>
 \n• 南極大陸：*
 \n世界中のほとんどの国がダウンロード可能です！
 \nフランス、ドイツ、メキシコ、イギリス、スペイン、オランダ、アメリカ、ロシア、ブラジルなど、各国において頼りとなるナビゲーターを手に入れましょう。</string>
-    <string name="osmand_plus_extended_description_part1">OsmAnd(OSM Automated Navigation Directions～自動ナビ案内)は、『無償利用可、ワールドワイド対応、高品質のOSM』データを使用した、地図＆ナビゲーションアプリです。 
-\n音声と視覚による案内、POI(Point Of Interest～興味的地点)表示、GPX経路の作成と管理、等高線を使った地形情報(要プラグイン)、ドライブ、サイクリング、徒歩移動各移動手段別のモード、OSMの編集等々に対応。 
-\n OsmAnd+は有料のアプリケーションです。購入することで同プロジェクトの資金、新機能開発への援助となり、最新アップデートも利用可能になります。 
+    <string name="osmand_plus_extended_description_part1">OsmAnd(OSM Automated Navigation Directions～自動ナビ案内)は、『無償利用可、ワールドワイド対応、高品質のOSM』データを使用した、地図＆ナビゲーションアプリです。
+\n音声と視覚による案内、POI(Point Of Interest～興味的地点)表示、GPX経路の作成と管理、等高線を使った地形情報(要プラグイン)、ドライブ、サイクリング、徒歩移動各移動手段別のモード、OSMの編集等々に対応。
+\n
+\n OsmAnd+は有料のアプリケーションです。購入することで同プロジェクトの資金、新機能開発への援助となり、最新アップデートも利用可能になります。
+\n
 \nいくつかの主な機能:</string>
     <string name="osmand_plus_extended_description_part2">ナビゲーション
 \n • オンライン（高速）またはオフライン(海外の場合はローミング料金が不要に）どちらでも動作可能です
@@ -2506,7 +2507,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_view">表示</string>
     <string name="waypoints_added_to_map_markers">経由地点をマップマーカーとして追加</string>
     <string name="choose_navigation_type">ナビゲーションのプロファイルを選択</string>
-    <string name="none_point_error">少なくとも1つのポイントを追加してください。</string>
+    <string name="none_point_error">少なくとも1つの地点を追加してください。</string>
     <string name="enter_gpx_name">GPXファイル名:</string>
     <string name="show_on_map_after_saving">保存後マップ上に表示</string>
     <string name="measurement_tool_action_bar">閲覧マップから計測したい各地点を選択</string>
@@ -2600,7 +2601,7 @@ POIの更新は利用できません</string>
     <string name="clear_all_intermediates">全ての経由地点を削除</string>
     <string name="add_waypoint">経由地点を追加</string>
     <string name="show_tunnels">トンネル</string>
-    <string name="touring_view_render_descr">高いコントラストと最大限のディテールを持つツーリングスタイルです。 OsmAndデフォルトスタイルのすべてのオプションが含まれていますが、特に道路、パス、その他の移動方法など、可能な限り詳細に表示されます。道路タイプ間の明確な『ツーリングアトラス』の区別があります。昼、夜、屋外での使用に適しています。</string>
+    <string name="touring_view_render_descr">高いコントラストと最大限のディテールを持つツーリングスタイルです。 OsmAndデフォルトスタイルのすべてのオプションが含まれていますが、特に道路、パス、その他の移動方法など、可能な限り詳細に表示されます。道路タイプ間の明確な\"ツーリングアトラス\"の区別があります。昼、夜、屋外での使用に適しています。</string>
     <string name="default_render_descr">汎用スタイルです。密集した都市でも簡素化されわかりやすく表示されます。等高線、ルート、路面品質、通行制限、国道や県道(州道)を示すルート標識、SACスケールに応じたパスレンダリング、急流下りなどのウォータースポーツアイテムを備えています。</string>
     <string name="open_wikipedia_link_online">Wikipediaをオンライン参照</string>
     <string name="open_wikipedia_link_online_description">このリンクを開くとウェブブラウザで閲覧することができます。</string>
@@ -2628,7 +2629,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_only_with_wifi">Wi-Fi接続時のみ有効</string>
     <string name="wikivoyage_download_pics">画像のダウンロード</string>
     <string name="wikivoyage_download_pics_descr">各記事の画像をオフラインでも閲覧できるようダウンロードできます。
-\n『探索』→ 『オプション』からいつでも変更可能です。</string>
+\n[探索]→[オプション]からいつでも変更可能です。</string>
     <string name="shared_string_wifi_only">Wi-Fi接続時のみ有効</string>
     <string name="images_cache">画像のキャッシュ</string>
     <string name="delete_search_history">検索履歴の削除</string>
@@ -3119,12 +3120,12 @@ POIの更新は利用できません</string>
     <string name="pref_selected_by_default_for_profiles">この設定で選択されたプロファイル\"%s\"が起動時にデフォルト表示されます</string>
     <string name="change_default_settings">設定の変更</string>
     <string name="discard_changes">変更を破棄</string>
-    <string name="apply_to_current_profile">この選択を『%1$s』に適用</string>
+    <string name="apply_to_current_profile">この選択を\"%1$s\"に適用</string>
     <string name="apply_to_all_profiles">すべてのプロファイルに適用</string>
     <string name="start_up_message_pref">起動メッセージ</string>
     <string name="analytics_pref_title">ユーザー解析</string>
     <string name="turn_screen_on_info">ナビゲーション中はロック画面にも地図を表示します。</string>
-    <string name="route_parameters_info">選択したプロファイル『%1$s』用のルーティングの設定です。</string>
+    <string name="route_parameters_info">選択したプロファイル\"%1$s\"用のルーティングの設定です。</string>
     <string name="wake_time">画面を表示する時間</string>
     <string name="units_and_formats">単位と形式</string>
     <string name="map_look_descr">マップの見た目に関する設定</string>
@@ -3293,7 +3294,7 @@ POIの更新は利用できません</string>
     <string name="added_profiles_descr">プラグインによって追加されたプロファイル</string>
     <string name="shared_string_turn_off">OFFにする</string>
     <string name="new_plugin_added">新しいプラグインが追加されました</string>
-    <string name="join_segments">セグメント同士の接続</string>
+    <string name="join_segments">セグメントの接続</string>
     <string name="quick_action_directions_from_desc">画面の中心を出発点にするボタンです。その後目的地を設定しルート検索を別途おこなう必要があります。</string>
     <string name="add_new_profile_q">新しいプロファイルとして\'%1$s\'を追加しますか？</string>
     <string name="save_heading">見出しを含める</string>
@@ -3751,7 +3752,7 @@ POIの更新は利用できません</string>
     <string name="attach_to_the_roads">道路に沿わせる</string>
     <string name="map_widget_monitoring">旅程の記録</string>
     <string name="marker_save_as_track">経路ファイルとして保存</string>
-    <string name="follow_track">経路を辿る</string>
+    <string name="follow_track">経路をたどる</string>
     <string name="follow_track_descr">辿るための経路ファイルを選択します</string>
     <string name="import_track_descr">経路ファイルを選択、または端末のストレージからインポートします。</string>
     <string name="select_another_track">別の経路を選択</string>
@@ -3778,7 +3779,7 @@ POIの更新は利用できません</string>
     <string name="all_previous_segments">以前のすべてのセグメント</string>
     <string name="only_selected_segment_recalc">選択したセグメントのみ、選択したプロファイルを使用して再計算されます。</string>
     <string name="all_previous_segments_will_be_recalc">以前のセグメントは、選択したプロファイルを使用して再計算されます。</string>
-    <string name="open_saved_track">保存した経路を開く</string>
+    <string name="open_saved_track">保存された経路を開く</string>
     <string name="one_point_error">少なくとも2つの地点を追加してください。</string>
     <string name="shared_string_redo">繰り返し</string>
     <string name="release_3_8">• ルート計画機能を更新 : セグメントごとに異なるナビゲーションタイプを使用し、経路として反映することが可能に
@@ -3797,7 +3798,7 @@ POIの更新は利用できません</string>
 \n
 \n</string>
     <string name="simplified_track">簡略化された経路</string>
-    <string name="simplified_track_description">ルートライン(経路)のみが保存され、経由地点は削除されます。</string>
+    <string name="simplified_track_description">ルートの線のみが保存され、経由地点はは削除されます。</string>
     <string name="number_of_gpx_files_selected_pattern">%s個の経路ファイルが選択されました</string>
     <string name="shared_string_file_name">ファイル名</string>
     <string name="disable_recording_once_app_killed_descrp">(最近使用したアプリを介して) OsmAndを終了すると、GPXの記録が一時停止されます(バックグラウンドサービスインジケーターがAndroid通知バーから消えます。)</string>
