@@ -333,6 +333,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	}
 
 	private void drawBeforeAfterPath(Canvas canvas, RotatedTileBox tb) {
+		canvas.rotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 		List<TrkSegment> before = editingCtx.getBeforeSegments();
 		List<TrkSegment> after = editingCtx.getAfterSegments();
 		if (before.size() > 0 || after.size() > 0) {
@@ -379,6 +380,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 				GeometryWay.calculatePath(tb, tx, ty, path);
 				canvas.drawPath(path, lineAttrs.paint);
 			}
+			canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 		}
 	}
 
