@@ -4113,4 +4113,6 @@
     <string name="srtm_unit_format">قالب واحد خطوط حد فاصل</string>
     <string name="srtm_download_list_help_message">اوپن‌استریت‌مپ، داده‌های خطوط حد فاصل را به متر و فوت ارائه می‌دهد. برای تغییر قالب بایستی پرونده را دوباره بارگیری کنید.</string>
     <string name="announce_when_exceeded">زمانی که بیش از حد شد اعلام کن</string>
+    <string name="srtm_download_single_help_message">لطفاً فرمت مورد نیازتان را انتخاب کنید. برای تغییر فرمت باید فایل را دوباره بارگیری کنید.</string>
+    <string name="user_points">امتیازات کاربر</string>
 </resources>
