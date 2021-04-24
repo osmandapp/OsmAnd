@@ -57,6 +57,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static android.app.Activity.RESULT_OK;
 import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
@@ -82,6 +84,7 @@ import static net.osmand.plus.settings.backend.backup.SettingsHelper.SILENT_IMPO
 public class ImportHelper {
 
 	public static final Log log = PlatformUtil.getLog(ImportHelper.class);
+	final static Pattern PATTERN = Pattern.compile("(.*?)(?:\\((\\d+)\\))?(\\.[^.]*)?");
 
 	public static final String KML_SUFFIX = ".kml";
 	public static final String KMZ_SUFFIX = ".kmz";
@@ -106,7 +109,7 @@ public class ImportHelper {
 			this.extension = extension;
 		}
 
-		private String extension;
+		private final String extension;
 
 		public String getExtension() {
 			return extension;
@@ -418,7 +421,7 @@ public class ImportHelper {
 		handleResult(result, name, fileSize, save, useImportDir, forceImportFavourites, true);
 	}
 
-	protected void handleResult(final GPXFile result, final String name, long fileSize, final boolean save,
+	protected void handleResult(final GPXFile result, String name, long fileSize, final boolean save,
 								final boolean useImportDir, boolean forceImportFavourites, boolean showInDetailsActivity) {
 		if (result != null) {
 			if (result.error != null) {
@@ -429,6 +432,7 @@ public class ImportHelper {
 			} else {
 				if (save) {
 					String existingFilePath = getExistingFilePath(name, fileSize);
+					name = getNewName(name);
 					if (existingFilePath != null) {
 						app.showToastMessage(R.string.file_already_imported);
 						showGpxInDetailsActivity(existingFilePath);
@@ -489,8 +493,45 @@ public class ImportHelper {
 			if (nameWithoutDirs.equals(name) && gpxInfo.getFileSize() == fileSize) {
 				return fileName;
 			}
+			if (nameWithoutDirs.equals(name)) {
+				name += name;
+			}
 		}
 		return null;
+	}
+
+	String getNewName(String filename) {
+		if (isDuplicateName(filename)) {
+			Matcher m = PATTERN.matcher(filename);
+			if (m.matches()) {
+				String prefix = m.group(1);
+				String last = m.group(2);
+				String suffix = m.group(3);
+				if (suffix == null) suffix = "";
+
+				int count = last != null ? Integer.parseInt(last) : 0;
+
+				do {
+					count++;
+					filename = prefix + "(" + count + ")" + suffix;
+				} while (isDuplicateName(filename));
+			}
+		}
+		return filename;
+	}
+
+	@Nullable
+	private boolean isDuplicateName(String name) {
+		File dir = app.getAppPath(GPX_INDEX_DIR);
+		List<GPXInfo> gpxInfoList = GpxUiHelper.getSortedGPXFilesInfoByDate(dir, true);
+		for (GPXInfo gpxInfo : gpxInfoList) {
+			String fileName = gpxInfo.getFileName();
+			String nameWithoutDirs = Algorithms.getFileWithoutDirs(fileName);
+			if (nameWithoutDirs.equals(name)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private String saveImport(final GPXFile gpxFile, final String fileName, final boolean useImportDir) {
@@ -555,7 +596,7 @@ public class ImportHelper {
 		private final GPXFile result;
 		private final String name;
 		private final boolean useImportDir;
-		private boolean showInDetailsActivity;
+		private final boolean showInDetailsActivity;
 
 		private SaveAsyncTask(GPXFile result, final String name, boolean useImportDir, boolean showInDetailsActivity) {
 			this.result = result;
