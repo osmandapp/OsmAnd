@@ -493,9 +493,6 @@ public class ImportHelper {
 			if (nameWithoutDirs.equals(name) && gpxInfo.getFileSize() == fileSize) {
 				return fileName;
 			}
-			if (nameWithoutDirs.equals(name)) {
-				name += name;
-			}
 		}
 		return null;
 	}
