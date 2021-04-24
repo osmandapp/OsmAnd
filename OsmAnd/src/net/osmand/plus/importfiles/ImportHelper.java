@@ -432,11 +432,11 @@ public class ImportHelper {
 			} else {
 				if (save) {
 					String existingFilePath = getExistingFilePath(name, fileSize);
-					name = getNewName(name);
 					if (existingFilePath != null) {
 						app.showToastMessage(R.string.file_already_imported);
 						showGpxInDetailsActivity(existingFilePath);
 					} else {
+						name = getNewName(name);
 						executeImportTask(new SaveAsyncTask(result, name, useImportDir, showInDetailsActivity));
 					}
 				} else {
