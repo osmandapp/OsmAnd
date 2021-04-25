@@ -230,4 +230,10 @@ public class WidgetsVisibilityHelper {
 		return AndroidUiHelper.isOrientationPortrait(mapActivity);
 	}
 
+	public void updateControlsVisibility(boolean topControlsVisible, boolean bottomControlsVisible) {
+		AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_center_info), topControlsVisible);
+		AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_left_widgets_panel), topControlsVisible);
+		AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_right_widgets_panel), topControlsVisible);
+		AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.bottom_controls_container), bottomControlsVisible);
+	}
 }
