@@ -252,11 +252,13 @@ public class VoiceLanguageBottomSheetFragment extends MenuBottomSheetDialogFragm
 			int position = isDefault ? DEFAULT_LANGUAGE_POSITION : -1;
 
 			final ImageView secondaryIcon = container.findViewById(R.id.secondary_icon);
-
-			final Drawable downloadIcon = getContentIcon(R.drawable.ic_action_gsave_dark);
-			final Drawable undoDownloadIcon = getContentIcon(R.drawable.ic_action_remove_dark);
-
 			int activeColorResId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+
+			@SuppressWarnings("ConstantConditions")
+			Drawable downloadIcon =  getContentIcon(R.drawable.ic_action_gsave_dark).getConstantState().newDrawable();
+			
+			@SuppressWarnings("ConstantConditions")
+			Drawable undoDownloadIcon =  getContentIcon(R.drawable.ic_action_remove_dark).getConstantState().newDrawable();
 
 			final Drawable tintedDownloadIcon = UiUtilities.tintDrawable(downloadIcon, ContextCompat.getColor(
 					context, activeColorResId));
