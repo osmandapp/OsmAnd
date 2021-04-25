@@ -3590,7 +3590,7 @@
     <string name="profiles_for_action_not_found">Ces profils sont introuvables.</string>
     <string name="shared_string_resume">Reprendre</string>
     <string name="shared_string_add_profile">Ajouter un profil</string>
-    <string name="change_application_profile">Modifier le profil d\'application</string>
+    <string name="change_application_profile">Modifier le profil</string>
     <string name="index_item_world_basemap_detailed">Carte mondiale générale (plus détaillée)</string>
     <string name="unsupported_type_error">Type non pris en charge</string>
     <string name="gpx_parse_error">Le fichier GPX OsmAnd n\'est pas construit correctement. Vous pouvez transmettre ce fichier à l\'équipe support OsmAnd pour investiguer.</string>
@@ -3696,7 +3696,7 @@
     <string name="track_show_start_finish_icons">Afficher les icônes de départ et d\'arrivée</string>
     <string name="select_track_width">Sélectionner la largeur</string>
     <string name="gpx_direction_arrows">Flèches de direction</string>
-    <string name="plan_route_last_edited">Dernières modifications</string>
+    <string name="plan_route_last_edited">Modifiés récemment</string>
     <string name="plan_route_import_track">Importer une trace</string>
     <string name="plan_route_open_existing_track">Ouvrir une trace existante</string>
     <string name="plan_route_create_new_route">Créer un nouvel itinéraire</string>
@@ -3782,7 +3782,7 @@
     <string name="plan_route_change_route_type_after">Modifier le type d’itinéraire après</string>
     <string name="simplified_track_description">Seule la ligne d\'itinéraire sera enregistrée, les points de passage seront supprimés.</string>
     <string name="shared_string_redo">Rétablir</string>
-    <string name="sort_last_modified">Dernières modifications</string>
+    <string name="sort_last_modified">Récents</string>
     <string name="sort_name_descending">Nom : Z – A</string>
     <string name="sort_name_ascending">Nom : A – Z</string>
     <string name="start_finish_icons">Icônes de départ et d\'arrivée</string>
@@ -4083,4 +4083,7 @@
     <string name="srtm_download_single_help_message">Veuillez sélectionner le format souhaité. Vous devrez à nouveau télécharger le fichier pour modifier le format.</string>
     <string name="srtm_unit_format">Format d\'unité pour les courbes de niveau</string>
     <string name="shared_string_feet">pieds</string>
+    <string name="route_line_use_gradient_coloring">Le trait de l\'itinéraire sera coloré selon la pente.</string>
+    <string name="shared_string_min_height">Hauteur min.</string>
+    <string name="shared_string_max_height">Hauteur max.</string>
 </resources>
