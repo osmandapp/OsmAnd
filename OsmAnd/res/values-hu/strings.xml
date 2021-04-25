@@ -4086,4 +4086,7 @@
     <string name="srtm_download_list_help_message">Az OsmAnd méterben és lábban adja meg a szintvonalak magasságát. A mértékegység módosításához újra le kell töltenie a fájlt.</string>
     <string name="shared_string_feet">láb</string>
     <string name="srtm_unit_format">Szintvonalak mértékegysége</string>
+    <string name="route_line_use_gradient_coloring">Az útvonal színezése az útvonal magassági profiljának megfelelő lesz.</string>
+    <string name="shared_string_min_height">Legkisebb magasság</string>
+    <string name="shared_string_max_height">Legnagyobb magasság</string>
 </resources>
