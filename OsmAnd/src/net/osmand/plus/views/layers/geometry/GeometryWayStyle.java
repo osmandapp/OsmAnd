@@ -3,6 +3,8 @@ package net.osmand.plus.views.layers.geometry;
 import android.content.Context;
 import android.graphics.Bitmap;
 
+import net.osmand.util.Algorithms;
+
 public abstract class GeometryWayStyle<T extends GeometryWayContext> {
 
 	private T context;
@@ -60,6 +62,10 @@ public abstract class GeometryWayStyle<T extends GeometryWayContext> {
 		return false;
 	}
 
+	public boolean isUnique() {
+		return false;
+	}
+
 	public double getPointStepPx(double zoomCoef) {
 		Bitmap arrow = context.getArrowBitmap();
 		int arrowHeight = arrow.getHeight();
@@ -86,9 +92,6 @@ public abstract class GeometryWayStyle<T extends GeometryWayContext> {
 			return false;
 		}
 		GeometryWayStyle<?> o = (GeometryWayStyle<?>) other;
-		if (color != null && o.color != null) {
-			return color.equals(o.color);
-		}
-		return color == null && o.color == null;
+		return Algorithms.objectEquals(color, o.color) && Algorithms.objectEquals(width, o.width);
 	}
 }
