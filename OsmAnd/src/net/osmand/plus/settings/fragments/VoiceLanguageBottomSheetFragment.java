@@ -2,7 +2,7 @@ package net.osmand.plus.settings.fragments;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,8 +62,8 @@ public class VoiceLanguageBottomSheetFragment extends MenuBottomSheetDialogFragm
 	private static final String TAG = TrackSelectSegmentBottomSheet.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(VoiceLanguageBottomSheetFragment.class);
 
-	private static final String VOICE_REC_KEY = OTHER_GROUP.getDefaultId() + "#" + VOICE_TTS.getDefaultId() + "#" + VOICE_HEADER_TTS.getDefaultId();
-	private static final String VOICE_TTS_KEY = OTHER_GROUP.getDefaultId() + "#" + VOICE_REC.getDefaultId() + "#" + VOICE_HEADER_REC.getDefaultId();
+	private static final String VOICE_REC_KEY = OTHER_GROUP.getDefaultId() + "#" + VOICE_REC.getDefaultId() + "#" + VOICE_HEADER_REC.getDefaultId();
+	private static final String VOICE_TTS_KEY = OTHER_GROUP.getDefaultId() + "#" + VOICE_TTS.getDefaultId() + "#" + VOICE_HEADER_TTS.getDefaultId();
 
 	private static final int DEFAULT_LANGUAGE_POSITION = 6;
 
@@ -72,7 +72,6 @@ public class VoiceLanguageBottomSheetFragment extends MenuBottomSheetDialogFragm
 	private DownloadIndexesThread downloadThread;
 	List<DownloadItem> voiceItems;
 	List<DownloadItem> voiceItemsRec;
-
 
 	private InfoType selectedVoiceType = InfoType.TTS;
 
@@ -97,13 +96,13 @@ public class VoiceLanguageBottomSheetFragment extends MenuBottomSheetDialogFragm
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = requiredMyApplication();
+		downloadThread = app.getDownloadThread();
 	}
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		Context context = requireContext();
 		settings = app.getSettings();
-		downloadThread = app.getDownloadThread();
 		int padding = getDimen(R.dimen.content_padding_small);
 
 		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
@@ -150,7 +149,7 @@ public class VoiceLanguageBottomSheetFragment extends MenuBottomSheetDialogFragm
 		View mainView = getView();
 		if (activity != null && mainView != null) {
 			Context context = requireContext();
-			LinearLayout itemsContainer = (LinearLayout) mainView.findViewById(useScrollableItemsContainer()
+			LinearLayout itemsContainer = mainView.findViewById(useScrollableItemsContainer()
 					? R.id.scrollable_items_container : R.id.non_scrollable_items_container);
 			if (itemsContainer != null) {
 				itemsContainer.removeAllViews();
@@ -222,9 +221,9 @@ public class VoiceLanguageBottomSheetFragment extends MenuBottomSheetDialogFragm
 	}
 
 	private void createVoiceView() {
-		if (selectedVoiceType == InfoType.TTS && voiceItems == null) {
+		if (selectedVoiceType == InfoType.TTS && voiceItems == null || voiceItems.isEmpty()) {
 			voiceItems = getVoiceList(VOICE_TTS_KEY);
-		} else if(selectedVoiceType == InfoType.RECORDED && voiceItemsRec == null) {
+		} else if (selectedVoiceType == InfoType.RECORDED && voiceItemsRec == null) {
 			voiceItemsRec = getVoiceList(VOICE_REC_KEY);
 		}
 		createSuggestedVoiceItemsView(selectedVoiceType == InfoType.TTS ? voiceItems : voiceItemsRec);
@@ -241,21 +240,32 @@ public class VoiceLanguageBottomSheetFragment extends MenuBottomSheetDialogFragm
 			AndroidUtils.setBackground(container, UiUtilities.getSelectableDrawable(context));
 			container.findViewById(R.id.divider).setVisibility(View.GONE);
 
-			String systemLanguage = Resources.getSystem().getConfiguration().locale.getLanguage();
+			String systemLanguage = app.getLanguage();
 			DateFormat df = SimpleDateFormat.getDateInstance(DateFormat.DEFAULT);
-			boolean isDefault = indexItem.isDownloaded() && indexItem.getBasename().equals(systemLanguage);
+
+			String indexName = indexItem.getBasename();
+			String indexFormattedName = indexName.replaceAll("-tts", "");
+			boolean isDefault = indexItem.isDownloaded() && indexFormattedName.equals(systemLanguage) && indexItem.getRelatedGroup().getType().equals(VOICE_HEADER_TTS);
 			String title = isDefault ? getString(R.string.use_system_language) : indexItem.getVisibleName(app, app.getRegions(), false);
 			String dateUpdate = ((IndexItem) indexItem).getDate(df);
 			String description = isDefault ? indexItem.getVisibleName(app, app.getRegions(), false) : indexItem.getSizeDescription(app) + " • " + dateUpdate;
 			int position = isDefault ? DEFAULT_LANGUAGE_POSITION : -1;
 
 			final ImageView secondaryIcon = container.findViewById(R.id.secondary_icon);
+
+			final Drawable downloadIcon = getContentIcon(R.drawable.ic_action_gsave_dark);
+			final Drawable undoDownloadIcon = getContentIcon(R.drawable.ic_action_remove_dark);
+
 			int activeColorResId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
-			secondaryIcon.setColorFilter(ContextCompat.getColor(context, activeColorResId));
+
+			final Drawable tintedDownloadIcon = UiUtilities.tintDrawable(downloadIcon, ContextCompat.getColor(
+					context, activeColorResId));
+			final Drawable tintedUndoDownloadIcon = UiUtilities.tintDrawable(undoDownloadIcon, ContextCompat.getColor(
+					context, activeColorResId));
 
 			final ProgressBar progressBar = container.findViewById(R.id.ProgressBar);
 			final TextView textDescription = container.findViewById(R.id.description);
-			RadioButton radioButton = (RadioButton) container.findViewById(R.id.compound_button);
+			RadioButton radioButton = container.findViewById(R.id.compound_button);
 			UiUtilities.setupCompoundButton(radioButton, nightMode, PROFILE_DEPENDENT);
 
 			AndroidUiHelper.updateVisibility(secondaryIcon, true);
@@ -264,10 +274,10 @@ public class VoiceLanguageBottomSheetFragment extends MenuBottomSheetDialogFragm
 			if (indexItem == downloadThread.getCurrentDownloadingItem()) {
 				progressBar.setProgress(downloadThread.getCurrentDownloadingItemProgress());
 				progressBar.setIndeterminate(false);
-				secondaryIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_remove_dark));
+				secondaryIcon.setImageDrawable(tintedUndoDownloadIcon);
 			} else {
 				progressBar.setIndeterminate(downloadThread.isDownloading());
-				secondaryIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_gsave_dark));
+				secondaryIcon.setImageDrawable(tintedDownloadIcon);
 			}
 
 			if (indexItem.isDownloaded()) {
@@ -277,7 +287,7 @@ public class VoiceLanguageBottomSheetFragment extends MenuBottomSheetDialogFragm
 				AndroidUiHelper.updateVisibility(radioButton, false);
 				AndroidUiHelper.updateVisibility(secondaryIcon, true);
 			}
-			boolean selected = settings.VOICE_PROVIDER.getModeValue(applicationMode).contains(indexItem.getBasename());
+			boolean selected = indexItem.getBasename().equals(settings.VOICE_PROVIDER.getModeValue(applicationMode));
 			final BottomSheetItemWithCompoundButton[] voiceDownloadedItem = new BottomSheetItemWithCompoundButton[1];
 			voiceDownloadedItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 					.setCompoundButtonColorId(activeColorResId)
@@ -299,12 +309,12 @@ public class VoiceLanguageBottomSheetFragment extends MenuBottomSheetDialogFragm
 									downloadThread.cancelDownload(indexItem);
 									AndroidUiHelper.updateVisibility(progressBar, false);
 									AndroidUiHelper.updateVisibility(textDescription, true);
-									secondaryIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_gsave_dark));
+									secondaryIcon.setImageDrawable(tintedDownloadIcon);
 								} else {
 									AndroidUiHelper.updateVisibility(progressBar, true);
 									AndroidUiHelper.updateVisibility(textDescription, false);
 									progressBar.setIndeterminate(downloadThread.isDownloading());
-									secondaryIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_remove_dark));
+									secondaryIcon.setImageDrawable(tintedUndoDownloadIcon);
 									new DownloadValidationManager(app).startDownload(getActivity(), (IndexItem) indexItem);
 								}
 							}
@@ -339,7 +349,7 @@ public class VoiceLanguageBottomSheetFragment extends MenuBottomSheetDialogFragm
 
 		List<DownloadItem> suggestedVoice = new ArrayList<>();
 		if (!downloadIndexes) {
-			suggestedVoice.addAll(app.getDownloadThread().getIndexes().getDownloadItemsForGroup(type));
+			suggestedVoice.addAll(downloadThread.getIndexes().getDownloadItemsForGroup(type));
 		}
 
 		return suggestedVoice;
