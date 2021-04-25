@@ -3924,4 +3924,9 @@
     <string name="poi_jiu_jitsu">džudžitsu</string>
     <string name="poi_karate">Karate</string>
     <string name="poi_hoops">Korvpallirõngad</string>
+    <string name="poi_office_diplomatic">Diplomaatiline esindus</string>
+    <string name="poi_health_post">Velskripunkt</string>
+    <string name="poi_club_social">Seltsimaja</string>
+    <string name="poi_plateau">Platoo</string>
+    <string name="poi_bay_filter">Lahe tüüp</string>
 </resources>
