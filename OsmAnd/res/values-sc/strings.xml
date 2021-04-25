@@ -4083,4 +4083,8 @@
     <string name="announce_when_exceeded">Avisa in casu de barigamentu</string>
     <string name="user_points">Puntos de s\'impreadore</string>
     <string name="output">Essida</string>
+    <string name="shared_string_feet">pees</string>
+    <string name="srtm_unit_format">Formadu de s\'unidade de medida pro sas curvas de livellu</string>
+    <string name="srtm_download_list_help_message">OsmAnd frunit datos de sas curvas de livellu in metros e in pees. As a dèpere torrare a iscarrigare su documentu pro mudare su formadu.</string>
+    <string name="srtm_download_single_help_message">Pro praghere ischerta su formadu netzessàriu. As a dèpere torrare a iscarrigare su documentu pro mudare su formadu.</string>
 </resources>

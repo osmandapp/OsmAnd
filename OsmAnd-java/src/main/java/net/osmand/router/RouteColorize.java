@@ -139,6 +139,14 @@ public class RouteColorize {
         sortPalette();
     }
 
+    public int getZoom() {
+        return zoom;
+    }
+
+    public void setZoom(int zoom) {
+        this.zoom = zoom;
+    }
+
     /**
      * Calculate slopes from elevations needs for right colorizing
      *
@@ -200,7 +208,7 @@ public class RouteColorize {
 
     public int getColorByValue(double value) {
         if (Double.isNaN(value)) {
-            value = (minValue + maxValue) / 2;
+            value = colorizationType == ColorizationType.SLOPE ? minValue : (minValue + maxValue) / 2;
         }
         for (int i = 0; i < palette.length - 1; i++) {
             if (value == palette[i][VALUE_INDEX])
@@ -242,7 +250,7 @@ public class RouteColorize {
         return rgbaToDecimal(0, 0, 0, 0);
     }
 
-    private List<RouteColorizationPoint> simplify() {
+    public List<RouteColorizationPoint> simplify() {
         if (dataList == null) {
             dataList = new ArrayList<>();
             for (int i = 0; i < latitudes.length; i++) {
@@ -266,6 +274,8 @@ public class RouteColorize {
             List<RouteColorizationPoint> sublist = dataList.subList(prevId, currentId);
             simplified.addAll(getExtremums(sublist));
         }
+        Node lastSurvivedPoint = result.get(result.size() - 1);
+        simplified.add(dataList.get((int) lastSurvivedPoint.getId()));
         return simplified;
     }
 
