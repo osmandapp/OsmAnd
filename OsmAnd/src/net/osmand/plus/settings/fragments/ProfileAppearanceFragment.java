@@ -63,6 +63,7 @@ import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.fragments.RouteLineAppearanceFragment.OnApplyRouteLineListener;
 import net.osmand.plus.track.ColorsCard;
 import net.osmand.plus.track.CustomColorBottomSheet.ColorPickerListener;
+import net.osmand.plus.track.GradientScaleType;
 import net.osmand.plus.widgets.FlowLayout;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.util.Algorithms;
@@ -1021,8 +1022,9 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 	private RouteLineDrawInfo createRouteLineDrawInfo(@NonNull ApplicationMode appMode) {
 		Integer colorDay = getRouteLineColor(appMode, settings.ROUTE_LINE_COLOR_DAY);
 		Integer colorNight = getRouteLineColor(appMode, settings.ROUTE_LINE_COLOR_NIGHT);
+		GradientScaleType scaleType = settings.ROUTE_LINE_GRADIENT.getModeValue(appMode);
 		String widthKey = settings.ROUTE_LINE_WIDTH.getModeValue(appMode);
-		return new RouteLineDrawInfo(colorDay, colorNight, widthKey);
+		return new RouteLineDrawInfo(colorDay, colorNight, scaleType, widthKey);
 	}
 
 	private Integer getRouteLineColor(@NonNull ApplicationMode appMode,
@@ -1035,6 +1037,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 	                                     @NonNull RouteLineDrawInfo drawInfo) {
 		saveRouteLineColor(appMode, settings.ROUTE_LINE_COLOR_DAY, drawInfo.getColor(false));
 		saveRouteLineColor(appMode, settings.ROUTE_LINE_COLOR_NIGHT, drawInfo.getColor(true));
+		settings.ROUTE_LINE_GRADIENT.setModeValue(appMode, drawInfo.getGradientScaleType());
 		settings.ROUTE_LINE_WIDTH.setModeValue(appMode, drawInfo.getWidth());
 	}
 

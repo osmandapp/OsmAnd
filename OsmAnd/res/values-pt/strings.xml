@@ -2013,7 +2013,7 @@
     <string name="routing_attr_height_obstacles_name">Utilizar dados de elevação</string>
     <string name="rendering_attr_depthContours_description">Mostrar pontos e contornos de profundidade.</string>
     <string name="rendering_attr_depthContours_name">Contornos de profundidade náuticos</string>
-    <string name="show_transparency_seekbar">Mostra a transparência da barra de navegação</string>
+    <string name="show_transparency_seekbar">Mostrar barra deslizante de transparência</string>
     <string name="shared_string_widgets">Widgets</string>
     <string name="rendering_attr_hideUnderground_name">Objetos subterrâneos</string>
     <string name="auto_split_recording_title">Dividir automaticamente as gravações após quebras</string>

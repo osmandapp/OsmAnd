@@ -3829,7 +3829,7 @@
     <string name="plan_route_change_route_type_after">تغيير نوع المسار بعد</string>
     <string name="number_of_gpx_files_selected_pattern">%s ملفات مسارات محددة</string>
     <string name="disable_recording_once_app_killed_descrp">سيتم إيقاف تسجيل المسار مؤقتًا عند إغلاق التطبيق (عبر نافذة التطبيقات المستخدمة مؤخرا). (إشارة تشغيل التطبيق في الخلفية ستختفي من الشريط العلوي.)</string>
-    <string name="save_global_track_interval_descr">حدد الفاصل الزمني للادخال الخاص بالتسجيل العام للمسار (مفعل من خلال ودجت \"تسجيل الرحلة\" على الخريطة).</string>
+    <string name="save_global_track_interval_descr">حدد الفاصل الزمني للإدخال الخاص بالتسجيل العام للمسار (مفعل من خلال ودجت \"تسجيل الرحلة\" على الخريطة).</string>
     <string name="gpx_monitoring_stop">إيقاف تسجيل الرحلة مؤقتًا</string>
     <string name="gpx_monitoring_start">استئناف تسجيل الرحلة</string>
     <string name="system_default_theme">النظام الافتراضي</string>
@@ -4005,7 +4005,7 @@
     <string name="online_routing_engines">محركات التوجيه عبر الإنترنت</string>
     <string name="shared_string_folders">المجلدات</string>
     <string name="select_folder">تحديد مجلد</string>
-    <string name="select_folder_descr">تحديد مجلد أو إضافة واحد جديد</string>
+    <string name="select_folder_descr">تحديد مجلد أو إضافة جديد</string>
     <string name="shared_string_empty">فارغ</string>
     <string name="analyze_by_intervals">التحليل حسب الفواصل الزمنية (الفاصل الزمني)</string>
     <string name="upload_to_openstreetmap">رفع إلى خريطة الشارع المفتوح</string>
@@ -4080,7 +4080,7 @@
     <string name="select_segments_description">%1$s يحتوي على أكثر من مقطع ، تحتاج إلى تحديد الجزء المطلوب للتنقل.</string>
     <string name="segments_count">الجزء %1$d</string>
     <string name="temporary_conditional_routing_descr">استخدم قيود الطريق النشطة الآن على الخريطة</string>
-    <string name="routing_attr_short_way_description">الطريق الأقصر الأمثل (توفير الطاقة)</string>
+    <string name="routing_attr_short_way_description">طريق أقصر أمثل (توفير الطاقة)</string>
     <string name="routing_attr_driving_style_description">حدد غرض القيادة للحصول على مسار أقصر أو أسرع أو أكثر أمانًا</string>
     <string name="map_orientation_threshold_descr">إذا كانت السرعة أقل من الحد ، لا تقم بتدويرالخريطة</string>
     <string name="restart">إعادة التشغيل</string>
@@ -4094,7 +4094,7 @@
     <string name="on_pause">عند الإيقاف المؤقت</string>
     <string name="app_restart_required">يلزم إعادة تشغيل التطبيق لتطبيق بعض الإعدادات.</string>
     <string name="routing_attr_height_obstacles_description">التوجيه يمكن أن يتجنب المرتفعات القوية.</string>
-    <string name="quick_action_coordinates_widget_descr">مقبس لإظهار أو إخفاء أداة الإحداثيات على الخريطة.</string>
+    <string name="quick_action_coordinates_widget_descr">تبديل لإظهار أو إخفاء أداة الإحداثيات على الخريطة.</string>
     <string name="map_widget_distance_by_tap">المسافة عن طريق الضغط</string>
     <string name="latest_openstreetmap_update">آخر تحديث خريطة الشارع المفتوح المتاحة:</string>
     <string name="updated">تحديث: %s</string>

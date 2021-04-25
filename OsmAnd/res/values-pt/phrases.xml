@@ -193,7 +193,7 @@
     <string name="poi_ford_stepping_stones">Ponte pedonal em pedras separadas</string>
     <string name="poi_mountain_pass">Passo de montanha</string>
     <string name="poi_gate">Portão</string>
-    <string name="poi_city_wall">Muralha de cidade</string>
+    <string name="poi_city_wall">Muralha/cerca de cidade</string>
     <string name="poi_lift_gate">Cancela elevatória</string>
     <string name="poi_toll_booth">Cabine de portagem</string>
     <string name="poi_border_control">Controlo aduaneiro</string>
@@ -637,13 +637,13 @@
     <string name="poi_australian_football">Futebol australiano</string>
     <string name="poi_base">Base jumping</string>
     <string name="poi_baseball">Beisebol</string>
-    <string name="poi_basketball">Basquete</string>
+    <string name="poi_basketball">Basquetebol</string>
     <string name="poi_beachvolleyball">Voleibol de praia</string>
     <string name="poi_bmx">BMX</string>
     <string name="poi_boules">Bocha</string>
     <string name="poi_bowls">Lawn bowls</string>
     <string name="poi_canadian_football">Futebol canadiano</string>
-    <string name="poi_canoe">Canoa</string>
+    <string name="poi_canoe">Canoagem</string>
     <string name="poi_chess">Xadrez</string>
     <string name="poi_climbing">Escalada</string>
     <string name="poi_cricket">Críquete</string>
@@ -694,7 +694,7 @@
     <string name="poi_boundary_stone">Marco de fronteira</string>
     <string name="poi_historic_cannon">Canhão histórico</string>
     <string name="poi_castle">Castelo</string>
-    <string name="poi_city_gate">Portão/arco de cidade</string>
+    <string name="poi_city_gate">Portão/porta/arco de cidade</string>
     <string name="poi_fort">Forte</string>
     <string name="poi_fountain">Chafariz</string>
     <string name="poi_historic_ruins">Ruínas históricas</string>
@@ -707,7 +707,7 @@
     <string name="poi_aquarium">Aquário</string>
     <string name="poi_theme_park">Parque de diversões</string>
     <string name="poi_attraction">Atração turística</string>
-    <string name="poi_tourism_yes">Objeto turístico</string>
+    <string name="poi_tourism_yes">Elemento turístico</string>
     <string name="poi_attraction_amusement_ride">Atracão de feira</string>
     <string name="poi_attraction_animal">Animal (atração)</string>
     <string name="poi_attraction_big_wheel">Roda gigante</string>
@@ -2866,9 +2866,9 @@
     <string name="poi_aquaculture_mussels">Aquicultura: mexilhões</string>
     <string name="poi_mdf">Rede de distribuição principal (MDF)</string>
     <string name="poi_min_age">Idade mínima</string>
-    <string name="poi_organic_yes">Sim</string>
-    <string name="poi_organic_no">Não</string>
-    <string name="poi_organic_only">Unicamente</string>
+    <string name="poi_organic_yes">Produtos orgânicos: sim</string>
+    <string name="poi_organic_no">Produtos orgânicos: não</string>
+    <string name="poi_organic_only">Produtos orgânicos: unicamente</string>
     <string name="poi_traffic_mirror">Espelho de tráfego</string>
     <string name="poi_diplomatic_consulate">Consulado</string>
     <string name="poi_diplomatic_consulate_general">Consulado geral</string>
@@ -3746,7 +3746,7 @@
     <string name="poi_community_gender_male">Sexo comunitário: masculino</string>
     <string name="poi_community_gender_mixed">Sexo comunitário: misto</string>
     <string name="poi_grave">Sepultura</string>
-    <string name="poi_parking_space">Espaço de estacionamento</string>
+    <string name="poi_parking_space">Lugar de estacionamento (1 veículo)</string>
     <string name="poi_url">URL</string>
     <string name="poi_volcano_type">Tipo</string>
     <string name="poi_volcano_status">Estado</string>

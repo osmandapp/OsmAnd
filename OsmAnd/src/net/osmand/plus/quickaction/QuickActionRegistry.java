@@ -152,6 +152,16 @@ public class QuickActionRegistry {
 		return null;
 	}
 
+	public List<QuickAction> collectQuickActionsByType(QuickActionType type) {
+		List<QuickAction> actions = new ArrayList<>();
+		for (QuickAction action : quickActions) {
+			if (action.getType() == type.getId()) {
+				actions.add(action);
+			}
+		}
+		return actions;
+	}
+
 	public boolean isNameUnique(QuickAction action, Context context) {
 		for (QuickAction a : quickActions) {
 			if (action.id != a.id) {
