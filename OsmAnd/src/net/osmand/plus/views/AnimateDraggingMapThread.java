@@ -127,7 +127,7 @@ public class AnimateDraggingMapThread {
 		double startLon = rb.getLongitude();
 		final int startZoom = rb.getZoom();
 		final double startZoomFP = rb.getZoomFloatPart();
-		final float startRotaton = rb.getRotate();
+		final float startRotation = rb.getRotate();
 
 		final int zoom;
 		final double zoomFP;
@@ -142,7 +142,7 @@ public class AnimateDraggingMapThread {
 		if (finalRotation != null) {
 			rotation = finalRotation;
 		} else {
-			rotation = startRotaton;
+			rotation = startRotation;
 		}
 
 		final float mMoveX = rb.getPixXFromLatLon(startLat, startLon) - rb.getPixXFromLatLon(finalLat, finalLon);
@@ -167,7 +167,7 @@ public class AnimateDraggingMapThread {
 					animatingZoomInThread(startZoom, startZoomFP, zoom, zoomFP, NAV_ANIMATION_TIME, notifyListener);
 				}
 
-				boolean animateRotation = rotation != startRotaton;
+				boolean animateRotation = rotation != startRotation;
 				if (animateRotation) {
 					animatingRotateInThread(rotation, 500f, notifyListener);
 				}
@@ -464,7 +464,7 @@ public class AnimateDraggingMapThread {
 	}
 
 	public void startRotate(final float rotate) {
-		if (!isAnimating()) {
+		if (!isAnimating() || isAnimatingMapMove) {
 			clearTargetValues();
 			// stopped = false;
 			// do we need to kill and recreate the thread? wait would be enough as now it
