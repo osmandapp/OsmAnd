@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.data.Amenity;
 import net.osmand.data.City;
 import net.osmand.data.LatLon;
 import net.osmand.data.Street;
@@ -14,6 +15,7 @@ import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
+import org.apache.commons.lang3.StringUtils;
 
 public class SearchResult {
 	// search phrase that makes search result valid
@@ -68,12 +70,11 @@ public class SearchResult {
 		List<String> searchPhraseNames = new ArrayList<>();
 		SearchPhrase.splitWords(name, localResultNames);
 
-		String fw = requiredSearchPhrase.getFirstUnknownSearchWord();
 		List<String> ow = requiredSearchPhrase.getUnknownSearchWords();
-		if (fw != null) {
-			searchPhraseNames.add(fw);
+		if (firstUnknownWordMatches) {
+			searchPhraseNames.add(requiredSearchPhrase.getFirstUnknownSearchWord());
 		}
-		if (!ow.isEmpty()) {
+		if (ow != null) {
 			searchPhraseNames.addAll(ow);
 		}
 
@@ -94,7 +95,12 @@ public class SearchResult {
 				break;
 			}
 		}
-		double res = ObjectType.getTypeWeight(allWordsMatched ? objectType : null);
+		String searchPhrase = StringUtils.join(searchPhraseNames, " ");
+		if (objectType.equals(ObjectType.POI_TYPE) && !searchPhrase.equalsIgnoreCase(name)) {
+			allWordsMatched = false;
+		}
+		boolean type = checkPhraseIsObjectType(searchPhrase);
+		double res = (allWordsMatched || type) ? ObjectType.getTypeWeight(objectType) * 10 : 1;
 		if (parentSearchResult != null) {
 			res = res + parentSearchResult.getSumPhraseMatchWeight() / MAX_TYPE_WEIGHT;
 		}
@@ -125,6 +131,17 @@ public class SearchResult {
 			inc += otherWordsMatch.size();
 		}
 		return inc;
+	}
+
+	private boolean checkPhraseIsObjectType(String searchPhraseName) {
+		if (object instanceof Amenity) {
+			String poiType = ((Amenity) object).getType().getKeyName();
+			String poiSubType = ((Amenity) object).getSubType();
+			boolean isType = poiType.equalsIgnoreCase(searchPhraseName);
+			boolean isSubType = poiSubType.equalsIgnoreCase(searchPhraseName);
+			return isType || isSubType;
+		}
+		return false;
 	}
 
 	public double getSearchDistance(LatLon location) {
