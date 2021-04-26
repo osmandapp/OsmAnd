@@ -208,7 +208,7 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 							"https://osmand.net/subscription/update",
 							parameters, "Sending data...", true, true, new AndroidNetworkUtils.OnRequestResultListener() {
 								@Override
-								public void onResult(String result) {
+								public void onResult(@Nullable String result, @Nullable String error) {
 									dismissProgress(null);
 									OsmandApplication app = getMyApplication();
 									if (result != null) {

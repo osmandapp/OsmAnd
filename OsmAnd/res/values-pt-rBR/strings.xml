@@ -3758,7 +3758,7 @@
     <string name="shared_string_file_name">Nome do arquivo</string>
     <string name="number_of_gpx_files_selected_pattern">%s arquivos de trilha selecionados</string>
     <string name="disable_recording_once_app_killed_descrp">O registro de trilhas fará uma pausa quando o aplicativo for encerrado (por meio de aplicativos recentes). (A indicação de segundo plano do OsmAnd desaparece da barra de notificação do Android.)</string>
-    <string name="save_global_track_interval_descr">Especifique o intervalo de registro para a gravação geral da trilha (ligado por meio do widget de \'gravação de viagem\' no mapa).</string>
+    <string name="save_global_track_interval_descr">Especifique o intervalo de registro para o registro geral da trilha (ativado por meio do widget de \'gravação de viagem\' no mapa).</string>
     <string name="gpx_monitoring_stop">Pausar gravação de viagem</string>
     <string name="gpx_monitoring_start">Retomar a gravação da viagem</string>
     <string name="system_default_theme">Padrão do sistema</string>
@@ -4049,9 +4049,13 @@
     <string name="shared_string_route_line">Linha de rota</string>
     <string name="route_line_use_map_style_appearance">A linha de rota seria usada %1$s especificado no estilo de mapa selecionado: %2$s.</string>
     <string name="specify_color_for_map_mode">Especifique a cor para o modo de mapa: %1$s.</string>
-    <string name="release_4_0_beta">"• As atualizações do OsmAnd Live foram movidas para \"Downloads &gt; Atualizações\"
+    <string name="release_4_0_beta">"• Adicionada opção para baixar curvas de nível em pés
 \n
-\n • As trilhas agora podem ser coloridas por altitude, velocidade ou inclinação.
+\n  • Plano de paisagem da rota: guias adicionadas para alternar entre pontos ou gráficos
+\n
+\n  • As atualizações do OsmAnd Live foram movidas para \"Downloads&gt; Atualizações\"
+\n
+\n  • As trilhas agora podem ser coloridas por altitude, velocidade ou inclinação.
 \n
 \n  • Adicionada opção para alterar a aparência da linha da rota de navegação
 \n
@@ -4081,4 +4085,8 @@
     <string name="user_points">Pontos do usuário</string>
     <string name="output">Saída</string>
     <string name="map_quick_action_pattern">%1$s → …</string>
+    <string name="shared_string_feet">pés</string>
+    <string name="srtm_unit_format">Formato da unidade de curvas de nível</string>
+    <string name="srtm_download_list_help_message">OsmAnd fornece dados de linhas de contorno em metros e pés. Você precisará baixar novamente o arquivo para alterar o formato.</string>
+    <string name="srtm_download_single_help_message">Selecione o formato necessário. Você precisará baixar novamente o arquivo para alterar o formato.</string>
 </resources>

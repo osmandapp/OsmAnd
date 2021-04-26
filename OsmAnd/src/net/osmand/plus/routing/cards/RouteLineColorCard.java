@@ -21,6 +21,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.enums.DayNightMode;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
@@ -32,9 +33,12 @@ import net.osmand.plus.settings.fragments.HeaderUiAdapter;
 import net.osmand.plus.track.AppearanceViewHolder;
 import net.osmand.plus.track.ColorsCard;
 import net.osmand.plus.track.CustomColorBottomSheet.ColorPickerListener;
-import net.osmand.plus.widgets.MultiStateToggleButton;
-import net.osmand.plus.widgets.MultiStateToggleButton.OnRadioItemClickListener;
-import net.osmand.plus.widgets.MultiStateToggleButton.RadioItem;
+import net.osmand.plus.track.GradientCard;
+import net.osmand.plus.track.GradientScaleType;
+import net.osmand.plus.widgets.multistatetoggle.RadioItem;
+import net.osmand.plus.widgets.multistatetoggle.RadioItem.OnRadioItemClickListener;
+import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
+import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -50,6 +54,7 @@ public class RouteLineColorCard extends BaseCard implements CardListener, ColorP
 	private HeaderUiAdapter headerUiAdapter;
 
 	private ColorsCard colorsCard;
+	private GradientCard gradientCard;
 	private ColorTypeAdapter colorAdapter;
 	private RecyclerView groupRecyclerView;
 	private TextView tvDescription;
@@ -63,7 +68,9 @@ public class RouteLineColorCard extends BaseCard implements CardListener, ColorP
 
 	private enum ColorMode {
 		DEFAULT(R.string.map_widget_renderer, R.drawable.ic_action_map_style),
-		CUSTOM(R.string.shared_string_custom, R.drawable.ic_action_settings);
+		CUSTOM(R.string.shared_string_custom, R.drawable.ic_action_settings),
+		ALTITUDE(R.string.altitude, R.drawable.ic_action_hillshade_dark),
+		SLOPE(R.string.shared_string_slope, R.drawable.ic_action_altitude_ascent);
 
 		ColorMode(int titleId, int iconId) {
 			this.titleId = titleId;
@@ -107,44 +114,59 @@ public class RouteLineColorCard extends BaseCard implements CardListener, ColorP
 		setupRadioGroup(radioGroup);
 
 		cardsContainer = (ViewGroup) view.findViewById(R.id.colors_card_container);
-		createColorSelector(cardsContainer);
+		createCards(cardsContainer);
 
 		initSelectedMode();
 	}
 
 	private void initSelectedMode() {
-		selectedMode = getRouteLineColor() == null ? ColorMode.DEFAULT : ColorMode.CUSTOM;
+		if (routeLineDrawInfo.getGradientScaleType() == GradientScaleType.ALTITUDE) {
+			selectedMode = ColorMode.ALTITUDE;
+		} else if (routeLineDrawInfo.getGradientScaleType() == GradientScaleType.SLOPE) {
+			selectedMode = ColorMode.SLOPE;
+		} else {
+			selectedMode = getRouteLineColor() == null ? ColorMode.DEFAULT : ColorMode.CUSTOM;
+		}
 		modeChanged();
 	}
 
 	private void modeChanged() {
 		if (selectedMode == ColorMode.DEFAULT) {
 			themeToggleContainer.setVisibility(View.GONE);
-			cardsContainer.setVisibility(View.GONE);
+			AndroidUiHelper.updateVisibility(colorsCard.getView(), false);
+			AndroidUiHelper.updateVisibility(gradientCard.getView(), false);
 			routeLineDrawInfo.setUseDefaultColor(true);
 			changeMapTheme(initMapTheme);
-		} else {
+		} else if (selectedMode == ColorMode.CUSTOM) {
 			themeToggleContainer.setVisibility(View.VISIBLE);
-			cardsContainer.setVisibility(View.VISIBLE);
+			AndroidUiHelper.updateVisibility(colorsCard.getView(), true);
+			AndroidUiHelper.updateVisibility(gradientCard.getView(), false);
 			routeLineDrawInfo.setUseDefaultColor(false);
 			changeMapTheme(isNightMap() ? DayNightMode.NIGHT : DayNightMode.DAY);
+		} else {
+			gradientCard.setSelectedScaleType(getGradientScaleTypeFromMode());
+			AndroidUiHelper.updateVisibility(colorsCard.getView(), false);
+			AndroidUiHelper.updateVisibility(gradientCard.getView(), true);
+			themeToggleContainer.setVisibility(View.GONE);
+			routeLineDrawInfo.setUseDefaultColor(false);
 		}
+		routeLineDrawInfo.setGradientScaleType(getGradientScaleTypeFromMode());
 		updateColorItems();
 		updateDescription();
 	}
 
 	private void setupRadioGroup(LinearLayout buttonsContainer) {
-		RadioItem day = createMapThemeButton(false);
-		RadioItem night = createMapThemeButton(true);
+		TextRadioItem day = createMapThemeButton(false);
+		TextRadioItem night = createMapThemeButton(true);
 
-		MultiStateToggleButton radioGroup = new MultiStateToggleButton(app, buttonsContainer, nightMode);
+		TextToggleButton radioGroup = new TextToggleButton(app, buttonsContainer, nightMode);
 		radioGroup.setItems(day, night);
 
 		radioGroup.setSelectedItem(!isNightMap() ? day : night);
 	}
 
-	private RadioItem createMapThemeButton(final boolean isNight) {
-		RadioItem item = new RadioItem(app.getString(!isNight ? DAY_TITLE_ID : NIGHT_TITLE_ID));
+	private TextRadioItem createMapThemeButton(final boolean isNight) {
+		TextRadioItem item = new TextRadioItem(app.getString(!isNight ? DAY_TITLE_ID : NIGHT_TITLE_ID));
 		item.setOnClickListener(new OnRadioItemClickListener() {
 			@Override
 			public boolean onRadioItemClick(RadioItem radioItem, View view) {
@@ -169,7 +191,7 @@ public class RouteLineColorCard extends BaseCard implements CardListener, ColorP
 		}
 	}
 
-	private void createColorSelector(ViewGroup container) {
+	private void createCards(ViewGroup container) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			List<Integer> colors = new ArrayList<>();
@@ -183,6 +205,9 @@ public class RouteLineColorCard extends BaseCard implements CardListener, ColorP
 			colorsCard = new ColorsCard(mapActivity, selectedColor, targetFragment, colors, preference, null);
 			colorsCard.setListener(this);
 			container.addView(colorsCard.build(mapActivity));
+
+			gradientCard = new GradientCard(mapActivity, routeLineDrawInfo.getGradientScaleType());
+			container.addView(gradientCard.build(mapActivity));
 		}
 	}
 
@@ -211,6 +236,17 @@ public class RouteLineColorCard extends BaseCard implements CardListener, ColorP
 		return routeLineDrawInfo.getColor(isNightMap());
 	}
 
+	@Nullable
+	private GradientScaleType getGradientScaleTypeFromMode() {
+		if (selectedMode == ColorMode.ALTITUDE) {
+			return GradientScaleType.ALTITUDE;
+		} else if (selectedMode == ColorMode.SLOPE) {
+			return GradientScaleType.SLOPE;
+		} else {
+			return null;
+		}
+	}
+
 	private void updateSelectedColor() {
 		int selectedColor = colorsCard.getSelectedColor();
 		routeLineDrawInfo.setColor(selectedColor, isNightMap());
@@ -234,6 +270,8 @@ public class RouteLineColorCard extends BaseCard implements CardListener, ColorP
 		String colorName = "";
 		if (selectedMode == ColorMode.DEFAULT) {
 			colorName = app.getString(R.string.map_widget_renderer);
+		} else if (selectedMode == ColorMode.ALTITUDE || selectedMode == ColorMode.SLOPE) {
+			colorName = app.getString(selectedMode.titleId);
 		} else if (getRouteLineColor() != null) {
 			int colorNameId = ColorDialogs.getColorName(getRouteLineColor());
 			colorName = app.getString(colorNameId);
@@ -247,10 +285,12 @@ public class RouteLineColorCard extends BaseCard implements CardListener, ColorP
 			String pattern = app.getString(R.string.route_line_use_map_style_appearance);
 			String color = app.getString(R.string.shared_string_color).toLowerCase();
 			description = String.format(pattern, color, app.getRendererRegistry().getSelectedRendererName());
-		} else {
+		} else if (selectedMode == ColorMode.CUSTOM) {
 			String pattern = app.getString(R.string.specify_color_for_map_mode);
 			String mapModeTitle = app.getString(isNightMap() ? NIGHT_TITLE_ID : DAY_TITLE_ID);
 			description = String.format(pattern, mapModeTitle.toLowerCase());
+		} else {
+			description = app.getString(R.string.route_line_use_gradient_coloring);
 		}
 		tvDescription.setText(description);
 	}

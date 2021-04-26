@@ -142,7 +142,7 @@ public class WikiArticleHelper {
 							public boolean publish(Amenity amenity) {
 								List<String> allNames = amenity.getAllNames(false);
 								for (String amenityName : allNames) {
-									if (name.equalsIgnoreCase(amenityName)) {
+									if (name.equals(amenityName)) {
 										results.add(amenity);
 										break;
 									}

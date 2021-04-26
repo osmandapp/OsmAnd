@@ -12,12 +12,21 @@
 
 -->
 
+    <string name="shared_string_max_height">Max. height</string>
+    <string name="shared_string_min_height">Min. height</string>
+    <string name="route_line_use_gradient_coloring">Route line will be colorized depending on the elevation profile of the route.</string>
     <string name="output">Output</string>
     <string name="user_points">User points</string>
     <string name="announce_when_exceeded">Announce when exceeded</string>
     <string name="exit_number">Exit number</string>
+    <string name="srtm_download_single_help_message">Please select the needed format. You will need to re-download the file to change the format.</string>
+    <string name="srtm_download_list_help_message">OsmAnd provides contour lines data in meters and feet. You will need to re-download the file to change the format.</string>
+    <string name="srtm_unit_format">Contour lines unit format</string>
+    <string name="shared_string_feet">feet</string>
     <string name="update_all_maps_added">Update all maps added to %1$s?</string>
     <string name="release_4_0_beta">
+    • Added option to download Contour lines in feet\n\n
+    • Plan Route landscape: added tabs to switch between points or graphs\n\n
     • OsmAnd Live updates moved to \"Downloads > Updates\"\n\n
     • Tracks now could be colorizing by altitude, speed, or slope.\n\n
     • Added option to change the appearance of the navigation route line\n\n

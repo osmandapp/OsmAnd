@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.AndroidUtils;
+import net.osmand.GPXUtilities.Elevation;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
@@ -92,7 +93,15 @@ public class TrackColoringCard extends BaseCard {
 		if (scaleType == GradientScaleType.SPEED) {
 			return gpxTrackAnalysis.isSpeedSpecified();
 		} else {
-			return gpxTrackAnalysis.isElevationSpecified();
+			if (!gpxTrackAnalysis.isElevationSpecified()) {
+				return false;
+			}
+			for (Elevation elevation : gpxTrackAnalysis.elevationData) {
+				if (Float.isNaN(elevation.elevation)) {
+					return false;
+				}
+			}
+			return true;
 		}
 	}
 

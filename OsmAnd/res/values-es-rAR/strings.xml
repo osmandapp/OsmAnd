@@ -209,7 +209,7 @@
     <string name="traffic_warning_calming">Reductor de velocidad</string>
     <string name="traffic_warning_speed_camera">Radar de velocidad</string>
     <string name="traffic_warning">Aviso de tráfico</string>
-    <string name="speak_favorites">Favoritos cerca</string>
+    <string name="speak_favorites">Favoritos cercanos</string>
     <string name="speak_poi">PDI cercanos</string>
     <string name="way_alarms">Advertencias de tráfico</string>
     <string name="stop_navigation_service">Parar</string>
@@ -3126,7 +3126,7 @@
     <string name="cancel_subscription">Cancelar suscripción</string>
     <string name="price_and_discount">%1$s • Ahorra %2$s</string>
     <string name="configure_profile_info">Ajustes para el perfil:</string>
-    <string name="utm_format_descr">OsmAnd utiliza el formato UTM Estándar, similar pero no idéntico al formato UTM NATO.</string>
+    <string name="utm_format_descr">OsmAnd usa el formato UTM Estándar, similar pero no idéntico al formato UTM de la OTAN.</string>
     <string name="shared_string_example">Ejemplo</string>
     <string name="navigate_point_format_utm">UTM Estándar</string>
     <string name="navigate_point_format_olc">Código de Ubicación Abierto</string>
@@ -4054,9 +4054,13 @@
     <string name="trip_recording_show_start_dialog_setting">Si se desactiva, la grabación será iniciada al pulsar el widget o el elemento del menú, saltándose el diálogo de confirmación.</string>
     <string name="customize_route_line">Personalizar línea de ruta</string>
     <string name="shared_string_route_line">Línea de ruta</string>
-    <string name="route_line_use_map_style_appearance">La línea de la ruta sería el uso %1$s especificado en el estilo de mapa seleccionado: %2$s.</string>
+    <string name="route_line_use_map_style_appearance">La línea de ruta usará el %1$s definido en el estilo de mapa elegido: %2$s.</string>
     <string name="specify_color_for_map_mode">Define el color para el modo de mapa: %1$s.</string>
-    <string name="release_4_0_beta">• Las actualizaciones de OsmAnd Live se han movido a «Descargas &gt; Actualizaciones».
+    <string name="release_4_0_beta">• Se ha añadido la opción para descargar las curvas de nivel en pies.
+\n
+\n• Paisaje del plan de ruta: se añadieron pestañas para alternar entre puntos o gráficos
+\n
+\n• Las actualizaciones de OsmAnd Live se han movido a «Descargas &gt; Actualizaciones».
 \n
 \n• Las trazas ahora pueden colorearse por altitud, velocidad o pendiente.
 \n
@@ -4087,4 +4091,8 @@
     <string name="announce_when_exceeded">Anunciar al excederse</string>
     <string name="user_points">Puntos de usuario</string>
     <string name="output">Salida</string>
+    <string name="shared_string_feet">pies</string>
+    <string name="srtm_unit_format">Formato de unidad de las curvas de nivel</string>
+    <string name="srtm_download_list_help_message">OsmAnd proporciona datos de curvas de nivel en metros y pies. Deberás volver a descargar el archivo para cambiar el formato.</string>
+    <string name="srtm_download_single_help_message">Marca el formato necesario. Deberás volver a descargar el archivo para cambiar el formato.</string>
 </resources>

@@ -13,6 +13,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.Version;
+import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.voice.JSMediaCommandPlayerImpl;
 import net.osmand.plus.voice.JSTTSCommandPlayerImpl;
@@ -142,8 +143,6 @@ public class LocalIndexHelper {
 
 		return null;
 	}
-
-	
 
 	public List<LocalIndexInfo> getLocalIndexInfos(String downloadName) {
 		List<LocalIndexInfo> list = new ArrayList<>();
@@ -313,7 +312,7 @@ public class LocalIndexHelper {
 			}
 		}
 	}
-	
+
 	private void loadTravelData(File mapPath, List<LocalIndexInfo> result, AbstractLoadLocalIndexTask loadTask) {
 		if (mapPath.canRead()) {
 			for (File mapFile : listFilesSorted(mapPath)) {
@@ -333,14 +332,15 @@ public class LocalIndexHelper {
 		if (mapPath.canRead()) {
 			for (File mapFile : listFilesSorted(mapPath)) {
 				if (mapFile.isFile() && mapFile.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
+					String fileName = mapFile.getName();
 					LocalIndexType lt = LocalIndexType.MAP_DATA;
-					if (mapFile.getName().endsWith(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT)) {
+					if (SrtmDownloadItem.isSrtmFile(fileName)) {
 						lt = LocalIndexType.SRTM_DATA;
-					} else if (mapFile.getName().endsWith(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT)) {
+					} else if (fileName.endsWith(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT)) {
 						lt = LocalIndexType.WIKI_DATA;
 					}
 					LocalIndexInfo info = new LocalIndexInfo(lt, mapFile, backup, app);
-					if (loadedMaps.containsKey(mapFile.getName()) && !backup) {
+					if (loadedMaps.containsKey(fileName) && !backup) {
 						info.setLoaded(true);
 					}
 					updateDescription(info);
@@ -403,7 +403,7 @@ public class LocalIndexHelper {
 			if (fileName.endsWith(IndexConstants.SQLITE_EXT)) {
 				return fileName.substring(0, fileName.length() - IndexConstants.SQLITE_EXT.length());
 			}
-			if (localIndexInfo.getType() == TRAVEL_DATA && 
+			if (localIndexInfo.getType() == TRAVEL_DATA &&
 					fileName.endsWith(IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT)) {
 				return fileName.substring(0, fileName.length() - IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT.length());
 			}
@@ -430,5 +430,4 @@ public class LocalIndexHelper {
 			return fileName;
 		}
 	}
-
 }

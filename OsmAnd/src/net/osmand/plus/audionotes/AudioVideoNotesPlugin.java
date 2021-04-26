@@ -22,7 +22,6 @@ import android.media.MediaRecorder;
 import android.media.SoundPool;
 import android.net.Uri;
 import android.os.Build;
-import android.os.StatFs;
 import android.provider.MediaStore;
 import android.view.Display;
 import android.view.KeyEvent;
@@ -1607,13 +1606,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			double bitrate = (((p.videoBitRate + p.audioBitRate) / 8f) * 60f) / (1 << 30); // gigabytes per minute
 			double clipSpace = bitrate * AV_RS_CLIP_LENGTH.get();
 			double storageSize = AV_RS_STORAGE_SIZE.get();
-
-			double availableSpace = storageSize;
-			File dir = app.getAppPath("").getParentFile();
-			if (dir.canRead()) {
-				StatFs fs = new StatFs(dir.getAbsolutePath());
-				availableSpace = (double) (fs.getAvailableBlocks()) * fs.getBlockSize() / (1 << 30) - clipSpace;
-			}
+			double availableSpace = (double) AndroidUtils.getAvailableSpace(app) / (1 << 30) - clipSpace;
 
 			if (usedSpace + clipSpace > storageSize || clipSpace > availableSpace) {
 				Arrays.sort(files, new Comparator<File>() {

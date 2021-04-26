@@ -141,8 +141,8 @@
     <string name="routing_attr_height_obstacles_name">Использовать данные о высотах</string>
     <string name="quick_action_duplicates">Действие переименовано в %1$s, чтобы избежать дублирования.</string>
     <string name="quick_action_duplicate">Обнаружен дубликат имени</string>
-    <string name="quick_action_showhide_favorites_descr">Переключатель, чтобы показать или скрыть избранные точки на карте.</string>
-    <string name="quick_action_showhide_poi_descr">Переключатель, чтобы показать или скрыть POI на карте.</string>
+    <string name="quick_action_showhide_favorites_descr">Переключатель для отображения или скрытия избранных точек на карте.</string>
+    <string name="quick_action_showhide_poi_descr">Переключатель для отображения или скрытия POI на карте.</string>
     <string name="quick_action_add_category">Категория</string>
     <string name="quick_action_add_create_items">Действия</string>
     <string name="quick_action_fav_name_descr">Если оставить это поле пустым, то оно будет автоматически заполнено адресом или названием места.</string>
@@ -2456,7 +2456,7 @@
     <string name="mark_passed">Отметить пройденным</string>
     <string name="import_track_desc">Файл %1$s не содержит путевых точек, импортировать его как трек?</string>
     <string name="add_track_to_markers_descr">Выберите трек, чтобы добавить в маркеры его точки.</string>
-    <string name="shared_string_gpx_waypoints">Трек путевых точек</string>
+    <string name="shared_string_gpx_waypoints">Путевые точки трека</string>
     <string name="shared_string_right">Направо</string>
     <string name="shared_string_left">Налево</string>
     <string name="show_number_pad">Показать цифровую панель</string>
@@ -2872,7 +2872,7 @@
     <string name="sit_on_the_stop">Посадка на остановке</string>
     <string name="use_osm_live_public_transport_description">Включить общественный транспорт с учётом автообновлений OsmAnd Live.</string>
     <string name="use_osm_live_public_transport">Общественный транспорт OsmAnd Live</string>
-    <string name="transfers_size">%1$d пересадки</string>
+    <string name="transfers_size">пересадки: %1$d</string>
     <string name="rendering_attr_surface_unpaved_name">Грунтовая</string>
     <string name="rendering_attr_surface_sand_name">Песок</string>
     <string name="rendering_attr_surface_grass_name">Трава</string>
@@ -3263,7 +3263,7 @@
     <string name="selected_profile">Выбранный профиль</string>
     <string name="personal_category_name">Персональный</string>
     <string name="shared_string_downloading_formatted">Скачивание %s</string>
-    <string name="rendering_value_thick_name">Толсто</string>
+    <string name="rendering_value_thick_name">Толстая</string>
     <string name="default_speed_dialog_msg">Используется для оценки времени прибытия для неизвестного типа дорог и ограничения скорости для всех дорог (может изменить маршрут)</string>
     <string name="routing_attr_allow_intermediate_name">Разрешить промежуточные маршруты</string>
     <string name="routing_attr_allow_advanced_name">Разрешить расширенные маршруты</string>
@@ -3302,7 +3302,7 @@
     <string name="rendering_attr_piste_difficulty_connection_name">Соединение</string>
     <string name="simulate_your_location_gpx_descr">Симулировать свою позицию используя записанный GPX трек.</string>
     <string name="route_start_point">Начало маршрута</string>
-    <string name="shared_string_revert">Вернуться</string>
+    <string name="shared_string_revert">Сброс</string>
     <string name="suggested_maps_descr">Эти карты необходимо использовать с плагином.</string>
     <string name="added_profiles">Добавленные профили</string>
     <string name="added_profiles_descr">Профили, добавленные плагином</string>
@@ -3480,7 +3480,7 @@
     <string name="select_shape">Выберите форму</string>
     <string name="shared_string_circle">Круг</string>
     <string name="shared_string_octagon">Восьмиугольник</string>
-    <string name="accessibility_announce">Сообщение о доступности</string>
+    <string name="accessibility_announce">Объявлять</string>
     <string name="monitoring_min_speed_descr_remark">Примечание: проверка скорости &gt; 0: большинство модулей GPS сообщают значение скорости только в том случае, если алгоритм определяет, что вы движетесь, и ничего, если вы не перемещаетесь. Следовательно, использование параметра &gt; 0 в этом фильтре в некотором смысле приводит к обнаружению факта перемещения модуля GPS. Но даже если мы не производим данную фильтрацию во время записи, то всё равно эта функция используется при анализе GPX для определения скорректированного расстояния, то есть значение, отображаемое в этом поле, является расстоянием, записанным во время движения.</string>
     <string name="multimedia_rec_split_title">Разделение записи</string>
     <string name="live_monitoring_adress_descr">Укажите веб-адрес со следующими параметрами: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
@@ -3607,7 +3607,7 @@
     <string name="unsupported_type_error">Неподдерживаемый тип</string>
     <string name="gpx_parse_error">OsmAnd сформировал GPX не совсем правильно, пожалуйста, свяжитесь со службой поддержки для выяснения причин.</string>
     <string name="turn_screen_on_navigation_instructions_descr">Каждая навигационная инструкция включает экран.</string>
-    <string name="turn_screen_on_navigation_instructions">Инструкции по навигации</string>
+    <string name="turn_screen_on_navigation_instructions">Навигационные инструкции</string>
     <string name="screen_timeout_descr">Если функция «%1$s» включена, время работы будет зависеть от неё.</string>
     <string name="turn_screen_on_wake_time_descr">Время работы экрана после включения. («%1$s» отключает выключение экрана.)</string>
     <string name="turn_screen_on_power_button_descr">Нажатие кнопки питания устройства включит экран с OsmAnd на переднем плане экрана блокировки.</string>
@@ -3660,7 +3660,7 @@
     <string name="vessel_height_warning">Вы можете указать высоту судна, чтобы избегать низких мостов. Имейте в виду, что если мост раздвижной, будет использована его высота в открытом состоянии.</string>
     <string name="vessel_height_limit_description">Укажите высоту судна, чтобы избежать низких мостов. Имейте в виду, что если мост раздвижной, будет использована его высота в открытом состоянии.</string>
     <string name="vessel_width_limit_description">Укажите ширину судна, чтобы избежать узких мостов</string>
-    <string name="quick_action_showhide_mapillary_descr">Переключатель, чтобы показать или скрыть слой Mapillary на карте.</string>
+    <string name="quick_action_showhide_mapillary_descr">Переключатель для отображения или скрытия слоя Mapillary на карте.</string>
     <string name="shared_string_legal">Законодательство</string>
     <string name="speed_cameras_legal_descr">В некоторых странах и регионах использование предупреждений о камерах контроля скорости запрещено законом. 
 \n 
@@ -3702,7 +3702,7 @@
     <string name="plan_a_route">Составление маршрута</string>
     <string name="gpx_split_interval_none_descr">Выберите способ разбиения: по времени или по расстоянию.</string>
     <string name="gpx_split_interval_descr">Интервал между метками расстояния или времени на треке.</string>
-    <string name="shared_string_custom">Заказная</string>
+    <string name="shared_string_custom">Своё знач.</string>
     <string name="add_hidden_group_info">Добавленная точка не будет видна на карте, так как выбранная группа скрыта, найти её можно в «%s».</string>
     <string name="track_show_start_finish_icons">Показывать значки старта и финиша</string>
     <string name="select_track_width">Выберите толщину линии</string>
@@ -4056,7 +4056,11 @@
     <string name="next_billing_date">Следующая дата оплаты: %1$s</string>
     <string name="osmand_live">OsmAnd Live</string>
     <string name="annual_subscription">Годовая подписка</string>
-    <string name="release_4_0_beta">• Обновления OsmAnd Live перемещены в «Загрузка карт» → «Обновления».
+    <string name="release_4_0_beta">• Добавлена возможность скачать контурные линии в футах.
+\n
+\n• Планирование маршрута: добавлены вкладки для переключения между точками и графиками.
+\n
+\n• Обновления OsmAnd Live перемещены в «Загрузка карт» → «Обновления».
 \n
 \n• Теперь треки можно раскрашивать по высоте, скорости или уклону.
 \n
@@ -4073,7 +4077,7 @@
     <string name="update_all_maps_added">Обновить все карты, добавленные в %1$s\?</string>
     <string name="customize_route_line">Настройка линии маршрута</string>
     <string name="shared_string_route_line">Линия маршрута</string>
-    <string name="route_line_use_map_style_appearance">Линия маршрута будет использовать %1$s, указанный в выбранном стиле карты: %2$s.</string>
+    <string name="route_line_use_map_style_appearance">Линия маршрута будет использовать %1$s из выбранного стиля карты: %2$s.</string>
     <string name="specify_color_for_map_mode">Укажите цвет для режима карты: %1$s.</string>
     <string name="no_purchases">У вас нет покупок</string>
     <string name="new_device_account">Новое устройство / новый аккаунт</string>
@@ -4086,4 +4090,9 @@
     <string name="user_points">Точки пользователя</string>
     <string name="output">Вывод</string>
     <string name="map_quick_action_pattern">%1$s → …</string>
+    <string name="exit_number">Номер съезда</string>
+    <string name="srtm_unit_format">Формат единиц на контурных линиях</string>
+    <string name="srtm_download_single_help_message">Выберите необходимый формат. Для изменения формата потребуется повторно загрузить файл.</string>
+    <string name="shared_string_feet">футы</string>
+    <string name="srtm_download_list_help_message">OsmAnd предоставляет данные изолиний в метрах и футах. Для изменения формата потребуется повторно загрузить файл.</string>
 </resources>

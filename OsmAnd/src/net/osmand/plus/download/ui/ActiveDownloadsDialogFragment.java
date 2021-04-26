@@ -87,7 +87,7 @@ public class ActiveDownloadsDialogFragment extends DialogFragment implements Dow
 			}
 			ItemViewHolder viewHolder = (ItemViewHolder) convertView.getTag();
 			IndexItem item = getItem(position);
-			viewHolder.bindIndexItem(item);
+			viewHolder.bindDownloadItem(item);
 			return convertView;
 		}
 		

@@ -35,6 +35,7 @@ public class RouteColorize {
     public static final int RED = rgbaToDecimal(243, 55, 77, 255);
     public static final int[] colors = new int[] {GREEN, YELLOW, RED};
 
+    private static final float DEFAULT_BASE = 17.2f;
     private static final int MAX_SLOPE_VALUE = 25;
 
     public enum ColorizationType {
@@ -105,6 +106,10 @@ public class RouteColorize {
         }
         for (Track t : gpxFile.tracks) {
             for (TrkSegment ts : t.segments) {
+                if (ts.generalSegment || ts.points.size() < 2) {
+                    continue;
+                }
+
                 for (WptPt p : ts.points) {
                     latList.add(p.lat);
                     lonList.add(p.lon);
@@ -132,6 +137,14 @@ public class RouteColorize {
         maxValue = getMaxValue(colorizationType, analysis, minValue, maxProfileSpeed);
         checkPalette();
         sortPalette();
+    }
+
+    public int getZoom() {
+        return zoom;
+    }
+
+    public void setZoom(int zoom) {
+        this.zoom = zoom;
     }
 
     /**
@@ -195,7 +208,7 @@ public class RouteColorize {
 
     public int getColorByValue(double value) {
         if (Double.isNaN(value)) {
-            value = (minValue + maxValue) / 2;
+            value = colorizationType == ColorizationType.SLOPE ? minValue : (minValue + maxValue) / 2;
         }
         for (int i = 0; i < palette.length - 1; i++) {
             if (value == palette[i][VALUE_INDEX])
@@ -237,11 +250,10 @@ public class RouteColorize {
         return rgbaToDecimal(0, 0, 0, 0);
     }
 
-    private List<RouteColorizationPoint> simplify() {
+    public List<RouteColorizationPoint> simplify() {
         if (dataList == null) {
             dataList = new ArrayList<>();
             for (int i = 0; i < latitudes.length; i++) {
-                //System.out.println(latitudes[i] + " " + longitudes[i] + " " + values[i]);
                 dataList.add(new RouteColorizationPoint(i, latitudes[i], longitudes[i], values[i]));
             }
         }
@@ -250,16 +262,20 @@ public class RouteColorize {
         for (RouteColorizationPoint data : dataList) {
             nodes.add(new net.osmand.osm.edit.Node(data.lat, data.lon, data.id));
         }
-        OsmMapUtils.simplifyDouglasPeucker(nodes, zoom + 5, 1, result, true);
+
+        double epsilon = Math.pow(2.0, DEFAULT_BASE - zoom);
+        result.add(nodes.get(0));
+        OsmMapUtils.simplifyDouglasPeucker(nodes, 0, nodes.size() - 1, result, epsilon);
 
         List<RouteColorizationPoint> simplified = new ArrayList<>();
-
-        for (int i = 1; i < result.size() - 1; i++) {
+        for (int i = 1; i < result.size(); i++) {
             int prevId = (int) result.get(i - 1).getId();
             int currentId = (int) result.get(i).getId();
             List<RouteColorizationPoint> sublist = dataList.subList(prevId, currentId);
             simplified.addAll(getExtremums(sublist));
         }
+        Node lastSurvivedPoint = result.get(result.size() - 1);
+        simplified.add(dataList.get((int) lastSurvivedPoint.getId()));
         return simplified;
     }
 
@@ -477,7 +493,7 @@ public class RouteColorize {
     }
 
     public static class RouteColorizationPoint {
-        int id;
+        public int id;
         public double lat;
         public double lon;
         public double val;

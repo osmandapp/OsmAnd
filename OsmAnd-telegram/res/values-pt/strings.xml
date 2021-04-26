@@ -114,7 +114,7 @@
     <string name="no_gps_connection">Sem conexão GPS</string>
     <string name="no_internet_connection">Sem ligação à Internet</string>
     <string name="shared_string_disable">Desativar</string>
-    <string name="shared_string_save">Gravar</string>
+    <string name="shared_string_save">Guardar</string>
     <string name="add_device">Adicionar dispositivo</string>
     <string name="share_location_as">Partilhar localização como</string>
     <string name="live_now_description">Contactos e grupos partilhando a localização consigo.</string>

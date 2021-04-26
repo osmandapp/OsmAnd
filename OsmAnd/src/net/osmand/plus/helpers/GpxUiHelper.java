@@ -79,6 +79,7 @@ import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxDbHelper;
 import net.osmand.plus.GpxDbHelper.GpxDataItemCallback;
+import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
@@ -2124,9 +2125,12 @@ public class GpxUiHelper {
 
 
 	public static GPXFile makeGpxFromRoute(RouteCalculationResult route, OsmandApplication app) {
+		return makeGpxFromLocations(route.getRouteLocations(), app);
+	}
+
+	public static GPXFile makeGpxFromLocations(List<Location> locations, OsmandApplication app) {
 		double lastHeight = HEIGHT_UNDEFINED;
 		GPXFile gpx = new GPXUtilities.GPXFile(Version.getFullVersion(app));
-		List<Location> locations = route.getRouteLocations();
 		if (locations != null) {
 			GPXUtilities.Track track = new GPXUtilities.Track();
 			GPXUtilities.TrkSegment seg = new GPXUtilities.TrkSegment();
@@ -2146,6 +2150,8 @@ public class GpxUiHelper {
 						}
 					}
 					lastHeight = h;
+				} else {
+					lastHeight = HEIGHT_UNDEFINED;
 				}
 				seg.points.add(point);
 			}
@@ -2228,17 +2234,18 @@ public class GpxUiHelper {
 		return dataSet;
 	}
 
-	public static GpxDisplayItem makeGpxDisplayItem(OsmandApplication app, GPXUtilities.GPXFile gpx) {
-		GpxDisplayItem gpxItem = null;
-		String groupName = app.getString(R.string.current_route);
-		GpxDisplayGroup group = app.getSelectedGpxHelper().buildGpxDisplayGroup(gpx, 0, groupName);
+	public static GpxDisplayItem makeGpxDisplayItem(OsmandApplication app, GPXFile gpxFile) {
+		GpxSelectionHelper helper = app.getSelectedGpxHelper();
+		String groupName = helper.getGroupName(gpxFile);
+		GpxDisplayGroup group = helper.buildGpxDisplayGroup(gpxFile, 0, groupName);
 		if (group != null && group.getModifiableList().size() > 0) {
-			gpxItem = group.getModifiableList().get(0);
+			GpxDisplayItem gpxItem = group.getModifiableList().get(0);
 			if (gpxItem != null) {
 				gpxItem.route = true;
 			}
+			return gpxItem;
 		}
-		return gpxItem;
+		return null;
 	}
 
 	public static void saveAndShareGpx(@NonNull final Context context, @NonNull final GPXFile gpxFile) {

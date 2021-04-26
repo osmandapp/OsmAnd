@@ -30,7 +30,8 @@ import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.enums.MetricsConstants;
-import net.osmand.plus.itinerary.ItineraryGroup;
+import net.osmand.plus.mapmarkers.MapMarkersGroup;
+import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.util.Algorithms;
@@ -291,10 +292,12 @@ public class GpxSelectionHelper {
 		return group;
 	}
 
-	private String getGroupName(GPXFile g) {
+	public String getGroupName(GPXFile g) {
 		String name = g.path;
 		if (g.showCurrentTrack) {
 			name = getString(R.string.shared_string_currently_recording_track);
+		} else if (Algorithms.isEmpty(name)) {
+			name = getString(R.string.current_route);
 		} else {
 			int i = name.lastIndexOf('/');
 			if (i >= 0) {
@@ -795,7 +798,7 @@ public class GpxSelectionHelper {
 	                                     boolean addToHistory) {
 		GpxDataItem dataItem = app.getGpxDbHelper().getItem(new File(gpx.path));
 		if (canAddToMarkers && show && dataItem != null && dataItem.isShowAsMarkers()) {
-			app.getItineraryHelper().addOrEnableGroup(gpx);
+			app.getMapMarkersHelper().addOrEnableGroup(gpx);
 		}
 		return selectGpxFile(gpx, dataItem, show, notShowNavigationDialog, syncGroup, selectedByUser, addToHistory);
 	}
@@ -822,9 +825,10 @@ public class GpxSelectionHelper {
 	}
 
 	private void syncGpxWithMarkers(GPXFile gpxFile) {
-		ItineraryGroup group = app.getItineraryHelper().getMarkersGroup(gpxFile);
+		MapMarkersHelper mapMarkersHelper = app.getMapMarkersHelper();
+		MapMarkersGroup group = mapMarkersHelper.getMarkersGroup(gpxFile);
 		if (group != null) {
-			app.getItineraryHelper().runSynchronization(group);
+			mapMarkersHelper.runSynchronization(group);
 		}
 	}
 

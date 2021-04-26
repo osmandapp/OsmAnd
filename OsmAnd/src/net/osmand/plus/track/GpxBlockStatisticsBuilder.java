@@ -45,7 +45,6 @@ import java.util.Date;
 import java.util.List;
 
 import static net.osmand.plus.liveupdates.LiveUpdatesFragment.getDefaultIconColorId;
-import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_SPEED;
 
 public class GpxBlockStatisticsBuilder {
 

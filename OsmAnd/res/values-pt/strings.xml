@@ -20,11 +20,11 @@
     <string name="amenity_type_sport">Desporto</string>
     <string name="amenity_type_sustenance">Alimentação</string>
     <string name="amenity_type_tourism">Turismo</string>
-    <string name="amenity_type_transportation">Transporte</string>
-    <string name="indexing_address">Indexando endereço…</string>
-    <string name="indexing_map">Indexando mapa…</string>
-    <string name="indexing_poi">Indexando POI…</string>
-    <string name="indexing_transport">Indexando transporte…</string>
+    <string name="amenity_type_transportation">Transportes públicos</string>
+    <string name="indexing_address">A indexar endereços…</string>
+    <string name="indexing_map">A indexar o mapa…</string>
+    <string name="indexing_poi">A indexar POI…</string>
+    <string name="indexing_transport">A indexar transportes…</string>
     <string name="shared_string_io_error">Erro de entrada/saída</string>
     <string name="km">km</string>
     <string name="km_h">km/h</string>
@@ -37,7 +37,7 @@
     <string name="poi_filter_food_shop">Supermercado</string>
     <string name="poi_filter_for_tourists">Para turistas</string>
     <string name="poi_filter_fuel">Combustível</string>
-    <string name="poi_filter_namefinder">Pesquisar nome on-line</string>
+    <string name="poi_filter_namefinder">Pesquisar nome online</string>
     <string name="reading_cached_tiles">A ler mosaicos temporários…</string>
     <string name="version_index_is_big_for_memory">O índice \'\'{0}\'\' não coube na memória</string>
     <string name="version_index_is_not_supported">A versão do índice \'\'{0}\'\' não é suportada</string>
@@ -96,7 +96,7 @@
     <string name="error_reading_gpx">Não foi possível ler os dados de GPX.</string>
     <string name="vector_data">Mapas vetoriais offline</string>
     <string name="transport_context_menu">Procurar transporte na paragem</string>
-    <string name="poi_context_menu_modify">Alterar POI</string>
+    <string name="poi_context_menu_modify">Alterar POI OSM</string>
     <string name="poi_context_menu_delete">Eliminar POI</string>
     <string name="rotate_map_compass_opt">Direção da bússola</string>
     <string name="rotate_map_bearing_opt">Direção do movimento</string>
@@ -120,7 +120,7 @@
     <string name="shared_string_favorites">Favoritos</string>
     <string name="layer_osm_bugs">Notas OSM (online)</string>
     <string name="layer_poi">Camada superior de POI…</string>
-    <string name="layer_map">Origem dos mapas…</string>
+    <string name="layer_map">Repositório de mapas…</string>
     <string name="menu_layers">Camada de mapa</string>
     <string name="context_menu_item_search_poi">Busca por POI</string>
     <string name="use_trackball_descr">Utilizar um dispositivo trackball para mover o mapa.</string>
@@ -140,7 +140,7 @@
     <string name="background_router_service_descr">Rastreia a sua posição enquanto o ecrã está desligado.</string>
     <string name="background_router_service">Executar OsmAnd em segundo plano</string>
     <string name="off_router_service_no_gps_available">O serviço em segundo plano necessita aa ativação de um fornecedor da localização.</string>
-    <string name="routing_settings_descr">Especifique as opções da rota.</string>
+    <string name="routing_settings_descr">Especifique as opções de navegação.</string>
     <string name="routing_settings">Navegação</string>
     <string name="hide_poi_filter">Ocultar filtro</string>
     <string name="show_poi_filter">Mostrar filtro</string>
@@ -159,12 +159,12 @@
 \nAgora só é possível ver o mapa pré-carregado, não descarregar novas áreas.</string>
     <string name="unzipping_file">A descomprimir o ficheiro…</string>
     <string name="route_tr">Vire à direita e continue em</string>
-    <string name="route_tshr">Vire fortemente à direita e continue em</string>
-    <string name="route_tslr">Vire levemente à direita e continue em</string>
+    <string name="route_tshr">Vire acentuadamente à direita e continue em</string>
+    <string name="route_tslr">Vire ligeiramente à direita e continue em</string>
     <string name="route_tl">Vire à esquerda e continue em</string>
-    <string name="route_tshl">Vire fortemente à esquerda e continue em</string>
-    <string name="route_tsll">Vire levemente à esquerda e continue em</string>
-    <string name="route_tu">Inverta o sentido da marcha e continue em</string>
+    <string name="route_tshl">Vire acentuadamente à esquerda e continue em</string>
+    <string name="route_tsll">Vire ligeiramente à esquerda e continue em</string>
+    <string name="route_tu">Faça inversão de marcha e continue em</string>
     <string name="route_head">Comece em</string>
     <string name="first_time_continue">Continuar</string>
     <string name="first_time_download">Descarregar regiões</string>
@@ -214,14 +214,14 @@
     <string name="search_nothing_found">Não foi encontrado nada</string>
     <string name="searching">A pesquisar…</string>
     <string name="searching_address">A pesquisar o endereço …</string>
-    <string name="search_osm_nominatim">Pesquisa on-line usando OSM Nominatim</string>
+    <string name="search_osm_nominatim">Pesquisa na Internet usando OSM Nominatim</string>
     <string name="hint_search_online">Pesquisa online: número da casa, rua, cidade</string>
     <string name="search_offline_address">Pesquisa offline</string>
     <string name="search_online_address">Pesquisa online</string>
     <string name="max_level_download_tile">Nível máximo de zoom</string>
-    <string name="max_level_download_tile_descr">Não navegar em mapas on-line para níveis de ampliação além deste.</string>
+    <string name="max_level_download_tile_descr">Não navegar em mapas online para níveis de ampliação além deste.</string>
     <string name="route_general_information">Distância total %1$s, tempo de viagem %2$d h %3$d min.</string>
-    <string name="router_service_descr">Serviço de navegação on-line ou off-line.</string>
+    <string name="router_service_descr">Serviço de navegação online ou offline.</string>
     <string name="router_service">Serviço de navegação</string>
     <string name="sd_dir_not_accessible">A pasta de armazenamento não está acessível no cartão de memória!</string>
     <string name="download_question">Descarregar {0} - {1} \?</string>
@@ -253,7 +253,7 @@
     <string name="loading_streets">A carregar ruas…</string>
     <string name="loading_cities">A carregar cidades…</string>
     <string name="poi">POI</string>
-    <string name="error_occurred_saving_gpx">Não foi possível gravar o ficheiro GPX.</string>
+    <string name="error_occurred_saving_gpx">Não foi possível guardar o ficheiro GPX.</string>
     <string name="error_calculating_route">Não foi possível calcular a rota.</string>
     <string name="error_calculating_route_occured">Não foi possível calcular a rota.</string>
     <string name="empty_route_calculated">A rota calculada está vazia.</string>
@@ -264,7 +264,7 @@
     <string name="loading_data">A carregar dados…</string>
     <string name="reading_indexes">A ler dados locais…</string>
     <string name="previous_run_crashed">O OsmAnd foi interrompido inesperadamente. O ficheiro de registo encontra-se em {0}. Por favor, relate o problema e inclua o ficheiro de registo.</string>
-    <string name="saving_gpx_tracks">A gravar o ficheiro GPX…</string>
+    <string name="saving_gpx_tracks">A guardar o ficheiro GPX…</string>
     <string name="finished_task">Concluído</string>
     <string name="use_online_routing_descr">Utilizar a Internet para calcular uma rota.</string>
     <string name="use_online_routing">Utilizar navegação online</string>
@@ -319,7 +319,7 @@
     <string name="search_POI_level_btn">Encontrar mais</string>
     <string name="incremental_search_city">Pesquisa progressiva de cidade. Para encontrar cidades/código postal, insira pelo menos os três primeiros caracteres</string>
     <string name="incremental_search_street">Pesquisa progressiva das ruas</string>
-    <string name="incremental_search_building">Pesquisa progressiva dos edificios</string>
+    <string name="incremental_search_building">Pesquisa progressiva dos edifícios</string>
     <string name="choose_available_region">Selecione a região da lista</string>
     <string name="choose_intersected_street">Selecione a rua transversal</string>
     <string name="Closest_Amenities">Infraestruturas mais próximas</string>
@@ -341,7 +341,7 @@
     <string name="search_address_building_option">Edifício</string>
     <string name="search_address_street_option">Rua transversal</string>
     <string name="context_menu_item_update_map">Atualizar mapa</string>
-    <string name="context_menu_item_create_poi">Criar POI OSM</string>
+    <string name="context_menu_item_create_poi">Criar POI</string>
     <string name="shared_string_yes">Sim</string>
     <string name="shared_string_cancel">Cancelar</string>
     <string name="shared_string_apply">Aplicar</string>
@@ -371,7 +371,7 @@
     <string name="poi_error_io_error_template">Erro de entrada/saída na execução da ação {0}.</string>
     <string name="poi_error_info_not_loaded">As informações sobre o objeto não foram carregadas</string>
     <string name="poi_dialog_opening_hours">Aberto</string>
-    <string name="poi_dialog_comment">Comentário</string>
+    <string name="poi_dialog_comment">Comentar</string>
     <string name="poi_dialog_comment_default">Alterar POI</string>
     <string name="poi_dialog_other_tags_message">Todas as outras etiquetas são preservadas</string>
     <string name="default_buttons_commit">Enviar</string>
@@ -395,18 +395,18 @@
     <string name="modify_transparency">Definir a transparência (0 - transparente, 255 - opaco)</string>
     <string name="confirm_interrupt_download">Cancelar o descarregamento\?</string>
     <string name="basemap_was_selected_to_download">O mapa base, necessário para fornecer funcionalidade básica, está na fila de descarregamentos.</string>
-    <string name="local_indexes_cat_tile">Mosaicos de mapas on-line e em ficheiros temporários</string>
+    <string name="local_indexes_cat_tile">Mosaicos de mapas online e em ficheiros temporários</string>
     <string name="local_indexes_cat_map">Mapas padrão (vetorial)</string>
-    <string name="map_online_plugin_is_not_installed">Ative a extensão de \'Mapas on-line\' para selecionar diferentes origens de mapas</string>
-    <string name="map_online_data">Mapas on-line e mosaicos</string>
+    <string name="map_online_plugin_is_not_installed">Ative a extensão de \'Mapas online\' para selecionar diferentes origens de mapas</string>
+    <string name="map_online_data">Mapas online e mosaicos</string>
     <string name="map_online_data_descr">Usar mapas online (descarregar e armazenar mosaicos no cartão de memória).</string>
     <string name="shared_string_online_maps">Mapas on-line</string>
-    <string name="online_map_settings_descr">Configurar origens de mosaicos ou de mapas on-line.</string>
-    <string name="osmand_rastermaps_plugin_description">Aceda a muitos tipos de mapas on-line (também chamados de mosaico ou raster) pré-definidos do OpenStreetMap (como Mapnik) para imagens de satélite e camadas especiais, como mapas aquáticos, climáticos, geológicos, camadas de sombra de relevo, etc.
+    <string name="online_map_settings_descr">Configurar origens de mosaicos ou de mapas online.</string>
+    <string name="osmand_rastermaps_plugin_description">Aceda a muitos tipos de mapas online (também chamados de mosaico ou raster) pré-definidos do OpenStreetMap (como Mapnik) para imagens de satélite e camadas especiais, como mapas aquáticos, climáticos, geológicos, camadas de sombra de relevo, etc.
 \n
-\nQuaisquer desses mapas podem ser usados como mapa principal (base) para ser mostrado no OsmAnd ou na camada superior ou inferior para outro mapa base (como o mapa off-line normal de OsmAnd). Para tornar qualquer camada inferior do mapa mais visível, certos elementos do mapa vetorial do OsmAnd podem facilmente ser ocultados através do menu \'Configurar mapa\'.
+\nQuaisquer desses mapas podem ser usados como mapa principal (base) para ser mostrado no OsmAnd ou na camada superior ou inferior para outro mapa base (como o mapa offline normal de OsmAnd). Para tornar qualquer camada inferior do mapa mais visível, certos elementos do mapa vetorial do OsmAnd podem facilmente ser ocultados através do menu \'Configurar mapa\'.
 \n
-\nOs mosaicos dos mapas podem ser obtidos diretamente através de origens on-line ou podem ser preparados para uso off-line (e copiados manualmente para o diretório de dados do OsmAnd) como uma base de dados sqlite, que pode ser produzido por uma variedade de ferramentas de terceiros para preparação de mapas.</string>
+\nOs mosaicos dos mapas podem ser obtidos diretamente através de origens online ou podem ser preparados para uso offline (e copiados manualmente para o diretório de dados do OsmAnd) como uma base de dados sqlite, que pode ser produzido por uma variedade de ferramentas de terceiros para preparação de mapas.</string>
     <string name="osmand_background_plugin_description">Mostra as configurações para ativar o rastreamento em segundo plano e a navegação, despertando periodicamente o dispositivo GPS (com o ecrã desligado).</string>
     <string name="osmand_accessibility_description">Mostra os recursos de acessibilidade do dispositivo disponíveis diretamente no OsmAnd. Facilita, por exemplo, o ajuste da velocidade da fala para vozes TTS, configurando a navegação no ecrã do teclado direcional, usando um trackball para controlo da ampliação, ou feedback texto-para-fala, por exemplo, para anunciar automaticamente a sua posição.</string>
     <string name="osmand_development_plugin_description">Mostra configurações para recursos de desenvolvimento e depuração como testar ou simular roteamento, o desempenho de renderização do ecrã ou solicitação de voz. Essas configurações são destinadas a programadores e não são necessárias para o utilizador em geral.</string>
@@ -465,7 +465,7 @@
     <string name="left">para a esquerda</string>
     <string name="front_left">para a frente à esquerda</string>
     <string name="oclock">horas</string>
-    <string name="towards">em direção a</string>
+    <string name="towards">para</string>
     <string name="accuracy">Precisão</string>
     <string name="altitude">Altitude</string>
     <string name="no_info">Sem informação</string>
@@ -483,7 +483,7 @@
     <string name="use_fluorescent_overlays">Camada superior fluorescente</string>
     <string name="use_fluorescent_overlays_descr">Usar cores fluorescentes para mostrar trajetos e rotas.</string>
     <string name="offline_edition">Edição offline</string>
-    <string name="offline_edition_descr">Se a edição offline estiver ativada, as alterações serão primeiro gravadas localmente e enviadas por pedido, caso contrário, as alterações serão enviadas imediatamente.</string>
+    <string name="offline_edition_descr">Se a edição offline estiver ativada, as alterações serão primeiro guardadas localmente e enviadas por pedido, caso contrário, as alterações serão enviadas imediatamente.</string>
     <string name="update_poi_does_not_change_indexes">As alterações de POI dentro da aplicação não afetam os ficheiros de mapas descarregados; essas alterações são guardadas num ficheiro separado no seu dispositivo.</string>
     <string name="local_openstreetmap_uploading">A enviar…</string>
     <string name="local_openstreetmap_were_uploaded">{0} POI/notas enviados</string>
@@ -493,11 +493,11 @@
     <string name="local_openstreetmap_descr_title">Edição assíncrona de OSM:</string>
     <string name="local_openstreetmap_settings">POIs / notas guardados no dispositivo</string>
     <string name="local_openstreetmap_settings_descr">Mostrar e gerir POIs/notas do OSM guardados localmente.</string>
-    <string name="live_monitoring_interval_descr">Especifique o intervalo de rastreamento on-line.</string>
-    <string name="live_monitoring_interval">Intervalo de rastreamento on-line</string>
+    <string name="live_monitoring_interval_descr">Especifique o intervalo de rastreamento online.</string>
+    <string name="live_monitoring_interval">Intervalo de rastreamento online</string>
     <string name="live_monitoring_url_descr">Especifique o endereço web com a sintaxe de parâmetros: lat={0}, lon={1}, data/hora={2}, hdop={3}, altitude={4}, velocidade={5}, bearing={6}.</string>
-    <string name="live_monitoring_url">Endereço web de rastreamento on-line</string>
-    <string name="gpx_monitoring_disabled_warn">Registo de trajeto usando widget GPX ou via \'Gravação de viagem\' nas configurações.</string>
+    <string name="live_monitoring_url">Endereço web de rastreamento online</string>
+    <string name="gpx_monitoring_disabled_warn">Registo de trajeto usando widget GPX ou via \'Gravar viagem\' nas configurações.</string>
     <string name="show_current_gpx_title">Mostrar rota atual</string>
     <string name="free_version_message">Pode descarregar ou atualizar %1$s mapas.</string>
     <string name="free_version_title">Versão gratuita</string>
@@ -562,13 +562,13 @@
     <string name="shared_string_undefined">Sem definir</string>
     <string name="search_position_map_view">Centro do mapa atual</string>
     <string name="select_search_position">Origem:</string>
-    <string name="context_menu_item_search">Pesquisar nas proximidades</string>
+    <string name="context_menu_item_search">Pesquisar perto daqui</string>
     <string name="route_successfully_saved_at">Rota guardada como \'%1$s\'.</string>
     <string name="filename_input">Nome do ficheiro:</string>
     <string name="file_with_name_already_exist">Já existe um ficheiro com o mesmo nome.</string>
-    <string name="shared_string_save">Gravar</string>
+    <string name="shared_string_save">Guardar</string>
     <string name="local_index_upload_gpx_description">Enviar ficheiros de GPX para a comunidade OSM, para ajudar a melhorar os mapas.</string>
-    <string name="local_index_items_uploaded">%1$d de %2$d items enviados.</string>
+    <string name="local_index_items_uploaded">%1$d de %2$d itens enviados.</string>
     <string name="local_index_mi_upload_gpx">Enviar para OSM</string>
     <string name="show_more_map_detail">Ver mais detalhes do mapa</string>
     <string name="show_more_map_detail_descr">Mostrar detalhes do mapa vetorial (estradas, etc.) já em níveis de zoom mais baixos.</string>
@@ -589,7 +589,7 @@
     <string name="local_index_items_backuped">%1$d de %2$d item(s) desativados.</string>
     <string name="local_index_items_deleted">%1$d de %2$d item(s) eliminados.</string>
     <string name="local_index_items_restored">%1$d de %2$d item(s) ativados.</string>
-    <string name="local_index_no_items_to_do">Sem items para %1$s</string>
+    <string name="local_index_no_items_to_do">Sem itens para %1$s</string>
     <string name="local_index_action_do">Está prestes a %1$s %2$s item(s). Continuar\?</string>
     <string name="local_index_descr_title">Gerir ficheiros de mapas.</string>
     <string name="local_index_mi_restore">Ativar</string>
@@ -646,7 +646,7 @@
     <string name="search_osm_offline">Pesquisa por localização geográfica</string>
     <string name="system_locale">Sistema</string>
     <string name="preferred_locale_descr">Idioma de visualização da aplicação (após reinicialização do OsmAnd).</string>
-    <string name="preferred_locale">Linguagem</string>
+    <string name="preferred_locale">Idioma</string>
     <string name="shared_string_next">Seguinte</string>
     <string name="shared_string_previous">Anterior</string>
     <string name="unit_of_length_descr">Alterar a unidade de medida de distância.</string>
@@ -665,9 +665,9 @@
     <string name="context_menu_item_share_location">Partilhar localização</string>
     <string name="add_waypoint_dialog_added">Foi adicionado o ponto de passagem GPX \'\'{0}\'\'</string>
     <string name="add_waypoint_dialog_title">Acrescentar ponto ao trilho GPX gravado</string>
-    <string name="osmand_routing_experimental">Navegação OsmAnd off-line ainda é uma função experimental e não funciona em distâncias superiores a cerca de 20 km.
+    <string name="osmand_routing_experimental">Navegação OsmAnd offline ainda é uma função experimental e não funciona em distâncias superiores a cerca de 20 km.
 \n
-\nO serviço de navegação está temporariamente mudado para CloudMade on-line.</string>
+\nO serviço de navegação está temporariamente mudado para CloudMade online.</string>
     <string name="specified_dir_doesnt_exist">Não foi possível encontrar a pasta especificada.</string>
     <string name="application_dir">Local de armazenamento</string>
     <string name="osmand_net_previously_installed">Todos os dados offline na aplicação instalada antiga serão suportados pela nova, mas os pontos Favoritos devem ser exportados da aplicação antiga e depois importados na nova.</string>
@@ -678,9 +678,9 @@
     <string name="loading_builds">A carregar compilações OsmAnd…</string>
     <string name="select_build_to_install">Selecionar a compilação OsmAnd a instalar</string>
     <string name="contribution_activity">Instalar versão</string>
-    <string name="navigate_point_format_D">DDD.DDDDD</string>
-    <string name="navigate_point_format_DM">DDD MM.MMM</string>
-    <string name="navigate_point_format_DMS">DDD MM SS.S</string>
+    <string name="navigate_point_format_D">GGG.GGGGG</string>
+    <string name="navigate_point_format_DM">GGG MM.MMM</string>
+    <string name="navigate_point_format_DMS">GGG MM SS.S</string>
     <string name="rendering_attr_noPolygons_description">Tornar transparentes todas as características do terreno no mapa.</string>
     <string name="rendering_attr_noPolygons_name">Polígonos</string>
     <string name="rendering_attr_appMode_name">Modo de visualização</string>
@@ -689,9 +689,9 @@
     <string name="rendering_attr_contourLines_name">Mostrar curvas de nível</string>
     <string name="rendering_attr_hmRendered_description">Aumentar o nível de detalhe do mapa.</string>
     <string name="rendering_attr_hmRendered_name">Ver mais detalhes no mapa</string>
-    <string name="route_roundabout">Rotunda: saia na saída %1$d para</string>
-    <string name="route_kl">Mantenha-se à esquerda e continue</string>
-    <string name="route_kr">Mantenha-se à direita e continue</string>
+    <string name="route_roundabout">Rotunda: saia na %1$dª saída para</string>
+    <string name="route_kl">Mantenha-se à esquerda e continue em</string>
+    <string name="route_kr">Mantenha-se à direita e continue em</string>
     <string name="asap">Assim que possível</string>
     <string name="gpxup_public">Público</string>
     <string name="gpxup_identifiable">Identificável</string>
@@ -706,7 +706,7 @@
     <string name="osmand_parking_choose_type">Selecione o tipo de estacionamento</string>
     <string name="osmand_parking_lim_text">Tempo limitado</string>
     <string name="osmand_parking_no_lim_text">Sem limite de tempo</string>
-    <string name="osmand_parking_add_event">Adicionar uma notificação à aplicação Calendário</string>
+    <string name="osmand_parking_add_event">Adicionar notificação ao Calendário</string>
     <string name="osmand_parking_time_limit">Estacionamento com limite de tempo</string>
     <string name="osmand_parking_time_no_limit">Estacionamento sem limite de tempo</string>
     <string name="osmand_parking_position_description">A localização do seu veículo estacionado. %1$s</string>
@@ -717,7 +717,7 @@
     <string name="osmand_parking_plugin_description">Permite gravar onde o seu carro foi estacionado e quanto tempo de estacionamento resta (se houver um limite de tempo). 
 \nA localização e o tempo ficam visíveis no painel de controlo do OsmAnd e num widget no ecrã do mapa. Um alarme pode ser adicionado ao calendário Android como lembrete.</string>
     <string name="osmand_parking_plugin_name">Local de estacionamento</string>
-    <string name="context_menu_item_add_parking_point">Marcar como local de estacionamento</string>
+    <string name="context_menu_item_add_parking_point">Marcar estacionamento</string>
     <string name="context_menu_item_delete_parking_point">Eliminar um marcador de estacionamento</string>
     <string name="starting_point_too_far">Ponto de partida demasiado distante da estrada mais próxima.</string>
     <string name="shared_location">Local partilhado</string>
@@ -735,8 +735,8 @@
     <string name="route_updated_loc_found">Aguardando posição para calcular a rota</string>
     <string name="continue_follow_previous_route_auto">Continuar a navegação a seguir que ficou antes inacabada\? (%1$s segundos)</string>
     <string name="show_cameras">Radares de velocidade</string>
-    <string name="show_traffic_warnings">Avisos de tráfego</string>
-    <string name="avoid_toll_roads">Sem estradas com portagem</string>
+    <string name="show_traffic_warnings">Informações de circulação</string>
+    <string name="avoid_toll_roads">Evitar estradas com portagem</string>
     <string name="map_widget_top_text">Nome da rua</string>
     <string name="map_widget_config">Configuração do ecrã</string>
     <string name="map_widget_back_to_loc">Onde estou</string>
@@ -762,11 +762,11 @@
     <string name="bg_service_sleep_mode_on">Parar
 \na execução em segundo plano</string>
     <string name="show_warnings_title">Mostrar alertas…</string>
-    <string name="show_warnings_descr">Configure avisos de trânsito (limites de velocidade, paragens forçadas, redutores de velocidade, túneis), avisos de radares de velocidade e informações da faixa de rodagem.</string>
-    <string name="avoid_motorway">Sem autoestradas</string>
+    <string name="show_warnings_descr">Configure avisos de trânsito (limites de velocidade, portagens, lombas, passadeiras, túneis), radares e a faixa de rodagem.</string>
+    <string name="avoid_motorway">Evitar autoestradas</string>
     <string name="snap_to_road">Ajustar à estrada</string>
     <string name="osmand_short_description_80_chars">Visualização e navegação móvel de mapas globais do OSM offline e online</string>
-    <string name="osmand_plus_short_description_80_chars">OsmAnd é uma aplicação de navegação de código aberto para mapas off-line e on-line</string>
+    <string name="osmand_plus_short_description_80_chars">OsmAnd é uma aplicação de navegação de código aberto para mapas offline e online</string>
     <string name="filterpoi_activity">Criar filtro de POI</string>
     <string name="select_navigation_mode">Meio de transporte:</string>
     <string name="day_night_info_description">Nascer do sol: %1$s
@@ -776,8 +776,8 @@
     <string name="map_widget_renderer">Estilo de renderização</string>
     <string name="layer_map_appearance">Configurar ecrã</string>
     <string name="show_lanes">Mostrar faixas de rodagem</string>
-    <string name="avoid_unpaved">Sem estradas não pavimentadas</string>
-    <string name="avoid_ferries">Sem balsas/ferries</string>
+    <string name="avoid_unpaved">Evitar estradas não pavimentadas</string>
+    <string name="avoid_ferries">Evitar balsas/ferries</string>
     <string name="avoid_in_routing_title">Evitar…</string>
     <string name="map_widget_fluorescent">Rotas fluorescentes</string>
     <string name="map_widget_show_ruler">Régua</string>
@@ -810,7 +810,7 @@
     <string name="rendering_attr_roadColors_description">Selecione um esquema de cores de estrada:</string>
     <string name="rendering_attr_roadColors_name">Esquema de cores</string>
     <string name="map_widget_show_destination_arrow">Ver direção para o destino</string>
-    <string name="enable_plugin_monitoring_services">Ative a extensão de \"Gravação de viagem\" para usar serviços de registo de posição (registo GPX, rastreamento on-line)</string>
+    <string name="enable_plugin_monitoring_services">Ative a extensão de \"Gravar viagem\" para usar serviços de registo de posição (registo GPX, rastreamento online)</string>
     <string name="non_optimal_route_calculation">Calcular rota possivelmente não ideal em longas distâncias</string>
     <string name="gps_not_available">Ative o GPS nas configurações</string>
     <string name="map_widget_monitoring_services">Serviços de registo</string>
@@ -847,12 +847,12 @@
     <string name="safe_mode_description">Executar a aplicação no modo de segurança (usando o código do Android mais lento em vez do nativo).</string>
     <string name="safe_mode">Modo de segurança</string>
     <string name="native_library_not_running">A aplicação está a ser executada no modo de segurança (desligue-o em \"Configurações\").</string>
-    <string name="background_service_is_enabled_question">O serviço de segundo plano OsmAnd ainda está em execução. Tambẽm pará-lo\?</string>
+    <string name="background_service_is_enabled_question">O serviço de segundo plano OsmAnd ainda está em execução. Também quer pará-lo\?</string>
     <string name="close_changeset">Fechar conjunto de alterações</string>
     <string name="search_villages_and_postcodes">Pesquisar mais povoações/códigos postais</string>
     <string name="dropbox_plugin_description">Sincroniza trilhos e notas de vídeo/áudio com a sua conta Dropbox.</string>
     <string name="av_def_action_video">Gravar vídeo</string>
-    <string name="av_def_action_audio">Gravar audio</string>
+    <string name="av_def_action_audio">Gravar áudio</string>
     <string name="av_widget_action_descr">Ação predefinida do widget:</string>
     <string name="av_widget_action">Ação widget padrão</string>
     <string name="av_video_format">Formato de saída de vídeo</string>
@@ -866,7 +866,7 @@
     <string name="recording_delete_confirm">Eliminar este item\?</string>
     <string name="recording_context_menu_arecord">Gravar nota de áudio</string>
     <string name="recording_context_menu_vrecord">Gravar nota de vídeo</string>
-    <string name="layer_recordings">Camada de gravação</string>
+    <string name="layer_recordings">Camada trilhos gravados</string>
     <string name="recording_can_not_be_played">Não foi possível reproduzir a gravação.</string>
     <string name="recording_context_menu_delete">Eliminar a gravação</string>
     <string name="recording_context_menu_play">Reproduzir</string>
@@ -883,7 +883,7 @@
     <string name="clear_dest_confirm">Tem a certeza que quer limpar o seu destino (e destinos intermédios)\?</string>
     <string name="precise_routing_mode_descr">Calcula rotas precisas sem falhas, mas com distância limitada e lento.</string>
     <string name="precise_routing_mode">Roteamento preciso (alfa)</string>
-    <string name="recording_context_menu_precord">Tirar uma foto</string>
+    <string name="recording_context_menu_precord">Tirar uma fotografia</string>
     <string name="dropbox_plugin_name">Extensão Dropbox</string>
     <string name="intermediate_points_change_order">Alterar ordem</string>
     <string name="srtm_paid_version_msg">Por favor, considere comprar a extensão \'Curvas de nível\' para apoiar o desenvolvimento.</string>
@@ -891,7 +891,7 @@
     <string name="av_def_action_choose">A pedido\?</string>
     <string name="av_video_format_descr">Formato de saída de vídeo:</string>
     <string name="av_use_external_recorder_descr">Usar gravador do sistema para vídeo.</string>
-    <string name="av_use_external_camera_descr">Utilizar a aplicação do sistema para fotos.</string>
+    <string name="av_use_external_camera_descr">Utilizar a aplicação do sistema para tirar fotografias.</string>
     <string name="av_use_external_camera">Usar aplicação da câmara</string>
     <string name="recording_playing">A reproduzir o áudio da gravação.
 \n%1$s</string>
@@ -901,7 +901,7 @@
     <string name="shared_string_control_stop">Parar</string>
     <string name="shared_string_control_start">Iniciar</string>
     <string name="map_widget_av_notes">Notas de áudio/vídeo</string>
-    <string name="osmand_srtm_short_description_80_chars">Extensão OsmAnd para curvas de nível off-line</string>
+    <string name="osmand_srtm_short_description_80_chars">Extensão OsmAnd para curvas de nível offline</string>
     <string name="map_widget_distancemeasurement">Medição da distância</string>
     <string name="audionotes_location_not_defined">O local para associar à nota ainda não está definido. Toque em \"Usar posição…\" para atribuir uma nota ao local especificado.</string>
     <string name="map_widget_audionotes">Notas de áudio</string>
@@ -909,8 +909,8 @@
     <string name="audionotes_plugin_name">Notas de áudio/vídeo</string>
     <string name="index_srtm_parts">Partes</string>
     <string name="index_srtm_ele">Curvas de nível</string>
-    <string name="recording_photo_description">Foto %1$s de %2$s</string>
-    <string name="av_def_action_picture">Tirar uma foto</string>
+    <string name="recording_photo_description">Fotografia %1$s de %2$s</string>
+    <string name="av_def_action_picture">Tirar uma fotografia</string>
     <string name="osmand_srtm_long_description_1000_chars">Esta extensão disponibiliza \'Curvas de nível\' e \'Sombras de relevo\', que podem ser aplicadas nos mapas padrão do OsmAnd. Estas funcionalidades podem ser apreciadas por atletas, caminhantes e qualquer pessoa interessada na informação do relevo de uma paisagem.
 \n
 \nOs dados globais (entre as latitudes 70° norte e 70° sul) são baseados nas medições do SRTM (Shuttle Radar Topography Mission) e do ASTER (Advanced Spaceborn Thermal Emission and Reflection Radiometer), um instrumento de imagens no satélite \'Terra\', o satélite principal do Sistema de Observação da Terra da NASA. O ASTER é um esforço conjunto da NASA, do Ministério da Economia, Comércio e Indústria do Japão e do Sistema Espacial Japonês (J-spacesystems).</string>
@@ -920,7 +920,7 @@
     <string name="srtm_plugin_name">Curvas de nível</string>
     <string name="download_select_map_types">Outros mapas</string>
     <string name="download_srtm_maps">Curvas de nível</string>
-    <string name="rendering_attr_noAdminboundaries_name">Limites</string>
+    <string name="rendering_attr_noAdminboundaries_name">Fronteiras regionais</string>
     <string name="rendering_attr_noAdminboundaries_description">Ocultar a visualização de limites regionais (níveis de administração 5 – 9).</string>
     <string name="recording_context_menu_show">Ver</string>
     <string name="item_unchecked">desmarcado</string>
@@ -948,7 +948,7 @@
     <string name="files_limit">%1$d ficheiros restantes</string>
     <string name="available_downloads_left">Faltam %1$d ficheiros para descarregar</string>
     <string name="install_paid">Versão completa</string>
-    <string name="cancel_route">Descartar a rota\?</string>
+    <string name="cancel_route">Cancelar a rota\?</string>
     <string name="cancel_navigation">Parar navegação</string>
     <string name="local_osm_changes_backup_successful">Ficheiro de alterações OSM %1$s gerado</string>
     <string name="local_osm_changes_backup_failed">Não foi possível fazer a cópia de segurança das alterações do OSM.</string>
@@ -970,11 +970,11 @@
     <string name="driving_region_europe_asia">Europa, Ásia, América Latina e similares</string>
     <string name="driving_region_uk">Reino Unido, Índia e similares</string>
     <string name="speak_title">Anunciar…</string>
-    <string name="speak_descr">Configurar anúncio de nomes de ruas, avisos de trânsito (paragens forçadas, lombas de velocidade), avisos de radares de trânsito, limites de velocidade.</string>
+    <string name="speak_descr">Configure as indicações sobre nomes de ruas, avisos de trânsito (portagens, lombas, passadeiras), radares e limites de velocidade.</string>
     <string name="speak_street_names">Nomes das ruas (TTS)</string>
     <string name="speak_speed_limit">Limite de velocidade</string>
     <string name="speak_cameras">Radares de velocidade</string>
-    <string name="speak_traffic_warnings">Avisos de tráfego</string>
+    <string name="speak_traffic_warnings">Informações de circulação</string>
     <string name="osb_author_or_password_not_specified">Especifique o nome de utilizador e a palavra-passe no OSM em \"Configurações\"</string>
     <string name="clear_intermediate_points">Remover destinos intermédios</string>
     <string name="keep_intermediate_points">Manter destinos intermédios</string>
@@ -985,7 +985,7 @@
     <string name="route_descr_lat_lon">Lat. %1$.3f, Lon. %2$.3f</string>
     <string name="route_to">Para:</string>
     <string name="route_via">Via:</string>
-    <string name="route_from">Desde:</string>
+    <string name="route_from">De:</string>
     <string name="destination_point">Destino %1$s</string>
     <string name="context_menu_item_destination_point">Definir como destino</string>
     <string name="please_select_address">Selecione primeiro a cidade ou rua</string>
@@ -1018,10 +1018,10 @@
     <string name="av_camera_focus_auto">Focagem automática</string>
     <string name="av_camera_focus_hiperfocal">Foco hiperfocal</string>
     <string name="av_camera_focus_edof">Profundidade de campo alargada (EDOF)</string>
-    <string name="av_camera_focus_infinity">O foco está definido como infinito</string>
+    <string name="av_camera_focus_infinity">Focar infinito</string>
     <string name="av_camera_focus_macro">Focagem macro (close-up)</string>
     <string name="av_camera_focus_continuous">A câmara tenta focar continuadamente</string>
-    <string name="av_photo_play_sound">Reproduzir o som do obturador da câmara</string>
+    <string name="av_photo_play_sound">Reproduzir som ao tirar fotografias</string>
     <string name="av_photo_play_sound_descr">Definir som ou silêncio ao fotografar.</string>
     <string name="driving_region_canada">Canadá</string>
     <string name="about_version">Versão:</string>
@@ -1082,7 +1082,7 @@
     <string name="app_mode_aircraft">Aeronave</string>
     <string name="local_osm_changes_delete_all_confirm">Tem a certeza que quer eliminar %1$d alterações no OSM\?</string>
     <string name="shared_string_delete_all">Eliminar tudo</string>
-    <string name="amenity_type_osmwiki">Wikipédia (off-line)</string>
+    <string name="amenity_type_osmwiki">Wikipédia (offline)</string>
     <string name="amenity_type_seamark">Marca marítima</string>
     <string name="app_modes_choose_descr">Escolha os perfis a mostrar.</string>
     <string name="app_modes_choose">Perfis da aplicação</string>
@@ -1113,7 +1113,7 @@
     <string name="lang_en">Inglês</string>
     <string name="lang_af">Africâner</string>
     <string name="lang_hy">Arménio</string>
-    <string name="calculate_osmand_route_without_internet">Cálculo off-line do segmento de rota OsmAnd</string>
+    <string name="calculate_osmand_route_without_internet">Calcular segmento de rota OsmAnd sem Internet</string>
     <string name="gpx_option_calculate_first_last_segment">Calcular rota de OsmAnd para o primeiro e último segmento da rota</string>
     <string name="use_displayed_track_for_navigation">Usar o trajeto indicado para a navegação\?</string>
     <string name="keep_and_add_destination_point">Adicionar como destino posterior</string>
@@ -1125,13 +1125,13 @@
     <string name="route_info">Informações da rota</string>
     <string name="routing_attr_prefer_motorway_name">Preferir autoestradas</string>
     <string name="routing_attr_prefer_motorway_description">Preferir autoestradas</string>
-    <string name="routing_attr_avoid_toll_name">Sem estradas com portagem</string>
+    <string name="routing_attr_avoid_toll_name">Evitar portagens</string>
     <string name="routing_attr_avoid_toll_description">Evitar estradas com portagem</string>
-    <string name="routing_attr_avoid_unpaved_name">Sem estradas não pavimentadas</string>
+    <string name="routing_attr_avoid_unpaved_name">Evitar estradas não pavimentadas</string>
     <string name="routing_attr_avoid_unpaved_description">Evitar estradas não pavimentadas</string>
-    <string name="routing_attr_avoid_ferries_name">Sem balsas/ferries</string>
+    <string name="routing_attr_avoid_ferries_name">Evitar balsas/ferries</string>
     <string name="routing_attr_avoid_ferries_description">Evita balsas/ferries</string>
-    <string name="routing_attr_avoid_motorway_name">Sem autoestradas</string>
+    <string name="routing_attr_avoid_motorway_name">Evitar autoestradas</string>
     <string name="routing_attr_avoid_motorway_description">Evita autoestradas</string>
     <string name="routing_attr_weight_name">Peso máximo</string>
     <string name="routing_attr_weight_description">Especifique o limite de peso permitido para veículos em rotas.</string>
@@ -1141,7 +1141,7 @@
     <string name="copying_osmand_one_file_descr">A copiar o ficheiro (%s) para novo destino…</string>
     <string name="copying_osmand_files_descr">A copiar os ficheiros OsmAnd para o novo destino (%s)…</string>
     <string name="copying_osmand_files">A copiar ficheiros de dados do OsmAnd…</string>
-    <string name="calculate_osmand_route_gpx">Cálculo de rota OsmAnd off-line</string>
+    <string name="calculate_osmand_route_gpx">Cálculo de rota OsmAnd offline</string>
     <string name="app_mode_truck">Camião</string>
     <string name="lang_eu">Basco</string>
     <string name="lang_be">Bielorrusso</string>
@@ -1226,7 +1226,7 @@
 \n
 \nToque longo para ver no mapa"</string>
     <string name="delay_navigation_start">Iniciar a orientação passo a passo automaticamente</string>
-    <string name="shared_string_selected_lowercase">selecionado</string>
+    <string name="shared_string_selected_lowercase">selecionado(s)</string>
     <string name="gpx_split_interval">Intervalo de divisão</string>
     <string name="gpx_info_waypoints">Ponto de rota: %1$s</string>
     <string name="gpx_info_distance">Distância: %1$s (%2$s pontos ) </string>
@@ -1247,7 +1247,7 @@
     <string name="traffic_warning">Aviso de tráfego</string>
     <string name="speak_favorites">Favoritos nas redondezas</string>
     <string name="speak_poi">POIs nas redondezas</string>
-    <string name="way_alarms">Avisos de tráfego</string>
+    <string name="way_alarms">Informações de circulação</string>
     <string name="sleep_mode_stop_dialog">Parar o GPS quando em segundo plano\?</string>
     <string name="stop_navigation_service">Parar</string>
     <string name="confirm_every_run">Perguntar sempre</string>
@@ -1287,10 +1287,10 @@
     <string name="dash_download_new_one">Descarregar novo mapa</string>
     <string name="map_locale">Idioma do mapa</string>
     <string name="navigate_point_zone">Zona</string>
-    <string name="download_tab_downloads">Todos os descarregamentos</string>
+    <string name="download_tab_downloads">Disponíveis</string>
     <string name="download_tab_updates">Atualizações</string>
-    <string name="download_tab_local">Local</string>
-    <string name="no_internet_connection">Não é possível descarregar, por favor, verifique a sua ligação à Internet.</string>
+    <string name="download_tab_local">Descarregados</string>
+    <string name="no_internet_connection">Não é possível descarregar. Verifique se tem ligação à Internet.</string>
     <string name="everything_up_to_date">Todos os ficheiros foram atualizados</string>
     <string name="use_opengl_render">Usar o renderizador OpenGL</string>
     <string name="home_button">Início</string>
@@ -1323,8 +1323,8 @@
     <string name="storage_directory">Armazenamento do mapa</string>
     <string name="shared_string_copy">Copiar</string>
     <string name="filter_poi_hint">Filtrar por nome</string>
-    <string name="search_poi_category_hint">Digite para pesquisar tudo</string>
-    <string name="shared_string_is_open">Abrir</string>
+    <string name="search_poi_category_hint">Digite para pesquisar em tudo</string>
+    <string name="shared_string_is_open">Aberto agora</string>
     <string name="rendering_attr_OSMMapperAssistant_name">Assistente de mapeador OSM</string>
     <string name="agps_info">Informação A-GPS</string>
     <string name="shared_string_manage">Gerir</string>
@@ -1348,12 +1348,12 @@
     <string name="version_settings_descr">Descarregar compilações noturnas.</string>
     <string name="proxy_pref_descr">Especifique um servidor proxy.</string>
     <string name="dash_download_manage">Gerir</string>
-    <string name="rendering_category_transport">Transporte</string>
+    <string name="rendering_category_transport">Transportes públicos</string>
     <string name="rendering_attr_tramTrainRoutes_name">Rotas de elétricos e comboios</string>
     <string name="rendering_attr_streetLighting_name">Iluminação pública</string>
     <string name="rendering_value__name">Predefinido</string>
     <string name="rendering_value_highContrastRoads_name">Estradas em alto contraste</string>
-    <string name="welcome_text">OsmAnd fornece mapas de navegação globais e navegação off-line.</string>
+    <string name="welcome_text">OsmAnd fornece mapas de navegação globais e navegação offline.</string>
     <string name="welcome_header">Bem-vindo(a)</string>
     <string name="current_route">Rota atual</string>
     <string name="osm_changes_added_to_local_edits">Mudanças no OSM adicionadas ao conjunto de alterações local</string>
@@ -1385,7 +1385,7 @@
     <string name="shared_string_disable">Desativar</string>
     <string name="shared_string_enabled">Ativado</string>
     <string name="shared_string_disabled">Desativado</string>
-    <string name="shared_string_selected">Selecionado</string>
+    <string name="shared_string_selected">Selecionado(s)</string>
     <string name="shared_string_deselect">Desmarcar</string>
     <string name="shared_string_deselect_all">Desmarcar tudo</string>
     <string name="shared_string_export">Exportar</string>
@@ -1398,25 +1398,25 @@
     <string name="shared_string_currently_recording_track">A gravar o trajeto</string>
     <string name="shared_string_audio">Áudio</string>
     <string name="shared_string_video">Vídeo</string>
-    <string name="shared_string_photo">Foto</string>
+    <string name="shared_string_photo">Fotografia</string>
     <string name="route_points">Pontos de rota</string>
     <string name="track_segments">Segmentos do trajeto</string>
     <string name="track_points">Pontos do trajeto</string>
     <string name="plugin_touringview_name">Ver mapa de turismo</string>
     <string name="plugin_nautical_name">Ver mapa náutico</string>
     <string name="plugin_ski_name">Ver mapa de esqui</string>
-    <string name="rename_failed">Renomeação falhou.</string>
+    <string name="rename_failed">A alteração do nome falhou.</string>
     <string name="back_to_map">Voltar ao mapa</string>
     <string name="share_note">Partilhar nota</string>
     <string name="location_on_map">Posição:\n Lat %1$s\n Lon %2$s</string>
     <string name="notes">Notas de áudio/vídeo</string>
-    <string name="online_map">Mapa on-line</string>
+    <string name="online_map">Mapa online</string>
     <string name="roads_only">Apenas estradas</string>
     <string name="rendering_attr_pisteRoutes_name">Pistas de esqui</string>
     <string name="free">%1$s livre</string>
     <string name="device_memory">Memória do dispositivo</string>
-    <string name="world_ski_missing">Para mostrar mapas de esqui, tem de descarregar o mapa off-line especial.</string>
-    <string name="nautical_maps_missing">Para mostrar mapas náuticos, tem de descarregar o mapa off-line especial.</string>
+    <string name="world_ski_missing">Para mostrar mapas de esqui, tem de descarregar o mapa offline especial.</string>
+    <string name="nautical_maps_missing">Para mostrar mapas náuticos, tem de descarregar o mapa offline especial.</string>
     <string name="edit_group">Editar grupo</string>
     <string name="parking_place">Lugar de estacionamento</string>
     <string name="version_settings">Compilações</string>
@@ -1426,7 +1426,7 @@
     <string name="wake_on_voice">Ligar o ecrã</string>
     <string name="configure_map">Configurar mapa</string>
     <string name="shared_string_waypoints">Pontos de rota</string>
-    <string name="shared_string_dismiss">Descartar</string>
+    <string name="shared_string_dismiss">Cancelar</string>
     <string name="rendering_category_others">Outros atributos do mapa</string>
     <string name="rendering_attr_showAccess_name">Mostrar restrições de acesso e portagens</string>
     <string name="rendering_attr_showSurfaceGrade_name">Mostrar qualidade da via</string>
@@ -1435,7 +1435,7 @@
     <string name="rendering_attr_coloredBuildings_name">Colorir edifícios por tipo</string>
     <string name="rendering_attr_alpineHiking_name">Escala de montanhismo (SAC)</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Camada superior de símbolos de montanhismo</string>
-    <string name="rendering_attr_showCycleRoutes_name">Mostrar rotas para bicicletas</string>
+    <string name="rendering_attr_showCycleRoutes_name">Rotas para bicicletas</string>
     <string name="rendering_attr_hideBuildings_name">Edifícios</string>
     <string name="rendering_attr_trolleybusRoutes_name">Rotas de troleicarros</string>
     <string name="favorite_category_dublicate_message">Por favor, use um nome de categoria que ainda não exista.</string>
@@ -1471,7 +1471,7 @@
     <string name="show_on_start_description">\'Desligado\' abre o mapa diretamente.</string>
     <string name="show_on_start">Mostrar no arranque</string>
     <string name="copied_to_clipboard">Copiado para a área de transferência</string>
-    <string name="osm_save_offline">Guardar off-line</string>
+    <string name="osm_save_offline">Guardar offline</string>
     <string name="osm_edit_modified_poi">POI do OpenStreetMap alterado</string>
     <string name="impassable_road_desc">Escolha as estradas que quer evitar durante a navegação.</string>
     <string name="shared_string_sound">Som</string>
@@ -1493,7 +1493,7 @@
     <string name="av_audio_bitrate">Taxa de bits do áudio</string>
     <string name="av_audio_bitrate_descr">Escolha a taxa de bits do áudio.</string>
     <string name="osm_edit_deleted_poi">POI do OSM eliminado</string>
-    <string name="context_menu_item_open_note">Abrir nota OSM</string>
+    <string name="context_menu_item_open_note">Criar nota OSM</string>
     <string name="osm_edit_reopened_note">Reabrir nota OSM</string>
     <string name="osm_edit_commented_note">Nota do OSM comentada</string>
     <string name="osm_edit_created_note">Nota do OSM adicionada</string>
@@ -1513,7 +1513,7 @@
     <string name="share_osm_edits_subject">Edições OSM partilhadas via OsmAnd</string>
     <string name="read_more">Ler mais</string>
     <string name="whats_new">Novidades</string>
-    <string name="rendering_attr_hideProposed_name">Objetos planeados</string>
+    <string name="rendering_attr_hideProposed_name">Elementos com construção planeada</string>
     <string name="shared_string_upload">Enviar</string>
     <string name="osm_edit_created_poi">POI OSM adicionado</string>
     <string name="world_map_download_descr">Mapa base mundial (cobrindo o mundo inteiro em baixo nível de ampliação) ausente ou ultrapassado. Por favor, considere descarregá-lo para uma visão global.</string>
@@ -1523,7 +1523,7 @@
     <string name="go_to_map">Mostrar mapa</string>
     <string name="simulate_initial_startup_descr">Define o sinalizador que indica a primeira inicialização da aplicação, mantém todas as outras configurações inalteradas.</string>
     <string name="simulate_initial_startup">Simular arranque inicial da aplicação</string>
-    <string name="share_geo">geo:</string>
+    <string name="share_geo">Outras aplicações de mapas</string>
     <string name="share_menu_location">Partilhar localização</string>
     <string name="shared_string_send">Enviar</string>
     <string name="osmand_running_in_background">Executar em segundo plano</string>
@@ -1535,7 +1535,7 @@
     <string name="av_locations_descr">Ficheiro GPX com localizações.</string>
     <string name="av_locations">Localizações</string>
     <string name="plugin_settings">Extensões</string>
-    <string name="routing_attr_avoid_shuttle_train_name">Sem comboio vaivém</string>
+    <string name="routing_attr_avoid_shuttle_train_name">Evitar comboios vaivém</string>
     <string name="routing_attr_avoid_shuttle_train_description">Evita usar comboios vaivém, em pequenos trajetos predefinidos como aeroportos</string>
     <string name="traffic_warning_hazard">Perigo</string>
     <string name="rendering_value_boldOutline_name">Contorno em negrito</string>
@@ -1545,8 +1545,8 @@
     <string name="rendering_value_defaultTranslucentCyan_name">Padrão (ciano translúcido)</string>
     <string name="rendering_attr_currentTrackColor_name">Cor GPX</string>
     <string name="rendering_attr_currentTrackColor_description">Cor GPX</string>
-    <string name="rendering_attr_currentTrackWidth_name">Espessura GPX</string>
-    <string name="rendering_attr_currentTrackWidth_description">Espessura GPX</string>
+    <string name="rendering_attr_currentTrackWidth_name">Espessura dos trilhos GPX</string>
+    <string name="rendering_attr_currentTrackWidth_description">Espessura dos trilhos GPX</string>
     <string name="rendering_value_red_name">Vermelho</string>
     <string name="rendering_value_translucent_red_name">Vermelho translúcido</string>
     <string name="rendering_value_translucent_orange_name">Laranja translúcido</string>
@@ -1591,9 +1591,9 @@
     <string name="lang_ta">Tamil</string>
     <string name="archive_wikipedia_data">Tem dados guardados da Wikipédia que são antigos e incompatíveis. Quer arquivá-los\?</string>
     <string name="download_wikipedia_files">Quer descarregar dados adicionais da Wikipédia (%1$s MB)\?</string>
-    <string name="gps_network_not_enabled">O serviço de localização não está ativado. Ativar\?</string>
+    <string name="gps_network_not_enabled">O serviço de localização não está ativado. Quer ativá-lo\?</string>
     <string name="shared_string_import2osmand">Importar para o OsmAnd</string>
-    <string name="read_full_article">Ler o artigo completo (on-line)</string>
+    <string name="read_full_article">Ler o artigo completo (na Internet)</string>
     <string name="shared_string_wikipedia">Wikipédia</string>
     <string name="local_indexes_cat_wiki">Wikipédia</string>
     <string name="shared_string_show_details">Mostrar detalhes</string>
@@ -1626,7 +1626,7 @@
 \n- Sincronizar grupos e dispositivos com o servidor;
 \n- Gerir grupos e dispositivos num painel de controlo pessoal no site web.</string>
     <string name="anonymous_user">Utilizador anónimo</string>
-    <string name="logged_as">Conectado como %1$s</string>
+    <string name="logged_as">Sessão iniciada como %1$s</string>
     <string name="shared_string_not_selected">Não selecionado</string>
     <string name="select_month_and_country">Mês e país:</string>
     <string name="updates_size">Tamanho das atualizações</string>
@@ -1659,7 +1659,7 @@
     <string name="map_mode">Modo do mapa</string>
     <string name="rendering_value_thin_name">Fino</string>
     <string name="rendering_value_medium_name">Médio</string>
-    <string name="rendering_value_bold_name">Negrito</string>
+    <string name="rendering_value_bold_name">Grosso</string>
     <string name="storage_permission_restart_is_required">Agora a aplicação está autorizada a gravar no armazenamento externo, mas primeiro é necessário reiniciar a aplicação.</string>
     <string name="shared_string_move_up">Mover ↑</string>
     <string name="shared_string_move_down">Mover ↓</string>
@@ -1675,7 +1675,7 @@
     <string name="number_of_recipients">Número de destinatários</string>
     <string name="osm_user_stat">Edições %1$s, posição %2$s, total de edições %3$s</string>
     <string name="osm_editors_ranking">Classificação de editores do OSM</string>
-    <string name="osm_live_subscription">Assinatura do OsmAnd Live</string>
+    <string name="osm_live_subscription">Subscrição do OsmAnd Live</string>
     <string name="osm_live_subscribe_btn">Subscrever</string>
     <string name="osm_live_email_desc">Necessário para o informar sobre as suas contribuições.</string>
     <string name="osm_live_user_public_name">Nome público</string>
@@ -1706,7 +1706,7 @@
     <string name="enter_country_name">Inserir nome do país</string>
     <string name="new_version">Nova versão</string>
     <string name="begin_with_osmand_menu_group">Primeiros passos com o OsmAnd</string>
-    <string name="application_dir_description">Escolha onde pretende guardar os ficheiros de mapas e de outros dados.</string>
+    <string name="application_dir_description">Escolha onde pretende guardar os ficheiros de mapas e outros dados.</string>
     <string name="other_menu_group">Outros</string>
     <string name="use_osm_live_routing_description">Ativar a navegação para mudanças do OsmAnd Live.</string>
     <string name="use_osm_live_routing">Navegação OsmAnd Live</string>
@@ -1725,10 +1725,10 @@
     <string name="osm_live_thanks">Obrigado por apoiar o OsmAnd!
 \nPara ativar todos os novos recursos tem que reiniciar o OsmAnd.</string>
     <string name="osm_live_region_desc">Parte da sua doação será enviada aos utilizadores OSM que submetem alterações ao mapa nessa região.</string>
-    <string name="osm_live_subscription_settings">Configurações da assinatura</string>
-    <string name="osm_live_ask_for_purchase">Por favor primeiro compre a assinatura do OsmAnd Live</string>
-    <string name="osm_live_header">Esta assinatura permite atualizações hora a hora de todos os mapas à volta do mundo.
-\nParte da renda regressa à comunidade do OpenStreetMap e paga-se para cada contribuição no OpenStreetMap.
+    <string name="osm_live_subscription_settings">Configurações da subscrição</string>
+    <string name="osm_live_ask_for_purchase">Por favor primeiro compre a subscrição do OsmAnd Live</string>
+    <string name="osm_live_header">Esta subscrição permite atualizações hora a hora de todos os mapas à volta do mundo.
+\nParte da renda regressa à comunidade do OpenStreetMap e é paga para cada contribuição no OpenStreetMap.
 \nSe gosta do OsmAnd e do OpenStreetMap e quer apoiar e ser apoiado por eles, esta é a maneira perfeita para o fazer.</string>
     <string name="select_map_marker">Selecione o marcador do mapa</string>
     <string name="map_markers_other">Outros marcadores</string>
@@ -1751,10 +1751,10 @@
     <string name="clear_active_markers_q">Remover todos os marcadores ativos\?</string>
     <string name="clear_markers_history_q">Limpar o histórico dos marcadores de mapa\?</string>
     <string name="active_markers">Marcadores ativos</string>
-    <string name="map_markers">Marcadores de mapa</string>
+    <string name="map_markers">Marcadores</string>
     <string name="map_marker">Marcador de mapa</string>
     <string name="consider_turning_polygons_off">É recomendável desativar a renderização de polígono.</string>
-    <string name="rendering_attr_showMtbRoutes_name">Mostrar trilhos de bicicletas de montanha</string>
+    <string name="rendering_attr_showMtbRoutes_name">Trilhos de bicicletas BTT</string>
     <string name="show_polygons">Mostrar polígonos</string>
     <string name="find_parking">Encontrar estacionamento</string>
     <string name="shared_string_status">Situação</string>
@@ -1764,11 +1764,11 @@
     <string name="shared_string_remove">Remover</string>
     <string name="shared_string_read_more">Ler mais</string>
     <string name="clear_updates_proposition_message">Remover atualizações descarregadas e voltar à edição do mapa original</string>
-    <string name="add_time_span">Adicionar intervalo de tempo</string>
+    <string name="add_time_span">Adicionar intervalo de tempo adicional</string>
     <string name="road_blocked">Estrada bloqueada</string>
     <string name="shared_string_select">Selecionar</string>
     <string name="switch_start_finish">Inverter ponto de partida e destino</string>
-    <string name="rendering_attr_hideIcons_name">Ícones POI</string>
+    <string name="rendering_attr_hideIcons_name">Ícones dos POI</string>
     <string name="item_removed">Item removido</string>
     <string name="n_items_removed">Itens removidos</string>
     <string name="shared_string_undo_all">Desfazer tudo</string>
@@ -1776,7 +1776,7 @@
     <string name="starting_point">Ponto de partida</string>
     <string name="rec_split">Divisão das gravações</string>
     <string name="rec_split_title">Usar divisão das gravações</string>
-    <string name="rec_split_clip_length">Duração do recorte</string>
+    <string name="rec_split_clip_length">Duração da divisão</string>
     <string name="rec_split_clip_length_desc">Limite de tempo máximo para clipes gravados.</string>
     <string name="lang_mk">Macedónio</string>
     <string name="lang_sh">Servo-Croata</string>
@@ -1802,19 +1802,19 @@
     <!-- string name="lat_lon_pattern">Lat: %1$.5f Lon: %2$.5f</string -->
     <string name="follow_us">Siga-nos</string>
     <string name="skip_map_downloading">Ignorar o descarregamento de mapas</string>
-    <string name="first_usage_greeting">Obter direções e descobrir novos lugares sem ligação à Internet</string>
+    <string name="first_usage_greeting">Obtenha direções e descubra novos lugares sem ser necessário estar ligado à Internet</string>
     <string name="shared_string_skip">Ignorar</string>
-    <string name="search_another_country">Selecione outra região</string>
+    <string name="search_another_country">Selecionar outra região</string>
     <string name="shared_string_change">Alterar</string>
     <string name="storage_directory_card">Cartão de memória</string>
-    <string name="skip_map_downloading_desc">Não tem nenhum mapa off-line instalado. Pode escolher um mapa na lista ou descarregar mapas mais tarde através do \'menu - %1$s\'.</string>
+    <string name="skip_map_downloading_desc">Não tem nenhum mapa offline instalado. Pode escolher um mapa na lista ou descarregar mapas mais tarde através do \'menu - %1$s\'.</string>
     <string name="shared_string_markers">Marcadores</string>
     <string name="coordinates_format">Formato de coordenadas</string>
     <string name="use_system_keyboard">Usar teclado do sistema</string>
     <string name="fast_coordinates_input_descr">Escolher formato de introdução de coordenada. Poderá sempre alterá-lo ao selecionar \'Opções\'.</string>
     <string name="fast_coordinates_input">Introdução rápida de coordenadas</string>
-    <string name="routing_attr_avoid_ice_roads_fords_name">Sem estradas de gelo ou vaus</string>
-    <string name="routing_attr_avoid_ice_roads_fords_description">Evitar estradas de gelo e vaus.</string>
+    <string name="routing_attr_avoid_ice_roads_fords_name">Evitar estradas de gelo ou vaus</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">Evitar estradas de gelo e vaus (passagens em riachos baixos).</string>
     <string name="use_location">Usar posição</string>
     <string name="add_location_as_first_point_descr">Adicionar a sua posição como ponto de partida para planear uma rota perfeita.</string>
     <string name="my_location">A minha posição</string>
@@ -1825,8 +1825,8 @@
     <string name="marker_save_as_track_descr">Exporte os seus marcadores para um ficheiro que pode especificar aqui:</string>
     <string name="move_to_history">Mover para histórico</string>
     <string name="group_will_be_removed_after_restart">O grupo terá desaparecido na próxima vez que iniciar a aplicação.</string>
-    <string name="show_guide_line">Mostrar linhas direcionais</string>
-    <string name="show_arrows_on_the_map">Mostrar setas no mapa</string>
+    <string name="show_guide_line">Mostrar linhas para marcadores</string>
+    <string name="show_arrows_on_the_map">Mostrar setas para marcadores</string>
     <string name="show_passed">Mostrar passado</string>
     <string name="hide_passed">Esconder o passado</string>
     <string name="remove_from_map_markers">Remover dos \'Marcadores do mapa\'</string>
@@ -1884,7 +1884,7 @@
     <string name="mapillary_menu_title_tile_cache">Ficheiros temporários dos mosaicos</string>
     <string name="wrong_user_name">Nome de utilizador errado</string>
     <string name="shared_string_to">Para</string>
-    <string name="mapillary_menu_date_from">A partir de</string>
+    <string name="mapillary_menu_date_from">De</string>
     <string name="mapillary_menu_descr_dates">Ver apenas imagens adicionadas</string>
     <string name="mapillary_menu_title_dates">Data</string>
     <string name="mapillary_menu_edit_text_hint">Introduza nome de utilizador</string>
@@ -1900,15 +1900,15 @@
     <string name="shared_string_install">Instalar</string>
     <string name="improve_coverage_mapillary">Melhorar cobertura fotográfica com Mapillary</string>
     <string name="improve_coverage_install_mapillary_desc">Instale o Mapillary para adicionar fotos a este local do mapa.</string>
-    <string name="online_photos">Fotos on-line</string>
-    <string name="shared_string_add_photos">Adicionar fotos</string>
-    <string name="no_photos_descr">Não há fotos aqui.</string>
-    <string name="mapillary_action_descr">Partilhe a sua vista ao nível da rua através do Mapillary.</string>
+    <string name="online_photos">Fotografias na Internet</string>
+    <string name="shared_string_add_photos">Adicionar fotografias</string>
+    <string name="no_photos_descr">Não há fotografias aqui.</string>
+    <string name="mapillary_action_descr">Partilhe as suas imagens ao nível do solo no Mapillary.</string>
     <string name="mapillary_widget">Widget Mapillary</string>
     <string name="mapillary_widget_descr">Permite contribuir rapidamente para o Mapillary.</string>
-    <string name="mapillary_descr">Fotos on-line ao nível da rua para todos. Descubra locais, colabore, capture o mundo.</string>
+    <string name="mapillary_descr">Fotografias online ao nível da rua para todos. Descubra locais, colabore, capture o mundo.</string>
     <string name="mapillary">Mapillary</string>
-    <string name="plugin_mapillary_descr">Fotos ao nível da rua para todos. Descubra locais, colabore, capture o mundo.</string>
+    <string name="plugin_mapillary_descr">Fotografias ao nível da rua para todos. Descubra locais, colabore, capture o mundo.</string>
     <string name="private_access_routing_req">O seu destino está localizado numa área de acesso privado. Permitir uso de estradas privadas para esta viagem\?</string>
     <string name="restart_search">Reiniciar pesquisa</string>
     <string name="increase_search_radius">Aumentar raio de pesquisa</string>
@@ -1925,7 +1925,7 @@
     <string name="srtm_purchase_header">Compre e instale a extensão \'Curvas de nível\' para mostrar as áreas verticais graduadas.</string>
     <string name="srtm_color_scheme">Esquema de cores</string>
     <string name="show_from_zoom_level">Mostrar a partir do nível de ampliação</string>
-    <string name="routing_attr_allow_private_name">Permitir acesso privado</string>
+    <string name="routing_attr_allow_private_name">Ativar acesso a vias privadas</string>
     <string name="routing_attr_allow_private_description">Permitir acesso a áreas privadas.</string>
     <string name="display_zoom_level">Mostrar nível de zoom: %1$s</string>
     <string name="favorite_group_name">Nome do grupo</string>
@@ -2013,7 +2013,7 @@
     <string name="routing_attr_height_obstacles_name">Utilizar dados de elevação</string>
     <string name="rendering_attr_depthContours_description">Mostrar pontos e contornos de profundidade.</string>
     <string name="rendering_attr_depthContours_name">Contornos de profundidade náuticos</string>
-    <string name="show_transparency_seekbar">Mostra a transparência da barra de navegação</string>
+    <string name="show_transparency_seekbar">Mostrar barra deslizante de transparência</string>
     <string name="shared_string_widgets">Widgets</string>
     <string name="rendering_attr_hideUnderground_name">Objetos subterrâneos</string>
     <string name="auto_split_recording_title">Dividir automaticamente as gravações após quebras</string>
@@ -2023,15 +2023,15 @@
     <string name="rendering_value_high_name">Alto</string>
     <string name="rendering_value_medium_w_name">Médio</string>
     <string name="rendering_value_low_name">Baixo</string>
-    <string name="rendering_attr_contourWidth_description">Largura das curvas de nível</string>
-    <string name="rendering_attr_contourWidth_name">Largura das curvas de nível</string>
+    <string name="rendering_attr_contourWidth_description">Espessura das curvas de nível</string>
+    <string name="rendering_attr_contourWidth_name">Espessura das curvas de nível</string>
     <string name="rendering_attr_hideWaterPolygons_description">Água</string>
-    <string name="rendering_attr_hideWaterPolygons_name">Ocultar água</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Corpos de água largos</string>
     <string name="routing_attr_allow_motorway_name">Utilizar autoestradas</string>
     <string name="routing_attr_allow_motorway_description">Permitir autoestradas.</string>
     <string name="wiki_around">Artigos da Wikipédia próximos</string>
     <string name="search_map_hint">Cidade ou região</string>
-    <string name="route_roundabout_short">Use a saída %1$d e continue</string>
+    <string name="route_roundabout_short">Saia na %1$d saída para</string>
     <string name="upload_poi">Enviar pontos de interesse (POI)</string>
     <string name="route_calculation">Cálculo da rota</string>
     <string name="gpx_no_tracks_title">Ainda não tem nenhuns ficheiros de trilhos</string>
@@ -2046,7 +2046,7 @@
     <string name="shared_string_paused">Em pausa</string>
     <string name="shared_string_trip">Viagem</string>
     <string name="shared_string_recorded">Gravado</string>
-    <string name="shared_string_record">Registo</string>
+    <string name="shared_string_record">Gravar</string>
     <string name="gpx_logging_no_data">Sem dados</string>
     <string name="rendering_attr_contourColorScheme_description">Esquema de cores das curvas de nível</string>
     <string name="save_track_min_speed">Velocidade mínima para registo</string>
@@ -2076,10 +2076,10 @@
     <string name="delete_filter">Eliminar filtro</string>
     <string name="new_filter">Novo filtro</string>
     <string name="new_filter_desc">Por favor introduza o nome do novo filtro, este vai ser adicionado ao separador \'Categorias\'.</string>
-    <string name="osm_live_payment_desc">A assinatura é cobrada no período selecionado. Cancele a assinatura no Google Play a qualquer altura.</string>
+    <string name="osm_live_payment_desc">A subscrição é debitada no período selecionado. Cancele a subscrição no Google Play a qualquer altura.</string>
     <string name="donation_to_osm">Doação para a comunidade OpenStreetMap</string>
-    <string name="donation_to_osm_desc">Parte da sua doação é enviada aos colaboradores do OSM. O custo da assinatura permanece o mesmo.</string>
-    <string name="osm_live_subscription_desc">A subscrição permite atualizações a cada hora, diárias, semanais e descarregamentos ilimitados de todos os mapas globalmente.</string>
+    <string name="donation_to_osm_desc">Parte do seu donativo é enviado aos colaboradores do OpenStreetMap. O custo da subscrição permanece o mesmo.</string>
+    <string name="osm_live_subscription_desc">A subscrição permite atualizações a cada hora, dia ou semana e descarregamentos ilimitados de todos os mapas globalmente.</string>
     <string name="get_it">Obter</string>
     <string name="get_for">Comprar por %1$s</string>
     <string name="osm_live_banner_desc">Obter descarregamentos ilimitados de mapas, adicionando atualizações semanais, diárias e a cada hora.</string>
@@ -2095,14 +2095,14 @@
     <string name="storage_place_description">Armazenamento de dados de OsmAnd (para mapas, ficheiros de trilhos, etc.): %1$s.</string>
     <string name="give_permission">Conceder permissão</string>
     <string name="allow_access_location">Permitir acesso à localização</string>
-    <string name="search_my_location">Encontrar a minha posição</string>
+    <string name="search_my_location">Encontrar a minha localização</string>
     <string name="update_all_maps_now">Atualizar todos os mapas agora\?</string>
     <string name="clear_tile_data">Eliminar todos os mosaicos</string>
     <string name="routing_attr_short_way_name">Percurso económico</string>
     <string name="replace_favorite_confirmation">Tem a certeza que quer substituir o favorito %1$s\?</string>
     <string name="rendering_attr_hideOverground_name">Objetos à superfície</string>
     <string name="get_started">Começar</string>
-    <string name="route_stops_before">%1$s paragens antes</string>
+    <string name="route_stops_before">%1$s paragens anteriores</string>
     <string name="coords_search">Pesquisa de coordenadas</string>
     <string name="advanced_coords_search">Pesquisa avançada de coordenadas</string>
     <string name="back_to_search">Retroceder para pesquisa</string>
@@ -2126,20 +2126,20 @@
     <string name="quick_action_edit_actions">Editar ações</string>
     <string name="get_osmand_live">Adquira o OsmAnd Live para desbloquear todas as funcionalidades: atualizações diárias de mapas com descarregamentos ilimitados, todas as extensões pagas e gratuitas, Wikipédia, Wikivoyage e muito mais.</string>
     <string name="unirs_render_descr">Alteração do estilo padrão para aumentar o contraste de caminhos pedestres e ciclovias. Usa cores clássicas do Mapnik.</string>
-    <string name="shared_string_bookmark">Marcador</string>
-    <string name="hide_full_description">Esconder descrição completa</string>
+    <string name="shared_string_bookmark">Favorito</string>
+    <string name="hide_full_description">Ocultar descrição completa</string>
     <string name="show_full_description">Mostrar a descrição completa</string>
     <string name="thank_you_for_feedback">Obrigado pelos seus comentários</string>
     <string name="search_street">Procurar rua</string>
     <string name="shared_string_restore">Restaurar</string>
-    <string name="keep_passed_markers_descr">Os marcadores adicionados como um grupo de favoritos ou ponto de rota GPX marcados como Passado permanecerão no mapa. Se o grupo não estiver ativo, os marcadores desaparecerão do mapa.</string>
-    <string name="keep_passed_markers">Manter marcadores passados no mapa</string>
+    <string name="keep_passed_markers_descr">Os marcadores adicionados como um grupo de favoritos ou ponto de rota GPX marcados como visitado (passado) permanecerão no mapa. Se o grupo não estiver ativo, os marcadores desaparecerão do mapa.</string>
+    <string name="keep_passed_markers">Manter marcadores visitados</string>
     <string name="more_transport_on_stop_hint">Outros transportes disponíveis nesta paragem.</string>
     <string name="ask_for_location_permission">Por favor, conceda ao OsmAnd o acesso à localização para continuar.</string>
     <string name="markers_remove_dialog_msg">Eliminar o marcador de mapa \'%s\'\?</string>
     <string name="edit_map_marker">Editar marcador de mapa</string>
     <string name="third_party_application">Aplicação de terceiros</string>
-    <string name="start_search_from_city">Primeiro especificar cidade/sítio/localidade</string>
+    <string name="start_search_from_city">Pesquisa progressiva cidade&gt;vila&gt;aldeia</string>
     <string name="osm_live_plan_pricing">Planos e preços</string>
     <string name="osm_live_payment_monthly_title">Mensalmente</string>
     <string name="osm_live_payment_3_months_title">A cada três meses</string>
@@ -2147,13 +2147,13 @@
     <string name="osm_live_payment_month_cost_descr">%1$s / mês</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / mês</string>
     <string name="osm_live_payment_discount_descr">Poupe %1$s</string>
-    <string name="osm_live_payment_current_subscription">Assinatura atual</string>
+    <string name="osm_live_payment_current_subscription">Subscrição atual</string>
     <string name="osm_live_payment_renews_monthly">Renova mensalmente</string>
     <string name="osm_live_payment_renews_quarterly">Renova trimestralmente</string>
     <string name="osm_live_payment_renews_annually">Renova anualmente</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
     <string name="osm_live_payment_header">Frequência do pagamento:</string>
-    <string name="osm_live_payment_contribute_descr">As doações ajudam a financiar a cartografia do OpenStreetMap.</string>
+    <string name="osm_live_payment_contribute_descr">Os donativos ajudam a financiar a cartografia do OpenStreetMap.</string>
     <string name="off_road_render_descr">Para condução todo-o-terreno com base no estilo \'Topo\' e para utilização com imagens de satélite verdes na camada inferior. Redução da espessura das estradas principais, aumento da espessura dos trajetos, caminhos, ciclovias e outras vias.</string>
     <string name="nautical_render_descr">Para navegação náutica. Características: bóias, faróis, cursos de rios, vias marítimas e marcas, portos, serviços de navegação, contornos de profundidade.</string>
     <string name="ski_map_render_descr">Para esquiar. Contém pistas de esqui, elevadores, pistas de cross country, etc. Escurece objetos de mapa secundários.</string>
@@ -2164,15 +2164,15 @@
     <string name="default_render_descr">Estilo de propósito geral. Renderização simplificada e limpa em cidades densamente povoadas. Características principais: curvas de nível, rotas, qualidade de superfície, restrições de acesso, escudos rodoviários, caminhos de renderização de acordo com a escala SAC, características desportivas Whitewater.</string>
     <string name="open_wikipedia_link_online">Abrir página da Wikipédia na Internet</string>
     <string name="open_wikipedia_link_online_description">A hiperligação será aberta no navegador de Internet.</string>
-    <string name="read_wikipedia_offline_description">Obtenha uma assinatura do OsmAnd Live para ler artigos da Wikipédia e da Wikivoyage desligado da Internet.</string>
+    <string name="read_wikipedia_offline_description">Obtenha uma subscrição do OsmAnd Live para ler artigos da Wikipédia e da Wikivoyage desligado da Internet.</string>
     <string name="how_to_open_link">Como abrir a hiperligação\?</string>
     <string name="read_wikipedia_offline">Ler a Wikipédia desligado da Internet</string>
     <string name="download_all">Descarregar tudo</string>
     <string name="shared_string_restart">Reiniciar a aplicação</string>
     <string name="show_images">Mostrar imagens</string>
-    <string name="purchase_cancelled_dialog_title">Cancelou a sua assinatura do OsmAnd Live</string>
-    <string name="purchase_cancelled_dialog_descr">Renovar assinatura para continuar a utilizar todas as funcionalidades:</string>
-    <string name="maps_you_need_descr">Com base nos artigos que marcou, sugerimos que descarregue os seguintes mapas:</string>
+    <string name="purchase_cancelled_dialog_title">Cancelou a sua subscrição do OsmAnd Live</string>
+    <string name="purchase_cancelled_dialog_descr">Renovar a subscrição para continuar a utilizar todas as funcionalidades:</string>
+    <string name="maps_you_need_descr">Com base nos artigos que marcou como favoritos, sugerimos que descarregue os seguintes mapas:</string>
     <string name="maps_you_need">Mapas que precisa</string>
     <string name="osmand_team">Equipa do OsmAnd</string>
     <string name="popular_destinations">Destinos populares</string>
@@ -2187,7 +2187,7 @@
     <string name="start_editing_card_description">Pode e deve editar qualquer artigo no Wikivoyage. Partilhe saber, experiência, talento e a sua atenção.</string>
     <string name="start_editing">Começar a editar</string>
     <string name="get_unlimited_access">Obter acesso ilimitado</string>
-    <string name="welcome_to_open_beta">Bem-vindo ao beta aberto</string>
+    <string name="welcome_to_open_beta">Bem-vindo à versão beta aberta</string>
     <string name="wikivoyage_travel_guide">Guias de viagem</string>
     <string name="wikivoyage_travel_guide_descr">Guias para os lugares mais interessantes do mundo dentro do OsmAnd, sem uma conexão com a Internet.</string>
     <string name="monthly_map_updates">Atualizações de mapas mensais</string>
@@ -2209,11 +2209,11 @@
     <string name="shared_string_only_with_wifi">Apenas em Wi-Fi</string>
     <string name="wikivoyage_download_pics">Descarregar imagens</string>
     <string name="wikivoyage_download_pics_descr">As imagens do artigo podem ser descarregadas para uso offline.
-\nSempre disponível em \'Explorar\' → \' Opções \'.</string>
+\nConfigure em \'Explorar\' → \' Opções \'.</string>
     <string name="shared_string_wifi_only">Apenas em Wi-Fi</string>
     <string name="select_travel_book">Selecione um livro de viagem</string>
     <string name="shared_string_travel_book">Livro de viagens</string>
-    <string name="online_webpage_warning">Página disponível apenas on-line. Abrir no navegador da web\?</string>
+    <string name="online_webpage_warning">Página disponível apenas online. Abrir no navegador da web\?</string>
     <string name="images_cache">Cache de imagens</string>
     <string name="delete_search_history">Eliminar histórico de pesquisa</string>
     <string name="download_images">Descarregar imagens</string>
@@ -2222,7 +2222,7 @@
     <string name="article_removed">Artigo removido</string>
     <string name="wikivoyage_search_hint">Pesquisar por país, cidade ou província</string>
     <string name="shared_string_read">Ler</string>
-    <string name="saved_articles">Artigos marcados</string>
+    <string name="saved_articles">Artigos favoritos</string>
     <string name="shared_string_explore">Explorar</string>
     <string name="shared_string_contents">Conteúdo</string>
     <string name="shared_string_result">Resultado</string>
@@ -2240,17 +2240,17 @@
     <string name="enter_lon">Digite a longitude</string>
     <string name="enter_lat">Digite a latitude</string>
     <string name="enter_lat_and_lon">Digite a latitude e a longitude</string>
-    <string name="dd_mm_ss_format">DD°MM′SS″</string>
-    <string name="dd_dddddd_format">DD.DDDDDD°</string>
-    <string name="dd_ddddd_format">DD.DDDDD°</string>
-    <string name="dd_mm_mmmm_format">DD°MM.MMMM′</string>
-    <string name="dd_mm_mmm_format">DD°MM.MMM′</string>
+    <string name="dd_mm_ss_format">GG°MM′SS″</string>
+    <string name="dd_dddddd_format">GG.GGGGGG°</string>
+    <string name="dd_ddddd_format">GG.GGGGG°</string>
+    <string name="dd_mm_mmmm_format">GG°MM.MMMM′</string>
+    <string name="dd_mm_mmm_format">GG°MM.MMM′</string>
     <string name="east_abbreviation">E</string>
     <string name="west_abbreviation">O</string>
     <string name="south_abbreviation">S</string>
     <string name="north_abbreviation">N</string>
     <string name="optional_point_name">Nome do ponto (opcional)</string>
-    <string name="transport_nearby_routes_within">Rotas próximas dentro de</string>
+    <string name="transport_nearby_routes_within">Rotas próximas a menos de</string>
     <string name="transport_nearby_routes">A menos de</string>
     <string name="enter_the_file_name">Digite o nome do ficheiro.</string>
     <string name="map_import_error">Erro ao importar mapa</string>
@@ -2261,7 +2261,7 @@
     <string name="first_intermediate_dest_description">Adicionar paragem inicial</string>
     <string name="subsequent_dest_description">Mover destino para cima e criar destino</string>
     <string name="show_closed_notes">Mostrar notas fechadas</string>
-    <string name="switch_osm_notes_visibility_desc">Mostrar ou ocultar notas do OpenStreetMap no mapa.</string>
+    <string name="switch_osm_notes_visibility_desc">Mostrar notas do OpenStreetMap.</string>
     <string name="gpx_file_desc">GPX - adequado para exportar para o JOSM ou outros editores do OSM.</string>
     <string name="osc_file_desc">OSC - adequado para exportar para o OSM.</string>
     <string name="shared_string_gpx_file">Ficheiro GPX</string>
@@ -2280,8 +2280,8 @@
     <string name="context_menu_read_full_article">Ler o artigo completo</string>
     <string name="context_menu_read_article">Ler o artigo</string>
     <string name="context_menu_points_of_group">Todos os pontos do grupo</string>
-    <string name="open_from">Aberto desde as</string>
-    <string name="open_till">Aberto até às</string>
+    <string name="open_from">Abre às</string>
+    <string name="open_till">Fecha às</string>
     <string name="will_close_at">Fecha às</string>
     <string name="will_open_at">Abre às</string>
     <string name="will_open_on">Abre às</string>
@@ -2292,7 +2292,7 @@
     <string name="shared_string_actions">Ações</string>
     <string name="shared_string_marker">Marcador</string>
     <string name="empty_state_osm_edits">Criar ou alterar objetos OSM</string>
-    <string name="empty_state_osm_edits_descr">Criar ou alterar POIs do OSM, abrir ou comentar notas do OSM e contribuir com ficheiros de GPX gravados.</string>
+    <string name="empty_state_osm_edits_descr">Criar ou alterar POIs do OSM, criar ou comentar notas do OSM e contribuir com ficheiros de GPX gravados.</string>
     <string name="shared_string_deleted">Eliminado</string>
     <string name="shared_string_edited">Editado</string>
     <string name="shared_string_added">Adicionado</string>
@@ -2300,7 +2300,7 @@
     <string name="one_tap_active_descr">Toque num marcador no mapa para movê-lo para a parte superior dos marcadores ativos sem abrir o menu de contexto.</string>
     <string name="one_tap_active">\'Um toque\' ativo</string>
     <string name="empty_state_av_notes">Faça notas!</string>
-    <string name="empty_state_av_notes_desc">Adicione notas de áudio, vídeo ou foto em qualquer ponto do mapa, usando o widget ou o menu de contexto.</string>
+    <string name="empty_state_av_notes_desc">Adicione notas de áudio, vídeo ou fotografia em qualquer ponto do mapa, usando o widget ou o menu de contexto.</string>
     <string name="notes_by_date">Notas de áudio/vídeo por data</string>
     <string name="by_date">Por data</string>
     <string name="by_type">Por tipo</string>
@@ -2321,16 +2321,16 @@
     <string name="shared_string_two">Dois</string>
     <string name="shared_string_one">Um</string>
     <string name="show_guide_line_descr">Mostrar linha direcional desde a sua posição até os locais dos marcadores ativos.</string>
-    <string name="show_arrows_descr">Mostrar uma ou duas setas indicando a direção para os marcadores ativos.</string>
+    <string name="show_arrows_descr">Mostrar uma ou duas setas indicando a direção em linha reta para os marcadores ativos.</string>
     <string name="distance_indication_descr">Escolher como mostrar a distância para os marcadores ativos.</string>
     <string name="active_markers_descr">Especifique a quantidade de indicadores de orientação.</string>
     <string name="digits_quantity">Número de casas decimais</string>
     <string name="shared_string_right">Direita</string>
-    <string name="shared_string_left">Esqueda</string>
+    <string name="shared_string_left">Esquerda</string>
     <string name="show_number_pad">Mostrar teclado numérico</string>
     <string name="shared_string_paste">Colar</string>
     <string name="go_to_next_field">Próximo campo</string>
-    <string name="rename_marker">Renomear marcador</string>
+    <string name="rename_marker">Alterar nome do marcador</string>
     <string name="tap_on_map_to_hide_interface_descr">Um toque no mapa mostra/esconde os botões de controlo e widgets.</string>
     <string name="tap_on_map_to_hide_interface">Modo ecrã cheio</string>
     <string name="mark_passed">Marcador visitado</string>
@@ -2350,8 +2350,8 @@
     <string name="round_trip">Ida e volta</string>
     <string name="plan_route_no_markers_toast">Tem de adicionar pelo menos um marcador para usar esta função.</string>
     <string name="osn_modify_dialog_error">Não foi possível alterar a nota.</string>
-    <string name="osn_modify_dialog_title">Alterar nota</string>
-    <string name="context_menu_item_modify_note">Alterar nota do OSM</string>
+    <string name="osn_modify_dialog_title">Alterar nota do OpenStreetMap</string>
+    <string name="context_menu_item_modify_note">Alterar nota</string>
     <string name="make_round_trip_descr">Adicionar cópia do ponto de partida como destino.</string>
     <string name="make_round_trip">Fazer viagem de ida e volta</string>
     <string name="index_item_world_wikivoyage">Artigos Wikivoyage mundiais</string>
@@ -2363,7 +2363,7 @@
     <string name="city_type_district">Distrito</string>
     <string name="city_type_neighbourhood">Bairro</string>
     <string name="map_widget_search">Procurar</string>
-    <string name="shared_string_is_open_24_7">Aberto 24/7</string>
+    <string name="shared_string_is_open_24_7">Sempre aberto (24/7)</string>
     <string name="coords_format">Formato de coordenadas</string>
     <string name="coords_format_descr">Formato para as coordenadas geográficas.</string>
     <string name="app_mode_bus">Autocarro</string>
@@ -2391,13 +2391,13 @@
     <string name="lang_lo">Laociano</string>
     <string name="lang_os">Osseta</string>
     <string name="lang_es_us">Espanhol (americano)</string>
-    <string name="lang_es_ar">Espanhol (Argentina)</string>
+    <string name="lang_es_ar">Espanhol (argentino)</string>
     <string name="lang_nb">Norueguês Bokmål</string>
     <string name="lang_vo">Volapuque</string>
     <string name="lang_th">Tailandês</string>
     <string name="lang_te">Telugu</string>
-    <string name="lang_nn">Norueguês (Nynorsk)</string>
-    <string name="lang_new">Neuari / Nepalbhasa</string>
+    <string name="lang_nn">Novo norueguês</string>
+    <string name="lang_new">Neuari</string>
     <string name="lang_ms">Malásio</string>
     <string name="lang_ht">Haitiano</string>
     <string name="lang_gl">Galego</string>
@@ -2406,7 +2406,7 @@
     <string name="lang_ast">Asturiano</string>
     <string name="lang_hsb">Alto sorábio</string>
     <string name="lang_kab">Cabila</string>
-    <string name="lang_ber">Berberes</string>
+    <string name="lang_ber">Berber</string>
     <string name="disable_recording_once_app_killed">Impedir a gravação autónoma</string>
     <string name="plugin_nautical_descr">Esta extensão enriquece o mapa do OsmAnd para também produzir mapas náuticos para passeios de barco, vela e outros tipos de desportos aquáticos.
 \n
@@ -2424,7 +2424,7 @@
 \nRepresenta área: %1$s x %2$s</string>
     <string name="speed_limit_exceed">Tolerância do limite de velocidade</string>
     <string name="speed_limit_exceed_message">Selecione a margem de tolerância de limite de velocidade, acima do qual receberá um aviso de voz.</string>
-    <string name="fav_point_emoticons_message">O nome do favorito foi alterado para %1$s para facilitar gravar corretamente a cadeia de caracteres com emoticons num ficheiro.</string>
+    <string name="fav_point_emoticons_message">O nome do favorito foi alterado para %1$s para poder guardar corretamente o texto com emoticons num ficheiro.</string>
     <string name="print_route">Imprimir rota</string>
     <string name="fav_point_dublicate">Nome de favorito duplicado</string>
     <string name="fav_point_dublicate_message">O nome do favorito especificado já está a ser utilizado, foi alterado para %1$s para evitar a duplicação.</string>
@@ -2459,9 +2459,9 @@
     <string name="forward">Avançar</string>
     <string name="home">Painel de controlo</string>
     <string name="live_monitoring_m_descr">Enviar o rastreamento para um serviço web especificado, se o registo de GPX estiver ligado.</string>
-    <string name="live_monitoring_m">Rastreamento on-line (requer GPX)</string>
-    <string name="live_monitoring_start">Iniciar rastreamento on-line</string>
-    <string name="live_monitoring_stop">Parar rastreamento on-line</string>
+    <string name="live_monitoring_m">Rastreamento online (requer GPX)</string>
+    <string name="live_monitoring_start">Iniciar rastreamento online</string>
+    <string name="live_monitoring_stop">Parar rastreamento online</string>
     <string name="gpx_start_new_segment">Iniciar novo segmento</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Estradas não transitáveis</string>
     <string name="rendering_attr_hideText_name">Texto</string>
@@ -2487,9 +2487,9 @@
     <string name="lang_zh_cn">Chinês (simplificado)</string>
     <string name="lang_zh_hk">Chinês (Hong Kong)</string>
     <string name="lang_zh_tw">Chinês (tradicional)</string>
-    <string name="routing_attr_avoid_stairs_name">Sem escadas</string>
+    <string name="routing_attr_avoid_stairs_name">Evitar escadas</string>
     <string name="routing_attr_avoid_stairs_description">Evita escadas</string>
-    <string name="routing_attr_avoid_borders_name">Sem passagens por fronteiras</string>
+    <string name="routing_attr_avoid_borders_name">Evitar passagens por fronteiras</string>
     <string name="routing_attr_avoid_borders_description">Evita cruzar fronteiras nacionais</string>
     <string name="routing_attr_height_name">Altura máxima</string>
     <string name="routing_attr_height_description">Especifique a altura permitida do veículo nas rotas.</string>
@@ -2504,7 +2504,7 @@
 \n
 \nPoderá usar o navegador visual e por voz, ver POIs (pontos de interesse), criar e gerir trilhos GPX, usar (através de uma extensão) curvas de nível e dados de altitude, escolher entre os modos motorista, ciclista e pedestre, editar o OpenStreetMap e muito mais.</string>
     <string name="osmand_extended_description_part2">Navegação GPS
-\n• Escolha entre modos off-line (sem tarifa de roaming quando estiver no exterior) ou on-line (mais rápido)
+\n• Escolha entre modos offline (sem tarifa de roaming quando estiver no exterior) ou online (mais rápido)
 \n• Orientação por voz passo-a-passo lhe guia ao longo do caminho (vozes gravadas e sintetizadas)
 \n• A rota é recalculada sempre que se desviar dela
 \n• Orientação de pista, nomes de ruas e tempo estimado de chegada ajudará ao longo do caminho
@@ -2515,14 +2515,14 @@
 \n• Suporta pontos intermédios no seu itinerário
 \n• Grave ou envie um trilho GPX e siga-a
 \n</string>
-    <string name="osmand_extended_description_part3">Mapa 
-\n• Mostra POIs (ponto de interesse) perto de si 
-\n• Ajusta o mapa na sua direção de movimento (ou bússola) 
-\n• Mostra a sua posição e direção para onde está olhando 
-\n• Partilhe sua posição para que seus amigos possam encontrá-lo 
-\n• Mantém seus lugares mais importantes em \'Favoritos\' 
-\n• Permite-lhe escolher como mostrar nomes no mapa: em inglês, local ou escrita fonética 
-\n• Mostra mapas on-line especializados, vista de satélite (do Bing), sobreposições diferentes como trajetos GPX de navegação/turismo e camadas adicionais com transparência personalizável
+    <string name="osmand_extended_description_part3">Mapa
+\n• Mostra POIs (ponto de interesse) perto de si
+\n• Ajusta o mapa na sua direção de movimento (ou bússola)
+\n• Mostra a sua posição e direção para onde está olhando
+\n• Partilhe sua posição para que seus amigos possam encontrá-lo
+\n• Mantém seus lugares mais importantes em \'Favoritos\'
+\n• Permite-lhe escolher como mostrar nomes no mapa: em inglês, local ou escrita fonética
+\n• Mostra mapas online especializados, vista de satélite (do Bing), sobreposições diferentes como trajetos GPX de navegação/turismo e camadas adicionais com transparência personalizável
 \n</string>
     <string name="osmand_extended_description_part4">Esqui
 \nA extensão de mapas de esqui OsmAnd Ski permite que veja pistas de esqui com nível de complexidade e algumas informações adicionais, como localização de elevadores e outras instalações invernais.</string>
@@ -2539,10 +2539,10 @@
 \n• Navegação GPS no modo pedestre cria a sua rota usando caminhos para pedestres
 \n• Enviar e seguir uma rota GPX ou gravar e partilhar a sua própria rota
 \n</string>
-    <string name="osmand_extended_description_part7">Contribua para o OpenStretMap
+    <string name="osmand_extended_description_part7">Contribua para o OpenStreetMap
 \n • Envie relatórios de erros
-\n • Envie trilhos GPX para o OpenStretMap diretamente da aplicação
-\n • Adicione POIs e envie-os diretamente para o OpenStretMap (ou mais tarde se estiver desconectado da Internet)
+\n • Envie trilhos GPX para o OpenStreetMap diretamente da aplicação
+\n • Adicione POIs e envie-os diretamente para o OpenStreetMap (ou mais tarde se estiver desconectado da Internet)
 \n</string>
     <string name="osmand_extended_description_part8">OsmAnd é um programa de fonte aberta desenvolvido ativamente. Todos podem contribuir para a aplicação reportando erros, melhorando as traduções ou programando novas funcionalidades. Além disso, o projeto conta com contribuições financeiras para financiar a programação e testes de novas funcionalidades.
 \n Cobertura de mapa e qualidade aproximada:
@@ -2565,7 +2565,7 @@
 \n
 \nAlgumas das características principais:</string>
     <string name="osmand_plus_extended_description_part2">Navegação
-\n• Funciona on-line (rápido) ou off-line (sem custos de roaming quando estiver no estrangeiro)
+\n• Funciona online (rápido) ou offline (sem custos de roaming quando estiver no estrangeiro)
 \n• Orientação por voz passo a passo (vozes gravadas e sintetizadas)
 \n• Orientação de trajetos opcionais, visualização do nome da rua e tempo estimado de chegada
 \n• Suporta pontos intermédios do seu itinerário
@@ -2580,13 +2580,13 @@
 \n • Veja imagens online especializadas, vistas de satélite (do Bing), diferentes camadas como trilhos de navegação GPX e camadas adicionais com transparência personalizável. 
 \n • Veja opcionalmente nomes de lugares em inglês, na língua local ou grafia fonética.
 \n</string>
-    <string name="osmand_plus_extended_description_part4">Use dados do OpenStretMap e da Wikipédia 
+    <string name="osmand_plus_extended_description_part4">Use dados do OpenStreetMap e da Wikipédia
 \n • Informações de alta qualidade dos melhores projetos colaborativos do mundo
-\n • Dados do OSM disponíveis por país ou região
+\n • Dados do OpenStreetMap disponíveis por país ou região
 \n • POIs da Wikipédia, ótimo para passeios turísticos
 \n • Descarregamentos grátis ilimitados, diretamente da aplicação
-\n • Mapas off-line vetoriais compactos e atualizados mensalmente 
-\n 
+\n • Mapas offline vetoriais compactos e atualizados mensalmente
+\n
 \n • Escolha entre região completa ou apenas a rede rodoviária (exemplo: o Japão inteiro tem 700 MB e a rede rodoviária tem apenas 200 MB)</string>
     <string name="osmand_plus_extended_description_part5">Recursos de segurança
 \n• Mudança da visualização automática para dia/noite opcional
@@ -2598,15 +2598,15 @@
 \n• Visualização de caminhos a pé, pistas de caminhadas e ciclovias, ideal para atividades ao ar livre
 \n• Navegação e modos de visualização especiais para bicicleta e pedestres
 \n• Paragens de transporte público opcionais (autocarro, elétrico, comboio) incluindo nomes de linhas
-\n• Gravação opcional de viagem para ficheiro GPX local ou serviço on-line
+\n• Gravação opcional de viagem para ficheiro GPX local ou serviço online
 \n• Visualização opcional de velocidade e altitudes
 \n• Visualização de curvas de nível e sombreamento de relevo (com uma extensão adicional)</string>
     <string name="osmand_plus_extended_description_part7">Contribua diretamente para o OpenStreetMap
-\n • Envie relatórios de erros.
-\n • Envie trilhos GPX para o OpenStretMap diretamente da aplicação.
-\n • Adicione POIs e envie-os diretamente para o OpenStretMap (ou mais tarde se estiver desconectado da Internet).
-\n • Gravação de viagem opcional também em plano de fundo (enquanto o dispositivo está no modo adormecido).
-\n OsmAnd é um programa de fonte aberta desenvolvido ativamente. Todos podem contribuir para a aplicação reportando erros, a melhorar as traduções ou a programar novas funcionalidades. Além disso, o projeto conta com contribuições financeiras para financiar a programação e testes de novas funcionalidades.
+\n• Envie relatórios de erros.
+\n• Envie trilhos GPX para o OpenStreetMap diretamente da aplicação.
+\n• Adicione POIs e envie-os diretamente para o OpenStreetMap (ou mais tarde se estiver desconectado da Internet).
+\n• Gravar viagem opcional também em plano de fundo (enquanto o dispositivo está no modo adormecido).
+\n• O OsmAnd é um programa de fonte aberta desenvolvido ativamente. Todos podem contribuir para a aplicação reportando erros, a melhorar as traduções ou a programar novas funcionalidades. Além disso, o projeto conta com contribuições financeiras para financiar a programação e testes de novas funcionalidades.
 \n</string>
     <string name="osmand_plus_extended_description_part8">Cobertura de mapa e qualidade aproximada:
 \n• Europa Ocidental: ****
@@ -2627,7 +2627,7 @@
     <string name="arrival_distance_factor_normally">Normal</string>
     <string name="arrival_distance_factor_late">Atrasado</string>
     <string name="arrival_distance_factor_at_last">Nos últimos metros</string>
-    <string name="live_monitoring_max_interval_to_send">Buffer de tempo para rastreamento on-line</string>
+    <string name="live_monitoring_max_interval_to_send">Buffer de tempo para rastreamento online</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Especificar um buffer de tempo para manter locais para enviar sem conexão</string>
     <string name="index_name_netherlands">Europa - Países Baixos</string>
     <string name="shared_string_others">Outros</string>
@@ -2636,7 +2636,7 @@
     <string name="favourites_context_menu_add">Adicionar favorito</string>
     <string name="poi_action_delete">eliminar</string>
     <string name="poi_dialog_reopen">Reabrir</string>
-    <string name="av_camera_pic_size">Tamanho da foto</string>
+    <string name="av_camera_pic_size">Tamanho da fotografia</string>
     <string name="av_camera_pic_size_descr">Definir o tamanho da imagem</string>
     <string name="get_plugin">Obter</string>
     <string name="use_fast_recalculation">Recálculo de rota inteligente</string>
@@ -2657,11 +2657,11 @@
     <string name="shared_string_undo">Desfazer</string>
     <string name="app_name_osmand">OsmAnd</string>
     <string name="offline_maps_and_navigation">Mapas e navegação
-\noff-line</string>
+\noffline</string>
     <string name="commit_poi">Enviar POI</string>
     <string name="tab_title_basic">Básico</string>
     <string name="tab_title_advanced">Avançado</string>
-    <string name="building_number">Número de edifício</string>
+    <string name="building_number">Número de porta</string>
     <string name="next_proceed">Próximo</string>
     <string name="opening_at">Abre às</string>
     <string name="closing_at">Fecha às</string>
@@ -2685,7 +2685,7 @@
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Atualizar tudo (%1$s MB)</string>
     <string name="save_poi_too_many_uppercase">O nome contém demasiadas letras maiúsculas. Continuar\?</string>
-    <string name="configure_screen_quick_action">Ação rápida</string>
+    <string name="configure_screen_quick_action">Botão de ação rápida</string>
     <string name="quick_action_item_action">Ação %d</string>
     <string name="quick_action_item_screen">Ecrã %d</string>
     <string name="quick_action_add_marker">Adicionar marcador de mapa</string>
@@ -2694,34 +2694,34 @@
     <string name="quick_action_map_style_switch">O estilo do mapa foi alterado para \"%s\".</string>
     <string name="quick_action_take_audio_note">Nova nota de áudio</string>
     <string name="quick_action_take_video_note">Nova nota de vídeo</string>
-    <string name="quick_action_take_photo_note">Nova nota de foto</string>
+    <string name="quick_action_take_photo_note">Nova nota de fotografia</string>
     <string name="quick_action_add_osm_bug">Adicionar nota OSM</string>
     <string name="quick_action_navigation_voice">Ligar/desligar voz</string>
     <string name="quick_action_navigation_voice_off">Ativar voz</string>
     <string name="quick_action_navigation_voice_on">Desativar voz</string>
     <string name="quick_action_add_parking">Adicionar local de estacionamento</string>
     <string name="quick_action_new_action">Adicionar ação</string>
-    <string name="quick_action_edit_action">Editar ação</string>
+    <string name="quick_action_edit_action">Editar botão de ação rápida</string>
     <string name="quick_action_add_favorite">Adicionar favorito</string>
     <string name="dialog_add_action_title">Adicionar ação</string>
-    <string name="quick_actions_delete">Eliminar ação</string>
-    <string name="quick_actions_delete_text">Tem a certeza de que quer eliminar a ação \"%s\"\?</string>
+    <string name="quick_actions_delete">Eliminar botão de ação rápida</string>
+    <string name="quick_actions_delete_text">Tem a certeza de que quer eliminar o botão de ação rápida \"%s\"\?</string>
     <string name="quick_favorites_show_favorites_dialog">Mostrar lista dos favoritos</string>
     <string name="quick_favorites_name_preset">Nome do modelo</string>
     <string name="quick_action_add_marker_descr">O botão é para adicionar um marcador de mapa no local do centro do ecrã.</string>
     <string name="quick_action_add_gpx_descr">Um botão para adicionar um ponto de rota GPX no local do centro do ecrã.</string>
     <string name="quick_action_take_audio_note_descr">Um botão para adicionar uma nota de áudio no local do centro do ecrã.</string>
     <string name="quick_action_take_video_note_descr">Um botão para adicionar uma nota de vídeo no local do centro do ecrã.</string>
-    <string name="quick_action_take_photo_note_descr">Um botão para adicionar uma nota de foto no local do centro do ecrã.</string>
+    <string name="quick_action_take_photo_note_descr">Um botão para adicionar uma nota de fotografia no local do centro do ecrã.</string>
     <string name="quick_action_add_osm_bug_descr">Um botão para adicionar uma nota OSM no local do centro do ecrã.</string>
     <string name="quick_action_add_poi_descr">Um botão para adicionar um POI no local do centro do ecrã.</string>
     <string name="quick_action_navigation_voice_descr">Um botão para ativar ou desativar a orientação por voz durante a navegação.</string>
     <string name="quick_action_add_parking_descr">Um botão para adicionar um lugar de estacionamento no local do centro do ecrã.</string>
     <string name="quick_action_interim_dialog">Mostrar uma janela temporal</string>
-    <string name="favorite_autofill_toast_text">" gravado em "</string>
+    <string name="favorite_autofill_toast_text">" guardado em "</string>
     <string name="favorite_empty_place_name">Local</string>
-    <string name="quick_action_duplicates">O nome da ação rápida foi alterado para %1$s para evitar duplicação.</string>
-    <string name="quick_action_duplicate">Nome de ação rápida duplicado</string>
+    <string name="quick_action_duplicates">O nome do botão de ação rápida foi alterado para %1$s para evitar duplicação.</string>
+    <string name="quick_action_duplicate">Nome do botão de ação rápida duplicado</string>
     <string name="quick_action_showhide_favorites_descr">Uma alternância para mostrar ou ocultar os pontos favoritos no mapa.</string>
     <string name="quick_action_showhide_poi_descr">Uma alternância para mostrar ou ocultar POIs no mapa.</string>
     <string name="quick_action_poi_show">Mostrar %1$s</string>
@@ -2733,7 +2733,7 @@
     <string name="quick_action_fav_name_descr">Deixe em branco para automaticamente usar o endereço ou nome de lugar.</string>
     <string name="quick_action_bug_descr">Esta mensagem está incluída no campo de comentário.</string>
     <string name="quick_action_bug_message">Mensagem</string>
-    <string name="quick_action_category_descr">Categoria na qual gravar o favorito:</string>
+    <string name="quick_action_category_descr">Categoria onde guardar o favorito:</string>
     <string name="quick_action_gpx_category_descr">Escolha uma categoria opcional.</string>
     <string name="quick_action_poi_list">Lista de POIs</string>
     <string name="quick_action_sh_poi_descr">Adicione uma ou mais categorias de POI para mostrar no mapa.</string>
@@ -2754,15 +2754,15 @@
     <string name="quick_action_map_source_action">Adicionar origem do mapa</string>
     <string name="quick_action_map_source_switch">A origem do mapa foi alterada para \"%s\".</string>
     <string name="quick_action_btn_tutorial_title">Mudar posição do botão</string>
-    <string name="quick_action_btn_tutorial_descr">Segure e arraste o botão para mudar a sua posição no ecrã.</string>
+    <string name="quick_action_btn_tutorial_descr">Pressione e segure arrastando o botão para mudar a sua posição no ecrã.</string>
     <string name="shared_string_action_name">Nome da ação</string>
-    <string name="mappilary_no_internet_desc">As fotos do Mapillary só estão disponíveis on-line.</string>
+    <string name="mappilary_no_internet_desc">As fotografias do Mapillary só estão disponíveis online.</string>
     <string name="retry">Repetir</string>
     <string name="add_route_points">Adicionar pontos de rota</string>
     <string name="add_waypoint">Adicionar ponto de passagem</string>
     <string name="add_line">Adicionar linha</string>
     <string name="save_gpx_waypoint">Guardar ponto de passagem GPX</string>
-    <string name="save_route_point">Gravar ponto de rota</string>
+    <string name="save_route_point">Guardar ponto de rota</string>
     <string name="waypoint_one">Ponto de passagem 1</string>
     <string name="route_point_one">Ponto de rota 1</string>
     <string name="empty_state_favourites">Adicionar favoritos</string>
@@ -2782,7 +2782,7 @@
     <string name="show_tunnels">Túneis</string>
     <string name="download_wikipedia_description">Descarregar artigos da Wikipédia de %1$s para lê-los offline.</string>
     <string name="download_wikipedia_label">Descarregar dados da Wikipédia</string>
-    <string name="open_in_browser_wiki">Abrir artigo on-line</string>
+    <string name="open_in_browser_wiki">Abrir artigo na Internet</string>
     <string name="open_in_browser_wiki_description">Ver artigo no navegador web.</string>
     <string name="download_wiki_region_placeholder">esta região</string>
     <string name="wiki_article_search_text">A procurar o artigo wiki correspondente</string>
@@ -2791,7 +2791,7 @@
     <string name="test_voice_desrc">Toque num botão e ouça a mensagem de voz dele correspondente para ouvir se está ausente ou avariado</string>
     <string name="powered_by_osmand">Por OsmAnd</string>
     <string name="navigate_point_olc">Código de localização aberto (OLC)</string>
-    <string name="osm_live_subscriptions">Assinaturas</string>
+    <string name="osm_live_subscriptions">Subscrições</string>
     <string name="mapillary_menu_title_pano">Mostrar apenas imagens de 360°</string>
     <string name="shared_string_launch">Lançar</string>
     <string name="lang_gn_py">Guarani</string>
@@ -2842,7 +2842,7 @@
     <string name="rendering_attr_surface_unpaved_name">Não pavimentado</string>
     <string name="rendering_attr_surface_sand_name">Areia</string>
     <string name="rendering_attr_surface_grass_name">Relva</string>
-    <string name="rendering_attr_surface_grass_paver_name">Blocos cimento perfurados</string>
+    <string name="rendering_attr_surface_grass_paver_name">Blocos de cimento perfurados</string>
     <string name="rendering_attr_surface_ground_name">Terra</string>
     <string name="rendering_attr_surface_dirt_name">Terra (lodosa)</string>
     <string name="rendering_attr_surface_mud_name">Lama</string>
@@ -2890,17 +2890,17 @@
     <string name="show_more">Mostrar mais</string>
     <string name="tracks_on_map">Trilhos mostrados</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Um botão para mostrar ou ocultar trilhos selecionados no mapa.</string>
-    <string name="routing_attr_avoid_tram_name">Sem elétricos</string>
+    <string name="routing_attr_avoid_tram_name">Evitar elétricos</string>
     <string name="routing_attr_avoid_tram_description">Evita elétricos</string>
-    <string name="routing_attr_avoid_bus_name">Sem autocarros</string>
+    <string name="routing_attr_avoid_bus_name">Evitar autocarros</string>
     <string name="routing_attr_avoid_bus_description">Evita autocarros e troleicarros</string>
-    <string name="routing_attr_avoid_share_taxi_name">Sem táxis partilhados</string>
+    <string name="routing_attr_avoid_share_taxi_name">Evitar táxis partilhados</string>
     <string name="routing_attr_avoid_share_taxi_description">Evita táxis partilhados</string>
-    <string name="routing_attr_avoid_train_name">Sem comboios</string>
+    <string name="routing_attr_avoid_train_name">Evitar comboios</string>
     <string name="routing_attr_avoid_train_description">Evitar comboios</string>
-    <string name="routing_attr_avoid_subway_name">Sem metropolitanos</string>
+    <string name="routing_attr_avoid_subway_name">Evitar metropolitanos</string>
     <string name="routing_attr_avoid_subway_description">Evitar metropolitanos subterrâneos e de superfície</string>
-    <string name="routing_attr_avoid_ferry_name">Sem balsas/ferries</string>
+    <string name="routing_attr_avoid_ferry_name">Evitar balsas/ferries</string>
     <string name="routing_attr_avoid_ferry_description">Evita balsas/ferries</string>
     <string name="shared_string_milliradians">Milirradianos</string>
     <string name="rendering_attr_surface_sett_name">Paralelos</string>
@@ -2931,23 +2931,23 @@
     <string name="public_transport_try_change_settings">Tente alterar a configuração.</string>
     <string name="public_transport_calc_pedestrian">Calcular a rota pedestre</string>
     <string name="public_transport_type">Tipo de transporte</string>
-    <string name="searching_gps">Procurando GPS</string>
+    <string name="searching_gps">A procurar GPS</string>
     <string name="coordinates_widget">Widget de coordenadas</string>
     <string name="rate_dialog_descr">Por favor envie os seus comentários e avalie o nosso trabalho no Google Play.</string>
     <string name="shared_string_privacy_policy">Política de privacidade</string>
     <string name="help_us_make_osmand_better">Ajude-nos a melhorar o OsmAnd</string>
-    <string name="make_osmand_better_descr">Permitir que OsmAnd recolha e processe dados anónimos de utilização da aplicação. Nenhuns dados sobre a sua posição, nem sobre as localizações que visualiza no mapa são recolhidos.
+    <string name="make_osmand_better_descr">Permitir que OsmAnd recolha e processe dados anónimos de utilização da aplicação. Não são recolhidos nenhuns dados sobre a sua posição, nem sobre as localizações que visualiza no mapa.
 \n
-\nConfigure a qualquer momento em \'Configurações\' → \'Privacidade e Segurança\'.</string>
+\nConfigure a qualquer momento em \'Configurações\' → \'Privacidade e segurança\'.</string>
     <string name="choose_data_to_share">Escolha o tipo de dados que pretende partilhar:</string>
     <string name="downloaded_maps">Mapas descarregados</string>
-    <string name="visited_screens">Ecrãs vistos</string>
-    <string name="collected_data_descr">Define quais os dados que permite que OsmAnd partilhe.</string>
-    <string name="downloaded_maps_collect_descr">Ajuda-nos a compreender a popularidade de mapas de países e regiões.</string>
-    <string name="visited_screens_collect_descr">Ajuda-nos a entender a popularidade dos recursos no OsmAnd.</string>
+    <string name="visited_screens">Ecrãs visualizados</string>
+    <string name="collected_data_descr">Define que dados que permite o OsmAnd partilhar.</string>
+    <string name="downloaded_maps_collect_descr">Permite-nos compreender a popularidade dos mapas de países e regiões.</string>
+    <string name="visited_screens_collect_descr">Permite-nos entender a popularidade dos recursos no OsmAnd.</string>
     <string name="privacy_and_security_change_descr">Toque em \"Permitir\" se concordar com %1$s</string>
     <string name="settings_privacy_and_security">Privacidade e segurança</string>
-    <string name="settings_privacy_and_security_desc">Escolha que dados partilha</string>
+    <string name="settings_privacy_and_security_desc">Escolha os dados que quer partilhar</string>
     <string name="shared_string_no_thank_you">Não, obrigado</string>
     <string name="shared_string_allow">Permitir</string>
     <string name="profile_name_hint">Nome do perfil</string>
@@ -2975,8 +2975,8 @@
     <string name="profile_alert_duplicate_name_title">Nome duplicado</string>
     <string name="profile_alert_duplicate_name_msg">Já existe um perfil com esse nome</string>
     <string name="profile_alert_cant_delete_base">Não pode eliminar perfis base OsmAnd</string>
-    <string name="profile_alert_need_save_title">Gravar alterações</string>
-    <string name="profile_alert_need_save_msg">Grave primeiro as alterações no perfil</string>
+    <string name="profile_alert_need_save_title">Guardar alterações</string>
+    <string name="profile_alert_need_save_msg">Guarde primeiro as alterações no perfil</string>
     <string name="profile_alert_delete_title">Eliminar perfil</string>
     <string name="profile_alert_delete_msg">Tem a certeza que quer eliminar o perfil \"%s\"</string>
     <string name="select_base_profile_dialog_title">Selecionar o perfil para começar</string>
@@ -2986,8 +2986,8 @@
     <string name="base_profile_descr_bicycle">Bicicleta de montanha, ciclomotor, cavalo</string>
     <string name="base_profile_descr_pedestrian">Andar, caminhar, correr</string>
     <string name="base_profile_descr_public_transport">Categorias de transportes públicos</string>
-    <string name="base_profile_descr_boat">Navio, remar, navegar</string>
-    <string name="base_profile_descr_aircraft">Avião, asa-delta</string>
+    <string name="base_profile_descr_boat">Barco, remo, vela</string>
+    <string name="base_profile_descr_aircraft">Avião, parapente</string>
     <string name="routing_profile_geocoding">Geocodificação</string>
     <string name="routing_profile_straightline">Linha reta</string>
     <string name="routing_profile_broutrer">BRouter (offline)</string>
@@ -2997,7 +2997,7 @@
     <string name="third_party_routing_type">Roteamento de terceiros</string>
     <string name="application_profiles_descr">Escolha os perfis mostrados na aplicação.</string>
     <string name="application_profiles">Perfis da aplicação</string>
-    <string name="quick_action_need_to_add_item_to_list">Adicione pelo menos um item à lista nas configurações de \'Ação rápida\'</string>
+    <string name="quick_action_need_to_add_item_to_list">Adicione pelo menos um item à lista nas configurações de \'Botão de ações rápidas\'</string>
     <string name="routing_attr_piste_type_downhill_name">Esqui alpino e descendente</string>
     <string name="routing_attr_piste_type_downhill_description">Pistas para esqui alpino ou downhill e acesso a teleféricos de esqui.</string>
     <string name="routing_attr_piste_type_nordic_name">Esqui de travessia e nórdico</string>
@@ -3028,7 +3028,7 @@
     <string name="shared_string_min_speed">Velocidade mínima</string>
     <string name="shared_string_max_speed">Velocidade máxima</string>
     <string name="default_speed_setting_title">Velocidade predefinida</string>
-    <string name="default_speed_setting_descr">Alterar as predefinições de velocidade</string>
+    <string name="default_speed_setting_descr">Alterar as velocidades predefinidas</string>
     <string name="minmax_speed_dialog_title">Definir a velocidade mínima/máxima</string>
     <string name="new_profile">Novo perfil</string>
     <string name="shared_string_crash">Encravou</string>
@@ -3066,8 +3066,8 @@
     <string name="edit_profile_setup_map_subtitle">Selecione as opções de mapa para o perfil</string>
     <string name="edit_profile_screen_options_subtitle">Selecionar opções de ecrã para o perfil</string>
     <string name="edit_profile_nav_settings_subtitle">Selecione as configurações de navegação para o perfil</string>
-    <string name="routing_attr_max_num_changes_description">Especificar o limite máximo de alterações</string>
-    <string name="routing_attr_max_num_changes_name">Quantidade de transferências</string>
+    <string name="routing_attr_max_num_changes_description">Especificar o limite máximo de transbordos</string>
+    <string name="routing_attr_max_num_changes_name">Número de transbordos</string>
     <string name="turn_screen_on_router">Despertar na curva</string>
     <string name="turn_screen_on_time_descr">Ajuste por quanto tempo o ecrã deve ficar ligado.</string>
     <string name="turn_screen_on_sensor">Utilizar sensor de proximidade</string>
@@ -3093,11 +3093,11 @@
     <string name="rendering_attr_tracktype_grade4_name">Maioritariamente macio</string>
     <string name="rendering_attr_tracktype_grade5_name">Macio</string>
     <string name="routeInfo_tracktype_name">Dureza da superfície</string>
-    <string name="shared_string_file_is_saved">%s está gravado</string>
+    <string name="shared_string_file_is_saved">%s está guardado</string>
     <string name="shared_string_open_track">Abrir trilho</string>
-    <string name="shared_string_track_is_saved">O trilho %s está gravado</string>
+    <string name="shared_string_track_is_saved">O trilho %s está guardado</string>
     <string name="rendering_attr_showLez_description">Mostrar zonas de baixas emissões (proibida circulação de veículos poluentes) no mapa. Não afeta o roteamento.</string>
-    <string name="rendering_attr_showLez_name">Mostrar zonas de baixas emissões</string>
+    <string name="rendering_attr_showLez_name">Mostrar zonas de baixas emissões poluentes</string>
     <string name="temporary_conditional_routing">Considerar limitações temporárias</string>
     <string name="shared_string_default">Padrão</string>
     <string name="new_route_calculated_dist_dbg">Rota: distância %1$s, tempo do roteador %2$s \nCálculo: %3$.1f seg, %4$d estradas, %5$d telhas)</string>
@@ -3118,7 +3118,7 @@
     <string name="years_5">Anos</string>
     <string name="months_3">Três meses</string>
     <string name="price_free">Grátis</string>
-    <string name="get_discount_title">Obter %1$d %2$s com %3$s de desconto.</string>
+    <string name="get_discount_title">Obtenha %1$d %2$s com %3$s de desconto.</string>
     <string name="get_discount_second_part">depois %1$s</string>
     <string name="cancel_subscription">Cancelar subscrição</string>
     <string name="price_and_discount">%1$s - Poupe %2$s</string>
@@ -3133,11 +3133,11 @@
     <string name="coordinates_format_info">O formato selecionado será aplicado em toda a aplicação.</string>
     <string name="pref_selected_by_default_for_profiles">Esta configuração é selecionada por padrão para os perfis: %s</string>
     <string name="change_default_settings">Alterar a configuração</string>
-    <string name="discard_changes">Descartar alteração</string>
+    <string name="discard_changes">Cancelar alteração</string>
     <string name="apply_to_current_profile">Aplicar só a \"%1$s\"</string>
     <string name="apply_to_all_profiles">Aplicar a todos os perfis</string>
     <string name="start_up_message_pref">Mensagem de inicialização</string>
-    <string name="analytics_pref_title">Análises</string>
+    <string name="analytics_pref_title">Enviar dados anónimos</string>
     <string name="turn_screen_on_info">Mostrar mapa no ecrã de bloqueio durante a navegação.</string>
     <string name="route_parameters_info">Configurações de roteamento no perfil selecionado \"%1$s\".</string>
     <string name="wake_time">Tempo limite após despertar</string>
@@ -3180,7 +3180,7 @@
 \n%1$s &gt; %2$s</string>
     <string name="enter_path_to_folder">Insira o caminho para a pasta</string>
     <string name="shared_string_select_folder">Pasta…</string>
-    <string name="paste_Osmand_data_folder_path">Colar caminho para a pasta com dados OsmAnd</string>
+    <string name="paste_Osmand_data_folder_path">Colar caminho para a pasta com dados do OsmAnd</string>
     <string name="change_osmand_data_folder_question">Alterar a pasta de dados OsmAnd\?</string>
     <string name="move_maps_to_new_destination">Mover para o novo destino</string>
     <string name="internal_app_storage_description">Armazenamento interno para OsmAnd (oculto aos utilizadores e outras aplicações).</string>
@@ -3250,7 +3250,7 @@
 \n - Outras correções de erros
 \n
 \n</string>
-    <string name="apply_preference_to_all_profiles">Pode aplicar esta alteração a todos ou apenas ao perfil atualmente selecionado.</string>
+    <string name="apply_preference_to_all_profiles">Pode aplicar esta alteração a todos os perfis ou apenas ao atualmente selecionado.</string>
     <string name="shared_preference">Partilhado</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Preferir estradas não pavimentadas</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Preferir estradas não pavimentadas sobre as pavimentadas para o roteamento.</string>
@@ -3258,11 +3258,11 @@
     <string name="rendering_value_white_name">Branco</string>
     <string name="add_new_profile_q">Adicionar o novo perfil \'%1$s\'\?</string>
     <string name="save_heading">Incluir a direção</string>
-    <string name="save_heading_descr">Gravar direção para cada ponto de pista durante a gravação.</string>
+    <string name="save_heading_descr">Guardar direção para cada ponto do trilho durante a gravação.</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
     <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
     <string name="personal_category_name">Pessoal</string>
-    <string name="shared_string_downloading_formatted">Descarregando %s</string>
+    <string name="shared_string_downloading_formatted">A descarregar %s</string>
     <string name="rendering_value_thick_name">Grosso</string>
     <string name="desert_render_descr">Para desertos e outras áreas pouco povoadas. Mais detalhado.</string>
     <string name="select_navigation_icon">Ícone de posição durante a movimentação</string>
@@ -3284,16 +3284,16 @@
     <string name="overwrite_profile_q">O perfil \'%1$s\' já existe. Substituir\?</string>
     <string name="export_profile_failed">Não foi possível exportar o perfil.</string>
     <string name="profile_import">Importar perfil</string>
-    <string name="profile_import_descr">Adicione um perfil abrindo o seu ficheiro com OsmAnd.</string>
+    <string name="profile_import_descr">Adicione um perfil abrindo o seu ficheiro com o OsmAnd.</string>
     <string name="file_import_error">%1$s erro de importação: %2$s</string>
     <string name="file_imported_successfully">%1$s importado(s).</string>
     <string name="swap_two_places">Trocar %1$s por %2$s</string>
     <string name="route_start_point">Ponto de partida</string>
-    <string name="track_saved">Trilho gravado</string>
+    <string name="track_saved">Trilho guardado</string>
     <string name="empty_filename">O nome do ficheiro está vazio</string>
     <string name="shared_string_revert">Reverter</string>
     <string name="quick_action_directions_from_desc">Um botão para centrar o ecrã no ponto de partida. Em seguida, solicitará para definir o destino ou acionar o cálculo da rota.</string>
-    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Mostrar nós da rede de ciclovias</string>
+    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Nós da rede de ciclovias</string>
     <string name="clear_confirmation_msg">Limpar %1$s\?</string>
     <string name="download_map_dialog">Diálogo de descarregar mapas</string>
     <string name="dialogs_and_notifications_title">Diálogos e notificações</string>
@@ -3342,18 +3342,18 @@
     <string name="recalculate_route_in_deviation">Recalcular rota em caso de desvio</string>
     <string name="select_distance_route_will_recalc">Selecione a distância após a qual o percurso será recalculado.</string>
     <string name="recalculate_route_distance_promo">A rota será recalculada se a distância da rota até o local atual for maior que o valor selecionado.</string>
-    <string name="import_complete_description">Todos os dados de %1$s são importados. Pode usar os botões abaixo para abrir a parte necessária da aplicação para o gerir.</string>
+    <string name="import_complete_description">Todos os dados de %1$s são importados. Pode usar os botões abaixo para abrir a parte necessária da aplicação para os gerir.</string>
     <string name="shared_string_import_complete">Importação terminada</string>
     <string name="items_added">Itens adicionados</string>
-    <string name="checking_for_duplicate_description">O OsmAnd verifica %1$s para ver se existem duplicados nos itens existentes na aplicação.
+    <string name="checking_for_duplicate_description">O OsmAnd verifica %1$s para ver se existem duplicados na aplicação.
 \n
 \nPode demorar algum tempo.</string>
     <string name="shared_string_importing">A importar</string>
     <string name="importing_from">A importar dados de %1$s</string>
     <string name="clear_recorded_data_warning">Tem a certeza que quer limpar os dados gravados\?</string>
     <string name="profile_backup_failed">Não foi possível fazer a cópia de segurança do perfil.</string>
-    <string name="saving_new_profile">Gravando novo perfil</string>
-    <string name="restore_all_profile_settings">Restaurar todas as configurações de perfil\?</string>
+    <string name="saving_new_profile">A guardar o novo perfil</string>
+    <string name="restore_all_profile_settings">Restaurar todas as configurações do perfil\?</string>
     <string name="restore_all_profile_settings_descr">Todas as configurações do perfil serão restauradas para o seu estado original após a criação/importação deste perfil.</string>
     <string name="import_rendering_file">Importar ficheiro de renderização</string>
     <string name="shared_string_rendering_style">Estilo de renderização</string>
@@ -3372,8 +3372,8 @@
     <string name="shared_string_nothing_selected">Nada selecionado</string>
     <string name="shared_string_poi_types">Tipos de POI</string>
     <string name="shared_string_preparing">A preparar</string>
-    <string name="recalc_angle_dialog_title">Ângulo mínimo entre minha localização e rota</string>
-    <string name="recalc_angle_dialog_descr">Segmento reto adicional entre a minha localização e a rota calculada será mostrada até que a rota seja recalculada</string>
+    <string name="recalc_angle_dialog_title">Ângulo mínimo entre a minha localização e a rota</string>
+    <string name="recalc_angle_dialog_descr">Será mostrado o segmento reto adicional entre a minha localização e a rota calculada até que a rota seja recalculada</string>
     <string name="shared_string_angle">Ângulo</string>
     <string name="shared_string_angle_param">Ângulo: %s°</string>
     <string name="profile_type_custom_string">Perfil personalizado</string>
@@ -3393,7 +3393,7 @@
 \nA extensão permanecerá no dispositivo após remover o OsmAnd.</string>
     <string name="plugin_disabled">Extensão desativada</string>
     <string name="open_settings">Abrir configurações</string>
-    <string name="please_provide_profile_name_message">Forneça um nome para o perfil</string>
+    <string name="please_provide_profile_name_message">Atribua um nome ao perfil</string>
     <string name="sort_by_category">Classificar por categoria</string>
     <string name="routing_profile_direct_to">Direto ao ponto</string>
     <string name="copy_coordinates">Copiar coordenadas</string>
@@ -3435,14 +3435,14 @@
     <string name="plugin_prefs_reset_successful">Todas as configurações da extensão foram repostas para os valores de origem.</string>
     <string name="add_custom_category">Adicionar categoria personalizada</string>
     <string name="shared_string_available">Disponível</string>
-    <string name="reset_to_default_category_button_promo">\'Restaurar valores predefinidos\' redefinirá a ordem de ordenação para os valores de origem.</string>
+    <string name="reset_to_default_category_button_promo">\'Restaurar valores predefinidos\' irá repor a ordenação de origem.</string>
     <string name="add_new_custom_category_button_promo">Pode adicionar uma nova categoria personalizada selecionando uma ou mais categorias.</string>
-    <string name="create_custom_categories_list_promo">Altere a ordem de ordenação da lista, oculte categorias. Pode importar ou exportar todas as alterações com perfis.</string>
+    <string name="create_custom_categories_list_promo">Altere a ordenação da lista e oculte categorias. Pode importar ou exportar todas as alterações com perfis.</string>
     <string name="rearrange_categories">Reorganizar categorias</string>
     <string name="osm_authorization_success">Autorização bem sucedida</string>
-    <string name="multimedia_photo_play_sound">Som do obturador da câmara</string>
+    <string name="multimedia_photo_play_sound">Som ao tirar fotografias</string>
     <string name="multimedia_use_system_camera">Usar aplicação do sistema</string>
-    <string name="multimedia_rec_split_title">Divisão de gravação</string>
+    <string name="multimedia_rec_split_title">Dividir gravações</string>
     <string name="reset_plugin_to_default">Repor configurações originais da extensão</string>
     <string name="monitoring_min_distance">Deslocamento mínimo</string>
     <string name="monitoring_min_accuracy">Precisão mínima</string>
@@ -3453,8 +3453,8 @@
     <string name="live_monitoring_tracking_interval">Intervalo de rastreamento</string>
     <string name="live_monitoring_time_buffer">Memória intermédia</string>
     <string name="monitoring_min_distance_descr_recommendation">Recomendação: uma configuração de 5 metros pode funcionar bem se não precisar capturar detalhes mais refinados do que isso e não quer capturar dados explicitamente enquanto estiver parado.</string>
-    <string name="monitoring_min_distance_descr_side_effect">Efeitos colaterais: os períodos em que está parado não são registados em absoluto ou em apenas um ponto cada. Pequenos movimentos (do mundo real) (por exemplo, de lado, para marcar um possível desvio na sua viagem) podem ser filtrados. O seu ficheiro contém menos informações para pós-processamento e possui estatísticas piores ao filtrar pontos obviamente redundantes no tempo de gravação, mantendo potencialmente artefactos causados por má receção ou efeitos de chipset GPS.</string>
-    <string name="monitoring_min_distance_descr">Este filtro evita que pontos duplicados sejam gravados onde muito pouco movimento real possa ter ocorrido, cria uma aparência espacial mais agradável dos trilhos que não são processados posteriormente.</string>
+    <string name="monitoring_min_distance_descr_side_effect">Efeitos colaterais: os períodos em que está parado não são registados em absoluto ou em apenas um ponto cada. Pequenos movimentos (no mundo real, por exemplo de lado, para marcar um possível desvio na sua viagem) podem ser filtrados. O seu ficheiro contém menos informações para pós-processamento e possui estatísticas piores ao filtrar pontos obviamente redundantes no tempo de gravação, mantendo potencialmente os artefactos causados por má receção ou efeitos do chipset GPS.</string>
+    <string name="monitoring_min_distance_descr">Este filtro evita que sejam gravados pontos duplicados quando houver muito pouco movimento real e cria uma aparência espacial mais agradável dos trilhos que não são processados posteriormente.</string>
     <string name="monitoring_min_accuracy_descr_remark">Observação: se o GPS estava desligado imediatamente antes de uma gravação, o primeiro ponto medido pode ter uma precisão diminuída; portanto, no nosso código, podemos esperar um segundo antes da gravação de um ponto (ou gravar o melhor de três pontos consecutivos, etc.), mas isso ainda não foi implementado.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Recomendação: é difícil prever o que será gravado e o que não será, talvez seja melhor desativar este filtro.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Efeito colateral: como resultado da filtragem por precisão, os pontos podem estar totalmente ausentes por ex. debaixo de pontes, sob árvores, entre prédios altos ou com certas condições climáticas.</string>
@@ -3468,7 +3468,7 @@
     <string name="logcat_buffer_descr">Verifique e partilhe registos detalhados da aplicação</string>
     <string name="select_map_icon_descr">Ícone mostrado quando parado.</string>
     <string name="select_nav_icon_descr">Ícone mostrado ao navegar ou mover.</string>
-    <string name="osm_edits_view_descr">Veja todas as suas edições ainda não enviadas ou bugs OSM em %1$s. Os pontos enviados não vão aparecer no OsmAnd.</string>
+    <string name="osm_edits_view_descr">Veja todas as suas edições ainda não enviadas ou notas do OpenStreetMap em %1$s. Os pontos enviados deixarão de aparecer nessa lista.</string>
     <string name="osm_editing">Edição OSM</string>
     <string name="plugin_global_prefs_info">Estas configurações da extensão são globais e aplicam-se a todos os perfis</string>
     <string name="login_and_pass">Utilizador e palavra-passe</string>
@@ -3476,12 +3476,12 @@
     <string name="route_recalculation">Recálculo da rota</string>
     <string name="photo_notes">Notas fotográficas</string>
     <string name="video_notes">Notas de vídeo</string>
-    <string name="multimedia_notes_view_descr">Pode encontrar todas as suas notas em %1$s.</string>
+    <string name="multimedia_notes_view_descr">Pode encontrar todas as suas notas OSM em %1$s.</string>
     <string name="tracks_view_descr">Pode encontrar todos os seus trilhos gravados em %1$s ou na pasta OsmAnd.</string>
     <string name="save_track_logging_accuracy">Precisão de registo</string>
     <string name="live_monitoring">Rastreamento online</string>
     <string name="live_monitoring_descr">Permite partilhar a localização atual usando a gravação de viagem.</string>
-    <string name="accessibility_prefs_descr">Escolha ícone, cor e nome</string>
+    <string name="accessibility_prefs_descr">Escolha o ícone, cor e nome</string>
     <string name="osm_editing_prefs_descr">Utilizador, palavra-passe, edição offline</string>
     <string name="multimedia_notes_prefs_descr">Tamanho da imagem, qualidade de áudio e vídeo</string>
     <string name="monitoring_prefs_descr">Navegação, precisão de registo</string>
@@ -3501,7 +3501,7 @@
     <string name="settings_item_import_error">Não foi possível importar de \'%1$s\'.</string>
     <string name="ui_customization_description">Personalize a quantidade de itens em \"Gaveta\", \"Configurar Mapa\" e \"Menu de Contexto\".
 \n
-\nDesative as extensões não utilizados para ocultar todos os seus controlos. %1$s.</string>
+\nDesative as extensões não utilizadas para ocultar todos os seus controlos. %1$s.</string>
     <string name="ui_customization_short_descr">Itens da gaveta, menu de contexto</string>
     <string name="ui_customization">Personalização da interface</string>
     <string name="shared_string_drawer">Gaveta</string>
@@ -3525,13 +3525,13 @@
     <string name="select_wikipedia_article_langs">Selecione as línguas dos artigos da Wikipédia no mapa. Mude para qualquer língua disponível enquanto lê o artigo.</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>
     <string name="tracker_item">OsmAnd Tracker</string>
-    <string name="quick_action_item">Ação rápida</string>
+    <string name="quick_action_item">Botão de ações rápidas</string>
     <string name="radius_ruler_item">Régua radial</string>
     <string name="measure_distance_item">Medir distância</string>
     <string name="travel_item">Viagem (Wikivoyage e Wikipédia)</string>
-    <string name="map_markers_item">Marcadores de mapa</string>
+    <string name="map_markers_item">Marcadores</string>
     <string name="favorites_item">Favoritos</string>
-    <string name="subscription_osmandlive_item">Assinatura - OsmAnd Live</string>
+    <string name="subscription_osmandlive_item">Subscrição - OsmAnd Live</string>
     <string name="osmand_purchases_item">Compras de OsmAnd</string>
     <string name="legend_item_description">O guia para a simbologia de um mapa.</string>
     <string name="navigation_profiles_item">Perfis de navegação</string>
@@ -3539,9 +3539,9 @@
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="osm_live_payment_subscription_management">O pagamento será debitado na sua conta Google Play na confirmação da compra.
 \n
-\n A assinatura é renovada automaticamente, a menos que seja cancelada antes da data de renovação. A sua conta será cobrada pelo período de renovação (mês/três meses/ano) apenas na data de renovação.
+\nA subscrição é renovada automaticamente, a não ser que seja cancelada antes da data de renovação. A sua conta será cobrada pelo período de renovação (mês/três meses/ano) apenas na data de renovação.
 \n
-\n Pode gerir e cancelar as suas subscrições, indo às suas definições do Google Play.</string>
+\nPode gerir e cancelar as suas subscrições, indo às suas definições do Google Play.</string>
     <string name="download_unsupported_action">Ação %1$s não suportada</string>
     <string name="extra_maps_menu_group">Mapas adicionais</string>
     <string name="some_articles_may_not_available_in_lang">Alguns artigos da Wikipédia podem não estar disponíveis no seu idioma.</string>
@@ -3566,7 +3566,7 @@
     <string name="lang_kk">Cazaque</string>
     <string name="lang_jv">Javanês</string>
     <string name="lang_gu">Guzerate</string>
-    <string name="lang_cv">Tchuvache</string>
+    <string name="lang_cv">Chuvache</string>
     <string name="lang_ce">Checheno</string>
     <string name="lang_bar">Bávaro</string>
     <string name="lang_ba">Basquires</string>
@@ -3604,9 +3604,9 @@
     <string name="pseudo_mercator_projection">Projeção pseudo-Mercator</string>
     <string name="one_image_per_tile">Um ficheiro de imagem por mosaico</string>
     <string name="sqlite_db_file">Ficheiro SQLiteDB</string>
-    <string name="online_map_name_helper_text">Forneça um nome para a origem do mapa on-line.</string>
-    <string name="online_map_url_helper_text">Insira ou cole a URL para a origem on-line.</string>
-    <string name="edit_online_source">Editar origem on-line</string>
+    <string name="online_map_name_helper_text">Forneça um nome para a origem do mapa online.</string>
+    <string name="online_map_url_helper_text">Introduza ou cole o URL para a origem online.</string>
+    <string name="edit_online_source">Editar origem online</string>
     <string name="expire_time">Tempo de validade</string>
     <string name="mercator_projection">Projeção de Mercator</string>
     <string name="storage_format">Formato de armazenamento</string>
@@ -3638,7 +3638,7 @@
     <string name="app_mode_go_cart">Kart</string>
     <string name="speed_cameras_alert">Os alertas de radares de velocidade em alguns países são proibidos por lei.</string>
     <string name="keep_active">Manter ativo</string>
-    <string name="please_provide_point_name_error">Forneça um nome para o ponto</string>
+    <string name="please_provide_point_name_error">Atribua um nome ao ponto</string>
     <string name="clear_tiles_warning">A aplicação dessas alterações limpará os dados temporários desta origem de mosaicos</string>
     <string name="speed_cameras_removed_descr">Este dispositivo não tem instalado o recurso de câmaras de velocidade.</string>
     <string name="speed_cameras_legal_descr">Em alguns países ou regiões, o uso de aplicações com avisos de radares é proibido por lei.
@@ -3647,18 +3647,18 @@
 \n
 \nSelecione %1$s e receberá alertas e avisos sobre radares de velocidade.
 \n
-\nSelecione %2$s. Todos os dados relacionados a radares de velocidade: alertas, notificações, POIs serão apagados até que o OsmAnd seja completamente reinstalado.</string>
-    <string name="plugin_wikipedia_description">Obter informações sobre pontos de interesse da Wikipédia. Um guia de bolso off-line para ver artigos sobre locais e destinos.</string>
+\nSelecione %2$s e yodos os dados relacionados a radares de velocidade: alertas, notificações, POIs serão eliminados até que o OsmAnd seja completamente reinstalado.</string>
+    <string name="plugin_wikipedia_description">Obter informações sobre pontos de interesse da Wikipédia. Um guia de bolso offline para ver artigos sobre locais e destinos.</string>
     <string name="app_mode_motor_scooter">Scooter</string>
     <string name="quick_action_remove_next_destination">Eliminar o ponto de destino mais próximo</string>
     <string name="search_download_wikipedia_maps">Descarregar mapas da Wikipédia</string>
     <string name="additional_actions_descr">Pode aceder a essas ações tocando no botão “%1$s”.</string>
     <string name="shared_string_uninstall">Desinstalar</string>
     <string name="lenght_limit_description">Forneça o comprimento do seu veículo, podem ser aplicadas algumas restrições de rota a veículos longos.</string>
-    <string name="use_volume_buttons_as_zoom">Botões de volume como zoom</string>
+    <string name="use_volume_buttons_as_zoom">Botões de volume mudam o zoom</string>
     <string name="speed_cameras_restart_descr">Reinicie a aplicação para eliminar os dados da câmara de velocidade.</string>
     <string name="item_deleted">%1$s eliminado</string>
-    <string name="quick_action_showhide_mapillary_descr">Se tocar neste botão de ação, mostra ou oculta a camada Mapillary no mapa.</string>
+    <string name="quick_action_showhide_mapillary_descr">Um botão que alterna entre mostrar ou ocultar a camada Mapillary no mapa.</string>
     <string name="vessel_height_warning_link">Definir altura da embarcação</string>
     <string name="app_mode_enduro_motorcycle">Motorizada de enduro</string>
     <string name="app_mode_inline_skates">Patins em linha</string>
@@ -3701,10 +3701,10 @@
     <string name="set_working_days_to_continue">Defina dias úteis para continuar</string>
     <string name="route_between_points">Rota entre pontos</string>
     <string name="plan_a_route">Planear uma rota</string>
-    <string name="add_to_a_track">Adicionar ao trilho</string>
+    <string name="add_to_a_track">Adicionar a um trilho</string>
     <string name="add_hidden_group_info">O ponto adicionado não será visível no mapa, já que o grupo selecionado está escondido, pode encontrá-lo em \"%s\".</string>
     <string name="track_show_start_finish_icons">Mostrar ícones de início e fim</string>
-    <string name="select_track_width">Selecionar a largura</string>
+    <string name="select_track_width">Espessura da linha do trilho</string>
     <string name="gpx_split_interval_descr">Selecione o intervalo em que as marcas com distância ou tempo no trilho serão mostradas.</string>
     <string name="gpx_split_interval_none_descr">Selecione a opção de divisão desejada: por tempo ou por distância.</string>
     <string name="shared_string_custom">Personalizado</string>
@@ -3715,16 +3715,16 @@
     <string name="plan_route_open_existing_track">Abrir trilho existente</string>
     <string name="plan_route_select_track_file_for_open">Selecione um ficheiro de trilho para abrir.</string>
     <string name="plan_route_create_new_route">Criar nova rota</string>
-    <string name="shared_string_done">Pronto</string>
+    <string name="shared_string_done">Feito</string>
     <string name="overwrite_track">Substituir trilho</string>
-    <string name="save_as_new_track">Gravar como novo trilho</string>
+    <string name="save_as_new_track">Guardar como novo trilho</string>
     <string name="reverse_route">Rota inversa</string>
     <string name="route_between_points_whole_track_button_desc">O trilho inteiro será recalculado a usar o perfil selecionado.</string>
     <string name="route_between_points_next_segment_button_desc">Apenas será recalculado o próximo segmento utilizando o perfil selecionado.</string>
     <string name="route_between_points_desc">Escolha como ligar os pontos por uma linha reta ou calcule uma rota entre eles como especificado abaixo.</string>
     <string name="whole_track">Trilho inteiro</string>
     <string name="next_segment">Próximo segmento</string>
-    <string name="route_between_points_warning_desc">Em seguida, encaixe a sua pista na estrada mais próxima permitida com um dos seus perfis de navegação para usar esta opção.</string>
+    <string name="route_between_points_warning_desc">Em seguida, encaixe o trilho na estrada mais próxima permitida com um dos seus perfis de navegação para usar esta opção.</string>
     <string name="threshold_distance">Distância limiar</string>
     <string name="navigation_profile">Perfil de navegação</string>
     <string name="route_between_points_add_track_desc">Selecione um ficheiro de trilho no qual será adicionado um novo segmento.</string>
@@ -3734,14 +3734,14 @@
     <string name="select_another_track">Selecionar outro trilho</string>
     <string name="navigate_to_track_descr">Navegar da minha posição até ao trilho</string>
     <string name="pass_whole_track_descr">Ponto do trilho para navegar</string>
-    <string name="start_of_the_track">Início da pista</string>
+    <string name="start_of_the_track">Início do trilho</string>
     <string name="nearest_point">Ponto mais próximo</string>
     <string name="attach_to_the_roads">Fixar às estradas</string>
     <string name="delete_address">Eliminar endereço</string>
     <string name="add_address">Adicionar endereço</string>
     <string name="access_hint_enter_address">Insira o endereço</string>
-    <string name="plan_route_trim_before">Aparecer antes</string>
-    <string name="plan_route_trim_after">Aparecer depois</string>
+    <string name="plan_route_trim_before">Recortar antes</string>
+    <string name="plan_route_trim_after">Recortar depois</string>
     <string name="plan_route_change_route_type_before">Alterar o tipo de rota antes</string>
     <string name="plan_route_change_route_type_after">Alterar o tipo de rota após</string>
     <string name="street_level_imagery">Imagens ao nível das ruas</string>
@@ -3749,19 +3749,19 @@
     <string name="in_case_of_reverse_direction">No caso de direção inversa</string>
     <string name="shared_string_gpx_route">Rota de trilho</string>
     <string name="shared_string_gpx_files">Trilhos</string>
-    <string name="marker_save_as_track">Gravar como ficheiro de trilho</string>
+    <string name="marker_save_as_track">Guardar como ficheiro de trilho</string>
     <string name="add_segment_to_the_track">Adicionar a um ficheiro de trilho</string>
     <string name="empty_state_my_tracks_desc">Importar ou gravar ficheiros de trilho</string>
     <string name="empty_state_my_tracks">Adicionar ficheiros de trilho</string>
     <string name="quick_action_add_gpx">Adicionar ponto de passagem de trilho</string>
     <string name="show_gpx">Trilhos</string>
-    <string name="shared_string_save_as_gpx">Gravar como novo ficheiro de trilho</string>
+    <string name="shared_string_save_as_gpx">Guardar como novo ficheiro de trilho</string>
     <string name="save_track_to_gpx_globally">Registar o trilho num ficheiro GPX</string>
     <string name="layer_gpx_layer">Trilhos</string>
     <string name="context_menu_item_add_waypoint">Adicionar ponto de passagem de trilho</string>
-    <string name="map_widget_monitoring">Gravação de viagem</string>
+    <string name="map_widget_monitoring">Gravar viagem</string>
     <string name="monitoring_control_start">Gravar</string>
-    <string name="save_global_track_interval_descr">Especifique o intervalo de registo para a gravação geral do trilho (ligado através do widget de \'gravação de viagem\' no mapa).</string>
+    <string name="save_global_track_interval_descr">Especifique o intervalo de registo para a gravação geral do trilho (ligado através do widget de \'Gravar viagem\' no mapa).</string>
     <string name="gpx_monitoring_stop">Pausar a gravação da viagem</string>
     <string name="gpx_monitoring_start">Retomar a gravação da viagem</string>
     <string name="system_default_theme">Predefinição do sistema</string>
@@ -3770,9 +3770,9 @@
     <string name="all_previous_segments">Todos os segmentos anteriores</string>
     <string name="only_selected_segment_recalc">Apenas o segmento selecionado será recalculado a usar o perfil selecionado.</string>
     <string name="all_next_segments_will_be_recalc">Todos os segmentos subsequentes serão recalculados a utilizar o perfil selecionado.</string>
-    <string name="all_previous_segments_will_be_recalc">Todos os segmentos anteriores serão recalculados a usar o perfil selecionado.</string>
+    <string name="all_previous_segments_will_be_recalc">Todos os segmentos anteriores serão recalculados usando o perfil selecionado.</string>
     <string name="open_saved_track">Abrir trilho guardado</string>
-    <string name="shared_string_is_saved">está gravado</string>
+    <string name="shared_string_is_saved">está guardado</string>
     <string name="one_point_error">Adicione pelo menos dois pontos.</string>
     <string name="shared_string_redo">Refazer</string>
     <string name="simplified_track">Trilho simplificado</string>
@@ -3800,30 +3800,30 @@
     <string name="sort_name_ascending">Nome: A – Z</string>
     <string name="start_finish_icons">Ícones de início e fim</string>
     <string name="contour_lines_thanks">Obrigado por comprar \'Curvas de nível\'</string>
-    <string name="osm_live_payment_desc_hw">A assinatura é cobrada pelo período selecionado. Cancele-a na sua AppGallery a qualquer momento.</string>
+    <string name="osm_live_payment_desc_hw">A subscrição é cobrada pelo período selecionado. Cancele-a na sua AppGallery a qualquer momento.</string>
     <string name="osm_live_payment_subscription_management_hw">Ao confirmar a sua subscrição, será debitado na sua conta AppGallery.
 \n
-\nA assinatura é renovada automaticamente, a não ser que seja cancelada antes da data de renovação. A sua conta será cobrada pelo período de renovação (mês/três meses/ano) apenas na data de renovação.
+\nA subscrição é renovada automaticamente, a não ser que seja cancelada antes da data de renovação. A sua conta será cobrada pelo período de renovação (mês/três meses/ano) apenas na data de renovação.
 \n
-\nPode gerir e cancelar as suas subscrições a ir às definições da sua AppGallery.</string>
-    <string name="routing_attr_avoid_footways_description">Evitar passeios</string>
-    <string name="routing_attr_avoid_footways_name">Evitar passeios</string>
+\nPode gerir e cancelar as suas subscrições nas definições da sua AppGallery.</string>
+    <string name="routing_attr_avoid_footways_description">Evitar vias pedonais</string>
+    <string name="routing_attr_avoid_footways_name">Evitar vias pedonais</string>
     <string name="what_is_new">Novidades</string>
     <string name="development">Desenvolvimento</string>
     <string name="use_live_public_transport">Dados do OsmAnd Live</string>
     <string name="use_live_routing">Dados do OsmAnd Live</string>
-    <string name="complex_routing_descr">Roteamento em duas fases para a navegação automotiva.</string>
+    <string name="complex_routing_descr">Roteamento em duas fases para a navegação automóvel.</string>
     <string name="use_native_pt">Desenvolvimento nativos de transportes públicos</string>
     <string name="use_native_pt_desc">Mudar para o cálculo de rotas de transportes públicos Java (seguro)</string>
-    <string name="perform_oauth_authorization_description">Entre com o OAuth para usar os recursos do osmedit</string>
+    <string name="perform_oauth_authorization_description">Inicie sessão com o OAuth para usar os recursos de edição OpenStreetMap</string>
     <string name="perform_oauth_authorization">Iniciar sessão com OAuth</string>
     <string name="clear_osm_token">Limpar token do OpenStreetMap OAuth</string>
-    <string name="osm_edit_logout_success">Saiu</string>
-    <string name="file_already_imported">O ficheiro já é importado em OsmAnd</string>
+    <string name="osm_edit_logout_success">Sessão terminada</string>
+    <string name="file_already_imported">O ficheiro já foi importado para o OsmAnd</string>
     <string name="use_two_phase_routing">Usar algoritmo de roteamento de 2 fases A*</string>
     <string name="snowmobile_render_descr">Para a condução de motos de neve com estradas e pistas dedicadas.</string>
     <string name="shared_string_graph">Gráfico</string>
-    <string name="message_need_calculate_route_before_show_graph">Dados de %1$s disponíveis apenas em estradas, calcule uma rota a usar \"Rota entre pontos\" para ver os gráficos.</string>
+    <string name="message_need_calculate_route_before_show_graph">Dados de %1$s disponíveis apenas em estradas, calcule uma rota usando \"Rota entre pontos\" para ver os gráficos.</string>
     <string name="message_graph_will_be_available_after_recalculation">Por favor aguarde.
 \nO gráfico estará disponível após o recálculo da rota.</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
@@ -3841,34 +3841,34 @@
     <string name="icon_group_emergency">Emergência</string>
     <string name="icon_group_travel">Viagem</string>
     <string name="message_you_need_add_two_points_to_show_graphs">Adicione pelo menos dois pontos</string>
-    <string name="manage_subscription">Gerir a assinatura</string>
-    <string name="subscription_payment_issue_title">Toque no botão para ir às definições de assinatura do Google Play para corrigir a sua assinatura.</string>
-    <string name="subscription_expired_title">A assinatura do OsmAnd Live expirou</string>
-    <string name="subscription_paused_title">A assinatura do OsmAnd Live foi pausada</string>
-    <string name="subscription_on_hold_title">A assinatura do OsmAnd Live está em espera</string>
+    <string name="manage_subscription">Gerir a subscrição</string>
+    <string name="subscription_payment_issue_title">Toque no botão para ir às definições de assinatura do Google Play para corrigir a sua subscrição.</string>
+    <string name="subscription_expired_title">A subscrição do OsmAnd Live expirou</string>
+    <string name="subscription_paused_title">A subscrição do OsmAnd Live foi pausada</string>
+    <string name="subscription_on_hold_title">A subscrição do OsmAnd Live está em espera</string>
     <string name="open_street_map_login_mode">Tem de iniciar sessão para enviar alterações.
 \n
 \nPode iniciar sessão usando o método seguro OAuth ou usar o seu nome de utilizador e a sua palavra-passe.</string>
     <string name="login_open_street_map">Iniciar sessão no OpenStreetMap</string>
     <string name="login_open_street_map_org">Iniciar sessão no OpenStreetMap.org</string>
-    <string name="sign_in_with_open_street_map">Entrar com OpenStreetMap</string>
+    <string name="sign_in_with_open_street_map">Iniciar sessão com OpenStreetMap</string>
     <string name="use_login_password">Usar o nome do utilizador e palavra-passe</string>
     <string name="login_account">Conta</string>
     <string name="user_login">Utilizador</string>
     <string name="markers_history">Histórico de marcadores</string>
-    <string name="send_files_to_openstreetmap">Enviar ficherio de GPX ao OpenStreetMap</string>
+    <string name="send_files_to_openstreetmap">Enviar ficheiro de GPX para o OpenStreetMap</string>
     <string name="enter_text_separated">Introduza etiquetas separadas por vírgula.</string>
-    <string name="gpx_upload_public_visibility_descr">\"Público\" significa que o rastreamento é mostrado publicamente em Seus traços de GPS e em listas públicas de rastreamento de GPS, e na lista pública de rastreamento com carimbos de data e hora na forma bruta. Os dados servidos através da API não fazem referência à sua página de rastreamento. Os marcadores de ponto de rastreamento não estão disponíveis através da API de GPS pública, e os pontos de rastreamento não estão ordenados cronologicamente.</string>
+    <string name="gpx_upload_public_visibility_descr">\"Público\" significa que o rastreamento é mostrado publicamente nos seus traços de GPS, em listas públicas de rastreamento de GPS e na lista pública de rastreamento com carimbos de data e hora na forma bruta. Os dados servidos através da API não fazem referência à sua página de rastreamento. Os marcadores de ponto de rastreamento não estão disponíveis através da API de GPS pública, e os pontos de rastreamento não estão ordenados cronologicamente.</string>
     <string name="gpx_upload_private_visibility_descr">\"Privado\" significa que o rastreamento não aparece em nenhuma listagem pública, mas os pontos de rastreamento dela em ordem não cronológica estão disponíveis através da API pública do GPS sem carimbos de tempo.</string>
     <string name="gpx_upload_identifiable_visibility_descr">\"Identificável\" significa que o rastreamento será mostrado publicamente nos seus traços de GPS e nas listas públicas de rastreamento de GPS, ou seja, outros utilizadores serão capazes de descarregar o rastreamento bruto e associá-lo ao seu nome de utilizador. Os dados públicos de pontos de rastreamento marcados com a hora da API do GPS servidos através da API de pontos de rastreamento farão referência à sua página de rastreamento original.</string>
-    <string name="gpx_upload_trackable_visibility_descr">\"Rastreável\" significa que o rastreamento não aparece em nenhuma listagem pública, mas pontos de rastreamento processados com carimbos de tempo a partir dele (que não podem ser associados diretamente a si) fazem através de descarregadas da API pública do GPS.</string>
+    <string name="gpx_upload_trackable_visibility_descr">\"Rastreável\" significa que o rastreamento não aparece em nenhuma listagem pública, mas pontos de rastreamento processados com carimbos de tempo a partir dele (que não podem ser associados diretamente a si) estarão disponíveis através da API pública de GPS.</string>
     <string name="osm_edit_close_note">Fechar nota do OSM</string>
     <string name="osm_edit_comment_note">Comentário de nota do OSM</string>
     <string name="osm_login_descr">Pode iniciar sessão pelo método seguro OAuth ou use o seu nome de utilizador e a palavra-passe.</string>
-    <string name="shared_string_add_photo">Adicionar fotos</string>
-    <string name="register_on_openplacereviews">Cadastre-se em
+    <string name="shared_string_add_photo">Adicionar fotografia</string>
+    <string name="register_on_openplacereviews">Crie uma conta em
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">As fotos são fornecidas pelo projeto de dados abertos OpenPlaceReviews.org. Para enviar as suas fotos precisa cadastrar-se no site.</string>
+    <string name="register_on_openplacereviews_desc">As fotografias são fornecidas pelo projeto de dados abertos OpenPlaceReviews.org. Para enviar as suas fotografias tem de criar uma conta nesse site.</string>
     <string name="register_opr_create_new_account">Criar uma conta</string>
     <string name="register_opr_have_account">Já tenho uma conta</string>
     <string name="shared_string_search_history">Histórico de pesquisa</string>
@@ -3878,14 +3878,14 @@
     <string name="approximate_file_size">Tamanho aproximado do ficheiro</string>
     <string name="select_data_to_export">Selecione os dados a serem exportados para o ficheiro.</string>
     <string name="file_size_needed_for_import">Necessário para a importação</string>
-    <string name="export_not_enough_space_descr">O seu dispositivo só tem %1$s livres. Por favor, liberte algum espaço ou desmarque alguns itens para exportar.</string>
+    <string name="export_not_enough_space_descr">O seu dispositivo só tem disponível %1$s. Liberte algum espaço ou desmarque alguns itens para exportar.</string>
     <string name="export_not_enough_space">Não há espaço suficiente</string>
     <string name="add_to_mapillary">Adicionar ao Mapillary</string>
     <string name="add_to_opr">Adicionar ao OpenPlaceReviews</string>
-    <string name="add_photos_descr">OsmAnd mostra fotos de várias origens:
-\nOpenPlaceReviews - fotos de POI;
-\nMapillary - imagens ao nível da rua;
-\nWeb / Wikimedia - fotos de POI como nos dados do OpenStreetMap.</string>
+    <string name="add_photos_descr">OsmAnd mostra fotografias de várias origens:
+\nOpenPlaceReviews - fotografias de POI;
+\nMapillary - fotografias ao nível do solo;
+\nWeb / Wikimedia - fotografias de POI definidas no OpenStreetMap.</string>
     <string name="select_groups_for_import">Selecionar os grupos que serão importados.</string>
     <string name="select_items_for_import">Selecionar os objetos que serão importados.</string>
     <string name="use_dev_url">Utilizar dev.openstreetmap.org</string>
@@ -3894,7 +3894,7 @@
     <string name="use_dev_url_descr">Mude para usar dev.openstreetmap.org ao invés de openstreetmap.org para testar enviar uma OSM Nota / POI / GPX.</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="lang_de_casual">Alemão (casual)</string>
-    <string name="app_mode_light_aircraft">Aeronaves ligeiras</string>
+    <string name="app_mode_light_aircraft">Aeronave ligeira</string>
     <string name="plan_route_join_segments">Unir segmentos</string>
     <string name="plan_route_split_before">Dividir antes</string>
     <string name="plan_route_split_after">Dividir após</string>
@@ -3915,10 +3915,10 @@
     <string name="shared_string_server_url">URL do servidor</string>
     <string name="shared_string_enter_param">Digite o parâmetro</string>
     <string name="keep_it_empty_if_not">Mantenha-o vazio se não</string>
-    <string name="online_routing_example_hint">O URL com todos os parâmetros parecerá-se assim:</string>
-    <string name="test_route_calculation">Cálculo da rota de teste</string>
+    <string name="online_routing_example_hint">O URL com todos os parâmetros será assim:</string>
+    <string name="test_route_calculation">Testar cálculo de rota</string>
     <string name="routing_engine_vehicle_type_driving">Condução</string>
-    <string name="routing_engine_vehicle_type_foot">Pé</string>
+    <string name="routing_engine_vehicle_type_foot">A pé</string>
     <string name="routing_engine_vehicle_type_bike">Bicicleta</string>
     <string name="routing_engine_vehicle_type_car">Carro</string>
     <string name="message_error_recheck_parameters">Erro, verifique novamente os parâmetros</string>
@@ -3932,12 +3932,12 @@
     <string name="analyze_by_intervals">Analisar por intervalos</string>
     <string name="upload_to_openstreetmap">Enviar para OpenStreetMap</string>
     <string name="edit_track">Editar trilho</string>
-    <string name="rename_track">Renomear trilho</string>
+    <string name="rename_track">Alterar nome do trilho</string>
     <string name="change_folder">Mudar pasta</string>
     <string name="hillshade_slope_contour_lines">Sombras de relevo / declives / curvas de nível</string>
-    <string name="open_place_reviews_plugin_description">OpenPlaceReviews é um projeto comunitário sobre lugares públicos como restaurantes, hotéis, museus, pontos de passagem. Recolhe toda a informação pública sobre eles, como fotos, resenhas, ligações para outros sistemas OpenStreetMap, Wikipédia.
+    <string name="open_place_reviews_plugin_description">OpenPlaceReviews é um projeto comunitário sobre lugares públicos como restaurantes, hotéis, museus, locais etc. Recolhe toda a informação pública sobre eles, como fotografias, classificações/avaliações, ligações para outros sistemas como o OpenStreetMap e a Wikipédia.
 \n
-\nTodos os dados OpenPlaceReview estão abertos e disponíveis para todos: http://openplacereviews.org/data.
+\nTodos os dados do OpenPlaceReviews estão abertos e disponíveis para todos: http://openplacereviews.org/data
 \n
 \nPode ler mais em: http://openplacereviews.org</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
@@ -3946,27 +3946,31 @@
     <string name="activity_type_water_name">Água</string>
     <string name="activity_type_winter_name">Inverno</string>
     <string name="activity_type_snowmobile_name">Moto de neve</string>
-    <string name="activity_type_riding_name">Equitação</string>
-    <string name="activity_type_racing_name">Corrida</string>
-    <string name="activity_type_mountainbike_name">Bicicleta de montanha</string>
+    <string name="activity_type_riding_name">A cavalo</string>
+    <string name="activity_type_racing_name">Corrida competitiva</string>
+    <string name="activity_type_mountainbike_name">BTT</string>
     <string name="activity_type_cycling_name">Ciclismo</string>
     <string name="activity_type_running_name">Correr</string>
-    <string name="activity_type_walking_name">Caminhada</string>
-    <string name="activity_type_offroad_name">Fora da estrada</string>
-    <string name="activity_type_motorbike_name">Motocicleta</string>
+    <string name="activity_type_walking_name">A pé</string>
+    <string name="activity_type_offroad_name">Todo o terreno</string>
+    <string name="activity_type_motorbike_name">Moto</string>
     <string name="activity_type_car_name">Carro</string>
     <string name="add_online_routing_engine">Adicionar motor de roteamento online</string>
     <string name="announcement_time_passing">Ao passar</string>
     <string name="routing_engine_vehicle_type_cycling_electric">Bicicleta elétrica</string>
     <string name="live_update_frequency_hour_variant">As atualizações ao mapa serão verificadas a todas as horas. Próxima %1$s em %2$s.</string>
-    <string name="live_update_delete_updates_msg">Tem a certeza que quer eliminar todas as %s atualizações live\?</string>
-    <string name="release_4_0_beta">• Atualizações OsmAnd Live movidas para \"Descarregamentos &gt; Atualizações\"
+    <string name="live_update_delete_updates_msg">Tem a certeza que quer eliminar todas as %s atualizações OsmAnd Live\?</string>
+    <string name="release_4_0_beta">• Adicionada opção para descarregar curvas de nível em pés.
 \n
-\n • Os trilhos podem ser agora coloridos conforme a altitude, velocidade e declive.
+\n• Planear rota: adicionadas abas para alternar entre pontos ou gráficos.
 \n
-\n • Adicionada opção para alterar a aparência da linha de rota de navegação
+\n• Atualizações OsmAnd Live movidas para \"Descarregamentos &gt; Atualizações\"
 \n
-\n • Janela de diálogo \"Gravação do trilho\" atualizada
+\n• Os trilhos podem ser agora coloridos conforme a altitude, velocidade e declive.
+\n
+\n• Adicionada opção para alterar a aparência da linha de rota de navegação.
+\n
+\n• Janela de diálogo \"Gravação do trilho\" atualizada.
 \n
 \n</string>
     <string name="routing_attr_height_obstacles_description">O roteamento pode evitar subidas íngremes.</string>
@@ -4008,7 +4012,7 @@
     <string name="quick_action_coordinates_widget_descr">Um alternador para mostrar ou ocultar um widget de coordenadas no mapa.</string>
     <string name="live_update_frequency_week_variant">As atualizações do mapa serão verificadas todas as semanas. Próxima %1$s em %2$s.</string>
     <string name="live_update_frequency_day_variant">As atualizações do mapa serão verificadas todos os dias. Próxima %1$s em %2$s.</string>
-    <string name="empty_purchases_description">Se as suas assinaturas não aparecerem aqui, toque em “%1$s” ou contacte a nossa equipa de apoio.</string>
+    <string name="empty_purchases_description">Se as suas compras não aparecerem aqui, toque em “%1$s” ou contacte a nossa equipa de suporte.</string>
     <string name="routing_attr_prefer_hiking_routes_description">Preferir rotas de caminhadas</string>
     <string name="routing_attr_prefer_hiking_routes_name">Preferir rotas de caminhadas</string>
     <string name="routing_engine_vehicle_type_hiking">Caminhada</string>
@@ -4021,12 +4025,12 @@
     <string name="last_time_checked">Última verificação: %s</string>
     <string name="update_frequency">Frequência da atualização</string>
     <string name="app_restart_required">Necessário reiniciar a aplicação para aplicar algumas configurações.</string>
-    <string name="trip_recording_logging_interval_info">Período de tempo do intervalo de registo em que o OsmAnd perguntará pelos dados da posição atual.</string>
-    <string name="no_purchases">Não tem assinaturas</string>
+    <string name="trip_recording_logging_interval_info">Frequência em que o OsmAnd irá registar a localização caso o sinal GPS esteja disponível.</string>
+    <string name="no_purchases">Não tem compras</string>
     <string name="contact_support_description">Se tiver alguma dúvida, contacte-nos em %1$s.</string>
     <string name="announcement_time_intervals">Intervalos de tempo e distância</string>
-    <string name="map_widget_distance_by_tap">Distância por toque</string>
-    <string name="contact_support">Contacte o apoio</string>
+    <string name="map_widget_distance_by_tap">Distância com 2 dedos</string>
+    <string name="contact_support">Contacte o suporte</string>
     <string name="troubleshooting_description">Por favor siga este link se tiver algum problema com assinaturas.</string>
     <string name="update_all_maps_added">Atualizar todos os mapas para %1$s\?</string>
     <string name="routing_attr_short_way_description">Rota mais curta otimizada (mais económica)</string>
@@ -4039,7 +4043,7 @@
     <string name="routing_attr_allow_streams_name">Permitir ribeiros e valas</string>
     <string name="profile_type_osmand_string">Perfil OsmAnd</string>
     <string name="profile_type_user_string">Perfil do utilizador</string>
-    <string name="routing_attr_allow_intermittent_description">Permitir vias aquáticas intermitentes</string>
+    <string name="routing_attr_allow_intermittent_description">Permitir cursos de água intermitentes</string>
     <string name="routing_engine_vehicle_type_racingbike">Bicicleta de corrida</string>
     <string name="routing_engine_vehicle_type_mtb">BTT</string>
     <string name="segments_count">Segmento %1$d</string>
@@ -4052,7 +4056,7 @@
     <string name="track_recording_save_and_stop">Guardar e parar de gravar</string>
     <string name="track_recording_title">A gravação do trilho parou</string>
     <string name="track_recording_description">Tem a certeza que quer parar de gravar\?
-\nTodos os dados por gravar serão perdidos.</string>
+\nTodos os dados por guardar serão perdidos.</string>
     <string name="on_pause">Em pausa</string>
     <string name="delete_updates">Eliminar atualizações</string>
     <string name="purchases">Compras</string>
@@ -4065,9 +4069,9 @@
     <string name="track_has_no_altitude">O trilho não contém dados da altitude.</string>
     <string name="track_has_no_speed">O trilho não contém dados da velocidade.</string>
     <string name="select_another_colorization">Por favor selecione outro tipo de colorização.</string>
-    <string name="trip_recording_save_and_continue">Gravar e continuar</string>
-    <string name="lost_data_warning">Todos os dados por gravar serão perdidos.</string>
-    <string name="show_start_dialog">Mostrar janela de confirmação para iniciar</string>
+    <string name="trip_recording_save_and_continue">Guardar e continuar</string>
+    <string name="lost_data_warning">Todos os dados por guardar serão perdidos.</string>
+    <string name="show_start_dialog">Mostrar janela de diálogo ao iniciar</string>
     <string name="trip_recording_show_start_dialog_setting">Se desativado, a gravação começará logo a seguir ao tocar no widget ou item do menu, ignorando a janela de confirmação.</string>
     <string name="customize_route_line">Personalizar a linha de itinerário</string>
     <string name="shared_string_route_line">Linha de itinerário</string>
@@ -4075,18 +4079,22 @@
     <string name="specify_color_for_map_mode">Especificar cor para o modo mapa: %1$s.</string>
     <string name="new_device_account">Novo dispositivo / nova conta</string>
     <string name="troubleshooting">Resolução de problemas</string>
-    <string name="annual_subscription">Assinatura anual</string>
-    <string name="monthly_subscription">Assinatura mensal</string>
-    <string name="three_months_subscription">Assinatura de 3 meses</string>
+    <string name="annual_subscription">Subscrição anual</string>
+    <string name="monthly_subscription">Subscrição mensal</string>
+    <string name="three_months_subscription">Subscrição de 3 meses</string>
     <string name="next_billing_date">Próxima faturação: %1$s</string>
     <string name="in_grace_period">Em período experimental</string>
     <string name="on_hold">Em espera</string>
-    <string name="routing_attr_allow_intermittent_name">Permitir hidrovias sazonais</string>
+    <string name="routing_attr_allow_intermittent_name">Permitir cursos de água sazonais</string>
     <string name="osmand_live_cancelled">Cancelada</string>
-    <string name="renew_subscription">Renovar assinatura</string>
+    <string name="renew_subscription">Renovar subscrição</string>
     <string name="expired">Expirou</string>
     <string name="exit_number">Número da saída</string>
     <string name="announce_when_exceeded">Anunciar quando ultrapassado</string>
     <string name="user_points">Pontos do utilizador</string>
     <string name="output">Saída</string>
+    <string name="shared_string_feet">pés</string>
+    <string name="srtm_download_list_help_message">O OsmAnd fornece dados de curvas de nível em metros e pés. Terá de descarregar novamente o ficheiro para alterar o formato.</string>
+    <string name="srtm_unit_format">Formato de unidades de curvas de nível</string>
+    <string name="srtm_download_single_help_message">Selecione o formato necessário. Terá de descarregar novamente o ficheiro para alterar o formato.</string>
 </resources>

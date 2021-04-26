@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -71,7 +73,7 @@ public class SendSearchQueryBottomSheet extends MenuBottomSheetDialogFragment {
 				AndroidNetworkUtils.sendRequestAsync(app, "https://osmand.net/api/missing_search", params,
 						null, true, true, new AndroidNetworkUtils.OnRequestResultListener() {
 							@Override
-							public void onResult(String result) {
+							public void onResult(@Nullable String result, @Nullable String error) {
 								if (result != null && isAdded()) {
 									try {
 										JSONObject obj = new JSONObject(result);

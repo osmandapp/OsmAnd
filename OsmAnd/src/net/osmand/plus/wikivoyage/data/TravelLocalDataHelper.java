@@ -4,11 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
+import net.osmand.plus.wikivoyage.data.TravelHelper.GpxReadCallback;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -117,14 +119,6 @@ public class TravelLocalDataHelper {
 	}
 
 	public void addArticleToSaved(@NonNull TravelArticle article) {
-		if (!isArticleSaved(article)) {
-			savedArticles.add(article);
-			dbHelper.addSavedArticle(article);
-			notifySavedUpdated();
-		}
-	}
-
-	public void restoreSavedArticle(@NonNull TravelArticle article) {
 		if (!isArticleSaved(article)) {
 			savedArticles.add(article);
 			dbHelper.addSavedArticle(article);
@@ -305,7 +299,7 @@ public class TravelLocalDataHelper {
 				conn.execSQL("ALTER TABLE " + BOOKMARKS_TABLE_NAME + " ADD " + BOOKMARKS_COL_TRAVEL_BOOK + " TEXT");
 				String selectedTravelBookName = context.getTravelHelper().getSelectedTravelBookName();
 				if (selectedTravelBookName != null) {
-					Object[] args = new Object[]{selectedTravelBookName};
+					Object[] args = new Object[] {selectedTravelBookName};
 					conn.execSQL("UPDATE " + HISTORY_TABLE_NAME + " SET " + HISTORY_COL_TRAVEL_BOOK + " = ?", args);
 					conn.execSQL("UPDATE " + BOOKMARKS_TABLE_NAME + " SET " + BOOKMARKS_COL_TRAVEL_BOOK + " = ?", args);
 				}
@@ -368,7 +362,7 @@ public class TravelLocalDataHelper {
 					conn.execSQL("INSERT INTO " + HISTORY_TABLE_NAME + "(" + HISTORY_COL_ARTICLE_TITLE + ", "
 							+ HISTORY_COL_LANG + ", " + HISTORY_COL_IS_PART_OF + ", " + HISTORY_COL_LAST_ACCESSED
 							+ ", " + HISTORY_COL_TRAVEL_BOOK + ") VALUES (?, ?, ?, ?, ?)", new Object[] {
-							item.articleTitle, item.lang, item.isPartOf, item.lastAccessed, travelBook });
+							item.articleTitle, item.lang, item.isPartOf, item.lastAccessed, travelBook});
 				} finally {
 					conn.close();
 				}
@@ -389,8 +383,8 @@ public class TravelLocalDataHelper {
 									"WHERE " + HISTORY_COL_ARTICLE_TITLE + " = ? " +
 									" AND " + HISTORY_COL_LANG + " = ?" +
 									" AND " + HISTORY_COL_TRAVEL_BOOK + " = ?",
-							new Object[]{item.isPartOf, item.lastAccessed, 
-								item.articleTitle, item.lang, travelBook});
+							new Object[] {item.isPartOf, item.lastAccessed,
+									item.articleTitle, item.lang, travelBook});
 				} finally {
 					conn.close();
 				}
@@ -406,10 +400,10 @@ public class TravelLocalDataHelper {
 			if (conn != null) {
 				try {
 					conn.execSQL("DELETE FROM " + HISTORY_TABLE_NAME +
-									" WHERE " + HISTORY_COL_ARTICLE_TITLE+ " = ?" +
+									" WHERE " + HISTORY_COL_ARTICLE_TITLE + " = ?" +
 									" AND " + HISTORY_COL_LANG + " = ?" +
 									" AND " + HISTORY_COL_TRAVEL_BOOK + " = ?",
-							new Object[]{item.articleTitle, item.lang, travelBook});
+							new Object[] {item.articleTitle, item.lang, travelBook});
 				} finally {
 					conn.close();
 				}
@@ -480,63 +474,84 @@ public class TravelLocalDataHelper {
 			if (travelBook == null) {
 				return;
 			}
-			context.getTravelHelper().getArticleById(article.generateIdentifier(), article.lang, true,
-					new TravelHelper.GpxReadCallback() {
-						@Override
-						public void onGpxFileReading() {
+			final TravelHelper travelHelper = context.getTravelHelper();
+			travelHelper.getArticleById(article.generateIdentifier(), article.lang, true, new GpxReadCallback() {
+				@Override
+				public void onGpxFileReading() {
 
-						}
+				}
 
-						@Override
-						public void onGpxFileRead(@Nullable GPXUtilities.GPXFile gpxFile) {
-							SQLiteConnection conn = openConnection(false);
-							if (conn != null) {
-								try {
-									String query = "INSERT INTO " + BOOKMARKS_TABLE_NAME + " (" +
-											BOOKMARKS_COL_ARTICLE_TITLE + ", " +
-											BOOKMARKS_COL_LANG + ", " +
-											BOOKMARKS_COL_IS_PART_OF + ", " +
-											BOOKMARKS_COL_IMAGE_TITLE + ", " +
-											BOOKMARKS_COL_TRAVEL_BOOK + ", " +
-											BOOKMARKS_COL_LAT + ", " +
-											BOOKMARKS_COL_LON + ", " +
-											BOOKMARKS_COL_ROUTE_ID + ", " +
-											BOOKMARKS_COL_CONTENT_JSON + ", " +
-											BOOKMARKS_COL_CONTENT + ", " +
-											BOOKMARKS_COL_LAST_MODIFIED + ", " +
-											BOOKMARKS_COL_GPX_GZ +
-											") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-									conn.execSQL(query, new Object[]{article.title, article.lang,
-											article.aggregatedPartOf, article.imageTitle,
-											travelBook, article.lat, article.lon, article.routeId, article.contentsJson,
-											article.content, article.getFile().lastModified(),
-											Algorithms.stringToGzip(GPXUtilities.asString(article.gpxFile))});
-								} finally {
-									conn.close();
-								}
-							}
+				@Override
+				public void onGpxFileRead(@Nullable GPXFile gpxFile) {
+					if (gpxFile != null) {
+						travelHelper.createGpxFile(article);
+					}
+
+					SQLiteConnection conn = openConnection(false);
+					if (conn != null) {
+						try {
+							String query = "INSERT INTO " + BOOKMARKS_TABLE_NAME + " (" +
+									BOOKMARKS_COL_ARTICLE_TITLE + ", " +
+									BOOKMARKS_COL_LANG + ", " +
+									BOOKMARKS_COL_IS_PART_OF + ", " +
+									BOOKMARKS_COL_IMAGE_TITLE + ", " +
+									BOOKMARKS_COL_TRAVEL_BOOK + ", " +
+									BOOKMARKS_COL_LAT + ", " +
+									BOOKMARKS_COL_LON + ", " +
+									BOOKMARKS_COL_ROUTE_ID + ", " +
+									BOOKMARKS_COL_CONTENT_JSON + ", " +
+									BOOKMARKS_COL_CONTENT + ", " +
+									BOOKMARKS_COL_LAST_MODIFIED + ", " +
+									BOOKMARKS_COL_GPX_GZ +
+									") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+							conn.execSQL(query, new Object[] {article.title, article.lang,
+									article.aggregatedPartOf, article.imageTitle,
+									travelBook, article.lat, article.lon, article.routeId, article.contentsJson,
+									article.content, article.getFile().lastModified(),
+									Algorithms.stringToGzip(GPXUtilities.asString(article.gpxFile))});
+						} finally {
+							conn.close();
 						}
-					});
+					}
+				}
+			});
 		}
 
-		void removeSavedArticle(@NonNull TravelArticle article) {
-			String travelBook = article.getTravelBook(context);
+		void removeSavedArticle(@NonNull final TravelArticle article) {
+			final String travelBook = article.getTravelBook(context);
 			if (travelBook == null) {
 				return;
 			}
-			SQLiteConnection conn = openConnection(false);
-			if (conn != null) {
-				try {
-					String query = "DELETE FROM " + BOOKMARKS_TABLE_NAME +
-							" WHERE " + BOOKMARKS_COL_ARTICLE_TITLE + " = ?" +
-							" AND " + BOOKMARKS_COL_ROUTE_ID + " = ?" +
-							" AND " + BOOKMARKS_COL_LANG + ((article.lang != null) ? " = '" + article.lang + "'" : " IS NULL") +
-							" AND " + BOOKMARKS_COL_TRAVEL_BOOK + " = ?";
-					conn.execSQL(query, new Object[]{article.title, article.routeId, travelBook});
-				} finally {
-					conn.close();
+			final TravelHelper travelHelper = context.getTravelHelper();
+			travelHelper.getArticleById(article.generateIdentifier(), article.lang, true, new GpxReadCallback() {
+				@Override
+				public void onGpxFileReading() {
+
 				}
-			}
+
+				@Override
+				public void onGpxFileRead(@Nullable GPXFile gpxFile) {
+					if (gpxFile != null) {
+						String name = travelHelper.getGPXName(article);
+						gpxFile.path = context.getAppPath(IndexConstants.GPX_TRAVEL_DIR + name).getAbsolutePath();
+						context.getSelectedGpxHelper().selectGpxFile(gpxFile, false, true);
+					}
+
+					SQLiteConnection conn = openConnection(false);
+					if (conn != null) {
+						try {
+							String query = "DELETE FROM " + BOOKMARKS_TABLE_NAME +
+									" WHERE " + BOOKMARKS_COL_ARTICLE_TITLE + " = ?" +
+									" AND " + BOOKMARKS_COL_ROUTE_ID + " = ?" +
+									" AND " + BOOKMARKS_COL_LANG + ((article.lang != null) ? " = '" + article.lang + "'" : " IS NULL") +
+									" AND " + BOOKMARKS_COL_TRAVEL_BOOK + " = ?";
+							conn.execSQL(query, new Object[] {article.title, article.routeId, travelBook});
+						} finally {
+							conn.close();
+						}
+					}
+				}
+			});
 		}
 
 		void updateSavedArticle(@NonNull TravelArticle odlArticle, @NonNull TravelArticle newArticle) {
@@ -563,7 +578,7 @@ public class TravelLocalDataHelper {
 									" AND " + BOOKMARKS_COL_ROUTE_ID + " = ?" +
 									" AND " + BOOKMARKS_COL_LANG + " = ?" +
 									" AND " + BOOKMARKS_COL_TRAVEL_BOOK + " = ?",
-							new Object[]{newArticle.title, newArticle.lang, newArticle.aggregatedPartOf,
+							new Object[] {newArticle.title, newArticle.lang, newArticle.aggregatedPartOf,
 									newArticle.imageTitle, newArticle.getTravelBook(context), newArticle.lat,
 									newArticle.lon, newArticle.routeId, newArticle.contentsJson, newArticle.content,
 									newArticle.getLastModified(),

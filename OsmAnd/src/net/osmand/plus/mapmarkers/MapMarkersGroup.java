@@ -1,12 +1,8 @@
-package net.osmand.plus.itinerary;
+package net.osmand.plus.mapmarkers;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.mapmarkers.CategoriesSubHeader;
-import net.osmand.plus.mapmarkers.GroupHeader;
-import net.osmand.plus.mapmarkers.MapMarker;
-import net.osmand.plus.mapmarkers.ShowHideHistoryButton;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.util.Algorithms;
 
@@ -14,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class ItineraryGroup {
+public class MapMarkersGroup {
 
 	public static final int ANY_TYPE = -1;
 	public static final int FAVORITES_TYPE = 0;
@@ -35,14 +31,13 @@ public class ItineraryGroup {
 	private TravelArticle wikivoyageArticle;
 	// TODO should be removed from this class:
 	private GroupHeader header;
-	private CategoriesSubHeader categoriesSubHeader;
 	private ShowHideHistoryButton showHideHistoryButton;
 
-	public ItineraryGroup() {
+	public MapMarkersGroup() {
 
 	}
 
-	public ItineraryGroup(@NonNull String id, @NonNull String name, int type) {
+	public MapMarkersGroup(@NonNull String id, @NonNull String name, int type) {
 		this.id = id;
 		this.name = name;
 		this.type = type;
@@ -78,10 +73,6 @@ public class ItineraryGroup {
 
 	public void setHeader(GroupHeader header) {
 		this.header = header;
-	}
-
-	public void setCategoriesSubHeader(CategoriesSubHeader categoriesSubHeader) {
-		this.categoriesSubHeader = categoriesSubHeader;
 	}
 
 	public void setShowHideHistoryButton(ShowHideHistoryButton showHideHistoryButton) {
@@ -146,10 +137,6 @@ public class ItineraryGroup {
 
 	public GroupHeader getGroupHeader() {
 		return header;
-	}
-
-	public CategoriesSubHeader getCategoriesSubHeader() {
-		return categoriesSubHeader;
 	}
 
 	public ShowHideHistoryButton getShowHideHistoryButton() {
