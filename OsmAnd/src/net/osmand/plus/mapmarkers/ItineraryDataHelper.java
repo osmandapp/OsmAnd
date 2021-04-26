@@ -86,12 +86,13 @@ public class ItineraryDataHelper {
 		return FavouritesDbHelper.getBackupFile(app, "itinerary_bak_");
 	}
 
-	public ArrayList<MapMarkersGroup> loadGroups() {
+	public List<MapMarkersGroup> loadGroups() {
 		File internalFile = getInternalFile();
 		if (!internalFile.exists()) {
 			File dbPath = app.getDatabasePath(DB_NAME);
 			if (dbPath.exists()) {
-
+				List<MapMarkersGroup> groups = loadGroupsLegacy();
+				saveGroups(groups);
 			}
 		}
 		Map<String, MapMarkersGroup> groups = new LinkedHashMap<>();
@@ -104,6 +105,33 @@ public class ItineraryDataHelper {
 			saveGroups();
 		}
 		return new ArrayList<>(groups.values());
+	}
+
+	private List<MapMarkersGroup> loadGroupsLegacy() {
+		MapMarkersDbHelper markersDbHelper = mapMarkersHelper.getMarkersDbHelper();
+		Map<String, MapMarkersGroup> groupsMap = markersDbHelper.getHelperLegacy().getAllGroupsMap();
+
+		List<MapMarker> allMarkers = new ArrayList<>(markersDbHelper.getActiveMarkers(true));
+		allMarkers.addAll(markersDbHelper.getMarkersHistory(true));
+
+		MapMarkersGroup noGroup = null;
+		for (MapMarker marker : allMarkers) {
+			MapMarkersGroup group = groupsMap.get(marker.groupKey);
+			if (group == null) {
+				if (noGroup == null) {
+					noGroup = new MapMarkersGroup();
+					noGroup.setCreationDate(Long.MAX_VALUE);
+					groupsMap.put(noGroup.getId(), noGroup);
+				}
+				noGroup.getMarkers().add(marker);
+			} else {
+				if (marker.creationDate < group.getCreationDate()) {
+					group.setCreationDate(marker.creationDate);
+				}
+				group.getMarkers().add(marker);
+			}
+		}
+		return new ArrayList<>(groupsMap.values());
 	}
 
 	private boolean loadGPXFile(File file, Map<String, MapMarkersGroup> groups) {
@@ -151,17 +179,20 @@ public class ItineraryDataHelper {
 	}
 
 	public void saveGroups() {
+		saveGroups(mapMarkersHelper.getMapMarkersGroups());
+	}
+
+	public void saveGroups(List<MapMarkersGroup> groups) {
 		try {
-			saveFile(getInternalFile());
-			saveFile(getExternalFile());
+			saveFile(getInternalFile(), groups);
+			saveFile(getExternalFile(), groups);
 			backup(getBackupFile(), getExternalFile());
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 		}
 	}
 
-	public Exception saveFile(File file) {
-		List<MapMarkersGroup> groups = mapMarkersHelper.getMapMarkersGroups();
+	public Exception saveFile(File file, List<MapMarkersGroup> groups) {
 		GPXFile gpxFile = generateGpx(groups);
 		return GPXUtilities.writeGpxFile(file, gpxFile);
 	}
