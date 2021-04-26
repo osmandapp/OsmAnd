@@ -76,11 +76,10 @@ public class SearchResult {
 		if (!ow.isEmpty()) {
 			searchPhraseNames.addAll(ow);
 		}
-		
+
 		int idxMatchedWord = -1;
 		boolean allWordsMatched = true;
 		for (String searchPhraseName : searchPhraseNames) {
-
 			boolean wordMatched = false;
 			for (int i = idxMatchedWord + 1; i < localResultNames.size(); i++) {
 				int r = requiredSearchPhrase.getCollator().compare(searchPhraseName, localResultNames.get(i));
