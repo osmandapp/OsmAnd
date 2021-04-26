@@ -4095,4 +4095,7 @@
     <string name="srtm_unit_format">Eş yükselti eğrileri birimi biçimi</string>
     <string name="srtm_download_list_help_message">OsmAnd, metre ve fit cinsinden eş yükselti eğrileri verileri sağlar. Biçimi değiştirmek için dosyayı yeniden indirmeniz gerekecek.</string>
     <string name="srtm_download_single_help_message">Lütfen gerekli biçimi seçin. Biçimi değiştirmek için dosyayı yeniden indirmeniz gerekecek.</string>
+    <string name="route_line_use_gradient_coloring">Güzergah hattı, güzergahın yükseklik profiline bağlı olarak renklendirilecektir.</string>
+    <string name="shared_string_min_height">Asgari yükseklik</string>
+    <string name="shared_string_max_height">Azami yükseklik</string>
 </resources>

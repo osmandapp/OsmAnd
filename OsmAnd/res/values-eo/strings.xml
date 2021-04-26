@@ -4093,4 +4093,7 @@
     <string name="srtm_unit_format">Unuo por nivelkurboj</string>
     <string name="srtm_download_list_help_message">OsmAnd liveras nivelkurbojn en metroj kaj en futoj. Ve devos reelŝuti la dosieron por ŝanĝi la formon.</string>
     <string name="srtm_download_single_help_message">Elektu la deziratan formon. Vi devos reelŝuti la dosieron por ŝanĝi la formon.</string>
+    <string name="route_line_use_gradient_coloring">Linio de spuro estos kolorigita laŭ la profilo de altitudo.</string>
+    <string name="shared_string_min_height">Minimuma alto</string>
+    <string name="shared_string_max_height">Maksimuma alto</string>
 </resources>
