@@ -99,7 +99,7 @@ public abstract class InAppPurchases {
 	public InAppSubscription getAnyPurchasedSubscription() {
 		List<InAppSubscription> allSubscriptions = liveUpdates.getAllSubscriptions();
 		for (InAppSubscription subscription : allSubscriptions) {
-			if (subscription.isAnyPurchased()) {
+			if (subscription.isPurchased()) {
 				return subscription;
 			}
 		}

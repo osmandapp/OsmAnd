@@ -178,11 +178,7 @@ public class BackupHelper {
 				int status;
 				String message;
 				if (!Algorithms.isEmpty(error)) {
-					message = "User registration error: " + parseServerError(error) + "\nEmail=" + email + "\nOrderId=" + orderId + "\nDeviceId=" + deviceId + "\n\n";
-					List<InAppSubscription> subscriptions = app.getInAppPurchaseHelper().getLiveUpdates().getAllSubscriptions();
-					for (InAppSubscription s : subscriptions) {
-						message += s.getSku() + " " + s.getOrderId() + " " + s.getState().getStateStr() + " " + s.getPurchaseState().name() + " " + s.getExpireTime() + "\n";
-					}
+					message = "User registration error: " + parseServerError(error) + "\nEmail=" + email + "\nOrderId=" + orderId + "\nDeviceId=" + deviceId;
 					status = STATUS_SERVER_ERROR;
 				} else if (!Algorithms.isEmpty(resultJson)) {
 					try {
