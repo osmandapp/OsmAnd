@@ -135,19 +135,19 @@ public class MapMarkersHelper {
 
 	private void loadGroups() {
 		mapMarkersGroups = dataHelper.loadGroups();
-		List<MapMarker> allMarkers = new ArrayList<>(mapMarkers);
-		allMarkers.addAll(mapMarkersHistory);
-
-		for (MapMarker marker : allMarkers) {
-			if (marker.groupKey == null) {
-				if (markersGroup.getCreationDate() == 0) {
-					markersGroup.setCreationDate(Long.MAX_VALUE);
-				}
-				markersGroup.getMarkers().add(marker);
-			}
-		}
-		sortMarkers(markersGroup.getMarkers(), false, BY_DATE_ADDED_DESC);
-		addToGroupsList(markersGroup);
+//		List<MapMarker> allMarkers = new ArrayList<>(mapMarkers);
+//		allMarkers.addAll(mapMarkersHistory);
+//
+//		for (MapMarker marker : allMarkers) {
+//			if (marker.groupKey == null) {
+//				if (markersGroup.getCreationDate() == 0) {
+//					markersGroup.setCreationDate(Long.MAX_VALUE);
+//				}
+//				markersGroup.getMarkers().add(marker);
+//			}
+//		}
+//		sortMarkers(markersGroup.getMarkers(), false, BY_DATE_ADDED_DESC);
+//		addToGroupsList(markersGroup);
 
 		sortGroups();
 
@@ -514,7 +514,13 @@ public class MapMarkersHelper {
 	}
 
 	private String getMarkerGroupId(File gpx) {
-		return gpx.getAbsolutePath();
+		String path = gpx.getAbsolutePath();
+		String gpxDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR).getAbsolutePath();
+		int index = path.indexOf(gpxDir);
+		if (index != -1) {
+			path = path.substring(gpxDir.length() + 1);
+		}
+		return path;
 	}
 
 	private String getMarkerGroupId(FavoriteGroup group) {
