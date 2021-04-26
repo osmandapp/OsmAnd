@@ -143,7 +143,7 @@ public class HistoryMarkersSettingsItem extends CollectionSettingsItem<MapMarker
 					warnings.add(app.getString(R.string.settings_item_read_error, String.valueOf(getType())));
 					SettingsHelper.LOG.error("Failed read gpx file", gpxFile.error);
 				} else {
-					List<MapMarker> mapMarkers = markersHelper.getSaveHelper().readMarkersFromGpx(gpxFile, true);
+					List<MapMarker> mapMarkers = markersHelper.getDataHelper().readMarkersFromGpx(gpxFile, true);
 					items.addAll(mapMarkers);
 				}
 			}
@@ -153,7 +153,7 @@ public class HistoryMarkersSettingsItem extends CollectionSettingsItem<MapMarker
 	@Nullable
 	@Override
 	SettingsItemWriter<? extends SettingsItem> getWriter() {
-		GPXFile gpxFile = markersHelper.getSaveHelper().generateGpx(items, true);
+		GPXFile gpxFile = markersHelper.getDataHelper().generateGpx(items, true);
 		return getGpxWriter(gpxFile);
 	}
 }

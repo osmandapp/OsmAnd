@@ -486,7 +486,7 @@ public class MapMarkersDialogFragment extends DialogFragment implements OnGroupS
 
 			@Override
 			public void saveGpx(final String fileName) {
-				final String gpxPath = mapActivity.getMyApplication().getMapMarkersHelper().getSaveHelper().saveMarkersToFile(fileName);
+				final String gpxPath = mapActivity.getMyApplication().getMapMarkersHelper().getDataHelper().saveMarkersToFile(fileName);
 				snackbar = Snackbar.make(viewPager, String.format(getString(R.string.shared_string_file_is_saved), fileName) + ".", Snackbar.LENGTH_LONG)
 						.setAction(R.string.shared_string_show, new View.OnClickListener() {
 							@Override

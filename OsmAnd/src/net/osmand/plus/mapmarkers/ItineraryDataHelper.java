@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat;
 
 import net.osmand.FileUtils;
 import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXExtensionsReader;
 import net.osmand.GPXUtilities.GPXExtensionsWriter;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
@@ -20,6 +21,8 @@ import net.osmand.plus.Version;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlSerializer;
 
 import java.io.File;
@@ -28,14 +31,18 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TimeZone;
 
+import static net.osmand.GPXUtilities.readText;
 import static net.osmand.GPXUtilities.writeNotNullText;
 import static net.osmand.plus.FavouritesDbHelper.backup;
+import static net.osmand.plus.mapmarkers.MapMarkersDbHelper.DB_NAME;
 import static net.osmand.util.MapUtils.createShortLinkString;
 
 public class ItineraryDataHelper {
@@ -79,6 +86,70 @@ public class ItineraryDataHelper {
 		return FavouritesDbHelper.getBackupFile(app, "itinerary_bak_");
 	}
 
+	public ArrayList<MapMarkersGroup> loadGroups() {
+		File internalFile = getInternalFile();
+		if (!internalFile.exists()) {
+			File dbPath = app.getDatabasePath(DB_NAME);
+			if (dbPath.exists()) {
+
+			}
+		}
+		Map<String, MapMarkersGroup> groups = new LinkedHashMap<>();
+		Map<String, MapMarkersGroup> extGroups = new LinkedHashMap<>();
+		loadGPXFile(internalFile, groups);
+		loadGPXFile(getExternalFile(), extGroups);
+
+		boolean changed = merge(extGroups, groups);
+		if (changed || !getExternalFile().exists()) {
+			saveGroups();
+		}
+		return new ArrayList<>(groups.values());
+	}
+
+	private boolean loadGPXFile(File file, Map<String, MapMarkersGroup> groups) {
+		if (!file.exists()) {
+			return false;
+		}
+		List<ItineraryGroupInfo> groupInfos = new ArrayList<>();
+		GPXFile gpxFile = loadGPXFile(file, groupInfos);
+		if (gpxFile.error != null) {
+			return false;
+		}
+		for (ItineraryGroupInfo groupInfo : groupInfos) {
+			MapMarkersGroup group = ItineraryGroupInfo.createGroup(groupInfo);
+			groups.put(groupInfo.alias, group);
+		}
+		for (WptPt point : gpxFile.getPoints()) {
+			String itineraryId = point.getExtensionsToRead().get(ITINERARY_ID);
+			if (!Algorithms.isEmpty(itineraryId)) {
+				for (Entry<String, MapMarkersGroup> entry : groups.entrySet()) {
+					String alias = entry.getKey() + ":";
+					if (itineraryId.startsWith(alias)) {
+						MapMarker marker = fromWpt(point, app, false);
+						marker.id = itineraryId.substring(alias.length());
+						marker.groupKey = entry.getValue().getId();
+						marker.groupName = entry.getValue().getName();
+						entry.getValue().getMarkers().add(marker);
+						break;
+					}
+				}
+			}
+		}
+		return true;
+	}
+
+	private boolean merge(Map<String, MapMarkersGroup> source, Map<String, MapMarkersGroup> destination) {
+		boolean changed = false;
+		for (Map.Entry<String, MapMarkersGroup> entry : source.entrySet()) {
+			String ks = entry.getKey();
+			if (!destination.containsKey(ks)) {
+				changed = true;
+				destination.put(ks, entry.getValue());
+			}
+		}
+		return changed;
+	}
+
 	public void saveGroups() {
 		try {
 			saveFile(getInternalFile());
@@ -118,6 +189,41 @@ public class ItineraryDataHelper {
 				}
 			});
 		}
+	}
+
+	private GPXFile loadGPXFile(File file, final List<ItineraryGroupInfo> groupInfos) {
+		return GPXUtilities.loadGPXFile(file, new GPXExtensionsReader() {
+			@Override
+			public boolean readExtensions(GPXFile res, XmlPullParser parser) throws IOException, XmlPullParserException {
+				if (ITINERARY_GROUP.equalsIgnoreCase(parser.getName())) {
+					ItineraryGroupInfo groupInfo = new ItineraryGroupInfo();
+
+					int tok;
+					while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
+						if (tok == XmlPullParser.START_TAG) {
+							String tagName = parser.getName().toLowerCase();
+							if ("name".equals(tagName)) {
+								groupInfo.name = readText(parser, tagName);
+							} else if ("type".equals(tagName)) {
+								groupInfo.type = readText(parser, tagName);
+							} else if ("path".equals(tagName)) {
+								groupInfo.path = readText(parser, tagName);
+							} else if ("alias".equals(tagName)) {
+								groupInfo.alias = readText(parser, tagName);
+							} else if ("categories".equals(tagName)) {
+								groupInfo.categories = readText(parser, tagName);
+							}
+						} else if (tok == XmlPullParser.END_TAG) {
+							if (ITINERARY_GROUP.equalsIgnoreCase(parser.getName())) {
+								groupInfos.add(groupInfo);
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+			}
+		});
 	}
 
 	public String saveMarkersToFile(String fileName) {
@@ -166,11 +272,12 @@ public class ItineraryDataHelper {
 				WptPt wptPt = toWpt(marker);
 
 				Map<String, String> extensions = wptPt.getExtensionsToWrite();
-				if (group.getType() != ItineraryType.FAVOURITES) {
-					String itineraryId = createShortLinkString(wptPt.lat, wptPt.lon, 15);
-					extensions.put(ITINERARY_ID, groupInfo.alias + ":" + itineraryId);
+
+				if (group.getType() == ItineraryType.MARKERS) {
+					extensions.put(ITINERARY_ID, groupInfo.alias + ":" + marker.id);
 				} else {
-					extensions.put(ITINERARY_ID, groupInfo.alias + ":" + marker.getName(app));
+					String itineraryId = marker.getName(app) + createShortLinkString(wptPt.lat, wptPt.lon, 15);
+					extensions.put(ITINERARY_ID, groupInfo.alias + ":" + itineraryId);
 				}
 				if (group.getType() == ItineraryType.TRACK) {
 					extensions.put(GPX_KEY, groupInfo.path);
@@ -258,9 +365,26 @@ public class ItineraryDataHelper {
 				groupInfo.path = path;
 				groupInfo.alias = groupInfo.type + ":" + path.replace(IndexConstants.GPX_FILE_EXT, "");
 			} else {
-				groupInfo.alias = groupInfo.type + (groupInfo.name == null ? "" : ":" + groupInfo.name);
+				groupInfo.alias = groupInfo.type + (group.getId() == null ? "" : ":" + group.getId());
 			}
 			return groupInfo;
+		}
+
+		public static MapMarkersGroup createGroup(ItineraryGroupInfo groupInfo) {
+			ItineraryType type = ItineraryType.findTypeForName(groupInfo.type);
+
+			String groupId;
+			if (type == ItineraryType.FAVOURITES && groupInfo.name == null) {
+				groupId = "";
+			} else if (type == ItineraryType.TRACK) {
+				groupId = groupInfo.path;
+			} else {
+				groupId = groupInfo.name;
+			}
+
+			MapMarkersGroup group = new MapMarkersGroup(groupId, groupInfo.name, type);
+			group.setWptCategories(Algorithms.decodeStringSet(groupInfo.categories, CATEGORIES_SPLIT));
+			return group;
 		}
 	}
 }
