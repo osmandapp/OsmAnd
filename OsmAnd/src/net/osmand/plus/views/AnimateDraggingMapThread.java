@@ -119,7 +119,7 @@ public class AnimateDraggingMapThread {
 	}
 
 	public void startMoving(final double finalLat, final double finalLon, final Pair<Integer, Double> finalZoom,
-							final Float finalRotation, final boolean notifyListener) {
+							final boolean pendingRotation, final Float finalRotation, final boolean notifyListener) {
 		stopAnimatingSync();
 
 		final RotatedTileBox rb = tileView.getCurrentRotatedTileBox().copy();
@@ -168,7 +168,9 @@ public class AnimateDraggingMapThread {
 				}
 
 				boolean animateRotation = rotation != startRotation;
-				if (animateRotation) {
+				if (pendingRotation) {
+					pendingRotateAnimation();
+				} else if (animateRotation) {
 					animatingRotateInThread(rotation, 500f, notifyListener);
 				}
 
@@ -464,7 +466,7 @@ public class AnimateDraggingMapThread {
 	}
 
 	public void startRotate(final float rotate) {
-		if (!isAnimating() || isAnimatingMapMove) {
+		if (!isAnimating()) {
 			clearTargetValues();
 			// stopped = false;
 			// do we need to kill and recreate the thread? wait would be enough as now it

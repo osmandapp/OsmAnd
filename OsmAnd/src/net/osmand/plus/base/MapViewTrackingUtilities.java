@@ -191,6 +191,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			if (isMapLinkedToLocation() && location != null) {
 				Pair<Integer, Double> zoom = null;
 				Float rotation = null;
+				boolean pendingRotation = false;
 				if (settings.AUTO_ZOOM_MAP.get()) {
 					zoom = autozoom(tb, location);
 				}
@@ -214,12 +215,14 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 					}
 				} else if(currentMapRotation == OsmandSettings.ROTATE_MAP_COMPASS) {
 					showViewAngle = routePlanningMode; // disable compass rotation in that mode
+					pendingRotation = true;
 				}
 				registerUnregisterSensor(location, smallSpeedForDirectionOfMovement);
 				if (settings.ANIMATE_MY_LOCATION.get() && !smallSpeedForAnimation && !movingToMyLocation &&
 						settings.TURN_SCREEN_ON_TIME_INT.get() == 0) {
 					mapView.getAnimatedDraggingThread().startMoving(
-							location.getLatitude(), location.getLongitude(), zoom, rotation, false);
+							location.getLatitude(), location.getLongitude(), zoom,
+							pendingRotation, rotation, false);
 				} else {
 					if (zoom != null && zoom.first != null && zoom.second != null) {
 						mapView.getAnimatedDraggingThread().startZooming(zoom.first, zoom.second, false);
