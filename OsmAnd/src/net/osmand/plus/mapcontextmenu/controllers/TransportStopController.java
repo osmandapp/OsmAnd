@@ -27,6 +27,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import static net.osmand.util.MapUtils.ROUNDING_ERROR;
+
 public class TransportStopController extends MenuController {
 
 	public static final int SHOW_STOPS_RADIUS_METERS = 150;
@@ -244,8 +246,6 @@ public class TransportStopController extends MenuController {
 
 		if (isSubwayEntrance) {
 			stopAggregated = processTransportStopsForAmenity(transportStops, amenity);
-			sortTransportStopsExits(loc, stopAggregated.getLocalTransportStops());
-			sortTransportStopsExits(loc, stopAggregated.getNearbyTransportStops());
 		} else {
 			stopAggregated = new TransportStopAggregated();
 			stopAggregated.setAmenity(amenity);
@@ -299,23 +299,25 @@ public class TransportStopController extends MenuController {
 	private static TransportStopAggregated processTransportStopsForAmenity(List<TransportStop> transportStops, Amenity amenity) {
 		TransportStopAggregated stopAggregated = new TransportStopAggregated();
 		stopAggregated.setAmenity(amenity);
-
+		LatLon amenityLocation = amenity.getLocation();
 		for (TransportStop stop : transportStops) {
 			stop.setTransportStopAggregated(stopAggregated);
 			List<TransportStopExit> stopExits = stop.getExits();
 			boolean stopOnSameExitAdded = false;
 			for (TransportStopExit exit : stopExits) {
-				if (exit.getLocation().equals(amenity.getLocation())) {
+				if (MapUtils.getDistance(exit.getLocation(), amenityLocation) < ROUNDING_ERROR) {
 					stopOnSameExitAdded = true;
 					stopAggregated.addLocalTransportStop(stop);
 					break;
 				}
 			}
-			if (!stopOnSameExitAdded && MapUtils.getDistance(stop.getLocation(), amenity.getLocation()) <= SHOW_STOPS_RADIUS_METERS) {
+			if (!stopOnSameExitAdded && MapUtils.getDistance(stop.getLocation(), amenityLocation)
+					<= SHOW_SUBWAY_STOPS_FROM_ENTRANCES_RADIUS_METERS) {
 				stopAggregated.addNearbyTransportStop(stop);
 			}
 		}
-
+		sortTransportStopsExits(amenityLocation, stopAggregated.getLocalTransportStops());
+		sortTransportStopsExits(amenityLocation, stopAggregated.getNearbyTransportStops());
 		return stopAggregated;
 	}
 
