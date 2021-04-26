@@ -103,8 +103,8 @@
     <string name="quick_action_directions_from_desc">Кнопка для установки центра экрана пунктом отправления. Затем нужно будет выбрать пункт назначения или запустить расчёт маршрута.</string>
     <string name="quick_action_replace_destination_desc">Кнопка для установки центра экрана пунктом назначения с заменой предыдущего (если был задан).</string>
     <string name="quick_action_add_first_intermediate_desc">Установка центра экрана местом первой остановки на маршруте.</string>
-    <string name="no_overlay">Нет покрытия</string>
-    <string name="no_underlay">Нет подложки</string>
+    <string name="no_overlay">Без наложения</string>
+    <string name="no_underlay">Без подложки</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Гористый</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Сглаженный</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Ровный</string>
@@ -123,7 +123,7 @@
     <string name="average_speed">Средняя скорость</string>
     <string name="shared_string_time_moving">Время в движении</string>
     <string name="shared_string_time_span">Общее время</string>
-    <string name="shared_string_max">Максимальная</string>
+    <string name="shared_string_max">Макс.</string>
     <string name="shared_string_start_time">Отправление</string>
     <string name="shared_string_end_time">Прибытие</string>
     <string name="shared_string_color">Цвет</string>
@@ -153,13 +153,13 @@
     <string name="quick_action_sh_poi_descr">Добавить одну или несколько категорий POI для отображения на карте.</string>
     <string name="quick_action_page_list_descr">Кнопка для перелистывания списка ниже.</string>
     <string name="quick_action_empty_param_error">Заполните все параметры</string>
-    <string name="quick_action_map_overlay">Сменить карту покрытия</string>
-    <string name="quick_action_map_overlay_title">Карты покрытия</string>
-    <string name="quick_action_map_overlay_action">Добавить карту покрытия</string>
+    <string name="quick_action_map_overlay">Сменить карту наложения</string>
+    <string name="quick_action_map_overlay_title">Наложения</string>
+    <string name="quick_action_map_overlay_action">Добавить карту наложения</string>
     <string name="quick_action_map_overlay_switch">Карта наложения изменена на «%s».</string>
     <string name="quick_action_map_underlay_switch">Карта подложки изменена на «%s».</string>
     <string name="quick_action_map_underlay">Сменить подложку карты</string>
-    <string name="quick_action_map_underlay_title">Подложки карты</string>
+    <string name="quick_action_map_underlay_title">Подложки</string>
     <string name="quick_action_map_underlay_action">Добавить подложку</string>
     <string name="quick_action_map_source">Сменить источник карты</string>
     <string name="quick_action_map_source_title">Источники карты</string>
@@ -288,7 +288,7 @@
     <string name="lang_fy">Западнофризский</string>
     <string name="lang_als">Албанский (тоскский)</string>
     <string name="rendering_attr_hideProposed_name">Планируемые объекты</string>
-    <string name="srtm_plugin_description">Обеспечивает как наложение контурных линий, так и отображения затеняющего слоя рельефа поверх стандартных карт OsmAnd. Эта функция высоко оценится спортсменами, туристами, путешественниками и всеми, кто заинтересован в рельефной структуре ландшафта.
+    <string name="srtm_plugin_description">Обеспечивает как наложение контурных линий, так и отображения слоя затенения рельефа (отмывки) поверх стандартных карт OsmAnd. Эта функция высоко оценится спортсменами, туристами, путешественниками и всеми, кто заинтересован в рельефной структуре ландшафта.
 \n
 \nГлобальные данные (между 70° на севере и 70° на юге) основываются на измерениях SRTM (Shuttle Radar Topography Mission) и ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) — инструментом визуализации Terra, флагманского спутника Системы Наблюдения Земли NASA. ASTER является результатом совместных усилий NASA, министерства экономики Японии, торговли и промышленности (METI), а также Космических Систем Японии (J-spacesystems).</string>
     <string name="srtm_paid_version_msg">Рассмотрите возможность покупки плагина «Линии высот» в Google Play, чтобы поддержать последующую разработку.</string>
@@ -1194,7 +1194,7 @@
     <string name="recording_context_menu_precord">Сделать фото</string>
     <string name="dropbox_plugin_description">Синхронизация треков и медиазаметок с вашим аккаунтом Dropbox.</string>
     <string name="dropbox_plugin_name">Плагин Dropbox</string>
-    <string name="osmand_srtm_long_description_1000_chars">Плагин обеспечивает наложение контурных линий и затемняющего слоя (рельефа), которые будут отображаться поверх стандартных карт OsmAnd. Эту функцию оценят спортсмены, туристы, путешественники и все, для кого рельеф местности имеет значение.
+    <string name="osmand_srtm_long_description_1000_chars">Плагин обеспечивает наложение контурных линий и слоя затенения рельефа (отмывки), которые будут отображаться поверх стандартных карт OsmAnd. Эту функцию оценят спортсмены, туристы, путешественники и все, для кого рельеф местности имеет значение.
 \n
 \nГлобальные данные (между 70° на севере и 70° на юге) основываются на измерениях SRTM (Shuttle Radar Topography Mission) и ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), инструментом визуализации Terra, флагманского спутника Земли системы наблюдения NASA. ASTER является результатом совместных усилий NASA, министерства экономики Японии, торговли и промышленности (METI), космических систем Японии (J-spacesystems).</string>
     <string name="recording_photo_description">Фото %1$s %2$s</string>
@@ -3634,10 +3634,10 @@
 \nОдин месяц — 43 829 минут.</string>
     <string name="tiles_storage_descr">Выберите способ хранения загруженных тайлов.</string>
     <string name="system_screen_timeout_descr">Экран будет отключаться после периода бездействия, указанного в системных настройках устройства.</string>
-    <string name="map_source_zoom_levels_descr">Эти параметры влияют на отображение при использовании в качестве карты или подложки. 
-\n 
-\n%1$s: карта будет ограничена выбранными уровнями масштабирования. 
-\n 
+    <string name="map_source_zoom_levels_descr">Эти параметры влияют на отображение при использовании в качестве карты или наложения / подложки.
+\n
+\n%1$s: карта будет ограничена выбранными уровнями масштабирования.
+\n
 \n%2$s: уровни масштабирования, при которых будут видны оригинальные тайлы; увеличение и уменьшение масштаба может происходить вне этих значений.</string>
     <string name="screen_control">Управление экраном</string>
     <string name="turn_screen_on_descr">Настройки включения экрана (убедитесь, что перед блокировкой устройства OsmAnd находится на переднем плане):</string>
@@ -4095,4 +4095,7 @@
     <string name="srtm_download_single_help_message">Выберите необходимый формат. Для изменения формата потребуется повторно загрузить файл.</string>
     <string name="shared_string_feet">футы</string>
     <string name="srtm_download_list_help_message">OsmAnd предоставляет данные изолиний в метрах и футах. Для изменения формата потребуется повторно загрузить файл.</string>
+    <string name="route_line_use_gradient_coloring">Линия маршрута будет окрашена в зависимости от профиля высоты маршрута.</string>
+    <string name="shared_string_min_height">Мин. высота</string>
+    <string name="shared_string_max_height">Макс. высота</string>
 </resources>
