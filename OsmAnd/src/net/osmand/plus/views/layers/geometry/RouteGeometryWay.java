@@ -20,6 +20,7 @@ import net.osmand.plus.track.GradientScaleType;
 import net.osmand.router.RouteColorize;
 import net.osmand.router.RouteColorize.RouteColorizationPoint;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -93,8 +94,6 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 			for (int i = 1; i < tx.size(); i++) {
 				GeometryGradientWayStyle style = getGradientWayStyle();
 				styles.add(style);
-				style.startXY = new PointF(tx.get(i - 1), ty.get(i - 1));
-				style.endXY = new PointF(tx.get(i), ty.get(i));
 				double prevDist = distances.get(i - 1);
 				double currDist = distances.get(i);
 				double nextDist = i + 1 == distances.size() ? 0 : distances.get(i + 1);
@@ -149,6 +148,16 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 	}
 
 	@Override
+	protected void addLocation(RotatedTileBox tb, int locationIdx, GeometryWayStyle<?> style, List<Float> tx, List<Float> ty, List<Double> angles, List<Double> distances, double dist, List<GeometryWayStyle<?>> styles) {
+		super.addLocation(tb, locationIdx, style, tx, ty, angles, distances, dist, styles);
+		if (style instanceof GeometryGradientWayStyle && styles.size() > 1) {
+			GeometryGradientWayStyle currStyle = (GeometryGradientWayStyle) style;
+			GeometryGradientWayStyle prevStyle = (GeometryGradientWayStyle) styles.get(styles.size() - 2);
+			prevStyle.endColor = currStyle.startColor;
+		}
+	}
+
+	@Override
 	protected boolean addInitialPoint(RotatedTileBox tb, double topLatitude, double leftLongitude, double bottomLatitude,
 									  double rightLongitude, GeometryWayStyle<?> style, boolean previousVisible,
 									  Location lastPoint, int startLocationIndex) {
@@ -157,18 +166,21 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 		if (style instanceof GeometryGradientWayStyle) {
 			GeometryGradientWayStyle gradientWayStyle = (GeometryGradientWayStyle) style;
 			GradientGeometryWayProvider locationProvider = getGradientLocationProvider();
-			if (startLocationIndex == 0) {
+			if (startLocationIndex == 0 || startLocationIndex == 1) {
 				int startColor = locationProvider.getColor(0);
 				gradientWayStyle.startColor = startColor;
 				gradientWayStyle.endColor = startColor;
 			} else {
-				GeometryGradientWayStyle prevStyle = (GeometryGradientWayStyle) getStyle(startLocationIndex - 1, null);
-				GeometryGradientWayStyle nextStyle = (GeometryGradientWayStyle) getStyle(startLocationIndex, null);
-				if (prevStyle != null && nextStyle != null) {
-					//TODO: calculate color delta
-					gradientWayStyle.startColor = prevStyle.startColor;
-					gradientWayStyle.endColor = prevStyle.startColor;
-				}
+				double prevLat = locationProvider.getLatitude(startLocationIndex - 1);
+				double prevLon = locationProvider.getLongitude(startLocationIndex - 1);
+				double nextLat = locationProvider.getLatitude(startLocationIndex);
+				double nextLon = locationProvider.getLongitude(startLocationIndex);
+				double percent = MapUtils.getPointOffsetOnSegment(prevLat, prevLon, nextLat, nextLon,
+						lastPoint.getLatitude(), lastPoint.getLongitude());
+				int prevColor = locationProvider.getColor(startLocationIndex - 2);
+				int nextColor = locationProvider.getColor(startLocationIndex - 1);
+				gradientWayStyle.startColor = RouteColorize.getGradientColor(prevColor, nextColor, percent);
+				gradientWayStyle.endColor = nextColor;
 			}
 		}
 		return previousVisible;
