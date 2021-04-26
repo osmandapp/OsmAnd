@@ -4097,4 +4097,7 @@
     <string name="srtm_unit_format">Einheit der Höhenlinien</string>
     <string name="srtm_download_list_help_message">OsmAnd liefert Höhenlinien-Daten in Metern und Fuß. Sie müssen die Datei erneut herunterladen, um das Format zu ändern.</string>
     <string name="srtm_download_single_help_message">Bitte wählen Sie das gewünschte Format. Sie müssen die Datei erneut herunterladen, um das Format zu ändern.</string>
+    <string name="route_line_use_gradient_coloring">Die Routenlinie wird je nach Höhenprofil der Route eingefärbt.</string>
+    <string name="shared_string_min_height">Mindesthöhe</string>
+    <string name="shared_string_max_height">Maximale Höhe</string>
 </resources>
