@@ -68,13 +68,15 @@ public class SearchResult {
 		List<String> searchPhraseNames = new ArrayList<>();
 		SearchPhrase.splitWords(name, localResultNames);
 
+		String fw = requiredSearchPhrase.getFirstUnknownSearchWord();
 		List<String> ow = requiredSearchPhrase.getUnknownSearchWords();
-		if (firstUnknownWordMatches) {
-			searchPhraseNames.add(requiredSearchPhrase.getFirstUnknownSearchWord());
+		if (fw != null) {
+			searchPhraseNames.add(fw);
 		}
-		if (ow != null) {
+		if (!ow.isEmpty()) {
 			searchPhraseNames.addAll(ow);
 		}
+
 		int idxMatchedWord = -1;
 		boolean allWordsMatched = true;
 		for (String searchPhraseName : searchPhraseNames) {
