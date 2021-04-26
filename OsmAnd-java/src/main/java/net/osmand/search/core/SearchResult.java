@@ -1,6 +1,7 @@
 package net.osmand.search.core;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -16,7 +17,7 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 public class SearchResult {
-	// search phrase that makes search result valid 
+	// search phrase that makes search result valid
 	public SearchPhrase requiredSearchPhrase;
 
 	// internal package fields (used for sorting)
@@ -25,7 +26,7 @@ public class SearchResult {
 	boolean firstUnknownWordMatches;
 	Collection<String> otherWordsMatch = null;
 
-	
+
 	public Object object;
 	public ObjectType objectType;
 	public BinaryMapIndexReader file;
@@ -39,11 +40,11 @@ public class SearchResult {
 	public String localeName;
 	public String alternateName;
 	public Collection<String> otherNames;
-	
+
 	public String localeRelatedObjectName;
 	public Object relatedObject;
 	public double distRelatedObjectName;
-	
+
 	private double unknownPhraseMatchWeight = 0;
 
 	public SearchResult(SearchPhrase sp) {
@@ -61,28 +62,27 @@ public class SearchResult {
 		unknownPhraseMatchWeight = res;
 		return res;
 	}
-	
+
 	public double getSumPhraseMatchWeight() {
 		// if result is a complete match in the search we prioritize it higher
 		String name = alternateName != null ? alternateName : localeName;
 		List<String> localResultNames = new ArrayList<>();
+		List<String> searchPhraseNames = new ArrayList<>();
 		SearchPhrase.splitWords(name, localResultNames);
-		List<String> searchPhraseNames = new ArrayList<String>();
-		if (firstUnknownWordMatches) {
-			searchPhraseNames.add(requiredSearchPhrase.getFirstUnknownSearchWord());
-		}
-		if (otherWordsMatch != null) {
-			searchPhraseNames.addAll(otherWordsMatch);
-		}
+
+		searchPhraseNames.add(requiredSearchPhrase.getFirstUnknownSearchWord());
+		searchPhraseNames.addAll(requiredSearchPhrase.getUnknownSearchWords());
+
 		int idxMatchedWord = -1;
 		boolean allWordsMatched = true;
-		for (int i = 0; i < searchPhraseNames.size(); i++) {
+		for (String searchPhraseName : searchPhraseNames) {
+
 			boolean wordMatched = false;
-			for (int j = idxMatchedWord + 1; j < localResultNames.size(); j++) {
-				int r = requiredSearchPhrase.getCollator().compare(searchPhraseNames.get(i), localResultNames.get(j));
+			for (int i = idxMatchedWord + 1; i < localResultNames.size(); i++) {
+				int r = requiredSearchPhrase.getCollator().compare(searchPhraseName, localResultNames.get(i));
 				if (r == 0) {
 					wordMatched = true;
-					idxMatchedWord = j;
+					idxMatchedWord = i;
 					break;
 				}
 			}
@@ -97,8 +97,8 @@ public class SearchResult {
 		}
 		return res;
 	}
-	
-	
+
+
 
 
 	public int getDepth() {
@@ -128,7 +128,7 @@ public class SearchResult {
 		}
 		return ph;
 	}
-	
+
 	private int getSelfWordCount() {
 		int inc = 0;
 		if (firstUnknownWordMatches) {
@@ -147,7 +147,7 @@ public class SearchResult {
 		}
 		return priority - 1 / (1 + priorityDistance * distance);
 	}
-	
+
 	public double getSearchDistance(LatLon location, double pd) {
 		double distance = 0;
 		if (location != null && this.location != null) {
@@ -155,7 +155,7 @@ public class SearchResult {
 		}
 		return priority - 1 / (1 + pd * distance);
 	}
-	
+
 
 	@Override
 	public String toString() {
