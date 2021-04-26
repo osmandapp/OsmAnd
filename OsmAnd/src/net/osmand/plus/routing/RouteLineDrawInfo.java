@@ -157,7 +157,10 @@ public class RouteLineDrawInfo {
 			colorNight = bundle.getInt(LINE_COLOR_NIGHT);
 		}
 		if (bundle.containsKey(LINE_COLOR_GRADIENT)) {
-			scaleType = GradientScaleType.getGradientTypeByName(bundle.getString(LINE_COLOR_GRADIENT));
+			String scaleTypeName = bundle.getString(LINE_COLOR_GRADIENT);
+			if (!Algorithms.isEmpty(scaleTypeName)) {
+				scaleType = GradientScaleType.getGradientTypeByName(scaleTypeName);
+			}
 		}
 		width = bundle.getString(LINE_WIDTH);
 		iconId = bundle.getInt(NAVIGATION_ICON_ID);

@@ -29,6 +29,7 @@ import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.ActivityResultListener;
@@ -577,6 +578,10 @@ public class ImportHelper {
 				gpxImportCompleteListener.onSaveComplete(success, result);
 			}
 			if (success) {
+				SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(result.path);
+				if (selectedGpxFile != null) {
+					selectedGpxFile.setGpxFile(result, app);
+				}
 				if (showInDetailsActivity) {
 					showGpxInDetailsActivity(result.path);
 				} else {

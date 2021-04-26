@@ -5,7 +5,6 @@ import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Shader;
-import android.util.Pair;
 
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.layers.geometry.RouteGeometryWay.GeometryGradientWayStyle;
@@ -24,13 +23,13 @@ public class RouteGeometryWayDrawer extends GeometryWayDrawer<RouteGeometryWayCo
 	}
 
 	@Override
-	protected void drawFullBorder(Canvas canvas, int zoom, List<Pair<Path, GeometryWayStyle<?>>> paths) {
+	protected void drawFullBorder(Canvas canvas, int zoom, List<DrawPathData> pathsData) {
 		if (drawBorder && zoom < BORDER_TYPE_ZOOM_THRESHOLD) {
 			Paint borderPaint = getContext().getAttrs().shadowPaint;
 			Path fullPath = new Path();
-			for (Pair<Path, GeometryWayStyle<?>> path : paths) {
-				if (path.second instanceof GeometryGradientWayStyle) {
-					fullPath.addPath(path.first);
+			for (DrawPathData data : pathsData) {
+				if (data.style instanceof GeometryGradientWayStyle) {
+					fullPath.addPath(data.path);
 				}
 			}
 			canvas.drawPath(fullPath, borderPaint);
@@ -38,20 +37,20 @@ public class RouteGeometryWayDrawer extends GeometryWayDrawer<RouteGeometryWayCo
 	}
 
 	@Override
-	public void drawPath(Canvas canvas, Path path, GeometryWayStyle<?> s) {
-		if (s instanceof GeometryGradientWayStyle) {
-			GeometryGradientWayStyle style = (GeometryGradientWayStyle) s;
-			LinearGradient gradient = new LinearGradient(style.startXY.x, style.startXY.y, style.endXY.x, style.endXY.y,
+	public void drawPath(Canvas canvas, DrawPathData pathData) {
+		if (pathData.style instanceof GeometryGradientWayStyle) {
+			GeometryGradientWayStyle style = (GeometryGradientWayStyle) pathData.style;
+			LinearGradient gradient = new LinearGradient(pathData.start.x, pathData.start.y, pathData.end.x, pathData.end.y,
 					style.startColor, style.endColor, Shader.TileMode.CLAMP);
 			getContext().getAttrs().customColorPaint.setShader(gradient);
 		}
-		super.drawPath(canvas, path, s);
+		super.drawPath(canvas, pathData);
 	}
 
 	@Override
-	protected void drawSegmentBorder(Canvas canvas, int zoom, Path path, GeometryWayStyle<?> style) {
+	protected void drawSegmentBorder(Canvas canvas, int zoom, DrawPathData pathData) {
 		if (drawBorder && zoom >= BORDER_TYPE_ZOOM_THRESHOLD) {
-			canvas.drawPath(path, getContext().getAttrs().shadowPaint);
+			canvas.drawPath(pathData.path, getContext().getAttrs().shadowPaint);
 		}
 	}
 }
