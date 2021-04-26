@@ -772,7 +772,10 @@ public abstract class InAppPurchases {
 			Date date = new Date(purchaseTime);
 			Calendar calendar = Calendar.getInstance();
 			calendar.setTime(date);
-			calendar.add(period.getUnit().getCalendarIdx(), period.getNumberOfUnits());
+			long currentTime = System.currentTimeMillis();
+			while (calendar.getTimeInMillis() < currentTime) {
+				calendar.add(period.getUnit().getCalendarIdx(), period.getNumberOfUnits());
+			}
 			return calendar.getTimeInMillis();
 		}
 
