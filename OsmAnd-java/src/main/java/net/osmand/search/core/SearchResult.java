@@ -1,7 +1,6 @@
 package net.osmand.search.core;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -25,7 +24,6 @@ public class SearchResult {
 	String wordsSpan ;
 	boolean firstUnknownWordMatches;
 	Collection<String> otherWordsMatch = null;
-
 
 	public Object object;
 	public ObjectType objectType;
@@ -98,9 +96,6 @@ public class SearchResult {
 		return res;
 	}
 
-
-
-
 	public int getDepth() {
 		if (parentSearchResult != null) {
 			return 1 + parentSearchResult.getDepth();
@@ -114,19 +109,6 @@ public class SearchResult {
 			inc += parentSearchResult.getFoundWordCount();
 		}
 		return inc;
-	}
-
-	private String getSelfPhrase() {
-		String ph = "";
-		if (firstUnknownWordMatches) {
-			ph = requiredSearchPhrase.getFirstUnknownSearchWord();
-		}
-		if (otherWordsMatch != null) {
-			for (String s : otherWordsMatch) {
-				ph += " " + s;
-			}
-		}
-		return ph;
 	}
 
 	private int getSelfWordCount() {
@@ -155,7 +137,6 @@ public class SearchResult {
 		}
 		return priority - 1 / (1 + pd * distance);
 	}
-
 
 	@Override
 	public String toString() {
