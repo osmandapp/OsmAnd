@@ -144,6 +144,7 @@ public class GpxUiHelper {
 
 	private static final int OPEN_GPX_DOCUMENT_REQUEST = 1005;
 	private static final int MAX_CHART_DATA_ITEMS = 10000;
+	private static final long SECOND_IN_MILLIS = 1000L;
 	private static final Log LOG = PlatformUtil.getLog(GpxUiHelper.class);
 
 	public static String getDescription(OsmandApplication app, GPXFile result, File f, boolean html) {
@@ -2134,6 +2135,7 @@ public class GpxUiHelper {
 		if (locations != null) {
 			GPXUtilities.Track track = new GPXUtilities.Track();
 			GPXUtilities.TrkSegment seg = new GPXUtilities.TrkSegment();
+			List<GPXUtilities.WptPt> pts = seg.points;
 			for (Location l : locations) {
 				GPXUtilities.WptPt point = new GPXUtilities.WptPt();
 				point.lat = l.getLatitude();
@@ -2142,8 +2144,8 @@ public class GpxUiHelper {
 					gpx.hasAltitude = true;
 					float h = (float) l.getAltitude();
 					point.ele = h;
-					if (lastHeight == HEIGHT_UNDEFINED && seg.points.size() > 0) {
-						for (GPXUtilities.WptPt pt : seg.points) {
+					if (lastHeight == HEIGHT_UNDEFINED && pts.size() > 0) {
+						for (GPXUtilities.WptPt pt : pts) {
 							if (Double.isNaN(pt.ele)) {
 								pt.ele = h;
 							}
@@ -2152,6 +2154,18 @@ public class GpxUiHelper {
 					lastHeight = h;
 				} else {
 					lastHeight = HEIGHT_UNDEFINED;
+				}
+				if (pts.size() == 0) {
+					point.time = System.currentTimeMillis();
+				} else {
+					GPXUtilities.WptPt prevPoint = pts.get(pts.size() - 1);
+					if (l.hasSpeed() && l.getSpeed() != 0) {
+						point.speed = l.getSpeed();
+						double dist = MapUtils.getDistance(prevPoint.lat, prevPoint.lon, point.lat, point.lon);
+						point.time = prevPoint.time + (long) (dist / point.speed) * SECOND_IN_MILLIS;
+					} else {
+						point.time = prevPoint.time;
+					}
 				}
 				seg.points.add(point);
 			}
