@@ -95,12 +95,20 @@ public class SearchResult {
 				break;
 			}
 		}
-		String searchPhrase = StringUtils.join(searchPhraseNames, SearchPhrase.DELIMITER);
-		if (objectType.equals(ObjectType.POI_TYPE) && !searchPhrase.equalsIgnoreCase(name)) {
+		if (objectType == ObjectType.POI_TYPE) {
 			allWordsMatched = false;
 		}
 
-		double res = (allWordsMatched && requiredSearchPhrase.getUnselectedPoiType() == null && objectType == ObjectType.POI) ? ObjectType.getTypeWeight(objectType) * 10 : 1;
+		double res = allWordsMatched ? ObjectType.getTypeWeight(objectType) * 10 : ObjectType.getTypeWeight(null);
+		if (requiredSearchPhrase.getUnselectedPoiType() != null) {
+			// search phrase matches poi type, then we lower all POI matches and don't check allWordsMatched
+			int wordsInPoiType = SearchPhrase.countWords(requiredSearchPhrase.getUnselectedPoiTypeName());
+			int wordsInUnknownPart = SearchPhrase.countWords(requiredSearchPhrase.getUnknownSearchPhrase());
+			// check only if poi type matches is complete
+			if (wordsInPoiType == wordsInUnknownPart) {
+				res = ObjectType.getTypeWeight(objectType);
+			}
+		}
 		if (parentSearchResult != null) {
 			res = res + parentSearchResult.getSumPhraseMatchWeight() / MAX_TYPE_WEIGHT;
 		}
@@ -131,14 +139,6 @@ public class SearchResult {
 			inc += otherWordsMatch.size();
 		}
 		return inc;
-	}
-
-	private boolean isPoiType(String phrase) {
-		AbstractPoiType type = requiredSearchPhrase.getUnselectedPoiType();
-		if (objectType.equals(ObjectType.POI) && type != null) {
-			return type.getKeyName().equalsIgnoreCase(phrase);
-		}
-		return false;
 	}
 
 	public double getSearchDistance(LatLon location) {

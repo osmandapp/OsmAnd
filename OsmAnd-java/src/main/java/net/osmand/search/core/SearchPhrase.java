@@ -61,6 +61,7 @@ public class SearchPhrase {
 	private List<NameStringMatcher> unknownWordsMatcher = new ArrayList<>();
 
 	private AbstractPoiType unselectedPoiType;
+	private String unselectedPoiTypeName;
 	
 	private QuadRect cache1kmRect;
 	
@@ -319,9 +320,14 @@ public class SearchPhrase {
 	public AbstractPoiType getUnselectedPoiType() {
 		return unselectedPoiType;
 	}
+	
+	public String getUnselectedPoiTypeName() {
+		return unselectedPoiTypeName;
+	}
 
-	public void setUnselectedPoiType(AbstractPoiType unselectedPoiType) {
+	public void setUnselectedPoiType(AbstractPoiType unselectedPoiType, String unselectedPoiTypeName) {
 		this.unselectedPoiType = unselectedPoiType;
+		this.unselectedPoiTypeName = unselectedPoiTypeName;
 	}
 
 	public boolean isMainUnknownSearchWordComplete() {
