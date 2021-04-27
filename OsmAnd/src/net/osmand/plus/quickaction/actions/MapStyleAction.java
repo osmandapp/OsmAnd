@@ -50,36 +50,40 @@ public class MapStyleAction extends SwitchableAction<String> {
 
 	@Override
 	public String getSelectedItem(OsmandApplication app) {
-		RenderingRulesStorage current = app.getRendererRegistry().getCurrentSelectedRenderer();
-		if (current != null) {
-			return current.getName();
-		} else {
-			return RendererRegistry.DEFAULT_RENDER;
-		}
+		return app.getSettings().RENDERER.get();
 	}
 
 	@Override
-	public void execute(MapActivity activity) {
+	public String getNextSelectedItem(OsmandApplication app) {
 		List<String> mapStyles = getFilteredStyles();
 		if (!Algorithms.isEmpty(mapStyles)) {
-			boolean showBottomSheetStyles = Boolean.valueOf(getParams().get(KEY_DIALOG));
-			if (showBottomSheetStyles) {
-				showChooseDialog(activity.getSupportFragmentManager());
-				return;
-			}
-			String curStyle = activity.getMyApplication().getSettings().RENDERER.get();
+			String curStyle = getSelectedItem(app);
 			int index = mapStyles.indexOf(curStyle);
 			String nextStyle = mapStyles.get(0);
 
 			if (index >= 0 && index + 1 < mapStyles.size()) {
 				nextStyle = mapStyles.get(index + 1);
 			}
+			return nextStyle;
+		}
+		return null;
+	}
+
+	@Override
+	public void execute(MapActivity activity) {
+		List<String> mapStyles = getFilteredStyles();
+		if (!Algorithms.isEmpty(mapStyles)) {
+			boolean showBottomSheetStyles = Boolean.parseBoolean(getParams().get(KEY_DIALOG));
+			if (showBottomSheetStyles) {
+				showChooseDialog(activity.getSupportFragmentManager());
+				return;
+			}
+			String nextStyle = getNextSelectedItem(activity.getMyApplication());
 			executeWithParams(activity, nextStyle);
 		} else {
 			Toast.makeText(activity, R.string.quick_action_need_to_add_item_to_list,
 					Toast.LENGTH_LONG).show();
 		}
-
 	}
 
 	@Override

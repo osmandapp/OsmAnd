@@ -275,16 +275,14 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 		TextViewEx toolbarTitle = (TextViewEx) toolbar.findViewById(R.id.toolbar_title);
 		toolbarTitle.setText(R.string.osm_live);
 
-		View closeButton = toolbar.findViewById(R.id.close_button);
+		ImageView closeButton = (ImageView) toolbar.findViewById(R.id.close_button);
+		UiUtilities.rotateImageByLayoutDirection(closeButton);
 		closeButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				dismiss();
 			}
 		});
-		if (closeButton instanceof ImageView) {
-			UiUtilities.rotateImageByLayoutDirection((ImageView) closeButton);
-		}
 
 		FrameLayout iconHelpContainer = toolbar.findViewById(R.id.action_button);
 		int iconColorResId = nightMode ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light;
@@ -443,6 +441,8 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 								 boolean isLastChild, View convertView, ViewGroup parent) {
 			LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
 			convertView = inflater.inflate(R.layout.list_item_triple_row_icon_and_menu, parent, false);
+			ImageView secondaryIcon = (ImageView) convertView.findViewById(R.id.secondary_icon);
+			UiUtilities.rotateImageByLayoutDirection(secondaryIcon);
 			LiveMapsViewHolder viewHolder = new LiveMapsViewHolder(convertView);
 			convertView.setTag(viewHolder);
 			viewHolder.bindLocalIndexInfo(getChild(groupPosition, childPosition).getFileName());

@@ -23,6 +23,7 @@ import static com.jwetherell.openmap.common.MoreMath.QUAD_PI_D;
  */
 public class MapUtils {
 
+	public static final int ROUNDING_ERROR = 3;
 	private static final int EARTH_RADIUS_B = 6356752;
 	private static final int EARTH_RADIUS_A = 6378137;
 	public static final double MIN_LATITUDE = -85.0511;

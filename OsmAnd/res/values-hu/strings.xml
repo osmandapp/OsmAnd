@@ -13,8 +13,8 @@
     <string name="shared_string_help">Súgó</string>
     <string name="accessibility_mode">Akadálymentes mód</string>
     <string name="accessibility_mode_descr">Bekapcsolja a fogyatékkal élőknek szóló funkciókat.</string>
-    <string name="shared_string_on">Be</string>
-    <string name="shared_string_off">Kikapcsolás</string>
+    <string name="shared_string_on">Bekapcsolva</string>
+    <string name="shared_string_off">Kikapcsolva</string>
     <string name="accessibility_default">Android rendszerbeállítások szerint</string>
     <string name="backToMenu">Vissza a menübe</string>
     <string name="zoomOut">Kicsinyít</string>
@@ -1318,7 +1318,7 @@
     <string name="shared_string_more">Bővebben…</string>
     <string name="route_descr_destination">Célpont</string>
     <string name="local_index_description">Egy meglévő elem adatainak megtekintéséhez koppintson rá, inaktiváláshoz vagy törléshez nyomja meg hosszan. Jelenlegi adatok az eszközön (%1$s szabad):</string>
-    <string name="speed_limit_exceed">Sebességkorlátozás-tolerancia</string>
+    <string name="speed_limit_exceed">Sebességkorlátozás túllépésének tűréshatára</string>
     <string name="speed_limit_exceed_message">Válassza ki a sebességkorlátozás tűréshatárát, amely fölött hangos figyelmeztetést fog kapni.</string>
     <string name="fav_point_emoticons_message">A Kedvenc hely át lett nevezve erre: %1$s, hogy a hangulatjeleket tartalmazó szöveget fájlba lehessen menteni.</string>
     <string name="print_route">Útvonal nyomtatása</string>
@@ -1470,7 +1470,7 @@
     <string name="shared_string_release">Megjelent</string>
     <string name="days_behind">napos</string>
     <string name="welmode_download_maps">Térképek letöltése</string>
-    <string name="confirm_usage_speed_cameras">Néhány országban (Németország, Franciaország, Olaszország és még néhány) tilos a traffipax figyelmeztetés használata! Az OsmAnd nem vállal felelősséget a szabályok megsértéséért. Koppints az Igen gombra, ha jogosult vagy a funkció használatára.</string>
+    <string name="confirm_usage_speed_cameras">Néhány országban (Németország, Franciaország, Olaszország stb.) tilos traffipax-riasztást használni! Az OsmAnd nem vállal felelősséget a szabályok megsértéséért. Koppintson az Igen gombra, ha jogosult a funkció használatára.</string>
     <string name="welcome_select_region">A jelzőtáblák és szabályok helyes értelmezéséhez jelölje ki a vezetési régiót:</string>
     <string name="welcome_text">Az OsmAnd lehetővé teszi a térképek és a navigáció offline használatát az egész világon.</string>
     <string name="current_route">Jelenlegi útvonal</string>
@@ -3583,7 +3583,7 @@
     <string name="uninstall_speed_cameras">Traffipaxok eltávolítása</string>
     <string name="shared_string_legal">Jogi</string>
     <string name="speed_camera_pois">Traffipax POI-k</string>
-    <string name="speed_cameras_legal_descr">Bizonyos országokban és régiókban a traffipaxra figyelmeztető alkalmazások törvényileg tiltottak.
+    <string name="speed_cameras_legal_descr">Bizonyos országokban és régiókban jogszabály tiltja a traffipaxra figyelmeztető alkalmazások használatát.
 \n
 \nDöntsön az ön országának törvényei alapján.
 \n
@@ -3592,14 +3592,14 @@
 \nVálassza az %2$s lehetőséget, hogy az összes traffipax-szal kapcsolatos adat: riasztások, értesítések, POI-k törlésre kerüljenek az OsmAnd teljes újratelepítéséig.</string>
     <string name="keep_active">Maradjanak</string>
     <string name="shared_string_uninstall">Eltávolít</string>
-    <string name="speed_cameras_alert">Bizonyos országokban a traffipax riasztások törvényileg tiltottak.</string>
+    <string name="speed_cameras_alert">Bizonyos országokban a törvény tiltja a traffipaxriasztást.</string>
     <string name="shared_string_bearing">Tájolás</string>
     <string name="item_deleted">%1$s törölve</string>
     <string name="speed_cameras_restart_descr">A traffipaxadatok végleges törléséhez indítsa újra az alkalmazást.</string>
     <string name="shared_string_uninstall_and_restart">Eltávolítás és Újraindítás</string>
     <string name="routing_attr_length_description">Adja meg az útvonalakon a járművekre vonatkozó hosszkorlátozást.</string>
     <string name="routing_attr_length_name">Hosszkorlátozás</string>
-    <string name="speed_cameras_removed_descr">Az eszköz nem tartalmaz traffipax adatokat.</string>
+    <string name="speed_cameras_removed_descr">Az eszköz nem tartalmaz traffipaxadatokat.</string>
     <string name="replace_all_desc">Az jelenlegi elemek lecserélésre kerülnek a fájlban lévőkre</string>
     <string name="keep_both_desc">Az importált elemek előtaggal lesznek hozzáadva</string>
     <string name="import_duplicates_description">Az OsmAnd már tartalmaz az importálttal megegyező nevű elemeket.
@@ -4044,7 +4044,11 @@
     <string name="lost_data_warning">Minden nem mentett adat törlődni fog.</string>
     <string name="show_start_dialog">Kezdő párbeszéd megjelenítése</string>
     <string name="trip_recording_show_start_dialog_setting">Ha le van tiltva, akkor a felvétel közvetlenül a widget vagy a menüelem megérintése után elindul, kihagyva a megerősítő párbeszédpanelt.</string>
-    <string name="release_4_0_beta">• Az OsmAnd Live frissítések átköltöztek a „Letöltések&gt; Frissítések” helyre
+    <string name="release_4_0_beta">• Új lehetőség: szinvonalak letöltése (méter mellett) lábban
+\n
+\n• Útvonaltervezési környezet: hozzáadott fülek a pontok és grafikonok közötti váltáshoz
+\n
+\n• Az OsmAnd Live frissítések átköltöztek a „Letöltések&gt; Frissítések” helyre
 \n
 \n• A nyomvonalak színezhetők magasság, sebesség vagy lejtés szerint.
 \n
@@ -4078,4 +4082,11 @@
     <string name="announce_when_exceeded">Értesítés túllépéskor</string>
     <string name="user_points">Felhasználói pontok</string>
     <string name="output">Teljesítmény</string>
+    <string name="srtm_download_single_help_message">Kérjük, válassza ki a kívánt mértékegységet. A mértékegység módosításához újra le kell töltenie a fájlt.</string>
+    <string name="srtm_download_list_help_message">Az OsmAnd méterben és lábban adja meg a szintvonalak magasságát. A mértékegység módosításához újra le kell töltenie a fájlt.</string>
+    <string name="shared_string_feet">láb</string>
+    <string name="srtm_unit_format">Szintvonalak mértékegysége</string>
+    <string name="route_line_use_gradient_coloring">Az útvonal színezése az útvonal magassági profiljának megfelelő lesz.</string>
+    <string name="shared_string_min_height">Legkisebb magasság</string>
+    <string name="shared_string_max_height">Legnagyobb magasság</string>
 </resources>

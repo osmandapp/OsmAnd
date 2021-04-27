@@ -118,7 +118,7 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_marginTop="@dimen/content_padding"
-				android:text="Actions"
+				tools:text="Actions"
 				android:textColor="?android:textColorPrimary"
 				android:textSize="@dimen/default_list_text_size" />
 

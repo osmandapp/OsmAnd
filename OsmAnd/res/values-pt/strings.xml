@@ -678,9 +678,9 @@
     <string name="loading_builds">A carregar compilações OsmAnd…</string>
     <string name="select_build_to_install">Selecionar a compilação OsmAnd a instalar</string>
     <string name="contribution_activity">Instalar versão</string>
-    <string name="navigate_point_format_D">DDD.DDDDD</string>
-    <string name="navigate_point_format_DM">DDD MM.MMM</string>
-    <string name="navigate_point_format_DMS">DDD MM SS.S</string>
+    <string name="navigate_point_format_D">GGG.GGGGG</string>
+    <string name="navigate_point_format_DM">GGG MM.MMM</string>
+    <string name="navigate_point_format_DMS">GGG MM SS.S</string>
     <string name="rendering_attr_noPolygons_description">Tornar transparentes todas as características do terreno no mapa.</string>
     <string name="rendering_attr_noPolygons_name">Polígonos</string>
     <string name="rendering_attr_appMode_name">Modo de visualização</string>
@@ -1021,7 +1021,7 @@
     <string name="av_camera_focus_infinity">Focar infinito</string>
     <string name="av_camera_focus_macro">Focagem macro (close-up)</string>
     <string name="av_camera_focus_continuous">A câmara tenta focar continuadamente</string>
-    <string name="av_photo_play_sound">Reproduzir o som do obturador da câmara</string>
+    <string name="av_photo_play_sound">Reproduzir som ao tirar fotografias</string>
     <string name="av_photo_play_sound_descr">Definir som ou silêncio ao fotografar.</string>
     <string name="driving_region_canada">Canadá</string>
     <string name="about_version">Versão:</string>
@@ -2013,7 +2013,7 @@
     <string name="routing_attr_height_obstacles_name">Utilizar dados de elevação</string>
     <string name="rendering_attr_depthContours_description">Mostrar pontos e contornos de profundidade.</string>
     <string name="rendering_attr_depthContours_name">Contornos de profundidade náuticos</string>
-    <string name="show_transparency_seekbar">Mostra a transparência da barra de navegação</string>
+    <string name="show_transparency_seekbar">Mostrar barra deslizante de transparência</string>
     <string name="shared_string_widgets">Widgets</string>
     <string name="rendering_attr_hideUnderground_name">Objetos subterrâneos</string>
     <string name="auto_split_recording_title">Dividir automaticamente as gravações após quebras</string>
@@ -3440,7 +3440,7 @@
     <string name="create_custom_categories_list_promo">Altere a ordenação da lista e oculte categorias. Pode importar ou exportar todas as alterações com perfis.</string>
     <string name="rearrange_categories">Reorganizar categorias</string>
     <string name="osm_authorization_success">Autorização bem sucedida</string>
-    <string name="multimedia_photo_play_sound">Som do obturador da câmara</string>
+    <string name="multimedia_photo_play_sound">Som ao tirar fotografias</string>
     <string name="multimedia_use_system_camera">Usar aplicação do sistema</string>
     <string name="multimedia_rec_split_title">Dividir gravações</string>
     <string name="reset_plugin_to_default">Repor configurações originais da extensão</string>
@@ -3960,13 +3960,17 @@
     <string name="routing_engine_vehicle_type_cycling_electric">Bicicleta elétrica</string>
     <string name="live_update_frequency_hour_variant">As atualizações ao mapa serão verificadas a todas as horas. Próxima %1$s em %2$s.</string>
     <string name="live_update_delete_updates_msg">Tem a certeza que quer eliminar todas as %s atualizações OsmAnd Live\?</string>
-    <string name="release_4_0_beta">• Atualizações OsmAnd Live movidas para \"Descarregamentos &gt; Atualizações\"
+    <string name="release_4_0_beta">• Adicionada opção para descarregar curvas de nível em pés.
+\n
+\n• Planear rota: adicionadas abas para alternar entre pontos ou gráficos.
+\n
+\n• Atualizações OsmAnd Live movidas para \"Descarregamentos &gt; Atualizações\"
 \n
 \n• Os trilhos podem ser agora coloridos conforme a altitude, velocidade e declive.
 \n
-\n• Adicionada opção para alterar a aparência da linha de rota de navegação
+\n• Adicionada opção para alterar a aparência da linha de rota de navegação.
 \n
-\n• Janela de diálogo \"Gravação do trilho\" atualizada
+\n• Janela de diálogo \"Gravação do trilho\" atualizada.
 \n
 \n</string>
     <string name="routing_attr_height_obstacles_description">O roteamento pode evitar subidas íngremes.</string>
@@ -4089,4 +4093,11 @@
     <string name="announce_when_exceeded">Anunciar quando ultrapassado</string>
     <string name="user_points">Pontos do utilizador</string>
     <string name="output">Saída</string>
+    <string name="shared_string_feet">pés</string>
+    <string name="srtm_download_list_help_message">O OsmAnd fornece dados de curvas de nível em metros e pés. Terá de descarregar novamente o ficheiro para alterar o formato.</string>
+    <string name="srtm_unit_format">Formato de unidades de curvas de nível</string>
+    <string name="srtm_download_single_help_message">Selecione o formato necessário. Terá de descarregar novamente o ficheiro para alterar o formato.</string>
+    <string name="route_line_use_gradient_coloring">A linha da rota será colorida de acordo com o perfil de elevação da rota.</string>
+    <string name="shared_string_min_height">Altura mínima</string>
+    <string name="shared_string_max_height">Altura máxima</string>
 </resources>

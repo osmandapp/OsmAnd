@@ -34,7 +34,9 @@ public class PublicTransportGeometryWayDrawer extends GeometryWayDrawer<PublicTr
 	}
 
 	@Override
-	public void drawPath(Canvas canvas, Path path, GeometryWayStyle<?> style) {
+	public void drawPath(Canvas canvas, DrawPathData pathData) {
+		Path path = pathData.path;
+		GeometryWayStyle<?> style = pathData.style;
 		if (style instanceof GeometryTransportWayStyle) {
 			RenderingLineAttributes attrsPT = getContext().getAttrsPT();
 			attrsPT.customColor = style.getStrokeColor();
@@ -44,7 +46,7 @@ public class PublicTransportGeometryWayDrawer extends GeometryWayDrawer<PublicTr
 			attrsPT.customColor = style.getColor();
 			attrsPT.drawPath(canvas, path);
 		} else {
-			super.drawPath(canvas, path, style);
+			super.drawPath(canvas, pathData);
 		}
 	}
 

@@ -11,7 +11,6 @@ import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
-import net.osmand.plus.GpxDbHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.ProgressImplementation;
 import net.osmand.plus.backup.BackupHelper.BackupInfo;
@@ -113,7 +112,7 @@ public class BackupTask {
 			tasks.push(backupTasks[i]);
 		}
 		this.runningTasks = tasks;
-		onTasksInit();
+		onBackupTasksInit();
 	}
 
 	private void initRestoreTasks() {
@@ -123,7 +122,7 @@ public class BackupTask {
 			tasks.push(restoreTasks[i]);
 		}
 		this.runningTasks = tasks;
-		onTasksInit();
+		onRestoreTasksInit();
 	}
 
 	private void initData() {
@@ -181,6 +180,11 @@ public class BackupTask {
 				}
 
 				@Override
+				public void onFileUploadDone(@NonNull File file) {
+					onTaskProgressDone();
+				}
+
+				@Override
 				public void onFilesUploadDone(@NonNull Map<File, String> errors) {
 					uploadErrors = errors;
 					onTaskFinished(TaskType.UPLOAD_FILES);
@@ -222,6 +226,11 @@ public class BackupTask {
 					} else {
 						onTaskProgressUpdate(progress);
 					}
+				}
+
+				@Override
+				public void onFileDownloaded(@NonNull File file) {
+					onTaskProgressDone();
 				}
 
 				@Override
@@ -275,11 +284,19 @@ public class BackupTask {
 		}
 	}
 
-	private void onTasksInit() {
+	private void onBackupTasksInit() {
 		Context ctx = contextRef.get();
-		if (ctx instanceof Activity && AndroidUtils.isActivityNotDestroyed((Activity) ctx) && progress != null) {
+		if (ctx instanceof Activity && AndroidUtils.isActivityNotDestroyed((Activity) ctx)) {
 			progress = ProgressImplementation.createProgressDialog(ctx,
 					"Backup data", "Initializing...", ProgressDialog.STYLE_HORIZONTAL);
+		}
+	}
+
+	private void onRestoreTasksInit() {
+		Context ctx = contextRef.get();
+		if (ctx instanceof Activity && AndroidUtils.isActivityNotDestroyed((Activity) ctx)) {
+			progress = ProgressImplementation.createProgressDialog(ctx,
+					"Restore data", "Initializing...", ProgressDialog.STYLE_HORIZONTAL);
 		}
 	}
 
@@ -292,7 +309,7 @@ public class BackupTask {
 						progress.startTask((String) objects[0], -1);
 					} else if (objects[0] instanceof Integer) {
 						int progressValue = (Integer) objects[0];
-						if (progressValue < Integer.MAX_VALUE) {
+						if (progressValue >= 0) {
 							progress.progress(progressValue);
 						} else {
 							progress.finishTask();
@@ -302,6 +319,13 @@ public class BackupTask {
 					progress.startTask((String) objects[0], (Integer) objects[1]);
 				}
 			}
+		}
+	}
+
+	private void onTaskProgressDone() {
+		Context ctx = contextRef.get();
+		if (ctx instanceof Activity && AndroidUtils.isActivityNotDestroyed((Activity) ctx) && progress != null) {
+			progress.finishTask();
 		}
 	}
 
