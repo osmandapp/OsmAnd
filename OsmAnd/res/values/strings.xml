@@ -12,6 +12,7 @@
 
 -->
 
+    <string name="shared_string_itinerary">Itinerary</string>
     <string name="shared_string_max_height">Max. height</string>
     <string name="shared_string_min_height">Min. height</string>
     <string name="route_line_use_gradient_coloring">Route line will be colorized depending on the elevation profile of the route.</string>

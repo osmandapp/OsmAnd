@@ -113,6 +113,11 @@ public class ItineraryDataHelper {
 		if (gpxFile.error != null) {
 			return false;
 		}
+		collectMarkersGroups(gpxFile, groups, groupInfos);
+		return true;
+	}
+
+	public void collectMarkersGroups(GPXFile gpxFile, Map<String, MapMarkersGroup> groups, List<ItineraryGroupInfo> groupInfos) {
 		for (ItineraryGroupInfo groupInfo : groupInfos) {
 			MapMarkersGroup group = ItineraryGroupInfo.createGroup(groupInfo);
 			groups.put(groupInfo.alias, group);
@@ -140,7 +145,6 @@ public class ItineraryDataHelper {
 				}
 			}
 		}
-		return true;
 	}
 
 	private boolean merge(Map<String, MapMarkersGroup> source, Map<String, MapMarkersGroup> destination) {
@@ -195,8 +199,12 @@ public class ItineraryDataHelper {
 		}
 	}
 
-	private GPXFile loadGPXFile(File file, final List<ItineraryGroupInfo> groupInfos) {
-		return GPXUtilities.loadGPXFile(file, new GPXExtensionsReader() {
+	private GPXFile loadGPXFile(File file, List<ItineraryGroupInfo> groupInfos) {
+		return GPXUtilities.loadGPXFile(file, getGPXExtensionsReader(groupInfos));
+	}
+
+	public GPXExtensionsReader getGPXExtensionsReader(final List<ItineraryGroupInfo> groupInfos) {
+		return new GPXExtensionsReader() {
 			@Override
 			public boolean readExtensions(GPXFile res, XmlPullParser parser) throws IOException, XmlPullParserException {
 				if (ITINERARY_GROUP.equalsIgnoreCase(parser.getName())) {
@@ -227,7 +235,7 @@ public class ItineraryDataHelper {
 				}
 				return false;
 			}
-		});
+		};
 	}
 
 	public String saveMarkersToFile(String fileName) {
