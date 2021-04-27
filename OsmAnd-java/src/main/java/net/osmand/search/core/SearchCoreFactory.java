@@ -1003,7 +1003,12 @@ public class SearchCoreFactory {
 							}
 							poiTypeFilter = getPoiTypeFilter(poiTypeResult.pt, poiAdditionals);
 							unselectedPoiType = poiTypeResult.pt;
-							phrase.setUnselectedPoiType(unselectedPoiType, foundName);
+							int wordsInPoiType = SearchPhrase.countWords(foundName);
+							int wordsInUnknownPart = SearchPhrase.countWords(phrase.getUnknownSearchPhrase());
+							if(wordsInPoiType == wordsInUnknownPart) {
+								// store only perfect match
+								phrase.setUnselectedPoiType(unselectedPoiType);
+							}
 						}
 					}
 				}
