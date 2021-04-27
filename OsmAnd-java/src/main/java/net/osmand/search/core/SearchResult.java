@@ -14,7 +14,6 @@ import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
-import org.apache.commons.lang3.StringUtils;
 
 public class SearchResult {
 	// search phrase that makes search result valid
@@ -62,7 +61,7 @@ public class SearchResult {
 		return res;
 	}
 
-	public double getSumPhraseMatchWeight() {
+	private double getSumPhraseMatchWeight() {
 		// if result is a complete match in the search we prioritize it higher
 		String name = alternateName != null ? alternateName : localeName;
 		List<String> localResultNames = new ArrayList<>();
