@@ -369,7 +369,7 @@ public class ItineraryDataHelper {
 				groupInfo.path = path;
 				groupInfo.alias = groupInfo.type + ":" + path.replace(IndexConstants.GPX_FILE_EXT, "");
 			} else {
-				groupInfo.alias = groupInfo.type + (group.getId() == null ? "" : ":" + group.getId());
+				groupInfo.alias = groupInfo.type + (group.getId() == null ? "" : ":" + group.getId().replace(":", "_"));
 			}
 			return groupInfo;
 		}
