@@ -102,12 +102,7 @@ public class SearchResult {
 		double res = allWordsMatched ? ObjectType.getTypeWeight(objectType) * 10 : ObjectType.getTypeWeight(null);
 		if (requiredSearchPhrase.getUnselectedPoiType() != null) {
 			// search phrase matches poi type, then we lower all POI matches and don't check allWordsMatched
-			int wordsInPoiType = SearchPhrase.countWords(requiredSearchPhrase.getUnselectedPoiTypeName());
-			int wordsInUnknownPart = SearchPhrase.countWords(requiredSearchPhrase.getUnknownSearchPhrase());
-			// check only if poi type matches is complete
-			if (wordsInPoiType == wordsInUnknownPart) {
-				res = ObjectType.getTypeWeight(objectType);
-			}
+			res = ObjectType.getTypeWeight(objectType);
 		}
 		if (parentSearchResult != null) {
 			res = res + parentSearchResult.getSumPhraseMatchWeight() / MAX_TYPE_WEIGHT;
