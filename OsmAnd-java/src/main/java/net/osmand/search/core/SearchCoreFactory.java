@@ -987,9 +987,9 @@ public class SearchCoreFactory {
 					for (String foundName : poiTypeResult.foundWords) {
 						CollatorStringMatcher csm = new CollatorStringMatcher(foundName, StringMatcherMode.CHECK_ONLY_STARTS_WITH);
 						// matches only completely
-						int mwords = phrase.countWords(foundName) ;
+						int mwords = SearchPhrase.countWords(foundName) ;
 						if (csm.matches(phrase.getUnknownSearchPhrase()) && countExtraWords < mwords) {
-							countExtraWords = phrase.countWords(foundName);
+							countExtraWords = SearchPhrase.countWords(foundName);
 							List<String> otherSearchWords = phrase.getUnknownSearchWords();
 							nameFilter = null;
 							if (countExtraWords - 1 < otherSearchWords.size()) {
@@ -1003,6 +1003,7 @@ public class SearchCoreFactory {
 							}
 							poiTypeFilter = getPoiTypeFilter(poiTypeResult.pt, poiAdditionals);
 							unselectedPoiType = poiTypeResult.pt;
+							phrase.setUnselectedPoiType(unselectedPoiType, foundName);
 						}
 					}
 				}

@@ -22,6 +22,7 @@ import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.CommonWords;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
+import net.osmand.osm.AbstractPoiType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.LocationParser;
 import net.osmand.util.MapUtils;
@@ -58,6 +59,9 @@ public class SearchPhrase {
 	private NameStringMatcher firstUnknownNameStringMatcher;
 	private NameStringMatcher mainUnknownNameStringMatcher;
 	private List<NameStringMatcher> unknownWordsMatcher = new ArrayList<>();
+
+	private AbstractPoiType unselectedPoiType;
+	private String unselectedPoiTypeName;
 	
 	private QuadRect cache1kmRect;
 	
@@ -312,14 +316,25 @@ public class SearchPhrase {
 	public List<SearchWord> getWords() {
 		return words;
 	}
+
+	public AbstractPoiType getUnselectedPoiType() {
+		return unselectedPoiType;
+	}
 	
+	public String getUnselectedPoiTypeName() {
+		return unselectedPoiTypeName;
+	}
+
+	public void setUnselectedPoiType(AbstractPoiType unselectedPoiType, String unselectedPoiTypeName) {
+		this.unselectedPoiType = unselectedPoiType;
+		this.unselectedPoiTypeName = unselectedPoiTypeName;
+	}
 
 	public boolean isMainUnknownSearchWordComplete() {
 		// return lastUnknownSearchWordComplete || otherUnknownWords.size() > 0 || unknownSearchWordPoiType != null;
 		return mainUnknownSearchWordComplete;
 	}
-	
-	
+
 	public boolean isLastUnknownSearchWordComplete() {
 		return lastUnknownSearchWordComplete;
 	}

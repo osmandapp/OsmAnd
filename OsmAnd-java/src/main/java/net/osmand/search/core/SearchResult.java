@@ -14,6 +14,7 @@ import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
+import org.apache.commons.lang3.StringUtils;
 
 public class SearchResult {
 	// search phrase that makes search result valid
@@ -73,7 +74,7 @@ public class SearchResult {
 		if (fw != null) {
 			searchPhraseNames.add(fw);
 		}
-		if (!ow.isEmpty()) {
+		if (ow != null) {
 			searchPhraseNames.addAll(ow);
 		}
 
@@ -94,7 +95,20 @@ public class SearchResult {
 				break;
 			}
 		}
-		double res = ObjectType.getTypeWeight(allWordsMatched ? objectType : null);
+		if (objectType == ObjectType.POI_TYPE) {
+			allWordsMatched = false;
+		}
+
+		double res = allWordsMatched ? ObjectType.getTypeWeight(objectType) * 10 : ObjectType.getTypeWeight(null);
+		if (requiredSearchPhrase.getUnselectedPoiType() != null) {
+			// search phrase matches poi type, then we lower all POI matches and don't check allWordsMatched
+			int wordsInPoiType = SearchPhrase.countWords(requiredSearchPhrase.getUnselectedPoiTypeName());
+			int wordsInUnknownPart = SearchPhrase.countWords(requiredSearchPhrase.getUnknownSearchPhrase());
+			// check only if poi type matches is complete
+			if (wordsInPoiType == wordsInUnknownPart) {
+				res = ObjectType.getTypeWeight(objectType);
+			}
+		}
 		if (parentSearchResult != null) {
 			res = res + parentSearchResult.getSumPhraseMatchWeight() / MAX_TYPE_WEIGHT;
 		}
