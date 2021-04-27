@@ -45,11 +45,11 @@ public class MarkersPlanRouteContext {
 	private boolean adjustMapOnStart = true;
 	private boolean navigationFromMarkers;
 
-	public Map<Pair<WptPt, WptPt>, List<WptPt>> getSnappedToRoadPoints() {
+	Map<Pair<WptPt, WptPt>, List<WptPt>> getSnappedToRoadPoints() {
 		return snappedToRoadPoints;
 	}
 
-	public TrkSegment getSnapTrkSegment() {
+	TrkSegment getSnapTrkSegment() {
 		return snapTrkSegment;
 	}
 
@@ -57,7 +57,7 @@ public class MarkersPlanRouteContext {
 		return snappedMode;
 	}
 
-	public void setSnappedMode(ApplicationMode snappedMode) {
+	void setSnappedMode(ApplicationMode snappedMode) {
 		this.snappedMode = snappedMode;
 	}
 
@@ -69,11 +69,11 @@ public class MarkersPlanRouteContext {
 		this.listener = listener;
 	}
 
-	public boolean isProgressBarVisible() {
+	boolean isProgressBarVisible() {
 		return progressBarVisible;
 	}
 
-	public void setProgressBarVisible(boolean progressBarVisible) {
+	void setProgressBarVisible(boolean progressBarVisible) {
 		this.progressBarVisible = progressBarVisible;
 	}
 
@@ -113,7 +113,7 @@ public class MarkersPlanRouteContext {
 		this.app = app;
 	}
 
-	public void cancelSnapToRoad() {
+	void cancelSnapToRoad() {
 		listener.hideProgressBar(true);
 		snapToRoadPairsToCalculate.clear();
 		if (calculationProgress != null) {
@@ -151,7 +151,7 @@ public class MarkersPlanRouteContext {
 		}
 	}
 
-	public void recreateSnapTrkSegment(boolean adjustMap) {
+	void recreateSnapTrkSegment(boolean adjustMap) {
 		snapTrkSegment.points.clear();
 		List<WptPt> points = getPointsToCalculate();
 		if (snappedMode == ApplicationMode.DEFAULT) {
@@ -281,7 +281,7 @@ public class MarkersPlanRouteContext {
 		return params;
 	}
 
-	public interface PlanRouteProgressListener {
+	interface PlanRouteProgressListener {
 
 		void showProgressBar();
 

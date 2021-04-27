@@ -1,4 +1,4 @@
-package net.osmand.plus.mapmarkers.bottomsheets;
+package net.osmand.plus.mapmarkers;
 
 import android.os.Bundle;
 import android.view.View;
@@ -65,7 +65,7 @@ public class CoordinateInputActionsBottomSheet extends MenuBottomSheetDialogFrag
 		return R.string.shared_string_cancel;
 	}
 
-	public interface CoordinateInputActionsListener {
+	interface CoordinateInputActionsListener {
 
 		void removeItem(int position);
 

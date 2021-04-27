@@ -1,4 +1,4 @@
-package net.osmand.plus.mapmarkers.fragments;
+package net.osmand.plus.mapmarkers;
 
 import android.app.Dialog;
 import android.graphics.drawable.Drawable;
@@ -32,18 +32,13 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.mapmarkers.MapMarker;
-import net.osmand.plus.mapmarkers.fragments.CoordinateInputDialogFragment.OnPointsSavedListener;
-import net.osmand.plus.mapmarkers.fragments.DirectionIndicationDialogFragment.DirectionIndicationFragmentListener;
+import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment.OnPointsSavedListener;
+import net.osmand.plus.mapmarkers.DirectionIndicationDialogFragment.DirectionIndicationFragmentListener;
 import net.osmand.plus.mapmarkers.MapMarkersHelper.MapMarkersSortByDef;
 import net.osmand.plus.mapmarkers.MapMarkersHelper.OnGroupSyncedListener;
-import net.osmand.plus.mapmarkers.bottomsheets.OptionsBottomSheetDialogFragment;
-import net.osmand.plus.mapmarkers.bottomsheets.OptionsBottomSheetDialogFragment.MarkerOptionsFragmentListener;
-import net.osmand.plus.mapmarkers.bottomsheets.OrderByBottomSheetDialogFragment;
-import net.osmand.plus.mapmarkers.bottomsheets.OrderByBottomSheetDialogFragment.OrderByFragmentListener;
-import net.osmand.plus.mapmarkers.bottomsheets.SaveAsTrackBottomSheetDialogFragment;
-import net.osmand.plus.mapmarkers.bottomsheets.SaveAsTrackBottomSheetDialogFragment.MarkerSaveAsTrackFragmentListener;
+import net.osmand.plus.mapmarkers.OptionsBottomSheetDialogFragment.MarkerOptionsFragmentListener;
+import net.osmand.plus.mapmarkers.OrderByBottomSheetDialogFragment.OrderByFragmentListener;
+import net.osmand.plus.mapmarkers.SaveAsTrackBottomSheetDialogFragment.MarkerSaveAsTrackFragmentListener;
 import net.osmand.plus.track.TrackMenuFragment;
 
 import java.io.File;
@@ -51,8 +46,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static net.osmand.plus.mapmarkers.bottomsheets.OptionsBottomSheetDialogFragment.GROUPS_MARKERS_MENU;
-import static net.osmand.plus.mapmarkers.bottomsheets.OptionsBottomSheetDialogFragment.HISTORY_MARKERS_MENU;
+import static net.osmand.plus.mapmarkers.OptionsBottomSheetDialogFragment.GROUPS_MARKERS_MENU;
+import static net.osmand.plus.mapmarkers.OptionsBottomSheetDialogFragment.HISTORY_MARKERS_MENU;
 
 public class MapMarkersDialogFragment extends DialogFragment implements OnGroupSyncedListener {
 

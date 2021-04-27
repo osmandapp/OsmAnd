@@ -108,11 +108,11 @@ public class GPXUtilities {
 	}
 
 	public interface GPXExtensionsWriter {
-		public void writeExtensions(XmlSerializer serializer);
+		void writeExtensions(XmlSerializer serializer);
 	}
 
 	public interface GPXExtensionsReader {
-		public boolean readExtensions(GPXFile res, XmlPullParser parser) throws IOException, XmlPullParserException;
+		boolean readExtensions(GPXFile res, XmlPullParser parser) throws IOException, XmlPullParserException;
 	}
 
 	public static class GPXExtensions {

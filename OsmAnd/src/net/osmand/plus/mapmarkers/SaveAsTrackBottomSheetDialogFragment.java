@@ -1,4 +1,4 @@
-package net.osmand.plus.mapmarkers.bottomsheets;
+package net.osmand.plus.mapmarkers;
 
 import android.os.Bundle;
 import android.text.format.DateFormat;
@@ -31,7 +31,7 @@ import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 
 import java.util.Date;
 
-import static net.osmand.plus.mapmarkers.fragments.CoordinateInputDialogFragment.ADDED_POINTS_NUMBER_KEY;
+import static net.osmand.plus.mapmarkers.CoordinateInputDialogFragment.ADDED_POINTS_NUMBER_KEY;
 
 public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
@@ -167,7 +167,7 @@ public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragm
 		}
 	}
 
-	public interface MarkerSaveAsTrackFragmentListener {
+	interface MarkerSaveAsTrackFragmentListener {
 		void saveGpx(String fileName);
 	}
 }

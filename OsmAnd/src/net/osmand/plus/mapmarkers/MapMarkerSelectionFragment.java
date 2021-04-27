@@ -1,4 +1,4 @@
-package net.osmand.plus.mapmarkers.fragments;
+package net.osmand.plus.mapmarkers;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -21,7 +21,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.helpers.MapMarkerDialogHelper;
-import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.OnMarkerSelectListener;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.PointType;

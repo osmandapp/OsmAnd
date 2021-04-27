@@ -1,4 +1,4 @@
-package net.osmand.plus.mapmarkers.bottomsheets;
+package net.osmand.plus.mapmarkers;
 
 import android.os.Bundle;
 import android.view.View;
@@ -96,7 +96,7 @@ public class HistoryMarkerMenuBottomSheetDialogFragment extends MenuBottomSheetD
 		return R.string.shared_string_close;
 	}
 
-	public interface HistoryMarkerMenuFragmentListener {
+	interface HistoryMarkerMenuFragmentListener {
 
 		void onMakeMarkerActive(int pos);
 

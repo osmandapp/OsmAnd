@@ -1,4 +1,4 @@
-package net.osmand.plus.mapmarkers.fragments;
+package net.osmand.plus.mapmarkers;
 
 import android.os.Build;
 import android.os.Bundle;

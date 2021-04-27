@@ -1,4 +1,4 @@
-package net.osmand.plus.mapmarkers.fragments;
+package net.osmand.plus.mapmarkers;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -71,17 +71,11 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.mapmarkers.CoordinateInputFormats;
-import net.osmand.plus.mapmarkers.MapMarkersGroup;
-import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.mapmarkers.bottomsheets.CoordinateInputActionsBottomSheet;
-import net.osmand.plus.mapmarkers.bottomsheets.CoordinateInputBottomSheetDialogFragment;
-import net.osmand.plus.mapmarkers.bottomsheets.CoordinateInputBottomSheetDialogFragment.CoordinateInputFormatChangeListener;
+import net.osmand.plus.mapmarkers.CoordinateInputBottomSheetDialogFragment.CoordinateInputFormatChangeListener;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.DDM;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.DMS;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.Format;
 import net.osmand.plus.mapmarkers.adapters.CoordinateInputAdapter;
-import net.osmand.plus.mapmarkers.bottomsheets.SaveAsTrackBottomSheetDialogFragment;
 import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.track.TrackMenuFragment;
 import net.osmand.plus.widgets.EditTextEx;

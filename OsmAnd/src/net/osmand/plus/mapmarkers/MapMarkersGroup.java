@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+// TODO rename after 4.0 MapMarkersGroup -> ItineraryGroup
 public class MapMarkersGroup {
 
 	public static final String MARKERS_SYNC_GROUP_ID = "markers_sync_group_id";
@@ -27,7 +28,6 @@ public class MapMarkersGroup {
 	private List<MapMarker> markers = new ArrayList<>();
 	private TravelArticle wikivoyageArticle;
 	// TODO should be removed from this class:
-	private GroupHeader header;
 	private ShowHideHistoryButton showHideHistoryButton;
 
 	public MapMarkersGroup() {
@@ -66,10 +66,6 @@ public class MapMarkersGroup {
 
 	public void setMarkers(List<MapMarker> markers) {
 		this.markers = markers;
-	}
-
-	public void setHeader(GroupHeader header) {
-		this.header = header;
 	}
 
 	public void setShowHideHistoryButton(ShowHideHistoryButton showHideHistoryButton) {
@@ -130,10 +126,6 @@ public class MapMarkersGroup {
 
 	public List<MapMarker> getMarkers() {
 		return markers;
-	}
-
-	public GroupHeader getGroupHeader() {
-		return header;
 	}
 
 	public ShowHideHistoryButton getShowHideHistoryButton() {

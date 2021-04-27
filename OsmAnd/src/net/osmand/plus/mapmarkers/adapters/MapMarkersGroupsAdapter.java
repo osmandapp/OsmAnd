@@ -22,12 +22,6 @@ import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.mapmarkers.GroupHeader;
-import net.osmand.plus.mapmarkers.ItineraryType;
-import net.osmand.plus.mapmarkers.MapMarker;
-import net.osmand.plus.mapmarkers.MapMarkersGroup;
-import net.osmand.plus.mapmarkers.ShowHideHistoryButton;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -35,11 +29,12 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapmarkers.GroupHeader;
+import net.osmand.plus.mapmarkers.ItineraryType;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
+import net.osmand.plus.mapmarkers.SelectWptCategoriesBottomSheetDialogFragment;
 import net.osmand.plus.mapmarkers.ShowHideHistoryButton;
-import net.osmand.plus.mapmarkers.bottomsheets.SelectWptCategoriesBottomSheetDialogFragment;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
@@ -194,8 +189,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 					items.add(marker);
 				}
 			} else {
-				GroupHeader header = group.getGroupHeader();
-				items.add(header);
+				items.add(new GroupHeader(group));
 				if (!group.isDisabled()) {
 					if (group.getWptCategories() != null && !group.getWptCategories().isEmpty()) {
 						CategoriesSubHeader categoriesSubHeader = new CategoriesSubHeader(group);
@@ -257,12 +251,19 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 	}
 
 	public int getGroupHeaderPosition(String groupId) {
-		int pos = -1;
 		MapMarkersGroup group = app.getMapMarkersHelper().getMapMarkerGroupById(groupId, ItineraryType.MARKERS);
 		if (group != null) {
-			pos = items.indexOf(group.getGroupHeader());
+			for (int i = 0; i < items.size(); i++) {
+				Object item = items.get(i);
+				if (item instanceof GroupHeader) {
+					GroupHeader header = (GroupHeader) item;
+					if (Algorithms.stringsEqual(header.getGroup().getId(), groupId)) {
+						return i;
+					}
+				}
+			}
 		}
-		return pos;
+		return -1;
 	}
 
 	public void updateDisplayedData() {

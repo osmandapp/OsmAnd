@@ -112,7 +112,7 @@ import net.osmand.plus.mapcontextmenu.other.DestinationReachedMenu;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper.MapMarkerChangedListener;
-import net.osmand.plus.mapmarkers.fragments.PlanRouteFragment;
+import net.osmand.plus.mapmarkers.PlanRouteFragment;
 import net.osmand.plus.measurementtool.GpxApproximationFragment;
 import net.osmand.plus.measurementtool.GpxData;
 import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
@@ -431,6 +431,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			findViewById(R.id.init_progress).setVisibility(View.VISIBLE);
 			initListener = new AppInitializeListener() {
 				boolean openGlSetup = false;
+
+				@Override
+				public void onStart(AppInitializer init) {
+
+				}
 
 				@Override
 				public void onProgress(AppInitializer init, InitEvents event) {

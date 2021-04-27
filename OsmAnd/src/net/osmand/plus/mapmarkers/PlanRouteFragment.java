@@ -1,4 +1,4 @@
-package net.osmand.plus.mapmarkers.fragments;
+package net.osmand.plus.mapmarkers;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -48,11 +48,7 @@ import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.mapmarkers.MapMarker;
-import net.osmand.plus.mapmarkers.MarkersPlanRouteContext;
-import net.osmand.plus.mapmarkers.bottomsheets.PlanRouteOptionsBottomSheetDialogFragment;
-import net.osmand.plus.mapmarkers.bottomsheets.PlanRouteOptionsBottomSheetDialogFragment.PlanRouteOptionsFragmentListener;
+import net.osmand.plus.mapmarkers.PlanRouteOptionsBottomSheetDialogFragment.PlanRouteOptionsFragmentListener;
 import net.osmand.plus.mapmarkers.adapters.MapMarkersItemTouchHelperCallback;
 import net.osmand.plus.mapmarkers.adapters.MapMarkersListAdapter;
 import net.osmand.plus.measurementtool.SnapToRoadBottomSheetDialogFragment;

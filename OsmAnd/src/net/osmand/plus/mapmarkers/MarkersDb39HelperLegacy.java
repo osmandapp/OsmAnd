@@ -5,15 +5,18 @@ import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.util.Algorithms;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
-import static net.osmand.plus.mapmarkers.MapMarkersDbHelper.MARKERS_COL_ACTIVE;
-import static net.osmand.plus.mapmarkers.MapMarkersDbHelper.MARKERS_COL_DISABLED;
-import static net.osmand.plus.mapmarkers.MapMarkersDbHelper.MARKERS_COL_GROUP_KEY;
-import static net.osmand.plus.mapmarkers.MapMarkersDbHelper.MARKERS_TABLE_NAME;
+import static net.osmand.plus.mapmarkers.MapMarkersDbHelper.DB_NAME;
+import static net.osmand.plus.mapmarkers.MapMarkersDbHelper.DB_VERSION;
 
-public class MarkersDbHelperLegacy {
+public class MarkersDb39HelperLegacy {
 
 	private static final String GROUPS_TABLE_NAME = "map_markers_groups";
 	private static final String GROUPS_COL_ID = "group_id";
@@ -41,16 +44,58 @@ public class MarkersDbHelperLegacy {
 	private final OsmandApplication app;
 	private final MapMarkersDbHelper markersDbHelper;
 
-	public MarkersDbHelperLegacy(OsmandApplication app, MapMarkersDbHelper markersDbHelper) {
+	public MarkersDb39HelperLegacy(OsmandApplication app) {
 		this.app = app;
-		this.markersDbHelper = markersDbHelper;
+		markersDbHelper = app.getMapMarkersHelper().getMarkersDbHelper();
+	}
+
+	public void migrateMarkersGroups() {
+		List<MapMarkersGroup> markersGroups = loadGroupsLegacy();
+		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
+		markersHelper.getDataHelper().saveGroups(markersGroups);
+	}
+
+	public List<MapMarkersGroup> loadGroupsLegacy() {
+		Map<String, MapMarkersGroup> groupsMap = getAllGroupsMap();
+		Iterator<Entry<String, MapMarkersGroup>> iterator = groupsMap.entrySet().iterator();
+		while (iterator.hasNext()) {
+			MapMarkersGroup group = iterator.next().getValue();
+			if (group.getType() == ItineraryType.TRACK && !new File(group.getId()).exists()) {
+				iterator.remove();
+			}
+		}
+
+		List<MapMarker> allMarkers = new ArrayList<>();
+		allMarkers.addAll(markersDbHelper.getActiveMarkers(true));
+		allMarkers.addAll(markersDbHelper.getMarkersHistory(true));
+
+		MapMarkersGroup noGroup = null;
+		for (MapMarker marker : allMarkers) {
+			MapMarkersGroup group = groupsMap.get(marker.groupKey);
+			if (group == null) {
+				if (noGroup == null) {
+					noGroup = new MapMarkersGroup();
+					noGroup.setCreationDate(Long.MAX_VALUE);
+					groupsMap.put(noGroup.getId(), noGroup);
+				}
+				noGroup.getMarkers().add(marker);
+			} else {
+				if (marker.creationDate < group.getCreationDate()) {
+					group.setCreationDate(marker.creationDate);
+				}
+				group.getMarkers().add(marker);
+			}
+		}
+		return new ArrayList<>(groupsMap.values());
 	}
 
 	public void onCreate(SQLiteConnection db) {
+		markersDbHelper.onCreate(db);
 		db.execSQL(GROUPS_TABLE_CREATE);
 	}
 
 	public void onUpgrade(SQLiteConnection db, int oldVersion, int newVersion) {
+		markersDbHelper.onUpgrade(db, oldVersion, newVersion);
 		if (oldVersion < 8) {
 			db.execSQL("ALTER TABLE " + GROUPS_TABLE_NAME + " ADD " + GROUPS_COL_DISABLED + " int");
 		}
@@ -65,48 +110,26 @@ public class MarkersDbHelperLegacy {
 	}
 
 	private SQLiteConnection openConnection(boolean readonly) {
-		return markersDbHelper.openConnection(readonly);
-	}
-
-	public void updateGroupDisabled(String id, boolean disabled) {
-		SQLiteConnection db = openConnection(false);
-		if (db != null) {
-			try {
-				db.execSQL("UPDATE " + GROUPS_TABLE_NAME +
-						" SET " + GROUPS_COL_DISABLED + " = ? " +
-						"WHERE " + GROUPS_COL_ID + " = ?", new Object[] {disabled ? 1 : 0, id});
-				db.execSQL("UPDATE " + MARKERS_TABLE_NAME +
-						" SET " + MARKERS_COL_DISABLED + " = ? " +
-						"WHERE " + MARKERS_COL_GROUP_KEY + " = ?", new Object[] {disabled ? 1 : 0, id});
-			} finally {
-				db.close();
+		SQLiteConnection conn = app.getSQLiteAPI().getOrCreateDatabase(DB_NAME, readonly);
+		if (conn == null) {
+			return null;
+		}
+		if (conn.getVersion() < DB_VERSION) {
+			if (readonly) {
+				conn.close();
+				conn = app.getSQLiteAPI().getOrCreateDatabase(DB_NAME, false);
+			}
+			if (conn != null) {
+				int version = conn.getVersion();
+				conn.setVersion(DB_VERSION);
+				if (version == 0) {
+					onCreate(conn);
+				} else {
+					onUpgrade(conn, version, DB_VERSION);
+				}
 			}
 		}
-	}
-
-	public void removeDisabledGroups() {
-		SQLiteConnection db = openConnection(false);
-		if (db != null) {
-			try {
-				db.execSQL("DELETE FROM " + GROUPS_TABLE_NAME + " WHERE " + GROUPS_COL_DISABLED + " = ? ", new Object[] {1});
-				db.execSQL("DELETE FROM " + MARKERS_TABLE_NAME
-						+ " WHERE " + MARKERS_COL_DISABLED + " = ? AND " + MARKERS_COL_ACTIVE + " = ?", new Object[] {1, 1});
-			} finally {
-				db.close();
-			}
-		}
-	}
-
-	public void addGroup(MapMarkersGroup group) {
-		SQLiteConnection db = openConnection(false);
-		if (db != null) {
-			try {
-				db.execSQL("INSERT INTO " + GROUPS_TABLE_NAME + " VALUES (?, ?, ?, ?, ?)",
-						new Object[] {group.getId(), group.getName(), group.getType().getTypeId(), group.isDisabled(), group.getWptCategoriesString()});
-			} finally {
-				db.close();
-			}
-		}
+		return conn;
 	}
 
 	public Map<String, MapMarkersGroup> getAllGroupsMap() {
@@ -143,29 +166,5 @@ public class MarkersDbHelperLegacy {
 		res.setWptCategories(categories == null ? null : Algorithms.decodeStringSet(categories));
 
 		return res;
-	}
-
-	public void removeMarkersGroup(String id) {
-		SQLiteConnection db = openConnection(false);
-		if (db != null) {
-			try {
-				db.execSQL("DELETE FROM " + GROUPS_TABLE_NAME + " WHERE " + GROUPS_COL_ID + " = ?", new Object[] {id});
-			} finally {
-				db.close();
-			}
-		}
-	}
-
-	public void updateGroupCategories(String id, String categories) {
-		SQLiteConnection db = openConnection(false);
-		if (db != null) {
-			try {
-				db.execSQL("UPDATE " + GROUPS_TABLE_NAME +
-						" SET " + GROUPS_COL_CATEGORIES + " = ? " +
-						"WHERE " + GROUPS_COL_ID + " = ?", new Object[] {categories, id});
-			} finally {
-				db.close();
-			}
-		}
 	}
 }

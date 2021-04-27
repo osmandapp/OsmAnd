@@ -42,7 +42,6 @@ import java.util.TimeZone;
 import static net.osmand.GPXUtilities.readText;
 import static net.osmand.GPXUtilities.writeNotNullText;
 import static net.osmand.plus.FavouritesDbHelper.backup;
-import static net.osmand.plus.mapmarkers.MapMarkersDbHelper.DB_NAME;
 import static net.osmand.util.MapUtils.createShortLinkString;
 
 public class ItineraryDataHelper {
@@ -87,51 +86,22 @@ public class ItineraryDataHelper {
 	}
 
 	public List<MapMarkersGroup> loadGroups() {
-		File internalFile = getInternalFile();
-		if (!internalFile.exists()) {
-			File dbPath = app.getDatabasePath(DB_NAME);
-			if (dbPath.exists()) {
-				List<MapMarkersGroup> groups = loadGroupsLegacy();
-				saveGroups(groups);
-			}
-		}
 		Map<String, MapMarkersGroup> groups = new LinkedHashMap<>();
 		Map<String, MapMarkersGroup> extGroups = new LinkedHashMap<>();
+
+		File internalFile = getInternalFile();
+		if (!internalFile.exists()) {
+			groups.put(ItineraryType.MARKERS.getTypeName(), new MapMarkersGroup());
+		}
 		loadGPXFile(internalFile, groups);
 		loadGPXFile(getExternalFile(), extGroups);
 
 		boolean changed = merge(extGroups, groups);
+		List<MapMarkersGroup> markersGroups = new ArrayList<>(groups.values());
 		if (changed || !getExternalFile().exists()) {
-			saveGroups();
+			saveGroups(markersGroups);
 		}
-		return new ArrayList<>(groups.values());
-	}
-
-	private List<MapMarkersGroup> loadGroupsLegacy() {
-		MapMarkersDbHelper markersDbHelper = mapMarkersHelper.getMarkersDbHelper();
-		Map<String, MapMarkersGroup> groupsMap = markersDbHelper.getHelperLegacy().getAllGroupsMap();
-
-		List<MapMarker> allMarkers = new ArrayList<>(markersDbHelper.getActiveMarkers(true));
-		allMarkers.addAll(markersDbHelper.getMarkersHistory(true));
-
-		MapMarkersGroup noGroup = null;
-		for (MapMarker marker : allMarkers) {
-			MapMarkersGroup group = groupsMap.get(marker.groupKey);
-			if (group == null) {
-				if (noGroup == null) {
-					noGroup = new MapMarkersGroup();
-					noGroup.setCreationDate(Long.MAX_VALUE);
-					groupsMap.put(noGroup.getId(), noGroup);
-				}
-				noGroup.getMarkers().add(marker);
-			} else {
-				if (marker.creationDate < group.getCreationDate()) {
-					group.setCreationDate(marker.creationDate);
-				}
-				group.getMarkers().add(marker);
-			}
-		}
-		return new ArrayList<>(groupsMap.values());
+		return markersGroups;
 	}
 
 	private boolean loadGPXFile(File file, Map<String, MapMarkersGroup> groups) {
@@ -153,10 +123,17 @@ public class ItineraryDataHelper {
 				for (Entry<String, MapMarkersGroup> entry : groups.entrySet()) {
 					String alias = entry.getKey() + ":";
 					if (itineraryId.startsWith(alias)) {
+						MapMarkersGroup group = entry.getValue();
 						MapMarker marker = fromWpt(point, app, false);
-						marker.id = itineraryId.substring(alias.length());
-						marker.groupKey = entry.getValue().getId();
-						marker.groupName = entry.getValue().getName();
+						marker.groupKey = group.getId();
+						marker.groupName = group.getName();
+
+						if (group.getType() == ItineraryType.MARKERS) {
+							marker.id = itineraryId.substring(alias.length());
+						} else {
+							marker.id = group.getId() + itineraryId.substring(alias.length());
+						}
+
 						entry.getValue().getMarkers().add(marker);
 						break;
 					}
@@ -176,10 +153,6 @@ public class ItineraryDataHelper {
 			}
 		}
 		return changed;
-	}
-
-	public void saveGroups() {
-		saveGroups(mapMarkersHelper.getMapMarkersGroups());
 	}
 
 	public void saveGroups(List<MapMarkersGroup> groups) {
@@ -404,10 +377,12 @@ public class ItineraryDataHelper {
 		public static MapMarkersGroup createGroup(ItineraryGroupInfo groupInfo) {
 			ItineraryType type = ItineraryType.findTypeForName(groupInfo.type);
 
-			String groupId;
 			if (type == ItineraryType.FAVOURITES && groupInfo.name == null) {
-				groupId = "";
-			} else if (type == ItineraryType.TRACK) {
+				groupInfo.name = "";
+			}
+
+			String groupId;
+			if (type == ItineraryType.TRACK) {
 				groupId = groupInfo.path;
 			} else {
 				groupId = groupInfo.name;

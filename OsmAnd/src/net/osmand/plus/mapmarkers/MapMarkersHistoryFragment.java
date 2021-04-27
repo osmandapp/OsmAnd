@@ -1,4 +1,4 @@
-package net.osmand.plus.mapmarkers.fragments;
+package net.osmand.plus.mapmarkers;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -25,11 +25,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapmarkers.MapMarkersHelper.MapMarkerChangedListener;
-import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.adapters.MapMarkerHeaderViewHolder;
 import net.osmand.plus.mapmarkers.adapters.MapMarkerItemViewHolder;
 import net.osmand.plus.mapmarkers.adapters.MapMarkersHistoryAdapter;
-import net.osmand.plus.mapmarkers.bottomsheets.HistoryMarkerMenuBottomSheetDialogFragment;
 import net.osmand.plus.widgets.EmptyStateRecyclerView;
 
 public class MapMarkersHistoryFragment extends Fragment implements MapMarkerChangedListener {

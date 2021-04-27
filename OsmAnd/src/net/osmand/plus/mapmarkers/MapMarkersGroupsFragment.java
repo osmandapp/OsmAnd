@@ -1,4 +1,4 @@
-package net.osmand.plus.mapmarkers.fragments;
+package net.osmand.plus.mapmarkers;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -34,13 +34,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.mapmarkers.MapMarker;
-import net.osmand.plus.mapmarkers.bottomsheets.AddFavouritesGroupBottomSheetDialogFragment;
-import net.osmand.plus.mapmarkers.bottomsheets.AddGroupBottomSheetDialogFragment;
-import net.osmand.plus.mapmarkers.bottomsheets.AddTracksGroupBottomSheetDialogFragment;
-import net.osmand.plus.mapmarkers.bottomsheets.HistoryMarkerMenuBottomSheetDialogFragment;
-import net.osmand.plus.mapmarkers.bottomsheets.SelectionMarkersGroupBottomSheetDialogFragment;
-import net.osmand.plus.mapmarkers.bottomsheets.SelectionMarkersGroupBottomSheetDialogFragment.AddMarkersGroupFragmentListener;
+import net.osmand.plus.mapmarkers.SelectionMarkersGroupBottomSheetDialogFragment.AddMarkersGroupFragmentListener;
 import net.osmand.plus.mapmarkers.adapters.MapMarkerItemViewHolder;
 import net.osmand.plus.mapmarkers.adapters.MapMarkersGroupsAdapter;
 import net.osmand.plus.widgets.EmptyStateRecyclerView;

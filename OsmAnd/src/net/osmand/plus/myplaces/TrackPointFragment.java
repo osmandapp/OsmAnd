@@ -62,7 +62,7 @@ import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.helpers.GpxUiHelper;
-import net.osmand.plus.mapmarkers.fragments.CoordinateInputDialogFragment;
+import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.DeletePointsTask.OnPointsDeleteListener;

@@ -553,6 +553,16 @@ public class FavouritesDbHelper {
 		return editFavourite(p, lat, lon, null);
 	}
 
+	public boolean favouritePassed(@NonNull FavouritePoint point, boolean passed, boolean saveImmediately) {
+		point.setPassedTimestamp(passed ? System.currentTimeMillis() : 0);
+		if (saveImmediately) {
+			saveCurrentPointsIntoFile();
+		}
+		FavoriteGroup group = getOrCreateGroup(point, 0);
+		runSyncWithMarkers(group);
+		return true;
+	}
+
 	private boolean editFavourite(@NonNull FavouritePoint p, double lat, double lon, @Nullable String description) {
 		cancelAddressRequest(p);
 		p.setLatitude(lat);
@@ -848,9 +858,9 @@ public class FavouritesDbHelper {
 		if (res.error != null) {
 			return false;
 		}
-		for (WptPt p : res.getPoints()) {
-			FavouritePoint fp = FavouritePoint.fromWpt(p, context);
-			points.put(getKey(fp), fp);
+		for (WptPt wptPt : res.getPoints()) {
+			FavouritePoint favouritePoint = FavouritePoint.fromWpt(wptPt, context);
+			points.put(getKey(favouritePoint), favouritePoint);
 		}
 		return true;
 	}

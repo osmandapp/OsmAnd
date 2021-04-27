@@ -1,4 +1,4 @@
-package net.osmand.plus.mapmarkers.bottomsheets;
+package net.osmand.plus.mapmarkers;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -120,7 +120,7 @@ public class OrderByBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 		return R.string.shared_string_close;
 	}
 
-	public interface OrderByFragmentListener {
+	interface OrderByFragmentListener {
 		void onMapMarkersOrderByModeChanged(@MapMarkersSortByDef int sortByMode);
 	}
 }
