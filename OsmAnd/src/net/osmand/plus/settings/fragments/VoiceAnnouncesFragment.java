@@ -253,7 +253,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 				AnnouncementTimeBottomSheet.showInstance(fragmentManager, preference.getKey(), this, getSelectedAppMode(), false);
 			}
 		} else if (settings.VOICE_PROVIDER.getId().equals(prefId)) {
-			VoiceLanguageBottomSheetFragment.showInstance(requireActivity().getSupportFragmentManager(), this, preference.getKey(), false);
+			VoiceLanguageBottomSheetFragment.showInstance(requireActivity().getSupportFragmentManager(), this, getSelectedAppMode(), false);
 		} else {
 			super.onDisplayPreferenceDialog(preference);
 		}
