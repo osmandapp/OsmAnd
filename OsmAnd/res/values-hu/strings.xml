@@ -80,7 +80,7 @@
     <string name="live_monitoring_url">Online útvonalrögzítés webcíme</string>
     <string name="gpx_monitoring_disabled_warn">Nyomvonal naplózása GPX-widgettel vagy az Útvonalrögzítés beállításokban.</string>
     <string name="show_current_gpx_title">Jelenlegi útvonal megjelenítése</string>
-    <string name="free_version_message">%1$s térképet tölthetsz le vagy frissíthetsz.</string>
+    <string name="free_version_message">%1$s térképet tölthet le vagy frissíthet.</string>
     <string name="free_version_title">Ingyenes verzió</string>
     <string name="poi_context_menu_showdescription">POI leírás megjelenítése.</string>
     <string name="index_name_us">Észak-Amerika – Egyesült Államok</string>
@@ -2811,7 +2811,7 @@
     <string name="avoid_pt_types_descr">A navigáció során elkerülendő közlekedési módok kijelölése:</string>
     <string name="avoid_pt_types">Közlekedési módok elkerülése…</string>
     <string name="shared_string_walk">Séta</string>
-    <string name="public_transport_warning_descr_blog">Az OsmAnd útvonalszámításának módjáról a blogunkon olvashatsz.</string>
+    <string name="public_transport_warning_descr_blog">Az OsmAnd útvonalszámításának módjáról a blogunkon olvashat.</string>
     <string name="public_transport_warning_title">A tömegközlekedési útvonaltervezés jelenleg bétatesztelési fázisban van, hibák és pontatlanságok előfordulhatnak.</string>
     <string name="add_intermediate">Köztes pont hozzáadása</string>
     <string name="transfers_size">%1$d átszállás</string>
@@ -3163,13 +3163,13 @@
     <string name="week">hétre</string>
     <string name="weeks_2_4">hétre</string>
     <string name="weeks_5">hétre</string>
-    <string name="month">hónapra</string>
-    <string name="months_2_4">hónapra</string>
-    <string name="months_5">hónapra</string>
+    <string name="month">hónap</string>
+    <string name="months_2_4">hónap</string>
+    <string name="months_5">hónap</string>
     <string name="year">évre</string>
     <string name="years_2_4">évre</string>
     <string name="years_5">évre</string>
-    <string name="months_3">Három hónapra</string>
+    <string name="months_3">három hónap</string>
     <string name="price_free">Ingyenes</string>
     <string name="cancel_subscription">Előfizetés törlése</string>
     <string name="utm_format_descr">Az OsmAnd az UTM-szabványt (Universal Transverse Mercator) használja, amely hasonlít a NATO MGRS-rendszeréhez (Military Grid Reference System), de nem azonos vele.</string>
