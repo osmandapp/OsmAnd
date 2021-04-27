@@ -100,7 +100,7 @@ public class SearchResult {
 			allWordsMatched = false;
 		}
 
-		double res = (allWordsMatched || isPoiType(searchPhrase)) ? ObjectType.getTypeWeight(objectType) * 10 : 1;
+		double res = (allWordsMatched && requiredSearchPhrase.getUnselectedPoiType() == null && objectType == ObjectType.POI) ? ObjectType.getTypeWeight(objectType) * 10 : 1;
 		if (parentSearchResult != null) {
 			res = res + parentSearchResult.getSumPhraseMatchWeight() / MAX_TYPE_WEIGHT;
 		}
