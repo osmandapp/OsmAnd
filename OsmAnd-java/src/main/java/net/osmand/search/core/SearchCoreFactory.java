@@ -1003,6 +1003,7 @@ public class SearchCoreFactory {
 							}
 							poiTypeFilter = getPoiTypeFilter(poiTypeResult.pt, poiAdditionals);
 							unselectedPoiType = poiTypeResult.pt;
+							phrase.setUnselectedPoiType(unselectedPoiType);
 						}
 					}
 				}

@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.List;
 
 import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.data.Amenity;
 import net.osmand.data.City;
 import net.osmand.data.LatLon;
 import net.osmand.data.Street;
@@ -96,12 +95,12 @@ public class SearchResult {
 				break;
 			}
 		}
-		String searchPhrase = StringUtils.join(searchPhraseNames, " ");
+		String searchPhrase = StringUtils.join(searchPhraseNames, SearchPhrase.DELIMITER);
 		if (objectType.equals(ObjectType.POI_TYPE) && !searchPhrase.equalsIgnoreCase(name)) {
 			allWordsMatched = false;
 		}
-		boolean type = checkPhraseIsObjectType(searchPhrase);
-		double res = (allWordsMatched || type) ? ObjectType.getTypeWeight(objectType) * 10 : 1;
+
+		double res = (allWordsMatched || isPoiType(searchPhrase)) ? ObjectType.getTypeWeight(objectType) * 10 : 1;
 		if (parentSearchResult != null) {
 			res = res + parentSearchResult.getSumPhraseMatchWeight() / MAX_TYPE_WEIGHT;
 		}
@@ -134,13 +133,10 @@ public class SearchResult {
 		return inc;
 	}
 
-	private boolean checkPhraseIsObjectType(String searchPhraseName) {
-		if (object instanceof Amenity) {
-			String poiType = ((Amenity) object).getType().getKeyName();
-			String poiSubType = ((Amenity) object).getSubType();
-			boolean isType = poiType.equalsIgnoreCase(searchPhraseName);
-			boolean isSubType = poiSubType.equalsIgnoreCase(searchPhraseName);
-			return isType || isSubType;
+	private boolean isPoiType(String phrase) {
+		AbstractPoiType type = requiredSearchPhrase.getUnselectedPoiType();
+		if (objectType.equals(ObjectType.POI) && type != null) {
+			return type.getKeyName().equalsIgnoreCase(phrase);
 		}
 		return false;
 	}
