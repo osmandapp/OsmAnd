@@ -99,7 +99,7 @@ public abstract class InAppPurchases {
 	public InAppSubscription getAnyPurchasedSubscription() {
 		List<InAppSubscription> allSubscriptions = liveUpdates.getAllSubscriptions();
 		for (InAppSubscription subscription : allSubscriptions) {
-			if (subscription.isAnyPurchased()) {
+			if (subscription.isPurchased()) {
 				return subscription;
 			}
 		}
@@ -772,7 +772,10 @@ public abstract class InAppPurchases {
 			Date date = new Date(purchaseTime);
 			Calendar calendar = Calendar.getInstance();
 			calendar.setTime(date);
-			calendar.add(period.getUnit().getCalendarIdx(), period.getNumberOfUnits());
+			long currentTime = System.currentTimeMillis();
+			while (calendar.getTimeInMillis() < currentTime) {
+				calendar.add(period.getUnit().getCalendarIdx(), period.getNumberOfUnits());
+			}
 			return calendar.getTimeInMillis();
 		}
 

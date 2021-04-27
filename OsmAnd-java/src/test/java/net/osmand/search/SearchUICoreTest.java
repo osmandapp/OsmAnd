@@ -132,6 +132,10 @@ public class SearchUICoreTest {
 
 			reader = new BinaryMapIndexReader(new RandomAccessFile(obfFile.getPath(), "r"), obfFile);
 		}
+		 boolean disabled = settingsJson.optBoolean("disabled", false);
+		 if (disabled) {
+			 return;
+		 }
 		List<List<String>> results = new ArrayList<>();
 		for (int i = 0; i < phrases.size(); i++) {
 			results.add(new ArrayList<String>());
@@ -180,21 +184,27 @@ public class SearchUICoreTest {
 			SearchResultCollection collection = new SearchResultCollection(phrase);
 			collection.addSearchResults(matcher.getRequestResults(), true, true);
 			List<SearchResult> searchResults = collection.getCurrentSearchResults();
-			for(int i = 0; i < result.size(); i++) {
+			for (int i = 0; i < result.size(); i++) {
 				String expected = result.get(i);
 				SearchResult res = i >= searchResults.size() ? null : searchResults.get(i);
 				if (simpleTest && expected.indexOf('[') != -1) {
 					expected = expected.substring(0, expected.indexOf('[')).trim();
 				}
-//				String present = result.toString();
-				String present = res == null ? ("#MISSING " + (i+1)) : formatResult(simpleTest, res, phrase);
+				// String present = result.toString();
+				String present = res == null ? ("#MISSING " + (i + 1)) : formatResult(simpleTest, res, phrase);
 				if (!Algorithms.stringsEqual(expected, present)) {
 					System.out.println(String.format("Phrase: %s", phrase));
 					System.out.println(String.format("Mismatch for '%s' != '%s'. Result: ", expected, present));
-				}
+					System.out.println("CURRENT RESULTS: ");
 					for (SearchResult r : searchResults) {
 						System.out.println(String.format("\t\"%s\",", formatResult(false, r, phrase)));
+					
 					}
+					System.out.println("EXPECTED : ");
+					for (String r : result) {
+						System.out.println(String.format("\t\"%s\",", r));
+					}
+				}
 				Assert.assertEquals(expected, present);
 			}
 		}

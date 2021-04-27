@@ -16,11 +16,11 @@ import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.mapillary.MapillaryPlugin;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.resources.ResourceManager;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.MapUtils;
 
 public class MapTileLayer extends BaseMapLayer {
@@ -153,6 +153,8 @@ public class MapTileLayer extends BaseMapLayer {
 		int top = (int) Math.floor(tilesRect.top + ellipticTileCorrection);
 		int width = (int) Math.ceil(tilesRect.right - left);
 		int height = (int) Math.ceil(tilesRect.bottom + ellipticTileCorrection - top);
+
+		mgr.setMapTileLayerSizes(this, width * height);
 
 		boolean useInternet = (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) != null || OsmandPlugin.getEnabledPlugin(MapillaryPlugin.class) != null)
 				&& settings.isInternetConnectionAvailable() && map.couldBeDownloadedFromInternet();
@@ -287,6 +289,9 @@ public class MapTileLayer extends BaseMapLayer {
 	@Override
 	public void destroyLayer() {
 		setMapTileAdapter(null);
+		if (resourceManager != null) {
+			resourceManager.removeMapTileLayerSize(this);
+		}
 	}
 
 	public boolean isVisible() {

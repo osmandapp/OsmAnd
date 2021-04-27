@@ -4095,4 +4095,6 @@
     <string name="srtm_unit_format">תצורת יחידת קווי מתאר</string>
     <string name="srtm_download_list_help_message">OsmAnd מספק נתוני קווי מתאר במטרים וברגל. יהיה עליך להוריד את הקובץ מחדש כדי לשנות את התצורה.</string>
     <string name="srtm_download_single_help_message">נא לבחור את התצורה הרצויה. יהיה עליך להוריד את הקובץ מחדש כדי לשנות את התצורה.</string>
+    <string name="shared_string_min_height">גובה מזערי</string>
+    <string name="shared_string_max_height">גובה מרבי</string>
 </resources>

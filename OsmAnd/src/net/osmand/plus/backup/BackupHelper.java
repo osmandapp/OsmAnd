@@ -163,21 +163,22 @@ public class BackupHelper {
 		}
 	}
 
-	public void registerUser(@NonNull String email, @Nullable final OnRegisterUserListener listener) {
+	public void registerUser(@NonNull final String email, @Nullable final OnRegisterUserListener listener) {
 		Map<String, String> params = new HashMap<>();
 		params.put("email", email);
-		String orderId = getOrderId();
+		final String orderId = getOrderId();
 		if (!Algorithms.isEmpty(orderId)) {
 			params.put("orderid", orderId);
 		}
-		params.put("deviceid", app.getUserAndroidId());
+		final String deviceId = app.getUserAndroidId();
+		params.put("deviceid", deviceId);
 		AndroidNetworkUtils.sendRequestAsync(app, USER_REGISTER_URL, params, "Register user", false, true, new OnRequestResultListener() {
 			@Override
 			public void onResult(@Nullable String resultJson, @Nullable String error) {
 				int status;
 				String message;
 				if (!Algorithms.isEmpty(error)) {
-					message = "User registration error: " + parseServerError(error);
+					message = "User registration error: " + parseServerError(error) + "\nEmail=" + email + "\nOrderId=" + orderId + "\nDeviceId=" + deviceId;
 					status = STATUS_SERVER_ERROR;
 				} else if (!Algorithms.isEmpty(resultJson)) {
 					try {

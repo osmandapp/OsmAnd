@@ -4092,4 +4092,7 @@
     <string name="srtm_unit_format">Формат одиниць вимірювання горизонталей</string>
     <string name="shared_string_feet">фути</string>
     <string name="srtm_download_single_help_message">Виберіть потрібний формат. Щоб змінити формат, потрібно повторно завантажувати файл.</string>
+    <string name="route_line_use_gradient_coloring">Лінія маршруту буде забарвлена залежно від профілю висоти маршруту.</string>
+    <string name="shared_string_min_height">Мін. висота</string>
+    <string name="shared_string_max_height">Макс. висота</string>
 </resources>

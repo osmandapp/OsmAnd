@@ -32,6 +32,7 @@ import java.util.List;
 
 import static net.osmand.plus.wikipedia.WikiArticleHelper.WIKIVOYAGE_DOMAIN;
 import static net.osmand.plus.wikipedia.WikiArticleHelper.WIKI_DOMAIN;
+import static net.osmand.util.MapUtils.ROUNDING_ERROR;
 
 
 /**
@@ -41,7 +42,6 @@ import static net.osmand.plus.wikipedia.WikiArticleHelper.WIKI_DOMAIN;
 public class WikivoyageWebViewClient extends WebViewClient {
 
 	private static final String TAG = WikivoyageWebViewClient.class.getSimpleName();
-	public static final int ROUNDING_ERROR = 3;
 
 	private OsmandApplication app;
 	private FragmentManager fragmentManager;

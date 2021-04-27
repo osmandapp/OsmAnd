@@ -1,20 +1,6 @@
 package net.osmand.search.core;
 
-import net.osmand.Collator;
-import net.osmand.CollatorStringMatcher;import net.osmand.OsmAndCollator;
-import net.osmand.CollatorStringMatcher.StringMatcherMode;
-import net.osmand.StringMatcher;
-import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
-import net.osmand.binary.CommonWords;
-import net.osmand.data.LatLon;
-import net.osmand.data.QuadRect;
-import net.osmand.util.Algorithms;
-import net.osmand.util.LocationParser;
-import net.osmand.util.MapUtils;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -25,6 +11,20 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.regex.Pattern;
+
+import net.osmand.Collator;
+import net.osmand.CollatorStringMatcher;
+import net.osmand.CollatorStringMatcher.StringMatcherMode;
+import net.osmand.OsmAndCollator;
+import net.osmand.StringMatcher;
+import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
+import net.osmand.binary.CommonWords;
+import net.osmand.data.LatLon;
+import net.osmand.data.QuadRect;
+import net.osmand.util.Algorithms;
+import net.osmand.util.LocationParser;
+import net.osmand.util.MapUtils;
 
 // Immutable object !
 public class SearchPhrase {
@@ -228,7 +228,17 @@ public class SearchPhrase {
 		return sp;
 	}
 	
-	public int countWords(String w) {
+	public static void splitWords(String w, Collection<String> ws) {
+		if (!Algorithms.isEmpty(w)) {
+			String[] wrs = w.split(ALLDELIMITERS);
+			for (int i = 0; i < wrs.length; i++) {
+				String wd = wrs[i].trim();
+				ws.add(wd);
+			}
+		}
+	}
+	
+	public static int countWords(String w) {
 		int cnt = 0;
 		if (!Algorithms.isEmpty(w)) {
 			String[] ws = w.split(ALLDELIMITERS);
