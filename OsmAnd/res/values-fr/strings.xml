@@ -4086,4 +4086,9 @@
     <string name="route_line_use_gradient_coloring">Le trait de l\'itinéraire sera coloré selon la pente.</string>
     <string name="shared_string_min_height">Hauteur min.</string>
     <string name="shared_string_max_height">Hauteur max.</string>
+    <string name="use_system_language">Utiliser la langue du système</string>
+    <string name="recorded_description">Une voix enregistrée est plus naturelle mais ne peut prononcer que des phrases préenregistrées comme les bifurcations ; elle ne peut pas prononcer le nom des rues ou des points d\'intérêt.</string>
+    <string name="language_description">Sélectionnez la langue et le type de guidage vocal.</string>
+    <string name="tts_description">La synthèse vocale (Text-To-Speech ou TTS) peut prononcer tous types d\'instructions : nom de rue, bifurcation, nom de PI, etc.</string>
+    <string name="tts_title">TTS</string>
 </resources>
