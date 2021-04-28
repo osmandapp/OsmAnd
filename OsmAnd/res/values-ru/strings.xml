@@ -4098,4 +4098,9 @@
     <string name="route_line_use_gradient_coloring">Линия маршрута будет окрашена в зависимости от профиля высоты маршрута.</string>
     <string name="shared_string_min_height">Мин. высота</string>
     <string name="shared_string_max_height">Макс. высота</string>
+    <string name="language_description">Выберите предпочтительный язык и тип голосовых подсказок.</string>
+    <string name="tts_description">Синтезатор речи (TTS) умеет произносить все типы инструкций: названия улиц, инструкции для поворотов, названия точек интереса (POI) и т. д.</string>
+    <string name="tts_title">TTS</string>
+    <string name="recorded_description">Записанный голос звучит лучше, но умеет произносить только заранее записанные фразы: инструкции для поворотов. Не умеет объявлять названия улиц или POI.</string>
+    <string name="use_system_language">Использовать системный язык</string>
 </resources>
