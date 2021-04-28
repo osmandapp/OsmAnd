@@ -12,6 +12,7 @@
 
 -->
 
+    <string name="shared_string_itinerary">Itinerary</string>
     <string name="use_system_language">Use system language</string>
     <string name="recorded_description">Recorded voice sounds better, but can pronounce only prerecorded phrases: turn instructions. Can\'t announce street names or POI names.</string>
     <string name="tts_title">TTS</string>

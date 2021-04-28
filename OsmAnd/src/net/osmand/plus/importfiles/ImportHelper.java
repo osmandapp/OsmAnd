@@ -717,6 +717,11 @@ public class ImportHelper {
 		if (app.isApplicationInitializing()) {
 			app.getAppInitializer().addListener(new AppInitializeListener() {
 				@Override
+				public void onStart(AppInitializer init) {
+
+				}
+
+				@Override
 				public void onProgress(AppInitializer init, InitEvents event) {
 				}
 
