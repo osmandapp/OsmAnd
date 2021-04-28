@@ -61,7 +61,7 @@ public class RoutingConfiguration {
 	// extra points to be inserted in ways (quad tree is based on 31 coords)
 	private QuadTree<DirectionPoint> directionPoints;
 	
-	public int directionPointsRadius = 100; // 30 m
+	public int directionPointsRadius = 30; // 30 m
 	
 	public QuadTree<DirectionPoint> getDirectionPoints() {
 		return directionPoints;

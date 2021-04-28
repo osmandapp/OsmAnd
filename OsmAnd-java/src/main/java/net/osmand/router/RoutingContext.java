@@ -563,7 +563,6 @@ public class RoutingContext {
 				double dist;
 				if (sgny == sgy && sgx == sgnx) {
 					// point outside of rect (line is diagonal) distance is likely be bigger
-					// TODO this can be speed up without projection!
 					dist = MapUtils.squareRootDist31(wptX, wptY, Math.abs(nx - wptX) < Math.abs(x - wptX) ? nx : x,
 							Math.abs(ny - wptY) < Math.abs(y - wptY) ? ny : y);
 					if (dist < config.directionPointsRadius) {
@@ -593,12 +592,12 @@ public class RoutingContext {
 				System.out.println(String.format("INSERT %s (%d-%d) %.0f m [%.5f, %.5f] - %d, %d ", ro, indexToInsert, indexToInsert + 1, mindist,
 						MapUtils.get31LongitudeX(wptX), MapUtils.get31LatitudeY(wptY), wptX, wptY));
 				if (np.connected != null) {
-					// clear old connected
-					// TODO search by coordinates cause by index doesn't work (parallel updates)
+					// clear old connected points
 					int pointIndex = -1;
 					for(int i = 0; i < np.connected.getPointsLength(); i++) {
 						int tx = np.connected.getPoint31XTile(i);
 						int ty = np.connected.getPoint31YTile(i);
+						// TODO PROBLEM #1 check that we don't insert / retrieve exact duplicate that's already in road
 						if (tx == np.connectedx && ty == np.connectedy) {
 							pointIndex = i;
 							break;
@@ -614,12 +613,12 @@ public class RoutingContext {
 						throw new RuntimeException();
 					}
 				}
-//				ro.insert(indexToInsert, wptX, wptY);
 				np.connectedx = mprojx;
 				np.connectedy = mprojy;
-				ro.insert(indexToInsert, mprojx, mprojy); // TODO more correct (check it doens't match points exactly)
-				// TODO uncomment
-				// ro.setPointTypes(indexToInsert, np.types.toArray());
+				// TODO PROBLEM #1 check that we don't insert / retrieve exact duplicate that's already in road
+				ro.insert(indexToInsert, mprojx, mprojy); 
+				// TODO VISUAL #3 comment to not forbid roads but to see zigzags
+//				ro.setPointTypes(indexToInsert, np.types.toArray());
 				int nametpx = ro.region.findOrCreateRouteType("osmand_pnt_x", "");
 				int nametpy = ro.region.findOrCreateRouteType("osmand_pnt_y", "");
 				ro.setPointNames(indexToInsert, new int[] { nametpx, nametpy },
@@ -628,11 +627,10 @@ public class RoutingContext {
 				np.connected = ro;
 			} else if (sameRoadId) {
 				boolean sameRoadIdButPointIsNotPresent;
-				// TODO check by coordinates that point was attached
+				// TODO PROBLEM #1 check that we don't insert / retrieve exact duplicate that's already in road
 				if (indexToInsert < ro.getPointsLength()) {
 					int tx = ro.getPoint31XTile(indexToInsert);
 					int ty = ro.getPoint31YTile(indexToInsert);
-					// TODO wptX != x || wptY != y this check is questionable (cause we should insert project)
 					sameRoadIdButPointIsNotPresent = (mprojx != tx || mprojy != ty);
 				} else {
 					sameRoadIdButPointIsNotPresent = true;
