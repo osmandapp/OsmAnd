@@ -194,7 +194,7 @@
     <string name="shared_string_continue">Продолжить</string>
     <string name="shared_string_pause">Пауза</string>
     <string name="shared_string_trip">Поездка</string>
-    <string name="shared_string_recorded">Записано в трек</string>
+    <string name="shared_string_recorded">Запись</string>
     <string name="shared_string_record">Запись</string>
     <string name="gpx_logging_no_data">Нет данных</string>
     <string name="save_track_min_speed">Минимальная скорость для записи</string>
@@ -3489,7 +3489,7 @@
     <string name="slope_description">Для визуализации крутизны рельефа используются цвета.</string>
     <string name="slope_read_more">Подробнее об уклонах можно прочитать в %1$s.</string>
     <string name="shared_string_hillshade">Затенение рельефа</string>
-    <string name="hillshade_description">Для отображения склонов, вершин и низменностей используются тёмные тени.</string>
+    <string name="hillshade_description">Для отображения склонов, вершин и низменностей используются тени (отмывка).</string>
     <string name="slope_download_description">Для отображения уклонов требуются дополнительные карты.</string>
     <string name="download_slope_maps">Карта уклонов</string>
     <string name="replace_point_descr">Заменить этой точкой другую.</string>

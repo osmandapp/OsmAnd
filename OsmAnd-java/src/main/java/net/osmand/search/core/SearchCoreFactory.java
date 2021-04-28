@@ -978,8 +978,7 @@ public class SearchCoreFactory {
 				nameFilter = phrase.getUnknownSearchPhrase();
 			} else if (searchAmenityTypesAPI != null && phrase.isFirstUnknownSearchWordComplete()) {
 				NameStringMatcher nm = phrase.getFirstUnknownNameStringMatcher();
-				NameStringMatcher nmAdditional = new NameStringMatcher(phrase.getFirstUnknownSearchWord(),
-						StringMatcherMode.CHECK_EQUALS_FROM_SPACE) ;
+				NameStringMatcher nmAdditional = new NameStringMatcher(phrase.getFirstUnknownSearchWord(), StringMatcherMode.CHECK_EQUALS_FROM_SPACE);
 				searchAmenityTypesAPI.initPoiTypes();
 				Map<String, PoiTypeResult> poiTypeResults = searchAmenityTypesAPI.getPoiTypeResults(nm, nmAdditional);
 				// find first full match only
@@ -987,15 +986,15 @@ public class SearchCoreFactory {
 					for (String foundName : poiTypeResult.foundWords) {
 						CollatorStringMatcher csm = new CollatorStringMatcher(foundName, StringMatcherMode.CHECK_ONLY_STARTS_WITH);
 						// matches only completely
-						int mwords = phrase.countWords(foundName) ;
+						int mwords = SearchPhrase.countWords(foundName);
 						if (csm.matches(phrase.getUnknownSearchPhrase()) && countExtraWords < mwords) {
-							countExtraWords = phrase.countWords(foundName);
+							countExtraWords = SearchPhrase.countWords(foundName);
 							List<String> otherSearchWords = phrase.getUnknownSearchWords();
 							nameFilter = null;
 							if (countExtraWords - 1 < otherSearchWords.size()) {
 								nameFilter = "";
-								for(int k = countExtraWords - 1; k < otherSearchWords.size(); k++) {
-									if(nameFilter.length() > 0) {
+								for (int k = countExtraWords - 1; k < otherSearchWords.size(); k++) {
+									if (nameFilter.length() > 0) {
 										nameFilter += SearchPhrase.DELIMITER;
 									}
 									nameFilter += otherSearchWords.get(k);
@@ -1003,6 +1002,12 @@ public class SearchCoreFactory {
 							}
 							poiTypeFilter = getPoiTypeFilter(poiTypeResult.pt, poiAdditionals);
 							unselectedPoiType = poiTypeResult.pt;
+							int wordsInPoiType = SearchPhrase.countWords(foundName);
+							int wordsInUnknownPart = SearchPhrase.countWords(phrase.getUnknownSearchPhrase());
+							if (wordsInPoiType == wordsInUnknownPart) {
+								// store only perfect match
+								phrase.setUnselectedPoiType(unselectedPoiType);
+							}
 						}
 					}
 				}

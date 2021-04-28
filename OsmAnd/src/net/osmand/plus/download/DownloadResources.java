@@ -662,6 +662,14 @@ public class DownloadResources extends DownloadResourceGroup {
 		return res;
 	}
 
+	public List<DownloadItem> getDownloadItemsForGroup(String groupId) {
+		DownloadResourceGroup group = getSubGroupById(groupId);
+		if (group != null) {
+			return group.getIndividualDownloadItems();
+		}
+		return Collections.emptyList();
+	}
+
 	public static List<IndexItem> findIndexItemsAt(OsmandApplication app,
 	                                               List<String> names,
 	                                               DownloadActivityType type,

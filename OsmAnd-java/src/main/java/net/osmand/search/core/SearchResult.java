@@ -61,7 +61,7 @@ public class SearchResult {
 		return res;
 	}
 
-	public double getSumPhraseMatchWeight() {
+	private double getSumPhraseMatchWeight() {
 		// if result is a complete match in the search we prioritize it higher
 		String name = alternateName != null ? alternateName : localeName;
 		List<String> localResultNames = new ArrayList<>();
@@ -73,7 +73,7 @@ public class SearchResult {
 		if (fw != null) {
 			searchPhraseNames.add(fw);
 		}
-		if (!ow.isEmpty()) {
+		if (ow != null) {
 			searchPhraseNames.addAll(ow);
 		}
 
@@ -94,7 +94,15 @@ public class SearchResult {
 				break;
 			}
 		}
-		double res = ObjectType.getTypeWeight(allWordsMatched ? objectType : null);
+		if (objectType == ObjectType.POI_TYPE) {
+			allWordsMatched = false;
+		}
+
+		double res = allWordsMatched ? ObjectType.getTypeWeight(objectType) * 10 : ObjectType.getTypeWeight(null);
+		if (requiredSearchPhrase.getUnselectedPoiType() != null) {
+			// search phrase matches poi type, then we lower all POI matches and don't check allWordsMatched
+			res = ObjectType.getTypeWeight(objectType);
+		}
 		if (parentSearchResult != null) {
 			res = res + parentSearchResult.getSumPhraseMatchWeight() / MAX_TYPE_WEIGHT;
 		}
