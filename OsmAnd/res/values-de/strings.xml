@@ -2525,7 +2525,7 @@
     <string name="context_menu_item_modify_note">OSM-Hinweis ändern</string>
     <string name="make_round_trip_descr">Kopie des Startpunkts als Ziel hinzufügen.</string>
     <string name="make_round_trip">Rundreise erstellen</string>
-    <string name="my_location">Meine Position</string>
+    <string name="my_location">Mein Standort</string>
     <string name="shared_string_finish">Beenden</string>
     <string name="use_system_keyboard">Gerätetastatur verwenden</string>
     <string name="marker_moved_to_active">Kartenmarkierung auf aktiv gesetzt</string>
@@ -3936,7 +3936,7 @@
     <string name="shared_string_subtype">Subtyp</string>
     <string name="keep_it_empty_if_not">Leer lassen, wenn kein API-Schlüssel vorhanden</string>
     <string name="copy_address">Adresse kopieren</string>
-    <string name="routing_engine_vehicle_type_driving">Fahren</string>
+    <string name="routing_engine_vehicle_type_driving">Fahrzeug</string>
     <string name="online_routing_engine">Online Navigationssystem</string>
     <string name="online_routing_engines">Online Navigationssysteme</string>
     <string name="shared_string_folders">Ordner</string>
