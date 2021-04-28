@@ -1,5 +1,6 @@
 package net.osmand.plus.settings.fragments;
 
+import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -12,13 +13,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
@@ -36,6 +30,13 @@ import net.osmand.plus.routing.cards.RouteLineColorCard.OnSelectedColorChangeLis
 import net.osmand.plus.routing.cards.RouteLineWidthCard;
 import net.osmand.plus.track.CustomColorBottomSheet.ColorPickerListener;
 import net.osmand.plus.track.TrackAppearanceFragment.OnNeedScrollListener;
+
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import static net.osmand.util.Algorithms.objectEquals;
 
@@ -330,30 +331,27 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 		int statusBarHeight = AndroidUtils.getStatusBarHeight(ctx);
 		int bottomSheetStart = getViewY() + (int) getMainView().findViewById(R.id.route_menu_top_shadow_all).getY();
 		int pathMargin = AndroidUtils.dpToPx(ctx, 28);
-		int startX;
-		int startY;
-		int endX;
-		int endY;
+		Rect lineBounds = new Rect();
 		int centerX;
 		int centerY;
 		if (isPortrait()) {
 			centerX = screenWidth / 2;
 			int totalHeight = getViewY() + toolbarContainer.getHeight() + statusBarHeight;
 			centerY = totalHeight / 2;
-			startY = bottomSheetStart - pathMargin;
-			startX = isRtl ? screenWidth : 0;
-			endX = isRtl ? 0 : screenWidth;
-			endY = toolbarContainer.getHeight() + statusBarHeight + pathMargin;
+			lineBounds.left = isRtl ? screenWidth : 0;
+			lineBounds.top = toolbarContainer.getHeight() + statusBarHeight + pathMargin;
+			lineBounds.right = isRtl ? 0 : screenWidth;
+			lineBounds.bottom = bottomSheetStart - pathMargin;
 		} else {
 			int dialogWidth = getLandscapeNoShadowWidth();
-			startX = isRtl ? 0 : dialogWidth;
-			startY = isRtl ? statusBarHeight + pathMargin : screenHeight - pathMargin;
-			endX = isRtl ? screenWidth - dialogWidth : screenWidth;
-			endY = isRtl ? screenHeight - pathMargin : statusBarHeight + pathMargin;
-			centerX = (startX + endX) / 2;
+			lineBounds.left = isRtl ? screenWidth - dialogWidth: dialogWidth;
+			lineBounds.top = statusBarHeight + pathMargin;
+			lineBounds.right = isRtl ? 0 : screenWidth;
+			lineBounds.bottom = screenHeight - pathMargin;
+			centerX = (lineBounds.left + lineBounds.right) / 2;
 			centerY = (screenHeight + statusBarHeight) / 2 ;
 		}
-		routeLineDrawInfo.setBounds(startX, startY, endX, endY);
+		routeLineDrawInfo.setLineBounds(lineBounds);
 		routeLineDrawInfo.setCenterX(centerX);
 		routeLineDrawInfo.setCenterY(centerY);
 		routeLineDrawInfo.setScreenHeight(screenHeight);

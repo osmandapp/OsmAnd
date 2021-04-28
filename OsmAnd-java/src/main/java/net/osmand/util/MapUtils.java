@@ -750,15 +750,4 @@ public class MapUtils {
 	public static double getSqrtDistance(float startX, float startY, float endX, float endY) {
 		return Math.sqrt((endX - startX) * (endX - startX) + (endY - startY) * (endY - startY));
 	}
-
-	public static double getPointOffsetOnSegment(double startLat, double startLon,
-												 double endLat, double endLon,
-												 double lat, double lon) {
-		double fullSegment = getDistance(startLat, startLon, endLat, endLon);
-		if (fullSegment == 0) {
-			return 0;
-		}
-		double partialSegment = getDistance(startLat, startLon, lat, lon);
-		return partialSegment / fullSegment;
-	}
 }

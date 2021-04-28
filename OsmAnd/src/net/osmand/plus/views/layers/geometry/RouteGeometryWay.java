@@ -97,8 +97,8 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 				double prevDist = distances.get(i - 1);
 				double currDist = distances.get(i);
 				double nextDist = i + 1 == distances.size() ? 0 : distances.get(i + 1);
-				style.startColor = getPreviewColor(i - 1, (prevDist + currDist / 2) / (prevDist + currDist));
-				style.endColor = getPreviewColor(i, (currDist + nextDist / 2) / (currDist + nextDist));
+				style.currColor = getPreviewColor(i - 1, (prevDist + currDist / 2) / (prevDist + currDist));
+				style.nextColor = getPreviewColor(i, (currDist + nextDist / 2) / (currDist + nextDist));
 			}
 			styles.add(styles.get(styles.size() - 1));
 		}
@@ -138,10 +138,10 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 
 	private Map<Integer, GeometryWayStyle<?>> createGradientStyles(List<RouteColorizationPoint> points) {
 		Map<Integer, GeometryWayStyle<?>> styleMap = new TreeMap<>();
-		for (int i = 1; i < points.size(); i++) {
+		for (int i = 0; i < points.size() - 1; i++) {
 			GeometryGradientWayStyle style = getGradientWayStyle();
-			style.startColor = points.get(i - 1).color;
-			style.endColor = points.get(i).color;
+			style.currColor = points.get(i).color;
+			style.nextColor = points.get(i + 1).color;
 			styleMap.put(i, style);
 		}
 		return styleMap;
@@ -151,9 +151,9 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 	protected void addLocation(RotatedTileBox tb, int locationIdx, GeometryWayStyle<?> style, List<Float> tx, List<Float> ty, List<Double> angles, List<Double> distances, double dist, List<GeometryWayStyle<?>> styles) {
 		super.addLocation(tb, locationIdx, style, tx, ty, angles, distances, dist, styles);
 		if (style instanceof GeometryGradientWayStyle && styles.size() > 1) {
-			GeometryGradientWayStyle currStyle = (GeometryGradientWayStyle) style;
 			GeometryGradientWayStyle prevStyle = (GeometryGradientWayStyle) styles.get(styles.size() - 2);
-			prevStyle.endColor = currStyle.startColor;
+			GeometryGradientWayStyle currStyle = (GeometryGradientWayStyle) style;
+			prevStyle.nextColor = currStyle.currColor;
 		}
 	}
 
@@ -166,21 +166,22 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 		if (style instanceof GeometryGradientWayStyle) {
 			GeometryGradientWayStyle gradientWayStyle = (GeometryGradientWayStyle) style;
 			GradientGeometryWayProvider locationProvider = getGradientLocationProvider();
-			if (startLocationIndex == 0 || startLocationIndex == 1) {
+			if (startLocationIndex == 0) {
 				int startColor = locationProvider.getColor(0);
-				gradientWayStyle.startColor = startColor;
-				gradientWayStyle.endColor = startColor;
+				gradientWayStyle.currColor = startColor;
+				gradientWayStyle.nextColor = startColor;
 			} else {
+				double currLat = lastPoint.getLatitude();
+				double currLon = lastPoint.getLongitude();
 				double prevLat = locationProvider.getLatitude(startLocationIndex - 1);
 				double prevLon = locationProvider.getLongitude(startLocationIndex - 1);
 				double nextLat = locationProvider.getLatitude(startLocationIndex);
 				double nextLon = locationProvider.getLongitude(startLocationIndex);
-				double percent = MapUtils.getPointOffsetOnSegment(prevLat, prevLon, nextLat, nextLon,
-						lastPoint.getLatitude(), lastPoint.getLongitude());
-				int prevColor = locationProvider.getColor(startLocationIndex - 2);
-				int nextColor = locationProvider.getColor(startLocationIndex - 1);
-				gradientWayStyle.startColor = RouteColorize.getGradientColor(prevColor, nextColor, percent);
-				gradientWayStyle.endColor = nextColor;
+				double percent = MapUtils.getProjectionCoeff(currLat, currLon, prevLat, prevLon, nextLat, nextLon);
+				int prevColor = locationProvider.getColor(startLocationIndex - 1);
+				int nextColor = locationProvider.getColor(startLocationIndex);
+				gradientWayStyle.currColor = RouteColorize.getGradientColor(prevColor, nextColor, percent);
+				gradientWayStyle.nextColor = nextColor;
 			}
 		}
 		return previousVisible;
@@ -305,8 +306,8 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 
 	public static class GeometryGradientWayStyle extends GeometryWayStyle<RouteGeometryWayContext> {
 
-		public int startColor;
-		public int endColor;
+		public int currColor;
+		public int nextColor;
 
 		public GeometryGradientWayStyle(RouteGeometryWayContext context, Integer color, Float width) {
 			super(context, color, width);
@@ -334,7 +335,7 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 				return false;
 			}
 			GeometryGradientWayStyle o = (GeometryGradientWayStyle) other;
-			return startColor == o.startColor && endColor == o.endColor;
+			return currColor == o.currColor && nextColor == o.nextColor;
 		}
 	}
 

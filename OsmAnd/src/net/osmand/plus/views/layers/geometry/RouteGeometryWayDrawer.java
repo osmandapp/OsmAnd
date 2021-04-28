@@ -41,7 +41,7 @@ public class RouteGeometryWayDrawer extends GeometryWayDrawer<RouteGeometryWayCo
 		if (pathData.style instanceof GeometryGradientWayStyle) {
 			GeometryGradientWayStyle style = (GeometryGradientWayStyle) pathData.style;
 			LinearGradient gradient = new LinearGradient(pathData.start.x, pathData.start.y, pathData.end.x, pathData.end.y,
-					style.startColor, style.endColor, Shader.TileMode.CLAMP);
+					style.currColor, style.nextColor, Shader.TileMode.CLAMP);
 			Paint customPaint = getContext().getAttrs().customColorPaint;
 			customPaint.setShader(gradient);
 			customPaint.setStrokeWidth(style.width);

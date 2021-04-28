@@ -1,13 +1,14 @@
 package net.osmand.plus.routing;
 
+import android.graphics.Rect;
 import android.os.Bundle;
+
+import net.osmand.plus.track.GradientScaleType;
+import net.osmand.util.Algorithms;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
-import net.osmand.plus.track.GradientScaleType;
-import net.osmand.util.Algorithms;
 
 public class RouteLineDrawInfo {
 
@@ -17,10 +18,7 @@ public class RouteLineDrawInfo {
 	private static final String LINE_WIDTH = "line_width";
 	private static final String NAVIGATION_ICON_ID = "navigation_icon_id";
 	private static final String NAVIGATION_ICON_COLOR = "navigation_icon_color";
-	private static final String LEFT_BOUND = "left_bound";
-	private static final String TOP_BOUND = "top_bound";
-	private static final String RIGHT_BOUND = "right_bound";
-	private static final String BOTTOM_BOUND = "bottom_bound";
+	private static final String LINE_BOUNDS = "line_bounds";
 	private static final String CENTER_X = "center_x";
 	private static final String CENTER_Y = "center_y";
 	private static final String SCREEN_HEIGHT = "screen_height";
@@ -37,10 +35,7 @@ public class RouteLineDrawInfo {
 	@ColorInt
 	private int iconColor;
 	private int iconId;
-	private int startX;
-	private int startY;
-	private int endX;
-	private int endY;
+	private Rect lineBounds;
 	private int centerX;
 	private int centerY;
 	private int screenHeight;
@@ -67,10 +62,7 @@ public class RouteLineDrawInfo {
 		this.width = existed.width;
 		this.iconId = existed.iconId;
 		this.iconColor = existed.iconColor;
-		this.startX = existed.startX;
-		this.startY = existed.startY;
-		this.endX = existed.endX;
-		this.endY = existed.endY;
+		this.lineBounds = existed.lineBounds;
 		this.centerX = existed.centerX;
 		this.centerY = existed.centerY;
 		this.screenHeight = existed.screenHeight;
@@ -105,11 +97,8 @@ public class RouteLineDrawInfo {
 		this.iconColor = iconColor;
 	}
 
-	public void setBounds(int left, int top, int right, int bottom) {
-		this.startX = left;
-		this.startY = top;
-		this.endX = right;
-		this.endY = bottom;
+	public void setLineBounds(Rect lineBounds) {
+		this.lineBounds = lineBounds;
 	}
 
 	public void setCenterX(int centerX) {
@@ -156,20 +145,8 @@ public class RouteLineDrawInfo {
 		return iconColor;
 	}
 
-	public int getStartX() {
-		return startX;
-	}
-
-	public int getStartY() {
-		return startY;
-	}
-
-	public int getEndX() {
-		return endX;
-	}
-
-	public int getEndY() {
-		return endY;
+	public Rect getLineBounds() {
+		return lineBounds;
 	}
 
 	public int getCenterX() {
@@ -200,10 +177,7 @@ public class RouteLineDrawInfo {
 		width = bundle.getString(LINE_WIDTH);
 		iconId = bundle.getInt(NAVIGATION_ICON_ID);
 		iconColor = bundle.getInt(NAVIGATION_ICON_COLOR);
-		startX = bundle.getInt(LEFT_BOUND);
-		startY = bundle.getInt(TOP_BOUND);
-		endX = bundle.getInt(RIGHT_BOUND);
-		endY = bundle.getInt(BOTTOM_BOUND);
+		lineBounds = (Rect) bundle.getParcelable(LINE_BOUNDS);
 		centerX = bundle.getInt(CENTER_X);
 		centerY = bundle.getInt(CENTER_Y);
 		screenHeight = bundle.getInt(SCREEN_HEIGHT);
@@ -225,10 +199,7 @@ public class RouteLineDrawInfo {
 		}
 		bundle.putInt(NAVIGATION_ICON_ID, iconId);
 		bundle.putInt(NAVIGATION_ICON_COLOR, iconColor);
-		bundle.putInt(LEFT_BOUND, startX);
-		bundle.putInt(TOP_BOUND, startY);
-		bundle.putInt(RIGHT_BOUND, endX);
-		bundle.putInt(BOTTOM_BOUND, endY);
+		bundle.putParcelable(LINE_BOUNDS, lineBounds);
 		bundle.putInt(CENTER_X, centerX);
 		bundle.putInt(CENTER_Y, centerY);
 		bundle.putInt(SCREEN_HEIGHT, screenHeight);
