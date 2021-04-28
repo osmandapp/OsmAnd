@@ -4098,4 +4098,9 @@
     <string name="route_line_use_gradient_coloring">Güzergah hattı, güzergahın yükseklik profiline bağlı olarak renklendirilecektir.</string>
     <string name="shared_string_min_height">Asgari yükseklik</string>
     <string name="shared_string_max_height">Azami yükseklik</string>
+    <string name="language_description">Tercih edilen dili ve sesli yönlendirme türünü seçin.</string>
+    <string name="tts_description">Metinden konuşmaya (TTS) her tür talimatı telaffuz edebilir: sokak adları, dönüş talimatı, POI adları vb.</string>
+    <string name="tts_title">TTS</string>
+    <string name="recorded_description">Kaydedilen ses daha iyi ses çıkarır, ancak yalnızca önceden kaydedilmiş cümleleri telaffuz edebilir: dönüş talimatları. Sokak veya POI adlarını söyleyemez.</string>
+    <string name="use_system_language">Sistem dilini kullan</string>
 </resources>
