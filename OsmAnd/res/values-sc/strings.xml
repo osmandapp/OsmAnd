@@ -4094,4 +4094,9 @@
     <string name="route_line_use_gradient_coloring">Sa lìnia de s\'àndala s\'at a colorare sighende su profilu altimètricu de s\'àndala.</string>
     <string name="shared_string_min_height">Artària mìn.</string>
     <string name="shared_string_max_height">Artària màss.</string>
+    <string name="language_description">Ischerta sa limba e sa casta de boghe de ghia chi preferis.</string>
+    <string name="tts_description">Sa boghe sintetizada (TTS) podet pronuntziare cale si siat casta de istrutzione: nùmenes de sas carreras, istrutziones de bortada, nùmenes de sos PDI etz.</string>
+    <string name="tts_title">TTS</string>
+    <string name="recorded_description">Sa boghe registrada sonat mègius, ma podet pronuntziare petzi fràsias giai registradas, che a sas istrutziones de bortada. Non podet pronuntziare sos nùmenes de sas carreras o de sos PDI.</string>
+    <string name="use_system_language">Imprea sa limba de su sistema</string>
 </resources>
