@@ -156,7 +156,7 @@
     <string name="amenity_type_user_defined">Користувацькі</string>
     <string name="fav_export_confirmation">Файл з раніше імпортованими Закладками вже існує. Замінити його?</string>
     <string name="profile_settings">Налаштування профілю</string>
-    <string name="settings_preset">Усталений профіль</string>
+    <string name="settings_preset">Типовий профіль</string>
     <string name="settings_preset_descr">Вид мапи й налаштування навігації зберігаються для кожного окремого профілю. Установіть ваш типовий профіль.</string>
     <string name="routing_settings">Навігація</string>
     <string name="routing_settings_descr">Визначити налаштування навігації.</string>
@@ -486,7 +486,7 @@
     <string name="search_poi_location">Очікування сигналу…</string>
     <string name="search_near_map">Шукати поблизу поточного центру мапи</string>
     <string name="search_nearby">Шукати поруч</string>
-    <string name="map_orientation_default">Усталено</string>
+    <string name="map_orientation_default">Типово</string>
     <string name="map_orientation_portrait">Портрет</string>
     <string name="map_orientation_landscape">Альбом</string>
     <string name="map_screen_orientation">Орієнтація екрану</string>
@@ -783,7 +783,7 @@
     <string name="srtm_paid_version_title">Розширення \'Горизонталі\'</string>
     <string name="av_def_action_video">Запис відео</string>
     <string name="av_def_action_audio">Запис аудіо</string>
-    <string name="av_widget_action_descr">Усталена дія віджету:</string>
+    <string name="av_widget_action_descr">Типова дія віджету:</string>
     <string name="av_widget_action">Дія для віджета</string>
     <string name="precise_routing_mode_descr">Обчислити точні маршрути без глюків. Обчислення все ще обмежене відстанню і повільне.</string>
     <string name="precise_routing_mode">Точний маршрут (alpha)</string>
@@ -1395,7 +1395,7 @@
     <string name="avoid_roads_msg">Прокласти альтернативний маршрут, вибравши дороги, яких варто уникати</string>
     <string name="speak_pedestrian">Пішохідні переходи</string>
     <string name="rendering_attr_roadStyle_name">Стиль доріг</string>
-    <string name="rendering_value_default_name">Усталено</string>
+    <string name="rendering_value_default_name">Типово</string>
     <string name="rendering_value_orange_name">Помаранчевий</string>
     <string name="rendering_value_germanRoadAtlas_name">Атлас доріг Німеччини</string>
     <string name="traffic_warning_railways">Залізничний переїзд</string>
@@ -1529,7 +1529,7 @@
     <string name="shared_string_copy">Копіювати</string>
     <string name="filter_poi_hint">Фільтрувати за назвою</string>
     <string name="search_poi_category_hint">Введіть запит для пошуку всіх</string>
-    <string name="rendering_value__name">Усталено</string>
+    <string name="rendering_value__name">Типово</string>
     <string name="rendering_value_highContrastRoads_name">Контрастні дороги</string>
     <string name="index_name_netherlands">Європа - Нідерланди</string>
     <string name="routing_attr_avoid_borders_description">Уникати перетину національних кордонів</string>
@@ -1601,8 +1601,8 @@
     <string name="shared_string_logoff">Вийти</string>
     <string name="local_recordings_delete_all_confirm">Ви збираєтеся видалити %1$d нотаток. Ви впевнені\?</string>
     <string name="download_wikipedia_maps">Вікіпедія</string>
-    <string name="rendering_value_default13_name">Усталено (13)</string>
-    <string name="rendering_value_defaultTranslucentCyan_name">Усталено (напівпрозорий блакитний)</string>
+    <string name="rendering_value_default13_name">Типово (13)</string>
+    <string name="rendering_value_defaultTranslucentCyan_name">Типово (напівпрозорий блакитний)</string>
     <string name="rendering_value_translucent_orange_name">Напівпрозорий помаранчевий</string>
     <string name="shared_string_update">Оновити</string>
     <string name="rendering_attr_horseRoutes_name">Кінні маршрути</string>
@@ -2984,7 +2984,7 @@
     <string name="press_again_to_change_the_map_orientation">Натисніть ще раз для зміни орієнтації мапи</string>
     <string name="shared_string_min_speed">Мінімальна швидкість</string>
     <string name="shared_string_max_speed">Макс. швидкість</string>
-    <string name="default_speed_setting_title">Усталена швидкість</string>
+    <string name="default_speed_setting_title">Типова швидкість</string>
     <string name="default_speed_setting_descr">Змінити налаштування типової швидкості</string>
     <string name="minmax_speed_dialog_title">Установити мінімальну/максимальну швидкість</string>
     <string name="new_profile">Новий профіль</string>
@@ -3099,7 +3099,7 @@
     <string name="rendering_attr_showLez_description">Показати на мапі зони низьких викидів. Не впливає на маршрутизацію.</string>
     <string name="rendering_attr_showLez_name">Показати зони низьких викидів</string>
     <string name="temporary_conditional_routing">Враховувати тимчасові обмеження</string>
-    <string name="shared_string_default">Усталений</string>
+    <string name="shared_string_default">Типовий</string>
     <string name="new_route_calculated_dist_dbg">Маршрут: відстань %1$s, час навігації %2$s \nРозрахунок: %3$.1f с, %4$d доріг, %5$d тайлів)</string>
     <string name="lang_oc">Окситанська</string>
     <string name="app_mode_wagon">Фургон</string>
@@ -3171,7 +3171,7 @@
     <string name="voice_announces_descr">Навігаційні вказівки та оголошення</string>
     <string name="logcat_buffer">Буфер logcat</string>
     <string name="plugins_settings">Налаштування розширень</string>
-    <string name="shared_string_by_default">Усталено</string>
+    <string name="shared_string_by_default">Типово</string>
     <string name="default_speed_dialog_msg">Розраховує час прибуття для невідомих типів доріг і обмежує швидкість для всіх доріг (може вплинути на маршрутизацію)</string>
     <string name="download_detailed_map">Завантажте докладну мапу %s, щоб переглянути цю область.</string>
     <string name="change_data_storage_full_description">Перемістити файли даних OsmAnd до нового місця призначення\?
@@ -3298,7 +3298,7 @@
     <string name="delete_profiles_descr">Натиснення \"Застосувати\" видалить профілі назавжди.</string>
     <string name="master_profile">Основний профіль</string>
     <string name="select_color">Виберіть колір</string>
-    <string name="edit_profiles_descr">Усталені профілі OsmAnd не видалено, проте вимкнуто (на попередньому екрані) чи відпорядковано донизу.</string>
+    <string name="edit_profiles_descr">Типові профілі OsmAnd не видалено, проте вимкнуто (на попередньому екрані) чи відпорядковано донизу.</string>
     <string name="edit_profiles">Редагувати профілі</string>
     <string name="select_nav_profile_dialog_message">\'Тип навігації\' визначає спосіб обчислення маршрутів.</string>
     <string name="profile_appearance">Зовнішній вигляд профілю</string>
@@ -3377,8 +3377,8 @@
     <string name="accessibility_mode_disabled">Режим доступності вимкнено у вашому Android.</string>
     <string name="reset_to_default_category_button_promo">Скидання до типових після установки усталить упорядкування.</string>
     <string name="use_system_screen_timeout">Використовувати системний час очікування екрана</string>
-    <string name="use_system_screen_timeout_promo">Усталено вимкнено, якщо OsmAnd працює на передньому плані, час очікування не закінчується. 
-\n 
+    <string name="use_system_screen_timeout_promo">Типово вимкнено, якщо OsmAnd працює на передньому плані, час очікування не закінчується.
+\n
 \nЯкщо увімкнено, OsmAnd використовуватиме налаштування часу очікування системи.</string>
     <string name="clear_recorded_data">Очистити записані дані</string>
     <string name="release_3_6">• Профілі: тепер Ви можете змінити порядок, встановити значок для мапи, змінити всі налаштування основних профілів та відновити їх до типових значень.
@@ -3422,7 +3422,7 @@
     <string name="import_profile_dialog_description">Імпортований профіль містить додаткові дані. Натисніть кнопку \"Імпорт\", щоб імпортувати дані профілю, або оберіть додаткові дані.</string>
     <string name="export_profile_dialog_description">Ви можете вибрати додаткові дані для експорту разом із профілем.</string>
     <string name="index_name_antarctica">Антарктида</string>
-    <string name="shared_string_app_default_w_val">Усталений застосунок (%s)</string>
+    <string name="shared_string_app_default_w_val">Типовий застосунок (%s)</string>
     <string name="no_recalculation_setting">Без перерахунку</string>
     <string name="route_recalculation_dist_title">Найменша відстань для перерахунку маршруту</string>
     <string name="route_recalculation_dist_descr">Маршрут буде перераховано, якщо відстань до нього перевищує вказане</string>
@@ -3639,7 +3639,7 @@
 \nОдин тиждень - 10 080 хвилин. 
 \nОдин місяць - 43 829 хвилин.</string>
     <string name="tiles_storage_descr">Виберіть спосіб зберігання завантажених плиток.</string>
-    <string name="default_screen_timeout">Усталений час до вимкнення екрану</string>
+    <string name="default_screen_timeout">Типовий час до вимкнення екрану</string>
     <string name="export_import_quick_actions_with_profiles_promo">Ви можете експортувати або імпортувати швидкі дії з профілями застосунку.</string>
     <string name="shared_string_delete_all_q">Видалити все\?</string>
     <string name="delete_all_actions_message_q">Ви дійсно бажаєте безповоротно видалити %d швидких дій\?</string>
@@ -3758,7 +3758,7 @@
     <string name="plan_route_change_route_type_before">Змінити вид маршруту раніше</string>
     <string name="plan_route_change_route_type_after">Змінити вид маршруту після</string>
     <string name="save_global_track_interval_descr">Вкажіть інтервал для загального запису поїздки (увімкнено через віджет «Запис подорожі» на мапі).</string>
-    <string name="system_default_theme">Усталена системна</string>
+    <string name="system_default_theme">Типова системна</string>
     <string name="all_next_segments">Всі наступні сегменти</string>
     <string name="previous_segment">Попередній сегмент</string>
     <string name="all_previous_segments">Усі попередні сегменти</string>
