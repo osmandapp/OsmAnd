@@ -885,7 +885,7 @@ public class GeneralRouter implements VehicleRouter {
 			}
 			for(int k = 0; k < types.length; k++) {
 				Integer nid = map.get(types[k]);
-				if(nid == null){
+				if (nid == null) {
 					RouteTypeRule r = reg.quickGetEncodingRule(types[k]);
 					nid = registerTagValueAttribute(r.getTag(), r.getValue());
 					map.put(types[k], nid);

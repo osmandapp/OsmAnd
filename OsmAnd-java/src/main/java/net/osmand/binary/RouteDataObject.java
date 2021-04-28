@@ -1,20 +1,15 @@
 package net.osmand.binary;
 
+import java.util.Arrays;
+
+import gnu.trove.map.hash.TIntObjectHashMap;
 import net.osmand.Location;
-import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.data.LatLon;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import net.osmand.util.TransliterationHelper;
-
-import org.apache.commons.logging.Log;
-
-import java.text.MessageFormat;
-import java.util.Arrays;
-
-import gnu.trove.map.hash.TIntObjectHashMap;
 
 public class RouteDataObject {
 	/*private */static final int RESTRICTION_SHIFT = 3;
@@ -39,7 +34,6 @@ public class RouteDataObject {
 	// mixed array [0, height, cumulative_distance height, cumulative_distance, height, ...] - length is length(points)*2
 	public float[] heightDistanceArray = null;
 	public float heightByCurrentLocation;
-	private static final Log LOG = PlatformUtil.getLog(RouteDataObject.class);
 
 	public RouteDataObject(RouteRegion region) {
 		this.region = region;
@@ -1116,6 +1110,21 @@ public class RouteDataObject {
 			restrictionsVia = new long[k + 1];
 		}
 		restrictionsVia[k] = viaWay;
+	}
+	
+	public void setPointNames(int pntInd, int[] array, String[] nms) {
+		if (pointNameTypes == null || pointNameTypes.length <= pntInd) {
+			int[][] npointTypes = new int[pntInd + 1][];
+			String[][] npointNames = new String[pntInd + 1][];
+			for (int k = 0; pointNameTypes != null && k < pointNameTypes.length; k++) {
+				npointTypes[k] = pointNameTypes[k];
+				npointNames[k] = pointNames[k];
+			}
+			pointNameTypes = npointTypes;
+			pointNames = npointNames;
+		}
+		pointNameTypes[pntInd] = array;
+		pointNames[pntInd] = nms;
 	}
 
 	public void setPointTypes(int pntInd, int[] array) {

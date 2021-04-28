@@ -3,7 +3,6 @@ package net.osmand.router;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -542,21 +541,24 @@ public class RoutingContext {
 			if (np.types.size() == 0) {
 				continue;
 			}	
-			boolean sameRoadId = np.connected != null && np.connected.getId() == ro.getId() && np.connected != ro;
+			
 			int wptX = MapUtils.get31TileNumberX(np.getLongitude());
 			int wptY = MapUtils.get31TileNumberY(np.getLatitude());
 			
 			int x = ro.getPoint31XTile(0);
 			int y = ro.getPoint31YTile(0);
-			for(int i = 1; i < ro.getPointsLength(); i++) {
+			
+			double mindist = config.directionPointsRadius;
+			int indexToInsert = 0;
+			int mprojx = 0;
+			int mprojy = 0;
+			for (int i = 1; i < ro.getPointsLength(); i++) {
 				int nx = ro.getPoint31XTile(i);
 				int ny = ro.getPoint31YTile(i);
-				// TODO wptX != x || wptY != y this check is questionable
-				boolean sameRoadIdIndex = sameRoadId && np.pointIndex == i && (wptX != x || wptY != y);
-				
-				boolean sgnx = nx - wptX > 0; 
+				int projx = 0, projy = 0;
+				boolean sgnx = nx - wptX > 0;
 				boolean sgx = x - wptX > 0;
-				boolean sgny = ny - wptY > 0; 
+				boolean sgny = ny - wptY > 0;
 				boolean sgy = y - wptY > 0;
 				double dist;
 				if (sgny == sgy && sgx == sgnx) {
@@ -571,29 +573,76 @@ public class RoutingContext {
 				} else {
 					QuadPoint pnt = MapUtils.getProjectionPoint31(wptX, wptY, x, y, nx, ny);
 					dist = MapUtils.squareRootDist31(wptX, wptY, (int) pnt.x, (int) pnt.y);
+					projx = (int) pnt.x;
+					projy = (int) pnt.y;
 				}
 
-				if ((dist < np.distance && dist < config.directionPointsRadius) || sameRoadIdIndex) {
-					System.out.println(String.format("INSERT %s %s (%d-%d) %.0f m [%.5f, %.5f] ",  ts.subregion.hashCode() + "",
-							ro, i, i + 1, dist, MapUtils.get31LatitudeY(wptY), MapUtils.get31LongitudeX(wptX)));
-					if (np.connected != null && !sameRoadIdIndex) {
-						// clear old connected
-						np.connected.setPointTypes(np.pointIndex, new int[0]);
-					}
-					ro.insert(i, wptX, wptY);
-					// ro.insert(i, (int) pnt.x, (int) pnt.y); // TODO more correct
-					ro.setPointTypes(i, np.types.toArray());
-					np.distance = dist;
-					np.connected = ro;
-					np.pointIndex = i;
-					i++;
+				if (dist < mindist) {
+					indexToInsert = i;
+					mindist = dist;
+					mprojx = projx;
+					mprojy = projy;
 				}
-				
 				x = nx;
 				y = ny;
-				
+			}
+			boolean sameRoadId = np.connected != null && np.connected.getId() == ro.getId();
+			boolean pointShouldBeAttachedByDist = (mindist < config.directionPointsRadius && mindist < np.distance);
+			
+			if (pointShouldBeAttachedByDist && !sameRoadId) {
+				System.out.println(String.format("INSERT %s (%d-%d) %.0f m [%.5f, %.5f] - %d, %d ", ro, indexToInsert, indexToInsert + 1, mindist,
+						MapUtils.get31LongitudeX(wptX), MapUtils.get31LatitudeY(wptY), wptX, wptY));
+				if (np.connected != null) {
+					// clear old connected
+					// TODO search by coordinates cause by index doesn't work (parallel updates)
+					int pointIndex = -1;
+					for(int i = 0; i < np.connected.getPointsLength(); i++) {
+						int tx = np.connected.getPoint31XTile(i);
+						int ty = np.connected.getPoint31YTile(i);
+						if (tx == np.connectedx && ty == np.connectedy) {
+							pointIndex = i;
+							break;
+						}
+					}
+					if (pointIndex != -1) {
+						int tp = ro.region.findOrCreateRouteType("osmand_dp", "osmand_delete_point");
+						np.connected.setPointTypes(pointIndex, new int[] { tp });
+						// reset or not reset
+						// TODO VISUAL #1 comment to see intermediate zigzags connection
+						np.connected.setPointNames(pointIndex, new int[] { }, new String[] { } );
+					} else {
+						throw new RuntimeException();
+					}
+				}
+//				ro.insert(indexToInsert, wptX, wptY);
+				np.connectedx = mprojx;
+				np.connectedy = mprojy;
+				ro.insert(indexToInsert, mprojx, mprojy); // TODO more correct (check it doens't match points exactly)
+				// TODO uncomment
+				// ro.setPointTypes(indexToInsert, np.types.toArray());
+				int nametpx = ro.region.findOrCreateRouteType("osmand_pnt_x", "");
+				int nametpy = ro.region.findOrCreateRouteType("osmand_pnt_y", "");
+				ro.setPointNames(indexToInsert, new int[] { nametpx, nametpy },
+						new String[] { wptX + "", wptY + "" });
+				np.distance = mindist;
+				np.connected = ro;
+			} else if (sameRoadId) {
+				boolean sameRoadIdButPointIsNotPresent;
+				// TODO check by coordinates that point was attached
+				if (indexToInsert < ro.getPointsLength()) {
+					int tx = ro.getPoint31XTile(indexToInsert);
+					int ty = ro.getPoint31YTile(indexToInsert);
+					// TODO wptX != x || wptY != y this check is questionable (cause we should insert project)
+					sameRoadIdButPointIsNotPresent = (mprojx != tx || mprojy != ty);
+				} else {
+					sameRoadIdButPointIsNotPresent = true;
+				}
+				if (sameRoadIdButPointIsNotPresent) {
+					ro.insert(indexToInsert, mprojx, mprojy);
+				}
 			}
 		}
+		
 	}
 	
 

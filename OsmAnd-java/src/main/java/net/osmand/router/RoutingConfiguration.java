@@ -61,7 +61,7 @@ public class RoutingConfiguration {
 	// extra points to be inserted in ways (quad tree is based on 31 coords)
 	private QuadTree<DirectionPoint> directionPoints;
 	
-	public int directionPointsRadius = 30; // 30 m
+	public int directionPointsRadius = 100; // 30 m
 	
 	public QuadTree<DirectionPoint> getDirectionPoints() {
 		return directionPoints;
@@ -71,8 +71,9 @@ public class RoutingConfiguration {
 		private static final long serialVersionUID = -7496599771204656505L;
 		public double distance = Double.MAX_VALUE;
 		public RouteDataObject connected;
-		public int pointIndex;
 		public TIntArrayList types = new TIntArrayList();
+		public int connectedx;
+		public int connectedy;
 
 		public DirectionPoint(Node n) {
 			super(n, n.getId());
