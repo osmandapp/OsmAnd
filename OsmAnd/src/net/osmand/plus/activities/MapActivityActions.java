@@ -46,13 +46,11 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.Version;
 import net.osmand.plus.activities.actions.OsmAndDialogs;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.liveupdates.OsmLiveActivity;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment.ContextMenuItemClickListener;
 import net.osmand.plus.mapmarkers.MapMarker;
@@ -107,7 +105,6 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_HELP_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_MAP_MARKERS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_MEASURE_DISTANCE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_MY_PLACES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_OSMAND_LIVE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_PLUGINS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SEARCH_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
@@ -518,6 +515,10 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 	public void setGPXRouteParams(GPXFile result) {
+		setGPXRouteParams(result, false);
+	}
+
+	public void setGPXRouteParams(GPXFile result, boolean followTrack) {
 		if (result == null) {
 			mapActivity.getRoutingHelper().setGpxParams(null);
 			settings.FOLLOW_THE_GPX_ROUTE.set(null);
@@ -526,6 +527,7 @@ public class MapActivityActions implements DialogProvider {
 			params.setCalculateOsmAndRouteParts(settings.GPX_ROUTE_CALC_OSMAND_PARTS.get());
 			params.setCalculateOsmAndRoute(settings.GPX_ROUTE_CALC.get());
 			params.setSelectedSegment(settings.GPX_ROUTE_SEGMENT.get());
+			params.setFollowTrack(followTrack);
 			List<Location> ps = params.getPoints(settings.getContext());
 			mapActivity.getRoutingHelper().setGpxParams(params);
 			settings.FOLLOW_THE_GPX_ROUTE.set(result.path);
