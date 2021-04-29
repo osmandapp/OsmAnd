@@ -42,14 +42,7 @@ public class CommonWords {
 	
 	static {
 		addFrequentlyUsed("santa");
-		addFrequentlyUsed("west");
-		addFrequentlyUsed("east");
-		addFrequentlyUsed("north");
-		addFrequentlyUsed("northeast");
-		addFrequentlyUsed("northwest");
-		addFrequentlyUsed("southwest");
 		addFrequentlyUsed("san");
-		addFrequentlyUsed("southeast");
 		addFrequentlyUsed("old");
 		addFrequentlyUsed("main");
 		addFrequentlyUsed("ridge");

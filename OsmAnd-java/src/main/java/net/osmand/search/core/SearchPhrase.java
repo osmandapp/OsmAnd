@@ -1,15 +1,6 @@
 package net.osmand.search.core;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.regex.Pattern;
 
 import net.osmand.Collator;
@@ -17,6 +8,7 @@ import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.OsmAndCollator;
 import net.osmand.StringMatcher;
+import net.osmand.binary.Abbreviations;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.CommonWords;
@@ -95,7 +87,6 @@ public class SearchPhrase {
 		conjunctions.add("r");
 		conjunctions.add("h");
 		conjunctions.add("mc");
-		conjunctions.add("sw");
 		conjunctions.add("g");
 		conjunctions.add("v");
 		conjunctions.add("m");
@@ -219,15 +210,14 @@ public class SearchPhrase {
 				boolean lastAndIncomplete = i == ws.length - 1 && !sp.lastUnknownSearchWordComplete;
 				if (wd.length() > 0 && (!conjunction || lastAndIncomplete)) {
 					if (first) {
-						sp.firstUnknownSearchWord = wd;
+						sp.firstUnknownSearchWord = Abbreviations.replace(wd.toLowerCase());
 						first = false;
 					} else {
-						sp.otherUnknownWords.add(wd);
+						sp.otherUnknownWords.add(Abbreviations.replace(wd.toLowerCase()));
 					}
 				}
 			}
 		}
-		
 		return sp;
 	}
 	
