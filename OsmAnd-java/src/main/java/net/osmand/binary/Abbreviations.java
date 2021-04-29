@@ -28,8 +28,8 @@ public class Abbreviations {
     }
 
     public static String replace(String word) {
-        return abbreviations.containsKey(word.toLowerCase()) ?
-                abbreviations.get(word.toLowerCase()) : word;
+        String value = abbreviations.get(word.toLowerCase());
+        return value != null ? value : word;
     }
 
     public static String replaceAll(String phrase) {
@@ -38,6 +38,7 @@ public class Abbreviations {
         for (String word : words) {
             result.add(replace(word));
         }
-        return StringUtils.join(result, DELIMITER);
+        String resultPhrase = StringUtils.join(result, DELIMITER);
+        return resultPhrase.equals(phrase) ? phrase : resultPhrase;
     }
 }

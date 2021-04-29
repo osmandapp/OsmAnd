@@ -211,10 +211,10 @@ public class SearchPhrase {
 				boolean lastAndIncomplete = i == ws.length - 1 && !sp.lastUnknownSearchWordComplete;
 				if (wd.length() > 0 && (!conjunction || lastAndIncomplete)) {
 					if (first) {
-						sp.firstUnknownSearchWord = Abbreviations.replace(wd.toLowerCase());
+						sp.firstUnknownSearchWord = Abbreviations.replace(wd);
 						first = false;
 					} else {
-						sp.otherUnknownWords.add(Abbreviations.replace(wd.toLowerCase()));
+						sp.otherUnknownWords.add(Abbreviations.replace(wd));
 					}
 				}
 			}
