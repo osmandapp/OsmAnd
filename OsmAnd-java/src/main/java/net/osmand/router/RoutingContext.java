@@ -306,7 +306,10 @@ public class RoutingContext {
 							}
 							if (config.router.acceptLine(ro)) {
 								if (excludeNotAllowed != null && !excludeNotAllowed.contains(ro.getId())) {
-									connectPoint(ts, ro, points);
+									// don't attach point for route precalculation
+									if (!config.router.attributes.containsKey(GeneralRouter.CHECK_ALLOW_PRIVATE_NEEDED)) {
+										connectPoint(ts, ro, points);
+									}
 									ts.add(ro);
 								}
 							}
@@ -548,40 +551,38 @@ public class RoutingContext {
 			int x = ro.getPoint31XTile(0);
 			int y = ro.getPoint31YTile(0);
 			
-			double mindist = config.directionPointsRadius;
+			double mindist = config.directionPointsRadius * 2;
 			int indexToInsert = 0;
 			int mprojx = 0;
 			int mprojy = 0;
 			for (int i = 1; i < ro.getPointsLength(); i++) {
 				int nx = ro.getPoint31XTile(i);
 				int ny = ro.getPoint31YTile(i);
-				int projx = 0, projy = 0;
 				boolean sgnx = nx - wptX > 0;
 				boolean sgx = x - wptX > 0;
 				boolean sgny = ny - wptY > 0;
 				boolean sgy = y - wptY > 0;
-				double dist;
+				boolean checkPreciseProjection = true;
 				if (sgny == sgy && sgx == sgnx) {
-					// point outside of rect (line is diagonal) distance is likely be bigger
-					dist = MapUtils.squareRootDist31(wptX, wptY, Math.abs(nx - wptX) < Math.abs(x - wptX) ? nx : x,
+					// Speedup: point outside of rect (line is diagonal) distance is likely be bigger
+					double dist = MapUtils.squareRootDist31(wptX, wptY, Math.abs(nx - wptX) < Math.abs(x - wptX) ? nx : x,
 							Math.abs(ny - wptY) < Math.abs(y - wptY) ? ny : y);
-					if (dist < config.directionPointsRadius) {
-						QuadPoint pnt = MapUtils.getProjectionPoint31(wptX, wptY, x, y, nx, ny);
-						dist = MapUtils.squareRootDist31(wptX, wptY, (int) pnt.x, (int) pnt.y);
-					}
-				} else {
+					checkPreciseProjection = dist < config.directionPointsRadius;
+				} 
+				if (checkPreciseProjection) {
 					QuadPoint pnt = MapUtils.getProjectionPoint31(wptX, wptY, x, y, nx, ny);
-					dist = MapUtils.squareRootDist31(wptX, wptY, (int) pnt.x, (int) pnt.y);
-					projx = (int) pnt.x;
-					projy = (int) pnt.y;
+					int projx = (int) pnt.x;
+					int projy = (int) pnt.y;
+					double dist = MapUtils.squareRootDist31(wptX, wptY, projx, projy);
+					if (dist < mindist) {
+						indexToInsert = i;
+						mindist = dist;
+						mprojx = projx;
+						mprojy = projy;
+					}
 				}
 
-				if (dist < mindist) {
-					indexToInsert = i;
-					mindist = dist;
-					mprojx = projx;
-					mprojy = projy;
-				}
+				
 				x = nx;
 				y = ny;
 			}
@@ -608,7 +609,7 @@ public class RoutingContext {
 						np.connected.setPointTypes(pointIndex, new int[] { tp });
 						// reset or not reset
 						// TODO VISUAL #1 comment to see intermediate zigzags connection
-						np.connected.setPointNames(pointIndex, new int[] { }, new String[] { } );
+//						np.connected.setPointNames(pointIndex, new int[] { }, new String[] { } );
 					} else {
 						throw new RuntimeException();
 					}
