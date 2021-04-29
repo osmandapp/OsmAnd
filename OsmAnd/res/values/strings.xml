@@ -20,7 +20,7 @@
     <string name="language_description">Select preferred language and type of voice guidance.</string>
     <string name="shared_string_max_height">Max. height</string>
     <string name="shared_string_min_height">Min. height</string>
-    <string name="route_line_use_gradient_coloring">Route line is colored depending on elevation.</string>
+    <string name="route_line_use_gradient_coloring">Route line is colored by elevation slope.</string>
     <string name="output">Output</string>
     <string name="user_points">User points</string>
     <string name="announce_when_exceeded">Announce when exceeded</string>
