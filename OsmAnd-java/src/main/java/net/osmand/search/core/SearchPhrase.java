@@ -87,6 +87,7 @@ public class SearchPhrase {
 		conjunctions.add("r");
 		conjunctions.add("h");
 		conjunctions.add("mc");
+		conjunctions.add("sw");
 		conjunctions.add("g");
 		conjunctions.add("v");
 		conjunctions.add("m");
