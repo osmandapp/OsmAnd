@@ -4091,4 +4091,5 @@
     <string name="language_description">Sélectionnez la langue et le type de guidage vocal.</string>
     <string name="tts_description">La synthèse vocale (Text-To-Speech ou TTS) peut prononcer tous types d\'instructions : nom de rue, bifurcation, nom de PI, etc.</string>
     <string name="tts_title">TTS</string>
+    <string name="shared_string_itinerary">Itinéraire</string>
 </resources>
