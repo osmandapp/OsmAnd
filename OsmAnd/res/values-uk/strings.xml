@@ -3375,7 +3375,7 @@
     <string name="sunset_at">Захід сонця о %1$s</string>
     <string name="sunrise_at">Схід сонця о %1$s</string>
     <string name="accessibility_mode_disabled">Режим доступності вимкнено у вашому Android.</string>
-    <string name="reset_to_default_category_button_promo">Скидання до типових після установки усталить упорядкування.</string>
+    <string name="reset_to_default_category_button_promo">Скидання до типових відновить впорядкування до початкового стану.</string>
     <string name="use_system_screen_timeout">Використовувати системний час очікування екрана</string>
     <string name="use_system_screen_timeout_promo">Типово вимкнено, якщо OsmAnd працює на передньому плані, час очікування не закінчується.
 \n
