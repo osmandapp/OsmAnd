@@ -4165,4 +4165,9 @@
     <string name="route_line_use_gradient_coloring">سيتم تلوين خط المسار اعتمادا على ملف تعريف الارتفاع للمسار.</string>
     <string name="shared_string_min_height">أدنى. ارتفاع</string>
     <string name="shared_string_max_height">اقصى. ارتفاع</string>
+    <string name="language_description">حدد اللغة المفضلة ونوع التوجيه الصوتي.</string>
+    <string name="tts_description">يمكن لميزة تحويل النص إلى كلام (TTS) نطق جميع أنواع التعليمات: أسماء الشوارع ، تعليمات الانعطاف ، أسماء نقاط الاهتمام ، إلخ.</string>
+    <string name="tts_title">تحويل النص إلى كلام</string>
+    <string name="recorded_description">الصوت المسجل يبدو أفضل، ولكن يمكن نطق العبارات المسجلة مسبقا فقط: تشغيل التعليمات. لا يمكن الإعلان عن أسماء الشوارع أونقاط الاهتمام.</string>
+    <string name="use_system_language">استخدام لغة النظام</string>
 </resources>

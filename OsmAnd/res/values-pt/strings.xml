@@ -1927,7 +1927,7 @@
     <string name="show_from_zoom_level">Mostrar a partir do nível de ampliação</string>
     <string name="routing_attr_allow_private_name">Ativar acesso a vias privadas</string>
     <string name="routing_attr_allow_private_description">Permitir acesso a áreas privadas.</string>
-    <string name="display_zoom_level">Mostrar nível de zoom: %1$s</string>
+    <string name="display_zoom_level">Mostrar no zoom: %1$s</string>
     <string name="favorite_group_name">Nome do grupo</string>
     <string name="change_color">Mudar cor</string>
     <string name="edit_name">Editar nome</string>
@@ -2206,11 +2206,11 @@
     <string name="purchase_dialog_subtitle">Escolha o artigo adequado</string>
     <string name="shared_string_dont">Não</string>
     <string name="shared_string_do">Fazer</string>
-    <string name="shared_string_only_with_wifi">Apenas em Wi-Fi</string>
+    <string name="shared_string_only_with_wifi">Só em Wi-Fi</string>
     <string name="wikivoyage_download_pics">Descarregar imagens</string>
     <string name="wikivoyage_download_pics_descr">As imagens do artigo podem ser descarregadas para uso offline.
 \nConfigure em \'Explorar\' → \' Opções \'.</string>
-    <string name="shared_string_wifi_only">Apenas em Wi-Fi</string>
+    <string name="shared_string_wifi_only">Só em Wi-Fi</string>
     <string name="select_travel_book">Selecione um livro de viagem</string>
     <string name="shared_string_travel_book">Livro de viagens</string>
     <string name="online_webpage_warning">Página disponível apenas online. Abrir no navegador da web\?</string>
@@ -4100,4 +4100,9 @@
     <string name="route_line_use_gradient_coloring">A linha da rota será colorida de acordo com o perfil de elevação da rota.</string>
     <string name="shared_string_min_height">Altura mínima</string>
     <string name="shared_string_max_height">Altura máxima</string>
+    <string name="language_description">Selecione o idioma preferido e o tipo de orientação por voz.</string>
+    <string name="tts_description">Text-to-speech (TTS) pode pronunciar todos os tipos de instruções: nomes de ruas, instruções de viragem, nomes de POI, etc.</string>
+    <string name="tts_title">TTS</string>
+    <string name="recorded_description">A voz gravada soa melhor, mas só consegue pronunciar frases pré-gravadas: instruções de viragem. Não pode anunciar nomes de ruas ou nomes de POI.</string>
+    <string name="use_system_language">Usar idioma do sistema</string>
 </resources>

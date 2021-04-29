@@ -4090,4 +4090,9 @@
     <string name="route_line_use_gradient_coloring">路線將會以路線的海拔設定檔來著色。</string>
     <string name="shared_string_min_height">最低高度</string>
     <string name="shared_string_max_height">最高高度</string>
+    <string name="language_description">選取偏好的語言以及語音導航的類型。</string>
+    <string name="tts_description">文字轉語音 (TTS) 可以說出所有類型的指令：街道名稱、轉彎指示、POI 名稱等。</string>
+    <string name="tts_title">文字轉語音</string>
+    <string name="recorded_description">錄製的聲音聽起來更好，但只能說出預先錄製的片段：轉彎指示。無法說出街道名稱或 POI 名稱。</string>
+    <string name="use_system_language">使用系統語言</string>
 </resources>

@@ -4096,4 +4096,9 @@
     <string name="route_line_use_gradient_coloring">Linio de spuro estos kolorigita laŭ la profilo de altitudo.</string>
     <string name="shared_string_min_height">Minimuma alto</string>
     <string name="shared_string_max_height">Maksimuma alto</string>
+    <string name="language_description">Elektu preferatan lingvon kaj specon de voĉo por navigaj gvidiloj.</string>
+    <string name="tts_description">Uzante parolsintezitajn voĉojn la aplikaĵo povas elparoli ĉiujn specojn de instrukcioj: gvidiloj pri turnoj, nomoj de stratoj kaj interesejoj, ktp.</string>
+    <string name="tts_title">Parolsintezita</string>
+    <string name="recorded_description">Antaŭregistritaj voĉoj sonas pli bone, sed la aplikaĵo povas nur elparoli gvidiloj pri turnoj. Ĝi ne povas anonci nomojn de stratoj aŭ de interesejoj.</string>
+    <string name="use_system_language">Uzi sisteman lingvon</string>
 </resources>
