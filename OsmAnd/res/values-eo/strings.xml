@@ -4101,4 +4101,5 @@
     <string name="tts_title">Parolsintezita</string>
     <string name="recorded_description">Antaŭregistritaj voĉoj sonas pli bone, sed la aplikaĵo povas nur elparoli gvidiloj pri turnoj. Ĝi ne povas anonci nomojn de stratoj aŭ de interesejoj.</string>
     <string name="use_system_language">Uzi sisteman lingvon</string>
+    <string name="shared_string_itinerary">Kurso</string>
 </resources>
