@@ -465,7 +465,6 @@
 
 	<string name="poi_power_substation">Substation</string>
 	<string name="poi_power_transformer">Transformer</string>
-	<string name="poi_power_cable_distribution_cabinet">Cable distribution cabinet</string>
 	<string name="poi_power_plant">Power plant</string>
 	<string name="poi_power_generator">Power generator</string>
 	<string name="poi_power_tower">Power tower</string>
@@ -3153,7 +3152,6 @@
 	<string name="poi_aquaculture_fish">Aquaculture: fish</string>
 	<string name="poi_aquaculture_mussels">Aquaculture: mussels</string>
 
-	<string name="poi_mdf">Main Distribution Frame</string>
 	<string name="poi_min_age">Minimum age</string>
 
 	<string name="poi_organic_yes">Yes</string>
@@ -4385,5 +4383,9 @@
 
 	<string name="poi_health_post">Health post</string>
 
+	<string name="poi_telecom_exchange">Telephone exchange</string>
+	<string name="poi_telecom_medium_copper">Medium: copper</string>
+	<string name="poi_telecom_medium_fibre">Medium: fibre</string>
+	<string name="poi_telecom_medium_coaxial">Medium: coaxial</string>
 
 </resources>
