@@ -38,7 +38,7 @@ public class Abbreviations {
             if (r.length() > 0) {
                 r.append(SearchPhrase.DELIMITER);
             }
-            String abbrRes = abbreviations.get(w);
+            String abbrRes = abbreviations.get(w.toLowerCase());
             if (abbrRes == null) {
                 r.append(w);
             } else {
