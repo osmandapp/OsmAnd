@@ -3960,15 +3960,15 @@
     <string name="routing_engine_vehicle_type_cycling_electric">Bicicleta elétrica</string>
     <string name="live_update_frequency_hour_variant">As atualizações ao mapa serão verificadas a todas as horas. Próxima %1$s em %2$s.</string>
     <string name="live_update_delete_updates_msg">Tem a certeza que quer eliminar todas as %s atualizações OsmAnd Live\?</string>
-    <string name="release_4_0_beta">• Adicionada opção para descarregar curvas de nível em pés.
+    <string name="release_4_0_beta">• Adicionada opção para descarregar curvas de nível na unidade de medida pés.
 \n
 \n• Planear rota: adicionadas abas para alternar entre pontos ou gráficos.
 \n
 \n• Atualizações OsmAnd Live movidas para \"Descarregamentos &gt; Atualizações\"
 \n
-\n• Os trilhos podem ser agora coloridos conforme a altitude, velocidade e declive.
+\n• Os trilhos podem ser agora coloridos conforme a altitude, velocidade ou declive.
 \n
-\n• Adicionada opção para alterar a aparência da linha de rota de navegação.
+\n• Adicionada opção para alterar a aparência da linha de rota.
 \n
 \n• Janela de diálogo \"Gravação do trilho\" atualizada.
 \n
@@ -4075,8 +4075,8 @@
     <string name="trip_recording_show_start_dialog_setting">Se desativado, a gravação começará logo a seguir ao tocar no widget ou item do menu, ignorando a janela de confirmação.</string>
     <string name="customize_route_line">Personalizar a linha de itinerário</string>
     <string name="shared_string_route_line">Linha de itinerário</string>
-    <string name="route_line_use_map_style_appearance">A linha do itinerário usará %1$s especificado no estilo do mapa: %2$s.</string>
-    <string name="specify_color_for_map_mode">Especificar cor para o modo mapa: %1$s.</string>
+    <string name="route_line_use_map_style_appearance">Usar estilo do mapa (%2$s) predefinido %1$s.</string>
+    <string name="specify_color_for_map_mode">Especificar cor para o modo mapa %1$s.</string>
     <string name="new_device_account">Novo dispositivo / nova conta</string>
     <string name="troubleshooting">Resolução de problemas</string>
     <string name="annual_subscription">Subscrição anual</string>
@@ -4095,8 +4095,8 @@
     <string name="output">Saída</string>
     <string name="shared_string_feet">pés</string>
     <string name="srtm_download_list_help_message">O OsmAnd fornece dados de curvas de nível em metros e pés. Terá de descarregar novamente o ficheiro para alterar o formato.</string>
-    <string name="srtm_unit_format">Formato de unidades de curvas de nível</string>
-    <string name="srtm_download_single_help_message">Selecione o formato necessário. Terá de descarregar novamente o ficheiro para alterar o formato.</string>
+    <string name="srtm_unit_format">Unidade das curvas de nível</string>
+    <string name="srtm_download_single_help_message">Selecione a variante. Terá de descarregar novamente o ficheiro para alterar o formato.</string>
     <string name="route_line_use_gradient_coloring">A linha da rota é colorida conforme o declive.</string>
     <string name="shared_string_min_height">Altura mínima</string>
     <string name="shared_string_max_height">Altura máxima</string>
