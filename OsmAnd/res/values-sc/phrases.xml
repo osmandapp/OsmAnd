@@ -3929,4 +3929,10 @@
     <string name="poi_club_social">Tzìrculu sotziale</string>
     <string name="poi_plateau">Artipranu</string>
     <string name="poi_health_post">Presìdiu sanitàriu</string>
+    <string name="poi_shop_water">Butega de abba potàbile</string>
+    <string name="poi_pest_control">Butega pro sa disinfestatzione</string>
+    <string name="poi_telecom_medium_coaxial">Mèdiu: cavu coassiale</string>
+    <string name="poi_telecom_medium_fibre">Mèdiu: fibra</string>
+    <string name="poi_telecom_medium_copper">Mèdiu: ràmene</string>
+    <string name="poi_telecom_exchange">Tzentralinu telefònicu</string>
 </resources>
