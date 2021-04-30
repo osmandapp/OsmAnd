@@ -3962,10 +3962,10 @@
     <string name="routing_engine_vehicle_type_small_truck">Kisteherautó</string>
     <string name="message_server_error">Szerverhiba: %1$s</string>
     <string name="message_name_is_already_exists">Ez a név már létezik</string>
-    <string name="announcement_time_descr">A különféle hangutasítások bemondási ideje függ az utasítás típusától, az aktuális navigációs sebességtől és az alapértelmezett navigációs sebességtől.</string>
+    <string name="announcement_time_descr">A különféle hangutasítások bemondásának időzítése függ az utasítás típusától, az aktuális navigációs sebességtől és az alapértelmezett navigációs sebességtől.</string>
     <string name="announcement_time_title">Bemondás ideje</string>
     <string name="routing_engine_vehicle_type_scooter">Roller</string>
-    <string name="delete_online_routing_engine">Törli ezt az online útvonaltervezőt\?</string>
+    <string name="delete_online_routing_engine">Eltávolítja ezt az online útvonaltervezőt\?</string>
     <string name="context_menu_read_full">Az egész elolvasása</string>
     <string name="context_menu_edit_descr">Leírás szerkesztése</string>
     <string name="delete_waypoints">Útpontok törlése</string>
@@ -4031,7 +4031,7 @@
     <string name="track_recording_will_be_continued">A felvétel folytatódni fog.</string>
     <string name="copy_poi_name">Érdekes pont nevének másolása</string>
     <string name="quick_action_show_hide_title">Megjelenítés / elrejtés</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Természetvédelmi területek, védett területek és nemzeti parkok határainak elrejtése</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Természetvédelmi területek, védett területek és nemzeti parkok határainak elrejtése.</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">Természetvédelmi területek határai</string>
     <string name="track_has_no_altitude">A nyomvonal nem tartalmaz magassági adatokat.</string>
     <string name="track_has_no_speed">A nyomvonal nem tartalmaz sebességadatokat.</string>
@@ -4043,7 +4043,7 @@
     <string name="trip_recording_save_and_continue">Mentés és folytatás</string>
     <string name="lost_data_warning">Minden nem mentett adat törlődni fog.</string>
     <string name="show_start_dialog">Kezdő párbeszéd megjelenítése</string>
-    <string name="trip_recording_show_start_dialog_setting">Ha le van tiltva, akkor a felvétel közvetlenül a widget vagy a menüelem megérintése után elindul, kihagyva a megerősítő párbeszédpanelt.</string>
+    <string name="trip_recording_show_start_dialog_setting">Ha le van tiltva, akkor a felvétel azonnal elindul a widget vagy a menüelem megérintése után, kihagyva a megerősítő párbeszédpanelt.</string>
     <string name="release_4_0_beta">• Új lehetőség: szinvonalak letöltése (méter mellett) lábban
 \n
 \n• Útvonaltervezési környezet: hozzáadott fülek a pontok és grafikonok közötti váltáshoz
@@ -4095,5 +4095,5 @@
     <string name="tts_description">A szövegfelolvasó (TTS) minden utasítástípust képes kiejteni: utcaneveket, bekanyarodási utasításokat, érdekes pontok (POI-k) nevét stb.</string>
     <string name="language_description">A kívánt nyelv és a hangutasítás típusának kiválasztása.</string>
     <string name="shared_string_itinerary">Útiterv</string>
-    <string name="route_line_use_map_style_appearance"></string>
+    <string name="route_line_use_map_style_appearance"/>
 </resources>
