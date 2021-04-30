@@ -4055,7 +4055,7 @@
     <string name="trip_recording_show_start_dialog_setting">אם האפשרות מושבתת, ההקלטה תתחיל מיד לאחר הנגיעה בווידג׳ט או בפריט שבתפריט תוך דילוג על חלונית האישור.</string>
     <string name="customize_route_line">להתאים קו מסלול אישית</string>
     <string name="shared_string_route_line">קו מסלול</string>
-    <string name="specify_color_for_map_mode">לציין צבע למצב מפה: %1$s.</string>
+    <string name="specify_color_for_map_mode">לציין צבע למצב מפה %1$s.</string>
     <string name="release_4_0_beta">• נוספה אפשרות להוריד קווי מתאר ברגל
 \n
 \n• תכנון מסלול אופקית: נוספו לשוניות למעבר בין נקודות לתרשימים
@@ -4092,9 +4092,9 @@
     <string name="user_points">נקודות משתמש</string>
     <string name="output">פלט</string>
     <string name="shared_string_feet">רגל</string>
-    <string name="srtm_unit_format">תצורת יחידת קווי מתאר</string>
+    <string name="srtm_unit_format">הגוון יחידת קווי מתאר</string>
     <string name="srtm_download_list_help_message">OsmAnd מספק נתוני קווי מתאר במטרים וברגל. יהיה עליך להוריד את הקובץ מחדש כדי לשנות את התצורה.</string>
-    <string name="srtm_download_single_help_message">נא לבחור את התצורה הרצויה. יהיה עליך להוריד את הקובץ מחדש כדי לשנות את התצורה.</string>
+    <string name="srtm_download_single_help_message">נא לבחור את ההגוון. יהיה עליך להוריד את הקובץ מחדש כדי לשנות את התצורה.</string>
     <string name="shared_string_min_height">גובה מזערי</string>
     <string name="shared_string_max_height">גובה מרבי</string>
     <string name="tts_title">טקסט לדיבור</string>
