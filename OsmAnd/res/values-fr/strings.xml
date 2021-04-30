@@ -4053,7 +4053,7 @@
 \n - Mise à jour de la fenêtre \"Enregistrement du trajet\".
 \n
 \n</string>
-    <string name="route_line_use_map_style_appearance">La ligne d\'itinéraire utilisera le %1$s pour le style de carte : %2$s.</string>
+    <string name="route_line_use_map_style_appearance">Utilise le style de carte (%2$s) par défaut %1$s.</string>
     <string name="customize_route_line">Personnaliser la ligne d\'itinéraire</string>
     <string name="shared_string_route_line">Ligne d\'itinéraire</string>
     <string name="specify_color_for_map_mode">Définissez une couleur pour le mode de carte %1$s.</string>
