@@ -4020,7 +4020,7 @@
     <string name="live_update_frequency_hour_variant">Les cartes seront vérifiées toutes les heures. La prochaine vérification de mise à jour s\'effectuera le %1$s dans %2$s.</string>
     <string name="delete_updates">Supprimer les mises à jour</string>
     <string name="purchases">Achats</string>
-    <string name="select_category_descr">Sélectionnez la catégorie ou créez-en une nouvelle</string>
+    <string name="select_category_descr">Sélectionnez une catégorie ou créez-en une nouvelle</string>
     <string name="track_recording_will_be_continued">L\'enregistrement se poursuivra.</string>
     <string name="copy_poi_name">Copier le nom du PI</string>
     <string name="quick_action_show_hide_title">Afficher / masquer</string>
@@ -4042,18 +4042,18 @@
     <string name="trip_recording_show_start_dialog_setting">Si désactivé, l\'enregistrement débutera dès appui sur le gadget ou dans le menu (sans demande de confirmation).</string>
     <string name="release_4_0_beta">- Ajout d\'une option pour télécharger les Courbes de niveau en pieds
 \n
-\n- Planification d\'itinéraires en paysage : ajout d’onglets pour basculer entre Points et Graphs 
+\n- Planification d\'itinéraires en paysage : ajout d’onglets pour basculer entre Points et Graphs
 \n
 \n- Les mises à jour d\'OsmAnd Live ont été déplacées vers \"Téléchargements &gt; Mises à jour\"
 \n
-\n - Les traces peuvent maintenant être colorées par altitude, vitesse ou pente
+\n- Les traces peuvent maintenant être colorées par altitude, vitesse ou pente
 \n
-\n - Ajout d\'une option pour modifier l\'apparence de la ligne d\'itinéraire en navigation
+\n- Ajout d\'une option pour modifier l\'apparence de la ligne d\'itinéraire en navigation
 \n
-\n - Mise à jour de la fenêtre \"Enregistrement du trajet\".
+\n- Mise à jour de la fenêtre \"Enregistrement du trajet\".
 \n
 \n</string>
-    <string name="route_line_use_map_style_appearance">Utilise le style de carte (%2$s) par défaut %1$s.</string>
+    <string name="route_line_use_map_style_appearance">Utiliser le style de carte (%2$s) par défaut %1$s.</string>
     <string name="customize_route_line">Personnaliser la ligne d\'itinéraire</string>
     <string name="shared_string_route_line">Ligne d\'itinéraire</string>
     <string name="specify_color_for_map_mode">Définissez une couleur pour le mode de carte %1$s.</string>
