@@ -4034,7 +4034,7 @@
     <string name="troubleshooting_description">Por favor siga este link se tiver algum problema com assinaturas.</string>
     <string name="update_all_maps_added">Atualizar todos os mapas para %1$s\?</string>
     <string name="routing_attr_short_way_description">Rota mais curta otimizada (mais económica)</string>
-    <string name="snap_to_road_descr">O ícone da localização atual será colocado no ponto mais próximo da rota de navegação atual</string>
+    <string name="snap_to_road_descr">O ícone da posição atual será colocado no ponto mais próximo da rota de navegação atual</string>
     <string name="copy_poi_name">Copiar nome do POI</string>
     <string name="reverse_all_points">Inverter todos os pontos</string>
     <string name="profile_by_default_description">Selecionar o perfil que será usado ao iniciar a aplicação.</string>
@@ -4064,7 +4064,7 @@
     <string name="track_recording_will_be_continued">A gravação continuará.</string>
     <string name="quick_action_show_hide_title">Mostrar/ocultar</string>
     <string name="shared_string_interval">Intervalo</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Ocultar fronteiras naturais, áreas protegidas e parques nacionais</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Ocultar fronteiras naturais, áreas protegidas e parques nacionais.</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">Fronteiras naturais</string>
     <string name="track_has_no_altitude">O trilho não contém dados da altitude.</string>
     <string name="track_has_no_speed">O trilho não contém dados da velocidade.</string>
