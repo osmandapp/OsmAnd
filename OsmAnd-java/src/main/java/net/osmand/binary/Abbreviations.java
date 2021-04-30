@@ -1,19 +1,17 @@
 package net.osmand.binary;
 
-import org.apache.commons.lang3.StringUtils;
+import net.osmand.search.core.SearchPhrase;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 
-import static net.osmand.search.core.SearchPhrase.DELIMITER;
 
 public class Abbreviations {
 
     private Abbreviations() {
     }
 
-    private static final Map<String, String> abbreviations = new TreeMap<>();
+    private static final Map<String, String> abbreviations = new HashMap<>();
 
     static {
         abbreviations.put("e", "East");
@@ -33,12 +31,21 @@ public class Abbreviations {
     }
 
     public static String replaceAll(String phrase) {
-        String[] words = phrase.split(DELIMITER);
-        ArrayList<String> result = new ArrayList<>();
-        for (String word : words) {
-            result.add(replace(word));
+        String[] words = phrase.split(SearchPhrase.DELIMITER);
+        StringBuilder r = new StringBuilder();
+        boolean changed = false;
+        for (String w : words) {
+            if (r.length() > 0) {
+                r.append(SearchPhrase.DELIMITER);
+            }
+            String abbrRes = abbreviations.get(w);
+            if (abbrRes == null) {
+                r.append(w);
+            } else {
+                changed = true;
+                r.append(abbrRes);
+            }
         }
-        String resultPhrase = StringUtils.join(result, DELIMITER);
-        return resultPhrase.equals(phrase) ? phrase : resultPhrase;
+        return changed ? r.toString() : phrase;
     }
 }
