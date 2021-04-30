@@ -4089,4 +4089,13 @@
     <string name="srtm_unit_format">Formát jednotiek vrstevníc</string>
     <string name="srtm_download_list_help_message">OsmAnd poskytuje údaje vrstevníc v metroch a stopách. Budete musieť znovu stiahnuť súbor pre zmenu formátu.</string>
     <string name="srtm_download_single_help_message">Prosím zvoľte požadovaný formát. Budete musieť znovu stiahnuť súbor pre zmenu formátu.</string>
+    <string name="route_line_use_gradient_coloring">Čiara trasy bude vyfarbená podľa prevýšenia ne jednotlivých miestach trasy.</string>
+    <string name="shared_string_min_height">Min. výška</string>
+    <string name="shared_string_max_height">Max. výška</string>
+    <string name="language_description">Zvoľte preferovaný jazyk a typ hlasových pokynov.</string>
+    <string name="tts_description">Text-to-speech (TTS) môže vysloviť všetky typy pokynov: názvy ulíc, zabočenia, body záujmu, atď.</string>
+    <string name="tts_title">TTS</string>
+    <string name="recorded_description">Nahratý hlas znie lepšie, ale môže vysloviť len predpripravené frázy: pokyny na zabočenie. Nevie vysloviť názvy ulíc alebo bodov záujmu.</string>
+    <string name="use_system_language">Použiť jazyk systému</string>
+    <string name="shared_string_itinerary">Itinerár</string>
 </resources>

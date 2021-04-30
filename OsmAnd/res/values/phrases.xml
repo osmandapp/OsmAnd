@@ -243,7 +243,6 @@
 	<string name="poi_doityourself">Home improvement store</string>
 	<string name="poi_doors">Doors</string>
 	<string name="poi_erotic">Erotic store</string>
-	<string name="poi_fashion">Fashion store</string>
 	<string name="poi_fishing">Fishing tackle</string>
 	<string name="poi_florist">Flower shop</string>
 	<string name="poi_frame">Picture frame shop</string>
@@ -466,7 +465,6 @@
 
 	<string name="poi_power_substation">Substation</string>
 	<string name="poi_power_transformer">Transformer</string>
-	<string name="poi_power_cable_distribution_cabinet">Cable distribution cabinet</string>
 	<string name="poi_power_plant">Power plant</string>
 	<string name="poi_power_generator">Power generator</string>
 	<string name="poi_power_tower">Power tower</string>
@@ -618,7 +616,6 @@
 	<string name="poi_pension_fund">Pension fund</string>
 	<string name="poi_migration">Migration</string>
 	<string name="poi_tax_inspection">Tax inspection</string>
-	<string name="poi_office_administrative">Administrative office</string>
 	<string name="poi_customs">Customs</string>
 	<string name="poi_country">Country</string>
 	<string name="poi_city">City</string>
@@ -3155,7 +3152,6 @@
 	<string name="poi_aquaculture_fish">Aquaculture: fish</string>
 	<string name="poi_aquaculture_mussels">Aquaculture: mussels</string>
 
-	<string name="poi_mdf">Main Distribution Frame</string>
 	<string name="poi_min_age">Minimum age</string>
 
 	<string name="poi_organic_yes">Yes</string>
@@ -4387,5 +4383,14 @@
 
 	<string name="poi_health_post">Health post</string>
 
+	<string name="poi_telecom_exchange">Telephone exchange</string>
+	<string name="poi_telecom_medium_copper">Medium: copper</string>
+	<string name="poi_telecom_medium_fibre">Medium: fibre</string>
+	<string name="poi_telecom_medium_coaxial">Medium: coaxial</string>
+
+	<string name="poi_pest_control">Pest control store</string>
+	<string name="poi_shop_water">Drinking water store</string>
+
+	<string name="poi_pillory">Pillory</string>
 
 </resources>

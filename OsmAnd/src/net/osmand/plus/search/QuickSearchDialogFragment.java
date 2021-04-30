@@ -70,6 +70,7 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
+import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.OsmAndFormatter;
@@ -1205,7 +1206,12 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			showProgressBar();
 			app.getAppInitializer().addListener(new AppInitializeListener() {
 				@Override
-				public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
+				public void onStart(AppInitializer init) {
+
+				}
+
+				@Override
+				public void onProgress(AppInitializer init, InitEvents event) {
 				}
 
 				@Override
@@ -1326,7 +1332,12 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			showProgressBar();
 			app.getAppInitializer().addListener(new AppInitializeListener() {
 				@Override
-				public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
+				public void onStart(AppInitializer init) {
+
+				}
+
+				@Override
+				public void onProgress(AppInitializer init, InitEvents event) {
 				}
 
 				@Override
@@ -1514,7 +1525,12 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			showProgressBar();
 			app.getAppInitializer().addListener(new AppInitializeListener() {
 				@Override
-				public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
+				public void onStart(AppInitializer init) {
+
+				}
+
+				@Override
+				public void onProgress(AppInitializer init, InitEvents event) {
 				}
 
 				@Override
@@ -1674,7 +1690,12 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		if (app.isApplicationInitializing() && text.length() > 0) {
 			app.getAppInitializer().addListener(new AppInitializeListener() {
 				@Override
-				public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
+				public void onStart(AppInitializer init) {
+
+				}
+
+				@Override
+				public void onProgress(AppInitializer init, InitEvents event) {
 				}
 
 				@Override

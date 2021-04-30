@@ -2525,7 +2525,7 @@
     <string name="context_menu_item_modify_note">OSM-Hinweis ändern</string>
     <string name="make_round_trip_descr">Kopie des Startpunkts als Ziel hinzufügen.</string>
     <string name="make_round_trip">Rundreise erstellen</string>
-    <string name="my_location">Meine Position</string>
+    <string name="my_location">Mein Standort</string>
     <string name="shared_string_finish">Beenden</string>
     <string name="use_system_keyboard">Gerätetastatur verwenden</string>
     <string name="marker_moved_to_active">Kartenmarkierung auf aktiv gesetzt</string>
@@ -3936,7 +3936,7 @@
     <string name="shared_string_subtype">Subtyp</string>
     <string name="keep_it_empty_if_not">Leer lassen, wenn kein API-Schlüssel vorhanden</string>
     <string name="copy_address">Adresse kopieren</string>
-    <string name="routing_engine_vehicle_type_driving">Fahren</string>
+    <string name="routing_engine_vehicle_type_driving">Fahrzeug</string>
     <string name="online_routing_engine">Online Navigationssystem</string>
     <string name="online_routing_engines">Online Navigationssysteme</string>
     <string name="shared_string_folders">Ordner</string>
@@ -4097,4 +4097,12 @@
     <string name="srtm_unit_format">Einheit der Höhenlinien</string>
     <string name="srtm_download_list_help_message">OsmAnd liefert Höhenlinien-Daten in Metern und Fuß. Sie müssen die Datei erneut herunterladen, um das Format zu ändern.</string>
     <string name="srtm_download_single_help_message">Bitte wählen Sie das gewünschte Format. Sie müssen die Datei erneut herunterladen, um das Format zu ändern.</string>
+    <string name="route_line_use_gradient_coloring">Die Routenlinie wird je nach Höhenprofil der Route eingefärbt.</string>
+    <string name="shared_string_min_height">Mindesthöhe</string>
+    <string name="shared_string_max_height">Maximale Höhe</string>
+    <string name="language_description">Wählen Sie die bevorzugte Sprache und die Art der Sprachführung.</string>
+    <string name="tts_description">Text-to-Speech (TTS) kann alle Arten von Anweisungen aussprechen: Straßennamen, Abbiegeanweisungen, POI-Namen usw.</string>
+    <string name="tts_title">TTS</string>
+    <string name="recorded_description">Aufgezeichnete Stimme klingt besser, kann aber nur vorher aufgezeichnete Phrasen aussprechen: Abbiegeanweisungen. Kann keine Straßennamen oder POI-Namen ansagen.</string>
+    <string name="use_system_language">Systemsprache verwenden</string>
 </resources>

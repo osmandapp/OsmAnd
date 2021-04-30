@@ -1927,7 +1927,7 @@
     <string name="show_from_zoom_level">Mostrar a partir do nível de ampliação</string>
     <string name="routing_attr_allow_private_name">Ativar acesso a vias privadas</string>
     <string name="routing_attr_allow_private_description">Permitir acesso a áreas privadas.</string>
-    <string name="display_zoom_level">Mostrar nível de zoom: %1$s</string>
+    <string name="display_zoom_level">Mostrar no zoom: %1$s</string>
     <string name="favorite_group_name">Nome do grupo</string>
     <string name="change_color">Mudar cor</string>
     <string name="edit_name">Editar nome</string>
@@ -2206,11 +2206,11 @@
     <string name="purchase_dialog_subtitle">Escolha o artigo adequado</string>
     <string name="shared_string_dont">Não</string>
     <string name="shared_string_do">Fazer</string>
-    <string name="shared_string_only_with_wifi">Apenas em Wi-Fi</string>
+    <string name="shared_string_only_with_wifi">Só em Wi-Fi</string>
     <string name="wikivoyage_download_pics">Descarregar imagens</string>
     <string name="wikivoyage_download_pics_descr">As imagens do artigo podem ser descarregadas para uso offline.
 \nConfigure em \'Explorar\' → \' Opções \'.</string>
-    <string name="shared_string_wifi_only">Apenas em Wi-Fi</string>
+    <string name="shared_string_wifi_only">Só em Wi-Fi</string>
     <string name="select_travel_book">Selecione um livro de viagem</string>
     <string name="shared_string_travel_book">Livro de viagens</string>
     <string name="online_webpage_warning">Página disponível apenas online. Abrir no navegador da web\?</string>
@@ -3960,15 +3960,15 @@
     <string name="routing_engine_vehicle_type_cycling_electric">Bicicleta elétrica</string>
     <string name="live_update_frequency_hour_variant">As atualizações ao mapa serão verificadas a todas as horas. Próxima %1$s em %2$s.</string>
     <string name="live_update_delete_updates_msg">Tem a certeza que quer eliminar todas as %s atualizações OsmAnd Live\?</string>
-    <string name="release_4_0_beta">• Adicionada opção para descarregar curvas de nível em pés.
+    <string name="release_4_0_beta">• Adicionada opção para descarregar curvas de nível na unidade de medida pés.
 \n
 \n• Planear rota: adicionadas abas para alternar entre pontos ou gráficos.
 \n
 \n• Atualizações OsmAnd Live movidas para \"Descarregamentos &gt; Atualizações\"
 \n
-\n• Os trilhos podem ser agora coloridos conforme a altitude, velocidade e declive.
+\n• Os trilhos podem ser agora coloridos conforme a altitude, velocidade ou declive.
 \n
-\n• Adicionada opção para alterar a aparência da linha de rota de navegação.
+\n• Adicionada opção para alterar a aparência da linha de rota.
 \n
 \n• Janela de diálogo \"Gravação do trilho\" atualizada.
 \n
@@ -3998,7 +3998,7 @@
     <string name="routing_engine_vehicle_type_scooter">Trotineta</string>
     <string name="message_server_error">Erro do servidor: %1$s</string>
     <string name="message_name_is_already_exists">O nome já existe</string>
-    <string name="delete_online_routing_engine">Eliminar este motor de roteamento online\?</string>
+    <string name="delete_online_routing_engine">Remover este motor de roteamento online\?</string>
     <string name="context_menu_read_full">Ler tudo</string>
     <string name="context_menu_edit_descr">Editar descrição</string>
     <string name="delete_waypoints">Eliminar pontos do trilho</string>
@@ -4034,7 +4034,7 @@
     <string name="troubleshooting_description">Por favor siga este link se tiver algum problema com assinaturas.</string>
     <string name="update_all_maps_added">Atualizar todos os mapas para %1$s\?</string>
     <string name="routing_attr_short_way_description">Rota mais curta otimizada (mais económica)</string>
-    <string name="snap_to_road_descr">O ícone da localização atual será colocado no ponto mais próximo da rota de navegação atual</string>
+    <string name="snap_to_road_descr">O ícone da posição atual será colocado no ponto mais próximo da rota de navegação atual</string>
     <string name="copy_poi_name">Copiar nome do POI</string>
     <string name="reverse_all_points">Inverter todos os pontos</string>
     <string name="profile_by_default_description">Selecionar o perfil que será usado ao iniciar a aplicação.</string>
@@ -4064,7 +4064,7 @@
     <string name="track_recording_will_be_continued">A gravação continuará.</string>
     <string name="quick_action_show_hide_title">Mostrar/ocultar</string>
     <string name="shared_string_interval">Intervalo</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Ocultar fronteiras naturais, áreas protegidas e parques nacionais</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Ocultar fronteiras naturais, áreas protegidas e parques nacionais.</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">Fronteiras naturais</string>
     <string name="track_has_no_altitude">O trilho não contém dados da altitude.</string>
     <string name="track_has_no_speed">O trilho não contém dados da velocidade.</string>
@@ -4075,8 +4075,8 @@
     <string name="trip_recording_show_start_dialog_setting">Se desativado, a gravação começará logo a seguir ao tocar no widget ou item do menu, ignorando a janela de confirmação.</string>
     <string name="customize_route_line">Personalizar a linha de itinerário</string>
     <string name="shared_string_route_line">Linha de itinerário</string>
-    <string name="route_line_use_map_style_appearance">A linha do itinerário usará %1$s especificado no estilo do mapa: %2$s.</string>
-    <string name="specify_color_for_map_mode">Especificar cor para o modo mapa: %1$s.</string>
+    <string name="route_line_use_map_style_appearance">Usar estilo do mapa (%2$s) predefinido %1$s.</string>
+    <string name="specify_color_for_map_mode">Especificar cor para o modo mapa %1$s.</string>
     <string name="new_device_account">Novo dispositivo / nova conta</string>
     <string name="troubleshooting">Resolução de problemas</string>
     <string name="annual_subscription">Subscrição anual</string>
@@ -4095,6 +4095,15 @@
     <string name="output">Saída</string>
     <string name="shared_string_feet">pés</string>
     <string name="srtm_download_list_help_message">O OsmAnd fornece dados de curvas de nível em metros e pés. Terá de descarregar novamente o ficheiro para alterar o formato.</string>
-    <string name="srtm_unit_format">Formato de unidades de curvas de nível</string>
-    <string name="srtm_download_single_help_message">Selecione o formato necessário. Terá de descarregar novamente o ficheiro para alterar o formato.</string>
+    <string name="srtm_unit_format">Unidade das curvas de nível</string>
+    <string name="srtm_download_single_help_message">Selecione a variante. Terá de descarregar novamente o ficheiro para alterar o formato.</string>
+    <string name="route_line_use_gradient_coloring">A linha da rota é colorida conforme o declive.</string>
+    <string name="shared_string_min_height">Altura mínima</string>
+    <string name="shared_string_max_height">Altura máxima</string>
+    <string name="language_description">Selecione o idioma preferido e o tipo de orientação por voz.</string>
+    <string name="tts_description">Text-to-speech (TTS) pode pronunciar todos os tipos de instruções: nomes de ruas, instruções de viragem, nomes de POI, etc.</string>
+    <string name="tts_title">TTS</string>
+    <string name="recorded_description">A voz gravada soa melhor, mas só consegue pronunciar frases pré-gravadas: instruções de viragem. Não pode anunciar nomes de ruas ou nomes de POI.</string>
+    <string name="use_system_language">Usar idioma do sistema</string>
+    <string name="shared_string_itinerary">Itinerário</string>
 </resources>

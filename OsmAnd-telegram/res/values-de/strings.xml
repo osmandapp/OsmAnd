@@ -4,7 +4,7 @@
     <string name="go_to_settings">Einstellungen öffnen</string>
     <string name="not_sent_yet">Noch nicht gesendet</string>
     <string name="not_found_yet">Noch nicht gefunden</string>
-    <string name="re_send_location">Position neu senden</string>
+    <string name="re_send_location">Standort erneut senden</string>
     <string name="sharing_status">Freigabestatus</string>
     <string name="location_sharing_status">Teilen: %1$s</string>
     <string name="shared_string_enabled">Aktiviert</string>

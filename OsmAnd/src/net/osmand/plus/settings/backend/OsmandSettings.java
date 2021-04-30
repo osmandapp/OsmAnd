@@ -2641,7 +2641,7 @@ public class OsmandSettings {
 					return lang + IndexConstants.VOICE_PROVIDER_SUFFIX;
 				}
 			}
-			return "en-tts";
+			return VOICE_PROVIDER_NOT_USE;
 		}
 	}.makeProfile();
 
