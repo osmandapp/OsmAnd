@@ -3998,7 +3998,7 @@
     <string name="routing_engine_vehicle_type_scooter">Trotineta</string>
     <string name="message_server_error">Erro do servidor: %1$s</string>
     <string name="message_name_is_already_exists">O nome já existe</string>
-    <string name="delete_online_routing_engine">Eliminar este motor de roteamento online\?</string>
+    <string name="delete_online_routing_engine">Remover este motor de roteamento online\?</string>
     <string name="context_menu_read_full">Ler tudo</string>
     <string name="context_menu_edit_descr">Editar descrição</string>
     <string name="delete_waypoints">Eliminar pontos do trilho</string>
