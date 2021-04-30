@@ -3929,4 +3929,11 @@
     <string name="poi_bay_filter">Tipo de baía</string>
     <string name="poi_ultimate">Ultimate</string>
     <string name="poi_health_post">Posto de saúde</string>
+    <string name="poi_pillory">Pelourinho</string>
+    <string name="poi_shop_water">Armazenamento de água potável</string>
+    <string name="poi_pest_control">Loja de controle de pragas</string>
+    <string name="poi_telecom_medium_coaxial">Médio: coaxial</string>
+    <string name="poi_telecom_medium_fibre">Médio: fibra</string>
+    <string name="poi_telecom_medium_copper">Médio: cobre</string>
+    <string name="poi_telecom_exchange">Central telefônica</string>
 </resources>
