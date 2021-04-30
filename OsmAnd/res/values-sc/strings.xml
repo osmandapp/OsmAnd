@@ -4090,8 +4090,8 @@
     <string name="shared_string_feet">pees</string>
     <string name="srtm_unit_format">Formadu de s\'unidade de medida pro sas curvas de livellu</string>
     <string name="srtm_download_list_help_message">OsmAnd frunit datos de sas curvas de livellu in metros e in pees. As a dèpere torrare a iscarrigare su documentu pro mudare su formadu.</string>
-    <string name="srtm_download_single_help_message">Pro praghere ischerta su formadu netzessàriu. As a dèpere torrare a iscarrigare su documentu pro mudare su formadu.</string>
-    <string name="route_line_use_gradient_coloring">Sa lìnia de s\'àndala s\'at a colorare sighende su profilu altimètricu de s\'àndala.</string>
+    <string name="srtm_download_single_help_message">Pro praghere ischerta sa variante. As a dèpere torrare a iscarrigare su documentu pro mudare su formadu.</string>
+    <string name="route_line_use_gradient_coloring">Sa lìnia de s\'àndala s\'at a colorare sighende sa pendèntzia.</string>
     <string name="shared_string_min_height">Artària mìn.</string>
     <string name="shared_string_max_height">Artària màss.</string>
     <string name="language_description">Ischerta sa limba e sa casta de boghe de ghia chi preferis.</string>
@@ -4099,4 +4099,5 @@
     <string name="tts_title">TTS</string>
     <string name="recorded_description">Sa boghe registrada sonat mègius, ma podet pronuntziare petzi fràsias giai registradas, che a sas istrutziones de bortada. Non podet pronuntziare sos nùmenes de sas carreras o de sos PDI.</string>
     <string name="use_system_language">Imprea sa limba de su sistema</string>
+    <string name="shared_string_itinerary">Itineràriu</string>
 </resources>
