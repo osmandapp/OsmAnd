@@ -4048,9 +4048,9 @@
     <string name="trip_recording_logging_interval_info">Agordita periodo de intertempo de registrado, dum kiu OsmAnd petos la nunajn poziciajn datumojn.</string>
     <string name="lost_data_warning">Ĉiuj nekonservitaj datumoj perdiĝos.</string>
     <string name="trip_recording_save_and_continue">Konservi kaj daŭrigi</string>
-    <string name="trip_recording_show_start_dialog_setting">Se malŝaltita, registrado komenciĝos tuj post frapeto sur la fenestraĵo aŭ menuero, preterlasante la konfirman dialogon.</string>
+    <string name="trip_recording_show_start_dialog_setting">Se malaktiva, registrado komenciĝos tuj post frapeto sur la fenestraĵo aŭ menuero, preterlasante la konfirman dialogon.</string>
     <string name="show_start_dialog">Montri komencan dialogon</string>
-    <string name="specify_color_for_map_mode">Elektu koloron por map‑reĝimo: %1$s.</string>
+    <string name="specify_color_for_map_mode">Elektu koloron por map‑reĝimo %1$s.</string>
     <string name="customize_route_line">Alĝustigi linion de kurso</string>
     <string name="shared_string_route_line">Linio de kurso</string>
     <string name="route_line_use_map_style_appearance">Por la linio de kurso estos uzata %1$s difinita por la map‑stilo: %2$s.</string>
@@ -4092,8 +4092,8 @@
     <string name="shared_string_feet">futoj</string>
     <string name="srtm_unit_format">Unuo por nivelkurboj</string>
     <string name="srtm_download_list_help_message">OsmAnd liveras nivelkurbojn en metroj kaj en futoj. Ve devos reelŝuti la dosieron por ŝanĝi la formon.</string>
-    <string name="srtm_download_single_help_message">Elektu la deziratan formon. Vi devos reelŝuti la dosieron por ŝanĝi la formon.</string>
-    <string name="route_line_use_gradient_coloring">Linio de spuro estos kolorigita laŭ la profilo de altitudo.</string>
+    <string name="srtm_download_single_help_message">Elektu la deziratan mezurunuon. Vi devos reelŝuti la dosieron por ŝanĝi la formon.</string>
+    <string name="route_line_use_gradient_coloring">Linio de spuro estas kolorigata laŭ la profilo de altitudo.</string>
     <string name="shared_string_min_height">Minimuma alto</string>
     <string name="shared_string_max_height">Maksimuma alto</string>
     <string name="language_description">Elektu preferatan lingvon kaj specon de voĉo por navigaj gvidiloj.</string>
