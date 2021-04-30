@@ -4095,4 +4095,5 @@
     <string name="tts_title">文字轉語音</string>
     <string name="recorded_description">錄製的聲音聽起來更好，但只能說出預先錄製的片段：轉彎指示。無法說出街道名稱或 POI 名稱。</string>
     <string name="use_system_language">使用系統語言</string>
+    <string name="shared_string_itinerary">行程</string>
 </resources>
