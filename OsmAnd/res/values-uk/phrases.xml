@@ -3215,7 +3215,7 @@
     <string name="poi_water_purification_none">Немає</string>
     <string name="poi_water_purification_chlorine">Хлорування</string>
     <string name="poi_water_purification_reverse_osmosis">Зворотний осмос</string>
-    <string name="poi_water_purification_aquatabs">Таблетки для дезінфекції води</string>
+    <string name="poi_water_purification_aquatabs">Таблетки для знезараження води</string>
     <string name="poi_water_supply_water_well">Колодязь</string>
     <string name="poi_water_supply_pipeline">Трубопровід</string>
     <string name="poi_water_supply_running_water">Проточна вода</string>
@@ -3929,4 +3929,10 @@
     <string name="poi_plateau">Плато</string>
     <string name="poi_club_social">Суспільний клуб</string>
     <string name="poi_health_post">Медпункт</string>
+    <string name="poi_shop_water">Крамниця питної води</string>
+    <string name="poi_pest_control">Крамниця боротьби зі шкідниками</string>
+    <string name="poi_telecom_medium_coaxial">Середнє: коаксіальний кабель</string>
+    <string name="poi_telecom_medium_fibre">Середнє: волокно</string>
+    <string name="poi_telecom_medium_copper">Середнє: мідь</string>
+    <string name="poi_telecom_exchange">Автоматична телефонна станція</string>
 </resources>
