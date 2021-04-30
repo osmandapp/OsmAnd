@@ -4122,4 +4122,10 @@
     <string name="route_line_use_gradient_coloring">خط مسیر بر اساس مشخصات ارتفاعی مسیر رنگ‌آمیزی خواهد شد.</string>
     <string name="shared_string_min_height">حداقل ارتفاع</string>
     <string name="shared_string_max_height">حداکثر ارتفاع</string>
+    <string name="shared_string_itinerary">برنامهٔ سفر</string>
+    <string name="language_description">زبان موردنظر و نوع راهنمایی گفتاری را انتخاب کنید.</string>
+    <string name="tts_description">با روش موتور متن به گفتار (TTS) بیان‌کردن همه‌نوع دستورالعملی امکان‌پذیر خواهد بود: نام خیابان، فرمان گردش، نام نقاط توجه و... .</string>
+    <string name="tts_title">TTS</string>
+    <string name="recorded_description">گفتار ضبط‌شده کیفیت بهتری دارد، اما فقط عبارت‌های ازپیش‌آماده برای دستورالعمل‌های گردش را خواهید شنید. بیان‌کردن نام خیابان یا نام نقاط توجه ممکن نخواهد بود.</string>
+    <string name="use_system_language">استفاده از زبان سیستم</string>
 </resources>

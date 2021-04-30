@@ -4095,4 +4095,13 @@
     <string name="srtm_unit_format">Formato de unidad de las curvas de nivel</string>
     <string name="srtm_download_list_help_message">OsmAnd proporciona datos de curvas de nivel en metros y pies. Deberás volver a descargar el archivo para cambiar el formato.</string>
     <string name="srtm_download_single_help_message">Marca el formato necesario. Deberás volver a descargar el archivo para cambiar el formato.</string>
+    <string name="route_line_use_gradient_coloring">La línea de ruta se colorea según el perfil de elevación de la ruta.</string>
+    <string name="shared_string_max_height">Altura máx.</string>
+    <string name="shared_string_min_height">Altura mín.</string>
+    <string name="language_description">Marca el idioma preferido y el tipo de indicaciones por voz.</string>
+    <string name="tts_description">El sistema de texto a voz (TTS) puede pronunciar todo tipo de avisos: nombres de calles, indicaciones de giro, nombres de PDI, etc.</string>
+    <string name="tts_title">TTS</string>
+    <string name="recorded_description">La voz grabada suena mejor, pero sólo puede pronunciar frases pregrabadas: indicaciones de giro. No puede anunciar los nombres de las calles o de los PDI.</string>
+    <string name="use_system_language">Usar idioma del sistema</string>
+    <string name="shared_string_itinerary">Itinerario</string>
 </resources>

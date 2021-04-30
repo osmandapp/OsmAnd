@@ -10,8 +10,8 @@
     <string name="rendering_attr_appMode_description">Оптимізувати мапу</string>
     <string name="rendering_attr_contourLines_description">Мінімальний рівень масштабу з відображенням ізоліній висот:</string>
     <string name="rendering_attr_contourLines_name">Показувати горизонталі</string>
-    <string name="rendering_attr_hmRendered_description">Відображати більше деталей на мапі.</string>
-    <string name="rendering_attr_hmRendered_name">Більше деталей</string>
+    <string name="rendering_attr_hmRendered_description">Відображати більше подробиць на мапі.</string>
+    <string name="rendering_attr_hmRendered_name">Більше подробиць</string>
     <string name="local_index_routing_data">Дані роутингу</string>
     <string name="navigate_point_format">Формат</string>
     <string name="poi_search_desc">Пошук POI</string>
@@ -219,8 +219,8 @@
     <string name="local_index_upload_gpx_description">Вивантажити GPX-файли до спільноти OSM, що покращує мапи.</string>
     <string name="local_index_items_uploaded">%1$d з %2$d об’єктів вивантажено.</string>
     <string name="local_index_mi_upload_gpx">Відправити в OSM</string>
-    <string name="show_more_map_detail">Показати більше деталей</string>
-    <string name="show_more_map_detail_descr">Відображати деякі деталі векторної мапи (дороги тощо) на менших рівнях масштабування.</string>
+    <string name="show_more_map_detail">Показати більше подробиць</string>
+    <string name="show_more_map_detail_descr">Відображати деякі подробиці векторної мапи (дороги тощо) на менших рівнях масштабування.</string>
     <string name="favourites_delete_multiple_succesful">Точки Закладок видалені.</string>
     <string name="favorite_delete_multiple">Ви збираєтесь видалити %1$d Закладок та %2$d груп Закладок. Ви впевнені?</string>
     <string name="favorite_home_category">Вдома</string>
@@ -1299,7 +1299,7 @@
     <string name="rendering_value_pedestrian_name">Пішки</string>
     <string name="record_plugin_description">Це розширення додає функцію запису та збереження ваших пересувань вручну, торканням віджету записування GPX на екрані мапи, або автоматично записувати всі ваші подорожі у файл GPX.
 \n
-\nЗаписаними маршрутами можна поділитись з вашими друзями або іншими учасниками спільноти OSM. Атлети можуть користуватися записаними маршрутами для відстеження власних тренувань. Основні деталі маршрутів наявний безпосередньо в OsmAnd, наприклад: час проходження кола, середня швидкість тощо, звісно, записані маршрути, також можна проаналізувати за допомогою сторонніх інструментів.</string>
+\nЗаписаними маршрутами можна поділитись з вашими друзями або іншими учасниками спільноти OSM. Атлети можуть користуватися записаними маршрутами для відстеження власних тренувань. Основні подробиці маршрутів наявні безпосередньо в OsmAnd, наприклад: час проходження кола, середня швидкість тощо, звісно, записані маршрути, також можна проаналізувати за допомогою сторонніх інструментів.</string>
     <string name="save_track_to_gpx_globally_descr">Загальний запис розташування до файлу GPX можна ввімкнути або вимкнути кнопкою запис GPX на екрані з мапою.</string>
     <string name="save_track_interval_globally">Інтервал записування</string>
     <string name="rendering_attr_publicTransportMode_name">Маршрути автобусів, тролейбусів та шатлів</string>
@@ -1515,7 +1515,7 @@
 \nЦей вигляд можна знедіяти тут або змінити на інший, змінивши „Стиль мапи“ на потрібний в „Налаштування мапи“.</string>
     <string name="plugin_ski_descr">Розширення забезпечує вам доступ до даних про гірськолижні траси, маршрути для бігових лиж, гірськолижні спуски, фунікулери та підіймачі. Маршрути та спуски позначені різними кольорами залежно від їх складності та зображені з використанням спеціального „зимового“ стилю мапи, який застосовує „снігові“ кольори зимового пейзажу.
 \n
-\nУ разі задіювання цього вигляду, стиль мапи змінюється на „Winter and ski“, показуючи усі деталі пейзажу так, як вони виглядають взимку. Цей вигляд може бути знедіяний тут, або якщо ви зміните „Стиль мапи“ в меню „Налаштування мапи“ на бажаний вигляд.</string>
+\nУ разі задіювання цього вигляду, стиль мапи змінюється на „Winter and ski“, показуючи усі подробиці пейзажу так, як вони виглядають взимку. Цей вигляд може бути знедіяний тут, або якщо ви зміните „Стиль мапи“ в меню „Налаштування мапи“ на бажаний вигляд.</string>
     <string name="rendering_attr_hideHouseNumbers_name">Номери будинків</string>
     <string name="application_dir_change_warning3">Перемістити файли даних OsmAnd в нове місце\?</string>
     <string name="specified_directiory_not_writeable">Не вдалося створити мапи у вказаній теці</string>
@@ -2671,7 +2671,7 @@
     <string name="light_rs_render_descr">Простий і контрастний стиль для автомобільної навігації. Зручний для очей в нічному режимі. Ключові особливості: горизонталі, контрастні помаранчеві дороги, менш відволікаючі другорядні об\'єкти мапи.</string>
     <string name="topo_render_descr">Для походів і катання на природі. Читання на відкритому повітрі. Контрастні дороги та природні об’єкти, різні типи маршрутів, розширені варіанти контуру, більше подробиць. Регулювання цілісності поверхні відрізняє якість дороги. Нічного режиму немає.</string>
     <string name="mapnik_render_descr">Старий типовий стиль \"Mapnik\". Подібні кольори до \'Mapnik\'.</string>
-    <string name="touring_view_render_descr">Туристичний стиль з високим контрастом і щонайбільшою деталізацією. Включає всі типові параметри стилю OsmAnd, відображаючи при цьому найдетальніші відомості, зокрема дороги, путі та інші шляхи подорожі. Чіткий \"туристичний атлас\" відрізняє типи доріг. Підходить для денного, нічного та зовнішнього використання.</string>
+    <string name="touring_view_render_descr">Туристичний стиль з високим контрастом і щонайбільшою деталізацією. Включає всі типові параметри стилю OsmAnd, відображаючи при цьому найдокладніші відомості, зокрема дороги, стежки та інші шляхи подорожі. Чіткий \"туристичний атлас\" відрізняє типи доріг. Підходить для денного, нічного та зовнішнього використання.</string>
     <string name="default_render_descr">Стиль загального призначення. Густі міста показані чисто. Особливості горизонталей, маршрутів, якості поверхні, обмеження доступу, дорожні щити, надання доріжок за шкалою SAC, пункти біловодних видів спорту.</string>
     <string name="open_wikipedia_link_online">Відкрити посилання Вікіпедії в мережі</string>
     <string name="open_wikipedia_link_online_description">Посилання буде відкрите в веб-браузері.</string>
@@ -3363,7 +3363,7 @@
     <string name="multimedia_use_system_camera">Використовувати системний застосунок</string>
     <string name="multimedia_photo_play_sound">Звук затвору камери</string>
     <string name="osm_authorization_success">Авторизація пройшла успішно</string>
-    <string name="rearrange_categories">Перевпорядкувати категорії</string>
+    <string name="rearrange_categories">Перевпорядкування категорій</string>
     <string name="create_custom_categories_list_promo">Змінюйте впорядкування списку, приховайте непотрібні категорії. Ви можете імпортувати або експортувати всі зміни з профілями.</string>
     <string name="add_new_custom_category_button_promo">Ви можете додати нову власну категорію, вибравши одну або кілька необхідних категорій.</string>
     <string name="shared_string_available">Доступні</string>
@@ -3375,7 +3375,7 @@
     <string name="sunset_at">Захід сонця о %1$s</string>
     <string name="sunrise_at">Схід сонця о %1$s</string>
     <string name="accessibility_mode_disabled">Режим доступності вимкнено у вашому Android.</string>
-    <string name="reset_to_default_category_button_promo">Скидання до типових після установки усталить упорядкування.</string>
+    <string name="reset_to_default_category_button_promo">Скидання до типових відновить впорядкування до початкового стану.</string>
     <string name="use_system_screen_timeout">Використовувати системний час очікування екрана</string>
     <string name="use_system_screen_timeout_promo">Типово вимкнено, якщо OsmAnd працює на передньому плані, час очікування не закінчується.
 \n
@@ -3647,7 +3647,7 @@
     <string name="weight_limit_description">Вкажіть вагу транспортного засобу тому, що для вантажівок можуть застосовуватися деякі маршрутні обмеження.</string>
     <string name="shared_string_tones">тонни</string>
     <string name="shared_string_meters">метри</string>
-    <string name="details_dialog_decr">Показати або приховати додаткові деталі на мапі</string>
+    <string name="details_dialog_decr">Показати або приховати додаткові подробиці на мапі</string>
     <string name="shared_string_night_map">Нічна мапа</string>
     <string name="width_limit_description">Вкажіть ширину автомобіля, для великих транспортних засобів можуть застосовуватися обмеження на деяких маршрутах.</string>
     <string name="height_limit_description">Вкажіть висоту автомобіля, для великих транспортних засобів можуть застосовуватися обмеження на деяких маршрутах.</string>
@@ -4100,4 +4100,5 @@
     <string name="tts_title">TTS</string>
     <string name="recorded_description">Записаний голос звучить краще, але може вимовляти лише попередньо записані фрази: вмикати настанови. Не може оголошувати назви вулиць або цікавих об\'єктів (POI).</string>
     <string name="use_system_language">Використовувати мову системи</string>
+    <string name="shared_string_itinerary">Путівник</string>
 </resources>

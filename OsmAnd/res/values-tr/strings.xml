@@ -57,7 +57,7 @@
     <string name="map_widget_back_to_loc">Neredeyim</string>
     <string name="map_widget_lock_screen">Kilitle</string>
     <string name="map_widget_compass">Pusula</string>
-    <string name="map_widget_reset">Öntanımlılara sıfırla</string>
+    <string name="map_widget_reset">Öntanımlı değerlere sıfırla</string>
     <string name="map_widget_speed">Hız</string>
     <string name="map_widget_distance">Varış Noktası</string>
     <string name="bg_service_screen_lock">Kilitle</string>
@@ -2587,7 +2587,7 @@
     <string name="screen_alerts_descr">Navigasyon sırasında sol altta gösterilen uyarılar.</string>
     <string name="switch_profile">Profil değiştir</string>
     <string name="language_and_output">Dil ve çıkış</string>
-    <string name="reset_to_default">Öntanımlılara sıfırla</string>
+    <string name="reset_to_default">Öntanımlı değerlere sıfırla</string>
     <string name="manage_profiles_descr">Profil oluşturma, içe aktarma, düzenleme</string>
     <string name="manage_profiles">Uygulama profillerini yönet…</string>
     <string name="application_profile_changed">Uygulama profili \"%s\" olarak değiştirildi</string>
@@ -3377,7 +3377,7 @@
     <string name="sunset_at">%1$s\'de gün batımı</string>
     <string name="sunrise_at">%1$s\'de gün doğumu</string>
     <string name="accessibility_mode_disabled">Android sisteminizde erişilebilirlik modu kapalı.</string>
-    <string name="reset_to_default_category_button_promo">\'Öntanımlılara sıfırla\', sıralama düzenini öntanımlı kurulum durumuna geri döndürecektir.</string>
+    <string name="reset_to_default_category_button_promo">\'Öntanımlı değerlere sıfırla\', sıralama düzenini öntanımlı kurulum durumuna geri döndürecektir.</string>
     <string name="use_system_screen_timeout">Sistemin ekran zaman aşımını kullan</string>
     <string name="use_system_screen_timeout_promo">Öntanımlı olarak devre dışıdır: OsmAnd ön planda çalışırken ekran zaman aşımına uğramayacaktır. 
 \n 
@@ -4103,4 +4103,5 @@
     <string name="tts_title">TTS</string>
     <string name="recorded_description">Kaydedilen ses daha iyi ses çıkarır, ancak yalnızca önceden kaydedilmiş cümleleri telaffuz edebilir: dönüş talimatları. Sokak veya POI adlarını söyleyemez.</string>
     <string name="use_system_language">Sistem dilini kullan</string>
+    <string name="shared_string_itinerary">Seyahat planı</string>
 </resources>

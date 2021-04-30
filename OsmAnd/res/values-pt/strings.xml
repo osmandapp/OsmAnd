@@ -4105,4 +4105,5 @@
     <string name="tts_title">TTS</string>
     <string name="recorded_description">A voz gravada soa melhor, mas só consegue pronunciar frases pré-gravadas: instruções de viragem. Não pode anunciar nomes de ruas ou nomes de POI.</string>
     <string name="use_system_language">Usar idioma do sistema</string>
+    <string name="shared_string_itinerary">Itinerário</string>
 </resources>

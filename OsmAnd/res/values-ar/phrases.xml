@@ -131,7 +131,7 @@
     <string name="poi_alt_name">الاسم البديل</string>
     <string name="poi_official_name">الاسم الرسمي</string>
     <string name="poi_village">قرية</string>
-    <string name="poi_town">مدينة صغيرة</string>
+    <string name="poi_town">مدينة</string>
     <string name="poi_website">موقع إنترنت</string>
     <string name="poi_emergency_phone">هاتف الطوارئ</string>
     <string name="poi_recycling_mobile_phones">هواتف نقالة</string>
@@ -1321,7 +1321,7 @@
     <string name="poi_material_plastic">المادة: البلاستيك</string>
     <string name="poi_material_glass">المادة: زجاج</string>
     <string name="poi_material_aluminium">المواد : الألومنيوم</string>
-    <string name="poi_site_type_city">مدينة</string>
+    <string name="poi_site_type_city">المدينة</string>
     <string name="poi_historic_farm">مزرعة تاريخية</string>
     <string name="poi_historic_railway_station">محطة سكة حديد تاريخية</string>
     <string name="poi_artist_name">فنان</string>
@@ -1500,7 +1500,7 @@
     <string name="poi_substation_type">النوع</string>
     <string name="poi_books_type">كتب</string>
     <string name="poi_denotation">إشارة</string>
-    <string name="poi_allotments">أراضي مخصصات</string>
+    <string name="poi_allotments">الحدائق/المزارع المحصصة</string>
     <string name="poi_denomination_shaktism">شاكتيزم</string>
     <string name="poi_bird_hide">مكان لمراقبة الطيور</string>
     <string name="poi_passing_place">مكان المرور</string>
@@ -1638,7 +1638,7 @@
     <string name="poi_orienteering">التوجيه</string>
     <string name="poi_ice_stock">مخزون الثلج</string>
     <string name="poi_bowls">كرة</string>
-    <string name="poi_place_allotments">أراضي مخصصات</string>
+    <string name="poi_place_allotments">الحدائق/المزارع المحصصة</string>
     <string name="poi_register_office">مكتب السجل المدني</string>
     <string name="poi_bunker_silo">غرفة تحميل</string>
     <string name="poi_recycling_hardcore">صلب</string>
@@ -3299,7 +3299,7 @@
     <string name="poi_departures_board_yes">نعم</string>
     <string name="poi_departures_board_no">لوحة المغادرين: لا</string>
     <string name="poi_elevator">مصعد</string>
-    <string name="poi_city_block">كتلة المدينة</string>
+    <string name="poi_city_block">مساحة المدينة</string>
     <string name="poi_borough">محافظة</string>
     <string name="poi_give_box">صندوق العطايا</string>
     <string name="poi_traffic_signals_arrow_no">أسهم: لا</string>

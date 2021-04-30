@@ -4092,4 +4092,10 @@
     <string name="route_line_use_gradient_coloring">A linha da rota será colorida dependendo do perfil de elevação da rota.</string>
     <string name="shared_string_min_height">Altura mínima</string>
     <string name="shared_string_max_height">Altura máxima</string>
+    <string name="language_description">Selecione o idioma preferido e o tipo de orientação por voz.</string>
+    <string name="tts_description">Text-to-Speech (TTS) pode pronunciar todos os tipos de instruções: nomes de rua, instrução de volta, nomes de POI etc.</string>
+    <string name="tts_title">TTS</string>
+    <string name="recorded_description">A voz gravada soa melhor, mas pode pronunciar apenas frases pré-gravadas: alternância de instruções. Não é possível anunciar nomes de rua ou nomes de POI.</string>
+    <string name="use_system_language">Usar o idioma do sistema</string>
+    <string name="shared_string_itinerary">Itinerário</string>
 </resources>

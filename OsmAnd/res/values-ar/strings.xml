@@ -4170,4 +4170,5 @@
     <string name="tts_title">تحويل النص إلى كلام</string>
     <string name="recorded_description">الصوت المسجل يبدو أفضل، ولكن يمكن نطق العبارات المسجلة مسبقا فقط: تشغيل التعليمات. لا يمكن الإعلان عن أسماء الشوارع أونقاط الاهتمام.</string>
     <string name="use_system_language">استخدام لغة النظام</string>
+    <string name="shared_string_itinerary">مسار الرحلة</string>
 </resources>
