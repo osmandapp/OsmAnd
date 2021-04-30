@@ -130,8 +130,8 @@
     <string name="local_openstreetmap_settings_descr">Перегляд і керування OSM-POI/примітками, збереженими у базі даних пристрою.</string>
     <string name="live_monitoring_interval_descr">Укажіть інтервал надсилання даних.</string>
     <string name="live_monitoring_interval">Інтервал надсилання даних</string>
-    <string name="live_monitoring_url_descr">Укажіть веб-адресу з наступними параметрами: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
-    <string name="live_monitoring_url">Мережеве відстеження веб-адрес</string>
+    <string name="live_monitoring_url_descr">Вкажіть вебадресу з такими параметрами: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
+    <string name="live_monitoring_url">Мережеве відстеження вебадрес</string>
     <string name="gpx_monitoring_disabled_warn">Записувати треки, використовуючи GPX-віджет або вибравши „Запис подорожей“ в Налаштуваннях.</string>
     <string name="show_current_gpx_title">Відображати пройдений шлях</string>
     <string name="free_version_message">Ви можете завантажити або оновити %1$s мап.</string>
@@ -698,7 +698,7 @@
     <string name="osmand_parking_event">Забрати автомобіль зі стоянки</string>
     <string name="osmand_parking_warning">Попередження</string>
     <string name="osmand_parking_warning_text">Повідомлення про прийом автомобіля було додано до Вашого календаря, і його можна редагувати чи видаляти там.</string>
-    <string name="osmand_parking_time_limit_title">Укажіть максимальний час стоянки</string>
+    <string name="osmand_parking_time_limit_title">Зазначте обмеження часу стоянки</string>
     <string name="osmand_parking_delete_confirm">Видалити позначку місця стоянки?</string>
     <string name="osmand_parking_delete">Вилучити позначку місця стоянки</string>
     <string name="osmand_parking_choose_type">Оберіть вид стоянки</string>
@@ -2939,7 +2939,7 @@
     <string name="choose_data_to_share">Оберіть, даними якого типу Ви хотіли б поділитися:</string>
     <string name="downloaded_maps">Мап завантажено</string>
     <string name="visited_screens">Екранів відвідано</string>
-    <string name="collected_data_descr">Укажіть, якими даними Ви дозволяєте OsmAnd-у ділитися.</string>
+    <string name="collected_data_descr">Визначте, якими даними ви дозволяєте OsmAnd ділитися.</string>
     <string name="downloaded_maps_collect_descr">Допомагає нам зрозуміти популярність на мапі країни та областей.</string>
     <string name="visited_screens_collect_descr">Допомагає нам зрозуміти, які можливості OsmAnd є найпопулярнішими.</string>
     <string name="privacy_and_security_change_descr">Натискаючи \"Дозволити\", Ви погоджуєтесь з нашими %1$s</string>
@@ -3682,7 +3682,7 @@
     <string name="app_mode_inline_skates">Роликові ковзани</string>
     <string name="use_volume_buttons_as_zoom_descr">Зміна масштабу мапи кнопками гучності пристрою.</string>
     <string name="use_volume_buttons_as_zoom">Масштабування кнопками гучності</string>
-    <string name="lenght_limit_description">Укажіть довжину вашого автомобіля, для довгих транспортних засобів можуть застосовуватися деякі обмеження на маршрутах.</string>
+    <string name="lenght_limit_description">Зазначте довжину вашого автомобіля, для довгих транспортних засобів можуть застосовуватися деякі обмеження на маршрутах.</string>
     <string name="quick_action_remove_next_destination">Видалити найближчу точку призначення</string>
     <string name="please_provide_point_name_error">Укажіть назву пункту</string>
     <string name="quick_action_remove_next_destination_descr">Видаляє наступний пункт призначення з маршруту. Якщо це кінцевий пункт призначення, навігація зупиниться.</string>
