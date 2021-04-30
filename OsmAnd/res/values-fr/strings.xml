@@ -4080,10 +4080,10 @@
     <string name="announce_when_exceeded">Annoncer en cas de dépassement</string>
     <string name="output">Sortie</string>
     <string name="srtm_download_list_help_message">OsmAnd fournit des données sur les courbes de niveau en mètres et en pieds. Vous devrez à nouveau télécharger le fichier pour modifier le format.</string>
-    <string name="srtm_download_single_help_message">Veuillez sélectionner le format souhaité. Vous devrez à nouveau télécharger le fichier pour modifier le format.</string>
-    <string name="srtm_unit_format">Format d\'unité pour les courbes de niveau</string>
+    <string name="srtm_download_single_help_message">Veuillez sélectionner (pour modifier le format, vous devrez re-télécharger le fichier).</string>
+    <string name="srtm_unit_format">Unité des courbes de niveau</string>
     <string name="shared_string_feet">pieds</string>
-    <string name="route_line_use_gradient_coloring">Le trait de l\'itinéraire sera coloré selon la pente.</string>
+    <string name="route_line_use_gradient_coloring">Le trait de l\'itinéraire est coloré selon la pente.</string>
     <string name="shared_string_min_height">Hauteur min.</string>
     <string name="shared_string_max_height">Hauteur max.</string>
     <string name="use_system_language">Utiliser la langue du système</string>
