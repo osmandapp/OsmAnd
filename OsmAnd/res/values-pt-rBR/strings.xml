@@ -3947,7 +3947,7 @@
     <string name="announcement_time_arrive">Chegue ao destino</string>
     <string name="shared_string_turn">Virar</string>
     <string name="announcement_time_intervals">Intervalos de tempo e distância</string>
-    <string name="announcement_time_descr">O tempo de anúncio de diferentes comandos de voz depende do tipo de prompt, velocidade de navegação atual e velocidade de navegação padrão.</string>
+    <string name="announcement_time_descr">O tempo do anúncio de diferentes prompts de voz depende do tipo de prompt, da velocidade de navegação atual e da velocidade de navegação padrão.</string>
     <string name="announcement_time_title">Hora do anúncio</string>
     <string name="start_recording">Comece a gravar</string>
     <string name="show_track_on_map">Mostrar trilha no mapa</string>
@@ -3965,12 +3965,12 @@
     <string name="routing_engine_vehicle_type_racingbike">Bicicleta de corrida</string>
     <string name="routing_engine_vehicle_type_mtb">MTB</string>
     <string name="message_server_error">Erro de servidor: %1$s</string>
-    <string name="message_name_is_already_exists">O nome já existe</string>
+    <string name="message_name_is_already_exists">Nome já existe</string>
     <string name="context_menu_edit_descr">Editar descrição</string>
     <string name="delete_waypoints">Apagar ponto fixo</string>
     <string name="copy_to_map_markers">Copiar para marcadores de mapa</string>
     <string name="copy_to_map_favorites">Copiar para favoritos</string>
-    <string name="delete_online_routing_engine">Excluir este mecanismo de roteamento online\?</string>
+    <string name="delete_online_routing_engine">Remover este mecanismo de roteamento online\?</string>
     <string name="context_menu_read_full">Ler na íntegra</string>
     <string name="upload_photo">Carregando</string>
     <string name="upload_photo_completed">Carreamento concluído</string>
@@ -3992,7 +3992,7 @@
     <string name="activity_type_snowmobile_name">Moto de neve</string>
     <string name="activity_type_riding_name">Equitação</string>
     <string name="activity_type_racing_name">Corrida</string>
-    <string name="activity_type_mountainbike_name">Mountainbike</string>
+    <string name="activity_type_mountainbike_name">Mountain bike</string>
     <string name="activity_type_cycling_name">Ciclismo</string>
     <string name="activity_type_hiking_name">Caminhada</string>
     <string name="activity_type_running_name">Corrida</string>
@@ -4000,11 +4000,11 @@
     <string name="activity_type_offroad_name">Fora de estrada</string>
     <string name="activity_type_car_name">Carro</string>
     <string name="select_segments">Selecionar os segmentos</string>
-    <string name="select_segments_description">%1$s contém mais de um segmento, você precisa selecionar a parte necessária para a navegação.</string>
+    <string name="select_segments_description">%1$s contém mais de um segmento, você precisa especificar a parte para a navegação.</string>
     <string name="temporary_conditional_routing_descr">Use as restrições de estrada que estão ativas agora no mapa</string>
     <string name="routing_attr_short_way_description">Rota mais curta otimizada (economia de energia)</string>
     <string name="routing_attr_driving_style_description">Selecione o propósito de condução para obter um trajeto mais curto, mais rápido ou mais seguro</string>
-    <string name="snap_to_road_descr">O ícone de localização atual será ajustado à rota de navegação atual</string>
+    <string name="snap_to_road_descr">O ícone da posição atual se ajustará à rota de navegação atual</string>
     <string name="map_orientation_threshold_descr">Não gire a visualização do mapa se a velocidade for inferior a um limite</string>
     <string name="restart">Reiniciar</string>
     <string name="shared_strings_all_regions">Todas as regiões</string>
@@ -4033,23 +4033,23 @@
     <string name="copy_poi_name">Copiar nome de POI</string>
     <string name="quick_action_show_hide_title">Mostrar/Ocultar</string>
     <string name="shared_string_interval">Intervalo</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Ocultar reserva natural, áreas protegidas e limites de parque nacional</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Ocultar reserva natural, áreas protegidas e limites de parque nacional.</string>
     <string name="map_widget_distance_by_tap">Distância por toque</string>
     <string name="track_has_no_altitude">A trilha não contém dados de altitude.</string>
     <string name="track_has_no_speed">A trilha não contém dados de velocidade.</string>
-    <string name="select_another_colorization">Selecione outro tipo de colorização.</string>
+    <string name="select_another_colorization">Selecione outro tipo de cor.</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">Limites naturais</string>
     <string name="segments_count">Segmento %1$d</string>
     <string name="trip_recording_save_and_continue">Salvar e continuar</string>
     <string name="lost_data_warning">Todos os dados não salvos serão perdidos.</string>
-    <string name="trip_recording_logging_interval_info">O intervalo de registro define o período de tempo no qual OsmAnd solicitará os dados de posição de localização atual.</string>
+    <string name="trip_recording_logging_interval_info">O intervalo de registro define o período de tempo no qual OsmAnd solicitará os dados da posição atual.</string>
     <string name="show_start_dialog">Mostrar caixa de diálogo inicial</string>
-    <string name="trip_recording_show_start_dialog_setting">Se desativado, a gravação começará logo após tocar no widget ou item de menu, pulando a caixa de diálogo de confirmação.</string>
+    <string name="trip_recording_show_start_dialog_setting">Se desativado, a gravação começará imediatamente após tocar no widget ou item de menu, pulando a caixa de diálogo de confirmação.</string>
     <string name="customize_route_line">Personalizar linha de rota</string>
     <string name="shared_string_route_line">Linha de rota</string>
-    <string name="route_line_use_map_style_appearance">A linha de rota seria usada %1$s especificado no estilo de mapa selecionado: %2$s.</string>
-    <string name="specify_color_for_map_mode">Especifique a cor para o modo de mapa: %1$s.</string>
-    <string name="release_4_0_beta">"• Adicionada opção para baixar curvas de nível em pés
+    <string name="route_line_use_map_style_appearance">Use o estilo de mapa (%2$s) padrão %1$s.</string>
+    <string name="specify_color_for_map_mode">Especifique a cor para o modo de mapa %1$s.</string>
+    <string name="release_4_0_beta">"• Adicionada opção para baixar cuevas de níveis em pés
 \n
 \n  • Plano de paisagem da rota: guias adicionadas para alternar entre pontos ou gráficos
 \n
@@ -4057,7 +4057,7 @@
 \n
 \n  • As trilhas agora podem ser coloridas por altitude, velocidade ou inclinação.
 \n
-\n  • Adicionada opção para alterar a aparência da linha da rota de navegação
+\n  • Adicionada opção para alterar a aparência da linha de rota.
 \n
 \n  • Caixa de diálogo \"Gravação de viagem\" atualizada
 \n
@@ -4086,10 +4086,10 @@
     <string name="output">Saída</string>
     <string name="map_quick_action_pattern">%1$s → …</string>
     <string name="shared_string_feet">pés</string>
-    <string name="srtm_unit_format">Formato da unidade de curvas de nível</string>
+    <string name="srtm_unit_format">Variante da unidade de curvas de nível</string>
     <string name="srtm_download_list_help_message">OsmAnd fornece dados de linhas de contorno em metros e pés. Você precisará baixar novamente o arquivo para alterar o formato.</string>
-    <string name="srtm_download_single_help_message">Selecione o formato necessário. Você precisará baixar novamente o arquivo para alterar o formato.</string>
-    <string name="route_line_use_gradient_coloring">A linha da rota será colorida dependendo do perfil de elevação da rota.</string>
+    <string name="srtm_download_single_help_message">Selecione a variante. Você precisará baixar novamente o arquivo para alterar o formato.</string>
+    <string name="route_line_use_gradient_coloring">A linha da rota é colorida pela inclinação da elevação.</string>
     <string name="shared_string_min_height">Altura mínima</string>
     <string name="shared_string_max_height">Altura máxima</string>
     <string name="language_description">Selecione o idioma preferido e o tipo de orientação por voz.</string>
