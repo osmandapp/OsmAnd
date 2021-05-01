@@ -4162,7 +4162,7 @@
     <string name="srtm_download_list_help_message">OsmAnd يوفر بيانات الخطوط الكنتورية بالأمتار والقدم. ستحتاج إلى إعادة تنزيل الملف لتغيير التنسيق.</string>
     <string name="srtm_download_single_help_message">الرجاء تحديد التنسيق المطلوب. ستحتاج إلى إعادة تنزيل الملف لتغيير التنسيق.</string>
     <string name="shared_string_feet">قدم</string>
-    <string name="route_line_use_gradient_coloring">سيتم تلوين خط المسار اعتمادا على ملف تعريف الارتفاع للمسار.</string>
+    <string name="route_line_use_gradient_coloring">خط المسار ملون حسب ارتفاع المنحدر .</string>
     <string name="shared_string_min_height">أدنى. ارتفاع</string>
     <string name="shared_string_max_height">اقصى. ارتفاع</string>
     <string name="language_description">حدد اللغة المفضلة ونوع التوجيه الصوتي.</string>
