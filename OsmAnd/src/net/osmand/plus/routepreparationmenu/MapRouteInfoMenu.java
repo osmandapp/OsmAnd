@@ -97,6 +97,7 @@ import net.osmand.plus.routepreparationmenu.cards.PublicTransportCard;
 import net.osmand.plus.routepreparationmenu.cards.PublicTransportNotFoundSettingsWarningCard;
 import net.osmand.plus.routepreparationmenu.cards.PublicTransportNotFoundWarningCard;
 import net.osmand.plus.routepreparationmenu.cards.SimpleRouteCard;
+import net.osmand.plus.routepreparationmenu.cards.SuggestMapsDownloadWarningCards;
 import net.osmand.plus.routepreparationmenu.cards.TracksCard;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.IRouteInformationListener;
@@ -679,6 +680,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				menuCards.add(new NauticalBridgeHeightWarningCard(mapActivity));
 			} else if (app.getTargetPointsHelper().hasTooLongDistanceToNavigate()) {
 				menuCards.add(new LongDistanceWarningCard(mapActivity));
+			} else if (app.getRoutingHelper().isOfflineSuggestedMaps()) {
+				menuCards.add(new SuggestMapsDownloadWarningCards(mapActivity));
 			}
 		} else {
 			// Home/work card

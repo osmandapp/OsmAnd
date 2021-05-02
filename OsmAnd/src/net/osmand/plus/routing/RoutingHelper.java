@@ -10,6 +10,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.ValueHolder;
 import net.osmand.data.LatLon;
+import net.osmand.map.WorldRegion;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -36,6 +37,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 public class RoutingHelper {
 
@@ -63,6 +65,18 @@ public class RoutingHelper {
 	private boolean isRoutePlanningMode = false;
 	private boolean isPauseNavigation = false;
 
+	private boolean isOfflineSuggestedMaps;
+
+	public Set<WorldRegion> getSuggestedOfflineMaps() {
+		return suggestedOfflineMaps;
+	}
+
+	public void setSuggestedOfflineMaps(Set<WorldRegion> suggestedOfflineMaps) {
+		this.suggestedOfflineMaps = suggestedOfflineMaps;
+	}
+
+	private Set<WorldRegion> suggestedOfflineMaps;
+
 	private GPXRouteParamsBuilder currentGPXRoute = null;
 
 	private RouteCalculationResult route = new RouteCalculationResult("");
@@ -82,6 +96,14 @@ public class RoutingHelper {
 	private long deviateFromRouteDetected = 0;
 	//private long wrongMovementDetected = 0;
 	private boolean voiceRouterStopped = false;
+
+	public boolean isOfflineSuggestedMaps() {
+		return isOfflineSuggestedMaps;
+	}
+
+	public void setOfflineSuggestedMaps(boolean offlineSuggestedMaps) {
+		isOfflineSuggestedMaps = offlineSuggestedMaps;
+	}
 
 	public boolean isDeviatedFromRoute() {
 		return isDeviatedFromRoute;

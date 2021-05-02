@@ -66,7 +66,7 @@ public class FileNameTranslationHelper {
 		}
 
 		if (regions != null) {
-			return regions.getLocaleName(basename, true);
+			return regions.getLocaleName(basename, true, false);
 		}
 
 		return null;
@@ -76,7 +76,7 @@ public class FileNameTranslationHelper {
 										int terrainNameRes) {
 		basename = basename.replace(" ", "_");
 		String terrain = ctx.getString(terrainNameRes);
-		String locName = regions.getLocaleName(basename.trim(), true);
+		String locName = regions.getLocaleName(basename.trim(), true, false);
 		return ctx.getString(R.string.ltr_or_rtl_combine_via_space, locName, "(" + terrain + ")");
 	}
 

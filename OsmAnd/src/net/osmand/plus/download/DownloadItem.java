@@ -41,11 +41,15 @@ public abstract class DownloadItem {
 	}
 
 	public String getVisibleName(Context ctx, OsmandRegions osmandRegions) {
-		return type.getVisibleName(this, ctx, osmandRegions, true);
+		return type.getVisibleName(this, ctx, osmandRegions, true, false);
 	}
 
 	public String getVisibleName(Context ctx, OsmandRegions osmandRegions, boolean includingParent) {
-		return type.getVisibleName(this, ctx, osmandRegions, includingParent);
+		return type.getVisibleName(this, ctx, osmandRegions, includingParent, false);
+	}
+
+	public String getVisibleName(Context ctx, OsmandRegions osmandRegions, boolean includingParent, boolean parentFirst) {
+		return type.getVisibleName(this, ctx, osmandRegions, includingParent, true);
 	}
 
 	public String getVisibleDescription(OsmandApplication ctx) {
@@ -63,7 +67,7 @@ public abstract class DownloadItem {
 	@Nullable
 	public abstract String getAdditionalDescription(Context ctx);
 
-	protected abstract double getSizeToDownloadInMb();
+	public abstract double getSizeToDownloadInMb();
 
 	public abstract double getArchiveSizeMB();
 

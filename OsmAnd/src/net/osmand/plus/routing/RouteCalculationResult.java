@@ -12,6 +12,7 @@ import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.QuadRect;
+import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
@@ -28,6 +29,7 @@ import org.apache.commons.logging.Log;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
 
@@ -59,6 +61,7 @@ public class RouteCalculationResult {
 	protected int cacheCurrentTextDirectionInfo = -1;
 	protected List<RouteDirectionInfo> cacheAgreggatedDirections;
 	protected List<LocationPoint> locationPoints = new ArrayList<LocationPoint>();
+	protected final Set<WorldRegion> downloadMaps;
 
 	// params
 	protected final ApplicationMode appMode;
@@ -81,6 +84,26 @@ public class RouteCalculationResult {
 		this.errorMessage = errorMessage;
 		this.routingTime = 0;
 		this.loadedTiles = 0;
+		this.downloadMaps =null;
+		this.visitedSegments = 0;
+		this.calculateTime = 0;
+		this.intermediatePoints = new int[0];
+		this.locations = new ArrayList<Location>();
+		this.segments = new ArrayList<RouteSegmentResult>();
+		this.listDistance = new int[0];
+		this.directions = new ArrayList<RouteDirectionInfo>();
+		this.alarmInfo = new ArrayList<AlarmInfo>();
+		this.routeService = null;
+		this.appMode = null;
+		this.routeRecalcDistance = 0;
+		this.routeVisibleAngle = 0;
+	}
+
+	public RouteCalculationResult(Set<WorldRegion> suggestedOfflineMaps) {
+		this.downloadMaps = suggestedOfflineMaps;
+		this.errorMessage = null;
+		this.routingTime = 0;
+		this.loadedTiles = 0;
 		this.visitedSegments = 0;
 		this.calculateTime = 0;
 		this.intermediatePoints = new int[0];
@@ -97,6 +120,7 @@ public class RouteCalculationResult {
 
 	public RouteCalculationResult(List<Location> list, List<RouteDirectionInfo> directions, RouteCalculationParams params, List<LocationPoint> waypoints, boolean addMissingTurns) {
 		this.routingTime = 0;
+		this.downloadMaps =null;
 		this.loadedTiles = 0;
 		this.calculateTime = 0;
 		this.visitedSegments = 0;
@@ -166,7 +190,7 @@ public class RouteCalculationResult {
 		if (calculateFirstAndLastPoint) {
 			introduceFirstPointAndLastPoint(locations, computeDirections, segments, start, end, ctx);
 		}
-		
+		this.downloadMaps =null;
 		this.locations = Collections.unmodifiableList(locations);
 		this.segments = Collections.unmodifiableList(segments);
 		this.listDistance = new int[locations.size()];

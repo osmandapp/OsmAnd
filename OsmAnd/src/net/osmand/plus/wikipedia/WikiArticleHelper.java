@@ -212,7 +212,7 @@ public class WikiArticleHelper {
 					.replace("_" + IndexConstants.BINARY_MAP_VERSION, "")
 					.replace(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT_ZIP, "")
 					.toLowerCase();
-			return osmandRegions.getLocaleName(regionName, false);
+			return osmandRegions.getLocaleName(regionName, false, false);
 		}
 		return "";
 	}

@@ -9,12 +9,15 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.Route;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.LocationsHolder;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
+import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
+import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
@@ -22,6 +25,7 @@ import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.OnlineRoutingResponse;
 import net.osmand.plus.render.NativeOsmandLibrary;
+import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.CommonPreference;
@@ -93,6 +97,7 @@ public class RouteProvider {
 
 	public RouteCalculationResult calculateRouteImpl(RouteCalculationParams params) {
 		long time = System.currentTimeMillis();
+		OsmandApplication app = params.ctx;
 		if (params.start != null && params.end != null) {
 			if(log.isInfoEnabled()){
 				log.info("Start finding route from " + params.start + " to " + params.end +" using " + 
@@ -100,26 +105,39 @@ public class RouteProvider {
 			}
 			try {
 				RouteCalculationResult res;
+				boolean isOfflineMapsNeeded = !getSuggestedOfflineMap(getGeneralLocation(params), app).isEmpty();
 				boolean calcGPXRoute = params.gpxRoute != null && (!params.gpxRoute.points.isEmpty()
 						|| (params.gpxRoute.reverse && !params.gpxRoute.routePoints.isEmpty()));
 				if (calcGPXRoute && !params.gpxRoute.calculateOsmAndRoute) {
-					res = calculateGpxRoute(params);
+					if (isOfflineMapsNeeded) {
+						return new RouteCalculationResult(getSuggestedOfflineMap(getGeneralLocation(params), app));
+					} else {
+						res = calculateGpxRoute(params);
+					}
 				} else if (params.mode.getRouteService() == RouteService.OSMAND) {
-					res = findVectorMapsRoute(params, calcGPXRoute);
+					if (isOfflineMapsNeeded) {
+						return new RouteCalculationResult(getSuggestedOfflineMap(getGeneralLocation(params), app));
+					} else {
+						res = findVectorMapsRoute(params, calcGPXRoute);
+					}
 				} else if (params.mode.getRouteService() == RouteService.BROUTER) {
 					res = findBROUTERRoute(params);
 				} else if (params.mode.getRouteService() == RouteService.ONLINE) {
 					res = findOnlineRoute(params);
 				} else if (params.mode.getRouteService() == RouteService.STRAIGHT ||
 						params.mode.getRouteService() == RouteService.DIRECT_TO) {
-					res = findStraightRoute(params);
+					if (isOfflineMapsNeeded) {
+						return new RouteCalculationResult(getSuggestedOfflineMap(getGeneralLocation(params), app));
+					} else {
+						res = findStraightRoute(params);
+					}
 				} else {
 					res = new RouteCalculationResult("Selected route service is not available");
 				}
 				if(log.isInfoEnabled() ){
 					log.info("Finding route contained " + res.getImmutableAllLocations().size() + " points for " + (System.currentTimeMillis() - time) + " ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				}
-				return res; 
+				return res;
 			} catch (IOException e) {
 				log.error("Failed to find route ", e); //$NON-NLS-1$
 			} catch (ParserConfigurationException e) {
@@ -130,7 +148,7 @@ public class RouteProvider {
 				log.error("Failed to find route ", e); //$NON-NLS-1$
 			}
 		}
-		return new RouteCalculationResult(null);
+		return new RouteCalculationResult("");
 	}
 
 	public RouteCalculationResult recalculatePartOfflineRoute(RouteCalculationResult res, RouteCalculationParams params) {
@@ -1202,6 +1220,61 @@ public class RouteProvider {
 				points.add(0, mp);
 			}
 		}
+
 		return new RouteCalculationResult(segments, computeDirections, params, null, false);
 	}
+
+	private Set<WorldRegion> getSuggestedOfflineMap(LinkedList<Location> points, OsmandApplication app) throws IOException {
+
+		Map<WorldRegion, BinaryMapDataObject> selectedObjects = new LinkedHashMap<>();
+		for (int i = 0; i < points.size(); i++) {
+			final Location o = points.get(i);
+			LatLon latLonPoint = new LatLon(o.getLatitude(), o.getLongitude());
+			Map.Entry<WorldRegion, BinaryMapDataObject> worldRegion = app.getRegions().getSmallestBinaryMapDataObjectAt(latLonPoint);
+			String worldRegionName = worldRegion.getKey().getRegionDownloadName();
+			boolean isRegionDownload = checkIfObjectDownloaded(worldRegionName, app);
+			if (!isRegionDownload) {
+				selectedObjects.put(worldRegion.getKey(), worldRegion.getValue());
+			}
+		}
+		return selectedObjects.keySet();
+	}
+
+	private LinkedList<Location> getGeneralLocation(RouteCalculationParams params) {
+		LinkedList<Location> points = new LinkedList<>();
+		points.add(new Location("", params.start.getLatitude(), params.start.getLongitude()));
+		if (params.intermediates != null) {
+			for (LatLon l : params.intermediates) {
+				points.add(new Location("", l.getLatitude(), l.getLongitude()));
+			}
+		}
+		points.add(new Location("", params.end.getLatitude(), params.end.getLongitude()));
+		return points;
+	}
+
+	private LinkedList<Location> getMinimalDistanceLocation(LinkedList<Location> points) {
+		while (points.getFirst().distanceTo(points.getLast()) > MIN_STRAIGHT_DIST) {
+			Location mp = MapUtils.calculateMidPoint(points.getFirst(), points.getLast());
+			points.add(0, mp);
+		}
+
+		Location minimalDistance = new Location("", points.getLast().getLatitude() - points.getFirst().getLatitude(), points.getLast().getLongitude() - points.getFirst().getLongitude());
+		points.subList(0, points.size() - 2).clear();
+
+		while (points.getFirst().distanceTo(points.getLast()) >= MIN_STRAIGHT_DIST) {
+			Location mp = new Location("", points.getFirst().getLatitude() + minimalDistance.getLatitude(), points.getFirst().getLongitude() + minimalDistance.getLongitude());
+			points.add(0, mp);
+		}
+		return points;
+	}
+
+	private boolean checkIfObjectDownloaded(String downloadName, OsmandApplication app) {
+		ResourceManager rm = app.getResourceManager();
+		final String regionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName)
+				+ IndexConstants.BINARY_MAP_INDEX_EXT;
+		final String roadsRegionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName) + ".road"
+				+ IndexConstants.BINARY_MAP_INDEX_EXT;
+		return rm.getIndexFileNames().containsKey(regionName) || rm.getIndexFileNames().containsKey(roadsRegionName);
+	}
+
 }
