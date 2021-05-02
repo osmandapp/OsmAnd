@@ -695,7 +695,7 @@ public class ImportHelper {
 				} else {
 					fpCat = p.category;
 				}
-				FavouritePoint point = new FavouritePoint(p.lat, p.lon, p.name, fpCat, p.ele, 0);
+				FavouritePoint point = new FavouritePoint(p.lat, p.lon, p.name, fpCat, p.ele, p.time);
 				if (p.desc != null) {
 					point.setDescription(p.desc);
 				}
