@@ -3133,7 +3133,7 @@
     <string name="poi_motorcycle_type_scooter">Lambreta</string>
     <string name="poi_motorcycle_type_sportbike">Desportiva</string>
     <string name="poi_motorcycle_type_chopper">Chopper</string>
-    <string name="poi_motorcycle_type_offroad">Off-road</string>
+    <string name="poi_motorcycle_type_offroad">Todo o terreno</string>
     <string name="poi_motorcycle_type_dualsport">Trail</string>
     <string name="poi_motorcycle_type_standard">Comum</string>
     <string name="poi_generator_output_electricity_no">Saída (eletricidade): não</string>

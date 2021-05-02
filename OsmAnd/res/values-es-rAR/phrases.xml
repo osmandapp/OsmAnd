@@ -3929,4 +3929,11 @@
     <string name="poi_plateau">Meseta (altiplano)</string>
     <string name="poi_club_social">Club social</string>
     <string name="poi_health_post">Puesto de salud</string>
+    <string name="poi_pillory">Picota</string>
+    <string name="poi_shop_water">Venta de agua potable</string>
+    <string name="poi_pest_control">Control de plagas</string>
+    <string name="poi_telecom_medium_coaxial">Medio: coaxial</string>
+    <string name="poi_telecom_medium_fibre">Medio: fibra</string>
+    <string name="poi_telecom_medium_copper">Medio: cobre</string>
+    <string name="poi_telecom_exchange">Central telefónica</string>
 </resources>
