@@ -354,12 +354,12 @@ class RouteRecalculationHelper {
 						params.resultListener.onRouteCalculated(res);
 					}
 				} else {
-					if(!res.downloadMaps.isEmpty()){
-						routingHelper.setOfflineSuggestedMaps(true);
+					if (res.downloadMaps != null && !res.downloadMaps.isEmpty()) {
 						routingHelper.setSuggestedOfflineMaps(res.downloadMaps);
+					} else {
+						evalWaitInterval = Math.max(3000, routingThreadHelper.evalWaitInterval * 3 / 2); // for Issue #3899
+						evalWaitInterval = Math.min(evalWaitInterval, 120000);
 					}
-					evalWaitInterval = Math.max(3000, routingThreadHelper.evalWaitInterval * 3 / 2); // for Issue #3899
-					evalWaitInterval = Math.min(evalWaitInterval, 120000);
 				}
 			}
 			OsmandApplication app = routingHelper.getApplication();

@@ -65,16 +65,6 @@ public class RoutingHelper {
 	private boolean isRoutePlanningMode = false;
 	private boolean isPauseNavigation = false;
 
-	private boolean isOfflineSuggestedMaps;
-
-	public Set<WorldRegion> getSuggestedOfflineMaps() {
-		return suggestedOfflineMaps;
-	}
-
-	public void setSuggestedOfflineMaps(Set<WorldRegion> suggestedOfflineMaps) {
-		this.suggestedOfflineMaps = suggestedOfflineMaps;
-	}
-
 	private Set<WorldRegion> suggestedOfflineMaps;
 
 	private GPXRouteParamsBuilder currentGPXRoute = null;
@@ -97,20 +87,20 @@ public class RoutingHelper {
 	//private long wrongMovementDetected = 0;
 	private boolean voiceRouterStopped = false;
 
-	public boolean isOfflineSuggestedMaps() {
-		return isOfflineSuggestedMaps;
-	}
-
-	public void setOfflineSuggestedMaps(boolean offlineSuggestedMaps) {
-		isOfflineSuggestedMaps = offlineSuggestedMaps;
-	}
-
 	public boolean isDeviatedFromRoute() {
 		return isDeviatedFromRoute;
 	}
 
 	public boolean isRouteWasFinished() {
 		return routeWasFinished;
+	}
+
+	public Set<WorldRegion> getSuggestedOfflineMaps() {
+		return suggestedOfflineMaps;
+	}
+
+	public void setSuggestedOfflineMaps(Set<WorldRegion> suggestedOfflineMaps) {
+		this.suggestedOfflineMaps = suggestedOfflineMaps;
 	}
 
 	public RoutingHelper(OsmandApplication context) {
