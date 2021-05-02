@@ -3089,7 +3089,8 @@
     <string name="app_mode_campervan">Camping-car</string>
     <string name="rendering_attr_showLez_description">Afficher les zones à faible émission sur la carte (n\'influe pas sur le calcul d\'itinéraire).</string>
     <string name="rendering_attr_showLez_name">Afficher les zones à faibles émissions</string>
-    <string name="new_route_calculated_dist_dbg">Itinéraire : distance %1$s, durée %2$s \nCalculs : %3$.1f secondes, %4$d routes, %5$d tuiles)</string>
+    <string name="new_route_calculated_dist_dbg">Itinéraire : distance %1$s, durée %2$s
+\nCalculs : %3$.1f secondes, %4$d routes, %5$d tuiles</string>
     <string name="lang_oc">Occitan</string>
     <string name="app_mode_wagon">Wagon</string>
     <string name="app_mode_pickup_truck">Camionnette</string>
