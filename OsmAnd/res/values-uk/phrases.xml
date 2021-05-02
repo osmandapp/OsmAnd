@@ -3930,9 +3930,10 @@
     <string name="poi_club_social">Суспільний клуб</string>
     <string name="poi_health_post">Медпункт</string>
     <string name="poi_shop_water">Крамниця питної води</string>
-    <string name="poi_pest_control">Крамниця боротьби зі шкідниками</string>
+    <string name="poi_pest_control">Крамниця засобів боротьби зі шкідниками</string>
     <string name="poi_telecom_medium_coaxial">Середнє: коаксіальний кабель</string>
     <string name="poi_telecom_medium_fibre">Середнє: волокно</string>
     <string name="poi_telecom_medium_copper">Середнє: мідь</string>
     <string name="poi_telecom_exchange">Автоматична телефонна станція</string>
+    <string name="poi_pillory">Стовп ганьби</string>
 </resources>

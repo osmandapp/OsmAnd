@@ -41,12 +41,7 @@ public class AudioVideoNoteMenuBuilder extends MenuBuilder {
 		File file = recording.getFile();
 		if (file != null) {
 
-			DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(view.getContext());
-			DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(view.getContext());
-			Date date = new Date(recording.getFile().lastModified());
-			buildRow(view, R.drawable.ic_action_data, null, dateFormat.format(date) + " — " + timeFormat.format(date),
-					0, false, null, false, 0, false, null, false);
-
+			buildDateRow(view, recording.getFile().lastModified());
 			buildPlainMenuItems(view);
 
 			if (recording.isPhoto()) {
