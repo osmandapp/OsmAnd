@@ -4092,7 +4092,7 @@
     <string name="map_quick_action_pattern">%1$s → …</string>
     <string name="exit_number">Номер съезда</string>
     <string name="srtm_unit_format">Формат единиц на контурных линиях</string>
-    <string name="srtm_download_single_help_message">Выберите необходимый формат. Для изменения формата потребуется повторно загрузить файл.</string>
+    <string name="srtm_download_single_help_message">Выберите необходимый вариант. Для изменения формата потребуется повторно загрузить файл.</string>
     <string name="shared_string_feet">футы</string>
     <string name="srtm_download_list_help_message">OsmAnd предоставляет данные изолиний в метрах и футах. Для изменения формата потребуется повторно загрузить файл.</string>
     <string name="route_line_use_gradient_coloring">Линия маршрута будет окрашена в зависимости от профиля высоты маршрута.</string>
