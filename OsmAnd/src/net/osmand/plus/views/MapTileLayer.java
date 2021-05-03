@@ -25,9 +25,9 @@ import net.osmand.util.MapUtils;
 
 public class MapTileLayer extends BaseMapLayer {
 
-	protected static final int emptyTileDivisor = 16;
 	public static final int OVERZOOM_IN = 2;
-	
+	private static final int ADDITIONAL_TILE_CACHE = 3;
+
 	protected final boolean mainMap;
 	protected ITileSource map = null;
 	protected MapTileAdapter mapTileAdapter = null;
@@ -154,7 +154,8 @@ public class MapTileLayer extends BaseMapLayer {
 		int width = (int) Math.ceil(tilesRect.right - left);
 		int height = (int) Math.ceil(tilesRect.bottom + ellipticTileCorrection - top);
 
-		mgr.setMapTileLayerSizes(this, width * height);
+		int tiles = (width + ADDITIONAL_TILE_CACHE) * (height + ADDITIONAL_TILE_CACHE);
+		mgr.setMapTileLayerSizes(this, tiles);
 
 		boolean useInternet = (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) != null || OsmandPlugin.getEnabledPlugin(MapillaryPlugin.class) != null)
 				&& settings.isInternetConnectionAvailable() && map.couldBeDownloadedFromInternet();
