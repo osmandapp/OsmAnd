@@ -390,7 +390,7 @@
     <string name="maps_could_not_be_downloaded">Дана мапа не може бути завантажена</string>
     <string name="continuous_rendering">Безперервне відмалювання</string>
     <string name="continuous_rendering_descr">Відображати безперервне промальовування замість цілковитого зображення.</string>
-    <string name="rendering_exception">Не вдалося відобразити обрану область.</string>
+    <string name="rendering_exception">Не вдалося показати вибрану ділянку.</string>
     <string name="show_point_options">Використати розташування…</string>
     <string name="renderer_load_sucess">Візуалізатор завантажено</string>
     <string name="renderer_load_exception">Не вдалося завантажити відмальовувач.</string>
@@ -2697,7 +2697,7 @@
     <string name="wikivoyage_travel_guide">Туристичні путівники</string>
     <string name="wikivoyage_travel_guide_descr">Путівники до найцікавіших місць на планеті – всередині OsmAnd і без підключення до Інтернету.</string>
     <string name="clear_all_intermediates">Очистити усі проміжні точки</string>
-    <string name="increase_search_radius_to">Збільшити область пошуку до %1$s</string>
+    <string name="increase_search_radius_to">Розширити ділянку пошуку до %1$s</string>
     <string name="send_search_query_description">Ми відправимо Ваш пошуковий запит: \"%1$s\", а також Ваше місцерозташування. 
 \n 
 \n Особисті відомості не накопичуються, пошукові дані використовуються лише для покращення алгоритму пошуку.</string>
