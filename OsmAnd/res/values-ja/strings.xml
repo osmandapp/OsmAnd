@@ -272,7 +272,7 @@ MB)をダウンロードしますか?</string>
     <string name="transport_to_go_before">to go before</string>
     <string name="transport_stops_to_pass">通過する乗り場</string>
     <string name="transport_route_distance">旅程の距離</string>
-    <string name="transport">交通機関</string>
+    <string name="transport">交通</string>
     <string name="shared_string_ok">OK</string>
     <string name="show_transport_over_map_description">マップ上に公共交通機関乗降場を表示</string>
     <string name="show_transport_over_map">交通機関乗降場を表示</string>
@@ -1721,7 +1721,7 @@ POIの更新は利用できません</string>
     <string name="access_from_map_description">メニューボタンでメニューではなくダッシュボードを開きます</string>
     <string name="access_from_map">マップ画面から開く</string>
     <string name="show_on_start_description">ONでOsmAnd起動時ダッシュボードを自動的に表示します</string>
-    <string name="copied_to_clipboard">クリップボードにコピーしました</string>
+    <string name="copied_to_clipboard">クリップボードにコピー</string>
     <string name="osm_save_offline">オフラインで保存</string>
     <string name="osm_edit_modified_poi">OSMのPOIが変更されました</string>
     <string name="osm_edit_deleted_poi">OSMのPOIが削除されました</string>
@@ -3373,7 +3373,7 @@ POIの更新は利用できません</string>
     <string name="multimedia_use_system_camera">システムアプリを使用</string>
     <string name="multimedia_photo_play_sound">カメラシャッター音</string>
     <string name="osm_authorization_success">認証に成功しました</string>
-    <string name="rearrange_categories">カテゴリーの並べ替え</string>
+    <string name="rearrange_categories">カテゴリの並べ替え</string>
     <string name="create_custom_categories_list_promo">リストの並び順を変更したり、不要なカテゴリを非表示にします。プロファイルデータのインポート/エクスポートも可能です。</string>
     <string name="add_new_custom_category_button_promo">一つあるいは複数のカテゴリーを選択して、新しいカスタムカテゴリーを追加できます。</string>
     <string name="shared_string_available">利用可</string>
