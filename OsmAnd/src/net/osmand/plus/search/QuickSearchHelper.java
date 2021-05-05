@@ -201,22 +201,20 @@ public class QuickSearchHelper implements ResourceListener {
 
 			List<SelectedGpxFile> list = app.getSelectedGpxHelper().getSelectedGPXFiles();
 			for (SelectedGpxFile selectedGpx : list) {
-				if (selectedGpx != null) {
-					for (WptPt point : selectedGpx.getGpxFile().getPoints()) {
-						SearchResult sr = new SearchResult(phrase);
-						sr.localeName = point.name;
-						sr.object = point;
-						sr.priority = SEARCH_WPT_OBJECT_PRIORITY;
-						sr.objectType = ObjectType.WPT;
-						sr.location = new LatLon(point.getLatitude(), point.getLongitude());
-						//sr.localeRelatedObjectName = app.getRegions().getCountryName(sr.location);
-						sr.relatedObject = selectedGpx.getGpxFile();
-						sr.preferredZoom = 17;
-						if (phrase.getFullSearchPhrase().length() <= 1 && phrase.isNoSelectedType()) {
-							resultMatcher.publish(sr);
-						} else if (phrase.getFirstUnknownNameStringMatcher().matches(sr.localeName)) {
-							resultMatcher.publish(sr);
-						}
+				for (WptPt point : selectedGpx.getGpxFile().getPoints()) {
+					SearchResult sr = new SearchResult(phrase);
+					sr.localeName = point.name;
+					sr.object = point;
+					sr.priority = SEARCH_WPT_OBJECT_PRIORITY;
+					sr.objectType = ObjectType.WPT;
+					sr.location = new LatLon(point.getLatitude(), point.getLongitude());
+					//sr.localeRelatedObjectName = app.getRegions().getCountryName(sr.location);
+					sr.relatedObject = selectedGpx.getGpxFile();
+					sr.preferredZoom = 17;
+					if (phrase.getFullSearchPhrase().length() <= 1 && phrase.isNoSelectedType()) {
+						resultMatcher.publish(sr);
+					} else if (phrase.getFirstUnknownNameStringMatcher().matches(sr.localeName)) {
+						resultMatcher.publish(sr);
 					}
 				}
 			}
@@ -514,9 +512,6 @@ public class QuickSearchHelper implements ResourceListener {
 		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
 			List<SelectedGpxFile> selectedGpxFiles = app.getSelectedGpxHelper().getSelectedGPXFiles();
 			for (SelectedGpxFile selectedGpxFile : selectedGpxFiles) {
-				if (selectedGpxFile == null) {
-					continue;
-				}
 				GPXFile gpxFile = selectedGpxFile.getGpxFile();
 				String relativePath = GpxUiHelper.getGpxFileRelativePath(app, gpxFile.path);
 				GPXInfo gpxInfo = GpxUiHelper.getGpxInfoByFileName(app, relativePath);
