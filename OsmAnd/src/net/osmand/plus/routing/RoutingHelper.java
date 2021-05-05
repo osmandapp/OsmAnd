@@ -10,7 +10,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.ValueHolder;
 import net.osmand.data.LatLon;
-import net.osmand.map.WorldRegion;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -20,8 +19,8 @@ import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.helpers.enums.MetricsConstants;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
-import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
+import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -37,7 +36,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 public class RoutingHelper {
 
@@ -65,8 +63,6 @@ public class RoutingHelper {
 	private boolean isRoutePlanningMode = false;
 	private boolean isPauseNavigation = false;
 
-	private Set<WorldRegion> suggestedOfflineMaps;
-
 	private GPXRouteParamsBuilder currentGPXRoute = null;
 
 	private RouteCalculationResult route = new RouteCalculationResult("");
@@ -93,14 +89,6 @@ public class RoutingHelper {
 
 	public boolean isRouteWasFinished() {
 		return routeWasFinished;
-	}
-
-	public Set<WorldRegion> getSuggestedOfflineMaps() {
-		return suggestedOfflineMaps;
-	}
-
-	public void setSuggestedOfflineMaps(Set<WorldRegion> suggestedOfflineMaps) {
-		this.suggestedOfflineMaps = suggestedOfflineMaps;
 	}
 
 	public RoutingHelper(OsmandApplication context) {

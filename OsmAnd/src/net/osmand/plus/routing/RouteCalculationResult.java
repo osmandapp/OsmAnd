@@ -61,6 +61,11 @@ public class RouteCalculationResult {
 	protected int cacheCurrentTextDirectionInfo = -1;
 	protected List<RouteDirectionInfo> cacheAgreggatedDirections;
 	protected List<LocationPoint> locationPoints = new ArrayList<LocationPoint>();
+
+	public Set<WorldRegion> getDownloadMaps() {
+		return downloadMaps;
+	}
+
 	protected final Set<WorldRegion> downloadMaps;
 
 	// params
@@ -69,8 +74,8 @@ public class RouteCalculationResult {
 	protected final double routeRecalcDistance;
 	protected final double routeVisibleAngle;
 
-	// Note always currentRoute > get(currentDirectionInfo).routeOffset, 
-	//         but currentRoute <= get(currentDirectionInfo+1).routeOffset 
+	// Note always currentRoute > get(currentDirectionInfo).routeOffset,
+	//         but currentRoute <= get(currentDirectionInfo+1).routeOffset
 	protected int currentDirectionInfo = 0;
 	protected int currentRoute = 0;
 	protected int nextIntermediate = 0;
@@ -120,7 +125,7 @@ public class RouteCalculationResult {
 
 	public RouteCalculationResult(List<Location> list, List<RouteDirectionInfo> directions, RouteCalculationParams params, List<LocationPoint> waypoints, boolean addMissingTurns) {
 		this.routingTime = 0;
-		this.downloadMaps =null;
+		this.downloadMaps = null;
 		this.loadedTiles = 0;
 		this.calculateTime = 0;
 		this.visitedSegments = 0;
@@ -136,7 +141,7 @@ public class RouteCalculationResult {
 		}
 		if(addMissingTurns) {
 			removeUnnecessaryGoAhead(localDirections);
-			addMissingTurnsToRoute(locations, localDirections, params.start,params.end, 
+			addMissingTurnsToRoute(locations, localDirections, params.start,params.end,
 					params.mode, params.ctx, params.leftSide);
 			// if there is no closest points to start - add it
 			introduceFirstPointAndLastPoint(locations, localDirections, null, params.start, params.end, params.ctx);

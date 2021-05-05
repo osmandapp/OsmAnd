@@ -113,7 +113,7 @@ public class SuggestMapsDownloadWarningCards extends WarningCard {
 				&& !app.getDownloadThread().getIndexes().isDownloadedFromInternet
 				&& !app.getDownloadThread().getIndexes().downloadFromInternetFailed;
 
-		Set<WorldRegion> isStandardMap = mapActivity.getRoutingHelper().getSuggestedOfflineMaps();
+		Set<WorldRegion> isStandardMap = mapActivity.getRoutingHelper().getRoute().getDownloadMaps();
 		List<DownloadItem> suggestedMaps = new ArrayList<>();
 		if (!downloadIndexes) {
 			for (WorldRegion temp : isStandardMap) {
