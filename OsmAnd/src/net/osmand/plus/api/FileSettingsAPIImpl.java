@@ -11,6 +11,7 @@ import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
 
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 
 public class FileSettingsAPIImpl implements SettingsAPI {
@@ -23,7 +24,7 @@ public class FileSettingsAPIImpl implements SettingsAPI {
 		this.file = file;
 		if (file.exists()) {
 			Properties props = new Properties();
-			FileInputStream fis = new FileInputStream(file);
+			FileInputStream fis = PlatformUtil.getFileInputStream(file);
 			props.load(fis);
 			for (Entry<Object, Object> entry : props.entrySet()) {
 				String k = entry.getKey().toString();

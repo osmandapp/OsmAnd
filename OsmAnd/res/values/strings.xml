@@ -11,7 +11,9 @@
 	Thx - Hardy
 
 -->
-
+    <string name="storage_directory_scoped">Scoped storage</string>
+    <string name="choose_scoped_storage">Choose scoped storage</string>
+    <string name="choose_scoped_storage_root_error">This folder might not be accessible on a new versions of Android OS</string>
     <string name="shared_string_max_height">Max. height</string>
     <string name="shared_string_min_height">Min. height</string>
     <string name="route_line_use_gradient_coloring">Route line will be colorized depending on the elevation profile of the route.</string>

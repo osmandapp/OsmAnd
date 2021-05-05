@@ -33,6 +33,7 @@ package com.google.protobuf;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.RandomAccessFile;
+import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -539,6 +540,7 @@ public final class CodedInputStream {
 
   private final byte[] buffer;
   private RandomAccessFile raf;
+  private FileChannel channel;
   private int bufferSize;
   private int bufferSizeAfterLimit;
   private int bufferPos;
@@ -583,6 +585,15 @@ public final class CodedInputStream {
 		bufferPos = 0;
 		totalBytesRetired = 0;
 		this.raf = raf;
+		input = null;
+	}
+
+	private CodedInputStream(final FileChannel channel) {
+		buffer = new byte[BUFFER_SIZE];
+		this.bufferSize = 0;
+		bufferPos = 0;
+		totalBytesRetired = 0;
+		this.channel = channel;
 		input = null;
 	}
 

@@ -3,18 +3,27 @@ package net.osmand.plus.settings.backend;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.UriPermission;
 import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Build;
+import android.os.Build.VERSION_CODES;
 import android.os.Environment;
+import android.provider.DocumentsContract;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.core.util.Pair;
 
+import net.osmand.DocumentFileCompat;
 import net.osmand.FileUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -1841,6 +1850,7 @@ public class OsmandSettings {
 	}
 
 	public static final String EXTERNAL_STORAGE_DIR = "external_storage_dir"; //$NON-NLS-1$
+	public static final String SCOPED_STORAGE_DIR = "scoped_storage_dir";
 
 	public static final String EXTERNAL_STORAGE_DIR_V19 = "external_storage_dir_V19"; //$NON-NLS-1$
 	public static final String EXTERNAL_STORAGE_DIR_TYPE_V19 = "external_storage_dir_type_V19"; //$NON-NLS-1$
@@ -1848,7 +1858,8 @@ public class OsmandSettings {
 	public static final int EXTERNAL_STORAGE_TYPE_EXTERNAL_FILE = 1; // ctx.getExternalFilesDirs(null)
 	public static final int EXTERNAL_STORAGE_TYPE_INTERNAL_FILE = 2; // ctx.getFilesDir()
 	public static final int EXTERNAL_STORAGE_TYPE_OBB = 3; // ctx.getObbDirs
-	public static final int EXTERNAL_STORAGE_TYPE_SPECIFIED = 4;
+	public static final int EXTERNAL_STORAGE_TYPE_SPECIFIED = 4; // manually specified
+	public static final int EXTERNAL_STORAGE_TYPE_SCOPED = 5; // scoped storage
 	public final OsmandPreference<Long> OSMAND_USAGE_SPACE = new LongPreference(this, "osmand_usage_space", 0).makeGlobal();
 
 
@@ -1915,7 +1926,7 @@ public class OsmandSettings {
 		return ctx.getNoBackupFilesDir();
 	}
 
-	@TargetApi(Build.VERSION_CODES.KITKAT)
+	@TargetApi(VERSION_CODES.KITKAT)
 	public File getExternalStorageDirectoryV19(ValueHolder<Integer> tp) {
 		int type = settingsAPI.getInt(globalPreferences, EXTERNAL_STORAGE_DIR_TYPE_V19, -1);
 		File location = getDefaultLocationV19();
@@ -1948,14 +1959,33 @@ public class OsmandSettings {
 					}
 				}
 			}
+		} else if (type == EXTERNAL_STORAGE_TYPE_SCOPED) {
+			if (isScopedStorageSpecified()) {
+				String locationStr = getRawDefaultLocationV19();
+				if (areScopedStoragePermissionsGranted(ctx, locationStr)) {
+					try {
+						return new DocumentFileCompat(ctx, locationStr).getFile();
+					} catch (Exception e) {
+						LOG.error(e.getMessage(), e);
+					}
+				}
+			}
+			location = getInternalAppPath();
+			if (tp != null) {
+				tp.value = EXTERNAL_STORAGE_TYPE_INTERNAL_FILE;
+			}
 		}
 		return location;
 	}
 
 	public File getDefaultLocationV19() {
-		String location = settingsAPI.getString(globalPreferences, EXTERNAL_STORAGE_DIR_V19,
-				getExternalStorageDirectoryPre19().getAbsolutePath());
+		String location = getRawDefaultLocationV19();
 		return new File(location);
+	}
+
+	private String getRawDefaultLocationV19() {
+		return settingsAPI.getString(globalPreferences, EXTERNAL_STORAGE_DIR_V19,
+				getExternalStorageDirectoryPre19().getAbsolutePath());
 	}
 
 	public boolean isExternalStorageDirectoryTypeSpecifiedV19() {
@@ -2022,6 +2052,83 @@ public class OsmandSettings {
 
 	public boolean setExternalStorageDirectoryPre19(String externalStorageDir) {
 		return settingsAPI.edit(globalPreferences).putString(EXTERNAL_STORAGE_DIR, externalStorageDir).commit();
+	}
+
+	public boolean isScopedStorageSupported() {
+		return Build.VERSION.SDK_INT >= VERSION_CODES.Q;
+	}
+
+	public boolean isScopedStorageRequired() {
+		return Build.VERSION.SDK_INT >= VERSION_CODES.Q;
+	}
+
+	public boolean isScopedStorageSpecified() {
+		return settingsAPI.contains(globalPreferences, SCOPED_STORAGE_DIR);
+	}
+
+	@RequiresApi(api = VERSION_CODES.KITKAT)
+	public boolean isScopedStorageInUse(@NonNull Context context) {
+		return getExternalStorageDirectoryTypeV19() == OsmandSettings.EXTERNAL_STORAGE_TYPE_SCOPED
+				&& isScopedStorageSpecified() && areScopedStoragePermissionsGranted(context);
+	}
+
+	@RequiresApi(api = VERSION_CODES.KITKAT)
+	public boolean areScopedStoragePermissionsGranted(@NonNull Context context) {
+		String scopedDir = getScopedStorageDirectory();
+		return scopedDir != null && areScopedStoragePermissionsGranted(context, scopedDir);
+	}
+
+	@RequiresApi(api = VERSION_CODES.KITKAT)
+	public boolean areScopedStoragePermissionsGranted(@NonNull Context context, @NonNull String scopedDir) {
+		ContentResolver contentResolver = context.getContentResolver();
+		if (contentResolver != null) {
+			List<UriPermission> permissions = contentResolver.getPersistedUriPermissions();
+			for (UriPermission p : permissions) {
+				Uri uri = p.getUri();
+				String persistedUriString = uri.toString();
+				if (persistedUriString.equals(scopedDir) && p.isWritePermission() && p.isReadPermission()) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	@RequiresApi(api = VERSION_CODES.O)
+	public void askScopedStoragePermission(@NonNull Activity activity, int reqestCode) {
+		Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
+		intent.addFlags(
+				Intent.FLAG_GRANT_READ_URI_PERMISSION
+				| Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+				| Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION
+				| Intent.FLAG_GRANT_PREFIX_URI_PERMISSION);
+		intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, Uri.fromFile(new File("/storage/emulated/0/osmand")));
+		activity.startActivityForResult(intent, reqestCode);
+	}
+
+	@Nullable
+	public String getScopedStorageDirectory() {
+		return settingsAPI.getString(globalPreferences, SCOPED_STORAGE_DIR, null);
+	}
+
+	public boolean setScopedStorageDirectory(@Nullable String scopedStorageDir) {
+		if (scopedStorageDir == null) {
+			return settingsAPI.edit(globalPreferences).remove(SCOPED_STORAGE_DIR).commit();
+		} else {
+			return settingsAPI.edit(globalPreferences).putString(SCOPED_STORAGE_DIR, scopedStorageDir).commit();
+		}
+	}
+
+	@Nullable
+	public File getScopedStorageDirectoryFile() {
+		String dir = getScopedStorageDirectory();
+		if (dir != null) {
+			String path = Uri.parse(dir).getPath();
+			if (path != null) {
+				return new File(path);
+			}
+		}
+		return null;
 	}
 
 	public Object getGlobalPreferences() {
@@ -2843,7 +2950,7 @@ public class OsmandSettings {
 	}
 
 	public boolean isSupportSystemDefaultTheme() {
-		return Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q;
+		return Build.VERSION.SDK_INT >= VERSION_CODES.Q;
 	}
 
 	public final CommonPreference<Boolean> FLUORESCENT_OVERLAYS =

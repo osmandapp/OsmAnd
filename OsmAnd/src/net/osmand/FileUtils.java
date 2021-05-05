@@ -1,5 +1,6 @@
 package net.osmand;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
@@ -183,6 +184,23 @@ public class FileUtils {
 			tempDir.mkdirs();
 		}
 		return tempDir;
+	}
+
+	public static boolean isWritable(@NonNull Context ctx, @NonNull File dirToTest) {
+		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
+		app.getSettings();
+		boolean isWriteable = true;
+		/*
+		try {
+			dirToTest.mkdirs();
+			File writeTestFile = File.createTempFile("osmand_", ".tmp", dirToTest);
+			isWriteable = writeTestFile.exists();
+			writeTestFile.delete();
+		} catch (IOException e) {
+			isWriteable = false;
+		}
+		 */
+		return isWriteable;
 	}
 
 	public static boolean isWritable(File dirToTest) {

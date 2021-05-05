@@ -220,6 +220,56 @@
 
 				</LinearLayout>
 
+				<View
+					android:id="@+id/divScopedStorage"
+					android:layout_width="match_parent"
+					android:layout_height="1dp"
+					android:layout_gravity="fill_horizontal"
+					android:background="@color/divider_color" />
+
+				<LinearLayout
+					android:id="@+id/scopedStorageRow"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="?attr/selectableItemBackground"
+					android:orientation="horizontal">
+
+					<androidx.appcompat.widget.AppCompatImageView
+						android:id="@+id/scopedStorageImageView"
+						android:layout_width="wrap_content"
+						android:layout_height="56dp"
+						android:paddingStart="@dimen/content_padding"
+						android:paddingLeft="@dimen/content_padding"
+						android:paddingEnd="@dimen/content_padding"
+						android:paddingRight="@dimen/content_padding"
+						android:scaleType="center"
+						osmand:srcCompat="@drawable/ic_action_phone"
+						tools:background="@color/color_warning" />
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_gravity="center_vertical"
+						android:orientation="vertical">
+
+						<TextView
+							android:id="@+id/scopedStorageTitle"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:text="@string/storage_directory_scoped"
+							android:textColor="?android:attr/textColorPrimary" />
+
+						<TextView
+							android:id="@+id/scopedStorageDescription"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:textColor="?android:attr/textColorSecondary"
+							tools:text="Free: 9 Gb" />
+
+					</LinearLayout>
+
+				</LinearLayout>
+
 			</LinearLayout>
 
 		</ScrollView>

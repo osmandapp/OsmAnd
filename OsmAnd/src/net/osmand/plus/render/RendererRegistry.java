@@ -195,11 +195,11 @@ public class RendererRegistry {
 
 	public InputStream getInputStream(String name) throws FileNotFoundException {
 		InputStream is;
-		if("default".equalsIgnoreCase(name)) {
+		if ("default".equalsIgnoreCase(name)) {
 			name = DEFAULT_RENDER;
 		} 
-		if(externalRenderers.containsKey(name)){
-			is = new FileInputStream(externalRenderers.get(name));
+		if (externalRenderers.containsKey(name)){
+			is = PlatformUtil.getFileInputStream(externalRenderers.get(name));
 		} else {
 			if (getInternalRender(name) == null) {
 				log.error("Rendering style not found: " + name);
@@ -207,7 +207,7 @@ public class RendererRegistry {
 			}
 			File fl = getFileForInternalStyle(name);
 			if (fl.exists()) {
-				is = new FileInputStream(fl);
+				is = PlatformUtil.getFileInputStream(fl);
 			} else {
 				copyFileForInternalStyle(name);
 				is = RenderingRulesStorage.class.getResourceAsStream(getInternalRender(name));

@@ -223,7 +223,7 @@ public abstract class MapRenderingTypes {
 			if(resourceName == null){
 				is = MapRenderingTypes.class.getResourceAsStream("rendering_types.xml"); //$NON-NLS-1$
 			} else {
-				is = new FileInputStream(resourceName);
+				is = PlatformUtil.getFileInputStream(resourceName);
 			}
 			long time = System.currentTimeMillis();
 			XmlPullParser parser = PlatformUtil.newXMLPullParser();

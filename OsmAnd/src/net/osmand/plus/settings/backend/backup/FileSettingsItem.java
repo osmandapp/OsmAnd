@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.IndexConstants;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.SrtmDownloadItem;
@@ -318,7 +319,7 @@ public class FileSettingsItem extends StreamSettingsItem {
 	public SettingsItemWriter<? extends SettingsItem> getWriter() {
 		if (!file.isDirectory()) {
 			try {
-				setInputStream(new FileInputStream(file));
+				setInputStream(PlatformUtil.getFileInputStream(file));
 			} catch (FileNotFoundException e) {
 				warnings.add(app.getString(R.string.settings_item_read_error, file.getName()));
 				SettingsHelper.LOG.error("Failed to set input stream from file: " + file.getName(), e);
@@ -353,7 +354,7 @@ public class FileSettingsItem extends StreamSettingsItem {
 							String zipEntryName = Algorithms.isEmpty(subtypeFolder)
 									? file.getName()
 									: file.getPath().substring(file.getPath().indexOf(subtypeFolder) - 1);
-							setInputStream(new FileInputStream(file));
+							setInputStream(PlatformUtil.getFileInputStream(file));
 							super.writeEntry(zipEntryName, zos);
 						}
 					}

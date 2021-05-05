@@ -311,7 +311,7 @@ public class CachedOsmandIndexes {
 
 	public void readFromFile(File f, int version) throws IOException {
 		long time = System.currentTimeMillis();
-		FileInputStream is = new FileInputStream(f);
+		FileInputStream is = PlatformUtil.getFileInputStream(f);
 		try {
 			storedIndex = OsmandIndex.OsmAndStoredIndex.newBuilder().mergeFrom(is).build();
 			hasChanged = false;

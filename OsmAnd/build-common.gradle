@@ -3,12 +3,12 @@ task printc {
 }
 
 android {
-	compileSdkVersion 29
-	buildToolsVersion "29.0.3"
+	compileSdkVersion 30
+	buildToolsVersion "30.0.3"
 	// compileNdkVersion "android-ndk-r17b"
 
 	defaultConfig {
-		targetSdkVersion 29
+		targetSdkVersion 30
 		multiDexEnabled true
 		vectorDrawables.useSupportLibrary = true
 	}
@@ -374,4 +374,5 @@ dependencies {
 	implementation 'com.jaredrummler:colorpicker:1.1.0'
 	implementation 'org.bouncycastle:bcpkix-jdk15on:1.56'
 	implementation 'com.google.android.play:core:1.9.1'
+	implementation 'androidx.documentfile:documentfile:1.0.1'
 }

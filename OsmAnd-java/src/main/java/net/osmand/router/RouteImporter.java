@@ -51,7 +51,7 @@ public class RouteImporter {
 		} else if (file != null) {
 			FileInputStream fis = null;
 			try {
-				fis = new FileInputStream(file);
+				fis = PlatformUtil.getFileInputStream(file);
 				gpxFile = GPXUtilities.loadGPXFile(fis);
 				parseRoute();
 				gpxFile.path = file.getAbsolutePath();

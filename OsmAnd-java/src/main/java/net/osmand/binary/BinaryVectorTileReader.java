@@ -5,6 +5,7 @@ import com.vividsolutions.jts.geom.GeometryFactory;
 import com.wdtinc.mapbox_vector_tile.adapt.jts.MvtReader;
 import com.wdtinc.mapbox_vector_tile.adapt.jts.TagKeyValueMapConverter;
 
+import net.osmand.PlatformUtil;
 import net.osmand.data.GeometryTile;
 
 import java.io.File;
@@ -17,6 +18,6 @@ public class BinaryVectorTileReader {
 	public static GeometryTile readTile(File file) throws IOException {
 		GeometryFactory geomFactory = new GeometryFactory();
 		return new GeometryTile(
-				MvtReader.loadMvt(new FileInputStream(file), geomFactory, new TagKeyValueMapConverter()));
+				MvtReader.loadMvt(PlatformUtil.getFileInputStream(file), geomFactory, new TagKeyValueMapConverter()));
 	}
 }

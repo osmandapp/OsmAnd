@@ -2285,7 +2285,7 @@ public class BinaryMapIndexReader {
 	private static List<Location> readGPX(File f) {
 		List<Location> res = new ArrayList<Location>();
 		try {
-			BufferedReader reader = new BufferedReader(getUTF8Reader(new FileInputStream(f)));
+			BufferedReader reader = new BufferedReader(getUTF8Reader(PlatformUtil.getFileInputStream(f)));
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dom = factory.newDocumentBuilder();
 //				{

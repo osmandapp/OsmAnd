@@ -109,6 +109,66 @@ public class Algorithms {
 		return s2.equals(s1);
 	}
 
+	public static String trimStart(String s, char c) {
+		if (!isEmpty(s)) {
+			boolean trimAll = true;
+			for (int i = 0; i < s.length(); i++) {
+				if (s.charAt(i) != c) {
+					if (i > 0) {
+						s = s.substring(i);
+					}
+					trimAll = false;
+					break;
+				}
+			}
+			if (trimAll) {
+				s = "";
+			}
+		}
+		return s;
+	}
+
+	public static String trimEnd(String s, char c) {
+		if (!isEmpty(s)) {
+			boolean trimAll = true;
+			for (int i = s.length() - 1; i >= 0 ; i--) {
+				if (s.charAt(i) != c) {
+					if (i < s.length() - 1) {
+						s = s.substring(0, i + 1);
+					}
+					trimAll = false;
+					break;
+				}
+			}
+			if (trimAll) {
+				s = "";
+			}
+		}
+		return s;
+	}
+
+	public static String trim(String s, char c) {
+		return trimStart(trimEnd(s, c), c);
+	}
+
+	public static String substringBefore(String s, String delimiter) {
+		return substringBefore(s, delimiter, s);
+	}
+
+	public static String substringBefore(String s, String delimiter, String missingDelimiterValue) {
+		int index = s.indexOf(delimiter);
+		return index == -1 ? missingDelimiterValue :  s.substring(0, index);
+	}
+
+	public static String substringAfter(String s, String delimiter) {
+		return substringAfter(s, delimiter, s);
+	}
+
+	public static String substringAfter(String s, String delimiter, String missingDelimiterValue) {
+		int index = s.indexOf(delimiter);
+		return index == -1 ? missingDelimiterValue : s.substring(index + 1);
+	}
+
 	public static long parseLongSilently(String input, long def) {
 		if (input != null && input.length() > 0) {
 			try {
@@ -349,7 +409,7 @@ public class Algorithms {
 		if (file.length() < 4) {
 			return false;
 		}
-		FileInputStream in = new FileInputStream(file);
+		FileInputStream in = PlatformUtil.getFileInputStream(file);
 		int test = readInt(in);
 		in.close();
 		return test == ZIP_FILE_SIGNATURE;
@@ -545,7 +605,7 @@ public class Algorithms {
 	public static void fileCopy(File src, File dst) throws IOException {
 		FileOutputStream fout = new FileOutputStream(dst);
 		try {
-			FileInputStream fin = new FileInputStream(src);
+			FileInputStream fin = PlatformUtil.getFileInputStream(src);
 			try {
 				Algorithms.streamCopy(fin, fout);
 			} finally {
@@ -926,7 +986,7 @@ public class Algorithms {
 
 	public static String getFileAsString(File file) {
 		try {
-			FileInputStream fin = new FileInputStream(file);
+			FileInputStream fin = PlatformUtil.getFileInputStream(file);
 			BufferedReader reader = new BufferedReader(new InputStreamReader(fin, "UTF-8"));
 			StringBuilder sb = new StringBuilder();
 			String line;
@@ -945,7 +1005,7 @@ public class Algorithms {
 	}
 
 	public static Map<String, String> parseStringsXml(File file) throws IOException, XmlPullParserException {
-		InputStream is = new FileInputStream(file);
+		InputStream is = PlatformUtil.getFileInputStream(file);
 		XmlPullParser parser = PlatformUtil.newXMLPullParser();
 		Map<String, String> map = new HashMap<>();
 		parser.setInput(is, "UTF-8");

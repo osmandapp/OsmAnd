@@ -414,7 +414,7 @@ public class TileSourceManager {
 				return null;
 			
 			ByteArrayOutputStream bous = new ByteArrayOutputStream();
-			FileInputStream fis = new FileInputStream(f);
+			FileInputStream fis = PlatformUtil.getFileInputStream(f);
 			Algorithms.streamCopy(fis, bous);
 			fis.close();
 			bous.close();
@@ -448,7 +448,7 @@ public class TileSourceManager {
 			File metainfo = new File(dir, ".metainfo"); //$NON-NLS-1$
 			if (metainfo.exists()) {
 				BufferedReader reader = new BufferedReader(new InputStreamReader(
-						new FileInputStream(metainfo), "UTF-8")); //$NON-NLS-1$
+						PlatformUtil.getFileInputStream(metainfo), "UTF-8")); //$NON-NLS-1$
 				String line;
 				String key = null;
 				while ((line = reader.readLine()) != null) {
@@ -554,7 +554,7 @@ public class TileSourceManager {
 			try {
 				if (readUrl.exists()) {
 					BufferedReader reader = new BufferedReader(new InputStreamReader(
-							new FileInputStream(readUrl), "UTF-8"));
+							PlatformUtil.getFileInputStream(readUrl), "UTF-8"));
 					url = reader.readLine();
 					url = TileSourceTemplate.normalizeUrl(url);
 					reader.close();

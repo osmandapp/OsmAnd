@@ -156,7 +156,7 @@ public class NetworkUtils {
 			}
 			ous.write(("content-disposition: form-data; name=\"" + formName + "\"; filename=\"" + filename + "\"\r\n").getBytes()); //$NON-NLS-1$ //$NON-NLS-2$
 			ous.write(("Content-Type: application/octet-stream\r\n\r\n").getBytes()); //$NON-NLS-1$
-			InputStream fis = new FileInputStream(fileToUpload);
+			InputStream fis = PlatformUtil.getFileInputStream(fileToUpload);
 			BufferedInputStream bis = new BufferedInputStream(fis, 20 * 1024);
 			ous.flush();
 			if (gzip) {

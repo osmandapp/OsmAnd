@@ -347,7 +347,7 @@ public class NativeLibrary {
 			}
 			try {
 				ByteArrayOutputStream ous = new ByteArrayOutputStream();
-				FileInputStream fis = new FileInputStream(f);
+				FileInputStream fis = PlatformUtil.getFileInputStream(f);
 				Algorithms.streamCopy(fis, ous);
 				fis.close();
 				System.out.println("FONT " + name);

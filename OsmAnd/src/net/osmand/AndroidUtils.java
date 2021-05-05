@@ -27,6 +27,8 @@ import android.os.Build.VERSION_CODES;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.StatFs;
+import android.os.storage.StorageManager;
+import android.os.storage.StorageVolume;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
@@ -57,6 +59,7 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.annotation.StringRes;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
@@ -71,6 +74,7 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -82,6 +86,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.UUID;
 
 import static android.content.Context.POWER_SERVICE;
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
@@ -267,7 +272,12 @@ public class AndroidUtils {
 	}
 
 	public static String getFreeSpace(Context ctx, File dir) {
-		long size = AndroidUtils.getAvailableSpace(dir);
+		long size;
+		if (Build.VERSION.SDK_INT >= VERSION_CODES.Q) {
+			size = AndroidUtils.getAvailableSpace(ctx, dir);
+		} else {
+			size = AndroidUtils.getAvailableSpace(dir);
+		}
 		return AndroidUtils.formatSize(ctx, size);
 	}
 
@@ -882,6 +892,47 @@ public class AndroidUtils {
 				}
 			} catch (IllegalArgumentException e) {
 				LOG.error(e);
+			}
+		}
+		return -1;
+	}
+
+	@RequiresApi(api = VERSION_CODES.O)
+	public static long getAvailableSpace(@NonNull Context context, @NonNull File path) {
+		StorageManager storageManager = context.getApplicationContext().getSystemService(StorageManager.class);
+		if (storageManager != null) {
+			try {
+				UUID uuidForPath = storageManager.getUuidForPath(path);
+				return storageManager.getAllocatableBytes(uuidForPath);
+			} catch (IOException e) {
+				StorageVolume volume = null;
+				String pathStr = path.getAbsolutePath();
+				if (pathStr.startsWith("/tree/primary:")) {
+					volume = storageManager.getPrimaryStorageVolume();
+				} else {
+					for (StorageVolume v : storageManager.getStorageVolumes()) {
+						if (pathStr.startsWith("/tree/" + v.getUuid() + ":")) {
+							volume = v;
+							break;
+						}
+					}
+				}
+				if (volume != null) {
+					try {
+						File directory = volume.getDirectory();
+						if (directory != null) {
+							try {
+								UUID uuidForPath = storageManager.getUuidForPath(directory);
+								return storageManager.getAllocatableBytes(uuidForPath);
+							} catch (IOException ex) {
+								StatFs fs = new StatFs(directory.getAbsolutePath());
+								return fs.getAvailableBlocksLong() * fs.getBlockSizeLong();
+							}
+						}
+					} catch (Exception ex) {
+						LOG.error(ex);
+					}
+				}
 			}
 		}
 		return -1;

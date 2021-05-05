@@ -1,11 +1,30 @@
 package net.osmand;
 
+import android.content.Context;
+import android.net.Uri;
+import android.os.Build;
+import android.os.ParcelFileDescriptor;
+import android.os.ParcelFileDescriptor.AutoCloseInputStream;
 import android.util.Xml;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.documentfile.provider.DocumentFile;
+
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.settings.backend.OsmandSettings;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlSerializer;
+
+import java.io.File;
+import java.io.FileDescriptor;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.lang.ref.WeakReference;
 
 /**
  * That class is replacing of standard LogFactory due to 
@@ -21,7 +40,11 @@ import org.xmlpull.v1.XmlSerializer;
  *  
  */
 public class PlatformUtil {
+
 	public static String TAG = "net.osmand"; //$NON-NLS-1$
+
+	private static WeakReference<Context> ctxRef;
+
 	private static class OsmandLogImplementation implements Log {
 		
 		private final String fullName;
@@ -170,6 +193,40 @@ public class PlatformUtil {
 	public static XmlSerializer newSerializer() {
 		return Xml.newSerializer();
 	}
-	
 
+	public static void setContext(@Nullable Context ctx) {
+		if (ctx == null) {
+			ctxRef = null;
+		} else {
+			ctxRef = new WeakReference<>(ctx);
+		}
+	}
+
+	@NonNull
+	public static FileInputStream getFileInputStream(@NonNull String path) throws FileNotFoundException {
+		return getFileInputStream(new File(path));
+	}
+
+	@NonNull
+	public static FileInputStream getFileInputStream(@NonNull File file) throws FileNotFoundException {
+		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) {
+			Context ctx = ctxRef != null ? ctxRef.get() : null;
+			if (ctx == null) {
+				throw new FileNotFoundException("Cannot create FileInputStream for " + file + ". Empty context.");
+			} else {
+				OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
+				if (app.getSettings().isScopedStorageInUse(ctx)) {
+					DocumentFile docFile = DocumentFileCompat.fromFullPath(ctx, file.getAbsolutePath());
+					if (docFile != null) {
+						Uri uri = docFile.getUri();
+						ParcelFileDescriptor r = ctx.getContentResolver().openFileDescriptor(uri, "r");
+						return new AutoCloseInputStream(r);
+					} else {
+						throw new FileNotFoundException("Cannot create FileInputStream for " + file + ". DocumentFile is null.");
+					}
+				}
+			}
+		}
+		return new FileInputStream(file);
+	}
 }

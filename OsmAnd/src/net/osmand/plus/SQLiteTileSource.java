@@ -544,7 +544,7 @@ public class SQLiteTileSource implements ITileSource {
 	
 	public void insertImage(int x, int y, int zoom, File fileToSave) throws IOException {
 		ByteBuffer buf = ByteBuffer.allocate((int) fileToSave.length());
-		FileInputStream is = new FileInputStream(fileToSave);
+		FileInputStream is = PlatformUtil.getFileInputStream(fileToSave);
 		int i = 0;
 		byte[] b = new byte[BUF_SIZE];
 		while ((i = is.read(b, 0, BUF_SIZE)) > -1) {

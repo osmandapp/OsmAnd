@@ -8,6 +8,7 @@
 	<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
 
 	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 	<uses-permission android:name="android.permission.STORAGE" />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -39,7 +40,7 @@
 	<uses-feature android:name="android.hardware.bluetooth" android:required="false" />
 	<uses-feature android:name="com.sec.feature.spen_usp" android:required="false"/>
 
-	<uses-sdk android:targetSdkVersion="26"
+	<uses-sdk android:targetSdkVersion="30"
 		tools:overrideLibrary="com.getkeepsafe.taptargetview, studio.carbonylgroup.textfieldboxes, android.support.customtabs"/>
 
 	<supports-screens android:resizeable="true" android:smallScreens="true" android:normalScreens="true" android:largeScreens="true"
@@ -498,17 +499,6 @@
 		<activity android:name="net.osmand.plus.activities.TrackActivity"/>
 		<activity android:name="net.osmand.plus.activities.ContributionVersionActivity" android:configChanges="keyboardHidden|orientation" android:label="@string/contribution_activity" />
 
-
-		<activity android:name="net.osmand.plus.osmo.SettingsOsMoActivity" android:configChanges="keyboardHidden|orientation" />
-		<activity android:name="net.osmand.plus.osmo.OsMoGroupsActivity">
-			<intent-filter>
-				<data android:scheme="http" android:host="z.osmo.mobi" />
-				<action android:name="android.intent.action.VIEW" />
-				<category android:name="android.intent.category.DEFAULT" />
-				<category android:name="android.intent.category.BROWSABLE" />
-			</intent-filter>
-		</activity>
-
 		<activity android:name="net.osmand.plus.activities.search.SearchPOIActivity" android:label="@string/searchpoi_activity" />
 		<activity android:name="net.osmand.plus.activities.search.SearchAddressActivity" android:label="@string/select_address_activity" />
 		<activity android:name="net.osmand.plus.activities.search.SearchCityByNameActivity" />
@@ -516,8 +506,6 @@
 		<activity android:name="net.osmand.plus.activities.search.SearchStreetByNameActivity" />
 		<activity android:name="net.osmand.plus.activities.search.SearchStreet2ByNameActivity" />
 		<activity android:name="net.osmand.plus.activities.search.SearchBuildingByNameActivity" />
-		<activity android:name="net.osmand.plus.sherpafy.TourViewActivity" android:exported="true"
-			android:launchMode= "singleInstance" android:label="Sherpafy" />
 		<activity android:name="net.osmand.plus.activities.EditPOIFilterActivity" />
 
 		<activity android:name="net.osmand.plus.activities.search.GeoIntentActivity" android:label="@string/app_name">

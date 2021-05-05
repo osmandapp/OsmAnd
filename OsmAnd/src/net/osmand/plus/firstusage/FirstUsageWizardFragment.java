@@ -730,6 +730,8 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 			return getString(R.string.storage_directory_multiuser);
 		} else if (type == OsmandSettings.EXTERNAL_STORAGE_TYPE_SPECIFIED) {
 			return getString(R.string.storage_directory_manual);
+		} else if (type == OsmandSettings.EXTERNAL_STORAGE_TYPE_SCOPED) {
+			return getString(R.string.storage_directory_scoped);
 		} else {
 			return getString(R.string.storage_directory_manual);
 		}

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
+import net.osmand.PlatformUtil;
 import net.osmand.plus.ProgressImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandActionBarActivity;
@@ -136,7 +137,7 @@ public class MoveFilesTask extends AsyncTask<Void, Void, Boolean> {
 			} catch (RuntimeException e) {
 			}
 			if (!rnm) {
-				FileInputStream fin = new FileInputStream(f);
+				FileInputStream fin = PlatformUtil.getFileInputStream(f);
 				FileOutputStream fout = new FileOutputStream(t);
 				try {
 					progress.startTask(ctx.getString(R.string.copying_osmand_one_file_descr, t.getName()), (int) (f.length() / 1024));

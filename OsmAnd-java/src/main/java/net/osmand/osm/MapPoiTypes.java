@@ -342,7 +342,7 @@ public class MapPoiTypes {
 			if (this.resourceName == null) {
 				is = MapPoiTypes.class.getResourceAsStream("poi_types.xml"); //$NON-NLS-1$
 			} else {
-				is = new FileInputStream(this.resourceName);
+				is = PlatformUtil.getFileInputStream(this.resourceName);
 			}
 			initFromInputStream(is);
 

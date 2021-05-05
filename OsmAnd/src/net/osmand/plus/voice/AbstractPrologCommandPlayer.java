@@ -160,7 +160,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 				// voiceZipFile = new ZipFile(voiceDir);
 				//				config = voiceZipFile.getInputStream(voiceZipFile.getEntry("_config.p")); //$NON-NLS-1$
 				// } else {
-				config = new FileInputStream(new File(voiceDir, configFile)); //$NON-NLS-1$
+				config = PlatformUtil.getFileInputStream(new File(voiceDir, configFile)); //$NON-NLS-1$
 				// }
 				MetricsConstants mc = settings.METRIC_SYSTEM.get();
 				settings.APPLICATION_MODE.addListener(this);

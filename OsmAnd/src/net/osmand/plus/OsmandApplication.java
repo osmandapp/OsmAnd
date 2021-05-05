@@ -19,6 +19,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.MediaStore;
 import android.provider.Settings;
 import android.text.format.DateFormat;
 import android.view.View;
@@ -190,6 +191,7 @@ public class OsmandApplication extends MultiDexApplication {
 		if (Build.VERSION.SDK_INT < 21) {
 			AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
 		}
+		PlatformUtil.setContext(this);
 		createInUiThread();
 		uiHandler = new Handler();
 		appCustomization = new OsmAndAppCustomization();
@@ -202,10 +204,14 @@ public class OsmandApplication extends MultiDexApplication {
 			osmandSettings.initExternalStorageDirectory();
 		}
 		externalStorageDirectory = osmandSettings.getExternalStorageDirectory();
-		if (!FileUtils.isWritable(externalStorageDirectory)) {
+		if (!FileUtils.isWritable(this, externalStorageDirectory)) {
 			externalStorageDirectoryReadOnly = true;
 			externalStorageDirectory = osmandSettings.getInternalAppPath();
 		}
+
+		MediaStore.Files.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY);
+		MediaStore.getExternalVolumeNames(this);
+
 
 		Algorithms.removeAllFiles(getAppPath(IndexConstants.TEMP_DIR));
 		if (appInitializer.isAppVersionChanged()) {

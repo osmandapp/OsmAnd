@@ -507,7 +507,7 @@ public class AndroidNetworkUtils {
 									@NonNull Map<String, String> additionalParams,
 									@Nullable Map<String, String> headers,
 									@Nullable IProgress progress) throws IOException {
-		return uploadFile(urlText, new FileInputStream(file), file.getName(), gzip, additionalParams, headers, progress);
+		return uploadFile(urlText, PlatformUtil.getFileInputStream(file), file.getName(), gzip, additionalParams, headers, progress);
 	}
 
 	public static String uploadFile(@NonNull String urlText, @NonNull InputStream inputStream,

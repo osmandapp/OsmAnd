@@ -570,7 +570,7 @@ public class DashChooseAppDirFragment {
 				} catch(RuntimeException e) {
 				}
 				if (!rnm) {
-					FileInputStream fin = new FileInputStream(f);
+					FileInputStream fin = PlatformUtil.getFileInputStream(f);
 					FileOutputStream fout = new FileOutputStream(t);
 					try {
 						progress.startTask(ctx.getString(R.string.copying_osmand_one_file_descr, t.getName()), (int) (f.length() / 1024));

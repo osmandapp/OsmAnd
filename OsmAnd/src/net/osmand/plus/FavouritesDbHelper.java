@@ -584,7 +584,7 @@ public class FavouritesDbHelper {
 		try {
 			File f = new File(backupFile.getParentFile(), backupFile.getName());
 			BZip2CompressorOutputStream out = new BZip2CompressorOutputStream(new FileOutputStream(f));
-			FileInputStream fis = new FileInputStream(externalFile);
+			FileInputStream fis = PlatformUtil.getFileInputStream(externalFile);
 			Algorithms.streamCopy(fis, out);
 			fis.close();
 			out.close();

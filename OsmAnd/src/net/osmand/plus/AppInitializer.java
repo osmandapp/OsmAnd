@@ -556,7 +556,7 @@ public class AppInitializer implements IProgress {
 								try {
 									String fileName = f.getName();
 									RoutingConfiguration.Builder builder = new RoutingConfiguration.Builder(defaultAttributes);
-									RoutingConfiguration.parseFromInputStream(new FileInputStream(f), fileName, builder);
+									RoutingConfiguration.parseFromInputStream(PlatformUtil.getFileInputStream(f), fileName, builder);
 
 									customConfigs.put(fileName, builder);
 								} catch (XmlPullParserException | IOException e) {

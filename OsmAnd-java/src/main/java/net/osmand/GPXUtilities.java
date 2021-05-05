@@ -2149,7 +2149,7 @@ public class GPXUtilities {
 	public static GPXFile loadGPXFile(File f) {
 		FileInputStream fis = null;
 		try {
-			fis = new FileInputStream(f);
+			fis = PlatformUtil.getFileInputStream(f);
 			GPXFile file = loadGPXFile(fis);
 			file.path = f.getAbsolutePath();
 			file.modifiedTime = f.lastModified();

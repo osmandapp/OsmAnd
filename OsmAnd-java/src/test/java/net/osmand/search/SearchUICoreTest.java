@@ -82,7 +82,7 @@ public class SearchUICoreTest {
 				String fileName = file.getName();
 				if (fileName.endsWith(".json")) {
 					String name = fileName.substring(0, fileName.length() - ".json".length());
-					arrayList.add(new Object[] { name, file });
+					//arrayList.add(new Object[] { name, file });
 				}
 			}
 		}

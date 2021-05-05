@@ -11,8 +11,10 @@ import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.documentfile.provider.DocumentFile;
 
 import net.osmand.AndroidUtils;
+import net.osmand.DocumentFileCompat;
 import net.osmand.GeoidAltitudeCorrection;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
@@ -647,13 +649,15 @@ public class ResourceManager {
 
 	private List<File> collectFiles(File dir, String ext, List<File> files) {
 		if (dir.exists() && dir.canRead()) {
-			File[] lf = dir.listFiles();
+			// TODO
+			DocumentFile[] lf = DocumentFileCompat.fromFullPath(context, dir.getAbsolutePath(), DocumentFileCompat.DocumentFileType.ANY, false).listFiles();
+			//File[] lf = dir.listFiles();
 			if (lf == null || lf.length == 0) {
 				return files;
 			}
-			for (File f : lf) {
+			for (DocumentFile f : lf) {
 				if (f.getName().endsWith(ext)) {
-					files.add(f);
+					files.add(new DocumentFileCompat(f).getFile());
 				}
 			}
 		}

@@ -17,6 +17,7 @@ import com.wdtinc.mapbox_vector_tile.encoding.GeomCmdHdr;
 import com.wdtinc.mapbox_vector_tile.encoding.ZigZag;
 import com.wdtinc.mapbox_vector_tile.util.Vec2d;
 
+import net.osmand.PlatformUtil;
 import net.osmand.binary.VectorTile;
 
 import java.io.File;
@@ -74,7 +75,7 @@ public final class MvtReader {
                                          GeometryFactory geomFactory,
                                          ITagConverter tagConverter,
                                          RingClassifier ringClassifier) throws IOException {
-        final InputStream is = new FileInputStream(f);
+        final InputStream is = PlatformUtil.getFileInputStream(f);
         return loadMvt(is, geomFactory, tagConverter, ringClassifier);
     }
 

@@ -1,12 +1,14 @@
 package net.osmand;
 
-
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlSerializer;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 /**
  * That class is replacing of standard LogFactory due to 
@@ -31,5 +33,12 @@ public class PlatformUtil {
 	public static XmlSerializer newSerializer() {
 		return new org.kxml2.io.KXmlSerializer();
 	}
-	
+
+	public static FileInputStream getFileInputStream(String path) throws FileNotFoundException {
+		return path != null ? new FileInputStream(new File(path)) : null;
+	}
+
+	public static FileInputStream getFileInputStream(File file) throws FileNotFoundException {
+		return new FileInputStream(file);
+	}
 }

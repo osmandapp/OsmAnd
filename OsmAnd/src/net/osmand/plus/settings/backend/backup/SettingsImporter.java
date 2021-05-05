@@ -3,6 +3,7 @@ package net.osmand.plus.settings.backend.backup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.util.Algorithms;
@@ -41,7 +42,7 @@ class SettingsImporter {
 
 	private List<SettingsItem> getItemsFromJson(@NonNull File file) throws IOException {
 		List<SettingsItem> items = new ArrayList<>();
-		ZipInputStream zis = new ZipInputStream(new FileInputStream(file));
+		ZipInputStream zis = new ZipInputStream(PlatformUtil.getFileInputStream(file));
 		InputStream ois = new BufferedInputStream(zis);
 		try {
 			ZipEntry entry;
@@ -108,7 +109,7 @@ class SettingsImporter {
 				throw new IllegalArgumentException("No items");
 			}
 		}
-		ZipInputStream zis = new ZipInputStream(new FileInputStream(file));
+		ZipInputStream zis = new ZipInputStream(PlatformUtil.getFileInputStream(file));
 		InputStream ois = new BufferedInputStream(zis);
 		try {
 			ZipEntry entry;
