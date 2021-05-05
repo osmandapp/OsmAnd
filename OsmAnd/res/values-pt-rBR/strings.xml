@@ -580,27 +580,27 @@
     <string name="settings_preset_descr">Configurações de exibição e navegação de mapa são gravadas por perfil de uso. Defina seu perfil padrão aqui.</string>
     <string name="snap_to_road">Ajustar com a via</string>
     <string name="osmand_short_description_80_chars">OsmAnd é um aplicativo de navegação de código aberto para mapas off-line e on-line</string>
-    <string name="osmand_long_description_1000_chars">OsmAnd (Direções de Navegação Automatizada do OSM) 
-\n 
-\n OsmAnd é um aplicativo de navegação de código aberto com acesso a uma grande variedade de dados globais do OSM. Todos os dados do mapa (mapas vetoriais ou de quadrículas) podem ser armazenados no cartão de memória do telefone para uso offline. A funcionalidade de roteamento off-line e on-line também é oferecida, incluindo orientação de voz curva-a-curva. 
-\n 
-\n Algumas das principais características: 
-\n - Funcionalidade offline completa (armazenar mapas vetoriais ou de quadrículas baixadas no armazenamento do dispositivo) 
-\n - Mapas vetoriais offline compactos para todo o mundo disponíveis 
-\n - Download de mapas de países ou regiões diretamente do aplicativo 
-\n - Sobreposição de várias camadas de mapas possíveis, como trilhas GPX ou navegação, Pontos de Interesse, Favoritos, curvas de nível, paradas de transporte público, mapas adicionais com transparência personalizável 
-\n - Pesquisa offline de endereços e locais (POIs) 
-\n - Encaminhamento off-line para distâncias médias 
-\n - Modos de carro, bicicleta e pedestre com os opcionais: 
-\n - Mudança automática de visualização dia/noite 
-\n - Zoom do mapa conforme velocidade 
-\n - Alinhamento do mapa de acordo com a bússola ou a direção do movimento 
-\n - Guia de faixa de rodagem, indicação do limite de velocidade, vozes gravadas e conversão de texto em fala 
-\n 
-\n Limitações desta versão gratuita do OsmAnd: 
-\n - Número de downloads de mapas limitado 
-\n - Sem acesso offline a POIs da Wikipedia 
-\n 
+    <string name="osmand_long_description_1000_chars">OsmAnd (Direções de Navegação Automatizada do OSM)
+\n
+\n OsmAnd é um aplicativo de navegação de código aberto com acesso a uma grande variedade de dados globais do OSM. Todos os dados do mapa (mapas vetoriais ou de quadrículas) podem ser armazenados no cartão de memória do telefone para uso offline. A funcionalidade de roteamento off-line e on-line também é oferecida, incluindo orientação de voz curva-a-curva.
+\n
+\n Algumas das principais características:
+\n - Funcionalidade offline completa (armazenar mapas vetoriais ou de quadrículas baixadas no armazenamento do dispositivo)
+\n - Mapas vetoriais offline compactos para todo o mundo disponíveis
+\n - Download de mapas de países ou regiões diretamente do aplicativo
+\n - Sobreposição de várias camadas de mapas possíveis, como trilhas GPX ou navegação, Pontos de Interesse, Favoritos, curvas de nível, paradas de transporte público, mapas adicionais com transparência personalizável
+\n - Pesquisa offline de endereços e locais (POIs)
+\n - Encaminhamento off-line para distâncias médias
+\n - Modos de carro, bicicleta e pedestre com os opcionais:
+\n - Mudança automática de visualização dia/noite
+\n - Zoom do mapa conforme velocidade
+\n - Alinhamento do mapa de acordo com a bússola ou a direção do movimento
+\n - Guia de faixa de rodagem, indicação do limite de velocidade, vozes gravadas e conversão de texto em fala
+\n
+\n Limitações desta versão gratuita do OsmAnd:
+\n - Número de downloads de mapas limitado
+\n - Sem acesso offline a POIs da Wikipédia
+\n
 \n OsmAnd está sendo desenvolvido ativamente e o nosso projeto e seu progresso contínuo depende de contribuições financeiras para o desenvolvimento e teste de novas funcionalidades. Por favor, considere adquirir OsmAnd+, ou financiar novas funcionalidades específicas ou fazer uma doação geral em https://osmand.net.</string>
     <string name="day_night_info_description">Nascer do sol: %1$s
 \nPôr do sol: %2$s</string>
@@ -1023,25 +1023,25 @@
     <string name="osmand_service">Modo em segundo plano</string>
     <string name="osmand_service_descr">OsmAnd é executado em segundo plano com a tela desligada.</string>
     <string name="arrival_distance_factor_late">Atrasado</string>
-    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (Direções de Navegação Automatizada do OSM) 
-\n 
-\n OsmAnd+ é um aplicativo de navegação de código aberto com acesso a uma grande variedade de dados globais do OSM. Todos os dados do mapa (mapas vetoriais ou de quadrículas) podem ser armazenados no cartão de memória do telefone para uso offline. A funcionalidade de roteamento off-line e on-line também é oferecida, incluindo orientação de voz curva-a-curva. 
-\n 
-\n OsmAnd+ é a versão paga do aplicativo, ao comprá-lo você apoia o projeto, financia o desenvolvimento de novas funcionalidades e recebe as últimas atualizações. 
-\n 
-\n Algumas das principais características: 
-\n - Funcionalidade offline completa (armazenar mapas vetoriais ou de quadrículas no armazenamento do dispositivo) 
-\n - Mapas vetoriais offline compactos para todo o mundo disponíveis 
-\n - Download ilimitado de mapas de países ou regiões diretamente do aplicativo 
-\n - Recurso Wikipedia offline (download de POIs da Wikipedia), ótimo para passeios turísticos 
-\n - Sobreposição de várias camadas de mapas possíveis, como trilhas GPX ou navegação, Pontos de Interesse, Favoritos, curvas de nível, paradas de transporte público, mapas adicionais com transparência personalizável 
-\n 
-\n - Pesquisa offline de endereços e locais (POIs) 
-\n - Encaminhamento off-line para distâncias médias 
-\n - Modos de carro, bicicleta e pedestre com os opcionais: 
-\n - Mudança automática de visualização dia/noite 
-\n - Zoom do mapa conforme velocidade 
-\n - Alinhamento do mapa de acordo com a bússola ou a direção do movimento 
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (Direções de Navegação Automatizada do OSM)
+\n
+\n OsmAnd+ é um aplicativo de navegação de código aberto com acesso a uma grande variedade de dados globais do OSM. Todos os dados do mapa (mapas vetoriais ou de quadrículas) podem ser armazenados no cartão de memória do telefone para uso offline. A funcionalidade de roteamento off-line e on-line também é oferecida, incluindo orientação de voz curva-a-curva.
+\n
+\n OsmAnd+ é a versão paga do aplicativo, ao comprá-lo você apoia o projeto, financia o desenvolvimento de novas funcionalidades e recebe as últimas atualizações.
+\n
+\n Algumas das principais características:
+\n - Funcionalidade offline completa (armazenar mapas vetoriais ou de quadrículas no armazenamento do dispositivo)
+\n - Mapas vetoriais offline compactos para todo o mundo disponíveis
+\n - Download ilimitado de mapas de países ou regiões diretamente do aplicativo
+\n - Recurso Wikipédia offline (download de POIs da Wikipédia), ótimo para passeios turísticos
+\n - Sobreposição de várias camadas de mapas possíveis, como trilhas GPX ou navegação, Pontos de Interesse, Favoritos, curvas de nível, paradas de transporte público, mapas adicionais com transparência personalizável
+\n
+\n - Pesquisa offline de endereços e locais (POIs)
+\n - Encaminhamento off-line para distâncias médias
+\n - Modos de carro, bicicleta e pedestre com os opcionais:
+\n - Mudança automática de visualização dia/noite
+\n - Zoom do mapa conforme velocidade
+\n - Alinhamento do mapa de acordo com a bússola ou a direção do movimento
 \n - Guia de faixa de rodagem, indicação do limite de velocidade, vozes gravadas e conversão de texto em fala
 \n</string>
     <string name="init_native_library">Iniciando a biblioteca nativa…</string>
@@ -2625,7 +2625,7 @@
     <string name="popular_destinations">Destinos populares</string>
     <string name="welcome_to_open_beta">Bem-vindo ao Open Beta</string>
     <string name="wiki_article_not_found">Artigo não encontrado</string>
-    <string name="how_to_open_wiki_title">Como se abre artigos da Wikipedia?</string>
+    <string name="how_to_open_wiki_title">Como se abre artigos da Wikipédia\?</string>
     <string name="osmand_team">Equipe OsmAnd</string>
     <string name="paid_app">Aplicativo pago</string>
     <string name="paid_plugin">Plugin pago</string>
@@ -2681,7 +2681,7 @@
     <string name="off_road_render_descr">Para condução off-road com base no estilo \"Topo\" e para utilização com imagens de satélite verdes como mapa de fundo. Espessura de via principal reduzido, espessura das trilhas, caminhos, ciclovias e outras vias aumentado.</string>
     <string name="nautical_render_descr">Para navegação náutica. Apresenta boias, faróis, vias fluviais, vias e sinais marítimos, portos, serviços de navegação e curvas batimétricas.</string>
     <string name="light_rs_render_descr">Estilo de condução simples. Modo noturno suave, curvas de nível, estradas em laranja contrastante, escurece objetos secundários do mapa.</string>
-    <string name="open_wikipedia_link_online">Abrir link da Wikipedia online</string>
+    <string name="open_wikipedia_link_online">Abrir link da Wikipédia online</string>
     <string name="read_wikipedia_offline_description">Assine OsmAnd Live para ler artigos da Wikipédia e Wikivoyage offline.</string>
     <string name="ski_map_render_descr">Para esquiar. Possui pistas, teleféricos, pistas de esqui, pistas de cross country, etc. Escurece objetos secundários do mapa.</string>
     <string name="error_notification_desc">Favor enviar uma captura de tela desta notificação para support@osmand.net</string>
@@ -3389,7 +3389,7 @@
 \n
 \n  • Ícones de POI corretamente alinhados no mapa
 \n
-\n  • Dados do pôr-do-sol/nascer do sol adicionados para configurar o mapa
+\n  • Dados do pôr do sol/nascer do sol adicionados para configurar o mapa
 \n
 \n  • Adicionado ícones Casa/Trabalho no mapa
 \n
@@ -3512,7 +3512,7 @@
     <string name="move_inside_category">Você pode mover itens somente dentro desta categoria.</string>
     <string name="developer_plugin">Plugin do desenvolvedor</string>
     <string name="shared_string_items">Itens</string>
-    <string name="select_wikipedia_article_langs">Selecione os idiomas para os artigos da Wikipedia no mapa. Alterne para qualquer idioma disponível enquanto lê o artigo.</string>
+    <string name="select_wikipedia_article_langs">Selecione os idiomas para os artigos da Wikipédia no mapa. Alterne para qualquer idioma disponível enquanto lê o artigo.</string>
     <string name="some_articles_may_not_available_in_lang">Alguns artigos da Wikipédia podem não estar disponíveis no seu idioma.</string>
     <string name="lang_zhyue">Cantonês</string>
     <string name="lang_zhminnan">Min do Sul</string>
@@ -3564,23 +3564,23 @@
     <string name="osmand_purchases_item">Compras no OsmAnd</string>
     <string name="legend_item_description">O guia para a simbologia de um mapa.</string>
     <string name="navigation_profiles_item">Perfis de navegação</string>
-    <string name="release_3_7">• Novos mapas de inclinação offline 
-\n 
-\n  • Personalização completa de Favoritos e Waypoints GPX - cores, ícones e formas personalizados 
-\n 
-\n  • Personalize a ordem dos itens no menu de contexto, configurar mapa, gaveta 
-\n 
-\n  • Wikipédia como uma camada separada no mapa Configurar, selecione apenas os idiomas necessários 
-\n 
-\n  • Crie seu próprio filtro / mapa de POI com total flexibilidade 
-\n 
-\n  • Adicionadas opções para restaurar configurações de perfis personalizados 
-\n 
-\n  • Rotas GPX completas das faixas de tráfego da Navigation Support e instruções completas de curva 
-\n 
-\n  • Corrigir tamanhos de interface do usuário em tablets 
-\n 
-\n  • Corrija bugs com RTL
+    <string name="release_3_7">• Novos mapas de inclinação offline
+\n
+\n  • Personalização completa de Favoritos e Waypoints GPX - cores, ícones e formas personalizados
+\n
+\n  • Personalize a ordem dos itens no menu de contexto, configurar mapa, gaveta
+\n
+\n  • Wikipédia como uma camada separada no mapa Configurar, selecione apenas os idiomas necessários
+\n
+\n  • Crie seu próprio filtro / mapa de POI com total flexibilidade
+\n
+\n  • Adicionadas opções para restaurar configurações de perfis personalizados
+\n
+\n  • Rotas GPX completas das faixas de tráfego do apoio a navegação e instruções completas de curva
+\n
+\n  • Corrigidos tamanhos de interface do usuário em tablets
+\n
+\n  • Corrigidos bugs com RTL
 \n
 \n</string>
     <string name="additional_actions_descr">Você pode acessar essas ações tocando no botão “%1$s”.</string>
@@ -3639,7 +3639,7 @@
     <string name="delete_all_actions_message_q">Tem certeza de que deseja excluir irrevogavelmente %d ações rápidas\?</string>
     <string name="screen_timeout">Tempo limite da tela</string>
     <string name="width_limit_description">Forneça a largura do seu veículo. Algumas restrições de rota podem se aplicar a veículos largos.</string>
-    <string name="height_limit_description">Forneça a altura do veículo, algumas restrições de rota podem ser aplicadas para veículos altos.</string>
+    <string name="height_limit_description">Forneça a altura do veículo. Algumas restrições de rota podem ser aplicadas para veículos altos.</string>
     <string name="weight_limit_description">Forneça o peso do seu veículo. Algumas restrições de rota podem ser aplicadas a veículos pesados.</string>
     <string name="shared_string_tones">tons</string>
     <string name="shared_string_meters">metros</string>
@@ -3840,7 +3840,7 @@
     <string name="app_mode_gap">Diferença</string>
     <string name="login_open_street_map">Entrar com OpenStreetMap</string>
     <string name="login_open_street_map_org">Entrar com OpenStreetMap.org</string>
-    <string name="open_street_map_login_mode">Você precisaentrar para carregar de alterações novas ou modificadas.
+    <string name="open_street_map_login_mode">Você precisa entrar para carregar de alterações novas ou modificadas.
 \n
 \nVocê pode fazer login usando o método OAuth seguro ou usar sua entrada e senha.</string>
     <string name="use_login_password">Usar entrada e senha</string>
@@ -3955,7 +3955,7 @@
     <string name="routing_engine_vehicle_type_hiking">Caminhada</string>
     <string name="routing_engine_vehicle_type_walking">Caminhando</string>
     <string name="routing_engine_vehicle_type_cycling_electric">Ciclismo elétrico</string>
-    <string name="routing_engine_vehicle_type_cycling_mountain">Mountain bike</string>
+    <string name="routing_engine_vehicle_type_cycling_mountain">BTT</string>
     <string name="routing_engine_vehicle_type_cycling_road">Ciclismo regular</string>
     <string name="routing_engine_vehicle_type_cycling_regular">Ciclismo regular</string>
     <string name="routing_engine_vehicle_type_hgv">Veículos de carga pesada</string>
@@ -3992,7 +3992,7 @@
     <string name="activity_type_snowmobile_name">Moto de neve</string>
     <string name="activity_type_riding_name">Equitação</string>
     <string name="activity_type_racing_name">Corrida</string>
-    <string name="activity_type_mountainbike_name">Mountain bike</string>
+    <string name="activity_type_mountainbike_name">BTT</string>
     <string name="activity_type_cycling_name">Ciclismo</string>
     <string name="activity_type_hiking_name">Caminhada</string>
     <string name="activity_type_running_name">Corrida</string>
@@ -4049,19 +4049,19 @@
     <string name="shared_string_route_line">Linha de rota</string>
     <string name="route_line_use_map_style_appearance">Use o estilo de mapa (%2$s) padrão %1$s.</string>
     <string name="specify_color_for_map_mode">Especifique a cor para o modo de mapa %1$s.</string>
-    <string name="release_4_0_beta">"• Adicionada opção para baixar cuevas de níveis em pés
+    <string name="release_4_0_beta">• Adicionada opção para baixar curvas de níveis em pés
 \n
-\n  • Plano de paisagem da rota: guias adicionadas para alternar entre pontos ou gráficos
+\n• Plano de paisagem da rota: guias adicionadas para alternar entre pontos ou gráficos
 \n
-\n  • As atualizações do OsmAnd Live foram movidas para \"Downloads&gt; Atualizações\"
+\n• As atualizações do OsmAnd Live foram movidas para \"Downloads&gt; Atualizações\"
 \n
-\n  • As trilhas agora podem ser coloridas por altitude, velocidade ou inclinação.
+\n• As trilhas agora podem ser coloridas por altitude, velocidade ou inclinação.
 \n
-\n  • Adicionada opção para alterar a aparência da linha de rota.
+\n• Adicionada opção para alterar a aparência da linha de rota.
 \n
-\n  • Caixa de diálogo \"Gravação de viagem\" atualizada
+\n• Caixa de diálogo \"Gravação de viagem\" atualizada
 \n
-\n"</string>
+\n</string>
     <string name="no_purchases">Você não tem nenhuma compra</string>
     <string name="new_device_account">Novo dispositivo / nova conta</string>
     <string name="contact_support_description">Se você tiver alguma dúvida, entre em contato conosco em %1$s.</string>
