@@ -10,7 +10,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-public class RouteLineDrawInfo {
+public class PreviewRouteLineInfo {
 
 	private static final String LINE_COLOR_DAY = "line_color_day";
 	private static final String LINE_COLOR_NIGHT = "line_color_night";
@@ -41,21 +41,21 @@ public class RouteLineDrawInfo {
 	private int screenHeight;
 	private boolean useDefaultColor;
 
-	public RouteLineDrawInfo(@Nullable @ColorInt Integer colorDay,
-	                         @Nullable @ColorInt Integer colorNight,
-							 @Nullable GradientScaleType gradientScaleType,
-	                         @Nullable String width) {
+	public PreviewRouteLineInfo(@Nullable @ColorInt Integer colorDay,
+								@Nullable @ColorInt Integer colorNight,
+								@Nullable GradientScaleType gradientScaleType,
+								@Nullable String width) {
 		this.colorDay = colorDay;
 		this.colorNight = colorNight;
 		this.scaleType = gradientScaleType;
 		this.width = width;
 	}
 
-	public RouteLineDrawInfo(@NonNull Bundle bundle) {
+	public PreviewRouteLineInfo(@NonNull Bundle bundle) {
 		readBundle(bundle);
 	}
 
-	public RouteLineDrawInfo(@NonNull RouteLineDrawInfo existed) {
+	public PreviewRouteLineInfo(@NonNull PreviewRouteLineInfo existed) {
 		this.colorDay = existed.colorDay;
 		this.colorNight = existed.colorNight;
 		this.scaleType = existed.scaleType;
@@ -209,9 +209,9 @@ public class RouteLineDrawInfo {
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
-		if (!(o instanceof RouteLineDrawInfo)) return false;
+		if (!(o instanceof PreviewRouteLineInfo)) return false;
 
-		RouteLineDrawInfo that = (RouteLineDrawInfo) o;
+		PreviewRouteLineInfo that = (PreviewRouteLineInfo) o;
 
 		if (!Algorithms.objectEquals(getColor(false), that.getColor(false))) return false;
 		if (!Algorithms.objectEquals(getColor(true), that.getColor(true))) return false;

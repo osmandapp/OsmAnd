@@ -361,9 +361,9 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 		return cnt;
 	}
 
-	protected void drawRouteSegment(RotatedTileBox tb, Canvas canvas, List<Float> tx, List<Float> ty,
-									List<Double> angles, List<Double> distances, double distToFinish,
-									List<GeometryWayStyle<?>> styles) {
+	public void drawRouteSegment(RotatedTileBox tb, Canvas canvas, List<Float> tx, List<Float> ty,
+								 List<Double> angles, List<Double> distances, double distToFinish,
+								 List<GeometryWayStyle<?>> styles) {
 		if (tx.size() < 2) {
 			return;
 		}
