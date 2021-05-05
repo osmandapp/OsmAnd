@@ -521,7 +521,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 					app.initVoiceCommandPlayer(mapActivity, mode, true, null, false, false, true);
 				}
 			}
-			mapActivity.getMapActions().setGPXRouteParams(gpxFile, true);
+			mapActivity.getMapActions().setGPXRouteParams(gpxFile);
 			app.getTargetPointsHelper().updateRouteAndRefresh(true);
 			app.getRoutingHelper().onSettingsChanged(true);
 		}

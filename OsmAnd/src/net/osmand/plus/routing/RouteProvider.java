@@ -260,11 +260,11 @@ public class RouteProvider {
 					routeParams.intermediates, routeParams.ctx, routeParams.leftSide, null, null, routeParams.mode, true);
 		}
 
-		if (routeParams.gpxRoute.useIntermediatePointsRTE && !routeParams.gpxRoute.followTrack) {
+		if (routeParams.gpxRoute.useIntermediatePointsRTE) {
 			return calculateOsmAndRouteWithIntermediatePoints(routeParams, gpxParams.points);
 		}
 
-		List<Location> gpxRoute;
+		List<Location> gpxRoute ;
 		int[] startI = new int[]{0};
 		int[] endI = new int[]{gpxParams.points.size()};
 		if (calcWholeRoute) {

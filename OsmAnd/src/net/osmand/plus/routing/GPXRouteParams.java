@@ -34,7 +34,6 @@ public class GPXRouteParams {
 	protected boolean passWholeRoute;
 	protected boolean calculateOsmAndRoute;
 	protected boolean useIntermediatePointsRTE;
-	protected boolean followTrack;
 	protected boolean calculateOsmAndRouteParts;
 
 	boolean addMissingTurns = true;
@@ -75,7 +74,6 @@ public class GPXRouteParams {
 		passWholeRoute = builder.passWholeRoute;
 		calculateOsmAndRouteParts = builder.calculateOsmAndRouteParts;
 		useIntermediatePointsRTE = builder.isUseIntermediatePointsRTE();
-		followTrack = builder.isFollowTrack();
 		builder.calculateOsmAndRoute = false; // Disabled temporary builder.calculateOsmAndRoute;
 		if (!file.isPointsEmpty()) {
 			wpt = new ArrayList<LocationPoint>(file.getPoints().size());
@@ -142,7 +140,6 @@ public class GPXRouteParams {
 		private boolean leftSide;
 		private boolean passWholeRoute;
 		private boolean calculateOsmAndRouteParts;
-		private boolean followTrack;
 		private int selectedSegment = -1;
 
 		public GPXRouteParamsBuilder(GPXFile file, OsmandSettings settings) {
@@ -172,14 +169,6 @@ public class GPXRouteParams {
 
 		public void setCalculateOsmAndRoute(boolean calculateOsmAndRoute) {
 			this.calculateOsmAndRoute = calculateOsmAndRoute;
-		}
-
-		public boolean isFollowTrack() {
-			return followTrack;
-		}
-
-		public void setFollowTrack(boolean followTrack) {
-			this.followTrack = followTrack;
 		}
 
 		public int getSelectedSegment() {
