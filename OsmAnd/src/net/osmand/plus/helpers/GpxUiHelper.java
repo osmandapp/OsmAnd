@@ -2362,6 +2362,12 @@ public class GpxUiHelper {
 		}
 	}
 
+	@NonNull
+	public static String getGpxFileRelativePath(@NonNull OsmandApplication app, @NonNull String fullPath) {
+		String rootGpxDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR).getAbsolutePath() + '/';
+		return fullPath.replace(rootGpxDir, "");
+	}
+
 	public static class GPXInfo {
 		private String fileName;
 		private long lastModified;
