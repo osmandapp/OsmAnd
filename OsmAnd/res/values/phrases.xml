@@ -4393,4 +4393,7 @@
 
 	<string name="poi_pillory">Pillory</string>
 
+	<string name="poi_service_vehicle_inspection_yes">Vehicle inspection</string>
+
+
 </resources>
