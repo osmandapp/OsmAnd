@@ -279,7 +279,7 @@ public class RoutingContext {
 			List<DirectionPoint> points = Collections.emptyList();
 			if (config.getDirectionPoints() != null) {
 				points = config.getDirectionPoints().queryInBox(
-						new QuadRect(ts.subregion.left, ts.subregion.top, ts.subregion.right, ts.subregion.bottom), new ArrayList<>());
+						new QuadRect(ts.subregion.left, ts.subregion.top, ts.subregion.right, ts.subregion.bottom), new ArrayList<DirectionPoint>());
 				for (DirectionPoint d : points) {
 					// use temporary types
 					d.types.clear();
@@ -590,15 +590,14 @@ public class RoutingContext {
 			boolean pointShouldBeAttachedByDist = (mindist < config.directionPointsRadius && mindist < np.distance);
 			
 			if (pointShouldBeAttachedByDist && !sameRoadId) {
-				System.out.println(String.format("INSERT %s (%d-%d) %.0f m [%.5f, %.5f] - %d, %d ", ro, indexToInsert, indexToInsert + 1, mindist,
-						MapUtils.get31LongitudeX(wptX), MapUtils.get31LatitudeY(wptY), wptX, wptY));
+				//System.out.println(String.format("INSERT %s (%d-%d) %.0f m [%.5f, %.5f] - %d, %d ", ro, indexToInsert, indexToInsert + 1, mindist,
+				//		MapUtils.get31LongitudeX(wptX), MapUtils.get31LatitudeY(wptY), wptX, wptY));
 				if (np.connected != null) {
 					// clear old connected points
 					int pointIndex = -1;
-					for(int i = 0; i < np.connected.getPointsLength(); i++) {
+					for (int i = 0; i < np.connected.getPointsLength(); i++) {
 						int tx = np.connected.getPoint31XTile(i);
 						int ty = np.connected.getPoint31YTile(i);
-						// TODO PROBLEM #1 check that we don't insert / retrieve exact duplicate that's already in road
 						if (tx == np.connectedx && ty == np.connectedy) {
 							pointIndex = i;
 							break;
@@ -607,28 +606,18 @@ public class RoutingContext {
 					if (pointIndex != -1) {
 						int tp = ro.region.findOrCreateRouteType("osmand_dp", "osmand_delete_point");
 						np.connected.setPointTypes(pointIndex, new int[] { tp });
-						// reset or not reset
-						// TODO VISUAL #1 comment to see intermediate zigzags connection
-//						np.connected.setPointNames(pointIndex, new int[] { }, new String[] { } );
 					} else {
 						throw new RuntimeException();
 					}
 				}
 				np.connectedx = mprojx;
 				np.connectedy = mprojy;
-				// TODO PROBLEM #1 check that we don't insert / retrieve exact duplicate that's already in road
-				ro.insert(indexToInsert, mprojx, mprojy); 
-				// TODO VISUAL #3 comment to not forbid roads but to see zigzags
-//				ro.setPointTypes(indexToInsert, np.types.toArray());
-				int nametpx = ro.region.findOrCreateRouteType("osmand_pnt_x", "");
-				int nametpy = ro.region.findOrCreateRouteType("osmand_pnt_y", "");
-				ro.setPointNames(indexToInsert, new int[] { nametpx, nametpy },
-						new String[] { wptX + "", wptY + "" });
+				ro.insert(indexToInsert, mprojx, mprojy);
+				ro.setPointTypes(indexToInsert, np.types.toArray());
 				np.distance = mindist;
 				np.connected = ro;
 			} else if (sameRoadId) {
 				boolean sameRoadIdButPointIsNotPresent;
-				// TODO PROBLEM #1 check that we don't insert / retrieve exact duplicate that's already in road
 				if (indexToInsert < ro.getPointsLength()) {
 					int tx = ro.getPoint31XTile(indexToInsert);
 					int ty = ro.getPoint31YTile(indexToInsert);
