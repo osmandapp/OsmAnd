@@ -61,11 +61,6 @@ public class RouteCalculationResult {
 	protected int cacheCurrentTextDirectionInfo = -1;
 	protected List<RouteDirectionInfo> cacheAgreggatedDirections;
 	protected List<LocationPoint> locationPoints = new ArrayList<LocationPoint>();
-
-	public Set<WorldRegion> getDownloadMaps() {
-		return downloadMaps;
-	}
-
 	protected final Set<WorldRegion> downloadMaps;
 
 	// params
@@ -1313,6 +1308,10 @@ public class RouteCalculationResult {
 	public void updateNextVisiblePoint(int nextPoint, Location mp) {
 		currentStraightAnglePoint = mp;
 		currentStraightAngleRoute = nextPoint;
+	}
+
+	public Set<WorldRegion> getDownloadMaps() {
+		return downloadMaps;
 	}
 
 	public static class NextDirectionInfo {

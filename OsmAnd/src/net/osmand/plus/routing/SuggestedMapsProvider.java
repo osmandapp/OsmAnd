@@ -23,7 +23,6 @@ public class SuggestedMapsProvider {
 	public static TargetPointsHelper.TargetPoint start;
 	public static LatLon[] intermediates;
 	public static TargetPointsHelper.TargetPoint end;
-	public Location currentLocation;
 
 	public static boolean checkIfObjectDownloaded(String downloadName) {
 		ResourceManager rm = ctx.getResourceManager();
@@ -70,7 +69,7 @@ public class SuggestedMapsProvider {
 			Map.Entry<WorldRegion, BinaryMapDataObject> worldRegion = ctx.getRegions().getSmallestBinaryMapDataObjectAt(latLonPoint);
 			Map.Entry<WorldRegion, BinaryMapDataObject> worldParentRegion = ctx.getRegions().getSmallestBinaryMapDataObjectAt(latLonPoint);
 			String worldRegionName = worldRegion.getKey().getRegionDownloadName();
-			String worldParentRegionName = worldParentRegion.getKey().getRegionDownloadName();
+			String worldParentRegionName = worldParentRegion.getKey().getSuperregion().getRegionDownloadName();
 			boolean isRegionDownload = checkIfObjectDownloaded(worldRegionName);
 			boolean isParentRegionDownload = checkIfObjectDownloaded(worldParentRegionName);
 			if (!isRegionDownload && !isParentRegionDownload) {

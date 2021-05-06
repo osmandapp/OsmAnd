@@ -680,7 +680,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				menuCards.add(new NauticalBridgeHeightWarningCard(mapActivity));
 			} else if (app.getTargetPointsHelper().hasTooLongDistanceToNavigate()) {
 				menuCards.add(new LongDistanceWarningCard(mapActivity));
-			} else if (app.getRoutingHelper().getRoute().getDownloadMaps() != null && app.getRoutingHelper().getRoute().getDownloadMaps().isEmpty()) {
+			} else if (!Algorithms.isEmpty(app.getRoutingHelper().getRoute().getDownloadMaps()) && !routeCalculationInProgress) {
 				menuCards.add(new SuggestMapsDownloadWarningCards(mapActivity));
 			}
 		} else {
