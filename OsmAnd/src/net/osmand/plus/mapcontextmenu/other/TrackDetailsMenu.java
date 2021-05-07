@@ -57,7 +57,7 @@ import java.util.List;
 
 public class TrackDetailsMenu {
 
-	private static final int MAX_DISTANCE_LOCATION_PROJECTION = 20; // in meters
+	public static final int MAX_DISTANCE_LOCATION_PROJECTION = 20; // in meters
 
 	@Nullable
 	private MapActivity mapActivity;
@@ -566,7 +566,7 @@ public class TrackDetailsMenu {
 		return xAxisPoints;
 	}
 
-	private void updateView(final View parentView, boolean forceFitTrackOnMap) {
+	private void updateView(final View parentView, boolean forceFitTrackOnMap) { //
 		MapActivity mapActivity = getMapActivity();
 		GpxDisplayItem gpxItem = getGpxItem();
 		if (mapActivity == null || gpxItem == null) {
