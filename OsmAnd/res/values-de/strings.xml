@@ -4027,7 +4027,7 @@
     <string name="select_another_colorization">Bitte wählen Sie eine andere Art der Einfärbung.</string>
     <string name="map_widget_distance_by_tap">Entfernung durch Antippen</string>
     <string name="select_segments">Segmente auswählen</string>
-    <string name="select_segments_description">%1$s enthält mehr als ein Segment, Sie müssen den benötigten Teil für die Navigation auswählen.</string>
+    <string name="select_segments_description">%1$s enthält mehr als ein Segment, Sie müssen den benötigten Teil für die Navigation spezifizieren.</string>
     <string name="segments_count">Segment %1$d</string>
     <string name="temporary_conditional_routing_descr">Verwenden Sie Straßeneinschränkungen, die jetzt in der Karte aktiv sind</string>
     <string name="routing_attr_short_way_description">Optimierte kürzere Route (energiesparend)</string>
@@ -4070,7 +4070,7 @@
 \n• Dialog \"Streckenaufzeichnung\" aktualisiert
 \n
 \n</string>
-    <string name="route_line_use_map_style_appearance">Die Routenlinie würde %1$s verwenden, die für den ausgewählten Kartenstil angegeben ist: %2$s.</string>
+    <string name="route_line_use_map_style_appearance">Nutze Standard des Kartenstil (%2$s): %1$s.</string>
     <string name="no_purchases">Du hast keine Einkäufe</string>
     <string name="new_device_account">Neues Gerät / neues Konto</string>
     <string name="contact_support_description">Wenn du Fragen hast, kontaktiere uns bitte unter %1$s.</string>
@@ -4094,7 +4094,7 @@
     <string name="user_points">Anwenderpunkte</string>
     <string name="output">Leistung</string>
     <string name="shared_string_feet">Fuß</string>
-    <string name="srtm_unit_format">Einheit der Höhenlinien</string>
+    <string name="srtm_unit_format">Einheitenvariante der Höhenlinien</string>
     <string name="srtm_download_list_help_message">OsmAnd liefert Höhenlinien-Daten in Metern und Fuß. Sie müssen die Datei erneut herunterladen, um das Format zu ändern.</string>
     <string name="srtm_download_single_help_message">Bitte wählen Sie die gewünschte Variante. Sie müssen die Datei erneut herunterladen, um das Format zu ändern.</string>
     <string name="route_line_use_gradient_coloring">Die Routenlinie wird durch die Steigung eingefärbt.</string>
@@ -4105,4 +4105,6 @@
     <string name="tts_title">TTS</string>
     <string name="recorded_description">Aufgezeichnete Stimme klingt besser, kann aber nur vorher aufgezeichnete Phrasen aussprechen: Abbiegeanweisungen. Kann keine Straßennamen oder POI-Namen ansagen.</string>
     <string name="use_system_language">Systemsprache verwenden</string>
+    <string name="in_grace_period">In der Nachlaufzeit</string>
+    <string name="shared_string_itinerary">Reiseplan</string>
 </resources>
