@@ -3359,7 +3359,7 @@
     <string name="sunset_at">Sonnenuntergang um %1$s</string>
     <string name="sunrise_at">Sonnenaufgang um %1$s</string>
     <string name="rearrange_categories">Kategorien neu ordnen</string>
-    <string name="create_custom_categories_list_promo">Ändern Sie die Sortierung der Liste, blenden Sie Kategorien aus. Sie können alle Änderungen mit Profilen importieren oder exportieren.</string>
+    <string name="create_custom_categories_list_promo">Ändern Sie die Sortierreihenfolge der Liste, blenden Sie Kategorien aus. Sie können alle Änderungen mit Profilen importieren oder exportieren.</string>
     <string name="add_new_custom_category_button_promo">Sie können eine neue benutzerdefinierte Kategorie hinzufügen, indem Sie eine oder mehrere Kategorien auswählen.</string>
     <string name="rendering_attr_streetLightingNight_name">Nur nachts anzeigen</string>
     <string name="plugin_prefs_reset_successful">Alle Plugin-Einstellungen wurden auf den Standardzustand zurückgesetzt.</string>
