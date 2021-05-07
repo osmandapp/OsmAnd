@@ -86,6 +86,8 @@
 		android:layout_height="wrap_content"
 		android:layout_marginLeft="@dimen/content_padding_small"
 		android:layout_marginRight="@dimen/content_padding_small"
-		android:paddingBottom="@dimen/content_padding" />
+		android:paddingBottom="@dimen/content_padding"
+		android:layout_marginStart="@dimen/content_padding_small"
+		android:layout_marginEnd="@dimen/content_padding_small" />
 
 </LinearLayout>

@@ -11,19 +11,69 @@
 	Thx - Hardy
 
 -->
+
+    <string name="shared_string_itinerary">Itinerary</string>
+    <string name="use_system_language">Use system language</string>
+    <string name="recorded_description">Recorded voice sounds better, but can pronounce only prerecorded phrases: turn instructions. Can\'t announce street names or POI names.</string>
+    <string name="tts_title">TTS</string>
+    <string name="tts_description">Text-to-speech (TTS) can pronounce all types of instructions: street names, turn instruction, POI names etc.</string>
+    <string name="language_description">Select preferred language and type of voice guidance.</string>
+    <string name="shared_string_max_height">Max. height</string>
+    <string name="shared_string_min_height">Min. height</string>
+    <string name="route_line_use_gradient_coloring">Route line is colored by elevation slope.</string>
+    <string name="output">Output</string>
+    <string name="user_points">User points</string>
+    <string name="announce_when_exceeded">Announce when exceeded</string>
+    <string name="exit_number">Exit number</string>
+    <string name="srtm_download_single_help_message">Please select the variant. You will need to re-download the file to change the format.</string>
+    <string name="srtm_download_list_help_message">OsmAnd provides contour lines data in meters and feet. You will need to re-download the file to change the format.</string>
+    <string name="srtm_unit_format">Contour lines unit variant</string>
+    <string name="shared_string_feet">feet</string>
+    <string name="update_all_maps_added">Update all maps added to %1$s?</string>
+    <string name="release_4_0_beta">
+    • Added option to download Contour lines in feet\n\n
+    • Plan Route landscape: added tabs to switch between points or graphs\n\n
+    • OsmAnd Live updates moved to \"Downloads > Updates\"\n\n
+    • Tracks can now be colored by altitude, speed, or slope.\n\n
+    • Added option to change the route line appearance.\n\n
+    • Updated \"Trip recording\" dialog\n\n
+    </string>
+    <string name="expired">Expired</string>
+    <string name="on_hold">On hold</string>
+    <string name="in_grace_period">In grace period</string>
+    <string name="renew_subscription">Renew subscription</string>
+    <string name="osmand_live_cancelled">Canceled</string>
+    <string name="next_billing_date">Next billing date: %1$s</string>
+    <string name="three_months_subscription">Three months subscription</string>
+    <string name="monthly_subscription">Monthly subscription</string>
+    <string name="annual_subscription">Annual subscription</string>
+    <string name="osmand_live">OsmAnd Live</string>
+    <string name="troubleshooting_description">Please follow this link if you have any issues with purchases.</string>
+    <string name="troubleshooting">Troubleshooting</string>
+    <string name="contact_support">Contact support</string>
+    <string name="empty_purchases_description">If your purchases don\'t show up here, tap on “%1$s”, or contact our support team.</string>
+    <string name="contact_support_description">If you have any questions, please contact us at %1$s.</string>
+    <string name="new_device_account">New device / new account</string>
+    <string name="no_purchases">You don\'t have any purchases</string>
+    <string name="specify_color_for_map_mode">Specify color for map mode %1$s.</string>
+    <string name="route_line_use_map_style_appearance">Use map style (%2$s) default %1$s.</string>
+    <string name="shared_string_route_line">Route line</string>
+    <string name="customize_route_line">Customize route line</string>
+    <string name="trip_recording_show_start_dialog_setting">If disabled, recording will start immediately after tapping the widget or menu item, skipping the confirmation dialog.</string>
+    <string name="show_start_dialog">Show start dialog</string>
     <string name="lost_data_warning">All unsaved data will be lost.</string>
     <string name="trip_recording_save_and_continue">Save and continue</string>
-    <string name="trip_recording_logging_interval_info">Logging interval set time period in which OsmAnd will ask for the current location position data.</string>
-    <string name="select_another_colorization">Please select another type of colorization.</string>
+    <string name="trip_recording_logging_interval_info">The logging interval sets the time period in which OsmAnd will request the current position data.</string>
+    <string name="select_another_colorization">Please select another type of coloring.</string>
     <string name="track_has_no_speed">The track does not contain speed data.</string>
     <string name="track_has_no_altitude">The track does not contain altitude data.</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">Nature boundaries</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Hide nature reserve, protected areas and national park boundaries</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Hide nature reserve, protected areas, and national park boundaries.</string>
     <string name="shared_string_interval">Interval</string>
     <string name="quick_action_show_hide_title">Show/hide</string>
     <string name="copy_poi_name">Copy POI name</string>
     <string name="track_recording_will_be_continued">The recording will be continued.</string>
-    <string name="select_category_descr">Select category or add new one</string>
+    <string name="select_category_descr">Select category or add a new one</string>
     <string name="purchases">Purchases</string>
     <string name="live_update_delete_updates_msg">Are you sure you want to delete all %s live updates?</string>
     <string name="delete_updates">Delete updates</string>
@@ -47,7 +97,7 @@
     <string name="shared_strings_all_regions">All regions</string>
     <string name="restart">Restart</string>
     <string name="map_orientation_threshold_descr">Don\'t rotate map view if speed is less than a threshold</string>
-    <string name="snap_to_road_descr">Current location icon will be snapped to the current navigation route</string>
+    <string name="snap_to_road_descr">Current position icon will snap to the current navigation route</string>
     <string name="routing_attr_driving_style_description">Select driving purpose to get shorter, faster or safer route</string>
     <string name="routing_attr_short_way_description">Optimized shorter route (energy saving)</string>
     <string name="temporary_conditional_routing_descr">Use road restrictions that are active now on the map</string>
@@ -58,7 +108,7 @@
     <string name="activity_type_running_name">Running</string>
     <string name="activity_type_hiking_name">Hiking</string>
     <string name="activity_type_cycling_name">Cycling</string>
-    <string name="activity_type_mountainbike_name">Mountainbike</string>
+    <string name="activity_type_mountainbike_name">Mountain bike</string>
     <string name="activity_type_racing_name">Racing</string>
     <string name="activity_type_riding_name">Riding</string>
     <string name="activity_type_snowmobile_name">Snowmobile</string>
@@ -72,7 +122,7 @@
     <string name="toast_select_edits_for_upload">Select edits for upload</string>
     <string name="uploaded_count">Uploaded %1$d of %2$d</string>
     <string name="segments_count">Segment %1$d</string>
-    <string name="select_segments_description">%1$s contains more than one segment, you need to select the needed part for the navigation.</string>
+    <string name="select_segments_description">%1$s contains more than one segment, you need to specify the portion for the navigation.</string>
     <string name="select_segments">Select segments</string>
     <string name="uploading_count">Uploading %1$d of %2$d</string>
     <string name="upload_photo_completed">Upload completed</string>
@@ -82,8 +132,8 @@
     <string name="delete_waypoints">Delete waypoints</string>
     <string name="context_menu_edit_descr">Edit description</string>
     <string name="context_menu_read_full">Read full</string>
-    <string name="delete_online_routing_engine">Delete this online routing engine?</string>
-    <string name="message_name_is_already_exists">The name is already exists</string>
+    <string name="delete_online_routing_engine">Remove this online routing engine?</string>
+    <string name="message_name_is_already_exists">Name already exists</string>
     <string name="message_server_error">Server error: %1$s</string>
     <string name="routing_engine_vehicle_type_mtb">MTB</string>
     <string name="routing_engine_vehicle_type_racingbike">Racing bike</string>
@@ -101,7 +151,7 @@
     <string name="show_track_on_map">Show track on map</string>
     <string name="start_recording">Start recording</string>
     <string name="announcement_time_title">Announcement time</string>
-    <string name="announcement_time_descr">Announcement time of different voice prompts depends on prompt type, current navigation speed and default navigation speed.</string>
+    <string name="announcement_time_descr">The anouncement timing of different voice prompts depends on prompt type, current navigation speed, and default navigation speed.</string>
     <string name="announcement_time_intervals">Time and distance intervals</string>
     <string name="shared_string_turn">Turn</string>
     <string name="announcement_time_arrive">Arrive at destination</string>
@@ -1177,7 +1227,7 @@
     <string name="search_no_results_feedback">No search results?\nProvide feedback</string>
     <!-- string name="release_3_2_pre">
     • Fixed crash on startup that occurred on some devices\n\n
-    • New Markers feature: Display already traversed markers\n\n 
+    • New Markers feature: Display already traversed markers\n\n
     • Search history now shows previously searched categories\n\n
     • Fixed crash on startup that occurred with non-latin maps\n\n
     • Improved rendering speed issues on Android 8.0 devices\n\n
@@ -2445,7 +2495,7 @@
     <string name="traffic_warning_calming">Traffic calming</string>
     <string name="traffic_warning_speed_camera">Speed camera</string>
     <string name="traffic_warning">Traffic warning</string>
-    <string name="speak_favorites">Favorites nearby</string>
+    <string name="speak_favorites">Nearby favorites</string>
     <string name="speak_poi">Nearby POI</string>
     <string name="way_alarms">Traffic warnings</string>
     <string name="background_service_is_enabled_question">OsmAnd background service still running. Stop it, too?</string>

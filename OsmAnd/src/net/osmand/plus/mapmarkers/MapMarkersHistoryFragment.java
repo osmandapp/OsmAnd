@@ -24,12 +24,13 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.mapmarkers.MapMarkersHelper.MapMarkerChangedListener;
 import net.osmand.plus.mapmarkers.adapters.MapMarkerHeaderViewHolder;
 import net.osmand.plus.mapmarkers.adapters.MapMarkerItemViewHolder;
 import net.osmand.plus.mapmarkers.adapters.MapMarkersHistoryAdapter;
 import net.osmand.plus.widgets.EmptyStateRecyclerView;
 
-public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHelper.MapMarkerChangedListener {
+public class MapMarkersHistoryFragment extends Fragment implements MapMarkerChangedListener {
 
 	private MapMarkersHistoryAdapter adapter;
 	private OsmandApplication app;

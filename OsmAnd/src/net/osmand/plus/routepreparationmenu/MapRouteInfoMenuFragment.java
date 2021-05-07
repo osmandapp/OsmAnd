@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
+import net.osmand.GPXUtilities;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
@@ -23,11 +24,16 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.routing.GPXRouteParams;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.track.TrackMenuFragment;
+import net.osmand.plus.track.TrackSelectSegmentBottomSheet;
 import net.osmand.plus.widgets.TextViewExProgress;
 
-public class MapRouteInfoMenuFragment extends ContextMenuFragment {
+import static net.osmand.plus.track.TrackMenuFragment.startNavigationForGPX;
+
+public class MapRouteInfoMenuFragment extends ContextMenuFragment implements TrackSelectSegmentBottomSheet.OnSegmentSelectedListener {
 	public static final String TAG = MapRouteInfoMenuFragment.class.getName();
 
 	@Nullable
@@ -95,13 +101,13 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-	                         Bundle savedInstanceState) {
+							 Bundle savedInstanceState) {
 		MapActivity mapActivity = requireMapActivity();
 		menu = mapActivity.getMapRouteInfoMenu();
 
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		if (view != null) {
-			bottomContainer = (FrameLayout) view.findViewById(R.id.bottom_container);
+			bottomContainer = view.findViewById(R.id.bottom_container);
 			modesLayoutToolbar = view.findViewById(R.id.modes_layout_toolbar);
 			modesLayoutToolbarContainer = view.findViewById(R.id.modes_layout_toolbar_container);
 			modesLayoutListContainer = view.findViewById(R.id.modes_layout_list_container);
@@ -121,7 +127,7 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 				int widthNoShadow = getLandscapeNoShadowWidth();
 				modesLayoutToolbar.setLayoutParams(new FrameLayout.LayoutParams(widthNoShadow, ViewGroup.LayoutParams.WRAP_CONTENT));
 				FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(widthNoShadow, ViewGroup.LayoutParams.WRAP_CONTENT);
-				params.gravity = Gravity.BOTTOM|Gravity.START;
+				params.gravity = Gravity.BOTTOM | Gravity.START;
 				view.findViewById(R.id.control_buttons).setLayoutParams(params);
 				View appModesView = view.findViewById(R.id.app_modes);
 				AndroidUtils.setPadding(appModesView, 0, 0, appModesView.getPaddingRight(), 0);
@@ -182,15 +188,15 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 
 	@Override
 	protected void updateMenuState(int currentMenuState, int newMenuState) {
-		if(getMyApplication().getRoutingHelper().isRouteCalculated() ) {
+		if (getMyApplication().getRoutingHelper().isRouteCalculated()) {
 			ApplicationMode mV = getMyApplication().getRoutingHelper().getAppMode();
 			if (newMenuState == MenuState.HEADER_ONLY && currentMenuState == MenuState.HALF_SCREEN) {
-				getSettings().OPEN_ONLY_HEADER_STATE_ROUTE_CALCULATED.setModeValue(mV,true);
+				getSettings().OPEN_ONLY_HEADER_STATE_ROUTE_CALCULATED.setModeValue(mV, true);
 			} else if (currentMenuState == MenuState.HEADER_ONLY && newMenuState == MenuState.HALF_SCREEN) {
 				getSettings().OPEN_ONLY_HEADER_STATE_ROUTE_CALCULATED.resetModeToDefault(mV);
 			}
 		}
- 	}
+	}
 
 	@Override
 	protected void setViewY(int y, boolean animated, boolean adjustMapPos) {
@@ -347,7 +353,7 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 		OsmandApplication app = getMyApplication();
 		return app != null && app.getRoutingHelper().isOsmandRouting();
 	}
-	
+
 	public void updateRouteCalculationProgress(int progress) {
 		MapActivity mapActivity = getMapActivity();
 		View mainView = getMainView();
@@ -356,7 +362,7 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 			return;
 		}
 		boolean indeterminate = isPublicTransportMode() || !isOsmandRouting();
-		ProgressBar progressBar = (ProgressBar) mainView.findViewById(R.id.progress_bar);
+		ProgressBar progressBar = mainView.findViewById(R.id.progress_bar);
 		if (progressBar != null) {
 			if (progress == 0) {
 				progressBar.setIndeterminate(indeterminate);
@@ -366,14 +372,14 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 			}
 			progressBar.setProgress(progress);
 		}
-		ProgressBar progressBarButton = (ProgressBar) view.findViewById(R.id.progress_bar_button);
+		ProgressBar progressBarButton = view.findViewById(R.id.progress_bar_button);
 		if (progressBarButton != null) {
 			if (progressBarButton.getVisibility() != View.VISIBLE) {
 				progressBarButton.setVisibility(View.VISIBLE);
 			}
 			progressBarButton.setProgress(indeterminate ? 0 : progress);
 		}
-		TextViewExProgress textViewExProgress = (TextViewExProgress) view.findViewById(R.id.start_button_descr);
+		TextViewExProgress textViewExProgress = view.findViewById(R.id.start_button_descr);
 		textViewExProgress.percent = indeterminate ? 0 : progress / 100f;
 		textViewExProgress.invalidate();
 	}
@@ -390,11 +396,11 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 		if (progressBar != null) {
 			progressBar.setVisibility(View.GONE);
 		}
-		ProgressBar progressBarButton = (ProgressBar) view.findViewById(R.id.progress_bar_button);
+		ProgressBar progressBarButton = view.findViewById(R.id.progress_bar_button);
 		if (progressBarButton != null) {
 			progressBarButton.setProgress(0);
 		}
-		TextViewExProgress textViewExProgress = (TextViewExProgress) view.findViewById(R.id.start_button_descr);
+		TextViewExProgress textViewExProgress = view.findViewById(R.id.start_button_descr);
 		textViewExProgress.percent = 0;
 	}
 
@@ -499,6 +505,21 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 
 		} catch (RuntimeException e) {
 			return false;
+		}
+	}
+
+	@Override
+	public void onSegmentSelect(GPXUtilities.GPXFile gpxFile, int selectedSegment) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getMyApplication().getSettings().GPX_ROUTE_SEGMENT.set(selectedSegment);
+			startNavigationForGPX(gpxFile, mapActivity.getMapActions(), mapActivity);
+			GPXRouteParams.GPXRouteParamsBuilder paramsBuilder = getMyApplication().getRoutingHelper().getCurrentGPXRoute();
+			if (paramsBuilder != null) {
+				paramsBuilder.setSelectedSegment(selectedSegment);
+				getMyApplication().getRoutingHelper().onSettingsChanged(true);
+			}
+			dismiss();
 		}
 	}
 }

@@ -4,7 +4,7 @@
     <string name="go_to_settings">Einstellungen öffnen</string>
     <string name="not_sent_yet">Noch nicht gesendet</string>
     <string name="not_found_yet">Noch nicht gefunden</string>
-    <string name="re_send_location">Position neu senden</string>
+    <string name="re_send_location">Standort erneut senden</string>
     <string name="sharing_status">Freigabestatus</string>
     <string name="location_sharing_status">Teilen: %1$s</string>
     <string name="shared_string_enabled">Aktiviert</string>
@@ -82,7 +82,7 @@
     <string name="no_location_permission">Der App fehlt die Berechtigung, auf Standortdaten zuzugreifen.</string>
     <string name="gps_not_available">Bitte schalten Sie \"Standort\" in den Systemeinstellungen ein</string>
     <string name="osmand_service">Hintergrundmodus</string>
-    <string name="osmand_service_descr">OsmAnd Tracker läuft im Hintergrund bei ausgeschaltetem Bildschirm.</string>
+    <string name="osmand_service_descr">OsmAnd Tracker läuft bei ausgeschaltetem Bildschirm im Hintergrund.</string>
     <string name="shared_string_distance">Distanz</string>
     <string name="share_location">Standort teilen</string>
     <string name="process_service">OsmAnd Tracker-Service</string>

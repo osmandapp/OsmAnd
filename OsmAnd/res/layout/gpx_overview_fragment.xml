@@ -20,12 +20,14 @@
 		android:textSize="@dimen/default_desc_text_size"
 		osmand:lineHeight="@dimen/default_desc_line_height"
 		osmand:typeface="@string/font_roboto_regular"
-		tools:text="Amsterdam is the Netherlands' capital and financial, cultural and creative centre with more" />
+		tools:text="Amsterdam is the Netherlands' capital and financial, cultural and creative centre with more"
+		android:layout_marginEnd="@dimen/content_padding"
+		android:layout_marginStart="@dimen/content_padding" />
 
 	<androidx.recyclerview.widget.RecyclerView
 		android:id="@+id/recycler_overview"
 		android:layout_width="match_parent"
-		android:layout_height="@dimen/list_header_height"
+		android:layout_height="wrap_content"
 		android:layout_marginBottom="@dimen/content_padding_small_half"
 		android:clipToPadding="false"
 		android:orientation="horizontal"

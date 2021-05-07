@@ -54,12 +54,16 @@ import net.osmand.plus.profiles.SelectProfileBottomSheet.DialogMode;
 import net.osmand.plus.profiles.SelectProfileBottomSheet.OnSelectProfileCallback;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
+import net.osmand.plus.routing.RouteLineDrawInfo;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.backup.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
+import net.osmand.plus.settings.fragments.RouteLineAppearanceFragment.OnApplyRouteLineListener;
 import net.osmand.plus.track.ColorsCard;
 import net.osmand.plus.track.CustomColorBottomSheet.ColorPickerListener;
+import net.osmand.plus.track.GradientScaleType;
 import net.osmand.plus.widgets.FlowLayout;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.util.Algorithms;
@@ -74,8 +78,9 @@ import java.util.List;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILES_LIST_UPDATED_ARG;
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILE_KEY_ARG;
+import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
 
-public class ProfileAppearanceFragment extends BaseSettingsFragment implements OnSelectProfileCallback, CardListener, ColorPickerListener {
+public class ProfileAppearanceFragment extends BaseSettingsFragment implements OnSelectProfileCallback, CardListener, ColorPickerListener, OnApplyRouteLineListener {
 
 	private static final Log LOG = PlatformUtil.getLog(ProfileAppearanceFragment.class);
 
@@ -91,6 +96,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 	private static final String LOCATION_ICON_ITEMS = "location_icon_items";
 	private static final String SELECT_NAV_ICON = "select_nav_icon";
 	private static final String NAV_ICON_ITEMS = "nav_icon_items";
+	private static final String CUSTOMIZE_ROUTE_LINE = "customize_route_line";
 
 	private static final String PROFILE_NAME_KEY = "profile_name_key";
 	private static final String PROFILE_STRINGKEY_KEY = "profile_stringkey_key";
@@ -159,6 +165,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 			changedProfile.routeService = profile.routeService;
 			changedProfile.locationIcon = profile.locationIcon;
 			changedProfile.navigationIcon = profile.navigationIcon;
+			changedProfile.routeLineDrawInfo = profile.routeLineDrawInfo;
 			isNewProfile = ApplicationMode.valueOfStringKey(changedProfile.stringKey, null) == null;
 		}
 		requireMyActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
@@ -179,6 +186,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		profile.routeService = baseModeForNewProfile.getRouteService();
 		profile.locationIcon = baseModeForNewProfile.getLocationIcon();
 		profile.navigationIcon = baseModeForNewProfile.getNavigationIcon();
+		profile.routeLineDrawInfo = createRouteLineDrawInfo(baseModeForNewProfile);
 	}
 
 	@Override
@@ -239,6 +247,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 			findPreference(SELECT_ICON).setVisible(false);
 			findPreference(ICON_ITEMS).setVisible(false);
 		}
+		updateRouteLinePreference();
 	}
 
 	@SuppressLint("InlinedApi")
@@ -318,6 +327,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		outState.putBoolean(IS_BASE_PROFILE_IMPORTED, isBaseProfileImported);
 		outState.putSerializable(PROFILE_LOCATION_ICON_KEY, changedProfile.locationIcon);
 		outState.putSerializable(PROFILE_NAVIGATION_ICON_KEY, changedProfile.navigationIcon);
+		changedProfile.routeLineDrawInfo.saveToBundle(outState);
 	}
 
 	private void restoreState(Bundle savedInstanceState) {
@@ -331,6 +341,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		isBaseProfileImported = savedInstanceState.getBoolean(IS_BASE_PROFILE_IMPORTED);
 		changedProfile.locationIcon = (LocationIcon) savedInstanceState.getSerializable(PROFILE_LOCATION_ICON_KEY);
 		changedProfile.navigationIcon = (NavigationIcon) savedInstanceState.getSerializable(PROFILE_NAVIGATION_ICON_KEY);
+		changedProfile.routeLineDrawInfo = new RouteLineDrawInfo(savedInstanceState);
 		isNewProfile = savedInstanceState.getBoolean(IS_NEW_PROFILE_KEY);
 	}
 
@@ -709,11 +720,20 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		changedProfile.routingProfile = changedProfile.parent.getRoutingProfile();
 		changedProfile.routeService = changedProfile.parent.getRouteService();
 		this.isBaseProfileImported = isBaseProfileImported;
+		updateRouteLinePreference();
 	}
 
 	private void setupBaseProfileView(String stringKey) {
 		ApplicationMode mode = ApplicationMode.valueOfStringKey(stringKey, ApplicationMode.DEFAULT);
 		baseProfileName.setText(Algorithms.capitalizeFirstLetter(mode.toHumanString()));
+	}
+
+	private void updateRouteLinePreference() {
+		Preference preference = findPreference(CUSTOMIZE_ROUTE_LINE);
+		boolean isDefaultProfile = getSelectedAppMode().equals(ApplicationMode.DEFAULT) && !isNewProfile;
+		boolean isPublicTransport = PUBLIC_TRANSPORT_KEY.equals(changedProfile.routingProfile);
+		preference.setVisible(!isDefaultProfile && !isPublicTransport);
+		preference.setIcon(getIcon(R.drawable.ic_action_route_distance, getActiveColorRes()));
 	}
 
 	private boolean checkProfileName() {
@@ -756,6 +776,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 			mode.setCustomIconColor(changedProfile.customColor);
 			mode.setLocationIcon(changedProfile.locationIcon);
 			mode.setNavigationIcon(changedProfile.navigationIcon);
+			saveRouteLineAppearance(mode, changedProfile.routeLineDrawInfo);
 
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
@@ -783,6 +804,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		if (!ApplicationMode.values(app).contains(mode)) {
 			ApplicationMode.changeProfileAvailability(mode, true, app);
 		}
+		saveRouteLineAppearance(mode, changedProfile.routeLineDrawInfo);
 		return mode;
 	}
 
@@ -968,6 +990,21 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 	}
 
 	@Override
+	public boolean onPreferenceClick(Preference preference) {
+		String prefId = preference.getKey();
+		if (CUSTOMIZE_ROUTE_LINE.equals(prefId)) {
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				RouteLineDrawInfo drawInfo = changedProfile.routeLineDrawInfo;
+				drawInfo.setIconId(changedProfile.navigationIcon.getIconId());
+				drawInfo.setIconColor(changedProfile.getActualColor());
+				RouteLineAppearanceFragment.showInstance(mapActivity, drawInfo, this);
+			}
+		}
+		return super.onPreferenceClick(preference);
+	}
+
+	@Override
 	public void onCardButtonPressed(@NonNull BaseCard card, int buttonIndex) {
 	}
 
@@ -975,6 +1012,43 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 	public void onColorSelected(Integer prevColor, int newColor) {
 		colorsCard.onColorSelected(prevColor, newColor);
 		this.onCardPressed(colorsCard);
+	}
+
+	@Override
+	public void applyRouteLineAppearance(@NonNull RouteLineDrawInfo routeLineDrawInfo) {
+		changedProfile.routeLineDrawInfo = routeLineDrawInfo;
+	}
+
+	private RouteLineDrawInfo createRouteLineDrawInfo(@NonNull ApplicationMode appMode) {
+		Integer colorDay = getRouteLineColor(appMode, settings.ROUTE_LINE_COLOR_DAY);
+		Integer colorNight = getRouteLineColor(appMode, settings.ROUTE_LINE_COLOR_NIGHT);
+		GradientScaleType scaleType = settings.ROUTE_LINE_GRADIENT.getModeValue(appMode);
+		String widthKey = settings.ROUTE_LINE_WIDTH.getModeValue(appMode);
+		return new RouteLineDrawInfo(colorDay, colorNight, scaleType, widthKey);
+	}
+
+	private Integer getRouteLineColor(@NonNull ApplicationMode appMode,
+	                                  @NonNull CommonPreference<Integer> preference) {
+		int storedValue = preference.getModeValue(appMode);
+		return storedValue != 0 ? storedValue : null;
+	}
+
+	private void saveRouteLineAppearance(@NonNull ApplicationMode appMode,
+	                                     @NonNull RouteLineDrawInfo drawInfo) {
+		saveRouteLineColor(appMode, settings.ROUTE_LINE_COLOR_DAY, drawInfo.getColor(false));
+		saveRouteLineColor(appMode, settings.ROUTE_LINE_COLOR_NIGHT, drawInfo.getColor(true));
+		settings.ROUTE_LINE_GRADIENT.setModeValue(appMode, drawInfo.getGradientScaleType());
+		settings.ROUTE_LINE_WIDTH.setModeValue(appMode, drawInfo.getWidth());
+	}
+
+	private void saveRouteLineColor(@NonNull ApplicationMode appMode,
+	                                @NonNull CommonPreference<Integer> preference,
+	                                @Nullable @ColorInt Integer color) {
+		if (color != null) {
+			preference.setModeValue(appMode, color);
+		} else {
+			preference.resetModeToDefault(appMode);
+		}
 	}
 
 	public static boolean showInstance(FragmentActivity activity, SettingsScreenType screenType, @Nullable String appMode, boolean imported) {
@@ -1008,6 +1082,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		RouteService routeService;
 		NavigationIcon navigationIcon;
 		LocationIcon locationIcon;
+		RouteLineDrawInfo routeLineDrawInfo;
 
 		@ColorInt
 		public int getActualColor() {
@@ -1044,6 +1119,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 				return false;
 			if (routeService != that.routeService) return false;
 			if (navigationIcon != that.navigationIcon) return false;
+			if (routeLineDrawInfo != null ? !routeLineDrawInfo.equals(that.routeLineDrawInfo) : that.routeLineDrawInfo != null) return false;
 			return locationIcon == that.locationIcon;
 		}
 
@@ -1059,6 +1135,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 			result = 31 * result + (routeService != null ? routeService.hashCode() : 0);
 			result = 31 * result + (navigationIcon != null ? navigationIcon.hashCode() : 0);
 			result = 31 * result + (locationIcon != null ? locationIcon.hashCode() : 0);
+			result = 31 * result + (routeLineDrawInfo != null ? routeLineDrawInfo.hashCode() : 0);
 			return result;
 		}
 	}

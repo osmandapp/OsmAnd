@@ -52,7 +52,7 @@
 	</LinearLayout>
 
 	<LinearLayout
-		android:id="@+id/average_max"
+		android:id="@+id/top_line_blocks"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:orientation="horizontal"
@@ -172,7 +172,7 @@
 
 
 	<LinearLayout
-		android:id="@+id/time_distance"
+		android:id="@+id/bottom_line_blocks"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:orientation="horizontal"
@@ -200,7 +200,7 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:background="@null"
-					android:text="@string/shared_string_time_moving"
+					android:text="@string/moving_time"
 					android:textColor="?android:attr/textColorSecondary"
 					android:textSize="@dimen/default_desc_text_size" />
 
@@ -221,7 +221,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="@dimen/poi_icon_size"
 				android:layout_marginTop="2dp"
-				osmand:srcCompat="@drawable/ic_action_time_span" />
+				osmand:srcCompat="@drawable/ic_action_time_moving_16" />
 
 		</LinearLayout>
 
@@ -275,6 +275,7 @@
 	</LinearLayout>
 
 	<View
+		android:id="@+id/details_divider"
 		android:layout_width="match_parent"
 		android:layout_height="1dp"
 		android:background="?attr/dashboard_divider" />

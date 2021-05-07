@@ -1,6 +1,24 @@
 package net.osmand.search.core;
 
 
+import java.io.IOException;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.TreeSet;
+
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.ResultMatcher;
@@ -32,27 +50,10 @@ import net.osmand.util.LocationParser;
 import net.osmand.util.LocationParser.ParsedOpenLocationCode;
 import net.osmand.util.MapUtils;
 
-import java.io.IOException;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.TreeSet;
-
 
 public class SearchCoreFactory {
 
+	public static boolean DISPLAY_DEFAULT_POI_TYPES = false;
 	public static final int MAX_DEFAULT_SEARCH_RADIUS = 7;
 	public static final int SEARCH_MAX_PRIORITY = Integer.MAX_VALUE;
 
@@ -816,6 +817,47 @@ public class SearchCoreFactory {
 				topVisibleFilters = types.getTopVisibleFilters();
 				topVisibleFilters.remove(types.getOsmwiki());
 				categories = types.getCategories(false);
+
+				if (DISPLAY_DEFAULT_POI_TYPES) {
+					List<String> order = new ArrayList<>();
+					for (AbstractPoiType p : topVisibleFilters) {
+						order.add(getStandardFilterId(p));
+					}
+					CustomSearchPoiFilter nearestPois = new CustomSearchPoiFilter() {
+
+						@Override
+						public boolean isEmpty() {
+							return false;
+						}
+
+						@Override
+						public boolean accept(PoiCategory type, String subcategory) {
+							return true;
+						}
+
+						@Override
+						public ResultMatcher<Amenity> wrapResultMatcher(ResultMatcher<Amenity> matcher) {
+							return matcher;
+						}
+
+						@Override
+						public String getName() {
+							return "Neareset POIs";
+						}
+
+						@Override
+						public Object getIconResource() {
+							return null;
+						}
+
+						@Override
+						public String getFilterId() {
+							return "nearest_pois";
+						}
+					};
+					setActivePoiFiltersByOrder(order);
+					addCustomFilter(nearestPois, 100);
+				}
 			}
 		}
 
@@ -978,8 +1020,7 @@ public class SearchCoreFactory {
 				nameFilter = phrase.getUnknownSearchPhrase();
 			} else if (searchAmenityTypesAPI != null && phrase.isFirstUnknownSearchWordComplete()) {
 				NameStringMatcher nm = phrase.getFirstUnknownNameStringMatcher();
-				NameStringMatcher nmAdditional = new NameStringMatcher(phrase.getFirstUnknownSearchWord(),
-						StringMatcherMode.CHECK_EQUALS_FROM_SPACE) ;
+				NameStringMatcher nmAdditional = new NameStringMatcher(phrase.getFirstUnknownSearchWord(), StringMatcherMode.CHECK_EQUALS_FROM_SPACE);
 				searchAmenityTypesAPI.initPoiTypes();
 				Map<String, PoiTypeResult> poiTypeResults = searchAmenityTypesAPI.getPoiTypeResults(nm, nmAdditional);
 				// find first full match only
@@ -987,15 +1028,15 @@ public class SearchCoreFactory {
 					for (String foundName : poiTypeResult.foundWords) {
 						CollatorStringMatcher csm = new CollatorStringMatcher(foundName, StringMatcherMode.CHECK_ONLY_STARTS_WITH);
 						// matches only completely
-						int mwords = phrase.countWords(foundName) ;
+						int mwords = SearchPhrase.countWords(foundName);
 						if (csm.matches(phrase.getUnknownSearchPhrase()) && countExtraWords < mwords) {
-							countExtraWords = phrase.countWords(foundName);
+							countExtraWords = SearchPhrase.countWords(foundName);
 							List<String> otherSearchWords = phrase.getUnknownSearchWords();
 							nameFilter = null;
 							if (countExtraWords - 1 < otherSearchWords.size()) {
 								nameFilter = "";
-								for(int k = countExtraWords - 1; k < otherSearchWords.size(); k++) {
-									if(nameFilter.length() > 0) {
+								for (int k = countExtraWords - 1; k < otherSearchWords.size(); k++) {
+									if (nameFilter.length() > 0) {
 										nameFilter += SearchPhrase.DELIMITER;
 									}
 									nameFilter += otherSearchWords.get(k);
@@ -1003,6 +1044,12 @@ public class SearchCoreFactory {
 							}
 							poiTypeFilter = getPoiTypeFilter(poiTypeResult.pt, poiAdditionals);
 							unselectedPoiType = poiTypeResult.pt;
+							int wordsInPoiType = SearchPhrase.countWords(foundName);
+							int wordsInUnknownPart = SearchPhrase.countWords(phrase.getUnknownSearchPhrase());
+							if (wordsInPoiType == wordsInUnknownPart) {
+								// store only perfect match
+								phrase.setUnselectedPoiType(unselectedPoiType);
+							}
 						}
 					}
 				}
@@ -1317,7 +1364,13 @@ public class SearchCoreFactory {
 							|| !phrase.isSearchTypeAllowed(ObjectType.HOUSE)) {
 						continue;
 					}
-					res.localeName = b.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
+					if(interpolation) {
+						res.localeName = lw;
+						res.location = b.getLocation(b.interpolation(lw));
+					} else {
+						res.localeName = b.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
+						res.location = b.getLocation();
+					}
 					res.otherNames = b.getAllNames(true);
 					res.object = b;
 					res.file = file;
@@ -1328,12 +1381,6 @@ public class SearchCoreFactory {
 					res.relatedObject = s;
 					res.localeRelatedObjectName = s.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
 					res.objectType = ObjectType.HOUSE;
-					if(interpolation) {
-						res.location = b.getLocation(b.interpolation(lw));
-						res.localeName = lw;
-					} else {
-						res.location = b.getLocation();
-					}
 					res.preferredZoom = 17;
 
 					resultMatcher.publish(res);

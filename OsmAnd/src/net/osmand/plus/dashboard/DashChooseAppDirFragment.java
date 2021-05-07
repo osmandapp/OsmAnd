@@ -11,7 +11,6 @@ import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.StatFs;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -34,10 +33,10 @@ import net.osmand.FileUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.ValueHolder;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.ProgressImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -93,18 +92,6 @@ public class DashChooseAppDirFragment {
 			selectePathTemp = null;
 		}
 
-		private String getFreeSpace(File dir) {
-			if (dir.canRead()) {
-				try {
-					StatFs fs = new StatFs(dir.getAbsolutePath());
-					return AndroidUtils.formatSize(activity, (long) fs.getAvailableBlocks() * fs.getBlockSize());
-				} catch (IllegalArgumentException e) {
-					LOG.error(e);
-				}
-			}
-			return "";
-		}
-
 		public void updateView() {
 			if (type == OsmandSettings.EXTERNAL_STORAGE_TYPE_INTERNAL_FILE) {
 				locationPath.setText(R.string.storage_directory_internal_app);
@@ -117,7 +104,7 @@ public class DashChooseAppDirFragment {
 			} else if (type == OsmandSettings.EXTERNAL_STORAGE_TYPE_SPECIFIED) {
 				locationPath.setText(R.string.storage_directory_manual);
 			}
-			locationDesc.setText(selectedFile.getAbsolutePath() + " \u2022 " + getFreeSpace(selectedFile));
+			locationDesc.setText(selectedFile.getAbsolutePath() + " \u2022 " + AndroidUtils.getFreeSpace(activity, selectedFile));
 			boolean copyFiles = !currentAppFile.getAbsolutePath().equals(selectedFile.getAbsolutePath()) && !mapsCopied;
 			warningReadonly.setVisibility(copyFiles ? View.VISIBLE : View.GONE);
 			if (copyFiles) {

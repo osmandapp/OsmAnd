@@ -530,7 +530,7 @@ public class ConfigureMapMenu {
 									TextView switchText = (TextView) v.findViewById(R.id.switchText);
 									switchText.setText(activity.getString(R.string.translit_name_if_miss, txtValues[position]));
 									SwitchCompat check = (SwitchCompat) v.findViewById(R.id.check);
-									check.setChecked(settings.MAP_TRANSLITERATE_NAMES.isSet() ? transliterateNames : txtIds[position].equals("en"));
+									check.setChecked(transliterateNames);
 									check.setOnCheckedChangeListener(translitChangdListener);
 									UiUtilities.setupCompoundButton(nightMode, selectedProfileColor, check);
 								} else {
@@ -548,6 +548,7 @@ public class ConfigureMapMenu {
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
 								selectedLanguageIndex = which;
+								transliterateNames = settings.MAP_TRANSLITERATE_NAMES.isSet() ? transliterateNames : txtIds[which].equals("en");
 								((AlertDialog) dialog).getListView().setSelection(which);
 								singleChoiceAdapter.notifyDataSetChanged();
 							}

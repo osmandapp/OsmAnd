@@ -6,7 +6,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.text.BidiFormatter;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,12 +26,12 @@ import androidx.preference.PreferenceViewHolder;
 import net.osmand.AndroidUtils;
 import net.osmand.FileUtils;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.ChangeDataStorageBottomSheet;
 import net.osmand.plus.settings.bottomsheets.SelectFolderBottomSheet;
 import net.osmand.plus.settings.datastorage.item.MemoryItem;
@@ -43,19 +45,20 @@ import java.io.File;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-import static net.osmand.plus.settings.datastorage.DataStorageHelper.INTERNAL_STORAGE;
-import static net.osmand.plus.settings.datastorage.DataStorageHelper.MANUALLY_SPECIFIED;
-import static net.osmand.plus.settings.datastorage.DataStorageHelper.OTHER_MEMORY;
-import static net.osmand.plus.settings.datastorage.DataStorageHelper.TILES_MEMORY;
 import static net.osmand.plus.settings.bottomsheets.ChangeDataStorageBottomSheet.CHOSEN_DIRECTORY;
 import static net.osmand.plus.settings.bottomsheets.ChangeDataStorageBottomSheet.MOVE_DATA;
 import static net.osmand.plus.settings.bottomsheets.SelectFolderBottomSheet.NEW_PATH;
 import static net.osmand.plus.settings.bottomsheets.SelectFolderBottomSheet.PATH_CHANGED;
+import static net.osmand.plus.settings.datastorage.DataStorageHelper.INTERNAL_STORAGE;
+import static net.osmand.plus.settings.datastorage.DataStorageHelper.MANUALLY_SPECIFIED;
+import static net.osmand.plus.settings.datastorage.DataStorageHelper.OTHER_MEMORY;
+import static net.osmand.plus.settings.datastorage.DataStorageHelper.SHARED_STORAGE;
+import static net.osmand.plus.settings.datastorage.DataStorageHelper.TILES_MEMORY;
 
 public class DataStorageFragment extends BaseSettingsFragment implements DataStorageHelper.UpdateMemoryInfoUIAdapter {
 	public final static int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 500;
 	public final static int UI_REFRESH_TIME_MS = 500;
-	
+
 	private final static String CHANGE_DIRECTORY_BUTTON = "change_directory";
 	private final static String OSMAND_USAGE = "osmand_usage";
 
@@ -67,7 +70,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 	private String tmpManuallySpecifiedPath;
 	private DataStorageHelper dataStorageHelper;
 	private boolean calculateTilesBtnPressed;
-	
+
 	private RefreshUsedMemoryTask calculateMemoryTask;
 	private RefreshUsedMemoryTask calculateTilesMemoryTask;
 
@@ -84,10 +87,10 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 		}
 		super.onCreate(savedInstanceState);
 	}
-	
+
 	@Override
 	protected void setupPreferences() {
-		
+
 		PreferenceScreen screen = getPreferenceScreen();
 
 		if (screen == null || dataStorageHelper == null) {
@@ -202,13 +205,13 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 		int primaryTextColorResId = isNightMode() ? R.color.text_color_primary_dark : R.color.text_color_primary_light;
 		int primaryTextColor = ContextCompat.getColor(app, primaryTextColorResId);
 
-		String[] memoryUnitsFormats = new String[] {
+		String[] memoryUnitsFormats = new String[]{
 				getString(R.string.shared_string_memory_kb_desc),
 				getString(R.string.shared_string_memory_mb_desc),
 				getString(R.string.shared_string_memory_gb_desc),
 				getString(R.string.shared_string_memory_tb_desc)
 		};
-		
+
 		final View itemView = holder.itemView;
 		if (preference instanceof CheckBoxPreference) {
 			StorageItem item = dataStorageHelper.getStorage(key);
@@ -226,12 +229,12 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 
 				int defaultIconColor = isNightMode() ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
 				int chosenIconColor = isNightMode() ? R.color.icon_color_osmand_dark : R.color.icon_color_osmand_light;
-				Drawable icon = app.getUIUtilities().getIcon(item.getIconResId(), 
+				Drawable icon = app.getUIUtilities().getIcon(item.getIconResId(),
 						isCurrent ? chosenIconColor : defaultIconColor);
 				ivIcon.setImageDrawable(icon);
 
 				if (currentKey.equals(MANUALLY_SPECIFIED)) {
-					tvSummary.setText(item.getDirectory());
+					setFormattedPath(item, tvSummary);
 					secondPart.setVisibility(View.GONE);
 					tvAdditionalDescription.setVisibility(View.GONE);
 					divider.setVisibility(View.GONE);
@@ -250,7 +253,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 					if (currentKey.equals(INTERNAL_STORAGE)) {
 						tvAdditionalDescription.setText(item.getDescription());
 					} else {
-						tvAdditionalDescription.setText(item.getDirectory());
+						setFormattedPath(item, tvAdditionalDescription);
 					}
 				}
 			}
@@ -261,7 +264,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 			AndroidUtils.setBackground(itemView, drawable);
 			icon.setVisibility(View.INVISIBLE);
 			title.setText(R.string.shared_string_change);
-		} else if(key.equals(OSMAND_USAGE)) {
+		} else if (key.equals(OSMAND_USAGE)) {
 			long totalUsageBytes = dataStorageHelper.getTotalUsedBytes();
 			TextView tvSummary = itemView.findViewById(R.id.summary);
 			tvSummary.setText(DataStorageHelper.getFormattedMemoryInfo(totalUsageBytes, memoryUnitsFormats));
@@ -297,6 +300,15 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 					tvMemory.setText(summary);
 				}
 			}
+		}
+	}
+
+	private void setFormattedPath(StorageItem item, TextView tvAdditionalDescription) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+			BidiFormatter pathRtlFormatter = BidiFormatter.getInstance();
+			tvAdditionalDescription.setText(pathRtlFormatter.unicodeWrap(item.getDirectory()));
+		} else {
+			tvAdditionalDescription.setText(String.format("\u200E%s", item.getDirectory()));
 		}
 	}
 
@@ -424,7 +436,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 		refreshDataInfo();
 		updateAllSettings();
 	}
-	
+
 	private void refreshDataInfo() {
 		calculateTilesBtnPressed = false;
 		dataStorageHelper = new DataStorageHelper(app);
@@ -460,7 +472,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 	public void onMemoryInfoUpdate() {
 		updateAllSettings();
 	}
-	
+
 	@Override
 	public void onFinishUpdating(String tag) {
 		updateAllSettings();

@@ -18,7 +18,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.itinerary.ItineraryGroup;
+import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.settings.backend.ExportSettingsCategory;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.FileSettingsItem;
@@ -58,7 +58,6 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 	private final int secondaryColorRes;
 	private final int groupViewHeight;
 	private final int childViewHeight;
-	private final int listBottomPadding;
 
 	ExportSettingsAdapter(OsmandApplication app, boolean exportMode, OnItemSelectedListener listener, boolean nightMode) {
 		this.app = app;
@@ -71,7 +70,6 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		secondaryColorRes = nightMode ? R.color.icon_color_secondary_dark : R.color.icon_color_secondary_light;
 		groupViewHeight = app.getResources().getDimensionPixelSize(R.dimen.setting_list_item_group_height);
 		childViewHeight = app.getResources().getDimensionPixelSize(R.dimen.setting_list_item_large_height);
-		listBottomPadding = app.getResources().getDimensionPixelSize(R.dimen.fab_recycler_view_padding_bottom);
 	}
 
 	@Override
@@ -117,9 +115,6 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 				notifyDataSetChanged();
 			}
 		});
-
-		boolean addPadding = !isExpanded && groupPosition == getGroupCount() - 1;
-		group.setPadding(0, 0, 0, addPadding ? listBottomPadding : 0);
 
 		adjustIndicator(app, groupPosition, isExpanded, group, nightMode);
 		AndroidUiHelper.updateVisibility(group.findViewById(R.id.divider), isExpanded);
@@ -188,8 +183,6 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 				notifyDataSetChanged();
 			}
 		});
-		boolean addPadding = isLastChild && groupPosition == getGroupCount() - 1;
-		child.setPadding(0, 0, 0, addPadding ? listBottomPadding : 0);
 		AndroidUiHelper.updateVisibility(child.findViewById(R.id.card_bottom_divider), isLastChild);
 
 		return child;
@@ -318,10 +311,14 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 						itemsSize += ((FileSettingsItem) object).getSize();
 					} else if (object instanceof File) {
 						itemsSize += ((File) object).length();
-					} else if (object instanceof ItineraryGroup) {
-						int selectedMarkers = ((ItineraryGroup) object).getMarkers().size();
-						String itemsDescr = app.getString(R.string.shared_string_items);
-						return app.getString(R.string.ltr_or_rtl_combine_via_colon, itemsDescr, selectedMarkers);
+					} else if (object instanceof MapMarkersGroup) {
+						MapMarkersGroup markersGroup = (MapMarkersGroup) object;
+						if (Algorithms.stringsEqual(markersGroup.getId(), ExportSettingsType.ACTIVE_MARKERS.name())
+								|| Algorithms.stringsEqual(markersGroup.getId(), ExportSettingsType.HISTORY_MARKERS.name())) {
+							int selectedMarkers = ((MapMarkersGroup) object).getMarkers().size();
+							String itemsDescr = app.getString(R.string.shared_string_items);
+							return app.getString(R.string.ltr_or_rtl_combine_via_colon, itemsDescr, selectedMarkers);
+						}
 					}
 				}
 			}

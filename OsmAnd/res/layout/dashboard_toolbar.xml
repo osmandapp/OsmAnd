@@ -49,7 +49,9 @@
                 android:background="@drawable/dashboard_button_light"
                 android:scaleType="fitCenter"
                 app:srcCompat="@drawable/ic_navigation_drawer"
-                tools:visibility="gone"/>
+                tools:visibility="gone"
+				android:layout_marginEnd="@dimen/multi_selection_menu_padding_top"
+				android:layout_marginStart="@dimen/multi_selection_menu_padding_top" />
 
             <TextView
                 android:id="@+id/toolbar_text"
@@ -80,7 +82,9 @@
                 android:layout_gravity="end"
                 android:background="@drawable/dashboard_button_light"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/ic_configure_screen_dark"/>
+                app:srcCompat="@drawable/ic_configure_screen_dark"
+				android:layout_marginEnd="@dimen/multi_selection_menu_padding_top"
+				android:layout_marginStart="@dimen/multi_selection_menu_padding_top" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/toolbar_ok"
@@ -91,7 +95,9 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/dashboard_button_light"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/ic_action_done"/>
+                app:srcCompat="@drawable/ic_action_done"
+				android:layout_marginEnd="@dimen/multi_selection_menu_padding_top"
+				android:layout_marginStart="@dimen/multi_selection_menu_padding_top" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/toolbar_sort"
@@ -102,7 +108,9 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/dashboard_button_light"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/ic_sort_waypoint_dark"/>
+                app:srcCompat="@drawable/ic_sort_waypoint_dark"
+				android:layout_marginStart="@dimen/multi_selection_menu_padding_top"
+				android:layout_marginEnd="@dimen/multi_selection_menu_padding_top" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/toolbar_flat"
@@ -114,7 +122,9 @@
                 android:background="@drawable/dashboard_button_light"
                 android:scaleType="fitCenter"
                 app:srcCompat="@drawable/ic_flat_list_dark"
-                android:visibility="gone"/>
+                android:visibility="gone"
+				android:layout_marginEnd="@dimen/multi_selection_menu_padding_top"
+				android:layout_marginStart="@dimen/multi_selection_menu_padding_top" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/toolbar_edit"
@@ -126,7 +136,9 @@
                 android:background="@drawable/dashboard_button_light"
                 android:scaleType="fitCenter"
                 app:srcCompat="@drawable/ic_action_edit_dark"
-                android:visibility="gone"/>
+                android:visibility="gone"
+				android:layout_marginEnd="@dimen/multi_selection_menu_padding_top"
+				android:layout_marginStart="@dimen/multi_selection_menu_padding_top" />
         </LinearLayout>
 
     </LinearLayout>

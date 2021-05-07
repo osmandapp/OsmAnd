@@ -55,6 +55,8 @@ public class TransportRoutingHelper {
 
 	private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(TransportRoutingHelper.class);
 
+	public static final String PUBLIC_TRANSPORT_KEY = "public_transport";
+
 	private List<WeakReference<IRouteInformationListener>> listeners = new LinkedList<>();
 
 	private final OsmandApplication app;

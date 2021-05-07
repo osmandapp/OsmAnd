@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.PlatformUtil;
@@ -41,6 +42,7 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
+import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
 import static net.osmand.plus.osmedit.OsmBugsUtil.*;
 
 public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider {
@@ -130,7 +132,8 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 							backgroundColorRes = R.color.osm_bug_resolved_icon_color;
 						}
 						PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(activity,
-								ContextCompat.getColor(activity, backgroundColorRes), true);
+								ContextCompat.getColor(activity, backgroundColorRes), true,
+								false, DEFAULT_UI_ICON_ID, BackgroundType.COMMENT);
 						pointImageDrawable.drawSmallPoint(canvas, x, y, textScale);
 					} else {
 						fullObjects.add(o);
@@ -451,7 +454,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	}
 
 	@Override
-	public boolean disableLongPressOnMap() {
+	public boolean disableLongPressOnMap(PointF point, RotatedTileBox tileBox) {
 		return false;
 	}
 
@@ -462,6 +465,11 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 
 	@Override
 	public boolean runExclusiveAction(Object o, boolean unknownLocation) {
+		return false;
+	}
+
+	@Override
+	public boolean showMenuAction(@Nullable Object o) {
 		return false;
 	}
 

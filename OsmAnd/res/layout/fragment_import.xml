@@ -52,7 +52,9 @@
 				android:paddingRight="@dimen/content_padding"
 				android:paddingBottom="@dimen/bottom_sheet_title_padding_bottom"
 				android:visibility="invisible"
-				tools:visibility="visible">
+				tools:visibility="visible"
+				android:paddingEnd="@dimen/content_padding"
+				android:paddingStart="@dimen/content_padding">
 
 				<net.osmand.plus.widgets.TextViewEx
 					android:id="@+id/file_size"
@@ -94,7 +96,9 @@
 				android:layout_marginLeft="@dimen/content_padding_half"
 				android:layout_marginTop="@dimen/content_padding_half"
 				android:layout_marginRight="@dimen/content_padding_half"
-				android:layout_marginBottom="@dimen/content_padding_half">
+				android:layout_marginBottom="@dimen/content_padding_half"
+				android:layout_marginEnd="@dimen/content_padding_half"
+				android:layout_marginStart="@dimen/content_padding_half">
 
 				<include
 					android:id="@+id/continue_button"

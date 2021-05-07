@@ -14,6 +14,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.AssetManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
@@ -51,8 +52,8 @@ import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.actions.OsmAndDialogs;
 import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPIImpl;
+import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.base.MapViewTrackingUtilities;
-import net.osmand.plus.dialogs.CrashBottomSheetDialogFragment;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadService;
 import net.osmand.plus.download.IndexItem;
@@ -66,7 +67,6 @@ import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.helpers.enums.DrivingRegion;
 import net.osmand.plus.helpers.enums.MetricsConstants;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
-import net.osmand.plus.itinerary.ItineraryHelper;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
@@ -168,7 +168,7 @@ public class OsmandApplication extends MultiDexApplication {
 	OprAuthHelper oprAuthHelper;
 	MeasurementEditingContext measurementEditingContext;
 	OnlineRoutingHelper onlineRoutingHelper;
-	ItineraryHelper itineraryHelper;
+	BackupHelper backupHelper;
 
 	private Map<String, Builder> customRoutingConfigs = new ConcurrentHashMap<>();
 	private File externalStorageDirectory;
@@ -470,8 +470,8 @@ public class OsmandApplication extends MultiDexApplication {
 		return onlineRoutingHelper;
 	}
 
-	public ItineraryHelper getItineraryHelper() {
-		return itineraryHelper;
+	public BackupHelper getBackupHelper() {
+		return backupHelper;
 	}
 
 	public TransportRoutingHelper getTransportRoutingHelper() {
@@ -1054,26 +1054,40 @@ public class OsmandApplication extends MultiDexApplication {
 		intent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(this, file));
 		intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 		intent.setType("vnd.android.cursor.dir/email"); 
-		intent.putExtra(Intent.EXTRA_SUBJECT, "OsmAnd bug"); 
-		StringBuilder text = new StringBuilder();
-		text.append("\nDevice : ").append(Build.DEVICE); 
-		text.append("\nBrand : ").append(Build.BRAND); 
-		text.append("\nModel : ").append(Build.MODEL); 
-		text.append("\nProduct : ").append(Build.PRODUCT); 
-		text.append("\nBuild : ").append(Build.DISPLAY); 
-		text.append("\nVersion : ").append(Build.VERSION.RELEASE); 
-		text.append("\nApp Version : ").append(Version.getAppName(this)); 
-		try {
-			PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), 0);
-			if (info != null) {
-				text.append("\nApk Version : ").append(info.versionName).append(" ").append(info.versionCode);  
-			}
-		} catch (PackageManager.NameNotFoundException e) {
-			PlatformUtil.getLog(CrashBottomSheetDialogFragment.class).error("", e);
-		}
-		intent.putExtra(Intent.EXTRA_TEXT, text.toString());
+		intent.putExtra(Intent.EXTRA_SUBJECT, "OsmAnd bug");
+		intent.putExtra(Intent.EXTRA_TEXT, getDeviceInfo());
 		Intent chooserIntent = Intent.createChooser(intent, getString(R.string.send_report));
 		chooserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		startActivity(chooserIntent);
+	}
+
+	public void sendSupportEmail(String screenName) {
+		final Intent emailIntent = new Intent(Intent.ACTION_SEND)
+				.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+				.putExtra(Intent.EXTRA_EMAIL, new String[]{"support@osmand.net"})
+				.putExtra(Intent.EXTRA_SUBJECT, screenName)
+				.putExtra(Intent.EXTRA_TEXT, getDeviceInfo());
+		emailIntent.setSelector(new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:")));
+		startActivity(emailIntent);
+	}
+
+	public String getDeviceInfo() {
+		StringBuilder text = new StringBuilder();
+		text.append("Device : ").append(Build.DEVICE);
+		text.append("\nBrand : ").append(Build.BRAND);
+		text.append("\nModel : ").append(Build.MODEL);
+		text.append("\nProduct : ").append(Build.PRODUCT);
+		text.append("\nBuild : ").append(Build.DISPLAY);
+		text.append("\nVersion : ").append(Build.VERSION.RELEASE);
+		text.append("\nApp Version : ").append(Version.getAppName(this));
+		try {
+			PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), 0);
+			if (info != null) {
+				text.append("\nApk Version : ").append(info.versionName).append(" ").append(info.versionCode);
+			}
+		} catch (PackageManager.NameNotFoundException e) {
+			LOG.error("", e);
+		}
+		return text.toString();
 	}
 }

@@ -46,13 +46,11 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.Version;
 import net.osmand.plus.activities.actions.OsmAndDialogs;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.liveupdates.OsmLiveActivity;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment.ContextMenuItemClickListener;
 import net.osmand.plus.mapmarkers.MapMarker;
@@ -62,8 +60,8 @@ import net.osmand.plus.mapmarkers.MarkersPlanRouteContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.StartPlanRouteBottomSheet;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
-import net.osmand.plus.monitoring.TripRecordingBottomFragment;
-import net.osmand.plus.monitoring.TripRecordingStartingBottomFragment;
+import net.osmand.plus.monitoring.TripRecordingBottomSheet;
+import net.osmand.plus.monitoring.TripRecordingStartingBottomSheet;
 import net.osmand.plus.osmedit.dialogs.DismissRouteBottomSheetFragment;
 import net.osmand.plus.profiles.ProfileDataObject;
 import net.osmand.plus.profiles.ProfileDataUtils;
@@ -107,7 +105,6 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_HELP_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_MAP_MARKERS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_MEASURE_DISTANCE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_MY_PLACES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_OSMAND_LIVE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_PLUGINS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SEARCH_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
@@ -854,9 +851,9 @@ public class MapActivityActions implements DialogProvider {
 							app.logEvent("trip_recording_open");
 							MapActivity.clearPrevActivityIntent();
 							if (monitoringPlugin.hasDataToSave() || monitoringPlugin.wasTrackMonitored()) {
-								TripRecordingBottomFragment.showInstance(mapActivity.getSupportFragmentManager(), monitoringPlugin.getCurrentTrack());
+								TripRecordingBottomSheet.showInstance(mapActivity.getSupportFragmentManager());
 							} else {
-								TripRecordingStartingBottomFragment.showInstance(mapActivity.getSupportFragmentManager());
+								TripRecordingStartingBottomSheet.showTripRecordingDialog(mapActivity.getSupportFragmentManager(), app);
 							}
 							return true;
 						}
@@ -1029,22 +1026,6 @@ public class MapActivityActions implements DialogProvider {
 					}
 				}).createItem());
 		*/
-
-		if (Version.isGooglePlayEnabled() || Version.isHuawei() || Version.isDeveloperVersion(app)) {
-			optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.purchases, mapActivity)
-					.setId(DRAWER_OSMAND_LIVE_ID)
-					.setIcon(R.drawable.ic_action_purchases)
-					.setListener(new ItemClickListener() {
-						@Override
-						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
-							app.logEvent("drawer_osm_live_open");
-							Intent intent = new Intent(mapActivity, OsmLiveActivity.class);
-							intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-							mapActivity.startActivity(intent);
-							return true;
-						}
-					}).createItem());
-		}
 
 		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.shared_string_help, mapActivity)
 				.setId(DRAWER_HELP_ID)

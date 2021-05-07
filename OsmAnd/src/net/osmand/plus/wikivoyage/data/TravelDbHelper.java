@@ -193,6 +193,15 @@ public class TravelDbHelper implements TravelHelper {
 		return WORLD_WIKIVOYAGE_FILE_NAME;
 	}
 
+	@Override
+	public void saveOrRemoveArticle(@NonNull TravelArticle article, boolean save) {
+		if (save) {
+			localDataHelper.addArticleToSaved(article);
+		} else {
+			localDataHelper.removeArticleFromSaved(article);
+		}
+	}
+
 	public List<File> getExistingTravelBooks() {
 		return existingTravelBooks;
 	}

@@ -184,7 +184,7 @@ public class TrackWidthCard extends BaseCard {
 		}
 	}
 
-	private class GpxWidthAdapter extends RecyclerView.Adapter<TrackAppearanceViewHolder> {
+	private class GpxWidthAdapter extends RecyclerView.Adapter<AppearanceViewHolder> {
 
 		private List<AppearanceListItem> items;
 
@@ -194,13 +194,13 @@ public class TrackWidthCard extends BaseCard {
 
 		@NonNull
 		@Override
-		public TrackAppearanceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+		public AppearanceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 			LayoutInflater themedInflater = UiUtilities.getInflater(parent.getContext(), nightMode);
 			View view = themedInflater.inflate(R.layout.point_editor_group_select_item, parent, false);
 			view.getLayoutParams().width = app.getResources().getDimensionPixelSize(R.dimen.gpx_group_button_width);
 			view.getLayoutParams().height = app.getResources().getDimensionPixelSize(R.dimen.gpx_group_button_height);
 
-			TrackAppearanceViewHolder holder = new TrackAppearanceViewHolder(view);
+			AppearanceViewHolder holder = new AppearanceViewHolder(view);
 			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 				AndroidUtils.setBackground(app, holder.button, nightMode, R.drawable.ripple_solid_light_6dp,
 						R.drawable.ripple_solid_dark_6dp);
@@ -209,7 +209,7 @@ public class TrackWidthCard extends BaseCard {
 		}
 
 		@Override
-		public void onBindViewHolder(@NonNull final TrackAppearanceViewHolder holder, int position) {
+		public void onBindViewHolder(@NonNull final AppearanceViewHolder holder, int position) {
 			AppearanceListItem item = items.get(position);
 			holder.title.setText(item.getLocalizedValue());
 
@@ -238,7 +238,7 @@ public class TrackWidthCard extends BaseCard {
 			});
 		}
 
-		private void updateWidthIcon(TrackAppearanceViewHolder holder, AppearanceListItem item) {
+		private void updateWidthIcon(AppearanceViewHolder holder, AppearanceListItem item) {
 			int color = trackDrawInfo.getColor();
 
 			int iconId;
@@ -251,7 +251,7 @@ public class TrackWidthCard extends BaseCard {
 			holder.icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(iconId, color));
 		}
 
-		private void updateButtonBg(TrackAppearanceViewHolder holder, AppearanceListItem item) {
+		private void updateButtonBg(AppearanceViewHolder holder, AppearanceListItem item) {
 			GradientDrawable rectContourDrawable = (GradientDrawable) AppCompatResources.getDrawable(app, R.drawable.bg_select_group_button_outline);
 			if (rectContourDrawable != null) {
 				if (getSelectedItem() != null && getSelectedItem().equals(item)) {

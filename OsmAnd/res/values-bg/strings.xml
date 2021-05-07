@@ -2258,4 +2258,20 @@
     <string name="osm_live_subscription_desc">Абонаментът позволява почасови, ежедневни, седмични актуализации и неограничено изтегляне за всички карти в световен мащаб.</string>
     <string name="select_wikipedia_article_langs">Изберете езиците на които Уикипедия публикациите ще се появяват на картата. Можете да превключвате между наличните езици докато четете публикацията.</string>
     <string name="extra_maps_menu_group">Допълнителни карти</string>
+    <string name="opr_use_dev_url">Използване на test.openplacereviews.org</string>
+    <string name="login_open_place_reviews">Вход в OpenPlaceПрегледи</string>
+    <string name="open_place_reviews">OpenPlaceReviews</string>
+    <string name="activity_type_water_name">Вода</string>
+    <string name="activity_type_winter_name">Зима</string>
+    <string name="activity_type_snowmobile_name">Моторни шейни</string>
+    <string name="activity_type_riding_name">Езда</string>
+    <string name="activity_type_racing_name">Състезание</string>
+    <string name="activity_type_mountainbike_name">Планинско колоездене</string>
+    <string name="activity_type_cycling_name">Колоездене</string>
+    <string name="activity_type_hiking_name">Туризъм</string>
+    <string name="activity_type_running_name">Бягане</string>
+    <string name="activity_type_walking_name">Ходене</string>
+    <string name="activity_type_offroad_name">Офроуд</string>
+    <string name="activity_type_motorbike_name">Мотор</string>
+    <string name="activity_type_car_name">Автомобил</string>
 </resources>

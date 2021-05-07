@@ -36,7 +36,6 @@ public class MapMarkersWidgetsFactory {
 	private boolean portraitMode;
 
 	private View topBar;
-	private View addressTopBar;
 	private View topBar2nd;
 	private View rowView;
 	private View rowView2nd;
@@ -60,7 +59,6 @@ public class MapMarkersWidgetsFactory {
 		helper = map.getMyApplication().getMapMarkersHelper();
 		portraitMode = AndroidUiHelper.isOrientationPortrait(map);
 
-		addressTopBar = map.findViewById(R.id.map_top_bar);
 		topBar = map.findViewById(R.id.map_markers_top_bar);
 		topBar2nd = map.findViewById(R.id.map_markers_top_bar_2nd);
 		rowView = map.findViewById(R.id.map_marker_row);
@@ -181,17 +179,8 @@ public class MapMarkersWidgetsFactory {
 		}
 
 		List<MapMarker> markers = helper.getMapMarkers();
-		if (zoom < 3 || markers.size() == 0
-				|| !map.getMyApplication().getSettings().MARKERS_DISTANCE_INDICATION_ENABLED.get()
-				|| !map.getMyApplication().getSettings().MAP_MARKERS_MODE.get().isToolbar()
-				|| map.getMyApplication().getRoutingHelper().isFollowingMode()
-				|| map.getMyApplication().getRoutingHelper().isRoutePlanningMode()
-				|| map.getMapRouteInfoMenu().isVisible()
-				|| addressTopBar.getVisibility() == View.VISIBLE
-				|| map.isTopToolbarActive()
-				|| map.shouldHideTopControls()
-				|| map.getMapLayers().getGpxLayer().isInTrackAppearanceMode()
-				|| map.getMapLayers().getMapMarkersLayer().isInPlanRouteMode()) {
+		WidgetsVisibilityHelper vh = map.getWidgetsVisibilityHelper();
+		if (zoom < 3 || markers.size() == 0 || vh.shouldHideMapMarkersWidget()) {
 			updateVisibility(false);
 			return;
 		}

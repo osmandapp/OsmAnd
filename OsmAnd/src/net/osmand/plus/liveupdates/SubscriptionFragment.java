@@ -177,7 +177,7 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 					CountrySelectionFragment countryCountrySelectionFragment =
 							countrySelectionFragment;
 					countryCountrySelectionFragment
-							.show(getChildFragmentManager(), "CountriesSearchSelectionFragment");
+							.show(getChildFragmentManager(), CountrySelectionFragment.TAG);
 				}
 				return false;
 			}
@@ -208,7 +208,7 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 							"https://osmand.net/subscription/update",
 							parameters, "Sending data...", true, true, new AndroidNetworkUtils.OnRequestResultListener() {
 								@Override
-								public void onResult(String result) {
+								public void onResult(@Nullable String result, @Nullable String error) {
 									dismissProgress(null);
 									OsmandApplication app = getMyApplication();
 									if (result != null) {
@@ -228,12 +228,6 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 												}
 												String preferredCountry = obj.getString("preferredCountry");
 												app.getSettings().BILLING_USER_COUNTRY_DOWNLOAD_NAME.set(preferredCountry);
-
-												Fragment parent = getParentFragment();
-												if (parent instanceof LiveUpdatesFragment) {
-													((LiveUpdatesFragment) parent).updateSubscriptionHeader();
-												}
-
 												dismiss();
 											} else {
 												app.showToastMessage("Error: " + obj.getString("error"));

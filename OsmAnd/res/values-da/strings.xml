@@ -3837,4 +3837,16 @@
     <string name="track_has_no_altitude">Sporet indeholder ikke højdedata.</string>
     <string name="track_has_no_speed">Sporet indeholder ikke hastighedsdata.</string>
     <string name="select_another_colorization">Vælg en anden type farvelægning.</string>
+    <string name="exit_number">Udgangsnummer</string>
+    <string name="announce_when_exceeded">Meddelelse ved overskridelse</string>
+    <string name="user_points">Bruger points</string>
+    <string name="output">Resultat</string>
+    <string name="route_line_use_gradient_coloring">Rutelinje vil blive farvelagt afhængig af rutens højdeprofil.</string>
+    <string name="shared_string_min_height">Min. højde</string>
+    <string name="shared_string_max_height">Maks. højde</string>
+    <string name="language_description">Vælg foretrukne sprog og type af stemmevejledning.</string>
+    <string name="tts_description">Tekst-til-tale (TTS) kan udtale alle typer instruktioner: vejnavne, drejeinstruktioner, POI-navne osv.</string>
+    <string name="tts_title">TTS</string>
+    <string name="recorded_description">Indspillet stemme lyder bedre, men kan kun udtale forudindspillede sætninger: drejeinstruktioner. Kan ikke udtale vejnavne eller POI-navne.</string>
+    <string name="use_system_language">Brug systemsprog</string>
 </resources>

@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
+
 public class ProfileCard extends BaseCard {
 
 	private ApplicationMode selectedMode;
@@ -42,7 +44,7 @@ public class ProfileCard extends BaseCard {
 		Iterator<ApplicationMode> iterator = modes.iterator();
 		while (iterator.hasNext()) {
 			ApplicationMode mode = iterator.next();
-			if ("public_transport".equals(mode.getRoutingProfile())) {
+			if (PUBLIC_TRANSPORT_KEY.equals(mode.getRoutingProfile())) {
 				iterator.remove();
 			}
 		}

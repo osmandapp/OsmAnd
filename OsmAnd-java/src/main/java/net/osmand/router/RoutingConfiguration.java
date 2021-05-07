@@ -28,7 +28,7 @@ import net.osmand.util.MapUtils;
 public class RoutingConfiguration {
 
 	public static final int DEFAULT_MEMORY_LIMIT = 30;
-	public final float DEVIATION_RADIUS = 3000;
+	public static final float DEVIATION_RADIUS = 3000;
 	public Map<String, String> attributes = new LinkedHashMap<String, String>();
 
 	// 1. parameters of routing and different tweaks

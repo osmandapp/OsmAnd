@@ -144,6 +144,7 @@
 	<string name="poi_diplomatic_services_non_immigrant_visas_filter">Non-immigrant visas</string>
 	<string name="poi_diplomatic_services_immigrant_visas_filter">Immigrant visas</string>
 	<string name="poi_diplomatic_services_citizen_services_filter">Citizen services</string>
+	<string name="poi_bay_filter">Bay type</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -242,7 +243,6 @@
 	<string name="poi_doityourself">Home improvement store</string>
 	<string name="poi_doors">Doors</string>
 	<string name="poi_erotic">Erotic store</string>
-	<string name="poi_fashion">Fashion store</string>
 	<string name="poi_fishing">Fishing tackle</string>
 	<string name="poi_florist">Flower shop</string>
 	<string name="poi_frame">Picture frame shop</string>
@@ -284,7 +284,6 @@
 	<string name="poi_ship_chandler">Ship chandler</string>
 	<string name="poi_sports">Sporting goods</string>
 	<string name="poi_stationery">Stationery store</string>
-	<string name="poi_tableware">Tableware store</string>
 	<string name="poi_ticket">Ticket sales</string>
 	<string name="poi_tobacco">Tobacco store</string>
 	<string name="poi_toys">Toyshop</string>
@@ -466,7 +465,6 @@
 
 	<string name="poi_power_substation">Substation</string>
 	<string name="poi_power_transformer">Transformer</string>
-	<string name="poi_power_cable_distribution_cabinet">Cable distribution cabinet</string>
 	<string name="poi_power_plant">Power plant</string>
 	<string name="poi_power_generator">Power generator</string>
 	<string name="poi_power_tower">Power tower</string>
@@ -618,7 +616,6 @@
 	<string name="poi_pension_fund">Pension fund</string>
 	<string name="poi_migration">Migration</string>
 	<string name="poi_tax_inspection">Tax inspection</string>
-	<string name="poi_office_administrative">Administrative office</string>
 	<string name="poi_customs">Customs</string>
 	<string name="poi_country">Country</string>
 	<string name="poi_city">City</string>
@@ -3155,7 +3152,6 @@
 	<string name="poi_aquaculture_fish">Aquaculture: fish</string>
 	<string name="poi_aquaculture_mussels">Aquaculture: mussels</string>
 
-	<string name="poi_mdf">Main Distribution Frame</string>
 	<string name="poi_min_age">Minimum age</string>
 
 	<string name="poi_organic_yes">Yes</string>
@@ -4346,5 +4342,60 @@
 	<string name="poi_geodesist">Geodesist</string>
 
 	<string name="poi_local_ref">Local ref</string>
+
+	<string name="poi_camp_pitch">Camp pitch</string>
+
+	<string name="poi_hoops">Hoops</string>
+	<string name="poi_karate">Karate</string>
+	<string name="poi_jiu_jitsu">Jiu-jitsu</string>
+	<string name="poi_pilates">Pilates</string>
+	<string name="poi_shot_put">Shot put</string>
+	<string name="poi_snooker">Snooker</string>
+	<string name="poi_speedway">Speedway</string>
+	<string name="poi_sumo">Sumo</string>
+	<string name="poi_table_soccer">Table soccer</string>
+	<string name="poi_taekwondo">Taekwondo</string>
+	<string name="poi_ultimate">Ultimate</string>
+	<string name="poi_wakeboarding">Wakeboarding</string>
+	<string name="poi_weightlifting">Weightlifting</string>
+	<string name="poi_wrestling">Wrestling</string>
+	<string name="poi_zurkhaneh_sport">Zurkhaneh sport</string>
+	<string name="poi_water_polo">Water polo</string>
+	<string name="poi_water_ski">Water ski</string>
+	<string name="poi_aikido">Aikido</string>
+	<string name="poi_biathlon">Biathlon</string>
+	<string name="poi_bobsleigh">Bobsleigh</string>
+	<string name="poi_bullfighting">Bullfighting</string>
+	<string name="poi_cliff_diving">Cliff diving</string>
+	<string name="poi_cockfighting">Cockfighting</string>
+	<string name="poi_crossfit">Crossfit</string>
+	<string name="poi_curling">Curling</string>
+	<string name="poi_cycle_polo">Cycle polo</string>
+	<string name="poi_fencing">Fencing</string>
+	<string name="poi_horseshoes">Horseshoes</string>
+	<string name="poi_kickboxing">Kickboxing</string>
+
+	<string name="poi_office_diplomatic">Diplomatic office</string>
+
+	<string name="poi_plateau">Plateau</string>
+
+	<string name="poi_club_social">Social club</string>
+
+	<string name="poi_health_post">Health post</string>
+
+	<string name="poi_telecom_exchange">Telephone exchange</string>
+	<string name="poi_telecom_medium_copper">Medium: copper</string>
+	<string name="poi_telecom_medium_fibre">Medium: fibre</string>
+	<string name="poi_telecom_medium_coaxial">Medium: coaxial</string>
+
+	<string name="poi_pest_control">Pest control store</string>
+	<string name="poi_shop_water">Drinking water store</string>
+
+	<string name="poi_pillory">Pillory</string>
+
+	<string name="poi_service_vehicle_inspection_yes">Vehicle inspection</string>
+	<string name="poi_service_vehicle_rental_yes">Car rental</string>
+
+	<string name="poi_planetarium">Planetarium</string>
 
 </resources>

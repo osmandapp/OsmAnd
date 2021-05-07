@@ -47,7 +47,9 @@
 			android:text="@string/upload_anonymously"
 			android:textColor="?android:textColorPrimary"
 			android:textSize="@dimen/default_list_text_size"
-			osmand:typeface="@string/font_roboto_regular" />
+			osmand:typeface="@string/font_roboto_regular"
+			android:paddingStart="@dimen/content_padding_small"
+			android:paddingEnd="@dimen/content_padding_small" />
 
 	</LinearLayout>
 

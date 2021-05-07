@@ -16,18 +16,18 @@ import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.mapillary.MapillaryPlugin;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.resources.ResourceManager;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.MapUtils;
 
 public class MapTileLayer extends BaseMapLayer {
 
-	protected static final int emptyTileDivisor = 16;
 	public static final int OVERZOOM_IN = 2;
-	
+	private static final int ADDITIONAL_TILE_CACHE = 3;
+
 	protected final boolean mainMap;
 	protected ITileSource map = null;
 	protected MapTileAdapter mapTileAdapter = null;
@@ -153,6 +153,9 @@ public class MapTileLayer extends BaseMapLayer {
 		int top = (int) Math.floor(tilesRect.top + ellipticTileCorrection);
 		int width = (int) Math.ceil(tilesRect.right - left);
 		int height = (int) Math.ceil(tilesRect.bottom + ellipticTileCorrection - top);
+
+		int tiles = (width + ADDITIONAL_TILE_CACHE) * (height + ADDITIONAL_TILE_CACHE);
+		mgr.setMapTileLayerSizes(this, tiles);
 
 		boolean useInternet = (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) != null || OsmandPlugin.getEnabledPlugin(MapillaryPlugin.class) != null)
 				&& settings.isInternetConnectionAvailable() && map.couldBeDownloadedFromInternet();
@@ -287,6 +290,9 @@ public class MapTileLayer extends BaseMapLayer {
 	@Override
 	public void destroyLayer() {
 		setMapTileAdapter(null);
+		if (resourceManager != null) {
+			resourceManager.removeMapTileLayerSize(this);
+		}
 	}
 
 	public boolean isVisible() {

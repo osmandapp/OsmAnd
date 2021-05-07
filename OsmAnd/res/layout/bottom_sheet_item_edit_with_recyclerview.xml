@@ -57,7 +57,9 @@
 		android:layout_height="wrap_content"
 		android:layout_marginTop="@dimen/content_padding_half"
 		android:layout_marginLeft="@dimen/content_padding"
-		android:layout_marginRight="@dimen/content_padding">
+		android:layout_marginRight="@dimen/content_padding"
+		android:layout_marginStart="@dimen/content_padding"
+		android:layout_marginEnd="@dimen/content_padding">
 
 		<LinearLayout
 			android:id="@+id/text"

@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
+import android.content.res.Resources;
 import android.os.Handler;
 import android.os.Message;
 import android.widget.ProgressBar;
@@ -204,7 +205,8 @@ public class ProgressImplementation implements IProgress {
 		work = -1;
 		progress = 0;
 		if (taskName != null) {
-			message = context.getResources().getString(R.string.finished_task) +" : "+ taskName; //$NON-NLS-1$
+			Resources resources = context.getResources();
+			message = resources.getString(R.string.ltr_or_rtl_combine_via_colon, resources.getString(R.string.finished_task), taskName);
 			mViewUpdateHandler.sendEmptyMessage(HANDLER_START_TASK);
 		}
 	}

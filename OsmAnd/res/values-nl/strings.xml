@@ -2884,7 +2884,7 @@
     <string name="quick_action_day_night_switch_mode">Wissel tussen dag-/nachtmodus</string>
     <string name="routeInfo_surface_name">Oppervlakte</string>
     <string name="routeInfo_smoothness_name">Kwaliteit wegdek</string>
-    <string name="routeInfo_steepness_name">Steilte</string>
+    <string name="routeInfo_steepness_name">Helling</string>
     <string name="run_full_osmand_msg">U gebruikt {0} kaart geleverd door OsmAnd. Wilt u de \"OsmAnd full\" versie openen\?</string>
     <string name="run_full_osmand_header">Open OsmAnd\?</string>
     <string name="angular_measeurement">Eenheid hoeken</string>
@@ -3358,7 +3358,7 @@
     <string name="shared_string_routing">Routering</string>
     <string name="shared_string_include_data">Bijkomende gegevens insluiten</string>
     <string name="import_profile_dialog_description">Het geïmporteerde profiel bevat aanvullende gegevens. Tik \"Importeren\" om enkel de profielgegevens te importeren of kies aanvullende gegevens om te importeren.</string>
-    <string name="export_profile_dialog_description">Je kan bijkomende gegevens toevoegen om mee met het profiel te exporteren.</string>
+    <string name="export_profile_dialog_description">Je kan bijkomende gegevens toevoegen om, samen met het profiel, te exporteren.</string>
     <string name="shared_string_app_default_w_val">App Standaardwaarde (%s)</string>
     <string name="no_recalculation_setting">Niet herberekenen</string>
     <string name="route_recalculation_dist_title">Minimale afstand om route te herbereken</string>
@@ -4032,4 +4032,55 @@
     <string name="track_has_no_altitude">De track bevat geen hoogtegegevens.</string>
     <string name="track_has_no_speed">De track bevat geen snelheidsgegevens.</string>
     <string name="select_another_colorization">Selecteer een ander inkleuring.</string>
+    <string name="trip_recording_show_start_dialog_setting">Indien uitgeschakeld zal de opname starten na een tik op de widget of het menu-item, waarbij er geen bevestiging zal worden gevraagd.</string>
+    <string name="trip_recording_save_and_continue">Opslaan en doorgaan</string>
+    <string name="lost_data_warning">Niet-opgeslagen gegevens zullen verloren gaan.</string>
+    <string name="no_purchases">U heeft geen aankopen gedaan</string>
+    <string name="new_device_account">Nieuw apparaat / nieuw account</string>
+    <string name="contact_support_description">Voor vragen kunt u contact met ons opnemen via %1$s.</string>
+    <string name="empty_purchases_description">Als uw aankopen hier niet verschijnen, tik dan op “%1$s”, of neem contact op met ons ondersteuningsteam.</string>
+    <string name="contact_support">Contacteer de support</string>
+    <string name="troubleshooting">Probleemoplosser</string>
+    <string name="troubleshooting_description">Volg deze link als u problemen heeft met aankopen.</string>
+    <string name="osmand_live">OsmAnd Live</string>
+    <string name="annual_subscription">Jaarlijks abonnement</string>
+    <string name="monthly_subscription">Maandelijks abonnement</string>
+    <string name="three_months_subscription">Drie maandelijks abonnement</string>
+    <string name="next_billing_date">Volgende factuurdatum: %1$s</string>
+    <string name="osmand_live_cancelled">Geannuleerd</string>
+    <string name="renew_subscription">Abonnement vernieuwen</string>
+    <string name="in_grace_period">Uitstelperiode</string>
+    <string name="on_hold">In afwachting</string>
+    <string name="expired">Niet meer geldig</string>
+    <string name="release_4_0_beta">• Optie toegevoegd om contourlijnen in voet te downloaden
+\n
+\n• Plan Route landschap: tabbladen toegevoegd om te wisselen tussen punten of grafieken
+\n
+\n• OsmAnd Live-updates verplaatst naar \"Downloads&gt; Updates\"
+\n
+\n• Tracks kunnen nu worden ingekleurd door hoogte, snelheid of helling.
+\n
+\n• Optie toegevoegd om het uiterlijk van de navigatieroutelijn te wijzigen
+\n
+\n• Bijgewerkt dialoogvenster \"Ritopname\"
+\n
+\n</string>
+    <string name="update_all_maps_added">Alle kaarten bijwerken die zijn toegevoegd aan %1$s\?</string>
+    <string name="shared_string_feet">voet</string>
+    <string name="srtm_unit_format">Contour lijnen (eenheid) formaat</string>
+    <string name="srtm_download_list_help_message">OsmAnd biedt gegevens van contourlijnen in meters en voet aan. U moet het bestand opnieuw downloaden om het formaat te wijzigen.</string>
+    <string name="srtm_download_single_help_message">Selecteer het juiste formaat. U moet het bestand opnieuw downloaden om het formaat te wijzigen.</string>
+    <string name="exit_number">Exit nummer</string>
+    <string name="announce_when_exceeded">Aankondigen wanneer overschreden</string>
+    <string name="user_points">Gebruiker punten</string>
+    <string name="output">Output</string>
+    <string name="route_line_use_gradient_coloring">De routelijn wordt ingekleurd, afhankelijk van het hoogteprofiel van de route.</string>
+    <string name="shared_string_min_height">Min. hoogte</string>
+    <string name="shared_string_max_height">Max. hoogte</string>
+    <string name="language_description">Selecteer de voorkeurstaal en het type stembegeleiding.</string>
+    <string name="tts_title">TTS (Tekst-naar-spraak)</string>
+    <string name="tts_description">Tekst-naar-spraak (TTS) kan alle soorten instructies uitspreken: straatnamen, afslaginstructies, POI-namen enz.</string>
+    <string name="recorded_description">De opgenomen stem klinkt beter, maar kan alleen vooraf opgenomen zinnen uitspreken: afslaginstructies. Kan geen straatnamen of POI-namen aankondigen.</string>
+    <string name="use_system_language">Gebruik de systeemtaal</string>
+    <string name="shared_string_itinerary">Routebeschrijving</string>
 </resources>

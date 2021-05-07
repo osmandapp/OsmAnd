@@ -47,6 +47,7 @@ import net.osmand.plus.helpers.enums.SpeedConstants;
 import net.osmand.plus.helpers.enums.TracksSortByMode;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.Format;
 import net.osmand.plus.mapmarkers.MapMarkersMode;
+import net.osmand.plus.osmedit.OsmEditingPlugin.UploadVisibility;
 import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.profiles.NavigationIcon;
 import net.osmand.plus.profiles.ProfileIconColors;
@@ -84,6 +85,7 @@ import java.util.StringTokenizer;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONFIGURE_MAP_ITEM_ID_SCHEME;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ACTIONS;
+import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
 
 public class OsmandSettings {
 
@@ -851,7 +853,7 @@ public class OsmandSettings {
 		public boolean setValue(Object prefs, DrivingRegion val) {
 			boolean overrideMetricSystem = !DRIVING_REGION_AUTOMATIC.getValue(prefs, DRIVING_REGION_AUTOMATIC.getDefaultValue());
 			if (overrideMetricSystem && val != null) {
-				METRIC_SYSTEM.set(val.defMetrics);
+				METRIC_SYSTEM.setValue(prefs, val.defMetrics);
 			}
 			return super.setValue(prefs, val);
 		}
@@ -864,7 +866,7 @@ public class OsmandSettings {
 
 	// this value string is synchronized with settings_pref.xml preference name
 	// cache of metrics constants as they are used very often
-	public final OsmandPreference<MetricsConstants> METRIC_SYSTEM = new EnumStringPreference<MetricsConstants>(this,
+	public final EnumStringPreference<MetricsConstants> METRIC_SYSTEM = (EnumStringPreference<MetricsConstants>) new EnumStringPreference<MetricsConstants>(this,
 			"default_metric_system", MetricsConstants.KILOMETERS_AND_METERS, MetricsConstants.values()) {
 		protected MetricsConstants getDefaultValue() {
 			return DRIVING_REGION.get().defMetrics;
@@ -956,7 +958,7 @@ public class OsmandSettings {
 		DEFAULT_SPEED.setModeDefaultValue(ApplicationMode.BICYCLE, 2.77f);
 		DEFAULT_SPEED.setModeDefaultValue(ApplicationMode.PEDESTRIAN, 1.11f);
 		DEFAULT_SPEED.setModeDefaultValue(ApplicationMode.BOAT, 1.38f);
-		DEFAULT_SPEED.setModeDefaultValue(ApplicationMode.AIRCRAFT, 40f);
+		DEFAULT_SPEED.setModeDefaultValue(ApplicationMode.AIRCRAFT, 200f);
 		DEFAULT_SPEED.setModeDefaultValue(ApplicationMode.SKI, 1.38f);
 	}
 
@@ -998,7 +1000,7 @@ public class OsmandSettings {
 		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.CAR, "car");
 		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.BICYCLE, "bicycle");
 		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.PEDESTRIAN, "pedestrian");
-		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.PUBLIC_TRANSPORT, "public_transport");
+		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.PUBLIC_TRANSPORT, PUBLIC_TRANSPORT_KEY);
 		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.BOAT, "boat");
 		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.AIRCRAFT, "STRAIGHT_LINE_MODE");
 		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.SKI, "ski");
@@ -1134,6 +1136,7 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<String> OSM_USER_NAME = new StringPreference(this, "user_name", "").makeGlobal().makeShared();
 	public final OsmandPreference<String> OSM_USER_DISPLAY_NAME = new StringPreference(this, "user_display_name", "").makeGlobal().makeShared();
+	public final CommonPreference<UploadVisibility> OSM_UPLOAD_VISIBILITY = new EnumStringPreference<>(this, "upload_visibility", UploadVisibility.PUBLIC, UploadVisibility.values()).makeGlobal().makeShared();
 
 	public static final String BILLING_USER_DONATION_WORLD_PARAMETER = "";
 	public static final String BILLING_USER_DONATION_NONE_PARAMETER = "none";
@@ -1161,6 +1164,16 @@ public class OsmandSettings {
 	public final OsmandPreference<Integer> DISCOUNT_SHOW_NUMBER_OF_STARTS = new IntPreference(this, "number_of_starts_on_discount_show", 0).makeGlobal();
 	public final OsmandPreference<Integer> DISCOUNT_TOTAL_SHOW = new IntPreference(this, "discount_total_show", 0).makeGlobal();
 	public final OsmandPreference<Long> DISCOUNT_SHOW_DATETIME_MS = new LongPreference(this, "show_discount_datetime_ms", 0).makeGlobal();
+
+	public final OsmandPreference<String> BACKUP_USER_EMAIL = new StringPreference(this, "backup_user_email", "").makeGlobal();
+	public final OsmandPreference<String> BACKUP_USER_ID = new StringPreference(this, "backup_user_id", "").makeGlobal();
+	public final OsmandPreference<String> BACKUP_DEVICE_ID = new StringPreference(this, "backup_device_id", "").makeGlobal();
+	public final OsmandPreference<String> BACKUP_NATIVE_DEVICE_ID = new StringPreference(this, "backup_native_device_id", "").makeGlobal();
+	public final OsmandPreference<String> BACKUP_ACCESS_TOKEN = new StringPreference(this, "backup_access_token", "").makeGlobal();
+	public final OsmandPreference<String> BACKUP_ACCESS_TOKEN_UPDATE_TIME = new StringPreference(this, "backup_access_token_update_time", "").makeGlobal();
+
+	public final OsmandPreference<Long> FAVORITES_LAST_UPLOADED_TIME = new LongPreference(this, "favorites_last_uploaded_time", 0L).makeGlobal();
+	public final OsmandPreference<Long> BACKUP_LAST_UPLOADED_TIME = new LongPreference(this, "backup_last_uploaded_time", 0L).makeGlobal();
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<String> USER_OSM_BUG_NAME =
@@ -1276,6 +1289,7 @@ public class OsmandSettings {
 	public final CommonPreference<Integer> SAVE_GLOBAL_TRACK_INTERVAL = new IntPreference(this, "save_global_track_interval", 5000).makeProfile().cache();
 	public final CommonPreference<Boolean> SAVE_GLOBAL_TRACK_REMEMBER = new BooleanPreference(this, "save_global_track_remember", false).makeProfile().cache();
 	public final CommonPreference<Boolean> SHOW_SAVED_TRACK_REMEMBER = new BooleanPreference(this, "show_saved_track_remember", true).makeGlobal().makeShared();
+	public final CommonPreference<Boolean> SHOW_TRIP_REC_START_DIALOG = new BooleanPreference(this, "show_trip_recording_start_dialog", true).makeGlobal().makeShared();
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Boolean> SAVE_TRACK_TO_GPX = new BooleanPreference(this, "save_track_to_gpx", false).makeProfile().cache();
 
@@ -1351,6 +1365,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> SPEAK_SPEED_LIMIT = new BooleanPreference(this, "speak_speed_limit", false).makeProfile().cache();
 	public final OsmandPreference<Boolean> SPEAK_SPEED_CAMERA = new BooleanPreference(this, "speak_cameras", false).makeProfile().cache();
 	public final OsmandPreference<Boolean> SPEAK_TUNNELS = new BooleanPreference(this, "speak_tunnels", false).makeProfile().cache();
+	public final OsmandPreference<Boolean> SPEAK_EXIT_NUMBER_NAMES = new BooleanPreference(this, "exit_number_names", true).makeProfile().cache();
 
 	public final OsmandPreference<Boolean> SPEED_CAMERAS_UNINSTALLED = new BooleanPreference(this, "speed_cameras_uninstalled", false).makeGlobal().makeShared();
 	public final OsmandPreference<Boolean> SPEED_CAMERAS_ALERT_SHOWED = new BooleanPreference(this, "speed_cameras_alert_showed", false).makeGlobal().makeShared();
@@ -2626,7 +2641,7 @@ public class OsmandSettings {
 					return lang + IndexConstants.VOICE_PROVIDER_SUFFIX;
 				}
 			}
-			return "en-tts";
+			return VOICE_PROVIDER_NOT_USE;
 		}
 	}.makeProfile();
 
@@ -2689,6 +2704,12 @@ public class OsmandSettings {
 
 	public final CommonPreference<Float> ROUTE_RECALCULATION_DISTANCE = new FloatPreference(this, "routing_recalc_distance", 0.f).makeProfile();
 	public final CommonPreference<Float> ROUTE_STRAIGHT_ANGLE = new FloatPreference(this, "routing_straight_angle", 30.f).makeProfile();
+
+	public final ListStringPreference CUSTOM_ROUTE_LINE_COLORS = (ListStringPreference) new ListStringPreference(this, "custom_route_line_colors", null, ",").makeShared().makeGlobal();
+	public final CommonPreference<Integer> ROUTE_LINE_COLOR_DAY = new IntPreference(this, "route_line_color", 0).cache().makeProfile();
+	public final CommonPreference<Integer> ROUTE_LINE_COLOR_NIGHT = new IntPreference(this, "route_line_color_night", 0).cache().makeProfile();
+	public final CommonPreference<GradientScaleType> ROUTE_LINE_GRADIENT = new EnumStringPreference<>(this, "route_line_gradient", null, new GradientScaleType[] {GradientScaleType.ALTITUDE, GradientScaleType.SLOPE}).cache().makeProfile();
+	public final CommonPreference<String> ROUTE_LINE_WIDTH = new StringPreference(this, "route_line_width", null).makeProfile();
 
 	public final OsmandPreference<Boolean> USE_OSM_LIVE_FOR_ROUTING = new BooleanPreference(this, "enable_osmc_routing", true).makeProfile();
 

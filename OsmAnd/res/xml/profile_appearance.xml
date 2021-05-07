@@ -76,4 +76,11 @@
 		android:title="@string/select_navigation_icon"
 		android:selectable="false"/>
 
+	<Preference
+		android:key="customize_route_line"
+		android:layout="@layout/preference_button"
+		android:persistent="false"
+		android:title="@string/customize_route_line"
+		android:icon="@drawable/ic_action_route_distance" />
+
 </PreferenceScreen>

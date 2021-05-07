@@ -2,14 +2,14 @@ package net.osmand.plus.inapp;
 
 import android.content.Context;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import com.android.billingclient.api.SkuDetails;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public class InAppPurchasesImpl extends InAppPurchases {
 
@@ -283,6 +283,11 @@ public class InAppPurchasesImpl extends InAppPurchases {
 		InAppPurchaseLiveUpdatesOldSubscription(@NonNull SkuDetails details) {
 			super(details.getSku(), true);
 			this.details = details;
+		}
+
+		@Override
+		public int getPeriodTypeString() {
+			return R.string.monthly_subscription;
 		}
 
 		@Override

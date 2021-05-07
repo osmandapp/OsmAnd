@@ -149,6 +149,9 @@ class SettingsItemsFactory {
 			case ONLINE_ROUTING_ENGINES:
 				item = new OnlineRoutingSettingsItem(app, json);
 				break;
+			case ITINERARY_GROUPS:
+				item = new ItinerarySettingsItem(app, json);
+				break;
 		}
 		return item;
 	}

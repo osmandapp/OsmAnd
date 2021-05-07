@@ -237,7 +237,7 @@
     <string name="not_possible_to_send_to_telegram_chats">Impossible d\'envoyer dans les discussions Telegram :</string>
     <string name="successfully_sent_and_updated">Envoyé et mis à jour avec succès</string>
     <string name="last_updated_location">Dernière position mise à jour :</string>
-    <string name="share_location_as_description">Si vous voulez connecter plusieurs appareils à un même compte Telegram, vous devez utiliser un appareil différent pour partager votre position.</string>
+    <string name="share_location_as_description">Si vous souhaitez connecter plusieurs appareils à un même compte Telegram, vous devez partager votre position depuis chaque appareil.</string>
     <string name="share_location_as_description_second_line">Vous pouvez créer et visualiser l\'identifiant du périphérique dans le client Telegram en utilisant le chat-bot %1$s. %2$s</string>
     <string name="enter_device_name_description">Nommez votre nouveau périphérique en max 200 symboles.</string>
     <string name="enter_another_device_name">Choisissez un nom que vous n\'avez pas encore utilisé</string>
@@ -266,7 +266,7 @@
     <string name="location_history_desc">Cacher les contacts qui ne se sont pas déplacés depuis un temps donné.</string>
     <string name="set_time_description">Définissez l\'heure à laquelle les contacts et groupes sélectionnés verront votre position en temps réel.</string>
     <string name="osmand_connect">OsmAnd connect</string>
-    <string name="time_ago">depuis</string>
+    <string name="time_ago">il y a</string>
     <string name="logcat_buffer">Buffer Logcat</string>
     <string name="logcat_buffer_descr">Vérifier et partager les logs détaillés de l\'application</string>
     <string name="shared_string_export">Exporter</string>

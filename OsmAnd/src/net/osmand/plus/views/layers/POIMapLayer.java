@@ -16,6 +16,7 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
@@ -356,19 +357,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	@Override
 	public PointDescription getObjectName(Object o) {
 		if (o instanceof Amenity) {
-			Amenity amenity = (Amenity) o;
-			String preferredLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
-			boolean transliterateNames = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
-
-			if (amenity.getType().isWiki()) {
-				if (Algorithms.isEmpty(preferredLang)) {
-					preferredLang = app.getLanguage();
-				}
-				preferredLang = OsmandPlugin.onGetMapObjectsLocale(amenity, preferredLang);
-			}
-
-			return new PointDescription(PointDescription.POINT_TYPE_POI,
-					amenity.getName(preferredLang, transliterateNames));
+			return new PointDescription(PointDescription.POINT_TYPE_POI, getAmenityName((Amenity) o));
 		}
 		return null;
 	}
@@ -379,7 +368,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	}
 
 	@Override
-	public boolean disableLongPressOnMap() {
+	public boolean disableLongPressOnMap(PointF point, RotatedTileBox tileBox) {
 		return false;
 	}
 
@@ -409,6 +398,11 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	}
 
 	@Override
+	public boolean showMenuAction(@Nullable Object o) {
+		return false;
+	}
+
+	@Override
 	public LatLon getTextLocation(Amenity o) {
 		return o.getLocation();
 	}
@@ -425,8 +419,20 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 
 	@Override
 	public String getText(Amenity o) {
-		return o.getName(view.getSettings().MAP_PREFERRED_LOCALE.get(),
-				view.getSettings().MAP_TRANSLITERATE_NAMES.get());
+		return getAmenityName(o);
+	}
+
+	private String getAmenityName(Amenity amenity) {
+		String locale = app.getSettings().MAP_PREFERRED_LOCALE.get();
+
+		if (amenity.getType().isWiki()) {
+			if (Algorithms.isEmpty(locale)) {
+				locale = app.getLanguage();
+			}
+			locale = OsmandPlugin.onGetMapObjectsLocale(amenity, locale);
+		}
+
+		return amenity.getName(locale, app.getSettings().MAP_TRANSLITERATE_NAMES.get());
 	}
 
 	@Override

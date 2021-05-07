@@ -30,6 +30,21 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback;
+import androidx.core.content.ContextCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentManager.BackStackEntry;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceFragmentCompat.OnPreferenceStartFragmentCallback;
+
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.Location;
@@ -104,7 +119,7 @@ import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.SnapTrackWarningFragment;
-import net.osmand.plus.monitoring.TripRecordingStartingBottomFragment;
+import net.osmand.plus.monitoring.TripRecordingStartingBottomSheet;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
@@ -125,6 +140,7 @@ import net.osmand.plus.settings.datastorage.DataStorageFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.settings.fragments.ConfigureProfileFragment;
+import net.osmand.plus.settings.fragments.RouteLineAppearanceFragment;
 import net.osmand.plus.track.TrackAppearanceFragment;
 import net.osmand.plus.track.TrackMenuFragment;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
@@ -139,6 +155,7 @@ import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
+import net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.GeneralRouter;
 import net.osmand.util.Algorithms;
@@ -154,21 +171,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.core.app.ActivityCompat;
-import androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback;
-import androidx.core.content.ContextCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentManager.BackStackEntry;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.PreferenceFragmentCompat.OnPreferenceStartFragmentCallback;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
 
@@ -209,6 +211,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	private MapActivityActions mapActions;
 	private MapActivityLayers mapLayers;
+	private WidgetsVisibilityHelper mapWidgetsVisibilityHelper;
 
 	// App variables
 	private OsmandApplication app;
@@ -304,6 +307,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		mapActions = new MapActivityActions(this);
 		mapLayers = new MapActivityLayers(this);
+		mapWidgetsVisibilityHelper = new WidgetsVisibilityHelper(this);
 		dashboardOnMap.createDashboardView();
 		checkAppInitialization();
 
@@ -427,6 +431,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			findViewById(R.id.init_progress).setVisibility(View.VISIBLE);
 			initListener = new AppInitializeListener() {
 				boolean openGlSetup = false;
+
+				@Override
+				public void onStart(AppInitializer init) {
+
+				}
 
 				@Override
 				public void onProgress(AppInitializer init, InitEvents event) {
@@ -1596,6 +1605,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return mapLayers;
 	}
 
+	public WidgetsVisibilityHelper getWidgetsVisibilityHelper() {
+		return mapWidgetsVisibilityHelper;
+	}
+
 	public static void launchMapActivityMoveToTop(Context activity, Bundle prevIntentParams, Uri intentData, Bundle intentParams) {
 		if (activity instanceof MapActivity) {
 			if (((MapActivity) activity).getDashboard().isVisible()) {
@@ -2066,7 +2079,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void showQuickSearch(double latitude, double longitude) {
-		hideContextMenu();
+		hideVisibleMenu();
 		QuickSearchDialogFragment fragment = getQuickSearchDialogFragment();
 		if (fragment != null) {
 			fragment.dismiss();
@@ -2077,7 +2090,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void showQuickSearch(String searchQuery) {
-		hideContextMenu();
+		hideVisibleMenu();
 		QuickSearchDialogFragment fragment = getQuickSearchDialogFragment();
 		if (fragment != null) {
 			fragment.dismiss();
@@ -2088,7 +2101,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void showQuickSearch(Object object) {
-		hideContextMenu();
+		hideVisibleMenu();
 		QuickSearchDialogFragment fragment = getQuickSearchDialogFragment();
 		if (fragment != null) {
 			fragment.dismiss();
@@ -2111,7 +2124,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (mode == ShowQuickSearchMode.CURRENT) {
 			mapContextMenu.close();
 		} else {
-			hideContextMenu();
+			hideVisibleMenu();
 		}
 		QuickSearchDialogFragment fragment = getQuickSearchDialogFragment();
 		if (mode.isPointSelection()) {
@@ -2164,7 +2177,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (mode == ShowQuickSearchMode.CURRENT) {
 			mapContextMenu.close();
 		} else {
-			hideContextMenu();
+			hideVisibleMenu();
 		}
 		QuickSearchDialogFragment fragment = getQuickSearchDialogFragment();
 		if (mode.isPointSelection()) {
@@ -2213,11 +2226,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		BaseSettingsFragment.showInstance(this, SettingsScreenType.MAIN_SETTINGS);
 	}
 
-	private void hideContextMenu() {
+	private void hideVisibleMenu() {
 		if (mapContextMenu.isVisible()) {
 			mapContextMenu.hide();
 		} else if (mapContextMenu.getMultiSelectionMenu().isVisible()) {
 			mapContextMenu.getMultiSelectionMenu().hide();
+		} else if (getTrackMenuFragment() != null) {
+			dismissTrackMenu();
 		}
 	}
 
@@ -2241,8 +2256,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return getFragment(MeasurementToolFragment.TAG);
 	}
 
-	public TripRecordingStartingBottomFragment getTripRecordingBottomSheet() {
-		return getFragment(TripRecordingStartingBottomFragment.TAG);
+	public TripRecordingStartingBottomSheet getTripRecordingBottomSheet() {
+		return getFragment(TripRecordingStartingBottomSheet.TAG);
 	}
 
 	public ChooseRouteFragment getChooseRouteFragment() {
@@ -2263,6 +2278,17 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public TrackMenuFragment getTrackMenuFragment() {
 		return getFragment(TrackMenuFragment.TAG);
+	}
+
+	public RouteLineAppearanceFragment getRouteLineAppearanceFragment() {
+		return getFragment(RouteLineAppearanceFragment.TAG);
+	}
+
+	public void dismissTrackMenu() {
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		if (!fragmentManager.isStateSaved()) {
+			fragmentManager.popBackStack(TrackMenuFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+		}
 	}
 
 	public void backToConfigureProfileFragment() {

@@ -492,8 +492,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 				}
 			});
 			if (closeButton instanceof ImageView) {
-				UiUtilities.rotateImageByLayoutDirection(
-						(ImageView) closeButton, AndroidUtils.getLayoutDirection(app));
+				UiUtilities.rotateImageByLayoutDirection((ImageView) closeButton);
 			}
 		}
 
@@ -683,6 +682,11 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		return isProfileDependent() ?
 				getSelectedAppMode().getProfileColor(isNightMode()) :
 				ContextCompat.getColor(app, nightMode ? R.color.icon_color_active_dark : R.color.icon_color_active_light);
+	}
+
+	@ColorRes
+	protected int getActiveColorRes() {
+		return isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
 	}
 
 	@ColorRes

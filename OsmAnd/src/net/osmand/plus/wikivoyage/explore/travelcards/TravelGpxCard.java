@@ -20,7 +20,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.track.TrackMenuFragment;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
-import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -37,7 +36,7 @@ public class TravelGpxCard extends BaseTravelCard {
 	private boolean isLastItem;
 
 	public TravelGpxCard(@NonNull OsmandApplication app, boolean nightMode, @NonNull TravelGpx article,
-	                     @NonNull FragmentActivity activity) {
+						 @NonNull FragmentActivity activity) {
 		super(app, nightMode);
 		this.article = article;
 		readIcon = getActiveIcon(R.drawable.ic_action_read_article);
@@ -104,19 +103,15 @@ public class TravelGpxCard extends BaseTravelCard {
 
 	private void updateSaveButton(final TravelGpxVH holder) {
 		if (article != null) {
-			final TravelLocalDataHelper helper = app.getTravelHelper().getBookmarksHelper();
-			final boolean saved = helper.isArticleSaved(article);
+			final TravelHelper helper = app.getTravelHelper();
+			final boolean saved = helper.getBookmarksHelper().isArticleSaved(article);
 			Drawable icon = getActiveIcon(saved ? R.drawable.ic_action_read_later_fill : R.drawable.ic_action_read_later);
 			holder.rightButton.setText(saved ? R.string.shared_string_remove : R.string.shared_string_save);
 			holder.rightButton.setCompoundDrawablesWithIntrinsicBounds(null, null, icon, null);
 			holder.rightButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					if (saved) {
-						helper.removeArticleFromSaved(article);
-					} else {
-						helper.addArticleToSaved(article);
-					}
+					helper.saveOrRemoveArticle(article, !saved);
 					updateSaveButton(holder);
 				}
 			});

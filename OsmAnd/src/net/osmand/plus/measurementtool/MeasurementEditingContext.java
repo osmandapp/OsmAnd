@@ -2,9 +2,7 @@ package net.osmand.plus.measurementtool;
 
 import android.util.Pair;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
+import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
@@ -38,12 +36,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode.NEXT_SEGMENT;
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode.WHOLE_TRACK;
 import static net.osmand.plus.measurementtool.command.MeasurementModeCommand.MeasurementCommandType.APPROXIMATE_POINTS;
 
@@ -1109,6 +1113,34 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 			firstPointIndex = lastPointIndex + 1;
 		}
 		return res;
+	}
+
+	public boolean isInMultiProfileMode() {
+		Set<String> profiles = new HashSet<>();
+		List<TrkSegment> allSegments = new ArrayList<>();
+		allSegments.addAll(beforeSegments);
+		allSegments.addAll(afterSegments);
+		for (TrkSegment segment : allSegments) {
+			List<WptPt> points = segment.points;
+			if (Algorithms.isEmpty(points)) {
+				continue;
+			}
+			for (int i = 0; i < points.size() / 2 + 1; i++) {
+				WptPt left = points.get(i);
+				int rightIdx = points.size() - 1 - i;
+				WptPt right = points.get(rightIdx);
+				if (!left.isGap() && i + 1 < points.size()) {
+					profiles.add(left.getProfileType());
+				}
+				if (!right.isGap() && rightIdx + 1 < points.size()) {
+					profiles.add(right.getProfileType());
+				}
+				if (profiles.size() >= 2) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	@Override

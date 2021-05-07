@@ -619,6 +619,27 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 	}
 
 	private void createIconForCategory() {
+		createIconList();
+		final HorizontalSelectionAdapter horizontalSelectionAdapter = new HorizontalSelectionAdapter(app, nightMode);
+		horizontalSelectionAdapter.setTitledItems(new ArrayList<>(iconCategories.keySet()));
+		horizontalSelectionAdapter.setSelectedItemByTitle(selectedIconCategory);
+		horizontalSelectionAdapter.setListener(new HorizontalSelectionAdapter.HorizontalSelectionAdapterListener() {
+			@Override
+			public void onItemSelected(HorizontalSelectionAdapter.HorizontalSelectionItem item) {
+				selectedIconCategory = item.getTitle();
+				createIconList();
+				updateIconSelector(selectedIcon, PointEditorFragmentNew.this.view);
+				horizontalSelectionAdapter.notifyDataSetChanged();
+			}
+		});
+		RecyclerView iconCategoriesRecyclerView = view.findViewById(R.id.group_name_recycler_view);
+		iconCategoriesRecyclerView.setAdapter(horizontalSelectionAdapter);
+		iconCategoriesRecyclerView.setLayoutManager(new LinearLayoutManager(app, RecyclerView.HORIZONTAL, false));
+		iconCategoriesRecyclerView.scrollToPosition(horizontalSelectionAdapter.getItemPositionByTitle(selectedIconCategory));
+	}
+
+
+	private void createIconList() {
 		FlowLayout selectIcon = view.findViewById(R.id.select_icon);
 		selectIcon.removeAllViews();
 		JSONArray iconJsonArray = iconCategories.get(selectedIconCategory);
@@ -631,22 +652,6 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 					e.printStackTrace();
 				}
 			}
-			HorizontalSelectionAdapter horizontalSelectionAdapter = new HorizontalSelectionAdapter(app, nightMode);
-			horizontalSelectionAdapter.setTitledItems(new ArrayList<>(iconCategories.keySet()));
-			horizontalSelectionAdapter.setSelectedItemByTitle(selectedIconCategory);
-			horizontalSelectionAdapter.setListener(new HorizontalSelectionAdapter.HorizontalSelectionAdapterListener() {
-				@Override
-				public void onItemSelected(HorizontalSelectionAdapter.HorizontalSelectionItem item) {
-					selectedIconCategory = item.getTitle();
-					createIconForCategory();
-					updateIconSelector(selectedIcon, PointEditorFragmentNew.this.view);
-				}
-			});
-			RecyclerView iconCategoriesRecyclerView = view.findViewById(R.id.group_name_recycler_view);
-			iconCategoriesRecyclerView.setAdapter(horizontalSelectionAdapter);
-			iconCategoriesRecyclerView.setLayoutManager(new LinearLayoutManager(app, RecyclerView.HORIZONTAL, false));
-			horizontalSelectionAdapter.notifyDataSetChanged();
-			iconCategoriesRecyclerView.smoothScrollToPosition(horizontalSelectionAdapter.getItemPositionByTitle(selectedIconCategory));
 			for (String name : iconNameList) {
 				int minimalPaddingBetweenIcon = app.getResources().getDimensionPixelSize(R.dimen.favorites_select_icon_button_right_padding);
 				selectIcon.addView(createIconItemView(name, selectIcon), new FlowLayout.LayoutParams(minimalPaddingBetweenIcon, 0));

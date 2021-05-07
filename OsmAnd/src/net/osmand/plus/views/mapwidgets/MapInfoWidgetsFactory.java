@@ -1204,12 +1204,7 @@ public class MapInfoWidgetsFactory {
 
 		@SuppressLint("SetTextI18n")
 		public boolean updateInfo() {
-			boolean visible = settings.SHOW_COORDINATES_WIDGET.get() && !map.shouldHideTopControls()
-					&& map.getMapRouteInfoMenu().shouldShowTopControls() && !map.isTopToolbarActive()
-					&& !map.getMapLayers().getGpxLayer().isInTrackAppearanceMode()
-					&& !MapRouteInfoMenu.chooseRoutesVisible && !MapRouteInfoMenu.waypointsVisible
-					&& !MapRouteInfoMenu.followTrackVisible;
-
+			boolean visible = map.getWidgetsVisibilityHelper().shouldShowTopCoordinatesWidget();
 			updateVisibility(visible);
 			if (visible) {
 				lastKnownLocation = locationProvider.getLastKnownLocation();

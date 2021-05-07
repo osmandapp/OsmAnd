@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.AndroidUtils;
+import net.osmand.GPXUtilities.Elevation;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
@@ -92,7 +93,15 @@ public class TrackColoringCard extends BaseCard {
 		if (scaleType == GradientScaleType.SPEED) {
 			return gpxTrackAnalysis.isSpeedSpecified();
 		} else {
-			return gpxTrackAnalysis.isElevationSpecified();
+			if (!gpxTrackAnalysis.isElevationSpecified()) {
+				return false;
+			}
+			for (Elevation elevation : gpxTrackAnalysis.elevationData) {
+				if (Float.isNaN(elevation.elevation)) {
+					return false;
+				}
+			}
+			return true;
 		}
 	}
 
@@ -135,7 +144,7 @@ public class TrackColoringCard extends BaseCard {
 		updateHeader();
 	}
 
-	private class TrackColoringAdapter extends RecyclerView.Adapter<TrackAppearanceViewHolder> {
+	private class TrackColoringAdapter extends RecyclerView.Adapter<AppearanceViewHolder> {
 
 		private List<TrackAppearanceItem> items;
 
@@ -145,16 +154,16 @@ public class TrackColoringCard extends BaseCard {
 
 		@NonNull
 		@Override
-		public TrackAppearanceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+		public AppearanceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 			LayoutInflater themedInflater = UiUtilities.getInflater(parent.getContext(), nightMode);
 			View view = themedInflater.inflate(R.layout.point_editor_group_select_item, parent, false);
 			view.getLayoutParams().width = app.getResources().getDimensionPixelSize(R.dimen.gpx_group_button_width);
 			view.getLayoutParams().height = app.getResources().getDimensionPixelSize(R.dimen.gpx_group_button_height);
-			return new TrackAppearanceViewHolder(view);
+			return new AppearanceViewHolder(view);
 		}
 
 		@Override
-		public void onBindViewHolder(@NonNull final TrackAppearanceViewHolder holder, int position) {
+		public void onBindViewHolder(@NonNull final AppearanceViewHolder holder, int position) {
 			final TrackAppearanceItem item = items.get(position);
 
 			if (item.isActive() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -186,7 +195,7 @@ public class TrackColoringCard extends BaseCard {
 			});
 		}
 
-		private void updateButtonBg(TrackAppearanceViewHolder holder, TrackAppearanceItem item) {
+		private void updateButtonBg(AppearanceViewHolder holder, TrackAppearanceItem item) {
 			GradientDrawable rectContourDrawable = (GradientDrawable) AppCompatResources.getDrawable(app, R.drawable.bg_select_group_button_outline);
 			if (rectContourDrawable != null) {
 				Context ctx = holder.itemView.getContext();
@@ -217,7 +226,7 @@ public class TrackColoringCard extends BaseCard {
 			}
 		}
 
-		private void updateTextAndIconColor(TrackAppearanceViewHolder holder, TrackAppearanceItem item) {
+		private void updateTextAndIconColor(AppearanceViewHolder holder, TrackAppearanceItem item) {
 			Context ctx = holder.itemView.getContext();
 			boolean isSelected = item.getAttrName().equals(getSelectedAppearanceItem().getAttrName());
 			int iconColorId;

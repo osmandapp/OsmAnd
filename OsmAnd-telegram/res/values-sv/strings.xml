@@ -13,7 +13,7 @@
     <string name="si_km_m">Kilomter/meter</string>
     <string name="si_mi_yard">Miles/yard</string>
     <string name="si_mi_feet">Miles/fot</string>
-    <string name="si_nm_h">Distansminuter per timme (knop)</string>
+    <string name="si_nm_h">Sjömil per timme (knop)</string>
     <string name="si_min_m">Minuter per mile</string>
     <string name="si_min_km">Minuter per kilometer</string>
     <string name="si_m_s">Meter per sekund</string>
@@ -22,7 +22,7 @@
     <string name="mile_per_hour">mph</string>
     <string name="km_h">km/h</string>
     <string name="m_s">m/s</string>
-    <string name="nm_h">di/h</string>
+    <string name="nm_h">M/h</string>
     <string name="min_km">min/km</string>
     <string name="min_mile">min/mi</string>
     <string name="nm">di</string>
@@ -43,7 +43,7 @@
     <string name="sharing_location">Delar plats</string>
     <string name="share_location">Dela plats</string>
     <string name="shared_string_distance">Avstånd</string>
-    <string name="osmand_service_descr">OsmAnd Tracker körs i bakgrunden med skärmen av.</string>
+    <string name="osmand_service_descr">OsmAnd Tracker körs i bakgrunden medan skärmen är avstängd.</string>
     <string name="osmand_service">Bakgrundsläge</string>
     <string name="location_service_no_gps_available">Välj en av platsleverantörerna för att dela din plats.</string>
     <string name="gps_not_available">Aktivera \"Plats\" i systeminställningarna</string>

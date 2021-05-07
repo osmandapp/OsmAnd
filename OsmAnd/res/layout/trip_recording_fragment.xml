@@ -18,6 +18,7 @@
 		android:paddingEnd="@dimen/content_padding"
 		android:paddingRight="@dimen/content_padding"
 		android:paddingBottom="@dimen/content_padding"
+		android:minHeight="@dimen/bottom_sheet_selected_item_title_height"
 		android:weightSum="2">
 
 		<net.osmand.plus.widgets.TextViewEx
@@ -72,12 +73,18 @@
 		android:layout_marginLeft="@dimen/content_padding"
 		android:layout_marginEnd="@dimen/content_padding"
 		android:layout_marginRight="@dimen/content_padding"
-		android:layout_marginBottom="@dimen/dialog_content_margin" />
+		android:layout_marginBottom="@dimen/context_menu_padding_margin_small" />
+
+	<LinearLayout
+		android:id="@+id/segments_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical" />
 
 	<androidx.recyclerview.widget.RecyclerView
 		android:id="@+id/block_statistics"
 		android:layout_width="match_parent"
-		android:layout_height="@dimen/list_header_height"
+		android:layout_height="wrap_content"
 		android:layout_marginTop="@dimen/content_padding_small_half"
 		android:layout_marginBottom="@dimen/dialog_content_margin"
 		android:clipToPadding="false"

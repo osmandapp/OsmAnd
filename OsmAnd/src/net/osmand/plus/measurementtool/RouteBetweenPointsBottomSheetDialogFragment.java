@@ -35,6 +35,7 @@ import static net.osmand.plus.UiUtilities.CustomRadioButtonType.END;
 import static net.osmand.plus.UiUtilities.CustomRadioButtonType.START;
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.DEFAULT_APP_MODE;
 import static net.osmand.plus.measurementtool.SelectFileBottomSheet.BOTTOM_SHEET_HEIGHT_DP;
+import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
 
 public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetBehaviourDialogFragment {
 
@@ -116,7 +117,7 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetBeha
 
 		for (int i = 0; i < modes.size(); i++) {
 			ApplicationMode mode = modes.get(i);
-			if (!"public_transport".equals(mode.getRoutingProfile())) {
+			if (!PUBLIC_TRANSPORT_KEY.equals(mode.getRoutingProfile())) {
 				icon = app.getUIUtilities().getPaintedIcon(mode.getIconRes(), mode.getProfileColor(nightMode));
 				addProfileView(navigationType, onClickListener, i, icon, mode.toHumanString(), mode.equals(appMode));
 			}

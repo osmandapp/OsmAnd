@@ -33,8 +33,8 @@ import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
 import org.apache.commons.logging.Log;
 
-import static net.osmand.plus.liveupdates.LiveUpdatesSettingsDialogFragmentNew.getActivePrimaryColorId;
-import static net.osmand.plus.monitoring.TripRecordingBottomFragment.getSecondaryIconColorId;
+import static net.osmand.plus.liveupdates.LiveUpdatesSettingsBottomSheet.getActivePrimaryColorId;
+import static net.osmand.plus.monitoring.TripRecordingBottomSheet.getSecondaryIconColorId;
 
 public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 
@@ -134,6 +134,7 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 
 	public static void updateCustomButtonView(OsmandApplication app, ApplicationMode mode, View customView, boolean checked, boolean nightMode) {
 		Context themedCtx = UiUtilities.getThemedContext(app, nightMode);
+		boolean isLayoutRtl = AndroidUtils.isLayoutRtl(themedCtx);
 		LinearLayout buttonView = customView.findViewById(R.id.button_container);
 
 		int bgColor;
@@ -149,10 +150,11 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 					ContextCompat.getColor(app, getActivePrimaryColorId(nightMode)), checked ? 0.3f : 0.5f);
 		}
 
-		int bgResId = R.drawable.rectangle_rounded_right;
+		int bgResId = isLayoutRtl ? R.drawable.rectangle_rounded_left : R.drawable.rectangle_rounded_right;
 		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-			int selectableResId = R.drawable.ripple_rectangle_rounded_right;
-
+			int selectableResId = isLayoutRtl ?
+					R.drawable.ripple_rectangle_rounded_left :
+					R.drawable.ripple_rectangle_rounded_right;
 			Drawable bgDrawable = app.getUIUtilities().getPaintedIcon(bgResId, bgColor);
 			Drawable selectable = app.getUIUtilities().getPaintedIcon(selectableResId, selectedColor);
 			Drawable[] layers = {bgDrawable, selectable};

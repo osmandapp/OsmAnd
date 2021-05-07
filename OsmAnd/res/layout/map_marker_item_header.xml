@@ -50,7 +50,9 @@
 			android:gravity="center"
 			android:visibility="gone"
 			android:background="?android:selectableItemBackground"
-			android:textColor="?attr/active_color_basic" />
+			android:textColor="?attr/active_color_basic"
+			android:paddingEnd="@dimen/bottom_sheet_content_margin"
+			android:paddingStart="@dimen/bottom_sheet_content_margin" />
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/disable_group_switch"

@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PointF;
 import android.graphics.Shader;
 
 import net.osmand.GPXUtilities;
@@ -13,6 +14,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.track.GradientScaleType;
 import net.osmand.plus.views.layers.geometry.GpxGeometryWay;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +28,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import androidx.annotation.NonNull;
-
 
 public class Renderable {
 
@@ -57,6 +58,7 @@ public class Renderable {
     public static abstract class RenderableSegment {
 
         protected static final int MIN_CULLER_ZOOM = 16;
+        protected static final int BORDER_TYPE_ZOOM_THRESHOLD = MapTileLayer.DEFAULT_MAX_ZOOM + MapTileLayer.OVERZOOM_IN;
 
         public List<WptPt> points = null;                           // Original list of points
         protected List<WptPt> culled = new ArrayList<>();           // Reduced/resampled list of points
@@ -67,7 +69,9 @@ public class Renderable {
         protected double zoom = -1;
         protected AsynchronousResampler culler = null;                        // The currently active resampler
         protected Paint paint = null;                               // MUST be set by 'updateLocalPaint' before use
+        protected Paint borderPaint;
         protected GradientScaleType scaleType = null;
+        protected boolean drawBorder = false;
 
         protected GpxGeometryWay geometryWay;
 
@@ -86,10 +90,15 @@ public class Renderable {
             }
             paint.setColor(p.getColor());
             paint.setStrokeWidth(p.getStrokeWidth());
+            if (scaleType != null) {
+                paint.setAlpha(0xFF);
+            }
         }
 
-        public void setGradientScaleType(GradientScaleType type) {
-            this.scaleType = type;
+        public void setGradientTrackParams(GradientScaleType gradientScaleType, @NonNull Paint borderPaint, boolean shouldDrawBorder) {
+            this.scaleType = gradientScaleType;
+            this.borderPaint = borderPaint;
+            this.drawBorder = shouldDrawBorder;
         }
 
         public GpxGeometryWay getGeometryWay() {
@@ -110,17 +119,21 @@ public class Renderable {
             updateLocalPaint(p);
             canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
             if (scaleType != null) {
-                drawGradient(getPointsForDrawing(), p, canvas, tileBox);
+                if (drawBorder && zoom < BORDER_TYPE_ZOOM_THRESHOLD) {
+                    drawSolid(points, borderPaint, canvas, tileBox);
+                }
+                drawGradient(zoom, points, paint, canvas, tileBox);
             } else {
-                drawSolid(getPointsForDrawing(), p, canvas, tileBox);
+                drawSolid(getPointsForDrawing(), paint, canvas, tileBox);
             }
             canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
         }
 
-
         public void drawSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {
             if (QuadRect.trivialOverlap(tileBox.getLatLonBounds(), trackBounds)) { // is visible?
-                startCuller(zoom);
+                if (scaleType == null) {
+                    startCuller(zoom);
+                }
                 drawSingleSegment(zoom, p, canvas, tileBox);
             }
         }
@@ -157,7 +170,7 @@ public class Renderable {
                         float lastX = tileBox.getPixXFromLatLon(lastPt.lat, lastPt.lon);
                         float lastY = tileBox.getPixYFromLatLon(lastPt.lat, lastPt.lon);
                         if (!path.isEmpty()) {
-                            canvas.drawPath(path, paint);
+                            canvas.drawPath(path, p);
                         }
                         path.reset();
                         path.moveTo(lastX, lastY);
@@ -171,36 +184,122 @@ public class Renderable {
                 lastPt = pt;
             }
             if (!path.isEmpty()) {
-                canvas.drawPath(path, paint);
+                canvas.drawPath(path, p);
             }
         }
 
-        protected void drawGradient(List<WptPt> pts, Paint p, Canvas canvas, RotatedTileBox tileBox) {
+        protected void drawGradient(double zoom, List<WptPt> pts, Paint p, Canvas canvas, RotatedTileBox tileBox) {
             QuadRect tileBounds = tileBox.getLatLonBounds();
+            boolean drawSegmentBorder = drawBorder && zoom >= BORDER_TYPE_ZOOM_THRESHOLD;
             Path path = new Path();
-            Paint paint = new Paint(this.paint);
-            WptPt prevPt = pts.get(0);
+            boolean recalculateLastXY = true;
+            WptPt lastPt = pts.get(0);
+
+            List<PointF> gradientPoints = new ArrayList<>();
+            List<Integer> gradientColors = new ArrayList<>();
+            float gradientAngle = 0;
+
+            List<Path> paths = new ArrayList<>();
+            List<LinearGradient> gradients = new ArrayList<>();
+
             for (int i = 1; i < pts.size(); i++) {
-                WptPt currentPt = pts.get(i);
-                if (arePointsInsideTile(currentPt, prevPt, tileBounds)) {
-                    float startX = tileBox.getPixXFromLatLon(prevPt.lat, prevPt.lon);
-                    float startY = tileBox.getPixYFromLatLon(prevPt.lat, prevPt.lon);
-                    float endX = tileBox.getPixXFromLatLon(currentPt.lat, currentPt.lon);
-                    float endY = tileBox.getPixYFromLatLon(currentPt.lat, currentPt.lon);
-                    int prevColor = prevPt.getColor(scaleType.toColorizationType());
-                    int currentColor = currentPt.getColor(scaleType.toColorizationType());
-                    LinearGradient gradient = new LinearGradient(startX, startY, endX, endY, prevColor, currentColor, Shader.TileMode.CLAMP);
-                    paint.setShader(gradient);
-                    path.reset();
-                    path.moveTo(startX, startY);
-                    path.lineTo(endX, endY);
-                    canvas.drawPath(path, paint);
+                WptPt pt = pts.get(i);
+                WptPt nextPt = i + 1 < pts.size() ? pts.get(i + 1) : null;
+                float nextX = nextPt == null ? 0 : tileBox.getPixXFromLatLon(nextPt.lat, nextPt.lon);
+                float nextY = nextPt == null ? 0 : tileBox.getPixYFromLatLon(nextPt.lat, nextPt.lon);
+                float lastX = 0;
+                float lastY = 0;
+                if (arePointsInsideTile(pt, lastPt, tileBounds)) {
+                    if (recalculateLastXY) {
+                        recalculateLastXY = false;
+                        lastX = tileBox.getPixXFromLatLon(lastPt.lat, lastPt.lon);
+                        lastY = tileBox.getPixYFromLatLon(lastPt.lat, lastPt.lon);
+                        if (!path.isEmpty()) {
+                            paths.add(new Path(path));
+                            gradients.add(createGradient(gradientPoints, gradientColors));
+                        }
+                        path.reset();
+                        path.moveTo(lastX, lastY);
+
+                        gradientPoints.clear();
+                        gradientColors.clear();
+                        gradientPoints.add(new PointF(lastX, lastY));
+                        gradientColors.add(lastPt.getColor(scaleType.toColorizationType()));
+                    }
+                    float x = tileBox.getPixXFromLatLon(pt.lat, pt.lon);
+                    float y = tileBox.getPixYFromLatLon(pt.lat, pt.lon);
+                    path.lineTo(x, y);
+                    gradientPoints.add(new PointF(x, y));
+                    gradientColors.add(pt.getColor(scaleType.toColorizationType()));
+
+                    if (gradientColors.size() == 2) {
+                        gradientAngle = calculateAngle(lastX, lastY, x, y);
+                    }
+                    if (nextPt != null) {
+                        float nextAngle = calculateAngle(x, y, nextX, nextY);
+                        if (Math.abs(nextAngle - gradientAngle) > 20) {
+                            recalculateLastXY = true;
+                        }
+                    }
+                } else {
+                    recalculateLastXY = true;
                 }
-                prevPt = currentPt;
+                lastPt = pt;
             }
+            if (!path.isEmpty()) {
+                paths.add(new Path(path));
+                gradients.add(createGradient(gradientPoints, gradientColors));
+            }
+
+            if (!paths.isEmpty()) {
+                if (drawSegmentBorder) {
+                    canvas.drawPath(paths.get(0), borderPaint);
+                }
+                for (int i = 0; i < paths.size(); i++) {
+                    if (drawSegmentBorder && i + 1 < paths.size()) {
+                        canvas.drawPath(paths.get(i + 1), borderPaint);
+                    }
+                    p.setShader(gradients.get(i));
+                    canvas.drawPath(paths.get(i), p);
+                }
+            }
+        }
+
+        private LinearGradient createGradient(List<PointF> gradientPoints, List<Integer> gradientColors) {
+            float gradientLength = 0;
+            List<Float> pointsLength = new ArrayList<>(gradientPoints.size() - 1);
+            for (int i = 1; i < gradientPoints.size(); i++) {
+                PointF start = gradientPoints.get(i - 1);
+                PointF end = gradientPoints.get(i);
+                pointsLength.add((float) MapUtils.getSqrtDistance(start.x, start.y, end.x, end.y));
+                gradientLength += pointsLength.get(i - 1);
+            }
+
+            float[] positions = new float[gradientPoints.size()];
+            positions[0] = 0;
+            for (int i = 1; i < gradientPoints.size(); i++) {
+                positions[i] = positions[i - 1] + pointsLength.get(i - 1) / gradientLength;
+            }
+
+            int[] colors = new int[gradientColors.size()];
+            for (int i = 0; i < gradientColors.size(); i++) {
+                colors[i] = gradientColors.get(i);
+            }
+
+            PointF gradientStart = gradientPoints.get(0);
+            PointF gradientEnd = gradientPoints.get(gradientPoints.size() - 1);
+            return new LinearGradient(gradientStart.x, gradientStart.y, gradientEnd.x, gradientEnd.y,
+                    colors, positions, Shader.TileMode.CLAMP);
+        }
+
+        private float calculateAngle(float startX, float startY, float endX, float endY) {
+            return (float) Math.abs(Math.toDegrees(Math.atan2(endY - startY, endX - startX)));
         }
 
         protected boolean arePointsInsideTile(WptPt first, WptPt second, QuadRect tileBounds) {
+            if (first == null || second == null) {
+                return false;
+            }
             return Math.min(first.lon, second.lon) < tileBounds.right && Math.max(first.lon, second.lon) > tileBounds.left
                     && Math.min(first.lat, second.lat) < tileBounds.top && Math.max(first.lat, second.lat) > tileBounds.bottom;
         }
@@ -243,7 +342,8 @@ public class Renderable {
             super(pt, 0);
         }
 
-        @Override public void drawSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {
+        @Override
+        public void drawSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {
             if (points.size() != pointSize) {
                 int prevSize = pointSize;
                 pointSize = points.size();

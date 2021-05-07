@@ -48,6 +48,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 		setupSimulateInitialStartupPref();
 		setupShouldShowFreeVersionBannerPref();
 		setupTestVoiceCommandsPref();
+		setupTestBackupsPref();
 		setupLogcatBufferPref();
 
 		Preference info = findPreference("info");
@@ -115,6 +116,12 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 		Preference testVoiceCommands = findPreference("test_voice_commands");
 		testVoiceCommands.setIntent(new Intent(getActivity(), TestVoiceActivity.class));
 		testVoiceCommands.setIconSpaceReserved(false);
+	}
+
+	private void setupTestBackupsPref() {
+		Preference testBackups = findPreference("test_backup");
+		testBackups.setIntent(new Intent(getActivity(), TestBackupActivity.class));
+		testBackups.setIconSpaceReserved(false);
 	}
 
 	private void setupLogcatBufferPref() {

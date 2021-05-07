@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
@@ -55,7 +56,7 @@ public class SegmentGPXAdapter extends ArrayAdapter<GpxDisplayItem> {
 			WrapContentHeightViewPager pager = row.findViewById(R.id.pager);
 			PagerSlidingTabStrip tabLayout = row.findViewById(R.id.sliding_tabs);
 
-			pager.setAdapter(new GPXItemPagerAdapter(app, item, displayHelper, nightMode, listener));
+			pager.setAdapter(new GPXItemPagerAdapter(app, item, displayHelper, nightMode, listener, false));
 			if (create) {
 				tabLayout.setViewPager(pager);
 			} else {

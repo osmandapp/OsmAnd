@@ -3853,7 +3853,7 @@
     <string name="subscription_on_hold_title">Áskrift að OsmAnd Live er í biðstöðu</string>
     <string name="login_account">Notandaaðgangur</string>
     <string name="login_open_street_map_org">Skrá inn á OpenStreetMap.org</string>
-    <string name="markers_history">Vinnsluferill kortamerkja</string>
+    <string name="markers_history">Ferill kortamerkja</string>
     <string name="message_you_need_add_two_points_to_show_graphs">Bættu við a.m.k. tveimur punktum</string>
     <string name="navigate_point_mgrs">MGRS</string>
     <string name="subscription_paused_title">Áskrift að OsmAnd Live hefur verið sett í bið</string>
@@ -4050,4 +4050,53 @@
     <string name="select_another_colorization">Veldu aðra tegund litunar.</string>
     <string name="rendering_attr_noNatureReserveBoundaries_description">Fela mörk friðlanda, verndaðra svæða og þjóðgarða</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">Mörk náttúru</string>
+    <string name="trip_recording_logging_interval_info">Millibil skráninga stillir tímabilið milli þess sem OsmAnd biður um staðsetningargögn.</string>
+    <string name="trip_recording_show_start_dialog_setting">Ef þetta er óvirkt, mun upptaka hefjast strax eftir að ýtt er á hnappinn eða valmyndarfærsluna og staðfestingarglugga er þá sleppt.</string>
+    <string name="release_4_0_beta">• Bætt við möguleika á að sækja hæðarlínur í fetum
+\n
+\n• Landslag í leiðaskipulagi: bætt við flipum til að skipta á milli punkta eða grafs
+\n
+\n• Uppfærslur OsmAnd Live færðar í \"Sótt gögn &gt; Uppfærslur\"
+\n
+\n • Ferla er nú hægt að lita eftir hæð, hraða eða halla.
+\n
+\n • Bætt við valkosti á að breyta útliti leiðarlínu leiðsagnar
+\n
+\n • Uppfærður gluggi fyrir \"Skráning ferðar\"
+\n
+\n</string>
+    <string name="trip_recording_save_and_continue">Vista og halda áfram</string>
+    <string name="lost_data_warning">Öll óvistuð gögn munu tapast.</string>
+    <string name="show_start_dialog">Birta upphafsglugga</string>
+    <string name="customize_route_line">Sérsníða leiðarlínu</string>
+    <string name="shared_string_route_line">Leiðarlína</string>
+    <string name="route_line_use_map_style_appearance">Leiðarlína myndi nota %1$s sem tilgreint er í völdum kortastíl: %2$s.</string>
+    <string name="specify_color_for_map_mode">Tilgreindu lit fyrir kortaham: %1$s.</string>
+    <string name="no_purchases">Þú ert ekki með nein innkaup</string>
+    <string name="new_device_account">Nýtt tæki / nýr aðgangur</string>
+    <string name="contact_support_description">Ef þú ert með spurningar skaltu hafa samband við okkur á %1$s.</string>
+    <string name="empty_purchases_description">Ef innkaupin þín birtast ekki hér, ýttu þá á “%1$s” eða hafðu samband við hjálparteymið okkar.</string>
+    <string name="contact_support">Hafa samband við aðstoðarteymi</string>
+    <string name="troubleshooting">Lausn á vandamálum</string>
+    <string name="troubleshooting_description">Fylgdu þessum tengli ef þú átt í vandræðum með innkaup.</string>
+    <string name="osmand_live">OsmAnd Live</string>
+    <string name="annual_subscription">Árs áskrift</string>
+    <string name="monthly_subscription">Mánaðarleg áskrift</string>
+    <string name="three_months_subscription">Þriggja mánaða áskrift</string>
+    <string name="next_billing_date">Næsta greiðsludagsetning: %1$s</string>
+    <string name="osmand_live_cancelled">Hætt við</string>
+    <string name="renew_subscription">Endurnýja áskrift</string>
+    <string name="in_grace_period">Í umþóttunarfresti</string>
+    <string name="on_hold">Í bið</string>
+    <string name="expired">Útrunnið</string>
+    <string name="update_all_maps_added">Uppfæra öll kort sem bætt hefur verið við %1$s\?</string>
+    <string name="exit_number">Númer útkeyrslu</string>
+    <string name="output">Útkeyrsla</string>
+    <string name="announce_when_exceeded">Tilkynna þegar farið er yfir</string>
+    <string name="user_points">Punktar notanda</string>
+    <string name="map_quick_action_pattern">%1$s → …</string>
+    <string name="shared_string_feet">fet</string>
+    <string name="srtm_unit_format">Snið eininga hæðarlína</string>
+    <string name="srtm_download_list_help_message">OsmAnd býður upp á hæðalínugögn í metrum og fetum. Þú þarft að sækja skrána aftur til að breyta sniðinu.</string>
+    <string name="srtm_download_single_help_message">Veldu rétt snið eininga. Þú þarft að sækja skrána aftur til að breyta sniðinu.</string>
 </resources>

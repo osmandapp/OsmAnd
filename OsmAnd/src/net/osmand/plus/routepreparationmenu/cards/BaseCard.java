@@ -39,9 +39,13 @@ public abstract class BaseCard {
 	}
 
 	public BaseCard(@NonNull MapActivity mapActivity) {
+		this(mapActivity, true);
+	}
+
+	public BaseCard(@NonNull MapActivity mapActivity, boolean usedOnMap) {
 		this.mapActivity = mapActivity;
 		this.app = mapActivity.getMyApplication();
-		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		nightMode = usedOnMap ? app.getDaynightHelper().isNightModeForMapControls() : !app.getSettings().isLightContent();
 	}
 
 	public abstract int getCardLayoutId();

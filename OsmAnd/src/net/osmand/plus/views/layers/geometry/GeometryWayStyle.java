@@ -3,10 +3,13 @@ package net.osmand.plus.views.layers.geometry;
 import android.content.Context;
 import android.graphics.Bitmap;
 
+import net.osmand.util.Algorithms;
+
 public abstract class GeometryWayStyle<T extends GeometryWayContext> {
 
 	private T context;
 	protected Integer color;
+	protected Float width;
 
 	public GeometryWayStyle(T context) {
 		this.context = context;
@@ -15,6 +18,12 @@ public abstract class GeometryWayStyle<T extends GeometryWayContext> {
 	public GeometryWayStyle(T context, Integer color) {
 		this.context = context;
 		this.color = color;
+	}
+
+	public GeometryWayStyle(T context, Integer color, Float width) {
+		this.context = context;
+		this.color = color;
+		this.width = width;
 	}
 
 	public T getContext() {
@@ -27,6 +36,10 @@ public abstract class GeometryWayStyle<T extends GeometryWayContext> {
 
 	public Integer getColor() {
 		return color;
+	}
+
+	public Float getWidth() {
+		return width;
 	}
 
 	public Integer getStrokeColor() {
@@ -46,6 +59,10 @@ public abstract class GeometryWayStyle<T extends GeometryWayContext> {
 	}
 
 	public boolean isVisibleWhileZooming() {
+		return false;
+	}
+
+	public boolean isUnique() {
 		return false;
 	}
 
@@ -75,9 +92,6 @@ public abstract class GeometryWayStyle<T extends GeometryWayContext> {
 			return false;
 		}
 		GeometryWayStyle<?> o = (GeometryWayStyle<?>) other;
-		if (color != null && o.color != null) {
-			return color.equals(o.color);
-		}
-		return color == null && o.color == null;
+		return Algorithms.objectEquals(color, o.color) && Algorithms.objectEquals(width, o.width);
 	}
 }

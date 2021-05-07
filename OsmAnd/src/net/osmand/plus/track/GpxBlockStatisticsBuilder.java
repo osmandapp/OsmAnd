@@ -8,6 +8,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
@@ -20,45 +30,47 @@ import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
+import net.osmand.plus.myplaces.GPXTabItemType;
 import net.osmand.plus.myplaces.SegmentActionsListener;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
-import androidx.annotation.ColorInt;
-import androidx.annotation.ColorRes;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import static net.osmand.plus.liveupdates.LiveUpdatesFragment.getDefaultIconColorId;
 
 public class GpxBlockStatisticsBuilder {
 
-	private static final Log log = PlatformUtil.getLog(GpxBlockStatisticsBuilder.class);
-	private static final int GENERAL_UPDATE_INTERVAL = 1000;
+	private static final Log LOG = PlatformUtil.getLog(GpxBlockStatisticsBuilder.class);
+	private static final int BLOCKS_UPDATE_INTERVAL = 1000;
 
 	private final OsmandApplication app;
+	private final boolean nightMode;
+
 	private RecyclerView blocksView;
 	private final SelectedGpxFile selectedGpxFile;
+	private GPXTrackAnalysis analysis;
 
 	private BlockStatisticsAdapter adapter;
 	private final List<StatBlock> items = new ArrayList<>();
 	private boolean blocksClickable = true;
+	private GPXTabItemType tabItem = null;
 
 	private final Handler handler = new Handler();
 	private Runnable updatingItems;
 	private boolean updateRunning = false;
 
-	public GpxBlockStatisticsBuilder(OsmandApplication app, SelectedGpxFile selectedGpxFile) {
+	public GpxBlockStatisticsBuilder(OsmandApplication app, SelectedGpxFile selectedGpxFile, boolean nightMode) {
 		this.app = app;
 		this.selectedGpxFile = selectedGpxFile;
+		this.nightMode = nightMode;
 	}
 
 	public boolean isUpdateRunning() {
@@ -73,6 +85,10 @@ public class GpxBlockStatisticsBuilder {
 		this.blocksView = blocksView;
 	}
 
+	public void setTabItem(GPXTabItemType tabItem) {
+		this.tabItem = tabItem;
+	}
+
 	@Nullable
 	public GpxDisplayItem getDisplayItem(GPXFile gpxFile) {
 		return gpxFile.tracks.size() > 0 ? GpxUiHelper.makeGpxDisplayItem(app, gpxFile) : null;
@@ -82,9 +98,9 @@ public class GpxBlockStatisticsBuilder {
 		return selectedGpxFile.getGpxFile();
 	}
 
-	public void initStatBlocks(@Nullable SegmentActionsListener actionsListener, @ColorInt int activeColor, boolean nightMode) {
+	public void initStatBlocks(@Nullable SegmentActionsListener actionsListener, @ColorInt int activeColor) {
 		initItems();
-		adapter = new BlockStatisticsAdapter(getDisplayItem(getGPXFile()), actionsListener, activeColor, nightMode);
+		adapter = new BlockStatisticsAdapter(getDisplayItem(getGPXFile()), actionsListener, activeColor);
 		adapter.setItems(items);
 		blocksView.setLayoutManager(new LinearLayoutManager(app, LinearLayoutManager.HORIZONTAL, false));
 		blocksView.setAdapter(adapter);
@@ -107,11 +123,16 @@ public class GpxBlockStatisticsBuilder {
 					}
 					AndroidUiHelper.updateVisibility(blocksView, !Algorithms.isEmpty(items));
 					int interval = app.getSettings().SAVE_GLOBAL_TRACK_INTERVAL.get();
-					updateRunning = handler.postDelayed(this, Math.max(GENERAL_UPDATE_INTERVAL, interval));
+					updateRunning = handler.postDelayed(this, Math.max(BLOCKS_UPDATE_INTERVAL, interval));
 				}
 			};
 			updateRunning = handler.post(updatingItems);
 		}
+	}
+
+	public void restartUpdatingStatBlocks() {
+		stopUpdatingStatBlocks();
+		runUpdatingStatBlocksIfNeeded();
 	}
 
 	public void initItems() {
@@ -119,7 +140,7 @@ public class GpxBlockStatisticsBuilder {
 		if (app == null || gpxFile == null) {
 			return;
 		}
-		GPXTrackAnalysis analysis = null;
+		analysis = null;
 		boolean withoutGaps = true;
 		if (gpxFile.equals(app.getSavingTrackHelper().getCurrentGpx())) {
 			GPXFile currentGpx = app.getSavingTrackHelper().getCurrentTrack().getGpxFile();
@@ -133,38 +154,152 @@ public class GpxBlockStatisticsBuilder {
 				withoutGaps = !selectedGpxFile.isJoinSegments() && gpxDisplayItem.isGeneralTrack();
 			}
 		}
+		items.clear();
 		if (analysis != null) {
-			float totalDistance = withoutGaps ? analysis.totalDistanceWithoutGaps : analysis.totalDistance;
-			float timeSpan = withoutGaps ? analysis.timeSpanWithoutGaps : analysis.timeSpan;
-			String asc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app);
-			String desc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app);
-			String avg = OsmAndFormatter.getFormattedSpeed(analysis.avgSpeed, app);
-			String max = OsmAndFormatter.getFormattedSpeed(analysis.maxSpeed, app);
-
-			items.clear();
-			prepareData(analysis, app.getString(R.string.distance), OsmAndFormatter.getFormattedDistance(totalDistance, app),
-					R.drawable.ic_action_track_16, R.color.icon_color_default_light, GPXDataSetType.ALTITUDE, GPXDataSetType.SPEED, ItemType.ITEM_DISTANCE);
-			prepareData(analysis, app.getString(R.string.altitude_ascent), asc,
-					R.drawable.ic_action_arrow_up_16, R.color.gpx_chart_red, GPXDataSetType.SLOPE, null, ItemType.ITEM_ALTITUDE);
-			prepareData(analysis, app.getString(R.string.altitude_descent), desc,
-					R.drawable.ic_action_arrow_down_16, R.color.gpx_pale_green, GPXDataSetType.ALTITUDE, GPXDataSetType.SLOPE, ItemType.ITEM_ALTITUDE);
-			prepareData(analysis, app.getString(R.string.average_speed), avg,
-					R.drawable.ic_action_speed_16, R.color.icon_color_default_light, GPXDataSetType.SPEED, null, ItemType.ITEM_SPEED);
-			prepareData(analysis, app.getString(R.string.max_speed), max,
-					R.drawable.ic_action_max_speed_16, R.color.icon_color_default_light, GPXDataSetType.SPEED, null, ItemType.ITEM_SPEED);
-			prepareData(analysis, app.getString(R.string.shared_string_time_span),
-					Algorithms.formatDuration((int) (timeSpan / 1000), app.accessibilityEnabled()),
-					R.drawable.ic_action_time_span_16, R.color.icon_color_default_light, GPXDataSetType.SPEED, null, ItemType.ITEM_TIME);
+			if (tabItem == null) {
+				float totalDistance = withoutGaps ? analysis.totalDistanceWithoutGaps : analysis.totalDistance;
+				String asc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app);
+				String desc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app);
+				String minElevation = OsmAndFormatter.getFormattedAlt(analysis.minElevation, app);
+				String maxElevation = OsmAndFormatter.getFormattedAlt(analysis.maxElevation, app);
+				String avg = OsmAndFormatter.getFormattedSpeed(analysis.avgSpeed, app);
+				String maxSpeed = OsmAndFormatter.getFormattedSpeed(analysis.maxSpeed, app);
+				float timeSpan = withoutGaps ? analysis.timeSpanWithoutGaps : analysis.timeSpan;
+				long timeMoving = withoutGaps ? analysis.timeMovingWithoutGaps : analysis.timeMoving;
+				prepareDataDistance(totalDistance);
+				prepareDataAscent(asc);
+				prepareDataDescent(desc);
+				prepareDataAltitudeRange(minElevation, maxElevation);
+				prepareDataAverageSpeed(avg);
+				prepareDataMaximumSpeed(maxSpeed);
+				prepareDataTimeSpan(timeSpan);
+				prepareDataTimeMoving(timeMoving);
+			} else {
+				switch (tabItem) {
+					case GPX_TAB_ITEM_GENERAL: {
+						float totalDistance = withoutGaps ? analysis.totalDistanceWithoutGaps : analysis.totalDistance;
+						float timeSpan = withoutGaps ? analysis.timeSpanWithoutGaps : analysis.timeSpan;
+						Date start = new Date(analysis.startTime);
+						Date end = new Date(analysis.endTime);
+						prepareDataDistance(totalDistance);
+						prepareDataTimeSpan(timeSpan);
+						prepareDataStartTime(start);
+						prepareDataEndTime(end);
+						break;
+					}
+					case GPX_TAB_ITEM_ALTITUDE: {
+						String min = OsmAndFormatter.getFormattedAlt(analysis.minElevation, app);
+						String max = OsmAndFormatter.getFormattedAlt(analysis.maxElevation, app);
+						String asc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app);
+						String desc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app);
+						prepareDataAverageAltitude();
+						prepareDataAltitudeRange(min, max);
+						prepareDataAscent(asc);
+						prepareDataDescent(desc);
+						break;
+					}
+					case GPX_TAB_ITEM_SPEED: {
+						String avg = OsmAndFormatter.getFormattedSpeed(analysis.avgSpeed, app);
+						String max = OsmAndFormatter.getFormattedSpeed(analysis.maxSpeed, app);
+						long timeMoving = withoutGaps ? analysis.timeMovingWithoutGaps : analysis.timeMoving;
+						float totalDistanceMoving = withoutGaps ? analysis.totalDistanceMovingWithoutGaps : analysis.totalDistanceMoving;
+						prepareDataAverageSpeed(avg);
+						prepareDataMaximumSpeed(max);
+						prepareDataTimeMoving(timeMoving);
+						prepareDataDistanceCorrected(totalDistanceMoving);
+						break;
+					}
+				}
+			}
 		}
 	}
 
-	public void prepareData(GPXTrackAnalysis analysis, String title, String value,
-							@DrawableRes int imageResId, @ColorRes int imageColorId,
+	public void prepareDataDistance(float totalDistance) {
+		prepareData(app.getString(R.string.distance), OsmAndFormatter.getFormattedDistance(totalDistance, app),
+				R.drawable.ic_action_track_16, GPXDataSetType.ALTITUDE, GPXDataSetType.SPEED, ItemType.ITEM_DISTANCE);
+	}
+
+	public void prepareDataAverageAltitude() {
+		prepareData(app.getString(R.string.average_altitude), OsmAndFormatter.getFormattedAlt(analysis.avgElevation, app),
+				R.drawable.ic_action_altitude_average_16, GPXDataSetType.ALTITUDE, null, ItemType.ITEM_ALTITUDE);
+	}
+
+	public void prepareDataAltitudeRange(String min, String max) {
+		prepareData(app.getString(R.string.altitude_range), min + " - " + max,
+				R.drawable.ic_action_altitude_range_16, GPXDataSetType.ALTITUDE, null, ItemType.ITEM_ALTITUDE);
+	}
+
+	public void prepareDataAscent(String asc) {
+		prepareData(app.getString(R.string.altitude_ascent), asc,
+				R.drawable.ic_action_arrow_up_16, R.color.gpx_chart_red,
+				GPXDataSetType.SLOPE, null, ItemType.ITEM_ALTITUDE);
+	}
+
+	public void prepareDataDescent(String desc) {
+		prepareData(app.getString(R.string.altitude_descent), desc,
+				R.drawable.ic_action_arrow_down_16, R.color.gpx_pale_green,
+				GPXDataSetType.ALTITUDE, GPXDataSetType.SLOPE, ItemType.ITEM_ALTITUDE);
+	}
+
+	public void prepareDataAverageSpeed(String avg) {
+		prepareData(app.getString(R.string.average_speed), avg,
+				R.drawable.ic_action_speed_16, GPXDataSetType.SPEED, null, ItemType.ITEM_SPEED);
+	}
+
+	public void prepareDataMaximumSpeed(String max) {
+		prepareData(app.getString(R.string.max_speed), max,
+				R.drawable.ic_action_max_speed_16, GPXDataSetType.SPEED, null, ItemType.ITEM_SPEED);
+	}
+
+	public void prepareDataTimeMoving(long timeMoving) {
+		prepareData(app.getString(R.string.moving_time), Algorithms.formatDuration((int) (timeMoving / 1000), app.accessibilityEnabled()),
+				R.drawable.ic_action_time_moving_16, GPXDataSetType.SPEED, null, ItemType.ITEM_TIME_MOVING);
+	}
+
+	public void prepareDataDistanceCorrected(float totalDistanceMoving) {
+		prepareData(app.getString(R.string.distance_moving),
+				OsmAndFormatter.getFormattedDistance(totalDistanceMoving, app),
+				R.drawable.ic_action_polygom_dark, GPXDataSetType.SPEED, null, ItemType.ITEM_DISTANCE_MOVING);
+	}
+
+	public void prepareDataTimeSpan(float timeSpan) {
+		prepareData(app.getString(R.string.shared_string_time_span),
+				Algorithms.formatDuration((int) (timeSpan / 1000), app.accessibilityEnabled()),
+				R.drawable.ic_action_time_span_16, GPXDataSetType.SPEED, null, ItemType.ITEM_TIME_SPAN);
+	}
+
+	public void prepareDataStartTime(Date start) {
+		DateFormat dtf = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
+		prepareData(app.getString(R.string.shared_string_start_time), dtf.format(start),
+				R.drawable.ic_action_time_start_16, GPXDataSetType.SPEED, null, ItemType.ITEM_TIME);
+	}
+
+	public void prepareDataEndTime(Date end) {
+		DateFormat dtf = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
+		prepareData(app.getString(R.string.shared_string_end_time), dtf.format(end),
+				R.drawable.ic_action_time_end_16, GPXDataSetType.SPEED, null, ItemType.ITEM_TIME);
+	}
+
+	public void prepareData(String title, String value, @DrawableRes int imageResId,
 							GPXDataSetType firstType, GPXDataSetType secondType, ItemType itemType) {
+		prepareData(title, value, imageResId, getDefaultIconColorId(nightMode), firstType, secondType, itemType);
+	}
+
+	public void prepareData(String title, String value, @DrawableRes int imageResId, @ColorRes int imageColorId,
+							GPXDataSetType firstType, GPXDataSetType secondType, ItemType itemType) {
+		if (analysis == null) {
+			return;
+		}
 		StatBlock statBlock = new StatBlock(title, value, imageResId, imageColorId, firstType, secondType, itemType);
 		switch (statBlock.itemType) {
 			case ITEM_DISTANCE: {
 				if (analysis.totalDistance != 0f) {
+					items.add(statBlock);
+				}
+				break;
+			}
+			case ITEM_DISTANCE_MOVING: {
+				if (analysis.totalDistanceMoving != 0f) {
 					items.add(statBlock);
 				}
 				break;
@@ -182,7 +317,19 @@ public class GpxBlockStatisticsBuilder {
 				break;
 			}
 			case ITEM_TIME: {
+				if (analysis.timeSpan > 0) {
+					items.add(statBlock);
+				}
+				break;
+			}
+			case ITEM_TIME_SPAN: {
 				if (analysis.hasSpeedData) {
+					items.add(statBlock);
+				}
+				break;
+			}
+			case ITEM_TIME_MOVING: {
+				if (analysis.isTimeMoving()) {
 					items.add(statBlock);
 				}
 				break;
@@ -213,9 +360,12 @@ public class GpxBlockStatisticsBuilder {
 
 	public enum ItemType {
 		ITEM_DISTANCE,
+		ITEM_DISTANCE_MOVING,
 		ITEM_ALTITUDE,
 		ITEM_SPEED,
-		ITEM_TIME;
+		ITEM_TIME,
+		ITEM_TIME_SPAN,
+		ITEM_TIME_MOVING;
 	}
 
 	private class BlockStatisticsAdapter extends RecyclerView.Adapter<BlockStatisticsViewHolder> {
@@ -225,17 +375,15 @@ public class GpxBlockStatisticsBuilder {
 		private final SegmentActionsListener actionsListener;
 		@ColorInt
 		private final int activeColor;
-		private final boolean nightMode;
 		private final int minWidthPx;
 		private final int maxWidthPx;
 		private final int textSize;
 
 		public BlockStatisticsAdapter(GpxDisplayItem displayItem, SegmentActionsListener actionsListener,
-									  @ColorInt int activeColor, boolean nightMode) {
+									  @ColorInt int activeColor) {
 			this.displayItem = displayItem;
 			this.actionsListener = actionsListener;
 			this.activeColor = activeColor;
-			this.nightMode = nightMode;
 			minWidthPx = AndroidUtils.dpToPx(app, 60f);
 			maxWidthPx = AndroidUtils.dpToPx(app, 120f);
 			textSize = app.getResources().getDimensionPixelSize(R.dimen.default_desc_text_size);
@@ -260,7 +408,7 @@ public class GpxBlockStatisticsBuilder {
 			holder.valueText.setText(item.value);
 			holder.valueText.setTextColor(activeColor);
 			holder.titleText.setText(item.title);
-			holder.titleText.setTextColor(app.getResources().getColor(R.color.text_color_secondary_light));
+			holder.titleText.setTextColor(ContextCompat.getColor(app, R.color.text_color_secondary_light));
 			float letterSpacing = 0.00f;
 			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 				letterSpacing = Math.max(holder.valueText.getLetterSpacing(), holder.titleText.getLetterSpacing());

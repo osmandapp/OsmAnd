@@ -158,7 +158,9 @@
 						android:paddingBottom="@dimen/dialog_content_margin"
 						android:layout_marginLeft="@dimen/content_padding"
 						android:layout_marginRight="@dimen/content_padding"
-						android:stepSize="1" />
+						android:stepSize="1"
+						android:layout_marginStart="@dimen/content_padding"
+						android:layout_marginEnd="@dimen/content_padding" />
 
 					<View
 						android:layout_width="match_parent"
@@ -236,7 +238,9 @@
 							android:layout_weight="1"
 							android:layout_marginLeft="@dimen/content_padding"
 							android:layout_marginRight="@dimen/content_padding"
-							android:stepSize="1" />
+							android:stepSize="1"
+							android:layout_marginStart="@dimen/content_padding"
+							android:layout_marginEnd="@dimen/content_padding" />
 
 						<net.osmand.plus.widgets.TextViewEx
 							android:id="@+id/zoom_value_max"

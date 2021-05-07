@@ -46,20 +46,18 @@ public class PerformLiveUpdateAsyncTask
 	@NonNull
 	private final String localIndexFileName;
 	private final boolean userRequested;
-	private final LiveUpdateListener listener;
-
-	public interface LiveUpdateListener {
-		void processFinish();
-	}
+	private Runnable runOnSuccess;
 
 	public PerformLiveUpdateAsyncTask(@NonNull Context context,
 									  @NonNull String localIndexFileName,
-									  boolean userRequested,
-									  @Nullable LiveUpdateListener listener) {
+									  boolean userRequested) {
 		this.context = context;
 		this.localIndexFileName = localIndexFileName;
 		this.userRequested = userRequested;
-		this.listener = listener;
+	}
+
+	public void setRunOnSuccess(Runnable runOnSuccess) {
+		this.runOnSuccess = runOnSuccess;
 	}
 
 	@Override
@@ -149,9 +147,6 @@ public class PerformLiveUpdateAsyncTask
 								((DownloadIndexesThread.DownloadEvents) context).downloadInProgress();
 							}
 							updateLatestAvailability(application, localIndexFileName);
-							if (listener != null) {
-								listener.processFinish();
-							}
 						} else {
 							LOG.debug("onPostExecute: Not enough space for updates");
 						}
@@ -163,9 +158,6 @@ public class PerformLiveUpdateAsyncTask
 					((DownloadIndexesThread.DownloadEvents) context).downloadInProgress();
 					if (userRequested && context instanceof DownloadActivity) {
 						updateLatestAvailability(application, localIndexFileName);
-						if (listener != null) {
-							listener.processFinish();
-						}
 						application.showShortToastMessage(R.string.no_updates_available);
 					}
 				}
@@ -201,9 +193,9 @@ public class PerformLiveUpdateAsyncTask
 	private void updateLatestAvailability(OsmandApplication app, @NonNull final String localIndexFileName) {
 		final OsmandSettings settings = app.getSettings();
 		AndroidNetworkUtils.sendRequestAsync(
-				app, LiveUpdatesFragmentNew.URL, null, "Requesting map updates info...", false, false, new OnRequestResultListener() {
+				app, LiveUpdatesFragment.URL, null, "Requesting map updates info...", false, false, new OnRequestResultListener() {
 					@Override
-					public void onResult(String result) {
+					public void onResult(@Nullable String result, @Nullable String error) {
 						if (!Algorithms.isEmpty(result)) {
 							SimpleDateFormat source = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.US);
 							source.setTimeZone(TimeZone.getTimeZone("UTC"));
@@ -213,6 +205,9 @@ public class PerformLiveUpdateAsyncTask
 									long dateTime = parsed.getTime();
 									preferenceLatestUpdateAvailable(settings).set(dateTime);
 									preferenceLatestUpdateAvailable(localIndexFileName, settings).set(dateTime);
+									if (runOnSuccess != null) {
+										runOnSuccess.run();
+									}
 								}
 							} catch (ParseException e) {
 								long dateTime = preferenceLatestUpdateAvailable(settings).get();

@@ -13,7 +13,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.AndroidNetworkUtils.OnRequestResultListener;
-import net.osmand.AndroidNetworkUtils.OnRequestsResultListener;
+import net.osmand.AndroidNetworkUtils.OnSendRequestsListener;
 import net.osmand.AndroidNetworkUtils.RequestResponse;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -24,6 +24,7 @@ import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseState;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscriptionList;
+import net.osmand.plus.inapp.InAppPurchases.PurchaseInfo;
 import net.osmand.plus.liveupdates.CountrySelectionFragment;
 import net.osmand.plus.liveupdates.CountrySelectionFragment.CountryItem;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -52,7 +53,7 @@ public abstract class InAppPurchaseHelper {
 	protected InAppPurchases purchases;
 	protected long lastValidationCheckTime;
 	protected boolean inventoryRequested;
-	protected Map<String, SubscriptionState> subscriptionStateMap = new HashMap<>();
+	protected Map<String, SubscriptionStateHolder> subscriptionStateMap = new HashMap<>();
 
 	private static final long PURCHASE_VALIDATION_PERIOD_MSEC = 1000 * 60 * 60 * 24; // daily
 
@@ -85,6 +86,11 @@ public abstract class InAppPurchaseHelper {
 		void onFail();
 	}
 
+	static class SubscriptionStateHolder {
+		SubscriptionState state = SubscriptionState.UNDEFINED;
+		long expireTime = 0;
+	}
+
 	public enum InAppPurchaseTaskType {
 		REQUEST_INVENTORY,
 		PURCHASE_FULL_VERSION,
@@ -110,30 +116,6 @@ public abstract class InAppPurchaseHelper {
 
 	public interface InAppCommandResultHandler {
 		void onCommandDone(@NonNull InAppCommand command);
-	}
-
-	public static class PurchaseInfo {
-		private String sku;
-		private String orderId;
-		private String purchaseToken;
-
-		public PurchaseInfo(String sku, String orderId, String purchaseToken) {
-			this.sku = sku;
-			this.orderId = orderId;
-			this.purchaseToken = purchaseToken;
-		}
-
-		public String getSku() {
-			return sku;
-		}
-
-		public String getOrderId() {
-			return orderId;
-		}
-
-		public String getPurchaseToken() {
-			return purchaseToken;
-		}
 	}
 
 	public String getToken() {
@@ -193,9 +175,25 @@ public abstract class InAppPurchaseHelper {
 		return purchases.getPurchasedMonthlyLiveUpdates();
 	}
 
+	@Nullable
+	public InAppSubscription getAnyPurchasedSubscription() {
+		return purchases.getAnyPurchasedSubscription();
+	}
+
 	public InAppPurchaseHelper(OsmandApplication ctx) {
 		this.ctx = ctx;
 		isDeveloperVersion = Version.isDeveloperVersion(ctx);
+	}
+
+	@NonNull
+	public List<InAppSubscription> getEverMadeSubscriptions() {
+		List<InAppSubscription> subscriptions = new ArrayList<>();
+		for (InAppSubscription subscription : getLiveUpdates().getVisibleSubscriptions()) {
+			if (subscription.isPurchased() ||  subscription.getState() != SubscriptionState.UNDEFINED) {
+				subscriptions.add(subscription);
+			}
+		}
+		return subscriptions;
 	}
 
 	public abstract void isInAppPurchaseSupported(@NonNull final Activity activity, @Nullable final InAppPurchaseInitCallback callback);
@@ -436,15 +434,22 @@ public abstract class InAppPurchaseHelper {
 			}
 			if (subscriptionsStateJson != null) {
 				inventoryRequested = true;
-				Map<String, SubscriptionState> subscriptionStateMap = new HashMap<>();
+				Map<String, SubscriptionStateHolder> subscriptionStateMap = new HashMap<>();
 				try {
 					JSONArray subArrJson = new JSONArray(subscriptionsStateJson);
 					for (int i = 0; i < subArrJson.length(); i++) {
 						JSONObject subObj = subArrJson.getJSONObject(i);
 						String sku = subObj.getString("sku");
 						String state = subObj.getString("state");
+						long expireTime = 0;
+						if (subObj.has("expire_time")) {
+							expireTime = subObj.getLong("expire_time");
+						}
 						if (!Algorithms.isEmpty(sku) && !Algorithms.isEmpty(state)) {
-							subscriptionStateMap.put(sku, SubscriptionState.getByStateStr(state));
+							SubscriptionStateHolder stateHolder = new SubscriptionStateHolder();
+							stateHolder.state = SubscriptionState.getByStateStr(state);
+							stateHolder.expireTime = expireTime;
+							subscriptionStateMap.put(sku, stateHolder);
 						}
 					}
 				} catch (JSONException e) {
@@ -461,7 +466,7 @@ public abstract class InAppPurchaseHelper {
 	protected void onSkuDetailsResponseDone(List<PurchaseInfo> purchaseInfoList) {
 		final AndroidNetworkUtils.OnRequestResultListener listener = new AndroidNetworkUtils.OnRequestResultListener() {
 			@Override
-			public void onResult(String result) {
+			public void onResult(@Nullable String result, @Nullable String error) {
 				notifyDismissProgress(InAppPurchaseTaskType.REQUEST_INVENTORY);
 				notifyGetItems();
 				stop(true);
@@ -472,7 +477,7 @@ public abstract class InAppPurchaseHelper {
 		if (purchaseInfoList.size() > 0) {
 			sendTokens(purchaseInfoList, listener);
 		} else {
-			listener.onResult("OK");
+			listener.onResult("OK", null);
 		}
 	}
 
@@ -488,15 +493,17 @@ public abstract class InAppPurchaseHelper {
 	protected void onPurchaseDone(PurchaseInfo info) {
 		logDebug("Purchase successful.");
 
-		InAppPurchase liveUpdatesPurchase = getLiveUpdates().getSubscriptionBySku(info.getSku());
+		InAppSubscription liveUpdatesPurchase = getLiveUpdates().getSubscriptionBySku(info.getSku());
 		if (liveUpdatesPurchase != null) {
 			// bought live updates
 			logDebug("Live updates subscription purchased.");
 			final String sku = liveUpdatesPurchase.getSku();
 			liveUpdatesPurchase.setPurchaseState(PurchaseState.PURCHASED);
+			liveUpdatesPurchase.setPurchaseInfo(ctx, info);
+			liveUpdatesPurchase.setState(ctx, SubscriptionState.UNDEFINED);
 			sendTokens(Collections.singletonList(info), new OnRequestResultListener() {
 				@Override
-				public void onResult(String result) {
+				public void onResult(@Nullable String result, @Nullable String error) {
 					boolean active = ctx.getSettings().LIVE_UPDATES_PURCHASED.get();
 					ctx.getSettings().LIVE_UPDATES_PURCHASED.set(true);
 					ctx.getSettings().getCustomRenderBooleanProperty("depthContours").set(true);
@@ -513,6 +520,7 @@ public abstract class InAppPurchaseHelper {
 		} else if (info.getSku().equals(getFullVersion().getSku())) {
 			// bought full version
 			getFullVersion().setPurchaseState(PurchaseState.PURCHASED);
+			getFullVersion().setPurchaseInfo(ctx, info);
 			logDebug("Full version purchased.");
 			showToast(ctx.getString(R.string.full_version_thanks));
 			ctx.getSettings().FULL_VERSION_PURCHASED.set(true);
@@ -524,6 +532,7 @@ public abstract class InAppPurchaseHelper {
 		} else if (info.getSku().equals(getDepthContours().getSku())) {
 			// bought sea depth contours
 			getDepthContours().setPurchaseState(PurchaseState.PURCHASED);
+			getDepthContours().setPurchaseInfo(ctx, info);
 			logDebug("Sea depth contours purchased.");
 			showToast(ctx.getString(R.string.sea_depth_thanks));
 			ctx.getSettings().DEPTH_CONTOURS_PURCHASED.set(true);
@@ -536,6 +545,7 @@ public abstract class InAppPurchaseHelper {
 		} else if (info.getSku().equals(getContourLines().getSku())) {
 			// bought contour lines
 			getContourLines().setPurchaseState(PurchaseState.PURCHASED);
+			getContourLines().setPurchaseInfo(ctx, info);
 			logDebug("Contours lines purchased.");
 			showToast(ctx.getString(R.string.contour_lines_thanks));
 			ctx.getSettings().CONTOUR_LINES_PURCHASED.set(true);
@@ -598,9 +608,14 @@ public abstract class InAppPurchaseHelper {
 				addUserInfo(parameters);
 				requests.add(new AndroidNetworkUtils.Request(url, parameters, userOperation, true, true));
 			}
-			AndroidNetworkUtils.sendRequestsAsync(ctx, requests, new OnRequestsResultListener() {
+			AndroidNetworkUtils.sendRequestsAsync(ctx, requests, new OnSendRequestsListener() {
+
 				@Override
-				public void onResult(@NonNull List<RequestResponse> results) {
+				public void onRequestSent(@NonNull RequestResponse response) {
+				}
+
+				@Override
+				public void onRequestsSent(@NonNull List<RequestResponse> results) {
 					for (RequestResponse rr : results) {
 						String sku = rr.getRequest().getParameters().get("sku");
 						PurchaseInfo info = getPurchaseInfo(sku);
@@ -627,7 +642,7 @@ public abstract class InAppPurchaseHelper {
 						}
 					}
 					if (listener != null) {
-						listener.onResult("OK");
+						listener.onResult("OK", null);
 					}
 				}
 
@@ -680,7 +695,7 @@ public abstract class InAppPurchaseHelper {
 		} catch (Exception e) {
 			logError("SendToken Error", e);
 			if (listener != null) {
-				listener.onResult("Error");
+				listener.onResult("Error", null);
 			}
 		}
 	}
