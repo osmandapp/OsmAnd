@@ -34,6 +34,7 @@ import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.mapmarkers.MapMarker;
+import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.osmedit.OpenstreetmapPoint;
 import net.osmand.plus.osmedit.OsmNotesPoint;
@@ -207,6 +208,7 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment {
 		List<MapMarker> mapMarkersGroups = new ArrayList<>();
 		List<HistoryEntry> historyEntries = new ArrayList<>();
 		List<OnlineRoutingEngine> onlineRoutingEngines = new ArrayList<>();
+		List<MapMarkersGroup> itineraryGroups = new ArrayList<>();
 
 		for (Object object : duplicatesList) {
 			if (object instanceof ApplicationMode.ApplicationModeBean) {
@@ -254,6 +256,8 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment {
 				historyEntries.add((HistoryEntry) object);
 			} else if (object instanceof OnlineRoutingEngine) {
 				onlineRoutingEngines.add((OnlineRoutingEngine) object);
+			} else if (object instanceof MapMarkersGroup) {
+				itineraryGroups.add((MapMarkersGroup) object);
 			}
 		}
 		if (!profiles.isEmpty()) {
@@ -327,6 +331,14 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment {
 		if (!onlineRoutingEngines.isEmpty()) {
 			duplicates.add(getString(R.string.online_routing_engines));
 			duplicates.addAll(onlineRoutingEngines);
+		}
+		if (!historyEntries.isEmpty()) {
+			duplicates.add(getString(R.string.shared_string_search_history));
+			duplicates.addAll(historyEntries);
+		}
+		if (!itineraryGroups.isEmpty()) {
+			duplicates.add(getString(R.string.shared_string_itinerary));
+			duplicates.addAll(itineraryGroups);
 		}
 		return duplicates;
 	}

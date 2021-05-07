@@ -433,6 +433,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				boolean openGlSetup = false;
 
 				@Override
+				public void onStart(AppInitializer init) {
+
+				}
+
+				@Override
 				public void onProgress(AppInitializer init, InitEvents event) {
 					String tn = init.getCurrentInitTaskName();
 					if (tn != null) {

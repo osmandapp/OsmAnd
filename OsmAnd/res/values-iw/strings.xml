@@ -3966,7 +3966,7 @@
     <string name="routing_engine_vehicle_type_cycling_regular">רכיבה רגילה</string>
     <string name="routing_engine_vehicle_type_hiking">טיול שטח</string>
     <string name="routing_engine_vehicle_type_hgv">משאית כבדה</string>
-    <string name="delete_online_routing_engine">למחוק את מנוע הניווט המקוון הזה\?</string>
+    <string name="delete_online_routing_engine">להסיר את מנוע הניווט המקוון הזה\?</string>
     <string name="context_menu_read_full">להציג במלואו</string>
     <string name="context_menu_edit_descr">עריכת תיאור</string>
     <string name="delete_waypoints">מחיקת נקודות דרך</string>
@@ -4032,12 +4032,12 @@
     <string name="track_recording_description">לעצור את ההקלטה\?
 \nכל הנתונים שלא יישמרו יאבדו.</string>
     <string name="select_segments">נא לבחור מקטעים</string>
-    <string name="select_segments_description">%1$s מכיל יותר ממקטע אחד, עליך לבחור את החלקים הנחוצים לניווט.</string>
+    <string name="select_segments_description">%1$s מכיל יותר ממקטע אחד, עליך לציין את החלקים הנחוצים לניווט.</string>
     <string name="segments_count">מקטע %1$d</string>
     <string name="temporary_conditional_routing_descr">להשתמש במגבלות הגביש שפעילות כעת על המפה</string>
     <string name="routing_attr_short_way_description">מסלול מקוצר מרחק (לחסכון באנרגיה)</string>
     <string name="routing_attr_driving_style_description">נא לבחור מטרת נסיעה כדי לקבל מסלול מהיר או בטוח יותר</string>
-    <string name="snap_to_road_descr">סמל המיקום הנוכחי יוצמד למסלול הניווט הנוכחי</string>
+    <string name="snap_to_road_descr">סמל המקום הנוכחי יוצמד למסלול הניווט הנוכחי</string>
     <string name="map_orientation_threshold_descr">לא לסובב את המפה אם המהירות קטנה מסף מסוים</string>
     <string name="on_pause">בהשהיה</string>
     <string name="app_restart_required">צריך להפעיל את היישומון מחדש כדי שכמה מהשינויים יחולו.</string>
@@ -4045,26 +4045,26 @@
     <string name="quick_action_coordinates_widget_descr">מפסק להצגה או הסתרה של וידג׳ט נקודות הציון במפה.</string>
     <string name="map_widget_distance_by_tap">מרחק בנגיעה</string>
     <string name="latest_openstreetmap_update">קיים עדכון ל־OpenStreetMap:</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">להסתיר גבולות של שמורות טבע, אזורים מוגנים ופארקים ציבוריים</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">להסתיר גבולות של שמורות טבע, אזורים מוגנים ופארקים ציבוריים.</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">גבולות טבעיים</string>
     <string name="live_update_delete_updates_msg">למחוק את כל העדכונים החיים של %s\?</string>
-    <string name="trip_recording_logging_interval_info">הגדרת הפרש קבוע בין הבקשות של OsmAnd לקבלת נתוני המיקום הנוכחיים.</string>
+    <string name="trip_recording_logging_interval_info">ההפרשים בין רשומות התיעוד מגדירים את משך הזמן בו OsmAnd יבקש את נתוני המקום הנוכחי.</string>
     <string name="trip_recording_save_and_continue">לשמור ולהמשיך</string>
     <string name="lost_data_warning">כל הנתונים שלא נשמרו יאבדו.</string>
     <string name="show_start_dialog">להציג חלונית פתיחה</string>
     <string name="trip_recording_show_start_dialog_setting">אם האפשרות מושבתת, ההקלטה תתחיל מיד לאחר הנגיעה בווידג׳ט או בפריט שבתפריט תוך דילוג על חלונית האישור.</string>
     <string name="customize_route_line">להתאים קו מסלול אישית</string>
     <string name="shared_string_route_line">קו מסלול</string>
-    <string name="specify_color_for_map_mode">לציין צבע למצב מפה: %1$s.</string>
+    <string name="specify_color_for_map_mode">לציין צבע למצב מפה %1$s.</string>
     <string name="release_4_0_beta">• נוספה אפשרות להוריד קווי מתאר ברגל
 \n
 \n• תכנון מסלול אופקית: נוספו לשוניות למעבר בין נקודות לתרשימים
 \n
 \n• העדכונים החיים של OsmAnd הועברו אל „הורדות &gt; עדכונים”
 \n
-\n• אפשר לצבוע מסלולים לפי גובה, מהירות או שיפוע.
+\n• ניתן מעתה לצבוע מסלולים לפי גובה, מהירות או שיפוע.
 \n
-\n• נוספה אפשרות לשנות את מראה קו מסלול הניווט
+\n• נוספה אפשרות לשנות את מראה קו המסלול.
 \n
 \n• החלונית „הקלטת מסלול” עודכנה
 \n
@@ -4092,9 +4092,18 @@
     <string name="user_points">נקודות משתמש</string>
     <string name="output">פלט</string>
     <string name="shared_string_feet">רגל</string>
-    <string name="srtm_unit_format">תצורת יחידת קווי מתאר</string>
+    <string name="srtm_unit_format">הגוון יחידת קווי מתאר</string>
     <string name="srtm_download_list_help_message">OsmAnd מספק נתוני קווי מתאר במטרים וברגל. יהיה עליך להוריד את הקובץ מחדש כדי לשנות את התצורה.</string>
-    <string name="srtm_download_single_help_message">נא לבחור את התצורה הרצויה. יהיה עליך להוריד את הקובץ מחדש כדי לשנות את התצורה.</string>
+    <string name="srtm_download_single_help_message">נא לבחור את ההגוון. יהיה עליך להוריד את הקובץ מחדש כדי לשנות את התצורה.</string>
     <string name="shared_string_min_height">גובה מזערי</string>
     <string name="shared_string_max_height">גובה מרבי</string>
+    <string name="tts_title">טקסט לדיבור</string>
+    <string name="recorded_description">קולות מוקלטים נשמעים טוב יותר אך יכולים לבטא רק משפטים שהוקלטו מראש: הנחיות נסיעה. אין אפשרות להכריז על שמות רחובות או נקודות עניין.</string>
+    <string name="use_system_language">להשתמש בשפת המערכת</string>
+    <string name="shared_string_itinerary">תכנית מסלול</string>
+    <string name="route_line_use_gradient_coloring">קו המסלול ייצבע לפי תלילות המדרון.</string>
+    <string name="language_description">נא לבחור את השפה והסוג של ההנחיה הקולית.</string>
+    <string name="tts_description">טקסט לדיבור (TTS) יכול לבטא את כל סוגי ההנחיות: שמות רחובות, הוראות סיבוב, שמות נקודות עניין וכו׳.</string>
+    <string name="app_mode_gap">רווח</string>
+    <string name="route_line_use_map_style_appearance">להשתמש בבררת המחדל %1$s של המפה (%2$s).</string>
 </resources>

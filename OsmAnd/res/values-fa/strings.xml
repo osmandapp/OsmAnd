@@ -3924,7 +3924,7 @@
     <string name="routing_engine_vehicle_type_bike">دوچرخه</string>
     <string name="routing_engine_vehicle_type_car">خودرو</string>
     <string name="app_restart_required">برای به کار بستن برخی تنظیمات، لازم است برنامه باز و بسته شود.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">پنهان‌کردن مرز ذخیره‌گاه‌های طبیعی، مناطق حفاظت‌شده و پارک‌های ملی</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">پنهان‌کردن مرز ذخیره‌گاه‌های طبیعی، مناطق حفاظت‌شده و پارک‌های ملی.</string>
     <string name="last_time_checked">آخرین زمان بررسی: %s</string>
     <string name="latest_openstreetmap_update">آخرین روزآمدسازهٔ اوپن‌استریت‌مپ:</string>
     <string name="updated">روزآمدشده: %s</string>
@@ -4027,7 +4027,7 @@
     <string name="shared_string_sec">sec</string>
     <string name="routing_engine_vehicle_type_scooter">اسکوتر</string>
     <string name="context_menu_read_full">تمام‌صفحه</string>
-    <string name="select_another_colorization">لطفاً رنگ‌بندی دیگری انتخاب کنید.</string>
+    <string name="select_another_colorization">لطفاً گونهٔ رنگ‌بندی دیگری انتخاب کنید.</string>
     <string name="lang_de_casual">آلمانی (خودمانی)</string>
     <string name="snowmobile_render_descr">مناسب برای اسنوموبیل‌سواری (برف‌روسواری) است. دارای مسیرها و جاده‌های ویژه.</string>
     <string name="osm_live_payment_desc_hw">هزینهٔ اشتراک با رسیدن موعد دورهٔ انتخابی از حسابتان پرداخت می‌شود. هر زمان که خواستید در AppGallery آن را لغو کنید.</string>
@@ -4062,7 +4062,7 @@
     <string name="announcement_time_off_route">خروج از مسیر</string>
     <string name="announcement_time_arrive">رسیدن به مقصد</string>
     <string name="announcement_time_intervals">تناوب زمانی و مسافتی</string>
-    <string name="announcement_time_descr">زمان اعلام پیام‌های گفتاری به نوع پیام، سرعت ناوبری جاری و سرعت ناوبری پیش‌فرض بستگی دارد.</string>
+    <string name="announcement_time_descr">زمان‌بندی اعلام پیام‌های گفتاری به نوع پیام، سرعت ناوبری جاری و سرعت ناوبری پیش‌فرض بستگی دارد.</string>
     <string name="announcement_time_title">زمان اعلام پیام</string>
     <string name="restart">شروع دوباره</string>
     <string name="on_pause">مکث کرده</string>
@@ -4074,7 +4074,7 @@
     <string name="trip_recording_show_start_dialog_setting">اگر غیرفعال باشد، بلافاصله پس از لمس ابزارک یا آیتم منو، ضبط آغاز می‌شود و کادر تأیید ظاهر نمی‌شود.</string>
     <string name="lost_data_warning">تمام دادهٔ ذخیره‌نشده از دست خواهد رفت.</string>
     <string name="route_line_use_map_style_appearance">برای خط مسیر از %1$s استفاده می‌شود که در سبک انتخاب‌شده برای نقشه (%2$s) مشخص شده است.</string>
-    <string name="specify_color_for_map_mode">رنگ حالت نقشهٔ %1$s را مشخص کنید.</string>
+    <string name="specify_color_for_map_mode">برای حالت نقشهٔ %1$s رنگ مشخص کنید.</string>
     <string name="trip_recording_logging_interval_info">تناوب ردنگاری مشخص می‌کند OsmAnd هر چند وقت یک بار دادهٔ مربوط به موقعیت جاری را درخواست کند.</string>
     <string name="customize_route_line">سفارشی‌سازی خط مسیر</string>
     <string name="shared_string_route_line">خط مسیر</string>
@@ -4084,7 +4084,7 @@
 \n
 \n• روزآمدسازه‌های OsmAnd Live منتقل شد به Downloads ‏&gt; Updates
 \n
-\n• اکنون می‌توانید رنگ‌بندی ردها را بر اساس ارتفاع، سرعت یا شیب انجام دهید.
+\n• اکنون می‌توان ردها را بر اساس ارتفاع، سرعت یا شیب رنگ کرد.
 \n
 \n• گزینه‌ای برای تغییر ظاهر خط مسیر هنگام ناوبری اضافه شد.
 \n
@@ -4114,12 +4114,18 @@
     <string name="app_mode_gap">فاصله</string>
     <string name="icon_group_amenity">تسهیلات</string>
     <string name="shared_string_feet">پا</string>
-    <string name="srtm_unit_format">قالب یکای منحنی‌های میزان</string>
+    <string name="srtm_unit_format">گونهٔ یکای منحنی‌های میزان</string>
     <string name="srtm_download_list_help_message">‏OsmAnd دادهٔ خطوط میزان را به متر و پا ارائه می‌دهد. برای تغییر قالب بایستی پرونده را دوباره دانلود کنید.</string>
     <string name="announce_when_exceeded">زمانی که بیش از حد شد اعلام کن</string>
-    <string name="srtm_download_single_help_message">لطفاً قالب مورد نیازتان را انتخاب کنید. برای تغییر قالب باید پرونده را دوباره دانلود کنید.</string>
+    <string name="srtm_download_single_help_message">لطفاً گونه را انتخاب کنید. برای تغییر قالب باید پرونده را دوباره دانلود کنید.</string>
     <string name="user_points">امتیازات کاربر</string>
-    <string name="route_line_use_gradient_coloring">خط مسیر بر اساس مشخصات ارتفاعی مسیر رنگ‌آمیزی خواهد شد.</string>
+    <string name="route_line_use_gradient_coloring">خط مسیر بر اساس ارتفاع رنگ‌آمیزی می‌شود.</string>
     <string name="shared_string_min_height">حداقل ارتفاع</string>
     <string name="shared_string_max_height">حداکثر ارتفاع</string>
+    <string name="shared_string_itinerary">برنامهٔ سفر</string>
+    <string name="language_description">زبان موردنظر و نوع راهنمایی گفتاری را انتخاب کنید.</string>
+    <string name="tts_description">با روش موتور متن به گفتار (TTS) بیان‌کردن همه‌نوع دستورالعملی امکان‌پذیر خواهد بود: نام خیابان، فرمان گردش، نام نقاط توجه و... .</string>
+    <string name="tts_title">TTS</string>
+    <string name="recorded_description">گفتار ضبط‌شده کیفیت بهتری دارد، اما فقط عبارت‌های ازپیش‌آماده برای دستورالعمل‌های گردش را خواهید شنید. بیان‌کردن نام خیابان یا نام نقاط توجه ممکن نخواهد بود.</string>
+    <string name="use_system_language">استفاده از زبان سیستم</string>
 </resources>

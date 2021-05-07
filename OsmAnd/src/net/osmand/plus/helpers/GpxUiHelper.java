@@ -2309,6 +2309,10 @@ public class GpxUiHelper {
 		}
 	}
 
+	public static void saveGpx(GPXFile gpxFile, SaveGpxListener listener) {
+		new SaveGpxAsyncTask(new File(gpxFile.path), gpxFile, listener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+
 	private static GpxDataItem getDataItem(@NonNull final OsmandApplication app, @NonNull final GPXFile gpxFile) {
 		GpxDataItemCallback itemCallback = new GpxDataItemCallback() {
 			@Override

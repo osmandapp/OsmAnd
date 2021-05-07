@@ -3929,4 +3929,11 @@
     <string name="poi_plateau">Platå</string>
     <string name="poi_club_social">Social klubb</string>
     <string name="poi_health_post">Hälsopost</string>
+    <string name="poi_pillory">Skampåle</string>
+    <string name="poi_shop_water">Dricksvattenaffär</string>
+    <string name="poi_pest_control">Affär för skadedjursbekämpning</string>
+    <string name="poi_telecom_medium_coaxial">Medium: koaxial</string>
+    <string name="poi_telecom_medium_fibre">Medium: fiber</string>
+    <string name="poi_telecom_medium_copper">Medium: koppar</string>
+    <string name="poi_telecom_exchange">Telefonväxel</string>
 </resources>

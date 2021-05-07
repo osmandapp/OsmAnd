@@ -4092,10 +4092,15 @@
     <string name="map_quick_action_pattern">%1$s → …</string>
     <string name="exit_number">Номер съезда</string>
     <string name="srtm_unit_format">Формат единиц на контурных линиях</string>
-    <string name="srtm_download_single_help_message">Выберите необходимый формат. Для изменения формата потребуется повторно загрузить файл.</string>
+    <string name="srtm_download_single_help_message">Выберите необходимый вариант. Для изменения формата потребуется повторно загрузить файл.</string>
     <string name="shared_string_feet">футы</string>
     <string name="srtm_download_list_help_message">OsmAnd предоставляет данные изолиний в метрах и футах. Для изменения формата потребуется повторно загрузить файл.</string>
     <string name="route_line_use_gradient_coloring">Линия маршрута будет окрашена в зависимости от профиля высоты маршрута.</string>
     <string name="shared_string_min_height">Мин. высота</string>
     <string name="shared_string_max_height">Макс. высота</string>
+    <string name="language_description">Выберите предпочтительный язык и тип голосовых подсказок.</string>
+    <string name="tts_description">Синтезатор речи (TTS) умеет произносить все типы инструкций: названия улиц, инструкции для поворотов, названия точек интереса (POI) и т. д.</string>
+    <string name="tts_title">TTS</string>
+    <string name="recorded_description">Записанный голос звучит лучше, но умеет произносить только заранее записанные фразы: инструкции для поворотов. Не умеет объявлять названия улиц или POI.</string>
+    <string name="use_system_language">Использовать системный язык</string>
 </resources>

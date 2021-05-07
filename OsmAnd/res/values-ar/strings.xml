@@ -4021,7 +4021,7 @@
     <string name="announcement_time_arrive">الوصول إلى الوجهة</string>
     <string name="shared_string_turn">منعطف</string>
     <string name="announcement_time_intervals">الوقت والمسافة</string>
-    <string name="announcement_time_descr">وقت الإعلان عن مختلف المطالبات الصوتية يعتمد على نوع موجه، وسرعة التنقل الحالية وسرعة التنقل الافتراضية.</string>
+    <string name="announcement_time_descr">يعتمد توقيت المطالبات الصوتية المختلفة على نوع المطالبة وسرعة التنقل الحالية وسرعة التنقل الافتراضية.</string>
     <string name="announcement_time_title">وقت الإعلان</string>
     <string name="start_recording">بدء التسجيل</string>
     <string name="show_track_on_map">عرض المسار على الخريطة</string>
@@ -4075,7 +4075,7 @@
     <string name="activity_type_car_name">سيارة</string>
     <string name="copy_poi_name">نسخ اسم POI</string>
     <string name="select_another_colorization">الرجاء اختيار أنواع أخرى من التلوين.</string>
-    <string name="snap_to_road_descr">سيتم سحب أيقونة المكان الحالي إلى مسار التنقل الحالي</string>
+    <string name="snap_to_road_descr">سيتم محاذاة رمز الموضع الحالي إلى مسار التنقل الحالي</string>
     <string name="select_segments">حدد الجزء</string>
     <string name="select_segments_description">%1$s يحتوي على أكثر من مقطع ، تحتاج إلى تحديد الجزء المطلوب للتنقل.</string>
     <string name="segments_count">الجزء %1$d</string>
@@ -4106,32 +4106,32 @@
     <string name="live_update_delete_updates_msg">هل أنت متأكد من أنك تريد حذف كافة %s التحديثات المباشرة؟</string>
     <string name="delete_updates">حذف التحديثات</string>
     <string name="purchases">المشتريات</string>
-    <string name="select_category_descr">حدد فئة أو أضف فئة جديدة</string>
+    <string name="select_category_descr">تحديد أو إضافة فئة جديدة</string>
     <string name="track_recording_will_be_continued">سيستمر التسجيل.</string>
     <string name="quick_action_show_hide_title">إظهار/ إخفاء</string>
     <string name="shared_string_interval">الفاصل الزمني</string>
     <string name="track_has_no_altitude">لا يحتوي المسار على بيانات الارتفاع.</string>
     <string name="track_has_no_speed">لا يحتوي المسار على بيانات السرعة.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">إخفاء المحميات الطبيعية والمناطق المحمية وحدود المتنزهات الوطنية</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">إخفاء المحميات الطبيعية والمناطق المحمية وحدود المتنزهات الوطنية.</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">حدود الطبيعة</string>
-    <string name="trip_recording_show_start_dialog_setting">إذا تم تعطيله، فسيبدأ التسجيل مباشرة بعد النقر على الويدجيت أو عنصر القائمة ، متخطيا لمربع حوار التأكيد.</string>
-    <string name="trip_recording_logging_interval_info">الفاصل الزمني للتسجيل يحدد الفترة الزمنية التي سيسأل فيها OsmAnd عن بيانات الموقع الحالي.</string>
+    <string name="trip_recording_show_start_dialog_setting">في حالة تعطيل التسجيل، سيبدأ التسجيل مباشرة بعد النقر على عنصر واجهة المستخدم أو عنصر القائمة، مما يؤدي إلى تخطي مربع حوار التأكيد.</string>
+    <string name="trip_recording_logging_interval_info">تعيين الفاصل الزمني لتسجيل الفترة الزمنية أوسماند سيطلب بيانات الموقع الحالي.</string>
     <string name="lost_data_warning">سيتم فقدان كافة البيانات غير المحفوظة.</string>
     <string name="show_start_dialog">إظهار مربع حوار البدء</string>
     <string name="trip_recording_save_and_continue">حفظ ومتابعة</string>
     <string name="customize_route_line">تخصيص خط المسار</string>
     <string name="shared_string_route_line">خط المسار</string>
-    <string name="route_line_use_map_style_appearance">سيستخدم خط الطريق %1$s المحدد في نمط الخريطة المحدد: %2$s.</string>
-    <string name="specify_color_for_map_mode">حدد لونًا لوضع الخريطة: %1$s.</string>
-    <string name="release_4_0_beta">• خيار مضاف لتنزيل خطوط الكنتور بالقدم
+    <string name="route_line_use_map_style_appearance">استخدم نمط الخريطة (%2$s) الافتراضي %1$s.</string>
+    <string name="specify_color_for_map_mode">حدد اللون لوضع الخريطة %1$s.</string>
+    <string name="release_4_0_beta">• خيار إضافي لتنزيل خطوط الكنتور بالقدم
 \n
-\n• مخطط الطريق الأفقي: علامات تبويب tabs مضافة للتبديل بين النقاط أو الرسوم البيانية
+\n • مخطط الطريق الأفقي: علامات التبويب المضافة للتبديل بين النقاط أو الرسوم البيانية
 \n
-\n• تم نقل تحديثات OsmAnd Live إلى \"التنزيلات&gt; التحديثات\"
+\n • تم نقل تحديثات OsmAnd Live إلى \"التنزيلات&gt; التحديثات\"
 \n
-\n • يمكن تلوين المسارات الآن حسب الارتفاع، السرعة أو المنحدر.
+\n • يمكن الآن تلوين المسارات حسب الارتفاع أو السرعة أو الانحدار.
 \n
-\n • خيار مضاف لتغيير مظهر خط مسار الملاحة
+\n • خيار مضاف لتغيير مظهر خط المسار.
 \n
 \n • تحديث مربع حوار \"تسجيل الرحلة\"
 \n
@@ -4149,7 +4149,7 @@
     <string name="annual_subscription">اشتراك سنوي</string>
     <string name="monthly_subscription">اشتراك شهري</string>
     <string name="three_months_subscription">اشتراك ثلاثة اشهر</string>
-    <string name="osmand_live_cancelled">ملغاة</string>
+    <string name="osmand_live_cancelled">تم الإلغاء</string>
     <string name="renew_subscription">جدد الاشتراك</string>
     <string name="on_hold">في الانتظار</string>
     <string name="expired">منتهي الصلاحية</string>
@@ -4162,7 +4162,13 @@
     <string name="srtm_download_list_help_message">OsmAnd يوفر بيانات الخطوط الكنتورية بالأمتار والقدم. ستحتاج إلى إعادة تنزيل الملف لتغيير التنسيق.</string>
     <string name="srtm_download_single_help_message">الرجاء تحديد التنسيق المطلوب. ستحتاج إلى إعادة تنزيل الملف لتغيير التنسيق.</string>
     <string name="shared_string_feet">قدم</string>
-    <string name="route_line_use_gradient_coloring">سيتم تلوين خط المسار اعتمادا على ملف تعريف الارتفاع للمسار.</string>
+    <string name="route_line_use_gradient_coloring">خط المسار ملون حسب ارتفاع المنحدر .</string>
     <string name="shared_string_min_height">أدنى. ارتفاع</string>
     <string name="shared_string_max_height">اقصى. ارتفاع</string>
+    <string name="language_description">حدد اللغة المفضلة ونوع التوجيه الصوتي.</string>
+    <string name="tts_description">يمكن لميزة تحويل النص إلى كلام (TTS) نطق جميع أنواع التعليمات: أسماء الشوارع ، تعليمات الانعطاف ، أسماء نقاط الاهتمام ، إلخ.</string>
+    <string name="tts_title">تحويل النص إلى كلام</string>
+    <string name="recorded_description">الصوت المسجل يبدو أفضل، ولكن يمكن نطق العبارات المسجلة مسبقا فقط: تشغيل التعليمات. لا يمكن الإعلان عن أسماء الشوارع أونقاط الاهتمام.</string>
+    <string name="use_system_language">استخدام لغة النظام</string>
+    <string name="shared_string_itinerary">مسار الرحلة</string>
 </resources>

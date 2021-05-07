@@ -41,6 +41,7 @@ import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.mapmarkers.ItineraryType;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.osmedit.OpenstreetmapPoint;
@@ -385,6 +386,17 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			} else if (ExportSettingsType.HISTORY_MARKERS.name().equals(markersGroup.getId())) {
 				item.setTitle(getString(R.string.markers_history));
 				item.setIcon(uiUtilities.getIcon(R.drawable.ic_action_history, getItemIconColor(object)));
+			} else {
+				String groupName = markersGroup.getName();
+				if (Algorithms.isEmpty(groupName)) {
+					if (markersGroup.getType() == ItineraryType.FAVOURITES) {
+						groupName = app.getString(R.string.shared_string_favorites);
+					} else if (markersGroup.getType() == ItineraryType.MARKERS) {
+						groupName = app.getString(R.string.map_markers);
+					}
+				}
+				item.setTitle(groupName);
+				item.setIcon(uiUtilities.getIcon(R.drawable.ic_action_flag, getItemIconColor(object)));
 			}
 			int selectedMarkers = markersGroup.getMarkers().size();
 			String itemsDescr = getString(R.string.shared_string_items);

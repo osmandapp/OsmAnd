@@ -431,7 +431,7 @@
     <string name="poi_bell_tower">Campanário</string>
     <string name="poi_cooling_tower">Torre de arrefecimento</string>
     <string name="poi_lighting_tower">Torre de iluminação</string>
-    <string name="poi_telephone_exchange">Central telefónica</string>
+    <string name="poi_telephone_exchange">Distribuição telefónica</string>
     <string name="poi_recycling">Reciclagem</string>
     <string name="poi_recycling_centre">Centro de reciclagem</string>
     <string name="poi_recycling_container">Contentor</string>
@@ -3133,7 +3133,7 @@
     <string name="poi_motorcycle_type_scooter">Lambreta</string>
     <string name="poi_motorcycle_type_sportbike">Desportiva</string>
     <string name="poi_motorcycle_type_chopper">Chopper</string>
-    <string name="poi_motorcycle_type_offroad">Off-road</string>
+    <string name="poi_motorcycle_type_offroad">Todo o terreno</string>
     <string name="poi_motorcycle_type_dualsport">Trail</string>
     <string name="poi_motorcycle_type_standard">Comum</string>
     <string name="poi_generator_output_electricity_no">Saída (eletricidade): não</string>
@@ -3929,4 +3929,11 @@
     <string name="poi_plateau">Planalto</string>
     <string name="poi_club_social">Clube social</string>
     <string name="poi_health_post">Posto de primeiros socorros</string>
+    <string name="poi_shop_water">Loja de água potável</string>
+    <string name="poi_pest_control">Loja de controlo de pragas</string>
+    <string name="poi_telecom_medium_coaxial">Tipo:cabo coaxial</string>
+    <string name="poi_telecom_medium_fibre">Tipo: fibra</string>
+    <string name="poi_telecom_medium_copper">Tipo: cobre</string>
+    <string name="poi_telecom_exchange">Distribuição telefónica</string>
+    <string name="poi_pillory">Pelourinho</string>
 </resources>
