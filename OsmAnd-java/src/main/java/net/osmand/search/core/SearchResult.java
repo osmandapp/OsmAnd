@@ -63,10 +63,15 @@ public class SearchResult {
 
 	private double getSumPhraseMatchWeight() {
 		// if result is a complete match in the search we prioritize it higher
-		String name = alternateName != null ? alternateName : localeName;
+		List<String> names = new ArrayList<>();
+		if(otherNames == null){
+			names.add(localeName);
+		} else {
+			names.add(localeName);
+			names.addAll(otherNames);
+		}
 		List<String> localResultNames = new ArrayList<>();
 		List<String> searchPhraseNames = new ArrayList<>();
-		SearchPhrase.splitWords(name, localResultNames);
 
 		String fw = requiredSearchPhrase.getFirstUnknownSearchWord();
 		List<String> ow = requiredSearchPhrase.getUnknownSearchWords();
@@ -77,22 +82,29 @@ public class SearchResult {
 			searchPhraseNames.addAll(ow);
 		}
 
-		int idxMatchedWord = -1;
 		boolean allWordsMatched = true;
-		for (String searchPhraseName : searchPhraseNames) {
-			boolean wordMatched = false;
-			for (int i = idxMatchedWord + 1; i < localResultNames.size(); i++) {
-				int r = requiredSearchPhrase.getCollator().compare(searchPhraseName, localResultNames.get(i));
-				if (r == 0) {
-					wordMatched = true;
-					idxMatchedWord = i;
-					break;
+		for (String name : names) {
+			int idxMatchedWord = -1;
+			SearchPhrase.splitWords(name, localResultNames);
+			if (names.indexOf(name) == 0 || !allWordsMatched) {
+				allWordsMatched = true;
+				for (String searchPhraseName : searchPhraseNames) {
+					boolean wordMatched = false;
+					for (int i = idxMatchedWord + 1; i < localResultNames.size(); i++) {
+						int r = requiredSearchPhrase.getCollator().compare(searchPhraseName, localResultNames.get(i));
+						if (r == 0) {
+							wordMatched = true;
+							idxMatchedWord = i;
+							break;
+						}
+					}
+					if (!wordMatched) {
+						allWordsMatched = false;
+						break;
+					}
 				}
 			}
-			if (!wordMatched) {
-				allWordsMatched = false;
-				break;
-			}
+			localResultNames.clear();
 		}
 		if (objectType == ObjectType.POI_TYPE) {
 			allWordsMatched = false;
