@@ -417,6 +417,10 @@ public class BinaryMapTransportReaderAdapter {
 				rid = stop.getId();
 				codedIS.popLimit(olds);
 				break;
+			case OsmandOdb.TransportRoute.ATTRIBUTETAGIDS_FIELD_NUMBER:
+				String str = regStr(stringTable);
+				dataObject.addTag(str, str);
+				break;
 			default:
 				skipUnknownField(t);
 				break;
@@ -525,6 +529,13 @@ public class BinaryMapTransportReaderAdapter {
 			for (TransportStop s : dataObject.getForwardStops()) {
 				initializeNames(stringTable, s);
 			}
+		}
+		if (dataObject.getTags() != null && dataObject.getTags().size() > 0) {
+			Map<String, String> newMap = new HashMap<>();
+			for (Map.Entry<String, String> entry : dataObject.getTags().entrySet()) {
+				newMap.put(stringTable.get(entry.getKey().charAt(0)), stringTable.get(entry.getValue().charAt(0)));
+			}
+			dataObject.setTags(newMap);
 		}
 	}
 

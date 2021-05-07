@@ -21,11 +21,12 @@ public class TransportRoute extends MapObject {
 	private String color;
 	private List<Way> forwardWays;
 	private TransportSchedule schedule;
+	private Map<String,String> tags = new HashMap<>();
 	public static final double SAME_STOP = 40;
-	
+
 	public TransportRoute() {
 	}
-	
+
 	public TransportRoute(TransportRoute r, List<TransportStop> forwardStops, List<Way> forwardWay) {
 		this.name = r.name;
 		this.enName = r.enName;
@@ -39,11 +40,19 @@ public class TransportRoute extends MapObject {
 		this.forwardStops = forwardStops;
 		this.forwardWays = forwardWay;
 	}
-	
+
 	public TransportSchedule getSchedule() {
 		return schedule;
 	}
-	
+
+	public Map<String, String> getTags() {
+		return tags;
+	}
+
+	public void addTag(String k, String v) {
+		tags.put(k, v);
+	}
+
 	public TransportSchedule getOrCreateSchedule() {
 		if (schedule == null) {
 			schedule = new TransportSchedule();
@@ -221,15 +230,19 @@ public class TransportRoute extends MapObject {
 		}
 		forwardWays.add(w);
 	}
-	
+
 	public String getRef() {
 		return ref;
 	}
-	
+
 	public void setRef(String ref) {
 		this.ref = ref;
 	}
-	
+
+	public void setTags(Map<String,String> tags) {
+		this.tags = tags;
+	}
+
 	public String getOperator() {
 		return operator;
 	}
