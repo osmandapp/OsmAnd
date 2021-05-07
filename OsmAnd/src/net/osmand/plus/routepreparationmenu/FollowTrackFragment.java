@@ -13,13 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.ViewGroup.MarginLayoutParams;
-import android.view.ViewTreeObserver.OnScrollChangedListener;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
@@ -73,6 +69,9 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 
 
 public class FollowTrackFragment extends ContextMenuScrollFragment implements CardListener,
@@ -173,7 +172,6 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			setupCards();
 			setupButtons(view);
 			setupSortButton(view);
-			setupScrollShadow();
 			if (!isPortrait()) {
 				int widthNoShadow = getLandscapeNoShadowWidth();
 				FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(widthNoShadow, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -186,7 +184,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		return view;
 	}
 
-	private void showShadowButton() {
+	public void showShadowButton() {
 		buttonsShadow.setVisibility(View.VISIBLE);
 		buttonsShadow.animate()
 				.alpha(0.8f)
@@ -194,13 +192,11 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 				.setListener(null);
 	}
 
-	private void hideShadowButton() {
+	public void hideShadowButton() {
 		buttonsShadow.animate()
 				.alpha(0f)
 				.setDuration(200);
-
 	}
-
 
 	private void setupCards() {
 		MapActivity mapActivity = getMapActivity();
@@ -255,7 +251,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			List<GPXInfo> list = GpxUiHelper.getSortedGPXFilesInfo(dir, selectedTrackNames, false);
 			if (list.size() > 0) {
 				String defaultCategory = app.getString(R.string.shared_string_all);
-				tracksCard = new TracksToFollowCard(mapActivity, list, defaultCategory);
+				tracksCard = new TracksToFollowCard(mapActivity, FollowTrackFragment.this, list, defaultCategory);
 				tracksCard.setListener(FollowTrackFragment.this);
 				getCardsContainer().addView(tracksCard.build(mapActivity));
 				sortButton.setVisibility(View.VISIBLE);
@@ -653,22 +649,6 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			}
 		});
 		UiUtilities.setupDialogButton(isNightMode(), cancelButton, DialogButtonType.SECONDARY, R.string.shared_string_close);
-	}
-
-	private void setupScrollShadow() {
-		final View scrollView = getBottomScrollView();
-		scrollView.getViewTreeObserver().addOnScrollChangedListener(new OnScrollChangedListener() {
-
-			@Override
-			public void onScrollChanged() {
-				boolean scrollToBottomAvailable = scrollView.canScrollVertically(1);
-				if (scrollToBottomAvailable) {
-					showShadowButton();
-				} else {
-					hideShadowButton();
-				}
-			}
-		});
 	}
 
 	private void close() {
