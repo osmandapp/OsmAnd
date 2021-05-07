@@ -12,6 +12,11 @@
 
 -->
 
+    <string name="shared_string_show_slope">Show slope</string>
+    <string name="shared_string_hide_slope">Hide slope</string>
+    <string name="shared_string_uphill">Uphill</string>
+    <string name="shared_string_downhill">Downhill</string>
+    <string name="elevation_profile">Elevation profile</string>
     <string name="shared_string_itinerary">Itinerary</string>
     <string name="use_system_language">Use system language</string>
     <string name="recorded_description">Recorded voice sounds better, but can pronounce only prerecorded phrases: turn instructions. Can\'t announce street names or POI names.</string>
