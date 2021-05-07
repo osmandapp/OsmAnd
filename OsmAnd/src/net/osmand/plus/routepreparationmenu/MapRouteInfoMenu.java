@@ -593,9 +593,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		if (mapActivity == null) {
 			return;
 		}
-
 		OsmandApplication app = mapActivity.getMyApplication();
 		nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		boolean isMapsAvailable = !Algorithms.isEmpty(app.getRoutingHelper().getRoute().getDownloadMaps());
 
 		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
 		RoutingHelper routingHelper = app.getRoutingHelper();
@@ -678,65 +678,70 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				menuCards.add(new PublicTransportBetaWarningCard(mapActivity));
 			} else if (app.getRoutingHelper().isBoatMode()) {
 				menuCards.add(new NauticalBridgeHeightWarningCard(mapActivity));
-			} else if (app.getTargetPointsHelper().hasTooLongDistanceToNavigate()) {
+			} else if (app.getTargetPointsHelper().hasTooLongDistanceToNavigate() && !isMapsAvailable) {
 				menuCards.add(new LongDistanceWarningCard(mapActivity));
-			} else if (!Algorithms.isEmpty(app.getRoutingHelper().getRoute().getDownloadMaps()) && !routeCalculationInProgress) {
+			} else if (isMapsAvailable) {
 				menuCards.add(new SuggestMapsDownloadWarningCards(mapActivity));
 			}
 		} else {
-			// Home/work card
-			HomeWorkCard homeWorkCard = new HomeWorkCard(mapActivity);
-			menuCards.add(homeWorkCard);
+			if (isMapsAvailable) {
+				menuCards.add(new SuggestMapsDownloadWarningCards(mapActivity));
+			} else {
+				// Home/work card
+				HomeWorkCard homeWorkCard = new HomeWorkCard(mapActivity);
+				menuCards.add(homeWorkCard);
+				;
 
-			// Previous route card
-			TargetPoint startBackup = targetPointsHelper.getPointToStartBackup();
-			if (startBackup == null) {
-				startBackup = targetPointsHelper.getMyLocationToStart();
-			}
-			TargetPoint destinationBackup = targetPointsHelper.getPointToNavigateBackup();
-			if (startBackup != null && destinationBackup != null) {
-				PreviousRouteCard previousRouteCard = new PreviousRouteCard(mapActivity);
-				previousRouteCard.setListener(this);
-				menuCards.add(previousRouteCard);
-			}
+				// Previous route card
+				TargetPoint startBackup = targetPointsHelper.getPointToStartBackup();
+				if (startBackup == null) {
+					startBackup = targetPointsHelper.getMyLocationToStart();
+				}
+				TargetPoint destinationBackup = targetPointsHelper.getPointToNavigateBackup();
+				if (startBackup != null && destinationBackup != null) {
+					PreviousRouteCard previousRouteCard = new PreviousRouteCard(mapActivity);
+					previousRouteCard.setListener(this);
+					menuCards.add(previousRouteCard);
+				}
 
-			// Gpx card
-			List<SelectedGpxFile> selectedGPXFiles =
-					app.getSelectedGpxHelper().getSelectedGPXFiles();
-			final List<GPXFile> gpxFiles = new ArrayList<>();
-			for (SelectedGpxFile gs : selectedGPXFiles) {
-				if (!gs.isShowCurrentTrack()) {
-					if (gs.getGpxFile().hasRtePt() || gs.getGpxFile().hasTrkPt()) {
-						gpxFiles.add(gs.getGpxFile());
+				// Gpx card
+				List<SelectedGpxFile> selectedGPXFiles =
+						app.getSelectedGpxHelper().getSelectedGPXFiles();
+				final List<GPXFile> gpxFiles = new ArrayList<>();
+				for (SelectedGpxFile gs : selectedGPXFiles) {
+					if (!gs.isShowCurrentTrack()) {
+						if (gs.getGpxFile().hasRtePt() || gs.getGpxFile().hasTrkPt()) {
+							gpxFiles.add(gs.getGpxFile());
+						}
 					}
 				}
-			}
-			if (gpxFiles.size() > 0) {
-				TracksCard tracksCard = new TracksCard(mapActivity, gpxFiles);
-				tracksCard.setListener(this);
-				menuCards.add(tracksCard);
-			}
+				if (gpxFiles.size() > 0) {
+					TracksCard tracksCard = new TracksCard(mapActivity, gpxFiles);
+					tracksCard.setListener(this);
+					menuCards.add(tracksCard);
+				}
 
-			// Map markers card
-			List<MapMarker> mapMarkers = app.getMapMarkersHelper().getMapMarkers();
-			if (mapMarkers.size() > 0) {
-				MapMarkersCard mapMarkersCard = new MapMarkersCard(mapActivity, mapMarkers);
-				menuCards.add(mapMarkersCard);
-			}
+				// Map markers card
+				List<MapMarker> mapMarkers = app.getMapMarkersHelper().getMapMarkers();
+				if (mapMarkers.size() > 0) {
+					MapMarkersCard mapMarkersCard = new MapMarkersCard(mapActivity, mapMarkers);
+					menuCards.add(mapMarkersCard);
+				}
 
-			// History card
-			SearchResultCollection res = null;
-			try {
-				res = app.getSearchUICore().getCore().shallowSearch(QuickSearchHelper.SearchHistoryAPI.class, "", null);
-			} catch (IOException e) {
-				// ignore
-			}
-			if (res != null) {
-				List<SearchResult> results = res.getCurrentSearchResults();
-				if (results.size() > 0) {
-					HistoryCard historyCard = new HistoryCard(mapActivity, results);
-					historyCard.setListener(this);
-					menuCards.add(historyCard);
+				// History card
+				SearchResultCollection res = null;
+				try {
+					res = app.getSearchUICore().getCore().shallowSearch(QuickSearchHelper.SearchHistoryAPI.class, "", null);
+				} catch (IOException e) {
+					// ignore
+				}
+				if (res != null) {
+					List<SearchResult> results = res.getCurrentSearchResults();
+					if (results.size() > 0) {
+						HistoryCard historyCard = new HistoryCard(mapActivity, results);
+						historyCard.setListener(this);
+						menuCards.add(historyCard);
+					}
 				}
 			}
 		}

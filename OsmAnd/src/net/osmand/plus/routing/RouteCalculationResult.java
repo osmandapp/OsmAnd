@@ -29,7 +29,6 @@ import org.apache.commons.logging.Log;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
 
@@ -61,7 +60,7 @@ public class RouteCalculationResult {
 	protected int cacheCurrentTextDirectionInfo = -1;
 	protected List<RouteDirectionInfo> cacheAgreggatedDirections;
 	protected List<LocationPoint> locationPoints = new ArrayList<LocationPoint>();
-	protected final Set<WorldRegion> downloadMaps;
+	protected final List<WorldRegion> downloadMaps;
 
 	// params
 	protected final ApplicationMode appMode;
@@ -99,7 +98,7 @@ public class RouteCalculationResult {
 		this.routeVisibleAngle = 0;
 	}
 
-	public RouteCalculationResult(Set<WorldRegion> suggestedOfflineMaps) {
+	public RouteCalculationResult(List<WorldRegion> suggestedOfflineMaps) {
 		this.downloadMaps = suggestedOfflineMaps;
 		this.errorMessage = null;
 		this.routingTime = 0;
@@ -1310,7 +1309,7 @@ public class RouteCalculationResult {
 		currentStraightAngleRoute = nextPoint;
 	}
 
-	public Set<WorldRegion> getDownloadMaps() {
+	public List<WorldRegion> getDownloadMaps() {
 		return downloadMaps;
 	}
 

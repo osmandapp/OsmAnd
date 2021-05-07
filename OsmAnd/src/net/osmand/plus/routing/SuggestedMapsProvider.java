@@ -2,30 +2,38 @@ package net.osmand.plus.routing;
 
 import net.osmand.IndexConstants;
 import net.osmand.Location;
-import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
 
 import java.io.IOException;
-import java.util.LinkedHashMap;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
-import java.util.Map;
-import java.util.Set;
+import java.util.List;
+
+import static java.lang.Math.PI;
+import static java.lang.Math.asin;
+import static java.lang.Math.atan2;
+import static java.lang.Math.cos;
+import static java.lang.Math.sin;
+import static java.lang.Math.toDegrees;
+import static java.lang.Math.toRadians;
 
 public class SuggestedMapsProvider {
 
-	public static OsmandApplication ctx;
+	private static final int EARTH_RADIUS = 6371000;
+	private static final int MINIMAL_DISTANCE = 20000;
 	public static TargetPointsHelper.TargetPoint start;
 	public static LatLon[] intermediates;
 	public static TargetPointsHelper.TargetPoint end;
 
-	public static boolean checkIfObjectDownloaded(String downloadName) {
-		ResourceManager rm = ctx.getResourceManager();
+	public static boolean checkIfObjectDownloaded(String downloadName, OsmandApplication app) {
+		ResourceManager rm = app.getResourceManager();
 		final String regionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName)
 				+ IndexConstants.BINARY_MAP_INDEX_EXT;
 		final String roadsRegionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName) + ".road"
@@ -33,23 +41,29 @@ public class SuggestedMapsProvider {
 		return rm.getIndexFileNames().containsKey(regionName) || rm.getIndexFileNames().containsKey(roadsRegionName);
 	}
 
-	private static LinkedList<Location> getLocationBasedOnDistance(LinkedList<Location> points, int distance) {
-		while (points.getFirst().distanceTo(points.getLast()) > distance) {
-			Location mp = MapUtils.calculateMidPoint(points.getFirst(), points.getLast());
-			points.add(0, mp);
-		}
-
-		Location minimalDistance = new Location("", points.getLast().getLatitude() - points.getFirst().getLatitude(), points.getLast().getLongitude() - points.getFirst().getLongitude());
-		points.subList(0, points.size() - 2).clear();
-
-		while (points.getFirst().distanceTo(points.getLast()) >= distance) {
-			Location mp = new Location("", points.getFirst().getLatitude() + minimalDistance.getLatitude(), points.getFirst().getLongitude() + minimalDistance.getLongitude());
-			points.add(0, mp);
+	public static LinkedList<Location> getLocationBasedOnDistance(LinkedList<Location> points) {
+		while (points.getFirst().distanceTo(points.getLast()) > MINIMAL_DISTANCE) {
+			float bearing = points.getFirst().bearingTo(points.getLast());
+			LatLon latLon = findPointAtDistanceFrom(points.getFirst().getLatitude(), points.getFirst().getLongitude(), MINIMAL_DISTANCE, bearing);
+			Location location = new Location("", latLon.getLatitude(), latLon.getLongitude());
+			points.add(0, location);
 		}
 		return points;
 	}
 
-	public static LinkedList<Location> getGeneralLocation(RouteCalculationParams params) {
+	public static LatLon findPointAtDistanceFrom(double latitude, double longitude, double distanceInMetres, double bearing) {
+		double bearingRad = toRadians(bearing);
+		double latRad = toRadians(latitude);
+		double lonRad = toRadians(longitude);
+		double distFraction = distanceInMetres / EARTH_RADIUS;
+
+		double latitudeResult = asin(sin(latRad) * cos(distFraction) + cos(latRad) * sin(distFraction) * cos(bearingRad));
+		double a = atan2(sin(bearingRad) * sin(distFraction) * cos(latRad), cos(distFraction) - sin(latRad) * sin(latitudeResult));
+		double longitudeResult = (lonRad + a + 3 * PI) % (2 * PI) - PI;
+		return new LatLon(toDegrees(latitudeResult), toDegrees(longitudeResult));
+	}
+
+	public static LinkedList<Location> getStartFinishIntermediatesPoints(RouteCalculationParams params) {
 		LinkedList<Location> points = new LinkedList<>();
 		points.add(new Location("", params.start.getLatitude(), params.start.getLongitude()));
 		if (params.intermediates != null) {
@@ -61,21 +75,30 @@ public class SuggestedMapsProvider {
 		return points;
 	}
 
-	public static Set<WorldRegion> getSuggestedOfflineMap(LinkedList<Location> points) throws IOException {
-		Map<WorldRegion, BinaryMapDataObject> selectedObjects = new LinkedHashMap<>();
+	public static List<WorldRegion> getSuggestedMaps(LinkedList<Location> points, OsmandApplication app) throws IOException {
+		List<WorldRegion> suggestedMaps = new ArrayList<>();
 		for (int i = 0; i < points.size(); i++) {
 			final Location o = points.get(i);
 			LatLon latLonPoint = new LatLon(o.getLatitude(), o.getLongitude());
-			Map.Entry<WorldRegion, BinaryMapDataObject> worldRegion = ctx.getRegions().getSmallestBinaryMapDataObjectAt(latLonPoint);
-			Map.Entry<WorldRegion, BinaryMapDataObject> worldParentRegion = ctx.getRegions().getSmallestBinaryMapDataObjectAt(latLonPoint);
-			String worldRegionName = worldRegion.getKey().getRegionDownloadName();
-			String worldParentRegionName = worldParentRegion.getKey().getSuperregion().getRegionDownloadName();
-			boolean isRegionDownload = checkIfObjectDownloaded(worldRegionName);
-			boolean isParentRegionDownload = checkIfObjectDownloaded(worldParentRegionName);
-			if (!isRegionDownload && !isParentRegionDownload) {
-				selectedObjects.put(worldRegion.getKey(), worldRegion.getValue());
+			List<WorldRegion> downloadRegions = app.getRegions().getWorldRegionsAt(latLonPoint);
+
+			Collections.sort(downloadRegions, new Comparator<WorldRegion>() {
+				@Override
+				public int compare(WorldRegion o1, WorldRegion o2) {
+					return Boolean.compare(o2.containsRegion(o1), o1.containsRegion(o2));
+				}
+			});
+
+			for (WorldRegion downloadRegion : downloadRegions) {
+				String mapName = downloadRegion.getRegionDownloadName();
+				String parentMapName = downloadRegion.getSuperregion().getRegionDownloadName();
+				boolean isSuggestedMapsNeeded = !checkIfObjectDownloaded(mapName, app);
+				if (isSuggestedMapsNeeded && !Algorithms.isEmpty(parentMapName)) {
+					suggestedMaps.add(downloadRegion);
+					break;
+				}
 			}
 		}
-		return selectedObjects.keySet();
+		return suggestedMaps;
 	}
 }

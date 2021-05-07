@@ -345,9 +345,9 @@ class RouteRecalculationHelper {
 			}
 			RouteCalculationResult prev = routingHelper.getRoute();
 			synchronized (routingHelper) {
+				routingHelper.setRoute(res);
 				if (res.isCalculated()) {
 					if (!params.inSnapToRoadMode && !params.inPublicTransportMode) {
-						routingHelper.setRoute(res);
 						routingHelper.updateOriginalRoute();
 					}
 					if (params.resultListener != null) {

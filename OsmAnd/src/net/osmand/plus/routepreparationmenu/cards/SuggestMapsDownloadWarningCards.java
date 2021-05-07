@@ -14,7 +14,6 @@ import net.osmand.plus.download.IndexItem;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import static net.osmand.plus.download.MultipleDownloadItem.getIndexItem;
 
@@ -34,9 +33,9 @@ public class SuggestMapsDownloadWarningCards extends WarningCard {
 		List<SelectionBottomSheet.SelectableItem> selectedItems = new ArrayList<>();
 
 		for (DownloadItem di : downloadMapsList) {
-			boolean isStandardMap = di.getType().getTag().equals("map");
+			boolean isSuggestedDownloadsMaps = di.getType().getTag().equals("map");
 			SelectionBottomSheet.SelectableItem si = createSelectableItem(di);
-			if (isStandardMap) {
+			if (isSuggestedDownloadsMaps) {
 				allItems.add(si);
 				selectedItems.add(si);
 			}
@@ -113,11 +112,11 @@ public class SuggestMapsDownloadWarningCards extends WarningCard {
 				&& !app.getDownloadThread().getIndexes().isDownloadedFromInternet
 				&& !app.getDownloadThread().getIndexes().downloadFromInternetFailed;
 
-		Set<WorldRegion> isStandardMap = mapActivity.getRoutingHelper().getRoute().getDownloadMaps();
+		List<WorldRegion> suggestedDownloadsMaps = mapActivity.getRoutingHelper().getRoute().getDownloadMaps();
 		List<DownloadItem> suggestedMaps = new ArrayList<>();
 		if (!downloadIndexes) {
-			for (WorldRegion temp : isStandardMap) {
-				suggestedMaps.addAll(0, app.getDownloadThread().getIndexes().getDownloadItems(temp));
+			for (WorldRegion suggestedDownloadMap : suggestedDownloadsMaps) {
+				suggestedMaps.addAll(app.getDownloadThread().getIndexes().getDownloadItems(suggestedDownloadMap));
 			}
 		}
 		return suggestedMaps;

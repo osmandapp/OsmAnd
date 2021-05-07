@@ -108,9 +108,10 @@ public class RouteProvider {
 				if (calcGPXRoute && !params.gpxRoute.calculateOsmAndRoute) {
 						res = calculateGpxRoute(params);
 				} else if (params.mode.getRouteService() == RouteService.OSMAND) {
-					LinkedList<Location> points = getGeneralLocation(params);
-					if (!getSuggestedOfflineMap(points).isEmpty()) {
-						return new RouteCalculationResult(getSuggestedOfflineMap(points));
+					LinkedList<Location> points = getStartFinishIntermediatesPoints(params);
+					boolean isMapsAvailable = !getSuggestedMaps(points, app).isEmpty();
+					if (isMapsAvailable) {
+						return new RouteCalculationResult(getSuggestedMaps(points, app));
 					} else {
 						res = findVectorMapsRoute(params, calcGPXRoute);
 					}
@@ -1182,7 +1183,7 @@ public class RouteProvider {
 	}
 
 	private RouteCalculationResult findStraightRoute(RouteCalculationParams params) {
-		LinkedList<Location> points = getGeneralLocation(params);
+		LinkedList<Location> points = getStartFinishIntermediatesPoints(params);
 		List<Location> segments = new ArrayList<>();
 		Location lastAdded = null;
 		float speed = params.mode.getDefaultSpeed();
