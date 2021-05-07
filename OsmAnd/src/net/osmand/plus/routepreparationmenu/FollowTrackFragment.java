@@ -51,6 +51,7 @@ import net.osmand.plus.routepreparationmenu.cards.ImportTrackCard;
 import net.osmand.plus.routepreparationmenu.cards.NavigateTrackOptionsCard;
 import net.osmand.plus.routepreparationmenu.cards.ReverseTrackCard;
 import net.osmand.plus.routepreparationmenu.cards.SelectTrackCard;
+import net.osmand.plus.routepreparationmenu.cards.SelectedTrackToFollowCard;
 import net.osmand.plus.routepreparationmenu.cards.TrackEditCard;
 import net.osmand.plus.routepreparationmenu.cards.TracksToFollowCard;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
@@ -208,37 +209,9 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 				setupTracksCard();
 			} else {
 				sortButton.setVisibility(View.GONE);
-				TrackEditCard importTrackCard = new TrackEditCard(mapActivity, gpxFile);
-				importTrackCard.setListener(this);
-				cardsContainer.addView(importTrackCard.build(mapActivity));
-
-				SelectTrackCard selectTrackCard = new SelectTrackCard(mapActivity);
-				selectTrackCard.setListener(this);
-				cardsContainer.addView(selectTrackCard.build(mapActivity));
-
-				ApplicationMode mode = app.getRoutingHelper().getAppMode();
-
-				RoutingHelper routingHelper = app.getRoutingHelper();
-				GPXRouteParamsBuilder rparams = routingHelper.getCurrentGPXRoute();
-				boolean osmandRouter = mode.getRouteService() == RouteService.OSMAND;
-				if (rparams != null && osmandRouter) {
-					cardsContainer.addView(buildDividerView(cardsContainer, false));
-
-					ReverseTrackCard reverseTrackCard = new ReverseTrackCard(mapActivity, rparams.isReverse());
-					reverseTrackCard.setListener(this);
-					cardsContainer.addView(reverseTrackCard.build(mapActivity));
-
-					if (!gpxFile.hasRtePt() && !gpxFile.hasRoute()) {
-						cardsContainer.addView(buildDividerView(cardsContainer, true));
-
-						AttachTrackToRoadsCard attachTrackCard = new AttachTrackToRoadsCard(mapActivity);
-						attachTrackCard.setListener(this);
-						cardsContainer.addView(attachTrackCard.build(mapActivity));
-					}
-					if (!rparams.isUseIntermediatePointsRTE()) {
-						setupNavigateOptionsCard(rparams);
-					}
-				}
+				SelectedTrackToFollowCard selectedTrackToFollowCard =
+						new SelectedTrackToFollowCard(mapActivity, FollowTrackFragment.this, gpxFile);
+				getCardsContainer().addView(selectedTrackToFollowCard.build(mapActivity));
 			}
 		}
 	}
@@ -257,36 +230,6 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 				sortButton.setVisibility(View.VISIBLE);
 			}
 		}
-	}
-
-	private void setupNavigateOptionsCard(GPXRouteParamsBuilder rparams) {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			int passRouteId = R.string.gpx_option_from_start_point;
-			LocalRoutingParameter passWholeRoute = new OtherLocalRoutingParameter(passRouteId,
-					app.getString(passRouteId), rparams.isPassWholeRoute());
-
-			int navigationTypeId = R.string.gpx_option_calculate_first_last_segment;
-			LocalRoutingParameter navigationType = new OtherLocalRoutingParameter(navigationTypeId,
-					app.getString(navigationTypeId), rparams.isCalculateOsmAndRouteParts());
-
-			NavigateTrackOptionsCard navigateTrackCard = new NavigateTrackOptionsCard(mapActivity, passWholeRoute, navigationType);
-			navigateTrackCard.setListener(this);
-			getCardsContainer().addView(navigateTrackCard.build(mapActivity));
-		}
-	}
-
-	public View buildDividerView(@NonNull ViewGroup view, boolean needMargin) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(view.getContext(), isNightMode());
-		View divider = themedInflater.inflate(R.layout.simple_divider_item, view, false);
-
-		LayoutParams params = divider.getLayoutParams();
-		if (needMargin && params instanceof MarginLayoutParams) {
-			AndroidUtils.setMargins((MarginLayoutParams) params, dpToPx(64), 0, 0, 0);
-			divider.setLayoutParams(params);
-		}
-
-		return divider;
 	}
 
 	@Override

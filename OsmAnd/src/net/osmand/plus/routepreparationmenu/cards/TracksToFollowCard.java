@@ -22,6 +22,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -40,7 +41,7 @@ public class TracksToFollowCard extends BaseCard {
 	private String visibleCategory;
 	private String selectedCategory;
 
-	public TracksToFollowCard(MapActivity mapActivity, Fragment target, List<GPXInfo> gpxInfoList, String selectedCategory) {
+	public TracksToFollowCard(@NonNull MapActivity mapActivity, @NonNull Fragment target, @NonNull List<GPXInfo> gpxInfoList, @NonNull String selectedCategory) {
 		super(mapActivity);
 		this.target = target;
 		this.gpxInfoList = gpxInfoList;
