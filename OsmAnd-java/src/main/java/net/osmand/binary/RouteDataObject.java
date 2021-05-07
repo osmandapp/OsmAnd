@@ -634,28 +634,12 @@ public class RouteDataObject {
 		} else {
 			int i = Algorithms.findFirstNumberEndIndex(v);
 			if (i > 0) {
-				try {
-					float f = Float.parseFloat(v.substring(0, i));
-					f /= 3.6; // km/h -> m/s
-					if (v.contains("mph")) {
-						f *= 1.6;
-					}
-					return f;
-				} catch (Exception e) {
-					int j = 0;
-					String number = "";
-					while (j < v.length()) {
-						if(Algorithms.isDigit(v.charAt(j))) {
-							number += v.charAt(j);
-						} else {
-							break;
-						}
-						j++;
-					}
-					if (!number.isEmpty()) {
-						return Float.parseFloat(number);
-					}
+				float f = Float.parseFloat(v.substring(0, i));
+				f /= 3.6; // km/h -> m/s
+				if (v.contains("mph")) {
+					f *= 1.6;
 				}
+				return f;
 			}
 		}
 		return def;
