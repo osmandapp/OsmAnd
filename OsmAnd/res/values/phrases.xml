@@ -4398,4 +4398,8 @@
 
 	<string name="poi_planetarium">Planetarium</string>
 
+	<string name="poi_trolley_bay">Trolley bay</string>
+
+	<string name="poi_refugee_site">Refugee site</string>
+
 </resources>
