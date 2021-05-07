@@ -276,12 +276,13 @@ public class RoutingContext {
 		int ucount = ts.getUnloadCont();
 		if (nativeLib == null) {
 			long now = System.nanoTime();
+
 			List<DirectionPoint> points = Collections.emptyList();
 			if (config.getDirectionPoints() != null) {
+				//retrieve direction points for attach to routing
 				points = config.getDirectionPoints().queryInBox(
 						new QuadRect(ts.subregion.left, ts.subregion.top, ts.subregion.right, ts.subregion.bottom), new ArrayList<DirectionPoint>());
 				for (DirectionPoint d : points) {
-					// use temporary types
 					d.types.clear();
 					for (Entry<String, String> e : d.getTags().entrySet()) {
 						int type = ts.subregion.routeReg.searchRouteEncodingRule(e.getKey(), e.getValue());
@@ -291,6 +292,7 @@ public class RoutingContext {
 					}
 				}
 			}
+
 			try {
 				BinaryMapIndexReader reader = reverseMap.get(ts.subregion.routeReg);
 				ts.setLoadedNonNative();
@@ -593,7 +595,8 @@ public class RoutingContext {
 				//System.out.println(String.format("INSERT %s (%d-%d) %.0f m [%.5f, %.5f] - %d, %d ", ro, indexToInsert, indexToInsert + 1, mindist,
 				//		MapUtils.get31LongitudeX(wptX), MapUtils.get31LatitudeY(wptY), wptX, wptY));
 				if (np.connected != null) {
-					// clear old connected points
+					// check old connected points
+					// using search by coordinates because by index doesn't work (parallel updates)
 					int pointIndex = -1;
 					for (int i = 0; i < np.connected.getPointsLength(); i++) {
 						int tx = np.connected.getPoint31XTile(i);
@@ -604,7 +607,7 @@ public class RoutingContext {
 						}
 					}
 					if (pointIndex != -1) {
-						int tp = ro.region.findOrCreateRouteType("osmand_dp", "osmand_delete_point");
+						int tp = ro.region.findOrCreateRouteType(DirectionPoint.TAG, DirectionPoint.DELETE_TYPE);
 						np.connected.setPointTypes(pointIndex, new int[] { tp });
 					} else {
 						throw new RuntimeException();
@@ -618,13 +621,9 @@ public class RoutingContext {
 				np.connected = ro;
 			} else if (sameRoadId) {
 				boolean sameRoadIdButPointIsNotPresent;
-				if (indexToInsert < ro.getPointsLength()) {
-					int tx = ro.getPoint31XTile(indexToInsert);
-					int ty = ro.getPoint31YTile(indexToInsert);
-					sameRoadIdButPointIsNotPresent = (mprojx != tx || mprojy != ty);
-				} else {
-					sameRoadIdButPointIsNotPresent = true;
-				}
+				int tx = ro.getPoint31XTile(indexToInsert);
+				int ty = ro.getPoint31YTile(indexToInsert);
+				sameRoadIdButPointIsNotPresent = (mprojx != tx || mprojy != ty);
 				if (sameRoadIdButPointIsNotPresent) {
 					ro.insert(indexToInsert, mprojx, mprojy);
 				}

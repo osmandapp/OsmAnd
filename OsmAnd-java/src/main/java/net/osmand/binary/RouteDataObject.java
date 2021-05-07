@@ -4,12 +4,14 @@ import java.util.Arrays;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
 import net.osmand.Location;
+import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.data.LatLon;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import net.osmand.util.TransliterationHelper;
+import org.apache.commons.logging.Log;
 
 public class RouteDataObject {
 	/*private */static final int RESTRICTION_SHIFT = 3;

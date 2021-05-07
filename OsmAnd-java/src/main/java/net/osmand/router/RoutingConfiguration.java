@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 
+import net.osmand.NativeLibrary;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -74,6 +75,8 @@ public class RoutingConfiguration {
 		public TIntArrayList types = new TIntArrayList();
 		public int connectedx;
 		public int connectedy;
+		public final static String TAG = "osmand_dp";
+		public final static String DELETE_TYPE = "osmand_delete_point";
 
 		public DirectionPoint(Node n) {
 			super(n, n.getId());
@@ -81,38 +84,20 @@ public class RoutingConfiguration {
 		
 	}
 
-	// Used in JNI
-	public DirectionPointSimplify[] getDirectionPointSimplifyArray() {
+	public NativeLibrary.NativeDirectionPoint[] getNativeDirectionPoints() {
 		if (directionPoints == null) {
-			return new DirectionPointSimplify[0];
+			return new NativeLibrary.NativeDirectionPoint[0];
 		}
 		QuadRect rect = new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE);
 		List<DirectionPoint> points = directionPoints.queryInBox(rect, new ArrayList<DirectionPoint>());
-		DirectionPointSimplify[] result = new DirectionPointSimplify[points.size()];
+		NativeLibrary.NativeDirectionPoint[] result = new NativeLibrary.NativeDirectionPoint[points.size()];
 		for (int i = 0; i < points.size(); i++) {
 			DirectionPoint point = points.get(i);
-			result[i] = new DirectionPointSimplify(point.getLatitude(), point.getLongitude(), point.getTags());
+			result[i] = new NativeLibrary.NativeDirectionPoint(point.getLatitude(), point.getLongitude(), point.getTags());
 		}
 		return result;
 	}
 
-	public static class DirectionPointSimplify {
-		public int x31;
-		public int y31;
-		public String[][] tags;
-		public DirectionPointSimplify(double lat, double lon, Map<String, String> tags) {
-			x31 = MapUtils.get31TileNumberX(lon);
-			y31 = MapUtils.get31TileNumberY(lat);
-			this.tags = new String[tags.size()][2];
-			int i = 0;
-			for (Map.Entry<String, String> e : tags.entrySet()) {
-				this.tags[i][0] = e.getKey();
-				this.tags[i][1] = e.getValue();
-				i++;
-			}
-		}
-	}
-	
 	public static class Builder {
 		// Design time storage
 		private String defaultRouter = "";

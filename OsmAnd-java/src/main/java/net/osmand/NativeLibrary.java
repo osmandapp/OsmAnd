@@ -32,6 +32,7 @@ import net.osmand.router.RoutingContext;
 import net.osmand.router.TransportRoutingConfiguration;
 import net.osmand.util.Algorithms;
 
+import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
 public class NativeLibrary {
@@ -91,6 +92,23 @@ public class NativeLibrary {
 			if (nativeHandler != 0) {
 				deleteRouteSearchResult(nativeHandler);
 				nativeHandler = 0;
+			}
+		}
+	}
+
+	public static class NativeDirectionPoint {
+		public int x31;
+		public int y31;
+		public String[][] tags;
+		public NativeDirectionPoint(double lat, double lon, Map<String, String> tags) {
+			x31 = MapUtils.get31TileNumberX(lon);
+			y31 = MapUtils.get31TileNumberY(lat);
+			this.tags = new String[tags.size()][2];
+			int i = 0;
+			for (Map.Entry<String, String> e : tags.entrySet()) {
+				this.tags[i][0] = e.getKey();
+				this.tags[i][1] = e.getValue();
+				i++;
 			}
 		}
 	}
