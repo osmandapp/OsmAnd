@@ -550,7 +550,7 @@
     <string name="poi_query_by_name_matches_categories">Foram encontradas várias categorias de POI relacionadas.</string>
     <string name="data_to_search_poi_not_available">Descarregar dados offline para procurar POIs.</string>
     <string name="old_poi_file_should_be_deleted">O ficheiro POI \'%1$s\' é redundante e pode ser eliminado.</string>
-    <string name="update_poi_file_not_found">Não foi encontrado (e não pôde ser criado) o ficheiro local para guardar as mudanças de POI.</string>
+    <string name="update_poi_file_not_found">Não foi encontrado e não pôde ser criado o ficheiro local para guardar as alterações do POI.</string>
     <string name="button_upgrade_osmandplus">Atualizar para o OsmAnd+</string>
     <string name="map_version_changed_info">Descarregue a nova versão da aplicação para poder usar os novos ficheiros de mapas.</string>
     <string name="shared_string_rename">Mudar o nome</string>
@@ -717,7 +717,7 @@
     <string name="osmand_parking_plugin_description">Permite gravar onde o seu carro foi estacionado e quanto tempo de estacionamento resta (se existir um limite de tempo).
 \nA localização e o tempo restante ficam visíveis no painel de controlo do OsmAnd e num widget no ecrã do mapa. Pode ser adicionado opcionalmente um alarme ao calendário do Android como lembrete.</string>
     <string name="osmand_parking_plugin_name">Local de estacionamento</string>
-    <string name="context_menu_item_add_parking_point">Marcar estacionamento</string>
+    <string name="context_menu_item_add_parking_point">Estacionar aqui</string>
     <string name="context_menu_item_delete_parking_point">Eliminar um marcador de estacionamento</string>
     <string name="starting_point_too_far">Ponto de partida demasiado distante da estrada mais próxima.</string>
     <string name="shared_location">Local partilhado</string>
@@ -980,7 +980,7 @@
     <string name="keep_intermediate_points">Manter destinos intermédios</string>
     <string name="new_directions_point_dialog">Já tem destinos intermédios definidos.</string>
     <string name="context_menu_item_directions_to">Direções para</string>
-    <string name="context_menu_item_directions_from">Direções desde</string>
+    <string name="context_menu_item_directions_from">Direções daqui</string>
     <string name="route_descr_map_location">Mapa: </string>
     <string name="route_descr_lat_lon">Lat. %1$.3f, Lon. %2$.3f</string>
     <string name="route_to">Para:</string>
@@ -1356,7 +1356,7 @@
     <string name="welcome_text">OsmAnd fornece mapas de navegação globais e navegação offline.</string>
     <string name="welcome_header">Bem-vindo(a)</string>
     <string name="current_route">Rota atual</string>
-    <string name="osm_changes_added_to_local_edits">Mudanças no OSM adicionadas ao conjunto de alterações local</string>
+    <string name="osm_changes_added_to_local_edits">Alterações no OpenStreetMap adicionadas ao conjunto de alterações local</string>
     <string name="mark_to_delete">Marcar para eliminar</string>
     <string name="local_osm_changes_upload_all_confirm">Vai enviar %1$d alterações para o OpenStreetMap. Tem a certeza\?</string>
     <string name="confirmation_to_clear_history">Limpar histórico\?</string>
@@ -1687,8 +1687,8 @@
     <string name="number_of_edits">Número de edições</string>
     <string name="save_poi_without_poi_type_message">Quer mesmo guardar o POI sem especificar o tipo\?</string>
     <string name="versions_item">Versões</string>
-    <string name="feedback">Comentários</string>
-    <string name="contact_us">Contacto</string>
+    <string name="feedback">Comentar</string>
+    <string name="contact_us">Email</string>
     <string name="map_legend">Legenda do mapa</string>
     <string name="techical_articles_item">Artigos técnicos</string>
     <string name="faq_item_description">Perguntas mais frequentes</string>
@@ -1764,7 +1764,7 @@
     <string name="shared_string_remove">Remover</string>
     <string name="shared_string_read_more">Ler mais</string>
     <string name="clear_updates_proposition_message">Remover atualizações descarregadas e voltar à edição do mapa original</string>
-    <string name="add_time_span">Adicionar intervalo de tempo adicional</string>
+    <string name="add_time_span">Adicionar outro intervalo de tempo</string>
     <string name="road_blocked">Estrada bloqueada</string>
     <string name="shared_string_select">Selecionar</string>
     <string name="switch_start_finish">Inverter ponto de partida e destino</string>
@@ -2111,7 +2111,7 @@
     <string name="poi_cannot_be_found">Não foi possível encontrar o nó ou o caminho.</string>
     <string name="search_no_results_feedback">Nenhum resultado de pesquisa\? 
 \nDê-nos a sua opinião</string>
-    <string name="increase_search_radius_to">Estender o raio de pesquisa para %1$s</string>
+    <string name="increase_search_radius_to">Alargar a pesquisa para %1$s</string>
     <string name="send_search_query_description">Enviaremos a sua consulta de pesquisa: \"%1$s\" com a sua localização. 
 \n
 \n Nenhuma informação pessoal é recolhida. Os dados de pesquisa só servem para melhorar o algoritmo de pesquisa.</string>
@@ -2724,7 +2724,7 @@
     <string name="quick_action_duplicate">Nome do botão de ação rápida duplicado</string>
     <string name="quick_action_showhide_favorites_descr">Uma alternância para mostrar ou ocultar os pontos favoritos no mapa.</string>
     <string name="quick_action_showhide_poi_descr">Uma alternância para mostrar ou ocultar POIs no mapa.</string>
-    <string name="quick_action_poi_show">Mostrar %1$s</string>
+    <string name="quick_action_poi_show">Ver %1$s</string>
     <string name="quick_action_poi_hide">Esconder %1$s</string>
     <string name="quick_action_add_category">Adicionar uma categoria</string>
     <string name="quick_action_add_create_items">Criar itens</string>
@@ -2917,7 +2917,7 @@
     <string name="routeInfo_steepness_name">Inclinação</string>
     <string name="routing_attr_avoid_sett_name">Sem pedras irregulares ou paralelos</string>
     <string name="routing_attr_avoid_sett_description">Evita pedras irregulares e paralelos</string>
-    <string name="send_log">Enviar registo</string>
+    <string name="send_log">Enviar relatório</string>
     <string name="sit_on_the_stop">Embarque na paragem</string>
     <string name="files_moved">%1$d ficheiros movidos (%2$s).</string>
     <string name="files_copied">%1$d ficheiros copiados (%2$s).</string>
@@ -3720,7 +3720,7 @@
     <string name="reverse_route">Rota inversa</string>
     <string name="route_between_points_whole_track_button_desc">O trilho inteiro será recalculado a usar o perfil selecionado.</string>
     <string name="route_between_points_next_segment_button_desc">Apenas será recalculado o próximo segmento utilizando o perfil selecionado.</string>
-    <string name="route_between_points_desc">Escolha como ligar os pontos por uma linha reta ou calcule uma rota entre eles como especificado abaixo.</string>
+    <string name="route_between_points_desc">Escolha como ligar os pontos: por uma linha reta ou por uma rota calculada entre eles como especificado abaixo.</string>
     <string name="whole_track">Trilho inteiro</string>
     <string name="next_segment">Próximo segmento</string>
     <string name="route_between_points_warning_desc">Em seguida, encaixe o trilho na estrada mais próxima permitida com um dos seus perfis de navegação para usar esta opção.</string>
@@ -3752,7 +3752,7 @@
     <string name="add_segment_to_the_track">Adicionar a um ficheiro de trilho</string>
     <string name="empty_state_my_tracks_desc">Importar ou gravar ficheiros de trilho</string>
     <string name="empty_state_my_tracks">Adicionar ficheiros de trilho</string>
-    <string name="quick_action_add_gpx">Adicionar ponto de passagem de trilho</string>
+    <string name="quick_action_add_gpx">Ponto de passagem</string>
     <string name="show_gpx">Trilhos</string>
     <string name="shared_string_save_as_gpx">Guardar como novo ficheiro de trilho</string>
     <string name="save_track_to_gpx_globally">Registar o trilho num ficheiro GPX</string>
