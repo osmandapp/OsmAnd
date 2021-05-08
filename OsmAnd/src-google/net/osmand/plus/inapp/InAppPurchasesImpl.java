@@ -23,26 +23,33 @@ public class InAppPurchasesImpl extends InAppPurchases {
 			new InAppPurchaseLiveUpdatesOldMonthlyFull(),
 			new InAppPurchaseLiveUpdatesMonthlyFull(),
 			new InAppPurchaseLiveUpdates3MonthsFull(),
-			new InAppPurchaseLiveUpdatesAnnualFull()
+			new InAppPurchaseLiveUpdatesAnnualFull(),
+
+			new InAppPurchaseOsmAndProMonthlyFull(),
+			new InAppPurchaseOsmAndProAnnualFull()
 	};
 
 	private static final InAppSubscription[] LIVE_UPDATES_FREE = new InAppSubscription[]{
 			new InAppPurchaseLiveUpdatesOldMonthlyFree(),
 			new InAppPurchaseLiveUpdatesMonthlyFree(),
 			new InAppPurchaseLiveUpdates3MonthsFree(),
-			new InAppPurchaseLiveUpdatesAnnualFree()
+			new InAppPurchaseLiveUpdatesAnnualFree(),
+
+			new InAppPurchaseOsmAndProMonthlyFree(),
+			new InAppPurchaseOsmAndProAnnualFree(),
+			new InAppPurchaseMapsAnnualFree()
 	};
 
 	public InAppPurchasesImpl(OsmandApplication ctx) {
 		super(ctx);
 		fullVersion = FULL_VERSION;
 		if (Version.isFreeVersion(ctx)) {
-			liveUpdates = new LiveUpdatesInAppPurchasesFree();
+			subscriptions = new LiveUpdatesInAppPurchasesFree();
 		} else {
-			liveUpdates = new LiveUpdatesInAppPurchasesFull();
+			subscriptions = new LiveUpdatesInAppPurchasesFull();
 		}
-		for (InAppSubscription s : liveUpdates.getAllSubscriptions()) {
-			if (s instanceof InAppPurchaseLiveUpdatesMonthly) {
+		for (InAppSubscription s : subscriptions.getAllSubscriptions()) {
+			if (s instanceof InAppPurchaseMonthlySubscription) {
 				if (s.isDiscounted()) {
 					discountedMonthlyLiveUpdates = s;
 				} else {
@@ -144,16 +151,16 @@ public class InAppPurchasesImpl extends InAppPurchases {
 		}
 	}
 
-	private static class InAppPurchaseLiveUpdatesMonthlyFull extends InAppPurchaseLiveUpdatesMonthly {
+	private static class InAppPurchaseLiveUpdatesMonthlyFull extends InAppPurchaseMonthlySubscription {
 
 		private static final String SKU_LIVE_UPDATES_MONTHLY_FULL = "osm_live_subscription_monthly_full";
 
 		InAppPurchaseLiveUpdatesMonthlyFull() {
-			super(SKU_LIVE_UPDATES_MONTHLY_FULL, 1);
+			super(SKU_LIVE_UPDATES_MONTHLY_FULL, 1, true);
 		}
 
 		private InAppPurchaseLiveUpdatesMonthlyFull(@NonNull String sku) {
-			super(sku);
+			super(sku, true);
 		}
 
 		@Nullable
@@ -163,16 +170,16 @@ public class InAppPurchasesImpl extends InAppPurchases {
 		}
 	}
 
-	private static class InAppPurchaseLiveUpdatesMonthlyFree extends InAppPurchaseLiveUpdatesMonthly {
+	private static class InAppPurchaseLiveUpdatesMonthlyFree extends InAppPurchaseMonthlySubscription {
 
 		private static final String SKU_LIVE_UPDATES_MONTHLY_FREE = "osm_live_subscription_monthly_free";
 
 		InAppPurchaseLiveUpdatesMonthlyFree() {
-			super(SKU_LIVE_UPDATES_MONTHLY_FREE, 1);
+			super(SKU_LIVE_UPDATES_MONTHLY_FREE, 1, true);
 		}
 
 		private InAppPurchaseLiveUpdatesMonthlyFree(@NonNull String sku) {
-			super(sku);
+			super(sku, true);
 		}
 
 		@Nullable
@@ -182,16 +189,16 @@ public class InAppPurchasesImpl extends InAppPurchases {
 		}
 	}
 
-	private static class InAppPurchaseLiveUpdates3MonthsFull extends InAppPurchaseLiveUpdates3Months {
+	private static class InAppPurchaseLiveUpdates3MonthsFull extends InAppPurchaseQuarterlySubscription {
 
 		private static final String SKU_LIVE_UPDATES_3_MONTHS_FULL = "osm_live_subscription_3_months_full";
 
 		InAppPurchaseLiveUpdates3MonthsFull() {
-			super(SKU_LIVE_UPDATES_3_MONTHS_FULL, 1);
+			super(SKU_LIVE_UPDATES_3_MONTHS_FULL, 1, true);
 		}
 
 		private InAppPurchaseLiveUpdates3MonthsFull(@NonNull String sku) {
-			super(sku);
+			super(sku, true);
 		}
 
 		@Nullable
@@ -201,16 +208,16 @@ public class InAppPurchasesImpl extends InAppPurchases {
 		}
 	}
 
-	private static class InAppPurchaseLiveUpdates3MonthsFree extends InAppPurchaseLiveUpdates3Months {
+	private static class InAppPurchaseLiveUpdates3MonthsFree extends InAppPurchaseQuarterlySubscription {
 
 		private static final String SKU_LIVE_UPDATES_3_MONTHS_FREE = "osm_live_subscription_3_months_free";
 
 		InAppPurchaseLiveUpdates3MonthsFree() {
-			super(SKU_LIVE_UPDATES_3_MONTHS_FREE, 1);
+			super(SKU_LIVE_UPDATES_3_MONTHS_FREE, 1, true);
 		}
 
 		private InAppPurchaseLiveUpdates3MonthsFree(@NonNull String sku) {
-			super(sku);
+			super(sku, true);
 		}
 
 		@Nullable
@@ -220,16 +227,16 @@ public class InAppPurchasesImpl extends InAppPurchases {
 		}
 	}
 
-	private static class InAppPurchaseLiveUpdatesAnnualFull extends InAppPurchaseLiveUpdatesAnnual {
+	private static class InAppPurchaseLiveUpdatesAnnualFull extends InAppPurchaseAnnualSubscription {
 
 		private static final String SKU_LIVE_UPDATES_ANNUAL_FULL = "osm_live_subscription_annual_full";
 
 		InAppPurchaseLiveUpdatesAnnualFull() {
-			super(SKU_LIVE_UPDATES_ANNUAL_FULL, 1);
+			super(SKU_LIVE_UPDATES_ANNUAL_FULL, 1, true);
 		}
 
 		private InAppPurchaseLiveUpdatesAnnualFull(@NonNull String sku) {
-			super(sku);
+			super(sku, true);
 		}
 
 		@Nullable
@@ -239,16 +246,16 @@ public class InAppPurchasesImpl extends InAppPurchases {
 		}
 	}
 
-	private static class InAppPurchaseLiveUpdatesAnnualFree extends InAppPurchaseLiveUpdatesAnnual {
+	private static class InAppPurchaseLiveUpdatesAnnualFree extends InAppPurchaseAnnualSubscription {
 
 		private static final String SKU_LIVE_UPDATES_ANNUAL_FREE = "osm_live_subscription_annual_free";
 
 		InAppPurchaseLiveUpdatesAnnualFree() {
-			super(SKU_LIVE_UPDATES_ANNUAL_FREE, 1);
+			super(SKU_LIVE_UPDATES_ANNUAL_FREE, 1, true);
 		}
 
 		private InAppPurchaseLiveUpdatesAnnualFree(@NonNull String sku) {
-			super(sku);
+			super(sku, true);
 		}
 
 		@Nullable
@@ -278,7 +285,7 @@ public class InAppPurchasesImpl extends InAppPurchases {
 
 	public static class InAppPurchaseLiveUpdatesOldSubscription extends InAppSubscription {
 
-		private SkuDetails details;
+		private final SkuDetails details;
 
 		InAppPurchaseLiveUpdatesOldSubscription(@NonNull SkuDetails details) {
 			super(details.getSku(), true);
@@ -309,6 +316,101 @@ public class InAppPurchasesImpl extends InAppPurchases {
 		@Override
 		protected InAppSubscription newInstance(@NonNull String sku) {
 			return null;
+		}
+	}
+
+	private static class InAppPurchaseOsmAndProMonthlyFull extends InAppPurchaseMonthlySubscription {
+
+		private static final String SKU_OSMAND_PRO_MONTHLY_FULL = "osmand_pro_monthly_full";
+
+		InAppPurchaseOsmAndProMonthlyFull() {
+			super(SKU_OSMAND_PRO_MONTHLY_FULL, 1, false);
+		}
+
+		private InAppPurchaseOsmAndProMonthlyFull(@NonNull String sku) {
+			super(sku, false);
+		}
+
+		@Nullable
+		@Override
+		protected InAppSubscription newInstance(@NonNull String sku) {
+			return sku.startsWith(getSkuNoVersion()) ? new InAppPurchaseOsmAndProMonthlyFull(sku) : null;
+		}
+	}
+
+	private static class InAppPurchaseOsmAndProMonthlyFree extends InAppPurchaseMonthlySubscription {
+
+		private static final String SKU_OSMAND_PRO_MONTHLY_FREE = "osmand_pro_monthly_free";
+
+		InAppPurchaseOsmAndProMonthlyFree() {
+			super(SKU_OSMAND_PRO_MONTHLY_FREE, 1, false);
+		}
+
+		private InAppPurchaseOsmAndProMonthlyFree(@NonNull String sku) {
+			super(sku, false);
+		}
+
+		@Nullable
+		@Override
+		protected InAppSubscription newInstance(@NonNull String sku) {
+			return sku.startsWith(getSkuNoVersion()) ? new InAppPurchaseOsmAndProMonthlyFree(sku) : null;
+		}
+	}
+
+	private static class InAppPurchaseOsmAndProAnnualFull extends InAppPurchaseAnnualSubscription {
+
+		private static final String SKU_OSMAND_PRO_ANNUAL_FULL = "osmand_pro_annual_full";
+
+		InAppPurchaseOsmAndProAnnualFull() {
+			super(SKU_OSMAND_PRO_ANNUAL_FULL, 1, false);
+		}
+
+		private InAppPurchaseOsmAndProAnnualFull(@NonNull String sku) {
+			super(sku, false);
+		}
+
+		@Nullable
+		@Override
+		protected InAppSubscription newInstance(@NonNull String sku) {
+			return sku.startsWith(getSkuNoVersion()) ? new InAppPurchaseOsmAndProAnnualFull(sku) : null;
+		}
+	}
+
+	private static class InAppPurchaseOsmAndProAnnualFree extends InAppPurchaseAnnualSubscription {
+
+		private static final String SKU_OSMAND_PRO_ANNUAL_FREE = "osmand_pro_annual_free";
+
+		InAppPurchaseOsmAndProAnnualFree() {
+			super(SKU_OSMAND_PRO_ANNUAL_FREE, 1, false);
+		}
+
+		private InAppPurchaseOsmAndProAnnualFree(@NonNull String sku) {
+			super(sku, false);
+		}
+
+		@Nullable
+		@Override
+		protected InAppSubscription newInstance(@NonNull String sku) {
+			return sku.startsWith(getSkuNoVersion()) ? new InAppPurchaseOsmAndProAnnualFree(sku) : null;
+		}
+	}
+
+	private static class InAppPurchaseMapsAnnualFree extends InAppPurchaseAnnualSubscription {
+
+		private static final String SKU_MAPS_ANNUAL_FREE = "osmand_maps_annual_free";
+
+		InAppPurchaseMapsAnnualFree() {
+			super(SKU_MAPS_ANNUAL_FREE, 1, false);
+		}
+
+		private InAppPurchaseMapsAnnualFree(@NonNull String sku) {
+			super(sku, false);
+		}
+
+		@Nullable
+		@Override
+		protected InAppSubscription newInstance(@NonNull String sku) {
+			return sku.startsWith(getSkuNoVersion()) ? new InAppPurchaseMapsAnnualFree(sku) : null;
 		}
 	}
 

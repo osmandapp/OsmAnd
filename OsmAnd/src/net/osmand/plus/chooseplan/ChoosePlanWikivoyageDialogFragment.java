@@ -1,9 +1,9 @@
 package net.osmand.plus.chooseplan;
 
-public class ChoosePlanWikivoyageDialogFragment extends ChoosePlanOsmLiveBannerDialogFragment {
+public class ChoosePlanWikivoyageDialogFragment extends ChoosePlanSubscriptionBannerDialogFragment {
 	public static final String TAG = ChoosePlanWikivoyageDialogFragment.class.getSimpleName();
 
-	private final OsmAndFeature[] osmLiveFeatures = {
+	private final OsmAndFeature[] subscriptionFeatures = {
 			OsmAndFeature.WIKIVOYAGE_OFFLINE,
 			OsmAndFeature.WIKIPEDIA_OFFLINE,
 			OsmAndFeature.DAILY_MAP_UPDATES,
@@ -12,19 +12,19 @@ public class ChoosePlanWikivoyageDialogFragment extends ChoosePlanOsmLiveBannerD
 			OsmAndFeature.SEA_DEPTH_MAPS,
 			OsmAndFeature.UNLOCK_ALL_FEATURES,
 	};
-	private final OsmAndFeature[] selectedOsmLiveFeatures = {
+	private final OsmAndFeature[] selectedSubscriptionFeatures = {
 			OsmAndFeature.WIKIVOYAGE_OFFLINE,
 			OsmAndFeature.WIKIPEDIA_OFFLINE,
 	};
 
 	@Override
-	public OsmAndFeature[] getOsmLiveFeatures() {
-		return osmLiveFeatures;
+	public OsmAndFeature[] getSubscriptionFeatures() {
+		return subscriptionFeatures;
 	}
 
 	@Override
-	public OsmAndFeature[] getSelectedOsmLiveFeatures() {
-		return selectedOsmLiveFeatures;
+	public OsmAndFeature[] getSelectedSubscriptionFeatures() {
+		return selectedSubscriptionFeatures;
 	}
 
 }

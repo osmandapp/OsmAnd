@@ -9,8 +9,8 @@ import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 
-public class OsmLiveRestartBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
-	public static final String TAG = OsmLiveRestartBottomSheetDialogFragment.class.getSimpleName();
+public class SubscriptionRestartBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
+	public static final String TAG = SubscriptionRestartBottomSheetDialogFragment.class.getSimpleName();
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {

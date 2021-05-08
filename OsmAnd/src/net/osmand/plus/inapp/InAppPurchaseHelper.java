@@ -150,8 +150,8 @@ public abstract class InAppPurchaseHelper {
 		return purchases;
 	}
 
-	public InAppSubscriptionList getLiveUpdates() {
-		return purchases.getLiveUpdates();
+	public InAppSubscriptionList getSubscriptions() {
+		return purchases.getSubscriptions();
 	}
 
 	public InAppPurchase getFullVersion() {
@@ -188,7 +188,7 @@ public abstract class InAppPurchaseHelper {
 	@NonNull
 	public List<InAppSubscription> getEverMadeSubscriptions() {
 		List<InAppSubscription> subscriptions = new ArrayList<>();
-		for (InAppSubscription subscription : getLiveUpdates().getVisibleSubscriptions()) {
+		for (InAppSubscription subscription : getSubscriptions().getVisibleSubscriptions()) {
 			if (subscription.isPurchased() ||  subscription.getState() != SubscriptionState.UNDEFINED) {
 				subscriptions.add(subscription);
 			}
@@ -424,7 +424,7 @@ public abstract class InAppPurchaseHelper {
 							JSONObject subObj = obj.getJSONObject(skuType);
 							String sku = subObj.getString("sku");
 							if (!Algorithms.isEmpty(sku)) {
-								getLiveUpdates().upgradeSubscription(sku);
+								getSubscriptions().upgradeSubscription(sku);
 							}
 						}
 					}
@@ -493,7 +493,7 @@ public abstract class InAppPurchaseHelper {
 	protected void onPurchaseDone(PurchaseInfo info) {
 		logDebug("Purchase successful.");
 
-		InAppSubscription liveUpdatesPurchase = getLiveUpdates().getSubscriptionBySku(info.getSku());
+		InAppSubscription liveUpdatesPurchase = getSubscriptions().getSubscriptionBySku(info.getSku());
 		if (liveUpdatesPurchase != null) {
 			// bought live updates
 			logDebug("Live updates subscription purchased.");
