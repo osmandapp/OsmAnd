@@ -3929,7 +3929,7 @@
     <string name="track_has_no_speed">Sporet inneholder ikke hastighetsdata.</string>
     <string name="select_another_colorization">Velg en annen type fargelegging.</string>
     <string name="shared_strings_all_regions">Alle regioner</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Skjul grenser for naturreservat, beskyttede områder og nasjonalparker</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Skjul grenser for naturreservat, beskyttede områder og nasjonalparker.</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">Naturgrenser</string>
     <string name="hillshade_slope_contour_lines">Relieffskygge / Bakkehelling / Koter</string>
     <string name="activity_type_riding_name">Ridning</string>
@@ -3937,12 +3937,18 @@
     <string name="activity_type_running_name">Løping</string>
     <string name="activity_type_walking_name">Gåing</string>
     <string name="routing_attr_short_way_description">Optimalisert kortere rute (energisparende)</string>
-    <string name="snap_to_road_descr">Aktuelle posisjonsikon vil bli festet til gjeldende navigeringsrute</string>
+    <string name="snap_to_road_descr">Aktuelle posisjonsikon vil festes til gjeldende navigeringsrute</string>
     <string name="routing_attr_height_obstacles_description">Ruting kan unngå kraftige oppoverbakker.</string>
     <string name="trip_recording_save_and_continue">Lagre og fortsett</string>
     <string name="lost_data_warning">All ulagret data vil gå tapt.</string>
     <string name="show_start_dialog">Vis startdialog</string>
     <string name="customize_route_line">Tilpass rutelinje</string>
     <string name="shared_string_route_line">Rutelinje</string>
-    <string name="specify_color_for_map_mode">Angi farge for kartmodus: %1$s.</string>
+    <string name="specify_color_for_map_mode">Angi farge for kartmodus %1$s.</string>
+    <string name="srtm_unit_format">Enhetsvariant for koter</string>
+    <string name="shared_string_min_height">Minimum høyde</string>
+    <string name="shared_string_max_height">Maksimum høyde</string>
+    <string name="language_description">Velg foretrukket språk og taleveiledningstype.</string>
+    <string name="tts_description">Tekst-til-tale (TTS) kan uttale alle typer instruksjoner: veinavn, svingeinstruksjoner, interessepunktnavn osv.</string>
+    <string name="use_system_language">Bruk systemets språk</string>
 </resources>

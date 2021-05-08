@@ -3929,4 +3929,11 @@
     <string name="poi_plateau">Plateau</string>
     <string name="poi_club_social">Freizeitclub</string>
     <string name="poi_health_post">Gesundheitsstation</string>
+    <string name="poi_pillory">Pranger</string>
+    <string name="poi_shop_water">Trinkwasserverkauf</string>
+    <string name="poi_pest_control">Schädlingsbekämpfungsgeschäft</string>
+    <string name="poi_telecom_exchange">Vermittlungsstelle</string>
+    <string name="poi_telecom_medium_coaxial">Medium: Koaxial</string>
+    <string name="poi_telecom_medium_fibre">Medium: Glasfaser</string>
+    <string name="poi_telecom_medium_copper">Medium: Kupfer</string>
 </resources>
