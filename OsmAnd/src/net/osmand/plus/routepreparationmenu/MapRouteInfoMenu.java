@@ -1068,6 +1068,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		final OsmandApplication app = mapActivity.getMyApplication();
 		final RoutingHelper helper = app.getRoutingHelper();
 		final TargetPointsHelper targetHelper = app.getTargetPointsHelper();
+		boolean isMapsAvailable = !Algorithms.isEmpty(app.getRoutingHelper().getRoute().getDownloadMaps());
 
 		View startButton = mainView.findViewById(R.id.start_button);
 		TextViewExProgress startButtonText = (TextViewExProgress) mainView.findViewById(R.id.start_button_descr);
@@ -1084,15 +1085,14 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			if (routeCalculated && hasTransportRoutes()) {
 				color1 = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
 				AndroidUtils.setBackground(app, startButton, nightMode, R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
-				color2 = color1;
 			} else {
 				color1 = R.color.description_font_and_bottom_sheet_icons;
 				AndroidUtils.setBackground(app, startButton, nightMode, R.color.activity_background_light, R.color.activity_background_dark);
-				color2 = color1;
 			}
+			color2 = color1;
 		} else {
 			color1 = nightMode ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light;
-			if (routeCalculated || currentLocationNotFound && !helper.isRouteBeingCalculated()) {
+			if (routeCalculated || currentLocationNotFound && !helper.isRouteBeingCalculated() && !isMapsAvailable) {
 				AndroidUtils.setBackground(app, startButton, nightMode, R.color.active_color_primary_light, R.color.active_color_primary_dark);
 				color2 = color1;
 			} else {
@@ -1110,6 +1110,15 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		} else {
 			startButtonText.setText(R.string.shared_string_control_start);
 		}
+
+		if (isMapsAvailable) {
+			startButton.setClickable(false);
+			startButton.setEnabled(false);
+		} else {
+			startButton.setEnabled(true);
+			startButton.setClickable(true);
+		}
+
 		startButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -1484,20 +1493,15 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		}
 		if (title == null) {
 			textView.setVisibility(View.GONE);
-			if (activeItemDrawable != null && itemDrawable != null) {
-				imageView.setImageDrawable(active ? activeItemDrawable : itemDrawable);
-			} else {
-				imageView.setVisibility(View.GONE);
-			}
 		} else {
 			textView.setVisibility(View.VISIBLE);
 			textView.setTextColor(active ? colorActive : colorDisabled);
 			textView.setText(title);
-			if (activeItemDrawable != null && itemDrawable != null) {
-				imageView.setImageDrawable(active ? activeItemDrawable : itemDrawable);
-			} else {
-				imageView.setVisibility(View.GONE);
-			}
+		}
+		if (activeItemDrawable != null && itemDrawable != null) {
+			imageView.setImageDrawable(active ? activeItemDrawable : itemDrawable);
+		} else {
+			imageView.setVisibility(View.GONE);
 		}
 		item.setOnClickListener(listener);
 
