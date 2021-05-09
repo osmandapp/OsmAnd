@@ -169,13 +169,23 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 		Paint paint = getContext().getAttrs().paint;
 		int color = customColor != null ? customColor : paint.getColor();
 		float width = customWidth != null ? customWidth : paint.getStrokeWidth();
-		return scaleType == null
-				? new GeometrySolidWayStyle(getContext(), color, width, customPointColor)
-				: new GeometryGradientWayStyle(getContext(), color, width);
+		GeometryWayProvider provider = getLocationProvider();
+		if (provider instanceof GradientGeometryWayProvider) {
+			return new GeometryGradientWayStyle(getContext(), color, width);
+		} else if (provider != null) {
+			return new GeometrySolidWayStyle(getContext(), color, width, customPointColor);
+		} else {
+			return scaleType == null
+					? new GeometrySolidWayStyle(getContext(), color, width, customPointColor)
+					: new GeometryGradientWayStyle(getContext(), color, width);
+		}
 	}
 
 	public GeometryGradientWayStyle getGradientWayStyle() {
-		return (GeometryGradientWayStyle) getDefaultWayStyle();
+		Paint paint = getContext().getAttrs().paint;
+		int color = customColor != null ? customColor : paint.getColor();
+		float width = customWidth != null ? customWidth : paint.getStrokeWidth();
+		return new GeometryGradientWayStyle(getContext(), color, width);
 	}
 
 	@Override

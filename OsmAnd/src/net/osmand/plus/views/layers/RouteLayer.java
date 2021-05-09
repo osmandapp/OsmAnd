@@ -9,7 +9,7 @@ import android.graphics.Paint;
 import android.graphics.Paint.Cap;
 import android.graphics.Path;
 import android.graphics.PointF;
-import android.graphics.PorterDuff.Mode;
+import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -32,9 +32,9 @@ import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
+import net.osmand.plus.routing.PreviewRouteLineInfo;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteDirectionInfo;
-import net.osmand.plus.routing.PreviewRouteLineInfo;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
@@ -60,6 +60,7 @@ import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -295,10 +296,9 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 			attrsIsPaint_1 = attrs.isPaint_1;
 		}
 
-		if (updatePaints || updateRouteGradient() || routeLineColor != attrs.paint.getColor()) {
+		if (updatePaints || updateRouteGradient()) {
 			attrs.isPaint_1 = useCustomRouteColor || gradientScaleType != null ? false : attrsIsPaint_1;
-			attrs.paint3.setColor(gradientScaleType == null ? attrsTurnArrowColor : Color.WHITE);
-			paintIconAction.setColorFilter(new PorterDuffColorFilter(attrs.paint3.getColor(), Mode.MULTIPLY));
+			updateTurnArrowColor();
 			routeWayContext.updatePaints(nightMode, attrs);
 			publicTransportWayContext.updatePaints(nightMode, attrs, attrsPT, attrsW);
 		}
@@ -379,7 +379,7 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 		previewLineGeometry.setRouteStyleParams(getRouteLineColor(), getRouteLineWidth(tileBox), getDirectionArrowsColor(), gradientScaleType);
 		fillPreviewLineArrays(tx, ty, angles, distances, styles);
 		canvas.rotate(+tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
-		routeGeometry.drawRouteSegment(tileBox, canvas, tx, ty, angles, distances, 0, styles);
+		previewLineGeometry.drawRouteSegment(tileBox, canvas, tx, ty, angles, distances, 0, styles);
 		canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 
 		Matrix matrix = new Matrix();
@@ -546,6 +546,7 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 	}
 
 	public void updateRouteColors(boolean night) {
+		updateTurnArrowColor();
 		Integer color;
 		if (previewRouteLineInfo != null) {
 			color = previewRouteLineInfo.getColor(night);
@@ -620,6 +621,30 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 		}
 		cachedRouteLineWidth.put(widthKey, resultValue);
 		return resultValue;
+	}
+
+	private void updateTurnArrowColor() {
+		if (attrsTurnArrowColor == null) {
+			return;
+		}
+		Integer turnArrowColor = null;
+		List<Location> locations = helper.getRoute() == null ?
+				Collections.<Location>emptyList() : helper.getRoute().getImmutableAllLocations();
+		if (gradientScaleType == null || locations.size() < 2) {
+			turnArrowColor = attrsTurnArrowColor;
+		} else {
+			for (Location location : locations) {
+				if (location.hasAltitude()) {
+					turnArrowColor = Color.WHITE;
+					break;
+				}
+			}
+		}
+		if (turnArrowColor == null) {
+			turnArrowColor = attrsTurnArrowColor;
+		}
+		attrs.paint3.setColor(turnArrowColor);
+		paintIconAction.setColorFilter(new PorterDuffColorFilter(turnArrowColor, PorterDuff.Mode.MULTIPLY));
 	}
 
 	public void drawLocations(RotatedTileBox tb, Canvas canvas, double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude) {
