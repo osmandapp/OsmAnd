@@ -3849,4 +3849,6 @@
     <string name="tts_title">TTS</string>
     <string name="recorded_description">Indspillet stemme lyder bedre, men kan kun udtale forudindspillede sætninger: drejeinstruktioner. Kan ikke udtale vejnavne eller POI-navne.</string>
     <string name="use_system_language">Brug systemsprog</string>
+    <string name="srtm_download_list_help_message">OsmAnd leverer data om højdekurver i meter og fod. Du skal downloade filen igen for at ændre formatet.</string>
+    <string name="srtm_download_single_help_message">Vælg venligst varianten. Du skal downloade filen igen for at ændre formatet.</string>
 </resources>

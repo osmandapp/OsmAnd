@@ -68,8 +68,8 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 
 	private boolean nightMode;
 
-	private ViewGroup osmLiveCardButtonsContainer;
-	private ProgressBar osmLiveCardProgress;
+	private ViewGroup subscriptionCardButtonsContainer;
+	private ProgressBar subscriptionCardProgress;
 	private View planTypeCardButton;
 	private View planTypeCardButtonDisabled;
 
@@ -132,9 +132,9 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 		}
 	}
 
-	public boolean hasSelectedOsmLiveFeature(OsmAndFeature feature) {
-		if (getSelectedOsmLiveFeatures() != null) {
-			for (OsmAndFeature f : getSelectedOsmLiveFeatures()) {
+	public boolean hasSelectedSubscriptionFeature(OsmAndFeature feature) {
+		if (getSelectedSubscriptionFeatures() != null) {
+			for (OsmAndFeature f : getSelectedSubscriptionFeatures()) {
 				if (feature == f) {
 					return true;
 				}
@@ -219,9 +219,9 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 		TextViewEx planInfoDescription = (TextViewEx) view.findViewById(R.id.plan_info_description);
 		planInfoDescription.setText(Version.isHuawei()
 				? R.string.osm_live_payment_subscription_management_hw : R.string.osm_live_payment_subscription_management);
-		ViewGroup osmLiveCard = buildOsmLiveCard(ctx, cardsContainer);
-		if (osmLiveCard != null) {
-			cardsContainer.addView(osmLiveCard);
+		ViewGroup subscriptionsCard = buildSubscriptionsCard(ctx, cardsContainer);
+		if (subscriptionsCard != null) {
+			cardsContainer.addView(subscriptionsCard);
 		}
 		ViewGroup planTypeCard = buildPlanTypeCard(ctx, cardsContainer);
 		if (planTypeCard != null) {
@@ -258,11 +258,11 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 		return app;
 	}
 
-	public abstract OsmAndFeature[] getOsmLiveFeatures();
+	public abstract OsmAndFeature[] getSubscriptionFeatures();
 
 	public abstract OsmAndFeature[] getPlanTypeFeatures();
 
-	public abstract OsmAndFeature[] getSelectedOsmLiveFeatures();
+	public abstract OsmAndFeature[] getSelectedSubscriptionFeatures();
 
 	public abstract OsmAndFeature[] getSelectedPlanTypeFeatures();
 
@@ -298,7 +298,7 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 				.inflate(layoutId, container, false);
 	}
 
-	private ViewGroup buildOsmLiveCard(@NonNull Context ctx, ViewGroup container) {
+	private ViewGroup buildSubscriptionsCard(@NonNull Context ctx, ViewGroup container) {
 		ViewGroup cardView = (ViewGroup) inflate(R.layout.purchase_dialog_osm_live_card, container);
 		TextView headerTitle = (TextView) cardView.findViewById(R.id.header_title);
 		TextView headerDescr = (TextView) cardView.findViewById(R.id.header_descr);
@@ -306,9 +306,9 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 		headerDescr.setText(R.string.osm_live_subscription);
 		ViewGroup rowsContainer = (ViewGroup) cardView.findViewById(R.id.rows_container);
 		View featureRowDiv = null;
-		for (OsmAndFeature feature : getOsmLiveFeatures()) {
+		for (OsmAndFeature feature : getSubscriptionFeatures()) {
 			String featureName = feature.toHumanString(ctx);
-			View featureRow = inflate(hasSelectedOsmLiveFeature(feature)
+			View featureRow = inflate(hasSelectedSubscriptionFeature(feature)
 					? R.layout.purchase_dialog_card_selected_row : R.layout.purchase_dialog_card_row, cardView);
 			AppCompatImageView imgView = (AppCompatImageView) featureRow.findViewById(R.id.img);
 			AppCompatImageView imgPurchasedView = (AppCompatImageView) featureRow.findViewById(R.id.img_purchased);
@@ -332,17 +332,17 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 			featureRowDiv.setVisibility(View.GONE);
 		}
 
-		osmLiveCardButtonsContainer = (ViewGroup) cardView.findViewById(R.id.card_buttons_container);
-		osmLiveCardProgress = (ProgressBar) cardView.findViewById(R.id.card_progress);
-		if (osmLiveCardProgress != null) {
+		subscriptionCardButtonsContainer = (ViewGroup) cardView.findViewById(R.id.card_buttons_container);
+		subscriptionCardProgress = (ProgressBar) cardView.findViewById(R.id.card_progress);
+		if (subscriptionCardProgress != null) {
 			int color =  ContextCompat.getColor(ctx, nightMode ? R.color.wikivoyage_active_dark : R.color.wikivoyage_active_light);
-			osmLiveCardProgress.getIndeterminateDrawable().setColorFilter(color, android.graphics.PorterDuff.Mode.MULTIPLY);
+			subscriptionCardProgress.getIndeterminateDrawable().setColorFilter(color, android.graphics.PorterDuff.Mode.MULTIPLY);
 		}
 		return cardView;
 	}
 
 	@SuppressLint("CutPasteId")
-	private void setupOsmLiveCardButtons(boolean progress) {
+	private void setupSubscriptionCardButtons(boolean progress) {
 		final Context ctx = getContext();
 		View view = getView();
 		if (ctx == null || view == null) {
@@ -350,16 +350,16 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 		}
 		view.findViewById(R.id.button_restore).setEnabled(!progress);
 		if (progress) {
-			if (osmLiveCardButtonsContainer != null) {
-				osmLiveCardButtonsContainer.setVisibility(View.GONE);
+			if (subscriptionCardButtonsContainer != null) {
+				subscriptionCardButtonsContainer.setVisibility(View.GONE);
 			}
-			if (osmLiveCardProgress != null) {
-				osmLiveCardProgress.setVisibility(View.VISIBLE);
+			if (subscriptionCardProgress != null) {
+				subscriptionCardProgress.setVisibility(View.VISIBLE);
 			}
-		} else if (osmLiveCardButtonsContainer != null) {
-			osmLiveCardButtonsContainer.removeAllViews();
+		} else if (subscriptionCardButtonsContainer != null) {
+			subscriptionCardButtonsContainer.removeAllViews();
 			View lastBtn = null;
-			List<InAppSubscription> visibleSubscriptions = purchaseHelper.getLiveUpdates().getVisibleSubscriptions();
+			List<InAppSubscription> visibleSubscriptions = purchaseHelper.getSubscriptions().getVisibleSubscriptions();
 			InAppSubscription maxDiscountSubscription = null;
 			double maxDiscount = 0;
 			boolean anyPurchased = false;
@@ -379,7 +379,7 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 				boolean hasIntroductoryInfo = introductoryInfo != null;
 				CharSequence descriptionText = s.getDescription(ctx);
 				if (s.isPurchased()) {
-					View buttonPurchased = inflate(R.layout.purchase_dialog_card_button_active_ex, osmLiveCardButtonsContainer);
+					View buttonPurchased = inflate(R.layout.purchase_dialog_card_button_active_ex, subscriptionCardButtonsContainer);
 					TextViewEx title = (TextViewEx) buttonPurchased.findViewById(R.id.title);
 					TextViewEx description = (TextViewEx) buttonPurchased.findViewById(R.id.description);
 					TextViewEx descriptionContribute = (TextViewEx) buttonPurchased.findViewById(R.id.description_contribute);
@@ -415,9 +415,9 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 					} else {
 						buttonPurchased.setOnClickListener(null);
 					}
-					osmLiveCardButtonsContainer.addView(buttonPurchased);
+					subscriptionCardButtonsContainer.addView(buttonPurchased);
 
-					View buttonCancel = inflate(R.layout.purchase_dialog_card_button_active_ex, osmLiveCardButtonsContainer);
+					View buttonCancel = inflate(R.layout.purchase_dialog_card_button_active_ex, subscriptionCardButtonsContainer);
 					title = (TextViewEx) buttonCancel.findViewById(R.id.title);
 					description = (TextViewEx) buttonCancel.findViewById(R.id.description);
 					buttonView = buttonCancel.findViewById(R.id.button_view);
@@ -437,10 +437,10 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 					});
 					div.setVisibility(View.VISIBLE);
 					rightImage.setVisibility(View.VISIBLE);
-					osmLiveCardButtonsContainer.addView(buttonCancel);
+					subscriptionCardButtonsContainer.addView(buttonCancel);
 					lastBtn = buttonCancel;
 				} else {
-					View button = inflate(R.layout.purchase_dialog_card_button_ex, osmLiveCardButtonsContainer);
+					View button = inflate(R.layout.purchase_dialog_card_button_ex, subscriptionCardButtonsContainer);
 					TextViewEx title = (TextViewEx) button.findViewById(R.id.title);
 					TextViewEx description = (TextViewEx) button.findViewById(R.id.description);
 					TextViewEx descriptionContribute = (TextViewEx) button.findViewById(R.id.description_contribute);
@@ -505,7 +505,7 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 						});
 					}
 					div.setVisibility(View.VISIBLE);
-					osmLiveCardButtonsContainer.addView(button);
+					subscriptionCardButtonsContainer.addView(button);
 					lastBtn = button;
 				}
 			}
@@ -515,10 +515,10 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 					div.setVisibility(View.GONE);
 				}
 			}
-			if (osmLiveCardProgress != null) {
-				osmLiveCardProgress.setVisibility(View.GONE);
+			if (subscriptionCardProgress != null) {
+				subscriptionCardProgress.setVisibility(View.GONE);
 			}
-			osmLiveCardButtonsContainer.setVisibility(View.VISIBLE);
+			subscriptionCardButtonsContainer.setVisibility(View.VISIBLE);
 		}
 	}
 
@@ -655,8 +655,8 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 		}
 
 		boolean requestingInventory = purchaseHelper != null && purchaseHelper.getActiveTask() == InAppPurchaseTaskType.REQUEST_INVENTORY;
-		if (osmLiveCardButtonsContainer != null) {
-			setupOsmLiveCardButtons(requestingInventory);
+		if (subscriptionCardButtonsContainer != null) {
+			setupSubscriptionCardButtons(requestingInventory);
 		}
 		if (planTypeCardButton != null) {
 			setupPlanTypeCardButtons(requestingInventory);
@@ -676,7 +676,7 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 	@Override
 	public void onError(InAppPurchaseTaskType taskType, String error) {
 		if (taskType == InAppPurchaseTaskType.REQUEST_INVENTORY) {
-			setupOsmLiveCardButtons(false);
+			setupSubscriptionCardButtons(false);
 			setupPlanTypeCardButtons(false);
 		}
 	}
@@ -692,7 +692,7 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 	@Override
 	public void onItemPurchased(String sku, boolean active) {
 		if (purchaseHelper != null) {
-			InAppSubscription s = purchaseHelper.getLiveUpdates().getSubscriptionBySku(sku);
+			InAppSubscription s = purchaseHelper.getSubscriptions().getSubscriptionBySku(sku);
 			if (s != null && s.isDonationSupported()) {
 				showDonationSettings();
 			}
@@ -703,7 +703,7 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 	@Override
 	public void showProgress(InAppPurchaseTaskType taskType) {
 		if (taskType == InAppPurchaseTaskType.REQUEST_INVENTORY) {
-			setupOsmLiveCardButtons(true);
+			setupSubscriptionCardButtons(true);
 			setupPlanTypeCardButtons(true);
 		}
 	}
@@ -711,7 +711,7 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 	@Override
 	public void dismissProgress(InAppPurchaseTaskType taskType) {
 		if (taskType == InAppPurchaseTaskType.REQUEST_INVENTORY) {
-			setupOsmLiveCardButtons(false);
+			setupSubscriptionCardButtons(false);
 			setupPlanTypeCardButtons(false);
 		}
 	}
@@ -723,7 +723,7 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 		WIKIVOYAGE("showWikivoyageInstance", ChoosePlanWikivoyageDialogFragment.TAG, ChoosePlanWikivoyageDialogFragment.class),
 		SEA_DEPTH_MAPS("showSeaDepthMapsInstance", ChoosePlanSeaDepthMapsDialogFragment.TAG, ChoosePlanSeaDepthMapsDialogFragment.class),
 		HILLSHADE_SRTM_PLUGIN("showHillshadeSrtmPluginInstance", ChoosePlanHillshadeSrtmDialogFragment.TAG, ChoosePlanHillshadeSrtmDialogFragment.class),
-		OSM_LIVE("showOsmLiveInstance", ChoosePlanOsmLiveBannerDialogFragment.TAG, ChoosePlanOsmLiveBannerDialogFragment.class);
+		SUBSCRIPTION("showSubscriptionInstance", ChoosePlanSubscriptionBannerDialogFragment.TAG, ChoosePlanSubscriptionBannerDialogFragment.class);
 
 		private final String tag;
 		private final String errorName;

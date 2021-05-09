@@ -3920,7 +3920,7 @@
     <string name="poi_hoops">Anneaux</string>
     <string name="poi_club_social">Club social</string>
     <string name="poi_plateau">Plateau</string>
-    <string name="poi_speedway">Voie express</string>
+    <string name="poi_speedway">Speedway</string>
     <string name="poi_gladed_yes">Satisfait : oui</string>
     <string name="poi_camp_pitch">Emplacement de camping</string>
     <string name="poi_mobile_library">Arrêt pour la bibliothèque mobile</string>
@@ -3929,4 +3929,11 @@
     <string name="poi_cycle_polo">Polo-vélo</string>
     <string name="poi_bay_filter">Type de baie</string>
     <string name="poi_health_post">Poste sanitaire</string>
+    <string name="poi_pillory">Pilori</string>
+    <string name="poi_shop_water">Magasin d\'eau potable</string>
+    <string name="poi_pest_control">Magasin de produits antiparasitaires</string>
+    <string name="poi_telecom_exchange">Nœud de raccordement</string>
+    <string name="poi_telecom_medium_coaxial">Médium : coaxial</string>
+    <string name="poi_telecom_medium_fibre">Médium : fibre</string>
+    <string name="poi_telecom_medium_copper">Médium : cuivre</string>
 </resources>
