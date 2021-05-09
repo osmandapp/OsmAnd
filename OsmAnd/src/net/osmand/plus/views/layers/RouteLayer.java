@@ -99,12 +99,14 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 	private PreviewRouteLineInfo previewRouteLineInfo;
 
 	private RenderingLineAttributes attrs;
+	private RenderingLineAttributes attrsPreview;
 	private RenderingLineAttributes attrsPT;
 	private RenderingLineAttributes attrsW;
 	private Map<String, Float> cachedRouteLineWidth = new HashMap<>();
 	private boolean nightMode;
 
 	private RouteGeometryWayContext routeWayContext;
+	private RouteGeometryWayContext previewWayContext;
 	private PublicTransportGeometryWayContext publicTransportWayContext;
 	private RouteGeometryWay routeGeometry;
 	private RouteGeometryWay previewLineGeometry;
@@ -154,6 +156,9 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 		attrs.paint2.setStrokeCap(Cap.BUTT);
 		attrs.paint2.setColor(Color.BLACK);
 
+		attrsPreview = new RenderingLineAttributes("previewLine");
+		copyRenderingAttrs(attrs, attrsPreview);
+
 		attrsPT = new RenderingLineAttributes("publicTransportLine");
 		attrsPT.defaultWidth = (int) (12 * density);
 		attrsPT.defaultWidth3 = (int) (7 * density);
@@ -175,7 +180,10 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 		routeWayContext = new RouteGeometryWayContext(view.getContext(), density);
 		routeWayContext.updatePaints(nightMode, attrs);
 		routeGeometry = new RouteGeometryWay(routeWayContext);
-		previewLineGeometry = new RouteGeometryWay(routeWayContext);
+
+		previewWayContext = new RouteGeometryWayContext(view.getContext(), density);
+		previewWayContext.updatePaints(nightMode, attrsPreview);
+		previewLineGeometry = new RouteGeometryWay(previewWayContext);
 
 		publicTransportWayContext = new PublicTransportGeometryWayContext(view.getContext(), density);
 		publicTransportWayContext.updatePaints(nightMode, attrs, attrsPT, attrsW);
@@ -299,7 +307,9 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 		if (updatePaints || updateRouteGradient()) {
 			attrs.isPaint_1 = useCustomRouteColor || gradientScaleType != null ? false : attrsIsPaint_1;
 			updateTurnArrowColor();
+			copyRenderingAttrs(attrs, attrsPreview);
 			routeWayContext.updatePaints(nightMode, attrs);
+			previewWayContext.updatePaints(nightMode, attrsPreview);
 			publicTransportWayContext.updatePaints(nightMode, attrs, attrsPT, attrsW);
 		}
 	}
@@ -389,14 +399,14 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 		path.moveTo(centerX + offset, startY);
 		path.lineTo(centerX, startY);
 		path.lineTo(centerX, startY - lineLength);
-		canvas.drawPath(path, attrs.paint3);
-		drawDirectionArrow(canvas, matrix, centerX, startY - lineLength, centerX, startY);
+		canvas.drawPath(path, attrsPreview.paint3);
+		drawDirectionArrow(canvas, attrsPreview.paint3, matrix, centerX, startY - lineLength, centerX, startY);
 		path.reset();
 		path.moveTo(centerX, endY + lineLength);
 		path.lineTo(centerX, endY);
 		path.lineTo(centerX - offset, endY);
-		canvas.drawPath(path, attrs.paint3);
-		drawDirectionArrow(canvas, matrix, centerX - offset, endY, centerX, endY);
+		canvas.drawPath(path, attrsPreview.paint3);
+		drawDirectionArrow(canvas, attrsPreview.paint3, matrix, centerX - offset, endY, centerX, endY);
 
 		if (previewIcon == null) {
 			previewIcon = (LayerDrawable) AppCompatResources.getDrawable(view.getContext(), previewInfo.getIconId());
@@ -466,7 +476,7 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 					if (o == null) {
 						first = true;
 						canvas.drawPath(pth, attrs.paint3);
-						drawDirectionArrow(canvas, matrix, x, y, px, py);
+						drawDirectionArrow(canvas, attrs.paint3, matrix, x, y, px, py);
 					} else {
 						px = x;
 						py = y;
@@ -488,7 +498,7 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 		}
 	}
 
-	private void drawDirectionArrow(Canvas canvas, Matrix matrix, float x, float y, float px, float py) {
+	private void drawDirectionArrow(Canvas canvas, Paint paint3, Matrix matrix, float x, float y, float px, float py) {
 		double angleRad = Math.atan2(y - py, x - px);
 		double angle = (angleRad * 180 / Math.PI) + 90f;
 		double distSegment = Math.sqrt((y - py) * (y - py) + (x - px) * (x - px));
@@ -497,7 +507,7 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 		}
 		float pdx = x - px;
 		float pdy = y - py;
-		float scale = attrs.paint3.getStrokeWidth() / ( actionArrow.getWidth() / 2.25f);
+		float scale = paint3.getStrokeWidth() / ( actionArrow.getWidth() / 2.25f);
 		float scaledWidth = actionArrow.getWidth();
 		matrix.reset();
 		matrix.postTranslate(0, -actionArrow.getHeight() / 2f);
@@ -644,6 +654,7 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 			turnArrowColor = attrsTurnArrowColor;
 		}
 		attrs.paint3.setColor(turnArrowColor);
+		attrsPreview.paint3.setColor(turnArrowColor);
 		paintIconAction.setColorFilter(new PorterDuffColorFilter(turnArrowColor, PorterDuff.Mode.MULTIPLY));
 	}
 
@@ -851,6 +862,27 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 		p.setLatitude(lp.getLatitude() + part * (l.getLatitude() - lp.getLatitude()));
 		p.setLongitude(lp.getLongitude() + part * (l.getLongitude() - lp.getLongitude()));
 		return p;
+	}
+
+	private void copyRenderingAttrs(RenderingLineAttributes from, RenderingLineAttributes to) {
+		to.paint = new Paint(from.paint);
+		to.customColorPaint = new Paint(from.customColorPaint);
+		to.customColor = from.customColor;
+		to.customWidth = from.customWidth;
+		to.defaultWidth = from.defaultWidth;
+		to.defaultColor = from.defaultColor;
+		to.isPaint2 = from.isPaint2;
+		to.paint2 = new Paint(from.paint2);
+		to.defaultWidth2 = from.defaultWidth2;
+		to.isPaint3 = from.isPaint3;
+		to.paint3 = new Paint(from.paint3);
+		to.defaultWidth3 = from.defaultWidth3;
+		to.shadowPaint = new Paint(from.shadowPaint);
+		to.isShadowPaint = from.isShadowPaint;
+		to.defaultShadowWidthExtent = from.defaultShadowWidthExtent;
+		to.paint_1 = new Paint(from.paint_1);
+		to.isPaint_1 = from.isPaint_1;
+		to.defaultWidth_1 = from.defaultWidth_1;
 	}
 
 	@Override
