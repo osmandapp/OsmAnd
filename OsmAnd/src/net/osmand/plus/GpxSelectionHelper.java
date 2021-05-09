@@ -735,10 +735,8 @@ public class GpxSelectionHelper {
 			sf.splitProcessed = false;
 		}
 		if (show && selectedByUser && addToHistory) {
-			String path = gpx.path;
-			String rootGpxDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR).getAbsolutePath() + '/';
-			String fileName = path.replace(rootGpxDir, "");
-			GPXInfo gpxInfo = GpxUiHelper.getGpxInfoByFileName(app, fileName);
+			String relativePath = GpxUiHelper.getGpxFileRelativePath(app, gpx.path);
+			GPXInfo gpxInfo = GpxUiHelper.getGpxInfoByFileName(app, relativePath);
 			if (gpxInfo != null) {
 				SearchHistoryHelper.getInstance(app).addNewItemToHistory(gpxInfo);
 			}
