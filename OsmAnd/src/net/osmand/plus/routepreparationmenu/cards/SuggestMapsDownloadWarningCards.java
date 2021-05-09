@@ -112,14 +112,14 @@ public class SuggestMapsDownloadWarningCards extends WarningCard {
 				&& !app.getDownloadThread().getIndexes().isDownloadedFromInternet
 				&& !app.getDownloadThread().getIndexes().downloadFromInternetFailed;
 
-		List<WorldRegion> suggestedDownloadsMaps = mapActivity.getRoutingHelper().getRoute().getDownloadMaps();
-		List<DownloadItem> suggestedMaps = new ArrayList<>();
+		List<WorldRegion> suggestedMaps = mapActivity.getRoutingHelper().getRoute().getDownloadMaps();
+		List<DownloadItem> suggestedDownloadsMaps = new ArrayList<>();
 		if (!downloadIndexes) {
-			for (WorldRegion suggestedDownloadMap : suggestedDownloadsMaps) {
-				suggestedMaps.addAll(app.getDownloadThread().getIndexes().getDownloadItems(suggestedDownloadMap));
+			for (WorldRegion suggestedDownloadMap : suggestedMaps) {
+				suggestedDownloadsMaps.addAll(app.getDownloadThread().getIndexes().getDownloadItems(suggestedDownloadMap));
 			}
 		}
-		return suggestedMaps;
+		return suggestedDownloadsMaps;
 	}
 
 	private SelectionBottomSheet.SelectableItem createSelectableItem(DownloadItem item) {
@@ -131,7 +131,7 @@ public class SuggestMapsDownloadWarningCards extends WarningCard {
 
 	private void updateSelectableItem(SelectionBottomSheet.SelectableItem selectableItem,
 									  DownloadItem downloadItem) {
-		selectableItem.setTitle(downloadItem.getVisibleName(app, app.getRegions(), true, true));
+		selectableItem.setTitle(downloadItem.getVisibleMapsName(app, app.getRegions()));
 		DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(app);
 		String size = downloadItem.getSizeDescription(app);
 		String addDescr = downloadItem.getAdditionalDescription(app);

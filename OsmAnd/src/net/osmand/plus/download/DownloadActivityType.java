@@ -345,7 +345,7 @@ public class DownloadActivityType {
 		return "";
 	}
 
-	public String getVisibleName(DownloadItem downloadItem, Context ctx, OsmandRegions osmandRegions, boolean includingParent, boolean parentFirst) {
+	public String getVisibleName(DownloadItem downloadItem, Context ctx, OsmandRegions osmandRegions, boolean includingParent) {
 		if (this == VOICE_FILE) {
 			String fileName = downloadItem.getFileName();
 			if (fileName.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)) {
@@ -376,7 +376,7 @@ public class DownloadActivityType {
 		if (basename.contains("addresses-nationwide")) {
 			final int ind = basename.indexOf("addresses-nationwide");
 			String downloadName = basename.substring(0, ind - 1) + basename.substring(ind + "addresses-nationwide".length());
-			return osmandRegions.getLocaleName(downloadName, includingParent, parentFirst) +
+			return osmandRegions.getLocaleName(downloadName, includingParent) +
 					" " + ctx.getString(R.string.index_item_nation_addresses);
 		} else if (basename.startsWith("Depth_")) {
 			final int extInd = basename.indexOf("osmand_ext");
@@ -385,7 +385,17 @@ public class DownloadActivityType {
 			return ctx.getString(R.string.download_depth_countours) + " " + Algorithms.capitalizeFirstLetter(downloadName);
 		}
 
-		return osmandRegions.getLocaleName(basename, includingParent, parentFirst);
+		return osmandRegions.getLocaleName(basename, includingParent);
+	}
+
+	public String getSuggestedMapsName (DownloadItem downloadItem, Context ctx, OsmandRegions osmandRegions) {
+		final String basename = getBasename(downloadItem);
+		final String lc = basename.toLowerCase();
+		String std = FileNameTranslationHelper.getStandardMapName(ctx, lc);
+		if (std != null) {
+			return std;
+		}
+		return osmandRegions.getSuggestedDownloadsMapsName(basename);
 	}
 
 	public String getTargetFileName(IndexItem item) {
