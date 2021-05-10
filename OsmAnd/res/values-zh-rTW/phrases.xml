@@ -3936,4 +3936,10 @@
     <string name="poi_telecom_medium_fibre">媒介：光纖</string>
     <string name="poi_telecom_medium_copper">媒介：銅纜</string>
     <string name="poi_telecom_exchange">電信交換</string>
+    <string name="poi_windsock">風向袋</string>
+    <string name="poi_refugee_site">難民營</string>
+    <string name="poi_trolley_bay">手推車停放區</string>
+    <string name="poi_planetarium">天文館</string>
+    <string name="poi_service_vehicle_rental_yes">租車</string>
+    <string name="poi_service_vehicle_inspection_yes">車輛檢查</string>
 </resources>

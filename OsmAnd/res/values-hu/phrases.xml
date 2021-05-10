@@ -3934,4 +3934,7 @@
     <string name="poi_telecom_medium_fibre">Helyi hurok: üvegszál</string>
     <string name="poi_telecom_medium_copper">Helyi hurok: rézvezeték</string>
     <string name="poi_pillory">Pellengér</string>
+    <string name="poi_windsock">Szélzsák</string>
+    <string name="poi_planetarium">Planetárium</string>
+    <string name="poi_service_vehicle_rental_yes">Autókölcsönzés</string>
 </resources>

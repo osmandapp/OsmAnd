@@ -3936,4 +3936,10 @@
     <string name="poi_telecom_medium_fibre">kaabeldus: valguskaabel</string>
     <string name="poi_telecom_medium_copper">kaabeldus: vask</string>
     <string name="poi_telecom_exchange">telefonikeskjaam</string>
+    <string name="poi_trolley_bay">poekärude parkla</string>
+    <string name="poi_windsock">tuulesokk</string>
+    <string name="poi_refugee_site">põgenikelaager</string>
+    <string name="poi_planetarium">planetaarium</string>
+    <string name="poi_service_vehicle_rental_yes">autorent</string>
+    <string name="poi_service_vehicle_inspection_yes">autode tehnoülevaatus</string>
 </resources>
