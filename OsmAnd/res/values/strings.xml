@@ -12,6 +12,9 @@
 
 -->
 
+    <string name="routing_attr_avoid_low_emission_zone_name">Avoid low emission zones</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">Avoid low emission zones</string>
+    <string name="poi_routes">Routes</string>
     <string name="shared_string_itinerary">Itinerary</string>
     <string name="use_system_language">Use system language</string>
     <string name="recorded_description">Recorded voice sounds better, but can pronounce only prerecorded phrases: turn instructions. Can\'t announce street names or POI names.</string>
