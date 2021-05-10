@@ -3959,4 +3959,7 @@
     <string name="poi_operator_type_religious">Art des Betreibers: Religiös</string>
     <string name="poi_operator_type_private">Art des Betreibers: Privat</string>
     <string name="poi_operator_type_public">Art des Betreibers: Öffentlich</string>
+    <string name="poi_fruit">Frucht</string>
+    <string name="poi_shrub">Strauch</string>
+    <string name="poi_dune">Düne</string>
 </resources>
