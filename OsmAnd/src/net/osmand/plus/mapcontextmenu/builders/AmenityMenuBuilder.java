@@ -28,7 +28,6 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.helpers.enums.MetricsConstants;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
@@ -83,11 +82,11 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	}
 
 	@Override
-	protected void buildNearestWikiRow(View view) {
+	protected void buildNearestWikiRow(ViewGroup view) {
 	}
 
 	@Override
-	protected void buildNearestPoiRow(View view) {
+	protected void buildNearestPoiRow(ViewGroup view) {
 	}
 
 	private void buildRow(View view, int iconId, String text, String textPrefix, String socialMediaUrl,
@@ -418,7 +417,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			} else if (Amenity.OPENING_HOURS.equals(key)) {
 				iconId = R.drawable.ic_action_time;
 				collapsableView = getCollapsableTextView(view.getContext(), true,
-						amenity.getAdditionalInfo(key).replace("; ", "\n").replace(",", ", "));
+					amenity.getAdditionalInfo(key).replace("; ", "\n").replace(",", ", "));
 				collapsable = true;
 				OpeningHoursParser.OpeningHours rs = OpeningHoursParser.parseOpenedHours(amenity.getAdditionalInfo(key));
 				if (rs != null) {
@@ -460,7 +459,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				vl = sb.toString();
 			} else if (key.contains(Amenity.ROUTE)
 					|| key.equals(Amenity.WIKIDATA)
-					|| key.equals(Amenity.WIKIMEDIA_COMMONS)) {
+					|| key.equals(Amenity.WIKIMEDIA_COMMONS))  {
 				continue;
 			} else {
 				if (key.contains(Amenity.DESCRIPTION)) {
@@ -648,28 +647,10 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			descriptions.remove(descInPrefLang);
 			descriptions.add(0, descInPrefLang);
 		}
-
 		for (AmenityInfoRow info : descriptions) {
 			buildAmenityRow(view, info);
 		}
-
-		if (processNearestWiki() && nearestWiki.size() > 0) {
-			AmenityInfoRow wikiInfo = new AmenityInfoRow(
-					NEAREST_WIKI_KEY, R.drawable.ic_plugin_wikipedia, null,
-					app.getString(R.string.wiki_around) + " (" + nearestWiki.size() + ")",
-					null, true, getCollapsableView(view.getContext(), true, nearestWiki, NEAREST_WIKI_KEY),
-					0, false, false, false, 1000, null, false, false, false, 0);
-			buildAmenityRow(view, wikiInfo);
-		}
-
-		if (processNearestPoi()) {
-			AmenityInfoRow poiInfo = new AmenityInfoRow(
-					NEAREST_POI_KEY, AmenityMenuController.getRightIconId(amenity), null,
-					app.getString(R.string.speak_poi) + " \"" + AmenityMenuController.getTypeStr(amenity) + "\" (" + nearestPoi.size() + ")",
-					null, true, getCollapsableView(view.getContext(), true, nearestPoi, NEAREST_POI_KEY),
-					0, false, false, false, 1000, null, false, false, false, 0);
-			buildAmenityRow(view, poiInfo);
-		}
+		buildNearestRows((ViewGroup) view);
 
 		if (osmEditingEnabled && amenity.getId() != null
 				&& amenity.getId() > 0 &&
@@ -683,6 +664,57 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			buildRow(view, R.drawable.ic_action_openstreetmap_logo, null, link + (amenity.getId() >> 1),
 					0, false, null, true, 0, true, null, false);
 		}
+	}
+
+	private void buildNearestRows(ViewGroup viewGroup) {
+		buildNearestWiki(viewGroup);
+		buildNearestPoi(viewGroup);
+	}
+
+	private void buildNearestWiki(final ViewGroup viewGroup) {
+		final int position = viewGroup.getChildCount();
+		buildNearestWikiRow(new SearchAmenitiesListener() {
+			@Override
+			public void onFinish(List<Amenity> amenities) {
+				if (Algorithms.isEmpty(amenities)) {
+					return;
+				}
+				Context context = viewGroup.getContext();
+				View amenitiesRow = createRowContainer(context, NEAREST_WIKI_KEY);
+				AmenityInfoRow wikiInfo = new AmenityInfoRow(
+						NEAREST_WIKI_KEY, R.drawable.ic_plugin_wikipedia, null,
+						app.getString(R.string.wiki_around) + " (" + amenities.size() + ")",
+						null, true, getCollapsableView(context, true, amenities, NEAREST_WIKI_KEY),
+						0, false, false, false, 1000, null, false, false, false, 0);
+				buildAmenityRow(amenitiesRow, wikiInfo);
+				viewGroup.addView(amenitiesRow, position);
+			}
+		});
+	}
+
+	private void buildNearestPoi(final ViewGroup viewGroup) {
+		final int position = viewGroup.getChildCount();
+		buildNearestPoiRow(new SearchAmenitiesListener() {
+			@Override
+			public void onFinish(List<Amenity> amenities) {
+				Context context = viewGroup.getContext();
+				View amenitiesRow = createRowContainer(context, NEAREST_POI_KEY);
+				AmenityInfoRow poiInfo = new AmenityInfoRow(
+						NEAREST_POI_KEY, AmenityMenuController.getRightIconId(amenity), null,
+						app.getString(R.string.speak_poi) + " \"" + AmenityMenuController.getTypeStr(amenity) + "\" (" + amenities.size() + ")",
+						null, true, getCollapsableView(context, true, amenities, NEAREST_POI_KEY),
+						0, false, false, false, 1000, null, false, false, false, 0);
+				buildAmenityRow(amenitiesRow, poiInfo);
+
+				View wikiRow = viewGroup.findViewWithTag(NEAREST_WIKI_KEY);
+				if (wikiRow != null) {
+					int index = viewGroup.indexOfChild(wikiRow);
+					viewGroup.addView(amenitiesRow, index + 1);
+				} else {
+					viewGroup.addView(amenitiesRow, position);
+				}
+			}
+		});
 	}
 
 	private String getFormattedInt(String value) {
@@ -726,35 +758,35 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				}
 				break;
 			case "distance":
-				if (Algorithms.isFloat(value)) {
+				if(Algorithms.isFloat(value)) {
 					float valueAsFloatInMeters = Float.parseFloat(value) * 1000;
 					if (metricSystem == MetricsConstants.KILOMETERS_AND_METERS) {
 						formattedValue =
-								value + " " + mapActivity.getResources().getString(R.string.km);
+							value + " " + mapActivity.getResources().getString(R.string.km);
 					} else {
 						formattedValue = OsmAndFormatter.getFormattedDistance(valueAsFloatInMeters,
-								mapActivity.getMyApplication());
+							mapActivity.getMyApplication());
 					}
 					formattedPrefix = formatPrefix(prefix,
-							mapActivity.getResources().getString(R.string.distance));
+						mapActivity.getResources().getString(R.string.distance));
 					break;
 				}
 			case "capacity":
 				if (amenity.getSubType().equals("water_tower") || amenity.getSubType().equals("storage_tank")) {
-					if (Algorithms.isFloat(value)) {
+					if(Algorithms.isFloat(value)) {
 						formattedValue = value + " " + mapActivity.getResources().getString(R.string.cubic_m);
 					}
 				}
 				break;
 			case "maxweight":
-				if (Algorithms.isInt(value)) {
+				if(Algorithms.isInt(value)) {
 					formattedValue = value + " " + mapActivity.getResources().getString(R.string.metric_ton);
 				}
 				break;
 			case "students":
 			case "spots":
 			case "seats":
-				if (Algorithms.isInt(value)) {
+				if(Algorithms.isInt(value)) {
 					formattedPrefix = formatPrefix(prefix, mapActivity.getResources().getString(R.string.shared_string_capacity));
 				}
 				break;
@@ -765,7 +797,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	}
 
 	private String formatPrefix(String prefix, String units) {
-		return (!prefix.isEmpty()) ? (prefix + ", " + units) : units;
+		return (!prefix.isEmpty()) ? (prefix + ", " + units): units;
 	}
 
 	public void buildAmenityRow(View view, AmenityInfoRow info) {

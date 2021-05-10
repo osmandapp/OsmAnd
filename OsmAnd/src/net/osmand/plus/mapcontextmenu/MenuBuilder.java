@@ -85,7 +85,6 @@ import org.json.JSONObject;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -100,13 +99,14 @@ public class MenuBuilder {
 	private static final int PICK_IMAGE = 1231;
 	public static final float SHADOW_HEIGHT_TOP_DP = 17f;
 	public static final int TITLE_LIMIT = 60;
-	protected static final String[] arrowChars = new String[]{"=>", " - "};
+	protected static final String[] arrowChars = new String[] {"=>", " - "};
 	protected final String NEAREST_WIKI_KEY = "nearest_wiki_key";
 	protected final String NEAREST_POI_KEY = "nearest_poi_key";
-	private static final int POI_COUNT = 10;
-	private static final int MINIMUM_RADIUS = 100;
-	private static final int MAXIMUM_RADIUS = 1000;
-	private static final int FACTOR = 2;
+
+	private static final int NEARBY_MAX_POI_COUNT = 10;
+	private static final int NEARBY_POI_MIN_RADIUS = 250;
+	private static final int NEARBY_POI_MAX_RADIUS = 1000;
+	private static final int NEARBY_POI_SEARCH_FACTOR = 2;
 
 	protected MapActivity mapActivity;
 	protected MapContextMenu mapContextMenu;
@@ -122,8 +122,7 @@ public class MenuBuilder {
 	private boolean showNearestWiki = false;
 	private boolean showNearestPoi = false;
 	private boolean showOnlinePhotos = true;
-	protected List<Amenity> nearestWiki = new ArrayList<>();
-	protected List<Amenity> nearestPoi = new ArrayList<>();
+
 	private List<OsmandPlugin> menuPlugins = new ArrayList<>();
 	@Nullable
 	private CardsRowBuilder onlinePhotoCardsRow;
@@ -277,7 +276,7 @@ public class MenuBuilder {
 		this.light = light;
 	}
 
-	public void build(View view) {
+	public void build(ViewGroup view) {
 		firstRow = true;
 		hidden = false;
 		buildTopInternal(view);
@@ -364,20 +363,53 @@ public class MenuBuilder {
 		}
 	}
 
-	protected void buildNearestWikiRow(View view) {
-		buildNearestRow(view, nearestWiki, processNearestWiki(),
-				R.drawable.ic_action_wikipedia, app.getString(R.string.wiki_around), NEAREST_WIKI_KEY);
+	protected void buildNearestWikiRow(final ViewGroup viewGroup) {
+		final int position = viewGroup.getChildCount();
+		buildNearestWikiRow(new SearchAmenitiesListener() {
+			@Override
+			public void onFinish(List<Amenity> amenities) {
+				if (!Algorithms.isEmpty(amenities)) {
+					View amenitiesRow = createRowContainer(viewGroup.getContext(), NEAREST_WIKI_KEY);
+
+					buildNearestRow(amenitiesRow, amenities, R.drawable.ic_action_wikipedia, app.getString(R.string.wiki_around), NEAREST_WIKI_KEY);
+					viewGroup.addView(amenitiesRow, position);
+				}
+			}
+		});
 	}
 
-	protected void buildNearestPoiRow(View view) {
+	protected void buildNearestPoiRow(final ViewGroup viewGroup) {
 		if (amenity != null) {
-			buildNearestRow(view, nearestPoi, processNearestPoi(), AmenityMenuController.getRightIconId(amenity),
-					app.getString(R.string.speak_poi) + " \"" + AmenityMenuController.getTypeStr(amenity) + "\" (" + nearestPoi.size() + ")", NEAREST_POI_KEY);
+			final int position = viewGroup.getChildCount();
+			buildNearestPoiRow(new SearchAmenitiesListener() {
+				@Override
+				public void onFinish(List<Amenity> amenities) {
+					View amenitiesRow = createRowContainer(viewGroup.getContext(), NEAREST_POI_KEY);
+					buildNearestRow(amenitiesRow, amenities,  AmenityMenuController.getRightIconId(amenity),
+							app.getString(R.string.speak_poi) + " \"" + AmenityMenuController.getTypeStr(amenity) + "\" (" + amenities.size() + ")", NEAREST_POI_KEY);
+
+					View wikiRow = viewGroup.findViewWithTag(NEAREST_WIKI_KEY);
+					if (wikiRow != null) {
+						int index = viewGroup.indexOfChild(wikiRow);
+						viewGroup.addView(amenitiesRow, index + 1);
+					} else {
+						viewGroup.addView(amenitiesRow, position);
+					}
+				}
+			});
 		}
 	}
 
-	protected void buildNearestRow(View view, List<Amenity> nearestAmenities, boolean process, int iconId, String text, String amenityKey) {
-		if (process && nearestAmenities.size() > 0) {
+	protected View createRowContainer(Context context, String tag) {
+		LinearLayout view = new LinearLayout(context);
+		view.setTag(tag);
+		view.setOrientation(LinearLayout.VERTICAL);
+		view.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+		return view;
+	}
+
+	protected void buildNearestRow(View view, List<Amenity> nearestAmenities, int iconId, String text, String amenityKey) {
+		if (nearestAmenities.size() > 0) {
 			buildRow(view, iconId, null, text + " (" + nearestAmenities.size() + ")", 0, true,
 					getCollapsableView(view.getContext(), true, nearestAmenities, amenityKey), false, 0, false, null, false);
 		}
@@ -579,29 +611,29 @@ public class MenuBuilder {
 	}
 
 	public View buildRow(View view, int iconId, String buttonText, String text, int textColor,
-						 boolean collapsable, final CollapsableView collapsableView,
-						 boolean needLinks, int textLinesLimit, boolean isUrl, OnClickListener onClickListener, boolean matchWidthDivider) {
+	                     boolean collapsable, final CollapsableView collapsableView,
+	                     boolean needLinks, int textLinesLimit, boolean isUrl, OnClickListener onClickListener, boolean matchWidthDivider) {
 		return buildRow(view, iconId == 0 ? null : getRowIcon(iconId), buttonText, text, textColor, null, collapsable, collapsableView,
 				needLinks, textLinesLimit, isUrl, onClickListener, matchWidthDivider);
 	}
 
 	public View buildRow(final View view, Drawable icon, final String buttonText, final String text, int textColor, String secondaryText,
-						 boolean collapsable, final CollapsableView collapsableView, boolean needLinks,
-						 int textLinesLimit, boolean isUrl, OnClickListener onClickListener, boolean matchWidthDivider) {
+	                     boolean collapsable, final CollapsableView collapsableView, boolean needLinks,
+	                     int textLinesLimit, boolean isUrl, OnClickListener onClickListener, boolean matchWidthDivider) {
 		return buildRow(view, icon, buttonText, null, text, textColor, secondaryText, collapsable, collapsableView,
 				needLinks, textLinesLimit, isUrl, false, false, onClickListener, matchWidthDivider);
 	}
 
 	public View buildRow(View view, int iconId, String buttonText, String text, int textColor,
-						 boolean collapsable, final CollapsableView collapsableView,
-						 boolean needLinks, int textLinesLimit, boolean isUrl, boolean isNumber, boolean isEmail, OnClickListener onClickListener, boolean matchWidthDivider) {
+	                     boolean collapsable, final CollapsableView collapsableView,
+	                     boolean needLinks, int textLinesLimit, boolean isUrl, boolean isNumber, boolean isEmail, OnClickListener onClickListener, boolean matchWidthDivider) {
 		return buildRow(view, iconId == 0 ? null : getRowIcon(iconId), buttonText, null, text, textColor, null, collapsable, collapsableView,
 				needLinks, textLinesLimit, isUrl, isNumber, isEmail, onClickListener, matchWidthDivider);
 	}
 
 	public View buildRow(final View view, Drawable icon, final String buttonText, final String textPrefix, final String text,
-						 int textColor, String secondaryText, boolean collapsable, final CollapsableView collapsableView, boolean needLinks,
-						 int textLinesLimit, boolean isUrl, boolean isNumber, boolean isEmail, OnClickListener onClickListener, boolean matchWidthDivider) {
+	                     int textColor, String secondaryText, boolean collapsable, final CollapsableView collapsableView, boolean needLinks,
+	                     int textLinesLimit, boolean isUrl, boolean isNumber, boolean isEmail, OnClickListener onClickListener, boolean matchWidthDivider) {
 
 		if (!isFirstRow()) {
 			buildRowDivider(view);
@@ -1055,8 +1087,8 @@ public class MenuBuilder {
 	}
 
 	public void addPlainMenuItem(int iconId, String text, boolean needLinks, boolean isUrl,
-								 boolean collapsable, CollapsableView collapsableView,
-								 OnClickListener onClickListener) {
+	                             boolean collapsable, CollapsableView collapsableView,
+	                             OnClickListener onClickListener) {
 		plainMenuItems.add(new PlainMenuItem(iconId, null, text, needLinks, isUrl, collapsable, collapsableView, onClickListener));
 	}
 
@@ -1244,6 +1276,7 @@ public class MenuBuilder {
 			float dist = (float) MapUtils.getDistance(latLon, poi.getLocation());
 			name += " (" + OsmAndFormatter.getFormattedDistance(dist, app) + ")";
 			button.setText(name);
+
 			button.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -1253,15 +1286,27 @@ public class MenuBuilder {
 				}
 			});
 			view.addView(button);
-
 		}
-
 		PoiUIFilter filter = getPoiFilterForType(nearestPoiType);
-		if (filter != null && nearestAmenities.size() == POI_COUNT) {
-			view.addView(createShowOnMap(context, filter));
+		if (filter != null) {
+			if (nearestAmenities.size() >= NEARBY_MAX_POI_COUNT) {
+				view.addView(createShowOnMap(context, filter));
+			}
+			view.addView(createSearchMoreButton(context, filter));
 		}
-		view.addView(createSearchMoreButton(context, filter));
 		return new CollapsableView(view, this, collapsed);
+	}
+
+	private View createSearchMoreButton(Context context, final PoiUIFilter filter) {
+		TextViewEx buttonShowAll = buildButtonInCollapsableView(context, false, false);
+		buttonShowAll.setText(app.getString(R.string.search_more));
+		buttonShowAll.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mapActivity.showQuickSearch(filter);
+			}
+		});
+		return buttonShowAll;
 	}
 
 	private View createShowOnMap(Context context, final PoiUIFilter filter) {
@@ -1300,18 +1345,6 @@ public class MenuBuilder {
 				mapContextMenu.hideMenues();
 				mapActivity.showTopToolbar(controller);
 				mapActivity.refreshMap();
-			}
-		});
-		return buttonShowAll;
-	}
-
-	private View createSearchMoreButton(Context context, final PoiUIFilter filter) {
-		TextViewEx buttonShowAll = buildButtonInCollapsableView(context, false, false);
-		buttonShowAll.setText(app.getString(R.string.search_more));
-		buttonShowAll.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				mapActivity.showQuickSearch(filter);
 			}
 		});
 		return buttonShowAll;
@@ -1367,26 +1400,22 @@ public class MenuBuilder {
 		return button;
 	}
 
-	protected boolean processNearestWiki() {
+	protected void buildNearestWikiRow(SearchAmenitiesListener listener) {
 		if (showNearestWiki && latLon != null && amenity != null) {
 			PoiUIFilter filter = app.getPoiFilters().getTopWikiPoiFilter();
 			if (filter != null) {
-				nearestWiki = getSortedAmenities(filter, latLon);
-				return true;
+				searchSortedAmenities(filter, latLon, listener);
 			}
 		}
-		return false;
 	}
 
-	protected boolean processNearestPoi() {
+	protected void buildNearestPoiRow(SearchAmenitiesListener listener) {
 		if (showNearestPoi && latLon != null && amenity != null) {
 			PoiUIFilter filter = getPoiFilterForAmenity(amenity);
 			if (filter != null) {
-				nearestPoi = getSortedAmenities(filter, latLon);
-				return true;
+				searchSortedAmenities(filter, latLon, listener);
 			}
 		}
-		return false;
 	}
 
 	private PoiUIFilter getPoiFilterForType(String nearestPoiType) {
@@ -1409,33 +1438,51 @@ public class MenuBuilder {
 		return null;
 	}
 
-	private List<Amenity> getSortedAmenities(PoiUIFilter filter, final LatLon latLon) {
-		QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), MINIMUM_RADIUS);
-
-		List<Amenity> nearestAmenities = getAmenities(rect, filter);
-
-		for (int radius = MINIMUM_RADIUS; nearestAmenities.size() - 1 <= POI_COUNT && radius <= MAXIMUM_RADIUS; radius *= FACTOR) {
-			rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), radius);
-			nearestAmenities = getAmenities(rect, filter);
-		}
-		nearestAmenities.remove(amenity);
-
-		Collections.sort(nearestAmenities, new Comparator<Amenity>() {
-
-			@Override
-			public int compare(Amenity o1, Amenity o2) {
-				double d1 = MapUtils.getDistance(latLon, o1.getLocation());
-				double d2 = MapUtils.getDistance(latLon, o2.getLocation());
-				return Double.compare(d1, d2);
-			}
-		});
-
-		return nearestAmenities.subList(0, Math.min(POI_COUNT, nearestAmenities.size()));
+	private void searchSortedAmenities(PoiUIFilter filter, LatLon latLon, SearchAmenitiesListener listener) {
+		execute(new SearchAmenitiesTask(filter, latLon, listener));
 	}
 
-	private List<Amenity> getAmenities(QuadRect rect, PoiUIFilter filter) {
-		return filter.searchAmenities(rect.top, rect.left,
-				rect.bottom, rect.right, -1, null);
+	private class SearchAmenitiesTask extends AsyncTask<Void, Void, List<Amenity>> {
+
+		private final LatLon latLon;
+		private final PoiUIFilter filter;
+		private final SearchAmenitiesListener listener;
+
+		private SearchAmenitiesTask(PoiUIFilter filter, LatLon latLon, SearchAmenitiesListener listener) {
+			this.filter = filter;
+			this.latLon = latLon;
+			this.listener = listener;
+		}
+
+		@Override
+		protected List<Amenity> doInBackground(Void... params) {
+			int radius = NEARBY_POI_MIN_RADIUS;
+			List<Amenity> amenities = Collections.emptyList();
+			while (amenities.size() < NEARBY_MAX_POI_COUNT && radius <= NEARBY_POI_MAX_RADIUS) {
+				QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), radius);
+				amenities = getAmenities(rect, filter);
+				amenities.remove(amenity);
+				radius *= NEARBY_POI_SEARCH_FACTOR;
+			}
+			MapUtils.sortListOfMapObject(amenities, latLon.getLatitude(), latLon.getLongitude());
+			return amenities.subList(0, Math.min(NEARBY_MAX_POI_COUNT, amenities.size()));
+		}
+
+		@Override
+		protected void onPostExecute(List<Amenity> amenities) {
+			if (listener != null) {
+				listener.onFinish(amenities);
+			}
+		}
+
+		private List<Amenity> getAmenities(QuadRect rect, PoiUIFilter filter) {
+			return filter.searchAmenities(rect.top, rect.left,
+					rect.bottom, rect.right, -1, null);
+		}
+	}
+
+	public interface SearchAmenitiesListener {
+		void onFinish(List<Amenity> amenities);
 	}
 
 	@SuppressWarnings("unchecked")

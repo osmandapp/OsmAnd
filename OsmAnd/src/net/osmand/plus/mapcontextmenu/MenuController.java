@@ -8,6 +8,7 @@ import android.text.style.ForegroundColorSpan;
 import android.util.Pair;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import androidx.annotation.ColorRes;
@@ -174,7 +175,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 				builder.addMenuPlugin(plugin);
 			}
 		}
-		builder.build(rootView);
+		builder.build((ViewGroup) rootView);
 	}
 
 	public static MenuController getMenuController(@NonNull MapActivity mapActivity,
