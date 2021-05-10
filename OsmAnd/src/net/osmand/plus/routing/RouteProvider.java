@@ -15,6 +15,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
+import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
@@ -68,7 +69,9 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import btools.routingapp.IBRouterService;
 
-import static net.osmand.plus.routing.SuggestedMapsProvider.*;
+import static net.osmand.plus.routing.SuggestedMapsProvider.getLocationBasedOnDistance;
+import static net.osmand.plus.routing.SuggestedMapsProvider.getStartFinishIntermediatesPoints;
+import static net.osmand.plus.routing.SuggestedMapsProvider.getSuggestedMaps;
 
 
 public class RouteProvider {
@@ -93,7 +96,7 @@ public class RouteProvider {
 		return loc;
 	}
 
-	public RouteCalculationResult calculateRouteImpl(RouteCalculationParams params) {
+	public RouteCalculationResult calculateRouteImpl(final RouteCalculationParams params) {
 		long time = System.currentTimeMillis();
 		OsmandApplication app = params.ctx;
 		if (params.start != null && params.end != null) {
@@ -106,14 +109,30 @@ public class RouteProvider {
 				boolean calcGPXRoute = params.gpxRoute != null && (!params.gpxRoute.points.isEmpty()
 						|| (params.gpxRoute.reverse && !params.gpxRoute.routePoints.isEmpty()));
 				if (calcGPXRoute && !params.gpxRoute.calculateOsmAndRoute) {
-						res = calculateGpxRoute(params);
+					res = calculateGpxRoute(params);
 				} else if (params.mode.getRouteService() == RouteService.OSMAND) {
 					LinkedList<Location> points = getStartFinishIntermediatesPoints(params);
-					boolean isMapsAvailable = !getSuggestedMaps(points, app).isEmpty();
-					if (isMapsAvailable) {
-						return new RouteCalculationResult(getSuggestedMaps(points, app));
+					List<WorldRegion> suggestedMaps = getSuggestedMaps(points, app);
+					if (Algorithms.isEmpty(suggestedMaps)) {
+						LinkedList<Location> pointsStraightLine = getLocationBasedOnDistance(points);
+						List<WorldRegion> suggestedMapsOnStraightLine = getSuggestedMaps(pointsStraightLine, app);
+						if (!Algorithms.isEmpty(suggestedMapsOnStraightLine)) {
+							res = findVectorMapsRoute(params, calcGPXRoute);
+							params.resultListener = new RouteCalculationParams.RouteCalculationResultListener() {
+								@Override
+								public void onRouteCalculated(RouteCalculationResult route) {
+									boolean calculateTime = route.getCalculateTime() > 60000;
+									boolean calculated = route.isCalculated();
+									if (calculated || calculateTime) {
+										//onlinerouting;
+									}
+								}
+							};
+						} else {
+							res = findVectorMapsRoute(params, calcGPXRoute);
+						}
 					} else {
-						res = findVectorMapsRoute(params, calcGPXRoute);
+						return new RouteCalculationResult(suggestedMaps);
 					}
 				} else if (params.mode.getRouteService() == RouteService.BROUTER) {
 					res = findBROUTERRoute(params);
@@ -121,7 +140,7 @@ public class RouteProvider {
 					res = findOnlineRoute(params);
 				} else if (params.mode.getRouteService() == RouteService.STRAIGHT ||
 						params.mode.getRouteService() == RouteService.DIRECT_TO) {
-						res = findStraightRoute(params);
+					res = findStraightRoute(params);
 				} else {
 					res = new RouteCalculationResult("Selected route service is not available");
 				}

@@ -194,6 +194,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private boolean editButtonCollapsed;
 	private boolean addButtonCollapsing;
 	private boolean addButtonCollapsed;
+	private boolean isMapsAvailable;
 
 	private interface OnButtonCollapsedListener {
 		void onButtonCollapsed(boolean success);
@@ -595,7 +596,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		}
 		OsmandApplication app = mapActivity.getMyApplication();
 		nightMode = app.getDaynightHelper().isNightModeForMapControls();
-		boolean isMapsAvailable = !Algorithms.isEmpty(app.getRoutingHelper().getRoute().getDownloadMaps());
+		isMapsAvailable = !Algorithms.isEmpty(app.getRoutingHelper().getRoute().getDownloadMaps());
 
 		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
 		RoutingHelper routingHelper = app.getRoutingHelper();
@@ -678,10 +679,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				menuCards.add(new PublicTransportBetaWarningCard(mapActivity));
 			} else if (app.getRoutingHelper().isBoatMode()) {
 				menuCards.add(new NauticalBridgeHeightWarningCard(mapActivity));
-			} else if (app.getTargetPointsHelper().hasTooLongDistanceToNavigate() && !isMapsAvailable) {
-				menuCards.add(new LongDistanceWarningCard(mapActivity));
 			} else if (isMapsAvailable) {
 				menuCards.add(new SuggestMapsDownloadWarningCards(mapActivity));
+			} else if (app.getTargetPointsHelper().hasTooLongDistanceToNavigate()) {
+				menuCards.add(new LongDistanceWarningCard(mapActivity));
 			}
 		} else {
 			if (isMapsAvailable) {
@@ -1068,7 +1069,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		final OsmandApplication app = mapActivity.getMyApplication();
 		final RoutingHelper helper = app.getRoutingHelper();
 		final TargetPointsHelper targetHelper = app.getTargetPointsHelper();
-		boolean isMapsAvailable = !Algorithms.isEmpty(app.getRoutingHelper().getRoute().getDownloadMaps());
 
 		View startButton = mainView.findViewById(R.id.start_button);
 		TextViewExProgress startButtonText = (TextViewExProgress) mainView.findViewById(R.id.start_button_descr);
