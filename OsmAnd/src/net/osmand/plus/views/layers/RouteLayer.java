@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.LinearGradient;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Paint.Cap;
@@ -11,6 +12,7 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffColorFilter;
+import android.graphics.Shader;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 
@@ -44,8 +46,10 @@ import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.track.GradientScaleType;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.geometry.PublicTransportGeometryWay;
 import net.osmand.plus.views.layers.geometry.PublicTransportGeometryWayContext;
 import net.osmand.plus.views.layers.geometry.RouteGeometryWay;
@@ -53,6 +57,7 @@ import net.osmand.plus.views.layers.geometry.RouteGeometryWayContext;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.router.RouteColorize;
 import net.osmand.router.TransportRouteResult;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -67,7 +72,7 @@ import java.util.Map;
 
 import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
 
-public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
+public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 
 	private static final Log log = PlatformUtil.getLog(RouteLayer.class);
 
@@ -108,6 +113,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 
 	private int routeLineColor;
 	private Integer directionArrowsColor;
+	private GradientScaleType gradientScaleType = null;
 
 	public RouteLayer(RoutingHelper helper) {
 		this.helper = helper;
@@ -135,6 +141,8 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 		attrs.defaultWidth = (int) (12 * density);
 		attrs.defaultWidth3 = (int) (7 * density);
 		attrs.defaultColor = view.getResources().getColor(R.color.nav_track);
+		attrs.shadowPaint.setColor(0x80000000);
+		attrs.shadowPaint.setStrokeCap(Cap.ROUND);
 		attrs.paint3.setStrokeCap(Cap.BUTT);
 		attrs.paint3.setColor(Color.WHITE);
 		attrs.paint2.setStrokeCap(Cap.BUTT);
@@ -330,13 +338,23 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 	                                  DrawSettings settings,
 	                                  RouteLineDrawInfo drawInfo) {
 		updateAttrs(settings, tileBox);
-		updateRouteColors(nightMode);
-		paintRouteLinePreview.setColor(getRouteLineColor());
 		paintRouteLinePreview.setStrokeWidth(getRouteLineWidth(tileBox));
 
 		int centerX = drawInfo.getCenterX();
 		int centerY = drawInfo.getCenterY();
 		int screenHeight = drawInfo.getScreenHeight();
+
+		updateRouteColors(nightMode);
+		updateRouteGradient();
+
+		LinearGradient gradient = null;
+		if (gradientScaleType == GradientScaleType.ALTITUDE || gradientScaleType == GradientScaleType.SLOPE) {
+			int[] colors = new int[] {RouteColorize.RED, RouteColorize.YELLOW, RouteColorize.GREEN};
+			float[] positions = new float[] {0, 0.5f, 1};
+			gradient = new LinearGradient(centerX, 0, centerX, screenHeight, colors, positions, Shader.TileMode.CLAMP);
+		}
+		paintRouteLinePreview.setShader(gradient);
+		paintRouteLinePreview.setColor(getRouteLineColor());
 
 		canvas.drawLine(centerX, 0, centerX, screenHeight, paintRouteLinePreview);
 
@@ -459,6 +477,14 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 		routeLineColor = color;
 	}
 
+	private void updateRouteGradient() {
+		if (routeLineDrawInfo != null) {
+			gradientScaleType = routeLineDrawInfo.getGradientScaleType();
+		} else {
+			gradientScaleType = view.getSettings().ROUTE_LINE_GRADIENT.getModeValue(helper.getAppMode());
+		}
+	}
+
 	private float getRouteLineWidth(@NonNull RotatedTileBox tileBox) {
 		String widthKey;
 		if (routeLineDrawInfo != null) {
@@ -523,9 +549,10 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 			boolean directTo = route.getRouteService() == RouteService.DIRECT_TO;
 			boolean straight = route.getRouteService() == RouteService.STRAIGHT;
 			publicTransportRouteGeometry.clearRoute();
-			routeGeometry.updateRoute(tb, route);
 			updateRouteColors(nightMode);
-			routeGeometry.setRouteStyleParams(getRouteLineColor(), getRouteLineWidth(tb), getDirectionArrowsColor());
+			updateRouteGradient();
+			routeGeometry.setRouteStyleParams(getRouteLineColor(), getRouteLineWidth(tb), getDirectionArrowsColor(), gradientScaleType);
+			routeGeometry.updateRoute(tb, route, view.getApplication());
 			if (directTo) {
 				routeGeometry.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
 						null, 0);
@@ -802,7 +829,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 	}
 
 	@Override
-	public boolean disableLongPressOnMap() {
+	public boolean disableLongPressOnMap(PointF point, RotatedTileBox tileBox) {
 		return isInRouteLineAppearanceMode();
 	}
 
@@ -813,6 +840,11 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 
 	@Override
 	public boolean runExclusiveAction(@Nullable Object o, boolean unknownLocation) {
+		return false;
+	}
+
+	@Override
+	public boolean showMenuAction(@Nullable Object o) {
 		return false;
 	}
 }

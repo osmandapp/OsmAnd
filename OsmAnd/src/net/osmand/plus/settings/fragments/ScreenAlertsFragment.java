@@ -164,10 +164,4 @@ public class ScreenAlertsFragment extends BaseSettingsFragment implements OnPref
 		showCameras.setIcon(getIcon(R.drawable.list_warnings_speed_camera));
 		showCameras.setVisible(!settings.SPEED_CAMERAS_UNINSTALLED.get());
 	}
-
-	public void setupSpeedCamerasAlert() {
-		Preference speedCamerasAlert = findPreference(settings.SPEED_CAMERAS_UNINSTALLED.getId());
-		speedCamerasAlert.setIcon(getContentIcon(R.drawable.ic_action_alert));
-		speedCamerasAlert.setVisible(!settings.SPEED_CAMERAS_UNINSTALLED.get());
-	}
 }

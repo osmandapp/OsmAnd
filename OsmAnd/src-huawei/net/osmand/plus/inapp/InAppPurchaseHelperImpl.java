@@ -29,6 +29,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscriptionIntroductoryInfo;
+import net.osmand.plus.inapp.InAppPurchases.PurchaseInfo;
 import net.osmand.plus.inapp.InAppPurchasesImpl.InAppPurchaseLiveUpdatesOldSubscription;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
@@ -48,7 +49,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 
 	private List<ProductInfo> productInfos;
 	private OwnedPurchasesResult ownedSubscriptions;
-	private List<OwnedPurchasesResult> ownedInApps = new ArrayList<>();
+	private final List<OwnedPurchasesResult> ownedInApps = new ArrayList<>();
 
 	public InAppPurchaseHelperImpl(OsmandApplication ctx) {
 		super(ctx);
@@ -233,15 +234,18 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 	}
 
 	private PurchaseInfo getPurchaseInfo(InAppPurchaseData purchase) {
-		return new PurchaseInfo(purchase.getProductId(), purchase.getSubscriptionId(), purchase.getPurchaseToken());
+		return new PurchaseInfo(purchase.getProductId(), purchase.getSubscriptionId(), purchase.getPurchaseToken(),
+				purchase.getPurchaseTime(), purchase.getPurchaseState(), true, purchase.isAutoRenewing());
 	}
 
 	private void fetchInAppPurchase(@NonNull InAppPurchase inAppPurchase, @NonNull ProductInfo productInfo, @Nullable InAppPurchaseData purchaseData) {
 		if (purchaseData != null) {
 			inAppPurchase.setPurchaseState(InAppPurchase.PurchaseState.PURCHASED);
 			inAppPurchase.setPurchaseTime(purchaseData.getPurchaseTime());
+			inAppPurchase.setPurchaseInfo(ctx, getPurchaseInfo(purchaseData));
 		} else {
 			inAppPurchase.setPurchaseState(InAppPurchase.PurchaseState.NOT_PURCHASED);
+			inAppPurchase.restorePurchaseInfo(ctx);
 		}
 		inAppPurchase.setPrice(productInfo.getPrice());
 		inAppPurchase.setPriceCurrencyCode(productInfo.getCurrency());

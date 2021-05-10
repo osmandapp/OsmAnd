@@ -20,8 +20,8 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.ShortDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.itinerary.ItineraryGroup;
-import net.osmand.plus.itinerary.ItineraryHelper;
+import net.osmand.plus.mapmarkers.MapMarkersGroup;
+import net.osmand.plus.mapmarkers.MapMarkersHelper;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -138,18 +138,18 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 	private void updateAddOrEnableGroupWptCategories() {
 		OsmandApplication app = getMyApplication();
 		GpxSelectionHelper gpxSelectionHelper = app.getSelectedGpxHelper();
-		ItineraryHelper helper = app.getItineraryHelper();
+		MapMarkersHelper mapMarkersHelper = app.getMapMarkersHelper();
 
 		SelectedGpxFile selectedGpxFile = gpxSelectionHelper.getSelectedFileByPath(gpxFile.path);
 		if (selectedGpxFile == null) {
 			gpxSelectionHelper.selectGpxFile(gpxFile, true, false, false, false, false);
 		}
-		ItineraryGroup group = helper.getMarkersGroup(gpxFile);
+		MapMarkersGroup group = mapMarkersHelper.getMarkersGroup(gpxFile);
 		if (group == null) {
-			group = helper.addOrEnableGroup(gpxFile);
+			group = mapMarkersHelper.addOrEnableGroup(gpxFile);
 		}
-		helper.updateGroupWptCategories(group, selectedCategories);
-		helper.runSynchronization(group);
+		mapMarkersHelper.updateGroupWptCategories(group, selectedCategories);
+		mapMarkersHelper.runSynchronization(group);
 	}
 
 	private boolean isAllChecked() {

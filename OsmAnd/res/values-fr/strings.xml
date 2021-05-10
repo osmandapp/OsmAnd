@@ -301,8 +301,8 @@
     <string name="error_reading_gpx">Impossible de lire les données GPX.</string>
     <string name="vector_data">Cartes vectorielles OSM</string>
     <string name="transport_context_menu">Recherche de transport pour cet arrêt</string>
-    <string name="poi_context_menu_modify">Modifier point d\'intérêt</string>
-    <string name="poi_context_menu_delete">Supprimer point d\'intérêt</string>
+    <string name="poi_context_menu_modify">Modifier le point d\'intérêt</string>
+    <string name="poi_context_menu_delete">Supprimer le point d\'intérêt</string>
     <string name="rotate_map_compass_opt">D\'après la boussole</string>
     <string name="rotate_map_bearing_opt">Dans la direction du déplacement</string>
     <string name="rotate_map_none_opt">Aucune rotation (nord toujours en haut)</string>
@@ -951,7 +951,7 @@
     <string name="osmand_plus_play_title_30_chars">Cartes et navigation OsmAnd+</string>
     <string name="street_name">Nom de la rue</string>
     <string name="hno">Numéro de bâtiment</string>
-    <string name="monitoring_settings">Enregistrement de traces</string>
+    <string name="monitoring_settings">Enregistrer le parcours</string>
     <string name="monitoring_settings_descr">Configurez comment enregistrer vos itinéraires.</string>
     <string name="choose_osmand_theme_descr">Personnalisez l\'apparence de l\'application.</string>
     <string name="choose_osmand_theme">Thème de l\'application</string>
@@ -1388,7 +1388,7 @@
     <string name="speak_pedestrian">Passages piétons</string>
     <string name="avoid_roads_msg">Générez un itinéraire alternatif en sélectionnant les routes à éviter</string>
     <string name="navigation_over_track">Démarrer la navigation en suivant cette trace ?</string>
-    <string name="save_track_to_gpx_globally_headline">Enregistrement de traces à la demande</string>
+    <string name="save_track_to_gpx_globally_headline">Enregistrement de parcours à la demande</string>
     <string name="proxy_pref_title">Proxy</string>
     <string name="enable_proxy_descr">Configurer le mandataire HTTP (Proxy) pour toutes les requêtes réseau</string>
     <string name="proxy_host_title">Serveur mandataire (Proxy)</string>
@@ -3089,7 +3089,8 @@
     <string name="app_mode_campervan">Camping-car</string>
     <string name="rendering_attr_showLez_description">Afficher les zones à faible émission sur la carte (n\'influe pas sur le calcul d\'itinéraire).</string>
     <string name="rendering_attr_showLez_name">Afficher les zones à faibles émissions</string>
-    <string name="new_route_calculated_dist_dbg">Itinéraire : distance %1$s, durée %2$s \nCalculs : %3$.1f secondes, %4$d routes, %5$d tuiles)</string>
+    <string name="new_route_calculated_dist_dbg">Itinéraire : distance %1$s, durée %2$s
+\nCalculs : %3$.1f secondes, %4$d routes, %5$d tuiles</string>
     <string name="lang_oc">Occitan</string>
     <string name="app_mode_wagon">Wagon</string>
     <string name="app_mode_pickup_truck">Camionnette</string>
@@ -3275,7 +3276,7 @@
     <string name="add_new_profile_q">Ajouter le profil \'%1$s\' \?</string>
     <string name="save_heading">Inclure la direction</string>
     <string name="save_heading_descr">Inclure la direction de chaque point lors de l\'enregistrement d\'une trace.</string>
-    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Afficher le réseau de nœuds de pistes cyclables</string>
+    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Afficher les itinéraires cyclables du réseau de nœuds</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Nœuds de transport</string>
     <string name="personal_category_name">Personnel</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
@@ -3590,7 +3591,7 @@
     <string name="profiles_for_action_not_found">Ces profils sont introuvables.</string>
     <string name="shared_string_resume">Reprendre</string>
     <string name="shared_string_add_profile">Ajouter un profil</string>
-    <string name="change_application_profile">Modifier le profil d\'application</string>
+    <string name="change_application_profile">Modifier le profil</string>
     <string name="index_item_world_basemap_detailed">Carte mondiale générale (plus détaillée)</string>
     <string name="unsupported_type_error">Type non pris en charge</string>
     <string name="gpx_parse_error">Le fichier GPX OsmAnd n\'est pas construit correctement. Vous pouvez transmettre ce fichier à l\'équipe support OsmAnd pour investiguer.</string>
@@ -3696,7 +3697,7 @@
     <string name="track_show_start_finish_icons">Afficher les icônes de départ et d\'arrivée</string>
     <string name="select_track_width">Sélectionner la largeur</string>
     <string name="gpx_direction_arrows">Flèches de direction</string>
-    <string name="plan_route_last_edited">Dernière modification</string>
+    <string name="plan_route_last_edited">Modifiés récemment</string>
     <string name="plan_route_import_track">Importer une trace</string>
     <string name="plan_route_open_existing_track">Ouvrir une trace existante</string>
     <string name="plan_route_create_new_route">Créer un nouvel itinéraire</string>
@@ -3715,7 +3716,7 @@
     <string name="threshold_distance">Seuil de distance</string>
     <string name="navigation_profile">Profil de navigation</string>
     <string name="street_level_imagery">Photos des rues</string>
-    <string name="plan_route_exit_dialog_descr">Souhaitez-vous vraiment ignorer toutes les modifications apportées à l\'itinéraire planifié \?</string>
+    <string name="plan_route_exit_dialog_descr">Souhaitez-vous vraiment ignorer toutes les modifications apportées à cet itinéraire \?</string>
     <string name="in_case_of_reverse_direction">Si inversion du sens</string>
     <string name="pass_whole_track_descr">Point de la trace vers lequel naviguer</string>
     <string name="shared_string_gpx_route">Enregistrer le parcours</string>
@@ -3733,7 +3734,7 @@
     <string name="show_gpx">Traces</string>
     <string name="monitoring_control_start">ENR</string>
     <string name="save_track_to_gpx_globally">Enregistrer le parcours dans un fichier GPX</string>
-    <string name="map_widget_monitoring">Enregistrement du parcours</string>
+    <string name="map_widget_monitoring">Enregistrer le parcours</string>
     <string name="marker_save_as_track">Enregistrer comme fichier de trace</string>
     <string name="follow_track">Suivre la trace</string>
     <string name="follow_track_descr">Sélectionner un fichier de trace à suivre</string>
@@ -3782,7 +3783,7 @@
     <string name="plan_route_change_route_type_after">Modifier le type d’itinéraire après</string>
     <string name="simplified_track_description">Seule la ligne d\'itinéraire sera enregistrée, les points de passage seront supprimés.</string>
     <string name="shared_string_redo">Rétablir</string>
-    <string name="sort_last_modified">Dernière modification</string>
+    <string name="sort_last_modified">Récents</string>
     <string name="sort_name_descending">Nom : Z – A</string>
     <string name="sort_name_ascending">Nom : A – Z</string>
     <string name="start_finish_icons">Icônes de départ et d\'arrivée</string>
@@ -3833,7 +3834,7 @@
     <string name="subscription_paused_title">L\'abonnement OsmAnd Live a été suspendu</string>
     <string name="login_open_street_map">Se connecter à OpenStreetMap</string>
     <string name="login_open_street_map_org">Se connecter à OpenStreetMap.org</string>
-    <string name="user_login">Identifiant</string>
+    <string name="user_login">Se connecter</string>
     <string name="use_login_password">Utiliser un identifiant et un mot de passe</string>
     <string name="login_account">Compte</string>
     <string name="manage_subscription">Gérer l\'abonnement</string>
@@ -3893,7 +3894,7 @@
     <string name="plan_route_split_before">Couper avant</string>
     <string name="plan_route_split_after">Couper après</string>
     <string name="plan_route_add_new_segment">Ajouter un nouveau segment</string>
-    <string name="gpx_upload_identifiable_visibility_descr">« Identifiable » siginifie que la trace sera affichée publiquement dans « Mes traces GPS » ainsi que dans les listes de traces GPS publiques. Ainsi les autres utilisateurs peuvent télécharger la trace brute et l\'associer avec votre nom d\'utilisateur. Les données de points de passage horodatés fournis par l\'API GPS publique feront référence à la page d\'origine de votre trace.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">« Identifiable » signifie que la trace sera affichée publiquement dans « Mes traces GPS » ainsi que dans les listes de traces GPS publiques. Ainsi les autres utilisateurs pourront télécharger la trace brute et l\'associer avec votre nom d\'utilisateur. Les données de points de passage horodatés fournis par l\'API GPS publique feront référence à la page d\'origine de votre trace.</string>
     <string name="gpx_upload_public_visibility_descr">« Public » signifie que la trace est affichée publiquement dans vos traces GPS et dans les listes de traces GPS publiques. Les données diffusées via l\'API ne font pas référence à votre page de traces. Les horodatages des points de trace ne sont pas disponibles via l\'API GPS publique et les points de trace ne sont pas classés par ordre chronologique.</string>
     <string name="profile_type_osmand_string">Profil OsmAnd</string>
     <string name="profile_type_user_string">Profil utilisateur</string>
@@ -3954,7 +3955,7 @@
     <string name="announcement_time_passing">Durée</string>
     <string name="analyze_by_intervals">Analyser par intervalles de fractionnement</string>
     <string name="announcement_time_intervals">Intervalles de temps et de distance</string>
-    <string name="announcement_time_descr">Le délai d\'annonce des alertes vocales dépend du type d\'annonce, de la vitesse actuelle et du type de navigation.</string>
+    <string name="announcement_time_descr">Le rythme des annonces vocales dépend du type d\'alerte, de la vitesse actuelle et du type de navigation.</string>
     <string name="announcement_time_title">Délai de l\'annonce</string>
     <string name="announcement_time_off_route">Hors de l\'itinéraire prévu</string>
     <string name="routing_engine_vehicle_type_cycling_road">Vélo de route</string>
@@ -3963,7 +3964,7 @@
     <string name="routing_engine_vehicle_type_cycling_regular">Vélo</string>
     <string name="copy_to_map_markers">Copier vers les marques de carte</string>
     <string name="copy_to_map_favorites">Copier vers les favoris</string>
-    <string name="delete_online_routing_engine">Supprimer ce moteur de routage en ligne \?</string>
+    <string name="delete_online_routing_engine">Retirer ce moteur de routage en ligne \?</string>
     <string name="context_menu_read_full">Lire la suite</string>
     <string name="context_menu_edit_descr">Modifier la description</string>
     <string name="delete_waypoints">Supprimer les points de passage</string>
@@ -4015,12 +4016,12 @@
     <string name="track_recording_title">Enregistrement de la trace arrêté</string>
     <string name="select_segments">Sélectionnez les segments</string>
     <string name="update_frequency">Fréquence de mise à jour</string>
-    <string name="live_update_frequency_week_variant">Les cartes seront vérifiées chaque semaine. La prochaine vérification de mise à jour s\'effectuera à %1$s dans %2$s.</string>
-    <string name="live_update_frequency_day_variant">Les cartes seront vérifiées tous les jours. La prochaine vérification de mise à jour s\'effectuera à %1$s dans %2$s.</string>
-    <string name="live_update_frequency_hour_variant">Les cartes seront vérifiées toutes les heures. La prochaine vérification de mise à jour s\'effectuera à %1$s dans %2$s.</string>
+    <string name="live_update_frequency_week_variant">Les cartes seront vérifiées chaque semaine. La prochaine vérification de mise à jour s\'effectuera le %1$s dans %2$s.</string>
+    <string name="live_update_frequency_day_variant">Les cartes seront vérifiées tous les jours. La prochaine vérification de mise à jour s\'effectuera le %1$s dans %2$s.</string>
+    <string name="live_update_frequency_hour_variant">Les cartes seront vérifiées toutes les heures. La prochaine vérification de mise à jour s\'effectuera le %1$s dans %2$s.</string>
     <string name="delete_updates">Supprimer les mises à jour</string>
     <string name="purchases">Achats</string>
-    <string name="select_category_descr">Sélectionnez la catégorie ou ajoutez-en une nouvelle</string>
+    <string name="select_category_descr">Sélectionnez une catégorie ou créez-en une nouvelle</string>
     <string name="track_recording_will_be_continued">L\'enregistrement se poursuivra.</string>
     <string name="copy_poi_name">Copier le nom du PI</string>
     <string name="quick_action_show_hide_title">Afficher / masquer</string>
@@ -4028,31 +4029,35 @@
     <string name="track_has_no_altitude">La trace ne contient aucune donnée d\'altitude.</string>
     <string name="track_has_no_speed">La trace ne contient aucune donnée de vitesse.</string>
     <string name="routing_attr_short_way_description">Itinéraire court optimisé (plus économe en énergie)</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Masquer les limites des réserves naturelles, des zones protégées et des parcs nationaux</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Masquer les limites des réserves naturelles, des zones protégées et des parcs nationaux.</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">Limites naturelles</string>
     <string name="select_segments_description">%1$s contient plusieurs segments, vous devez sélectionner un tronçon pour la navigation.</string>
     <string name="routing_attr_driving_style_description">Sélectionnez un mode de conduite pour calculer l\'itinéraire le plus court, le plus rapide ou le plus sûr.</string>
     <string name="quick_action_coordinates_widget_descr">Appuyez pour afficher ou masquer le gadget Coordonnées sur la carte.</string>
     <string name="snap_to_road_descr">L’icône de positionnement se déplacera sur le trajet en cours.</string>
-    <string name="select_another_colorization">Veuillez sélectionner une autre coloration.</string>
-    <string name="trip_recording_logging_interval_info">L\'intervalle d’enregistrement définit la fréquence à laquelle OsmAnd récupérera les données de localisation.</string>
+    <string name="select_another_colorization">Veuillez sélectionner un autre type de coloration.</string>
+    <string name="trip_recording_logging_interval_info">L\'intervalle d’enregistrement définit la fréquence à laquelle OsmAnd interrogera les données de localisation.</string>
     <string name="trip_recording_save_and_continue">Enregistrer et continuer</string>
     <string name="lost_data_warning">Toutes les données non enregistrées seront perdues.</string>
     <string name="show_start_dialog">Afficher la boîte de dialogue de démarrage</string>
     <string name="trip_recording_show_start_dialog_setting">Si désactivé, l\'enregistrement débutera dès appui sur le gadget ou dans le menu (sans demande de confirmation).</string>
-    <string name="release_4_0_beta">- Les mises à jour d\'OsmAnd Live ont été déplacées vers \"Téléchargements &gt; Mises à jour\"
+    <string name="release_4_0_beta">- Ajout d\'une option pour télécharger les Courbes de niveau en pieds
 \n
-\n - Les traces peuvent maintenant être colorées par altitude, vitesse ou pente.
+\n- Planification d\'itinéraires en paysage : ajout d’onglets pour basculer entre Points et Graphs
 \n
-\n - Ajout d\'une option pour modifier l\'apparence de la ligne d\'itinéraire en navigation
+\n- Les mises à jour d\'OsmAnd Live ont été déplacées vers \"Téléchargements &gt; Mises à jour\"
 \n
-\n - Mise à jour de la fenêtre \"Enregistrement du trajet\".
+\n- Les traces peuvent maintenant être colorées par altitude, vitesse ou pente
+\n
+\n- Ajout d\'une option pour modifier l\'apparence de la ligne d\'itinéraire en navigation
+\n
+\n- Mise à jour de la fenêtre \"Enregistrement du trajet\".
 \n
 \n</string>
-    <string name="route_line_use_map_style_appearance">La ligne d\'itinéraire utilisera le %1$s pour le style de carte : %2$s.</string>
+    <string name="route_line_use_map_style_appearance">Utiliser le style de carte (%2$s) par défaut %1$s.</string>
     <string name="customize_route_line">Personnaliser la ligne d\'itinéraire</string>
     <string name="shared_string_route_line">Ligne d\'itinéraire</string>
-    <string name="specify_color_for_map_mode">Définissez une couleur pour le mode de carte : %1$s.</string>
+    <string name="specify_color_for_map_mode">Définissez une couleur pour le mode de carte %1$s.</string>
     <string name="contact_support_description">Si vous avez des questions, veuillez nous contacter sur %1$s.</string>
     <string name="empty_purchases_description">Si vos achats n\'apparaissent pas ici, appuyez sur \"%1$s\" ou contactez notre équipe d\'assistance.</string>
     <string name="troubleshooting">Résolution de problèmes</string>
@@ -4071,4 +4076,21 @@
     <string name="renew_subscription">Renouveler l’abonnement</string>
     <string name="on_hold">En attente</string>
     <string name="expired">Expiré</string>
+    <string name="user_points">Points utilisateur</string>
+    <string name="exit_number">Numéro de sortie</string>
+    <string name="announce_when_exceeded">Annoncer en cas de dépassement</string>
+    <string name="output">Sortie</string>
+    <string name="srtm_download_list_help_message">OsmAnd fournit des données sur les courbes de niveau en mètres et en pieds. Vous devrez à nouveau télécharger le fichier pour modifier le format.</string>
+    <string name="srtm_download_single_help_message">Veuillez sélectionner (pour modifier le format, vous devrez re-télécharger le fichier).</string>
+    <string name="srtm_unit_format">Unité des courbes de niveau</string>
+    <string name="shared_string_feet">pieds</string>
+    <string name="route_line_use_gradient_coloring">Le trait de l\'itinéraire est coloré selon la pente.</string>
+    <string name="shared_string_min_height">Hauteur min.</string>
+    <string name="shared_string_max_height">Hauteur max.</string>
+    <string name="use_system_language">Utiliser la langue du système</string>
+    <string name="recorded_description">Une voix enregistrée est plus naturelle mais ne peut prononcer que des phrases préenregistrées comme les bifurcations ; elle ne peut pas prononcer le nom des rues ou des points d\'intérêt.</string>
+    <string name="language_description">Sélectionnez la langue et le type de guidage vocal.</string>
+    <string name="tts_description">La synthèse vocale (Text-To-Speech ou TTS) peut prononcer tous types d\'instructions : nom de rue, bifurcation, nom de PI, etc.</string>
+    <string name="tts_title">TTS</string>
+    <string name="shared_string_itinerary">Itinéraire</string>
 </resources>

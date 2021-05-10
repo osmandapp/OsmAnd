@@ -8,7 +8,7 @@
     <string name="traffic_warning_payment">Portaxe ou peaxe</string>
     <string name="traffic_warning_stop">Sinal de stop</string>
     <string name="traffic_warning_speed_camera">Radar de velocidade</string>
-    <string name="speak_favorites">Favoritos próximos</string>
+    <string name="speak_favorites">Favoritos preto</string>
     <string name="speak_poi">Puntos de interese (PDI) pretos</string>
     <string name="fav_point_emoticons_message">Favorito renomeado a \'%1$s\' para gardar a cadea que contén emoticonas nun ficheiro.</string>
     <string name="print_route">Imprimir o itinerario</string>
@@ -4000,7 +4000,7 @@ Lon %2$s</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">Empregar test.openplacereviews.org</string>
     <string name="login_open_place_reviews">Iniciar sesión ao OpenPlaceReviews</string>
-    <string name="snap_to_road_descr">A icona da localización actual será axustada á ruta de navegación actual</string>
+    <string name="snap_to_road_descr">A icona da posición actual será axustada á ruta de navegación actual</string>
     <string name="map_orientation_threshold_descr">Non xirar a vista do mapa se a velocidade é inferior a un limiar</string>
     <string name="restart">Reiniciar</string>
     <string name="shared_strings_all_regions">Todas as rexións</string>
@@ -4035,7 +4035,7 @@ Lon %2$s</string>
     <string name="select_another_colorization">Escolle outro tipo de cor.</string>
     <string name="live_update_frequency_hour_variant">As actualizacións de mapas serán comprobadas cada hora. A seguinte vez %1$s en %2$s.</string>
     <string name="select_segments">Escoller segmentos</string>
-    <string name="select_segments_description">%1$s contén máis dun segmento, precisas selecionar a parte necesaria para a navegación.</string>
+    <string name="select_segments_description">%1$s contén máis dun segmento, precisas especificar a parte para a navegación.</string>
     <string name="segments_count">Segmento %1$d</string>
     <string name="activity_type_water_name">Auga</string>
     <string name="activity_type_winter_name">Inverno</string>
@@ -4053,5 +4053,62 @@ Lon %2$s</string>
     <string name="temporary_conditional_routing_descr">Empregar as restricións de estrada que están activas agora no mapa</string>
     <string name="routing_attr_short_way_description">Ruta optimizada máis curta (baixo consumo)</string>
     <string name="routing_attr_driving_style_description">Escolle o propósito da condución para obter unha ruta máis curta, máis rápida ou máis segura</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Agochar reservas naturais, áreas protexidas e de parques nacionais</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Agochar reservas naturais, áreas protexidas e de parques nacionais.</string>
+    <string name="release_4_0_beta">• Engadiuse a opción para baixar as curvas de nivel en pés.
+\n
+\n• Paisaxe do plan de ruta: engadíronse lapelas para alternar entre puntos ou gráficos
+\n
+\n• As actualizacións do OsmAnd Live movéronse a \"Descargas &gt; Actualizacións\".
+\n
+\n• As pistas agora poden corarse por altitude, velocidade ou pendente.
+\n
+\n• Engadiuse a opción da aparencia da liña de ruta.
+\n
+\n• Actualizouse o cadro de diálogo \"Gravación de viaxe\"
+\n
+\n</string>
+    <string name="trip_recording_logging_interval_info">O intre de rexistro estabelece o período de tempo no que o OsmAnd pedirá os datos da posición actual.</string>
+    <string name="trip_recording_save_and_continue">Gardar e continuar</string>
+    <string name="lost_data_warning">Todos os datos non gardados serán perdidos.</string>
+    <string name="show_start_dialog">Amosar cadro de diálogo do inicio</string>
+    <string name="trip_recording_show_start_dialog_setting">Se se desactiva, a gravación será iniciada após tocar o control ou o elemento de menú, saltándose o diálogo de confirmación.</string>
+    <string name="customize_route_line">Personalizar liña de ruta</string>
+    <string name="shared_string_route_line">Liña de ruta</string>
+    <string name="route_line_use_map_style_appearance">Emprega o estilo do mapa (%2$s) co %1$s predefinido.</string>
+    <string name="specify_color_for_map_mode">Especifica a cor para o modo de mapa %1$s.</string>
+    <string name="no_purchases">Non tes compras</string>
+    <string name="new_device_account">Novo dispositivo / nova conta</string>
+    <string name="contact_support_description">Se tes algunha dúbida, ponte en contacto connosco en %1$s.</string>
+    <string name="empty_purchases_description">Se as túas compras non aparecen aquí, preme en \"%1$s\", ou ponte en contacto co noso equipo de asistencia.</string>
+    <string name="contact_support">Contacto co soporte</string>
+    <string name="troubleshooting">Solución de problemas</string>
+    <string name="troubleshooting_description">Por favor, sigue esta ligazón se tes algún problema coas compras.</string>
+    <string name="osmand_live">OsmAnd Live</string>
+    <string name="annual_subscription">Subscrición anual</string>
+    <string name="monthly_subscription">Subscrición mensual</string>
+    <string name="three_months_subscription">Subscrición de tres meses</string>
+    <string name="next_billing_date">Próxima data de facturación: %1$s</string>
+    <string name="osmand_live_cancelled">Cancelado</string>
+    <string name="renew_subscription">Renovar a subscrición</string>
+    <string name="in_grace_period">En período experimental</string>
+    <string name="on_hold">En espera</string>
+    <string name="expired">Expirado</string>
+    <string name="update_all_maps_added">Actualizar todos os mapas engadidos a %1$s\?</string>
+    <string name="shared_string_feet">pés</string>
+    <string name="srtm_unit_format">Variante da unidade das curvas de nivel</string>
+    <string name="srtm_download_list_help_message">O OsmAnd fornece datos de curvas de nivel en metros e pés. Terás que volver baixar o ficheiro para mudar o formato.</string>
+    <string name="srtm_download_single_help_message">Selecciona a variante. Terás que volver baixar o ficheiro para mudar o formato.</string>
+    <string name="exit_number">Número da saída</string>
+    <string name="announce_when_exceeded">Anunciar ao excederse</string>
+    <string name="user_points">Puntos do usuario</string>
+    <string name="output">Saída</string>
+    <string name="route_line_use_gradient_coloring">A liña de ruta é colorada segundo a pendente de elevación.</string>
+    <string name="shared_string_min_height">Altura mínima</string>
+    <string name="shared_string_max_height">Altura máxima</string>
+    <string name="language_description">Escolle a lingua preferida e o tipo de indicacións por voz.</string>
+    <string name="tts_description">O sistema de texto a voz (TTS) pode pronunciar todo tipo de avisos: nomes de rúas, indicacións de xiro, nomes de PDI, etc.</string>
+    <string name="tts_title">TTS</string>
+    <string name="recorded_description">A voz gravada soa mellor, mais só pode pronunciar frases pregravadas: indicacións de xiro. Non pode anunciar os nomes das rúas ou dos PDI.</string>
+    <string name="use_system_language">Empregar lingua do sistema</string>
+    <string name="shared_string_itinerary">Itinerario</string>
 </resources>

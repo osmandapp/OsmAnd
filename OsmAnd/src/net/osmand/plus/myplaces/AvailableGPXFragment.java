@@ -107,7 +107,6 @@ import static net.osmand.plus.track.TrackMenuFragment.openTrack;
 import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 import static net.osmand.util.Algorithms.formatDuration;
 import static net.osmand.util.Algorithms.objectEquals;
-import static net.osmand.util.Algorithms.removeAllFiles;
 
 public class AvailableGPXFragment extends OsmandExpandableListFragment implements
 		FavoritesFragmentStateHolder, OsmAuthorizationListener, OnTrackFileMoveListener, RenameCallback {

@@ -47,9 +47,9 @@ public abstract class OsmLiveGoneDialog extends BaseOsmAndDialogFragment {
 
 	private OsmandApplication app;
 	private boolean nightMode;
-	private View osmLiveButton;
+	private View subscriptionButton;
 
-	private final OsmAndFeature[] osmLiveFeatures = {
+	private final OsmAndFeature[] subscriptionFeatures = {
 			OsmAndFeature.DAILY_MAP_UPDATES,
 			OsmAndFeature.UNLIMITED_DOWNLOADS,
 			OsmAndFeature.WIKIPEDIA_OFFLINE,
@@ -163,12 +163,12 @@ public abstract class OsmLiveGoneDialog extends BaseOsmAndDialogFragment {
 			descr.append(subscriptionDescr).append("\n\n");
 		}
 		descr.append(getString(R.string.purchase_cancelled_dialog_descr));
-		for (OsmAndFeature feature : osmLiveFeatures) {
+		for (OsmAndFeature feature : subscriptionFeatures) {
 			descr.append("\n").append("— ").append(feature.toHumanString(ctx));
 		}
 		infoDescr.setText(descr);
 
-		osmLiveButton = view.findViewById(R.id.card_button);
+		subscriptionButton = view.findViewById(R.id.card_button);
 
 		return view;
 	}
@@ -224,26 +224,26 @@ public abstract class OsmLiveGoneDialog extends BaseOsmAndDialogFragment {
 	}
 
 	private void setupOsmLiveButton() {
-		if (osmLiveButton != null) {
-			TextViewEx buttonTitle = (TextViewEx) osmLiveButton.findViewById(R.id.card_button_title);
-			TextViewEx buttonSubtitle = (TextViewEx) osmLiveButton.findViewById(R.id.card_button_subtitle);
+		if (subscriptionButton != null) {
+			TextViewEx buttonTitle = (TextViewEx) subscriptionButton.findViewById(R.id.card_button_title);
+			TextViewEx buttonSubtitle = (TextViewEx) subscriptionButton.findViewById(R.id.card_button_subtitle);
 			switch (getOsmLiveButtonType()) {
 				case PURCHASE_SUBSCRIPTION:
 					buttonTitle.setText(getString(R.string.osm_live_plan_pricing));
-					osmLiveButton.setOnClickListener(new View.OnClickListener() {
+					subscriptionButton.setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
 							dismiss();
 							FragmentActivity activity = getActivity();
 							if (activity != null) {
-								ChoosePlanDialogFragment.showDialogInstance(app, activity.getSupportFragmentManager(), ChoosePlanDialogType.OSM_LIVE);
+								ChoosePlanDialogFragment.showDialogInstance(app, activity.getSupportFragmentManager(), ChoosePlanDialogType.SUBSCRIPTION);
 							}
 						}
 					});
 					break;
 				case MANAGE_SUBSCRIPTION:
 					buttonTitle.setText(getString(R.string.manage_subscription));
-					osmLiveButton.setOnClickListener(new View.OnClickListener() {
+					subscriptionButton.setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
 							dismiss();
@@ -260,7 +260,7 @@ public abstract class OsmLiveGoneDialog extends BaseOsmAndDialogFragment {
 			}
 			buttonSubtitle.setVisibility(View.GONE);
 			buttonTitle.setVisibility(View.VISIBLE);
-			osmLiveButton.findViewById(R.id.card_button_progress).setVisibility(View.GONE);
+			subscriptionButton.findViewById(R.id.card_button_progress).setVisibility(View.GONE);
 		}
 	}
 
@@ -280,7 +280,7 @@ public abstract class OsmLiveGoneDialog extends BaseOsmAndDialogFragment {
 	private static InAppSubscription getExpiredSubscription(@NonNull OsmandApplication app) {
 		if (!app.getSettings().LIVE_UPDATES_PURCHASED.get()) {
 			InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
-			return purchaseHelper.getLiveUpdates().getTopExpiredSubscription();
+			return purchaseHelper.getSubscriptions().getTopExpiredSubscription();
 		}
 		return null;
 	}

@@ -18,7 +18,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.itinerary.ItineraryGroup;
+import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.settings.backend.ExportSettingsCategory;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.FileSettingsItem;
@@ -311,10 +311,14 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 						itemsSize += ((FileSettingsItem) object).getSize();
 					} else if (object instanceof File) {
 						itemsSize += ((File) object).length();
-					} else if (object instanceof ItineraryGroup) {
-						int selectedMarkers = ((ItineraryGroup) object).getMarkers().size();
-						String itemsDescr = app.getString(R.string.shared_string_items);
-						return app.getString(R.string.ltr_or_rtl_combine_via_colon, itemsDescr, selectedMarkers);
+					} else if (object instanceof MapMarkersGroup) {
+						MapMarkersGroup markersGroup = (MapMarkersGroup) object;
+						if (Algorithms.stringsEqual(markersGroup.getId(), ExportSettingsType.ACTIVE_MARKERS.name())
+								|| Algorithms.stringsEqual(markersGroup.getId(), ExportSettingsType.HISTORY_MARKERS.name())) {
+							int selectedMarkers = ((MapMarkersGroup) object).getMarkers().size();
+							String itemsDescr = app.getString(R.string.shared_string_items);
+							return app.getString(R.string.ltr_or_rtl_combine_via_colon, itemsDescr, selectedMarkers);
+						}
 					}
 				}
 			}

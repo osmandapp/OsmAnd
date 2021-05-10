@@ -21,10 +21,10 @@ import java.lang.ref.WeakReference;
 
 public class WidgetsVisibilityHelper {
 
-	private MapActivity mapActivity;
-	private OsmandSettings settings;
-	private RoutingHelper routingHelper;
-	private MapActivityLayers mapLayers;
+	private final MapActivity mapActivity;
+	private final OsmandSettings settings;
+	private final RoutingHelper routingHelper;
+	private final MapActivityLayers mapLayers;
 
 	public WidgetsVisibilityHelper(@NonNull MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
@@ -104,7 +104,6 @@ public class WidgetsVisibilityHelper {
 	public boolean shouldHideCompass() {
 		return mapActivity.shouldHideTopControls()
 				|| isTrackDetailsMenuOpened()
-				|| isInMeasurementToolMode()
 				|| isInPlanRouteMode()
 				|| isInChoosingRoutesMode()
 				|| isInTrackAppearanceMode()
@@ -116,7 +115,6 @@ public class WidgetsVisibilityHelper {
 	public boolean shouldShowTopButtons() {
 		return !mapActivity.shouldHideTopControls()
 				&& !isTrackDetailsMenuOpened()
-				&& !isInMeasurementToolMode()
 				&& !isInPlanRouteMode()
 				&& !isInChoosingRoutesMode()
 				&& !isInTrackAppearanceMode()
@@ -232,4 +230,10 @@ public class WidgetsVisibilityHelper {
 		return AndroidUiHelper.isOrientationPortrait(mapActivity);
 	}
 
+	public void updateControlsVisibility(boolean topControlsVisible, boolean bottomControlsVisible) {
+		AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_center_info), topControlsVisible);
+		AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_left_widgets_panel), topControlsVisible);
+		AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_right_widgets_panel), topControlsVisible);
+		AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.bottom_controls_container), bottomControlsVisible);
+	}
 }

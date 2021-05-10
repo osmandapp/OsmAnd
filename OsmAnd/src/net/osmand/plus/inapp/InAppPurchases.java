@@ -7,32 +7,39 @@ import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+
 import net.osmand.AndroidUtils;
 import net.osmand.Period;
 import net.osmand.Period.PeriodUnit;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Currency;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
-import androidx.annotation.ColorInt;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 
 public abstract class InAppPurchases {
 
@@ -41,10 +48,14 @@ public abstract class InAppPurchases {
 	protected InAppPurchase contourLines;
 	protected InAppSubscription monthlyLiveUpdates;
 	protected InAppSubscription discountedMonthlyLiveUpdates;
-	protected InAppSubscriptionList liveUpdates;
+	protected InAppSubscriptionList subscriptions;
 	protected InAppPurchase[] inAppPurchases;
 
 	protected InAppPurchases(OsmandApplication ctx) {
+	}
+
+	private static OsmandSettings getSettings(@NonNull Context ctx) {
+		return ((OsmandApplication) ctx.getApplicationContext()).getSettings();
 	}
 
 	public InAppPurchase getFullVersion() {
@@ -83,8 +94,19 @@ public abstract class InAppPurchases {
 		return null;
 	}
 
-	public InAppSubscriptionList getLiveUpdates() {
-		return liveUpdates;
+	@Nullable
+	public InAppSubscription getAnyPurchasedSubscription() {
+		List<InAppSubscription> allSubscriptions = subscriptions.getAllSubscriptions();
+		for (InAppSubscription subscription : allSubscriptions) {
+			if (subscription.isPurchased()) {
+				return subscription;
+			}
+		}
+		return null;
+	}
+
+	public InAppSubscriptionList getSubscriptions() {
+		return subscriptions;
 	}
 
 	public List<InAppPurchase> getAllInAppPurchases(boolean includeSubscriptions) {
@@ -93,18 +115,18 @@ public abstract class InAppPurchases {
 		purchases.add(depthContours);
 		purchases.add(contourLines);
 		if (includeSubscriptions) {
-			purchases.addAll(liveUpdates.getAllSubscriptions());
+			purchases.addAll(subscriptions.getAllSubscriptions());
 		}
 		return purchases;
 	}
 
 	public List<InAppSubscription> getAllInAppSubscriptions() {
-		return liveUpdates.getAllSubscriptions();
+		return subscriptions.getAllSubscriptions();
 	}
 
 	@Nullable
 	public InAppSubscription getInAppSubscriptionBySku(@NonNull String sku) {
-		for (InAppSubscription s : liveUpdates.getAllSubscriptions()) {
+		for (InAppSubscription s : subscriptions.getAllSubscriptions()) {
 			if (sku.startsWith(s.getSkuNoVersion())) {
 				return s;
 			}
@@ -231,7 +253,7 @@ public abstract class InAppPurchases {
 		private double priceValue;
 		private String priceCurrencyCode;
 		private PurchaseState purchaseState = PurchaseState.UNKNOWN;
-		private long purchaseTime;
+		private PurchaseInfo purchaseInfo;
 
 		double monthlyPriceValue;
 		boolean donationSupported = false;
@@ -253,6 +275,37 @@ public abstract class InAppPurchases {
 			return sku;
 		}
 
+		@Nullable
+		public String getOrderId() {
+			return purchaseInfo != null ? purchaseInfo.getOrderId() : null;
+		}
+
+		private CommonPreference<String> getPurchaseInfoPref(@NonNull Context ctx) {
+			return getSettings(ctx).registerStringPreference(sku + "_purchase_info", "").makeGlobal();
+		}
+
+		public boolean storePurchaseInfo(@NonNull Context ctx) {
+			PurchaseInfo purchaseInfo = this.purchaseInfo;
+			if (purchaseInfo != null) {
+				getPurchaseInfoPref(ctx).set(purchaseInfo.toJson());
+				return true;
+			}
+			return false;
+		}
+
+		public boolean restorePurchaseInfo(@NonNull Context ctx) {
+			String json = getPurchaseInfoPref(ctx).get();
+			if (!Algorithms.isEmpty(json)) {
+				try {
+					purchaseInfo = new PurchaseInfo(json);
+				} catch (JSONException e) {
+					// ignore
+				}
+				return true;
+			}
+			return false;
+		}
+
 		public String getPrice(Context ctx) {
 			if (!Algorithms.isEmpty(price)) {
 				return price;
@@ -266,11 +319,16 @@ public abstract class InAppPurchases {
 		}
 
 		public long getPurchaseTime() {
-			return purchaseTime;
+			return purchaseInfo != null ? purchaseInfo.getPurchaseTime() : 0;
 		}
 
-		public void setPurchaseTime(long purchaseTime) {
-			this.purchaseTime = purchaseTime;
+		public PurchaseInfo getPurchaseInfo() {
+			return purchaseInfo;
+		}
+
+		void setPurchaseInfo(@NonNull Context ctx, PurchaseInfo purchaseInfo) {
+			this.purchaseInfo = purchaseInfo;
+			storePurchaseInfo(ctx);
 		}
 
 		public String getDefaultPrice(Context ctx) {
@@ -571,35 +629,33 @@ public abstract class InAppPurchases {
 
 	public static abstract class InAppSubscription extends InAppPurchase {
 
-		private Map<String, InAppSubscription> upgrades = new ConcurrentHashMap<>();
-		private String skuNoVersion;
+		private final Map<String, InAppSubscription> upgrades = new ConcurrentHashMap<>();
+		private final String skuNoVersion;
 		private String subscriptionPeriodString;
 		private Period subscriptionPeriod;
 		private boolean upgrade = false;
 		private SubscriptionState state = SubscriptionState.UNDEFINED;
-		private SubscriptionState prevState = SubscriptionState.UNDEFINED;
+		private SubscriptionState previousState = SubscriptionState.UNDEFINED;
+		private long expireTime = 0;
 
 		private InAppSubscriptionIntroductoryInfo introductoryInfo;
 
 		public enum SubscriptionState {
-			UNDEFINED("undefined", 0, 0),
-			ACTIVE("active", R.string.osm_live_active, R.drawable.bg_osmand_live_active),
-			CANCELLED("cancelled", R.string.osmand_live_cancelled, R.drawable.bg_osmand_live_cancelled),
-			IN_GRACE_PERIOD("in_grace_period", R.string.in_grace_period, R.drawable.bg_osmand_live_active),
-			ON_HOLD("on_hold", R.string.on_hold, R.drawable.bg_osmand_live_cancelled),
-			PAUSED("paused", R.string.shared_string_paused, R.drawable.bg_osmand_live_cancelled),
-			EXPIRED("expired", R.string.expired, R.drawable.bg_osmand_live_cancelled);
+			UNDEFINED("undefined", R.string.shared_string_undefined),
+			ACTIVE("active", R.string.osm_live_active),
+			CANCELLED("cancelled", R.string.osmand_live_cancelled),
+			IN_GRACE_PERIOD("in_grace_period", R.string.in_grace_period),
+			ON_HOLD("on_hold", R.string.on_hold),
+			PAUSED("paused", R.string.shared_string_paused),
+			EXPIRED("expired", R.string.expired);
 
 			private final String stateStr;
 			@StringRes
 			private final int stringRes;
-			@DrawableRes
-			private final int backgroundRes;
 
-			SubscriptionState(@NonNull String stateStr, @StringRes int stringRes, @DrawableRes int backgroundRes) {
+			SubscriptionState(@NonNull String stateStr, @StringRes int stringRes) {
 				this.stateStr = stateStr;
 				this.stringRes = stringRes;
-				this.backgroundRes = backgroundRes;
 			}
 
 			public String getStateStr() {
@@ -609,11 +665,6 @@ public abstract class InAppPurchases {
 			@StringRes
 			public int getStringRes() {
 				return stringRes;
-			}
-
-			@DrawableRes
-			public int getBackgroundRes() {
-				return backgroundRes;
 			}
 
 			@NonNull
@@ -635,8 +686,8 @@ public abstract class InAppPurchases {
 			}
 		}
 
-		InAppSubscription(@NonNull String skuNoVersion, int version) {
-			super(skuNoVersion + "_v" + version);
+		InAppSubscription(@NonNull String skuNoVersion, int version, boolean discounted) {
+			super(skuNoVersion + "_v" + version, discounted);
 			this.skuNoVersion = skuNoVersion;
 		}
 
@@ -678,21 +729,79 @@ public abstract class InAppPurchases {
 			return state;
 		}
 
-		public void setState(@NonNull SubscriptionState state) {
+		public void setState(@NonNull Context ctx, @NonNull SubscriptionState state) {
 			this.state = state;
+			storeState(ctx, state);
 		}
 
 		@NonNull
-		public SubscriptionState getPrevState() {
-			return prevState;
-		}
-
-		public void setPrevState(@NonNull SubscriptionState prevState) {
-			this.prevState = prevState;
+		public SubscriptionState getPreviousState() {
+			return previousState;
 		}
 
 		public boolean hasStateChanged() {
-			return state != prevState;
+			return state != previousState;
+		}
+
+		private CommonPreference<String> getStatePref(@NonNull Context ctx) {
+			return getSettings(ctx).registerStringPreference(getSku() + "_state", "").makeGlobal();
+		}
+
+		void storeState(@NonNull Context ctx, @NonNull SubscriptionState state) {
+			getStatePref(ctx).set(state.getStateStr());
+		}
+
+		boolean restoreState(@NonNull Context ctx) {
+			String stateStr = getStatePref(ctx).get();
+			if (!Algorithms.isEmpty(stateStr)) {
+				SubscriptionState state = SubscriptionState.getByStateStr(stateStr);
+				this.previousState = state;
+				this.state = state;
+				return true;
+			}
+			return false;
+		}
+
+		public long getCalculatedExpiredTime() {
+			long purchaseTime = getPurchaseTime();
+			Period period = getSubscriptionPeriod();
+			if (purchaseTime == 0 || period == null || period.getUnit() == null) {
+				return 0;
+			}
+			Date date = new Date(purchaseTime);
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(date);
+			long currentTime = System.currentTimeMillis();
+			while (calendar.getTimeInMillis() < currentTime) {
+				calendar.add(period.getUnit().getCalendarIdx(), period.getNumberOfUnits());
+			}
+			return calendar.getTimeInMillis();
+		}
+
+		public long getExpireTime() {
+			return expireTime;
+		}
+
+		public void setExpireTime(@NonNull Context ctx, long expireTime) {
+			this.expireTime = expireTime;
+			storeExpireTime(ctx, expireTime);
+		}
+
+		private CommonPreference<Long> getExpireTimePref(@NonNull Context ctx) {
+			return getSettings(ctx).registerLongPreference(getSku() + "_expire_time", 0L).makeGlobal();
+		}
+
+		boolean restoreExpireTime(@NonNull Context ctx) {
+			Long expireTime = getExpireTimePref(ctx).get();
+			if (expireTime != null) {
+				this.expireTime = expireTime;
+				return true;
+			}
+			return false;
+		}
+
+		void storeExpireTime(@NonNull Context ctx, long expireTime) {
+			getExpireTimePref(ctx).set(expireTime);
 		}
 
 		public boolean isAnyPurchased() {
@@ -822,20 +931,16 @@ public abstract class InAppPurchases {
 		}
 	}
 
-	protected static abstract class InAppPurchaseLiveUpdatesMonthly extends InAppSubscription {
+	protected static abstract class InAppPurchaseMonthlySubscription extends InAppSubscription {
 
-		InAppPurchaseLiveUpdatesMonthly(String skuNoVersion, int version) {
-			super(skuNoVersion, version);
+		InAppPurchaseMonthlySubscription(String skuNoVersion, int version, boolean discounted) {
+			super(skuNoVersion, version, discounted);
 			donationSupported = true;
 		}
 
-		InAppPurchaseLiveUpdatesMonthly(@NonNull String sku, boolean discounted) {
+		InAppPurchaseMonthlySubscription(@NonNull String sku, boolean discounted) {
 			super(sku, discounted);
 			donationSupported = true;
-		}
-
-		InAppPurchaseLiveUpdatesMonthly(@NonNull String sku) {
-			this(sku, false);
 		}
 
 		@Override
@@ -881,14 +986,14 @@ public abstract class InAppPurchases {
 		}
 	}
 
-	protected static abstract class InAppPurchaseLiveUpdates3Months extends InAppSubscription {
+	protected static abstract class InAppPurchaseQuarterlySubscription extends InAppSubscription {
 
-		InAppPurchaseLiveUpdates3Months(String skuNoVersion, int version) {
-			super(skuNoVersion, version);
+		InAppPurchaseQuarterlySubscription(String skuNoVersion, int version, boolean discounted) {
+			super(skuNoVersion, version, discounted);
 		}
 
-		InAppPurchaseLiveUpdates3Months(@NonNull String sku) {
-			super(sku, false);
+		InAppPurchaseQuarterlySubscription(@NonNull String sku, boolean discounted) {
+			super(sku, discounted);
 		}
 
 		@Override
@@ -929,14 +1034,14 @@ public abstract class InAppPurchases {
 		}
 	}
 
-	protected static abstract class InAppPurchaseLiveUpdatesAnnual extends InAppSubscription {
+	protected static abstract class InAppPurchaseAnnualSubscription extends InAppSubscription {
 
-		InAppPurchaseLiveUpdatesAnnual(String skuNoVersion, int version) {
-			super(skuNoVersion, version);
+		InAppPurchaseAnnualSubscription(String skuNoVersion, int version, boolean discounted) {
+			super(skuNoVersion, version, discounted);
 		}
 
-		InAppPurchaseLiveUpdatesAnnual(@NonNull String sku) {
-			super(sku, false);
+		InAppPurchaseAnnualSubscription(@NonNull String sku, boolean discounted) {
+			super(sku, discounted);
 		}
 
 		@Override
@@ -977,7 +1082,7 @@ public abstract class InAppPurchases {
 		}
 	}
 
-	public static class InAppPurchaseLiveUpdatesOldMonthly extends InAppPurchaseLiveUpdatesMonthly {
+	public static class InAppPurchaseLiveUpdatesOldMonthly extends InAppPurchaseMonthlySubscription {
 
 		InAppPurchaseLiveUpdatesOldMonthly(String sku) {
 			super(sku, true);
@@ -997,6 +1102,96 @@ public abstract class InAppPurchases {
 		@Override
 		protected InAppSubscription newInstance(@NonNull String sku) {
 			return null;
+		}
+	}
+
+	public static class PurchaseInfo {
+		private String sku;
+		private String orderId;
+		private String purchaseToken;
+		private long purchaseTime;
+		private int purchaseState;
+		private boolean acknowledged;
+		private boolean autoRenewing;
+
+		PurchaseInfo(String sku, String orderId, String purchaseToken, long purchaseTime,
+							int purchaseState, boolean acknowledged, boolean autoRenewing) {
+			this.sku = sku;
+			this.orderId = orderId;
+			this.purchaseToken = purchaseToken;
+			this.purchaseTime = purchaseTime;
+			this.purchaseState = purchaseState;
+			this.acknowledged = acknowledged;
+			this.autoRenewing = autoRenewing;
+		}
+
+		PurchaseInfo(@NonNull String json) throws JSONException {
+			parseJson(json);
+		}
+
+		public String getSku() {
+			return sku;
+		}
+
+		public String getOrderId() {
+			return orderId;
+		}
+
+		public String getPurchaseToken() {
+			return purchaseToken;
+		}
+
+		public long getPurchaseTime() {
+			return purchaseTime;
+		}
+
+		public int getPurchaseState() {
+			return purchaseState;
+		}
+
+		public boolean isAcknowledged() {
+			return acknowledged;
+		}
+
+		public boolean isAutoRenewing() {
+			return autoRenewing;
+		}
+
+		public String toJson() {
+			Map<String, Object> jsonMap = new HashMap<>();
+			jsonMap.put("sku", sku);
+			jsonMap.put("orderId", orderId);
+			jsonMap.put("purchaseToken", purchaseToken);
+			jsonMap.put("purchaseTime", purchaseTime);
+			jsonMap.put("purchaseState", purchaseState);
+			jsonMap.put("acknowledged", acknowledged);
+			jsonMap.put("autoRenewing", autoRenewing);
+			return new JSONObject(jsonMap).toString();
+		}
+
+		public void parseJson(@NonNull String json) throws JSONException {
+			JSONObject jsonObj = new JSONObject(json);
+			if (jsonObj.has("sku")) {
+				this.sku = jsonObj.getString("sku");
+			}
+			if (jsonObj.has("orderId")) {
+				this.orderId = jsonObj.getString("orderId");
+			}
+			if (jsonObj.has("purchaseToken")) {
+				this.purchaseToken = jsonObj.getString("purchaseToken");
+			}
+			if (jsonObj.has("purchaseTime")) {
+				this.purchaseTime = jsonObj.getLong("purchaseTime");
+			}
+			if (jsonObj.has("purchaseState")) {
+				this.purchaseState = jsonObj.getInt("purchaseState");
+			}
+			if (jsonObj.has("acknowledged")) {
+				this.acknowledged = jsonObj.getBoolean("acknowledged");
+			}
+			if (jsonObj.has("autoRenewing")) {
+				this.autoRenewing = jsonObj.getBoolean("autoRenewing");
+			}
 		}
 	}
 }

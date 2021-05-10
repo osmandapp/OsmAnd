@@ -25,7 +25,7 @@
     <string name="traffic_warning_calming">Verkehrsberuhigung</string>
     <string name="traffic_warning_speed_camera">Blitzer</string>
     <string name="traffic_warning">Verkehrswarnung</string>
-    <string name="speak_favorites">Favoriten in der Nähe</string>
+    <string name="speak_favorites">Nahegelegene Favoriten</string>
     <string name="speak_poi">Nahegelegene POI</string>
     <string name="confirm_every_run">Immer fragen</string>
     <string name="save_global_track_interval">Intervall für generelle Aufzeichnung</string>
@@ -2525,7 +2525,7 @@
     <string name="context_menu_item_modify_note">OSM-Hinweis ändern</string>
     <string name="make_round_trip_descr">Kopie des Startpunkts als Ziel hinzufügen.</string>
     <string name="make_round_trip">Rundreise erstellen</string>
-    <string name="my_location">Meine Position</string>
+    <string name="my_location">Mein Standort</string>
     <string name="shared_string_finish">Beenden</string>
     <string name="use_system_keyboard">Gerätetastatur verwenden</string>
     <string name="marker_moved_to_active">Kartenmarkierung auf aktiv gesetzt</string>
@@ -3359,7 +3359,7 @@
     <string name="sunset_at">Sonnenuntergang um %1$s</string>
     <string name="sunrise_at">Sonnenaufgang um %1$s</string>
     <string name="rearrange_categories">Kategorien neu ordnen</string>
-    <string name="create_custom_categories_list_promo">Ändern Sie die Sortierung der Liste, blenden Sie Kategorien aus. Sie können alle Änderungen mit Profilen importieren oder exportieren.</string>
+    <string name="create_custom_categories_list_promo">Ändern Sie die Sortierreihenfolge der Liste, blenden Sie Kategorien aus. Sie können alle Änderungen mit Profilen importieren oder exportieren.</string>
     <string name="add_new_custom_category_button_promo">Sie können eine neue benutzerdefinierte Kategorie hinzufügen, indem Sie eine oder mehrere Kategorien auswählen.</string>
     <string name="rendering_attr_streetLightingNight_name">Nur nachts anzeigen</string>
     <string name="plugin_prefs_reset_successful">Alle Plugin-Einstellungen wurden auf den Standardzustand zurückgesetzt.</string>
@@ -3856,7 +3856,7 @@
 \nSie können sich mit der sicheren OAuth-Methode anmelden oder Ihren Benutzernamen und Ihr Passwort verwenden.</string>
     <string name="use_login_password">Benutzername und Passwort verwenden</string>
     <string name="login_account">Konto</string>
-    <string name="user_login">Benutzername</string>
+    <string name="user_login">Anmelden</string>
     <string name="markers_history">Historie der Marker</string>
     <string name="send_files_to_openstreetmap">GPX-Datei an OpenStreetMap senden</string>
     <string name="enter_text_separated">Geben Sie durch Komma getrennte Tags ein.</string>
@@ -3936,7 +3936,7 @@
     <string name="shared_string_subtype">Subtyp</string>
     <string name="keep_it_empty_if_not">Leer lassen, wenn kein API-Schlüssel vorhanden</string>
     <string name="copy_address">Adresse kopieren</string>
-    <string name="routing_engine_vehicle_type_driving">Fahren</string>
+    <string name="routing_engine_vehicle_type_driving">Fahrzeug</string>
     <string name="online_routing_engine">Online Navigationssystem</string>
     <string name="online_routing_engines">Online Navigationssysteme</string>
     <string name="shared_string_folders">Ordner</string>
@@ -3968,7 +3968,7 @@
     <string name="routing_engine_vehicle_type_racingbike">Rennrad</string>
     <string name="routing_engine_vehicle_type_mtb">Mountainbike</string>
     <string name="message_server_error">Server-Fehler: %1$s</string>
-    <string name="message_name_is_already_exists">Der Name ist bereits vorhanden</string>
+    <string name="message_name_is_already_exists">Name existiert bereits</string>
     <string name="announcement_time_passing">Beim Passieren</string>
     <string name="announcement_time_off_route">Abweichung von der Route</string>
     <string name="announcement_time_arrive">Ankunft am Ziel</string>
@@ -4024,10 +4024,10 @@
     <string name="shared_string_interval">Intervall</string>
     <string name="track_has_no_altitude">Der Track enthält keine Höhendaten.</string>
     <string name="track_has_no_speed">Der Track enthält keine Geschwindigkeitsdaten.</string>
-    <string name="select_another_colorization">Bitte wähle eine andere Art der Einfärbung aus.</string>
+    <string name="select_another_colorization">Bitte wählen Sie eine andere Art der Einfärbung.</string>
     <string name="map_widget_distance_by_tap">Entfernung durch Antippen</string>
     <string name="select_segments">Segmente auswählen</string>
-    <string name="select_segments_description">%1$s enthält mehr als ein Segment, Sie müssen den benötigten Teil für die Navigation auswählen.</string>
+    <string name="select_segments_description">%1$s enthält mehr als ein Segment, Sie müssen den benötigten Teil für die Navigation spezifizieren.</string>
     <string name="segments_count">Segment %1$d</string>
     <string name="temporary_conditional_routing_descr">Verwenden Sie Straßeneinschränkungen, die jetzt in der Karte aktiv sind</string>
     <string name="routing_attr_short_way_description">Optimierte kürzere Route (energiesparend)</string>
@@ -4047,8 +4047,8 @@
     <string name="live_update_frequency_day_variant">Die Kartenaktualisierung wird täglich überprüft. Das nächste Mal %1$s in %2$s.</string>
     <string name="live_update_frequency_hour_variant">Die Kartenaktualisierung wird stündlich überprüft. Das nächste Mal %1$s in %2$s.</string>
     <string name="live_update_delete_updates_msg">Sind Sie sicher, dass Sie alle %s Live-Updates löschen möchten\?</string>
-    <string name="select_category_descr">Kategorie auswählen oder neue hinzufügen</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Grenzen von Naturschutzgebieten, Schutzgebieten und Nationalparks ausblenden</string>
+    <string name="select_category_descr">Kategorie auswählen oder eine neue hinzufügen</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Grenzen von Naturschutzgebieten, Schutzgebieten und Nationalparks ausblenden.</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">Grenzen von Schutzgebieten</string>
     <string name="trip_recording_save_and_continue">Speichern und fortfahren</string>
     <string name="lost_data_warning">Alle nicht gespeicherten Daten gehen verloren.</string>
@@ -4056,8 +4056,12 @@
     <string name="trip_recording_show_start_dialog_setting">Wenn deaktiviert, beginnt die Aufnahme direkt nach dem Tippen auf das Widget oder den Menüpunkt und überspringt den Bestätigungsdialog.</string>
     <string name="customize_route_line">Routenlinie anpassen</string>
     <string name="shared_string_route_line">Routenlinie</string>
-    <string name="specify_color_for_map_mode">Legen Sie die Farbe für den Kartenmodus fest: %1$s.</string>
-    <string name="release_4_0_beta">• OsmAnd Live-Updates nach \"Downloads &gt; Updates\" verschoben
+    <string name="specify_color_for_map_mode">Legen Sie die Farbe für den Kartenmodus fest %1$s.</string>
+    <string name="release_4_0_beta">• Option zum Herunterladen von Höhenlinien in Fuß zugefügt
+\n
+\n• Routenplanung im Querformat: Registerkarten zum Umschalten zwischen Punkten oder Diagrammen hinzugefügt
+\n
+\n• OsmAnd Live-Updates nach \"Downloads &gt; Updates\" verschoben
 \n
 \n• Tracks können nun nach Höhe, Geschwindigkeit oder Steigung eingefärbt werden.
 \n
@@ -4066,7 +4070,7 @@
 \n• Dialog \"Streckenaufzeichnung\" aktualisiert
 \n
 \n</string>
-    <string name="route_line_use_map_style_appearance">Die Routenlinie würde %1$s verwenden, die für den ausgewählten Kartenstil angegeben ist: %2$s.</string>
+    <string name="route_line_use_map_style_appearance">Nutze Standard des Kartenstil (%2$s): %1$s.</string>
     <string name="no_purchases">Du hast keine Einkäufe</string>
     <string name="new_device_account">Neues Gerät / neues Konto</string>
     <string name="contact_support_description">Wenn du Fragen hast, kontaktiere uns bitte unter %1$s.</string>
@@ -4083,5 +4087,24 @@
     <string name="renew_subscription">Abonnement erneuern</string>
     <string name="on_hold">In der Warteschleife</string>
     <string name="expired">Abgelaufen</string>
-    <string name="update_all_maps_added">Alle zu %1$s hinzugefügten Maps aktualisieren\?</string>
+    <string name="update_all_maps_added">Alle zu %1$s hinzugefügten Karten aktualisieren\?</string>
+    <string name="trip_recording_logging_interval_info">Das Protokollierungsintervall legt den Zeitraum fest, in dem OsmAnd nach den aktuellen Positionsdaten des Standorts fragt.</string>
+    <string name="exit_number">Ausfahrtnummer</string>
+    <string name="announce_when_exceeded">Meldung bei Überschreitung</string>
+    <string name="user_points">Anwenderpunkte</string>
+    <string name="output">Leistung</string>
+    <string name="shared_string_feet">Fuß</string>
+    <string name="srtm_unit_format">Einheitenvariante der Höhenlinien</string>
+    <string name="srtm_download_list_help_message">OsmAnd liefert Höhenlinien-Daten in Metern und Fuß. Sie müssen die Datei erneut herunterladen, um das Format zu ändern.</string>
+    <string name="srtm_download_single_help_message">Bitte wählen Sie die gewünschte Variante. Sie müssen die Datei erneut herunterladen, um das Format zu ändern.</string>
+    <string name="route_line_use_gradient_coloring">Die Routenlinie wird durch die Steigung eingefärbt.</string>
+    <string name="shared_string_min_height">Mindesthöhe</string>
+    <string name="shared_string_max_height">Maximale Höhe</string>
+    <string name="language_description">Wählen Sie die bevorzugte Sprache und die Art der Sprachführung.</string>
+    <string name="tts_description">Text-to-Speech (TTS) kann alle Arten von Anweisungen aussprechen: Straßennamen, Abbiegeanweisungen, POI-Namen usw.</string>
+    <string name="tts_title">TTS</string>
+    <string name="recorded_description">Aufgezeichnete Stimme klingt besser, kann aber nur vorher aufgezeichnete Phrasen aussprechen: Abbiegeanweisungen. Kann keine Straßennamen oder POI-Namen ansagen.</string>
+    <string name="use_system_language">Systemsprache verwenden</string>
+    <string name="in_grace_period">In der Nachlaufzeit</string>
+    <string name="shared_string_itinerary">Reiseplan</string>
 </resources>

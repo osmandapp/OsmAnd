@@ -772,7 +772,12 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		if (gpxData == null || gpxData.getGpxFile() == null) {
 			return;
 		}
-		List<TrkSegment> segments = gpxData.getGpxFile().getNonEmptyTrkSegments(false);
+		GPXFile gpxFile = gpxData.getGpxFile();
+		if(gpxFile.hasRtePt() && !gpxFile.hasTrkPt()){
+			addPoints(gpxFile.getRoutePoints());
+			return;
+		}
+		List<TrkSegment> segments = gpxFile.getNonEmptyTrkSegments(false);
 		if (Algorithms.isEmpty(segments)) {
 			return;
 		}

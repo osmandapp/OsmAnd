@@ -1494,7 +1494,7 @@
     <string name="local_osm_changes_upload_all_confirm">Naozaj chcete odoslať %1$d zmien do OSM\?</string>
     <string name="confirmation_to_clear_history">Vymazať históriu?</string>
     <string name="osmand_parking_overdue">prekročený čas</string>
-    <string name="confirm_usage_speed_cameras">Vo viacerých krajinách (ako Nemecko, Francúzsko, Taliansko) je použitie varovaní pred rýchlostnými radarmi/kamerami zakázané zákonom (nelegálne). OsmAnd nepreberá žiadnu zodpovednosť ak porušíte zákon. Stlačte \"Áno\" len ak ste na to oprávnený použiť túto funkciu.</string>
+    <string name="confirm_usage_speed_cameras">Vo viacerých krajinách (ako Nemecko, Francúzsko, Taliansko) je použitie varovaní pred rýchlostnými radarmi/kamerami zakázané zákonom. OsmAnd nepreberá žiadnu zodpovednosť ak porušíte zákon. Stlačte \"Áno\" len ak ste oprávnený použiť túto funkciu.</string>
     <string name="welmode_download_maps">Stiahnuť mapy</string>
     <string name="welcome_select_region">Vyberte svoj región, aby bolo možné správne nastaviť dopravné predpisy:</string>
     <string name="welcome_text">OsmAnd poskytuje celosvetové offline mapy a offline navigáciu.</string>
@@ -2729,7 +2729,7 @@
     <string name="wikipedia_offline">Wikipédia offline</string>
     <string name="contour_lines_hillshade_maps">Vrstevnice &amp; tieňované svahy</string>
     <string name="unlock_all_features">Odomknite všetky funkcie OsmAnd</string>
-    <string name="download_wikipedia_description">Stiahnite články Wikipédie pre %1$s pre ich čítanie offline.</string>
+    <string name="download_wikipedia_description">Stiahnite články Wikipédie pre %1$s na ich čítanie offline.</string>
     <string name="download_wikipedia_label">Stiahnuť údaje Wikipédie</string>
     <string name="open_in_browser_wiki">Otvoriť článok online</string>
     <string name="open_in_browser_wiki_description">Zobraziť článok vo webovom prehliadači.</string>
@@ -3946,7 +3946,7 @@
     <string name="announcement_time_off_route">Mimo trasy</string>
     <string name="announcement_time_arrive">Dosiahnutie cieľa</string>
     <string name="announcement_time_intervals">Intervaly času a vzdialenosti</string>
-    <string name="announcement_time_descr">Čas oznamu rôznych hlasových pokynov závisí od typu pokynu, aktuálnej rýchlosti navigácie a predvolenej rýchlosti navigácie.</string>
+    <string name="announcement_time_descr">Časovanie oznamu rôznych hlasových pokynov závisí od typu pokynu, aktuálnej rýchlosti navigácie a predvolenej rýchlosti navigácie.</string>
     <string name="announcement_time_title">Čas oznamu</string>
     <string name="start_recording">Začať záznam</string>
     <string name="show_track_on_map">Zobraziť stopu na mape</string>
@@ -4000,13 +4000,13 @@
     <string name="activity_type_motorbike_name">Motorka</string>
     <string name="activity_type_car_name">Auto</string>
     <string name="select_segments">Zvoliť úseky</string>
-    <string name="select_segments_description">%1$s obsahuje viac než jeden segment, pre navigáciu musíte zvoliť potrebnú časť.</string>
+    <string name="select_segments_description">%1$s obsahuje viac než jeden segment, pre navigáciu musíte určiť potrebnú časť.</string>
     <string name="segments_count">Úsek %1$d</string>
     <string name="temporary_conditional_routing_descr">Použiť cestné obmedzenia, ktoré sú teraz aktívne na mape</string>
     <string name="routing_attr_driving_style_description">Zvoľte účel jazdy pre získanie kratšej, rýchlejšej alebo bezpečnejšej trasy</string>
     <string name="map_orientation_threshold_descr">Neotáčať mapu, ak je rýchlosť nižšia ako hranica</string>
     <string name="restart">Reštartovať</string>
-    <string name="shared_strings_all_regions">Všetky regióny</string>
+    <string name="shared_strings_all_regions">Všetky oblasti</string>
     <string name="delete_number_files_question">Zmazať %1$d súborov\?</string>
     <string name="track_recording_stop_without_saving">Zastaviť bez uloženia</string>
     <string name="track_recording_save_and_stop">Uložiť a zastaviť záznam</string>
@@ -4031,7 +4031,7 @@
     <string name="copy_poi_name">Kopírovať názov POI</string>
     <string name="quick_action_show_hide_title">Zobraziť/skryť</string>
     <string name="shared_string_interval">Interval</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Skryť hranice prírodných rezervácií, národných parkov a chránených oblastí</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Skryť hranice prírodných rezervácií, národných parkov a chránených oblastí.</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">Hranice prírodných oblastí</string>
     <string name="track_has_no_altitude">Stopa neobsahuje údaje o nadmorskej výške.</string>
     <string name="track_has_no_speed">Stopa neobsahuje údaje o rýchlosti.</string>
@@ -4045,17 +4045,57 @@
     <string name="lost_data_warning">Všetky neuložené údaje budú stratené.</string>
     <string name="show_start_dialog">Zobraziť úvodné okno</string>
     <string name="trip_recording_show_start_dialog_setting">Ak je vypnuté, záznam začne hneď po stlačení nástroja alebo položky v menu a preskočí okno nastavenia.</string>
-    <string name="release_4_0_beta">• Aktualizácie OsmAnd Live presunuté do \"Sťahovania &gt; Aktualizácie\"
+    <string name="release_4_0_beta">• Pridaná možnosť stiahnutia Vrstevníc v stopách
+\n
+\n• Plánovať trasy: pridané prepínače medzi bodmi a grafmi
+\n
+\n• Aktualizácie OsmAnd Live presunuté do \"Sťahovania &gt; Aktualizácie\"
 \n
 \n • Stopy je teraz možné vyfarbiť podľa nadmorskej výšky, rýchlosti alebo sklonu svahu.
 \n
-\n • Pridaná možnosť zmeny vzhľadu navigačnej trasy
+\n • Pridaná možnosť zmeny vzhľadu navigačnej trasy.
 \n
 \n • Vylepšené okno \"Záznam výletu\"
 \n
 \n</string>
     <string name="customize_route_line">Upraviť navigačnú trasu</string>
     <string name="shared_string_route_line">Navigačná trasa</string>
-    <string name="route_line_use_map_style_appearance">Navigačná trasa použije %1$s, zadané na zvolenom štýle mapy: %2$s.</string>
-    <string name="specify_color_for_map_mode">Zadajte farbu pre režim mapy: %1$s.</string>
+    <string name="route_line_use_map_style_appearance">Použiť štýl mapy (%2$s), predvolene %1$s.</string>
+    <string name="specify_color_for_map_mode">Zadajte farbu pre režim mapy %1$s.</string>
+    <string name="no_purchases">Nemáte žiadne nákupy</string>
+    <string name="new_device_account">Nové zariadenie / nový účet</string>
+    <string name="contact_support_description">Ak máte nejaké otázky, kontaktujte nás na %1$s.</string>
+    <string name="empty_purchases_description">Ak sa tu vaše nákupy nezobrazujú, stlačte “%1$s” alebo kontaktujte tím podpory.</string>
+    <string name="contact_support">Kontaktovať podporu</string>
+    <string name="troubleshooting">Riešenie problémov</string>
+    <string name="troubleshooting_description">Prosím nasledujte tento odkaz ak máte problémy s nákupom.</string>
+    <string name="osmand_live">OsmAnd Live</string>
+    <string name="annual_subscription">Ročné predplatné</string>
+    <string name="monthly_subscription">Mesačné predplatné</string>
+    <string name="three_months_subscription">3-mesačné predplatné</string>
+    <string name="next_billing_date">Nasledujúci dátum platby: %1$s</string>
+    <string name="osmand_live_cancelled">Zrušené</string>
+    <string name="renew_subscription">Obnoviť predplatné</string>
+    <string name="in_grace_period">V období tolerancie</string>
+    <string name="on_hold">Pozdržané</string>
+    <string name="expired">Expirované</string>
+    <string name="update_all_maps_added">Aktualizovať všetky mapy pridané do %1$s\?</string>
+    <string name="exit_number">Číslo výjazdu</string>
+    <string name="announce_when_exceeded">Hlásiť keď je prekročené</string>
+    <string name="user_points">Body používateľa</string>
+    <string name="output">Výstup</string>
+    <string name="map_quick_action_pattern">%1$s → …</string>
+    <string name="shared_string_feet">stopy</string>
+    <string name="srtm_unit_format">Variant jednotiek vrstevníc</string>
+    <string name="srtm_download_list_help_message">OsmAnd poskytuje údaje vrstevníc v metroch a stopách. Budete musieť znovu stiahnuť súbor pre zmenu formátu.</string>
+    <string name="srtm_download_single_help_message">Prosím zvoľte variant. Budete musieť znovu stiahnuť súbor pre zmenu formátu.</string>
+    <string name="route_line_use_gradient_coloring">Čiara trasy je vyfarbená podľa svahu prevýšenia.</string>
+    <string name="shared_string_min_height">Min. výška</string>
+    <string name="shared_string_max_height">Max. výška</string>
+    <string name="language_description">Zvoľte preferovaný jazyk a typ hlasových pokynov.</string>
+    <string name="tts_description">Text-to-speech (TTS) môže vysloviť všetky typy pokynov: názvy ulíc, zabočenia, body záujmu, atď.</string>
+    <string name="tts_title">TTS</string>
+    <string name="recorded_description">Nahratý hlas znie lepšie, ale môže vysloviť len predpripravené frázy: pokyny na zabočenie. Nevie vysloviť názvy ulíc alebo bodov záujmu.</string>
+    <string name="use_system_language">Použiť jazyk systému</string>
+    <string name="shared_string_itinerary">Itinerár</string>
 </resources>

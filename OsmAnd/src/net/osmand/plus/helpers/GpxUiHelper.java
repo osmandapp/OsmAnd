@@ -79,6 +79,7 @@ import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxDbHelper;
 import net.osmand.plus.GpxDbHelper.GpxDataItemCallback;
+import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
@@ -143,6 +144,7 @@ public class GpxUiHelper {
 
 	private static final int OPEN_GPX_DOCUMENT_REQUEST = 1005;
 	private static final int MAX_CHART_DATA_ITEMS = 10000;
+	private static final long SECOND_IN_MILLIS = 1000L;
 	private static final Log LOG = PlatformUtil.getLog(GpxUiHelper.class);
 
 	public static String getDescription(OsmandApplication app, GPXFile result, File f, boolean html) {
@@ -2124,12 +2126,16 @@ public class GpxUiHelper {
 
 
 	public static GPXFile makeGpxFromRoute(RouteCalculationResult route, OsmandApplication app) {
+		return makeGpxFromLocations(route.getRouteLocations(), app);
+	}
+
+	public static GPXFile makeGpxFromLocations(List<Location> locations, OsmandApplication app) {
 		double lastHeight = HEIGHT_UNDEFINED;
 		GPXFile gpx = new GPXUtilities.GPXFile(Version.getFullVersion(app));
-		List<Location> locations = route.getRouteLocations();
 		if (locations != null) {
 			GPXUtilities.Track track = new GPXUtilities.Track();
 			GPXUtilities.TrkSegment seg = new GPXUtilities.TrkSegment();
+			List<GPXUtilities.WptPt> pts = seg.points;
 			for (Location l : locations) {
 				GPXUtilities.WptPt point = new GPXUtilities.WptPt();
 				point.lat = l.getLatitude();
@@ -2138,14 +2144,28 @@ public class GpxUiHelper {
 					gpx.hasAltitude = true;
 					float h = (float) l.getAltitude();
 					point.ele = h;
-					if (lastHeight == HEIGHT_UNDEFINED && seg.points.size() > 0) {
-						for (GPXUtilities.WptPt pt : seg.points) {
+					if (lastHeight == HEIGHT_UNDEFINED && pts.size() > 0) {
+						for (GPXUtilities.WptPt pt : pts) {
 							if (Double.isNaN(pt.ele)) {
 								pt.ele = h;
 							}
 						}
 					}
 					lastHeight = h;
+				} else {
+					lastHeight = HEIGHT_UNDEFINED;
+				}
+				if (pts.size() == 0) {
+					point.time = System.currentTimeMillis();
+				} else {
+					GPXUtilities.WptPt prevPoint = pts.get(pts.size() - 1);
+					if (l.hasSpeed() && l.getSpeed() != 0) {
+						point.speed = l.getSpeed();
+						double dist = MapUtils.getDistance(prevPoint.lat, prevPoint.lon, point.lat, point.lon);
+						point.time = prevPoint.time + (long) (dist / point.speed) * SECOND_IN_MILLIS;
+					} else {
+						point.time = prevPoint.time;
+					}
 				}
 				seg.points.add(point);
 			}
@@ -2228,17 +2248,18 @@ public class GpxUiHelper {
 		return dataSet;
 	}
 
-	public static GpxDisplayItem makeGpxDisplayItem(OsmandApplication app, GPXUtilities.GPXFile gpx) {
-		GpxDisplayItem gpxItem = null;
-		String groupName = app.getString(R.string.current_route);
-		GpxDisplayGroup group = app.getSelectedGpxHelper().buildGpxDisplayGroup(gpx, 0, groupName);
+	public static GpxDisplayItem makeGpxDisplayItem(OsmandApplication app, GPXFile gpxFile) {
+		GpxSelectionHelper helper = app.getSelectedGpxHelper();
+		String groupName = helper.getGroupName(gpxFile);
+		GpxDisplayGroup group = helper.buildGpxDisplayGroup(gpxFile, 0, groupName);
 		if (group != null && group.getModifiableList().size() > 0) {
-			gpxItem = group.getModifiableList().get(0);
+			GpxDisplayItem gpxItem = group.getModifiableList().get(0);
 			if (gpxItem != null) {
 				gpxItem.route = true;
 			}
+			return gpxItem;
 		}
-		return gpxItem;
+		return null;
 	}
 
 	public static void saveAndShareGpx(@NonNull final Context context, @NonNull final GPXFile gpxFile) {
@@ -2288,6 +2309,10 @@ public class GpxUiHelper {
 		}
 	}
 
+	public static void saveGpx(GPXFile gpxFile, SaveGpxListener listener) {
+		new SaveGpxAsyncTask(new File(gpxFile.path), gpxFile, listener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+
 	private static GpxDataItem getDataItem(@NonNull final OsmandApplication app, @NonNull final GPXFile gpxFile) {
 		GpxDataItemCallback itemCallback = new GpxDataItemCallback() {
 			@Override
@@ -2335,6 +2360,12 @@ public class GpxUiHelper {
 		if (AndroidUtils.isIntentSafe(context, sendIntent)) {
 			context.startActivity(sendIntent);
 		}
+	}
+
+	@NonNull
+	public static String getGpxFileRelativePath(@NonNull OsmandApplication app, @NonNull String fullPath) {
+		String rootGpxDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR).getAbsolutePath() + '/';
+		return fullPath.replace(rootGpxDir, "");
 	}
 
 	public static class GPXInfo {

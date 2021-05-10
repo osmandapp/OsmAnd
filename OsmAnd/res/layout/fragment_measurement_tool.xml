@@ -13,293 +13,314 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="@drawable/bg_bottom_menu_dark"
         android:orientation="vertical"
         android:clickable="true"
-        android:focusable="true">
-
-        <ProgressBar
-            android:id="@+id/snap_to_road_progress_bar"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="0dp"
-            android:visibility="gone"
-            tools:visibility="visible" />
-
-        <RelativeLayout
-            android:id="@+id/up_down_row"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/measurement_tool_up_down_row_height"
-            android:background="?attr/selectableItemBackground">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/main_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/measurement_tool_text_button_padding"
-                android:layout_marginLeft="@dimen/measurement_tool_text_button_padding"
-                android:layout_marginRight="@dimen/measurement_tool_text_button_padding"
-                android:layout_marginStart="@dimen/measurement_tool_text_button_padding"
-                android:background="@null"
-                tools:src="@drawable/ic_action_ruler"/>
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/up_down_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/bottom_sheet_content_margin"
-                android:layout_marginLeft="@dimen/bottom_sheet_content_margin"
-                android:layout_marginRight="@dimen/bottom_sheet_content_margin"
-                android:layout_marginStart="@dimen/bottom_sheet_content_margin"
-                android:background="@null"
-                tools:src="@drawable/ic_action_arrow_down"/>
-
-            <TextView
-                android:id="@+id/measurement_distance_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/measurement_tool_button_padding"
-                android:layout_marginEnd="@dimen/text_margin_small"
-                android:layout_marginLeft="@dimen/measurement_tool_text_button_padding"
-                android:layout_marginRight="@dimen/text_margin_small"
-                android:layout_marginStart="@dimen/measurement_tool_text_button_padding"
-                android:layout_toEndOf="@id/main_icon"
-                android:layout_toRightOf="@id/main_icon"
-                android:textAppearance="@style/TextAppearance.ListItemCategoryTitle"
-                tools:text="724 m,"/>
-
-            <TextView
-                android:id="@+id/measurement_points_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/measurement_tool_button_padding"
-                android:layout_toEndOf="@id/measurement_distance_text_view"
-                android:layout_toRightOf="@id/measurement_distance_text_view"
-                android:layout_alignEnd="@id/up_down_button"
-                android:layout_alignRight="@id/up_down_button"
-                android:textAppearance="@style/TextAppearance.ListItemCategoryTitle"
-                tools:text="points: 3" />
-
-            <TextView
-                android:id="@+id/distance_to_center_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/measurement_points_text_view"
-                android:layout_alignStart="@+id/measurement_distance_text_view"
-                android:layout_alignLeft="@+id/measurement_distance_text_view"
-                android:maxLines="1"
-                android:textColor="?android:textColorSecondary"
-                android:textSize="@dimen/default_desc_text_size"
-                tools:text=" – 700 m" />
-
-            <TextView
-                android:id="@+id/move_point_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/text_margin_small"
-                android:layout_marginLeft="@dimen/measurement_tool_text_margin"
-                android:layout_marginRight="@dimen/text_margin_small"
-                android:layout_marginStart="@dimen/measurement_tool_text_margin"
-                android:layout_toEndOf="@id/main_icon"
-                android:layout_toRightOf="@id/main_icon"
-                android:text="@string/move_point"
-                android:textAppearance="@style/TextAppearance.ListItemTitle"
-                android:visibility="gone"/>
-
-            <TextView
-                android:id="@+id/add_point_before_after_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/text_margin_small"
-                android:layout_marginLeft="@dimen/measurement_tool_text_margin"
-                android:layout_marginRight="@dimen/text_margin_small"
-                android:layout_marginStart="@dimen/measurement_tool_text_margin"
-                android:layout_toEndOf="@id/main_icon"
-                android:layout_toRightOf="@id/main_icon"
-                android:textAppearance="@style/TextAppearance.ListItemTitle"
-                android:visibility="gone"
-                tools:text="@string/add_point_after"/>
-        </RelativeLayout>
+        android:focusable="true"
+        tools:ignore="UselessParent">
 
         <FrameLayout
-            android:id="@+id/info_type_buttons_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <include
-                layout="@layout/custom_radio_buttons"
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/measurement_tool_button_height"
-                android:layout_marginStart="@dimen/content_padding"
-                android:layout_marginEnd="@dimen/content_padding"
-                android:layout_marginBottom="@dimen/measurement_tool_content_padding_medium" />
+                android:layout_height="0dp"
+                android:background="@drawable/bg_contextmenu_shadow_top_light" />
+
+            <ProgressBar
+                android:id="@+id/snap_to_road_progress_bar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="0dp"
+                android:background="?attr/list_background_color"
+                android:visibility="invisible"
+                tools:visibility="visible" />
 
         </FrameLayout>
 
-        <FrameLayout
-            android:id="@+id/cards_container"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/measurement_tool_info_cards_container_height"
-            android:visibility="gone" />
-
-        <View
-            android:id="@+id/bottom_panel_divider"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?attr/dashboard_divider" />
-
         <LinearLayout
-            android:id="@+id/measure_mode_controls"
+            android:id="@+id/main_content"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/measurement_tool_controls_height"
-            android:paddingTop="@dimen/measurement_tool_button_margin"
-            android:paddingBottom="@dimen/measurement_tool_button_margin"
-            android:paddingLeft="@dimen/measurement_tool_button_margin"
-            android:paddingRight="@dimen/measurement_tool_button_margin"
-			android:paddingStart="@dimen/measurement_tool_button_margin"
-			android:paddingEnd="@dimen/measurement_tool_button_margin">
+            android:layout_height="wrap_content"
+            android:background="?attr/list_background_color"
+            android:orientation="vertical">
 
-            <FrameLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
+            <RelativeLayout
+                android:id="@+id/up_down_row"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/measurement_tool_up_down_row_height"
+                android:background="?attr/selectableItemBackground">
 
-                <net.osmand.plus.widgets.TextViewEx
-                    android:id="@+id/options_button"
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/main_icon"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:background="?attr/selectableItemBackground"
-                    android:ellipsize="end"
-                    android:gravity="center_vertical"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/measurement_tool_text_button_padding"
+                    android:layout_marginLeft="@dimen/measurement_tool_text_button_padding"
+                    android:layout_marginRight="@dimen/measurement_tool_text_button_padding"
+                    android:layout_marginStart="@dimen/measurement_tool_text_button_padding"
+                    android:background="@null"
+                    tools:src="@drawable/ic_action_ruler"/>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/up_down_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/bottom_sheet_content_margin"
+                    android:layout_marginLeft="@dimen/bottom_sheet_content_margin"
+                    android:layout_marginRight="@dimen/bottom_sheet_content_margin"
+                    android:layout_marginStart="@dimen/bottom_sheet_content_margin"
+                    android:background="@null"
+                    tools:src="@drawable/ic_action_arrow_down"/>
+
+                <TextView
+                    android:id="@+id/measurement_distance_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/measurement_tool_button_padding"
+                    android:layout_marginEnd="@dimen/text_margin_small"
+                    android:layout_marginLeft="@dimen/measurement_tool_text_button_padding"
+                    android:layout_marginRight="@dimen/text_margin_small"
+                    android:layout_marginStart="@dimen/measurement_tool_text_button_padding"
+                    android:layout_toEndOf="@id/main_icon"
+                    android:layout_toRightOf="@id/main_icon"
+                    android:textAppearance="@style/TextAppearance.ListItemCategoryTitle"
+                    tools:text="724 m,"/>
+
+                <TextView
+                    android:id="@+id/measurement_points_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/measurement_tool_button_padding"
+                    android:layout_toEndOf="@id/measurement_distance_text_view"
+                    android:layout_toRightOf="@id/measurement_distance_text_view"
+                    android:layout_alignEnd="@id/up_down_button"
+                    android:layout_alignRight="@id/up_down_button"
+                    android:textAppearance="@style/TextAppearance.ListItemCategoryTitle"
+                    tools:text="points: 3" />
+
+                <TextView
+                    android:id="@+id/distance_to_center_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/measurement_points_text_view"
+                    android:layout_alignStart="@+id/measurement_distance_text_view"
+                    android:layout_alignLeft="@+id/measurement_distance_text_view"
                     android:maxLines="1"
-                    android:paddingStart="@dimen/measurement_tool_text_button_padding_small"
-                    android:paddingLeft="@dimen/measurement_tool_text_button_padding_small"
-                    android:paddingEnd="@dimen/measurement_tool_text_button_padding_small"
-                    android:paddingRight="@dimen/measurement_tool_text_button_padding_small"
-                    android:text="@string/shared_string_options"
-                    android:textColor="?attr/color_dialog_buttons"
-                    osmand:typeface="@string/font_roboto_medium"/>
-            </FrameLayout>
+                    android:textColor="?android:textColorSecondary"
+                    android:textSize="@dimen/default_desc_text_size"
+                    tools:text=" – 700 m" />
 
-            <ImageButton
-                android:id="@+id/undo_point_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="?attr/selectableItemBackground"
-                android:padding="@dimen/measurement_tool_undo_redo_padding_small"
-                android:contentDescription="@string/shared_string_undo"
-                tools:src="@drawable/ic_action_undo_dark"/>
+                <TextView
+                    android:id="@+id/move_point_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/text_margin_small"
+                    android:layout_marginLeft="@dimen/measurement_tool_text_margin"
+                    android:layout_marginRight="@dimen/text_margin_small"
+                    android:layout_marginStart="@dimen/measurement_tool_text_margin"
+                    android:layout_toEndOf="@id/main_icon"
+                    android:layout_toRightOf="@id/main_icon"
+                    android:text="@string/move_point"
+                    android:textAppearance="@style/TextAppearance.ListItemTitle"
+                    android:visibility="gone"/>
 
-            <ImageButton
-                android:id="@+id/redo_point_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/measurement_tool_button_padding"
-                android:layout_marginStart="@dimen/measurement_tool_button_padding"
-                android:background="?attr/selectableItemBackground"
-                android:padding="@dimen/measurement_tool_undo_redo_padding_small"
-                android:contentDescription="@string/shared_string_redo"
-                tools:src="@drawable/ic_action_redo_dark"/>
+                <TextView
+                    android:id="@+id/add_point_before_after_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/text_margin_small"
+                    android:layout_marginLeft="@dimen/measurement_tool_text_margin"
+                    android:layout_marginRight="@dimen/text_margin_small"
+                    android:layout_marginStart="@dimen/measurement_tool_text_margin"
+                    android:layout_toEndOf="@id/main_icon"
+                    android:layout_toRightOf="@id/main_icon"
+                    android:textAppearance="@style/TextAppearance.ListItemTitle"
+                    android:visibility="gone"
+                    tools:text="@string/add_point_after"/>
+            </RelativeLayout>
 
             <FrameLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:id="@+id/info_type_buttons_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
                 <include
-                    android:id="@+id/add_point_button"
-                    layout="@layout/bottom_sheet_dialog_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="end"
-                    android:minWidth="@dimen/measurement_tool_button_width" />
+                    layout="@layout/custom_radio_buttons"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/measurement_tool_button_height"
+                    android:layout_marginStart="@dimen/content_padding"
+                    android:layout_marginEnd="@dimen/content_padding"
+                    android:layout_marginBottom="@dimen/measurement_tool_content_padding_medium" />
 
             </FrameLayout>
 
-        </LinearLayout>
-
-        <RelativeLayout
-            android:id="@+id/move_point_controls"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/measurement_tool_controls_height"
-            android:visibility="gone">
-
-            <include
-                android:id="@+id/apply_move_point_button"
-                layout="@layout/bottom_sheet_dialog_button"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/measurement_tool_button_height"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/measurement_tool_button_margin"
-                android:layout_marginRight="@dimen/measurement_tool_button_margin"
-                android:minWidth="@dimen/measurement_tool_button_width" />
-
-            <net.osmand.plus.widgets.TextViewEx
-                android:id="@+id/cancel_move_point_button"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_margin="@dimen/measurement_tool_button_margin"
-                android:background="?attr/selectableItemBackground"
-                android:gravity="center_vertical"
-                android:padding="@dimen/measurement_tool_text_button_padding_small"
-                android:text="@string/shared_string_cancel"
-                android:textColor="?attr/color_dialog_buttons"
-                osmand:typeface="@string/font_roboto_medium"/>
-        </RelativeLayout>
-
-        <LinearLayout
-            android:id="@+id/add_point_before_after_controls"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/measurement_tool_controls_height"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:visibility="gone">
-
-            <net.osmand.plus.widgets.TextViewEx
-                android:id="@+id/cancel_point_before_after_button"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_margin="@dimen/measurement_tool_button_margin"
-                android:background="?attr/selectableItemBackground"
-                android:gravity="center_vertical"
-                android:padding="@dimen/measurement_tool_text_button_padding_small"
-                android:text="@string/shared_string_cancel"
-                android:textColor="?attr/color_dialog_buttons"
-                osmand:typeface="@string/font_roboto_medium"/>
+            <FrameLayout
+                android:id="@+id/cards_container"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/measurement_tool_info_cards_container_height"
+                android:visibility="gone" />
 
             <View
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"/>
+                android:id="@+id/bottom_panel_divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?attr/dashboard_divider" />
 
-            <include
-                android:id="@+id/apply_point_before_after_point_button"
-                android:layout_height="@dimen/measurement_tool_button_height"
-                android:layout_gravity="center_vertical"
-                android:layout_width="@dimen/measurement_tool_button_width"
-                android:layout_marginEnd="@dimen/measurement_tool_button_margin"
-                android:layout_marginRight="@dimen/measurement_tool_button_margin"
-                layout="@layout/bottom_sheet_dialog_button" />
+            <LinearLayout
+                android:id="@+id/measure_mode_controls"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/measurement_tool_controls_height"
+                android:paddingTop="@dimen/measurement_tool_button_margin"
+                android:paddingBottom="@dimen/measurement_tool_button_margin"
+                android:paddingLeft="@dimen/measurement_tool_button_margin"
+                android:paddingRight="@dimen/measurement_tool_button_margin"
+                android:paddingStart="@dimen/measurement_tool_button_margin"
+                android:paddingEnd="@dimen/measurement_tool_button_margin">
 
-            <include
-                android:id="@+id/add_point_before_after_button"
-                android:layout_height="@dimen/measurement_tool_button_height"
-                android:layout_gravity="center_vertical"
-                android:layout_width="@dimen/measurement_tool_button_width"
-                android:layout_marginEnd="@dimen/measurement_tool_button_margin"
-                android:layout_marginRight="@dimen/measurement_tool_button_margin"
-                layout="@layout/bottom_sheet_dialog_button" />
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <net.osmand.plus.widgets.TextViewEx
+                        android:id="@+id/options_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="?attr/selectableItemBackground"
+                        android:ellipsize="end"
+                        android:gravity="center_vertical"
+                        android:maxLines="1"
+                        android:paddingStart="@dimen/measurement_tool_text_button_padding_small"
+                        android:paddingLeft="@dimen/measurement_tool_text_button_padding_small"
+                        android:paddingEnd="@dimen/measurement_tool_text_button_padding_small"
+                        android:paddingRight="@dimen/measurement_tool_text_button_padding_small"
+                        android:text="@string/shared_string_options"
+                        android:textColor="?attr/color_dialog_buttons"
+                        osmand:typeface="@string/font_roboto_medium"/>
+                </FrameLayout>
+
+                <ImageButton
+                    android:id="@+id/undo_point_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:padding="@dimen/measurement_tool_undo_redo_padding_small"
+                    android:contentDescription="@string/shared_string_undo"
+                    tools:src="@drawable/ic_action_undo_dark"/>
+
+                <ImageButton
+                    android:id="@+id/redo_point_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/measurement_tool_button_padding"
+                    android:layout_marginStart="@dimen/measurement_tool_button_padding"
+                    android:background="?attr/selectableItemBackground"
+                    android:padding="@dimen/measurement_tool_undo_redo_padding_small"
+                    android:contentDescription="@string/shared_string_redo"
+                    tools:src="@drawable/ic_action_redo_dark"/>
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <include
+                        android:id="@+id/add_point_button"
+                        layout="@layout/bottom_sheet_dialog_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="end"
+                        android:minWidth="@dimen/measurement_tool_button_width" />
+
+                </FrameLayout>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/move_point_controls"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/measurement_tool_controls_height"
+                android:visibility="gone">
+
+                <include
+                    android:id="@+id/apply_move_point_button"
+                    layout="@layout/bottom_sheet_dialog_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/measurement_tool_button_height"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/measurement_tool_button_margin"
+                    android:layout_marginRight="@dimen/measurement_tool_button_margin"
+                    android:minWidth="@dimen/measurement_tool_button_width" />
+
+                <net.osmand.plus.widgets.TextViewEx
+                    android:id="@+id/cancel_move_point_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/measurement_tool_button_margin"
+                    android:background="?attr/selectableItemBackground"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/measurement_tool_text_button_padding_small"
+                    android:text="@string/shared_string_cancel"
+                    android:textColor="?attr/color_dialog_buttons"
+                    osmand:typeface="@string/font_roboto_medium"/>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/add_point_before_after_controls"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/measurement_tool_controls_height"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <net.osmand.plus.widgets.TextViewEx
+                    android:id="@+id/cancel_point_before_after_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/measurement_tool_button_margin"
+                    android:background="?attr/selectableItemBackground"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/measurement_tool_text_button_padding_small"
+                    android:text="@string/shared_string_cancel"
+                    android:textColor="?attr/color_dialog_buttons"
+                    osmand:typeface="@string/font_roboto_medium"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"/>
+
+                <include
+                    android:id="@+id/apply_point_before_after_point_button"
+                    android:layout_height="@dimen/measurement_tool_button_height"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="@dimen/measurement_tool_button_width"
+                    android:layout_marginEnd="@dimen/measurement_tool_button_margin"
+                    android:layout_marginRight="@dimen/measurement_tool_button_margin"
+                    layout="@layout/bottom_sheet_dialog_button" />
+
+                <include
+                    android:id="@+id/add_point_before_after_button"
+                    android:layout_height="@dimen/measurement_tool_button_height"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="@dimen/measurement_tool_button_width"
+                    android:layout_marginEnd="@dimen/measurement_tool_button_margin"
+                    android:layout_marginRight="@dimen/measurement_tool_button_margin"
+                    layout="@layout/bottom_sheet_dialog_button" />
+
+            </LinearLayout>
 
         </LinearLayout>
 

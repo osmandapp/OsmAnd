@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
-import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
 import androidx.appcompat.widget.SwitchCompat;
@@ -32,10 +31,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static net.osmand.AndroidUtils.isLayoutRtl;
+
 public abstract class SwitchableAction<T> extends QuickAction {
 
 	public static final String KEY_ID = "id";
-	
+
 	protected static final String KEY_DIALOG = "dialog";
 
 	private transient EditText title;
@@ -58,11 +59,10 @@ public abstract class SwitchableAction<T> extends QuickAction {
 
 	@Override
 	public void drawUI(ViewGroup parent, final MapActivity activity) {
-
 		View view = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.quick_action_switchable_action, parent, false);
 
-		final SwitchCompat showDialog = (SwitchCompat) view.findViewById(R.id.saveButton);
+		final SwitchCompat showDialog = view.findViewById(R.id.saveButton);
 		if (!getParams().isEmpty()) {
 			showDialog.setChecked(Boolean.valueOf(getParams().get(KEY_DIALOG)));
 		}
@@ -74,7 +74,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 			}
 		});
 
-		RecyclerView list = (RecyclerView) view.findViewById(R.id.list);
+		RecyclerView list = view.findViewById(R.id.list);
 		adapter = new Adapter(activity, new QuickActionListFragment.OnStartDragListener() {
 			@Override
 			public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
@@ -92,9 +92,9 @@ public abstract class SwitchableAction<T> extends QuickAction {
 
 		list.setAdapter(adapter);
 
-		TextView dscrTitle = (TextView) view.findViewById(R.id.textDscrTitle);
-		TextView dscrHint = (TextView) view.findViewById(R.id.textDscrHint);
-		Button addBtn = (Button) view.findViewById(R.id.btnAdd);
+		TextView dscrTitle = view.findViewById(R.id.textDscrTitle);
+		TextView dscrHint = view.findViewById(R.id.textDscrHint);
+		Button addBtn = view.findViewById(R.id.btnAdd);
 
 		dscrTitle.setText(parent.getContext().getString(getDiscrTitle()) + ":");
 		dscrHint.setText(getDiscrHint());
@@ -105,9 +105,22 @@ public abstract class SwitchableAction<T> extends QuickAction {
 	}
 
 	@Override
-	public boolean fillParams(View root, MapActivity activity) {
+	public String getActionText(OsmandApplication app) {
+		String arrowDirection = isLayoutRtl(app) ? "\u25c0" : "\u25b6";
 
-		final RecyclerView list = (RecyclerView) root.findViewById(R.id.list);
+		List<QuickAction> actions = app.getQuickActionRegistry().collectQuickActionsByType(getActionType());
+		if (actions.size() > 1) {
+			String item = getNextSelectedItem(app);
+			return "\u2026" + arrowDirection + getTranslatedItemName(app, item);
+		} else {
+			String item = getSelectedItem(app);
+			return getTranslatedItemName(app, item) + arrowDirection + "\u2026";
+		}
+	}
+
+	@Override
+	public boolean fillParams(View root, MapActivity activity) {
+		final RecyclerView list = root.findViewById(R.id.list);
 		final Adapter adapter = (Adapter) list.getAdapter();
 
 		boolean hasParams = adapter.itemsList != null && !adapter.itemsList.isEmpty();
@@ -124,8 +137,12 @@ public abstract class SwitchableAction<T> extends QuickAction {
 	public abstract List<T> loadListFromParams();
 
 	public abstract void executeWithParams(MapActivity activity, String params);
-	
+
 	public abstract String getTranslatedItemName(Context context, String item);
+
+	public abstract String getSelectedItem(OsmandApplication app);
+
+	public abstract String getNextSelectedItem(OsmandApplication app);
 
 	protected void showChooseDialog(FragmentManager fm) {
 		SelectMapViewQuickActionsBottomSheet fragment = new SelectMapViewQuickActionsBottomSheet();
@@ -135,15 +152,11 @@ public abstract class SwitchableAction<T> extends QuickAction {
 		fragment.show(fm, SelectMapViewQuickActionsBottomSheet.TAG);
 	}
 
-	public String getSelectedItem(OsmandApplication app) {
-		return null;
-	}
-
 	protected class Adapter extends RecyclerView.Adapter<Adapter.ItemHolder> implements ReorderItemTouchHelperCallback.OnItemMoveCallback {
 
 		private List<T> itemsList = new ArrayList<>();
 		private final QuickActionListFragment.OnStartDragListener onStartDragListener;
-		private Context context;
+		private final Context context;
 
 		public Adapter(Context context, QuickActionListFragment.OnStartDragListener onStartDragListener) {
 			this.context = context;
@@ -293,10 +306,10 @@ public abstract class SwitchableAction<T> extends QuickAction {
 			public ItemHolder(View itemView) {
 				super(itemView);
 
-				title = (TextView) itemView.findViewById(R.id.title);
-				handleView = (ImageView) itemView.findViewById(R.id.handle_view);
-				closeBtn = (ImageView) itemView.findViewById(R.id.closeImageButton);
-				icon = (ImageView) itemView.findViewById(R.id.imageView);
+				title = itemView.findViewById(R.id.title);
+				handleView = itemView.findViewById(R.id.handle_view);
+				closeBtn = itemView.findViewById(R.id.closeImageButton);
+				icon = itemView.findViewById(R.id.imageView);
 			}
 		}
 	}

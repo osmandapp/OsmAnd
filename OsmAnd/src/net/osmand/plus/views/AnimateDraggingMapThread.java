@@ -119,7 +119,7 @@ public class AnimateDraggingMapThread {
 	}
 
 	public void startMoving(final double finalLat, final double finalLon, final Pair<Integer, Double> finalZoom,
-							final Float finalRotation, final boolean notifyListener) {
+							final boolean pendingRotation, final Float finalRotation, final boolean notifyListener) {
 		stopAnimatingSync();
 
 		final RotatedTileBox rb = tileView.getCurrentRotatedTileBox().copy();
@@ -127,7 +127,7 @@ public class AnimateDraggingMapThread {
 		double startLon = rb.getLongitude();
 		final int startZoom = rb.getZoom();
 		final double startZoomFP = rb.getZoomFloatPart();
-		final float startRotaton = rb.getRotate();
+		final float startRotation = rb.getRotate();
 
 		final int zoom;
 		final double zoomFP;
@@ -142,7 +142,7 @@ public class AnimateDraggingMapThread {
 		if (finalRotation != null) {
 			rotation = finalRotation;
 		} else {
-			rotation = startRotaton;
+			rotation = startRotation;
 		}
 
 		final float mMoveX = rb.getPixXFromLatLon(startLat, startLon) - rb.getPixXFromLatLon(finalLat, finalLon);
@@ -167,8 +167,10 @@ public class AnimateDraggingMapThread {
 					animatingZoomInThread(startZoom, startZoomFP, zoom, zoomFP, NAV_ANIMATION_TIME, notifyListener);
 				}
 
-				boolean animateRotation = rotation != startRotaton;
-				if (animateRotation) {
+				boolean animateRotation = rotation != startRotation;
+				if (pendingRotation) {
+					pendingRotateAnimation();
+				} else if (animateRotation) {
 					animatingRotateInThread(rotation, 500f, notifyListener);
 				}
 

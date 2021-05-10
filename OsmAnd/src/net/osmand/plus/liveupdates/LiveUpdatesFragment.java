@@ -275,7 +275,8 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 		TextViewEx toolbarTitle = (TextViewEx) toolbar.findViewById(R.id.toolbar_title);
 		toolbarTitle.setText(R.string.osm_live);
 
-		View closeButton = toolbar.findViewById(R.id.close_button);
+		ImageView closeButton = (ImageView) toolbar.findViewById(R.id.close_button);
+		UiUtilities.rotateImageByLayoutDirection(closeButton);
 		closeButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -440,6 +441,8 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 								 boolean isLastChild, View convertView, ViewGroup parent) {
 			LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
 			convertView = inflater.inflate(R.layout.list_item_triple_row_icon_and_menu, parent, false);
+			ImageView secondaryIcon = (ImageView) convertView.findViewById(R.id.secondary_icon);
+			UiUtilities.rotateImageByLayoutDirection(secondaryIcon);
 			LiveMapsViewHolder viewHolder = new LiveMapsViewHolder(convertView);
 			convertView.setTag(viewHolder);
 			viewHolder.bindLocalIndexInfo(getChild(groupPosition, childPosition).getFileName());
@@ -700,7 +703,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 		OsmandSettings settings = app.getSettings();
 		String countryName = settings.BILLING_USER_COUNTRY.get();
 		if (purchaseHelper != null) {
-			List<InAppSubscription> subscriptions = purchaseHelper.getLiveUpdates().getVisibleSubscriptions();
+			List<InAppSubscription> subscriptions = purchaseHelper.getSubscriptions().getVisibleSubscriptions();
 			boolean donationSupported = false;
 			for (InAppSubscription s : subscriptions) {
 				if (s.isDonationSupported()) {

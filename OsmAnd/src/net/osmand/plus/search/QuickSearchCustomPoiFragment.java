@@ -542,7 +542,8 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 				titleView.setText(textString);
 				Set<String> subtypes = filter.getAcceptedSubtypes(category);
 				if (categorySelected) {
-					if (subtypes == null) {
+					LinkedHashSet<String> poiTypes = filter.getAcceptedTypes().get(category);
+					if (subtypes == null || (poiTypes != null && category.getPoiTypes().size() == poiTypes.size())) {
 						descView.setText(getString(R.string.shared_string_all));
 					} else {
 						StringBuilder sb = new StringBuilder();

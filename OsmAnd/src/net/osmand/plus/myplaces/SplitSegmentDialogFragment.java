@@ -287,6 +287,8 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 		}
 		int color = app.getResources().getColor(colorId);
 		title.setTextColor(color);
+		String titleText = getString(R.string.gpx_split_interval);
+		title.setText(getString(R.string.ltr_or_rtl_combine_via_colon, titleText, ""));
 		text.setTextColor(color);
 		img.setImageDrawable(ic.getIcon(R.drawable.ic_action_arrow_drop_down, colorId));
 	}

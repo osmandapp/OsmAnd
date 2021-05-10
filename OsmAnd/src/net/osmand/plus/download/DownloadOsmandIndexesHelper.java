@@ -1,5 +1,26 @@
 package net.osmand.plus.download;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.AssetManager;
+import android.provider.Settings.Secure;
+
+import net.osmand.AndroidUtils;
+import net.osmand.IndexConstants;
+import net.osmand.PlatformUtil;
+import net.osmand.osm.io.NetworkUtils;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,29 +32,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.zip.GZIPInputStream;
 
-import net.osmand.AndroidUtils;
-import net.osmand.IndexConstants;
-import net.osmand.PlatformUtil;
-import net.osmand.osm.io.NetworkUtils;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
-
-import org.apache.commons.logging.Log;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlPullParserFactory;
-
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
-import android.content.res.AssetManager;
-import android.provider.Settings.Secure;
-
 public class DownloadOsmandIndexesHelper {
 	private final static Log log = PlatformUtil.getLog(DownloadOsmandIndexesHelper.class);
-	
+
 	public static class IndexFileList implements Serializable {
 		private static final long serialVersionUID = 1L;
 
@@ -41,29 +42,29 @@ public class DownloadOsmandIndexesHelper {
 		IndexItem basemap;
 		ArrayList<IndexItem> indexFiles = new ArrayList<IndexItem>();
 		private String mapversion;
-		
-		private Comparator<IndexItem> comparator = new Comparator<IndexItem>(){
+
+		private Comparator<IndexItem> comparator = new Comparator<IndexItem>() {
 			@Override
 			public int compare(IndexItem o1, IndexItem o2) {
 				String object1 = o1.getFileName();
 				String object2 = o2.getFileName();
-				if(object1.endsWith(IndexConstants.ANYVOICE_INDEX_EXT_ZIP)){
-					if(object2.endsWith(IndexConstants.ANYVOICE_INDEX_EXT_ZIP)){
+				if (object1.endsWith(IndexConstants.ANYVOICE_INDEX_EXT_ZIP)) {
+					if (object2.endsWith(IndexConstants.ANYVOICE_INDEX_EXT_ZIP)) {
 						return object1.compareTo(object2);
 					} else {
 						return -1;
 					}
-				} else if(object2.endsWith(IndexConstants.ANYVOICE_INDEX_EXT_ZIP)){
+				} else if (object2.endsWith(IndexConstants.ANYVOICE_INDEX_EXT_ZIP)) {
 					return 1;
 				}
 				return object1.compareTo(object2);
 			}
 		};
-		
+
 		public void setDownloadedFromInternet(boolean downloadedFromInternet) {
 			this.downloadedFromInternet = downloadedFromInternet;
 		}
-		
+
 		public boolean isDownloadedFromInternet() {
 			return downloadedFromInternet;
 		}
@@ -75,12 +76,12 @@ public class DownloadOsmandIndexesHelper {
 		@SuppressLint("DefaultLocale")
 		public void add(IndexItem indexItem) {
 			indexFiles.add(indexItem);
-			if(indexItem.getFileName().toLowerCase().startsWith("world_basemap")) {
+			if (indexItem.getFileName().toLowerCase().startsWith("world_basemap")) {
 				basemap = indexItem;
 			}
 		}
-		
-		public void sort(){
+
+		public void sort() {
 			Collections.sort(indexFiles, comparator);
 		}
 
@@ -91,7 +92,7 @@ public class DownloadOsmandIndexesHelper {
 		public List<IndexItem> getIndexFiles() {
 			return indexFiles;
 		}
-		
+
 		public IndexItem getBasemap() {
 			return basemap;
 		}
@@ -106,7 +107,7 @@ public class DownloadOsmandIndexesHelper {
 			return false;
 		}
 
-	}	
+	}
 
 	public static IndexFileList getIndexesList(OsmandApplication app) {
 		PackageManager pm = app.getPackageManager();
@@ -141,16 +142,16 @@ public class DownloadOsmandIndexesHelper {
 	}
 
 	private static void listVoiceAssets(IndexFileList result, AssetManager amanager, PackageManager pm,
-			OsmandSettings settings) {
+	                                    OsmandSettings settings) {
 		try {
-			File voicePath = settings.getContext().getAppPath(IndexConstants.VOICE_INDEX_DIR); 
+			File voicePath = settings.getContext().getAppPath(IndexConstants.VOICE_INDEX_DIR);
 			// list = amanager.list("voice");
 			String date = "";
 			long dateModified = System.currentTimeMillis();
 			try {
 				OsmandApplication app = settings.getContext();
 				ApplicationInfo appInfo = pm.getApplicationInfo(app.getPackageName(), 0);
-				dateModified =  new File(appInfo.sourceDir).lastModified();
+				dateModified = new File(appInfo.sourceDir).lastModified();
 				date = AndroidUtils.formatDate((Context) settings.getContext(), dateModified);
 			} catch (NameNotFoundException e) {
 				log.error(e);
@@ -177,17 +178,17 @@ public class DownloadOsmandIndexesHelper {
 			log.error("Error while loading tts files from assets", e); //$NON-NLS-1$
 		}
 	}
-	
 
-	private static IndexFileList downloadIndexesListFromInternet(OsmandApplication ctx){
+
+	private static IndexFileList downloadIndexesListFromInternet(OsmandApplication ctx) {
 		try {
 			IndexFileList result = new IndexFileList();
 			log.debug("Start loading list of index files"); //$NON-NLS-1$
 			try {
 				String strUrl = ctx.getAppCustomization().getIndexesUrl();
 				long nd = ctx.getAppInitializer().getFirstInstalledDays();
-				if(nd > 0) {
-					strUrl += "&nd=" + nd; 
+				if (nd > 0) {
+					strUrl += "&nd=" + nd;
 				}
 				strUrl += "&ns=" + ctx.getAppInitializer().getNumberOfStarts();
 				try {
@@ -202,12 +203,12 @@ public class DownloadOsmandIndexesHelper {
 				GZIPInputStream gzin = new GZIPInputStream(in);
 				parser.setInput(gzin, "UTF-8"); //$NON-NLS-1$
 				int next;
-				while((next = parser.next()) != XmlPullParser.END_DOCUMENT) {
+				while ((next = parser.next()) != XmlPullParser.END_DOCUMENT) {
 					if (next == XmlPullParser.START_TAG) {
 						DownloadActivityType tp = DownloadActivityType.getIndexType(parser.getAttributeValue(null, "type"));
 						if (tp != null) {
 							IndexItem it = tp.parseIndexItem(ctx, parser);
-							if(it != null) {
+							if (it != null) {
 								result.add(it);
 							}
 						} else if ("osmand_regions".equals(parser.getName())) {
@@ -226,7 +227,7 @@ public class DownloadOsmandIndexesHelper {
 				log.error("Error while loading indexes from repository", e); //$NON-NLS-1$
 				return null;
 			}
-			
+
 			if (result.isAcceptable()) {
 				return result;
 			} else {
@@ -239,19 +240,19 @@ public class DownloadOsmandIndexesHelper {
 	}
 
 	public static class AssetIndexItem extends IndexItem {
-		
+
 		private final String assetName;
 		private final String destFile;
 		private final long dateModified;
 
 		public AssetIndexItem(String fileName, String description, String date,
-				long dateModified, String size, long sizeL, String assetName, String destFile, DownloadActivityType type) {
+		                      long dateModified, String size, long sizeL, String assetName, String destFile, DownloadActivityType type) {
 			super(fileName, description, dateModified, size, sizeL, sizeL, type);
 			this.dateModified = dateModified;
 			this.assetName = assetName;
 			this.destFile = destFile;
 		}
-		
+
 		public long getDateModified() {
 			return dateModified;
 		}
@@ -261,7 +262,7 @@ public class DownloadOsmandIndexesHelper {
 			return new DownloadEntry(assetName, destFile, dateModified);
 		}
 
-		public String getDestFile(){
+		public String getDestFile() {
 			return destFile;
 		}
 	}

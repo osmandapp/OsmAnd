@@ -998,7 +998,7 @@
     <string name="get_directions">التوجيه مع الطرق</string>
     <string name="show_point_options">استخدام الموقع…</string>
     <string name="favorite">مفضلة</string>
-    <string name="speak_favorites">نقاط مفضلة مجاورة</string>
+    <string name="speak_favorites">مفضلة مجاورة</string>
     <string name="save_as_favorites_points">حفظ كمجموعة مفضلة</string>
     <string name="add_favorite_dialog_top_text">أدخل اسم المفضلة</string>
     <string name="add_favorite_dialog_favourite_added_template">تم إضافة إحداثية المفضلة \'\'{0}\'\' بنجاح.</string>
@@ -3829,7 +3829,7 @@
     <string name="plan_route_change_route_type_after">تغيير نوع المسار بعد</string>
     <string name="number_of_gpx_files_selected_pattern">%s ملفات مسارات محددة</string>
     <string name="disable_recording_once_app_killed_descrp">سيتم إيقاف تسجيل المسار مؤقتًا عند إغلاق التطبيق (عبر نافذة التطبيقات المستخدمة مؤخرا). (إشارة تشغيل التطبيق في الخلفية ستختفي من الشريط العلوي.)</string>
-    <string name="save_global_track_interval_descr">حدد الفاصل الزمني للادخال الخاص بالتسجيل العام للمسار (مفعل من خلال ودجت \"تسجيل الرحلة\" على الخريطة).</string>
+    <string name="save_global_track_interval_descr">حدد الفاصل الزمني للإدخال الخاص بالتسجيل العام للمسار (مفعل من خلال ودجت \"تسجيل الرحلة\" على الخريطة).</string>
     <string name="gpx_monitoring_stop">إيقاف تسجيل الرحلة مؤقتًا</string>
     <string name="gpx_monitoring_start">استئناف تسجيل الرحلة</string>
     <string name="system_default_theme">النظام الافتراضي</string>
@@ -3921,7 +3921,7 @@
     <string name="login_account">الحساب</string>
     <string name="user_login">تسجيل الدخول</string>
     <string name="gpx_upload_trackable_visibility_descr">\"إمكانية التتبع\" تعني أن التتبع لا يظهر في أي قوائم عامة ولكن نقاط التتبع المعالجة مع طوابع زمنية صادرة عنها(التي لا يمكن أن تكون مرتبطة بك مباشرة) ستظهر خلال التنزيلات من واجهة برمجة التطبيقات GPS API العامة.</string>
-    <string name="markers_history">سجل تاريخ العلامات</string>
+    <string name="markers_history">سجل التوجيه المباشر</string>
     <string name="send_files_to_openstreetmap">أرسل ملف GPX إلى OpenStreetMap</string>
     <string name="enter_text_separated">أدخل العلامات مفصولة بفاصلة.</string>
     <string name="gpx_upload_private_visibility_descr">\"خاص\"يعني أن التتبع لن يظهر في أي قوائم عامة ، ولكن نقاط التتبع الصادرة عنه ستظل متاحة من خلال واجهة برمجة تطبيقات GPS API العامة بدون طوابع زمنية ولكن لن يتم ترتيبها ترتيبًا زمنيًا.</string>
@@ -4005,7 +4005,7 @@
     <string name="online_routing_engines">محركات التوجيه عبر الإنترنت</string>
     <string name="shared_string_folders">المجلدات</string>
     <string name="select_folder">تحديد مجلد</string>
-    <string name="select_folder_descr">تحديد مجلد أو إضافة واحد جديد</string>
+    <string name="select_folder_descr">تحديد مجلد أو إضافة جديد</string>
     <string name="shared_string_empty">فارغ</string>
     <string name="analyze_by_intervals">التحليل حسب الفواصل الزمنية (الفاصل الزمني)</string>
     <string name="upload_to_openstreetmap">رفع إلى خريطة الشارع المفتوح</string>
@@ -4021,7 +4021,7 @@
     <string name="announcement_time_arrive">الوصول إلى الوجهة</string>
     <string name="shared_string_turn">منعطف</string>
     <string name="announcement_time_intervals">الوقت والمسافة</string>
-    <string name="announcement_time_descr">وقت الإعلان عن مختلف المطالبات الصوتية يعتمد على نوع موجه، وسرعة التنقل الحالية وسرعة التنقل الافتراضية.</string>
+    <string name="announcement_time_descr">يعتمد توقيت المطالبات الصوتية المختلفة على نوع المطالبة وسرعة التنقل الحالية وسرعة التنقل الافتراضية.</string>
     <string name="announcement_time_title">وقت الإعلان</string>
     <string name="start_recording">بدء التسجيل</string>
     <string name="show_track_on_map">عرض المسار على الخريطة</string>
@@ -4075,12 +4075,12 @@
     <string name="activity_type_car_name">سيارة</string>
     <string name="copy_poi_name">نسخ اسم POI</string>
     <string name="select_another_colorization">الرجاء اختيار أنواع أخرى من التلوين.</string>
-    <string name="snap_to_road_descr">سيتم التقاط الرمز إلى مسار التنقل الحالي</string>
+    <string name="snap_to_road_descr">سيتم محاذاة رمز الموضع الحالي إلى مسار التنقل الحالي</string>
     <string name="select_segments">حدد الجزء</string>
     <string name="select_segments_description">%1$s يحتوي على أكثر من مقطع ، تحتاج إلى تحديد الجزء المطلوب للتنقل.</string>
     <string name="segments_count">الجزء %1$d</string>
     <string name="temporary_conditional_routing_descr">استخدم قيود الطريق النشطة الآن على الخريطة</string>
-    <string name="routing_attr_short_way_description">الطريق الأقصر الأمثل (توفير الطاقة)</string>
+    <string name="routing_attr_short_way_description">طريق أقصر أمثل (توفير الطاقة)</string>
     <string name="routing_attr_driving_style_description">حدد غرض القيادة للحصول على مسار أقصر أو أسرع أو أكثر أمانًا</string>
     <string name="map_orientation_threshold_descr">إذا كانت السرعة أقل من الحد ، لا تقم بتدويرالخريطة</string>
     <string name="restart">إعادة التشغيل</string>
@@ -4106,28 +4106,32 @@
     <string name="live_update_delete_updates_msg">هل أنت متأكد من أنك تريد حذف كافة %s التحديثات المباشرة؟</string>
     <string name="delete_updates">حذف التحديثات</string>
     <string name="purchases">المشتريات</string>
-    <string name="select_category_descr">حدد فئة أو أضف فئة جديدة</string>
+    <string name="select_category_descr">تحديد أو إضافة فئة جديدة</string>
     <string name="track_recording_will_be_continued">سيستمر التسجيل.</string>
     <string name="quick_action_show_hide_title">إظهار/ إخفاء</string>
     <string name="shared_string_interval">الفاصل الزمني</string>
     <string name="track_has_no_altitude">لا يحتوي المسار على بيانات الارتفاع.</string>
     <string name="track_has_no_speed">لا يحتوي المسار على بيانات السرعة.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">إخفاء المحميات الطبيعية والمناطق المحمية وحدود المتنزهات الوطنية</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">إخفاء المحميات الطبيعية والمناطق المحمية وحدود المتنزهات الوطنية.</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">حدود الطبيعة</string>
-    <string name="trip_recording_show_start_dialog_setting">إذا تم تعطيله، فسيبدأ التسجيل مباشرة بعد النقر على الويدجيت أو عنصر القائمة ، متخطيا لمربع حوار التأكيد.</string>
-    <string name="trip_recording_logging_interval_info">الفاصل الزمني للتسجيل يحدد الفترة الزمنية التي سيسأل فيها OsmAnd عن بيانات الموقع الحالي.</string>
+    <string name="trip_recording_show_start_dialog_setting">في حالة تعطيل التسجيل، سيبدأ التسجيل مباشرة بعد النقر على عنصر واجهة المستخدم أو عنصر القائمة، مما يؤدي إلى تخطي مربع حوار التأكيد.</string>
+    <string name="trip_recording_logging_interval_info">تعيين الفاصل الزمني لتسجيل الفترة الزمنية أوسماند سيطلب بيانات الموقع الحالي.</string>
     <string name="lost_data_warning">سيتم فقدان كافة البيانات غير المحفوظة.</string>
     <string name="show_start_dialog">إظهار مربع حوار البدء</string>
     <string name="trip_recording_save_and_continue">حفظ ومتابعة</string>
     <string name="customize_route_line">تخصيص خط المسار</string>
     <string name="shared_string_route_line">خط المسار</string>
-    <string name="route_line_use_map_style_appearance">سيستخدم خط الطريق %1$s المحدد في نمط الخريطة المحدد: %2$s.</string>
-    <string name="specify_color_for_map_mode">حدد لونًا لوضع الخريطة: %1$s.</string>
-    <string name="release_4_0_beta">• تم نقل تحديثات OsmAnd Live إلى \"التنزيلات&gt; التحديثات\"
+    <string name="route_line_use_map_style_appearance">استخدم نمط الخريطة (%2$s) الافتراضي %1$s.</string>
+    <string name="specify_color_for_map_mode">حدد اللون لوضع الخريطة %1$s.</string>
+    <string name="release_4_0_beta">• خيار إضافي لتنزيل خطوط الكنتور بالقدم
 \n
-\n • يمكن تلوين المسارات الآن حسب الارتفاع، السرعة أو المنحدر.
+\n • مخطط الطريق الأفقي: علامات التبويب المضافة للتبديل بين النقاط أو الرسوم البيانية
 \n
-\n • خيار مضاف لتغيير مظهر خط مسار الملاحة
+\n • تم نقل تحديثات OsmAnd Live إلى \"التنزيلات&gt; التحديثات\"
+\n
+\n • يمكن الآن تلوين المسارات حسب الارتفاع أو السرعة أو الانحدار.
+\n
+\n • خيار مضاف لتغيير مظهر خط المسار.
 \n
 \n • تحديث مربع حوار \"تسجيل الرحلة\"
 \n
@@ -4145,9 +4149,26 @@
     <string name="annual_subscription">اشتراك سنوي</string>
     <string name="monthly_subscription">اشتراك شهري</string>
     <string name="three_months_subscription">اشتراك ثلاثة اشهر</string>
-    <string name="osmand_live_cancelled">ملغاة</string>
+    <string name="osmand_live_cancelled">تم الإلغاء</string>
     <string name="renew_subscription">جدد الاشتراك</string>
     <string name="on_hold">في الانتظار</string>
     <string name="expired">منتهي الصلاحية</string>
     <string name="update_all_maps_added">تحديث كافة الخرائط المضافة إلى %1$s؟</string>
+    <string name="exit_number">رقم الخروج</string>
+    <string name="announce_when_exceeded">الإعلان عند التجاوز</string>
+    <string name="user_points">نقاط المستخدم</string>
+    <string name="output">الإخراج</string>
+    <string name="srtm_unit_format">تنسيق وحدة خطوط الكنتور</string>
+    <string name="srtm_download_list_help_message">OsmAnd يوفر بيانات الخطوط الكنتورية بالأمتار والقدم. ستحتاج إلى إعادة تنزيل الملف لتغيير التنسيق.</string>
+    <string name="srtm_download_single_help_message">الرجاء تحديد التنسيق المطلوب. ستحتاج إلى إعادة تنزيل الملف لتغيير التنسيق.</string>
+    <string name="shared_string_feet">قدم</string>
+    <string name="route_line_use_gradient_coloring">خط المسار ملون حسب ارتفاع المنحدر .</string>
+    <string name="shared_string_min_height">أدنى. ارتفاع</string>
+    <string name="shared_string_max_height">اقصى. ارتفاع</string>
+    <string name="language_description">حدد اللغة المفضلة ونوع التوجيه الصوتي.</string>
+    <string name="tts_description">يمكن لميزة تحويل النص إلى كلام (TTS) نطق جميع أنواع التعليمات: أسماء الشوارع ، تعليمات الانعطاف ، أسماء نقاط الاهتمام ، إلخ.</string>
+    <string name="tts_title">تحويل النص إلى كلام</string>
+    <string name="recorded_description">الصوت المسجل يبدو أفضل، ولكن يمكن نطق العبارات المسجلة مسبقا فقط: تشغيل التعليمات. لا يمكن الإعلان عن أسماء الشوارع أونقاط الاهتمام.</string>
+    <string name="use_system_language">استخدام لغة النظام</string>
+    <string name="shared_string_itinerary">مسار الرحلة</string>
 </resources>

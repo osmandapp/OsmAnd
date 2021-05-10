@@ -56,10 +56,10 @@ import static net.osmand.GPXUtilities.WptPt;
 import static net.osmand.GPXUtilities.writeGpxFile;
 import static net.osmand.plus.helpers.GpxUiHelper.getGpxTitle;
 import static net.osmand.plus.wikivoyage.data.PopularArticles.ARTICLES_PER_PAGE;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.ACTIVITY_TYPE;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.DIFF_ELE_DOWN;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.DIFF_ELE_UP;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.DISTANCE;
-import static net.osmand.plus.wikivoyage.data.TravelGpx.ACTIVITY_TYPE;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.USER;
 import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 
@@ -72,7 +72,7 @@ public class TravelObfHelper implements TravelHelper {
 	public static final String ROUTE_TRACK = "route_track";
 	public static final int ARTICLE_SEARCH_RADIUS = 50 * 1000;
 	public static final int SAVED_ARTICLE_SEARCH_RADIUS = 30 * 1000;
-	public static final int MAX_SEARCH_RADIUS = 10000 * 1000;
+	public static final int MAX_SEARCH_RADIUS = 800 * 1000;
 	public static final String REF_TAG = "ref";
 	public static final String NAME_TAG = "name";
 
@@ -124,8 +124,8 @@ public class TravelObfHelper implements TravelHelper {
 					final LatLon location = app.getMapViewTrackingUtilities().getMapLocation();
 					for (final BinaryMapIndexReader reader : getReaders()) {
 						try {
-							searchAmenity(foundAmenities, location, reader, searchRadius, -1, ROUTE_ARTICLE);
-							searchAmenity(foundAmenities, location, reader, searchRadius / 5, 15, ROUTE_TRACK);
+							searchAmenity(foundAmenities, location, reader, searchRadius, -1, ROUTE_ARTICLE, lang);
+							searchAmenity(foundAmenities, location, reader, searchRadius / 5, 15, ROUTE_TRACK, null);
 						} catch (Exception e) {
 							LOG.error(e.getMessage(), e);
 						}
@@ -172,12 +172,14 @@ public class TravelObfHelper implements TravelHelper {
 
 	private void searchAmenity(final List<Pair<File, Amenity>> amenitiesList, LatLon location,
 	                           final BinaryMapIndexReader reader, int searchRadius, int zoom,
-	                           String searchFilter) throws IOException {
+	                           String searchFilter, final String lang) throws IOException {
 		reader.searchPoi(BinaryMapIndexReader.buildSearchPoiRequest(
 				location, searchRadius, zoom, getSearchFilter(searchFilter), new ResultMatcher<Amenity>() {
 					@Override
 					public boolean publish(Amenity object) {
-						amenitiesList.add(new Pair<>(reader.getFile(), object));
+						if (lang == null || object.getNamesMap(true).containsKey(lang)) {
+							amenitiesList.add(new Pair<>(reader.getFile(), object));
+						}
 						return false;
 					}
 
@@ -231,7 +233,7 @@ public class TravelObfHelper implements TravelHelper {
 		}
 		res.user = Algorithms.emptyIfNull(amenity.getTagContent(USER));
 		res.activityType = Algorithms.emptyIfNull(amenity.getTagContent(ACTIVITY_TYPE));
-		articles.put("en", res);
+		articles.put("", res);
 		return articles;
 	}
 
@@ -1027,6 +1029,15 @@ public class TravelObfHelper implements TravelHelper {
 	@Override
 	public String getWikivoyageFileName() {
 		return WORLD_WIKIVOYAGE_FILE_NAME;
+	}
+
+	@Override
+	public void saveOrRemoveArticle(@NonNull TravelArticle article, boolean save) {
+		if (save) {
+			localDataHelper.addArticleToSaved(article);
+		} else {
+			localDataHelper.removeArticleFromSaved(article);
+		}
 	}
 
 	private class GpxFileReader extends AsyncTask<Void, Void, GPXFile> {

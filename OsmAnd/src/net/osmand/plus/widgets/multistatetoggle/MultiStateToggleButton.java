@@ -1,4 +1,4 @@
-package net.osmand.plus.widgets;
+package net.osmand.plus.widgets.multistatetoggle;
 
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
@@ -6,38 +6,58 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.widgets.multistatetoggle.RadioItem.OnRadioItemClickListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collection;
 import java.util.List;
 
-public class MultiStateToggleButton {
+public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 
-	private List<RadioItem> items = new ArrayList<>();
-	private OsmandApplication app;
-	private List<ViewGroup> buttons = new ArrayList<>();
-	private List<View> dividers = new ArrayList<>();
-	private RadioItem selectedItem;
+	protected final OsmandApplication app;
+	protected final UiUtilities uiUtilities;
 
-	private LinearLayout container;
-	private boolean nightMode;
+	private final LinearLayout container;
+	private final List<ViewGroup> buttons = new ArrayList<>();
+	private final List<View> dividers = new ArrayList<>();
 
-	public MultiStateToggleButton(OsmandApplication app, LinearLayout container, boolean nightMode) {
+	protected final List<_Radio> items = new ArrayList<>();
+	protected final boolean nightMode;
+	protected boolean isEnabled;
+	protected RadioItem selectedItem;
+
+	public MultiStateToggleButton(@NonNull OsmandApplication app,
+	                              @NonNull LinearLayout container,
+	                              boolean nightMode) {
 		this.app = app;
+		this.uiUtilities = app.getUIUtilities();
 		this.container = container;
 		this.nightMode = nightMode;
 	}
 
-	public void setItems(RadioItem firstBtn, RadioItem secondBtn, RadioItem... other) {
+	public void setItems(Collection<_Radio> radioItems) {
+		if (radioItems == null || radioItems.size() < 2) return;
+		items.clear();
+		items.addAll(radioItems);
+		initView();
+	}
+
+	@SafeVarargs
+	public final void setItems(@NonNull _Radio firstBtn,
+	                           @NonNull _Radio secondBtn,
+	                           @Nullable _Radio... other) {
 		items.clear();
 		items.add(firstBtn);
 		items.add(secondBtn);
@@ -45,6 +65,11 @@ public class MultiStateToggleButton {
 			items.addAll(Arrays.asList(other));
 		}
 		initView();
+	}
+
+	public final void setSelectedItem(@Nullable RadioItem selectedItem) {
+		this.selectedItem = selectedItem;
+		updateView();
 	}
 
 	private void initView() {
@@ -60,16 +85,10 @@ public class MultiStateToggleButton {
 		updateView();
 	}
 
-	private boolean isLastItem(int index) {
-		return index == items.size() - 1;
-	}
-
-	private void createBtn(@NonNull final RadioItem item) {
+	private void createBtn(@NonNull final _Radio item) {
 		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
 		ViewGroup button = (ViewGroup) inflater.inflate(
-				R.layout.custom_radio_btn_text_item, container, false);
-		TextView title = button.findViewById(R.id.title);
-		title.setText(item.getTitle());
+				getRadioItemLayoutId(), container, false);
 		button.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -79,6 +98,7 @@ public class MultiStateToggleButton {
 				}
 			}
 		});
+		initItemView(button, item);
 		buttons.add(button);
 		container.addView(button);
 	}
@@ -93,11 +113,6 @@ public class MultiStateToggleButton {
 		divider.setBackgroundColor(ContextCompat.getColor(app, dividerColor));
 		dividers.add(divider);
 		container.addView(divider);
-	}
-
-	public void setSelectedItem(RadioItem selectedItem) {
-		this.selectedItem = selectedItem;
-		updateView();
 	}
 
 	private void updateView() {
@@ -123,15 +138,14 @@ public class MultiStateToggleButton {
 
 		showAllDividers();
 		for (int i = 0; i < items.size(); i++) {
-			RadioItem item = items.get(i);
+			_Radio item = items.get(i);
 			ViewGroup container = buttons.get(i);
 			container.setEnabled(isEnabled);
-			TextView tvTitle = (TextView) container.findViewById(R.id.title);
 			if (selectedItem == item) {
 				if (i == 0) {
 					background.setCornerRadii(isLayoutRtl ? rightBtnRadii : leftBtnRadii);
 					hideDividers(0);
-				} else if (i == items.size() - 1) {
+				} else if (isLastItem(i)) {
 					background.setCornerRadii(isLayoutRtl ? leftBtnRadii : rightBtnRadii);
 					hideDividers(dividers.size() - 1);
 				} else {
@@ -139,13 +153,20 @@ public class MultiStateToggleButton {
 					hideDividers(i - 1, i);
 				}
 				container.setBackgroundDrawable(background);
-				tvTitle.setTextColor(textColor);
+				updateItemView(container, item, textColor);
 			} else {
 				container.setBackgroundColor(Color.TRANSPARENT);
-				tvTitle.setTextColor(activeColor);
+				updateItemView(container, item, activeColor);
 			}
 		}
 	}
+
+	protected abstract int getRadioItemLayoutId();
+
+	protected abstract void initItemView(@NonNull ViewGroup view, @NonNull _Radio item);
+
+	protected abstract void updateItemView(@NonNull ViewGroup view, @NonNull _Radio item,
+	                                       @ColorInt int color);
 
 	private void showAllDividers() {
 		for (View divider : dividers) {
@@ -161,28 +182,7 @@ public class MultiStateToggleButton {
 		}
 	}
 
-	public static class RadioItem {
-		private String title;
-		private OnRadioItemClickListener listener;
-
-		public RadioItem(String title) {
-			this.title = title;
-		}
-
-		public void setOnClickListener(OnRadioItemClickListener listener) {
-			this.listener = listener;
-		}
-
-		public String getTitle() {
-			return title;
-		}
-
-		public OnRadioItemClickListener getListener() {
-			return listener;
-		}
-	}
-
-	public interface OnRadioItemClickListener {
-		boolean onRadioItemClick(RadioItem radioItem, View view);
+	private boolean isLastItem(int index) {
+		return index == items.size() - 1;
 	}
 }

@@ -3,7 +3,7 @@ package net.osmand.plus.chooseplan;
 public class ChoosePlanHillshadeSrtmDialogFragment extends ChoosePlanFreeBannerDialogFragment {
 	public static final String TAG = ChoosePlanHillshadeSrtmDialogFragment.class.getSimpleName();
 
-	private final OsmAndFeature[] osmLiveFeatures = {
+	private final OsmAndFeature[] subscriptionFeatures = {
 			OsmAndFeature.CONTOUR_LINES_HILLSHADE_MAPS,
 			OsmAndFeature.SEA_DEPTH_MAPS,
 			OsmAndFeature.DAILY_MAP_UPDATES,
@@ -12,7 +12,7 @@ public class ChoosePlanHillshadeSrtmDialogFragment extends ChoosePlanFreeBannerD
 			OsmAndFeature.WIKIVOYAGE_OFFLINE,
 			OsmAndFeature.UNLOCK_ALL_FEATURES,
 	};
-	private final OsmAndFeature[] selectedOsmLiveFeatures = {
+	private final OsmAndFeature[] selectedSubscriptionFeatures = {
 			OsmAndFeature.CONTOUR_LINES_HILLSHADE_MAPS,
 			OsmAndFeature.SEA_DEPTH_MAPS,
 	};
@@ -27,8 +27,8 @@ public class ChoosePlanHillshadeSrtmDialogFragment extends ChoosePlanFreeBannerD
 	private final OsmAndFeature[] selectedPlanTypeFeatures = {};
 
 	@Override
-	public OsmAndFeature[] getOsmLiveFeatures() {
-		return osmLiveFeatures;
+	public OsmAndFeature[] getSubscriptionFeatures() {
+		return subscriptionFeatures;
 	}
 
 	@Override
@@ -37,8 +37,8 @@ public class ChoosePlanHillshadeSrtmDialogFragment extends ChoosePlanFreeBannerD
 	}
 
 	@Override
-	public OsmAndFeature[] getSelectedOsmLiveFeatures() {
-		return selectedOsmLiveFeatures;
+	public OsmAndFeature[] getSelectedSubscriptionFeatures() {
+		return selectedSubscriptionFeatures;
 	}
 
 	@Override

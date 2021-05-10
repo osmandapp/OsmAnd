@@ -492,8 +492,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 				}
 			});
 			if (closeButton instanceof ImageView) {
-				UiUtilities.rotateImageByLayoutDirection(
-						(ImageView) closeButton, AndroidUtils.getLayoutDirection(app));
+				UiUtilities.rotateImageByLayoutDirection((ImageView) closeButton);
 			}
 		}
 
@@ -922,6 +921,12 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		if (mapActivity != null) {
 			mapActivity.getMapRouteInfoMenu().updateMenu();
 		}
+	}
+
+	public void setupSpeedCamerasAlert() {
+		Preference speedCamerasAlert = findPreference(settings.SPEED_CAMERAS_UNINSTALLED.getId());
+		speedCamerasAlert.setIcon(getContentIcon(R.drawable.ic_action_alert));
+		speedCamerasAlert.setVisible(!settings.SPEED_CAMERAS_UNINSTALLED.get());
 	}
 
 	public void setupPrefRoundedBg(PreferenceViewHolder holder) {

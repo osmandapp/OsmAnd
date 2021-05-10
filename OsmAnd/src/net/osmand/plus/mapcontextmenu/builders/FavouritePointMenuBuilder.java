@@ -73,6 +73,9 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 
 	@Override
 	public void buildInternal(View view) {
+		if (fav != null && fav.getTimestamp() != 0) {
+			buildDateRow(view, fav.getTimestamp());
+		}
 		if (originObject != null && originObject instanceof Amenity) {
 			AmenityMenuBuilder builder = new AmenityMenuBuilder(mapActivity, (Amenity) originObject);
 			builder.setLatLon(getLatLon());

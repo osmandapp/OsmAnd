@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PointF;
 
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.GPXUtilities.TrkSegment;
@@ -332,6 +333,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	}
 
 	private void drawBeforeAfterPath(Canvas canvas, RotatedTileBox tb) {
+		canvas.rotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 		List<TrkSegment> before = editingCtx.getBeforeSegments();
 		List<TrkSegment> after = editingCtx.getAfterSegments();
 		if (before.size() > 0 || after.size() > 0) {
@@ -378,6 +380,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 				GeometryWay.calculatePath(tb, tx, ty, path);
 				canvas.drawPath(path, lineAttrs.paint);
 			}
+			canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 		}
 	}
 
@@ -502,7 +505,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	}
 
 	@Override
-	public boolean disableLongPressOnMap() {
+	public boolean disableLongPressOnMap(PointF point, RotatedTileBox tileBox) {
 		return isInMeasurementMode();
 	}
 
@@ -513,6 +516,11 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 
 	@Override
 	public boolean runExclusiveAction(Object o, boolean unknownLocation) {
+		return false;
+	}
+
+	@Override
+	public boolean showMenuAction(@Nullable Object o) {
 		return false;
 	}
 

@@ -1866,9 +1866,14 @@ public class OsmandAidlApi {
 			return false;
 		}
 		if (app.isApplicationInitializing()) {
-			app.getAppInitializer().addListener(new AppInitializer.AppInitializeListener() {
+			app.getAppInitializer().addListener(new AppInitializeListener() {
 				@Override
-				public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
+				public void onStart(AppInitializer init) {
+
+				}
+
+				@Override
+				public void onProgress(AppInitializer init, InitEvents event) {
 				}
 
 				@Override
@@ -1885,6 +1890,11 @@ public class OsmandAidlApi {
 	boolean registerForOsmandInitialization(final OsmandAppInitCallback callback) {
 		if (app.isApplicationInitializing()) {
 			app.getAppInitializer().addListener(new AppInitializeListener() {
+				@Override
+				public void onStart(AppInitializer init) {
+
+				}
+
 				@Override
 				public void onProgress(AppInitializer init, InitEvents event) {
 				}
@@ -2255,9 +2265,14 @@ public class OsmandAidlApi {
 		};
 
 		if (app.isApplicationInitializing()) {
-			app.getAppInitializer().addListener(new AppInitializer.AppInitializeListener() {
+			app.getAppInitializer().addListener(new AppInitializeListener() {
 				@Override
-				public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
+				public void onStart(AppInitializer init) {
+
+				}
+
+				@Override
+				public void onProgress(AppInitializer init, InitEvents event) {
 				}
 
 				@Override

@@ -1279,7 +1279,7 @@
     <string name="traffic_warning_calming">Liikluse rahustamine</string>
     <string name="traffic_warning_speed_camera">Kiiruskaamera</string>
     <string name="traffic_warning">Liiklushoiatus</string>
-    <string name="speak_favorites">Lähedalolevad lemmikud</string>
+    <string name="speak_favorites">Lähedal paiknevad lemmikud</string>
     <string name="speak_poi">Lähedalolev HP</string>
     <string name="way_alarms">Liikluse hoiatused</string>
     <string name="sleep_mode_stop_dialog">Peata GPS taustarežiim\?</string>
@@ -4046,11 +4046,11 @@
     <string name="select_another_colorization">Palun vali muud moodi värvimine.</string>
     <string name="routing_attr_short_way_description">Optimeeritud lühem marsruut (energiat säästev)</string>
     <string name="snap_to_road_descr">Hetkeasukoha ikoon seotakse aktiivse navigeerimismarsruudiga</string>
-    <string name="routing_attr_height_obstacles_description">Marsruudi loomisel võiks vältida raskeid tõuse.</string>
+    <string name="routing_attr_height_obstacles_description">Marsruudi koostamisel pigem väldi raskeid tõuse.</string>
     <string name="shared_string_turn">Pööra</string>
     <string name="purchases">Ostud</string>
     <string name="map_widget_distance_by_tap">Kaugus toksamise järgi</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Peida (loodus)kaitsealade ja rahvusparkide piirid</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Peida (loodus)kaitsealade ja rahvusparkide piirid.</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">Looduse piirid</string>
     <string name="trip_recording_save_and_continue">Salvesta ja jätka</string>
     <string name="lost_data_warning">Kõik salvestamata andmed lähevad kaotsi.</string>

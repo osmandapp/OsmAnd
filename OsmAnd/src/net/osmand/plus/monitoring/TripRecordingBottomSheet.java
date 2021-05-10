@@ -83,7 +83,7 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 	public static final String UPDATE_DYNAMIC_ITEMS = "update_dynamic_items";
 	private static final int GPS_UPDATE_INTERVAL = 1000;
 	public static final GPXTabItemType[] INIT_TAB_ITEMS =
-			new GPXTabItemType[]{GPX_TAB_ITEM_GENERAL, GPX_TAB_ITEM_ALTITUDE, GPX_TAB_ITEM_SPEED};
+			new GPXTabItemType[] {GPX_TAB_ITEM_GENERAL, GPX_TAB_ITEM_ALTITUDE, GPX_TAB_ITEM_SPEED};
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
@@ -651,7 +651,7 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 	}
 
 	@Override
-	public void openAnalyzeOnMap(GpxDisplayItem gpxItem) {
+	public void openAnalyzeOnMap(@NonNull GpxDisplayItem gpxItem) {
 	}
 
 	public interface DismissTargetFragment {

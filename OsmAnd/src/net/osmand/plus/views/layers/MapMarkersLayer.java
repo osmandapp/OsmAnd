@@ -497,7 +497,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	@Override
-	public boolean disableLongPressOnMap() {
+	public boolean disableLongPressOnMap(PointF point, RotatedTileBox tileBox) {
 		return inPlanRouteMode;
 	}
 
@@ -529,6 +529,11 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				})
 				.show();
 		return true;
+	}
+
+	@Override
+	public boolean showMenuAction(@Nullable Object o) {
+		return false;
 	}
 
 	@Override

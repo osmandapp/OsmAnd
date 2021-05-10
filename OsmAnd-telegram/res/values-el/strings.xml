@@ -53,4 +53,5 @@
     <string name="si_km_m">Χιλιόμετρα/μέτρα</string>
     <string name="unit_of_length_descr">Αλλαγή απόστασης που μετριέται.</string>
     <string name="unit_of_length">Μονάδες μήκους</string>
+    <string name="shared_string_sort_by">Ταξινόμηση κατά</string>
 </resources>

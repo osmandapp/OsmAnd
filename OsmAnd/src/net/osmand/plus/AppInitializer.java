@@ -16,6 +16,8 @@ import android.os.Build;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.UiThread;
+import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.AndroidUtils;
@@ -31,6 +33,7 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.plus.activities.LocalIndexHelper;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.SavingTrackHelper;
+import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
@@ -39,7 +42,6 @@ import net.osmand.plus.helpers.DayNightHelper;
 import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelperImpl;
-import net.osmand.plus.itinerary.ItineraryHelper;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
@@ -137,8 +139,13 @@ public class AppInitializer implements IProgress {
 
 	public interface AppInitializeListener {
 
+		@WorkerThread
+		void onStart(AppInitializer init);
+
+		@UiThread
 		void onProgress(AppInitializer init, InitEvents event);
 
+		@UiThread
 		void onFinish(AppInitializer init);
 	}
 	
@@ -472,7 +479,7 @@ public class AppInitializer implements IProgress {
 		app.osmOAuthHelper = startupInit(new OsmOAuthHelper(app), OsmOAuthHelper.class);
 		app.oprAuthHelper = startupInit(new OprAuthHelper(app), OprAuthHelper.class);
 		app.onlineRoutingHelper = startupInit(new OnlineRoutingHelper(app), OnlineRoutingHelper.class);
-		app.itineraryHelper = startupInit(new ItineraryHelper(app), ItineraryHelper.class);
+		app.backupHelper = startupInit(new BackupHelper(app), BackupHelper.class);
 
 		initOpeningHoursParser();
 	}
@@ -655,6 +662,7 @@ public class AppInitializer implements IProgress {
 
 	private void startApplicationBackground() {
 		try {
+			notifyStart();
 			startBgTime = System.currentTimeMillis();
 			app.getRendererRegistry().initRenderers(this);
 			notifyEvent(InitEvents.INIT_RENDERERS);
@@ -685,7 +693,7 @@ public class AppInitializer implements IProgress {
 			// restore backuped favorites to normal file
 			restoreBackupForFavoritesFiles();
 			notifyEvent(InitEvents.RESTORE_BACKUPS);
-			app.itineraryHelper.syncAllGroupsAsync();
+			app.mapMarkersHelper.syncAllGroups();
 			app.searchUICore.initSearchUICore();
 
 			checkLiveUpdatesAlerts();
@@ -812,6 +820,12 @@ public class AppInitializer implements IProgress {
 
 			}
 			app.getResourceManager().initMapBoundariesCacheNative();
+		}
+	}
+
+	public void notifyStart() {
+		for (AppInitializeListener listener : listeners) {
+			listener.onStart(AppInitializer.this);
 		}
 	}
 

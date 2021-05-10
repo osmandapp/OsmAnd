@@ -27,7 +27,7 @@
 	<androidx.recyclerview.widget.RecyclerView
 		android:id="@+id/recycler_overview"
 		android:layout_width="match_parent"
-		android:layout_height="@dimen/list_header_height"
+		android:layout_height="wrap_content"
 		android:layout_marginBottom="@dimen/content_padding_small_half"
 		android:clipToPadding="false"
 		android:orientation="horizontal"

@@ -31,13 +31,13 @@ import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikivoyage.WikivoyageUtils;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
-import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
+import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.osmand.plus.wikivoyage.explore.travelcards.TravelGpxCard.*;
+import static net.osmand.plus.wikivoyage.explore.travelcards.TravelGpxCard.TravelGpxVH;
 import static net.osmand.util.Algorithms.capitalizeFirstLetterAndLowercase;
 
 public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -182,20 +182,15 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
 	private void updateSaveButton(final TravelGpxVH holder, final TravelGpx article) {
 		if (article != null) {
-			final TravelLocalDataHelper helper = app.getTravelHelper().getBookmarksHelper();
-			final boolean saved = helper.isArticleSaved(article);
+			final TravelHelper helper = app.getTravelHelper();
+			final boolean saved = helper.getBookmarksHelper().isArticleSaved(article);
 			Drawable icon = getActiveIcon(saved ? R.drawable.ic_action_read_later_fill : R.drawable.ic_action_read_later);
 			holder.rightButton.setText(saved ? R.string.shared_string_remove : R.string.shared_string_save);
 			holder.rightButton.setCompoundDrawablesWithIntrinsicBounds(null, null, icon, null);
 			holder.rightButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					if (saved) {
-						helper.removeArticleFromSaved(article);
-					} else {
-						app.getTravelHelper().createGpxFile(article);
-						helper.addArticleToSaved(article);
-					}
+					helper.saveOrRemoveArticle(article, !saved);
 					updateSaveButton(holder, article);
 				}
 			});
@@ -286,13 +281,13 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 					Object item = getItemByPosition();
 					if (item instanceof TravelArticle) {
 						final TravelArticle article = (TravelArticle) item;
-						final TravelLocalDataHelper ldh = app.getTravelHelper().getBookmarksHelper();
-						ldh.removeArticleFromSaved(article);
+						final TravelHelper helper = app.getTravelHelper();
+						helper.saveOrRemoveArticle(article, false);
 						Snackbar snackbar = Snackbar.make(itemView, R.string.article_removed, Snackbar.LENGTH_LONG)
 								.setAction(R.string.shared_string_undo, new View.OnClickListener() {
 									@Override
 									public void onClick(View view) {
-										ldh.restoreSavedArticle(article);
+										helper.saveOrRemoveArticle(article, true);
 									}
 								});
 						boolean nightMode = !settings.isLightContent();

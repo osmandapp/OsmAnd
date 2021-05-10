@@ -10,9 +10,10 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.mapmarkers.ItineraryType;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
-import net.osmand.plus.itinerary.ItineraryGroup;
+import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.util.Algorithms;
@@ -46,7 +47,7 @@ public class MarkersSettingsItem extends CollectionSettingsItem<MapMarker> {
 	protected void init() {
 		super.init();
 		markersHelper = app.getMapMarkersHelper();
-		existingItems = new ArrayList<>(app.getItineraryHelper().getMapMarkersFromDefaultGroups(false));
+		existingItems = new ArrayList<>(markersHelper.getMapMarkersFromDefaultGroups(false));
 	}
 
 	@NonNull
@@ -122,10 +123,10 @@ public class MarkersSettingsItem extends CollectionSettingsItem<MapMarker> {
 		}
 	}
 
-	public ItineraryGroup getMarkersGroup() {
+	public MapMarkersGroup getMarkersGroup() {
 		String name = app.getString(R.string.map_markers);
 		String groupId = ExportSettingsType.ACTIVE_MARKERS.name();
-		ItineraryGroup markersGroup = new ItineraryGroup(groupId, name, ItineraryGroup.ANY_TYPE);
+		MapMarkersGroup markersGroup = new MapMarkersGroup(groupId, name, ItineraryType.MARKERS);
 		markersGroup.setMarkers(items);
 		return markersGroup;
 	}
@@ -142,7 +143,7 @@ public class MarkersSettingsItem extends CollectionSettingsItem<MapMarker> {
 					warnings.add(app.getString(R.string.settings_item_read_error, String.valueOf(getType())));
 					SettingsHelper.LOG.error("Failed read gpx file", gpxFile.error);
 				} else {
-					List<MapMarker> mapMarkers = markersHelper.readMarkersFromGpx(gpxFile, false);
+					List<MapMarker> mapMarkers = markersHelper.getDataHelper().readMarkersFromGpx(gpxFile, false);
 					items.addAll(mapMarkers);
 				}
 			}
@@ -152,7 +153,7 @@ public class MarkersSettingsItem extends CollectionSettingsItem<MapMarker> {
 	@Nullable
 	@Override
 	SettingsItemWriter<? extends SettingsItem> getWriter() {
-		GPXFile gpxFile = markersHelper.generateGpx(items, true);
+		GPXFile gpxFile = markersHelper.getDataHelper().generateGpx(items, true);
 		return getGpxWriter(gpxFile);
 	}
 }

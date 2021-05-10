@@ -510,7 +510,7 @@
     <string name="map_online_data_descr">使用在线地图（在储存卡上下载并缓存瓦片）。</string>
     <string name="shared_string_online_maps">在线地图</string>
     <string name="online_map_settings_descr">配置在线或缓存瓦片地图来源。</string>
-    <string name="osmand_accessibility_description"></string>
+    <string name="osmand_accessibility_description"/>
     <string name="vector_maps_may_display_faster_on_some_devices">矢量地图很可能显示更快速。但在某些设备上不能正常工作。</string>
     <string name="test_voice_prompts">测试语音提示</string>
     <string name="switch_to_raster_map_to_see">这个位置没有离线矢量地图。您可以从设置(数据管理)中下载，或者切换到在线地图。</string>
@@ -1454,7 +1454,7 @@
     <string name="postcode">邮政编码</string>
     <string name="shared_string_from">从</string>
     <string name="city_type_district">区</string>
-    <string name="city_type_neighbourhood">邻近</string>
+    <string name="city_type_neighbourhood">邻里</string>
     <string name="map_widget_search">搜索</string>
     <string name="shared_string_is_open_24_7">24小时开放</string>
     <string name="storage_directory_card">存储卡</string>
