@@ -147,7 +147,7 @@ public class ConfigureMapMenu {
 		}
 		List<RenderingRuleProperty> customRules = new ArrayList<>();
 		boolean useDepthContours = app.getResourceManager().hasDepthContours()
-				&& (InAppPurchaseHelper.isSubscribedToLiveUpdates(app)
+				&& (InAppPurchaseHelper.isSubscribedToAny(app)
 				|| InAppPurchaseHelper.isDepthContoursPurchased(app));
 		for (RenderingRuleProperty p : renderer.PROPS.getCustomRules()) {
 			if (useDepthContours || !"depthContours".equals(p.getAttrName())) {
