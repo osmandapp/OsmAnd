@@ -3826,7 +3826,6 @@
     <string name="message_graph_will_be_available_after_recalculation">Proszę czekać.
 \nWykres będzie dostępny po ponownym obliczeniu trasy.</string>
     <string name="shared_string_local_maps">Mapy lokalne</string>
-    <string name="app_mode_gap">Przerwa</string>
     <string name="icon_group_amenity">Udogodnienie</string>
     <string name="icon_group_special">Specjalny</string>
     <string name="icon_group_transport">Transport</string>

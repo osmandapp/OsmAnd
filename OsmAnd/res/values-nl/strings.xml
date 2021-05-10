@@ -3702,7 +3702,6 @@
 \nNa herberekening is de grafiek zichtbaar.</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="import_track_descr">Kies een trackbestand om te volgen of importeer het vanaf uw apparaat.</string>
-    <string name="app_mode_gap">Onderbreking</string>
     <string name="shared_string_custom">Aangepast</string>
     <string name="perform_oauth_authorization_description">Voer een OAuth-login uit om osm edit functies te gebruiken</string>
     <string name="release_3_5">• Bijgewerkte app- en profielinstellingen: instellingen zijn nu gerangschikt op type. Elk profiel kan afzonderlijk worden aangepast.
