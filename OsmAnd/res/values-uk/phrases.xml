@@ -3958,4 +3958,8 @@
     <string name="poi_operator_type_government">Тип оператора: державний</string>
     <string name="poi_operator_type_public">Тип оператора: загальнодоступний</string>
     <string name="poi_operator_type_private">Тип оператора: приватний</string>
+    <string name="poi_fruit">Фруктовий сад</string>
+    <string name="poi_shrub">Чагарник</string>
+    <string name="poi_dune">Дюна</string>
+    <string name="poi_ultralight_aviation">Надлегка авіація</string>
 </resources>
