@@ -267,7 +267,6 @@
     <string name="icon_group_transport">Transport</string>
     <string name="icon_group_special">Special</string>
     <string name="icon_group_amenity">Amenity</string>
-    <string name="app_mode_gap">Gap</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="shared_string_local_maps">Local maps</string>
     <string name="message_graph_will_be_available_after_recalculation">Please wait.\nGraph will be available after route recalculation.</string>

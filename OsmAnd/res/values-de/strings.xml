@@ -3907,7 +3907,6 @@
 \n • Unterstützung benutzerdefinierter Farben für Favoriten und Track-Wegpunkte
 \n
 \n</string>
-    <string name="app_mode_gap">Lücke</string>
     <string name="plan_route_join_segments">Segmente verbinden</string>
     <string name="plan_route_add_new_segment">Neues Segment hinzufügen</string>
     <string name="profile_type_osmand_string">OsmAnd-Profil</string>

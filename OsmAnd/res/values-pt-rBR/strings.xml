@@ -3837,7 +3837,6 @@
     <string name="subscription_expired_title">A assinatura do OsmAnd Live expirou</string>
     <string name="subscription_paused_title">A assinatura do OsmAnd Live foi pausada</string>
     <string name="subscription_on_hold_title">A assinatura do OsmAnd Live está em espera</string>
-    <string name="app_mode_gap">Diferença</string>
     <string name="login_open_street_map">Entrar com OpenStreetMap</string>
     <string name="login_open_street_map_org">Entrar com OpenStreetMap.org</string>
     <string name="open_street_map_login_mode">Você precisa entrar para carregar de alterações novas ou modificadas.

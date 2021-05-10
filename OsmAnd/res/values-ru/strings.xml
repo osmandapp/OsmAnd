@@ -3818,7 +3818,6 @@
     <string name="file_already_imported">Файл уже импортирован</string>
     <string name="message_graph_will_be_available_after_recalculation">Дождитесь пересчёта маршрута.
 \nГрафик будет доступен после пересчёта.</string>
-    <string name="app_mode_gap">Разрыв</string>
     <string name="icon_group_service">Сервис</string>
     <string name="icon_group_special">Специальные</string>
     <string name="snowmobile_render_descr">Для езды на снегоходах по выделенным дорогам и трассам.</string>
