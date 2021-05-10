@@ -3936,4 +3936,10 @@
     <string name="poi_telecom_medium_copper">Tipo: cobre</string>
     <string name="poi_telecom_exchange">Distribuição telefónica</string>
     <string name="poi_pillory">Pelourinho</string>
+    <string name="poi_windsock">Manga de vento</string>
+    <string name="poi_refugee_site">Campo de refugiados</string>
+    <string name="poi_trolley_bay">Abrigo de carrinhos de compras</string>
+    <string name="poi_planetarium">Planetário</string>
+    <string name="poi_service_vehicle_rental_yes">Aluguer de automóveis</string>
+    <string name="poi_service_vehicle_inspection_yes">Inspeção de veículos</string>
 </resources>

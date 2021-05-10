@@ -4096,4 +4096,8 @@
     <string name="srtm_unit_format">Formato de unidad de las curvas de nivel</string>
     <string name="srtm_download_list_help_message">OsmAnd proporciona datos de curvas de nivel en metros y pies. Deberás volver a descargar el archivo para cambiar el formato.</string>
     <string name="srtm_download_single_help_message">Marca el formato necesario. Deberás volver a descargar el archivo para cambiar el formato.</string>
+    <string name="tts_title">TTS</string>
+    <string name="recorded_description">La voz grabada suena mejor, pero sólo puede pronunciar frases pregrabadas: indicaciones de giro. No puede anunciar los nombres de las calles o de los PDI.</string>
+    <string name="use_system_language">Usar idioma del sistema</string>
+    <string name="shared_string_itinerary">Itinerario</string>
 </resources>

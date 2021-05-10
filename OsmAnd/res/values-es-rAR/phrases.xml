@@ -3936,4 +3936,10 @@
     <string name="poi_telecom_medium_fibre">Medio: fibra</string>
     <string name="poi_telecom_medium_copper">Medio: cobre</string>
     <string name="poi_telecom_exchange">Central telefónica</string>
+    <string name="poi_trolley_bay">Corral para carritos de compras</string>
+    <string name="poi_windsock">Manga de viento</string>
+    <string name="poi_refugee_site">Sitio para refugiados</string>
+    <string name="poi_planetarium">Planetario</string>
+    <string name="poi_service_vehicle_rental_yes">Alquiler de automóviles</string>
+    <string name="poi_service_vehicle_inspection_yes">Inspección de vehículos</string>
 </resources>
