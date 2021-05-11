@@ -596,10 +596,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		}
 		OsmandApplication app = mapActivity.getMyApplication();
 		nightMode = app.getDaynightHelper().isNightModeForMapControls();
-		isMapsAvailable = !Algorithms.isEmpty(app.getRoutingHelper().getRoute().getDownloadMaps());
 
 		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
 		RoutingHelper routingHelper = app.getRoutingHelper();
+		isMapsAvailable = !Algorithms.isEmpty(routingHelper.getRoute().getDownloadMaps());
 
 		List<BaseCard> menuCards = new ArrayList<>();
 

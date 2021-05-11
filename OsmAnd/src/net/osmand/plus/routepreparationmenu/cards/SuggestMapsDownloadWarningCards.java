@@ -22,9 +22,15 @@ public class SuggestMapsDownloadWarningCards extends WarningCard {
 
 	public SuggestMapsDownloadWarningCards(@NonNull MapActivity mapActivity) {
 		super(mapActivity);
-		imageId = R.drawable.ic_map;
-		title = mapActivity.getString(R.string.offline_maps);
-		linkText = mapActivity.getString(R.string.welmode_download_maps);
+		if (mapActivity.getRoutingHelper().getRoute().isOnlineMapsNeeded()) {
+			imageId = R.drawable.ic_action_time_span;
+			title = mapActivity.getString(R.string.online_map);
+			linkText = mapActivity.getString(R.string.online_maps_link);
+		} else {
+			imageId = R.drawable.ic_map;
+			title = mapActivity.getString(R.string.offline_maps);
+			linkText = mapActivity.getString(R.string.welmode_download_maps);
+		}
 	}
 
 	private void showMultipleSelectionDialog() {

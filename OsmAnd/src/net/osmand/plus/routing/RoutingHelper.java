@@ -150,6 +150,10 @@ public class RoutingHelper {
 		return routeRecalculationHelper.getLastRouteCalcErrorShort();
 	}
 
+	public long getLastTimeEvaluated() {
+		return routeRecalculationHelper.getLastTimeEvaluatedRoute();
+	}
+
 	public void setPauseNavigation(boolean b) {
 		this.isPauseNavigation = b;
 		if (b) {

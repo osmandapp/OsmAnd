@@ -35,6 +35,10 @@ class RouteRecalculationHelper {
 	private final Map<Future<?>, RouteRecalculationTask> tasksMap = new LinkedHashMap<>();
 	private RouteRecalculationTask lastTask;
 
+	public long getLastTimeEvaluatedRoute() {
+		return lastTimeEvaluatedRoute;
+	}
+
 	private long lastTimeEvaluatedRoute = 0;
 	private String lastRouteCalcError;
 	private String lastRouteCalcErrorShort;

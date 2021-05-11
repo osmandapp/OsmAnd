@@ -6,8 +6,12 @@ import net.osmand.data.LatLon;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.TargetPointsHelper;
+import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
+import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.util.Algorithms;
+
+import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,6 +34,7 @@ public class SuggestedMapsProvider {
 
 	private static final int EARTH_RADIUS = 6371000;
 	private static final int MINIMAL_DISTANCE = 20000;
+	private static final String STANDARD_URL = "https://router.project-osrm.org/route/v1/";
 	public static TargetPointsHelper.TargetPoint start;
 	public static LatLon[] intermediates;
 	public static TargetPointsHelper.TargetPoint end;
@@ -75,6 +80,28 @@ public class SuggestedMapsProvider {
 		}
 		points.add(new Location("", params.end.getLatitude(), params.end.getLongitude()));
 		return points;
+	}
+
+	public static LinkedList<Location> findOnlineRoutePoints(RouteCalculationParams params) throws IOException, JSONException {
+		List<LatLon> points = new ArrayList<>();
+		List<Location> route;
+		LinkedList<Location> routeLocation = new LinkedList<>();
+		OsmandApplication app = params.ctx;
+		OnlineRoutingHelper helper = app.getOnlineRoutingHelper();
+		LinkedList<Location> location = getStartFinishIntermediatesPoints(params);
+		for (Location e : location) {
+			points.add(new LatLon(e.getLongitude(), e.getLatitude()));
+		}
+		String engineKey = params.mode.getRoutingProfile();
+		OnlineRoutingEngine.OnlineRoutingResponse response =
+				helper.calculateRouteOnline(engineKey, points, params.leftSide);
+
+		if (response != null) {
+			route = response.getRoute();
+			routeLocation.addAll(route);
+		}
+
+		return routeLocation;
 	}
 
 	public static List<WorldRegion> getSuggestedMaps(LinkedList<Location> points, OsmandApplication app) throws IOException {

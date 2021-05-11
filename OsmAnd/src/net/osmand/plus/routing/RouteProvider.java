@@ -69,6 +69,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import btools.routingapp.IBRouterService;
 
+import static net.osmand.plus.routing.SuggestedMapsProvider.*;
 import static net.osmand.plus.routing.SuggestedMapsProvider.getLocationBasedOnDistance;
 import static net.osmand.plus.routing.SuggestedMapsProvider.getStartFinishIntermediatesPoints;
 import static net.osmand.plus.routing.SuggestedMapsProvider.getSuggestedMaps;
@@ -98,10 +99,10 @@ public class RouteProvider {
 
 	public RouteCalculationResult calculateRouteImpl(final RouteCalculationParams params) {
 		long time = System.currentTimeMillis();
-		OsmandApplication app = params.ctx;
+		final OsmandApplication app = params.ctx;
 		if (params.start != null && params.end != null) {
 			if(log.isInfoEnabled()){
-				log.info("Start finding route from " + params.start + " to " + params.end +" using " + 
+				log.info("Start finding route from " + params.start + " to " + params.end +" using " +
 						params.mode.getRouteService().getName()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			}
 			try {
@@ -117,14 +118,41 @@ public class RouteProvider {
 						LinkedList<Location> pointsStraightLine = getLocationBasedOnDistance(points);
 						List<WorldRegion> suggestedMapsOnStraightLine = getSuggestedMaps(pointsStraightLine, app);
 						if (!Algorithms.isEmpty(suggestedMapsOnStraightLine)) {
+							final RoutingHelper routingHelper = app.getRoutingHelper();
+							long currentTime = System.currentTimeMillis();
 							res = findVectorMapsRoute(params, calcGPXRoute);
-							params.resultListener = new RouteCalculationParams.RouteCalculationResultListener() {
+							long lastTimeEvaluated = routingHelper.getLastTimeEvaluated();
+							final LinkedList<Location> onlinePoints = findOnlineRoutePoints(params);
+							if (lastTimeEvaluated - currentTime > 6000) {
+								List<WorldRegion> mapsCalculatedOnline = getSuggestedMaps(onlinePoints, app);
+								return new RouteCalculationResult(mapsCalculatedOnline, true);
+							}
+							params.calculationProgressCallback = new RouteCalculationProgressCallback() {
+
 								@Override
-								public void onRouteCalculated(RouteCalculationResult route) {
-									boolean calculateTime = route.getCalculateTime() > 60000;
-									boolean calculated = route.isCalculated();
-									if (calculated || calculateTime) {
-										//onlinerouting;
+								public void start() {
+
+								}
+
+								@Override
+								public void updateProgress(int progress) {
+
+								}
+
+								@Override
+								public void requestPrivateAccessRouting() {
+
+								}
+
+								@Override
+								public void finish() {
+									if (!routingHelper.isRouteCalculated()){
+										try {
+											List<WorldRegion> mapsCalculatedOnline = getSuggestedMaps(onlinePoints, app);
+											new RouteCalculationResult(mapsCalculatedOnline, true);
+										} catch (IOException e) {
+											e.printStackTrace();
+										}
 									}
 								}
 							};
@@ -132,7 +160,7 @@ public class RouteProvider {
 							res = findVectorMapsRoute(params, calcGPXRoute);
 						}
 					} else {
-						return new RouteCalculationResult(suggestedMaps);
+						return new RouteCalculationResult(suggestedMaps, false);
 					}
 				} else if (params.mode.getRouteService() == RouteService.BROUTER) {
 					res = findBROUTERRoute(params);
@@ -166,7 +194,7 @@ public class RouteProvider {
 		List<Location> locs = new ArrayList<Location>(rcr.getRouteLocations());
 		try {
 			int[] startI = new int[]{0};
-			int[] endI = new int[]{locs.size()}; 
+			int[] endI = new int[]{locs.size()};
 			locs = findStartAndEndLocationsFromRoute(locs, params.start, params.end, startI, endI);
 			List<RouteDirectionInfo> directions = calcDirections(startI, endI, rcr.getRouteDirections());
 			insertInitialSegment(params, locs, directions, true);
@@ -310,7 +338,7 @@ public class RouteProvider {
 		for (RouteDirectionInfo info : gpxDirections) {
 			// recalculate
 			info.distance = 0;
-			info.afterLeftTime = 0;			
+			info.afterLeftTime = 0;
 		}
 
 		return new RouteCalculationResult(gpxRoute, gpxDirections, routeParams,
@@ -514,8 +542,8 @@ public class RouteProvider {
 
 		return newGpxRoute;
 	}
-	
-	private RouteCalculationResult findOfflineRouteSegment(RouteCalculationParams rParams, Location start, 
+
+	private RouteCalculationResult findOfflineRouteSegment(RouteCalculationParams rParams, Location start,
 			LatLon end) {
 		RouteCalculationParams newParams = new RouteCalculationParams();
 		newParams.start = start;
@@ -752,7 +780,7 @@ public class RouteProvider {
 		int memoryLimit = (int) (0.95 * ((rt.maxMemory() - rt.totalMemory()) + rt.freeMemory()) / mb);
 		log.warn("Use " + memoryLimit +  " MB Free " + rt.freeMemory() / mb + " of " + rt.totalMemory() / mb + " max " + rt.maxMemory() / mb);
 		RoutingConfiguration cf = config.build( params.mode.getRoutingProfile(), params.start.hasBearing() ?
-				params.start.getBearing() / 180d * Math.PI : null, 
+				params.start.getBearing() / 180d * Math.PI : null,
 				memoryLimit, paramsR);
 		if(settings.ENABLE_TIME_CONDITIONAL_ROUTING.getModeValue(params.mode)) {
 			cf.routeCalculationTime = System.currentTimeMillis();
@@ -774,7 +802,7 @@ public class RouteProvider {
 					params.ctx.runInUIThread(new Runnable() {
 						@Override
 						public void run() {
-							params.ctx.showToastMessage(R.string.complex_route_calculation_failed, e.getMessage());							
+							params.ctx.showToastMessage(R.string.complex_route_calculation_failed, e.getMessage());
 						}
 					});
 					result = router.searchRoute(ctx, st, en, inters);
@@ -802,10 +830,9 @@ public class RouteProvider {
 				// something really strange better to see that message on the scren
 				return emptyResult();
 			} else {
-				RouteCalculationResult res = new RouteCalculationResult(result, params.start, params.end,
+				return new RouteCalculationResult(result, params.start, params.end,
 						params.intermediates, params.ctx, params.leftSide, ctx, params.gpxRoute  == null? null: params.gpxRoute.wpt,
 								params.mode, true);
-				return res;
 			}
 		} catch (RuntimeException e) {
 			log.error("Runtime error: " + e.getMessage(), e);

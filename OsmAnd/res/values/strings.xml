@@ -12,6 +12,8 @@
 
 -->
 
+    <string name="online_maps_link">Check the necessary maps</string>
+    <string name="online_maps">The calculation of the route takes more than usual. Perhaps some cards are not loaded. You can run online checking the necessary cards.</string>
     <string name="offline_maps">Additional offline maps are required to calculate the route.</string>
     <string name="shared_string_itinerary">Itinerary</string>
     <string name="use_system_language">Use system language</string>
