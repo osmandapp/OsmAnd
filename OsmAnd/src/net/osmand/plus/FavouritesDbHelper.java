@@ -14,12 +14,13 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
+import net.osmand.data.FavouritePoint.SpecialPointType;
 import net.osmand.data.LatLon;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
-import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
+import net.osmand.plus.mapmarkers.MapMarkersGroup;
+import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.compress.compressors.bzip2.BZip2CompressorOutputStream;
@@ -246,7 +247,7 @@ public class FavouritesDbHelper {
 		});
 	}
 
-	public FavouritePoint getSpecialPoint(FavouritePoint.SpecialPointType pointType) {
+	public FavouritePoint getSpecialPoint(SpecialPointType pointType) {
 		for (FavouritePoint fp : cachedFavoritePoints) {
 			if (fp.getSpecialPointType() == pointType) {
 				return fp;
@@ -552,6 +553,16 @@ public class FavouritesDbHelper {
 		return editFavourite(p, lat, lon, null);
 	}
 
+	public boolean favouritePassed(@NonNull FavouritePoint point, boolean passed, boolean saveImmediately) {
+		point.setPassedTimestamp(passed ? System.currentTimeMillis() : 0);
+		if (saveImmediately) {
+			saveCurrentPointsIntoFile();
+		}
+		FavoriteGroup group = getOrCreateGroup(point, 0);
+		runSyncWithMarkers(group);
+		return true;
+	}
+
 	private boolean editFavourite(@NonNull FavouritePoint p, double lat, double lon, @Nullable String description) {
 		cancelAddressRequest(p);
 		p.setLatitude(lat);
@@ -580,7 +591,7 @@ public class FavouritesDbHelper {
 		}
 	}
 
-	private void backup(File backupFile, File externalFile) {
+	public static void backup(File backupFile, File externalFile) {
 		try {
 			File f = new File(backupFile.getParentFile(), backupFile.getName());
 			BZip2CompressorOutputStream out = new BZip2CompressorOutputStream(new FileOutputStream(f));
@@ -635,7 +646,11 @@ public class FavouritesDbHelper {
 	}
 
 	public File getBackupFile() {
-		File fld = new File(context.getAppPath(null), BACKUP_FOLDER);
+		return getBackupFile(context, "favourites_bak_");
+	}
+
+	public static File getBackupFile(OsmandApplication app, String fileName) {
+		File fld = new File(app.getAppPath(null), BACKUP_FOLDER);
 		if (!fld.exists()) {
 			fld.mkdirs();
 		}
@@ -648,7 +663,7 @@ public class FavouritesDbHelper {
 			if (back < 10) {
 				backPrefix = "0" + backPrefix;
 			}
-			File bak = new File(fld, "favourites_bak_" + backPrefix + ".gpx.bz2");
+			File bak = new File(fld, fileName + backPrefix + ".gpx.bz2");
 			if (!bak.exists()) {
 				return bak;
 			} else if (bak.lastModified() < firstModifiedMin) {
@@ -843,11 +858,9 @@ public class FavouritesDbHelper {
 		if (res.error != null) {
 			return false;
 		}
-		for (WptPt p : res.getPoints()) {
-			FavouritePoint fp = FavouritePoint.fromWpt(p, context);
-			if (fp != null) {
-				points.put(getKey(fp), fp);
-			}
+		for (WptPt wptPt : res.getPoints()) {
+			FavouritePoint favouritePoint = FavouritePoint.fromWpt(wptPt, context);
+			points.put(getKey(favouritePoint), favouritePoint);
 		}
 		return true;
 	}
@@ -959,7 +972,7 @@ public class FavouritesDbHelper {
 	public void onUpgrade(SQLiteConnection db, int oldVersion, int newVersion) {
 		if (oldVersion == 1) {
 			db.execSQL("ALTER TABLE " + FAVOURITE_TABLE_NAME + " ADD " + FAVOURITE_COL_CATEGORY + " text");
-			db.execSQL("UPDATE " + FAVOURITE_TABLE_NAME + " SET category = ?", new Object[]{""}); //$NON-NLS-1$ //$NON-NLS-2$
+			db.execSQL("UPDATE " + FAVOURITE_TABLE_NAME + " SET category = ?", new Object[] {""}); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 

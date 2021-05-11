@@ -1159,6 +1159,8 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> DEPTH_CONTOURS_PURCHASED = new BooleanPreference(this, "billing_sea_depth_purchased", false).makeGlobal();
 	public final OsmandPreference<Boolean> CONTOUR_LINES_PURCHASED = new BooleanPreference(this, "billing_srtm_purchased", false).makeGlobal();
 	public final OsmandPreference<Boolean> EMAIL_SUBSCRIBED = new BooleanPreference(this, "email_subscribed", false).makeGlobal();
+	public final OsmandPreference<Boolean> OSMAND_PRO_PURCHASED = new BooleanPreference(this, "billing_osmand_pro_purchased", false).makeGlobal();
+	public final OsmandPreference<Boolean> OSMAND_MAPS_PURCHASED = new BooleanPreference(this, "billing_osmand_maps_purchased", false).makeGlobal();
 
 	public final OsmandPreference<Integer> DISCOUNT_ID = new IntPreference(this, "discount_id", 0).makeGlobal();
 	public final OsmandPreference<Integer> DISCOUNT_SHOW_NUMBER_OF_STARTS = new IntPreference(this, "number_of_starts_on_discount_show", 0).makeGlobal();
@@ -2641,7 +2643,7 @@ public class OsmandSettings {
 					return lang + IndexConstants.VOICE_PROVIDER_SUFFIX;
 				}
 			}
-			return "en-tts";
+			return VOICE_PROVIDER_NOT_USE;
 		}
 	}.makeProfile();
 

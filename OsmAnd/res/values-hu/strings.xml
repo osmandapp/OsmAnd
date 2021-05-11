@@ -80,7 +80,7 @@
     <string name="live_monitoring_url">Online útvonalrögzítés webcíme</string>
     <string name="gpx_monitoring_disabled_warn">Nyomvonal naplózása GPX-widgettel vagy az Útvonalrögzítés beállításokban.</string>
     <string name="show_current_gpx_title">Jelenlegi útvonal megjelenítése</string>
-    <string name="free_version_message">%1$s térképet tölthetsz le vagy frissíthetsz.</string>
+    <string name="free_version_message">%1$s térképet tölthet le vagy frissíthet.</string>
     <string name="free_version_title">Ingyenes verzió</string>
     <string name="poi_context_menu_showdescription">POI leírás megjelenítése.</string>
     <string name="index_name_us">Észak-Amerika – Egyesült Államok</string>
@@ -450,14 +450,14 @@
     <string name="transport_Routes">Útvonalak</string>
     <string name="transport_Stop">Megálló</string>
     <string name="transport_stops">megállók</string>
-    <string name="transport_search_after">Következő útvonal</string>
-    <string name="transport_search_before">Előzetes útvonal</string>
+    <string name="transport_search_after">Következő útiterv</string>
+    <string name="transport_search_before">Előző útiterv</string>
     <string name="transport_finish_search">Keresés befejezése</string>
     <string name="transport_stop_to_go_out">Leszállási megálló kiválasztása</string>
     <string name="transport_to_go_after">távolság előtte</string>
     <string name="transport_to_go_before">távolság utána</string>
     <string name="transport_stops_to_pass">ennyi megálló:</string>
-    <string name="transport_route_distance">Útvonal távolsága</string>
+    <string name="transport_route_distance">Útiterv távolsága</string>
     <string name="transport">Tömegközlekedés</string>
     <string name="shared_string_ok">OK</string>
     <string name="show_transport_over_map_description">Tömegközlekedési megállok megjelenítése a térképen.</string>
@@ -2055,7 +2055,7 @@
     <string name="rendering_attr_contourColorScheme_name">Szintvonalak színsémája</string>
     <string name="rendering_attr_surfaceIntegrity_name">Útfelület épsége</string>
     <string name="search_hint">Város, cím, érdekes pont (POI) nevének megadása</string>
-    <string name="translit_name_if_miss">Átírás, ha a(z) %1$s név hiányzik</string>
+    <string name="translit_name_if_miss">Átírás, ha a %1$s név hiányzik</string>
     <string name="translit_names">Nevek átírása</string>
     <string name="rendering_value_fine_name">Finom</string>
     <string name="wiki_around">Közeli Wikipédia-cikkek</string>
@@ -2761,19 +2761,19 @@
 \n Az OsmAnd+ az alkalmazás fizetős verziója. A megvásárlásával támogatod a projektet, finanszírozod az új funkciók fejlesztését, és megkapod a legújabb frissítéseket. 
 \n 
 \n Néhány a főbb funkciókból:</string>
-    <string name="osmand_plus_extended_description_part2">Navigáció 
-\n • Online (gyorsabb) és offline (nincs roamingdíj külföldön) is működik 
-\n • Kanyaronkénti hangutasítások vezetnek végig az úton (rögzített és előállított hangok) 
-\n • Válaszható sávvezérlés, utcanevek, és becsült érkezési idő 
-\n • Köztes pontok támogatása az útitervben 
-\n • Az útvonalterv újratervezésre kerül, ha eltérsz attól 
-\n • Célkeresés cím, típus (például: parkoló, étterem, hotel, benzinkút, múzeum), vagy földrajzi koordináták szerint 
+    <string name="osmand_plus_extended_description_part2">Navigáció
+\n • Online (gyorsabb) és offline (nincs roamingdíj külföldön) is működik
+\n • Kanyaronkénti hangutasítások vezetnek végig az úton (rögzített és előállított hangok)
+\n • Válaszható sávvezérlés, utcanevek, és becsült érkezési idő
+\n • Köztes pontok támogatása az útitervben
+\n • Az útvonal újratervezése kerül, ha letér róla
+\n• Célkeresés cím, típus (például: parkoló, étterem, hotel, benzinkút, múzeum), vagy földrajzi koordináták szerint
 \n</string>
     <string name="quick_action_switch_day_night_descr">Gomb, amellyel az OsmAnd éjszakai és nappali módja között lehet váltani.</string>
     <string name="quick_action_switch_day_mode">Nappali mód</string>
     <string name="quick_action_switch_night_mode">Éjszakai mód</string>
     <string name="quick_action_day_night_switch_mode">Váltás a nappali/éjszakai mód között</string>
-    <string name="run_full_osmand_msg">A(z) {0} térképet használod, amelyet az OsmAnd biztosít. Elindítod az OsmAnd teljes verzióját\?</string>
+    <string name="run_full_osmand_msg">A(z) {0} térképet használja, amelyet az OsmAnd biztosít. Elindítja az OsmAnd teljes verzióját\?</string>
     <string name="run_full_osmand_header">Elindítod az OsmAndot\?</string>
     <string name="add_work">Munkahely hozzáadása</string>
     <string name="work_button">Munkahely</string>
@@ -2811,7 +2811,7 @@
     <string name="avoid_pt_types_descr">A navigáció során elkerülendő közlekedési módok kijelölése:</string>
     <string name="avoid_pt_types">Közlekedési módok elkerülése…</string>
     <string name="shared_string_walk">Séta</string>
-    <string name="public_transport_warning_descr_blog">Az OsmAnd útvonalszámításának módjáról a blogunkon olvashatsz.</string>
+    <string name="public_transport_warning_descr_blog">Az OsmAnd útvonalszámításának módjáról a blogunkon olvashat.</string>
     <string name="public_transport_warning_title">A tömegközlekedési útvonaltervezés jelenleg bétatesztelési fázisban van, hibák és pontatlanságok előfordulhatnak.</string>
     <string name="add_intermediate">Köztes pont hozzáadása</string>
     <string name="transfers_size">%1$d átszállás</string>
@@ -3163,13 +3163,13 @@
     <string name="week">hétre</string>
     <string name="weeks_2_4">hétre</string>
     <string name="weeks_5">hétre</string>
-    <string name="month">hónapra</string>
-    <string name="months_2_4">hónapra</string>
-    <string name="months_5">hónapra</string>
+    <string name="month">hónap</string>
+    <string name="months_2_4">hónap</string>
+    <string name="months_5">hónap</string>
     <string name="year">évre</string>
     <string name="years_2_4">évre</string>
     <string name="years_5">évre</string>
-    <string name="months_3">Három hónapra</string>
+    <string name="months_3">három hónap</string>
     <string name="price_free">Ingyenes</string>
     <string name="cancel_subscription">Előfizetés törlése</string>
     <string name="utm_format_descr">Az OsmAnd az UTM-szabványt (Universal Transverse Mercator) használja, amely hasonlít a NATO MGRS-rendszeréhez (Military Grid Reference System), de nem azonos vele.</string>
@@ -3901,7 +3901,6 @@
     <string name="profile_type_osmand_string">OsmAnd profil</string>
     <string name="profile_type_user_string">Felhasználói profil</string>
     <string name="reverse_all_points">Összes pont megfordítása</string>
-    <string name="app_mode_gap">Rés</string>
     <string name="profile_by_default_description">Jelölje ki az alkalmazás elindításakor használandó profilt.</string>
     <string name="shared_string_last_used">Utoljára használt</string>
     <string name="routing_attr_prefer_hiking_routes_description">Túraútvonalak előnyben részesítése</string>
@@ -3962,10 +3961,10 @@
     <string name="routing_engine_vehicle_type_small_truck">Kisteherautó</string>
     <string name="message_server_error">Szerverhiba: %1$s</string>
     <string name="message_name_is_already_exists">Ez a név már létezik</string>
-    <string name="announcement_time_descr">A különféle hangutasítások bemondási ideje függ az utasítás típusától, az aktuális navigációs sebességtől és az alapértelmezett navigációs sebességtől.</string>
+    <string name="announcement_time_descr">A különféle hangutasítások bemondásának időzítése függ az utasítás típusától, az aktuális navigációs sebességtől és az alapértelmezett navigációs sebességtől.</string>
     <string name="announcement_time_title">Bemondás ideje</string>
     <string name="routing_engine_vehicle_type_scooter">Roller</string>
-    <string name="delete_online_routing_engine">Törli ezt az online útvonaltervezőt\?</string>
+    <string name="delete_online_routing_engine">Eltávolítja ezt az online útvonaltervezőt\?</string>
     <string name="context_menu_read_full">Az egész elolvasása</string>
     <string name="context_menu_edit_descr">Leírás szerkesztése</string>
     <string name="delete_waypoints">Útpontok törlése</string>
@@ -4031,7 +4030,7 @@
     <string name="track_recording_will_be_continued">A felvétel folytatódni fog.</string>
     <string name="copy_poi_name">Érdekes pont nevének másolása</string>
     <string name="quick_action_show_hide_title">Megjelenítés / elrejtés</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Természetvédelmi területek, védett területek és nemzeti parkok határainak elrejtése</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Természetvédelmi területek, védett területek és nemzeti parkok határainak elrejtése.</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">Természetvédelmi területek határai</string>
     <string name="track_has_no_altitude">A nyomvonal nem tartalmaz magassági adatokat.</string>
     <string name="track_has_no_speed">A nyomvonal nem tartalmaz sebességadatokat.</string>
@@ -4043,14 +4042,14 @@
     <string name="trip_recording_save_and_continue">Mentés és folytatás</string>
     <string name="lost_data_warning">Minden nem mentett adat törlődni fog.</string>
     <string name="show_start_dialog">Kezdő párbeszéd megjelenítése</string>
-    <string name="trip_recording_show_start_dialog_setting">Ha le van tiltva, akkor a felvétel közvetlenül a widget vagy a menüelem megérintése után elindul, kihagyva a megerősítő párbeszédpanelt.</string>
+    <string name="trip_recording_show_start_dialog_setting">Ha le van tiltva, akkor a felvétel azonnal elindul a widget vagy a menüelem megérintése után, kihagyva a megerősítő párbeszédpanelt.</string>
     <string name="release_4_0_beta">• Új lehetőség: szinvonalak letöltése (méter mellett) lábban
 \n
 \n• Útvonaltervezési környezet: hozzáadott fülek a pontok és grafikonok közötti váltáshoz
 \n
 \n• Az OsmAnd Live frissítések átköltöztek a „Letöltések&gt; Frissítések” helyre
 \n
-\n• A nyomvonalak színezhetők magasság, sebesség vagy lejtés szerint.
+\n• A nyomvonalak már magasság, sebesség vagy lejtés szerint is színezhetők
 \n
 \n• Módoítható a navigációs útvonal megjelenése
 \n
@@ -4082,8 +4081,18 @@
     <string name="announce_when_exceeded">Értesítés túllépéskor</string>
     <string name="user_points">Felhasználói pontok</string>
     <string name="output">Teljesítmény</string>
-    <string name="srtm_download_single_help_message">Kérjük, válassza ki a kívánt mértékegységet. A mértékegység módosításához újra le kell töltenie a fájlt.</string>
+    <string name="srtm_download_single_help_message">Kérjük, válassza ki a mértékegységet. A formátum módosításához újra le kell töltenie a fájlt.</string>
     <string name="srtm_download_list_help_message">Az OsmAnd méterben és lábban adja meg a szintvonalak magasságát. A mértékegység módosításához újra le kell töltenie a fájlt.</string>
     <string name="shared_string_feet">láb</string>
     <string name="srtm_unit_format">Szintvonalak mértékegysége</string>
+    <string name="route_line_use_gradient_coloring">Az útvonal a magassági profil szerint van színezve.</string>
+    <string name="shared_string_min_height">Legkisebb magasság</string>
+    <string name="shared_string_max_height">Legnagyobb magasság</string>
+    <string name="use_system_language">A rendszer nyelvének használata</string>
+    <string name="recorded_description">A felvett hang szebben hangzik, de csak előre rögzített kifejezéseket – bekanyarodási utasításokat – képes kiejteni. Utcaneveket vagy érdekes pontokat nem tud bemondani.</string>
+    <string name="tts_title">TTS</string>
+    <string name="tts_description">A szövegfelolvasó (TTS) minden utasítástípust képes kiejteni: utcaneveket, bekanyarodási utasításokat, érdekes pontok (POI-k) nevét stb.</string>
+    <string name="language_description">A kívánt nyelv és a hangutasítás típusának kiválasztása.</string>
+    <string name="shared_string_itinerary">Útiterv</string>
+    <string name="route_line_use_map_style_appearance"/>
 </resources>

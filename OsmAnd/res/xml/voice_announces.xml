@@ -15,22 +15,18 @@
 		android:key="voice_provider"
 		android:layout="@layout/preference_with_descr"
 		android:persistent="false"
-		android:title="@string/shared_string_languages"
+		android:title="@string/shared_string_language"
 		tools:icon="@drawable/ic_action_volume_up" />
 
 	<Preference
+		android:key="language_divider"
 		android:layout="@layout/simple_divider_item"
 		android:selectable="false" />
 
 	<PreferenceCategory
-		android:key="language_and_output"
-		android:layout="@layout/preference_category_with_descr"
+		android:key="announce_header"
+		android:layout="@layout/preference_category_title"
 		android:title="@string/accessibility_announce" />
-
-	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
-		android:key="turn_screen_on_navigation_instructions"
-		android:layout="@layout/preference_with_descr"
-		android:title="@string/turn_screen_on_navigation_instructions" />
 
 	<SwitchPreferenceCompat
 		android:key="speak_street_names"
@@ -43,6 +39,7 @@
 		android:title="@string/exit_number" />
 
 	<Preference
+		android:key="exit_number_divider"
 		android:layout="@layout/divider_half_item"
 		android:selectable="false" />
 
@@ -61,18 +58,27 @@
 		android:layout="@layout/preference_switch"
 		android:title="@string/speak_cameras" />
 
+	<Preference
+		android:key="speed_cameras_uninstalled"
+		android:layout="@layout/preference_permission"
+		android:persistent="false"
+		android:summary="@string/read_more"
+		android:title="@string/speed_cameras_alert"
+		tools:icon="@drawable/ic_action_alert" />
+
 	<SwitchPreferenceCompat
 		android:key="speak_tunnels"
 		android:layout="@layout/preference_switch"
 		android:title="@string/show_tunnels" />
 
 	<Preference
+		android:key="announce_divider"
 		android:layout="@layout/divider_half_item"
 		android:selectable="false" />
 
 	<PreferenceCategory
-		android:key="language_and_output"
-		android:layout="@layout/preference_category_with_descr"
+		android:key="user_points_header"
+		android:layout="@layout/preference_category_title"
 		android:title="@string/user_points" />
 
 	<SwitchPreferenceCompat
@@ -91,12 +97,13 @@
 		android:title="@string/speak_poi" />
 
 	<Preference
+		android:key="user_points_divider"
 		android:layout="@layout/divider_half_item"
 		android:selectable="false" />
 
 	<PreferenceCategory
-		android:key="language_and_output"
-		android:layout="@layout/preference_category_with_descr"
+		android:key="speed_limit_header"
+		android:layout="@layout/preference_category_title"
 		android:title="@string/speak_speed_limit" />
 
 	<SwitchPreferenceCompat
@@ -110,16 +117,13 @@
 		android:title="@string/speed_limit_exceed" />
 
 	<Preference
-		android:layout="@layout/simple_divider_item"
-		android:selectable="false" />
-
-	<Preference
+		android:key="speed_limit_divider"
 		android:layout="@layout/simple_divider_item"
 		android:selectable="false" />
 
 	<PreferenceCategory
-		android:key="language_and_output"
-		android:layout="@layout/preference_category_with_descr"
+		android:key="options_header"
+		android:layout="@layout/preference_category_title"
 		android:title="@string/shared_string_options" />
 
 	<net.osmand.plus.settings.preferences.ListPreferenceEx
@@ -133,12 +137,13 @@
 		android:title="@string/announcement_time_title" />
 
 	<Preference
+		android:key="options_divider"
 		android:layout="@layout/simple_divider_item"
 		android:selectable="false" />
 
 	<PreferenceCategory
-		android:key="language_and_output"
-		android:layout="@layout/preference_category_with_descr"
+		android:key="output_header"
+		android:layout="@layout/preference_category_title"
 		android:title="@string/output" />
 
 </PreferenceScreen>

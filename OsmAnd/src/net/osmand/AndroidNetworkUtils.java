@@ -416,7 +416,7 @@ public class AndroidNetworkUtils {
 		if (listener != null) {
 			listener.onResult(result, error);
 		}
-		return null;
+		return result;
 	}
 
 	public static Bitmap downloadImage(OsmandApplication ctx, String url) {

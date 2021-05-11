@@ -3817,7 +3817,6 @@
     <string name="message_graph_will_be_available_after_recalculation">請稍候。
 \n重新計算路線後即可使用圖表。</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
-    <string name="app_mode_gap">分隔</string>
     <string name="shared_string_local_maps">本機地圖</string>
     <string name="icon_group_amenity">便利設施</string>
     <string name="icon_group_special">特殊</string>
@@ -3964,7 +3963,7 @@
     <string name="routing_engine_vehicle_type_mtb">登山車</string>
     <string name="message_server_error">伺服器錯誤：%1$s</string>
     <string name="message_name_is_already_exists">名稱已存在</string>
-    <string name="delete_online_routing_engine">刪除此線上路線引擎？</string>
+    <string name="delete_online_routing_engine">移除此線上路線引擎？</string>
     <string name="context_menu_read_full">讀取全部</string>
     <string name="context_menu_edit_descr">編輯描述</string>
     <string name="delete_waypoints">刪除航點</string>
@@ -3977,7 +3976,7 @@
     <string name="toast_select_edits_for_upload">選取要上傳的檔案</string>
     <string name="hillshade_slope_contour_lines">地形陰影／斜坡／等高線</string>
     <string name="select_segments">選取線段</string>
-    <string name="select_segments_description">%1$s 包含了多於一段，您必須為導航選取必要的部份。</string>
+    <string name="select_segments_description">%1$s 包含了多於一段，您必須指定導航的部份。</string>
     <string name="segments_count">線段 %1$d</string>
     <string name="open_place_reviews_plugin_description">OpenPlaceReviews 是一個社群驅動的專案，其蒐集關於餐廳、飯店、博物館、航點等公共場所的資訊。其蒐集的資訊包含了照片、評論、其他系統的連結（如 OpenStreetMap、維基百科）。
 \n
@@ -4036,16 +4035,16 @@
     <string name="track_has_no_altitude">軌跡不包含海拔資料。</string>
     <string name="track_has_no_speed">軌跡不包含速度資料。</string>
     <string name="select_another_colorization">請選擇另一種顏色。</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">隱藏自然保留區、保護區與國家公園界線</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">隱藏自然保留區、保護區與國家公園界線。</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">自然界線</string>
-    <string name="trip_recording_logging_interval_info">紀錄間隔設定的時段，OsmAnd 將會要求目前位置的位置資料。</string>
+    <string name="trip_recording_logging_interval_info">紀錄間隔設定的時段，OsmAnd 將會要求目前位置的資料。</string>
     <string name="trip_recording_save_and_continue">儲存並繼續</string>
     <string name="lost_data_warning">所有未儲存的資料都將會遺失。</string>
     <string name="show_start_dialog">顯示開始對話框</string>
     <string name="trip_recording_show_start_dialog_setting">若停用，則在點擊小工具或選單項目後將跳過確認對話框，立刻開始。</string>
     <string name="customize_route_line">自訂路線</string>
     <string name="shared_string_route_line">路線</string>
-    <string name="route_line_use_map_style_appearance">路線將會使用 %1$s 在選定的地圖樣式上指定的：%2$s。</string>
+    <string name="route_line_use_map_style_appearance">使用地圖樣式 (%2$s) 預設 %1$s。</string>
     <string name="specify_color_for_map_mode">指定地圖模式的顏色：%1$s。</string>
     <string name="release_4_0_beta">• 新增以英呎為單位下載等高線
 \n
@@ -4053,9 +4052,9 @@
 \n
 \n • OsmAnd Live 更新移動至「下載 &gt; 更新」
 \n
-\n • 軌跡現在可以使用海拔、速度或坡度來填色
+\n • 現在可以使用海拔、速度或坡度來為軌跡著色了。
 \n
-\n • 新增了變更導航路線外觀的選項
+\n • 新增變更路線外觀的選項。
 \n
 \n • 更新「旅程錄製」對話框
 \n
@@ -4084,7 +4083,16 @@
     <string name="output">輸出</string>
     <string name="map_quick_action_pattern">%1$s → …</string>
     <string name="shared_string_feet">英呎</string>
-    <string name="srtm_unit_format">等高線單位格式</string>
+    <string name="srtm_unit_format">等高線單位變體</string>
     <string name="srtm_download_list_help_message">OsmAnd 提供以公尺與英呎為單位的等高線資料。您將必須重新下載檔案以變更格式。</string>
-    <string name="srtm_download_single_help_message">請選取需要格式。您將必須重新下載檔案以變更格式。</string>
+    <string name="srtm_download_single_help_message">請選取變體。您將必須重新下載檔案以變更格式。</string>
+    <string name="route_line_use_gradient_coloring">路線將以高程坡度著色。</string>
+    <string name="shared_string_min_height">最低高度</string>
+    <string name="shared_string_max_height">最高高度</string>
+    <string name="language_description">選取偏好的語言以及語音導航的類型。</string>
+    <string name="tts_description">文字轉語音 (TTS) 可以說出所有類型的指令：街道名稱、轉彎指示、POI 名稱等。</string>
+    <string name="tts_title">文字轉語音</string>
+    <string name="recorded_description">錄製的聲音聽起來更好，但只能說出預先錄製的片段：轉彎指示。無法說出街道名稱或 POI 名稱。</string>
+    <string name="use_system_language">使用系統語言</string>
+    <string name="shared_string_itinerary">行程</string>
 </resources>

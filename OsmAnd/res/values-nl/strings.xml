@@ -3310,7 +3310,7 @@
     <string name="logcat_buffer_descr">Controleer en deel gedetailleerde logs van de app</string>
     <string name="permission_is_required">Toestemming is vereist om deze optie te gebruiken.</string>
     <string name="monitoring_min_speed_descr">Dit is een filter waarbij geen punten worden geregistreerd bij een bepaalde lage snelheid. Dit zorgt voor effener tracks op de kaart.</string>
-    <string name="monitoring_min_speed_descr_side_effect">Bijwerking: alle segmenten waar de minimum snelheid niet werd gehaald zullen ontbreken in je track (bvb waar je je fiets een steile helling opduwde). Ook zal info over rustperiodes ontbreken. Dat heeft gevolgen voor latere analyse of verwerking, zoals het bepalen van de totale lengte van je trip, tijd in beweging of gemiddelde snelheid.</string>
+    <string name="monitoring_min_speed_descr_side_effect">Bijwerking: alle segmenten waar de minimum snelheid niet werd gehaald zullen ontbreken in je track (bv. waar je je fiets een steile helling opduwde). Ook zal info over rustperiodes ontbreken. Dat heeft gevolgen voor latere analyse of verwerking, zoals het bepalen van de totale lengte van je trip, tijd in beweging of gemiddelde snelheid.</string>
     <string name="monitoring_min_speed_descr_recommendation">Aanbeveling: probeer eerst de bewegingsdetectie via het minimum verplaatsingsfilter loggen (B) om betere resultaten en minder gegevensverlies te bekomen. Probeer waardes hoger dan 0 wanneer je tracks te veel ruis bevatten bij lage snelheid. Noteer dat sommige metingen totaal geen snelheid rapporteren (op netwerk gebaseerde methodes), zodat je niets vastlegt.</string>
     <string name="monitoring_min_accuracy_descr">Dit zal slechts punten met een indicatie van de minimale nauwkeurigheid opnemen (in meter/voet, zoals door Android gerapporteerd wordt voor de chipset). Nauwkeurigheid is de afwijking van metingen ten opzichte van de echte positie en is niet rechtstreeks gerelateerd aan precisie, wat de spreiding is van herhaalde metingen.</string>
     <string name="monitoring_min_distance_descr_recommendation">Aanbeveling: een instelling van 5 meter kan voor jou goed werken wanneer je geen fijnere details dan die nodig hebt. Of wanneer je niet expliciet gegevens wil verzamelen tijdens het rusten.</string>
@@ -3358,7 +3358,7 @@
     <string name="shared_string_routing">Routering</string>
     <string name="shared_string_include_data">Bijkomende gegevens insluiten</string>
     <string name="import_profile_dialog_description">Het geïmporteerde profiel bevat aanvullende gegevens. Tik \"Importeren\" om enkel de profielgegevens te importeren of kies aanvullende gegevens om te importeren.</string>
-    <string name="export_profile_dialog_description">Je kan bijkomende gegevens toevoegen om mee met het profiel te exporteren.</string>
+    <string name="export_profile_dialog_description">Je kan bijkomende gegevens toevoegen om, samen met het profiel, te exporteren.</string>
     <string name="shared_string_app_default_w_val">App Standaardwaarde (%s)</string>
     <string name="no_recalculation_setting">Niet herberekenen</string>
     <string name="route_recalculation_dist_title">Minimale afstand om route te herbereken</string>
@@ -3702,7 +3702,6 @@
 \nNa herberekening is de grafiek zichtbaar.</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="import_track_descr">Kies een trackbestand om te volgen of importeer het vanaf uw apparaat.</string>
-    <string name="app_mode_gap">Onderbreking</string>
     <string name="shared_string_custom">Aangepast</string>
     <string name="perform_oauth_authorization_description">Voer een OAuth-login uit om osm edit functies te gebruiken</string>
     <string name="release_3_5">• Bijgewerkte app- en profielinstellingen: instellingen zijn nu gerangschikt op type. Elk profiel kan afzonderlijk worden aangepast.
@@ -4010,7 +4009,7 @@
     <string name="on_pause">Pauze</string>
     <string name="app_restart_required">Herstarten van de applicatie is vereist om bepaalde instellingen toe te passen.</string>
     <string name="routing_attr_height_obstacles_description">Routebepaling kan sterke hellingen vermijden.</string>
-    <string name="quick_action_coordinates_widget_descr">Een schuifschakelaar om de coördinaten-widget op de kaart weer te geven of te verbergen.</string>
+    <string name="quick_action_coordinates_widget_descr">Een schuifschakelaar om de coördinaten widget op de kaart weer te geven of te verbergen.</string>
     <string name="map_widget_distance_by_tap">Afstand bij het tikken</string>
     <string name="latest_openstreetmap_update">Nieuwste OpenStreetMap update beschikbaar:</string>
     <string name="updated">Geüpdatet: %s</string>
@@ -4027,7 +4026,7 @@
     <string name="copy_poi_name">Kopieer POI-naam</string>
     <string name="quick_action_show_hide_title">Tonen/verbergen</string>
     <string name="shared_string_interval">Interval</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Verberg natuurreservaten, beschermde gebieden en grenzen van nationale parken</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Verberg natuurreservaten, beschermde gebieden en grenzen van nationale parken.</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">Natuurlijke grenzen</string>
     <string name="track_has_no_altitude">De track bevat geen hoogtegegevens.</string>
     <string name="track_has_no_speed">De track bevat geen snelheidsgegevens.</string>
@@ -4035,4 +4034,58 @@
     <string name="trip_recording_show_start_dialog_setting">Indien uitgeschakeld zal de opname starten na een tik op de widget of het menu-item, waarbij er geen bevestiging zal worden gevraagd.</string>
     <string name="trip_recording_save_and_continue">Opslaan en doorgaan</string>
     <string name="lost_data_warning">Niet-opgeslagen gegevens zullen verloren gaan.</string>
+    <string name="no_purchases">U heeft geen aankopen gedaan</string>
+    <string name="new_device_account">Nieuw apparaat / nieuw account</string>
+    <string name="contact_support_description">Voor vragen kunt u contact met ons opnemen via %1$s.</string>
+    <string name="empty_purchases_description">Als uw aankopen hier niet verschijnen, tik dan op “%1$s”, of neem contact op met ons ondersteuningsteam.</string>
+    <string name="contact_support">Contacteer de support</string>
+    <string name="troubleshooting">Probleemoplosser</string>
+    <string name="troubleshooting_description">Volg deze link als u problemen heeft met aankopen.</string>
+    <string name="osmand_live">OsmAnd Live</string>
+    <string name="annual_subscription">Jaarlijks abonnement</string>
+    <string name="monthly_subscription">Maandelijks abonnement</string>
+    <string name="three_months_subscription">Drie maandelijks abonnement</string>
+    <string name="next_billing_date">Volgende factuurdatum: %1$s</string>
+    <string name="osmand_live_cancelled">Geannuleerd</string>
+    <string name="renew_subscription">Abonnement vernieuwen</string>
+    <string name="in_grace_period">Uitstelperiode</string>
+    <string name="on_hold">In afwachting</string>
+    <string name="expired">Niet meer geldig</string>
+    <string name="release_4_0_beta">• Optie toegevoegd om contourlijnen in voet te downloaden
+\n
+\n• Plan Route landschap: tabbladen toegevoegd om te wisselen tussen punten of grafieken
+\n
+\n• OsmAnd Live-updates verplaatst naar \"Downloads&gt; Updates\"
+\n
+\n• Tracks kunnen nu worden ingekleurd door hoogte, snelheid of helling.
+\n
+\n• Optie toegevoegd om het uiterlijk van de navigatieroutelijn te wijzigen
+\n
+\n• Bijgewerkt dialoogvenster \"Ritopname\"
+\n
+\n</string>
+    <string name="update_all_maps_added">Alle kaarten bijwerken die zijn toegevoegd aan %1$s\?</string>
+    <string name="shared_string_feet">voet</string>
+    <string name="srtm_unit_format">Contour lijnen (eenheid) formaat</string>
+    <string name="srtm_download_list_help_message">OsmAnd biedt gegevens van contourlijnen in meters en voet aan. U moet het bestand opnieuw downloaden om het formaat te wijzigen.</string>
+    <string name="srtm_download_single_help_message">Selecteer het juiste formaat. U moet het bestand opnieuw downloaden om het formaat te wijzigen.</string>
+    <string name="exit_number">Exit nummer</string>
+    <string name="announce_when_exceeded">Aankondigen wanneer overschreden</string>
+    <string name="user_points">Gebruiker punten</string>
+    <string name="output">Output</string>
+    <string name="route_line_use_gradient_coloring">De routelijn wordt ingekleurd, afhankelijk van het hoogteprofiel van de route.</string>
+    <string name="shared_string_min_height">Min. hoogte</string>
+    <string name="shared_string_max_height">Max. hoogte</string>
+    <string name="language_description">Selecteer de voorkeurstaal en het type stembegeleiding.</string>
+    <string name="tts_title">TTS (Tekst-naar-spraak)</string>
+    <string name="tts_description">Tekst-naar-spraak (TTS) kan alle soorten instructies uitspreken: straatnamen, afslaginstructies, POI-namen enz.</string>
+    <string name="recorded_description">De opgenomen stem klinkt beter, maar kan alleen vooraf opgenomen zinnen uitspreken: afslaginstructies. Kan geen straatnamen of POI-namen aankondigen.</string>
+    <string name="use_system_language">Gebruik de systeemtaal</string>
+    <string name="shared_string_itinerary">Routebeschrijving</string>
+    <string name="trip_recording_logging_interval_info">Het registratie-interval stelt de tijdsperiode in waarin OsmAnd de huidige positiegegevens opvraagt.</string>
+    <string name="show_start_dialog">Toon startdialoog</string>
+    <string name="customize_route_line">Pas de routelijn aan</string>
+    <string name="shared_string_route_line">Routelijn</string>
+    <string name="route_line_use_map_style_appearance">Gebruik de kaartstijl (%2$s) standaard %1$s.</string>
+    <string name="specify_color_for_map_mode">Geef een kleur op voor de kaartmodus %1$s.</string>
 </resources>

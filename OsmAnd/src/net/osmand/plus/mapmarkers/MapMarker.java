@@ -44,10 +44,10 @@ public class MapMarker implements LocationPoint {
 		this.index = index;
 	}
 
-	public int getType() {
+	public ItineraryType getType() {
 		return favouritePoint == null ?
-				(wptPt == null ? MapMarkersGroup.ANY_TYPE : MapMarkersGroup.GPX_TYPE) :
-				MapMarkersGroup.FAVORITES_TYPE;
+				(wptPt == null ? ItineraryType.MARKERS : ItineraryType.TRACK) :
+				ItineraryType.FAVOURITES;
 	}
 
 	public PointDescription getPointDescription(Context ctx) {

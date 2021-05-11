@@ -347,6 +347,7 @@ public class RouteCalculationResult {
 				LatLon point = s.getPoint(i);
 				n.setLatitude(point.getLatitude());
 				n.setLongitude(point.getLongitude());
+				n.setSpeed(s.getSegmentSpeed());
 				if (vls != null && i * 2 + 1 < vls.length) {
 					float h = vls[2 * i + 1];
 					n.setAltitude(h);

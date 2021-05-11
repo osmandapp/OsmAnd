@@ -16,6 +16,8 @@ import android.os.Build;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.UiThread;
+import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.AndroidUtils;
@@ -137,8 +139,13 @@ public class AppInitializer implements IProgress {
 
 	public interface AppInitializeListener {
 
+		@WorkerThread
+		void onStart(AppInitializer init);
+
+		@UiThread
 		void onProgress(AppInitializer init, InitEvents event);
 
+		@UiThread
 		void onFinish(AppInitializer init);
 	}
 	
@@ -655,6 +662,7 @@ public class AppInitializer implements IProgress {
 
 	private void startApplicationBackground() {
 		try {
+			notifyStart();
 			startBgTime = System.currentTimeMillis();
 			app.getRendererRegistry().initRenderers(this);
 			notifyEvent(InitEvents.INIT_RENDERERS);
@@ -685,7 +693,7 @@ public class AppInitializer implements IProgress {
 			// restore backuped favorites to normal file
 			restoreBackupForFavoritesFiles();
 			notifyEvent(InitEvents.RESTORE_BACKUPS);
-			app.mapMarkersHelper.syncAllGroupsAsync();
+			app.mapMarkersHelper.syncAllGroups();
 			app.searchUICore.initSearchUICore();
 
 			checkLiveUpdatesAlerts();
@@ -812,6 +820,12 @@ public class AppInitializer implements IProgress {
 
 			}
 			app.getResourceManager().initMapBoundariesCacheNative();
+		}
+	}
+
+	public void notifyStart() {
+		for (AppInitializeListener listener : listeners) {
+			listener.onStart(AppInitializer.this);
 		}
 	}
 

@@ -15,8 +15,7 @@ public class InAppPurchasesImpl extends InAppPurchases {
 	private static final InAppPurchase FULL_VERSION = new InAppPurchaseFullVersion();
 	private static final InAppPurchaseDepthContoursFree DEPTH_CONTOURS_FREE = new InAppPurchaseDepthContoursFree();
 	private static final InAppPurchaseContourLinesFree CONTOUR_LINES_FREE = new InAppPurchaseContourLinesFree();
-
-
+	
 	private static final InAppSubscription[] LIVE_UPDATES_FREE = new InAppSubscription[]{
 			new InAppPurchaseLiveUpdatesMonthlyFree(),
 			new InAppPurchaseLiveUpdates3MonthsFree(),
@@ -33,8 +32,8 @@ public class InAppPurchasesImpl extends InAppPurchases {
 		liveUpdates = new LiveUpdatesInAppPurchasesFree();
 		for (InAppSubscription s : liveUpdates.getAllSubscriptions()) {
 			if (s instanceof InAppPurchaseLiveUpdatesMonthly) {
-				if (s.isDiscounted()) {
-					discountedMonthlyLiveUpdates = s;
+				if (s.isLegacy()) {
+					legacyMonthlyLiveUpdates = s;
 				} else {
 					monthlyLiveUpdates = s;
 				}

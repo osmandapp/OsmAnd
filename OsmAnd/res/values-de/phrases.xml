@@ -3928,4 +3928,18 @@
     <string name="poi_bay_filter">Art der Bucht</string>
     <string name="poi_plateau">Plateau</string>
     <string name="poi_club_social">Freizeitclub</string>
+    <string name="poi_health_post">Gesundheitsstation</string>
+    <string name="poi_pillory">Pranger</string>
+    <string name="poi_shop_water">Trinkwasserverkauf</string>
+    <string name="poi_pest_control">Schädlingsbekämpfungsgeschäft</string>
+    <string name="poi_telecom_exchange">Vermittlungsstelle</string>
+    <string name="poi_telecom_medium_coaxial">Medium: Koaxial</string>
+    <string name="poi_telecom_medium_fibre">Medium: Glasfaser</string>
+    <string name="poi_telecom_medium_copper">Medium: Kupfer</string>
+    <string name="poi_windsock">Windsack</string>
+    <string name="poi_refugee_site">Flüchtlingslager</string>
+    <string name="poi_trolley_bay">Wagenbucht</string>
+    <string name="poi_planetarium">Planetarium</string>
+    <string name="poi_service_vehicle_rental_yes">Autovermietung</string>
+    <string name="poi_service_vehicle_inspection_yes">Fahrzeuginspektion</string>
 </resources>

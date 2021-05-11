@@ -57,7 +57,7 @@
     <string name="map_widget_back_to_loc">Neredeyim</string>
     <string name="map_widget_lock_screen">Kilitle</string>
     <string name="map_widget_compass">Pusula</string>
-    <string name="map_widget_reset">Öntanımlılara sıfırla</string>
+    <string name="map_widget_reset">Öntanımlı değerlere sıfırla</string>
     <string name="map_widget_speed">Hız</string>
     <string name="map_widget_distance">Varış Noktası</string>
     <string name="bg_service_screen_lock">Kilitle</string>
@@ -2587,7 +2587,7 @@
     <string name="screen_alerts_descr">Navigasyon sırasında sol altta gösterilen uyarılar.</string>
     <string name="switch_profile">Profil değiştir</string>
     <string name="language_and_output">Dil ve çıkış</string>
-    <string name="reset_to_default">Öntanımlılara sıfırla</string>
+    <string name="reset_to_default">Öntanımlı değerlere sıfırla</string>
     <string name="manage_profiles_descr">Profil oluşturma, içe aktarma, düzenleme</string>
     <string name="manage_profiles">Uygulama profillerini yönet…</string>
     <string name="application_profile_changed">Uygulama profili \"%s\" olarak değiştirildi</string>
@@ -3377,7 +3377,7 @@
     <string name="sunset_at">%1$s\'de gün batımı</string>
     <string name="sunrise_at">%1$s\'de gün doğumu</string>
     <string name="accessibility_mode_disabled">Android sisteminizde erişilebilirlik modu kapalı.</string>
-    <string name="reset_to_default_category_button_promo">\'Öntanımlılara sıfırla\', sıralama düzenini öntanımlı kurulum durumuna geri döndürecektir.</string>
+    <string name="reset_to_default_category_button_promo">\'Öntanımlı değerlere sıfırla\', sıralama düzenini öntanımlı kurulum durumuna geri döndürecektir.</string>
     <string name="use_system_screen_timeout">Sistemin ekran zaman aşımını kullan</string>
     <string name="use_system_screen_timeout_promo">Öntanımlı olarak devre dışıdır: OsmAnd ön planda çalışırken ekran zaman aşımına uğramayacaktır. 
 \n 
@@ -3824,7 +3824,6 @@
     <string name="message_need_calculate_route_before_show_graph">%1$s verileri yalnızca yollarda kullanılabilir, grafikleri görmek için “Noktalar arasındaki güzergah” kullanarak bir rota hesaplayın.</string>
     <string name="message_graph_will_be_available_after_recalculation">Lütfen bekleyin.
 \nGüzergah yeniden hesaplandıktan sonra grafik kullanılabilir olacak.</string>
-    <string name="app_mode_gap">Boşluk</string>
     <string name="navigate_point_mgrs">MGRS</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="mgrs_format_descr">OsmAnd, UTM NATO biçimine benzer olan MGRS\'yi kullanmaktadır.</string>
@@ -3953,7 +3952,7 @@
     <string name="announcement_time_arrive">Hedefe varış</string>
     <string name="shared_string_turn">Dönüş</string>
     <string name="announcement_time_intervals">Zaman ve mesafe aralıkları</string>
-    <string name="announcement_time_descr">Farklı sesli komutların duyuru zamanı komut türüne, geçerli navigasyon hızına ve öntanımlı navigasyon hızına bağlıdır.</string>
+    <string name="announcement_time_descr">Farklı sesli komutların duyuru zamanlaması komut türüne, geçerli navigasyon hızına ve öntanımlı navigasyon hızına bağlıdır.</string>
     <string name="announcement_time_title">Duyuru zamanı</string>
     <string name="start_recording">Kaydı başlat</string>
     <string name="show_track_on_map">Yolu haritada göster</string>
@@ -3975,7 +3974,7 @@
     <string name="delete_waypoints">Ara noktaları sil</string>
     <string name="copy_to_map_markers">Harita işaretleyicilerine kopyala</string>
     <string name="copy_to_map_favorites">Sık kullanılanlara kopyala</string>
-    <string name="delete_online_routing_engine">Bu çevrim içi yönlendirme motoru silinsin mi\?</string>
+    <string name="delete_online_routing_engine">Bu çevrim içi yönlendirme motoru kaldırılsın mı\?</string>
     <string name="context_menu_read_full">Tamamını oku</string>
     <string name="context_menu_edit_descr">Açıklamayı düzenle</string>
     <string name="upload_photo">Karşıya yükleniyor</string>
@@ -4006,7 +4005,7 @@
     <string name="activity_type_motorbike_name">Motosiklet</string>
     <string name="activity_type_car_name">Araba</string>
     <string name="select_segments">Bölümleri seç</string>
-    <string name="select_segments_description">%1$s birden fazla bölüm içeriyor, navigasyon için gerekli kısmı seçmeniz gerekiyor.</string>
+    <string name="select_segments_description">%1$s birden fazla bölüm içeriyor, navigasyon için bir bölümü belirtmeniz gerekiyor.</string>
     <string name="segments_count">Bölüm %1$d</string>
     <string name="temporary_conditional_routing_descr">Şu anda haritada etkin olan yol kısıtlamalarını kullan</string>
     <string name="routing_attr_short_way_description">Optimize edilmiş daha kısa güzergah (enerji tasarrufu)</string>
@@ -4036,12 +4035,12 @@
     <string name="delete_updates">Güncellemeleri sil</string>
     <string name="live_update_delete_updates_msg">%s canlı güncellemenin hepsini silmek istediğinizden emin misiniz\?</string>
     <string name="purchases">Satın almalar</string>
-    <string name="select_category_descr">Kategori seçin veya yenisini ekleyin</string>
+    <string name="select_category_descr">Kategori seçin veya yeni bir tane ekleyin</string>
     <string name="track_recording_will_be_continued">Kayıt devam edecek.</string>
     <string name="copy_poi_name">POI adını kopyala</string>
     <string name="quick_action_show_hide_title">Göster/gizle</string>
     <string name="shared_string_interval">Aralık</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Doğa koruma bölgelerini, korunan alanları ve milli park sınırlarını gizleyin</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Doğa koruma bölgelerini, korunan alanları ve milli park sınırlarını gizleyin.</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">Doğa sınırları</string>
     <string name="track_has_no_altitude">Yol, yükseklik verileri içermiyor.</string>
     <string name="track_has_no_speed">Yol, hız verileri içermiyor.</string>
@@ -4053,8 +4052,8 @@
     <string name="trip_recording_show_start_dialog_setting">Devre dışı bırakılırsa onay diyaloğu atlanarak, widget veya menü ögesine dokunduktan hemen sonra kayıt başlayacaktır.</string>
     <string name="customize_route_line">Güzergah hattını özelleştir</string>
     <string name="shared_string_route_line">Güzergah hattı</string>
-    <string name="route_line_use_map_style_appearance">Güzergah hattı, seçilen harita tarzında belirtilen %1$s seçeneğini kullanacaktır: %2$s.</string>
-    <string name="specify_color_for_map_mode">Harita modu için renk belirt: %1$s.</string>
+    <string name="route_line_use_map_style_appearance">Harita tarzını kullan(%2$s) öntanımlı %1$s.</string>
+    <string name="specify_color_for_map_mode">%1$s harita modu için renk belirtin.</string>
     <string name="no_purchases">Herhangi bir satın alma işleminiz yok</string>
     <string name="new_device_account">Yeni aygıt / yeni hesap</string>
     <string name="contact_support_description">Herhangi bir sorunuz varsa, lütfen %1$s üzerinden bizimle iletişime geçin.</string>
@@ -4080,7 +4079,7 @@
 \n
 \n • Yollar artık rakım, hız veya eğime göre renklendirilebilir
 \n
-\n • Navigasyon güzergah çizgisinin görünümünü değiştirme seçeneği eklendi
+\n • Güzergah hattı görünümünü değiştirme seçeneği eklendi
 \n
 \n • \"Seyahat kaydetme\" iletişim kutusu güncellendi
 \n
@@ -4092,7 +4091,16 @@
     <string name="output">Çıkış</string>
     <string name="map_quick_action_pattern">%1$s → …</string>
     <string name="shared_string_feet">fit</string>
-    <string name="srtm_unit_format">Eş yükselti eğrileri birimi biçimi</string>
+    <string name="srtm_unit_format">Eş yükselti eğrileri birimi çeşidi</string>
     <string name="srtm_download_list_help_message">OsmAnd, metre ve fit cinsinden eş yükselti eğrileri verileri sağlar. Biçimi değiştirmek için dosyayı yeniden indirmeniz gerekecek.</string>
-    <string name="srtm_download_single_help_message">Lütfen gerekli biçimi seçin. Biçimi değiştirmek için dosyayı yeniden indirmeniz gerekecek.</string>
+    <string name="srtm_download_single_help_message">Lütfen çeşidi seçin. Biçimi değiştirmek için dosyayı yeniden indirmeniz gerekecek.</string>
+    <string name="route_line_use_gradient_coloring">Güzergah hattı yükseklik eğimi ile renklendirilir.</string>
+    <string name="shared_string_min_height">Asgari yükseklik</string>
+    <string name="shared_string_max_height">Azami yükseklik</string>
+    <string name="language_description">Tercih edilen dili ve sesli yönlendirme türünü seçin.</string>
+    <string name="tts_description">Metinden konuşmaya (TTS) her tür talimatı telaffuz edebilir: sokak adları, dönüş talimatı, POI adları vb.</string>
+    <string name="tts_title">TTS</string>
+    <string name="recorded_description">Kaydedilen ses daha iyi ses çıkarır, ancak yalnızca önceden kaydedilmiş cümleleri telaffuz edebilir: dönüş talimatları. Sokak veya POI adlarını söyleyemez.</string>
+    <string name="use_system_language">Sistem dilini kullan</string>
+    <string name="shared_string_itinerary">Seyahat planı</string>
 </resources>

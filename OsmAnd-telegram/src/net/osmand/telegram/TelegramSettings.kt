@@ -333,8 +333,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 	fun getCurrentSharingDevice() = shareDevices.singleOrNull { it.externalId == currentSharingMode }
 
 	fun getLastSuccessfulSendTime(): Long {
-		val lastSuccessTextSend = shareChatsInfo.values.maxBy { it.lastTextSuccessfulSendTime }?.lastTextSuccessfulSendTime ?: -1
-		val lastSuccessMapSend = shareChatsInfo.values.maxBy { it.lastMapSuccessfulSendTime }?.lastMapSuccessfulSendTime ?: -1
+		val lastSuccessTextSend = shareChatsInfo.values.maxByOrNull { it.lastTextSuccessfulSendTime }?.lastTextSuccessfulSendTime ?: -1
+		val lastSuccessMapSend = shareChatsInfo.values.maxByOrNull { it.lastMapSuccessfulSendTime }?.lastMapSuccessfulSendTime ?: -1
 		return Math.max(lastSuccessTextSend, lastSuccessMapSend)
 	}
 

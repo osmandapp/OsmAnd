@@ -3971,7 +3971,7 @@
     <string name="uploaded_count">%1$d de %2$d carrigados</string>
     <string name="toast_select_edits_for_upload">Ischerta modìficas de carrigare</string>
     <string name="announcement_time_descr">Su tempus de annùntziu de sos annùntzios vocales diferentes dipendet dae sa casta de annùntziu, dae sa lestresa de navigatzione de cussu momentu e dae sa lestresa de navigatzione predefinida.</string>
-    <string name="announcement_time_title">Tempus de annùntziu</string>
+    <string name="announcement_time_title">Tempus de s\'annùntziu</string>
     <string name="open_place_reviews_plugin_description">OpenPlaceReviews est unu progetu ghiadu dae sa comunidade in subra de logos pùblicos che a ristorantes, albergos, museos, puntos de coladòrgiu. Collit totu sas informatziones pùblicas chi lis pertocant che a sas fotos, sas retzensiones, e sos ligàmenes a àteros sistemas che ligant a OpenStreetMap e Wikipedia.
 \n
 \nTotu sos datos de OpenPlaceReview sunt lìberos e a disponimentu de totus: http://openplacereviews.org/data.
@@ -3991,7 +3991,7 @@
     <string name="activity_type_water_name">Abba</string>
     <string name="activity_type_winter_name">Ierru</string>
     <string name="activity_type_snowmobile_name">Motoislita</string>
-    <string name="activity_type_riding_name">A caddu</string>
+    <string name="activity_type_riding_name">Ecuitatzione</string>
     <string name="activity_type_racing_name">Gara</string>
     <string name="activity_type_mountainbike_name">Bitzicleta de monte</string>
     <string name="activity_type_cycling_name">Bitzicleta</string>
@@ -4046,18 +4046,21 @@
     <string name="lost_data_warning">Totu sos datos non sarvados s\'ant a pèrdere.</string>
     <string name="show_start_dialog">Ammustra su diàlogu de incumintzu</string>
     <string name="specify_color_for_map_mode">Dislinda unu colore pro sa modalidade pro sa mapa: %1$s.</string>
-    <string name="release_4_0_beta">• Agiornamentos de OsmAnd Live (OSmAnd in direta) tramudados cara a \"Iscarrigamentos &gt; Agiornamentos\"
+    <string name="release_4_0_beta">• Annanghidura de s\'optzione pro iscarrigare sas curvas de livellu in pees
 \n
-\n • Sas rastas como si podent colorizare pro artària, lestresa, o pendèntzia.
+\n• Panoràmica de pianificatzione de s\'àndala: annanghidura de ischedas pro colare dae sos puntos a sos gràficos
 \n
-\n • Annanghidura de s\'optzione pro mudare s\'aparèntzia de sa lìnia de navigatzione de s\'àndala
+\n• Agiornamentos de OsmAnd Live (OSmAnd in direta) tramudados cara a \"Iscarrigamentos &gt; Agiornamentos\"
 \n
-\n • Agiornamentu de sa ventanedda de diàlogu \"Registratzione de su biàgiu\"
+\n• Sas rastas como si podent colorizare pro artària, lestresa, o pendèntzia.
+\n
+\n• Annanghidura de s\'optzione pro mudare s\'aparèntzia de sa lìnia de navigatzione de s\'àndala
+\n
+\n• Agiornamentu de sa ventanedda de diàlogu \"Registratzione de su biàgiu\"
 \n
 \n</string>
     <string name="in_grace_period">In perìodu de gràtzia</string>
     <string name="osmand_live">OsmAnd in direta</string>
-    <string name="app_mode_gap">Divàriu</string>
     <string name="trip_recording_logging_interval_info">S\'intervallu de registratzione impostat sa frecuèntzia cun sa cale OsmAnd at a pedire sos datos de sa positzione atuale.</string>
     <string name="trip_recording_show_start_dialog_setting">Si est disabilitadu sa registratzione at a incumintzare a pustis de su tocu in subra de su widget o de s\'elementu de su menù, brinchende sa ventanedda de diàlogu de cunfirma.</string>
     <string name="customize_route_line">Personaliza sa lìnia de s\'àndala</string>
@@ -4086,5 +4089,14 @@
     <string name="shared_string_feet">pees</string>
     <string name="srtm_unit_format">Formadu de s\'unidade de medida pro sas curvas de livellu</string>
     <string name="srtm_download_list_help_message">OsmAnd frunit datos de sas curvas de livellu in metros e in pees. As a dèpere torrare a iscarrigare su documentu pro mudare su formadu.</string>
-    <string name="srtm_download_single_help_message">Pro praghere ischerta su formadu netzessàriu. As a dèpere torrare a iscarrigare su documentu pro mudare su formadu.</string>
+    <string name="srtm_download_single_help_message">Pro praghere ischerta sa variante. As a dèpere torrare a iscarrigare su documentu pro mudare su formadu.</string>
+    <string name="route_line_use_gradient_coloring">Sa lìnia de s\'àndala s\'at a colorare sighende sa pendèntzia.</string>
+    <string name="shared_string_min_height">Artària mìn.</string>
+    <string name="shared_string_max_height">Artària màss.</string>
+    <string name="language_description">Ischerta sa limba e sa casta de boghe de ghia chi preferis.</string>
+    <string name="tts_description">Sa boghe sintetizada (TTS) podet pronuntziare cale si siat casta de istrutzione: nùmenes de sas carreras, istrutziones de bortada, nùmenes de sos PDI etz.</string>
+    <string name="tts_title">TTS</string>
+    <string name="recorded_description">Sa boghe registrada sonat mègius, ma podet pronuntziare petzi fràsias giai registradas, che a sas istrutziones de bortada. Non podet pronuntziare sos nùmenes de sas carreras o de sos PDI.</string>
+    <string name="use_system_language">Imprea sa limba de su sistema</string>
+    <string name="shared_string_itinerary">Itineràriu</string>
 </resources>
