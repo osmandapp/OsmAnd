@@ -81,7 +81,7 @@
     <string name="auto_follow_location_enabled">Centrado automático del mapa activado.</string>
     <string name="pref_vector_rendering">Opciones específicas de dibujo vectorial</string>
     <string name="pref_overlay">Superpuesta / subyacente</string>
-    <string name="pref_raster_map">Ajustes del repositorio de mapas</string>
+    <string name="pref_raster_map">Ajustes de la fuente del mapa</string>
     <string name="pref_vector_map">Ajustes del mapa vectorial</string>
     <string name="delete_confirmation_msg">¿Borrar «%1$s»?</string>
     <string name="city_type_suburb">Suburbio</string>
@@ -343,7 +343,7 @@
     <string name="shared_string_favorites">Favoritos</string>
     <string name="layer_osm_bugs">Notas de OSM (en línea)</string>
     <string name="layer_poi">Superposición de PDI…</string>
-    <string name="layer_map">Repositorio de mapas…</string>
+    <string name="layer_map">Fuente del mapa…</string>
     <string name="menu_layers">Capas de mapas</string>
     <string name="context_menu_item_search_poi">Buscar PDI</string>
     <string name="use_trackball_descr">Usa un dispositivo con rueda de desplazamiento para mover el mapa.</string>
@@ -518,9 +518,9 @@
     <string name="map_view_3d">Visión 3D del mapa</string>
     <string name="show_poi_over_map_description">Muestra la última superposición de PDI usada.</string>
     <string name="show_poi_over_map">Mostrar superposición de PDI</string>
-    <string name="map_tile_source_descr">Elige el repositorio de los mapas en línea o teselas en caché.</string>
-    <string name="map_tile_source">Repositorio de teselas del mapa</string>
-    <string name="map_source">Repositorio del mapa</string>
+    <string name="map_tile_source_descr">Elige la fuente de teselas de mapa en línea o almacenadas.</string>
+    <string name="map_tile_source">Fuente de teselas del mapa</string>
+    <string name="map_source">Fuente del mapa</string>
     <string name="use_internet">Usar Internet</string>
     <string name="show_location">Mostrar su ubicación</string>
     <string name="show_gps_coordinates_text">Mostrar coordenadas GPS en el mapa</string>
@@ -604,11 +604,11 @@
     <string name="unknown_from_location">Punto de partida aún no determinado.</string>
     <string name="confirm_interrupt_download">¿Cancelar la descarga\?</string>
     <string name="basemap_was_selected_to_download">El mapa base necesario para proporcionar la funcionalidad básica, está en la cola de descarga.</string>
-    <string name="map_online_plugin_is_not_installed">Activa el complemento «Mapas en línea», para elegir diferentes repositorios de mapas</string>
+    <string name="map_online_plugin_is_not_installed">Activa el complemento «Mapas en línea» para seleccionar diferentes fuentes de mapas</string>
     <string name="map_online_data">Mapas en línea y teselas</string>
     <string name="map_online_data_descr">Usa mapas en línea (descarga y guarda teselas en la tarjeta de memoria).</string>
     <string name="shared_string_online_maps">Mapas en línea</string>
-    <string name="online_map_settings_descr">Elige los repositorios de teselas de mapas en línea o en caché.</string>
+    <string name="online_map_settings_descr">Configura las fuentes de teselas de mapas con conexión o almacenadas</string>
     <string name="osmand_rastermaps_plugin_description">Accede a tantos tipos de mapas en línea (llamados teselas o ráster) que desees, desde teselas predefinidas de OSM (como Mapnik) a imágenes satelitales y capas de propósito especial como mapas meteorológicos, mapas del clima, mapas geológicos, capas de sombreado, etc.
 \n
 \nCualquiera de estos mapas puede usarse como el mapa predefinido que se mostrará, o como una superposición o subyacencia de otro mapa base (como los mapas estándar de OsmAnd en línea). Ciertos elementos de los mapas vectoriales de OsmAnd pueden ocultarse a través del menú «Configurar mapa» para hacer cualquier subyacencia mas visible.
@@ -1053,7 +1053,7 @@
     <string name="driving_region">Región de conducción</string>
     <string name="edit_tilesource_minzoom">Zoom mínimo</string>
     <string name="edit_tilesource_expiration_time">Tiempo de expiración (minutos)</string>
-    <string name="edit_tilesource_successfully">Repositorio de teselas «%1$s» guardada</string>
+    <string name="edit_tilesource_successfully">Fuente de teselas «%1$s» guardada</string>
     <string name="local_index_tile_data_name">Datos de teselas: %1$s</string>
     <string name="local_index_tile_data_expire">Tiempo de expiración (minutos): %1$s</string>
     <string name="shared_string_about">Información</string>
@@ -2140,10 +2140,10 @@
     <string name="quick_action_map_underlay">Cambiar mapa subyacente</string>
     <string name="quick_action_map_underlay_title">Mapas subyacentes</string>
     <string name="quick_action_map_underlay_action">Añadir subyacencia</string>
-    <string name="quick_action_map_source">Cambiar repositorio del mapa</string>
-    <string name="quick_action_map_source_title">Repositorio de mapas</string>
-    <string name="quick_action_map_source_action">Añadir repositorio del mapa</string>
-    <string name="quick_action_map_source_switch">Repositorio del mapa cambiada a «%s».</string>
+    <string name="quick_action_map_source">Cambiar fuente del mapa</string>
+    <string name="quick_action_map_source_title">Fuentes del mapa</string>
+    <string name="quick_action_map_source_action">Añadir fuente del mapa</string>
+    <string name="quick_action_map_source_switch">Fuente del mapa cambiada a «%s».</string>
     <string name="quick_action_btn_tutorial_title">Cambiar ubicación del botón</string>
     <string name="quick_action_btn_tutorial_descr">Mantener pulsado y arrastrar el botón para cambiar su ubicación en la pantalla.</string>
     <string name="shared_string_action_name">Nombre de la acción</string>
@@ -3600,14 +3600,14 @@
     <string name="pseudo_mercator_projection">Proyección de pseudo-Mercator</string>
     <string name="one_image_per_tile">Un archivo de imagen por tesela</string>
     <string name="sqlite_db_file">Archivo SQLiteDB</string>
-    <string name="online_map_name_helper_text">Proporciona un nombre para el repositorio del mapa en línea.</string>
-    <string name="online_map_url_helper_text">Ingresa o pega la URL del repositorio en línea.</string>
-    <string name="edit_online_source">Editar repositorio en línea</string>
+    <string name="online_map_name_helper_text">Proporciona un nombre para la fuente del mapa en línea.</string>
+    <string name="online_map_url_helper_text">Escribe o pega la URL de la fuente en línea.</string>
+    <string name="edit_online_source">Editar fuente en línea</string>
     <string name="expire_time">Tiempo de expiración</string>
     <string name="mercator_projection">Proyección de Mercator</string>
     <string name="storage_format">Formato de almacenamiento</string>
     <string name="map_source_zoom_levels">Define un nivel de zoom mínimo y máximo para mostrar o cargar el mapa en línea.</string>
-    <string name="expire_time_descr">Las teselas almacenadas serán renovadas después del número especificado en minutos. Dejar este campo vacío para que nunca se renueven las teselas de este repositorio.
+    <string name="expire_time_descr">Las teselas almacenadas serán renovadas después del número especificado de minutos. Deja este campo vacío para que nunca se renueven las teselas de esta fuente.
 \n
 \nUn día son 1440 minutos.
 \nUna semana son 10 080 minutos.
@@ -3664,8 +3664,8 @@
     <string name="speed_cameras_alert">Las alertas de cámaras de velocidad están prohibidas por la ley en algunos países.</string>
     <string name="default_screen_timeout">Tiempo predefinido de la espera de la pantalla</string>
     <string name="shared_string_tones">tonos</string>
-    <string name="add_online_source">Añadir repositorio en línea</string>
-    <string name="clear_tiles_warning">Al aplicar estos cambios, los datos almacenados serán borrados para este repositorio de teselas</string>
+    <string name="add_online_source">Añadir fuente en línea</string>
+    <string name="clear_tiles_warning">Al aplicar estos cambios, los datos almacenados de esta fuente de teselas serán borrados</string>
     <string name="vessel_height_warning_link">Fijar la altura del navío</string>
     <string name="vessel_height_warning">Puedes establecer la altura del navío para evitar los puentes bajos. Ten en cuenta que si el puente es móvil, usaremos su altura en estado abierto.</string>
     <string name="vessel_height_limit_description">Define la altura de la embarcación para evitar los puentes bajos. Ten en cuenta que si el puente es móvil, usaremos su altura en estado abierto.</string>
@@ -3829,7 +3829,7 @@
     <string name="app_mode_motorboat">Lancha a motor</string>
     <string name="add_to_mapillary">Añadir a Mapillary</string>
     <string name="add_to_opr">Añadir a OpenPlaceReviews</string>
-    <string name="add_photos_descr">OsmAnd muestra fotos de varios repositorios:
+    <string name="add_photos_descr">OsmAnd muestra fotos de varios orígenes:
 \nOpenPlaceReviews (fotos de PDI);
 \nMapillary (imágenes a nivel de calle);
 \nWeb / Wikimedia (fotos de PDI según datos de OpenStreetMap).</string>
@@ -3856,7 +3856,6 @@
     <string name="use_native_pt">Desarrollo nativo del transporte público</string>
     <string name="use_native_pt_desc">Cambiar al cálculo de ruta Java (seguro) del transporte público</string>
     <string name="message_need_calculate_route_before_show_graph">Los datos de «%1$s» sólo están disponibles con los caminos, calcula una ruta usando «Ruta entre puntos» para ver los gráficos.</string>
-    <string name="app_mode_gap">Separador</string>
     <string name="gpx_upload_public_visibility_descr">«Público» significa que la traza se mostrará públicamente en tu listado de trazas y en los listados de trazas GPS públicas con marcas de tiempo en bruto. Los datos servidos a través de la API no harán referencia a su página de trazas. Las marcas de tiempo de los puntos de la traza no estarán disponible a través de la API pública de GPS, aunque los puntos se ordenan cronológicamente.</string>
     <string name="gpx_upload_private_visibility_descr">«Privado» significa que la traza no aparecerá en ninguna lista pública, pero el conjunto de puntos seguirá estando disponible en orden cronológico a través de la API pública de GPS y sin marcas de tiempo.</string>
     <string name="gpx_upload_identifiable_visibility_descr">«Identificable» significa que la traza se mostrará públicamente en tu listado de trazas y en el listado de trazas GPS públicas, es decir que otros usuarios podrán descargar la traza en bruto y asociarla con su nombre de usuario. Los datos servidos a través de la API de conjunto de puntos hará referencia a la página original de la traza.</string>
@@ -4052,7 +4051,6 @@
     <string name="trip_recording_show_start_dialog_setting">Si se desactiva, la grabación se iniciará justo después de tocar el control o el elemento de menú, saltándose el diálogo de confirmación.</string>
     <string name="customize_route_line">Personalizar la línea de ruta</string>
     <string name="shared_string_route_line">Línea de ruta</string>
-    <string name="route_line_use_map_style_appearance">La línea de ruta usará el %1$s definido en el estilo de mapa elegido: %2$s.</string>
     <string name="specify_color_for_map_mode">Especifica el color para el modo de mapa: %1$s.</string>
     <string name="no_purchases">No tienes compras</string>
     <string name="new_device_account">Nuevo dispositivo / nueva cuenta</string>
@@ -4085,4 +4083,8 @@
     <string name="announce_when_exceeded">Anunciar cuando se excede</string>
     <string name="user_points">Puntos de usuario</string>
     <string name="output">Salida</string>
+    <string name="shared_string_feet">pies</string>
+    <string name="shared_string_min_height">Altura máxima</string>
+    <string name="shared_string_max_height">Altura mínima</string>
+    <string name="shared_string_itinerary">Itinerario</string>
 </resources>

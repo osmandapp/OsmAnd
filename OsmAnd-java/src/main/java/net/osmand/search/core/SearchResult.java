@@ -1,5 +1,9 @@
 package net.osmand.search.core;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.City;
 import net.osmand.data.LatLon;
@@ -11,10 +15,8 @@ import net.osmand.osm.PoiType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
-import java.util.Collection;
-
 public class SearchResult {
-	// search phrase that makes search result valid 
+	// search phrase that makes search result valid
 	public SearchPhrase requiredSearchPhrase;
 
 	// internal package fields (used for sorting)
@@ -23,7 +25,6 @@ public class SearchResult {
 	boolean firstUnknownWordMatches;
 	Collection<String> otherWordsMatch = null;
 
-	
 	public Object object;
 	public ObjectType objectType;
 	public BinaryMapIndexReader file;
@@ -37,10 +38,12 @@ public class SearchResult {
 	public String localeName;
 	public String alternateName;
 	public Collection<String> otherNames;
-	
+
 	public String localeRelatedObjectName;
 	public Object relatedObject;
 	public double distRelatedObjectName;
+
+	private double unknownPhraseMatchWeight = 0;
 
 	public SearchResult(SearchPhrase sp) {
 		this.requiredSearchPhrase = sp;
@@ -49,16 +52,57 @@ public class SearchResult {
 
 	// maximum corresponds to the top entry
 	public double getUnknownPhraseMatchWeight() {
+		if (unknownPhraseMatchWeight != 0) {
+			return unknownPhraseMatchWeight;
+		}
 		// if result is a complete match in the search we prioritize it higher
-		return getSumPhraseMatchWeight() / Math.pow(MAX_TYPE_WEIGHT, getDepth() - 1);
+		double res = getSumPhraseMatchWeight() / Math.pow(MAX_TYPE_WEIGHT, getDepth() - 1);
+		unknownPhraseMatchWeight = res;
+		return res;
 	}
-	
-	public double getSumPhraseMatchWeight() {
+
+	private double getSumPhraseMatchWeight() {
 		// if result is a complete match in the search we prioritize it higher
-		int localWordsMatched = alternateName != null ? 
-				requiredSearchPhrase.countWords(alternateName)  : requiredSearchPhrase.countWords(localeName) ;
- 		boolean match = localWordsMatched <= getSelfWordCount();
-		double res = ObjectType.getTypeWeight(match ? objectType : null);
+		String name = alternateName != null ? alternateName : localeName;
+		List<String> localResultNames = new ArrayList<>();
+		List<String> searchPhraseNames = new ArrayList<>();
+		SearchPhrase.splitWords(name, localResultNames);
+
+		String fw = requiredSearchPhrase.getFirstUnknownSearchWord();
+		List<String> ow = requiredSearchPhrase.getUnknownSearchWords();
+		if (fw != null) {
+			searchPhraseNames.add(fw);
+		}
+		if (ow != null) {
+			searchPhraseNames.addAll(ow);
+		}
+
+		int idxMatchedWord = -1;
+		boolean allWordsMatched = true;
+		for (String searchPhraseName : searchPhraseNames) {
+			boolean wordMatched = false;
+			for (int i = idxMatchedWord + 1; i < localResultNames.size(); i++) {
+				int r = requiredSearchPhrase.getCollator().compare(searchPhraseName, localResultNames.get(i));
+				if (r == 0) {
+					wordMatched = true;
+					idxMatchedWord = i;
+					break;
+				}
+			}
+			if (!wordMatched) {
+				allWordsMatched = false;
+				break;
+			}
+		}
+		if (objectType == ObjectType.POI_TYPE) {
+			allWordsMatched = false;
+		}
+
+		double res = allWordsMatched ? ObjectType.getTypeWeight(objectType) * 10 : ObjectType.getTypeWeight(null);
+		if (requiredSearchPhrase.getUnselectedPoiType() != null) {
+			// search phrase matches poi type, then we lower all POI matches and don't check allWordsMatched
+			res = ObjectType.getTypeWeight(objectType);
+		}
 		if (parentSearchResult != null) {
 			res = res + parentSearchResult.getSumPhraseMatchWeight() / MAX_TYPE_WEIGHT;
 		}
@@ -98,7 +142,7 @@ public class SearchResult {
 		}
 		return priority - 1 / (1 + priorityDistance * distance);
 	}
-	
+
 	public double getSearchDistance(LatLon location, double pd) {
 		double distance = 0;
 		if (location != null && this.location != null) {
@@ -106,7 +150,6 @@ public class SearchResult {
 		}
 		return priority - 1 / (1 + pd * distance);
 	}
-	
 
 	@Override
 	public String toString() {

@@ -3824,7 +3824,6 @@
     <string name="message_graph_will_be_available_after_recalculation">Bonvolu atendi.
 \nDiagramo estos videbla post rekalkuli kurson.</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
-    <string name="app_mode_gap">Manko</string>
     <string name="shared_string_local_maps">Lokaj mapoj</string>
     <string name="icon_group_amenity">Oportunaĵo</string>
     <string name="icon_group_special">Specialaj</string>
@@ -3949,7 +3948,7 @@
     <string name="routing_engine_vehicle_type_racingbike">Biciklo vetkura</string>
     <string name="routing_engine_vehicle_type_mtb">Montbiciklo</string>
     <string name="message_server_error">Servila eraro: %1$s</string>
-    <string name="message_name_is_already_exists">Tiu ĉi nomo jam estas uzata</string>
+    <string name="message_name_is_already_exists">La nomo jam estas uzata</string>
     <string name="start_recording">Ekigi registri</string>
     <string name="show_track_on_map">Montri kurson sur mapo</string>
     <string name="routing_engine_vehicle_type_wheelchair">Rulseĝo</string>
@@ -3969,7 +3968,7 @@
     <string name="announcement_time_arrive">Atingo al celo</string>
     <string name="shared_string_turn">Turno</string>
     <string name="announcement_time_intervals">Interspacoj distancaj kaj tempaj</string>
-    <string name="announcement_time_descr">Tempo de anonco de diversaj voĉaj sciigoj dependas de ilia specoj, nuna naviga kaj implicita naviga rapido.</string>
+    <string name="announcement_time_descr">La tempo de anonco de diversaj voĉaj sciigoj dependas de iliaj specoj, nuna kaj implicita navigaj rapidoj.</string>
     <string name="announcement_time_title">Tempo de anonco</string>
     <string name="copy_to_map_favorites">Kopii al ŝatataj</string>
     <string name="delete_online_routing_engine">Ĉu forigi tiun ĉi enretan navigilon\?</string>
@@ -4004,7 +4003,7 @@
     <string name="activity_type_offroad_name">Ekstervoje</string>
     <string name="activity_type_motorbike_name">Motorciklo</string>
     <string name="activity_type_car_name">Aŭto</string>
-    <string name="select_segments_description">%1$s enhavas almenaŭ unu segmenton, vi devas elekti la necesan parton por navigi.</string>
+    <string name="select_segments_description">%1$s enhavas pli ol unu segmento, elektu la deziratan parton por navigi.</string>
     <string name="temporary_conditional_routing_descr">Uzi vojajn limigojn, kiuj estas nun aktivaj sur la mapo</string>
     <string name="routing_attr_driving_style_description">Elekti inter pli mallonga, pli rapida aŭ pli sekura kursoj</string>
     <string name="snap_to_road_descr">Proksimigas emblemon de via pozicio al la nune navigata vojo</string>
@@ -4043,17 +4042,16 @@
     <string name="purchases">Aĉetoj</string>
     <string name="quick_action_show_hide_title">Montri/kaŝi</string>
     <string name="shared_string_interval">Intertempo</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Kaŝi limojn de naturaj rezervejoj, protektataj areoj kaj naciaj parkoj</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Kaŝi limojn de naturaj rezervejoj, protektataj areoj kaj naciaj parkoj.</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">Limoj de rezervejoj</string>
-    <string name="trip_recording_logging_interval_info">Agordita periodo de intertempo de registrado, dum kiu OsmAnd petos la nunajn poziciajn datumojn.</string>
+    <string name="trip_recording_logging_interval_info">La periodo de intertempo de registrado estas tempo post kiu OsmAnd petos pri aktualaj datumoj de pozicio.</string>
     <string name="lost_data_warning">Ĉiuj nekonservitaj datumoj perdiĝos.</string>
     <string name="trip_recording_save_and_continue">Konservi kaj daŭrigi</string>
-    <string name="trip_recording_show_start_dialog_setting">Se malŝaltita, registrado komenciĝos tuj post frapeto sur la fenestraĵo aŭ menuero, preterlasante la konfirman dialogon.</string>
+    <string name="trip_recording_show_start_dialog_setting">Se malaktiva, registrado komenciĝos tuj post frapeto sur la fenestraĵo aŭ menuero, preterlasante la ekranon de konfirmo.</string>
     <string name="show_start_dialog">Montri komencan dialogon</string>
-    <string name="specify_color_for_map_mode">Elektu koloron por map‑reĝimo: %1$s.</string>
+    <string name="specify_color_for_map_mode">Elektu koloron por map‑reĝimo %1$s.</string>
     <string name="customize_route_line">Alĝustigi linion de kurso</string>
     <string name="shared_string_route_line">Linio de kurso</string>
-    <string name="route_line_use_map_style_appearance">Por la linio de kurso estos uzata %1$s difinita por la map‑stilo: %2$s.</string>
     <string name="release_4_0_beta">• eblo elŝuti nivelkurbojn en futoj
 \n
 \n• horizontala vido por “plani kurson”: aldonitaj langetoj por baskuli inter punktoj kaj diagramoj
@@ -4092,5 +4090,14 @@
     <string name="shared_string_feet">futoj</string>
     <string name="srtm_unit_format">Unuo por nivelkurboj</string>
     <string name="srtm_download_list_help_message">OsmAnd liveras nivelkurbojn en metroj kaj en futoj. Ve devos reelŝuti la dosieron por ŝanĝi la formon.</string>
-    <string name="srtm_download_single_help_message">Elektu la deziratan formon. Vi devos reelŝuti la dosieron por ŝanĝi la formon.</string>
+    <string name="srtm_download_single_help_message">Elektu la deziratan mezurunuon. Vi devos reelŝuti la dosieron por ŝanĝi la formon.</string>
+    <string name="route_line_use_gradient_coloring">Linio de spuro estas kolorigata laŭ la profilo de altitudo.</string>
+    <string name="shared_string_min_height">Minimuma alto</string>
+    <string name="shared_string_max_height">Maksimuma alto</string>
+    <string name="language_description">Elektu preferatan lingvon kaj specon de voĉo por navigaj gvidiloj.</string>
+    <string name="tts_description">Uzante parolsintezitajn voĉojn la aplikaĵo povas elparoli ĉiujn specojn de instrukcioj: gvidiloj pri turnoj, nomoj de stratoj kaj interesejoj, ktp.</string>
+    <string name="tts_title">Parolsintezita</string>
+    <string name="recorded_description">Antaŭregistritaj voĉoj sonas pli bone, sed la aplikaĵo povas nur elparoli gvidiloj pri turnoj. Ĝi ne povas anonci nomojn de stratoj aŭ de interesejoj.</string>
+    <string name="use_system_language">Uzi sisteman lingvon</string>
+    <string name="shared_string_itinerary">Kurso</string>
 </resources>

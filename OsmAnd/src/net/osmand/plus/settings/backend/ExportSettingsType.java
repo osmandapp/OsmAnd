@@ -25,7 +25,8 @@ public enum ExportSettingsType {
 	OFFLINE_MAPS(R.string.shared_string_maps, R.drawable.ic_map),
 	TTS_VOICE(R.string.local_indexes_cat_tts, R.drawable.ic_action_volume_up),
 	VOICE(R.string.local_indexes_cat_voice, R.drawable.ic_action_volume_up),
-	ONLINE_ROUTING_ENGINES(R.string.online_routing_engines, R.drawable.ic_world_globe_dark);
+	ONLINE_ROUTING_ENGINES(R.string.online_routing_engines, R.drawable.ic_world_globe_dark),
+	ITINERARY_GROUPS(R.string.shared_string_itinerary, R.drawable.ic_action_flag);
 
 	@StringRes
 	private final int titleId;
@@ -55,7 +56,7 @@ public enum ExportSettingsType {
 	public boolean isMyPlacesCategory() {
 		return this == FAVORITES || this == TRACKS || this == OSM_EDITS || this == OSM_NOTES
 				|| this == MULTIMEDIA_NOTES || this == ACTIVE_MARKERS || this == HISTORY_MARKERS
-				|| this == SEARCH_HISTORY;
+				|| this == SEARCH_HISTORY|| this == ITINERARY_GROUPS;
 	}
 
 	public boolean isResourcesCategory() {

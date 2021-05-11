@@ -3852,7 +3852,6 @@
 \nГрафикон ће бити доступан након поновног израчунавања путање.</string>
     <string name="shared_string_local_maps">Локалне мапе</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
-    <string name="app_mode_gap">Размак</string>
     <string name="icon_group_amenity">Аменити</string>
     <string name="icon_group_special">Специал</string>
     <string name="icon_group_transport">Превоз</string>
@@ -3939,7 +3938,7 @@
     <string name="copy_poi_name">Копирај име тачке од интереса</string>
     <string name="quick_action_show_hide_title">Прикажи/сакриј</string>
     <string name="shared_string_interval">Интервал</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Сакриј резервате природе, заштићена подручја и границе националних паркова</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Сакриј резервате природе, заштићена подручја и границе националних паркова.</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">Природне границе</string>
     <string name="track_has_no_altitude">Путања не садржи податке о надморској висини.</string>
     <string name="track_has_no_speed">Путања не садржи податке о брзини.</string>
@@ -3947,7 +3946,7 @@
     <string name="temporary_conditional_routing_descr">Користи ограничења на путу тренутно активна на карти</string>
     <string name="routing_attr_short_way_description">Оптимизовани краћи пут (уштеда енергије)</string>
     <string name="routing_attr_driving_style_description">Одаберите разлог путовања да добијете краћи, бржи или сигурнији пут</string>
-    <string name="snap_to_road_descr">Иконица тренутне локације ће бити прилепљена за тренутно навођени пут</string>
+    <string name="snap_to_road_descr">Иконица тренутне позиције ће бити прилепљена за тренутно навођени пут</string>
     <string name="routing_attr_height_obstacles_description">Рутирање може да заобиђе велике узбрдице.</string>
     <string name="select_another_colorization">Одаберите други тип бојења.</string>
     <string name="announcement_time_title">Време објаве</string>
@@ -4032,13 +4031,12 @@
     <string name="quick_action_coordinates_widget_descr">Прекидач да на карти покаже или сакрије справицу са координатама.</string>
     <string name="map_widget_distance_by_tap">Удаљеност по кликтању</string>
     <string name="latest_openstreetmap_update">Последње OpenStreetMap ажурирање доступно:</string>
-    <string name="trip_recording_logging_interval_info">Временски интервал бележења на који ће OsmAnd да пита за податке о тренутној позицији.</string>
+    <string name="trip_recording_logging_interval_info">Временски интервал бележења на који ће OsmAnd да захтева податке о тренутној позицији.</string>
     <string name="show_start_dialog">Прикажи почетни дијалог</string>
     <string name="trip_recording_show_start_dialog_setting">Ако се искључи, снимање ће почети одмах после кликтања на справицу или на ставку менија, прескакајући дијалог потврде.</string>
     <string name="customize_route_line">Прилагоди линију руте</string>
-    <string name="route_line_use_map_style_appearance">Линија руте ће користити %1$s одабран на означеном стилу карте: %2$s.</string>
     <string name="shared_string_route_line">Линија руте</string>
-    <string name="specify_color_for_map_mode">Одаберите боју за режим карте: %1$s.</string>
+    <string name="specify_color_for_map_mode">Одаберите боју за режим карте %1$s.</string>
     <string name="no_purchases">Немате ниједну куповину</string>
     <string name="new_device_account">Нови уређај / нови налог</string>
     <string name="contact_support_description">Ако имате икаквих питања, контактирајте нас на %1$s.</string>
@@ -4066,11 +4064,15 @@
 \nСви подаци на OpenPlaceReview су отворени и доступни свима: http://openplacereviews.org/data.
 \n
 \nМожете прочитати више на: http://openplacereviews.org</string>
-    <string name="release_4_0_beta">• Ажурирања OsmAnd уживо су премештена у „Преузимања &gt; Ажурирања”
+    <string name="release_4_0_beta">• Додата могућност преузимања изохипси у стопама
+\n
+\n• Планирајте пејзаж руте: додати језичци да се пребацује између тачака и графика
+\n
+\n• Ажурирања OsmAnd уживо су премештена у „Преузимања &gt; Ажурирања”
 \n
 \n • Путање се сада могу обојити по висини, брзини или нагибу.
 \n
-\n • Додата опција да се измени изглед линије која се приказује приликом навођења
+\n • Додата опција да се измени изглед линија за навођење
 \n
 \n • Ажуриран дијалог за „Снимање пута”
 \n
@@ -4082,4 +4084,16 @@
     <string name="reverse_all_points">Обрни све тачке</string>
     <string name="profile_by_default_description">Одаберите профил које ће се користити по покретању апликације.</string>
     <string name="shared_string_last_used">Последње коришћено</string>
+    <string name="shared_string_feet">стопе</string>
+    <string name="srtm_unit_format">Варијанта мерних јединица за изохипсе</string>
+    <string name="srtm_download_list_help_message">OsmAnd пружа податке о изохипсама у метрима и стопама. Мораћете поново да преузмете фајл да промените формат.</string>
+    <string name="srtm_download_single_help_message">Одаберите варијанту. Мораћете поново да преузмете фајл да промените формат.</string>
+    <string name="route_line_use_gradient_coloring">Линија руте је обојена висинским нагибом.</string>
+    <string name="shared_string_min_height">Мин. висина</string>
+    <string name="shared_string_max_height">Макс. висина</string>
+    <string name="language_description">Одаберите жељени језик и тип гласовног навођења.</string>
+    <string name="tts_title">TTS</string>
+    <string name="recorded_description">Снимљени звукови звуче боље, али могу да изговоре само унапред снимљене фразе: инструкције скретања. Не могу да изговоре имена улица и тачака од интереса.</string>
+    <string name="use_system_language">Користи системски језик</string>
+    <string name="shared_string_itinerary">Итеринер</string>
 </resources>

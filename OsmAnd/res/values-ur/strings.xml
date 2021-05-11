@@ -1,2 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="transport_Routes">راستے</string>
+    <string name="transport_Stop">رکو</string>
+    <string name="lost_data_warning">غیر محفوظ شدہ تمام ڈیٹا ضائع ہوجائیں گے۔</string>
+    <string name="annual_subscription">سالانہ سبسکرپشن</string>
+    <string name="on_hold">رکیے</string>
+    <string name="shared_string_feet">فٹ</string>
+    <string name="shared_string_min_height">کم سے کم اونچائی</string>
+    <string name="shared_string_max_height">زیادہ سے زیادہ اونچائی</string>
+    <string name="use_system_language">سسٹم کی زبان استعمال کریں</string>
+    <string name="language_description"></string>
+    <string name="tts_description">ٹیکسٹ-ٹو-سپیچ(ٹی- ٹی ایس) تمام قسم کے گلی ناموں، موڑ کی ھدایات، پی او آئ کے ناموں وغیرہ کا تلفظ کر سکتا ھے۔</string>
+</resources>

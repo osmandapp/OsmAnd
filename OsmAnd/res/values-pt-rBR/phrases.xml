@@ -3911,7 +3911,7 @@
     <string name="poi_taekwondo">Taekwondo</string>
     <string name="poi_table_soccer">Futebol de mesa</string>
     <string name="poi_sumo">Sumo</string>
-    <string name="poi_speedway">Pista de corrida</string>
+    <string name="poi_speedway">Speedway</string>
     <string name="poi_snooker">Snooker</string>
     <string name="poi_shot_put">Arremesso de peso</string>
     <string name="poi_pilates">Pilates</string>
@@ -3927,4 +3927,19 @@
     <string name="poi_cliff_diving">Mergulho de falésia</string>
     <string name="poi_zurkhaneh_sport">Zurkhaneh</string>
     <string name="poi_bay_filter">Tipo de baía</string>
+    <string name="poi_ultimate">Ultimate</string>
+    <string name="poi_health_post">Posto de saúde</string>
+    <string name="poi_pillory">Pelourinho</string>
+    <string name="poi_shop_water">Armazenamento de água potável</string>
+    <string name="poi_pest_control">Loja de controle de pragas</string>
+    <string name="poi_telecom_medium_coaxial">Médio: coaxial</string>
+    <string name="poi_telecom_medium_fibre">Médio: fibra</string>
+    <string name="poi_telecom_medium_copper">Médio: cobre</string>
+    <string name="poi_telecom_exchange">Central telefônica</string>
+    <string name="poi_windsock">Biruta</string>
+    <string name="poi_refugee_site">Local de refugiados</string>
+    <string name="poi_trolley_bay">Compartimento de carrinho</string>
+    <string name="poi_planetarium">Planetário</string>
+    <string name="poi_service_vehicle_rental_yes">Aluguel de carros</string>
+    <string name="poi_service_vehicle_inspection_yes">Inspeção veicular</string>
 </resources>

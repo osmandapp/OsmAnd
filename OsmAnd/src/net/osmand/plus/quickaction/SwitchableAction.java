@@ -59,7 +59,6 @@ public abstract class SwitchableAction<T> extends QuickAction {
 
 	@Override
 	public void drawUI(ViewGroup parent, final MapActivity activity) {
-
 		View view = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.quick_action_switchable_action, parent, false);
 
@@ -106,16 +105,21 @@ public abstract class SwitchableAction<T> extends QuickAction {
 	}
 
 	@Override
-	public String getActionText(OsmandApplication application) {
-		String item = getSelectedItem(application);
-		String arrowDirection = isLayoutRtl(application) ? "\u25c0" : "\u25b6";
+	public String getActionText(OsmandApplication app) {
+		String arrowDirection = isLayoutRtl(app) ? "\u25c0" : "\u25b6";
 
-		return getTranslatedItemName(application, item) + arrowDirection + "\u2026";
+		List<QuickAction> actions = app.getQuickActionRegistry().collectQuickActionsByType(getActionType());
+		if (actions.size() > 1) {
+			String item = getNextSelectedItem(app);
+			return "\u2026" + arrowDirection + getTranslatedItemName(app, item);
+		} else {
+			String item = getSelectedItem(app);
+			return getTranslatedItemName(app, item) + arrowDirection + "\u2026";
+		}
 	}
 
 	@Override
 	public boolean fillParams(View root, MapActivity activity) {
-
 		final RecyclerView list = root.findViewById(R.id.list);
 		final Adapter adapter = (Adapter) list.getAdapter();
 
@@ -136,16 +140,16 @@ public abstract class SwitchableAction<T> extends QuickAction {
 
 	public abstract String getTranslatedItemName(Context context, String item);
 
+	public abstract String getSelectedItem(OsmandApplication app);
+
+	public abstract String getNextSelectedItem(OsmandApplication app);
+
 	protected void showChooseDialog(FragmentManager fm) {
 		SelectMapViewQuickActionsBottomSheet fragment = new SelectMapViewQuickActionsBottomSheet();
 		Bundle args = new Bundle();
 		args.putLong(KEY_ID, id);
 		fragment.setArguments(args);
 		fragment.show(fm, SelectMapViewQuickActionsBottomSheet.TAG);
-	}
-
-	public String getSelectedItem(OsmandApplication app) {
-		return null;
 	}
 
 	protected class Adapter extends RecyclerView.Adapter<Adapter.ItemHolder> implements ReorderItemTouchHelperCallback.OnItemMoveCallback {

@@ -2,8 +2,8 @@ package net.osmand.util;
 
 import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
-import net.osmand.router.RouteColorize;
 import net.osmand.data.LatLon;
+import net.osmand.router.RouteColorize;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
@@ -298,17 +298,25 @@ public class Algorithms {
 	}
 
 	public static Set<String> decodeStringSet(String s) {
-		if (isEmpty(s)) {
-			return Collections.emptySet();
-		}
-		return new HashSet<>(Arrays.asList(s.split(CHAR_TOSPLIT + "")));
+		return decodeStringSet(s, String.valueOf(CHAR_TOSPLIT));
 	}
 
 	public static String encodeStringSet(Set<String> set) {
+		return encodeStringSet(set, String.valueOf(CHAR_TOSPLIT));
+	}
+
+	public static Set<String> decodeStringSet(String s, String split) {
+		if (isEmpty(s)) {
+			return Collections.emptySet();
+		}
+		return new HashSet<>(Arrays.asList(s.split(split)));
+	}
+
+	public static String encodeStringSet(Set<String> set, String split) {
 		if (set != null) {
 			StringBuilder sb = new StringBuilder();
 			for (String s : set) {
-				sb.append(s).append(CHAR_TOSPLIT);
+				sb.append(s).append(split);
 			}
 			return sb.toString();
 		}
@@ -321,7 +329,12 @@ public class Algorithms {
 		if (value.length() > 0 && value.charAt(0) == '-') {
 			i++;
 		}
-		while (i < value.length() && (isDigit(value.charAt(i)) || value.charAt(i) == '.')) {
+		boolean dotfound = false;
+		while (i < value.length() && 
+				(isDigit(value.charAt(i)) || (value.charAt(i) == '.') && !dotfound)) {
+			if (value.charAt(i) == '.') {
+				dotfound = true;
+			}
 			i++;
 			valid = true;
 		}

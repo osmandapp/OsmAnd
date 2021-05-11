@@ -14,7 +14,7 @@
     <string name="local_openstreetmap_settings">PDI/Note OSM salvati in locale</string>
     <string name="local_openstreetmap_settings_descr">Visualizza e gestisci i PDI/Note OSM inseriti nel database locale.</string>
     <string name="live_monitoring_interval_descr">Specifica l\'intervallo del tracking online.</string>
-    <string name="live_monitoring_interval">Intervallo del Live tracking</string>
+    <string name="live_monitoring_interval">Intervallo di tracciamento online</string>
     <string name="live_monitoring_url_descr">Specifica l\'indirizzo internet con la sintassi dei parametri: lat={0}, lon={1}, data/ora={2}, hdop={3}, altitudine={4}, velocità={5}, angolo={6}.</string>
     <string name="live_monitoring_url">Indirizzo internet per il tracking in diretta</string>
     <string name="gpx_monitoring_disabled_warn">Registra la traccia usando il widget GPX o le impostazioni \'Registrazione viaggi\'.</string>
@@ -2163,7 +2163,7 @@
     <string name="shared_string_time">Tempo</string>
     <string name="total_distance">Distanza totale</string>
     <string name="routing_attr_height_obstacles_name">Utilizza dati altitudine</string>
-    <string name="shared_string_time_span">Intervallo di tempo</string>
+    <string name="shared_string_time_span">Tempo totale</string>
     <string name="shared_string_max">Massimo</string>
     <string name="shared_string_start_time">Ora d\'inizio</string>
     <string name="shared_string_end_time">Ora di fine</string>
@@ -2173,7 +2173,7 @@
     <string name="shared_string_move">Sposta</string>
     <string name="shared_string_gpx_tracks">Tracce</string>
     <string name="average_speed">Velocità media</string>
-    <string name="shared_string_time_moving">Tempo in movimento</string>
+    <string name="shared_string_time_moving">In movimento</string>
     <string name="points_delete_multiple_succesful">Punti cancellati.</string>
     <string name="points_delete_multiple">Confermi la cancellazione di %1$d punto(i)\?</string>
     <string name="route_points_category_name">Svolte di questo percorso</string>
@@ -3815,7 +3815,6 @@
     <string name="message_graph_will_be_available_after_recalculation">Attendi.
 \nIl grafico sarà disponibile dopo il ricalcolo del percorso.</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
-    <string name="app_mode_gap">Buco</string>
     <string name="navigate_point_mgrs">MGRS</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="mgrs_format_descr">OsmAnd utilizza MGRS, che è simile al formato UTM NATO.</string>
@@ -4042,13 +4041,17 @@
     <string name="contact_support_description">Se hai delle domande, per favore contattaci al %1$s.</string>
     <string name="next_billing_date">Nuova data di addebito: %1$s</string>
     <string name="routing_attr_allow_streams_name">Permetti ruscelli e scoli</string>
-    <string name="release_4_0_beta">• Aggiornamenti OsmAnd Live spostati in \"Scarica mappe&gt; Aggiornabili\"
+    <string name="release_4_0_beta">• Aggiunta opzione per scaricare le linee di contorno in piedi
 \n
-\n • Le tracce adesso possono essere colorate in base all\'altitudine, velocità o pendenza.
+\n• Panoramica pianificazione percorso: aggiunte schede per passare da punti a grafici
 \n
-\n • Aggiunta l\'opzione per cambiare l\'aspetto della line del percorso di navigazione
+\n• Aggiornamenti OsmAnd Live spostati in \"Scarica mappe&gt; Aggiornabili\"
 \n
-\n • Aggiornato la finestra di dialogo \"Registra il percorso\"
+\n• Le tracce adesso possono essere colorate in base all\'altitudine, velocità o pendenza
+\n
+\n• Aggiunta l\'opzione per cambiare l\'aspetto della line del percorso di navigazione
+\n
+\n• Aggiornato la finestra di dialogo \"Registra il percorso\"
 \n
 \n</string>
     <string name="routing_attr_allow_streams_description">Permetti ruscelli e scoli</string>
@@ -4056,7 +4059,6 @@
     <string name="routing_attr_allow_intermittent_name">Permetti le vie d\'acqua intermittenti</string>
     <string name="customize_route_line">Personalizza la linea del percorso</string>
     <string name="shared_string_route_line">Linea del percorso</string>
-    <string name="route_line_use_map_style_appearance">Per la linea del percorso sarà utilizzato %1$s specificato nello stile della mappa selezionato: %2$s.</string>
     <string name="no_purchases">Non hai alcun acquisto</string>
     <string name="empty_purchases_description">Se l\'acquisto non viene visualizzato qui, tappa su “%1$s”, o contatta il supporto.</string>
     <string name="contact_support">Contatta il supporto</string>
@@ -4076,4 +4078,12 @@
     <string name="user_points">Punti utente</string>
     <string name="output">Output</string>
     <string name="map_quick_action_pattern">%1$s → …</string>
+    <string name="in_grace_period">In periodo di grazia</string>
+    <string name="shared_string_feet">piedi</string>
+    <string name="srtm_unit_format">Unità di misura delle linee di contorno</string>
+    <string name="srtm_download_list_help_message">OsmAnd fornisce i dati delle curve di livello in metri e in piedi. Dovrai scaricare di nuovo il file per cambiarne il formato.</string>
+    <string name="srtm_download_single_help_message">Selezionare il formato necessario. Sarà necessario scaricare di nuovo il file per modificarne il formato.</string>
+    <string name="route_line_use_gradient_coloring">La linea del percorso sarà colorata a seconda del profilo altimetrico del percorso.</string>
+    <string name="shared_string_min_height">Altezza min</string>
+    <string name="shared_string_max_height">Altezza max</string>
 </resources>

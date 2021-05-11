@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="poi_routes">Маршруты</string>
     <string name="day">День</string>
     <string name="days_2_4">Дня</string>
     <string name="days_5">Дней</string>
@@ -103,8 +104,8 @@
     <string name="quick_action_directions_from_desc">Кнопка для установки центра экрана пунктом отправления. Затем нужно будет выбрать пункт назначения или запустить расчёт маршрута.</string>
     <string name="quick_action_replace_destination_desc">Кнопка для установки центра экрана пунктом назначения с заменой предыдущего (если был задан).</string>
     <string name="quick_action_add_first_intermediate_desc">Установка центра экрана местом первой остановки на маршруте.</string>
-    <string name="no_overlay">Нет покрытия</string>
-    <string name="no_underlay">Нет подложки</string>
+    <string name="no_overlay">Без наложения</string>
+    <string name="no_underlay">Без подложки</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Гористый</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Сглаженный</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Ровный</string>
@@ -123,7 +124,7 @@
     <string name="average_speed">Средняя скорость</string>
     <string name="shared_string_time_moving">Время в движении</string>
     <string name="shared_string_time_span">Общее время</string>
-    <string name="shared_string_max">Максимальная</string>
+    <string name="shared_string_max">Макс.</string>
     <string name="shared_string_start_time">Отправление</string>
     <string name="shared_string_end_time">Прибытие</string>
     <string name="shared_string_color">Цвет</string>
@@ -153,13 +154,13 @@
     <string name="quick_action_sh_poi_descr">Добавить одну или несколько категорий POI для отображения на карте.</string>
     <string name="quick_action_page_list_descr">Кнопка для перелистывания списка ниже.</string>
     <string name="quick_action_empty_param_error">Заполните все параметры</string>
-    <string name="quick_action_map_overlay">Сменить карту покрытия</string>
-    <string name="quick_action_map_overlay_title">Карты покрытия</string>
-    <string name="quick_action_map_overlay_action">Добавить карту покрытия</string>
+    <string name="quick_action_map_overlay">Сменить карту наложения</string>
+    <string name="quick_action_map_overlay_title">Наложения</string>
+    <string name="quick_action_map_overlay_action">Добавить карту наложения</string>
     <string name="quick_action_map_overlay_switch">Карта наложения изменена на «%s».</string>
     <string name="quick_action_map_underlay_switch">Карта подложки изменена на «%s».</string>
     <string name="quick_action_map_underlay">Сменить подложку карты</string>
-    <string name="quick_action_map_underlay_title">Подложки карты</string>
+    <string name="quick_action_map_underlay_title">Подложки</string>
     <string name="quick_action_map_underlay_action">Добавить подложку</string>
     <string name="quick_action_map_source">Сменить источник карты</string>
     <string name="quick_action_map_source_title">Источники карты</string>
@@ -194,7 +195,7 @@
     <string name="shared_string_continue">Продолжить</string>
     <string name="shared_string_pause">Пауза</string>
     <string name="shared_string_trip">Поездка</string>
-    <string name="shared_string_recorded">Записано в трек</string>
+    <string name="shared_string_recorded">Запись</string>
     <string name="shared_string_record">Запись</string>
     <string name="gpx_logging_no_data">Нет данных</string>
     <string name="save_track_min_speed">Минимальная скорость для записи</string>
@@ -288,7 +289,7 @@
     <string name="lang_fy">Западнофризский</string>
     <string name="lang_als">Албанский (тоскский)</string>
     <string name="rendering_attr_hideProposed_name">Планируемые объекты</string>
-    <string name="srtm_plugin_description">Обеспечивает как наложение контурных линий, так и отображения затеняющего слоя рельефа поверх стандартных карт OsmAnd. Эта функция высоко оценится спортсменами, туристами, путешественниками и всеми, кто заинтересован в рельефной структуре ландшафта.
+    <string name="srtm_plugin_description">Обеспечивает как наложение контурных линий, так и отображения слоя затенения рельефа (отмывки) поверх стандартных карт OsmAnd. Эта функция высоко оценится спортсменами, туристами, путешественниками и всеми, кто заинтересован в рельефной структуре ландшафта.
 \n
 \nГлобальные данные (между 70° на севере и 70° на юге) основываются на измерениях SRTM (Shuttle Radar Topography Mission) и ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) — инструментом визуализации Terra, флагманского спутника Системы Наблюдения Земли NASA. ASTER является результатом совместных усилий NASA, министерства экономики Японии, торговли и промышленности (METI), а также Космических Систем Японии (J-spacesystems).</string>
     <string name="srtm_paid_version_msg">Рассмотрите возможность покупки плагина «Линии высот» в Google Play, чтобы поддержать последующую разработку.</string>
@@ -1194,7 +1195,7 @@
     <string name="recording_context_menu_precord">Сделать фото</string>
     <string name="dropbox_plugin_description">Синхронизация треков и медиазаметок с вашим аккаунтом Dropbox.</string>
     <string name="dropbox_plugin_name">Плагин Dropbox</string>
-    <string name="osmand_srtm_long_description_1000_chars">Плагин обеспечивает наложение контурных линий и затемняющего слоя (рельефа), которые будут отображаться поверх стандартных карт OsmAnd. Эту функцию оценят спортсмены, туристы, путешественники и все, для кого рельеф местности имеет значение.
+    <string name="osmand_srtm_long_description_1000_chars">Плагин обеспечивает наложение контурных линий и слоя затенения рельефа (отмывки), которые будут отображаться поверх стандартных карт OsmAnd. Эту функцию оценят спортсмены, туристы, путешественники и все, для кого рельеф местности имеет значение.
 \n
 \nГлобальные данные (между 70° на севере и 70° на юге) основываются на измерениях SRTM (Shuttle Radar Topography Mission) и ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), инструментом визуализации Terra, флагманского спутника Земли системы наблюдения NASA. ASTER является результатом совместных усилий NASA, министерства экономики Японии, торговли и промышленности (METI), космических систем Японии (J-spacesystems).</string>
     <string name="recording_photo_description">Фото %1$s %2$s</string>
@@ -2872,7 +2873,7 @@
     <string name="sit_on_the_stop">Посадка на остановке</string>
     <string name="use_osm_live_public_transport_description">Включить общественный транспорт с учётом автообновлений OsmAnd Live.</string>
     <string name="use_osm_live_public_transport">Общественный транспорт OsmAnd Live</string>
-    <string name="transfers_size">%1$d пересадки</string>
+    <string name="transfers_size">пересадки: %1$d</string>
     <string name="rendering_attr_surface_unpaved_name">Грунтовая</string>
     <string name="rendering_attr_surface_sand_name">Песок</string>
     <string name="rendering_attr_surface_grass_name">Трава</string>
@@ -3263,7 +3264,7 @@
     <string name="selected_profile">Выбранный профиль</string>
     <string name="personal_category_name">Персональный</string>
     <string name="shared_string_downloading_formatted">Скачивание %s</string>
-    <string name="rendering_value_thick_name">Толсто</string>
+    <string name="rendering_value_thick_name">Толстая</string>
     <string name="default_speed_dialog_msg">Используется для оценки времени прибытия для неизвестного типа дорог и ограничения скорости для всех дорог (может изменить маршрут)</string>
     <string name="routing_attr_allow_intermediate_name">Разрешить промежуточные маршруты</string>
     <string name="routing_attr_allow_advanced_name">Разрешить расширенные маршруты</string>
@@ -3302,7 +3303,7 @@
     <string name="rendering_attr_piste_difficulty_connection_name">Соединение</string>
     <string name="simulate_your_location_gpx_descr">Симулировать свою позицию используя записанный GPX трек.</string>
     <string name="route_start_point">Начало маршрута</string>
-    <string name="shared_string_revert">Вернуться</string>
+    <string name="shared_string_revert">Сброс</string>
     <string name="suggested_maps_descr">Эти карты необходимо использовать с плагином.</string>
     <string name="added_profiles">Добавленные профили</string>
     <string name="added_profiles_descr">Профили, добавленные плагином</string>
@@ -3489,7 +3490,7 @@
     <string name="slope_description">Для визуализации крутизны рельефа используются цвета.</string>
     <string name="slope_read_more">Подробнее об уклонах можно прочитать в %1$s.</string>
     <string name="shared_string_hillshade">Затенение рельефа</string>
-    <string name="hillshade_description">Для отображения склонов, вершин и низменностей используются тёмные тени.</string>
+    <string name="hillshade_description">Для отображения склонов, вершин и низменностей используются тени (отмывка).</string>
     <string name="slope_download_description">Для отображения уклонов требуются дополнительные карты.</string>
     <string name="download_slope_maps">Карта уклонов</string>
     <string name="replace_point_descr">Заменить этой точкой другую.</string>
@@ -3634,10 +3635,10 @@
 \nОдин месяц — 43 829 минут.</string>
     <string name="tiles_storage_descr">Выберите способ хранения загруженных тайлов.</string>
     <string name="system_screen_timeout_descr">Экран будет отключаться после периода бездействия, указанного в системных настройках устройства.</string>
-    <string name="map_source_zoom_levels_descr">Эти параметры влияют на отображение при использовании в качестве карты или подложки. 
-\n 
-\n%1$s: карта будет ограничена выбранными уровнями масштабирования. 
-\n 
+    <string name="map_source_zoom_levels_descr">Эти параметры влияют на отображение при использовании в качестве карты или наложения / подложки.
+\n
+\n%1$s: карта будет ограничена выбранными уровнями масштабирования.
+\n
 \n%2$s: уровни масштабирования, при которых будут видны оригинальные тайлы; увеличение и уменьшение масштаба может происходить вне этих значений.</string>
     <string name="screen_control">Управление экраном</string>
     <string name="turn_screen_on_descr">Настройки включения экрана (убедитесь, что перед блокировкой устройства OsmAnd находится на переднем плане):</string>
@@ -3818,7 +3819,6 @@
     <string name="file_already_imported">Файл уже импортирован</string>
     <string name="message_graph_will_be_available_after_recalculation">Дождитесь пересчёта маршрута.
 \nГрафик будет доступен после пересчёта.</string>
-    <string name="app_mode_gap">Разрыв</string>
     <string name="icon_group_service">Сервис</string>
     <string name="icon_group_special">Специальные</string>
     <string name="snowmobile_render_descr">Для езды на снегоходах по выделенным дорогам и трассам.</string>
@@ -4039,7 +4039,7 @@
     <string name="select_category_descr">Выберите категорию или добавьте новую</string>
     <string name="copy_poi_name">Копировать имя POI</string>
     <string name="shared_string_interval">Интервал</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Скрыть природный заповедник, особо охраняемые природные территории и границы национального парка</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Скрыть границы заповедников, особо охраняемых природных территорий и национальных парков.</string>
     <string name="gpx_upload_trackable_visibility_descr">«Отслеживаемый» означает, что трек не будет виден в любых общедоступных списках, но обработанные точки c отметками времени из него будут доступны через public GPS API (при этом трек не будет ассоциирован с вами). Другие пользователи смогут лишь загружать обработанные точки из вашего трека.</string>
     <string name="gpx_upload_identifiable_visibility_descr">«Идентифицируемый» означает, что трек будет виден всем в разделе треки пользователя, загрузившего трек и в общем списке треков, доступном на странице GPS-треки. Другие пользователи смогут загрузить данные трека и в свойствах трека будет указано имя пользователя, загрузившего трек. Отметки времени точек трека доступны через public GPS API будут ссылаться на страницу с вашим оригинальным треком.</string>
     <string name="gpx_upload_public_visibility_descr">«Общедоступный» означает, что трек будет виден всем в разделе треки пользователя, загрузившего трек и в общем списке треков, доступном на странице GPS-треки. Отметки времени точек трека не доступны через public GPS API. Однако, другие пользователи по-прежнему могут загрузить файл трека из общего списка треков и данные трека будут иметь все отметки времени.</string>
@@ -4056,7 +4056,11 @@
     <string name="next_billing_date">Следующая дата оплаты: %1$s</string>
     <string name="osmand_live">OsmAnd Live</string>
     <string name="annual_subscription">Годовая подписка</string>
-    <string name="release_4_0_beta">• Обновления OsmAnd Live перемещены в «Загрузка карт» → «Обновления».
+    <string name="release_4_0_beta">• Добавлена возможность загрузить контурные линии в футах.
+\n
+\n• Планирование маршрута: добавлены вкладки для переключения между точками и графиками.
+\n
+\n• Обновления OsmAnd Live перемещены в «Загрузка карт» → «Обновления».
 \n
 \n• Теперь треки можно раскрашивать по высоте, скорости или уклону.
 \n
@@ -4073,7 +4077,6 @@
     <string name="update_all_maps_added">Обновить все карты, добавленные в %1$s\?</string>
     <string name="customize_route_line">Настройка линии маршрута</string>
     <string name="shared_string_route_line">Линия маршрута</string>
-    <string name="route_line_use_map_style_appearance">Линия маршрута будет использовать %1$s из выбранного стиля карты: %2$s.</string>
     <string name="specify_color_for_map_mode">Укажите цвет для режима карты: %1$s.</string>
     <string name="no_purchases">У вас нет покупок</string>
     <string name="new_device_account">Новое устройство / новый аккаунт</string>
@@ -4087,4 +4090,16 @@
     <string name="output">Вывод</string>
     <string name="map_quick_action_pattern">%1$s → …</string>
     <string name="exit_number">Номер съезда</string>
+    <string name="srtm_unit_format">Формат единиц на контурных линиях</string>
+    <string name="srtm_download_single_help_message">Выберите необходимый вариант. Для изменения формата потребуется повторно загрузить файл.</string>
+    <string name="shared_string_feet">футы</string>
+    <string name="srtm_download_list_help_message">OsmAnd предоставляет данные изолиний в метрах и футах. Для изменения формата потребуется повторно загрузить файл.</string>
+    <string name="route_line_use_gradient_coloring">Линия маршрута будет окрашена в зависимости от профиля высоты маршрута.</string>
+    <string name="shared_string_min_height">Мин. высота</string>
+    <string name="shared_string_max_height">Макс. высота</string>
+    <string name="language_description">Выберите предпочтительный язык и тип голосовых подсказок.</string>
+    <string name="tts_description">Синтезатор речи (TTS) умеет произносить все типы инструкций: названия улиц, инструкции для поворотов, названия точек интереса (POI) и т. д.</string>
+    <string name="tts_title">TTS</string>
+    <string name="recorded_description">Записанный голос звучит лучше, но умеет произносить только заранее записанные фразы: инструкции для поворотов. Не умеет объявлять названия улиц или POI.</string>
+    <string name="use_system_language">Использовать системный язык</string>
 </resources>
