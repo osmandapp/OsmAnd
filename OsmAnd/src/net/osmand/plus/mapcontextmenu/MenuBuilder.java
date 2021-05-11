@@ -393,9 +393,13 @@ public class MenuBuilder {
 					if (viewGroup == null) {
 						return;
 					}
+					String title = app.getString(R.string.speak_poi);
+					String type = " \"" + AmenityMenuController.getTypeStr(amenity) + "\"";
+					String count = "(" + amenities.size() + ")";
+					String text = app.getString(R.string.ltr_or_rtl_triple_combine_via_space, title, type, count);
+
 					View amenitiesRow = createRowContainer(viewGroup.getContext(), NEAREST_POI_KEY);
-					buildNearestRow(amenitiesRow, amenities, AmenityMenuController.getRightIconId(amenity),
-							app.getString(R.string.speak_poi) + " \"" + AmenityMenuController.getTypeStr(amenity) + "\" (" + amenities.size() + ")", NEAREST_POI_KEY);
+					buildNearestRow(amenitiesRow, amenities, AmenityMenuController.getRightIconId(amenity), text, NEAREST_POI_KEY);
 
 					View wikiRow = viewGroup.findViewWithTag(NEAREST_WIKI_KEY);
 					if (wikiRow != null) {
@@ -419,8 +423,11 @@ public class MenuBuilder {
 
 	protected void buildNearestRow(View view, List<Amenity> nearestAmenities, int iconId, String text, String amenityKey) {
 		if (nearestAmenities.size() > 0) {
-			buildRow(view, iconId, null, text + " (" + nearestAmenities.size() + ")", 0, true,
-					getCollapsableView(view.getContext(), true, nearestAmenities, amenityKey), false, 0, false, null, false);
+			String count = " (" + nearestAmenities.size() + ")";
+			text = app.getString(R.string.ltr_or_rtl_combine_via_space, text, count);
+			CollapsableView collapsableView = getCollapsableView(view.getContext(), true, nearestAmenities, amenityKey);
+			buildRow(view, iconId, null, text, 0, true, collapsableView,
+					false, 0, false, null, false);
 		}
 	}
 

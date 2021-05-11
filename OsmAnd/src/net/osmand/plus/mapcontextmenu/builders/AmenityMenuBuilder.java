@@ -682,13 +682,17 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				if (viewGroup == null || Algorithms.isEmpty(amenities)) {
 					return;
 				}
+				String title = app.getString(R.string.wiki_around);
+				String count = " (" + amenities.size() + ")";
+				String text = app.getString(R.string.ltr_or_rtl_combine_via_space, title, count);
+
 				Context context = viewGroup.getContext();
-				View amenitiesRow = createRowContainer(context, NEAREST_WIKI_KEY);
 				AmenityInfoRow wikiInfo = new AmenityInfoRow(
-						NEAREST_WIKI_KEY, R.drawable.ic_plugin_wikipedia, null,
-						app.getString(R.string.wiki_around) + " (" + amenities.size() + ")",
+						NEAREST_WIKI_KEY, R.drawable.ic_plugin_wikipedia, null, text,
 						null, true, getCollapsableView(context, true, amenities, NEAREST_WIKI_KEY),
 						0, false, false, false, 1000, null, false, false, false, 0);
+
+				View amenitiesRow = createRowContainer(context, NEAREST_WIKI_KEY);
 				buildAmenityRow(amenitiesRow, wikiInfo);
 				viewGroup.addView(amenitiesRow, position);
 			}
@@ -705,13 +709,18 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				if (viewGroup == null) {
 					return;
 				}
+				String title = app.getString(R.string.speak_poi);
+				String type = " \"" + AmenityMenuController.getTypeStr(amenity) + "\"";
+				String count = "(" + amenities.size() + ")";
+				String text = app.getString(R.string.ltr_or_rtl_triple_combine_via_space, title, type, count);
+
 				Context context = viewGroup.getContext();
-				View amenitiesRow = createRowContainer(context, NEAREST_POI_KEY);
 				AmenityInfoRow poiInfo = new AmenityInfoRow(
-						NEAREST_POI_KEY, AmenityMenuController.getRightIconId(amenity), null,
-						app.getString(R.string.speak_poi) + " \"" + AmenityMenuController.getTypeStr(amenity) + "\" (" + amenities.size() + ")",
+						NEAREST_POI_KEY, AmenityMenuController.getRightIconId(amenity), null, text,
 						null, true, getCollapsableView(context, true, amenities, NEAREST_POI_KEY),
 						0, false, false, false, 1000, null, false, false, false, 0);
+
+				View amenitiesRow = createRowContainer(context, NEAREST_POI_KEY);
 				buildAmenityRow(amenitiesRow, poiInfo);
 
 				View wikiRow = viewGroup.findViewWithTag(NEAREST_WIKI_KEY);
