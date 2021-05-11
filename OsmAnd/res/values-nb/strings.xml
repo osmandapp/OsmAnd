@@ -3950,4 +3950,8 @@
     <string name="language_description">Velg foretrukket språk og taleveiledningstype.</string>
     <string name="tts_description">Tekst-til-tale (TTS) kan uttale alle typer instruksjoner: veinavn, svingeinstruksjoner, interessepunktnavn osv.</string>
     <string name="use_system_language">Bruk systemets språk</string>
+    <string name="announce_when_exceeded">Annonser når overskredet</string>
+    <string name="route_line_use_gradient_coloring">Rutelinjen er farget av høydeskråning.</string>
+    <string name="recorded_description">Innspilt stemme høres bedre ut, men kan kun uttale forhåndsinnspillede setninger: svinginstruksjoner. Kan ikke kunngjøre gatenavn eller interessepunktnavn.</string>
+    <string name="shared_string_itinerary">Reiseplan</string>
 </resources>

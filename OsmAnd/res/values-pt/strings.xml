@@ -766,7 +766,7 @@
     <string name="avoid_motorway">Evitar autoestradas</string>
     <string name="snap_to_road">Ajustar à estrada</string>
     <string name="osmand_short_description_80_chars">Visualização e navegação móvel de mapas globais do OSM offline e online</string>
-    <string name="osmand_plus_short_description_80_chars">OsmAnd é uma aplicação de navegação de código aberto para mapas offline e online</string>
+    <string name="osmand_plus_short_description_80_chars">Visualização e navegação com o mapa mundial OpenStreetMap, tanto offline como online</string>
     <string name="filterpoi_activity">Criar filtro de POI</string>
     <string name="select_navigation_mode">Meio de transporte:</string>
     <string name="day_night_info_description">Nascer do sol: %1$s
@@ -785,15 +785,15 @@
     <string name="map_widget_transparent">Widgets transparentes</string>
     <string name="int_continuosly">Contínuo</string>
     <string name="email">e-mail</string>
-    <string name="osmand_long_description_1000_chars">OsmAnd (direções automatizadas de navegação OSM)
+    <string name="osmand_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions / direções de navegação automatizadas do OSM)
 \n
-\nO OsmAnd é uma aplicação de navegação com código-fonte aberto, com acesso a uma ampla variedade de dados globais do OpenStreetMap (OSM). Todos os dados dos mapas (vetoriais ou imagens raster) podem ser armazenados no cartão de memória do telemóvel para usar quando não tiver Internet. O OsmAnd também permite roteamento, tanto ligado como desligado da Internet, incluindo a funcionalidade de roteamento curva a curva com orientação por voz.
+\nO OsmAnd é uma aplicação de navegação com código-fonte aberto, com acesso a uma ampla variedade de dados globais do OpenStreetMap (OSM). Todos os dados dos mapas (vetoriais ou imagens raster) podem ser armazenados no cartão de memória do telemóvel para usar quando não tiver Internet. O OsmAnd também permite usar rotas, tanto ligado como desligado da Internet, incluindo a funcionalidade de rotas curva a curva com orientação por voz.
 \n
 \nAlgumas das características principais:
 \n- Funcionamento totalmente desligado da Internet (guarda os mapas obtidos, sejam eles vetoriais ou imagens, numa pasta selecionável).
 \n- Disponíveis mapas vetoriais compactados do mundo inteiro.
 \n- Descarregar mapas de países ou regiões diretamente na aplicação.
-\n- Sobreposição de mapas diversos, como GPX ou trajetos de navegação, pontos de interesse (POI), favoritos, curvas de nível, paragens de transportes públicos, mapas adicionais com transparência personalizável.
+\n- Sobreposição de mapas diversos, como trilhos GPX ou trajetos de navegação, pontos de interesse (POI), favoritos, curvas de nível, paragens de transportes públicos, mapas adicionais com transparência personalizável, etc.
 \n- Pesquisa desligado da Internet para endereços e locais (POIs).
 \n- Cálculo de rotas desligado da Internet para distâncias médias.
 \n- Modo de carro, bicicleta, pedestre, entre outros.
@@ -806,7 +806,7 @@
 \n- Quantidade de descarregamentos de mapas limitado.
 \n- Sem acesso aos POIs da Wikipédia no modo desligado da Internet.
 \n
-\nO OsmAnd está em desenvolvimento ativo, mas o nosso projeto e o seu progresso ainda depende de contribuições financeiras para o desenvolvimento e testes de novas funcionalidades. Por favor, considere comprar o OsmAnd+, ajudar a financiar novas funcionalidades específicas ou fazer um donativo em osmand.net</string>
+\nO OsmAnd está em desenvolvimento ativo, mas o nosso projeto e o seu progresso ainda depende de contribuições financeiras para o desenvolvimento e testes de novas funcionalidades. Por favor, considere comprar o OsmAnd+, para ajudar a financiar novas funcionalidades específicas. Também pode fazer um donativo em osmand.net</string>
     <string name="rendering_attr_roadColors_description">Selecione um esquema de cores de estrada:</string>
     <string name="rendering_attr_roadColors_name">Esquema de cores</string>
     <string name="map_widget_show_destination_arrow">Ver direção para o destino</string>
@@ -1044,18 +1044,18 @@
     <string name="map_widget_fps_info">Informação FPS</string>
     <string name="map_magnifier">Lupa do mapa</string>
     <string name="base_world_map">Mapa mundial</string>
-    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (direções automatizadas de navegação OSM)
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions / direções de navegação automatizadas do OSM)
 \n
-\nO OsmAnd+ é uma aplicação de navegação com código-fonte aberto, com acesso a uma ampla variedade de dados globais do OpenStreetMap (OSM). Todos os dados dos mapas (vetoriais ou imagens raster) podem ser armazenados no cartão de memória do telemóvel para usar quando não tiver Internet. O OsmAnd+ também permite roteamento, tanto ligado como desligado da Internet, incluindo a funcionalidade de roteamento curva a curva com orientação por voz.
+\nO OsmAnd+ é uma aplicação de navegação com código-fonte aberto, com acesso a uma ampla variedade de dados globais do OpenStreetMap (OSM). Todos os dados dos mapas (vetoriais ou imagens raster) podem ser armazenados no cartão de memória do telemóvel para usar quando não tiver Internet. O OsmAnd+ também permite usar rotas, tanto ligado como desligado da Internet, incluindo a funcionalidade de rotas curva a curva com orientação por voz.
 \n
-\nOsmAnd+ é a versão paga da aplicação, ao comprá-lo está a apoiar o projeto, a financiar o desenvolvimento de novas funcionalidades e a receber as últimas atualizações.
+\nOsmAnd+ é a versão paga da aplicação, ao comprá-la está a apoiar o projeto, a financiar o desenvolvimento de novas funcionalidades e a receber as últimas atualizações nos mapas.
 \n
 \nAlgumas das características principais:
 \n- Funcionamento totalmente desligado da Internet (guarda os mapas obtidos, sejam eles vetoriais ou imagens, numa pasta selecionável).
 \n- Disponíveis mapas vetoriais compactados do mundo inteiro.
 \n- Descarregar mapas de países ou regiões diretamente na aplicação.
-\n- Recurso Wikipédia desligado da Internet (descarregamento de POIs da Wikipédia), ótimo para passeios turísticos.
-\n- Sobreposição de mapas diversos, como GPX ou trajetos de navegação, pontos de interesse (POI), favoritos, curvas de nível, paragens de transportes públicos, mapas adicionais com transparência personalizável.
+\n- Recurso Wikipédia desligado da Internet (descarregamento de POIs da Wikipédia), bom para passeios turísticos.
+\n- Sobreposição de mapas diversos, como trilhos GPX ou trajetos de navegação, pontos de interesse (POI), favoritos, curvas de nível, paragens de transportes públicos, mapas adicionais com transparência personalizável, etc.
 \n
 \n- Pesquisa desligado da Internet para endereços e locais (POIs).
 \n- Cálculo de rotas desligado da Internet para distâncias médias.
@@ -2558,10 +2558,11 @@
 \n • Antártida: *
 \n A maioria dos países ao redor do globo está disponível para descarregar!
 \n Obtenha um navegador confiável no seu país - seja em França, Alemanha, México, Reino Unido, Espanha, Holanda, EUA, Rússia, Brasil ou qualquer outro.</string>
-    <string name="osmand_plus_extended_description_part1">OsmAnd+ (direções de navegação automatizada do OSM) é uma aplicação de mapas e navegação com acesso a dados livres do OSM, de todo o mundo e de alta qualidade.
-\nDesfrute da navegação visual ou por voz, ver POIs (pontos de interesse), criando e gerindo trilhos GPX, usando informação de altitude e curvas de nível, escolher entre modos dirigir, andar de bicicleta e pedestre, editar o OpenStreetMap e muito mais.
+    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions / direções de navegação automatizadas do OSM)
 \n
-\nOsmAnd+ é a versão paga da aplicação. Ao comprá-lo, está a apoiar o projeto, a financiar o desenvolvimento de novas funcionalidades e a receber as últimas atualizações.
+\nO OsmAnd+ é uma aplicação de navegação com código-fonte aberto, com acesso a uma ampla variedade de dados globais do OpenStreetMap (OSM). Todos os dados dos mapas (vetoriais ou imagens raster) podem ser armazenados no cartão de memória do telemóvel para usar quando não tiver Internet. O OsmAnd+ também permite usar rotas, tanto ligado como desligado da Internet, incluindo a funcionalidade de rotas curva a curva com orientação por voz.
+\n
+\nOsmAnd+ é a versão paga da aplicação, ao comprá-la está a apoiar o projeto, a financiar o desenvolvimento de novas funcionalidades e a receber as últimas atualizações nos mapas.
 \n
 \nAlgumas das características principais:</string>
     <string name="osmand_plus_extended_description_part2">Navegação
@@ -2602,11 +2603,11 @@
 \n• Visualização opcional de velocidade e altitudes
 \n• Visualização de curvas de nível e sombreamento de relevo (com uma extensão adicional)</string>
     <string name="osmand_plus_extended_description_part7">Contribua diretamente para o OpenStreetMap
-\n• Envie relatórios de erros.
+\n• Envie notas de erros que encontrou para informar os editores do OpenStreetMap.
 \n• Envie trilhos GPX para o OpenStreetMap diretamente da aplicação.
 \n• Adicione POIs e envie-os diretamente para o OpenStreetMap (ou mais tarde se estiver desconectado da Internet).
 \n• Gravar viagem opcional também em plano de fundo (enquanto o aparelho está no modo adormecido).
-\n• O OsmAnd é um programa de fonte aberta desenvolvido ativamente. Todos podem contribuir para a aplicação reportando erros, a melhorar as traduções ou a programar novas funcionalidades. Além disso, o projeto conta com contribuições financeiras para financiar a programação e testes de novas funcionalidades.
+\n• O OsmAnd é um programa com código-fonte aberto desenvolvido ativamente. Todos podem contribuir para a aplicação reportando erros, melhorar as traduções ou a programar novas funcionalidades. Além disso, o projeto conta com contribuições financeiras para financiar a programação e testes de novas funcionalidades.
 \n</string>
     <string name="osmand_plus_extended_description_part8">Cobertura de mapa e qualidade aproximada:
 \n• Europa Ocidental: ****
@@ -3495,7 +3496,7 @@
     <string name="replace_point_descr">Substituir outro ponto por este.</string>
     <string name="app_mode_ski_touring">Passeios de esqui</string>
     <string name="app_mode_ski_snowmobile">Moto de neve</string>
-    <string name="custom_osmand_plugin">Extensão personalizada OsmAnd</string>
+    <string name="custom_osmand_plugin">Extensão OsmAnd personalizada</string>
     <string name="changes_applied_to_profile">Alterações aplicadas ao perfil \'%1$s\'.</string>
     <string name="settings_item_read_error">Não foi possível ler \'%1$s\'.</string>
     <string name="settings_item_write_error">Não foi possível gravar em \'%1$s\'.</string>
@@ -3757,7 +3758,7 @@
     <string name="shared_string_save_as_gpx">Guardar como novo ficheiro de trilho</string>
     <string name="save_track_to_gpx_globally">Registar o trilho num ficheiro GPX</string>
     <string name="layer_gpx_layer">Trilhos</string>
-    <string name="context_menu_item_add_waypoint">Adicionar ponto de passagem de trilho</string>
+    <string name="context_menu_item_add_waypoint">Inserir ponto intermédio</string>
     <string name="map_widget_monitoring">Gravar viagem</string>
     <string name="monitoring_control_start">Gravar</string>
     <string name="save_global_track_interval_descr">Especifique o intervalo de registo para a gravação geral do trilho (ligado através do widget de \'Gravar viagem\' no mapa).</string>
@@ -3897,13 +3898,13 @@
     <string name="plan_route_split_before">Dividir antes</string>
     <string name="plan_route_split_after">Dividir após</string>
     <string name="plan_route_add_new_segment">Adicionar um novo segmento</string>
-    <string name="release_3_9">• Adicionada opção de exportar e importar todos os dados, que inclui configurações, recursos, meus lugares
+    <string name="release_3_9">• Adicionada opção de exportar e importar todos os dados, incluindo configurações, recursos e meus lugares.
 \n
-\n• Planear rota: gráficos para segmentos com a rota, adicionado a capacidade de criar e editar trilhos de segmentos múltiplos
+\n• Planear rota: gráficos para segmentos de trilhos com rota, e adicionada a capacidade de criar e editar múltiplos trilhos de segmentos.
 \n
-\n• Adicionado método de autenticação OAuth para OpenStreetMap, melhor interface dos diálogos OSM
+\n• Adicionado método de autenticação OAuth para o OpenStreetMap, melhoria da interface das janelas de diálogos do OpenStreetMap.
 \n
-\n• Cores personalizadas para favoritos e pontos de rotas de trilhos
+\n• Cores personalizadas para favoritos e pontos de rotas de trilhos.
 \n
 \n</string>
     <string name="edit_online_routing_engine">Editar o mecanismo de roteamento online</string>
@@ -3933,11 +3934,13 @@
     <string name="rename_track">Alterar nome do trilho</string>
     <string name="change_folder">Mudar pasta</string>
     <string name="hillshade_slope_contour_lines">Sombras de relevo / declives / curvas de nível</string>
-    <string name="open_place_reviews_plugin_description">OpenPlaceReviews é um projeto comunitário sobre lugares públicos como restaurantes, hotéis, museus, locais etc. Recolhe toda a informação pública sobre eles, como fotografias, classificações/avaliações, ligações para outros sistemas como o OpenStreetMap e a Wikipédia.
+    <string name="open_place_reviews_plugin_description">OpenPlaceReviews é um projeto gerido pela comunidade sobre lugares públicos como restaurantes, hotéis, museus, locais, etc. Permite recolher toda a informação pública sobre estes, como fotografias, classificações/avaliações, ligações para outros sistemas como o OpenStreetMap e a Wikipédia.
 \n
 \nTodos os dados do OpenPlaceReviews estão abertos e disponíveis para todos: http://openplacereviews.org/data
 \n
-\nPode ler mais em: http://openplacereviews.org</string>
+\nApós criar uma conta no openplacereviews.org recomenda-se aguardar algumas horas até esta estar registada na blockchain para que possa iniciar sessão com a sua conta.
+\n
+\nLer mais em: http://openplacereviews.org</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">Usar test.openplacereviews.org</string>
     <string name="login_open_place_reviews">Iniciar sessão no OpenPlaceReviews</string>
@@ -3960,17 +3963,17 @@
     <string name="live_update_delete_updates_msg">Tem a certeza que quer eliminar todas as %s atualizações OsmAnd Live\?</string>
     <string name="release_4_0_beta">• Tradução para português europeu completamente revista.
 \n
-\n• Adicionada opção para descarregar curvas de nível na unidade de medida pés.
+\n• Adicionada opção para descarregar curvas de nível na unidade de medida \"pés\".
 \n
 \n• Planear rota: adicionadas abas para alternar entre pontos ou gráficos.
 \n
-\n• Atualizações OsmAnd Live movidas para \"Descarregamentos &gt; Atualizações\"
+\n• Atualizações OsmAnd Live movidas para \"Descarregar mapas &gt; Atualizações\"
 \n
 \n• Os trilhos podem ser agora coloridos conforme a altitude, velocidade ou declive.
 \n
 \n• Adicionada opção para alterar a aparência da linha de rota.
 \n
-\n• Janela de diálogo \"Gravação do trilho\" atualizada.
+\n• Janela \"Gravar viagem\" atualizada.
 \n
 \n</string>
     <string name="routing_attr_height_obstacles_description">O roteamento pode evitar subidas íngremes.</string>
