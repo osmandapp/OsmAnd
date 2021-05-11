@@ -752,5 +752,3 @@ public class MapUtils {
 		return Math.sqrt((endX - startX) * (endX - startX) + (endY - startY) * (endY - startY));
 	}
 }
-
-
