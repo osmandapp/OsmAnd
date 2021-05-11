@@ -191,7 +191,7 @@ public class WidgetsVisibilityHelper {
 	}
 
 	private boolean isInRouteLineAppearanceMode() {
-		return mapLayers.getRouteLayer().isInRouteLineAppearanceMode();
+		return mapLayers.getRouteLayer().isPreviewRouteLineVisible();
 	}
 
 	private boolean isInFollowTrackMode() {
