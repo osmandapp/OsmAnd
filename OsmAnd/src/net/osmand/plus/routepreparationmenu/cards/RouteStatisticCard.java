@@ -52,7 +52,7 @@ public class RouteStatisticCard extends BaseCard {
 		super(mapActivity);
 		this.gpx = gpx;
 		this.onAnalyseClickListener = onAnalyseClickListener;
-		this.gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpx);
+		this.gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpx, true);
 	}
 
 	@Nullable
