@@ -4044,7 +4044,6 @@
     <string name="trip_recording_show_start_dialog_setting">若停用，則在點擊小工具或選單項目後將跳過確認對話框，立刻開始。</string>
     <string name="customize_route_line">自訂路線</string>
     <string name="shared_string_route_line">路線</string>
-    <string name="route_line_use_map_style_appearance">使用地圖樣式 (%2$s) 預設 %1$s。</string>
     <string name="specify_color_for_map_mode">指定地圖模式的顏色：%1$s。</string>
     <string name="release_4_0_beta">• 新增以英呎為單位下載等高線
 \n

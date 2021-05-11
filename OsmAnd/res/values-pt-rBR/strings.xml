@@ -4046,7 +4046,6 @@
     <string name="trip_recording_show_start_dialog_setting">Se desativado, a gravação começará imediatamente após tocar no widget ou item de menu, pulando a caixa de diálogo de confirmação.</string>
     <string name="customize_route_line">Personalizar linha de rota</string>
     <string name="shared_string_route_line">Linha de rota</string>
-    <string name="route_line_use_map_style_appearance">Use o estilo de mapa (%2$s) padrão %1$s.</string>
     <string name="specify_color_for_map_mode">Especifique a cor para o modo de mapa %1$s.</string>
     <string name="release_4_0_beta">• Adicionada opção para baixar curvas de níveis em pés
 \n

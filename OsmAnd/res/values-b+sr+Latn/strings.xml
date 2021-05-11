@@ -4056,7 +4056,6 @@
     <string name="trip_recording_show_start_dialog_setting">Ako se isključi, snimanje će početi odmah posle kliktanja na spravicu ili na stavku menija, preskakajući dijalog potvrde.</string>
     <string name="customize_route_line">Prilagodi liniju rute</string>
     <string name="shared_string_route_line">Linija rute</string>
-    <string name="route_line_use_map_style_appearance">Linija rute će koristiti %1$s odabran na označenom stilu karte: %2$s.</string>
     <string name="specify_color_for_map_mode">Odaberite boju za režim karte: %1$s.</string>
     <string name="no_purchases">Nemate nijednu kupovinu</string>
     <string name="new_device_account">Novi uređaj / novi nalog</string>

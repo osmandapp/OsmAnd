@@ -4048,7 +4048,6 @@ POIの更新は利用できません</string>
     <string name="voice_prompts_timetable">音声アナウンスの間隔</string>
     <string name="customize_route_line">ルートラインのカスタマイズ</string>
     <string name="shared_string_route_line">ルートライン</string>
-    <string name="route_line_use_map_style_appearance">ルートライン指定は%1$s、選択したマップスタイルは:%2$s</string>
     <string name="specify_color_for_map_mode">マップモードの色指定: %1$s</string>
     <string name="release_4_0_beta">• OsmAndLiveのアップデートは\"ダウンロード\"＞\"更新\"に移動
 \n
