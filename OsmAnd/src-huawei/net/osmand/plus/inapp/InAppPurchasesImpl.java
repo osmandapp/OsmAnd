@@ -35,8 +35,6 @@ public class InAppPurchasesImpl extends InAppPurchases {
 
 	private static final int[] MAPS_SCOPE = new int[]{
 			FULL_VERSION_ID,
-			DEPTH_CONTOURS_ID,
-			CONTOUR_LINES_ID,
 	};
 
 	private static final InAppPurchase FULL_VERSION = new InAppPurchaseFullVersion();
