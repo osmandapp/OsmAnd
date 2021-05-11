@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="poi_routes">Маршруты</string>
     <string name="day">День</string>
     <string name="days_2_4">Дня</string>
     <string name="days_5">Дней</string>

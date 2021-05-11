@@ -12,6 +12,9 @@
 
 -->
 
+    <string name="routing_attr_avoid_low_emission_zone_name">Avoid low emission zones</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">Avoid low emission zones</string>
+    <string name="poi_routes">Routes</string>
     <string name="route_line_use_map_style_color">Use map style (%1$s) default color.</string>
     <string name="route_line_use_map_style_width">Use map style (%1$s) default width.</string>
     <string name="shared_string_itinerary">Itinerary</string>
