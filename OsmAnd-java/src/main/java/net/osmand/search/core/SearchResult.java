@@ -70,39 +70,13 @@ public class SearchResult {
 			names.add(localeName);
 			names.addAll(otherNames);
 		}
-		List<String> localResultNames = new ArrayList<>();
-		List<String> searchPhraseNames = new ArrayList<>();
-
-		String fw = requiredSearchPhrase.getFirstUnknownSearchWord();
-		List<String> ow = requiredSearchPhrase.getUnknownSearchWords();
-		if (fw != null) {
-			searchPhraseNames.add(fw);
-		}
-		if (ow != null) {
-			searchPhraseNames.addAll(ow);
-		}
 
 		boolean allWordsMatched = true;
+		List<String> localResultNames = new ArrayList<>();
 		for (String name : names) {
-			int idxMatchedWord = -1;
 			SearchPhrase.splitWords(name, localResultNames);
 			if (names.indexOf(name) == 0 || !allWordsMatched) {
-				allWordsMatched = true;
-				for (String searchPhraseName : searchPhraseNames) {
-					boolean wordMatched = false;
-					for (int i = idxMatchedWord + 1; i < localResultNames.size(); i++) {
-						int r = requiredSearchPhrase.getCollator().compare(searchPhraseName, localResultNames.get(i));
-						if (r == 0) {
-							wordMatched = true;
-							idxMatchedWord = i;
-							break;
-						}
-					}
-					if (!wordMatched) {
-						allWordsMatched = false;
-						break;
-					}
-				}
+				allWordsMatched = isWordMatched(localResultNames);
 			}
 			localResultNames.clear();
 		}
@@ -134,6 +108,41 @@ public class SearchResult {
 			inc += parentSearchResult.getFoundWordCount();
 		}
 		return inc;
+	}
+
+	private boolean isWordMatched(List<String> localResultNames) {
+		List<String> searchPhraseNames = getSearchPhraseNames();
+		int idxMatchedWord = -1;
+		for (String searchPhraseName : searchPhraseNames) {
+			boolean wordMatched = false;
+			for (int i = idxMatchedWord + 1; i < localResultNames.size(); i++) {
+				int r = requiredSearchPhrase.getCollator().compare(searchPhraseName, localResultNames.get(i));
+				if (r == 0) {
+					wordMatched = true;
+					idxMatchedWord = i;
+					break;
+				}
+			}
+			if (!wordMatched) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private List<String> getSearchPhraseNames() {
+		List<String> searchPhraseNames = new ArrayList<>();
+
+		String fw = requiredSearchPhrase.getFirstUnknownSearchWord();
+		List<String> ow = requiredSearchPhrase.getUnknownSearchWords();
+		if (fw != null) {
+			searchPhraseNames.add(fw);
+		}
+		if (ow != null) {
+			searchPhraseNames.addAll(ow);
+		}
+
+		return searchPhraseNames;
 	}
 
 	private int getSelfWordCount() {
