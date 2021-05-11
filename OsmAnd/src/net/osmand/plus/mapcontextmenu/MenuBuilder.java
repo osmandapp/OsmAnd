@@ -82,6 +82,7 @@ import org.apache.commons.logging.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.ref.WeakReference;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -363,29 +364,37 @@ public class MenuBuilder {
 		}
 	}
 
-	protected void buildNearestWikiRow(final ViewGroup viewGroup) {
+	protected void buildNearestWikiRow(ViewGroup viewGroup) {
 		final int position = viewGroup.getChildCount();
+		final WeakReference<ViewGroup> viewGroupRef = new WeakReference<>(viewGroup);
 		buildNearestWikiRow(new SearchAmenitiesListener() {
 			@Override
 			public void onFinish(List<Amenity> amenities) {
-				if (!Algorithms.isEmpty(amenities)) {
-					View amenitiesRow = createRowContainer(viewGroup.getContext(), NEAREST_WIKI_KEY);
-
-					buildNearestRow(amenitiesRow, amenities, R.drawable.ic_action_wikipedia, app.getString(R.string.wiki_around), NEAREST_WIKI_KEY);
-					viewGroup.addView(amenitiesRow, position);
+				ViewGroup viewGroup = viewGroupRef.get();
+				if (viewGroup == null || Algorithms.isEmpty(amenities)) {
+					return;
 				}
+				View amenitiesRow = createRowContainer(viewGroup.getContext(), NEAREST_WIKI_KEY);
+
+				buildNearestRow(amenitiesRow, amenities, R.drawable.ic_action_wikipedia, app.getString(R.string.wiki_around), NEAREST_WIKI_KEY);
+				viewGroup.addView(amenitiesRow, position);
 			}
 		});
 	}
 
-	protected void buildNearestPoiRow(final ViewGroup viewGroup) {
+	protected void buildNearestPoiRow(ViewGroup viewGroup) {
 		if (amenity != null) {
 			final int position = viewGroup.getChildCount();
+			final WeakReference<ViewGroup> viewGroupRef = new WeakReference<>(viewGroup);
 			buildNearestPoiRow(new SearchAmenitiesListener() {
 				@Override
 				public void onFinish(List<Amenity> amenities) {
+					ViewGroup viewGroup = viewGroupRef.get();
+					if (viewGroup == null) {
+						return;
+					}
 					View amenitiesRow = createRowContainer(viewGroup.getContext(), NEAREST_POI_KEY);
-					buildNearestRow(amenitiesRow, amenities,  AmenityMenuController.getRightIconId(amenity),
+					buildNearestRow(amenitiesRow, amenities, AmenityMenuController.getRightIconId(amenity),
 							app.getString(R.string.speak_poi) + " \"" + AmenityMenuController.getTypeStr(amenity) + "\" (" + amenities.size() + ")", NEAREST_POI_KEY);
 
 					View wikiRow = viewGroup.findViewWithTag(NEAREST_WIKI_KEY);

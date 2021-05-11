@@ -46,6 +46,7 @@ import net.osmand.util.OpeningHoursParser;
 import org.apache.commons.logging.Log;
 
 import java.io.UnsupportedEncodingException;
+import java.lang.ref.WeakReference;
 import java.math.RoundingMode;
 import java.net.URLDecoder;
 import java.text.DecimalFormat;
@@ -671,12 +672,14 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		buildNearestPoi(viewGroup);
 	}
 
-	private void buildNearestWiki(final ViewGroup viewGroup) {
+	private void buildNearestWiki(ViewGroup viewGroup) {
 		final int position = viewGroup.getChildCount();
+		final WeakReference<ViewGroup> viewGroupRef = new WeakReference<>(viewGroup);
 		buildNearestWikiRow(new SearchAmenitiesListener() {
 			@Override
 			public void onFinish(List<Amenity> amenities) {
-				if (Algorithms.isEmpty(amenities)) {
+				ViewGroup viewGroup = viewGroupRef.get();
+				if (viewGroup == null || Algorithms.isEmpty(amenities)) {
 					return;
 				}
 				Context context = viewGroup.getContext();
@@ -692,11 +695,16 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		});
 	}
 
-	private void buildNearestPoi(final ViewGroup viewGroup) {
+	private void buildNearestPoi(ViewGroup viewGroup) {
 		final int position = viewGroup.getChildCount();
+		final WeakReference<ViewGroup> viewGroupRef = new WeakReference<>(viewGroup);
 		buildNearestPoiRow(new SearchAmenitiesListener() {
 			@Override
 			public void onFinish(List<Amenity> amenities) {
+				ViewGroup viewGroup = viewGroupRef.get();
+				if (viewGroup == null) {
+					return;
+				}
 				Context context = viewGroup.getContext();
 				View amenitiesRow = createRowContainer(context, NEAREST_POI_KEY);
 				AmenityInfoRow poiInfo = new AmenityInfoRow(
