@@ -3897,7 +3897,6 @@
     <string name="delete_online_routing_engine">Slett denne nettbaserte rutingsmotoren\?</string>
     <string name="context_menu_read_full">Les hele</string>
     <string name="delete_waypoints">Slett rutepunkter</string>
-    <string name="app_mode_gap">Luke</string>
     <string name="login_open_street_map">Logg inn på OpenStreetMap</string>
     <string name="user_login">Logg inn</string>
     <string name="announcement_time_passing">Tidsforbruk</string>

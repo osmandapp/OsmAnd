@@ -47,7 +47,7 @@ public abstract class InAppPurchases {
 	protected InAppPurchase depthContours;
 	protected InAppPurchase contourLines;
 	protected InAppSubscription monthlyLiveUpdates;
-	protected InAppSubscription discountedMonthlyLiveUpdates;
+	protected InAppSubscription legacyMonthlyLiveUpdates;
 	protected InAppSubscriptionList subscriptions;
 	protected InAppPurchase[] inAppPurchases;
 
@@ -88,8 +88,8 @@ public abstract class InAppPurchases {
 	public InAppSubscription getPurchasedMonthlyLiveUpdates() {
 		if (monthlyLiveUpdates.isAnyPurchased()) {
 			return monthlyLiveUpdates;
-		} else if (discountedMonthlyLiveUpdates != null && discountedMonthlyLiveUpdates.isAnyPurchased()) {
-			return discountedMonthlyLiveUpdates;
+		} else if (legacyMonthlyLiveUpdates != null && legacyMonthlyLiveUpdates.isAnyPurchased()) {
+			return legacyMonthlyLiveUpdates;
 		}
 		return null;
 	}
@@ -134,23 +134,27 @@ public abstract class InAppPurchases {
 		return null;
 	}
 
-	public abstract boolean isFullVersion(String sku);
+	public abstract boolean isFullVersion(InAppPurchase p);
 
-	public abstract boolean isDepthContours(String sku);
+	public abstract boolean isDepthContours(InAppPurchase p);
 
-	public abstract boolean isContourLines(String sku);
+	public abstract boolean isContourLines(InAppPurchase p);
 
-	public abstract boolean isLiveUpdates(String sku);
+	public abstract boolean isLiveUpdatesSubscription(InAppPurchase p);
+
+	public abstract boolean isOsmAndProSubscription(InAppPurchase p);
+
+	public abstract boolean isMapsSubscription(InAppPurchase p);
 
 	public abstract static class InAppSubscriptionList {
 
-		private List<InAppSubscription> subscriptions;
+		private final List<InAppSubscription> subscriptions;
 
 		InAppSubscriptionList(@NonNull InAppSubscription[] subscriptionsArray) {
 			this.subscriptions = Arrays.asList(subscriptionsArray);
 		}
 
-		private List<InAppSubscription> getSubscriptions() {
+		public List<InAppSubscription> getSubscriptions() {
 			return new ArrayList<>(subscriptions);
 		}
 
@@ -184,7 +188,7 @@ public abstract class InAppPurchases {
 						added = true;
 					}
 				}
-				if (!added && !s.isDiscounted()) {
+				if (!added && !s.isLegacy()) {
 					res.add(s);
 				}
 			}
@@ -248,7 +252,8 @@ public abstract class InAppPurchases {
 			NOT_PURCHASED
 		}
 
-		private String sku;
+		private final int featureId;
+		private final String sku;
 		private String price;
 		private double priceValue;
 		private String priceCurrencyCode;
@@ -257,17 +262,28 @@ public abstract class InAppPurchases {
 
 		double monthlyPriceValue;
 		boolean donationSupported = false;
-		boolean discounted = false;
 
 		private NumberFormat currencyFormatter;
 
-		protected InAppPurchase(@NonNull String sku) {
+		protected InAppPurchase(int featureId, @NonNull String sku) {
+			this.featureId = featureId;
 			this.sku = sku;
 		}
 
-		protected InAppPurchase(@NonNull String sku, boolean discounted) {
-			this(sku);
-			this.discounted = discounted;
+		public int getFeatureId() {
+			return featureId;
+		}
+
+		@NonNull
+		public abstract int[] getScope();
+
+		public boolean hasFeatureInScope(int featureId) {
+			for (int id : getScope()) {
+				if (featureId == id) {
+					return true;
+				}
+			}
+			return false;
 		}
 
 		@NonNull
@@ -355,9 +371,7 @@ public abstract class InAppPurchases {
 			return purchaseState == PurchaseState.UNKNOWN;
 		}
 
-		public boolean isDiscounted() {
-			return discounted;
-		}
+		public abstract boolean isLegacy();
 
 		public CharSequence getTitle(Context ctx) {
 			return "";
@@ -686,13 +700,13 @@ public abstract class InAppPurchases {
 			}
 		}
 
-		InAppSubscription(@NonNull String skuNoVersion, int version, boolean discounted) {
-			super(skuNoVersion + "_v" + version, discounted);
+		InAppSubscription(int id, @NonNull String skuNoVersion, int version) {
+			super(id, skuNoVersion + "_v" + version);
 			this.skuNoVersion = skuNoVersion;
 		}
 
-		InAppSubscription(@NonNull String sku, boolean discounted) {
-			super(sku, discounted);
+		InAppSubscription(int id, @NonNull String sku) {
+			super(id, sku);
 			this.skuNoVersion = sku;
 		}
 
@@ -907,10 +921,10 @@ public abstract class InAppPurchases {
 		}
 	}
 
-	public static class InAppPurchaseDepthContours extends InAppPurchase {
+	public static abstract class InAppPurchaseDepthContours extends InAppPurchase {
 
-		protected InAppPurchaseDepthContours(String sku) {
-			super(sku);
+		protected InAppPurchaseDepthContours(int featureId, String sku) {
+			super(featureId, sku);
 		}
 
 		@Override
@@ -919,10 +933,10 @@ public abstract class InAppPurchases {
 		}
 	}
 
-	public static class InAppPurchaseContourLines extends InAppPurchase {
+	public static abstract class InAppPurchaseContourLines extends InAppPurchase {
 
-		protected InAppPurchaseContourLines(String sku) {
-			super(sku);
+		protected InAppPurchaseContourLines(int featureId, String sku) {
+			super(featureId, sku);
 		}
 
 		@Override
@@ -933,13 +947,13 @@ public abstract class InAppPurchases {
 
 	protected static abstract class InAppPurchaseMonthlySubscription extends InAppSubscription {
 
-		InAppPurchaseMonthlySubscription(String skuNoVersion, int version, boolean discounted) {
-			super(skuNoVersion, version, discounted);
+		InAppPurchaseMonthlySubscription(int featureId, String skuNoVersion, int version) {
+			super(featureId, skuNoVersion, version);
 			donationSupported = true;
 		}
 
-		InAppPurchaseMonthlySubscription(@NonNull String sku, boolean discounted) {
-			super(sku, discounted);
+		InAppPurchaseMonthlySubscription(int featureId, @NonNull String sku) {
+			super(featureId, sku);
 			donationSupported = true;
 		}
 
@@ -988,12 +1002,12 @@ public abstract class InAppPurchases {
 
 	protected static abstract class InAppPurchaseQuarterlySubscription extends InAppSubscription {
 
-		InAppPurchaseQuarterlySubscription(String skuNoVersion, int version, boolean discounted) {
-			super(skuNoVersion, version, discounted);
+		InAppPurchaseQuarterlySubscription(int featureId, String skuNoVersion, int version) {
+			super(featureId, skuNoVersion, version);
 		}
 
-		InAppPurchaseQuarterlySubscription(@NonNull String sku, boolean discounted) {
-			super(sku, discounted);
+		InAppPurchaseQuarterlySubscription(int featureId, @NonNull String sku) {
+			super(featureId, sku);
 		}
 
 		@Override
@@ -1036,12 +1050,12 @@ public abstract class InAppPurchases {
 
 	protected static abstract class InAppPurchaseAnnualSubscription extends InAppSubscription {
 
-		InAppPurchaseAnnualSubscription(String skuNoVersion, int version, boolean discounted) {
-			super(skuNoVersion, version, discounted);
+		InAppPurchaseAnnualSubscription(int featureId, String skuNoVersion, int version) {
+			super(featureId, skuNoVersion, version);
 		}
 
-		InAppPurchaseAnnualSubscription(@NonNull String sku, boolean discounted) {
-			super(sku, discounted);
+		InAppPurchaseAnnualSubscription(int featureId, @NonNull String sku) {
+			super(featureId, sku);
 		}
 
 		@Override
@@ -1082,10 +1096,15 @@ public abstract class InAppPurchases {
 		}
 	}
 
-	public static class InAppPurchaseLiveUpdatesOldMonthly extends InAppPurchaseMonthlySubscription {
+	public abstract static class InAppPurchaseLiveUpdatesOldMonthly extends InAppPurchaseMonthlySubscription {
 
-		InAppPurchaseLiveUpdatesOldMonthly(String sku) {
-			super(sku, true);
+		InAppPurchaseLiveUpdatesOldMonthly(int featureId, String sku) {
+			super(featureId, sku);
+		}
+
+		@Override
+		public boolean isLegacy() {
+			return true;
 		}
 
 		@Override

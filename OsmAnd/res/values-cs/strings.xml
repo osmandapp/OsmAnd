@@ -3657,7 +3657,6 @@
     <string name="subscription_expired_title">Předplatné OsmAnd Live skončilo</string>
     <string name="subscription_paused_title">Předplatné OsmAnd Live je pozastaveno</string>
     <string name="subscription_on_hold_title">Předplatné OsmAnd Live je zablokované</string>
-    <string name="app_mode_gap">Mezera</string>
     <string name="routing_attr_freeride_policy_description">Freeride a sjezd mimo sjezdovky. Obvykle neupravované a neudržované, bez večerní kontroly. Vstup na vlastní nebezpečí.</string>
     <string name="routing_attr_difficulty_preference_description">Preferovat trasy s touto obtížností, avšak povolit navigaci přes náročnější nebo jednodušší trasy, pokud jsou kratší.</string>
     <string name="routing_attr_allow_skating_only_description">Trasy upravované pouze pro volný styl nebo bruslení na lyžích, ne pro klasické lyžování.</string>

@@ -3901,7 +3901,6 @@
     <string name="profile_type_osmand_string">OsmAnd profil</string>
     <string name="profile_type_user_string">Felhasználói profil</string>
     <string name="reverse_all_points">Összes pont megfordítása</string>
-    <string name="app_mode_gap">Rés</string>
     <string name="profile_by_default_description">Jelölje ki az alkalmazás elindításakor használandó profilt.</string>
     <string name="shared_string_last_used">Utoljára használt</string>
     <string name="routing_attr_prefer_hiking_routes_description">Túraútvonalak előnyben részesítése</string>
@@ -4095,5 +4094,4 @@
     <string name="tts_description">A szövegfelolvasó (TTS) minden utasítástípust képes kiejteni: utcaneveket, bekanyarodási utasításokat, érdekes pontok (POI-k) nevét stb.</string>
     <string name="language_description">A kívánt nyelv és a hangutasítás típusának kiválasztása.</string>
     <string name="shared_string_itinerary">Útiterv</string>
-    <string name="route_line_use_map_style_appearance"/>
 </resources>

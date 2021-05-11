@@ -217,10 +217,7 @@ public class DiscountHelper {
 		if (url.startsWith(INAPP_PREFIX) && url.length() > INAPP_PREFIX.length()) {
 			String inAppSku = url.substring(INAPP_PREFIX.length());
 			InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
-			if (purchaseHelper != null
-					&& purchaseHelper.isPurchased(inAppSku) || InAppPurchaseHelper.isSubscribedToLiveUpdates(app)) {
-				return false;
-			}
+			return purchaseHelper == null || !purchaseHelper.isPurchased(inAppSku);
 		}
 		return true;
 	}

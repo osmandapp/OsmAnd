@@ -3826,7 +3826,6 @@
     <string name="message_graph_will_be_available_after_recalculation">Aguarde um momento.
 \nO gráfico estará disponível após a rota ser recalculada.</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
-    <string name="app_mode_gap">Intervalo</string>
     <string name="navigate_point_mgrs">MGRS</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="mgrs_format_descr">O OsmAnd utiliza o MGRS, que é semelhante ao formato UTM NATO.</string>
@@ -4076,7 +4075,6 @@
     <string name="trip_recording_show_start_dialog_setting">Se desativado, a gravação começará logo a seguir ao tocar no widget ou item do menu, ignorando a janela de confirmação.</string>
     <string name="customize_route_line">Personalizar a linha de itinerário</string>
     <string name="shared_string_route_line">Linha de itinerário</string>
-    <string name="route_line_use_map_style_appearance">Usar estilo do mapa predefinido (%2$s) %1$s.</string>
     <string name="specify_color_for_map_mode">Especificar cor para o modo mapa %1$s.</string>
     <string name="new_device_account">Novo aparelho / nova conta</string>
     <string name="troubleshooting">Resolução de problemas</string>

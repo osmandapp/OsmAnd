@@ -3819,7 +3819,6 @@
     <string name="message_graph_will_be_available_after_recalculation">Počkajte na prepočet trasy.
 \nGraf bude dostupný po prepočte.</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
-    <string name="app_mode_gap">Medzera</string>
     <string name="shared_string_local_maps">Lokálne mapy</string>
     <string name="icon_group_amenity">Občianska vybavenosť</string>
     <string name="icon_group_special">Špeciálne</string>
@@ -4060,7 +4059,6 @@
 \n</string>
     <string name="customize_route_line">Upraviť navigačnú trasu</string>
     <string name="shared_string_route_line">Navigačná trasa</string>
-    <string name="route_line_use_map_style_appearance">Použiť štýl mapy (%2$s), predvolene %1$s.</string>
     <string name="specify_color_for_map_mode">Zadajte farbu pre režim mapy %1$s.</string>
     <string name="no_purchases">Nemáte žiadne nákupy</string>
     <string name="new_device_account">Nové zariadenie / nový účet</string>

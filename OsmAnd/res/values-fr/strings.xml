@@ -3814,7 +3814,6 @@
 \nLe graphique sera disponible à l\'issue du calcul de l\'itinéraire.</string>
     <string name="snowmobile_render_descr">Pour la conduite en motoneige avec des routes et des pistes dédiées.</string>
     <string name="shared_string_graph">Graphique</string>
-    <string name="app_mode_gap">Écart</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s - %2$s</string>
     <string name="shared_string_local_maps">Cartes locales</string>
     <string name="icon_group_amenity">Loisir</string>
@@ -4054,7 +4053,6 @@
 \n- Mise à jour de la fenêtre \"Enregistrement du trajet\".
 \n
 \n</string>
-    <string name="route_line_use_map_style_appearance">Utiliser le style de carte (%2$s) par défaut %1$s.</string>
     <string name="customize_route_line">Personnaliser la ligne d\'itinéraire</string>
     <string name="shared_string_route_line">Ligne d\'itinéraire</string>
     <string name="specify_color_for_map_mode">Définissez une couleur pour le mode de carte %1$s.</string>
