@@ -2248,14 +2248,14 @@ public class GpxUiHelper {
 		return dataSet;
 	}
 
-	public static GpxDisplayItem makeGpxDisplayItem(OsmandApplication app, GPXFile gpxFile) {
+	public static GpxDisplayItem makeGpxDisplayItem(OsmandApplication app, GPXFile gpxFile, boolean fromRoute) {
 		GpxSelectionHelper helper = app.getSelectedGpxHelper();
 		String groupName = helper.getGroupName(gpxFile);
 		GpxDisplayGroup group = helper.buildGpxDisplayGroup(gpxFile, 0, groupName);
 		if (group != null && group.getModifiableList().size() > 0) {
 			GpxDisplayItem gpxItem = group.getModifiableList().get(0);
 			if (gpxItem != null) {
-				gpxItem.route = true;
+				gpxItem.route = fromRoute;
 			}
 			return gpxItem;
 		}
