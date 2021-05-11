@@ -3907,7 +3907,6 @@
 \n • Unterstützung benutzerdefinierter Farben für Favoriten und Track-Wegpunkte
 \n
 \n</string>
-    <string name="app_mode_gap">Lücke</string>
     <string name="plan_route_join_segments">Segmente verbinden</string>
     <string name="plan_route_add_new_segment">Neues Segment hinzufügen</string>
     <string name="profile_type_osmand_string">OsmAnd-Profil</string>
@@ -4070,7 +4069,6 @@
 \n• Dialog \"Streckenaufzeichnung\" aktualisiert
 \n
 \n</string>
-    <string name="route_line_use_map_style_appearance">Nutze Standard des Kartenstil (%2$s): %1$s.</string>
     <string name="no_purchases">Du hast keine Einkäufe</string>
     <string name="new_device_account">Neues Gerät / neues Konto</string>
     <string name="contact_support_description">Wenn du Fragen hast, kontaktiere uns bitte unter %1$s.</string>

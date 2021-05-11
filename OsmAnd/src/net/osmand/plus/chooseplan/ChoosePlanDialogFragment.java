@@ -537,7 +537,7 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 		} else {
 			if (activity != null && purchaseHelper != null) {
 				OsmandSettings settings = app.getSettings();
-				purchaseHelper.purchaseLiveUpdates(activity, sku,
+				purchaseHelper.purchaseSubscription(activity, sku,
 						settings.BILLING_USER_EMAIL.get(),
 						settings.BILLING_USER_NAME.get(),
 						settings.BILLING_USER_COUNTRY_DOWNLOAD_NAME.get(),

@@ -3702,7 +3702,6 @@
 \nNa herberekening is de grafiek zichtbaar.</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="import_track_descr">Kies een trackbestand om te volgen of importeer het vanaf uw apparaat.</string>
-    <string name="app_mode_gap">Onderbreking</string>
     <string name="shared_string_custom">Aangepast</string>
     <string name="perform_oauth_authorization_description">Voer een OAuth-login uit om osm edit functies te gebruiken</string>
     <string name="release_3_5">• Bijgewerkte app- en profielinstellingen: instellingen zijn nu gerangschikt op type. Elk profiel kan afzonderlijk worden aangepast.
@@ -4087,6 +4086,5 @@
     <string name="show_start_dialog">Toon startdialoog</string>
     <string name="customize_route_line">Pas de routelijn aan</string>
     <string name="shared_string_route_line">Routelijn</string>
-    <string name="route_line_use_map_style_appearance">Gebruik de kaartstijl (%2$s) standaard %1$s.</string>
     <string name="specify_color_for_map_mode">Geef een kleur op voor de kaartmodus %1$s.</string>
 </resources>

@@ -48,7 +48,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 	}
 
 	@Override
-	protected InAppCommand getPurchaseLiveUpdatesCommand(WeakReference<Activity> activity, String sku, String userInfo) throws UnsupportedOperationException {
+	protected InAppCommand getPurchaseSubscriptionCommand(WeakReference<Activity> activity, String sku, String userInfo) throws UnsupportedOperationException {
 		return null;
 	}
 

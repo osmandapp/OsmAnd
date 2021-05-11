@@ -12,6 +12,11 @@
 
 -->
 
+    <string name="routing_attr_avoid_low_emission_zone_name">Avoid low emission zones</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">Avoid low emission zones</string>
+    <string name="poi_routes">Routes</string>
+    <string name="route_line_use_map_style_color">Use map style (%1$s) default color.</string>
+    <string name="route_line_use_map_style_width">Use map style (%1$s) default width.</string>
     <string name="shared_string_itinerary">Itinerary</string>
     <string name="use_system_language">Use system language</string>
     <string name="recorded_description">Recorded voice sounds better, but can pronounce only prerecorded phrases: turn instructions. Can\'t announce street names or POI names.</string>
@@ -56,7 +61,6 @@
     <string name="new_device_account">New device / new account</string>
     <string name="no_purchases">You don\'t have any purchases</string>
     <string name="specify_color_for_map_mode">Specify color for map mode %1$s.</string>
-    <string name="route_line_use_map_style_appearance">Use map style (%2$s) default %1$s.</string>
     <string name="shared_string_route_line">Route line</string>
     <string name="customize_route_line">Customize route line</string>
     <string name="trip_recording_show_start_dialog_setting">If disabled, recording will start immediately after tapping the widget or menu item, skipping the confirmation dialog.</string>
@@ -267,7 +271,6 @@
     <string name="icon_group_transport">Transport</string>
     <string name="icon_group_special">Special</string>
     <string name="icon_group_amenity">Amenity</string>
-    <string name="app_mode_gap">Gap</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="shared_string_local_maps">Local maps</string>
     <string name="message_graph_will_be_available_after_recalculation">Please wait.\nGraph will be available after route recalculation.</string>
