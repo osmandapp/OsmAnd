@@ -3852,7 +3852,6 @@
 \nГрафикон ће бити доступан након поновног израчунавања путање.</string>
     <string name="shared_string_local_maps">Локалне мапе</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
-    <string name="app_mode_gap">Размак</string>
     <string name="icon_group_amenity">Аменити</string>
     <string name="icon_group_special">Специал</string>
     <string name="icon_group_transport">Превоз</string>
@@ -4036,7 +4035,6 @@
     <string name="show_start_dialog">Прикажи почетни дијалог</string>
     <string name="trip_recording_show_start_dialog_setting">Ако се искључи, снимање ће почети одмах после кликтања на справицу или на ставку менија, прескакајући дијалог потврде.</string>
     <string name="customize_route_line">Прилагоди линију руте</string>
-    <string name="route_line_use_map_style_appearance">Користи стил карте (%2$s) подразумевано %1$s.</string>
     <string name="shared_string_route_line">Линија руте</string>
     <string name="specify_color_for_map_mode">Одаберите боју за режим карте %1$s.</string>
     <string name="no_purchases">Немате ниједну куповину</string>

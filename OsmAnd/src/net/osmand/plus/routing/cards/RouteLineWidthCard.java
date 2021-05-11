@@ -142,9 +142,8 @@ public class RouteLineWidthCard extends BaseCard implements HeaderInfo {
 
 	private void updateDescription() {
 		if (selectedMode == WidthMode.DEFAULT) {
-			String pattern = app.getString(R.string.route_line_use_map_style_appearance);
-			String width = app.getString(R.string.shared_string_color).toLowerCase();
-			String description = String.format(pattern, width, app.getRendererRegistry().getSelectedRendererName());
+			String pattern = app.getString(R.string.route_line_use_map_style_width);
+			String description = String.format(pattern, app.getRendererRegistry().getSelectedRendererName());
 			tvDescription.setText(description);
 			tvDescription.setVisibility(View.VISIBLE);
 		} else {

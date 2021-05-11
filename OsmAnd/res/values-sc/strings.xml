@@ -4061,12 +4061,10 @@
 \n</string>
     <string name="in_grace_period">In perìodu de gràtzia</string>
     <string name="osmand_live">OsmAnd in direta</string>
-    <string name="app_mode_gap">Divàriu</string>
     <string name="trip_recording_logging_interval_info">S\'intervallu de registratzione impostat sa frecuèntzia cun sa cale OsmAnd at a pedire sos datos de sa positzione atuale.</string>
     <string name="trip_recording_show_start_dialog_setting">Si est disabilitadu sa registratzione at a incumintzare a pustis de su tocu in subra de su widget o de s\'elementu de su menù, brinchende sa ventanedda de diàlogu de cunfirma.</string>
     <string name="customize_route_line">Personaliza sa lìnia de s\'àndala</string>
     <string name="shared_string_route_line">Lìnia de s\'àndala</string>
-    <string name="route_line_use_map_style_appearance">Pro sa lìnia de s\'àndala s\'at a impreare su %1$s dislindadu in s\'istile de sa mapa ischertadu: %2$s.</string>
     <string name="no_purchases">Non tenes còmpora peruna</string>
     <string name="new_device_account">Dispositivu nou / contu nou</string>
     <string name="contact_support_description">Si tenes preguntas cuntata·nos a su %1$s.</string>
