@@ -3942,4 +3942,20 @@
     <string name="poi_planetarium">Планетарій</string>
     <string name="poi_service_vehicle_rental_yes">Прокат автомобілів</string>
     <string name="poi_service_vehicle_inspection_yes">Огляд автомобіля</string>
+    <string name="poi_glacier_status_oscillating">Стан льодовика: коливання</string>
+    <string name="poi_glacier_status_marked_retreat">Стан льодовика: помітний відступ</string>
+    <string name="poi_glacier_status_retreat">Стан льодовика: відступ</string>
+    <string name="poi_glacier_edge_calving_line">Льодовиковий край: лінія спокою</string>
+    <string name="poi_glacier_edge_grounding_line">Край льодовика: лінія основи</string>
+    <string name="poi_glacier_debris_cover_scarce">Льодовикові уламки: майже немає</string>
+    <string name="poi_glacier_debris_cover_partial">Льодовикові уламки: частково</string>
+    <string name="poi_glacier_debris_cover_none">Льодовикові уламки: немає</string>
+    <string name="poi_operator_type_cooperative">Тип оператора: кооперативний</string>
+    <string name="poi_operator_type_consortium">Тип оператора: асоціація</string>
+    <string name="poi_operator_type_community">Тип оператора: суспільний</string>
+    <string name="poi_operator_type_ngo">Тип оператора: ngo</string>
+    <string name="poi_operator_type_religious">Тип оператора: релігійний</string>
+    <string name="poi_operator_type_government">Тип оператора: державний</string>
+    <string name="poi_operator_type_public">Тип оператора: загальнодоступний</string>
+    <string name="poi_operator_type_private">Тип оператора: приватний</string>
 </resources>
