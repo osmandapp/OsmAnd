@@ -3,6 +3,8 @@
     android:id="@+id/elevation_profile_widget_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clickable="true"
+    android:focusable="true"
     android:background="?attr/bottom_menu_view_bg">
 
     <LinearLayout
