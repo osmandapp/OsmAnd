@@ -3942,4 +3942,21 @@
     <string name="poi_planetarium">Planetarium</string>
     <string name="poi_service_vehicle_rental_yes">Autovermietung</string>
     <string name="poi_service_vehicle_inspection_yes">Fahrzeuginspektion</string>
+    <string name="poi_glacier_status_oscillating">Gletscherstatus: oszillierend</string>
+    <string name="poi_glacier_status_marked_retreat">Gletscherstatus: deutlicher Rückzug</string>
+    <string name="poi_glacier_status_retreat">Gletscherstatus: Rückzug</string>
+    <string name="poi_glacier_edge_calving_line">Gletscherabbruchkante</string>
+    <string name="poi_glacier_edge_grounding_line">Gletschergrund</string>
+    <string name="poi_glacier_debris_cover_scarce">Geröllbedeckung: spärlich</string>
+    <string name="poi_glacier_debris_cover_partial">Geröllbedeckung: teilweise</string>
+    <string name="poi_glacier_debris_cover_none">Geröllbedeckung: keine</string>
+    <string name="poi_ultralight_aviation">Ultraleichtflugbetrieb</string>
+    <string name="poi_operator_type_cooperative">Art des Betreibers: Genossenschaftlich</string>
+    <string name="poi_operator_type_consortium">Art des Betreibers: Konsortium</string>
+    <string name="poi_operator_type_community">Art des Betreibers: Gemeindebasiert</string>
+    <string name="poi_operator_type_government">Art des Betreibers: Regierungsorganisation</string>
+    <string name="poi_operator_type_ngo">Art des Betreibers: Nichtregierungsorganisation</string>
+    <string name="poi_operator_type_religious">Art des Betreibers: Religiös</string>
+    <string name="poi_operator_type_private">Art des Betreibers: Privat</string>
+    <string name="poi_operator_type_public">Art des Betreibers: Öffentlich</string>
 </resources>
