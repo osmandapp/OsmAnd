@@ -4073,7 +4073,6 @@ Lon %2$s</string>
     <string name="trip_recording_show_start_dialog_setting">Se se desactiva, a gravación será iniciada após tocar o control ou o elemento de menú, saltándose o diálogo de confirmación.</string>
     <string name="customize_route_line">Personalizar liña de ruta</string>
     <string name="shared_string_route_line">Liña de ruta</string>
-    <string name="route_line_use_map_style_appearance">Emprega o estilo do mapa (%2$s) co %1$s predefinido.</string>
     <string name="specify_color_for_map_mode">Especifica a cor para o modo de mapa %1$s.</string>
     <string name="no_purchases">Non tes compras</string>
     <string name="new_device_account">Novo dispositivo / nova conta</string>

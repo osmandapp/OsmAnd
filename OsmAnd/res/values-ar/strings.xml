@@ -4120,7 +4120,6 @@
     <string name="trip_recording_save_and_continue">حفظ ومتابعة</string>
     <string name="customize_route_line">تخصيص خط المسار</string>
     <string name="shared_string_route_line">خط المسار</string>
-    <string name="route_line_use_map_style_appearance">استخدم نمط الخريطة (%2$s) الافتراضي %1$s.</string>
     <string name="specify_color_for_map_mode">حدد اللون لوضع الخريطة %1$s.</string>
     <string name="release_4_0_beta">• خيار إضافي لتنزيل خطوط الكنتور بالقدم
 \n

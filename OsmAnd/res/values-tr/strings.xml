@@ -4052,7 +4052,6 @@
     <string name="trip_recording_show_start_dialog_setting">Devre dışı bırakılırsa onay diyaloğu atlanarak, widget veya menü ögesine dokunduktan hemen sonra kayıt başlayacaktır.</string>
     <string name="customize_route_line">Güzergah hattını özelleştir</string>
     <string name="shared_string_route_line">Güzergah hattı</string>
-    <string name="route_line_use_map_style_appearance">Harita tarzını kullan(%2$s) öntanımlı %1$s.</string>
     <string name="specify_color_for_map_mode">%1$s harita modu için renk belirtin.</string>
     <string name="no_purchases">Herhangi bir satın alma işleminiz yok</string>
     <string name="new_device_account">Yeni aygıt / yeni hesap</string>

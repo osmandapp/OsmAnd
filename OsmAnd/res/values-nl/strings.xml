@@ -4086,6 +4086,5 @@
     <string name="show_start_dialog">Toon startdialoog</string>
     <string name="customize_route_line">Pas de routelijn aan</string>
     <string name="shared_string_route_line">Routelijn</string>
-    <string name="route_line_use_map_style_appearance">Gebruik de kaartstijl (%2$s) standaard %1$s.</string>
     <string name="specify_color_for_map_mode">Geef een kleur op voor de kaartmodus %1$s.</string>
 </resources>

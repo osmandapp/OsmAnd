@@ -4069,7 +4069,6 @@
     <string name="show_start_dialog">Birta upphafsglugga</string>
     <string name="customize_route_line">Sérsníða leiðarlínu</string>
     <string name="shared_string_route_line">Leiðarlína</string>
-    <string name="route_line_use_map_style_appearance">Nota kortastíl (%2$s) sjálfgefið %1$s.</string>
     <string name="specify_color_for_map_mode">Tilgreindu lit fyrir kortaham: %1$s.</string>
     <string name="no_purchases">Þú ert ekki með nein innkaup</string>
     <string name="new_device_account">Nýtt tæki / nýr aðgangur</string>

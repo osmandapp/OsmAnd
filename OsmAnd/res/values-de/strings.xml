@@ -4069,7 +4069,6 @@
 \n• Dialog \"Streckenaufzeichnung\" aktualisiert
 \n
 \n</string>
-    <string name="route_line_use_map_style_appearance">Nutze Standard des Kartenstil (%2$s): %1$s.</string>
     <string name="no_purchases">Du hast keine Einkäufe</string>
     <string name="new_device_account">Neues Gerät / neues Konto</string>
     <string name="contact_support_description">Wenn du Fragen hast, kontaktiere uns bitte unter %1$s.</string>

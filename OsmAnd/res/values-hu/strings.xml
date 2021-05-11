@@ -4094,5 +4094,4 @@
     <string name="tts_description">A szövegfelolvasó (TTS) minden utasítástípust képes kiejteni: utcaneveket, bekanyarodási utasításokat, érdekes pontok (POI-k) nevét stb.</string>
     <string name="language_description">A kívánt nyelv és a hangutasítás típusának kiválasztása.</string>
     <string name="shared_string_itinerary">Útiterv</string>
-    <string name="route_line_use_map_style_appearance"/>
 </resources>

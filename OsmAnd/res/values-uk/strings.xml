@@ -4050,7 +4050,6 @@
     <string name="trip_recording_show_start_dialog_setting">Якщо вимкнено, запис почнеться відразу після торкання до віджета або пункту меню, пропускаючи діалогове вікно підтвердження.</string>
     <string name="customize_route_line">Налаштувати лінію маршруту</string>
     <string name="shared_string_route_line">Лінія маршруту</string>
-    <string name="route_line_use_map_style_appearance">Використовувати стиль мапи (%2$s) типово %1$s.</string>
     <string name="specify_color_for_map_mode">Укажіть колір для режиму мапи %1$s.</string>
     <string name="release_4_0_beta">• Додана можливість завантаження контурних ліній у футах
 \n

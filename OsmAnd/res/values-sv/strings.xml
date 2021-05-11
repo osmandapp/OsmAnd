@@ -3390,7 +3390,6 @@
     <string name="trip_recording_show_start_dialog_setting">Om den är inaktiverad startar inspelningen direkt efter att du har tryckt på widgeten eller menyalternativet och hoppat över bekräftelsedialogrutan.</string>
     <string name="customize_route_line">Anpassa ruttlinjen</string>
     <string name="shared_string_route_line">Ruttlinje</string>
-    <string name="route_line_use_map_style_appearance">Ruttlinje skulle användas %1$s som anges i vald kartstil: %2$s.</string>
     <string name="expired">Upphörd</string>
     <string name="release_4_0_beta">• OsmAnd Live-uppdateringar flyttade till \"Nedladdningar&gt; Uppdateringar\"
 \n
