@@ -84,7 +84,7 @@
     <string name="shared_string_clear_all">Limpiar todo</string>
     <string name="shared_string_save">Guardar</string>
     <string name="shared_string_rename">Renombrar</string>
-    <string name="shared_string_delete">Borrar.</string>
+    <string name="shared_string_delete">Borrar</string>
     <string name="shared_string_delete_all">Borrar todo</string>
     <string name="shared_string_share">Compartir</string>
     <string name="shared_string_apply">Aplicar</string>
@@ -4097,9 +4097,14 @@
     <string name="shared_string_max_height">Altura máx.</string>
     <string name="shared_string_min_height">Altura mín.</string>
     <string name="language_description">Marca el idioma preferido y el tipo de indicaciones por voz.</string>
-    <string name="tts_description">El sistema de texto a voz (TTS) puede pronunciar todo tipo de avisos: nombres de calles, indicaciones de giro, nombres de PDI, etc.</string>
+    <string name="tts_description">El sistema de texto a voz (TTS) puede pronunciar todo tipo de avisos: nombres de calles y PDI, indicaciones de giro, etc.</string>
     <string name="tts_title">TTS</string>
     <string name="recorded_description">La voz grabada suena mejor, pero sólo puede pronunciar frases pregrabadas: indicaciones de giro. No puede anunciar los nombres de las calles o de los PDI.</string>
     <string name="use_system_language">Usar idioma del sistema</string>
     <string name="shared_string_itinerary">Itinerario</string>
+    <string name="route_line_use_map_style_width">Usa el ancho predefinido del estilo de mapa (%1$s).</string>
+    <string name="route_line_use_map_style_color">Usa el color predefinido del estilo de mapa (%1$s).</string>
+    <string name="poi_routes">Rutas</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">Evita las zonas de baja emisión o zonas urbanas de atmósfera protegida</string>
+    <string name="routing_attr_avoid_low_emission_zone_name">Evitar zonas de baja emisión</string>
 </resources>
