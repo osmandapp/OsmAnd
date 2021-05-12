@@ -501,7 +501,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 						}
 					}
 				}
-				if (file != null && file.exists()) {
+				if (file != null && file.exists() && file.length() > 0) {
 					if (!openTrack) {
 						if (activityRef != null) {
 							final Activity a = activityRef.get();
