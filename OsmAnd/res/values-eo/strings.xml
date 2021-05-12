@@ -4100,4 +4100,9 @@
     <string name="recorded_description">Antaŭregistritaj voĉoj sonas pli bone, sed la aplikaĵo povas nur elparoli gvidiloj pri turnoj. Ĝi ne povas anonci nomojn de stratoj aŭ de interesejoj.</string>
     <string name="use_system_language">Uzi sisteman lingvon</string>
     <string name="shared_string_itinerary">Kurso</string>
+    <string name="route_line_use_map_style_width">Uzi implicitan larĝon por la map‑stilo %1$s.</string>
+    <string name="route_line_use_map_style_color">Uzi implicitan koloron de la map‑stilo %1$s.</string>
+    <string name="poi_routes">Kursoj</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">Eviti zonojn nur por malalte aer‑malpurigantaj veturiloj</string>
+    <string name="routing_attr_avoid_low_emission_zone_name">Sen zonoj de restrikta emisio</string>
 </resources>
