@@ -3936,4 +3936,22 @@
     <string name="poi_telecom_medium_fibre">kaabeldus: valguskaabel</string>
     <string name="poi_telecom_medium_copper">kaabeldus: vask</string>
     <string name="poi_telecom_exchange">telefonikeskjaam</string>
+    <string name="poi_trolley_bay">poekärude parkla</string>
+    <string name="poi_windsock">tuulesokk</string>
+    <string name="poi_refugee_site">põgenikelaager</string>
+    <string name="poi_planetarium">planetaarium</string>
+    <string name="poi_service_vehicle_rental_yes">autorent</string>
+    <string name="poi_service_vehicle_inspection_yes">autode tehnoülevaatus</string>
+    <string name="poi_fruit">viljapuu</string>
+    <string name="poi_shrub">põõsas</string>
+    <string name="poi_ultralight_aviation">ülikerglennukid</string>
+    <string name="poi_dune">düün</string>
+    <string name="poi_operator_type_cooperative">Teenusepakkuja tüüp: ühistu</string>
+    <string name="poi_operator_type_consortium">Teenusepakkuja tüüp: konsortsium</string>
+    <string name="poi_operator_type_community">Teenusepakkuja tüüp: kogukond</string>
+    <string name="poi_operator_type_ngo">Teenusepakkuja tüüp: vabaühendus</string>
+    <string name="poi_operator_type_religious">Teenusepakkuja tüüp: usuühendus</string>
+    <string name="poi_operator_type_government">Teenusepakkuja tüüp: valitsusasutus</string>
+    <string name="poi_operator_type_private">Teenusepakkuja tüüp: erateenus</string>
+    <string name="poi_operator_type_public">Teenusepakkuja tüüp: avalik teenus</string>
 </resources>

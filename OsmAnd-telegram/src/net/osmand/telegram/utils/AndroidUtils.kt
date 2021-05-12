@@ -152,7 +152,7 @@ object AndroidUtils {
 	fun getPopupMenuWidth(ctx: Context, titles: Collection<String>): Int {
 		val txtSize = ctx.resources.getDimensionPixelSize(R.dimen.list_item_title_text_size)
 		val paint = Paint().apply { textSize = txtSize.toFloat() }
-		val maxTextWidth = titles.map { paint.measureText(it) }.max()
+		val maxTextWidth = titles.map { paint.measureText(it) }.maxOrNull()
 		if (maxTextWidth != null) {
 			val maxItemWidth = maxTextWidth.toInt() + AndroidUtils.dpToPx(ctx, 34f)
 			val minWidth = AndroidUtils.dpToPx(ctx, 100f)

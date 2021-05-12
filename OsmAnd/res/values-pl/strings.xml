@@ -3826,7 +3826,6 @@
     <string name="message_graph_will_be_available_after_recalculation">Proszę czekać.
 \nWykres będzie dostępny po ponownym obliczeniu trasy.</string>
     <string name="shared_string_local_maps">Mapy lokalne</string>
-    <string name="app_mode_gap">Przerwa</string>
     <string name="icon_group_amenity">Udogodnienie</string>
     <string name="icon_group_special">Specjalny</string>
     <string name="icon_group_transport">Transport</string>
@@ -4080,7 +4079,6 @@
     <string name="on_pause">Pauza</string>
     <string name="map_widget_distance_by_tap">Odległość po dotknięciu</string>
     <string name="track_recording_will_be_continued">Nagrywanie będzie kontynuowane.</string>
-    <string name="route_line_use_map_style_appearance">Użyj stylu mapy (%2$s) domyślnie %1$s.</string>
     <string name="in_grace_period">W okresie karencji</string>
     <string name="on_hold">Wstrzymane</string>
     <string name="exit_number">Numer wyjścia</string>

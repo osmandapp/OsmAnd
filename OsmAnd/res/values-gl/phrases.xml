@@ -3928,4 +3928,12 @@
     <string name="poi_hoops">Canastras</string>
     <string name="poi_camp_pitch">Parcela de acampamento</string>
     <string name="poi_bay_filter">Tipo de baía</string>
+    <string name="poi_pillory">Pelouro</string>
+    <string name="poi_shop_water">Tenda de auga potábel</string>
+    <string name="poi_pest_control">Tenda de control de pragas</string>
+    <string name="poi_telecom_medium_coaxial">Medio: coaxial</string>
+    <string name="poi_telecom_medium_fibre">Medio: fibra</string>
+    <string name="poi_telecom_medium_copper">Medio: cobre</string>
+    <string name="poi_telecom_exchange">Central telefónica</string>
+    <string name="poi_health_post">Posto de saúde</string>
 </resources>

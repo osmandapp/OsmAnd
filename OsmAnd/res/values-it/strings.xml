@@ -3815,7 +3815,6 @@
     <string name="message_graph_will_be_available_after_recalculation">Attendi.
 \nIl grafico sarà disponibile dopo il ricalcolo del percorso.</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
-    <string name="app_mode_gap">Buco</string>
     <string name="navigate_point_mgrs">MGRS</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="mgrs_format_descr">OsmAnd utilizza MGRS, che è simile al formato UTM NATO.</string>
@@ -4060,7 +4059,6 @@
     <string name="routing_attr_allow_intermittent_name">Permetti le vie d\'acqua intermittenti</string>
     <string name="customize_route_line">Personalizza la linea del percorso</string>
     <string name="shared_string_route_line">Linea del percorso</string>
-    <string name="route_line_use_map_style_appearance">Per la linea del percorso sarà utilizzato %1$s specificato nello stile della mappa selezionato: %2$s.</string>
     <string name="no_purchases">Non hai alcun acquisto</string>
     <string name="empty_purchases_description">Se l\'acquisto non viene visualizzato qui, tappa su “%1$s”, o contatta il supporto.</string>
     <string name="contact_support">Contatta il supporto</string>

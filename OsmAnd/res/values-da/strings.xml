@@ -3679,7 +3679,6 @@
     <string name="all_previous_segments_will_be_recalc">Alle tidligere segmenter genberegnes ved hjælp af den valgte profil.</string>
     <string name="start_finish_icons">Start- og slutikoner</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
-    <string name="app_mode_gap">Hul</string>
     <string name="export_not_enough_space">Der er ikke plads nok</string>
     <string name="routing_attr_length_name">Længdegrænse</string>
     <string name="contour_lines_thanks">Tak for køb af \'Konturlinjer\'</string>
@@ -3849,4 +3848,6 @@
     <string name="tts_title">TTS</string>
     <string name="recorded_description">Indspillet stemme lyder bedre, men kan kun udtale forudindspillede sætninger: drejeinstruktioner. Kan ikke udtale vejnavne eller POI-navne.</string>
     <string name="use_system_language">Brug systemsprog</string>
+    <string name="srtm_download_list_help_message">OsmAnd leverer data om højdekurver i meter og fod. Du skal downloade filen igen for at ændre formatet.</string>
+    <string name="srtm_download_single_help_message">Vælg venligst varianten. Du skal downloade filen igen for at ændre formatet.</string>
 </resources>

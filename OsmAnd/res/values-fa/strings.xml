@@ -4073,7 +4073,6 @@
     <string name="show_start_dialog">نمایش کادر آغاز</string>
     <string name="trip_recording_show_start_dialog_setting">اگر غیرفعال باشد، بلافاصله پس از لمس ابزارک یا آیتم منو، ضبط آغاز می‌شود و کادر تأیید ظاهر نمی‌شود.</string>
     <string name="lost_data_warning">تمام دادهٔ ذخیره‌نشده از دست خواهد رفت.</string>
-    <string name="route_line_use_map_style_appearance">برای خط مسیر از %1$s استفاده می‌شود که در سبک انتخاب‌شده برای نقشه (%2$s) مشخص شده است.</string>
     <string name="specify_color_for_map_mode">برای حالت نقشهٔ %1$s رنگ مشخص کنید.</string>
     <string name="trip_recording_logging_interval_info">تناوب ردنگاری مشخص می‌کند OsmAnd هر چند وقت یک بار دادهٔ مربوط به موقعیت جاری را درخواست کند.</string>
     <string name="customize_route_line">سفارشی‌سازی خط مسیر</string>
@@ -4111,7 +4110,6 @@
     <string name="update_all_maps_added">همهٔ نقشه‌های اضافه‌شده به %1$s روزآمد شود؟</string>
     <string name="exit_number">شمارهٔ خروج</string>
     <string name="output">خروجی</string>
-    <string name="app_mode_gap">فاصله</string>
     <string name="icon_group_amenity">تسهیلات</string>
     <string name="shared_string_feet">پا</string>
     <string name="srtm_unit_format">گونهٔ یکای منحنی‌های میزان</string>

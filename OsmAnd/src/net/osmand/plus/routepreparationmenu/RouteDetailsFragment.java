@@ -1440,7 +1440,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 	private void makeGpx() {
 		OsmandApplication app = requireMyApplication();
 		gpx = GpxUiHelper.makeGpxFromRoute(app.getRoutingHelper().getRoute(), app);
-		gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpx);
+		gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpx, true);
 	}
 
 	void openDetails() {

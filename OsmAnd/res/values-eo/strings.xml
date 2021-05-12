@@ -3824,7 +3824,6 @@
     <string name="message_graph_will_be_available_after_recalculation">Bonvolu atendi.
 \nDiagramo estos videbla post rekalkuli kurson.</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
-    <string name="app_mode_gap">Manko</string>
     <string name="shared_string_local_maps">Lokaj mapoj</string>
     <string name="icon_group_amenity">Oportunaĵo</string>
     <string name="icon_group_special">Specialaj</string>
@@ -4053,7 +4052,6 @@
     <string name="specify_color_for_map_mode">Elektu koloron por map‑reĝimo %1$s.</string>
     <string name="customize_route_line">Alĝustigi linion de kurso</string>
     <string name="shared_string_route_line">Linio de kurso</string>
-    <string name="route_line_use_map_style_appearance">Por la linio de kurso estos uzata %1$s difinita por la map‑stilo: %2$s.</string>
     <string name="release_4_0_beta">• eblo elŝuti nivelkurbojn en futoj
 \n
 \n• horizontala vido por “plani kurson”: aldonitaj langetoj por baskuli inter punktoj kaj diagramoj

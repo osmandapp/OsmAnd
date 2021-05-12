@@ -20,7 +20,7 @@ import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseInitCallback;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
-import net.osmand.plus.liveupdates.OsmLiveRestartBottomSheetDialogFragment;
+import net.osmand.plus.liveupdates.SubscriptionRestartBottomSheetDialogFragment;
 
 import org.apache.commons.logging.Log;
 
@@ -193,13 +193,13 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 	@Override
 	public void onItemPurchased(String sku, boolean active) {
 		FragmentManager fragmentManager = getSupportFragmentManager();
-		if (purchaseHelper != null && purchaseHelper.getLiveUpdates().containsSku(sku)) {
+		if (purchaseHelper != null && purchaseHelper.getSubscriptions().containsSku(sku)) {
 			getMyApplication().logEvent("live_osm_subscription_purchased");
 
 			if (!active && !fragmentManager.isStateSaved()) {
-				OsmLiveRestartBottomSheetDialogFragment fragment = new OsmLiveRestartBottomSheetDialogFragment();
+				SubscriptionRestartBottomSheetDialogFragment fragment = new SubscriptionRestartBottomSheetDialogFragment();
 				fragment.setUsedOnMap(this instanceof MapActivity);
-				fragment.show(fragmentManager, OsmLiveRestartBottomSheetDialogFragment.TAG);
+				fragment.show(fragmentManager, SubscriptionRestartBottomSheetDialogFragment.TAG);
 			}
 		}
 		onInAppPurchaseItemPurchased(sku);

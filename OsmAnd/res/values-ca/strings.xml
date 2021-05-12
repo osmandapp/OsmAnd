@@ -3748,7 +3748,6 @@
     <string name="icon_group_sport">Esport</string>
     <string name="icon_group_emergency">Emergència</string>
     <string name="use_native_pt">Desenvolupament local de Transport Public</string>
-    <string name="app_mode_gap">Discontinu</string>
     <string name="lenght_limit_description">Proporcioneu la llargada del vostre vehicle, pot haver-hi rutes restringides als vehicles llargs.</string>
     <string name="gpx_parse_error">No s\'ha generat correctament l\'arxiu GPX. Indiqueu-ho a l\'equip de suport per continuar investigant.</string>
     <string name="save_track_to_gpx">Enregistra automàticament la traça durant la navegació</string>

@@ -58,7 +58,7 @@
     <string name="shared_string_refresh">Atualizar</string>
     <string name="general_settings_descr">Configure a visualização e configurações comuns para a aplicação.</string>
     <string name="general_settings">Configurações gerais</string>
-    <string name="index_settings_descr">Descarregar e gerir ficheiros de mapas offline armazenados no seu dispositivo.</string>
+    <string name="index_settings_descr">Descarregar e gerir ficheiros de mapas offline armazenados no seu aparelho.</string>
     <string name="index_settings">Gerir ficheiros de mapas</string>
     <string name="osmand_service">Modo em segundo plano</string>
     <string name="osmand_service_descr">Executar o serviço em segundo plano para usar OsmAnd enquanto o ecrã está desligado.</string>
@@ -83,7 +83,7 @@
     <string name="phone">Telefone</string>
     <string name="download_type_to_filter">Filtro</string>
     <string name="use_high_res_maps">Mapa de alta resolução</string>
-    <string name="use_high_res_maps_descr">Utilizar mapas de alta resolução para dispositivos com ecrã de alta densidade.</string>
+    <string name="use_high_res_maps_descr">Utilizar mapas de alta resolução para aparelhos com ecrã de alta densidade.</string>
     <string name="unknown_location">Posição atual desconhecida.</string>
     <string name="context_menu_item_search_transport">Pesquisar transportes públicos</string>
     <string name="transport_searching_transport">Resultados de transporte (sem destino):</string>
@@ -123,7 +123,7 @@
     <string name="layer_map">Origem do mapa…</string>
     <string name="menu_layers">Camada de mapa</string>
     <string name="context_menu_item_search_poi">Busca por POI</string>
-    <string name="use_trackball_descr">Utilizar um dispositivo trackball para mover o mapa.</string>
+    <string name="use_trackball_descr">Utilizar um aparelho trackball para mover o mapa.</string>
     <string name="use_trackball">Usar trackball</string>
     <string name="background_service_wait_int_descr">Definir o tempo limite para determinar a localização.</string>
     <string name="background_service_wait_int">Tempo de espera máximo</string>
@@ -172,7 +172,7 @@
     <string name="search_poi_location">Aguardando o sinal…</string>
     <string name="search_near_map">Procurar perto do centro atual do mapa</string>
     <string name="search_nearby">Procurar nas proximidades</string>
-    <string name="map_orientation_default">Mesma do dispositivo</string>
+    <string name="map_orientation_default">Mesma do aparelho</string>
     <string name="map_orientation_portrait">Retrato</string>
     <string name="map_orientation_landscape">Paisagem</string>
     <string name="map_screen_orientation">Orientação do mapa</string>
@@ -407,14 +407,14 @@
 \nQuaisquer desses mapas podem ser usados como mapa principal (base) para ser mostrado no OsmAnd ou na camada superior ou inferior para outro mapa base (como o mapa offline normal de OsmAnd). Para tornar qualquer camada inferior do mapa mais visível, certos elementos do mapa vetorial do OsmAnd podem facilmente ser ocultados através do menu \'Configurar mapa\'.
 \n
 \nOs mosaicos dos mapas podem ser obtidos diretamente através de origens online ou podem ser preparados para uso offline (e copiados manualmente para o diretório de dados do OsmAnd) como uma base de dados sqlite, que pode ser produzido por uma variedade de ferramentas de terceiros para preparação de mapas.</string>
-    <string name="osmand_background_plugin_description">Mostra as configurações para ativar o rastreamento em segundo plano e a navegação, despertando periodicamente o dispositivo GPS (com o ecrã desligado).</string>
-    <string name="osmand_accessibility_description">Mostra os recursos de acessibilidade do dispositivo disponíveis diretamente no OsmAnd. Facilita, por exemplo, o ajuste da velocidade da fala para vozes TTS, configurando a navegação no ecrã do teclado direcional, usando um trackball para controlo da ampliação, ou feedback texto-para-fala, por exemplo, para anunciar automaticamente a sua posição.</string>
+    <string name="osmand_background_plugin_description">Mostra as configurações para ativar o rastreamento em segundo plano e a navegação, despertando periodicamente o aparelho GPS (com o ecrã desligado).</string>
+    <string name="osmand_accessibility_description">Mostra os recursos de acessibilidade do aparelho disponíveis diretamente no OsmAnd. Facilita, por exemplo, o ajuste da velocidade da fala para vozes TTS, configurando a navegação no ecrã do teclado direcional, usando um trackball para controlo da ampliação, ou feedback texto-para-fala, por exemplo, para anunciar automaticamente a sua posição.</string>
     <string name="osmand_development_plugin_description">Mostra configurações para recursos de desenvolvimento e depuração como testar ou simular roteamento, o desempenho de renderização do ecrã ou solicitação de voz. Essas configurações são destinadas a programadores e não são necessárias para o utilizador em geral.</string>
     <string name="plugins_screen">Extensões</string>
     <string name="prefs_plugins_descr">As extensões ativam configurações avançadas e funcionalidades adicionais.</string>
     <string name="prefs_plugins">Extensões</string>
     <string name="osm_editing_plugin_description">Permite enviar alterações para o OpenStreetMap, tais como criar ou alterar POIs, abrir ou comentar erros reportados do OpenStreetMap e contribuir com ficheiros GPX gravados. O OpenStreetMap é um projeto de mapeamento mundial dirigido pela comunidade e de domínio público. Para mais detalhes, consulte https://openstreetmap.org. A participação ativa é apreciada e as contribuições podem ser feitas diretamente do OsmAnd, se introduzir os seus dados de acesso à sua conta de utilizador do OpenStreetMap na aplicação.</string>
-    <string name="vector_maps_may_display_faster_on_some_devices">Os mapas vetoriais são mostrados mais rapidamente. Podem não funcionar bem em alguns dispositivos.</string>
+    <string name="vector_maps_may_display_faster_on_some_devices">Os mapas vetoriais são mostrados mais rapidamente. Podem não funcionar bem em alguns aparelhos.</string>
     <string name="play_commands_of_currently_selected_voice">Selecione uma voz e teste reproduzindo anúncios</string>
     <string name="debugging_and_development">Desenvolvimento OsmAnd</string>
     <string name="native_rendering">Renderização nativa</string>
@@ -484,14 +484,14 @@
     <string name="use_fluorescent_overlays_descr">Usar cores fluorescentes para mostrar trajetos e rotas.</string>
     <string name="offline_edition">Edição offline</string>
     <string name="offline_edition_descr">Se a edição offline estiver ativada, as alterações serão primeiro guardadas localmente e enviadas por pedido, caso contrário, as alterações serão enviadas imediatamente.</string>
-    <string name="update_poi_does_not_change_indexes">As alterações de POI dentro da aplicação não afetam os ficheiros de mapas descarregados; essas alterações são guardadas num ficheiro separado no seu dispositivo.</string>
+    <string name="update_poi_does_not_change_indexes">As alterações de POI dentro da aplicação não afetam os ficheiros de mapas descarregados; essas alterações são guardadas num ficheiro separado no seu aparelho.</string>
     <string name="local_openstreetmap_uploading">A enviar…</string>
     <string name="local_openstreetmap_were_uploaded">{0} POI/notas enviados</string>
     <string name="local_openstreetmap_uploadall">Enviar todos</string>
     <string name="local_openstreetmap_upload">Enviar edição para o OpenStreetMap</string>
     <string name="local_openstreetmap_delete">Eliminar alteração</string>
     <string name="local_openstreetmap_descr_title">Edição assíncrona de OSM:</string>
-    <string name="local_openstreetmap_settings">POIs / notas guardados no dispositivo</string>
+    <string name="local_openstreetmap_settings">POIs / notas guardados no aparelho</string>
     <string name="local_openstreetmap_settings_descr">Mostrar e gerir POIs/notas do OSM guardados localmente.</string>
     <string name="live_monitoring_interval_descr">Especifique o intervalo de rastreamento online.</string>
     <string name="live_monitoring_interval">Intervalo de rastreamento online</string>
@@ -526,7 +526,7 @@
     <string name="download_files_question_space">Descarregar {0} ficheiro(s)\?
 \n {1} MB (de {2} MB) será utilizado.</string>
     <string name="use_transparent_map_theme">Tema transparente</string>
-    <string name="native_library_not_supported">A biblioteca nativa não é compatível com este dispositivo.</string>
+    <string name="native_library_not_supported">A biblioteca nativa não é compatível com este aparelho.</string>
     <string name="init_native_library">Inicializando biblioteca nativa…</string>
     <string name="choose_auto_follow_route">Auto-centrar visualização do mapa</string>
     <string name="choose_auto_follow_route_descr">Tempo até o mapa ser centrado na posição atual.</string>
@@ -550,7 +550,7 @@
     <string name="poi_query_by_name_matches_categories">Foram encontradas várias categorias de POI relacionadas.</string>
     <string name="data_to_search_poi_not_available">Descarregar dados offline para procurar POIs.</string>
     <string name="old_poi_file_should_be_deleted">O ficheiro POI \'%1$s\' é redundante e pode ser eliminado.</string>
-    <string name="update_poi_file_not_found">Não foi encontrado (e não pôde ser criado) o ficheiro local para guardar as mudanças de POI.</string>
+    <string name="update_poi_file_not_found">Não foi encontrado e não pôde ser criado o ficheiro local para guardar as alterações do POI.</string>
     <string name="button_upgrade_osmandplus">Atualizar para o OsmAnd+</string>
     <string name="map_version_changed_info">Descarregue a nova versão da aplicação para poder usar os novos ficheiros de mapas.</string>
     <string name="shared_string_rename">Mudar o nome</string>
@@ -620,7 +620,7 @@
 \n\t Para o usar, ative-o em \'Menu\' -&gt; \'Configurar mapa\' -&gt; \'Origem do mapa…\' -&gt; \'Mapas vetoriais offline\'.</string>
     <string name="choose_audio_stream">Saída para orientação por voz</string>
     <string name="choose_audio_stream_descr">Selecione o altifalante para orientação por voz.</string>
-    <string name="voice_stream_voice_call">Áudio de chamada telefónica (para interromper os dispositivos de som Bluetooth do carro)</string>
+    <string name="voice_stream_voice_call">Áudio de chamada telefónica (para interromper os aparelhos de som Bluetooth do carro)</string>
     <string name="voice_stream_notification">Áudio de notificação</string>
     <string name="voice_stream_music">Áudio de mídia/navegação</string>
     <string name="warning_tile_layer_not_downloadable">A aplicação não conseguiu descarregar a camada do mapa %1$s, se a tornar a instalar pode resolver o problema.</string>
@@ -717,7 +717,7 @@
     <string name="osmand_parking_plugin_description">Permite gravar onde o seu carro foi estacionado e quanto tempo de estacionamento resta (se existir um limite de tempo).
 \nA localização e o tempo restante ficam visíveis no painel de controlo do OsmAnd e num widget no ecrã do mapa. Pode ser adicionado opcionalmente um alarme ao calendário do Android como lembrete.</string>
     <string name="osmand_parking_plugin_name">Local de estacionamento</string>
-    <string name="context_menu_item_add_parking_point">Marcar estacionamento</string>
+    <string name="context_menu_item_add_parking_point">Estacionar aqui</string>
     <string name="context_menu_item_delete_parking_point">Eliminar um marcador de estacionamento</string>
     <string name="starting_point_too_far">Ponto de partida demasiado distante da estrada mais próxima.</string>
     <string name="shared_location">Local partilhado</string>
@@ -766,7 +766,7 @@
     <string name="avoid_motorway">Evitar autoestradas</string>
     <string name="snap_to_road">Ajustar à estrada</string>
     <string name="osmand_short_description_80_chars">Visualização e navegação móvel de mapas globais do OSM offline e online</string>
-    <string name="osmand_plus_short_description_80_chars">OsmAnd é uma aplicação de navegação de código aberto para mapas offline e online</string>
+    <string name="osmand_plus_short_description_80_chars">Visualização e navegação com o mapa mundial OpenStreetMap, tanto offline como online</string>
     <string name="filterpoi_activity">Criar filtro de POI</string>
     <string name="select_navigation_mode">Meio de transporte:</string>
     <string name="day_night_info_description">Nascer do sol: %1$s
@@ -785,15 +785,15 @@
     <string name="map_widget_transparent">Widgets transparentes</string>
     <string name="int_continuosly">Contínuo</string>
     <string name="email">e-mail</string>
-    <string name="osmand_long_description_1000_chars">OsmAnd (direções automatizadas de navegação OSM)
+    <string name="osmand_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions / direções de navegação automatizadas do OSM)
 \n
-\nO OsmAnd é uma aplicação de navegação com código-fonte aberto, com acesso a uma ampla variedade de dados globais do OpenStreetMap (OSM). Todos os dados dos mapas (vetoriais ou imagens raster) podem ser armazenados no cartão de memória do telemóvel para usar quando não tiver Internet. O OsmAnd também permite roteamento, tanto ligado como desligado da Internet, incluindo a funcionalidade de roteamento curva a curva com orientação por voz.
+\nO OsmAnd é uma aplicação de navegação com código-fonte aberto, com acesso a uma ampla variedade de dados globais do OpenStreetMap (OSM). Todos os dados dos mapas (vetoriais ou imagens raster) podem ser armazenados no cartão de memória do telemóvel para usar quando não tiver Internet. O OsmAnd também permite usar rotas, tanto ligado como desligado da Internet, incluindo a funcionalidade de rotas curva a curva com orientação por voz.
 \n
 \nAlgumas das características principais:
 \n- Funcionamento totalmente desligado da Internet (guarda os mapas obtidos, sejam eles vetoriais ou imagens, numa pasta selecionável).
 \n- Disponíveis mapas vetoriais compactados do mundo inteiro.
 \n- Descarregar mapas de países ou regiões diretamente na aplicação.
-\n- Sobreposição de mapas diversos, como GPX ou trajetos de navegação, pontos de interesse (POI), favoritos, curvas de nível, paragens de transportes públicos, mapas adicionais com transparência personalizável.
+\n- Sobreposição de mapas diversos, como trilhos GPX ou trajetos de navegação, pontos de interesse (POI), favoritos, curvas de nível, paragens de transportes públicos, mapas adicionais com transparência personalizável, etc.
 \n- Pesquisa desligado da Internet para endereços e locais (POIs).
 \n- Cálculo de rotas desligado da Internet para distâncias médias.
 \n- Modo de carro, bicicleta, pedestre, entre outros.
@@ -806,7 +806,7 @@
 \n- Quantidade de descarregamentos de mapas limitado.
 \n- Sem acesso aos POIs da Wikipédia no modo desligado da Internet.
 \n
-\nO OsmAnd está em desenvolvimento ativo, mas o nosso projeto e o seu progresso ainda depende de contribuições financeiras para o desenvolvimento e testes de novas funcionalidades. Por favor, considere comprar o OsmAnd+, ajudar a financiar novas funcionalidades específicas ou fazer um donativo em osmand.net</string>
+\nO OsmAnd está em desenvolvimento ativo, mas o nosso projeto e o seu progresso ainda depende de contribuições financeiras para o desenvolvimento e testes de novas funcionalidades. Por favor, considere comprar o OsmAnd+, para ajudar a financiar novas funcionalidades específicas. Também pode fazer um donativo em osmand.net</string>
     <string name="rendering_attr_roadColors_description">Selecione um esquema de cores de estrada:</string>
     <string name="rendering_attr_roadColors_name">Esquema de cores</string>
     <string name="map_widget_show_destination_arrow">Ver direção para o destino</string>
@@ -980,7 +980,7 @@
     <string name="keep_intermediate_points">Manter destinos intermédios</string>
     <string name="new_directions_point_dialog">Já tem destinos intermédios definidos.</string>
     <string name="context_menu_item_directions_to">Direções para</string>
-    <string name="context_menu_item_directions_from">Direções desde</string>
+    <string name="context_menu_item_directions_from">Direções daqui</string>
     <string name="route_descr_map_location">Mapa: </string>
     <string name="route_descr_lat_lon">Lat. %1$.3f, Lon. %2$.3f</string>
     <string name="route_to">Para:</string>
@@ -1044,18 +1044,18 @@
     <string name="map_widget_fps_info">Informação FPS</string>
     <string name="map_magnifier">Lupa do mapa</string>
     <string name="base_world_map">Mapa mundial</string>
-    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (direções automatizadas de navegação OSM)
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions / direções de navegação automatizadas do OSM)
 \n
-\nO OsmAnd+ é uma aplicação de navegação com código-fonte aberto, com acesso a uma ampla variedade de dados globais do OpenStreetMap (OSM). Todos os dados dos mapas (vetoriais ou imagens raster) podem ser armazenados no cartão de memória do telemóvel para usar quando não tiver Internet. O OsmAnd+ também permite roteamento, tanto ligado como desligado da Internet, incluindo a funcionalidade de roteamento curva a curva com orientação por voz.
+\nO OsmAnd+ é uma aplicação de navegação com código-fonte aberto, com acesso a uma ampla variedade de dados globais do OpenStreetMap (OSM). Todos os dados dos mapas (vetoriais ou imagens raster) podem ser armazenados no cartão de memória do telemóvel para usar quando não tiver Internet. O OsmAnd+ também permite usar rotas, tanto ligado como desligado da Internet, incluindo a funcionalidade de rotas curva a curva com orientação por voz.
 \n
-\nOsmAnd+ é a versão paga da aplicação, ao comprá-lo está a apoiar o projeto, a financiar o desenvolvimento de novas funcionalidades e a receber as últimas atualizações.
+\nOsmAnd+ é a versão paga da aplicação, ao comprá-la está a apoiar o projeto, a financiar o desenvolvimento de novas funcionalidades e a receber as últimas atualizações nos mapas.
 \n
 \nAlgumas das características principais:
 \n- Funcionamento totalmente desligado da Internet (guarda os mapas obtidos, sejam eles vetoriais ou imagens, numa pasta selecionável).
 \n- Disponíveis mapas vetoriais compactados do mundo inteiro.
 \n- Descarregar mapas de países ou regiões diretamente na aplicação.
-\n- Recurso Wikipédia desligado da Internet (descarregamento de POIs da Wikipédia), ótimo para passeios turísticos.
-\n- Sobreposição de mapas diversos, como GPX ou trajetos de navegação, pontos de interesse (POI), favoritos, curvas de nível, paragens de transportes públicos, mapas adicionais com transparência personalizável.
+\n- Recurso Wikipédia desligado da Internet (descarregamento de POIs da Wikipédia), bom para passeios turísticos.
+\n- Sobreposição de mapas diversos, como trilhos GPX ou trajetos de navegação, pontos de interesse (POI), favoritos, curvas de nível, paragens de transportes públicos, mapas adicionais com transparência personalizável, etc.
 \n
 \n- Pesquisa desligado da Internet para endereços e locais (POIs).
 \n- Cálculo de rotas desligado da Internet para distâncias médias.
@@ -1356,7 +1356,7 @@
     <string name="welcome_text">OsmAnd fornece mapas de navegação globais e navegação offline.</string>
     <string name="welcome_header">Bem-vindo(a)</string>
     <string name="current_route">Rota atual</string>
-    <string name="osm_changes_added_to_local_edits">Mudanças no OSM adicionadas ao conjunto de alterações local</string>
+    <string name="osm_changes_added_to_local_edits">Alterações no OpenStreetMap adicionadas ao conjunto de alterações local</string>
     <string name="mark_to_delete">Marcar para eliminar</string>
     <string name="local_osm_changes_upload_all_confirm">Vai enviar %1$d alterações para o OpenStreetMap. Tem a certeza\?</string>
     <string name="confirmation_to_clear_history">Limpar histórico\?</string>
@@ -1414,7 +1414,7 @@
     <string name="roads_only">Apenas estradas</string>
     <string name="rendering_attr_pisteRoutes_name">Pistas de esqui</string>
     <string name="free">%1$s livre</string>
-    <string name="device_memory">Memória do dispositivo</string>
+    <string name="device_memory">Memória do aparelho</string>
     <string name="world_ski_missing">Para mostrar mapas de esqui, tem de descarregar o mapa offline especial.</string>
     <string name="nautical_maps_missing">Para mostrar mapas náuticos, tem de descarregar o mapa offline especial.</string>
     <string name="edit_group">Editar grupo</string>
@@ -1422,7 +1422,7 @@
     <string name="version_settings">Compilações</string>
     <string name="navigation_over_track">Iniciar a navegação ao longo do trilho\?</string>
     <string name="rendering_attr_transportStops_name">Paragens de transporte</string>
-    <string name="use_opengl_render_descr">Usar a renderização OpenGL acelerada por hardware (pode usar mais bateria ou não funcionar em dispositivos muito antigos).</string>
+    <string name="use_opengl_render_descr">Usar a renderização OpenGL acelerada por hardware (pode usar mais bateria ou não funcionar em aparelhos muito antigos).</string>
     <string name="wake_on_voice">Ligar o ecrã</string>
     <string name="configure_map">Configurar mapa</string>
     <string name="shared_string_waypoints">Pontos de rota</string>
@@ -1616,15 +1616,15 @@
 \nEssa vista pode ser revertida, basta desativá-la, ou alterar o estilo de mapa em \'Configurar mapa\'.</string>
     <string name="rendering_attr_roadStyle_description">Estilo de estrada</string>
     <string name="error_avoid_specific_road">Nenhum desvio encontrado</string>
-    <string name="wake_on_voice_descr">Ligar o ecrã do dispositivo (se estiver desligado) ao fazer a aproximação à próxima viragem.</string>
+    <string name="wake_on_voice_descr">Ligar o ecrã do aparelho (se estiver desligado) ao fazer a aproximação à próxima viragem.</string>
     <string name="map_widget_top">Barra de estado</string>
     <string name="map_widget_right">Painel direito</string>
     <string name="map_widget_left">Painel esquerdo</string>
     <string name="search_radius_proximity">A menos de</string>
     <string name="anonymous_user_hint">Utilizadores anónimos não podem:
 \n- Criar grupos;
-\n- Sincronizar grupos e dispositivos com o servidor;
-\n- Gerir grupos e dispositivos num painel de controlo pessoal no site web.</string>
+\n- Sincronizar grupos e aparelhos com o servidor;
+\n- Gerir grupos e aparelhos num painel de controlo pessoal no site web.</string>
     <string name="anonymous_user">Utilizador anónimo</string>
     <string name="logged_as">Sessão iniciada como %1$s</string>
     <string name="shared_string_not_selected">Não selecionado</string>
@@ -1687,8 +1687,8 @@
     <string name="number_of_edits">Número de edições</string>
     <string name="save_poi_without_poi_type_message">Quer mesmo guardar o POI sem especificar o tipo\?</string>
     <string name="versions_item">Versões</string>
-    <string name="feedback">Comentários</string>
-    <string name="contact_us">Contacto</string>
+    <string name="feedback">Comentar</string>
+    <string name="contact_us">Email</string>
     <string name="map_legend">Legenda do mapa</string>
     <string name="techical_articles_item">Artigos técnicos</string>
     <string name="faq_item_description">Perguntas mais frequentes</string>
@@ -1764,7 +1764,7 @@
     <string name="shared_string_remove">Remover</string>
     <string name="shared_string_read_more">Ler mais</string>
     <string name="clear_updates_proposition_message">Remover atualizações descarregadas e voltar à edição do mapa original</string>
-    <string name="add_time_span">Adicionar intervalo de tempo adicional</string>
+    <string name="add_time_span">Adicionar outro intervalo de tempo</string>
     <string name="road_blocked">Estrada bloqueada</string>
     <string name="shared_string_select">Selecionar</string>
     <string name="switch_start_finish">Inverter ponto de partida e destino</string>
@@ -2111,7 +2111,7 @@
     <string name="poi_cannot_be_found">Não foi possível encontrar o nó ou o caminho.</string>
     <string name="search_no_results_feedback">Nenhum resultado de pesquisa\? 
 \nDê-nos a sua opinião</string>
-    <string name="increase_search_radius_to">Estender o raio de pesquisa para %1$s</string>
+    <string name="increase_search_radius_to">Alargar a pesquisa para %1$s</string>
     <string name="send_search_query_description">Enviaremos a sua consulta de pesquisa: \"%1$s\" com a sua localização. 
 \n
 \n Nenhuma informação pessoal é recolhida. Os dados de pesquisa só servem para melhorar o algoritmo de pesquisa.</string>
@@ -2558,10 +2558,11 @@
 \n • Antártida: *
 \n A maioria dos países ao redor do globo está disponível para descarregar!
 \n Obtenha um navegador confiável no seu país - seja em França, Alemanha, México, Reino Unido, Espanha, Holanda, EUA, Rússia, Brasil ou qualquer outro.</string>
-    <string name="osmand_plus_extended_description_part1">OsmAnd+ (direções de navegação automatizada do OSM) é uma aplicação de mapas e navegação com acesso a dados livres do OSM, de todo o mundo e de alta qualidade.
-\nDesfrute da navegação visual ou por voz, ver POIs (pontos de interesse), criando e gerindo trilhos GPX, usando informação de altitude e curvas de nível, escolher entre modos dirigir, andar de bicicleta e pedestre, editar o OpenStreetMap e muito mais.
+    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions / direções de navegação automatizadas do OSM)
 \n
-\nOsmAnd+ é a versão paga da aplicação. Ao comprá-lo, está a apoiar o projeto, a financiar o desenvolvimento de novas funcionalidades e a receber as últimas atualizações.
+\nO OsmAnd+ é uma aplicação de navegação com código-fonte aberto, com acesso a uma ampla variedade de dados globais do OpenStreetMap (OSM). Todos os dados dos mapas (vetoriais ou imagens raster) podem ser armazenados no cartão de memória do telemóvel para usar quando não tiver Internet. O OsmAnd+ também permite usar rotas, tanto ligado como desligado da Internet, incluindo a funcionalidade de rotas curva a curva com orientação por voz.
+\n
+\nOsmAnd+ é a versão paga da aplicação, ao comprá-la está a apoiar o projeto, a financiar o desenvolvimento de novas funcionalidades e a receber as últimas atualizações nos mapas.
 \n
 \nAlgumas das características principais:</string>
     <string name="osmand_plus_extended_description_part2">Navegação
@@ -2602,11 +2603,11 @@
 \n• Visualização opcional de velocidade e altitudes
 \n• Visualização de curvas de nível e sombreamento de relevo (com uma extensão adicional)</string>
     <string name="osmand_plus_extended_description_part7">Contribua diretamente para o OpenStreetMap
-\n• Envie relatórios de erros.
+\n• Envie notas de erros que encontrou para informar os editores do OpenStreetMap.
 \n• Envie trilhos GPX para o OpenStreetMap diretamente da aplicação.
 \n• Adicione POIs e envie-os diretamente para o OpenStreetMap (ou mais tarde se estiver desconectado da Internet).
-\n• Gravar viagem opcional também em plano de fundo (enquanto o dispositivo está no modo adormecido).
-\n• O OsmAnd é um programa de fonte aberta desenvolvido ativamente. Todos podem contribuir para a aplicação reportando erros, a melhorar as traduções ou a programar novas funcionalidades. Além disso, o projeto conta com contribuições financeiras para financiar a programação e testes de novas funcionalidades.
+\n• Gravar viagem opcional também em plano de fundo (enquanto o aparelho está no modo adormecido).
+\n• O OsmAnd é um programa com código-fonte aberto desenvolvido ativamente. Todos podem contribuir para a aplicação reportando erros, melhorar as traduções ou a programar novas funcionalidades. Além disso, o projeto conta com contribuições financeiras para financiar a programação e testes de novas funcionalidades.
 \n</string>
     <string name="osmand_plus_extended_description_part8">Cobertura de mapa e qualidade aproximada:
 \n• Europa Ocidental: ****
@@ -2622,7 +2623,7 @@
 \nA maioria dos países ao redor do globo disponível como descarregamentos!
 \nDo Afeganistão ao Zimbabué, da Austrália aos Estados Unidos. Argentina, Brasil, Canadá, França, Alemanha, México, Reino Unido, Espanha…
 \n</string>
-    <string name="local_index_description">Toque em qualquer item para ver mais detalhes, toque longo para desativar ou eliminar. Dados atuais no dispositivo (%1$s livre):</string>
+    <string name="local_index_description">Toque em qualquer item para ver mais detalhes, toque longo para desativar ou eliminar. Dados atuais no aparelho (%1$s livre):</string>
     <string name="arrival_distance_factor_early">Adiantado</string>
     <string name="arrival_distance_factor_normally">Normal</string>
     <string name="arrival_distance_factor_late">Atrasado</string>
@@ -2724,7 +2725,7 @@
     <string name="quick_action_duplicate">Nome do botão de ação rápida duplicado</string>
     <string name="quick_action_showhide_favorites_descr">Uma alternância para mostrar ou ocultar os pontos favoritos no mapa.</string>
     <string name="quick_action_showhide_poi_descr">Uma alternância para mostrar ou ocultar POIs no mapa.</string>
-    <string name="quick_action_poi_show">Mostrar %1$s</string>
+    <string name="quick_action_poi_show">Ver %1$s</string>
     <string name="quick_action_poi_hide">Esconder %1$s</string>
     <string name="quick_action_add_category">Adicionar uma categoria</string>
     <string name="quick_action_add_create_items">Criar itens</string>
@@ -2917,7 +2918,7 @@
     <string name="routeInfo_steepness_name">Inclinação</string>
     <string name="routing_attr_avoid_sett_name">Sem pedras irregulares ou paralelos</string>
     <string name="routing_attr_avoid_sett_description">Evita pedras irregulares e paralelos</string>
-    <string name="send_log">Enviar registo</string>
+    <string name="send_log">Enviar relatório</string>
     <string name="sit_on_the_stop">Embarque na paragem</string>
     <string name="files_moved">%1$d ficheiros movidos (%2$s).</string>
     <string name="files_copied">%1$d ficheiros copiados (%2$s).</string>
@@ -3077,8 +3078,8 @@
     <string name="rendering_attr_highway_class_track_grade3_name">Grau 3</string>
     <string name="rendering_attr_highway_class_track_grade4_name">Grau 4</string>
     <string name="rendering_attr_highway_class_track_grade5_name">Grau 5</string>
-    <string name="external_input_device">Dispositivos externos de entrada</string>
-    <string name="external_input_device_descr">Selecione um dispositivo de controlo externo, como um teclado ou WunderLINQ.</string>
+    <string name="external_input_device">Aparelhos externos de entrada</string>
+    <string name="external_input_device_descr">Selecione um aparelho de controlo externo, como um teclado ou WunderLINQ.</string>
     <string name="sett_no_ext_input">Nenhum</string>
     <string name="sett_generic_ext_input">Teclado</string>
     <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
@@ -3391,7 +3392,7 @@
     <string name="shared_string_menu">Menu</string>
     <string name="plugin_disabled_descr">Esta extensão é uma aplicação separada, terá de removê-la separadamente se não tenciona usá-la mais.
 \n
-\nA extensão permanecerá no dispositivo após remover o OsmAnd.</string>
+\nA extensão permanecerá no aparelho após remover o OsmAnd.</string>
     <string name="plugin_disabled">Extensão desativada</string>
     <string name="open_settings">Abrir configurações</string>
     <string name="please_provide_profile_name_message">Atribua um nome ao perfil</string>
@@ -3495,7 +3496,7 @@
     <string name="replace_point_descr">Substituir outro ponto por este.</string>
     <string name="app_mode_ski_touring">Passeios de esqui</string>
     <string name="app_mode_ski_snowmobile">Moto de neve</string>
-    <string name="custom_osmand_plugin">Extensão personalizada OsmAnd</string>
+    <string name="custom_osmand_plugin">Extensão OsmAnd personalizada</string>
     <string name="changes_applied_to_profile">Alterações aplicadas ao perfil \'%1$s\'.</string>
     <string name="settings_item_read_error">Não foi possível ler \'%1$s\'.</string>
     <string name="settings_item_write_error">Não foi possível gravar em \'%1$s\'.</string>
@@ -3592,10 +3593,10 @@
     <string name="screen_control">Controlo do ecrã</string>
     <string name="system_screen_timeout_descr">Desliga o ecrã após o tempo limite do ecrã de acordo com o do sistema.</string>
     <string name="system_screen_timeout">Usar o tempo limite do ecrã do sistema</string>
-    <string name="turn_screen_on_descr">Selecione as opções de acordar o ecrã (certifique-se de que OsmAnd está em primeiro plano quando o dispositivo está a ser bloqueado):</string>
+    <string name="turn_screen_on_descr">Selecione as opções de acordar o ecrã (certifique-se de que OsmAnd está em primeiro plano quando o aparelho está a ser bloqueado):</string>
     <string name="turn_screen_on_navigation_instructions_descr">Cada instrução de navegação irá ligar o ecrã.</string>
     <string name="turn_screen_on_navigation_instructions">Instruções de navegação</string>
-    <string name="turn_screen_on_power_button_descr">Pressionando o botão de ligar o dispositivo ligará o ecrã com OsmAnd acima do ecrã de bloqueio.</string>
+    <string name="turn_screen_on_power_button_descr">Pressionando o botão de ligar o aparelho ligará o ecrã com OsmAnd acima do ecrã de bloqueio.</string>
     <string name="turn_screen_on_power_button">Botão de ligar</string>
     <string name="turn_screen_on_proximity_sensor">Sensor de proximidade</string>
     <string name="turn_screen_on_wake_time_descr">Selecione o tempo limite do ecrã após acordar. (\"%1$s\" não aplica tempo limite.)</string>
@@ -3639,7 +3640,7 @@
     <string name="keep_active">Manter ativo</string>
     <string name="please_provide_point_name_error">Atribua um nome ao ponto</string>
     <string name="clear_tiles_warning">A aplicação dessas alterações limpará os dados temporários desta origem de mosaicos</string>
-    <string name="speed_cameras_removed_descr">Este dispositivo não tem instalado o recurso de câmaras de velocidade.</string>
+    <string name="speed_cameras_removed_descr">Este aparelho não tem instalado o recurso de câmaras de velocidade.</string>
     <string name="speed_cameras_legal_descr">Em alguns países ou regiões, o uso de aplicações com avisos de radares é proibido por lei.
 \n
 \nTem de fazer uma escolha, dependendo da lei do seu país.
@@ -3688,7 +3689,7 @@
     <string name="shared_string_legal">Legal</string>
     <string name="vessel_height_warning">Pode definir a altura da embarcação para evitar pontes baixas. Lembre-se, se a ponte for móvel, usaremos sua altura no estado aberto.</string>
     <string name="app_mode_wheelchair_forward">Cadeira de rodas (para a frente)</string>
-    <string name="use_volume_buttons_as_zoom_descr">Controlar o nível de ampliação do mapa pelos botões de volume do dispositivo.</string>
+    <string name="use_volume_buttons_as_zoom_descr">Controlar o nível de ampliação do mapa pelos botões de volume do aparelho.</string>
     <string name="uninstall_speed_cameras">Desinstalar radares de velocidade</string>
     <string name="osm_edit_closed_note">Nota do OSM fechada</string>
     <string name="shared_string_uninstall_and_restart">Desinstalar e reiniciar</string>
@@ -3720,7 +3721,7 @@
     <string name="reverse_route">Rota inversa</string>
     <string name="route_between_points_whole_track_button_desc">O trilho inteiro será recalculado a usar o perfil selecionado.</string>
     <string name="route_between_points_next_segment_button_desc">Apenas será recalculado o próximo segmento utilizando o perfil selecionado.</string>
-    <string name="route_between_points_desc">Escolha como ligar os pontos por uma linha reta ou calcule uma rota entre eles como especificado abaixo.</string>
+    <string name="route_between_points_desc">Escolha como ligar os pontos: por uma linha reta ou por uma rota calculada entre eles como especificado abaixo.</string>
     <string name="whole_track">Trilho inteiro</string>
     <string name="next_segment">Próximo segmento</string>
     <string name="route_between_points_warning_desc">Em seguida, encaixe o trilho na estrada mais próxima permitida com um dos seus perfis de navegação para usar esta opção.</string>
@@ -3729,7 +3730,7 @@
     <string name="route_between_points_add_track_desc">Selecione um ficheiro de trilho no qual será adicionado um novo segmento.</string>
     <string name="follow_track">Seguir o trilho</string>
     <string name="follow_track_descr">Escolha o ficheiro de trilho a seguir</string>
-    <string name="import_track_descr">Escolha o ficheiro de trilho a seguir ou importe um do seu dispositivo.</string>
+    <string name="import_track_descr">Escolha o ficheiro de trilho a seguir ou importe um do seu aparelho.</string>
     <string name="select_another_track">Selecionar outro trilho</string>
     <string name="navigate_to_track_descr">Navegar da minha posição até ao trilho</string>
     <string name="pass_whole_track_descr">Ponto do trilho para navegar</string>
@@ -3752,12 +3753,12 @@
     <string name="add_segment_to_the_track">Adicionar a um ficheiro de trilho</string>
     <string name="empty_state_my_tracks_desc">Importar ou gravar ficheiros de trilho</string>
     <string name="empty_state_my_tracks">Adicionar ficheiros de trilho</string>
-    <string name="quick_action_add_gpx">Adicionar ponto de passagem de trilho</string>
+    <string name="quick_action_add_gpx">Ponto de passagem</string>
     <string name="show_gpx">Trilhos</string>
     <string name="shared_string_save_as_gpx">Guardar como novo ficheiro de trilho</string>
     <string name="save_track_to_gpx_globally">Registar o trilho num ficheiro GPX</string>
     <string name="layer_gpx_layer">Trilhos</string>
-    <string name="context_menu_item_add_waypoint">Adicionar ponto de passagem de trilho</string>
+    <string name="context_menu_item_add_waypoint">Inserir ponto intermédio</string>
     <string name="map_widget_monitoring">Gravar viagem</string>
     <string name="monitoring_control_start">Gravar</string>
     <string name="save_global_track_interval_descr">Especifique o intervalo de registo para a gravação geral do trilho (ligado através do widget de \'Gravar viagem\' no mapa).</string>
@@ -3826,7 +3827,6 @@
     <string name="message_graph_will_be_available_after_recalculation">Aguarde um momento.
 \nO gráfico estará disponível após a rota ser recalculada.</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
-    <string name="app_mode_gap">Intervalo</string>
     <string name="navigate_point_mgrs">MGRS</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="mgrs_format_descr">O OsmAnd utiliza o MGRS, que é semelhante ao formato UTM NATO.</string>
@@ -3877,7 +3877,7 @@
     <string name="approximate_file_size">Tamanho aproximado do ficheiro</string>
     <string name="select_data_to_export">Selecione os dados a serem exportados para o ficheiro.</string>
     <string name="file_size_needed_for_import">Necessário para a importação</string>
-    <string name="export_not_enough_space_descr">O seu dispositivo só tem disponível %1$s. Liberte algum espaço ou desmarque alguns itens para exportar.</string>
+    <string name="export_not_enough_space_descr">O seu aparelho só tem disponível %1$s. Liberte algum espaço ou desmarque alguns itens para exportar.</string>
     <string name="export_not_enough_space">Não há espaço suficiente</string>
     <string name="add_to_mapillary">Adicionar ao Mapillary</string>
     <string name="add_to_opr">Adicionar ao OpenPlaceReviews</string>
@@ -3898,13 +3898,13 @@
     <string name="plan_route_split_before">Dividir antes</string>
     <string name="plan_route_split_after">Dividir após</string>
     <string name="plan_route_add_new_segment">Adicionar um novo segmento</string>
-    <string name="release_3_9">• Adicionada opção de exportar e importar todos os dados, que inclui configurações, recursos, meus lugares
+    <string name="release_3_9">• Adicionada opção de exportar e importar todos os dados, incluindo configurações, recursos e meus lugares.
 \n
-\n• Planear rota: gráficos para segmentos com a rota, adicionado a capacidade de criar e editar trilhos de segmentos múltiplos
+\n• Planear rota: gráficos para segmentos de trilhos com rota, e adicionada a capacidade de criar e editar múltiplos trilhos de segmentos.
 \n
-\n• Adicionado método de autenticação OAuth para OpenStreetMap, melhor interface dos diálogos OSM
+\n• Adicionado método de autenticação OAuth para o OpenStreetMap, melhoria da interface das janelas de diálogos do OpenStreetMap.
 \n
-\n• Cores personalizadas para favoritos e pontos de rotas de trilhos
+\n• Cores personalizadas para favoritos e pontos de rotas de trilhos.
 \n
 \n</string>
     <string name="edit_online_routing_engine">Editar o mecanismo de roteamento online</string>
@@ -3934,11 +3934,13 @@
     <string name="rename_track">Alterar nome do trilho</string>
     <string name="change_folder">Mudar pasta</string>
     <string name="hillshade_slope_contour_lines">Sombras de relevo / declives / curvas de nível</string>
-    <string name="open_place_reviews_plugin_description">OpenPlaceReviews é um projeto comunitário sobre lugares públicos como restaurantes, hotéis, museus, locais etc. Recolhe toda a informação pública sobre eles, como fotografias, classificações/avaliações, ligações para outros sistemas como o OpenStreetMap e a Wikipédia.
+    <string name="open_place_reviews_plugin_description">OpenPlaceReviews é um projeto gerido pela comunidade sobre lugares públicos como restaurantes, hotéis, museus, locais, etc. Permite recolher toda a informação pública sobre estes, como fotografias, classificações/avaliações, ligações para outros sistemas como o OpenStreetMap e a Wikipédia.
 \n
 \nTodos os dados do OpenPlaceReviews estão abertos e disponíveis para todos: http://openplacereviews.org/data
 \n
-\nPode ler mais em: http://openplacereviews.org</string>
+\nApós criar uma conta no openplacereviews.org recomenda-se aguardar algumas horas até esta estar registada na blockchain para que possa iniciar sessão com a sua conta.
+\n
+\nLer mais em: http://openplacereviews.org</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">Usar test.openplacereviews.org</string>
     <string name="login_open_place_reviews">Iniciar sessão no OpenPlaceReviews</string>
@@ -3961,17 +3963,17 @@
     <string name="live_update_delete_updates_msg">Tem a certeza que quer eliminar todas as %s atualizações OsmAnd Live\?</string>
     <string name="release_4_0_beta">• Tradução para português europeu completamente revista.
 \n
-\n• Adicionada opção para descarregar curvas de nível na unidade de medida pés.
+\n• Adicionada opção para descarregar curvas de nível na unidade de medida \"pés\".
 \n
 \n• Planear rota: adicionadas abas para alternar entre pontos ou gráficos.
 \n
-\n• Atualizações OsmAnd Live movidas para \"Descarregamentos &gt; Atualizações\"
+\n• Atualizações OsmAnd Live movidas para \"Descarregar mapas &gt; Atualizações\"
 \n
 \n• Os trilhos podem ser agora coloridos conforme a altitude, velocidade ou declive.
 \n
 \n• Adicionada opção para alterar a aparência da linha de rota.
 \n
-\n• Janela de diálogo \"Gravação do trilho\" atualizada.
+\n• Janela \"Gravar viagem\" atualizada.
 \n
 \n</string>
     <string name="routing_attr_height_obstacles_description">O roteamento pode evitar subidas íngremes.</string>
@@ -4076,9 +4078,8 @@
     <string name="trip_recording_show_start_dialog_setting">Se desativado, a gravação começará logo a seguir ao tocar no widget ou item do menu, ignorando a janela de confirmação.</string>
     <string name="customize_route_line">Personalizar a linha de itinerário</string>
     <string name="shared_string_route_line">Linha de itinerário</string>
-    <string name="route_line_use_map_style_appearance">Usar estilo do mapa predefinido (%2$s) %1$s.</string>
     <string name="specify_color_for_map_mode">Especificar cor para o modo mapa %1$s.</string>
-    <string name="new_device_account">Novo dispositivo / nova conta</string>
+    <string name="new_device_account">Novo aparelho / nova conta</string>
     <string name="troubleshooting">Resolução de problemas</string>
     <string name="annual_subscription">Subscrição anual</string>
     <string name="monthly_subscription">Subscrição mensal</string>

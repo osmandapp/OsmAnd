@@ -329,7 +329,12 @@ public class Algorithms {
 		if (value.length() > 0 && value.charAt(0) == '-') {
 			i++;
 		}
-		while (i < value.length() && (isDigit(value.charAt(i)) || value.charAt(i) == '.')) {
+		boolean dotfound = false;
+		while (i < value.length() && 
+				(isDigit(value.charAt(i)) || (value.charAt(i) == '.') && !dotfound)) {
+			if (value.charAt(i) == '.') {
+				dotfound = true;
+			}
 			i++;
 			valid = true;
 		}

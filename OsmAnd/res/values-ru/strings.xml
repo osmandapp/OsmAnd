@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="poi_routes">Маршруты</string>
     <string name="day">День</string>
     <string name="days_2_4">Дня</string>
     <string name="days_5">Дней</string>
@@ -3818,7 +3819,6 @@
     <string name="file_already_imported">Файл уже импортирован</string>
     <string name="message_graph_will_be_available_after_recalculation">Дождитесь пересчёта маршрута.
 \nГрафик будет доступен после пересчёта.</string>
-    <string name="app_mode_gap">Разрыв</string>
     <string name="icon_group_service">Сервис</string>
     <string name="icon_group_special">Специальные</string>
     <string name="snowmobile_render_descr">Для езды на снегоходах по выделенным дорогам и трассам.</string>
@@ -4039,7 +4039,7 @@
     <string name="select_category_descr">Выберите категорию или добавьте новую</string>
     <string name="copy_poi_name">Копировать имя POI</string>
     <string name="shared_string_interval">Интервал</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Скрыть природный заповедник, особо охраняемые природные территории и границы национального парка</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Скрыть границы заповедников, особо охраняемых природных территорий и национальных парков.</string>
     <string name="gpx_upload_trackable_visibility_descr">«Отслеживаемый» означает, что трек не будет виден в любых общедоступных списках, но обработанные точки c отметками времени из него будут доступны через public GPS API (при этом трек не будет ассоциирован с вами). Другие пользователи смогут лишь загружать обработанные точки из вашего трека.</string>
     <string name="gpx_upload_identifiable_visibility_descr">«Идентифицируемый» означает, что трек будет виден всем в разделе треки пользователя, загрузившего трек и в общем списке треков, доступном на странице GPS-треки. Другие пользователи смогут загрузить данные трека и в свойствах трека будет указано имя пользователя, загрузившего трек. Отметки времени точек трека доступны через public GPS API будут ссылаться на страницу с вашим оригинальным треком.</string>
     <string name="gpx_upload_public_visibility_descr">«Общедоступный» означает, что трек будет виден всем в разделе треки пользователя, загрузившего трек и в общем списке треков, доступном на странице GPS-треки. Отметки времени точек трека не доступны через public GPS API. Однако, другие пользователи по-прежнему могут загрузить файл трека из общего списка треков и данные трека будут иметь все отметки времени.</string>
@@ -4056,7 +4056,7 @@
     <string name="next_billing_date">Следующая дата оплаты: %1$s</string>
     <string name="osmand_live">OsmAnd Live</string>
     <string name="annual_subscription">Годовая подписка</string>
-    <string name="release_4_0_beta">• Добавлена возможность скачать контурные линии в футах.
+    <string name="release_4_0_beta">• Добавлена возможность загрузить контурные линии в футах.
 \n
 \n• Планирование маршрута: добавлены вкладки для переключения между точками и графиками.
 \n
@@ -4077,7 +4077,6 @@
     <string name="update_all_maps_added">Обновить все карты, добавленные в %1$s\?</string>
     <string name="customize_route_line">Настройка линии маршрута</string>
     <string name="shared_string_route_line">Линия маршрута</string>
-    <string name="route_line_use_map_style_appearance">Линия маршрута будет использовать %1$s из выбранного стиля карты: %2$s.</string>
     <string name="specify_color_for_map_mode">Укажите цвет для режима карты: %1$s.</string>
     <string name="no_purchases">У вас нет покупок</string>
     <string name="new_device_account">Новое устройство / новый аккаунт</string>

@@ -3934,4 +3934,22 @@
     <string name="poi_telecom_medium_fibre">Helyi hurok: üvegszál</string>
     <string name="poi_telecom_medium_copper">Helyi hurok: rézvezeték</string>
     <string name="poi_pillory">Pellengér</string>
+    <string name="poi_windsock">Szélzsák</string>
+    <string name="poi_planetarium">Planetárium</string>
+    <string name="poi_service_vehicle_rental_yes">Autókölcsönzés</string>
+    <string name="poi_fruit">Gyümölcs</string>
+    <string name="poi_shrub">Cserje</string>
+    <string name="poi_dune">Homokdűne</string>
+    <string name="poi_ultralight_aviation">Ultrakönnyű motoros repülés</string>
+    <string name="poi_operator_type_cooperative">Üzemeltető típusa: szövetkezet</string>
+    <string name="poi_operator_type_consortium">Üzemeltető típusa: konzorcium</string>
+    <string name="poi_operator_type_community">Üzemeltető típusa: helyi közösségi</string>
+    <string name="poi_operator_type_public">Üzemeltető típusa: állami, önkormányzati</string>
+    <string name="poi_operator_type_ngo">Üzemeltető típusa: civil</string>
+    <string name="poi_operator_type_religious">Üzemeltető típusa: egyházi</string>
+    <string name="poi_operator_type_government">Üzemeltető típusa: kormányzati</string>
+    <string name="poi_operator_type_private">Üzemeltető típusa: magán</string>
+    <string name="poi_refugee_site">Menekülttábor</string>
+    <string name="poi_service_vehicle_inspection_yes">Műszaki vizsgálat</string>
+    <string name="poi_trolley_bay">Bevásárlókocsi-tároló</string>
 </resources>
