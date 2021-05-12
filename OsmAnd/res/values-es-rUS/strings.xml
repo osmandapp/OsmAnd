@@ -4053,7 +4053,7 @@
     <string name="trip_recording_show_start_dialog_setting">Si se desactiva, la grabación será iniciada al pulsar el widget o el elemento del menú, saltándose el diálogo de confirmación.</string>
     <string name="customize_route_line">Personalizar línea de ruta</string>
     <string name="shared_string_route_line">Línea de ruta</string>
-    <string name="specify_color_for_map_mode">Define el color para el modo de mapa: %1$s.</string>
+    <string name="specify_color_for_map_mode">Define el color para el modo de mapa «%1$s».</string>
     <string name="no_purchases">No tienes compras</string>
     <string name="new_device_account">Nuevo dispositivo / nueva cuenta</string>
     <string name="contact_support_description">Si tienes alguna duda, ponte en contacto con nosotros en %1$s.</string>
@@ -4079,7 +4079,7 @@
 \n
 \n• Las trazas ahora pueden colorearse por altitud, velocidad o pendiente.
 \n
-\n• Se ha añadido la opción de cambiar el aspecto a la línea de ruta de la navegación
+\n• Se ha añadido la opción de cambiar el aspecto a la línea de ruta.
 \n
 \n• Se ha actualizado el cuadro de diálogo «Grabación de viaje»
 \n
@@ -4091,11 +4091,21 @@
     <string name="output">Salida</string>
     <string name="map_quick_action_pattern">%1$s → …</string>
     <string name="shared_string_feet">pies</string>
-    <string name="srtm_unit_format">Formato de unidad de las curvas de nivel</string>
+    <string name="srtm_unit_format">Variante de unidad de las curvas de nivel</string>
     <string name="srtm_download_list_help_message">OsmAnd proporciona datos de curvas de nivel en metros y pies. Deberás volver a descargar el archivo para cambiar el formato.</string>
-    <string name="srtm_download_single_help_message">Marca el formato necesario. Deberás volver a descargar el archivo para cambiar el formato.</string>
+    <string name="srtm_download_single_help_message">Marca la variante. Deberás volver a descargar el archivo para cambiar el formato.</string>
     <string name="tts_title">TTS</string>
     <string name="recorded_description">La voz grabada suena mejor, pero sólo puede pronunciar frases pregrabadas: indicaciones de giro. No puede anunciar los nombres de las calles o de los PDI.</string>
     <string name="use_system_language">Usar idioma del sistema</string>
     <string name="shared_string_itinerary">Itinerario</string>
+    <string name="route_line_use_gradient_coloring">La línea de ruta se colorea según la pendiente de elevación.</string>
+    <string name="shared_string_min_height">Altura mín.</string>
+    <string name="shared_string_max_height">Altura máx.</string>
+    <string name="language_description">Marca el idioma preferido y el tipo de indicaciones por voz.</string>
+    <string name="tts_description">El sistema de texto a voz (TTS) puede pronunciar todo tipo de avisos: nombres de calles y PDI, indicaciones de giro, etc.</string>
+    <string name="route_line_use_map_style_width">Usa el ancho predefinido del estilo de mapa (%1$s).</string>
+    <string name="route_line_use_map_style_color">Usa el color predefinido del estilo de mapa (%1$s).</string>
+    <string name="poi_routes">Rutas</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">Evita las zonas de baja emisión o zonas urbanas de atmósfera protegida</string>
+    <string name="routing_attr_avoid_low_emission_zone_name">Evitar zonas de baja emisión</string>
 </resources>
