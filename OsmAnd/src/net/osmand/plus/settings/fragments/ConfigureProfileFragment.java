@@ -408,21 +408,20 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		String prefId = preference.getKey();
 
 		if (CONFIGURE_MAP.equals(prefId) || CONFIGURE_SCREEN.equals(prefId)) {
-			FragmentActivity activity = getActivity();
-			if (activity != null) {
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
 				try {
-					FragmentManager fragmentManager = activity.getSupportFragmentManager();
-					if (fragmentManager != null) {
-						ApplicationMode selectedMode = getSelectedAppMode();
-						if (!ApplicationMode.values(app).contains(selectedMode)) {
-							ApplicationMode.changeProfileAvailability(selectedMode, true, app);
-						}
-						settings.setApplicationMode(selectedMode);
-						fragmentManager.beginTransaction()
-								.remove(this)
-								.addToBackStack(TAG)
-								.commitAllowingStateLoss();
+					FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+					ApplicationMode selectedMode = getSelectedAppMode();
+					if (!ApplicationMode.values(app).contains(selectedMode)) {
+						ApplicationMode.changeProfileAvailability(selectedMode, true, app);
+						mapActivity.getMapLayers().getMapWidgetRegistry().updateVisibleWidgets();
 					}
+					settings.setApplicationMode(selectedMode);
+					fragmentManager.beginTransaction()
+							.remove(this)
+							.addToBackStack(TAG)
+							.commitAllowingStateLoss();
 				} catch (Exception e) {
 					LOG.error(e);
 				}

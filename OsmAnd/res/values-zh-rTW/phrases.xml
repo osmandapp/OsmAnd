@@ -3942,4 +3942,24 @@
     <string name="poi_planetarium">天文館</string>
     <string name="poi_service_vehicle_rental_yes">租車</string>
     <string name="poi_service_vehicle_inspection_yes">車輛檢查</string>
+    <string name="poi_glacier_status_oscillating">冰川狀況：震盪</string>
+    <string name="poi_glacier_status_marked_retreat">冰川狀況：明顯後退</string>
+    <string name="poi_glacier_status_retreat">冰川狀況：後退</string>
+    <string name="poi_glacier_edge_calving_line">邊緣：冰裂線</string>
+    <string name="poi_glacier_edge_grounding_line">邊緣：基線</string>
+    <string name="poi_glacier_debris_cover_scarce">碎屑覆蓋：稀少</string>
+    <string name="poi_glacier_debris_cover_partial">碎屑覆蓋：部份</string>
+    <string name="poi_glacier_debris_cover_none">碎屑覆蓋：無</string>
+    <string name="poi_fruit">水果</string>
+    <string name="poi_shrub">灌木</string>
+    <string name="poi_dune">沙丘</string>
+    <string name="poi_ultralight_aviation">超輕型航空</string>
+    <string name="poi_operator_type_cooperative">營運者類型：合作社</string>
+    <string name="poi_operator_type_consortium">營運者類型：財團</string>
+    <string name="poi_operator_type_community">營運者類型：社區</string>
+    <string name="poi_operator_type_ngo">營運者類型：非政府組織</string>
+    <string name="poi_operator_type_religious">營運者類型：宗教</string>
+    <string name="poi_operator_type_government">營運者類型：政府</string>
+    <string name="poi_operator_type_private">營運者類型：私人</string>
+    <string name="poi_operator_type_public">營運者類型：公共</string>
 </resources>

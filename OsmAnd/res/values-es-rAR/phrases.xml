@@ -3942,4 +3942,24 @@
     <string name="poi_planetarium">Planetario</string>
     <string name="poi_service_vehicle_rental_yes">Alquiler de automóviles</string>
     <string name="poi_service_vehicle_inspection_yes">Inspección de vehículos</string>
+    <string name="poi_glacier_status_oscillating">Estado del glaciar: oscilante</string>
+    <string name="poi_glacier_status_marked_retreat">Estado del glaciar: marcado retroceso</string>
+    <string name="poi_glacier_status_retreat">Estado del glaciar: en retroceso</string>
+    <string name="poi_glacier_edge_calving_line">Borde: línea de parto</string>
+    <string name="poi_glacier_edge_grounding_line">Borde: línea de tierra</string>
+    <string name="poi_glacier_debris_cover_scarce">Cubierta de escombros: escasa</string>
+    <string name="poi_glacier_debris_cover_partial">Cubierta de escombros: parcial</string>
+    <string name="poi_glacier_debris_cover_none">Cubierta de escombros: ninguna</string>
+    <string name="poi_fruit">Fruta</string>
+    <string name="poi_shrub">Arbusto</string>
+    <string name="poi_dune">Duna</string>
+    <string name="poi_ultralight_aviation">Aviación ultraligera</string>
+    <string name="poi_operator_type_cooperative">Tipo de operador: cooperativa</string>
+    <string name="poi_operator_type_consortium">Tipo de operador: consorcio</string>
+    <string name="poi_operator_type_community">Tipo de operador: comunidad</string>
+    <string name="poi_operator_type_ngo">Tipo de operador: ONG</string>
+    <string name="poi_operator_type_religious">Tipo de operador: religioso</string>
+    <string name="poi_operator_type_government">Tipo de operador: gobierno</string>
+    <string name="poi_operator_type_private">Tipo de operador: privado</string>
+    <string name="poi_operator_type_public">Tipo de operador: público</string>
 </resources>
