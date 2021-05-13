@@ -323,6 +323,25 @@ public class Algorithms {
 		return "";
 	}
 
+	public static int findFirstNumberEndIndexLegacy(String value) {
+		// keep this method unmodified ! (to check old clients crashes on server side)
+		int i = 0;
+		boolean valid = false;
+		if (value.length() > 0 && value.charAt(0) == '-') {
+			i++;
+		}
+		while (i < value.length() &&
+				(isDigit(value.charAt(i)) || value.charAt(i) == '.')) {
+			i++;
+			valid = true;
+		}
+		if (valid) {
+			return i;
+		} else {
+			return -1;
+		}
+	}
+
 	public static int findFirstNumberEndIndex(String value) {
 		int i = 0;
 		boolean valid = false;
