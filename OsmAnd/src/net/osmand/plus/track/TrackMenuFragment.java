@@ -169,7 +169,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private int menuHeaderHeight;
 	private int toolbarHeightPx;
 	private boolean adjustMapPosition = true;
-
+	private boolean showedHeaderOverview = false;
 
 	public enum TrackMenuType {
 		OVERVIEW(R.id.action_overview, R.string.shared_string_overview),
@@ -658,6 +658,11 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	@Override
 	public void onPause() {
 		super.onPause();
+		if (isPortrait()) {
+			Bundle args = getArguments() == null ? new Bundle() : getArguments();
+			args.putInt(MENU_STATE_KEY, getCurrentMenuState());
+			setArguments(args);
+		}
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.getMapLayers().getGpxLayer().setTrackChartPoints(null);
@@ -983,7 +988,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	@Override
 	protected void onHeaderClick() {
 		if (getCurrentMenuState() == MenuState.HEADER_ONLY) {
-			updateMenuState();
+			updateMenuState(false, false);
 		}
 	}
 
@@ -1038,7 +1043,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		runLayoutListener(new Runnable() {
 			@Override
 			public void run() {
-				updateMenuState();
+				updateMenuState(showedHeaderOverview, !showedHeaderOverview);
 			}
 		});
 	}
@@ -1047,22 +1052,32 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		runLayoutListener(new Runnable() {
 			@Override
 			public void run() {
-				int posY = getViewHeight() - menuHeaderHeight - menuTitleHeight - getShadowHeight();
-				if (posY < getViewY()) {
-					updateMainViewLayout(posY);
+				if (!showedHeaderOverview) {
+					int posY = getViewHeight() - menuHeaderHeight - menuTitleHeight - getShadowHeight();
+					if (posY < getViewY()) {
+						updateMainViewLayout(posY);
+					}
+					animateMainView(posY, false, getCurrentMenuState(), getCurrentMenuState());
+					updateMapControlsPos(TrackMenuFragment.this, posY, true);
 				}
-				animateMainView(posY, false, getCurrentMenuState(), getCurrentMenuState());
-				updateMapControlsPos(TrackMenuFragment.this, posY, true);
 			}
 		});
 	}
 
-	private void updateMenuState() {
-		if (menuType == TrackMenuType.OPTIONS) {
+	private void updateMenuState(boolean usePrevState, boolean halfScreen) {
+		if (usePrevState) {
+			changeMenuState(getMenuStatePosY(getCurrentMenuState()), false, false, true);
+		} else if (!halfScreen && menuType == TrackMenuType.OPTIONS) {
 			openMenuFullScreen();
 		} else {
 			openMenuHalfScreen();
 		}
+	}
+
+	@Override
+	protected void changeMenuState(int currentY, boolean slidingUp, boolean slidingDown, boolean animated) {
+		super.changeMenuState(currentY, slidingUp, slidingDown, animated);
+		showedHeaderOverview = true;
 	}
 
 	@Override
