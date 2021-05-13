@@ -1095,7 +1095,7 @@
     <string name="map_screen_orientation_descr">Vertical, horizontal ou a mesma do aparelho.</string>
     <string name="opening_hours_not_supported">Não é possível alterar o formato do horário de funcionamento.</string>
     <string name="add_new_rule">Adicionar nova regra</string>
-    <string name="transport_Routes">Linhas</string>
+    <string name="transport_Routes">Rotas</string>
     <string name="transport_Stop">Parada</string>
     <string name="transport_stops">paradas</string>
     <string name="transport_search_after">Itinerário seguinte</string>
@@ -4096,4 +4096,9 @@
     <string name="recorded_description">A voz gravada soa melhor, mas pode pronunciar apenas frases pré-gravadas: alternância de instruções. Não é possível anunciar nomes de rua ou nomes de POI.</string>
     <string name="use_system_language">Usar o idioma do sistema</string>
     <string name="shared_string_itinerary">Itinerário</string>
+    <string name="route_line_use_map_style_width">Usar a espessura padrão das linhas do estilo do mapa (%1$s).</string>
+    <string name="route_line_use_map_style_color">Usar a cor padrão do estilo do mapa (%1$s).</string>
+    <string name="poi_routes">Rotas</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">Evitar zonas de baixa emissão</string>
+    <string name="routing_attr_avoid_low_emission_zone_name">Evitar zonas de baixa emissão</string>
 </resources>
