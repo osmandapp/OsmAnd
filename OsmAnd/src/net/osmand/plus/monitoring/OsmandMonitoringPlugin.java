@@ -502,6 +502,10 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 					}
 				}
 				if (file != null && file.exists() && file.length() > 0) {
+/*					Depends what Victor mean - empty track.
+					GPXUtilities.GPXFile res = GPXUtilities.loadGPXFile(file);
+					boolean b = res.hasTrkPt();
+					double lastPoint = res.getLastPoint().distance;*/
 					if (!openTrack) {
 						if (activityRef != null) {
 							final Activity a = activityRef.get();
