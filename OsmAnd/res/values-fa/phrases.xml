@@ -542,7 +542,7 @@
     <string name="poi_waterfall">ابشار</string>
     <string name="poi_river">رودخانه</string>
     <string name="poi_stream">نهر</string>
-    <string name="poi_rapids">راپیدز</string>
+    <string name="poi_rapids">تندآب</string>
     <string name="poi_stone"/>
     <string name="poi_cape">دماغه</string>
     <string name="poi_beach">ساحل</string>
@@ -1470,19 +1470,20 @@
     <string name="poi_aerialway_bubble_no">بدون حباب</string>
     <string name="poi_adult_gaming_centre">مرکز بازی بزرگسالان</string>
     <string name="poi_block">بلوک</string>
-    <string name="poi_bollard">بولارد</string>
+    <string name="poi_bollard">تیرک مهار
+\nبولارد</string>
     <string name="poi_fuel_e20">E20</string>
     <string name="poi_fuel_e10">E10</string>
     <string name="poi_cabin">کابین</string>
     <string name="poi_piste">پیست</string>
     <string name="poi_sailing">کشتیرانی</string>
-    <string name="poi_farmyard">حیاط‌مزرعه</string>
+    <string name="poi_farmyard">حیاط‌ مزرعه</string>
     <string name="poi_valley">دره</string>
     <string name="poi_gasometer">کنتورگاز</string>
     <string name="poi_reservoir">مخزن</string>
     <string name="poi_lodging">اسکان</string>
     <string name="poi_administrative">اداری</string>
-    <string name="poi_mast">ماست</string>
+    <string name="poi_mast">دکل</string>
     <string name="poi_animal_keeping">نگهداری حیوانات</string>
     <string name="poi_amperage">آمپراژ</string>
     <string name="poi_amenity_vacuum_cleaner">جارو برقی</string>
@@ -1495,4 +1496,5 @@
     <string name="poi_aerodrome_type_private">خصوصی</string>
     <string name="poi_aerodrome_type_military_public">نظامی/عمومی</string>
     <string name="poi_aerodrome_type_military">نظامی</string>
+    <string name="poi_books_type">کتاب‌ها</string>
 </resources>

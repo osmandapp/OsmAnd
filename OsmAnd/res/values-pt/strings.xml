@@ -1409,7 +1409,7 @@
     <string name="back_to_map">Voltar ao mapa</string>
     <string name="share_note">Partilhar nota</string>
     <string name="location_on_map">Posição:\n Lat %1$s\n Lon %2$s</string>
-    <string name="notes">Notas de áudio/vídeo</string>
+    <string name="notes">Notas áudio/vídeo</string>
     <string name="online_map">Mapa online</string>
     <string name="roads_only">Apenas estradas</string>
     <string name="rendering_attr_pisteRoutes_name">Pistas de esqui</string>
@@ -2559,7 +2559,6 @@
 \n A maioria dos países ao redor do globo está disponível para descarregar!
 \n Obtenha um navegador confiável no seu país - seja em França, Alemanha, México, Reino Unido, Espanha, Holanda, EUA, Rússia, Brasil ou qualquer outro.</string>
     <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions / direções de navegação automatizadas do OSM)
-\n
 \nO OsmAnd+ é uma aplicação de navegação com código-fonte aberto, com acesso a uma ampla variedade de dados globais do OpenStreetMap (OSM). Todos os dados dos mapas (vetoriais ou imagens raster) podem ser armazenados no cartão de memória do telemóvel para usar quando não tiver Internet. O OsmAnd+ também permite usar rotas, tanto ligado como desligado da Internet, incluindo a funcionalidade de rotas curva a curva com orientação por voz.
 \n
 \nOsmAnd+ é a versão paga da aplicação, ao comprá-la está a apoiar o projeto, a financiar o desenvolvimento de novas funcionalidades e a receber as últimas atualizações nos mapas.
@@ -4108,4 +4107,9 @@
     <string name="recorded_description">A voz gravada soa melhor, mas só consegue pronunciar frases pré-gravadas: instruções de viragem. Não pode anunciar nomes de ruas ou nomes de POI.</string>
     <string name="use_system_language">Usar idioma do sistema</string>
     <string name="shared_string_itinerary">Itinerário</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">Evitar zonas de baixas emissões poluentes</string>
+    <string name="routing_attr_avoid_low_emission_zone_name">Evitar zonas de baixas emissões poluentes</string>
+    <string name="route_line_use_map_style_width">Usar a espessura padrão das linhas do estilo do mapa (%1$s).</string>
+    <string name="route_line_use_map_style_color">Usar a cor predefinida do estilo do mapa (%1$s).</string>
+    <string name="poi_routes">Rotas</string>
 </resources>

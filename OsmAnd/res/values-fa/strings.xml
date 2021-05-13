@@ -4126,4 +4126,9 @@
     <string name="tts_title">TTS</string>
     <string name="recorded_description">گفتار ضبط‌شده کیفیت بهتری دارد، اما فقط عبارت‌های ازپیش‌آماده برای دستورالعمل‌های گردش را خواهید شنید. بیان‌کردن نام خیابان یا نام نقاط توجه ممکن نخواهد بود.</string>
     <string name="use_system_language">استفاده از زبان سیستم</string>
+    <string name="route_line_use_map_style_width">از عرض پیشفرض سبک نقشه (%1$s) استفاده شود.</string>
+    <string name="route_line_use_map_style_color">از رنگ پیشفرض سبک نقشه (%1$s) استفاده شود.</string>
+    <string name="poi_routes">مسیرها</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">پرهیز از محدوده‌های کاهش</string>
+    <string name="routing_attr_avoid_low_emission_zone_name">پرهیز از محدوده‌های کاهش</string>
 </resources>
