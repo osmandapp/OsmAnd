@@ -343,29 +343,49 @@ public class Algorithms {
 	}
 
 	public static int findFirstNumberEndIndex(String value) {
+		int index = findFirstNumberEndIndexLegacy(value);
+		if (index == -1) {
+			return index;
+		}
+		String analizedValue = value.substring(0, index);
 		int i = 0;
-		boolean valid = false;
-		if (value.length() > 0 && value.charAt(0) == '-') {
+		int noDigitCount = 0;
+		int lastNoDigitIndex = 0;
+		int firstNoDigitIndex = -1;
+		boolean hasDigit = false;
+		while (i < analizedValue.length()) {
+			if (!isDigit(value.charAt(i))) {
+				noDigitCount++;
+				lastNoDigitIndex = i;
+				if (firstNoDigitIndex == -1) {
+					firstNoDigitIndex = i;
+				}
+			} else {
+				hasDigit = true;
+			}
 			i++;
 		}
-		boolean dotfound = false;
-		boolean digitfound = false;
-		while (i < value.length() &&
-				(isDigit(value.charAt(i)) || (value.charAt(i) == '.') && !dotfound)) {
-			if (value.charAt(i) == '.') {
-				dotfound = true;
-			}
-			if (!digitfound && isDigit(value.charAt(i))) {
-				digitfound = true;
-			}
-			i++;
-			valid = digitfound;
-		}
-		if (valid) {
-			return i;
-		} else {
+		if (!hasDigit) {
+			// value like . or ..
 			return -1;
 		}
+		if (noDigitCount > 1) {
+			if (analizedValue.charAt(0) == '-' && analizedValue.charAt(lastNoDigitIndex) == '.' && noDigitCount == 2) {
+				// numbers like -5.62 or -5.
+				return index;
+			}
+			if (firstNoDigitIndex > 0) {
+				// numbers like 40..60
+				return firstNoDigitIndex;
+			}
+			if (analizedValue.charAt(0) == '-') {
+				// numbers like -40..60
+				return findFirstNumberEndIndex(analizedValue.substring(0, lastNoDigitIndex));
+			}
+			// numbers like -..40 or ..40.60 etc.
+			return -1;
+		}
+		return index;
 	}
 
 	public static boolean isDigit(char charAt) {
