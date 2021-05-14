@@ -349,8 +349,7 @@ public class Algorithms {
 			i++;
 		}
 		boolean dotfound = false;
-		while (i < value.length() && 
-				(isDigit(value.charAt(i)) || (value.charAt(i) == '.') && !dotfound)) {
+		while (i < value.length() && isDigit(value.charAt(i)) && !dotfound) {
 			if (value.charAt(i) == '.') {
 				dotfound = true;
 			}
