@@ -58,6 +58,7 @@ public class Algorithms {
 	public static final int BZIP_FILE_SIGNATURE = 0x425a;
 	public static final int GZIP_FILE_SIGNATURE = 0x1f8b;
 
+
 	public static String normalizeSearchText(String s) {
 		boolean norm = false;
 		for (int i = 0; i < s.length() && !norm; i++) {
@@ -350,9 +351,13 @@ public class Algorithms {
 		int state = 0; // 0 - no number, 1 - 1st digits, 2 - dot, 3 - last digits
 		while (i < value.length() && (isDigit(value.charAt(i)) || (value.charAt(i) == '.'))) {
 			if (value.charAt(i) == '.') {
+				if (state == 2) {
+					return i - 1;
+				}
 				if (state != 1) {
 					return -1;
 				}
+				state = 2;
 			} else {
 				if (state == 2) {
 					// last digits 
