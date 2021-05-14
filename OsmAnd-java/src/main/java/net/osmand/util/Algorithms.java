@@ -344,28 +344,35 @@ public class Algorithms {
 
 	public static int findFirstNumberEndIndex(String value) {
 		int i = 0;
-		boolean valid = false;
 		if (value.length() > 0 && value.charAt(0) == '-') {
 			i++;
 		}
-		boolean dotfound = false;
-		boolean digitfound = false;
-		while (i < value.length() &&
-				(isDigit(value.charAt(i)) || (value.charAt(i) == '.') && !dotfound)) {
+		int state = 0; // 0 - no number, 1 - 1st digits, 2 - dot, 3 - last digits
+		while (i < value.length() && (isDigit(value.charAt(i)) || (value.charAt(i) == '.'))) {
 			if (value.charAt(i) == '.') {
-				dotfound = true;
-			}
-			if (!digitfound && isDigit(value.charAt(i))) {
-				digitfound = true;
+				if (state != 1) {
+					return -1;
+				}
+			} else {
+				if (state == 2) {
+					// last digits 
+					state = 3;
+				} else if (state == 0) {
+					// first digits started
+					state = 1;
+				}
+
 			}
 			i++;
-			valid = digitfound;
 		}
-		if (valid) {
-			return i;
-		} else {
+		if (state == 2) {
+			// invalid number like 40. correct to -> '40'
+			return i - 1;
+		}
+		if (state == 0) {
 			return -1;
 		}
+		return i;
 	}
 
 	public static boolean isDigit(char charAt) {
