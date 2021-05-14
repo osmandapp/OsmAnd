@@ -349,12 +349,17 @@ public class Algorithms {
 			i++;
 		}
 		boolean dotfound = false;
-		while (i < value.length() && isDigit(value.charAt(i)) && !dotfound) {
+		boolean digitfound = false;
+		while (i < value.length() &&
+				(isDigit(value.charAt(i)) || (value.charAt(i) == '.') && !dotfound)) {
 			if (value.charAt(i) == '.') {
 				dotfound = true;
 			}
+			if (!digitfound && isDigit(value.charAt(i))) {
+				digitfound = true;
+			}
 			i++;
-			valid = true;
+			valid = digitfound;
 		}
 		if (valid) {
 			return i;
