@@ -1047,4 +1047,7 @@
     <string name="will_open_on">Dibuka pada</string>
     <string name="will_open_at">Dibuka pada</string>
     <string name="first_intermediate_dest_description">Menambahkan perhentian awal</string>
+    <string name="output">Hasil</string>
+    <string name="tts_title">TTS</string>
+    <string name="shared_string_itinerary">Jadwal</string>
 </resources>
