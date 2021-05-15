@@ -4105,4 +4105,5 @@
     <string name="use_system_language">Systemsprache verwenden</string>
     <string name="in_grace_period">In der Nachlaufzeit</string>
     <string name="shared_string_itinerary">Reiseplan</string>
+    <string name="poi_routes">Routen</string>
 </resources>
