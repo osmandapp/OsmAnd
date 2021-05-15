@@ -763,7 +763,7 @@
     <string name="incomplete_locale">ناقص</string>
     <string name="shared_string_next">التالي</string>
     <string name="shared_string_previous">السابق</string>
-    <string name="unit_of_length_descr">اختيار الوحدات: كم، ميل، ميلٌ بحري.. إلخ.</string>
+    <string name="unit_of_length_descr">تغيير وحدات قياس المسافة.</string>
     <string name="unit_of_length">وحدات الطول</string>
     <string name="si_mi_feet">ميل ، قدم</string>
     <string name="si_mi_yard">ميل ، ياردة</string>
