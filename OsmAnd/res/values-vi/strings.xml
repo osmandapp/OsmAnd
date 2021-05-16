@@ -536,4 +536,8 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com --><resources>
     <string name="tts_description">Văn bản thành giọng nói (TTS) có thể phát âm tất cả các loại hướng dẫn: tên đường phố, hướng dẫn rẽ, tên địa điểm hứng thú, v.v.</string>
     <string name="tts_title">TTS</string>
     <string name="use_system_language">Sử dụng ngôn ngữ hệ thống</string>
+    <string name="expired">Đã hết hạn</string>
+    <string name="announce_when_exceeded">Tuyên bố khi vượt quá</string>
+    <string name="shared_string_min_height">Độ cao tối thiểu</string>
+    <string name="shared_string_max_height">Độ cao tối đa</string>
 </resources>
