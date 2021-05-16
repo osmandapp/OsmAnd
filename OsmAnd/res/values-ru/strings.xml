@@ -4102,4 +4102,9 @@
     <string name="tts_title">TTS</string>
     <string name="recorded_description">Записанный голос звучит лучше, но умеет произносить только заранее записанные фразы: инструкции для поворотов. Не умеет объявлять названия улиц или POI.</string>
     <string name="use_system_language">Использовать системный язык</string>
+    <string name="shared_string_itinerary">Маршрут</string>
+    <string name="route_line_use_map_style_width">Используется толщина линии стиля карты (%1$s).</string>
+    <string name="route_line_use_map_style_color">Используется цвет стиля карты (%1$s).</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">Без зон с низким уровнем выбросов</string>
+    <string name="routing_attr_avoid_low_emission_zone_name">Без зон с низким уровнем выбросов</string>
 </resources>

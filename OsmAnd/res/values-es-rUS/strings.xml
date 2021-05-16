@@ -3978,7 +3978,7 @@
     <string name="login_open_place_reviews">Acceder a OpenPlaceReviews</string>
     <string name="hillshade_slope_contour_lines">Sombreado / Pendiente / Curvas de nivel</string>
     <string name="delete_waypoints">Borrar puntos de referencia</string>
-    <string name="delete_online_routing_engine">¿Borrar este motor de navegación en línea\?</string>
+    <string name="delete_online_routing_engine">¿Quitar este motor de navegación en línea\?</string>
     <string name="copy_to_map_markers">Copiar a «Marcadores del mapa»</string>
     <string name="copy_to_map_favorites">Copiar a favoritos</string>
     <string name="context_menu_read_full">Leer completo</string>
@@ -4006,12 +4006,12 @@
     <string name="activity_type_cycling_name">Bicicleta</string>
     <string name="activity_type_car_name">Automóvil</string>
     <string name="select_segments">Elegir segmentos</string>
-    <string name="select_segments_description">«%1$s» contiene más de un segmento, debe marcar la parte necesaria para la navegación.</string>
+    <string name="select_segments_description">«%1$s» contiene más de un segmento, define el tramo para la navegación.</string>
     <string name="segments_count">Segmento %1$d</string>
     <string name="temporary_conditional_routing_descr">Usar las restricciones viales que están activas ahora en el mapa</string>
     <string name="routing_attr_short_way_description">Ruta optimizada más corta (bajo consumo)</string>
     <string name="routing_attr_driving_style_description">Elige el propósito de la conducción para obtener la ruta más corta, más rápida o más segura</string>
-    <string name="snap_to_road_descr">El icono de la ubicación actual se ajustará a la ruta de navegación actual</string>
+    <string name="snap_to_road_descr">El icono de la ubicación actual será ajustado a la ruta de navegación</string>
     <string name="map_orientation_threshold_descr">No girar la vista del mapa si la velocidad es inferior a un umbral</string>
     <string name="restart">Reiniciar</string>
     <string name="shared_strings_all_regions">Todas las regiones</string>
@@ -4041,7 +4041,7 @@
     <string name="copy_poi_name">Copiar nombre del PDI</string>
     <string name="quick_action_show_hide_title">Mostrar/Ocultar</string>
     <string name="shared_string_interval">Intervalo</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Oculta fronteras de reservas naturales, áreas protegidas y parques nacionales</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Oculta fronteras de reservas naturales, áreas protegidas y parques nacionales.</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">Fronteras naturales</string>
     <string name="track_has_no_altitude">La traza no contiene datos de altitud.</string>
     <string name="track_has_no_speed">La traza no contiene datos de velocidad.</string>

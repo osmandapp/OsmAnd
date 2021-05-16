@@ -3333,7 +3333,7 @@
     <string name="osm_edits_view_descr">Ĉiuj viaj jam nepublikigitaj redaktoj aŭ rimarkoj OSM estos videblaj ĉe %1$s. Punktoj alŝutitaj al OSM ne estos videblaj en OsmAnd.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Emblemo montrata dum navigi aŭ moviĝi.</string>
-    <string name="select_map_icon_descr">Montri emblemon dum restado.</string>
+    <string name="select_map_icon_descr">Emblemo montrata dum restado.</string>
     <string name="logcat_buffer_descr">Legi kaj kunhavigi detalajn protokolojn de la aplikaĵo</string>
     <string name="permission_is_required">Permeso estas necesa por uzi tiun ĉi eblaĵon.</string>
     <string name="monitoring_min_speed_descr">Tiu ĉi filtrilo preventas registri punktojn sub difinita rapidlimo. Tiel registritaj spuroj aspektos pli glate dum vidiĝi sur la mapo.</string>
