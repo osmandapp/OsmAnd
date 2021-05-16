@@ -3902,4 +3902,21 @@
     <string name="poi_routes">Ruter</string>
     <string name="routing_attr_avoid_low_emission_zone_description">Undgå miljøzoner</string>
     <string name="routing_attr_avoid_low_emission_zone_name">Undgå miljøzoner</string>
+    <string name="test_route_calculation">Test ruteberegning</string>
+    <string name="routing_engine_vehicle_type_driving">Kørsel</string>
+    <string name="routing_engine_vehicle_type_foot">Til fods</string>
+    <string name="routing_engine_vehicle_type_bike">Cykel</string>
+    <string name="routing_engine_vehicle_type_car">Bil</string>
+    <string name="copy_address">Kopiér adresse</string>
+    <string name="shared_string_folders">Mapper</string>
+    <string name="select_folder">Valg mappe</string>
+    <string name="select_folder_descr">Vælg mappe eller tilføj en ny</string>
+    <string name="shared_string_empty">Tom</string>
+    <string name="analyze_by_intervals">Analyser splitintervaller</string>
+    <string name="upload_to_openstreetmap">Upload til OpenStreetMap</string>
+    <string name="edit_track">Rediger spor</string>
+    <string name="rename_track">Omdøb spor</string>
+    <string name="announcement_time_off_route">Uden for ruten</string>
+    <string name="announcement_time_descr">Tidspunktet for de forskellige stemmeprompter afhænger af prompttypen, den aktuelle navigationshastighed og standardnavigationshastigheden.</string>
+    <string name="map_orientation_threshold_descr">Roter ikke kortvisningen, hvis hastigheden er under en vis grænseværdi</string>
 </resources>
