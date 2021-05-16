@@ -3850,4 +3850,18 @@
     <string name="use_system_language">Brug systemsprog</string>
     <string name="srtm_download_list_help_message">OsmAnd leverer data om højdekurver i meter og fod. Du skal downloade filen igen for at ændre formatet.</string>
     <string name="srtm_download_single_help_message">Vælg venligst varianten. Du skal downloade filen igen for at ændre formatet.</string>
+    <string name="change_folder">Skift mappe</string>
+    <string name="shared_string_sec">sek</string>
+    <string name="announcement_time_approach">Tilgang</string>
+    <string name="announcement_time_prepare_long">Lang forberedelse</string>
+    <string name="announcement_time_prepare">Forbered</string>
+    <string name="announcement_time_arrive">Ankomst til destinationen</string>
+    <string name="shared_string_turn">Sving</string>
+    <string name="announcement_time_intervals">Tid- og afstandsintervaller</string>
+    <string name="context_menu_read_full">Læs hele</string>
+    <string name="hillshade_slope_contour_lines">Bakkeskygge / Skråning / Konturlinjer</string>
+    <string name="activity_type_racing_name">Racing</string>
+    <string name="temporary_conditional_routing_descr">Brug de vejrestriktioner, der er aktive på kortet nu</string>
+    <string name="on_hold">I venteposition</string>
+    <string name="srtm_unit_format">Enhedsvariant med konturlinjer</string>
 </resources>
