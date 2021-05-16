@@ -2053,8 +2053,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	public void increaseSearchRadius() {
-		if (!interruptedSearch) {
-			SearchSettings settings = searchUICore.getSearchSettings();
+		SearchSettings settings = searchUICore.getSearchSettings();
+		if (settings.getRadiusLevel() == 4) {
+			searchUICore.updateSettings(settings.setRadiusLevel(Integer.MAX_VALUE));
+		} else {
 			searchUICore.updateSettings(settings.setRadiusLevel(settings.getRadiusLevel() + 1));
 		}
 		runCoreSearch(searchQuery, false, true);

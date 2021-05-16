@@ -30,10 +30,9 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
 import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
+import net.osmand.plus.chooseplan.ChoosePlanDialogFragment.ChoosePlanDialogType;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
-import net.osmand.plus.search.listitems.QuickSearchBannerListItem;
-import net.osmand.plus.chooseplan.ChoosePlanDialogFragment.ChoosePlanDialogType;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.search.listitems.QuickSearchBannerListItem;
 import net.osmand.plus.search.listitems.QuickSearchHeaderListItem;
@@ -444,7 +443,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		Object searchResultObject = listItem.getSearchResult().object;
 		if (searchResultObject instanceof AbstractPoiType) {
 			AbstractPoiType abstractPoiType = (AbstractPoiType) searchResultObject;
-			String synonyms[] = abstractPoiType.getSynonyms().split(";");
+			String[] synonyms = abstractPoiType.getSynonyms().split(";");
 			QuickSearchHelper searchHelper = app.getSearchUICore();
 			SearchUICore searchUICore = searchHelper.getCore();
 			String searchPhrase = searchUICore.getPhrase().getText(true);
@@ -604,9 +603,6 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 				selectedItems.clear();
 			}
 			notifyDataSetChanged();
-			if (selectionListener != null) {
-				selectionListener.onUpdateSelectionMode(selectedItems);
-			}
 		} else {
 			QuickSearchListItem listItem = getItem(position);
 			if (ch.isChecked()) {
@@ -614,9 +610,9 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			} else {
 				selectedItems.remove(listItem);
 			}
-			if (selectionListener != null) {
-				selectionListener.onUpdateSelectionMode(selectedItems);
-			}
+		}
+		if (selectionListener != null) {
+			selectionListener.onUpdateSelectionMode(selectedItems);
 		}
 	}
 
