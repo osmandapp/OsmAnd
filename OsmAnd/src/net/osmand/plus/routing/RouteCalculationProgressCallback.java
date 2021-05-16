@@ -8,5 +8,7 @@ public interface RouteCalculationProgressCallback {
 
 	void requestPrivateAccessRouting();
 
+	void updateMissingMaps();
+
 	void finish();
 }

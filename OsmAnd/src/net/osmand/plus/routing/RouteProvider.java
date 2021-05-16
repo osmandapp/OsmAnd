@@ -69,7 +69,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import btools.routingapp.IBRouterService;
 
-import static net.osmand.plus.routing.SuggestedMapsProvider.*;
+import static net.osmand.plus.routing.SuggestedMapsProvider.findOnlineRoutePoints;
 import static net.osmand.plus.routing.SuggestedMapsProvider.getLocationBasedOnDistance;
 import static net.osmand.plus.routing.SuggestedMapsProvider.getStartFinishIntermediatesPoints;
 import static net.osmand.plus.routing.SuggestedMapsProvider.getSuggestedMaps;
@@ -81,6 +81,13 @@ public class RouteProvider {
 	private static final int MIN_DISTANCE_FOR_INSERTING_ROUTE_SEGMENT = 60;
 	private static final int ADDITIONAL_DISTANCE_FOR_START_POINT = 300;
 	private static final int MIN_STRAIGHT_DIST = 50000;
+
+	public void setOnlineCheckNeeded(boolean onlineCheckNeeded) {
+		this.onlineCheckNeeded = onlineCheckNeeded;
+	}
+
+	boolean onlineCheckNeeded;
+	List<WorldRegion> mapsCalculatedOnline;
 
 	public static Location createLocation(WptPt pt){
 		Location loc = new Location("OsmandRouteProvider");
@@ -112,21 +119,15 @@ public class RouteProvider {
 				if (calcGPXRoute && !params.gpxRoute.calculateOsmAndRoute) {
 					res = calculateGpxRoute(params);
 				} else if (params.mode.getRouteService() == RouteService.OSMAND) {
-					LinkedList<Location> points = getStartFinishIntermediatesPoints(params);
+					LinkedList<Location> points = getStartFinishIntermediatesPoints(params, "");
 					List<WorldRegion> suggestedMaps = getSuggestedMaps(points, app);
 					if (Algorithms.isEmpty(suggestedMaps)) {
 						LinkedList<Location> pointsStraightLine = getLocationBasedOnDistance(points);
 						List<WorldRegion> suggestedMapsOnStraightLine = getSuggestedMaps(pointsStraightLine, app);
 						if (!Algorithms.isEmpty(suggestedMapsOnStraightLine)) {
-							final RoutingHelper routingHelper = app.getRoutingHelper();
-							long currentTime = System.currentTimeMillis();
-							res = findVectorMapsRoute(params, calcGPXRoute);
-							long lastTimeEvaluated = routingHelper.getLastTimeEvaluated();
+							params.startTimeRouteCalculation = System.currentTimeMillis();
+							findVectorMapsRoute(params, calcGPXRoute);
 							final LinkedList<Location> onlinePoints = findOnlineRoutePoints(params);
-							if (lastTimeEvaluated - currentTime > 6000) {
-								List<WorldRegion> mapsCalculatedOnline = getSuggestedMaps(onlinePoints, app);
-								return new RouteCalculationResult(mapsCalculatedOnline, true);
-							}
 							params.calculationProgressCallback = new RouteCalculationProgressCallback() {
 
 								@Override
@@ -145,17 +146,25 @@ public class RouteProvider {
 								}
 
 								@Override
-								public void finish() {
-									if (!routingHelper.isRouteCalculated()){
-										try {
-											List<WorldRegion> mapsCalculatedOnline = getSuggestedMaps(onlinePoints, app);
-											new RouteCalculationResult(mapsCalculatedOnline, true);
-										} catch (IOException e) {
-											e.printStackTrace();
-										}
+								public void updateMissingMaps() {
+									try {
+										mapsCalculatedOnline = getSuggestedMaps(onlinePoints, app);
+									} catch (IOException e) {
+										e.printStackTrace();
 									}
+									setOnlineCheckNeeded(true);
+								}
+
+								@Override
+								public void finish() {
+
 								}
 							};
+							if (onlineCheckNeeded) {
+								return new RouteCalculationResult(mapsCalculatedOnline, true);
+							} else {
+								res = findVectorMapsRoute(params, calcGPXRoute);
+							}
 						} else {
 							res = findVectorMapsRoute(params, calcGPXRoute);
 						}
@@ -810,7 +819,7 @@ public class RouteProvider {
 			} else {
 				result = router.searchRoute(ctx, st, en, inters);
 			}
-			
+
 			if(result == null || result.isEmpty()) {
 				if(ctx.calculationProgress.segmentNotFound == 0) {
 					return new RouteCalculationResult(params.ctx.getString(R.string.starting_point_too_far));
@@ -845,7 +854,7 @@ public class RouteProvider {
 //			ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
 //			activityManager.getMemoryInfo(memoryInfo);
 //			int avl = (int) (memoryInfo.availMem / (1 << 20));
-			int max = (int) (Runtime.getRuntime().maxMemory() / (1 << 20)); 
+			int max = (int) (Runtime.getRuntime().maxMemory() / (1 << 20));
 			int avl = (int) (Runtime.getRuntime().freeMemory() / (1 << 20));
 			String s = " (" + avl + " MB available of " + max  + ") ";
 			return new RouteCalculationResult("Not enough process memory "+ s);
@@ -953,10 +962,10 @@ public class RouteProvider {
 							float currentDistanceToEnd = distanceToEnd[offset];
 							if (lasttime != 0) {
 								last.setAverageSpeed((lastDistanceToEnd - currentDistanceToEnd) / lasttime);
-							} 
+							}
 							last.distance = (int) Math.round(lastDistanceToEnd - currentDistanceToEnd);
 						}
-					} 
+					}
 					// save time as a speed because we don't know distance of the route segment
 					lasttime = time;
 					float avgSpeed = defSpeed;
@@ -1165,7 +1174,7 @@ public class RouteProvider {
 				nogoindex++;
 			}
 		}
-		
+
 		if (params.mode.isDerivedRoutingFrom(ApplicationMode.PEDESTRIAN)) {
 			mode = "foot"; //$NON-NLS-1$
 		} else if (params.mode.isDerivedRoutingFrom(ApplicationMode.BICYCLE)) {
@@ -1229,7 +1238,7 @@ public class RouteProvider {
 	}
 
 	private RouteCalculationResult findStraightRoute(RouteCalculationParams params) {
-		LinkedList<Location> points = getStartFinishIntermediatesPoints(params);
+		LinkedList<Location> points = getStartFinishIntermediatesPoints(params, "pnt");
 		List<Location> segments = new ArrayList<>();
 		Location lastAdded = null;
 		float speed = params.mode.getDefaultSpeed();
@@ -1238,7 +1247,7 @@ public class RouteProvider {
 			Location pl = points.peek();
 			if (lastAdded == null || lastAdded.distanceTo(pl) < MIN_STRAIGHT_DIST) {
 				lastAdded = points.poll();
-				if(lastAdded.getProvider().equals("pnt")) {
+				if(lastAdded != null && lastAdded.getProvider().equals("pnt")) {
 					RouteDirectionInfo previousInfo = new RouteDirectionInfo(speed, TurnType.straight());
 					previousInfo.routePointOffset = segments.size();
 					previousInfo.setDescriptionRoute(params.ctx.getString(R.string.route_head));

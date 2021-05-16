@@ -62,7 +62,7 @@ public class RouteCalculationResult {
 	protected List<LocationPoint> locationPoints = new ArrayList<LocationPoint>();
 	protected final List<WorldRegion> downloadMaps;
 
-	protected boolean isOnlineMapsNeeded;
+	protected boolean onlineCheckNeeded;
 
 	// params
 	protected final ApplicationMode appMode;
@@ -100,9 +100,9 @@ public class RouteCalculationResult {
 		this.routeVisibleAngle = 0;
 	}
 
-	public RouteCalculationResult(List<WorldRegion> suggestedOfflineMaps, boolean isOnlineMapsNeeded) {
+	public RouteCalculationResult(List<WorldRegion> suggestedOfflineMaps, boolean onlineCheckNeeded) {
 		this.downloadMaps = suggestedOfflineMaps;
-		this.isOnlineMapsNeeded = isOnlineMapsNeeded;
+		this.onlineCheckNeeded = onlineCheckNeeded;
 		this.errorMessage = null;
 		this.routingTime = 0;
 		this.loadedTiles = 0;
@@ -1317,7 +1317,7 @@ public class RouteCalculationResult {
 	}
 
 	public boolean isOnlineMapsNeeded() {
-		return isOnlineMapsNeeded;
+		return onlineCheckNeeded;
 	}
 
 	public static class NextDirectionInfo {

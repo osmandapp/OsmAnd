@@ -2,7 +2,9 @@ package net.osmand.plus.measurementtool;
 
 import android.util.Pair;
 
-import net.osmand.AndroidUtils;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
@@ -44,10 +46,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode.NEXT_SEGMENT;
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode.WHOLE_TRACK;
 import static net.osmand.plus.measurementtool.command.MeasurementModeCommand.MeasurementCommandType.APPROXIMATE_POINTS;
 
@@ -984,6 +982,11 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 
 			@Override
 			public void requestPrivateAccessRouting() {
+			}
+
+			@Override
+			public void updateMissingMaps() {
+
 			}
 
 			@Override

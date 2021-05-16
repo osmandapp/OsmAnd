@@ -35,10 +35,7 @@ class RouteRecalculationHelper {
 	private final Map<Future<?>, RouteRecalculationTask> tasksMap = new LinkedHashMap<>();
 	private RouteRecalculationTask lastTask;
 
-	public long getLastTimeEvaluatedRoute() {
-		return lastTimeEvaluatedRoute;
-	}
-
+	private long routeEvaluationStartTime = 0;
 	private long lastTimeEvaluatedRoute = 0;
 	private String lastRouteCalcError;
 	private String lastRouteCalcErrorShort;
@@ -269,6 +266,9 @@ class RouteRecalculationHelper {
 						if (calculationProgress.requestPrivateAccessRouting) {
 							progressRoute.requestPrivateAccessRouting();
 						}
+						if (routeEvaluationStartTime > params.startTimeRouteCalculation + 60000) {
+							progressRoute.updateMissingMaps();
+						}
 						progressRoute.finish();
 					}
 				}
@@ -390,6 +390,12 @@ class RouteRecalculationHelper {
 
 		public RouteRecalculationExecutor() {
 			super(1, 1, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>());
+		}
+
+		@Override
+		protected void beforeExecute(Thread thread, Runnable run){
+			super.beforeExecute(thread, run);
+			routeEvaluationStartTime = System.currentTimeMillis();
 		}
 
 		protected void afterExecute(Runnable r, Throwable t) {

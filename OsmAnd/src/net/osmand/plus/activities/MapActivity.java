@@ -587,6 +587,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 
 			@Override
+			public void updateMissingMaps() {
+
+			}
+
+			@Override
 			public void finish() {
 				mapRouteInfoMenu.routeCalculationFinished();
 				dashboardOnMap.routeCalculationFinished();

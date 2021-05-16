@@ -6,7 +6,9 @@ import net.osmand.data.LatLon;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.TargetPointsHelper;
+import net.osmand.plus.onlinerouting.EngineParameter;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
+import net.osmand.plus.onlinerouting.engine.EngineType;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.util.Algorithms;
@@ -15,12 +17,11 @@ import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 import static java.lang.Math.PI;
 import static java.lang.Math.asin;
@@ -34,7 +35,6 @@ public class SuggestedMapsProvider {
 
 	private static final int EARTH_RADIUS = 6371000;
 	private static final int MINIMAL_DISTANCE = 20000;
-	private static final String STANDARD_URL = "https://router.project-osrm.org/route/v1/";
 	public static TargetPointsHelper.TargetPoint start;
 	public static LatLon[] intermediates;
 	public static TargetPointsHelper.TargetPoint end;
@@ -70,15 +70,15 @@ public class SuggestedMapsProvider {
 		return new LatLon(toDegrees(latitudeResult), toDegrees(longitudeResult));
 	}
 
-	public static LinkedList<Location> getStartFinishIntermediatesPoints(RouteCalculationParams params) {
+	public static LinkedList<Location> getStartFinishIntermediatesPoints(RouteCalculationParams params, String locationProvider) {
 		LinkedList<Location> points = new LinkedList<>();
-		points.add(new Location("", params.start.getLatitude(), params.start.getLongitude()));
+		points.add(new Location(locationProvider, params.start.getLatitude(), params.start.getLongitude()));
 		if (params.intermediates != null) {
 			for (LatLon l : params.intermediates) {
-				points.add(new Location("", l.getLatitude(), l.getLongitude()));
+				points.add(new Location(locationProvider, l.getLatitude(), l.getLongitude()));
 			}
 		}
-		points.add(new Location("", params.end.getLatitude(), params.end.getLongitude()));
+		points.add(new Location(locationProvider, params.end.getLatitude(), params.end.getLongitude()));
 		return points;
 	}
 
@@ -88,7 +88,7 @@ public class SuggestedMapsProvider {
 		LinkedList<Location> routeLocation = new LinkedList<>();
 		OsmandApplication app = params.ctx;
 		OnlineRoutingHelper helper = app.getOnlineRoutingHelper();
-		LinkedList<Location> location = getStartFinishIntermediatesPoints(params);
+		LinkedList<Location> location = getStartFinishIntermediatesPoints(params, "");
 		for (Location e : location) {
 			points.add(new LatLon(e.getLongitude(), e.getLatitude()));
 		}
@@ -104,35 +104,40 @@ public class SuggestedMapsProvider {
 		return routeLocation;
 	}
 
+	public static OnlineRoutingEngine createInitStateEngine(RouteCalculationParams params) {
+		Map<String, String> paramsOnlineRouting = new HashMap<>();
+		paramsOnlineRouting.put(EngineParameter.VEHICLE_KEY.name(), params.mode.getRoutingProfile());
+		return EngineType.OSRM_TYPE.newInstance(paramsOnlineRouting);
+	}
+
 	public static List<WorldRegion> getSuggestedMaps(LinkedList<Location> points, OsmandApplication app) throws IOException {
-		List<WorldRegion> suggestedMaps = new ArrayList<>();
+		LinkedHashSet<WorldRegion> suggestedMaps = new LinkedHashSet<>();
 		for (int i = 0; i < points.size(); i++) {
 			final Location o = points.get(i);
 			LatLon latLonPoint = new LatLon(o.getLatitude(), o.getLongitude());
 			List<WorldRegion> downloadRegions = app.getRegions().getWorldRegionsAt(latLonPoint);
 
-			Collections.sort(downloadRegions, new Comparator<WorldRegion>() {
-				@Override
-				public int compare(WorldRegion o1, WorldRegion o2) {
-					return Boolean.compare(o2.containsRegion(o1), o1.containsRegion(o2));
-				}
-			});
-
+			List<Boolean> mapsDownloadedList = new ArrayList<>();
+			List<WorldRegion> maps = new ArrayList<>();
 			for (WorldRegion downloadRegion : downloadRegions) {
 				String mapName = downloadRegion.getRegionDownloadName();
-				String parentMapName = downloadRegion.getSuperregion().getRegionDownloadName();
+				String countryMapName = downloadRegion.getSuperregion().getRegionDownloadName();
 				boolean isSuggestedMapsNeeded = !checkIfObjectDownloaded(mapName, app);
-				if (isSuggestedMapsNeeded && !Algorithms.isEmpty(parentMapName)) {
-					suggestedMaps.add(downloadRegion);
-					break;
+				boolean isCountry = !Algorithms.isEmpty(countryMapName);
+				if (isSuggestedMapsNeeded) {
+					if (!isCountry) {
+						maps.add(downloadRegion);
+					}
+					mapsDownloadedList.add(true);
+				} else {
+					mapsDownloadedList.add(false);
 				}
+			}
+			if (!mapsDownloadedList.contains(false)) {
+				suggestedMaps.addAll(maps);
 			}
 		}
 
-		Set<WorldRegion> listWithoutDuplicates = new LinkedHashSet<>(suggestedMaps);
-		suggestedMaps.clear();
-		suggestedMaps.addAll(listWithoutDuplicates);
-
-		return suggestedMaps;
+		return new ArrayList<>(suggestedMaps);
 	}
 }

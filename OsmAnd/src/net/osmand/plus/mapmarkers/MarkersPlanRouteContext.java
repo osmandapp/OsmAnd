@@ -241,6 +241,11 @@ public class MarkersPlanRouteContext {
 			}
 
 			@Override
+			public void updateMissingMaps() {
+
+			}
+
+			@Override
 			public void finish() {
 				calculatedPairs = 0;
 			}
