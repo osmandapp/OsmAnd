@@ -607,12 +607,20 @@ public class RoutingContext {
 						}
 					}
 					if (pointIndex != -1) {
+						// set type "deleted" for old connected points
 						int tp = ro.region.findOrCreateRouteType(DirectionPoint.TAG, DirectionPoint.DELETE_TYPE);
 						np.connected.setPointTypes(pointIndex, new int[] { tp });
 					} else {
 						throw new RuntimeException();
 					}
 				}
+				for (int i = 0; i < ro.getPointsLength(); i++) {
+					if (ro.pointsX[i] == mprojx && ro.pointsY[i] == mprojy) {
+						mprojx++;// add +1 for avoid set type "deleted" for normal point
+						break;
+					}
+				}
+
 				np.connectedx = mprojx;
 				np.connectedy = mprojy;
 				ro.insert(indexToInsert, mprojx, mprojy);
