@@ -633,6 +633,23 @@ public class GPXUtilities {
 			return avgSpeed > 0;
 		}
 
+		public boolean isColorizationTypeAvailable(ColorizationType colorizationType) {
+			if (colorizationType == ColorizationType.SPEED) {
+				return isSpeedSpecified();
+			} else if (colorizationType == ColorizationType.ELEVATION || colorizationType == ColorizationType.SLOPE) {
+				if (!isElevationSpecified()) {
+					return false;
+				}
+				for (Elevation elevation : elevationData) {
+					if (Float.isNaN(elevation.elevation)) {
+						return false;
+					}
+				}
+				return true;
+			} else {
+				return true;
+			}
+		}
 
 		public static GPXTrackAnalysis segment(long filetimestamp, TrkSegment segment) {
 			return new GPXTrackAnalysis().prepareInformation(filetimestamp, new SplitSegment(segment));
