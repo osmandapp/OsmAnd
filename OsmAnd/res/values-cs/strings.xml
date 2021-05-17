@@ -4049,4 +4049,13 @@
     <string name="lost_data_warning">Všechna neuložená data budou ztracena.</string>
     <string name="show_start_dialog">Zobrazit úvodní okno</string>
     <string name="trip_recording_show_start_dialog_setting">Pokud je vypnuto, záznam začne hned po klepnutí na nástroj nebo položku v menu, přeskočí tedy potvrzovací okno.</string>
+    <string name="use_system_language">Použít jazyk systému</string>
+    <string name="shared_string_itinerary">Itinerář</string>
+    <string name="route_line_use_map_style_width">Použít výchozí šířku mapového stylu (%1$s).</string>
+    <string name="route_line_use_map_style_color">Použít výchozí barvu mapového stylu (%1$s).</string>
+    <string name="poi_routes">Trasy</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">Vyhnout se nízkoemisním zónám</string>
+    <string name="routing_attr_avoid_low_emission_zone_name">Vyhnout se nízkoemisním zónám</string>
+    <string name="search_more">Hledat další…</string>
+    <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
 </resources>
