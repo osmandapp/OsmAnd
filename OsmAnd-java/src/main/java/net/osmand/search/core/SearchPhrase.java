@@ -227,7 +227,9 @@ public class SearchPhrase {
 			String[] wrs = w.split(ALLDELIMITERS);
 			for (int i = 0; i < wrs.length; i++) {
 				String wd = wrs[i].trim();
-				ws.add(wd);
+				if (wd.length() > 0) {
+					ws.add(wd);
+				}
 			}
 		}
 		return ws;

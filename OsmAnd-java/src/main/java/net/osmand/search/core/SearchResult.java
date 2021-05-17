@@ -104,8 +104,12 @@ public class SearchResult {
 	}
 
 	private boolean allWordsMatched(List<String> localResultNames, List<String> searchPhraseNames) {
+		if (searchPhraseNames.size() == 0) {
+			return false;
+		}
 		int idxMatchedWord = -1;
 		for (String searchPhraseName : searchPhraseNames) {
+			
 			boolean wordMatched = false;
 			for (int i = idxMatchedWord + 1; i < localResultNames.size(); i++) {
 				int r = requiredSearchPhrase.getCollator().compare(searchPhraseName, localResultNames.get(i));
@@ -127,7 +131,7 @@ public class SearchResult {
 
 		String fw = requiredSearchPhrase.getFirstUnknownSearchWord();
 		List<String> ow = requiredSearchPhrase.getUnknownSearchWords();
-		if (fw != null) {
+		if (fw != null && fw.length() > 0) {
 			searchPhraseNames.add(fw);
 		}
 		if (ow != null) {
