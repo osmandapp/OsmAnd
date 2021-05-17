@@ -4104,4 +4104,9 @@
     <string name="route_line_use_gradient_coloring">קו המסלול ייצבע לפי תלילות המדרון.</string>
     <string name="language_description">נא לבחור את השפה והסוג של ההנחיה הקולית.</string>
     <string name="tts_description">טקסט לדיבור (TTS) יכול לבטא את כל סוגי ההנחיות: שמות רחובות, הוראות סיבוב, שמות נקודות עניין וכו׳.</string>
+    <string name="route_line_use_map_style_width">להשתמש בעובי בררת מחדל של סגנון המפה (%1$s).</string>
+    <string name="route_line_use_map_style_color">להשתמש בצבע בררת מחדל של סגנון המפה (%1$s).</string>
+    <string name="poi_routes">מסלולים</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">להימנע מאזורים עם פליטה נמוכה</string>
+    <string name="routing_attr_avoid_low_emission_zone_name">להימנע מאזורים עם פליטה נמוכה</string>
 </resources>

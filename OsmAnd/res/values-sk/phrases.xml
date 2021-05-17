@@ -3740,4 +3740,23 @@
     <string name="poi_geodesist">Geodet</string>
     <string name="poi_conference_centre">Konferenčné centrum</string>
     <string name="poi_couloir">Horský žľab</string>
+    <string name="poi_biathlon">Biatlon</string>
+    <string name="poi_aikido">Aikido</string>
+    <string name="poi_water_ski">Vodné lyžovanie</string>
+    <string name="poi_water_polo">Vodné pólo</string>
+    <string name="poi_zurkhaneh_sport">Iránsky wrestling</string>
+    <string name="poi_wrestling">Wrestling</string>
+    <string name="poi_weightlifting">Vzpieranie</string>
+    <string name="poi_wakeboarding">Wakeboarding</string>
+    <string name="poi_ultimate">Lietajúci tanier</string>
+    <string name="poi_taekwondo">Taekwondo</string>
+    <string name="poi_table_soccer">Stolný futbal</string>
+    <string name="poi_sumo">Sumo</string>
+    <string name="poi_speedway">Oválna závodná dráha motošportu</string>
+    <string name="poi_snooker">Snooker</string>
+    <string name="poi_shot_put">Vrh guľou</string>
+    <string name="poi_pilates">Pilates</string>
+    <string name="poi_jiu_jitsu">Jiu-jitsu</string>
+    <string name="poi_karate">Karate</string>
+    <string name="poi_camp_pitch">Miesto na stan</string>
 </resources>

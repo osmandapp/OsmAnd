@@ -4099,4 +4099,9 @@
     <string name="recorded_description">Записаний голос звучить краще, але може вимовляти лише попередньо записані фрази: вмикати настанови. Не може оголошувати назви вулиць або цікавих об\'єктів (POI).</string>
     <string name="use_system_language">Використовувати мову системи</string>
     <string name="shared_string_itinerary">Путівник</string>
+    <string name="route_line_use_map_style_width">Застосовувати типову ширину стилю мапи (%1$s).</string>
+    <string name="route_line_use_map_style_color">Застосовувати типовий колір стилю мапи (%1$s).</string>
+    <string name="poi_routes">Маршрути</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">Уникати зон з вимогою низького рівня викидів</string>
+    <string name="routing_attr_avoid_low_emission_zone_name">Уникати зон з вимогою низького рівня викидів</string>
 </resources>

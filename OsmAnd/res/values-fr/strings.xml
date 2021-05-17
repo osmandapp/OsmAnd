@@ -4091,4 +4091,9 @@
     <string name="tts_description">La synthèse vocale (Text-To-Speech ou TTS) peut prononcer tous types d\'instructions : nom de rue, bifurcation, nom de PI, etc.</string>
     <string name="tts_title">TTS</string>
     <string name="shared_string_itinerary">Itinéraire</string>
+    <string name="route_line_use_map_style_width">Utiliser la largeur par défaut du style de carte (%1$s).</string>
+    <string name="route_line_use_map_style_color">Utiliser la couleur par défaut du style de carte (%1$s).</string>
+    <string name="routing_attr_avoid_low_emission_zone_name">Éviter les zones à faibles émissions</string>
+    <string name="poi_routes">Routes</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">Éviter les zones à faibles émissions</string>
 </resources>

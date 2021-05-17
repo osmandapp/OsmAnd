@@ -3942,4 +3942,24 @@
     <string name="poi_planetarium">Astrokinejo</string>
     <string name="poi_service_vehicle_rental_yes">Prunto de aŭtomobiloj</string>
     <string name="poi_service_vehicle_inspection_yes">Kontrolo de aŭtomobiloj</string>
+    <string name="poi_ultralight_aviation">Ultramalpeza aviado</string>
+    <string name="poi_operator_type_cooperative">Speco de administranto: aŭtonoma organizaĵo</string>
+    <string name="poi_operator_type_religious">Speco de administranto: religia organizaĵo</string>
+    <string name="poi_operator_type_government">Speco de administranto: registara organizaĵo</string>
+    <string name="poi_operator_type_consortium">Speco de administranto: asocio</string>
+    <string name="poi_operator_type_community">Speco de administranto: komunumo</string>
+    <string name="poi_operator_type_ngo">Speco de administranto: neregistara organizaĵo</string>
+    <string name="poi_glacier_status_oscillating">Stato de glacirivero: oscilanta</string>
+    <string name="poi_glacier_status_marked_retreat">Stato de glacirivero: signife malaperanta</string>
+    <string name="poi_glacier_status_retreat">Stato de glacirivero: malaperanta</string>
+    <string name="poi_glacier_edge_calving_line">Rando de glacibreto: naska linio</string>
+    <string name="poi_glacier_edge_grounding_line">Rando de glacibreto: grunda linio</string>
+    <string name="poi_glacier_debris_cover_scarce">Ŝtonkovraĵo: preskaŭ nenia</string>
+    <string name="poi_glacier_debris_cover_partial">Ŝtonkovraĵo: parta</string>
+    <string name="poi_glacier_debris_cover_none">Ŝtonkovraĵo: nenia</string>
+    <string name="poi_fruit">Frukto(j)</string>
+    <string name="poi_shrub">Arbusto</string>
+    <string name="poi_dune">Duno</string>
+    <string name="poi_operator_type_private">Speco de administranto: privata</string>
+    <string name="poi_operator_type_public">Speco de administranto: publika</string>
 </resources>

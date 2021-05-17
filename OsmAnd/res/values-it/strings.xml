@@ -4026,7 +4026,7 @@
     <string name="copy_poi_name">Copia il nome del PDI</string>
     <string name="quick_action_show_hide_title">Mostra/nascondi</string>
     <string name="shared_string_interval">Intervallo</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Nascondi i confini delle riserve naturali, delle aree protette e dei parchi naturali</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Nascondi i confini delle riserve naturali, delle aree protette e dei parchi naturali.</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">Confini naturali</string>
     <string name="track_has_no_altitude">La traccia non contiene i dati di altitudine.</string>
     <string name="track_has_no_speed">La traccia non contiene i dati di velocità.</string>
@@ -4035,8 +4035,8 @@
     <string name="trip_recording_save_and_continue">Salva e continua</string>
     <string name="lost_data_warning">Tutti i dati non salvati andranno persi.</string>
     <string name="show_start_dialog">Mostra la finestra di avvio</string>
-    <string name="trip_recording_show_start_dialog_setting">Se disabilitato, la registrazione inizierà appena tappato sul widget o sul menu, saltando la finestra di conferma.</string>
-    <string name="specify_color_for_map_mode">Specifica il colore per il tipo di mappa: %1$s.</string>
+    <string name="trip_recording_show_start_dialog_setting">Se disabilitato, la registrazione inizierà appena premuto sul widget o sul menu, saltando la finestra di conferma.</string>
+    <string name="specify_color_for_map_mode">Specifica il colore per il tipo di mappa %1$s.</string>
     <string name="new_device_account">Nuovo dispositivo / nuovo account</string>
     <string name="contact_support_description">Se hai delle domande, per favore contattaci al %1$s.</string>
     <string name="next_billing_date">Nuova data di addebito: %1$s</string>
@@ -4045,13 +4045,13 @@
 \n
 \n• Panoramica pianificazione percorso: aggiunte schede per passare da punti a grafici
 \n
-\n• Aggiornamenti OsmAnd Live spostati in \"Scarica mappe&gt; Aggiornabili\"
+\n• Aggiornamenti OsmAnd Live spostati in \"Scarica mappe &gt; Aggiornabili\"
 \n
 \n• Le tracce adesso possono essere colorate in base all\'altitudine, velocità o pendenza
 \n
-\n• Aggiunta l\'opzione per cambiare l\'aspetto della line del percorso di navigazione
+\n• Aggiunta l\'opzione per cambiare l\'aspetto della linea del percorso di navigazione
 \n
-\n• Aggiornato la finestra di dialogo \"Registra il percorso\"
+\n• Aggiornata la finestra di dialogo \"Registra il percorso\"
 \n
 \n</string>
     <string name="routing_attr_allow_streams_description">Permetti ruscelli e scoli</string>
@@ -4060,7 +4060,7 @@
     <string name="customize_route_line">Personalizza la linea del percorso</string>
     <string name="shared_string_route_line">Linea del percorso</string>
     <string name="no_purchases">Non hai alcun acquisto</string>
-    <string name="empty_purchases_description">Se l\'acquisto non viene visualizzato qui, tappa su “%1$s”, o contatta il supporto.</string>
+    <string name="empty_purchases_description">Se l\'acquisto non viene visualizzato qui, premi su “%1$s”, o contatta il supporto.</string>
     <string name="contact_support">Contatta il supporto</string>
     <string name="troubleshooting">Risoluzione dei problemi</string>
     <string name="troubleshooting_description">Per problemi con gli acquisti per favore segui il link.</string>
@@ -4082,8 +4082,19 @@
     <string name="shared_string_feet">piedi</string>
     <string name="srtm_unit_format">Unità di misura delle linee di contorno</string>
     <string name="srtm_download_list_help_message">OsmAnd fornisce i dati delle curve di livello in metri e in piedi. Dovrai scaricare di nuovo il file per cambiarne il formato.</string>
-    <string name="srtm_download_single_help_message">Selezionare il formato necessario. Sarà necessario scaricare di nuovo il file per modificarne il formato.</string>
-    <string name="route_line_use_gradient_coloring">La linea del percorso sarà colorata a seconda del profilo altimetrico del percorso.</string>
+    <string name="srtm_download_single_help_message">Selezionare la variante. Sarà necessario scaricare di nuovo il file per modificarne il formato.</string>
+    <string name="route_line_use_gradient_coloring">La linea del percorso sarà colorata a seconda della pendenza.</string>
     <string name="shared_string_min_height">Altezza min</string>
     <string name="shared_string_max_height">Altezza max</string>
+    <string name="routing_attr_avoid_low_emission_zone_name">Evita le zone a basse emissioni</string>
+    <string name="language_description">Seleziona la lingua preferita e il tipo di istruzioni vocali.</string>
+    <string name="tts_description">La sintesi vocale (Text-to-Speech o TTS) può pronunciare tutti i tipi di istruzioni: nomi delle strade, biforcazioni, nome dei PDI etc.</string>
+    <string name="tts_title">TTS</string>
+    <string name="recorded_description">Una voce registrata suona più naturale, ma può pronunciare solo frasi preregistrate, come ad esempio le biforcazioni. Non può pronunciare i nomi delle strade o dei PDI.</string>
+    <string name="use_system_language">Utilizza la lingua di sistema</string>
+    <string name="route_line_use_map_style_color">Utilizza il colore predefinito dello stile della mappa (%1$s).</string>
+    <string name="route_line_use_map_style_width">Utilizza la larghezza predefinita dello stile della mappa (%1$s).</string>
+    <string name="shared_string_itinerary">Itinerario</string>
+    <string name="poi_routes">Percorsi</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">Evita le zone a basse emissioni</string>
 </resources>

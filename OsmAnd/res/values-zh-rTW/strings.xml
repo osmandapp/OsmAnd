@@ -4094,4 +4094,9 @@
     <string name="recorded_description">錄製的聲音聽起來更好，但只能說出預先錄製的片段：轉彎指示。無法說出街道名稱或 POI 名稱。</string>
     <string name="use_system_language">使用系統語言</string>
     <string name="shared_string_itinerary">行程</string>
+    <string name="route_line_use_map_style_width">使用地圖樣式 (%1$s) 預設寬度。</string>
+    <string name="route_line_use_map_style_color">使用地圖樣式 (%1$s) 預設色彩。</string>
+    <string name="poi_routes">路線</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">避免低排放區域</string>
+    <string name="routing_attr_avoid_low_emission_zone_name">避免低排放區域</string>
 </resources>

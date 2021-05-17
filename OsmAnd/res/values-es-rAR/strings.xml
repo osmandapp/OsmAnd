@@ -84,7 +84,7 @@
     <string name="shared_string_clear_all">Limpiar todo</string>
     <string name="shared_string_save">Guardar</string>
     <string name="shared_string_rename">Renombrar</string>
-    <string name="shared_string_delete">Borrar.</string>
+    <string name="shared_string_delete">Borrar</string>
     <string name="shared_string_delete_all">Borrar todo</string>
     <string name="shared_string_share">Compartir</string>
     <string name="shared_string_apply">Aplicar</string>
@@ -4008,12 +4008,12 @@
     <string name="map_widget_distance_by_tap">Distancia al pulsar</string>
     <string name="quick_action_show_hide_title">Mostrar/Ocultar</string>
     <string name="select_segments">Elegir segmentos</string>
-    <string name="select_segments_description">«%1$s» contiene más de un segmento, define la parte para la navegación.</string>
+    <string name="select_segments_description">«%1$s» contiene más de un segmento, define el tramo para la navegación.</string>
     <string name="segments_count">Segmento %1$d</string>
     <string name="temporary_conditional_routing_descr">Usar las restricciones viales que están activas ahora en el mapa</string>
     <string name="routing_attr_short_way_description">Ruta optimizada más corta (bajo consumo)</string>
     <string name="routing_attr_driving_style_description">Elige el propósito de la conducción para obtener la ruta más corta, más rápida o más segura</string>
-    <string name="snap_to_road_descr">El icono de la ubicación actual se ajustará a la ruta de navegación actual</string>
+    <string name="snap_to_road_descr">El icono de la ubicación actual será ajustado a la ruta de navegación</string>
     <string name="map_orientation_threshold_descr">No girar la vista del mapa si la velocidad es inferior a un umbral</string>
     <string name="restart">Reiniciar</string>
     <string name="shared_strings_all_regions">Todas las regiones</string>
@@ -4097,9 +4097,14 @@
     <string name="shared_string_max_height">Altura máx.</string>
     <string name="shared_string_min_height">Altura mín.</string>
     <string name="language_description">Marca el idioma preferido y el tipo de indicaciones por voz.</string>
-    <string name="tts_description">El sistema de texto a voz (TTS) puede pronunciar todo tipo de avisos: nombres de calles, indicaciones de giro, nombres de PDI, etc.</string>
+    <string name="tts_description">El sistema de texto a voz (TTS) puede pronunciar todo tipo de avisos: nombres de calles y PDI, indicaciones de giro, etc.</string>
     <string name="tts_title">TTS</string>
     <string name="recorded_description">La voz grabada suena mejor, pero sólo puede pronunciar frases pregrabadas: indicaciones de giro. No puede anunciar los nombres de las calles o de los PDI.</string>
     <string name="use_system_language">Usar idioma del sistema</string>
     <string name="shared_string_itinerary">Itinerario</string>
+    <string name="route_line_use_map_style_width">Usa el ancho predefinido del estilo de mapa (%1$s).</string>
+    <string name="route_line_use_map_style_color">Usa el color predefinido del estilo de mapa (%1$s).</string>
+    <string name="poi_routes">Rutas</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">Evita las zonas de baja emisión o zonas urbanas de atmósfera protegida</string>
+    <string name="routing_attr_avoid_low_emission_zone_name">Evitar zonas de baja emisión</string>
 </resources>

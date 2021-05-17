@@ -58,6 +58,7 @@ public class Algorithms {
 	public static final int BZIP_FILE_SIGNATURE = 0x425a;
 	public static final int GZIP_FILE_SIGNATURE = 0x1f8b;
 
+
 	public static String normalizeSearchText(String s) {
 		boolean norm = false;
 		for (int i = 0; i < s.length() && !norm; i++) {
@@ -323,18 +324,15 @@ public class Algorithms {
 		return "";
 	}
 
-	public static int findFirstNumberEndIndex(String value) {
+	public static int findFirstNumberEndIndexLegacy(String value) {
+		// keep this method unmodified ! (to check old clients crashes on server side)
 		int i = 0;
 		boolean valid = false;
 		if (value.length() > 0 && value.charAt(0) == '-') {
 			i++;
 		}
-		boolean dotfound = false;
-		while (i < value.length() && 
-				(isDigit(value.charAt(i)) || (value.charAt(i) == '.') && !dotfound)) {
-			if (value.charAt(i) == '.') {
-				dotfound = true;
-			}
+		while (i < value.length() &&
+				(isDigit(value.charAt(i)) || value.charAt(i) == '.')) {
 			i++;
 			valid = true;
 		}
@@ -343,6 +341,43 @@ public class Algorithms {
 		} else {
 			return -1;
 		}
+	}
+
+	public static int findFirstNumberEndIndex(String value) {
+		int i = 0;
+		if (value.length() > 0 && value.charAt(0) == '-') {
+			i++;
+		}
+		int state = 0; // 0 - no number, 1 - 1st digits, 2 - dot, 3 - last digits
+		while (i < value.length() && (isDigit(value.charAt(i)) || (value.charAt(i) == '.'))) {
+			if (value.charAt(i) == '.') {
+				if (state == 2) {
+					return i - 1;
+				}
+				if (state != 1) {
+					return -1;
+				}
+				state = 2;
+			} else {
+				if (state == 2) {
+					// last digits 
+					state = 3;
+				} else if (state == 0) {
+					// first digits started
+					state = 1;
+				}
+
+			}
+			i++;
+		}
+		if (state == 2) {
+			// invalid number like 40. correct to -> '40'
+			return i - 1;
+		}
+		if (state == 0) {
+			return -1;
+		}
+		return i;
 	}
 
 	public static boolean isDigit(char charAt) {

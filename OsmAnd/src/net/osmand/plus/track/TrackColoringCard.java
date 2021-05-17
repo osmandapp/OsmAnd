@@ -84,12 +84,12 @@ public class TrackColoringCard extends BaseCard {
 		items.add(new TrackAppearanceItem(SOLID_COLOR, app.getString(R.string.track_coloring_solid), R.drawable.ic_action_circle, true));
 		for (GradientScaleType scaleType : GradientScaleType.values()) {
 			items.add(new TrackAppearanceItem(scaleType.getTypeName(),
-					scaleType.getHumanString(app), scaleType.getIconId(), isScaleTypeActive(scaleType)));
+					scaleType.getHumanString(app), scaleType.getIconId(), isScaleTypeAvailable(gpxTrackAnalysis, scaleType)));
 		}
 		return items;
 	}
 
-	private boolean isScaleTypeActive(GradientScaleType scaleType) {
+	public static boolean isScaleTypeAvailable(@NonNull GPXTrackAnalysis gpxTrackAnalysis, @NonNull GradientScaleType scaleType) {
 		if (scaleType == GradientScaleType.SPEED) {
 			return gpxTrackAnalysis.isSpeedSpecified();
 		} else {
