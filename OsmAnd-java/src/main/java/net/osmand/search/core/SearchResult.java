@@ -63,22 +63,15 @@ public class SearchResult {
 
 	private double getSumPhraseMatchWeight() {
 		// if result is a complete match in the search we prioritize it higher
-		List<String> names = new ArrayList<>();
-		if(otherNames == null){
-			names.add(localeName);
-		} else {
-			names.add(localeName);
-			names.addAll(otherNames);
-		}
-
-		boolean allWordsMatched = true;
-		List<String> localResultNames = new ArrayList<>();
-		for (String name : names) {
-			SearchPhrase.splitWords(name, localResultNames);
-			if (names.indexOf(name) == 0 || !allWordsMatched) {
-				allWordsMatched = isWordMatched(localResultNames);
+		List<String> searchPhraseNames = getSearchPhraseNames();
+		boolean allWordsMatched = allWordsMatched(SearchPhrase.splitWords(localeName, new ArrayList<>()), searchPhraseNames);
+		if (otherNames != null && !allWordsMatched) {
+			for (String otherName : otherNames) {
+				allWordsMatched = allWordsMatched(SearchPhrase.splitWords(otherName, new ArrayList<>()), searchPhraseNames);
+				if (allWordsMatched) {
+					break;
+				}
 			}
-			localResultNames.clear();
 		}
 		if (objectType == ObjectType.POI_TYPE) {
 			allWordsMatched = false;
@@ -110,8 +103,7 @@ public class SearchResult {
 		return inc;
 	}
 
-	private boolean isWordMatched(List<String> localResultNames) {
-		List<String> searchPhraseNames = getSearchPhraseNames();
+	private boolean allWordsMatched(List<String> localResultNames, List<String> searchPhraseNames) {
 		int idxMatchedWord = -1;
 		for (String searchPhraseName : searchPhraseNames) {
 			boolean wordMatched = false;
