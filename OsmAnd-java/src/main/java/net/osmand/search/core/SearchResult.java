@@ -64,10 +64,10 @@ public class SearchResult {
 	private double getSumPhraseMatchWeight() {
 		// if result is a complete match in the search we prioritize it higher
 		List<String> searchPhraseNames = getSearchPhraseNames();
-		boolean allWordsMatched = allWordsMatched(SearchPhrase.splitWords(localeName, new ArrayList<>()), searchPhraseNames);
+		boolean allWordsMatched = allWordsMatched(SearchPhrase.splitWords(localeName, new ArrayList<String>()), searchPhraseNames);
 		if (otherNames != null && !allWordsMatched) {
 			for (String otherName : otherNames) {
-				allWordsMatched = allWordsMatched(SearchPhrase.splitWords(otherName, new ArrayList<>()), searchPhraseNames);
+				allWordsMatched = allWordsMatched(SearchPhrase.splitWords(otherName, new ArrayList<String>()), searchPhraseNames);
 				if (allWordsMatched) {
 					break;
 				}
