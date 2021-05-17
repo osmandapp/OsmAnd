@@ -210,19 +210,18 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	}
 
 	/**
-	 * @return warnings, filenames
+	 * @return warnings, files
 	 */
 	public synchronized SaveGpxResult saveDataToGpx(File dir) {
 		List<String> warnings = new ArrayList<>();
-		List<String> filenames = new ArrayList<>();
-		Map<String, GPXFile> data = new LinkedHashMap<>();
+		Map<String, GPXFile> files = new LinkedHashMap<>();
 		dir.mkdirs();
 		if (dir.getParentFile().canWrite()) {
 			if (dir.exists()) {
-				data = collectRecordedData();
+				files = collectRecordedData();
 
 				// save file
-				for (final Map.Entry<String, GPXFile> entry : data.entrySet()) {
+				for (final Map.Entry<String, GPXFile> entry : files.entrySet()) {
 					final String f = entry.getKey();
 					GPXFile gpx = entry.getValue();
 					log.debug("Filename: " + f);
@@ -243,7 +242,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 								fileName = dateDirName + File.separator + fileName;
 							}
 						}
-						filenames.add(fileName);
+						files.put(fileName, gpx);
 						fout = new File(dir, fileName + IndexConstants.GPX_FILE_EXT);
 						int ind = 1;
 						while (fout.exists()) {
@@ -254,7 +253,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 					Exception warn = GPXUtilities.writeGpxFile(fout, gpx);
 					if (warn != null) {
 						warnings.add(warn.getMessage());
-						return new SaveGpxResult(warnings, new ArrayList<String>(), new LinkedHashMap<>());
+						return new SaveGpxResult(warnings, new LinkedHashMap<>());
 					}
 
 					GPXTrackAnalysis analysis = gpx.getAnalysis(fout.lastModified());
@@ -264,8 +263,8 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 				}
 			}
 		}
-		clearRecordedData(warnings.isEmpty());
-		return new SaveGpxResult(warnings, filenames, data);
+		clearRecordedData(true);
+		return new SaveGpxResult(warnings, files);
 	}
 
 	public void clearRecordedData(boolean isWarningEmpty) {
@@ -756,28 +755,22 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		return currentTrack;
 	}
 
-	public class SaveGpxResult {
+	public static class SaveGpxResult {
 
-		public SaveGpxResult(List<String> warnings, List<String> filenames, Map<String, GPXFile> data) {
+		public SaveGpxResult(List<String> warnings, Map<String, GPXFile> files) {
 			this.warnings = warnings;
-			this.filenames = filenames;
-			this.data = data;
+			this.files = files;
 		}
 
 		List<String> warnings;
-		List<String> filenames;
-		Map<String, GPXFile> data;
+		Map<String, GPXFile> files;
 
 		public List<String> getWarnings() {
 			return warnings;
 		}
 
-		public List<String> getFilenames() {
-			return filenames;
-		}
-
-		public Map<String, GPXFile> getData() {
-			return data;
+		public Map<String, GPXFile> getFiles() {
+			return files;
 		}
 	}
 

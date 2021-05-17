@@ -492,17 +492,17 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				File file = null;
 				File dir = app.getAppCustomization().getTracksDir();
 				File[] children = dir.listFiles();
-				if (children != null && !Algorithms.isEmpty(result.getFilenames())) {
+				if (children != null && !Algorithms.isEmpty(result.getFiles())) {
 					SavingTrackHelper helper = app.getSavingTrackHelper();
 					for (File child : children) {
-						if (child.getName().startsWith(result.getFilenames().get(0))
+						if (child.getName().startsWith(result.getFiles().keySet().iterator().next())
 								&& child.lastModified() == helper.getLastTimeFileSaved()) {
 							file = child;
 						}
 					}
 				}
 				if (file != null && file.exists() && file.length() > 0) {
-					boolean isTrackEmpty = !result.getData().values().iterator().next().hasTrkPt();
+					boolean isTrackEmpty = !result.getFiles().values().iterator().next().hasTrkPt();
 					if (!isTrackEmpty) {
 						if (!openTrack) {
 							if (activityRef != null) {
