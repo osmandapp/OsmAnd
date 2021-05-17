@@ -4096,4 +4096,6 @@
     <string name="routing_attr_avoid_low_emission_zone_name">Éviter les zones à faibles émissions</string>
     <string name="poi_routes">Routes</string>
     <string name="routing_attr_avoid_low_emission_zone_description">Éviter les zones à faibles émissions</string>
+    <string name="search_more">Rechercher plus …</string>
+    <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
 </resources>
