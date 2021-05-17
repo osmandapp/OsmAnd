@@ -80,7 +80,7 @@ public class OsmLiveActivity extends AbstractDownloadActivity implements ChooseP
 	protected void onResume() {
 		super.onResume();
 		if (!InAppPurchaseHelper.isSubscribedToLiveUpdates(getMyApplication()) && showSettingOnly) {
-			ChoosePlanDialogFragment.showDialogInstance(getMyApplication(), getSupportFragmentManager(), ChoosePlanDialogType.OSM_LIVE);
+			ChoosePlanDialogFragment.showDialogInstance(getMyApplication(), getSupportFragmentManager(), ChoosePlanDialogType.SUBSCRIPTION);
 		}
 	}
 

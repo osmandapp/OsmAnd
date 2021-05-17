@@ -750,8 +750,10 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				} else if (!mapView.getLayers().contains(audioNotesLayer)) {
 					mapView.addLayer(audioNotesLayer, 3.5f);
 				}
+				mapView.refreshMap();
 			} else if (audioNotesLayer != null) {
 				mapView.removeLayer(audioNotesLayer);
+				mapView.refreshMap();
 			}
 			if (recordControl == null) {
 				registerWidget(activity);
@@ -759,6 +761,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		} else {
 			if (audioNotesLayer != null) {
 				mapView.removeLayer(audioNotesLayer);
+				mapView.refreshMap();
 				audioNotesLayer = null;
 			}
 			MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();

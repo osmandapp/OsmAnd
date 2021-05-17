@@ -1,15 +1,16 @@
 package net.osmand.plus.routing;
 
+import android.graphics.Rect;
 import android.os.Bundle;
+
+import net.osmand.plus.track.GradientScaleType;
+import net.osmand.util.Algorithms;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.track.GradientScaleType;
-import net.osmand.util.Algorithms;
-
-public class RouteLineDrawInfo {
+public class PreviewRouteLineInfo {
 
 	private static final String LINE_COLOR_DAY = "line_color_day";
 	private static final String LINE_COLOR_NIGHT = "line_color_night";
@@ -17,6 +18,7 @@ public class RouteLineDrawInfo {
 	private static final String LINE_WIDTH = "line_width";
 	private static final String NAVIGATION_ICON_ID = "navigation_icon_id";
 	private static final String NAVIGATION_ICON_COLOR = "navigation_icon_color";
+	private static final String LINE_BOUNDS = "line_bounds";
 	private static final String CENTER_X = "center_x";
 	private static final String CENTER_Y = "center_y";
 	private static final String SCREEN_HEIGHT = "screen_height";
@@ -33,32 +35,34 @@ public class RouteLineDrawInfo {
 	@ColorInt
 	private int iconColor;
 	private int iconId;
+	private Rect lineBounds;
 	private int centerX;
 	private int centerY;
 	private int screenHeight;
 	private boolean useDefaultColor;
 
-	public RouteLineDrawInfo(@Nullable @ColorInt Integer colorDay,
-	                         @Nullable @ColorInt Integer colorNight,
-							 @Nullable GradientScaleType gradientScaleType,
-	                         @Nullable String width) {
+	public PreviewRouteLineInfo(@Nullable @ColorInt Integer colorDay,
+								@Nullable @ColorInt Integer colorNight,
+								@Nullable GradientScaleType gradientScaleType,
+								@Nullable String width) {
 		this.colorDay = colorDay;
 		this.colorNight = colorNight;
 		this.scaleType = gradientScaleType;
 		this.width = width;
 	}
 
-	public RouteLineDrawInfo(@NonNull Bundle bundle) {
+	public PreviewRouteLineInfo(@NonNull Bundle bundle) {
 		readBundle(bundle);
 	}
 
-	public RouteLineDrawInfo(@NonNull RouteLineDrawInfo existed) {
+	public PreviewRouteLineInfo(@NonNull PreviewRouteLineInfo existed) {
 		this.colorDay = existed.colorDay;
 		this.colorNight = existed.colorNight;
 		this.scaleType = existed.scaleType;
 		this.width = existed.width;
 		this.iconId = existed.iconId;
 		this.iconColor = existed.iconColor;
+		this.lineBounds = existed.lineBounds;
 		this.centerX = existed.centerX;
 		this.centerY = existed.centerY;
 		this.screenHeight = existed.screenHeight;
@@ -91,6 +95,10 @@ public class RouteLineDrawInfo {
 
 	public void setIconColor(int iconColor) {
 		this.iconColor = iconColor;
+	}
+
+	public void setLineBounds(Rect lineBounds) {
+		this.lineBounds = lineBounds;
 	}
 
 	public void setCenterX(int centerX) {
@@ -137,6 +145,10 @@ public class RouteLineDrawInfo {
 		return iconColor;
 	}
 
+	public Rect getLineBounds() {
+		return lineBounds;
+	}
+
 	public int getCenterX() {
 		return centerX;
 	}
@@ -165,6 +177,7 @@ public class RouteLineDrawInfo {
 		width = bundle.getString(LINE_WIDTH);
 		iconId = bundle.getInt(NAVIGATION_ICON_ID);
 		iconColor = bundle.getInt(NAVIGATION_ICON_COLOR);
+		lineBounds = (Rect) bundle.getParcelable(LINE_BOUNDS);
 		centerX = bundle.getInt(CENTER_X);
 		centerY = bundle.getInt(CENTER_Y);
 		screenHeight = bundle.getInt(SCREEN_HEIGHT);
@@ -186,6 +199,7 @@ public class RouteLineDrawInfo {
 		}
 		bundle.putInt(NAVIGATION_ICON_ID, iconId);
 		bundle.putInt(NAVIGATION_ICON_COLOR, iconColor);
+		bundle.putParcelable(LINE_BOUNDS, lineBounds);
 		bundle.putInt(CENTER_X, centerX);
 		bundle.putInt(CENTER_Y, centerY);
 		bundle.putInt(SCREEN_HEIGHT, screenHeight);
@@ -195,9 +209,9 @@ public class RouteLineDrawInfo {
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
-		if (!(o instanceof RouteLineDrawInfo)) return false;
+		if (!(o instanceof PreviewRouteLineInfo)) return false;
 
-		RouteLineDrawInfo that = (RouteLineDrawInfo) o;
+		PreviewRouteLineInfo that = (PreviewRouteLineInfo) o;
 
 		if (!Algorithms.objectEquals(getColor(false), that.getColor(false))) return false;
 		if (!Algorithms.objectEquals(getColor(true), that.getColor(true))) return false;

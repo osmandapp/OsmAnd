@@ -26,7 +26,7 @@ import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.enums.DayNightMode;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
-import net.osmand.plus.routing.RouteLineDrawInfo;
+import net.osmand.plus.routing.PreviewRouteLineInfo;
 import net.osmand.plus.settings.backend.ListStringPreference;
 import net.osmand.plus.settings.fragments.HeaderInfo;
 import net.osmand.plus.settings.fragments.HeaderUiAdapter;
@@ -62,7 +62,7 @@ public class RouteLineColorCard extends BaseCard implements CardListener, ColorP
 	private ViewGroup cardsContainer;
 
 	private ColorMode selectedMode;
-	private RouteLineDrawInfo routeLineDrawInfo;
+	private PreviewRouteLineInfo previewRouteLineInfo;
 	private DayNightMode initMapTheme;
 	private DayNightMode selectedMapTheme;
 
@@ -83,13 +83,13 @@ public class RouteLineColorCard extends BaseCard implements CardListener, ColorP
 
 	public RouteLineColorCard(@NonNull MapActivity mapActivity,
 	                          @NonNull Fragment targetFragment,
-	                          @NonNull RouteLineDrawInfo routeLineDrawInfo,
+	                          @NonNull PreviewRouteLineInfo previewRouteLineInfo,
 	                          @NonNull DayNightMode initMapTheme,
 	                          @NonNull DayNightMode selectedMapTheme,
 	                          @NonNull HeaderUiAdapter headerUiAdapter) {
 		super(mapActivity);
 		this.targetFragment = targetFragment;
-		this.routeLineDrawInfo = routeLineDrawInfo;
+		this.previewRouteLineInfo = previewRouteLineInfo;
 		this.initMapTheme = initMapTheme;
 		this.selectedMapTheme = selectedMapTheme;
 		this.headerUiAdapter = headerUiAdapter;
@@ -120,9 +120,9 @@ public class RouteLineColorCard extends BaseCard implements CardListener, ColorP
 	}
 
 	private void initSelectedMode() {
-		if (routeLineDrawInfo.getGradientScaleType() == GradientScaleType.ALTITUDE) {
+		if (previewRouteLineInfo.getGradientScaleType() == GradientScaleType.ALTITUDE) {
 			selectedMode = ColorMode.ALTITUDE;
-		} else if (routeLineDrawInfo.getGradientScaleType() == GradientScaleType.SLOPE) {
+		} else if (previewRouteLineInfo.getGradientScaleType() == GradientScaleType.SLOPE) {
 			selectedMode = ColorMode.SLOPE;
 		} else {
 			selectedMode = getRouteLineColor() == null ? ColorMode.DEFAULT : ColorMode.CUSTOM;
@@ -135,22 +135,22 @@ public class RouteLineColorCard extends BaseCard implements CardListener, ColorP
 			themeToggleContainer.setVisibility(View.GONE);
 			AndroidUiHelper.updateVisibility(colorsCard.getView(), false);
 			AndroidUiHelper.updateVisibility(gradientCard.getView(), false);
-			routeLineDrawInfo.setUseDefaultColor(true);
+			previewRouteLineInfo.setUseDefaultColor(true);
 			changeMapTheme(initMapTheme);
 		} else if (selectedMode == ColorMode.CUSTOM) {
 			themeToggleContainer.setVisibility(View.VISIBLE);
 			AndroidUiHelper.updateVisibility(colorsCard.getView(), true);
 			AndroidUiHelper.updateVisibility(gradientCard.getView(), false);
-			routeLineDrawInfo.setUseDefaultColor(false);
+			previewRouteLineInfo.setUseDefaultColor(false);
 			changeMapTheme(isNightMap() ? DayNightMode.NIGHT : DayNightMode.DAY);
 		} else {
 			gradientCard.setSelectedScaleType(getGradientScaleTypeFromMode());
 			AndroidUiHelper.updateVisibility(colorsCard.getView(), false);
 			AndroidUiHelper.updateVisibility(gradientCard.getView(), true);
 			themeToggleContainer.setVisibility(View.GONE);
-			routeLineDrawInfo.setUseDefaultColor(false);
+			previewRouteLineInfo.setUseDefaultColor(false);
 		}
-		routeLineDrawInfo.setGradientScaleType(getGradientScaleTypeFromMode());
+		previewRouteLineInfo.setGradientScaleType(getGradientScaleTypeFromMode());
 		updateColorItems();
 		updateDescription();
 	}
@@ -206,21 +206,21 @@ public class RouteLineColorCard extends BaseCard implements CardListener, ColorP
 			colorsCard.setListener(this);
 			container.addView(colorsCard.build(mapActivity));
 
-			gradientCard = new GradientCard(mapActivity, routeLineDrawInfo.getGradientScaleType());
+			gradientCard = new GradientCard(mapActivity, previewRouteLineInfo.getGradientScaleType());
 			container.addView(gradientCard.build(mapActivity));
 		}
 	}
 
 	private int getSelectedColorForTheme(List<Integer> colors, boolean nightMode) {
-		Integer color = routeLineDrawInfo.getColorIgnoreDefault(nightMode);
+		Integer color = previewRouteLineInfo.getColorIgnoreDefault(nightMode);
 		if (color != null) {
 			if (!ColorDialogs.isPaletteColor(color)) {
 				colors.add(color);
 			}
 		} else {
 			color = colors.get(0);
-			routeLineDrawInfo.setUseDefaultColor(true);
-			routeLineDrawInfo.setColor(color, nightMode);
+			previewRouteLineInfo.setUseDefaultColor(true);
+			previewRouteLineInfo.setColor(color, nightMode);
 		}
 		return color;
 	}
@@ -233,7 +233,7 @@ public class RouteLineColorCard extends BaseCard implements CardListener, ColorP
 
 	@Nullable
 	private Integer getRouteLineColor() {
-		return routeLineDrawInfo.getColor(isNightMap());
+		return previewRouteLineInfo.getColor(isNightMap());
 	}
 
 	@Nullable
@@ -249,7 +249,7 @@ public class RouteLineColorCard extends BaseCard implements CardListener, ColorP
 
 	private void updateSelectedColor() {
 		int selectedColor = colorsCard.getSelectedColor();
-		routeLineDrawInfo.setColor(selectedColor, isNightMap());
+		previewRouteLineInfo.setColor(selectedColor, isNightMap());
 		updateColorItems();
 	}
 
@@ -282,9 +282,8 @@ public class RouteLineColorCard extends BaseCard implements CardListener, ColorP
 	private void updateDescription() {
 		String description;
 		if (selectedMode == ColorMode.DEFAULT) {
-			String pattern = app.getString(R.string.route_line_use_map_style_appearance);
-			String color = app.getString(R.string.shared_string_color).toLowerCase();
-			description = String.format(pattern, color, app.getRendererRegistry().getSelectedRendererName());
+			String pattern = app.getString(R.string.route_line_use_map_style_color);
+			description = String.format(pattern, app.getRendererRegistry().getSelectedRendererName());
 		} else if (selectedMode == ColorMode.CUSTOM) {
 			String pattern = app.getString(R.string.specify_color_for_map_mode);
 			String mapModeTitle = app.getString(isNightMap() ? NIGHT_TITLE_ID : DAY_TITLE_ID);

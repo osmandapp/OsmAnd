@@ -343,7 +343,7 @@
     <string name="route_tu">U dönüşü yapın ve ilerleyin</string>
     <string name="first_time_continue">Sonra</string>
     <string name="search_poi_location">Sinyal bekleniyor…</string>
-    <string name="transport_Routes">Rotalar</string>
+    <string name="transport_Routes">Güzergah</string>
     <string name="shared_string_ok">Tamam</string>
     <string name="shared_string_clear_all">Hepsini temizle</string>
     <string name="searching">Aranıyor…</string>
@@ -1910,7 +1910,7 @@
     <string name="shared_string_move_up">Taşı ↑</string>
     <string name="shared_string_move_down">Taşı ↓</string>
     <string name="finish_navigation">Gezintiyi bitir</string>
-    <string name="avoid_road">Yoldan sakın</string>
+    <string name="avoid_road">Yoldan kaçın</string>
     <string name="storage_directory_readonly_desc">Seçilen veri saklama klasörü yazma korumalı olduğu için dahili hafızaya geçildi. Lütfen yazılabilir bir depolama dizini seçin.</string>
     <string name="storage_directory_shared">Paylaşılan bellek</string>
     <string name="shared_string_topbar">Üst menü</string>
@@ -3203,7 +3203,7 @@
     <string name="routeInfo_piste_difficulty_name">Pist zorluğu</string>
     <string name="routing_attr_width_name">Genişlik sınırı</string>
     <string name="routing_attr_width_description">Rotalarda izin verilen araç genişlik sınırını belirtin.</string>
-    <string name="avoid_in_routing_descr_">Belirli güzergahlardan ve yol türlerinden kaçının</string>
+    <string name="avoid_in_routing_descr_">Belirli güzergahlardan ve yol türlerinden kaçın</string>
     <string name="app_mode_utv">Yan yana</string>
     <string name="rendering_attr_piste_difficulty_aerialway_name">Hava yolu</string>
     <string name="rendering_attr_piste_difficulty_connection_name">Bağlantı</string>
@@ -3550,7 +3550,7 @@
     <string name="lang_lmo">Lombardca</string>
     <string name="lang_mn">Moğolca</string>
     <string name="custom_color">Özel renk</string>
-    <string name="extra_maps_menu_group">Ekstra haritalar</string>
+    <string name="extra_maps_menu_group">Ek haritalar</string>
     <string name="download_unsupported_action">Desteklenmeyen eylem %1$s</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="osm_live_payment_subscription_management">Ödeme, satın alma onaylandığında Google Play hesabınızdan alınacaktır.
@@ -3824,7 +3824,6 @@
     <string name="message_need_calculate_route_before_show_graph">%1$s verileri yalnızca yollarda kullanılabilir, grafikleri görmek için “Noktalar arasındaki güzergah” kullanarak bir rota hesaplayın.</string>
     <string name="message_graph_will_be_available_after_recalculation">Lütfen bekleyin.
 \nGüzergah yeniden hesaplandıktan sonra grafik kullanılabilir olacak.</string>
-    <string name="app_mode_gap">Boşluk</string>
     <string name="navigate_point_mgrs">MGRS</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="mgrs_format_descr">OsmAnd, UTM NATO biçimine benzer olan MGRS\'yi kullanmaktadır.</string>
@@ -4053,7 +4052,6 @@
     <string name="trip_recording_show_start_dialog_setting">Devre dışı bırakılırsa onay diyaloğu atlanarak, widget veya menü ögesine dokunduktan hemen sonra kayıt başlayacaktır.</string>
     <string name="customize_route_line">Güzergah hattını özelleştir</string>
     <string name="shared_string_route_line">Güzergah hattı</string>
-    <string name="route_line_use_map_style_appearance">Harita tarzını kullan(%2$s) öntanımlı %1$s.</string>
     <string name="specify_color_for_map_mode">%1$s harita modu için renk belirtin.</string>
     <string name="no_purchases">Herhangi bir satın alma işleminiz yok</string>
     <string name="new_device_account">Yeni aygıt / yeni hesap</string>
@@ -4104,4 +4102,9 @@
     <string name="recorded_description">Kaydedilen ses daha iyi ses çıkarır, ancak yalnızca önceden kaydedilmiş cümleleri telaffuz edebilir: dönüş talimatları. Sokak veya POI adlarını söyleyemez.</string>
     <string name="use_system_language">Sistem dilini kullan</string>
     <string name="shared_string_itinerary">Seyahat planı</string>
+    <string name="route_line_use_map_style_width">Harita tarzı (%1$s) öntanımlı genişliğini kullan.</string>
+    <string name="route_line_use_map_style_color">Harita tarzı (%1$s) öntanımlı rengini kullan.</string>
+    <string name="poi_routes">Güzergah</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">Düşük emisyon bölgelerinden kaçın</string>
+    <string name="routing_attr_avoid_low_emission_zone_name">Düşük emisyon bölgelerinden kaçın</string>
 </resources>

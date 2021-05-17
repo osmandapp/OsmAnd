@@ -4393,4 +4393,40 @@
 
 	<string name="poi_pillory">Pillory</string>
 
+	<string name="poi_service_vehicle_inspection_yes">Vehicle inspection</string>
+	<string name="poi_service_vehicle_rental_yes">Car rental</string>
+
+	<string name="poi_planetarium">Planetarium</string>
+
+	<string name="poi_trolley_bay">Trolley bay</string>
+
+	<string name="poi_refugee_site">Refugee site</string>
+
+	<string name="poi_windsock">Windsock</string>
+
+	<string name="poi_operator_type_public">Operator type: public</string>
+	<string name="poi_operator_type_private">Operator type: private</string>
+	<string name="poi_operator_type_government">Operator type: government</string>
+	<string name="poi_operator_type_religious">Operator type: religious</string>
+	<string name="poi_operator_type_ngo">Operator type: ngo</string>
+	<string name="poi_operator_type_community">Operator type: community</string>
+	<string name="poi_operator_type_consortium">Operator type: consortium</string>
+	<string name="poi_operator_type_cooperative">Operator type: cooperative</string>
+
+	<string name="poi_ultralight_aviation">Ultralight aviation</string>
+
+	<string name="poi_dune">Dune</string>
+
+	<string name="poi_shrub">Shrub</string>
+	<string name="poi_fruit">Fruit</string>
+
+	<string name="poi_glacier_debris_cover_none">Debris cover: none</string>
+	<string name="poi_glacier_debris_cover_partial">Debris cover: partial</string>
+	<string name="poi_glacier_debris_cover_scarce">Debris cover: scarce</string>
+	<string name="poi_glacier_edge_grounding_line">Edge: grounding line</string>
+	<string name="poi_glacier_edge_calving_line">Edge: calving line</string>
+	<string name="poi_glacier_status_retreat">Glacier status: retreat</string>
+	<string name="poi_glacier_status_marked_retreat">Glacier status: marked retreat</string>
+	<string name="poi_glacier_status_oscillating">Glacier status: oscillating</string>
+
 </resources>

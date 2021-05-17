@@ -122,7 +122,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 			GPXFile gpxFile = displayHelper.getGpx();
 			if (gpxFile != null && !gpxFile.isEmpty()) {
 				analysis = gpxFile.getAnalysis(0);
-				gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpxFile);
+				gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpxFile, false);
 			}
 		} else {
 			if (gpxItem != null) {

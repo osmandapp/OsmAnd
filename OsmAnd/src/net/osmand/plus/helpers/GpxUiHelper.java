@@ -70,7 +70,9 @@ import net.osmand.GPXUtilities.Elevation;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.GPXUtilities.Speed;
+import net.osmand.GPXUtilities.Track;
 import net.osmand.GPXUtilities.TrkSegment;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -125,6 +127,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 
 import static com.github.mikephil.charting.components.XAxis.XAxisPosition.BOTTOM;
@@ -2131,21 +2134,23 @@ public class GpxUiHelper {
 
 	public static GPXFile makeGpxFromLocations(List<Location> locations, OsmandApplication app) {
 		double lastHeight = HEIGHT_UNDEFINED;
+		double lastValidHeight = Double.NaN;
 		GPXFile gpx = new GPXUtilities.GPXFile(Version.getFullVersion(app));
 		if (locations != null) {
-			GPXUtilities.Track track = new GPXUtilities.Track();
-			GPXUtilities.TrkSegment seg = new GPXUtilities.TrkSegment();
-			List<GPXUtilities.WptPt> pts = seg.points;
+			Track track = new Track();
+			TrkSegment seg = new TrkSegment();
+			List<WptPt> pts = seg.points;
 			for (Location l : locations) {
-				GPXUtilities.WptPt point = new GPXUtilities.WptPt();
+				WptPt point = new WptPt();
 				point.lat = l.getLatitude();
 				point.lon = l.getLongitude();
 				if (l.hasAltitude()) {
 					gpx.hasAltitude = true;
 					float h = (float) l.getAltitude();
 					point.ele = h;
+					lastValidHeight = h;
 					if (lastHeight == HEIGHT_UNDEFINED && pts.size() > 0) {
-						for (GPXUtilities.WptPt pt : pts) {
+						for (WptPt pt : pts) {
 							if (Double.isNaN(pt.ele)) {
 								pt.ele = h;
 							}
@@ -2167,7 +2172,16 @@ public class GpxUiHelper {
 						point.time = prevPoint.time;
 					}
 				}
-				seg.points.add(point);
+				pts.add(point);;
+			}
+			if (!Double.isNaN(lastValidHeight) && lastHeight == HEIGHT_UNDEFINED) {
+				for (ListIterator<WptPt> iterator = pts.listIterator(pts.size()); iterator.hasPrevious(); ) {
+					WptPt point = iterator.previous();
+					if (!Double.isNaN(point.ele)) {
+						break;
+					}
+					point.ele = lastValidHeight;
+				}
 			}
 			track.segments.add(seg);
 			gpx.tracks.add(track);
@@ -2248,14 +2262,14 @@ public class GpxUiHelper {
 		return dataSet;
 	}
 
-	public static GpxDisplayItem makeGpxDisplayItem(OsmandApplication app, GPXFile gpxFile) {
+	public static GpxDisplayItem makeGpxDisplayItem(OsmandApplication app, GPXFile gpxFile, boolean fromRoute) {
 		GpxSelectionHelper helper = app.getSelectedGpxHelper();
 		String groupName = helper.getGroupName(gpxFile);
 		GpxDisplayGroup group = helper.buildGpxDisplayGroup(gpxFile, 0, groupName);
 		if (group != null && group.getModifiableList().size() > 0) {
 			GpxDisplayItem gpxItem = group.getModifiableList().get(0);
 			if (gpxItem != null) {
-				gpxItem.route = true;
+				gpxItem.route = fromRoute;
 			}
 			return gpxItem;
 		}
@@ -2360,6 +2374,12 @@ public class GpxUiHelper {
 		if (AndroidUtils.isIntentSafe(context, sendIntent)) {
 			context.startActivity(sendIntent);
 		}
+	}
+
+	@NonNull
+	public static String getGpxFileRelativePath(@NonNull OsmandApplication app, @NonNull String fullPath) {
+		String rootGpxDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR).getAbsolutePath() + '/';
+		return fullPath.replace(rootGpxDir, "");
 	}
 
 	public static class GPXInfo {

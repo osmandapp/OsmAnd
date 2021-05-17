@@ -1,7 +1,7 @@
 package net.osmand.plus.chooseplan;
 
-public class ChoosePlanOsmLiveBannerDialogFragment extends ChoosePlanFreeBannerDialogFragment {
-	public static final String TAG = ChoosePlanOsmLiveBannerDialogFragment.class.getSimpleName();
+public class ChoosePlanSubscriptionBannerDialogFragment extends ChoosePlanFreeBannerDialogFragment {
+	public static final String TAG = ChoosePlanSubscriptionBannerDialogFragment.class.getSimpleName();
 
 	@Override
 	public OsmAndFeature[] getPlanTypeFeatures() {

@@ -27,7 +27,6 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
 import net.osmand.plus.chooseplan.ChoosePlanDialogFragment.ChoosePlanDialogType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
@@ -218,10 +217,7 @@ public class DiscountHelper {
 		if (url.startsWith(INAPP_PREFIX) && url.length() > INAPP_PREFIX.length()) {
 			String inAppSku = url.substring(INAPP_PREFIX.length());
 			InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
-			if (purchaseHelper != null
-					&& purchaseHelper.isPurchased(inAppSku) || InAppPurchaseHelper.isSubscribedToLiveUpdates(app)) {
-				return false;
-			}
+			return purchaseHelper == null || !purchaseHelper.isPurchased(inAppSku);
 		}
 		return true;
 	}
@@ -321,9 +317,9 @@ public class DiscountHelper {
 						LOG.error("purchaseFullVersion is not supported", e);
 					}
 				} else {
-					for (InAppPurchase p : purchaseHelper.getLiveUpdates().getAllSubscriptions()) {
+					for (InAppPurchase p : purchaseHelper.getSubscriptions().getAllSubscriptions()) {
 						if (url.contains(p.getSku())) {
-							ChoosePlanDialogFragment.showDialogInstance(app, mapActivity.getSupportFragmentManager(), ChoosePlanDialogType.OSM_LIVE);
+							ChoosePlanDialogFragment.showDialogInstance(app, mapActivity.getSupportFragmentManager(), ChoosePlanDialogType.SUBSCRIPTION);
 							break;
 						}
 					}
@@ -370,7 +366,7 @@ public class DiscountHelper {
 			if (CHOOSE_PLAN_TYPE_FREE.equals(planType)) {
 				ChoosePlanDialogFragment.showDialogInstance(mapActivity.getMyApplication(), mapActivity.getSupportFragmentManager(), ChoosePlanDialogType.FREE_VERSION);
 			} else if (CHOOSE_PLAN_TYPE_LIVE.equals(planType)) {
-				ChoosePlanDialogFragment.showDialogInstance(mapActivity.getMyApplication(), mapActivity.getSupportFragmentManager(), ChoosePlanDialogType.OSM_LIVE);
+				ChoosePlanDialogFragment.showDialogInstance(mapActivity.getMyApplication(), mapActivity.getSupportFragmentManager(), ChoosePlanDialogType.SUBSCRIPTION);
 			} else if (CHOOSE_PLAN_TYPE_SEA_DEPTH.equals(planType)) {
 				ChoosePlanDialogFragment.showDialogInstance(mapActivity.getMyApplication(), mapActivity.getSupportFragmentManager(), ChoosePlanDialogType.SEA_DEPTH_MAPS);
 			} else if (CHOOSE_PLAN_TYPE_HILLSHADE.equals(planType)) {
@@ -535,7 +531,7 @@ public class DiscountHelper {
 
 		SubscriptionCondition(OsmandApplication app) {
 			super(app);
-			liveUpdates = app.getInAppPurchaseHelper().getLiveUpdates();
+			liveUpdates = app.getInAppPurchaseHelper().getSubscriptions();
 		}
 	}
 

@@ -241,7 +241,6 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 	private void fetchInAppPurchase(@NonNull InAppPurchase inAppPurchase, @NonNull ProductInfo productInfo, @Nullable InAppPurchaseData purchaseData) {
 		if (purchaseData != null) {
 			inAppPurchase.setPurchaseState(InAppPurchase.PurchaseState.PURCHASED);
-			inAppPurchase.setPurchaseTime(purchaseData.getPurchaseTime());
 			inAppPurchase.setPurchaseInfo(ctx, getPurchaseInfo(purchaseData));
 		} else {
 			inAppPurchase.setPurchaseState(InAppPurchase.PurchaseState.NOT_PURCHASED);
@@ -279,7 +278,9 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 		}
 	}
 
-	protected InAppCommand getPurchaseLiveUpdatesCommand(final WeakReference<Activity> activity, final String sku, final String userInfo) {
+	@Override
+	protected InAppCommand getPurchaseSubscriptionCommand(final WeakReference<Activity> activity,
+														  String sku, String userInfo) throws UnsupportedOperationException {
 		return new InAppCommand() {
 			@Override
 			public void run(InAppPurchaseHelper helper) {
@@ -405,7 +406,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 			private void obtainSubscriptionsInfo() {
 				if (uiActivity != null) {
 					Set<String> productIds = new HashSet<>();
-					List<InAppSubscription> subscriptions = purchases.getLiveUpdates().getAllSubscriptions();
+					List<InAppSubscription> subscriptions = purchases.getSubscriptions().getAllSubscriptions();
 					for (InAppSubscription s : subscriptions) {
 						productIds.add(s.getSku());
 					}
@@ -476,7 +477,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 				 */
 
 				List<String> allOwnedSubscriptionSkus = ownedSubscriptions.getItemList();
-				for (InAppSubscription s : getLiveUpdates().getAllSubscriptions()) {
+				for (InAppSubscription s : getSubscriptions().getAllSubscriptions()) {
 					if (hasDetails(s.getSku())) {
 						InAppPurchaseData purchaseData = getPurchaseData(s.getSku());
 						ProductInfo liveUpdatesInfo = getProductInfo(s.getSku());
@@ -490,7 +491,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 					InAppPurchaseData purchaseData = getPurchaseData(sku);
 					ProductInfo liveUpdatesInfo = getProductInfo(sku);
 					if (liveUpdatesInfo != null) {
-						InAppSubscription s = getLiveUpdates().upgradeSubscription(sku);
+						InAppSubscription s = getSubscriptions().upgradeSubscription(sku);
 						if (s == null) {
 							s = new InAppPurchaseLiveUpdatesOldSubscription(liveUpdatesInfo);
 						}
@@ -535,12 +536,13 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 
 				// Do we have the live updates?
 				boolean subscribedToLiveUpdates = false;
-				List<InAppPurchaseData> liveUpdatesPurchases = new ArrayList<>();
-				for (InAppPurchase p : getLiveUpdates().getAllSubscriptions()) {
-					InAppPurchaseData purchaseData = getPurchaseData(p.getSku());
+				List<InAppPurchaseData> subscriptionPurchases = new ArrayList<>();
+				for (InAppSubscription s : getSubscriptions().getAllSubscriptions()) {
+					InAppPurchaseData purchaseData = getPurchaseData(s.getSku());
 					if (purchaseData != null) {
-						liveUpdatesPurchases.add(purchaseData);
-						if (!subscribedToLiveUpdates) {
+						subscriptionPurchases.add(purchaseData);
+						if (!subscribedToLiveUpdates
+								&& (purchases.isLiveUpdatesSubscription(s) || purchases.isOsmAndProSubscription(s))) {
 							subscribedToLiveUpdates = true;
 						}
 					}
@@ -562,9 +564,9 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 				settings.INAPPS_READ.set(true);
 
 				List<InAppPurchaseData> tokensToSend = new ArrayList<>();
-				if (liveUpdatesPurchases.size() > 0) {
+				if (subscriptionPurchases.size() > 0) {
 					List<String> tokensSent = Arrays.asList(settings.BILLING_PURCHASE_TOKENS_SENT.get().split(";"));
-					for (InAppPurchaseData purchase : liveUpdatesPurchases) {
+					for (InAppPurchaseData purchase : subscriptionPurchases) {
 						if ((Algorithms.isEmpty(settings.BILLING_USER_ID.get()) || Algorithms.isEmpty(settings.BILLING_USER_TOKEN.get()))
 								&& !Algorithms.isEmpty(purchase.getDeveloperPayload())) {
 							String payload = purchase.getDeveloperPayload();

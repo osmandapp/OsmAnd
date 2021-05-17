@@ -3897,7 +3897,6 @@
     <string name="message_need_calculate_route_before_show_graph">%1$s andmed on saadaval ainult teedel. Graafikute nägemiseks arvutage marsruut, kasutades \"Punktidevaheline marsruut\".</string>
     <string name="message_graph_will_be_available_after_recalculation">Palun oota.
 \nGraafik on saadaval peale teekonna ümberarvutust.</string>
-    <string name="app_mode_gap">Vahe</string>
     <string name="login_open_street_map">Logi OpenStreetMap-i sisse</string>
     <string name="login_open_street_map_org">Logi sisse OpenStreetMap.org keskkonda</string>
     <string name="enter_text_separated">Sisesta komadega eraldatud sildid.</string>
@@ -4050,7 +4049,7 @@
     <string name="shared_string_turn">Pööra</string>
     <string name="purchases">Ostud</string>
     <string name="map_widget_distance_by_tap">Kaugus toksamise järgi</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Peida (loodus)kaitsealade ja rahvusparkide piirid</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Peida (loodus)kaitsealade ja rahvusparkide piirid.</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">Looduse piirid</string>
     <string name="trip_recording_save_and_continue">Salvesta ja jätka</string>
     <string name="lost_data_warning">Kõik salvestamata andmed lähevad kaotsi.</string>

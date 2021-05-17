@@ -3928,4 +3928,12 @@
     <string name="poi_bay_filter">Gerð flóa</string>
     <string name="poi_plateau">Háslétta</string>
     <string name="poi_club_social">Félagsstarf</string>
+    <string name="poi_pillory">Gapastokkur</string>
+    <string name="poi_health_post">Heilsugæsluaðstaða</string>
+    <string name="poi_shop_water">Verslun með drykkjarvatn</string>
+    <string name="poi_pest_control">Verslun með meindýravarnir</string>
+    <string name="poi_telecom_medium_coaxial">Tenging: kóax</string>
+    <string name="poi_telecom_medium_fibre">Tenging: ljósleiðari</string>
+    <string name="poi_telecom_medium_copper">Tenging: kopar</string>
+    <string name="poi_telecom_exchange">Símstöð</string>
 </resources>

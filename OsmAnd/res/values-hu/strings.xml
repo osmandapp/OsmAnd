@@ -2055,7 +2055,7 @@
     <string name="rendering_attr_contourColorScheme_name">Szintvonalak színsémája</string>
     <string name="rendering_attr_surfaceIntegrity_name">Útfelület épsége</string>
     <string name="search_hint">Város, cím, érdekes pont (POI) nevének megadása</string>
-    <string name="translit_name_if_miss">Átírás, ha a(z) %1$s név hiányzik</string>
+    <string name="translit_name_if_miss">Átírás, ha a %1$s név hiányzik</string>
     <string name="translit_names">Nevek átírása</string>
     <string name="rendering_value_fine_name">Finom</string>
     <string name="wiki_around">Közeli Wikipédia-cikkek</string>
@@ -2773,7 +2773,7 @@
     <string name="quick_action_switch_day_mode">Nappali mód</string>
     <string name="quick_action_switch_night_mode">Éjszakai mód</string>
     <string name="quick_action_day_night_switch_mode">Váltás a nappali/éjszakai mód között</string>
-    <string name="run_full_osmand_msg">A(z) {0} térképet használod, amelyet az OsmAnd biztosít. Elindítod az OsmAnd teljes verzióját\?</string>
+    <string name="run_full_osmand_msg">A(z) {0} térképet használja, amelyet az OsmAnd biztosít. Elindítja az OsmAnd teljes verzióját\?</string>
     <string name="run_full_osmand_header">Elindítod az OsmAndot\?</string>
     <string name="add_work">Munkahely hozzáadása</string>
     <string name="work_button">Munkahely</string>
@@ -3901,7 +3901,6 @@
     <string name="profile_type_osmand_string">OsmAnd profil</string>
     <string name="profile_type_user_string">Felhasználói profil</string>
     <string name="reverse_all_points">Összes pont megfordítása</string>
-    <string name="app_mode_gap">Rés</string>
     <string name="profile_by_default_description">Jelölje ki az alkalmazás elindításakor használandó profilt.</string>
     <string name="shared_string_last_used">Utoljára használt</string>
     <string name="routing_attr_prefer_hiking_routes_description">Túraútvonalak előnyben részesítése</string>
@@ -4095,5 +4094,9 @@
     <string name="tts_description">A szövegfelolvasó (TTS) minden utasítástípust képes kiejteni: utcaneveket, bekanyarodási utasításokat, érdekes pontok (POI-k) nevét stb.</string>
     <string name="language_description">A kívánt nyelv és a hangutasítás típusának kiválasztása.</string>
     <string name="shared_string_itinerary">Útiterv</string>
-    <string name="route_line_use_map_style_appearance"/>
+    <string name="route_line_use_map_style_width">A térképstílus (%1$s) alapértelmezett szélességének használata.</string>
+    <string name="route_line_use_map_style_color">A térképstílus (%1$s) alapértelmezett színeinek használata.</string>
+    <string name="poi_routes">Útvonalak</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">Alacsony kibocsátású zónák elkerülése</string>
+    <string name="routing_attr_avoid_low_emission_zone_name">Alacsony kibocsátású zónák elkerülése</string>
 </resources>

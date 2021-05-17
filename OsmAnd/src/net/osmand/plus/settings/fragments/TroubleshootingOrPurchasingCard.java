@@ -62,7 +62,7 @@ public class TroubleshootingOrPurchasingCard extends BaseCard {
 				public void onClick(View v) {
 					ChoosePlanDialogFragment.showDialogInstance(getMyApplication(),
 							mapActivity.getSupportFragmentManager(),
-							ChoosePlanDialogFragment.ChoosePlanDialogType.OSM_LIVE);
+							ChoosePlanDialogFragment.ChoosePlanDialogType.SUBSCRIPTION);
 				}
 			});
 

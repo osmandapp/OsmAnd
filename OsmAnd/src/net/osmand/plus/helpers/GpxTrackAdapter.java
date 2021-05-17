@@ -8,9 +8,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.IndexConstants;
@@ -21,6 +18,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
+import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -28,12 +26,20 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class GpxTrackAdapter extends RecyclerView.Adapter<GpxTrackAdapter.TrackViewHolder> {
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+public class GpxTrackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+	private static final int TRACK_INFO_VIEW_TYPE = 0;
+	private static final int TRACK_CATEGORY_VIEW_TYPE = 1;
 
 	private OsmandApplication app;
 	private LayoutInflater themedInflater;
 	private UiUtilities iconsCache;
 	private List<GPXInfo> gpxInfoList;
+	private HorizontalSelectionAdapter trackCategoriesAdapter;
 	private OnItemClickListener onItemClickListener;
 
 	private boolean showFolderName;
@@ -64,44 +70,67 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<GpxTrackAdapter.TrackV
 		this.showFolderName = showFolderName;
 	}
 
-	@NonNull
-	@Override
-	public GpxTrackAdapter.TrackViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-		View view = themedInflater.inflate(R.layout.gpx_track_select_item, parent, false);
-		ImageView distanceIcon = view.findViewById(R.id.distance_icon);
-		distanceIcon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_distance_16));
-		ImageView pointsIcon = view.findViewById(R.id.points_icon);
-		pointsIcon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_waypoint_16));
-		ImageView timeIcon = view.findViewById(R.id.time_icon);
-		timeIcon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_time_16));
-		return new TrackViewHolder(view);
+	public void setTrackCategoriesAdapter(HorizontalSelectionAdapter adapter) {
+		this.trackCategoriesAdapter = adapter;
 	}
 
 	@Override
-	public void onBindViewHolder(@NonNull final GpxTrackAdapter.TrackViewHolder holder, final int position) {
-		boolean currentlyRecordingTrack = (showCurrentGpx && position == 0);
-		if (currentlyRecordingTrack) {
-			holder.icon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_track_recordable));
-		} else {
-			holder.icon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_polygom_dark));
-		}
-		final int adapterPosition = holder.getAdapterPosition();
-		GPXInfo info = gpxInfoList.get(adapterPosition);
-		GpxDataItem dataItem = getDataItem(info);
-		String itemTitle = GpxUiHelper.getGpxTitle(info.getFileName());
-		if (!showFolderName) {
-			itemTitle = Algorithms.getFileWithoutDirs(itemTitle);
-		}
-		updateGpxInfoView(holder, itemTitle, info, dataItem, currentlyRecordingTrack, app);
-		holder.itemView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (onItemClickListener != null) {
-					onItemClickListener.onItemClick(adapterPosition);
-				}
-			}
-		});
+	public int getItemViewType(int position) {
+		return trackCategoriesAdapter != null && position == 0 ? TRACK_CATEGORY_VIEW_TYPE : TRACK_INFO_VIEW_TYPE;
 	}
+
+	@NonNull
+	@Override
+	public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+		if (viewType == TRACK_INFO_VIEW_TYPE) {
+			View view = themedInflater.inflate(R.layout.gpx_track_select_item, parent, false);
+			ImageView distanceIcon = view.findViewById(R.id.distance_icon);
+			distanceIcon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_distance_16));
+			ImageView pointsIcon = view.findViewById(R.id.points_icon);
+			pointsIcon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_waypoint_16));
+			ImageView timeIcon = view.findViewById(R.id.time_icon);
+			timeIcon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_time_16));
+			return new TrackViewHolder(view);
+		} else {
+			View view = themedInflater.inflate(R.layout.gpx_track_select_category_item, parent, false);
+			return new TrackCategoriesViewHolder(view);
+		}
+	}
+
+	@Override
+	public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+		if (holder.getItemViewType() == TRACK_INFO_VIEW_TYPE) {
+			TrackViewHolder trackViewHolder = (TrackViewHolder) holder;
+			boolean currentlyRecordingTrack = (showCurrentGpx && position == 0);
+			if (currentlyRecordingTrack) {
+				trackViewHolder.icon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_track_recordable));
+			} else {
+				trackViewHolder.icon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_polygom_dark));
+			}
+			final int adapterPosition = trackViewHolder.getAdapterPosition();
+			GPXInfo info = gpxInfoList.get(adapterPosition);
+			GpxDataItem dataItem = getDataItem(info);
+			String itemTitle = GpxUiHelper.getGpxTitle(info.getFileName());
+			if (!showFolderName) {
+				itemTitle = Algorithms.getFileWithoutDirs(itemTitle);
+			}
+			updateGpxInfoView(trackViewHolder, itemTitle, info, dataItem, currentlyRecordingTrack, app);
+			trackViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if (onItemClickListener != null) {
+						onItemClickListener.onItemClick(adapterPosition);
+					}
+				}
+			});
+		} else {
+			TrackCategoriesViewHolder categoriesViewHolder = (TrackCategoriesViewHolder) holder;
+			categoriesViewHolder.trackCategories.setAdapter(trackCategoriesAdapter);
+			categoriesViewHolder.trackCategories.setLayoutManager(new LinearLayoutManager(app, RecyclerView.HORIZONTAL, false));
+			trackCategoriesAdapter.notifyDataSetChanged();
+		}
+	}
+
 
 	@Override
 	public int getItemCount() {
@@ -188,6 +217,16 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<GpxTrackAdapter.TrackV
 			readSection = itemView.findViewById(R.id.read_section);
 			unknownSection = itemView.findViewById(R.id.unknown_section);
 			dateAndSize = itemView.findViewById(R.id.date_and_size_details);
+		}
+	}
+
+	static class TrackCategoriesViewHolder extends RecyclerView.ViewHolder {
+
+		RecyclerView trackCategories;
+
+		TrackCategoriesViewHolder(View itemView) {
+			super(itemView);
+			trackCategories = itemView.findViewById(R.id.track_categories);
 		}
 	}
 

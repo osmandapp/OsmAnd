@@ -84,7 +84,7 @@
 	<androidx.recyclerview.widget.RecyclerView
 		android:id="@+id/block_statistics"
 		android:layout_width="match_parent"
-		android:layout_height="@dimen/list_header_height"
+		android:layout_height="wrap_content"
 		android:layout_marginTop="@dimen/content_padding_small_half"
 		android:layout_marginBottom="@dimen/dialog_content_margin"
 		android:clipToPadding="false"

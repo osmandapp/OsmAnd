@@ -91,7 +91,7 @@ public class GpxBlockStatisticsBuilder {
 
 	@Nullable
 	public GpxDisplayItem getDisplayItem(GPXFile gpxFile) {
-		return gpxFile.tracks.size() > 0 ? GpxUiHelper.makeGpxDisplayItem(app, gpxFile) : null;
+		return gpxFile.tracks.size() > 0 ? GpxUiHelper.makeGpxDisplayItem(app, gpxFile, false) : null;
 	}
 
 	private GPXFile getGPXFile() {

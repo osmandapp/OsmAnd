@@ -390,7 +390,7 @@
     <string name="maps_could_not_be_downloaded">Дана мапа не може бути завантажена</string>
     <string name="continuous_rendering">Безперервне відмалювання</string>
     <string name="continuous_rendering_descr">Відображати безперервне промальовування замість цілковитого зображення.</string>
-    <string name="rendering_exception">Не вдалося відобразити обрану область.</string>
+    <string name="rendering_exception">Не вдалося показати вибрану ділянку.</string>
     <string name="show_point_options">Використати розташування…</string>
     <string name="renderer_load_sucess">Візуалізатор завантажено</string>
     <string name="renderer_load_exception">Не вдалося завантажити відмальовувач.</string>
@@ -2697,7 +2697,7 @@
     <string name="wikivoyage_travel_guide">Туристичні путівники</string>
     <string name="wikivoyage_travel_guide_descr">Путівники до найцікавіших місць на планеті – всередині OsmAnd і без підключення до Інтернету.</string>
     <string name="clear_all_intermediates">Очистити усі проміжні точки</string>
-    <string name="increase_search_radius_to">Збільшити область пошуку до %1$s</string>
+    <string name="increase_search_radius_to">Розширити ділянку пошуку до %1$s</string>
     <string name="send_search_query_description">Ми відправимо Ваш пошуковий запит: \"%1$s\", а також Ваше місцерозташування. 
 \n 
 \n Особисті відомості не накопичуються, пошукові дані використовуються лише для покращення алгоритму пошуку.</string>
@@ -3822,7 +3822,6 @@
     <string name="message_need_calculate_route_before_show_graph">%1$s дані доступні лише для доріг, обчисліть маршрут за допомогою «Маршрут між точками», щоб побачити графіки.</string>
     <string name="message_graph_will_be_available_after_recalculation">Будь ласка заждіть.
 \nГрафік буде доступний після переобчислення маршруту.</string>
-    <string name="app_mode_gap">Розрив</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="shared_string_local_maps">Місцеві мапи</string>
     <string name="icon_group_amenity">Зручності</string>
@@ -4051,7 +4050,6 @@
     <string name="trip_recording_show_start_dialog_setting">Якщо вимкнено, запис почнеться відразу після торкання до віджета або пункту меню, пропускаючи діалогове вікно підтвердження.</string>
     <string name="customize_route_line">Налаштувати лінію маршруту</string>
     <string name="shared_string_route_line">Лінія маршруту</string>
-    <string name="route_line_use_map_style_appearance">Використовувати стиль мапи (%2$s) типово %1$s.</string>
     <string name="specify_color_for_map_mode">Укажіть колір для режиму мапи %1$s.</string>
     <string name="release_4_0_beta">• Додана можливість завантаження контурних ліній у футах
 \n
@@ -4101,4 +4099,9 @@
     <string name="recorded_description">Записаний голос звучить краще, але може вимовляти лише попередньо записані фрази: вмикати настанови. Не може оголошувати назви вулиць або цікавих об\'єктів (POI).</string>
     <string name="use_system_language">Використовувати мову системи</string>
     <string name="shared_string_itinerary">Путівник</string>
+    <string name="route_line_use_map_style_width">Застосовувати типову ширину стилю мапи (%1$s).</string>
+    <string name="route_line_use_map_style_color">Застосовувати типовий колір стилю мапи (%1$s).</string>
+    <string name="poi_routes">Маршрути</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">Уникати зон з вимогою низького рівня викидів</string>
+    <string name="routing_attr_avoid_low_emission_zone_name">Уникати зон з вимогою низького рівня викидів</string>
 </resources>

@@ -12,12 +12,36 @@ import net.osmand.plus.R;
 
 public class InAppPurchasesImpl extends InAppPurchases {
 
+	private static final int FULL_VERSION_ID = 1;
+	private static final int DEPTH_CONTOURS_ID = 2;
+	private static final int CONTOUR_LINES_ID = 3;
+
+	private static final int LIVE_UPDATES_ID = 5;
+	private static final int OSMAND_PRO_ID = 6;
+	private static final int MAPS_ID = 7;
+
+	private static final int[] LIVE_UPDATES_SCOPE = new int[]{
+			FULL_VERSION_ID,
+			DEPTH_CONTOURS_ID,
+			CONTOUR_LINES_ID,
+	};
+
+	private static final int[] OSMAND_PRO_SCOPE = new int[]{
+			FULL_VERSION_ID,
+			DEPTH_CONTOURS_ID,
+			CONTOUR_LINES_ID,
+			LIVE_UPDATES_ID,
+	};
+
+	private static final int[] MAPS_SCOPE = new int[]{
+			FULL_VERSION_ID,
+	};
+
 	private static final InAppPurchase FULL_VERSION = new InAppPurchaseFullVersion();
 	private static final InAppPurchaseDepthContoursFree DEPTH_CONTOURS_FREE = new InAppPurchaseDepthContoursFree();
 	private static final InAppPurchaseContourLinesFree CONTOUR_LINES_FREE = new InAppPurchaseContourLinesFree();
-
-
-	private static final InAppSubscription[] LIVE_UPDATES_FREE = new InAppSubscription[]{
+	
+	private static final InAppSubscription[] SUBSCRIPTIONS_FREE = new InAppSubscription[]{
 			new InAppPurchaseLiveUpdatesMonthlyFree(),
 			new InAppPurchaseLiveUpdates3MonthsFree(),
 			new InAppPurchaseLiveUpdatesAnnualFree()
@@ -30,11 +54,11 @@ public class InAppPurchasesImpl extends InAppPurchases {
 		contourLines = CONTOUR_LINES_FREE;
 		inAppPurchases = new InAppPurchase[] { fullVersion, depthContours, contourLines };
 
-		liveUpdates = new LiveUpdatesInAppPurchasesFree();
-		for (InAppSubscription s : liveUpdates.getAllSubscriptions()) {
-			if (s instanceof InAppPurchaseLiveUpdatesMonthly) {
-				if (s.isDiscounted()) {
-					discountedMonthlyLiveUpdates = s;
+		subscriptions = new SubscriptionsPurchasesFree();
+		for (InAppSubscription s : subscriptions.getAllSubscriptions()) {
+			if (s instanceof InAppPurchaseMonthlySubscription) {
+				if (s.isLegacy()) {
+					legacyMonthlyLiveUpdates = s;
 				} else {
 					monthlyLiveUpdates = s;
 				}
@@ -43,28 +67,33 @@ public class InAppPurchasesImpl extends InAppPurchases {
 	}
 
 	@Override
-	public boolean isFullVersion(String sku) {
-		return FULL_VERSION.getSku().equals(sku);
+	public boolean isFullVersion(InAppPurchase p) {
+		return FULL_VERSION.getSku().equals(p.getSku());
 	}
 
 	@Override
-	public boolean isDepthContours(String sku) {
-		return DEPTH_CONTOURS_FREE.getSku().equals(sku);
+	public boolean isDepthContours(InAppPurchase p) {
+		return DEPTH_CONTOURS_FREE.getSku().equals(p.getSku());
 	}
 
 	@Override
-	public boolean isContourLines(String sku) {
-		return CONTOUR_LINES_FREE.getSku().equals(sku);
+	public boolean isContourLines(InAppPurchase p) {
+		return CONTOUR_LINES_FREE.getSku().equals(p.getSku());
 	}
 
 	@Override
-	public boolean isLiveUpdates(String sku) {
-		for (InAppPurchase p : LIVE_UPDATES_FREE) {
-			if (p.getSku().equals(sku)) {
-				return true;
-			}
-		}
-		return false;
+	public boolean isLiveUpdatesSubscription(InAppPurchase p) {
+		return p.getFeatureId() == LIVE_UPDATES_ID;
+	}
+
+	@Override
+	public boolean isOsmAndProSubscription(InAppPurchase p) {
+		return p.getFeatureId() == OSMAND_PRO_ID;
+	}
+
+	@Override
+	public boolean isMapsSubscription(InAppPurchase p) {
+		return p.getFeatureId() == MAPS_ID;
 	}
 
 	private static class InAppPurchaseFullVersion extends InAppPurchase {
@@ -72,7 +101,18 @@ public class InAppPurchasesImpl extends InAppPurchases {
 		private static final String SKU_FULL_VERSION_PRICE = "net.osmand.huawei.full";
 
 		InAppPurchaseFullVersion() {
-			super(SKU_FULL_VERSION_PRICE);
+			super(FULL_VERSION_ID, SKU_FULL_VERSION_PRICE);
+		}
+
+		@NonNull
+		@Override
+		public int[] getScope() {
+			return new int[0];
+		}
+
+		@Override
+		public boolean isLegacy() {
+			return false;
 		}
 
 		@Override
@@ -86,7 +126,18 @@ public class InAppPurchasesImpl extends InAppPurchases {
 		private static final String SKU_DEPTH_CONTOURS_FREE = "net.osmand.huawei.seadepth";
 
 		InAppPurchaseDepthContoursFree() {
-			super(SKU_DEPTH_CONTOURS_FREE);
+			super(DEPTH_CONTOURS_ID, SKU_DEPTH_CONTOURS_FREE);
+		}
+
+		@NonNull
+		@Override
+		public int[] getScope() {
+			return new int[0];
+		}
+
+		@Override
+		public boolean isLegacy() {
+			return false;
 		}
 	}
 
@@ -95,20 +146,42 @@ public class InAppPurchasesImpl extends InAppPurchases {
 		private static final String SKU_CONTOUR_LINES_FREE = "net.osmand.huawei.contourlines";
 
 		InAppPurchaseContourLinesFree() {
-			super(SKU_CONTOUR_LINES_FREE);
+			super(CONTOUR_LINES_ID, SKU_CONTOUR_LINES_FREE);
+		}
+
+		@NonNull
+		@Override
+		public int[] getScope() {
+			return new int[0];
+		}
+
+		@Override
+		public boolean isLegacy() {
+			return false;
 		}
 	}
 
-	private static class InAppPurchaseLiveUpdatesMonthlyFree extends InAppPurchaseLiveUpdatesMonthly {
+	private static class InAppPurchaseLiveUpdatesMonthlyFree extends InAppPurchaseMonthlySubscription {
 
 		private static final String SKU_LIVE_UPDATES_MONTHLY_HW_FREE = "net.osmand.huawei.monthly";
 
 		InAppPurchaseLiveUpdatesMonthlyFree() {
-			super(SKU_LIVE_UPDATES_MONTHLY_HW_FREE, 1);
+			super(LIVE_UPDATES_ID, SKU_LIVE_UPDATES_MONTHLY_HW_FREE, 1);
 		}
 
 		private InAppPurchaseLiveUpdatesMonthlyFree(@NonNull String sku) {
-			super(sku);
+			super(LIVE_UPDATES_ID, sku);
+		}
+
+		@NonNull
+		@Override
+		public int[] getScope() {
+			return LIVE_UPDATES_SCOPE;
+		}
+
+		@Override
+		public boolean isLegacy() {
+			return false;
 		}
 
 		@Nullable
@@ -118,16 +191,27 @@ public class InAppPurchasesImpl extends InAppPurchases {
 		}
 	}
 
-	private static class InAppPurchaseLiveUpdates3MonthsFree extends InAppPurchaseLiveUpdates3Months {
+	private static class InAppPurchaseLiveUpdates3MonthsFree extends InAppPurchaseQuarterlySubscription {
 
 		private static final String SKU_LIVE_UPDATES_3_MONTHS_HW_FREE = "net.osmand.huawei.3months";
 
 		InAppPurchaseLiveUpdates3MonthsFree() {
-			super(SKU_LIVE_UPDATES_3_MONTHS_HW_FREE, 1);
+			super(LIVE_UPDATES_ID, SKU_LIVE_UPDATES_3_MONTHS_HW_FREE, 1);
 		}
 
 		private InAppPurchaseLiveUpdates3MonthsFree(@NonNull String sku) {
-			super(sku);
+			super(LIVE_UPDATES_ID, sku);
+		}
+
+		@NonNull
+		@Override
+		public int[] getScope() {
+			return LIVE_UPDATES_SCOPE;
+		}
+
+		@Override
+		public boolean isLegacy() {
+			return false;
 		}
 
 		@Nullable
@@ -137,16 +221,27 @@ public class InAppPurchasesImpl extends InAppPurchases {
 		}
 	}
 
-	private static class InAppPurchaseLiveUpdatesAnnualFree extends InAppPurchaseLiveUpdatesAnnual {
+	private static class InAppPurchaseLiveUpdatesAnnualFree extends InAppPurchaseAnnualSubscription {
 
 		private static final String SKU_LIVE_UPDATES_ANNUAL_HW_FREE = "net.osmand.huawei.annual";
 
 		InAppPurchaseLiveUpdatesAnnualFree() {
-			super(SKU_LIVE_UPDATES_ANNUAL_HW_FREE, 1);
+			super(LIVE_UPDATES_ID, SKU_LIVE_UPDATES_ANNUAL_HW_FREE, 1);
 		}
 
 		private InAppPurchaseLiveUpdatesAnnualFree(@NonNull String sku) {
-			super(sku);
+			super(LIVE_UPDATES_ID, sku);
+		}
+
+		@NonNull
+		@Override
+		public int[] getScope() {
+			return LIVE_UPDATES_SCOPE;
+		}
+
+		@Override
+		public boolean isLegacy() {
+			return false;
 		}
 
 		@Nullable
@@ -158,11 +253,22 @@ public class InAppPurchasesImpl extends InAppPurchases {
 
 	public static class InAppPurchaseLiveUpdatesOldSubscription extends InAppSubscription {
 
-		private ProductInfo info;
+		private final ProductInfo info;
 
 		InAppPurchaseLiveUpdatesOldSubscription(@NonNull ProductInfo info) {
-			super(info.getProductId(), true);
+			super(LIVE_UPDATES_ID, info.getProductId());
 			this.info = info;
+		}
+
+		@NonNull
+		@Override
+		public int[] getScope() {
+			return LIVE_UPDATES_SCOPE;
+		}
+
+		@Override
+		public boolean isLegacy() {
+			return false;
 		}
 
 		@Override
@@ -192,10 +298,10 @@ public class InAppPurchasesImpl extends InAppPurchases {
 		}
 	}
 
-	private static class LiveUpdatesInAppPurchasesFree extends InAppSubscriptionList {
+	private static class SubscriptionsPurchasesFree extends InAppSubscriptionList {
 
-		public LiveUpdatesInAppPurchasesFree() {
-			super(LIVE_UPDATES_FREE);
+		public SubscriptionsPurchasesFree() {
+			super(SUBSCRIPTIONS_FREE);
 		}
 	}
 }

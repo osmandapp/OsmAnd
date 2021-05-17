@@ -703,7 +703,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 		OsmandSettings settings = app.getSettings();
 		String countryName = settings.BILLING_USER_COUNTRY.get();
 		if (purchaseHelper != null) {
-			List<InAppSubscription> subscriptions = purchaseHelper.getLiveUpdates().getVisibleSubscriptions();
+			List<InAppSubscription> subscriptions = purchaseHelper.getSubscriptions().getVisibleSubscriptions();
 			boolean donationSupported = false;
 			for (InAppSubscription s : subscriptions) {
 				if (s.isDonationSupported()) {

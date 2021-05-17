@@ -294,7 +294,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 
 	private void setupAudioFormatPref(AudioVideoNotesPlugin plugin) {
 		Integer[] entryValues = new Integer[] {MediaRecorder.AudioEncoder.DEFAULT, MediaRecorder.AudioEncoder.AAC};
-		String[] entries = new String[] {"Default", "AAC"};
+		String[] entries = new String[] {getString(R.string.shared_string_default), "AAC"};
 
 		ListPreferenceEx audioFormat = (ListPreferenceEx) findPreference(plugin.AV_AUDIO_FORMAT.getId());
 		audioFormat.setEntries(entries);
@@ -304,7 +304,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 
 	private void setupAudioBitratePref(AudioVideoNotesPlugin plugin) {
 		Integer[] entryValues = new Integer[] {AUDIO_BITRATE_DEFAULT, 16 * 1024, 32 * 1024, 48 * 1024, 64 * 1024, 96 * 1024, 128 * 1024};
-		String[] entries = new String[] {"Default", "16 kbps", "32 kbps", "48 kbps", "64 kbps", "96 kbps", "128 kbps"};
+		String[] entries = new String[] {getString(R.string.shared_string_default), "16 kbps", "32 kbps", "48 kbps", "64 kbps", "96 kbps", "128 kbps"};
 
 		ListPreferenceEx audioBitrate = (ListPreferenceEx) findPreference(plugin.AV_AUDIO_BITRATE.getId());
 		audioBitrate.setEntries(entries);

@@ -13,13 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.ViewGroup.MarginLayoutParams;
-import android.view.ViewTreeObserver.OnScrollChangedListener;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
@@ -55,6 +51,7 @@ import net.osmand.plus.routepreparationmenu.cards.ImportTrackCard;
 import net.osmand.plus.routepreparationmenu.cards.NavigateTrackOptionsCard;
 import net.osmand.plus.routepreparationmenu.cards.ReverseTrackCard;
 import net.osmand.plus.routepreparationmenu.cards.SelectTrackCard;
+import net.osmand.plus.routepreparationmenu.cards.SelectedTrackToFollowCard;
 import net.osmand.plus.routepreparationmenu.cards.TrackEditCard;
 import net.osmand.plus.routepreparationmenu.cards.TracksToFollowCard;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
@@ -73,6 +70,9 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 
 
 public class FollowTrackFragment extends ContextMenuScrollFragment implements CardListener,
@@ -173,7 +173,6 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			setupCards();
 			setupButtons(view);
 			setupSortButton(view);
-			setupScrollShadow();
 			if (!isPortrait()) {
 				int widthNoShadow = getLandscapeNoShadowWidth();
 				FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(widthNoShadow, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -186,7 +185,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		return view;
 	}
 
-	private void showShadowButton() {
+	public void showShadowButton() {
 		buttonsShadow.setVisibility(View.VISIBLE);
 		buttonsShadow.animate()
 				.alpha(0.8f)
@@ -194,13 +193,11 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 				.setListener(null);
 	}
 
-	private void hideShadowButton() {
+	public void hideShadowButton() {
 		buttonsShadow.animate()
 				.alpha(0f)
 				.setDuration(200);
-
 	}
-
 
 	private void setupCards() {
 		MapActivity mapActivity = getMapActivity();
@@ -212,37 +209,9 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 				setupTracksCard();
 			} else {
 				sortButton.setVisibility(View.GONE);
-				TrackEditCard importTrackCard = new TrackEditCard(mapActivity, gpxFile);
-				importTrackCard.setListener(this);
-				cardsContainer.addView(importTrackCard.build(mapActivity));
-
-				SelectTrackCard selectTrackCard = new SelectTrackCard(mapActivity);
-				selectTrackCard.setListener(this);
-				cardsContainer.addView(selectTrackCard.build(mapActivity));
-
-				ApplicationMode mode = app.getRoutingHelper().getAppMode();
-
-				RoutingHelper routingHelper = app.getRoutingHelper();
-				GPXRouteParamsBuilder rparams = routingHelper.getCurrentGPXRoute();
-				boolean osmandRouter = mode.getRouteService() == RouteService.OSMAND;
-				if (rparams != null && osmandRouter) {
-					cardsContainer.addView(buildDividerView(cardsContainer, false));
-
-					ReverseTrackCard reverseTrackCard = new ReverseTrackCard(mapActivity, rparams.isReverse());
-					reverseTrackCard.setListener(this);
-					cardsContainer.addView(reverseTrackCard.build(mapActivity));
-
-					if (!gpxFile.hasRtePt() && !gpxFile.hasRoute()) {
-						cardsContainer.addView(buildDividerView(cardsContainer, true));
-
-						AttachTrackToRoadsCard attachTrackCard = new AttachTrackToRoadsCard(mapActivity);
-						attachTrackCard.setListener(this);
-						cardsContainer.addView(attachTrackCard.build(mapActivity));
-					}
-					if (!rparams.isUseIntermediatePointsRTE()) {
-						setupNavigateOptionsCard(rparams);
-					}
-				}
+				SelectedTrackToFollowCard selectedTrackToFollowCard =
+						new SelectedTrackToFollowCard(mapActivity, FollowTrackFragment.this, gpxFile);
+				getCardsContainer().addView(selectedTrackToFollowCard.build(mapActivity));
 			}
 		}
 	}
@@ -255,42 +224,12 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			List<GPXInfo> list = GpxUiHelper.getSortedGPXFilesInfo(dir, selectedTrackNames, false);
 			if (list.size() > 0) {
 				String defaultCategory = app.getString(R.string.shared_string_all);
-				tracksCard = new TracksToFollowCard(mapActivity, list, defaultCategory);
+				tracksCard = new TracksToFollowCard(mapActivity, FollowTrackFragment.this, list, defaultCategory);
 				tracksCard.setListener(FollowTrackFragment.this);
 				getCardsContainer().addView(tracksCard.build(mapActivity));
 				sortButton.setVisibility(View.VISIBLE);
 			}
 		}
-	}
-
-	private void setupNavigateOptionsCard(GPXRouteParamsBuilder rparams) {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			int passRouteId = R.string.gpx_option_from_start_point;
-			LocalRoutingParameter passWholeRoute = new OtherLocalRoutingParameter(passRouteId,
-					app.getString(passRouteId), rparams.isPassWholeRoute());
-
-			int navigationTypeId = R.string.gpx_option_calculate_first_last_segment;
-			LocalRoutingParameter navigationType = new OtherLocalRoutingParameter(navigationTypeId,
-					app.getString(navigationTypeId), rparams.isCalculateOsmAndRouteParts());
-
-			NavigateTrackOptionsCard navigateTrackCard = new NavigateTrackOptionsCard(mapActivity, passWholeRoute, navigationType);
-			navigateTrackCard.setListener(this);
-			getCardsContainer().addView(navigateTrackCard.build(mapActivity));
-		}
-	}
-
-	public View buildDividerView(@NonNull ViewGroup view, boolean needMargin) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(view.getContext(), isNightMode());
-		View divider = themedInflater.inflate(R.layout.simple_divider_item, view, false);
-
-		LayoutParams params = divider.getLayoutParams();
-		if (needMargin && params instanceof MarginLayoutParams) {
-			AndroidUtils.setMargins((MarginLayoutParams) params, dpToPx(64), 0, 0, 0);
-			divider.setLayoutParams(params);
-		}
-
-		return divider;
 	}
 
 	@Override
@@ -653,22 +592,6 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			}
 		});
 		UiUtilities.setupDialogButton(isNightMode(), cancelButton, DialogButtonType.SECONDARY, R.string.shared_string_close);
-	}
-
-	private void setupScrollShadow() {
-		final View scrollView = getBottomScrollView();
-		scrollView.getViewTreeObserver().addOnScrollChangedListener(new OnScrollChangedListener() {
-
-			@Override
-			public void onScrollChanged() {
-				boolean scrollToBottomAvailable = scrollView.canScrollVertically(1);
-				if (scrollToBottomAvailable) {
-					showShadowButton();
-				} else {
-					hideShadowButton();
-				}
-			}
-		});
 	}
 
 	private void close() {

@@ -292,7 +292,7 @@ public class GraphsCard extends BaseCard implements OnUpdateInfoListener {
 		OsmandApplication app = getMyApplication();
 		gpxFile = getGpxFile();
 		analysis = gpxFile != null ? gpxFile.getAnalysis(0) : null;
-		gpxItem = gpxFile != null ? GpxUiHelper.makeGpxDisplayItem(app, gpxFile) : null;
+		gpxItem = gpxFile != null ? GpxUiHelper.makeGpxDisplayItem(app, gpxFile, true) : null;
 		if (gpxItem != null) {
 			trackDetailsMenu.setGpxItem(gpxItem);
 		}

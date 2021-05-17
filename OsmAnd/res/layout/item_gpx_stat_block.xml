@@ -3,15 +3,16 @@
 	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="wrap_content"
-	android:layout_height="@dimen/list_header_height"
+	android:layout_height="wrap_content"
 	android:layout_marginStart="@dimen/content_padding"
 	android:layout_marginLeft="@dimen/content_padding"
+	android:minHeight="@dimen/list_header_height"
 	android:gravity="start|center_vertical"
 	android:orientation="horizontal">
 
 	<LinearLayout
 		android:layout_width="wrap_content"
-		android:layout_height="match_parent"
+		android:layout_height="wrap_content"
 		android:layout_marginEnd="@dimen/content_padding"
 		android:layout_marginRight="@dimen/content_padding"
 		android:gravity="start|center_vertical"

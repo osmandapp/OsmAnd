@@ -7,26 +7,36 @@ public class InAppPurchasesImpl extends InAppPurchases {
 	public InAppPurchasesImpl(OsmandApplication ctx) {
 		super(ctx);
 		inAppPurchases = new InAppPurchase[] {};
-		liveUpdates = new EmptyLiveUpdatesList();
+		subscriptions = new EmptyLiveUpdatesList();
 	}
 
 	@Override
-	public boolean isFullVersion(String sku) {
+	public boolean isFullVersion(InAppPurchase p) {
 		return false;
 	}
 
 	@Override
-	public boolean isDepthContours(String sku) {
+	public boolean isDepthContours(InAppPurchase p) {
 		return false;
 	}
 
 	@Override
-	public boolean isContourLines(String sku) {
+	public boolean isContourLines(InAppPurchase p) {
 		return false;
 	}
 
 	@Override
-	public boolean isLiveUpdates(String sku) {
+	public boolean isLiveUpdatesSubscription(InAppPurchase p) {
+		return false;
+	}
+
+	@Override
+	public boolean isOsmAndProSubscription(InAppPurchase p) {
+		return false;
+	}
+
+	@Override
+	public boolean isMapsSubscription(InAppPurchase p) {
 		return false;
 	}
 

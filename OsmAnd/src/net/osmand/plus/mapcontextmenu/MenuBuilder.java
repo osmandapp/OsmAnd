@@ -82,9 +82,11 @@ import org.apache.commons.logging.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -1023,6 +1025,14 @@ public class MenuBuilder {
 				? AndroidUtils.createPressedStateListDrawable(normal, pressed) : normal, null, null, null);
 		button.setCompoundDrawablePadding(dpToPx(8f));
 		container.addView(button);
+	}
+
+	protected void buildDateRow(View view, long timestamp) {
+		DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(view.getContext());
+		DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(view.getContext());
+		Date date = new Date(timestamp);
+		buildRow(view, R.drawable.ic_action_data, null, dateFormat.format(date) + " — " + timeFormat.format(date),
+				0, false, null, false, 0, false, null, false);
 	}
 
 	public boolean hasCustomAddressLine() {

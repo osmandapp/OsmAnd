@@ -3089,7 +3089,8 @@
     <string name="app_mode_campervan">Camping-car</string>
     <string name="rendering_attr_showLez_description">Afficher les zones à faible émission sur la carte (n\'influe pas sur le calcul d\'itinéraire).</string>
     <string name="rendering_attr_showLez_name">Afficher les zones à faibles émissions</string>
-    <string name="new_route_calculated_dist_dbg">Itinéraire : distance %1$s, durée %2$s \nCalculs : %3$.1f secondes, %4$d routes, %5$d tuiles)</string>
+    <string name="new_route_calculated_dist_dbg">Itinéraire : distance %1$s, durée %2$s
+\nCalculs : %3$.1f secondes, %4$d routes, %5$d tuiles</string>
     <string name="lang_oc">Occitan</string>
     <string name="app_mode_wagon">Wagon</string>
     <string name="app_mode_pickup_truck">Camionnette</string>
@@ -3813,7 +3814,6 @@
 \nLe graphique sera disponible à l\'issue du calcul de l\'itinéraire.</string>
     <string name="snowmobile_render_descr">Pour la conduite en motoneige avec des routes et des pistes dédiées.</string>
     <string name="shared_string_graph">Graphique</string>
-    <string name="app_mode_gap">Écart</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s - %2$s</string>
     <string name="shared_string_local_maps">Cartes locales</string>
     <string name="icon_group_amenity">Loisir</string>
@@ -4053,7 +4053,6 @@
 \n- Mise à jour de la fenêtre \"Enregistrement du trajet\".
 \n
 \n</string>
-    <string name="route_line_use_map_style_appearance">Utiliser le style de carte (%2$s) par défaut %1$s.</string>
     <string name="customize_route_line">Personnaliser la ligne d\'itinéraire</string>
     <string name="shared_string_route_line">Ligne d\'itinéraire</string>
     <string name="specify_color_for_map_mode">Définissez une couleur pour le mode de carte %1$s.</string>
@@ -4092,4 +4091,9 @@
     <string name="tts_description">La synthèse vocale (Text-To-Speech ou TTS) peut prononcer tous types d\'instructions : nom de rue, bifurcation, nom de PI, etc.</string>
     <string name="tts_title">TTS</string>
     <string name="shared_string_itinerary">Itinéraire</string>
+    <string name="route_line_use_map_style_width">Utiliser la largeur par défaut du style de carte (%1$s).</string>
+    <string name="route_line_use_map_style_color">Utiliser la couleur par défaut du style de carte (%1$s).</string>
+    <string name="routing_attr_avoid_low_emission_zone_name">Éviter les zones à faibles émissions</string>
+    <string name="poi_routes">Routes</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">Éviter les zones à faibles émissions</string>
 </resources>

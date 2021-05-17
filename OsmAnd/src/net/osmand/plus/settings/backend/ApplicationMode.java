@@ -82,8 +82,6 @@ public class ApplicationMode {
 	public static final ApplicationMode DEFAULT = createBase(R.string.app_mode_default, "default")
 			.icon(R.drawable.ic_world_globe_dark).reg();
 
-	public static final ApplicationMode GAP = new ApplicationMode(R.string.app_mode_gap, "gap");
-
 	public static final ApplicationMode CAR = createBase(R.string.app_mode_car, "car")
 			.icon(R.drawable.ic_action_car_dark)
 			.description(R.string.base_profile_descr_car).reg();
