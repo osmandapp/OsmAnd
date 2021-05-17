@@ -215,10 +215,11 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	public synchronized SaveGpxResult saveDataToGpx(File dir) {
 		List<String> warnings = new ArrayList<>();
 		List<String> filenames = new ArrayList<>();
+		Map<String, GPXFile> data = new LinkedHashMap<>();
 		dir.mkdirs();
 		if (dir.getParentFile().canWrite()) {
 			if (dir.exists()) {
-				Map<String, GPXFile> data = collectRecordedData();
+				data = collectRecordedData();
 
 				// save file
 				for (final Map.Entry<String, GPXFile> entry : data.entrySet()) {
@@ -253,7 +254,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 					Exception warn = GPXUtilities.writeGpxFile(fout, gpx);
 					if (warn != null) {
 						warnings.add(warn.getMessage());
-						return new SaveGpxResult(warnings, new ArrayList<String>());
+						return new SaveGpxResult(warnings, new ArrayList<String>(), new LinkedHashMap<>());
 					}
 
 					GPXTrackAnalysis analysis = gpx.getAnalysis(fout.lastModified());
@@ -264,7 +265,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 			}
 		}
 		clearRecordedData(warnings.isEmpty());
-		return new SaveGpxResult(warnings, filenames);
+		return new SaveGpxResult(warnings, filenames, data);
 	}
 
 	public void clearRecordedData(boolean isWarningEmpty) {
@@ -757,13 +758,15 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 
 	public class SaveGpxResult {
 
-		public SaveGpxResult(List<String> warnings, List<String> filenames) {
+		public SaveGpxResult(List<String> warnings, List<String> filenames, Map<String, GPXFile> data) {
 			this.warnings = warnings;
 			this.filenames = filenames;
+			this.data = data;
 		}
 
 		List<String> warnings;
 		List<String> filenames;
+		Map<String, GPXFile> data;
 
 		public List<String> getWarnings() {
 			return warnings;
@@ -771,6 +774,10 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 
 		public List<String> getFilenames() {
 			return filenames;
+		}
+
+		public Map<String, GPXFile> getData() {
+			return data;
 		}
 	}
 

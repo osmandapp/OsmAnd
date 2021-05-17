@@ -24,7 +24,6 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.slider.Slider;
 
 import net.osmand.AndroidUtils;
-import net.osmand.GPXUtilities;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.ValueHolder;
@@ -503,9 +502,8 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 					}
 				}
 				if (file != null && file.exists() && file.length() > 0) {
-					GPXUtilities.GPXFile res = GPXUtilities.loadGPXFile(file);
-					boolean isTrackEmpty = res.hasTrkPt();
-					if (isTrackEmpty) {
+					boolean isTrackEmpty = !result.getData().values().iterator().next().hasTrkPt();
+					if (!isTrackEmpty) {
 						if (!openTrack) {
 							if (activityRef != null) {
 								final Activity a = activityRef.get();
