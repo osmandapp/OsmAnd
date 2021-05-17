@@ -52,7 +52,7 @@
                 android:background="?attr/divider_color_basic" />
 
             <FrameLayout
-                android:id="@+id/slope_widget"
+                android:id="@+id/grade_widget"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
