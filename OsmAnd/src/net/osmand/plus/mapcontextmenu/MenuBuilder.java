@@ -1140,7 +1140,7 @@ public class MenuBuilder {
 
 		titleView.setText(AndroidUtils.replaceCharsWithIcon(desc, arrow, arrowChars));
 		infoView.addView(titleView);
-		if (route.hasInterval()) {
+		if (route.route.hasInterval()) {
 			infoView.addView(createIntervalView(view.getContext(), route, titleParams, textColor));
 		}
 		LinearLayout typeView = new LinearLayout(view.getContext());
@@ -1180,7 +1180,8 @@ public class MenuBuilder {
 		intervalView.setLayoutParams(titleParams);
 		intervalView.setTextSize(16);
 		intervalView.setTextColor(textColor);
-		intervalView.setText(route.getInterval(ctx));
+		intervalView.setText(ctx.getString(R.string.ltr_or_rtl_combine_via_colon,
+				ctx.getString(R.string.shared_string_interval), route.route.getInterval()));
 		return intervalView;
 	}
 

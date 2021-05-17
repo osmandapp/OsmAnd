@@ -138,9 +138,14 @@ public class PublicTransportCard extends BaseCard {
 
 		TextView fromLine = (TextView) view.findViewById(R.id.from_line);
 		TextView wayLine = (TextView) view.findViewById(R.id.way_line);
+		TextView intervalLine = view.findViewById(R.id.interval_line);
 
 		fromLine.setText(getFirstLineDescrSpan());
 		wayLine.setText(getSecondLineDescrSpan(segments));
+		if (hasInterval(segments)) {
+			intervalLine.setText(getIntervalDescr(segments));
+			intervalLine.setVisibility(View.VISIBLE);
+		}
 
 		updateButtons();
 
@@ -150,6 +155,15 @@ public class PublicTransportCard extends BaseCard {
 		if (transparentBackground) {
 			view.findViewById(R.id.routes_info_container).setBackgroundDrawable(null);
 		}
+	}
+
+	private boolean hasInterval(List<TransportRouteResultSegment> segments) {
+		for (TransportRouteResultSegment segment : segments) {
+			if (segment.route.hasInterval()) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public void updateButtons() {
@@ -278,6 +292,11 @@ public class PublicTransportCard extends BaseCard {
 		secondLineDesc.setSpan(new CustomTypefaceSpan(typeface), startWalkTime, startWalkTime + walkTimeStr.length(), 0);
 
 		return secondLineDesc;
+	}
+
+	private String getIntervalDescr(List<TransportRouteResultSegment> segments) {
+		String interval = Algorithms.capitalizeFirstLetter(app.getString(R.string.shared_string_interval));
+		return interval + " " + segments.get(0).route.getInterval();
 	}
 
 	private void createRouteBadges(List<TransportRouteResultSegment> segments, boolean badgesRowClickable) {

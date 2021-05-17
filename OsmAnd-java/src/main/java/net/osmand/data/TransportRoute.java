@@ -21,8 +21,9 @@ public class TransportRoute extends MapObject {
 	private String color;
 	private List<Way> forwardWays;
 	private TransportSchedule schedule;
-	private Map<String,String> tags = new HashMap<>();
+	private Map<String, String> tags = new HashMap<>();
 	public static final double SAME_STOP = 40;
+	public static final String INTERVAL_KEY = "interval";
 
 	public TransportRoute() {
 	}
@@ -47,6 +48,14 @@ public class TransportRoute extends MapObject {
 
 	public Map<String, String> getTags() {
 		return tags;
+	}
+
+	public boolean hasInterval() {
+		return getTags().containsKey(INTERVAL_KEY);
+	}
+
+	public String getInterval() {
+		return getTags().get(INTERVAL_KEY);
 	}
 
 	public void addTag(String k, String v) {

@@ -1,6 +1,5 @@
 package net.osmand.plus.transport;
 
-import android.content.Context;
 import android.util.Pair;
 
 import net.osmand.data.RotatedTileBox;
@@ -17,7 +16,6 @@ import java.util.List;
 import java.util.Map;
 
 public class TransportStopRoute {
-	public static final String INTERVAL_KEY = "interval";
 	public TransportStop refStop;
 	public TransportStopType type;
 	public String desc;
@@ -49,15 +47,6 @@ public class TransportStopRoute {
 			return desc + " (" + nm + ")";
 		}
 		return desc;
-	}
-
-	public boolean hasInterval(){
-		return route.getTags().containsKey(INTERVAL_KEY);
-	}
-
-	public String getInterval(Context ctx) {
-		return ctx.getString(R.string.ltr_or_rtl_combine_via_colon,ctx.getString(R.string.shared_string_interval),
-				route.getTags().get(INTERVAL_KEY));
 	}
 
 	// TODO: [Hot fix] - Move changes to upper method later
