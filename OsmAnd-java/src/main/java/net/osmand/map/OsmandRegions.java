@@ -198,7 +198,7 @@ public class OsmandRegions {
 		}
 	}
 
-	public String getSuggestedDownloadsMapsName(String downloadName) {
+	public String getSuggestedDownloadMapName(String downloadName) {
 		final String lc = downloadName.toLowerCase();
 		if (downloadNamesToFullNames.containsKey(lc)) {
 			String fullName = downloadNamesToFullNames.get(lc);

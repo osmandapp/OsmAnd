@@ -7,6 +7,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MultipleSelectionBottomSheet;
 import net.osmand.plus.base.SelectionBottomSheet;
+import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadItem;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
@@ -23,7 +24,7 @@ public class SuggestMapsDownloadWarningCards extends WarningCard {
 	public SuggestMapsDownloadWarningCards(@NonNull MapActivity mapActivity) {
 		super(mapActivity);
 		imageId = R.drawable.ic_map;
-		title = mapActivity.getString(R.string.offline_maps);
+		title = mapActivity.getString(R.string.offline_maps_required_descr);
 		linkText = mapActivity.getString(R.string.welmode_download_maps);
 	}
 
@@ -104,13 +105,16 @@ public class SuggestMapsDownloadWarningCards extends WarningCard {
 
 
 	public List<DownloadItem> getMapsList() {
-		if (!app.getDownloadThread().getIndexes().isDownloadedFromInternet && app.getSettings().isInternetConnectionAvailable()) {
-			app.getDownloadThread().runReloadIndexFiles();
+		DownloadIndexesThread downloadThread = app.getDownloadThread();
+		if (!downloadThread.getIndexes().isDownloadedFromInternet) {
+			if (mapActivity.getMyApplication().getSettings().isInternetConnectionAvailable()) {
+				downloadThread.runReloadIndexFiles();
+			}
 		}
 
 		boolean downloadIndexes = app.getSettings().isInternetConnectionAvailable()
-				&& !app.getDownloadThread().getIndexes().isDownloadedFromInternet
-				&& !app.getDownloadThread().getIndexes().downloadFromInternetFailed;
+				&& !downloadThread.getIndexes().isDownloadedFromInternet
+				&& !downloadThread.getIndexes().downloadFromInternetFailed;
 
 		List<WorldRegion> suggestedMaps = mapActivity.getRoutingHelper().getRoute().getDownloadMaps();
 		List<DownloadItem> suggestedDownloadsMaps = new ArrayList<>();

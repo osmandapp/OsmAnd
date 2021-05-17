@@ -5,7 +5,6 @@ import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.onlinerouting.EngineParameter;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.onlinerouting.engine.EngineType;
@@ -35,9 +34,6 @@ public class SuggestedMapsProvider {
 
 	private static final int EARTH_RADIUS = 6371000;
 	private static final int MINIMAL_DISTANCE = 20000;
-	public static TargetPointsHelper.TargetPoint start;
-	public static LatLon[] intermediates;
-	public static TargetPointsHelper.TargetPoint end;
 
 	public static boolean checkIfObjectDownloaded(String downloadName, OsmandApplication app) {
 		ResourceManager rm = app.getResourceManager();
@@ -48,10 +44,10 @@ public class SuggestedMapsProvider {
 		return rm.getIndexFileNames().containsKey(regionName) || rm.getIndexFileNames().containsKey(roadsRegionName);
 	}
 
-	public static LinkedList<Location> getLocationBasedOnDistance(LinkedList<Location> points) {
-		while (points.getFirst().distanceTo(points.getLast()) > MINIMAL_DISTANCE) {
-			float bearing = points.getFirst().bearingTo(points.getLast());
-			LatLon latLon = findPointAtDistanceFrom(points.getFirst().getLatitude(), points.getFirst().getLongitude(), MINIMAL_DISTANCE, bearing);
+	public static List<Location> getLocationBasedOnDistance(List<Location> points) {
+		while (points.get(0).distanceTo(points.get(points.size() - 1)) > MINIMAL_DISTANCE) {
+			float bearing = points.get(0).bearingTo(points.get(points.size() - 1));
+			LatLon latLon = findPointAtDistanceFrom(points.get(0).getLatitude(), points.get(0).getLongitude(), MINIMAL_DISTANCE, bearing);
 			Location location = new Location("", latLon.getLatitude(), latLon.getLongitude());
 			points.add(0, location);
 		}

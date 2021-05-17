@@ -15,8 +15,8 @@
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
     <string name="search_more">Search more…</string>
     <string name="online_maps_link">Check the necessary maps</string>
-    <string name="online_maps">The calculation of the route takes more than usual. Perhaps some cards are not loaded. You can run online checking the necessary cards.</string>
-    <string name="offline_maps">Additional offline maps are required to calculate the route.</string>
+    <string name="online_maps__required_descr">The calculation of the route takes more than usual. Perhaps some cards are not loaded. You can run online checking the necessary cards.</string>
+    <string name="offline_maps_required_descr">Additional offline maps are required to calculate the route.</string>
     <string name="routing_attr_avoid_low_emission_zone_name">Avoid low emission zones</string>
     <string name="routing_attr_avoid_low_emission_zone_description">Avoid low emission zones</string>
     <string name="poi_routes">Routes</string>

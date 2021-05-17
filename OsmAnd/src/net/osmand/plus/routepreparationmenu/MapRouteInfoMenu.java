@@ -48,7 +48,6 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.map.WorldRegion;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoritesListener;
 import net.osmand.plus.GeocodingLookupService;
@@ -106,6 +105,7 @@ import net.osmand.plus.routing.RouteCalculationParams;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelperUtils;
+import net.osmand.plus.routing.SuggestedMapsProvider;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -138,10 +138,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
-
-import static net.osmand.plus.routing.SuggestedMapsProvider.getLocationBasedOnDistance;
-import static net.osmand.plus.routing.SuggestedMapsProvider.getStartFinishIntermediatesPoints;
-import static net.osmand.plus.routing.SuggestedMapsProvider.getSuggestedMaps;
 
 public class MapRouteInfoMenu implements IRouteInformationListener, CardListener, FavoritesListener {
 
@@ -487,15 +483,13 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		}
 	}
 
-	private List<WorldRegion> suggestedMaps;
-
 	public void updateMissingMaps(RouteCalculationParams params) {
 		try {
-			LinkedList<Location> points = getStartFinishIntermediatesPoints(params, "");
-			List<Location> pointsStraightLine = getLocationBasedOnDistance(points);
-			suggestedMaps = getSuggestedMaps(pointsStraightLine, params.ctx);
+			LinkedList<Location> points = SuggestedMapsProvider.getStartFinishIntermediatesPoints(params, "");
+			List<Location> pointsStraightLine = SuggestedMapsProvider.getLocationBasedOnDistance(points);
+			SuggestedMapsProvider.getSuggestedMaps(pointsStraightLine, params.ctx);
 		} catch (IOException e) {
-			e.printStackTrace();
+			LOG.error(e.getMessage(), e);
 		}
 	}
 

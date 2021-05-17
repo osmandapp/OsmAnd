@@ -69,10 +69,6 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import btools.routingapp.IBRouterService;
 
-import static net.osmand.plus.routing.SuggestedMapsProvider.getLocationBasedOnDistance;
-import static net.osmand.plus.routing.SuggestedMapsProvider.getStartFinishIntermediatesPoints;
-import static net.osmand.plus.routing.SuggestedMapsProvider.getSuggestedMaps;
-
 public class RouteProvider {
 
 	private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(RouteProvider.class);
@@ -109,10 +105,10 @@ public class RouteProvider {
 				if (calcGPXRoute && !params.gpxRoute.calculateOsmAndRoute) {
 					res = calculateGpxRoute(params);
 				} else if (params.mode.getRouteService() == RouteService.OSMAND) {
-					LinkedList<Location> points = getStartFinishIntermediatesPoints(params, "");
-					List<WorldRegion> suggestedMapsStartFinishIntermediates = getSuggestedMaps(points, params.ctx);
-					LinkedList<Location> pointsStraightLine = getLocationBasedOnDistance(points);
-					List<WorldRegion> suggestedMapsOnStraightLine = getSuggestedMaps(pointsStraightLine, params.ctx);
+					LinkedList<Location> points = SuggestedMapsProvider.getStartFinishIntermediatesPoints(params, "");
+					List<WorldRegion> suggestedMapsStartFinishIntermediates = SuggestedMapsProvider.getSuggestedMaps(points, params.ctx);
+					List<Location> pointsStraightLine = SuggestedMapsProvider.getLocationBasedOnDistance(points);
+					List<WorldRegion> suggestedMapsOnStraightLine = SuggestedMapsProvider.getSuggestedMaps(pointsStraightLine, params.ctx);
 					if (Algorithms.isEmpty(suggestedMapsStartFinishIntermediates)) {
 						if (!Algorithms.isEmpty(suggestedMapsOnStraightLine)) {
 							params.startTimeRouteCalculation = time;
@@ -1189,7 +1185,7 @@ public class RouteProvider {
 	}
 
 	private RouteCalculationResult findStraightRoute(RouteCalculationParams params) {
-		LinkedList<Location> points = getStartFinishIntermediatesPoints(params, "pnt");
+		LinkedList<Location> points = SuggestedMapsProvider.getStartFinishIntermediatesPoints(params, "pnt");
 		List<Location> segments = new ArrayList<>();
 		Location lastAdded = null;
 		float speed = params.mode.getDefaultSpeed();

@@ -395,7 +395,7 @@ public class DownloadActivityType {
 		if (std != null) {
 			return std;
 		}
-		return osmandRegions.getSuggestedDownloadsMapsName(basename);
+		return osmandRegions.getSuggestedDownloadMapName(basename);
 	}
 
 	public String getTargetFileName(IndexItem item) {
