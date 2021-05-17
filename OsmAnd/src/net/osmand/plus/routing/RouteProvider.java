@@ -69,11 +69,9 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import btools.routingapp.IBRouterService;
 
-import static net.osmand.plus.routing.SuggestedMapsProvider.findOnlineRoutePoints;
 import static net.osmand.plus.routing.SuggestedMapsProvider.getLocationBasedOnDistance;
 import static net.osmand.plus.routing.SuggestedMapsProvider.getStartFinishIntermediatesPoints;
 import static net.osmand.plus.routing.SuggestedMapsProvider.getSuggestedMaps;
-
 
 public class RouteProvider {
 
@@ -81,13 +79,6 @@ public class RouteProvider {
 	private static final int MIN_DISTANCE_FOR_INSERTING_ROUTE_SEGMENT = 60;
 	private static final int ADDITIONAL_DISTANCE_FOR_START_POINT = 300;
 	private static final int MIN_STRAIGHT_DIST = 50000;
-
-	public void setOnlineCheckNeeded(boolean onlineCheckNeeded) {
-		this.onlineCheckNeeded = onlineCheckNeeded;
-	}
-
-	boolean onlineCheckNeeded;
-	List<WorldRegion> mapsCalculatedOnline;
 
 	public static Location createLocation(WptPt pt){
 		Location loc = new Location("OsmandRouteProvider");
@@ -104,12 +95,11 @@ public class RouteProvider {
 		return loc;
 	}
 
-	public RouteCalculationResult calculateRouteImpl(final RouteCalculationParams params) {
+	public RouteCalculationResult calculateRouteImpl(RouteCalculationParams params) {
 		long time = System.currentTimeMillis();
-		final OsmandApplication app = params.ctx;
 		if (params.start != null && params.end != null) {
 			if(log.isInfoEnabled()){
-				log.info("Start finding route from " + params.start + " to " + params.end +" using " +
+				log.info("Start finding route from " + params.start + " to " + params.end +" using " + 
 						params.mode.getRouteService().getName()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			}
 			try {
@@ -120,56 +110,16 @@ public class RouteProvider {
 					res = calculateGpxRoute(params);
 				} else if (params.mode.getRouteService() == RouteService.OSMAND) {
 					LinkedList<Location> points = getStartFinishIntermediatesPoints(params, "");
-					List<WorldRegion> suggestedMaps = getSuggestedMaps(points, app);
-					if (Algorithms.isEmpty(suggestedMaps)) {
-						LinkedList<Location> pointsStraightLine = getLocationBasedOnDistance(points);
-						List<WorldRegion> suggestedMapsOnStraightLine = getSuggestedMaps(pointsStraightLine, app);
+					List<WorldRegion> suggestedMapsStartFinishIntermediates = getSuggestedMaps(points, params.ctx);
+					LinkedList<Location> pointsStraightLine = getLocationBasedOnDistance(points);
+					List<WorldRegion> suggestedMapsOnStraightLine = getSuggestedMaps(pointsStraightLine, params.ctx);
+					if (Algorithms.isEmpty(suggestedMapsStartFinishIntermediates)) {
 						if (!Algorithms.isEmpty(suggestedMapsOnStraightLine)) {
-							params.startTimeRouteCalculation = System.currentTimeMillis();
-							findVectorMapsRoute(params, calcGPXRoute);
-							final LinkedList<Location> onlinePoints = findOnlineRoutePoints(params);
-							params.calculationProgressCallback = new RouteCalculationProgressCallback() {
-
-								@Override
-								public void start() {
-
-								}
-
-								@Override
-								public void updateProgress(int progress) {
-
-								}
-
-								@Override
-								public void requestPrivateAccessRouting() {
-
-								}
-
-								@Override
-								public void updateMissingMaps() {
-									try {
-										mapsCalculatedOnline = getSuggestedMaps(onlinePoints, app);
-									} catch (IOException e) {
-										e.printStackTrace();
-									}
-									setOnlineCheckNeeded(true);
-								}
-
-								@Override
-								public void finish() {
-
-								}
-							};
-							if (onlineCheckNeeded) {
-								return new RouteCalculationResult(mapsCalculatedOnline, true);
-							} else {
-								res = findVectorMapsRoute(params, calcGPXRoute);
-							}
-						} else {
-							res = findVectorMapsRoute(params, calcGPXRoute);
+							params.startTimeRouteCalculation = time;
 						}
+						res = findVectorMapsRoute(params, calcGPXRoute);
 					} else {
-						return new RouteCalculationResult(suggestedMaps, false);
+						return new RouteCalculationResult(suggestedMapsOnStraightLine);
 					}
 				} else if (params.mode.getRouteService() == RouteService.BROUTER) {
 					res = findBROUTERRoute(params);
@@ -184,7 +134,7 @@ public class RouteProvider {
 				if(log.isInfoEnabled() ){
 					log.info("Finding route contained " + res.getImmutableAllLocations().size() + " points for " + (System.currentTimeMillis() - time) + " ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				}
-				return res;
+				return res; 
 			} catch (IOException e) {
 				log.error("Failed to find route ", e); //$NON-NLS-1$
 			} catch (ParserConfigurationException e) {
@@ -203,7 +153,7 @@ public class RouteProvider {
 		List<Location> locs = new ArrayList<Location>(rcr.getRouteLocations());
 		try {
 			int[] startI = new int[]{0};
-			int[] endI = new int[]{locs.size()};
+			int[] endI = new int[]{locs.size()}; 
 			locs = findStartAndEndLocationsFromRoute(locs, params.start, params.end, startI, endI);
 			List<RouteDirectionInfo> directions = calcDirections(startI, endI, rcr.getRouteDirections());
 			insertInitialSegment(params, locs, directions, true);
@@ -347,7 +297,7 @@ public class RouteProvider {
 		for (RouteDirectionInfo info : gpxDirections) {
 			// recalculate
 			info.distance = 0;
-			info.afterLeftTime = 0;
+			info.afterLeftTime = 0;			
 		}
 
 		return new RouteCalculationResult(gpxRoute, gpxDirections, routeParams,
@@ -551,8 +501,8 @@ public class RouteProvider {
 
 		return newGpxRoute;
 	}
-
-	private RouteCalculationResult findOfflineRouteSegment(RouteCalculationParams rParams, Location start,
+	
+	private RouteCalculationResult findOfflineRouteSegment(RouteCalculationParams rParams, Location start, 
 			LatLon end) {
 		RouteCalculationParams newParams = new RouteCalculationParams();
 		newParams.start = start;
@@ -789,7 +739,7 @@ public class RouteProvider {
 		int memoryLimit = (int) (0.95 * ((rt.maxMemory() - rt.totalMemory()) + rt.freeMemory()) / mb);
 		log.warn("Use " + memoryLimit +  " MB Free " + rt.freeMemory() / mb + " of " + rt.totalMemory() / mb + " max " + rt.maxMemory() / mb);
 		RoutingConfiguration cf = config.build( params.mode.getRoutingProfile(), params.start.hasBearing() ?
-				params.start.getBearing() / 180d * Math.PI : null,
+				params.start.getBearing() / 180d * Math.PI : null, 
 				memoryLimit, paramsR);
 		if(settings.ENABLE_TIME_CONDITIONAL_ROUTING.getModeValue(params.mode)) {
 			cf.routeCalculationTime = System.currentTimeMillis();
@@ -811,7 +761,7 @@ public class RouteProvider {
 					params.ctx.runInUIThread(new Runnable() {
 						@Override
 						public void run() {
-							params.ctx.showToastMessage(R.string.complex_route_calculation_failed, e.getMessage());
+							params.ctx.showToastMessage(R.string.complex_route_calculation_failed, e.getMessage());							
 						}
 					});
 					result = router.searchRoute(ctx, st, en, inters);
@@ -819,7 +769,7 @@ public class RouteProvider {
 			} else {
 				result = router.searchRoute(ctx, st, en, inters);
 			}
-
+			
 			if(result == null || result.isEmpty()) {
 				if(ctx.calculationProgress.segmentNotFound == 0) {
 					return new RouteCalculationResult(params.ctx.getString(R.string.starting_point_too_far));
@@ -839,9 +789,10 @@ public class RouteProvider {
 				// something really strange better to see that message on the scren
 				return emptyResult();
 			} else {
-				return new RouteCalculationResult(result, params.start, params.end,
+				RouteCalculationResult res = new RouteCalculationResult(result, params.start, params.end,
 						params.intermediates, params.ctx, params.leftSide, ctx, params.gpxRoute  == null? null: params.gpxRoute.wpt,
 								params.mode, true);
+				return res;
 			}
 		} catch (RuntimeException e) {
 			log.error("Runtime error: " + e.getMessage(), e);
@@ -854,7 +805,7 @@ public class RouteProvider {
 //			ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
 //			activityManager.getMemoryInfo(memoryInfo);
 //			int avl = (int) (memoryInfo.availMem / (1 << 20));
-			int max = (int) (Runtime.getRuntime().maxMemory() / (1 << 20));
+			int max = (int) (Runtime.getRuntime().maxMemory() / (1 << 20)); 
 			int avl = (int) (Runtime.getRuntime().freeMemory() / (1 << 20));
 			String s = " (" + avl + " MB available of " + max  + ") ";
 			return new RouteCalculationResult("Not enough process memory "+ s);
@@ -962,10 +913,10 @@ public class RouteProvider {
 							float currentDistanceToEnd = distanceToEnd[offset];
 							if (lasttime != 0) {
 								last.setAverageSpeed((lastDistanceToEnd - currentDistanceToEnd) / lasttime);
-							}
+							} 
 							last.distance = (int) Math.round(lastDistanceToEnd - currentDistanceToEnd);
 						}
-					}
+					} 
 					// save time as a speed because we don't know distance of the route segment
 					lasttime = time;
 					float avgSpeed = defSpeed;
@@ -1174,7 +1125,7 @@ public class RouteProvider {
 				nogoindex++;
 			}
 		}
-
+		
 		if (params.mode.isDerivedRoutingFrom(ApplicationMode.PEDESTRIAN)) {
 			mode = "foot"; //$NON-NLS-1$
 		} else if (params.mode.isDerivedRoutingFrom(ApplicationMode.BICYCLE)) {
@@ -1243,11 +1194,11 @@ public class RouteProvider {
 		Location lastAdded = null;
 		float speed = params.mode.getDefaultSpeed();
 		List<RouteDirectionInfo> computeDirections = new ArrayList<RouteDirectionInfo>();
-		while(!points.isEmpty()) {
+		while (!points.isEmpty()) {
 			Location pl = points.peek();
 			if (lastAdded == null || lastAdded.distanceTo(pl) < MIN_STRAIGHT_DIST) {
 				lastAdded = points.poll();
-				if(lastAdded != null && lastAdded.getProvider().equals("pnt")) {
+				if (lastAdded != null && lastAdded.getProvider().equals("pnt")) {
 					RouteDirectionInfo previousInfo = new RouteDirectionInfo(speed, TurnType.straight());
 					previousInfo.routePointOffset = segments.size();
 					previousInfo.setDescriptionRoute(params.ctx.getString(R.string.route_head));
@@ -1261,5 +1212,4 @@ public class RouteProvider {
 		}
 		return new RouteCalculationResult(segments, computeDirections, params, null, false);
 	}
-
 }

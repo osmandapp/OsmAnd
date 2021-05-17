@@ -260,14 +260,17 @@ class RouteRecalculationHelper {
 							if (calculationProgress.requestPrivateAccessRouting) {
 								progressRoute.requestPrivateAccessRouting();
 							}
+							if (params.startTimeRouteCalculation != 0 && routeEvaluationStartTime > params.startTimeRouteCalculation + 60000) {
+								progressRoute.updateMissingMaps(params);
+							}
 							updateProgress(params);
 						}
 					} else {
 						if (calculationProgress.requestPrivateAccessRouting) {
 							progressRoute.requestPrivateAccessRouting();
 						}
-						if (routeEvaluationStartTime > params.startTimeRouteCalculation + 60000) {
-							progressRoute.updateMissingMaps();
+						if (params.startTimeRouteCalculation != 0 && routeEvaluationStartTime > params.startTimeRouteCalculation + 60000) {
+							progressRoute.updateMissingMaps(params);
 						}
 						progressRoute.finish();
 					}
@@ -358,8 +361,8 @@ class RouteRecalculationHelper {
 						params.resultListener.onRouteCalculated(res);
 					}
 				} else {
-						evalWaitInterval = Math.max(3000, routingThreadHelper.evalWaitInterval * 3 / 2); // for Issue #3899
-						evalWaitInterval = Math.min(evalWaitInterval, 120000);
+					evalWaitInterval = Math.max(3000, routingThreadHelper.evalWaitInterval * 3 / 2); // for Issue #3899
+					evalWaitInterval = Math.min(evalWaitInterval, 120000);
 				}
 			}
 			OsmandApplication app = routingHelper.getApplication();

@@ -48,6 +48,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.map.WorldRegion;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoritesListener;
 import net.osmand.plus.GeocodingLookupService;
@@ -101,6 +102,7 @@ import net.osmand.plus.routepreparationmenu.cards.SuggestMapsDownloadWarningCard
 import net.osmand.plus.routepreparationmenu.cards.TracksCard;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.IRouteInformationListener;
+import net.osmand.plus.routing.RouteCalculationParams;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelperUtils;
@@ -131,10 +133,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
+
+import static net.osmand.plus.routing.SuggestedMapsProvider.getLocationBasedOnDistance;
+import static net.osmand.plus.routing.SuggestedMapsProvider.getStartFinishIntermediatesPoints;
+import static net.osmand.plus.routing.SuggestedMapsProvider.getSuggestedMaps;
 
 public class MapRouteInfoMenu implements IRouteInformationListener, CardListener, FavoritesListener {
 
@@ -480,6 +487,18 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		}
 	}
 
+	private List<WorldRegion> suggestedMaps;
+
+	public void updateMissingMaps(RouteCalculationParams params) {
+		try {
+			LinkedList<Location> points = getStartFinishIntermediatesPoints(params, "");
+			List<Location> pointsStraightLine = getLocationBasedOnDistance(points);
+			suggestedMaps = getSuggestedMaps(pointsStraightLine, params.ctx);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public void routeCalculationFinished() {
 		WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
 		MapRouteInfoMenuFragment fragment = fragmentRef != null ? fragmentRef.get() : null;
@@ -691,7 +710,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				// Home/work card
 				HomeWorkCard homeWorkCard = new HomeWorkCard(mapActivity);
 				menuCards.add(homeWorkCard);
-				;
 
 				// Previous route card
 				TargetPoint startBackup = targetPointsHelper.getPointToStartBackup();

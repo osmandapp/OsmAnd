@@ -568,7 +568,7 @@ public class TransportRoutingHelper {
 				}
 
 				@Override
-				public void updateMissingMaps() {
+				public void updateMissingMaps(RouteCalculationParams params) {
 
 				}
 

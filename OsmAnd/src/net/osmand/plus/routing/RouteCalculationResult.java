@@ -50,6 +50,7 @@ public class RouteCalculationResult {
 	private final String errorMessage;
 	private final int[] listDistance;
 	private final int[] intermediatePoints;
+	private boolean onlineCheckNeeded;
 
 	// Route information
 	private final float routingTime;
@@ -62,16 +63,14 @@ public class RouteCalculationResult {
 	protected List<LocationPoint> locationPoints = new ArrayList<LocationPoint>();
 	protected final List<WorldRegion> downloadMaps;
 
-	protected boolean onlineCheckNeeded;
-
 	// params
 	protected final ApplicationMode appMode;
 	protected final RouteService routeService;
 	protected final double routeRecalcDistance;
 	protected final double routeVisibleAngle;
 
-	// Note always currentRoute > get(currentDirectionInfo).routeOffset,
-	//         but currentRoute <= get(currentDirectionInfo+1).routeOffset
+	// Note always currentRoute > get(currentDirectionInfo).routeOffset, 
+	//         but currentRoute <= get(currentDirectionInfo+1).routeOffset 
 	protected int currentDirectionInfo = 0;
 	protected int currentRoute = 0;
 	protected int nextIntermediate = 0;
@@ -100,9 +99,8 @@ public class RouteCalculationResult {
 		this.routeVisibleAngle = 0;
 	}
 
-	public RouteCalculationResult(List<WorldRegion> suggestedOfflineMaps, boolean onlineCheckNeeded) {
+	public RouteCalculationResult(List<WorldRegion> suggestedOfflineMaps) {
 		this.downloadMaps = suggestedOfflineMaps;
-		this.onlineCheckNeeded = onlineCheckNeeded;
 		this.errorMessage = null;
 		this.routingTime = 0;
 		this.loadedTiles = 0;
@@ -138,7 +136,7 @@ public class RouteCalculationResult {
 		}
 		if(addMissingTurns) {
 			removeUnnecessaryGoAhead(localDirections);
-			addMissingTurnsToRoute(locations, localDirections, params.start,params.end,
+			addMissingTurnsToRoute(locations, localDirections, params.start,params.end, 
 					params.mode, params.ctx, params.leftSide);
 			// if there is no closest points to start - add it
 			introduceFirstPointAndLastPoint(locations, localDirections, null, params.start, params.end, params.ctx);
@@ -192,7 +190,7 @@ public class RouteCalculationResult {
 		if (calculateFirstAndLastPoint) {
 			introduceFirstPointAndLastPoint(locations, computeDirections, segments, start, end, ctx);
 		}
-		this.downloadMaps =null;
+		this.downloadMaps = null;
 		this.locations = Collections.unmodifiableList(locations);
 		this.segments = Collections.unmodifiableList(segments);
 		this.listDistance = new int[locations.size()];
@@ -1312,12 +1310,12 @@ public class RouteCalculationResult {
 		currentStraightAngleRoute = nextPoint;
 	}
 
-	public List<WorldRegion> getDownloadMaps() {
-		return downloadMaps;
-	}
-
 	public boolean isOnlineMapsNeeded() {
 		return onlineCheckNeeded;
+	}
+
+	public List<WorldRegion> getDownloadMaps() {
+		return downloadMaps;
 	}
 
 	public static class NextDirectionInfo {

@@ -241,7 +241,7 @@ public class MarkersPlanRouteContext {
 			}
 
 			@Override
-			public void updateMissingMaps() {
+			public void updateMissingMaps(RouteCalculationParams params) {
 
 			}
 

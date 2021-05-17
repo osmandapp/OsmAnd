@@ -110,7 +110,7 @@ public class SuggestedMapsProvider {
 		return EngineType.OSRM_TYPE.newInstance(paramsOnlineRouting);
 	}
 
-	public static List<WorldRegion> getSuggestedMaps(LinkedList<Location> points, OsmandApplication app) throws IOException {
+	public static List<WorldRegion> getSuggestedMaps(List<Location> points, OsmandApplication app) throws IOException {
 		LinkedHashSet<WorldRegion> suggestedMaps = new LinkedHashSet<>();
 		for (int i = 0; i < points.size(); i++) {
 			final Location o = points.get(i);
@@ -123,7 +123,7 @@ public class SuggestedMapsProvider {
 				String mapName = downloadRegion.getRegionDownloadName();
 				String countryMapName = downloadRegion.getSuperregion().getRegionDownloadName();
 				boolean isSuggestedMapsNeeded = !checkIfObjectDownloaded(mapName, app);
-				boolean isCountry = !Algorithms.isEmpty(countryMapName);
+				boolean isCountry = Algorithms.isEmpty(countryMapName);
 				if (isSuggestedMapsNeeded) {
 					if (!isCountry) {
 						maps.add(downloadRegion);
