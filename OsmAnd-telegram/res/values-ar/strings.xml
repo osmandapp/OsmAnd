@@ -11,8 +11,8 @@
     <string name="privacy_policy_use_telegram">يستخدم تيليجرام (تطبيق المراسلة) للاتصال والتواصل مع الأشخاص.</string>
     <string name="shared_string_later">لاحقا</string>
     <string name="osmand_service">حالة وضع السكون</string>
-    <string name="nm_h">ميل بحري</string>
-    <string name="si_nm_h">ميل بحري في الساعة (عقدة)</string>
+    <string name="nm_h">ميل بحري/في الساعة</string>
+    <string name="si_nm_h">أميال بحرية في الساعة (عقدة)</string>
     <string name="si_km_m">كم ، م</string>
     <string name="shared_string_end">نهاية</string>
     <string name="saved_messages">الرسائل المحفوظة</string>
@@ -67,7 +67,7 @@
     <string name="shared_string_apply">تطبيق</string>
     <string name="shared_string_enabled">مفعل</string>
     <string name="units_and_formats">الوحدات والأشكال</string>
-    <string name="unit_of_length_descr">اختيار الوحدات: كم، ميل، ميلٌ بحري.. إلخ.</string>
+    <string name="unit_of_length_descr">تغيير وحدات قياس المسافة.</string>
     <string name="unit_of_length">وحدات الطول</string>
     <string name="last_update_from_telegram_date">آخر تحديث من تيليجرام: %1$s</string>
     <string name="last_response_date">الرد الأخير:٪ 1 $ s</string>
@@ -204,10 +204,10 @@
     <string name="closing">اغلاق</string>
     <string name="gps_network_not_enabled">تشغيل \"الموقع\"؟</string>
     <string name="not_logged_in">لم تقم بتسجيل الدخول</string>
-    <string name="no_location_permission">يفتقر التطبيق إلى إذن للوصول إلى بيانات الموقع.</string>
+    <string name="no_location_permission">التطبيق يفتقر إلى إذن للوصول إلى بيانات الموقع.</string>
     <string name="gps_not_available">الرجاء تشغيل \"الموقع\" في إعدادات النظام</string>
     <string name="location_service_no_gps_available">حدد أحد موفري الموقع لمشاركة موقعك.</string>
-    <string name="osmand_service_descr">يعمل تتبع أوسماند في الخلفية مع إيقاف تشغيل الشاشة.</string>
+    <string name="osmand_service_descr">يعمل OsmAnd Tracker في الخلفية مع إيقاف تشغيل الشاشة.</string>
     <string name="share_location">مشاركة الموقع</string>
     <string name="sharing_location">مشاركة الموقع</string>
     <string name="process_service">خدمة تتبع أوسماند</string>

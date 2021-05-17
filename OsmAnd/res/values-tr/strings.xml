@@ -343,7 +343,7 @@
     <string name="route_tu">U dönüşü yapın ve ilerleyin</string>
     <string name="first_time_continue">Sonra</string>
     <string name="search_poi_location">Sinyal bekleniyor…</string>
-    <string name="transport_Routes">Rotalar</string>
+    <string name="transport_Routes">Güzergah</string>
     <string name="shared_string_ok">Tamam</string>
     <string name="shared_string_clear_all">Hepsini temizle</string>
     <string name="searching">Aranıyor…</string>
@@ -1910,7 +1910,7 @@
     <string name="shared_string_move_up">Taşı ↑</string>
     <string name="shared_string_move_down">Taşı ↓</string>
     <string name="finish_navigation">Gezintiyi bitir</string>
-    <string name="avoid_road">Yoldan sakın</string>
+    <string name="avoid_road">Yoldan kaçın</string>
     <string name="storage_directory_readonly_desc">Seçilen veri saklama klasörü yazma korumalı olduğu için dahili hafızaya geçildi. Lütfen yazılabilir bir depolama dizini seçin.</string>
     <string name="storage_directory_shared">Paylaşılan bellek</string>
     <string name="shared_string_topbar">Üst menü</string>
@@ -3203,7 +3203,7 @@
     <string name="routeInfo_piste_difficulty_name">Pist zorluğu</string>
     <string name="routing_attr_width_name">Genişlik sınırı</string>
     <string name="routing_attr_width_description">Rotalarda izin verilen araç genişlik sınırını belirtin.</string>
-    <string name="avoid_in_routing_descr_">Belirli güzergahlardan ve yol türlerinden kaçının</string>
+    <string name="avoid_in_routing_descr_">Belirli güzergahlardan ve yol türlerinden kaçın</string>
     <string name="app_mode_utv">Yan yana</string>
     <string name="rendering_attr_piste_difficulty_aerialway_name">Hava yolu</string>
     <string name="rendering_attr_piste_difficulty_connection_name">Bağlantı</string>
@@ -4102,4 +4102,9 @@
     <string name="recorded_description">Kaydedilen ses daha iyi ses çıkarır, ancak yalnızca önceden kaydedilmiş cümleleri telaffuz edebilir: dönüş talimatları. Sokak veya POI adlarını söyleyemez.</string>
     <string name="use_system_language">Sistem dilini kullan</string>
     <string name="shared_string_itinerary">Seyahat planı</string>
+    <string name="route_line_use_map_style_width">Harita tarzı (%1$s) öntanımlı genişliğini kullan.</string>
+    <string name="route_line_use_map_style_color">Harita tarzı (%1$s) öntanımlı rengini kullan.</string>
+    <string name="poi_routes">Güzergah</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">Düşük emisyon bölgelerinden kaçın</string>
+    <string name="routing_attr_avoid_low_emission_zone_name">Düşük emisyon bölgelerinden kaçın</string>
 </resources>

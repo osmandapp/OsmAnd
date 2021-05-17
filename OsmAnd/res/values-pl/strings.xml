@@ -4049,9 +4049,9 @@
     <string name="rendering_attr_noNatureReserveBoundaries_name">Naturalne granice</string>
     <string name="track_has_no_altitude">Ślady nie zawierają danych o wysokości.</string>
     <string name="track_has_no_speed">Ślady nie zawierają informacji o prędkości.</string>
-    <string name="trip_recording_logging_interval_info">Interwały logowania ustala okres czasu, w któtym OsmAnd będzie prosił o dane obecnej lokalizacji pozycji.</string>
+    <string name="trip_recording_logging_interval_info">Interwał rejestrowania ustawia okres, w którym OsmAnd zażąda bieżących danych pozycji.</string>
     <string name="show_start_dialog">Pokaż okno rozpocznij</string>
-    <string name="trip_recording_show_start_dialog_setting">Gdy wyłączone, nagrywanie rozpocznie się niezwłocznie po naciśnięciu w widżet lub w menu, pomijając okno potwierdzenia.</string>
+    <string name="trip_recording_show_start_dialog_setting">Jeśli ta opcja jest wyłączona, nagrywanie rozpocznie się natychmiast po dotknięciu widżetu lub elementu menu, pomijając okno dialogowe potwierdzenia.</string>
     <string name="customize_route_line">Zmień trasę nawigacji</string>
     <string name="shared_string_route_line">Trasa nawigacji</string>
     <string name="expired">Wygasł</string>
@@ -4073,10 +4073,10 @@
     <string name="select_segments_description">%1$s zawiera więcej niż jeden segment, musisz wybrać wymagany element nawigacji.</string>
     <string name="segments_count">Segment %1$d</string>
     <string name="track_recording_save_and_stop">Zapisz i zatrzymaj nagrywanie</string>
-    <string name="track_recording_title">Zapis ścieżki zatrzymany</string>
+    <string name="track_recording_title">Nagrywanie ścieżki zostało zatrzymane</string>
     <string name="track_recording_description">Czy na pewno chcesz zakończyć nagrywanie\?
 \nWszystkie niezapisane dane zostaną utracone.</string>
-    <string name="on_pause">Pauza</string>
+    <string name="on_pause">Po wstrzymaniu</string>
     <string name="map_widget_distance_by_tap">Odległość po dotknięciu</string>
     <string name="track_recording_will_be_continued">Nagrywanie będzie kontynuowane.</string>
     <string name="in_grace_period">W okresie karencji</string>
@@ -4097,4 +4097,10 @@
     <string name="recorded_description">Nagrany głos brzmi lepiej, ale może wymówić tylko wcześniej nagrane frazy: instrukcje skrętu. Nie można wypowiadać nazw ulic ani punktów POI.</string>
     <string name="use_system_language">Użyj języka systemu</string>
     <string name="shared_string_itinerary">Plan podróży</string>
+    <string name="shared_string_feet">stopy</string>
+    <string name="route_line_use_map_style_width">Użyj domyślnej szerokości stylu mapy (%1$s).</string>
+    <string name="route_line_use_map_style_color">Użyj domyślnego koloru stylu mapy (%1$s).</string>
+    <string name="poi_routes">Trasy</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">Unikaj stref niskiej emisji</string>
+    <string name="routing_attr_avoid_low_emission_zone_name">Unikaj stref niskiej emisji</string>
 </resources>

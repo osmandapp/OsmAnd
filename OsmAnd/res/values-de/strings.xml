@@ -4105,4 +4105,9 @@
     <string name="use_system_language">Systemsprache verwenden</string>
     <string name="in_grace_period">In der Nachlaufzeit</string>
     <string name="shared_string_itinerary">Reiseplan</string>
+    <string name="poi_routes">Routen</string>
+    <string name="route_line_use_map_style_width">Standardbreite des Kartenstils (%1$s) verwenden.</string>
+    <string name="route_line_use_map_style_color">Standardfarbe des Kartenstils (%1$s) verwenden.</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">Umweltzonen vermeiden</string>
+    <string name="routing_attr_avoid_low_emission_zone_name">Umweltzonen vermeiden</string>
 </resources>

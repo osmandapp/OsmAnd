@@ -4096,4 +4096,9 @@
     <string name="recorded_description">Nahratý hlas znie lepšie, ale môže vysloviť len predpripravené frázy: pokyny na zabočenie. Nevie vysloviť názvy ulíc alebo bodov záujmu.</string>
     <string name="use_system_language">Použiť jazyk systému</string>
     <string name="shared_string_itinerary">Itinerár</string>
+    <string name="route_line_use_map_style_width">Použiť predvolenú šírku mapového štýlu (%1$s).</string>
+    <string name="route_line_use_map_style_color">Použiť predvolenú farbu mapového štýlu (%1$s).</string>
+    <string name="poi_routes">Trasy</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">Vyhnúť sa zónam nízkych emisií</string>
+    <string name="routing_attr_avoid_low_emission_zone_name">Povoliť vjazd do zóny nízkych emisií</string>
 </resources>

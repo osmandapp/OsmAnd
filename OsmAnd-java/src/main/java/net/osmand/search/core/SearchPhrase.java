@@ -222,14 +222,17 @@ public class SearchPhrase {
 		return sp;
 	}
 	
-	public static void splitWords(String w, Collection<String> ws) {
+	public static List<String> splitWords(String w, List<String> ws) {
 		if (!Algorithms.isEmpty(w)) {
 			String[] wrs = w.split(ALLDELIMITERS);
 			for (int i = 0; i < wrs.length; i++) {
 				String wd = wrs[i].trim();
-				ws.add(wd);
+				if (wd.length() > 0) {
+					ws.add(wd);
+				}
 			}
 		}
+		return ws;
 	}
 	
 	public static int countWords(String w) {
