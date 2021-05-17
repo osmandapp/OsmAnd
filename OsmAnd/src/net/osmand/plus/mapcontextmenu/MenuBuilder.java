@@ -1319,7 +1319,7 @@ public class MenuBuilder {
 		buttonShowAll.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mapActivity.showQuickSearch(filter);
+				mapActivity.showQuickSearch(filter, latLon);
 			}
 		});
 		return buttonShowAll;
