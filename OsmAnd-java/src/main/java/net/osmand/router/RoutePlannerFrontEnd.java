@@ -648,6 +648,7 @@ public class RoutePlannerFrontEnd {
 			ctx.unloadAllData();
 			LinkedHashMap<String, String> mp = new LinkedHashMap<String, String>();
 			mp.put(GeneralRouter.ALLOW_PRIVATE, "true");
+			mp.put(GeneralRouter.CHECK_ALLOW_PRIVATE_NEEDED, "true");
 			ctx.setRouter(new GeneralRouter(router.getProfile(), mp));
 			for (LatLon latLon : points) {
 				RouteSegmentPoint rp = findRouteSegment(latLon.getLatitude(), latLon.getLongitude(), ctx, null);
