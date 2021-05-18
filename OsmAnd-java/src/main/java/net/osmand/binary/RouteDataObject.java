@@ -1141,4 +1141,13 @@ public class RouteDataObject {
 		}
 		pointTypes[pntInd] = array;
 	}
+
+	public boolean hasPointType(int pntId, int type) {
+		for (int k = 0; pointTypes != null && pointTypes[pntId] != null && k < pointTypes[pntId].length; k++) {
+			if (pointTypes[pntId][k] == type) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

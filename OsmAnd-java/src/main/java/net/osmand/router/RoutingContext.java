@@ -282,6 +282,7 @@ public class RoutingContext {
 				//retrieve direction points for attach to routing
 				points = config.getDirectionPoints().queryInBox(
 						new QuadRect(ts.subregion.left, ts.subregion.top, ts.subregion.right, ts.subregion.bottom), new ArrayList<DirectionPoint>());
+				int createType = ts.subregion.routeReg.findOrCreateRouteType(DirectionPoint.TAG, DirectionPoint.CREATE_TYPE);
 				for (DirectionPoint d : points) {
 					d.types.clear();
 					for (Entry<String, String> e : d.getTags().entrySet()) {
@@ -289,6 +290,7 @@ public class RoutingContext {
 						if (type != -1) {
 							d.types.add(type);
 						}
+						d.types.add(createType);
 					}
 				}
 			}
@@ -545,14 +547,14 @@ public class RoutingContext {
 		for (DirectionPoint np : points) {
 			if (np.types.size() == 0) {
 				continue;
-			}	
-			
+			}
+
 			int wptX = MapUtils.get31TileNumberX(np.getLongitude());
 			int wptY = MapUtils.get31TileNumberY(np.getLatitude());
-			
+
 			int x = ro.getPoint31XTile(0);
 			int y = ro.getPoint31YTile(0);
-			
+
 			double mindist = config.directionPointsRadius * 2;
 			int indexToInsert = 0;
 			int mprojx = 0;
@@ -570,7 +572,7 @@ public class RoutingContext {
 					double dist = MapUtils.squareRootDist31(wptX, wptY, Math.abs(nx - wptX) < Math.abs(x - wptX) ? nx : x,
 							Math.abs(ny - wptY) < Math.abs(y - wptY) ? ny : y);
 					checkPreciseProjection = dist < config.directionPointsRadius;
-				} 
+				}
 				if (checkPreciseProjection) {
 					QuadPoint pnt = MapUtils.getProjectionPoint31(wptX, wptY, x, y, nx, ny);
 					int projx = (int) pnt.x;
@@ -584,60 +586,63 @@ public class RoutingContext {
 					}
 				}
 
-				
+
 				x = nx;
 				y = ny;
 			}
 			boolean sameRoadId = np.connected != null && np.connected.getId() == ro.getId();
 			boolean pointShouldBeAttachedByDist = (mindist < config.directionPointsRadius && mindist < np.distance);
-			
-			if (pointShouldBeAttachedByDist && !sameRoadId) {
-				//System.out.println(String.format("INSERT %s (%d-%d) %.0f m [%.5f, %.5f] - %d, %d ", ro, indexToInsert, indexToInsert + 1, mindist,
-				//		MapUtils.get31LongitudeX(wptX), MapUtils.get31LatitudeY(wptY), wptX, wptY));
-				if (np.connected != null) {
-					// check old connected points
-					// using search by coordinates because by index doesn't work (parallel updates)
-					int pointIndex = -1;
-					for (int i = 0; i < np.connected.getPointsLength(); i++) {
-						int tx = np.connected.getPoint31XTile(i);
-						int ty = np.connected.getPoint31YTile(i);
-						if (tx == np.connectedx && ty == np.connectedy) {
-							pointIndex = i;
-							break;
+			int createType = ts.subregion.routeReg.findOrCreateRouteType(DirectionPoint.TAG, DirectionPoint.CREATE_TYPE);
+			int deleteType = ro.region.findOrCreateRouteType(DirectionPoint.TAG, DirectionPoint.DELETE_TYPE);
+
+			if (pointShouldBeAttachedByDist) {
+				if (!sameRoadId) {
+					//System.out.println(String.format("INSERT %s (%d-%d) %.0f m [%.5f, %.5f] - %d, %d ", ro, indexToInsert, indexToInsert + 1, mindist,
+					//		MapUtils.get31LongitudeX(wptX), MapUtils.get31LatitudeY(wptY), wptX, wptY));
+					if (np.connected != null) {
+						// check old connected points
+						int pointIndex = findPointIndex(np, createType);
+						if (pointIndex != -1) {
+							// set type "deleted" for old connected point
+							np.connected.setPointTypes(pointIndex, new int[]{deleteType});
+						} else {
+							throw new RuntimeException();
 						}
 					}
-					if (pointIndex != -1) {
-						// set type "deleted" for old connected points
-						int tp = ro.region.findOrCreateRouteType(DirectionPoint.TAG, DirectionPoint.DELETE_TYPE);
-						np.connected.setPointTypes(pointIndex, new int[] { tp });
-					} else {
-						throw new RuntimeException();
+				} else {
+					int sameRoadPointIndex = findPointIndex(np, createType);
+					if (sameRoadPointIndex != -1 && np.connected != null) {
+						if (mprojx == np.connectedx && mprojy == np.connectedy) {
+							continue;// was found the same point
+						} else {
+							// set type "deleted" for old connected point
+							np.connected.setPointTypes(sameRoadPointIndex, new int[]{deleteType});
+						}
 					}
 				}
-				for (int i = 0; i < ro.getPointsLength(); i++) {
-					if (ro.pointsX[i] == mprojx && ro.pointsY[i] == mprojy) {
-						mprojx++;// add +1 for avoid set type "deleted" for normal point
-						break;
-					}
-				}
-
 				np.connectedx = mprojx;
 				np.connectedy = mprojy;
 				ro.insert(indexToInsert, mprojx, mprojy);
-				ro.setPointTypes(indexToInsert, np.types.toArray());
+				ro.setPointTypes(indexToInsert, np.types.toArray());// np.types contains DirectionPoint.CREATE_TYPE
 				np.distance = mindist;
 				np.connected = ro;
-			} else if (sameRoadId) {
-				boolean sameRoadIdButPointIsNotPresent;
-				int tx = ro.getPoint31XTile(indexToInsert);
-				int ty = ro.getPoint31YTile(indexToInsert);
-				sameRoadIdButPointIsNotPresent = (mprojx != tx || mprojy != ty);
-				if (sameRoadIdButPointIsNotPresent) {
-					ro.insert(indexToInsert, mprojx, mprojy);
-				}
 			}
 		}
-		
+
+	}
+
+	private int findPointIndex(DirectionPoint np, int createType) {
+		// using search by coordinates because by index doesn't work (parallel updates)
+		int samePointIndex = -1;
+		for (int i = 0; np.connected != null && i < np.connected.getPointsLength(); i++) {
+			int tx = np.connected.getPoint31XTile(i);
+			int ty = np.connected.getPoint31YTile(i);
+			if (tx == np.connectedx && ty == np.connectedy && np.connected.hasPointType(i, createType)) {
+				samePointIndex = i;
+				break;
+			}
+		}
+		return samePointIndex;
 	}
 	
 

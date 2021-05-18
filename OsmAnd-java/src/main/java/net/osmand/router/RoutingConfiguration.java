@@ -77,6 +77,7 @@ public class RoutingConfiguration {
 		public int connectedy;
 		public final static String TAG = "osmand_dp";
 		public final static String DELETE_TYPE = "osmand_delete_point";
+		public final static String CREATE_TYPE = "osmand_add_point";
 
 		public DirectionPoint(Node n) {
 			super(n, n.getId());
