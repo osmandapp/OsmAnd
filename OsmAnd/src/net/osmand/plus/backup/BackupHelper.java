@@ -67,11 +67,11 @@ public class BackupHelper {
 	public final static int STATUS_SERVER_ERROR = 3;
 
 	public interface OnRegisterUserListener {
-		void onRegisterUser(int status, @Nullable String message);
+		void onRegisterUser(int status, @Nullable String message, @Nullable String error);
 	}
 
 	public interface OnRegisterDeviceListener {
-		void onRegisterDevice(int status, @Nullable String message);
+		void onRegisterDevice(int status, @Nullable String message, @Nullable String error);
 	}
 
 	public interface OnDownloadFileListListener {
@@ -163,6 +163,11 @@ public class BackupHelper {
 		}
 	}
 
+	public void logout() {
+		settings.BACKUP_DEVICE_ID.resetToDefault();
+		settings.BACKUP_ACCESS_TOKEN.resetToDefault();
+	}
+
 	public void registerUser(@NonNull final String email, @Nullable final OnRegisterUserListener listener) {
 		Map<String, String> params = new HashMap<>();
 		params.put("email", email);
@@ -199,7 +204,7 @@ public class BackupHelper {
 					status = STATUS_EMPTY_RESPONSE_ERROR;
 				}
 				if (listener != null) {
-					listener.onRegisterUser(status, message);
+					listener.onRegisterUser(status, message, error);
 				}
 			}
 		}, EXECUTOR);
@@ -245,7 +250,7 @@ public class BackupHelper {
 					status = STATUS_EMPTY_RESPONSE_ERROR;
 				}
 				if (listener != null) {
-					listener.onRegisterDevice(status, message);
+					listener.onRegisterDevice(status, message, error);
 				}
 			}
 		}, EXECUTOR);
