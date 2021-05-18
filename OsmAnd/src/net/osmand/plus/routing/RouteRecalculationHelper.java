@@ -383,7 +383,9 @@ class RouteRecalculationHelper {
 					routeCalcError = app.getString(R.string.empty_route_calculated);
 					routeCalcErrorShort = app.getString(R.string.empty_route_calculated);
 				}
-				showMessage(routeCalcError);
+				if (res.getDownloadMaps().isEmpty()) {
+					showMessage(routeCalcError);
+				}
 			}
 			app.getNotificationHelper().refreshNotification(NAVIGATION);
 		}

@@ -118,8 +118,9 @@ public class SuggestedMapsProvider {
 			for (WorldRegion downloadRegion : downloadRegions) {
 				String mapName = downloadRegion.getRegionDownloadName();
 				String countryMapName = downloadRegion.getSuperregion().getRegionDownloadName();
+				List<WorldRegion> subregions = downloadRegion.getSubregions();
 				boolean isSuggestedMapsNeeded = !checkIfObjectDownloaded(mapName, app);
-				boolean isCountry = Algorithms.isEmpty(countryMapName);
+				boolean isCountry = Algorithms.isEmpty(countryMapName) && !subregions.isEmpty();
 				if (isSuggestedMapsNeeded) {
 					if (!isCountry) {
 						maps.add(downloadRegion);
