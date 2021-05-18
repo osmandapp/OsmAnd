@@ -1338,10 +1338,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		private void defineAvailableScaleTypes() {
 			GPXTrackAnalysis analysis = selectedGpxFile.getTrackAnalysis(app);
 			availableScaleTypes = new HashSet<>();
-			if (TrackColoringCard.isScaleTypeAvailable(analysis, GradientScaleType.SPEED)) {
+			if (analysis.isColorizationTypeAvailable(GradientScaleType.SPEED.toColorizationType())) {
 				availableScaleTypes.add(GradientScaleType.SPEED);
 			}
-			if (TrackColoringCard.isScaleTypeAvailable(analysis, GradientScaleType.ALTITUDE)) {
+			if (analysis.isColorizationTypeAvailable(GradientScaleType.ALTITUDE.toColorizationType())) {
 				availableScaleTypes.add(GradientScaleType.ALTITUDE);
 				availableScaleTypes.add(GradientScaleType.SLOPE);
 			}

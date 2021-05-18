@@ -3919,4 +3919,16 @@
     <string name="announcement_time_off_route">Uden for ruten</string>
     <string name="announcement_time_descr">Tidspunktet for de forskellige stemmeprompter afhænger af prompttypen, den aktuelle navigationshastighed og standardnavigationshastigheden.</string>
     <string name="map_orientation_threshold_descr">Roter ikke kortvisningen, hvis hastigheden er under en vis grænseværdi</string>
+    <string name="profile_type_osmand_string">OsmAnd-profil</string>
+    <string name="profile_type_user_string">Brugerprofil</string>
+    <string name="reverse_all_points">Vend alle punkter</string>
+    <string name="profile_by_default_description">Vælg den profil, der skal bruges ved start af applikationen.</string>
+    <string name="shared_string_last_used">Sidst brugt</string>
+    <string name="routing_attr_prefer_hiking_routes_description">Foretræk vandreruter</string>
+    <string name="routing_attr_prefer_hiking_routes_name">Foretræk vandreruter</string>
+    <string name="routing_attr_allow_streams_description">Tillad vandløb og afløb</string>
+    <string name="routing_attr_allow_streams_name">Tillad vandløb og afløb</string>
+    <string name="shared_string_subtype">Undertype</string>
+    <string name="shared_string_vehicle">Køretøj</string>
+    <string name="shared_string_api_key">API-nøgle</string>
 </resources>

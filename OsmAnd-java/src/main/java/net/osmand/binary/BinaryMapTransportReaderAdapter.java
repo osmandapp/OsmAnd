@@ -1,6 +1,7 @@
 package net.osmand.binary;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -8,6 +9,7 @@ import java.util.Map;
 import com.google.protobuf.CodedInputStream;
 import com.google.protobuf.WireFormat;
 
+import gnu.trove.list.array.TByteArrayList;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
@@ -417,6 +419,21 @@ public class BinaryMapTransportReaderAdapter {
 				rid = stop.getId();
 				codedIS.popLimit(olds);
 				break;
+			case OsmandOdb.TransportRoute.ATTRIBUTETAGIDS_FIELD_NUMBER:
+				String str = regStr(stringTable);
+				dataObject.addTag(str, "");
+				break;
+			case OsmandOdb.TransportRoute.ATTRIBUTETEXTTAGVALUES_FIELD_NUMBER:
+				TByteArrayList buf = new TByteArrayList();
+				sizeL = codedIS.readRawVarint32();
+				olds = codedIS.pushLimit(sizeL);
+				String key = regStr(stringTable);
+				while (codedIS.getBytesUntilLimit() > 0) {
+					buf.add(codedIS.readRawByte());
+				}
+				codedIS.popLimit(olds);
+				dataObject.addTag(key, new String(buf.toArray(), StandardCharsets.UTF_8));
+				break;
 			default:
 				skipUnknownField(t);
 				break;
@@ -502,23 +519,23 @@ public class BinaryMapTransportReaderAdapter {
 	}
 
 	protected void initializeNames(boolean onlyDescription, net.osmand.data.TransportRoute dataObject,
-			TIntObjectHashMap<String> stringTable) throws IOException {
-		if(dataObject.getName().length() > 0){
+	                               TIntObjectHashMap<String> stringTable) throws IOException {
+		if (dataObject.getName().length() > 0) {
 			dataObject.setName(stringTable.get(dataObject.getName().charAt(0)));
 		}
-		if(dataObject.getEnName(false).length() > 0){
+		if (dataObject.getEnName(false).length() > 0) {
 			dataObject.setEnName(stringTable.get(dataObject.getEnName(false).charAt(0)));
 		}
-		if(dataObject.getName().length() > 0 && dataObject.getName("en").length() == 0){
+		if (dataObject.getName().length() > 0 && dataObject.getName("en").length() == 0) {
 			dataObject.setEnName(TransliterationHelper.transliterate(dataObject.getName()));
 		}
-		if(dataObject.getOperator() != null && dataObject.getOperator().length() > 0){
+		if (dataObject.getOperator() != null && dataObject.getOperator().length() > 0) {
 			dataObject.setOperator(stringTable.get(dataObject.getOperator().charAt(0)));
 		}
-		if(dataObject.getColor() != null && dataObject.getColor().length() > 0){
+		if (dataObject.getColor() != null && dataObject.getColor().length() > 0) {
 			dataObject.setColor(stringTable.get(dataObject.getColor().charAt(0)));
 		}
-		if(dataObject.getType() != null && dataObject.getType().length() > 0){
+		if (dataObject.getType() != null && dataObject.getType().length() > 0) {
 			dataObject.setType(stringTable.get(dataObject.getType().charAt(0)));
 		}
 		if (!onlyDescription) {
@@ -526,10 +543,30 @@ public class BinaryMapTransportReaderAdapter {
 				initializeNames(stringTable, s);
 			}
 		}
+		if (dataObject.getTags() != null && dataObject.getTags().size() > 0) {
+			dataObject.setTags(initializeTags(stringTable, dataObject));
+		}
+	}
+
+	private Map<String, String> initializeTags(TIntObjectHashMap<String> stringTable,
+	                                           net.osmand.data.TransportRoute dataObject) {
+		Map<String, String> newMap = new HashMap<>();
+		for (Map.Entry<String, String> entry : dataObject.getTags().entrySet()) {
+			String string = stringTable.get(entry.getKey().charAt(0));
+			if (entry.getValue().length() > 0) {
+				newMap.put(string, entry.getValue());
+			} else {
+				int index = string.indexOf('/');
+				if (index > 0) {
+					newMap.put(string.substring(0, index), string.substring(index + 1));
+				}
+			}
+		}
+		return newMap;
 	}
 
 	protected void initializeNames(TIntObjectHashMap<String> stringTable, TransportStop s) {
-		for (TransportStopExit exit : s.getExits())	{
+		for (TransportStopExit exit : s.getExits()) {
 			if (exit.getRef().length() > 0) {
 				exit.setRef(stringTable.get(exit.getRef().charAt(0)));
 			}
