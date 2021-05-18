@@ -394,7 +394,7 @@ public class MenuBuilder {
 						return;
 					}
 					String title = app.getString(R.string.speak_poi);
-					String type = " \"" + AmenityMenuController.getTypeStr(amenity) + "\"";
+					String type = "\"" + AmenityMenuController.getTypeStr(amenity) + "\"";
 					String count = "(" + amenities.size() + ")";
 					String text = app.getString(R.string.ltr_or_rtl_triple_combine_via_space, title, type, count);
 
@@ -423,7 +423,7 @@ public class MenuBuilder {
 
 	protected void buildNearestRow(View view, List<Amenity> nearestAmenities, int iconId, String text, String amenityKey) {
 		if (nearestAmenities.size() > 0) {
-			String count = " (" + nearestAmenities.size() + ")";
+			String count = "(" + nearestAmenities.size() + ")";
 			text = app.getString(R.string.ltr_or_rtl_combine_via_space, text, count);
 			CollapsableView collapsableView = getCollapsableView(view.getContext(), true, nearestAmenities, amenityKey);
 			buildRow(view, iconId, null, text, 0, true, collapsableView,

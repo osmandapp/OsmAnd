@@ -683,7 +683,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 					return;
 				}
 				String title = app.getString(R.string.wiki_around);
-				String count = " (" + amenities.size() + ")";
+				String count = "(" + amenities.size() + ")";
 				String text = app.getString(R.string.ltr_or_rtl_combine_via_space, title, count);
 
 				Context context = viewGroup.getContext();
@@ -710,7 +710,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 					return;
 				}
 				String title = app.getString(R.string.speak_poi);
-				String type = " \"" + AmenityMenuController.getTypeStr(amenity) + "\"";
+				String type = "\"" + AmenityMenuController.getTypeStr(amenity) + "\"";
 				String count = "(" + amenities.size() + ")";
 				String text = app.getString(R.string.ltr_or_rtl_triple_combine_via_space, title, type, count);
 
