@@ -556,7 +556,10 @@ public class BinaryMapTransportReaderAdapter {
 			if (entry.getValue().length() > 0) {
 				newMap.put(string, entry.getValue());
 			} else {
-				newMap.put(string.split("/")[0], string.split("/")[1]);
+				int index = string.indexOf('/');
+				if (index > 0) {
+					newMap.put(string.substring(0, index), string.substring(index + 1));
+				}
 			}
 		}
 		return newMap;

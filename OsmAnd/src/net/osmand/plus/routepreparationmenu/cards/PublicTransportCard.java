@@ -296,7 +296,24 @@ public class PublicTransportCard extends BaseCard {
 
 	private String getIntervalDescr(List<TransportRouteResultSegment> segments) {
 		String interval = Algorithms.capitalizeFirstLetter(app.getString(R.string.shared_string_interval));
-		return interval + " " + segments.get(0).route.getInterval();
+		Iterator<TransportRouteResultSegment> iterator = segments.iterator();
+		boolean firstInterval = true;
+		while (iterator.hasNext()) {
+			TransportRouteResultSegment segment = iterator.next();
+			if (segment.route.hasInterval()) {
+				if (firstInterval) {
+					interval = app.getString(R.string.ltr_or_rtl_combine_via_space, interval,
+							app.getString(R.string.ltr_or_rtl_combine_via_dash,
+									segment.route.getRef(), segment.route.getInterval()));
+					firstInterval = false;
+				} else {
+					interval = app.getString(R.string.ltr_or_rtl_combine_via_comma, interval,
+							app.getString(R.string.ltr_or_rtl_combine_via_dash,
+									segment.route.getRef(), segment.route.getInterval()));
+				}
+			}
+		}
+		return interval;
 	}
 
 	private void createRouteBadges(List<TransportRouteResultSegment> segments, boolean badgesRowClickable) {
