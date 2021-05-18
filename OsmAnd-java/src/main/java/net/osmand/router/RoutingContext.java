@@ -544,6 +544,9 @@ public class RoutingContext {
 
 	
 	private void connectPoint(final RoutingSubregionTile ts, RouteDataObject ro, List<DirectionPoint> points) {
+		int createType = ro.region.findOrCreateRouteType(DirectionPoint.TAG, DirectionPoint.CREATE_TYPE);
+		int deleteType = ro.region.findOrCreateRouteType(DirectionPoint.TAG, DirectionPoint.DELETE_TYPE);
+
 		for (DirectionPoint np : points) {
 			if (np.types.size() == 0) {
 				continue;
@@ -592,8 +595,6 @@ public class RoutingContext {
 			}
 			boolean sameRoadId = np.connected != null && np.connected.getId() == ro.getId();
 			boolean pointShouldBeAttachedByDist = (mindist < config.directionPointsRadius && mindist < np.distance);
-			int createType = ts.subregion.routeReg.findOrCreateRouteType(DirectionPoint.TAG, DirectionPoint.CREATE_TYPE);
-			int deleteType = ro.region.findOrCreateRouteType(DirectionPoint.TAG, DirectionPoint.DELETE_TYPE);
 
 			if (pointShouldBeAttachedByDist) {
 				if (!sameRoadId) {
