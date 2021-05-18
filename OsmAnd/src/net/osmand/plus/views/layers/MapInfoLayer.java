@@ -414,6 +414,12 @@ public class MapInfoLayer extends OsmandMapLayer {
 		}
 	}
 
+	public void routeCalculationFinished() {
+		if (elevationProfileWidget != null) {
+			elevationProfileWidget.onRouteCalculated();
+		}
+	}
+
 	@Override
 	public void destroyLayer() {
 	}
