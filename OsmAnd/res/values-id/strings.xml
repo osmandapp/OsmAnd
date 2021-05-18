@@ -1708,4 +1708,18 @@
     <string name="features_menu_group">Fitur-fitur</string>
     <string name="begin_with_osmand_menu_group">Langkah-langkah pertama di OsmAnd</string>
     <string name="loading_poi_obj">Memuat POI…</string>
+    <string name="available_downloads_left">%1$d berkas tersisa untuk diunduh</string>
+    <string name="local_recordings_delete_all_confirm">Anda yakin mau menghapus %1$d catatan\?</string>
+    <string name="multimedia_notes_view_descr">Nota OSM Anda berada di %1$s.</string>
+    <string name="data_storage_space_description">%1$s GB sedia (total %2$s GB)</string>
+    <string name="route_descr_lat_lon">Lat %1$.3f, lon %2$.3f</string>
+    <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
+    <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
+    <string name="n_items_of_z">%1$s / %2$s</string>
+    <string name="poi_remove_confirm_template">Hapuskan {0} (komentar)\?</string>
+    <string name="recording_photo_description">Gambar %1$s %2$s</string>
+    <string name="waypoint_one">Titik arah 1</string>
+    <string name="shared_string_action_template">Aksi {0}</string>
 </resources>
