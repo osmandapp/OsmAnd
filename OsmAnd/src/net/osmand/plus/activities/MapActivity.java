@@ -2101,6 +2101,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void showQuickSearch(Object object) {
+		showQuickSearch(object, null);
+	}
+
+	public void showQuickSearch(Object object, @Nullable LatLon latLon) {
 		hideVisibleMenu();
 		QuickSearchDialogFragment fragment = getQuickSearchDialogFragment();
 		if (fragment != null) {
@@ -2108,7 +2112,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			refreshMap();
 		}
 		QuickSearchDialogFragment.showInstance(this, "", object,
-				QuickSearchType.REGULAR, QuickSearchTab.CATEGORIES, null);
+				QuickSearchType.REGULAR, QuickSearchTab.CATEGORIES, latLon);
 	}
 
 	public void showQuickSearch(ShowQuickSearchMode mode, boolean showCategories) {
