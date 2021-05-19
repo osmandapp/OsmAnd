@@ -46,8 +46,9 @@ import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
-import org.json.JSONException;
-import org.json.JSONObject;
+
+import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_TOKEN_IS_NOT_VALID_OR_EXPIRED;
+import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_USER_IS_NOT_REGISTERED;
 
 public class AuthorizeFragment extends BaseOsmAndFragment {
 
@@ -60,10 +61,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment {
 
 	private static final String LOGIN_DIALOG_TYPE_KEY = "login_dialog_type_key";
 
-	private static final int VERIFICATION_CODE_EXPIRATION_TIME_MIN = 60 * 1000; // 10 minutes
-
-	private static final int ERROR_CODE_USER_IS_NOT_REGISTERED = 103;
-	private static final int ERROR_CODE_TOKEN_IS_NOT_VALID_OR_EXPIRED = 104;
+	private static final int VERIFICATION_CODE_EXPIRATION_TIME_MIN = 10 * 60 * 1000; // 10 minutes
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
@@ -328,7 +326,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment {
 			public void onRegisterDevice(int status, @Nullable String message, @Nullable String error) {
 				FragmentActivity activity = getActivity();
 				if (AndroidUtils.isActivityNotDestroyed(activity)) {
-					int errorCode = getErrorCode(error);
+					int errorCode = BackupHelper.getErrorCode(error);
 					if (errorCode == type.permittedErrorCode) {
 						registerUser(errorText);
 					} else if (errorCode != -1) {
@@ -397,27 +395,12 @@ public class AuthorizeFragment extends BaseOsmAndFragment {
 		});
 	}
 
-	private int getErrorCode(@Nullable String error) {
-		if (!Algorithms.isEmpty(error)) {
-			try {
-				JSONObject resultError = new JSONObject(error);
-				if (resultError.has("error")) {
-					JSONObject errorObj = resultError.getJSONObject("error");
-					return errorObj.getInt("errorCode");
-				}
-			} catch (JSONException e) {
-				log.error(e);
-			}
-		}
-		return -1;
-	}
-
 	private enum LoginDialogType {
 
 		SIGN_IN(R.id.sign_in_container, R.string.user_login, R.string.osmand_cloud_login_descr,
-				R.string.cloud_email_not_registered, ERROR_CODE_USER_IS_NOT_REGISTERED, ERROR_CODE_TOKEN_IS_NOT_VALID_OR_EXPIRED),
+				R.string.cloud_email_not_registered, SERVER_ERROR_CODE_USER_IS_NOT_REGISTERED, SERVER_ERROR_CODE_TOKEN_IS_NOT_VALID_OR_EXPIRED),
 		SIGN_UP(R.id.sign_up_container, R.string.register_opr_create_new_account, R.string.osmand_cloud_create_account_descr,
-				R.string.cloud_email_already_registered, ERROR_CODE_TOKEN_IS_NOT_VALID_OR_EXPIRED, ERROR_CODE_USER_IS_NOT_REGISTERED),
+				R.string.cloud_email_already_registered, SERVER_ERROR_CODE_TOKEN_IS_NOT_VALID_OR_EXPIRED, SERVER_ERROR_CODE_USER_IS_NOT_REGISTERED),
 		VERIFY_EMAIL(R.id.verify_email_container, R.string.verify_email_address, R.string.verify_email_address_descr,
 				-1, -1, -1);
 
