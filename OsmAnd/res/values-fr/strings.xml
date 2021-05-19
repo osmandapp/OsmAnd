@@ -2917,7 +2917,7 @@
     <string name="public_transport_try_change_settings">Essayez de modifier les paramètres.</string>
     <string name="public_transport_calc_pedestrian">Calculer l\'itinéraire piéton</string>
     <string name="public_transport_type">Type de transport</string>
-    <string name="searching_gps">Recherche des satellites</string>
+    <string name="searching_gps"></string>
     <string name="coordinates_widget">Gadget de coordonnées</string>
     <string name="shared_string_privacy_policy">Politique de confidentialité</string>
     <string name="help_us_make_osmand_better">Aidez-nous à améliorer OsmAnd</string>
@@ -3355,7 +3355,7 @@
     <string name="monitoring_min_speed_descr_remark">Remarque : vérification de vitesse &gt; 0. La plupart des puces GPS fournissent une vitesse uniquement lorsque vous êtes en mouvement. Par conséquent, l\'indication du paramètre &gt; 0 pour ce filtre utilise la détection de mouvement par la puce GPS. Mais même s\'il n\'est pas filtré ici au moment de l\'enregistrement, nous utilisons toujours cette fonctionnalité dans notre analyse des traces GPX pour déterminer la distance corrigée, c\'est-à-dire que la valeur affichée dans ce champ est la distance enregistrée en déplacement.</string>
     <string name="monitoring_min_distance_descr_side_effect">Effet secondaire : les périodes de repos ne seront pas enregistrées ou seulement par un point. De petits mouvements, comme des pas sur le côté, pourront être ignorés. Votre fichier contiendra moins d\'informations exploitables en post-traitement et aura des statistiques moins exactes (éliminant les points redondants mais conservant les erreurs de position dues à une mauvaise réception ou aux artefacts de la puce GPS).</string>
     <string name="shared_string_available">Disponible</string>
-    <string name="add_custom_category">Ajouter une catégorie personnelle</string>
+    <string name="add_custom_category">Ajouter une catégorie personnalisée</string>
     <string name="rendering_attr_streetLightingNight_name">Afficher seulement de nuit</string>
     <string name="plugin_prefs_reset_successful">Tous les paramètres du greffon ont été restaurés à leurs valeurs par défaut.</string>
     <string name="profile_prefs_reset_successful">Tous les paramètres du profile ont été restaurés à leurs valeurs par défaut.</string>
