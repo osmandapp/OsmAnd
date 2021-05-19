@@ -812,7 +812,7 @@
     <string name="poi">POI</string>
     <string name="error_occurred_saving_gpx">Не удалось сохранить файл GPX.</string>
     <string name="error_calculating_route">Не удалось рассчитать маршрут.</string>
-    <string name="error_calculating_route_occured">Не удалось рассчитать маршрут</string>
+    <string name="error_calculating_route_occured">Не удалось рассчитать маршрут.</string>
     <string name="empty_route_calculated">Невозможно построить маршрут.</string>
     <string name="arrived_at_destination">Вы прибыли.</string>
     <string name="invalid_locations">Неправильные координаты</string>
@@ -1171,7 +1171,7 @@
     <string name="add_as_last_destination_point">Последний промежуточный пункт</string>
     <string name="add_as_first_destination_point">Первый промежуточный пункт</string>
     <string name="replace_destination_point">Заменить пункт назначения</string>
-    <string name="new_destination_point_dialog">Пункт назначения уже задан</string>
+    <string name="new_destination_point_dialog">Пункт назначения уже задан:</string>
     <string name="target_point">Пункт %1$s</string>
     <string name="shared_string_target_points">Точки маршрута</string>
     <string name="intermediate_point">Промежуточный пункт %1$s</string>
@@ -2686,7 +2686,7 @@
     <string name="use_two_digits_longitude">Использовать двузначную долготу</string>
     <string name="shared_string_travel_guides">Путеводитель</string>
     <string name="waypoints_removed_from_map_markers">Путевые точки удалены из маркеров карты</string>
-    <string name="nothing_found_in_radius">Ничего нет в радиусе</string>
+    <string name="nothing_found_in_radius">Ничего не найдено:</string>
     <string name="select_waypoints_category_description">Добавьте все путевые точки трека или выберите отдельные категории.</string>
     <string name="shared_string_total">Всего</string>
     <string name="shared_string_result">Результат</string>
@@ -3216,7 +3216,7 @@
 \n</string>
     <string name="contour_lines_and_hillshade">Контурные линии и затенение рельефа</string>
     <string name="routing_attr_prefer_unpaved_name">Предпочитать грунтовые дороги</string>
-    <string name="routing_attr_prefer_unpaved_description">Предпочитать грунтовые дороги</string>
+    <string name="routing_attr_prefer_unpaved_description">Предпочитать грунтовые дороги.</string>
     <string name="update_all_maps_q">Вы уверены, что хотите обновить все карты (%1$d)\?</string>
     <string name="apply_preference_to_all_profiles">Вы можете применить это ко всем или только к выбранному профилю.</string>
     <string name="shared_preference">Общий</string>
@@ -4094,7 +4094,7 @@
     <string name="srtm_download_single_help_message">Выберите необходимый вариант. Для изменения формата потребуется повторно загрузить файл.</string>
     <string name="shared_string_feet">футы</string>
     <string name="srtm_download_list_help_message">OsmAnd предоставляет данные изолиний в метрах и футах. Для изменения формата потребуется повторно загрузить файл.</string>
-    <string name="route_line_use_gradient_coloring">Линия маршрута будет окрашена в зависимости от профиля высоты маршрута.</string>
+    <string name="route_line_use_gradient_coloring">Линия маршрута окрашена в зависимости от угла подъёма.</string>
     <string name="shared_string_min_height">Мин. высота</string>
     <string name="shared_string_max_height">Макс. высота</string>
     <string name="language_description">Выберите предпочтительный язык и тип голосовых подсказок.</string>
@@ -4108,4 +4108,5 @@
     <string name="routing_attr_avoid_low_emission_zone_description">Без зон с низким уровнем выбросов</string>
     <string name="routing_attr_avoid_low_emission_zone_name">Без зон с низким уровнем выбросов</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
+    <string name="search_more">Найти ещё…</string>
 </resources>
