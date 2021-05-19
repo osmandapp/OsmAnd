@@ -1,21 +1,30 @@
 package net.osmand.router;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.Stack;
+
+import net.osmand.NativeLibrary;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
+import gnu.trove.list.array.TIntArrayList;
 import net.osmand.PlatformUtil;
+import net.osmand.binary.RouteDataObject;
+import net.osmand.data.QuadRect;
+import net.osmand.data.QuadTree;
+import net.osmand.osm.edit.Node;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.router.GeneralRouter.RouteAttributeContext;
 import net.osmand.router.GeneralRouter.RouteDataObjectAttribute;
 import net.osmand.util.Algorithms;
-
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.Stack;
+import net.osmand.util.MapUtils;
 
 public class RoutingConfiguration {
 
@@ -49,15 +58,56 @@ public class RoutingConfiguration {
 	// 1.6 Time to calculate all access restrictions based on conditions
 	public long routeCalculationTime = 0;
 	
+	
+	// extra points to be inserted in ways (quad tree is based on 31 coords)
+	private QuadTree<DirectionPoint> directionPoints;
+	
+	public int directionPointsRadius = 30; // 30 m
+	
+	public QuadTree<DirectionPoint> getDirectionPoints() {
+		return directionPoints;
+	}
+
+	public static class DirectionPoint extends Node {
+		private static final long serialVersionUID = -7496599771204656505L;
+		public double distance = Double.MAX_VALUE;
+		public RouteDataObject connected;
+		public TIntArrayList types = new TIntArrayList();
+		public int connectedx;
+		public int connectedy;
+		public final static String TAG = "osmand_dp";
+		public final static String DELETE_TYPE = "osmand_delete_point";
+		public final static String CREATE_TYPE = "osmand_add_point";
+
+		public DirectionPoint(Node n) {
+			super(n, n.getId());
+		}
+		
+	}
+
+	public NativeLibrary.NativeDirectionPoint[] getNativeDirectionPoints() {
+		if (directionPoints == null) {
+			return new NativeLibrary.NativeDirectionPoint[0];
+		}
+		QuadRect rect = new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE);
+		List<DirectionPoint> points = directionPoints.queryInBox(rect, new ArrayList<DirectionPoint>());
+		NativeLibrary.NativeDirectionPoint[] result = new NativeLibrary.NativeDirectionPoint[points.size()];
+		for (int i = 0; i < points.size(); i++) {
+			DirectionPoint point = points.get(i);
+			result[i] = new NativeLibrary.NativeDirectionPoint(point.getLatitude(), point.getLongitude(), point.getTags());
+		}
+		return result;
+	}
+
 	public static class Builder {
 		// Design time storage
 		private String defaultRouter = "";
 		private Map<String, GeneralRouter> routers = new LinkedHashMap<>();
 		private Map<String, String> attributes = new LinkedHashMap<>();
 		private Set<Long> impassableRoadLocations = new HashSet<>();
+		private QuadTree<Node> directionPointsBuilder;
 
 		public Builder() {
-
 		}
 
 		public Builder(Map<String, String> defaultAttributes) {
@@ -106,8 +156,24 @@ public class RoutingConfiguration {
 				i.memoryLimitation = memoryLimitMB * (1l << 20);
 			}
 			i.planRoadDirection = parseSilentInt(getAttribute(i.router, "planRoadDirection"), i.planRoadDirection);
+			if (directionPointsBuilder != null) {
+				QuadRect rect = new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE);
+				List<net.osmand.osm.edit.Node> lst = directionPointsBuilder.queryInBox(rect, new ArrayList<Node>());
+				i.directionPoints = new QuadTree<>(rect, 14, 0.5f);
+				for(Node n : lst) {
+					DirectionPoint dp = new DirectionPoint(n);
+					int x = MapUtils.get31TileNumberX(dp.getLongitude());
+					int y = MapUtils.get31TileNumberY(dp.getLatitude());
+					i.directionPoints.insert(dp, new QuadRect(x, y, x, y));
+				}
+			}
 //			i.planRoadDirection = 1;
 			return i;
+		}
+		
+		public Builder setDirectionPoints(QuadTree<Node> directionPoints) {
+			this.directionPointsBuilder = directionPoints;
+			return this;
 		}
 
 		public Set<Long> getImpassableRoadLocations() {

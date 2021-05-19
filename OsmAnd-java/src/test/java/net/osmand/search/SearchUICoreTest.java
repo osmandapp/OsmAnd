@@ -6,9 +6,7 @@ import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.search.SearchUICore.SearchResultCollection;
 import net.osmand.search.SearchUICore.SearchResultMatcher;
-import net.osmand.search.core.SearchPhrase;
-import net.osmand.search.core.SearchResult;
-import net.osmand.search.core.SearchSettings;
+import net.osmand.search.core.*;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -177,13 +175,30 @@ public class SearchUICoreTest {
 		for (int k = 0; k < phrases.size(); k++) {
 			String text = phrases.get(k);
 			List<String> result = results.get(k);
-			SearchPhrase phrase = emptyPhrase.generateNewPhrase(text, s);
-			SearchResultMatcher matcher = new SearchResultMatcher(rm, phrase, 1, new AtomicInteger(1), -1);
-			core.searchInternal(phrase, matcher);
+			List<SearchResult> searchResults;
+			SearchPhrase phrase;
+			String[] arr = text.split("[\\\\{}]");
+			if (arr.length > 0 && arr[0].equals("POI_TYPE:")) {
+				SearchCoreFactory.DISPLAY_DEFAULT_POI_TYPES = true;
+				phrase = emptyPhrase.generateNewPhrase("", s);
+				searchResults = getSearchResult(phrase, rm, core);
+				for (SearchResult searchResult : searchResults) {
+					if (arr.length > 1 && arr[1].equals(searchResult.localeName)) {
+						String fullText = "";
+						if (arr.length > 2) {
+							fullText = arr[2];
+						}
+						phrase = emptyPhrase.generateNewPhrase(fullText, s);
+						phrase.getWords().add(new SearchWord(searchResult.localeName, searchResult));
+						searchResults = getSearchResult(phrase, rm, core);
+						break;
+					}
+				}
+			} else {
+				phrase = emptyPhrase.generateNewPhrase(text, s);
+				searchResults = getSearchResult(phrase, rm, core);
+			}
 
-			SearchResultCollection collection = new SearchResultCollection(phrase);
-			collection.addSearchResults(matcher.getRequestResults(), true, true);
-			List<SearchResult> searchResults = collection.getCurrentSearchResults();
 			for (int i = 0; i < result.size(); i++) {
 				String expected = result.get(i);
 				SearchResult res = i >= searchResults.size() ? null : searchResults.get(i);
@@ -210,6 +225,15 @@ public class SearchUICoreTest {
 		}
 
 		obfFile.delete();
+	}
+
+	private List<SearchResult> getSearchResult(SearchPhrase phrase, ResultMatcher<SearchResult> rm, SearchUICore core){
+		SearchResultMatcher matcher = new SearchResultMatcher(rm, phrase, 1, new AtomicInteger(1), -1);
+		core.searchInternal(phrase, matcher);
+		SearchResultCollection collection = new SearchResultCollection(phrase);
+		collection.addSearchResults(matcher.getRequestResults(), true, true);
+
+		return collection.getCurrentSearchResults();
 	}
 
 	private void parseResults(JSONObject sourceJson, String tag, List<List<String>> results) {
