@@ -2917,7 +2917,7 @@
     <string name="public_transport_try_change_settings">Essayez de modifier les paramètres.</string>
     <string name="public_transport_calc_pedestrian">Calculer l\'itinéraire piéton</string>
     <string name="public_transport_type">Type de transport</string>
-    <string name="searching_gps">Recherche GPS</string>
+    <string name="searching_gps">Recherche des satellites</string>
     <string name="coordinates_widget">Gadget de coordonnées</string>
     <string name="shared_string_privacy_policy">Politique de confidentialité</string>
     <string name="help_us_make_osmand_better">Aidez-nous à améliorer OsmAnd</string>
