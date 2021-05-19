@@ -107,7 +107,7 @@ public class RouteProvider {
 				} else if (params.mode.getRouteService() == RouteService.OSMAND) {
 					LinkedList<Location> points = SuggestedMapsProvider.getStartFinishIntermediatesPoints(params, "");
 					List<WorldRegion> suggestedMapsStartFinishIntermediates = SuggestedMapsProvider.getSuggestedMaps(points, params.ctx);
-					List<Location> pointsStraightLine = SuggestedMapsProvider.getLocationBasedOnDistance(points);
+					List<Location> pointsStraightLine = SuggestedMapsProvider.getLocationBasedOnDistanceInterval(points);
 					List<WorldRegion> suggestedMapsOnStraightLine = SuggestedMapsProvider.getSuggestedMaps(pointsStraightLine, params.ctx);
 					if (Algorithms.isEmpty(suggestedMapsStartFinishIntermediates)) {
 						if (!Algorithms.isEmpty(suggestedMapsOnStraightLine)) {

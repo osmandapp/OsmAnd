@@ -34,6 +34,11 @@ public class SuggestedMapsProvider {
 
 	private static final int EARTH_RADIUS = 6371000;
 	private static final int MINIMAL_DISTANCE = 20000;
+	private static boolean isPointOnWater;
+
+	public boolean isPointOnWater() {
+		return isPointOnWater;
+	}
 
 	public static boolean checkIfObjectDownloaded(String downloadName, OsmandApplication app) {
 		ResourceManager rm = app.getResourceManager();
@@ -44,14 +49,21 @@ public class SuggestedMapsProvider {
 		return rm.getIndexFileNames().containsKey(regionName) || rm.getIndexFileNames().containsKey(roadsRegionName);
 	}
 
-	public static List<Location> getLocationBasedOnDistance(List<Location> points) {
-		while (points.get(0).distanceTo(points.get(points.size() - 1)) > MINIMAL_DISTANCE) {
-			float bearing = points.get(0).bearingTo(points.get(points.size() - 1));
-			LatLon latLon = findPointAtDistanceFrom(points.get(0).getLatitude(), points.get(0).getLongitude(), MINIMAL_DISTANCE, bearing);
-			Location location = new Location("", latLon.getLatitude(), latLon.getLongitude());
-			points.add(0, location);
+	public static List<Location> getLocationBasedOnDistanceInterval(List<Location> points) {
+		List<Location> mapsBasedOnPoints = new ArrayList<>();
+		for (int i = 0; i < points.size(); i++) {
+			for (int j = i + 1; j < points.size(); j++) {
+				mapsBasedOnPoints.add(0, points.get(i));
+				mapsBasedOnPoints.add(mapsBasedOnPoints.size() - 1, points.get(j));
+				while (mapsBasedOnPoints.get(0).distanceTo(mapsBasedOnPoints.get(mapsBasedOnPoints.size() - 1)) > MINIMAL_DISTANCE) {
+					float bearing = mapsBasedOnPoints.get(0).bearingTo(mapsBasedOnPoints.get(mapsBasedOnPoints.size() - 1));
+					LatLon latLon = findPointAtDistanceFrom(mapsBasedOnPoints.get(0).getLatitude(), mapsBasedOnPoints.get(0).getLongitude(), MINIMAL_DISTANCE, bearing);
+					Location location = new Location("", latLon.getLatitude(), latLon.getLongitude());
+					mapsBasedOnPoints.add(0, location);
+				}
+			}
 		}
-		return points;
+		return mapsBasedOnPoints;
 	}
 
 	public static LatLon findPointAtDistanceFrom(double latitude, double longitude, double distanceInMetres, double bearing) {
@@ -112,6 +124,10 @@ public class SuggestedMapsProvider {
 			final Location o = points.get(i);
 			LatLon latLonPoint = new LatLon(o.getLatitude(), o.getLongitude());
 			List<WorldRegion> downloadRegions = app.getRegions().getWorldRegionsAt(latLonPoint);
+
+			if (downloadRegions.isEmpty()) {
+				isPointOnWater = true;
+			}
 
 			List<Boolean> mapsDownloadedList = new ArrayList<>();
 			List<WorldRegion> maps = new ArrayList<>();

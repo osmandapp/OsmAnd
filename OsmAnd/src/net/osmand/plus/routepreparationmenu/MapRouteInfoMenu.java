@@ -486,7 +486,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	public void updateMissingMaps(RouteCalculationParams params) {
 		try {
 			LinkedList<Location> points = SuggestedMapsProvider.getStartFinishIntermediatesPoints(params, "");
-			List<Location> pointsStraightLine = SuggestedMapsProvider.getLocationBasedOnDistance(points);
+			List<Location> pointsStraightLine = SuggestedMapsProvider.getLocationBasedOnDistanceInterval(points);
 			SuggestedMapsProvider.getSuggestedMaps(pointsStraightLine, params.ctx);
 		} catch (IOException e) {
 			LOG.error(e.getMessage(), e);
