@@ -124,6 +124,8 @@ public class ExternalApiHelper {
 	public static final String PARAM_LON = "lon";
 	public static final String PARAM_MAP_LAT = "map_lat";
 	public static final String PARAM_MAP_LON = "map_lon";
+	public static final String PARAM_DESTINATION_LAT = "destination_lat";
+	public static final String PARAM_DESTINATION_LON = "destination_lon";
 	public static final String PARAM_COLOR = "color";
 	public static final String PARAM_VISIBLE = "visible";
 
@@ -443,8 +445,12 @@ public class ExternalApiHelper {
 					result.putExtra(PARAM_MAP_LON, mapLocation.getLongitude());
 				}
 
-				final RoutingHelper routingHelper = app.getRoutingHelper();
+				RoutingHelper routingHelper = app.getRoutingHelper();
 				if (routingHelper.isRouteCalculated()) {
+					LatLon finalLocation = routingHelper.getFinalLocation();
+					result.putExtra(PARAM_DESTINATION_LAT, finalLocation.getLatitude());
+					result.putExtra(PARAM_DESTINATION_LON, finalLocation.getLongitude());
+
 					int time = routingHelper.getLeftTime();
 					result.putExtra(PARAM_TIME_LEFT, time);
 					long eta = time + System.currentTimeMillis() / 1000;
