@@ -2686,7 +2686,7 @@
     <string name="use_two_digits_longitude">Использовать двузначную долготу</string>
     <string name="shared_string_travel_guides">Путеводитель</string>
     <string name="waypoints_removed_from_map_markers">Путевые точки удалены из маркеров карты</string>
-    <string name="nothing_found_in_radius">Ничего не найдено:</string>
+    <string name="nothing_found_in_radius">Ничего нет в радиусе</string>
     <string name="select_waypoints_category_description">Добавьте все путевые точки трека или выберите отдельные категории.</string>
     <string name="shared_string_total">Всего</string>
     <string name="shared_string_result">Результат</string>
