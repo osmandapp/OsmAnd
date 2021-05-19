@@ -4112,4 +4112,10 @@
     <string name="cloud_email_already_registered">Un compte avec cet email existe déjà.</string>
     <string name="resend_verification_code">Renvoyer le code</string>
     <string name="verification_code_missing">Je n\'ai pas reçu le code de vérification</string>
+    <string name="osmand_cloud_authorize_descr">Ne perdez jamais vos données, sauvegardez et restaurez facilement toutes vos informations.</string>
+    <string name="osmand_cloud_create_account_descr">Veuillez saisir votre adresse email, toutes vos données y seront associées.
+\nLe code de vérification vous sera envoyé à cette adresse.</string>
+    <string name="osmand_cloud_login_descr">Veuillez saisir l\'adresse email utilisée à l\'inscription. A l\'étape suivante, vous recevrez un mot de passe à usage unique.</string>
+    <string name="cloud_email_not_registered">Cet email n\'est pas enregistré sur OsmAnd Cloud</string>
+    <string name="backup_into_file">Fichier de sauvegarde</string>
 </resources>
