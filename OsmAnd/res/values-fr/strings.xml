@@ -1314,7 +1314,7 @@
     <string name="traffic_warning">Alerte de circulation</string>
     <string name="local_index_description">Cliquez sur un élément pour voir plus de détails, maintenez appuyé pour désactiver ou supprimer. Données actuellement sur l\'appareil (%1$s libre) :</string>
     <string name="text_size">Taille du texte</string>
-    <string name="fav_point_dublicate">Ce nom est déjà utilisé pour un favori</string>
+    <string name="fav_point_dublicate">Dupliquer le nom Favori spécifié</string>
     <string name="fav_point_dublicate_message">Favori renommé en %1$s pour éviter un doublon.</string>
     <string name="text_size_descr">Sélectionnez la taille du texte sur la carte.</string>
     <string name="print_route">Exporter l\'itinéraire</string>
@@ -3271,12 +3271,12 @@
     <string name="added_profiles">Profils ajoutés</string>
     <string name="added_profiles_descr">Profils ajoutés par le greffon</string>
     <string name="shared_string_turn_off">Désactiver</string>
-    <string name="new_plugin_added">Nouveau greffon ajouté</string>
+    <string name="new_plugin_added">Nouveau plugin ajouté</string>
     <string name="join_segments">Joindre les segments</string>
     <string name="add_new_profile_q">Ajouter le profil \'%1$s\' \?</string>
     <string name="save_heading">Inclure la direction</string>
     <string name="save_heading_descr">Inclure la direction de chaque point lors de l\'enregistrement d\'une trace.</string>
-    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Afficher les itinéraires cyclables du réseau de nœuds</string>
+    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Afficher les nœuds du réseau cyclable</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Nœuds de transport</string>
     <string name="personal_category_name">Personnel</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
@@ -3581,7 +3581,7 @@
 \n
 \n</string>
     <string name="additional_actions_descr">Vous pouvez accéder à ces actions en appuyant sur le bouton \"%1$s\".</string>
-    <string name="quick_action_transport_descr">Bouton pour afficher ou masquer les transports publics sur la carte.</string>
+    <string name="quick_action_transport_descr">Appuyez pour afficher ou masquer les transports publics sur la carte.</string>
     <string name="create_edit_poi">Créer ou modifier un PI</string>
     <string name="parking_positions">Emplacements de stationnement</string>
     <string name="add_edit_favorite">Ajouter ou modifier un favori</string>
@@ -3591,7 +3591,7 @@
     <string name="profiles_for_action_not_found">Ces profils sont introuvables.</string>
     <string name="shared_string_resume">Reprendre</string>
     <string name="shared_string_add_profile">Ajouter un profil</string>
-    <string name="change_application_profile">Modifier le profil</string>
+    <string name="change_application_profile">Modifier le profil de l\'application</string>
     <string name="index_item_world_basemap_detailed">Carte mondiale générale (plus détaillée)</string>
     <string name="unsupported_type_error">Type non pris en charge</string>
     <string name="gpx_parse_error">Le fichier GPX OsmAnd n\'est pas construit correctement. Vous pouvez transmettre ce fichier à l\'équipe support OsmAnd pour investiguer.</string>
@@ -3647,9 +3647,9 @@
     <string name="clear_tiles_warning">Appliquer ces modifications effacera les données mises en cache pour cette source de tuiles</string>
     <string name="vessel_height_warning_link">Définir la hauteur du navire</string>
     <string name="vessel_height_warning">Vous pouvez définir la hauteur du navire pour éviter les ponts bas. Souvenez-vous que si le pont est mobile, nous utiliserons sa hauteur en position ouverte.</string>
-    <string name="vessel_height_limit_description">Définir la hauteur du navire afin d\'éviter les ponts bas. Souvenez-vous que si le pont est mobile, nous utiliserons sa hauteur en position ouverte.</string>
+    <string name="vessel_height_limit_description">Définit la hauteur du navire afin d\'éviter les ponts bas. Souvenez-vous que si le pont est mobile, nous utiliserons sa hauteur en position ouverte.</string>
     <string name="vessel_width_limit_description">Définir la largeur du navire pour éviter les ponts étroits</string>
-    <string name="quick_action_showhide_mapillary_descr">Bouton pour afficher ou masquer la couche Mapillary sur la carte.</string>
+    <string name="quick_action_showhide_mapillary_descr">Appuyez pour afficher ou masquer la couche Mapillary sur la carte.</string>
     <string name="speed_cameras_legal_descr">Dans certains pays ou régions, l\'utilisation d\'avertisseurs de radars est interdit par la loi.
 \n
 \nVous devez faire un choix en fonction de la loi de votre pays.
@@ -3708,14 +3708,14 @@
     <string name="route_between_points_whole_track_button_desc">Toute la trace sera recalculée en utilisant le profil sélectionné.</string>
     <string name="route_between_points_next_segment_button_desc">Seul le prochain segment sera recalculé en utilisant le profil sélectionné.</string>
     <string name="route_between_points_warning_desc">Ensuite, sélectionnez le profil de navigation pour détecter les routes autorisées et le seuil de distance afin de déplacer votre trace.</string>
-    <string name="route_between_points_add_track_desc">Sélectionnez un fichier de trace auquel ajouter un nouveau segment.</string>
+    <string name="route_between_points_add_track_desc">Sélectionnez le fichier de traces auquel vous souhaitez ajouter un nouveau segment.</string>
     <string name="save_as_new_track">Enregistrer comme nouvelle trace</string>
     <string name="reverse_route">Inverser l\'itinéraire</string>
     <string name="whole_track">Trace entière</string>
     <string name="next_segment">Segment suivant</string>
     <string name="threshold_distance">Seuil de distance</string>
     <string name="navigation_profile">Profil de navigation</string>
-    <string name="street_level_imagery">Photos des rues</string>
+    <string name="street_level_imagery">Imagerie des rues</string>
     <string name="plan_route_exit_dialog_descr">Souhaitez-vous vraiment ignorer toutes les modifications apportées à cet itinéraire \?</string>
     <string name="in_case_of_reverse_direction">Si inversion du sens</string>
     <string name="pass_whole_track_descr">Point de la trace vers lequel naviguer</string>
@@ -4001,7 +4001,7 @@
     <string name="map_orientation_threshold_descr">Ne pas pivoter la carte si la vitesse est inférieure à un seuil</string>
     <string name="on_pause">En pause</string>
     <string name="app_restart_required">Un redémarrage de l\'application est nécessaire pour appliquer certains paramètres.</string>
-    <string name="routing_attr_height_obstacles_description">Le routage peut éviter de fortes montées.</string>
+    <string name="routing_attr_height_obstacles_description">L\'itinéraire pourrait éviter les fortes montées.</string>
     <string name="map_widget_distance_by_tap">Distance par appui</string>
     <string name="latest_openstreetmap_update">Dernière mise à jour d\'OpenStreetMap disponible :</string>
     <string name="updated">Mis à jour : %s</string>
