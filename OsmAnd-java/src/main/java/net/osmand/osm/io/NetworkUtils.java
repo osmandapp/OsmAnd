@@ -6,12 +6,11 @@ import com.github.scribejava.core.model.Verb;
 import net.osmand.PlatformUtil;
 import net.osmand.osm.oauth.OsmOAuthAuthorizationClient;
 import net.osmand.util.Algorithms;
-
-import org.apache.commons.compress.utils.IOUtils;
 import org.apache.commons.logging.Log;
 
 import java.io.*;
 import java.net.*;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.zip.GZIPOutputStream;
@@ -121,7 +120,7 @@ public class NetworkUtils {
 			log.info("Start uploading file to " + urlText + " " +fileToUpload.getName());
 			url = new URL(urlText);
 			HttpURLConnection conn;
-			if (client != null && client.isValidToken()){
+			if (client != null && client.isValidToken()) {
 				OAuthRequest req = new OAuthRequest(Verb.POST, urlText);
 				client.getService().signRequest(client.getAccessToken(), req);
 				req.addHeader("Content-Type", "multipart/form-data; boundary=" + BOUNDARY);
@@ -138,8 +137,7 @@ public class NetworkUtils {
 					log.error(e);
 				}
 				return null;
-			}
-			else {
+			} else {
 				conn = (HttpURLConnection) url.openConnection();
 				conn.setDoInput(true);
 				conn.setDoOutput(true);
@@ -150,6 +148,7 @@ public class NetworkUtils {
 			}
 			conn.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + BOUNDARY); //$NON-NLS-1$ //$NON-NLS-2$
 			conn.setRequestProperty("User-Agent", "OsmAnd"); //$NON-NLS-1$ //$NON-NLS-2$
+			conn.setChunkedStreamingMode(4096);
 			OutputStream ous = conn.getOutputStream();
 			ous.write(("--" + BOUNDARY + "\r\n").getBytes());
 			String filename = fileToUpload.getName();
@@ -205,79 +204,11 @@ public class NetworkUtils {
 	}
 
 	public static void main(String[] args) {
-		File myFile = new File("/Users/macmini/Downloads/Spain_madrid_europe_2.obf");
-		String type = "obf";
+		File myFile = new File("/Users/macmini/Downloads/great-britain-latest.osm.pbf");
+		String type = "pbf-big";
 		String serverUrl = "http://localhost:8080/userdata/upload-file?name="+myFile.getName()+"&type="+type+"&deviceid=2&accessToken=dd8d3693-4812-440a-8042-b0d848310e23";
-		uploadBigFile(serverUrl, myFile, true);
-	}
-
-	public static String uploadBigFile(String serverUrl, File fileToUpload, boolean gzip){
-		URL url;
-		try {
-			int mb = 1024 * 1024;
-			log.info("Start uploading file " +fileToUpload.getName() + " max memory:" + Runtime.getRuntime().maxMemory() / mb);
-			url = new URL(serverUrl);
-			HttpURLConnection conn;
-			conn = (HttpURLConnection) url.openConnection();
-			conn.setDoInput(true);
-			conn.setDoOutput(true);
-			conn.setRequestMethod("POST");
-
-			conn.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + BOUNDARY); //$NON-NLS-1$ //$NON-NLS-2$
-			conn.setRequestProperty("User-Agent", "OsmAnd"); //$NON-NLS-1$ //$NON-NLS-2$
-			conn.setChunkedStreamingMode(1024);
-			OutputStream ous = conn.getOutputStream();
-			ous.write(("--" + BOUNDARY + "\r\n").getBytes());
-			String filename = fileToUpload.getName();
-			if (gzip) {
-				filename += ".gz";
-			}
-			ous.write(("content-disposition: form-data; name=\"file\"; filename=\"" + filename + "\"\r\n").getBytes()); //$NON-NLS-1$ //$NON-NLS-2$
-			ous.write(("Content-Type: application/octet-stream\r\n\r\n").getBytes()); //$NON-NLS-1$
-			InputStream fis = new FileInputStream(fileToUpload);
-			BufferedInputStream bis = new BufferedInputStream(fis, 20 * 1024);
-			ous.flush();
-			if (gzip) {
-				GZIPOutputStream gous = new GZIPOutputStream(ous, 1024);
-				IOUtils.copy(bis, gous);
-				gous.flush();
-				gous.finish();
-			} else {
-				IOUtils.copy(bis, ous);
-			}
-			ous.write(("\r\n--" + BOUNDARY + "--\r\n").getBytes()); //$NON-NLS-1$ //$NON-NLS-2$
-			ous.flush();
-			Algorithms.closeStream(bis);
-			Algorithms.closeStream(ous);
-
-			log.info("Finish uploading file " + fileToUpload.getName());
-			log.info("Response code and message : " + conn.getResponseCode() + " " + conn.getResponseMessage());
-			if(conn.getResponseCode() != 200){
-				return conn.getResponseMessage();
-			}
-			InputStream is = conn.getInputStream();
-			StringBuilder responseBody = new StringBuilder();
-			if (is != null) {
-				BufferedReader in = new BufferedReader(new InputStreamReader(is, "UTF-8")); //$NON-NLS-1$
-				String s;
-				boolean first = true;
-				while ((s = in.readLine()) != null) {
-					if(first){
-						first = false;
-					} else {
-						responseBody.append("\n"); //$NON-NLS-1$
-					}
-					responseBody.append(s);
-				}
-				is.close();
-			}
-			String response = responseBody.toString();
-			log.info("Response : " + response);
-			return null;
-		} catch (IOException e) {
-			log.error(e.getMessage(), e);
-			return e.getMessage();
-		}
+		Map<String, String> additionalMapData = new HashMap<>();
+		uploadFile(serverUrl, myFile, null, null, "file", true, additionalMapData);
 	}
 
 	public static void setProxy(String host, int port) {
