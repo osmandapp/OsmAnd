@@ -4098,4 +4098,18 @@
     <string name="routing_attr_avoid_low_emission_zone_description">Éviter les zones à faibles émissions</string>
     <string name="search_more">Rechercher plus …</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
+    <string name="backup_and_restore">Sauvegarde &amp; Restauration</string>
+    <string name="last_backup">Dernière sauvegarde</string>
+    <string name="duration_ago">il y a %1$s</string>
+    <string name="osmand_cloud">OsmAnd Cloud</string>
+    <string name="local_backup">Sauvegarde locale</string>
+    <string name="local_backup_descr">Sauvegarder ou restaurer des données à partir d\'un fichier local.</string>
+    <string name="restore_from_file">Restaurer à partir d\'un fichier</string>
+    <string name="osmand_cloud_help_descr">Besoin d\'aide\? Contactez-nous sur %1$s.</string>
+    <string name="verify_email_address">Vérifier l’adresse e-mail</string>
+    <string name="verify_email_address_descr">Nous avons envoyé un code de vérification à %1$s, veuillez le saisir dans le champ ci-dessous.</string>
+    <string name="enter_verification_code">Entrez le code à 4 chiffres</string>
+    <string name="cloud_email_already_registered">Un compte avec cet email existe déjà.</string>
+    <string name="resend_verification_code">Renvoyer le code</string>
+    <string name="verification_code_missing">Je n\'ai pas reçu le code de vérification</string>
 </resources>
