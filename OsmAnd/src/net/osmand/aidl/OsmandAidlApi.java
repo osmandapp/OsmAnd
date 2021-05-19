@@ -1819,9 +1819,13 @@ public class OsmandAidlApi {
 		long arrivalTime = 0;
 		int leftDistance = 0;
 		Bundle turnInfo = null;
+		ALatLon destinationLocation = null;
 
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		if (routingHelper.isRouteCalculated()) {
+			LatLon finalLocation = routingHelper.getFinalLocation();
+			destinationLocation = new ALatLon(finalLocation.getLatitude(), finalLocation.getLongitude());
+
 			leftTime = routingHelper.getLeftTime();
 			arrivalTime = leftTime + System.currentTimeMillis() / 1000;
 			leftDistance = routingHelper.getLeftDistance();
@@ -1840,7 +1844,9 @@ public class OsmandAidlApi {
 				updateTurnInfo("no_speak_next_", turnInfo, directionInfo);
 			}
 		}
-		return new AppInfoParams(lastKnownLocation, mapLocation, turnInfo, leftTime, leftDistance, arrivalTime, mapVisible);
+		AppInfoParams params = new AppInfoParams(lastKnownLocation, mapLocation, turnInfo, leftTime, leftDistance, arrivalTime, mapVisible);
+		params.setDestinationLocation(destinationLocation);
+		return params;
 	}
 
 	private void updateTurnInfo(String prefix, Bundle bundle, NextDirectionInfo ni) {
