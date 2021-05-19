@@ -3568,7 +3568,7 @@
 \n
 \nВи можете керувати передплатами та скасовувати їх у налаштуваннях Google Play.</string>
     <string name="search_poi_types">Пошук видів POI</string>
-    <string name="search_poi_types_descr">Поєднуйте види POI з різних категорій. Торкніться \"Перемикача\", щоб вибрати усі, торкніться лівої сторони для вибору категорії.</string>
+    <string name="search_poi_types_descr">Поєднуйте види POI з різних категорій. Торкніться перемикача, щоб вибрати всі, торкніться лівої сторони для вибору категорії.</string>
     <string name="navigation_profiles_item">Профілі навігації</string>
     <string name="release_3_7">• Нові автономні мапи схилів
 \n
