@@ -36,7 +36,7 @@ public class RouteColorize {
     public static final int[] colors = new int[] {GREEN, YELLOW, RED};
 
     private static final float DEFAULT_BASE = 17.2f;
-    private static final int MAX_SLOPE_VALUE = 25;
+    private static final double MAX_SLOPE_VALUE = 0.25;// 25%, slope value in the range 0..1
 
     public enum ColorizationType {
         ELEVATION,
@@ -134,6 +134,7 @@ public class RouteColorize {
             values = listToArray(valList);
         }
         calculateMinMaxValue();
+        // set strict limitations for maxValue
         maxValue = getMaxValue(colorizationType, analysis, minValue, maxProfileSpeed);
         checkPalette();
         sortPalette();

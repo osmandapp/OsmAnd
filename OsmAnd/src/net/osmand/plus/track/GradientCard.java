@@ -81,6 +81,7 @@ public class GradientCard extends BaseCard {
 		if (selectedScaleType == GradientScaleType.ALTITUDE) {
 			return OsmAndFormatter.getFormattedAlt(value, app);
 		} else if (selectedScaleType == GradientScaleType.SLOPE) {
+			value *= 100;// slope value in the range 0..1
 			return app.getString(R.string.ltr_or_rtl_combine_via_space, String.valueOf((int) value),  "%");
 		}
 		String speed = OsmAndFormatter.getFormattedSpeed((float) value, app);
