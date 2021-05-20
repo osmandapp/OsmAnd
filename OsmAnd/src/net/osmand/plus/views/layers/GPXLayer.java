@@ -15,12 +15,6 @@ import android.graphics.drawable.LayerDrawable;
 import android.os.AsyncTask;
 import android.util.Pair;
 
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.content.ContextCompat;
-
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
@@ -84,6 +78,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.content.ContextCompat;
 
 import static net.osmand.GPXUtilities.calculateTrackBounds;
 import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
@@ -983,7 +983,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		return null;
 	}
 
-	private SelectedGpxPoint createSelectedGpxPoint(SelectedGpxFile selectedGpxFile, WptPt prevPoint, WptPt nextPoint, LatLon latLon) {
+	public static SelectedGpxPoint createSelectedGpxPoint(SelectedGpxFile selectedGpxFile, WptPt prevPoint, WptPt nextPoint, LatLon latLon) {
 		WptPt projectionPoint = createProjectionPoint(prevPoint, nextPoint, latLon);
 
 		Location prevPointLocation = new Location("");
@@ -1148,9 +1148,30 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		if (!(object instanceof SelectedGpxPoint)) {
 			return false;
 		}
+		OsmandApplication app = view.getApplication();
 		MapActivity mapActivity = (MapActivity) view.getContext();
 		SelectedGpxPoint point = (SelectedGpxPoint) object;
-		TrackMenuFragment.showInstance(mapActivity, point.getSelectedGpxFile(), point, null, null, false);
+		SelectedGpxFile selectedGpxFile = point.getSelectedGpxFile();
+		GPXFile gpxFile = selectedGpxFile.getGpxFile();
+		String path = gpxFile.path;
+		boolean isSaved = new File(path).exists();
+		if (isSaved || Algorithms.isEmpty(path)) {
+			TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, point, null, null, false);
+		} else {
+				new SaveGpxAsyncTask(new File(path), gpxFile, new SaveGpxAsyncTask.SaveGpxListener() {
+				@Override
+				public void gpxSavingStarted() {
+				}
+
+				@Override
+				public void gpxSavingFinished(Exception errorMessage) {
+					if (errorMessage == null) {
+						app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, false);
+						TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, point, null, null, false);
+					}
+				}
+			}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		}
 		return true;
 	}
 

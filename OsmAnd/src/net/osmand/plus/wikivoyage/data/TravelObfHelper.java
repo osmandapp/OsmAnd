@@ -345,7 +345,7 @@ public class TravelObfHelper implements TravelHelper {
 		return gpxFile;
 	}
 
-	private String getTagValue(BinaryMapDataObject object, String tag) {
+	public static String getTagValue(BinaryMapDataObject object, String tag) {
 		BinaryMapIndexReader.MapIndex mi = object.getMapIndex();
 		TIntObjectIterator<String> it = object.getObjectNames().iterator();
 		while (it.hasNext()) {
