@@ -4112,4 +4112,8 @@
     <string name="routing_attr_avoid_low_emission_zone_name">Umweltzonen vermeiden</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
     <string name="search_more">Mehr suchen…</string>
+    <string name="osmand_cloud_authorize_descr">Verlieren Sie niemals Ihre Daten, sichern und stellen Sie alle Informationen problemlos wieder her.</string>
+    <string name="osmand_cloud_create_account_descr">Bitte geben Sie Ihre E-Mail-Adresse ein, alle Ihre Daten werden mit dieser verknüpft.
+\nWir senden Ihnen einen Verifizierungscode an diese E-Mail-Adresse.</string>
+    <string name="verification_code_missing_description">Die Wartezeit für den Code kann 10 Minuten betragen, außerdem können Sie Ihren Spamordner überprüfen. Wenn dies nicht hilft, verwenden Sie die Schaltfläche unten.</string>
 </resources>
