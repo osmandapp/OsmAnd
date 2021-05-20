@@ -4103,4 +4103,27 @@
     <string name="poi_routes">Trasy</string>
     <string name="routing_attr_avoid_low_emission_zone_description">Unikaj stref niskiej emisji</string>
     <string name="routing_attr_avoid_low_emission_zone_name">Unikaj stref niskiej emisji</string>
+    <string name="search_more">Wyszukaj więcej…</string>
+    <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
+    <string name="backup_and_restore">Kopia i przywracanie</string>
+    <string name="last_backup">Ostatnia kopia zapasowa</string>
+    <string name="duration_ago">%1$s temu</string>
+    <string name="osmand_cloud">Chmura OsmAnd</string>
+    <string name="osmand_cloud_authorize_descr">Nigdy nie trać swoich danych, wykonuj kopie zapasowe i przywracaj wszystkie informacje bez problemu.</string>
+    <string name="local_backup">Lokalna kopia zapasowa</string>
+    <string name="local_backup_descr">Tworzenie kopii zapasowej lub przywracanie danych z pliku lokalnego.</string>
+    <string name="backup_into_file">Plik informacji o kopii zapasowej</string>
+    <string name="restore_from_file">Przywróć z pliku</string>
+    <string name="osmand_cloud_help_descr">Potrzebujesz pomocy\? Skontaktuj się z nami pod adresem %1$s</string>
+    <string name="osmand_cloud_create_account_descr">Podaj swój adres e-mail, wszystkie Twoje dane będą z nim powiązane.
+\nWyślemy Ci kod weryfikacyjny na ten adres e-mail.</string>
+    <string name="osmand_cloud_login_descr">Proszę wpisać adres e-mail, którego użyłeś do rejestracji. Wyślemy Ci jednorazowe hasło potrzebne w następnym kroku.</string>
+    <string name="verify_email_address">Zweryfikuj adres e-mail</string>
+    <string name="verify_email_address_descr">Wysłaliśmy kod weryfikacyjny na adres %1$s, wprowadź go w poniższe pole.</string>
+    <string name="enter_verification_code">Wprowadź 4-cyfrowy kod</string>
+    <string name="cloud_email_not_registered">Ten e-mail nie został zarejestrowany w OsmAnd Cloud</string>
+    <string name="cloud_email_already_registered">Konto o tym adresie jest już zarejestrowane.</string>
+    <string name="resend_verification_code">Wyślij ponownie kod</string>
+    <string name="verification_code_missing">Nie otrzymałem kodu weryfikacyjnego</string>
+    <string name="verification_code_missing_description">Czas oczekiwania na kod może wynosić 10 minut, możesz również sprawdzić folder spam. Jeśli to nie pomoże, użyj przycisku poniżej.</string>
 </resources>
