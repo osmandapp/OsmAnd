@@ -50,7 +50,8 @@ public class RouteCalculationResult {
 	private final String errorMessage;
 	private final int[] listDistance;
 	private final int[] intermediatePoints;
-	private boolean onlineCheckNeeded;
+
+	private final warningCardType type;
 
 	// Route information
 	private final float routingTime;
@@ -78,6 +79,7 @@ public class RouteCalculationResult {
 	protected int lastWaypointGPX = 0;
 	protected int currentStraightAngleRoute = -1;
 	protected Location currentStraightAnglePoint = null;
+	public enum warningCardType {START_FINISH_INTERMEDIATES, DIRECT_LINE, ONLINE }
 
 
 	public RouteCalculationResult(String errorMessage) {
@@ -85,6 +87,7 @@ public class RouteCalculationResult {
 		this.routingTime = 0;
 		this.loadedTiles = 0;
 		this.downloadMaps = null;
+		this.type = null;
 		this.visitedSegments = 0;
 		this.calculateTime = 0;
 		this.intermediatePoints = new int[0];
@@ -99,8 +102,9 @@ public class RouteCalculationResult {
 		this.routeVisibleAngle = 0;
 	}
 
-	public RouteCalculationResult(List<WorldRegion> suggestedOfflineMaps) {
+	public RouteCalculationResult(List<WorldRegion> suggestedOfflineMaps, warningCardType type) {
 		this.downloadMaps = suggestedOfflineMaps;
+		this.type = type;
 		this.errorMessage = null;
 		this.routingTime = 0;
 		this.loadedTiles = 0;
@@ -121,6 +125,7 @@ public class RouteCalculationResult {
 	public RouteCalculationResult(List<Location> list, List<RouteDirectionInfo> directions, RouteCalculationParams params, List<LocationPoint> waypoints, boolean addMissingTurns) {
 		this.routingTime = 0;
 		this.downloadMaps = null;
+		this.type = null;
 		this.loadedTiles = 0;
 		this.calculateTime = 0;
 		this.visitedSegments = 0;
@@ -191,6 +196,7 @@ public class RouteCalculationResult {
 			introduceFirstPointAndLastPoint(locations, computeDirections, segments, start, end, ctx);
 		}
 		this.downloadMaps = null;
+		this.type = null;
 		this.locations = Collections.unmodifiableList(locations);
 		this.segments = Collections.unmodifiableList(segments);
 		this.listDistance = new int[locations.size()];
@@ -1310,15 +1316,15 @@ public class RouteCalculationResult {
 		currentStraightAngleRoute = nextPoint;
 	}
 
-	public boolean isOnlineMapsNeeded() {
-		return onlineCheckNeeded;
-	}
-
 	public List<WorldRegion> getDownloadMaps() {
 		return downloadMaps;
 	}
 
-	public static class NextDirectionInfo {
+	public warningCardType getType() {
+		return type;
+	}
+
+		public static class NextDirectionInfo {
 		public RouteDirectionInfo directionInfo;
 		public int distanceTo;
 		public boolean intermediatePoint;

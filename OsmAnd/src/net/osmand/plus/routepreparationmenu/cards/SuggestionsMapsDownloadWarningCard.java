@@ -11,6 +11,7 @@ import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadItem;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.routing.RouteCalculationResult;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -18,14 +19,26 @@ import java.util.List;
 
 import static net.osmand.plus.download.MultipleDownloadItem.getIndexItem;
 
-public class SuggestMapsDownloadWarningCards extends WarningCard {
+public class SuggestionsMapsDownloadWarningCard extends WarningCard {
 	private SelectionBottomSheet dialog;
 
-	public SuggestMapsDownloadWarningCards(@NonNull MapActivity mapActivity) {
+	public SuggestionsMapsDownloadWarningCard(@NonNull MapActivity mapActivity) {
 		super(mapActivity);
-		imageId = R.drawable.ic_map;
-		title = mapActivity.getString(R.string.offline_maps_required_descr);
-		linkText = mapActivity.getString(R.string.welmode_download_maps);
+		RouteCalculationResult.warningCardType warningCardType = mapActivity.getRoutingHelper().getRoute().getType();
+
+		if (warningCardType.equals(RouteCalculationResult.warningCardType.START_FINISH_INTERMEDIATES)) {
+			imageId = R.drawable.ic_map;
+			title = mapActivity.getString(R.string.offline_maps_required_descr);
+			linkText = mapActivity.getString(R.string.welmode_download_maps);
+		} else if (warningCardType.equals(RouteCalculationResult.warningCardType.DIRECT_LINE)) {
+			imageId = R.drawable.ic_action_time_span;
+			title = mapActivity.getString(R.string.direct_line_maps_required_descr);
+			linkText = mapActivity.getString(R.string.online_direct_line_maps_link);
+		} else if (warningCardType.equals(RouteCalculationResult.warningCardType.ONLINE)){
+			imageId = R.drawable.ic_action_time_span;
+			title = mapActivity.getString(R.string.online_maps__required_descr);
+			linkText = mapActivity.getString(R.string.online_direct_line_maps_link);
+		}
 	}
 
 	private void showMultipleSelectionDialog() {
@@ -58,26 +71,18 @@ public class SuggestMapsDownloadWarningCards extends WarningCard {
 			}
 		});
 
-		msDialog.setSelectionUpdateListener(new MultipleSelectionBottomSheet.SelectionUpdateListener() {
-			@Override
-			public void onSelectionUpdate() {
-				updateSize();
-			}
-		});
+		msDialog.setSelectionUpdateListener(this::updateSize);
 
-		msDialog.setOnApplySelectionListener(new SelectionBottomSheet.OnApplySelectionListener() {
-			@Override
-			public void onSelectionApplied(List<SelectionBottomSheet.SelectableItem> selectedItems) {
-				List<IndexItem> indexes = new ArrayList<>();
-				for (SelectionBottomSheet.SelectableItem item : selectedItems) {
-					IndexItem index = getIndexItem((DownloadItem) item.getObject());
-					if (index != null) {
-						indexes.add(index);
-					}
+		msDialog.setOnApplySelectionListener(selectedItems1 -> {
+			List<IndexItem> indexes = new ArrayList<>();
+			for (SelectionBottomSheet.SelectableItem item : selectedItems1) {
+				IndexItem index = getIndexItem((DownloadItem) item.getObject());
+				if (index != null) {
+					indexes.add(index);
 				}
-				IndexItem[] indexesArray = new IndexItem[indexes.size()];
-				new DownloadValidationManager(app).startDownload(mapActivity, indexes.toArray(indexesArray));
 			}
+			IndexItem[] indexesArray = new IndexItem[indexes.size()];
+			new DownloadValidationManager(app).startDownload(mapActivity, indexes.toArray(indexesArray));
 		});
 	}
 
@@ -138,9 +143,9 @@ public class SuggestMapsDownloadWarningCards extends WarningCard {
 		selectableItem.setTitle(downloadItem.getVisibleMapsName(app, app.getRegions()));
 		DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(app);
 		String size = downloadItem.getSizeDescription(app);
-		String addDescr = downloadItem.getAdditionalDescription(app);
-		if (addDescr != null) {
-			size += " " + addDescr;
+		String additionalDescription = downloadItem.getAdditionalDescription(app);
+		if (additionalDescription != null) {
+			size += " " + additionalDescription;
 		}
 		String date = downloadItem.getDate(dateFormat, true);
 		String description = app.getString(R.string.ltr_or_rtl_combine_via_bold_point, size, date);

@@ -48,6 +48,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.map.WorldRegion;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoritesListener;
 import net.osmand.plus.GeocodingLookupService;
@@ -97,7 +98,7 @@ import net.osmand.plus.routepreparationmenu.cards.PublicTransportCard;
 import net.osmand.plus.routepreparationmenu.cards.PublicTransportNotFoundSettingsWarningCard;
 import net.osmand.plus.routepreparationmenu.cards.PublicTransportNotFoundWarningCard;
 import net.osmand.plus.routepreparationmenu.cards.SimpleRouteCard;
-import net.osmand.plus.routepreparationmenu.cards.SuggestMapsDownloadWarningCards;
+import net.osmand.plus.routepreparationmenu.cards.SuggestionsMapsDownloadWarningCard;
 import net.osmand.plus.routepreparationmenu.cards.TracksCard;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.IRouteInformationListener;
@@ -105,7 +106,7 @@ import net.osmand.plus.routing.RouteCalculationParams;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelperUtils;
-import net.osmand.plus.routing.SuggestedMapsProvider;
+import net.osmand.plus.routing.SuggestionsMapsProvider;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -125,6 +126,7 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
+import org.json.JSONException;
 
 import java.io.File;
 import java.io.IOException;
@@ -483,14 +485,17 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		}
 	}
 
-	public void updateMissingMaps(RouteCalculationParams params) {
+	public RouteCalculationResult updateMissingMaps(RouteCalculationParams params) {
+		RouteCalculationResult res = new RouteCalculationResult((String) null);
 		try {
-			LinkedList<Location> points = SuggestedMapsProvider.getStartFinishIntermediatesPoints(params, "");
-			List<Location> pointsStraightLine = SuggestedMapsProvider.getLocationBasedOnDistanceInterval(points);
-			SuggestedMapsProvider.getSuggestedMaps(pointsStraightLine, params.ctx);
-		} catch (IOException e) {
+			LinkedList<Location> pointsOnlineRoute = SuggestionsMapsProvider.findOnlineRoutePoints(params);
+			List<Location> pointsStraightLine = SuggestionsMapsProvider.getLocationBasedOnDistanceInterval(pointsOnlineRoute);
+			List<WorldRegion> suggestedOnlineMaps = SuggestionsMapsProvider.getSuggestedMaps(pointsStraightLine, params.ctx);
+			res =  new RouteCalculationResult(suggestedOnlineMaps, RouteCalculationResult.warningCardType.ONLINE);
+		} catch (IOException | JSONException e) {
 			LOG.error(e.getMessage(), e);
 		}
+		return res;
 	}
 
 	public void routeCalculationFinished() {
@@ -693,13 +698,13 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			} else if (app.getRoutingHelper().isBoatMode()) {
 				menuCards.add(new NauticalBridgeHeightWarningCard(mapActivity));
 			} else if (isMapsAvailable) {
-				menuCards.add(new SuggestMapsDownloadWarningCards(mapActivity));
+				menuCards.add(new SuggestionsMapsDownloadWarningCard(mapActivity));
 			} else if (app.getTargetPointsHelper().hasTooLongDistanceToNavigate()) {
 				menuCards.add(new LongDistanceWarningCard(mapActivity));
 			}
 		} else {
 			if (isMapsAvailable) {
-				menuCards.add(new SuggestMapsDownloadWarningCards(mapActivity));
+				menuCards.add(new SuggestionsMapsDownloadWarningCard(mapActivity));
 			} else {
 				// Home/work card
 				HomeWorkCard homeWorkCard = new HomeWorkCard(mapActivity);

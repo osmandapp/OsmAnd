@@ -30,13 +30,13 @@ import static java.lang.Math.sin;
 import static java.lang.Math.toDegrees;
 import static java.lang.Math.toRadians;
 
-public class SuggestedMapsProvider {
+public class SuggestionsMapsProvider {
 
 	private static final int EARTH_RADIUS = 6371000;
 	private static final int MINIMAL_DISTANCE = 20000;
 	private static boolean isPointOnWater;
 
-	public boolean isPointOnWater() {
+	public static boolean isPointOnWater() {
 		return isPointOnWater;
 	}
 
@@ -52,15 +52,14 @@ public class SuggestedMapsProvider {
 	public static List<Location> getLocationBasedOnDistanceInterval(List<Location> points) {
 		List<Location> mapsBasedOnPoints = new ArrayList<>();
 		for (int i = 0; i < points.size(); i++) {
-			for (int j = i + 1; j < points.size(); j++) {
-				mapsBasedOnPoints.add(0, points.get(i));
-				mapsBasedOnPoints.add(mapsBasedOnPoints.size() - 1, points.get(j));
-				while (mapsBasedOnPoints.get(0).distanceTo(mapsBasedOnPoints.get(mapsBasedOnPoints.size() - 1)) > MINIMAL_DISTANCE) {
-					float bearing = mapsBasedOnPoints.get(0).bearingTo(mapsBasedOnPoints.get(mapsBasedOnPoints.size() - 1));
-					LatLon latLon = findPointAtDistanceFrom(mapsBasedOnPoints.get(0).getLatitude(), mapsBasedOnPoints.get(0).getLongitude(), MINIMAL_DISTANCE, bearing);
-					Location location = new Location("", latLon.getLatitude(), latLon.getLongitude());
-					mapsBasedOnPoints.add(0, location);
-				}
+			int nextIndex = i + 1 < points.size() ? i + 1 : i;
+			mapsBasedOnPoints.add(0, points.get(i));
+			mapsBasedOnPoints.add(mapsBasedOnPoints.size(), points.get(nextIndex));
+			while (mapsBasedOnPoints.get(0).distanceTo(mapsBasedOnPoints.get(mapsBasedOnPoints.size() - 1)) > MINIMAL_DISTANCE) {
+				float bearing = mapsBasedOnPoints.get(0).bearingTo(mapsBasedOnPoints.get(mapsBasedOnPoints.size() - 1));
+				LatLon latLon = findPointAtDistanceFrom(mapsBasedOnPoints.get(0).getLatitude(), mapsBasedOnPoints.get(0).getLongitude(), MINIMAL_DISTANCE, bearing);
+				Location location = new Location("", latLon.getLatitude(), latLon.getLongitude());
+				mapsBasedOnPoints.add(0, location);
 			}
 		}
 		return mapsBasedOnPoints;

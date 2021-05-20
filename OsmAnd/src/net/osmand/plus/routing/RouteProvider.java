@@ -105,17 +105,19 @@ public class RouteProvider {
 				if (calcGPXRoute && !params.gpxRoute.calculateOsmAndRoute) {
 					res = calculateGpxRoute(params);
 				} else if (params.mode.getRouteService() == RouteService.OSMAND) {
-					LinkedList<Location> points = SuggestedMapsProvider.getStartFinishIntermediatesPoints(params, "");
-					List<WorldRegion> suggestedMapsStartFinishIntermediates = SuggestedMapsProvider.getSuggestedMaps(points, params.ctx);
-					List<Location> pointsStraightLine = SuggestedMapsProvider.getLocationBasedOnDistanceInterval(points);
-					List<WorldRegion> suggestedMapsOnStraightLine = SuggestedMapsProvider.getSuggestedMaps(pointsStraightLine, params.ctx);
-					if (Algorithms.isEmpty(suggestedMapsStartFinishIntermediates)) {
-						if (!Algorithms.isEmpty(suggestedMapsOnStraightLine)) {
-							params.startTimeRouteCalculation = time;
-						}
-						res = findVectorMapsRoute(params, calcGPXRoute);
+					LinkedList<Location> points = SuggestionsMapsProvider.getStartFinishIntermediatesPoints(params, "");
+					List<WorldRegion> suggestionsMapsStartFinishIntermediates = SuggestionsMapsProvider.getSuggestedMaps(points, params.ctx);
+					List<Location> pointsStraightLine = SuggestionsMapsProvider.getLocationBasedOnDistanceInterval(points);
+					List<WorldRegion> suggestedMapsOnStraightLine = SuggestionsMapsProvider.getSuggestedMaps(pointsStraightLine, params.ctx);
+					if (!Algorithms.isEmpty(suggestionsMapsStartFinishIntermediates)) {
+						res = new RouteCalculationResult(suggestedMapsOnStraightLine, RouteCalculationResult.warningCardType.START_FINISH_INTERMEDIATES);
 					} else {
-						return new RouteCalculationResult(suggestedMapsOnStraightLine);
+						if (!Algorithms.isEmpty(suggestedMapsOnStraightLine) && !SuggestionsMapsProvider.isPointOnWater()) {
+							res = new RouteCalculationResult(suggestedMapsOnStraightLine, RouteCalculationResult.warningCardType.DIRECT_LINE);
+						} else {
+							params.startTimeRouteCalculation = time;
+							res = findVectorMapsRoute(params, calcGPXRoute);
+						}
 					}
 				} else if (params.mode.getRouteService() == RouteService.BROUTER) {
 					res = findBROUTERRoute(params);
@@ -748,7 +750,7 @@ public class RouteProvider {
 			List<LatLon> inters, PrecalculatedRouteDirection precalculated) throws IOException {
 		try {
 			List<RouteSegmentResult> result ;
-			if(complexCtx != null) {
+			if (complexCtx != null) {
 				try {
 					result = router.searchRoute(complexCtx, st, en, inters, precalculated);
 					// discard ctx and replace with calculated
@@ -766,7 +768,7 @@ public class RouteProvider {
 				result = router.searchRoute(ctx, st, en, inters);
 			}
 			
-			if(result == null || result.isEmpty()) {
+			if (result == null || result.isEmpty()) {
 				if(ctx.calculationProgress.segmentNotFound == 0) {
 					return new RouteCalculationResult(params.ctx.getString(R.string.starting_point_too_far));
 				} else if(ctx.calculationProgress.segmentNotFound == inters.size() + 1) {
@@ -785,14 +787,13 @@ public class RouteProvider {
 				// something really strange better to see that message on the scren
 				return emptyResult();
 			} else {
-				RouteCalculationResult res = new RouteCalculationResult(result, params.start, params.end,
+				return new RouteCalculationResult(result, params.start, params.end,
 						params.intermediates, params.ctx, params.leftSide, ctx, params.gpxRoute  == null? null: params.gpxRoute.wpt,
 								params.mode, true);
-				return res;
 			}
 		} catch (RuntimeException e) {
 			log.error("Runtime error: " + e.getMessage(), e);
-			return new RouteCalculationResult(e.getMessage() );
+			return new RouteCalculationResult(e.getMessage());
 		} catch (InterruptedException e) {
 			log.error("Interrupted: " + e.getMessage(), e);
 			return interrupted();
@@ -1185,7 +1186,7 @@ public class RouteProvider {
 	}
 
 	private RouteCalculationResult findStraightRoute(RouteCalculationParams params) {
-		LinkedList<Location> points = SuggestedMapsProvider.getStartFinishIntermediatesPoints(params, "pnt");
+		LinkedList<Location> points = SuggestionsMapsProvider.getStartFinishIntermediatesPoints(params, "pnt");
 		List<Location> segments = new ArrayList<>();
 		Location lastAdded = null;
 		float speed = params.mode.getDefaultSpeed();
