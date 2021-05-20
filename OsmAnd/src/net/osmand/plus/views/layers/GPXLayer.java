@@ -1295,7 +1295,11 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			GPXFile gpxFile = selectedGpxFile.getGpxFile();
 			RouteColorize colorize = new RouteColorize(zoom, gpxFile, selectedGpxFile.getTrackAnalysis(app),
 					scaleType.toColorizationType(), app.getSettings().getApplicationMode().getMaxSpeed());
-			colorize.setPalette(gradientPalette);
+			if (scaleType == GradientScaleType.SLOPE) {
+				colorize.palette = RouteColorize.SLOPE_PALETTE;
+			} else {
+				colorize.setPalette(gradientPalette);
+			}
 			List<RouteColorizationPoint> colorsOfPoints = colorize.getResult(true);
 			return createSimplifiedSegments(selectedGpxFile.getGpxFile(), colorsOfPoints, scaleType);
 		}
