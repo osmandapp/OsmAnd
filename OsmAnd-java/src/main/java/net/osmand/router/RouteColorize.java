@@ -33,10 +33,15 @@ public class RouteColorize {
     public static final int GREEN = rgbaToDecimal(90, 220, 95, 255);
     public static final int YELLOW = rgbaToDecimal(212, 239, 50, 255);
     public static final int RED = rgbaToDecimal(243, 55, 77, 255);
+    public static final int PURPLE = rgbaToDecimal(128, 0, 128, 255);
+    public static final int WHITE = rgbaToDecimal(255, 255, 255, 255);
     public static final int[] colors = new int[] {GREEN, YELLOW, RED};
 
+    public static final double SLOPE_MIN_VALUE = -0.25;//25%
+    public static final double SLOPE_MAX_VALUE = 1.0;//100%
+    public static final double[][] SLOPE_PALETTE = {{SLOPE_MIN_VALUE, WHITE}, {0.0, GREEN}, {0.125, YELLOW}, {0.25, RED}, {SLOPE_MAX_VALUE, PURPLE}};
+
     private static final float DEFAULT_BASE = 17.2f;
-    private static final double MAX_SLOPE_VALUE = 0.25;// 25%, slope value in the range 0..1
 
     public enum ColorizationType {
         ELEVATION,
@@ -133,9 +138,7 @@ public class RouteColorize {
         } else {
             values = listToArray(valList);
         }
-        calculateMinMaxValue();
-        // set strict limitations for maxValue
-        maxValue = getMaxValue(colorizationType, analysis, minValue, maxProfileSpeed);
+        calculateMinMaxValue(analysis, maxProfileSpeed);
         checkPalette();
         sortPalette();
     }
@@ -222,6 +225,11 @@ public class RouteColorize {
                 double percent = (value - minPaletteValue) / (maxPaletteValue - minPaletteValue);
                 return getGradientColor(minPaletteColor, maxPaletteColor, percent);
             }
+        }
+        if (value < minValue) {
+            return (int)palette[0][1];
+        } else if (value > maxValue) {
+            return (int) palette[palette.length-1][1];
         }
         return getTransparentColor();
     }
@@ -430,16 +438,28 @@ public class RouteColorize {
     }
 
     public static double getMinValue(ColorizationType type, GPXTrackAnalysis analysis) {
-        return type == ColorizationType.ELEVATION ? analysis.minElevation : 0.0;
+        switch (type) {
+            case SPEED:
+                return 0.0;
+            case ELEVATION:
+                return analysis.minElevation;
+            case SLOPE:
+                return SLOPE_MIN_VALUE;
+            default:
+                return -1;
+        }
     }
 
     public static double getMaxValue(ColorizationType type, GPXTrackAnalysis analysis, double minValue, double maxProfileSpeed) {
-        if (type == ColorizationType.SPEED) {
-            return Math.max(analysis.maxSpeed, maxProfileSpeed);
-        } else if (type == ColorizationType.ELEVATION) {
-            return Math.max(analysis.maxElevation, minValue + 50);
-        } else {
-            return MAX_SLOPE_VALUE;
+        switch (type) {
+            case SPEED:
+                return Math.max(analysis.maxSpeed, maxProfileSpeed);
+            case ELEVATION:
+                return Math.max(analysis.maxElevation, minValue + 50);
+            case SLOPE:
+                return SLOPE_MAX_VALUE;
+            default:
+                return -1;
         }
     }
 
@@ -463,6 +483,12 @@ public class RouteColorize {
             if (maxValue < value)
                 maxValue = value;
         }
+    }
+
+    private void calculateMinMaxValue(GPXTrackAnalysis analysis, float maxProfileSpeed) {
+        calculateMinMaxValue();
+        // set strict limitations for maxValue
+        maxValue = getMaxValue(colorizationType, analysis, minValue, maxProfileSpeed);
     }
 
     private double[] listToArray(List<Double> doubleList) {
