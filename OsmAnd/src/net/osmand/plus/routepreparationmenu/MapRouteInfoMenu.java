@@ -803,6 +803,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			} else if (card instanceof PublicTransportNotFoundSettingsWarningCard) {
 				AvoidRoadsBottomSheetDialogFragment avoidRoadsFragment = new AvoidRoadsBottomSheetDialogFragment();
 				avoidRoadsFragment.setHideImpassableRoads(true);
+				avoidRoadsFragment.setCompoundButtonColor(app.getRoutingHelper().getAppMode().getProfileColor(nightMode));
 				avoidRoadsFragment.show(mapActivity.getSupportFragmentManager(), AvoidRoadsBottomSheetDialogFragment.TAG);
 			} else if (card instanceof PedestrianRouteCard) {
 				updateApplicationMode(null, ApplicationMode.PEDESTRIAN);
