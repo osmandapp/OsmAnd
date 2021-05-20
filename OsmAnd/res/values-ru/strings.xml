@@ -3703,7 +3703,7 @@
     <string name="plan_a_route">Составление маршрута</string>
     <string name="gpx_split_interval_none_descr">Выберите способ разбиения: по времени или по расстоянию.</string>
     <string name="gpx_split_interval_descr">Интервал между метками расстояния или времени на треке.</string>
-    <string name="shared_string_custom">Своё знач.</string>
+    <string name="shared_string_custom">Своё значение</string>
     <string name="add_hidden_group_info">Добавленная точка не будет видна на карте, так как выбранная группа скрыта, найти её можно в «%s».</string>
     <string name="track_show_start_finish_icons">Показывать значки старта и финиша</string>
     <string name="select_track_width">Выберите толщину линии</string>
