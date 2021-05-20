@@ -22,8 +22,8 @@ public class GradientCard extends BaseCard {
 	private final GPXTrackAnalysis gpxTrackAnalysis;
 	private GradientScaleType selectedScaleType;
 
-	private final int minSlope = 0;
-	private final int maxSlope = 60;
+	private static final float minSlope = 0;
+	private static final float maxSlope = 0.6f; // 60%
 
 	public GradientCard(@NonNull MapActivity mapActivity, @NonNull GPXTrackAnalysis gpxTrackAnalysis, @Nullable GradientScaleType selectedScaleType) {
 		super(mapActivity);
@@ -81,7 +81,7 @@ public class GradientCard extends BaseCard {
 		if (selectedScaleType == GradientScaleType.ALTITUDE) {
 			return OsmAndFormatter.getFormattedAlt(value, app);
 		} else if (selectedScaleType == GradientScaleType.SLOPE) {
-			value *= 100;// slope value in the range 0..1
+			value *= 100; // slope value in the range 0..1
 			return app.getString(R.string.ltr_or_rtl_combine_via_space, String.valueOf((int) value),  "%");
 		}
 		String speed = OsmAndFormatter.getFormattedSpeed((float) value, app);
