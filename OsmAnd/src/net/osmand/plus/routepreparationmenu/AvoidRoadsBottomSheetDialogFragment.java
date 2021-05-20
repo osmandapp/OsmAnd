@@ -12,7 +12,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
-import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -34,16 +33,12 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.SubtitleDividerItem;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.router.GeneralRouter;
-import net.osmand.router.RouteSegmentResult;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem.INVALID_ID;
-
 
 public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
@@ -84,6 +79,9 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 			return;
 		}
 		routingOptionsHelper = app.getRoutingOptionsHelper();
+		compoundButtonColor = appMode != null
+				? appMode.getProfileColor(nightMode)
+				: app.getSettings().getApplicationMode().getProfileColor(nightMode);
 		if (savedInstanceState != null) {
 			hideImpassableRoads = savedInstanceState.getBoolean(HIDE_IMPASSABLE_ROADS_KEY);
 			if (savedInstanceState.containsKey(AVOID_ROADS_TYPES_KEY)) {
