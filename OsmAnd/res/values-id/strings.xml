@@ -341,8 +341,8 @@
     <string name="rendering_attr_contourWidth_name">Lebar garis kontur</string>
     <string name="rendering_attr_hideWaterPolygons_description">Air</string>
     <string name="rendering_attr_hideWaterPolygons_name">Sembunyikan air</string>
-    <string name="routing_attr_allow_motorway_name">Gunakan jalan tol</string>
-    <string name="routing_attr_allow_motorway_description">Mengizinkan jalan tol.</string>
+    <string name="routing_attr_allow_motorway_name">Gunakan jalan bebas hambatan</string>
+    <string name="routing_attr_allow_motorway_description">Mengizinkan jalan bebas hambatan.</string>
     <string name="upload_osm_note_description">Unggah Catatan OSM Anda secara anonim atau dengan menggunakan profil OpenStreetMap.org Anda.</string>
     <string name="wiki_around">Artikel Wikipedia terdekat</string>
     <string name="search_map_hint">Kota atau daerah</string>
@@ -435,7 +435,7 @@
     <string name="shared_string_from">Dari</string>
     <string name="city_type_district">Distrik/Kabupaten</string>
     <string name="city_type_neighbourhood">lingkungan</string>
-    <string name="routing_attr_avoid_bus_name">Hindari bus</string>
+    <string name="routing_attr_avoid_bus_name">Larang bus</string>
     <string name="routing_attr_avoid_train_name">Hindari kereta api</string>
     <string name="routing_attr_avoid_train_description">Hindari kereta api</string>
     <string name="routing_attr_avoid_ferry_name">Hindari feri</string>
@@ -1866,4 +1866,12 @@
     <string name="localization_pref_title">Lokalisasi</string>
     <string name="misc_pref_title">Lainnya</string>
     <string name="voice_pref_title">Suara</string>
+    <string name="routing_attr_avoid_ferries_name">Larang feri</string>
+    <string name="routing_attr_avoid_bus_description">Menghindari bus dan bus listrik</string>
+    <string name="add_line">Tambahkan Garis</string>
+    <string name="copy_location_name">Salin nama lokasi/POI</string>
+    <string name="open_in_browser_wiki">Buka artikel daring</string>
+    <string name="tab_title_advanced">Lanjutan</string>
+    <string name="prefs_plugins_descr">Plugin-plugin mengaktivasi pengaturan lanjutan dan fungsi-fungsi tambahan.</string>
+    <string name="btn_advanced_mode">Mode Lanjutan…</string>
 </resources>
