@@ -22,8 +22,8 @@ public class GradientCard extends BaseCard {
 	private final GPXTrackAnalysis gpxTrackAnalysis;
 	private GradientScaleType selectedScaleType;
 
-	private static final float minSlope = 0;
-	private static final float maxSlope = 0.6f; // 60%
+	private static final float MIN_SLOPE = 0;
+	private static final float MAX_SLOPE = 0.6f; // 60%
 
 	public GradientCard(@NonNull MapActivity mapActivity, @NonNull GPXTrackAnalysis gpxTrackAnalysis, @Nullable GradientScaleType selectedScaleType) {
 		super(mapActivity);
@@ -65,8 +65,8 @@ public class GradientCard extends BaseCard {
 				minValue.setText(R.string.shared_string_min_height);
 				maxValue.setText(R.string.shared_string_max_height);
 			} else if (selectedScaleType == GradientScaleType.SLOPE) {
-				minValue.setText(formatValue(minSlope));
-				maxValue.setText(formatValue(maxSlope));
+				minValue.setText(formatValue(MIN_SLOPE));
+				maxValue.setText(formatValue(MAX_SLOPE));
 			}
 			AndroidUiHelper.updateVisibility(view.findViewById(R.id.space), false);
 		}
