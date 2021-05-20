@@ -922,7 +922,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 		for (ResourceManager.BinaryMapReaderResource resource : app.getResourceManager().getFileReaders()) {
 			BinaryMapIndexReader reader = resource.getReader(ResourceManager.BinaryMapReaderResourceType.POI);
-			if (reader == null) {
+			int x31 = object.getX().get(0);
+			int y31 = object.getY().get(0);
+			if (reader == null || !reader.containsMapData(x31, y31, 15)) {
 				continue;
 			}
 			try {
