@@ -66,12 +66,21 @@ public class BackupHelper {
 	public final static int STATUS_EMPTY_RESPONSE_ERROR = 2;
 	public final static int STATUS_SERVER_ERROR = 3;
 
+	public static final int SERVER_ERROR_CODE_EMAIL_IS_INVALID = 101;
+	public static final int SERVER_ERROR_CODE_NO_VALID_SUBSCRIPTION = 102;
+	public static final int SERVER_ERROR_CODE_USER_IS_NOT_REGISTERED = 103;
+	public static final int SERVER_ERROR_CODE_TOKEN_IS_NOT_VALID_OR_EXPIRED = 104;
+	public static final int SERVER_ERROR_CODE_PROVIDED_TOKEN_IS_NOT_VALID = 105;
+	public static final int SERVER_ERROR_CODE_FILE_NOT_AVAILABLE = 106;
+	public static final int SERVER_ERROR_CODE_GZIP_ONLY_SUPPORTED_UPLOAD = 107;
+	public static final int SERVER_ERROR_CODE_SIZE_OF_SUPPORTED_BOX_IS_EXCEEDED = 108;
+
 	public interface OnRegisterUserListener {
-		void onRegisterUser(int status, @Nullable String message);
+		void onRegisterUser(int status, @Nullable String message, @Nullable String error);
 	}
 
 	public interface OnRegisterDeviceListener {
-		void onRegisterDevice(int status, @Nullable String message);
+		void onRegisterDevice(int status, @Nullable String message, @Nullable String error);
 	}
 
 	public interface OnDownloadFileListListener {
@@ -163,6 +172,11 @@ public class BackupHelper {
 		}
 	}
 
+	public void logout() {
+		settings.BACKUP_DEVICE_ID.resetToDefault();
+		settings.BACKUP_ACCESS_TOKEN.resetToDefault();
+	}
+
 	public void registerUser(@NonNull final String email, @Nullable final OnRegisterUserListener listener) {
 		Map<String, String> params = new HashMap<>();
 		params.put("email", email);
@@ -199,7 +213,7 @@ public class BackupHelper {
 					status = STATUS_EMPTY_RESPONSE_ERROR;
 				}
 				if (listener != null) {
-					listener.onRegisterUser(status, message);
+					listener.onRegisterUser(status, message, error);
 				}
 			}
 		}, EXECUTOR);
@@ -245,7 +259,7 @@ public class BackupHelper {
 					status = STATUS_EMPTY_RESPONSE_ERROR;
 				}
 				if (listener != null) {
-					listener.onRegisterDevice(status, message);
+					listener.onRegisterDevice(status, message, error);
 				}
 			}
 		}, EXECUTOR);
@@ -587,6 +601,21 @@ public class BackupHelper {
 			// ignore
 		}
 		return error;
+	}
+
+	public static int getErrorCode(@Nullable String error) {
+		if (!Algorithms.isEmpty(error)) {
+			try {
+				JSONObject resultError = new JSONObject(error);
+				if (resultError.has("error")) {
+					JSONObject errorObj = resultError.getJSONObject("error");
+					return errorObj.getInt("errorCode");
+				}
+			} catch (JSONException e) {
+				// ignore
+			}
+		}
+		return -1;
 	}
 
 	@SuppressLint("StaticFieldLeak")

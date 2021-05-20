@@ -1,5 +1,8 @@
 package net.osmand.binary;
 
+import java.util.Arrays;
+
+import gnu.trove.map.hash.TIntObjectHashMap;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
@@ -8,13 +11,7 @@ import net.osmand.data.LatLon;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import net.osmand.util.TransliterationHelper;
-
 import org.apache.commons.logging.Log;
-
-import java.text.MessageFormat;
-import java.util.Arrays;
-
-import gnu.trove.map.hash.TIntObjectHashMap;
 
 public class RouteDataObject {
 	/*private */static final int RESTRICTION_SHIFT = 3;
@@ -1071,8 +1068,8 @@ public class RouteDataObject {
 	public String toString() {
 		String name = getName();
 		String rf = getRef("", false, true);
-		return MessageFormat.format("Road id {0} name {1} ref {2}", (getId() / 64) + "", name == null ? "" : name,
-				rf == null ? "" : rf);
+		return String.format("Road id (%d), name ('%s'), ref ('%s')", id / 64, name, rf);
+//		return String.format("Road [%d, '%s', '%s'] - [%s, %s]", id / 64, name, rf, Arrays.toString(pointsX), Arrays.toString(pointsY));
 	}
 
 	public boolean hasNameTagStartsWith(String tagStartsWith) {
@@ -1117,5 +1114,40 @@ public class RouteDataObject {
 			restrictionsVia = new long[k + 1];
 		}
 		restrictionsVia[k] = viaWay;
+	}
+	
+	public void setPointNames(int pntInd, int[] array, String[] nms) {
+		if (pointNameTypes == null || pointNameTypes.length <= pntInd) {
+			int[][] npointTypes = new int[pntInd + 1][];
+			String[][] npointNames = new String[pntInd + 1][];
+			for (int k = 0; pointNameTypes != null && k < pointNameTypes.length; k++) {
+				npointTypes[k] = pointNameTypes[k];
+				npointNames[k] = pointNames[k];
+			}
+			pointNameTypes = npointTypes;
+			pointNames = npointNames;
+		}
+		pointNameTypes[pntInd] = array;
+		pointNames[pntInd] = nms;
+	}
+
+	public void setPointTypes(int pntInd, int[] array) {
+		if (pointTypes == null || pointTypes.length <= pntInd) {
+			int[][] npointTypes = new int[pntInd + 1][];
+			for (int k = 0; pointTypes != null && k < pointTypes.length; k++) {
+				npointTypes[k] = pointTypes[k];
+			}
+			pointTypes = npointTypes;
+		}
+		pointTypes[pntInd] = array;
+	}
+
+	public boolean hasPointType(int pntId, int type) {
+		for (int k = 0; pointTypes != null && pointTypes[pntId] != null && k < pointTypes[pntId].length; k++) {
+			if (pointTypes[pntId][k] == type) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

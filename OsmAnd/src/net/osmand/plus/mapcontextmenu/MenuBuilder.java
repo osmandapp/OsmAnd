@@ -394,7 +394,7 @@ public class MenuBuilder {
 						return;
 					}
 					String title = app.getString(R.string.speak_poi);
-					String type = " \"" + AmenityMenuController.getTypeStr(amenity) + "\"";
+					String type = "\"" + AmenityMenuController.getTypeStr(amenity) + "\"";
 					String count = "(" + amenities.size() + ")";
 					String text = app.getString(R.string.ltr_or_rtl_triple_combine_via_space, title, type, count);
 
@@ -423,7 +423,7 @@ public class MenuBuilder {
 
 	protected void buildNearestRow(View view, List<Amenity> nearestAmenities, int iconId, String text, String amenityKey) {
 		if (nearestAmenities.size() > 0) {
-			String count = " (" + nearestAmenities.size() + ")";
+			String count = "(" + nearestAmenities.size() + ")";
 			text = app.getString(R.string.ltr_or_rtl_combine_via_space, text, count);
 			CollapsableView collapsableView = getCollapsableView(view.getContext(), true, nearestAmenities, amenityKey);
 			buildRow(view, iconId, null, text, 0, true, collapsableView,
@@ -1184,14 +1184,17 @@ public class MenuBuilder {
 		LinearLayout.LayoutParams titleParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		titleView.setLayoutParams(titleParams);
 		titleView.setTextSize(16);
-		titleView.setTextColor(app.getResources().getColor(light ? R.color.text_color_primary_light : R.color.text_color_primary_dark));
+		int textColor = app.getResources().getColor(light ? R.color.text_color_primary_light : R.color.text_color_primary_dark);
+		titleView.setTextColor(textColor);
 		String desc = route.getDescription(getMapActivity().getMyApplication(), true);
 		Drawable arrow = app.getUIUtilities().getIcon(R.drawable.ic_arrow_right_16, light ? R.color.ctx_menu_route_icon_color_light : R.color.ctx_menu_route_icon_color_dark);
 		arrow.setBounds(0, 0, arrow.getIntrinsicWidth(), arrow.getIntrinsicHeight());
 
 		titleView.setText(AndroidUtils.replaceCharsWithIcon(desc, arrow, arrowChars));
 		infoView.addView(titleView);
-
+		if (route.route.hasInterval()) {
+			infoView.addView(createIntervalView(view.getContext(), route, titleParams, textColor));
+		}
 		LinearLayout typeView = new LinearLayout(view.getContext());
 		typeView.setOrientation(LinearLayout.HORIZONTAL);
 		LinearLayout.LayoutParams typeViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -1220,6 +1223,18 @@ public class MenuBuilder {
 		((ViewGroup) view).addView(baseView);
 
 		return baseView;
+	}
+
+	private View createIntervalView(Context ctx, TransportStopRoute route, LinearLayout.LayoutParams titleParams,
+	                                int textColor) {
+		TextView intervalView;
+		intervalView = new TextView(ctx);
+		intervalView.setLayoutParams(titleParams);
+		intervalView.setTextSize(16);
+		intervalView.setTextColor(textColor);
+		intervalView.setText(ctx.getString(R.string.ltr_or_rtl_combine_via_colon,
+				ctx.getString(R.string.shared_string_interval), route.route.getInterval()));
+		return intervalView;
 	}
 
 	private void buildTransportRouteRow(ViewGroup parent, TransportStopRoute r, OnClickListener listener, boolean showDivider) {
@@ -1319,7 +1334,7 @@ public class MenuBuilder {
 		buttonShowAll.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mapActivity.showQuickSearch(filter);
+				mapActivity.showQuickSearch(filter, latLon);
 			}
 		});
 		return buttonShowAll;

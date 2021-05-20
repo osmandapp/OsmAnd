@@ -3574,7 +3574,7 @@
     <string name="lang_an">Aragonês</string>
     <string name="lang_lmo">Lombardo</string>
     <string name="custom_color">Cor personalizada</string>
-    <string name="search_poi_types_descr">Combinar categorias de POI de categorias diferentes. Toque em trocar para selecionar tudo, toque no lado esquerdo para seleção da categoria.</string>
+    <string name="search_poi_types_descr">Combinar categorias de POI de categorias diferentes. Toque em trocar para selecionar tudo, toque no lado esquerdo para selecionar as categorias.</string>
     <string name="quick_action_transport_descr">Botão que mostra ou oculta os transportes públicos no mapa.</string>
     <string name="create_edit_poi">Criar ou editar um POI</string>
     <string name="parking_positions">Posições de estacionamento</string>
@@ -4112,4 +4112,6 @@
     <string name="route_line_use_map_style_width">Usar a espessura padrão das linhas do estilo do mapa (%1$s).</string>
     <string name="route_line_use_map_style_color">Usar a cor predefinida do estilo do mapa (%1$s).</string>
     <string name="poi_routes">Rotas</string>
+    <string name="search_more">Pesquisar mais…</string>
+    <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
 </resources>

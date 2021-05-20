@@ -54,6 +54,7 @@ public class TestBackupActivity extends OsmandActionBarActivity {
 	private View buttonRefresh;
 	private View buttonBackup;
 	private View buttonRestore;
+	private View buttonLogout;
 	private EditText emailEditText;
 	private OsmandTextFieldBoxes tokenEdit;
 	private EditText tokenEditText;
@@ -99,6 +100,8 @@ public class TestBackupActivity extends OsmandActionBarActivity {
 		UiUtilities.setupDialogButton(nightMode, buttonBackup, DialogButtonType.PRIMARY, "Backup");
 		buttonRestore = findViewById(R.id.btn_restore);
 		UiUtilities.setupDialogButton(nightMode, buttonRestore, DialogButtonType.PRIMARY, "Restore");
+		buttonLogout = findViewById(R.id.btn_logout);
+		UiUtilities.setupDialogButton(nightMode, buttonLogout, DialogButtonType.PRIMARY, "Logout");
 
 		tokenEdit = findViewById(R.id.edit_token_label);
 		tokenEditText = findViewById(R.id.edit_token);
@@ -128,7 +131,7 @@ public class TestBackupActivity extends OsmandActionBarActivity {
 					progressBar.setVisibility(View.VISIBLE);
 					backupHelper.registerUser(email, new OnRegisterUserListener() {
 						@Override
-						public void onRegisterUser(int status, @Nullable String message) {
+						public void onRegisterUser(int status, @Nullable String message, @Nullable String error) {
 							TestBackupActivity a = activityRef.get();
 							if (AndroidUtils.isActivityNotDestroyed(a)) {
 								a.progressBar.setVisibility(View.GONE);
@@ -157,7 +160,7 @@ public class TestBackupActivity extends OsmandActionBarActivity {
 					backupHelper.registerDevice(token, new BackupHelper.OnRegisterDeviceListener() {
 
 						@Override
-						public void onRegisterDevice(int status, @Nullable String message) {
+						public void onRegisterDevice(int status, @Nullable String message, @Nullable String error) {
 							TestBackupActivity a = activityRef.get();
 							if (AndroidUtils.isActivityNotDestroyed(a)) {
 								a.progressBar.setVisibility(View.GONE);
@@ -252,7 +255,13 @@ public class TestBackupActivity extends OsmandActionBarActivity {
 				}
 			}
 		});
-
+		buttonLogout.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				backupHelper.logout();
+				finish();
+			}
+		});
 		prepareBackup();
 	}
 

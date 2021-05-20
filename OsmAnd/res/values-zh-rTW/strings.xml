@@ -4099,4 +4099,6 @@
     <string name="poi_routes">路線</string>
     <string name="routing_attr_avoid_low_emission_zone_description">避免低排放區域</string>
     <string name="routing_attr_avoid_low_emission_zone_name">避免低排放區域</string>
+    <string name="search_more">搜尋更多……</string>
+    <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
 </resources>
