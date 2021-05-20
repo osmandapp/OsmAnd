@@ -24,7 +24,7 @@
     <string name="osmand_cloud_create_account_descr">Please enter your email address, all your data will be linked to it.\nWe will send you a verification code to this email address.</string>
     <string name="osmand_cloud_help_descr">Need help? Please contact us at %1$s</string>
     <string name="restore_from_file">Restore from file</string>
-    <string name="backup_into_file">Backup info file</string>
+    <string name="backup_into_file">Backup into file</string>
     <string name="local_backup_descr">Backup or restore data from a local file.</string>
     <string name="local_backup">Local backup</string>
     <string name="osmand_cloud_authorize_descr">Never lose your data, backup and restore all information without a problem.</string>
