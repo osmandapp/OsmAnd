@@ -4102,7 +4102,7 @@
     <string name="tts_title">TTS</string>
     <string name="recorded_description">Записанный голос звучит лучше, но умеет произносить только заранее записанные фразы: инструкции для поворотов. Не умеет объявлять названия улиц или POI.</string>
     <string name="use_system_language">Использовать системный язык</string>
-    <string name="shared_string_itinerary">Маршрут</string>
+    <string name="shared_string_itinerary">Маркеры</string>
     <string name="route_line_use_map_style_width">Используется толщина линии стиля карты (%1$s).</string>
     <string name="route_line_use_map_style_color">Используется цвет стиля карты (%1$s).</string>
     <string name="routing_attr_avoid_low_emission_zone_description">Без зон с низким уровнем выбросов</string>
@@ -4110,12 +4110,12 @@
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
     <string name="search_more">Найти ещё…</string>
     <string name="osmand_cloud">OsmAnd Cloud</string>
-    <string name="local_backup_descr">Резервное копирование в локальный файл или восстановление из него данных.</string>
+    <string name="local_backup_descr">Резервное копирование данных в локальный файл или восстановление из него.</string>
     <string name="backup_into_file">Резервное копирование в файл</string>
-    <string name="restore_from_file">Восстановить из файла</string>
-    <string name="osmand_cloud_help_descr">Нужна помощь\? Свяжитесь с нами по %1$s</string>
-    <string name="osmand_cloud_create_account_descr">Введите свой адрес электронной почты, все ваши данные будут привязаны к нему.
-\nМы вышлем вам проверочный код на этот адрес электронной почты.</string>
+    <string name="restore_from_file">Восстановление из файла</string>
+    <string name="osmand_cloud_help_descr">Нужна помощь\? Напишите нам на %1$s</string>
+    <string name="osmand_cloud_create_account_descr">Введите адрес электронной почты и все ваши данные будут привязаны к нему.
+\nМы вышлем вам проверочный код на указанный адрес электронной почты.</string>
     <string name="osmand_cloud_login_descr">Введите адрес электронной почты, который вы использовали при регистрации. Мы вышлем вам одноразовый пароль, необходимый на следующем шаге.</string>
     <string name="verify_email_address">Подтверждение адреса электронной почты</string>
     <string name="verify_email_address_descr">Мы отправили проверочный код на %1$s, пожалуйста, введите его в поле ниже.</string>
