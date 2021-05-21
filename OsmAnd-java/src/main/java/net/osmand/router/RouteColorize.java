@@ -488,7 +488,7 @@ public class RouteColorize {
     private void calculateMinMaxValue(GPXTrackAnalysis analysis, float maxProfileSpeed) {
         calculateMinMaxValue();
         // set strict limitations for maxValue
-        //maxValue = getMaxValue(colorizationType, analysis, minValue, maxProfileSpeed);
+        maxValue = getMaxValue(colorizationType, analysis, minValue, maxProfileSpeed);
     }
 
     private double[] listToArray(List<Double> doubleList) {
