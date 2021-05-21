@@ -4119,5 +4119,5 @@
     <string name="cloud_email_already_registered">Un account con questa mail è già registrato.</string>
     <string name="resend_verification_code">Invia di nuovo il codice</string>
     <string name="verification_code_missing">Non ho ricevuto il codice di verifica</string>
-    <string name="verification_code_missing_description">L\'attesa del codice può essere di minuti, verifica anche la cartella spam. Se non è d\'aiuto utilizza il pulsante sotto.</string>
+    <string name="verification_code_missing_description">L\'attesa del codice può essere di 10 minuti, verifica anche la cartella spam. Se non è d\'aiuto utilizza il pulsante sotto.</string>
 </resources>
