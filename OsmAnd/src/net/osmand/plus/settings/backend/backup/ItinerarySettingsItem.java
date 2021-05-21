@@ -135,7 +135,7 @@ public class ItinerarySettingsItem extends CollectionSettingsItem<MapMarkersGrou
 
 	@Nullable
 	@Override
-	SettingsItemWriter<? extends SettingsItem> getWriter() {
+	public SettingsItemWriter<? extends SettingsItem> getWriter() {
 		GPXFile gpxFile = dataHelper.generateGpx(items);
 		return getGpxWriter(gpxFile);
 	}

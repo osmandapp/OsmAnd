@@ -25,6 +25,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.backup.SettingsItem;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONArray;
@@ -34,6 +35,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -84,12 +86,12 @@ public class BackupHelper {
 	}
 
 	public interface OnDownloadFileListListener {
-		void onDownloadFileList(int status, @Nullable String message, @NonNull List<UserFile> userFiles);
+		void onDownloadFileList(int status, @Nullable String message, @NonNull List<RemoteFile> remoteFiles);
 	}
 
 	public interface OnCollectLocalFilesListener {
-		void onFileCollected(@NonNull GpxFileInfo fileInfo);
-		void onFilesCollected(@NonNull List<GpxFileInfo> fileInfos);
+		void onFileCollected(@NonNull LocalFile fileInfo);
+		void onFilesCollected(@NonNull List<LocalFile> fileInfos);
 	}
 
 	public interface OnGenerateBackupInfoListener {
@@ -103,12 +105,12 @@ public class BackupHelper {
 	}
 
 	public interface OnDeleteFilesListener {
-		void onFileDeleteProgress(@NonNull UserFile file);
-		void onFilesDeleteDone(@NonNull Map<UserFile, String> errors);
+		void onFileDeleteProgress(@NonNull RemoteFile file);
+		void onFilesDeleteDone(@NonNull Map<RemoteFile, String> errors);
 	}
 
 	public interface OnDownloadFileListener {
-		void onFileDownloadProgress(@NonNull UserFile userFile, int progress);
+		void onFileDownloadProgress(@NonNull RemoteFile remoteFile, int progress);
 
 		@WorkerThread
 		void onFileDownloadedAsync(@NonNull File file);
@@ -117,10 +119,10 @@ public class BackupHelper {
 	}
 
 	public static class BackupInfo {
-		public List<UserFile> filesToDownload = new ArrayList<>();
-		public List<GpxFileInfo> filesToUpload = new ArrayList<>();
-		public List<UserFile> filesToDelete = new ArrayList<>();
-		public List<Pair<GpxFileInfo, UserFile>> filesToMerge = new ArrayList<>();
+		public List<RemoteFile> filesToDownload = new ArrayList<>();
+		public List<? extends SettingsItem> filesToUpload = new ArrayList<>();
+		public List<RemoteFile> filesToDelete = new ArrayList<>();
+		public List<Pair<LocalFile, RemoteFile>> filesToMerge = new ArrayList<>();
 	}
 
 	public BackupHelper(@NonNull OsmandApplication app) {
@@ -265,7 +267,7 @@ public class BackupHelper {
 		}, EXECUTOR);
 	}
 
-	public void uploadFiles(@NonNull List<GpxFileInfo> gpxFiles, @Nullable final OnUploadFilesListener listener) throws UserNotRegisteredException {
+	public void uploadFiles(@NonNull List<LocalFile> localFiles, @Nullable final OnUploadFilesListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 
 		Map<String, String> params = new HashMap<>();
@@ -274,22 +276,22 @@ public class BackupHelper {
 		Map<String, String> headers = new HashMap<>();
 		headers.put("Accept-Encoding", "deflate, gzip");
 
-		final Map<File, GpxFileInfo> gpxInfos = new HashMap<>();
-		for (GpxFileInfo gpxFile : gpxFiles) {
-			gpxInfos.put(gpxFile.file, gpxFile);
+		final Map<File, LocalFile> localFileMap = new HashMap<>();
+		for (LocalFile localFile : localFiles) {
+			localFileMap.put(localFile.file, localFile);
 		}
 		final File favoritesFile = favouritesHelper.getExternalFile();
-		AndroidNetworkUtils.uploadFilesAsync(UPLOAD_FILE_URL, new ArrayList<>(gpxInfos.keySet()), true, params, headers, new OnFilesUploadCallback() {
+		AndroidNetworkUtils.uploadFilesAsync(UPLOAD_FILE_URL, new ArrayList<>(localFileMap.keySet()), true, params, headers, new OnFilesUploadCallback() {
 			@Nullable
 			@Override
 			public Map<String, String> getAdditionalParams(@NonNull File file) {
 				Map<String, String> additionaParams = new HashMap<>();
-				GpxFileInfo gpxFileInfo = gpxInfos.get(file);
-				if (gpxFileInfo != null) {
-					additionaParams.put("name", gpxFileInfo.getFileName(true));
+				LocalFile localFile = localFileMap.get(file);
+				if (localFile != null) {
+					additionaParams.put("name", localFile.getFileName(true));
 					additionaParams.put("type", Algorithms.getFileExtension(file));
-					gpxFileInfo.uploadTime = System.currentTimeMillis();
-					additionaParams.put("clienttime", String.valueOf(gpxFileInfo.uploadTime));
+					localFile.uploadTime = System.currentTimeMillis();
+					additionaParams.put("clienttime", String.valueOf(localFile.uploadTime));
 				}
 				return additionaParams;
 			}
@@ -304,14 +306,14 @@ public class BackupHelper {
 			@Override
 			public void onFileUploadDone(@NonNull File file) {
 				if (listener != null) {
-					GpxFileInfo gpxFileInfo = gpxInfos.get(file);
-					if (gpxFileInfo != null) {
+					LocalFile localFile = localFileMap.get(file);
+					if (localFile != null) {
 						if (file.equals(favoritesFile)) {
-							favouritesHelper.setLastUploadedTime(gpxFileInfo.uploadTime);
+							favouritesHelper.setLastUploadedTime(localFile.uploadTime);
 						} else {
 							GpxDataItem gpxItem = gpxHelper.getItem(file);
 							if (gpxItem != null) {
-								gpxHelper.updateLastUploadedTime(gpxItem, gpxFileInfo.uploadTime);
+								gpxHelper.updateLastUploadedTime(gpxItem, localFile.uploadTime);
 							}
 						}
 					}
@@ -331,7 +333,7 @@ public class BackupHelper {
 		}, EXECUTOR);
 	}
 
-	public void deleteFiles(@NonNull List<UserFile> userFiles, @Nullable final OnDeleteFilesListener listener) throws UserNotRegisteredException {
+	public void deleteFiles(@NonNull List<RemoteFile> remoteFiles, @Nullable final OnDeleteFilesListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 
 		Map<String, String> commonParameters = new HashMap<>();
@@ -339,22 +341,22 @@ public class BackupHelper {
 		commonParameters.put("accessToken", getAccessToken());
 
 		final List<Request> requests = new ArrayList<>();
-		final Map<Request, UserFile> filesMap = new HashMap<>();
-		for (UserFile userFile : userFiles) {
+		final Map<Request, RemoteFile> filesMap = new HashMap<>();
+		for (RemoteFile remoteFile : remoteFiles) {
 			Map<String, String> parameters = new HashMap<>(commonParameters);
-			parameters.put("name", userFile.getName());
-			parameters.put("type", userFile.getType());
+			parameters.put("name", remoteFile.getName());
+			parameters.put("type", remoteFile.getType());
 			Request r = new Request(DELETE_FILE_URL, parameters, null, false, true);
 			requests.add(r);
-			filesMap.put(r, userFile);
+			filesMap.put(r, remoteFile);
 		}
 		AndroidNetworkUtils.sendRequestsAsync(null, requests, new OnSendRequestsListener() {
 			@Override
 			public void onRequestSent(@NonNull RequestResponse response) {
 				if (listener != null) {
-					UserFile userFile = filesMap.get(response.getRequest());
-					if (userFile != null) {
-						listener.onFileDeleteProgress(userFile);
+					RemoteFile remoteFile = filesMap.get(response.getRequest());
+					if (remoteFile != null) {
+						listener.onFileDeleteProgress(remoteFile);
 					}
 				}
 			}
@@ -362,10 +364,10 @@ public class BackupHelper {
 			@Override
 			public void onRequestsSent(@NonNull List<RequestResponse> results) {
 				if (listener != null) {
-					Map<UserFile, String> errors = new HashMap<>();
+					Map<RemoteFile, String> errors = new HashMap<>();
 					for (RequestResponse response : results) {
-						UserFile userFile = filesMap.get(response.getRequest());
-						if (userFile != null) {
+						RemoteFile remoteFile = filesMap.get(response.getRequest());
+						if (remoteFile != null) {
 							boolean success;
 							String message = null;
 							String errorStr = response.getError();
@@ -388,7 +390,7 @@ public class BackupHelper {
 								}
 							}
 							if (!success) {
-								errors.put(userFile, message);
+								errors.put(remoteFile, message);
 							}
 						}
 					}
@@ -409,7 +411,7 @@ public class BackupHelper {
 			public void onResult(@Nullable String resultJson, @Nullable String error) {
 				int status;
 				String message;
-				List<UserFile> userFiles = new ArrayList<>();
+				List<RemoteFile> remoteFiles = new ArrayList<>();
 				if (!Algorithms.isEmpty(error)) {
 					status = STATUS_SERVER_ERROR;
 					message = "Download file list error: " + parseServerError(error);
@@ -421,7 +423,7 @@ public class BackupHelper {
 						String totalFileVersions = result.getString("totalFileVersions");
 						JSONArray files = result.getJSONArray("uniqueFiles");
 						for (int i = 0; i < files.length(); i++) {
-							userFiles.add(new UserFile(files.getJSONObject(i)));
+							remoteFiles.add(new RemoteFile(files.getJSONObject(i)));
 						}
 
 						status = STATUS_SUCCESS;
@@ -437,13 +439,13 @@ public class BackupHelper {
 					message = "Download file list error: empty response";
 				}
 				if (listener != null) {
-					listener.onDownloadFileList(status, message, userFiles);
+					listener.onDownloadFileList(status, message, remoteFiles);
 				}
 			}
 		}, EXECUTOR);
 	}
 
-	public void downloadFiles(@NonNull final Map<File, UserFile> filesMap, @Nullable final OnDownloadFileListener listener) throws UserNotRegisteredException {
+	public void downloadFiles(@NonNull final Map<File, RemoteFile> filesMap, @Nullable final OnDownloadFileListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 
 		Map<String, String> params = new HashMap<>();
@@ -454,10 +456,10 @@ public class BackupHelper {
 					@Nullable
 					@Override
 					public Map<String, String> getAdditionalParams(@NonNull File file) {
-						UserFile userFile = filesMap.get(file);
+						RemoteFile remoteFile = filesMap.get(file);
 						Map<String, String> additionaParams = new HashMap<>();
-						additionaParams.put("name", userFile.getName());
-						additionaParams.put("type", userFile.getType());
+						additionaParams.put("name", remoteFile.getName());
+						additionaParams.put("type", remoteFile.getType());
 						return additionaParams;
 					}
 
@@ -493,27 +495,27 @@ public class BackupHelper {
 
 	@SuppressLint("StaticFieldLeak")
 	public void collectLocalFiles(@Nullable final OnCollectLocalFilesListener listener) {
-		AsyncTask<Void, GpxFileInfo, List<GpxFileInfo>> task = new AsyncTask<Void, GpxFileInfo, List<GpxFileInfo>>() {
+		AsyncTask<Void, LocalFile, List<LocalFile>> task = new AsyncTask<Void, LocalFile, List<LocalFile>>() {
 
 			private final OnCollectLocalFilesListener internalListener = new OnCollectLocalFilesListener() {
 				@Override
-				public void onFileCollected(@NonNull GpxFileInfo fileInfo) {
+				public void onFileCollected(@NonNull LocalFile fileInfo) {
 					publishProgress(fileInfo);
 				}
 
 				@Override
-				public void onFilesCollected(@NonNull List<GpxFileInfo> fileInfos) {
+				public void onFilesCollected(@NonNull List<LocalFile> fileInfos) {
 				}
 			};
 
-			private void loadGPXData(@NonNull File mapPath, @NonNull List<GpxFileInfo> result,
+			private void loadGPXData(@NonNull File mapPath, @NonNull List<LocalFile> result,
 									 @Nullable OnCollectLocalFilesListener listener) {
 				if (mapPath.canRead()) {
 					loadGPXFolder(mapPath, result, "", listener);
 				}
 			}
 
-			private void loadGPXFolder(@NonNull File mapPath, @NonNull List<GpxFileInfo> result,
+			private void loadGPXFolder(@NonNull File mapPath, @NonNull List<LocalFile> result,
 									   @NonNull String gpxSubfolder, @Nullable OnCollectLocalFilesListener listener) {
 				File[] listFiles = mapPath.listFiles();
 				if (listFiles != null) {
@@ -523,7 +525,7 @@ public class BackupHelper {
 									+ gpxFile.getName();
 							loadGPXFolder(gpxFile, result, sub, listener);
 						} else if (gpxFile.isFile() && gpxFile.getName().toLowerCase().endsWith(IndexConstants.GPX_FILE_EXT)) {
-							GpxFileInfo info = new GpxFileInfo();
+							LocalFile info = new LocalFile();
 							info.subfolder = gpxSubfolder;
 							info.file = gpxFile;
 							GpxDataItem gpxItem = gpxHelper.getItem(gpxFile);
@@ -540,10 +542,10 @@ public class BackupHelper {
 			}
 
 			@Override
-			protected List<GpxFileInfo> doInBackground(Void... voids) {
-				List<GpxFileInfo> result = new ArrayList<>();
+			protected List<LocalFile> doInBackground(Void... voids) {
+				List<LocalFile> result = new ArrayList<>();
 
-				GpxFileInfo favInfo = new GpxFileInfo();
+				LocalFile favInfo = new LocalFile();
 				favInfo.subfolder = "";
 				favInfo.file = favouritesHelper.getExternalFile();
 				favInfo.uploadTime = favouritesHelper.getLastUploadedTime();
@@ -557,14 +559,14 @@ public class BackupHelper {
 			}
 
 			@Override
-			protected void onProgressUpdate(GpxFileInfo... fileInfos) {
+			protected void onProgressUpdate(LocalFile... fileInfos) {
 				if (listener != null) {
 					listener.onFileCollected(fileInfos[0]);
 				}
 			}
 
 			@Override
-			protected void onPostExecute(List<GpxFileInfo> fileInfos) {
+			protected void onPostExecute(List<LocalFile> fileInfos) {
 				if (listener != null) {
 					listener.onFilesCollected(fileInfos);
 				}
@@ -619,7 +621,7 @@ public class BackupHelper {
 	}
 
 	@SuppressLint("StaticFieldLeak")
-	public void generateBackupInfo(@NonNull final List<GpxFileInfo> localFiles, @NonNull final List<UserFile> remoteFiles,
+	public void generateBackupInfo(@NonNull final List<LocalFile> localFiles, @NonNull final List<RemoteFile> remoteFiles,
 								   @Nullable final OnGenerateBackupInfoListener listener) {
 
 		final long backupLastUploadedTime = settings.BACKUP_LAST_UPLOADED_TIME.get();
@@ -628,9 +630,9 @@ public class BackupHelper {
 			@Override
 			protected BackupInfo doInBackground(Void... voids) {
 				BackupInfo info = new BackupInfo();
-				for (UserFile remoteFile : remoteFiles) {
+				for (RemoteFile remoteFile : remoteFiles) {
 					boolean hasLocalFile = false;
-					for (GpxFileInfo localFile : localFiles) {
+					for (LocalFile localFile : localFiles) {
 						if (remoteFile.getName().equals(localFile.getFileName(true))) {
 							hasLocalFile = true;
 							long remoteUploadTime = remoteFile.getClienttimems();
@@ -654,9 +656,9 @@ public class BackupHelper {
 						}
 					}
 				}
-				for (GpxFileInfo localFile : localFiles) {
+				for (LocalFile localFile : localFiles) {
 					boolean hasRemoteFile = false;
-					for (UserFile remoteFile : remoteFiles) {
+					for (RemoteFile remoteFile : remoteFiles) {
 						if (localFile.getFileName(true).equals(remoteFile.getName())) {
 							hasRemoteFile = true;
 							break;

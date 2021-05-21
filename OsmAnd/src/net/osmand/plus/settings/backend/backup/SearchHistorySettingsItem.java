@@ -162,7 +162,7 @@ public class SearchHistorySettingsItem extends CollectionSettingsItem<HistoryEnt
 
 	@Nullable
 	@Override
-	SettingsItemWriter<? extends SettingsItem> getWriter() {
+	public SettingsItemWriter<? extends SettingsItem> getWriter() {
 		return getJsonWriter();
 	}
 }

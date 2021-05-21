@@ -62,7 +62,7 @@ public class GlobalSettingsItem extends OsmandSettingsItem {
 
 	@Nullable
 	@Override
-	SettingsItemWriter<? extends SettingsItem> getWriter() {
+	public SettingsItemWriter<? extends SettingsItem> getWriter() {
 		return new OsmandSettingsItemWriter<OsmandSettingsItem>(this, getSettings()) {
 			@Override
 			protected void writePreferenceToJson(@NonNull OsmandPreference<?> preference, @NonNull JSONObject json) throws JSONException {

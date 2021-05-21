@@ -164,7 +164,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 
 	@Nullable
 	@Override
-	SettingsItemWriter<? extends SettingsItem> getWriter() {
+	public SettingsItemWriter<? extends SettingsItem> getWriter() {
 		List<FavouritePoint> favourites = getPointsFromGroups(items);
 		GPXFile gpxFile = favoritesHelper.asGpxFile(favourites);
 		return getGpxWriter(gpxFile);

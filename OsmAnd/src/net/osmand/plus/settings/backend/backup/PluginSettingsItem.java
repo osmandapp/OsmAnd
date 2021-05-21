@@ -111,7 +111,7 @@ public class PluginSettingsItem extends SettingsItem {
 
 	@Nullable
 	@Override
-	SettingsItemWriter<? extends SettingsItem> getWriter() {
+	public SettingsItemWriter<? extends SettingsItem> getWriter() {
 		return null;
 	}
 }

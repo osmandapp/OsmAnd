@@ -182,7 +182,7 @@ public class PoiUiFiltersSettingsItem extends CollectionSettingsItem<PoiUIFilter
 
 	@Nullable
 	@Override
-	SettingsItemWriter<? extends SettingsItem> getWriter() {
+	public SettingsItemWriter<? extends SettingsItem> getWriter() {
 		return getJsonWriter();
 	}
 }

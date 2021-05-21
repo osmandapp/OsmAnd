@@ -10,7 +10,7 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.Locale;
 
-public class UserFile {
+public class RemoteFile {
 
 	private int userid;
 	private long id;
@@ -24,7 +24,7 @@ public class UserFile {
 	private long clienttimems;
 	private int zipSize;
 
-	public UserFile(@NonNull JSONObject json) throws JSONException, ParseException {
+	public RemoteFile(@NonNull JSONObject json) throws JSONException, ParseException {
 		if (json.has("userid")) {
 			userid = json.getInt("userid");
 		}

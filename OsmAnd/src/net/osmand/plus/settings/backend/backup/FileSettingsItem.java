@@ -20,8 +20,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
 
 public class FileSettingsItem extends StreamSettingsItem {
 
@@ -323,42 +321,7 @@ public class FileSettingsItem extends StreamSettingsItem {
 				warnings.add(app.getString(R.string.settings_item_read_error, file.getName()));
 				SettingsHelper.LOG.error("Failed to set input stream from file: " + file.getName(), e);
 			}
-			return new StreamSettingsItemWriter(this) {
-				@Override
-				public ZipEntry createNewEntry(String fileName) {
-					ZipEntry entry = super.createNewEntry(fileName);
-					entry.setTime(file.lastModified());
-					return entry;
-				}
-			};
-		} else {
-			return new StreamSettingsItemWriter(this) {
-
-				@Override
-				public void writeEntry(String fileName, @NonNull ZipOutputStream zos) throws IOException {
-					writeDirWithFiles(file, zos);
-				}
-
-				public void writeDirWithFiles(File file, ZipOutputStream zos) throws IOException {
-					if (file != null) {
-						if (file.isDirectory()) {
-							File[] files = file.listFiles();
-							if (files != null) {
-								for (File subfolderFile : files) {
-									writeDirWithFiles(subfolderFile, zos);
-								}
-							}
-						} else {
-							String subtypeFolder = getSubtype().getSubtypeFolder();
-							String zipEntryName = Algorithms.isEmpty(subtypeFolder)
-									? file.getName()
-									: file.getPath().substring(file.getPath().indexOf(subtypeFolder) - 1);
-							setInputStream(new FileInputStream(file));
-							super.writeEntry(zipEntryName, zos);
-						}
-					}
-				}
-			};
 		}
+		return new StreamSettingsItemWriter(this);
 	}
 }

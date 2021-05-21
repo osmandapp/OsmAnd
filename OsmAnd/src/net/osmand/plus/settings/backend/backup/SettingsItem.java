@@ -171,7 +171,7 @@ public abstract class SettingsItem {
 	abstract SettingsItemReader<? extends SettingsItem> getReader();
 
 	@Nullable
-	abstract SettingsItemWriter<? extends SettingsItem> getWriter();
+	public abstract SettingsItemWriter<? extends SettingsItem> getWriter();
 
 	@NonNull
 	SettingsItemReader<? extends SettingsItem> getJsonReader() {

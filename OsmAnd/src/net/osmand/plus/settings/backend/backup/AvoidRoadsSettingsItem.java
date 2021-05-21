@@ -170,7 +170,7 @@ public class AvoidRoadsSettingsItem extends CollectionSettingsItem<AvoidRoadInfo
 
 	@Nullable
 	@Override
-	SettingsItemWriter<? extends SettingsItem> getWriter() {
+	public SettingsItemWriter<? extends SettingsItem> getWriter() {
 		return getJsonWriter();
 	}
 }

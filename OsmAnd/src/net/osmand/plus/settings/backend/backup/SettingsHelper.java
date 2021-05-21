@@ -106,7 +106,7 @@ public class SettingsHelper {
 
 	protected static final Log LOG = PlatformUtil.getLog(SettingsHelper.class);
 
-	private OsmandApplication app;
+	private final OsmandApplication app;
 
 	private ImportAsyncTask importTask;
 	private Map<File, ExportAsyncTask> exportAsyncTasks = new HashMap<>();
@@ -245,8 +245,8 @@ public class SettingsHelper {
 	@SuppressLint("StaticFieldLeak")
 	public class ExportAsyncTask extends AsyncTask<Void, Integer, Boolean> {
 
-		private File file;
-		private SettingsExporter exporter;
+		private final File file;
+		private final SettingsExporter exporter;
 		private SettingsExportListener listener;
 
 		ExportAsyncTask(@NonNull File settingsFile,
@@ -307,20 +307,20 @@ public class SettingsHelper {
 	@SuppressLint("StaticFieldLeak")
 	public class ImportAsyncTask extends AsyncTask<Void, Void, List<SettingsItem>> {
 
-		private File file;
+		private final File file;
 		private String latestChanges;
 		private int version;
 
 		private SettingsImportListener importListener;
 		private SettingsCollectListener collectListener;
 		private CheckDuplicatesListener duplicatesListener;
-		private SettingsImporter importer;
+		private final SettingsImporter importer;
 
 		private List<SettingsItem> items = new ArrayList<>();
 		private List<SettingsItem> selectedItems = new ArrayList<>();
 		private List<Object> duplicates;
 
-		private ImportType importType;
+		private final ImportType importType;
 		private boolean importDone;
 
 		ImportAsyncTask(@NonNull File file, String latestChanges, int version, @Nullable SettingsCollectListener collectListener) {

@@ -52,7 +52,7 @@ class SettingsImporter {
 					try {
 						itemsJson = Algorithms.readFromInputStream(ois, false).toString();
 					} catch (IOException e) {
-						SettingsHelper.LOG.error("Error reading items.json: " + itemsJson, e);
+						SettingsHelper.LOG.error("Error reading items.json", e);
 						throw new IllegalArgumentException("No items");
 					} finally {
 						zis.closeEntry();

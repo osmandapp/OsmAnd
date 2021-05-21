@@ -196,7 +196,7 @@ public class OsmEditsSettingsItem extends CollectionSettingsItem<OpenstreetmapPo
 
 	@Nullable
 	@Override
-	SettingsItemWriter<? extends SettingsItem> getWriter() {
+	public SettingsItemWriter<? extends SettingsItem> getWriter() {
 		return getJsonWriter();
 	}
 }

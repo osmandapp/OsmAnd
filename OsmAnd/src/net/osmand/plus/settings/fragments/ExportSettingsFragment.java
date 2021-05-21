@@ -151,7 +151,7 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 			showExportProgressDialog();
 			File tempDir = FileUtils.getTempDir(app);
 			String fileName = getFileName();
-			List<SettingsItem> items = app.getSettingsHelper().prepareSettingsItems(adapter.getData(), Collections.<SettingsItem>emptyList(), true);
+			List<SettingsItem> items = app.getSettingsHelper().prepareSettingsItems(adapter.getData(), Collections.emptyList(), true);
 			progress.setMax(getMaxProgress(items));
 			app.getSettingsHelper().exportSettings(tempDir, fileName, getSettingsExportListener(), items, true);
 		}

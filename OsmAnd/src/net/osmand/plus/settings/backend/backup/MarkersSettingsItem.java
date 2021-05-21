@@ -152,7 +152,7 @@ public class MarkersSettingsItem extends CollectionSettingsItem<MapMarker> {
 
 	@Nullable
 	@Override
-	SettingsItemWriter<? extends SettingsItem> getWriter() {
+	public SettingsItemWriter<? extends SettingsItem> getWriter() {
 		GPXFile gpxFile = markersHelper.getDataHelper().generateGpx(items, true);
 		return getGpxWriter(gpxFile);
 	}

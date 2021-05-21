@@ -4,7 +4,7 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 
-public class GpxFileInfo {
+public class LocalFile {
 	public File file;
 	public String subfolder;
 	public long uploadTime = 0;

@@ -1,5 +1,10 @@
-package net.osmand.plus.settings.backend.backup;
+package net.osmand.plus.backup;
 
+import net.osmand.plus.settings.backend.backup.FileSettingsItem;
+import net.osmand.plus.settings.backend.backup.SettingsHelper;
+import net.osmand.plus.settings.backend.backup.SettingsHelper.ExportProgressListener;
+import net.osmand.plus.settings.backend.backup.SettingsItem;
+import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONArray;
@@ -16,9 +21,10 @@ import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import static net.osmand.plus.settings.backend.backup.SettingsHelper.*;
+import static net.osmand.plus.settings.backend.backup.SettingsHelper.BUFFER;
+import static net.osmand.plus.settings.backend.backup.SettingsHelper.VERSION;
 
-class SettingsExporter {
+public class BackupExporter {
 
 	private final Map<String, SettingsItem> items;
 	private final Map<String, String> additionalParams;
@@ -27,7 +33,7 @@ class SettingsExporter {
 	private final boolean exportItemsFiles;
 	private boolean cancelled;
 
-	SettingsExporter(ExportProgressListener progressListener, boolean exportItemsFiles) {
+	BackupExporter(ExportProgressListener progressListener, boolean exportItemsFiles) {
 		this.progressListener = progressListener;
 		this.exportItemsFiles = exportItemsFiles;
 		items = new LinkedHashMap<>();
@@ -49,7 +55,7 @@ class SettingsExporter {
 		additionalParams.put(key, value);
 	}
 
-	void exportSettings(File file) throws JSONException, IOException {
+	void exportSettings() throws JSONException, IOException {
 		JSONObject json = createItemsJson();
 		OutputStream os = new BufferedOutputStream(new FileOutputStream(file), BUFFER);
 		ZipOutputStream zos = new ZipOutputStream(os);
@@ -71,11 +77,14 @@ class SettingsExporter {
 
 	private void writeItemFiles(ZipOutputStream zos) throws IOException {
 		int progress = 0;
-		ZipWriter zipWriter = new ZipWriter(zos);
 		for (SettingsItem item : items.values()) {
-			SettingsItemWriter<? extends SettingsItem> itemWriter = item.getWriter();
-			if (itemWriter != null) {
-				zipWriter.write(itemWriter);
+			SettingsItemWriter<? extends SettingsItem> writer = item.getWriter();
+			if (writer != null) {
+				String fileName = item.getFileName();
+				if (Algorithms.isEmpty(fileName)) {
+					fileName = item.getDefaultFileName();
+				}
+				writer.writeEntry(fileName, zos);
 			}
 			if (cancelled) {
 				return;

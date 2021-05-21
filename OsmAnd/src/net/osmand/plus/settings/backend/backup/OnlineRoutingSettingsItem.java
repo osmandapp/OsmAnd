@@ -137,7 +137,7 @@ public class OnlineRoutingSettingsItem extends CollectionSettingsItem<OnlineRout
 
 	@Nullable
 	@Override
-	SettingsItemWriter<? extends SettingsItem> getWriter() {
+	public SettingsItemWriter<? extends SettingsItem> getWriter() {
 		return getJsonWriter();
 	}
 }
