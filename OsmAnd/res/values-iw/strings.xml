@@ -4119,4 +4119,17 @@
     <string name="resend_verification_code">שליחת הקוד מחדש</string>
     <string name="verification_code_missing">לא קיבלתי את קוד האימות</string>
     <string name="verification_code_missing_description">זמן ההמתנה לקוד יכול לארוך עד 10 דקות, כדאי גם לחפש בתיקיית הספאם שלך. אם זה לא עזר, יש להשתמש בכפתור שלהלן.</string>
+    <string name="backup_and_restore">גיבוי ושחזור</string>
+    <string name="last_backup">גיבוי אחרון</string>
+    <string name="duration_ago">לפני %1$s</string>
+    <string name="osmand_cloud">OsmAnd Cloud</string>
+    <string name="osmand_cloud_authorize_descr">הנתונים שלך לעולם לא ילכו לאיבוד, ניתן לגבות ולשחזר את המידע שלך ללא כל קושי.</string>
+    <string name="local_backup">גיבוי מקומי</string>
+    <string name="local_backup_descr">גיבוי ושחזור נתונים מקובץ מקומי.</string>
+    <string name="backup_into_file">גיבוי לקובץ</string>
+    <string name="restore_from_file">שחזור מקובץ</string>
+    <string name="osmand_cloud_help_descr">הסתבכת\? ניתן ליצור אתנו קשר דרך %1$s</string>
+    <string name="osmand_cloud_create_account_descr">נא למלא את כתובת הדוא״ל שלך, כל הנתונים שלך יקושרו אליה.
+\nאנו נשלח לך קוד אימות לכתובת הדוא״ל הזו.</string>
+    <string name="osmand_cloud_login_descr">נא להקליד את כתובת הדוא״ל בה השתמשת להרשמה. אנו נשלח לך תוך זמן קצר ססמה חד־פעמית שנחוצה לשלב הבא.</string>
 </resources>
