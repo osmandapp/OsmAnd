@@ -91,5 +91,5 @@
     <string name="status_widget_title">وضعیت ردیاب OsmAnd</string>
     <string name="shared_string_suggested">پیشنهادی</string>
     <string name="back_to_osmand">بازگشت به OsmAnd</string>
-    <string name="duration_ago">%1$s پیش</string>
+    <string name="duration_ago">‏%1$s پیش</string>
 </resources>
