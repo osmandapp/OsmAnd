@@ -4113,7 +4113,7 @@
     <string name="osmand_cloud_authorize_descr">Ніколи не втрачайте свої дані, резервне копіювання та відновлення всіх даних без ускладнень.</string>
     <string name="local_backup">Локальна резервна копія</string>
     <string name="local_backup_descr">Резервне копіювання або відновлення даних із локального файлу.</string>
-    <string name="backup_into_file">Файл відомостей про резервне копіювання</string>
+    <string name="backup_into_file">Створити резервну копію у файл</string>
     <string name="restore_from_file">Відновити з файлу</string>
     <string name="osmand_cloud_help_descr">Потрібна допомога\? Зв\'яжіться з нами через %1$s</string>
     <string name="osmand_cloud_create_account_descr">Будь ласка, введіть вашу адресу електронної пошти, всі ваші дані буде пов\'язано з нею.
