@@ -226,9 +226,9 @@ public class RouteColorize {
                 return getGradientColor(minPaletteColor, maxPaletteColor, percent);
             }
         }
-        if (value < minValue) {
+        if (value <= palette[0][0]) {
             return (int)palette[0][1];
-        } else if (value > maxValue) {
+        } else if (value >= palette[palette.length-1][0]) {
             return (int) palette[palette.length-1][1];
         }
         return getTransparentColor();
@@ -488,7 +488,7 @@ public class RouteColorize {
     private void calculateMinMaxValue(GPXTrackAnalysis analysis, float maxProfileSpeed) {
         calculateMinMaxValue();
         // set strict limitations for maxValue
-        maxValue = getMaxValue(colorizationType, analysis, minValue, maxProfileSpeed);
+        //maxValue = getMaxValue(colorizationType, analysis, minValue, maxProfileSpeed);
     }
 
     private double[] listToArray(List<Double> doubleList) {
