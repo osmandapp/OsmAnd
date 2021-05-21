@@ -4100,4 +4100,26 @@
     <string name="routing_attr_avoid_low_emission_zone_description">Alacsony kibocsátású zónák elkerülése</string>
     <string name="routing_attr_avoid_low_emission_zone_name">Alacsony kibocsátású zónák elkerülése</string>
     <string name="search_more">További keresés…</string>
+    <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
+    <string name="osmand_cloud">OsmAnd Cloud</string>
+    <string name="verify_email_address_descr">Elküldtünk az e-mail címére (%1$s) egy hitelesítő kódot. Kérjük, írja be az alábbi mezőbe.</string>
+    <string name="verification_code_missing_description">A kód várakozási ideje akár 10 perc is lehet, ellenőrizheti a spam mappát is. Ha mindez nem segít, használja az alábbi gombot.</string>
+    <string name="verification_code_missing">Nem kaptam meg a hitelesítő kódot</string>
+    <string name="resend_verification_code">Kód újraküldése</string>
+    <string name="cloud_email_already_registered">Az e-mail címhez tartozó fiók már regisztrálva van.</string>
+    <string name="cloud_email_not_registered">Ez az e-mail címe nincs regisztrálva az OsmAnd Cloud szolgáltatásban</string>
+    <string name="enter_verification_code">Írja be a négy számjegyű kódot</string>
+    <string name="verify_email_address">E-mail cím hitelesítése</string>
+    <string name="osmand_cloud_login_descr">Kérjük, írja be a regisztrációhoz használt e-mail címet. A következő lépéshez ide küldünk Önnek egy egyszer használatos jelszót.</string>
+    <string name="osmand_cloud_create_account_descr">Kérjük, adja meg e-mail címét, amelyhez minden adata kapcsolódni fog.
+\nErre az e-mail címre küldünk egy ellenőrző kódot.</string>
+    <string name="osmand_cloud_help_descr">Segítségre van szüksége\? Lépjen velünk kapcsolatba itt: %1$s</string>
+    <string name="restore_from_file">Visszaállítás fájlból</string>
+    <string name="backup_into_file">Biztonsági mentés fájlba</string>
+    <string name="osmand_cloud_authorize_descr">Soha ne veszítse el adatait: készítsen biztonsági mentést, és gond nélkül állítson vissza minden információt.</string>
+    <string name="local_backup">Helyi biztonsági mentés</string>
+    <string name="local_backup_descr">Biztonsági mentés vagy visszaállítás helyi fájl segítségével.</string>
+    <string name="duration_ago">Ennyi idővel ezelőtt: %1$s</string>
+    <string name="last_backup">Legutóbbi biztonsági mentés</string>
+    <string name="backup_and_restore">Biztonsági mentés és visszaállítás</string>
 </resources>

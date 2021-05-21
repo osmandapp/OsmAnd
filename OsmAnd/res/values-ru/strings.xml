@@ -4109,4 +4109,25 @@
     <string name="routing_attr_avoid_low_emission_zone_name">Без зон с низким уровнем выбросов</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
     <string name="search_more">Найти ещё…</string>
+    <string name="osmand_cloud">OsmAnd Cloud</string>
+    <string name="local_backup_descr">Резервное копирование в локальный файл или восстановление из него данных.</string>
+    <string name="backup_into_file">Резервное копирование в файл</string>
+    <string name="restore_from_file">Восстановить из файла</string>
+    <string name="osmand_cloud_help_descr">Нужна помощь\? Свяжитесь с нами по %1$s</string>
+    <string name="osmand_cloud_create_account_descr">Введите свой адрес электронной почты, все ваши данные будут привязаны к нему.
+\nМы вышлем вам проверочный код на этот адрес электронной почты.</string>
+    <string name="osmand_cloud_login_descr">Введите адрес электронной почты, который вы использовали при регистрации. Мы вышлем вам одноразовый пароль, необходимый на следующем шаге.</string>
+    <string name="verify_email_address">Подтверждение адреса электронной почты</string>
+    <string name="verify_email_address_descr">Мы отправили проверочный код на %1$s, пожалуйста, введите его в поле ниже.</string>
+    <string name="cloud_email_not_registered">Данный адрес электронной почты не был зарегистрирован в Osmand Cloud</string>
+    <string name="cloud_email_already_registered">Учетная запись с данным адресом электронной почты уже зарегистрирована.</string>
+    <string name="resend_verification_code">Отправить код повторно</string>
+    <string name="verification_code_missing">Я не получил код подтверждения</string>
+    <string name="verification_code_missing_description">Время ожидания кода может составлять 10 минут, также вы можете проверить папку со спамом. Если это не помогло, воспользуйтесь кнопкой ниже.</string>
+    <string name="local_backup">Локальное резервное копирование</string>
+    <string name="osmand_cloud_authorize_descr">Никогда не теряйте свои данные, создавайте резервные копии и восстанавливайте всю информацию без проблем.</string>
+    <string name="backup_and_restore">Резервное копирование и восстановление</string>
+    <string name="last_backup">Последнее резервное копирование</string>
+    <string name="duration_ago">%1$s назад</string>
+    <string name="enter_verification_code">Введите 4-значный код</string>
 </resources>

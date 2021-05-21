@@ -4101,4 +4101,25 @@
     <string name="routing_attr_avoid_low_emission_zone_name">避免低排放區域</string>
     <string name="search_more">搜尋更多……</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
+    <string name="backup_and_restore">備份與還原</string>
+    <string name="last_backup">上次備份</string>
+    <string name="osmand_cloud">OsmAnd Cloud</string>
+    <string name="duration_ago">%1$s 前</string>
+    <string name="osmand_cloud_authorize_descr">絕對不會遺失您的資料、備份與還原所有資訊。</string>
+    <string name="local_backup">本機備份</string>
+    <string name="local_backup_descr">從本機檔案備份或還原資料。</string>
+    <string name="backup_into_file">備份至檔案</string>
+    <string name="restore_from_file">從檔案還原</string>
+    <string name="osmand_cloud_help_descr">需要協助嗎？請在 %1$s 聯絡我們</string>
+    <string name="osmand_cloud_create_account_descr">請輸入您的電子郵件地址，您所有的資料都將會連結到這個地址。
+\n我們將會傳送驗證碼到這個電子郵件地址給您。</string>
+    <string name="osmand_cloud_login_descr">請輸入您用於註冊的電子郵件地址。我們將會傳送下一步所需的一次性密碼。</string>
+    <string name="verify_email_address">驗證電子郵件地址</string>
+    <string name="verify_email_address_descr">我們已將驗證碼傳送至 %1$s，請在下方欄位輸入。</string>
+    <string name="enter_verification_code">輸入 4 位數代碼</string>
+    <string name="cloud_email_not_registered">此電子郵件尚未註冊 OsmAnd Cloud</string>
+    <string name="cloud_email_already_registered">使用此電子郵件的帳號已被註冊。</string>
+    <string name="resend_verification_code">重新傳送代碼</string>
+    <string name="verification_code_missing">我沒有收到驗證碼</string>
+    <string name="verification_code_missing_description">等待代碼的時間可能需要10分鐘，您也可以檢查您的垃圾郵件資料夾。如果沒有幫助，請點擊下方的按鈕。</string>
 </resources>

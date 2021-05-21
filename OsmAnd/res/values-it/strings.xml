@@ -530,7 +530,7 @@
     <string name="poi_error_io_error_template">Errore di I/O durante l\'esecuzione dell\'azione {0}.</string>
     <string name="poi_error_info_not_loaded">Informazioni relative al nodo non caricate</string>
     <string name="poi_dialog_opening_hours">Aperto</string>
-    <string name="poi_dialog_comment">Commento</string>
+    <string name="poi_dialog_comment">Commenta</string>
     <string name="poi_dialog_comment_default">Cambio PDI</string>
     <string name="poi_dialog_other_tags_message">Tutte le altre etichette sono conservate</string>
     <string name="default_buttons_commit">Esegui</string>
@@ -4097,4 +4097,27 @@
     <string name="shared_string_itinerary">Itinerario</string>
     <string name="poi_routes">Percorsi</string>
     <string name="routing_attr_avoid_low_emission_zone_description">Evita le zone a basse emissioni</string>
+    <string name="osmand_cloud_create_account_descr">Per favore immetti il tuo indirizzo email, tutti i tuoi dati saranno collegati ad esso.
+\nTi invieremo un codice di verifica a quella mail.</string>
+    <string name="search_more">Cerca di più …</string>
+    <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
+    <string name="backup_and_restore">Salvataggio e Ripristino</string>
+    <string name="last_backup">Ultimo salvataggio</string>
+    <string name="duration_ago">%1$s fa</string>
+    <string name="osmand_cloud">OsmAnd Cloud</string>
+    <string name="osmand_cloud_authorize_descr">Non perdere mai i tuoi dati, salva e ripristina tutte le informazioni senza problemi.</string>
+    <string name="local_backup">Salvataggio locale</string>
+    <string name="local_backup_descr">Salva o ripristina dati da un file locale.</string>
+    <string name="backup_into_file">Salva sul file</string>
+    <string name="restore_from_file">Ripristina dal file</string>
+    <string name="osmand_cloud_help_descr">Serve aiuto\? Per favore contattaci a %1$s</string>
+    <string name="osmand_cloud_login_descr">Per favore immetti l\'indirizzo email che hai usato per la registrazione. Ti invieremo una password temporanea necessaria per il prossimo passo.</string>
+    <string name="verify_email_address">Verifica l\'indirizzo email</string>
+    <string name="verify_email_address_descr">Abbiamo inviato un codice di verifica a %1$s, per favore immettilo nel campo sottostante.</string>
+    <string name="enter_verification_code">Immetti un codice di 4 cifre</string>
+    <string name="cloud_email_not_registered">Questa mail non è stata registrata per OsmAnd Cloud</string>
+    <string name="cloud_email_already_registered">Un account con questa mail è già registrato.</string>
+    <string name="resend_verification_code">Invia di nuovo il codice</string>
+    <string name="verification_code_missing">Non ho ricevuto il codice di verifica</string>
+    <string name="verification_code_missing_description">L\'attesa del codice può essere di minuti, verifica anche la cartella spam. Se non è d\'aiuto utilizza il pulsante sotto.</string>
 </resources>

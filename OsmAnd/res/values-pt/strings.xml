@@ -4114,4 +4114,18 @@
     <string name="poi_routes">Rotas</string>
     <string name="search_more">Pesquisar mais…</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
+    <string name="backup_into_file">Restaurar de um ficheiro</string>
+    <string name="restore_from_file">Restaurar de um ficheiro</string>
+    <string name="osmand_cloud_help_descr">Precisa de ajuda\? Por favor contacte-nos em %1$s</string>
+    <string name="osmand_cloud_create_account_descr">Introduza o seu endereço de email, todos os seus dados serão ligados a ele.
+\nVamos enviar um código de verificação para este endereço de email.</string>
+    <string name="osmand_cloud_login_descr">Por favor, introduza o endereço de email que usou para o registo da conta. Enviaremos uma palavra-passe única, que será necessária para o próximo passo.</string>
+    <string name="verify_email_address">Verifique o endereço de email</string>
+    <string name="verify_email_address_descr">Enviámos um código de verificação para %1$s, por favor introduza-o no campo abaixo.</string>
+    <string name="enter_verification_code">Introduza o código de 4 dígitos</string>
+    <string name="cloud_email_not_registered">Este email ainda não foi registado no OsmAnd Cloud</string>
+    <string name="cloud_email_already_registered">A conta com este e-mail já está registada.</string>
+    <string name="resend_verification_code">Reenviar código</string>
+    <string name="verification_code_missing">Não recebi o código de verificação</string>
+    <string name="verification_code_missing_description">O tempo de espera pelo código pode ser de 10 minutos, também pode verificar a sua pasta de spam. Se não o encontrar, use o botão abaixo.</string>
 </resources>

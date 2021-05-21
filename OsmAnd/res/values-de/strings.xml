@@ -4112,4 +4112,25 @@
     <string name="routing_attr_avoid_low_emission_zone_name">Umweltzonen vermeiden</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
     <string name="search_more">Mehr suchen…</string>
+    <string name="osmand_cloud_authorize_descr">Verlieren Sie niemals Ihre Daten, sichern und stellen Sie alle Informationen problemlos wieder her.</string>
+    <string name="osmand_cloud_create_account_descr">Bitte geben Sie Ihre E-Mail-Adresse ein, alle Ihre Daten werden mit dieser verknüpft.
+\nWir senden Ihnen einen Verifizierungscode an diese E-Mail-Adresse.</string>
+    <string name="verification_code_missing_description">Die Wartezeit für den Code kann 10 Minuten betragen, außerdem können Sie Ihren Spamordner überprüfen. Wenn dies nicht hilft, verwenden Sie die Schaltfläche unten.</string>
+    <string name="backup_and_restore">Backup und Wiederherstellen</string>
+    <string name="last_backup">Letztes Backup</string>
+    <string name="duration_ago">vor %1$s</string>
+    <string name="osmand_cloud">OsmAnd Cloud</string>
+    <string name="local_backup">Lokales Backup</string>
+    <string name="local_backup_descr">Daten aus/in eine lokale Datei wiederherstellen/sichern.</string>
+    <string name="backup_into_file">Backup in Datei</string>
+    <string name="restore_from_file">Von Datei wiederherstellen</string>
+    <string name="osmand_cloud_help_descr">Sie benötigen Hilfe\? Bitte kontaktieren Sie uns unter %1$s</string>
+    <string name="osmand_cloud_login_descr">Bitte geben Sie die E-Mail-Adresse ein, die Sie für die Registrierung verwendet haben. Wir werden Ihnen ein Einmalpasswort senden, dass Sie im nächsten Schritt benötigen.</string>
+    <string name="verify_email_address">E-Mail-Adresse verifizieren</string>
+    <string name="verify_email_address_descr">Wir haben einen Bestätigungscode an %1$s gesendet, bitte geben Sie ihn unten ein.</string>
+    <string name="enter_verification_code">Geben Sie den 4-stelligen Code ein</string>
+    <string name="cloud_email_not_registered">Diese E-Mail wurde noch nicht für OsmAnd Cloud registriert</string>
+    <string name="cloud_email_already_registered">Account mit dieser E-Mail wurde bereits registriert.</string>
+    <string name="resend_verification_code">Code erneut senden</string>
+    <string name="verification_code_missing">Ich habe keinen Bestätigungscode erhalten</string>
 </resources>

@@ -2917,7 +2917,7 @@
     <string name="public_transport_try_change_settings">Essayez de modifier les paramètres.</string>
     <string name="public_transport_calc_pedestrian">Calculer l\'itinéraire piéton</string>
     <string name="public_transport_type">Type de transport</string>
-    <string name="searching_gps">Recherche des satellites</string>
+    <string name="searching_gps"></string>
     <string name="coordinates_widget">Gadget de coordonnées</string>
     <string name="shared_string_privacy_policy">Politique de confidentialité</string>
     <string name="help_us_make_osmand_better">Aidez-nous à améliorer OsmAnd</string>
@@ -3355,7 +3355,7 @@
     <string name="monitoring_min_speed_descr_remark">Remarque : vérification de vitesse &gt; 0. La plupart des puces GPS fournissent une vitesse uniquement lorsque vous êtes en mouvement. Par conséquent, l\'indication du paramètre &gt; 0 pour ce filtre utilise la détection de mouvement par la puce GPS. Mais même s\'il n\'est pas filtré ici au moment de l\'enregistrement, nous utilisons toujours cette fonctionnalité dans notre analyse des traces GPX pour déterminer la distance corrigée, c\'est-à-dire que la valeur affichée dans ce champ est la distance enregistrée en déplacement.</string>
     <string name="monitoring_min_distance_descr_side_effect">Effet secondaire : les périodes de repos ne seront pas enregistrées ou seulement par un point. De petits mouvements, comme des pas sur le côté, pourront être ignorés. Votre fichier contiendra moins d\'informations exploitables en post-traitement et aura des statistiques moins exactes (éliminant les points redondants mais conservant les erreurs de position dues à une mauvaise réception ou aux artefacts de la puce GPS).</string>
     <string name="shared_string_available">Disponible</string>
-    <string name="add_custom_category">Ajouter une catégorie personnelle</string>
+    <string name="add_custom_category">Ajouter une catégorie personnalisée</string>
     <string name="rendering_attr_streetLightingNight_name">Afficher seulement de nuit</string>
     <string name="plugin_prefs_reset_successful">Tous les paramètres du greffon ont été restaurés à leurs valeurs par défaut.</string>
     <string name="profile_prefs_reset_successful">Tous les paramètres du profile ont été restaurés à leurs valeurs par défaut.</string>
@@ -4112,4 +4112,10 @@
     <string name="cloud_email_already_registered">Un compte avec cet email existe déjà.</string>
     <string name="resend_verification_code">Renvoyer le code</string>
     <string name="verification_code_missing">Je n\'ai pas reçu le code de vérification</string>
+    <string name="osmand_cloud_authorize_descr">Ne perdez jamais vos données, sauvegardez et restaurez facilement toutes vos informations.</string>
+    <string name="osmand_cloud_create_account_descr">Veuillez saisir votre adresse email, toutes vos données y seront associées.
+\nLe code de vérification vous sera envoyé à cette adresse.</string>
+    <string name="osmand_cloud_login_descr">Veuillez saisir l\'adresse email utilisée à l\'inscription. A l\'étape suivante, vous recevrez un mot de passe à usage unique.</string>
+    <string name="cloud_email_not_registered">Cet email n\'est pas enregistré sur OsmAnd Cloud</string>
+    <string name="backup_into_file">Fichier de sauvegarde</string>
 </resources>
