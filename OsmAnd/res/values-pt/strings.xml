@@ -1955,7 +1955,7 @@
     <string name="no_overlay">Sem camada superior</string>
     <string name="no_underlay">Sem camada inferior</string>
     <string name="subscribe_email_error">Erro</string>
-    <string name="subscribe_email_desc">Assine a nossa lista de email sobre descontos da aplicação e ganhe mais 3 descarregamentos de mapas!</string>
+    <string name="subscribe_email_desc">Inscreva-se na nossa lista de email sobre descontos da aplicação e ganhe mais 3 descarregamentos de mapas!</string>
     <string name="depth_contour_descr">Curvas de nível de profundidade marítima e seamarks.</string>
     <string name="sea_depth_thanks">Muito obrigado por comprar \'Contornos de profundidade náutica\'</string>
     <string name="index_item_depth_contours_osmand_ext">Curvas de profundidades náuticas</string>
