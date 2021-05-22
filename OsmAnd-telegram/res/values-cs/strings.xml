@@ -77,4 +77,5 @@
     <string name="by_name">Podle názvu</string>
     <string name="shared_string_distance">Vzdálenost</string>
     <string name="shared_string_later">Později</string>
+    <string name="duration_ago">před %1$s</string>
 </resources>
