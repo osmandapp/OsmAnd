@@ -78,4 +78,6 @@
     <string name="shared_string_distance">Vzdálenost</string>
     <string name="shared_string_later">Později</string>
     <string name="duration_ago">před %1$s</string>
+    <string name="shared_string_password">Heslo</string>
+    <string name="shared_string_account">Účet</string>
 </resources>
