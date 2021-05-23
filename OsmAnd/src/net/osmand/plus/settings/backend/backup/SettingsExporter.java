@@ -1,8 +1,10 @@
 package net.osmand.plus.settings.backend.backup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.util.Algorithms;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -11,45 +13,30 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import static net.osmand.plus.settings.backend.backup.SettingsHelper.*;
+import static net.osmand.plus.settings.backend.backup.SettingsHelper.BUFFER;
+import static net.osmand.plus.settings.backend.backup.SettingsHelper.ExportProgressListener;
 
-class SettingsExporter {
+public class SettingsExporter extends Exporter {
 
-	private final Map<String, SettingsItem> items;
-	private final Map<String, String> additionalParams;
-	private final ExportProgressListener progressListener;
-
+	private final File file;
 	private final boolean exportItemsFiles;
-	private boolean cancelled;
 
-	SettingsExporter(ExportProgressListener progressListener, boolean exportItemsFiles) {
-		this.progressListener = progressListener;
+	public SettingsExporter(@NonNull File file, @Nullable ExportProgressListener progressListener,
+							boolean exportItemsFiles) {
+		super(progressListener);
+		this.file = file;
 		this.exportItemsFiles = exportItemsFiles;
-		items = new LinkedHashMap<>();
-		additionalParams = new LinkedHashMap<>();
 	}
 
-	void addSettingsItem(SettingsItem item) throws IllegalArgumentException {
-		if (items.containsKey(item.getName())) {
-			throw new IllegalArgumentException("Already has such item: " + item.getName());
-		}
-		items.put(item.getName(), item);
+	@Override
+	public void export() throws JSONException, IOException {
+		exportSettings(file);
 	}
 
-	public void setCancelled(boolean cancelled) {
-		this.cancelled = cancelled;
-	}
-
-	void addAdditionalParam(String key, String value) {
-		additionalParams.put(key, value);
-	}
-
-	void exportSettings(File file) throws JSONException, IOException {
+	private void exportSettings(File file) throws JSONException, IOException {
 		JSONObject json = createItemsJson();
 		OutputStream os = new BufferedOutputStream(new FileOutputStream(file), BUFFER);
 		ZipOutputStream zos = new ZipOutputStream(os);
@@ -69,38 +56,17 @@ class SettingsExporter {
 		}
 	}
 
-	private void writeItemFiles(ZipOutputStream zos) throws IOException {
-		int progress = 0;
-		ZipWriter zipWriter = new ZipWriter(zos);
-		for (SettingsItem item : items.values()) {
-			SettingsItemWriter<? extends SettingsItem> itemWriter = item.getWriter();
-			if (itemWriter != null) {
-				zipWriter.write(itemWriter);
-			}
-			if (cancelled) {
-				return;
-			}
-			if (item instanceof FileSettingsItem) {
-				int size = (int) ((FileSettingsItem) item).getSize() / (1 << 20);
-				progress += size;
-				if (progressListener != null) {
-					progressListener.updateProgress(progress);
+	protected void writeItemFiles(ZipOutputStream zos) throws IOException {
+		long[] progress = {0};
+		ZipWriter zipWriter = new ZipWriter(zos, new AbstractProgress() {
+			@Override
+			public void progress(int deltaWork) {
+				progress[0] += deltaWork;
+				if (getProgressListener() != null) {
+					getProgressListener().updateProgress((int) progress[0] / (1 << 20));
 				}
 			}
-		}
-	}
-
-	private JSONObject createItemsJson() throws JSONException {
-		JSONObject json = new JSONObject();
-		json.put("version", VERSION);
-		for (Map.Entry<String, String> param : additionalParams.entrySet()) {
-			json.put(param.getKey(), param.getValue());
-		}
-		JSONArray itemsJson = new JSONArray();
-		for (SettingsItem item : items.values()) {
-			itemsJson.put(new JSONObject(item.toJson()));
-		}
-		json.put("items", itemsJson);
-		return json;
+		});
+		writeItems(zipWriter);
 	}
 }

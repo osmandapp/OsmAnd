@@ -40,7 +40,7 @@ public abstract class StreamSettingsItem extends SettingsItem {
 		return inputStream;
 	}
 
-	protected void setInputStream(@Nullable InputStream inputStream) {
+	public void setInputStream(@Nullable InputStream inputStream) {
 		this.inputStream = inputStream;
 	}
 

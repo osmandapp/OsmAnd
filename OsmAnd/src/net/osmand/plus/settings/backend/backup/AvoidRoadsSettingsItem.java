@@ -137,8 +137,9 @@ public class AvoidRoadsSettingsItem extends CollectionSettingsItem<AvoidRoadInfo
 		}
 	}
 
+	@NonNull
 	@Override
-	void writeItemsToJson(@NonNull JSONObject json) {
+	JSONObject writeItemsToJson(@NonNull JSONObject json) {
 		JSONArray jsonArray = new JSONArray();
 		if (!items.isEmpty()) {
 			try {
@@ -160,6 +161,7 @@ public class AvoidRoadsSettingsItem extends CollectionSettingsItem<AvoidRoadInfo
 				SettingsHelper.LOG.error("Failed write to json", e);
 			}
 		}
+		return json;
 	}
 
 	@Nullable

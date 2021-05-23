@@ -137,8 +137,9 @@ public class PoiUiFiltersSettingsItem extends CollectionSettingsItem<PoiUIFilter
 		}
 	}
 
+	@NonNull
 	@Override
-	void writeItemsToJson(@NonNull JSONObject json) {
+	JSONObject writeItemsToJson(@NonNull JSONObject json) {
 		JSONArray jsonArray = new JSONArray();
 		Gson gson = new Gson();
 		Type type = new TypeToken<HashMap<PoiCategory, LinkedHashSet<String>>>() {
@@ -172,6 +173,7 @@ public class PoiUiFiltersSettingsItem extends CollectionSettingsItem<PoiUIFilter
 				SettingsHelper.LOG.error("Failed write to json", e);
 			}
 		}
+		return json;
 	}
 
 	@Nullable

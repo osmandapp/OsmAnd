@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 
 import net.osmand.AndroidNetworkUtils;
+import net.osmand.AndroidNetworkUtils.OnFileUploadCallback;
 import net.osmand.AndroidNetworkUtils.OnFilesDownloadCallback;
 import net.osmand.AndroidNetworkUtils.OnFilesUploadCallback;
 import net.osmand.AndroidNetworkUtils.OnRequestResultListener;
@@ -18,6 +19,8 @@ import net.osmand.AndroidNetworkUtils.Request;
 import net.osmand.AndroidNetworkUtils.RequestResponse;
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
+import net.osmand.PlatformUtil;
+import net.osmand.StreamWriter;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxDbHelper;
@@ -25,9 +28,11 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItem;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,7 +40,6 @@ import org.json.JSONObject;
 import java.io.File;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -98,6 +102,11 @@ public class BackupHelper {
 		void onBackupInfoGenerated(@Nullable BackupInfo backupInfo, @Nullable String error);
 	}
 
+	public interface OnUploadFileListener {
+		void onFileUploadProgress(@NonNull String fileName, int progress);
+		void onFileUploadDone(@NonNull String fileName, long uploadTime, @Nullable String error);
+	}
+
 	public interface OnUploadFilesListener {
 		void onFileUploadProgress(@NonNull File file, int progress);
 		void onFileUploadDone(@NonNull File file);
@@ -130,6 +139,11 @@ public class BackupHelper {
 		this.settings = app.getSettings();
 		this.favouritesHelper = app.getFavorites();
 		this.gpxHelper = app.getGpxDbHelper();
+	}
+
+	@NonNull
+	public OsmandApplication getApp() {
+		return app;
 	}
 
 	@SuppressLint("HardwareIds")
@@ -172,6 +186,14 @@ public class BackupHelper {
 		if (Algorithms.isEmpty(getDeviceId()) || Algorithms.isEmpty(getAccessToken())) {
 			throw new UserNotRegisteredException();
 		}
+	}
+
+	public void updateFileUploadTime(@NonNull String fileName, long updateTime) {
+		// TODO - implement
+	}
+
+	public void updateBackupUploadTime() {
+		settings.BACKUP_LAST_UPLOADED_TIME.set(System.currentTimeMillis() + 1);
 	}
 
 	public void logout() {
@@ -262,6 +284,40 @@ public class BackupHelper {
 				}
 				if (listener != null) {
 					listener.onRegisterDevice(status, message, error);
+				}
+			}
+		}, EXECUTOR);
+	}
+
+	public void uploadFile(@NonNull String fileName, @NonNull StreamWriter streamWriter,
+						   @Nullable final OnUploadFileListener listener) throws UserNotRegisteredException {
+		checkRegistered();
+
+		final long uploadTime = System.currentTimeMillis();
+
+		Map<String, String> params = new HashMap<>();
+		params.put("deviceid", getDeviceId());
+		params.put("accessToken", getAccessToken());
+		params.put("name", fileName);
+		params.put("type", Algorithms.getFileExtension(new File(fileName)));
+		params.put("clienttime", String.valueOf(uploadTime));
+
+		Map<String, String> headers = new HashMap<>();
+		headers.put("Accept-Encoding", "deflate, gzip");
+
+		AndroidNetworkUtils.uploadFileAsync(UPLOAD_FILE_URL, streamWriter, fileName, true, params, headers, new OnFileUploadCallback() {
+
+			@Override
+			public void onFileUploadProgress(int progress) {
+				if (listener != null) {
+					listener.onFileUploadProgress(fileName, progress);
+				}
+			}
+
+			@Override
+			public void onFileUploadDone(@Nullable String error) {
+				if (listener != null) {
+					listener.onFileUploadDone(fileName, uploadTime, resolveServerError(error));
 				}
 			}
 		}, EXECUTOR);
@@ -579,17 +635,23 @@ public class BackupHelper {
 		Map<File, String> resolvedErrors = new HashMap<>();
 		for (Entry<File, String> fileError : errors.entrySet()) {
 			File file = fileError.getKey();
-			String errorStr = fileError.getValue();
-			try {
-				JSONObject errorJson = new JSONObject(errorStr);
-				JSONObject error = errorJson.getJSONObject("error");
-				errorStr = "Error " + error.getInt("errorCode") + " (" + error.getString("message") + ")";
-			} catch (JSONException e) {
-				// ignore
-			}
+			String errorStr = resolveServerError(fileError.getValue());
 			resolvedErrors.put(file, errorStr);
 		}
 		return resolvedErrors;
+	}
+
+	@NonNull
+	private String resolveServerError(String fileError) {
+		String errorStr = fileError;
+		try {
+			JSONObject errorJson = new JSONObject(errorStr);
+			JSONObject error = errorJson.getJSONObject("error");
+			errorStr = "Error " + error.getInt("errorCode") + " (" + error.getString("message") + ")";
+		} catch (JSONException e) {
+			// ignore
+		}
+		return errorStr;
 	}
 
 	private String parseServerError(@NonNull String error) {

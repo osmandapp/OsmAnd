@@ -1,6 +1,9 @@
 package net.osmand.plus.settings.backend.backup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import net.osmand.IProgress;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -19,5 +22,5 @@ public abstract class SettingsItemWriter<T extends SettingsItem> {
 		return item;
 	}
 
-	public abstract boolean writeToStream(@NonNull OutputStream outputStream) throws IOException;
+	public abstract void writeToStream(@NonNull OutputStream outputStream, @Nullable IProgress progress) throws IOException;
 }

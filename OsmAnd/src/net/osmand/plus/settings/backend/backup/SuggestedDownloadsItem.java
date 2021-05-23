@@ -83,8 +83,9 @@ public class SuggestedDownloadsItem extends SettingsItem {
 		}
 	}
 
+	@NonNull
 	@Override
-	void writeItemsToJson(@NonNull JSONObject json) {
+	JSONObject writeItemsToJson(@NonNull JSONObject json) {
 		JSONArray jsonArray = new JSONArray();
 		if (!items.isEmpty()) {
 			try {
@@ -112,6 +113,7 @@ public class SuggestedDownloadsItem extends SettingsItem {
 				SettingsHelper.LOG.error("Failed write to json", e);
 			}
 		}
+		return json;
 	}
 
 	@Nullable

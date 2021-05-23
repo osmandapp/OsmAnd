@@ -1,115 +1,67 @@
 package net.osmand.plus.backup;
 
-import net.osmand.plus.settings.backend.backup.FileSettingsItem;
-import net.osmand.plus.settings.backend.backup.SettingsHelper;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import net.osmand.plus.backup.BackupHelper.OnUploadFileListener;
+import net.osmand.plus.settings.backend.backup.Exporter;
+import net.osmand.plus.settings.backend.backup.JsonSettingsItem;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ExportProgressListener;
 import net.osmand.plus.settings.backend.backup.SettingsItem;
 import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
 import net.osmand.util.Algorithms;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
+import java.util.List;
 
-import static net.osmand.plus.settings.backend.backup.SettingsHelper.BUFFER;
-import static net.osmand.plus.settings.backend.backup.SettingsHelper.VERSION;
+public class BackupExporter extends Exporter {
 
-public class BackupExporter {
+	private final BackupHelper backupHelper;
 
-	private final Map<String, SettingsItem> items;
-	private final Map<String, String> additionalParams;
-	private final ExportProgressListener progressListener;
-
-	private final boolean exportItemsFiles;
-	private boolean cancelled;
-
-	BackupExporter(ExportProgressListener progressListener, boolean exportItemsFiles) {
-		this.progressListener = progressListener;
-		this.exportItemsFiles = exportItemsFiles;
-		items = new LinkedHashMap<>();
-		additionalParams = new LinkedHashMap<>();
+	BackupExporter(@NonNull BackupHelper backupHelper, @Nullable ExportProgressListener progressListener) {
+		super(progressListener);
+		this.backupHelper = backupHelper;
 	}
 
-	void addSettingsItem(SettingsItem item) throws IllegalArgumentException {
-		if (items.containsKey(item.getName())) {
-			throw new IllegalArgumentException("Already has such item: " + item.getName());
-		}
-		items.put(item.getName(), item);
+	@Override
+	public void export() throws JSONException, IOException {
+		writeItems();
 	}
 
-	public void setCancelled(boolean cancelled) {
-		this.cancelled = cancelled;
-	}
+	private void writeItems() throws JSONException, IOException {
+		List<SettingsItemWriter<? extends SettingsItem>> itemWriters = getItemWriters();
+		final int itemWritersCount = itemWriters.size();
+		OnUploadFileListener uploadFileListener = new OnUploadFileListener() {
 
-	void addAdditionalParam(String key, String value) {
-		additionalParams.put(key, value);
-	}
+			int processed = 0;
 
-	void exportSettings() throws JSONException, IOException {
-		JSONObject json = createItemsJson();
-		OutputStream os = new BufferedOutputStream(new FileOutputStream(file), BUFFER);
-		ZipOutputStream zos = new ZipOutputStream(os);
-		try {
-			ZipEntry entry = new ZipEntry("items.json");
-			zos.putNextEntry(entry);
-			zos.write(json.toString(2).getBytes("UTF-8"));
-			zos.closeEntry();
-			if (exportItemsFiles) {
-				writeItemFiles(zos);
-			}
-			zos.flush();
-			zos.finish();
-		} finally {
-			Algorithms.closeStream(zos);
-			Algorithms.closeStream(os);
-		}
-	}
-
-	private void writeItemFiles(ZipOutputStream zos) throws IOException {
-		int progress = 0;
-		for (SettingsItem item : items.values()) {
-			SettingsItemWriter<? extends SettingsItem> writer = item.getWriter();
-			if (writer != null) {
-				String fileName = item.getFileName();
-				if (Algorithms.isEmpty(fileName)) {
-					fileName = item.getDefaultFileName();
-				}
-				writer.writeEntry(fileName, zos);
-			}
-			if (cancelled) {
-				return;
-			}
-			if (item instanceof FileSettingsItem) {
-				int size = (int) ((FileSettingsItem) item).getSize() / (1 << 20);
-				progress += size;
-				if (progressListener != null) {
-					progressListener.updateProgress(progress);
+			@Override
+			public void onFileUploadProgress(@NonNull String fileName, int progress) {
+				if (getProgressListener() != null) {
+					getProgressListener().updateProgress(progress);
 				}
 			}
-		}
-	}
 
-	private JSONObject createItemsJson() throws JSONException {
-		JSONObject json = new JSONObject();
-		json.put("version", VERSION);
-		for (Map.Entry<String, String> param : additionalParams.entrySet()) {
-			json.put(param.getKey(), param.getValue());
-		}
-		JSONArray itemsJson = new JSONArray();
-		for (SettingsItem item : items.values()) {
-			itemsJson.put(new JSONObject(item.toJson()));
-		}
-		json.put("items", itemsJson);
-		return json;
+			@Override
+			public void onFileUploadDone(@NonNull String fileName, long uploadTime, @Nullable String error) {
+				processed++;
+				if (!Algorithms.isEmpty(error)) {
+					setCancelled(true);
+				} else {
+					backupHelper.updateFileUploadTime(fileName, uploadTime);
+				}
+				if (processed == itemWritersCount && !isCancelled()) {
+					backupHelper.updateBackupUploadTime();
+				}
+			}
+		};
+		NetworkWriter networkWriter = new NetworkWriter(backupHelper, uploadFileListener);
+		JSONObject backupJson = createItemsJson();
+		JsonSettingsItem jsonItem = new JsonSettingsItem(backupHelper.getApp(), "backup", backupJson);
+		networkWriter.write(jsonItem.getWriter());
+		writeItems(networkWriter, itemWriters);
 	}
 }

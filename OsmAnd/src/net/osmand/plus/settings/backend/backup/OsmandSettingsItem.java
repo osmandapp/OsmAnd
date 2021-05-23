@@ -10,7 +10,7 @@ import org.json.JSONObject;
 
 public abstract class OsmandSettingsItem extends SettingsItem {
 
-	private OsmandSettings settings;
+	private final OsmandSettings settings;
 
 	protected OsmandSettingsItem(@NonNull OsmandSettings settings) {
 		super(settings.getContext());

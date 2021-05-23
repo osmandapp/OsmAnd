@@ -254,7 +254,7 @@ public class SettingsHelper {
 						@NonNull List<SettingsItem> items, boolean exportItemsFiles) {
 			this.file = settingsFile;
 			this.listener = listener;
-			this.exporter = new SettingsExporter(getProgressListener(), exportItemsFiles);
+			this.exporter = new SettingsExporter(file, getProgressListener(), exportItemsFiles);
 			for (SettingsItem item : items) {
 				exporter.addSettingsItem(item);
 			}
@@ -263,7 +263,7 @@ public class SettingsHelper {
 		@Override
 		protected Boolean doInBackground(Void... voids) {
 			try {
-				exporter.exportSettings(file);
+				exporter.export();
 				return true;
 			} catch (JSONException e) {
 				LOG.error("Failed to export items to: " + file.getName(), e);
@@ -450,7 +450,7 @@ public class SettingsHelper {
 						duplicateItems.add(((ProfileSettingsItem) item).getModeBean());
 					}
 				} else if (item instanceof CollectionSettingsItem<?>) {
-					CollectionSettingsItem settingsItem = (CollectionSettingsItem) item;
+					CollectionSettingsItem<?> settingsItem = (CollectionSettingsItem<?>) item;
 					List<?> duplicates = settingsItem.processDuplicateItems();
 					if (!duplicates.isEmpty() && settingsItem.shouldShowDuplicates()) {
 						duplicateItems.addAll(duplicates);
@@ -496,7 +496,7 @@ public class SettingsHelper {
 		typesMap.putAll(getMyPlacesItems());
 		typesMap.putAll(getResourcesItems());
 
-		return getFilteredSettingsItems(typesMap, settingsTypes, Collections.<SettingsItem>emptyList(), export);
+		return getFilteredSettingsItems(typesMap, settingsTypes, Collections.emptyList(), export);
 	}
 
 	public List<SettingsItem> getFilteredSettingsItems(

@@ -16,14 +16,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-class SettingsItemsFactory {
+public class SettingsItemsFactory {
 
-	private OsmandApplication app;
-	private List<SettingsItem> items = new ArrayList<>();
+	private final OsmandApplication app;
+	private final List<SettingsItem> items = new ArrayList<>();
 
-	SettingsItemsFactory(@NonNull OsmandApplication app, String jsonStr) throws IllegalArgumentException, JSONException {
+	public SettingsItemsFactory(@NonNull OsmandApplication app, JSONObject json) throws IllegalArgumentException, JSONException {
 		this.app = app;
-		collectItems(new JSONObject(jsonStr));
+		collectItems(json);
+	}
+
+	public SettingsItemsFactory(@NonNull OsmandApplication app, String jsonStr) throws IllegalArgumentException, JSONException {
+		this(app, new JSONObject(jsonStr));
 	}
 
 	private void collectItems(JSONObject json) throws IllegalArgumentException, JSONException {

@@ -140,8 +140,9 @@ public class QuickActionsSettingsItem extends CollectionSettingsItem<QuickAction
 		}
 	}
 
+	@NonNull
 	@Override
-	void writeItemsToJson(@NonNull JSONObject json) {
+	JSONObject writeItemsToJson(@NonNull JSONObject json) {
 		JSONArray jsonArray = new JSONArray();
 		Gson gson = new Gson();
 		Type type = new TypeToken<HashMap<String, String>>() {
@@ -162,6 +163,7 @@ public class QuickActionsSettingsItem extends CollectionSettingsItem<QuickAction
 				SettingsHelper.LOG.error("Failed write to json", e);
 			}
 		}
+		return json;
 	}
 
 	@Nullable

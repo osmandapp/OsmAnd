@@ -108,8 +108,9 @@ public class SearchHistorySettingsItem extends CollectionSettingsItem<HistoryEnt
 		}
 	}
 
+	@NonNull
 	@Override
-	void writeItemsToJson(@NonNull JSONObject json) {
+	JSONObject writeItemsToJson(@NonNull JSONObject json) {
 		JSONArray jsonArray = new JSONArray();
 		if (!items.isEmpty()) {
 			try {
@@ -130,6 +131,7 @@ public class SearchHistorySettingsItem extends CollectionSettingsItem<HistoryEnt
 				SettingsHelper.LOG.error("Failed write to json", e);
 			}
 		}
+		return json;
 	}
 
 	@Override

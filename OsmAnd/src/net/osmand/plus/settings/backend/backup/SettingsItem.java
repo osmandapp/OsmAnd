@@ -7,6 +7,8 @@ import androidx.annotation.Nullable;
 
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.IProgress;
+import net.osmand.ProgressOutputStream;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.util.Algorithms;
@@ -15,6 +17,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -163,8 +167,10 @@ public abstract class SettingsItem {
 		// override
 	}
 
-	void writeItemsToJson(@NonNull JSONObject json) {
+	@NonNull
+	JSONObject writeItemsToJson(@NonNull JSONObject json) {
 		// override
+		return json;
 	}
 
 	@Nullable
@@ -205,20 +211,17 @@ public abstract class SettingsItem {
 	SettingsItemWriter<? extends SettingsItem> getJsonWriter() {
 		return new SettingsItemWriter<SettingsItem>(this) {
 			@Override
-			public boolean writeToStream(@NonNull OutputStream outputStream) throws IOException {
-				JSONObject json = new JSONObject();
-				writeItemsToJson(json);
+			public void writeToStream(@NonNull OutputStream outputStream, @Nullable IProgress progress) throws IOException {
+				JSONObject json = writeItemsToJson(new JSONObject());
 				if (json.length() > 0) {
 					try {
-						String s = json.toString(2);
-						outputStream.write(s.getBytes("UTF-8"));
+						InputStream inputStream = new ByteArrayInputStream(json.toString(2).getBytes("UTF-8"));
+						Algorithms.streamCopy(inputStream, outputStream, progress, 1024);
 					} catch (JSONException e) {
 						warnings.add(app.getString(R.string.settings_item_write_error, String.valueOf(getType())));
 						SettingsHelper.LOG.error("Failed to write json to stream", e);
 					}
-					return true;
 				}
-				return false;
 			}
 		};
 	}
@@ -227,14 +230,14 @@ public abstract class SettingsItem {
 	SettingsItemWriter<? extends SettingsItem> getGpxWriter(@NonNull final GPXFile gpxFile) {
 		return new SettingsItemWriter<SettingsItem>(this) {
 			@Override
-			public boolean writeToStream(@NonNull OutputStream outputStream) throws IOException {
-				Exception error = GPXUtilities.writeGpx(new OutputStreamWriter(outputStream, "UTF-8"), gpxFile);
+			public void writeToStream(@NonNull OutputStream outputStream, @Nullable IProgress progress) throws IOException {
+				ProgressOutputStream progressOutputStream = new ProgressOutputStream(outputStream, progress);
+				Exception error = GPXUtilities.writeGpx(
+						new BufferedWriter(new OutputStreamWriter(progressOutputStream, "UTF-8")), gpxFile);
 				if (error != null) {
 					warnings.add(app.getString(R.string.settings_item_write_error, String.valueOf(getType())));
 					SettingsHelper.LOG.error("Failed write to gpx file", error);
-					return false;
 				}
-				return true;
 			}
 		};
 	}

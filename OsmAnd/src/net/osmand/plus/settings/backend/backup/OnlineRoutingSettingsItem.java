@@ -117,8 +117,9 @@ public class OnlineRoutingSettingsItem extends CollectionSettingsItem<OnlineRout
 		}
 	}
 
+	@NonNull
 	@Override
-	void writeItemsToJson(@NonNull JSONObject json) {
+	JSONObject writeItemsToJson(@NonNull JSONObject json) {
 		if (!items.isEmpty()) {
 			try {
 				OnlineRoutingUtils.writeToJson(json, items);
@@ -127,6 +128,7 @@ public class OnlineRoutingSettingsItem extends CollectionSettingsItem<OnlineRout
 				SettingsHelper.LOG.error("Failed write to json", e);
 			}
 		}
+		return json;
 	}
 
 	@Nullable

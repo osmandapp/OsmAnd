@@ -160,8 +160,9 @@ public class OsmEditsSettingsItem extends CollectionSettingsItem<OpenstreetmapPo
 		}
 	}
 
+	@NonNull
 	@Override
-	void writeItemsToJson(@NonNull JSONObject json) {
+	JSONObject writeItemsToJson(@NonNull JSONObject json) {
 		JSONArray jsonArray = new JSONArray();
 		if (!items.isEmpty()) {
 			try {
@@ -186,6 +187,7 @@ public class OsmEditsSettingsItem extends CollectionSettingsItem<OpenstreetmapPo
 				SettingsHelper.LOG.error("Failed write to json", e);
 			}
 		}
+		return json;
 	}
 
 	@Nullable

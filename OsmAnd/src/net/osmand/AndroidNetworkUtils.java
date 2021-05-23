@@ -51,6 +51,11 @@ public class AndroidNetworkUtils {
 		void onResult(@Nullable String result, @Nullable String error);
 	}
 
+	public interface OnFileUploadCallback {
+		void onFileUploadProgress(int percent);
+		void onFileUploadDone(@Nullable String error);
+	}
+
 	public interface OnFilesUploadCallback {
 		@Nullable
 		Map<String, String> getAdditionalParams(@NonNull File file);
@@ -515,6 +520,23 @@ public class AndroidNetworkUtils {
 									@NonNull Map<String, String> additionalParams,
 									@Nullable Map<String, String> headers,
 									@Nullable IProgress progress) {
+		BufferedInputStream bis = new BufferedInputStream(inputStream, 20 * 1024);
+		StreamWriter streamWriter = new StreamWriter() {
+			@Override
+			public void write(OutputStream outputStream, IProgress progress) throws IOException {
+				Algorithms.streamCopy(bis, outputStream, progress, 1024);
+				outputStream.flush();
+				Algorithms.closeStream(bis);
+			}
+		};
+		return uploadFile(urlText, streamWriter, fileName, gzip, additionalParams, headers, progress);
+	}
+
+	public static String uploadFile(@NonNull String urlText, @NonNull StreamWriter streamWriter,
+									@NonNull String fileName, boolean gzip,
+									@NonNull Map<String, String> additionalParams,
+									@Nullable Map<String, String> headers,
+									@Nullable IProgress progress) {
 		try {
 			boolean firstPrm = !urlText.contains("?");
 			StringBuilder sb = new StringBuilder(urlText);
@@ -547,20 +569,17 @@ public class AndroidNetworkUtils {
 			ous.write(("content-disposition: form-data; name=\"file\"; filename=\"" + fileName + "\"\r\n").getBytes());
 			ous.write(("Content-Type: application/octet-stream\r\n\r\n").getBytes());
 
-			BufferedInputStream bis = new BufferedInputStream(inputStream, 20 * 1024);
 			ous.flush();
 			if (gzip) {
 				GZIPOutputStream gous = new GZIPOutputStream(ous, 1024);
-				Algorithms.streamCopy(bis, gous, progress, 1024);
+				streamWriter.write(gous, progress);
 				gous.flush();
 				gous.finish();
 			} else {
-				Algorithms.streamCopy(bis, ous, progress, 1024);
+				streamWriter.write(ous, progress);
 			}
-
 			ous.write(("\r\n--" + BOUNDARY + "--\r\n").getBytes());
 			ous.flush();
-			Algorithms.closeStream(bis);
 			Algorithms.closeStream(ous);
 
 			LOG.info("Finish uploading file " + fileName);
@@ -671,6 +690,82 @@ public class AndroidNetworkUtils {
 			protected void onPostExecute(@NonNull Map<File, String> errors) {
 				if (callback != null) {
 					callback.onFilesUploadDone(errors);
+				}
+			}
+
+		}.executeOnExecutor(executor, (Void) null);
+	}
+
+	public static void uploadFileAsync(final @NonNull String url,
+										final @NonNull InputStream inputStream,
+										final @NonNull String fileName,
+										final boolean gzip,
+										final @NonNull Map<String, String> parameters,
+										final @Nullable Map<String, String> headers,
+										final OnFileUploadCallback callback,
+										final Executor executor) {
+
+		BufferedInputStream bis = new BufferedInputStream(inputStream, 20 * 1024);
+		StreamWriter streamWriter = new StreamWriter() {
+			@Override
+			public void write(OutputStream outputStream, IProgress progress) throws IOException {
+				Algorithms.streamCopy(bis, outputStream, progress, 1024);
+				outputStream.flush();
+				Algorithms.closeStream(bis);
+			}
+		};
+		uploadFileAsync(url, streamWriter, fileName, gzip, parameters, headers, callback, executor);
+	}
+
+	public static void uploadFileAsync(final @NonNull String url,
+										final @NonNull StreamWriter streamWriter,
+										final @NonNull String fileName,
+										final boolean gzip,
+										final @NonNull Map<String, String> parameters,
+										final @Nullable Map<String, String> headers,
+										final OnFileUploadCallback callback,
+										final Executor executor) {
+
+		new AsyncTask<Void, Integer, String>() {
+
+			@Override
+			@Nullable
+			protected String doInBackground(Void... v) {
+				String error;
+				final int[] progressValue = {0};
+				publishProgress(0);
+				IProgress progress = null;
+				if (callback != null) {
+					progress = new NetworkProgress() {
+						@Override
+						public void progress(int deltaWork) {
+							progressValue[0] += deltaWork;
+							publishProgress(progressValue[0]);
+						}
+					};
+				}
+				try {
+					error = uploadFile(url, streamWriter, fileName, gzip, parameters, headers, progress);
+				} catch (Exception e) {
+					error = e.getMessage();
+				}
+				return error;
+			}
+
+			@Override
+			protected void onProgressUpdate(Integer... p) {
+				if (callback != null) {
+					Integer progress = p[0];
+					if (progress >= 0) {
+						callback.onFileUploadProgress(progress);
+					}
+				}
+			}
+
+			@Override
+			protected void onPostExecute(@Nullable String error) {
+				if (callback != null) {
+					callback.onFileUploadDone(error);
 				}
 			}
 

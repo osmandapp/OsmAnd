@@ -1,7 +1,9 @@
 package net.osmand.plus.settings.backend.backup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
+import net.osmand.IProgress;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -13,9 +15,11 @@ import java.util.zip.ZipOutputStream;
 public class ZipWriter implements AbstractWriter {
 
 	private final ZipOutputStream zos;
+	private final IProgress progress;
 
-	public ZipWriter(@NonNull ZipOutputStream zos) {
+	public ZipWriter(@NonNull ZipOutputStream zos, @Nullable IProgress progress) {
 		this.zos = zos;
+		this.progress = progress;
 	}
 
 	@Override
@@ -34,15 +38,15 @@ public class ZipWriter implements AbstractWriter {
 			FileSettingsItem fileSettingsItem = (FileSettingsItem) itemWriter.getItem();
 			writeDirWithFiles(itemWriter, fileSettingsItem.getFile(), zos);
 		} else {
-			writeEntryToStream(itemWriter, fileName, zos);
+			writeItemToStream(itemWriter, fileName, zos);
 		}
 	}
 
-	private void writeEntryToStream(@NonNull SettingsItemWriter<? extends SettingsItem> itemWriter,
-									@NonNull String fileName, @NonNull ZipOutputStream zos) throws IOException {
+	private void writeItemToStream(@NonNull SettingsItemWriter<? extends SettingsItem> itemWriter,
+								   @NonNull String fileName, @NonNull ZipOutputStream zos) throws IOException {
 		ZipEntry entry = createNewEntry(itemWriter, fileName);
 		zos.putNextEntry(entry);
-		itemWriter.writeToStream(zos);
+		itemWriter.writeToStream(zos, progress);
 		zos.closeEntry();
 	}
 
@@ -72,7 +76,7 @@ public class ZipWriter implements AbstractWriter {
 					? file.getName()
 					: file.getPath().substring(file.getPath().indexOf(subtypeFolder) - 1);
 			fileSettingsItem.setInputStream(new FileInputStream(file));
-			writeEntryToStream(itemWriter, zipEntryName, zos);
+			writeItemToStream(itemWriter, zipEntryName, zos);
 		}
 	}
 }
