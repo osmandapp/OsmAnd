@@ -784,7 +784,7 @@
     <string name="map_widget_view_direction">Direção da visualização</string>
     <string name="map_widget_transparent">Widgets transparentes</string>
     <string name="int_continuosly">Contínuo</string>
-    <string name="email">e-mail</string>
+    <string name="email">email</string>
     <string name="osmand_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions / direções de navegação automatizadas do OSM)
 \n
 \nO OsmAnd é uma aplicação de navegação com código-fonte aberto, com acesso a uma ampla variedade de dados globais do OpenStreetMap (OSM). Todos os dados dos mapas (vetoriais ou imagens raster) podem ser armazenados no cartão de memória do telemóvel para usar quando não tiver Internet. O OsmAnd também permite usar rotas, tanto ligado como desligado da Internet, incluindo a funcionalidade de rotas curva a curva com orientação por voz.
@@ -1720,7 +1720,7 @@
     <string name="osm_live_month_cost_desc">Pagamento mensal</string>
     <string name="osm_live_active">Ativo</string>
     <string name="osm_live_not_active">Inativo</string>
-    <string name="osm_live_enter_email">Favor introduzir um endereço de e-mail válido</string>
+    <string name="osm_live_enter_email">Favor introduzir um endereço de email válido</string>
     <string name="osm_live_enter_user_name">Introduza um nome público</string>
     <string name="osm_live_thanks">Obrigado por apoiar o OsmAnd!
 \nPara ativar todos os novos recursos tem que reiniciar o OsmAnd.</string>
@@ -1759,7 +1759,7 @@
     <string name="find_parking">Encontrar estacionamento</string>
     <string name="shared_string_status">Situação</string>
     <string name="shared_string_save_changes">Guardar alterações</string>
-    <string name="shared_string_email_address">Endereço de e-mail</string>
+    <string name="shared_string_email_address">Endereço de email</string>
     <string name="data_is_not_available">Dados não disponíveis</string>
     <string name="shared_string_remove">Remover</string>
     <string name="shared_string_read_more">Ler mais</string>
@@ -1955,7 +1955,7 @@
     <string name="no_overlay">Sem camada superior</string>
     <string name="no_underlay">Sem camada inferior</string>
     <string name="subscribe_email_error">Erro</string>
-    <string name="subscribe_email_desc">Assine a nossa lista de e-mail sobre descontos da aplicação e ganhe mais 3 descarregamentos de mapas!</string>
+    <string name="subscribe_email_desc">Inscreva-se na nossa lista de email sobre descontos da aplicação e ganhe mais 3 descarregamentos de mapas!</string>
     <string name="depth_contour_descr">Curvas de nível de profundidade marítima e seamarks.</string>
     <string name="sea_depth_thanks">Muito obrigado por comprar \'Contornos de profundidade náutica\'</string>
     <string name="index_item_depth_contours_osmand_ext">Curvas de profundidades náuticas</string>
@@ -3574,7 +3574,7 @@
     <string name="lang_an">Aragonês</string>
     <string name="lang_lmo">Lombardo</string>
     <string name="custom_color">Cor personalizada</string>
-    <string name="search_poi_types_descr">Combinar categorias de POI de categorias diferentes. Toque em trocar para selecionar tudo, toque no lado esquerdo para seleção da categoria.</string>
+    <string name="search_poi_types_descr">Combinar categorias de POI de categorias diferentes. Toque em trocar para selecionar tudo, toque no lado esquerdo para selecionar as categorias.</string>
     <string name="quick_action_transport_descr">Botão que mostra ou oculta os transportes públicos no mapa.</string>
     <string name="create_edit_poi">Criar ou editar um POI</string>
     <string name="parking_positions">Posições de estacionamento</string>
@@ -4112,4 +4112,27 @@
     <string name="route_line_use_map_style_width">Usar a espessura padrão das linhas do estilo do mapa (%1$s).</string>
     <string name="route_line_use_map_style_color">Usar a cor predefinida do estilo do mapa (%1$s).</string>
     <string name="poi_routes">Rotas</string>
+    <string name="search_more">Pesquisar mais…</string>
+    <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
+    <string name="backup_into_file">Restaurar de um ficheiro</string>
+    <string name="restore_from_file">Restaurar de um ficheiro</string>
+    <string name="osmand_cloud_help_descr">Precisa de ajuda\? Por favor contacte-nos em %1$s</string>
+    <string name="osmand_cloud_create_account_descr">Introduza o seu endereço de email, todos os seus dados serão ligados a ele.
+\nVamos enviar um código de verificação para este endereço de email.</string>
+    <string name="osmand_cloud_login_descr">Por favor, introduza o endereço de email que usou para o registo da conta. Enviaremos uma palavra-passe única, que será necessária para o próximo passo.</string>
+    <string name="verify_email_address">Verifique o endereço de email</string>
+    <string name="verify_email_address_descr">Enviámos um código de verificação para %1$s, por favor introduza-o no campo abaixo.</string>
+    <string name="enter_verification_code">Introduza o código de 4 dígitos</string>
+    <string name="cloud_email_not_registered">Este email ainda não foi registado no OsmAnd Cloud</string>
+    <string name="cloud_email_already_registered">A conta com este email já está registada.</string>
+    <string name="resend_verification_code">Reenviar código</string>
+    <string name="verification_code_missing">Não recebi o código de verificação</string>
+    <string name="verification_code_missing_description">O tempo de espera pelo código pode ser de 10 minutos, também pode verificar a sua pasta de spam. Se não o encontrar, use o botão abaixo.</string>
+    <string name="backup_and_restore">Cópia de segurança e restauro</string>
+    <string name="last_backup">Última cópia de segurança</string>
+    <string name="duration_ago">%1$s atrás</string>
+    <string name="osmand_cloud">OsmAnd Cloud</string>
+    <string name="osmand_cloud_authorize_descr">Nunca perca os seus dados, faça uma cópia de segurança e restaure todas as informações sem problemas.</string>
+    <string name="local_backup">Cópia de segurança local</string>
+    <string name="local_backup_descr">Faça um cópia de segurança ou restaure dados de um ficheiro no seu dispositivo.</string>
 </resources>

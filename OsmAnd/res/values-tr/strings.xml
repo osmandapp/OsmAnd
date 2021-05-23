@@ -4107,4 +4107,27 @@
     <string name="poi_routes">Güzergah</string>
     <string name="routing_attr_avoid_low_emission_zone_description">Düşük emisyon bölgelerinden kaçın</string>
     <string name="routing_attr_avoid_low_emission_zone_name">Düşük emisyon bölgelerinden kaçın</string>
+    <string name="search_more">Daha fazla ara…</string>
+    <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
+    <string name="backup_and_restore">Yedekle &amp; Geri Yükle</string>
+    <string name="last_backup">Son yedekleme</string>
+    <string name="duration_ago">%1$s önce</string>
+    <string name="osmand_cloud">OsmAnd Cloud</string>
+    <string name="osmand_cloud_authorize_descr">Verilerinizi asla kaybetmeyin, tüm bilgileri sorunsuz bir şekilde yedekleyin ve geri yükleyin.</string>
+    <string name="local_backup">Yerel yedekleme</string>
+    <string name="local_backup_descr">Yerel bir dosyadan verileri yedekleyin veya geri yükleyin.</string>
+    <string name="backup_into_file">Dosyaya yedekle</string>
+    <string name="restore_from_file">Dosyadan geri yükle</string>
+    <string name="osmand_cloud_help_descr">Yardıma mı ihtiyacınız var\? Lütfen %1$s adresinden bizimle iletişime geçin</string>
+    <string name="osmand_cloud_create_account_descr">Lütfen e-posta adresinizi girin, tüm verileriniz ona bağlanacaktır.
+\nBu e-posta adresine bir doğrulama kodu göndereceğiz.</string>
+    <string name="osmand_cloud_login_descr">Lütfen kayıt için kullandığınız e-posta adresini girin. Bir sonraki adımda size gerekli olan tek seferlik bir parola göndereceğiz.</string>
+    <string name="verify_email_address">E-posta adresini doğrula</string>
+    <string name="verify_email_address_descr">%1$s adresine bir doğrulama kodu gönderdik, lütfen aşağıdaki alana girin.</string>
+    <string name="enter_verification_code">4 haneli kodu girin</string>
+    <string name="cloud_email_not_registered">Bu e-posta adresi OsmAnd Cloud için kaydolmadı</string>
+    <string name="cloud_email_already_registered">Bu e-posta adresine sahip bir hesap zaten kayıtlı.</string>
+    <string name="resend_verification_code">Kodu yeniden gönder</string>
+    <string name="verification_code_missing">Doğrulama kodunu almadım</string>
+    <string name="verification_code_missing_description">Kod için bekleme süresi 10 dakika olabilir, ayrıca spam klasörünüzü de bakabilirsiniz. Yardımcı olmazsa aşağıdaki düğmeyi kullanın.</string>
 </resources>

@@ -4101,4 +4101,27 @@
     <string name="poi_routes">Trasy</string>
     <string name="routing_attr_avoid_low_emission_zone_description">Vyhnúť sa zónam nízkych emisií</string>
     <string name="routing_attr_avoid_low_emission_zone_name">Povoliť vjazd do zóny nízkych emisií</string>
+    <string name="search_more">Hľadať ďalšie…</string>
+    <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
+    <string name="backup_and_restore">Zálohovanie &amp; Obnovenie</string>
+    <string name="last_backup">Posledná záloha</string>
+    <string name="duration_ago">pred %1$s</string>
+    <string name="osmand_cloud">OsmAnd Cloud</string>
+    <string name="osmand_cloud_authorize_descr">Nikdy nestraťte svoje údaje, zálohujte a obnovujte údaje bez problémov.</string>
+    <string name="local_backup">Lokálna záloha</string>
+    <string name="local_backup_descr">Zálohovať alebo obnoviť údaje z lokálneho súboru.</string>
+    <string name="backup_into_file">Zálohovať do súboru</string>
+    <string name="restore_from_file">Obnoviť zo súboru</string>
+    <string name="osmand_cloud_help_descr">Potrebujete pomoc\? Prosím kontaktujte nás na %1$s</string>
+    <string name="osmand_cloud_create_account_descr">Prosím zadajte vašu emailovú adresy, na ktorú budú naviazané všetky údaje.
+\nPošleme na ňu overovací kód.</string>
+    <string name="osmand_cloud_login_descr">Prosím zadajte emailovú adresu, ktorú ste použili na registráciu. Pošleme vám jednorazové heslo potrebné pre ďalší krok.</string>
+    <string name="verify_email_address">Overiť emailovú adresu</string>
+    <string name="verify_email_address_descr">Poslali sme overovací kód na %1$s, prosím zadajte ho do poľa nižšie.</string>
+    <string name="enter_verification_code">Zadajte 4-miestny kód</string>
+    <string name="cloud_email_not_registered">Táto emailová adresa nebola registrovaná pre OsmAnd Cloud</string>
+    <string name="cloud_email_already_registered">Účet s touto emailovou adresou je už zaregistrovaný.</string>
+    <string name="resend_verification_code">Poslať kód znovu</string>
+    <string name="verification_code_missing">Neobdržal som overovací kód</string>
+    <string name="verification_code_missing_description">Čakacia doba na kód môže byť 10 minút, skontrolujte aj svoj priečinok nevyžiadanej pošty. Ak to nepomôže, použite tlačidlo nižšie.</string>
 </resources>

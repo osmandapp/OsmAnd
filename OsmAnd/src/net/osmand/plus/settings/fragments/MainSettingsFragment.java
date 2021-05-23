@@ -1,5 +1,6 @@
 package net.osmand.plus.settings.fragments;
 
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -14,10 +15,12 @@ import androidx.preference.PreferenceViewHolder;
 
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.development.TestBackupActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.profiles.ProfileDataUtils;
 import net.osmand.plus.profiles.SelectProfileBottomSheet;
@@ -37,10 +40,13 @@ import static net.osmand.plus.importfiles.ImportHelper.ImportType.SETTINGS;
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILES_LIST_UPDATED_ARG;
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILE_KEY_ARG;
 
-public class MainSettingsFragment extends BaseSettingsFragment implements OnSelectProfileCallback{
+public class MainSettingsFragment extends BaseSettingsFragment implements OnSelectProfileCallback {
 
 	public static final String TAG = MainSettingsFragment.class.getName();
 
+	private static final int MIN_DURATION_FOR_DATE_FORMAT = 48 * 60 * 60;
+
+	private static final String BACKUP_AND_RESTORE = "backup_and_restore";
 	private static final String CONFIGURE_PROFILE = "configure_profile";
 	private static final String APP_PROFILES = "app_profiles";
 	private static final String PURCHASES_SETTINGS = "purchases_settings";
@@ -48,7 +54,6 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 	private static final String CREATE_PROFILE = "create_profile";
 	private static final String IMPORT_PROFILE = "import_profile";
 	private static final String REORDER_PROFILES = "reorder_profiles";
-	private static final String EXPORT_PROFILES = "export_profiles";
 
 	private List<ApplicationMode> allAppModes;
 	private Set<ApplicationMode> availableAppModes;
@@ -70,6 +75,7 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 		availableAppModes = new LinkedHashSet<>(ApplicationMode.values(getMyApplication()));
 		Preference globalSettings = findPreference("global_settings");
 		globalSettings.setIcon(getContentIcon(R.drawable.ic_action_settings));
+		setupBackupAndRestorePref();
 		Preference purchasesSettings = findPreference(PURCHASES_SETTINGS);
 		purchasesSettings.setIcon(getContentIcon(R.drawable.ic_action_purchases));
 		PreferenceCategory selectedProfile = findPreference(SELECTED_PROFILE);
@@ -143,18 +149,21 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 
 				});
 			}
-		} else if (EXPORT_PROFILES.equals(prefId)) {
-			MapActivity mapActivity = getMapActivity();
-			if (mapActivity != null) {
-				ApplicationMode mode = getSelectedAppMode();
-				FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
-				ExportSettingsFragment.showInstance(fragmentManager, mode, true);
-			}
 		} else if (PURCHASES_SETTINGS.equals(prefId)) {
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
 				FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 				PurchasesFragment.showInstance(fragmentManager);
+			}
+		} else if (BACKUP_AND_RESTORE.equals(prefId)) {
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				if (app.getBackupHelper().isRegistered()) {
+					Intent intent = new Intent(mapActivity, TestBackupActivity.class);
+					mapActivity.startActivity(intent);
+				} else {
+					BackupAndRestoreFragment.showInstance(mapActivity.getSupportFragmentManager());
+				}
 			}
 		}
 
@@ -171,6 +180,24 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 		configureProfile.setSummary(profileType);
 	}
 
+	private void setupBackupAndRestorePref() {
+		Preference backupSettings = findPreference(BACKUP_AND_RESTORE);
+		backupSettings.setIcon(getContentIcon(R.drawable.ic_action_cloud_upload));
+
+		long lastUploadedTime = settings.BACKUP_LAST_UPLOADED_TIME.get();
+		if (lastUploadedTime > 0) {
+			String time;
+			long duration = (System.currentTimeMillis() - lastUploadedTime) / 1000;
+			if (duration > MIN_DURATION_FOR_DATE_FORMAT) {
+				time = OsmAndFormatter.getFormattedDate(app, lastUploadedTime);
+			} else {
+				time = getString(R.string.duration_ago, OsmAndFormatter.getFormattedDuration((int) duration, app));
+			}
+			String summary = getString(R.string.last_backup);
+			backupSettings.setSummary(getString(R.string.ltr_or_rtl_combine_via_colon, summary, time));
+		}
+	}
+
 	private void profileManagementPref() {
 		int activeColorPrimaryResId = isNightMode() ? R.color.active_color_primary_dark
 				: R.color.active_color_primary_light;
@@ -183,9 +210,6 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 
 		Preference reorderProfiles = findPreference(REORDER_PROFILES);
 		reorderProfiles.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_edit_dark, activeColorPrimaryResId));
-
-		Preference exportProfiles = findPreference(EXPORT_PROFILES);
-		exportProfiles.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_export, activeColorPrimaryResId));
 	}
 
 	private void setupAppProfiles(PreferenceCategory preferenceCategory) {
@@ -234,13 +258,10 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 	public void onProfileSelected(Bundle args) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
-			FragmentManager fragmentManager = activity.getSupportFragmentManager();
-			if (fragmentManager != null) {
-				String profileKey = args.getString(PROFILE_KEY_ARG);
-				boolean imported = args.getBoolean(PROFILES_LIST_UPDATED_ARG);
-				ProfileAppearanceFragment.showInstance(activity, SettingsScreenType.PROFILE_APPEARANCE,
-						profileKey, imported);
-			}
+			String profileKey = args.getString(PROFILE_KEY_ARG);
+			boolean imported = args.getBoolean(PROFILES_LIST_UPDATED_ARG);
+			ProfileAppearanceFragment.showInstance(activity, SettingsScreenType.PROFILE_APPEARANCE,
+					profileKey, imported);
 		}
 	}
 }

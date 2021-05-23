@@ -4131,4 +4131,26 @@
     <string name="poi_routes">مسیرها</string>
     <string name="routing_attr_avoid_low_emission_zone_description">پرهیز از محدوده‌های کاهش</string>
     <string name="routing_attr_avoid_low_emission_zone_name">پرهیز از محدوده‌های کاهش</string>
+    <string name="search_more">بیشتر بگرد…</string>
+    <string name="backup_and_restore">پشتیبان‌گیری و بازیابی</string>
+    <string name="last_backup">آخرین پشتیبان</string>
+    <string name="duration_ago">‏%1$s پیش</string>
+    <string name="osmand_cloud">ابر OsmAnd</string>
+    <string name="osmand_cloud_authorize_descr">هیچ‌گاه داده‌هایتان را از دست ندهید. تمام اطلاعات را بی‌دردسر پشتیبان بگیرید و بازیابی کنید.</string>
+    <string name="local_backup">پشتیبان محلی</string>
+    <string name="local_backup_descr">بازیابی/پشتیبان‌گیری داده از/در پروندهٔ محلی.</string>
+    <string name="backup_into_file">پشتیبان‌گیری در پرونده</string>
+    <string name="restore_from_file">بازیابی از پرونده</string>
+    <string name="osmand_cloud_help_descr">کمک می‌خواهید؟ از طریق %1$s با ما تماس بگیرید</string>
+    <string name="osmand_cloud_create_account_descr">لطفاً نشانی ایمیل خود را وارد کنید. تمام دادهٔ مربوط به شما به این ایمیل متصل خواهد شد.
+\nیک کد تأیید به این ایمیل برایتان می‌فرستیم.</string>
+    <string name="osmand_cloud_login_descr">لطفاً نشانی ایمیلی که برای ثبت‌نام استفاده کردید را وارد نمایید. گذرواژهٔ یک‌بارمصرفی برایتان می‌فرستیم که در مرحلهٔ بعد به آن نیاز خواهید داشت.</string>
+    <string name="verify_email_address">نشانی ایمیل را تأیید کنید</string>
+    <string name="verify_email_address_descr">کد تأیید را به %1$s فرستادیم. لطفاً آن را در خانهٔ زیر بنویسید.</string>
+    <string name="enter_verification_code">کد ۴رقمی را وارد کنید</string>
+    <string name="cloud_email_not_registered">این ایمیل برای ابر OsmAnd ثبت نشده است</string>
+    <string name="cloud_email_already_registered">با این ایمیل حساب کاربری وجود دارد.</string>
+    <string name="resend_verification_code">بازارسال کد</string>
+    <string name="verification_code_missing">کد تأیید را دریافت نکردم</string>
+    <string name="verification_code_missing_description">زمان انتظار برای دریافت کد تا ۱۰ دقیقه ممکن است برسد. همچنین لطفا پوشهٔ هرزنامه را بررسی کنید. در غیر این صورت دکمهٔ زیر را بزنید.</string>
 </resources>

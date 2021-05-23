@@ -12,6 +12,26 @@
 
 -->
 
+    <string name="verification_code_missing_description">Waiting time for code can be 10 minutes, also you can check your spam folder. If it doesn\'t help, use button below.</string>
+    <string name="verification_code_missing">I didn\'t receive verification code</string>
+    <string name="resend_verification_code">Resend code</string>
+    <string name="cloud_email_already_registered">Account with this email is already registered.</string>
+    <string name="cloud_email_not_registered">This email has not been registered for OsmAnd Cloud</string>
+    <string name="enter_verification_code">Enter 4 digit code</string>
+    <string name="verify_email_address_descr">We sent a verification code to %1$s, please enter it in the field below.</string>
+    <string name="verify_email_address">Verify email address</string>
+    <string name="osmand_cloud_login_descr">Please enter the email address, you used for registration. We will send you a one-time password needed on the next step.</string>
+    <string name="osmand_cloud_create_account_descr">Please enter your email address, all your data will be linked to it.\nWe will send you a verification code to this email address.</string>
+    <string name="osmand_cloud_help_descr">Need help? Please contact us at %1$s</string>
+    <string name="restore_from_file">Restore from file</string>
+    <string name="backup_into_file">Backup into file</string>
+    <string name="local_backup_descr">Backup or restore data from a local file.</string>
+    <string name="local_backup">Local backup</string>
+    <string name="osmand_cloud_authorize_descr">Never lose your data, backup and restore all information without a problem.</string>
+    <string name="osmand_cloud">OsmAnd Cloud</string>
+    <string name="duration_ago">%1$s ago</string>
+    <string name="last_backup">Last backup</string>
+    <string name="backup_and_restore">Backup &amp; Restore</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
     <string name="search_more">Search more…</string>
     <string name="routing_attr_avoid_low_emission_zone_name">Avoid low emission zones</string>
