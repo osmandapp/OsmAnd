@@ -681,7 +681,7 @@
     <string name="files_present">%1$d faili (%2$s) on järel eelmises asukohas \'%3$s\'.</string>
     <string name="move_maps">Teisalda kaardid</string>
     <string name="dont_move_maps">Ära teisalda</string>
-    <string name="public_transport_ped_route_title">Teekond jalgsi on umbes %1$s ja võib olla kiirem kui ühistransport</string>
+    <string name="public_transport_ped_route_title">Teekond jalgsi on umbes %1$s ja see võib olla kiirem kui ühistransport</string>
     <string name="public_transport_no_route_title">Kahjuks ei suuda OsmAnd leida sinu seadetele vastavat teekonda.</string>
     <string name="public_transport_try_ped">Proovi jalgsi navigeerimist.</string>
     <string name="public_transport_try_change_settings">Proovi muuta seadeid.</string>
@@ -3725,7 +3725,7 @@
     <string name="gpx_monitoring_stop">Peata teekonna salvestamine</string>
     <string name="gpx_monitoring_start">Jätka teekonna salvestamist</string>
     <string name="accessibility_mode_disabled">Režiim erivajadusega kasutajatele on sinu Android\'i seadmes välja lülitatud.</string>
-    <string name="create_custom_categories_list_promo">Muuda loendi järjestust ja peida kategooriaid. Kõiki muudatusi saad importida või eksportida koos profiilidega.</string>
+    <string name="create_custom_categories_list_promo">Muuda loendi järjestust ja peida kategooriad. Kõiki muudatusi saad importida või eksportida koos profiilidega.</string>
     <string name="add_new_custom_category_button_promo">Valides ühe või mitu kategooriat võid lisada uue kohandatud kategooria.</string>
     <string name="shared_string_routing">Marsruutimine</string>
     <string name="sort_last_modified">Viimati muudetud</string>
@@ -4055,4 +4055,12 @@
     <string name="lost_data_warning">Kõik salvestamata andmed lähevad kaotsi.</string>
     <string name="verification_code_missing_description">Koodi ooteaeg võib olla 10 minutit; samuti võid kontrollida rämpsposti kausta, Kui see ei aita, siis kasuta all asuvat nuppu.</string>
     <string name="duration_ago">%1$s tagasi</string>
+    <string name="osmand_cloud_login_descr">Palun sisesta e-posti aadress, mida kasutasid registreerimisel. Me saadame sulle ühekordse parooli, mida vajad järgmisel sammul.</string>
+    <string name="verify_email_address">Kinnita e-posti aadress</string>
+    <string name="verify_email_address_descr">Me saatsime kinnituskoodi aadressile %1$s. Palun sisesta see väljale all.</string>
+    <string name="enter_verification_code">Sisesta neljast numbrist kood</string>
+    <string name="cloud_email_not_registered">See e-postiaadress ei ole registreeritud OsmAnd Cloudile</string>
+    <string name="cloud_email_already_registered">Selle postiaadressiga konto on juba registreeritud.</string>
+    <string name="resend_verification_code">Saada kood uuesti</string>
+    <string name="verification_code_missing">Ma ei saanud kinnituskoodi</string>
 </resources>
