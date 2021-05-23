@@ -12,6 +12,7 @@ import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.QuadRect;
+import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
@@ -60,6 +61,8 @@ public class RouteCalculationResult {
 	protected List<RouteDirectionInfo> cacheAgreggatedDirections;
 	protected List<LocationPoint> locationPoints = new ArrayList<LocationPoint>();
 
+	protected final List<WorldRegion> downloadMaps;
+
 	// params
 	protected final ApplicationMode appMode;
 	protected final RouteService routeService;
@@ -79,6 +82,26 @@ public class RouteCalculationResult {
 
 	public RouteCalculationResult(String errorMessage) {
 		this.errorMessage = errorMessage;
+		this.downloadMaps = null;
+		this.routingTime = 0;
+		this.loadedTiles = 0;
+		this.visitedSegments = 0;
+		this.calculateTime = 0;
+		this.intermediatePoints = new int[0];
+		this.locations = new ArrayList<Location>();
+		this.segments = new ArrayList<RouteSegmentResult>();
+		this.listDistance = new int[0];
+		this.directions = new ArrayList<RouteDirectionInfo>();
+		this.alarmInfo = new ArrayList<AlarmInfo>();
+		this.routeService = null;
+		this.appMode = null;
+		this.routeRecalcDistance = 0;
+		this.routeVisibleAngle = 0;
+	}
+
+	public RouteCalculationResult(List<WorldRegion> suggestedOfflineMaps) {
+		this.downloadMaps = suggestedOfflineMaps;
+		this.errorMessage = null;
 		this.routingTime = 0;
 		this.loadedTiles = 0;
 		this.visitedSegments = 0;
@@ -101,6 +124,7 @@ public class RouteCalculationResult {
 		this.calculateTime = 0;
 		this.visitedSegments = 0;
 		this.errorMessage = null;
+		this.downloadMaps = null;
 		this.intermediatePoints = new int[params.intermediates == null ? 0 : params.intermediates.size()];
 		List<Location> locations = list == null ? new ArrayList<Location>() : new ArrayList<Location>(list);
 		List<RouteDirectionInfo> localDirections = directions == null? new ArrayList<RouteDirectionInfo>() : new ArrayList<RouteDirectionInfo>(directions);
@@ -159,6 +183,7 @@ public class RouteCalculationResult {
 		}
 		List<RouteDirectionInfo> computeDirections = new ArrayList<RouteDirectionInfo>();
 		this.errorMessage = null;
+		this.downloadMaps = null;
 		this.intermediatePoints = new int[intermediates == null ? 0 : intermediates.size()];
 		List<Location> locations = new ArrayList<Location>();
 		ArrayList<AlarmInfo> alarms = new ArrayList<AlarmInfo>();
@@ -1284,6 +1309,10 @@ public class RouteCalculationResult {
 	public void updateNextVisiblePoint(int nextPoint, Location mp) {
 		currentStraightAnglePoint = mp;
 		currentStraightAngleRoute = nextPoint;
+	}
+
+	public List<WorldRegion> getDownloadMaps() {
+		return downloadMaps;
 	}
 
 	public static class NextDirectionInfo {

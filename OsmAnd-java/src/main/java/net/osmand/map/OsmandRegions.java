@@ -190,8 +190,39 @@ public class OsmandRegions {
 			}
 			if (parentParent.getRegionId().equals(WorldRegion.JAPAN_REGION_ID)) {
 				return parentParent.getLocaleName() + " " + rd.getLocaleName();
+			} else {
+				return parent.getLocaleName() + " " + rd.getLocaleName();
 			}
-			return parent.getLocaleName() + " " + rd.getLocaleName();
+		} else {
+			return rd.getLocaleName();
+		}
+	}
+
+	public String getSuggestedDownloadMapName(String downloadName) {
+		final String lc = downloadName.toLowerCase();
+		if (downloadNamesToFullNames.containsKey(lc)) {
+			String fullName = downloadNamesToFullNames.get(lc);
+			return getSuggestedMapsName(fullName);
+		}
+		return downloadName.replace('_', ' ');
+	}
+
+	public String getSuggestedMapsName(String fullName) {
+		WorldRegion rd = fullNamesToRegionData.get(fullName);
+		if (rd == null) {
+			return fullName.replace('_', ' ');
+		}
+		if (rd.getSuperregion() != null && rd.getSuperregion().getSuperregion() != null) {
+			WorldRegion parentParent = rd.getSuperregion().getSuperregion();
+			WorldRegion parent = rd.getSuperregion();
+			if (parentParent.getRegionId().equals(WorldRegion.RUSSIA_REGION_ID)) {
+				return rd.getLocaleName() + ", " + parentParent.getLocaleName();
+			}
+			if (parentParent.getRegionId().equals(WorldRegion.JAPAN_REGION_ID)) {
+				return rd.getLocaleName() + ", " + parentParent.getLocaleName();
+			} else {
+				return rd.getLocaleName() + ", " + parent.getLocaleName();
+			}
 		} else {
 			return rd.getLocaleName();
 		}

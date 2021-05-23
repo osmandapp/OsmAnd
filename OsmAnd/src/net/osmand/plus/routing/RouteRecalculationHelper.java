@@ -10,6 +10,7 @@ import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.router.RouteCalculationProgress;
+import net.osmand.util.Algorithms;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -259,11 +260,17 @@ class RouteRecalculationHelper {
 							if (calculationProgress.requestPrivateAccessRouting) {
 								progressRoute.requestPrivateAccessRouting();
 							}
+							if (!Algorithms.isEmpty(params.missingMaps)) {
+								progressRoute.updateMissingMaps(params);
+							}
 							updateProgress(params);
 						}
 					} else {
 						if (calculationProgress.requestPrivateAccessRouting) {
 							progressRoute.requestPrivateAccessRouting();
+						}
+						if (!Algorithms.isEmpty(params.missingMaps)) {
+							progressRoute.updateMissingMaps(params);
 						}
 						progressRoute.finish();
 					}
@@ -345,6 +352,7 @@ class RouteRecalculationHelper {
 			}
 			RouteCalculationResult prev = routingHelper.getRoute();
 			synchronized (routingHelper) {
+				routingHelper.setRoute(res);
 				if (res.isCalculated()) {
 					if (!params.inSnapToRoadMode && !params.inPublicTransportMode) {
 						routingHelper.setRoute(res);
@@ -376,7 +384,9 @@ class RouteRecalculationHelper {
 					routeCalcError = app.getString(R.string.empty_route_calculated);
 					routeCalcErrorShort = app.getString(R.string.empty_route_calculated);
 				}
-				showMessage(routeCalcError);
+				if (res.getDownloadMaps().isEmpty()) {
+					showMessage(routeCalcError);
+				}
 			}
 			app.getNotificationHelper().refreshNotification(NAVIGATION);
 		}

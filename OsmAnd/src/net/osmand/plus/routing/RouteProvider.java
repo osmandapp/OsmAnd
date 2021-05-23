@@ -15,6 +15,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
+import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
@@ -105,7 +106,21 @@ public class RouteProvider {
 				if (calcGPXRoute && !params.gpxRoute.calculateOsmAndRoute) {
 					res = calculateGpxRoute(params);
 				} else if (params.mode.getRouteService() == RouteService.OSMAND) {
-					res = findVectorMapsRoute(params, calcGPXRoute);
+					SuggestionsMapsProvider suggestionsMapsProvider = new SuggestionsMapsProvider(params);
+
+					LinkedList<Location> points = suggestionsMapsProvider.getStartFinishIntermediatesPoints("");
+					List<WorldRegion> suggestionsMapsStartFinishIntermediates = suggestionsMapsProvider.getSuggestedMaps(points);
+
+					List<Location> pointsStraightLine = suggestionsMapsProvider.getLocationBasedOnDistanceInterval(points);
+					List<WorldRegion> suggestedMapsOnStraightLine = suggestionsMapsProvider.getSuggestedMaps(pointsStraightLine);
+					if (!Algorithms.isEmpty(suggestionsMapsStartFinishIntermediates)) {
+						res = new RouteCalculationResult(suggestedMapsOnStraightLine);
+					} else {
+						if (!suggestionsMapsProvider.isPointOnWater()) {
+							params.missingMaps = suggestedMapsOnStraightLine;
+						}
+						res = findVectorMapsRoute(params, calcGPXRoute);
+					}
 				} else if (params.mode.getRouteService() == RouteService.BROUTER) {
 					res = findBROUTERRoute(params);
 				} else if (params.mode.getRouteService() == RouteService.ONLINE) {
@@ -130,7 +145,7 @@ public class RouteProvider {
 				log.error("Failed to find route ", e); //$NON-NLS-1$
 			}
 		}
-		return new RouteCalculationResult(null);
+		return new RouteCalculationResult((String) null);
 	}
 
 	public RouteCalculationResult recalculatePartOfflineRoute(RouteCalculationResult res, RouteCalculationParams params) {
@@ -1174,7 +1189,8 @@ public class RouteProvider {
 	}
 
 	private RouteCalculationResult findStraightRoute(RouteCalculationParams params) {
-		LinkedList<Location> points = new LinkedList<>();
+		SuggestionsMapsProvider suggestionsMapsProvider = new SuggestionsMapsProvider(params);
+		LinkedList<Location> points = suggestionsMapsProvider.getStartFinishIntermediatesPoints("pnt");
 		List<Location> segments = new ArrayList<>();
 		points.add(new Location("pnt", params.start.getLatitude(), params.start.getLongitude()));
 		if(params.intermediates != null) {

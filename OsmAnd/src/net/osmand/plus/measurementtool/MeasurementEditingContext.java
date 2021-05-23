@@ -987,6 +987,11 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 			}
 
 			@Override
+			public void updateMissingMaps(RouteCalculationParams params) {
+
+			}
+
+			@Override
 			public void finish() {
 				calculatedPairs = 0;
 				pointsToCalculateSize = 0;

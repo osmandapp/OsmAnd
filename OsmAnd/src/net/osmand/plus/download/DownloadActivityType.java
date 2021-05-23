@@ -10,7 +10,6 @@ import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.util.Algorithms;
 
@@ -28,7 +27,6 @@ import java.util.Locale;
 import java.util.Map;
 
 import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
-import static net.osmand.plus.activities.LocalIndexHelper.LocalIndexType.SRTM_DATA;
 
 public class DownloadActivityType {
 	private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.US);
@@ -388,6 +386,16 @@ public class DownloadActivityType {
 		}
 
 		return osmandRegions.getLocaleName(basename, includingParent);
+	}
+
+	public String getSuggestedMapsName (DownloadItem downloadItem, Context ctx, OsmandRegions osmandRegions) {
+		final String basename = getBasename(downloadItem);
+		final String lc = basename.toLowerCase();
+		String std = FileNameTranslationHelper.getStandardMapName(ctx, lc);
+		if (std != null) {
+			return std;
+		}
+		return osmandRegions.getSuggestedDownloadMapName(basename);
 	}
 
 	public String getTargetFileName(IndexItem item) {
