@@ -15,6 +15,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
+import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
@@ -68,7 +69,6 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import btools.routingapp.IBRouterService;
 
-
 public class RouteProvider {
 
 	private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(RouteProvider.class);
@@ -76,26 +76,232 @@ public class RouteProvider {
 	private static final int ADDITIONAL_DISTANCE_FOR_START_POINT = 300;
 	private static final int MIN_STRAIGHT_DIST = 50000;
 
-	public static Location createLocation(WptPt pt){
+	public static Location createLocation(WptPt pt) {
 		Location loc = new Location("OsmandRouteProvider");
 		loc.setLatitude(pt.lat);
 		loc.setLongitude(pt.lon);
 		loc.setSpeed((float) pt.speed);
-		if(!Double.isNaN(pt.ele)) {
+		if (!Double.isNaN(pt.ele)) {
 			loc.setAltitude(pt.ele);
 		}
 		loc.setTime(pt.time);
-		if(!Double.isNaN(pt.hdop)) {
+		if (!Double.isNaN(pt.hdop)) {
 			loc.setAccuracy((float) pt.hdop);
 		}
 		return loc;
 	}
 
+	protected static List<RouteSegmentResult> parseOsmAndGPXRoute(List<Location> points, GPXFile gpxFile,
+																  List<Location> segmentEndpoints,
+																  int selectedSegment) {
+		List<TrkSegment> segments = gpxFile.getNonEmptyTrkSegments(false);
+		if (selectedSegment != -1 && segments.size() > selectedSegment) {
+			TrkSegment segment = segments.get(selectedSegment);
+			for (WptPt p : segment.points) {
+				points.add(createLocation(p));
+			}
+			RouteImporter routeImporter = new RouteImporter(segment);
+			return routeImporter.importRoute();
+		} else {
+			collectPointsFromSegments(segments, points, segmentEndpoints);
+			RouteImporter routeImporter = new RouteImporter(gpxFile);
+			return routeImporter.importRoute();
+		}
+	}
+
+	protected static void collectSegmentPointsFromGpx(GPXFile gpxFile, List<Location> points,
+													  List<Location> segmentEndpoints, int selectedSegment) {
+		List<TrkSegment> segments = gpxFile.getNonEmptyTrkSegments(false);
+		if (selectedSegment != -1 && segments.size() > selectedSegment) {
+			TrkSegment segment = segments.get(selectedSegment);
+			for (WptPt wptPt : segment.points) {
+				points.add(createLocation(wptPt));
+			}
+		} else {
+			collectPointsFromSegments(segments, points, segmentEndpoints);
+		}
+	}
+
+	protected static void collectPointsFromSegments(List<TrkSegment> segments, List<Location> points, List<Location> segmentEndpoints) {
+		Location lastPoint = null;
+		for (int i = 0; i < segments.size(); i++) {
+			TrkSegment segment = segments.get(i);
+			for (WptPt wptPt : segment.points) {
+				points.add(createLocation(wptPt));
+			}
+			if (i <= segments.size() - 1 && lastPoint != null) {
+				segmentEndpoints.add(lastPoint);
+				segmentEndpoints.add(points.get((points.size() - segment.points.size())));
+			}
+			lastPoint = points.get(points.size() - 1);
+		}
+	}
+
+	protected static List<RouteDirectionInfo> parseOsmAndGPXRoute(List<Location> points, GPXFile gpxFile,
+																  List<Location> segmentEndpoints,
+																  boolean osmandRouter, boolean leftSide,
+																  float defSpeed, int selectedSegment) {
+		List<RouteDirectionInfo> directions = null;
+		if (!osmandRouter) {
+			for (WptPt pt : gpxFile.getPoints()) {
+				points.add(createLocation(pt));
+			}
+		} else {
+			collectSegmentPointsFromGpx(gpxFile, points, segmentEndpoints, selectedSegment);
+		}
+		float[] distanceToEnd = new float[points.size()];
+		for (int i = points.size() - 2; i >= 0; i--) {
+			distanceToEnd[i] = distanceToEnd[i + 1] + points.get(i).distanceTo(points.get(i + 1));
+		}
+
+		Route route = null;
+		if (gpxFile.routes.size() > 0) {
+			route = gpxFile.routes.get(0);
+		}
+		RouteDirectionInfo previous = null;
+		if (route != null && route.points.size() > 0) {
+			directions = new ArrayList<RouteDirectionInfo>();
+			Iterator<WptPt> iterator = route.points.iterator();
+			float lasttime = 0;
+			while (iterator.hasNext()) {
+				WptPt item = iterator.next();
+				try {
+					String stime = item.getExtensionsToRead().get("time");
+					int time = 0;
+					if (stime != null) {
+						time = Integer.parseInt(stime);
+					}
+					int offset = Integer.parseInt(item.getExtensionsToRead().get("offset")); //$NON-NLS-1$
+					if (directions.size() > 0) {
+						RouteDirectionInfo last = directions.get(directions.size() - 1);
+						// update speed using time and idstance
+						if (distanceToEnd.length > last.routePointOffset && distanceToEnd.length > offset) {
+							float lastDistanceToEnd = distanceToEnd[last.routePointOffset];
+							float currentDistanceToEnd = distanceToEnd[offset];
+							if (lasttime != 0) {
+								last.setAverageSpeed((lastDistanceToEnd - currentDistanceToEnd) / lasttime);
+							}
+							last.distance = (int) Math.round(lastDistanceToEnd - currentDistanceToEnd);
+						}
+					}
+					// save time as a speed because we don't know distance of the route segment
+					lasttime = time;
+					float avgSpeed = defSpeed;
+					if (!iterator.hasNext() && time > 0) {
+						if (distanceToEnd.length > offset) {
+							avgSpeed = distanceToEnd[offset] / time;
+						} else {
+							avgSpeed = defSpeed;
+						}
+					}
+					String stype = item.getExtensionsToRead().get("turn"); //$NON-NLS-1$
+					TurnType turnType;
+					if (stype != null) {
+						turnType = TurnType.fromString(stype.toUpperCase(), leftSide);
+					} else {
+						turnType = TurnType.straight();
+					}
+					String sturn = item.getExtensionsToRead().get("turn-angle"); //$NON-NLS-1$
+					if (sturn != null) {
+						turnType.setTurnAngle((float) Double.parseDouble(sturn));
+					}
+					String slanes = item.getExtensionsToRead().get("lanes");
+					if (slanes != null) {
+						try {
+							int[] lanes = Algorithms.stringToArray(slanes);
+							if (lanes != null && lanes.length > 0) {
+								turnType.setLanes(lanes);
+							}
+						} catch (NumberFormatException e) {
+							// ignore
+						}
+					}
+					RouteDirectionInfo dirInfo = new RouteDirectionInfo(avgSpeed, turnType);
+					dirInfo.setDescriptionRoute(item.desc); //$NON-NLS-1$
+					dirInfo.routePointOffset = offset;
+
+					// Issue #2894
+					String sref = item.getExtensionsToRead().get("ref"); //$NON-NLS-1$
+					if (sref != null && !"null".equals(sref)) {
+						dirInfo.setRef(sref); //$NON-NLS-1$
+					}
+					String sstreetname = item.getExtensionsToRead().get("street-name"); //$NON-NLS-1$
+					if (sstreetname != null && !"null".equals(sstreetname)) {
+						dirInfo.setStreetName(sstreetname); //$NON-NLS-1$
+					}
+					String sdest = item.getExtensionsToRead().get("dest"); //$NON-NLS-1$
+					if (sdest != null && !"null".equals(sdest)) {
+						dirInfo.setDestinationName(sdest); //$NON-NLS-1$
+					}
+
+					if (previous != null && TurnType.C != previous.getTurnType().getValue() &&
+							!osmandRouter) {
+						// calculate angle
+						if (previous.routePointOffset > 0) {
+							float paz = points.get(previous.routePointOffset - 1).bearingTo(points.get(previous.routePointOffset));
+							float caz;
+							if (previous.getTurnType().isRoundAbout() && dirInfo.routePointOffset < points.size() - 1) {
+								caz = points.get(dirInfo.routePointOffset).bearingTo(points.get(dirInfo.routePointOffset + 1));
+							} else {
+								caz = points.get(dirInfo.routePointOffset - 1).bearingTo(points.get(dirInfo.routePointOffset));
+							}
+							float angle = caz - paz;
+							if (angle < 0) {
+								angle += 360;
+							} else if (angle > 360) {
+								angle -= 360;
+							}
+							// that magic number helps to fix some errors for turn
+							angle += 75;
+
+							if (previous.getTurnType().getTurnAngle() < 0.5f) {
+								previous.getTurnType().setTurnAngle(angle);
+							}
+						}
+					}
+
+					directions.add(dirInfo);
+
+					previous = dirInfo;
+				} catch (NumberFormatException e) {
+					log.info("Exception", e); //$NON-NLS-1$
+				} catch (IllegalArgumentException e) {
+					log.info("Exception", e); //$NON-NLS-1$
+				}
+			}
+		}
+		if (previous != null && TurnType.C != previous.getTurnType().getValue()) {
+			// calculate angle
+			if (previous.routePointOffset > 0 && previous.routePointOffset < points.size() - 1) {
+				float paz = points.get(previous.routePointOffset - 1).bearingTo(points.get(previous.routePointOffset));
+				float caz = points.get(previous.routePointOffset).bearingTo(points.get(points.size() - 1));
+				float angle = caz - paz;
+				if (angle < 0) {
+					angle += 360;
+				}
+				if (previous.getTurnType().getTurnAngle() < 0.5f) {
+					previous.getTurnType().setTurnAngle(angle);
+				}
+			}
+		}
+		return directions;
+	}
+
+	private static List<LatLon> getPathFromParams(RouteCalculationParams params) {
+		List<LatLon> points = new ArrayList<>();
+		points.add(new LatLon(params.start.getLatitude(), params.start.getLongitude()));
+		if (Algorithms.isEmpty(params.intermediates)) {
+			points.addAll(params.intermediates);
+		}
+		points.add(params.end);
+		return points;
+	}
+
 	public RouteCalculationResult calculateRouteImpl(RouteCalculationParams params) {
 		long time = System.currentTimeMillis();
 		if (params.start != null && params.end != null) {
-			if(log.isInfoEnabled()){
-				log.info("Start finding route from " + params.start + " to " + params.end +" using " + 
+			if (log.isInfoEnabled()) {
+				log.info("Start finding route from " + params.start + " to " + params.end + " using " +
 						params.mode.getRouteService().getName()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			}
 			try {
@@ -105,7 +311,21 @@ public class RouteProvider {
 				if (calcGPXRoute && !params.gpxRoute.calculateOsmAndRoute) {
 					res = calculateGpxRoute(params);
 				} else if (params.mode.getRouteService() == RouteService.OSMAND) {
-					res = findVectorMapsRoute(params, calcGPXRoute);
+					SuggestionsMapsProvider suggestionsMapsProvider = new SuggestionsMapsProvider(params);
+
+					LinkedList<Location> points = suggestionsMapsProvider.getStartFinishIntermediatesPoints("");
+					List<WorldRegion> suggestionsMapsStartFinishIntermediates = suggestionsMapsProvider.getSuggestedMaps(points);
+
+					List<Location> pointsStraightLine = suggestionsMapsProvider.getLocationBasedOnDistanceInterval(points);
+					List<WorldRegion> suggestedMapsOnStraightLine = suggestionsMapsProvider.getSuggestedMaps(pointsStraightLine);
+					if (!Algorithms.isEmpty(suggestionsMapsStartFinishIntermediates)) {
+						res = new RouteCalculationResult(suggestedMapsOnStraightLine);
+					} else {
+						if (!suggestionsMapsProvider.isPointOnWater()) {
+							params.missingMaps = suggestedMapsOnStraightLine;
+						}
+						res = findVectorMapsRoute(params, calcGPXRoute);
+					}
 				} else if (params.mode.getRouteService() == RouteService.BROUTER) {
 					res = findBROUTERRoute(params);
 				} else if (params.mode.getRouteService() == RouteService.ONLINE) {
@@ -116,10 +336,10 @@ public class RouteProvider {
 				} else {
 					res = new RouteCalculationResult("Selected route service is not available");
 				}
-				if(log.isInfoEnabled() ){
+				if (log.isInfoEnabled()) {
 					log.info("Finding route contained " + res.getImmutableAllLocations().size() + " points for " + (System.currentTimeMillis() - time) + " ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				}
-				return res; 
+				return res;
 			} catch (IOException e) {
 				log.error("Failed to find route ", e); //$NON-NLS-1$
 			} catch (ParserConfigurationException e) {
@@ -130,7 +350,7 @@ public class RouteProvider {
 				log.error("Failed to find route ", e); //$NON-NLS-1$
 			}
 		}
-		return new RouteCalculationResult(null);
+		return new RouteCalculationResult((String) null);
 	}
 
 	public RouteCalculationResult recalculatePartOfflineRoute(RouteCalculationResult res, RouteCalculationParams params) {
@@ -138,7 +358,7 @@ public class RouteProvider {
 		List<Location> locs = new ArrayList<Location>(rcr.getRouteLocations());
 		try {
 			int[] startI = new int[]{0};
-			int[] endI = new int[]{locs.size()}; 
+			int[] endI = new int[]{locs.size()};
 			locs = findStartAndEndLocationsFromRoute(locs, params.start, params.end, startI, endI);
 			List<RouteDirectionInfo> directions = calcDirections(startI, endI, rcr.getRouteDirections());
 			insertInitialSegment(params, locs, directions, true);
@@ -207,7 +427,7 @@ public class RouteProvider {
 						routeParams.intermediates, routeParams.ctx, routeParams.leftSide, null, null, routeParams.mode, true);
 			}
 			RouteCalculationResult result = new RouteCalculationResult(gpxRouteResult, routeParams.start, routeParams.end,
-						routeParams.intermediates, routeParams.ctx, routeParams.leftSide, null, null, routeParams.mode, false);
+					routeParams.intermediates, routeParams.ctx, routeParams.leftSide, null, null, routeParams.mode, false);
 			List<Location> gpxRouteLocations = result.getImmutableAllLocations();
 			int nearestGpxPointInd = calcWholeRoute ? 0 : findNearestGpxPointIndexFromRoute(gpxRouteLocations, routeParams.start, calculateOsmAndRouteParts);
 			Location nearestGpxLocation = null;
@@ -264,7 +484,7 @@ public class RouteProvider {
 			return calculateOsmAndRouteWithIntermediatePoints(routeParams, gpxParams.points);
 		}
 
-		List<Location> gpxRoute ;
+		List<Location> gpxRoute;
 		int[] startI = new int[]{0};
 		int[] endI = new int[]{gpxParams.points.size()};
 		if (calcWholeRoute) {
@@ -282,7 +502,7 @@ public class RouteProvider {
 		for (RouteDirectionInfo info : gpxDirections) {
 			// recalculate
 			info.distance = 0;
-			info.afterLeftTime = 0;			
+			info.afterLeftTime = 0;
 		}
 
 		return new RouteCalculationResult(gpxRoute, gpxDirections, routeParams,
@@ -290,7 +510,7 @@ public class RouteProvider {
 	}
 
 	private RouteCalculationResult calculateOsmAndRouteWithIntermediatePoints(RouteCalculationParams routeParams,
-			final List<Location> intermediates) throws IOException {
+																			  final List<Location> intermediates) throws IOException {
 		RouteCalculationParams rp = new RouteCalculationParams();
 		rp.calculationProgress = routeParams.calculationProgress;
 		rp.ctx = routeParams.ctx;
@@ -300,7 +520,7 @@ public class RouteProvider {
 		rp.leftSide = routeParams.leftSide;
 		rp.fast = routeParams.fast;
 		rp.onlyStartPointChanged = routeParams.onlyStartPointChanged;
-		rp.previousToRecalculate =  routeParams.previousToRecalculate;
+		rp.previousToRecalculate = routeParams.previousToRecalculate;
 		rp.intermediates = new ArrayList<LatLon>();
 		int closest = 0;
 		double maxDist = Double.POSITIVE_INFINITY;
@@ -313,7 +533,7 @@ public class RouteProvider {
 				maxDist = dist;
 			}
 		}
-		for(int i = closest; i< intermediates.size() ; i++ ){
+		for (int i = closest; i < intermediates.size(); i++) {
 			Location w = intermediates.get(i);
 			rp.intermediates.add(new LatLon(w.getLatitude(), w.getLongitude()));
 		}
@@ -334,14 +554,14 @@ public class RouteProvider {
 	}
 
 	private List<RouteDirectionInfo> calcDirections(int[] startI, int[] endI,
-			final List<RouteDirectionInfo> inputDirections) {
+													final List<RouteDirectionInfo> inputDirections) {
 		List<RouteDirectionInfo> directions = new ArrayList<RouteDirectionInfo>();
 		if (inputDirections != null) {
 			for (RouteDirectionInfo info : inputDirections) {
 				if (info.routePointOffset >= startI[0] && info.routePointOffset < endI[0]) {
 					RouteDirectionInfo ch = new RouteDirectionInfo(info.getAverageSpeed(), info.getTurnType());
 					ch.routePointOffset = info.routePointOffset - startI[0];
-					if(info.routeEndPointOffset != 0) {
+					if (info.routeEndPointOffset != 0) {
 						ch.routeEndPointOffset = info.routeEndPointOffset - startI[0];
 					}
 					ch.setDescriptionRoute(info.getDescriptionRoutePart());
@@ -365,8 +585,8 @@ public class RouteProvider {
 	}
 
 	private void insertFinalSegment(RouteCalculationParams routeParams, List<Location> points,
-			List<RouteDirectionInfo> directions, boolean calculateOsmAndRouteParts) {
-		if(points.size() > 0) {
+									List<RouteDirectionInfo> directions, boolean calculateOsmAndRouteParts) {
+		if (points.size() > 0) {
 			Location routeEnd = points.get(points.size() - 1);
 			LatLon e = routeEnd == null ? null : new LatLon(routeEnd.getLatitude(), routeEnd.getLongitude());
 			LatLon finalEnd = routeParams.end;
@@ -398,7 +618,7 @@ public class RouteProvider {
 	}
 
 	public void insertInitialSegment(RouteCalculationParams routeParams, List<Location> points,
-			List<RouteDirectionInfo> directions, boolean calculateOsmAndRouteParts) {
+									 List<RouteDirectionInfo> directions, boolean calculateOsmAndRouteParts) {
 		Location realStart = routeParams.start;
 		if (realStart != null && points.size() > 0 && realStart.distanceTo(points.get(0)) > MIN_DISTANCE_FOR_INSERTING_ROUTE_SEGMENT) {
 			Location trackStart = points.get(0);
@@ -486,9 +706,9 @@ public class RouteProvider {
 
 		return newGpxRoute;
 	}
-	
-	private RouteCalculationResult findOfflineRouteSegment(RouteCalculationParams rParams, Location start, 
-			LatLon end) {
+
+	private RouteCalculationResult findOfflineRouteSegment(RouteCalculationParams rParams, Location start,
+														   LatLon end) {
 		RouteCalculationParams newParams = new RouteCalculationParams();
 		newParams.start = start;
 		newParams.end = end;
@@ -501,9 +721,9 @@ public class RouteProvider {
 			if (rParams.mode.getRouteService() == RouteService.OSMAND) {
 				newRes = findVectorMapsRoute(newParams, false);
 			} else if (rParams.mode.getRouteService() == RouteService.BROUTER) {
-				newRes= findBROUTERRoute(newParams);
+				newRes = findBROUTERRoute(newParams);
 			} else if (rParams.mode.getRouteService() == RouteService.STRAIGHT ||
-				rParams.mode.getRouteService() == RouteService.DIRECT_TO) {
+					rParams.mode.getRouteService() == RouteService.DIRECT_TO) {
 				newRes = findStraightRoute(newParams);
 			}
 		} catch (IOException e) {
@@ -542,10 +762,10 @@ public class RouteProvider {
 			}
 		}
 		ArrayList<Location> sublist = new ArrayList<Location>(route.subList(start, end));
-		if(startI != null) {
+		if (startI != null) {
 			startI[0] = start;
 		}
-		if(endI != null) {
+		if (endI != null) {
 			endI[0] = end;
 		}
 		return sublist;
@@ -686,23 +906,23 @@ public class RouteProvider {
 	}
 
 	private RoutingConfiguration initOsmAndRoutingConfig(Builder config, final RouteCalculationParams params, OsmandSettings settings,
-			GeneralRouter generalRouter) throws IOException, FileNotFoundException {
+														 GeneralRouter generalRouter) throws IOException, FileNotFoundException {
 		Map<String, String> paramsR = new LinkedHashMap<String, String>();
-		for(Map.Entry<String, RoutingParameter> e : generalRouter.getParameters().entrySet()){
+		for (Map.Entry<String, RoutingParameter> e : generalRouter.getParameters().entrySet()) {
 			String key = e.getKey();
 			RoutingParameter pr = e.getValue();
 			String vl;
-			if(key.equals(GeneralRouter.USE_SHORTEST_WAY)) {
+			if (key.equals(GeneralRouter.USE_SHORTEST_WAY)) {
 				Boolean bool = !settings.FAST_ROUTE_MODE.getModeValue(params.mode);
 				vl = bool ? "true" : null;
-			} else if(pr.getType() == RoutingParameterType.BOOLEAN) {
+			} else if (pr.getType() == RoutingParameterType.BOOLEAN) {
 				CommonPreference<Boolean> pref = settings.getCustomRoutingBooleanProperty(key, pr.getDefaultBoolean());
 				Boolean bool = pref.getModeValue(params.mode);
 				vl = bool ? "true" : null;
 			} else {
 				vl = settings.getCustomRoutingProperty(key, "").getModeValue(params.mode);
 			}
-			if(vl != null && vl.length() > 0) {
+			if (vl != null && vl.length() > 0) {
 				paramsR.put(key, vl);
 			}
 		}
@@ -722,31 +942,31 @@ public class RouteProvider {
 		Runtime rt = Runtime.getRuntime();
 		// make visible
 		int memoryLimit = (int) (0.95 * ((rt.maxMemory() - rt.totalMemory()) + rt.freeMemory()) / mb);
-		log.warn("Use " + memoryLimit +  " MB Free " + rt.freeMemory() / mb + " of " + rt.totalMemory() / mb + " max " + rt.maxMemory() / mb);
-		RoutingConfiguration cf = config.build( params.mode.getRoutingProfile(), params.start.hasBearing() ?
-				params.start.getBearing() / 180d * Math.PI : null, 
+		log.warn("Use " + memoryLimit + " MB Free " + rt.freeMemory() / mb + " of " + rt.totalMemory() / mb + " max " + rt.maxMemory() / mb);
+		RoutingConfiguration cf = config.build(params.mode.getRoutingProfile(), params.start.hasBearing() ?
+						params.start.getBearing() / 180d * Math.PI : null,
 				memoryLimit, paramsR);
-		if(settings.ENABLE_TIME_CONDITIONAL_ROUTING.getModeValue(params.mode)) {
+		if (settings.ENABLE_TIME_CONDITIONAL_ROUTING.getModeValue(params.mode)) {
 			cf.routeCalculationTime = System.currentTimeMillis();
 		}
 		return cf;
 	}
 
 	private RouteCalculationResult calcOfflineRouteImpl(final RouteCalculationParams params,
-			RoutePlannerFrontEnd router, RoutingContext ctx, RoutingContext complexCtx, LatLon st, LatLon en,
-			List<LatLon> inters, PrecalculatedRouteDirection precalculated) throws IOException {
+														RoutePlannerFrontEnd router, RoutingContext ctx, RoutingContext complexCtx, LatLon st, LatLon en,
+														List<LatLon> inters, PrecalculatedRouteDirection precalculated) throws IOException {
 		try {
-			List<RouteSegmentResult> result ;
-			if(complexCtx != null) {
+			List<RouteSegmentResult> result;
+			if (complexCtx != null) {
 				try {
 					result = router.searchRoute(complexCtx, st, en, inters, precalculated);
 					// discard ctx and replace with calculated
 					ctx = complexCtx;
-				} catch(final RuntimeException e) {
+				} catch (final RuntimeException e) {
 					params.ctx.runInUIThread(new Runnable() {
 						@Override
 						public void run() {
-							params.ctx.showToastMessage(R.string.complex_route_calculation_failed, e.getMessage());							
+							params.ctx.showToastMessage(R.string.complex_route_calculation_failed, e.getMessage());
 						}
 					});
 					result = router.searchRoute(ctx, st, en, inters);
@@ -754,34 +974,34 @@ public class RouteProvider {
 			} else {
 				result = router.searchRoute(ctx, st, en, inters);
 			}
-			
-			if(result == null || result.isEmpty()) {
-				if(ctx.calculationProgress.segmentNotFound == 0) {
+
+			if (result == null || result.isEmpty()) {
+				if (ctx.calculationProgress.segmentNotFound == 0) {
 					return new RouteCalculationResult(params.ctx.getString(R.string.starting_point_too_far));
-				} else if(ctx.calculationProgress.segmentNotFound == inters.size() + 1) {
+				} else if (ctx.calculationProgress.segmentNotFound == inters.size() + 1) {
 					return new RouteCalculationResult(params.ctx.getString(R.string.ending_point_too_far));
-				} else if(ctx.calculationProgress.segmentNotFound > 0) {
+				} else if (ctx.calculationProgress.segmentNotFound > 0) {
 					return new RouteCalculationResult(params.ctx.getString(R.string.intermediate_point_too_far, "'" + ctx.calculationProgress.segmentNotFound + "'"));
 				}
-				if(ctx.calculationProgress.directSegmentQueueSize == 0) {
-					return new RouteCalculationResult("Route can not be found from start point (" +ctx.calculationProgress.distanceFromBegin/1000f+" km)");
-				} else if(ctx.calculationProgress.reverseSegmentQueueSize == 0) {
-					return new RouteCalculationResult("Route can not be found from end point (" +ctx.calculationProgress.distanceFromEnd/1000f+" km)");
+				if (ctx.calculationProgress.directSegmentQueueSize == 0) {
+					return new RouteCalculationResult("Route can not be found from start point (" + ctx.calculationProgress.distanceFromBegin / 1000f + " km)");
+				} else if (ctx.calculationProgress.reverseSegmentQueueSize == 0) {
+					return new RouteCalculationResult("Route can not be found from end point (" + ctx.calculationProgress.distanceFromEnd / 1000f + " km)");
 				}
-				if(ctx.calculationProgress.isCancelled) {
+				if (ctx.calculationProgress.isCancelled) {
 					return interrupted();
 				}
 				// something really strange better to see that message on the scren
 				return emptyResult();
 			} else {
 				RouteCalculationResult res = new RouteCalculationResult(result, params.start, params.end,
-						params.intermediates, params.ctx, params.leftSide, ctx, params.gpxRoute  == null? null: params.gpxRoute.wpt,
-								params.mode, true);
+						params.intermediates, params.ctx, params.leftSide, ctx, params.gpxRoute == null ? null : params.gpxRoute.wpt,
+						params.mode, true);
 				return res;
 			}
 		} catch (RuntimeException e) {
 			log.error("Runtime error: " + e.getMessage(), e);
-			return new RouteCalculationResult(e.getMessage() );
+			return new RouteCalculationResult(e.getMessage());
 		} catch (InterruptedException e) {
 			log.error("Interrupted: " + e.getMessage(), e);
 			return interrupted();
@@ -790,15 +1010,15 @@ public class RouteProvider {
 //			ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
 //			activityManager.getMemoryInfo(memoryInfo);
 //			int avl = (int) (memoryInfo.availMem / (1 << 20));
-			int max = (int) (Runtime.getRuntime().maxMemory() / (1 << 20)); 
+			int max = (int) (Runtime.getRuntime().maxMemory() / (1 << 20));
 			int avl = (int) (Runtime.getRuntime().freeMemory() / (1 << 20));
-			String s = " (" + avl + " MB available of " + max  + ") ";
-			return new RouteCalculationResult("Not enough process memory "+ s);
+			String s = " (" + avl + " MB available of " + max + ") ";
+			return new RouteCalculationResult("Not enough process memory " + s);
 		}
 	}
 
 	private RouteCalculationResult applicationModeNotSupported(RouteCalculationParams params) {
-		return new RouteCalculationResult("Application mode '"+ params.mode.toHumanString()+ "' is not supported.");
+		return new RouteCalculationResult("Application mode '" + params.mode.toHumanString() + "' is not supported.");
 	}
 
 	private RouteCalculationResult interrupted() {
@@ -807,202 +1027,6 @@ public class RouteProvider {
 
 	private RouteCalculationResult emptyResult() {
 		return new RouteCalculationResult("Empty result");
-	}
-
-	protected static List<RouteSegmentResult> parseOsmAndGPXRoute(List<Location> points, GPXFile gpxFile,
-																  List<Location> segmentEndpoints,
-																  int selectedSegment) {
-		List<TrkSegment> segments = gpxFile.getNonEmptyTrkSegments(false);
-		if (selectedSegment != -1 && segments.size() > selectedSegment) {
-			TrkSegment segment = segments.get(selectedSegment);
-			for (WptPt p : segment.points) {
-				points.add(createLocation(p));
-			}
-			RouteImporter routeImporter = new RouteImporter(segment);
-			return routeImporter.importRoute();
-		} else {
-			collectPointsFromSegments(segments, points, segmentEndpoints);
-			RouteImporter routeImporter = new RouteImporter(gpxFile);
-			return routeImporter.importRoute();
-		}
-	}
-
-	protected static void collectSegmentPointsFromGpx(GPXFile gpxFile, List<Location> points,
-													  List<Location> segmentEndpoints, int selectedSegment) {
-		List<TrkSegment> segments = gpxFile.getNonEmptyTrkSegments(false);
-		if (selectedSegment != -1 && segments.size() > selectedSegment) {
-			TrkSegment segment = segments.get(selectedSegment);
-			for (WptPt wptPt : segment.points) {
-				points.add(createLocation(wptPt));
-			}
-		} else {
-			collectPointsFromSegments(segments, points, segmentEndpoints);
-		}
-	}
-
-	protected static void collectPointsFromSegments(List<TrkSegment> segments, List<Location> points, List<Location> segmentEndpoints) {
-		Location lastPoint = null;
-		for (int i = 0; i < segments.size(); i++) {
-			TrkSegment segment = segments.get(i);
-			for (WptPt wptPt : segment.points) {
-				points.add(createLocation(wptPt));
-			}
-			if (i <= segments.size() - 1 && lastPoint != null) {
-				segmentEndpoints.add(lastPoint);
-				segmentEndpoints.add(points.get((points.size() - segment.points.size())));
-			}
-			lastPoint = points.get(points.size() - 1);
-		}
-	}
-
-	protected static List<RouteDirectionInfo> parseOsmAndGPXRoute(List<Location> points, GPXFile gpxFile,
-																  List<Location> segmentEndpoints,
-																  boolean osmandRouter, boolean leftSide,
-																  float defSpeed, int selectedSegment) {
-		List<RouteDirectionInfo> directions = null;
-		if (!osmandRouter) {
-			for (WptPt pt : gpxFile.getPoints()) {
-				points.add(createLocation(pt));
-			}
-		} else {
-			collectSegmentPointsFromGpx(gpxFile, points, segmentEndpoints, selectedSegment);
-		}
-		float[] distanceToEnd = new float[points.size()];
-		for (int i = points.size() - 2; i >= 0; i--) {
-			distanceToEnd[i] = distanceToEnd[i + 1] + points.get(i).distanceTo(points.get(i + 1));
-		}
-
-		Route route = null;
-		if (gpxFile.routes.size() > 0) {
-			route = gpxFile.routes.get(0);
-		}
-		RouteDirectionInfo previous = null;
-		if (route != null && route.points.size() > 0) {
-			directions = new ArrayList<RouteDirectionInfo>();
-			Iterator<WptPt> iterator = route.points.iterator();
-			float lasttime = 0;
-			while(iterator.hasNext()){
-				WptPt item = iterator.next();
-				try {
-					String stime = item.getExtensionsToRead().get("time");
-					int time  = 0;
-					if (stime != null) {
-						time = Integer.parseInt(stime);
-					}
-					int offset = Integer.parseInt(item.getExtensionsToRead().get("offset")); //$NON-NLS-1$
-					if(directions.size() > 0) {
-						RouteDirectionInfo last = directions.get(directions.size() - 1);
-						// update speed using time and idstance
-						if (distanceToEnd.length > last.routePointOffset && distanceToEnd.length > offset) {
-							float lastDistanceToEnd = distanceToEnd[last.routePointOffset];
-							float currentDistanceToEnd = distanceToEnd[offset];
-							if (lasttime != 0) {
-								last.setAverageSpeed((lastDistanceToEnd - currentDistanceToEnd) / lasttime);
-							} 
-							last.distance = (int) Math.round(lastDistanceToEnd - currentDistanceToEnd);
-						}
-					} 
-					// save time as a speed because we don't know distance of the route segment
-					lasttime = time;
-					float avgSpeed = defSpeed;
-					if (!iterator.hasNext() && time > 0) {
-						if (distanceToEnd.length > offset) {
-							avgSpeed = distanceToEnd[offset] / time;
-						} else {
-							avgSpeed = defSpeed;
-						}
-					}
-					String stype = item.getExtensionsToRead().get("turn"); //$NON-NLS-1$
-					TurnType turnType;
-					if (stype != null) {
-						turnType = TurnType.fromString(stype.toUpperCase(), leftSide);
-					} else {
-						turnType = TurnType.straight();
-					}
-					String sturn = item.getExtensionsToRead().get("turn-angle"); //$NON-NLS-1$
-					if (sturn != null) {
-						turnType.setTurnAngle((float) Double.parseDouble(sturn));
-					}
-					String slanes = item.getExtensionsToRead().get("lanes");
-					if (slanes != null) {
-						try {
-							int[] lanes = Algorithms.stringToArray(slanes);
-							if (lanes != null && lanes.length > 0) {
-								turnType.setLanes(lanes);
-							}
-						} catch (NumberFormatException e) {
-							// ignore
-						}
-					}
-					RouteDirectionInfo dirInfo = new RouteDirectionInfo(avgSpeed, turnType);
-					dirInfo.setDescriptionRoute(item.desc); //$NON-NLS-1$
-					dirInfo.routePointOffset = offset;
-
-					// Issue #2894
-					String sref = item.getExtensionsToRead().get("ref"); //$NON-NLS-1$
-					if (sref != null && !"null".equals(sref)) {
-						dirInfo.setRef(sref); //$NON-NLS-1$
-					}
-					String sstreetname = item.getExtensionsToRead().get("street-name"); //$NON-NLS-1$
-					if (sstreetname != null && !"null".equals(sstreetname)) {
-						dirInfo.setStreetName(sstreetname); //$NON-NLS-1$
-					}
-					String sdest = item.getExtensionsToRead().get("dest"); //$NON-NLS-1$
-					if (sdest != null && !"null".equals(sdest)) {
-						dirInfo.setDestinationName(sdest); //$NON-NLS-1$
-					}
-
-					if (previous != null && TurnType.C != previous.getTurnType().getValue() &&
-							!osmandRouter) {
-						// calculate angle
-						if (previous.routePointOffset > 0) {
-							float paz = points.get(previous.routePointOffset - 1).bearingTo(points.get(previous.routePointOffset));
-							float caz;
-							if (previous.getTurnType().isRoundAbout() && dirInfo.routePointOffset < points.size() - 1) {
-								caz = points.get(dirInfo.routePointOffset).bearingTo(points.get(dirInfo.routePointOffset + 1));
-							} else {
-								caz = points.get(dirInfo.routePointOffset - 1).bearingTo(points.get(dirInfo.routePointOffset));
-							}
-							float angle = caz - paz;
-							if (angle < 0) {
-								angle += 360;
-							} else if (angle > 360) {
-								angle -= 360;
-							}
-							// that magic number helps to fix some errors for turn
-							angle += 75;
-
-							if (previous.getTurnType().getTurnAngle() < 0.5f) {
-								previous.getTurnType().setTurnAngle(angle);
-							}
-						}
-					}
-
-					directions.add(dirInfo);
-
-					previous = dirInfo;
-				} catch (NumberFormatException e) {
-					log.info("Exception", e); //$NON-NLS-1$
-				} catch (IllegalArgumentException e) {
-					log.info("Exception", e); //$NON-NLS-1$
-				}
-			}
-		}
-		if (previous != null && TurnType.C != previous.getTurnType().getValue()) {
-			// calculate angle
-			if (previous.routePointOffset > 0 && previous.routePointOffset < points.size() - 1) {
-				float paz = points.get(previous.routePointOffset - 1).bearingTo(points.get(previous.routePointOffset));
-				float caz = points.get(previous.routePointOffset).bearingTo(points.get(points.size() - 1));
-				float angle = caz - paz;
-				if (angle < 0) {
-					angle += 360;
-				}
-				if (previous.getTurnType().getTurnAngle() < 0.5f) {
-					previous.getTurnType().setTurnAngle(angle);
-				}
-			}
-		}
-		return directions;
 	}
 
 	public GPXFile createOsmandRouterGPX(RouteCalculationResult route, OsmandApplication ctx, String name) {
@@ -1021,8 +1045,8 @@ public class RouteProvider {
 						pt.name = ctx.getString(R.string.destination_point, pt.name);
 					}
 				} else {
-					String prefix = (k + 1) +". ";
-					if(Algorithms.isEmpty(pt.name)) {
+					String prefix = (k + 1) + ". ";
+					if (Algorithms.isEmpty(pt.name)) {
 						pt.name = ctx.getString(R.string.target_point, pt.name);
 					}
 					if (pt.name.startsWith(prefix)) {
@@ -1065,16 +1089,6 @@ public class RouteProvider {
 		return new RouteCalculationResult("Route is empty");
 	}
 
-	private static List<LatLon> getPathFromParams(RouteCalculationParams params) {
-		List<LatLon> points = new ArrayList<>();
-		points.add(new LatLon(params.start.getLatitude(), params.start.getLongitude()));
-		if (Algorithms.isEmpty(params.intermediates)) {
-			points.addAll(params.intermediates);
-		}
-		points.add(params.end);
-		return points;
-	}
-
 	protected RouteCalculationResult findBROUTERRoute(RouteCalculationParams params) throws MalformedURLException,
 			IOException, ParserConfigurationException, FactoryConfigurationError, SAXException {
 		int numpoints = 2 + (params.intermediates != null ? params.intermediates.size() : 0);
@@ -1086,8 +1100,8 @@ public class RouteProvider {
 		lats[index] = params.start.getLatitude();
 		lons[index] = params.start.getLongitude();
 		index++;
-		if(params.intermediates != null && params.intermediates.size() > 0) {
-			for(LatLon il : params.intermediates) {
+		if (params.intermediates != null && params.intermediates.size() > 0) {
+			for (LatLon il : params.intermediates) {
 				lats[index] = il.getLatitude();
 				lons[index] = il.getLongitude();
 				index++;
@@ -1101,7 +1115,7 @@ public class RouteProvider {
 		double[] nogoLons = new double[impassableRoads.size()];
 		double[] nogoRadi = new double[impassableRoads.size()];
 
-		if(impassableRoads.size() != 0) {
+		if (impassableRoads.size() != 0) {
 			int nogoindex = 0;
 			for (LatLon nogos : impassableRoads) {
 				nogoLats[nogoindex] = nogos.getLatitude();
@@ -1110,7 +1124,7 @@ public class RouteProvider {
 				nogoindex++;
 			}
 		}
-		
+
 		if (params.mode.isDerivedRoutingFrom(ApplicationMode.PEDESTRIAN)) {
 			mode = "foot"; //$NON-NLS-1$
 		} else if (params.mode.isDerivedRoutingFrom(ApplicationMode.BICYCLE)) {
@@ -1174,23 +1188,17 @@ public class RouteProvider {
 	}
 
 	private RouteCalculationResult findStraightRoute(RouteCalculationParams params) {
-		LinkedList<Location> points = new LinkedList<>();
+		SuggestionsMapsProvider suggestionsMapsProvider = new SuggestionsMapsProvider(params);
+		LinkedList<Location> points = suggestionsMapsProvider.getStartFinishIntermediatesPoints("pnt");
 		List<Location> segments = new ArrayList<>();
-		points.add(new Location("pnt", params.start.getLatitude(), params.start.getLongitude()));
-		if(params.intermediates != null) {
-			for (LatLon l : params.intermediates) {
-				points.add(new Location("pnt", l.getLatitude(), l.getLongitude()));
-			}
-		}
-		points.add(new Location("", params.end.getLatitude(), params.end.getLongitude()));
 		Location lastAdded = null;
 		float speed = params.mode.getDefaultSpeed();
 		List<RouteDirectionInfo> computeDirections = new ArrayList<RouteDirectionInfo>();
-		while(!points.isEmpty()) {
+		while (!points.isEmpty()) {
 			Location pl = points.peek();
 			if (lastAdded == null || lastAdded.distanceTo(pl) < MIN_STRAIGHT_DIST) {
 				lastAdded = points.poll();
-				if(lastAdded.getProvider().equals("pnt")) {
+				if (lastAdded != null && lastAdded.getProvider().equals("pnt")) {
 					RouteDirectionInfo previousInfo = new RouteDirectionInfo(speed, TurnType.straight());
 					previousInfo.routePointOffset = segments.size();
 					previousInfo.setDescriptionRoute(params.ctx.getString(R.string.route_head));
@@ -1204,4 +1212,5 @@ public class RouteProvider {
 		}
 		return new RouteCalculationResult(segments, computeDirections, params, null, false);
 	}
+
 }

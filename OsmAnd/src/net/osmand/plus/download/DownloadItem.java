@@ -52,6 +52,10 @@ public abstract class DownloadItem {
 		return type.getVisibleDescription(this, ctx);
 	}
 
+	public String getVisibleMapsName(Context ctx, OsmandRegions osmandRegions) {
+		return type.getSuggestedMapsName(this, ctx, osmandRegions);
+	}
+
 	@NonNull
 	public String getBasename() {
 		return type.getBasename(this);
@@ -63,7 +67,7 @@ public abstract class DownloadItem {
 	@Nullable
 	public abstract String getAdditionalDescription(Context ctx);
 
-	protected abstract double getSizeToDownloadInMb();
+	public abstract double getSizeToDownloadInMb();
 
 	public abstract double getArchiveSizeMB();
 

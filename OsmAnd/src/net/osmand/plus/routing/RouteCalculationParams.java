@@ -2,6 +2,7 @@ package net.osmand.plus.routing;
 
 import net.osmand.Location;
 import net.osmand.data.LatLon;
+import net.osmand.map.WorldRegion;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.router.RouteCalculationProgress;
@@ -26,6 +27,7 @@ public class RouteCalculationParams {
 	public boolean inPublicTransportMode;
 	public boolean startTransportStop;
 	public boolean targetTransportStop;
+	public List<WorldRegion> missingMaps;
 	public RouteCalculationProgress calculationProgress;
 	public RouteCalculationProgressCallback calculationProgressCallback;
 	public RouteCalculationResultListener resultListener;

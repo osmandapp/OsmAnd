@@ -126,6 +126,7 @@ import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenuFragment;
 import net.osmand.plus.routing.IRouteInformationListener;
+import net.osmand.plus.routing.RouteCalculationParams;
 import net.osmand.plus.routing.RouteCalculationProgressCallback;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper.TransportRouteCalculationProgressCallback;
@@ -584,6 +585,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 						dlg.show();
 					}
 				}
+			}
+
+			@Override
+			public void updateMissingMaps(RouteCalculationParams params) {
+				mapRouteInfoMenu.updateMissingMapsOnDirectLine(params);
 			}
 
 			@Override

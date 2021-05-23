@@ -568,6 +568,11 @@ public class TransportRoutingHelper {
 				}
 
 				@Override
+				public void updateMissingMaps(RouteCalculationParams params) {
+
+				}
+
+				@Override
 				public void finish() {
 					if (walkingSegmentsToCalculate.isEmpty()) {
 						walkingSegmentsCalculated = true;
