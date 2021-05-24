@@ -80,4 +80,5 @@
     <string name="duration_ago">před %1$s</string>
     <string name="shared_string_password">Heslo</string>
     <string name="shared_string_account">Účet</string>
+    <string name="shared_string_export">Export</string>
 </resources>
