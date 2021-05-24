@@ -48,7 +48,7 @@ public class NominatimPoiFilter extends PoiUIFilter {
 		if(addressQuery) {
 			this.distanceToSearchValues = new double[] {500};
 		} else {
-			this.distanceToSearchValues = new double[] {1, 2, 5, 10, 20, 50, 100, 200, 500 };
+			this.distanceToSearchValues = new double[] {1, 2, 5, 10, 20, 50, 100, 200, 7000};
 		}
 		this.filterId = FILTER_ID + (addressQuery ? "_address" : "_places");
 	}
