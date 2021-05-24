@@ -229,6 +229,8 @@ public abstract class MenuController extends BaseMenuController implements Colla
 				menuController = new MapillaryMenuController(mapActivity, pointDescription, (MapillaryImage) object);
 			} else if (object instanceof SelectedGpxPoint) {
 				menuController = new SelectedGpxMenuController(mapActivity, pointDescription, (SelectedGpxPoint) object);
+			} else if (object instanceof Pair && ((Pair<?, ?>) object).second instanceof SelectedGpxPoint) {
+				menuController = new SelectedGpxMenuController(mapActivity, pointDescription, (SelectedGpxPoint) ((Pair<?, ?>) object).second);
 			}
 		}
 		if (menuController == null) {

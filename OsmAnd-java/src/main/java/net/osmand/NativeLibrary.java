@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
@@ -457,6 +458,30 @@ public class NativeLibrary {
 
 		public void setLabelY(int labelY) {
 			this.labelY = labelY;
+		}
+
+		public List<String> getOriginalNames() {
+			List<String> names = new ArrayList<>();
+			if (!Algorithms.isEmpty(name)) {
+				names.add(name);
+			}
+			for (Map.Entry<String, String> entry : tags.entrySet()) {
+				String key = entry.getKey();
+				String value = entry.getValue();
+				if ((key.startsWith("name:") || key.equals("name")) && !value.isEmpty()) {
+					names.add(value);
+				}
+			}
+			return names;
+		}
+
+		public String getGpxFileName() {
+			for (String name : getOriginalNames()) {
+				if (name.endsWith(IndexConstants.GPX_FILE_EXT)) {
+					return name;
+				}
+			}
+			return null;
 		}
 	}
 
