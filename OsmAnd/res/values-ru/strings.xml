@@ -69,7 +69,7 @@
     <string name="nearest_cities">Ближайшие города</string>
     <string name="select_city">Выберите город</string>
     <string name="select_postcode">Поиск почтового индекса</string>
-    <string name="quick_action_take_audio_note">Запись аудио⁣</string>
+    <string name="quick_action_take_audio_note">Записать аудио</string>
     <string name="quick_action_take_video_note">Записать видео</string>
     <string name="quick_action_take_photo_note">Сделать фото</string>
     <string name="quick_action_add_osm_bug">OSM-заметка</string>
@@ -294,8 +294,8 @@
 \nГлобальные данные (между 70° на севере и 70° на юге) основываются на измерениях SRTM (Shuttle Radar Topography Mission) и ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) — инструментом визуализации Terra, флагманского спутника Системы Наблюдения Земли NASA. ASTER является результатом совместных усилий NASA, министерства экономики Японии, торговли и промышленности (METI), а также Космических Систем Японии (J-spacesystems).</string>
     <string name="srtm_paid_version_msg">Рассмотрите возможность покупки плагина «Линии высот» в Google Play, чтобы поддержать последующую разработку.</string>
     <string name="srtm_paid_version_title">Линии высот</string>
-    <string name="av_def_action_video">Запись видео</string>
-    <string name="av_def_action_audio">Запись аудио</string>
+    <string name="av_def_action_video">Записать видео</string>
+    <string name="av_def_action_audio">Записать аудио</string>
     <string name="av_widget_action_descr">Действие по умолчанию для виджета:</string>
     <string name="av_widget_action">Действие по умолчанию для виджета</string>
     <string name="av_video_format_descr">Формат вывода видео:</string>
@@ -310,8 +310,8 @@
     <string name="recording_open_external_player">Открыть внешний проигрыватель</string>
     <string name="recording_delete_confirm">Удалить эту запись?</string>
     <string name="recording_unavailable">недоступно</string>
-    <string name="recording_context_menu_arecord">Запись аудио</string>
-    <string name="recording_context_menu_vrecord">Запись видео</string>
+    <string name="recording_context_menu_arecord">Записать аудио</string>
+    <string name="recording_context_menu_vrecord">Записать видео</string>
     <string name="layer_recordings">Слой медиазаписей</string>
     <string name="recording_can_not_be_played">Не удаётся воспроизвести запись.</string>
     <string name="recording_context_menu_delete">Удалить запись</string>
@@ -893,7 +893,7 @@
     <string name="search_address_building_option">Дом</string>
     <string name="search_address_street_option">Пересечение улиц</string>
     <string name="context_menu_item_update_map">Обновить карту</string>
-    <string name="context_menu_item_create_poi">Добавление POI</string>
+    <string name="context_menu_item_create_poi">Добавить POI</string>
     <string name="shared_string_yes">Да</string>
     <string name="shared_string_cancel">Отмена</string>
     <string name="shared_string_no">Нет</string>
