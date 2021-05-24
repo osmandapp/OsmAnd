@@ -153,6 +153,7 @@ public class PoiUiFiltersSettingsItem extends CollectionSettingsItem<PoiUIFilter
 					JSONObject jsonObject = new JSONObject();
 					jsonObject.put("name", filter.getName());
 					jsonObject.put("filterId", filter.getFilterId());
+					jsonObject.put("filterByName", filter.getFilterByName());
 
 					Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = filter.getAcceptedTypes();
 					for (PoiCategory category : acceptedTypes.keySet()) {
