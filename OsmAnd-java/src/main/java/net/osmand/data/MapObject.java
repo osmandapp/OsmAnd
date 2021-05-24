@@ -123,9 +123,11 @@ public abstract class MapObject implements Comparable<MapObject> {
 	
 	public List<String> getAllNames(boolean transliterate) {
 		List<String> l = new ArrayList<String>();
-		String enName = getEnName(transliterate); 
+		String enName = getEnName(transliterate);
 		if (!Algorithms.isEmpty(enName)) {
 			l.add(enName);
+		} else if (!transliterate) {
+			l.add(getName());
 		}
 		if (names != null) {
 			l.addAll(names.values());
