@@ -993,7 +993,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		return null;
 	}
 
-	public SelectedGpxPoint createSelectedGpxPoint(SelectedGpxFile selectedGpxFile, WptPt prevPoint, WptPt nextPoint, LatLon latLon) {
+	private SelectedGpxPoint createSelectedGpxPoint(SelectedGpxFile selectedGpxFile, WptPt prevPoint, WptPt nextPoint, LatLon latLon) {
 		WptPt projectionPoint = createProjectionPoint(prevPoint, nextPoint, latLon);
 
 		Location prevPointLocation = new Location("");
@@ -1055,6 +1055,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			try {
 				reader.searchMapIndex(sr);
 			} catch (IOException e) {
+				log.error(e);
 			}
 			if (!Algorithms.isEmpty(segmentsObjects)) {
 				break;
@@ -1249,38 +1250,26 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	public boolean showMenuAction(@Nullable Object object) {
 		OsmandApplication app = view.getApplication();
 		MapActivity mapActivity = (MapActivity) view.getContext();
-		SelectedGpxPoint selectedGpxPoint;
-		SelectedGpxFile selectedGpxFile;
 		if (object instanceof Pair && ((Pair<?, ?>) object).first instanceof NativeLibrary.RenderedObject
 				&& ((Pair<?, ?>) object).second instanceof SelectedGpxPoint) {
 			Pair<NativeLibrary.RenderedObject, SelectedGpxPoint> pair = (Pair) object;
 			NativeLibrary.RenderedObject renderedObject = pair.first;
-			selectedGpxPoint = createSelectedGpxPoint(view.getCurrentRotatedTileBox(), pair.second.getSelectedPoint(), renderedObject);
-			selectedGpxFile = selectedGpxPoint.getSelectedGpxFile();
+			SelectedGpxPoint selectedGpxPoint = createSelectedGpxPoint(view.getCurrentRotatedTileBox(), pair.second.getSelectedPoint(), renderedObject);
+			SelectedGpxFile selectedGpxFile = selectedGpxPoint.getSelectedGpxFile();
 			GPXFile gpxFile = selectedGpxFile.getGpxFile();
-
-			new SaveGpxAsyncTask(new File(gpxFile.path), gpxFile, new SaveGpxAsyncTask.SaveGpxListener() {
-				@Override
-				public void gpxSavingStarted() {
-				}
-
-				@Override
-				public void gpxSavingFinished(Exception errorMessage) {
-					if (errorMessage == null) {
-						app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, false);
-						TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint, null, null, false);
-					}
-				}
-			}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, false);
+			gpxFile.addGeneralTrack();
+			new SaveGpxAsyncTask(new File(gpxFile.path), gpxFile, null)
+					.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint, null, null, false);
+			return true;
 		} else if (object instanceof SelectedGpxPoint) {
-			selectedGpxPoint = (SelectedGpxPoint) object;
-			selectedGpxFile = selectedGpxPoint.getSelectedGpxFile();
-		} else {
-			return false;
+			SelectedGpxPoint selectedGpxPoint = (SelectedGpxPoint) object;
+			SelectedGpxFile selectedGpxFile = selectedGpxPoint.getSelectedGpxFile();
+			TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint, null, null, false);
+			return true;
 		}
-
-		TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint, null, null, false);
-		return true;
+		return false;
 	}
 
 	@Override
