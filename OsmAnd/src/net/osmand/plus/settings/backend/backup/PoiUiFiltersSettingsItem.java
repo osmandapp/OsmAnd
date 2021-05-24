@@ -122,6 +122,7 @@ public class PoiUiFiltersSettingsItem extends CollectionSettingsItem<PoiUIFilter
 				String name = object.getString("name");
 				String filterId = object.getString("filterId");
 				String acceptedTypesString = object.getString("acceptedTypes");
+				String filterByName = object.getString("filterByName");
 				HashMap<String, LinkedHashSet<String>> acceptedTypes = gson.fromJson(acceptedTypesString, type);
 				Map<PoiCategory, LinkedHashSet<String>> acceptedTypesDone = new HashMap<>();
 				for (Map.Entry<String, LinkedHashSet<String>> mapItem : acceptedTypes.entrySet()) {
@@ -129,6 +130,7 @@ public class PoiUiFiltersSettingsItem extends CollectionSettingsItem<PoiUIFilter
 					acceptedTypesDone.put(a, mapItem.getValue());
 				}
 				PoiUIFilter filter = new PoiUIFilter(name, filterId, acceptedTypesDone, app);
+				filter.setFilterByName(filterByName);
 				items.add(filter);
 			}
 		} catch (JSONException e) {
@@ -149,6 +151,7 @@ public class PoiUiFiltersSettingsItem extends CollectionSettingsItem<PoiUIFilter
 					JSONObject jsonObject = new JSONObject();
 					jsonObject.put("name", filter.getName());
 					jsonObject.put("filterId", filter.getFilterId());
+					jsonObject.put("filterByName", filter.getFilterByName());
 
 					Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = filter.getAcceptedTypes();
 					for (PoiCategory category : acceptedTypes.keySet()) {
