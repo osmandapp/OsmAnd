@@ -3740,7 +3740,7 @@
     <string name="shared_string_gpx_route">Маршрут трека</string>
     <string name="empty_state_my_tracks">Добавить файлы треков</string>
     <string name="empty_state_my_tracks_desc">Импортируйте или запишите файлы треков</string>
-    <string name="context_menu_item_add_waypoint">Путевая точка</string>
+    <string name="context_menu_item_add_waypoint">Добавить путевую точку</string>
     <string name="quick_action_add_gpx">Путевая точка</string>
     <string name="map_widget_monitoring">Запись поездки</string>
     <string name="marker_save_as_track">Сохранить как файл трека</string>
