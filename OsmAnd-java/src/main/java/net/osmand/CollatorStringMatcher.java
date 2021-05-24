@@ -184,7 +184,7 @@ public class CollatorStringMatcher implements StringMatcher {
 		int i;
 		fullText = fullText.toLowerCase(Locale.getDefault());
 		// if key consist of 'ß' e.g. "gieß" we do not change to 'ss'
-		while( key.indexOf('ß') == -1 && (i = fullText.indexOf('ß') ) != -1 ) {
+		while (key.indexOf('ß') == -1 && (i = fullText.indexOf('ß')) != -1) {
 			fullText = fullText.substring(0, i) + "ss" + fullText.substring(i+1);
 		}
 		return fullText;
