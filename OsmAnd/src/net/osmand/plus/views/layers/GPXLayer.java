@@ -926,20 +926,29 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		int my = (int) point.y;
 		List<SelectedGpxFile> selectedGpxFiles = new ArrayList<>(selectedGpxHelper.getSelectedGPXFiles());
 		for (SelectedGpxFile selectedGpxFile : selectedGpxFiles) {
-			List<TrkSegment> segments = selectedGpxFile.getPointsToDisplay();
-			for (TrkSegment segment : segments) {
-				QuadRect trackBounds = GPXUtilities.calculateBounds(segment.points);
-				if (QuadRect.trivialOverlap(tb.getLatLonBounds(), trackBounds)) {
-					Pair<WptPt, WptPt> points = findPointsNearSegment(tb, segment.points, r, mx, my);
-					if (points != null) {
-						LatLon latLon = tb.getLatLonFromPixel(mx, my);
-						SelectedGpxPoint selectedGpxPoint = createSelectedGpxPoint(selectedGpxFile, points.first, points.second, latLon);
-						res.add(selectedGpxPoint);
-						break;
-					}
+			Pair<WptPt, WptPt> points = findPointsNearSegments(selectedGpxFile.getPointsToDisplay(), tb, r, mx, my);
+			if (points != null) {
+				LatLon latLon = tb.getLatLonFromPixel(mx, my);
+				SelectedGpxPoint selectedGpxPoint =
+						createSelectedGpxPoint(selectedGpxFile, points.first, points.second, latLon);
+				res.add(selectedGpxPoint);
+				break;
+			}
+		}
+	}
+
+	private Pair<WptPt, WptPt> findPointsNearSegments(List<TrkSegment> segments, RotatedTileBox tileBox,
+													  int radius, int x, int y) {
+		for (TrkSegment segment : segments) {
+			QuadRect trackBounds = GPXUtilities.calculateBounds(segment.points);
+			if (QuadRect.trivialOverlap(tileBox.getLatLonBounds(), trackBounds)) {
+				Pair<WptPt, WptPt> points = findPointsNearSegment(tileBox, segment.points, radius, x, y);
+				if (points != null) {
+					return points;
 				}
 			}
 		}
+		return null;
 	}
 
 	@Nullable
@@ -1009,30 +1018,21 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		return new SelectedGpxPoint(selectedGpxFile, projectionPoint, prevPoint, nextPoint, bearing);
 	}
 
-	private SelectedGpxPoint createSelectedGpxPoint(RotatedTileBox tileBox, WptPt point, NativeLibrary.RenderedObject object) {
+	private GPXFile createGpxFileFromRenderedObject(NativeLibrary.RenderedObject object) {
 		OsmandApplication app = view.getApplication();
-		SelectedGpxFile selectedGpxFile = new SelectedGpxFile();
 		GPXFile gpxFile = new GPXFile(Version.getFullVersion(app));
-		List<String> names = object.getOriginalNames();
-		String fileName = "";
-		for (String name : names) {
-			if (name.endsWith(IndexConstants.GPX_FILE_EXT)) {
-				fileName = name;
-				break;
-			}
-		}
+		String fileName = object.getFileNameByExtension(IndexConstants.GPX_FILE_EXT);
 		gpxFile.path = app.getAppPath(IndexConstants.GPX_FROM_OBF_DIR).getPath() + "/" + fileName;
 		GPXUtilities.Track track = new GPXUtilities.Track();
-		String refValue = object.getTags().get(TravelObfHelper.REF_TAG);
+		String refValue = object.getTagValue(TravelObfHelper.REF_TAG);
 
 		List<BinaryMapDataObject> segmentsObjects = new ArrayList<>();
-		String finalFileName = fileName;
 		BinaryMapIndexReader.SearchRequest<BinaryMapDataObject> sr = BinaryMapIndexReader.buildSearchRequest(
 				0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, 15, null, new ResultMatcher<BinaryMapDataObject>() {
 					@Override
 					public boolean publish(BinaryMapDataObject object) {
-						if (TravelObfHelper.getTagValue(object, TravelObfHelper.REF_TAG).equals(refValue)
-								&& TravelObfHelper.getTagValue(object, TravelObfHelper.NAME_TAG).equals(finalFileName)) {
+						if (object.getTagValue(TravelObfHelper.REF_TAG).equals(refValue)
+								&& object.getTagValue(TravelObfHelper.NAME_TAG).equals(fileName)) {
 							segmentsObjects.add(object);
 						}
 						return false;
@@ -1064,7 +1064,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 		Collections.sort(segmentsObjects, (left, right) -> Long.compare(right.getId(), left.getId()));
 
-		Pair<WptPt, WptPt> prevNextPoints = null;
 		for (BinaryMapDataObject mapDataObject : segmentsObjects) {
 			if (mapDataObject.getPointsLength() < 2) {
 				continue;
@@ -1077,23 +1076,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				segment.points.add(pt);
 			}
 			track.segments.add(segment);
-			if (mapDataObject.getId() == object.getId()) {
-				int radius = getScaledTouchRadius(app, getDefaultRadiusPoi(tileBox));
-				int x = (int) tileBox.getPixXFromLatLon(point.getLatitude(), point.getLongitude());
-				int y = (int) tileBox.getPixYFromLatLon(point.getLatitude(), point.getLongitude());
-				prevNextPoints = GPXLayer.findPointsNearSegment(tileBox, segment.points, radius, x, y);
-			}
 		}
 
 		gpxFile.tracks.add(track);
-		selectedGpxFile.setGpxFile(gpxFile, app);
-
-		LatLon latLon = new LatLon(point.lat, point.lon);
-		if (prevNextPoints != null) {
-			return createSelectedGpxPoint(selectedGpxFile, prevNextPoints.first, prevNextPoints.second, latLon);
-		} else {
-			return createSelectedGpxPoint(selectedGpxFile, new WptPt(), new WptPt(), latLon);
-		}
+		return gpxFile;
 	}
 
 	public static WptPt createProjectionPoint(WptPt prevPoint, WptPt nextPoint, LatLon latLon) {
@@ -1142,7 +1128,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		} else if (o instanceof Pair && ((Pair<?, ?>) o).first instanceof NativeLibrary.RenderedObject) {
 			NativeLibrary.RenderedObject renderedObject = (NativeLibrary.RenderedObject) ((Pair<?, ?>) o).first;
 			return new PointDescription(PointDescription.POINT_TYPE_GPX,
-					Algorithms.getFileNameWithoutExtension(renderedObject.getGpxFileName()));
+					Algorithms.getFileNameWithoutExtension(renderedObject.getFileNameByExtension(IndexConstants.GPX_FILE_EXT)));
 		}
 		return null;
 	}
@@ -1211,8 +1197,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		} else if (o instanceof SelectedGpxPoint) {
 			WptPt point = ((SelectedGpxPoint) o).getSelectedPoint();
 			return new LatLon(point.lat, point.lon);
-		} else if (o instanceof Pair && ((Pair<?, ?>) o).second instanceof LatLon) {
-			return (LatLon) ((Pair<?, ?>) o).second;
+		} else if (o instanceof Pair && ((Pair<?, ?>) o).second instanceof SelectedGpxPoint) {
+			WptPt point = ((SelectedGpxPoint) ((Pair<?, ?>) o).second).getSelectedPoint();
+			return new LatLon(point.lat, point.lon);
 		}
 		return null;
 	}
@@ -1250,18 +1237,29 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	public boolean showMenuAction(@Nullable Object object) {
 		OsmandApplication app = view.getApplication();
 		MapActivity mapActivity = (MapActivity) view.getContext();
+		RotatedTileBox tileBox = view.getCurrentRotatedTileBox();
+
 		if (object instanceof Pair && ((Pair<?, ?>) object).first instanceof NativeLibrary.RenderedObject
 				&& ((Pair<?, ?>) object).second instanceof SelectedGpxPoint) {
 			Pair<NativeLibrary.RenderedObject, SelectedGpxPoint> pair = (Pair) object;
 			NativeLibrary.RenderedObject renderedObject = pair.first;
-			SelectedGpxPoint selectedGpxPoint = createSelectedGpxPoint(view.getCurrentRotatedTileBox(), pair.second.getSelectedPoint(), renderedObject);
-			SelectedGpxFile selectedGpxFile = selectedGpxPoint.getSelectedGpxFile();
-			GPXFile gpxFile = selectedGpxFile.getGpxFile();
-			app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, false);
+			LatLon latLon = new LatLon(pair.second.getSelectedPoint().lat, pair.second.getSelectedPoint().lon);
+			GPXFile gpxFile = createGpxFileFromRenderedObject(renderedObject);
 			gpxFile.addGeneralTrack();
+			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, false);
+
+			int r = getScaledTouchRadius(view.getApplication(), getDefaultRadiusPoi(tileBox));
+			int x = (int) tileBox.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
+			int y = (int) tileBox.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
+			Pair<WptPt, WptPt> prevNextPoints =
+					findPointsNearSegments(selectedGpxFile.getPointsToDisplay(), tileBox, r, x, y);
+			SelectedGpxPoint selectedGpxPoint = prevNextPoints == null
+					? createSelectedGpxPoint(selectedGpxFile, new WptPt(), new WptPt(), latLon)
+					: createSelectedGpxPoint(selectedGpxFile, prevNextPoints.first, prevNextPoints.second, latLon);
+
+			TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint, null, null, false);
 			new SaveGpxAsyncTask(new File(gpxFile.path), gpxFile, null)
 					.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-			TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint, null, null, false);
 			return true;
 		} else if (object instanceof SelectedGpxPoint) {
 			SelectedGpxPoint selectedGpxPoint = (SelectedGpxPoint) object;

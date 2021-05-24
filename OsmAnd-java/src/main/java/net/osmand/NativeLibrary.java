@@ -378,6 +378,10 @@ public class NativeLibrary {
 		public Map<String, String> getTags() {
 			return tags;
 		}
+
+		public String getTagValue(String tag) {
+			return getTags().get(tag);
+		}
 		
 		public boolean isText() {
 			return !getName().isEmpty();
@@ -475,9 +479,12 @@ public class NativeLibrary {
 			return names;
 		}
 
-		public String getGpxFileName() {
+		public String getFileNameByExtension(String extension) {
+			if (Algorithms.isEmpty(extension) || !extension.startsWith(".")) {
+				return null;
+			}
 			for (String name : getOriginalNames()) {
-				if (name.endsWith(IndexConstants.GPX_FILE_EXT)) {
+				if (name.endsWith(extension)) {
 					return name;
 				}
 			}

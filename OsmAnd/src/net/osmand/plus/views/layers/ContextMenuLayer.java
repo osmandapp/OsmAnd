@@ -736,10 +736,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 				for (RenderedObject renderedObject : renderedObjects) {
 
-					List<String> names = renderedObject.getOriginalNames();
-					String gpxFileName = renderedObject.getGpxFileName();
+					String gpxFileName = renderedObject.getFileNameByExtension(IndexConstants.GPX_FILE_EXT);
 					boolean isGpx = !Algorithms.isEmpty(gpxFileName);
-					if (renderedObject.getId() == null || !renderedObject.isVisible() && !isGpx) {
+					if (!isGpx && (renderedObject.getId() == null || !renderedObject.isVisible())) {
 						continue;
 					}
 
@@ -766,23 +765,19 @@ public class ContextMenuLayer extends OsmandMapLayer {
 					} else if (renderedObject.getLabelLatLon() != null) {
 						objectLatLon = renderedObject.getLabelLatLon();
 					}
-					LatLon searchLatLon = objectLatLon;
-					if (searchLatLon == null) {
-						searchLatLon = pointLatLon;
-					}
+					LatLon searchLatLon = objectLatLon != null ? objectLatLon : pointLatLon;
 					if (isGpx) {
 						if (isUniqueGpx(selectedObjects, gpxFileName)) {
-							SelectedGpxFile selectedGpxFile = new SelectedGpxFile();
-							selectedGpxFile.setGpxFile(new GPXFile(Version.getFullVersion(app)), app);
 							WptPt selectedPoint = new WptPt();
 							selectedPoint.lat = pointLatLon.getLatitude();
 							selectedPoint.lon = pointLatLon.getLongitude();
 							SelectedGpxPoint selectedGpxPoint =
-									new SelectedGpxPoint(selectedGpxFile, selectedPoint, null, null, Float.NaN);
+									new SelectedGpxPoint(null, selectedPoint, null, null, Float.NaN);
 							selectedObjects.put(new Pair<>(renderedObject, selectedGpxPoint), gpxMenuProvider);
 						}
 					} else {
-						Amenity amenity = findAmenity(app, renderedObject.getId() >> 7, names, searchLatLon, AMENITY_SEARCH_RADIUS);
+						Amenity amenity = findAmenity(app, renderedObject.getId() >> 7,
+								renderedObject.getOriginalNames(), searchLatLon, AMENITY_SEARCH_RADIUS);
 						if (amenity != null) {
 							if (renderedObject.getX() != null && renderedObject.getX().size() > 1
 									&& renderedObject.getY() != null && renderedObject.getY().size() > 1) {
@@ -877,7 +872,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			if (entry.getKey() instanceof Pair && entry.getValue() instanceof GPXLayer
 					&& ((Pair<?, ?>) entry.getKey()).first instanceof RenderedObject) {
 				RenderedObject object = (RenderedObject) ((Pair<?, ?>) entry.getKey()).first;
-				if (gpxFileName.equals(object.getGpxFileName())) {
+				if (gpxFileName.equals(object.getFileNameByExtension(IndexConstants.GPX_FILE_EXT))) {
 					return false;
 				}
 			}

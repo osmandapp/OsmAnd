@@ -303,8 +303,8 @@ public class TravelObfHelper implements TravelHelper {
 							@Override
 							public boolean publish(BinaryMapDataObject object) {
 								if (object.getPointsLength() > 1) {
-									if (getTagValue(object, REF_TAG).equals(ref)
-											&& createTitle(getTagValue(object, NAME_TAG)).equals(article.title)) {
+									if (object.getTagValue(REF_TAG).equals(ref)
+											&& createTitle(object.getTagValue(NAME_TAG)).equals(article.title)) {
 										segmentList.add(object);
 									}
 								}
@@ -343,19 +343,6 @@ public class TravelObfHelper implements TravelHelper {
 		}
 		article.gpxFile = gpxFile;
 		return gpxFile;
-	}
-
-	public static String getTagValue(BinaryMapDataObject object, String tag) {
-		BinaryMapIndexReader.MapIndex mi = object.getMapIndex();
-		TIntObjectIterator<String> it = object.getObjectNames().iterator();
-		while (it.hasNext()) {
-			it.advance();
-			BinaryMapIndexReader.TagValuePair tp = mi.decodeType(it.key());
-			if (tp.tag.equals(tag)) {
-				return it.value();
-			}
-		}
-		return "";
 	}
 
 	private String createTitle(String name) {
