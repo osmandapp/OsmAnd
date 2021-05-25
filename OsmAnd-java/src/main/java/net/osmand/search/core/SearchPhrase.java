@@ -1,6 +1,5 @@
 package net.osmand.search.core;
 
-import java.io.IOException;
 import java.util.*;
 import java.util.regex.Pattern;
 
@@ -15,8 +14,6 @@ import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.CommonWords;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
-import net.osmand.map.OsmandRegions;
-import net.osmand.map.WorldRegion;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.LocationParser;
@@ -212,8 +209,7 @@ public class SearchPhrase {
 				String wd = ws[i].trim();
 				boolean conjunction = conjunctions.contains(wd.toLowerCase());
 				boolean lastAndIncomplete = i == ws.length - 1 && !sp.lastUnknownSearchWordComplete;
-				boolean decryptAbbreviations = needDecryptAbbreviations(getWorldRegions());
-
+				boolean decryptAbbreviations = needDecryptAbbreviations();
 				if (wd.length() > 0 && (!conjunction || lastAndIncomplete)) {
 					if (first) {
 						sp.firstUnknownSearchWord = decryptAbbreviations ? Abbreviations.replace(wd) : wd;
@@ -227,34 +223,14 @@ public class SearchPhrase {
 		return sp;
 	}
 
-	private List<WorldRegion> getWorldRegions() {
-		OsmandRegions or = new OsmandRegions();
-		List<WorldRegion> regions = new ArrayList<>();
-		LatLon location = null;
-		try {
-			or.prepareFile();
-			if (settings != null) {
-				location = settings.getOriginalLocation();
-			}
-			if (location != null) {
-				regions = or.getWorldRegionsAt(location);
-			}
-		} catch (IOException e) {
-			return regions;
-		}
-		return regions;
-	}
-
-	private boolean needDecryptAbbreviations(List<WorldRegion> regions) {
-		if (regions != null) {
-			for (WorldRegion region : regions) {
-				String regionLang = region.getParams().getRegionLang();
-				if (regionLang != null) {
-					String[] langArr = regionLang.split(",");
-					for (String lang : langArr) {
-						if (lang.equals("en")) {
-							return true;
-						}
+	private boolean needDecryptAbbreviations() {
+		if (settings != null && settings.getRegionLang() != null) {
+			String langs = settings.getRegionLang();
+			if (langs != null) {
+				String[] langArr = langs.split(",");
+				for (String lang : langArr) {
+					if (lang.equals("en")) {
+						return true;
 					}
 				}
 			}

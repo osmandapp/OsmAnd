@@ -15,6 +15,7 @@ import java.util.Locale;
 public class SearchSettings {
 
 	private LatLon originalLocation;
+	private String regionLang;
 	private List<BinaryMapIndexReader> offlineIndexes = new ArrayList<>();
 	private int radiusLevel = 1;
 	private int totalLimit = -1;
@@ -33,6 +34,7 @@ public class SearchSettings {
 			this.totalLimit = s.totalLimit;
 			this.offlineIndexes = s.offlineIndexes;
 			this.originalLocation = s.originalLocation;
+			this.regionLang = s.regionLang;
 			this.searchTypes = s.searchTypes;
 			this.emptyQueryAllowed = s.emptyQueryAllowed;
 			this.sortByName = s.sortByName;
@@ -162,6 +164,16 @@ public class SearchSettings {
 		return false;
 	}
 
+	public String getRegionLang() {
+		return regionLang;
+	}
+
+	public SearchSettings setRegionLang(String regionLang) {
+		SearchSettings s = new SearchSettings(this);
+		s.regionLang = regionLang;
+		return s;
+	}
+
 	public JSONObject toJSON() {
 		JSONObject json = new JSONObject();
 		if (originalLocation != null) {
@@ -197,6 +209,9 @@ public class SearchSettings {
 		s.sortByName = json.optBoolean("sortByName", false);
 		if (json.has("lang")) {
 			s.lang = json.getString("lang");
+		}
+		if (json.has("regionLang")) {
+			s.regionLang = json.getString("regionLang");
 		}
 		if (json.has("searchTypes")) {
 			JSONArray searchTypesArr = json.getJSONArray("searchTypes");
