@@ -232,7 +232,6 @@ public class SearchPhrase {
 		List<WorldRegion> regions = new ArrayList<>();
 		try {
 			or.prepareFile();
-			or.cacheAllCountries();
 			LatLon location = settings.getOriginalLocation();
 			if (location != null) {
 				regions = or.getWorldRegionsAt(location);
