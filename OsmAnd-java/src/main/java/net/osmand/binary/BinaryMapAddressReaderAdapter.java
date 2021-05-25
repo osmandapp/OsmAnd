@@ -294,7 +294,7 @@ public class BinaryMapAddressReaderAdapter {
 			}
 			boolean matches = stringMatcher.matches(city.getName());
 			if (!matches) {
-				for (String n : city.getAllNames()) {
+				for (String n : city.getOtherNames()) {
 					matches = stringMatcher.matches(n);
 					if (matches) {
 						break;
@@ -710,7 +710,7 @@ public class BinaryMapAddressReaderAdapter {
 								publishRawData(req, s);
 								boolean matches = stringMatcher.matches(s.getName());
 								if (!matches) {
-									for (String n : s.getAllNames()) {
+									for (String n : s.getOtherNames()) {
 										matches = stringMatcher.matches(n);
 										if (matches) {
 											break;

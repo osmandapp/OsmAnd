@@ -3298,7 +3298,6 @@
     <string name="select_color">Одаберите боју</string>
     <string name="edit_profiles_descr">Подразумевани OsmAnd профиле не могу да се избришу, али могу да се искључе (на претходном екрану), или да се ставе на дно.</string>
     <string name="edit_profiles">Измени профиле</string>
-    <string name="select_nav_profile_dialog_message">’Тип навођења’ одређује како се пут израчунава.</string>
     <string name="profile_appearance">Изглед профила</string>
     <string name="choose_icon_color_name">Иконица, боја и име</string>
     <string name="reorder_profiles">Измени листу профила</string>

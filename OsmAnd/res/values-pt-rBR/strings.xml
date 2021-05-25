@@ -3294,7 +3294,6 @@
     <string name="select_color">Selecione a cor</string>
     <string name="edit_profiles_descr">Perfis padrão do OsmAnd não podem ser excluídos, mas desativados (na tela anterior) ou classificados na parte inferior.</string>
     <string name="edit_profiles">Editar perfis</string>
-    <string name="select_nav_profile_dialog_message">O \'Tipo de navegação\' controla como as rotas são calculadas.</string>
     <string name="profile_appearance">Aparência do perfil</string>
     <string name="choose_icon_color_name">Ícone, cor e nome</string>
     <string name="reorder_profiles">Editar lista de perfil</string>

@@ -434,7 +434,7 @@ public class OsmAndFormatter {
 		List<String> res = new ArrayList<>();
 		String localName = amenity.getName(locale, transliterate);
 		addPoiString(typeName, localName, res);
-		for (String name : amenity.getAllNames(true)) {
+		for (String name : amenity.getOtherNames(true)) {
 			addPoiString(typeName, name, res);
 		}
 		for (String name : amenity.getAdditionalInfoValues(false)) {

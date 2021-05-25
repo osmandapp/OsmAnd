@@ -3270,7 +3270,6 @@
     <string name="select_color">Kleur selecteren</string>
     <string name="edit_profiles_descr">U kunt geen standaard OsmAnd profielen verwijderen, maar u kunt ze deactiveren (in het vorige scherm), of naar onderen verplaatsen.</string>
     <string name="edit_profiles">Wijzig profielen</string>
-    <string name="select_nav_profile_dialog_message">\'Navigatietype\' bepaalt hoe routes berekend worden.</string>
     <string name="profile_appearance">Profiel weergave</string>
     <string name="choose_icon_color_name">Icoon, kleur en naam</string>
     <string name="reorder_profiles">Wijzig lijst met profielen</string>

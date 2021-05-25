@@ -3289,7 +3289,6 @@
     <string name="select_color">Seleccioneu el color</string>
     <string name="edit_profiles_descr">Els perfils predeterminats de l\'OsmAnd no es poden esborrar però si desactivar-se (a la pantalla anterior) o reordenar-se cap al el final.</string>
     <string name="edit_profiles">Edita els perfils</string>
-    <string name="select_nav_profile_dialog_message">El \'tipus de navegació\' determina com es calculen les rutes.</string>
     <string name="profile_appearance">Aparença del perfil</string>
     <string name="choose_icon_color_name">Icona, color i nom</string>
     <string name="reorder_profiles">Edita la llista de perfils</string>

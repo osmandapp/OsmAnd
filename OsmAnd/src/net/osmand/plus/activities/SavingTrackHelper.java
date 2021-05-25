@@ -5,25 +5,25 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.text.format.DateFormat;
 
-import net.osmand.IndexConstants;
-import net.osmand.PlatformUtil;
-import net.osmand.data.LatLon;
-import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.GPXUtilities.Track;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.IndexConstants;
+import net.osmand.PlatformUtil;
+import net.osmand.data.LatLon;
+import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.Version;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -32,6 +32,7 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -67,8 +68,8 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 
 	public final static Log log = PlatformUtil.getLog(SavingTrackHelper.class);
 
-	private String updateScript;
-	private String insertPointsScript;
+	private final String updateScript;
+	private final String insertPointsScript;
 
 	private long lastTimeUpdated = 0;
 	private final OsmandApplication ctx;
@@ -76,7 +77,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	private LatLon lastPoint;
 	private float distance = 0;
 	private long duration = 0;
-	private SelectedGpxFile currentTrack;
+	private final SelectedGpxFile currentTrack;
 	private int points;
 	private int trkPoints = 0;
 	private long lastTimeFileSaved;
@@ -210,11 +211,11 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	}
 
 	/**
-	 * @return warnings, filenames
+	 * @return warnings, gpxFilesByName
 	 */
 	public synchronized SaveGpxResult saveDataToGpx(File dir) {
 		List<String> warnings = new ArrayList<>();
-		List<String> filenames = new ArrayList<>();
+		Map<String, GPXFile> gpxFilesByName = new LinkedHashMap<>();
 		dir.mkdirs();
 		if (dir.getParentFile().canWrite()) {
 			if (dir.exists()) {
@@ -242,7 +243,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 								fileName = dateDirName + File.separator + fileName;
 							}
 						}
-						filenames.add(fileName);
+						gpxFilesByName.put(fileName, gpx);
 						fout = new File(dir, fileName + IndexConstants.GPX_FILE_EXT);
 						int ind = 1;
 						while (fout.exists()) {
@@ -253,7 +254,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 					Exception warn = GPXUtilities.writeGpxFile(fout, gpx);
 					if (warn != null) {
 						warnings.add(warn.getMessage());
-						return new SaveGpxResult(warnings, new ArrayList<String>());
+						return new SaveGpxResult(warnings, new HashMap<>());
 					}
 
 					GPXTrackAnalysis analysis = gpx.getAnalysis(fout.lastModified());
@@ -264,7 +265,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 			}
 		}
 		clearRecordedData(warnings.isEmpty());
-		return new SaveGpxResult(warnings, filenames);
+		return new SaveGpxResult(warnings, gpxFilesByName);
 	}
 
 	public void clearRecordedData(boolean isWarningEmpty) {
@@ -755,23 +756,22 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		return currentTrack;
 	}
 
-	public class SaveGpxResult {
+	public static class SaveGpxResult {
 
-		public SaveGpxResult(List<String> warnings, List<String> filenames) {
+		private final List<String> warnings;
+		private final Map<String, GPXFile> gpxFilesByName;
+
+		public SaveGpxResult(List<String> warnings, Map<String, GPXFile> gpxFilesByName) {
 			this.warnings = warnings;
-			this.filenames = filenames;
+			this.gpxFilesByName = gpxFilesByName;
 		}
-
-		List<String> warnings;
-		List<String> filenames;
 
 		public List<String> getWarnings() {
 			return warnings;
 		}
 
-		public List<String> getFilenames() {
-			return filenames;
+		public Map<String, GPXFile> getGpxFilesByName() {
+			return gpxFilesByName;
 		}
 	}
-
 }

@@ -1437,7 +1437,7 @@
     <string name="track_segments">Úseky trasy</string>
     <string name="track_points">Body trasy</string>
     <string name="location_on_map">Poloha:\n Šířka %1$s\n Délka %2$s</string>
-    <string name="shared_string_export">Exportovat</string>
+    <string name="shared_string_export">Export</string>
     <string name="shared_string_enable">Povolit</string>
     <string name="shared_string_disable">Zakázat</string>
     <string name="plugin_install_needs_network">Pro instalaci tohoto modulu musíte být online.</string>
@@ -3753,7 +3753,6 @@
     <string name="personal_category_name">Osobní</string>
     <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
-    <string name="select_nav_profile_dialog_message">\'Typ navigace\' ovlivňuje pravidla pro výpočet trasy.</string>
     <string name="edit_profiles">Upravit profily</string>
     <string name="edit_profiles_descr">Základní profily OsmAnd nelze odstranit, ale mohou být vypnuty (na předchozí obrazovce), nebo přesunuty na konec seznamu.</string>
     <string name="shared_string_downloading_formatted">Stahování %s</string>

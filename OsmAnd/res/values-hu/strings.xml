@@ -3211,7 +3211,6 @@
     <string name="select_color">Szín kijelölése</string>
     <string name="edit_profiles_descr">Az alapértelmezett OsmAnd-profilok nem törölhetők, viszont letilthatók (az előző képernyőn) vagy letolhatók a lista aljára.</string>
     <string name="edit_profiles">Profilok szerkesztése</string>
-    <string name="select_nav_profile_dialog_message">A navigációtípus határozza meg az útvonalszámítás módját.</string>
     <string name="profile_appearance">Profil megjelenése</string>
     <string name="choose_icon_color_name">Ikon, szín és név</string>
     <string name="reorder_profiles">Profilok listájának szerkesztése</string>

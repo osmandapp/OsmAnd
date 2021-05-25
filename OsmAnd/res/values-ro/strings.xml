@@ -2652,7 +2652,6 @@
     <string name="select_color">Selectează culoarea</string>
     <string name="edit_profiles_descr">Nu puteți șterge profilurile OsmAnd implicite, dar aveți posibilitatea să le dezactivați în ecranul anterior sau să le mutați în partea de jos.</string>
     <string name="edit_profiles">Editarea profilurilor</string>
-    <string name="select_nav_profile_dialog_message">Tipul de navigație afectează regulile pentru calcularea rutei.</string>
     <string name="profile_appearance">Aspectul profilului</string>
     <string name="choose_icon_color_name">Pictograma, culoarea și numele</string>
     <string name="reorder_profiles">Editează lista de profiluri</string>

@@ -3291,7 +3291,6 @@
     <string name="select_color">Sélectionnez la couleur</string>
     <string name="edit_profiles_descr">Les profils OsmAnd par défaut ne peuvent pas être supprimés mais vous pouvez les désactiver (depuis l\'écran précédent) ou les déplacer vers le bas.</string>
     <string name="edit_profiles">Modifier les profils</string>
-    <string name="select_nav_profile_dialog_message">Le type de navigation détermine les règles de calcul des itinéraires.</string>
     <string name="profile_appearance">Apparence du profil</string>
     <string name="choose_icon_color_name">Icône, couleur et nom</string>
     <string name="reorder_profiles">Modifiez la liste des profils</string>
@@ -4105,7 +4104,7 @@
     <string name="local_backup">Sauvegarde locale</string>
     <string name="local_backup_descr">Sauvegarder ou restaurer des données à partir d\'un fichier local.</string>
     <string name="restore_from_file">Restaurer à partir d\'un fichier</string>
-    <string name="osmand_cloud_help_descr">Besoin d\'aide\? Contactez-nous sur %1$s.</string>
+    <string name="osmand_cloud_help_descr">Besoin d\'aide \? Contactez-nous sur %1$s</string>
     <string name="verify_email_address">Vérifier l’adresse e-mail</string>
     <string name="verify_email_address_descr">Nous avons envoyé un code de vérification à %1$s, veuillez le saisir dans le champ ci-dessous.</string>
     <string name="enter_verification_code">Entrez le code à 4 chiffres</string>

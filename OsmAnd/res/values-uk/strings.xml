@@ -3300,7 +3300,6 @@
     <string name="select_color">Виберіть колір</string>
     <string name="edit_profiles_descr">Типові профілі OsmAnd не видалено, проте вимкнуто (на попередньому екрані) чи відпорядковано донизу.</string>
     <string name="edit_profiles">Редагувати профілі</string>
-    <string name="select_nav_profile_dialog_message">\'Тип навігації\' визначає спосіб обчислення маршрутів.</string>
     <string name="profile_appearance">Зовнішній вигляд профілю</string>
     <string name="choose_icon_color_name">Значок, колір та назва</string>
     <string name="reorder_profiles">Редагувати список профілів</string>

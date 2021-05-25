@@ -448,7 +448,7 @@
     <string name="preferred_locale">Anzeigesprache</string>
     <string name="shared_string_next">Weiter</string>
     <string name="shared_string_previous">Zurück</string>
-    <string name="unit_of_length_descr">Maß für Entfernungen ändern.</string>
+    <string name="unit_of_length_descr">Ändern Sie, in welcher Entfernung gemessen wird.</string>
     <string name="unit_of_length">Längeneinheiten</string>
     <string name="si_mi_feet">Meilen/Fuß</string>
     <string name="si_mi_yard">Meilen/Yards</string>
@@ -3308,7 +3308,6 @@
     <string name="select_color">Farbe wählen</string>
     <string name="edit_profiles_descr">OsmAnd-Standardprofile können nicht gelöscht, aber (auf dem vorherigen Bildschirm) deaktiviert oder nach unten verschoben werden.</string>
     <string name="edit_profiles">Profile bearbeiten</string>
-    <string name="select_nav_profile_dialog_message">Der \'Navigationstyp\' bestimmt, wie die Routen berechnet werden.</string>
     <string name="profile_appearance">Profildarstellung</string>
     <string name="choose_icon_color_name">Symbol, Farbe und Name</string>
     <string name="reorder_profiles">Profilliste bearbeiten</string>
