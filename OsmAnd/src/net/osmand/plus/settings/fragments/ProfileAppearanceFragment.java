@@ -49,8 +49,7 @@ import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.profiles.NavigationIcon;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.profiles.ProfileIcons;
-import net.osmand.plus.profiles.SelectProfileBottomSheet;
-import net.osmand.plus.profiles.SelectProfileBottomSheet.DialogMode;
+import net.osmand.plus.profiles.SelectBaseProfileBottomSheet;
 import net.osmand.plus.profiles.SelectProfileBottomSheet.OnSelectProfileCallback;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
@@ -421,12 +420,12 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 				public void onClick(View v) {
 					if (isNewProfile) {
 						hideKeyboard();
-						String selectedAppModeKey =
-								changedProfile.parent != null ? changedProfile.parent.getStringKey() : null;
 						if (getActivity() != null) {
-							SelectProfileBottomSheet.showInstance(
-									getActivity(), DialogMode.BASE_PROFILE, ProfileAppearanceFragment.this,
-									getSelectedAppMode(), selectedAppModeKey, false);
+							String selected = changedProfile.parent != null ?
+									changedProfile.parent.getStringKey() : null;
+							SelectBaseProfileBottomSheet.showInstance(
+									getActivity(),ProfileAppearanceFragment.this,
+									getSelectedAppMode(), selected, false);
 						}
 					}
 				}

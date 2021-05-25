@@ -23,8 +23,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.development.TestBackupActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.profiles.ProfileDataUtils;
-import net.osmand.plus.profiles.SelectProfileBottomSheet;
-import net.osmand.plus.profiles.SelectProfileBottomSheet.DialogMode;
+import net.osmand.plus.profiles.SelectBaseProfileBottomSheet;
 import net.osmand.plus.profiles.SelectProfileBottomSheet.OnSelectProfileCallback;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.backup.SettingsItem;
@@ -126,9 +125,8 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 			return true;
 		} else if (CREATE_PROFILE.equals(prefId)) {
 			if (getActivity() != null) {
-				SelectProfileBottomSheet.showInstance(
-						getActivity(), DialogMode.BASE_PROFILE, this,
-						getSelectedAppMode(), null, false);
+				SelectBaseProfileBottomSheet.showInstance(
+						getActivity(), this, getSelectedAppMode(), null, false);
 			}
 		} else if (IMPORT_PROFILE.equals(prefId)) {
 			final MapActivity mapActivity = getMapActivity();

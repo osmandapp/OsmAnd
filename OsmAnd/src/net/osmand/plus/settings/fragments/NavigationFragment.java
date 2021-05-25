@@ -12,6 +12,7 @@ import androidx.preference.SwitchPreferenceCompat;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.profiles.ProfileDataObject;
 import net.osmand.plus.profiles.ProfileDataUtils;
+import net.osmand.plus.profiles.SelectNavProfileBottomSheet;
 import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet;
 import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet.DialogMode;
 import net.osmand.plus.routing.RouteService;
@@ -122,12 +123,11 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		if (preference.getKey().equals(NAVIGATION_TYPE)) {
-			String routingProfileKey =
-					getSelectedAppMode() != null ? getSelectedAppMode().getRoutingProfile() : null;
+			ApplicationMode appMode = getSelectedAppMode();
+			String selected = appMode != null ? appMode.getRoutingProfile() : null;
 			if (getActivity() != null) {
-				SelectProfileBottomSheet.showInstance(
-						getActivity(), SelectProfileBottomSheet.DialogMode.NAVIGATION_PROFILE,
-						this, getSelectedAppMode(), routingProfileKey, false);
+				SelectNavProfileBottomSheet.showInstance(
+						getActivity(), this, getSelectedAppMode(), selected, false);
 			}
 		}
 		return false;
