@@ -12,6 +12,8 @@
 
 -->
 
+    <string name="loading_list_of_routing_services">Loading list of available routing services</string>
+    <string name="predefined_online_routing_templates_description">You can use predefined templates, or add custom online routing, supported: OSRM, Graphhopper, OpenRouteService, GPX.</string>
     <string name="select_nav_profile_dialog_message">The \'Navigation type\' governs how routes are calculated. You can select between offline and online routing engines.</string>
     <string name="verification_code_missing_description">Waiting time for code can be 10 minutes, also you can check your spam folder. If it doesn\'t help, use button below.</string>
     <string name="verification_code_missing">I didn\'t receive verification code</string>
