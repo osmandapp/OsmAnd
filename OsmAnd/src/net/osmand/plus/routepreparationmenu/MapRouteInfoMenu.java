@@ -106,7 +106,6 @@ import net.osmand.plus.routing.RouteCalculationParams;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelperUtils;
-import net.osmand.plus.routing.SuggestionsMapsProvider;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -134,7 +133,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -509,6 +507,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				}
 			}
 		}
+
 	}
 
 	public void openMenuFullScreen() {
@@ -519,14 +518,12 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	public void updateMissingMapsOnDirectLine(RouteCalculationParams params) {
-		try {
-			SuggestionsMapsProvider suggestionsMapsProvider = new SuggestionsMapsProvider(params);
-			LinkedList<Location> points = suggestionsMapsProvider.getStartFinishIntermediatesPoints("");
-			List<Location> pointsStraightLine = suggestionsMapsProvider.getLocationBasedOnDistanceInterval(points);
-			missingMapsOnDirectLine = suggestionsMapsProvider.getSuggestedMaps(pointsStraightLine);
-		} catch (IOException e) {
-			LOG.error(e.getMessage(), e);
-		}
+		missingMapsOnDirectLine = params.missingMaps;
+		updateCards();
+	}
+
+	public void clearMissingMapsOnDirectLine() {
+		missingMapsOnDirectLine = null;
 	}
 
 	public void openMenuHeaderOnly() {
@@ -595,7 +592,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		updateApplicationModes();
 		updateApplicationModesOptions();
 		updateCards();
-		
 		updateOptionsButtons();
 	}
 
@@ -703,9 +699,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				menuCards.add(new PublicTransportBetaWarningCard(mapActivity));
 			} else if (app.getRoutingHelper().isBoatMode()) {
 				menuCards.add(new NauticalBridgeHeightWarningCard(mapActivity));
-			} else if (isMapsNeededRouteCalculationStarted && !isMapsNeededRouteCalculationStopped) {
+			} else if (isMapsNeededRouteCalculationStarted) {
 				menuCards.add(new SuggestionsMapsDownloadWarningCard(mapActivity));
-			} else if (app.getTargetPointsHelper().hasTooLongDistanceToNavigate()) {
+			} else if (app.getTargetPointsHelper().hasTooLongDistanceToNavigate() && !isMapsNeededRouteCalculationStopped) {
 				menuCards.add(new LongDistanceWarningCard(mapActivity));
 			}
 		} else {

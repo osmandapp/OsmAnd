@@ -12,10 +12,9 @@
 
 -->
 
-    <string name="online_maps__required_descr">The calculation of the route takes more than usual. Perhaps some cards are not loaded. You can run online checking the necessary cards.</string>
     <string name="offline_maps_required_descr">Additional offline maps are required to calculate the route.</string>
     <string name="online_direct_line_maps_link">Check the necessary maps</string>
-    <string name="direct_line_maps_required_descr">Perhaps some cards are not loaded.</string>
+    <string name="direct_line_maps_required_descr">Perhaps some maps are not loaded.</string>
     <string name="verification_code_missing_description">Waiting time for code can be 10 minutes, also you can check your spam folder. If it doesn\'t help, use button below.</string>
     <string name="verification_code_missing">I didn\'t receive verification code</string>
     <string name="resend_verification_code">Resend code</string>

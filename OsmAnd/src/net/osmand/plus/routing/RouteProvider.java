@@ -109,10 +109,10 @@ public class RouteProvider {
 					SuggestionsMapsProvider suggestionsMapsProvider = new SuggestionsMapsProvider(params);
 
 					LinkedList<Location> points = suggestionsMapsProvider.getStartFinishIntermediatesPoints("");
-					List<WorldRegion> suggestionsMapsStartFinishIntermediates = suggestionsMapsProvider.getSuggestedMaps(points);
+					List<WorldRegion> suggestionsMapsStartFinishIntermediates = suggestionsMapsProvider.getMissingMaps(points);
 
 					List<Location> pointsStraightLine = suggestionsMapsProvider.getLocationBasedOnDistanceInterval(points);
-					List<WorldRegion> suggestedMapsOnStraightLine = suggestionsMapsProvider.getSuggestedMaps(pointsStraightLine);
+					List<WorldRegion> suggestedMapsOnStraightLine = suggestionsMapsProvider.getMissingMaps(pointsStraightLine);
 					if (!Algorithms.isEmpty(suggestionsMapsStartFinishIntermediates)) {
 						res = new RouteCalculationResult(suggestedMapsOnStraightLine);
 					} else {

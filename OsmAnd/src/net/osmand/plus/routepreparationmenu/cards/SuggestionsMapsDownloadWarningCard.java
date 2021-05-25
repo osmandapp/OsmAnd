@@ -28,14 +28,14 @@ public class SuggestionsMapsDownloadWarningCard extends WarningCard {
 		super(mapActivity);
 		isRouteCalculationInProgress = !Algorithms.isEmpty(mapActivity.getMapRouteInfoMenu().getMissingMapsOnDirectLine());
 		isRouteCalculationStopped = !Algorithms.isEmpty(mapActivity.getRoutingHelper().getRoute().getDownloadMaps());
-		if (isRouteCalculationStopped) {
-			imageId = R.drawable.ic_map;
-			title = mapActivity.getString(R.string.offline_maps_required_descr);
-			linkText = mapActivity.getString(R.string.welmode_download_maps);
-		} else if (isRouteCalculationInProgress) {
+		if (isRouteCalculationInProgress) {
 			imageId = R.drawable.ic_action_time_span;
 			title = mapActivity.getString(R.string.direct_line_maps_required_descr);
 			linkText = mapActivity.getString(R.string.online_direct_line_maps_link);
+		} else if (isRouteCalculationStopped) {
+			imageId = R.drawable.ic_map;
+			title = mapActivity.getString(R.string.offline_maps_required_descr);
+			linkText = mapActivity.getString(R.string.welmode_download_maps);
 		}
 	}
 

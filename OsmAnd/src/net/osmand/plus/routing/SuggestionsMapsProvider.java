@@ -64,7 +64,7 @@ public class SuggestionsMapsProvider {
 		return points;
 	}
 
-	public List<WorldRegion> getSuggestedMaps(List<Location> points) throws IOException {
+	public List<WorldRegion> getMissingMaps(List<Location> points) throws IOException {
 		LinkedHashSet<WorldRegion> suggestedMaps = new LinkedHashSet<>();
 		for (int i = 0; i < points.size(); i++) {
 			final Location o = points.get(i);
@@ -75,7 +75,7 @@ public class SuggestionsMapsProvider {
 				isPointOnWater = true;
 			}
 
-			List<Boolean> mapsDownloadedList = new ArrayList<>();
+			boolean addMaps = true;
 			List<WorldRegion> maps = new ArrayList<>();
 			for (WorldRegion downloadRegion : downloadRegions) {
 				String mapName = downloadRegion.getRegionDownloadName();
@@ -87,12 +87,11 @@ public class SuggestionsMapsProvider {
 					if (!isCountry) {
 						maps.add(downloadRegion);
 					}
-					mapsDownloadedList.add(true);
 				} else {
-					mapsDownloadedList.add(false);
+					addMaps = false;
 				}
 			}
-			if (!mapsDownloadedList.contains(false)) {
+			if (addMaps) {
 				suggestedMaps.addAll(maps);
 			}
 		}
