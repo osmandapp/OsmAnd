@@ -1,5 +1,6 @@
 package net.osmand.search.core;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.regex.Pattern;
 
@@ -14,6 +15,8 @@ import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.CommonWords;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
+import net.osmand.map.OsmandRegions;
+import net.osmand.map.WorldRegion;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.LocationParser;
@@ -192,8 +195,8 @@ public class SearchPhrase {
 	}
 	
 	// init search phrase
-	private SearchPhrase createNewSearchPhrase(SearchSettings settings, String fullText, List<SearchWord> foundWords,
-			String textToSearch) {
+	private SearchPhrase createNewSearchPhrase(final SearchSettings settings, String fullText, List<SearchWord> foundWords,
+											   String textToSearch) {
 		SearchPhrase sp = new SearchPhrase(settings, this.clt);
 		sp.words = foundWords;
 		sp.fullTextSearchPhrase = fullText;
@@ -209,19 +212,53 @@ public class SearchPhrase {
 				String wd = ws[i].trim();
 				boolean conjunction = conjunctions.contains(wd.toLowerCase());
 				boolean lastAndIncomplete = i == ws.length - 1 && !sp.lastUnknownSearchWordComplete;
+				boolean decryptAbbreviations = needDecryptAbbreviations(getWorldRegions());
+
 				if (wd.length() > 0 && (!conjunction || lastAndIncomplete)) {
 					if (first) {
-						sp.firstUnknownSearchWord = Abbreviations.replace(wd);
+						sp.firstUnknownSearchWord = decryptAbbreviations ? Abbreviations.replace(wd) : wd;
 						first = false;
 					} else {
-						sp.otherUnknownWords.add(Abbreviations.replace(wd));
+						sp.otherUnknownWords.add(decryptAbbreviations ? Abbreviations.replace(wd) : wd);
 					}
 				}
 			}
 		}
 		return sp;
 	}
-	
+
+	private List<WorldRegion> getWorldRegions() {
+		OsmandRegions or = new OsmandRegions();
+		List<WorldRegion> regions = new ArrayList<>();
+		try {
+			or.prepareFile();
+			LatLon location = settings.getOriginalLocation();
+			if (location != null) {
+				regions = or.getWorldRegionsAt(location);
+			}
+		} catch (IOException e) {
+			return regions;
+		}
+		return regions;
+	}
+
+	private boolean needDecryptAbbreviations(List<WorldRegion> regions) {
+		if (regions != null) {
+			for (WorldRegion region : regions) {
+				String regionLang = region.getParams().getRegionLang();
+				if (regionLang != null) {
+					String[] langArr = regionLang.split(",");
+					for (String lang : langArr) {
+						if (lang.equals("en")) {
+							return true;
+						}
+					}
+				}
+			}
+		}
+		return false;
+	}
+
 	public static List<String> splitWords(String w, List<String> ws) {
 		if (!Algorithms.isEmpty(w)) {
 			String[] wrs = w.split(ALLDELIMITERS);
