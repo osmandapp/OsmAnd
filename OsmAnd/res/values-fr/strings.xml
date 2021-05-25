@@ -3291,7 +3291,6 @@
     <string name="select_color">Sélectionnez la couleur</string>
     <string name="edit_profiles_descr">Les profils OsmAnd par défaut ne peuvent pas être supprimés mais vous pouvez les désactiver (depuis l\'écran précédent) ou les déplacer vers le bas.</string>
     <string name="edit_profiles">Modifier les profils</string>
-    <string name="select_nav_profile_dialog_message">Le type de navigation détermine les règles de calcul des itinéraires.</string>
     <string name="profile_appearance">Apparence du profil</string>
     <string name="choose_icon_color_name">Icône, couleur et nom</string>
     <string name="reorder_profiles">Modifiez la liste des profils</string>

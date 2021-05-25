@@ -3308,7 +3308,6 @@
     <string name="select_color">Farbe wählen</string>
     <string name="edit_profiles_descr">OsmAnd-Standardprofile können nicht gelöscht, aber (auf dem vorherigen Bildschirm) deaktiviert oder nach unten verschoben werden.</string>
     <string name="edit_profiles">Profile bearbeiten</string>
-    <string name="select_nav_profile_dialog_message">Der \'Navigationstyp\' bestimmt, wie die Routen berechnet werden.</string>
     <string name="profile_appearance">Profildarstellung</string>
     <string name="choose_icon_color_name">Symbol, Farbe und Name</string>
     <string name="reorder_profiles">Profilliste bearbeiten</string>

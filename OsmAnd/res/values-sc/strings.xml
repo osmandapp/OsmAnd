@@ -3299,7 +3299,6 @@
     <string name="select_color">Ischerta su colore</string>
     <string name="edit_profiles_descr">Non podes iscantzellare sos profilos predefinidos de OsmAnd, ma los podes disabilitare (in s\'ischermada anteposta), o los podes mòvere a giosso.</string>
     <string name="edit_profiles">Muda sos profilos</string>
-    <string name="select_nav_profile_dialog_message">Sa \'Casta de navigatzione\' influentzat su càrculu de sas àndalas.</string>
     <string name="profile_appearance">Aparèntzia de su profilu</string>
     <string name="choose_icon_color_name">Icona, colore e nùmene</string>
     <string name="reorder_profiles">Muda sa lista de sos profilos</string>

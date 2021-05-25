@@ -3300,7 +3300,6 @@
     <string name="select_color">Elegir el color</string>
     <string name="edit_profiles_descr">Los perfiles predefinidos de OsmAnd no se pueden borrar, sino desactivar (en la pantalla anterior) u ordenarse en la parte inferior.</string>
     <string name="edit_profiles">Editar perfiles</string>
-    <string name="select_nav_profile_dialog_message">El \'Tipo de navegación\' determina cómo se calculan las rutas.</string>
     <string name="profile_appearance">Aspecto del perfil</string>
     <string name="choose_icon_color_name">Icono, color y nombre</string>
     <string name="reorder_profiles">Editar lista de perfiles</string>

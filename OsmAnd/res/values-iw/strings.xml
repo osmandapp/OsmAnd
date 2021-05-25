@@ -3301,7 +3301,6 @@
     <string name="select_color">בחירת צבע</string>
     <string name="edit_profiles_descr">לא ניתן למחוק את פרופילי בררת המחדל של OsmAnd, אך ניתן להשבית אותם (במסך הקודם) או להוריד אותם לתחתית.</string>
     <string name="edit_profiles">עריכת פרופילים</string>
-    <string name="select_nav_profile_dialog_message">‚סוג הניווט’ מגבש את אופן חישוב המסלול.</string>
     <string name="profile_appearance">הופעת פרופיל</string>
     <string name="choose_icon_color_name">סמל, צבע ושם</string>
     <string name="reorder_profiles">עריכת רשימת הפרופילים</string>

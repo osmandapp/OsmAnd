@@ -3324,7 +3324,6 @@
     <string name="select_color">انتخاب رنگ</string>
     <string name="edit_profiles_descr">پروفایل‌های پیشفرض OsmAnd حذف نمی‌شوند، اما می‌توانید آن‌ها را غیرفعال نمایید (در صفحهٔ پیشین)، یا با مرتب‌سازی به پایین منتقل کنید.</string>
     <string name="edit_profiles">ویرایش پروفایل‌ها</string>
-    <string name="select_nav_profile_dialog_message">«نوع ناوبری» نحوهٔ محاسبهٔ مسیر را کنترل می‌کند.</string>
     <string name="profile_appearance">ظاهر پروفایل</string>
     <string name="choose_icon_color_name">نماد، رنگ و نام</string>
     <string name="reorder_profiles">ویرایش لیست پروفایل</string>

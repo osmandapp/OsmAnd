@@ -3764,7 +3764,6 @@
     <string name="personal_category_name">Lični</string>
     <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
-    <string name="select_nav_profile_dialog_message">’Tip navođenja’ određuje kako se put izračunava.</string>
     <string name="edit_profiles">Izmeni profile</string>
     <string name="edit_profiles_descr">Podrazumevani OsmAnd profile ne mogu da se izbrišu, ali mogu da se isključe (na prethodnom ekranu), ili da se stave na dno.</string>
     <string name="shared_string_downloading_formatted">Preuzimam %s</string>

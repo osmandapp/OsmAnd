@@ -3304,7 +3304,6 @@
     <string name="select_color">Vælg farve</string>
     <string name="edit_profiles_descr">Standard-profiler kan ikke slettes, men de kan deaktiveres (på forrige skærmbillede) eller flyttes til bunden.</string>
     <string name="edit_profiles">Rediger profiler</string>
-    <string name="select_nav_profile_dialog_message">Navigationstype\' bestemmer hvordan ruter beregnes.</string>
     <string name="profile_appearance">Profil udseende</string>
     <string name="choose_icon_color_name">Ikon, farve og navn</string>
     <string name="reorder_profiles">Rediger profilliste</string>

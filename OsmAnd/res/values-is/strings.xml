@@ -3305,7 +3305,6 @@
     <string name="select_color">Veldu lit</string>
     <string name="edit_profiles_descr">Sjálfgefnum grunnsniðum OsmAnd er ekki hægt að eyða, en hægt er gera þau óvirk (á skjánum hér á undan), eða færa þau neðst.</string>
     <string name="edit_profiles">Breyta sniðum</string>
-    <string name="select_nav_profile_dialog_message">Gerð leiðsagnar hefur áhrif á reglur þær sem notaðar eru við útreikning leiða.</string>
     <string name="profile_appearance">Útlit sniðs</string>
     <string name="choose_icon_color_name">Táknmynd, litur og nafn</string>
     <string name="reorder_profiles">Breyta lista yfir snið</string>

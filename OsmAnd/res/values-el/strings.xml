@@ -3309,7 +3309,6 @@
     <string name="select_color">Επιλέξτε χρώμα</string>
     <string name="edit_profiles_descr">Οι προεπιλεγμένες κατατομές (προφίλ) OsmAnd δεν μπορούν να διαγραφούν , αλλά απενεργοποιούνται (στην προηγούμενη οθόνη), ή ταξινομούνται στο τέλος.</string>
     <string name="edit_profiles">Επεξεργασία κατατομών (προφίλ)</string>
-    <string name="select_nav_profile_dialog_message">Ο \'τύπος πλοήγησης\' καθορίζει τους υπολογισμούς διαδρομών.</string>
     <string name="profile_appearance">Εμφάνιση κατατομής (προφίλ)</string>
     <string name="choose_icon_color_name">Εικονίδιο, χρώμα και όνομα</string>
     <string name="reorder_profiles">Επεξεργασία καταλόγου κατατομών (προφίλ)</string>

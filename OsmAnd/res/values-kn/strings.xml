@@ -363,7 +363,6 @@
     <string name="select_color">ಬಣ್ಣವನ್ನು ಆಯ್ಕೆಮಾಡಿ</string>
     <string name="edit_profiles_descr">ನೀವು ಡೀಫಾಲ್ಟ್ OsmAnd ಪ್ರೊಫೈಲ್‌ಗಳನ್ನು ಅಳಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ, ಆದರೆ ನೀವು ಅವುಗಳನ್ನು ಹಿಂದಿನ ಪರದೆಯಲ್ಲಿ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಬಹುದು, ಅಥವಾ ಅವುಗಳನ್ನು ಕೆಳಕ್ಕೆ ಸರಿಸಬಹುದು.</string>
     <string name="edit_profiles">ಪ್ರೊಫೈಲ್‌ಗಳನ್ನು ಪರಿಷ್ಕರಿಸು</string>
-    <string name="select_nav_profile_dialog_message">ನ್ಯಾವಿಗೇಷನ್ ಪ್ರಕಾರವು ಮಾರ್ಗ ಲೆಕ್ಕಾಚಾರದ ನಿಯಮಗಳ ಮೇಲೆ ಪರಿಣಾಮ ಬೀರುತ್ತದೆ.</string>
     <string name="profile_appearance">ಪ್ರೊಫೈಲ್ ತೋರಿಕೆ</string>
     <string name="choose_icon_color_name">ಐಕಾನ್, ಬಣ್ಣ ಮತ್ತು ಹೆಸರನ್ನು ಆಯ್ಕೆ ಮಾಡಿ</string>
     <string name="reorder_profiles">ಪ್ರೊಫೈಲ್‌ಗಳ ಪಟ್ಟಿಯನ್ನು ಪರಿಷ್ಕರಿಸು</string>

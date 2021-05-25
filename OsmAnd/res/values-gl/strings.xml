@@ -3309,7 +3309,6 @@ Lon %2$s</string>
     <string name="select_color">Escoller a cor</string>
     <string name="edit_profiles_descr">Os perfís por defecto do OsmAnd non se poden eliminar, senón desactivar (na pantalla anterior) ou ordenarse na parte inferior.</string>
     <string name="edit_profiles">Editar perfís</string>
-    <string name="select_nav_profile_dialog_message">O \'Tipo de navegación\' rexe o xeito en que se calculan as rutas.</string>
     <string name="profile_appearance">Aparencia do perfil</string>
     <string name="choose_icon_color_name">Icona, cor e nome</string>
     <string name="reorder_profiles">Editar a listaxe de perfís</string>

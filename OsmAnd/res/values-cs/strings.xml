@@ -3753,7 +3753,6 @@
     <string name="personal_category_name">Osobní</string>
     <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
-    <string name="select_nav_profile_dialog_message">\'Typ navigace\' ovlivňuje pravidla pro výpočet trasy.</string>
     <string name="edit_profiles">Upravit profily</string>
     <string name="edit_profiles_descr">Základní profily OsmAnd nelze odstranit, ale mohou být vypnuty (na předchozí obrazovce), nebo přesunuty na konec seznamu.</string>
     <string name="shared_string_downloading_formatted">Stahování %s</string>
