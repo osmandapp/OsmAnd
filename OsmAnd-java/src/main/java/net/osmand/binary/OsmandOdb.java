@@ -29597,6 +29597,34 @@ public final class OsmandOdb {
      */
     net.osmand.binary.OsmandOdb.TransportRouteScheduleOrBuilder getScheduleTripOrBuilder(
         int index);
+
+    // repeated uint32 attributeTagIds = 19;
+    /**
+     * <code>repeated uint32 attributeTagIds = 19;</code>
+     */
+    java.util.List<java.lang.Integer> getAttributeTagIdsList();
+    /**
+     * <code>repeated uint32 attributeTagIds = 19;</code>
+     */
+    int getAttributeTagIdsCount();
+    /**
+     * <code>repeated uint32 attributeTagIds = 19;</code>
+     */
+    int getAttributeTagIds(int index);
+
+    // repeated bytes attributeTextTagValues = 20;
+    /**
+     * <code>repeated bytes attributeTextTagValues = 20;</code>
+     */
+    java.util.List<com.google.protobuf.ByteString> getAttributeTextTagValuesList();
+    /**
+     * <code>repeated bytes attributeTextTagValues = 20;</code>
+     */
+    int getAttributeTextTagValuesCount();
+    /**
+     * <code>repeated bytes attributeTextTagValues = 20;</code>
+     */
+    com.google.protobuf.ByteString getAttributeTextTagValues(int index);
   }
   /**
    * Protobuf type {@code OsmAnd.OBF.TransportRoute}
@@ -29718,6 +29746,35 @@ public final class OsmandOdb {
               scheduleTrip_.add(input.readMessage(net.osmand.binary.OsmandOdb.TransportRouteSchedule.PARSER, extensionRegistry));
               break;
             }
+            case 152: {
+              if (!((mutable_bitField0_ & 0x00001000) == 0x00001000)) {
+                attributeTagIds_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00001000;
+              }
+              attributeTagIds_.add(input.readUInt32());
+              break;
+            }
+            case 154: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00001000) == 0x00001000) && input.getBytesUntilLimit() > 0) {
+                attributeTagIds_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00001000;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                attributeTagIds_.add(input.readUInt32());
+              }
+              input.popLimit(limit);
+              break;
+            }
+            case 162: {
+              if (!((mutable_bitField0_ & 0x00002000) == 0x00002000)) {
+                attributeTextTagValues_ = new java.util.ArrayList<com.google.protobuf.ByteString>();
+                mutable_bitField0_ |= 0x00002000;
+              }
+              attributeTextTagValues_.add(input.readBytes());
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -29734,6 +29791,12 @@ public final class OsmandOdb {
         }
         if (((mutable_bitField0_ & 0x00000800) == 0x00000800)) {
           scheduleTrip_ = java.util.Collections.unmodifiableList(scheduleTrip_);
+        }
+        if (((mutable_bitField0_ & 0x00001000) == 0x00001000)) {
+          attributeTagIds_ = java.util.Collections.unmodifiableList(attributeTagIds_);
+        }
+        if (((mutable_bitField0_ & 0x00002000) == 0x00002000)) {
+          attributeTextTagValues_ = java.util.Collections.unmodifiableList(attributeTextTagValues_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -30128,6 +30191,52 @@ public final class OsmandOdb {
       return scheduleTrip_.get(index);
     }
 
+    // repeated uint32 attributeTagIds = 19;
+    public static final int ATTRIBUTETAGIDS_FIELD_NUMBER = 19;
+    private java.util.List<java.lang.Integer> attributeTagIds_;
+    /**
+     * <code>repeated uint32 attributeTagIds = 19;</code>
+     */
+    public java.util.List<java.lang.Integer>
+        getAttributeTagIdsList() {
+      return attributeTagIds_;
+    }
+    /**
+     * <code>repeated uint32 attributeTagIds = 19;</code>
+     */
+    public int getAttributeTagIdsCount() {
+      return attributeTagIds_.size();
+    }
+    /**
+     * <code>repeated uint32 attributeTagIds = 19;</code>
+     */
+    public int getAttributeTagIds(int index) {
+      return attributeTagIds_.get(index);
+    }
+
+    // repeated bytes attributeTextTagValues = 20;
+    public static final int ATTRIBUTETEXTTAGVALUES_FIELD_NUMBER = 20;
+    private java.util.List<com.google.protobuf.ByteString> attributeTextTagValues_;
+    /**
+     * <code>repeated bytes attributeTextTagValues = 20;</code>
+     */
+    public java.util.List<com.google.protobuf.ByteString>
+        getAttributeTextTagValuesList() {
+      return attributeTextTagValues_;
+    }
+    /**
+     * <code>repeated bytes attributeTextTagValues = 20;</code>
+     */
+    public int getAttributeTextTagValuesCount() {
+      return attributeTextTagValues_.size();
+    }
+    /**
+     * <code>repeated bytes attributeTextTagValues = 20;</code>
+     */
+    public com.google.protobuf.ByteString getAttributeTextTagValues(int index) {
+      return attributeTextTagValues_.get(index);
+    }
+
     private void initFields() {
       id_ = 0L;
       type_ = 0;
@@ -30141,6 +30250,8 @@ public final class OsmandOdb {
       reverseStops_ = java.util.Collections.emptyList();
       geometry_ = com.google.protobuf.ByteString.EMPTY;
       scheduleTrip_ = java.util.Collections.emptyList();
+      attributeTagIds_ = java.util.Collections.emptyList();
+      attributeTextTagValues_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -30206,6 +30317,12 @@ public final class OsmandOdb {
       for (int i = 0; i < scheduleTrip_.size(); i++) {
         output.writeMessage(18, scheduleTrip_.get(i));
       }
+      for (int i = 0; i < attributeTagIds_.size(); i++) {
+        output.writeUInt32(19, attributeTagIds_.get(i));
+      }
+      for (int i = 0; i < attributeTextTagValues_.size(); i++) {
+        output.writeBytes(20, attributeTextTagValues_.get(i));
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -30262,6 +30379,24 @@ public final class OsmandOdb {
       for (int i = 0; i < scheduleTrip_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(18, scheduleTrip_.get(i));
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < attributeTagIds_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeUInt32SizeNoTag(attributeTagIds_.get(i));
+        }
+        size += dataSize;
+        size += 2 * getAttributeTagIdsList().size();
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < attributeTextTagValues_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeBytesSizeNoTag(attributeTextTagValues_.get(i));
+        }
+        size += dataSize;
+        size += 2 * getAttributeTextTagValuesList().size();
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -30418,6 +30553,10 @@ public final class OsmandOdb {
         } else {
           scheduleTripBuilder_.clear();
         }
+        attributeTagIds_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00001000);
+        attributeTextTagValues_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00002000);
         return this;
       }
 
@@ -30509,6 +30648,16 @@ public final class OsmandOdb {
         } else {
           result.scheduleTrip_ = scheduleTripBuilder_.build();
         }
+        if (((bitField0_ & 0x00001000) == 0x00001000)) {
+          attributeTagIds_ = java.util.Collections.unmodifiableList(attributeTagIds_);
+          bitField0_ = (bitField0_ & ~0x00001000);
+        }
+        result.attributeTagIds_ = attributeTagIds_;
+        if (((bitField0_ & 0x00002000) == 0x00002000)) {
+          attributeTextTagValues_ = java.util.Collections.unmodifiableList(attributeTextTagValues_);
+          bitField0_ = (bitField0_ & ~0x00002000);
+        }
+        result.attributeTextTagValues_ = attributeTextTagValues_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -30631,6 +30780,26 @@ public final class OsmandOdb {
               scheduleTripBuilder_.addAllMessages(other.scheduleTrip_);
             }
           }
+        }
+        if (!other.attributeTagIds_.isEmpty()) {
+          if (attributeTagIds_.isEmpty()) {
+            attributeTagIds_ = other.attributeTagIds_;
+            bitField0_ = (bitField0_ & ~0x00001000);
+          } else {
+            ensureAttributeTagIdsIsMutable();
+            attributeTagIds_.addAll(other.attributeTagIds_);
+          }
+          onChanged();
+        }
+        if (!other.attributeTextTagValues_.isEmpty()) {
+          if (attributeTextTagValues_.isEmpty()) {
+            attributeTextTagValues_ = other.attributeTextTagValues_;
+            bitField0_ = (bitField0_ & ~0x00002000);
+          } else {
+            ensureAttributeTextTagValuesIsMutable();
+            attributeTextTagValues_.addAll(other.attributeTextTagValues_);
+          }
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -31930,6 +32099,144 @@ public final class OsmandOdb {
           scheduleTrip_ = null;
         }
         return scheduleTripBuilder_;
+      }
+
+      // repeated uint32 attributeTagIds = 19;
+      private java.util.List<java.lang.Integer> attributeTagIds_ = java.util.Collections.emptyList();
+      private void ensureAttributeTagIdsIsMutable() {
+        if (!((bitField0_ & 0x00001000) == 0x00001000)) {
+          attributeTagIds_ = new java.util.ArrayList<java.lang.Integer>(attributeTagIds_);
+          bitField0_ |= 0x00001000;
+         }
+      }
+      /**
+       * <code>repeated uint32 attributeTagIds = 19;</code>
+       */
+      public java.util.List<java.lang.Integer>
+          getAttributeTagIdsList() {
+        return java.util.Collections.unmodifiableList(attributeTagIds_);
+      }
+      /**
+       * <code>repeated uint32 attributeTagIds = 19;</code>
+       */
+      public int getAttributeTagIdsCount() {
+        return attributeTagIds_.size();
+      }
+      /**
+       * <code>repeated uint32 attributeTagIds = 19;</code>
+       */
+      public int getAttributeTagIds(int index) {
+        return attributeTagIds_.get(index);
+      }
+      /**
+       * <code>repeated uint32 attributeTagIds = 19;</code>
+       */
+      public Builder setAttributeTagIds(
+          int index, int value) {
+        ensureAttributeTagIdsIsMutable();
+        attributeTagIds_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 attributeTagIds = 19;</code>
+       */
+      public Builder addAttributeTagIds(int value) {
+        ensureAttributeTagIdsIsMutable();
+        attributeTagIds_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 attributeTagIds = 19;</code>
+       */
+      public Builder addAllAttributeTagIds(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureAttributeTagIdsIsMutable();
+        super.addAll(values, attributeTagIds_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 attributeTagIds = 19;</code>
+       */
+      public Builder clearAttributeTagIds() {
+        attributeTagIds_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00001000);
+        onChanged();
+        return this;
+      }
+
+      // repeated bytes attributeTextTagValues = 20;
+      private java.util.List<com.google.protobuf.ByteString> attributeTextTagValues_ = java.util.Collections.emptyList();
+      private void ensureAttributeTextTagValuesIsMutable() {
+        if (!((bitField0_ & 0x00002000) == 0x00002000)) {
+          attributeTextTagValues_ = new java.util.ArrayList<com.google.protobuf.ByteString>(attributeTextTagValues_);
+          bitField0_ |= 0x00002000;
+         }
+      }
+      /**
+       * <code>repeated bytes attributeTextTagValues = 20;</code>
+       */
+      public java.util.List<com.google.protobuf.ByteString>
+          getAttributeTextTagValuesList() {
+        return java.util.Collections.unmodifiableList(attributeTextTagValues_);
+      }
+      /**
+       * <code>repeated bytes attributeTextTagValues = 20;</code>
+       */
+      public int getAttributeTextTagValuesCount() {
+        return attributeTextTagValues_.size();
+      }
+      /**
+       * <code>repeated bytes attributeTextTagValues = 20;</code>
+       */
+      public com.google.protobuf.ByteString getAttributeTextTagValues(int index) {
+        return attributeTextTagValues_.get(index);
+      }
+      /**
+       * <code>repeated bytes attributeTextTagValues = 20;</code>
+       */
+      public Builder setAttributeTextTagValues(
+          int index, com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureAttributeTextTagValuesIsMutable();
+        attributeTextTagValues_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated bytes attributeTextTagValues = 20;</code>
+       */
+      public Builder addAttributeTextTagValues(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureAttributeTextTagValuesIsMutable();
+        attributeTextTagValues_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated bytes attributeTextTagValues = 20;</code>
+       */
+      public Builder addAllAttributeTextTagValues(
+          java.lang.Iterable<? extends com.google.protobuf.ByteString> values) {
+        ensureAttributeTextTagValuesIsMutable();
+        super.addAll(values, attributeTextTagValues_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated bytes attributeTextTagValues = 20;</code>
+       */
+      public Builder clearAttributeTextTagValues() {
+        attributeTextTagValues_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00002000);
+        onChanged();
+        return this;
       }
 
       // @@protoc_insertion_point(builder_scope:OsmAnd.OBF.TransportRoute)
@@ -65047,7 +65354,7 @@ public final class OsmandOdb {
       "\017 \003(\r\022\027\n\017attributeValues\030\020 \003(\t\022\030\n\020attrib" +
       "uteTagIds2\030\021 \003(\r\022\030\n\020attributeValues2\030\022 \003" +
       "(\t\"=\n\017TransportRoutes\022*\n\006routes\030\006 \003(\0132\032." +
-      "OsmAnd.OBF.TransportRoute\"\300\002\n\016TransportR" +
+      "OsmAnd.OBF.TransportRoute\"\371\002\n\016TransportR" +
       "oute\022\n\n\002id\030\001 \002(\004\022\014\n\004type\030\003 \001(\r\022\020\n\010operat" +
       "or\030\004 \001(\r\022\013\n\003ref\030\005 \001(\t\022\014\n\004name\030\006 \001(\r\022\017\n\007n" +
       "ame_en\030\007 \001(\r\022\020\n\010distance\030\010 \001(\r\022\r\n\005color\030" +
@@ -65055,104 +65362,105 @@ public final class OsmandOdb {
       "TransportRouteStop\0224\n\014reverseStops\030\020 \003(\013" +
       "2\036.OsmAnd.OBF.TransportRouteStop\022\020\n\010geom" +
       "etry\030\021 \001(\014\0228\n\014scheduleTrip\030\022 \003(\0132\".OsmAn" +
-      "d.OBF.TransportRouteSchedule\"Q\n\031Incomple" +
-      "teTransportRoutes\0224\n\006routes\030\006 \003(\0132$.OsmA" +
-      "nd.OBF.IncompleteTransportRoute\"{\n\030Incom" +
-      "pleteTransportRoute\022\n\n\002id\030\001 \002(\004\022\014\n\004type\030" +
-      "\003 \001(\r\022\020\n\010operator\030\004 \001(\r\022\013\n\003ref\030\005 \001(\r\022\020\n\010" +
-      "routeRef\030\007 \002(\r\022\024\n\014missingStops\030\010 \003(\r\"\244\001\n" +
-      "\026TransportRouteSchedule\022\030\n\020avgStopInterv",
-      "als\030\001 \001(\014\022\030\n\020avgWaitIntervals\030\002 \001(\014\022\025\n\rt" +
-      "ripIntervals\030\003 \001(\014\022?\n\nexceptions\030\010 \003(\0132+" +
-      ".OsmAnd.OBF.TransportRouteScheduleExcept" +
-      "ion\"\313\001\n\037TransportRouteScheduleException\022" +
-      "\023\n\013tripIndexes\030\001 \003(\r\022\023\n\013stopIndexes\030\002 \003(" +
-      "\r\022\021\n\tavailable\030\003 \001(\010\022\024\n\014delayArrival\030\005 \003" +
-      "(\r\022\031\n\021deltaWaitInterval\030\006 \003(\005\022\034\n\024dayOfWe" +
-      "ekRestriction\030\007 \003(\r\022\034\n\024dayOfYearRestrict" +
-      "ion\030\010 \003(\r\"W\n\022TransportRouteStop\022\n\n\002id\030\001 " +
-      "\002(\022\022\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003 \002(\021\022\014\n\004name\030\006 \002(",
-      "\r\022\017\n\007name_en\030\007 \001(\r\"\332\001\n\rTransportStop\022\n\n\002" +
-      "dx\030\001 \002(\021\022\n\n\002dy\030\002 \002(\021\022\n\n\002id\030\005 \002(\022\022\014\n\004name" +
-      "\030\006 \002(\r\022\017\n\007name_en\030\007 \001(\r\022\033\n\023additionalNam" +
-      "ePairs\030\010 \001(\014\022,\n\005exits\030\t \003(\0132\035.OsmAnd.OBF" +
-      ".TransportStopExit\022\016\n\006routes\030\020 \003(\r\022\030\n\020de" +
-      "letedRoutesIds\030\024 \003(\004\022\021\n\troutesIds\030\026 \003(\004\"" +
-      "8\n\021TransportStopExit\022\n\n\002dx\030\001 \002(\021\022\n\n\002dy\030\002" +
-      " \002(\021\022\013\n\003ref\030\003 \002(\r\"\272\001\n\022TransportStopsTree" +
-      "\022\014\n\004left\030\001 \002(\021\022\r\n\005right\030\002 \002(\021\022\013\n\003top\030\003 \002" +
-      "(\021\022\016\n\006bottom\030\004 \002(\021\0220\n\010subtrees\030\007 \003(\0132\036.O",
-      "smAnd.OBF.TransportStopsTree\022(\n\005leafs\030\010 " +
-      "\003(\0132\031.OsmAnd.OBF.TransportStop\022\016\n\006baseId" +
-      "\030\020 \001(\004\"\357\001\n\024OsmAndTransportIndex\022\014\n\004name\030" +
-      "\001 \001(\t\022+\n\006routes\030\003 \001(\0132\033.OsmAnd.OBF.Trans" +
-      "portRoutes\022-\n\005stops\030\006 \001(\0132\036.OsmAnd.OBF.T" +
-      "ransportStopsTree\022?\n\020incompleteRoutes\030\010 " +
-      "\001(\0132%.OsmAnd.OBF.IncompleteTransportRout" +
-      "es\022,\n\013stringTable\030\t \002(\0132\027.OsmAnd.OBF.Str" +
-      "ingTable\"\312\002\n\016OsmAndPoiIndex\022\014\n\004name\030\001 \002(" +
-      "\t\022-\n\nboundaries\030\002 \002(\0132\031.OsmAnd.OBF.OsmAn",
-      "dTileBox\0228\n\017categoriesTable\030\003 \003(\0132\037.OsmA" +
-      "nd.OBF.OsmAndCategoryTable\0221\n\tnameIndex\030" +
-      "\004 \001(\0132\036.OsmAnd.OBF.OsmAndPoiNameIndex\0226\n" +
-      "\rsubtypesTable\030\005 \001(\0132\037.OsmAnd.OBF.OsmAnd" +
-      "SubtypesTable\022\'\n\005boxes\030\006 \003(\0132\030.OsmAnd.OB" +
-      "F.OsmAndPoiBox\022-\n\007poiData\030\t \003(\0132\034.OsmAnd" +
-      ".OBF.OsmAndPoiBoxData\"\331\001\n\022OsmAndPoiNameI" +
-      "ndex\022-\n\005table\030\003 \002(\0132\036.OsmAnd.OBF.Indexed" +
-      "StringTable\022C\n\004data\030\005 \003(\01325.OsmAnd.OBF.O" +
-      "smAndPoiNameIndex.OsmAndPoiNameIndexData",
-      "\032O\n\026OsmAndPoiNameIndexData\0225\n\005atoms\030\003 \003(" +
-      "\0132&.OsmAnd.OBF.OsmAndPoiNameIndexDataAto" +
-      "m\"Q\n\032OsmAndPoiNameIndexDataAtom\022\014\n\004zoom\030" +
-      "\002 \001(\r\022\t\n\001x\030\003 \001(\r\022\t\n\001y\030\004 \001(\r\022\017\n\007shiftTo\030\016" +
-      " \001(\007\">\n\023OsmAndCategoryTable\022\020\n\010category\030" +
-      "\001 \002(\t\022\025\n\rsubcategories\030\003 \003(\t\"E\n\023OsmAndSu" +
-      "btypesTable\022.\n\010subtypes\030\004 \003(\0132\034.OsmAnd.O" +
-      "BF.OsmAndPoiSubtype\"\205\001\n\020OsmAndPoiSubtype" +
-      "\022\014\n\004name\030\001 \002(\t\022\017\n\007tagname\030\002 \001(\t\022\016\n\006isTex" +
-      "t\030\003 \002(\010\022\021\n\tfrequency\030\005 \001(\r\022\031\n\021subtypeVal",
-      "uesSize\030\006 \001(\r\022\024\n\014subtypeValue\030\010 \003(\t\"\255\001\n\014" +
-      "OsmAndPoiBox\022\014\n\004zoom\030\001 \002(\r\022\014\n\004left\030\002 \002(\021" +
-      "\022\013\n\003top\030\003 \002(\021\0223\n\ncategories\030\004 \001(\0132\037.OsmA" +
-      "nd.OBF.OsmAndPoiCategories\022*\n\010subBoxes\030\n" +
-      " \003(\0132\030.OsmAnd.OBF.OsmAndPoiBox\022\023\n\013shiftT" +
-      "oData\030\016 \001(\007\"@\n\023OsmAndPoiCategories\022\022\n\nca" +
-      "tegories\030\003 \003(\r\022\025\n\rsubcategories\030\005 \003(\r\"i\n" +
-      "\020OsmAndPoiBoxData\022\014\n\004zoom\030\001 \001(\r\022\t\n\001x\030\002 \001" +
-      "(\r\022\t\n\001y\030\003 \001(\r\0221\n\007poiData\030\005 \003(\0132 .OsmAnd." +
-      "OBF.OsmAndPoiBoxDataAtom\"\205\002\n\024OsmAndPoiBo",
-      "xDataAtom\022\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003 \002(\021\022\022\n\ncat" +
-      "egories\030\004 \003(\r\022\025\n\rsubcategories\030\005 \003(\r\022\014\n\004" +
-      "name\030\006 \001(\t\022\016\n\006nameEn\030\007 \001(\t\022\n\n\002id\030\010 \001(\004\022\024" +
-      "\n\014openingHours\030\n \001(\t\022\014\n\004site\030\013 \001(\t\022\r\n\005ph" +
-      "one\030\014 \001(\t\022\014\n\004note\030\r \001(\t\022\026\n\016textCategorie" +
-      "s\030\016 \003(\r\022\022\n\ntextValues\030\017 \003(\t\022\023\n\013precision" +
-      "XY\030\020 \001(\005\"\032\n\007IdTable\022\017\n\007routeId\030\001 \003(\022\"F\n\017" +
-      "RestrictionData\022\014\n\004type\030\001 \002(\005\022\014\n\004from\030\002 " +
-      "\002(\005\022\n\n\002to\030\003 \002(\005\022\013\n\003via\030\004 \001(\005\"x\n\tRouteDat" +
-      "a\022\016\n\006points\030\001 \002(\014\022\022\n\npointTypes\030\004 \001(\014\022\022\n",
-      "\npointNames\030\005 \001(\014\022\r\n\005types\030\007 \002(\014\022\017\n\007rout" +
-      "eId\030\014 \002(\005\022\023\n\013stringNames\030\016 \001(\014\"\304\005\n\022OsmAn" +
-      "dRoutingIndex\022\014\n\004name\030\001 \002(\t\022?\n\005rules\030\002 \003" +
-      "(\01320.OsmAnd.OBF.OsmAndRoutingIndex.Route" +
-      "EncodingRule\022>\n\trootBoxes\030\003 \003(\0132+.OsmAnd" +
-      ".OBF.OsmAndRoutingIndex.RouteDataBox\022A\n\014" +
-      "basemapBoxes\030\004 \003(\0132+.OsmAnd.OBF.OsmAndRo" +
-      "utingIndex.RouteDataBox\022=\n\006blocks\030\005 \003(\0132" +
-      "-.OsmAnd.OBF.OsmAndRoutingIndex.RouteDat" +
-      "aBlock\032;\n\021RouteEncodingRule\022\013\n\003tag\030\003 \002(\t",
-      "\022\r\n\005value\030\005 \002(\t\022\n\n\002id\030\007 \001(\r\032\231\001\n\014RouteDat" +
-      "aBox\022\014\n\004left\030\001 \002(\021\022\r\n\005right\030\002 \002(\021\022\013\n\003top" +
-      "\030\003 \002(\021\022\016\n\006bottom\030\004 \002(\021\022\023\n\013shiftToData\030\005 " +
-      "\001(\007\022:\n\005boxes\030\007 \003(\0132+.OsmAnd.OBF.OsmAndRo" +
-      "utingIndex.RouteDataBox\032\303\001\n\016RouteDataBlo" +
-      "ck\022$\n\007idTable\030\005 \001(\0132\023.OsmAnd.OBF.IdTable" +
-      "\022*\n\013dataObjects\030\006 \003(\0132\025.OsmAnd.OBF.Route" +
-      "Data\0221\n\014restrictions\030\007 \003(\0132\033.OsmAnd.OBF." +
-      "RestrictionData\022,\n\013stringTable\030\010 \001(\0132\027.O" +
-      "smAnd.OBF.StringTableB\036\n\021net.osmand.bina",
-      "ryB\tOsmandOdb"
+      "d.OBF.TransportRouteSchedule\022\027\n\017attribut" +
+      "eTagIds\030\023 \003(\r\022\036\n\026attributeTextTagValues\030" +
+      "\024 \003(\014\"Q\n\031IncompleteTransportRoutes\0224\n\006ro" +
+      "utes\030\006 \003(\0132$.OsmAnd.OBF.IncompleteTransp" +
+      "ortRoute\"{\n\030IncompleteTransportRoute\022\n\n\002" +
+      "id\030\001 \002(\004\022\014\n\004type\030\003 \001(\r\022\020\n\010operator\030\004 \001(\r" +
+      "\022\013\n\003ref\030\005 \001(\r\022\020\n\010routeRef\030\007 \002(\r\022\024\n\014missi",
+      "ngStops\030\010 \003(\r\"\244\001\n\026TransportRouteSchedule" +
+      "\022\030\n\020avgStopIntervals\030\001 \001(\014\022\030\n\020avgWaitInt" +
+      "ervals\030\002 \001(\014\022\025\n\rtripIntervals\030\003 \001(\014\022?\n\ne" +
+      "xceptions\030\010 \003(\0132+.OsmAnd.OBF.TransportRo" +
+      "uteScheduleException\"\313\001\n\037TransportRouteS" +
+      "cheduleException\022\023\n\013tripIndexes\030\001 \003(\r\022\023\n" +
+      "\013stopIndexes\030\002 \003(\r\022\021\n\tavailable\030\003 \001(\010\022\024\n" +
+      "\014delayArrival\030\005 \003(\r\022\031\n\021deltaWaitInterval" +
+      "\030\006 \003(\005\022\034\n\024dayOfWeekRestriction\030\007 \003(\r\022\034\n\024" +
+      "dayOfYearRestriction\030\010 \003(\r\"W\n\022TransportR",
+      "outeStop\022\n\n\002id\030\001 \002(\022\022\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003" +
+      " \002(\021\022\014\n\004name\030\006 \002(\r\022\017\n\007name_en\030\007 \001(\r\"\332\001\n\r" +
+      "TransportStop\022\n\n\002dx\030\001 \002(\021\022\n\n\002dy\030\002 \002(\021\022\n\n" +
+      "\002id\030\005 \002(\022\022\014\n\004name\030\006 \002(\r\022\017\n\007name_en\030\007 \001(\r" +
+      "\022\033\n\023additionalNamePairs\030\010 \001(\014\022,\n\005exits\030\t" +
+      " \003(\0132\035.OsmAnd.OBF.TransportStopExit\022\016\n\006r" +
+      "outes\030\020 \003(\r\022\030\n\020deletedRoutesIds\030\024 \003(\004\022\021\n" +
+      "\troutesIds\030\026 \003(\004\"8\n\021TransportStopExit\022\n\n" +
+      "\002dx\030\001 \002(\021\022\n\n\002dy\030\002 \002(\021\022\013\n\003ref\030\003 \002(\r\"\272\001\n\022T" +
+      "ransportStopsTree\022\014\n\004left\030\001 \002(\021\022\r\n\005right",
+      "\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\022\016\n\006bottom\030\004 \002(\021\0220\n\010s" +
+      "ubtrees\030\007 \003(\0132\036.OsmAnd.OBF.TransportStop" +
+      "sTree\022(\n\005leafs\030\010 \003(\0132\031.OsmAnd.OBF.Transp" +
+      "ortStop\022\016\n\006baseId\030\020 \001(\004\"\357\001\n\024OsmAndTransp" +
+      "ortIndex\022\014\n\004name\030\001 \001(\t\022+\n\006routes\030\003 \001(\0132\033" +
+      ".OsmAnd.OBF.TransportRoutes\022-\n\005stops\030\006 \001" +
+      "(\0132\036.OsmAnd.OBF.TransportStopsTree\022?\n\020in" +
+      "completeRoutes\030\010 \001(\0132%.OsmAnd.OBF.Incomp" +
+      "leteTransportRoutes\022,\n\013stringTable\030\t \002(\013" +
+      "2\027.OsmAnd.OBF.StringTable\"\312\002\n\016OsmAndPoiI",
+      "ndex\022\014\n\004name\030\001 \002(\t\022-\n\nboundaries\030\002 \002(\0132\031" +
+      ".OsmAnd.OBF.OsmAndTileBox\0228\n\017categoriesT" +
+      "able\030\003 \003(\0132\037.OsmAnd.OBF.OsmAndCategoryTa" +
+      "ble\0221\n\tnameIndex\030\004 \001(\0132\036.OsmAnd.OBF.OsmA" +
+      "ndPoiNameIndex\0226\n\rsubtypesTable\030\005 \001(\0132\037." +
+      "OsmAnd.OBF.OsmAndSubtypesTable\022\'\n\005boxes\030" +
+      "\006 \003(\0132\030.OsmAnd.OBF.OsmAndPoiBox\022-\n\007poiDa" +
+      "ta\030\t \003(\0132\034.OsmAnd.OBF.OsmAndPoiBoxData\"\331" +
+      "\001\n\022OsmAndPoiNameIndex\022-\n\005table\030\003 \002(\0132\036.O" +
+      "smAnd.OBF.IndexedStringTable\022C\n\004data\030\005 \003",
+      "(\01325.OsmAnd.OBF.OsmAndPoiNameIndex.OsmAn" +
+      "dPoiNameIndexData\032O\n\026OsmAndPoiNameIndexD" +
+      "ata\0225\n\005atoms\030\003 \003(\0132&.OsmAnd.OBF.OsmAndPo" +
+      "iNameIndexDataAtom\"Q\n\032OsmAndPoiNameIndex" +
+      "DataAtom\022\014\n\004zoom\030\002 \001(\r\022\t\n\001x\030\003 \001(\r\022\t\n\001y\030\004" +
+      " \001(\r\022\017\n\007shiftTo\030\016 \001(\007\">\n\023OsmAndCategoryT" +
+      "able\022\020\n\010category\030\001 \002(\t\022\025\n\rsubcategories\030" +
+      "\003 \003(\t\"E\n\023OsmAndSubtypesTable\022.\n\010subtypes" +
+      "\030\004 \003(\0132\034.OsmAnd.OBF.OsmAndPoiSubtype\"\205\001\n" +
+      "\020OsmAndPoiSubtype\022\014\n\004name\030\001 \002(\t\022\017\n\007tagna",
+      "me\030\002 \001(\t\022\016\n\006isText\030\003 \002(\010\022\021\n\tfrequency\030\005 " +
+      "\001(\r\022\031\n\021subtypeValuesSize\030\006 \001(\r\022\024\n\014subtyp" +
+      "eValue\030\010 \003(\t\"\255\001\n\014OsmAndPoiBox\022\014\n\004zoom\030\001 " +
+      "\002(\r\022\014\n\004left\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\0223\n\ncatego" +
+      "ries\030\004 \001(\0132\037.OsmAnd.OBF.OsmAndPoiCategor" +
+      "ies\022*\n\010subBoxes\030\n \003(\0132\030.OsmAnd.OBF.OsmAn" +
+      "dPoiBox\022\023\n\013shiftToData\030\016 \001(\007\"@\n\023OsmAndPo" +
+      "iCategories\022\022\n\ncategories\030\003 \003(\r\022\025\n\rsubca" +
+      "tegories\030\005 \003(\r\"i\n\020OsmAndPoiBoxData\022\014\n\004zo" +
+      "om\030\001 \001(\r\022\t\n\001x\030\002 \001(\r\022\t\n\001y\030\003 \001(\r\0221\n\007poiDat",
+      "a\030\005 \003(\0132 .OsmAnd.OBF.OsmAndPoiBoxDataAto" +
+      "m\"\205\002\n\024OsmAndPoiBoxDataAtom\022\n\n\002dx\030\002 \002(\021\022\n" +
+      "\n\002dy\030\003 \002(\021\022\022\n\ncategories\030\004 \003(\r\022\025\n\rsubcat" +
+      "egories\030\005 \003(\r\022\014\n\004name\030\006 \001(\t\022\016\n\006nameEn\030\007 " +
+      "\001(\t\022\n\n\002id\030\010 \001(\004\022\024\n\014openingHours\030\n \001(\t\022\014\n" +
+      "\004site\030\013 \001(\t\022\r\n\005phone\030\014 \001(\t\022\014\n\004note\030\r \001(\t" +
+      "\022\026\n\016textCategories\030\016 \003(\r\022\022\n\ntextValues\030\017" +
+      " \003(\t\022\023\n\013precisionXY\030\020 \001(\005\"\032\n\007IdTable\022\017\n\007" +
+      "routeId\030\001 \003(\022\"F\n\017RestrictionData\022\014\n\004type" +
+      "\030\001 \002(\005\022\014\n\004from\030\002 \002(\005\022\n\n\002to\030\003 \002(\005\022\013\n\003via\030",
+      "\004 \001(\005\"x\n\tRouteData\022\016\n\006points\030\001 \002(\014\022\022\n\npo" +
+      "intTypes\030\004 \001(\014\022\022\n\npointNames\030\005 \001(\014\022\r\n\005ty" +
+      "pes\030\007 \002(\014\022\017\n\007routeId\030\014 \002(\005\022\023\n\013stringName" +
+      "s\030\016 \001(\014\"\304\005\n\022OsmAndRoutingIndex\022\014\n\004name\030\001" +
+      " \002(\t\022?\n\005rules\030\002 \003(\01320.OsmAnd.OBF.OsmAndR" +
+      "outingIndex.RouteEncodingRule\022>\n\trootBox" +
+      "es\030\003 \003(\0132+.OsmAnd.OBF.OsmAndRoutingIndex" +
+      ".RouteDataBox\022A\n\014basemapBoxes\030\004 \003(\0132+.Os" +
+      "mAnd.OBF.OsmAndRoutingIndex.RouteDataBox" +
+      "\022=\n\006blocks\030\005 \003(\0132-.OsmAnd.OBF.OsmAndRout",
+      "ingIndex.RouteDataBlock\032;\n\021RouteEncoding" +
+      "Rule\022\013\n\003tag\030\003 \002(\t\022\r\n\005value\030\005 \002(\t\022\n\n\002id\030\007" +
+      " \001(\r\032\231\001\n\014RouteDataBox\022\014\n\004left\030\001 \002(\021\022\r\n\005r" +
+      "ight\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\022\016\n\006bottom\030\004 \002(\021\022" +
+      "\023\n\013shiftToData\030\005 \001(\007\022:\n\005boxes\030\007 \003(\0132+.Os" +
+      "mAnd.OBF.OsmAndRoutingIndex.RouteDataBox" +
+      "\032\303\001\n\016RouteDataBlock\022$\n\007idTable\030\005 \001(\0132\023.O" +
+      "smAnd.OBF.IdTable\022*\n\013dataObjects\030\006 \003(\0132\025" +
+      ".OsmAnd.OBF.RouteData\0221\n\014restrictions\030\007 " +
+      "\003(\0132\033.OsmAnd.OBF.RestrictionData\022,\n\013stri",
+      "ngTable\030\010 \001(\0132\027.OsmAnd.OBF.StringTableB\036" +
+      "\n\021net.osmand.binaryB\tOsmandOdb"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -65290,7 +65598,7 @@ public final class OsmandOdb {
           internal_static_OsmAnd_OBF_TransportRoute_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_TransportRoute_descriptor,
-              new java.lang.String[] { "Id", "Type", "Operator", "Ref", "Name", "NameEn", "Distance", "Color", "DirectStops", "ReverseStops", "Geometry", "ScheduleTrip", });
+              new java.lang.String[] { "Id", "Type", "Operator", "Ref", "Name", "NameEn", "Distance", "Color", "DirectStops", "ReverseStops", "Geometry", "ScheduleTrip", "AttributeTagIds", "AttributeTextTagValues", });
           internal_static_OsmAnd_OBF_IncompleteTransportRoutes_descriptor =
             getDescriptor().getMessageTypes().get(17);
           internal_static_OsmAnd_OBF_IncompleteTransportRoutes_fieldAccessorTable = new

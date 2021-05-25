@@ -28,10 +28,14 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
 import net.osmand.binary.RouteDataObject;
+import net.osmand.data.QuadPoint;
+import net.osmand.data.QuadRect;
 import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentVisitor;
 import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
+import net.osmand.router.RoutingConfiguration.DirectionPoint;
+import net.osmand.util.MapUtils;
 
 
 public class RoutingContext {
@@ -272,27 +276,50 @@ public class RoutingContext {
 		int ucount = ts.getUnloadCont();
 		if (nativeLib == null) {
 			long now = System.nanoTime();
+
+			List<DirectionPoint> points = Collections.emptyList();
+			if (config.getDirectionPoints() != null) {
+				//retrieve direction points for attach to routing
+				points = config.getDirectionPoints().queryInBox(
+						new QuadRect(ts.subregion.left, ts.subregion.top, ts.subregion.right, ts.subregion.bottom), new ArrayList<DirectionPoint>());
+				int createType = ts.subregion.routeReg.findOrCreateRouteType(DirectionPoint.TAG, DirectionPoint.CREATE_TYPE);
+				for (DirectionPoint d : points) {
+					d.types.clear();
+					for (Entry<String, String> e : d.getTags().entrySet()) {
+						int type = ts.subregion.routeReg.searchRouteEncodingRule(e.getKey(), e.getValue());
+						if (type != -1) {
+							d.types.add(type);
+						}
+						d.types.add(createType);
+					}
+				}
+			}
+
 			try {
 				BinaryMapIndexReader reader = reverseMap.get(ts.subregion.routeReg);
 				ts.setLoadedNonNative();
 				List<RouteDataObject> res = reader.loadRouteIndexData(ts.subregion);
 				
-				if(toLoad != null) {
+				if (toLoad != null) {
 					toLoad.addAll(res);
 				} else {
-					for(RouteDataObject ro : res){
-						if(ro != null) {
-							if(config.routeCalculationTime != 0) {
+					for (RouteDataObject ro : res) {
+						if (ro != null) {
+							if (config.routeCalculationTime != 0) {
 								ro.processConditionalTags(config.routeCalculationTime);
 							}
-							if(config.router.acceptLine(ro)) {
-								if(excludeNotAllowed != null && !excludeNotAllowed.contains(ro.getId())) {
+							if (config.router.acceptLine(ro)) {
+								if (excludeNotAllowed != null && !excludeNotAllowed.contains(ro.getId())) {
+									// don't attach point for route precalculation
+									if (!config.router.attributes.containsKey(GeneralRouter.CHECK_ALLOW_PRIVATE_NEEDED)) {
+										connectPoint(ts, ro, points);
+									}
 									ts.add(ro);
 								}
 							}
-							if(excludeNotAllowed != null && ro.getId() > 0){
+							if (excludeNotAllowed != null && ro.getId() > 0) {
 								excludeNotAllowed.add(ro.getId());
-								if(ts.excludedIds == null ){
+								if (ts.excludedIds == null) {
 									ts.excludedIds = new TLongHashSet();
 								}
 								ts.excludedIds.add(ro.getId());
@@ -337,6 +364,8 @@ public class RoutingContext {
 		}
 		global.size += ts.tileStatistics.size;
 	}
+
+	
 
 	private List<RoutingSubregionTile> loadTileHeaders(final int x31, final int y31) {
 		final int zoomToLoad = 31 - config.ZOOM_TO_LOAD_TILES;
@@ -451,8 +480,9 @@ public class RoutingContext {
 	@SuppressWarnings("unused")
 	private long getRoutingTile(int x31, int y31, long memoryLimit) {
 		// long now = System.nanoTime();
-		long xloc = x31 >> (31 - config.ZOOM_TO_LOAD_TILES);
-		long yloc = y31 >> (31 - config.ZOOM_TO_LOAD_TILES);
+		int zmShift = 31 - config.ZOOM_TO_LOAD_TILES;
+		long xloc = x31 >> zmShift;
+		long yloc = y31 >> zmShift;
 		long tileId = (xloc << config.ZOOM_TO_LOAD_TILES) + yloc;
 		if (memoryLimit == 0) {
 			memoryLimit = config.memoryLimitation;
@@ -513,7 +543,112 @@ public class RoutingContext {
 	}
 
 	
+	private void connectPoint(final RoutingSubregionTile ts, RouteDataObject ro, List<DirectionPoint> points) {
+		int createType = ro.region.findOrCreateRouteType(DirectionPoint.TAG, DirectionPoint.CREATE_TYPE);
+		int deleteType = ro.region.findOrCreateRouteType(DirectionPoint.TAG, DirectionPoint.DELETE_TYPE);
+
+		for (DirectionPoint np : points) {
+			if (np.types.size() == 0) {
+				continue;
+			}
+
+			int wptX = MapUtils.get31TileNumberX(np.getLongitude());
+			int wptY = MapUtils.get31TileNumberY(np.getLatitude());
+
+			int x = ro.getPoint31XTile(0);
+			int y = ro.getPoint31YTile(0);
+
+			double mindist = config.directionPointsRadius * 2;
+			int indexToInsert = 0;
+			int mprojx = 0;
+			int mprojy = 0;
+			for (int i = 1; i < ro.getPointsLength(); i++) {
+				int nx = ro.getPoint31XTile(i);
+				int ny = ro.getPoint31YTile(i);
+				boolean sgnx = nx - wptX > 0;
+				boolean sgx = x - wptX > 0;
+				boolean sgny = ny - wptY > 0;
+				boolean sgy = y - wptY > 0;
+				boolean checkPreciseProjection = true;
+				if (sgny == sgy && sgx == sgnx) {
+					// Speedup: point outside of rect (line is diagonal) distance is likely be bigger
+					double dist = MapUtils.squareRootDist31(wptX, wptY, Math.abs(nx - wptX) < Math.abs(x - wptX) ? nx : x,
+							Math.abs(ny - wptY) < Math.abs(y - wptY) ? ny : y);
+					checkPreciseProjection = dist < config.directionPointsRadius;
+				}
+				if (checkPreciseProjection) {
+					QuadPoint pnt = MapUtils.getProjectionPoint31(wptX, wptY, x, y, nx, ny);
+					int projx = (int) pnt.x;
+					int projy = (int) pnt.y;
+					double dist = MapUtils.squareRootDist31(wptX, wptY, projx, projy);
+					if (dist < mindist) {
+						indexToInsert = i;
+						mindist = dist;
+						mprojx = projx;
+						mprojy = projy;
+					}
+				}
+
+
+				x = nx;
+				y = ny;
+			}
+			boolean sameRoadId = np.connected != null && np.connected.getId() == ro.getId();
+			boolean pointShouldBeAttachedByDist = (mindist < config.directionPointsRadius && mindist < np.distance);
+
+			if (pointShouldBeAttachedByDist) {
+				if (!sameRoadId) {
+					//System.out.println(String.format("INSERT %s (%d-%d) %.0f m [%.5f, %.5f] - %d, %d ", ro, indexToInsert, indexToInsert + 1, mindist,
+					//		MapUtils.get31LongitudeX(wptX), MapUtils.get31LatitudeY(wptY), wptX, wptY));
+					if (np.connected != null) {
+						// check old connected points
+						int pointIndex = findPointIndex(np, createType);
+						if (pointIndex != -1) {
+							// set type "deleted" for old connected point
+							np.connected.setPointTypes(pointIndex, new int[]{deleteType});
+						} else {
+							throw new RuntimeException();
+						}
+					}
+				} else {
+					int sameRoadPointIndex = findPointIndex(np, createType);
+					if (sameRoadPointIndex != -1 && np.connected != null) {
+						if (mprojx == np.connectedx && mprojy == np.connectedy) {
+							continue;// was found the same point
+						} else {
+							// set type "deleted" for old connected point
+							np.connected.setPointTypes(sameRoadPointIndex, new int[]{deleteType});
+						}
+					}
+				}
+				np.connectedx = mprojx;
+				np.connectedy = mprojy;
+				ro.insert(indexToInsert, mprojx, mprojy);
+				ro.setPointTypes(indexToInsert, np.types.toArray());// np.types contains DirectionPoint.CREATE_TYPE
+				np.distance = mindist;
+				np.connected = ro;
+			}
+		}
+
+	}
+
+	private int findPointIndex(DirectionPoint np, int createType) {
+		// using search by coordinates because by index doesn't work (parallel updates)
+		int samePointIndex = -1;
+		for (int i = 0; np.connected != null && i < np.connected.getPointsLength(); i++) {
+			int tx = np.connected.getPoint31XTile(i);
+			int ty = np.connected.getPoint31YTile(i);
+			if (tx == np.connectedx && ty == np.connectedy && np.connected.hasPointType(i, createType)) {
+				samePointIndex = i;
+				break;
+			}
+		}
+		return samePointIndex;
+	}
 	
+
+
+
 	public boolean checkIfMemoryLimitCritical(long memoryLimit) {
 		return getCurrentEstimatedSize() > 0.9 * memoryLimit;
 	}

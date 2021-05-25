@@ -170,7 +170,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private int toolbarHeightPx;
 	private boolean adjustMapPosition = true;
 
-
 	public enum TrackMenuType {
 		OVERVIEW(R.id.action_overview, R.string.shared_string_overview),
 		TRACK(R.id.action_track, R.string.shared_string_gpx_tracks),
@@ -1038,7 +1037,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		runLayoutListener(new Runnable() {
 			@Override
 			public void run() {
-				updateMenuState();
+				if (getCurrentMenuState() != MenuState.FULL_SCREEN) {
+					updateMenuState();
+				}
 			}
 		});
 	}

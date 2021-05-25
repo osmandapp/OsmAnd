@@ -1095,7 +1095,7 @@
     <string name="map_screen_orientation_descr">Vertical, horizontal ou a mesma do aparelho.</string>
     <string name="opening_hours_not_supported">Não é possível alterar o formato do horário de funcionamento.</string>
     <string name="add_new_rule">Adicionar nova regra</string>
-    <string name="transport_Routes">Linhas</string>
+    <string name="transport_Routes">Rotas</string>
     <string name="transport_Stop">Parada</string>
     <string name="transport_stops">paradas</string>
     <string name="transport_search_after">Itinerário seguinte</string>
@@ -4096,4 +4096,32 @@
     <string name="recorded_description">A voz gravada soa melhor, mas pode pronunciar apenas frases pré-gravadas: alternância de instruções. Não é possível anunciar nomes de rua ou nomes de POI.</string>
     <string name="use_system_language">Usar o idioma do sistema</string>
     <string name="shared_string_itinerary">Itinerário</string>
+    <string name="route_line_use_map_style_width">Usar a espessura padrão das linhas do estilo do mapa (%1$s).</string>
+    <string name="route_line_use_map_style_color">Usar a cor padrão do estilo do mapa (%1$s).</string>
+    <string name="poi_routes">Rotas</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">Evitar zonas de baixa emissão</string>
+    <string name="routing_attr_avoid_low_emission_zone_name">Evitar zonas de baixa emissão</string>
+    <string name="search_more">Pesquisar mais…</string>
+    <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
+    <string name="backup_and_restore">Backup e restauração</string>
+    <string name="last_backup">Último backup</string>
+    <string name="duration_ago">%1$s atrás</string>
+    <string name="osmand_cloud">OsmAnd Cloud</string>
+    <string name="osmand_cloud_authorize_descr">Nunca perca seus dados, faça backup e restaure todas as informações sem problemas.</string>
+    <string name="local_backup">Backup local</string>
+    <string name="local_backup_descr">Faça backup ou restaure dados de um arquivo local.</string>
+    <string name="backup_into_file">Backup em arquivo</string>
+    <string name="restore_from_file">Restaurar do arquivo</string>
+    <string name="osmand_cloud_help_descr">Precisa de ajuda\? Entre em contato conosco em %1$s</string>
+    <string name="osmand_cloud_create_account_descr">Por favor, insira seu endereço de e-mail, todos os seus dados estarão vinculados a ele.
+\nEnviaremos a você um código de verificação para este endereço de e-mail.</string>
+    <string name="osmand_cloud_login_descr">Por favor, insira o endereço de e-mail que você usou para se registrar. Enviaremos a você uma senha de uso único necessária na próxima etapa.</string>
+    <string name="verify_email_address">Verifique o endereço de e-mail</string>
+    <string name="verify_email_address_descr">Enviamos um código de verificação para %1$s, digite-o no campo abaixo.</string>
+    <string name="enter_verification_code">Digite o código de 4 dígitos</string>
+    <string name="cloud_email_not_registered">Este e-mail não foi registrado para o OsmAnd Cloud</string>
+    <string name="cloud_email_already_registered">A conta com este e-mail já está cadastrada.</string>
+    <string name="resend_verification_code">Reenviar código</string>
+    <string name="verification_code_missing">Não recebi o código de verificação</string>
+    <string name="verification_code_missing_description">O tempo de espera pelo código pode ser de 10 minutos, você também pode verificar sua pasta de spam. Se não ajudar, use o botão abaixo.</string>
 </resources>

@@ -1763,7 +1763,7 @@
     <string name="rendering_attr_currentTrackColor_description">Couleur GPX</string>
     <string name="rendering_attr_currentTrackWidth_description">Largeur GPX</string>
     <string name="rendering_attr_roadStyle_description">Style pour les routes</string>
-    <string name="copied_to_clipboard">Copié dans le presse-papier</string>
+    <string name="copied_to_clipboard">Copié dans le presse-papiers</string>
     <string name="use_dashboard_btn">Utiliser le tableau de bord</string>
     <string name="use_drawer_btn">Utiliser le menu</string>
     <string name="dashboard_or_drawer_title">Lancement du Tableau de bord ou du Menu</string>
@@ -2386,7 +2386,7 @@
     <string name="measurement_tool">Mesurer une distance</string>
     <string name="show_on_map_after_saving">Afficher sur la carte après enregistrement</string>
     <string name="route_point_one">Point 1 de l\'itinéraire</string>
-    <string name="none_point_error">Merci d\'ajouter au moins un point.</string>
+    <string name="none_point_error">Veuillez ajouter au moins un point.</string>
     <string name="enter_gpx_name">Nom du fichier GPX :</string>
     <string name="waypoint_one">Étape 1</string>
     <string name="save_route_point">Enregistrer le point d\'itinéraire</string>
@@ -3276,7 +3276,7 @@
     <string name="add_new_profile_q">Ajouter le profil \'%1$s\' \?</string>
     <string name="save_heading">Inclure la direction</string>
     <string name="save_heading_descr">Inclure la direction de chaque point lors de l\'enregistrement d\'une trace.</string>
-    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Afficher les itinéraires cyclables du réseau de nœuds</string>
+    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Afficher les nœuds du réseau cyclable</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Nœuds de transport</string>
     <string name="personal_category_name">Personnel</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
@@ -3355,7 +3355,7 @@
     <string name="monitoring_min_speed_descr_remark">Remarque : vérification de vitesse &gt; 0. La plupart des puces GPS fournissent une vitesse uniquement lorsque vous êtes en mouvement. Par conséquent, l\'indication du paramètre &gt; 0 pour ce filtre utilise la détection de mouvement par la puce GPS. Mais même s\'il n\'est pas filtré ici au moment de l\'enregistrement, nous utilisons toujours cette fonctionnalité dans notre analyse des traces GPX pour déterminer la distance corrigée, c\'est-à-dire que la valeur affichée dans ce champ est la distance enregistrée en déplacement.</string>
     <string name="monitoring_min_distance_descr_side_effect">Effet secondaire : les périodes de repos ne seront pas enregistrées ou seulement par un point. De petits mouvements, comme des pas sur le côté, pourront être ignorés. Votre fichier contiendra moins d\'informations exploitables en post-traitement et aura des statistiques moins exactes (éliminant les points redondants mais conservant les erreurs de position dues à une mauvaise réception ou aux artefacts de la puce GPS).</string>
     <string name="shared_string_available">Disponible</string>
-    <string name="add_custom_category">Ajouter une catégorie personnelle</string>
+    <string name="add_custom_category">Ajouter une catégorie personnalisée</string>
     <string name="rendering_attr_streetLightingNight_name">Afficher seulement de nuit</string>
     <string name="plugin_prefs_reset_successful">Tous les paramètres du greffon ont été restaurés à leurs valeurs par défaut.</string>
     <string name="profile_prefs_reset_successful">Tous les paramètres du profile ont été restaurés à leurs valeurs par défaut.</string>
@@ -3647,7 +3647,7 @@
     <string name="clear_tiles_warning">Appliquer ces modifications effacera les données mises en cache pour cette source de tuiles</string>
     <string name="vessel_height_warning_link">Définir la hauteur du navire</string>
     <string name="vessel_height_warning">Vous pouvez définir la hauteur du navire pour éviter les ponts bas. Souvenez-vous que si le pont est mobile, nous utiliserons sa hauteur en position ouverte.</string>
-    <string name="vessel_height_limit_description">Définir la hauteur du navire afin d\'éviter les ponts bas. Souvenez-vous que si le pont est mobile, nous utiliserons sa hauteur en position ouverte.</string>
+    <string name="vessel_height_limit_description">Définit la hauteur du navire afin d\'éviter les ponts bas. Souvenez-vous que si le pont est mobile, nous utiliserons sa hauteur en position ouverte.</string>
     <string name="vessel_width_limit_description">Définir la largeur du navire pour éviter les ponts étroits</string>
     <string name="quick_action_showhide_mapillary_descr">Bouton pour afficher ou masquer la couche Mapillary sur la carte.</string>
     <string name="speed_cameras_legal_descr">Dans certains pays ou régions, l\'utilisation d\'avertisseurs de radars est interdit par la loi.
@@ -3708,7 +3708,7 @@
     <string name="route_between_points_whole_track_button_desc">Toute la trace sera recalculée en utilisant le profil sélectionné.</string>
     <string name="route_between_points_next_segment_button_desc">Seul le prochain segment sera recalculé en utilisant le profil sélectionné.</string>
     <string name="route_between_points_warning_desc">Ensuite, sélectionnez le profil de navigation pour détecter les routes autorisées et le seuil de distance afin de déplacer votre trace.</string>
-    <string name="route_between_points_add_track_desc">Sélectionnez un fichier de trace auquel ajouter un nouveau segment.</string>
+    <string name="route_between_points_add_track_desc">Sélectionnez le fichier de trace auquel vous souhaitez ajouter un nouveau segment.</string>
     <string name="save_as_new_track">Enregistrer comme nouvelle trace</string>
     <string name="reverse_route">Inverser l\'itinéraire</string>
     <string name="whole_track">Trace entière</string>
@@ -4001,7 +4001,7 @@
     <string name="map_orientation_threshold_descr">Ne pas pivoter la carte si la vitesse est inférieure à un seuil</string>
     <string name="on_pause">En pause</string>
     <string name="app_restart_required">Un redémarrage de l\'application est nécessaire pour appliquer certains paramètres.</string>
-    <string name="routing_attr_height_obstacles_description">Le routage peut éviter de fortes montées.</string>
+    <string name="routing_attr_height_obstacles_description">L\'itinéraire pourrait éviter les fortes pentes.</string>
     <string name="map_widget_distance_by_tap">Distance par appui</string>
     <string name="latest_openstreetmap_update">Dernière mise à jour d\'OpenStreetMap disponible :</string>
     <string name="updated">Mis à jour : %s</string>
@@ -4032,7 +4032,7 @@
     <string name="rendering_attr_noNatureReserveBoundaries_name">Limites naturelles</string>
     <string name="select_segments_description">%1$s contient plusieurs segments, vous devez sélectionner un tronçon pour la navigation.</string>
     <string name="routing_attr_driving_style_description">Sélectionnez un mode de conduite pour calculer l\'itinéraire le plus court, le plus rapide ou le plus sûr.</string>
-    <string name="quick_action_coordinates_widget_descr">Appuyez pour afficher ou masquer le gadget Coordonnées sur la carte.</string>
+    <string name="quick_action_coordinates_widget_descr">Bouton pour afficher ou masquer le gadget Coordonnées sur la carte.</string>
     <string name="snap_to_road_descr">L’icône de positionnement se déplacera sur le trajet en cours.</string>
     <string name="select_another_colorization">Veuillez sélectionner un autre type de coloration.</string>
     <string name="trip_recording_logging_interval_info">L\'intervalle d’enregistrement définit la fréquence à laquelle OsmAnd interrogera les données de localisation.</string>
@@ -4091,4 +4091,32 @@
     <string name="tts_description">La synthèse vocale (Text-To-Speech ou TTS) peut prononcer tous types d\'instructions : nom de rue, bifurcation, nom de PI, etc.</string>
     <string name="tts_title">TTS</string>
     <string name="shared_string_itinerary">Itinéraire</string>
+    <string name="route_line_use_map_style_width">Utiliser la largeur par défaut du style de carte (%1$s).</string>
+    <string name="route_line_use_map_style_color">Utiliser la couleur par défaut du style de carte (%1$s).</string>
+    <string name="routing_attr_avoid_low_emission_zone_name">Éviter les zones à faibles émissions</string>
+    <string name="poi_routes">Routes</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">Éviter les zones à faibles émissions</string>
+    <string name="search_more">Rechercher plus …</string>
+    <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
+    <string name="backup_and_restore">Sauvegarde &amp; Restauration</string>
+    <string name="last_backup">Dernière sauvegarde</string>
+    <string name="duration_ago">il y a %1$s</string>
+    <string name="osmand_cloud">OsmAnd Cloud</string>
+    <string name="local_backup">Sauvegarde locale</string>
+    <string name="local_backup_descr">Sauvegarder ou restaurer des données à partir d\'un fichier local.</string>
+    <string name="restore_from_file">Restaurer à partir d\'un fichier</string>
+    <string name="osmand_cloud_help_descr">Besoin d\'aide \? Contactez-nous sur %1$s</string>
+    <string name="verify_email_address">Vérifier l’adresse e-mail</string>
+    <string name="verify_email_address_descr">Nous avons envoyé un code de vérification à %1$s, veuillez le saisir dans le champ ci-dessous.</string>
+    <string name="enter_verification_code">Entrez le code à 4 chiffres</string>
+    <string name="cloud_email_already_registered">Un compte avec cet email existe déjà.</string>
+    <string name="resend_verification_code">Renvoyer le code</string>
+    <string name="verification_code_missing">Je n\'ai pas reçu le code de vérification</string>
+    <string name="osmand_cloud_authorize_descr">Ne perdez jamais vos données, sauvegardez et restaurez facilement toutes vos informations.</string>
+    <string name="osmand_cloud_create_account_descr">Veuillez saisir votre adresse email, toutes vos données y seront associées.
+\nLe code de vérification vous sera envoyé à cette adresse.</string>
+    <string name="osmand_cloud_login_descr">Veuillez saisir l\'adresse email utilisée à l\'inscription. A l\'étape suivante, vous recevrez un mot de passe à usage unique.</string>
+    <string name="cloud_email_not_registered">Cet email n\'est pas enregistré sur OsmAnd Cloud</string>
+    <string name="backup_into_file">Sauvegarder dans un fichier</string>
+    <string name="verification_code_missing_description">Le délai maximum d\'envoi du code est de 10 minutes. Pensez à vérifier votre dossier \'Pourriel\' sinon utilisez le bouton ci-dessous.</string>
 </resources>

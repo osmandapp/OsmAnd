@@ -805,7 +805,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 							if (count++ > searchCityLimit) {
 								return false;
 							}
-							List<String> otherNames = amenity.getAllNames(true);
+							List<String> otherNames = amenity.getOtherNames(true);
 							String localeName = amenity.getName(lang, transliterate);
 							String subType = amenity.getSubType();
 							if (!citySubTypes.contains(subType)
