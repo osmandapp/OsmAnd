@@ -420,8 +420,8 @@ public class SearchCoreFactory {
 						List<City> closestCities = null;
 						if (object instanceof Street) {
 							// remove limitation by location
-							if (/*(locSpecified && !streetBbox.contains(x, y, x, y))
-									|| */!phrase.isSearchTypeAllowed(ObjectType.STREET)) {
+							if (  //(locSpecified && !streetBbox.contains(x, y, x, y)) || 
+								!phrase.isSearchTypeAllowed(ObjectType.STREET)) {
 								return false;
 							}
 							if (object.getName().startsWith("<")) {
