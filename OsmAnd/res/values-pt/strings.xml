@@ -3273,7 +3273,6 @@
     <string name="select_color">Selecionar a cor</string>
     <string name="edit_profiles_descr">Os perfis predefinidos do OsmAnd não podem ser eliminados, mas podem ser desativados (no ecrã anterior) ou deslocados para o fim da lista.</string>
     <string name="edit_profiles">Editar perfis</string>
-    <string name="select_nav_profile_dialog_message">O \'Tipo de navegação\' controla como as rotas são calculadas.</string>
     <string name="profile_appearance">Aspeto do perfil</string>
     <string name="layer_osm_edits">Edições OSM</string>
     <string name="quick_action_contour_lines_descr">Botão que mostra ou oculta curvas de nível no mapa.</string>

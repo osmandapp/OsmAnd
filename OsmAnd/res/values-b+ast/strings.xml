@@ -3153,7 +3153,6 @@
     <string name="personal_category_name">Personal</string>
     <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
-    <string name="select_nav_profile_dialog_message">The \'Navigation type\' governs how routes are calculated.</string>
     <string name="edit_profiles">Edit profiles</string>
     <string name="edit_profiles_descr">OsmAnd default profiles cannot be deleted, but disabled (on the previous screen), or be sorted to the bottom.</string>
     <string name="shared_string_downloading_formatted">Downloading %s</string>

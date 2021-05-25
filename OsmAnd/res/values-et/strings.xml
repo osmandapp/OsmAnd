@@ -1030,7 +1030,6 @@
     <string name="select_color">Vali värv</string>
     <string name="edit_profiles_descr">OsmAnd vaikimisi profiile ei saa kustutada, aga saate need eelmisel ekraanil keelata või lõppu nihutada.</string>
     <string name="edit_profiles">Muuda profiile</string>
-    <string name="select_nav_profile_dialog_message">Navigeerimise liik mõjutab teekonna arvutamise loogikat.</string>
     <string name="profile_appearance">Profiili välimus</string>
     <string name="choose_icon_color_name">Ikoon, värv ja nimi</string>
     <string name="reorder_profiles">Muuda profiililoendit</string>
