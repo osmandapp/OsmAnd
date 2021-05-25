@@ -136,7 +136,13 @@ public class MapMarkersHelper {
 	}
 
 	private void saveGroups() {
-		dataHelper.saveGroups(mapMarkersGroups);
+		List<MapMarkersGroup> markersGroups = new ArrayList<>();
+		for (MapMarkersGroup group : mapMarkersGroups) {
+			if (!group.isDisabled()) {
+				markersGroups.add(group);
+			}
+		}
+		dataHelper.saveGroups(markersGroups);
 	}
 
 	public ItineraryDataHelper getDataHelper() {
