@@ -230,9 +230,12 @@ public class SearchPhrase {
 	private List<WorldRegion> getWorldRegions() {
 		OsmandRegions or = new OsmandRegions();
 		List<WorldRegion> regions = new ArrayList<>();
+		LatLon location = null;
 		try {
 			or.prepareFile();
-			LatLon location = settings.getOriginalLocation();
+			if (settings != null) {
+				location = settings.getOriginalLocation();
+			}
 			if (location != null) {
 				regions = or.getWorldRegionsAt(location);
 			}
