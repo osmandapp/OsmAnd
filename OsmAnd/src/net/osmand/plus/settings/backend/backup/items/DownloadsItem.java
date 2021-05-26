@@ -1,4 +1,4 @@
-package net.osmand.plus.settings.backend.backup;
+package net.osmand.plus.settings.backend.backup.items;
 
 import android.content.Context;
 
@@ -10,6 +10,10 @@ import net.osmand.plus.CustomOsmandPlugin;
 import net.osmand.plus.CustomRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.settings.backend.backup.SettingsHelper;
+import net.osmand.plus.settings.backend.backup.SettingsItemReader;
+import net.osmand.plus.settings.backend.backup.SettingsItemType;
+import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,7 +26,7 @@ public class DownloadsItem extends SettingsItem {
 
 	private List<WorldRegion> items;
 
-	DownloadsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
+	public DownloadsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 		super(app, json);
 	}
 
@@ -92,7 +96,7 @@ public class DownloadsItem extends SettingsItem {
 
 	@Nullable
 	@Override
-	SettingsItemReader<? extends SettingsItem> getReader() {
+	public SettingsItemReader<? extends SettingsItem> getReader() {
 		return null;
 	}
 

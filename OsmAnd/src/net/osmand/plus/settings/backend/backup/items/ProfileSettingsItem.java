@@ -1,4 +1,4 @@
-package net.osmand.plus.settings.backend.backup;
+package net.osmand.plus.settings.backend.backup.items;
 
 import android.content.Context;
 
@@ -14,6 +14,12 @@ import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
 import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBuilder;
 import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.backup.OsmandSettingsItemReader;
+import net.osmand.plus.settings.backend.backup.OsmandSettingsItemWriter;
+import net.osmand.plus.settings.backend.backup.SettingsHelper;
+import net.osmand.plus.settings.backend.backup.SettingsItemReader;
+import net.osmand.plus.settings.backend.backup.SettingsItemType;
+import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
 import net.osmand.router.GeneralRouter;
 import net.osmand.util.Algorithms;
 
@@ -182,7 +188,7 @@ public class ProfileSettingsItem extends OsmandSettingsItem {
 
 			SettingsItemReader<? extends SettingsItem> reader = getReader();
 			if (reader instanceof OsmandSettingsItemReader) {
-				((OsmandSettingsItemReader) reader).readPreferencesFromJson(additionalPrefsJson);
+				((OsmandSettingsItemReader<?>) reader).readPreferencesFromJson(additionalPrefsJson);
 			}
 		}
 	}
@@ -237,7 +243,7 @@ public class ProfileSettingsItem extends OsmandSettingsItem {
 
 	@Nullable
 	@Override
-	SettingsItemReader<? extends SettingsItem> getReader() {
+	public SettingsItemReader<? extends SettingsItem> getReader() {
 		return new OsmandSettingsItemReader<ProfileSettingsItem>(this, getSettings()) {
 			@Override
 			protected void readPreferenceFromJson(@NonNull OsmandPreference<?> preference, @NonNull JSONObject json) throws JSONException {
@@ -247,7 +253,7 @@ public class ProfileSettingsItem extends OsmandSettingsItem {
 			}
 
 			@Override
-			void readPreferencesFromJson(final JSONObject json) {
+			public void readPreferencesFromJson(final JSONObject json) {
 				getSettings().getContext().runInUIThread(new Runnable() {
 					@Override
 					public void run() {

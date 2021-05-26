@@ -28,8 +28,9 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.backup.SettingsHelper;
-import net.osmand.plus.settings.backend.backup.SettingsItem;
+import net.osmand.plus.settings.backend.backup.AbstractProgress;
+import net.osmand.plus.settings.backend.backup.SettingsHelper.ExportProgressListener;
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -38,6 +39,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -54,6 +56,10 @@ public class BackupHelper {
 	private final OsmandSettings settings;
 	private final FavouritesDbHelper favouritesHelper;
 	private final GpxDbHelper gpxHelper;
+
+	public static final Log LOG = PlatformUtil.getLog(BackupHelper.class);
+
+	public final static String INFO_EXT = ".info";
 
 	private static final ThreadPoolExecutor EXECUTOR = new ThreadPoolExecutor(1, 1, 0L,
 			TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>());
@@ -80,6 +86,9 @@ public class BackupHelper {
 	public static final int SERVER_ERROR_CODE_FILE_NOT_AVAILABLE = 106;
 	public static final int SERVER_ERROR_CODE_GZIP_ONLY_SUPPORTED_UPLOAD = 107;
 	public static final int SERVER_ERROR_CODE_SIZE_OF_SUPPORTED_BOX_IS_EXCEEDED = 108;
+
+	private ExportAsyncTask exportAsyncTask;
+	private List<RemoteFile> remoteFiles;
 
 	public interface OnRegisterUserListener {
 		void onRegisterUser(int status, @Nullable String message, @Nullable String error);
@@ -127,6 +136,12 @@ public class BackupHelper {
 		void onFilesDownloadDone(@NonNull Map<File, String> errors);
 	}
 
+	public interface BackupExportListener {
+		void onBackupExportFinished(boolean succeed);
+
+		void onBackupExportProgressUpdate(int value);
+	}
+
 	public static class BackupInfo {
 		public List<RemoteFile> filesToDownload = new ArrayList<>();
 		public List<? extends SettingsItem> filesToUpload = new ArrayList<>();
@@ -144,6 +159,14 @@ public class BackupHelper {
 	@NonNull
 	public OsmandApplication getApp() {
 		return app;
+	}
+
+	public List<RemoteFile> getRemoteFiles() {
+		return remoteFiles;
+	}
+
+	void setRemoteFiles(List<RemoteFile> remoteFiles) {
+		this.remoteFiles = remoteFiles;
 	}
 
 	@SuppressLint("HardwareIds")
@@ -289,8 +312,19 @@ public class BackupHelper {
 		}, EXECUTOR);
 	}
 
-	public void uploadFile(@NonNull String fileName, @NonNull StreamWriter streamWriter,
-						   @Nullable final OnUploadFileListener listener) throws UserNotRegisteredException {
+	private void prepareFileUpload(@NonNull String fileName, @NonNull String type, long uploadTime,
+								   @NonNull Map<String, String> params, @NonNull Map<String, String> headers) {
+		params.put("deviceid", getDeviceId());
+		params.put("accessToken", getAccessToken());
+		params.put("name", fileName);
+		params.put("type", type);
+		params.put("clienttime", String.valueOf(uploadTime));
+
+		headers.put("Accept-Encoding", "deflate, gzip");
+	}
+
+	public void uploadFileSync(@NonNull String fileName, @NonNull String type, @NonNull StreamWriter streamWriter,
+							   @Nullable final OnUploadFileListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 
 		final long uploadTime = System.currentTimeMillis();
@@ -299,11 +333,37 @@ public class BackupHelper {
 		params.put("deviceid", getDeviceId());
 		params.put("accessToken", getAccessToken());
 		params.put("name", fileName);
-		params.put("type", Algorithms.getFileExtension(new File(fileName)));
+		params.put("type", type);
 		params.put("clienttime", String.valueOf(uploadTime));
 
 		Map<String, String> headers = new HashMap<>();
 		headers.put("Accept-Encoding", "deflate, gzip");
+
+		String error = AndroidNetworkUtils.uploadFile(UPLOAD_FILE_URL, streamWriter, fileName, true, params, headers,
+				new AbstractProgress() {
+					int progress = 0;
+
+					@Override
+					public void progress(int deltaWork) {
+						if (listener != null) {
+							progress += deltaWork;
+							listener.onFileUploadProgress(fileName, progress);
+						}
+					}
+				});
+		if (listener != null) {
+			listener.onFileUploadDone(fileName, uploadTime, error != null ? resolveServerError(error) : null);
+		}
+	}
+
+	public void uploadFile(@NonNull String fileName, @NonNull String type, @NonNull StreamWriter streamWriter,
+						   @Nullable final OnUploadFileListener listener) throws UserNotRegisteredException {
+		checkRegistered();
+
+		final long uploadTime = System.currentTimeMillis();
+		Map<String, String> params = new HashMap<>();
+		Map<String, String> headers = new HashMap<>();
+		prepareFileUpload(fileName, type, uploadTime, params, headers);
 
 		AndroidNetworkUtils.uploadFileAsync(UPLOAD_FILE_URL, streamWriter, fileName, true, params, headers, new OnFileUploadCallback() {
 
@@ -317,7 +377,7 @@ public class BackupHelper {
 			@Override
 			public void onFileUploadDone(@Nullable String error) {
 				if (listener != null) {
-					listener.onFileUploadDone(fileName, uploadTime, resolveServerError(error));
+					listener.onFileUploadDone(fileName, uploadTime, error != null ? resolveServerError(error) : null);
 				}
 			}
 		}, EXECUTOR);
@@ -456,13 +516,28 @@ public class BackupHelper {
 		}, EXECUTOR);
 	}
 
+	public void downloadFileListSync(@Nullable final OnDownloadFileListListener listener) throws UserNotRegisteredException {
+		checkRegistered();
+
+		Map<String, String> params = new HashMap<>();
+		params.put("deviceid", getDeviceId());
+		params.put("accessToken", getAccessToken());
+		AndroidNetworkUtils.sendRequest(app, LIST_FILES_URL, params, "Download file list", false, false,
+				getDownloadFileListListener(listener));
+	}
+
 	public void downloadFileList(@Nullable final OnDownloadFileListListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 
 		Map<String, String> params = new HashMap<>();
 		params.put("deviceid", getDeviceId());
 		params.put("accessToken", getAccessToken());
-		AndroidNetworkUtils.sendRequestAsync(app, LIST_FILES_URL, params, "Download file list", false, false, new OnRequestResultListener() {
+		AndroidNetworkUtils.sendRequestAsync(app, LIST_FILES_URL, params, "Download file list", false, false,
+				getDownloadFileListListener(listener), EXECUTOR);
+	}
+
+	private OnRequestResultListener getDownloadFileListListener(@Nullable OnDownloadFileListListener listener) {
+		return new OnRequestResultListener() {
 			@Override
 			public void onResult(@Nullable String resultJson, @Nullable String error) {
 				int status;
@@ -498,10 +573,65 @@ public class BackupHelper {
 					listener.onDownloadFileList(status, message, remoteFiles);
 				}
 			}
-		}, EXECUTOR);
+		};
 	}
 
-	public void downloadFiles(@NonNull final Map<File, RemoteFile> filesMap, @Nullable final OnDownloadFileListener listener) throws UserNotRegisteredException {
+	@NonNull
+	public Map<File, String> downloadFilesSync(@NonNull final Map<File, RemoteFile> filesMap,
+											   @Nullable final OnDownloadFileListener listener) throws UserNotRegisteredException {
+		checkRegistered();
+
+		Map<File, String> res = new HashMap<>();
+		Map<String, String> params = new HashMap<>();
+		params.put("deviceid", getDeviceId());
+		params.put("accessToken", getAccessToken());
+		AndroidNetworkUtils.downloadFiles(DOWNLOAD_FILE_URL,
+				new ArrayList<>(filesMap.keySet()), params, new OnFilesDownloadCallback() {
+					@Nullable
+					@Override
+					public Map<String, String> getAdditionalParams(@NonNull File file) {
+						RemoteFile remoteFile = filesMap.get(file);
+						Map<String, String> additionaParams = new HashMap<>();
+						additionaParams.put("name", remoteFile.getName());
+						additionaParams.put("type", remoteFile.getType());
+						return additionaParams;
+					}
+
+					@Override
+					public void onFileDownloadProgress(@NonNull File file, int percent) {
+						if (listener != null) {
+							listener.onFileDownloadProgress(filesMap.get(file), percent);
+						}
+					}
+
+					@Override
+					public void onFileDownloadDone(@NonNull File file) {
+						if (listener != null) {
+							listener.onFileDownloaded(file);
+						}
+					}
+
+					@Override
+					public void onFileDownloadedAsync(@NonNull File file) {
+						if (listener != null) {
+							listener.onFileDownloadedAsync(file);
+						}
+					}
+
+					@Override
+					public void onFilesDownloadDone(@NonNull Map<File, String> errors) {
+						Map<File, String> errMap = resolveServerErrors(errors);
+						res.putAll(errMap);
+						if (listener != null) {
+							listener.onFilesDownloadDone(errMap);
+						}
+					}
+				});
+		return res;
+	}
+
+	public void downloadFiles(@NonNull final Map<File, RemoteFile> filesMap,
+							  @Nullable final OnDownloadFileListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 
 		Map<String, String> params = new HashMap<>();
@@ -642,7 +772,7 @@ public class BackupHelper {
 	}
 
 	@NonNull
-	private String resolveServerError(String fileError) {
+	private String resolveServerError(@NonNull String fileError) {
 		String errorStr = fileError;
 		try {
 			JSONObject errorJson = new JSONObject(errorStr);
@@ -741,5 +871,61 @@ public class BackupHelper {
 			}
 		};
 		task.executeOnExecutor(EXECUTOR);
+	}
+
+	@SuppressLint("StaticFieldLeak")
+	public class ExportAsyncTask extends AsyncTask<Void, Integer, Boolean> {
+
+		private final BackupExporter exporter;
+		private BackupExportListener listener;
+
+		ExportAsyncTask(@NonNull List<SettingsItem> items, @Nullable BackupExportListener listener) {
+			this.listener = listener;
+			this.exporter = new BackupExporter(BackupHelper.this, getProgressListener());
+			for (SettingsItem item : items) {
+				exporter.addSettingsItem(item);
+			}
+		}
+
+		@Override
+		protected void onPreExecute() {
+			exportAsyncTask = this;
+		}
+
+		@Override
+		protected Boolean doInBackground(Void... voids) {
+			try {
+				exporter.export();
+				return true;
+			} catch (IOException e) {
+				LOG.error("Failed to backup items", e);
+			}
+			return false;
+		}
+
+		@Override
+		protected void onProgressUpdate(Integer... values) {
+			if (listener != null) {
+				listener.onBackupExportProgressUpdate(values[0]);
+			}
+		}
+
+		@Override
+		protected void onPostExecute(Boolean success) {
+			exportAsyncTask = null;
+			if (listener != null) {
+				listener.onBackupExportFinished(success);
+			}
+		}
+
+		private ExportProgressListener getProgressListener() {
+			return new ExportProgressListener() {
+				@Override
+				public void updateProgress(int value) {
+					exporter.setCancelled(isCancelled());
+					publishProgress(value);
+				}
+			};
+		}
 	}
 }

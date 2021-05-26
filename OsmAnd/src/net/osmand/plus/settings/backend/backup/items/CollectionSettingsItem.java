@@ -1,4 +1,4 @@
-package net.osmand.plus.settings.backend.backup;
+package net.osmand.plus.settings.backend.backup.items;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,12 +26,12 @@ public abstract class CollectionSettingsItem<T> extends SettingsItem {
 		duplicateItems = new ArrayList<>();
 	}
 
-	CollectionSettingsItem(@NonNull OsmandApplication app, @Nullable CollectionSettingsItem<T> baseItem, @NonNull List<T> items) {
+	public CollectionSettingsItem(@NonNull OsmandApplication app, @Nullable CollectionSettingsItem<T> baseItem, @NonNull List<T> items) {
 		super(app, baseItem);
 		this.items = items;
 	}
 
-	CollectionSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
+	public CollectionSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 		super(app, json);
 	}
 

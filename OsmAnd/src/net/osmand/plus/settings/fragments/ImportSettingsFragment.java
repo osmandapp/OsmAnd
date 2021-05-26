@@ -27,10 +27,10 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.download.ReloadIndexesTask;
 import net.osmand.plus.download.ReloadIndexesTask.ReloadIndexesListener;
-import net.osmand.plus.settings.backend.backup.FileSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportAsyncTask;
-import net.osmand.plus.settings.backend.backup.SettingsItem;
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
 import org.apache.commons.logging.Log;
 

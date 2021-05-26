@@ -1,4 +1,4 @@
-package net.osmand.plus.settings.backend.backup;
+package net.osmand.plus.settings.backend.backup.items;
 
 import android.content.Context;
 
@@ -8,6 +8,10 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.CustomOsmandPlugin;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.settings.backend.backup.SettingsHelper;
+import net.osmand.plus.settings.backend.backup.SettingsItemReader;
+import net.osmand.plus.settings.backend.backup.SettingsItemType;
+import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONArray;
@@ -21,7 +25,7 @@ public class SuggestedDownloadsItem extends SettingsItem {
 
 	private List<CustomOsmandPlugin.SuggestedDownloadItem> items;
 
-	SuggestedDownloadsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
+	public SuggestedDownloadsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 		super(app, json);
 	}
 
@@ -118,7 +122,7 @@ public class SuggestedDownloadsItem extends SettingsItem {
 
 	@Nullable
 	@Override
-	SettingsItemReader<? extends SettingsItem> getReader() {
+	public SettingsItemReader<? extends SettingsItem> getReader() {
 		return null;
 	}
 

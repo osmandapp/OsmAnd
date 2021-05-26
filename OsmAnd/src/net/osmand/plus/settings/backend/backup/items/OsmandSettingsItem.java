@@ -1,9 +1,10 @@
-package net.osmand.plus.settings.backend.backup;
+package net.osmand.plus.settings.backend.backup.items;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.backup.SettingsItemType;
 
 import org.json.JSONException;
 import org.json.JSONObject;

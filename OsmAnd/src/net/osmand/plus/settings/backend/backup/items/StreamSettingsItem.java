@@ -1,4 +1,4 @@
-package net.osmand.plus.settings.backend.backup;
+package net.osmand.plus.settings.backend.backup.items;
 
 import android.content.Context;
 
@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
+import net.osmand.plus.settings.backend.backup.StreamSettingsItemWriter;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -24,7 +26,7 @@ public abstract class StreamSettingsItem extends SettingsItem {
 		this.fileName = name;
 	}
 
-	StreamSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
+	public StreamSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 		super(app, json);
 	}
 

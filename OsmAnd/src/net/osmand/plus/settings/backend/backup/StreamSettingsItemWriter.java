@@ -4,10 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.IProgress;
+import net.osmand.plus.settings.backend.backup.items.StreamSettingsItem;
 import net.osmand.util.Algorithms;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;

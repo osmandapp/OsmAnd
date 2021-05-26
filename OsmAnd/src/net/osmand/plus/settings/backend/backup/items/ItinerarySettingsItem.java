@@ -1,4 +1,4 @@
-package net.osmand.plus.settings.backend.backup;
+package net.osmand.plus.settings.backend.backup.items;
 
 import android.content.Context;
 
@@ -13,6 +13,10 @@ import net.osmand.plus.mapmarkers.ItineraryDataHelper;
 import net.osmand.plus.mapmarkers.ItineraryDataHelper.ItineraryGroupInfo;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
+import net.osmand.plus.settings.backend.backup.SettingsHelper;
+import net.osmand.plus.settings.backend.backup.SettingsItemReader;
+import net.osmand.plus.settings.backend.backup.SettingsItemType;
+import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
@@ -39,7 +43,7 @@ public class ItinerarySettingsItem extends CollectionSettingsItem<MapMarkersGrou
 		super(app, baseItem, items);
 	}
 
-	ItinerarySettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
+	public ItinerarySettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 		super(app, json);
 	}
 
@@ -114,7 +118,7 @@ public class ItinerarySettingsItem extends CollectionSettingsItem<MapMarkersGrou
 
 	@Nullable
 	@Override
-	SettingsItemReader<ItinerarySettingsItem> getReader() {
+	public SettingsItemReader<ItinerarySettingsItem> getReader() {
 		return new SettingsItemReader<ItinerarySettingsItem>(this) {
 
 			@Override

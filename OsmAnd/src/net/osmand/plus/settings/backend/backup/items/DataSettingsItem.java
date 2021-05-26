@@ -1,9 +1,14 @@
-package net.osmand.plus.settings.backend.backup;
+package net.osmand.plus.settings.backend.backup.items;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.settings.backend.backup.SettingsHelper;
+import net.osmand.plus.settings.backend.backup.SettingsItemReader;
+import net.osmand.plus.settings.backend.backup.SettingsItemType;
+import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
+import net.osmand.plus.settings.backend.backup.StreamSettingsItemReader;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
@@ -24,7 +29,7 @@ public class DataSettingsItem extends StreamSettingsItem {
 		super(app, name);
 	}
 
-	DataSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
+	public DataSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 		super(app, json);
 	}
 
@@ -61,7 +66,7 @@ public class DataSettingsItem extends StreamSettingsItem {
 
 	@Nullable
 	@Override
-	SettingsItemReader<? extends SettingsItem> getReader() {
+	public SettingsItemReader<? extends SettingsItem> getReader() {
 		return new StreamSettingsItemReader(this) {
 			@Override
 			public void readFromStream(@NonNull InputStream inputStream, String entryName) throws IOException, IllegalArgumentException {

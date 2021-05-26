@@ -1,4 +1,4 @@
-package net.osmand.plus.settings.backend.backup;
+package net.osmand.plus.settings.backend.backup.items;
 
 import android.content.Context;
 
@@ -8,6 +8,9 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.CustomOsmandPlugin;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.settings.backend.backup.SettingsItemReader;
+import net.osmand.plus.settings.backend.backup.SettingsItemType;
+import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,7 +23,7 @@ public class PluginSettingsItem extends SettingsItem {
 	private CustomOsmandPlugin plugin;
 	private List<SettingsItem> pluginDependentItems;
 
-	PluginSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
+	public PluginSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 		super(app, json);
 	}
 
@@ -105,7 +108,7 @@ public class PluginSettingsItem extends SettingsItem {
 
 	@Nullable
 	@Override
-	SettingsItemReader<? extends SettingsItem> getReader() {
+	public SettingsItemReader<? extends SettingsItem> getReader() {
 		return null;
 	}
 

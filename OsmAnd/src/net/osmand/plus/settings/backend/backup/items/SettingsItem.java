@@ -1,4 +1,4 @@
-package net.osmand.plus.settings.backend.backup;
+package net.osmand.plus.settings.backend.backup.items;
 
 import android.content.Context;
 
@@ -11,6 +11,10 @@ import net.osmand.IProgress;
 import net.osmand.ProgressOutputStream;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.settings.backend.backup.SettingsHelper;
+import net.osmand.plus.settings.backend.backup.SettingsItemReader;
+import net.osmand.plus.settings.backend.backup.SettingsItemType;
+import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
@@ -35,16 +39,16 @@ public abstract class SettingsItem {
 	protected String pluginId;
 	protected String fileName;
 
-	boolean shouldReplace = false;
+	protected boolean shouldReplace = false;
 
 	protected List<String> warnings;
 
-	SettingsItem(@NonNull OsmandApplication app) {
+	public SettingsItem(@NonNull OsmandApplication app) {
 		this.app = app;
 		init();
 	}
 
-	SettingsItem(@NonNull OsmandApplication app, @Nullable SettingsItem baseItem) {
+	public SettingsItem(@NonNull OsmandApplication app, @Nullable SettingsItem baseItem) {
 		this.app = app;
 		if (baseItem != null) {
 			this.pluginId = baseItem.pluginId;
@@ -53,7 +57,7 @@ public abstract class SettingsItem {
 		init();
 	}
 
-	SettingsItem(OsmandApplication app, @NonNull JSONObject json) throws JSONException {
+	public SettingsItem(OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 		this.app = app;
 		init();
 		readFromJson(json);
@@ -108,15 +112,13 @@ public abstract class SettingsItem {
 		this.shouldReplace = shouldReplace;
 	}
 
-	static SettingsItemType parseItemType(@NonNull JSONObject json) throws IllegalArgumentException, JSONException {
-		String type = json.has("type") ? json.getString("type") : null;
-		if (type == null) {
+	@NonNull
+	public static SettingsItemType parseItemType(@NonNull JSONObject json) throws IllegalArgumentException, JSONException {
+		String typeName = json.has("type") ? json.getString("type") : null;
+		if (typeName == null) {
 			throw new IllegalArgumentException("No type field");
 		}
-		if (type.equals("QUICK_ACTION")) {
-			type = "QUICK_ACTIONS";
-		}
-		return SettingsItemType.valueOf(type);
+		return SettingsItemType.fromName(typeName);
 	}
 
 	public boolean exists() {
@@ -157,7 +159,7 @@ public abstract class SettingsItem {
 		}
 	}
 
-	String toJson() throws JSONException {
+	public String toJson() throws JSONException {
 		JSONObject json = new JSONObject();
 		writeToJson(json);
 		return json.toString();
@@ -174,13 +176,13 @@ public abstract class SettingsItem {
 	}
 
 	@Nullable
-	abstract SettingsItemReader<? extends SettingsItem> getReader();
+	public abstract SettingsItemReader<? extends SettingsItem> getReader();
 
 	@Nullable
 	public abstract SettingsItemWriter<? extends SettingsItem> getWriter();
 
 	@NonNull
-	SettingsItemReader<? extends SettingsItem> getJsonReader() {
+	protected SettingsItemReader<? extends SettingsItem> getJsonReader() {
 		return new SettingsItemReader<SettingsItem>(this) {
 			@Override
 			public void readFromStream(@NonNull InputStream inputStream, String entryName) throws IOException, IllegalArgumentException {
@@ -208,7 +210,7 @@ public abstract class SettingsItem {
 	}
 
 	@NonNull
-	SettingsItemWriter<? extends SettingsItem> getJsonWriter() {
+	protected SettingsItemWriter<? extends SettingsItem> getJsonWriter() {
 		return new SettingsItemWriter<SettingsItem>(this) {
 			@Override
 			public void writeToStream(@NonNull OutputStream outputStream, @Nullable IProgress progress) throws IOException {
@@ -227,7 +229,7 @@ public abstract class SettingsItem {
 	}
 
 	@NonNull
-	SettingsItemWriter<? extends SettingsItem> getGpxWriter(@NonNull final GPXFile gpxFile) {
+	protected SettingsItemWriter<? extends SettingsItem> getGpxWriter(@NonNull final GPXFile gpxFile) {
 		return new SettingsItemWriter<SettingsItem>(this) {
 			@Override
 			public void writeToStream(@NonNull OutputStream outputStream, @Nullable IProgress progress) throws IOException {

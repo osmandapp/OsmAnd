@@ -20,7 +20,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
@@ -45,7 +44,7 @@ import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsLis
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.SettingsCollectListener;
-import net.osmand.plus.settings.backend.backup.SettingsItem;
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet.ResetAppModePrefsListener;
 import net.osmand.plus.skimapsplugin.SkiMapsPlugin;

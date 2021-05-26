@@ -45,14 +45,14 @@ import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportAsyncTask;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportType;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.SettingsImportListener;
-import net.osmand.plus.settings.backend.backup.SettingsItem;
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.view.ComplexButton;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.osmand.plus.settings.backend.backup.FileSettingsItem.FileSubtype;
+import static net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 import static net.osmand.plus.settings.fragments.BaseSettingsListFragment.SETTINGS_LIST_TAG;
 
 

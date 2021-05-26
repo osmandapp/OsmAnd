@@ -4,11 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.IProgress;
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
 
 public abstract class SettingsItemWriter<T extends SettingsItem> {
 

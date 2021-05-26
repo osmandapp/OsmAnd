@@ -1,4 +1,4 @@
-package net.osmand.plus.settings.backend.backup;
+package net.osmand.plus.settings.backend.backup.items;
 
 import android.content.Context;
 
@@ -12,6 +12,10 @@ import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.settings.backend.backup.SettingsHelper;
+import net.osmand.plus.settings.backend.backup.SettingsItemReader;
+import net.osmand.plus.settings.backend.backup.SettingsItemType;
+import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,7 +41,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 		super(app, baseItem, items);
 	}
 
-	FavoritesSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
+	public FavoritesSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 		super(app, json);
 	}
 
@@ -128,7 +132,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 
 	@Nullable
 	@Override
-	SettingsItemReader<FavoritesSettingsItem> getReader() {
+	public SettingsItemReader<FavoritesSettingsItem> getReader() {
 		return new SettingsItemReader<FavoritesSettingsItem>(this) {
 
 			@Override

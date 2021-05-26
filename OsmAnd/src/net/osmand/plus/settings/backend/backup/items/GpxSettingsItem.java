@@ -1,4 +1,4 @@
-package net.osmand.plus.settings.backend.backup;
+package net.osmand.plus.settings.backend.backup.items;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -8,6 +8,8 @@ import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxDbHelper;
 import net.osmand.plus.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.settings.backend.backup.GpxAppearanceInfo;
+import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.GradientScaleType;
 
@@ -25,7 +27,7 @@ public class GpxSettingsItem extends FileSettingsItem {
 		createGpxAppearanceInfo();
 	}
 
-	GpxSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
+	public GpxSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 		super(app, json);
 	}
 

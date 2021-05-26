@@ -58,7 +58,7 @@ import net.osmand.plus.routing.PreviewRouteLineInfo;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.CommonPreference;
-import net.osmand.plus.settings.backend.backup.ProfileSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.fragments.RouteLineAppearanceFragment.OnApplyRouteLineListener;
 import net.osmand.plus.track.ColorsCard;

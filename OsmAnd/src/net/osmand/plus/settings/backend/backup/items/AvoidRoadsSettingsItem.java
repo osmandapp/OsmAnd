@@ -1,4 +1,4 @@
-package net.osmand.plus.settings.backend.backup;
+package net.osmand.plus.settings.backend.backup.items;
 
 import android.content.Context;
 
@@ -12,6 +12,10 @@ import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.backup.SettingsHelper;
+import net.osmand.plus.settings.backend.backup.SettingsItemReader;
+import net.osmand.plus.settings.backend.backup.SettingsItemType;
+import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,7 +37,7 @@ public class AvoidRoadsSettingsItem extends CollectionSettingsItem<AvoidRoadInfo
 		super(app, baseItem, items);
 	}
 
-	AvoidRoadsSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
+	public AvoidRoadsSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 		super(app, json);
 	}
 
@@ -166,7 +170,7 @@ public class AvoidRoadsSettingsItem extends CollectionSettingsItem<AvoidRoadInfo
 
 	@Nullable
 	@Override
-	SettingsItemReader<? extends SettingsItem> getReader() {
+	public SettingsItemReader<? extends SettingsItem> getReader() {
 		return getJsonReader();
 	}
 

@@ -46,6 +46,24 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
 import net.osmand.plus.settings.backend.ExportSettingsCategory;
 import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.backup.items.AvoidRoadsSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.CollectionSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.FavoritesSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.GlobalSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.GpxSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.HistoryMarkersSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.ItinerarySettingsItem;
+import net.osmand.plus.settings.backend.backup.items.MapSourcesSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.MarkersSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.OnlineRoutingSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.OsmEditsSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.OsmNotesSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.PoiUiFiltersSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.QuickActionsSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.SearchHistorySettingsItem;
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.fragments.SettingsCategoryItems;
 import net.osmand.util.Algorithms;
 
@@ -67,7 +85,7 @@ import java.util.Set;
 
 import static net.osmand.IndexConstants.OSMAND_SETTINGS_FILE_EXT;
 import static net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
-import static net.osmand.plus.settings.backend.backup.FileSettingsItem.FileSubtype;
+import static net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 
 /*
 	Usage:
@@ -104,7 +122,7 @@ public class SettingsHelper {
 
 	public static final int BUFFER = 1024;
 
-	protected static final Log LOG = PlatformUtil.getLog(SettingsHelper.class);
+	public static final Log LOG = PlatformUtil.getLog(SettingsHelper.class);
 
 	private final OsmandApplication app;
 

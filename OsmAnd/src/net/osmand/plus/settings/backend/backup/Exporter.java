@@ -1,15 +1,14 @@
 package net.osmand.plus.settings.backend.backup;
 
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ExportProgressListener;
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.VERSION;
@@ -57,24 +56,9 @@ public abstract class Exporter {
 
 	public abstract void export() throws JSONException, IOException;
 
-	protected List<SettingsItemWriter<? extends SettingsItem>> getItemWriters() {
-		List<SettingsItemWriter<? extends SettingsItem>> res = new ArrayList<>();
-		for (SettingsItem item : getItems().values()) {
-			SettingsItemWriter<? extends SettingsItem> itemWriter = item.getWriter();
-			if (itemWriter != null) {
-				res.add(itemWriter);
-			}
-		}
-		return res;
-	}
-
 	protected void writeItems(AbstractWriter writer) throws IOException {
-		writeItems(writer, getItemWriters());
-	}
-
-	protected void writeItems(AbstractWriter writer, List<SettingsItemWriter<? extends SettingsItem>> itemWriters) throws IOException {
-		for (SettingsItemWriter<? extends SettingsItem> itemWriter : itemWriters) {
-			writer.write(itemWriter);
+		for (SettingsItem item : getItems().values()) {
+			writer.write(item);
 			if (isCancelled()) {
 				break;
 			}

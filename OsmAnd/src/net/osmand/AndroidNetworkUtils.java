@@ -233,6 +233,68 @@ public class AndroidNetworkUtils {
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 	}
 
+	private static void publishFilesDownloadProgress(@NonNull File file, int progress,
+													 @Nullable OnFilesDownloadCallback callback) {
+		if (callback != null) {
+			if (progress >= 0) {
+				callback.onFileDownloadProgress(file, progress);
+			} else {
+				callback.onFileDownloadDone(file);
+			}
+		}
+	}
+
+	public static Map<File, String> downloadFiles(final @NonNull String url,
+												  final @NonNull List<File> files,
+												  final @NonNull Map<String, String> parameters,
+												  final @Nullable OnFilesDownloadCallback callback) {
+		Map<File, String> errors = new HashMap<>();
+		for (final File file : files) {
+			final int[] progressValue = {0};
+			publishFilesDownloadProgress(file, 0, callback);
+			IProgress progress = null;
+			if (callback != null) {
+				progress = new NetworkProgress() {
+					@Override
+					public void progress(int deltaWork) {
+						progressValue[0] += deltaWork;
+						publishFilesDownloadProgress(file, progressValue[0], callback);
+					}
+				};
+			}
+			try {
+				Map<String, String> params = new HashMap<>(parameters);
+				if (callback != null) {
+					Map<String, String> additionalParams = callback.getAdditionalParams(file);
+					if (additionalParams != null) {
+						params.putAll(additionalParams);
+					}
+				}
+				boolean firstPrm = !url.contains("?");
+				StringBuilder sb = new StringBuilder(url);
+				for (Entry<String, String> entry : params.entrySet()) {
+					sb.append(firstPrm ? "?" : "&").append(entry.getKey()).append("=").append(URLEncoder.encode(entry.getValue(), "UTF-8"));
+					firstPrm = false;
+				}
+				String res = downloadFile(sb.toString(), file, true, progress);
+				if (res != null) {
+					errors.put(file, res);
+				} else {
+					if (callback != null) {
+						callback.onFileDownloadedAsync(file);
+					}
+				}
+			} catch (Exception e) {
+				errors.put(file, e.getMessage());
+			}
+			publishFilesDownloadProgress(file, -1, callback);
+		}
+		if (callback != null) {
+			callback.onFilesDownloadDone(errors);
+		}
+		return errors;
+	}
+
 	public static void downloadFilesAsync(final @NonNull String url,
 										  final @NonNull List<File> files,
 										  final @NonNull Map<String, String> parameters,

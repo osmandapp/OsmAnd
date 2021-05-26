@@ -1,4 +1,4 @@
-package net.osmand.plus.settings.backend.backup;
+package net.osmand.plus.settings.backend.backup.items;
 
 import android.content.Context;
 
@@ -9,6 +9,11 @@ import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.backup.OsmandSettingsItemReader;
+import net.osmand.plus.settings.backend.backup.OsmandSettingsItemWriter;
+import net.osmand.plus.settings.backend.backup.SettingsItemReader;
+import net.osmand.plus.settings.backend.backup.SettingsItemType;
+import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -48,7 +53,7 @@ public class GlobalSettingsItem extends OsmandSettingsItem {
 
 	@Nullable
 	@Override
-	SettingsItemReader<? extends SettingsItem> getReader() {
+	public SettingsItemReader<? extends SettingsItem> getReader() {
 		return new OsmandSettingsItemReader<OsmandSettingsItem>(this, getSettings()) {
 			@Override
 			protected void readPreferenceFromJson(@NonNull OsmandPreference<?> preference, @NonNull JSONObject json) throws JSONException {

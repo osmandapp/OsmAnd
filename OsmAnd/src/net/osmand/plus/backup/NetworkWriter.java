@@ -7,17 +7,22 @@ import net.osmand.IProgress;
 import net.osmand.StreamWriter;
 import net.osmand.plus.backup.BackupHelper.OnUploadFileListener;
 import net.osmand.plus.settings.backend.backup.AbstractWriter;
-import net.osmand.plus.settings.backend.backup.FileSettingsItem;
-import net.osmand.plus.settings.backend.backup.SettingsItem;
+import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
 import net.osmand.util.Algorithms;
 
+import org.json.JSONException;
+
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 
 public class NetworkWriter implements AbstractWriter {
+
 	private final BackupHelper backupHelper;
 	private final OnUploadFileListener listener;
 
@@ -27,48 +32,71 @@ public class NetworkWriter implements AbstractWriter {
 	}
 
 	@Override
-	public void write(@NonNull SettingsItemWriter<? extends SettingsItem> itemWriter) throws IOException {
-		SettingsItem item = itemWriter.getItem();
+	public void write(@NonNull SettingsItem item) throws IOException {
 		String fileName = item.getFileName();
 		if (Algorithms.isEmpty(fileName)) {
 			fileName = item.getDefaultFileName();
 		}
+		SettingsItemWriter<? extends SettingsItem> itemWriter = item.getWriter();
+		if (itemWriter != null) {
+			try {
+				uploadItemInfo(item, fileName);
+				uploadEntry(itemWriter, fileName);
+			} catch (UserNotRegisteredException e) {
+				throw new IOException(e.getMessage(), e);
+			}
+		} else {
+			uploadItemInfo(item, fileName);
+		}
+	}
+
+	private void uploadEntry(@NonNull SettingsItemWriter<? extends SettingsItem> itemWriter,
+							 @NonNull String fileName) throws UserNotRegisteredException, IOException {
+		if (itemWriter.getItem() instanceof FileSettingsItem) {
+			FileSettingsItem fileSettingsItem = (FileSettingsItem) itemWriter.getItem();
+			uploadDirWithFiles(itemWriter, fileSettingsItem.getFile());
+		} else {
+			uploadItemFile(itemWriter, fileName);
+		}
+	}
+
+	private void uploadItemInfo(@NonNull SettingsItem item, String fileName) throws IOException {
+		fileName = Algorithms.getFileWithoutDirs(fileName) + BackupHelper.INFO_EXT;
 		try {
-			writeEntry(itemWriter, fileName);
-		} catch (UserNotRegisteredException e) {
+			String itemJson = item.toJson();
+			InputStream inputStream = new ByteArrayInputStream(itemJson.getBytes("UTF-8"));
+			StreamWriter streamWriter = new StreamWriter() {
+				@Override
+				public void write(OutputStream outputStream, IProgress progress) throws IOException {
+					Algorithms.streamCopy(inputStream, outputStream, progress, 1024);
+					outputStream.flush();
+				}
+			};
+			backupHelper.uploadFileSync(fileName, item.getType().name(), streamWriter, listener);
+		} catch (JSONException | UserNotRegisteredException e) {
 			throw new IOException(e.getMessage(), e);
 		}
 	}
 
-	private void writeEntry(@NonNull SettingsItemWriter<? extends SettingsItem> itemWriter,
-							@NonNull String fileName) throws UserNotRegisteredException, IOException {
-		if (itemWriter.getItem() instanceof FileSettingsItem) {
-			FileSettingsItem fileSettingsItem = (FileSettingsItem) itemWriter.getItem();
-			writeDirWithFiles(itemWriter, fileSettingsItem.getFile());
-		} else {
-			writeItemToStream(itemWriter, fileName);
-		}
-	}
-
-	private void writeItemToStream(@NonNull SettingsItemWriter<? extends SettingsItem> itemWriter,
-								   @NonNull String fileName) throws UserNotRegisteredException, IOException {
+	private void uploadItemFile(@NonNull SettingsItemWriter<? extends SettingsItem> itemWriter,
+								@NonNull String fileName) throws UserNotRegisteredException, IOException {
 		StreamWriter streamWriter = new StreamWriter() {
 			@Override
 			public void write(OutputStream outputStream, IProgress progress) throws IOException {
 				itemWriter.writeToStream(outputStream, progress);
 			}
 		};
-		backupHelper.uploadFile(fileName, streamWriter, listener);
+		backupHelper.uploadFileSync(fileName, itemWriter.getItem().getType().name(), streamWriter, listener);
 	}
 
-	private void writeDirWithFiles(@NonNull SettingsItemWriter<? extends SettingsItem> itemWriter,
-								   @NonNull File file) throws UserNotRegisteredException, IOException {
+	private void uploadDirWithFiles(@NonNull SettingsItemWriter<? extends SettingsItem> itemWriter,
+									@NonNull File file) throws UserNotRegisteredException, IOException {
 		FileSettingsItem fileSettingsItem = (FileSettingsItem) itemWriter.getItem();
 		if (file.isDirectory()) {
 			File[] files = file.listFiles();
 			if (files != null) {
 				for (File subfolderFile : files) {
-					writeDirWithFiles(itemWriter, subfolderFile);
+					uploadDirWithFiles(itemWriter, subfolderFile);
 				}
 			}
 		} else {
@@ -77,7 +105,7 @@ public class NetworkWriter implements AbstractWriter {
 					? file.getName()
 					: file.getPath().substring(file.getPath().indexOf(subtypeFolder) - 1);
 			fileSettingsItem.setInputStream(new FileInputStream(file));
-			writeItemToStream(itemWriter, fileName);
+			uploadItemFile(itemWriter, fileName);
 		}
 	}
 }

@@ -1,4 +1,4 @@
-package net.osmand.plus.settings.backend.backup;
+package net.osmand.plus.settings.backend.backup.items;
 
 import android.content.Context;
 
@@ -14,6 +14,10 @@ import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.settings.backend.backup.SettingsHelper;
+import net.osmand.plus.settings.backend.backup.SettingsItemReader;
+import net.osmand.plus.settings.backend.backup.SettingsItemType;
+import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,7 +40,7 @@ public class PoiUiFiltersSettingsItem extends CollectionSettingsItem<PoiUIFilter
 		super(app, baseItem, items);
 	}
 
-	PoiUiFiltersSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
+	public PoiUiFiltersSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 		super(app, json);
 	}
 
@@ -178,7 +182,7 @@ public class PoiUiFiltersSettingsItem extends CollectionSettingsItem<PoiUIFilter
 
 	@Nullable
 	@Override
-	SettingsItemReader<? extends SettingsItem> getReader() {
+	public SettingsItemReader<? extends SettingsItem> getReader() {
 		return getJsonReader();
 	}
 

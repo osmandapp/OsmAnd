@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.IProgress;
+import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -23,13 +25,15 @@ public class ZipWriter implements AbstractWriter {
 	}
 
 	@Override
-	public void write(@NonNull SettingsItemWriter<? extends SettingsItem> itemWriter) throws IOException {
-		SettingsItem item = itemWriter.getItem();
-		String fileName = item.getFileName();
-		if (Algorithms.isEmpty(fileName)) {
-			fileName = item.getDefaultFileName();
+	public void write(@NonNull SettingsItem item) throws IOException {
+		SettingsItemWriter<? extends SettingsItem> itemWriter = item.getWriter();
+		if (itemWriter != null) {
+			String fileName = item.getFileName();
+			if (Algorithms.isEmpty(fileName)) {
+				fileName = item.getDefaultFileName();
+			}
+			writeEntry(itemWriter, fileName, zos);
 		}
-		writeEntry(itemWriter, fileName, zos);
 	}
 
 	private void writeEntry(@NonNull SettingsItemWriter<? extends SettingsItem> itemWriter,

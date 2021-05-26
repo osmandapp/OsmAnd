@@ -1,9 +1,11 @@
-package net.osmand.plus.settings.backend.backup;
+package net.osmand.plus.settings.backend.backup.items;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.settings.backend.backup.SettingsItemType;
+import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
@@ -13,7 +15,7 @@ import java.io.File;
 
 public class ResourcesSettingsItem extends FileSettingsItem {
 
-	ResourcesSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
+	public ResourcesSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 		super(app, json);
 		shouldReplace = true;
 		String fileName = getFileName();

@@ -21,7 +21,7 @@ import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.settings.backend.ExportSettingsCategory;
 import net.osmand.plus.settings.backend.ExportSettingsType;
-import net.osmand.plus.settings.backend.backup.FileSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.util.Algorithms;
 import net.osmand.view.ThreeStateCheckbox;
 

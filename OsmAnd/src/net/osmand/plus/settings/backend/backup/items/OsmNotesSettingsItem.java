@@ -1,4 +1,4 @@
-package net.osmand.plus.settings.backend.backup;
+package net.osmand.plus.settings.backend.backup.items;
 
 import android.content.Context;
 
@@ -12,6 +12,10 @@ import net.osmand.plus.osmedit.OsmBugsDbHelper;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.osmedit.OsmNotesPoint;
 import net.osmand.plus.osmedit.OsmPoint;
+import net.osmand.plus.settings.backend.backup.SettingsHelper;
+import net.osmand.plus.settings.backend.backup.SettingsItemReader;
+import net.osmand.plus.settings.backend.backup.SettingsItemType;
+import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -171,7 +175,7 @@ public class OsmNotesSettingsItem extends CollectionSettingsItem<OsmNotesPoint> 
 
 	@Nullable
 	@Override
-	SettingsItemReader<? extends SettingsItem> getReader() {
+	public SettingsItemReader<? extends SettingsItem> getReader() {
 		return getJsonReader();
 	}
 
