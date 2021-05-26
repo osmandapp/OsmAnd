@@ -21,6 +21,7 @@ import java.util.Locale;
 public class SearchSettings {
 
 	public static final Log LOG = PlatformUtil.getLog(SearchSettings.class);
+	private static final int MIN_DISTANCE_REGION_LANG_RECALC = 10000;
 
 	private LatLon originalLocation;
 	private OsmandRegions regions;
@@ -102,7 +103,7 @@ public class SearchSettings {
 	public SearchSettings setOriginalLocation(LatLon l) {
 		SearchSettings s = new SearchSettings(this);
 		double distance = this.originalLocation == null ? -1 : MapUtils.getDistance(l, this.originalLocation);
-		s.regionLang = (distance > 10000 || distance == -1 || this.regionLang == null) ? calculateRegionLang(l) : this.regionLang;
+		s.regionLang = (distance > MIN_DISTANCE_REGION_LANG_RECALC || distance == -1 || this.regionLang == null) ? calculateRegionLang(l) : this.regionLang;
 		s.originalLocation = l;
 		return s;
 	}
