@@ -500,7 +500,7 @@ public class MapMarkersHelper {
 		List<SelectedGpxFile> selectedGpxFiles = ctx.getSelectedGpxHelper().getSelectedGPXFiles();
 		for (SelectedGpxFile selected : selectedGpxFiles) {
 			MapMarkersGroup search = getMarkersGroup(selected.getGpxFile());
-			if (search == null && selected.getGpxFile() != null && selected.getGpxFile().path != null) {
+			if (search == null && selected.getGpxFile() != null && !Algorithms.isEmpty(selected.getGpxFile().path)) {
 				MapMarkersGroup group = createGPXMarkerGroup(new File(selected.getGpxFile().path));
 				group.setDisabled(true);
 				res.add(group);
@@ -583,10 +583,11 @@ public class MapMarkersHelper {
 	public void moveMapMarkerToHistory(MapMarker marker) {
 		if (marker != null) {
 			cancelPointAddressRequests(marker.point);
+			marker.history = true;
+			marker.visitedDate = System.currentTimeMillis();
+			marker.nextKey = MapMarkersDbHelper.HISTORY_NEXT_VALUE;
 			markersDbHelper.moveMarkerToHistory(marker);
 			removeFromMapMarkersList(marker);
-			marker.history = true;
-			marker.nextKey = MapMarkersDbHelper.HISTORY_NEXT_VALUE;
 			addToMapMarkersHistoryList(marker);
 			reorderActiveMarkersIfNeeded();
 			sortMarkers(mapMarkersHistory, true, BY_DATE_ADDED_DESC);
@@ -819,20 +820,31 @@ public class MapMarkersHelper {
 					marker.groupKey = group.getId();
 				}
 				if (wptPt != null) {
+					String timestamp = wptPt.getExtensionsToWrite().get(FavouritePoint.PASSED_TIMESTAMP);
+					long passedTime = Algorithms.parseLongSilently(timestamp, 0);
 					marker.wptPt = wptPt;
-					marker.history = wptPt.getExtensionsToWrite().containsKey(FavouritePoint.PASSED_TIMESTAMP);
+					marker.history = passedTime != 0;
+					marker.visitedDate = passedTime;
 				} else if (favouritePoint != null) {
 					marker.favouritePoint = favouritePoint;
 					marker.history = favouritePoint.getPassedTimestamp() != 0;
+					marker.visitedDate = favouritePoint.getPassedTimestamp();
 				} else {
 					marker.history = false;
 				}
 				marker.mapObjectName = mapObjName;
-				marker.nextKey = MapMarkersDbHelper.TAIL_NEXT_VALUE;
-				markersDbHelper.addMarker(marker);
-				addToMapMarkersList(0, marker);
+
 				addedMarkers.add(marker);
-				reorderActiveMarkersIfNeeded();
+				markersDbHelper.addMarker(marker);
+				if (marker.history) {
+					marker.nextKey = MapMarkersDbHelper.HISTORY_NEXT_VALUE;
+					addToMapMarkersHistoryList(marker);
+					sortMarkers(mapMarkersHistory, true, BY_DATE_ADDED_DESC);
+				} else {
+					marker.nextKey = MapMarkersDbHelper.TAIL_NEXT_VALUE;
+					addToMapMarkersList(0, marker);
+					reorderActiveMarkersIfNeeded();
+				}
 				lookupAddress(marker);
 			}
 			addMarkersToGroups(addedMarkers);
@@ -974,11 +986,10 @@ public class MapMarkersHelper {
 	public List<MapMarker> getMapMarkersFromDefaultGroups(boolean history) {
 		List<MapMarker> mapMarkers = new ArrayList<>();
 		for (MapMarkersGroup group : mapMarkersGroups) {
-			if (group.getType() == ItineraryType.MARKERS) {
-				for (MapMarker marker : group.getMarkers()) {
-					if (history && marker.history || !history && !marker.history) {
-						mapMarkers.add(marker);
-					}
+			for (MapMarker marker : group.getMarkers()) {
+				if ((group.getType() == ItineraryType.MARKERS || history)
+						&& (history && marker.history || !history && !marker.history)) {
+					mapMarkers.add(marker);
 				}
 			}
 		}
@@ -1083,6 +1094,7 @@ public class MapMarkersHelper {
 		if (group.getType() == ItineraryType.FAVOURITES) {
 			FavoriteGroup favGroup = ctx.getFavorites().getGroup(group.getId());
 			if (favGroup == null) {
+				removeFromGroupsList(group);
 				return;
 			}
 			group.setVisible(favGroup.isVisible());
@@ -1102,7 +1114,8 @@ public class MapMarkersHelper {
 		} else if (group.getType() == ItineraryType.TRACK) {
 			GpxSelectionHelper gpxHelper = ctx.getSelectedGpxHelper();
 			File file = ctx.getAppPath(IndexConstants.GPX_INDEX_DIR + group.getId());
-			if (!file.exists()) {
+			if (!file.exists() || !file.isFile()) {
+				removeFromGroupsList(group);
 				return;
 			}
 
@@ -1128,7 +1141,9 @@ public class MapMarkersHelper {
 		} else if (group.getType() == ItineraryType.MARKERS) {
 			groupMarkers.clear();
 			List<MapMarker> markers = new ArrayList<>();
-			for (MapMarker marker : mapMarkers) {
+			List<MapMarker> allMarkers = new ArrayList<>(mapMarkers);
+			allMarkers.addAll(mapMarkersHistory);
+			for (MapMarker marker : allMarkers) {
 				if (marker.groupKey == null) {
 					markers.add(marker);
 				}
