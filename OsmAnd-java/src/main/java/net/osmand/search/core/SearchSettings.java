@@ -21,7 +21,7 @@ import java.util.Locale;
 public class SearchSettings {
 
 	public static final Log LOG = PlatformUtil.getLog(SearchSettings.class);
-	private static final int MIN_DISTANCE_REGION_LANG_RECALC = 10000;
+	private static final double MIN_DISTANCE_REGION_LANG_RECALC = 10000;
 
 	private LatLon originalLocation;
 	private OsmandRegions regions;
