@@ -224,14 +224,12 @@ public class SearchPhrase {
 	}
 
 	private boolean needDecryptAbbreviations() {
-		if (settings != null && settings.getRegionLang() != null) {
-			String langs = settings.getRegionLang();
-			if (langs != null) {
-				String[] langArr = langs.split(",");
-				for (String lang : langArr) {
-					if (lang.equals("en")) {
-						return true;
-					}
+		String langs = settings != null ? settings.getRegionLang() : null;
+		if (langs != null) {
+			String[] langArr = langs.split(",");
+			for (String lang : langArr) {
+				if (lang.equals("en")) {
+					return true;
 				}
 			}
 		}

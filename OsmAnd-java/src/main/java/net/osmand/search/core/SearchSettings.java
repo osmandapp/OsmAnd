@@ -1,5 +1,6 @@
 package net.osmand.search.core;
 
+import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
 
@@ -7,7 +8,6 @@ import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -20,7 +20,7 @@ import java.util.Locale;
 // immutable object
 public class SearchSettings {
 
-	private static final Log log = LogFactory.getLog(SearchSettings.class);
+	public static final Log LOG = PlatformUtil.getLog(SearchSettings.class);
 
 	private LatLon originalLocation;
 	private OsmandRegions regions;
@@ -100,16 +100,8 @@ public class SearchSettings {
 
 	public SearchSettings setOriginalLocation(LatLon l) {
 		SearchSettings s = new SearchSettings(this);
-		boolean isStartLocation = false;
-		double distance = 0;
-
-		if (this.originalLocation != null) {
-			distance = MapUtils.getDistance(l, this.originalLocation);
-		} else {
-			isStartLocation = true;
-		}
-
-		s.regionLang = (distance > 10 || isStartLocation) ? calculateRegionLang(l) : this.regionLang;
+		double distance = this.originalLocation == null ? -1 : MapUtils.getDistance(l, this.originalLocation);
+		s.regionLang = (distance > 10000 || distance == -1 || this.regionLang == null) ? calculateRegionLang(l) : this.regionLang;
 		s.originalLocation = l;
 		return s;
 	}
@@ -202,12 +194,12 @@ public class SearchSettings {
 				region = this.regions.getSmallestBinaryMapDataObjectAt(l).getKey();
 			}
 		} catch (IOException e) {
-			log.error(e.getMessage(), e);
+			LOG.error(e.getMessage(), e);
 		}
 		if (region != null) {
 			return region.getParams().getRegionLang();
 		}
-		return "";
+		return null;
 	}
 
 	public JSONObject toJSON() {
