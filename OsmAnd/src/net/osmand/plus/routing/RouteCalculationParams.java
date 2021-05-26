@@ -28,6 +28,7 @@ public class RouteCalculationParams {
 	public boolean startTransportStop;
 	public boolean targetTransportStop;
 	public List<WorldRegion> missingMaps;
+	public long startTimeRouteCalculation;
 	public RouteCalculationProgress calculationProgress;
 	public RouteCalculationProgressCallback calculationProgressCallback;
 	public RouteCalculationResultListener resultListener;

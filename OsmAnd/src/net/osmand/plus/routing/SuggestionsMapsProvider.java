@@ -4,13 +4,22 @@ import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.map.WorldRegion;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.onlinerouting.EngineParameter;
+import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
+import net.osmand.plus.onlinerouting.engine.EngineType;
+import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.util.Algorithms;
+
+import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import static net.osmand.util.MapUtils.findPointAtDistanceFrom;
 
@@ -18,14 +27,14 @@ public class SuggestionsMapsProvider {
 
 	private static final int DISTANCE = 20000;
 	RouteCalculationParams params;
-	private boolean isPointOnWater;
+	private boolean pointOnWater;
 
 	public SuggestionsMapsProvider(RouteCalculationParams params) {
 		this.params = params;
 	}
 
 	public boolean isPointOnWater() {
-		return isPointOnWater;
+		return pointOnWater;
 	}
 
 	public boolean checkIfObjectDownloaded(String downloadName) {
@@ -64,6 +73,31 @@ public class SuggestionsMapsProvider {
 		return points;
 	}
 
+	public List<Location> findOnlineRoutePoints() throws IOException, JSONException {
+		List<LatLon> points = new ArrayList<>();
+		List<Location> route;
+		List<Location> routeLocation = new ArrayList<>();
+		OsmandApplication app = params.ctx;
+		OnlineRoutingHelper helper = app.getOnlineRoutingHelper();
+		LinkedList<Location> location = getStartFinishIntermediatesPoints("");
+		for (Location e : location) {
+			points.add(new LatLon(e.getLongitude(), e.getLatitude()));
+		}
+		OnlineRoutingEngine.OnlineRoutingResponse response =
+				helper.calculateRouteOnline(createInitStateEngine(), points, params.leftSide);
+		if (response != null) {
+			route = response.getRoute();
+			routeLocation.addAll(route);
+		}
+		return routeLocation;
+	}
+
+	private OnlineRoutingEngine createInitStateEngine() {
+		Map<String, String> paramsOnlineRouting = new HashMap<>();
+		paramsOnlineRouting.put(EngineParameter.VEHICLE_KEY.name(), params.mode.getRoutingProfile());
+		return EngineType.OSRM_TYPE.newInstance(paramsOnlineRouting);
+	}
+
 	public List<WorldRegion> getMissingMaps(List<Location> points) throws IOException {
 		LinkedHashSet<WorldRegion> suggestedMaps = new LinkedHashSet<>();
 		for (int i = 0; i < points.size(); i++) {
@@ -72,7 +106,7 @@ public class SuggestionsMapsProvider {
 			List<WorldRegion> downloadRegions = params.ctx.getRegions().getWorldRegionsAt(latLonPoint);
 
 			if (downloadRegions.isEmpty()) {
-				isPointOnWater = true;
+				pointOnWater = true;
 			}
 
 			boolean addMaps = true;

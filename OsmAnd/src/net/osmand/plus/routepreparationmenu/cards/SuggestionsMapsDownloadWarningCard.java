@@ -20,21 +20,27 @@ import java.util.List;
 import static net.osmand.plus.download.MultipleDownloadItem.getIndexItem;
 
 public class SuggestionsMapsDownloadWarningCard extends WarningCard {
-	boolean isRouteCalculationStopped;
-	boolean isRouteCalculationInProgress;
+	boolean isMissingMapsStartFinishIntermediates;
+	boolean isMissingMapsDirectLine;
+	boolean isMissingMapsOnline;
 	private SelectionBottomSheet dialog;
 
 	public SuggestionsMapsDownloadWarningCard(@NonNull MapActivity mapActivity) {
 		super(mapActivity);
-		isRouteCalculationInProgress = !Algorithms.isEmpty(mapActivity.getMapRouteInfoMenu().getMissingMapsOnDirectLine());
-		isRouteCalculationStopped = !Algorithms.isEmpty(mapActivity.getRoutingHelper().getRoute().getDownloadMaps());
-		if (isRouteCalculationInProgress) {
+		isMissingMapsDirectLine = !Algorithms.isEmpty(mapActivity.getMapRouteInfoMenu().getMissingMapsOnDirectLine());
+		isMissingMapsOnline = !Algorithms.isEmpty(mapActivity.getMapRouteInfoMenu().getMissingMapsOnline());
+		isMissingMapsStartFinishIntermediates = !Algorithms.isEmpty(mapActivity.getRoutingHelper().getRoute().getDownloadMaps());
+		if (isMissingMapsDirectLine) {
 			imageId = R.drawable.ic_action_time_span;
 			title = mapActivity.getString(R.string.direct_line_maps_required_descr);
 			linkText = mapActivity.getString(R.string.online_direct_line_maps_link);
-		} else if (isRouteCalculationStopped) {
+		} else if (isMissingMapsStartFinishIntermediates) {
 			imageId = R.drawable.ic_map;
 			title = mapActivity.getString(R.string.offline_maps_required_descr);
+			linkText = mapActivity.getString(R.string.welmode_download_maps);
+		} else if (isMissingMapsOnline){
+			imageId = R.drawable.ic_action_time_span;
+			title = mapActivity.getString(R.string.online_maps_required_descr);
 			linkText = mapActivity.getString(R.string.welmode_download_maps);
 		}
 	}
@@ -119,11 +125,13 @@ public class SuggestionsMapsDownloadWarningCard extends WarningCard {
 				&& !downloadThread.getIndexes().isDownloadedFromInternet
 				&& !downloadThread.getIndexes().downloadFromInternetFailed;
 
-		List<WorldRegion> suggestedMaps;
-		if (isRouteCalculationStopped) {
+		List<WorldRegion> suggestedMaps = new ArrayList<>();
+		if (isMissingMapsStartFinishIntermediates) {
 			suggestedMaps = mapActivity.getRoutingHelper().getRoute().getDownloadMaps();
-		} else {
+		} else if (isMissingMapsDirectLine) {
 			suggestedMaps = mapActivity.getMapRouteInfoMenu().getMissingMapsOnDirectLine();
+		} else if (isMissingMapsOnline) {
+			suggestedMaps = mapActivity.getMapRouteInfoMenu().getMissingMapsOnline();
 		}
 		List<DownloadItem> suggestedDownloadsMaps = new ArrayList<>();
 		if (!downloadIndexes) {

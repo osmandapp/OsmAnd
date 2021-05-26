@@ -196,13 +196,11 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private boolean editButtonCollapsed;
 	private boolean addButtonCollapsing;
 	private boolean addButtonCollapsed;
-	private boolean isMapsNeededRouteCalculationStopped;
-
-	public List<WorldRegion> getMissingMapsOnDirectLine() {
-		return missingMapsOnDirectLine;
-	}
+	private boolean isStartFinishIntermediatesMaps;
 
 	private List<WorldRegion> missingMapsOnDirectLine;
+
+	private List<WorldRegion> missingMapsOnline;
 
 	private interface OnButtonCollapsedListener {
 		void onButtonCollapsed(boolean success);
@@ -521,6 +519,19 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		missingMapsOnDirectLine = params.missingMaps;
 		updateCards();
 	}
+	
+	public void updateMissingMapsOnline(RouteCalculationParams params) {
+		missingMapsOnline = params.missingMaps;
+		updateCards();
+	}
+
+	public List<WorldRegion> getMissingMapsOnDirectLine() {
+		return missingMapsOnDirectLine;
+	}
+
+	public List<WorldRegion> getMissingMapsOnline() {
+		return missingMapsOnline;
+	}
 
 	public void clearMissingMapsOnDirectLine() {
 		missingMapsOnDirectLine = null;
@@ -618,8 +629,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
 		RoutingHelper routingHelper = app.getRoutingHelper();
 
-		isMapsNeededRouteCalculationStopped = !Algorithms.isEmpty(routingHelper.getRoute().getDownloadMaps());
-		boolean isMapsNeededRouteCalculationStarted = !Algorithms.isEmpty(missingMapsOnDirectLine);
+		isStartFinishIntermediatesMaps = !Algorithms.isEmpty(routingHelper.getRoute().getDownloadMaps());
+		boolean isDirectLineMapsMissing = !Algorithms.isEmpty(missingMapsOnDirectLine);
+		boolean isOnlineMapsMissing = !Algorithms.isEmpty(missingMapsOnline);
 
 		List<BaseCard> menuCards = new ArrayList<>();
 
@@ -699,13 +711,13 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				menuCards.add(new PublicTransportBetaWarningCard(mapActivity));
 			} else if (app.getRoutingHelper().isBoatMode()) {
 				menuCards.add(new NauticalBridgeHeightWarningCard(mapActivity));
-			} else if (isMapsNeededRouteCalculationStarted) {
+			} else if (isDirectLineMapsMissing || isOnlineMapsMissing) {
 				menuCards.add(new SuggestionsMapsDownloadWarningCard(mapActivity));
-			} else if (app.getTargetPointsHelper().hasTooLongDistanceToNavigate() && !isMapsNeededRouteCalculationStopped) {
+			} else if (app.getTargetPointsHelper().hasTooLongDistanceToNavigate() && !isStartFinishIntermediatesMaps) {
 				menuCards.add(new LongDistanceWarningCard(mapActivity));
 			}
 		} else {
-			if (isMapsNeededRouteCalculationStopped) {
+			if (isStartFinishIntermediatesMaps) {
 				menuCards.add(new SuggestionsMapsDownloadWarningCard(mapActivity));
 			} else {
 				// Home/work card
@@ -1111,7 +1123,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			color2 = color1;
 		} else {
 			color1 = nightMode ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light;
-			if (routeCalculated || currentLocationNotFound && !helper.isRouteBeingCalculated() && !isMapsNeededRouteCalculationStopped) {
+			if (routeCalculated || currentLocationNotFound && !helper.isRouteBeingCalculated() && !isStartFinishIntermediatesMaps) {
 				AndroidUtils.setBackground(app, startButton, nightMode, R.color.active_color_primary_light, R.color.active_color_primary_dark);
 				color2 = color1;
 			} else {
@@ -1130,7 +1142,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			startButtonText.setText(R.string.shared_string_control_start);
 		}
 
-		if (isMapsNeededRouteCalculationStopped) {
+		if (isStartFinishIntermediatesMaps) {
 			startButton.setClickable(false);
 			startButton.setEnabled(false);
 		} else {

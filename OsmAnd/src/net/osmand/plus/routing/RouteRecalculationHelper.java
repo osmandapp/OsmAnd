@@ -254,13 +254,16 @@ class RouteRecalculationHelper {
 				@Override
 				public void run() {
 					RouteCalculationProgress calculationProgress = params.calculationProgress;
+					long routeCalculationDuration = System.currentTimeMillis();
 					if (isRouteBeingCalculated()) {
 						if (lastTask != null && lastTask.params == params) {
 							progressRoute.updateProgress((int) calculationProgress.getLinearProgress());
 							if (calculationProgress.requestPrivateAccessRouting) {
 								progressRoute.requestPrivateAccessRouting();
 							}
-							if (!Algorithms.isEmpty(params.missingMaps)) {
+							if (!Algorithms.isEmpty(params.missingMaps) && routeCalculationDuration < params.startTimeRouteCalculation) {
+								progressRoute.updateMissingMaps(params);
+							} else  if (!Algorithms.isEmpty(params.missingMaps) && routeCalculationDuration > params.startTimeRouteCalculation) {
 								progressRoute.updateMissingMaps(params);
 							}
 							updateProgress(params);
@@ -268,9 +271,6 @@ class RouteRecalculationHelper {
 					} else {
 						if (calculationProgress.requestPrivateAccessRouting) {
 							progressRoute.requestPrivateAccessRouting();
-						}
-						if (!Algorithms.isEmpty(params.missingMaps)) {
-							progressRoute.updateMissingMaps(params);
 						}
 						progressRoute.finish();
 					}

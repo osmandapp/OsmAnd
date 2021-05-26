@@ -592,7 +592,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 			@Override
 			public void updateMissingMaps(RouteCalculationParams params) {
-				mapRouteInfoMenu.updateMissingMapsOnDirectLine(params);
+				if (params.startTimeRouteCalculation != 0) {
+					mapRouteInfoMenu.updateMissingMapsOnline(params);
+				} else {
+					mapRouteInfoMenu.updateMissingMapsOnDirectLine(params);
+				}
 			}
 
 			@Override

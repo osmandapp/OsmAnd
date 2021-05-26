@@ -76,6 +76,7 @@ public class RouteProvider {
 	private static final int MIN_DISTANCE_FOR_INSERTING_ROUTE_SEGMENT = 60;
 	private static final int ADDITIONAL_DISTANCE_FOR_START_POINT = 300;
 	private static final int MIN_STRAIGHT_DIST = 50000;
+	private static final long DELAY = 60000;
 
 	public static Location createLocation(WptPt pt){
 		Location loc = new Location("OsmandRouteProvider");
@@ -118,6 +119,10 @@ public class RouteProvider {
 					} else {
 						if (!suggestionsMapsProvider.isPointOnWater()) {
 							params.missingMaps = suggestedMapsOnStraightLine;
+						} else {
+							List<Location> onlinePoints = suggestionsMapsProvider.findOnlineRoutePoints();
+							params.missingMaps = suggestionsMapsProvider.getMissingMaps(onlinePoints);
+							params.startTimeRouteCalculation = System.currentTimeMillis() + DELAY;
 						}
 						res = findVectorMapsRoute(params, calcGPXRoute);
 					}
