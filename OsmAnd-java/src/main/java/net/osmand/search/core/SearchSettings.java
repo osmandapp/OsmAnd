@@ -3,9 +3,15 @@ package net.osmand.search.core;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
 
+import net.osmand.map.OsmandRegions;
+import net.osmand.map.WorldRegion;
+import net.osmand.util.MapUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -14,7 +20,10 @@ import java.util.Locale;
 // immutable object
 public class SearchSettings {
 
+	private static final Log log = LogFactory.getLog(SearchSettings.class);
+
 	private LatLon originalLocation;
+	private OsmandRegions regions;
 	private String regionLang;
 	private List<BinaryMapIndexReader> offlineIndexes = new ArrayList<>();
 	private int radiusLevel = 1;
@@ -91,6 +100,16 @@ public class SearchSettings {
 
 	public SearchSettings setOriginalLocation(LatLon l) {
 		SearchSettings s = new SearchSettings(this);
+		boolean isStartLocation = false;
+		double distance = 0;
+
+		if (this.originalLocation != null) {
+			distance = MapUtils.getDistance(l, this.originalLocation);
+		} else {
+			isStartLocation = true;
+		}
+
+		s.regionLang = (distance > 10 || isStartLocation) ? calculateRegionLang(l) : this.regionLang;
 		s.originalLocation = l;
 		return s;
 	}
@@ -168,10 +187,27 @@ public class SearchSettings {
 		return regionLang;
 	}
 
-	public SearchSettings setRegionLang(String regionLang) {
-		SearchSettings s = new SearchSettings(this);
-		s.regionLang = regionLang;
-		return s;
+	public OsmandRegions getRegions() {
+		return regions;
+	}
+
+	public void setRegions(OsmandRegions regions) {
+		this.regions = regions;
+	}
+
+	private String calculateRegionLang(LatLon l) {
+		WorldRegion region = null;
+		try {
+			if (regions != null) {
+				region = this.regions.getSmallestBinaryMapDataObjectAt(l).getKey();
+			}
+		} catch (IOException e) {
+			log.error(e.getMessage(), e);
+		}
+		if (region != null) {
+			return region.getParams().getRegionLang();
+		}
+		return "";
 	}
 
 	public JSONObject toJSON() {
@@ -179,6 +215,7 @@ public class SearchSettings {
 		if (originalLocation != null) {
 			json.put("lat", String.format(Locale.US, "%.5f", originalLocation.getLatitude()));
 			json.put("lon", String.format(Locale.US, "%.5f", originalLocation.getLongitude()));
+			json.put("regionLang", regionLang);
 		}
 		json.put("radiusLevel", radiusLevel);
 		json.put("totalLimit", totalLimit);
