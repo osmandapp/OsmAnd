@@ -135,7 +135,8 @@ public class CollatorStringMatcher implements StringMatcher {
 	 */
 	public static boolean cstartsWith(Collator collator, String fullTextP, String theStart, 
 			boolean checkBeginning, boolean checkSpaces, boolean equals) {
-		// TODO this needs to be reviewed cause it could potentially slow down performance 
+		// FUTURE: This is not effective code, it runs on each comparision
+		// It would be more efficient to normalize all strings in file and normalize search string before collator  
 		theStart = alignChars(theStart);
 		String searchIn = simplifyStringAndAlignChars(fullTextP);
 		int searchInLength = searchIn.length();
