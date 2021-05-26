@@ -43,6 +43,7 @@ public class SearchSettings {
 			this.totalLimit = s.totalLimit;
 			this.offlineIndexes = s.offlineIndexes;
 			this.originalLocation = s.originalLocation;
+			this.regions = s.regions;
 			this.regionLang = s.regionLang;
 			this.searchTypes = s.searchTypes;
 			this.emptyQueryAllowed = s.emptyQueryAllowed;
@@ -207,6 +208,8 @@ public class SearchSettings {
 		if (originalLocation != null) {
 			json.put("lat", String.format(Locale.US, "%.5f", originalLocation.getLatitude()));
 			json.put("lon", String.format(Locale.US, "%.5f", originalLocation.getLongitude()));
+		}
+		if (regionLang != null) {
 			json.put("regionLang", regionLang);
 		}
 		json.put("radiusLevel", radiusLevel);
