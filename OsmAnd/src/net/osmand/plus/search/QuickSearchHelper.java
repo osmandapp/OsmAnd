@@ -138,6 +138,7 @@ public class QuickSearchHelper implements ResourceListener {
 	public void setRepositoriesForSearchUICore(final OsmandApplication app) {
 		BinaryMapIndexReader[] binaryMapIndexReaderArray = app.getResourceManager().getQuickSearchFiles();
 		core.getSearchSettings().setOfflineIndexes(Arrays.asList(binaryMapIndexReaderArray));
+		core.getSearchSettings().setRegions(app.getRegions());
 	}
 
 	public Amenity findAmenity(String name, double lat, double lon, String lang, boolean transliterate) {
