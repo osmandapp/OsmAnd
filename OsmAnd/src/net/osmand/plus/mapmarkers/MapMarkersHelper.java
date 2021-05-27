@@ -89,6 +89,16 @@ public class MapMarkersHelper {
 		return mapMarkersGroups;
 	}
 
+	public List<MapMarkersGroup> getVisibleMapMarkersGroups() {
+		List<MapMarkersGroup> groups = new ArrayList<>();
+		for (MapMarkersGroup group : mapMarkersGroups) {
+			if (group.isVisible()) {
+				groups.add(group);
+			}
+		}
+		return groups;
+	}
+
 	public boolean isStartFromMyLocation() {
 		return ctx.getSettings().ROUTE_MAP_MARKERS_START_MY_LOC.get();
 	}
@@ -981,19 +991,6 @@ public class MapMarkersHelper {
 				}
 			}
 		}
-	}
-
-	public List<MapMarker> getMapMarkersFromDefaultGroups(boolean history) {
-		List<MapMarker> mapMarkers = new ArrayList<>();
-		for (MapMarkersGroup group : mapMarkersGroups) {
-			for (MapMarker marker : group.getMarkers()) {
-				if ((group.getType() == ItineraryType.MARKERS || history)
-						&& (history && marker.history || !history && !marker.history)) {
-					mapMarkers.add(marker);
-				}
-			}
-		}
-		return mapMarkers;
 	}
 
 	// ---------------------------------------------------------------------------------------------
