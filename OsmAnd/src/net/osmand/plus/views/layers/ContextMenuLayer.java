@@ -20,7 +20,6 @@ import android.widget.ImageView;
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.NativeLibrary.RenderedObject;
@@ -52,10 +51,8 @@ import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -864,7 +861,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 
 	private boolean isUniqueGpx(Map<Object, IContextMenuProvider> selectedObjects, String gpxFileName) {
-		String tracksDir = view.getApplication().getAppPath(IndexConstants.GPX_FROM_OBF_DIR).getPath();
+		String tracksDir = view.getApplication().getAppPath(IndexConstants.GPX_TRAVEL_DIR).getPath();
 		if (new File(tracksDir, gpxFileName).exists()) {
 			return false;
 		}

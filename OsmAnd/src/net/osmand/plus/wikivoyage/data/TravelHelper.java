@@ -59,6 +59,8 @@ public interface TravelHelper {
 	@NonNull
 	ArrayList<String> getArticleLangs(@NonNull TravelArticleIdentifier articleId);
 
+	void searchGpx(LatLon location, String fileName, String ref, @Nullable GpxReadCallback callback);
+
 	@NonNull
 	String getGPXName(@NonNull TravelArticle article);
 

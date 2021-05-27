@@ -711,6 +711,10 @@ public class TravelDbHelper implements TravelHelper {
 		return nm.substring(0, nm.indexOf('.')).replace('_', ' ');
 	}
 
+	@Override
+	public void searchGpx(LatLon location, String fileName, String ref, @Nullable GpxReadCallback callback) {
+	}
+
 	@NonNull
 	@Override
 	public String getGPXName(@NonNull final TravelArticle article) {
