@@ -1030,7 +1030,7 @@ public class GpxUiHelper {
 		return list;
 	}
 
-	private static void readGpxDirectory(File dir, final List<GPXInfo> list, String parent,
+	public static void readGpxDirectory(File dir, final List<GPXInfo> list, String parent,
 										 boolean absolutePath) {
 		if (dir != null && dir.canRead()) {
 			File[] files = dir.listFiles();
