@@ -757,8 +757,7 @@ public class MapUtils {
 		return Math.sqrt((endX - startX) * (endX - startX) + (endY - startY) * (endY - startY));
 	}
 
-	//Looks like a method rhumbDestinationPoint. The result is also looks the same, for example: 19983.254 and 19983.266. Please, choose better method.
-	public static LatLon findPointAtDistanceFrom(double latitude, double longitude, double distanceInMetres, double bearing) {
+	public static Location movePointToDistance(double latitude, double longitude, double distanceInMetres, double bearing) {
 		double bearingRad = toRadians(bearing);
 		double latRad = toRadians(latitude);
 		double lonRad = toRadians(longitude);
@@ -767,6 +766,7 @@ public class MapUtils {
 		double latitudeResult = asin(sin(latRad) * cos(distFraction) + cos(latRad) * sin(distFraction) * cos(bearingRad));
 		double a = atan2(sin(bearingRad) * sin(distFraction) * cos(latRad), cos(distFraction) - sin(latRad) * sin(latitudeResult));
 		double longitudeResult = (lonRad + a + 3 * PI) % (2 * PI) - PI;
-		return new LatLon(toDegrees(latitudeResult), toDegrees(longitudeResult));
+		LatLon latLon = new LatLon(toDegrees(latitudeResult), toDegrees(longitudeResult));
+		return new Location("", latLon.getLatitude(), latLon.getLongitude());
 	}
 }

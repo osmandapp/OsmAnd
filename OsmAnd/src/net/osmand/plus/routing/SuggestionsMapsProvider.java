@@ -21,7 +21,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import static net.osmand.util.MapUtils.findPointAtDistanceFrom;
+import static net.osmand.util.MapUtils.movePointToDistance;
 
 public class SuggestionsMapsProvider {
 
@@ -53,8 +53,7 @@ public class SuggestionsMapsProvider {
 			mapsBasedOnPoints.add(mapsBasedOnPoints.size(), points.get(nextIndex));
 			while (mapsBasedOnPoints.get(0).distanceTo(mapsBasedOnPoints.get(mapsBasedOnPoints.size() - 1)) > DISTANCE) {
 				float bearing = mapsBasedOnPoints.get(0).bearingTo(mapsBasedOnPoints.get(mapsBasedOnPoints.size() - 1));
-				LatLon latLon = findPointAtDistanceFrom(mapsBasedOnPoints.get(0).getLatitude(), mapsBasedOnPoints.get(0).getLongitude(), DISTANCE, bearing);
-				Location location = new Location("", latLon.getLatitude(), latLon.getLongitude());
+				Location location = movePointToDistance(mapsBasedOnPoints.get(0).getLatitude(), mapsBasedOnPoints.get(0).getLongitude(), DISTANCE, bearing);
 				mapsBasedOnPoints.add(0, location);
 			}
 		}
@@ -81,7 +80,7 @@ public class SuggestionsMapsProvider {
 		OnlineRoutingHelper helper = app.getOnlineRoutingHelper();
 		LinkedList<Location> location = getStartFinishIntermediatesPoints("");
 		for (Location e : location) {
-			points.add(new LatLon(e.getLongitude(), e.getLatitude()));
+			points.add(new LatLon(e.getLatitude(), e.getLongitude()));
 		}
 		OnlineRoutingEngine.OnlineRoutingResponse response =
 				helper.calculateRouteOnline(createInitStateEngine(), points, params.leftSide);
@@ -89,7 +88,16 @@ public class SuggestionsMapsProvider {
 			route = response.getRoute();
 			routeLocation.addAll(route);
 		}
-		return routeLocation;
+		List<Location> mapsBasedOnPoints = new ArrayList<>();
+		for (int i = 0; i < routeLocation.size(); i++) {
+			for (int j = i + 1; j < routeLocation.size(); j++) {
+				if (routeLocation.get(i).distanceTo(routeLocation.get(j)) > DISTANCE) {
+					mapsBasedOnPoints.add(routeLocation.get(j));
+					i = j;
+				}
+			}
+		}
+		return mapsBasedOnPoints;
 	}
 
 	private OnlineRoutingEngine createInitStateEngine() {
@@ -129,7 +137,6 @@ public class SuggestionsMapsProvider {
 				suggestedMaps.addAll(maps);
 			}
 		}
-
 		return new ArrayList<>(suggestedMaps);
 	}
 }

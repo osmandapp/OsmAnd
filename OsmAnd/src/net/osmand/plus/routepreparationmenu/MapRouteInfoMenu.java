@@ -106,6 +106,7 @@ import net.osmand.plus.routing.RouteCalculationParams;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelperUtils;
+import net.osmand.plus.routing.SuggestionsMapsProvider;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -125,6 +126,7 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
+import org.json.JSONException;
 
 import java.io.File;
 import java.io.IOException;
@@ -198,9 +200,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private boolean addButtonCollapsed;
 	private boolean isStartFinishIntermediatesMaps;
 
-	private List<WorldRegion> missingMapsOnDirectLine;
+	private List<WorldRegion> suggestedMissingMaps;
 
 	private List<WorldRegion> missingMapsOnline;
+	boolean isCardUpdated = false;
 
 	private interface OnButtonCollapsedListener {
 		void onButtonCollapsed(boolean success);
@@ -515,26 +518,28 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		}
 	}
 
-	public void updateMissingMapsOnDirectLine(RouteCalculationParams params) {
-		missingMapsOnDirectLine = params.missingMaps;
-		updateCards();
-	}
-	
-	public void updateMissingMapsOnline(RouteCalculationParams params) {
-		missingMapsOnline = params.missingMaps;
-		updateCards();
-	}
-
-	public List<WorldRegion> getMissingMapsOnDirectLine() {
-		return missingMapsOnDirectLine;
-	}
-
-	public List<WorldRegion> getMissingMapsOnline() {
-		return missingMapsOnline;
+	public void updateSuggestedMissingMaps(RouteCalculationParams params) throws IOException, JSONException {
+		if (params.startTimeRouteCalculation != 0) {
+			SuggestionsMapsProvider suggestionsMapsProvider = new SuggestionsMapsProvider(params);
+			List<Location> onlinePoints = suggestionsMapsProvider.findOnlineRoutePoints();
+			suggestedMissingMaps = suggestionsMapsProvider.getMissingMaps(onlinePoints);
+		} else {
+			suggestedMissingMaps = params.missingMaps;
+		}
+		if (!isCardUpdated) {
+			updateCards();
+			isCardUpdated = true;
+		}
 	}
 
-	public void clearMissingMapsOnDirectLine() {
-		missingMapsOnDirectLine = null;
+
+	public List<WorldRegion> getSuggestedMissingMaps() {
+		return suggestedMissingMaps;
+	}
+
+	public void clearSuggestedMissingMaps() {
+		suggestedMissingMaps = null;
+		isCardUpdated = false;
 	}
 
 	public void openMenuHeaderOnly() {
@@ -630,7 +635,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		RoutingHelper routingHelper = app.getRoutingHelper();
 
 		isStartFinishIntermediatesMaps = !Algorithms.isEmpty(routingHelper.getRoute().getDownloadMaps());
-		boolean isDirectLineMapsMissing = !Algorithms.isEmpty(missingMapsOnDirectLine);
+		boolean isDirectLineMapsMissing = !Algorithms.isEmpty(suggestedMissingMaps);
 		boolean isOnlineMapsMissing = !Algorithms.isEmpty(missingMapsOnline);
 
 		List<BaseCard> menuCards = new ArrayList<>();

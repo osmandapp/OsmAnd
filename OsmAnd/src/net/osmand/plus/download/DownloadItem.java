@@ -41,19 +41,19 @@ public abstract class DownloadItem {
 	}
 
 	public String getVisibleName(Context ctx, OsmandRegions osmandRegions) {
-		return type.getVisibleName(this, ctx, osmandRegions, true);
+		return type.getVisibleName(this, ctx, osmandRegions, true, true);
 	}
 
 	public String getVisibleName(Context ctx, OsmandRegions osmandRegions, boolean includingParent) {
-		return type.getVisibleName(this, ctx, osmandRegions, includingParent);
+		return type.getVisibleName(this, ctx, osmandRegions, includingParent, true);
+	}
+
+	public String getVisibleMapsName(Context ctx, OsmandRegions osmandRegions) {
+		return type.getVisibleName(this, ctx, osmandRegions, true, false);
 	}
 
 	public String getVisibleDescription(OsmandApplication ctx) {
 		return type.getVisibleDescription(this, ctx);
-	}
-
-	public String getVisibleMapsName(Context ctx, OsmandRegions osmandRegions) {
-		return type.getSuggestedMapsName(this, ctx, osmandRegions);
 	}
 
 	@NonNull

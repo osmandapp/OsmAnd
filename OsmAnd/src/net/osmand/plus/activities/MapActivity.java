@@ -162,7 +162,9 @@ import net.osmand.router.GeneralRouter;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
+import org.json.JSONException;
 
+import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -536,8 +538,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				if (routingHelper.isPublicTransportMode() || !routingHelper.isOsmandRouting()) {
 					dashboardOnMap.updateRouteCalculationProgress(0);
 				}
-				if (mapRouteInfoMenu.getMissingMapsOnDirectLine() != null) {
-					mapRouteInfoMenu.clearMissingMapsOnDirectLine();
+				if (mapRouteInfoMenu.getSuggestedMissingMaps() != null) {
+					mapRouteInfoMenu.clearSuggestedMissingMaps();
 				}
 			}
 
@@ -592,10 +594,12 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 			@Override
 			public void updateMissingMaps(RouteCalculationParams params) {
-				if (params.startTimeRouteCalculation != 0) {
-					mapRouteInfoMenu.updateMissingMapsOnline(params);
-				} else {
-					mapRouteInfoMenu.updateMissingMapsOnDirectLine(params);
+				try {
+					mapRouteInfoMenu.updateSuggestedMissingMaps(params);
+				} catch (IOException e) {
+					LOG.error("Error while calling updateSuggestedMissingMaps", e);
+				} catch (JSONException e) {
+					LOG.error("Failed write to json", e);
 				}
 			}
 

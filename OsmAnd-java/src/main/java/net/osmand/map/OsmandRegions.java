@@ -164,16 +164,16 @@ public class OsmandRegions {
 	}
 
 
-	public String getLocaleName(String downloadName, boolean includingParent) {
+	public String getLocaleName(String downloadName, boolean includingParent, boolean parentFirst) {
 		final String lc = downloadName.toLowerCase();
 		if (downloadNamesToFullNames.containsKey(lc)) {
 			String fullName = downloadNamesToFullNames.get(lc);
-			return getLocaleNameByFullName(fullName, includingParent);
+			return getLocaleNameByFullName(fullName, includingParent, parentFirst);
 		}
 		return downloadName.replace('_', ' ');
 	}
 
-	public String getLocaleNameByFullName(String fullName, boolean includingParent) {
+	public String getLocaleNameByFullName(String fullName, boolean includingParent, boolean parentFirst) {
 		WorldRegion rd = fullNamesToRegionData.get(fullName);
 		if (rd == null) {
 			return fullName.replace('_', ' ');
@@ -185,43 +185,24 @@ public class OsmandRegions {
 					!parent.getRegionId().equals(WorldRegion.RUSSIA_REGION_ID)) {
 				return rd.getLocaleName();
 			}
-			if (parentParent.getRegionId().equals(WorldRegion.RUSSIA_REGION_ID)) {
-				return parentParent.getLocaleName() + " " + rd.getLocaleName();
-			}
-			if (parentParent.getRegionId().equals(WorldRegion.JAPAN_REGION_ID)) {
-				return parentParent.getLocaleName() + " " + rd.getLocaleName();
+			if (parentFirst) {
+				if (parentParent.getRegionId().equals(WorldRegion.RUSSIA_REGION_ID)) {
+					return parentParent.getLocaleName() + " " + rd.getLocaleName();
+				}
+				if (parentParent.getRegionId().equals(WorldRegion.JAPAN_REGION_ID)) {
+					return parentParent.getLocaleName() + " " + rd.getLocaleName();
+				} else {
+					return parent.getLocaleName() + " " + rd.getLocaleName();
+				}
 			} else {
-				return parent.getLocaleName() + " " + rd.getLocaleName();
-			}
-		} else {
-			return rd.getLocaleName();
-		}
-	}
-
-	public String getSuggestedDownloadMapName(String downloadName) {
-		final String lc = downloadName.toLowerCase();
-		if (downloadNamesToFullNames.containsKey(lc)) {
-			String fullName = downloadNamesToFullNames.get(lc);
-			return getSuggestedMapsName(fullName);
-		}
-		return downloadName.replace('_', ' ');
-	}
-
-	public String getSuggestedMapsName(String fullName) {
-		WorldRegion rd = fullNamesToRegionData.get(fullName);
-		if (rd == null) {
-			return fullName.replace('_', ' ');
-		}
-		if (rd.getSuperregion() != null && rd.getSuperregion().getSuperregion() != null) {
-			WorldRegion parentParent = rd.getSuperregion().getSuperregion();
-			WorldRegion parent = rd.getSuperregion();
-			if (parentParent.getRegionId().equals(WorldRegion.RUSSIA_REGION_ID)) {
-				return rd.getLocaleName() + ", " + parentParent.getLocaleName();
-			}
-			if (parentParent.getRegionId().equals(WorldRegion.JAPAN_REGION_ID)) {
-				return rd.getLocaleName() + ", " + parentParent.getLocaleName();
-			} else {
-				return rd.getLocaleName() + ", " + parent.getLocaleName();
+				if (parentParent.getRegionId().equals(WorldRegion.RUSSIA_REGION_ID)) {
+					return rd.getLocaleName() + ", " + parentParent.getLocaleName();
+				}
+				if (parentParent.getRegionId().equals(WorldRegion.JAPAN_REGION_ID)) {
+					return rd.getLocaleName() + ", " + parentParent.getLocaleName();
+				} else {
+					return rd.getLocaleName() + ", " + parent.getLocaleName();
+				}
 			}
 		} else {
 			return rd.getLocaleName();
@@ -231,7 +212,6 @@ public class OsmandRegions {
 	public WorldRegion getWorldRegion() {
 		return worldRegion;
 	}
-
 
 	public boolean isInitialized() {
 		return reader != null;
@@ -662,7 +642,7 @@ public class OsmandRegions {
 			String nm = b.getNameByType(or.mapIndexFields.nameEnType);
 			if (nm == null) {
 				nm = b.getName();
-				System.out.println(or.getLocaleName(or.getDownloadName(b), false));
+				System.out.println(or.getLocaleName(or.getDownloadName(b), false, false));
 			}
 			if (or.isDownloadOfType(b, MAP_TYPE)) {
 				found.add(nm.toLowerCase());

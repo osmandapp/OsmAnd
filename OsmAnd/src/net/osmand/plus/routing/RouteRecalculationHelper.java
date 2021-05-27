@@ -28,6 +28,7 @@ class RouteRecalculationHelper {
 
 	private static final int RECALCULATE_THRESHOLD_COUNT_CAUSING_FULL_RECALCULATE = 3;
 	private static final int RECALCULATE_THRESHOLD_CAUSING_FULL_RECALCULATE_INTERVAL = 2 * 60 * 1000;
+	private static final long WAITING_TIME = 60000;
 
 	private final OsmandApplication app;
 	private final RoutingHelper routingHelper;
@@ -255,15 +256,14 @@ class RouteRecalculationHelper {
 				public void run() {
 					RouteCalculationProgress calculationProgress = params.calculationProgress;
 					long routeCalculationDuration = System.currentTimeMillis();
+					boolean isOnlineRoutingNeeded = routeCalculationDuration > params.startTimeRouteCalculation + WAITING_TIME && params.startTimeRouteCalculation != 0;
 					if (isRouteBeingCalculated()) {
 						if (lastTask != null && lastTask.params == params) {
 							progressRoute.updateProgress((int) calculationProgress.getLinearProgress());
 							if (calculationProgress.requestPrivateAccessRouting) {
 								progressRoute.requestPrivateAccessRouting();
 							}
-							if (!Algorithms.isEmpty(params.missingMaps) && routeCalculationDuration < params.startTimeRouteCalculation) {
-								progressRoute.updateMissingMaps(params);
-							} else  if (!Algorithms.isEmpty(params.missingMaps) && routeCalculationDuration > params.startTimeRouteCalculation) {
+							if (!Algorithms.isEmpty(params.missingMaps) || isOnlineRoutingNeeded) {
 								progressRoute.updateMissingMaps(params);
 							}
 							updateProgress(params);
