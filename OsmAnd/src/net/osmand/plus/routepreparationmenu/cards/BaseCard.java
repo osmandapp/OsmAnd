@@ -138,8 +138,16 @@ public abstract class BaseCard {
 		return getColoredIcon(icon, nightMode ? colorDark : colorLight);
 	}
 
+	protected Drawable getIcon(@DrawableRes int icon) {
+		return app.getUIUtilities().getIcon(icon);
+	}
+
 	protected Drawable getColoredIcon(@DrawableRes int icon, @ColorRes int color) {
 		return app.getUIUtilities().getIcon(icon, color);
+	}
+
+	protected Drawable getPaintedIcon(@DrawableRes int id, @ColorInt int color) {
+		return app.getUIUtilities().getPaintedIcon(id, color);
 	}
 
 	public void setShowTopShadow(boolean showTopShadow) {

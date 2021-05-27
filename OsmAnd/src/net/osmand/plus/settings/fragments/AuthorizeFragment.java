@@ -1,6 +1,5 @@
 package net.osmand.plus.settings.fragments;
 
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
@@ -38,7 +37,6 @@ import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupHelper.OnRegisterDeviceListener;
 import net.osmand.plus.backup.BackupHelper.OnRegisterUserListener;
 import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.development.TestBackupActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
@@ -280,10 +278,9 @@ public class AuthorizeFragment extends BaseOsmAndFragment {
 								if (status == BackupHelper.STATUS_SUCCESS) {
 									FragmentManager fragmentManager = activity.getSupportFragmentManager();
 									if (!fragmentManager.isStateSaved()) {
-										fragmentManager.popBackStack(SettingsScreenType.BACKUP_AND_RESTORE.name(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+										fragmentManager.popBackStack(SettingsScreenType.BACKUP_AUTHORIZATION.name(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
 									}
-									Intent intent = new Intent(activity, TestBackupActivity.class);
-									activity.startActivity(intent);
+									BackupAndRestoreFragment.showInstance(fragmentManager);
 								} else {
 									errorText.setText(message);
 									buttonContinue.setEnabled(false);

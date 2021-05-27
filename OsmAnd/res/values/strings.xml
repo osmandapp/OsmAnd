@@ -12,6 +12,27 @@
 
 -->
 
+    <string name="shared_string_logout">Logout</string>
+    <string name="download_server_version">Download server version</string>
+    <string name="upload_local_version">Upload local version</string>
+    <string name="backup_pause_all">Pause all</string>
+    <string name="backup_using_mobile_data">Backup using mobile data</string>
+    <string name="backup_waiting_for_wifi_descr">Automatic backup is enabled only for Wi-Fi connection</string>
+    <string name="backup_waiting_for_wifi">Backup is waiting for Wi-Fi connection</string>
+    <string name="backup_no_internet_descr">Check your internet connection and download again.</string>
+    <string name="backup_view_conflicts">View conflicts</string>
+    <string name="backup_confilcts_descr">Some files could not be uploaded to the server because a newer version is stored on the server.</string>
+    <string name="backup_conflicts">Conflicts</string>
+    <string name="make_backup_descr">There are many changes on this device, please make a backup of this data so as not to lose it.</string>
+    <string name="make_backup">Make a backup</string>
+    <string name="backup_now">Backup now</string>
+    <string name="backup_complete">Backup complete</string>
+    <string name="restore_backup">Restore now</string>
+    <string name="setup_backup">Set up backup</string>
+    <string name="backup_welcome_back">Welcome back!</string>
+    <string name="backup_dont_have_any">You don\’t have any online backup yet</string>
+    <string name="backup_welcome_back_descr">You can restore data on this device using existing backups or set up a backup of this device to OsmAnd Cloud.</string>
+    <string name="backup_dont_have_any_descr">Set up an automatic backup so you don\'t have to worry about lost data.</string>
     <string name="select_nav_profile_dialog_message">The \'Navigation type\' governs how routes are calculated. You can select between offline and online routing engines.</string>
     <string name="verification_code_missing_description">Waiting time for code can be 10 minutes, also you can check your spam folder. If it doesn\'t help, use button below.</string>
     <string name="verification_code_missing">I didn\'t receive verification code</string>

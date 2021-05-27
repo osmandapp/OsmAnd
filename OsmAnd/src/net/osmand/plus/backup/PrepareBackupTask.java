@@ -43,7 +43,8 @@ public class PrepareBackupTask {
 	}
 
 	public interface OnPrepareBackupListener {
-		void onBackupPrepared(@Nullable BackupInfo backupInfo, @Nullable String error);
+		void onBackupPrepared(@Nullable BackupInfo backupInfo, @Nullable List<UserFile> userFiles,
+							  @Nullable List<GpxFileInfo> fileInfos, @Nullable String error);
 	}
 
 	public PrepareBackupTask(@NonNull Context context, @Nullable OnPrepareBackupListener listener) {
@@ -189,7 +190,7 @@ public class PrepareBackupTask {
 
 	private void onTasksDone() {
 		if (listener != null) {
-			listener.onBackupPrepared(result, error);
+			listener.onBackupPrepared(result, userFiles, fileInfos, error);
 		}
 		Context ctx = contextRef.get();
 		if (ctx instanceof Activity && AndroidUtils.isActivityNotDestroyed((Activity) ctx) && progress != null) {

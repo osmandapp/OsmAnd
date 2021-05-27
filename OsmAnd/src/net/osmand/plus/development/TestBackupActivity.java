@@ -37,6 +37,7 @@ import java.io.File;
 import java.lang.ref.WeakReference;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -335,7 +336,8 @@ public class TestBackupActivity extends OsmandActionBarActivity {
 		buttonRefresh.setEnabled(false);
 		PrepareBackupTask prepareBackupTask = new PrepareBackupTask(this, new OnPrepareBackupListener() {
 			@Override
-			public void onBackupPrepared(@Nullable BackupInfo backupInfo, @Nullable String error) {
+			public void onBackupPrepared(@Nullable BackupInfo backupInfo, @Nullable List<UserFile> userFiles,
+										 @Nullable List<GpxFileInfo> fileInfos, @Nullable String error) {
 				TestBackupActivity.this.backupInfo = backupInfo;
 				TestBackupActivity a = activityRef.get();
 				if (AndroidUtils.isActivityNotDestroyed(a)) {
