@@ -12,6 +12,9 @@
 
 -->
 
+    <string name="osmand_online_routing_promo">You can use predefined templates, or add custom online routing, supported: OSRM, Graphhopper, OpenRouteService, GPX.</string>
+    <string name="shared_string_online">Online</string>
+    <string name="shared_string_offline">Offline</string>
     <string name="loading_list_of_routing_services">Loading list of available routing services</string>
     <string name="predefined_online_routing_templates_description">You can use predefined templates, or add custom online routing, supported: OSRM, Graphhopper, OpenRouteService, GPX.</string>
     <string name="select_nav_profile_dialog_message">The \'Navigation type\' governs how routes are calculated. You can select between offline and online routing engines.</string>
