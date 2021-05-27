@@ -690,7 +690,7 @@
     <string name="rendering_attr_hmRendered_description">Aumentar o nível de detalhe do mapa.</string>
     <string name="rendering_attr_hmRendered_name">Ver mais detalhes no mapa</string>
     <string name="route_roundabout">Rotunda: saia na %1$dª saída para</string>
-    <string name="route_kl">Mantenha-se à esquerda e continue em</string>
+    <string name="route_kl">Mantenha-se à esquerda e siga</string>
     <string name="route_kr">Mantenha-se à direita e continue em</string>
     <string name="asap">Assim que possível</string>
     <string name="gpxup_public">Público</string>
@@ -1041,7 +1041,7 @@
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Escolher existente…</string>
     <string name="maps_define_edit">Definir/editar…</string>
-    <string name="map_widget_fps_info">Informação FPS</string>
+    <string name="map_widget_fps_info">Fotogramas p/segundo</string>
     <string name="map_magnifier">Lupa do mapa</string>
     <string name="base_world_map">Mapa mundial</string>
     <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions / direções de navegação automatizadas do OSM)
@@ -1220,7 +1220,7 @@
     <string name="select_destination_and_intermediate_points">Definir destinos</string>
     <string name="layer_amenity_label">Nomes dos POI</string>
     <string name="loading_smth">A carregar %1$s…</string>
-    <string name="map_widget_plain_time">Tempo atual</string>
+    <string name="map_widget_plain_time">Hora atual</string>
     <string name="shared_string_waypoint">Ponto de rota</string>
     <string name="selected_gpx_info_show">"
 \n
@@ -1832,7 +1832,7 @@
     <string name="remove_from_map_markers">Remover dos \'Marcadores do mapa\'</string>
     <string name="descendingly">Z-A</string>
     <string name="ascendingly">A-Z</string>
-    <string name="date_added">Adicionada</string>
+    <string name="date_added">Adicionado</string>
     <string name="order_by">Ordenar por:</string>
     <string name="marker_show_distance_descr">Selecionar como indicar a distância e a direção para os marcadores no mapa:</string>
     <string name="map_orientation_change_in_accordance_with_speed">Limiar de orientação do mapa</string>
@@ -2291,8 +2291,8 @@
     <string name="modify_the_search_query">Altere a sua pesquisa.</string>
     <string name="shared_string_actions">Ações</string>
     <string name="shared_string_marker">Marcador</string>
-    <string name="empty_state_osm_edits">Criar ou alterar objetos OSM</string>
-    <string name="empty_state_osm_edits_descr">Criar ou alterar POIs do OSM, criar ou comentar notas do OSM e contribuir com ficheiros de GPX gravados.</string>
+    <string name="empty_state_osm_edits">Criar ou alterar elementos do OSM</string>
+    <string name="empty_state_osm_edits_descr">Crie ou altere POIs do OpenStreetMap, crie ou comente notas e contribua com ficheiros de GPX gravados.</string>
     <string name="shared_string_deleted">Eliminado</string>
     <string name="shared_string_edited">Editado</string>
     <string name="shared_string_added">Adicionado</string>
@@ -4134,4 +4134,5 @@
     <string name="osmand_cloud_authorize_descr">Nunca perca os seus dados, faça uma cópia de segurança e restaure todas as informações sem problemas.</string>
     <string name="local_backup">Cópia de segurança local</string>
     <string name="local_backup_descr">Faça um cópia de segurança ou restaure dados de um ficheiro no seu dispositivo.</string>
+    <string name="select_nav_profile_dialog_message">O \"tipo de navegação\" determina como as rotas são calculadas. Pode-se selecionar entre mecanismos de roteamento offline e online.</string>
 </resources>
