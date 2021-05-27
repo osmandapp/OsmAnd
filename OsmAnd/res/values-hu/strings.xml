@@ -769,7 +769,7 @@
     <string name="show_lanes">Sávok</string>
     <string name="avoid_unpaved">Burkolatlan út nélkül</string>
     <string name="avoid_ferries">Komp nélkül</string>
-    <string name="email">email</string>
+    <string name="email">e-mail</string>
     <string name="filterpoi_activity">POI szűrő készítés</string>
     <string name="select_navigation_mode">Közlekedési mód:</string>
     <string name="day_night_info_description">Napkelte : %1$s \nNapnyugta : %2$s</string>
@@ -1834,7 +1834,7 @@
     <string name="osm_live_month_cost_desc">Havi fizetés</string>
     <string name="osm_live_active">Aktív</string>
     <string name="osm_live_not_active">Inaktív</string>
-    <string name="osm_live_enter_email">Kérjük, érvényes e-mail címet adjon meg</string>
+    <string name="osm_live_enter_email">Kérjük, érvényes e-mail-címet adjon meg</string>
     <string name="osm_live_enter_user_name">Kérjük, nyilvános nevet adjon meg</string>
     <string name="osm_live_thanks">Köszönjük az OsmAnd támogatását!
 \nAz új funkciók aktiválásához az OsmAnd újraindítása szükséges.</string>
@@ -1874,7 +1874,7 @@
     <string name="find_parking">Parkoló keresése</string>
     <string name="shared_string_status">Állapot</string>
     <string name="shared_string_save_changes">Módosítások mentése</string>
-    <string name="shared_string_email_address">E-mail cím</string>
+    <string name="shared_string_email_address">E-mail-cím</string>
     <string name="rendering_attr_hideUnderground_name">Földalatti objektumok</string>
     <string name="data_is_not_available">Az adat nem érhető el</string>
     <string name="shared_string_read_more">Bővebben</string>
@@ -2216,7 +2216,7 @@
     <string name="no_overlay">Nincs rátétréteg</string>
     <string name="no_underlay">Nincs alátétréteg</string>
     <string name="subscribe_email_error">Hiba</string>
-    <string name="subscribe_email_desc">Iratkozz fel az alkalmazás akciókról szóló hírlevelünkre és kapsz további 3 térképletöltést!</string>
+    <string name="subscribe_email_desc">Iratkozzon fel az alkalmazás akciókról szóló hírlevelünkre és kap további 3 térképletöltést!</string>
     <string name="depth_contour_descr">Tengeri mélységvonalak és hajózási jelzések.</string>
     <string name="sea_depth_thanks">Köszönjük, hogy megvásároltad a tengeri mélységvonalakat</string>
     <string name="index_item_depth_contours_osmand_ext">Tengeri mélységvonalak</string>
@@ -4101,16 +4101,16 @@
     <string name="search_more">További keresés…</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
     <string name="osmand_cloud">OsmAnd Cloud</string>
-    <string name="verify_email_address_descr">Elküldtünk az e-mail címére (%1$s) egy hitelesítő kódot. Kérjük, írja be az alábbi mezőbe.</string>
+    <string name="verify_email_address_descr">Elküldtünk az e-mail-címére (%1$s) egy hitelesítő kódot. Kérjük, írja be az alábbi mezőbe.</string>
     <string name="verification_code_missing_description">A kód várakozási ideje akár 10 perc is lehet, ellenőrizheti a spam mappát is. Ha mindez nem segít, használja az alábbi gombot.</string>
     <string name="verification_code_missing">Nem kaptam meg a hitelesítő kódot</string>
     <string name="resend_verification_code">Kód újraküldése</string>
-    <string name="cloud_email_already_registered">Az e-mail címhez tartozó fiók már regisztrálva van.</string>
-    <string name="cloud_email_not_registered">Ez az e-mail címe nincs regisztrálva az OsmAnd Cloud szolgáltatásban</string>
+    <string name="cloud_email_already_registered">Az e-mail-címhez tartozó fiók már regisztrálva van.</string>
+    <string name="cloud_email_not_registered">Ez az e-mail-címe nincs regisztrálva az OsmAnd Cloud szolgáltatásban</string>
     <string name="enter_verification_code">Írja be a négy számjegyű kódot</string>
-    <string name="verify_email_address">E-mail cím hitelesítése</string>
-    <string name="osmand_cloud_login_descr">Kérjük, írja be a regisztrációhoz használt e-mail címet. A következő lépéshez ide küldünk Önnek egy egyszer használatos jelszót.</string>
-    <string name="osmand_cloud_create_account_descr">Kérjük, adja meg e-mail címét, amelyhez minden adata kapcsolódni fog.
+    <string name="verify_email_address">E-mail-cím hitelesítése</string>
+    <string name="osmand_cloud_login_descr">Kérjük, írja be a regisztrációhoz használt e-mail-címet. A következő lépéshez ide küldünk Önnek egy egyszer használatos jelszót.</string>
+    <string name="osmand_cloud_create_account_descr">Kérjük, adja meg e-mail-címét, amelyhez minden adata kapcsolódni fog.
 \nErre az e-mail címre küldünk egy ellenőrző kódot.</string>
     <string name="osmand_cloud_help_descr">Segítségre van szüksége\? Lépjen velünk kapcsolatba itt: %1$s</string>
     <string name="restore_from_file">Visszaállítás fájlból</string>
@@ -4121,4 +4121,5 @@
     <string name="duration_ago">Ennyi idővel ezelőtt: %1$s</string>
     <string name="last_backup">Legutóbbi biztonsági mentés</string>
     <string name="backup_and_restore">Biztonsági mentés és visszaállítás</string>
+    <string name="select_nav_profile_dialog_message">A „Navigáció típusa” az útvonalak megtervezését szabályozza. Választhat offline és online útvonaltervezők között.</string>
 </resources>

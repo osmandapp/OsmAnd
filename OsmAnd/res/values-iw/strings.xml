@@ -4131,4 +4131,5 @@
     <string name="osmand_cloud_create_account_descr">נא למלא את כתובת הדוא״ל שלך, כל הנתונים שלך יקושרו אליה.
 \nאנו נשלח לך קוד אימות לכתובת הדוא״ל הזו.</string>
     <string name="osmand_cloud_login_descr">נא להקליד את כתובת הדוא״ל בה השתמשת להרשמה. אנו נשלח לך תוך זמן קצר ססמה חד־פעמית שנחוצה לשלב הבא.</string>
+    <string name="select_nav_profile_dialog_message">‚סוג הניווט’ מגדיר את המסלולים מחושבים. ניתן לבחור בין מנגנוני ניווט מקוונים ובלתי מקוונים.</string>
 </resources>

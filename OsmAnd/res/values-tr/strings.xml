@@ -4129,4 +4129,5 @@
     <string name="resend_verification_code">Kodu yeniden gönder</string>
     <string name="verification_code_missing">Doğrulama kodunu almadım</string>
     <string name="verification_code_missing_description">Kod için bekleme süresi 10 dakika olabilir, ayrıca spam klasörünüzü de bakabilirsiniz. Yardımcı olmazsa aşağıdaki düğmeyi kullanın.</string>
+    <string name="select_nav_profile_dialog_message">\'Navigasyon türü\' güzergahların nasıl hesaplandığını yönetir. Çevrim dışı ve çevrim içi yönlendirme motorları arasında seçim yapabilirsiniz.</string>
 </resources>
