@@ -4121,4 +4121,5 @@
     <string name="duration_ago">Ennyi idővel ezelőtt: %1$s</string>
     <string name="last_backup">Legutóbbi biztonsági mentés</string>
     <string name="backup_and_restore">Biztonsági mentés és visszaállítás</string>
+    <string name="select_nav_profile_dialog_message">A „Navigáció típusa” az útvonalak megtervezését szabályozza. Választhat offline és online útvonaltervezők között.</string>
 </resources>
