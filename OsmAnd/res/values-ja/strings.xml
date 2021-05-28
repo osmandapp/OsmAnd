@@ -3312,7 +3312,6 @@ POIの更新は利用できません</string>
     <string name="select_color">プロファイルの色</string>
     <string name="edit_profiles_descr">OsmAndの標準プロファイルは削除できませんが、前の画面でそれらを無効にしたり、リストの下の方へ移動させることはできます。</string>
     <string name="edit_profiles">プロファイルの編集</string>
-    <string name="select_nav_profile_dialog_message">\'ナビゲーションタイプ\'は、ルート計算方法の管理をおこないます。</string>
     <string name="profile_appearance">プロファイルの外観</string>
     <string name="choose_icon_color_name">アイコンの色と名前</string>
     <string name="reorder_profiles">プロファイルリストの編集</string>

@@ -133,6 +133,10 @@ public class PoiUiFiltersSettingsItem extends CollectionSettingsItem<PoiUIFilter
 					acceptedTypesDone.put(a, mapItem.getValue());
 				}
 				PoiUIFilter filter = new PoiUIFilter(name, filterId, acceptedTypesDone, app);
+				if (object.has("filterByName")) {
+					String filterByName = object.getString("filterByName");
+					filter.setFilterByName(filterByName);
+				}
 				items.add(filter);
 			}
 		} catch (JSONException e) {
@@ -154,6 +158,7 @@ public class PoiUiFiltersSettingsItem extends CollectionSettingsItem<PoiUIFilter
 					JSONObject jsonObject = new JSONObject();
 					jsonObject.put("name", filter.getName());
 					jsonObject.put("filterId", filter.getFilterId());
+					jsonObject.put("filterByName", filter.getFilterByName());
 
 					Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = filter.getAcceptedTypes();
 					for (PoiCategory category : acceptedTypes.keySet()) {

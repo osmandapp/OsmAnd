@@ -928,7 +928,7 @@
     <string name="favourites_list_activity">Seleziona Preferito</string>
     <string name="local_openstreetmap_act_title">Modifiche OSM</string>
     <string name="download_using_mobile_internet">Non connesso al Wi-Fi. Usare la connessione a Internet attuale per il download\?</string>
-    <string name="cancel_route">Ignora il percorso\?</string>
+    <string name="cancel_route">Abbandonare il percorso\?</string>
     <string name="cancel_navigation">Interrompere la navigazione</string>
     <string name="clear_destination">Cancella la destinazione</string>
     <string name="other_location">Altra</string>
@@ -1398,7 +1398,7 @@
     <string name="shared_string_ellipsis">…</string>
     <string name="shared_string_ok">Ok</string>
     <string name="shared_string_cancel">Annulla</string>
-    <string name="shared_string_dismiss">Ignora</string>
+    <string name="shared_string_dismiss">Abbandona</string>
     <string name="shared_string_yes">Sì</string>
     <string name="shared_string_no">No</string>
     <string name="shared_string_on">Acceso</string>
@@ -3292,7 +3292,6 @@
     <string name="select_color">Seleziona il colore</string>
     <string name="edit_profiles_descr">Non puoi cancellare i profili preimpostati di OsmAnd, ma puoi disabilitarli nello schermo precedente o spostarli in basso.</string>
     <string name="edit_profiles">Modifica il profilo</string>
-    <string name="select_nav_profile_dialog_message">Il \'Tipo di navigazione\' determina il modo in cui vengono calcolati i percorsi.</string>
     <string name="profile_appearance">Aspetto del profilo</string>
     <string name="choose_icon_color_name">Scegli l\'icona, il colore e il nome</string>
     <string name="reorder_profiles">Modifica la lista dei profili</string>
@@ -3327,7 +3326,7 @@
     <string name="logcat_buffer_descr">Controlla e condividi i log dettagliati dell\'applicazione</string>
     <string name="permission_is_required">Un permesso è richiesto per usare questa opzione.</string>
     <string name="rearrange_categories">Sistema categorie</string>
-    <string name="create_custom_categories_list_promo">Cambia l\'ordinamento della lista, nasconde le categoria non necessarie. Puoi importare o esportare tutti i cambiamenti con i profili.</string>
+    <string name="create_custom_categories_list_promo">Cambia l\'ordinamento della lista, nasconde le categorie. Puoi importare o esportare tutti i cambiamenti con i profili.</string>
     <string name="add_new_custom_category_button_promo">Puoi aggiungere una nuova categoria personalizzata selezionandone una o più.</string>
     <string name="shared_string_available">Disponibile</string>
     <string name="add_custom_category">Aggiungi categoria personalizzata</string>
@@ -3448,7 +3447,7 @@
     <string name="shared_string_importing">Importazione in corso</string>
     <string name="items_added">Oggetti aggiunti</string>
     <string name="shared_string_import_complete">Importazione completata</string>
-    <string name="import_complete_description">Tutti i dati sono stati importati da %1$s, puoi utilizzare i bottoni sottostanti per aprire e gestire le parti dell\' applicazione di cui necessiti.</string>
+    <string name="import_complete_description">Tutti i dati sono stati importati da %1$s, puoi utilizzare i bottoni sottostanti per aprire le parti dell\' applicazione di cui necessiti per gestirli.</string>
     <string name="recalculate_route_distance_promo">Il percorso verrà ricalcolato quando la distanza tra il percorso e la propria posizione è maggiore del valore selezionato.</string>
     <string name="select_distance_route_will_recalc">Seleziona le distanza dopo la quale il percorso verrà ricalcolato.</string>
     <string name="recalculate_route_in_deviation">Ricalcola il percorso in caso di deviazione</string>
@@ -3571,15 +3570,15 @@
     <string name="lang_ba">Baschiro</string>
     <string name="lang_jv">Giavanese</string>
     <string name="lang_cv">Ciuvascia</string>
-    <string name="release_3_7">• Nuove mappe dei pendii
+    <string name="release_3_7">• Nuove mappe offline dei Pendii
 \n
-\n • Personalizzazione completa dei Preferiti e dei Waypoint GPX – colori personalizzati, icone, forme
+\n • Personalizzazione completa dei Preferiti e dei Punti GPX intermedi – colori personalizzati, icone, forme
 \n
 \n • Personalizza l\'ordine degli oggetti nel \"Menu contestuale\", \"Configura la mappa\" e \"Pannello\"
 \n
-\n • In Configura la mappa Wikipedia come livello separato, selezione solo le lingue che utilizzi
+\n • In Configura la mappa Wikipedia come livello separato, seleziona solo le lingue che utilizzi
 \n
-\n • Crea filtri personalizzati per i PDI/mappe con totale flessibiità
+\n • Crea filtri personalizzati per i PDI/mappe con totale flessibilità
 \n
 \n • Aggiunta l\'opzione per reimpostare le impostazioni dei profili personalizzati
 \n
@@ -3803,7 +3802,7 @@
     <string name="use_live_routing">Dati OsmAnd Live</string>
     <string name="complex_routing_descr">Calcolo del percorso in due fasi per la navigazione in auto.</string>
     <string name="use_native_pt">Sviluppo Trasporto Pubblico nativo</string>
-    <string name="use_native_pt_desc">Cambia a Java (safe) calcolo del percorso su Trasporto Pubblico</string>
+    <string name="use_native_pt_desc">Cambia a Java (sicuro) calcolo del percorso su Trasporto Pubblico</string>
     <string name="perform_oauth_authorization_description">Entra con OAuth per usare le funzionalità osmedit</string>
     <string name="perform_oauth_authorization">Connettiti via OAuth</string>
     <string name="clear_osm_token">Cancella il token OAuth OpenStreetMap</string>
@@ -4119,5 +4118,5 @@
     <string name="cloud_email_already_registered">Un account con questa mail è già registrato.</string>
     <string name="resend_verification_code">Invia di nuovo il codice</string>
     <string name="verification_code_missing">Non ho ricevuto il codice di verifica</string>
-    <string name="verification_code_missing_description">L\'attesa del codice può essere di minuti, verifica anche la cartella spam. Se non è d\'aiuto utilizza il pulsante sotto.</string>
+    <string name="verification_code_missing_description">L\'attesa del codice può essere di 10 minuti, verifica anche la cartella spam. Se non è d\'aiuto utilizza il pulsante sotto.</string>
 </resources>

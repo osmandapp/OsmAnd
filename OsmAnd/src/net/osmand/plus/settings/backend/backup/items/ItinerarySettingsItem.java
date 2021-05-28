@@ -52,7 +52,7 @@ public class ItinerarySettingsItem extends CollectionSettingsItem<MapMarkersGrou
 		super.init();
 		markersHelper = app.getMapMarkersHelper();
 		dataHelper = markersHelper.getDataHelper();
-		existingItems = new ArrayList<>(markersHelper.getMapMarkersGroups());
+		existingItems = new ArrayList<>(markersHelper.getVisibleMapMarkersGroups());
 	}
 
 	@NonNull

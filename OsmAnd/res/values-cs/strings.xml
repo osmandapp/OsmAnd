@@ -1410,7 +1410,7 @@
     <string name="proxy_host_descr">Zadejte hostname proxy serveru (např. 127.0.0.1).</string>
     <string name="proxy_port_title">Port proxy</string>
     <string name="proxy_port_descr">Zadejte číslo portu proxy serveru (např. 8118).</string>
-    <string name="parking_place">Parkovací místo</string>
+    <string name="parking_place">Místo parkování</string>
     <string name="remove_the_tag">ODSTRANIT ZNAČKU</string>
     <string name="shared_string_disabled">Zakázán</string>
     <string name="shared_string_enabled">Povolen</string>
@@ -1437,7 +1437,7 @@
     <string name="track_segments">Úseky trasy</string>
     <string name="track_points">Body trasy</string>
     <string name="location_on_map">Poloha:\n Šířka %1$s\n Délka %2$s</string>
-    <string name="shared_string_export">Exportovat</string>
+    <string name="shared_string_export">Export</string>
     <string name="shared_string_enable">Povolit</string>
     <string name="shared_string_disable">Zakázat</string>
     <string name="plugin_install_needs_network">Pro instalaci tohoto modulu musíte být online.</string>
@@ -3753,7 +3753,6 @@
     <string name="personal_category_name">Osobní</string>
     <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
-    <string name="select_nav_profile_dialog_message">\'Typ navigace\' ovlivňuje pravidla pro výpočet trasy.</string>
     <string name="edit_profiles">Upravit profily</string>
     <string name="edit_profiles_descr">Základní profily OsmAnd nelze odstranit, ale mohou být vypnuty (na předchozí obrazovce), nebo přesunuty na konec seznamu.</string>
     <string name="shared_string_downloading_formatted">Stahování %s</string>
@@ -3991,7 +3990,7 @@
     <string name="opr_use_dev_url">Použít test.openplacereviews.org</string>
     <string name="login_open_place_reviews">Přihlásit se do OpenPlaceReviews</string>
     <string name="select_segments">Vybrat úseky</string>
-    <string name="select_segments_description">%1$s obsahuje více než jeden úsek, musíte vybrat potřebnou část pro navigaci.</string>
+    <string name="select_segments_description">%1$s obsahuje více než jeden úsek, musíte určit potřebnou část pro navigaci.</string>
     <string name="segments_count">Úsek %1$d</string>
     <string name="activity_type_water_name">Voda</string>
     <string name="activity_type_winter_name">Zima</string>
@@ -4009,7 +4008,7 @@
     <string name="temporary_conditional_routing_descr">Použít omezení, která jsou nyní aktivní na mapě</string>
     <string name="routing_attr_short_way_description">Optimalizovaná kratší trasa (úspora energie)</string>
     <string name="routing_attr_driving_style_description">Vyberte účel řízení pro získání kratší, rychlejší nebo bezpečnější trasy</string>
-    <string name="snap_to_road_descr">Ikona aktuální polohy bude zachycena na aktuální navigační trasu.</string>
+    <string name="snap_to_road_descr">Ikona aktuální polohy bude přichycena k aktuální navigační trase</string>
     <string name="map_orientation_threshold_descr">Neotáčet mapu, pokud rychlost je nižší než určitá mez</string>
     <string name="restart">Restartovat</string>
     <string name="shared_strings_all_regions">Všechny oblasti</string>
@@ -4042,7 +4041,7 @@
     <string name="track_has_no_altitude">Stopa neobsahuje údaje o nadmořské výšce.</string>
     <string name="track_has_no_speed">Stopa neobsahuje údaje o rychlosti.</string>
     <string name="select_another_colorization">Vyberte prosím jiný typ obarvení.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Skrýt hranice přírodních rezervací, chráněných území a národních parků</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Skrýt hranice přírodních rezervací, chráněných území a národních parků.</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">Hranice přírody</string>
     <string name="trip_recording_logging_interval_info">Interval záznamu nastaví, jak často bude OsmAnd zjišťovat aktuální polohu.</string>
     <string name="trip_recording_save_and_continue">Uložit a pokračovat</string>
@@ -4058,4 +4057,74 @@
     <string name="routing_attr_avoid_low_emission_zone_name">Vyhnout se nízkoemisním zónám</string>
     <string name="search_more">Hledat další…</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
+    <string name="backup_and_restore">Zálohování &amp; obnovení</string>
+    <string name="last_backup">Poslední záloha</string>
+    <string name="duration_ago">před %1$s</string>
+    <string name="osmand_cloud">OsmAnd Cloud</string>
+    <string name="osmand_cloud_authorize_descr">Nikdy již neztraťte své údaje, zálohujte a obnovujte všechna data bez problémů.</string>
+    <string name="local_backup">Lokální záloha</string>
+    <string name="local_backup_descr">Zálohovat do nebo obnovit údaje z lokálního souboru.</string>
+    <string name="backup_into_file">Zálohovat do souboru</string>
+    <string name="restore_from_file">Obnovit ze souboru</string>
+    <string name="osmand_cloud_help_descr">Potřebujete pomoc\? Kontaktujte nás prosím na %1$s</string>
+    <string name="osmand_cloud_create_account_descr">Zadejte prosím svoji emailovou adresu, na kterou budou navázány všechny vaše údaje.
+\nPošleme vám na ni ověřovací kód.</string>
+    <string name="osmand_cloud_login_descr">Zadejte prosím emailovou adresu, kterou jste použili při registraci. Pošleme vám jednorázové heslo potřebné pro další krok.</string>
+    <string name="verify_email_address">Ověřit emailovou adresu</string>
+    <string name="verify_email_address_descr">Poslali jsme ověřovací kód na %1$s, zadejte ho prosím do políčka níže.</string>
+    <string name="enter_verification_code">Zadejte 4-místný kód</string>
+    <string name="cloud_email_not_registered">Tato emailová adresa nebyla registrovaná pro OsmAnd Cloud</string>
+    <string name="cloud_email_already_registered">Účet s touto emailovou adresou je už zaregistrovaný.</string>
+    <string name="resend_verification_code">Poslat kód znovu</string>
+    <string name="verification_code_missing">Neobdržel jsem ověřovací kód</string>
+    <string name="verification_code_missing_description">Čekací doba na kód může být 10 minut, zkontrolujte také složku nevyžádané pošty. Pokud to nepomůže, použijte tlačítko níže.</string>
+    <string name="customize_route_line">Upravit navigační trasu</string>
+    <string name="shared_string_route_line">Navigační trasa</string>
+    <string name="specify_color_for_map_mode">Zadejte barvu pro mapový režim %1$s.</string>
+    <string name="no_purchases">Nemáte žádné nákupy</string>
+    <string name="new_device_account">Nové zařízení / nový účet</string>
+    <string name="contact_support_description">Máte-li libovolnou otázku, kontaktujte nás prosím na %1$s.</string>
+    <string name="empty_purchases_description">Pokud se zde vaše nákupy nezobrazují, klepněte na “%1$s” nebo kontaktujte náš tým podpory.</string>
+    <string name="contact_support">Kontaktovat podporu</string>
+    <string name="troubleshooting">Řešení problémů</string>
+    <string name="troubleshooting_description">Pokud máte problémy s nákupem, následujte prosím tento odkaz.</string>
+    <string name="osmand_live">OsmAnd Live</string>
+    <string name="annual_subscription">Roční předplatné</string>
+    <string name="monthly_subscription">Měsíční předplatné</string>
+    <string name="three_months_subscription">Tříměsíční předplatné</string>
+    <string name="next_billing_date">Datum následující platby: %1$s</string>
+    <string name="osmand_live_cancelled">Zrušeno</string>
+    <string name="renew_subscription">Obnovit předplatné</string>
+    <string name="in_grace_period">V období tolerance</string>
+    <string name="on_hold">Pozastaveno</string>
+    <string name="expired">Expirovalo</string>
+    <string name="release_4_0_beta">• Přidaná možnost stáhnutí vrstevnic v stopách
+\n
+\n• Plánovač trasy: přidané přepínače mezi body a grafy
+\n
+\n• Aktualizace OsmAnd Live přesunuté do \"Stáhnout mapy &gt; Aktualizace\"
+\n
+\n• Stopy je nyní možné vybarvit podle nadmořské výšky, rychlosti nebo sklonu svahu.
+\n
+\n• Přidaná možnost změny vzhledu navigační trasy.
+\n
+\n• Vylepšené okno \"Záznam výletu\"
+\n
+\n</string>
+    <string name="update_all_maps_added">Aktualizovat všechny mapy přidané do %1$s\?</string>
+    <string name="shared_string_feet">stopy</string>
+    <string name="srtm_unit_format">Varianta vrstevnicových jednotek</string>
+    <string name="srtm_download_list_help_message">OsmAnd poskytuje vrstevnicová data v metrech a stopách. Pro změnu formátu budete muset soubor znovu stáhnout.</string>
+    <string name="srtm_download_single_help_message">Zvolte prosím variantu. Pro změnu formátu budete muset soubor znovu stáhnout.</string>
+    <string name="exit_number">Číslo výjezdu</string>
+    <string name="announce_when_exceeded">Hlásit při překročení</string>
+    <string name="user_points">Uživatelské body</string>
+    <string name="output">Výstup</string>
+    <string name="route_line_use_gradient_coloring">Čára trasy je vybarvená podle sklonu svahu.</string>
+    <string name="shared_string_min_height">Min. výška</string>
+    <string name="shared_string_max_height">Max. výška</string>
+    <string name="language_description">Zvolte preferovaný jazyk a typ hlasových pokynů.</string>
+    <string name="tts_description">Převod textu na řeč (TTS) může vyslovovat všechny typy pokynů: odbočení, názvy ulic a bodů zájmu, atd.</string>
+    <string name="tts_title">TTS</string>
+    <string name="recorded_description">Nahraný hlas zní lépe, ale může vyslovovat jen předem zaznamenané fráze: pokyny k odbočení. Neumí vyslovit názvy ulic nebo bodů zájmu.</string>
 </resources>

@@ -1241,7 +1241,7 @@
     <string name="poi_second_hand_no">Pas de biens d\'occasion</string>
     <string name="poi_second_hand_only">Biens d\'occasion uniquement</string>
     <string name="poi_service_parts">Pièces détachées</string>
-    <string name="poi_service_dealer">Distributeur</string>
+    <string name="poi_service_dealer">Vente</string>
     <string name="poi_service_repair">Réparation</string>
     <string name="poi_service_electrical">Réparation de véhicules électriques</string>
     <string name="poi_motorcycle_repair">Atelier de réparation de motos</string>
@@ -3936,4 +3936,20 @@
     <string name="poi_telecom_medium_coaxial">Médium : coaxial</string>
     <string name="poi_telecom_medium_fibre">Médium : fibre</string>
     <string name="poi_telecom_medium_copper">Médium : cuivre</string>
+    <string name="poi_fruit">Fruit</string>
+    <string name="poi_shrub">Buisson</string>
+    <string name="poi_dune">Dune</string>
+    <string name="poi_operator_type_cooperative">Type d\'opérateur : coopérative</string>
+    <string name="poi_operator_type_consortium">Type d\'opérateur : consortium</string>
+    <string name="poi_operator_type_community">Type d\'opérateur : communautaire</string>
+    <string name="poi_operator_type_ngo">Type d\'opérateur : ONG</string>
+    <string name="poi_operator_type_religious">Type d\'opérateur : religieux</string>
+    <string name="poi_operator_type_government">Type d\'opérateur : gouvernemental</string>
+    <string name="poi_operator_type_private">Type d\'opérateur : privé</string>
+    <string name="poi_operator_type_public">Type d\'opérateur : public</string>
+    <string name="poi_windsock">Manche à air</string>
+    <string name="poi_trolley_bay">Baie à chariots</string>
+    <string name="poi_service_vehicle_rental_yes">Location de voitures</string>
+    <string name="poi_planetarium">Planétarium</string>
+    <string name="poi_service_vehicle_inspection_yes">Contrôle technique</string>
 </resources>

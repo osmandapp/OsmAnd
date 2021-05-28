@@ -315,12 +315,14 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 						MapMarkersGroup markersGroup = (MapMarkersGroup) object;
 						if (Algorithms.stringsEqual(markersGroup.getId(), ExportSettingsType.ACTIVE_MARKERS.name())
 								|| Algorithms.stringsEqual(markersGroup.getId(), ExportSettingsType.HISTORY_MARKERS.name())) {
-							int selectedMarkers = ((MapMarkersGroup) object).getMarkers().size();
-							String itemsDescr = app.getString(R.string.shared_string_items);
-							return app.getString(R.string.ltr_or_rtl_combine_via_colon, itemsDescr, selectedMarkers);
+							itemsSize += ((MapMarkersGroup) object).getMarkers().size();
 						}
 					}
 				}
+			}
+			if (itemsSize > 0 && type == ExportSettingsType.ACTIVE_MARKERS) {
+				String itemsDescr = app.getString(R.string.shared_string_items);
+				return app.getString(R.string.ltr_or_rtl_combine_via_colon, itemsDescr, String.valueOf(itemsSize));
 			}
 		}
 		String description;

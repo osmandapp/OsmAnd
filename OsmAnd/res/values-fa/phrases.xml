@@ -1497,4 +1497,7 @@
     <string name="poi_aerodrome_type_military_public">نظامی/عمومی</string>
     <string name="poi_aerodrome_type_military">نظامی</string>
     <string name="poi_books_type">کتاب‌ها</string>
+    <string name="poi_socket">سوکت</string>
+    <string name="poi_socket_type2_output_filter">خروجی نوع 2</string>
+    <string name="poi_socket_chademo_output_filter">خروجی CHAdeMO</string>
 </resources>

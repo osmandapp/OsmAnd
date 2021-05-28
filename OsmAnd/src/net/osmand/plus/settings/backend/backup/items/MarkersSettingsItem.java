@@ -51,7 +51,7 @@ public class MarkersSettingsItem extends CollectionSettingsItem<MapMarker> {
 	protected void init() {
 		super.init();
 		markersHelper = app.getMapMarkersHelper();
-		existingItems = new ArrayList<>(markersHelper.getMapMarkersFromDefaultGroups(false));
+		existingItems = new ArrayList<>(markersHelper.getMapMarkers());
 	}
 
 	@NonNull

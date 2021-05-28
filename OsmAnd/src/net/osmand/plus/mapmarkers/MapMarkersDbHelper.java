@@ -375,8 +375,6 @@ public class MapMarkersDbHelper {
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
-				marker.visitedDate = System.currentTimeMillis();
-
 				db.execSQL("UPDATE " + MARKERS_TABLE_NAME + " SET " +
 						MARKERS_COL_ACTIVE + " = ?, " +
 						MARKERS_COL_VISITED + " = ?, " +

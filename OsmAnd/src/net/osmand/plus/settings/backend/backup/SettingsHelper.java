@@ -232,27 +232,31 @@ public abstract class SettingsHelper {
 				myPlacesItems.put(ExportSettingsType.MULTIMEDIA_NOTES, files);
 			}
 		}
-		List<MapMarker> mapMarkers = app.getMapMarkersHelper().getMapMarkersFromDefaultGroups(false);
+		List<MapMarkersGroup> mapMarkersGroups = new ArrayList<>();
+		List<MapMarker> mapMarkers = app.getMapMarkersHelper().getMapMarkers();
 		if (!mapMarkers.isEmpty()) {
 			String name = app.getString(R.string.map_markers);
 			String groupId = ExportSettingsType.ACTIVE_MARKERS.name();
 			MapMarkersGroup markersGroup = new MapMarkersGroup(groupId, name, ItineraryType.MARKERS);
 			markersGroup.setMarkers(mapMarkers);
-			myPlacesItems.put(ExportSettingsType.ACTIVE_MARKERS, Collections.singletonList(markersGroup));
+			mapMarkersGroups.add(markersGroup);
 		}
-		List<MapMarker> markersHistory = app.getMapMarkersHelper().getMapMarkersFromDefaultGroups(true);
+		List<MapMarker> markersHistory = app.getMapMarkersHelper().getMapMarkersHistory();
 		if (!markersHistory.isEmpty()) {
 			String name = app.getString(R.string.shared_string_history);
 			String groupId = ExportSettingsType.HISTORY_MARKERS.name();
 			MapMarkersGroup markersGroup = new MapMarkersGroup(groupId, name, ItineraryType.MARKERS);
 			markersGroup.setMarkers(markersHistory);
-			myPlacesItems.put(ExportSettingsType.HISTORY_MARKERS, Collections.singletonList(markersGroup));
+			mapMarkersGroups.add(markersGroup);
+		}
+		if (!mapMarkersGroups.isEmpty()) {
+			myPlacesItems.put(ExportSettingsType.ACTIVE_MARKERS, mapMarkersGroups);
 		}
 		List<HistoryEntry> historyEntries = SearchHistoryHelper.getInstance(app).getHistoryEntries(false);
 		if (!historyEntries.isEmpty()) {
 			myPlacesItems.put(ExportSettingsType.SEARCH_HISTORY, historyEntries);
 		}
-		List<MapMarkersGroup> markersGroups = app.getMapMarkersHelper().getMapMarkersGroups();
+		List<MapMarkersGroup> markersGroups = app.getMapMarkersHelper().getVisibleMapMarkersGroups();
 		if (!markersGroups.isEmpty()) {
 			myPlacesItems.put(ExportSettingsType.ITINERARY_GROUPS, markersGroups);
 		}
@@ -549,7 +553,6 @@ public abstract class SettingsHelper {
 		List<OpenstreetmapPoint> editsPointList = new ArrayList<>();
 		List<FavoriteGroup> favoriteGroups = new ArrayList<>();
 		List<MapMarkersGroup> markersGroups = new ArrayList<>();
-		List<MapMarkersGroup> markersHistoryGroups = new ArrayList<>();
 		List<HistoryEntry> historyEntries = new ArrayList<>();
 		List<OnlineRoutingEngine> onlineRoutingEngines = new ArrayList<>();
 		List<MapMarkersGroup> itineraryGroups = new ArrayList<>();
@@ -638,7 +641,7 @@ public abstract class SettingsHelper {
 					break;
 				case HISTORY_MARKERS:
 					HistoryMarkersSettingsItem historyMarkersSettingsItem = (HistoryMarkersSettingsItem) item;
-					markersHistoryGroups.add(historyMarkersSettingsItem.getMarkersGroup());
+					markersGroups.add(historyMarkersSettingsItem.getMarkersGroup());
 					break;
 				case SEARCH_HISTORY:
 					SearchHistorySettingsItem searchHistorySettingsItem = (SearchHistorySettingsItem) item;
@@ -710,9 +713,6 @@ public abstract class SettingsHelper {
 		}
 		if (!markersGroups.isEmpty()) {
 			settingsToOperate.put(ExportSettingsType.ACTIVE_MARKERS, markersGroups);
-		}
-		if (!markersHistoryGroups.isEmpty()) {
-			settingsToOperate.put(ExportSettingsType.HISTORY_MARKERS, markersHistoryGroups);
 		}
 		if (!historyEntries.isEmpty()) {
 			settingsToOperate.put(ExportSettingsType.SEARCH_HISTORY, historyEntries);

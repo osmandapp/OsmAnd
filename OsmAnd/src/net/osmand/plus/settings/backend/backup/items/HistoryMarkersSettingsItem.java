@@ -51,7 +51,7 @@ public class HistoryMarkersSettingsItem extends CollectionSettingsItem<MapMarker
 	protected void init() {
 		super.init();
 		markersHelper = app.getMapMarkersHelper();
-		existingItems = new ArrayList<>(markersHelper.getMapMarkersFromDefaultGroups(true));
+		existingItems = new ArrayList<>(markersHelper.getMapMarkersHistory());
 	}
 
 	@NonNull

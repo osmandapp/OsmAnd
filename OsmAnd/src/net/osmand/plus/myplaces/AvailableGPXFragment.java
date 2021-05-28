@@ -820,7 +820,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		} else {
 			app.showToastMessage(R.string.file_can_not_be_moved);
 		}
-  }
+	}
 
 	public void renamedTo(File file) {
 		reloadTracks();

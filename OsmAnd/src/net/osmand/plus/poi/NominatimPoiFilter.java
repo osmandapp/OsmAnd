@@ -38,17 +38,16 @@ public class NominatimPoiFilter extends PoiUIFilter {
 	public NominatimPoiFilter(OsmandApplication application, boolean addressQuery) {
 		super(application);
 		this.addressQuery = addressQuery;
-		this.name =
-				application.getString(R.string.poi_filter_nominatim); //$NON-NLS-1$
-		if(addressQuery) {
+		this.name = application.getString(R.string.poi_filter_nominatim);
+		if (addressQuery) {
 			this.name += " - " + application.getString(R.string.shared_string_address); 
 		} else {
 			this.name += " - " + application.getString(R.string.shared_string_places);
 		}
-		if(addressQuery) {
-			this.distanceToSearchValues = new double[] {500};
+		if (addressQuery) {
+			this.distanceToSearchValues = new double[] {500, 10000};
 		} else {
-			this.distanceToSearchValues = new double[] {1, 2, 5, 10, 20, 50, 100, 200, 500 };
+			this.distanceToSearchValues = new double[] {1, 2, 5, 10, 20, 100, 500, 10000};
 		}
 		this.filterId = FILTER_ID + (addressQuery ? "_address" : "_places");
 	}

@@ -140,11 +140,16 @@ public class WikiArticleHelper {
 						ResultMatcher<Amenity> matcher = new ResultMatcher<Amenity>() {
 							@Override
 							public boolean publish(Amenity amenity) {
-								List<String> allNames = amenity.getAllNames(false);
-								for (String amenityName : allNames) {
-									if (name.equals(amenityName)) {
-										results.add(amenity);
-										break;
+								String localeName = amenity.getName();
+								List<String> otherNames = amenity.getOtherNames(false);
+								if (WikiArticleSearchTask.this.name.equals(localeName)) {
+									results.add(amenity);
+								} else {
+									for (String amenityName : otherNames) {
+										if (WikiArticleSearchTask.this.name.equals(amenityName)) {
+											results.add(amenity);
+											break;
+										}
 									}
 								}
 								return false;

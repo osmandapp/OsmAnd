@@ -484,7 +484,7 @@
     <string name="save_track_interval">Intervalle d\'enregistrement pendant la navigation</string>
     <string name="save_track_to_gpx_descrp">Une trace GPX est enregistrée automatiquement dans le dossier des traces pendant l\'itinéraire</string>
     <string name="update_tile">Mettre à jour la carte</string>
-    <string name="reload_tile">Recharger carreau</string>
+    <string name="reload_tile">Actualiser la tuile</string>
     <string name="mark_point">Cible</string>
     <string name="shared_string_add_to_favorites">Ajouter aux favoris</string>
     <string name="use_english_names_descr">Afficher sur la carte les noms locaux ou les noms anglais.</string>
@@ -536,7 +536,7 @@
     <string name="search_address_building">Numéro</string>
     <string name="search_address_building_option">Numéro</string>
     <string name="search_address_street_option">Intersection</string>
-    <string name="context_menu_item_update_map">Mettre à jour la carte</string>
+    <string name="context_menu_item_update_map">Mettre à jour</string>
     <string name="context_menu_item_create_poi">Créer un point d\'intérêt</string>
     <string name="shared_string_yes">Oui</string>
     <string name="shared_string_cancel">Annuler</string>
@@ -2917,7 +2917,7 @@
     <string name="public_transport_try_change_settings">Essayez de modifier les paramètres.</string>
     <string name="public_transport_calc_pedestrian">Calculer l\'itinéraire piéton</string>
     <string name="public_transport_type">Type de transport</string>
-    <string name="searching_gps"></string>
+    <string name="searching_gps">Recherche des satellites</string>
     <string name="coordinates_widget">Gadget de coordonnées</string>
     <string name="shared_string_privacy_policy">Politique de confidentialité</string>
     <string name="help_us_make_osmand_better">Aidez-nous à améliorer OsmAnd</string>
@@ -3271,7 +3271,7 @@
     <string name="added_profiles">Profils ajoutés</string>
     <string name="added_profiles_descr">Profils ajoutés par le greffon</string>
     <string name="shared_string_turn_off">Désactiver</string>
-    <string name="new_plugin_added">Nouveau plugin ajouté</string>
+    <string name="new_plugin_added">Nouveau greffon ajouté</string>
     <string name="join_segments">Joindre les segments</string>
     <string name="add_new_profile_q">Ajouter le profil \'%1$s\' \?</string>
     <string name="save_heading">Inclure la direction</string>
@@ -3291,7 +3291,6 @@
     <string name="select_color">Sélectionnez la couleur</string>
     <string name="edit_profiles_descr">Les profils OsmAnd par défaut ne peuvent pas être supprimés mais vous pouvez les désactiver (depuis l\'écran précédent) ou les déplacer vers le bas.</string>
     <string name="edit_profiles">Modifier les profils</string>
-    <string name="select_nav_profile_dialog_message">Le type de navigation détermine les règles de calcul des itinéraires.</string>
     <string name="profile_appearance">Apparence du profil</string>
     <string name="choose_icon_color_name">Icône, couleur et nom</string>
     <string name="reorder_profiles">Modifiez la liste des profils</string>
@@ -3581,7 +3580,7 @@
 \n
 \n</string>
     <string name="additional_actions_descr">Vous pouvez accéder à ces actions en appuyant sur le bouton \"%1$s\".</string>
-    <string name="quick_action_transport_descr">Appuyez pour afficher ou masquer les transports publics sur la carte.</string>
+    <string name="quick_action_transport_descr">Bouton pour afficher ou masquer les transports publics sur la carte.</string>
     <string name="create_edit_poi">Créer ou modifier un PI</string>
     <string name="parking_positions">Emplacements de stationnement</string>
     <string name="add_edit_favorite">Ajouter ou modifier un favori</string>
@@ -3591,7 +3590,7 @@
     <string name="profiles_for_action_not_found">Ces profils sont introuvables.</string>
     <string name="shared_string_resume">Reprendre</string>
     <string name="shared_string_add_profile">Ajouter un profil</string>
-    <string name="change_application_profile">Modifier le profil de l\'application</string>
+    <string name="change_application_profile">Modifier le profil</string>
     <string name="index_item_world_basemap_detailed">Carte mondiale générale (plus détaillée)</string>
     <string name="unsupported_type_error">Type non pris en charge</string>
     <string name="gpx_parse_error">Le fichier GPX OsmAnd n\'est pas construit correctement. Vous pouvez transmettre ce fichier à l\'équipe support OsmAnd pour investiguer.</string>
@@ -3649,7 +3648,7 @@
     <string name="vessel_height_warning">Vous pouvez définir la hauteur du navire pour éviter les ponts bas. Souvenez-vous que si le pont est mobile, nous utiliserons sa hauteur en position ouverte.</string>
     <string name="vessel_height_limit_description">Définit la hauteur du navire afin d\'éviter les ponts bas. Souvenez-vous que si le pont est mobile, nous utiliserons sa hauteur en position ouverte.</string>
     <string name="vessel_width_limit_description">Définir la largeur du navire pour éviter les ponts étroits</string>
-    <string name="quick_action_showhide_mapillary_descr">Appuyez pour afficher ou masquer la couche Mapillary sur la carte.</string>
+    <string name="quick_action_showhide_mapillary_descr">Bouton pour afficher ou masquer la couche Mapillary sur la carte.</string>
     <string name="speed_cameras_legal_descr">Dans certains pays ou régions, l\'utilisation d\'avertisseurs de radars est interdit par la loi.
 \n
 \nVous devez faire un choix en fonction de la loi de votre pays.
@@ -3708,14 +3707,14 @@
     <string name="route_between_points_whole_track_button_desc">Toute la trace sera recalculée en utilisant le profil sélectionné.</string>
     <string name="route_between_points_next_segment_button_desc">Seul le prochain segment sera recalculé en utilisant le profil sélectionné.</string>
     <string name="route_between_points_warning_desc">Ensuite, sélectionnez le profil de navigation pour détecter les routes autorisées et le seuil de distance afin de déplacer votre trace.</string>
-    <string name="route_between_points_add_track_desc">Sélectionnez le fichier de traces auquel vous souhaitez ajouter un nouveau segment.</string>
+    <string name="route_between_points_add_track_desc">Sélectionnez le fichier de trace auquel vous souhaitez ajouter un nouveau segment.</string>
     <string name="save_as_new_track">Enregistrer comme nouvelle trace</string>
     <string name="reverse_route">Inverser l\'itinéraire</string>
     <string name="whole_track">Trace entière</string>
     <string name="next_segment">Segment suivant</string>
     <string name="threshold_distance">Seuil de distance</string>
     <string name="navigation_profile">Profil de navigation</string>
-    <string name="street_level_imagery">Imagerie des rues</string>
+    <string name="street_level_imagery">Photos des rues</string>
     <string name="plan_route_exit_dialog_descr">Souhaitez-vous vraiment ignorer toutes les modifications apportées à cet itinéraire \?</string>
     <string name="in_case_of_reverse_direction">Si inversion du sens</string>
     <string name="pass_whole_track_descr">Point de la trace vers lequel naviguer</string>
@@ -3781,7 +3780,7 @@
     <string name="plan_route_trim_after">Couper après</string>
     <string name="plan_route_change_route_type_before">Modifier le type d’itinéraire avant</string>
     <string name="plan_route_change_route_type_after">Modifier le type d’itinéraire après</string>
-    <string name="simplified_track_description">Seule la ligne de l\'itinéraire sera sauvegardée, les points de passage seront supprimés.</string>
+    <string name="simplified_track_description">Seule la ligne d\'itinéraire sera enregistrée, les points de passage seront supprimés.</string>
     <string name="shared_string_redo">Rétablir</string>
     <string name="sort_last_modified">Récents</string>
     <string name="sort_name_descending">Nom : Z – A</string>
@@ -4001,7 +4000,7 @@
     <string name="map_orientation_threshold_descr">Ne pas pivoter la carte si la vitesse est inférieure à un seuil</string>
     <string name="on_pause">En pause</string>
     <string name="app_restart_required">Un redémarrage de l\'application est nécessaire pour appliquer certains paramètres.</string>
-    <string name="routing_attr_height_obstacles_description">L\'itinéraire pourrait éviter les fortes montées.</string>
+    <string name="routing_attr_height_obstacles_description">L\'itinéraire pourrait éviter les fortes pentes.</string>
     <string name="map_widget_distance_by_tap">Distance par appui</string>
     <string name="latest_openstreetmap_update">Dernière mise à jour d\'OpenStreetMap disponible :</string>
     <string name="updated">Mis à jour : %s</string>
@@ -4032,7 +4031,7 @@
     <string name="rendering_attr_noNatureReserveBoundaries_name">Limites naturelles</string>
     <string name="select_segments_description">%1$s contient plusieurs segments, vous devez sélectionner un tronçon pour la navigation.</string>
     <string name="routing_attr_driving_style_description">Sélectionnez un mode de conduite pour calculer l\'itinéraire le plus court, le plus rapide ou le plus sûr.</string>
-    <string name="quick_action_coordinates_widget_descr">Appuyez pour afficher ou masquer le gadget Coordonnées sur la carte.</string>
+    <string name="quick_action_coordinates_widget_descr">Bouton pour afficher ou masquer le gadget Coordonnées sur la carte.</string>
     <string name="snap_to_road_descr">L’icône de positionnement se déplacera sur le trajet en cours.</string>
     <string name="select_another_colorization">Veuillez sélectionner un autre type de coloration.</string>
     <string name="trip_recording_logging_interval_info">L\'intervalle d’enregistrement définit la fréquence à laquelle OsmAnd interrogera les données de localisation.</string>
@@ -4105,7 +4104,7 @@
     <string name="local_backup">Sauvegarde locale</string>
     <string name="local_backup_descr">Sauvegarder ou restaurer des données à partir d\'un fichier local.</string>
     <string name="restore_from_file">Restaurer à partir d\'un fichier</string>
-    <string name="osmand_cloud_help_descr">Besoin d\'aide\? Contactez-nous sur %1$s.</string>
+    <string name="osmand_cloud_help_descr">Besoin d\'aide \? Contactez-nous %1$s.</string>
     <string name="verify_email_address">Vérifier l’adresse e-mail</string>
     <string name="verify_email_address_descr">Nous avons envoyé un code de vérification à %1$s, veuillez le saisir dans le champ ci-dessous.</string>
     <string name="enter_verification_code">Entrez le code à 4 chiffres</string>
@@ -4117,5 +4116,7 @@
 \nLe code de vérification vous sera envoyé à cette adresse.</string>
     <string name="osmand_cloud_login_descr">Veuillez saisir l\'adresse email utilisée à l\'inscription. A l\'étape suivante, vous recevrez un mot de passe à usage unique.</string>
     <string name="cloud_email_not_registered">Cet email n\'est pas enregistré sur OsmAnd Cloud</string>
-    <string name="backup_into_file">Fichier de sauvegarde</string>
+    <string name="backup_into_file">Sauvegarder dans un fichier</string>
+    <string name="verification_code_missing_description">Le délai maximum d\'envoi du code est de 10 minutes. Pensez à vérifier votre dossier \'Pourriel\' sinon utilisez le bouton ci-dessous.</string>
+    <string name="select_nav_profile_dialog_message">Le \"type de navigation\" détermine la façon dont les itinéraires sont calculés. Vous pouvez sélectionner un moteur de routage soit hors-ligne soit en ligne.</string>
 </resources>

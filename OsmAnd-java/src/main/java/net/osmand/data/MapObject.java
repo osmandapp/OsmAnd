@@ -108,20 +108,11 @@ public abstract class MapObject implements Comparable<MapObject> {
 		return mp;
 	}
 
-	public List<String> getAllNames() {
-		List<String> l = new ArrayList<String>();
-		if (!Algorithms.isEmpty(enName)) {
-			l.add(unzipContent(enName));
-		}
-		if (names != null) {
-			for (String nm : names.values()) {
-				l.add(unzipContent(nm));
-			}
-		}
-		return l;
+	public List<String> getOtherNames() {
+		return getOtherNames(false);
 	}
 	
-	public List<String> getAllNames(boolean transliterate) {
+	public List<String> getOtherNames(boolean transliterate) {
 		List<String> l = new ArrayList<String>();
 		String enName = getEnName(transliterate); 
 		if (!Algorithms.isEmpty(enName)) {
