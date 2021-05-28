@@ -63,8 +63,8 @@ import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.monitoring.TripRecordingBottomSheet;
 import net.osmand.plus.monitoring.TripRecordingStartingBottomSheet;
 import net.osmand.plus.osmedit.dialogs.DismissRouteBottomSheetFragment;
-import net.osmand.plus.profiles.ProfileDataObject;
-import net.osmand.plus.profiles.ProfileDataUtils;
+import net.osmand.plus.profiles.dto.ProfileDataObject;
+import net.osmand.plus.profiles.dto.RoutingDataUtils;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.WaypointsFragment;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
@@ -738,7 +738,7 @@ public class MapActivityActions implements DialogProvider {
 
 		String modeDescription;
 
-		Map<String, ProfileDataObject> profilesObjects = ProfileDataUtils.getRoutingProfiles(app);
+		Map<String, ProfileDataObject> profilesObjects = RoutingDataUtils.getRoutingProfiles(app);
 		for (final ApplicationMode appMode : activeModes) {
 			if (appMode.isCustomProfile()) {
 				modeDescription = getProfileDescription(app, appMode, profilesObjects, getString(R.string.profile_type_user_string));
@@ -1051,7 +1051,7 @@ public class MapActivityActions implements DialogProvider {
 		//switch profile button
 		ApplicationMode currentMode = app.getSettings().APPLICATION_MODE.get();
 		String modeDescription;
-		Map<String, ProfileDataObject> profilesObjects = ProfileDataUtils.getRoutingProfiles(app);
+		Map<String, ProfileDataObject> profilesObjects = RoutingDataUtils.getRoutingProfiles(app);
 		if (currentMode.isCustomProfile()) {
 			modeDescription = getProfileDescription(app, currentMode, profilesObjects, getString(R.string.profile_type_user_string));
 		} else {

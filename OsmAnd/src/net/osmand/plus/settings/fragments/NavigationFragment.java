@@ -10,17 +10,16 @@ import androidx.preference.Preference;
 import androidx.preference.SwitchPreferenceCompat;
 
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
-import net.osmand.plus.profiles.ProfileDataObject;
-import net.osmand.plus.profiles.ProfileDataUtils;
+import net.osmand.plus.profiles.dto.ProfileDataObject;
 import net.osmand.plus.profiles.SelectNavProfileBottomSheet;
+import net.osmand.plus.profiles.dto.RoutingDataUtils;
 import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet;
 import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet.DialogMode;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.profiles.RoutingProfileDataObject.RoutingProfilesResources;
-import net.osmand.plus.profiles.SelectProfileBottomSheet;
+import net.osmand.plus.profiles.dto.RoutingDataObject.RoutingProfilesResources;
 import net.osmand.plus.profiles.SelectProfileBottomSheet.OnSelectProfileCallback;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.util.Algorithms;
@@ -134,7 +133,7 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 	}
 
 	private void updateRoutingProfilesDataObjects() {
-		routingProfileDataObjects = ProfileDataUtils.getRoutingProfiles(app);
+		routingProfileDataObjects = RoutingDataUtils.getRoutingProfiles(app);
 	}
 
 	void updateRoutingProfile(String profileKey) {

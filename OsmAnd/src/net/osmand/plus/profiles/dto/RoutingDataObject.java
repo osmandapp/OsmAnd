@@ -1,4 +1,4 @@
-package net.osmand.plus.profiles;
+package net.osmand.plus.profiles.dto;
 
 import net.osmand.plus.R;
 
@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class RoutingProfileDataObject extends ProfileDataObject {
+public class RoutingDataObject extends ProfileDataObject {
 
 	private String fileName;
 
-	public RoutingProfileDataObject(String stringKey, String name, String descr,  int iconRes, boolean isSelected, String fileName) {
+	public RoutingDataObject(String stringKey, String name, String descr, int iconRes, boolean isSelected, String fileName) {
 		super(name, descr, stringKey, iconRes, isSelected, null, null);
 		this.fileName = fileName;
 	}

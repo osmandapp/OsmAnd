@@ -22,7 +22,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.development.TestBackupActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.profiles.ProfileDataUtils;
+import net.osmand.plus.profiles.dto.ProfileDataUtils;
 import net.osmand.plus.profiles.SelectBaseProfileBottomSheet;
 import net.osmand.plus.profiles.SelectProfileBottomSheet.OnSelectProfileCallback;
 import net.osmand.plus.settings.backend.ApplicationMode;

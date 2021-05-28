@@ -1,7 +1,6 @@
-package net.osmand.plus.profiles;
+package net.osmand.plus.profiles.dto;
 
 import androidx.annotation.ColorInt;
-import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 
 
