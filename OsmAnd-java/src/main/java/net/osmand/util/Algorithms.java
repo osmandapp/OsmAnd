@@ -187,7 +187,10 @@ public class Algorithms {
 	}
 
 	public static String getFileExtension(File f) {
-		String name = f.getName();
+		return getFileNameExtension(f.getName());
+	}
+
+	public static String getFileNameExtension(String name) {
 		int i = name.lastIndexOf(".");
 		return name.substring(i + 1);
 	}

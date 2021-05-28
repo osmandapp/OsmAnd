@@ -41,7 +41,7 @@ public class BackupTask {
 	private final BackupInfo backupInfo;
 	private Map<File, String> uploadErrors;
 	private Map<File, String> downloadErrors;
-	private Map<UserFile, String> deleteErrors;
+	private Map<RemoteFile, String> deleteErrors;
 	private String error;
 
 	private final TaskType[] backupTasks = {TaskType.UPLOAD_FILES, TaskType.DELETE_FILES};
@@ -58,7 +58,7 @@ public class BackupTask {
 	public interface OnBackupListener {
 		void onBackupDone(@Nullable Map<File, String> uploadErrors,
 						  @Nullable Map<File, String> downloadErrors,
-						  @Nullable Map<UserFile, String> deleteErrors, @Nullable String error);
+						  @Nullable Map<RemoteFile, String> deleteErrors, @Nullable String error);
 	}
 
 	public BackupTask(@NonNull BackupInfo backupInfo, @NonNull Context context, @Nullable OnBackupListener listener) {
@@ -81,7 +81,7 @@ public class BackupTask {
 		return downloadErrors;
 	}
 
-	public Map<UserFile, String> getDeleteErrors() {
+	public Map<RemoteFile, String> getDeleteErrors() {
 		return deleteErrors;
 	}
 
@@ -204,25 +204,25 @@ public class BackupTask {
 		File favoritesFile = app.getFavorites().getExternalFile();
 		String favoritesFileName = favoritesFile.getName();
 		File tempFavoritesFile = null;
-		final Map<File, UserFile> filesMap = new HashMap<>();
-		for (UserFile userFile : backupInfo.filesToDownload) {
+		final Map<File, RemoteFile> filesMap = new HashMap<>();
+		for (RemoteFile remoteFile : backupInfo.filesToDownload) {
 			File file;
-			String fileName = userFile.getName();
+			String fileName = remoteFile.getName();
 			if (favoritesFileName.equals(fileName)) {
 				file = new File(app.getAppPath(TEMP_DIR), fileName);
 				tempFavoritesFile = file;
 			} else {
 				file = new File(app.getAppPath(GPX_INDEX_DIR), fileName);
 			}
-			filesMap.put(file, userFile);
+			filesMap.put(file, remoteFile);
 		}
 		final File finalTempFavoritesFile = tempFavoritesFile;
 		try {
 			backupHelper.downloadFiles(filesMap, new OnDownloadFileListener() {
 				@Override
-				public void onFileDownloadProgress(@NonNull UserFile userFile, int progress) {
+				public void onFileDownloadProgress(@NonNull RemoteFile remoteFile, int progress) {
 					if (progress == 0) {
-						onTaskProgressUpdate(new File(userFile.getName()).getName(), userFile.getFilesize() / 1024);
+						onTaskProgressUpdate(new File(remoteFile.getName()).getName(), remoteFile.getFilesize() / 1024);
 					} else {
 						onTaskProgressUpdate(progress);
 					}
@@ -235,8 +235,8 @@ public class BackupTask {
 
 				@Override
 				public void onFileDownloadedAsync(@NonNull File file) {
-					UserFile userFile = filesMap.get(file);
-					long userFileTime = userFile.getClienttimems();
+					RemoteFile remoteFile = filesMap.get(file);
+					long userFileTime = remoteFile.getClienttimems();
 					if (file.equals(finalTempFavoritesFile)) {
 						GPXFile gpxFile = GPXUtilities.loadGPXFile(finalTempFavoritesFile);
 						FavoritesImportTask.mergeFavorites(app, gpxFile, "", false);
@@ -269,12 +269,12 @@ public class BackupTask {
 		try {
 			backupHelper.deleteFiles(backupInfo.filesToDelete, new OnDeleteFilesListener() {
 				@Override
-				public void onFileDeleteProgress(@NonNull UserFile userFile) {
-					onTaskProgressUpdate(userFile.getName());
+				public void onFileDeleteProgress(@NonNull RemoteFile remoteFile) {
+					onTaskProgressUpdate(remoteFile.getName());
 				}
 
 				@Override
-				public void onFilesDeleteDone(@NonNull Map<UserFile, String> errors) {
+				public void onFilesDeleteDone(@NonNull Map<RemoteFile, String> errors) {
 					deleteErrors = errors;
 					onTaskFinished(TaskType.DELETE_FILES);
 				}

@@ -1,17 +1,12 @@
 package net.osmand.plus.settings.backend.backup;
 
-import android.annotation.SuppressLint;
-import android.os.AsyncTask;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.AndroidUtils;
 import net.osmand.Collator;
 import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
-import net.osmand.StateChangedListener;
 import net.osmand.data.LatLon;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
@@ -46,14 +41,29 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
 import net.osmand.plus.settings.backend.ExportSettingsCategory;
 import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.backup.items.AvoidRoadsSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.FavoritesSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.GlobalSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.GpxSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.HistoryMarkersSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.ItinerarySettingsItem;
+import net.osmand.plus.settings.backend.backup.items.MapSourcesSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.MarkersSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.OnlineRoutingSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.OsmEditsSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.OsmNotesSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.PoiUiFiltersSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.QuickActionsSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.SearchHistorySettingsItem;
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.fragments.SettingsCategoryItems;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
-import org.json.JSONException;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -65,34 +75,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static net.osmand.IndexConstants.OSMAND_SETTINGS_FILE_EXT;
 import static net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
-import static net.osmand.plus.settings.backend.backup.FileSettingsItem.FileSubtype;
+import static net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 
-/*
-	Usage:
-
-	SettingsHelper helper = app.getSettingsHelper();
-	File file = new File(app.getAppPath(null), "settings.zip");
-
-	List<SettingsItem> items = new ArrayList<>();
-	items.add(new GlobalSettingsItem(app.getSettings()));
-	items.add(new ProfileSettingsItem(app.getSettings(), ApplicationMode.DEFAULT));
-	items.add(new ProfileSettingsItem(app.getSettings(), ApplicationMode.CAR));
-	items.add(new ProfileSettingsItem(app.getSettings(), ApplicationMode.PEDESTRIAN));
-	items.add(new ProfileSettingsItem(app.getSettings(), ApplicationMode.BICYCLE));
-	items.add(new FileSettingsItem(app, new File(app.getAppPath(GPX_INDEX_DIR), "Day 2.gpx")));
-	items.add(new FileSettingsItem(app, new File(app.getAppPath(GPX_INDEX_DIR), "Day 3.gpx")));
-	items.add(new FileSettingsItem(app, new File(app.getAppPath(RENDERERS_DIR), "default.render.xml")));
-	items.add(new DataSettingsItem(new byte[] {'t', 'e', 's', 't', '1'}, "data1"));
-	items.add(new DataSettingsItem(new byte[] {'t', 'e', 's', 't', '2'}, "data2"));
-
-	helper.exportSettings(file, items);
-
-	helper.importSettings(file);
- */
-
-public class SettingsHelper {
+public abstract class SettingsHelper {
 
 	public static final int VERSION = 1;
 
@@ -104,29 +90,16 @@ public class SettingsHelper {
 
 	public static final int BUFFER = 1024;
 
-	protected static final Log LOG = PlatformUtil.getLog(SettingsHelper.class);
+	public static final Log LOG = PlatformUtil.getLog(SettingsHelper.class);
 
-	private OsmandApplication app;
-
-	private ImportAsyncTask importTask;
-	private Map<File, ExportAsyncTask> exportAsyncTasks = new HashMap<>();
-
-	public interface SettingsImportListener {
-		void onSettingsImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> items);
-	}
-
-	public interface SettingsCollectListener {
-		void onSettingsCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items);
-	}
+	private final OsmandApplication app;
 
 	public interface CheckDuplicatesListener {
 		void onDuplicatesChecked(@NonNull List<Object> duplicates, List<SettingsItem> items);
 	}
 
-	public interface SettingsExportListener {
-		void onSettingsExportFinished(@NonNull File file, boolean succeed);
-
-		void onSettingsExportProgressUpdate(int value);
+	public interface ExportProgressListener {
+		void updateProgress(int value);
 	}
 
 	public enum ImportType {
@@ -139,355 +112,8 @@ public class SettingsHelper {
 		this.app = app;
 	}
 
-	@Nullable
-	public ImportAsyncTask getImportTask() {
-		return importTask;
-	}
-
-	@Nullable
-	public ImportType getImportTaskType() {
-		ImportAsyncTask importTask = this.importTask;
-		return importTask != null ? importTask.getImportType() : null;
-	}
-
-	public boolean isImportDone() {
-		ImportAsyncTask importTask = this.importTask;
-		return importTask == null || importTask.isImportDone();
-	}
-
-	public boolean cancelExportForFile(File file) {
-		ExportAsyncTask exportTask = exportAsyncTasks.get(file);
-		if (exportTask != null && (exportTask.getStatus() == AsyncTask.Status.RUNNING)) {
-			return exportTask.cancel(true);
-		}
-		return false;
-	}
-
-	public boolean isFileExporting(File file) {
-		return exportAsyncTasks.containsKey(file);
-	}
-
-	public void updateExportListener(File file, SettingsExportListener listener) {
-		ExportAsyncTask exportAsyncTask = exportAsyncTasks.get(file);
-		if (exportAsyncTask != null) {
-			exportAsyncTask.listener = listener;
-		}
-	}
-
-	private void finishImport(@Nullable SettingsImportListener listener, boolean success, @NonNull List<SettingsItem> items, boolean needRestart) {
-		importTask = null;
-		List<String> warnings = new ArrayList<>();
-		for (SettingsItem item : items) {
-			warnings.addAll(item.getWarnings());
-		}
-		if (!warnings.isEmpty()) {
-			app.showToastMessage(AndroidUtils.formatWarnings(warnings).toString());
-		}
-		if (listener != null) {
-			listener.onSettingsImportFinished(success, needRestart, items);
-		}
-	}
-
-	@SuppressLint("StaticFieldLeak")
-	private class ImportItemsAsyncTask extends AsyncTask<Void, Void, Boolean> {
-
-		private final SettingsImporter importer;
-		private final File file;
-		private final SettingsImportListener listener;
-		private final List<SettingsItem> items;
-		private final StateChangedListener<String> localeListener;
-		private boolean needRestart = false;
-
-		ImportItemsAsyncTask(@NonNull File file,
-							 @Nullable SettingsImportListener listener,
-							 @NonNull List<SettingsItem> items) {
-			importer = new SettingsImporter(app);
-			this.file = file;
-			this.listener = listener;
-			this.items = items;
-			localeListener = new StateChangedListener<String>() {
-				@Override
-				public void stateChanged(String change) {
-					needRestart = true;
-				}
-			};
-		}
-
-		@Override
-		protected void onPreExecute() {
-			app.getSettings().PREFERRED_LOCALE.addListener(localeListener);
-		}
-
-		@Override
-		protected Boolean doInBackground(Void... voids) {
-			try {
-				importer.importItems(file, items);
-				return true;
-			} catch (IllegalArgumentException e) {
-				LOG.error("Failed to import items from: " + file.getName(), e);
-			} catch (IOException e) {
-				LOG.error("Failed to import items from: " + file.getName(), e);
-			}
-			return false;
-		}
-
-		@Override
-		protected void onPostExecute(Boolean success) {
-			app.getSettings().PREFERRED_LOCALE.removeListener(localeListener);
-			finishImport(listener, success, items, needRestart);
-		}
-	}
-
-	public interface ExportProgressListener {
-		void updateProgress(int value);
-	}
-
-	@SuppressLint("StaticFieldLeak")
-	public class ExportAsyncTask extends AsyncTask<Void, Integer, Boolean> {
-
-		private File file;
-		private SettingsExporter exporter;
-		private SettingsExportListener listener;
-
-		ExportAsyncTask(@NonNull File settingsFile,
-						@Nullable SettingsExportListener listener,
-						@NonNull List<SettingsItem> items, boolean exportItemsFiles) {
-			this.file = settingsFile;
-			this.listener = listener;
-			this.exporter = new SettingsExporter(getProgressListener(), exportItemsFiles);
-			for (SettingsItem item : items) {
-				exporter.addSettingsItem(item);
-			}
-		}
-
-		@Override
-		protected Boolean doInBackground(Void... voids) {
-			try {
-				exporter.exportSettings(file);
-				return true;
-			} catch (JSONException e) {
-				LOG.error("Failed to export items to: " + file.getName(), e);
-			} catch (IOException e) {
-				LOG.error("Failed to export items to: " + file.getName(), e);
-			}
-			return false;
-		}
-
-		@Override
-		protected void onProgressUpdate(Integer... values) {
-			if (listener != null) {
-				listener.onSettingsExportProgressUpdate(values[0]);
-			}
-		}
-
-		@Override
-		protected void onPostExecute(Boolean success) {
-			exportAsyncTasks.remove(file);
-			if (listener != null) {
-				listener.onSettingsExportFinished(file, success);
-			}
-		}
-
-		@Override
-		protected void onCancelled() {
-			Algorithms.removeAllFiles(file);
-		}
-
-		private ExportProgressListener getProgressListener() {
-			return new ExportProgressListener() {
-				@Override
-				public void updateProgress(int value) {
-					exporter.setCancelled(isCancelled());
-					publishProgress(value);
-				}
-			};
-		}
-	}
-
-	@SuppressLint("StaticFieldLeak")
-	public class ImportAsyncTask extends AsyncTask<Void, Void, List<SettingsItem>> {
-
-		private File file;
-		private String latestChanges;
-		private int version;
-
-		private SettingsImportListener importListener;
-		private SettingsCollectListener collectListener;
-		private CheckDuplicatesListener duplicatesListener;
-		private SettingsImporter importer;
-
-		private List<SettingsItem> items = new ArrayList<>();
-		private List<SettingsItem> selectedItems = new ArrayList<>();
-		private List<Object> duplicates;
-
-		private ImportType importType;
-		private boolean importDone;
-
-		ImportAsyncTask(@NonNull File file, String latestChanges, int version, @Nullable SettingsCollectListener collectListener) {
-			this.file = file;
-			this.collectListener = collectListener;
-			this.latestChanges = latestChanges;
-			this.version = version;
-			importer = new SettingsImporter(app);
-			importType = ImportType.COLLECT;
-		}
-
-		ImportAsyncTask(@NonNull File file, @NonNull List<SettingsItem> items, String latestChanges, int version, @Nullable SettingsImportListener importListener) {
-			this.file = file;
-			this.importListener = importListener;
-			this.items = items;
-			this.latestChanges = latestChanges;
-			this.version = version;
-			importer = new SettingsImporter(app);
-			importType = ImportType.IMPORT;
-		}
-
-		ImportAsyncTask(@NonNull File file, @NonNull List<SettingsItem> items, @NonNull List<SettingsItem> selectedItems, @Nullable CheckDuplicatesListener duplicatesListener) {
-			this.file = file;
-			this.items = items;
-			this.duplicatesListener = duplicatesListener;
-			this.selectedItems = selectedItems;
-			importer = new SettingsImporter(app);
-			importType = ImportType.CHECK_DUPLICATES;
-		}
-
-		@Override
-		protected void onPreExecute() {
-			ImportAsyncTask importTask = SettingsHelper.this.importTask;
-			if (importTask != null && !importTask.importDone) {
-				finishImport(importListener, false, items, false);
-			}
-			SettingsHelper.this.importTask = this;
-		}
-
-		@Override
-		protected List<SettingsItem> doInBackground(Void... voids) {
-			switch (importType) {
-				case COLLECT:
-					try {
-						return importer.collectItems(file);
-					} catch (IllegalArgumentException e) {
-						LOG.error("Failed to collect items from: " + file.getName(), e);
-					} catch (IOException e) {
-						LOG.error("Failed to collect items from: " + file.getName(), e);
-					}
-					break;
-				case CHECK_DUPLICATES:
-					this.duplicates = getDuplicatesData(selectedItems);
-					return selectedItems;
-				case IMPORT:
-					return items;
-			}
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(@Nullable List<SettingsItem> items) {
-			if (items != null && importType != ImportType.CHECK_DUPLICATES) {
-				this.items = items;
-			} else {
-				selectedItems = items;
-			}
-			switch (importType) {
-				case COLLECT:
-					importDone = true;
-					collectListener.onSettingsCollectFinished(true, false, this.items);
-					break;
-				case CHECK_DUPLICATES:
-					importDone = true;
-					if (duplicatesListener != null) {
-						duplicatesListener.onDuplicatesChecked(duplicates, selectedItems);
-					}
-					break;
-				case IMPORT:
-					if (items != null && items.size() > 0) {
-						for (SettingsItem item : items) {
-							item.apply();
-						}
-						new ImportItemsAsyncTask(file, importListener, items).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-					}
-					break;
-			}
-		}
-
-		public List<SettingsItem> getItems() {
-			return items;
-		}
-
-		public File getFile() {
-			return file;
-		}
-
-		public void setImportListener(SettingsImportListener importListener) {
-			this.importListener = importListener;
-		}
-
-		public void setDuplicatesListener(CheckDuplicatesListener duplicatesListener) {
-			this.duplicatesListener = duplicatesListener;
-		}
-
-		ImportType getImportType() {
-			return importType;
-		}
-
-		boolean isImportDone() {
-			return importDone;
-		}
-
-		public List<Object> getDuplicates() {
-			return duplicates;
-		}
-
-		public List<SettingsItem> getSelectedItems() {
-			return selectedItems;
-		}
-
-		private List<Object> getDuplicatesData(List<SettingsItem> items) {
-			List<Object> duplicateItems = new ArrayList<>();
-			for (SettingsItem item : items) {
-				if (item instanceof ProfileSettingsItem) {
-					if (item.exists()) {
-						duplicateItems.add(((ProfileSettingsItem) item).getModeBean());
-					}
-				} else if (item instanceof CollectionSettingsItem<?>) {
-					CollectionSettingsItem settingsItem = (CollectionSettingsItem) item;
-					List<?> duplicates = settingsItem.processDuplicateItems();
-					if (!duplicates.isEmpty() && settingsItem.shouldShowDuplicates()) {
-						duplicateItems.addAll(duplicates);
-					}
-				} else if (item instanceof FileSettingsItem) {
-					if (item.exists()) {
-						duplicateItems.add(((FileSettingsItem) item).getFile());
-					}
-				}
-			}
-			return duplicateItems;
-		}
-	}
-
-	public void collectSettings(@NonNull File settingsFile, String latestChanges, int version,
-								@Nullable SettingsCollectListener listener) {
-		new ImportAsyncTask(settingsFile, latestChanges, version, listener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-	}
-
-	public void checkDuplicates(@NonNull File file, @NonNull List<SettingsItem> items, @NonNull List<SettingsItem> selectedItems, CheckDuplicatesListener listener) {
-		new ImportAsyncTask(file, items, selectedItems, listener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-	}
-
-	public void importSettings(@NonNull File settingsFile, @NonNull List<SettingsItem> items, String latestChanges, int version, @Nullable SettingsImportListener listener) {
-		new ImportAsyncTask(settingsFile, items, latestChanges, version, listener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-	}
-
-	public void exportSettings(@NonNull File fileDir, @NonNull String fileName, @Nullable SettingsExportListener listener, @NonNull List<SettingsItem> items, boolean exportItemsFiles) {
-		File file = new File(fileDir, fileName + OSMAND_SETTINGS_FILE_EXT);
-		ExportAsyncTask exportAsyncTask = new ExportAsyncTask(file, listener, items, exportItemsFiles);
-		exportAsyncTasks.put(file, exportAsyncTask);
-		exportAsyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-	}
-
-	public void exportSettings(@NonNull File fileDir, @NonNull String fileName, @Nullable SettingsExportListener listener,
-							   boolean exportItemsFiles, @NonNull SettingsItem... items) {
-		exportSettings(fileDir, fileName, listener, new ArrayList<>(Arrays.asList(items)), exportItemsFiles);
+	public OsmandApplication getApp() {
+		return app;
 	}
 
 	public List<SettingsItem> getFilteredSettingsItems(List<ExportSettingsType> settingsTypes, boolean addProfiles, boolean export) {
@@ -496,7 +122,7 @@ public class SettingsHelper {
 		typesMap.putAll(getMyPlacesItems());
 		typesMap.putAll(getResourcesItems());
 
-		return getFilteredSettingsItems(typesMap, settingsTypes, Collections.<SettingsItem>emptyList(), export);
+		return getFilteredSettingsItems(typesMap, settingsTypes, Collections.emptyList(), export);
 	}
 
 	public List<SettingsItem> getFilteredSettingsItems(
