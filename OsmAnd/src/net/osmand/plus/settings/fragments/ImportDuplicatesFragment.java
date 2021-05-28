@@ -41,10 +41,10 @@ import net.osmand.plus.osmedit.OsmNotesPoint;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.backup.SettingsHelper;
-import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportAsyncTask;
+import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
+import net.osmand.plus.settings.backend.backup.FileSettingsHelper.SettingsImportListener;
+import net.osmand.plus.settings.backend.backup.ImportFileTask;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportType;
-import net.osmand.plus.settings.backend.backup.SettingsHelper.SettingsImportListener;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.view.ComplexButton;
 
@@ -70,7 +70,7 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment {
 	private ProgressBar progressBar;
 	private CollapsingToolbarLayout toolbarLayout;
 	private TextView description;
-	private SettingsHelper settingsHelper;
+	private FileSettingsHelper settingsHelper;
 
 	public static void showInstance(@NonNull FragmentManager fm, List<? super Object> duplicatesList,
 									List<SettingsItem> settingsItems, File file, Fragment targetFragment) {
@@ -89,9 +89,9 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = requireMyApplication();
-		settingsHelper = app.getSettingsHelper();
+		settingsHelper = app.getFileSettingsHelper();
 		nightMode = !app.getSettings().isLightContent();
-		ImportAsyncTask importTask = settingsHelper.getImportTask();
+		ImportFileTask importTask = settingsHelper.getImportTask();
 		if (importTask != null) {
 			if (settingsItems == null) {
 				settingsItems = importTask.getSelectedItems();

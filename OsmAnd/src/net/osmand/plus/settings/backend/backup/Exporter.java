@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.backend.backup;
 
+import androidx.annotation.Nullable;
+
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ExportProgressListener;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
@@ -17,11 +19,11 @@ public abstract class Exporter {
 
 	private final Map<String, SettingsItem> items;
 	private final Map<String, String> additionalParams;
-	private final ExportProgressListener progressListener;
+	private ExportProgressListener progressListener;
 
 	private boolean cancelled;
 
-	public Exporter(ExportProgressListener progressListener) {
+	public Exporter(@Nullable ExportProgressListener progressListener) {
 		this.progressListener = progressListener;
 		this.items = new LinkedHashMap<>();
 		this.additionalParams = new LinkedHashMap<>();
@@ -38,8 +40,13 @@ public abstract class Exporter {
 		return items;
 	}
 
+	@Nullable
 	public ExportProgressListener getProgressListener() {
 		return progressListener;
+	}
+
+	public void setProgressListener(@Nullable ExportProgressListener progressListener) {
+		this.progressListener = progressListener;
 	}
 
 	public boolean isCancelled() {

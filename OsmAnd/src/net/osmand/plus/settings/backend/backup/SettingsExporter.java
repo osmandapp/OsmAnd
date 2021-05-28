@@ -24,7 +24,8 @@ public class SettingsExporter extends Exporter {
 	private final File file;
 	private final boolean exportItemsFiles;
 
-	public SettingsExporter(@NonNull File file, @Nullable ExportProgressListener progressListener,
+	public SettingsExporter(@NonNull File file,
+							@Nullable ExportProgressListener progressListener,
 							boolean exportItemsFiles) {
 		super(progressListener);
 		this.file = file;
@@ -62,8 +63,9 @@ public class SettingsExporter extends Exporter {
 			@Override
 			public void progress(int deltaWork) {
 				progress[0] += deltaWork;
-				if (getProgressListener() != null) {
-					getProgressListener().updateProgress((int) progress[0] / (1 << 20));
+				ExportProgressListener progressListener = getProgressListener();
+				if (progressListener != null) {
+					progressListener.updateProgress((int) progress[0] / (1 << 10));
 				}
 			}
 		});

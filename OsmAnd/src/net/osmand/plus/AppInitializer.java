@@ -34,6 +34,7 @@ import net.osmand.plus.activities.LocalIndexHelper;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.backup.BackupHelper;
+import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
@@ -62,7 +63,7 @@ import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.backup.SettingsHelper;
+import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.voice.CommandPlayerException;
@@ -474,7 +475,8 @@ public class AppInitializer implements IProgress {
 		app.travelHelper = startupInit(app.travelHelper, TravelHelper.class);
 
 		app.lockHelper = startupInit(new LockHelper(app), LockHelper.class);
-		app.settingsHelper = startupInit(new SettingsHelper(app), SettingsHelper.class);
+		app.fileSettingsHelper = startupInit(new FileSettingsHelper(app), FileSettingsHelper.class);
+		app.networkSettingsHelper = startupInit(new NetworkSettingsHelper(app), NetworkSettingsHelper.class);
 		app.quickActionRegistry = startupInit(new QuickActionRegistry(app.getSettings()), QuickActionRegistry.class);
 		app.osmOAuthHelper = startupInit(new OsmOAuthHelper(app), OsmOAuthHelper.class);
 		app.oprAuthHelper = startupInit(new OprAuthHelper(app), OprAuthHelper.class);

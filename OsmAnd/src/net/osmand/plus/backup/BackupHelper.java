@@ -29,8 +29,6 @@ import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.AbstractProgress;
-import net.osmand.plus.settings.backend.backup.SettingsHelper.ExportProgressListener;
-import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -39,7 +37,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -87,7 +84,6 @@ public class BackupHelper {
 	public static final int SERVER_ERROR_CODE_GZIP_ONLY_SUPPORTED_UPLOAD = 107;
 	public static final int SERVER_ERROR_CODE_SIZE_OF_SUPPORTED_BOX_IS_EXCEEDED = 108;
 
-	private ExportAsyncTask exportAsyncTask;
 	private List<RemoteFile> remoteFiles;
 
 	public interface OnRegisterUserListener {
@@ -136,15 +132,9 @@ public class BackupHelper {
 		void onFilesDownloadDone(@NonNull Map<File, String> errors);
 	}
 
-	public interface BackupExportListener {
-		void onBackupExportFinished(boolean succeed);
-
-		void onBackupExportProgressUpdate(int value);
-	}
-
 	public static class BackupInfo {
 		public List<RemoteFile> filesToDownload = new ArrayList<>();
-		public List<? extends SettingsItem> filesToUpload = new ArrayList<>();
+		public List<LocalFile> filesToUpload = new ArrayList<>();
 		public List<RemoteFile> filesToDelete = new ArrayList<>();
 		public List<Pair<LocalFile, RemoteFile>> filesToMerge = new ArrayList<>();
 	}
@@ -871,61 +861,5 @@ public class BackupHelper {
 			}
 		};
 		task.executeOnExecutor(EXECUTOR);
-	}
-
-	@SuppressLint("StaticFieldLeak")
-	public class ExportAsyncTask extends AsyncTask<Void, Integer, Boolean> {
-
-		private final BackupExporter exporter;
-		private BackupExportListener listener;
-
-		ExportAsyncTask(@NonNull List<SettingsItem> items, @Nullable BackupExportListener listener) {
-			this.listener = listener;
-			this.exporter = new BackupExporter(BackupHelper.this, getProgressListener());
-			for (SettingsItem item : items) {
-				exporter.addSettingsItem(item);
-			}
-		}
-
-		@Override
-		protected void onPreExecute() {
-			exportAsyncTask = this;
-		}
-
-		@Override
-		protected Boolean doInBackground(Void... voids) {
-			try {
-				exporter.export();
-				return true;
-			} catch (IOException e) {
-				LOG.error("Failed to backup items", e);
-			}
-			return false;
-		}
-
-		@Override
-		protected void onProgressUpdate(Integer... values) {
-			if (listener != null) {
-				listener.onBackupExportProgressUpdate(values[0]);
-			}
-		}
-
-		@Override
-		protected void onPostExecute(Boolean success) {
-			exportAsyncTask = null;
-			if (listener != null) {
-				listener.onBackupExportFinished(success);
-			}
-		}
-
-		private ExportProgressListener getProgressListener() {
-			return new ExportProgressListener() {
-				@Override
-				public void updateProgress(int value) {
-					exporter.setCancelled(isCancelled());
-					publishProgress(value);
-				}
-			};
-		}
 	}
 }

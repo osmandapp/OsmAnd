@@ -42,8 +42,8 @@ import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.backup.SettingsHelper;
-import net.osmand.plus.settings.backend.backup.SettingsHelper.SettingsCollectListener;
+import net.osmand.plus.settings.backend.backup.FileSettingsHelper.SettingsCollectListener;
+import net.osmand.plus.settings.backend.backup.FileSettingsHelper.SettingsImportListener;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet.ResetAppModePrefsListener;
@@ -185,7 +185,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 	}
 
 	private void restoreCustomModeFromFile(final File file) {
-		app.getSettingsHelper().collectSettings(file, "", 1, new SettingsCollectListener() {
+		app.getFileSettingsHelper().collectSettings(file, "", 1, new SettingsCollectListener() {
 			@Override
 			public void onSettingsCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items) {
 				if (succeed) {
@@ -199,7 +199,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 	}
 
 	private void importBackupSettingsItems(File file, List<SettingsItem> items) {
-		app.getSettingsHelper().importSettings(file, items, "", 1, new SettingsHelper.SettingsImportListener() {
+		app.getFileSettingsHelper().importSettings(file, items, "", 1, new SettingsImportListener() {
 			@Override
 			public void onSettingsImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> items) {
 				app.showToastMessage(R.string.profile_prefs_reset_successful);

@@ -29,8 +29,9 @@ public class BackupExporter extends Exporter {
 
 			@Override
 			public void onFileUploadProgress(@NonNull String fileName, int progress) {
-				if (getProgressListener() != null) {
-					getProgressListener().updateProgress(progress);
+				ExportProgressListener progressListener = getProgressListener();
+				if (progressListener != null) {
+					progressListener.updateProgress(progress);
 				}
 			}
 

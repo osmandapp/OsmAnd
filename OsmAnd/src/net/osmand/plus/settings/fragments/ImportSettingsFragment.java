@@ -27,9 +27,11 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.download.ReloadIndexesTask;
 import net.osmand.plus.download.ReloadIndexesTask.ReloadIndexesListener;
-import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
+import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
+import net.osmand.plus.settings.backend.backup.FileSettingsHelper.SettingsImportListener;
+import net.osmand.plus.settings.backend.backup.ImportFileTask;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
-import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportAsyncTask;
+import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
 import org.apache.commons.logging.Log;
@@ -47,7 +49,7 @@ public class ImportSettingsFragment extends BaseSettingsListFragment {
 	private static final long MIN_DELAY_TIME_MS = 500;
 
 	private File file;
-	private SettingsHelper settingsHelper;
+	private FileSettingsHelper settingsHelper;
 	private List<SettingsItem> settingsItems;
 
 	private TextView description;
@@ -74,9 +76,9 @@ public class ImportSettingsFragment extends BaseSettingsListFragment {
 			duplicateStartTime = savedInstanceState.getLong(DUPLICATES_START_TIME_KEY);
 		}
 		exportMode = false;
-		settingsHelper = app.getSettingsHelper();
+		settingsHelper = app.getFileSettingsHelper();
 
-		ImportAsyncTask importTask = settingsHelper.getImportTask();
+		ImportFileTask importTask = settingsHelper.getImportTask();
 		if (importTask != null) {
 			if (settingsItems == null) {
 				settingsItems = importTask.getItems();
@@ -152,8 +154,8 @@ public class ImportSettingsFragment extends BaseSettingsListFragment {
 		updateUi(R.string.shared_string_preparing, R.string.checking_for_duplicate_description);
 	}
 
-	public SettingsHelper.SettingsImportListener getImportListener() {
-		return new SettingsHelper.SettingsImportListener() {
+	public SettingsImportListener getImportListener() {
+		return new SettingsImportListener() {
 			@Override
 			public void onSettingsImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> items) {
 				if (succeed) {
