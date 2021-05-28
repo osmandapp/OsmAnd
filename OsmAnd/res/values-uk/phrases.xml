@@ -3963,6 +3963,6 @@
     <string name="poi_dune">Дюна</string>
     <string name="poi_ultralight_aviation">Надлегка авіація</string>
     <string name="poi_climbing_grade_french_min">Найпростіший маршрут (французький клас)</string>
-    <string name="poi_climbing_grade_saxon_min">Найпростіший маршрут (саксонський клас)</string>
+    <string name="poi_climbing_grade_saxon_min">Найпростіший маршрут (саксонська класифікація)</string>
     <string name="poi_climbing_grade_uiaa_min">Найпростіший маршрут (клас UIAA)</string>
 </resources>
