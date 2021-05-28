@@ -4104,4 +4104,32 @@
     <string name="route_line_use_gradient_coloring">קו המסלול ייצבע לפי תלילות המדרון.</string>
     <string name="language_description">נא לבחור את השפה והסוג של ההנחיה הקולית.</string>
     <string name="tts_description">טקסט לדיבור (TTS) יכול לבטא את כל סוגי ההנחיות: שמות רחובות, הוראות סיבוב, שמות נקודות עניין וכו׳.</string>
+    <string name="route_line_use_map_style_width">להשתמש בעובי בררת מחדל של סגנון המפה (%1$s).</string>
+    <string name="route_line_use_map_style_color">להשתמש בצבע בררת מחדל של סגנון המפה (%1$s).</string>
+    <string name="poi_routes">מסלולים</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">להימנע מאזורים עם פליטה נמוכה</string>
+    <string name="routing_attr_avoid_low_emission_zone_name">להימנע מאזורים עם פליטה נמוכה</string>
+    <string name="search_more">לחפש עוד…</string>
+    <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
+    <string name="verify_email_address">אימות כתובת דוא״ל</string>
+    <string name="verify_email_address_descr">שלחנו קוד אימות אל %1$s, נא למלא אותו בשדה שלהלן.</string>
+    <string name="enter_verification_code">נא למלא קוד באורך 4 תווים</string>
+    <string name="cloud_email_not_registered">כתובת דוא״ל זו טרם נרשמה ב־OsmAnd Cloud</string>
+    <string name="cloud_email_already_registered">כבר יש חשבון רשום עם כתובת הדוא״ל הזאת.</string>
+    <string name="resend_verification_code">שליחת הקוד מחדש</string>
+    <string name="verification_code_missing">לא קיבלתי את קוד האימות</string>
+    <string name="verification_code_missing_description">זמן ההמתנה לקוד יכול לארוך עד 10 דקות, כדאי גם לחפש בתיקיית הספאם שלך. אם זה לא עזר, יש להשתמש בכפתור שלהלן.</string>
+    <string name="backup_and_restore">גיבוי ושחזור</string>
+    <string name="last_backup">גיבוי אחרון</string>
+    <string name="duration_ago">לפני %1$s</string>
+    <string name="osmand_cloud">OsmAnd Cloud</string>
+    <string name="osmand_cloud_authorize_descr">הנתונים שלך לעולם לא ילכו לאיבוד, ניתן לגבות ולשחזר את המידע שלך ללא כל קושי.</string>
+    <string name="local_backup">גיבוי מקומי</string>
+    <string name="local_backup_descr">גיבוי ושחזור נתונים מקובץ מקומי.</string>
+    <string name="backup_into_file">גיבוי לקובץ</string>
+    <string name="restore_from_file">שחזור מקובץ</string>
+    <string name="osmand_cloud_help_descr">הסתבכת\? ניתן ליצור אתנו קשר דרך %1$s</string>
+    <string name="osmand_cloud_create_account_descr">נא למלא את כתובת הדוא״ל שלך, כל הנתונים שלך יקושרו אליה.
+\nאנו נשלח לך קוד אימות לכתובת הדוא״ל הזו.</string>
+    <string name="osmand_cloud_login_descr">נא להקליד את כתובת הדוא״ל בה השתמשת להרשמה. אנו נשלח לך תוך זמן קצר ססמה חד־פעמית שנחוצה לשלב הבא.</string>
 </resources>

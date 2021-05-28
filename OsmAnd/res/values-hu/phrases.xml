@@ -3952,4 +3952,12 @@
     <string name="poi_refugee_site">Menekülttábor</string>
     <string name="poi_service_vehicle_inspection_yes">Műszaki vizsgálat</string>
     <string name="poi_trolley_bay">Bevásárlókocsi-tároló</string>
+    <string name="poi_glacier_status_oscillating">Gleccser állapota: ingadozó</string>
+    <string name="poi_glacier_status_marked_retreat">Gleccser állapota: erősen visszahúzódó</string>
+    <string name="poi_glacier_status_retreat">Gleccser állapota: visszahúzódó</string>
+    <string name="poi_glacier_edge_calving_line">Gleccser borjadzási vonala</string>
+    <string name="poi_glacier_edge_grounding_line">Gleccseralap vonala</string>
+    <string name="poi_glacier_debris_cover_scarce">Törmelékborítottság: ritka</string>
+    <string name="poi_glacier_debris_cover_partial">Törmelékborítottság: részleges</string>
+    <string name="poi_glacier_debris_cover_none">Törmelékborítottság: nincs</string>
 </resources>

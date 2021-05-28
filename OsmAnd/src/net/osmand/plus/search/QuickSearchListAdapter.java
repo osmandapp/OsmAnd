@@ -604,9 +604,6 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 				selectedItems.clear();
 			}
 			notifyDataSetChanged();
-			if (selectionListener != null) {
-				selectionListener.onUpdateSelectionMode(selectedItems);
-			}
 		} else {
 			QuickSearchListItem listItem = getItem(position);
 			if (ch.isChecked()) {
@@ -614,9 +611,9 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			} else {
 				selectedItems.remove(listItem);
 			}
-			if (selectionListener != null) {
-				selectionListener.onUpdateSelectionMode(selectedItems);
-			}
+		}
+		if (selectionListener != null) {
+			selectionListener.onUpdateSelectionMode(selectedItems);
 		}
 	}
 

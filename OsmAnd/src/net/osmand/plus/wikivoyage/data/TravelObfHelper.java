@@ -460,7 +460,7 @@ public class TravelObfHelper implements TravelHelper {
 						0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, getSearchFilter(ROUTE_ARTICLE), new ResultMatcher<Amenity>() {
 							@Override
 							public boolean publish(Amenity object) {
-								List<String> otherNames = object.getAllNames(false);
+								List<String> otherNames = object.getOtherNames(false);
 								String localeName = object.getName(appLang);
 								return nm.matches(localeName) || nm.matches(otherNames);
 							}

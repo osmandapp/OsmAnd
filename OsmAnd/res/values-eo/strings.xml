@@ -1492,7 +1492,7 @@
     <string name="app_mode_car">Aŭto</string>
     <string name="app_mode_bicycle">Biciklo</string>
     <string name="app_mode_pedestrian">Piediranto</string>
-    <string name="get_plugin">Elŝuti</string>
+    <string name="get_plugin">Akiri</string>
     <string name="do_you_like_osmand">Ĉu OsmAnd plaĉas al ci?</string>
     <string name="app_name_osmand">OsmAnd</string>
     <string name="access_direction_audio_feedback">Sonaj sciigoj pri direkto</string>
@@ -3333,7 +3333,7 @@
     <string name="osm_edits_view_descr">Ĉiuj viaj jam nepublikigitaj redaktoj aŭ rimarkoj OSM estos videblaj ĉe %1$s. Punktoj alŝutitaj al OSM ne estos videblaj en OsmAnd.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Emblemo montrata dum navigi aŭ moviĝi.</string>
-    <string name="select_map_icon_descr">Montri emblemon dum restado.</string>
+    <string name="select_map_icon_descr">Emblemo montrata dum restado.</string>
     <string name="logcat_buffer_descr">Legi kaj kunhavigi detalajn protokolojn de la aplikaĵo</string>
     <string name="permission_is_required">Permeso estas necesa por uzi tiun ĉi eblaĵon.</string>
     <string name="monitoring_min_speed_descr">Tiu ĉi filtrilo preventas registri punktojn sub difinita rapidlimo. Tiel registritaj spuroj aspektos pli glate dum vidiĝi sur la mapo.</string>
@@ -4100,4 +4100,32 @@
     <string name="recorded_description">Antaŭregistritaj voĉoj sonas pli bone, sed la aplikaĵo povas nur elparoli gvidiloj pri turnoj. Ĝi ne povas anonci nomojn de stratoj aŭ de interesejoj.</string>
     <string name="use_system_language">Uzi sisteman lingvon</string>
     <string name="shared_string_itinerary">Kurso</string>
+    <string name="route_line_use_map_style_width">Uzi implicitan larĝon por la map‑stilo %1$s.</string>
+    <string name="route_line_use_map_style_color">Uzi implicitan koloron de la map‑stilo %1$s.</string>
+    <string name="poi_routes">Kursoj</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">Eviti zonojn nur por malalte aer‑malpurigantaj veturiloj</string>
+    <string name="routing_attr_avoid_low_emission_zone_name">Sen zonoj de restrikta emisio</string>
+    <string name="search_more">Serĉi pli…</string>
+    <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
+    <string name="backup_and_restore">Sekurkopio</string>
+    <string name="last_backup">Antaŭa sekurkopio</string>
+    <string name="duration_ago">antaŭ %1$s</string>
+    <string name="cloud_email_not_registered">Tiu ĉi retpoŝta adreso ne estis registrita en OsmAnd-Nubo</string>
+    <string name="osmand_cloud">OsmAnd-Nubo</string>
+    <string name="osmand_cloud_authorize_descr">Neniam perdu viajn datumojn: fari sekurkopiojn kaj restarigi ĉiujn datumojn senprobleme.</string>
+    <string name="local_backup">Loka sekurkopio</string>
+    <string name="local_backup_descr">Fari sekurkopion aŭ restarigi datumojn el loka dosiero.</string>
+    <string name="backup_into_file">Konservi al dosiero</string>
+    <string name="restore_from_file">Restarigi el dosiero</string>
+    <string name="osmand_cloud_help_descr">Ĉu vi bezonas helpon\? Kontaktu nin ĉe %1$s</string>
+    <string name="osmand_cloud_create_account_descr">Enigu vian retpoŝtan adreson, ĉiuj viaj datumoj estos ligitaj kun ĝi.
+\nLa kontrolkodo estos sendita al tiu ĉi retpoŝta adreso.</string>
+    <string name="osmand_cloud_login_descr">Enigu la retpoŝtan adreson, kiun vi uzis por registriĝi. Ni sendos al vi unufojan pasvorton necesan por la sekva etapo.</string>
+    <string name="verify_email_address">Kontroli retpoŝtan adreson</string>
+    <string name="verify_email_address_descr">La kontrolkodo estis sendita al %1$s, enigu ĝin en la lampon sube.</string>
+    <string name="enter_verification_code">Enigu 4-ciferan kodon</string>
+    <string name="cloud_email_already_registered">Konto kun tiu ĉi retpoŝta adreso jam estas registrita.</string>
+    <string name="resend_verification_code">Resendi kontrolkodon</string>
+    <string name="verification_code_missing">Mi ne ricevis kontrolkodon</string>
+    <string name="verification_code_missing_description">Necesos atendi eĉ 10 minutojn por ricevi la kodon, bonvolu ankaŭ kontroli vian trudmesaĝujon. Se tio ĉi ne helpos, uzu la butonon sube.</string>
 </resources>

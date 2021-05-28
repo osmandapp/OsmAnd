@@ -3959,7 +3959,7 @@
     <string name="rename_track">Modìfica su nùmene de sa rasta</string>
     <string name="change_folder">Càmbia sa cartella</string>
     <string name="shared_string_sec">seg</string>
-    <string name="delete_online_routing_engine">Iscantzellare custu motore de càrculu in lìnia\?</string>
+    <string name="delete_online_routing_engine">Bogare custu motore de càrculu in lìnia\?</string>
     <string name="context_menu_read_full">Leghe totu</string>
     <string name="context_menu_edit_descr">Modìfica sa descritzione</string>
     <string name="delete_waypoints">Iscantzella sos puntos de coladòrgiu</string>
@@ -4002,7 +4002,7 @@
     <string name="activity_type_motorbike_name">Moto</string>
     <string name="activity_type_car_name">Màchina</string>
     <string name="select_segments">Ischerta sos segmentos</string>
-    <string name="select_segments_description">%1$s cuntenet prus de unu segmentu. Depes ischertare sa parte chi serbit pro sa navigatzione.</string>
+    <string name="select_segments_description">%1$s cuntenet prus de unu segmentu. Depes dislindare sa parte pro sa navigatzione.</string>
     <string name="segments_count">Segmentu %1$d</string>
     <string name="temporary_conditional_routing_descr">Imprea sas restritziones de sos caminos chi sunt ativas como in sa mapa</string>
     <string name="routing_attr_short_way_description">Àndala prus curtza otimizada (rispàrmiu energèticu)</string>
@@ -4035,24 +4035,24 @@
     <string name="copy_poi_name">Còpia su nùmene de su PDI</string>
     <string name="quick_action_show_hide_title">Ammustra/cua</string>
     <string name="shared_string_interval">Intervallu</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Cua sas làcanas de sas riservas naturales, de sas àreas amparadas e de sos parcos natzionales</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Cua sas làcanas de sas riservas naturales, de sas àreas amparadas e de sos parcos natzionales.</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">Làcanas naturales</string>
     <string name="track_has_no_altitude">Sa rasta non cuntenet datos de artària.</string>
     <string name="track_has_no_speed">Sa rasta non cuntenet datos de lestresa.</string>
-    <string name="select_another_colorization">Ischerta un\'àtera casta de coloratzione.</string>
+    <string name="select_another_colorization">Ischerta un\'àtera casta de colorimentu.</string>
     <string name="purchases">Còmporas</string>
     <string name="map_widget_distance_by_tap">Distàntzia pro tocu</string>
     <string name="trip_recording_save_and_continue">Sarva e sighi</string>
     <string name="lost_data_warning">Totu sos datos non sarvados s\'ant a pèrdere.</string>
     <string name="show_start_dialog">Ammustra su diàlogu de incumintzu</string>
-    <string name="specify_color_for_map_mode">Dislinda unu colore pro sa modalidade pro sa mapa: %1$s.</string>
+    <string name="specify_color_for_map_mode">Dislinda unu colore pro sa modalidade pro sa mapa %1$s.</string>
     <string name="release_4_0_beta">• Annanghidura de s\'optzione pro iscarrigare sas curvas de livellu in pees
 \n
 \n• Panoràmica de pianificatzione de s\'àndala: annanghidura de ischedas pro colare dae sos puntos a sos gràficos
 \n
 \n• Agiornamentos de OsmAnd Live (OSmAnd in direta) tramudados cara a \"Iscarrigamentos &gt; Agiornamentos\"
 \n
-\n• Sas rastas como si podent colorizare pro artària, lestresa, o pendèntzia.
+\n• Como podes colorizare sas rastas pro artària, lestresa, o pendèntzia.
 \n
 \n• Annanghidura de s\'optzione pro mudare s\'aparèntzia de sa lìnia de navigatzione de s\'àndala
 \n
@@ -4062,7 +4062,7 @@
     <string name="in_grace_period">In perìodu de gràtzia</string>
     <string name="osmand_live">OsmAnd in direta</string>
     <string name="trip_recording_logging_interval_info">S\'intervallu de registratzione impostat sa frecuèntzia cun sa cale OsmAnd at a pedire sos datos de sa positzione atuale.</string>
-    <string name="trip_recording_show_start_dialog_setting">Si est disabilitadu sa registratzione at a incumintzare a pustis de su tocu in subra de su widget o de s\'elementu de su menù, brinchende sa ventanedda de diàlogu de cunfirma.</string>
+    <string name="trip_recording_show_start_dialog_setting">Si est disabilitadu sa registratzione at a incumintzare immediatamente a pustis de su tocu in subra de su widget o de s\'elementu de su menù, brinchende sa ventanedda de diàlogu de cunfirma.</string>
     <string name="customize_route_line">Personaliza sa lìnia de s\'àndala</string>
     <string name="shared_string_route_line">Lìnia de s\'àndala</string>
     <string name="no_purchases">Non tenes còmpora peruna</string>
@@ -4098,4 +4098,9 @@
     <string name="recorded_description">Sa boghe registrada sonat mègius, ma podet pronuntziare petzi fràsias giai registradas, che a sas istrutziones de bortada. Non podet pronuntziare sos nùmenes de sas carreras o de sos PDI.</string>
     <string name="use_system_language">Imprea sa limba de su sistema</string>
     <string name="shared_string_itinerary">Itineràriu</string>
+    <string name="route_line_use_map_style_width">Imprea sa largària predefinida de s\'istile de sa mapa (%1$s).</string>
+    <string name="route_line_use_map_style_color">Imprea su colore predefinidu de s\'istile de sa mapa (%1$s).</string>
+    <string name="poi_routes">Àndalas</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">Istransi sas zonas a emissiones bassas</string>
+    <string name="routing_attr_avoid_low_emission_zone_name">Istransi sas zonas a emissiones bassas</string>
 </resources>

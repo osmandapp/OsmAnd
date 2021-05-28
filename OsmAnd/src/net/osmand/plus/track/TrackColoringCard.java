@@ -83,26 +83,11 @@ public class TrackColoringCard extends BaseCard {
 		List<TrackAppearanceItem> items = new ArrayList<>();
 		items.add(new TrackAppearanceItem(SOLID_COLOR, app.getString(R.string.track_coloring_solid), R.drawable.ic_action_circle, true));
 		for (GradientScaleType scaleType : GradientScaleType.values()) {
+			boolean isAvailable = gpxTrackAnalysis.isColorizationTypeAvailable(scaleType.toColorizationType());
 			items.add(new TrackAppearanceItem(scaleType.getTypeName(),
-					scaleType.getHumanString(app), scaleType.getIconId(), isScaleTypeActive(scaleType)));
+					scaleType.getHumanString(app), scaleType.getIconId(), isAvailable));
 		}
 		return items;
-	}
-
-	private boolean isScaleTypeActive(GradientScaleType scaleType) {
-		if (scaleType == GradientScaleType.SPEED) {
-			return gpxTrackAnalysis.isSpeedSpecified();
-		} else {
-			if (!gpxTrackAnalysis.isElevationSpecified()) {
-				return false;
-			}
-			for (Elevation elevation : gpxTrackAnalysis.elevationData) {
-				if (Float.isNaN(elevation.elevation)) {
-					return false;
-				}
-			}
-			return true;
-		}
 	}
 
 	private TrackAppearanceItem getSelectedAppearanceItem() {

@@ -10,6 +10,7 @@ public class AppInfoParams extends AidlParams {
 
 	private ALatLon lastKnownLocation;
 	private ALatLon mapLocation;
+	private ALatLon destinationLocation;
 
 	private Bundle turnInfo;
 	private int leftTime;
@@ -51,6 +52,14 @@ public class AppInfoParams extends AidlParams {
 		return mapLocation;
 	}
 
+	public ALatLon getDestinationLocation() {
+		return destinationLocation;
+	}
+
+	public void setDestinationLocation(ALatLon destinationLocation) {
+		this.destinationLocation = destinationLocation;
+	}
+
 	public int getLeftTime() {
 		return leftTime;
 	}
@@ -75,6 +84,7 @@ public class AppInfoParams extends AidlParams {
 	public void writeToBundle(Bundle bundle) {
 		bundle.putParcelable("lastKnownLocation", lastKnownLocation);
 		bundle.putParcelable("mapLocation", mapLocation);
+		bundle.putParcelable("destinationLocation", destinationLocation);
 		bundle.putInt("leftTime", leftTime);
 		bundle.putLong("arrivalTime", arrivalTime);
 		bundle.putInt("leftDistance", leftDistance);
@@ -86,6 +96,7 @@ public class AppInfoParams extends AidlParams {
 	protected void readFromBundle(Bundle bundle) {
 		lastKnownLocation = bundle.getParcelable("lastKnownLocation");
 		mapLocation = bundle.getParcelable("mapLocation");
+		destinationLocation = bundle.getParcelable("destinationLocation");
 		leftTime = bundle.getInt("leftTime");
 		arrivalTime = bundle.getLong("arrivalTime");
 		leftDistance = bundle.getInt("leftDistance");

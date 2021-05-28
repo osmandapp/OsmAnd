@@ -763,7 +763,7 @@
     <string name="incomplete_locale">ناقص</string>
     <string name="shared_string_next">التالي</string>
     <string name="shared_string_previous">السابق</string>
-    <string name="unit_of_length_descr">اختيار الوحدات: كم، ميل، ميلٌ بحري.. إلخ.</string>
+    <string name="unit_of_length_descr">تغيير وحدات قياس المسافة.</string>
     <string name="unit_of_length">وحدات الطول</string>
     <string name="si_mi_feet">ميل ، قدم</string>
     <string name="si_mi_yard">ميل ، ياردة</string>
@@ -4169,4 +4169,9 @@
     <string name="recorded_description">الصوت المسجل يبدو أفضل، ولكن يمكن نطق العبارات المسجلة مسبقا فقط: تشغيل التعليمات. لا يمكن الإعلان عن أسماء الشوارع أونقاط الاهتمام.</string>
     <string name="use_system_language">استخدام لغة النظام</string>
     <string name="shared_string_itinerary">مسار الرحلة</string>
+    <string name="route_line_use_map_style_width">استخدم نمط الخريطة (%1$s) العرض الافتراضي.</string>
+    <string name="route_line_use_map_style_color">استخدم نمط الخريطة (%1$s) اللون الافتراضي.</string>
+    <string name="poi_routes">المسارات الرياضية</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">تجنب المناطق منخفضة الانبعاثات</string>
+    <string name="routing_attr_avoid_low_emission_zone_name">تجنب مناطق الانبعاثات المنخفضة</string>
 </resources>

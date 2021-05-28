@@ -598,7 +598,7 @@ public class BinaryMapPoiReaderAdapter {
 					boolean matches = matcher.matches(am.getName().toLowerCase()) ||
 							matcher.matches(am.getEnName(true).toLowerCase());
 					if (!matches) {
-						for (String s : am.getAllNames()) {
+						for (String s : am.getOtherNames()) {
 							matches = matcher.matches(s.toLowerCase());
 							if (matches) {
 								break;

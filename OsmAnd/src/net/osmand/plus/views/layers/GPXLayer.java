@@ -18,6 +18,7 @@ import android.util.Pair;
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
@@ -77,6 +78,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -472,7 +474,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				float trackWidth = getTrackWidth(width, defaultTrackWidth);
 				int trackColor = getTrackColor(selectedGpxFile.getGpxFile(), cachedColor);
 				int arrowColor = UiUtilities.getContrastColor(view.getApplication(), trackColor, false);
-				GradientScaleType scaleType = getGradientScaleType(selectedGpxFile.getGpxFile());
+				GradientScaleType scaleType = getGradientScaleType(selectedGpxFile);
 				List<TrkSegment> segments = scaleType != null ?
 						getCachedSegments(selectedGpxFile, scaleType) : selectedGpxFile.getPointsToDisplay();
 				for (TrkSegment segment : segments) {
@@ -547,17 +549,15 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			for (SelectedGpxFile g : selectedGPXFiles) {
 				List<Pair<WptPt, MapMarker>> fullObjects = new ArrayList<>();
 				int fileColor = getFileColor(g);
-				boolean synced = mapMarkersHelper.getMarkersGroup(g.getGpxFile()) != null;
+				boolean synced = isSynced(g.getGpxFile());
 				for (WptPt wpt : getListStarPoints(g)) {
 					if (wpt.lat >= latLonBounds.bottom && wpt.lat <= latLonBounds.top
 							&& wpt.lon >= latLonBounds.left && wpt.lon <= latLonBounds.right
 							&& wpt != contextMenuLayer.getMoveableObject() && !isPointHidden(g, wpt)) {
 						pointFileMap.put(wpt, g);
 						MapMarker marker = null;
-						if (synced) {
-							if ((marker = mapMarkersHelper.getMapMarker(wpt)) == null) {
-								continue;
-							}
+						if (synced && (marker = mapMarkersHelper.getMapMarker(wpt)) == null) {
+							continue;
 						}
 						cache.add(wpt);
 						float x = tileBox.getPixXFromLatLon(wpt.lat, wpt.lon);
@@ -613,6 +613,11 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			this.smallObjectsLatLon = smallObjectsLatLon;
 			this.pointFileMap = pointFileMap;
 		}
+	}
+
+	private boolean isSynced(@NonNull GPXFile gpxFile) {
+		MapMarkersGroup markersGroup = mapMarkersHelper.getMarkersGroup(gpxFile);
+		return markersGroup != null && !markersGroup.isDisabled();
 	}
 
 	private void drawXAxisPoints(Canvas canvas, RotatedTileBox tileBox) {
@@ -697,7 +702,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private void drawSelectedFileSegments(SelectedGpxFile selectedGpxFile, boolean currentTrack,
 										  Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		GPXFile gpxFile = selectedGpxFile.getGpxFile();
-		GradientScaleType scaleType = getGradientScaleType(gpxFile);
+		GradientScaleType scaleType = getGradientScaleType(selectedGpxFile);
 
 		boolean visible = QuadRect.trivialOverlap(tileBox.getLatLonBounds(), calculateTrackBounds(selectedGpxFile.getPointsToDisplay()));
 		if (!gpxFile.hasTrkPt() && scaleType != null || !visible) {
@@ -736,12 +741,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	private List<TrkSegment> getCachedSegments(SelectedGpxFile selectedGpxFile, GradientScaleType scaleType) {
 		GPXFile gpxFile = selectedGpxFile.getGpxFile();
-		String path = gpxFile.path;
-		CachedTrack cachedTrack = segmentsCache.get(path);
-		if (cachedTrack == null) {
-			cachedTrack = new CachedTrack(view.getApplication(), selectedGpxFile);
-			segmentsCache.put(path, cachedTrack);
-		}
+		CachedTrack cachedTrack = getCachedTrack(selectedGpxFile);
 		return cachedTrack.getCachedSegments(view.getZoom(), scaleType, getColorizationPalette(gpxFile, scaleType));
 	}
 
@@ -765,15 +765,30 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		return color != 0 ? color : defaultColor;
 	}
 
-	private GradientScaleType getGradientScaleType(GPXFile gpxFile) {
+	private GradientScaleType getGradientScaleType(SelectedGpxFile selectedGpxFile) {
+		GPXFile gpxFile = selectedGpxFile.getGpxFile();
+		GpxDataItem dataItem = null;
+		GradientScaleType scaleType = null;
+		boolean isCurrentTrack = gpxFile.showCurrentTrack;
 		if (hasTrackDrawInfoForTrack(gpxFile)) {
 			return trackDrawInfo.getGradientScaleType();
-		} else if (gpxFile.showCurrentTrack) {
-			return currentTrackScaleType.get();
+		} else if (isCurrentTrack) {
+			scaleType = currentTrackScaleType.get();
 		} else {
-			GpxDataItem dataItem = gpxDbHelper.getItem(new File(gpxFile.path));
-			if (dataItem != null && dataItem.getGradientScaleType() != null) {
-				return dataItem.getGradientScaleType();
+			dataItem = gpxDbHelper.getItem(new File(gpxFile.path));
+			if (dataItem != null) {
+				scaleType = dataItem.getGradientScaleType();
+			}
+		}
+		if (scaleType == null) {
+			return null;
+		} else if (getCachedTrack(selectedGpxFile).isScaleTypeAvailable(scaleType)) {
+			return scaleType;
+		} else {
+			if (isCurrentTrack) {
+				currentTrackScaleType.set(null);
+			} else {
+				gpxDbHelper.updateGradientScaleType(dataItem, null);
 			}
 		}
 		return null;
@@ -866,6 +881,16 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					|| MapRouteInfoMenu.waypointsVisible;
 		}
 		return false;
+	}
+
+	private CachedTrack getCachedTrack(SelectedGpxFile selectedGpxFile) {
+		String path = selectedGpxFile.getGpxFile().path;
+		CachedTrack cachedTrack = segmentsCache.get(path);
+		if (cachedTrack == null) {
+			cachedTrack = new CachedTrack(view.getApplication(), selectedGpxFile);
+			segmentsCache.put(path, cachedTrack);
+		}
+		return cachedTrack;
 	}
 
 	private boolean isPointVisited(WptPt o) {
@@ -1299,10 +1324,11 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	private static class CachedTrack {
 
-		private OsmandApplication app;
+		private final OsmandApplication app;
 
 		private final SelectedGpxFile selectedGpxFile;
 		private final Map<String, List<TrkSegment>> cache = new HashMap<>();
+		private Set<GradientScaleType> availableScaleTypes = null;
 
 		private long prevModifiedTime = -1;
 
@@ -1336,7 +1362,11 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			GPXFile gpxFile = selectedGpxFile.getGpxFile();
 			RouteColorize colorize = new RouteColorize(zoom, gpxFile, selectedGpxFile.getTrackAnalysis(app),
 					scaleType.toColorizationType(), app.getSettings().getApplicationMode().getMaxSpeed());
-			colorize.setPalette(gradientPalette);
+			if (scaleType == GradientScaleType.SLOPE) {
+				colorize.palette = RouteColorize.SLOPE_PALETTE;
+			} else {
+				colorize.setPalette(gradientPalette);
+			}
 			List<RouteColorizationPoint> colorsOfPoints = colorize.getResult(true);
 			return createSimplifiedSegments(selectedGpxFile.getGpxFile(), colorsOfPoints, scaleType);
 		}
@@ -1367,6 +1397,25 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			}
 
 			return simplifiedSegments;
+		}
+
+		public boolean isScaleTypeAvailable(@NonNull GradientScaleType scaleType) {
+			if (prevModifiedTime != selectedGpxFile.getGpxFile().modifiedTime || availableScaleTypes == null) {
+				defineAvailableScaleTypes();
+			}
+			return availableScaleTypes.contains(scaleType);
+		}
+
+		private void defineAvailableScaleTypes() {
+			GPXTrackAnalysis analysis = selectedGpxFile.getTrackAnalysis(app);
+			availableScaleTypes = new HashSet<>();
+			if (analysis.isColorizationTypeAvailable(GradientScaleType.SPEED.toColorizationType())) {
+				availableScaleTypes.add(GradientScaleType.SPEED);
+			}
+			if (analysis.isColorizationTypeAvailable(GradientScaleType.ALTITUDE.toColorizationType())) {
+				availableScaleTypes.add(GradientScaleType.ALTITUDE);
+				availableScaleTypes.add(GradientScaleType.SLOPE);
+			}
 		}
 	}
 }

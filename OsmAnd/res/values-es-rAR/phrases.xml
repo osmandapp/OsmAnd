@@ -3945,7 +3945,7 @@
     <string name="poi_glacier_status_oscillating">Estado del glaciar: oscilante</string>
     <string name="poi_glacier_status_marked_retreat">Estado del glaciar: marcado retroceso</string>
     <string name="poi_glacier_status_retreat">Estado del glaciar: en retroceso</string>
-    <string name="poi_glacier_edge_calving_line">Borde: línea de parto</string>
+    <string name="poi_glacier_edge_calving_line">Borde: línea de nacimiento</string>
     <string name="poi_glacier_edge_grounding_line">Borde: línea de tierra</string>
     <string name="poi_glacier_debris_cover_scarce">Cubierta de escombros: escasa</string>
     <string name="poi_glacier_debris_cover_partial">Cubierta de escombros: parcial</string>

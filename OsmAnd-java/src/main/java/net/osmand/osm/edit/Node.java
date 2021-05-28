@@ -1,11 +1,10 @@
 package net.osmand.osm.edit;
 
-import net.osmand.Location;
-import net.osmand.data.LatLon;
-import net.osmand.util.Algorithms;
-
 import java.io.Serializable;
 import java.util.Map;
+
+import net.osmand.Location;
+import net.osmand.data.LatLon;
 
 public class Node extends Entity implements Serializable {
 

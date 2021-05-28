@@ -10,6 +10,7 @@ import org.apache.commons.logging.Log;
 
 import java.io.*;
 import java.net.*;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.zip.GZIPOutputStream;
@@ -119,7 +120,7 @@ public class NetworkUtils {
 			log.info("Start uploading file to " + urlText + " " +fileToUpload.getName());
 			url = new URL(urlText);
 			HttpURLConnection conn;
-			if (client != null && client.isValidToken()){
+			if (client != null && client.isValidToken()) {
 				OAuthRequest req = new OAuthRequest(Verb.POST, urlText);
 				client.getService().signRequest(client.getAccessToken(), req);
 				req.addHeader("Content-Type", "multipart/form-data; boundary=" + BOUNDARY);
@@ -136,8 +137,7 @@ public class NetworkUtils {
 					log.error(e);
 				}
 				return null;
-			}
-			else {
+			} else {
 				conn = (HttpURLConnection) url.openConnection();
 				conn.setDoInput(true);
 				conn.setDoOutput(true);
@@ -148,6 +148,7 @@ public class NetworkUtils {
 			}
 			conn.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + BOUNDARY); //$NON-NLS-1$ //$NON-NLS-2$
 			conn.setRequestProperty("User-Agent", "OsmAnd"); //$NON-NLS-1$ //$NON-NLS-2$
+			conn.setChunkedStreamingMode(4096);
 			OutputStream ous = conn.getOutputStream();
 			ous.write(("--" + BOUNDARY + "\r\n").getBytes());
 			String filename = fileToUpload.getName();
@@ -200,6 +201,14 @@ public class NetworkUtils {
 			log.error(e.getMessage(), e);
 			return e.getMessage();
 		}
+	}
+
+	public static void main(String[] args) {
+		File myFile = new File("/Users/macmini/Downloads/great-britain-latest.osm.pbf");
+		String type = "pbf-big";
+		String serverUrl = "http://localhost:8080/userdata/upload-file?name="+myFile.getName()+"&type="+type+"&deviceid=2&accessToken=dd8d3693-4812-440a-8042-b0d848310e23";
+		Map<String, String> additionalMapData = new HashMap<>();
+		uploadFile(serverUrl, myFile, null, null, "file", true, additionalMapData);
 	}
 
 	public static void setProxy(String host, int port) {

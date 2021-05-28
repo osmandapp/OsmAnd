@@ -171,7 +171,12 @@ public class RouteResultPreparation {
 
 	List<RouteSegmentResult> prepareResult(RoutingContext ctx, List<RouteSegmentResult> result, boolean recalculation) throws IOException {
 		for(int i = 0; i < result.size(); i++) {
-			checkAndInitRouteRegion(ctx, result.get(i).getObject());
+			RouteDataObject road = result.get(i).getObject();
+			checkAndInitRouteRegion(ctx, road);
+			//"osmand_dp" using for backward compatibility from native lib RoutingConfiguration directionPoints
+			if (road.region != null) {
+				road.region.findOrCreateRouteType(RoutingConfiguration.DirectionPoint.TAG, RoutingConfiguration.DirectionPoint.DELETE_TYPE);
+			}
 		}
 		combineWayPointsForAreaRouting(ctx, result);
 		validateAllPointsConnected(result);

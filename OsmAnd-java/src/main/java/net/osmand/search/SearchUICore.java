@@ -743,7 +743,7 @@ public class SearchUICore {
 
 		@Override
 		public boolean publish(SearchResult object) {
-			if (phrase != null && object.otherNames != null) {
+			if (phrase != null && object.otherNames != null && !phrase.getFirstUnknownNameStringMatcher().matches(object.localeName)) {
 				for (String s : object.otherNames) {
 					if (phrase.getFirstUnknownNameStringMatcher().matches(s)) {
 						object.alternateName = s;
