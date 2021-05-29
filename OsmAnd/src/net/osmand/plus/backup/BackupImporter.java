@@ -137,7 +137,7 @@ class BackupImporter {
 			File tempDir = FileUtils.getTempDir(app);
 			for (RemoteFile remoteFile : remoteFiles) {
 				String fileName = remoteFile.getName();
-				if (Algorithms.getFileNameExtension(fileName).equals(INFO_EXT)) {
+				if (fileName.endsWith(INFO_EXT)) {
 					remoteInfoFiles.put(new File(tempDir, fileName), remoteFile);
 				} else {
 					remoteItemFiles.put(fileName, remoteFile);

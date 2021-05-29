@@ -7,9 +7,9 @@ import net.osmand.IProgress;
 import net.osmand.StreamWriter;
 import net.osmand.plus.backup.BackupHelper.OnUploadFileListener;
 import net.osmand.plus.settings.backend.backup.AbstractWriter;
+import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
-import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
@@ -40,8 +40,9 @@ public class NetworkWriter implements AbstractWriter {
 		SettingsItemWriter<? extends SettingsItem> itemWriter = item.getWriter();
 		if (itemWriter != null) {
 			try {
-				uploadItemInfo(item, fileName);
-				uploadEntry(itemWriter, fileName);
+				if (uploadEntry(itemWriter, fileName) == null) {
+					uploadItemInfo(item, fileName);
+				}
 			} catch (UserNotRegisteredException e) {
 				throw new IOException(e.getMessage(), e);
 			}
@@ -50,17 +51,17 @@ public class NetworkWriter implements AbstractWriter {
 		}
 	}
 
-	private void uploadEntry(@NonNull SettingsItemWriter<? extends SettingsItem> itemWriter,
-							 @NonNull String fileName) throws UserNotRegisteredException, IOException {
+	private String uploadEntry(@NonNull SettingsItemWriter<? extends SettingsItem> itemWriter,
+							   @NonNull String fileName) throws UserNotRegisteredException, IOException {
 		if (itemWriter.getItem() instanceof FileSettingsItem) {
 			FileSettingsItem fileSettingsItem = (FileSettingsItem) itemWriter.getItem();
-			uploadDirWithFiles(itemWriter, fileSettingsItem.getFile());
+			return uploadDirWithFiles(itemWriter, fileSettingsItem.getFile());
 		} else {
-			uploadItemFile(itemWriter, fileName);
+			return uploadItemFile(itemWriter, fileName);
 		}
 	}
 
-	private void uploadItemInfo(@NonNull SettingsItem item, String fileName) throws IOException {
+	private String uploadItemInfo(@NonNull SettingsItem item, String fileName) throws IOException {
 		fileName = Algorithms.getFileWithoutDirs(fileName) + BackupHelper.INFO_EXT;
 		try {
 			String itemJson = item.toJson();
@@ -72,40 +73,45 @@ public class NetworkWriter implements AbstractWriter {
 					outputStream.flush();
 				}
 			};
-			backupHelper.uploadFileSync(fileName, item.getType().name(), streamWriter, listener);
+			return backupHelper.uploadFileSync(fileName, item.getType().name(), streamWriter, listener);
 		} catch (JSONException | UserNotRegisteredException e) {
 			throw new IOException(e.getMessage(), e);
 		}
 	}
 
-	private void uploadItemFile(@NonNull SettingsItemWriter<? extends SettingsItem> itemWriter,
-								@NonNull String fileName) throws UserNotRegisteredException, IOException {
+	private String uploadItemFile(@NonNull SettingsItemWriter<? extends SettingsItem> itemWriter,
+								  @NonNull String fileName) throws UserNotRegisteredException, IOException {
 		StreamWriter streamWriter = new StreamWriter() {
 			@Override
 			public void write(OutputStream outputStream, IProgress progress) throws IOException {
 				itemWriter.writeToStream(outputStream, progress);
 			}
 		};
-		backupHelper.uploadFileSync(fileName, itemWriter.getItem().getType().name(), streamWriter, listener);
+		return backupHelper.uploadFileSync(fileName, itemWriter.getItem().getType().name(), streamWriter, listener);
 	}
 
-	private void uploadDirWithFiles(@NonNull SettingsItemWriter<? extends SettingsItem> itemWriter,
-									@NonNull File file) throws UserNotRegisteredException, IOException {
+	private String uploadDirWithFiles(@NonNull SettingsItemWriter<? extends SettingsItem> itemWriter,
+									  @NonNull File file) throws UserNotRegisteredException, IOException {
+		String error = null;
 		FileSettingsItem fileSettingsItem = (FileSettingsItem) itemWriter.getItem();
 		if (file.isDirectory()) {
 			File[] files = file.listFiles();
 			if (files != null) {
 				for (File subfolderFile : files) {
-					uploadDirWithFiles(itemWriter, subfolderFile);
+					String err = uploadDirWithFiles(itemWriter, subfolderFile);
+					if (err != null) {
+						error = err;
+					}
 				}
 			}
 		} else {
 			String subtypeFolder = fileSettingsItem.getSubtype().getSubtypeFolder();
 			String fileName = Algorithms.isEmpty(subtypeFolder)
 					? file.getName()
-					: file.getPath().substring(file.getPath().indexOf(subtypeFolder) - 1);
+					: file.getPath().substring(file.getPath().indexOf(subtypeFolder) + subtypeFolder.length());
 			fileSettingsItem.setInputStream(new FileInputStream(file));
-			uploadItemFile(itemWriter, fileName);
+			error = uploadItemFile(itemWriter, fileName);
 		}
+		return error;
 	}
 }

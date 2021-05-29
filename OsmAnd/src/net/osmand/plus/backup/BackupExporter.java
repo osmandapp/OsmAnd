@@ -26,21 +26,23 @@ public class BackupExporter extends Exporter {
 
 	private void writeItems() throws IOException {
 		OnUploadFileListener uploadFileListener = new OnUploadFileListener() {
+			final long[] itemsProgress = {0};
 
 			@Override
-			public void onFileUploadProgress(@NonNull String fileName, int progress) {
+			public void onFileUploadProgress(@NonNull String type, @NonNull String fileName, int progress, int deltaWork) {
+				itemsProgress[0] += deltaWork;
 				ExportProgressListener progressListener = getProgressListener();
 				if (progressListener != null) {
-					progressListener.updateProgress(progress);
+					progressListener.updateProgress((int) itemsProgress[0] / (1 << 10));
 				}
 			}
 
 			@Override
-			public void onFileUploadDone(@NonNull String fileName, long uploadTime, @Nullable String error) {
+			public void onFileUploadDone(@NonNull String type, @NonNull String fileName, long uploadTime, @Nullable String error) {
 				if (!Algorithms.isEmpty(error)) {
 					setCancelled(true);
 				} else {
-					backupHelper.updateFileUploadTime(fileName, uploadTime);
+					backupHelper.updateFileUploadTime(type, fileName, uploadTime);
 				}
 			}
 		};
