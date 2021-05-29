@@ -27,6 +27,7 @@ import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.R;
@@ -380,6 +381,7 @@ public class MapActivityLayers {
 					PoiUIFilter wiki = poiFilters.getTopWikiPoiFilter();
 					poiFilters.clearSelectedPoiFilters(wiki);
 					poiFilters.addSelectedPoiFilter(pf);
+					updateRoutingPoiFiltersIfNeeded();
 					mapView.refreshMap();
 				}
 			}
@@ -562,6 +564,18 @@ public class MapActivityLayers {
 		}
 		if (adapter != null) {
 			adapter.notifyDataSetChanged();
+		}
+	}
+
+	private void updateRoutingPoiFiltersIfNeeded() {
+		OsmandApplication app = getApplication();
+		OsmandSettings settings = app.getSettings();
+		RoutingHelper routingHelper = app.getRoutingHelper();
+		boolean usingRouting = routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode()
+				|| routingHelper.isRouteBeingCalculated() || routingHelper.isRouteCalculated();
+		ApplicationMode routingMode = routingHelper.getAppMode();
+		if (usingRouting && routingMode != settings.getApplicationMode()) {
+			settings.setSelectedPoiFilters(routingMode, settings.getSelectedPoiFilters());
 		}
 	}
 
