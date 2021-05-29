@@ -336,8 +336,8 @@ public class TestBackupActivity extends OsmandActionBarActivity {
 		buttonRefresh.setEnabled(false);
 		PrepareBackupTask prepareBackupTask = new PrepareBackupTask(this, new OnPrepareBackupListener() {
 			@Override
-			public void onBackupPrepared(@Nullable BackupInfo backupInfo, @Nullable List<UserFile> userFiles,
-										 @Nullable List<GpxFileInfo> fileInfos, @Nullable String error) {
+			public void onBackupPrepared(@Nullable BackupInfo backupInfo, @Nullable List<RemoteFile> userFiles,
+										 @Nullable List<LocalFile> fileInfos, @Nullable String error) {
 				TestBackupActivity.this.backupInfo = backupInfo;
 				TestBackupActivity a = activityRef.get();
 				if (AndroidUtils.isActivityNotDestroyed(a)) {
