@@ -4152,4 +4152,5 @@
     <string name="resend_verification_code">بازارسال کد</string>
     <string name="verification_code_missing">کد تأیید را دریافت نکردم</string>
     <string name="verification_code_missing_description">زمان انتظار برای دریافت کد تا ۱۰ دقیقه ممکن است برسد. همچنین لطفا پوشهٔ هرزنامه را بررسی کنید. در غیر این صورت دکمهٔ زیر را بزنید.</string>
+    <string name="select_nav_profile_dialog_message">«نوع ناوبری» نحوهٔ محاسبهٔ مسیر را کنترل می‌کند. می‌توانید از بین موتورهای مسیریابی آنلاین و آفلاین انتخاب کنید.</string>
 </resources>
