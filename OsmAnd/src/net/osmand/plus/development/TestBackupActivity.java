@@ -25,10 +25,10 @@ import net.osmand.plus.backup.BackupHelper.BackupInfo;
 import net.osmand.plus.backup.BackupHelper.OnRegisterUserListener;
 import net.osmand.plus.backup.BackupTask;
 import net.osmand.plus.backup.BackupTask.OnBackupListener;
-import net.osmand.plus.backup.GpxFileInfo;
+import net.osmand.plus.backup.LocalFile;
 import net.osmand.plus.backup.PrepareBackupTask;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
-import net.osmand.plus.backup.UserFile;
+import net.osmand.plus.backup.RemoteFile;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.util.Algorithms;
@@ -196,7 +196,7 @@ public class TestBackupActivity extends OsmandActionBarActivity {
 					BackupTask task = new BackupTask(backupInfo, TestBackupActivity.this, new OnBackupListener() {
 						@Override
 						public void onBackupDone(@Nullable Map<File, String> uploadErrors, @Nullable Map<File, String> downloadErrors,
-												 @Nullable Map<UserFile, String> deleteErrors, @Nullable String error) {
+												 @Nullable Map<RemoteFile, String> deleteErrors, @Nullable String error) {
 							TestBackupActivity a = activityRef.get();
 							if (AndroidUtils.isActivityNotDestroyed(a)) {
 								String description;
@@ -230,7 +230,7 @@ public class TestBackupActivity extends OsmandActionBarActivity {
 					BackupTask task = new BackupTask(backupInfo, TestBackupActivity.this, new OnBackupListener() {
 						@Override
 						public void onBackupDone(@Nullable Map<File, String> uploadErrors, @Nullable Map<File, String> downloadErrors,
-												 @Nullable Map<UserFile, String> deleteErrors, @Nullable String error) {
+												 @Nullable Map<RemoteFile, String> deleteErrors, @Nullable String error) {
 							TestBackupActivity a = activityRef.get();
 							if (AndroidUtils.isActivityNotDestroyed(a)) {
 								String description;
@@ -266,7 +266,7 @@ public class TestBackupActivity extends OsmandActionBarActivity {
 		prepareBackup();
 	}
 
-	private String getBackupErrorsDescription(@Nullable Map<File, String> uploadErrors, @Nullable Map<File, String> downloadErrors, @Nullable Map<UserFile, String> deleteErrors, @Nullable String error) {
+	private String getBackupErrorsDescription(@Nullable Map<File, String> uploadErrors, @Nullable Map<File, String> downloadErrors, @Nullable Map<RemoteFile, String> deleteErrors, @Nullable String error) {
 		StringBuilder sb = new StringBuilder();
 		if (!Algorithms.isEmpty(uploadErrors)) {
 			sb.append("--- Upload errors ---").append("\n\n");
@@ -282,7 +282,7 @@ public class TestBackupActivity extends OsmandActionBarActivity {
 		}
 		if (!Algorithms.isEmpty(deleteErrors)) {
 			sb.append("--- Delete errors ---").append("\n\n");
-			for (Entry<UserFile, String> deleteEntry : deleteErrors.entrySet()) {
+			for (Entry<RemoteFile, String> deleteEntry : deleteErrors.entrySet()) {
 				sb.append(deleteEntry.getKey().getName()).append(": ").append(deleteEntry.getValue()).append("\n\n");
 			}
 		}
@@ -293,7 +293,7 @@ public class TestBackupActivity extends OsmandActionBarActivity {
 		StringBuilder sb = new StringBuilder();
 		if (!Algorithms.isEmpty(backupInfo.filesToUpload)) {
 			sb.append("\n").append("--- Upload ---").append("\n\n");
-			for (GpxFileInfo info : backupInfo.filesToUpload) {
+			for (LocalFile info : backupInfo.filesToUpload) {
 				sb.append(info.getFileName(true))
 						.append(" L: ").append(DF.format(new Date(info.getFileDate())))
 						.append(" U: ").append(DF.format(new Date(info.uploadTime)))
@@ -302,25 +302,25 @@ public class TestBackupActivity extends OsmandActionBarActivity {
 		}
 		if (!Algorithms.isEmpty(backupInfo.filesToDownload)) {
 			sb.append("\n").append("--- Download ---").append("\n\n");
-			for (UserFile userFile : backupInfo.filesToDownload) {
-				sb.append(userFile.getName())
-						.append(" R: ").append(DF.format(new Date(userFile.getClienttimems())))
+			for (RemoteFile remoteFile : backupInfo.filesToDownload) {
+				sb.append(remoteFile.getName())
+						.append(" R: ").append(DF.format(new Date(remoteFile.getClienttimems())))
 						.append("\n\n");
 			}
 		}
 		if (!Algorithms.isEmpty(backupInfo.filesToDelete)) {
 			sb.append("\n").append("--- Delete ---").append("\n\n");
-			for (UserFile userFile : backupInfo.filesToDelete) {
-				sb.append(userFile.getName())
-						.append(" R: ").append(DF.format(new Date(userFile.getClienttimems())))
+			for (RemoteFile remoteFile : backupInfo.filesToDelete) {
+				sb.append(remoteFile.getName())
+						.append(" R: ").append(DF.format(new Date(remoteFile.getClienttimems())))
 						.append("\n\n");
 			}
 		}
 		if (!Algorithms.isEmpty(backupInfo.filesToMerge)) {
 			sb.append("\n").append("--- Conflicts ---").append("\n\n");
-			for (Pair<GpxFileInfo, UserFile> localRemote : backupInfo.filesToMerge) {
-				GpxFileInfo local = localRemote.first;
-				UserFile remote = localRemote.second;
+			for (Pair<LocalFile, RemoteFile> localRemote : backupInfo.filesToMerge) {
+				LocalFile local = localRemote.first;
+				RemoteFile remote = localRemote.second;
 				sb.append(local.getFileName(true))
 						.append(" L: ").append(DF.format(new Date(local.getFileDate())))
 						.append(" U: ").append(DF.format(new Date(local.uploadTime)))

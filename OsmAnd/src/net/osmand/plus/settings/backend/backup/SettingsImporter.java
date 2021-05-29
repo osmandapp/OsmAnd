@@ -5,6 +5,8 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
@@ -52,7 +54,7 @@ class SettingsImporter {
 					try {
 						itemsJson = Algorithms.readFromInputStream(ois, false).toString();
 					} catch (IOException e) {
-						SettingsHelper.LOG.error("Error reading items.json: " + itemsJson, e);
+						SettingsHelper.LOG.error("Error reading items.json", e);
 						throw new IllegalArgumentException("No items");
 					} finally {
 						zis.closeEntry();
@@ -130,10 +132,10 @@ class SettingsImporter {
 						}
 						item.applyAdditionalParams();
 					} catch (IllegalArgumentException e) {
-						item.warnings.add(app.getString(R.string.settings_item_read_error, item.getName()));
+						item.getWarnings().add(app.getString(R.string.settings_item_read_error, item.getName()));
 						SettingsHelper.LOG.error("Error reading item data: " + item.getName(), e);
 					} catch (IOException e) {
-						item.warnings.add(app.getString(R.string.settings_item_read_error, item.getName()));
+						item.getWarnings().add(app.getString(R.string.settings_item_read_error, item.getName()));
 						SettingsHelper.LOG.error("Error reading item data: " + item.getName(), e);
 					} finally {
 						zis.closeEntry();

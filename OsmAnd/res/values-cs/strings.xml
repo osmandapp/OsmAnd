@@ -4127,4 +4127,5 @@
     <string name="tts_description">Převod textu na řeč (TTS) může vyslovovat všechny typy pokynů: odbočení, názvy ulic a bodů zájmu, atd.</string>
     <string name="tts_title">TTS</string>
     <string name="recorded_description">Nahraný hlas zní lépe, ale může vyslovovat jen předem zaznamenané fráze: pokyny k odbočení. Neumí vyslovit názvy ulic nebo bodů zájmu.</string>
+    <string name="select_nav_profile_dialog_message">\'Typ navigace\' ovlivňuje pravidla pro výpočet trasy. Můžete si vybrat mezi offline a online navigačními službami.</string>
 </resources>

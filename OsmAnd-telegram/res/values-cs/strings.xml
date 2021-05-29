@@ -81,4 +81,23 @@
     <string name="shared_string_password">Heslo</string>
     <string name="shared_string_account">Účet</string>
     <string name="shared_string_export">Export</string>
+    <string name="set_time_timeline_descr">Vyberte čas, který se má ukázat</string>
+    <string name="shared_string_apply">Použít</string>
+    <string name="shared_string_start">Start</string>
+    <string name="shared_string_end">Konec</string>
+    <string name="saved_messages">Uložené zprávy</string>
+    <string name="unit_of_speed_system">Jednotka rychlosti</string>
+    <string name="unit_of_speed_system_descr">Zvolte jednotku rychlosti.</string>
+    <string name="time_zone">Časová zóna</string>
+    <string name="time_zone_descr">Zvolte časovou zónu, která bude použita ve vašich zprávách o poloze.</string>
+    <string name="buffer_time">Doba expirace mezipaměti</string>
+    <string name="buffer_time_descr">Časový limit pro ukládání bodů v mezipaměti</string>
+    <string name="shared_string_suggested">Navrženo</string>
+    <string name="back_to_osmand">Zpět do OsmAnd</string>
+    <string name="last_response_duration">Poslední odpověď: před %1$s</string>
+    <string name="last_update_from_telegram_duration">Poslední aktualizace z Telegramu: před %1$s</string>
+    <string name="last_response_date">Poslední odpověď: %1$s</string>
+    <string name="last_update_from_telegram_date">Poslední aktualizace z Telegramu: %1$s</string>
+    <string name="shared_string_error_short">CHYBA</string>
+    <string name="send_report">Odeslat hlášení</string>
 </resources>

@@ -58,7 +58,8 @@ import net.osmand.plus.routing.PreviewRouteLineInfo;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.CommonPreference;
-import net.osmand.plus.settings.backend.backup.ProfileSettingsItem;
+import net.osmand.plus.settings.backend.backup.FileSettingsHelper.SettingsExportListener;
+import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.fragments.RouteLineAppearanceFragment.OnApplyRouteLineListener;
 import net.osmand.plus.track.ColorsCard;
@@ -110,7 +111,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 	private static final String IS_BASE_PROFILE_IMPORTED = "is_base_profile_imported";
 	private static final String IS_NEW_PROFILE_KEY = "is_new_profile_key";
 
-	private SettingsHelper.SettingsExportListener exportListener;
+	private SettingsExportListener exportListener;
 
 	private ProgressDialog progress;
 
@@ -477,9 +478,9 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		super.onPause();
 		if (isNewProfile) {
 			File file = ConfigureProfileFragment.getBackupFileForCustomMode(app, changedProfile.stringKey);
-			boolean fileExporting = app.getSettingsHelper().isFileExporting(file);
+			boolean fileExporting = app.getFileSettingsHelper().isFileExporting(file);
 			if (fileExporting) {
-				app.getSettingsHelper().updateExportListener(file, null);
+				app.getFileSettingsHelper().updateExportListener(file, null);
 			}
 		}
 	}
@@ -690,9 +691,9 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		}
 	}
 
-	private SettingsHelper.SettingsExportListener getSettingsExportListener() {
+	private SettingsExportListener getSettingsExportListener() {
 		if (exportListener == null) {
-			exportListener = new SettingsHelper.SettingsExportListener() {
+			exportListener = new SettingsExportListener() {
 
 				@Override
 				public void onSettingsExportFinished(@NonNull File file, boolean succeed) {
@@ -814,7 +815,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 			if (!tempDir.exists()) {
 				tempDir.mkdirs();
 			}
-			app.getSettingsHelper().exportSettings(tempDir, mode.getStringKey(),
+			app.getFileSettingsHelper().exportSettings(tempDir, mode.getStringKey(),
 					getSettingsExportListener(), true, new ProfileSettingsItem(app, mode));
 		}
 	}
@@ -833,10 +834,10 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 	private void checkSavingProfile() {
 		if (isNewProfile) {
 			File file = ConfigureProfileFragment.getBackupFileForCustomMode(app, changedProfile.stringKey);
-			boolean fileExporting = app.getSettingsHelper().isFileExporting(file);
+			boolean fileExporting = app.getFileSettingsHelper().isFileExporting(file);
 			if (fileExporting) {
 				showNewProfileSavingDialog(null);
-				app.getSettingsHelper().updateExportListener(file, getSettingsExportListener());
+				app.getFileSettingsHelper().updateExportListener(file, getSettingsExportListener());
 			} else if (file.exists()) {
 				dismissProfileSavingDialog();
 				customProfileSaved();

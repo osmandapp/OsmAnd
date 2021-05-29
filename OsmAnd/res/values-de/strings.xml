@@ -4132,4 +4132,5 @@
     <string name="cloud_email_already_registered">Account mit dieser E-Mail wurde bereits registriert.</string>
     <string name="resend_verification_code">Code erneut senden</string>
     <string name="verification_code_missing">Ich habe keinen Bestätigungscode erhalten</string>
+    <string name="select_nav_profile_dialog_message">Die \'Navigationsart\' bestimmt, wie Routen berechnet werden. Sie können zwischen Offline- und Online-Routenplanern wählen.</string>
 </resources>
