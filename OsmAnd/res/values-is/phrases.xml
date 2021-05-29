@@ -3962,4 +3962,7 @@
     <string name="poi_operator_type_consortium">Tegund rekstraraðila: fyrirtækjasamsteypa</string>
     <string name="poi_refugee_site">Flóttamannabúðir</string>
     <string name="poi_trolley_bay">Stæði fyrir innkaupakörfur</string>
+    <string name="poi_climbing_grade_uiaa_min">Auðveldasta leið (UIAA-flokkun)</string>
+    <string name="poi_climbing_grade_french_min">Auðveldasta leið (frönsk-flokkun)</string>
+    <string name="poi_climbing_grade_saxon_min">Auðveldasta leið (Saxon-flokkun)</string>
 </resources>
