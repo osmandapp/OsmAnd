@@ -249,7 +249,7 @@ public class SelectIndexesHelper {
 
 	private void updateSelectableItem(SelectableItem selectableItem,
 	                                  DownloadItem downloadItem) {
-		selectableItem.setTitle(downloadItem.getVisibleName(app, app.getRegions(), false));
+		selectableItem.setTitle(downloadItem.getVisibleName(app, app.getRegions(), "%2$s"));
 
 		String size = downloadItem.getSizeDescription(app);
 		String addDescr = downloadItem.getAdditionalDescription(app);

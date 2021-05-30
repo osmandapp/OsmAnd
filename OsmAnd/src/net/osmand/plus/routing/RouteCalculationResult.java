@@ -61,7 +61,7 @@ public class RouteCalculationResult {
 	protected List<RouteDirectionInfo> cacheAgreggatedDirections;
 	protected List<LocationPoint> locationPoints = new ArrayList<LocationPoint>();
 
-	protected final List<WorldRegion> downloadMaps;
+	protected List<WorldRegion> downloadMaps = new ArrayList<>();
 
 	// params
 	protected final ApplicationMode appMode;
@@ -82,7 +82,6 @@ public class RouteCalculationResult {
 
 	public RouteCalculationResult(String errorMessage) {
 		this.errorMessage = errorMessage;
-		this.downloadMaps = null;
 		this.routingTime = 0;
 		this.loadedTiles = 0;
 		this.visitedSegments = 0;
@@ -124,7 +123,6 @@ public class RouteCalculationResult {
 		this.calculateTime = 0;
 		this.visitedSegments = 0;
 		this.errorMessage = null;
-		this.downloadMaps = null;
 		this.intermediatePoints = new int[params.intermediates == null ? 0 : params.intermediates.size()];
 		List<Location> locations = list == null ? new ArrayList<Location>() : new ArrayList<Location>(list);
 		List<RouteDirectionInfo> localDirections = directions == null? new ArrayList<RouteDirectionInfo>() : new ArrayList<RouteDirectionInfo>(directions);
@@ -183,7 +181,6 @@ public class RouteCalculationResult {
 		}
 		List<RouteDirectionInfo> computeDirections = new ArrayList<RouteDirectionInfo>();
 		this.errorMessage = null;
-		this.downloadMaps = null;
 		this.intermediatePoints = new int[intermediates == null ? 0 : intermediates.size()];
 		List<Location> locations = new ArrayList<Location>();
 		ArrayList<AlarmInfo> alarms = new ArrayList<AlarmInfo>();

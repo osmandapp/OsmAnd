@@ -198,12 +198,13 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private boolean editButtonCollapsed;
 	private boolean addButtonCollapsing;
 	private boolean addButtonCollapsed;
-	private boolean isStartFinishIntermediatesMaps;
 
 	private List<WorldRegion> suggestedMissingMaps;
+	boolean isNavigationDisable;
 
-	private List<WorldRegion> missingMapsOnline;
-	boolean isCardUpdated = false;
+	boolean onlineCheckNeeded;
+
+	boolean isCardUpdated;
 
 	private interface OnButtonCollapsedListener {
 		void onButtonCollapsed(boolean success);
@@ -523,6 +524,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			SuggestionsMapsProvider suggestionsMapsProvider = new SuggestionsMapsProvider(params);
 			List<Location> onlinePoints = suggestionsMapsProvider.findOnlineRoutePoints();
 			suggestedMissingMaps = suggestionsMapsProvider.getMissingMaps(onlinePoints);
+			onlineCheckNeeded = true;
 		} else {
 			suggestedMissingMaps = params.missingMaps;
 		}
@@ -532,14 +534,18 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		}
 	}
 
-
 	public List<WorldRegion> getSuggestedMissingMaps() {
 		return suggestedMissingMaps;
+	}
+
+	public boolean isOnlineCheckNeeded() {
+		return onlineCheckNeeded;
 	}
 
 	public void clearSuggestedMissingMaps() {
 		suggestedMissingMaps = null;
 		isCardUpdated = false;
+		onlineCheckNeeded = false;
 	}
 
 	public void openMenuHeaderOnly() {
@@ -634,9 +640,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
 		RoutingHelper routingHelper = app.getRoutingHelper();
 
-		isStartFinishIntermediatesMaps = !Algorithms.isEmpty(routingHelper.getRoute().getDownloadMaps());
-		boolean isDirectLineMapsMissing = !Algorithms.isEmpty(suggestedMissingMaps);
-		boolean isOnlineMapsMissing = !Algorithms.isEmpty(missingMapsOnline);
+		boolean isNavigationEnable = !Algorithms.isEmpty(mapActivity.getMapRouteInfoMenu().getSuggestedMissingMaps());
+		isNavigationDisable = !Algorithms.isEmpty(mapActivity.getRoutingHelper().getRoute().getDownloadMaps());
 
 		List<BaseCard> menuCards = new ArrayList<>();
 
@@ -716,13 +721,13 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				menuCards.add(new PublicTransportBetaWarningCard(mapActivity));
 			} else if (app.getRoutingHelper().isBoatMode()) {
 				menuCards.add(new NauticalBridgeHeightWarningCard(mapActivity));
-			} else if (isDirectLineMapsMissing || isOnlineMapsMissing) {
+			} else if (isNavigationEnable) {
 				menuCards.add(new SuggestionsMapsDownloadWarningCard(mapActivity));
-			} else if (app.getTargetPointsHelper().hasTooLongDistanceToNavigate() && !isStartFinishIntermediatesMaps) {
+			} else if (app.getTargetPointsHelper().hasTooLongDistanceToNavigate() && !isNavigationDisable) {
 				menuCards.add(new LongDistanceWarningCard(mapActivity));
 			}
 		} else {
-			if (isStartFinishIntermediatesMaps) {
+			if (isNavigationDisable) {
 				menuCards.add(new SuggestionsMapsDownloadWarningCard(mapActivity));
 			} else {
 				// Home/work card
@@ -1128,7 +1133,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			color2 = color1;
 		} else {
 			color1 = nightMode ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light;
-			if (routeCalculated || currentLocationNotFound && !helper.isRouteBeingCalculated() && !isStartFinishIntermediatesMaps) {
+			if (routeCalculated || currentLocationNotFound && !helper.isRouteBeingCalculated() && !isNavigationDisable) {
 				AndroidUtils.setBackground(app, startButton, nightMode, R.color.active_color_primary_light, R.color.active_color_primary_dark);
 				color2 = color1;
 			} else {
@@ -1147,7 +1152,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			startButtonText.setText(R.string.shared_string_control_start);
 		}
 
-		if (isStartFinishIntermediatesMaps) {
+		if (isNavigationDisable) {
 			startButton.setClickable(false);
 			startButton.setEnabled(false);
 		} else {

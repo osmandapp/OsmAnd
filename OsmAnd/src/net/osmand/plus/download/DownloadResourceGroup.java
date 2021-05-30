@@ -240,8 +240,8 @@ public class DownloadResourceGroup {
 				} else if(firstOrder > secondOrder) {
 					return 1;
 				}
-				String firstName = firstItem.getVisibleName(app, osmandRegions);
-				String secondName = secondItem.getVisibleName(app, osmandRegions);
+				String firstName = firstItem.getVisibleName(app, osmandRegions, "%1$s %2$s");
+				String secondName = secondItem.getVisibleName(app, osmandRegions, "%1$s %2$s");
 				return collator.compare(firstName, secondName);
 			}
 		});

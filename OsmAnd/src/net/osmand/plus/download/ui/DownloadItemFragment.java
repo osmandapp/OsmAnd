@@ -154,7 +154,7 @@ public class DownloadItemFragment extends DialogFragment implements DownloadEven
 		group = indexes.getGroupById(regionId);
 		CustomIndexItem indexItem = (CustomIndexItem) group.getItemByIndex(itemIndex);
 		if (indexItem != null) {
-			toolbar.setTitle(indexItem.getVisibleName(app, app.getRegions()));
+			toolbar.setTitle(indexItem.getVisibleName(app, app.getRegions(), "%1$s %2$s"));
 
 			DownloadDescriptionInfo descriptionInfo = indexItem.getDescriptionInfo();
 			if (descriptionInfo != null) {

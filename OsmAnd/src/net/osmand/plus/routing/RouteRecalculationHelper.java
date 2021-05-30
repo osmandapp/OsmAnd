@@ -28,7 +28,7 @@ class RouteRecalculationHelper {
 
 	private static final int RECALCULATE_THRESHOLD_COUNT_CAUSING_FULL_RECALCULATE = 3;
 	private static final int RECALCULATE_THRESHOLD_CAUSING_FULL_RECALCULATE_INTERVAL = 2 * 60 * 1000;
-	private static final long WAITING_TIME = 60000;
+	private static final long WAITING_TIME = 6000;
 
 	private final OsmandApplication app;
 	private final RoutingHelper routingHelper;

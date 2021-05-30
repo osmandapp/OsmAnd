@@ -482,7 +482,7 @@ public class MapDataMenuController extends MenuController {
 				String fn;
 				if (indexItem != null) {
 					fn = FileNameTranslationHelper.getFileName(getMapActivity(), app.getRegions(),
-							indexItem.getVisibleName(getMapActivity(), app.getRegions()));
+							indexItem.getVisibleName(getMapActivity(), app.getRegions(), "%1$s %2$s"));
 				} else {
 					fn = getPointDescription().getName();
 				}

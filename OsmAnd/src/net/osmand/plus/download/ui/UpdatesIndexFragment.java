@@ -133,8 +133,8 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 		listAdapter.sort(new Comparator<IndexItem>() {
 			@Override
 			public int compare(IndexItem indexItem, IndexItem indexItem2) {
-				return collator.compare(indexItem.getVisibleName(app, osmandRegions),
-						indexItem2.getVisibleName(app, osmandRegions));
+				return collator.compare(indexItem.getVisibleName(app, osmandRegions, "%1$s %2$s"),
+						indexItem2.getVisibleName(app, osmandRegions, "%1$s %2$s"));
 			}
 		});
 		setListAdapter(listAdapter);

@@ -11,6 +11,7 @@ import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadItem;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.util.Algorithms;
 
 import java.text.DateFormat;
@@ -20,17 +21,16 @@ import java.util.List;
 import static net.osmand.plus.download.MultipleDownloadItem.getIndexItem;
 
 public class SuggestionsMapsDownloadWarningCard extends WarningCard {
-	boolean isNavigationDisable;
 	boolean isNavigationEnable;
 	private SelectionBottomSheet dialog;
 
 	public SuggestionsMapsDownloadWarningCard(@NonNull MapActivity mapActivity) {
 		super(mapActivity);
-		isNavigationEnable = !Algorithms.isEmpty(mapActivity.getMapRouteInfoMenu().getSuggestedMissingMaps());
-		isNavigationDisable = !Algorithms.isEmpty(mapActivity.getRoutingHelper().getRoute().getDownloadMaps());
+		MapRouteInfoMenu mapRouteInfoMenu = mapActivity.getMapRouteInfoMenu();
+		isNavigationEnable = !Algorithms.isEmpty(mapRouteInfoMenu.getSuggestedMissingMaps());
 		if (isNavigationEnable) {
 			imageId = R.drawable.ic_action_time_span;
-			title = mapActivity.getString(R.string.direct_line_maps_required_descr);
+			title = mapRouteInfoMenu.isOnlineCheckNeeded() ? mapActivity.getString(R.string.online_maps_required_descr) : mapActivity.getString(R.string.direct_line_maps_required_descr);
 			linkText = mapActivity.getString(R.string.online_direct_line_maps_link);
 		} else {
 			imageId = R.drawable.ic_map;
@@ -126,7 +126,7 @@ public class SuggestionsMapsDownloadWarningCard extends WarningCard {
 			suggestedMaps = mapActivity.getRoutingHelper().getRoute().getDownloadMaps();
 		}
 		List<DownloadItem> suggestedDownloadsMaps = new ArrayList<>();
-		if (!downloadIndexes) {
+		if (!downloadIndexes && !Algorithms.isEmpty(suggestedMaps)) {
 			for (WorldRegion suggestedDownloadMap : suggestedMaps) {
 				suggestedDownloadsMaps.addAll(app.getDownloadThread().getIndexes().getDownloadItems(suggestedDownloadMap));
 			}
@@ -143,7 +143,7 @@ public class SuggestionsMapsDownloadWarningCard extends WarningCard {
 
 	private void updateSelectableItem(SelectionBottomSheet.SelectableItem selectableItem,
 									  DownloadItem downloadItem) {
-		selectableItem.setTitle(downloadItem.getVisibleMapsName(app, app.getRegions()));
+		selectableItem.setTitle(downloadItem.getVisibleName(app, app.getRegions(), "%2$s, %1$s"));
 		DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(app);
 		String size = downloadItem.getSizeDescription(app);
 		String additionalDescription = downloadItem.getAdditionalDescription(app);

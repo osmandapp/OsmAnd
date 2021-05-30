@@ -1,5 +1,7 @@
 package net.osmand.plus.routing;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
@@ -21,7 +23,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import static net.osmand.util.MapUtils.movePointToDistance;
+import static net.osmand.util.MapUtils.calculateMidPoint;
 
 public class SuggestionsMapsProvider {
 
@@ -46,18 +48,14 @@ public class SuggestionsMapsProvider {
 	}
 
 	public List<Location> getLocationBasedOnDistanceInterval(List<Location> points) {
-		List<Location> mapsBasedOnPoints = new ArrayList<>();
 		for (int i = 0; i < points.size(); i++) {
 			int nextIndex = i + 1 < points.size() ? i + 1 : i;
-			mapsBasedOnPoints.add(0, points.get(i));
-			mapsBasedOnPoints.add(mapsBasedOnPoints.size(), points.get(nextIndex));
-			while (mapsBasedOnPoints.get(0).distanceTo(mapsBasedOnPoints.get(mapsBasedOnPoints.size() - 1)) > DISTANCE) {
-				float bearing = mapsBasedOnPoints.get(0).bearingTo(mapsBasedOnPoints.get(mapsBasedOnPoints.size() - 1));
-				Location location = movePointToDistance(mapsBasedOnPoints.get(0).getLatitude(), mapsBasedOnPoints.get(0).getLongitude(), DISTANCE, bearing);
-				mapsBasedOnPoints.add(0, location);
+			while (points.get(i).distanceTo(points.get(nextIndex)) > DISTANCE) {
+				Location location = calculateMidPoint(points.get(i), points.get(nextIndex));
+				points.add(nextIndex, location);
 			}
 		}
-		return mapsBasedOnPoints;
+		return points;
 	}
 
 	public LinkedList<Location> getStartFinishIntermediatesPoints(String locationProvider) {
@@ -88,22 +86,7 @@ public class SuggestionsMapsProvider {
 			route = response.getRoute();
 			routeLocation.addAll(route);
 		}
-		List<Location> mapsBasedOnPoints = new ArrayList<>();
-		for (int i = 0; i < routeLocation.size(); i++) {
-			for (int j = i + 1; j < routeLocation.size(); j++) {
-				if (routeLocation.get(i).distanceTo(routeLocation.get(j)) > DISTANCE) {
-					mapsBasedOnPoints.add(routeLocation.get(j));
-					i = j;
-				}
-			}
-		}
-		return mapsBasedOnPoints;
-	}
-
-	private OnlineRoutingEngine createInitStateEngine() {
-		Map<String, String> paramsOnlineRouting = new HashMap<>();
-		paramsOnlineRouting.put(EngineParameter.VEHICLE_KEY.name(), params.mode.getRoutingProfile());
-		return EngineType.OSRM_TYPE.newInstance(paramsOnlineRouting);
+		return getOnlineLocationsBasedOnDistance(routeLocation);
 	}
 
 	public List<WorldRegion> getMissingMaps(List<Location> points) throws IOException {
@@ -138,5 +121,25 @@ public class SuggestionsMapsProvider {
 			}
 		}
 		return new ArrayList<>(suggestedMaps);
+	}
+
+	@NonNull
+	private List<Location> getOnlineLocationsBasedOnDistance(List<Location> routeLocation) {
+		List<Location> mapsBasedOnPoints = new ArrayList<>();
+		for (int i = 0, j; i < routeLocation.size(); i = j) {
+			for (j = i + 1; j < routeLocation.size(); j++) {
+				if (routeLocation.get(i).distanceTo(routeLocation.get(j)) >= DISTANCE) {
+					mapsBasedOnPoints.add(routeLocation.get(j));
+					break;
+				}
+			}
+		}
+		return mapsBasedOnPoints;
+	}
+
+	private OnlineRoutingEngine createInitStateEngine() {
+		Map<String, String> paramsOnlineRouting = new HashMap<>();
+		paramsOnlineRouting.put(EngineParameter.VEHICLE_KEY.name(), params.mode.getRoutingProfile());
+		return EngineType.OSRM_TYPE.newInstance(paramsOnlineRouting);
 	}
 }

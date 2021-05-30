@@ -77,7 +77,7 @@ public class DownloadNotification extends OsmandNotification {
 			if (contentText.length() > 0) {
 				contentText.append(", ");
 			}
-			contentText.append(i.getVisibleName(app, app.getRegions()));
+			contentText.append(i.getVisibleName(app, app.getRegions(), "%1$s %2$s"));
 			contentText.append(" ").append(i.getType().getString(app));
 		}
 		notificationBuilder.setContentTitle(msg)

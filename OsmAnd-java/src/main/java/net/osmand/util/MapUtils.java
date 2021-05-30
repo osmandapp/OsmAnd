@@ -12,12 +12,6 @@ import java.util.Comparator;
 import java.util.List;
 
 import static com.jwetherell.openmap.common.MoreMath.QUAD_PI_D;
-import static java.lang.Math.PI;
-import static java.lang.Math.asin;
-import static java.lang.Math.atan2;
-import static java.lang.Math.cos;
-import static java.lang.Math.sin;
-import static java.lang.Math.toDegrees;
 
 
 /**
@@ -755,18 +749,5 @@ public class MapUtils {
 
 	public static double getSqrtDistance(float startX, float startY, float endX, float endY) {
 		return Math.sqrt((endX - startX) * (endX - startX) + (endY - startY) * (endY - startY));
-	}
-
-	public static Location movePointToDistance(double latitude, double longitude, double distanceInMetres, double bearing) {
-		double bearingRad = toRadians(bearing);
-		double latRad = toRadians(latitude);
-		double lonRad = toRadians(longitude);
-		double distFraction = distanceInMetres / EARTH_RADIUS_A;
-
-		double latitudeResult = asin(sin(latRad) * cos(distFraction) + cos(latRad) * sin(distFraction) * cos(bearingRad));
-		double a = atan2(sin(bearingRad) * sin(distFraction) * cos(latRad), cos(distFraction) - sin(latRad) * sin(latitudeResult));
-		double longitudeResult = (lonRad + a + 3 * PI) % (2 * PI) - PI;
-		LatLon latLon = new LatLon(toDegrees(latitudeResult), toDegrees(longitudeResult));
-		return new Location("", latLon.getLatitude(), latLon.getLongitude());
 	}
 }

@@ -525,7 +525,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 						|| group.getType() == DownloadResourceGroupType.FONTS_HEADER) {
 					if (group.getIndividualResources() != null) {
 						for (IndexItem item : group.getIndividualResources()) {
-							name = item.getVisibleName(ctx, osmandRegions, false).toLowerCase();
+							name = item.getVisibleName(ctx, osmandRegions, "%2$s").toLowerCase();
 							if (isMatch(conds, false, name)) {
 								filter.add(item);
 								break;
@@ -650,7 +650,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 							if (obj1 instanceof DownloadResourceGroup) {
 								str1 = ((DownloadResourceGroup) obj1).getName(ctx);
 							} else if (obj1 instanceof IndexItem) {
-								str1 = ((IndexItem) obj1).getVisibleName(getMyApplication(), osmandRegions, false);
+								str1 = ((IndexItem) obj1).getVisibleName(getMyApplication(), osmandRegions, "%2$s");
 							} else {
 								Amenity a = ((CityItem) obj1).getAmenity();
 								if ("city".equals(a.getSubType())) {
@@ -662,7 +662,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 							if (obj2 instanceof DownloadResourceGroup) {
 								str2 = ((DownloadResourceGroup) obj2).getName(ctx);
 							} else if (obj2 instanceof IndexItem) {
-								str2 = ((IndexItem) obj2).getVisibleName(getMyApplication(), osmandRegions, false);
+								str2 = ((IndexItem) obj2).getVisibleName(getMyApplication(), osmandRegions, "%2$s");
 							} else {
 								Amenity a = ((CityItem) obj2).getAmenity();
 								if ("city".equals(a.getSubType())) {

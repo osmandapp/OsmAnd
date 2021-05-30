@@ -235,9 +235,9 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 
 			String indexFormattedName = indexItem.getBasename().replaceAll("-tts", "");
 			boolean isDefault = indexItem.isDownloaded() && indexFormattedName.equals(app.getLanguage()) && indexItem.getRelatedGroup().getType().equals(VOICE_HEADER_TTS);
-			String title = isDefault ? getString(R.string.use_system_language) : indexItem.getVisibleName(app, app.getRegions(), false);
+			String title = isDefault ? getString(R.string.use_system_language) : indexItem.getVisibleName(app, app.getRegions(), "%2$s");
 			String dateUpdate = indexItem.getDate(SimpleDateFormat.getDateInstance(DateFormat.DEFAULT));
-			String description = isDefault ? downloadItem.getVisibleName(app, app.getRegions(), false) : indexItem.getSizeDescription(app) + " • " + dateUpdate;
+			String description = isDefault ? downloadItem.getVisibleName(app, app.getRegions(), "%2$s") : indexItem.getSizeDescription(app) + " • " + dateUpdate;
 
 			final TextView textDescription = container.findViewById(R.id.description);
 			final ProgressBar progressBar = container.findViewById(R.id.ProgressBar);
