@@ -414,9 +414,9 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 					ApplicationMode selectedMode = getSelectedAppMode();
 					if (!ApplicationMode.values(app).contains(selectedMode)) {
 						ApplicationMode.changeProfileAvailability(selectedMode, true, app);
-						mapActivity.getMapLayers().getMapWidgetRegistry().updateVisibleWidgets();
 					}
 					settings.setApplicationMode(selectedMode);
+					mapActivity.getMapLayers().getMapWidgetRegistry().updateVisibleWidgets();
 					fragmentManager.beginTransaction()
 							.remove(this)
 							.addToBackStack(TAG)
