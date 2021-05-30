@@ -17,9 +17,17 @@ import java.util.List;
 
 public class PredefinedProfilesGroup extends ProfilesGroup {
 
+	private String type;
+
 	public PredefinedProfilesGroup(@NonNull String title,
+	                               @NonNull String type,
 	                               @NonNull List<ProfileDataObject> profiles) {
 		super(title, profiles);
+		this.type = type;
+	}
+
+	public String getType() {
+		return type;
 	}
 
 	@Override

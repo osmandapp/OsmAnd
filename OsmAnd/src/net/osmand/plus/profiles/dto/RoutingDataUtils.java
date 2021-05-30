@@ -6,6 +6,7 @@ import net.osmand.CallbackWithObject;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.profiles.dto.RoutingDataObject.RoutingProfilesResources;
 import net.osmand.router.GeneralRouter;
@@ -60,7 +61,7 @@ public class RoutingDataUtils {
 		if (!Algorithms.isEmpty(predefined)) {
 			result.addAll(predefined);
 		}
-		result.add(new ProfilesGroup(getString(R.string.shared_string_custom), getOnlineRoutingProfiles()));
+		result.add(new ProfilesGroup(getString(R.string.shared_string_custom), getOnlineRoutingProfiles(true)));
 		sortItems(result);
 		return result;
 	}
@@ -69,7 +70,7 @@ public class RoutingDataUtils {
 		List<ProfileDataObject> profiles = new ArrayList<>();
 		profiles.addAll(getOfflineRoutingProfiles());
 		profiles.addAll(getExternalRoutingProfiles());
-		profiles.addAll(getOnlineRoutingProfiles());
+		profiles.addAll(getOnlineRoutingProfiles(false));
 
 		Map<String, ProfileDataObject> result = new HashMap<>();
 		for (ProfileDataObject onlineEngine : profiles) {
@@ -148,9 +149,10 @@ public class RoutingDataUtils {
 		return result;
 	}
 
-	private List<ProfileDataObject> getOnlineRoutingProfiles() {
+	private List<ProfileDataObject> getOnlineRoutingProfiles(boolean onlyCustom) {
+		OnlineRoutingHelper helper = app.getOnlineRoutingHelper();
 		List<ProfileDataObject> objects = new ArrayList<>();
-		List<OnlineRoutingEngine> engines = app.getOnlineRoutingHelper().getEngines();
+		List<OnlineRoutingEngine> engines = onlyCustom ? helper.getOnlyCustomEngines() : helper.getEngines();
 		for (int i = 0; i < engines.size(); i++) {
 			OnlineRoutingEngine engine = engines.get(i);
 			objects.add(new OnlineRoutingDataObject(
@@ -186,6 +188,7 @@ public class RoutingDataUtils {
 		for (int i = 0; i < providers.length(); i++) {
 			JSONObject groupObject = providers.getJSONObject(i);
 			String providerName = groupObject.getString(NAME);
+			String providerType = groupObject.getString(TYPE);
 			String providerUrl = groupObject.getString(URL);
 			JSONArray items = groupObject.getJSONArray(ROUTES);
 			List<ProfileDataObject> engines = new ArrayList<>();
@@ -199,10 +202,11 @@ public class RoutingDataUtils {
 					iconRes = RoutingProfilesResources.valueOf(type).getIconRes();
 					engineName = getString(RoutingProfilesResources.valueOf(type).getStringRes());
 				}
-				RoutingDataObject engine = new OnlineRoutingDataObject(engineName, engineUrl, null, iconRes, true, j);
+				String key = OnlineRoutingEngine.generatePredefinedKey(providerName, type);
+				RoutingDataObject engine = new OnlineRoutingDataObject(engineName, engineUrl, key, iconRes, true, j);
 				engines.add(engine);
 			}
-			ProfilesGroup group = new PredefinedProfilesGroup(providerName, engines);
+			ProfilesGroup group = new PredefinedProfilesGroup(providerName, providerType, engines);
 			group.setDescription(providerUrl);
 			result.add(group);
 		}

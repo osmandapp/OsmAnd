@@ -24,7 +24,12 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.onlinerouting.EngineParameter;
+import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
+import net.osmand.plus.onlinerouting.engine.EngineType;
+import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.onlinerouting.ui.OnlineRoutingEngineFragment;
+import net.osmand.plus.profiles.dto.PredefinedProfilesGroup;
 import net.osmand.plus.profiles.dto.ProfilesGroup;
 import net.osmand.plus.profiles.dto.ProfileDataObject;
 import net.osmand.plus.profiles.dto.RoutingDataObject;
@@ -48,7 +53,7 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 
 	private boolean onlineRouting = false;
 	private List<ProfilesGroup> predefinedEngines;
-	private List<ProfilesGroup> profiles = new ArrayList<>();
+	private List<ProfilesGroup> profileGroups = new ArrayList<>();
 
 	public static void showInstance(@NonNull FragmentActivity activity,
 	                                @Nullable Fragment target,
@@ -119,7 +124,7 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 	}
 
 	private void createProfilesList() {
-		for (ProfilesGroup group : profiles) {
+		for (ProfilesGroup group : profileGroups) {
 			List<ProfileDataObject> items = group.getProfiles();
 			if (!Algorithms.isEmpty(items)) {
 				addGroupHeaderItem(group);
@@ -239,12 +244,45 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 
 	@Override
 	protected void refreshProfiles() {
-		profiles.clear();
+		profileGroups.clear();
 		if (onlineRouting) {
-			profiles = getDataUtils().getOnlineProfiles(predefinedEngines);
+			profileGroups = getDataUtils().getOnlineProfiles(predefinedEngines);
 		} else {
-			profiles = getDataUtils().getOfflineProfiles();
+			profileGroups = getDataUtils().getOfflineProfiles();
 		}
+	}
+
+	@Override
+	protected void onItemSelected(ProfileDataObject profile) {
+		if (((RoutingDataObject) profile).isPredefined()) {
+			savePredefinedEngine((RoutingDataObject) profile);
+		}
+		super.onItemSelected(profile);
+	}
+
+	private void savePredefinedEngine(RoutingDataObject profile) {
+		String key = profile.getStringKey();
+		OnlineRoutingHelper helper = app.getOnlineRoutingHelper();
+		PredefinedProfilesGroup group = (PredefinedProfilesGroup) findGroupOfProfile(profile);
+		if (group != null) {
+			String type = group.getType().toUpperCase();
+			OnlineRoutingEngine engine = EngineType.getTypeByName(type).newInstance(null);
+			engine.put(EngineParameter.KEY, key);
+			engine.put(EngineParameter.CUSTOM_URL, profile.getDescription());
+			String namePattern = getString(R.string.ltr_or_rtl_combine_via_dash);
+			String name = String.format(namePattern, group.getTitle(), profile.getName());
+			engine.put(EngineParameter.CUSTOM_NAME, name);
+			helper.saveEngine(engine);
+		}
+	}
+
+	private ProfilesGroup findGroupOfProfile(ProfileDataObject profile) {
+		for (ProfilesGroup group : profileGroups) {
+			if (group.getProfiles().contains(profile)) {
+				return group;
+			}
+		}
+		return null;
 	}
 
 	private RoutingDataUtils getDataUtils() {

@@ -201,16 +201,20 @@ public abstract class SelectProfileBottomSheet extends BasePreferenceBottomSheet
 		return new OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Bundle args = new Bundle();
-				args.putString(PROFILE_KEY_ARG, profile.getStringKey());
-				args.putBoolean(PROFILES_LIST_UPDATED_ARG, isProfilesListUpdated(profile));
-				Fragment target = getTargetFragment();
-				if (target instanceof OnSelectProfileCallback) {
-					((OnSelectProfileCallback) target).onProfileSelected(args);
-				}
-				dismiss();
+				onItemSelected(profile);
 			}
 		};
+	}
+
+	protected void onItemSelected(ProfileDataObject profile) {
+		Bundle args = new Bundle();
+		args.putString(PROFILE_KEY_ARG, profile.getStringKey());
+		args.putBoolean(PROFILES_LIST_UPDATED_ARG, isProfilesListUpdated(profile));
+		Fragment target = getTargetFragment();
+		if (target instanceof OnSelectProfileCallback) {
+			((OnSelectProfileCallback) target).onProfileSelected(args);
+		}
+		dismiss();
 	}
 
 	protected boolean isProfilesListUpdated(ProfileDataObject profile) {
