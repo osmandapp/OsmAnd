@@ -350,9 +350,8 @@ public class DownloadActivityType {
 	public String getVisibleName(DownloadItem downloadItem, Context ctx, OsmandRegions osmandRegions, boolean includingParent) {
 		if (this == VOICE_FILE) {
 			String fileName = downloadItem.getFileName();
-			if (fileName.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)) {
-				return FileNameTranslationHelper.getVoiceName(ctx, getBasename(downloadItem));
-			} else if (fileName.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS)) {
+			if (fileName.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)
+					|| fileName.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS)) {
 				return FileNameTranslationHelper.getVoiceName(ctx, getBasename(downloadItem));
 			}
 			return getBasename(downloadItem);
@@ -506,5 +505,4 @@ public class DownloadActivityType {
 		}
 		return fileName;
 	}
-
 }

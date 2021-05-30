@@ -11,12 +11,6 @@ import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-import androidx.annotation.DimenRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.StringRes;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -34,6 +28,7 @@ import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
 import net.osmand.plus.track.TrackSelectSegmentBottomSheet;
@@ -49,6 +44,12 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.DimenRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import static net.osmand.plus.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
 import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.OTHER_GROUP;
@@ -225,6 +226,7 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 	}
 
 	private void createSuggestedVoiceItemsView(List<DownloadItem> suggestedMaps) {
+		OsmandPreference<String> voiceProvider = settings.VOICE_PROVIDER;
 		int defaultLanguagePosition = items.size();
 
 		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
@@ -243,7 +245,7 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 			final ProgressBar progressBar = container.findViewById(R.id.ProgressBar);
 			final ImageView secondaryIcon = container.findViewById(R.id.secondary_icon);
 
-			boolean selected = indexItem.getBasename().equals(settings.VOICE_PROVIDER.getModeValue(getAppMode()));
+			boolean selected = indexItem.getBasename().equals(voiceProvider.getModeValue(getAppMode()));
 			final BottomSheetItemWithCompoundButton[] voiceDownloadedItem = new BottomSheetItemWithCompoundButton[1];
 			voiceDownloadedItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 					.setCompoundButtonColorId(getActiveColorId())
@@ -258,7 +260,10 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 							if (indexItem.isDownloaded()) {
 								boolean checked = !voiceDownloadedItem[0].isChecked();
 								voiceDownloadedItem[0].setChecked(checked);
-								settings.VOICE_PROVIDER.setModeValue(getAppMode(), indexItem.getBasename());
+								voiceProvider.setModeValue(getAppMode(), indexItem.getBasename());
+								if (getTargetFragment() instanceof OnPreferenceChanged) {
+									((OnPreferenceChanged) getTargetFragment()).onPreferenceChanged(voiceProvider.getId());
+								}
 								dismiss();
 							} else {
 								if (downloadThread.isDownloading(indexItem)) {
