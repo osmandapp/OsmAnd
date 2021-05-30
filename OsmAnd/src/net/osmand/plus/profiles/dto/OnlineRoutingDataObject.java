@@ -4,16 +4,30 @@ import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
 
-public class OnlineRoutingDataObject extends ProfileDataObject {
+public class OnlineRoutingDataObject extends RoutingDataObject {
 
 	private int order;
+	private boolean isPredefined;
 
 	public OnlineRoutingDataObject(String name,
 	                               String description,
 	                               String stringKey,
+	                               int iconRes,
+	                               boolean isPredefined,
 	                               int order) {
-		super(name, description, stringKey, R.drawable.ic_world_globe_dark, false, null, null);
+		super(stringKey, name, description, iconRes, false, null);
 		this.order = order;
+		this.isPredefined = isPredefined;
+	}
+
+	@Override
+	public boolean isOnline() {
+		return true;
+	}
+
+	@Override
+	public boolean isPredefined() {
+		return isPredefined;
 	}
 
 	@Override

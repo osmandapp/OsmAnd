@@ -38,6 +38,7 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 
 	private Map<String, ProfileDataObject> routingProfileDataObjects;
 	private Preference navigationType;
+	private RoutingDataUtils routingDataUtils;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -133,7 +134,14 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 	}
 
 	private void updateRoutingProfilesDataObjects() {
-		routingProfileDataObjects = RoutingDataUtils.getRoutingProfiles(app);
+		routingProfileDataObjects = getRoutingDataUtils().getRoutingProfiles();
+	}
+
+	private RoutingDataUtils getRoutingDataUtils() {
+		if (routingDataUtils == null) {
+			routingDataUtils = new RoutingDataUtils(app);
+		}
+		return routingDataUtils;
 	}
 
 	void updateRoutingProfile(String profileKey) {

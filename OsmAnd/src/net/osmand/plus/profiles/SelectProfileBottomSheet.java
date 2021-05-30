@@ -11,7 +11,9 @@ import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -23,17 +25,21 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.ProgressWithTitleItem;
 import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.profiles.dto.ProfileDataObject;
+import net.osmand.plus.profiles.dto.ProfilesGroup;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
+import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
+import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
 import net.osmand.util.Algorithms;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public abstract class SelectProfileBottomSheet extends BasePreferenceBottomSheet {
 
@@ -46,9 +52,7 @@ public abstract class SelectProfileBottomSheet extends BasePreferenceBottomSheet
 	public final static String PROFILES_LIST_UPDATED_ARG = "is_profiles_list_updated";
 
 	protected OsmandApplication app;
-
-	private final List<ProfileDataObject> profiles = new ArrayList<>();
-	private String selectedItemKey;
+	protected String selectedItemKey;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -76,30 +80,44 @@ public abstract class SelectProfileBottomSheet extends BasePreferenceBottomSheet
 	protected void addProfileItem(final ProfileDataObject profile) {
 		LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
 		View itemView = inflater.inflate(getItemLayoutId(profile), null);
-		TextView tvTitle = itemView.findViewById(R.id.title);
-		TextView tvDescription = itemView.findViewById(R.id.description);
-		ImageView ivIcon = itemView.findViewById(R.id.icon);
-		CompoundButton compoundButton = itemView.findViewById(R.id.compound_button);
-		View bottomDivider = itemView.findViewById(R.id.divider_bottom);
 
+		TextView tvTitle = itemView.findViewById(R.id.title);
 		tvTitle.setText(profile.getName());
+
+		TextView tvDescription = itemView.findViewById(R.id.description);
 		tvDescription.setText(profile.getDescription());
 
+		ImageView ivIcon = itemView.findViewById(R.id.icon);
 		Drawable drawableIcon = getPaintedIcon(profile.getIconRes(), getIconColor(profile));
 		ivIcon.setImageDrawable(drawableIcon);
+
+		CompoundButton compoundButton = itemView.findViewById(R.id.compound_button);
 		compoundButton.setChecked(isSelected(profile));
 		UiUtilities.setupCompoundButton(compoundButton, nightMode, UiUtilities.CompoundButtonType.GLOBAL);
-		bottomDivider.setVisibility(shouldShowBottomDivider(profile) ? View.VISIBLE : View.INVISIBLE);
 
 		BaseBottomSheetItem.Builder builder = new BaseBottomSheetItem.Builder().setCustomView(itemView);
-		setupSpecificProfileItemAppearance(profile, itemView, builder);
+		builder.setOnClickListener(getItemClickListener(profile));
 		items.add(builder.create());
 	}
 
-	protected void setupSpecificProfileItemAppearance(ProfileDataObject profile,
-	                                                  View itemView,
-	                                                  BaseBottomSheetItem.Builder builder) {
-		builder.setOnClickListener(getItemClickListener(profile));
+	protected void addToggleButton(TextRadioItem selectedItem, TextRadioItem ... radioItems) {
+		int padding = getDimen(R.dimen.content_padding_small);
+		Context themedCtx = UiUtilities.getThemedContext(app, nightMode);
+		LayoutInflater inflater = UiUtilities.getInflater(themedCtx, nightMode);
+		LinearLayout container = (LinearLayout) inflater.inflate(R.layout.custom_radio_buttons, null);
+		LinearLayout.MarginLayoutParams params = new LinearLayout.MarginLayoutParams(
+				LinearLayout.MarginLayoutParams.MATCH_PARENT, LinearLayout.MarginLayoutParams.WRAP_CONTENT);
+		AndroidUtils.setMargins(params, padding, padding, padding, 0);
+		container.setLayoutParams(params);
+
+		TextToggleButton radioGroup = new TextToggleButton(app, container, nightMode);
+		radioGroup.setItems(radioItems);
+		radioGroup.setSelectedItem(selectedItem);
+
+		items.add(new BaseBottomSheetItem.Builder()
+				.setCustomView(container)
+				.create()
+		);
 	}
 
 	protected void addCheckableItem(int titleId,
@@ -108,7 +126,6 @@ public abstract class SelectProfileBottomSheet extends BasePreferenceBottomSheet
 		View itemView = UiUtilities.getInflater(getContext(), nightMode).inflate(R.layout.bottom_sheet_item_with_descr_and_radio_btn, null);
 		itemView.findViewById(R.id.icon).setVisibility(View.GONE);
 		itemView.findViewById(R.id.description).setVisibility(View.GONE);
-		itemView.findViewById(R.id.divider_bottom).setVisibility(View.GONE);
 
 		Typeface typeface = FontCache.getRobotoMedium(app);
 		String title = getString(titleId);
@@ -143,13 +160,50 @@ public abstract class SelectProfileBottomSheet extends BasePreferenceBottomSheet
 				.create());
 	}
 
+	protected void addProgressWithTitleItem(int titleId) {
+		items.add(new ProgressWithTitleItem(getString(titleId)));
+	}
+
+	protected void addDivider() {
+		items.add(new DividerItem(app));
+	}
+
+	protected void addSpaceItem(int space) {
+		View view = new View(app);
+		view.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, space));
+		items.add(new BaseBottomSheetItem.Builder()
+				.setCustomView(view)
+				.create());
+	}
+
+	protected void addGroupHeaderItem(ProfilesGroup group) {
+		Context themedCtx = UiUtilities.getThemedContext(app, nightMode);
+		LayoutInflater inflater = UiUtilities.getInflater(themedCtx, nightMode);
+		View view = inflater.inflate(R.layout.bottom_sheet_item_title_with_description_72dp, null);
+
+		TextView tvTitle = view.findViewById(R.id.title);
+		TextView tvDescription = view.findViewById(R.id.description);
+		tvTitle.setText(group.getTitle());
+		CharSequence description = group.getDescription(app, nightMode);
+		if (description != null) {
+			tvDescription.setText(description);
+		} else {
+			tvDescription.setVisibility(View.GONE);
+		}
+
+		items.add(new BaseBottomSheetItem.Builder()
+				.setCustomView(view)
+				.create()
+		);
+	}
+
 	protected OnClickListener getItemClickListener(final ProfileDataObject profile) {
 		return new OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				Bundle args = new Bundle();
 				args.putString(PROFILE_KEY_ARG, profile.getStringKey());
-				args.putBoolean(PROFILES_LIST_UPDATED_ARG, isProfileListUpdated(profile));
+				args.putBoolean(PROFILES_LIST_UPDATED_ARG, isProfilesListUpdated(profile));
 				Fragment target = getTargetFragment();
 				if (target instanceof OnSelectProfileCallback) {
 					((OnSelectProfileCallback) target).onProfileSelected(args);
@@ -157,6 +211,10 @@ public abstract class SelectProfileBottomSheet extends BasePreferenceBottomSheet
 				dismiss();
 			}
 		};
+	}
+
+	protected boolean isProfilesListUpdated(ProfileDataObject profile) {
+		return false;
 	}
 
 	protected void refreshView() {
@@ -178,19 +236,10 @@ public abstract class SelectProfileBottomSheet extends BasePreferenceBottomSheet
 		}
 	}
 
-	private void refreshProfiles() {
-		profiles.clear();
-		fillProfilesList(profiles);
-	}
-
-	protected abstract void fillProfilesList(List<ProfileDataObject> profiles);
+	protected abstract void refreshProfiles();
 
 	protected boolean isSelected(ProfileDataObject profile) {
 		return Algorithms.objectEquals(profile.getStringKey(), selectedItemKey);
-	}
-
-	public List<ProfileDataObject> getProfiles() {
-		return profiles;
 	}
 
 	protected int getItemLayoutId(ProfileDataObject profile) {
@@ -200,14 +249,6 @@ public abstract class SelectProfileBottomSheet extends BasePreferenceBottomSheet
 	@ColorInt
 	protected int getIconColor(ProfileDataObject profile) {
 		return profile.getIconColor(nightMode);
-	}
-
-	protected boolean shouldShowBottomDivider(ProfileDataObject profile) {
-		return false;
-	}
-
-	protected boolean isProfileListUpdated(ProfileDataObject profile) {
-		return false;
 	}
 
 	@ColorRes

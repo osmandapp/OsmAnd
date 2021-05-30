@@ -10,13 +10,26 @@ public class RoutingDataObject extends ProfileDataObject {
 
 	private String fileName;
 
-	public RoutingDataObject(String stringKey, String name, String descr, int iconRes, boolean isSelected, String fileName) {
-		super(name, descr, stringKey, iconRes, isSelected, null, null);
+	public RoutingDataObject(String stringKey,
+	                         String name,
+	                         String description,
+	                         int iconRes,
+	                         boolean isSelected,
+	                         String fileName) {
+		super(name, description, stringKey, iconRes, isSelected, null, null);
 		this.fileName = fileName;
 	}
 
 	public String getFileName() {
 		return fileName;
+	}
+
+	public boolean isOnline() {
+		return false;
+	}
+
+	public boolean isPredefined() {
+		return false;
 	}
 
 	public enum RoutingProfilesResources {

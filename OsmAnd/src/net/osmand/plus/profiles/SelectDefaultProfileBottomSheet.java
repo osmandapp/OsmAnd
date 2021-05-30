@@ -17,9 +17,12 @@ import net.osmand.plus.profiles.dto.ProfileDataObject;
 import net.osmand.plus.profiles.dto.ProfileDataUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SelectDefaultProfileBottomSheet extends SelectProfileBottomSheet {
+
+	private final List<ProfileDataObject> profiles = new ArrayList<>();
 
 	public static void showInstance(@NonNull FragmentActivity activity,
 	                                @Nullable Fragment target,
@@ -38,7 +41,6 @@ public class SelectDefaultProfileBottomSheet extends SelectProfileBottomSheet {
 
 	@Override
 	public void createMenuItems(@Nullable Bundle savedInstanceState) {
-		List<ProfileDataObject> profiles = getProfiles();
 		items.add(new TitleItem(getString(R.string.settings_preset)));
 		items.add(new LongDescriptionItem(getString(R.string.profile_by_default_description)));
 
@@ -69,7 +71,8 @@ public class SelectDefaultProfileBottomSheet extends SelectProfileBottomSheet {
 	}
 
 	@Override
-	protected void fillProfilesList(List<ProfileDataObject> profiles) {
+	protected void refreshProfiles() {
+		profiles.clear();
 		profiles.addAll(ProfileDataUtils.getDataObjects(app, ApplicationMode.values(app)));
 	}
 
