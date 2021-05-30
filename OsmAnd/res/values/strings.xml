@@ -12,6 +12,8 @@
 
 -->
 
+    <string name="provided_by">Provided by %1$s</string>
+    <string name="shared_string_external">External</string>
     <string name="osmand_online_routing_promo">You can use predefined templates, or add custom online routing, supported: OSRM, Graphhopper, OpenRouteService, GPX.</string>
     <string name="shared_string_online">Online</string>
     <string name="shared_string_offline">Offline</string>
