@@ -127,7 +127,7 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 	@Override
 	public void onResume() {
 		super.onResume();
-		OsmandPlugin.checkInstalledMarketPlugins(app, getActivity());
+		OsmandPlugin.checkInstalledMarketPlugins(app);
 		adapter.notifyDataSetChanged();
 	}
 

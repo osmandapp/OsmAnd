@@ -187,7 +187,7 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 	@Override
 	public void onResume() {
 		super.onResume();
-		OsmandPlugin.checkInstalledMarketPlugins(app, getActivity());
+		OsmandPlugin.checkInstalledMarketPlugins(app);
 		updateState();
 	}
 

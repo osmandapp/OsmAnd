@@ -404,10 +404,6 @@ public abstract class OsmandPlugin {
 			// marketEnabled = false;
 		}
 		if (pckg || (!marketEnabled && !paid)) {
-			if (pckg && !app.getSettings().getPlugins().contains("-" + plugin.getId())) {
-				enabledPlugins.add(plugin.getId());
-				plugin.setActive(true);
-			}
 			plugin.setInstallURL(null);
 			return true;
 		} else {
@@ -423,13 +419,9 @@ public abstract class OsmandPlugin {
 		return false;
 	}
 
-	public static void checkInstalledMarketPlugins(@NonNull OsmandApplication app, @Nullable Activity activity) {
+	public static void checkInstalledMarketPlugins(@NonNull OsmandApplication app) {
 		Set<String> enabledPlugins = app.getSettings().getEnabledPlugins();
 		for (OsmandPlugin plugin : OsmandPlugin.getMarketPlugins()) {
-			if (plugin.getInstallURL() != null && plugin.pluginAvailable(app)) {
-				plugin.onInstall(app, activity);
-				initPlugin(app, plugin);
-			}
 			updateMarketPlugin(app, enabledPlugins, plugin);
 		}
 		app.getQuickActionRegistry().updateActionTypes();
