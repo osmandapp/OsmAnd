@@ -764,7 +764,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 					}
 					LatLon searchLatLon = objectLatLon != null ? objectLatLon : pointLatLon;
 					if (isGpx) {
-						if (isUniqueGpx(selectedObjects, gpxFileName)) {
+						String ref = Algorithms.emptyIfNull(renderedObject.getTagValue("ref"));
+						if (isUniqueGpx(selectedObjects, gpxFileName, ref)) {
 							WptPt selectedPoint = new WptPt();
 							selectedPoint.lat = pointLatLon.getLatitude();
 							selectedPoint.lon = pointLatLon.getLongitude();
@@ -860,16 +861,19 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		return res;
 	}
 
-	private boolean isUniqueGpx(Map<Object, IContextMenuProvider> selectedObjects, String gpxFileName) {
+	private boolean isUniqueGpx(Map<Object, IContextMenuProvider> selectedObjects, String gpxFileName, String ref) {
 		String tracksDir = view.getApplication().getAppPath(IndexConstants.GPX_TRAVEL_DIR).getPath();
-		if (new File(tracksDir, gpxFileName).exists()) {
-			return false;
+		File file = new File(tracksDir, gpxFileName);
+		if (file.exists()) {
+			GPXUtilities.GPXFile gpxFile = GPXUtilities.loadGPXFile(file);
+			return !ref.equals(gpxFile.getRef());
 		}
 		for (Map.Entry<Object, IContextMenuProvider> entry : selectedObjects.entrySet()) {
 			if (entry.getKey() instanceof Pair && entry.getValue() instanceof GPXLayer
 					&& ((Pair<?, ?>) entry.getKey()).first instanceof RenderedObject) {
 				RenderedObject object = (RenderedObject) ((Pair<?, ?>) entry.getKey()).first;
-				if (gpxFileName.equals(object.getFileNameByExtension(IndexConstants.GPX_FILE_EXT))) {
+				if (gpxFileName.equals(object.getFileNameByExtension(IndexConstants.GPX_FILE_EXT))
+						&& ref.equals(object.getTagValue("ref"))) {
 					return false;
 				}
 			}

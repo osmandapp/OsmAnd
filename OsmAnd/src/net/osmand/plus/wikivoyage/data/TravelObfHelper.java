@@ -368,6 +368,7 @@ public class TravelObfHelper implements TravelHelper {
 			gpxFile = new GPXFile(travelGpx.getTitle(), travelGpx.getLang(), "");
 			gpxFile.tracks = new ArrayList<>();
 			gpxFile.tracks.add(track);
+			gpxFile.setRef(travelGpx.ref);
 		}
 		travelGpx.gpxFile = gpxFile;
 		return gpxFile;

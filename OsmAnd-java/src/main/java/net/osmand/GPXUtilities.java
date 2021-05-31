@@ -1805,6 +1805,17 @@ public class GPXUtilities {
 		public void setShowStartFinish(boolean showStartFinish) {
 			getExtensionsToWrite().put("show_start_finish", String.valueOf(showStartFinish));
 		}
+
+		public void setRef(String ref) {
+			getExtensionsToWrite().put("ref", ref);
+		}
+
+		public String getRef() {
+			if (extensions != null) {
+				return extensions.get("ref");
+			}
+			return null;
+		}
 	}
 
 	public static String asString(GPXFile file) {

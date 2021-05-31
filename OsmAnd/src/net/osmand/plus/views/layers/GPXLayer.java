@@ -1232,11 +1232,12 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 							WptPt selectedPoint = new WptPt();
 							selectedPoint.lat = latLon.getLatitude();
 							selectedPoint.lon = latLon.getLongitude();
+							app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, false);
 							SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, false);
 							SelectedGpxPoint selectedGpxPoint =
 									new SelectedGpxPoint(selectedGpxFile, selectedPoint, null, null, Float.NaN);
 							TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint,
-									null, null, false);
+									null, null, false, false);
 						}
 					}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 				}
