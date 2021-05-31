@@ -33,8 +33,16 @@ public class OnlineRoutingDataObject extends RoutingDataObject {
 	public int compareTo(@NonNull ProfileDataObject profileDataObject) {
 		if (profileDataObject instanceof OnlineRoutingDataObject) {
 			OnlineRoutingDataObject another = (OnlineRoutingDataObject) profileDataObject;
-			return (this.order < another.order) ? -1 : ((this.order == another.order) ? 0 : 1);
+			if (!isPredefined() && !another.isPredefined()) {
+				return compareByOrder(another);
+			} else {
+				return compareByName(another);
+			}
 		}
 		return 0;
+	}
+
+	public int compareByOrder(@NonNull OnlineRoutingDataObject another) {
+		return (this.order < another.order) ? -1 : ((this.order == another.order) ? 0 : 1);
 	}
 }

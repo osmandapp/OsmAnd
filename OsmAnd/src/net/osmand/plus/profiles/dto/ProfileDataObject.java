@@ -67,6 +67,10 @@ public class ProfileDataObject implements Comparable<ProfileDataObject> {
 
 	@Override
 	public int compareTo(@NonNull ProfileDataObject another) {
+		return compareByName(another);
+	}
+
+	public int compareByName(@NonNull ProfileDataObject another) {
 		return this.name.compareToIgnoreCase(another.name);
 	}
 
