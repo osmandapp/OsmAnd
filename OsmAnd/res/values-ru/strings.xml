@@ -152,7 +152,7 @@
     <string name="quick_action_gpx_category_descr">Выберите дополнительную категорию.</string>
     <string name="quick_action_poi_list">Список категорий</string>
     <string name="quick_action_sh_poi_descr">Добавить одну или несколько категорий POI для отображения на карте.</string>
-    <string name="quick_action_page_list_descr">Кнопка для перелистывания списка ниже.</string>
+    <string name="quick_action_page_list_descr">Кнопка для переключения между элементами списка.</string>
     <string name="quick_action_empty_param_error">Заполните все параметры</string>
     <string name="quick_action_map_overlay">Сменить карту наложения</string>
     <string name="quick_action_map_overlay_title">Наложения</string>
