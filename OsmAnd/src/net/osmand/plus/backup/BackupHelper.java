@@ -18,7 +18,6 @@ import net.osmand.AndroidNetworkUtils.OnSendRequestsListener;
 import net.osmand.AndroidNetworkUtils.Request;
 import net.osmand.AndroidNetworkUtils.RequestResponse;
 import net.osmand.AndroidUtils;
-import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.StreamWriter;
 import net.osmand.plus.FavouritesDbHelper;
@@ -26,10 +25,13 @@ import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxDbHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
+import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
+import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.AbstractProgress;
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -40,6 +42,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -102,6 +105,7 @@ public class BackupHelper {
 
 	public interface OnCollectLocalFilesListener {
 		void onFileCollected(@NonNull LocalFile fileInfo);
+
 		void onFilesCollected(@NonNull List<LocalFile> fileInfos);
 	}
 
@@ -111,17 +115,21 @@ public class BackupHelper {
 
 	public interface OnUploadFileListener {
 		void onFileUploadProgress(@NonNull String type, @NonNull String fileName, int progress, int deltaWork);
+
 		void onFileUploadDone(@NonNull String type, @NonNull String fileName, long uploadTime, @Nullable String error);
 	}
 
 	public interface OnUploadFilesListener {
 		void onFileUploadProgress(@NonNull File file, int progress);
+
 		void onFileUploadDone(@NonNull File file);
+
 		void onFilesUploadDone(@NonNull Map<File, String> errors);
 	}
 
 	public interface OnDeleteFilesListener {
 		void onFileDeleteProgress(@NonNull RemoteFile file);
+
 		void onFilesDeleteDone(@NonNull Map<RemoteFile, String> errors);
 	}
 
@@ -130,15 +138,17 @@ public class BackupHelper {
 
 		@WorkerThread
 		void onFileDownloadedAsync(@NonNull File file);
+
 		void onFileDownloaded(@NonNull File file);
+
 		void onFilesDownloadDone(@NonNull Map<File, String> errors);
 	}
 
 	public static class BackupInfo {
-		public List<RemoteFile> filesToDownload = new ArrayList<>();
-		public List<LocalFile> filesToUpload = new ArrayList<>();
-		public List<RemoteFile> filesToDelete = new ArrayList<>();
-		public List<Pair<LocalFile, RemoteFile>> filesToMerge = new ArrayList<>();
+		public List<SettingsItem> itemsToDownload = new ArrayList<>();
+		public List<SettingsItem> itemsToUpload = new ArrayList<>();
+		public List<SettingsItem> itemsToDelete = new ArrayList<>();
+		public List<Pair<SettingsItem, SettingsItem>> itemsToMerge = new ArrayList<>();
 	}
 
 	public BackupHelper(@NonNull OsmandApplication app) {
@@ -316,6 +326,10 @@ public class BackupHelper {
 				}
 			}
 		}, EXECUTOR);
+	}
+
+	public void prepareBackupInfo(OnPrepareBackupListener listener) {
+		new PrepareBackupTask(app, listener).prepare();
 	}
 
 	private void prepareFileUpload(@NonNull String fileName, @NonNull String type, long uploadTime,
@@ -691,64 +705,35 @@ public class BackupHelper {
 	public void collectLocalFiles(@Nullable final OnCollectLocalFilesListener listener) {
 		AsyncTask<Void, LocalFile, List<LocalFile>> task = new AsyncTask<Void, LocalFile, List<LocalFile>>() {
 
-			private final OnCollectLocalFilesListener internalListener = new OnCollectLocalFilesListener() {
-				@Override
-				public void onFileCollected(@NonNull LocalFile fileInfo) {
-					publishProgress(fileInfo);
-				}
-
-				@Override
-				public void onFilesCollected(@NonNull List<LocalFile> fileInfos) {
-				}
-			};
-
-			private void loadGPXData(@NonNull File mapPath, @NonNull List<LocalFile> result,
-									 @Nullable OnCollectLocalFilesListener listener) {
-				if (mapPath.canRead()) {
-					loadGPXFolder(mapPath, result, "", listener);
-				}
-			}
-
-			private void loadGPXFolder(@NonNull File mapPath, @NonNull List<LocalFile> result,
-									   @NonNull String gpxSubfolder, @Nullable OnCollectLocalFilesListener listener) {
-				File[] listFiles = mapPath.listFiles();
-				if (listFiles != null) {
-					for (File gpxFile : listFiles) {
-						if (gpxFile.isDirectory()) {
-							String sub = gpxSubfolder.length() == 0 ? gpxFile.getName() : gpxSubfolder + "/"
-									+ gpxFile.getName();
-							loadGPXFolder(gpxFile, result, sub, listener);
-						} else if (gpxFile.isFile() && gpxFile.getName().toLowerCase().endsWith(IndexConstants.GPX_FILE_EXT)) {
-							LocalFile info = new LocalFile();
-							info.subfolder = gpxSubfolder;
-							info.file = gpxFile;
-							GpxDataItem gpxItem = gpxHelper.getItem(gpxFile);
-							if (gpxItem != null) {
-								info.uploadTime = gpxItem.getFileLastUploadedTime();
-							}
-							result.add(info);
-							if (listener != null) {
-								listener.onFileCollected(info);
-							}
-						}
-					}
-				}
-			}
-
 			@Override
 			protected List<LocalFile> doInBackground(Void... voids) {
 				List<LocalFile> result = new ArrayList<>();
 
-				LocalFile favInfo = new LocalFile();
-				favInfo.subfolder = "";
-				favInfo.file = favouritesHelper.getExternalFile();
-				favInfo.uploadTime = favouritesHelper.getLastUploadedTime();
-				result.add(favInfo);
-				if (listener != null) {
-					listener.onFileCollected(favInfo);
-				}
+				List<ExportSettingsType> settingsTypes = new ArrayList<>(Arrays.asList(ExportSettingsType.values()));
+				List<SettingsItem> localItems = app.getFileSettingsHelper().getFilteredSettingsItems(settingsTypes, true, true);
 
-				loadGPXData(app.getAppPath(IndexConstants.GPX_INDEX_DIR), result, internalListener);
+				for (SettingsItem item : localItems) {
+					String fileName = item.getFileName();
+					if (fileName == null) {
+						fileName = item.getDefaultFileName();
+					} else {
+						fileName = Algorithms.getFileWithoutDirs(fileName);
+					}
+					LocalFile localFile = new LocalFile();
+					localFile.item = item;
+					localFile.subfolder = "";
+					localFile.file = app.getAppPath(fileName);
+
+					UploadedFileInfo info = app.getBackupHelper().getDbHelper().getUploadedFileInfo(item.getType().name(), fileName);
+					if (info != null) {
+						localFile.uploadTime = info.getUploadTime();
+					}
+
+					result.add(localFile);
+					if (listener != null) {
+						listener.onFileCollected(localFile);
+					}
+				}
 				return result;
 			}
 
@@ -840,19 +825,19 @@ public class BackupHelper {
 							long localModifiedTime = localFile.file.lastModified();
 							if (remoteUploadTime == localUploadTime) {
 								if (localUploadTime < localModifiedTime) {
-									info.filesToUpload.add(localFile);
+									info.itemsToUpload.add(localFile.item);
 								}
 							} else {
-								info.filesToMerge.add(new Pair<>(localFile, remoteFile));
+								info.itemsToMerge.add(new Pair<>(localFile.item, remoteFile.item));
 							}
 							break;
 						}
 					}
-					if (!hasLocalFile) {
+					if (!hasLocalFile && remoteFile.item != null) {
 						if (backupLastUploadedTime > 0 && backupLastUploadedTime >= remoteFile.getClienttimems()) {
-							info.filesToDelete.add(remoteFile);
+							info.itemsToDelete.add(remoteFile.item);
 						} else {
-							info.filesToDownload.add(remoteFile);
+							info.itemsToDownload.add(remoteFile.item);
 						}
 					}
 				}
@@ -865,7 +850,7 @@ public class BackupHelper {
 						}
 					}
 					if (!hasRemoteFile) {
-						info.filesToUpload.add(localFile);
+						info.itemsToUpload.add(localFile.item);
 					}
 				}
 				return info;

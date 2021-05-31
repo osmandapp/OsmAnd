@@ -236,9 +236,16 @@ class BackupImporter {
 
 	private void updateFilesInfo(@NonNull Map<String, RemoteFile> remoteFiles, List<SettingsItem> settingsItemList) throws IOException {
 		for (SettingsItem settingsItem : settingsItemList) {
-			if (settingsItem instanceof FileSettingsItem) {
-				RemoteFile remoteFile = remoteFiles.get(settingsItem.getFileName());
-				if (remoteFile != null) {
+			RemoteFile remoteFile = remoteFiles.get(settingsItem.getFileName());
+			if (remoteFile == null) {
+				remoteFile = remoteFiles.get(settingsItem.getDefaultFileName());
+			}
+			if (remoteFile == null) {
+				remoteFile = remoteFiles.get(settingsItem.getName());
+			}
+			if (remoteFile != null) {
+				remoteFile.item = settingsItem;
+				if (settingsItem instanceof FileSettingsItem) {
 					FileSettingsItem fileSettingsItem = (FileSettingsItem) settingsItem;
 					fileSettingsItem.setSize(remoteFile.getFilesize());
 					fileSettingsItem.setLastModified(remoteFile.getClienttimems());

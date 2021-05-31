@@ -50,6 +50,13 @@ public class ExportBackupTask extends AsyncTask<Void, Integer, Boolean> {
 	}
 
 	@Override
+	protected void onPreExecute() {
+		if (listener != null) {
+			listener.onBackupExportStarted();
+		}
+	}
+
+	@Override
 	protected void onProgressUpdate(Integer... values) {
 		if (listener != null) {
 			listener.onBackupExportProgressUpdate(values[0]);

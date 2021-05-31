@@ -2,13 +2,13 @@ package net.osmand.plus.backup;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Date;
-import java.util.Locale;
 
 public class RemoteFile {
 
@@ -23,6 +23,8 @@ public class RemoteFile {
 	private Date clienttime;
 	private long clienttimems;
 	private int zipSize;
+
+	protected SettingsItem item;
 
 	public RemoteFile(@NonNull JSONObject json) throws JSONException, ParseException {
 		if (json.has("userid")) {

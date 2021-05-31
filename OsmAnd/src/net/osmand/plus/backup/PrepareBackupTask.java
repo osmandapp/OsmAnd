@@ -1,22 +1,17 @@
 package net.osmand.plus.backup;
 
-import android.app.Activity;
-import android.app.ProgressDialog;
-import android.content.Context;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.ProgressImplementation;
 import net.osmand.plus.backup.BackupHelper.BackupInfo;
 import net.osmand.plus.backup.BackupHelper.OnCollectLocalFilesListener;
-import net.osmand.plus.backup.BackupHelper.OnDownloadFileListListener;
 import net.osmand.plus.backup.BackupHelper.OnGenerateBackupInfoListener;
+import net.osmand.plus.backup.NetworkSettingsHelper.BackupCollectListener;
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
 
-import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
@@ -26,13 +21,14 @@ public class PrepareBackupTask {
 	private final BackupHelper backupHelper;
 
 	private final OnPrepareBackupListener listener;
-	private final WeakReference<Context> contextRef;
-	private ProgressImplementation progress;
 
 	private BackupInfo result;
 	private List<RemoteFile> remoteFiles;
 	private List<LocalFile> fileInfos;
 	private String error;
+
+	private List<SettingsItem> localItems;
+	private List<SettingsItem> remoteItems;
 
 	private Stack<TaskType> runningTasks = new Stack<>();
 
@@ -43,13 +39,12 @@ public class PrepareBackupTask {
 	}
 
 	public interface OnPrepareBackupListener {
-		void onBackupPrepared(@Nullable BackupInfo backupInfo, @Nullable List<RemoteFile> userFiles,
-							  @Nullable List<LocalFile> fileInfos, @Nullable String error);
+		void onBackupPrepared(@Nullable BackupInfo backupInfo, @Nullable List<SettingsItem> userFiles,
+							  @Nullable String error);
 	}
 
-	public PrepareBackupTask(@NonNull Context context, @Nullable OnPrepareBackupListener listener) {
-		this.contextRef = new WeakReference<>(context);
-		this.app = (OsmandApplication) context.getApplicationContext();
+	public PrepareBackupTask(@NonNull OsmandApplication app, @Nullable OnPrepareBackupListener listener) {
+		this.app = app;
 		this.backupHelper = app.getBackupHelper();
 		this.listener = listener;
 	}
@@ -81,7 +76,6 @@ public class PrepareBackupTask {
 			tasks.push(types[i]);
 		}
 		this.runningTasks = tasks;
-		onTasksInit();
 	}
 
 	private boolean runTasks() {
@@ -115,7 +109,6 @@ public class PrepareBackupTask {
 	}
 
 	private void doCollectLocalFiles() {
-		onTaskProgressUpdate("Collecting local info...");
 		backupHelper.collectLocalFiles(new OnCollectLocalFilesListener() {
 			@Override
 			public void onFileCollected(@NonNull LocalFile fileInfo) {
@@ -130,22 +123,24 @@ public class PrepareBackupTask {
 	}
 
 	private void doCollectRemoteFiles() {
-		onTaskProgressUpdate("Downloading remote info...");
-		try {
-			backupHelper.downloadFileList(new OnDownloadFileListListener() {
-				@Override
-				public void onDownloadFileList(int status, @Nullable String message, @NonNull List<RemoteFile> remoteFiles) {
-					if (status == BackupHelper.STATUS_SUCCESS) {
-						PrepareBackupTask.this.remoteFiles = remoteFiles;
-					} else {
-						onError(!Algorithms.isEmpty(message) ? message : "Download file list error: " + status);
+		app.getNetworkSettingsHelper().collectSettings("", 0, new BackupCollectListener() {
+			@Override
+			public void onBackupCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items) {
+				if (succeed) {
+					List<RemoteFile> files = new ArrayList<>();
+					for (RemoteFile remoteFile : app.getBackupHelper().getRemoteFiles()) {
+						if (!remoteFile.getName().endsWith(BackupHelper.INFO_EXT)) {
+							files.add(remoteFile);
+						}
 					}
-					onTaskFinished(TaskType.COLLECT_REMOTE_FILES);
+					PrepareBackupTask.this.remoteItems = items;
+					PrepareBackupTask.this.remoteFiles = files;
+				} else {
+					onError("Download remote items error");
 				}
-			});
-		} catch (UserNotRegisteredException e) {
-			onError("User is not registered");
-		}
+				onTaskFinished(TaskType.COLLECT_REMOTE_FILES);
+			}
+		});
 	}
 
 	private void doGenerateBackupInfo() {
@@ -153,7 +148,6 @@ public class PrepareBackupTask {
 			onTaskFinished(TaskType.GENERATE_BACKUP_INFO);
 			return;
 		}
-		onTaskProgressUpdate("Generating backup info...");
 		backupHelper.generateBackupInfo(fileInfos, remoteFiles, new OnGenerateBackupInfoListener() {
 			@Override
 			public void onBackupInfoGenerated(@Nullable BackupInfo backupInfo, @Nullable String error) {
@@ -167,21 +161,6 @@ public class PrepareBackupTask {
 		});
 	}
 
-	private void onTasksInit() {
-		Context ctx = contextRef.get();
-		if (ctx instanceof Activity && AndroidUtils.isActivityNotDestroyed((Activity) ctx)) {
-			progress = ProgressImplementation.createProgressDialog(ctx,
-					"Prepare backup", "Initializing...", ProgressDialog.STYLE_HORIZONTAL);
-		}
-	}
-
-	private void onTaskProgressUpdate(String message) {
-		Context ctx = contextRef.get();
-		if (ctx instanceof Activity && AndroidUtils.isActivityNotDestroyed((Activity) ctx) && progress != null) {
-			progress.startTask(message, -1);
-		}
-	}
-
 	private void onError(@NonNull String message) {
 		this.error = message;
 		runningTasks.clear();
@@ -190,23 +169,7 @@ public class PrepareBackupTask {
 
 	private void onTasksDone() {
 		if (listener != null) {
-			listener.onBackupPrepared(result, remoteFiles, fileInfos, error);
-		}
-		Context ctx = contextRef.get();
-		if (ctx instanceof Activity && AndroidUtils.isActivityNotDestroyed((Activity) ctx) && progress != null) {
-			progress.finishTask();
-			app.runInUIThread(new Runnable() {
-				@Override
-				public void run() {
-					try {
-						if (progress.getDialog().isShowing()) {
-							progress.getDialog().dismiss();
-						}
-					} catch (Exception e) {
-						//ignored
-					}
-				}
-			}, 300);
+			listener.onBackupPrepared(result, remoteItems, error);
 		}
 	}
 }
