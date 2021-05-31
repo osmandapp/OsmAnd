@@ -9,6 +9,7 @@ import net.osmand.plus.backup.BackupHelper.OnUploadFileListener;
 import net.osmand.plus.settings.backend.backup.AbstractWriter;
 import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.GpxSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
 
@@ -33,21 +34,27 @@ public class NetworkWriter implements AbstractWriter {
 
 	@Override
 	public void write(@NonNull SettingsItem item) throws IOException {
-		String fileName = item.getFileName();
-		if (Algorithms.isEmpty(fileName)) {
-			fileName = item.getDefaultFileName();
+		String fileName;
+		if (item instanceof FileSettingsItem) {
+			FileSettingsItem fileItem = (FileSettingsItem) item;
+			fileName = getFileItemName(fileItem.getFile(), fileItem);
+		} else {
+			fileName = item.getFileName();
+			if (Algorithms.isEmpty(fileName)) {
+				fileName = item.getDefaultFileName();
+			}
 		}
 		SettingsItemWriter<? extends SettingsItem> itemWriter = item.getWriter();
 		if (itemWriter != null) {
 			try {
 				if (uploadEntry(itemWriter, fileName) == null) {
-					uploadItemInfo(item, fileName);
+					uploadItemInfo(item, fileName + BackupHelper.INFO_EXT);
 				}
 			} catch (UserNotRegisteredException e) {
 				throw new IOException(e.getMessage(), e);
 			}
 		} else {
-			uploadItemInfo(item, fileName);
+			uploadItemInfo(item, fileName + BackupHelper.INFO_EXT);
 		}
 	}
 
@@ -61,8 +68,7 @@ public class NetworkWriter implements AbstractWriter {
 		}
 	}
 
-	private String uploadItemInfo(@NonNull SettingsItem item, String fileName) throws IOException {
-		fileName = Algorithms.getFileWithoutDirs(fileName) + BackupHelper.INFO_EXT;
+	private String uploadItemInfo(@NonNull SettingsItem item, @NonNull String fileName) throws IOException {
 		try {
 			String itemJson = item.toJson();
 			InputStream inputStream = new ByteArrayInputStream(itemJson.getBytes("UTF-8"));
@@ -105,13 +111,24 @@ public class NetworkWriter implements AbstractWriter {
 				}
 			}
 		} else {
-			String subtypeFolder = fileSettingsItem.getSubtype().getSubtypeFolder();
-			String fileName = Algorithms.isEmpty(subtypeFolder)
-					? file.getName()
-					: file.getPath().substring(file.getPath().indexOf(subtypeFolder) + subtypeFolder.length());
+			String fileName = getFileItemName(file, fileSettingsItem);
 			fileSettingsItem.setInputStream(new FileInputStream(file));
 			error = uploadItemFile(itemWriter, fileName);
 		}
 		return error;
+	}
+
+	@NonNull
+	private String getFileItemName(@NonNull File file, @NonNull FileSettingsItem fileSettingsItem) {
+		String subtypeFolder = fileSettingsItem.getSubtype().getSubtypeFolder();
+		String fileName;
+		if (Algorithms.isEmpty(subtypeFolder)) {
+			fileName = file.getName();
+		} else if (fileSettingsItem instanceof GpxSettingsItem) {
+			fileName = file.getPath().substring(file.getPath().indexOf(subtypeFolder) + subtypeFolder.length());
+		} else {
+			fileName = file.getPath().substring(file.getPath().indexOf(subtypeFolder) - 1);
+		}
+		return fileName;
 	}
 }

@@ -2,6 +2,9 @@ package net.osmand.plus.backup;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
+import net.osmand.util.Algorithms;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -23,6 +26,8 @@ public class RemoteFile {
 	private Date clienttime;
 	private long clienttimems;
 	private int zipSize;
+
+	protected SettingsItem item;
 
 	public RemoteFile(@NonNull JSONObject json) throws JSONException, ParseException {
 		if (json.has("userid")) {
@@ -78,6 +83,14 @@ public class RemoteFile {
 
 	public String getName() {
 		return name;
+	}
+
+	public String getTypeNamePath() {
+		if (!Algorithms.isEmpty(name)) {
+			return type + (name.charAt(0) == '/' ? name : "/" + name);
+		} else {
+			return type;
+		}
 	}
 
 	public Date getUpdatetime() {

@@ -12,6 +12,7 @@ import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemsFactory;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.GpxSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
 
@@ -24,6 +25,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -81,10 +83,9 @@ class BackupImporter {
 		OsmandApplication app = backupHelper.getApp();
 		File tempDir = FileUtils.getTempDir(app);
 		for (RemoteFile remoteFile : remoteFiles) {
-			String fileName = remoteFile.getName();
 			SettingsItem item = null;
 			for (SettingsItem settingsItem : items) {
-				if (settingsItem != null && settingsItem.applyFileName(fileName)) {
+				if (settingsItem.equals(remoteFile.item)) {
 					item = settingsItem;
 					break;
 				}
@@ -94,6 +95,7 @@ class BackupImporter {
 				try {
 					SettingsItemReader<? extends SettingsItem> reader = item.getReader();
 					if (reader != null) {
+						String fileName = remoteFile.getTypeNamePath();
 						File tempFile = new File(tempDir, fileName);
 						Map<File, RemoteFile> map = new HashMap<>();
 						map.put(tempFile, remoteFile);
@@ -133,42 +135,58 @@ class BackupImporter {
 			json.put("items", itemsJson);
 			Map<File, RemoteFile> remoteInfoFiles = new HashMap<>();
 			Map<String, RemoteFile> remoteItemFiles = new HashMap<>();
+			List<String> remoteInfoNames = new ArrayList<>();
+			List<RemoteFile> noInfoRemoteItemFiles = new ArrayList<>();
 			OsmandApplication app = backupHelper.getApp();
 			File tempDir = FileUtils.getTempDir(app);
 			for (RemoteFile remoteFile : remoteFiles) {
-				String fileName = remoteFile.getName();
+				String fileName = remoteFile.getTypeNamePath();
 				if (fileName.endsWith(INFO_EXT)) {
 					remoteInfoFiles.put(new File(tempDir, fileName), remoteFile);
+					remoteInfoNames.add(fileName.substring(0, fileName.length() - INFO_EXT.length()));
 				} else {
 					remoteItemFiles.put(fileName, remoteFile);
 				}
 			}
-			if (!remoteInfoFiles.isEmpty()) {
-				downloadInfoFiles(itemsJson, remoteInfoFiles);
-
-				SettingsItemsFactory itemsFactory = new SettingsItemsFactory(app, json);
-				List<SettingsItem> settingsItemList = itemsFactory.getItems();
-				updateFilesInfo(remoteItemFiles, settingsItemList);
-				items.addAll(settingsItemList);
-
-				Map<RemoteFile, SettingsItemReader<? extends SettingsItem>> remoteFilesForRead = new HashMap<>();
-				for (SettingsItem item : settingsItemList) {
-					String fileName = item.getFileName();
-					RemoteFile remoteFile = remoteItemFiles.get(fileName);
-					if (remoteFile != null && item.shouldReadOnCollecting()) {
-						SettingsItemReader<? extends SettingsItem> reader = item.getReader();
-						if (reader != null) {
-							remoteFilesForRead.put(remoteFile, reader);
-						}
+			for (Entry<String, RemoteFile> remoteFileEntry : remoteItemFiles.entrySet()) {
+				String itemFileName = remoteFileEntry.getKey();
+				boolean hasInfo = false;
+				for (String remoteInfoName : remoteInfoNames) {
+					if (itemFileName.equals(remoteInfoName) || itemFileName.startsWith(remoteInfoName + "/")) {
+						hasInfo = true;
+						break;
 					}
 				}
-				Map<File, RemoteFile> remoteFilesForDownload = new HashMap<>();
-				for (RemoteFile remoteFile : remoteFilesForRead.keySet()) {
-					String fileName = remoteFile.getName();
-					remoteFilesForDownload.put(new File(tempDir, fileName), remoteFile);
+				if (!hasInfo) {
+					noInfoRemoteItemFiles.add(remoteFileEntry.getValue());
 				}
+			}
+			buildItemsJson(itemsJson, remoteInfoFiles, noInfoRemoteItemFiles);
+
+			SettingsItemsFactory itemsFactory = new SettingsItemsFactory(app, json);
+			List<SettingsItem> settingsItemList = itemsFactory.getItems();
+			updateFilesInfo(remoteItemFiles, settingsItemList);
+			items.addAll(settingsItemList);
+
+			Map<RemoteFile, SettingsItemReader<? extends SettingsItem>> remoteFilesForRead = new HashMap<>();
+			for (SettingsItem item : settingsItemList) {
+				RemoteFile remoteFile = getItemRemoteFile(item, remoteItemFiles.values());
+				if (remoteFile != null && item.shouldReadOnCollecting()) {
+					SettingsItemReader<? extends SettingsItem> reader = item.getReader();
+					if (reader != null) {
+						remoteFilesForRead.put(remoteFile, reader);
+					}
+				}
+			}
+			Map<File, RemoteFile> remoteFilesForDownload = new HashMap<>();
+			for (RemoteFile remoteFile : remoteFilesForRead.keySet()) {
+				String fileName = remoteFile.getTypeNamePath();
+				remoteFilesForDownload.put(new File(tempDir, fileName), remoteFile);
+			}
+			if (!remoteFilesForDownload.isEmpty()) {
 				downloadAndReadItemFiles(remoteFilesForRead, remoteFilesForDownload);
 			}
+
 		} catch (IllegalArgumentException e) {
 			throw new IllegalArgumentException("Error reading items", e);
 		} catch (JSONException e) {
@@ -181,7 +199,34 @@ class BackupImporter {
 		return items;
 	}
 
-	private void downloadInfoFiles(JSONArray itemsJson, Map<File, RemoteFile> remoteInfoFiles) throws UserNotRegisteredException, JSONException, IOException {
+	@Nullable
+	private RemoteFile getItemRemoteFile(@NonNull SettingsItem item, @NonNull Collection<RemoteFile> remoteFiles) {
+		String fileName = item.getFileName();
+		if (!Algorithms.isEmpty(fileName)) {
+			if (item instanceof GpxSettingsItem) {
+				GpxSettingsItem gpxItem = (GpxSettingsItem) item;
+				String folder = gpxItem.getSubtype().getSubtypeFolder();
+				if (!Algorithms.isEmpty(folder) && folder.charAt(0) != '/') {
+					folder = "/" + folder;
+				}
+				if (fileName.startsWith(folder)) {
+					fileName = fileName.substring(folder.length());
+				}
+			}
+			for (RemoteFile remoteFile : remoteFiles) {
+				String remoteFileName = remoteFile.getTypeNamePath();
+				String typeFileName = remoteFile.getType() + (fileName.charAt(0) == '/' ? fileName : "/" + fileName);
+				if (remoteFileName.equals(typeFileName) || remoteFileName.startsWith(typeFileName + "/")) {
+					return remoteFile;
+				}
+			}
+		}
+		return null;
+	}
+
+	private void buildItemsJson(@NonNull JSONArray itemsJson,
+								@NonNull Map<File, RemoteFile> remoteInfoFiles,
+								@NonNull List<RemoteFile> noInfoRemoteItemFiles) throws UserNotRegisteredException, JSONException, IOException {
 		Map<File, String> errors = backupHelper.downloadFilesSync(remoteInfoFiles, null);
 		if (errors.isEmpty()) {
 			for (File file : remoteInfoFiles.keySet()) {
@@ -194,6 +239,14 @@ class BackupImporter {
 			}
 		} else {
 			throw new IOException("Error downloading items info");
+		}
+		for (RemoteFile remoteFile : noInfoRemoteItemFiles) {
+			String type = remoteFile.getType();
+			String fileName = remoteFile.getName();
+			JSONObject itemJson = new JSONObject();
+			itemJson.put("type", type);
+			itemJson.put("file", fileName);
+			itemsJson.put(itemJson);
 		}
 	}
 
@@ -236,9 +289,10 @@ class BackupImporter {
 
 	private void updateFilesInfo(@NonNull Map<String, RemoteFile> remoteFiles, List<SettingsItem> settingsItemList) throws IOException {
 		for (SettingsItem settingsItem : settingsItemList) {
-			if (settingsItem instanceof FileSettingsItem) {
-				RemoteFile remoteFile = remoteFiles.get(settingsItem.getFileName());
-				if (remoteFile != null) {
+			RemoteFile remoteFile = getItemRemoteFile(settingsItem, remoteFiles.values());
+			if (remoteFile != null) {
+				remoteFile.item = settingsItem;
+				if (settingsItem instanceof FileSettingsItem) {
 					FileSettingsItem fileSettingsItem = (FileSettingsItem) settingsItem;
 					fileSettingsItem.setSize(remoteFile.getFilesize());
 					fileSettingsItem.setLastModified(remoteFile.getClienttimems());
