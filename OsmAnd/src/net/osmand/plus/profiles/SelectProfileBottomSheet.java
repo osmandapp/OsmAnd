@@ -39,6 +39,7 @@ import net.osmand.plus.profiles.dto.ProfileDataObject;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
+import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
 import net.osmand.util.Algorithms;
 
 public abstract class SelectProfileBottomSheet extends BasePreferenceBottomSheet {
@@ -190,6 +191,7 @@ public abstract class SelectProfileBottomSheet extends BasePreferenceBottomSheet
 		tvTitle.setText(title);
 		if (description != null) {
 			tvDescription.setText(description);
+			tvDescription.setOnTouchListener(new ClickableSpanTouchListener());
 		} else {
 			tvDescription.setVisibility(View.GONE);
 		}
