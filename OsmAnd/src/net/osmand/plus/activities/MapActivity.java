@@ -799,7 +799,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		readLocationToShow();
 
-		OsmandPlugin.checkInstalledMarketPlugins(app);
+		OsmandPlugin.checkInstalledMarketPlugins(app, this);
 		OsmandPlugin.onMapActivityResume(this);
 
 		intentHelper.parseContentIntent();
