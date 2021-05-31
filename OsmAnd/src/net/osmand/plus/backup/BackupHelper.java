@@ -25,6 +25,7 @@ import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxDbHelper;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -53,6 +54,7 @@ public class BackupHelper {
 	private final OsmandSettings settings;
 	private final FavouritesDbHelper favouritesHelper;
 	private final GpxDbHelper gpxHelper;
+	private final BackupDbHelper dbHelper;
 
 	public static final Log LOG = PlatformUtil.getLog(BackupHelper.class);
 
@@ -108,8 +110,8 @@ public class BackupHelper {
 	}
 
 	public interface OnUploadFileListener {
-		void onFileUploadProgress(@NonNull String fileName, int progress);
-		void onFileUploadDone(@NonNull String fileName, long uploadTime, @Nullable String error);
+		void onFileUploadProgress(@NonNull String type, @NonNull String fileName, int progress, int deltaWork);
+		void onFileUploadDone(@NonNull String type, @NonNull String fileName, long uploadTime, @Nullable String error);
 	}
 
 	public interface OnUploadFilesListener {
@@ -144,11 +146,17 @@ public class BackupHelper {
 		this.settings = app.getSettings();
 		this.favouritesHelper = app.getFavorites();
 		this.gpxHelper = app.getGpxDbHelper();
+		this.dbHelper = new BackupDbHelper(app);
 	}
 
 	@NonNull
 	public OsmandApplication getApp() {
 		return app;
+	}
+
+	@NonNull
+	public BackupDbHelper getDbHelper() {
+		return dbHelper;
 	}
 
 	public List<RemoteFile> getRemoteFiles() {
@@ -201,8 +209,16 @@ public class BackupHelper {
 		}
 	}
 
-	public void updateFileUploadTime(@NonNull String fileName, long updateTime) {
-		// TODO - implement
+	public void updateFileUploadTime(@NonNull String type, @NonNull String fileName, long updateTime) {
+		BackupDbHelper dbHelper = getDbHelper();
+		UploadedFileInfo info = dbHelper.getUploadedFileInfo(type, fileName);
+		if (info != null) {
+			info.setUploadTime(updateTime);
+			dbHelper.updateUploadedFileInfo(info);
+		} else {
+			info = new UploadedFileInfo(type, fileName, updateTime);
+			dbHelper.addUploadedFileInfo(info);
+		}
 	}
 
 	public void updateBackupUploadTime() {
@@ -313,8 +329,8 @@ public class BackupHelper {
 		headers.put("Accept-Encoding", "deflate, gzip");
 	}
 
-	public void uploadFileSync(@NonNull String fileName, @NonNull String type, @NonNull StreamWriter streamWriter,
-							   @Nullable final OnUploadFileListener listener) throws UserNotRegisteredException {
+	public String uploadFileSync(@NonNull String fileName, @NonNull String type, @NonNull StreamWriter streamWriter,
+								 @Nullable final OnUploadFileListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 
 		final long uploadTime = System.currentTimeMillis();
@@ -337,13 +353,15 @@ public class BackupHelper {
 					public void progress(int deltaWork) {
 						if (listener != null) {
 							progress += deltaWork;
-							listener.onFileUploadProgress(fileName, progress);
+							listener.onFileUploadProgress(type, fileName, progress, deltaWork);
 						}
 					}
 				});
+		error = error != null ? resolveServerError(error) : null;
 		if (listener != null) {
-			listener.onFileUploadDone(fileName, uploadTime, error != null ? resolveServerError(error) : null);
+			listener.onFileUploadDone(type, fileName, uploadTime, error);
 		}
+		return error;
 	}
 
 	public void uploadFile(@NonNull String fileName, @NonNull String type, @NonNull StreamWriter streamWriter,
@@ -360,14 +378,14 @@ public class BackupHelper {
 			@Override
 			public void onFileUploadProgress(int progress) {
 				if (listener != null) {
-					listener.onFileUploadProgress(fileName, progress);
+					listener.onFileUploadProgress(type, fileName, progress, 0);
 				}
 			}
 
 			@Override
 			public void onFileUploadDone(@Nullable String error) {
 				if (listener != null) {
-					listener.onFileUploadDone(fileName, uploadTime, error != null ? resolveServerError(error) : null);
+					listener.onFileUploadDone(type, fileName, uploadTime, error != null ? resolveServerError(error) : null);
 				}
 			}
 		}, EXECUTOR);
