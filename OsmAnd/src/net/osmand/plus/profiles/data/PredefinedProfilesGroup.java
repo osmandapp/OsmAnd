@@ -1,4 +1,4 @@
-package net.osmand.plus.profiles.dto;
+package net.osmand.plus.profiles.data;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -18,7 +18,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package net.osmand.plus.profiles.dto;
+package net.osmand.plus.profiles.data;
 
 import androidx.annotation.Nullable;
 
@@ -8,7 +8,7 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
-import net.osmand.plus.profiles.dto.RoutingDataObject.RoutingProfilesResources;
+import net.osmand.plus.profiles.data.RoutingDataObject.RoutingProfilesResources;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.util.Algorithms;

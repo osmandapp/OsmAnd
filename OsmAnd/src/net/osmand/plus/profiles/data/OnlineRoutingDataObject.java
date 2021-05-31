@@ -1,4 +1,4 @@
-package net.osmand.plus.profiles.dto;
+package net.osmand.plus.profiles.data;
 
 import androidx.annotation.NonNull;
 

@@ -35,7 +35,7 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.ProgressWithTitleItem;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.profiles.dto.ProfileDataObject;
+import net.osmand.plus.profiles.data.ProfileDataObject;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
@@ -184,7 +184,7 @@ public abstract class SelectProfileBottomSheet extends BasePreferenceBottomSheet
 	protected void addGroupHeader(CharSequence title, CharSequence description) {
 		Context themedCtx = UiUtilities.getThemedContext(app, nightMode);
 		LayoutInflater inflater = UiUtilities.getInflater(themedCtx, nightMode);
-		View view = inflater.inflate(R.layout.bottom_sheet_item_title_with_description_72dp, null);
+		View view = inflater.inflate(R.layout.bottom_sheet_item_title_with_description_large, null);
 
 		TextView tvTitle = view.findViewById(R.id.title);
 		TextView tvDescription = view.findViewById(R.id.description);
