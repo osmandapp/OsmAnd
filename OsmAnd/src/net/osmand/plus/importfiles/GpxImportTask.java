@@ -24,10 +24,11 @@ class GpxImportTask extends BaseLoadAsyncTask<Void, Void, GPXFile> {
 	private boolean save;
 	private boolean useImportDir;
 	private boolean showInDetailsActivity;
+	private boolean showPlanRouteFragment;
 
 	public GpxImportTask(@NonNull ImportHelper importHelper, @NonNull FragmentActivity activity,
 						 @NonNull Uri gpxFile, @NonNull String fileName, boolean save, boolean useImportDir,
-						 boolean showInDetailsActivity) {
+						 boolean showInDetailsActivity, boolean showPlanRouteFragment) {
 		super(activity);
 		this.importHelper = importHelper;
 		this.gpxFile = gpxFile;
@@ -35,6 +36,7 @@ class GpxImportTask extends BaseLoadAsyncTask<Void, Void, GPXFile> {
 		this.save = save;
 		this.useImportDir = useImportDir;
 		this.showInDetailsActivity = showInDetailsActivity;
+		this.showPlanRouteFragment = showPlanRouteFragment;
 	}
 
 	@Override
@@ -61,6 +63,6 @@ class GpxImportTask extends BaseLoadAsyncTask<Void, Void, GPXFile> {
 	@Override
 	protected void onPostExecute(GPXFile result) {
 		hideProgress();
-		importHelper.handleResult(result, fileName, fileSize, save, useImportDir, false, showInDetailsActivity);
+		importHelper.handleResult(result, fileName, fileSize, save, useImportDir, false, showInDetailsActivity, showPlanRouteFragment);
 	}
 }

@@ -889,8 +889,11 @@ public class GpxUiHelper {
 					if (resultCode == Activity.RESULT_OK) {
 						if (resultData != null) {
 							Uri uri = resultData.getData();
-							if (mapActivity.getImportHelper().handleGpxImport(uri, false)) {
-								dialog.dismiss();
+							if (mapActivity.getImportHelper().handleGpxImport(uri, false, false, false)) {
+								synchronized (dialog){
+								dialog.notifyAll();
+//								I need to update alertdialog gpx list. How to do its better?
+								}
 							}
 						}
 					}
