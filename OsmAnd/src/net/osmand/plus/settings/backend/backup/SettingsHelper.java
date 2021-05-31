@@ -647,7 +647,7 @@ public class SettingsHelper {
 				resourcesItems.put(ExportSettingsType.CUSTOM_ROUTING, Arrays.asList(fl));
 			}
 		}
-		List<OnlineRoutingEngine> onlineRoutingEngines = app.getOnlineRoutingHelper().getEngines();
+		List<OnlineRoutingEngine> onlineRoutingEngines = app.getOnlineRoutingHelper().getOnlyCustomEngines();
 		if (!Algorithms.isEmpty(onlineRoutingEngines)) {
 			resourcesItems.put(ExportSettingsType.ONLINE_ROUTING_ENGINES, onlineRoutingEngines);
 		}

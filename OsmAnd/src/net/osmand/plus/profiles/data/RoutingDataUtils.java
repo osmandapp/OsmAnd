@@ -3,6 +3,7 @@ package net.osmand.plus.profiles.data;
 import androidx.annotation.Nullable;
 
 import net.osmand.CallbackWithObject;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -13,6 +14,7 @@ import net.osmand.router.GeneralRouter;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,6 +27,8 @@ import java.util.List;
 import java.util.Map;
 
 public class RoutingDataUtils {
+
+	private final static Log LOG = PlatformUtil.getLog(RoutingDataUtils.class);
 
 	public static final String DOWNLOAD_ENGINES_URL = "https://osmand.net/online-routing-providers.json";
 
@@ -185,7 +189,7 @@ public class RoutingDataUtils {
 					String content = app.getOnlineRoutingHelper().makeRequest(DOWNLOAD_ENGINES_URL);
 					predefinedEngines = parsePredefinedEngines(content);
 				} catch (IOException | JSONException e) {
-					e.printStackTrace();
+					LOG.error("Error trying download predefined routing engines list: " + e.getMessage());
 				}
 				final List<ProfilesGroup> predefined = predefinedEngines;
 				app.runInUIThread(new Runnable() {

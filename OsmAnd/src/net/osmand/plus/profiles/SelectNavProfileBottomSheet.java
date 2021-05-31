@@ -53,7 +53,7 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 
 	private RoutingDataUtils dataUtils;
 
-	private List<ProfilesGroup> predefinedEngines;
+	private List<ProfilesGroup> predefinedGroups;
 	private List<ProfilesGroup> profileGroups = new ArrayList<>();
 	private boolean onlineRouting = false;
 	private boolean alreadyTriedToDownload = false;
@@ -80,20 +80,18 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 	public void createMenuItems(@Nullable Bundle savedInstanceState) {
 		createHeader();
 		if (onlineRouting) {
-			if (predefinedEngines != null) {
-				createProfilesList();
-			} else {
+			if (predefinedGroups == null) {
 				if (alreadyTriedToDownload) {
-					addEmptyPredefinedPart();
-					createProfilesList();
+					addNonePredefinedView();
 				} else {
 					addProgressWithTitleItem(getString(R.string.loading_list_of_routing_services));
 				}
 			}
-			createOnlineBottom();
+			createProfilesList();
+			createOnlineFooter();
 		} else {
 			createProfilesList();
-			createOfflineBottom();
+			createOfflineFooter();
 		}
 		addSpaceItem(getDimen(R.dimen.empty_state_text_button_padding_top));
 	}
@@ -115,7 +113,7 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 			public boolean onRadioItemClick(RadioItem radioItem, View view) {
 				if (onlineRouting != online) {
 					onlineRouting = online;
-					predefinedEngines = null;
+					predefinedGroups = null;
 					alreadyTriedToDownload = false;
 
 					if (online) {
@@ -123,7 +121,7 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 							@Override
 							public boolean processResult(final List<ProfilesGroup> result) {
 								alreadyTriedToDownload = true;
-								predefinedEngines = result;
+								predefinedGroups = result;
 								refreshView();
 								return false;
 							}
@@ -152,7 +150,7 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 		}
 	}
 
-	private void addEmptyPredefinedPart() {
+	private void addNonePredefinedView() {
 		int padding = getDimen(R.dimen.content_padding_half);
 		addGroupHeader(getString(R.string.shared_string_predefined));
 		addMessageWithRoundedBackground(
@@ -166,7 +164,7 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 		addDivider();
 	}
 
-	private void createOfflineBottom() {
+	private void createOfflineFooter() {
 		items.add(new LongDescriptionItem(app.getString(R.string.osmand_routing_promo)));
 		addButtonItem(R.string.import_routing_file, R.drawable.ic_action_folder, new OnClickListener() {
 			@Override
@@ -186,7 +184,7 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 		});
 	}
 
-	private void createOnlineBottom() {
+	private void createOnlineFooter() {
 		items.add(new LongDescriptionItem(app.getString(R.string.osmand_online_routing_promo)));
 		addButtonItem(R.string.add_online_routing_engine, R.drawable.ic_action_plus, new OnClickListener() {
 			@Override
@@ -276,7 +274,7 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 	protected void refreshProfiles() {
 		profileGroups.clear();
 		if (onlineRouting) {
-			profileGroups = getDataUtils().getOnlineProfiles(predefinedEngines);
+			profileGroups = getDataUtils().getOnlineProfiles(predefinedGroups);
 		} else {
 			profileGroups = getDataUtils().getOfflineProfiles();
 		}

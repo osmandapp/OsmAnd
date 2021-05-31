@@ -62,8 +62,8 @@ public abstract class SelectProfileBottomSheet extends BasePreferenceBottomSheet
 		Bundle args = getArguments();
 		if (args != null) {
 			selectedItemKey = args.getString(SELECTED_KEY, null);
-			refreshProfiles();
 		}
+		refreshProfiles();
 	}
 
 	@Override

@@ -40,7 +40,7 @@ public class OnlineRoutingSettingsItem extends CollectionSettingsItem<OnlineRout
 	protected void init() {
 		super.init();
 		helper = app.getOnlineRoutingHelper();
-		existingItems = new ArrayList<>(helper.getEngines());
+		existingItems = new ArrayList<>(helper.getOnlyCustomEngines());
 		otherEngines = new ArrayList<>(existingItems);
 	}
 
