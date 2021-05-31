@@ -46,6 +46,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static net.osmand.plus.importfiles.ImportHelper.ImportType.ROUTING;
+import static net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.NONE_VEHICLE;
 
 public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 
@@ -261,13 +262,15 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 	}
 
 	private void savePredefinedEngine(RoutingDataObject profile) {
-		String key = profile.getStringKey();
+		String stringKey = profile.getStringKey();
 		OnlineRoutingHelper helper = app.getOnlineRoutingHelper();
-		PredefinedProfilesGroup group = (PredefinedProfilesGroup) findGroupOfProfile(profile);
-		if (group != null) {
+		ProfilesGroup profilesGroup = findGroupOfProfile(profile);
+		if (profilesGroup != null) {
+			PredefinedProfilesGroup group = (PredefinedProfilesGroup) profilesGroup;
 			String type = group.getType().toUpperCase();
 			OnlineRoutingEngine engine = EngineType.getTypeByName(type).newInstance(null);
-			engine.put(EngineParameter.KEY, key);
+			engine.put(EngineParameter.KEY, stringKey);
+			engine.put(EngineParameter.VEHICLE_KEY, NONE_VEHICLE.getKey());
 			engine.put(EngineParameter.CUSTOM_URL, profile.getDescription());
 			String namePattern = getString(R.string.ltr_or_rtl_combine_via_dash);
 			String name = String.format(namePattern, group.getTitle(), profile.getName());
