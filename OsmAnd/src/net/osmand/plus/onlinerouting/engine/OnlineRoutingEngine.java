@@ -174,12 +174,8 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 		return allowedParameters.contains(key);
 	}
 
-	public boolean isCustom() {
-		String key = getStringKey();
-		if (key != null) {
-			return !key.startsWith(TEMPLATE_PREFIX);
-		}
-		return true;
+	public boolean isPredefined() {
+		return isPredefinedEngineKey(getStringKey());
 	}
 
 	@Nullable
@@ -234,11 +230,15 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 	}
 
 	@NonNull
-	public static String generateTemplateKey(String provider,
-	                                         String type) {
+	public static String generateTemplateKey(@NonNull String provider,
+	                                         @NonNull String type) {
 		provider = provider.replaceAll(" ", "_").toLowerCase();
 		type = type.replaceAll(" ", "_").toLowerCase();
 		return TEMPLATE_PREFIX + provider + "_" + type;
+	}
+
+	public static boolean isPredefinedEngineKey(@Nullable String stringKey) {
+		return stringKey != null && stringKey.startsWith(TEMPLATE_PREFIX);
 	}
 
 	public static class OnlineRoutingResponse {

@@ -149,34 +149,51 @@ public class RoutingDataUtils {
 		return result;
 	}
 
+	@Nullable
+	public ProfileDataObject getOnlineEngineByKey(String stringKey) {
+		OnlineRoutingHelper helper = app.getOnlineRoutingHelper();
+		OnlineRoutingEngine engine = helper.getEngineByKey(stringKey);
+		if (engine != null) {
+			return convertOnlineEngineToDataObject(engine);
+		}
+		return null;
+	}
+
 	private List<ProfileDataObject> getOnlineRoutingProfiles(boolean onlyCustom) {
 		OnlineRoutingHelper helper = app.getOnlineRoutingHelper();
 		List<ProfileDataObject> objects = new ArrayList<>();
 		List<OnlineRoutingEngine> engines = onlyCustom ? helper.getOnlyCustomEngines() : helper.getEngines();
 		for (int i = 0; i < engines.size(); i++) {
-			OnlineRoutingEngine engine = engines.get(i);
-			objects.add(new OnlineRoutingDataObject(
-					engine.getName(app), engine.getBaseUrl(), engine.getStringKey(), R.drawable.ic_world_globe_dark, false, i));
+			OnlineRoutingDataObject profile = convertOnlineEngineToDataObject(engines.get(i));
+			profile.setOrder(i);
+			objects.add(profile);
 		}
 		return objects;
+	}
+
+	private OnlineRoutingDataObject convertOnlineEngineToDataObject(OnlineRoutingEngine engine) {
+		return new OnlineRoutingDataObject(engine.getName(app),
+				engine.getBaseUrl(), engine.getStringKey(), R.drawable.ic_world_globe_dark);
 	}
 
 	public void downloadPredefinedEngines(final CallbackWithObject<List<ProfilesGroup>> callback) {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
+				List<ProfilesGroup> predefinedEngines = null;
 				try {
 					String content = app.getOnlineRoutingHelper().makeRequest(DOWNLOAD_ENGINES_URL);
-					final List<ProfilesGroup> predefinedEngines = parsePredefinedEngines(content);
-					app.runInUIThread(new Runnable() {
-						@Override
-						public void run() {
-							callback.processResult(predefinedEngines);
-						}
-					});
+					predefinedEngines = parsePredefinedEngines(content);
 				} catch (IOException | JSONException e) {
 					e.printStackTrace();
 				}
+				final List<ProfilesGroup> predefined = predefinedEngines;
+				app.runInUIThread(new Runnable() {
+					@Override
+					public void run() {
+						callback.processResult(predefined);
+					}
+				});
 			}
 		}).start();
 	}
@@ -203,7 +220,7 @@ public class RoutingDataUtils {
 					engineName = getString(RoutingProfilesResources.valueOf(type).getStringRes());
 				}
 				String key = OnlineRoutingEngine.generateTemplateKey(providerName, type);
-				RoutingDataObject engine = new OnlineRoutingDataObject(engineName, engineUrl, key, iconRes, true, j);
+				OnlineRoutingDataObject engine = new OnlineRoutingDataObject(engineName, engineUrl, key, iconRes);
 				engines.add(engine);
 			}
 			ProfilesGroup group = new PredefinedProfilesGroup(providerName, providerType, engines);

@@ -52,9 +52,10 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 
 	private RoutingDataUtils dataUtils;
 
-	private boolean onlineRouting = false;
 	private List<ProfilesGroup> predefinedEngines;
 	private List<ProfilesGroup> profileGroups = new ArrayList<>();
+	private boolean onlineRouting = false;
+	private boolean alreadyTriedToDownload = false;
 
 	public static void showInstance(@NonNull FragmentActivity activity,
 	                                @Nullable Fragment target,
@@ -78,7 +79,12 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 			if (predefinedEngines != null) {
 				createProfilesList();
 			} else {
-				addProgressWithTitleItem(R.string.loading_list_of_routing_services);
+				if (alreadyTriedToDownload) {
+					addEmptyPredefinedPart();
+					createProfilesList();
+				} else {
+					addProgressWithTitleItem(getString(R.string.loading_list_of_routing_services));
+				}
 			}
 			createOnlineBottom();
 		} else {
@@ -103,22 +109,27 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 		item.setOnClickListener(new OnRadioItemClickListener() {
 			@Override
 			public boolean onRadioItemClick(RadioItem radioItem, View view) {
-				onlineRouting = online;
-				predefinedEngines = null;
+				if (onlineRouting != online) {
+					onlineRouting = online;
+					predefinedEngines = null;
+					alreadyTriedToDownload = false;
 
-				if (online) {
-					getDataUtils().downloadPredefinedEngines(new CallbackWithObject<List<ProfilesGroup>>() {
-						@Override
-						public boolean processResult(final List<ProfilesGroup> result) {
-							predefinedEngines = result;
-							refreshView();
-							return false;
-						}
-					});
+					if (online) {
+						getDataUtils().downloadPredefinedEngines(new CallbackWithObject<List<ProfilesGroup>>() {
+							@Override
+							public boolean processResult(final List<ProfilesGroup> result) {
+								alreadyTriedToDownload = true;
+								predefinedEngines = result;
+								refreshView();
+								return false;
+							}
+						});
+					}
+
+					refreshView();
+					return true;
 				}
-
-				refreshView();
-				return true;
+				return false;
 			}
 		});
 		return item;
@@ -128,13 +139,27 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 		for (ProfilesGroup group : profileGroups) {
 			List<ProfileDataObject> items = group.getProfiles();
 			if (!Algorithms.isEmpty(items)) {
-				addGroupHeaderItem(group);
+				addGroupHeader(group.getTitle(), group.getDescription(app, nightMode));
 				for (ProfileDataObject item : items) {
 					addProfileItem(item);
 				}
 				addDivider();
 			}
 		}
+	}
+
+	private void addEmptyPredefinedPart() {
+		int padding = getDimen(R.dimen.content_padding_half);
+		addGroupHeader(getString(R.string.shared_string_predefined));
+		addMessageWithRoundedBackground(
+				getString(R.string.failed_loading_predefined_engines), 0, padding);
+
+		if (OnlineRoutingEngine.isPredefinedEngineKey(selectedItemKey)) {
+			ProfileDataObject selectedProfile = getDataUtils().getOnlineEngineByKey(selectedItemKey);
+			addProfileItem(selectedProfile);
+		}
+
+		addDivider();
 	}
 
 	private void createOfflineBottom() {

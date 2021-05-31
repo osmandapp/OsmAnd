@@ -56,7 +56,7 @@ public class OnlineRoutingHelper {
 	public List<OnlineRoutingEngine> getOnlyCustomEngines() {
 		List<OnlineRoutingEngine> engines = new ArrayList<>();
 		for (OnlineRoutingEngine engine : getEngines()) {
-			if (engine.isCustom()) {
+			if (!engine.isPredefined()) {
 				engines.add(engine);
 			}
 		}

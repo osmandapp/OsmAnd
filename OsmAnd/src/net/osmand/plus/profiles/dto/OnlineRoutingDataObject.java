@@ -2,22 +2,17 @@ package net.osmand.plus.profiles.dto;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.plus.R;
+import static net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.isPredefinedEngineKey;
 
 public class OnlineRoutingDataObject extends RoutingDataObject {
 
 	private int order;
-	private boolean isPredefined;
 
 	public OnlineRoutingDataObject(String name,
 	                               String description,
 	                               String stringKey,
-	                               int iconRes,
-	                               boolean isPredefined,
-	                               int order) {
+	                               int iconRes) {
 		super(stringKey, name, description, iconRes, false, null);
-		this.order = order;
-		this.isPredefined = isPredefined;
 	}
 
 	@Override
@@ -27,7 +22,11 @@ public class OnlineRoutingDataObject extends RoutingDataObject {
 
 	@Override
 	public boolean isPredefined() {
-		return isPredefined;
+		return isPredefinedEngineKey(getStringKey());
+	}
+
+	public void setOrder(int order) {
+		this.order = order;
 	}
 
 	@Override

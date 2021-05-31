@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewGroup.MarginLayoutParams;
 import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -35,7 +36,6 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.ProgressWithTitleItem;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.profiles.dto.ProfileDataObject;
-import net.osmand.plus.profiles.dto.ProfilesGroup;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
@@ -160,8 +160,8 @@ public abstract class SelectProfileBottomSheet extends BasePreferenceBottomSheet
 				.create());
 	}
 
-	protected void addProgressWithTitleItem(int titleId) {
-		items.add(new ProgressWithTitleItem(getString(titleId)));
+	protected void addProgressWithTitleItem(CharSequence title) {
+		items.add(new ProgressWithTitleItem(title));
 	}
 
 	protected void addDivider() {
@@ -176,20 +176,45 @@ public abstract class SelectProfileBottomSheet extends BasePreferenceBottomSheet
 				.create());
 	}
 
-	protected void addGroupHeaderItem(ProfilesGroup group) {
+	protected void addGroupHeader(CharSequence title) {
+		addGroupHeader(title, null);
+	}
+
+	protected void addGroupHeader(CharSequence title, CharSequence description) {
 		Context themedCtx = UiUtilities.getThemedContext(app, nightMode);
 		LayoutInflater inflater = UiUtilities.getInflater(themedCtx, nightMode);
 		View view = inflater.inflate(R.layout.bottom_sheet_item_title_with_description_72dp, null);
 
 		TextView tvTitle = view.findViewById(R.id.title);
 		TextView tvDescription = view.findViewById(R.id.description);
-		tvTitle.setText(group.getTitle());
-		CharSequence description = group.getDescription(app, nightMode);
+		tvTitle.setText(title);
 		if (description != null) {
 			tvDescription.setText(description);
 		} else {
 			tvDescription.setVisibility(View.GONE);
 		}
+
+		items.add(new BaseBottomSheetItem.Builder()
+				.setCustomView(view)
+				.create()
+		);
+	}
+
+	protected void addMessageWithRoundedBackground(String message, int marginTop, int marginBottom) {
+		Context themedCtx = UiUtilities.getThemedContext(app, nightMode);
+		LayoutInflater inflater = UiUtilities.getInflater(themedCtx, nightMode);
+		View view = inflater.inflate(R.layout.bottom_sheet_item_description_on_rounded_bg, null);
+
+		TextView tvMessage = view.findViewById(R.id.title);
+		tvMessage.setText(message);
+
+		LinearLayout backgroundView = view.findViewById(R.id.background_view);
+		int color = AndroidUtils.getColorFromAttr(themedCtx, R.attr.activity_background_color);
+		Drawable bgDrawable = getPaintedIcon(R.drawable.rectangle_rounded, color);
+		AndroidUtils.setBackground(backgroundView, bgDrawable);
+
+		MarginLayoutParams params = (MarginLayoutParams) backgroundView.getLayoutParams();
+		AndroidUtils.setMargins(params, params.leftMargin, marginTop, params.rightMargin, marginBottom);
 
 		items.add(new BaseBottomSheetItem.Builder()
 				.setCustomView(view)
