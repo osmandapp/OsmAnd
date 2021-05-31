@@ -103,7 +103,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 		items = new ArrayList<>();
 		MapMarkersHelper helper = app.getMapMarkersHelper();
 		helper.updateGroups();
-		List<MapMarkersGroup> groups = new ArrayList<>(helper.getMapMarkersGroups());
+		List<MapMarkersGroup> groups = new ArrayList<>(helper.getVisibleMapMarkersGroups());
 		groups.addAll(helper.getGroupsForDisplayedGpx());
 		groups.addAll(helper.getGroupsForSavedArticlesTravelBook());
 
@@ -135,9 +135,6 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 
 		for (int i = 0; i < groups.size(); i++) {
 			MapMarkersGroup group = groups.get(i);
-			if (!group.isVisible()) {
-				continue;
-			}
 			String markerGroupName = group.getName();
 
 			if (markerGroupName == null) {

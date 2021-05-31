@@ -3297,7 +3297,6 @@
     <string name="select_color">Zvoľte farbu</string>
     <string name="edit_profiles_descr">Predvolené profily OsmAndu sa nedajú vymazať, ale dajú sa vypnúť (na prechádzajúcej obrazovke) alebo presunúť na koniec zoznamu.</string>
     <string name="edit_profiles">Upraviť profily</string>
-    <string name="select_nav_profile_dialog_message">\'Typ navigácie\' ovplyvňuje pravidlá pre výpočet trasy.</string>
     <string name="profile_appearance">Vzhľad profilu</string>
     <string name="choose_icon_color_name">Ikona, farba a názov</string>
     <string name="reorder_profiles">Upraviť zoznam profilov</string>

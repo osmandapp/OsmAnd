@@ -33,7 +33,7 @@ public class CollatorStringMatcher implements StringMatcher {
 
 	public CollatorStringMatcher(String part, StringMatcherMode mode) {
 		this.collator = OsmAndCollator.primaryCollator();
-		part = simplifyStringAndAlignChars(part, "");
+		part = simplifyStringAndAlignChars(part);
 		if (part.length() > 0 && part.charAt(part.length() - 1) == '.') {
 			part = part.substring(0, part.length() - 1);
 			if (mode == StringMatcherMode.CHECK_EQUALS_FROM_SPACE) {
@@ -135,13 +135,16 @@ public class CollatorStringMatcher implements StringMatcher {
 	 */
 	public static boolean cstartsWith(Collator collator, String fullTextP, String theStart, 
 			boolean checkBeginning, boolean checkSpaces, boolean equals) {
-		String searchIn = simplifyStringAndAlignChars(fullTextP, theStart);
+		// FUTURE: This is not effective code, it runs on each comparision
+		// It would be more efficient to normalize all strings in file and normalize search string before collator  
+		theStart = alignChars(theStart);
+		String searchIn = simplifyStringAndAlignChars(fullTextP);
 		int searchInLength = searchIn.length();
 		int startLength = theStart.length();
 		if (startLength == 0) {
 			return true;
 		}
-		// this is not correct because of Auhofstrasse != Auhofstraße
+		// this is not correct without (simplifyStringAndAlignChars) because of Auhofstrasse != Auhofstraße
 		if (startLength > searchInLength) {
 			return false;
 		}
@@ -180,11 +183,15 @@ public class CollatorStringMatcher implements StringMatcher {
 		return false;
 	}
 	
-	private static String simplifyStringAndAlignChars(String fullText, String key) {
-		int i;
+	private static String simplifyStringAndAlignChars(String fullText) {
 		fullText = fullText.toLowerCase(Locale.getDefault());
-		// if key consist of 'ß' e.g. "gieß" we do not change to 'ss'
-		while (key.indexOf('ß') == -1 && (i = fullText.indexOf('ß')) != -1) {
+		fullText = alignChars(fullText);
+		return fullText;
+	}
+
+	private static String alignChars(String fullText) {
+		int i;
+		while ((i = fullText.indexOf('ß')) != -1) {
 			fullText = fullText.substring(0, i) + "ss" + fullText.substring(i+1);
 		}
 		return fullText;

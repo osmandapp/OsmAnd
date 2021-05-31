@@ -3292,7 +3292,6 @@
     <string name="select_color">Seleziona il colore</string>
     <string name="edit_profiles_descr">Non puoi cancellare i profili preimpostati di OsmAnd, ma puoi disabilitarli nello schermo precedente o spostarli in basso.</string>
     <string name="edit_profiles">Modifica il profilo</string>
-    <string name="select_nav_profile_dialog_message">Il \'Tipo di navigazione\' determina il modo in cui vengono calcolati i percorsi.</string>
     <string name="profile_appearance">Aspetto del profilo</string>
     <string name="choose_icon_color_name">Scegli l\'icona, il colore e il nome</string>
     <string name="reorder_profiles">Modifica la lista dei profili</string>

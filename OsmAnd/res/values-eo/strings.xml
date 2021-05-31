@@ -3298,7 +3298,6 @@
     <string name="select_color">Elekti koloron</string>
     <string name="edit_profiles_descr">Ne eblas forigi la implicitajn profilojn de OsmAnd, sed eblas malaktivigi ilin (ĉe la antaŭa ekrano) aŭ movi ilin suben.</string>
     <string name="edit_profiles">Redakti profilojn</string>
-    <string name="select_nav_profile_dialog_message">“Speco de navigo” influas al maniero kiel kalkuli kurson.</string>
     <string name="profile_appearance">Aspekto de profilo</string>
     <string name="choose_icon_color_name">Emblemo, koloro kaj nomo</string>
     <string name="reorder_profiles">Redakti liston de profiloj</string>

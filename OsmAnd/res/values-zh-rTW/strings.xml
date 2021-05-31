@@ -3294,7 +3294,6 @@
     <string name="select_color">選取顏色</string>
     <string name="edit_profiles_descr">OsmAnd 預設的設定檔無法被刪除，但可以被停用（在前一個畫面），或被排到底部。</string>
     <string name="edit_profiles">編輯設定檔</string>
-    <string name="select_nav_profile_dialog_message">「導航類型」會控制路徑的計算方式。</string>
     <string name="profile_appearance">設定檔外觀</string>
     <string name="choose_icon_color_name">圖示、顏色與名稱</string>
     <string name="reorder_profiles">編輯設定檔清單</string>
@@ -4122,4 +4121,5 @@
     <string name="resend_verification_code">重新傳送代碼</string>
     <string name="verification_code_missing">我沒有收到驗證碼</string>
     <string name="verification_code_missing_description">等待代碼的時間可能需要10分鐘，您也可以檢查您的垃圾郵件資料夾。如果沒有幫助，請點擊下方的按鈕。</string>
+    <string name="select_nav_profile_dialog_message">「導航類型」控制著路線計算的方式。您可以在離線與線上導航引擎中選取。</string>
 </resources>
