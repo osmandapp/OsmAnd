@@ -219,7 +219,7 @@ public class RoutingDataUtils {
 					iconRes = RoutingProfilesResources.valueOf(type).getIconRes();
 					engineName = getString(RoutingProfilesResources.valueOf(type).getStringRes());
 				}
-				String key = OnlineRoutingEngine.generateTemplateKey(providerName, type);
+				String key = OnlineRoutingEngine.generatePredefinedKey(providerName, type);
 				OnlineRoutingDataObject engine = new OnlineRoutingDataObject(engineName, engineUrl, key, iconRes);
 				engines.add(engine);
 			}

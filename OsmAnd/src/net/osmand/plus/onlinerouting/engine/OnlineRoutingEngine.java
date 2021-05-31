@@ -34,7 +34,7 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 	protected static final Log LOG = PlatformUtil.getLog(OnlineRoutingEngine.class);
 
 	public final static String ONLINE_ROUTING_ENGINE_PREFIX = "online_routing_engine_";
-	public final static String TEMPLATE_PREFIX = ONLINE_ROUTING_ENGINE_PREFIX + "predefined_";
+	public final static String PREDEFINED_PREFIX = ONLINE_ROUTING_ENGINE_PREFIX + "predefined_";
 
 	public final static VehicleType CUSTOM_VEHICLE = new VehicleType("", R.string.shared_string_custom);
 	public final static VehicleType NONE_VEHICLE = new VehicleType("None", R.string.shared_string_none);
@@ -230,15 +230,14 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 	}
 
 	@NonNull
-	public static String generateTemplateKey(@NonNull String provider,
-	                                         @NonNull String type) {
-		provider = provider.replaceAll(" ", "_").toLowerCase();
-		type = type.replaceAll(" ", "_").toLowerCase();
-		return TEMPLATE_PREFIX + provider + "_" + type;
+	public static String generatePredefinedKey(@NonNull String provider,
+	                                           @NonNull String type) {
+		String key = PREDEFINED_PREFIX + provider + "_" + type;
+		return key.replaceAll(" ", "_").toLowerCase();
 	}
 
 	public static boolean isPredefinedEngineKey(@Nullable String stringKey) {
-		return stringKey != null && stringKey.startsWith(TEMPLATE_PREFIX);
+		return stringKey != null && stringKey.startsWith(PREDEFINED_PREFIX);
 	}
 
 	public static class OnlineRoutingResponse {

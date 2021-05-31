@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
@@ -62,14 +63,17 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 	                                ApplicationMode appMode,
 	                                String selectedItemKey,
 	                                boolean usedOnMap) {
-		SelectNavProfileBottomSheet fragment = new SelectNavProfileBottomSheet();
-		Bundle args = new Bundle();
-		args.putString(SELECTED_KEY, selectedItemKey);
-		fragment.setArguments(args);
-		fragment.setUsedOnMap(usedOnMap);
-		fragment.setAppMode(appMode);
-		fragment.setTargetFragment(target, 0);
-		fragment.show(activity.getSupportFragmentManager(), TAG);
+		FragmentManager fragmentManager = activity.getSupportFragmentManager();
+		if (!fragmentManager.isStateSaved()) {
+			SelectNavProfileBottomSheet fragment = new SelectNavProfileBottomSheet();
+			Bundle args = new Bundle();
+			args.putString(SELECTED_KEY, selectedItemKey);
+			fragment.setArguments(args);
+			fragment.setUsedOnMap(usedOnMap);
+			fragment.setAppMode(appMode);
+			fragment.setTargetFragment(target, 0);
+			fragment.show(fragmentManager, TAG);
+		}
 	}
 
 	@Override

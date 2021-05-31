@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
@@ -29,14 +30,17 @@ public class SelectDefaultProfileBottomSheet extends SelectProfileBottomSheet {
 	                                ApplicationMode appMode,
 	                                String selectedItemKey,
 	                                boolean usedOnMap) {
-		SelectDefaultProfileBottomSheet fragment = new SelectDefaultProfileBottomSheet();
-		Bundle args = new Bundle();
-		args.putString(SELECTED_KEY, selectedItemKey);
-		fragment.setArguments(args);
-		fragment.setUsedOnMap(usedOnMap);
-		fragment.setAppMode(appMode);
-		fragment.setTargetFragment(target, 0);
-		fragment.show(activity.getSupportFragmentManager(), TAG);
+		FragmentManager fragmentManager = activity.getSupportFragmentManager();
+		if (!fragmentManager.isStateSaved()) {
+			SelectDefaultProfileBottomSheet fragment = new SelectDefaultProfileBottomSheet();
+			Bundle args = new Bundle();
+			args.putString(SELECTED_KEY, selectedItemKey);
+			fragment.setArguments(args);
+			fragment.setUsedOnMap(usedOnMap);
+			fragment.setAppMode(appMode);
+			fragment.setTargetFragment(target, 0);
+			fragment.show(fragmentManager, TAG);
+		}
 	}
 
 	@Override
