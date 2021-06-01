@@ -44,8 +44,8 @@ class BackupImporter {
 	}
 
 	List<SettingsItem> collectItems() throws IllegalArgumentException, IOException {
-		final List<SettingsItem> result = new ArrayList<>();
-		final StringBuilder error = new StringBuilder();
+		List<SettingsItem> result = new ArrayList<>();
+		StringBuilder error = new StringBuilder();
 		try {
 			backupHelper.downloadFileListSync(new OnDownloadFileListListener() {
 				@Override

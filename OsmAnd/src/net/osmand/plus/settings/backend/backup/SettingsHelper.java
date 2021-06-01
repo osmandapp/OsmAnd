@@ -122,7 +122,7 @@ public abstract class SettingsHelper {
 		typesMap.putAll(getMyPlacesItems());
 		typesMap.putAll(getResourcesItems());
 
-		return getFilteredSettingsItems(typesMap, settingsTypes, Collections.<SettingsItem>emptyList(), export);
+		return getFilteredSettingsItems(typesMap, settingsTypes, Collections.emptyList(), export);
 	}
 
 	public List<SettingsItem> getFilteredSettingsItems(
