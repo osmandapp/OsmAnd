@@ -1207,8 +1207,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	TravelHelper.GpxReadCallback gpxReadListener(String gpxFileName, LatLon latLon) {
-		OsmandApplication app = view.getApplication();
-		MapActivity mapActivity = (MapActivity) view.getContext();
 		return new TravelHelper.GpxReadCallback() {
 			@Override
 			public void onGpxFileReading() {
@@ -1217,29 +1215,39 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			@Override
 			public void onGpxFileRead(@Nullable GPXUtilities.GPXFile gpxFile) {
 				if (gpxFile != null) {
-					File file = app.getAppPath(IndexConstants.GPX_TRAVEL_DIR + gpxFileName);
-					new SaveGpxAsyncTask(file, gpxFile, new SaveGpxAsyncTask.SaveGpxListener() {
-						@Override
-						public void gpxSavingStarted() {
-
-						}
-
-						@Override
-						public void gpxSavingFinished(Exception errorMessage) {
-							WptPt selectedPoint = new WptPt();
-							selectedPoint.lat = latLon.getLatitude();
-							selectedPoint.lon = latLon.getLongitude();
-							app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, false);
-							SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, false);
-							SelectedGpxPoint selectedGpxPoint =
-									new SelectedGpxPoint(selectedGpxFile, selectedPoint, null, null, Float.NaN);
-							TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint,
-									null, null, false, false);
-						}
-					}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+					saveGpx(gpxFile, gpxFileName, latLon);
 				}
 			}
 		};
+	}
+
+	private void saveGpx(@NonNull GPXFile gpxFile, String gpxFileName, LatLon latLon) {
+		OsmandApplication app = view.getApplication();
+		MapActivity mapActivity = (MapActivity) view.getContext();
+		File file = app.getAppPath(IndexConstants.GPX_TRAVEL_DIR + gpxFileName);
+		new SaveGpxAsyncTask(file, gpxFile, new SaveGpxAsyncTask.SaveGpxListener() {
+			@Override
+			public void gpxSavingStarted() {
+
+			}
+
+			@Override
+			public void gpxSavingFinished(Exception errorMessage) {
+				if (errorMessage == null) {
+					WptPt selectedPoint = new WptPt();
+					selectedPoint.lat = latLon.getLatitude();
+					selectedPoint.lon = latLon.getLongitude();
+					app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, false);
+					SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, false);
+					SelectedGpxPoint selectedGpxPoint =
+							new SelectedGpxPoint(selectedGpxFile, selectedPoint, null, null, Float.NaN);
+					TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint,
+							null, null, false, false);
+				} else {
+					log.error(errorMessage);
+				}
+			}
+		}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	@Override
