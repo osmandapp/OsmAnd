@@ -71,7 +71,7 @@ public class NetworkWriter implements AbstractWriter {
 	private String uploadItemInfo(@NonNull SettingsItem item, @NonNull String fileName) throws IOException {
 		try {
 			String itemJson = item.toJson();
-			InputStream inputStream = new ByteArrayInputStream(itemJson.getBytes("UTF-8"));
+			final InputStream inputStream = new ByteArrayInputStream(itemJson.getBytes("UTF-8"));
 			StreamWriter streamWriter = new StreamWriter() {
 				@Override
 				public void write(OutputStream outputStream, IProgress progress) throws IOException {
@@ -85,7 +85,7 @@ public class NetworkWriter implements AbstractWriter {
 		}
 	}
 
-	private String uploadItemFile(@NonNull SettingsItemWriter<? extends SettingsItem> itemWriter,
+	private String uploadItemFile(@NonNull final SettingsItemWriter<? extends SettingsItem> itemWriter,
 								  @NonNull String fileName) throws UserNotRegisteredException, IOException {
 		StreamWriter streamWriter = new StreamWriter() {
 			@Override

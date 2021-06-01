@@ -182,8 +182,6 @@ public class SelectFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 		button.setPadding(0, 0, dp8, 0);
 		LinearLayout descriptionContainer = itemView.findViewById(R.id.descriptionContainer);
 		descriptionContainer.setPadding(dp16, 0, dp16, 0);
-		View divider = itemView.findViewById(R.id.divider_bottom);
-		divider.setVisibility(View.GONE);
 		itemView.setPadding(0, 0, 0, 0);
 		int activeColorId = nightMode ?
 				R.color.active_color_primary_dark : R.color.active_color_primary_light;

@@ -10,16 +10,16 @@ import androidx.preference.Preference;
 import androidx.preference.SwitchPreferenceCompat;
 
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
-import net.osmand.plus.profiles.ProfileDataObject;
-import net.osmand.plus.profiles.ProfileDataUtils;
+import net.osmand.plus.profiles.data.ProfileDataObject;
+import net.osmand.plus.profiles.SelectNavProfileBottomSheet;
+import net.osmand.plus.profiles.data.RoutingDataUtils;
 import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet;
 import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet.DialogMode;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.profiles.RoutingProfileDataObject.RoutingProfilesResources;
-import net.osmand.plus.profiles.SelectProfileBottomSheet;
+import net.osmand.plus.profiles.data.RoutingDataObject.RoutingProfilesResources;
 import net.osmand.plus.profiles.SelectProfileBottomSheet.OnSelectProfileCallback;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.util.Algorithms;
@@ -38,6 +38,7 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 
 	private Map<String, ProfileDataObject> routingProfileDataObjects;
 	private Preference navigationType;
+	private RoutingDataUtils routingDataUtils;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -122,19 +123,25 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		if (preference.getKey().equals(NAVIGATION_TYPE)) {
-			String routingProfileKey =
-					getSelectedAppMode() != null ? getSelectedAppMode().getRoutingProfile() : null;
+			ApplicationMode appMode = getSelectedAppMode();
+			String selected = appMode != null ? appMode.getRoutingProfile() : null;
 			if (getActivity() != null) {
-				SelectProfileBottomSheet.showInstance(
-						getActivity(), SelectProfileBottomSheet.DialogMode.NAVIGATION_PROFILE,
-						this, getSelectedAppMode(), routingProfileKey, false);
+				SelectNavProfileBottomSheet.showInstance(
+						getActivity(), this, getSelectedAppMode(), selected, false);
 			}
 		}
 		return false;
 	}
 
 	private void updateRoutingProfilesDataObjects() {
-		routingProfileDataObjects = ProfileDataUtils.getRoutingProfiles(app);
+		routingProfileDataObjects = getRoutingDataUtils().getRoutingProfiles();
+	}
+
+	private RoutingDataUtils getRoutingDataUtils() {
+		if (routingDataUtils == null) {
+			routingDataUtils = new RoutingDataUtils(app);
+		}
+		return routingDataUtils;
 	}
 
 	void updateRoutingProfile(String profileKey) {

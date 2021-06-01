@@ -3261,7 +3261,7 @@
     <string name="choose_icon_color_name">Значок, цвет и имя</string>
     <string name="reorder_profiles">Редактировать список профилей</string>
     <string name="selected_profile">Выбранный профиль</string>
-    <string name="personal_category_name">Персональный</string>
+    <string name="personal_category_name">Персональные</string>
     <string name="shared_string_downloading_formatted">Скачивание %s</string>
     <string name="rendering_value_thick_name">Толстая</string>
     <string name="default_speed_dialog_msg">Используется для оценки времени прибытия для неизвестного типа дорог и ограничения скорости для всех дорог (может изменить маршрут)</string>

@@ -291,6 +291,10 @@ public class Amenity extends MapObject {
 		return null;
 	}
 
+	public String getRef(){
+		return getAdditionalInfo(REF);
+	}
+
 	public String getStrictTagContent(String tag, String lang) {
 		if (lang != null) {
 			String translateName = getAdditionalInfo(tag + ":" + lang);

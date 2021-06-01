@@ -182,24 +182,39 @@ public class EntityParser {
 		Collection<Map<String, String>> it = MapRenderingTypes.splitTagsIntoDifferentObjects(tags);
 		for (Map<String, String> ts : it) {
 			for (Map.Entry<String, String> e : ts.entrySet()) {
-				Amenity am = poiTypes.parseAmenity(e.getKey(), e.getValue(), purerelation, ts);
-				if (am != null) {
-					parseMapObject(am, entity, ts);
-					String wbs = getWebSiteURL(ts, false);
-					if (wbs != null) {
-						am.setAdditionalInfo("website", wbs);
+				String value = e.getValue();
+				String key = e.getKey();
+				if (value.indexOf(';') != -1) {
+					String[] vls = value.split(";");
+					for(String v : vls) {
+						v = v.trim();
+						Amenity am = poiTypes.parseAmenity(key, v, purerelation, ts);
+						addAmenity(entity, amenitiesList, ts, am);
 					}
-					wbs = getWebSiteURL(ts, true);
-					if (wbs != null) {
-						am.setAdditionalInfo("wikipedia", wbs);
-					}
-					if (checkAmenitiesToAdd(am, amenitiesList) && !"no".equals(am.getSubType())) {
-						amenitiesList.add(am);
-					}
+				} else {
+					Amenity am = poiTypes.parseAmenity(key, value, purerelation, ts);
+					addAmenity(entity, amenitiesList, ts, am);
 				}
 			}
 		}
 		return amenitiesList;
+	}
+
+	private static void addAmenity(Entity entity, List<Amenity> amenitiesList, Map<String, String> ts, Amenity am) {
+		if (am != null) {
+			parseMapObject(am, entity, ts);
+			String wbs = getWebSiteURL(ts, false);
+			if (wbs != null) {
+				am.setAdditionalInfo("website", wbs);
+			}
+			wbs = getWebSiteURL(ts, true);
+			if (wbs != null) {
+				am.setAdditionalInfo("wikipedia", wbs);
+			}
+			if (checkAmenitiesToAdd(am, amenitiesList) && !"no".equals(am.getSubType())) {
+				amenitiesList.add(am);
+			}
+		}
 	}
 
 	private static boolean checkAmenitiesToAdd(Amenity a, List<Amenity> amenitiesList){

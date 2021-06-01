@@ -329,7 +329,7 @@ public class BackupHelper {
 		headers.put("Accept-Encoding", "deflate, gzip");
 	}
 
-	public String uploadFileSync(@NonNull String fileName, @NonNull String type, @NonNull StreamWriter streamWriter,
+	public String uploadFileSync(@NonNull final String fileName, final @NonNull String type, @NonNull StreamWriter streamWriter,
 								 @Nullable final OnUploadFileListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 
@@ -364,7 +364,7 @@ public class BackupHelper {
 		return error;
 	}
 
-	public void uploadFile(@NonNull String fileName, @NonNull String type, @NonNull StreamWriter streamWriter,
+	public void uploadFile(@NonNull final String fileName, final @NonNull String type, @NonNull StreamWriter streamWriter,
 						   @Nullable final OnUploadFileListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 
@@ -544,7 +544,7 @@ public class BackupHelper {
 				getDownloadFileListListener(listener), EXECUTOR);
 	}
 
-	private OnRequestResultListener getDownloadFileListListener(@Nullable OnDownloadFileListListener listener) {
+	private OnRequestResultListener getDownloadFileListListener(@Nullable final OnDownloadFileListListener listener) {
 		return new OnRequestResultListener() {
 			@Override
 			public void onResult(@Nullable String resultJson, @Nullable String error) {
@@ -589,7 +589,7 @@ public class BackupHelper {
 											   @Nullable final OnDownloadFileListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 
-		Map<File, String> res = new HashMap<>();
+		final Map<File, String> res = new HashMap<>();
 		Map<String, String> params = new HashMap<>();
 		params.put("deviceid", getDeviceId());
 		params.put("accessToken", getAccessToken());
@@ -840,12 +840,11 @@ public class BackupHelper {
 							long localModifiedTime = localFile.file.lastModified();
 							if (remoteUploadTime == localUploadTime) {
 								if (localUploadTime < localModifiedTime) {
-									//info.filesToUpload.add(localFile);
+									info.filesToUpload.add(localFile);
 								}
 							} else {
-								//info.filesToMerge.add(new Pair<>(localFile, remoteFile));
+								info.filesToMerge.add(new Pair<>(localFile, remoteFile));
 							}
-							info.filesToDelete.add(remoteFile);
 							break;
 						}
 					}
@@ -853,8 +852,7 @@ public class BackupHelper {
 						if (backupLastUploadedTime > 0 && backupLastUploadedTime >= remoteFile.getClienttimems()) {
 							info.filesToDelete.add(remoteFile);
 						} else {
-							//info.filesToDownload.add(remoteFile);
-							info.filesToDelete.add(remoteFile);
+							info.filesToDownload.add(remoteFile);
 						}
 					}
 				}
@@ -867,7 +865,7 @@ public class BackupHelper {
 						}
 					}
 					if (!hasRemoteFile) {
-						//info.filesToUpload.add(localFile);
+						info.filesToUpload.add(localFile);
 					}
 				}
 				return info;
