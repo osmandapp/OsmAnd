@@ -1897,4 +1897,22 @@
     <string name="resend_verification_code">Kirim ulang kode</string>
     <string name="verification_code_missing">Saya tidak mendapatkan kode verifikasi</string>
     <string name="verification_code_missing_description">Waktu menunggu untuk mendapatkan kode dapat selama 10 menit, dan Anda juga dapat memeriksa folder spam Anda. Jika itu tidak membantu, gunakan tombol di bawah.</string>
+    <string name="rendering_value_black_name">Hitam</string>
+    <string name="favorite_empty_place_name">Tempat</string>
+    <string name="shared_string_send">Kirim</string>
+    <string name="shared_string_wikipedia">Wiki</string>
+    <string name="traffic_warning_hazard">Bahaya</string>
+    <string name="rendering_value_purple_name">Ungu</string>
+    <string name="rendering_value_blue_name">Biru</string>
+    <string name="rendering_value_green_name">Hijau</string>
+    <string name="dark_theme">Thema Malam</string>
+    <string name="lang_ta">Bahasa Tamil</string>
+    <string name="lang_la">Latin</string>
+    <string name="lang_ms">Bahasa Malaysia</string>
+    <string name="download_wikipedia_maps">Wiki</string>
+    <string name="local_indexes_cat_wiki">Wiki</string>
+    <string name="shared_string_go">Go</string>
+    <string name="rendering_value_orange_name">Jeruk</string>
+    <string name="rendering_value_yellow_name">Kuning</string>
+    <string name="rendering_value_red_name">Merah</string>
 </resources>
