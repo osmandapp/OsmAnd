@@ -1206,7 +1206,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		return false;
 	}
 
-	TravelHelper.GpxReadCallback gpxReadListener(final String gpxFileName, final LatLon latLon) {
+	TravelHelper.GpxReadCallback gpxReadListener(String gpxFileName, LatLon latLon) {
 		return new TravelHelper.GpxReadCallback() {
 			@Override
 			public void onGpxFileReading() {
@@ -1221,9 +1221,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		};
 	}
 
-	private void saveGpx(@NonNull final GPXFile gpxFile, String gpxFileName, final LatLon latLon) {
-		final OsmandApplication app = view.getApplication();
-		final MapActivity mapActivity = (MapActivity) view.getContext();
+	private void saveGpx(@NonNull GPXFile gpxFile, String gpxFileName, LatLon latLon) {
+		OsmandApplication app = view.getApplication();
+		MapActivity mapActivity = (MapActivity) view.getContext();
 		File file = app.getAppPath(IndexConstants.GPX_TRAVEL_DIR + gpxFileName);
 		new SaveGpxAsyncTask(file, gpxFile, new SaveGpxAsyncTask.SaveGpxListener() {
 			@Override
