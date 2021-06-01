@@ -76,6 +76,7 @@ public class BackupHelper {
 	private static final String LIST_FILES_URL = SERVER_URL + "/userdata/list-files";
 	private static final String DOWNLOAD_FILE_URL = SERVER_URL + "/userdata/download-file";
 	private static final String DELETE_FILE_URL = SERVER_URL + "/userdata/delete-file";
+	private static final String DELETE_FILE_VERSION_URL = SERVER_URL + "/userdata/delete-file-version";
 
 	public final static int STATUS_SUCCESS = 0;
 	public final static int STATUS_PARSE_JSON_ERROR = 1;
@@ -468,6 +469,10 @@ public class BackupHelper {
 	}
 
 	public void deleteFiles(@NonNull List<RemoteFile> remoteFiles, @Nullable final OnDeleteFilesListener listener) throws UserNotRegisteredException {
+		deleteFiles(remoteFiles, false, listener);
+	}
+
+	public void deleteFiles(@NonNull List<RemoteFile> remoteFiles, boolean byVersion, @Nullable final OnDeleteFilesListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 
 		Map<String, String> commonParameters = new HashMap<>();
@@ -480,7 +485,10 @@ public class BackupHelper {
 			Map<String, String> parameters = new HashMap<>(commonParameters);
 			parameters.put("name", remoteFile.getName());
 			parameters.put("type", remoteFile.getType());
-			Request r = new Request(DELETE_FILE_URL, parameters, null, false, true);
+			if (byVersion) {
+				parameters.put("updatetime", String.valueOf(remoteFile.getUpdatetimems()));
+			}
+			Request r = new Request(byVersion ? DELETE_FILE_VERSION_URL : DELETE_FILE_URL, parameters, null, false, true);
 			requests.add(r);
 			filesMap.put(r, remoteFile);
 		}
@@ -639,7 +647,7 @@ public class BackupHelper {
 				} else {
 					try {
 						if (!remoteFiles.isEmpty()) {
-							deleteFiles(remoteFiles, listener);
+							deleteFiles(remoteFiles, true, listener);
 						} else {
 							if (listener != null) {
 								listener.onFilesDeleteDone(Collections.emptyMap());
@@ -704,7 +712,7 @@ public class BackupHelper {
 				} else {
 					try {
 						if (!remoteFiles.isEmpty()) {
-							deleteFiles(remoteFiles, listener);
+							deleteFiles(remoteFiles, true, listener);
 						} else {
 							if (listener != null) {
 								listener.onFilesDeleteDone(Collections.emptyMap());
