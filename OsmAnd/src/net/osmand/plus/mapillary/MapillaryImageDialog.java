@@ -18,9 +18,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
-import androidx.annotation.NonNull;
-import androidx.core.util.Pair;
-
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.Point;
 
@@ -39,6 +36,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.builders.cards.dialogs.ContextMenuCardDialog;
 import net.osmand.plus.mapcontextmenu.builders.cards.dialogs.ContextMenuCardDialogFragment;
+import net.osmand.plus.resources.GeometryTilesCache;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
@@ -51,6 +49,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import androidx.annotation.NonNull;
+import androidx.core.util.Pair;
 
 import static net.osmand.plus.mapillary.MapillaryVectorLayer.EXTENT;
 import static net.osmand.plus.mapillary.MapillaryVectorLayer.TILE_ZOOM;
@@ -452,6 +453,7 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 			return;
 		}
 		ResourceManager mgr = getMapActivity().getMyApplication().getResourceManager();
+		GeometryTilesCache geometryTilesCache = mgr.getGeometryTilesCache();
 		final QuadRect tilesRect = tileBox.getTileBounds();
 
 		// recalculate for ellipsoid coordinates
@@ -466,6 +468,8 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 		int height = (int) Math.ceil(tilesRect.bottom + ellipticTileCorrection - top);
 		int dzoom = nzoom - TILE_ZOOM;
 		int div = (int) Math.pow(2.0, dzoom);
+		geometryTilesCache.setTileBounds(left, top, left + width, top + height);
+		geometryTilesCache.setCurrentZoom(tileBox.getZoom());
 
 		Map<String, Pair<QuadPointDouble, GeometryTile>> tiles = new HashMap<>();
 		for (int i = 0; i < width; i++) {
@@ -480,10 +484,10 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 					boolean imgExist = mgr.tileExistOnFileSystem(tileId, map, tileX, tileY, TILE_ZOOM);
 					if (imgExist) {
 						if (sync) {
-							tile = mgr.getGeometryTilesCache().getTileForMapSync(tileId, map, tileX, tileY, TILE_ZOOM, false);
+							tile = geometryTilesCache.getTileForMapSync(tileId, map, tileX, tileY, TILE_ZOOM, false);
 							sync = false;
 						} else {
-							tile = mgr.getGeometryTilesCache().getTileForMapAsync(tileId, map, tileX, tileY, TILE_ZOOM, false);
+							tile = geometryTilesCache.getTileForMapAsync(tileId, map, tileX, tileY, TILE_ZOOM, false);
 						}
 					}
 					if (tile != null) {

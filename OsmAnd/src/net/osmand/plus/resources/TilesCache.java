@@ -1,5 +1,8 @@
 package net.osmand.plus.resources;
 
+import android.graphics.Rect;
+import android.util.Pair;
+
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.map.ITileSource;
@@ -25,6 +28,9 @@ public abstract class TilesCache<T> {
 	protected File dirWithTiles;
 	protected int maxCacheSize = 30;
 
+	private int currentZoom = -1;
+	private Rect tileBounds = null;
+
 	public TilesCache(AsyncLoadingThread asyncLoadingThread) {
 		this.asyncLoadingThread = asyncLoadingThread;
 	}
@@ -47,6 +53,14 @@ public abstract class TilesCache<T> {
 		this.dirWithTiles = dirWithTiles;
 	}
 
+	public void setTileBounds(int left, int top, int right, int bottom) {
+		this.tileBounds = new Rect(left, top, right, bottom);
+	}
+
+	public void setCurrentZoom(int zoom) {
+		this.currentZoom = zoom;
+	}
+
 	public abstract boolean isTileSourceSupported(ITileSource tileSource);
 
 	public synchronized String calculateTileId(ITileSource map, int x, int y, int zoom) {
@@ -67,6 +81,28 @@ public abstract class TilesCache<T> {
 		return builder.toString();
 	}
 
+	public Pair<Integer, Integer> getTileXYFromTileId(String tileId) {
+		String[] values = tileId.split("/");
+		try {
+			int x = Integer.parseInt(values[values.length - 2]);
+			int y = Integer.parseInt(values[values.length - 1].replaceAll("[a-zA-Z.]+", ""));
+			return new Pair<>(x, y);
+		} catch (NumberFormatException e) {
+			log.error("Failed to parse tile XY from its id", e);
+			return null;
+		}
+	}
+
+	public int getTileZoomFromTileId(String tileId) {
+		String[] values = tileId.split("/");
+		try {
+			return Integer.parseInt(values[values.length - 3]);
+		} catch (NumberFormatException e) {
+			log.error("Failed to parse tile zoom from its id", e);
+			return -1;
+		}
+	}
+
 	public synchronized boolean tileExistOnFileSystem(String file, ITileSource map, int x, int y, int zoom) {
 		if (!tilesOnFS.containsKey(file)) {
 			boolean ex = false;
@@ -76,7 +112,7 @@ public abstract class TilesCache<T> {
 				}
 				ex = ((SQLiteTileSource) map).exists(x, y, zoom);
 			} else {
-				if(file == null){
+				if (file == null){
 					file = calculateTileId(map, x, y, zoom);
 				}
 				ex = new File(dirWithTiles, file).exists();
@@ -219,9 +255,31 @@ public abstract class TilesCache<T> {
 		log.info("Cleaning tiles - size = " + cache.size());
 		List<String> list = new ArrayList<>(cache.keySet());
 		// remove first images (as we think they are older)
-		for (int i = 0; i < list.size() / 2; i++) {
-			cache.remove(list.get(i));
+		int tilesRemoved = 0;
+		int tilesToRemove = list.size() / 2;
+		for (int i = 0; i < list.size() && tilesRemoved < tilesToRemove; i++) {
+			String tileId = list.get(i);
+			if (tileOutOfBounds(tileId)) {
+				cache.remove(tileId);
+			}
 		}
+	}
+
+	protected boolean tileOutOfBounds(String tileId) {
+		if (tileBounds == null) {
+			return true;
+		}
+		int tileZoom = getTileZoomFromTileId(tileId);
+		if (tileZoom != currentZoom) {
+			return true;
+		}
+		Pair<Integer, Integer> xy = getTileXYFromTileId(tileId);
+		if (xy == null) {
+			return true;
+		}
+		int x = xy.first;
+		int y = xy.second;
+		return x > tileBounds.right || x < tileBounds.left || y > tileBounds.bottom || y < tileBounds.top;
 	}
 
 	public synchronized T get(String key) {

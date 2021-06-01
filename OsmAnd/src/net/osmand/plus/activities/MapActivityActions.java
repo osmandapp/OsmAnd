@@ -18,11 +18,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.core.content.ContextCompat;
-
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
@@ -65,6 +60,7 @@ import net.osmand.plus.monitoring.TripRecordingStartingBottomSheet;
 import net.osmand.plus.osmedit.dialogs.DismissRouteBottomSheetFragment;
 import net.osmand.plus.profiles.ProfileDataObject;
 import net.osmand.plus.profiles.ProfileDataUtils;
+import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.WaypointsFragment;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
@@ -92,13 +88,17 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
+
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_CONFIGURE_MAP_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_CONFIGURE_PROFILE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_CONFIGURE_SCREEN_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DASHBOARD_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DIRECTIONS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_TRIP_RECORDING_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DIVIDER_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DOWNLOAD_MAPS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_HELP_ID;
@@ -110,6 +110,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SEARCH_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SWITCH_PROFILE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_TRAVEL_GUIDES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_TRIP_RECORDING_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ADD_GPX_WAYPOINT;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ADD_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_AVOID_ROAD;
@@ -655,19 +656,21 @@ public class MapActivityActions implements DialogProvider {
 					Toast.makeText(mapActivity, R.string.maps_could_not_be_downloaded, Toast.LENGTH_SHORT).show();
 					return;
 				}
+				ResourceManager manager = ((OsmandApplication) mapActivity.getApplication()).getResourceManager();
 				final RotatedTileBox tb = mapView.getCurrentRotatedTileBox();
 				final QuadRect tilesRect = tb.getTileBounds();
 				int left = (int) Math.floor(tilesRect.left);
 				int top = (int) Math.floor(tilesRect.top);
 				int width = (int) (Math.ceil(tilesRect.right) - left);
 				int height = (int) (Math.ceil(tilesRect.bottom) - top);
+				manager.updateTileBounds(mapSource, left, top, left + width, top + height);
+				manager.updateTileZoom(mapSource, zoom);
+
 				for (int i = 0; i < width; i++) {
 					for (int j = 0; j < height; j++) {
-						((OsmandApplication) mapActivity.getApplication()).getResourceManager().
-								clearTileForMap(null, mapSource, i + left, j + top, zoom);
+						manager.clearTileForMap(null, mapSource, i + left, j + top, zoom);
 					}
 				}
-
 
 				mapView.refreshMap();
 			}

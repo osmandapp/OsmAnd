@@ -26,6 +26,7 @@ import net.osmand.map.ITileSource;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
+import net.osmand.plus.resources.GeometryTilesCache;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.MapTileLayer;
@@ -114,6 +115,7 @@ class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer, ICont
 			return;
 		}
 		ResourceManager mgr = resourceManager;
+		GeometryTilesCache geometryTilesCache = mgr.getGeometryTilesCache();
 		final QuadRect tilesRect = tileBox.getTileBounds();
 
 		// recalculate for ellipsoid coordinates
@@ -128,6 +130,8 @@ class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer, ICont
 		int height = (int) Math.ceil(tilesRect.bottom + ellipticTileCorrection - top);
 		int dzoom = nzoom - TILE_ZOOM;
 		int div = (int) Math.pow(2.0, dzoom);
+		geometryTilesCache.setTileBounds(left, top, left + width, top + height);
+		geometryTilesCache.setCurrentZoom(tileBox.getZoom());
 
 		boolean useInternet = (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) != null || OsmandPlugin.getEnabledPlugin(MapillaryPlugin.class) != null)
 				&& settings.isInternetConnectionAvailable() && map.couldBeDownloadedFromInternet();
@@ -145,7 +149,7 @@ class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer, ICont
 					// asking tile image async
 					boolean imgExist = mgr.tileExistOnFileSystem(tileId, map, tileX, tileY, TILE_ZOOM);
 					if (imgExist || useInternet) {
-						tile = mgr.getGeometryTilesCache().getTileForMapAsync(tileId, map, tileX, tileY, TILE_ZOOM, useInternet);
+						tile = geometryTilesCache.getTileForMapAsync(tileId, map, tileX, tileY, TILE_ZOOM, useInternet);
 					}
 					if (tile != null) {
 						tiles.put(tileId, tile);

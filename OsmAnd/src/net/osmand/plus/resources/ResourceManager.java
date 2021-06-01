@@ -426,6 +426,20 @@ public class ResourceManager {
 		}
 	}
 
+	public void updateTileBounds(@NonNull ITileSource map, int left, int top, int right, int bottom) {
+		TilesCache cache = getTilesCache(map);
+		if (cache != null) {
+			cache.setTileBounds(left, top, right, bottom);
+		}
+	}
+
+	public void updateTileZoom(@NonNull ITileSource map, int zoom) {
+		TilesCache cache = getTilesCache(map);
+		if (cache != null) {
+			cache.setCurrentZoom(zoom);
+		}
+	}
+
 	////////////////////////////////////////////// Working with indexes ////////////////////////////////////////////////
 
 	public List<String> reloadIndexesOnStart(AppInitializer progress, List<String> warnings) {

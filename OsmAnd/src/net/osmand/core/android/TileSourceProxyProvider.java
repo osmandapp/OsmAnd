@@ -51,15 +51,19 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 	public SWIGTYPE_p_QByteArray obtainImage(IMapTiledDataProvider.Request request) {
 		byte[] image;
 		try {
+			int tileX = request.getTileId().getX();
+			int tileY = request.getTileId().getY();
+			int zoom = request.getZoom().swigValue();
+
 			ResourceManager rm = app.getResourceManager();
-			String tileFilename = rm.calculateTileId(tileSource, request.getTileId().getX(), request.getTileId().getY(),
-					request.getZoom().swigValue());
+			rm.updateTileZoom(tileSource, zoom);
+			String tileFilename = rm.calculateTileId(tileSource, tileX, tileY, zoom);
 
 			final TileReadyCallback tileReadyCallback = new TileReadyCallback(tileSource,
-					request.getTileId().getX(), request.getTileId().getY(), request.getZoom().swigValue());
+					tileX, tileY, zoom);
 			rm.getMapTileDownloader().addDownloaderCallback(tileReadyCallback);
-			while (rm.getBitmapTilesCache().getTileForMapAsync(tileFilename, tileSource, request.getTileId().getX(), request.getTileId().getY(),
-					request.getZoom().swigValue(), true) == null) {
+			while (rm.getBitmapTilesCache().getTileForMapAsync(tileFilename, tileSource, tileX, tileY,
+					zoom, true) == null) {
 				synchronized (tileReadyCallback.getSync()) {
 					if (tileReadyCallback.isReady()) {
 						break;
@@ -72,13 +76,14 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 			}
 			rm.getMapTileDownloader().removeDownloaderCallback(tileReadyCallback);
 
-			image = tileSource.getBytes(request.getTileId().getX(), request.getTileId().getY(), request.getZoom().swigValue(),
+			image = tileSource.getBytes(tileX, tileY, zoom,
 					app.getAppPath(IndexConstants.TILES_INDEX_DIR).getAbsolutePath());
-		} catch(IOException e) {
+		} catch (IOException e) {
 			return SwigUtilities.emptyQByteArray();
 		}
-		if (image == null)
+		if (image == null) {
 			return SwigUtilities.emptyQByteArray();
+		}
 
 		return SwigUtilities.createQByteArrayAsCopyOf(image);
 	}

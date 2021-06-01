@@ -8,9 +8,6 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-
 import com.google.android.material.slider.Slider;
 
 import net.osmand.PlatformUtil;
@@ -33,6 +30,9 @@ import org.apache.commons.logging.Log;
 
 import java.text.MessageFormat;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 
 public class DownloadTilesDialog {
 
@@ -154,6 +154,9 @@ public class DownloadTilesDialog {
 							y1 = (int) MapUtils.getTileNumberY(z, latlonRect.top);
 							y2 = (int) MapUtils.getTileNumberY(z, latlonRect.bottom);
 						}
+						rm.updateTileBounds(map, x1, y1, x2, y2);
+						rm.updateTileZoom(map, z);
+
 						for (int x = x1; x <= x2 && !cancel; x++) {
 							for (int y = y1; y <= y2 && !cancel; y++) {
 								String tileId = rm.calculateTileId(map, x, y, z);

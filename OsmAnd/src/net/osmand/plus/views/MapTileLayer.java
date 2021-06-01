@@ -148,11 +148,12 @@ public class MapTileLayer extends BaseMapLayer {
 			ellipticTileCorrection = (float) (MapUtils.getTileEllipsoidNumberY(nzoom, tileBox.getLatitude()) - tileBox.getCenterTileY());
 		}
 
-
 		int left = (int) Math.floor(tilesRect.left);
 		int top = (int) Math.floor(tilesRect.top + ellipticTileCorrection);
 		int width = (int) Math.ceil(tilesRect.right - left);
 		int height = (int) Math.ceil(tilesRect.bottom + ellipticTileCorrection - top);
+		mgr.getBitmapTilesCache().setTileBounds(left, top, left + width, top + height);
+		mgr.getBitmapTilesCache().setCurrentZoom(nzoom);
 
 		int tiles = (width + ADDITIONAL_TILE_CACHE) * (height + ADDITIONAL_TILE_CACHE);
 		mgr.setMapTileLayerSizes(this, tiles);
