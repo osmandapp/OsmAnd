@@ -278,6 +278,12 @@ public class BackupTask {
 					deleteErrors = errors;
 					onTaskFinished(TaskType.DELETE_FILES);
 				}
+
+				@Override
+				public void onFilesDeleteError(int status, @NonNull String message) {
+					error = message;
+					onTaskFinished(TaskType.DELETE_FILES);
+				}
 			});
 		} catch (UserNotRegisteredException e) {
 			onError("User is not registered");

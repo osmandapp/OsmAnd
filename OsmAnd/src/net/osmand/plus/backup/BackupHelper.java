@@ -40,6 +40,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -123,6 +124,7 @@ public class BackupHelper {
 	public interface OnDeleteFilesListener {
 		void onFileDeleteProgress(@NonNull RemoteFile file);
 		void onFilesDeleteDone(@NonNull Map<RemoteFile, String> errors);
+		void onFilesDeleteError(int status, @NonNull String message);
 	}
 
 	public interface OnDownloadFileListener {
@@ -579,6 +581,132 @@ public class BackupHelper {
 				}
 				if (listener != null) {
 					listener.onDownloadFileList(status, message, remoteFiles);
+				}
+			}
+		};
+	}
+
+	public void deleteAllFiles(@Nullable final OnDeleteFilesListener listener) throws UserNotRegisteredException {
+		checkRegistered();
+
+		Map<String, String> params = new HashMap<>();
+		params.put("deviceid", getDeviceId());
+		params.put("accessToken", getAccessToken());
+		params.put("allVersions", "true");
+		AndroidNetworkUtils.sendRequestAsync(app, LIST_FILES_URL, params, "Delete all files", false, false,
+				getDeleteAllFilesListener(listener), EXECUTOR);
+	}
+
+	private OnRequestResultListener getDeleteAllFilesListener(@Nullable OnDeleteFilesListener listener) {
+		return new OnRequestResultListener() {
+			@Override
+			public void onResult(@Nullable String resultJson, @Nullable String error) {
+				int status;
+				String message;
+				List<RemoteFile> remoteFiles = new ArrayList<>();
+				if (!Algorithms.isEmpty(error)) {
+					status = STATUS_SERVER_ERROR;
+					message = "Download file list error: " + parseServerError(error);
+				} else if (!Algorithms.isEmpty(resultJson)) {
+					try {
+						JSONObject result = new JSONObject(resultJson);
+						JSONArray files = result.getJSONArray("allFiles");
+						for (int i = 0; i < files.length(); i++) {
+							remoteFiles.add(new RemoteFile(files.getJSONObject(i)));
+						}
+						status = STATUS_SUCCESS;
+						message = "OK";
+					} catch (JSONException | ParseException e) {
+						status = STATUS_PARSE_JSON_ERROR;
+						message = "Download file list error: json parsing";
+					}
+				} else {
+					status = STATUS_EMPTY_RESPONSE_ERROR;
+					message = "Download file list error: empty response";
+				}
+				if (status != STATUS_SUCCESS) {
+					if (listener != null) {
+						listener.onFilesDeleteError(status, message);
+					}
+				} else {
+					try {
+						if (!remoteFiles.isEmpty()) {
+							deleteFiles(remoteFiles, listener);
+						} else {
+							if (listener != null) {
+								listener.onFilesDeleteDone(Collections.emptyMap());
+							}
+						}
+					} catch (UserNotRegisteredException e) {
+						if (listener != null) {
+							listener.onFilesDeleteError(STATUS_SERVER_ERROR, "User not registered");
+						}
+					}
+				}
+			}
+		};
+	}
+
+	public void deleteOldFiles(@Nullable final OnDeleteFilesListener listener) throws UserNotRegisteredException {
+		checkRegistered();
+
+		Map<String, String> params = new HashMap<>();
+		params.put("deviceid", getDeviceId());
+		params.put("accessToken", getAccessToken());
+		params.put("allVersions", "true");
+		AndroidNetworkUtils.sendRequestAsync(app, LIST_FILES_URL, params, "Delete old files", false, false,
+				getDeleteOldFilesListener(listener), EXECUTOR);
+	}
+
+	private OnRequestResultListener getDeleteOldFilesListener(@Nullable OnDeleteFilesListener listener) {
+		return new OnRequestResultListener() {
+			@Override
+			public void onResult(@Nullable String resultJson, @Nullable String error) {
+				int status;
+				String message;
+				List<RemoteFile> remoteFiles = new ArrayList<>();
+				if (!Algorithms.isEmpty(error)) {
+					status = STATUS_SERVER_ERROR;
+					message = "Download file list error: " + parseServerError(error);
+				} else if (!Algorithms.isEmpty(resultJson)) {
+					try {
+						JSONObject result = new JSONObject(resultJson);
+						JSONArray allFiles = result.getJSONArray("allFiles");
+						for (int i = 0; i < allFiles.length(); i++) {
+							remoteFiles.add(new RemoteFile(allFiles.getJSONObject(i)));
+						}
+						JSONArray uniqueFiles = result.getJSONArray("uniqueFiles");
+						for (int i = 0; i < uniqueFiles.length(); i++) {
+							remoteFiles.remove(new RemoteFile(uniqueFiles.getJSONObject(i)));
+						}
+						status = STATUS_SUCCESS;
+						message = "OK";
+					} catch (JSONException | ParseException e) {
+						status = STATUS_PARSE_JSON_ERROR;
+						message = "Download file list error: json parsing";
+					}
+				} else {
+					status = STATUS_EMPTY_RESPONSE_ERROR;
+					message = "Download file list error: empty response";
+				}
+				if (status != STATUS_SUCCESS) {
+					if (listener != null) {
+						listener.onFilesDeleteError(status, message);
+					}
+				} else {
+					try {
+						if (!remoteFiles.isEmpty()) {
+							deleteFiles(remoteFiles, listener);
+						} else {
+							if (listener != null) {
+								listener.onFilesDeleteDone(Collections.emptyMap());
+							}
+						}
+					} catch (UserNotRegisteredException e) {
+						if (listener != null) {
+							listener.onFilesDeleteError(STATUS_SERVER_ERROR, "User not registered");
+						}
+					}
 				}
 			}
 		};
