@@ -1,20 +1,28 @@
 package net.osmand.plus.backup;
 
+import androidx.annotation.Nullable;
+
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
 
 public class LocalFile {
+
+	@Nullable
 	public File file;
 	public String subfolder;
+	public String fileName;
 	public long uploadTime = 0;
+	public long localModifiedTime = 0;
 
 	private String name = null;
 	private int sz = -1;
-	private String fileName = null;
+
+	public SettingsItem item;
 
 	public String getName() {
-		if (name == null) {
+		if (name == null && file != null) {
 			name = formatName(file.getName());
 		}
 		return name;

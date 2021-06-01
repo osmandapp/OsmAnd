@@ -28,9 +28,11 @@ public class NetworkSettingsHelper extends SettingsHelper {
 	}
 
 	public interface BackupExportListener {
-		void onBackupExportFinished(boolean succeed);
+		void onBackupExportStarted();
 
 		void onBackupExportProgressUpdate(int value);
+
+		void onBackupExportFinished(boolean succeed);
 	}
 
 	public NetworkSettingsHelper(@NonNull OsmandApplication app) {
