@@ -10,6 +10,7 @@ public class TravelGpx extends TravelArticle {
 
 	public String user;
 	public String activityType;
+	public String ref;
 	public float totalDistance = 0;
 	public double diffElevationUp = 0;
 	public double diffElevationDown = 0;

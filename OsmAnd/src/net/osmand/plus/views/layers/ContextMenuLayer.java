@@ -9,6 +9,7 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 import android.os.Vibrator;
 import android.text.TextUtils;
+import android.util.Pair;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -16,14 +17,11 @@ import android.widget.ArrayAdapter;
 import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresPermission;
-import androidx.appcompat.content.res.AppCompatResources;
-
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.WptPt;
+import net.osmand.IndexConstants;
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.RenderingContext;
 import net.osmand.aidl.AidlMapPointWrapper;
@@ -59,6 +57,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
+import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.osmedit.OsmBugsLayer;
@@ -72,9 +71,11 @@ import net.osmand.plus.views.MoveMarkerBottomSheetHelper;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
+import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -83,6 +84,10 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresPermission;
+import androidx.appcompat.content.res.AppCompatResources;
 import gnu.trove.list.array.TIntArrayList;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CHANGE_MARKER_POSITION;
@@ -631,6 +636,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		LatLon pointLatLon = tileBox.getLatLonFromPixel(point.x, point.y);
 		OsmandApplication app = activity.getMyApplication();
 		IContextMenuProvider poiMenuProvider = activity.getMapLayers().getPoiMapLayer();
+		IContextMenuProvider gpxMenuProvider = activity.getMapLayers().getGpxLayer();
+
 		if (app.getSettings().USE_OPENGL_RENDER.get() && NativeCoreContext.isInit()) {
 			MapRendererView rendererView = view.getMapRenderer();
 			if (rendererView != null) {
@@ -698,7 +705,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 								}
 							}
 						}
-						if (amenity != null && isUnique(selectedObjects.keySet(), amenity)) {
+						if (amenity != null && isUniqueAmenity(selectedObjects.keySet(), amenity)) {
 							selectedObjects.put(amenity, poiMenuProvider);
 						}
 					}
@@ -718,28 +725,37 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				int coordX = (int) (dx * cosRotate - dy * sinRotate);
 				int coordY = (int) (dy * cosRotate + dx * sinRotate);
 
-				renderedObjects = nativeLib.searchRenderedObjectsFromContext(rc, coordX, coordY);
+				renderedObjects = nativeLib.searchRenderedObjectsFromContext(rc, coordX, coordY, true);
 			}
 			if (renderedObjects != null) {
 				int TILE_SIZE = 256;
 				double cosRotateTileSize = Math.cos(Math.toRadians(rc.rotate)) * TILE_SIZE;
 				double sinRotateTileSize = Math.sin(Math.toRadians(rc.rotate)) * TILE_SIZE;
-				for (RenderedObject r : renderedObjects) {
-					if (r.getLabelX() != 0 && r.getLabelY() != 0) {
-						r.setLabelLatLon(new LatLon(MapUtils.get31LatitudeY(r.getLabelY()), MapUtils.get31LongitudeX(r.getLabelX())));
+
+				for (RenderedObject renderedObject : renderedObjects) {
+
+					String gpxFileName = renderedObject.getFileNameByExtension(IndexConstants.GPX_FILE_EXT);
+					boolean isGpx = !Algorithms.isEmpty(gpxFileName);
+					if (!isGpx && (renderedObject.getId() == null || !renderedObject.isVisible())) {
+						continue;
+					}
+
+					if (renderedObject.getLabelX() != 0 && renderedObject.getLabelY() != 0) {
+						double lat = MapUtils.get31LatitudeY(renderedObject.getLabelY());
+						double lon = MapUtils.get31LongitudeX(renderedObject.getLabelX());
+						renderedObject.setLabelLatLon(new LatLon(lat, lon));
 					} else {
-						double cx = r.getBbox().centerX();
-						double cy = r.getBbox().centerY();
+						double cx = renderedObject.getBbox().centerX();
+						double cy = renderedObject.getBbox().centerY();
 						double dTileX = (cx * cosRotateTileSize + cy * sinRotateTileSize) / (TILE_SIZE * TILE_SIZE);
 						double dTileY = (cy * cosRotateTileSize - cx * sinRotateTileSize) / (TILE_SIZE * TILE_SIZE);
 						int x31 = (int) ((dTileX + rc.leftX) * rc.tileDivisor);
 						int y31 = (int) ((dTileY + rc.topY) * rc.tileDivisor);
 						double lat = MapUtils.get31LatitudeY(y31);
 						double lon = MapUtils.get31LongitudeX(x31);
-						r.setLabelLatLon(new LatLon(lat, lon));
+						renderedObject.setLabelLatLon(new LatLon(lat, lon));
 					}
-				}
-				for (RenderedObject renderedObject : renderedObjects) {
+
 					if (renderedObject.getX() != null && renderedObject.getX().size() == 1
 							&& renderedObject.getY() != null && renderedObject.getY().size() == 1) {
 						objectLatLon = new LatLon(MapUtils.get31LatitudeY(renderedObject.getY().get(0)),
@@ -747,35 +763,33 @@ public class ContextMenuLayer extends OsmandMapLayer {
 					} else if (renderedObject.getLabelLatLon() != null) {
 						objectLatLon = renderedObject.getLabelLatLon();
 					}
-					if (renderedObject.getId() != null) {
-						List<String> names = new ArrayList<>();
-						if (!Algorithms.isEmpty(renderedObject.getName())) {
-							names.add(renderedObject.getName());
+					LatLon searchLatLon = objectLatLon != null ? objectLatLon : pointLatLon;
+					if (isGpx) {
+						String ref = Algorithms.emptyIfNull(renderedObject.getTagValue("ref"));
+						TravelGpx travelGpx = app.getTravelHelper().searchGpx(pointLatLon, gpxFileName, ref, null);
+						if (travelGpx != null && isUniqueGpx(selectedObjects, travelGpx)) {
+							WptPt selectedPoint = new WptPt();
+							selectedPoint.lat = pointLatLon.getLatitude();
+							selectedPoint.lon = pointLatLon.getLongitude();
+							SelectedGpxPoint selectedGpxPoint =
+									new SelectedGpxPoint(null, selectedPoint, null, null, Float.NaN);
+							selectedObjects.put(new Pair<>(travelGpx, selectedGpxPoint), gpxMenuProvider);
 						}
-						for (Entry<String, String> entry : renderedObject.getTags().entrySet()) {
-							String key = entry.getKey();
-							String value = entry.getValue();
-							if ((key.startsWith("name:") || key.equals("name")) && !value.isEmpty()) {
-								names.add(value);
-							}
-						}
-						LatLon searchLatLon = objectLatLon;
-						if (searchLatLon == null) {
-							searchLatLon = pointLatLon;
-						}
-						Amenity amenity = findAmenity(app, renderedObject.getId() >> 7, names, searchLatLon, AMENITY_SEARCH_RADIUS);
+					} else {
+						Amenity amenity = findAmenity(app, renderedObject.getId() >> 7,
+								renderedObject.getOriginalNames(), searchLatLon, AMENITY_SEARCH_RADIUS);
 						if (amenity != null) {
 							if (renderedObject.getX() != null && renderedObject.getX().size() > 1
 									&& renderedObject.getY() != null && renderedObject.getY().size() > 1) {
 								amenity.getX().addAll(renderedObject.getX());
 								amenity.getY().addAll(renderedObject.getY());
 							}
-							if (isUnique(selectedObjects.keySet(), amenity)) {
+							if (isUniqueAmenity(selectedObjects.keySet(), amenity)) {
 								selectedObjects.put(amenity, poiMenuProvider);
 							}
-							continue;
+						} else {
+							selectedObjects.put(renderedObject, null);
 						}
-						selectedObjects.put(renderedObject, null);
 					}
 				}
 			}
@@ -849,7 +863,25 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		return res;
 	}
 
-	private boolean isUnique(@NonNull Set<Object> set, @NonNull Amenity amenity) {
+	private boolean isUniqueGpx(Map<Object, IContextMenuProvider> selectedObjects, TravelGpx travelGpx) {
+		String tracksDir = view.getApplication().getAppPath(IndexConstants.GPX_TRAVEL_DIR).getPath();
+		File file = new File(tracksDir, travelGpx.getRouteId() + IndexConstants.GPX_FILE_EXT);
+		if (file.exists()) {
+			return false;
+		}
+		for (Map.Entry<Object, IContextMenuProvider> entry : selectedObjects.entrySet()) {
+			if (entry.getKey() instanceof Pair && entry.getValue() instanceof GPXLayer
+					&& ((Pair<?, ?>) entry.getKey()).first instanceof TravelGpx) {
+				TravelGpx object = (TravelGpx) ((Pair<?, ?>) entry.getKey()).first;
+				if (travelGpx.equals(object)) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	private boolean isUniqueAmenity(@NonNull Set<Object> set, @NonNull Amenity amenity) {
 		for (Object o : set) {
 			if (o instanceof Amenity && ((Amenity) o).compareTo(amenity) == 0) {
 				return false;
