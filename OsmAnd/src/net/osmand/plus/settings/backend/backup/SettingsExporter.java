@@ -58,7 +58,7 @@ public class SettingsExporter extends Exporter {
 	}
 
 	protected void writeItemFiles(ZipOutputStream zos) throws IOException {
-		long[] progress = {0};
+		final long[] progress = {0};
 		ZipWriter zipWriter = new ZipWriter(zos, new AbstractProgress() {
 			@Override
 			public void progress(int deltaWork) {
