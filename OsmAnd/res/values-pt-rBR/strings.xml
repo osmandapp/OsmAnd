@@ -4123,4 +4123,5 @@
     <string name="resend_verification_code">Reenviar código</string>
     <string name="verification_code_missing">Não recebi o código de verificação</string>
     <string name="verification_code_missing_description">O tempo de espera pelo código pode ser de 10 minutos, você também pode verificar sua pasta de spam. Se não ajudar, use o botão abaixo.</string>
+    <string name="select_nav_profile_dialog_message">O \'tipo de navegação\' rege como as rotas são calculadas. Você pode selecionar entre mecanismos de roteamento offline e online.</string>
 </resources>

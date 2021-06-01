@@ -174,6 +174,11 @@ public class SelectedGpxMenuController extends MenuController {
 	}
 
 	@Override
+	public boolean displayDistanceDirection() {
+		return true;
+	}
+
+	@Override
 	public Drawable getRightIcon() {
 		int color = isLight() ? R.color.active_color_primary_light : R.color.active_color_primary_dark;
 		return getIcon(R.drawable.ic_action_polygom_dark, color);

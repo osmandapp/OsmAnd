@@ -374,7 +374,7 @@ dependencies {
 
 	legacyImplementation "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@jar"
 
-	implementation("com.getkeepsafe.taptargetview:taptargetview:1.12.0") {
+	implementation("com.getkeepsafe.taptargetview:taptargetview:1.13.2") {
 		exclude group: 'com.android.support'
 	}
 	implementation 'com.github.PhilJay:MPAndroidChart:v3.0.1'

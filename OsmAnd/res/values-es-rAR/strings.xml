@@ -4129,4 +4129,5 @@
     <string name="resend_verification_code">Reenviar código</string>
     <string name="verification_code_missing">No he recibido el código de verificación</string>
     <string name="verification_code_missing_description">El código puede demorar 10 minutos, también puedes comprobar la carpeta de spam. Si esto no ayuda, usa el botón de abajo.</string>
+    <string name="select_nav_profile_dialog_message">El «Tipo de navegación» determina cómo se calculan las rutas. Puedes elegir entre los motores de navegación en línea o sin conexión.</string>
 </resources>

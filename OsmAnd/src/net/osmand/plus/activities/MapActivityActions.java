@@ -63,8 +63,8 @@ import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.monitoring.TripRecordingBottomSheet;
 import net.osmand.plus.monitoring.TripRecordingStartingBottomSheet;
 import net.osmand.plus.osmedit.dialogs.DismissRouteBottomSheetFragment;
-import net.osmand.plus.profiles.ProfileDataObject;
-import net.osmand.plus.profiles.ProfileDataUtils;
+import net.osmand.plus.profiles.data.ProfileDataObject;
+import net.osmand.plus.profiles.data.RoutingDataUtils;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.WaypointsFragment;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
@@ -158,6 +158,7 @@ public class MapActivityActions implements DialogProvider {
 
 	private final MapActivity mapActivity;
 	private OsmandSettings settings;
+	private RoutingDataUtils routingDataUtils;
 
 	@NonNull
 	private ImageView drawerLogoHeader;
@@ -167,6 +168,7 @@ public class MapActivityActions implements DialogProvider {
 	public MapActivityActions(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
 		settings = mapActivity.getMyApplication().getSettings();
+		routingDataUtils = new RoutingDataUtils(mapActivity.getMyApplication());
 		drawerLogoHeader = new ImageView(mapActivity);
 		drawerLogoHeader.setPadding(-AndroidUtils.dpToPx(mapActivity, 8f),
 				AndroidUtils.dpToPx(mapActivity, 16f), 0, 0);
@@ -738,7 +740,7 @@ public class MapActivityActions implements DialogProvider {
 
 		String modeDescription;
 
-		Map<String, ProfileDataObject> profilesObjects = ProfileDataUtils.getRoutingProfiles(app);
+		Map<String, ProfileDataObject> profilesObjects = routingDataUtils.getRoutingProfiles();
 		for (final ApplicationMode appMode : activeModes) {
 			if (appMode.isCustomProfile()) {
 				modeDescription = getProfileDescription(app, appMode, profilesObjects, getString(R.string.profile_type_user_string));
@@ -1051,7 +1053,7 @@ public class MapActivityActions implements DialogProvider {
 		//switch profile button
 		ApplicationMode currentMode = app.getSettings().APPLICATION_MODE.get();
 		String modeDescription;
-		Map<String, ProfileDataObject> profilesObjects = ProfileDataUtils.getRoutingProfiles(app);
+		Map<String, ProfileDataObject> profilesObjects = routingDataUtils.getRoutingProfiles();
 		if (currentMode.isCustomProfile()) {
 			modeDescription = getProfileDescription(app, currentMode, profilesObjects, getString(R.string.profile_type_user_string));
 		} else {

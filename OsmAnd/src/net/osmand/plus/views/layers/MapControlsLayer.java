@@ -782,11 +782,12 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	public void startNavigation() {
 		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandSettings settings = app.getSettings();
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		if (routingHelper.isFollowingMode()) {
 			switchToRouteFollowingLayout();
-			if (app.getSettings().APPLICATION_MODE.get() != routingHelper.getAppMode()) {
-				app.getSettings().setApplicationMode(routingHelper.getAppMode(), false);
+			if (settings.getApplicationMode() != routingHelper.getAppMode()) {
+				settings.setApplicationMode(routingHelper.getAppMode(), false);
 			}
 		} else {
 			if (!app.getTargetPointsHelper().checkPointToNavigateShort()) {
@@ -794,14 +795,14 @@ public class MapControlsLayer extends OsmandMapLayer {
 			} else {
 				touchEvent = 0;
 				app.logEvent("start_navigation");
-				app.getSettings().setApplicationMode(routingHelper.getAppMode(), false);
+				settings.setApplicationMode(routingHelper.getAppMode(), false);
 				mapActivity.getMapViewTrackingUtilities().backToLocationImpl(17, true);
-				app.getSettings().FOLLOW_THE_ROUTE.set(true);
+				settings.FOLLOW_THE_ROUTE.set(true);
 				routingHelper.setFollowingMode(true);
 				routingHelper.setRoutePlanningMode(false);
 				mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
-				app.getRoutingHelper().notifyIfRouteIsCalculated();
-				if (!app.getSettings().simulateNavigation) {
+				routingHelper.notifyIfRouteIsCalculated();
+				if (!settings.simulateNavigation) {
 					routingHelper.setCurrentLocation(app.getLocationProvider().getLastKnownLocation(), false);
 				} else if (routingHelper.isRouteCalculated() && !routingHelper.isRouteBeingCalculated()) {
 					OsmAndLocationSimulation sim = app.getLocationProvider().getLocationSimulation();

@@ -10,13 +10,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.View;
 
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-
 import net.osmand.IProgress;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -71,6 +64,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 public abstract class OsmandPlugin {
 
@@ -383,7 +383,7 @@ public abstract class OsmandPlugin {
 
 	private static void enablePluginByDefault(@NonNull OsmandApplication app, @NonNull Set<String> enabledPlugins, @NonNull OsmandPlugin plugin) {
 		allPlugins.add(plugin);
-		if (!enabledPlugins.contains(plugin.getId()) && !app.getSettings().getPlugins().contains("-" + plugin.getId())) {
+		if (!enabledPlugins.contains(plugin.getId()) && !isPluginDisabledManually(app, plugin)) {
 			enabledPlugins.add(plugin.getId());
 			app.getSettings().enablePlugin(plugin.getId(), true);
 		}
@@ -399,12 +399,13 @@ public abstract class OsmandPlugin {
 		boolean marketEnabled = Version.isMarketEnabled();
 		boolean pckg = plugin.pluginAvailable(app);
 		boolean paid = plugin.isPaid();
+		boolean apkInstalled = checkPluginPackage(app, plugin);
 		if ((Version.isDeveloperVersion(app) || !Version.isProductionVersion(app)) && !paid) {
 			// for test reasons
 			// marketEnabled = false;
 		}
 		if (pckg || (!marketEnabled && !paid)) {
-			if (pckg && !app.getSettings().getPlugins().contains("-" + plugin.getId())) {
+			if (apkInstalled && !isPluginDisabledManually(app, plugin)) {
 				enabledPlugins.add(plugin.getId());
 				plugin.setActive(true);
 			}
@@ -413,7 +414,7 @@ public abstract class OsmandPlugin {
 		} else {
 			if (marketEnabled) {
 				plugin.setActive(false);
-				if (!app.getSettings().getPlugins().contains("-" + plugin.getId())) {
+				if (!isPluginDisabledManually(app, plugin)) {
 					enabledPlugins.remove(plugin.getId());
 				}
 				plugin.setInstallURL(Version.getUrlWithUtmRef(app, plugin.getComponentId1()));
@@ -692,6 +693,10 @@ public abstract class OsmandPlugin {
 
 	public static <T extends OsmandPlugin> boolean isPluginEnabled(Class<T> clz) {
 		return getEnabledPlugin(clz) != null;
+	}
+
+	public static boolean isPluginDisabledManually(OsmandApplication app, OsmandPlugin plugin) {
+		return app.getSettings().getPlugins().contains("-" + plugin.getId());
 	}
 
 	public static List<WorldRegion> getCustomDownloadRegions() {
