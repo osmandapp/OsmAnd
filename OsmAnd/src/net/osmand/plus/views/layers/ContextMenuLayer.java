@@ -71,6 +71,7 @@ import net.osmand.plus.views.MoveMarkerBottomSheetHelper;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
+import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -765,13 +766,14 @@ public class ContextMenuLayer extends OsmandMapLayer {
 					LatLon searchLatLon = objectLatLon != null ? objectLatLon : pointLatLon;
 					if (isGpx) {
 						String ref = Algorithms.emptyIfNull(renderedObject.getTagValue("ref"));
-						if (isUniqueGpx(selectedObjects, gpxFileName, ref)) {
+						TravelGpx travelGpx = app.getTravelHelper().searchGpx(pointLatLon, gpxFileName, ref, null);
+						if (travelGpx != null && isUniqueGpx(selectedObjects, travelGpx)) {
 							WptPt selectedPoint = new WptPt();
 							selectedPoint.lat = pointLatLon.getLatitude();
 							selectedPoint.lon = pointLatLon.getLongitude();
 							SelectedGpxPoint selectedGpxPoint =
 									new SelectedGpxPoint(null, selectedPoint, null, null, Float.NaN);
-							selectedObjects.put(new Pair<>(renderedObject, selectedGpxPoint), gpxMenuProvider);
+							selectedObjects.put(new Pair<>(travelGpx, selectedGpxPoint), gpxMenuProvider);
 						}
 					} else {
 						Amenity amenity = findAmenity(app, renderedObject.getId() >> 7,
@@ -861,19 +863,17 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		return res;
 	}
 
-	private boolean isUniqueGpx(Map<Object, IContextMenuProvider> selectedObjects, String gpxFileName, String ref) {
+	private boolean isUniqueGpx(Map<Object, IContextMenuProvider> selectedObjects, TravelGpx travelGpx) {
 		String tracksDir = view.getApplication().getAppPath(IndexConstants.GPX_TRAVEL_DIR).getPath();
-		File file = new File(tracksDir, gpxFileName);
+		File file = new File(tracksDir, travelGpx.getRouteId() + IndexConstants.GPX_FILE_EXT);
 		if (file.exists()) {
-			GPXUtilities.GPXFile gpxFile = GPXUtilities.loadGPXFile(file);
-			return !ref.equals(gpxFile.getRef());
+			return false;
 		}
 		for (Map.Entry<Object, IContextMenuProvider> entry : selectedObjects.entrySet()) {
 			if (entry.getKey() instanceof Pair && entry.getValue() instanceof GPXLayer
-					&& ((Pair<?, ?>) entry.getKey()).first instanceof RenderedObject) {
-				RenderedObject object = (RenderedObject) ((Pair<?, ?>) entry.getKey()).first;
-				if (gpxFileName.equals(object.getFileNameByExtension(IndexConstants.GPX_FILE_EXT))
-						&& ref.equals(object.getTagValue("ref"))) {
+					&& ((Pair<?, ?>) entry.getKey()).first instanceof TravelGpx) {
+				TravelGpx object = (TravelGpx) ((Pair<?, ?>) entry.getKey()).first;
+				if (travelGpx.equals(object)) {
 					return false;
 				}
 			}

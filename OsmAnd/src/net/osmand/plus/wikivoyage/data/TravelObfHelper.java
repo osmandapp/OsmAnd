@@ -167,7 +167,8 @@ public class TravelObfHelper implements TravelHelper {
 		return popularArticles;
 	}
 
-	public synchronized void searchGpx(LatLon location, String fileName, String ref, @Nullable GpxReadCallback callback) {
+	@Nullable
+	public synchronized TravelGpx searchGpx(LatLon location, String fileName, String ref, @Nullable GpxReadCallback callback) {
 		final List<Pair<File, Amenity>> foundAmenities = new ArrayList<>();
 		int searchRadius = ARTICLE_SEARCH_RADIUS;
 		TravelGpx travelGpx = null;
@@ -188,9 +189,7 @@ public class TravelObfHelper implements TravelHelper {
 			}
 			searchRadius *= 2;
 		} while (travelGpx == null && searchRadius < MAX_SEARCH_RADIUS);
-		if (travelGpx != null) {
-			readGpxFile(travelGpx, callback);
-		}
+		return travelGpx;
 	}
 
 	private void searchAmenity(final List<Pair<File, Amenity>> amenitiesList, LatLon location,
@@ -702,7 +701,7 @@ public class TravelObfHelper implements TravelHelper {
 		return article;
 	}
 
-	private void readGpxFile(@NonNull TravelArticle article, @Nullable GpxReadCallback callback) {
+	public void readGpxFile(@NonNull TravelArticle article, @Nullable GpxReadCallback callback) {
 		if (!article.gpxFileRead) {
 			new GpxFileReader(article, callback).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		} else if (callback != null) {

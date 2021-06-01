@@ -711,8 +711,15 @@ public class TravelDbHelper implements TravelHelper {
 		return nm.substring(0, nm.indexOf('.')).replace('_', ' ');
 	}
 
+	@Nullable
 	@Override
-	public void searchGpx(LatLon location, String fileName, String ref, @Nullable GpxReadCallback callback) {
+	public TravelGpx searchGpx(LatLon location, String fileName, String ref, @Nullable GpxReadCallback callback) {
+		return null;
+	}
+
+	@Override
+	public void readGpxFile(@NonNull TravelArticle article, @Nullable TravelHelper.GpxReadCallback callback) {
+
 	}
 
 	@NonNull
