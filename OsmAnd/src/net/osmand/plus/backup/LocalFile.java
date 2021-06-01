@@ -12,11 +12,12 @@ public class LocalFile {
 	@Nullable
 	public File file;
 	public String subfolder;
+	public String fileName;
 	public long uploadTime = 0;
+	public long localModifiedTime = 0;
 
 	private String name = null;
 	private int sz = -1;
-	private String fileName = null;
 
 	public SettingsItem item;
 

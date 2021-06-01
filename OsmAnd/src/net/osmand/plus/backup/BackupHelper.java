@@ -32,6 +32,8 @@ import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.AbstractProgress;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.GlobalSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
 
@@ -852,6 +854,15 @@ public class BackupHelper {
 					localFile.subfolder = "";
 					if (item instanceof FileSettingsItem) {
 						localFile.file = ((FileSettingsItem) item).getFile();
+						localFile.localModifiedTime = localFile.file.lastModified();
+					} else {
+						localFile.fileName = fileName;
+						if (localFile.item instanceof ProfileSettingsItem) {
+							ProfileSettingsItem settingsItem = (ProfileSettingsItem) localFile.item;
+							localFile.localModifiedTime = app.getSettings().getLastModePreferencesEditTime(settingsItem.getAppMode());
+						} else if (localFile.item instanceof GlobalSettingsItem) {
+							localFile.localModifiedTime = app.getSettings().getLastGlobalPreferencesEditTime();
+						}
 					}
 
 					UploadedFileInfo info = app.getBackupHelper().getDbHelper().getUploadedFileInfo(item.getType().name(), fileName);
@@ -952,9 +963,8 @@ public class BackupHelper {
 							hasLocalFile = true;
 							long remoteUploadTime = remoteFile.getClienttimems();
 							long localUploadTime = localFile.uploadTime;
-							long localModifiedTime = localFile.file.lastModified();
 							if (remoteUploadTime == localUploadTime) {
-								if (localUploadTime < localModifiedTime) {
+								if (localUploadTime < localFile.localModifiedTime) {
 									info.filesToUpload.add(localFile);
 								}
 							} else {
