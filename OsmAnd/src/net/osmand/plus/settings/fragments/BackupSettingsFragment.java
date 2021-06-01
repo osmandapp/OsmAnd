@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
@@ -24,7 +25,7 @@ import net.osmand.plus.backup.BackupHelper.OnDeleteFilesListener;
 import net.osmand.plus.backup.RemoteFile;
 import net.osmand.plus.backup.UserNotRegisteredException;
 import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.helpers.AndroidUiHelper;
 
 import org.apache.commons.logging.Log;
 
@@ -35,8 +36,9 @@ public class BackupSettingsFragment extends BaseOsmAndFragment {
 	private final static Log log = PlatformUtil.getLog(BackupSettingsFragment.class);
 
 	private OsmandApplication app;
-	private OsmandSettings settings;
 	private BackupHelper backupHelper;
+
+	private ProgressBar progressBar;
 
 	private boolean nightMode;
 
@@ -59,9 +61,8 @@ public class BackupSettingsFragment extends BaseOsmAndFragment {
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = requireMyApplication();
-		settings = app.getSettings();
 		backupHelper = app.getBackupHelper();
-		nightMode = !settings.isLightContent();
+		nightMode = !app.getSettings().isLightContent();
 	}
 
 	@Nullable
@@ -69,6 +70,7 @@ public class BackupSettingsFragment extends BaseOsmAndFragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		LayoutInflater themedInflater = UiUtilities.getInflater(app, nightMode);
 		View view = themedInflater.inflate(R.layout.fragment_backup_settings, container, false);
+		progressBar = view.findViewById(R.id.progress_bar);
 
 		TextView userName = view.findViewById(R.id.user_name);
 		userName.setText(backupHelper.getEmail());
@@ -103,6 +105,7 @@ public class BackupSettingsFragment extends BaseOsmAndFragment {
 
 	private void deleteAllData() {
 		try {
+			AndroidUiHelper.setVisibility(View.VISIBLE, progressBar);
 			backupHelper.deleteAllFiles(new OnDeleteFilesListener() {
 				@Override
 				public void onFileDeleteProgress(@NonNull RemoteFile file) {
@@ -111,11 +114,7 @@ public class BackupSettingsFragment extends BaseOsmAndFragment {
 
 				@Override
 				public void onFilesDeleteDone(@NonNull Map<RemoteFile, String> errors) {
-					if (errors.isEmpty()) {
-						app.showShortToastMessage("Files deleted");
-					} else {
-						app.showShortToastMessage("Failed to delete files");
-					}
+					AndroidUiHelper.setVisibility(View.INVISIBLE, progressBar);
 				}
 
 				@Override
