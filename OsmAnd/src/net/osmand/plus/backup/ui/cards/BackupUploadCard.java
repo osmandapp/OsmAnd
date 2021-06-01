@@ -105,33 +105,7 @@ public class BackupUploadCard extends BaseCard {
 				continue;
 			}
 			View itemView = themedInflater.inflate(R.layout.backup_upload_item, itemsContainer, false);
-			TextView title = itemView.findViewById(R.id.title);
-			if (item instanceof ProfileSettingsItem) {
-				ProfileSettingsItem profileSettingsItem = (ProfileSettingsItem) item;
-				title.setText(profileSettingsItem.getAppMode().toHumanString());
-			} else if (item instanceof FileSettingsItem) {
-				FileSettingsItem profileSettingsItem = (FileSettingsItem) item;
-				title.setText(Algorithms.getFileWithoutDirs(profileSettingsItem.getFile().getName()));
-			} else {
-				title.setText(item.getName());
-			}
-
-			String filename = item.getFileName();
-			if (filename == null) {
-				filename = item.getDefaultFileName();
-			}
-			TextView description = itemView.findViewById(R.id.description);
-			String summary = app.getString(R.string.last_backup);
-			UploadedFileInfo info = app.getBackupHelper().getDbHelper().getUploadedFileInfo(item.getType().name(), filename);
-			if (info != null) {
-				String time = MainSettingsFragment.getBackupTime(app, info.getUploadTime(), app.getString(R.string.shared_string_never));
-				description.setText(app.getString(R.string.ltr_or_rtl_combine_via_colon, summary, time));
-			} else {
-				description.setText(app.getString(R.string.ltr_or_rtl_combine_via_colon, summary, app.getString(R.string.shared_string_never)));
-			}
-
-			ImageView icon = itemView.findViewById(R.id.icon);
-			icon.setImageDrawable(getIcon(item));
+			setupItemView(item, itemView);
 
 			itemsContainer.addView(itemView);
 			AndroidUiHelper.updateVisibility(itemView.findViewById(R.id.warningIcon), false);
@@ -148,33 +122,7 @@ public class BackupUploadCard extends BaseCard {
 				continue;
 			}
 			View itemView = themedInflater.inflate(R.layout.backup_upload_item, itemsContainer, false);
-			TextView title = itemView.findViewById(R.id.title);
-			if (item instanceof ProfileSettingsItem) {
-				ProfileSettingsItem profileSettingsItem = (ProfileSettingsItem) item;
-				title.setText(profileSettingsItem.getAppMode().toHumanString());
-			} else if (item instanceof FileSettingsItem) {
-				FileSettingsItem profileSettingsItem = (FileSettingsItem) item;
-				title.setText(Algorithms.getFileWithoutDirs(profileSettingsItem.getFile().getName()));
-			} else {
-				title.setText(item.getName());
-			}
-
-			String filename = item.getFileName();
-			if (filename == null) {
-				filename = item.getDefaultFileName();
-			}
-			TextView description = itemView.findViewById(R.id.description);
-			String summary = app.getString(R.string.last_backup);
-			UploadedFileInfo info = app.getBackupHelper().getDbHelper().getUploadedFileInfo(item.getType().name(), filename);
-			if (info != null) {
-				String time = MainSettingsFragment.getBackupTime(app, info.getUploadTime(), app.getString(R.string.shared_string_never));
-				description.setText(app.getString(R.string.ltr_or_rtl_combine_via_colon, summary, time));
-			} else {
-				description.setText(app.getString(R.string.ltr_or_rtl_combine_via_colon, summary, app.getString(R.string.shared_string_never)));
-			}
-
-			ImageView icon = itemView.findViewById(R.id.icon);
-			icon.setImageDrawable(getIcon(item));
+			setupItemView(item, itemView);
 
 			View localVersionButton = itemView.findViewById(R.id.local_version_button);
 			localVersionButton.setOnClickListener(new OnClickListener() {
@@ -200,6 +148,35 @@ public class BackupUploadCard extends BaseCard {
 
 			itemsContainer.addView(itemView);
 		}
+	}
+
+	private void setupItemView(SettingsItem item, View itemView) {
+		TextView title = itemView.findViewById(R.id.title);
+		if (item instanceof ProfileSettingsItem) {
+			ProfileSettingsItem profileSettingsItem = (ProfileSettingsItem) item;
+			title.setText(profileSettingsItem.getAppMode().toHumanString());
+		} else if (item instanceof FileSettingsItem) {
+			FileSettingsItem profileSettingsItem = (FileSettingsItem) item;
+			title.setText(Algorithms.getFileWithoutDirs(profileSettingsItem.getFile().getName()));
+		} else {
+			title.setText(item.getName());
+		}
+
+		String filename = item.getFileName();
+		if (filename == null) {
+			filename = item.getDefaultFileName();
+		}
+		TextView description = itemView.findViewById(R.id.description);
+		String summary = app.getString(R.string.last_backup);
+		UploadedFileInfo info = app.getBackupHelper().getDbHelper().getUploadedFileInfo(item.getType().name(), filename);
+		if (info != null) {
+			String time = MainSettingsFragment.getLastBackupTimeDescription(app, info.getUploadTime(), app.getString(R.string.shared_string_never));
+			description.setText(app.getString(R.string.ltr_or_rtl_combine_via_colon, summary, time));
+		} else {
+			description.setText(app.getString(R.string.ltr_or_rtl_combine_via_colon, summary, app.getString(R.string.shared_string_never)));
+		}
+		ImageView icon = itemView.findViewById(R.id.icon);
+		icon.setImageDrawable(getIcon(item));
 	}
 
 	private void setupActionButton() {

@@ -4130,5 +4130,4 @@
     <string name="duration_ago">%1$s назад</string>
     <string name="enter_verification_code">Введите 4-значный код</string>
     <string name="select_nav_profile_dialog_message">Режим навигации определяет правила расчёта маршрутов. Вы можете выбрать локальный или онлайн маршрутизатор.</string>
-    <string name="backup_welcome_back_descr">Вы можете восстановить данные на этом устройстве использую существующие бекапы или настроить резервное копирование этого устройства в OsmAnd Cloud.</string>
 </resources>

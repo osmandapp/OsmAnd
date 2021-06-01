@@ -182,23 +182,23 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 		Preference backupSettings = findPreference(BACKUP_AND_RESTORE);
 		backupSettings.setIcon(getContentIcon(R.drawable.ic_action_cloud_upload));
 
-		String time = getBackupTime(app);
+		String time = getLastBackupTimeDescription(app);
 		if (!Algorithms.isEmpty(time)) {
 			String summary = getString(R.string.last_backup);
 			backupSettings.setSummary(getString(R.string.ltr_or_rtl_combine_via_colon, summary, time));
 		}
 	}
 
-	public static String getBackupTime(OsmandApplication app) {
+	public static String getLastBackupTimeDescription(OsmandApplication app) {
 		long lastUploadedTime = app.getSettings().BACKUP_LAST_UPLOADED_TIME.get();
-		return getBackupTime(app, lastUploadedTime, "");
+		return getLastBackupTimeDescription(app, lastUploadedTime, "");
 	}
 
-	public static String getBackupTime(OsmandApplication app, long lastUploadedTime, String def) {
-		if (lastUploadedTime > 0) {
-			long duration = (System.currentTimeMillis() - lastUploadedTime) / 1000;
+	public static String getLastBackupTimeDescription(OsmandApplication app, long lastUploadedTimems, String def) {
+		if (lastUploadedTimems > 0) {
+			long duration = (System.currentTimeMillis() - lastUploadedTimems) / 1000;
 			if (duration > MIN_DURATION_FOR_DATE_FORMAT) {
-				return OsmAndFormatter.getFormattedDate(app, lastUploadedTime);
+				return OsmAndFormatter.getFormattedDate(app, lastUploadedTimems);
 			} else {
 				return app.getString(R.string.duration_ago, OsmAndFormatter.getFormattedDuration((int) duration, app));
 			}

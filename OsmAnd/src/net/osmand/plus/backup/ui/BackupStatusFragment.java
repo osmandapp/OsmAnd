@@ -14,7 +14,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupHelper.BackupInfo;
 import net.osmand.plus.backup.NetworkSettingsHelper.BackupExportListener;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
@@ -25,13 +24,10 @@ import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
-import net.osmand.plus.settings.backend.OsmandSettings;
 
 public class BackupStatusFragment extends BaseOsmAndFragment implements CardListener, BackupExportListener {
 
 	private OsmandApplication app;
-	private OsmandSettings settings;
-	private BackupHelper backupHelper;
 
 	private BackupInfo backupInfo;
 	private String error;
@@ -53,9 +49,7 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements CardList
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = requireMyApplication();
-		settings = app.getSettings();
-		backupHelper = app.getBackupHelper();
-		nightMode = !settings.isLightContent();
+		nightMode = !app.getSettings().isLightContent();
 	}
 
 	@Nullable

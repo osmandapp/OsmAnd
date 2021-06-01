@@ -123,13 +123,13 @@ public class PrepareBackupTask {
 			@Override
 			public void onBackupCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items) {
 				if (succeed) {
-					List<RemoteFile> files = new ArrayList<>();
+					List<RemoteFile> remoteFiles = new ArrayList<>();
 					for (RemoteFile remoteFile : app.getBackupHelper().getRemoteFiles()) {
 						if (!remoteFile.getName().endsWith(BackupHelper.INFO_EXT)) {
-							files.add(remoteFile);
+							remoteFiles.add(remoteFile);
 						}
 					}
-					PrepareBackupTask.this.remoteFiles = files;
+					PrepareBackupTask.this.remoteFiles = remoteFiles;
 				} else {
 					onError("Download remote items error");
 				}

@@ -21,11 +21,8 @@ public class LocalFile {
 	public SettingsItem item;
 
 	public String getName() {
-		if (name == null) {
-			if (file != null) {
-				name = formatName(file.getName());
-			}
-			name = "";
+		if (name == null && file != null) {
+			name = formatName(file.getName());
 		}
 		return name;
 	}

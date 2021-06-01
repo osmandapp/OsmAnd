@@ -1,6 +1,5 @@
 package net.osmand.plus.settings.fragments;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,14 +15,24 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.AndroidUtils;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.backup.BackupHelper;
+import net.osmand.plus.backup.BackupHelper.OnDeleteFilesListener;
+import net.osmand.plus.backup.RemoteFile;
+import net.osmand.plus.backup.UserNotRegisteredException;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
+import org.apache.commons.logging.Log;
+
+import java.util.Map;
+
 public class BackupSettingsFragment extends BaseOsmAndFragment {
+
+	private final static Log log = PlatformUtil.getLog(BackupSettingsFragment.class);
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
@@ -65,8 +74,7 @@ public class BackupSettingsFragment extends BaseOsmAndFragment {
 		userName.setText(backupHelper.getEmail());
 
 		View logout = view.findViewById(R.id.logout_container);
-		Drawable drawable = UiUtilities.getColoredSelectableDrawable(app, getActiveColor(), 0.3f);
-		AndroidUtils.setBackground(logout, drawable);
+		AndroidUtils.setBackground(logout, UiUtilities.getColoredSelectableDrawable(app, getActiveColor(), 0.3f));
 		logout.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -78,6 +86,45 @@ public class BackupSettingsFragment extends BaseOsmAndFragment {
 			}
 		});
 
+		View deleteAll = view.findViewById(R.id.delete_all_container);
+		AndroidUtils.setBackground(deleteAll, UiUtilities.getColoredSelectableDrawable(app, getActiveColor(), 0.3f));
+		deleteAll.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				FragmentActivity activity = getActivity();
+				if (activity != null) {
+					deleteAllData();
+				}
+			}
+		});
+
 		return view;
+	}
+
+	private void deleteAllData() {
+		try {
+			backupHelper.deleteAllFiles(new OnDeleteFilesListener() {
+				@Override
+				public void onFileDeleteProgress(@NonNull RemoteFile file) {
+
+				}
+
+				@Override
+				public void onFilesDeleteDone(@NonNull Map<RemoteFile, String> errors) {
+					if (errors.isEmpty()) {
+						app.showShortToastMessage("Files deleted");
+					} else {
+						app.showShortToastMessage("Failed to delete files");
+					}
+				}
+
+				@Override
+				public void onFilesDeleteError(int status, @NonNull String message) {
+
+				}
+			});
+		} catch (UserNotRegisteredException e) {
+			log.error(e);
+		}
 	}
 }

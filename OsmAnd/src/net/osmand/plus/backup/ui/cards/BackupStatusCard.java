@@ -31,8 +31,8 @@ public class BackupStatusCard extends BaseCard {
 	public static final int RETRY_BUTTON_INDEX = 0;
 	public static final int BACKUP_BUTTON_INDEX = 1;
 
-	private BackupInfo backupInfo;
-	private String error;
+	private final String error;
+	private final BackupInfo backupInfo;
 
 	private BackupStatus status;
 	private View itemsContainer;
@@ -120,7 +120,7 @@ public class BackupStatusCard extends BaseCard {
 		title.setText(status.statusTitleRes);
 
 		TextView description = view.findViewById(R.id.status_description);
-		String backupTime = MainSettingsFragment.getBackupTime(app);
+		String backupTime = MainSettingsFragment.getLastBackupTimeDescription(app);
 		if (Algorithms.isEmpty(backupTime)) {
 			description.setText(R.string.shared_string_never);
 		} else {
@@ -135,6 +135,7 @@ public class BackupStatusCard extends BaseCard {
 			@Override
 			public void onClick(View v) {
 				buttonsVisible = !buttonsVisible;
+				adjustIndicator(app, buttonsVisible, view, nightMode);
 				AndroidUiHelper.updateVisibility(itemsContainer, buttonsVisible);
 			}
 		});
@@ -168,7 +169,6 @@ public class BackupStatusCard extends BaseCard {
 		MAKE_BACKUP(R.string.last_backup, R.drawable.ic_action_cloud, R.drawable.ic_action_alert_circle, R.string.make_backup, R.string.make_backup_descr, R.string.backup_now),
 		CONFLICTS(R.string.last_backup, R.drawable.ic_action_cloud_alert, R.drawable.ic_action_alert, R.string.backup_conflicts, R.string.backup_confilcts_descr, R.string.backup_view_conflicts),
 		NO_INTERNET_CONNECTION(R.string.last_backup, R.drawable.ic_action_cloud_alert, R.drawable.ic_action_wifi_off, R.string.no_inet_connection, R.string.backup_no_internet_descr, R.string.retry),
-		NO_WIFI_CONNECTION(R.string.last_backup, R.drawable.ic_action_cloud_alert, R.drawable.ic_action_wifi_off, R.string.backup_waiting_for_wifi, R.string.backup_waiting_for_wifi_descr, R.string.backup_using_mobile_data),
 		ERROR(R.string.last_backup, R.drawable.ic_action_cloud_alert, R.drawable.ic_action_alert, -1, -1, R.string.retry);
 
 		@StringRes
