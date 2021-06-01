@@ -840,12 +840,11 @@ public class BackupHelper {
 							long localModifiedTime = localFile.file.lastModified();
 							if (remoteUploadTime == localUploadTime) {
 								if (localUploadTime < localModifiedTime) {
-									//info.filesToUpload.add(localFile);
+									info.filesToUpload.add(localFile);
 								}
 							} else {
-								//info.filesToMerge.add(new Pair<>(localFile, remoteFile));
+								info.filesToMerge.add(new Pair<>(localFile, remoteFile));
 							}
-							info.filesToDelete.add(remoteFile);
 							break;
 						}
 					}
@@ -853,8 +852,7 @@ public class BackupHelper {
 						if (backupLastUploadedTime > 0 && backupLastUploadedTime >= remoteFile.getClienttimems()) {
 							info.filesToDelete.add(remoteFile);
 						} else {
-							//info.filesToDownload.add(remoteFile);
-							info.filesToDelete.add(remoteFile);
+							info.filesToDownload.add(remoteFile);
 						}
 					}
 				}
@@ -867,7 +865,7 @@ public class BackupHelper {
 						}
 					}
 					if (!hasRemoteFile) {
-						//info.filesToUpload.add(localFile);
+						info.filesToUpload.add(localFile);
 					}
 				}
 				return info;
