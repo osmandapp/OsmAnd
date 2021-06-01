@@ -70,10 +70,11 @@ public abstract class MapRenderingTypes {
 			init();
 		}
 	}
+
 	public static Collection<Map<String, String>> splitTagsIntoDifferentObjects(final Map<String, String> tags) {
 		// check open sea maps tags
 		boolean split = splitIsNeeded(tags);
-		if(!split) {
+		if (!split) {
 			return Collections.singleton(tags);
 		} else {
 			return splitOpenSeaMapsTags(tags);
