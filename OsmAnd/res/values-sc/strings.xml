@@ -4085,7 +4085,7 @@
     <string name="user_points">Puntos de s\'impreadore</string>
     <string name="output">Essida</string>
     <string name="shared_string_feet">pees</string>
-    <string name="srtm_unit_format">Formadu de s\'unidade de medida pro sas curvas de livellu</string>
+    <string name="srtm_unit_format">Unidade de medida pro sas curvas de livellu</string>
     <string name="srtm_download_list_help_message">OsmAnd frunit datos de sas curvas de livellu in metros e in pees. As a dèpere torrare a iscarrigare su documentu pro mudare su formadu.</string>
     <string name="srtm_download_single_help_message">Pro praghere ischerta sa variante. As a dèpere torrare a iscarrigare su documentu pro mudare su formadu.</string>
     <string name="route_line_use_gradient_coloring">Sa lìnia de s\'àndala s\'at a colorare sighende sa pendèntzia.</string>
@@ -4102,4 +4102,28 @@
     <string name="poi_routes">Àndalas</string>
     <string name="routing_attr_avoid_low_emission_zone_description">Istransi sas zonas a emissiones bassas</string>
     <string name="routing_attr_avoid_low_emission_zone_name">Istransi sas zonas a emissiones bassas</string>
+    <string name="search_more">Chirca de prus…</string>
+    <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
+    <string name="backup_and_restore">Sarvamentu e Riprìstinu</string>
+    <string name="last_backup">Ùrtima còpia de seguresa</string>
+    <string name="duration_ago">%1$s a como</string>
+    <string name="osmand_cloud">OsmAnd Cloud</string>
+    <string name="osmand_cloud_authorize_descr">Non perdas mai sos datos tuos, sarva e riprìstina totu sas informatziones chene problemas.</string>
+    <string name="local_backup">Còpia de seguresa locale</string>
+    <string name="local_backup_descr">Sarva o riprìstina sos datos dae unu documentu locale.</string>
+    <string name="backup_into_file">Faghe una còpia de seguresa in unu documentu</string>
+    <string name="restore_from_file">Riprìstina dae unu documentu</string>
+    <string name="osmand_cloud_help_descr">Ti serbit agiudu\? Cuntata·nos a%1$s</string>
+    <string name="osmand_cloud_create_account_descr">Pro praghere inserta s\'indiritzu de posta eletrònica tuo. Totu sos datos tuos b\'ant a èssere ligados.
+\nAmus a imbiare unu còdighe de verìfica a custu indiritzu.</string>
+    <string name="osmand_cloud_login_descr">Pro praghere inserta su còdighe de posta eletrònica chi as impreadu pro sa registratzione. T\'amus a imbiare una crae temporànea chi t\'at a bisongiare pro su passu imbeniente.</string>
+    <string name="verify_email_address">Verìfica s\'indiritzu de posta eletrònica</string>
+    <string name="verify_email_address_descr">Amus imbiadu unu còdighe de verìfica a %1$s, pro praghere inserta·lu in su campu inoghe in suta.</string>
+    <string name="enter_verification_code">Inserta su còdighe a 4 tzifras</string>
+    <string name="cloud_email_not_registered">Custu indiritzu de posta no est istadu registradu pro OsmAnd Cloud</string>
+    <string name="cloud_email_already_registered">B\'at giai unu contu cun custu indiritzu de posta.</string>
+    <string name="resend_verification_code">Torra a imbiare su còdighe</string>
+    <string name="verification_code_missing">No apo retzidu su còdighe de cunfirma</string>
+    <string name="verification_code_missing_description">Su tempus de isetu pro su còdighe podet èssere de 10 minutos, e podes fintzas compidare in sa cartella de su spam tua. Si custu no est de agiudu imprea su butone inoghe in suta.</string>
+    <string name="select_nav_profile_dialog_message">Sa \'Casta de navigatzione\' determinat comente benint carculadas sas àndalas. Podes isseberare intre motores de càrculu de s\'àndala no in lìnia o in lìnia.</string>
 </resources>

@@ -2,8 +2,8 @@ package net.osmand.plus.search;
 
 import android.view.View;
 
-import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.IndexConstants;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.data.Amenity;
@@ -43,7 +43,9 @@ import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -138,6 +140,7 @@ public class QuickSearchHelper implements ResourceListener {
 	public void setRepositoriesForSearchUICore(final OsmandApplication app) {
 		BinaryMapIndexReader[] binaryMapIndexReaderArray = app.getResourceManager().getQuickSearchFiles();
 		core.getSearchSettings().setOfflineIndexes(Arrays.asList(binaryMapIndexReaderArray));
+		core.getSearchSettings().setRegions(app.getRegions());
 	}
 
 	public Amenity findAmenity(String name, double lat, double lon, String lang, boolean transliterate) {
@@ -510,19 +513,13 @@ public class QuickSearchHelper implements ResourceListener {
 
 		@Override
 		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
-			List<SelectedGpxFile> selectedGpxFiles = app.getSelectedGpxHelper().getSelectedGPXFiles();
-			for (SelectedGpxFile selectedGpxFile : selectedGpxFiles) {
-				GPXFile gpxFile = selectedGpxFile.getGpxFile();
-				String relativePath = GpxUiHelper.getGpxFileRelativePath(app, gpxFile.path);
-				GPXInfo gpxInfo = GpxUiHelper.getGpxInfoByFileName(app, relativePath);
-				if (gpxInfo == null) {
-					continue;
-				}
-
+			File tracksDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
+			List<GPXInfo> gpxInfoList = new ArrayList<>();
+			GpxUiHelper.readGpxDirectory(tracksDir, gpxInfoList, "", false);
+			for (GPXInfo gpxInfo : gpxInfoList) {
 				SearchResult searchResult = new SearchResult(phrase);
 				searchResult.objectType = ObjectType.GPX_TRACK;
-				searchResult.localeName = relativePath;
-				searchResult.object = gpxFile;
+				searchResult.localeName = GpxUiHelper.getGpxFileRelativePath(app, gpxInfo.getFileName());
 				searchResult.relatedObject = gpxInfo;
 				searchResult.priority = SEARCH_TRACK_OBJECT_PRIORITY;
 				searchResult.preferredZoom = 17;

@@ -419,8 +419,9 @@ public class SearchCoreFactory {
 						int x = MapUtils.get31TileNumberX(object.getLocation().getLongitude());
 						List<City> closestCities = null;
 						if (object instanceof Street) {
-							if ((locSpecified && !streetBbox.contains(x, y, x, y))
-									|| !phrase.isSearchTypeAllowed(ObjectType.STREET)) {
+							// remove limitation by location
+							if (  //(locSpecified && !streetBbox.contains(x, y, x, y)) || 
+								!phrase.isSearchTypeAllowed(ObjectType.STREET)) {
 								return false;
 							}
 							if (object.getName().startsWith("<")) {

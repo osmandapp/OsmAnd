@@ -2975,7 +2975,7 @@
     <string name="profile_alert_delete_msg">Ĉu vi certe volas forigi la profilon “%s”\?</string>
     <string name="select_base_profile_dialog_title">Elektu komencan profilon</string>
     <string name="select_base_profile_dialog_message">Via propra profilo estos bazita sur iu implicita aplikaĵa profilo, kiu difinos bazajn agordojn kiel videblon de fenestraĵoj, unuojn de rapido kaj distanco. Jen implicitaj profiloj kaj ekzemplaj profiloj por krei:</string>
-    <string name="select_nav_profile_dialog_title">Elektu profilon de navigo</string>
+    <string name="select_nav_profile_dialog_title">Elekti profilon de navigo</string>
     <string name="base_profile_descr_car">Aŭto, kamiono, motorciklo</string>
     <string name="base_profile_descr_bicycle">Biciklo, motorbiciklo, ĉevalo</string>
     <string name="base_profile_descr_pedestrian">Promenado, marŝado, kurado</string>
@@ -2985,10 +2985,10 @@
     <string name="routing_profile_geocoding">Koordinat-trovado</string>
     <string name="routing_profile_straightline">Rekta linio</string>
     <string name="routing_profile_broutrer">BRouter (malkonekte)</string>
-    <string name="osmand_default_routing">Kurs‑difinilo OsmAnd</string>
+    <string name="osmand_default_routing">OsmAnd-navigilo</string>
     <string name="custom_routing">Propra profilo de kurs‑difinado</string>
-    <string name="special_routing_type">Speciala kurs‑difinado</string>
-    <string name="third_party_routing_type">Ekstera kurs‑difinilo</string>
+    <string name="special_routing_type">Speciala navigilo</string>
+    <string name="third_party_routing_type">Ekstera navigilo</string>
     <string name="application_profiles_descr">Elekti profilojn videblajn en la aplikaĵo.</string>
     <string name="application_profiles">Profiloj de aplikaĵo</string>
     <string name="quick_action_need_to_add_item_to_list">Aldonu almenaŭ unu elementon al la listo en agordoj de “rapida ago”</string>
@@ -3310,7 +3310,7 @@
     <string name="file_does_not_contain_routing_rules">Neniuj reguloj pri kurs‑difinado en “%1$s”. Bonvolu elekti alian dosieron.</string>
     <string name="not_support_file_type_with_ext">Bonvolu elekti dosieron kun la subtenata finaĵo %1$s.</string>
     <string name="import_from_file">Enporti el dosiero</string>
-    <string name="import_routing_file">Enporti dosieron de kurs‑difinado</string>
+    <string name="import_routing_file">Enporti dosieron de navigilo</string>
     <string name="import_profile">Enporti profilon</string>
     <string name="monitoring_prefs_descr">Navigado, precizo de registrado</string>
     <string name="multimedia_notes_prefs_descr">Dimensioj de bildo, kvalito de sono kaj video</string>
@@ -4127,4 +4127,5 @@
     <string name="resend_verification_code">Resendi kontrolkodon</string>
     <string name="verification_code_missing">Mi ne ricevis kontrolkodon</string>
     <string name="verification_code_missing_description">Necesos atendi eĉ 10 minutojn por ricevi la kodon, bonvolu ankaŭ kontroli vian trudmesaĝujon. Se tio ĉi ne helpos, uzu la butonon sube.</string>
+    <string name="select_nav_profile_dialog_message">Elekto de profilo de navigo influas al maniero kiel kalkuli kurson. Eblas elekti malkonektan aŭ enretan navigilon.</string>
 </resources>

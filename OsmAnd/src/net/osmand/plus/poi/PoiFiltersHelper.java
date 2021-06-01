@@ -559,7 +559,10 @@ public class PoiFiltersHelper {
 		Pair<Long, Map<String, List<String>>> cache = null;
 		PoiFilterDbHelper helper = openDbHelper();
 		if (helper != null) {
-			cache = helper.getCacheByResourceName(helper.getReadableDatabase(), fileName);
+			SQLiteConnection readableDb = helper.getReadableDatabase();
+			if (readableDb != null) {
+				cache = helper.getCacheByResourceName(readableDb, fileName);
+			}
 			helper.close();
 		}
 		return cache;
@@ -568,7 +571,10 @@ public class PoiFiltersHelper {
 	public void updateCacheForResource(String fileName, long lastModified, Map<String, List<String>> categories) {
 		PoiFilterDbHelper helper = openDbHelper();
 		if (helper != null) {
-			helper.updateCacheForResource(helper.getReadableDatabase(), fileName, lastModified, categories);
+			SQLiteConnection readableDb = helper.getReadableDatabase();
+			if (readableDb != null) {
+				helper.updateCacheForResource(readableDb, fileName, lastModified, categories);
+			}
 			helper.close();
 		}
 	}
@@ -576,7 +582,10 @@ public class PoiFiltersHelper {
 	public void insertCacheForResource(String fileName, long lastModified, Map<String, List<String>> categories) {
 		PoiFilterDbHelper helper = openDbHelper();
 		if (helper != null) {
-			helper.insertCacheForResource(helper.getReadableDatabase(), fileName, lastModified, categories);
+			SQLiteConnection readableDb = helper.getReadableDatabase();
+			if (readableDb != null) {
+				helper.insertCacheForResource(readableDb, fileName, lastModified, categories);
+			}
 			helper.close();
 		}
 	}
@@ -871,25 +880,23 @@ public class PoiFiltersHelper {
 		}
 
 		@Nullable
-		protected Pair<Long, Map<String, List<String>>> getCacheByResourceName(SQLiteConnection db, String fileName) {
+		protected Pair<Long, Map<String, List<String>>> getCacheByResourceName(@NonNull SQLiteConnection db, String fileName) {
 			Pair<Long, Map<String, List<String>>> cache = null;
-			if (db != null) {
-				SQLiteAPI.SQLiteCursor query = db.rawQuery("SELECT " +
-						MAP_FILE_DATE + ", " +
-						CACHED_POI_CATEGORIES +
-						" FROM " +
-						POI_TYPES_CACHE_NAME +
-						" WHERE " + MAP_FILE_NAME + " = ?", new String[]{fileName});
-				if (query != null && query.moveToFirst()) {
-					long lastModified = query.getLong(0);
-					Map<String, List<String>> categories = getCategories(query.getString(1));
-					cache = new Pair<>(lastModified, categories);
-				}
-				if (query != null) {
-					query.close();
-				}
-				db.close();
+			SQLiteCursor query = db.rawQuery("SELECT " +
+					MAP_FILE_DATE + ", " +
+					CACHED_POI_CATEGORIES +
+					" FROM " +
+					POI_TYPES_CACHE_NAME +
+					" WHERE " + MAP_FILE_NAME + " = ?", new String[]{fileName});
+			if (query != null && query.moveToFirst()) {
+				long lastModified = query.getLong(0);
+				Map<String, List<String>> categories = getCategories(query.getString(1));
+				cache = new Pair<>(lastModified, categories);
 			}
+			if (query != null) {
+				query.close();
+			}
+			db.close();
 			return cache;
 		}
 
@@ -909,7 +916,7 @@ public class PoiFiltersHelper {
 			return categories;
 		}
 
-		protected void updateCacheForResource(SQLiteConnection db, String fileName, long lastModified, Map<String, List<String>> categories) {
+		protected void updateCacheForResource(@NonNull SQLiteConnection db, String fileName, long lastModified, Map<String, List<String>> categories) {
 			try {
 				db.execSQL("UPDATE " + POI_TYPES_CACHE_NAME + " SET " +
 								MAP_FILE_DATE + " = ?, " +
@@ -921,7 +928,7 @@ public class PoiFiltersHelper {
 			}
 		}
 
-		protected void insertCacheForResource(SQLiteConnection db, String fileName, long lastModified, Map<String, List<String>> categories) {
+		protected void insertCacheForResource(@NonNull SQLiteConnection db, String fileName, long lastModified, Map<String, List<String>> categories) {
 			try {
 				db.execSQL("INSERT INTO " + POI_TYPES_CACHE_NAME + " VALUES(?,?,?)",
 						new Object[]{fileName, lastModified, getCategoriesJson(categories)});

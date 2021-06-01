@@ -26,7 +26,7 @@ import net.osmand.plus.profiles.data.ProfileDataUtils;
 import net.osmand.plus.profiles.SelectBaseProfileBottomSheet;
 import net.osmand.plus.profiles.SelectProfileBottomSheet.OnSelectProfileCallback;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.backup.SettingsItem;
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
@@ -136,7 +136,7 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 					@Override
 					public boolean processResult(List<SettingsItem> result) {
 						for (SettingsItem item : result) {
-							if (SettingsItemType.PROFILE.equals(item.getType())) {
+							if (item.getType() == SettingsItemType.PROFILE) {
 								ConfigureProfileFragment.showInstance(mapActivity, SettingsScreenType.CONFIGURE_PROFILE,
 										ApplicationMode.valueOfStringKey(item.getName(), null));
 								break;

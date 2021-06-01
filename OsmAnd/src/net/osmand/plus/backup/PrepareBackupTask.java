@@ -30,8 +30,8 @@ public class PrepareBackupTask {
 	private ProgressImplementation progress;
 
 	private BackupInfo result;
-	private List<UserFile> userFiles;
-	private List<GpxFileInfo> fileInfos;
+	private List<RemoteFile> remoteFiles;
+	private List<LocalFile> fileInfos;
 	private String error;
 
 	private Stack<TaskType> runningTasks = new Stack<>();
@@ -71,7 +71,7 @@ public class PrepareBackupTask {
 
 	private void initTasks() {
 		result = null;
-		userFiles = null;
+		remoteFiles = null;
 		fileInfos = null;
 		error = null;
 		Stack<TaskType> tasks = new Stack<>();
@@ -117,11 +117,11 @@ public class PrepareBackupTask {
 		onTaskProgressUpdate("Collecting local info...");
 		backupHelper.collectLocalFiles(new OnCollectLocalFilesListener() {
 			@Override
-			public void onFileCollected(@NonNull GpxFileInfo fileInfo) {
+			public void onFileCollected(@NonNull LocalFile fileInfo) {
 			}
 
 			@Override
-			public void onFilesCollected(@NonNull List<GpxFileInfo> fileInfos) {
+			public void onFilesCollected(@NonNull List<LocalFile> fileInfos) {
 				PrepareBackupTask.this.fileInfos = fileInfos;
 				onTaskFinished(TaskType.COLLECT_LOCAL_FILES);
 			}
@@ -133,9 +133,9 @@ public class PrepareBackupTask {
 		try {
 			backupHelper.downloadFileList(new OnDownloadFileListListener() {
 				@Override
-				public void onDownloadFileList(int status, @Nullable String message, @NonNull List<UserFile> userFiles) {
+				public void onDownloadFileList(int status, @Nullable String message, @NonNull List<RemoteFile> remoteFiles) {
 					if (status == BackupHelper.STATUS_SUCCESS) {
-						PrepareBackupTask.this.userFiles = userFiles;
+						PrepareBackupTask.this.remoteFiles = remoteFiles;
 					} else {
 						onError(!Algorithms.isEmpty(message) ? message : "Download file list error: " + status);
 					}
@@ -148,12 +148,12 @@ public class PrepareBackupTask {
 	}
 
 	private void doGenerateBackupInfo() {
-		if (fileInfos == null || userFiles == null) {
+		if (fileInfos == null || remoteFiles == null) {
 			onTaskFinished(TaskType.GENERATE_BACKUP_INFO);
 			return;
 		}
 		onTaskProgressUpdate("Generating backup info...");
-		backupHelper.generateBackupInfo(fileInfos, userFiles, new OnGenerateBackupInfoListener() {
+		backupHelper.generateBackupInfo(fileInfos, remoteFiles, new OnGenerateBackupInfoListener() {
 			@Override
 			public void onBackupInfoGenerated(@Nullable BackupInfo backupInfo, @Nullable String error) {
 				if (Algorithms.isEmpty(error)) {

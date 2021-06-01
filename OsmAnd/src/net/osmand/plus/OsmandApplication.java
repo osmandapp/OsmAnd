@@ -53,6 +53,7 @@ import net.osmand.plus.activities.actions.OsmAndDialogs;
 import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPIImpl;
 import net.osmand.plus.backup.BackupHelper;
+import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadService;
@@ -85,7 +86,7 @@ import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.backup.SettingsHelper;
+import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.router.GeneralRouter;
@@ -161,7 +162,8 @@ public class OsmandApplication extends MultiDexApplication {
 	InAppPurchaseHelper inAppPurchaseHelper;
 	MapViewTrackingUtilities mapViewTrackingUtilities;
 	LockHelper lockHelper;
-	SettingsHelper settingsHelper;
+	FileSettingsHelper fileSettingsHelper;
+	NetworkSettingsHelper networkSettingsHelper;
 	GpxDbHelper gpxDbHelper;
 	QuickActionRegistry quickActionRegistry;
 	OsmOAuthHelper osmOAuthHelper;
@@ -391,8 +393,12 @@ public class OsmandApplication extends MultiDexApplication {
 		return lockHelper;
 	}
 
-	public SettingsHelper getSettingsHelper() {
-		return settingsHelper;
+	public FileSettingsHelper getFileSettingsHelper() {
+		return fileSettingsHelper;
+	}
+
+	public NetworkSettingsHelper getNetworkSettingsHelper() {
+		return networkSettingsHelper;
 	}
 
 	public OsmOAuthHelper getOsmOAuthHelper() {

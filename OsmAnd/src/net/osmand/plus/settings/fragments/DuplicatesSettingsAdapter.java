@@ -43,7 +43,7 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.util.List;
 
-import static net.osmand.plus.settings.backend.backup.FileSettingsItem.FileSubtype;
+import static net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 
 public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 

@@ -152,7 +152,7 @@
     <string name="quick_action_gpx_category_descr">Выберите дополнительную категорию.</string>
     <string name="quick_action_poi_list">Список категорий</string>
     <string name="quick_action_sh_poi_descr">Добавить одну или несколько категорий POI для отображения на карте.</string>
-    <string name="quick_action_page_list_descr">Кнопка для перелистывания списка ниже.</string>
+    <string name="quick_action_page_list_descr">Кнопка для переключения между элементами списка.</string>
     <string name="quick_action_empty_param_error">Заполните все параметры</string>
     <string name="quick_action_map_overlay">Сменить карту наложения</string>
     <string name="quick_action_map_overlay_title">Наложения</string>
@@ -226,11 +226,11 @@
     <string name="save_filter">Сохранить фильтр</string>
     <string name="delete_filter">Удалить фильтр</string>
     <string name="new_filter">Новый фильтр</string>
-    <string name="change_markers_position">Изменение позиции</string>
+    <string name="change_markers_position">Переместить точку или маркер</string>
     <string name="current_track">Текущий путь</string>
     <string name="use_osm_live_routing">Навигация OsmAnd Live</string>
     <string name="map_widget_battery">Уровень заряда батареи</string>
-    <string name="move_marker_bottom_sheet_title">Двигайте карту, чтобы изменить позицию маркера</string>
+    <string name="move_marker_bottom_sheet_title">Двигайте карту, чтобы изменить позицию точки или маркера</string>
     <!-- string name="lat_lon_pattern">Широта: %1$.5f Долгота: %2$.5f</string -->
     <string name="map_widget_magnetic_bearing">Магнитный пеленг</string>
     <string name="map_widget_bearing">Курсовой угол</string>
@@ -681,7 +681,7 @@
     <string name="layer_yandex_traffic">Яндекс.Пробки</string>
     <string name="layer_route">Маршрут</string>
     <string name="layer_osm_bugs">OSM-заметки (онлайн)</string>
-    <string name="layer_poi">POI…</string>
+    <string name="layer_poi">Наложение POI…</string>
     <string name="layer_map">Источник карты…</string>
     <string name="menu_layers">Слои</string>
     <string name="context_menu_item_search_poi">Поиск POI</string>
@@ -1603,7 +1603,7 @@
     <string name="rendering_attr_busRoutes_name">Маршруты автобусов</string>
     <string name="rendering_attr_tramTrainRoutes_name">Маршруты трамваев и поездов</string>
     <string name="rendering_category_hide">Скрыть</string>
-    <string name="impassable_road">Избегать дорог</string>
+    <string name="impassable_road">Избегать дорог…</string>
     <string name="lock_screen_request_explanation">%1$s необходимо это разрешение, чтобы выключить экран для экономии энергии.</string>
     <string name="wake_on_voice">Автовключение экрана перед поворотом</string>
     <string name="wake_on_voice_descr">Включать экран перед поворотом (если выключен).</string>
@@ -2023,7 +2023,7 @@
     <string name="context_menu_item_edit_waypoint">Изменить путевую точку GPX</string>
     <string name="routing_attr_avoid_stairs_name">Без лестниц</string>
     <string name="routing_attr_avoid_stairs_description">Избегать ступеней и лестниц</string>
-    <string name="routing_attr_avoid_borders_name">Без перехода границы</string>
+    <string name="routing_attr_avoid_borders_name">Без пересечений границы</string>
     <string name="only_download_over_wifi">Загружать только по Wi-Fi</string>
     <string name="update_now">Обновить сейчас</string>
     <string name="missing_write_external_storage_permission">Приложение не имеет разрешения на использование SD-карты</string>
@@ -2569,8 +2569,8 @@
     <string name="save_route_point">Сохранить точку маршрута</string>
     <string name="waypoint_one">Путевая точка 1</string>
     <string name="route_point_one">Точка маршрута 1</string>
-    <string name="empty_state_favourites">Добавить избранные</string>
-    <string name="empty_state_favourites_desc">Избранное можно импортировать или создать, отмечая точки на карте.</string>
+    <string name="empty_state_favourites">Добавьте избранные</string>
+    <string name="empty_state_favourites_desc">Импортируйте избранные или создавайте их, отмечая точки на карте.</string>
     <string name="import_track">Импортировать файл GPX</string>
     <string name="move_point">Переместить точку</string>
     <string name="osmand_plus_extended_description_part4">Используйте данные OSM и Википедии
@@ -2601,7 +2601,7 @@
 \n • Возможность записи путешествие в фоновом режиме (в то время, как устройство находится в спящем режиме) 
 \n OsmAnd это активно развивающееся программное обеспечение с открытым исходным кодом. Каждый может внести свой вклад в приложение, сообщая об ошибках, улучшая переводы или кодируя новые функции. Кроме того, проект опирается на финансовые взносы для финансирования разработки и тестирования новых функциональных возможностей.
 \n</string>
-    <string name="empty_state_osm_edits">Создать или изменить объекты OSM</string>
+    <string name="empty_state_osm_edits">Создайте или измените объекты OSM</string>
     <string name="empty_state_osm_edits_descr">Добавляйте и редактируйте POI, сообщайте о неточностях на карте в OSM-заметках, делитесь записанными треками.</string>
     <string name="shared_string_deleted">Удалено</string>
     <string name="shared_string_edited">Отредактировано</string>
@@ -3462,7 +3462,7 @@
     <string name="search_offline_geo_error">Невозможно разобрать геоссылку «%s».</string>
     <string name="hillshade_download_description">Для отображения затенения рельефа требуются дополнительные карты.</string>
     <string name="shared_string_min">Мин.</string>
-    <string name="terrain_empty_state_text">Способы отображения рельефа местности: посредством теней (затенение рельефа) или цветов (карта уклонов). Подробнее об этих типах карт вы можете прочитать на нашем сайте.</string>
+    <string name="terrain_empty_state_text">Способы отображения рельефа местности: посредством отмывки (затенение рельефа) или цветов (карта уклонов). Подробнее об этих типах карт вы можете прочитать на нашем сайте.</string>
     <string name="shared_string_transparency">Прозрачность</string>
     <string name="shared_string_zoom_levels">Уровни масштаба</string>
     <string name="recalculate_route_in_deviation">Пересчитывать маршрут в случае отклонения</string>
@@ -3705,7 +3705,7 @@
     <string name="shared_string_custom">Своё значение</string>
     <string name="add_hidden_group_info">Добавленная точка не будет видна на карте, так как выбранная группа скрыта, найти её можно в «%s».</string>
     <string name="track_show_start_finish_icons">Показывать значки старта и финиша</string>
-    <string name="select_track_width">Выберите толщину линии</string>
+    <string name="select_track_width">Толщина линии</string>
     <string name="gpx_direction_arrows">Стрелки направления</string>
     <string name="track_coloring_solid">Сплошной</string>
     <string name="plan_route_last_edited">Последнее изменение</string>
@@ -3737,7 +3737,7 @@
     <string name="monitoring_control_start">REC</string>
     <string name="save_track_to_gpx_globally">Запись трека в файл GPX</string>
     <string name="shared_string_gpx_route">Маршрут трека</string>
-    <string name="empty_state_my_tracks">Добавить файлы треков</string>
+    <string name="empty_state_my_tracks">Добавьте файлы треков</string>
     <string name="empty_state_my_tracks_desc">Импортируйте или запишите файлы треков</string>
     <string name="context_menu_item_add_waypoint">Добавить путевую точку</string>
     <string name="quick_action_add_gpx">Путевая точка</string>
@@ -3927,7 +3927,7 @@
     <string name="routing_engine_vehicle_type_small_truck">Малый грузовик</string>
     <string name="routing_engine_vehicle_type_truck">Грузовик</string>
     <string name="copy_to_map_markers">Копировать в маркеры</string>
-    <string name="copy_to_map_favorites">Копировать в избранное</string>
+    <string name="copy_to_map_favorites">Копировать в избранные</string>
     <string name="delete_online_routing_engine">Удалить онлайн-маршрутизатор\?</string>
     <string name="routing_attr_prefer_hiking_routes_name">Предпочитать пешеходные маршруты</string>
     <string name="add_online_routing_engine">Добавить онлайн-маршрутизатор</string>
@@ -4129,4 +4129,5 @@
     <string name="last_backup">Последнее резервное копирование</string>
     <string name="duration_ago">%1$s назад</string>
     <string name="enter_verification_code">Введите 4-значный код</string>
+    <string name="select_nav_profile_dialog_message">Режим навигации определяет правила расчёта маршрутов. Вы можете выбрать локальный или онлайн маршрутизатор.</string>
 </resources>

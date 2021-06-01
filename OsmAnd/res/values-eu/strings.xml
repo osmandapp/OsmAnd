@@ -3912,4 +3912,67 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="tts_title">TTS</string>
     <string name="use_system_language">Erabili sistemaren hizkuntza</string>
     <string name="shared_string_itinerary">Ibilbidea</string>
+    <string name="osmand_live">OsmAnd Live</string>
+    <string name="annual_subscription">Urteko harpidetza</string>
+    <string name="monthly_subscription">Hilabeteko harpidetza</string>
+    <string name="three_months_subscription">Hiru hilabeteko harpidetza</string>
+    <string name="next_billing_date">Hurrengo fakturazio data :%1$s</string>
+    <string name="osmand_live_cancelled">Bertan behera utzi da</string>
+    <string name="renew_subscription">Berritu harpidetza</string>
+    <string name="in_grace_period">Grazia aldian</string>
+    <string name="on_hold">Zain</string>
+    <string name="expired">Iraungi da</string>
+    <string name="release_4_0_beta">• Sestra lerroak oinetan deskargatzeko aukera gehitu da
+\n
+\n • Planifikatu ibilbidearen paisaia: gehitu dira fitxak puntu edo grafikoen artean aldatzeko
+\n
+\n • OsmAnd Live eguneraketak \"Deskargak&gt; Eguneratzeak\" atalera eraman dira
+\n
+\n • Arrastoak orain altueraren, abiaduraren edo maldaren arabera koloreztatu daitezke.
+\n
+\n • ibilbidearen marraren itxura aldatzeko aukera gehitu da.
+\n
+\n • \"Bidaiaren grabaketa\" elkarrizketa-koadroa eguneratu da
+\n
+\n</string>
+    <string name="update_all_maps_added">%1$s-ra gehitutako mapa guztiak eguneratu\?</string>
+    <string name="shared_string_feet">oin</string>
+    <string name="srtm_unit_format">Sestra-marren unitate aldaketa</string>
+    <string name="srtm_download_list_help_message">OsmAnd-ek sestra-marren datuak metro eta oinetan ematen ditu. Fitxategia berriro deskargatu beharko duzu formatua aldatzeko.</string>
+    <string name="srtm_download_single_help_message">Aukeratu beste bat. Fitxategia berriro deskargatu beharko duzu formatua aldatzeko.</string>
+    <string name="announce_when_exceeded">Abisatu gainditzen denean</string>
+    <string name="user_points">Erabiltzailearen puntuak</string>
+    <string name="output">Irteera</string>
+    <string name="shared_string_min_height">Altuera minimoa</string>
+    <string name="shared_string_max_height">Altuera maximoa</string>
+    <string name="recorded_description">Grabatutako ahotsak hobeto entzuten dira, baina aurrez grabatutako esaldiak bakarrik ahoskatu ditzake: begiratu argibideak. Ezin dira kale izenak edo POI izenak jakinarazi.</string>
+    <string name="route_line_use_map_style_color">Erabili maparen estiloa (%1$s) kolore lehenetsia.</string>
+    <string name="route_line_use_map_style_width">Erabili maparen estiloa (%1$s) kolore lehenetsia.</string>
+    <string name="poi_routes">Ibilbideak</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">Saihestu emisio baxuko zonak</string>
+    <string name="routing_attr_avoid_low_emission_zone_name">Saihestu emisio baxuko zonak</string>
+    <string name="search_more">Bilatu gehiago…</string>
+    <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
+    <string name="backup_and_restore">Babeskopia eta Leheneratzea</string>
+    <string name="last_backup">Azken babeskopia</string>
+    <string name="duration_ago">Duela %1$s</string>
+    <string name="osmand_cloud">OsmAnd Cloud</string>
+    <string name="osmand_cloud_authorize_descr">Ez galdu inoiz zure datuak, egin babeskopia eta leheneratu zure informazio guztia arazorik gabe.</string>
+    <string name="local_backup">Babeskopia lokala</string>
+    <string name="local_backup_descr">Egin babeskopia edo leheneratu datuak fitxategi lokal batetik.</string>
+    <string name="backup_into_file">Egin babeskopia fitxategian</string>
+    <string name="restore_from_file">Leheneratu fitxategitik</string>
+    <string name="osmand_cloud_help_descr">Laguntza behar duzu\? Kontaktatu gurekin hemen: %1$s</string>
+    <string name="osmand_cloud_create_account_descr">Sartu zure posta helbidea, zure datu guztiak hari lotuko zaizkio.
+\nEgiaztatze-kodea bidaliko dizugu posta helbide horretara.</string>
+    <string name="osmand_cloud_login_descr">Sartu erregistratzeko erabili zenuen helbide elektronikoa. Bidaliko dizugu hurrengo urratserako behar duzun erabilera bakarreko pasahitza.</string>
+    <string name="verify_email_address">Egiaztatu e-posta helbidea</string>
+    <string name="verify_email_address_descr">Bidali dugu egiaztatzeko kodea %1$s kontura, sartu beheko eremuan.</string>
+    <string name="enter_verification_code">Sartu 4 digituko kodea</string>
+    <string name="cloud_email_not_registered">E-posta hori ez dago erregistratuta OsmAnd Cloud-en</string>
+    <string name="cloud_email_already_registered">E-posta hori duen kontu bat dagoeneko erregistratuta dago.</string>
+    <string name="resend_verification_code">Birbidali kodea</string>
+    <string name="verification_code_missing">Ez dut jaso egiaztatze-koderik</string>
+    <string name="verification_code_missing_description">Kodearen itxaronaldia 10 minutukoa izan daiteke; gainera, Zaborra karpeta egiaztatu dezakezu. Laguntzen ez badizu, erabili beheko botoia.</string>
+    <string name="select_nav_profile_dialog_message">\"Nabigazio motak\" ibilbideak nola kalkulatzen diren arautzen du. Lineaz kanpoko eta lineako bideratze motorren artean hauta dezakezu.</string>
 </resources>
