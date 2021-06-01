@@ -27,9 +27,6 @@ public class PrepareBackupTask {
 	private List<LocalFile> fileInfos;
 	private String error;
 
-	private List<SettingsItem> localItems;
-	private List<SettingsItem> remoteItems;
-
 	private Stack<TaskType> runningTasks = new Stack<>();
 
 	private enum TaskType {
@@ -39,8 +36,7 @@ public class PrepareBackupTask {
 	}
 
 	public interface OnPrepareBackupListener {
-		void onBackupPrepared(@Nullable BackupInfo backupInfo, @Nullable List<SettingsItem> userFiles,
-							  @Nullable String error);
+		void onBackupPrepared(@Nullable BackupInfo backupInfo, @Nullable String error);
 	}
 
 	public PrepareBackupTask(@NonNull OsmandApplication app, @Nullable OnPrepareBackupListener listener) {
@@ -133,7 +129,6 @@ public class PrepareBackupTask {
 							files.add(remoteFile);
 						}
 					}
-					PrepareBackupTask.this.remoteItems = items;
 					PrepareBackupTask.this.remoteFiles = files;
 				} else {
 					onError("Download remote items error");
@@ -169,7 +164,7 @@ public class PrepareBackupTask {
 
 	private void onTasksDone() {
 		if (listener != null) {
-			listener.onBackupPrepared(result, remoteItems, error);
+			listener.onBackupPrepared(result, error);
 		}
 	}
 }

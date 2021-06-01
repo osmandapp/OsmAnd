@@ -1,4 +1,4 @@
-package net.osmand.plus.settings.fragments;
+package net.osmand.plus.backup.ui;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,14 +18,14 @@ import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupHelper.BackupInfo;
 import net.osmand.plus.backup.NetworkSettingsHelper.BackupExportListener;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
+import net.osmand.plus.backup.ui.cards.BackupStatusCard;
+import net.osmand.plus.backup.ui.cards.BackupUploadCard;
+import net.osmand.plus.backup.ui.cards.LocalBackupCard;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.backup.items.SettingsItem;
-
-import java.util.List;
 
 public class BackupStatusFragment extends BaseOsmAndFragment implements CardListener, BackupExportListener {
 
@@ -111,7 +111,7 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements CardList
 			app.getBackupHelper().prepareBackupInfo(new OnPrepareBackupListener() {
 
 				@Override
-				public void onBackupPrepared(@Nullable BackupInfo backupInfo, @Nullable List<SettingsItem> userFiles, String error) {
+				public void onBackupPrepared(@Nullable BackupInfo backupInfo, String error) {
 					AndroidUiHelper.setVisibility(View.INVISIBLE, progressBar);
 					BackupStatusFragment.this.error = error;
 					BackupStatusFragment.this.backupInfo = backupInfo;
@@ -156,7 +156,7 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements CardList
 	@Override
 	public void onBackupExportStarted() {
 		if (uploadCard != null) {
-			uploadCard.updateContent();
+			uploadCard.update();
 		}
 	}
 

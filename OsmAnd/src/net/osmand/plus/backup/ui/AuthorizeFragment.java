@@ -1,4 +1,4 @@
-package net.osmand.plus.settings.fragments;
+package net.osmand.plus.backup.ui;
 
 import android.net.Uri;
 import android.os.Bundle;

@@ -19,7 +19,6 @@
 			android:layout_marginLeft="@dimen/content_padding"
 			android:layout_marginRight="@dimen/content_padding"
 			android:tint="?attr/default_icon_color"
-			android:visibility="gone"
 			tools:srcCompat="@drawable/ic_map" />
 
 		<LinearLayout

@@ -1,4 +1,4 @@
-package net.osmand.plus.settings.fragments;
+package net.osmand.plus.backup.ui;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -24,6 +24,8 @@ import net.osmand.plus.chooseplan.ChoosePlanDialogFragment.ChoosePlanDialogType;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.settings.fragments.ExportSettingsFragment;
 
 import static net.osmand.plus.UiUtilities.setupDialogButton;
 import static net.osmand.plus.importfiles.ImportHelper.ImportType.SETTINGS;

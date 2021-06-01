@@ -96,6 +96,6 @@
 
 	<include
 		android:id="@+id/card_bottom_divider"
-		layout="@layout/list_item_divider" />
+		layout="@layout/card_bottom_divider" />
 
 </LinearLayout>

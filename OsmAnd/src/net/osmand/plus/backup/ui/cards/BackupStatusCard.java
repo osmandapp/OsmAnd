@@ -1,4 +1,4 @@
-package net.osmand.plus.settings.fragments;
+package net.osmand.plus.backup.ui.cards;
 
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
@@ -21,9 +21,10 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.BackupHelper.BackupInfo;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.settings.fragments.MainSettingsFragment;
 import net.osmand.util.Algorithms;
 
-import static net.osmand.plus.settings.fragments.BackupUploadCard.adjustIndicator;
+import static net.osmand.plus.backup.ui.cards.LocalBackupCard.adjustIndicator;
 
 public class BackupStatusCard extends BaseCard {
 
@@ -54,10 +55,9 @@ public class BackupStatusCard extends BaseCard {
 		itemsContainer = view.findViewById(R.id.items_container);
 
 		if (backupInfo != null) {
-			if (!Algorithms.isEmpty(backupInfo.itemsToMerge)) {
+			if (!Algorithms.isEmpty(backupInfo.filesToMerge)) {
 				status = BackupStatus.CONFLICTS;
-			} else if (!Algorithms.isEmpty(backupInfo.itemsToDownload)
-					|| !Algorithms.isEmpty(backupInfo.itemsToDelete)) {
+			} else if (!Algorithms.isEmpty(backupInfo.filesToUpload)) {
 				status = BackupStatus.MAKE_BACKUP;
 			}
 		} else if (!app.getSettings().isInternetConnectionAvailable()) {
@@ -77,6 +77,7 @@ public class BackupStatusCard extends BaseCard {
 	private void setupActionButton() {
 		View button = view.findViewById(R.id.action_button);
 		UiUtilities.setupDialogButton(nightMode, button, DialogButtonType.SECONDARY, status.actionTitleRes);
+		AndroidUtils.setBackground(app, button, nightMode, R.drawable.dlg_btn_transparent_light, R.drawable.dlg_btn_transparent_dark);
 		button.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {

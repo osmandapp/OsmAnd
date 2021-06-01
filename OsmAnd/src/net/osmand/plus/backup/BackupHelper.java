@@ -31,6 +31,7 @@ import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.AbstractProgress;
+import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
 
@@ -105,7 +106,6 @@ public class BackupHelper {
 
 	public interface OnCollectLocalFilesListener {
 		void onFileCollected(@NonNull LocalFile fileInfo);
-
 		void onFilesCollected(@NonNull List<LocalFile> fileInfos);
 	}
 
@@ -115,21 +115,17 @@ public class BackupHelper {
 
 	public interface OnUploadFileListener {
 		void onFileUploadProgress(@NonNull String type, @NonNull String fileName, int progress, int deltaWork);
-
 		void onFileUploadDone(@NonNull String type, @NonNull String fileName, long uploadTime, @Nullable String error);
 	}
 
 	public interface OnUploadFilesListener {
 		void onFileUploadProgress(@NonNull File file, int progress);
-
 		void onFileUploadDone(@NonNull File file);
-
 		void onFilesUploadDone(@NonNull Map<File, String> errors);
 	}
 
 	public interface OnDeleteFilesListener {
 		void onFileDeleteProgress(@NonNull RemoteFile file);
-
 		void onFilesDeleteDone(@NonNull Map<RemoteFile, String> errors);
 	}
 
@@ -138,17 +134,15 @@ public class BackupHelper {
 
 		@WorkerThread
 		void onFileDownloadedAsync(@NonNull File file);
-
 		void onFileDownloaded(@NonNull File file);
-
 		void onFilesDownloadDone(@NonNull Map<File, String> errors);
 	}
 
 	public static class BackupInfo {
-		public List<SettingsItem> itemsToDownload = new ArrayList<>();
-		public List<SettingsItem> itemsToUpload = new ArrayList<>();
-		public List<SettingsItem> itemsToDelete = new ArrayList<>();
-		public List<Pair<SettingsItem, SettingsItem>> itemsToMerge = new ArrayList<>();
+		public List<RemoteFile> filesToDownload = new ArrayList<>();
+		public List<LocalFile> filesToUpload = new ArrayList<>();
+		public List<RemoteFile> filesToDelete = new ArrayList<>();
+		public List<Pair<LocalFile, RemoteFile>> filesToMerge = new ArrayList<>();
 	}
 
 	public BackupHelper(@NonNull OsmandApplication app) {
@@ -716,13 +710,13 @@ public class BackupHelper {
 					String fileName = item.getFileName();
 					if (fileName == null) {
 						fileName = item.getDefaultFileName();
-					} else {
-						fileName = Algorithms.getFileWithoutDirs(fileName);
 					}
 					LocalFile localFile = new LocalFile();
 					localFile.item = item;
 					localFile.subfolder = "";
-					localFile.file = app.getAppPath(fileName);
+					if (item instanceof FileSettingsItem) {
+						localFile.file = ((FileSettingsItem) item).getFile();
+					}
 
 					UploadedFileInfo info = app.getBackupHelper().getDbHelper().getUploadedFileInfo(item.getType().name(), fileName);
 					if (info != null) {
@@ -825,19 +819,19 @@ public class BackupHelper {
 							long localModifiedTime = localFile.file.lastModified();
 							if (remoteUploadTime == localUploadTime) {
 								if (localUploadTime < localModifiedTime) {
-									info.itemsToUpload.add(localFile.item);
+									info.filesToUpload.add(localFile);
 								}
 							} else {
-								info.itemsToMerge.add(new Pair<>(localFile.item, remoteFile.item));
+								info.filesToMerge.add(new Pair<>(localFile, remoteFile));
 							}
 							break;
 						}
 					}
-					if (!hasLocalFile && remoteFile.item != null) {
+					if (!hasLocalFile) {
 						if (backupLastUploadedTime > 0 && backupLastUploadedTime >= remoteFile.getClienttimems()) {
-							info.itemsToDelete.add(remoteFile.item);
+							info.filesToDelete.add(remoteFile);
 						} else {
-							info.itemsToDownload.add(remoteFile.item);
+							info.filesToDownload.add(remoteFile);
 						}
 					}
 				}
@@ -850,7 +844,7 @@ public class BackupHelper {
 						}
 					}
 					if (!hasRemoteFile) {
-						info.itemsToUpload.add(localFile.item);
+						info.filesToUpload.add(localFile);
 					}
 				}
 				return info;

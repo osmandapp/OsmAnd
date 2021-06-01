@@ -19,13 +19,15 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.backup.ui.BackupAndRestoreFragment;
+import net.osmand.plus.backup.ui.BackupAuthorizationFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.profiles.data.ProfileDataUtils;
 import net.osmand.plus.profiles.SelectBaseProfileBottomSheet;
 import net.osmand.plus.profiles.SelectProfileBottomSheet.OnSelectProfileCallback;
+import net.osmand.plus.profiles.data.ProfileDataUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.util.Algorithms;
 
@@ -189,10 +191,10 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 
 	public static String getBackupTime(OsmandApplication app) {
 		long lastUploadedTime = app.getSettings().BACKUP_LAST_UPLOADED_TIME.get();
-		return getBackupTime(app, lastUploadedTime);
+		return getBackupTime(app, lastUploadedTime, "");
 	}
 
-	public static String getBackupTime(OsmandApplication app, long lastUploadedTime) {
+	public static String getBackupTime(OsmandApplication app, long lastUploadedTime, String def) {
 		if (lastUploadedTime > 0) {
 			long duration = (System.currentTimeMillis() - lastUploadedTime) / 1000;
 			if (duration > MIN_DURATION_FOR_DATE_FORMAT) {
@@ -201,7 +203,7 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 				return app.getString(R.string.duration_ago, OsmAndFormatter.getFormattedDuration((int) duration, app));
 			}
 		}
-		return "";
+		return def;
 	}
 
 	private void profileManagementPref() {

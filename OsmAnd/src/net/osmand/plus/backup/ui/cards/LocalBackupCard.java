@@ -1,4 +1,4 @@
-package net.osmand.plus.settings.fragments;
+package net.osmand.plus.backup.ui.cards;
 
 import android.graphics.drawable.Drawable;
 import android.view.View;
@@ -10,18 +10,20 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.fragments.ExportSettingsFragment;
 
 import static net.osmand.plus.importfiles.ImportHelper.ImportType.SETTINGS;
-import static net.osmand.plus.settings.fragments.BackupUploadCard.adjustIndicator;
 
 public class LocalBackupCard extends BaseCard {
 
+	private View localBackup;
 	private View backupToFile;
 	private View restoreFromFile;
 	private View localBackupDivider;
@@ -39,11 +41,11 @@ public class LocalBackupCard extends BaseCard {
 
 	@Override
 	protected void updateContent() {
+		localBackup = view.findViewById(R.id.local_backup);
 		backupToFile = view.findViewById(R.id.backup_to_file);
 		restoreFromFile = view.findViewById(R.id.restore_from_file);
 		localBackupDivider = view.findViewById(R.id.local_backup_divider);
 
-		View localBackup = view.findViewById(R.id.local_backup);
 		TextView title = localBackup.findViewById(android.R.id.title);
 		TextView description = localBackup.findViewById(android.R.id.summary);
 
@@ -55,11 +57,9 @@ public class LocalBackupCard extends BaseCard {
 			@Override
 			public void onClick(View v) {
 				buttonsVisible = !buttonsVisible;
-				adjustIndicator(app, buttonsVisible, localBackup, nightMode);
 				updateButtonsVisibility();
 			}
 		});
-		adjustIndicator(app, buttonsVisible, localBackup, nightMode);
 		setupBackupButton();
 		setupRestoreButton();
 		updateButtonsVisibility();
@@ -113,8 +113,20 @@ public class LocalBackupCard extends BaseCard {
 	}
 
 	private void updateButtonsVisibility() {
+		adjustIndicator(app, buttonsVisible, localBackup, nightMode);
 		AndroidUiHelper.updateVisibility(backupToFile, buttonsVisible);
 		AndroidUiHelper.updateVisibility(restoreFromFile, buttonsVisible);
 		AndroidUiHelper.updateVisibility(localBackupDivider, buttonsVisible);
+	}
+
+	public static void adjustIndicator(OsmandApplication app, boolean isExpanded, View row, boolean nightMode) {
+		ImageView indicator = row.findViewById(R.id.explicit_indicator);
+		if (!isExpanded) {
+			indicator.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_arrow_down, !nightMode));
+			indicator.setContentDescription(row.getContext().getString(R.string.access_collapsed_list));
+		} else {
+			indicator.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_arrow_up, !nightMode));
+			indicator.setContentDescription(row.getContext().getString(R.string.access_expanded_list));
+		}
 	}
 }
