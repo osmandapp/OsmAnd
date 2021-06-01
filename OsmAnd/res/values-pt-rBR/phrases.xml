@@ -3964,4 +3964,5 @@
     <string name="poi_operator_type_public">Tipo de operador: público</string>
     <string name="poi_climbing_grade_uiaa_min">Rota mais fácil (grau UIAA)</string>
     <string name="poi_climbing_grade_saxon_min">Rota mais fácil (grau saxão)</string>
+    <string name="poi_climbing_grade_french_min">Rota mais fácil (grau francês)</string>
 </resources>

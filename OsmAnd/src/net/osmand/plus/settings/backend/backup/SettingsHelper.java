@@ -122,7 +122,7 @@ public abstract class SettingsHelper {
 		typesMap.putAll(getMyPlacesItems());
 		typesMap.putAll(getResourcesItems());
 
-		return getFilteredSettingsItems(typesMap, settingsTypes, Collections.emptyList(), export);
+		return getFilteredSettingsItems(typesMap, settingsTypes, Collections.<SettingsItem>emptyList(), export);
 	}
 
 	public List<SettingsItem> getFilteredSettingsItems(
@@ -277,7 +277,7 @@ public abstract class SettingsHelper {
 				resourcesItems.put(ExportSettingsType.CUSTOM_ROUTING, Arrays.asList(fl));
 			}
 		}
-		List<OnlineRoutingEngine> onlineRoutingEngines = app.getOnlineRoutingHelper().getEngines();
+		List<OnlineRoutingEngine> onlineRoutingEngines = app.getOnlineRoutingHelper().getOnlyCustomEngines();
 		if (!Algorithms.isEmpty(onlineRoutingEngines)) {
 			resourcesItems.put(ExportSettingsType.ONLINE_ROUTING_ENGINES, onlineRoutingEngines);
 		}

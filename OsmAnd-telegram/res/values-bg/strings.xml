@@ -5,4 +5,5 @@
     <string name="last_update_from_telegram_date">Последна актуализация от Telegram: %1$s</string>
     <string name="shared_string_error_short">ГРЕШКА</string>
     <string name="shared_string_export">Експорт</string>
+    <string name="duration_ago">Преди %1$s</string>
 </resources>

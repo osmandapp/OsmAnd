@@ -343,7 +343,7 @@ public class BackupHelper {
 		headers.put("Accept-Encoding", "deflate, gzip");
 	}
 
-	public String uploadFileSync(@NonNull String fileName, @NonNull String type, @NonNull StreamWriter streamWriter,
+	public String uploadFileSync(@NonNull final String fileName, final @NonNull String type, @NonNull StreamWriter streamWriter,
 								 @Nullable final OnUploadFileListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 
@@ -378,7 +378,7 @@ public class BackupHelper {
 		return error;
 	}
 
-	public void uploadFile(@NonNull String fileName, @NonNull String type, @NonNull StreamWriter streamWriter,
+	public void uploadFile(@NonNull final String fileName, final @NonNull String type, @NonNull StreamWriter streamWriter,
 						   @Nullable final OnUploadFileListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 
@@ -558,7 +558,7 @@ public class BackupHelper {
 				getDownloadFileListListener(listener), EXECUTOR);
 	}
 
-	private OnRequestResultListener getDownloadFileListListener(@Nullable OnDownloadFileListListener listener) {
+	private OnRequestResultListener getDownloadFileListListener(@Nullable final OnDownloadFileListListener listener) {
 		return new OnRequestResultListener() {
 			@Override
 			public void onResult(@Nullable String resultJson, @Nullable String error) {
@@ -603,7 +603,7 @@ public class BackupHelper {
 											   @Nullable final OnDownloadFileListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 
-		Map<File, String> res = new HashMap<>();
+		final Map<File, String> res = new HashMap<>();
 		Map<String, String> params = new HashMap<>();
 		params.put("deviceid", getDeviceId());
 		params.put("accessToken", getAccessToken());

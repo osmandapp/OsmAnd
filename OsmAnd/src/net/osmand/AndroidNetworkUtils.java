@@ -582,7 +582,7 @@ public class AndroidNetworkUtils {
 									@NonNull Map<String, String> additionalParams,
 									@Nullable Map<String, String> headers,
 									@Nullable IProgress progress) {
-		BufferedInputStream bis = new BufferedInputStream(inputStream, 20 * 1024);
+		final BufferedInputStream bis = new BufferedInputStream(inputStream, 20 * 1024);
 		StreamWriter streamWriter = new StreamWriter() {
 			@Override
 			public void write(OutputStream outputStream, IProgress progress) throws IOException {
@@ -767,7 +767,7 @@ public class AndroidNetworkUtils {
 										final OnFileUploadCallback callback,
 										final Executor executor) {
 
-		BufferedInputStream bis = new BufferedInputStream(inputStream, 20 * 1024);
+		final BufferedInputStream bis = new BufferedInputStream(inputStream, 20 * 1024);
 		StreamWriter streamWriter = new StreamWriter() {
 			@Override
 			public void write(OutputStream outputStream, IProgress progress) throws IOException {
