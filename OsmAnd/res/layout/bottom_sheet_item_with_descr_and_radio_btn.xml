@@ -73,6 +73,8 @@
 		android:layout_height="1dp"
 		android:layout_marginStart="@dimen/bottom_sheet_divider_margin_start"
 		android:layout_marginLeft="@dimen/bottom_sheet_divider_margin_start"
-		android:background="?attr/divider_color" />
+		android:background="?attr/divider_color"
+		android:visibility="gone"
+		tools:visibility="visible" />
 
 </LinearLayout>

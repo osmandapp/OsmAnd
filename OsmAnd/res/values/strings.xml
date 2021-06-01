@@ -12,6 +12,14 @@
 
 -->
 
+    <string name="shared_string_predefined">Predefined</string>
+    <string name="failed_loading_predefined_engines">Failed to load the list of predefined templates.\nPlease check your Internet connection.</string>
+    <string name="provided_by">Provided by %1$s</string>
+    <string name="shared_string_external">External</string>
+    <string name="osmand_online_routing_promo">You can use predefined templates, or add custom online routing, supported: OSRM, Graphhopper, OpenRouteService, GPX.</string>
+    <string name="shared_string_online">Online</string>
+    <string name="shared_string_offline">Offline</string>
+    <string name="loading_list_of_routing_services">Loading list of available routing services</string>
     <string name="select_nav_profile_dialog_message">The \'Navigation type\' governs how routes are calculated. You can select between offline and online routing engines.</string>
     <string name="verification_code_missing_description">Waiting time for code can be 10 minutes, also you can check your spam folder. If it doesn\'t help, use button below.</string>
     <string name="verification_code_missing">I didn\'t receive verification code</string>

@@ -82,7 +82,7 @@ public class OsrmEngine extends JsonOnlineRoutingEngine {
 	@Override
 	protected void makeFullUrl(@NonNull StringBuilder sb,
 	                           @NonNull List<LatLon> path) {
-		String vehicleKey = get(EngineParameter.VEHICLE_KEY);
+		String vehicleKey = getVehicleKeyForUrl();
 		if (!isEmpty(vehicleKey)) {
 			sb.append(vehicleKey).append('/');
 		}

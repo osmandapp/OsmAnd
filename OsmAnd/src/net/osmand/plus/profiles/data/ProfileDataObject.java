@@ -1,7 +1,6 @@
-package net.osmand.plus.profiles;
+package net.osmand.plus.profiles.data;
 
 import androidx.annotation.ColorInt;
-import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 
 
@@ -68,6 +67,10 @@ public class ProfileDataObject implements Comparable<ProfileDataObject> {
 
 	@Override
 	public int compareTo(@NonNull ProfileDataObject another) {
+		return compareByName(another);
+	}
+
+	public int compareByName(@NonNull ProfileDataObject another) {
 		return this.name.compareToIgnoreCase(another.name);
 	}
 
