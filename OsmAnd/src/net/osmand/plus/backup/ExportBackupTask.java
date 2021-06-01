@@ -5,13 +5,14 @@ import android.os.AsyncTask;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.backup.BackupExporter.NetworkExportProgressListener;
 import net.osmand.plus.backup.NetworkSettingsHelper.BackupExportListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
-import net.osmand.plus.settings.backend.backup.SettingsHelper.ExportProgressListener;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 public class ExportBackupTask extends AsyncTask<Void, Integer, Boolean> {
 
@@ -20,8 +21,8 @@ public class ExportBackupTask extends AsyncTask<Void, Integer, Boolean> {
 	private BackupExportListener listener;
 
 	ExportBackupTask(@NonNull NetworkSettingsHelper helper,
-				   @Nullable BackupExportListener listener,
-				   @NonNull List<SettingsItem> items) {
+					 @Nullable BackupExportListener listener,
+					 @NonNull List<SettingsItem> items) {
 		this.helper = helper;
 		this.listener = listener;
 		this.exporter = new BackupExporter(helper.getApp().getBackupHelper(), getProgressListener());
@@ -71,12 +72,22 @@ public class ExportBackupTask extends AsyncTask<Void, Integer, Boolean> {
 		}
 	}
 
-	private ExportProgressListener getProgressListener() {
-		return new ExportProgressListener() {
+	private NetworkExportProgressListener getProgressListener() {
+		return new NetworkExportProgressListener() {
 			@Override
-			public void updateProgress(int value) {
+			public void updateItemProgress(@NonNull String type, @NonNull String fileName, int value) {
+
+			}
+
+			@Override
+			public void updateGeneralProgress(int value) {
 				exporter.setCancelled(isCancelled());
 				publishProgress(value);
+			}
+
+			@Override
+			public void networkExportDone(@NonNull Map<String, String> errors) {
+
 			}
 		};
 	}

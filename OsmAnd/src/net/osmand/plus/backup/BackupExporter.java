@@ -5,18 +5,29 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.backup.BackupHelper.OnUploadFileListener;
 import net.osmand.plus.settings.backend.backup.Exporter;
-import net.osmand.plus.settings.backend.backup.SettingsHelper.ExportProgressListener;
 import net.osmand.util.Algorithms;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BackupExporter extends Exporter {
 
 	private final BackupHelper backupHelper;
+	private final NetworkExportProgressListener listener;
 
-	BackupExporter(@NonNull BackupHelper backupHelper, @Nullable ExportProgressListener progressListener) {
-		super(progressListener);
+	public interface NetworkExportProgressListener {
+		void updateItemProgress(@NonNull String type, @NonNull String fileName, int value);
+
+		void updateGeneralProgress(int value);
+
+		void networkExportDone(@NonNull Map<String, String> errors);
+	}
+
+	BackupExporter(@NonNull BackupHelper backupHelper, @Nullable NetworkExportProgressListener listener) {
+		super(null);
 		this.backupHelper = backupHelper;
+		this.listener = listener;
 	}
 
 	@Override
@@ -25,22 +36,23 @@ public class BackupExporter extends Exporter {
 	}
 
 	private void writeItems() throws IOException {
+		Map<String, String> errors = new HashMap<>();
 		OnUploadFileListener uploadFileListener = new OnUploadFileListener() {
 			final long[] itemsProgress = {0};
 
 			@Override
 			public void onFileUploadProgress(@NonNull String type, @NonNull String fileName, int progress, int deltaWork) {
 				itemsProgress[0] += deltaWork;
-				ExportProgressListener progressListener = getProgressListener();
-				if (progressListener != null) {
-					progressListener.updateProgress((int) itemsProgress[0] / (1 << 10));
+				if (listener != null) {
+					listener.updateItemProgress(type, fileName, progress);
+					listener.updateGeneralProgress((int) itemsProgress[0] / (1 << 10));
 				}
 			}
 
 			@Override
 			public void onFileUploadDone(@NonNull String type, @NonNull String fileName, long uploadTime, @Nullable String error) {
 				if (!Algorithms.isEmpty(error)) {
-					setCancelled(true);
+					errors.put(type + "/" + fileName, error);
 				} else {
 					backupHelper.updateFileUploadTime(type, fileName, uploadTime);
 				}
@@ -50,6 +62,9 @@ public class BackupExporter extends Exporter {
 		writeItems(networkWriter);
 		if (!isCancelled()) {
 			backupHelper.updateBackupUploadTime();
+		}
+		if (listener != null) {
+			listener.networkExportDone(errors);
 		}
 	}
 }
