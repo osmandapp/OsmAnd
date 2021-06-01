@@ -188,7 +188,7 @@ public class EntityParser {
 					String[] vls = value.split(";");
 					for(String v : vls) {
 						v = v.trim();
-						Amenity am = poiTypes.parseAmenity(key, value, purerelation, ts);
+						Amenity am = poiTypes.parseAmenity(key, v, purerelation, ts);
 						addAmenity(entity, amenitiesList, ts, am);
 					}
 				} else {
