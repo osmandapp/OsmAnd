@@ -195,7 +195,7 @@ public abstract class TilesCache<T> {
 			}
 
 		}
-		return cache.get(req.tileId).tile;
+		return get(req.tileId, req.timestamp);
 	}
 
 	protected abstract T getTileObject(TileLoadDownloadRequest req);
