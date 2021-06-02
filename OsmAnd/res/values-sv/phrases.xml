@@ -935,7 +935,7 @@
     <string name="poi_car_sharing">Samåkning</string>
     <string name="poi_boat_sharing">Båtdelning</string>
     <string name="poi_dock">Kaj</string>
-    <string name="poi_toilets">Vilorum;Toaletter</string>
+    <string name="poi_toilets">Toaletter;WC</string>
     <string name="poi_shower">Dusch</string>
     <string name="poi_sauna">Bastu</string>
     <string name="poi_brothel">Bordell</string>

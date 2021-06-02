@@ -784,7 +784,7 @@
     <string name="precise_routing_mode">Exakt ruttning (alfa)</string>
     <string name="av_def_action_picture">Ta ett foto</string>
     <string name="dropbox_plugin_description">Dropbox-modulen låter dig synkronisera spår och ljud-/videoanteckningar med ditt Dropbox-konto.</string>
-    <string name="srtm_paid_version_msg">Köp gärna pluginen Höjdkurvor på Market för att stödja fortsatt utveckling.</string>
+    <string name="srtm_paid_version_msg">Köp gärna pluginet Höjdkurvor för att stödja fortsatt utveckling.</string>
     <string name="av_def_action_audio">Spela in ljud</string>
     <string name="av_widget_action_descr">Standardåtgärd för widget:</string>
     <string name="av_widget_action">Standardåtgärd för widget</string>
@@ -1083,7 +1083,7 @@
     <string name="lang_lv">Lettiska</string>
     <string name="lang_lt">Litauiska</string>
     <string name="lang_mr">Marathi</string>
-    <string name="lang_no">Norska</string>
+    <string name="lang_no">Norska Bokmål</string>
     <string name="lang_pl">Polska</string>
     <string name="lang_pt">Portugisiska</string>
     <string name="lang_ro">Rumänska</string>
@@ -1249,7 +1249,7 @@
     <string name="traffic_warning_stop">Stopptecken</string>
     <string name="traffic_warning">Trafikskylt</string>
     <string name="traffic_warning_speed_camera">Fartkamera</string>
-    <string name="traffic_warning_calming">Trafikdämpning</string>
+    <string name="traffic_warning_calming">Farthinder</string>
     <string name="local_index_description">Tryck på en post för att se fler detaljer, tryck och håll för att inaktivera eller ta bort. Data på enheten (%1$s ledigt):</string>
     <string name="text_size_descr">Ange textstorlek på kartan.</string>
     <string name="text_size">Textstorlek</string>
@@ -2884,8 +2884,8 @@
     <string name="edit_profile_setup_map_subtitle">Välj kartalternativ för profilen</string>
     <string name="edit_profile_screen_options_subtitle">Välj skärmalternativ för profilen</string>
     <string name="edit_profile_nav_settings_subtitle">Välj navigeringsinställningar för profilen</string>
-    <string name="routing_attr_max_num_changes_description">Ange övre gräns för ändringar</string>
-    <string name="routing_attr_max_num_changes_name">Antal ändringar</string>
+    <string name="routing_attr_max_num_changes_description">Ange max gräns för antal byten</string>
+    <string name="routing_attr_max_num_changes_name">Antal byten</string>
     <string name="turn_screen_on_router">Vakna vid kurva</string>
     <string name="turn_screen_on_time_descr">Justera hur länge skärmen ska vara på.</string>
     <string name="turn_screen_on_sensor">Använd närhetssensor</string>

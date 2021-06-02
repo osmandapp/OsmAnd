@@ -3962,4 +3962,7 @@
     <string name="poi_glacier_debris_cover_none">Purdmaterjali kate: puudub</string>
     <string name="poi_glacier_status_oscillating">Liustiku olek: võnkuv</string>
     <string name="poi_glacier_status_marked_retreat">Liustiku olek: märgitud taandumine</string>
+    <string name="poi_climbing_grade_uiaa_min">Kaljuronimise lihtsaim marsruut (UIAA süsteemi järgi)</string>
+    <string name="poi_climbing_grade_french_min">Kaljuronimise lihtsaim marsruut (prantsuse süsteemi järgi)</string>
+    <string name="poi_climbing_grade_saxon_min">Kaljuronimise lihtsaim marsruut (anglosaksi süsteemi järgi)</string>
 </resources>
