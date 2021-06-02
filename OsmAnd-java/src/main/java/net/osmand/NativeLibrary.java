@@ -383,16 +383,17 @@ public class NativeLibrary {
 
 	public static class RenderedObject extends MapObject {
 		private Map<String, String> tags = new LinkedHashMap<>();
-		private QuadRect bbox = new QuadRect(); 
+		private QuadRect bbox = new QuadRect();
 		private TIntArrayList x = new TIntArrayList();
 		private TIntArrayList y = new TIntArrayList();
 		private String iconRes;
 		private int order;
 		private boolean visible;
+		private boolean drawOnPath;
 		private LatLon labelLatLon;
 		private int labelX = 0;
 		private int labelY = 0;
-		
+
 		public Map<String, String> getTags() {
 			return tags;
 		}
@@ -437,31 +438,39 @@ public class NativeLibrary {
 		public void setIconRes(String iconRes) {
 			this.iconRes = iconRes;
 		}
-		
+
 		public void setVisible(boolean visible) {
 			this.visible = visible;
 		}
-		
+
 		public boolean isVisible() {
 			return visible;
 		}
-		
+
+		public void setDrawOnPath(boolean drawOnPath) {
+			this.drawOnPath = drawOnPath;
+		}
+
+		public boolean isDrawOnPath() {
+			return drawOnPath;
+		}
+
 		public TIntArrayList getY() {
 			return y;
 		}
-		
+
 		public void setBbox(int left, int top, int right, int bottom) {
 			bbox = new QuadRect(left, top, right, bottom);
 		}
-		
+
 		public QuadRect getBbox() {
 			return bbox;
 		}
-		
+
 		public void setNativeId(long id) {
 			setId(id);
 		}
-		
+
 		public void putTag(String t, String v) {
 			tags.put(t, v);
 		}
