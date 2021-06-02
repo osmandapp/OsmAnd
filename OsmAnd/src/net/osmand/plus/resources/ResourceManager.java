@@ -390,10 +390,10 @@ public class ResourceManager {
 		return cache != null && cache.tileExistOnFileSystem(file, map, x, y, zoom);
 	}
 
-	public void clearTileForMap(String file, ITileSource map, int x, int y, int zoom) {
+	public void clearTileForMap(String file, ITileSource map, int x, int y, int zoom, long requestTimestamp) {
 		TilesCache cache = getTilesCache(map);
 		if (cache != null) {
-			cache.getTileForMap(file, map, x, y, zoom, true, false, true, true);
+			cache.getTileForMap(file, map, x, y, zoom, true, false, true, requestTimestamp);
 		}
 	}
 
@@ -413,9 +413,11 @@ public class ResourceManager {
 		return cache != null && cache.getRequestedTile(req) != null;
 	}
 
-	public boolean hasTileForMapSync(String file, ITileSource map, int x, int y, int zoom, boolean loadFromInternetIfNeeded) {
+	public boolean hasTileForMapSync(String file, ITileSource map, int x, int y, int zoom,
+									 boolean loadFromInternetIfNeeded, long requestTimestamp) {
 		TilesCache cache = getTilesCache(map);
-		return cache != null && cache.getTileForMapSync(file, map, x, y, zoom, loadFromInternetIfNeeded) != null;
+		return cache != null
+				&& cache.getTileForMapSync(file, map, x, y, zoom, loadFromInternetIfNeeded, requestTimestamp) != null;
 	}
 
 	public void clearCacheAndTiles(@NonNull ITileSource map) {

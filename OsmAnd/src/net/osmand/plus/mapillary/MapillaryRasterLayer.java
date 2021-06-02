@@ -60,7 +60,7 @@ class MapillaryRasterLayer extends MapTileLayer implements MapillaryLayer {
 	}
 
 	@Override
-	public void drawTileMap(Canvas canvas, RotatedTileBox tileBox) {
+	public void drawTileMap(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
 		ITileSource map = this.map;
 		if (map == null) {
 			return;
@@ -69,7 +69,7 @@ class MapillaryRasterLayer extends MapTileLayer implements MapillaryLayer {
 		if (tileBox.getZoom() > maxZoom) {
 			return;
 		}
-		super.drawTileMap(canvas, tileBox);
+		super.drawTileMap(canvas, tileBox, drawSettings);
 		drawSelectedPoint(canvas, tileBox);
 	}
 }
