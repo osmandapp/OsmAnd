@@ -37,6 +37,12 @@
 
 			<include layout="@layout/card_top_divider" />
 
+			<include
+				android:id="@+id/select_types_container"
+				layout="@layout/preference_with_descr" />
+
+			<include layout="@layout/list_item_divider" />
+
 			<LinearLayout
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
