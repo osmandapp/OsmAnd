@@ -8,8 +8,10 @@ import net.osmand.data.LatLon;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
+import net.osmand.plus.onlinerouting.engine.EngineType;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.OnlineRoutingResponse;
+import net.osmand.plus.routing.RouteCalculationParams;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 
@@ -24,6 +26,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -117,6 +120,18 @@ public class OnlineRoutingHelper {
 		} catch (IOException ignored) {
 		}
 		return content.toString();
+	}
+
+	public OnlineRoutingEngine createInitStateEngine(RouteCalculationParams params) {
+		String routingProfile = params.mode.getRoutingProfile();
+		boolean isCarBicycleFoot = routingProfile.equals("car") || routingProfile.equals("bicycle") || routingProfile.equals("pedestrian");
+		Map<String, String> paramsOnlineRouting = new HashMap<>();
+		paramsOnlineRouting.put(EngineParameter.VEHICLE_KEY.name(), routingProfile);
+		if (isCarBicycleFoot) {
+			return EngineType.OSRM_TYPE.newInstance(paramsOnlineRouting);
+		} else {
+			return null;
+		}
 	}
 
 	private InputStream getInputStream(@NonNull HttpURLConnection connection) throws IOException {

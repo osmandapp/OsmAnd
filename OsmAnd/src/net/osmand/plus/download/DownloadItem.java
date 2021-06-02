@@ -40,8 +40,16 @@ public abstract class DownloadItem {
 		return getFormattedMb(ctx, getSizeToDownloadInMb());
 	}
 
-	public String getVisibleName(Context ctx, OsmandRegions osmandRegions, String format) {
-		return type.getVisibleName(this, ctx, osmandRegions, format);
+	public String getVisibleName(Context ctx, OsmandRegions osmandRegions) {
+		return type.getVisibleName(this, ctx, osmandRegions, true, "%1$s %2$s");
+	}
+
+	public String getVisibleName(Context ctx, OsmandRegions osmandRegions, boolean includingParent) {
+		return type.getVisibleName(this, ctx, osmandRegions, includingParent, "%1$s %2$s");
+	}
+
+	public String getVisibleName(Context ctx, OsmandRegions osmandRegions, boolean includingParent, String format) {
+		return type.getVisibleName(this, ctx, osmandRegions, includingParent, format);
 	}
 
 	public String getVisibleDescription(OsmandApplication ctx) {

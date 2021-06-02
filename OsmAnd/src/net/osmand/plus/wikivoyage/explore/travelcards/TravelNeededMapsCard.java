@@ -123,7 +123,7 @@ public class TravelNeededMapsCard extends BaseTravelCard {
 			((ImageView) view.findViewById(R.id.icon))
 					.setImageDrawable(getActiveIcon(item.getType().getIconResource()));
 			((TextView) view.findViewById(R.id.title))
-					.setText(item.getVisibleName(app, app.getRegions(), "%2$s"));
+					.setText(item.getVisibleName(app, app.getRegions(), false));
 			((TextView) view.findViewById(R.id.description)).setText(getItemDescription(item));
 
 			ImageView iconAction = (ImageView) view.findViewById(R.id.icon_action);

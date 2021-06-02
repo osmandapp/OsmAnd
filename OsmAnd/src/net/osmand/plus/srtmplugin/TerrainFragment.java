@@ -398,7 +398,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 					for (final IndexItem indexItem : terrainItems) {
 						ContextMenuItem.ItemBuilder itemBuilder = new ContextMenuItem.ItemBuilder()
 								.setLayout(R.layout.list_item_icon_and_download)
-								.setTitle(indexItem.getVisibleName(app, app.getRegions(), "%2$s"))
+								.setTitle(indexItem.getVisibleName(app, app.getRegions(), false))
 								.setDescription(mode == HILLSHADE
 										? HILLSHADE_FILE.getString(app) + " • " + indexItem.getSizeDescription(app)
 										: SLOPE_FILE.getString(app) + " • " + indexItem.getSizeDescription(app))

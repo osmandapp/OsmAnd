@@ -133,7 +133,7 @@ public class WikipediaPoiMenu {
 						boolean isLastItem = i == wikiIndexes.size() - 1;
 						ContextMenuItem.ItemBuilder itemBuilder = new ContextMenuItem.ItemBuilder()
 								.setLayout(R.layout.list_item_icon_and_download)
-								.setTitle(indexItem.getVisibleName(app, app.getRegions(), "%2$s"))
+								.setTitle(indexItem.getVisibleName(app, app.getRegions(), false))
 								.setDescription(DownloadActivityType.WIKIPEDIA_FILE.getString(app) + " • " + indexItem.getSizeDescription(app))
 								.setIcon(DownloadActivityType.WIKIPEDIA_FILE.getIconResource())
 								.hideDivider(isLastItem)

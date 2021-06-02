@@ -285,7 +285,7 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 
 			BaseBottomSheetItem mapIndexItem = new BottomSheetItemWithDescription.Builder()
 					.setDescription(indexItem.getType().getString(app) + " • " + indexItem.getSizeDescription(app))
-					.setTitle(indexItem.getVisibleName(app, app.getRegions(), "%2$s"))
+					.setTitle(indexItem.getVisibleName(app, app.getRegions(), false))
 					.setIcon(getContentIcon(indexItem.getType().getIconResource()))
 					.setOnClickListener(new View.OnClickListener() {
 						@Override

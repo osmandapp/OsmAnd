@@ -163,7 +163,7 @@ public class ItemViewHolder {
 		if (showTypeInName) {
 			name = downloadItem.getType().getString(context);
 		} else {
-			name = downloadItem.getVisibleName(context, context.getMyApplication().getRegions(), "%2$s");
+			name = downloadItem.getVisibleName(context, context.getMyApplication().getRegions(), showParentRegionName);
 		}
 		String text = (!Algorithms.isEmpty(cityName) && !cityName.equals(name) ? cityName + "\n" : "") + name;
 		nameTextView.setText(text);
@@ -513,7 +513,7 @@ public class ItemViewHolder {
 			message = context.getString(R.string.delete_number_files_question, downloadedFiles.size());
 		} else {
 			OsmandRegions regions = app.getRegions();
-			String visibleName = downloadItem.getVisibleName(context, regions, "%1$s %2$s");
+			String visibleName = downloadItem.getVisibleName(context, regions);
 			String fileName = FileNameTranslationHelper.getFileName(context, regions, visibleName);
 			message = context.getString(R.string.delete_confirmation_msg, fileName);
 		}

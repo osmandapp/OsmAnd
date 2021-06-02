@@ -267,7 +267,7 @@ public class ContourLinesMenu {
 						for (final IndexItem indexItem : srtms) {
 							ContextMenuItem.ItemBuilder itemBuilder = new ContextMenuItem.ItemBuilder()
 									.setLayout(R.layout.list_item_icon_and_download)
-									.setTitle(indexItem.getVisibleName(app, app.getRegions(), "%2$s"))
+									.setTitle(indexItem.getVisibleName(app, app.getRegions(), false))
 									.setDescription(DownloadActivityType.SRTM_COUNTRY_FILE.getString(app) + " • " + indexItem.getSizeDescription(app))
 									.setIcon(DownloadActivityType.SRTM_COUNTRY_FILE.getIconResource())
 									.setListener(new ContextMenuAdapter.ItemClickListener() {

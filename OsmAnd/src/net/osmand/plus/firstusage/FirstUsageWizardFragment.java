@@ -193,7 +193,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 				TextView mapTitle = (TextView) view.findViewById(R.id.map_download_title);
 				TextView mapDescription = (TextView) view.findViewById(R.id.map_download_desc);
 				if (mapIndexItem != null) {
-					mapTitle.setText(mapIndexItem.getVisibleName(getContext(), getMyApplication().getRegions(), "%2$s"));
+					mapTitle.setText(mapIndexItem.getVisibleName(getContext(), getMyApplication().getRegions(), false));
 					mapDescription.setText(mapIndexItem.getSizeDescription(getContext()));
 				}
 				view.findViewById(R.id.map_download_action_button).setOnClickListener(new View.OnClickListener() {
@@ -217,7 +217,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 				break;
 			case MAP_DOWNLOAD:
 				if (mapIndexItem != null) {
-					String mapName = mapIndexItem.getVisibleName(getContext(), getMyApplication().getRegions(), "%2$s");
+					String mapName = mapIndexItem.getVisibleName(getContext(), getMyApplication().getRegions(), false);
 					TextView mapNameTextView = (TextView) view.findViewById(R.id.map_downloading_title);
 					mapNameTextView.setText(mapName);
 					final TextView mapDescriptionTextView = (TextView) view.findViewById(R.id.map_downloading_desc);

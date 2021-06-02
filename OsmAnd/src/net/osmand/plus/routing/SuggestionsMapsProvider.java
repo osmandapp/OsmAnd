@@ -7,9 +7,7 @@ import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.onlinerouting.EngineParameter;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
-import net.osmand.plus.onlinerouting.engine.EngineType;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.util.Algorithms;
 
@@ -17,11 +15,9 @@ import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import static net.osmand.util.MapUtils.calculateMidPoint;
 
@@ -48,14 +44,18 @@ public class SuggestionsMapsProvider {
 	}
 
 	public List<Location> getLocationBasedOnDistanceInterval(List<Location> points) {
-		for (int i = 0; i < points.size(); i++) {
-			int nextIndex = i + 1 < points.size() ? i + 1 : i;
-			while (points.get(i).distanceTo(points.get(nextIndex)) > DISTANCE) {
-				Location location = calculateMidPoint(points.get(i), points.get(nextIndex));
-				points.add(nextIndex, location);
+		List<Location> pointsBasedOnDistance = new ArrayList<>(points.size());
+		for (Location location : points) {
+			pointsBasedOnDistance.add(new Location(location));
+		}
+		for (int i = 0; i < pointsBasedOnDistance.size() - 1; i++) {
+			int nextIndex = i + 1;
+			while (pointsBasedOnDistance.get(i).distanceTo(pointsBasedOnDistance.get(nextIndex)) > DISTANCE) {
+				Location location = calculateMidPoint(pointsBasedOnDistance.get(i), pointsBasedOnDistance.get(nextIndex));
+				pointsBasedOnDistance.add(nextIndex, location);
 			}
 		}
-		return points;
+		return removeRedundantPoints(pointsBasedOnDistance);
 	}
 
 	public LinkedList<Location> getStartFinishIntermediatesPoints(String locationProvider) {
@@ -75,18 +75,19 @@ public class SuggestionsMapsProvider {
 		List<Location> route;
 		List<Location> routeLocation = new ArrayList<>();
 		OsmandApplication app = params.ctx;
+		OnlineRoutingHelper onlineRoutingHelper = app.getOnlineRoutingHelper();
 		OnlineRoutingHelper helper = app.getOnlineRoutingHelper();
 		LinkedList<Location> location = getStartFinishIntermediatesPoints("");
 		for (Location e : location) {
 			points.add(new LatLon(e.getLatitude(), e.getLongitude()));
 		}
 		OnlineRoutingEngine.OnlineRoutingResponse response =
-				helper.calculateRouteOnline(createInitStateEngine(), points, params.leftSide);
+				helper.calculateRouteOnline(onlineRoutingHelper.createInitStateEngine(params), points, params.leftSide);
 		if (response != null) {
 			route = response.getRoute();
 			routeLocation.addAll(route);
 		}
-		return getOnlineLocationsBasedOnDistance(routeLocation);
+		return removeRedundantPoints(routeLocation);
 	}
 
 	public List<WorldRegion> getMissingMaps(List<Location> points) throws IOException {
@@ -124,22 +125,15 @@ public class SuggestionsMapsProvider {
 	}
 
 	@NonNull
-	private List<Location> getOnlineLocationsBasedOnDistance(List<Location> routeLocation) {
+	private List<Location> removeRedundantPoints(List<Location> routeLocation) {
 		List<Location> mapsBasedOnPoints = new ArrayList<>();
-		for (int i = 0, j; i < routeLocation.size(); i = j) {
-			for (j = i + 1; j < routeLocation.size(); j++) {
-				if (routeLocation.get(i).distanceTo(routeLocation.get(j)) >= DISTANCE) {
-					mapsBasedOnPoints.add(routeLocation.get(j));
-					break;
-				}
+		for (int i = 0, j = i + 1; j < routeLocation.size(); i = j++) {
+			while (routeLocation.get(i).distanceTo(routeLocation.get(j)) < DISTANCE && j < routeLocation.size() - 1) {
+				j++;
 			}
+			mapsBasedOnPoints.add(routeLocation.get(j));
 		}
 		return mapsBasedOnPoints;
 	}
 
-	private OnlineRoutingEngine createInitStateEngine() {
-		Map<String, String> paramsOnlineRouting = new HashMap<>();
-		paramsOnlineRouting.put(EngineParameter.VEHICLE_KEY.name(), params.mode.getRoutingProfile());
-		return EngineType.OSRM_TYPE.newInstance(paramsOnlineRouting);
-	}
 }

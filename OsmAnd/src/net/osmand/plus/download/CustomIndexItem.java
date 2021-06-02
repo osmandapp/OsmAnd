@@ -66,8 +66,14 @@ public class CustomIndexItem extends IndexItem {
 	}
 
 	@Override
-	public String getVisibleName(Context ctx, OsmandRegions osmandRegions, String format) {
-		return getVisibleName(ctx, osmandRegions, "%1$s");
+	public String getVisibleName(Context ctx, OsmandRegions osmandRegions) {
+		return getVisibleName(ctx, osmandRegions, true);
+	}
+
+	@Override
+	public String getVisibleName(Context ctx, OsmandRegions osmandRegions, boolean includingParent) {
+		String name = super.getVisibleName(ctx, osmandRegions, includingParent);
+		return JsonUtils.getLocalizedResFromMap(ctx, names, name);
 	}
 
 	public String getSubName(Context ctx) {
