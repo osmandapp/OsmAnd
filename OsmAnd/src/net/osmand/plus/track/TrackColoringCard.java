@@ -36,14 +36,16 @@ public class TrackColoringCard extends BaseCard {
 	private final static String SOLID_COLOR = "solid_color";
 	private static final Log log = PlatformUtil.getLog(TrackColoringCard.class);
 
-	private GPXTrackAnalysis gpxTrackAnalysis;
-	private TrackDrawInfo trackDrawInfo;
+	private final GPXTrackAnalysis gpxTrackAnalysis;
+	private final TrackDrawInfo trackDrawInfo;
 
 	private TrackColoringAdapter coloringAdapter;
 	private TrackAppearanceItem selectedAppearanceItem;
 	private List<TrackAppearanceItem> appearanceItems;
 
-	public TrackColoringCard(MapActivity mapActivity, GPXTrackAnalysis gpxTrackAnalysis, TrackDrawInfo trackDrawInfo) {
+	public TrackColoringCard(@NonNull MapActivity mapActivity,
+							 @NonNull GPXTrackAnalysis gpxTrackAnalysis,
+							 @NonNull TrackDrawInfo trackDrawInfo) {
 		super(mapActivity);
 		this.trackDrawInfo = trackDrawInfo;
 		this.gpxTrackAnalysis = gpxTrackAnalysis;
@@ -84,8 +86,8 @@ public class TrackColoringCard extends BaseCard {
 		items.add(new TrackAppearanceItem(SOLID_COLOR, app.getString(R.string.track_coloring_solid), R.drawable.ic_action_circle, true));
 		for (GradientScaleType scaleType : GradientScaleType.values()) {
 			boolean isAvailable = gpxTrackAnalysis.isColorizationTypeAvailable(scaleType.toColorizationType());
-			items.add(new TrackAppearanceItem(scaleType.getTypeName(),
-					scaleType.getHumanString(app), scaleType.getIconId(), isAvailable));
+			items.add(new TrackAppearanceItem(scaleType.getTypeName(), scaleType.getHumanString(app),
+					scaleType.getIconId(), isAvailable || trackDrawInfo.isCurrentRecording()));
 		}
 		return items;
 	}
