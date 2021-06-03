@@ -352,7 +352,6 @@ class RouteRecalculationHelper {
 			}
 			RouteCalculationResult prev = routingHelper.getRoute();
 			synchronized (routingHelper) {
-				routingHelper.setRoute(res);
 				if (res.isCalculated()) {
 					if (!params.inSnapToRoadMode && !params.inPublicTransportMode) {
 						routingHelper.setRoute(res);
@@ -383,9 +382,6 @@ class RouteRecalculationHelper {
 				} else {
 					routeCalcError = app.getString(R.string.empty_route_calculated);
 					routeCalcErrorShort = app.getString(R.string.empty_route_calculated);
-				}
-				if (res.getDownloadMaps().isEmpty()) {
-					showMessage(routeCalcError);
 				}
 			}
 			app.getNotificationHelper().refreshNotification(NAVIGATION);

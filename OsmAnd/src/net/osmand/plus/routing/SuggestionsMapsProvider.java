@@ -82,7 +82,7 @@ public class SuggestionsMapsProvider {
 			points.add(new LatLon(e.getLatitude(), e.getLongitude()));
 		}
 		OnlineRoutingEngine.OnlineRoutingResponse response =
-				helper.calculateRouteOnline(onlineRoutingHelper.createInitStateEngine(params), points, params.leftSide);
+				helper.calculateRouteOnline(onlineRoutingHelper.startOsrmEngine(params), points, params.leftSide);
 		if (response != null) {
 			route = response.getRoute();
 			routeLocation.addAll(route);
@@ -127,11 +127,11 @@ public class SuggestionsMapsProvider {
 	@NonNull
 	private List<Location> removeRedundantPoints(List<Location> routeLocation) {
 		List<Location> mapsBasedOnPoints = new ArrayList<>();
-		for (int i = 0, j = i + 1; j < routeLocation.size(); i = j++) {
-			while (routeLocation.get(i).distanceTo(routeLocation.get(j)) < DISTANCE && j < routeLocation.size() - 1) {
-				j++;
+		for (int i = 0, j = i + 1; j < routeLocation.size() - 1; j++) {
+			if (routeLocation.get(i).distanceTo(routeLocation.get(j)) >= DISTANCE) {
+				mapsBasedOnPoints.add(routeLocation.get(j));
+				i = j;
 			}
-			mapsBasedOnPoints.add(routeLocation.get(j));
 		}
 		return mapsBasedOnPoints;
 	}

@@ -12,6 +12,7 @@ import net.osmand.plus.onlinerouting.engine.EngineType;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.OnlineRoutingResponse;
 import net.osmand.plus.routing.RouteCalculationParams;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 
@@ -122,11 +123,11 @@ public class OnlineRoutingHelper {
 		return content.toString();
 	}
 
-	public OnlineRoutingEngine createInitStateEngine(RouteCalculationParams params) {
-		String routingProfile = params.mode.getRoutingProfile();
-		boolean isCarBicycleFoot = routingProfile.equals("car") || routingProfile.equals("bicycle") || routingProfile.equals("pedestrian");
+	public OnlineRoutingEngine startOsrmEngine(RouteCalculationParams params) {
+		ApplicationMode mode = params.ctx.getRoutingHelper().getAppMode();
+		boolean isCarBicycleFoot = mode.equals(ApplicationMode.CAR) || mode.equals(ApplicationMode.BICYCLE) || mode.equals(ApplicationMode.PEDESTRIAN);
 		Map<String, String> paramsOnlineRouting = new HashMap<>();
-		paramsOnlineRouting.put(EngineParameter.VEHICLE_KEY.name(), routingProfile);
+		paramsOnlineRouting.put(EngineParameter.VEHICLE_KEY.name(), mode.getStringKey());
 		if (isCarBicycleFoot) {
 			return EngineType.OSRM_TYPE.newInstance(paramsOnlineRouting);
 		} else {

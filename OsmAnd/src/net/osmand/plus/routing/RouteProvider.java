@@ -76,6 +76,15 @@ public class RouteProvider {
 	private static final int MIN_DISTANCE_FOR_INSERTING_ROUTE_SEGMENT = 60;
 	private static final int ADDITIONAL_DISTANCE_FOR_START_POINT = 300;
 	private static final int MIN_STRAIGHT_DIST = 50000;
+	private static List<WorldRegion> missingMaps;
+
+	public interface OnMissingMapsListener {
+		void onUpdateMissingMaps(List<WorldRegion> missingMaps);
+	}
+	
+	public static void setMissingMapsListener(OnMissingMapsListener eventListener) {
+		eventListener.onUpdateMissingMaps(missingMaps);
+	}
 
 	public static Location createLocation(WptPt pt){
 		Location loc = new Location("OsmandRouteProvider");
@@ -114,7 +123,9 @@ public class RouteProvider {
 					List<Location> pointsStraightLine = suggestionsMapsProvider.getLocationBasedOnDistanceInterval(points);
 					List<WorldRegion> suggestedMapsOnStraightLine = suggestionsMapsProvider.getMissingMaps(pointsStraightLine);
 					if (!Algorithms.isEmpty(suggestionsMapsStartFinishIntermediates)) {
-						res = new RouteCalculationResult(suggestedMapsOnStraightLine);
+						missingMaps = suggestionsMapsProvider.getMissingMaps(pointsStraightLine);
+						params.ctx.getRoutingHelper().getRoute().setNavigationDisabled(true);
+						res = new RouteCalculationResult(null);
 					} else {
 						if (!suggestionsMapsProvider.isPointOnWater()) {
 							params.missingMaps = suggestedMapsOnStraightLine;
@@ -147,7 +158,7 @@ public class RouteProvider {
 				log.error("Failed to find route ", e); //$NON-NLS-1$
 			}
 		}
-		return new RouteCalculationResult((String) null);
+		return new RouteCalculationResult(null);
 	}
 
 	public RouteCalculationResult recalculatePartOfflineRoute(RouteCalculationResult res, RouteCalculationParams params) {

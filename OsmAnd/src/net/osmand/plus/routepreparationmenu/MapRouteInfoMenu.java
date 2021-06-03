@@ -200,6 +200,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private boolean addButtonCollapsed;
 
 	private List<WorldRegion> suggestedMissingMaps;
+
 	boolean isNavigationDisable;
 
 	boolean onlineCheckNeeded;
@@ -304,7 +305,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				Pair<LatLon, PointDescription> pair = getObjectLocation(mapActivity.getMapView(), point, tileBox);
 				LatLon selectedPoint = pair != null ? pair.first : latLon;
 				PointDescription name = pair != null ? pair.second : null;
-				choosePointTypeAction(mapActivity, selectedPoint, selectFromMapPointType, name, null);
+				choosePointTypeAction(selectedPoint, selectFromMapPointType, name, null);
 				if (selectFromMapWaypoints) {
 					WaypointsFragment.showInstance(mapActivity.getSupportFragmentManager(), true);
 				} else {
@@ -338,7 +339,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		return null;
 	}
 
-	private void choosePointTypeAction(MapActivity mapActivity, LatLon latLon, PointType pointType, PointDescription pd, String address) {
+	private void choosePointTypeAction(LatLon latLon, PointType pointType, PointDescription pd, String address) {
 		OsmandApplication app = getApp();
 		FavouritesDbHelper favorites = app.getFavorites();
 		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
@@ -641,7 +642,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		RoutingHelper routingHelper = app.getRoutingHelper();
 
 		boolean isNavigationEnable = !Algorithms.isEmpty(mapActivity.getMapRouteInfoMenu().getSuggestedMissingMaps());
-		isNavigationDisable = !Algorithms.isEmpty(mapActivity.getRoutingHelper().getRoute().getDownloadMaps());
+		isNavigationDisable = mapActivity.getRoutingHelper().getRoute().isNavigationDisabled();
 
 		List<BaseCard> menuCards = new ArrayList<>();
 
@@ -2065,7 +2066,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_ADDRESS, name);
-			choosePointTypeAction(mapActivity, latLon, pointType, pd, name);
+			choosePointTypeAction(latLon, pointType, pd, name);
 			updateMenu();
 		}
 	}
@@ -2121,7 +2122,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			if (marker != null) {
 				LatLon latLon = new LatLon(marker.getLatitude(), marker.getLongitude());
 				PointDescription pd = marker.getPointDescription(mapActivity);
-				choosePointTypeAction(mapActivity, latLon, pointType, pd, null);
+				choosePointTypeAction(latLon, pointType, pd, null);
 				updateMenu();
 			} else {
 				MapMarkerSelectionFragment selectionFragment = MapMarkerSelectionFragment.newInstance(pointType);
@@ -2481,6 +2482,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	public void setShowMenu(int menuState) {
 		showMenu = true;
 		showMenuState = menuState;
+	}
+
+	public boolean isNavigationDisable() {
+		return isNavigationDisable;
 	}
 
 	@DrawableRes

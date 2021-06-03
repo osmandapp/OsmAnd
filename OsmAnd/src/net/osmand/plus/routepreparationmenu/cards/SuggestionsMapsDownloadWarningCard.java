@@ -12,6 +12,7 @@ import net.osmand.plus.download.DownloadItem;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
+import net.osmand.plus.routing.RouteProvider;
 import net.osmand.util.Algorithms;
 
 import java.text.DateFormat;
@@ -23,6 +24,7 @@ import static net.osmand.plus.download.MultipleDownloadItem.getIndexItem;
 public class SuggestionsMapsDownloadWarningCard extends WarningCard {
 	boolean isNavigationEnable;
 	private SelectionBottomSheet dialog;
+	private List<WorldRegion> suggestedMaps;
 
 	public SuggestionsMapsDownloadWarningCard(@NonNull MapActivity mapActivity) {
 		super(mapActivity);
@@ -119,11 +121,10 @@ public class SuggestionsMapsDownloadWarningCard extends WarningCard {
 				&& !downloadThread.getIndexes().isDownloadedFromInternet
 				&& !downloadThread.getIndexes().downloadFromInternetFailed;
 
-		List<WorldRegion> suggestedMaps;
 		if (isNavigationEnable) {
 			suggestedMaps = mapActivity.getMapRouteInfoMenu().getSuggestedMissingMaps();
 		} else {
-			suggestedMaps = mapActivity.getRoutingHelper().getRoute().getDownloadMaps();
+			RouteProvider.setMissingMapsListener(missingMaps -> suggestedMaps = missingMaps);
 		}
 		List<DownloadItem> suggestedDownloadsMaps = new ArrayList<>();
 		if (!downloadIndexes && !Algorithms.isEmpty(suggestedMaps)) {

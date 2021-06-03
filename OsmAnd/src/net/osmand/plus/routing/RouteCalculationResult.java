@@ -12,7 +12,6 @@ import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.QuadRect;
-import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
@@ -61,7 +60,7 @@ public class RouteCalculationResult {
 	protected List<RouteDirectionInfo> cacheAgreggatedDirections;
 	protected List<LocationPoint> locationPoints = new ArrayList<LocationPoint>();
 
-	protected List<WorldRegion> downloadMaps = new ArrayList<>();
+	protected boolean navigationDisabled;
 
 	// params
 	protected final ApplicationMode appMode;
@@ -82,25 +81,6 @@ public class RouteCalculationResult {
 
 	public RouteCalculationResult(String errorMessage) {
 		this.errorMessage = errorMessage;
-		this.routingTime = 0;
-		this.loadedTiles = 0;
-		this.visitedSegments = 0;
-		this.calculateTime = 0;
-		this.intermediatePoints = new int[0];
-		this.locations = new ArrayList<Location>();
-		this.segments = new ArrayList<RouteSegmentResult>();
-		this.listDistance = new int[0];
-		this.directions = new ArrayList<RouteDirectionInfo>();
-		this.alarmInfo = new ArrayList<AlarmInfo>();
-		this.routeService = null;
-		this.appMode = null;
-		this.routeRecalcDistance = 0;
-		this.routeVisibleAngle = 0;
-	}
-
-	public RouteCalculationResult(List<WorldRegion> suggestedOfflineMaps) {
-		this.downloadMaps = suggestedOfflineMaps;
-		this.errorMessage = null;
 		this.routingTime = 0;
 		this.loadedTiles = 0;
 		this.visitedSegments = 0;
@@ -1308,8 +1288,12 @@ public class RouteCalculationResult {
 		currentStraightAngleRoute = nextPoint;
 	}
 
-	public List<WorldRegion> getDownloadMaps() {
-		return downloadMaps;
+	public boolean isNavigationDisabled() {
+		return navigationDisabled;
+	}
+
+	public void setNavigationDisabled(boolean navigationDisabled) {
+		this.navigationDisabled = navigationDisabled;
 	}
 
 	public static class NextDirectionInfo {
