@@ -61,6 +61,11 @@ public class OsmNotesSettingsItem extends CollectionSettingsItem<OsmNotesPoint> 
 	}
 
 	@Override
+	protected long getLocalModifiedTime() { // TODO
+		return 0;
+	}
+
+	@Override
 	public void apply() {
 		List<OsmNotesPoint> newItems = getNewItems();
 		if (!newItems.isEmpty() || !duplicateItems.isEmpty()) {

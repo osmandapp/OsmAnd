@@ -39,7 +39,6 @@ public class SuggestedDownloadsItem extends SettingsItem {
 	@Override
 	public SettingsItemType getType() {
 		return SettingsItemType.SUGGESTED_DOWNLOADS;
-
 	}
 
 	@NonNull
@@ -56,6 +55,11 @@ public class SuggestedDownloadsItem extends SettingsItem {
 
 	public List<CustomOsmandPlugin.SuggestedDownloadItem> getItems() {
 		return items;
+	}
+
+	@Override
+	protected long getLocalModifiedTime() {
+		return 0;
 	}
 
 	@Override

@@ -40,7 +40,6 @@ public class DownloadsItem extends SettingsItem {
 	@Override
 	public SettingsItemType getType() {
 		return SettingsItemType.DOWNLOADS;
-
 	}
 
 	@NonNull
@@ -57,6 +56,11 @@ public class DownloadsItem extends SettingsItem {
 
 	public List<WorldRegion> getItems() {
 		return items;
+	}
+
+	@Override
+	protected long getLocalModifiedTime() {
+		return 0;
 	}
 
 	@Override

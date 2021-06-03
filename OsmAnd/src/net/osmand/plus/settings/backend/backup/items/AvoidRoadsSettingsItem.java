@@ -55,6 +55,11 @@ public class AvoidRoadsSettingsItem extends CollectionSettingsItem<AvoidRoadInfo
 		return SettingsItemType.AVOID_ROADS;
 	}
 
+	@Override
+	protected long getLocalModifiedTime() { // TODO
+		return 0;
+	}
+
 	@NonNull
 	@Override
 	public String getName() {

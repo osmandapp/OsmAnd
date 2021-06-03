@@ -73,6 +73,11 @@ public class OsmEditsSettingsItem extends CollectionSettingsItem<OpenstreetmapPo
 	}
 
 	@Override
+	protected long getLocalModifiedTime() { // TODO
+		return 0;
+	}
+
+	@Override
 	public void apply() {
 		List<OpenstreetmapPoint> newItems = getNewItems();
 		if (!newItems.isEmpty() || !duplicateItems.isEmpty()) {

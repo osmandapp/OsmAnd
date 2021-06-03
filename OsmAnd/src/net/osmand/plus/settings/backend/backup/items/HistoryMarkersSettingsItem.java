@@ -78,6 +78,11 @@ public class HistoryMarkersSettingsItem extends CollectionSettingsItem<MapMarker
 	}
 
 	@Override
+	protected long getLocalModifiedTime() { // TODO
+		return 0;
+	}
+
+	@Override
 	public void apply() {
 		List<MapMarker> newItems = getNewItems();
 		if (!newItems.isEmpty() || !duplicateItems.isEmpty()) {

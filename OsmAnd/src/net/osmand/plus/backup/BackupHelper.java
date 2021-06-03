@@ -33,9 +33,7 @@ import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.AbstractProgress;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
-import net.osmand.plus.settings.backend.backup.items.GlobalSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.GpxSettingsItem;
-import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
 
@@ -892,18 +890,7 @@ public class BackupHelper {
 					localFile.item = item;
 					localFile.subfolder = "";
 					localFile.fileName = fileName;
-					if (item instanceof FileSettingsItem) {
-						localFile.file = ((FileSettingsItem) item).getFile();
-						localFile.localModifiedTime = localFile.file.lastModified();
-					} else {
-						if (localFile.item instanceof ProfileSettingsItem) {
-							ProfileSettingsItem settingsItem = (ProfileSettingsItem) localFile.item;
-							localFile.localModifiedTime = app.getSettings().getLastModePreferencesEditTime(settingsItem.getAppMode());
-						} else if (localFile.item instanceof GlobalSettingsItem) {
-							localFile.localModifiedTime = app.getSettings().getLastGlobalPreferencesEditTime();
-						}
-					}
-
+					localFile.localModifiedTime = item.getLastModifiedTime();
 					UploadedFileInfo info = app.getBackupHelper().getDbHelper().getUploadedFileInfo(item.getType().name(), fileName);
 					if (info != null) {
 						localFile.uploadTime = info.getUploadTime();

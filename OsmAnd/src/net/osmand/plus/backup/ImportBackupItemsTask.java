@@ -10,7 +10,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.backup.NetworkSettingsHelper.BackupImportListener;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
-import java.io.IOException;
 import java.util.List;
 
 public class ImportBackupItemsTask extends AsyncTask<Void, Void, Boolean> {
@@ -50,8 +49,6 @@ public class ImportBackupItemsTask extends AsyncTask<Void, Void, Boolean> {
 			importer.importItems(items);
 			return true;
 		} catch (IllegalArgumentException e) {
-			NetworkSettingsHelper.LOG.error("Failed to import items from backup", e);
-		} catch (IOException e) {
 			NetworkSettingsHelper.LOG.error("Failed to import items from backup", e);
 		}
 		return false;

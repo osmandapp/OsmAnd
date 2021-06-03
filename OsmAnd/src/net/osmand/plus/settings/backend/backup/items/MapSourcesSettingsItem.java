@@ -54,6 +54,11 @@ public class MapSourcesSettingsItem extends CollectionSettingsItem<ITileSource> 
 	}
 
 	@Override
+	protected long getLocalModifiedTime() { // TODO
+		return 0;
+	}
+
+	@Override
 	public void apply() {
 		List<ITileSource> newItems = getNewItems();
 		if (!newItems.isEmpty() || !duplicateItems.isEmpty()) {

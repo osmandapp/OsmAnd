@@ -56,6 +56,11 @@ public class DataSettingsItem extends StreamSettingsItem {
 	}
 
 	@Override
+	protected long getLocalModifiedTime() {
+		return 0;
+	}
+
+	@Override
 	void readFromJson(@NonNull JSONObject json) throws JSONException {
 		super.readFromJson(json);
 		String fileName = getFileName();

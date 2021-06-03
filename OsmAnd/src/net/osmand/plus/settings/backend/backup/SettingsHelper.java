@@ -127,8 +127,7 @@ public abstract class SettingsHelper {
 
 	public List<SettingsItem> getFilteredSettingsItems(
 			Map<ExportSettingsType, List<?>> allSettingsMap, List<ExportSettingsType> settingsTypes,
-			@NonNull List<SettingsItem> settingsItems, boolean export
-	) {
+			@NonNull List<SettingsItem> settingsItems, boolean export) {
 		List<SettingsItem> filteredSettingsItems = new ArrayList<>();
 		for (ExportSettingsType settingsType : settingsTypes) {
 			List<?> settingsDataObjects = allSettingsMap.get(settingsType);

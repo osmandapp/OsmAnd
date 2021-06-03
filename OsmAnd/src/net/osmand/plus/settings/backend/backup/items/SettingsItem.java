@@ -38,6 +38,8 @@ public abstract class SettingsItem {
 
 	protected String pluginId;
 	protected String fileName;
+	protected long lastModifiedTime;
+	private boolean fromJson;
 
 	protected boolean shouldReplace = false;
 
@@ -59,6 +61,7 @@ public abstract class SettingsItem {
 
 	public SettingsItem(OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 		this.app = app;
+		this.fromJson = true;
 		init();
 		readFromJson(json);
 	}
@@ -98,6 +101,21 @@ public abstract class SettingsItem {
 	public String getFileName() {
 		return fileName;
 	}
+
+	public long getLastModifiedTime() {
+		if (fromJson) {
+			return lastModifiedTime;
+		} else if (lastModifiedTime == 0) {
+			lastModifiedTime = getLocalModifiedTime();
+		}
+		return lastModifiedTime;
+	}
+
+	public void setLastModifiedTime(long lastModified) {
+		this.lastModifiedTime = lastModified;
+	}
+
+	protected abstract long getLocalModifiedTime();
 
 	public boolean applyFileName(@NonNull String fileName) {
 		String n = getFileName();

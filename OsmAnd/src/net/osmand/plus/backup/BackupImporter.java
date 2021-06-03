@@ -8,7 +8,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.backup.BackupHelper.OnDownloadFileListListener;
-import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemsFactory;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
@@ -72,7 +71,7 @@ class BackupImporter {
 		return result;
 	}
 
-	void importItems(@NonNull List<SettingsItem> items) throws IllegalArgumentException, IOException {
+	void importItems(@NonNull List<SettingsItem> items) throws IllegalArgumentException {
 		if (Algorithms.isEmpty(items)) {
 			throw new IllegalArgumentException("No items");
 		}
@@ -167,26 +166,6 @@ class BackupImporter {
 			List<SettingsItem> settingsItemList = itemsFactory.getItems();
 			updateFilesInfo(remoteItemFiles, settingsItemList);
 			items.addAll(settingsItemList);
-
-			Map<RemoteFile, SettingsItemReader<? extends SettingsItem>> remoteFilesForRead = new HashMap<>();
-			for (SettingsItem item : settingsItemList) {
-				RemoteFile remoteFile = getItemRemoteFile(item, remoteItemFiles.values());
-				if (remoteFile != null && item.shouldReadOnCollecting()) {
-					SettingsItemReader<? extends SettingsItem> reader = item.getReader();
-					if (reader != null) {
-						remoteFilesForRead.put(remoteFile, reader);
-					}
-				}
-			}
-			Map<File, RemoteFile> remoteFilesForDownload = new HashMap<>();
-			for (RemoteFile remoteFile : remoteFilesForRead.keySet()) {
-				String fileName = remoteFile.getTypeNamePath();
-				remoteFilesForDownload.put(new File(tempDir, fileName), remoteFile);
-			}
-			if (!remoteFilesForDownload.isEmpty()) {
-				downloadAndReadItemFiles(remoteFilesForRead, remoteFilesForDownload);
-			}
-
 		} catch (IllegalArgumentException e) {
 			throw new IllegalArgumentException("Error reading items", e);
 		} catch (JSONException e) {
@@ -250,52 +229,15 @@ class BackupImporter {
 		}
 	}
 
-	private void downloadAndReadItemFiles(@NonNull Map<RemoteFile, SettingsItemReader<? extends SettingsItem>> remoteFilesForRead,
-										  @NonNull Map<File, RemoteFile> remoteFilesForDownload) throws UserNotRegisteredException, IOException {
-		OsmandApplication app = backupHelper.getApp();
-		Map<File, String> errors = backupHelper.downloadFilesSync(remoteFilesForDownload, null);
-		if (errors.isEmpty()) {
-			for (Entry<File, RemoteFile> entry : remoteFilesForDownload.entrySet()) {
-				File tempFile = entry.getKey();
-				RemoteFile remoteFile = entry.getValue();
-				if (tempFile.exists()) {
-					SettingsItemReader<? extends SettingsItem> reader = remoteFilesForRead.get(remoteFile);
-					if (reader != null) {
-						SettingsItem item = reader.getItem();
-						FileInputStream is = new FileInputStream(tempFile);
-						try {
-							reader.readFromStream(is, item.getFileName());
-							item.applyAdditionalParams();
-						} catch (IllegalArgumentException e) {
-							item.getWarnings().add(app.getString(R.string.settings_item_read_error, item.getName()));
-							SettingsHelper.LOG.error("Error reading item data: " + item.getName(), e);
-						} catch (IOException e) {
-							item.getWarnings().add(app.getString(R.string.settings_item_read_error, item.getName()));
-							SettingsHelper.LOG.error("Error reading item data: " + item.getName(), e);
-						} finally {
-							Algorithms.closeStream(is);
-						}
-					} else {
-						throw new IOException("No reader for: " + tempFile.getName());
-					}
-				} else {
-					throw new IOException("No temp item file: " + tempFile.getName());
-				}
-			}
-		} else {
-			throw new IOException("Error downloading temp item files");
-		}
-	}
-
-	private void updateFilesInfo(@NonNull Map<String, RemoteFile> remoteFiles, List<SettingsItem> settingsItemList) throws IOException {
+	private void updateFilesInfo(@NonNull Map<String, RemoteFile> remoteFiles, List<SettingsItem> settingsItemList) {
 		for (SettingsItem settingsItem : settingsItemList) {
 			RemoteFile remoteFile = getItemRemoteFile(settingsItem, remoteFiles.values());
 			if (remoteFile != null) {
+				settingsItem.setLastModifiedTime(remoteFile.getClienttimems());
 				remoteFile.item = settingsItem;
 				if (settingsItem instanceof FileSettingsItem) {
 					FileSettingsItem fileSettingsItem = (FileSettingsItem) settingsItem;
 					fileSettingsItem.setSize(remoteFile.getFilesize());
-					fileSettingsItem.setLastModified(remoteFile.getClienttimems());
 				}
 			}
 		}
