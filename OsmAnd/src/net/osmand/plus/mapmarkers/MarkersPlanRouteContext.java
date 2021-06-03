@@ -211,7 +211,6 @@ public class MarkersPlanRouteContext {
 		LatLon end = new LatLon(currentPair.second.getLatitude(), currentPair.second.getLongitude());
 
 		final RouteCalculationParams params = new RouteCalculationParams();
-		params.inSnapToRoadMode = true;
 		params.start = start;
 		params.end = end;
 		RoutingHelper.applyApplicationSettings(params, app.getSettings(), snappedMode);
@@ -245,7 +244,7 @@ public class MarkersPlanRouteContext {
 				calculatedPairs = 0;
 			}
 		};
-		params.resultListener = new RouteCalculationParams.RouteCalculationResultListener() {
+		params.alternateResultListener = new RouteCalculationParams.RouteCalculationResultListener() {
 			@Override
 			public void onRouteCalculated(RouteCalculationResult route) {
 				List<Location> locations = route.getRouteLocations();
