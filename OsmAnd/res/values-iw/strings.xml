@@ -4165,4 +4165,6 @@
     <string name="backup_delete_old_data_warning">פעולה זו תמחק את ההיסטוריה של הנתונים שנטענו בעבר.
 \n
 \nהגרסה הנוכחית של הנתונים תישמר על השרת אך לא תהיה לך אפשרות לשחזר שינויים שערכת בעבר.</string>
+    <string name="backup_data">גיבוי נתונים</string>
+    <string name="select_backup_data_descr">נא לבחור נתונים ותיקיות לגיבוי.</string>
 </resources>

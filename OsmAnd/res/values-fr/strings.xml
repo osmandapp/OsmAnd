@@ -4141,4 +4141,6 @@
     <string name="backup_danger_zone">Zone de danger</string>
     <string name="delete_all_confirmation">Oui, supprimer tout</string>
     <string name="backup_delete_old_data">Supprimer les anciennes versions</string>
+    <string name="backup_data">Sauvegarder les données</string>
+    <string name="select_backup_data_descr">Sélectionnez les données et dossiers à sauvegarder.</string>
 </resources>

@@ -4160,4 +4160,6 @@
     <string name="backup_delete_old_data_warning">Ви збираєтеся видалити історію змін для раніше завантажених даних.
 \n
 \nПоточну версію даних буде збережено на сервері, але ви не зможете повернути раніше внесені зміни.</string>
+    <string name="backup_data">Резервне копіювання даних</string>
+    <string name="select_backup_data_descr">Виберіть дані та теки для резервного копіювання.</string>
 </resources>

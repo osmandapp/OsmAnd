@@ -4155,4 +4155,6 @@
 \n
 \nA törölt adatokat nem tudja helyreállítani.</string>
     <string name="backup_danger_zone">Veszélyes terület</string>
+    <string name="select_backup_data_descr">Biztonsági mentésre kerülő adatok és mappák kijelölése.</string>
+    <string name="backup_data">Adatok biztonsági mentése</string>
 </resources>
