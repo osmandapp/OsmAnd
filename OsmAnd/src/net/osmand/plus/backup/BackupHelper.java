@@ -891,11 +891,11 @@ public class BackupHelper {
 					LocalFile localFile = new LocalFile();
 					localFile.item = item;
 					localFile.subfolder = "";
+					localFile.fileName = fileName;
 					if (item instanceof FileSettingsItem) {
 						localFile.file = ((FileSettingsItem) item).getFile();
 						localFile.localModifiedTime = localFile.file.lastModified();
 					} else {
-						localFile.fileName = fileName;
 						if (localFile.item instanceof ProfileSettingsItem) {
 							ProfileSettingsItem settingsItem = (ProfileSettingsItem) localFile.item;
 							localFile.localModifiedTime = app.getSettings().getLastModePreferencesEditTime(settingsItem.getAppMode());

@@ -19,6 +19,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
+import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupHelper.BackupInfo;
 import net.osmand.plus.backup.LocalFile;
 import net.osmand.plus.backup.NetworkSettingsHelper.BackupExportListener;
@@ -162,10 +163,7 @@ public class BackupUploadCard extends BaseCard {
 			title.setText(item.getName());
 		}
 
-		String filename = item.getFileName();
-		if (filename == null) {
-			filename = item.getDefaultFileName();
-		}
+		String filename = BackupHelper.getItemFileName(item);
 		TextView description = itemView.findViewById(R.id.description);
 		String summary = app.getString(R.string.last_backup);
 		UploadedFileInfo info = app.getBackupHelper().getDbHelper().getUploadedFileInfo(item.getType().name(), filename);
