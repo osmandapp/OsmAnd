@@ -4163,4 +4163,6 @@
     <string name="backup_delete_old_data_warning">Önceden yüklenen veriler için değişiklik geçmişini silmek üzeresiniz.
 \n
 \nVerilerin geçerli sürümü sunucuya kaydedilecek, ancak daha önce yapılan değişikliklere geri dönemeyeceksiniz.</string>
+    <string name="backup_data">Verileri yedekle</string>
+    <string name="select_backup_data_descr">Yedeklenecek verileri ve klasörleri seçin.</string>
 </resources>
