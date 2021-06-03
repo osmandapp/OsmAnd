@@ -4127,4 +4127,37 @@
     <string name="verification_code_missing">Код підтвердження не надійшов</string>
     <string name="verification_code_missing_description">Час очікування коду може тривати 10 хвилин, також ви можете перевірити теку з небажаним. Якщо це не допомогло, скористайтеся кнопкою знизу.</string>
     <string name="select_nav_profile_dialog_message">\'Тип навігації\' визначає спосіб обчислення маршрутів. Можна вибирати між автономним та мережним рушіями маршрутизації.</string>
+    <string name="loading_list_of_routing_services">Список завантаження доступних служб маршрутизації</string>
+    <string name="shared_string_offline">Автономно</string>
+    <string name="shared_string_online">З мережі</string>
+    <string name="osmand_online_routing_promo">Ви можете користуватися попередньо визначеними шаблонами або додавати власні мережні маршрути, підтримуються: OSRM, Graphhopper, OpenRouteService, GPX.</string>
+    <string name="shared_string_external">Зовнішні</string>
+    <string name="provided_by">Надано %1$s</string>
+    <string name="failed_loading_predefined_engines">Не вдалося завантажити список попередньо визначених шаблонів.
+\nПеревірте з\'єднання з Інтернетом.</string>
+    <string name="shared_string_predefined">Попередньо визначено</string>
+    <string name="backup_complete">Резервне копіювання завершено</string>
+    <string name="backup_now">Створити резервну копію зараз</string>
+    <string name="make_backup">Створити резервну копію</string>
+    <string name="make_backup_descr">На цьому пристрої є багато змін, зробіть резервну копію цих даних, щоб не втратити їх.</string>
+    <string name="backup_conflicts">Суперечності</string>
+    <string name="backup_confilcts_descr">Не вдалося вивантажити деякі файли на сервер, оскільки на сервері зберігається новіша версія.</string>
+    <string name="backup_view_conflicts">Переглянути суперечності</string>
+    <string name="backup_no_internet_descr">Перевірте з\'єднання з Інтернетом та завантажте знову.</string>
+    <string name="backup_pause_all">Призупинити все</string>
+    <string name="upload_local_version">Вивантажити локальну версію</string>
+    <string name="download_server_version">Завантажити серверну версію</string>
+    <string name="shared_string_logout">Вийти</string>
+    <string name="backup_delete_all_data">Видалити всі мої дані</string>
+    <string name="backup_delete_all_data_descr">Усі дані на OsmAnd Cloud буде видалено. Локальні версії залишаться недоторканими.</string>
+    <string name="backup_delete_all_data_warning">Ви ось-ось видалите всі дані, раніше завантажені в OsmAnd Cloud, включно з історією версій.
+\n
+\nВи не зможете відновити видалені дані.</string>
+    <string name="backup_danger_zone">Небезпечна зона</string>
+    <string name="delete_all_confirmation">Так, видалити все</string>
+    <string name="backup_delete_old_data">Вилучити старі версії</string>
+    <string name="backup_delete_old_data_descr">Поточні версії ваших даних будуть збережені в OsmAnd Cloud</string>
+    <string name="backup_delete_old_data_warning">Ви збираєтеся видалити історію змін для раніше завантажених даних.
+\n
+\nПоточну версію даних буде збережено на сервері, але ви не зможете повернути раніше внесені зміни.</string>
 </resources>

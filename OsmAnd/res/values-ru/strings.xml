@@ -4131,4 +4131,31 @@
     <string name="select_nav_profile_dialog_message">Режим навигации определяет правила расчёта маршрутов. Вы можете выбрать локальный или онлайн маршрутизатор.</string>
     <string name="backup_delete_all_data_warning">Вы собираетесь удалить все данные ранее загруженные в OsmAnd Cloud, включая истории версий.\n\nВы не сможете восстановить удаленные данные.</string>
     <string name="backup_delete_old_data_warning">Вы собираетесь удалить историю изменений для ранее загруженных данных.\n\nТекущая версия данных будет сохранена на сервере, но вы не сможете вернуться к ранее сделанным изменениям.</string>
+    <string name="upload_local_version">Отправить локальную версию</string>
+    <string name="download_server_version">Загрузить версию с сервера</string>
+    <string name="shared_string_predefined">Предопределенные</string>
+    <string name="backup_now">Создать резервную копию сейчас</string>
+    <string name="make_backup">Создать резервную копию</string>
+    <string name="make_backup_descr">На этом устройстве произошло много изменений, пожалуйста, сделайте резервную копию этих данных, чтобы не потерять их.</string>
+    <string name="backup_pause_all">Приостановить все</string>
+    <string name="backup_danger_zone">Опасная зона</string>
+    <string name="delete_all_confirmation">Да, удалите все</string>
+    <string name="backup_delete_old_data">Удалить старые версии</string>
+    <string name="backup_delete_old_data_descr">Текущие версии ваших данных будут сохранены в OsmAnd Cloud</string>
+    <string name="loading_list_of_routing_services">Загрузка списка доступных сервисов маршрутизации</string>
+    <string name="shared_string_offline">Офлайн</string>
+    <string name="shared_string_online">Онлайн</string>
+    <string name="osmand_online_routing_promo">Вы можете использовать предопределенные шаблоны или добавить настраиваемую онлайн-маршрутизацию: OSRM, Graphhopper, OpenRouteService, GPX.</string>
+    <string name="shared_string_external">Внешний</string>
+    <string name="provided_by">Предоставлен %1$s</string>
+    <string name="failed_loading_predefined_engines">Не удалось загрузить список предопределенных шаблонов.
+\nПожалуйста, проверьте подключение к Интернету.</string>
+    <string name="backup_complete">Резервное копирование завершено</string>
+    <string name="backup_conflicts">Конфликты</string>
+    <string name="backup_confilcts_descr">Некоторые файлы не могут быть загружены на сервер, поскольку на сервере хранится более новая версия.</string>
+    <string name="backup_view_conflicts">Просмотр конфликтов</string>
+    <string name="backup_no_internet_descr">Проверьте подключение к Интернету и загрузите снова.</string>
+    <string name="shared_string_logout">Выход</string>
+    <string name="backup_delete_all_data">Удалить все мои данные</string>
+    <string name="backup_delete_all_data_descr">Все данные в OsmAnd Cloud будут удалены. Локальные версии останутся нетронутыми.</string>
 </resources>
