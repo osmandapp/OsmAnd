@@ -62,20 +62,20 @@ public class MapMarkersHelper {
 	public @interface MapMarkersSortByDef {
 	}
 
-	private OsmandApplication ctx;
-	private MapMarkersDbHelper markersDbHelper;
-	private ItineraryDataHelper dataHelper;
+	private final OsmandApplication ctx;
+	private final MapMarkersDbHelper markersDbHelper;
+	private final ItineraryDataHelper dataHelper;
 
-	private ExecutorService executorService = Executors.newSingleThreadExecutor();
+	private final ExecutorService executorService = Executors.newSingleThreadExecutor();
 
 	private List<MapMarker> mapMarkers = new ArrayList<>();
 	private List<MapMarker> mapMarkersHistory = new ArrayList<>();
 	private List<MapMarkersGroup> mapMarkersGroups = new ArrayList<>();
 
-	private List<MapMarkerChangedListener> listeners = new ArrayList<>();
-	private Set<OnGroupSyncedListener> syncListeners = new HashSet<>();
+	private final List<MapMarkerChangedListener> listeners = new ArrayList<>();
+	private final Set<OnGroupSyncedListener> syncListeners = new HashSet<>();
 
-	private MarkersPlanRouteContext planRouteContext;
+	private final MarkersPlanRouteContext planRouteContext;
 
 	public List<MapMarker> getMapMarkers() {
 		return mapMarkers;
@@ -117,6 +117,10 @@ public class MapMarkersHelper {
 		markersDbHelper = ctx.getMapMarkersDbHelper();
 		planRouteContext = new MarkersPlanRouteContext(ctx);
 		loadMarkers();
+	}
+
+	public long getDatabaseLastModifiedTime() {
+		return markersDbHelper.getLastModifiedTime();
 	}
 
 	private void loadMarkers() {
