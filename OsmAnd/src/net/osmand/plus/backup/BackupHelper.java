@@ -34,6 +34,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.AbstractProgress;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.GlobalSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.GpxSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
@@ -243,6 +244,43 @@ public class BackupHelper {
 
 	public CommonPreference<Boolean> getBackupTypePref(@NonNull ExportSettingsType type) {
 		return app.getSettings().registerBooleanPreference(BACKUP_TYPE_PREFIX + type.name(), true).makeGlobal().makeShared();
+	}
+
+	@NonNull
+	public static String getItemFileName(@NonNull SettingsItem item) {
+		String fileName;
+		if (item instanceof FileSettingsItem) {
+			FileSettingsItem fileItem = (FileSettingsItem) item;
+			fileName = BackupHelper.getFileItemName(fileItem);
+		} else {
+			fileName = item.getFileName();
+			if (Algorithms.isEmpty(fileName)) {
+				fileName = item.getDefaultFileName();
+			}
+		}
+		return fileName;
+	}
+
+	@NonNull
+	public static String getFileItemName(@NonNull FileSettingsItem fileSettingsItem) {
+		return getFileItemName(null, fileSettingsItem);
+	}
+
+	@NonNull
+	public static String getFileItemName(@Nullable File file, @NonNull FileSettingsItem fileSettingsItem) {
+		String subtypeFolder = fileSettingsItem.getSubtype().getSubtypeFolder();
+		String fileName;
+		if (file == null) {
+			file = fileSettingsItem.getFile();
+		}
+		if (Algorithms.isEmpty(subtypeFolder)) {
+			fileName = file.getName();
+		} else if (fileSettingsItem instanceof GpxSettingsItem) {
+			fileName = file.getPath().substring(file.getPath().indexOf(subtypeFolder) + subtypeFolder.length());
+		} else {
+			fileName = file.getPath().substring(file.getPath().indexOf(subtypeFolder) - 1);
+		}
+		return fileName;
 	}
 
 	public void registerUser(@NonNull final String email, @Nullable final OnRegisterUserListener listener) {
@@ -849,10 +887,7 @@ public class BackupHelper {
 
 				List<SettingsItem> localItems = getFilteredLocalItems();
 				for (SettingsItem item : localItems) {
-					String fileName = item.getFileName();
-					if (fileName == null) {
-						fileName = item.getDefaultFileName();
-					}
+					String fileName = BackupHelper.getItemFileName(item);
 					LocalFile localFile = new LocalFile();
 					localFile.item = item;
 					localFile.subfolder = "";

@@ -9,7 +9,6 @@ import net.osmand.plus.backup.BackupHelper.OnUploadFileListener;
 import net.osmand.plus.settings.backend.backup.AbstractWriter;
 import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
-import net.osmand.plus.settings.backend.backup.items.GpxSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
 
@@ -34,16 +33,7 @@ public class NetworkWriter implements AbstractWriter {
 
 	@Override
 	public void write(@NonNull SettingsItem item) throws IOException {
-		String fileName;
-		if (item instanceof FileSettingsItem) {
-			FileSettingsItem fileItem = (FileSettingsItem) item;
-			fileName = getFileItemName(fileItem.getFile(), fileItem);
-		} else {
-			fileName = item.getFileName();
-			if (Algorithms.isEmpty(fileName)) {
-				fileName = item.getDefaultFileName();
-			}
-		}
+		String fileName = BackupHelper.getItemFileName(item);
 		SettingsItemWriter<? extends SettingsItem> itemWriter = item.getWriter();
 		if (itemWriter != null) {
 			try {
@@ -111,24 +101,11 @@ public class NetworkWriter implements AbstractWriter {
 				}
 			}
 		} else {
-			String fileName = getFileItemName(file, fileSettingsItem);
+			String fileName = BackupHelper.getFileItemName(file, fileSettingsItem);
 			fileSettingsItem.setInputStream(new FileInputStream(file));
 			error = uploadItemFile(itemWriter, fileName);
 		}
 		return error;
 	}
 
-	@NonNull
-	private String getFileItemName(@NonNull File file, @NonNull FileSettingsItem fileSettingsItem) {
-		String subtypeFolder = fileSettingsItem.getSubtype().getSubtypeFolder();
-		String fileName;
-		if (Algorithms.isEmpty(subtypeFolder)) {
-			fileName = file.getName();
-		} else if (fileSettingsItem instanceof GpxSettingsItem) {
-			fileName = file.getPath().substring(file.getPath().indexOf(subtypeFolder) + subtypeFolder.length());
-		} else {
-			fileName = file.getPath().substring(file.getPath().indexOf(subtypeFolder) - 1);
-		}
-		return fileName;
-	}
 }
