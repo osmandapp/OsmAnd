@@ -637,15 +637,7 @@ public class GPXUtilities {
 			if (colorizationType == ColorizationType.SPEED) {
 				return isSpeedSpecified();
 			} else if (colorizationType == ColorizationType.ELEVATION || colorizationType == ColorizationType.SLOPE) {
-				if (!isElevationSpecified()) {
-					return false;
-				}
-				for (Elevation elevation : elevationData) {
-					if (Float.isNaN(elevation.elevation)) {
-						return false;
-					}
-				}
-				return true;
+				return isElevationSpecified();
 			} else {
 				return true;
 			}

@@ -212,7 +212,11 @@ public class RouteColorize {
 
     public int getColorByValue(double value) {
         if (Double.isNaN(value)) {
-            value = colorizationType == ColorizationType.SLOPE ? minValue : (minValue + maxValue) / 2;
+            if (colorizationType == ColorizationType.SLOPE) {
+                return LIGHT_GREY;
+            } else {
+                value = (minValue + maxValue) / 2;
+            }
         }
         for (int i = 0; i < palette.length - 1; i++) {
             if (value == palette[i][VALUE_INDEX])
