@@ -4157,4 +4157,6 @@
     <string name="delete_all_confirmation">Sim, apague tudo</string>
     <string name="backup_delete_old_data">Remova versões antigas</string>
     <string name="backup_delete_old_data_descr">Versões atuais de seus dados serão preservadas no OsmAnd Cloud</string>
+    <string name="backup_data">Dados de backup</string>
+    <string name="select_backup_data_descr">Selecione dados e pastas para backup.</string>
 </resources>
