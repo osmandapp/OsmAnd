@@ -12,6 +12,8 @@
 
 -->
 
+    <string name="select_backup_data_descr">Select data and folders for backup.</string>
+    <string name="backup_data">Backup data</string>
     <string name="backup_delete_old_data_warning">You are about to delete the change history for the previously loaded data.\n\nThe current version of the data will be saved on the server, but you will not be able to revert to the previously made changes.</string>
     <string name="backup_delete_old_data_descr">Current versions of your data will be preserved on OsmAnd Cloud</string>
     <string name="backup_delete_old_data">Remove old versions</string>

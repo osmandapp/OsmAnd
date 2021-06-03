@@ -45,8 +45,8 @@ import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_K
 
 public class ExportSettingsFragment extends BaseSettingsListFragment {
 
-	public static final String TAG = ImportSettingsFragment.class.getSimpleName();
-	public static final Log LOG = PlatformUtil.getLog(ImportSettingsFragment.class.getSimpleName());
+	public static final String TAG = ExportSettingsFragment.class.getSimpleName();
+	public static final Log LOG = PlatformUtil.getLog(ExportSettingsFragment.class.getSimpleName());
 
 	private static final String GLOBAL_EXPORT_KEY = "global_export_key";
 	private static final String EXPORT_START_TIME_KEY = "export_start_time_key";

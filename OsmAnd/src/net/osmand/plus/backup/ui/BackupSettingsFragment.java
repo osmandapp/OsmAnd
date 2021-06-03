@@ -1,5 +1,6 @@
 package net.osmand.plus.backup.ui;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -77,10 +78,31 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 		progressBar = view.findViewById(R.id.progress_bar);
 
 		setupAccount(view);
+		setupBackupTypes(view);
 		setupDeleteAllData(view);
 		setupRemoveOldData(view);
 
 		return view;
+	}
+
+	private void setupBackupTypes(View view) {
+		View container = view.findViewById(R.id.select_types_container);
+		TextView title = container.findViewById(android.R.id.title);
+		TextView summary = container.findViewById(android.R.id.summary);
+
+		title.setText(R.string.backup_data);
+		summary.setText(R.string.select_backup_data_descr);
+		container.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				FragmentActivity activity = getActivity();
+				if (activity != null) {
+					BackupTypesFragment.showInstance(activity.getSupportFragmentManager());
+				}
+			}
+		});
+		setupSelectableBackground(container);
+		AndroidUiHelper.updateVisibility(container.findViewById(android.R.id.icon), false);
 	}
 
 	private void setupAccount(View view) {
@@ -106,7 +128,7 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 				}
 			}
 		});
-		AndroidUtils.setBackground(container, UiUtilities.getColoredSelectableDrawable(app, getActiveColor(), 0.3f));
+		setupSelectableBackground(container);
 	}
 
 	private void setupDeleteAllData(View view) {
@@ -131,7 +153,7 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 				}
 			}
 		});
-		AndroidUtils.setBackground(container, UiUtilities.getColoredSelectableDrawable(app, getActiveColor(), 0.3f));
+		setupSelectableBackground(container);
 	}
 
 	private void setupRemoveOldData(View view) {
@@ -154,7 +176,13 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 				}
 			}
 		});
-		AndroidUtils.setBackground(container, UiUtilities.getColoredSelectableDrawable(app, getActiveColor(), 0.3f));
+		setupSelectableBackground(container);
+	}
+
+	private void setupSelectableBackground(View view) {
+		View selectableView = view.findViewById(R.id.selectable_list_item);
+		Drawable drawable = UiUtilities.getColoredSelectableDrawable(app, getActiveColor(), 0.3f);
+		AndroidUtils.setBackground(selectableView, drawable);
 	}
 
 	private void deleteAllFiles() {

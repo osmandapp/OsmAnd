@@ -209,7 +209,7 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 			lblListHeader.setCompoundDrawablesWithIntrinsicBounds(itemGroupIcon, null, null, null);
 
 			adjustIndicator(getMyApplication(), groupPosition, isExpanded, convertView, !nightMode);
-			ImageView indicator = (ImageView) convertView.findViewById(R.id.explist_indicator);
+			ImageView indicator = (ImageView) convertView.findViewById(R.id.explicit_indicator);
 			indicator.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
