@@ -94,6 +94,14 @@ public abstract class SettingsHelper {
 
 	private final OsmandApplication app;
 
+	public interface CollectListener {
+		void onCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items);
+	}
+
+	public interface ImportListener {
+		void onImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> items);
+	}
+
 	public interface CheckDuplicatesListener {
 		void onDuplicatesChecked(@NonNull List<Object> duplicates, List<SettingsItem> items);
 	}
