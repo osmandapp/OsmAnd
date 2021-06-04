@@ -4135,7 +4135,7 @@
     <string name="shared_string_online">En línea</string>
     <string name="osmand_online_routing_promo">Puedes usar plantillas predefinidas o añadir navegadores en línea personalizados, soportado: OSRM, Graphhopper, OpenRouteService, GPX.</string>
     <string name="shared_string_external">Externo</string>
-    <string name="provided_by">Proporcionado por %1$s</string>
+    <string name="provided_by">Provisto por %1$s</string>
     <string name="failed_loading_predefined_engines">No se pudo cargar la lista de plantillas predefinidas.
 \nComprueba la conexión a Internet.</string>
     <string name="shared_string_predefined">Predefinido</string>
@@ -4163,4 +4163,6 @@
     <string name="backup_delete_old_data_warning">Se borrará el historial de cambios de los datos cargados previamente.
 \n
 \nLa versión actual de los datos se guardará en el servidor, pero no podrás volver a los cambios anteriores.</string>
+    <string name="backup_data">Datos de la copia de seguridad</string>
+    <string name="select_backup_data_descr">Marca los datos y carpetas para la copia de seguridad.</string>
 </resources>
