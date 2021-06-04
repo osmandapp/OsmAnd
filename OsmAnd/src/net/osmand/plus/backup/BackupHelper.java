@@ -1,6 +1,7 @@
 package net.osmand.plus.backup;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.provider.Settings;
 import android.util.Pair;
@@ -175,6 +176,20 @@ public class BackupHelper {
 
 	void setRemoteFiles(List<RemoteFile> remoteFiles) {
 		this.remoteFiles = remoteFiles;
+	}
+
+	public static void setLastModifiedTime(@NonNull Context ctx, @NonNull String name) {
+		setLastModifiedTime(ctx, name, System.currentTimeMillis());
+	}
+
+	public static void setLastModifiedTime(@NonNull Context ctx, @NonNull String name, long lastModifiedTime) {
+		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
+		app.getBackupHelper().getDbHelper().setLastModifiedTime(name, lastModifiedTime);
+	}
+
+	public static long getLastModifiedTime(@NonNull Context ctx, @NonNull String name) {
+		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
+		return app.getBackupHelper().getDbHelper().getLastModifiedTime(name);
 	}
 
 	@SuppressLint("HardwareIds")

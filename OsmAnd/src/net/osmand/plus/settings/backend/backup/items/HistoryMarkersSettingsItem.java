@@ -78,8 +78,8 @@ public class HistoryMarkersSettingsItem extends CollectionSettingsItem<MapMarker
 	}
 
 	@Override
-	protected long getLocalModifiedTime() { // TODO
-		return 0;
+	protected long getLocalModifiedTime() {
+		return markersHelper.getMarkersHistoryLastModifiedTime();
 	}
 
 	@Override

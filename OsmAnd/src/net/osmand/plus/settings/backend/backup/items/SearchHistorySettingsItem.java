@@ -66,8 +66,8 @@ public class SearchHistorySettingsItem extends CollectionSettingsItem<HistoryEnt
 	}
 
 	@Override
-	protected long getLocalModifiedTime() { // TODO
-		return 0;
+	protected long getLocalModifiedTime() {
+		return searchHistoryHelper.getLastModifiedTime();
 	}
 
 	@Override

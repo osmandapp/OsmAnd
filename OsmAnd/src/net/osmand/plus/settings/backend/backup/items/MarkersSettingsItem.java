@@ -79,7 +79,7 @@ public class MarkersSettingsItem extends CollectionSettingsItem<MapMarker> {
 
 	@Override
 	protected long getLocalModifiedTime() {
-		return markersHelper.getDatabaseLastModifiedTime();
+		return markersHelper.getMarkersLastModifiedTime();
 	}
 
 	@Override
