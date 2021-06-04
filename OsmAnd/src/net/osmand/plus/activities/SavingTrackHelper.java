@@ -451,6 +451,8 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		}
 		if (ctx.getRoutingHelper().isFollowingMode()) {
 			lastRoutingApplicationMode = settings.getApplicationMode();
+		} else if (settings.getApplicationMode() == settings.DEFAULT_APPLICATION_MODE.get()) {
+			lastRoutingApplicationMode = null;
 		}
 		boolean record = false;
 		if (location != null && OsmAndLocationProvider.isNotSimulatedLocation(location)
