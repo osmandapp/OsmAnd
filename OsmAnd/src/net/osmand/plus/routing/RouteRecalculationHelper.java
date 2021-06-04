@@ -28,7 +28,7 @@ class RouteRecalculationHelper {
 
 	private static final int RECALCULATE_THRESHOLD_COUNT_CAUSING_FULL_RECALCULATE = 3;
 	private static final int RECALCULATE_THRESHOLD_CAUSING_FULL_RECALCULATE_INTERVAL = 2 * 60 * 1000;
-	private static final long WAITING_TIME = 6000;
+	private static final long WAITING_TIME = 60000;
 
 	private final OsmandApplication app;
 	private final RoutingHelper routingHelper;
@@ -214,7 +214,7 @@ class RouteRecalculationHelper {
 				params.calculationProgress = new RouteCalculationProgress();
 				updateProgress = true;
 			} else {
-				params.resultListener = new RouteCalculationParams.RouteCalculationResultListener() {
+				params.alternateResultListener = new RouteCalculationParams.RouteCalculationResultListener() {
 					@Override
 					public void onRouteCalculated(RouteCalculationResult route) {
 						app.runInUIThread(new Runnable() {
