@@ -3301,7 +3301,6 @@
     <string name="select_color">בחירת צבע</string>
     <string name="edit_profiles_descr">לא ניתן למחוק את פרופילי בררת המחדל של OsmAnd, אך ניתן להשבית אותם (במסך הקודם) או להוריד אותם לתחתית.</string>
     <string name="edit_profiles">עריכת פרופילים</string>
-    <string name="select_nav_profile_dialog_message">‚סוג הניווט’ מגבש את אופן חישוב המסלול.</string>
     <string name="profile_appearance">הופעת פרופיל</string>
     <string name="choose_icon_color_name">סמל, צבע ושם</string>
     <string name="reorder_profiles">עריכת רשימת הפרופילים</string>
@@ -4132,4 +4131,38 @@
     <string name="osmand_cloud_create_account_descr">נא למלא את כתובת הדוא״ל שלך, כל הנתונים שלך יקושרו אליה.
 \nאנו נשלח לך קוד אימות לכתובת הדוא״ל הזו.</string>
     <string name="osmand_cloud_login_descr">נא להקליד את כתובת הדוא״ל בה השתמשת להרשמה. אנו נשלח לך תוך זמן קצר ססמה חד־פעמית שנחוצה לשלב הבא.</string>
+    <string name="select_nav_profile_dialog_message">‚סוג הניווט’ מגדיר את המסלולים מחושבים. ניתן לבחור בין מנגנוני ניווט מקוונים ובלתי מקוונים.</string>
+    <string name="loading_list_of_routing_services">רשימת שירותי הניווט הזמינים נטענת</string>
+    <string name="shared_string_offline">בלתי מקוון</string>
+    <string name="shared_string_online">מקוון</string>
+    <string name="osmand_online_routing_promo">ניתן להשתמש בתבניות שהוגדרו מראש או להוסיף ניווט מקוון מותאם אישית, נתמכים: OSRM,‏ Graphhopper,‏ OpenRouteService,‏ GPX.</string>
+    <string name="shared_string_external">חיצוני</string>
+    <string name="provided_by">סופק על ידי %1$s</string>
+    <string name="failed_loading_predefined_engines">טעינת התבניות שהוגדרו מראש נכשלה.
+\nנא לבדוק את החיבור לאינטרנט.</string>
+    <string name="shared_string_predefined">הוגדר מראש</string>
+    <string name="backup_complete">הגיבוי הושלם</string>
+    <string name="backup_now">לגבות כעת</string>
+    <string name="make_backup">עריכת גיבוי</string>
+    <string name="make_backup_descr">נערכו שינויים רבים במכשיר הזה, נא לגבות את הנתונים האלה כדי שלא יאבדו.</string>
+    <string name="backup_conflicts">סתירות</string>
+    <string name="backup_confilcts_descr">לא ניתן להעלות חלק מהקבצים לשרת כיוון שהגרסה העדכנית יותר מאוחסנת בשרת.</string>
+    <string name="backup_view_conflicts">הצגת סתירות</string>
+    <string name="backup_no_internet_descr">כדאי לבדוק את החיבור שלך לאינטרנט להוריד שוב.</string>
+    <string name="backup_pause_all">להשהות הכול</string>
+    <string name="upload_local_version">להעלות את הגרסה המקומית</string>
+    <string name="download_server_version">להוריד את גרסת השרת</string>
+    <string name="shared_string_logout">יציאה</string>
+    <string name="backup_delete_all_data">למחוק את כל הנתונים שלי</string>
+    <string name="backup_delete_all_data_descr">כל הנתונים ב־OsmAnd Cloud יימחקו. הגרסאות המקומיות תישארנה כפי שהן.</string>
+    <string name="backup_delete_all_data_warning">פעולה זו תמחק את כל הנתונים שהועלו בעבר ל־OsmAnd Cloud, לרבות את היסטוריית הגרסאות.
+\n
+\nלא תהיה לך אפשרות לשחזר נתונים שנמחקו.</string>
+    <string name="backup_danger_zone">אזור מסוכן</string>
+    <string name="delete_all_confirmation">כן, למחוק הכול</string>
+    <string name="backup_delete_old_data">הסרת גרסאות ישנות</string>
+    <string name="backup_delete_old_data_descr">הגרסה הנוכחית של הנתונים שלך תישמר ב־OsmAnd Cloud</string>
+    <string name="backup_delete_old_data_warning">פעולה זו תמחק את ההיסטוריה של הנתונים שנטענו בעבר.
+\n
+\nהגרסה הנוכחית של הנתונים תישמר על השרת אך לא תהיה לך אפשרות לשחזר שינויים שערכת בעבר.</string>
 </resources>

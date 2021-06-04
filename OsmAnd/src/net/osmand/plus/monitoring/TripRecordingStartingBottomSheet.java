@@ -71,7 +71,6 @@ public class TripRecordingStartingBottomSheet extends MenuBottomSheetDialogFragm
 				showInstance(fragmentManager);
 			} else {
 				startRecording(app);
-				TripRecordingBottomSheet.showInstance(fragmentManager);
 			}
 		}
 	}

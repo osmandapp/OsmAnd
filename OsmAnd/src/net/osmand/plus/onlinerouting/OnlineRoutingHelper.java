@@ -57,6 +57,16 @@ public class OnlineRoutingHelper {
 		return new ArrayList<>(cachedEngines.values());
 	}
 
+	public List<OnlineRoutingEngine> getOnlyCustomEngines() {
+		List<OnlineRoutingEngine> engines = new ArrayList<>();
+		for (OnlineRoutingEngine engine : getEngines()) {
+			if (!engine.isPredefined()) {
+				engines.add(engine);
+			}
+		}
+		return engines;
+	}
+
 	@NonNull
 	public List<OnlineRoutingEngine> getEnginesExceptMentionedKeys(@Nullable String... excludeKeys) {
 		List<OnlineRoutingEngine> engines = getEngines();

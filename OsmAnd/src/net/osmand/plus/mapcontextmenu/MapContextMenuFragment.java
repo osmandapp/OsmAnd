@@ -1954,6 +1954,9 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	}
 
 	private void updateZoomButtonsVisibility(int menuState) {
+		if (zoomButtonsView == null) {
+			return;
+		}
 		boolean zoomButtonsVisible = menu.zoomButtonsVisible() && menuState == MenuState.HEADER_ONLY;
 		if (zoomButtonsVisible) {
 			if (zoomButtonsView.getVisibility() != View.VISIBLE) {

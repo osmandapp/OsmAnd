@@ -65,8 +65,8 @@ public class ItineraryDataHelper {
 		GPX_TIME_FORMAT.setTimeZone(TimeZone.getTimeZone("UTC"));
 	}
 
-	private OsmandApplication app;
-	private MapMarkersHelper mapMarkersHelper;
+	private final OsmandApplication app;
+	private final MapMarkersHelper mapMarkersHelper;
 
 	public ItineraryDataHelper(OsmandApplication app, MapMarkersHelper mapMarkersHelper) {
 		this.app = app;

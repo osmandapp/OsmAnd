@@ -3294,7 +3294,6 @@
     <string name="select_color">選取顏色</string>
     <string name="edit_profiles_descr">OsmAnd 預設的設定檔無法被刪除，但可以被停用（在前一個畫面），或被排到底部。</string>
     <string name="edit_profiles">編輯設定檔</string>
-    <string name="select_nav_profile_dialog_message">「導航類型」會控制路徑的計算方式。</string>
     <string name="profile_appearance">設定檔外觀</string>
     <string name="choose_icon_color_name">圖示、顏色與名稱</string>
     <string name="reorder_profiles">編輯設定檔清單</string>
@@ -4122,4 +4121,38 @@
     <string name="resend_verification_code">重新傳送代碼</string>
     <string name="verification_code_missing">我沒有收到驗證碼</string>
     <string name="verification_code_missing_description">等待代碼的時間可能需要10分鐘，您也可以檢查您的垃圾郵件資料夾。如果沒有幫助，請點擊下方的按鈕。</string>
+    <string name="select_nav_profile_dialog_message">「導航類型」控制著路線計算的方式。您可以在離線與線上導航引擎中選取。</string>
+    <string name="loading_list_of_routing_services">載入可用路線規劃服務清單</string>
+    <string name="shared_string_offline">離線</string>
+    <string name="shared_string_online">線上</string>
+    <string name="osmand_online_routing_promo">您可以使用預先定義的範本，或是新增自訂的線上路線規劃，支援：OSRM, Graphhopper, OpenRouteService, GPX。</string>
+    <string name="shared_string_external">外部</string>
+    <string name="provided_by">由 %1$s 提供</string>
+    <string name="failed_loading_predefined_engines">載入預先定義範本失敗。
+\n請檢查您的網際網路連線。</string>
+    <string name="shared_string_predefined">預先定義</string>
+    <string name="backup_complete">備份完成</string>
+    <string name="backup_now">立即備份</string>
+    <string name="make_backup">備份</string>
+    <string name="make_backup_descr">此裝置有許多變動，請備份此資料以免遺失。</string>
+    <string name="backup_conflicts">衝突</string>
+    <string name="backup_confilcts_descr">部份檔案無法上傳至伺服器，因為伺服器上已儲存了較新的版本。</string>
+    <string name="backup_view_conflicts">檢視衝突</string>
+    <string name="backup_no_internet_descr">檢查您的網際網路連線並再次下載。</string>
+    <string name="backup_pause_all">暫停全部</string>
+    <string name="upload_local_version">上傳本機版本</string>
+    <string name="download_server_version">下載伺服器版本</string>
+    <string name="shared_string_logout">登出</string>
+    <string name="backup_delete_all_data">刪除我所有的資料</string>
+    <string name="backup_delete_all_data_descr">OsmAnd Cloud 上的所有資料都將會被刪除。本機版本將維持不變。</string>
+    <string name="backup_delete_all_data_warning">您將要刪除先前上傳至 OsmAnd Cloud 的所有資料，包含版本歷史紀錄。
+\n
+\n您將無法復原已刪除的資料。</string>
+    <string name="backup_danger_zone">危險地帶</string>
+    <string name="delete_all_confirmation">是的，刪除全部</string>
+    <string name="backup_delete_old_data">移除舊版本</string>
+    <string name="backup_delete_old_data_descr">您目前版本的資料將保留在 OsmAnd Cloud 上</string>
+    <string name="backup_delete_old_data_warning">您將要刪除先前載入資料的變更歷史紀錄。
+\n
+\n目前版本的資料將會儲存到伺服氣上，但您將無法回退到先前做出的修改。</string>
 </resources>

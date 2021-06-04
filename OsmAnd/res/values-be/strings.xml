@@ -3263,7 +3263,6 @@
     <string name="select_color">Абярыце колер</string>
     <string name="edit_profiles_descr">Прадвызначаныя профілі OsmAnd немагчыма выдаліць, але можна адключыць іх на папярэднім экране, альбо адсартаваць унізе.</string>
     <string name="edit_profiles">Рэдагаваць профілі</string>
-    <string name="select_nav_profile_dialog_message">Тып навігацыі ўплывае на разлік маршруту.</string>
     <string name="profile_appearance">Выгляд профілю</string>
     <string name="choose_icon_color_name">Значок, колер і назва</string>
     <string name="reorder_profiles">Рэдагаваць спіс профіляў</string>

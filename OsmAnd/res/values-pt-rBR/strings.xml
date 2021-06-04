@@ -3294,7 +3294,6 @@
     <string name="select_color">Selecione a cor</string>
     <string name="edit_profiles_descr">Perfis padrão do OsmAnd não podem ser excluídos, mas desativados (na tela anterior) ou classificados na parte inferior.</string>
     <string name="edit_profiles">Editar perfis</string>
-    <string name="select_nav_profile_dialog_message">O \'Tipo de navegação\' controla como as rotas são calculadas.</string>
     <string name="profile_appearance">Aparência do perfil</string>
     <string name="choose_icon_color_name">Ícone, cor e nome</string>
     <string name="reorder_profiles">Editar lista de perfil</string>
@@ -4124,4 +4123,38 @@
     <string name="resend_verification_code">Reenviar código</string>
     <string name="verification_code_missing">Não recebi o código de verificação</string>
     <string name="verification_code_missing_description">O tempo de espera pelo código pode ser de 10 minutos, você também pode verificar sua pasta de spam. Se não ajudar, use o botão abaixo.</string>
+    <string name="select_nav_profile_dialog_message">O \'tipo de navegação\' rege como as rotas são calculadas. Você pode selecionar entre mecanismos de roteamento offline e online.</string>
+    <string name="loading_list_of_routing_services">Lista de carregamento de serviços de roteamento disponíveis</string>
+    <string name="shared_string_offline">Offline</string>
+    <string name="shared_string_online">Online</string>
+    <string name="osmand_online_routing_promo">Você pode usar modelos predefinidos ou adicionar roteamento on-line personalizado, suportado: OSRM, Graphhopper, OpenRouteService, GPX.</string>
+    <string name="shared_string_external">Externo</string>
+    <string name="provided_by">Fornecido por %1$s</string>
+    <string name="failed_loading_predefined_engines">Falha ao carregar a lista de modelos predefinidos.
+\nPor favor, verifique sua conexão à internet.</string>
+    <string name="shared_string_predefined">Predefinido</string>
+    <string name="backup_complete">Backup completo</string>
+    <string name="backup_now">Backup agora</string>
+    <string name="make_backup">Fazer um backup</string>
+    <string name="make_backup_descr">Existem muitas alterações neste dispositivo, por favor, faça um backup desses dados para não perdê-lo.</string>
+    <string name="backup_conflicts">Conflitos</string>
+    <string name="backup_confilcts_descr">Alguns arquivos não pôde ser carregado no servidor porque uma versão mais recente é armazenada no servidor.</string>
+    <string name="backup_view_conflicts">Ver conflitos</string>
+    <string name="backup_no_internet_descr">Verifique sua conexão com a Internet e baixe novamente.</string>
+    <string name="backup_pause_all">Pausar tudo</string>
+    <string name="upload_local_version">Carregue a versão local</string>
+    <string name="download_server_version">Baixar versão do servidor</string>
+    <string name="backup_delete_all_data_warning">Você está prestes a excluir todos os dados enviados anteriormente para o OsmAnd Cloud, incluindo o histórico de versão.
+\n
+\nVocê não poderá recuperar dados excluídos.</string>
+    <string name="backup_delete_old_data_warning">Você está prestes a excluir o histórico de alterações para os dados carregados anteriormente.
+\n
+\nA versão atual dos dados será salva no servidor, mas você não poderá reverter as alterações feitas anteriormente.</string>
+    <string name="shared_string_logout">Sair</string>
+    <string name="backup_delete_all_data">Excluir todos os meus dados</string>
+    <string name="backup_delete_all_data_descr">Todos os dados no OsmAnd Cloud serão excluídos. Versões locais ficarão intocadas.</string>
+    <string name="backup_danger_zone">Zona de perigo</string>
+    <string name="delete_all_confirmation">Sim, apague tudo</string>
+    <string name="backup_delete_old_data">Remova versões antigas</string>
+    <string name="backup_delete_old_data_descr">Versões atuais de seus dados serão preservadas no OsmAnd Cloud</string>
 </resources>

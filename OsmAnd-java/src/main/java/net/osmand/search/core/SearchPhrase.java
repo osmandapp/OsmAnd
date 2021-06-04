@@ -192,8 +192,8 @@ public class SearchPhrase {
 	}
 	
 	// init search phrase
-	private SearchPhrase createNewSearchPhrase(SearchSettings settings, String fullText, List<SearchWord> foundWords,
-			String textToSearch) {
+	private SearchPhrase createNewSearchPhrase(final SearchSettings settings, String fullText, List<SearchWord> foundWords,
+											   String textToSearch) {
 		SearchPhrase sp = new SearchPhrase(settings, this.clt);
 		sp.words = foundWords;
 		sp.fullTextSearchPhrase = fullText;
@@ -209,19 +209,33 @@ public class SearchPhrase {
 				String wd = ws[i].trim();
 				boolean conjunction = conjunctions.contains(wd.toLowerCase());
 				boolean lastAndIncomplete = i == ws.length - 1 && !sp.lastUnknownSearchWordComplete;
+				boolean decryptAbbreviations = needDecryptAbbreviations();
 				if (wd.length() > 0 && (!conjunction || lastAndIncomplete)) {
 					if (first) {
-						sp.firstUnknownSearchWord = Abbreviations.replace(wd);
+						sp.firstUnknownSearchWord = decryptAbbreviations ? Abbreviations.replace(wd) : wd;
 						first = false;
 					} else {
-						sp.otherUnknownWords.add(Abbreviations.replace(wd));
+						sp.otherUnknownWords.add(decryptAbbreviations ? Abbreviations.replace(wd) : wd);
 					}
 				}
 			}
 		}
 		return sp;
 	}
-	
+
+	private boolean needDecryptAbbreviations() {
+		String langs = settings != null ? settings.getRegionLang() : null;
+		if (langs != null) {
+			String[] langArr = langs.split(",");
+			for (String lang : langArr) {
+				if (lang.equals("en")) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 	public static List<String> splitWords(String w, List<String> ws) {
 		if (!Algorithms.isEmpty(w)) {
 			String[] wrs = w.split(ALLDELIMITERS);

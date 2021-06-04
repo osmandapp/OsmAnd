@@ -77,7 +77,7 @@
             android:layout_marginEnd="4dp" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/explist_indicator"
+            android:id="@+id/explicit_indicator"
             android:layout_width="@dimen/context_menu_padding_margin_large"
             android:layout_height="match_parent"
             android:scaleType="center"

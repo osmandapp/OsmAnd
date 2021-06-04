@@ -11,7 +11,6 @@ import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-import androidx.annotation.DimenRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
@@ -317,10 +316,6 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 	@Override
 	protected int getActiveColorId() {
 		return nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
-	}
-
-	public int getDimen(@DimenRes int id) {
-		return getResources().getDimensionPixelSize(id);
 	}
 
 	private BaseBottomSheetItem createDividerItem() {

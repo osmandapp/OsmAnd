@@ -3366,6 +3366,9 @@
     <string name="poi_climbing_bolted_no">Fixpunkte: nein</string>
     <string name="poi_climbing_summit_log_yes">Gipfelbuch: ja</string>
     <string name="poi_climbing_summit_log_no">Gipfelbuch: nein</string>
+    <string name="poi_climbing_grade_saxon_min">Einfachste Route (Sächsisch)</string>
+    <string name="poi_climbing_grade_french_min">Einfachste Route (Französisch)</string>
+    <string name="poi_climbing_grade_uiaa_min">Einfachste Route (UIAA)</string>
     <string name="poi_circumference">Umfang</string>
     <string name="poi_meadow_perpetual">Typ: dauernd</string>
     <string name="poi_meadow_pasture">Typ: Weide</string>

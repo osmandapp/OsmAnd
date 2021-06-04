@@ -579,6 +579,25 @@ public class OsmandSettings {
 		return global ? globalPreferences : profilePreferences;
 	}
 
+	private static final String LAST_PREFERENCES_EDIT_TIME = "last_preferences_edit_time";
+
+	public long getLastModePreferencesEditTime(ApplicationMode mode) {
+		Object preferences = getProfilePreferences(mode);
+		return getLastPreferencesEditTime(preferences);
+	}
+
+	public long getLastGlobalPreferencesEditTime() {
+		return getLastPreferencesEditTime(globalPreferences);
+	}
+
+	private long getLastPreferencesEditTime(Object preferences) {
+		return settingsAPI.getLong(preferences, LAST_PREFERENCES_EDIT_TIME, 0);
+	}
+
+	protected void updateLastPreferencesEditTime(Object preferences) {
+		long time = System.currentTimeMillis();
+		settingsAPI.edit(preferences).putLong(LAST_PREFERENCES_EDIT_TIME, time).commit();
+	}
 
 	@SuppressWarnings("unchecked")
 	public CommonPreference<Boolean> registerBooleanPreference(String id, boolean defValue) {
@@ -2594,7 +2613,11 @@ public class OsmandSettings {
 	}
 
 	public void setSelectedPoiFilters(final Set<String> poiFilters) {
-		SELECTED_POI_FILTER_FOR_MAP.set(android.text.TextUtils.join(",", poiFilters));
+		setSelectedPoiFilters(APPLICATION_MODE.get(), poiFilters);
+	}
+
+	public void setSelectedPoiFilters(@NonNull ApplicationMode appMode, final Set<String> poiFilters) {
+		SELECTED_POI_FILTER_FOR_MAP.setModeValue(appMode, android.text.TextUtils.join(",", poiFilters));
 	}
 
 	public final ListStringPreference POI_FILTERS_ORDER = (ListStringPreference)

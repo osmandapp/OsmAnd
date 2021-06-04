@@ -9,6 +9,7 @@ import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -81,6 +82,11 @@ public class MapMarkersDbHelper {
 
 	public MapMarkersDbHelper(OsmandApplication context) {
 		this.context = context;
+	}
+
+	public long getLastModifiedTime() {
+		File dbFile = context.getDatabasePath(DB_NAME);
+		return dbFile.exists() ? dbFile.lastModified() : 0;
 	}
 
 	private SQLiteConnection openConnection(boolean readonly) {
@@ -375,8 +381,6 @@ public class MapMarkersDbHelper {
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
-				marker.visitedDate = System.currentTimeMillis();
-
 				db.execSQL("UPDATE " + MARKERS_TABLE_NAME + " SET " +
 						MARKERS_COL_ACTIVE + " = ?, " +
 						MARKERS_COL_VISITED + " = ?, " +

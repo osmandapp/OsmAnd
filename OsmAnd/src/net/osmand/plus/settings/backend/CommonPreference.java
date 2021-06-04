@@ -97,8 +97,11 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 
 		Object profilePrefs = settings.getProfilePreferences(mode);
 		boolean valueSaved = setValue(profilePrefs, obj);
-		if (valueSaved && cache && cachedPreference == profilePrefs) {
-			cachedValue = obj;
+		if (valueSaved) {
+			settings.updateLastPreferencesEditTime(profilePrefs);
+			if (cache && cachedPreference == profilePrefs) {
+				cachedValue = obj;
+			}
 		}
 		fireEvent(obj);
 
@@ -182,6 +185,7 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 		if (setValue(prefs, obj)) {
 			cachedValue = obj;
 			cachedPreference = prefs;
+			settings.updateLastPreferencesEditTime(prefs);
 			fireEvent(obj);
 			return true;
 		}

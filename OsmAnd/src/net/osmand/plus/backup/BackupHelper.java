@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 
 import net.osmand.AndroidNetworkUtils;
+import net.osmand.AndroidNetworkUtils.OnFileUploadCallback;
 import net.osmand.AndroidNetworkUtils.OnFilesDownloadCallback;
 import net.osmand.AndroidNetworkUtils.OnFilesUploadCallback;
 import net.osmand.AndroidNetworkUtils.OnRequestResultListener;
@@ -17,16 +18,26 @@ import net.osmand.AndroidNetworkUtils.OnSendRequestsListener;
 import net.osmand.AndroidNetworkUtils.Request;
 import net.osmand.AndroidNetworkUtils.RequestResponse;
 import net.osmand.AndroidUtils;
-import net.osmand.IndexConstants;
+import net.osmand.PlatformUtil;
+import net.osmand.StreamWriter;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxDbHelper;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
+import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
+import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.backup.AbstractProgress;
+import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.GpxSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,6 +45,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,6 +60,11 @@ public class BackupHelper {
 	private final OsmandSettings settings;
 	private final FavouritesDbHelper favouritesHelper;
 	private final GpxDbHelper gpxHelper;
+	private final BackupDbHelper dbHelper;
+
+	public static final Log LOG = PlatformUtil.getLog(BackupHelper.class);
+
+	public final static String INFO_EXT = ".info";
 
 	private static final ThreadPoolExecutor EXECUTOR = new ThreadPoolExecutor(1, 1, 0L,
 			TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>());
@@ -60,6 +77,9 @@ public class BackupHelper {
 	private static final String LIST_FILES_URL = SERVER_URL + "/userdata/list-files";
 	private static final String DOWNLOAD_FILE_URL = SERVER_URL + "/userdata/download-file";
 	private static final String DELETE_FILE_URL = SERVER_URL + "/userdata/delete-file";
+	private static final String DELETE_FILE_VERSION_URL = SERVER_URL + "/userdata/delete-file-version";
+
+	private static final String BACKUP_TYPE_PREFIX = "backup_type_";
 
 	public final static int STATUS_SUCCESS = 0;
 	public final static int STATUS_PARSE_JSON_ERROR = 1;
@@ -75,6 +95,8 @@ public class BackupHelper {
 	public static final int SERVER_ERROR_CODE_GZIP_ONLY_SUPPORTED_UPLOAD = 107;
 	public static final int SERVER_ERROR_CODE_SIZE_OF_SUPPORTED_BOX_IS_EXCEEDED = 108;
 
+	private List<RemoteFile> remoteFiles;
+
 	public interface OnRegisterUserListener {
 		void onRegisterUser(int status, @Nullable String message, @Nullable String error);
 	}
@@ -84,16 +106,21 @@ public class BackupHelper {
 	}
 
 	public interface OnDownloadFileListListener {
-		void onDownloadFileList(int status, @Nullable String message, @NonNull List<UserFile> userFiles);
+		void onDownloadFileList(int status, @Nullable String message, @NonNull List<RemoteFile> remoteFiles);
 	}
 
 	public interface OnCollectLocalFilesListener {
-		void onFileCollected(@NonNull GpxFileInfo fileInfo);
-		void onFilesCollected(@NonNull List<GpxFileInfo> fileInfos);
+		void onFileCollected(@NonNull LocalFile fileInfo);
+		void onFilesCollected(@NonNull List<LocalFile> fileInfos);
 	}
 
 	public interface OnGenerateBackupInfoListener {
 		void onBackupInfoGenerated(@Nullable BackupInfo backupInfo, @Nullable String error);
+	}
+
+	public interface OnUploadFileListener {
+		void onFileUploadProgress(@NonNull String type, @NonNull String fileName, int progress, int deltaWork);
+		void onFileUploadDone(@NonNull String type, @NonNull String fileName, long uploadTime, @Nullable String error);
 	}
 
 	public interface OnUploadFilesListener {
@@ -103,12 +130,13 @@ public class BackupHelper {
 	}
 
 	public interface OnDeleteFilesListener {
-		void onFileDeleteProgress(@NonNull UserFile file);
-		void onFilesDeleteDone(@NonNull Map<UserFile, String> errors);
+		void onFileDeleteProgress(@NonNull RemoteFile file);
+		void onFilesDeleteDone(@NonNull Map<RemoteFile, String> errors);
+		void onFilesDeleteError(int status, @NonNull String message);
 	}
 
 	public interface OnDownloadFileListener {
-		void onFileDownloadProgress(@NonNull UserFile userFile, int progress);
+		void onFileDownloadProgress(@NonNull RemoteFile remoteFile, int progress);
 
 		@WorkerThread
 		void onFileDownloadedAsync(@NonNull File file);
@@ -117,10 +145,10 @@ public class BackupHelper {
 	}
 
 	public static class BackupInfo {
-		public List<UserFile> filesToDownload = new ArrayList<>();
-		public List<GpxFileInfo> filesToUpload = new ArrayList<>();
-		public List<UserFile> filesToDelete = new ArrayList<>();
-		public List<Pair<GpxFileInfo, UserFile>> filesToMerge = new ArrayList<>();
+		public List<RemoteFile> filesToDownload = new ArrayList<>();
+		public List<LocalFile> filesToUpload = new ArrayList<>();
+		public List<RemoteFile> filesToDelete = new ArrayList<>();
+		public List<Pair<LocalFile, RemoteFile>> filesToMerge = new ArrayList<>();
 	}
 
 	public BackupHelper(@NonNull OsmandApplication app) {
@@ -128,6 +156,25 @@ public class BackupHelper {
 		this.settings = app.getSettings();
 		this.favouritesHelper = app.getFavorites();
 		this.gpxHelper = app.getGpxDbHelper();
+		this.dbHelper = new BackupDbHelper(app);
+	}
+
+	@NonNull
+	public OsmandApplication getApp() {
+		return app;
+	}
+
+	@NonNull
+	public BackupDbHelper getDbHelper() {
+		return dbHelper;
+	}
+
+	public List<RemoteFile> getRemoteFiles() {
+		return remoteFiles;
+	}
+
+	void setRemoteFiles(List<RemoteFile> remoteFiles) {
+		this.remoteFiles = remoteFiles;
 	}
 
 	@SuppressLint("HardwareIds")
@@ -172,9 +219,66 @@ public class BackupHelper {
 		}
 	}
 
+	public void updateFileUploadTime(@NonNull String type, @NonNull String fileName, long updateTime) {
+		BackupDbHelper dbHelper = getDbHelper();
+		UploadedFileInfo info = dbHelper.getUploadedFileInfo(type, fileName);
+		if (info != null) {
+			info.setUploadTime(updateTime);
+			dbHelper.updateUploadedFileInfo(info);
+		} else {
+			info = new UploadedFileInfo(type, fileName, updateTime);
+			dbHelper.addUploadedFileInfo(info);
+		}
+	}
+
+	public void updateBackupUploadTime() {
+		settings.BACKUP_LAST_UPLOADED_TIME.set(System.currentTimeMillis() + 1);
+	}
+
 	public void logout() {
 		settings.BACKUP_DEVICE_ID.resetToDefault();
 		settings.BACKUP_ACCESS_TOKEN.resetToDefault();
+	}
+
+	public CommonPreference<Boolean> getBackupTypePref(@NonNull ExportSettingsType type) {
+		return app.getSettings().registerBooleanPreference(BACKUP_TYPE_PREFIX + type.name(), true).makeGlobal().makeShared();
+	}
+
+	@NonNull
+	public static String getItemFileName(@NonNull SettingsItem item) {
+		String fileName;
+		if (item instanceof FileSettingsItem) {
+			FileSettingsItem fileItem = (FileSettingsItem) item;
+			fileName = BackupHelper.getFileItemName(fileItem);
+		} else {
+			fileName = item.getFileName();
+			if (Algorithms.isEmpty(fileName)) {
+				fileName = item.getDefaultFileName();
+			}
+		}
+		return fileName;
+	}
+
+	@NonNull
+	public static String getFileItemName(@NonNull FileSettingsItem fileSettingsItem) {
+		return getFileItemName(null, fileSettingsItem);
+	}
+
+	@NonNull
+	public static String getFileItemName(@Nullable File file, @NonNull FileSettingsItem fileSettingsItem) {
+		String subtypeFolder = fileSettingsItem.getSubtype().getSubtypeFolder();
+		String fileName;
+		if (file == null) {
+			file = fileSettingsItem.getFile();
+		}
+		if (Algorithms.isEmpty(subtypeFolder)) {
+			fileName = file.getName();
+		} else if (fileSettingsItem instanceof GpxSettingsItem) {
+			fileName = file.getPath().substring(file.getPath().indexOf(subtypeFolder) + subtypeFolder.length());
+		} else {
+			fileName = file.getPath().substring(file.getPath().indexOf(subtypeFolder) - 1);
+		}
+		return fileName;
 	}
 
 	public void registerUser(@NonNull final String email, @Nullable final OnRegisterUserListener listener) {
@@ -265,7 +369,84 @@ public class BackupHelper {
 		}, EXECUTOR);
 	}
 
-	public void uploadFiles(@NonNull List<GpxFileInfo> gpxFiles, @Nullable final OnUploadFilesListener listener) throws UserNotRegisteredException {
+	public void prepareBackupInfo(OnPrepareBackupListener listener) {
+		new PrepareBackupTask(app, listener).prepare();
+	}
+
+	private void prepareFileUpload(@NonNull String fileName, @NonNull String type, long uploadTime,
+								   @NonNull Map<String, String> params, @NonNull Map<String, String> headers) {
+		params.put("deviceid", getDeviceId());
+		params.put("accessToken", getAccessToken());
+		params.put("name", fileName);
+		params.put("type", type);
+		params.put("clienttime", String.valueOf(uploadTime));
+
+		headers.put("Accept-Encoding", "deflate, gzip");
+	}
+
+	public String uploadFileSync(@NonNull String fileName, @NonNull String type, @NonNull StreamWriter streamWriter,
+								 @Nullable final OnUploadFileListener listener) throws UserNotRegisteredException {
+		checkRegistered();
+
+		final long uploadTime = System.currentTimeMillis();
+
+		Map<String, String> params = new HashMap<>();
+		params.put("deviceid", getDeviceId());
+		params.put("accessToken", getAccessToken());
+		params.put("name", fileName);
+		params.put("type", type);
+		params.put("clienttime", String.valueOf(uploadTime));
+
+		Map<String, String> headers = new HashMap<>();
+		headers.put("Accept-Encoding", "deflate, gzip");
+
+		String error = AndroidNetworkUtils.uploadFile(UPLOAD_FILE_URL, streamWriter, fileName, true, params, headers,
+				new AbstractProgress() {
+					int progress = 0;
+
+					@Override
+					public void progress(int deltaWork) {
+						if (listener != null) {
+							progress += deltaWork;
+							listener.onFileUploadProgress(type, fileName, progress, deltaWork);
+						}
+					}
+				});
+		error = error != null ? resolveServerError(error) : null;
+		if (listener != null) {
+			listener.onFileUploadDone(type, fileName, uploadTime, error);
+		}
+		return error;
+	}
+
+	public void uploadFile(@NonNull String fileName, @NonNull String type, @NonNull StreamWriter streamWriter,
+						   @Nullable final OnUploadFileListener listener) throws UserNotRegisteredException {
+		checkRegistered();
+
+		final long uploadTime = System.currentTimeMillis();
+		Map<String, String> params = new HashMap<>();
+		Map<String, String> headers = new HashMap<>();
+		prepareFileUpload(fileName, type, uploadTime, params, headers);
+
+		AndroidNetworkUtils.uploadFileAsync(UPLOAD_FILE_URL, streamWriter, fileName, true, params, headers, new OnFileUploadCallback() {
+
+			@Override
+			public void onFileUploadProgress(int progress) {
+				if (listener != null) {
+					listener.onFileUploadProgress(type, fileName, progress, 0);
+				}
+			}
+
+			@Override
+			public void onFileUploadDone(@Nullable String error) {
+				if (listener != null) {
+					listener.onFileUploadDone(type, fileName, uploadTime, error != null ? resolveServerError(error) : null);
+				}
+			}
+		}, EXECUTOR);
+	}
+
+	public void uploadFiles(@NonNull List<LocalFile> localFiles, @Nullable final OnUploadFilesListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 
 		Map<String, String> params = new HashMap<>();
@@ -274,22 +455,22 @@ public class BackupHelper {
 		Map<String, String> headers = new HashMap<>();
 		headers.put("Accept-Encoding", "deflate, gzip");
 
-		final Map<File, GpxFileInfo> gpxInfos = new HashMap<>();
-		for (GpxFileInfo gpxFile : gpxFiles) {
-			gpxInfos.put(gpxFile.file, gpxFile);
+		final Map<File, LocalFile> localFileMap = new HashMap<>();
+		for (LocalFile localFile : localFiles) {
+			localFileMap.put(localFile.file, localFile);
 		}
 		final File favoritesFile = favouritesHelper.getExternalFile();
-		AndroidNetworkUtils.uploadFilesAsync(UPLOAD_FILE_URL, new ArrayList<>(gpxInfos.keySet()), true, params, headers, new OnFilesUploadCallback() {
+		AndroidNetworkUtils.uploadFilesAsync(UPLOAD_FILE_URL, new ArrayList<>(localFileMap.keySet()), true, params, headers, new OnFilesUploadCallback() {
 			@Nullable
 			@Override
 			public Map<String, String> getAdditionalParams(@NonNull File file) {
 				Map<String, String> additionaParams = new HashMap<>();
-				GpxFileInfo gpxFileInfo = gpxInfos.get(file);
-				if (gpxFileInfo != null) {
-					additionaParams.put("name", gpxFileInfo.getFileName(true));
+				LocalFile localFile = localFileMap.get(file);
+				if (localFile != null) {
+					additionaParams.put("name", localFile.getFileName(true));
 					additionaParams.put("type", Algorithms.getFileExtension(file));
-					gpxFileInfo.uploadTime = System.currentTimeMillis();
-					additionaParams.put("clienttime", String.valueOf(gpxFileInfo.uploadTime));
+					localFile.uploadTime = System.currentTimeMillis();
+					additionaParams.put("clienttime", String.valueOf(localFile.uploadTime));
 				}
 				return additionaParams;
 			}
@@ -304,14 +485,14 @@ public class BackupHelper {
 			@Override
 			public void onFileUploadDone(@NonNull File file) {
 				if (listener != null) {
-					GpxFileInfo gpxFileInfo = gpxInfos.get(file);
-					if (gpxFileInfo != null) {
+					LocalFile localFile = localFileMap.get(file);
+					if (localFile != null) {
 						if (file.equals(favoritesFile)) {
-							favouritesHelper.setLastUploadedTime(gpxFileInfo.uploadTime);
+							favouritesHelper.setLastUploadedTime(localFile.uploadTime);
 						} else {
 							GpxDataItem gpxItem = gpxHelper.getItem(file);
 							if (gpxItem != null) {
-								gpxHelper.updateLastUploadedTime(gpxItem, gpxFileInfo.uploadTime);
+								gpxHelper.updateLastUploadedTime(gpxItem, localFile.uploadTime);
 							}
 						}
 					}
@@ -331,7 +512,11 @@ public class BackupHelper {
 		}, EXECUTOR);
 	}
 
-	public void deleteFiles(@NonNull List<UserFile> userFiles, @Nullable final OnDeleteFilesListener listener) throws UserNotRegisteredException {
+	public void deleteFiles(@NonNull List<RemoteFile> remoteFiles, @Nullable final OnDeleteFilesListener listener) throws UserNotRegisteredException {
+		deleteFiles(remoteFiles, false, listener);
+	}
+
+	public void deleteFiles(@NonNull List<RemoteFile> remoteFiles, boolean byVersion, @Nullable final OnDeleteFilesListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 
 		Map<String, String> commonParameters = new HashMap<>();
@@ -339,22 +524,25 @@ public class BackupHelper {
 		commonParameters.put("accessToken", getAccessToken());
 
 		final List<Request> requests = new ArrayList<>();
-		final Map<Request, UserFile> filesMap = new HashMap<>();
-		for (UserFile userFile : userFiles) {
+		final Map<Request, RemoteFile> filesMap = new HashMap<>();
+		for (RemoteFile remoteFile : remoteFiles) {
 			Map<String, String> parameters = new HashMap<>(commonParameters);
-			parameters.put("name", userFile.getName());
-			parameters.put("type", userFile.getType());
-			Request r = new Request(DELETE_FILE_URL, parameters, null, false, true);
+			parameters.put("name", remoteFile.getName());
+			parameters.put("type", remoteFile.getType());
+			if (byVersion) {
+				parameters.put("updatetime", String.valueOf(remoteFile.getUpdatetimems()));
+			}
+			Request r = new Request(byVersion ? DELETE_FILE_VERSION_URL : DELETE_FILE_URL, parameters, null, false, true);
 			requests.add(r);
-			filesMap.put(r, userFile);
+			filesMap.put(r, remoteFile);
 		}
 		AndroidNetworkUtils.sendRequestsAsync(null, requests, new OnSendRequestsListener() {
 			@Override
 			public void onRequestSent(@NonNull RequestResponse response) {
 				if (listener != null) {
-					UserFile userFile = filesMap.get(response.getRequest());
-					if (userFile != null) {
-						listener.onFileDeleteProgress(userFile);
+					RemoteFile remoteFile = filesMap.get(response.getRequest());
+					if (remoteFile != null) {
+						listener.onFileDeleteProgress(remoteFile);
 					}
 				}
 			}
@@ -362,10 +550,10 @@ public class BackupHelper {
 			@Override
 			public void onRequestsSent(@NonNull List<RequestResponse> results) {
 				if (listener != null) {
-					Map<UserFile, String> errors = new HashMap<>();
+					Map<RemoteFile, String> errors = new HashMap<>();
 					for (RequestResponse response : results) {
-						UserFile userFile = filesMap.get(response.getRequest());
-						if (userFile != null) {
+						RemoteFile remoteFile = filesMap.get(response.getRequest());
+						if (remoteFile != null) {
 							boolean success;
 							String message = null;
 							String errorStr = response.getError();
@@ -388,7 +576,7 @@ public class BackupHelper {
 								}
 							}
 							if (!success) {
-								errors.put(userFile, message);
+								errors.put(remoteFile, message);
 							}
 						}
 					}
@@ -398,18 +586,33 @@ public class BackupHelper {
 		}, EXECUTOR);
 	}
 
+	public void downloadFileListSync(@Nullable final OnDownloadFileListListener listener) throws UserNotRegisteredException {
+		checkRegistered();
+
+		Map<String, String> params = new HashMap<>();
+		params.put("deviceid", getDeviceId());
+		params.put("accessToken", getAccessToken());
+		AndroidNetworkUtils.sendRequest(app, LIST_FILES_URL, params, "Download file list", false, false,
+				getDownloadFileListListener(listener));
+	}
+
 	public void downloadFileList(@Nullable final OnDownloadFileListListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 
 		Map<String, String> params = new HashMap<>();
 		params.put("deviceid", getDeviceId());
 		params.put("accessToken", getAccessToken());
-		AndroidNetworkUtils.sendRequestAsync(app, LIST_FILES_URL, params, "Download file list", false, false, new OnRequestResultListener() {
+		AndroidNetworkUtils.sendRequestAsync(app, LIST_FILES_URL, params, "Download file list", false, false,
+				getDownloadFileListListener(listener), EXECUTOR);
+	}
+
+	private OnRequestResultListener getDownloadFileListListener(@Nullable OnDownloadFileListListener listener) {
+		return new OnRequestResultListener() {
 			@Override
 			public void onResult(@Nullable String resultJson, @Nullable String error) {
 				int status;
 				String message;
-				List<UserFile> userFiles = new ArrayList<>();
+				List<RemoteFile> remoteFiles = new ArrayList<>();
 				if (!Algorithms.isEmpty(error)) {
 					status = STATUS_SERVER_ERROR;
 					message = "Download file list error: " + parseServerError(error);
@@ -421,7 +624,7 @@ public class BackupHelper {
 						String totalFileVersions = result.getString("totalFileVersions");
 						JSONArray files = result.getJSONArray("uniqueFiles");
 						for (int i = 0; i < files.length(); i++) {
-							userFiles.add(new UserFile(files.getJSONObject(i)));
+							remoteFiles.add(new RemoteFile(files.getJSONObject(i)));
 						}
 
 						status = STATUS_SUCCESS;
@@ -437,13 +640,194 @@ public class BackupHelper {
 					message = "Download file list error: empty response";
 				}
 				if (listener != null) {
-					listener.onDownloadFileList(status, message, userFiles);
+					listener.onDownloadFileList(status, message, remoteFiles);
 				}
 			}
-		}, EXECUTOR);
+		};
 	}
 
-	public void downloadFiles(@NonNull final Map<File, UserFile> filesMap, @Nullable final OnDownloadFileListener listener) throws UserNotRegisteredException {
+	public void deleteAllFiles(@Nullable final OnDeleteFilesListener listener) throws UserNotRegisteredException {
+		checkRegistered();
+
+		Map<String, String> params = new HashMap<>();
+		params.put("deviceid", getDeviceId());
+		params.put("accessToken", getAccessToken());
+		params.put("allVersions", "true");
+		AndroidNetworkUtils.sendRequestAsync(app, LIST_FILES_URL, params, "Delete all files", false, false,
+				getDeleteAllFilesListener(listener), EXECUTOR);
+	}
+
+	private OnRequestResultListener getDeleteAllFilesListener(@Nullable OnDeleteFilesListener listener) {
+		return new OnRequestResultListener() {
+			@Override
+			public void onResult(@Nullable String resultJson, @Nullable String error) {
+				int status;
+				String message;
+				List<RemoteFile> remoteFiles = new ArrayList<>();
+				if (!Algorithms.isEmpty(error)) {
+					status = STATUS_SERVER_ERROR;
+					message = "Download file list error: " + parseServerError(error);
+				} else if (!Algorithms.isEmpty(resultJson)) {
+					try {
+						JSONObject result = new JSONObject(resultJson);
+						JSONArray files = result.getJSONArray("allFiles");
+						for (int i = 0; i < files.length(); i++) {
+							remoteFiles.add(new RemoteFile(files.getJSONObject(i)));
+						}
+						status = STATUS_SUCCESS;
+						message = "OK";
+					} catch (JSONException | ParseException e) {
+						status = STATUS_PARSE_JSON_ERROR;
+						message = "Download file list error: json parsing";
+					}
+				} else {
+					status = STATUS_EMPTY_RESPONSE_ERROR;
+					message = "Download file list error: empty response";
+				}
+				if (status != STATUS_SUCCESS) {
+					if (listener != null) {
+						listener.onFilesDeleteError(status, message);
+					}
+				} else {
+					try {
+						if (!remoteFiles.isEmpty()) {
+							deleteFiles(remoteFiles, true, listener);
+						} else {
+							if (listener != null) {
+								listener.onFilesDeleteDone(Collections.emptyMap());
+							}
+						}
+					} catch (UserNotRegisteredException e) {
+						if (listener != null) {
+							listener.onFilesDeleteError(STATUS_SERVER_ERROR, "User not registered");
+						}
+					}
+				}
+			}
+		};
+	}
+
+	public void deleteOldFiles(@Nullable final OnDeleteFilesListener listener) throws UserNotRegisteredException {
+		checkRegistered();
+
+		Map<String, String> params = new HashMap<>();
+		params.put("deviceid", getDeviceId());
+		params.put("accessToken", getAccessToken());
+		params.put("allVersions", "true");
+		AndroidNetworkUtils.sendRequestAsync(app, LIST_FILES_URL, params, "Delete old files", false, false,
+				getDeleteOldFilesListener(listener), EXECUTOR);
+	}
+
+	private OnRequestResultListener getDeleteOldFilesListener(@Nullable OnDeleteFilesListener listener) {
+		return new OnRequestResultListener() {
+			@Override
+			public void onResult(@Nullable String resultJson, @Nullable String error) {
+				int status;
+				String message;
+				List<RemoteFile> remoteFiles = new ArrayList<>();
+				if (!Algorithms.isEmpty(error)) {
+					status = STATUS_SERVER_ERROR;
+					message = "Download file list error: " + parseServerError(error);
+				} else if (!Algorithms.isEmpty(resultJson)) {
+					try {
+						JSONObject result = new JSONObject(resultJson);
+						JSONArray allFiles = result.getJSONArray("allFiles");
+						for (int i = 0; i < allFiles.length(); i++) {
+							remoteFiles.add(new RemoteFile(allFiles.getJSONObject(i)));
+						}
+						JSONArray uniqueFiles = result.getJSONArray("uniqueFiles");
+						for (int i = 0; i < uniqueFiles.length(); i++) {
+							remoteFiles.remove(new RemoteFile(uniqueFiles.getJSONObject(i)));
+						}
+						status = STATUS_SUCCESS;
+						message = "OK";
+					} catch (JSONException | ParseException e) {
+						status = STATUS_PARSE_JSON_ERROR;
+						message = "Download file list error: json parsing";
+					}
+				} else {
+					status = STATUS_EMPTY_RESPONSE_ERROR;
+					message = "Download file list error: empty response";
+				}
+				if (status != STATUS_SUCCESS) {
+					if (listener != null) {
+						listener.onFilesDeleteError(status, message);
+					}
+				} else {
+					try {
+						if (!remoteFiles.isEmpty()) {
+							deleteFiles(remoteFiles, true, listener);
+						} else {
+							if (listener != null) {
+								listener.onFilesDeleteDone(Collections.emptyMap());
+							}
+						}
+					} catch (UserNotRegisteredException e) {
+						if (listener != null) {
+							listener.onFilesDeleteError(STATUS_SERVER_ERROR, "User not registered");
+						}
+					}
+				}
+			}
+		};
+	}
+
+	@NonNull
+	public Map<File, String> downloadFilesSync(@NonNull final Map<File, RemoteFile> filesMap,
+											   @Nullable final OnDownloadFileListener listener) throws UserNotRegisteredException {
+		checkRegistered();
+
+		Map<File, String> res = new HashMap<>();
+		Map<String, String> params = new HashMap<>();
+		params.put("deviceid", getDeviceId());
+		params.put("accessToken", getAccessToken());
+		AndroidNetworkUtils.downloadFiles(DOWNLOAD_FILE_URL,
+				new ArrayList<>(filesMap.keySet()), params, new OnFilesDownloadCallback() {
+					@Nullable
+					@Override
+					public Map<String, String> getAdditionalParams(@NonNull File file) {
+						RemoteFile remoteFile = filesMap.get(file);
+						Map<String, String> additionaParams = new HashMap<>();
+						additionaParams.put("name", remoteFile.getName());
+						additionaParams.put("type", remoteFile.getType());
+						return additionaParams;
+					}
+
+					@Override
+					public void onFileDownloadProgress(@NonNull File file, int percent) {
+						if (listener != null) {
+							listener.onFileDownloadProgress(filesMap.get(file), percent);
+						}
+					}
+
+					@Override
+					public void onFileDownloadDone(@NonNull File file) {
+						if (listener != null) {
+							listener.onFileDownloaded(file);
+						}
+					}
+
+					@Override
+					public void onFileDownloadedAsync(@NonNull File file) {
+						if (listener != null) {
+							listener.onFileDownloadedAsync(file);
+						}
+					}
+
+					@Override
+					public void onFilesDownloadDone(@NonNull Map<File, String> errors) {
+						Map<File, String> errMap = resolveServerErrors(errors);
+						res.putAll(errMap);
+						if (listener != null) {
+							listener.onFilesDownloadDone(errMap);
+						}
+					}
+				});
+		return res;
+	}
+
+	public void downloadFiles(@NonNull final Map<File, RemoteFile> filesMap,
+							  @Nullable final OnDownloadFileListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 
 		Map<String, String> params = new HashMap<>();
@@ -454,10 +838,10 @@ public class BackupHelper {
 					@Nullable
 					@Override
 					public Map<String, String> getAdditionalParams(@NonNull File file) {
-						UserFile userFile = filesMap.get(file);
+						RemoteFile remoteFile = filesMap.get(file);
 						Map<String, String> additionaParams = new HashMap<>();
-						additionaParams.put("name", userFile.getName());
-						additionaParams.put("type", userFile.getType());
+						additionaParams.put("name", remoteFile.getName());
+						additionaParams.put("type", remoteFile.getType());
 						return additionaParams;
 					}
 
@@ -493,78 +877,52 @@ public class BackupHelper {
 
 	@SuppressLint("StaticFieldLeak")
 	public void collectLocalFiles(@Nullable final OnCollectLocalFilesListener listener) {
-		AsyncTask<Void, GpxFileInfo, List<GpxFileInfo>> task = new AsyncTask<Void, GpxFileInfo, List<GpxFileInfo>>() {
-
-			private final OnCollectLocalFilesListener internalListener = new OnCollectLocalFilesListener() {
-				@Override
-				public void onFileCollected(@NonNull GpxFileInfo fileInfo) {
-					publishProgress(fileInfo);
-				}
-
-				@Override
-				public void onFilesCollected(@NonNull List<GpxFileInfo> fileInfos) {
-				}
-			};
-
-			private void loadGPXData(@NonNull File mapPath, @NonNull List<GpxFileInfo> result,
-									 @Nullable OnCollectLocalFilesListener listener) {
-				if (mapPath.canRead()) {
-					loadGPXFolder(mapPath, result, "", listener);
-				}
-			}
-
-			private void loadGPXFolder(@NonNull File mapPath, @NonNull List<GpxFileInfo> result,
-									   @NonNull String gpxSubfolder, @Nullable OnCollectLocalFilesListener listener) {
-				File[] listFiles = mapPath.listFiles();
-				if (listFiles != null) {
-					for (File gpxFile : listFiles) {
-						if (gpxFile.isDirectory()) {
-							String sub = gpxSubfolder.length() == 0 ? gpxFile.getName() : gpxSubfolder + "/"
-									+ gpxFile.getName();
-							loadGPXFolder(gpxFile, result, sub, listener);
-						} else if (gpxFile.isFile() && gpxFile.getName().toLowerCase().endsWith(IndexConstants.GPX_FILE_EXT)) {
-							GpxFileInfo info = new GpxFileInfo();
-							info.subfolder = gpxSubfolder;
-							info.file = gpxFile;
-							GpxDataItem gpxItem = gpxHelper.getItem(gpxFile);
-							if (gpxItem != null) {
-								info.uploadTime = gpxItem.getFileLastUploadedTime();
-							}
-							result.add(info);
-							if (listener != null) {
-								listener.onFileCollected(info);
-							}
-						}
-					}
-				}
-			}
+		AsyncTask<Void, LocalFile, List<LocalFile>> task = new AsyncTask<Void, LocalFile, List<LocalFile>>() {
 
 			@Override
-			protected List<GpxFileInfo> doInBackground(Void... voids) {
-				List<GpxFileInfo> result = new ArrayList<>();
+			protected List<LocalFile> doInBackground(Void... voids) {
+				List<LocalFile> result = new ArrayList<>();
 
-				GpxFileInfo favInfo = new GpxFileInfo();
-				favInfo.subfolder = "";
-				favInfo.file = favouritesHelper.getExternalFile();
-				favInfo.uploadTime = favouritesHelper.getLastUploadedTime();
-				result.add(favInfo);
-				if (listener != null) {
-					listener.onFileCollected(favInfo);
+				List<SettingsItem> localItems = getFilteredLocalItems();
+				for (SettingsItem item : localItems) {
+					String fileName = BackupHelper.getItemFileName(item);
+					LocalFile localFile = new LocalFile();
+					localFile.item = item;
+					localFile.subfolder = "";
+					localFile.fileName = fileName;
+					localFile.localModifiedTime = item.getLastModifiedTime();
+					UploadedFileInfo info = app.getBackupHelper().getDbHelper().getUploadedFileInfo(item.getType().name(), fileName);
+					if (info != null) {
+						localFile.uploadTime = info.getUploadTime();
+					}
+
+					result.add(localFile);
+					if (listener != null) {
+						listener.onFileCollected(localFile);
+					}
 				}
-
-				loadGPXData(app.getAppPath(IndexConstants.GPX_INDEX_DIR), result, internalListener);
 				return result;
 			}
 
+			private List<SettingsItem> getFilteredLocalItems() {
+				List<ExportSettingsType> settingsTypes = new ArrayList<>();
+				for (ExportSettingsType type : ExportSettingsType.values()) {
+					if (getBackupTypePref(type).get()) {
+						settingsTypes.add(type);
+					}
+				}
+				return app.getFileSettingsHelper().getFilteredSettingsItems(settingsTypes, true, true);
+			}
+
 			@Override
-			protected void onProgressUpdate(GpxFileInfo... fileInfos) {
+			protected void onProgressUpdate(LocalFile... fileInfos) {
 				if (listener != null) {
 					listener.onFileCollected(fileInfos[0]);
 				}
 			}
 
 			@Override
-			protected void onPostExecute(List<GpxFileInfo> fileInfos) {
+			protected void onPostExecute(List<LocalFile> fileInfos) {
 				if (listener != null) {
 					listener.onFilesCollected(fileInfos);
 				}
@@ -577,17 +935,23 @@ public class BackupHelper {
 		Map<File, String> resolvedErrors = new HashMap<>();
 		for (Entry<File, String> fileError : errors.entrySet()) {
 			File file = fileError.getKey();
-			String errorStr = fileError.getValue();
-			try {
-				JSONObject errorJson = new JSONObject(errorStr);
-				JSONObject error = errorJson.getJSONObject("error");
-				errorStr = "Error " + error.getInt("errorCode") + " (" + error.getString("message") + ")";
-			} catch (JSONException e) {
-				// ignore
-			}
+			String errorStr = resolveServerError(fileError.getValue());
 			resolvedErrors.put(file, errorStr);
 		}
 		return resolvedErrors;
+	}
+
+	@NonNull
+	private String resolveServerError(@NonNull String fileError) {
+		String errorStr = fileError;
+		try {
+			JSONObject errorJson = new JSONObject(errorStr);
+			JSONObject error = errorJson.getJSONObject("error");
+			errorStr = "Error " + error.getInt("errorCode") + " (" + error.getString("message") + ")";
+		} catch (JSONException e) {
+			// ignore
+		}
+		return errorStr;
 	}
 
 	private String parseServerError(@NonNull String error) {
@@ -619,7 +983,7 @@ public class BackupHelper {
 	}
 
 	@SuppressLint("StaticFieldLeak")
-	public void generateBackupInfo(@NonNull final List<GpxFileInfo> localFiles, @NonNull final List<UserFile> remoteFiles,
+	public void generateBackupInfo(@NonNull final List<LocalFile> localFiles, @NonNull final List<RemoteFile> remoteFiles,
 								   @Nullable final OnGenerateBackupInfoListener listener) {
 
 		final long backupLastUploadedTime = settings.BACKUP_LAST_UPLOADED_TIME.get();
@@ -628,16 +992,15 @@ public class BackupHelper {
 			@Override
 			protected BackupInfo doInBackground(Void... voids) {
 				BackupInfo info = new BackupInfo();
-				for (UserFile remoteFile : remoteFiles) {
+				for (RemoteFile remoteFile : remoteFiles) {
 					boolean hasLocalFile = false;
-					for (GpxFileInfo localFile : localFiles) {
+					for (LocalFile localFile : localFiles) {
 						if (remoteFile.getName().equals(localFile.getFileName(true))) {
 							hasLocalFile = true;
 							long remoteUploadTime = remoteFile.getClienttimems();
 							long localUploadTime = localFile.uploadTime;
-							long localModifiedTime = localFile.file.lastModified();
 							if (remoteUploadTime == localUploadTime) {
-								if (localUploadTime < localModifiedTime) {
+								if (localUploadTime < localFile.localModifiedTime) {
 									info.filesToUpload.add(localFile);
 								}
 							} else {
@@ -654,9 +1017,9 @@ public class BackupHelper {
 						}
 					}
 				}
-				for (GpxFileInfo localFile : localFiles) {
+				for (LocalFile localFile : localFiles) {
 					boolean hasRemoteFile = false;
-					for (UserFile remoteFile : remoteFiles) {
+					for (RemoteFile remoteFile : remoteFiles) {
 						if (localFile.getFileName(true).equals(remoteFile.getName())) {
 							hasRemoteFile = true;
 							break;
