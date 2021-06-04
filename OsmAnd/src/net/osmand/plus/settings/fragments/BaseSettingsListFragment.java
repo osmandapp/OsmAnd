@@ -44,7 +44,7 @@ import java.util.Map;
 
 public abstract class BaseSettingsListFragment extends BaseOsmAndFragment implements OnItemSelectedListener {
 
-	protected static final String SETTINGS_LIST_TAG = "settings_list_tag";
+	public static final String SETTINGS_LIST_TAG = "settings_list_tag";
 
 	protected OsmandApplication app;
 

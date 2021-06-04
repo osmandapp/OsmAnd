@@ -85,6 +85,7 @@ public class BackupUploadCard extends BaseCard {
 			@Override
 			public void onClick(View v) {
 				buttonsVisible = !buttonsVisible;
+				adjustIndicator(app, buttonsVisible, view, nightMode);
 				AndroidUiHelper.updateVisibility(actionButton, buttonsVisible);
 				AndroidUiHelper.updateVisibility(itemsContainer, buttonsVisible);
 			}

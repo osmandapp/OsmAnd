@@ -46,14 +46,6 @@ public class FileSettingsHelper extends SettingsHelper {
 	ImportFileTask importTask;
 	final Map<File, ExportFileTask> exportAsyncTasks = new HashMap<>();
 
-	public interface SettingsImportListener {
-		void onSettingsImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> items);
-	}
-
-	public interface SettingsCollectListener {
-		void onSettingsCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items);
-	}
-
 	public interface SettingsExportListener {
 		void onSettingsExportFinished(@NonNull File file, boolean succeed);
 		void onSettingsExportProgressUpdate(int value);
@@ -102,7 +94,7 @@ public class FileSettingsHelper extends SettingsHelper {
 		}
 	}
 
-	void finishImport(@Nullable SettingsImportListener listener, boolean success,
+	void finishImport(@Nullable ImportListener listener, boolean success,
 					  @NonNull List<SettingsItem> items, boolean needRestart) {
 		importTask = null;
 		List<String> warnings = new ArrayList<>();
@@ -113,12 +105,12 @@ public class FileSettingsHelper extends SettingsHelper {
 			getApp().showToastMessage(AndroidUtils.formatWarnings(warnings).toString());
 		}
 		if (listener != null) {
-			listener.onSettingsImportFinished(success, needRestart, items);
+			listener.onImportFinished(success, needRestart, items);
 		}
 	}
 
 	public void collectSettings(@NonNull File settingsFile, String latestChanges, int version,
-								@Nullable SettingsCollectListener listener) {
+								@Nullable CollectListener listener) {
 		new ImportFileTask(this, settingsFile, latestChanges, version, listener)
 				.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
@@ -130,7 +122,7 @@ public class FileSettingsHelper extends SettingsHelper {
 	}
 
 	public void importSettings(@NonNull File settingsFile, @NonNull List<SettingsItem> items,
-							   String latestChanges, int version, @Nullable SettingsImportListener listener) {
+							   String latestChanges, int version, @Nullable ImportListener listener) {
 		new ImportFileTask(this, settingsFile, items, latestChanges, version, listener)
 				.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
