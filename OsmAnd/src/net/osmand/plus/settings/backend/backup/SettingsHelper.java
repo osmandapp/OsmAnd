@@ -104,6 +104,7 @@ public abstract class SettingsHelper {
 
 	public enum ImportType {
 		COLLECT,
+		COLLECT_AND_READ,
 		CHECK_DUPLICATES,
 		IMPORT
 	}

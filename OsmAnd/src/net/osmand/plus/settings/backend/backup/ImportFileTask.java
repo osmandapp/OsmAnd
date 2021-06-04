@@ -97,6 +97,7 @@ public class ImportFileTask extends AsyncTask<Void, Void, List<SettingsItem>> {
 	protected List<SettingsItem> doInBackground(Void... voids) {
 		switch (importType) {
 			case COLLECT:
+			case COLLECT_AND_READ:
 				try {
 					return importer.collectItems(file);
 				} catch (IllegalArgumentException e) {

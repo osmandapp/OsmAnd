@@ -89,8 +89,9 @@ public class ImportBackupTask extends AsyncTask<Void, Void, List<SettingsItem>> 
 	protected List<SettingsItem> doInBackground(Void... voids) {
 		switch (importType) {
 			case COLLECT:
+			case COLLECT_AND_READ:
 				try {
-					return importer.collectItems();
+					return importer.collectItems(importType == ImportType.COLLECT_AND_READ);
 				} catch (IllegalArgumentException e) {
 					NetworkSettingsHelper.LOG.error("Failed to collect items for backup", e);
 				} catch (IOException e) {
