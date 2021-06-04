@@ -4432,4 +4432,7 @@
 	<string name="poi_glacier_status_marked_retreat">Glacier status: marked retreat</string>
 	<string name="poi_glacier_status_oscillating">Glacier status: oscillating</string>
 
+	<string name="poi_power_terminal">Power terminal</string>
+
+
 </resources>
