@@ -73,6 +73,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 
 	private long lastTimeUpdated = 0;
 	private final OsmandApplication ctx;
+	private final OsmandSettings settings;
 
 	private LatLon lastPoint;
 	private float distance = 0;
@@ -87,6 +88,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	public SavingTrackHelper(OsmandApplication ctx) {
 		super(ctx, DATABASE_NAME, null, DATABASE_VERSION);
 		this.ctx = ctx;
+		this.settings = ctx.getSettings();
 		this.currentTrack = new SelectedGpxFile();
 		this.currentTrack.setShowCurrentTrack(true);
 		GPXFile gx = new GPXFile(Version.getFullVersion(ctx));
@@ -370,10 +372,12 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 				long currentInterval = Math.abs(time - previousTime);
 				boolean newInterval = pt.lat == 0 && pt.lon == 0;
 
-				if (track != null && !newInterval && (!ctx.getSettings().AUTO_SPLIT_RECORDING.get() || currentInterval < 6 * 60 * 1000 || currentInterval < 10 * previousInterval)) {
+				if (track != null && !newInterval && (!settings.AUTO_SPLIT_RECORDING.get()
+						|| currentInterval < 6 * 60 * 1000 || currentInterval < 10 * previousInterval)) {
 					// 6 minute - same segment
 					segment.points.add(pt);
-				} else if (track != null && (ctx.getSettings().AUTO_SPLIT_RECORDING.get() && currentInterval < 2 * 60 * 60 * 1000)) {
+				} else if (track != null && (settings.AUTO_SPLIT_RECORDING.get()
+						&& currentInterval < 2 * 60 * 60 * 1000)) {
 					// 2 hour - same track
 					segment = new TrkSegment();
 					if (!newInterval) {
@@ -440,7 +444,6 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	public void updateLocation(net.osmand.Location location, Float heading) {
 		// use because there is a bug on some devices with location.getTime()
 		long locationTime = System.currentTimeMillis();
-		OsmandSettings settings = ctx.getSettings();
 		if (heading != null && settings.SAVE_HEADING_TO_GPX.get()) {
 			heading = MapUtils.normalizeDegrees360(heading);
 		} else {
@@ -452,9 +455,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		boolean record = false;
 		if (location != null && OsmAndLocationProvider.isNotSimulatedLocation(location)
 				&& OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null) {
-			if (settings.SAVE_TRACK_TO_GPX.get()
-					&& locationTime - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get()
-					&& lastRoutingApplicationMode == settings.getApplicationMode()) {
+			if (isRecordingAutomatically() && locationTime - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get()) {
 				record = true;
 			} else if (settings.SAVE_GLOBAL_TRACK_TO_GPX.get()
 					&& locationTime - lastTimeUpdated > settings.SAVE_GLOBAL_TRACK_INTERVAL.get()) {
@@ -714,10 +715,14 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	}
 
 	public boolean getIsRecording() {
-		OsmandSettings settings = ctx.getSettings();
 		return OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null
-				&& settings.SAVE_GLOBAL_TRACK_TO_GPX.get() || settings.SAVE_TRACK_TO_GPX.get()
-				&& lastRoutingApplicationMode == settings.getApplicationMode();
+				&& settings.SAVE_GLOBAL_TRACK_TO_GPX.get() || isRecordingAutomatically();
+	}
+
+	private boolean isRecordingAutomatically() {
+		return settings.SAVE_TRACK_TO_GPX.get() && (ctx.getRoutingHelper().isFollowingMode()
+				|| lastRoutingApplicationMode == settings.getApplicationMode()
+				&& settings.getApplicationMode() != settings.DEFAULT_APPLICATION_MODE.get());
 	}
 
 	public float getDistance() {
