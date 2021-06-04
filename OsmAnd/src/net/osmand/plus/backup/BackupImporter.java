@@ -131,6 +131,9 @@ class BackupImporter {
 	@NonNull
 	private List<SettingsItem> getRemoteItems(@NonNull List<RemoteFile> remoteFiles, boolean readItems) throws IllegalArgumentException, IOException {
 		List<SettingsItem> items = new ArrayList<>();
+		if (remoteFiles.isEmpty()) {
+			return items;
+		}
 		try {
 			JSONObject json = new JSONObject();
 			JSONArray itemsJson = new JSONArray();
