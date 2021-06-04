@@ -4155,4 +4155,6 @@
     <string name="backup_delete_old_data_warning">您將要刪除先前載入資料的變更歷史紀錄。
 \n
 \n目前版本的資料將會儲存到伺服氣上，但您將無法回退到先前做出的修改。</string>
+    <string name="backup_data">備份資料</string>
+    <string name="select_backup_data_descr">選取要備份的資料與資料夾。</string>
 </resources>
