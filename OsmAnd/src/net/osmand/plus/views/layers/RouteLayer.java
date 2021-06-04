@@ -582,7 +582,7 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 	private boolean updateRouteGradient() {
 		GradientScaleType prev = gradientScaleType;
 		if (previewRouteLineInfo != null) {
-			gradientScaleType = previewRouteLineInfo.getGradientScaleType();
+			gradientScaleType = previewRouteLineInfo.getRouteColoringType().;
 		} else {
 			gradientScaleType = view.getSettings().ROUTE_LINE_GRADIENT.getModeValue(helper.getAppMode());
 		}

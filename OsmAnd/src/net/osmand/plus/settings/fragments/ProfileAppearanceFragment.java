@@ -54,12 +54,12 @@ import net.osmand.plus.profiles.SelectProfileBottomSheet.OnSelectProfileCallback
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
+import net.osmand.plus.routing.RouteColoringType;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper.SettingsExportListener;
 import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
-import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.fragments.RouteLineAppearanceFragment.OnApplyRouteLineListener;
 import net.osmand.plus.track.ColorsCard;
 import net.osmand.plus.track.CustomColorBottomSheet.ColorPickerListener;
@@ -1022,9 +1022,9 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 	private PreviewRouteLineInfo createRouteLineDrawInfo(@NonNull ApplicationMode appMode) {
 		Integer colorDay = getRouteLineColor(appMode, settings.ROUTE_LINE_COLOR_DAY);
 		Integer colorNight = getRouteLineColor(appMode, settings.ROUTE_LINE_COLOR_NIGHT);
-		GradientScaleType scaleType = settings.ROUTE_LINE_GRADIENT.getModeValue(appMode);
+		RouteColoringType coloringType = settings.ROUTE_COLORING_TYPE.getModeValue(appMode);
 		String widthKey = settings.ROUTE_LINE_WIDTH.getModeValue(appMode);
-		return new PreviewRouteLineInfo(colorDay, colorNight, scaleType, widthKey);
+		return new PreviewRouteLineInfo(colorDay, colorNight, coloringType, widthKey);
 	}
 
 	private Integer getRouteLineColor(@NonNull ApplicationMode appMode,
@@ -1037,7 +1037,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 	                                     @NonNull PreviewRouteLineInfo drawInfo) {
 		saveRouteLineColor(appMode, settings.ROUTE_LINE_COLOR_DAY, drawInfo.getColor(false));
 		saveRouteLineColor(appMode, settings.ROUTE_LINE_COLOR_NIGHT, drawInfo.getColor(true));
-		settings.ROUTE_LINE_GRADIENT.setModeValue(appMode, drawInfo.getGradientScaleType());
+		settings.ROUTE_COLORING_TYPE.setModeValue(appMode, drawInfo.getRouteColoringType());
 		settings.ROUTE_LINE_WIDTH.setModeValue(appMode, drawInfo.getWidth());
 	}
 

@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AndroidUiHelper;
 
 public abstract class BaseCard {
 
@@ -172,5 +173,11 @@ public abstract class BaseCard {
 
 	public void setTransparentBackground(boolean transparentBackground) {
 		this.transparentBackground = transparentBackground;
+	}
+
+	public void updateVisibility(boolean show) {
+		if (view != null) {
+			AndroidUiHelper.updateVisibility(view, show);
+		}
 	}
 }

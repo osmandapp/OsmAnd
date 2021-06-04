@@ -47,6 +47,7 @@
 		android:paddingEnd="@dimen/content_padding_half"
 		android:paddingRight="@dimen/content_padding_half"
 		android:textColor="?attr/active_color_basic"
+		android:lines="1"
 		app:typeface="@string/font_roboto_medium"
 		tools:text="@string/favorite" />
 
