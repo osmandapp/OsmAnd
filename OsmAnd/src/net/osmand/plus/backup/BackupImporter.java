@@ -224,7 +224,7 @@ class BackupImporter {
 					folder = "/" + folder;
 				}
 				if (fileName.startsWith(folder)) {
-					fileName = fileName.substring(folder.length());
+					fileName = fileName.substring(folder.length() - 1);
 				}
 			}
 			for (RemoteFile remoteFile : remoteFiles) {
