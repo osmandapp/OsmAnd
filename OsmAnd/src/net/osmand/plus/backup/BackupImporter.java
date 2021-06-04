@@ -214,6 +214,9 @@ class BackupImporter {
 	private RemoteFile getItemRemoteFile(@NonNull SettingsItem item, @NonNull Collection<RemoteFile> remoteFiles) {
 		String fileName = item.getFileName();
 		if (!Algorithms.isEmpty(fileName)) {
+			if (fileName.charAt(0) != '/') {
+				fileName = "/" + fileName;
+			}
 			if (item instanceof GpxSettingsItem) {
 				GpxSettingsItem gpxItem = (GpxSettingsItem) item;
 				String folder = gpxItem.getSubtype().getSubtypeFolder();
@@ -226,7 +229,7 @@ class BackupImporter {
 			}
 			for (RemoteFile remoteFile : remoteFiles) {
 				String remoteFileName = remoteFile.getTypeNamePath();
-				String typeFileName = remoteFile.getType() + (fileName.charAt(0) == '/' ? fileName : "/" + fileName);
+				String typeFileName = remoteFile.getType() + fileName;
 				if (remoteFileName.equals(typeFileName) || remoteFileName.startsWith(typeFileName + "/")) {
 					return remoteFile;
 				}
