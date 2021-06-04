@@ -44,8 +44,8 @@ public class TrackColoringCard extends BaseCard {
 	private List<TrackAppearanceItem> appearanceItems;
 
 	public TrackColoringCard(@NonNull MapActivity mapActivity,
-							 @NonNull GPXTrackAnalysis gpxTrackAnalysis,
-							 @NonNull TrackDrawInfo trackDrawInfo) {
+	                         @NonNull GPXTrackAnalysis gpxTrackAnalysis,
+	                         @NonNull TrackDrawInfo trackDrawInfo) {
 		super(mapActivity);
 		this.trackDrawInfo = trackDrawInfo;
 		this.gpxTrackAnalysis = gpxTrackAnalysis;
