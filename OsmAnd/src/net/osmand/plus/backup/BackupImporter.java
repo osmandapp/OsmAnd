@@ -44,6 +44,7 @@ class BackupImporter {
 		this.backupHelper = backupHelper;
 	}
 
+	@NonNull
 	List<SettingsItem> collectItems(boolean readItems) throws IllegalArgumentException, IOException {
 		List<SettingsItem> result = new ArrayList<>();
 		StringBuilder error = new StringBuilder();

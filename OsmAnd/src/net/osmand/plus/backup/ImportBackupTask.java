@@ -117,7 +117,7 @@ public class ImportBackupTask extends AsyncTask<Void, Void, List<SettingsItem>> 
 		switch (importType) {
 			case COLLECT:
 				importDone = true;
-				collectListener.onCollectFinished(true, false, this.items);
+				collectListener.onCollectFinished(items != null, false, this.items);
 				break;
 			case CHECK_DUPLICATES:
 				importDone = true;
