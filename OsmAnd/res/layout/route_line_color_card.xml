@@ -48,7 +48,7 @@
         android:paddingLeft="@dimen/content_padding"
         android:paddingTop="@dimen/content_padding_small"
         android:paddingRight="@dimen/content_padding"
-        android:paddingBottom="@dimen/content_padding_small"
+        android:paddingBottom="@dimen/content_padding_half"
         android:textColor="?android:textColorSecondary"
         android:textSize="@dimen/default_desc_text_size"
         osmand:typeface="@string/font_roboto_regular"
