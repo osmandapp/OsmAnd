@@ -690,7 +690,7 @@
     <string name="rendering_attr_hmRendered_description">Aumentar o nível de detalhe do mapa.</string>
     <string name="rendering_attr_hmRendered_name">Ver mais detalhes no mapa</string>
     <string name="route_roundabout">Rotunda: saia na %1$dª saída para</string>
-    <string name="route_kl">Mantenha-se à esquerda e siga</string>
+    <string name="route_kl">Mantenha-se à esquerda e continue em</string>
     <string name="route_kr">Mantenha-se à direita e continue em</string>
     <string name="asap">Assim que possível</string>
     <string name="gpxup_public">Público</string>
@@ -3645,7 +3645,7 @@
 \n
 \nSelecione %1$s e receberá alertas e avisos sobre radares de velocidade.
 \n
-\nSelecione %2$s e yodos os dados relacionados a radares de velocidade: alertas, notificações, POIs serão eliminados até que o OsmAnd seja completamente reinstalado.</string>
+\nSelecione %2$s e todos os dados relacionados a radares de velocidade (alertas, notificações, POIs) serão eliminados até que o OsmAnd seja completamente reinstalado.</string>
     <string name="plugin_wikipedia_description">Obter informações sobre pontos de interesse da Wikipédia. Um guia de bolso offline para ver artigos sobre locais e destinos.</string>
     <string name="app_mode_motor_scooter">Scooter</string>
     <string name="quick_action_remove_next_destination">Eliminar o ponto de destino mais próximo</string>
@@ -4168,4 +4168,6 @@
     <string name="backup_delete_old_data_warning">Está prestes a eliminar o histórico de alterações dos dados carregados anteriormente.
 \n
 \nA versão atual dos dados será guardada no servidor, mas não poderá reverter para as alterações feitas anteriormente.</string>
+    <string name="backup_data">Fazer cópia de segurança</string>
+    <string name="select_backup_data_descr">Selecionar dados e pastas para a cópia de segurança.</string>
 </resources>
