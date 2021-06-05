@@ -1462,8 +1462,8 @@
     <string name="choose_available_region">Selecione região da lista</string>
     <string name="choose_intersected_street">Selecione rua transversal</string>
     <string name="Closest_Amenities">Serviços próximos</string>
-    <string name="app_mode_car">Carro</string>
-    <string name="app_mode_bicycle">Bicicleta</string>
+    <string name="app_mode_car">Condução</string>
+    <string name="app_mode_bicycle">Ciclismo</string>
     <string name="app_mode_pedestrian">A pé</string>
     <string name="position_on_map_center">Centro</string>
     <string name="position_on_map_bottom">Em baixo</string>
@@ -3920,7 +3920,7 @@
     <string name="keep_it_empty_if_not">Mantenha-o vazio se não</string>
     <string name="online_routing_example_hint">O URL com todos os parâmetros terá a seguinte aparência:</string>
     <string name="test_route_calculation">Cálculo da rota de teste</string>
-    <string name="routing_engine_vehicle_type_driving">Dirigindo</string>
+    <string name="routing_engine_vehicle_type_driving">Condução</string>
     <string name="routing_engine_vehicle_type_foot">Pé</string>
     <string name="routing_engine_vehicle_type_bike">Bicicleta</string>
     <string name="routing_engine_vehicle_type_car">Carro</string>
