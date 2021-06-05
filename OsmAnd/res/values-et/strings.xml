@@ -4062,4 +4062,28 @@
     <string name="cloud_email_already_registered">Selle postiaadressiga konto on juba registreeritud.</string>
     <string name="resend_verification_code">Saada kood uuesti</string>
     <string name="verification_code_missing">Ma ei saanud kinnituskoodi</string>
+    <string name="backup_complete">Varukoopia on tehtud</string>
+    <string name="backup_now">Varunda nüüd</string>
+    <string name="make_backup_descr">Selles seadmed leiduvates andmetes on palju muudatusi. Vältimaks võimalikku andmekadu, palun tee neist varukoopia.</string>
+    <string name="make_backup">Tee varukoopia</string>
+    <string name="backup_conflicts">Versioonide erinevused</string>
+    <string name="backup_confilcts_descr">Kuna serveris leiduv versioon on uuem, siis mõned failid jäid serverisse üleslaadimata.</string>
+    <string name="backup_view_conflicts">Vaata versioonide erinevusi</string>
+    <string name="backup_delete_all_data_descr">Kustutame kõik OsmAnd Cloud\'is leiduvad andmed. Kohalikus seadmes leiduvad andmed jäävad muutmata.</string>
+    <string name="backup_no_internet_descr">Kontrolli oma võrguühendust ja proovi allalaadimist uuesti.</string>
+    <string name="backup_pause_all">Peata kõik</string>
+    <string name="upload_local_version">Laadi üles kohalik versioon</string>
+    <string name="download_server_version">Laadi alla serveris leiduv versioon</string>
+    <string name="shared_string_logout">Logi välja</string>
+    <string name="backup_delete_all_data">Kustuta kõik minu andmed</string>
+    <string name="backup_delete_all_data_warning">Sa oled kustutamas kõik hiljuti OsmAnd Cloud\'i varundatud andmed, sealhulgas versioonide ajaloo.
+\n
+\nNende kustutatud andmete taastamine pole võimalik.</string>
+    <string name="backup_danger_zone">Hoiatus</string>
+    <string name="backup_delete_old_data_descr">Sinu andmete viimane versioon on varundatud OsmAnd Cloud\'is</string>
+    <string name="backup_delete_old_data">Kustuta vanad versioonid</string>
+    <string name="delete_all_confirmation">Jah, kustuta kõik</string>
+    <string name="backup_data">Andmete varundamine</string>
+    <string name="select_backup_data_descr">Vali varundatavad andmed ja kaustad.</string>
+    <string name="select_nav_profile_dialog_message">„Navigatsioonitüüp“ määrab teekonna koostamise viisi. Saad valida võrguühenduseta ja võrgupõhiste marsruutimismootorite vahel.</string>
 </resources>
