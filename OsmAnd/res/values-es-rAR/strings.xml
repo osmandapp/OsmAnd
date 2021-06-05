@@ -4165,4 +4165,11 @@
 \nLa versión actual de los datos se guardará en el servidor, pero no podrás volver a los cambios anteriores.</string>
     <string name="backup_data">Datos de la copia de seguridad</string>
     <string name="select_backup_data_descr">Marca los datos y carpetas para la copia de seguridad.</string>
+    <string name="backup_restore_data_descr">Restaura los datos en el dispositivo, usando copias de seguridad en línea.</string>
+    <string name="backup_restore_data">Restaurar datos</string>
+    <string name="restore_from_osmand_cloud">Restaurar desde OsmAnd Cloud</string>
+    <string name="choose_what_to_restore">Elige qué restaurar.</string>
+    <string name="restore_selected_data">Restaurar datos marcados</string>
+    <string name="receiving_data_from_server">Recibir datos del servidor</string>
+    <string name="restore_complete">Restauración completa</string>
 </resources>
