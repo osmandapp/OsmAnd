@@ -1925,6 +1925,19 @@
     <string name="shared_string_logout">Keluar</string>
     <string name="backup_delete_all_data">Hapus semua data saya</string>
     <string name="backup_delete_all_data_descr">Semua data di OsmAnd Cloud akan dihapus. Versi-versi lokal tidak akan disentuh.</string>
-    <string name="backup_danger_zone">Zona bahaya</string>
+    <string name="backup_danger_zone">Zona berbahaya</string>
     <string name="delete_all_confirmation">Ya, hapus semua</string>
+    <string name="backup_complete">Pencadangan selesai</string>
+    <string name="backup_now">Cadangkan sekarang</string>
+    <string name="make_backup_descr">Ada banyak perubahan pada perangkat ini, harap melakukan pencadangan dari data ini agar tidak hilang.</string>
+    <string name="backup_conflicts">Konflik-konflik</string>
+    <string name="backup_confilcts_descr">Beberapa berkas tidak dapat diunggah ke server karena versi lebih baru dari berkas itu sudah disimpan di server.</string>
+    <string name="backup_view_conflicts">Lihat konflik-konflik</string>
+    <string name="backup_data">Cadangkan data</string>
+    <string name="backup_restore_data">Pulihkan data</string>
+    <string name="restore_from_osmand_cloud">Pulihkan dari OsmAnd Cloud</string>
+    <string name="choose_what_to_restore">Pilih apa yang ingin dipulihkan.</string>
+    <string name="restore_selected_data">Pulihkan data yang dipilih</string>
+    <string name="receiving_data_from_server">Menerima data dari server</string>
+    <string name="restore_complete">Pemulihan selesai</string>
 </resources>
