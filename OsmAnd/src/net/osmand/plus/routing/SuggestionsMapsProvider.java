@@ -24,15 +24,10 @@ import static net.osmand.util.MapUtils.calculateMidPoint;
 public class SuggestionsMapsProvider {
 
 	private static final int DISTANCE = 20000;
-	RouteCalculationParams params;
-	private boolean pointOnWater;
+	private final RouteCalculationParams params;
 
 	public SuggestionsMapsProvider(RouteCalculationParams params) {
 		this.params = params;
-	}
-
-	public boolean isPointOnWater() {
-		return pointOnWater;
 	}
 
 	private boolean checkIfObjectDownloaded(String downloadName) {
@@ -41,6 +36,19 @@ public class SuggestionsMapsProvider {
 		final String roadsRegionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName) + ".road"
 				+ IndexConstants.BINARY_MAP_INDEX_EXT;
 		return params.ctx.getResourceManager().getIndexFileNames().containsKey(regionName) || params.ctx.getResourceManager().getIndexFileNames().containsKey(roadsRegionName);
+	}
+
+	public boolean checkIfPointOnWater(List<Location> points) throws IOException {
+		for (int i = 0; i < points.size(); i++) {
+			final Location o = points.get(i);
+			LatLon latLonPoint = new LatLon(o.getLatitude(), o.getLongitude());
+			List<WorldRegion> downloadRegions = params.ctx.getRegions().getWorldRegionsAt(latLonPoint);
+
+			if (downloadRegions.isEmpty()) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public List<Location> getLocationBasedOnDistanceInterval(List<Location> points) {
@@ -97,10 +105,6 @@ public class SuggestionsMapsProvider {
 			LatLon latLonPoint = new LatLon(o.getLatitude(), o.getLongitude());
 			List<WorldRegion> downloadRegions = params.ctx.getRegions().getWorldRegionsAt(latLonPoint);
 
-			if (downloadRegions.isEmpty()) {
-				pointOnWater = true;
-			}
-
 			boolean addMaps = true;
 			List<WorldRegion> maps = new ArrayList<>();
 			for (WorldRegion downloadRegion : downloadRegions) {
@@ -131,21 +135,6 @@ public class SuggestionsMapsProvider {
 			if (routeLocation.get(i).distanceTo(routeLocation.get(j)) >= DISTANCE) {
 				mapsBasedOnPoints.add(routeLocation.get(j));
 				i = j;
-			}
-		}
-		return mapsBasedOnPoints;
-	}
-
-	@NonNull
-	private List<Location> removeRedundantPoints2(List<Location> routeLocation) {
-		List<Location> mapsBasedOnPoints = new ArrayList<>();
-		for (int i = 0; i < routeLocation.size() - 1; i++) {
-			if (i == 0) {
-				mapsBasedOnPoints.add(routeLocation.get(i));
-			}
-			double sumDist = routeLocation.get(i).distanceTo(routeLocation.get(i + 1));
-			if (sumDist >= DISTANCE) {
-				mapsBasedOnPoints.add(routeLocation.get(i + 1));
 			}
 		}
 		return mapsBasedOnPoints;

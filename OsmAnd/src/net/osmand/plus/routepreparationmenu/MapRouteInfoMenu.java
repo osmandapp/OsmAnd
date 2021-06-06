@@ -649,12 +649,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		boolean bottomShadowVisible = true;
 		if (isBasicRouteCalculated()) {
 			GPXFile gpx = GpxUiHelper.makeGpxFromRoute(routingHelper.getRoute(), app);
-			if (gpx != null) {
-				SimpleRouteCard simpleRouteCard = new SimpleRouteCard(mapActivity, gpx);
-				simpleRouteCard.setListener(this);
-				menuCards.add(simpleRouteCard);
-			}
-			bottomShadowVisible = gpx == null;
+			SimpleRouteCard simpleRouteCard = new SimpleRouteCard(mapActivity, gpx);
+			simpleRouteCard.setListener(this);
+			menuCards.add(simpleRouteCard);
+			bottomShadowVisible = false;
 		} else if (isTransportRouteCalculated()) {
 			TransportRoutingHelper transportRoutingHelper = app.getTransportRoutingHelper();
 			List<TransportRouteResult> routes = transportRoutingHelper.getRoutes();

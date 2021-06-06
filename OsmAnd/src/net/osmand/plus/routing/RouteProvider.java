@@ -121,14 +121,14 @@ public class RouteProvider {
 					List<WorldRegion> suggestionsMapsStartFinishIntermediates = suggestionsMapsProvider.getMissingMaps(points);
 
 					List<Location> pointsStraightLine = suggestionsMapsProvider.getLocationBasedOnDistanceInterval(points);
-					List<WorldRegion> suggestedMapsOnStraightLine = suggestionsMapsProvider.getMissingMaps(pointsStraightLine);
 					if (!Algorithms.isEmpty(suggestionsMapsStartFinishIntermediates)) {
 						missingMaps = suggestionsMapsProvider.getMissingMaps(pointsStraightLine);
 						params.ctx.getRoutingHelper().getRoute().setNavigationDisabled(true);
 						res = new RouteCalculationResult("Additional maps available");
 					} else {
-						if (!suggestionsMapsProvider.isPointOnWater()) {
-							params.missingMaps = suggestedMapsOnStraightLine;
+						params.ctx.getRoutingHelper().getRoute().setNavigationDisabled(false);
+						if (suggestionsMapsProvider.checkIfPointOnWater(points)) {
+							params.missingMaps = suggestionsMapsProvider.getMissingMaps(pointsStraightLine);
 						} else {
 							params.startTimeRouteCalculation = System.currentTimeMillis();
 						}
