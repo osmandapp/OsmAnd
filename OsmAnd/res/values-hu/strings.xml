@@ -4157,4 +4157,11 @@
     <string name="backup_danger_zone">Veszélyes terület</string>
     <string name="select_backup_data_descr">Biztonsági mentésre kerülő adatok és mappák kijelölése.</string>
     <string name="backup_data">Adatok biztonsági mentése</string>
+    <string name="backup_restore_data_descr">A készüléken lévő adatok visszaállítása online biztonsági mentésekből.</string>
+    <string name="backup_restore_data">Adatok visszaállítása</string>
+    <string name="restore_from_osmand_cloud">Visszaállítás az OsmAnd Cloud-ból</string>
+    <string name="choose_what_to_restore">Válassza ki, mit állítson vissza.</string>
+    <string name="restore_selected_data">Kijelölt adatok visszaállítása</string>
+    <string name="receiving_data_from_server">Adatok fogadása a kiszolgálóról</string>
+    <string name="restore_complete">A visszaállítás befejeződött</string>
 </resources>
