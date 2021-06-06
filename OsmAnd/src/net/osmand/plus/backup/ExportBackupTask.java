@@ -53,7 +53,7 @@ public class ExportBackupTask extends AsyncTask<Void, Integer, Boolean> {
 	@Override
 	protected void onPreExecute() {
 		if (listener != null) {
-			listener.onBackupExportStarted();
+			listener.onBackupExportStarted(exporter.getItems().size() * 2);
 		}
 	}
 
@@ -80,9 +80,9 @@ public class ExportBackupTask extends AsyncTask<Void, Integer, Boolean> {
 			}
 
 			@Override
-			public void updateGeneralProgress(int value) {
+			public void updateGeneralProgress(int uploadedItems, int uploadedKb) {
 				exporter.setCancelled(isCancelled());
-				publishProgress(value);
+				publishProgress(uploadedItems);
 			}
 
 			@Override

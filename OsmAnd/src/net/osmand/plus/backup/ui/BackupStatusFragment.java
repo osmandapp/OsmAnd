@@ -153,9 +153,10 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements CardList
 	}
 
 	@Override
-	public void onBackupExportStarted() {
+	public void onBackupExportStarted(int itemsCount) {
 		if (uploadCard != null) {
 			uploadCard.update();
+			uploadCard.setupProgress(itemsCount);
 		}
 	}
 

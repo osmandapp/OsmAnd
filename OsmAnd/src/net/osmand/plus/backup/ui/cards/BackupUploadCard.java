@@ -209,9 +209,13 @@ public class BackupUploadCard extends BaseCard {
 		}
 	}
 
+	public void setupProgress(int itemsCount) {
+		progressBar.setMax(itemsCount);
+	}
+
 	public void updateProgress(int value) {
 		String uploading = app.getString(R.string.local_openstreetmap_uploading);
-		progressTitle.setText(app.getString(R.string.ltr_or_rtl_combine_via_space, uploading, String.valueOf(value)));
+		progressTitle.setText(app.getString(R.string.ltr_or_rtl_combine_via_space, uploading, String.valueOf((int) (value / 2))));
 
 		progressBar.setProgress(value);
 		AndroidUiHelper.updateVisibility(progressBar, app.getNetworkSettingsHelper().isBackupExporting());

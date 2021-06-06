@@ -19,7 +19,7 @@ public class BackupExporter extends Exporter {
 	public interface NetworkExportProgressListener {
 		void updateItemProgress(@NonNull String type, @NonNull String fileName, int value);
 
-		void updateGeneralProgress(int value);
+		void updateGeneralProgress(int uploadedItems, int uploadedKb);
 
 		void networkExportDone(@NonNull Map<String, String> errors);
 	}
@@ -38,14 +38,15 @@ public class BackupExporter extends Exporter {
 	private void writeItems() throws IOException {
 		Map<String, String> errors = new HashMap<>();
 		OnUploadFileListener uploadFileListener = new OnUploadFileListener() {
-			final long[] itemsProgress = {0};
+			final int[] itemsProgress = {0};
+			final int[] dataProgress = {0};
 
 			@Override
 			public void onFileUploadProgress(@NonNull String type, @NonNull String fileName, int progress, int deltaWork) {
-				itemsProgress[0] += deltaWork;
+				dataProgress[0] += deltaWork;
 				if (listener != null) {
 					listener.updateItemProgress(type, fileName, progress);
-					listener.updateGeneralProgress((int) itemsProgress[0] / (1 << 10));
+					listener.updateGeneralProgress(itemsProgress[0], dataProgress[0]);
 				}
 			}
 
@@ -55,6 +56,10 @@ public class BackupExporter extends Exporter {
 					errors.put(type + "/" + fileName, error);
 				} else {
 					backupHelper.updateFileUploadTime(type, fileName, uploadTime);
+				}
+				itemsProgress[0] += 1;
+				if (listener != null) {
+					listener.updateGeneralProgress(itemsProgress[0], dataProgress[0]);
 				}
 			}
 		};
