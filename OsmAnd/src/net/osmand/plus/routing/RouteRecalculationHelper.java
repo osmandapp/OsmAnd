@@ -365,7 +365,6 @@ class RouteRecalculationHelper {
 					routeCalcError = app.getString(R.string.error_calculating_route)
 							+ ":\n" + app.getString(R.string.internet_connection_required_for_online_route);
 					routeCalcErrorShort = app.getString(R.string.error_calculating_route);
-					showMessage(routeCalcError);
 				} else {
 					if (res.getErrorMessage() != null) {
 						routeCalcError = app.getString(R.string.error_calculating_route) + ":\n" + res.getErrorMessage();
@@ -374,6 +373,8 @@ class RouteRecalculationHelper {
 						routeCalcError = app.getString(R.string.empty_route_calculated);
 						routeCalcErrorShort = app.getString(R.string.empty_route_calculated);
 					}
+				}
+				if (!res.getErrorMessage().equals("Additional maps available")) {
 					showMessage(routeCalcError);
 				}
 			}

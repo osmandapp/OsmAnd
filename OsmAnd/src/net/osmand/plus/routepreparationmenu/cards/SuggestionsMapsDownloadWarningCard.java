@@ -108,7 +108,6 @@ public class SuggestionsMapsDownloadWarningCard extends WarningCard {
 		return totalSizeMb;
 	}
 
-
 	public List<DownloadItem> getMapsList() {
 		DownloadIndexesThread downloadThread = app.getDownloadThread();
 		if (!downloadThread.getIndexes().isDownloadedFromInternet) {
@@ -144,7 +143,7 @@ public class SuggestionsMapsDownloadWarningCard extends WarningCard {
 
 	private void updateSelectableItem(SelectionBottomSheet.SelectableItem selectableItem,
 									  DownloadItem downloadItem) {
-		selectableItem.setTitle(downloadItem.getVisibleName(app, app.getRegions(), true, "%2$s, %1$s"));
+		selectableItem.setTitle(app.getRegions().getLocaleName(downloadItem.getBasename()));
 		DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(app);
 		String size = downloadItem.getSizeDescription(app);
 		String additionalDescription = downloadItem.getAdditionalDescription(app);

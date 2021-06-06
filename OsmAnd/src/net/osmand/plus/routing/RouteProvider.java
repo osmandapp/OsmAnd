@@ -125,7 +125,7 @@ public class RouteProvider {
 					if (!Algorithms.isEmpty(suggestionsMapsStartFinishIntermediates)) {
 						missingMaps = suggestionsMapsProvider.getMissingMaps(pointsStraightLine);
 						params.ctx.getRoutingHelper().getRoute().setNavigationDisabled(true);
-						res = new RouteCalculationResult(null);
+						res = new RouteCalculationResult("Additional maps available");
 					} else {
 						if (!suggestionsMapsProvider.isPointOnWater()) {
 							params.missingMaps = suggestedMapsOnStraightLine;

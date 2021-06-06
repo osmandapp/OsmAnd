@@ -52,6 +52,8 @@ public class OsmandRegions {
 	public static final String FIELD_LEFT_HAND_DRIVING = "region_left_hand_navigation";
 	public static final String FIELD_WIKI_LINK = "region_wiki_link";
 	public static final String FIELD_POPULATION = "region_population";
+	public static final String STD_FORMAT = "%1$s %2$s";
+	public static final String REVERSE_FORMAT = "%2$s, %1$s";
 
 	private BinaryMapIndexReader reader;
 	private String locale = "en";
@@ -164,11 +166,20 @@ public class OsmandRegions {
 	}
 
 
-	public String getLocaleName(String downloadName, boolean includingParent, String format) {
+	public String getLocaleName(String downloadName, boolean includingParent) {
 		final String lc = downloadName.toLowerCase();
 		if (downloadNamesToFullNames.containsKey(lc)) {
 			String fullName = downloadNamesToFullNames.get(lc);
-			return getLocaleNameByFullName(fullName, includingParent, format);
+			return getLocaleNameByFullName(fullName, includingParent, STD_FORMAT);
+		}
+		return downloadName.replace('_', ' ');
+	}
+
+	public String getLocaleName(String downloadName) {
+		final String lc = downloadName.toLowerCase();
+		if (downloadNamesToFullNames.containsKey(lc)) {
+			String fullName = downloadNamesToFullNames.get(lc);
+			return getLocaleNameByFullName(fullName, true, REVERSE_FORMAT);
 		}
 		return downloadName.replace('_', ' ');
 	}
@@ -630,7 +641,7 @@ public class OsmandRegions {
 			String nm = b.getNameByType(or.mapIndexFields.nameEnType);
 			if (nm == null) {
 				nm = b.getName();
-				System.out.println(or.getLocaleName(or.getDownloadName(b), false, "%1$s %2$s"));
+				System.out.println(or.getLocaleName(or.getDownloadName(b), false));
 			}
 			if (or.isDownloadOfType(b, MAP_TYPE)) {
 				found.add(nm.toLowerCase());

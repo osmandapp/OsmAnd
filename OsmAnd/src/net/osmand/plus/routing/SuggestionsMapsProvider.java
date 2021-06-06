@@ -35,7 +35,7 @@ public class SuggestionsMapsProvider {
 		return pointOnWater;
 	}
 
-	public boolean checkIfObjectDownloaded(String downloadName) {
+	private boolean checkIfObjectDownloaded(String downloadName) {
 		final String regionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName)
 				+ IndexConstants.BINARY_MAP_INDEX_EXT;
 		final String roadsRegionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName) + ".road"
@@ -131,6 +131,21 @@ public class SuggestionsMapsProvider {
 			if (routeLocation.get(i).distanceTo(routeLocation.get(j)) >= DISTANCE) {
 				mapsBasedOnPoints.add(routeLocation.get(j));
 				i = j;
+			}
+		}
+		return mapsBasedOnPoints;
+	}
+
+	@NonNull
+	private List<Location> removeRedundantPoints2(List<Location> routeLocation) {
+		List<Location> mapsBasedOnPoints = new ArrayList<>();
+		for (int i = 0; i < routeLocation.size() - 1; i++) {
+			if (i == 0) {
+				mapsBasedOnPoints.add(routeLocation.get(i));
+			}
+			double sumDist = routeLocation.get(i).distanceTo(routeLocation.get(i + 1));
+			if (sumDist >= DISTANCE) {
+				mapsBasedOnPoints.add(routeLocation.get(i + 1));
 			}
 		}
 		return mapsBasedOnPoints;

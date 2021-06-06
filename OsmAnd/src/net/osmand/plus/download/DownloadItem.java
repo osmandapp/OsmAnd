@@ -41,15 +41,11 @@ public abstract class DownloadItem {
 	}
 
 	public String getVisibleName(Context ctx, OsmandRegions osmandRegions) {
-		return type.getVisibleName(this, ctx, osmandRegions, true, "%1$s %2$s");
+		return type.getVisibleName(this, ctx, osmandRegions, true);
 	}
 
 	public String getVisibleName(Context ctx, OsmandRegions osmandRegions, boolean includingParent) {
-		return type.getVisibleName(this, ctx, osmandRegions, includingParent, "%1$s %2$s");
-	}
-
-	public String getVisibleName(Context ctx, OsmandRegions osmandRegions, boolean includingParent, String format) {
-		return type.getVisibleName(this, ctx, osmandRegions, includingParent, format);
+		return type.getVisibleName(this, ctx, osmandRegions, includingParent);
 	}
 
 	public String getVisibleDescription(OsmandApplication ctx) {
