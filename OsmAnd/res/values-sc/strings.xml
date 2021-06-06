@@ -4126,4 +4126,37 @@
     <string name="verification_code_missing">No apo retzidu su còdighe de cunfirma</string>
     <string name="verification_code_missing_description">Su tempus de isetu pro su còdighe podet èssere de 10 minutos, e podes fintzas compidare in sa cartella de su spam tua. Si custu no est de agiudu imprea su butone inoghe in suta.</string>
     <string name="select_nav_profile_dialog_message">Sa \'Casta de navigatzione\' determinat comente benint carculadas sas àndalas. Podes isseberare intre motores de càrculu de s\'àndala no in lìnia o in lìnia.</string>
+    <string name="download_server_version">Iscàrriga sa versione de su serbidore</string>
+    <string name="backup_delete_all_data_warning">As a iscantzellare totu sos datos giai carrigados in OsmAnd Cloud, fintzas sa cronologia de sas versiones.
+\n
+\nNo as a pòdere recuperare sos datos iscantzellados.</string>
+    <string name="backup_delete_old_data_warning">As a iscantzellare sa cronologia de sas modìficas pro sos datos giai carrigados.
+\n
+\nSa versione atuale de custos datos at a èssere sarvada in su serbidore, ma no as a pòdere torrare a sas modìficas fatas in antis.</string>
+    <string name="loading_list_of_routing_services">Carrighende sa lista de sos servìtzios de càrculu de sas àndalas a disponimentu</string>
+    <string name="shared_string_offline">Non in lìnia</string>
+    <string name="shared_string_online">In lìnia</string>
+    <string name="osmand_online_routing_promo">Podes impreare modellos predefinidos o annànghere motores de càrculu de s\'àndala personalizados in lìnia. Suportados: OSRM, Graphhopper, OpenRouteService, GPX.</string>
+    <string name="shared_string_external">Esternu</string>
+    <string name="provided_by">Frunidu dae %1$s</string>
+    <string name="failed_loading_predefined_engines">Carrigamentu de sa lista de sos modellos predefinidos.
+\nPro praghere verìfica sa connessione a internet tua.</string>
+    <string name="shared_string_predefined">Predefinidu</string>
+    <string name="backup_complete">Còpia de seguresa acabada</string>
+    <string name="backup_now">Faghe una còpia como</string>
+    <string name="make_backup">Faghe una còpia de seguresa</string>
+    <string name="make_backup_descr">In custu dispositivu bi sunt modìficas medas. Faghe una còpia de seguresa de custos datos pro non los pèrdere.</string>
+    <string name="backup_conflicts">Cunflitos</string>
+    <string name="backup_confilcts_descr">Unos cantos documentos non si sunt pòdidos carrigare in su serbidore ca in cue b\'at una versione prus noa.</string>
+    <string name="backup_view_conflicts">Pòmpia sos cunflitos</string>
+    <string name="backup_no_internet_descr">Verìfica sa connessione a internet tua e torra a iscarrigare.</string>
+    <string name="backup_pause_all">Pone totu in pàusa</string>
+    <string name="upload_local_version">Càrriga sa versione locale</string>
+    <string name="shared_string_logout">Essi</string>
+    <string name="backup_delete_all_data">Iscantzella sos datos meos</string>
+    <string name="backup_delete_all_data_descr">Totu sos datos in OsmAnd Cloud s\'ant a iscantzellare. Sas versiones locales ant a abarrare intatas.</string>
+    <string name="backup_danger_zone">Zona de perìgulu</string>
+    <string name="delete_all_confirmation">Eja, iscantzella totu</string>
+    <string name="backup_delete_old_data">Boga sas versiones betzas</string>
+    <string name="backup_delete_old_data_descr">Sas versiones atuales de sos datos tuos s\'ant a preservare in OsmAnd Cloud</string>
 </resources>

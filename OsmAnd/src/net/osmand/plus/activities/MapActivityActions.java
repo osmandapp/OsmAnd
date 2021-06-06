@@ -659,6 +659,7 @@ public class MapActivityActions implements DialogProvider {
 				}
 				final RotatedTileBox tb = mapView.getCurrentRotatedTileBox();
 				final QuadRect tilesRect = tb.getTileBounds();
+				long requestTimestamp = System.currentTimeMillis();
 				int left = (int) Math.floor(tilesRect.left);
 				int top = (int) Math.floor(tilesRect.top);
 				int width = (int) (Math.ceil(tilesRect.right) - left);
@@ -666,7 +667,7 @@ public class MapActivityActions implements DialogProvider {
 				for (int i = 0; i < width; i++) {
 					for (int j = 0; j < height; j++) {
 						((OsmandApplication) mapActivity.getApplication()).getResourceManager().
-								clearTileForMap(null, mapSource, i + left, j + top, zoom);
+								clearTileForMap(null, mapSource, i + left, j + top, zoom, requestTimestamp);
 					}
 				}
 

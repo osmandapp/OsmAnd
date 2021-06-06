@@ -57,6 +57,11 @@ public class PoiUiFiltersSettingsItem extends CollectionSettingsItem<PoiUIFilter
 	}
 
 	@Override
+	protected long getLocalModifiedTime() {
+		return app.getPoiFilters().getLastModifiedTime();
+	}
+
+	@Override
 	public void apply() {
 		List<PoiUIFilter> newItems = getNewItems();
 		if (!newItems.isEmpty() || !duplicateItems.isEmpty()) {

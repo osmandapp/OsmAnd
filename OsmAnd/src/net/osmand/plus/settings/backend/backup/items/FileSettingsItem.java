@@ -138,7 +138,6 @@ public class FileSettingsItem extends StreamSettingsItem {
 	private final File appPath;
 	protected FileSubtype subtype;
 	private long size;
-	private long lastModified;
 
 	public FileSettingsItem(@NonNull OsmandApplication app, @NonNull File file) throws IllegalArgumentException {
 		super(app, file.getPath().replace(app.getAppPath(null).getPath(), ""));
@@ -176,6 +175,11 @@ public class FileSettingsItem extends StreamSettingsItem {
 	@Override
 	public SettingsItemType getType() {
 		return SettingsItemType.FILE;
+	}
+
+	@Override
+	protected long getLocalModifiedTime() {
+		return file.lastModified();
 	}
 
 	public File getPluginPath() {
@@ -228,14 +232,6 @@ public class FileSettingsItem extends StreamSettingsItem {
 
 	public void setSize(long size) {
 		this.size = size;
-	}
-
-	public long getLastModified() {
-		return lastModified;
-	}
-
-	public void setLastModified(long lastModified) {
-		this.lastModified = lastModified;
 	}
 
 	@NonNull
@@ -310,8 +306,8 @@ public class FileSettingsItem extends StreamSettingsItem {
 				} finally {
 					Algorithms.closeStream(output);
 				}
-				if (lastModified != -1) {
-					savedFile.setLastModified(lastModified);
+				if (lastModifiedTime != -1) {
+					savedFile.setLastModified(lastModifiedTime);
 				}
 			}
 		};

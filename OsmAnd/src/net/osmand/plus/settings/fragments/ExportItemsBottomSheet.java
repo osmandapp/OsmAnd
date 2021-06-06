@@ -428,7 +428,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			}
 			if (item.getTag() instanceof FileSettingsItem) {
 				FileSettingsItem settingsItem = (FileSettingsItem) item.getTag();
-				item.setTitle(getNameForMultimediaFile(settingsItem.getFile(), settingsItem.getLastModified()));
+				item.setTitle(getNameForMultimediaFile(settingsItem.getFile(), settingsItem.getLastModifiedTime()));
 			} else {
 				item.setTitle(new Recording(file).getName(app, true));
 			}

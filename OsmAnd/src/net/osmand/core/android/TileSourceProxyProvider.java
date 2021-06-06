@@ -51,15 +51,19 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 	public SWIGTYPE_p_QByteArray obtainImage(IMapTiledDataProvider.Request request) {
 		byte[] image;
 		try {
-			ResourceManager rm = app.getResourceManager();
-			String tileFilename = rm.calculateTileId(tileSource, request.getTileId().getX(), request.getTileId().getY(),
-					request.getZoom().swigValue());
+			long requestTimestamp = System.currentTimeMillis();
+			int zoom = request.getZoom().swigValue();
+			int tileX = request.getTileId().getX();
+			int tileY = request.getTileId().getY();
 
-			final TileReadyCallback tileReadyCallback = new TileReadyCallback(tileSource,
-					request.getTileId().getX(), request.getTileId().getY(), request.getZoom().swigValue());
+			ResourceManager rm = app.getResourceManager();
+			String tileFilename = rm.calculateTileId(tileSource, tileX, tileY, zoom);
+
+			final TileReadyCallback tileReadyCallback = new TileReadyCallback(tileSource, tileX, tileY, zoom);
 			rm.getMapTileDownloader().addDownloaderCallback(tileReadyCallback);
-			while (rm.getBitmapTilesCache().getTileForMapAsync(tileFilename, tileSource, request.getTileId().getX(), request.getTileId().getY(),
-					request.getZoom().swigValue(), true) == null) {
+
+			while (rm.getBitmapTilesCache().getTileForMapAsync(tileFilename, tileSource, tileX, tileY,
+					zoom, true, requestTimestamp) == null) {
 				synchronized (tileReadyCallback.getSync()) {
 					if (tileReadyCallback.isReady()) {
 						break;
@@ -72,9 +76,8 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 			}
 			rm.getMapTileDownloader().removeDownloaderCallback(tileReadyCallback);
 
-			image = tileSource.getBytes(request.getTileId().getX(), request.getTileId().getY(), request.getZoom().swigValue(),
-					app.getAppPath(IndexConstants.TILES_INDEX_DIR).getAbsolutePath());
-		} catch(IOException e) {
+			image = tileSource.getBytes(tileX, tileY, zoom, app.getAppPath(IndexConstants.TILES_INDEX_DIR).getAbsolutePath());
+		} catch (IOException e) {
 			return SwigUtilities.emptyQByteArray();
 		}
 		if (image == null)

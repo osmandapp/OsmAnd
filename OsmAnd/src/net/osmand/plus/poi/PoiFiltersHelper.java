@@ -15,6 +15,7 @@ import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.api.SQLiteAPI.SQLiteStatement;
+import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 
 import org.apache.commons.logging.Log;
@@ -22,6 +23,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -71,6 +73,13 @@ public class PoiFiltersHelper {
 		PoiFilterDbHelper helper = openDbHelperNoPois();
 		helper.doDeletion();
 		helper.close();
+	}
+
+	public long getLastModifiedTime() {
+		PoiFilterDbHelper helper = openDbHelperNoPois();
+		long lastModifiedTime = helper.getLastModifiedTime();
+		helper.close();
+		return lastModifiedTime;
 	}
 
 	public NominatimPoiFilter getNominatimPOIFilter() {
@@ -646,9 +655,11 @@ public class PoiFiltersHelper {
 		private static final String CATEGORY_KEY = "category";
 		private static final String SUB_CATEGORIES_KEY = "sub_categories";
 
-		private OsmandApplication context;
+		private static final String FILTERS_LAST_MODIFIED_NAME = "poi_filters";
+
+		private final OsmandApplication context;
 		private SQLiteConnection conn;
-		private MapPoiTypes mapPoiTypes;
+		private final MapPoiTypes mapPoiTypes;
 
 		PoiFilterDbHelper(MapPoiTypes mapPoiTypes, OsmandApplication context) {
 			this.mapPoiTypes = mapPoiTypes;
@@ -698,16 +709,37 @@ public class PoiFiltersHelper {
 
 
 		public void onUpgrade(SQLiteConnection conn, int oldVersion, int newVersion) {
+			boolean upgraded = false;
 			if (newVersion <= 5) {
 				deleteOldFilters(conn);
+				upgraded = true;
 			}
 			if (oldVersion < 6) {
 				conn.execSQL("ALTER TABLE " + FILTER_NAME + " ADD " + FILTER_COL_HISTORY + " int DEFAULT " + FALSE_INT);
 				conn.execSQL("ALTER TABLE " + FILTER_NAME + " ADD " + FILTER_COL_DELETED + " int DEFAULT " + FALSE_INT);
+				upgraded = true;
 			}
 			if (oldVersion < 7) {
 				conn.execSQL(POI_CACHE_TABLE_CREATE);
+				upgraded = true;
 			}
+			if (upgraded) {
+				updateLastModifiedTime();
+			}
+		}
+
+		public long getLastModifiedTime() {
+			long lastModifiedTime = BackupHelper.getLastModifiedTime(context, FILTERS_LAST_MODIFIED_NAME);
+			if (lastModifiedTime == 0) {
+				File dbFile = context.getDatabasePath(DATABASE_NAME);
+				lastModifiedTime = dbFile.exists() ? dbFile.lastModified() : 0;
+				BackupHelper.setLastModifiedTime(context, FILTERS_LAST_MODIFIED_NAME, lastModifiedTime);
+			}
+			return lastModifiedTime;
+		}
+
+		private void updateLastModifiedTime() {
+			BackupHelper.setLastModifiedTime(context, FILTERS_LAST_MODIFIED_NAME);
 		}
 
 		private void deleteOldFilters(SQLiteConnection conn) {
@@ -741,6 +773,7 @@ public class PoiFiltersHelper {
 			if (conn != null) {
 				conn.execSQL("UPDATE " + FILTER_NAME + " SET " + FILTER_COL_HISTORY + " = ? WHERE " + FILTER_COL_ID + " = ?",
 						new Object[]{history ? TRUE_INT : FALSE_INT, filterId});
+				updateLastModifiedTime();
 			}
 		}
 
@@ -748,6 +781,7 @@ public class PoiFiltersHelper {
 			SQLiteConnection conn = getWritableDatabase();
 			if (conn != null) {
 				conn.execSQL("UPDATE " + FILTER_NAME + " SET " + FILTER_COL_HISTORY + " = ?", new Object[]{FALSE_INT});
+				updateLastModifiedTime();
 			}
 		}
 
@@ -778,6 +812,7 @@ public class PoiFiltersHelper {
 					}
 				}
 				insertCategories.close();
+				updateLastModifiedTime();
 				return true;
 			}
 			return false;
@@ -851,6 +886,7 @@ public class PoiFiltersHelper {
 						new Object[]{filter.getFilterId()});
 				addFilter(filter, conn, true, false);
 				updateName(conn, filter);
+				updateLastModifiedTime();
 				return true;
 			}
 			return false;
@@ -859,6 +895,7 @@ public class PoiFiltersHelper {
 		private void updateName(SQLiteConnection db, PoiUIFilter filter) {
 			db.execSQL("UPDATE " + FILTER_NAME + " SET " + FILTER_COL_FILTERBYNAME + " = ?, " + FILTER_COL_NAME + " = ? " + " WHERE "
 					+ FILTER_COL_ID + "= ?", new Object[]{filter.getFilterByName(), filter.getName(), filter.getFilterId()});
+			updateLastModifiedTime();
 		}
 
 		protected boolean deleteFilter(SQLiteConnection db, PoiUIFilter p, boolean force) {
@@ -869,6 +906,7 @@ public class PoiFiltersHelper {
 					db.execSQL("UPDATE " + FILTER_NAME + " SET " + FILTER_COL_DELETED + " = ? WHERE " + FILTER_COL_ID + " = ?",
 							new Object[]{TRUE_INT, p.getFilterId()});
 				}
+				updateLastModifiedTime();
 				return true;
 			}
 			return false;
@@ -877,6 +915,7 @@ public class PoiFiltersHelper {
 		private void deleteFilter(@NonNull SQLiteConnection db, String key) {
 			db.execSQL("DELETE FROM " + FILTER_NAME + " WHERE " + FILTER_COL_ID + " = ?", new Object[]{key});
 			db.execSQL("DELETE FROM " + CATEGORIES_NAME + " WHERE " + CATEGORIES_FILTER_ID + " = ?", new Object[]{key});
+			updateLastModifiedTime();
 		}
 
 		@Nullable

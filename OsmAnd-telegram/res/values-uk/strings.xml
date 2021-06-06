@@ -120,7 +120,7 @@
     <string name="gps_not_available">Будь ласка, увімкніть «Позиціювання» у системних налаштуваннях</string>
     <string name="osmand_service">Режим тла</string>
     <string name="osmand_service_descr">OsmAnd Tracker працює у фоновому режимі з вимкненим екраном.</string>
-    <string name="shared_string_distance">Відстань</string>
+    <string name="shared_string_distance">Віддаль</string>
     <string name="share_location">Поділитися позицією</string>
     <string name="sharing_location">Трансляція позиції</string>
     <string name="install_osmand_dialog_message">Спочатку Вам необхідно встановити безкоштовну або платну версію OsmAnd</string>

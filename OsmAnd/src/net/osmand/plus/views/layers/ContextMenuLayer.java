@@ -736,7 +736,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 					String gpxFileName = renderedObject.getFileNameByExtension(IndexConstants.GPX_FILE_EXT);
 					boolean isGpx = !Algorithms.isEmpty(gpxFileName);
-					if (!isGpx && (renderedObject.getId() == null || !renderedObject.isVisible())) {
+					if (!isGpx && (renderedObject.getId() == null || !renderedObject.isVisible()
+							|| renderedObject.isDrawOnPath())) {
 						continue;
 					}
 

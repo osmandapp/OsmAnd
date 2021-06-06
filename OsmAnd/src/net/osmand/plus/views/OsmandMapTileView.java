@@ -804,6 +804,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 							}
 							handler.removeMessages(MAP_FORCE_REFRESH_MESSAGE);
 						}
+						param.mapRefreshTimestamp = System.currentTimeMillis();
 						refreshBaseMapInternal(currentViewport.copy(), param);
 						sendRefreshMapMsg(param, 0);
 					} catch (Exception e) {

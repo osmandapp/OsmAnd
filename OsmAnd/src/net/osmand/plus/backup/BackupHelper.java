@@ -1,6 +1,7 @@
 package net.osmand.plus.backup;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.provider.Settings;
 import android.util.Pair;
@@ -28,12 +29,12 @@ import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
+import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.AbstractProgress;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
-import net.osmand.plus.settings.backend.backup.items.GlobalSettingsItem;
-import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.GpxSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
 
@@ -46,7 +47,6 @@ import java.io.File;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -79,6 +79,8 @@ public class BackupHelper {
 	private static final String DOWNLOAD_FILE_URL = SERVER_URL + "/userdata/download-file";
 	private static final String DELETE_FILE_URL = SERVER_URL + "/userdata/delete-file";
 	private static final String DELETE_FILE_VERSION_URL = SERVER_URL + "/userdata/delete-file-version";
+
+	private static final String BACKUP_TYPE_PREFIX = "backup_type_";
 
 	public final static int STATUS_SUCCESS = 0;
 	public final static int STATUS_PARSE_JSON_ERROR = 1;
@@ -176,6 +178,20 @@ public class BackupHelper {
 		this.remoteFiles = remoteFiles;
 	}
 
+	public static void setLastModifiedTime(@NonNull Context ctx, @NonNull String name) {
+		setLastModifiedTime(ctx, name, System.currentTimeMillis());
+	}
+
+	public static void setLastModifiedTime(@NonNull Context ctx, @NonNull String name, long lastModifiedTime) {
+		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
+		app.getBackupHelper().getDbHelper().setLastModifiedTime(name, lastModifiedTime);
+	}
+
+	public static long getLastModifiedTime(@NonNull Context ctx, @NonNull String name) {
+		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
+		return app.getBackupHelper().getDbHelper().getLastModifiedTime(name);
+	}
+
 	@SuppressLint("HardwareIds")
 	private String getAndroidId() {
 		try {
@@ -237,6 +253,47 @@ public class BackupHelper {
 	public void logout() {
 		settings.BACKUP_DEVICE_ID.resetToDefault();
 		settings.BACKUP_ACCESS_TOKEN.resetToDefault();
+	}
+
+	public CommonPreference<Boolean> getBackupTypePref(@NonNull ExportSettingsType type) {
+		return app.getSettings().registerBooleanPreference(BACKUP_TYPE_PREFIX + type.name(), true).makeGlobal().makeShared();
+	}
+
+	@NonNull
+	public static String getItemFileName(@NonNull SettingsItem item) {
+		String fileName;
+		if (item instanceof FileSettingsItem) {
+			FileSettingsItem fileItem = (FileSettingsItem) item;
+			fileName = BackupHelper.getFileItemName(fileItem);
+		} else {
+			fileName = item.getFileName();
+			if (Algorithms.isEmpty(fileName)) {
+				fileName = item.getDefaultFileName();
+			}
+		}
+		return fileName;
+	}
+
+	@NonNull
+	public static String getFileItemName(@NonNull FileSettingsItem fileSettingsItem) {
+		return getFileItemName(null, fileSettingsItem);
+	}
+
+	@NonNull
+	public static String getFileItemName(@Nullable File file, @NonNull FileSettingsItem fileSettingsItem) {
+		String subtypeFolder = fileSettingsItem.getSubtype().getSubtypeFolder();
+		String fileName;
+		if (file == null) {
+			file = fileSettingsItem.getFile();
+		}
+		if (Algorithms.isEmpty(subtypeFolder)) {
+			fileName = file.getName();
+		} else if (fileSettingsItem instanceof GpxSettingsItem) {
+			fileName = file.getPath().substring(file.getPath().indexOf(subtypeFolder) + subtypeFolder.length());
+		} else {
+			fileName = file.getPath().substring(file.getPath().indexOf(subtypeFolder) - 1);
+		}
+		return fileName;
 	}
 
 	public void registerUser(@NonNull final String email, @Nullable final OnRegisterUserListener listener) {
@@ -841,30 +898,14 @@ public class BackupHelper {
 			protected List<LocalFile> doInBackground(Void... voids) {
 				List<LocalFile> result = new ArrayList<>();
 
-				List<ExportSettingsType> settingsTypes = new ArrayList<>(Arrays.asList(ExportSettingsType.values()));
-				List<SettingsItem> localItems = app.getFileSettingsHelper().getFilteredSettingsItems(settingsTypes, true, true);
-
+				List<SettingsItem> localItems = getFilteredLocalItems();
 				for (SettingsItem item : localItems) {
-					String fileName = item.getFileName();
-					if (fileName == null) {
-						fileName = item.getDefaultFileName();
-					}
+					String fileName = BackupHelper.getItemFileName(item);
 					LocalFile localFile = new LocalFile();
 					localFile.item = item;
 					localFile.subfolder = "";
-					if (item instanceof FileSettingsItem) {
-						localFile.file = ((FileSettingsItem) item).getFile();
-						localFile.localModifiedTime = localFile.file.lastModified();
-					} else {
-						localFile.fileName = fileName;
-						if (localFile.item instanceof ProfileSettingsItem) {
-							ProfileSettingsItem settingsItem = (ProfileSettingsItem) localFile.item;
-							localFile.localModifiedTime = app.getSettings().getLastModePreferencesEditTime(settingsItem.getAppMode());
-						} else if (localFile.item instanceof GlobalSettingsItem) {
-							localFile.localModifiedTime = app.getSettings().getLastGlobalPreferencesEditTime();
-						}
-					}
-
+					localFile.fileName = fileName;
+					localFile.localModifiedTime = item.getLastModifiedTime();
 					UploadedFileInfo info = app.getBackupHelper().getDbHelper().getUploadedFileInfo(item.getType().name(), fileName);
 					if (info != null) {
 						localFile.uploadTime = info.getUploadTime();
@@ -876,6 +917,16 @@ public class BackupHelper {
 					}
 				}
 				return result;
+			}
+
+			private List<SettingsItem> getFilteredLocalItems() {
+				List<ExportSettingsType> settingsTypes = new ArrayList<>();
+				for (ExportSettingsType type : ExportSettingsType.values()) {
+					if (getBackupTypePref(type).get()) {
+						settingsTypes.add(type);
+					}
+				}
+				return app.getFileSettingsHelper().getFilteredSettingsItems(settingsTypes, true, true);
 			}
 
 			@Override

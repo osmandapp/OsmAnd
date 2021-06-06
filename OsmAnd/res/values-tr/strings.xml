@@ -2493,7 +2493,7 @@
     <string name="quick_action_take_photo_note">Yeni resim notu</string>
     <string name="quick_action_add_osm_bug">OSM notu oluştur</string>
     <string name="quick_action_add_parking">Otopark ekle</string>
-    <string name="quick_action_add_favorite">Favorilere ekle</string>
+    <string name="quick_action_add_favorite">Sık kullanılanlara ekle</string>
     <string name="quick_favorites_show_favorites_dialog">Favorileri göster</string>
     <string name="routing_attr_avoid_sett_description">Parke ve kaldırım taşından kaçınır</string>
     <string name="rate_dialog_descr">Lütfen geri bildirimlerinizi paylaşın ve çalışmalarımızı Google Play\'de değerlendirin.</string>
@@ -4130,4 +4130,39 @@
     <string name="verification_code_missing">Doğrulama kodunu almadım</string>
     <string name="verification_code_missing_description">Kod için bekleme süresi 10 dakika olabilir, ayrıca spam klasörünüzü de bakabilirsiniz. Yardımcı olmazsa aşağıdaki düğmeyi kullanın.</string>
     <string name="select_nav_profile_dialog_message">\'Navigasyon türü\' güzergahların nasıl hesaplandığını yönetir. Çevrim dışı ve çevrim içi yönlendirme motorları arasında seçim yapabilirsiniz.</string>
+    <string name="loading_list_of_routing_services">Kullanılabilir yönlendirme hizmetlerinin listesi yükleniyor</string>
+    <string name="shared_string_offline">Çevrim dışı</string>
+    <string name="shared_string_online">Çevrim içi</string>
+    <string name="osmand_online_routing_promo">Önceden tanımlanan şablonları kullanabilir veya özel çevrim içi yönlendirme ekleyebilirsiniz, desteklenenler: OSRM, Graphhopper, OpenRouteService, GPX.</string>
+    <string name="shared_string_external">Harici</string>
+    <string name="provided_by">%1$s tarafından sağlanan</string>
+    <string name="failed_loading_predefined_engines">Önceden tanımlanan şablonların listesi yüklenemedi.
+\nLütfen internet bağlantınızı gözden geçirin.</string>
+    <string name="shared_string_predefined">Önceden tanımlanan</string>
+    <string name="backup_complete">Yedekleme tamamlandı</string>
+    <string name="backup_now">Şimdi yedekle</string>
+    <string name="make_backup">Yedekle</string>
+    <string name="make_backup_descr">Bu aygıtta birçok değişiklik var, lütfen bu verileri kaybetmemek için yedekleyin.</string>
+    <string name="backup_conflicts">Çakışmalar</string>
+    <string name="backup_confilcts_descr">Sunucuda daha yeni bir sürüm bulunduğu için bazı dosyalar sunucuya yüklenemedi.</string>
+    <string name="backup_view_conflicts">Çakışmaları görüntüle</string>
+    <string name="backup_no_internet_descr">İnternet bağlantınızı gözden geçirin ve tekrar indirin.</string>
+    <string name="backup_pause_all">Tümünü duraklat</string>
+    <string name="upload_local_version">Yerel sürümü karşıya yükle</string>
+    <string name="download_server_version">Sunucu sürümünü indir</string>
+    <string name="shared_string_logout">Oturumu kapat</string>
+    <string name="backup_delete_all_data">Tüm verilerimi sil</string>
+    <string name="backup_delete_all_data_descr">OsmAnd Cloud üzerindeki tüm veriler silinecek. Yerel sürümlere dokunulmayacak.</string>
+    <string name="backup_delete_all_data_warning">Sürüm geçmişi de dahil olmak üzere daha önce OsmAnd Cloud\'a yüklenen tüm verileri silmek üzeresiniz.
+\n
+\nSilinen verileri kurtaramazsınız.</string>
+    <string name="backup_danger_zone">Tehlike bölgesi</string>
+    <string name="delete_all_confirmation">Evet, tümünü sil</string>
+    <string name="backup_delete_old_data">Eski sürümleri kaldır</string>
+    <string name="backup_delete_old_data_descr">Verilerinizin geçerli sürümleri OsmAnd Cloud üzerinde korunacak</string>
+    <string name="backup_delete_old_data_warning">Önceden yüklenen veriler için değişiklik geçmişini silmek üzeresiniz.
+\n
+\nVerilerin geçerli sürümü sunucuya kaydedilecek, ancak daha önce yapılan değişikliklere geri dönemeyeceksiniz.</string>
+    <string name="backup_data">Verileri yedekle</string>
+    <string name="select_backup_data_descr">Yedeklenecek verileri ve klasörleri seçin.</string>
 </resources>

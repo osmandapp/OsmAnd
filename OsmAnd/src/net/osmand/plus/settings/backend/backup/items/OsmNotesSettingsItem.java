@@ -61,6 +61,15 @@ public class OsmNotesSettingsItem extends CollectionSettingsItem<OsmNotesPoint> 
 	}
 
 	@Override
+	protected long getLocalModifiedTime() {
+		OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+		if (osmEditingPlugin != null) {
+			return osmEditingPlugin.getDBBug().getLastModifiedTime();
+		}
+		return 0;
+	}
+
+	@Override
 	public void apply() {
 		List<OsmNotesPoint> newItems = getNewItems();
 		if (!newItems.isEmpty() || !duplicateItems.isEmpty()) {

@@ -6,9 +6,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.backup.FileSettingsHelper.SettingsCollectListener;
-import net.osmand.plus.settings.backend.backup.FileSettingsHelper.SettingsImportListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.CheckDuplicatesListener;
+import net.osmand.plus.settings.backend.backup.SettingsHelper.CollectListener;
+import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportType;
 import net.osmand.plus.settings.backend.backup.items.CollectionSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
@@ -28,8 +28,8 @@ public class ImportFileTask extends AsyncTask<Void, Void, List<SettingsItem>> {
 	private String latestChanges;
 	private int version;
 
-	private SettingsImportListener importListener;
-	private SettingsCollectListener collectListener;
+	private ImportListener importListener;
+	private CollectListener collectListener;
 	private CheckDuplicatesListener duplicatesListener;
 	private final SettingsImporter importer;
 
@@ -43,7 +43,7 @@ public class ImportFileTask extends AsyncTask<Void, Void, List<SettingsItem>> {
 	ImportFileTask(@NonNull FileSettingsHelper helper,
 				   @NonNull File file,
 				   String latestChanges, int version,
-				   @Nullable SettingsCollectListener collectListener) {
+				   @Nullable CollectListener collectListener) {
 		this.helper = helper;
 		this.app = helper.getApp();
 		this.file = file;
@@ -57,7 +57,7 @@ public class ImportFileTask extends AsyncTask<Void, Void, List<SettingsItem>> {
 	ImportFileTask(@NonNull FileSettingsHelper helper,
 				   @NonNull File file,
 				   @NonNull List<SettingsItem> items, String latestChanges, int version,
-				   @Nullable SettingsImportListener importListener) {
+				   @Nullable ImportListener importListener) {
 		this.helper = helper;
 		this.app = helper.getApp();
 		this.file = file;
@@ -97,6 +97,7 @@ public class ImportFileTask extends AsyncTask<Void, Void, List<SettingsItem>> {
 	protected List<SettingsItem> doInBackground(Void... voids) {
 		switch (importType) {
 			case COLLECT:
+			case COLLECT_AND_READ:
 				try {
 					return importer.collectItems(file);
 				} catch (IllegalArgumentException e) {
@@ -124,7 +125,7 @@ public class ImportFileTask extends AsyncTask<Void, Void, List<SettingsItem>> {
 		switch (importType) {
 			case COLLECT:
 				importDone = true;
-				collectListener.onSettingsCollectFinished(true, false, this.items);
+				collectListener.onCollectFinished(true, false, this.items);
 				break;
 			case CHECK_DUPLICATES:
 				importDone = true;
@@ -152,7 +153,7 @@ public class ImportFileTask extends AsyncTask<Void, Void, List<SettingsItem>> {
 		return file;
 	}
 
-	public void setImportListener(SettingsImportListener importListener) {
+	public void setImportListener(ImportListener importListener) {
 		this.importListener = importListener;
 	}
 

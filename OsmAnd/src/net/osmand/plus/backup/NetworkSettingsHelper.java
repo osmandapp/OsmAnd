@@ -19,14 +19,6 @@ public class NetworkSettingsHelper extends SettingsHelper {
 	ImportBackupTask importTask;
 	ExportBackupTask exportTask;
 
-	public interface BackupImportListener {
-		void onBackupImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> items);
-	}
-
-	public interface BackupCollectListener {
-		void onBackupCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items);
-	}
-
 	public interface BackupExportListener {
 		void onBackupExportStarted();
 
@@ -78,7 +70,7 @@ public class NetworkSettingsHelper extends SettingsHelper {
 		}
 	}
 
-	void finishImport(@Nullable BackupImportListener listener, boolean success, @NonNull List<SettingsItem> items, boolean needRestart) {
+	void finishImport(@Nullable ImportListener listener, boolean success, @NonNull List<SettingsItem> items, boolean needRestart) {
 		importTask = null;
 		List<String> warnings = new ArrayList<>();
 		for (SettingsItem item : items) {
@@ -88,12 +80,12 @@ public class NetworkSettingsHelper extends SettingsHelper {
 			getApp().showToastMessage(AndroidUtils.formatWarnings(warnings).toString());
 		}
 		if (listener != null) {
-			listener.onBackupImportFinished(success, needRestart, items);
+			listener.onImportFinished(success, needRestart, items);
 		}
 	}
 
 	public void collectSettings(String latestChanges, int version,
-								@Nullable BackupCollectListener listener) {
+								@Nullable CollectListener listener) {
 		new ImportBackupTask(this, latestChanges, version, listener)
 				.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
@@ -107,7 +99,7 @@ public class NetworkSettingsHelper extends SettingsHelper {
 
 	public void importSettings(@NonNull List<SettingsItem> items,
 							   String latestChanges, int version,
-							   @Nullable BackupImportListener listener) {
+							   @Nullable ImportListener listener) {
 		new ImportBackupTask(this, items, latestChanges, version, listener)
 				.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}

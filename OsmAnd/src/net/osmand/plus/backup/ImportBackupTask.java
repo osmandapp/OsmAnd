@@ -6,8 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.backup.NetworkSettingsHelper.BackupCollectListener;
-import net.osmand.plus.backup.NetworkSettingsHelper.BackupImportListener;
+import net.osmand.plus.settings.backend.backup.SettingsHelper.CollectListener;
+import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.CheckDuplicatesListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportType;
 import net.osmand.plus.settings.backend.backup.items.CollectionSettingsItem;
@@ -26,8 +26,8 @@ public class ImportBackupTask extends AsyncTask<Void, Void, List<SettingsItem>> 
 	private String latestChanges;
 	private int version;
 
-	private BackupImportListener importListener;
-	private BackupCollectListener collectListener;
+	private ImportListener importListener;
+	private CollectListener collectListener;
 	private CheckDuplicatesListener duplicatesListener;
 	private final BackupImporter importer;
 
@@ -40,7 +40,7 @@ public class ImportBackupTask extends AsyncTask<Void, Void, List<SettingsItem>> 
 
 	ImportBackupTask(@NonNull NetworkSettingsHelper helper,
 				   String latestChanges, int version,
-				   @Nullable BackupCollectListener collectListener) {
+				   @Nullable CollectListener collectListener) {
 		this.helper = helper;
 		this.app = helper.getApp();
 		this.collectListener = collectListener;
@@ -52,7 +52,7 @@ public class ImportBackupTask extends AsyncTask<Void, Void, List<SettingsItem>> 
 
 	ImportBackupTask(@NonNull NetworkSettingsHelper helper,
 				   @NonNull List<SettingsItem> items, String latestChanges, int version,
-				   @Nullable BackupImportListener importListener) {
+				   @Nullable ImportListener importListener) {
 		this.helper = helper;
 		this.app = helper.getApp();
 		this.importListener = importListener;
@@ -89,8 +89,9 @@ public class ImportBackupTask extends AsyncTask<Void, Void, List<SettingsItem>> 
 	protected List<SettingsItem> doInBackground(Void... voids) {
 		switch (importType) {
 			case COLLECT:
+			case COLLECT_AND_READ:
 				try {
-					return importer.collectItems();
+					return importer.collectItems(importType == ImportType.COLLECT_AND_READ);
 				} catch (IllegalArgumentException e) {
 					NetworkSettingsHelper.LOG.error("Failed to collect items for backup", e);
 				} catch (IOException e) {
@@ -116,7 +117,7 @@ public class ImportBackupTask extends AsyncTask<Void, Void, List<SettingsItem>> 
 		switch (importType) {
 			case COLLECT:
 				importDone = true;
-				collectListener.onBackupCollectFinished(true, false, this.items);
+				collectListener.onCollectFinished(items != null, false, this.items);
 				break;
 			case CHECK_DUPLICATES:
 				importDone = true;
@@ -140,7 +141,7 @@ public class ImportBackupTask extends AsyncTask<Void, Void, List<SettingsItem>> 
 		return items;
 	}
 
-	public void setImportListener(BackupImportListener importListener) {
+	public void setImportListener(ImportListener importListener) {
 		this.importListener = importListener;
 	}
 

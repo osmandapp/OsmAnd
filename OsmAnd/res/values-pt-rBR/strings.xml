@@ -1462,8 +1462,8 @@
     <string name="choose_available_region">Selecione região da lista</string>
     <string name="choose_intersected_street">Selecione rua transversal</string>
     <string name="Closest_Amenities">Serviços próximos</string>
-    <string name="app_mode_car">Carro</string>
-    <string name="app_mode_bicycle">Bicicleta</string>
+    <string name="app_mode_car">Condução</string>
+    <string name="app_mode_bicycle">Ciclismo</string>
     <string name="app_mode_pedestrian">A pé</string>
     <string name="position_on_map_center">Centro</string>
     <string name="position_on_map_bottom">Em baixo</string>
@@ -3920,7 +3920,7 @@
     <string name="keep_it_empty_if_not">Mantenha-o vazio se não</string>
     <string name="online_routing_example_hint">O URL com todos os parâmetros terá a seguinte aparência:</string>
     <string name="test_route_calculation">Cálculo da rota de teste</string>
-    <string name="routing_engine_vehicle_type_driving">Dirigindo</string>
+    <string name="routing_engine_vehicle_type_driving">Condução</string>
     <string name="routing_engine_vehicle_type_foot">Pé</string>
     <string name="routing_engine_vehicle_type_bike">Bicicleta</string>
     <string name="routing_engine_vehicle_type_car">Carro</string>
@@ -4124,4 +4124,39 @@
     <string name="verification_code_missing">Não recebi o código de verificação</string>
     <string name="verification_code_missing_description">O tempo de espera pelo código pode ser de 10 minutos, você também pode verificar sua pasta de spam. Se não ajudar, use o botão abaixo.</string>
     <string name="select_nav_profile_dialog_message">O \'tipo de navegação\' rege como as rotas são calculadas. Você pode selecionar entre mecanismos de roteamento offline e online.</string>
+    <string name="loading_list_of_routing_services">Lista de carregamento de serviços de roteamento disponíveis</string>
+    <string name="shared_string_offline">Offline</string>
+    <string name="shared_string_online">Online</string>
+    <string name="osmand_online_routing_promo">Você pode usar modelos predefinidos ou adicionar roteamento on-line personalizado, suportado: OSRM, Graphhopper, OpenRouteService, GPX.</string>
+    <string name="shared_string_external">Externo</string>
+    <string name="provided_by">Fornecido por %1$s</string>
+    <string name="failed_loading_predefined_engines">Falha ao carregar a lista de modelos predefinidos.
+\nPor favor, verifique sua conexão à internet.</string>
+    <string name="shared_string_predefined">Predefinido</string>
+    <string name="backup_complete">Backup completo</string>
+    <string name="backup_now">Backup agora</string>
+    <string name="make_backup">Fazer um backup</string>
+    <string name="make_backup_descr">Existem muitas alterações neste dispositivo, por favor, faça um backup desses dados para não perdê-lo.</string>
+    <string name="backup_conflicts">Conflitos</string>
+    <string name="backup_confilcts_descr">Alguns arquivos não pôde ser carregado no servidor porque uma versão mais recente é armazenada no servidor.</string>
+    <string name="backup_view_conflicts">Ver conflitos</string>
+    <string name="backup_no_internet_descr">Verifique sua conexão com a Internet e baixe novamente.</string>
+    <string name="backup_pause_all">Pausar tudo</string>
+    <string name="upload_local_version">Carregue a versão local</string>
+    <string name="download_server_version">Baixar versão do servidor</string>
+    <string name="backup_delete_all_data_warning">Você está prestes a excluir todos os dados enviados anteriormente para o OsmAnd Cloud, incluindo o histórico de versão.
+\n
+\nVocê não poderá recuperar dados excluídos.</string>
+    <string name="backup_delete_old_data_warning">Você está prestes a excluir o histórico de alterações para os dados carregados anteriormente.
+\n
+\nA versão atual dos dados será salva no servidor, mas você não poderá reverter as alterações feitas anteriormente.</string>
+    <string name="shared_string_logout">Sair</string>
+    <string name="backup_delete_all_data">Excluir todos os meus dados</string>
+    <string name="backup_delete_all_data_descr">Todos os dados no OsmAnd Cloud serão excluídos. Versões locais ficarão intocadas.</string>
+    <string name="backup_danger_zone">Zona de perigo</string>
+    <string name="delete_all_confirmation">Sim, apague tudo</string>
+    <string name="backup_delete_old_data">Remova versões antigas</string>
+    <string name="backup_delete_old_data_descr">Versões atuais de seus dados serão preservadas no OsmAnd Cloud</string>
+    <string name="backup_data">Dados de backup</string>
+    <string name="select_backup_data_descr">Selecione dados e pastas para backup.</string>
 </resources>

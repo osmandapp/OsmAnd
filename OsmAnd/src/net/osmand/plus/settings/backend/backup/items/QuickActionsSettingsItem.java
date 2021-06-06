@@ -56,6 +56,11 @@ public class QuickActionsSettingsItem extends CollectionSettingsItem<QuickAction
 	}
 
 	@Override
+	protected long getLocalModifiedTime() { // TODO
+		return 0;
+	}
+
+	@Override
 	public boolean isDuplicate(@NonNull QuickAction item) {
 		return !actionRegistry.isNameUnique(item, app);
 	}

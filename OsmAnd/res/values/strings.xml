@@ -12,7 +12,22 @@
 
 -->
 
+    <string name="grey_color_slope">Grey color is used when slope is undefined.</string>
+    <string name="restore_complete">Restore complete</string>
+    <string name="receiving_data_from_server">Receiving data from the server</string>
+    <string name="restore_selected_data">Restore selected data</string>
+    <string name="choose_what_to_restore">Choose what to restore.</string>
+    <string name="restore_from_osmand_cloud">Restore from OsmAnd Cloud</string>
+    <string name="backup_restore_data">Restore data</string>
+    <string name="backup_restore_data_descr">Restore data on the device, using online backups.</string>
+    <string name="select_backup_data_descr">Select data and folders for backup.</string>
+    <string name="backup_data">Backup data</string>
+    <string name="backup_delete_old_data_warning">You are about to delete the change history for the previously loaded data.\n\nThe current version of the data will be saved on the server, but you will not be able to revert to the previously made changes.</string>
+    <string name="backup_delete_old_data_descr">Current versions of your data will be preserved on OsmAnd Cloud</string>
+    <string name="backup_delete_old_data">Remove old versions</string>
+    <string name="delete_all_confirmation">Yes, delete all</string>
     <string name="backup_danger_zone">Danger zone</string>
+    <string name="backup_delete_all_data_warning">You are about to delete all data previously uploaded to OsmAnd Cloud, including version history.\n\nYou will not be able to recover deleted data.</string>
     <string name="backup_delete_all_data_descr">All data on OsmAnd Cloud will be deleted. Local versions will stay untouched.</string>
     <string name="backup_delete_all_data">Delete all my data</string>
     <string name="shared_string_logout">Logout</string>

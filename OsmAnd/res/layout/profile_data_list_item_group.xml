@@ -27,7 +27,7 @@
 			android:orientation="horizontal">
 
 			<androidx.appcompat.widget.AppCompatImageView
-				android:id="@+id/explist_indicator"
+				android:id="@+id/explicit_indicator"
 				android:layout_width="@dimen/standard_icon_size"
 				android:layout_height="@dimen/standard_icon_size"
 				android:layout_marginLeft="@dimen/content_padding"

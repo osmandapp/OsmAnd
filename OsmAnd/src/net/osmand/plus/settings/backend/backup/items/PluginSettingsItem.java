@@ -66,6 +66,11 @@ public class PluginSettingsItem extends SettingsItem {
 	}
 
 	@Override
+	protected long getLocalModifiedTime() {
+		return 0;
+	}
+
+	@Override
 	public boolean exists() {
 		return OsmandPlugin.getPlugin(getPluginId()) != null;
 	}

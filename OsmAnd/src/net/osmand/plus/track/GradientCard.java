@@ -3,6 +3,7 @@ package net.osmand.plus.track;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
+import android.view.View;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
@@ -21,9 +22,6 @@ public class GradientCard extends BaseCard {
 
 	private final GPXTrackAnalysis gpxTrackAnalysis;
 	private GradientScaleType selectedScaleType;
-
-	private static final float MIN_SLOPE = 0;
-	private static final float MAX_SLOPE = 0.6f; // 60%
 
 	public GradientCard(@NonNull MapActivity mapActivity, @NonNull GPXTrackAnalysis gpxTrackAnalysis, @Nullable GradientScaleType selectedScaleType) {
 		super(mapActivity);
@@ -49,26 +47,39 @@ public class GradientCard extends BaseCard {
 			return;
 		}
 
+		boolean isTrack = gpxTrackAnalysis != null;
+		boolean isRouteAltitude = !isTrack && selectedScaleType == GradientScaleType.ALTITUDE;
+		AndroidUiHelper.updateVisibility(view, true);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.upper_space), isTrack || isRouteAltitude);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.bottom_space), isTrack);
+
+		View slopeLegend = view.findViewById(R.id.slope_legend);
+		View speedAltitudeLegend = view.findViewById(R.id.speed_altitude_legend);
+
+		if (selectedScaleType == GradientScaleType.SLOPE) {
+			AndroidUiHelper.updateVisibility(slopeLegend, true);
+			AndroidUiHelper.updateVisibility(speedAltitudeLegend, false);
+			return;
+		}
+
+		AndroidUiHelper.updateVisibility(slopeLegend, false);
+		AndroidUiHelper.updateVisibility(speedAltitudeLegend, true);
+
 		TextView minValue = view.findViewById(R.id.min_value);
 		TextView maxValue = view.findViewById(R.id.max_value);
 
-		if (gpxTrackAnalysis != null) {
+		if (isTrack) {
 			AndroidUiHelper.updateVisibility(view, true);
 			double min = RouteColorize.getMinValue(selectedScaleType.toColorizationType(), gpxTrackAnalysis);
 			double max = RouteColorize.getMaxValue(selectedScaleType.toColorizationType(),
 					gpxTrackAnalysis, min, app.getSettings().getApplicationMode().getMaxSpeed());
 			minValue.setText(formatValue(min));
 			maxValue.setText(formatValue(max));
-			AndroidUiHelper.updateVisibility(view.findViewById(R.id.space), true);
 		} else {
 			if (selectedScaleType == GradientScaleType.ALTITUDE) {
 				minValue.setText(R.string.shared_string_min_height);
 				maxValue.setText(R.string.shared_string_max_height);
-			} else if (selectedScaleType == GradientScaleType.SLOPE) {
-				minValue.setText(formatValue(MIN_SLOPE));
-				maxValue.setText(formatValue(MAX_SLOPE));
 			}
-			AndroidUiHelper.updateVisibility(view.findViewById(R.id.space), false);
 		}
 	}
 

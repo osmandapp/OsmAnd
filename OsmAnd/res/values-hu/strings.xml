@@ -4122,4 +4122,39 @@
     <string name="last_backup">Legutóbbi biztonsági mentés</string>
     <string name="backup_and_restore">Biztonsági mentés és visszaállítás</string>
     <string name="select_nav_profile_dialog_message">A „Navigáció típusa” az útvonalak megtervezését szabályozza. Választhat offline és online útvonaltervezők között.</string>
+    <string name="delete_all_confirmation">Igen, törlődjék minden</string>
+    <string name="backup_delete_old_data">Régi változatok eltávolítása</string>
+    <string name="backup_delete_old_data_warning">Törölni készül a korábban betöltött adatok változáselőzményeit.
+\n
+\nAz adatok aktuális verziója el lesz mentve a kiszolgálón, de a korábbi változtatásokra nem térhet vissza.</string>
+    <string name="backup_delete_old_data_descr">Az OsmAnd Cloud megőrzi adatai jelenlegi változatait</string>
+    <string name="provided_by">Szolgáltató: %1$s</string>
+    <string name="loading_list_of_routing_services">Elérhető útvonaltervező szolgáltatások listájának betöltése</string>
+    <string name="shared_string_offline">Offline</string>
+    <string name="shared_string_online">Online</string>
+    <string name="osmand_online_routing_promo">Használhat előre meghatározott sablonokat, vagy hozzáadhat egyéni online útvonaltervezést. Támogatott szolgáltatások: OSRM, Graphhopper, OpenRouteService, GPX.</string>
+    <string name="shared_string_external">Külső</string>
+    <string name="failed_loading_predefined_engines">Nem sikerült betölteni az előre meghatározott sablonok listáját.
+\nKérjük, ellenőrizze internetkapcsolatát.</string>
+    <string name="shared_string_predefined">Előre meghatározott</string>
+    <string name="backup_complete">A biztonsági mentés kész</string>
+    <string name="backup_now">Biztonsági mentés most</string>
+    <string name="make_backup">Biztonsági mentés készítése</string>
+    <string name="make_backup_descr">Ezen az eszközön sok változás van, kérjük, készítsen biztonsági mentést ezekről az adatokról, hogy el ne vesszenek.</string>
+    <string name="backup_conflicts">Ütközések</string>
+    <string name="backup_confilcts_descr">Egyes fájlokat nem sikerült feltölteni a kiszolgálóra, mert ott egy újabb verzió van tárolva.</string>
+    <string name="backup_view_conflicts">Ütközések megtekintése</string>
+    <string name="backup_no_internet_descr">Ellenőrizze az internetkapcsolatát, és töltse le újra.</string>
+    <string name="backup_pause_all">Az összes szüneteltetése</string>
+    <string name="upload_local_version">Hely változat feltöltése</string>
+    <string name="download_server_version">A kiszolgálón lévő változat letöltése</string>
+    <string name="shared_string_logout">Kijelentkezés</string>
+    <string name="backup_delete_all_data">Összes adatom törlése</string>
+    <string name="backup_delete_all_data_descr">Az OsmAnd Cloud összes adata törlődni fog. A helyi verziók érintetlenek maradnak.</string>
+    <string name="backup_delete_all_data_warning">Törölni készül minden olyan adatot, amelyet korábban feltöltött az OsmAnd Cloud szolgáltatásba, beleértve a verzióelőzményeket is.
+\n
+\nA törölt adatokat nem tudja helyreállítani.</string>
+    <string name="backup_danger_zone">Veszélyes terület</string>
+    <string name="select_backup_data_descr">Biztonsági mentésre kerülő adatok és mappák kijelölése.</string>
+    <string name="backup_data">Adatok biztonsági mentése</string>
 </resources>

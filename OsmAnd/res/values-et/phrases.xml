@@ -36,9 +36,9 @@
     <string name="poi_military">Militaar</string>
     <string name="poi_palaeontological_site">Paleontoloogia</string>
     <string name="poi_bakery">Pagariäri</string>
-    <string name="poi_alcohol">Likööri pood</string>
-    <string name="poi_cheese">Juustu pood</string>
-    <string name="poi_chocolate">Šokolaadi pood</string>
+    <string name="poi_alcohol">Viinapood</string>
+    <string name="poi_cheese">Juustupood</string>
+    <string name="poi_chocolate">Šokolaadipood</string>
     <string name="poi_coffee">Kohvipood</string>
     <string name="poi_mall">Kaubanduskeskus</string>
     <string name="poi_beverages">Joogi pood</string>
@@ -57,18 +57,18 @@
     <string name="poi_convenience">Lähikauplus</string>
     <string name="poi_ice_cream">Jäätisekohvik</string>
     <string name="poi_supermarket">Supermarket</string>
-    <string name="poi_tea">Tee pood</string>
-    <string name="poi_pasta">Pasta pood</string>
+    <string name="poi_tea">Teepood</string>
+    <string name="poi_pasta">Pastapood</string>
     <string name="poi_pastry">Kondiitriäri</string>
-    <string name="poi_dairy">Meierei pood</string>
+    <string name="poi_dairy">Piimapood</string>
     <string name="poi_vending_machine">Müügiautomaat</string>
     <string name="poi_wine">Veinipood</string>
     <string name="poi_books">Raamatupood</string>
-    <string name="poi_bicycle">Jalgratta pood</string>
-    <string name="poi_anime">Anime pood</string>
+    <string name="poi_bicycle">Jalgrattapood</string>
+    <string name="poi_anime">Anime-pood</string>
     <string name="poi_antiques">Antiigiäri</string>
     <string name="poi_art">Kunstiäri</string>
-    <string name="poi_baby_goods">Beebi kaubad</string>
+    <string name="poi_baby_goods">Beebikaubad</string>
     <string name="poi_bag">Kotipood</string>
     <string name="poi_bathroom_furnishing">Vannitoasisustus</string>
     <string name="poi_boutique">Moebutiik</string>
@@ -133,13 +133,13 @@
     <string name="poi_ticket">Piletimüük</string>
     <string name="poi_tobacco">Tubaka pood</string>
     <string name="poi_toys">Mänguasjapood</string>
-    <string name="poi_fuel_avia_type">Kütuse liik (avio)</string>
+    <string name="poi_fuel_avia_type">Lennukikütuse liik</string>
     <string name="poi_payment_type">Makse liik</string>
     <string name="poi_payment_fuel_type">Kütusekaardid</string>
     <string name="poi_additional_type">Täiendav</string>
     <string name="poi_internet_access_type">Internetiühenduse liik</string>
     <string name="poi_vending_type">Müügiautomaadi liik</string>
-    <string name="poi_bicycle_service">Jalgratta teenindus</string>
+    <string name="poi_bicycle_service">Jalgrattahooldus</string>
     <string name="poi_clothes_type">Liik</string>
     <string name="poi_shoes_type">Liik</string>
     <string name="poi_fire_hydrant_type">Liik</string>
@@ -165,7 +165,7 @@
     <string name="poi_fire_hose">Tuletõrjevoolik</string>
     <string name="poi_fire_water_pond">Tuletõrjevee tiik</string>
     <string name="poi_grit_bin">Liivatuskast</string>
-    <string name="poi_ambulance_station">Kiirabi jaam</string>
+    <string name="poi_ambulance_station">Kiirabijaam</string>
     <string name="poi_ses_station">SES jaam</string>
     <string name="poi_emergency_access_point">Hädaabipunkt</string>
     <string name="poi_ford">Koolmekoht</string>
@@ -175,7 +175,7 @@
     <string name="poi_video">Video pood</string>
     <string name="poi_window_blind">Aknakatete pood</string>
     <string name="poi_electronics">Elektroonikapood</string>
-    <string name="poi_atv">Neljarattaliste pood</string>
+    <string name="poi_atv">Maastikukulgurite pood</string>
     <string name="poi_cosmetics">Kosmeetika</string>
     <string name="poi_sewing">Kuivkaupade pood</string>
     <string name="poi_tyres">Rehvipood</string>
@@ -342,7 +342,7 @@
     <string name="poi_public_transport_station">Ühistranspordi jaam</string>
     <string name="poi_bus_station">Bussijaam</string>
     <string name="poi_railway_station">Raudteejaam</string>
-    <string name="poi_railway_platform">Raudtee platvorm</string>
+    <string name="poi_railway_platform">Raudteeplatvorm</string>
     <string name="poi_halt">Raudtee peatus</string>
     <string name="poi_subway_station">Jah</string>
     <string name="poi_railway_buffer_stop">Raudtee puhverpeatus</string>
@@ -721,8 +721,8 @@
     <string name="poi_guest_house">Külalistemaja</string>
     <string name="poi_hostel">Hostel</string>
     <string name="poi_motel">Motell</string>
-    <string name="poi_alpine_hut">Alpi onn</string>
-    <string name="poi_chalet">Karjasemaja</string>
+    <string name="poi_alpine_hut">Alpimaja</string>
+    <string name="poi_chalet">Mägimajake</string>
     <string name="poi_apartment">Korter</string>
     <string name="poi_place_of_worship">Jumalateenistuse koht</string>
     <string name="poi_internet_access_wlan">Internet: traadita</string>
@@ -737,7 +737,7 @@
     <string name="poi_travel_agent">Reisibüroo</string>
     <string name="poi_viewpoint">Vaatepunkt</string>
     <string name="poi_camp_site">Laagriplats</string>
-    <string name="poi_caravan_site">Haagissuvila koht</string>
+    <string name="poi_caravan_site">Haagissuvilate parkla</string>
     <string name="poi_picnic_site">Piknikuplats</string>
     <string name="poi_spring">Allikas</string>
     <string name="poi_hot_spring">Kuumaveeallikas</string>
@@ -1360,7 +1360,7 @@
     <string name="poi_services">Teeninduspiirkond</string>
     <string name="poi_mini_roundabout">Väike ringristmik</string>
     <string name="poi_railway_crossing">Raudtee ülesõit</string>
-    <string name="poi_railway_level_crossing">Samatasandiline raudtee ülesõit</string>
+    <string name="poi_railway_level_crossing">Samatasandiline raudteeülesõit</string>
     <string name="poi_bird_hide">Linnuvaatluse koht</string>
     <string name="poi_horse_riding">Ratsutamine</string>
     <string name="poi_leisure_common">Levinud vaba aja veetmise koht</string>
@@ -1936,7 +1936,7 @@
     <string name="poi_training_martial_art">Koolitus: võitluskunst</string>
     <string name="poi_training_aviation">Koolitus: lennundus</string>
     <string name="poi_training_hairdressing">Koolitus: juuksur</string>
-    <string name="poi_memorial_stolperstein">Komistusmälestuskivi</string>
+    <string name="poi_memorial_stolperstein">Mälestuskivi sillutises</string>
     <string name="poi_memorial_column">Sammas</string>
     <string name="poi_memorial_stupa">Stuupa</string>
     <string name="poi_memorial_prasat">Prasat</string>
@@ -3962,4 +3962,7 @@
     <string name="poi_glacier_debris_cover_none">Purdmaterjali kate: puudub</string>
     <string name="poi_glacier_status_oscillating">Liustiku olek: võnkuv</string>
     <string name="poi_glacier_status_marked_retreat">Liustiku olek: märgitud taandumine</string>
+    <string name="poi_climbing_grade_uiaa_min">Kaljuronimise lihtsaim marsruut (UIAA süsteemi järgi)</string>
+    <string name="poi_climbing_grade_french_min">Kaljuronimise lihtsaim marsruut (prantsuse süsteemi järgi)</string>
+    <string name="poi_climbing_grade_saxon_min">Kaljuronimise lihtsaim marsruut (anglosaksi süsteemi järgi)</string>
 </resources>

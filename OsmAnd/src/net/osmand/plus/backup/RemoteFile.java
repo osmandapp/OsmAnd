@@ -137,4 +137,10 @@ public class RemoteFile {
 		return Algorithms.hash(id, userid, deviceid, filesize, type, name,
 				updatetime, updatetimems, clienttime, clienttimems);
 	}
+
+	@NonNull
+	@Override
+	public String toString() {
+		return "type " + type + ", name " + name + "";
+	}
 }

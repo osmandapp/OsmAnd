@@ -94,7 +94,7 @@ class SettingsImporter {
 						&& zipEntry.getName().equals(settingsItem.getFileName())) {
 					FileSettingsItem fileSettingsItem = (FileSettingsItem) settingsItem;
 					fileSettingsItem.setSize(size);
-					fileSettingsItem.setLastModified(zipEntry.getTime());
+					fileSettingsItem.setLastModifiedTime(zipEntry.getTime());
 					break;
 				}
 			}

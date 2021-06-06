@@ -167,7 +167,6 @@ public class RouteProvider {
 				LatLon end = new LatLon(gpxPoint.getLatitude(), gpxPoint.getLongitude());
 
 				RouteCalculationParams params = new RouteCalculationParams();
-				params.inSnapToRoadMode = true;
 				params.start = start;
 				params.end = end;
 				RoutingHelper.applyApplicationSettings(params, routeParams.ctx.getSettings(), appMode);

@@ -94,6 +94,14 @@ public abstract class SettingsHelper {
 
 	private final OsmandApplication app;
 
+	public interface CollectListener {
+		void onCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items);
+	}
+
+	public interface ImportListener {
+		void onImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> items);
+	}
+
 	public interface CheckDuplicatesListener {
 		void onDuplicatesChecked(@NonNull List<Object> duplicates, List<SettingsItem> items);
 	}
@@ -104,6 +112,7 @@ public abstract class SettingsHelper {
 
 	public enum ImportType {
 		COLLECT,
+		COLLECT_AND_READ,
 		CHECK_DUPLICATES,
 		IMPORT
 	}
@@ -127,8 +136,7 @@ public abstract class SettingsHelper {
 
 	public List<SettingsItem> getFilteredSettingsItems(
 			Map<ExportSettingsType, List<?>> allSettingsMap, List<ExportSettingsType> settingsTypes,
-			@NonNull List<SettingsItem> settingsItems, boolean export
-	) {
+			@NonNull List<SettingsItem> settingsItems, boolean export) {
 		List<SettingsItem> filteredSettingsItems = new ArrayList<>();
 		for (ExportSettingsType settingsType : settingsTypes) {
 			List<?> settingsDataObjects = allSettingsMap.get(settingsType);

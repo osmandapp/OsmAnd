@@ -467,6 +467,8 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 		int dzoom = nzoom - TILE_ZOOM;
 		int div = (int) Math.pow(2.0, dzoom);
 
+		long requestTimestamp = System.currentTimeMillis();
+
 		Map<String, Pair<QuadPointDouble, GeometryTile>> tiles = new HashMap<>();
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
@@ -480,10 +482,12 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 					boolean imgExist = mgr.tileExistOnFileSystem(tileId, map, tileX, tileY, TILE_ZOOM);
 					if (imgExist) {
 						if (sync) {
-							tile = mgr.getGeometryTilesCache().getTileForMapSync(tileId, map, tileX, tileY, TILE_ZOOM, false);
+							tile = mgr.getGeometryTilesCache().getTileForMapSync(tileId, map,
+									tileX, tileY, TILE_ZOOM, false, requestTimestamp);
 							sync = false;
 						} else {
-							tile = mgr.getGeometryTilesCache().getTileForMapAsync(tileId, map, tileX, tileY, TILE_ZOOM, false);
+							tile = mgr.getGeometryTilesCache().getTileForMapAsync(tileId, map,
+									tileX, tileY, TILE_ZOOM, false, requestTimestamp);
 						}
 					}
 					if (tile != null) {

@@ -114,6 +114,9 @@ public abstract class OsmandMapLayer {
 	public abstract boolean drawInScreenPixels();
 
 	public static class DrawSettings {
+
+		public long mapRefreshTimestamp;
+
 		private final boolean nightMode;
 		private final boolean updateVectorRendering;
 
