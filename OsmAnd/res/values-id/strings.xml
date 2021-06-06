@@ -15,8 +15,8 @@
     <string name="asap">ASAP</string>
     <string name="street_name">Jalan</string>
     <string name="hno">Nomor rumah</string>
-    <string name="website">Website</string>
-    <string name="phone">Telpon</string>
+    <string name="website">Situs web</string>
+    <string name="phone">Telepon</string>
     <string name="monitoring_settings">Layanan pencatatan &amp; Mode Sleep</string>
     <string name="monitoring_settings_descr">Atur bagaimana ingin mencatat perjalanan dan mengaktifkan mode sleep</string>
     <string name="osmand_background_plugin_description">Menampilkan pengaturan untuk mengaktifkan tracking dan navigasi pada mode sleep (layar mati) dengan secara periodik mengaktifkan GPS.</string>
@@ -1940,4 +1940,5 @@
     <string name="restore_selected_data">Pulihkan data yang dipilih</string>
     <string name="receiving_data_from_server">Menerima data dari server</string>
     <string name="restore_complete">Pemulihan selesai</string>
+    <string name="poi_context_menu_website">Tampilkan situs web POI</string>
 </resources>
