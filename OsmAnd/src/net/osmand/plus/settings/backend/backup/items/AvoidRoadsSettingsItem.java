@@ -56,8 +56,8 @@ public class AvoidRoadsSettingsItem extends CollectionSettingsItem<AvoidRoadInfo
 	}
 
 	@Override
-	protected long getLocalModifiedTime() { // TODO
-		return 0;
+	protected long getLocalModifiedTime() {
+		return specificRoads.getLastModifiedTime();
 	}
 
 	@NonNull

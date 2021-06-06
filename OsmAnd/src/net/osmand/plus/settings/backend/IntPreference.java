@@ -13,7 +13,8 @@ public class IntPreference extends CommonPreference<Integer> {
 
 	@Override
 	protected boolean setValue(Object prefs, Integer val) {
-		return getSettingsAPI().edit(prefs).putInt(getId(), val).commit();
+		return super.setValue(prefs, val)
+				&& getSettingsAPI().edit(prefs).putInt(getId(), val).commit();
 	}
 
 	@Override

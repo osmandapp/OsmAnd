@@ -897,26 +897,48 @@ public class BackupHelper {
 			@Override
 			protected List<LocalFile> doInBackground(Void... voids) {
 				List<LocalFile> result = new ArrayList<>();
-
 				List<SettingsItem> localItems = getFilteredLocalItems();
 				for (SettingsItem item : localItems) {
 					String fileName = BackupHelper.getItemFileName(item);
-					LocalFile localFile = new LocalFile();
-					localFile.item = item;
-					localFile.subfolder = "";
-					localFile.fileName = fileName;
-					localFile.localModifiedTime = item.getLastModifiedTime();
-					UploadedFileInfo info = app.getBackupHelper().getDbHelper().getUploadedFileInfo(item.getType().name(), fileName);
-					if (info != null) {
-						localFile.uploadTime = info.getUploadTime();
-					}
-
-					result.add(localFile);
-					if (listener != null) {
-						listener.onFileCollected(localFile);
+					if (item instanceof FileSettingsItem) {
+						File file = app.getAppPath(fileName);
+						if (file.isDirectory()) {
+							List<File> dirs = new ArrayList<>();
+							dirs.add(file);
+							Algorithms.collectDirs(file, dirs);
+							for (File dir : dirs) {
+								File[] files = dir.listFiles();
+								if (files != null && files.length > 0) {
+									for (File f : files) {
+										fileName = f.getPath().replace(app.getAppPath(null).getPath(), "");
+										createLocalFile(result, item, fileName, f.lastModified());
+									}
+								}
+							}
+						} else {
+							createLocalFile(result, item, fileName, file.lastModified());
+						}
+					} else {
+						createLocalFile(result, item, fileName, item.getLastModifiedTime());
 					}
 				}
 				return result;
+			}
+
+			private void createLocalFile(List<LocalFile> result, SettingsItem item, String fileName, long lastModifiedTime) {
+				LocalFile localFile = new LocalFile();
+				localFile.item = item;
+				localFile.subfolder = "";
+				localFile.fileName = fileName;
+				localFile.localModifiedTime = lastModifiedTime;
+				UploadedFileInfo info = app.getBackupHelper().getDbHelper().getUploadedFileInfo(item.getType().name(), fileName);
+				if (info != null) {
+					localFile.uploadTime = info.getUploadTime();
+				}
+				result.add(localFile);
+				if (listener != null) {
+					listener.onFileCollected(localFile);
+				}
 			}
 
 			private List<SettingsItem> getFilteredLocalItems() {

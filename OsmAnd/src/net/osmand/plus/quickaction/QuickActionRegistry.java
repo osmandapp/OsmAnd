@@ -102,6 +102,10 @@ public class QuickActionRegistry {
 		return getQuickActions();
 	}
 
+	public long getLastModifiedTime() {
+		return settings.QUICK_ACTION_LIST.getLastModifiedTime();
+	}
+
 	public void addQuickAction(QuickAction action) {
 		quickActions.add(action);
 		saveActions();

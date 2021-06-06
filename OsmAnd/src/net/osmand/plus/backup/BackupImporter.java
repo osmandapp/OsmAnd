@@ -249,11 +249,16 @@ class BackupImporter {
 			String fileName = remoteFile.getName();
 			fileName = fileName.substring(0, fileName.length() - INFO_EXT.length());
 			String type = remoteFile.getType();
+			JSONObject itemJson = new JSONObject();
+			itemJson.put("type", type);
 			if (SettingsItemType.GPX.name().equals(type)) {
 				fileName = FileSubtype.GPX.getSubtypeFolder() + fileName;
 			}
-			JSONObject itemJson = new JSONObject();
-			itemJson.put("type", type);
+			if (SettingsItemType.PROFILE.name().equals(type)) {
+				JSONObject appMode = new JSONObject();
+				appMode.put("stringKey", fileName.replaceFirst("profile_", ""));
+				itemJson.put("appMode", appMode);
+			}
 			itemJson.put("file", fileName);
 			itemsJson.put(itemJson);
 		}

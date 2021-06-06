@@ -54,8 +54,8 @@ public class MapSourcesSettingsItem extends CollectionSettingsItem<ITileSource> 
 	}
 
 	@Override
-	protected long getLocalModifiedTime() { // TODO
-		return 0;
+	protected long getLocalModifiedTime() {
+		return app.getSettings().getTileSourcesLastModifiedTime();
 	}
 
 	@Override
