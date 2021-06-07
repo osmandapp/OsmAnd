@@ -4169,4 +4169,5 @@
     <string name="restore_selected_data">Відновити вибрані дані</string>
     <string name="receiving_data_from_server">Отримання даних із сервера</string>
     <string name="restore_complete">Відновлення завершено</string>
+    <string name="grey_color_slope">Сірий колір застосовується на позначення невизначених схилів.</string>
 </resources>
