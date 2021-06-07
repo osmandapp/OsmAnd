@@ -97,7 +97,7 @@
     <string name="timeline_available_for_free_now">La timeline est maintenant disponible gratuitement.</string>
     <string name="disable_monitoring">Désactiver le suivi</string>
     <string name="timeline_description">Activer le suivi pour enregistrer tous les emplacements dans l\'historique.</string>
-    <string name="app_name_short">OsmAnd Tracker</string>
+    <string name="app_name_short">Tracker OsmAnd</string>
     <string name="privacy_policy_use_telegram">Telegram (l\'application de messagerie) est utilisée pour se connecter et communiquer avec d\'autres personnes.</string>
     <string name="privacy_policy_telegram_client">OsmAnd tracker est l\'un des clients qui utilise la plateforme ouverte Telegram. Vos contacts peuvent utiliser n\'importe quel autre client Telegram.</string>
     <string name="privacy_policy_agree">En appuyant sur « Continuer » vous acceptez les conditions des politiques de confidentialité de Telegram et d\'OsmAnd.</string>
@@ -140,7 +140,7 @@
     <string name="si_min_km">Minutes par kilomètre</string>
     <string name="si_min_m">Minutes par mile</string>
     <string name="si_mi_feet">Miles/pieds</string>
-    <string name="si_mi_yard">Miles/yards</string>
+    <string name="si_mi_yard">Miles / yards</string>
     <string name="si_km_m">Kilomètres/mètres</string>
     <string name="si_nm">Miles nautiques</string>
     <string name="si_mi_meters">Miles / Mètres</string>
@@ -213,7 +213,7 @@
     <string name="by_group">Par groupe</string>
     <string name="by_distance">Par distance</string>
     <string name="logout_from_osmand_telegram">Se déconnecter d\'OsmAnd Tracker \?</string>
-    <string name="logout_from_osmand_telegram_descr">Êtes-vous certain de vouloir vous déconnecter d\'OsmAnd Tracker \? Vous ne pourrez pas partager votre position ni voir la position des autres.</string>
+    <string name="logout_from_osmand_telegram_descr">Êtes-vous certain de vouloir vous déconnecter d\'OsmAnd Tracker \? Vous ne pourrez plus partager votre position ni afficher celle des autres.</string>
     <string name="live_now_description">Contacts et groupes partageant leur position avec vous.</string>
     <string name="share_location_as">Partager la position comme</string>
     <string name="add_device">Ajouter un périphérique</string>
