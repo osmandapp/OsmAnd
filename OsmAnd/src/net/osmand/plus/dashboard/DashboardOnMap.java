@@ -567,7 +567,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		ApplicationMode currentAppMode = getMyApplication().getSettings().APPLICATION_MODE.get();
 		boolean appModeChanged = currentAppMode != previousAppMode;
 
-		boolean refresh = this.visibleType == type && !appModeChanged;
+		boolean refresh = this.visibleType == type && !appModeChanged || type == DashboardType.CONFIGURE_SCREEN;
 		previousAppMode = currentAppMode;
 		visibleType = type;
 		DashboardOnMap.staticVisible = visible;
@@ -793,6 +793,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 					.attach(mapillaryFragment)
 					.commit();
 		} else if (visibleType == DashboardType.CONFIGURE_SCREEN || force) {
+			mapActivity.getMapLayers().getMapWidgetRegistry().updateVisibleWidgets();
 			updateListAdapter();
 		} else if (visibleType == DashboardType.CONFIGURE_MAP || visibleType == DashboardType.ROUTE_PREFERENCES) {
 			int index = listView.getFirstVisiblePosition();
