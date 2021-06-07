@@ -3963,4 +3963,5 @@
     <string name="poi_climbing_grade_uiaa_min">Legkönnyebb útvonal (UIAA [Nemzetközi Hegymászószövetség] skála)</string>
     <string name="poi_climbing_grade_french_min">Legkönnyebb útvonal (francia skála)</string>
     <string name="poi_climbing_grade_saxon_min">Legkönnyebb útvonal (szász skála)</string>
+    <string name="poi_power_terminal">Légvezeték végződése</string>
 </resources>

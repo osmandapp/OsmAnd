@@ -871,8 +871,8 @@
     <string name="context_menu_item_add_parking_point">Parkposition festlegen</string>
     <string name="context_menu_item_delete_parking_point">Parkplatz-Standort löschen</string>
     <string name="gpxup_public">Öffentlich</string>
-    <string name="gpxup_identifiable">Erkennbar</string>
-    <string name="gpxup_trackable">Verfolgbar</string>
+    <string name="gpxup_identifiable">Identifizierbar</string>
+    <string name="gpxup_trackable">Nachverfolgbar</string>
     <string name="gpxup_private">Privat</string>
     <string name="global_app_allocated_memory_descr">Belegter Speicher %1$s MB (Android-Limit %2$s MB, Dalvik %3$s MB).</string>
     <string name="global_app_allocated_memory">Belegter Speicher</string>
@@ -2685,7 +2685,7 @@
     <string name="shared_string_dont">Nicht</string>
     <string name="shared_string_do">Tun</string>
     <string name="shared_string_only_with_wifi">Nur mit WLAN</string>
-    <string name="shared_string_wifi_only">Nur mit WLAN</string>
+    <string name="shared_string_wifi_only">Nur bei WLAN</string>
     <string name="select_travel_book">Reisebuch auswählen</string>
     <string name="shared_string_travel_book">Reisebuch</string>
     <string name="images_cache">Bilder-Cache</string>
@@ -4168,4 +4168,11 @@
 \nDie aktuelle Version der Daten wird auf dem Server gespeichert, aber Sie können nicht zu den zuvor vorgenommenen Änderungen zurückkehren.</string>
     <string name="backup_data">Daten sichern</string>
     <string name="select_backup_data_descr">Wählen Sie Daten und Ordner für die Sicherung aus.</string>
+    <string name="backup_restore_data_descr">Stelle Daten von dem Gerät wieder her, verwende dabei Online-Backups.</string>
+    <string name="backup_restore_data">Stelle Daten wieder her</string>
+    <string name="restore_from_osmand_cloud">Wiederherstellung aus der OsmAnd Cloud</string>
+    <string name="choose_what_to_restore">Wähle aus was wiederhergestellt werden soll.</string>
+    <string name="restore_selected_data">Stelle ausgewählte Daten wieder her</string>
+    <string name="receiving_data_from_server">Empfange Daten vom Server</string>
+    <string name="restore_complete">Wiederherstellung abgeschlossen</string>
 </resources>
