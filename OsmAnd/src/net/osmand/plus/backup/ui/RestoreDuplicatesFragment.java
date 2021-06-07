@@ -73,7 +73,7 @@ public class RestoreDuplicatesFragment extends ImportDuplicatesFragment {
 		toolbarLayout.setTitle(getString(R.string.shared_string_importing));
 		description.setText(UiUtilities.createSpannableString(
 				String.format(getString(R.string.importing_from), getString(R.string.osmand_cloud)),
-				new StyleSpan(Typeface.BOLD), getString(R.string.osmand_cloud)
+				Typeface.BOLD, getString(R.string.osmand_cloud)
 		));
 	}
 

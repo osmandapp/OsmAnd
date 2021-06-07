@@ -12,6 +12,29 @@
 
 -->
 
+    <string name="redeem_promo_code">Redeem promo code</string>
+    <string name="not_available_with">Not available with %1$s </string>
+    <string name="continue_with">Continue with %1$s</string>
+    <string name="ltr_or_rtl_combine_via_or">%1$s or %2$s</string>
+    <string name="osmand_pro">OsmAnd Pro</string>
+    <string name="maps_plus">Maps+</string>
+    <string name="you_can_get_feature_as_part_of_pattern">You can get “%1$s” as part of: %2$s plan. Compare the plans:</string>
+    <string name="advanced_widgets">Advanced Widgets</string>
+    <string name="nautical_depth">Nautical depth</string>
+    <string name="terrain_maps">Terrain maps</string>
+    <string name="offline_wikivoyage">Offline Wikivoyage</string>
+    <string name="offline_wikipeadia">Offline Wikipedia</string>
+    <string name="terrain_maps_contour_lines_hillshade_slope">Terrain maps: cotrour lines, hillshades, slope</string>
+    <string name="unlimited_map_downloads">Unlimited map downloads</string>
+    <string name="purchases_feature_desc_osmand_cloud">Get OsmAnd Cloud to store all OsmAnd data online. Forget about loosing your data after reinstall, backup and restore all information without a problem.</string>
+    <string name="purchases_feature_desc_advanced_widgets">Get Advanced OsmAnd Widgets.</string>
+    <string name="purchases_feature_desc_hourly_map_updates">Get access to more frequently maps update, choose between: hourly, daily or weekly updates. Updates are downloaded incrementally, only for the changed area.</string>
+    <string name="purchases_feature_desc_monthly_map_updates">Get access to regular monthly updates for offline maps.</string>
+    <string name="purchases_feature_desc_unlimited_map_download">Get unlimited downloads for all continents and regions offline maps.</string>
+    <string name="purchases_feature_desc_wikipedia">Explore Wikipedia offline. Articles divided by countries and regions and available in all languages.</string>
+    <string name="purchases_feature_desc_wikivoyage">Explore Wikipedia offline. Articles divided by countries and regions and available in all languages.</string>
+    <string name="purchases_feature_desc_terrain">Terrain contour lines, full hillshade map with dark shades and slope maps with colors to show, peaks and lowlands.</string>
+    <string name="purchases_feature_desc_nautical">Get access to nautical depth information</string>
     <string name="backup_storage_taken">Storage taken</string>
     <string name="backup_version_history">Version history</string>
     <string name="grey_color_slope">Grey color is used when slope is undefined.</string>

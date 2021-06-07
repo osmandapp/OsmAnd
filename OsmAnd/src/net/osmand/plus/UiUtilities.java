@@ -785,15 +785,17 @@ public class UiUtilities {
 		}
 	}
 
-	public static SpannableString createSpannableString(@NonNull String text, @NonNull StyleSpan styleSpan, @NonNull String... textToStyle) {
+	public static SpannableString createSpannableString(@NonNull String text, int style, @NonNull String... textToStyle) {
 		SpannableString spannable = new SpannableString(text);
 		for (String t : textToStyle) {
-			setSpan(spannable, styleSpan, text, t);
+			setSpan(spannable, new StyleSpan(style), text, t);
 		}
 		return spannable;
 	}
 
-	private static void setSpan(@NonNull SpannableString spannable, @NonNull Object styleSpan, @NonNull String text, @NonNull String t) {
+	private static void setSpan(@NonNull SpannableString spannable,
+	                            @NonNull Object styleSpan,
+	                            @NonNull String text, @NonNull String t) {
 		try {
 			int startIndex = text.indexOf(t);
 			spannable.setSpan(

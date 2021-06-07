@@ -565,6 +565,10 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 		return nightMode ? R.color.text_color_tertiary_dark : R.color.text_color_tertiary_light;
 	}
 
+	public static int getDefaultIconColorId(boolean nightMode) {
+		return nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
+	}
+
 	@Override
 	protected int getDismissButtonTextId() {
 		return R.string.shared_string_close;
