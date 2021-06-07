@@ -16,7 +16,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.FontCache;
 
-public class ImportTrackCard extends BaseCard {
+public class ImportTrackCard extends MapBaseCard {
 
 	public ImportTrackCard(@NonNull MapActivity mapActivity) {
 		super(mapActivity);

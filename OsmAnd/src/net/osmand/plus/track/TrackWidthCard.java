@@ -25,13 +25,13 @@ import net.osmand.plus.dialogs.GpxAppearanceAdapter;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter.AppearanceListItem;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter.GpxAppearanceAdapterType;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.track.TrackAppearanceFragment.OnNeedScrollListener;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
 
-public class TrackWidthCard extends BaseCard {
+public class TrackWidthCard extends MapBaseCard {
 
 	private final static String CUSTOM_WIDTH = "custom_width";
 	private final static int CUSTOM_WIDTH_MIN = 1;

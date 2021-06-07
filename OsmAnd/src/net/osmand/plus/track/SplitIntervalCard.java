@@ -15,10 +15,10 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
-public class SplitIntervalCard extends BaseCard {
+public class SplitIntervalCard extends MapBaseCard {
 
 	private TrackDrawInfo trackDrawInfo;
 
