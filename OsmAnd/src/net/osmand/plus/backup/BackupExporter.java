@@ -54,8 +54,6 @@ public class BackupExporter extends Exporter {
 			public void onFileUploadDone(@NonNull String type, @NonNull String fileName, long uploadTime, @Nullable String error) {
 				if (!Algorithms.isEmpty(error)) {
 					errors.put(type + "/" + fileName, error);
-				} else {
-					backupHelper.updateFileUploadTime(type, fileName, uploadTime);
 				}
 				itemsProgress[0] += 1;
 				if (listener != null) {
