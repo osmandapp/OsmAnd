@@ -3965,4 +3965,5 @@
     <string name="poi_fruit">Frucht</string>
     <string name="poi_shrub">Strauch</string>
     <string name="poi_dune">Düne</string>
+    <string name="poi_power_terminal">Endpunkt einer Freileitung</string>
 </resources>
