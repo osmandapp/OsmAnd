@@ -551,7 +551,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 	public void build(LinearLayout rootView) {
 		rootView.removeAllViews();
-		for (MapActivityCard card : menuCards) {
+		for (BaseCard card : menuCards) {
 			rootView.addView(card.build(rootView.getContext()));
 		}
 	}
