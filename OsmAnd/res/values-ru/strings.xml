@@ -4167,4 +4167,5 @@
     <string name="restore_selected_data">Восстановить выбранные данные</string>
     <string name="receiving_data_from_server">Получение данных с сервера</string>
     <string name="restore_complete">Восстановление завершено</string>
+    <string name="grey_color_slope">Серый цвет используется, когда уклон не определен.</string>
 </resources>
