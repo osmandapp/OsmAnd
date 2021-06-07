@@ -8,7 +8,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.backup.BackupHelper.OnDownloadFileListListener;
-import net.osmand.plus.backup.NetworkSettingsHelper.CollectType;
+import net.osmand.plus.backup.BackupHelper.CollectType;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.SettingsItemsFactory;

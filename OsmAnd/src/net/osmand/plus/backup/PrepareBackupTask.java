@@ -5,9 +5,9 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.backup.BackupHelper.BackupInfo;
+import net.osmand.plus.backup.BackupHelper.CollectType;
 import net.osmand.plus.backup.BackupHelper.OnCollectLocalFilesListener;
 import net.osmand.plus.backup.BackupHelper.OnGenerateBackupInfoListener;
-import net.osmand.plus.backup.NetworkSettingsHelper.CollectType;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.CollectListener;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;

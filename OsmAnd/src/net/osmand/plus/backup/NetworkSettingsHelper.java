@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.backup.BackupHelper.CollectType;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
@@ -25,12 +26,6 @@ public class NetworkSettingsHelper extends SettingsHelper {
 		void onBackupExportProgressUpdate(int value);
 
 		void onBackupExportFinished(boolean succeed);
-	}
-
-	public enum CollectType {
-		COLLECT_ALL,
-		COLLECT_OLD,
-		COLLECT_UNIQUE
 	}
 
 	public NetworkSettingsHelper(@NonNull OsmandApplication app) {

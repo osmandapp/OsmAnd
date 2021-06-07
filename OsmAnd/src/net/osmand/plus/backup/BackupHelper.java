@@ -26,7 +26,6 @@ import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxDbHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
-import net.osmand.plus.backup.NetworkSettingsHelper.CollectType;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
@@ -145,6 +144,12 @@ public class BackupHelper {
 		void onFileDownloadedAsync(@NonNull File file);
 		void onFileDownloaded(@NonNull File file);
 		void onFilesDownloadDone(@NonNull Map<File, String> errors);
+	}
+
+	public enum CollectType {
+		COLLECT_ALL,
+		COLLECT_OLD,
+		COLLECT_UNIQUE
 	}
 
 	public static class BackupInfo {
