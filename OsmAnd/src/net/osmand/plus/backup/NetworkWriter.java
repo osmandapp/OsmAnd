@@ -25,9 +25,14 @@ import java.io.OutputStream;
 public class NetworkWriter implements AbstractWriter {
 
 	private final BackupHelper backupHelper;
-	private final OnUploadFileListener listener;
+	private final OnUploadItemListener listener;
 
-	public NetworkWriter(@NonNull BackupHelper backupHelper, @Nullable OnUploadFileListener listener) {
+	public interface OnUploadItemListener {
+		void onItemFileUploadProgress(@NonNull SettingsItem item, @NonNull String fileName, int progress, int deltaWork);
+		void onItemFileUploadDone(@NonNull SettingsItem item, @NonNull String fileName, long uploadTime, @Nullable String error);
+	}
+
+	public NetworkWriter(@NonNull BackupHelper backupHelper, @Nullable OnUploadItemListener listener) {
 		this.backupHelper = backupHelper;
 		this.listener = listener;
 	}
@@ -73,7 +78,8 @@ public class NetworkWriter implements AbstractWriter {
 						outputStream.flush();
 					}
 				};
-				return backupHelper.uploadFileSync(fileName, item.getType().name(), streamWriter, listener);
+				return backupHelper.uploadFileSync(fileName, item.getType().name(), streamWriter,
+						getUploadFileListener(item));
 			} else {
 				return null;
 			}
@@ -90,7 +96,8 @@ public class NetworkWriter implements AbstractWriter {
 				itemWriter.writeToStream(outputStream, progress);
 			}
 		};
-		return backupHelper.uploadFileSync(fileName, itemWriter.getItem().getType().name(), streamWriter, listener);
+		return backupHelper.uploadFileSync(fileName, itemWriter.getItem().getType().name(), streamWriter,
+				getUploadFileListener(itemWriter.getItem()));
 	}
 
 	private String uploadDirWithFiles(@NonNull SettingsItemWriter<? extends SettingsItem> itemWriter,
@@ -115,4 +122,21 @@ public class NetworkWriter implements AbstractWriter {
 		return error;
 	}
 
+	private OnUploadFileListener getUploadFileListener(final @NonNull SettingsItem item) {
+		return new OnUploadFileListener() {
+			@Override
+			public void onFileUploadProgress(@NonNull String type, @NonNull String fileName, int progress, int deltaWork) {
+				if (listener != null) {
+					listener.onItemFileUploadProgress(item, fileName, progress, deltaWork);
+				}
+			}
+
+			@Override
+			public void onFileUploadDone(@NonNull String type, @NonNull String fileName, long uploadTime, @Nullable String error) {
+				if (listener != null) {
+					listener.onItemFileUploadDone(item, fileName, uploadTime, error);
+				}
+			}
+		};
+	}
 }

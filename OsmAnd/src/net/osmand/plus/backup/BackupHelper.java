@@ -27,6 +27,7 @@ import net.osmand.plus.GpxDbHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
+import net.osmand.plus.backup.PrepareBackupTask.PrepareBackupResult;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.settings.backend.CommonPreference;
@@ -81,6 +82,7 @@ public class BackupHelper {
 	private static final String DELETE_FILE_VERSION_URL = SERVER_URL + "/userdata/delete-file-version";
 
 	private static final String BACKUP_TYPE_PREFIX = "backup_type_";
+	private static final String VERSION_HISTORY_PREFIX = "save_version_history_";
 
 	public final static int STATUS_SUCCESS = 0;
 	public final static int STATUS_PARSE_JSON_ERROR = 1;
@@ -96,7 +98,7 @@ public class BackupHelper {
 	public static final int SERVER_ERROR_CODE_GZIP_ONLY_SUPPORTED_UPLOAD = 107;
 	public static final int SERVER_ERROR_CODE_SIZE_OF_SUPPORTED_BOX_IS_EXCEEDED = 108;
 
-	private List<RemoteFile> remoteFiles;
+	private PrepareBackupResult backup = new PrepareBackupResult();
 
 	public interface OnRegisterUserListener {
 		void onRegisterUser(int status, @Nullable String message, @Nullable String error);
@@ -145,6 +147,12 @@ public class BackupHelper {
 		void onFilesDownloadDone(@NonNull Map<File, String> errors);
 	}
 
+	public enum CollectType {
+		COLLECT_ALL,
+		COLLECT_OLD,
+		COLLECT_UNIQUE
+	}
+
 	public static class BackupInfo {
 		public List<RemoteFile> filesToDownload = new ArrayList<>();
 		public List<LocalFile> filesToUpload = new ArrayList<>();
@@ -170,12 +178,13 @@ public class BackupHelper {
 		return dbHelper;
 	}
 
-	public List<RemoteFile> getRemoteFiles() {
-		return remoteFiles;
+	public PrepareBackupResult getBackup() {
+		return backup;
 	}
 
-	void setRemoteFiles(List<RemoteFile> remoteFiles) {
-		this.remoteFiles = remoteFiles;
+
+	void setBackup(PrepareBackupResult backup) {
+		this.backup = backup;
 	}
 
 	public static void setLastModifiedTime(@NonNull Context ctx, @NonNull String name) {
@@ -257,6 +266,10 @@ public class BackupHelper {
 
 	public CommonPreference<Boolean> getBackupTypePref(@NonNull ExportSettingsType type) {
 		return app.getSettings().registerBooleanPreference(BACKUP_TYPE_PREFIX + type.name(), true).makeGlobal().makeShared();
+	}
+
+	public CommonPreference<Boolean> getVersionHistoryTypePref(@NonNull ExportSettingsType type) {
+		return app.getSettings().registerBooleanPreference(VERSION_HISTORY_PREFIX + type.name(), true).makeGlobal().makeShared();
 	}
 
 	@NonNull
@@ -605,27 +618,29 @@ public class BackupHelper {
 		}, EXECUTOR);
 	}
 
-	public void downloadFileListSync(@Nullable final OnDownloadFileListListener listener) throws UserNotRegisteredException {
+	public void downloadFileListSync(@NonNull CollectType collectType, @Nullable final OnDownloadFileListListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 
 		Map<String, String> params = new HashMap<>();
 		params.put("deviceid", getDeviceId());
 		params.put("accessToken", getAccessToken());
+		params.put("allVersions", String.valueOf(collectType == CollectType.COLLECT_ALL || collectType == CollectType.COLLECT_OLD));
 		AndroidNetworkUtils.sendRequest(app, LIST_FILES_URL, params, "Download file list", false, false,
-				getDownloadFileListListener(listener));
+				getDownloadFileListListener(collectType, listener));
 	}
 
-	public void downloadFileList(@Nullable final OnDownloadFileListListener listener) throws UserNotRegisteredException {
+	public void downloadFileList(@NonNull CollectType collectType, @Nullable final OnDownloadFileListListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 
 		Map<String, String> params = new HashMap<>();
 		params.put("deviceid", getDeviceId());
 		params.put("accessToken", getAccessToken());
+		params.put("allVersions", String.valueOf(collectType == CollectType.COLLECT_ALL || collectType == CollectType.COLLECT_OLD));
 		AndroidNetworkUtils.sendRequestAsync(app, LIST_FILES_URL, params, "Download file list", false, false,
-				getDownloadFileListListener(listener), EXECUTOR);
+				getDownloadFileListListener(collectType, listener), EXECUTOR);
 	}
 
-	private OnRequestResultListener getDownloadFileListListener(@Nullable OnDownloadFileListListener listener) {
+	private OnRequestResultListener getDownloadFileListListener(@NonNull CollectType collectType, @Nullable OnDownloadFileListListener listener) {
 		return new OnRequestResultListener() {
 			@Override
 			public void onResult(@Nullable String resultJson, @Nullable String error) {
@@ -641,9 +656,26 @@ public class BackupHelper {
 						String totalZipSize = result.getString("totalZipSize");
 						String totalFiles = result.getString("totalFiles");
 						String totalFileVersions = result.getString("totalFileVersions");
-						JSONArray files = result.getJSONArray("uniqueFiles");
-						for (int i = 0; i < files.length(); i++) {
-							remoteFiles.add(new RemoteFile(files.getJSONObject(i)));
+
+						if (collectType == CollectType.COLLECT_ALL) {
+							JSONArray allFiles = result.getJSONArray("allFiles");
+							for (int i = 0; i < allFiles.length(); i++) {
+								remoteFiles.add(new RemoteFile(allFiles.getJSONObject(i)));
+							}
+						} else if (collectType == CollectType.COLLECT_UNIQUE) {
+							JSONArray uniqueFiles = result.getJSONArray("uniqueFiles");
+							for (int i = 0; i < uniqueFiles.length(); i++) {
+								remoteFiles.add(new RemoteFile(uniqueFiles.getJSONObject(i)));
+							}
+						} else if (collectType == CollectType.COLLECT_OLD) {
+							JSONArray allFiles = result.getJSONArray("allFiles");
+							for (int i = 0; i < allFiles.length(); i++) {
+								remoteFiles.add(new RemoteFile(allFiles.getJSONObject(i)));
+							}
+							JSONArray uniqueFiles = result.getJSONArray("uniqueFiles");
+							for (int i = 0; i < uniqueFiles.length(); i++) {
+								remoteFiles.remove(new RemoteFile(uniqueFiles.getJSONObject(i)));
+							}
 						}
 
 						status = STATUS_SUCCESS;
