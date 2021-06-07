@@ -18,7 +18,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 
-public class PedestrianRouteCard extends MapActivityCard {
+public class PedestrianRouteCard extends MapBaseCard {
 
 	private int approxPedestrianTime;
 

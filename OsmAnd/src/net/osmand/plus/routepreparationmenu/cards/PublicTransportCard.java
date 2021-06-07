@@ -37,7 +37,7 @@ import net.osmand.util.Algorithms;
 import java.util.Iterator;
 import java.util.List;
 
-public class PublicTransportCard extends MapActivityCard {
+public class PublicTransportCard extends MapBaseCard {
 
 	private static final int MIN_WALK_TIME = 120;
 	public static final int DETAILS_BUTTON_INDEX = 0;

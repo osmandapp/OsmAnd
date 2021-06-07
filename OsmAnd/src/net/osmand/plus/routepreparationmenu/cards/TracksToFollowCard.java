@@ -27,7 +27,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class TracksToFollowCard extends MapActivityCard {
+public class TracksToFollowCard extends MapBaseCard {
 
 	private final Fragment target;
 

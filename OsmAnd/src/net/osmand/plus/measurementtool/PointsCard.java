@@ -9,10 +9,10 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.measurementtool.MeasurementToolFragment.OnUpdateInfoListener;
 import net.osmand.plus.measurementtool.adapter.MeasurementToolAdapter;
-import net.osmand.plus.routepreparationmenu.cards.MapActivityCard;
+import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 
-public class PointsCard extends MapActivityCard implements OnUpdateInfoListener {
+public class PointsCard extends MapBaseCard implements OnUpdateInfoListener {
 
 	private MeasurementToolAdapter adapter;
 	private MeasurementToolFragment fragment;

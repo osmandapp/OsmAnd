@@ -12,13 +12,13 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.routepreparationmenu.cards.MapActivityCard;
+import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.router.RouteColorize;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-public class GradientCard extends MapActivityCard {
+public class GradientCard extends MapBaseCard {
 
 	private final GPXTrackAnalysis gpxTrackAnalysis;
 	private GradientScaleType selectedScaleType;

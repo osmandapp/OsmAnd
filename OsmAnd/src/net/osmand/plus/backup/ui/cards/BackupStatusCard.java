@@ -20,13 +20,13 @@ import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.BackupHelper.BackupInfo;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.routepreparationmenu.cards.MapActivityCard;
+import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.settings.fragments.MainSettingsFragment;
 import net.osmand.util.Algorithms;
 
 import static net.osmand.plus.backup.ui.cards.LocalBackupCard.adjustIndicator;
 
-public class BackupStatusCard extends MapActivityCard {
+public class BackupStatusCard extends MapBaseCard {
 
 	public static final int RETRY_BUTTON_INDEX = 0;
 	public static final int BACKUP_BUTTON_INDEX = 1;

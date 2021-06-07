@@ -4,15 +4,15 @@ import androidx.annotation.NonNull;
 
 import net.osmand.plus.activities.MapActivity;
 
-public abstract class MapActivityCard extends BaseCard {
+public abstract class MapBaseCard extends BaseCard {
 
 	protected MapActivity mapActivity;
 
-	public MapActivityCard(@NonNull MapActivity mapActivity) {
+	public MapBaseCard(@NonNull MapActivity mapActivity) {
 		this(mapActivity, true);
 	}
 
-	public MapActivityCard(@NonNull MapActivity mapActivity, boolean usedOnMap) {
+	public MapBaseCard(@NonNull MapActivity mapActivity, boolean usedOnMap) {
 		super(mapActivity, usedOnMap);
 		this.mapActivity = mapActivity;
 	}

@@ -82,7 +82,7 @@ import net.osmand.plus.myplaces.SplitSegmentDialogFragment;
 import net.osmand.plus.myplaces.TrackActivityFragmentAdapter;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
-import net.osmand.plus.routepreparationmenu.cards.MapActivityCard;
+import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.search.QuickSearchDialogFragment;
@@ -447,13 +447,13 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		}
 	}
 
-	private void removeCardViewFromHeader(MapActivityCard card) {
+	private void removeCardViewFromHeader(MapBaseCard card) {
 		if (card != null && card.getView() != null) {
 			headerContainer.removeView(card.getView());
 		}
 	}
 
-	private void addCardViewToHeader(MapActivityCard card) {
+	private void addCardViewToHeader(MapBaseCard card) {
 		if (card != null && card.getView() != null) {
 			ViewGroup parent = ((ViewGroup) card.getView().getParent());
 			if (parent != null) {

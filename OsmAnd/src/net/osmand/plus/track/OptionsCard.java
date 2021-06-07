@@ -23,7 +23,7 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
-import net.osmand.plus.routepreparationmenu.cards.MapActivityCard;
+import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -32,7 +32,7 @@ import java.util.List;
 import static net.osmand.plus.myplaces.TrackActivityFragmentAdapter.isGpxFileSelected;
 import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 
-public class OptionsCard extends MapActivityCard {
+public class OptionsCard extends MapBaseCard {
 
 	public static final int SHOW_ON_MAP_BUTTON_INDEX = 0;
 	public static final int APPEARANCE_BUTTON_INDEX = 1;

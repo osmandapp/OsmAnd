@@ -24,7 +24,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.routepreparationmenu.cards.MapActivityCard;
+import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
 import net.osmand.plus.settings.fragments.HeaderInfo;
 import net.osmand.plus.settings.fragments.HeaderUiAdapter;
@@ -35,7 +35,7 @@ import net.osmand.util.Algorithms;
 import java.util.Arrays;
 import java.util.List;
 
-public class RouteLineWidthCard extends MapActivityCard implements HeaderInfo {
+public class RouteLineWidthCard extends MapBaseCard implements HeaderInfo {
 
 	private final static int CUSTOM_WIDTH_MIN = 1;
 	private final static int CUSTOM_WIDTH_MAX = 36;

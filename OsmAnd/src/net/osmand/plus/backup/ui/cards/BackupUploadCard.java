@@ -25,7 +25,7 @@ import net.osmand.plus.backup.LocalFile;
 import net.osmand.plus.backup.NetworkSettingsHelper.BackupExportListener;
 import net.osmand.plus.backup.RemoteFile;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.routepreparationmenu.cards.MapActivityCard;
+import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
@@ -38,7 +38,7 @@ import java.util.List;
 
 import static net.osmand.plus.backup.ui.cards.LocalBackupCard.adjustIndicator;
 
-public class BackupUploadCard extends MapActivityCard {
+public class BackupUploadCard extends MapBaseCard {
 
 	private final BackupInfo info;
 	private final BackupExportListener listener;

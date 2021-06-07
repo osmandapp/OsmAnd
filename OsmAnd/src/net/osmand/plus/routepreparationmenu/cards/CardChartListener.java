@@ -14,14 +14,14 @@ public interface CardChartListener {
 	 * @param h The corresponding highlight object that contains information
 	 *          about the highlighted position such as dataSetIndex, ...
 	 */
-	void onValueSelected(MapActivityCard card, Entry e, Highlight h);
+	void onValueSelected(MapBaseCard card, Entry e, Highlight h);
 
 	/**
 	 * Called when nothing has been selected or an "un-select" has been made.
 	 */
-	void onNothingSelected(MapActivityCard card);
+	void onNothingSelected(MapBaseCard card);
 
-	void onChartGestureStart(MapActivityCard card, MotionEvent me, ChartGesture lastPerformedGesture);
+	void onChartGestureStart(MapBaseCard card, MotionEvent me, ChartGesture lastPerformedGesture);
 
-	void onChartGestureEnd(MapActivityCard card, MotionEvent me, ChartGesture lastPerformedGesture, boolean hasTranslated);
+	void onChartGestureEnd(MapBaseCard card, MotionEvent me, ChartGesture lastPerformedGesture, boolean hasTranslated);
 }
