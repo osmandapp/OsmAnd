@@ -28,6 +28,11 @@ public class NetworkSettingsHelper extends SettingsHelper {
 		void onBackupExportFinished(boolean succeed);
 	}
 
+	public interface BackupCollectListener {
+		void onBackupCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items,
+									 @NonNull List<RemoteFile> remoteFiles);
+	}
+
 	public NetworkSettingsHelper(@NonNull OsmandApplication app) {
 		super(app);
 	}
@@ -86,7 +91,7 @@ public class NetworkSettingsHelper extends SettingsHelper {
 	}
 
 	public void collectSettings(String latestChanges, int version, CollectType collectType,
-								@Nullable CollectListener listener) {
+								@Nullable BackupCollectListener listener) {
 		new ImportBackupTask(this, latestChanges, version, collectType, listener)
 				.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}

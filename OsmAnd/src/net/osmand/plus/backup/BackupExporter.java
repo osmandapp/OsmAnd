@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -96,6 +97,7 @@ public class BackupExporter extends Exporter {
 
 	@Nullable
 	private RemoteFile getRemoteFile(@NonNull String type, @NonNull String fileName) {
+		List<RemoteFile> remoteFiles = backupHelper.getBackup().getAllRemoteFiles();
 		if (!Algorithms.isEmpty(fileName) && !Algorithms.isEmpty(remoteFiles)) {
 			for (RemoteFile remoteFile : remoteFiles) {
 				if (remoteFile.getType().equals(type) && remoteFile.getName().equals(fileName)) {

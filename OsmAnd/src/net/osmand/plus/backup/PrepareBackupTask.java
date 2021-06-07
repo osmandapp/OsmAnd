@@ -8,7 +8,6 @@ import net.osmand.plus.backup.BackupHelper.BackupInfo;
 import net.osmand.plus.backup.BackupHelper.CollectType;
 import net.osmand.plus.backup.BackupHelper.OnCollectLocalFilesListener;
 import net.osmand.plus.backup.BackupHelper.OnGenerateBackupInfoListener;
-import net.osmand.plus.settings.backend.backup.SettingsHelper.CollectListener;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
 
@@ -39,7 +38,7 @@ public class PrepareBackupTask {
 		private List<LocalFile> fileInfos;
 		private String error;
 
-		private PrepareBackupResult() {
+		PrepareBackupResult() {
 		}
 
 		public BackupInfo getBackupInfo() {
@@ -141,29 +140,31 @@ public class PrepareBackupTask {
 	}
 
 	private void doCollectRemoteFiles() {
-		app.getNetworkSettingsHelper().collectSettings("", 0, CollectType.COLLECT_UNIQUE, new CollectListener() {
-			@Override
-			public void onCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items) {
-				// TODO - get remote files from listener
-				if (succeed) {
-					List<RemoteFile> originalRemoteFiles = new ArrayList<>();
-					for (RemoteFile remoteFile : remoteFiles) {
-						if (!remoteFile.getName().endsWith(BackupHelper.INFO_EXT)) {
-							originalRemoteFiles.add(remoteFile);
+		app.getNetworkSettingsHelper().collectSettings("", 0, CollectType.COLLECT_UNIQUE, new NetworkSettingsHelper.BackupCollectListener() {
+					@Override
+					public void onBackupCollectFinished(boolean succeed, boolean empty,
+														@NonNull List<SettingsItem> items,
+														@NonNull List<RemoteFile> remoteFiles) {
+						if (succeed) {
+							List<RemoteFile> originalRemoteFiles = new ArrayList<>();
+							for (RemoteFile remoteFile : remoteFiles) {
+								if (!remoteFile.getName().endsWith(BackupHelper.INFO_EXT)) {
+									originalRemoteFiles.add(remoteFile);
+								}
+							}
+							PrepareBackupTask.this.result.remoteFiles = originalRemoteFiles;
+							PrepareBackupTask.this.result.allRemoteFiles = remoteFiles;
+						} else {
+							onError("Download remote items error");
 						}
+						onTaskFinished(TaskType.COLLECT_REMOTE_FILES);
 					}
-					PrepareBackupTask.this.result.remoteFiles = originalRemoteFiles;
-					PrepareBackupTask.this.result.allRemoteFiles = remoteFiles;
-				} else {
-					onError("Download remote items error");
 				}
-				onTaskFinished(TaskType.COLLECT_REMOTE_FILES);
-			}
-		});
+		);
 	}
 
 	private void doGenerateBackupInfo() {
-		if (result == null || result.fileInfos == null || result.remoteFiles == null) {
+		if (result.fileInfos == null || result.remoteFiles == null) {
 			onTaskFinished(TaskType.GENERATE_BACKUP_INFO);
 			return;
 		}

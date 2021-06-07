@@ -8,8 +8,8 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.backup.BackupHelper.CollectType;
 import net.osmand.plus.backup.BackupImporter.CollectItemsResult;
+import net.osmand.plus.backup.NetworkSettingsHelper.BackupCollectListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.CheckDuplicatesListener;
-import net.osmand.plus.settings.backend.backup.SettingsHelper.CollectListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportType;
 import net.osmand.plus.settings.backend.backup.items.CollectionSettingsItem;
@@ -29,7 +29,7 @@ public class ImportBackupTask extends AsyncTask<Void, Void, List<SettingsItem>> 
 	private int version;
 
 	private ImportListener importListener;
-	private CollectListener collectListener;
+	private BackupCollectListener collectListener;
 	private CheckDuplicatesListener duplicatesListener;
 	private final BackupImporter importer;
 
@@ -45,7 +45,7 @@ public class ImportBackupTask extends AsyncTask<Void, Void, List<SettingsItem>> 
 
 	ImportBackupTask(@NonNull NetworkSettingsHelper helper,
 					 String latestChanges, int version, CollectType collectType,
-					 @Nullable CollectListener collectListener) {
+					 @Nullable BackupCollectListener collectListener) {
 		this.helper = helper;
 		this.app = helper.getApp();
 		this.collectListener = collectListener;
@@ -125,8 +125,7 @@ public class ImportBackupTask extends AsyncTask<Void, Void, List<SettingsItem>> 
 		switch (importType) {
 			case COLLECT:
 				importDone = true;
-				// TODO - pass remote files to listener
-				collectListener.onCollectFinished(items != null, false, this.items);
+				collectListener.onBackupCollectFinished(items != null, false, this.items, remoteFiles);
 				break;
 			case CHECK_DUPLICATES:
 				importDone = true;

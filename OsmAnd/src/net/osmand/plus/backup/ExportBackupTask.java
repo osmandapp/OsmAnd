@@ -53,7 +53,7 @@ public class ExportBackupTask extends AsyncTask<Void, Integer, Boolean> {
 	@Override
 	protected void onPreExecute() {
 		if (listener != null) {
-			listener.onBackupExportStarted(exporter.getItems().size() * 2);
+			listener.onBackupExportStarted(exporter.getItems().size());
 		}
 	}
 

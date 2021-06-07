@@ -25,15 +25,15 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.backup.BackupHelper;
-import net.osmand.plus.backup.BackupHelper.OnDeleteFilesListener;
 import net.osmand.plus.backup.BackupHelper.CollectType;
+import net.osmand.plus.backup.BackupHelper.OnDeleteFilesListener;
+import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.backup.RemoteFile;
 import net.osmand.plus.backup.UserNotRegisteredException;
 import net.osmand.plus.backup.ui.DeleteAllDataConfirmationBottomSheet.OnConfirmDeletionListener;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.settings.backend.backup.SettingsHelper.CollectListener;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
 
@@ -164,10 +164,11 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 		setupSelectableBackground(container);
 
 		TextView summary = container.findViewById(android.R.id.summary);
-		if (!Algorithms.isEmpty(oldItems) && !Algorithms.isEmpty(backupHelper.getRemoteFiles())) {
+		List<RemoteFile> remoteFiles = backupHelper.getBackup().getAllRemoteFiles();
+		if (!Algorithms.isEmpty(oldItems) && !Algorithms.isEmpty(remoteFiles)) {
 			AndroidUiHelper.updateVisibility(summary, true);
 			int filesSize = 0;
-			for (RemoteFile remoteFile : backupHelper.getRemoteFiles()) {
+			for (RemoteFile remoteFile : remoteFiles) {
 				filesSize += remoteFile.getFilesize();
 			}
 			summary.setText(AndroidUtils.formatSize(app, filesSize));
@@ -234,18 +235,22 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			AndroidUiHelper.setVisibility(View.VISIBLE, progressBar);
-			app.getNetworkSettingsHelper().collectSettings("", 0, CollectType.COLLECT_OLD, new CollectListener() {
-				@Override
-				public void onCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items) {
-					AndroidUiHelper.setVisibility(View.INVISIBLE, progressBar);
-					if (succeed) {
-						oldItems = items;
-						if (getView() != null) {
-							setupVersionHistory(getView());
+			app.getNetworkSettingsHelper().collectSettings("", 0, CollectType.COLLECT_OLD,
+					new NetworkSettingsHelper.BackupCollectListener() {
+						@Override
+						public void onBackupCollectFinished(boolean succeed, boolean empty,
+															@NonNull List<SettingsItem> items,
+															@NonNull List<RemoteFile> remoteFiles) {
+							AndroidUiHelper.setVisibility(View.INVISIBLE, progressBar);
+							if (succeed) {
+								oldItems = items;
+								if (getView() != null) {
+									setupVersionHistory(getView());
+								}
+							}
 						}
 					}
-				}
-			});
+			);
 		}
 	}
 
