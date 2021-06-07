@@ -72,6 +72,7 @@ public class TravelObfHelper implements TravelHelper {
 	public static final int ARTICLE_SEARCH_RADIUS = 50 * 1000;
 	public static final int SAVED_ARTICLE_SEARCH_RADIUS = 30 * 1000;
 	public static final int MAX_SEARCH_RADIUS = 800 * 1000;
+	public static final String ROUTE_TRACK_POINT = "route_track_pointq";
 
 	private final OsmandApplication app;
 	private final Collator collator;
@@ -318,6 +319,7 @@ public class TravelObfHelper implements TravelHelper {
 	@Nullable
 	private GPXFile buildTravelGpxFile(@NonNull final TravelGpx travelGpx) {
 		final List<BinaryMapDataObject> segmentList = new ArrayList<>();
+		final List<Amenity> wayPointList = new ArrayList<>();
 
 		for (BinaryMapIndexReader reader : getReaders()) {
 			try {
@@ -344,6 +346,24 @@ public class TravelObfHelper implements TravelHelper {
 							}
 						});
 				reader.searchMapIndex(sr);
+				BinaryMapIndexReader.SearchRequest<Amenity> pointRequest = BinaryMapIndexReader.buildSearchPoiRequest(
+						0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, 15,
+						getSearchFilter(ROUTE_TRACK_POINT),
+						new ResultMatcher<Amenity>() {
+							@Override
+							public boolean publish(Amenity object) {
+								if (object.getRouteId().equals(travelGpx.getRouteId())) {
+									wayPointList.add(object);
+								}
+								return false;
+							}
+
+							@Override
+							public boolean isCancelled() {
+								return false;
+							}
+						});
+				reader.searchPoi(pointRequest);
 				if (!Algorithms.isEmpty(segmentList)) {
 					break;
 				}
@@ -368,6 +388,18 @@ public class TravelObfHelper implements TravelHelper {
 			gpxFile.tracks = new ArrayList<>();
 			gpxFile.tracks.add(track);
 			gpxFile.setRef(travelGpx.ref);
+		}
+		if (!wayPointList.isEmpty()) {
+			if (gpxFile == null) {
+				gpxFile = new GPXFile(travelGpx.getTitle(), travelGpx.getLang(), "");
+			}
+			for (Amenity wayPoint : wayPointList) {
+				WptPt wptPt = new WptPt();
+				wptPt.lat = wayPoint.getLocation().getLatitude();
+				wptPt.lon = wayPoint.getLocation().getLongitude();
+				wptPt.name = wayPoint.getName();
+				gpxFile.addPoint(wptPt);
+			}
 		}
 		travelGpx.gpxFile = gpxFile;
 		return gpxFile;
