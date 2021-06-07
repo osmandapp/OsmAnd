@@ -27,6 +27,7 @@ import net.osmand.plus.GpxDbHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
+import net.osmand.plus.backup.PrepareBackupTask.PrepareBackupResult;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.settings.backend.CommonPreference;
@@ -97,7 +98,7 @@ public class BackupHelper {
 	public static final int SERVER_ERROR_CODE_GZIP_ONLY_SUPPORTED_UPLOAD = 107;
 	public static final int SERVER_ERROR_CODE_SIZE_OF_SUPPORTED_BOX_IS_EXCEEDED = 108;
 
-	private List<RemoteFile> remoteFiles;
+	private PrepareBackupResult backup;
 
 	public interface OnRegisterUserListener {
 		void onRegisterUser(int status, @Nullable String message, @Nullable String error);
@@ -177,12 +178,13 @@ public class BackupHelper {
 		return dbHelper;
 	}
 
-	public List<RemoteFile> getRemoteFiles() {
-		return remoteFiles;
+	public PrepareBackupResult getBackup() {
+		return backup;
 	}
 
-	void setRemoteFiles(List<RemoteFile> remoteFiles) {
-		this.remoteFiles = remoteFiles;
+
+	void setBackup(PrepareBackupResult backup) {
+		this.backup = backup;
 	}
 
 	public static void setLastModifiedTime(@NonNull Context ctx, @NonNull String name) {

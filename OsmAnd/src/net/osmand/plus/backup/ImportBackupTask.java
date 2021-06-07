@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.backup.BackupHelper.CollectType;
+import net.osmand.plus.backup.BackupImporter.CollectItemsResult;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.CheckDuplicatesListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.CollectListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
@@ -35,6 +36,8 @@ public class ImportBackupTask extends AsyncTask<Void, Void, List<SettingsItem>> 
 	private List<SettingsItem> items = new ArrayList<>();
 	private List<SettingsItem> selectedItems = new ArrayList<>();
 	private List<Object> duplicates;
+
+	private List<RemoteFile> remoteFiles;
 
 	private final ImportType importType;
 	private CollectType collectType;
@@ -94,7 +97,9 @@ public class ImportBackupTask extends AsyncTask<Void, Void, List<SettingsItem>> 
 			case COLLECT:
 			case COLLECT_AND_READ:
 				try {
-					return importer.collectItems(collectType, importType == ImportType.COLLECT_AND_READ);
+					CollectItemsResult result = importer.collectItems(collectType, importType == ImportType.COLLECT_AND_READ);
+					remoteFiles = result.remoteFiles;
+					return result.items;
 				} catch (IllegalArgumentException e) {
 					NetworkSettingsHelper.LOG.error("Failed to collect items for backup", e);
 				} catch (IOException e) {
@@ -120,6 +125,7 @@ public class ImportBackupTask extends AsyncTask<Void, Void, List<SettingsItem>> 
 		switch (importType) {
 			case COLLECT:
 				importDone = true;
+				// TODO - pass remote files to listener
 				collectListener.onCollectFinished(items != null, false, this.items);
 				break;
 			case CHECK_DUPLICATES:

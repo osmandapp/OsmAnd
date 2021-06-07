@@ -7,8 +7,8 @@ import net.osmand.FileUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.backup.BackupHelper.OnDownloadFileListListener;
 import net.osmand.plus.backup.BackupHelper.CollectType;
+import net.osmand.plus.backup.BackupHelper.OnDownloadFileListListener;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.SettingsItemsFactory;
@@ -41,23 +41,27 @@ class BackupImporter {
 
 	private final BackupHelper backupHelper;
 
+	public static class CollectItemsResult {
+		public List<SettingsItem> items;
+		public List<RemoteFile> remoteFiles;
+	}
+
 	BackupImporter(@NonNull BackupHelper backupHelper) {
 		this.backupHelper = backupHelper;
 	}
 
 	@NonNull
-	List<SettingsItem> collectItems(CollectType collectType, boolean readItems) throws IllegalArgumentException, IOException {
-		List<SettingsItem> result = new ArrayList<>();
+	CollectItemsResult collectItems(CollectType collectType, boolean readItems) throws IllegalArgumentException, IOException {
+		CollectItemsResult result = new CollectItemsResult();
 		StringBuilder error = new StringBuilder();
 		try {
 			backupHelper.downloadFileListSync(collectType, new OnDownloadFileListListener() {
 				@Override
 				public void onDownloadFileList(int status, @Nullable String message, @NonNull List<RemoteFile> remoteFiles) {
 					if (status == BackupHelper.STATUS_SUCCESS) {
+						result.remoteFiles = remoteFiles;
 						try {
-							backupHelper.setRemoteFiles(remoteFiles);
-							List<SettingsItem> items = getRemoteItems(remoteFiles, readItems);
-							result.addAll(items);
+							result.items = getRemoteItems(remoteFiles, readItems);
 						} catch (IOException e) {
 							error.append(e.getMessage());
 						}
@@ -79,7 +83,7 @@ class BackupImporter {
 		if (Algorithms.isEmpty(items)) {
 			throw new IllegalArgumentException("No items");
 		}
-		List<RemoteFile> remoteFiles = backupHelper.getRemoteFiles();
+		List<RemoteFile> remoteFiles = backupHelper.getBackup().getRemoteFiles();
 		if (Algorithms.isEmpty(remoteFiles)) {
 			throw new IllegalArgumentException("No remote files");
 		}
@@ -126,7 +130,6 @@ class BackupImporter {
 				}
 			}
 		}
-		backupHelper.setRemoteFiles(null);
 	}
 
 	@NonNull

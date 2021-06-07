@@ -17,6 +17,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.BackupHelper.BackupInfo;
 import net.osmand.plus.backup.NetworkSettingsHelper.BackupExportListener;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
+import net.osmand.plus.backup.PrepareBackupTask.PrepareBackupResult;
 import net.osmand.plus.backup.ui.cards.BackupStatusCard;
 import net.osmand.plus.backup.ui.cards.BackupUploadCard;
 import net.osmand.plus.backup.ui.cards.LocalBackupCard;
@@ -31,8 +32,7 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements CardList
 
 	private OsmandApplication app;
 
-	private BackupInfo backupInfo;
-	private String error;
+	private PrepareBackupResult backup;
 
 	private BackupStatusCard statusCard;
 	private BackupUploadCard uploadCard;
@@ -69,11 +69,22 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements CardList
 		return view;
 	}
 
+	@Nullable
+	private BackupInfo getBackupInfo() {
+		return backup != null ? backup.getBackupInfo() : null;
+	}
+
+	@Nullable
+	private String getBackupError() {
+		return backup != null ? backup.getError() : null;
+	}
+
 	private void updateCards() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			cardsContainer.removeAllViews();
-
+			BackupInfo backupInfo = getBackupInfo();
+			String error = getBackupError();
 			if (backupInfo != null && app.getNetworkSettingsHelper().isBackupExporting()) {
 				showUploadCard();
 			} else if (backupInfo != null || error != null) {
@@ -96,7 +107,8 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements CardList
 
 	private void showUploadCard() {
 		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
+		BackupInfo backupInfo = getBackupInfo();
+		if (mapActivity != null && backupInfo != null) {
 			uploadCard = new BackupUploadCard(mapActivity, backupInfo, this);
 			uploadCard.setListener(this);
 			cardsContainer.addView(uploadCard.build(mapActivity), 0);
@@ -110,10 +122,9 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements CardList
 			app.getBackupHelper().prepareBackupInfo(new OnPrepareBackupListener() {
 
 				@Override
-				public void onBackupPrepared(@Nullable BackupInfo backupInfo, String error) {
+				public void onBackupPrepared(@Nullable PrepareBackupResult backup) {
 					AndroidUiHelper.setVisibility(View.INVISIBLE, progressBar);
-					BackupStatusFragment.this.error = error;
-					BackupStatusFragment.this.backupInfo = backupInfo;
+					BackupStatusFragment.this.backup = backup;
 					updateCards();
 				}
 			});
