@@ -26,6 +26,7 @@ import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxDbHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
+import net.osmand.plus.backup.NetworkSettingsHelper.CollectType;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
@@ -81,6 +82,7 @@ public class BackupHelper {
 	private static final String DELETE_FILE_VERSION_URL = SERVER_URL + "/userdata/delete-file-version";
 
 	private static final String BACKUP_TYPE_PREFIX = "backup_type_";
+	private static final String VERSION_HISTORY_PREFIX = "save_version_history_";
 
 	public final static int STATUS_SUCCESS = 0;
 	public final static int STATUS_PARSE_JSON_ERROR = 1;
@@ -257,6 +259,10 @@ public class BackupHelper {
 
 	public CommonPreference<Boolean> getBackupTypePref(@NonNull ExportSettingsType type) {
 		return app.getSettings().registerBooleanPreference(BACKUP_TYPE_PREFIX + type.name(), true).makeGlobal().makeShared();
+	}
+
+	public CommonPreference<Boolean> getVersionHistoryTypePref(@NonNull ExportSettingsType type) {
+		return app.getSettings().registerBooleanPreference(VERSION_HISTORY_PREFIX + type.name(), true).makeGlobal().makeShared();
 	}
 
 	@NonNull
@@ -601,27 +607,29 @@ public class BackupHelper {
 		}, EXECUTOR);
 	}
 
-	public void downloadFileListSync(@Nullable final OnDownloadFileListListener listener) throws UserNotRegisteredException {
+	public void downloadFileListSync(@NonNull CollectType collectType, @Nullable final OnDownloadFileListListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 
 		Map<String, String> params = new HashMap<>();
 		params.put("deviceid", getDeviceId());
 		params.put("accessToken", getAccessToken());
+		params.put("allVersions", String.valueOf(collectType == CollectType.COLLECT_ALL || collectType == CollectType.COLLECT_OLD));
 		AndroidNetworkUtils.sendRequest(app, LIST_FILES_URL, params, "Download file list", false, false,
-				getDownloadFileListListener(listener));
+				getDownloadFileListListener(collectType, listener));
 	}
 
-	public void downloadFileList(@Nullable final OnDownloadFileListListener listener) throws UserNotRegisteredException {
+	public void downloadFileList(@NonNull CollectType collectType, @Nullable final OnDownloadFileListListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 
 		Map<String, String> params = new HashMap<>();
 		params.put("deviceid", getDeviceId());
 		params.put("accessToken", getAccessToken());
+		params.put("allVersions", String.valueOf(collectType == CollectType.COLLECT_ALL || collectType == CollectType.COLLECT_OLD));
 		AndroidNetworkUtils.sendRequestAsync(app, LIST_FILES_URL, params, "Download file list", false, false,
-				getDownloadFileListListener(listener), EXECUTOR);
+				getDownloadFileListListener(collectType, listener), EXECUTOR);
 	}
 
-	private OnRequestResultListener getDownloadFileListListener(@Nullable OnDownloadFileListListener listener) {
+	private OnRequestResultListener getDownloadFileListListener(@NonNull CollectType collectType, @Nullable OnDownloadFileListListener listener) {
 		return new OnRequestResultListener() {
 			@Override
 			public void onResult(@Nullable String resultJson, @Nullable String error) {
@@ -637,9 +645,26 @@ public class BackupHelper {
 						String totalZipSize = result.getString("totalZipSize");
 						String totalFiles = result.getString("totalFiles");
 						String totalFileVersions = result.getString("totalFileVersions");
-						JSONArray files = result.getJSONArray("uniqueFiles");
-						for (int i = 0; i < files.length(); i++) {
-							remoteFiles.add(new RemoteFile(files.getJSONObject(i)));
+
+						if (collectType == CollectType.COLLECT_ALL) {
+							JSONArray allFiles = result.getJSONArray("allFiles");
+							for (int i = 0; i < allFiles.length(); i++) {
+								remoteFiles.add(new RemoteFile(allFiles.getJSONObject(i)));
+							}
+						} else if (collectType == CollectType.COLLECT_UNIQUE) {
+							JSONArray uniqueFiles = result.getJSONArray("uniqueFiles");
+							for (int i = 0; i < uniqueFiles.length(); i++) {
+								remoteFiles.add(new RemoteFile(uniqueFiles.getJSONObject(i)));
+							}
+						} else if (collectType == CollectType.COLLECT_OLD) {
+							JSONArray allFiles = result.getJSONArray("allFiles");
+							for (int i = 0; i < allFiles.length(); i++) {
+								remoteFiles.add(new RemoteFile(allFiles.getJSONObject(i)));
+							}
+							JSONArray uniqueFiles = result.getJSONArray("uniqueFiles");
+							for (int i = 0; i < uniqueFiles.length(); i++) {
+								remoteFiles.remove(new RemoteFile(uniqueFiles.getJSONObject(i)));
+							}
 						}
 
 						status = STATUS_SUCCESS;

@@ -1,5 +1,6 @@
 package net.osmand.plus.backup.ui;
 
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -25,15 +26,20 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupHelper.OnDeleteFilesListener;
+import net.osmand.plus.backup.NetworkSettingsHelper.CollectType;
 import net.osmand.plus.backup.RemoteFile;
 import net.osmand.plus.backup.UserNotRegisteredException;
 import net.osmand.plus.backup.ui.DeleteAllDataConfirmationBottomSheet.OnConfirmDeletionListener;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.settings.backend.backup.SettingsHelper.CollectListener;
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
+import java.util.List;
 import java.util.Map;
 
 public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDeleteFilesListener, OnConfirmDeletionListener {
@@ -42,6 +48,8 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 
 	private OsmandApplication app;
 	private BackupHelper backupHelper;
+
+	private List<SettingsItem> oldItems;
 
 	private ProgressBar progressBar;
 
@@ -77,10 +85,12 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 		View view = themedInflater.inflate(R.layout.fragment_backup_settings, container, false);
 		progressBar = view.findViewById(R.id.progress_bar);
 
+		prepareBackup();
 		setupAccount(view);
 		setupBackupTypes(view);
 		setupDeleteAllData(view);
 		setupRemoveOldData(view);
+		setupVersionHistory(view);
 
 		return view;
 	}
@@ -90,7 +100,9 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 		TextView title = container.findViewById(android.R.id.title);
 		TextView summary = container.findViewById(android.R.id.summary);
 
-		title.setText(R.string.backup_data);
+		String text = getString(R.string.backup_data);
+		Typeface typeface = FontCache.getRobotoMedium(app);
+		title.setText(UiUtilities.createCustomFontSpannable(typeface, text, text));
 		summary.setText(R.string.select_backup_data_descr);
 		container.setOnClickListener(new OnClickListener() {
 			@Override
@@ -129,6 +141,39 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 			}
 		});
 		setupSelectableBackground(container);
+	}
+
+	private void setupVersionHistory(View view) {
+		View container = view.findViewById(R.id.version_history);
+
+		TextView title = container.findViewById(android.R.id.title);
+		title.setText(R.string.backup_storage_taken);
+
+		ImageView icon = container.findViewById(android.R.id.icon);
+		icon.setImageDrawable(getContentIcon(R.drawable.ic_action_storage));
+
+		container.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				FragmentActivity activity = getActivity();
+				if (activity != null && !Algorithms.isEmpty(oldItems)) {
+					VersionHistoryFragment.showInstance(activity.getSupportFragmentManager(), oldItems);
+				}
+			}
+		});
+		setupSelectableBackground(container);
+
+		TextView summary = container.findViewById(android.R.id.summary);
+		if (!Algorithms.isEmpty(oldItems) && !Algorithms.isEmpty(backupHelper.getRemoteFiles())) {
+			AndroidUiHelper.updateVisibility(summary, true);
+			int filesSize = 0;
+			for (RemoteFile remoteFile : backupHelper.getRemoteFiles()) {
+				filesSize += remoteFile.getFilesize();
+			}
+			summary.setText(AndroidUtils.formatSize(app, filesSize));
+		} else {
+			AndroidUiHelper.updateVisibility(summary, false);
+		}
 	}
 
 	private void setupDeleteAllData(View view) {
@@ -183,6 +228,25 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 		View selectableView = view.findViewById(R.id.selectable_list_item);
 		Drawable drawable = UiUtilities.getColoredSelectableDrawable(app, getActiveColor(), 0.3f);
 		AndroidUtils.setBackground(selectableView, drawable);
+	}
+
+	private void prepareBackup() {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			AndroidUiHelper.setVisibility(View.VISIBLE, progressBar);
+			app.getNetworkSettingsHelper().collectSettings("", 0, CollectType.COLLECT_OLD, new CollectListener() {
+				@Override
+				public void onCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items) {
+					AndroidUiHelper.setVisibility(View.INVISIBLE, progressBar);
+					if (succeed) {
+						oldItems = items;
+						if (getView() != null) {
+							setupVersionHistory(getView());
+						}
+					}
+				}
+			});
+		}
 	}
 
 	private void deleteAllFiles() {

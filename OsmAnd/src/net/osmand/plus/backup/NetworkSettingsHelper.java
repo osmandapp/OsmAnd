@@ -27,6 +27,12 @@ public class NetworkSettingsHelper extends SettingsHelper {
 		void onBackupExportFinished(boolean succeed);
 	}
 
+	public enum CollectType {
+		COLLECT_ALL,
+		COLLECT_OLD,
+		COLLECT_UNIQUE
+	}
+
 	public NetworkSettingsHelper(@NonNull OsmandApplication app) {
 		super(app);
 	}
@@ -84,9 +90,9 @@ public class NetworkSettingsHelper extends SettingsHelper {
 		}
 	}
 
-	public void collectSettings(String latestChanges, int version,
+	public void collectSettings(String latestChanges, int version, CollectType collectType,
 								@Nullable CollectListener listener) {
-		new ImportBackupTask(this, latestChanges, version, listener)
+		new ImportBackupTask(this, latestChanges, version, collectType, listener)
 				.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 

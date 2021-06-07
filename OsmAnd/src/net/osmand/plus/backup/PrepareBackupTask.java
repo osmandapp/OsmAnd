@@ -7,6 +7,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.backup.BackupHelper.BackupInfo;
 import net.osmand.plus.backup.BackupHelper.OnCollectLocalFilesListener;
 import net.osmand.plus.backup.BackupHelper.OnGenerateBackupInfoListener;
+import net.osmand.plus.backup.NetworkSettingsHelper.CollectType;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.CollectListener;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
@@ -119,7 +120,7 @@ public class PrepareBackupTask {
 	}
 
 	private void doCollectRemoteFiles() {
-		app.getNetworkSettingsHelper().collectSettings("", 0, new CollectListener() {
+		app.getNetworkSettingsHelper().collectSettings("", 0, CollectType.COLLECT_UNIQUE, new CollectListener() {
 			@Override
 			public void onCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items) {
 				if (succeed) {

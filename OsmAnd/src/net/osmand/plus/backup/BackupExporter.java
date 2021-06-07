@@ -4,11 +4,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.backup.BackupHelper.OnUploadFileListener;
+import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.Exporter;
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class BackupExporter extends Exporter {
@@ -55,6 +59,7 @@ public class BackupExporter extends Exporter {
 				if (!Algorithms.isEmpty(error)) {
 					errors.put(type + "/" + fileName, error);
 				} else {
+					checkAndDeleteOldFile(type, fileName, errors);
 					backupHelper.updateFileUploadTime(type, fileName, uploadTime);
 				}
 				itemsProgress[0] += 1;
@@ -71,5 +76,44 @@ public class BackupExporter extends Exporter {
 		if (listener != null) {
 			listener.networkExportDone(errors);
 		}
+	}
+
+	private void checkAndDeleteOldFile(@NonNull String type, @NonNull String fileName, Map<String, String> errors) {
+		try {
+			ExportSettingsType exportType = getExportSettingsType(type, fileName);
+			if (exportType != null && !backupHelper.getVersionHistoryTypePref(exportType).get()) {
+				RemoteFile remoteFile = getRemoteFile(type, fileName);
+				if (remoteFile != null) {
+					backupHelper.deleteFiles(Collections.singletonList(remoteFile), true, null);
+				}
+			}
+		} catch (UserNotRegisteredException e) {
+			errors.put(type + "/" + fileName, e.getMessage());
+		}
+	}
+
+	private ExportSettingsType getExportSettingsType(@NonNull String type, @NonNull String fileName) {
+		for (SettingsItem item : getItems().values()) {
+			String itemFileName = BackupHelper.getItemFileName(item);
+			if (item.getType().name().equals(type)
+					&& (itemFileName.equals(fileName)
+					|| itemFileName.equals(fileName + BackupHelper.INFO_EXT))) {
+				return ExportSettingsType.getExportSettingsTypeForItem(item);
+			}
+		}
+		return null;
+	}
+
+	@Nullable
+	private RemoteFile getRemoteFile(@NonNull String type, @NonNull String fileName) {
+		List<RemoteFile> remoteFiles = backupHelper.getRemoteFiles();
+		if (!Algorithms.isEmpty(fileName) && !Algorithms.isEmpty(remoteFiles)) {
+			for (RemoteFile remoteFile : remoteFiles) {
+				if (remoteFile.getType().equals(type) && remoteFile.getName().equals(fileName)) {
+					return remoteFile;
+				}
+			}
+		}
+		return null;
 	}
 }

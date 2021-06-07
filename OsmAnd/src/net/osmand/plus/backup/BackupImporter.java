@@ -8,6 +8,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.backup.BackupHelper.OnDownloadFileListListener;
+import net.osmand.plus.backup.NetworkSettingsHelper.CollectType;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.SettingsItemsFactory;
@@ -45,11 +46,11 @@ class BackupImporter {
 	}
 
 	@NonNull
-	List<SettingsItem> collectItems(boolean readItems) throws IllegalArgumentException, IOException {
+	List<SettingsItem> collectItems(CollectType collectType, boolean readItems) throws IllegalArgumentException, IOException {
 		List<SettingsItem> result = new ArrayList<>();
 		StringBuilder error = new StringBuilder();
 		try {
-			backupHelper.downloadFileListSync(new OnDownloadFileListListener() {
+			backupHelper.downloadFileListSync(collectType, new OnDownloadFileListListener() {
 				@Override
 				public void onDownloadFileList(int status, @Nullable String message, @NonNull List<RemoteFile> remoteFiles) {
 					if (status == BackupHelper.STATUS_SUCCESS) {

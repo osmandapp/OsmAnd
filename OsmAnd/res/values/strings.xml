@@ -12,6 +12,8 @@
 
 -->
 
+    <string name="backup_storage_taken">Storage taken</string>
+    <string name="backup_version_history">Version history</string>
     <string name="grey_color_slope">Grey color is used when slope is undefined.</string>
     <string name="restore_complete">Restore complete</string>
     <string name="receiving_data_from_server">Receiving data from the server</string>
