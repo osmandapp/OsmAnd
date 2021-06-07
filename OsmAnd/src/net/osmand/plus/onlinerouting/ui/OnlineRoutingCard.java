@@ -26,13 +26,13 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionAdapterListener;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionItem;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.routepreparationmenu.cards.MapActivityCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 
 import java.util.List;
 
-public class OnlineRoutingCard extends BaseCard {
+public class OnlineRoutingCard extends MapActivityCard {
 
 	private View headerContainer;
 	private TextView tvHeaderTitle;

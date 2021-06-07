@@ -45,7 +45,7 @@ import net.osmand.plus.onlinerouting.VehicleType;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.onlinerouting.engine.EngineType;
 import net.osmand.plus.onlinerouting.ui.OnlineRoutingCard.OnTextChangedListener;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.routepreparationmenu.cards.MapActivityCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.util.Algorithms;
 
@@ -500,8 +500,8 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		});
 	}
 
-	private void updateCardViews(@NonNull BaseCard... cardsToUpdate) {
-		for (BaseCard card : cardsToUpdate) {
+	private void updateCardViews(@NonNull MapActivityCard... cardsToUpdate) {
+		for (MapActivityCard card : cardsToUpdate) {
 			if (nameCard.equals(card)) {
 				if (Algorithms.isEmpty(engine.get(EngineParameter.CUSTOM_NAME))) {
 					nameCard.setEditedText(engine.getName(app));

@@ -10,9 +10,9 @@ import com.google.android.material.slider.Slider;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.routepreparationmenu.cards.MapActivityCard;
 
-public class SliderCard extends BaseCard {
+public class SliderCard extends MapActivityCard {
 
 	private int initValue;
 	private SliderCardListener listener;

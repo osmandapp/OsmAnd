@@ -27,6 +27,7 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.myplaces.AddNewTrackFolderBottomSheet;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.routepreparationmenu.cards.MapActivityCard;
 import net.osmand.plus.track.ColorsCard;
 import net.osmand.plus.track.CustomColorBottomSheet;
 import net.osmand.util.Algorithms;
@@ -35,7 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class AddNewFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFragment implements CustomColorBottomSheet.ColorPickerListener, BaseCard.CardListener {
+public class AddNewFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFragment implements CustomColorBottomSheet.ColorPickerListener, MapActivityCard.CardListener {
 
 
 	public static final String TAG = AddNewTrackFolderBottomSheet.class.getName();

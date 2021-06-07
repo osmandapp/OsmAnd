@@ -17,14 +17,14 @@ import net.osmand.plus.backup.BackupHelper.BackupInfo;
 import net.osmand.plus.backup.LocalFile;
 import net.osmand.plus.backup.RemoteFile;
 import net.osmand.plus.backup.ui.RestoreSettingsFragment;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.routepreparationmenu.cards.MapActivityCard;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RestoreBackupCard extends BaseCard {
+public class RestoreBackupCard extends MapActivityCard {
 
 	private BackupInfo info;
 

@@ -84,6 +84,7 @@ import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.OtherLocalRouti
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.RouteMenuAppModes;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.ShowAlongTheRouteItem;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.routepreparationmenu.cards.MapActivityCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routepreparationmenu.cards.HistoryCard;
 import net.osmand.plus.routepreparationmenu.cards.HomeWorkCard;
@@ -177,7 +178,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private AddressLookupRequest targetPointRequest;
 	private List<LatLon> intermediateRequestsLatLon = new ArrayList<>();
 	private OnDismissListener onDismissListener;
-	private List<BaseCard> menuCards = new ArrayList<>();
+	private List<MapActivityCard> menuCards = new ArrayList<>();
 
 	private OnMarkerSelectListener onMarkerSelectListener;
 	private StateChangedListener<Void> onStateChangedListener;
@@ -550,7 +551,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 	public void build(LinearLayout rootView) {
 		rootView.removeAllViews();
-		for (BaseCard card : menuCards) {
+		for (MapActivityCard card : menuCards) {
 			rootView.addView(card.build(rootView.getContext()));
 		}
 	}
@@ -576,9 +577,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		updateCards();
 	}
 
-	private void applyCardsState(@NonNull List<BaseCard> newCards, @NonNull List<BaseCard> prevCards) {
-		for (BaseCard newCard : newCards) {
-			for (BaseCard prevCard : prevCards) {
+	private void applyCardsState(@NonNull List<MapActivityCard> newCards, @NonNull List<MapActivityCard> prevCards) {
+		for (MapActivityCard newCard : newCards) {
+			for (MapActivityCard prevCard : prevCards) {
 				if (newCard.getClass() == prevCard.getClass()) {
 					newCard.applyState(prevCard);
 					break;
@@ -599,7 +600,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
 		RoutingHelper routingHelper = app.getRoutingHelper();
 
-		List<BaseCard> menuCards = new ArrayList<>();
+		List<MapActivityCard> menuCards = new ArrayList<>();
 
 		boolean bottomShadowVisible = true;
 		if (isBasicRouteCalculated()) {

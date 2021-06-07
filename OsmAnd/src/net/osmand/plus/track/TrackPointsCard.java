@@ -40,7 +40,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.DeletePointsTask;
 import net.osmand.plus.myplaces.DeletePointsTask.OnPointsDeleteListener;
 import net.osmand.plus.myplaces.EditTrackGroupDialogFragment;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.routepreparationmenu.cards.MapActivityCard;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -55,7 +55,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-public class TrackPointsCard extends BaseCard implements OnChildClickListener, OnPointsDeleteListener {
+public class TrackPointsCard extends MapActivityCard implements OnChildClickListener, OnPointsDeleteListener {
 
 	public static final int ADD_WAYPOINT_INDEX = 0;
 	public static final int DELETE_WAYPOINTS_INDEX = 1;

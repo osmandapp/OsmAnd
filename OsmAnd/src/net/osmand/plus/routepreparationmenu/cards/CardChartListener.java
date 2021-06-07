@@ -4,7 +4,6 @@ import android.view.MotionEvent;
 
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.highlight.Highlight;
-import com.github.mikephil.charting.listener.ChartTouchListener;
 import com.github.mikephil.charting.listener.ChartTouchListener.ChartGesture;
 
 public interface CardChartListener {
@@ -15,14 +14,14 @@ public interface CardChartListener {
 	 * @param h The corresponding highlight object that contains information
 	 *          about the highlighted position such as dataSetIndex, ...
 	 */
-	void onValueSelected(BaseCard card, Entry e, Highlight h);
+	void onValueSelected(MapActivityCard card, Entry e, Highlight h);
 
 	/**
 	 * Called when nothing has been selected or an "un-select" has been made.
 	 */
-	void onNothingSelected(BaseCard card);
+	void onNothingSelected(MapActivityCard card);
 
-	void onChartGestureStart(BaseCard card, MotionEvent me, ChartGesture lastPerformedGesture);
+	void onChartGestureStart(MapActivityCard card, MotionEvent me, ChartGesture lastPerformedGesture);
 
-	void onChartGestureEnd(BaseCard card, MotionEvent me, ChartGesture lastPerformedGesture, boolean hasTranslated);
+	void onChartGestureEnd(MapActivityCard card, MotionEvent me, ChartGesture lastPerformedGesture, boolean hasTranslated);
 }

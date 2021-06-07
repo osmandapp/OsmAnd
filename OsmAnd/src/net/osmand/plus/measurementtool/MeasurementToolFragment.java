@@ -78,7 +78,7 @@ import net.osmand.plus.measurementtool.command.ReversePointsCommand;
 import net.osmand.plus.measurementtool.command.SplitPointsCommand;
 import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet;
 import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet.DialogMode;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.routepreparationmenu.cards.MapActivityCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.TrackMenuFragment;
@@ -130,7 +130,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private TextView distanceToCenterTv;
 	private String pointsSt;
 	private ViewGroup cardsContainer;
-	private BaseCard visibleCard;
+	private MapActivityCard visibleCard;
 	private PointsCard pointsCard;
 	private GraphsCard graphsCard;
 	private MultiStateToggleButton infoTypeBtn;

@@ -15,13 +15,13 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.routepreparationmenu.cards.MapActivityCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.fragments.ExportSettingsFragment;
 
 import static net.osmand.plus.importfiles.ImportHelper.ImportType.SETTINGS;
 
-public class LocalBackupCard extends BaseCard {
+public class LocalBackupCard extends MapActivityCard {
 
 	private View localBackup;
 	private View backupToFile;

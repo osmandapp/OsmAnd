@@ -60,6 +60,7 @@ import net.osmand.plus.measurementtool.graph.GraphAdapterHelper;
 import net.osmand.plus.measurementtool.graph.GraphAdapterHelper.RefreshMapCallback;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.routepreparationmenu.cards.MapActivityCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routepreparationmenu.cards.PublicTransportCard;
 import net.osmand.plus.routepreparationmenu.cards.PublicTransportCard.PublicTransportCardListener;
@@ -104,7 +105,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 	@Nullable
 	private OrderedLineDataSet elevationDataSet;
 	private GpxDisplayItem gpxItem;
-	private List<BaseCard> menuCards = new ArrayList<>();
+	private List<MapActivityCard> menuCards = new ArrayList<>();
 	@Nullable
 	private PublicTransportCard transportCard;
 	private RouteDetailsFragmentListener routeDetailsListener;

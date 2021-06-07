@@ -18,7 +18,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.routepreparationmenu.cards.MapActivityCard;
 
 import org.apache.commons.logging.Log;
 
@@ -31,7 +31,7 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class TrackColoringCard extends BaseCard {
+public class TrackColoringCard extends MapActivityCard {
 
 	private final static String SOLID_COLOR = "solid_color";
 	private static final Log log = PlatformUtil.getLog(TrackColoringCard.class);

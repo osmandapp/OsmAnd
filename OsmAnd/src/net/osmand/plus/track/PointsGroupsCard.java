@@ -10,13 +10,13 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionAdapterListener;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionItem;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.routepreparationmenu.cards.MapActivityCard;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PointsGroupsCard extends BaseCard {
+public class PointsGroupsCard extends MapActivityCard {
 
 	public static final int SELECT_GROUP_INDEX = 0;
 

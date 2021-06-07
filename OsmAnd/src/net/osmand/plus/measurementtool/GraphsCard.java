@@ -38,7 +38,7 @@ import net.osmand.plus.measurementtool.graph.CustomGraphAdapter.LegendViewType;
 import net.osmand.plus.measurementtool.graph.GraphAdapterHelper;
 import net.osmand.plus.measurementtool.graph.GraphAdapterHelper.RefreshMapCallback;
 import net.osmand.plus.routepreparationmenu.RouteDetailsFragment;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.routepreparationmenu.cards.MapActivityCard;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.util.Algorithms;
 
@@ -54,7 +54,7 @@ import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.SPEED;
 import static net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionItem;
 import static net.osmand.router.RouteStatisticsHelper.RouteStatistics;
 
-public class GraphsCard extends BaseCard implements OnUpdateInfoListener {
+public class GraphsCard extends MapActivityCard implements OnUpdateInfoListener {
 
 	private static String GRAPH_DATA_GPX_FILE_NAME = "graph_data_tmp";
 	private static int INVALID_ID = -1;

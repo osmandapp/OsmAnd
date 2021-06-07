@@ -19,7 +19,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 
 import androidx.annotation.NonNull;
 
-public class SelectedTrackToFollowCard extends BaseCard {
+public class SelectedTrackToFollowCard extends MapActivityCard {
 
 	final FollowTrackFragment target;
 	final GPXFile gpxFile;
