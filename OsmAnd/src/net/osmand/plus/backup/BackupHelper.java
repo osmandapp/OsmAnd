@@ -284,6 +284,9 @@ public class BackupHelper {
 				fileName = item.getDefaultFileName();
 			}
 		}
+		if (!Algorithms.isEmpty(fileName) && fileName.charAt(0) == '/') {
+			fileName = fileName.substring(1);
+		}
 		return fileName;
 	}
 
@@ -305,6 +308,9 @@ public class BackupHelper {
 			fileName = file.getPath().substring(file.getPath().indexOf(subtypeFolder) + subtypeFolder.length());
 		} else {
 			fileName = file.getPath().substring(file.getPath().indexOf(subtypeFolder) - 1);
+		}
+		if (!Algorithms.isEmpty(fileName) && fileName.charAt(0) == '/') {
+			fileName = fileName.substring(1);
 		}
 		return fileName;
 	}
@@ -440,6 +446,9 @@ public class BackupHelper {
 						}
 					}
 				});
+		if (error == null) {
+			updateFileUploadTime(type, fileName, uploadTime);
+		}
 		error = error != null ? resolveServerError(error) : null;
 		if (listener != null) {
 			listener.onFileUploadDone(type, fileName, uploadTime, error);
@@ -467,6 +476,9 @@ public class BackupHelper {
 
 			@Override
 			public void onFileUploadDone(@Nullable String error) {
+				if (error == null) {
+					updateFileUploadTime(type, fileName, uploadTime);
+				}
 				if (listener != null) {
 					listener.onFileUploadDone(type, fileName, uploadTime, error != null ? resolveServerError(error) : null);
 				}
@@ -487,7 +499,6 @@ public class BackupHelper {
 		for (LocalFile localFile : localFiles) {
 			localFileMap.put(localFile.file, localFile);
 		}
-		final File favoritesFile = favouritesHelper.getExternalFile();
 		AndroidNetworkUtils.uploadFilesAsync(UPLOAD_FILE_URL, new ArrayList<>(localFileMap.keySet()), true, params, headers, new OnFilesUploadCallback() {
 			@Nullable
 			@Override
@@ -496,7 +507,7 @@ public class BackupHelper {
 				LocalFile localFile = localFileMap.get(file);
 				if (localFile != null) {
 					additionaParams.put("name", localFile.getFileName(true));
-					additionaParams.put("type", Algorithms.getFileExtension(file));
+					additionaParams.put("type", localFile.item.getType().name());
 					localFile.uploadTime = System.currentTimeMillis();
 					additionaParams.put("clienttime", String.valueOf(localFile.uploadTime));
 				}
@@ -512,18 +523,11 @@ public class BackupHelper {
 
 			@Override
 			public void onFileUploadDone(@NonNull File file) {
+				LocalFile localFile = localFileMap.get(file);
+				if (localFile != null) {
+					updateFileUploadTime(localFile.item.getType().name(), localFile.getFileName(true), localFile.uploadTime);
+				}
 				if (listener != null) {
-					LocalFile localFile = localFileMap.get(file);
-					if (localFile != null) {
-						if (file.equals(favoritesFile)) {
-							favouritesHelper.setLastUploadedTime(localFile.uploadTime);
-						} else {
-							GpxDataItem gpxItem = gpxHelper.getItem(file);
-							if (gpxItem != null) {
-								gpxHelper.updateLastUploadedTime(gpxItem, localFile.uploadTime);
-							}
-						}
-					}
 					listener.onFileUploadDone(file);
 				}
 			}
@@ -942,7 +946,7 @@ public class BackupHelper {
 								File[] files = dir.listFiles();
 								if (files != null && files.length > 0) {
 									for (File f : files) {
-										fileName = f.getPath().replace(app.getAppPath(null).getPath(), "");
+										fileName = f.getPath().replace(app.getAppPath(null).getPath() + "/", "");
 										createLocalFile(result, item, fileName, f.lastModified());
 									}
 								}

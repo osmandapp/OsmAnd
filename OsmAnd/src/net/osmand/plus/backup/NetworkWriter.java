@@ -13,6 +13,7 @@ import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -65,17 +66,23 @@ public class NetworkWriter implements AbstractWriter {
 
 	private String uploadItemInfo(@NonNull SettingsItem item, @NonNull String fileName) throws IOException {
 		try {
-			String itemJson = item.toJson();
-			InputStream inputStream = new ByteArrayInputStream(itemJson.getBytes("UTF-8"));
-			StreamWriter streamWriter = new StreamWriter() {
-				@Override
-				public void write(OutputStream outputStream, IProgress progress) throws IOException {
-					Algorithms.streamCopy(inputStream, outputStream, progress, 1024);
-					outputStream.flush();
-				}
-			};
-			return backupHelper.uploadFileSync(fileName, item.getType().name(), streamWriter,
-					getUploadFileListener(item));
+			JSONObject json = item.toJsonObj();
+			boolean hasFile = json.has("file");
+			if (json.length() > (hasFile ? 2 : 1)) {
+				String itemJson = json.toString();
+				InputStream inputStream = new ByteArrayInputStream(itemJson.getBytes("UTF-8"));
+				StreamWriter streamWriter = new StreamWriter() {
+					@Override
+					public void write(OutputStream outputStream, IProgress progress) throws IOException {
+						Algorithms.streamCopy(inputStream, outputStream, progress, 1024);
+						outputStream.flush();
+					}
+				};
+				return backupHelper.uploadFileSync(fileName, item.getType().name(), streamWriter,
+						getUploadFileListener(item));
+			} else {
+				return null;
+			}
 		} catch (JSONException | UserNotRegisteredException e) {
 			throw new IOException(e.getMessage(), e);
 		}
