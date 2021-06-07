@@ -178,7 +178,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private AddressLookupRequest targetPointRequest;
 	private List<LatLon> intermediateRequestsLatLon = new ArrayList<>();
 	private OnDismissListener onDismissListener;
-	private List<MapActivityCard> menuCards = new ArrayList<>();
+	private List<BaseCard> menuCards = new ArrayList<>();
 
 	private OnMarkerSelectListener onMarkerSelectListener;
 	private StateChangedListener<Void> onStateChangedListener;
@@ -577,9 +577,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		updateCards();
 	}
 
-	private void applyCardsState(@NonNull List<MapActivityCard> newCards, @NonNull List<MapActivityCard> prevCards) {
-		for (MapActivityCard newCard : newCards) {
-			for (MapActivityCard prevCard : prevCards) {
+	private void applyCardsState(@NonNull List<BaseCard> newCards, @NonNull List<BaseCard> prevCards) {
+		for (BaseCard newCard : newCards) {
+			for (BaseCard prevCard : prevCards) {
 				if (newCard.getClass() == prevCard.getClass()) {
 					newCard.applyState(prevCard);
 					break;
@@ -600,7 +600,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
 		RoutingHelper routingHelper = app.getRoutingHelper();
 
-		List<MapActivityCard> menuCards = new ArrayList<>();
+		List<BaseCard> menuCards = new ArrayList<>();
 
 		boolean bottomShadowVisible = true;
 		if (isBasicRouteCalculated()) {
