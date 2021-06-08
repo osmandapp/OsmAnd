@@ -4168,4 +4168,6 @@
     <string name="receiving_data_from_server">Получение данных с сервера</string>
     <string name="restore_complete">Восстановление завершено</string>
     <string name="grey_color_slope">Серый цвет используется, когда уклон не определен.</string>
+    <string name="backup_storage_taken">Принято на хранение</string>
+    <string name="backup_version_history">История версий</string>
 </resources>
