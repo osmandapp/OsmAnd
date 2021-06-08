@@ -60,7 +60,7 @@ public class NetworkSettingsHelper extends SettingsHelper {
 	public boolean cancelExport() {
 		ExportBackupTask exportTask = this.exportTask;
 		if (exportTask != null && (exportTask.getStatus() == AsyncTask.Status.RUNNING)) {
-			return exportTask.cancel(true);
+			return exportTask.cancel(false);
 		}
 		return false;
 	}

@@ -33,6 +33,7 @@ public class PrepareBackupTask {
 
 	public static class PrepareBackupResult {
 		private BackupInfo backupInfo;
+		private List<SettingsItem> settingsItems;
 		private List<RemoteFile> remoteFiles;
 		private List<RemoteFile> allRemoteFiles;
 		private List<LocalFile> fileInfos;
@@ -43,6 +44,10 @@ public class PrepareBackupTask {
 
 		public BackupInfo getBackupInfo() {
 			return backupInfo;
+		}
+
+		public List<SettingsItem> getSettingsItems() {
+			return settingsItems;
 		}
 
 		public List<RemoteFile> getRemoteFiles() {
@@ -152,6 +157,7 @@ public class PrepareBackupTask {
 									originalRemoteFiles.add(remoteFile);
 								}
 							}
+							PrepareBackupTask.this.result.settingsItems = items;
 							PrepareBackupTask.this.result.remoteFiles = originalRemoteFiles;
 							PrepareBackupTask.this.result.allRemoteFiles = remoteFiles;
 						} else {

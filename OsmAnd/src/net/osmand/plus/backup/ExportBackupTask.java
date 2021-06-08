@@ -65,6 +65,11 @@ public class ExportBackupTask extends AsyncTask<Void, Integer, Boolean> {
 	}
 
 	@Override
+	protected void onCancelled() {
+		onPostExecute(false);
+	}
+
+	@Override
 	protected void onPostExecute(Boolean success) {
 		helper.exportTask = null;
 		if (listener != null) {

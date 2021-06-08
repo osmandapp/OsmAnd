@@ -101,11 +101,7 @@ public class BackupUploadCard extends MapBaseCard {
 		itemsContainer.removeAllViews();
 
 		LayoutInflater themedInflater = UiUtilities.getInflater(view.getContext(), nightMode);
-		for (LocalFile localFile : info.filesToUpload) {
-			SettingsItem item = localFile.item;
-			if (item == null) {
-				continue;
-			}
+		for (SettingsItem item : info.getItemsToUpload()) {
 			View itemView = themedInflater.inflate(R.layout.backup_upload_item, itemsContainer, false);
 			setupItemView(item, itemView);
 
@@ -195,12 +191,7 @@ public class BackupUploadCard extends MapBaseCard {
 			actionButton.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					List<SettingsItem> items = new ArrayList<>();
-					for (LocalFile localFile : info.filesToUpload) {
-						if (localFile.item != null) {
-							items.add(localFile.item);
-						}
-					}
+					List<SettingsItem> items = info.getItemsToUpload();
 					if (!items.isEmpty()) {
 						app.getNetworkSettingsHelper().exportSettings(listener, items);
 					}

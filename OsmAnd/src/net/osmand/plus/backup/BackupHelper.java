@@ -21,9 +21,6 @@ import net.osmand.AndroidNetworkUtils.RequestResponse;
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.StreamWriter;
-import net.osmand.plus.FavouritesDbHelper;
-import net.osmand.plus.GPXDatabase.GpxDataItem;
-import net.osmand.plus.GpxDbHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
@@ -52,6 +49,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -60,8 +58,6 @@ public class BackupHelper {
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
-	private final FavouritesDbHelper favouritesHelper;
-	private final GpxDbHelper gpxHelper;
 	private final BackupDbHelper dbHelper;
 
 	public static final Log LOG = PlatformUtil.getLog(BackupHelper.class);
@@ -69,7 +65,7 @@ public class BackupHelper {
 	public final static String INFO_EXT = ".info";
 
 	private static final ThreadPoolExecutor EXECUTOR = new ThreadPoolExecutor(1, 1, 0L,
-			TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>());
+			TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>());
 
 	private static final String SERVER_URL = "https://osmand.net";
 
@@ -158,13 +154,22 @@ public class BackupHelper {
 		public List<LocalFile> filesToUpload = new ArrayList<>();
 		public List<RemoteFile> filesToDelete = new ArrayList<>();
 		public List<Pair<LocalFile, RemoteFile>> filesToMerge = new ArrayList<>();
+
+		public List<SettingsItem> getItemsToUpload() {
+			List<SettingsItem> items = new ArrayList<>();
+			for (LocalFile localFile : filesToUpload) {
+				SettingsItem item = localFile.item;
+				if (item != null && !items.contains(item)) {
+					items.add(item);
+				}
+			}
+			return items;
+		}
 	}
 
 	public BackupHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 		this.settings = app.getSettings();
-		this.favouritesHelper = app.getFavorites();
-		this.gpxHelper = app.getGpxDbHelper();
 		this.dbHelper = new BackupDbHelper(app);
 	}
 
@@ -181,7 +186,6 @@ public class BackupHelper {
 	public PrepareBackupResult getBackup() {
 		return backup;
 	}
-
 
 	void setBackup(PrepareBackupResult backup) {
 		this.backup = backup;
