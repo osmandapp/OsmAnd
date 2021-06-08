@@ -4164,4 +4164,5 @@
     <string name="restore_selected_data">復原選定的資料</string>
     <string name="receiving_data_from_server">正在從伺服器接收資料</string>
     <string name="restore_complete">復原完成</string>
+    <string name="grey_color_slope">當斜率未被定義時則使用灰色。</string>
 </resources>
