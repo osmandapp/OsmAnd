@@ -529,6 +529,11 @@ public class BinaryRoutePlanner {
 		if (directionAllowed && visitedSegment != null) {
 			if (visitedSegment.distanceFromStart <= segment.distanceFromStart) {
 				directionAllowed = false;
+			} else {
+				if (ctx.config.heuristicCoefficient <= 1) {
+					System.err.println("! Alert distance from start visited " + visitedSegment.distanceFromStart + " > "
+							+ segment.distanceFromStart + ": " + road.toString());
+				}
 			}
 		}
 		return directionAllowed;
