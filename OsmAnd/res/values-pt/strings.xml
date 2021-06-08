@@ -34,7 +34,7 @@
     <string name="poi_filter_closest_poi">POIs mais próximos</string>
     <string name="poi_filter_custom_filter">Filtro personalizado</string>
     <string name="poi_filter_by_name">Procurar por nome</string>
-    <string name="poi_filter_food_shop">Supermercado</string>
+    <string name="poi_filter_food_shop">Hiper/supermercado</string>
     <string name="poi_filter_for_tourists">Para turistas</string>
     <string name="poi_filter_fuel">Combustível</string>
     <string name="poi_filter_namefinder">Pesquisar nome online</string>
@@ -1792,7 +1792,7 @@
     <string name="later">Mais tarde</string>
     <string name="buy">Comprar</string>
     <string name="downloading_number_of_files">A descarregar - %1$d ficheiros</string>
-    <string name="show_free_version_banner">Mostrar propaganda da versão gratuita</string>
+    <string name="show_free_version_banner">Mostrar anúncio da versão gratuita</string>
     <string name="downloads_left_template">%1$s descarregamentos restantes</string>
     <string name="roads">Estradas</string>
     <string name="current_track">Trajeto atual</string>
@@ -2678,7 +2678,7 @@
     <string name="count_of_lines">Contagem de linhas</string>
     <string name="are_you_sure">Tem a certeza\?</string>
     <string name="unsaved_changes_will_be_lost">Quaisquer alterações por guardar serão perdidas. Continuar\?</string>
-    <string name="show_free_version_banner_description">Mostra o banner da versão gratuita mesmo na versão paga.</string>
+    <string name="show_free_version_banner_description">Mostra o anúncio da versão gratuita mesmo na versão paga.</string>
     <string name="activate_seamarks_plugin">Ative a extensão \'Mapa náutico\'</string>
     <string name="activate_srtm_plugin">Ative a extensão \'Curvas de nível\'</string>
     <string name="value_downloaded_of_max">%1$.1f de %2$.1f MB</string>
@@ -3003,7 +3003,7 @@
     <string name="routing_attr_piste_type_nordic_name">Esqui de travessia e nórdico</string>
     <string name="routing_attr_piste_type_nordic_description">Trilhos para esqui nórdico ou cross-country.</string>
     <string name="routing_attr_piste_type_skitour_name">Passeios de esqui</string>
-    <string name="routing_attr_piste_type_skitour_description">Rotas para excursões de esqui.</string>
+    <string name="routing_attr_piste_type_skitour_description">Rotas para passeios de esqui.</string>
     <string name="routing_attr_piste_type_sled_name">Trenó</string>
     <string name="routing_attr_piste_type_sled_description">Pistas para trenó.</string>
     <string name="routing_attr_allow_intermediate_name">Permitir rotas intermédias</string>
@@ -4170,4 +4170,11 @@
 \nA versão atual dos dados será guardada no servidor, mas não poderá reverter para as alterações feitas anteriormente.</string>
     <string name="backup_data">Fazer cópia de segurança</string>
     <string name="select_backup_data_descr">Selecionar dados e pastas para a cópia de segurança.</string>
+    <string name="backup_restore_data_descr">Restaurar dados no dispositivo utilizando cópias de segurança online.</string>
+    <string name="backup_restore_data">Restaurar dados</string>
+    <string name="restore_from_osmand_cloud">Restaurar de OsmAnd Cloud</string>
+    <string name="choose_what_to_restore">Escolher o que restaurar.</string>
+    <string name="restore_selected_data">Restaurar dados selecionados</string>
+    <string name="receiving_data_from_server">A receber dados do servidor</string>
+    <string name="restore_complete">Restauro completo</string>
 </resources>

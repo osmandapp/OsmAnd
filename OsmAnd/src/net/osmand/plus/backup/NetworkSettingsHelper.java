@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.backup.BackupHelper.CollectType;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
@@ -20,11 +21,16 @@ public class NetworkSettingsHelper extends SettingsHelper {
 	ExportBackupTask exportTask;
 
 	public interface BackupExportListener {
-		void onBackupExportStarted();
+		void onBackupExportStarted(int itemsCount);
 
 		void onBackupExportProgressUpdate(int value);
 
 		void onBackupExportFinished(boolean succeed);
+	}
+
+	public interface BackupCollectListener {
+		void onBackupCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items,
+									 @NonNull List<RemoteFile> remoteFiles);
 	}
 
 	public NetworkSettingsHelper(@NonNull OsmandApplication app) {
@@ -54,7 +60,7 @@ public class NetworkSettingsHelper extends SettingsHelper {
 	public boolean cancelExport() {
 		ExportBackupTask exportTask = this.exportTask;
 		if (exportTask != null && (exportTask.getStatus() == AsyncTask.Status.RUNNING)) {
-			return exportTask.cancel(true);
+			return exportTask.cancel(false);
 		}
 		return false;
 	}
@@ -84,9 +90,9 @@ public class NetworkSettingsHelper extends SettingsHelper {
 		}
 	}
 
-	public void collectSettings(String latestChanges, int version,
-								@Nullable CollectListener listener) {
-		new ImportBackupTask(this, latestChanges, version, listener)
+	public void collectSettings(String latestChanges, int version, CollectType collectType,
+								@Nullable BackupCollectListener listener) {
+		new ImportBackupTask(this, latestChanges, version, collectType, listener)
 				.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 

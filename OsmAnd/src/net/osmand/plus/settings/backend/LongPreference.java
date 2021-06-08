@@ -13,7 +13,8 @@ public class LongPreference extends CommonPreference<Long> {
 
 	@Override
 	protected boolean setValue(Object prefs, Long val) {
-		return getSettingsAPI().edit(prefs).putLong(getId(), val).commit();
+		return super.setValue(prefs, val)
+				&& getSettingsAPI().edit(prefs).putLong(getId(), val).commit();
 	}
 
 	@Override

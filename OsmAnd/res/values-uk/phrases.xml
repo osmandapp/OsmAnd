@@ -479,7 +479,7 @@
     <string name="poi_climbing">Скелелазіння</string>
     <string name="poi_cricket">Крикет</string>
     <string name="poi_croquet">Крокет</string>
-    <string name="poi_cycling">Велоспорт</string>
+    <string name="poi_cycling">Їзда на велосипеді</string>
     <string name="poi_scuba_diving">Підводне плавання</string>
     <string name="poi_dog_racing">Собачі перегони</string>
     <string name="poi_equestrian">Кінний спорт</string>
@@ -641,8 +641,8 @@
     <string name="poi_10pin">10-кегельний боулінг (звичайний)</string>
     <string name="poi_boules">Буль</string>
     <string name="poi_bowls">Кеглі</string>
-    <string name="poi_diving">Стрибки у воду</string>
-    <string name="poi_ice_hockey">Хокей з шайбою</string>
+    <string name="poi_diving">Занурювання</string>
+    <string name="poi_ice_hockey">Хокей</string>
     <string name="poi_ice_stock">Айсшток</string>
     <string name="poi_korfbal">Корфбол</string>
     <string name="poi_sport_multi">Універсальний спортмайданчик</string>
@@ -3965,4 +3965,5 @@
     <string name="poi_climbing_grade_french_min">Найпростіший маршрут (французька класифікація)</string>
     <string name="poi_climbing_grade_saxon_min">Найпростіший маршрут (саксонська класифікація)</string>
     <string name="poi_climbing_grade_uiaa_min">Найпростіший маршрут (класифікація UIAA)</string>
+    <string name="poi_power_terminal">Термінал живлення</string>
 </resources>

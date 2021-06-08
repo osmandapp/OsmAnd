@@ -25,7 +25,7 @@ import net.osmand.plus.backup.LocalFile;
 import net.osmand.plus.backup.NetworkSettingsHelper.BackupExportListener;
 import net.osmand.plus.backup.RemoteFile;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
@@ -38,7 +38,7 @@ import java.util.List;
 
 import static net.osmand.plus.backup.ui.cards.LocalBackupCard.adjustIndicator;
 
-public class BackupUploadCard extends BaseCard {
+public class BackupUploadCard extends MapBaseCard {
 
 	private final BackupInfo info;
 	private final BackupExportListener listener;
@@ -101,11 +101,7 @@ public class BackupUploadCard extends BaseCard {
 		itemsContainer.removeAllViews();
 
 		LayoutInflater themedInflater = UiUtilities.getInflater(view.getContext(), nightMode);
-		for (LocalFile localFile : info.filesToUpload) {
-			SettingsItem item = localFile.item;
-			if (item == null) {
-				continue;
-			}
+		for (SettingsItem item : info.getItemsToUpload()) {
 			View itemView = themedInflater.inflate(R.layout.backup_upload_item, itemsContainer, false);
 			setupItemView(item, itemView);
 
@@ -195,18 +191,17 @@ public class BackupUploadCard extends BaseCard {
 			actionButton.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					List<SettingsItem> items = new ArrayList<>();
-					for (LocalFile localFile : info.filesToUpload) {
-						if (localFile.item != null) {
-							items.add(localFile.item);
-						}
-					}
+					List<SettingsItem> items = info.getItemsToUpload();
 					if (!items.isEmpty()) {
 						app.getNetworkSettingsHelper().exportSettings(listener, items);
 					}
 				}
 			});
 		}
+	}
+
+	public void setupProgress(int itemsCount) {
+		progressBar.setMax(itemsCount);
 	}
 
 	public void updateProgress(int value) {

@@ -67,8 +67,8 @@ public class OnlineRoutingSettingsItem extends CollectionSettingsItem<OnlineRout
 	}
 
 	@Override
-	protected long getLocalModifiedTime() { // TODO
-		return 0;
+	protected long getLocalModifiedTime() {
+		return helper.getLastModifiedTime();
 	}
 
 	@Override

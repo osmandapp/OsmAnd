@@ -3,9 +3,6 @@ package net.osmand.plus.activities;
 
 import android.content.Context;
 
-import androidx.annotation.DrawableRes;
-import androidx.annotation.StringRes;
-
 import net.osmand.IndexConstants;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
@@ -29,6 +26,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 
 
 public class LocalIndexHelper {
@@ -214,7 +215,7 @@ public class LocalIndexHelper {
 		return result;
 	}
 
-	private void loadVoiceData(File voiceDir, List<LocalIndexInfo> result, boolean backup, AbstractLoadLocalIndexTask loadTask) {
+	public void loadVoiceData(File voiceDir, List<LocalIndexInfo> result, boolean backup, @Nullable AbstractLoadLocalIndexTask loadTask) {
 		if (voiceDir.canRead()) {
 			//First list TTS files, they are preferred
 			for (File voiceF : listFilesSorted(voiceDir)) {
@@ -223,8 +224,9 @@ public class LocalIndexHelper {
 					LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.TTS_VOICE_DATA, voiceF, backup, app);
 					updateDescription(info);
 					result.add(info);
-					loadTask.loadFile(info);
-
+					if (loadTask != null) {
+						loadTask.loadFile(info);
+					}
 				}
 			}
 
@@ -235,7 +237,9 @@ public class LocalIndexHelper {
 					LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.VOICE_DATA, voiceF, backup, app);
 					updateDescription(info);
 					result.add(info);
-					loadTask.loadFile(info);
+					if (loadTask != null) {
+						loadTask.loadFile(info);
+					}
 				}
 			}
 		}

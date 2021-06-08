@@ -6,9 +6,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.backup.SettingsHelper.CollectListener;
-import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
+import net.osmand.plus.backup.BackupHelper.CollectType;
+import net.osmand.plus.backup.BackupImporter.CollectItemsResult;
+import net.osmand.plus.backup.NetworkSettingsHelper.BackupCollectListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.CheckDuplicatesListener;
+import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportType;
 import net.osmand.plus.settings.backend.backup.items.CollectionSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
@@ -27,7 +29,7 @@ public class ImportBackupTask extends AsyncTask<Void, Void, List<SettingsItem>> 
 	private int version;
 
 	private ImportListener importListener;
-	private CollectListener collectListener;
+	private BackupCollectListener collectListener;
 	private CheckDuplicatesListener duplicatesListener;
 	private final BackupImporter importer;
 
@@ -35,17 +37,21 @@ public class ImportBackupTask extends AsyncTask<Void, Void, List<SettingsItem>> 
 	private List<SettingsItem> selectedItems = new ArrayList<>();
 	private List<Object> duplicates;
 
+	private List<RemoteFile> remoteFiles;
+
 	private final ImportType importType;
+	private CollectType collectType;
 	private boolean importDone;
 
 	ImportBackupTask(@NonNull NetworkSettingsHelper helper,
-				   String latestChanges, int version,
-				   @Nullable CollectListener collectListener) {
+					 String latestChanges, int version, CollectType collectType,
+					 @Nullable BackupCollectListener collectListener) {
 		this.helper = helper;
 		this.app = helper.getApp();
 		this.collectListener = collectListener;
 		this.latestChanges = latestChanges;
 		this.version = version;
+		this.collectType = collectType;
 		importer = new BackupImporter(app.getBackupHelper());
 		importType = ImportType.COLLECT;
 	}
@@ -91,7 +97,9 @@ public class ImportBackupTask extends AsyncTask<Void, Void, List<SettingsItem>> 
 			case COLLECT:
 			case COLLECT_AND_READ:
 				try {
-					return importer.collectItems(importType == ImportType.COLLECT_AND_READ);
+					CollectItemsResult result = importer.collectItems(collectType, importType == ImportType.COLLECT_AND_READ);
+					remoteFiles = result.remoteFiles;
+					return result.items;
 				} catch (IllegalArgumentException e) {
 					NetworkSettingsHelper.LOG.error("Failed to collect items for backup", e);
 				} catch (IOException e) {
@@ -117,7 +125,7 @@ public class ImportBackupTask extends AsyncTask<Void, Void, List<SettingsItem>> 
 		switch (importType) {
 			case COLLECT:
 				importDone = true;
-				collectListener.onCollectFinished(items != null, false, this.items);
+				collectListener.onBackupCollectFinished(items != null, false, this.items, remoteFiles);
 				break;
 			case CHECK_DUPLICATES:
 				importDone = true;

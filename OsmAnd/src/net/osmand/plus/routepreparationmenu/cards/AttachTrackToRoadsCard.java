@@ -10,7 +10,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 
 
-public class AttachTrackToRoadsCard extends BaseCard {
+public class AttachTrackToRoadsCard extends MapBaseCard {
 
 	public AttachTrackToRoadsCard(@NonNull MapActivity mapActivity) {
 		super(mapActivity);

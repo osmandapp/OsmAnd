@@ -7,7 +7,7 @@ import java.util.List;
 class IntermediatePointsStorage extends SettingsMapPointsStorage {
 
 	public IntermediatePointsStorage(OsmandSettings osmandSettings) {
-		super(osmandSettings);
+		super(osmandSettings, false);
 		pointsKey = OsmandSettings.INTERMEDIATE_POINTS;
 		descriptionsKey = OsmandSettings.INTERMEDIATE_POINTS_DESCRIPTION;
 	}
