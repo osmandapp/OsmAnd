@@ -705,4 +705,24 @@
     <string name="poi_service_car">Layanan mobil</string>
     <string name="poi_water_supply_type">Jenis pasokan air</string>
     <string name="poi_operational_status">Status operasional</string>
+    <string name="poi_url">URL</string>
+    <string name="poi_volcano_status_inactive">Tidak aktif</string>
+    <string name="poi_volcano_status_active">Aktif</string>
+    <string name="poi_shop_security">Toko keamanan</string>
+    <string name="poi_bowling_alley">Pusat bowling</string>
+    <string name="poi_internet_access_fee_customers">Akses internet: pelanggan</string>
+    <string name="poi_video_no">Tidak</string>
+    <string name="poi_video_yes">Ya</string>
+    <string name="poi_sms_no">Tidak</string>
+    <string name="poi_sms_yes">Ya</string>
+    <string name="poi_tactile_paving_incorrect">Tidak benar</string>
+    <string name="poi_fire_hydrant_type_pipe">Pipa</string>
+    <string name="poi_drinking_water_refill_no">Isi ulang air minum: tidak</string>
+    <string name="poi_drinking_water_refill_yes">Ya</string>
+    <string name="poi_traffic_signals_arrow_no">Panah: tidak</string>
+    <string name="poi_traffic_signals_arrow_yes">Ya</string>
+    <string name="poi_traffic_signals_vibration_yes">Ya</string>
+    <string name="poi_departures_board_yes">Ya</string>
+    <string name="poi_departures_board_no">Papan keberangkatan: tidak</string>
+    <string name="poi_horseshoes">Sepatu kuda</string>
 </resources>
