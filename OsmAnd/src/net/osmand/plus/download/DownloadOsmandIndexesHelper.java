@@ -1,7 +1,6 @@
 package net.osmand.plus.download;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -13,8 +12,8 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.util.Algorithms;
+import net.osmand.plus.activities.LocalIndexHelper;
+import net.osmand.plus.activities.LocalIndexInfo;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
@@ -118,8 +117,8 @@ public class DownloadOsmandIndexesHelper {
 		} else {
 			result.setDownloadedFromInternet(true);
 		}
-		// add all tts files from assets
-		listVoiceAssets(result, amanager, pm, app.getSettings());
+		// Add all tts files from assets and data folder
+		listVoicePrompts(result, amanager, pm, app);
 		return result;
 	}
 
@@ -141,21 +140,23 @@ public class DownloadOsmandIndexesHelper {
 		return assets;
 	}
 
-	private static void listVoiceAssets(IndexFileList result, AssetManager amanager, PackageManager pm,
-	                                    OsmandSettings settings) {
+	private static void listVoicePrompts(IndexFileList result, AssetManager amanager, PackageManager pm,
+										 OsmandApplication app) {
 		try {
-			File voicePath = settings.getContext().getAppPath(IndexConstants.VOICE_INDEX_DIR);
-			// list = amanager.list("voice");
+			File voicePath = app.getAppPath(IndexConstants.VOICE_INDEX_DIR);
 			String date = "";
 			long dateModified = System.currentTimeMillis();
 			try {
-				OsmandApplication app = settings.getContext();
 				ApplicationInfo appInfo = pm.getApplicationInfo(app.getPackageName(), 0);
 				dateModified = new File(appInfo.sourceDir).lastModified();
-				date = AndroidUtils.formatDate((Context) settings.getContext(), dateModified);
+				date = AndroidUtils.formatDate(app, dateModified);
 			} catch (NameNotFoundException e) {
 				log.error(e);
 			}
+
+			String description = "voice";
+			String size = "0.1";
+
 			List<AssetEntry> mapping = getBundledAssets(amanager);
 			for (AssetEntry asset : mapping) {
 				String target = asset.destination;
@@ -167,10 +168,33 @@ public class DownloadOsmandIndexesHelper {
 					File destFile = new File(voicePath, target.substring(IndexConstants.VOICE_INDEX_DIR.length(),
 							target.indexOf("/", IndexConstants.VOICE_INDEX_DIR.length())) + "/" + lang + "_tts.js");
 					result.add(new AssetIndexItem(lang + "_" + IndexConstants.TTSVOICE_INDEX_EXT_JS,
-							"voice", date, dateModified, "0.1", destFile.length(), asset.source,
+							description, date, dateModified, size, destFile.length(), asset.source,
 							destFile.getPath(), DownloadActivityType.VOICE_FILE));
 				}
 			}
+
+			LocalIndexHelper localIndexHelper = new LocalIndexHelper(app);
+			List<LocalIndexInfo> localIndexes = new ArrayList<>();
+			localIndexHelper.loadVoiceData(voicePath, localIndexes, false, null);
+			for (LocalIndexInfo indexInfo : localIndexes) {
+				if (!indexInfo.getFileName().contains("tts")) {
+					continue;
+				}
+				boolean customVoice = true;
+				for (AssetEntry assetEntry : mapping) {
+					if (assetEntry.destination.contains("/" + indexInfo.getFileName() + "/")) {
+						customVoice = false;
+						break;
+					}
+				}
+				if (customVoice) {
+					String fileName = indexInfo.getFileName().replace("-", "_") + ".js";
+					File file = new File(voicePath, indexInfo.getFileName() + "/" + fileName);
+					result.add(new AssetIndexItem(fileName, description, date, dateModified, size,
+							file.length(), "", file.getPath(), DownloadActivityType.VOICE_FILE));
+				}
+			}
+
 			result.sort();
 		} catch (IOException e) {
 			log.error("Error while loading tts files from assets", e); //$NON-NLS-1$
