@@ -16,6 +16,7 @@ import android.os.AsyncTask;
 import android.util.Pair;
 
 import net.osmand.AndroidUtils;
+import net.osmand.FileUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
@@ -1200,7 +1201,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		} else if (object instanceof SelectedGpxPoint) {
 			SelectedGpxPoint selectedGpxPoint = (SelectedGpxPoint) object;
 			SelectedGpxFile selectedGpxFile = selectedGpxPoint.getSelectedGpxFile();
-			TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint, null, null, false);
+			TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint);
 			return true;
 		}
 		return false;
@@ -1224,7 +1225,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private void saveGpx(@NonNull GPXFile gpxFile, String gpxFileName, LatLon latLon) {
 		OsmandApplication app = view.getApplication();
 		MapActivity mapActivity = (MapActivity) view.getContext();
-		File file = app.getAppPath(IndexConstants.GPX_TRAVEL_DIR + gpxFileName);
+		File file = new File(FileUtils.getTempDir(app), gpxFileName);
 		new SaveGpxAsyncTask(file, gpxFile, new SaveGpxAsyncTask.SaveGpxListener() {
 			@Override
 			public void gpxSavingStarted() {
@@ -1241,8 +1242,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, false);
 					SelectedGpxPoint selectedGpxPoint =
 							new SelectedGpxPoint(selectedGpxFile, selectedPoint, null, null, Float.NaN);
-					TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint,
-							null, null, false, false);
+					TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint);
 				} else {
 					log.error(errorMessage);
 				}

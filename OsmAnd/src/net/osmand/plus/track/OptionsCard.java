@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 
 import net.osmand.AndroidUtils;
+import net.osmand.FileUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandPlugin;
@@ -71,12 +72,14 @@ public class OptionsCard extends BaseCard {
 		items.clear();
 
 		boolean fileAvailable = gpxFile.path != null && !gpxFile.showCurrentTrack;
-		items.add(createShowOnMapItem());
-		items.add(createAppearanceItem());
-		if (fileAvailable) {
-			items.add(createDirectionsItem());
+		if (!FileUtils.isTempFile(app, gpxFile.path)) {
+			items.add(createShowOnMapItem());
+			items.add(createAppearanceItem());
+			if (fileAvailable) {
+				items.add(createDirectionsItem());
+			}
+			items.add(createDividerItem());
 		}
-		items.add(createDividerItem());
 		if (gpxFile.getGeneralTrack() != null) {
 			items.add(createJoinGapsItem());
 		}
@@ -92,7 +95,9 @@ public class OptionsCard extends BaseCard {
 				items.add(uploadOsmItem);
 			}
 			items.add(createDividerItem());
-			items.add(createEditItem());
+			if (!FileUtils.isTempFile(app, gpxFile.path)) {
+				items.add(createEditItem());
+			}
 			items.add(createRenameItem());
 			items.add(createChangeFolderItem());
 			items.add(createDividerItem());
