@@ -36,7 +36,6 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
-import net.osmand.plus.settings.fragments.TroubleshootingOrPurchasingCard;
 
 import org.apache.commons.logging.Log;
 
@@ -165,6 +164,7 @@ public class ChoosePlanFragment extends BaseOsmAndDialogFragment {
 	}
 
 	private void initView() {
+		setupToolbar();
 		setupHeaderIconBackground();
 		createFeaturesList();
 		setupLaterButton();
@@ -172,17 +172,13 @@ public class ChoosePlanFragment extends BaseOsmAndDialogFragment {
 		fullUpdateView();
 	}
 
-	private void fullUpdateView() {
-		updateHeader();
-		updateListSelection();
-		updateContinueButtons();
-	}
+	private void setupToolbar() {
+		ImageView backBtn = view.findViewById(R.id.button_back);
+		backBtn.setImageResource(AndroidUtils.getNavigationIconResId(app));
+		backBtn.setOnClickListener(v -> dismiss());
 
-	private void selectFeature(OsmAndFeature feature) {
-		if (selectedFeature != feature) {
-			selectedFeature = feature;
-			fullUpdateView();
-		}
+		ImageView restoreBtn = view.findViewById(R.id.button_reset);
+		restoreBtn.setOnClickListener(v -> purchaseHelper.requestInventory());
 	}
 
 	private void setupHeaderIconBackground() {
@@ -225,10 +221,12 @@ public class ChoosePlanFragment extends BaseOsmAndDialogFragment {
 	}
 
 	private void setupLaterButton() {
+		View button = view.findViewById(R.id.button_later);
+		button.setOnClickListener(v -> dismiss());
+
 		int colorNoAlpha = ContextCompat.getColor(themedCtx, getActivePrimaryColorId(nightMode));
 		int colorAlpha = UiUtilities.getColorWithAlpha(colorNoAlpha, 0.15f);
 
-		View button = view.findViewById(R.id.button_later);
 		Drawable bgDrawable = UiUtilities.createTintedDrawable(app, R.drawable.rectangle_rounded, colorAlpha);
 		Drawable selectableBg = UiUtilities.getColoredSelectableDrawable(app, colorAlpha, 1.0f);
 		Drawable[] layers = {bgDrawable, selectableBg};
@@ -237,13 +235,26 @@ public class ChoosePlanFragment extends BaseOsmAndDialogFragment {
 	}
 
 	private void createTroubleshootingCard() {
-		FragmentActivity activity = getMapActivity();
+		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			FrameLayout container = view.findViewById(R.id.troubleshooting_card);
 			boolean isPaidVersion = Version.isPaidVersion(app);
-			container.addView(new TroubleshootingOrPurchasingCard(getMapActivity(), purchaseHelper, isPaidVersion)
+			container.addView(new TroubleshootingOrPurchasingCard(activity, purchaseHelper, isPaidVersion, true)
 					.build(activity));
 		}
+	}
+
+	private void selectFeature(OsmAndFeature feature) {
+		if (selectedFeature != feature) {
+			selectedFeature = feature;
+			fullUpdateView();
+		}
+	}
+
+	private void fullUpdateView() {
+		updateHeader();
+		updateListSelection();
+		updateContinueButtons();
 	}
 
 	private void updateHeader() {

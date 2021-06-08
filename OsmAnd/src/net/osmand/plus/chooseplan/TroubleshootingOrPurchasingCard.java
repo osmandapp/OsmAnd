@@ -1,4 +1,4 @@
-package net.osmand.plus.settings.fragments;
+package net.osmand.plus.chooseplan;
 
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -31,6 +31,7 @@ public class TroubleshootingOrPurchasingCard extends BaseCard {
 	protected InAppPurchaseHelper purchaseHelper;
 
 	private final boolean isPaidVersion;
+	private final boolean showPromoCodeBtn;
 
 	@Override
 	public int getCardLayoutId() {
@@ -39,15 +40,18 @@ public class TroubleshootingOrPurchasingCard extends BaseCard {
 
 	public TroubleshootingOrPurchasingCard(@NonNull FragmentActivity activity,
 	                                       @NonNull InAppPurchaseHelper purchaseHelper,
-	                                       boolean isPaidVersion) {
+	                                       boolean isPaidVersion,
+	                                       boolean showPromoCodeBtn) {
 		super(activity, false);
 		this.purchaseHelper = purchaseHelper;
 		this.isPaidVersion = isPaidVersion;
+		this.showPromoCodeBtn = showPromoCodeBtn;
 	}
 
 	@Override
 	protected void updateContent() {
 		setupRestorePurchasesBtn();
+		setupRedeemPromoCodeBtn();
 		setupNewDeviceOrAccountBtn();
 		setupSupportDescription();
 		setupContactUsLink();
@@ -59,14 +63,9 @@ public class TroubleshootingOrPurchasingCard extends BaseCard {
 			infoDescription.setText(infoPurchases);
 
 			View osmandLive = view.findViewById(R.id.osmand_live);
-			osmandLive.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					ChoosePlanDialogFragment.showDialogInstance(getMyApplication(),
-							activity.getSupportFragmentManager(),
-							ChoosePlanDialogFragment.ChoosePlanDialogType.SUBSCRIPTION);
-				}
-			});
+			osmandLive.setOnClickListener(v -> ChoosePlanDialogFragment.showDialogInstance(getMyApplication(),
+					activity.getSupportFragmentManager(),
+					ChoosePlanDialogFragment.ChoosePlanDialogType.SUBSCRIPTION));
 
 			CardView getItButtonContainer = view.findViewById(R.id.card_view);
 			int colorRes = nightMode ? R.color.switch_button_active_dark : R.color.switch_button_active_light;
@@ -91,6 +90,11 @@ public class TroubleshootingOrPurchasingCard extends BaseCard {
 				purchaseHelper.requestInventory();
 			}
 		});
+	}
+
+	protected void setupRedeemPromoCodeBtn() {
+		View redeemPromoCode = view.findViewById(R.id.redeem_promo_code);
+		redeemPromoCode.setVisibility(showPromoCodeBtn ? View.VISIBLE : View.GONE);
 	}
 
 	protected void setupNewDeviceOrAccountBtn() {
