@@ -27,10 +27,9 @@ public class TabActivity extends ActionBarProgressActivity {
 			this.mTitle = mTitle;
 			this.fragment = fragment;
 		}
-
 	}
 
-	protected void setViewPagerAdapter(ViewPager pager, List<TabItem> items){
+	protected void setViewPagerAdapter(ViewPager pager, List<TabItem> items) {
 		pager.setAdapter(new OsmandFragmentPagerAdapter(getSupportFragmentManager(), items));
 	}
 
@@ -75,7 +74,6 @@ public class TabActivity extends ActionBarProgressActivity {
 		public void addTab(TabItem tabIndicator) {
 			mTabs.add(tabIndicator);
 			notifyDataSetChanged();
-			
 		}
 	}
 }
