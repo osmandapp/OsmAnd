@@ -434,9 +434,12 @@ public class BinaryRoutePlanner {
 			// store <segment> in order to not have unique <segment, direction> in visitedSegments
 			long nextPntId = calculateRoutePointId(segment.getRoad(), prevSegmentPoint, segmentPoint);
 			RouteSegment toInsert = previous != null ? previous : segment;
-			RouteSegment existingSegment = visitedSegments.get(nextPntId);
-			if (existingSegment == null || toInsert.distanceFromStart < existingSegment.distanceFromStart) {
-				visitedSegments.put(nextPntId, toInsert);
+			RouteSegment existingSegment = visitedSegments.put(nextPntId, toInsert);
+			if (existingSegment != null && toInsert.distanceFromStart > existingSegment.distanceFromStart) {
+				// insert back original segment (test case with large area way)
+				visitedSegments.put(nextPntId, existingSegment);
+				directionAllowed = false;
+				break;
 			}
 			
 			final int x = road.getPoint31XTile(segmentPoint);
