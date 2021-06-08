@@ -153,6 +153,7 @@ public class BackupHelper {
 		public List<RemoteFile> filesToDownload = new ArrayList<>();
 		public List<LocalFile> filesToUpload = new ArrayList<>();
 		public List<RemoteFile> filesToDelete = new ArrayList<>();
+		public List<LocalFile> localFilesToDelete = new ArrayList<>();
 		public List<Pair<LocalFile, RemoteFile>> filesToMerge = new ArrayList<>();
 
 		public List<SettingsItem> getItemsToUpload() {
