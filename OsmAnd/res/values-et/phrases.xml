@@ -41,8 +41,8 @@
     <string name="poi_chocolate">Šokolaadipood</string>
     <string name="poi_coffee">Kohvipood</string>
     <string name="poi_mall">Kaubanduskeskus</string>
-    <string name="poi_beverages">Joogi pood</string>
-    <string name="poi_butcher">Liha turg</string>
+    <string name="poi_beverages">Joogipood</string>
+    <string name="poi_butcher">Lihaturg</string>
     <string name="poi_deli">Delikatessid</string>
     <string name="poi_farm">Talupood</string>
     <string name="poi_greengrocer">Puu-ja köögivili</string>
@@ -172,7 +172,7 @@
     <string name="poi_bed">Voodipesu pood</string>
     <string name="poi_trade">Kauplemispunkt</string>
     <string name="poi_vacuum_cleaner">Tolmuimejate pood</string>
-    <string name="poi_video">Video pood</string>
+    <string name="poi_video">Videopood</string>
     <string name="poi_window_blind">Aknakatete pood</string>
     <string name="poi_electronics">Elektroonikapood</string>
     <string name="poi_atv">Maastikukulgurite pood</string>
@@ -240,7 +240,7 @@
     <string name="poi_microbrewery">Väikepruulikoda</string>
     <string name="poi_beauty_salon_service">Teenus</string>
     <string name="poi_recycling_type">Liik</string>
-    <string name="poi_recycling_accepted_waste">Vastuvõetud jäätmed</string>
+    <string name="poi_recycling_accepted_waste">Vastuvõetavad jäätmed</string>
     <string name="poi_shelter_type">Liik</string>
     <string name="poi_fireplace">Kamin</string>
     <string name="poi_seasonal">Hooajaline</string>
@@ -1960,11 +1960,11 @@
     <string name="poi_industrial_depot">Liik: depoo</string>
     <string name="poi_note">Märge</string>
     <string name="poi_watering_place">Kastmiskoht</string>
-    <string name="poi_animal_boarding">Loomade pardaleminek</string>
-    <string name="poi_animal_boarding_dog">Pardalemineku liik: koer</string>
-    <string name="poi_animal_boarding_cat">Pardalemineku liik: kass</string>
-    <string name="poi_animal_boarding_dog_cat">Pardalemineku liik: koer, kass</string>
-    <string name="poi_animal_boarding_horse">Pardalemineku liik: hobune</string>
+    <string name="poi_animal_boarding">Loomahotell</string>
+    <string name="poi_animal_boarding_dog">Loomahotell koertele</string>
+    <string name="poi_animal_boarding_cat">Loomahotell kassidele</string>
+    <string name="poi_animal_boarding_dog_cat">Loomahotell koertele ja kassidele</string>
+    <string name="poi_animal_boarding_horse">Loomahotell hobustele</string>
     <string name="poi_historic_aircraft">Ajalooline õhusõiduk</string>
     <string name="poi_elevator_yes">Liftiga</string>
     <string name="poi_elevator_no">Ilma liftita</string>
@@ -3094,7 +3094,7 @@
     <string name="poi_tower_construction_dome">Ehitus: kuppel</string>
     <string name="poi_tower_construction_concealed">Ehitus: varjatud</string>
     <string name="poi_railway_yard">Kaubajaam</string>
-    <string name="poi_coworking_space">Koostöötamise ruum</string>
+    <string name="poi_coworking_space">Vabakontor</string>
     <string name="poi_fast_food_cafeteria">Jah</string>
     <string name="poi_drink_wine_yes">Vein: jah</string>
     <string name="poi_drink_wine_retail">Vein: jaemüük</string>
@@ -3965,4 +3965,5 @@
     <string name="poi_climbing_grade_uiaa_min">Kaljuronimise lihtsaim marsruut (UIAA süsteemi järgi)</string>
     <string name="poi_climbing_grade_french_min">Kaljuronimise lihtsaim marsruut (prantsuse süsteemi järgi)</string>
     <string name="poi_climbing_grade_saxon_min">Kaljuronimise lihtsaim marsruut (anglosaksi süsteemi järgi)</string>
+    <string name="poi_fuel_propane">Propaan</string>
 </resources>
