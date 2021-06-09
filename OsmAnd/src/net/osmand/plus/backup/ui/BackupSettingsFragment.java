@@ -39,6 +39,7 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -50,7 +51,7 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 	private OsmandApplication app;
 	private BackupHelper backupHelper;
 
-	private List<SettingsItem> oldItems;
+	private List<SettingsItem> oldItems = new ArrayList<>();
 
 	private ProgressBar progressBar;
 
@@ -171,7 +172,7 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 			@Override
 			public void onClick(View v) {
 				FragmentActivity activity = getActivity();
-				if (activity != null && !Algorithms.isEmpty(oldItems)) {
+				if (activity != null) {
 					VersionHistoryFragment.showInstance(activity.getSupportFragmentManager(), oldItems);
 				}
 			}
@@ -184,7 +185,9 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 			AndroidUiHelper.updateVisibility(summary, true);
 			int filesSize = 0;
 			for (RemoteFile remoteFile : remoteFiles) {
-				filesSize += remoteFile.getFilesize();
+				if (oldItems.contains(remoteFile.item)) {
+					filesSize += remoteFile.getFilesize();
+				}
 			}
 			summary.setText(AndroidUtils.formatSize(app, filesSize));
 		} else {

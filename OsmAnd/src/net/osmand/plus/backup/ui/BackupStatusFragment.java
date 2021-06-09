@@ -15,9 +15,11 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.BackupHelper.BackupInfo;
+import net.osmand.plus.backup.BackupHelper.OnDeleteFilesListener;
 import net.osmand.plus.backup.NetworkSettingsHelper.BackupExportListener;
-import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
 import net.osmand.plus.backup.PrepareBackupResult;
+import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
+import net.osmand.plus.backup.RemoteFile;
 import net.osmand.plus.backup.ui.cards.BackupStatusCard;
 import net.osmand.plus.backup.ui.cards.BackupUploadCard;
 import net.osmand.plus.backup.ui.cards.LocalBackupCard;
@@ -28,8 +30,10 @@ import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.util.Algorithms;
 
+import java.util.Map;
+
 public class BackupStatusFragment extends BaseOsmAndFragment implements CardListener, BackupExportListener,
-		OnPrepareBackupListener {
+		OnDeleteFilesListener, OnPrepareBackupListener {
 
 	private OsmandApplication app;
 
@@ -120,7 +124,7 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements CardList
 		MapActivity mapActivity = getMapActivity();
 		BackupInfo backupInfo = getBackupInfo();
 		if (mapActivity != null && backupInfo != null) {
-			uploadCard = new BackupUploadCard(mapActivity, backupInfo, this);
+			uploadCard = new BackupUploadCard(mapActivity, backupInfo, this, this);
 			uploadCard.setListener(this);
 			cardsContainer.addView(uploadCard.build(mapActivity), 0);
 		}
@@ -187,5 +191,20 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements CardList
 	@Override
 	public void onBackupExportFinished(boolean succeed) {
 		app.getBackupHelper().prepareBackup();
+	}
+
+	@Override
+	public void onFileDeleteProgress(@NonNull RemoteFile file) {
+
+	}
+
+	@Override
+	public void onFilesDeleteDone(@NonNull Map<RemoteFile, String> errors) {
+
+	}
+
+	@Override
+	public void onFilesDeleteError(int status, @NonNull String message) {
+
 	}
 }
