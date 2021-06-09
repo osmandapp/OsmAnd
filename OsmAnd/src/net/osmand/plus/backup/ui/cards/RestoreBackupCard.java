@@ -26,7 +26,7 @@ import java.util.List;
 
 public class RestoreBackupCard extends MapBaseCard {
 
-	private BackupInfo info;
+	private final BackupInfo info;
 
 	public RestoreBackupCard(@NonNull MapActivity mapActivity, BackupInfo info) {
 		super(mapActivity, false);

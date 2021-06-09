@@ -92,12 +92,13 @@ class BackupImporter {
 		for (RemoteFile remoteFile : remoteFiles) {
 			SettingsItem item = null;
 			for (SettingsItem settingsItem : items) {
-				if (settingsItem.equals(remoteFile.item)) {
+				String fileName = remoteFile.item != null ? remoteFile.item.getFileName() : null;
+				if (fileName != null && settingsItem.applyFileName(fileName)) {
 					item = settingsItem;
 					break;
 				}
 			}
-			if (item != null && !item.shouldReadOnCollecting()) {
+			if (item != null/* && !item.shouldReadOnCollecting()*/) {
 				FileInputStream is = null;
 				try {
 					SettingsItemReader<? extends SettingsItem> reader = item.getReader();
@@ -110,6 +111,13 @@ class BackupImporter {
 						if (errors.isEmpty()) {
 							is = new FileInputStream(tempFile);
 							reader.readFromStream(is, fileName);
+							if (item instanceof FileSettingsItem) {
+								String itemFileName = BackupHelper.getFileItemName((FileSettingsItem) item);
+								if (app.getAppPath(itemFileName).isDirectory()) {
+									backupHelper.updateFileUploadTime(item.getType().name(), itemFileName,
+											remoteFile.getClienttimems());
+								}
+							}
 						} else {
 							throw new IOException("Error reading temp item file " + fileName + ": " +
 									errors.values().iterator().next());
