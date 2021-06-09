@@ -1024,7 +1024,7 @@ public class BackupHelper {
 						settingsTypes.add(type);
 					}
 				}
-				return app.getFileSettingsHelper().getFilteredSettingsItems(settingsTypes, true, true);
+				return app.getFileSettingsHelper().getFilteredSettingsItems(settingsTypes, true, true, true);
 			}
 
 			@Override
