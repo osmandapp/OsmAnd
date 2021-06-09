@@ -125,11 +125,11 @@ public abstract class SettingsHelper {
 		return app;
 	}
 
-	public List<SettingsItem> getFilteredSettingsItems(List<ExportSettingsType> settingsTypes, boolean addProfiles, boolean export) {
+	public List<SettingsItem> getFilteredSettingsItems(List<ExportSettingsType> settingsTypes, boolean addProfiles, boolean export, boolean addEmptyItems) {
 		Map<ExportSettingsType, List<?>> typesMap = new HashMap<>();
-		typesMap.putAll(getSettingsItems(addProfiles, false));
-		typesMap.putAll(getMyPlacesItems(false));
-		typesMap.putAll(getResourcesItems(false));
+		typesMap.putAll(getSettingsItems(addProfiles, addEmptyItems));
+		typesMap.putAll(getMyPlacesItems(addEmptyItems));
+		typesMap.putAll(getResourcesItems(addEmptyItems));
 
 		return getFilteredSettingsItems(typesMap, settingsTypes, Collections.emptyList(), export);
 	}
