@@ -446,6 +446,8 @@ public class BackupHelper {
 		prepareBackupListeners.add(listener);
 		if (isBackupPreparing()) {
 			listener.onBackupPreparing();
+		} else {
+			listener.onBackupPrepared(getBackup());
 		}
 	}
 
