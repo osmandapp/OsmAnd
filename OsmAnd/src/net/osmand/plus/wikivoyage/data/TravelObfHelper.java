@@ -72,7 +72,7 @@ public class TravelObfHelper implements TravelHelper {
 	public static final int ARTICLE_SEARCH_RADIUS = 50 * 1000;
 	public static final int SAVED_ARTICLE_SEARCH_RADIUS = 30 * 1000;
 	public static final int MAX_SEARCH_RADIUS = 800 * 1000;
-	public static final String ROUTE_TRACK_POINT = "route_track_pointq";
+	public static final String ROUTE_TRACK_POINT = "route_track_point";
 
 	private final OsmandApplication app;
 	private final Collator collator;
