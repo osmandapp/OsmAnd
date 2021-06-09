@@ -75,6 +75,10 @@ public class RemoteFile {
 		return filesize;
 	}
 
+	public boolean isDeleted() {
+		return filesize < 0;
+	}
+
 	public String getType() {
 		return type;
 	}

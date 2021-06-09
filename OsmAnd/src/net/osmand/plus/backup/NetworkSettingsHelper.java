@@ -7,7 +7,6 @@ import androidx.annotation.Nullable;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.backup.BackupHelper.CollectType;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
@@ -90,9 +89,9 @@ public class NetworkSettingsHelper extends SettingsHelper {
 		}
 	}
 
-	public void collectSettings(String latestChanges, int version, CollectType collectType,
+	public void collectSettings(String latestChanges, int version,
 								@Nullable BackupCollectListener listener) {
-		new ImportBackupTask(this, latestChanges, version, collectType, listener)
+		new ImportBackupTask(this, latestChanges, version, listener)
 				.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
