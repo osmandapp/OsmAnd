@@ -110,7 +110,7 @@ class BackupImporter {
 						Map<File, String> errors = backupHelper.downloadFilesSync(map, null);
 						if (errors.isEmpty()) {
 							is = new FileInputStream(tempFile);
-							reader.readFromStream(is, fileName);
+							reader.readFromStream(is, remoteFile.getName());
 							if (item instanceof FileSettingsItem) {
 								String itemFileName = BackupHelper.getFileItemName((FileSettingsItem) item);
 								if (app.getAppPath(itemFileName).isDirectory()) {
