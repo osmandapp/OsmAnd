@@ -1,7 +1,6 @@
 package net.osmand.plus.settings.backend;
 
 import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
@@ -78,7 +77,10 @@ public enum ExportSettingsType {
 	}
 
 	@Nullable
-	public static ExportSettingsType getExportSettingsTypeForItem(@NonNull SettingsItem item) {
+	public static ExportSettingsType getExportSettingsTypeForItem(@Nullable SettingsItem item) {
+		if (item == null) {
+			return null;
+		}
 		for (ExportSettingsType exportType : ExportSettingsType.values()) {
 			if (exportType.getItemName().equals(item.getType().name())) {
 				if (item.getType() == SettingsItemType.FILE) {

@@ -1118,7 +1118,7 @@ public class BackupHelper {
 					}
 					if (!hasLocalFile && !remoteFile.isDeleted()) {
 						ExportSettingsType exportType = ExportSettingsType.getExportSettingsTypeForItem(remoteFile.item);
-						if (exportType != null && getBackupTypePref(exportType).get()) {
+						if (exportType == null || getBackupTypePref(exportType).get()) {
 							if (backupLastUploadedTime > 0 && backupLastUploadedTime >= remoteFile.getClienttimems()) {
 								info.filesToDelete.add(remoteFile);
 							} else {
