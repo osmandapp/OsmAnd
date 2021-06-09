@@ -49,7 +49,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -160,6 +159,17 @@ public class BackupHelper {
 			List<SettingsItem> items = new ArrayList<>();
 			for (LocalFile localFile : filesToUpload) {
 				SettingsItem item = localFile.item;
+				if (item != null && !items.contains(item)) {
+					items.add(item);
+				}
+			}
+			return items;
+		}
+
+		public List<SettingsItem> getItemsToDelete() {
+			List<SettingsItem> items = new ArrayList<>();
+			for (RemoteFile remoteFile : filesToDelete) {
+				SettingsItem item = remoteFile.item;
 				if (item != null && !items.contains(item)) {
 					items.add(item);
 				}
@@ -1088,10 +1098,13 @@ public class BackupHelper {
 						}
 					}
 					if (!hasLocalFile) {
-						if (backupLastUploadedTime > 0 && backupLastUploadedTime >= remoteFile.getClienttimems()) {
-							info.filesToDelete.add(remoteFile);
-						} else {
-							info.filesToDownload.add(remoteFile);
+						ExportSettingsType exportType = ExportSettingsType.getExportSettingsTypeForItem(remoteFile.item);
+						if (exportType != null && getBackupTypePref(exportType).get()) {
+							if (backupLastUploadedTime > 0 && backupLastUploadedTime >= remoteFile.getClienttimems()) {
+								info.filesToDelete.add(remoteFile);
+							} else {
+								info.filesToDownload.add(remoteFile);
+							}
 						}
 					}
 				}

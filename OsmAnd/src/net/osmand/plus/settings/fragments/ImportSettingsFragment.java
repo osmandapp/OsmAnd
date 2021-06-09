@@ -62,7 +62,7 @@ public abstract class ImportSettingsFragment extends BaseSettingsListFragment {
 			duplicateStartTime = savedInstanceState.getLong(DUPLICATES_START_TIME_KEY);
 		}
 		if (settingsItems != null) {
-			dataList = SettingsHelper.getSettingsToOperateByCategory(settingsItems, false);
+			dataList = SettingsHelper.getSettingsToOperateByCategory(settingsItems, false, false);
 		}
 	}
 
