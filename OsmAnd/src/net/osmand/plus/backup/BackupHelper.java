@@ -160,6 +160,17 @@ public class BackupHelper {
 			}
 			return items;
 		}
+
+		public List<SettingsItem> getItemsToDelete() {
+			List<SettingsItem> items = new ArrayList<>();
+			for (RemoteFile remoteFile : filesToDelete) {
+				SettingsItem item = remoteFile.item;
+				if (item != null && !items.contains(item)) {
+					items.add(item);
+				}
+			}
+			return items;
+		}
 	}
 
 	public BackupHelper(@NonNull OsmandApplication app) {
@@ -1106,10 +1117,13 @@ public class BackupHelper {
 						}
 					}
 					if (!hasLocalFile && !remoteFile.isDeleted()) {
-						if (backupLastUploadedTime > 0 && backupLastUploadedTime >= remoteFile.getClienttimems()) {
-							info.filesToDelete.add(remoteFile);
-						} else {
-							info.filesToDownload.add(remoteFile);
+						ExportSettingsType exportType = ExportSettingsType.getExportSettingsTypeForItem(remoteFile.item);
+						if (exportType != null && getBackupTypePref(exportType).get()) {
+							if (backupLastUploadedTime > 0 && backupLastUploadedTime >= remoteFile.getClienttimems()) {
+								info.filesToDelete.add(remoteFile);
+							} else {
+								info.filesToDownload.add(remoteFile);
+							}
 						}
 					}
 				}

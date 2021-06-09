@@ -30,7 +30,7 @@ import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.fragments.BaseSettingsListFragment;
 import net.osmand.plus.settings.fragments.SettingsCategoryItems;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.EnumMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -61,8 +61,8 @@ public class VersionHistoryFragment extends BaseOsmAndFragment implements OnItem
 		app = requireMyApplication();
 		backupHelper = app.getBackupHelper();
 		nightMode = !app.getSettings().isLightContent();
+		dataList = SettingsHelper.getSettingsToOperateByCategory(settingsItems, false, true);
 		selectedItemsMap = getSelectedItems();
-		dataList = SettingsHelper.getSettingsToOperateByCategory(settingsItems, false);
 	}
 
 	@Nullable
@@ -88,14 +88,14 @@ public class VersionHistoryFragment extends BaseOsmAndFragment implements OnItem
 		SettingsCategoryItems categoryItems = dataList.get(category);
 		for (ExportSettingsType type : categoryItems.getTypes()) {
 			backupHelper.getVersionHistoryTypePref(type).set(selected);
-			selectedItemsMap.put(type, selected ? categoryItems.getItemsForType(type) : new ArrayList<>());
+			selectedItemsMap.put(type, selected ? categoryItems.getItemsForType(type) : null);
 		}
 	}
 
 	@Override
 	public void onTypeSelected(ExportSettingsType type, boolean selected) {
 		backupHelper.getVersionHistoryTypePref(type).set(selected);
-		selectedItemsMap.put(type, selected ? getItemsForType(type) : new ArrayList<>());
+		selectedItemsMap.put(type, selected ? getItemsForType(type) : null);
 	}
 
 	@Override
@@ -141,7 +141,7 @@ public class VersionHistoryFragment extends BaseOsmAndFragment implements OnItem
 	protected Map<ExportSettingsType, List<?>> getSelectedItems() {
 		Map<ExportSettingsType, List<?>> selectedItemsMap = new EnumMap<>(ExportSettingsType.class);
 		for (ExportSettingsType type : ExportSettingsType.values()) {
-			if (backupHelper.getBackupTypePref(type).get()) {
+			if (backupHelper.getVersionHistoryTypePref(type).get()) {
 				selectedItemsMap.put(type, getItemsForType(type));
 			}
 		}
@@ -154,7 +154,7 @@ public class VersionHistoryFragment extends BaseOsmAndFragment implements OnItem
 				return (List<Object>) categoryItems.getItemsForType(type);
 			}
 		}
-		return null;
+		return Collections.emptyList();
 	}
 
 	@Nullable

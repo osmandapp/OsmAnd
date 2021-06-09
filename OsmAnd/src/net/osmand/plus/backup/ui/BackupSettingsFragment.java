@@ -39,6 +39,7 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -50,7 +51,7 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 	private OsmandApplication app;
 	private BackupHelper backupHelper;
 
-	private List<SettingsItem> oldItems;
+	private List<SettingsItem> oldItems = new ArrayList<>();
 
 	private ProgressBar progressBar;
 
@@ -90,6 +91,7 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 		setupBackupTypes(view);
 		setupDeleteAllData(view);
 		setupRemoveOldData(view);
+		setupVersionHistory(view);
 
 		return view;
 	}
@@ -97,17 +99,16 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 	@Override
 	public void onResume() {
 		super.onResume();
-		View view = getView();
-		if (view != null) {
-			setupVersionHistory(view);
+		backupHelper.addPrepareBackupListener(this);
+		if (!backupHelper.isBackupPreparing()) {
+			onBackupPrepared(backupHelper.getBackup());
 		}
-		app.getBackupHelper().addPrepareBackupListener(this);
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		app.getBackupHelper().removePrepareBackupListener(this);
+		backupHelper.removePrepareBackupListener(this);
 	}
 
 	private void setupBackupTypes(View view) {
@@ -171,7 +172,7 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 			@Override
 			public void onClick(View v) {
 				FragmentActivity activity = getActivity();
-				if (activity != null && !Algorithms.isEmpty(oldItems)) {
+				if (activity != null) {
 					VersionHistoryFragment.showInstance(activity.getSupportFragmentManager(), oldItems);
 				}
 			}
@@ -184,7 +185,9 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 			AndroidUiHelper.updateVisibility(summary, true);
 			int filesSize = 0;
 			for (RemoteFile remoteFile : remoteFiles) {
-				filesSize += remoteFile.getFilesize();
+				if (oldItems.contains(remoteFile.item)) {
+					filesSize += remoteFile.getFilesize();
+				}
 			}
 			summary.setText(AndroidUtils.formatSize(app, filesSize));
 		} else {
