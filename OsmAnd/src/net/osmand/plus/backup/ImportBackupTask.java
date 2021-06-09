@@ -6,9 +6,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.backup.BackupHelper.CollectType;
 import net.osmand.plus.backup.BackupImporter.CollectItemsResult;
 import net.osmand.plus.backup.NetworkSettingsHelper.BackupCollectListener;
+import net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.CheckDuplicatesListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportType;
@@ -40,18 +40,17 @@ public class ImportBackupTask extends AsyncTask<Void, Void, List<SettingsItem>> 
 	private List<RemoteFile> remoteFiles;
 
 	private final ImportType importType;
-	private CollectType collectType;
+	private RemoteFilesType remoteFilesType;
 	private boolean importDone;
 
 	ImportBackupTask(@NonNull NetworkSettingsHelper helper,
-					 String latestChanges, int version, CollectType collectType,
+					 String latestChanges, int version,
 					 @Nullable BackupCollectListener collectListener) {
 		this.helper = helper;
 		this.app = helper.getApp();
 		this.collectListener = collectListener;
 		this.latestChanges = latestChanges;
 		this.version = version;
-		this.collectType = collectType;
 		importer = new BackupImporter(app.getBackupHelper());
 		importType = ImportType.COLLECT;
 	}
@@ -97,7 +96,7 @@ public class ImportBackupTask extends AsyncTask<Void, Void, List<SettingsItem>> 
 			case COLLECT:
 			case COLLECT_AND_READ:
 				try {
-					CollectItemsResult result = importer.collectItems(collectType, importType == ImportType.COLLECT_AND_READ);
+					CollectItemsResult result = importer.collectItems(importType == ImportType.COLLECT_AND_READ);
 					remoteFiles = result.remoteFiles;
 					return result.items;
 				} catch (IllegalArgumentException e) {

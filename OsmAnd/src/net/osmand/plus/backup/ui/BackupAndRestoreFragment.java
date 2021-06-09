@@ -54,6 +54,8 @@ public class BackupAndRestoreFragment extends BaseOsmAndFragment {
 		setupTabs(view);
 		setupToolbar(view);
 
+		requireMyApplication().getBackupHelper().prepareBackup();
+
 		return view;
 	}
 
