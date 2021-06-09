@@ -91,6 +91,7 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 		setupBackupTypes(view);
 		setupDeleteAllData(view);
 		setupRemoveOldData(view);
+		setupVersionHistory(view);
 
 		return view;
 	}
@@ -98,17 +99,16 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 	@Override
 	public void onResume() {
 		super.onResume();
-		View view = getView();
-		if (view != null) {
-			setupVersionHistory(view);
+		backupHelper.addPrepareBackupListener(this);
+		if (!backupHelper.isBackupPreparing()) {
+			onBackupPrepared(backupHelper.getBackup());
 		}
-		app.getBackupHelper().addPrepareBackupListener(this);
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		app.getBackupHelper().removePrepareBackupListener(this);
+		backupHelper.removePrepareBackupListener(this);
 	}
 
 	private void setupBackupTypes(View view) {
