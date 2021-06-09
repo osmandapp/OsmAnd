@@ -17,6 +17,7 @@ public class PrepareBackupResult {
 	private List<SettingsItem> settingsItems;
 	private List<RemoteFile> remoteFiles;
 	private List<RemoteFile> uniqueRemoteFiles;
+	private List<RemoteFile> uniqueInfoRemoteFiles;
 	private List<RemoteFile> deletedRemoteFiles;
 	private List<RemoteFile> oldRemoteFiles;
 	private List<LocalFile> localFiles;
@@ -25,6 +26,7 @@ public class PrepareBackupResult {
 	public enum RemoteFilesType {
 		ALL,
 		UNIQUE,
+		UNIQUE_INFO,
 		DELETED,
 		OLD,
 	}
@@ -41,7 +43,6 @@ public class PrepareBackupResult {
 	}
 
 	public List<RemoteFile> getRemoteFiles() {
-		// (!remoteFile.getName().endsWith(BackupHelper.INFO_EXT)) {
 		return remoteFiles;
 	}
 
@@ -49,12 +50,14 @@ public class PrepareBackupResult {
 		switch (type) {
 			case UNIQUE:
 				return uniqueRemoteFiles;
+			case UNIQUE_INFO:
+				return uniqueInfoRemoteFiles;
 			case DELETED:
 				return deletedRemoteFiles;
 			case OLD:
 				return oldRemoteFiles;
 			default:
-				return remoteFiles;
+				return this.remoteFiles;
 		}
 	}
 
@@ -88,12 +91,15 @@ public class PrepareBackupResult {
 
 	void setRemoteFiles(List<RemoteFile> remoteFiles) {
 		List<RemoteFile> uniqueRemoteFiles = new ArrayList<>();
+		List<RemoteFile> uniqueInfoRemoteFiles = new ArrayList<>();
 		List<RemoteFile> deletedRemoteFiles = new ArrayList<>();
 		Set<String> uniqueFileIds = new TreeSet<>();
 		for (RemoteFile rf : remoteFiles) {
 			String fileId = rf.getTypeNamePath();
 			if (uniqueFileIds.add(fileId)) {
-				if (rf.isDeleted()) {
+				if (rf.isInfoFile()) {
+					uniqueInfoRemoteFiles.add(rf);
+				} else if (rf.isDeleted()) {
 					deletedRemoteFiles.add(rf);
 				} else {
 					uniqueRemoteFiles.add(rf);
@@ -107,6 +113,7 @@ public class PrepareBackupResult {
 			}
 		}
 		this.uniqueRemoteFiles = uniqueRemoteFiles;
+		this.uniqueInfoRemoteFiles = uniqueInfoRemoteFiles;
 		this.deletedRemoteFiles = deletedRemoteFiles;
 		this.oldRemoteFiles = oldRemoteFiles;
 		this.remoteFiles = remoteFiles;
