@@ -28,7 +28,7 @@ import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.fragments.BaseSettingsListFragment;
 import net.osmand.plus.settings.fragments.SettingsCategoryItems;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.EnumMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -58,7 +58,7 @@ public class BackupTypesFragment extends BaseOsmAndFragment implements OnItemSel
 		app = requireMyApplication();
 		backupHelper = app.getBackupHelper();
 		nightMode = !app.getSettings().isLightContent();
-		dataList = app.getFileSettingsHelper().getSettingsByCategory(true);
+		dataList = app.getFileSettingsHelper().getSettingsByCategory(true, true);
 		selectedItemsMap = getSelectedItems();
 	}
 
@@ -85,14 +85,14 @@ public class BackupTypesFragment extends BaseOsmAndFragment implements OnItemSel
 		SettingsCategoryItems categoryItems = dataList.get(category);
 		for (ExportSettingsType type : categoryItems.getTypes()) {
 			backupHelper.getBackupTypePref(type).set(selected);
-			selectedItemsMap.put(type, selected ? categoryItems.getItemsForType(type) : new ArrayList<>());
+			selectedItemsMap.put(type, selected ? categoryItems.getItemsForType(type) : null);
 		}
 	}
 
 	@Override
 	public void onTypeSelected(ExportSettingsType type, boolean selected) {
 		backupHelper.getBackupTypePref(type).set(selected);
-		selectedItemsMap.put(type, selected ? getItemsForType(type) : new ArrayList<>());
+		selectedItemsMap.put(type, selected ? getItemsForType(type) : null);
 	}
 
 	@Override
@@ -151,7 +151,7 @@ public class BackupTypesFragment extends BaseOsmAndFragment implements OnItemSel
 				return (List<Object>) categoryItems.getItemsForType(type);
 			}
 		}
-		return null;
+		return Collections.emptyList();
 	}
 
 	@Nullable

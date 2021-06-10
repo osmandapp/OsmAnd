@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import net.osmand.Location;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.views.layers.geometry.GeometryWayDrawer.DrawPathData;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapAlgorithms;
 import net.osmand.util.MapUtils;
 
@@ -380,22 +381,10 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 				canvas.rotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 				calculatePath(tb, tx, ty, styles, pathsData);
 
-				drawer.drawFullBorder(canvas, tb.getZoom(), pathsData);
-				drawer.drawSegmentBorder(canvas, tb.getZoom(), pathsData.get(0));
-				for (int i = 1; i <= pathsData.size(); i++) {
-					if (i != pathsData.size()) {
-						DrawPathData prev = pathsData.get(i);
-						if (prev.style.hasPathLine()) {
-							drawer.drawSegmentBorder(canvas, tb.getZoom(), prev);
-						}
-					}
-
-					DrawPathData pd = pathsData.get(i - 1);
-					GeometryWayStyle<?> style = pd.style;
-					if (style.hasPathLine()) {
-						drawer.drawPath(canvas, pd);
-					}
+				if (!Algorithms.isEmpty(pathsData)) {
+					drawPathLine(canvas, tb, pathsData);
 				}
+
 				context.clearCustomColor();
 				context.clearCustomShader();
 			}
@@ -403,6 +392,25 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 		} finally {
 			if (hasPathLine) {
 				canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
+			}
+		}
+	}
+
+	private void drawPathLine(Canvas canvas, RotatedTileBox tb, List<DrawPathData> pathsData) {
+		drawer.drawFullBorder(canvas, tb.getZoom(), pathsData);
+		drawer.drawSegmentBorder(canvas, tb.getZoom(), pathsData.get(0));
+		for (int i = 1; i <= pathsData.size(); i++) {
+			if (i != pathsData.size()) {
+				DrawPathData prev = pathsData.get(i);
+				if (prev.style.hasPathLine()) {
+					drawer.drawSegmentBorder(canvas, tb.getZoom(), prev);
+				}
+			}
+
+			DrawPathData pd = pathsData.get(i - 1);
+			GeometryWayStyle<?> style = pd.style;
+			if (style.hasPathLine()) {
+				drawer.drawPath(canvas, pd);
 			}
 		}
 	}

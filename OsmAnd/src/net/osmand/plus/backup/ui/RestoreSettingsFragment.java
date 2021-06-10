@@ -106,7 +106,7 @@ public class RestoreSettingsFragment extends ImportSettingsFragment {
 	}
 
 	private void importItems() {
-		List<SettingsItem> selectedItems = settingsHelper.prepareSettingsItems(adapter.getData(), settingsItems, false);
+		List<SettingsItem> selectedItems = settingsHelper.prepareSettingsItems(adapter.getData(), settingsItems, false, false);
 		if (settingsItems != null) {
 			duplicateStartTime = System.currentTimeMillis();
 			settingsHelper.checkDuplicates(settingsItems, selectedItems, getDuplicatesListener());

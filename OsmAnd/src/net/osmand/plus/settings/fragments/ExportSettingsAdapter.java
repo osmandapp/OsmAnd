@@ -87,7 +87,7 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		titleTv.setText(UiUtilities.createCustomFontSpannable(FontCache.getRobotoMedium(app), title, title));
 
 		TextView subTextTv = group.findViewById(R.id.sub_text_tv);
-		subTextTv.setText(getCategoryDescr(app, itemsMap, selectedItemsMap, category, exportMode));
+		subTextTv.setText(getCategoryDescr(category, exportMode));
 
 		int selectedTypes = 0;
 		for (ExportSettingsType type : items.getTypes()) {
@@ -142,7 +142,7 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		titleTv.setText(type.getTitleId());
 
 		TextView subTextTv = child.findViewById(R.id.sub_text_tv);
-		subTextTv.setText(getSelectedTypeDescr(app, selectedItemsMap, type, items));
+		subTextTv.setText(getSelectedTypeDescr(type, items));
 
 		ImageView icon = child.findViewById(R.id.explicit_indicator);
 		setupIcon(icon, type.getIconRes(), !Algorithms.isEmpty(selectedItems));
@@ -263,8 +263,7 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		return selectedItems;
 	}
 
-	public static String getCategoryDescr(OsmandApplication app, Map<ExportSettingsCategory, SettingsCategoryItems> itemsMap,
-										  Map<ExportSettingsType, List<?>> selectedItemsMap, ExportSettingsCategory category, boolean exportMode) {
+	private String getCategoryDescr(ExportSettingsCategory category, boolean exportMode) {
 		long itemsSize = 0;
 		int selectedTypes = 0;
 		SettingsCategoryItems items = itemsMap.get(category);
@@ -298,8 +297,7 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		return itemsSize;
 	}
 
-	public static String getSelectedTypeDescr(OsmandApplication app, Map<ExportSettingsType, List<?>> selectedItemsMap,
-											  ExportSettingsType type, List<?> items) {
+	private String getSelectedTypeDescr(ExportSettingsType type, List<?> items) {
 		long itemsSize = 0;
 		int selectedTypes = 0;
 

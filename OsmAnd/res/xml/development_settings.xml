@@ -71,13 +71,6 @@
 		android:title="@string/test_voice_prompts" />
 
 	<Preference
-		android:key="test_backup"
-		android:layout="@layout/preference_with_descr"
-		android:persistent="false"
-		android:summary="Register and backup/restore tracks and favorites"
-		android:title="Test backup" />
-
-	<Preference
 		android:key="logcat_buffer"
 		android:layout="@layout/preference_with_descr"
 		android:persistent="false"

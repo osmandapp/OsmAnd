@@ -3030,7 +3030,7 @@
     <string name="new_profile">Nuevo perfil</string>
     <string name="shared_string_crash">Error</string>
     <string name="last_launch_crashed">OsmAnd falló la última vez. Por favor, ayúdanos a mejorar OsmAnd compartiendo el mensaje de error.</string>
-    <string name="app_mode_ufo">OVNI</string>
+    <string name="app_mode_ufo">Ovni</string>
     <string name="release_3_4">• Perfiles de aplicación: crea un perfil personalizado según tus necesidades, con un icono y color personalizado.
 \n
 \n • Ahora puedes personalizar las velocidades predefinidas, máximas y mínimas de cualquier perfil
@@ -4172,4 +4172,5 @@
     <string name="restore_selected_data">Restaurar datos marcados</string>
     <string name="receiving_data_from_server">Recibir datos del servidor</string>
     <string name="restore_complete">Restauración completa</string>
+    <string name="grey_color_slope">El color gris se usa al no estar definida la pendiente.</string>
 </resources>

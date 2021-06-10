@@ -101,8 +101,8 @@ class SettingsImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 									FileImportSettingsFragment.showInstance(fragmentManager, pluginIndependentItems, file);
 								}
 							} else {
-								Map<ExportSettingsType, List<?>> allSettingsMap = getSettingsToOperate(pluginIndependentItems, false);
-								List<SettingsItem> settingsList = settingsHelper.getFilteredSettingsItems(allSettingsMap, settingsTypes, pluginIndependentItems, false);
+								Map<ExportSettingsType, List<?>> allSettingsMap = getSettingsToOperate(pluginIndependentItems, false, false);
+								List<SettingsItem> settingsList = settingsHelper.getFilteredSettingsItems(allSettingsMap, settingsTypes, pluginIndependentItems, false, false);
 								settingsHelper.checkDuplicates(file, settingsList, settingsList, getDuplicatesListener(file, replace));
 							}
 						}

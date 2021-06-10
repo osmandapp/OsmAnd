@@ -7,8 +7,8 @@ import net.osmand.FileUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.backup.BackupHelper.CollectType;
 import net.osmand.plus.backup.BackupHelper.OnDownloadFileListListener;
+import net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.SettingsItemsFactory;
@@ -51,11 +51,11 @@ class BackupImporter {
 	}
 
 	@NonNull
-	CollectItemsResult collectItems(CollectType collectType, boolean readItems) throws IllegalArgumentException, IOException {
+	CollectItemsResult collectItems(boolean readItems) throws IllegalArgumentException, IOException {
 		CollectItemsResult result = new CollectItemsResult();
 		StringBuilder error = new StringBuilder();
 		try {
-			backupHelper.downloadFileListSync(collectType, new OnDownloadFileListListener() {
+			backupHelper.downloadFileListSync(new OnDownloadFileListListener() {
 				@Override
 				public void onDownloadFileList(int status, @Nullable String message, @NonNull List<RemoteFile> remoteFiles) {
 					if (status == BackupHelper.STATUS_SUCCESS) {
@@ -83,7 +83,7 @@ class BackupImporter {
 		if (Algorithms.isEmpty(items)) {
 			throw new IllegalArgumentException("No items");
 		}
-		List<RemoteFile> remoteFiles = backupHelper.getBackup().getRemoteFiles();
+		List<RemoteFile> remoteFiles = backupHelper.getBackup().getRemoteFiles(RemoteFilesType.UNIQUE);
 		if (Algorithms.isEmpty(remoteFiles)) {
 			throw new IllegalArgumentException("No remote files");
 		}
@@ -92,12 +92,13 @@ class BackupImporter {
 		for (RemoteFile remoteFile : remoteFiles) {
 			SettingsItem item = null;
 			for (SettingsItem settingsItem : items) {
-				if (settingsItem.equals(remoteFile.item)) {
+				String fileName = remoteFile.item != null ? remoteFile.item.getFileName() : null;
+				if (fileName != null && settingsItem.applyFileName(fileName)) {
 					item = settingsItem;
 					break;
 				}
 			}
-			if (item != null && !item.shouldReadOnCollecting()) {
+			if (item != null/* && !item.shouldReadOnCollecting()*/) {
 				FileInputStream is = null;
 				try {
 					SettingsItemReader<? extends SettingsItem> reader = item.getReader();
@@ -109,7 +110,14 @@ class BackupImporter {
 						Map<File, String> errors = backupHelper.downloadFilesSync(map, null);
 						if (errors.isEmpty()) {
 							is = new FileInputStream(tempFile);
-							reader.readFromStream(is, fileName);
+							reader.readFromStream(is, remoteFile.getName());
+							if (item instanceof FileSettingsItem) {
+								String itemFileName = BackupHelper.getFileItemName((FileSettingsItem) item);
+								if (app.getAppPath(itemFileName).isDirectory()) {
+									backupHelper.updateFileUploadTime(item.getType().name(), itemFileName,
+											remoteFile.getClienttimems());
+								}
+							}
 						} else {
 							throw new IOException("Error reading temp item file " + fileName + ": " +
 									errors.values().iterator().next());

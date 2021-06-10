@@ -83,7 +83,7 @@ public class BackupStatusCard extends MapBaseCard {
 			public void onClick(View v) {
 				CardListener listener = getListener();
 				if (listener != null) {
-					if (status == BackupStatus.CONFLICTS || status == BackupStatus.BACKUP_COMPLETE || status == BackupStatus.MAKE_BACKUP) {
+					if (status == BackupStatus.CONFLICTS || status == BackupStatus.MAKE_BACKUP) {
 						listener.onCardButtonPressed(BackupStatusCard.this, BACKUP_BUTTON_INDEX);
 					} else {
 						listener.onCardButtonPressed(BackupStatusCard.this, RETRY_BUTTON_INDEX);
@@ -91,6 +91,7 @@ public class BackupStatusCard extends MapBaseCard {
 				}
 			}
 		});
+		AndroidUiHelper.updateVisibility(button, status != BackupStatus.BACKUP_COMPLETE);
 	}
 
 	private void setupWarningContainer() {

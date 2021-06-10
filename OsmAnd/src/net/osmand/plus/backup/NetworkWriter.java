@@ -133,6 +133,12 @@ public class NetworkWriter implements AbstractWriter {
 
 			@Override
 			public void onFileUploadDone(@NonNull String type, @NonNull String fileName, long uploadTime, @Nullable String error) {
+				if (item instanceof FileSettingsItem) {
+					String itemFileName = BackupHelper.getFileItemName((FileSettingsItem) item);
+					if (backupHelper.getApp().getAppPath(itemFileName).isDirectory()) {
+						backupHelper.updateFileUploadTime(item.getType().name(), itemFileName, uploadTime);
+					}
+				}
 				if (listener != null) {
 					listener.onItemFileUploadDone(item, fileName, uploadTime, error);
 				}
