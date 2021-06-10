@@ -23,13 +23,14 @@ import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupHelper.BackupInfo;
 import net.osmand.plus.backup.BackupHelper.OnDeleteFilesListener;
 import net.osmand.plus.backup.LocalFile;
+import net.osmand.plus.backup.NetworkSettingsHelper.BackupExportItemListener;
 import net.osmand.plus.backup.NetworkSettingsHelper.BackupExportListener;
 import net.osmand.plus.backup.RemoteFile;
 import net.osmand.plus.backup.UserNotRegisteredException;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ExportSettingsType;
-import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.fragments.MainSettingsFragment;
@@ -44,6 +45,7 @@ public class BackupUploadCard extends MapBaseCard {
 
 	private final BackupInfo info;
 	private final BackupExportListener exportListener;
+	private final BackupExportItemListener exportItemListener;
 	private final OnDeleteFilesListener deleteFilesListener;
 
 	private View actionButton;
@@ -57,10 +59,12 @@ public class BackupUploadCard extends MapBaseCard {
 	public BackupUploadCard(@NonNull MapActivity mapActivity,
 							@NonNull BackupInfo info,
 							@Nullable BackupExportListener exportListener,
+							@Nullable BackupExportItemListener exportItemListener,
 							@Nullable OnDeleteFilesListener deleteFilesListener) {
 		super(mapActivity, false);
 		this.info = info;
 		this.exportListener = exportListener;
+		this.exportItemListener = exportItemListener;
 		this.deleteFilesListener = deleteFilesListener;
 	}
 
@@ -114,7 +118,7 @@ public class BackupUploadCard extends MapBaseCard {
 			setupItemView(item, itemView);
 
 			itemsContainer.addView(itemView);
-			AndroidUiHelper.updateVisibility(itemView.findViewById(R.id.warningIcon), false);
+			AndroidUiHelper.updateVisibility(itemView.findViewById(R.id.second_icon), false);
 		}
 	}
 
@@ -124,7 +128,7 @@ public class BackupUploadCard extends MapBaseCard {
 			View itemView = themedInflater.inflate(R.layout.backup_upload_item, itemsContainer, false);
 			setupItemView(item, itemView);
 
-			ImageView icon = itemView.findViewById(R.id.warningIcon);
+			ImageView icon = itemView.findViewById(R.id.second_icon);
 			icon.setImageDrawable(getContentIcon(R.drawable.ic_action_delete_dark));
 			AndroidUiHelper.updateVisibility(icon, true);
 
@@ -148,7 +152,7 @@ public class BackupUploadCard extends MapBaseCard {
 			localVersionButton.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					app.getNetworkSettingsHelper().exportSettings(exportListener, pair.first.item);
+					app.getNetworkSettingsHelper().exportSettings(exportListener, exportItemListener, pair.first.item);
 				}
 			});
 			View serverButton = itemView.findViewById(R.id.server_button);
@@ -162,7 +166,7 @@ public class BackupUploadCard extends MapBaseCard {
 			});
 			AndroidUiHelper.updateVisibility(serverButton, true);
 			AndroidUiHelper.updateVisibility(localVersionButton, true);
-			AndroidUiHelper.updateVisibility(itemView.findViewById(R.id.warningIcon), true);
+			AndroidUiHelper.updateVisibility(itemView.findViewById(R.id.second_icon), true);
 			UiUtilities.setupDialogButton(nightMode, localVersionButton, DialogButtonType.SECONDARY, R.string.upload_local_version);
 			UiUtilities.setupDialogButton(nightMode, serverButton, DialogButtonType.SECONDARY, R.string.download_server_version);
 			AndroidUtils.setBackground(app, localVersionButton, nightMode, R.drawable.dlg_btn_transparent_light, R.drawable.dlg_btn_transparent_dark);
@@ -174,15 +178,7 @@ public class BackupUploadCard extends MapBaseCard {
 
 	private void setupItemView(SettingsItem item, View itemView) {
 		TextView title = itemView.findViewById(R.id.title);
-		if (item instanceof ProfileSettingsItem) {
-			ProfileSettingsItem profileSettingsItem = (ProfileSettingsItem) item;
-			title.setText(profileSettingsItem.getAppMode().toHumanString());
-		} else if (item instanceof FileSettingsItem) {
-			FileSettingsItem profileSettingsItem = (FileSettingsItem) item;
-			title.setText(Algorithms.getFileWithoutDirs(profileSettingsItem.getFile().getName()));
-		} else {
-			title.setText(item.getName());
-		}
+		title.setText(item.getPublicName(app));
 
 		String filename = BackupHelper.getItemFileName(item);
 		TextView description = itemView.findViewById(R.id.description);
@@ -195,7 +191,8 @@ public class BackupUploadCard extends MapBaseCard {
 			description.setText(app.getString(R.string.ltr_or_rtl_combine_via_colon, summary, app.getString(R.string.shared_string_never)));
 		}
 		ImageView icon = itemView.findViewById(R.id.icon);
-		icon.setImageDrawable(getIcon(item));
+		icon.setImageDrawable(getItemIcon(item));
+		itemView.setTag(item);
 	}
 
 	private void setupActionButton() {
@@ -217,7 +214,7 @@ public class BackupUploadCard extends MapBaseCard {
 				public void onClick(View v) {
 					List<SettingsItem> items = info.getItemsToUpload();
 					if (!items.isEmpty()) {
-						app.getNetworkSettingsHelper().exportSettings(exportListener, items);
+						app.getNetworkSettingsHelper().exportSettings(items, exportListener, exportItemListener);
 					}
 					if (!Algorithms.isEmpty(info.filesToDelete)) {
 						try {
@@ -235,6 +232,66 @@ public class BackupUploadCard extends MapBaseCard {
 		progressBar.setMax(itemsCount);
 	}
 
+	public void onBackupExportItemProgress(@NonNull String type, @NonNull String fileName, int value) {
+		SettingsItem item = getSettingsItem(type, fileName);
+		if (item != null) {
+			View itemView = view.findViewWithTag(item);
+			if (itemView != null) {
+				ProgressBar progress = itemView.findViewById(R.id.progressBar);
+				progress.setProgress(value);
+				AndroidUiHelper.updateVisibility(progress, true);
+			}
+		}
+	}
+
+	public void onBackupExportItemFinished(@NonNull String type, @NonNull String fileName) {
+		SettingsItem item = getSettingsItem(type, fileName);
+		if (item != null) {
+			View itemView = view.findViewWithTag(item);
+			if (itemView != null) {
+				ProgressBar progress = itemView.findViewById(R.id.progressBar);
+				AndroidUiHelper.updateVisibility(progress, false);
+
+				ImageView icon = itemView.findViewById(R.id.second_icon);
+				icon.setImageDrawable(getContentIcon(R.drawable.ic_action_cloud_done));
+				AndroidUiHelper.updateVisibility(icon, true);
+			}
+		}
+	}
+
+	public void onBackupExportItemStarted(@NonNull String type, @NonNull String fileName, int max) {
+		SettingsItem item = getSettingsItem(type, fileName);
+		if (item != null) {
+			View itemView = view.findViewWithTag(item);
+			if (itemView != null) {
+				ProgressBar progress = itemView.findViewById(R.id.progressBar);
+				progress.setMax(max);
+				progress.setProgress(0);
+				AndroidUiHelper.updateVisibility(progress, true);
+			}
+		}
+	}
+
+	private SettingsItem getSettingsItem(@NonNull String type, @NonNull String fileName) {
+		for (LocalFile file : info.filesToUpload) {
+			if (file.item != null && file.item.getType().name().equals(type) && BackupHelper.getItemFileName(file.item).equals(fileName)) {
+				return file.item;
+			}
+		}
+		for (RemoteFile file : info.filesToDelete) {
+			if (file.item != null && file.item.getType().name().equals(type) && BackupHelper.getItemFileName(file.item).equals(fileName)) {
+				return file.item;
+			}
+		}
+		for (Pair<LocalFile, RemoteFile> pair : info.filesToMerge) {
+			SettingsItem item = pair.first.item;
+			if (item != null && item.getType().name().equals(type) && BackupHelper.getItemFileName(item).equals(fileName)) {
+				return item;
+			}
+		}
+		return null;
+	}
+
 	public void updateProgress(int value) {
 		String uploading = app.getString(R.string.local_openstreetmap_uploading);
 		progressTitle.setText(app.getString(R.string.ltr_or_rtl_combine_via_space, uploading, String.valueOf(value)));
@@ -248,39 +305,15 @@ public class BackupUploadCard extends MapBaseCard {
 		AndroidUtils.setBackground(view, drawable);
 	}
 
-	private Drawable getIcon(SettingsItem item) {
-		switch (item.getType()) {
-			case GLOBAL:
-				return getContentIcon(ExportSettingsType.GLOBAL.getIconRes());
-			case PROFILE:
-				ProfileSettingsItem profileSettingsItem = (ProfileSettingsItem) item;
-				return getContentIcon(profileSettingsItem.getAppMode().getIconRes());
-			case QUICK_ACTIONS:
-				return getContentIcon(ExportSettingsType.QUICK_ACTIONS.getIconRes());
-			case POI_UI_FILTERS:
-				return getContentIcon(ExportSettingsType.POI_TYPES.getIconRes());
-			case MAP_SOURCES:
-				return getContentIcon(ExportSettingsType.MAP_SOURCES.getIconRes());
-			case AVOID_ROADS:
-				return getContentIcon(ExportSettingsType.AVOID_ROADS.getIconRes());
-			case OSM_NOTES:
-				return getContentIcon(ExportSettingsType.OSM_NOTES.getIconRes());
-			case OSM_EDITS:
-				return getContentIcon(ExportSettingsType.OSM_EDITS.getIconRes());
-			case FAVOURITES:
-				return getContentIcon(ExportSettingsType.FAVORITES.getIconRes());
-			case ACTIVE_MARKERS:
-				return getContentIcon(ExportSettingsType.ACTIVE_MARKERS.getIconRes());
-			case HISTORY_MARKERS:
-				return getContentIcon(ExportSettingsType.HISTORY_MARKERS.getIconRes());
-			case SEARCH_HISTORY:
-				return getContentIcon(ExportSettingsType.SEARCH_HISTORY.getIconRes());
-			case GPX:
-				return getContentIcon(ExportSettingsType.TRACKS.getIconRes());
-			case ONLINE_ROUTING_ENGINES:
-				return getContentIcon(ExportSettingsType.ONLINE_ROUTING_ENGINES.getIconRes());
-			case ITINERARY_GROUPS:
-				return getContentIcon(ExportSettingsType.ITINERARY_GROUPS.getIconRes());
+	private Drawable getItemIcon(SettingsItem item) {
+		if (item instanceof ProfileSettingsItem) {
+			ProfileSettingsItem profileItem = (ProfileSettingsItem) item;
+			ApplicationMode mode = profileItem.getAppMode();
+			return getContentIcon(mode.getIconRes());
+		}
+		ExportSettingsType type = ExportSettingsType.getExportSettingsTypeForItem(item);
+		if (type != null) {
+			return getContentIcon(type.getIconRes());
 		}
 		return null;
 	}

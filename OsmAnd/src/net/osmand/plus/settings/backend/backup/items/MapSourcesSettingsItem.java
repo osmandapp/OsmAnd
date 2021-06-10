@@ -136,7 +136,7 @@ public class MapSourcesSettingsItem extends CollectionSettingsItem<ITileSource> 
 	@NonNull
 	@Override
 	public String getPublicName(@NonNull Context ctx) {
-		return "map_sources";
+		return ctx.getString(R.string.quick_action_map_source_title);
 	}
 
 	@Override

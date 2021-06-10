@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.backend.backup.items;
 
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -8,6 +10,7 @@ import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxDbHelper;
 import net.osmand.plus.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.settings.backend.backup.GpxAppearanceInfo;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.track.GpxSplitType;
@@ -40,6 +43,12 @@ public class GpxSettingsItem extends FileSettingsItem {
 	@Override
 	public SettingsItemType getType() {
 		return SettingsItemType.GPX;
+	}
+
+	@NonNull
+	@Override
+	public String getPublicName(@NonNull Context ctx) {
+		return GpxUiHelper.getGpxTitle(file.getName());
 	}
 
 	@Override

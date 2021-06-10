@@ -33,6 +33,11 @@ public class DataSettingsItem extends StreamSettingsItem {
 		super(app, json);
 	}
 
+	@Override
+	public long getSize() {
+		return data != null ? data.length : 0;
+	}
+
 	public DataSettingsItem(@NonNull OsmandApplication app, @NonNull byte[] data, @NonNull String name) {
 		super(app, name);
 		this.data = data;

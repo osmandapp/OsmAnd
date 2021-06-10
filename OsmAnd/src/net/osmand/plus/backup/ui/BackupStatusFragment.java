@@ -16,6 +16,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.BackupHelper.BackupInfo;
 import net.osmand.plus.backup.BackupHelper.OnDeleteFilesListener;
+import net.osmand.plus.backup.NetworkSettingsHelper.BackupExportItemListener;
 import net.osmand.plus.backup.NetworkSettingsHelper.BackupExportListener;
 import net.osmand.plus.backup.PrepareBackupResult;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
@@ -33,7 +34,7 @@ import net.osmand.util.Algorithms;
 import java.util.Map;
 
 public class BackupStatusFragment extends BaseOsmAndFragment implements CardListener, BackupExportListener,
-		OnDeleteFilesListener, OnPrepareBackupListener {
+		BackupExportItemListener, OnDeleteFilesListener, OnPrepareBackupListener {
 
 	private OsmandApplication app;
 
@@ -124,7 +125,7 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements CardList
 		MapActivity mapActivity = getMapActivity();
 		BackupInfo backupInfo = getBackupInfo();
 		if (mapActivity != null && backupInfo != null) {
-			uploadCard = new BackupUploadCard(mapActivity, backupInfo, this, this);
+			uploadCard = new BackupUploadCard(mapActivity, backupInfo, this, this, this);
 			uploadCard.setListener(this);
 			cardsContainer.addView(uploadCard.build(mapActivity), 0);
 		}
@@ -191,6 +192,27 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements CardList
 	@Override
 	public void onBackupExportFinished(boolean succeed) {
 		app.getBackupHelper().prepareBackup();
+	}
+
+	@Override
+	public void onBackupExportItemStarted(@NonNull String type, @NonNull String fileName, int work) {
+		if (uploadCard != null) {
+			uploadCard.onBackupExportItemStarted(type, fileName, work);
+		}
+	}
+
+	@Override
+	public void onBackupExportItemFinished(@NonNull String type, @NonNull String fileName) {
+		if (uploadCard != null) {
+			uploadCard.onBackupExportItemFinished(type, fileName);
+		}
+	}
+
+	@Override
+	public void onBackupExportItemProgress(@NonNull String type, @NonNull String fileName, int value) {
+		if (uploadCard != null) {
+			uploadCard.onBackupExportItemProgress(type, fileName, value);
+		}
 	}
 
 	@Override

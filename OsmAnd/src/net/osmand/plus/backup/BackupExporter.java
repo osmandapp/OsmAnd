@@ -22,7 +22,11 @@ public class BackupExporter extends Exporter {
 	private final NetworkExportProgressListener listener;
 
 	public interface NetworkExportProgressListener {
-		void updateItemProgress(@NonNull String type, @NonNull String fileName, int value);
+		void itemExportStarted(@NonNull String type, @NonNull String fileName, int work);
+
+		void updateItemProgress(@NonNull String type, @NonNull String fileName, int progress);
+
+		void itemExportDone(@NonNull String type, @NonNull String fileName);
 
 		void updateGeneralProgress(int uploadedItems, int uploadedKb);
 
@@ -47,6 +51,13 @@ public class BackupExporter extends Exporter {
 			final int[] dataProgress = {0};
 
 			@Override
+			public void onItemFileUploadStarted(@NonNull SettingsItem item, @NonNull String fileName, int work) {
+				if (listener != null) {
+					listener.itemExportStarted(item.getType().name(), fileName, work);
+				}
+			}
+
+			@Override
 			public void onItemFileUploadProgress(@NonNull SettingsItem item, @NonNull String fileName, int progress, int deltaWork) {
 				dataProgress[0] += deltaWork;
 				if (listener != null) {
@@ -65,6 +76,7 @@ public class BackupExporter extends Exporter {
 				}
 				itemsProgress.add(item);
 				if (listener != null) {
+					listener.itemExportDone(item.getType().name(), fileName);
 					listener.updateGeneralProgress(itemsProgress.size(), dataProgress[0]);
 				}
 			}

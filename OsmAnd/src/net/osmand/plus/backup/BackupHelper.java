@@ -118,6 +118,7 @@ public class BackupHelper {
 	}
 
 	public interface OnUploadFileListener {
+		void onFileUploadStarted(@NonNull String type, @NonNull String fileName, int work);
 		void onFileUploadProgress(@NonNull String type, @NonNull String fileName, int progress, int deltaWork);
 		void onFileUploadDone(@NonNull String type, @NonNull String fileName, long uploadTime, @Nullable String error);
 	}
@@ -482,13 +483,28 @@ public class BackupHelper {
 
 		String error = AndroidNetworkUtils.uploadFile(UPLOAD_FILE_URL, streamWriter, fileName, true, params, headers,
 				new AbstractProgress() {
-					int progress = 0;
+
+					private int work = 0;
+					private int progress = 0;
+					private int deltaProgress = 0;
+
+					@Override
+					public void startWork(int work) {
+						if (listener != null) {
+							this.work = work > 0 ? work : 1;
+							listener.onFileUploadStarted(type, fileName, work);
+						}
+					}
 
 					@Override
 					public void progress(int deltaWork) {
 						if (listener != null) {
-							progress += deltaWork;
-							listener.onFileUploadProgress(type, fileName, progress, deltaWork);
+							deltaProgress += deltaWork;
+							if ((deltaProgress > (work / 100)) || ((progress + deltaProgress) >= work)) {
+								progress += deltaProgress;
+								deltaProgress = 0;
+								listener.onFileUploadProgress(type, fileName, progress, deltaWork);
+							}
 						}
 					}
 				});
@@ -512,6 +528,13 @@ public class BackupHelper {
 		prepareFileUpload(fileName, type, uploadTime, params, headers);
 
 		AndroidNetworkUtils.uploadFileAsync(UPLOAD_FILE_URL, streamWriter, fileName, true, params, headers, new OnFileUploadCallback() {
+
+			@Override
+			public void onFileUploadStarted() {
+				if (listener != null) {
+					listener.onFileUploadStarted(type, fileName, 1);
+				}
+			}
 
 			@Override
 			public void onFileUploadProgress(int progress) {
@@ -977,6 +1000,7 @@ public class BackupHelper {
 				for (SettingsItem item : localItems) {
 					String fileName = BackupHelper.getItemFileName(item);
 					if (item instanceof FileSettingsItem) {
+						FileSettingsItem settingsItem = (FileSettingsItem) item;
 						File file = app.getAppPath(fileName);
 						if (file.isDirectory()) {
 							List<File> dirs = new ArrayList<>();
@@ -992,7 +1016,7 @@ public class BackupHelper {
 								}
 							}
 						} else {
-							createLocalFile(result, item, fileName, file.lastModified());
+							createLocalFile(result, item, fileName, settingsItem.getFile().lastModified());
 						}
 					} else {
 						createLocalFile(result, item, fileName, item.getLastModifiedTime());
