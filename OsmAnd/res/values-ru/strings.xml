@@ -2706,7 +2706,7 @@
     <string name="wikivoyage_download_pics">Загружать изображения</string>
     <string name="wikivoyage_download_pics_descr">Изображения из статей можно загрузить для использования в автономном режиме. 
 \nВы всегда можете изменить настройку в «Исследовать» → «Параметры».</string>
-    <string name="shared_string_wifi_only">Только Wi-Fi</string>
+    <string name="shared_string_wifi_only">Только по Wi-Fi</string>
     <string name="select_travel_book">Выберите дневник путешествий</string>
     <string name="shared_string_travel_book">Дневник путешествий</string>
     <string name="online_webpage_warning">Страница доступна только онлайн. Открыть её в браузере\?</string>
