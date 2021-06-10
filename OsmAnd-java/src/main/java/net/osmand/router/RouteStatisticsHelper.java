@@ -4,6 +4,7 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -40,8 +41,6 @@ public class RouteStatisticsHelper {
 		BOUNDARIES_ARRAY[NUM - 1] = MAX_INCLINE;
 		BOUNDARIES_CLASS[NUM - 1] = "steepness="+MAX_DIVIDED_INCLINE+"_"+MAX_INCLINE;
 	}
-
-
 
 	public static class RouteStatistics {
 		public final List<RouteSegmentAttribute> elements;
@@ -80,10 +79,42 @@ public class RouteStatisticsHelper {
 		int[] slopeClass;
 	}
 
-	public static List<RouteStatistics> calculateRouteStatistic(List<RouteSegmentResult> route, RenderingRulesStorage currentRenderer,
-																RenderingRulesStorage defaultRenderer, RenderingRuleSearchRequest currentSearchRequest,
+	public static List<RouteStatistics> calculateRouteStatistic(List<RouteSegmentResult> route,
+																RenderingRulesStorage currentRenderer,
+																RenderingRulesStorage defaultRenderer,
+																RenderingRuleSearchRequest currentSearchRequest,
+																RenderingRuleSearchRequest defaultSearchRequest) {
+		return calculateRouteStatistic(route, null, currentRenderer, defaultRenderer,
+				currentSearchRequest, defaultSearchRequest);
+	}
+
+	public static List<RouteStatistics> calculateRouteStatistic(List<RouteSegmentResult> route,
+																List<String> attributesNames,
+																RenderingRulesStorage currentRenderer,
+																RenderingRulesStorage defaultRenderer,
+																RenderingRuleSearchRequest currentSearchRequest,
 																RenderingRuleSearchRequest defaultSearchRequest) {
 		List<RouteSegmentWithIncline> routeSegmentWithInclines = calculateInclineRouteSegments(route);
+		// "steepnessColor", "surfaceColor", "roadClassColor", "smoothnessColor"
+		// steepness=-19_-16
+		List<RouteStatistics>  result = new ArrayList<>();
+		if (Algorithms.isEmpty(attributesNames)) {
+			attributesNames = getRouteStatisticAttrsNames(currentRenderer, defaultRenderer);
+		}
+		for (String attr : attributesNames) {
+			RouteStatisticComputer statisticComputer =
+					new RouteStatisticComputer(currentRenderer, defaultRenderer, currentSearchRequest, defaultSearchRequest);
+			RouteStatistics routeStatistics = statisticComputer.computeStatistic(routeSegmentWithInclines, attr);
+			Map<String, RouteSegmentAttribute> partitions = routeStatistics.partition;
+			if (!partitions.isEmpty() && (partitions.size() != 1 || !routeStatistics.partition.containsKey(UNDEFINED_ATTR))) {
+				result.add(routeStatistics);
+			}
+		}
+		return result;
+	}
+
+	public static List<String> getRouteStatisticAttrsNames(RenderingRulesStorage currentRenderer,
+														   RenderingRulesStorage defaultRenderer) {
 		List<String> attributeNames = new ArrayList<>();
 		if (currentRenderer != null) {
 			for (String s : currentRenderer.getRenderingAttributeNames()) {
@@ -92,30 +123,17 @@ public class RouteStatisticsHelper {
 				}
 			}
 		}
-		if(attributeNames.isEmpty()) {
+		if (attributeNames.isEmpty()) {
 			for (String s : defaultRenderer.getRenderingAttributeNames()) {
 				if (s.startsWith(ROUTE_INFO_PREFIX)) {
 					attributeNames.add(s);
 				}
 			}
 		}
-
-		// "steepnessColor", "surfaceColor", "roadClassColor", "smoothnessColor"
-		// steepness=-19_-16
-		List<RouteStatistics>  result = new ArrayList<>();
-		for(String attributeName : attributeNames) {
-			RouteStatisticComputer statisticComputer =
-					new RouteStatisticComputer(currentRenderer, defaultRenderer, currentSearchRequest, defaultSearchRequest);
-			RouteStatistics routeStatistics = statisticComputer.computeStatistic(routeSegmentWithInclines, attributeName);
-			if (!routeStatistics.partition.isEmpty() && (routeStatistics.partition.size() != 1 || !routeStatistics.partition.containsKey(UNDEFINED_ATTR))) {
-				result.add(routeStatistics);
-			}
-		}
-
-		return result;
+		return attributeNames;
 	}
 
-	private static List<RouteSegmentWithIncline>  calculateInclineRouteSegments(List<RouteSegmentResult> route) {
+	private static List<RouteSegmentWithIncline> calculateInclineRouteSegments(List<RouteSegmentResult> route) {
 		List<RouteSegmentWithIncline> input = new ArrayList<>();
 		float prevHeight = 0;
 		int totalArrayHeightsLength = 0;
@@ -127,12 +145,12 @@ public class RouteStatisticsHelper {
 			input.add(incl);
 			float prevH = prevHeight;
 			int indStep = 0;
-			if(incl.dist > H_STEP) {
+			if (incl.dist > H_STEP) {
 				// for 10.1 meters 3 points (0, 5, 10)
 				incl.interpolatedHeightByStep = new float[(int) ((incl.dist) / H_STEP) + 1];
 				totalArrayHeightsLength += incl.interpolatedHeightByStep.length;
 			}
-			if(heightValues != null && heightValues.length > 0) {
+			if (heightValues != null && heightValues.length > 0) {
 				int indH = 2;
 				float distCum = 0;
 				prevH = heightValues[1];
@@ -140,7 +158,7 @@ public class RouteStatisticsHelper {
 				if(incl.interpolatedHeightByStep != null && incl.interpolatedHeightByStep.length > indStep) {
 					incl.interpolatedHeightByStep[indStep++] = prevH;
 				}
-				while(incl.interpolatedHeightByStep != null && 
+				while (incl.interpolatedHeightByStep != null &&
 						indStep < incl.interpolatedHeightByStep.length && indH < heightValues.length) {
 					float dist = heightValues[indH] + distCum;
 					if(dist > indStep * H_STEP) {
@@ -225,7 +243,6 @@ public class RouteStatisticsHelper {
 		}
 		return input;
 	}
-
 
 	private static String formatSlopeString(int slope, int next) {
 		return String.format("%d%% .. %d%%", slope, next);
@@ -434,6 +451,4 @@ public class RouteStatisticsHelper {
 			return String.format("%s - %.0f m %d", getUserPropertyName(), getDistance(), getColor());
 		}
 	}
-
-
 }

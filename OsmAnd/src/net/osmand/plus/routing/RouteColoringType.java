@@ -13,25 +13,27 @@ import androidx.annotation.StringRes;
 
 public enum RouteColoringType {
 
-	DEFAULT("default", R.string.map_widget_renderer, R.drawable.ic_action_map_style),
-	CUSTOM_COLOR("custom_color", R.string.shared_string_custom, R.drawable.ic_action_settings),
-	ALTITUDE("altitude", R.string.altitude, R.drawable.ic_action_hillshade_dark),
-	SLOPE("slope", R.string.shared_string_slope, R.drawable.ic_action_altitude_ascent),
-	ROAD_TYPE("road_type", R.string.routeInfo_roadClass_name, R.drawable.ic_action_hillshade_dark),
-	SURFACE("surface", R.string.routeInfo_surface_name, R.drawable.ic_action_hillshade_dark),
-	SMOOTHNESS("smoothness", R.string.routeInfo_smoothness_name, R.drawable.ic_action_hillshade_dark),
-	STEEPNESS("steepness", R.string.routeInfo_steepness_name, R.drawable.ic_action_hillshade_dark),
-	WINTER_ICE_ROAD("winter_ice_road", R.string.routeInfo_winter_ice_road_name, R.drawable.ic_action_hillshade_dark),
-	TRACK_TYPE("track_type", R.string.routeInfo_tracktype_name, R.drawable.ic_action_hillshade_dark);
+	DEFAULT("default", null, R.string.map_widget_renderer, R.drawable.ic_action_map_style),
+	CUSTOM_COLOR("custom_color", null, R.string.shared_string_custom, R.drawable.ic_action_settings),
+	ALTITUDE("altitude", null, R.string.altitude, R.drawable.ic_action_hillshade_dark),
+	SLOPE("slope", null, R.string.shared_string_slope, R.drawable.ic_action_altitude_ascent),
+	ROAD_TYPE("road_type", "routeInfo_roadClass", R.string.routeInfo_roadClass_name, R.drawable.ic_action_hillshade_dark),
+	SURFACE("surface", "routeInfo_surface", R.string.routeInfo_surface_name, R.drawable.ic_action_hillshade_dark),
+	SMOOTHNESS("smoothness", "routeInfo_smoothness", R.string.routeInfo_smoothness_name, R.drawable.ic_action_hillshade_dark),
+	STEEPNESS("steepness", "routeInfo_steepness", R.string.routeInfo_steepness_name, R.drawable.ic_action_hillshade_dark),
+	WINTER_ICE_ROAD("winter_ice_road", "routeInfo_winter_ice_road", R.string.routeInfo_winter_ice_road_name, R.drawable.ic_action_hillshade_dark),
+	TRACK_TYPE("track_type", "routeInfo_tracktype", R.string.routeInfo_tracktype_name, R.drawable.ic_action_hillshade_dark);
 
 	private final String name;
+	private final String attrName;
 	@StringRes
 	private final int titleId;
 	@DrawableRes
 	private final int iconId;
 
-	RouteColoringType(String name, int titleId, int iconId) {
+	RouteColoringType(String name, String attrName, int titleId, int iconId) {
 		this.name = name;
+		this.attrName = attrName;
 		this.titleId = titleId;
 		this.iconId = iconId;
 	}
@@ -39,6 +41,11 @@ public enum RouteColoringType {
 	@NonNull
 	public String getName() {
 		return name;
+	}
+
+	@Nullable
+	public String getAttrName() {
+		return attrName;
 	}
 
 	@StringRes
@@ -64,11 +71,15 @@ public enum RouteColoringType {
 		return this == CUSTOM_COLOR;
 	}
 
+	public boolean isSolidSingleColor() {
+		return isDefault() || isCustomColor();
+	}
+
 	public boolean isGradient() {
 		return this == ALTITUDE || this == SLOPE;
 	}
 
-	public boolean isPaid() {
+	public boolean isSolidMultiColor() {
 		return this == ROAD_TYPE || this == SURFACE || this == SMOOTHNESS || this == STEEPNESS
 				|| this == WINTER_ICE_ROAD || this == TRACK_TYPE;
 	}

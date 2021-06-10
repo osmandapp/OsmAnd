@@ -34,6 +34,7 @@ import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
 import net.osmand.plus.routing.RouteCalculationResult;
+import net.osmand.plus.routing.RouteColoringType;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
@@ -386,7 +387,7 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 		updateAttrs(settings, tileBox);
 		updateRouteColors(nightMode);
 		updateRouteGradient();
-		previewLineGeometry.setRouteStyleParams(getRouteLineColor(), getRouteLineWidth(tileBox), getDirectionArrowsColor(), gradientScaleType);
+		previewLineGeometry.setRouteStyleParams(getRouteLineColor(), getRouteLineWidth(tileBox), getDirectionArrowsColor(), RouteColoringType.DEFAULT);
 		fillPreviewLineArrays(tx, ty, angles, distances, styles);
 		canvas.rotate(+tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 		previewLineGeometry.drawRouteSegment(tileBox, canvas, tx, ty, angles, distances, 0, styles);
@@ -582,7 +583,7 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 	private boolean updateRouteGradient() {
 		GradientScaleType prev = gradientScaleType;
 		if (previewRouteLineInfo != null) {
-			gradientScaleType = previewRouteLineInfo.getRouteColoringType().;
+			gradientScaleType = previewRouteLineInfo.getRouteColoringType().toGradientScaleType();
 		} else {
 			gradientScaleType = view.getSettings().ROUTE_LINE_GRADIENT.getModeValue(helper.getAppMode());
 		}
@@ -638,8 +639,7 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 			return;
 		}
 		Integer turnArrowColor = null;
-		List<Location> locations = helper.getRoute() == null ?
-				Collections.<Location>emptyList() : helper.getRoute().getImmutableAllLocations();
+		List<Location> locations = helper.getRoute().getImmutableAllLocations();
 		if (gradientScaleType == null || locations.size() < 2) {
 			turnArrowColor = attrsTurnArrowColor;
 		} else {
@@ -679,8 +679,8 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 			boolean straight = route.getRouteService() == RouteService.STRAIGHT;
 			publicTransportRouteGeometry.clearRoute();
 			updateRouteColors(nightMode);
-			routeGeometry.setRouteStyleParams(getRouteLineColor(), getRouteLineWidth(tb), getDirectionArrowsColor(), gradientScaleType);
-			routeGeometry.updateRoute(tb, route, view.getApplication());
+			routeGeometry.setRouteStyleParams(getRouteLineColor(), getRouteLineWidth(tb), getDirectionArrowsColor(), RouteColoringType.DEFAULT);
+			routeGeometry.updateRoute(tb, route);
 			if (directTo) {
 				routeGeometry.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
 						null, 0);

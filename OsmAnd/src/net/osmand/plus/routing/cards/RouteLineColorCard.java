@@ -242,8 +242,8 @@ public class RouteLineColorCard extends BaseCard implements CardListener, ColorP
 		String colorName = "";
 		if (selectedType.isDefault()) {
 			colorName = app.getString(R.string.map_widget_renderer);
-		} else if (selectedType.isGradient() || selectedType.isPaid()) {
-			colorName = app.getString(selectedType.getTitleId());
+		} else if (selectedType.isGradient() || selectedType.isSolidMultiColor()) {
+			colorName = selectedType.getHumanString(app);
 		} else if (getRouteLineColor() != null) {
 			int colorNameId = ColorDialogs.getColorName(getRouteLineColor());
 			colorName = app.getString(colorNameId);
@@ -252,7 +252,7 @@ public class RouteLineColorCard extends BaseCard implements CardListener, ColorP
 	}
 
 	private void updateDescription() {
-		if (selectedType.isPaid()) {
+		if (selectedType.isSolidMultiColor()) {
 			AndroidUiHelper.updateVisibility(tvDescription, false);
 			return;
 		}
@@ -313,7 +313,7 @@ public class RouteLineColorCard extends BaseCard implements CardListener, ColorP
 		@Override
 		public void onBindViewHolder(@NonNull final AppearanceViewHolder holder, int position) {
 			RouteColoringType item = items.get(position);
-			holder.title.setText(app.getString(item.getTitleId()));
+			holder.title.setText(item.getHumanString(app));
 
 			updateButtonBg(holder, item);
 			updateTextAndIconColor(holder, item);
