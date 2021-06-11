@@ -14,7 +14,6 @@ import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
-import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
@@ -23,7 +22,6 @@ import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.wikivoyage.data.TravelArticle.TravelArticleIdentifier;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.util.Algorithms;
@@ -48,31 +46,24 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static net.osmand.GPXUtilities.Track;
-import static net.osmand.GPXUtilities.TrkSegment;
-import static net.osmand.GPXUtilities.WptPt;
 import static net.osmand.GPXUtilities.writeGpxFile;
-import static net.osmand.data.Amenity.REF;
-import static net.osmand.plus.helpers.GpxUiHelper.getGpxTitle;
 import static net.osmand.plus.wikivoyage.data.PopularArticles.ARTICLES_PER_PAGE;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.ACTIVITY_TYPE;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.DIFF_ELE_DOWN;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.DIFF_ELE_UP;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.DISTANCE;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.USER;
-import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 
 public class TravelObfHelper implements TravelHelper {
 
 	private static final Log LOG = PlatformUtil.getLog(TravelObfHelper.class);
 	private static final String WORLD_WIKIVOYAGE_FILE_NAME = "World_wikivoyage.travel.obf";
 	public static final String ROUTE_ARTICLE = "route_article";
-	public static final String ROUTE_ARTICLE_POINT = "route_article_point";
 	public static final String ROUTE_TRACK = "route_track";
+	public static final String ROUTE_RADIUS = "route_radius";
 	public static final int ARTICLE_SEARCH_RADIUS = 50 * 1000;
 	public static final int SAVED_ARTICLE_SEARCH_RADIUS = 30 * 1000;
 	public static final int MAX_SEARCH_RADIUS = 800 * 1000;
-	public static final String ROUTE_TRACK_POINT = "route_track_point";
 
 	private final OsmandApplication app;
 	private final Collator collator;
@@ -242,28 +233,21 @@ public class TravelObfHelper implements TravelHelper {
 		TravelGpx res = new TravelGpx();
 		res.file = file;
 		String title = amenity.getName("en");
-		res.title = createTitle(Algorithms.isEmpty(title) ? amenity.getName() : title);
+		res.title = res.createTitle(Algorithms.isEmpty(title) ? amenity.getName() : title);
 		res.lat = amenity.getLocation().getLatitude();
 		res.lon = amenity.getLocation().getLongitude();
 		res.routeId = Algorithms.emptyIfNull(amenity.getTagContent(Amenity.ROUTE_ID));
-		try {
-			res.totalDistance = Float.parseFloat(Algorithms.emptyIfNull(amenity.getTagContent(DISTANCE)));
-		} catch (NumberFormatException e) {
-			LOG.debug(e.getMessage(), e);
-		}
-		try {
-			res.diffElevationUp = Double.parseDouble(Algorithms.emptyIfNull(amenity.getTagContent(DIFF_ELE_UP)));
-		} catch (NumberFormatException e) {
-			LOG.debug(e.getMessage(), e);
-		}
-		try {
-			res.diffElevationDown = Double.parseDouble(Algorithms.emptyIfNull(amenity.getTagContent(DIFF_ELE_DOWN)));
-		} catch (NumberFormatException e) {
-			LOG.debug(e.getMessage(), e);
-		}
 		res.user = Algorithms.emptyIfNull(amenity.getTagContent(USER));
 		res.activityType = Algorithms.emptyIfNull(amenity.getTagContent(ACTIVITY_TYPE));
 		res.ref = Algorithms.emptyIfNull(amenity.getRef());
+		try {
+			res.totalDistance = Float.parseFloat(Algorithms.emptyIfNull(amenity.getTagContent(DISTANCE)));
+			res.diffElevationUp = Double.parseDouble(Algorithms.emptyIfNull(amenity.getTagContent(DIFF_ELE_UP)));
+			res.diffElevationDown = Double.parseDouble(Algorithms.emptyIfNull(amenity.getTagContent(DIFF_ELE_DOWN)));
+			res.routeRadius = Integer.parseInt(Algorithms.emptyIfNull(amenity.getTagContent(ROUTE_RADIUS)));
+		} catch (NumberFormatException e) {
+			LOG.debug(e.getMessage(), e);
+		}
 		return res;
 	}
 
@@ -316,163 +300,8 @@ public class TravelObfHelper implements TravelHelper {
 		return res;
 	}
 
-	@Nullable
-	private GPXFile buildTravelGpxFile(@NonNull final TravelGpx travelGpx) {
-		final List<BinaryMapDataObject> segmentList = new ArrayList<>();
-		final List<Amenity> wayPointList = new ArrayList<>();
 
-		for (BinaryMapIndexReader reader : getReaders()) {
-			try {
-				if (travelGpx.file != null && !travelGpx.file.equals(reader.getFile())) {
-					continue;
-				}
-				BinaryMapIndexReader.SearchRequest<BinaryMapDataObject> sr = BinaryMapIndexReader.buildSearchRequest(
-						0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, 15, null,
-						new ResultMatcher<BinaryMapDataObject>() {
-							@Override
-							public boolean publish(BinaryMapDataObject object) {
-								if (object.getPointsLength() > 1) {
-									if (object.getTagValue(REF).equals(travelGpx.ref)
-											&& createTitle(object.getName()).equals(travelGpx.title)) {
-										segmentList.add(object);
-									}
-								}
-								return false;
-							}
 
-							@Override
-							public boolean isCancelled() {
-								return false;
-							}
-						});
-				reader.searchMapIndex(sr);
-				BinaryMapIndexReader.SearchRequest<Amenity> pointRequest = BinaryMapIndexReader.buildSearchPoiRequest(
-						0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, 15,
-						getSearchFilter(ROUTE_TRACK_POINT),
-						new ResultMatcher<Amenity>() {
-							@Override
-							public boolean publish(Amenity object) {
-								if (object.getRouteId().equals(travelGpx.getRouteId())) {
-									wayPointList.add(object);
-								}
-								return false;
-							}
-
-							@Override
-							public boolean isCancelled() {
-								return false;
-							}
-						});
-				reader.searchPoi(pointRequest);
-				if (!Algorithms.isEmpty(segmentList)) {
-					break;
-				}
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
-			}
-		}
-		GPXFile gpxFile = null;
-		if (!segmentList.isEmpty()) {
-			Track track = new Track();
-			for (BinaryMapDataObject segment : segmentList) {
-				TrkSegment trkSegment = new TrkSegment();
-				for (int i = 0; i < segment.getPointsLength(); i++) {
-					WptPt point = new WptPt();
-					point.lat = MapUtils.get31LatitudeY(segment.getPoint31YTile(i));
-					point.lon = MapUtils.get31LongitudeX(segment.getPoint31XTile(i));
-					trkSegment.points.add(point);
-				}
-				track.segments.add(trkSegment);
-			}
-			gpxFile = new GPXFile(travelGpx.getTitle(), travelGpx.getLang(), "");
-			gpxFile.tracks = new ArrayList<>();
-			gpxFile.tracks.add(track);
-			gpxFile.setRef(travelGpx.ref);
-		}
-		if (!wayPointList.isEmpty()) {
-			if (gpxFile == null) {
-				gpxFile = new GPXFile(travelGpx.getTitle(), travelGpx.getLang(), "");
-			}
-			for (Amenity wayPoint : wayPointList) {
-				WptPt wptPt = new WptPt();
-				wptPt.lat = wayPoint.getLocation().getLatitude();
-				wptPt.lon = wayPoint.getLocation().getLongitude();
-				wptPt.name = wayPoint.getName();
-				gpxFile.addPoint(wptPt);
-			}
-		}
-		travelGpx.gpxFile = gpxFile;
-		return gpxFile;
-	}
-
-	private String createTitle(String name) {
-		return capitalizeFirstLetter(getGpxTitle(name));
-	}
-
-	@NonNull
-	private synchronized List<Amenity> getPointList(@NonNull final TravelArticle article) {
-		final List<Amenity> pointList = new ArrayList<>();
-		final String lang = article.getLang();
-		for (BinaryMapIndexReader reader : getReaders()) {
-			try {
-				if (article.file != null && !article.file.equals(reader.getFile())) {
-					continue;
-				}
-				SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(0, 0,
-						Algorithms.emptyIfNull(article.title), 0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE,
-						getSearchFilter(ROUTE_ARTICLE_POINT), new ResultMatcher<Amenity>() {
-
-							@Override
-							public boolean publish(Amenity amenity) {
-								String amenityLang = amenity.getTagSuffix(Amenity.LANG_YES + ":");
-								if (Algorithms.stringsEqual(lang, amenityLang)
-										&& Algorithms.stringsEqual(article.routeId,
-										Algorithms.emptyIfNull(amenity.getTagContent(Amenity.ROUTE_ID)))) {
-									pointList.add(amenity);
-								}
-								return false;
-							}
-
-							@Override
-							public boolean isCancelled() {
-								return false;
-							}
-						}, null);
-
-					if (!Algorithms.isEmpty(article.title)) {
-						reader.searchPoiByName(req);
-					} else {
-						reader.searchPoi(req);
-					}
-			} catch (Exception e) {
-				LOG.error(e.getMessage(), e);
-			}
-		}
-		return pointList;
-	}
-
-	@NonNull
-	private WptPt createWptPt(@NonNull Amenity amenity, @Nullable String lang) {
-		WptPt wptPt = new WptPt();
-		wptPt.name = amenity.getName();
-		wptPt.lat = amenity.getLocation().getLatitude();
-		wptPt.lon = amenity.getLocation().getLongitude();
-		wptPt.desc = amenity.getDescription(lang);
-		wptPt.link = amenity.getSite();
-		String color = amenity.getColor();
-		if (color != null) {
-			wptPt.setColor(ColorDialogs.getColorByTag(color));
-		}
-		String iconName = amenity.getGpxIcon();
-		if (iconName != null) {
-			wptPt.setIconName(iconName);
-		}
-		String category = amenity.getTagSuffix("category_");
-		if (category != null) {
-			wptPt.category = capitalizeFirstLetter(category);
-		}
-		return wptPt;
-	}
 
 	@Override
 	public boolean isAnyTravelBookPresent() {
@@ -735,7 +564,7 @@ public class TravelObfHelper implements TravelHelper {
 
 	public void readGpxFile(@NonNull TravelArticle article, @Nullable GpxReadCallback callback) {
 		if (!article.gpxFileRead) {
-			new GpxFileReader(article, callback).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			new GpxFileReader(article, callback, getReaders()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		} else if (callback != null) {
 			callback.onGpxFileRead(article.gpxFile);
 		}
@@ -1087,14 +916,17 @@ public class TravelObfHelper implements TravelHelper {
 		}
 	}
 
-	private class GpxFileReader extends AsyncTask<Void, Void, GPXFile> {
+	private static class GpxFileReader extends AsyncTask<Void, Void, GPXFile> {
 
 		private final TravelArticle article;
 		private final GpxReadCallback callback;
+		private final List<BinaryMapIndexReader> readers;
 
-		public GpxFileReader(@NonNull TravelArticle article, @Nullable GpxReadCallback callback) {
+		public GpxFileReader(@NonNull TravelArticle article, @Nullable GpxReadCallback callback,
+		                     @NonNull List<BinaryMapIndexReader> readers) {
 			this.article = article;
 			this.callback = callback;
+			this.readers = readers;
 		}
 
 		@Override
@@ -1106,21 +938,7 @@ public class TravelObfHelper implements TravelHelper {
 
 		@Override
 		protected GPXFile doInBackground(Void... voids) {
-			GPXFile gpxFile = null;
-			if (article instanceof TravelGpx) {
-				gpxFile = buildTravelGpxFile((TravelGpx) article);
-			} else {
-				List<Amenity> pointList = getPointList(article);
-				if (!Algorithms.isEmpty(pointList)) {
-					gpxFile = new GPXFile(article.getTitle(), article.getLang(), article.getContent());
-					gpxFile.metadata.link = TravelArticle.getImageUrl(article.getImageTitle(), false);
-					for (Amenity amenity : pointList) {
-						WptPt wptPt = createWptPt(amenity, article.getLang());
-						gpxFile.addPoint(wptPt);
-					}
-				}
-			}
-			return gpxFile;
+			return article.buildGpxFile(readers);
 		}
 
 		@Override

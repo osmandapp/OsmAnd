@@ -9,6 +9,8 @@ import net.osmand.data.QuadRect;
 import net.osmand.router.RouteColorize.ColorizationType;
 import net.osmand.util.Algorithms;
 
+import net.osmand.util.MapUtils;
+
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -64,6 +66,7 @@ public class GPXUtilities {
 	// speed, ele, hdop
 	private final static NumberFormat decimalFormat = new DecimalFormat("#.#", new DecimalFormatSymbols(
 			new Locale("EN", "US")));
+	public static final int RADIUS_DIVIDER = 5000;
 
 	public enum GPXColor {
 		BLACK(0xFF000000),
@@ -1665,8 +1668,10 @@ public class GPXUtilities {
 		}
 
 		public QuadRect getRect() {
-			double left = 0, right = 0;
-			double top = 0, bottom = 0;
+			return getRect(0, 0, 0, 0);
+		}
+
+		public QuadRect getRect(double left, double bottom, double right, double top) {
 			for (Track track : tracks) {
 				for (TrkSegment segment : track.segments) {
 					for (WptPt p : segment.points) {
@@ -1815,6 +1820,20 @@ public class GPXUtilities {
 				return extensions.get("ref");
 			}
 			return null;
+		}
+
+		public String getOuterRadius() {
+			String outerRadius = "";
+			QuadRect rect = getRect();
+			if (rect.width() > 0.00001 && rect.height() > 0.00001) {
+				WptPt wptPt = findPointToShow();
+				if (wptPt != null) {
+					int radius = (((int) Math.max(MapUtils.getDistance(wptPt.lat, wptPt.lon, rect.bottom, rect.left),
+							MapUtils.getDistance(wptPt.lat, wptPt.lon, rect.top, rect.right))) / RADIUS_DIVIDER + 1) * 5;
+					outerRadius = String.valueOf(radius);
+				}
+			}
+			return outerRadius;
 		}
 	}
 
