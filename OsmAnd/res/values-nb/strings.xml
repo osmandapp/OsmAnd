@@ -2883,7 +2883,7 @@
     <string name="rendering_attr_smoothness_very_horrible_name">Uhyre fryktelig</string>
     <string name="rendering_attr_smoothness_impassable_name">Ikke farbart</string>
     <string name="rendering_attr_highway_class_motorway_name">Motorvei</string>
-    <string name="rendering_attr_highway_class_state_road_name">Fylkesvei</string>
+    <string name="rendering_attr_highway_class_state_road_name">Riks- eller primær fylkesvei</string>
     <string name="rendering_attr_highway_class_road_name">Vei</string>
     <string name="rendering_attr_highway_class_street_name">Gate</string>
     <string name="rendering_attr_highway_class_service_name">Tjeneste</string>

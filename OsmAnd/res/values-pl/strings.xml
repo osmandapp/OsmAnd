@@ -4169,4 +4169,5 @@
     <string name="receiving_data_from_server">Odbieranie danych z serwera</string>
     <string name="restore_complete">Przywracanie zakończone</string>
     <string name="grey_color_slope">Kolor szary jest używany, gdy nachylenie jest nieokreślone.</string>
+    <string name="backup_version_history">Historia wersji</string>
 </resources>

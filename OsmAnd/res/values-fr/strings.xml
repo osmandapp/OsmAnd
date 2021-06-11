@@ -4162,4 +4162,6 @@
     <string name="receiving_data_from_server">Réception de données du serveur</string>
     <string name="restore_complete">Restauration terminée</string>
     <string name="grey_color_slope">Les pentes inconnues sont de couleur grise.</string>
+    <string name="backup_storage_taken">Espace utilisé</string>
+    <string name="backup_version_history">Historique des versions</string>
 </resources>
