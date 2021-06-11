@@ -2518,7 +2518,7 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="custom_color">Mukautettu väri</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="extra_maps_menu_group">Lisäkartat</string>
-    <string name="mapillary_item">OsmAnd + mapillary</string>
+    <string name="mapillary_item">OsmAnd + Mapillary</string>
     <string name="quick_action_item">Pikatoiminto</string>
     <string name="radius_ruler_item">Sädeviivain</string>
     <string name="download_unsupported_action">Ei tuettu toiminto %1$s</string>
@@ -2787,10 +2787,13 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="gpx_upload_public_visibility_descr">\"Julkinen\" tarkoittaa sitä, että jälki näkyy julkisesti GPS-jäljissäsi ja julkisissa GPS-jälkilistauksissa sekä julkisessa jälkiluettelossa, jossa aikaleimat on raakamuodossa. API:n kautta toimitetut tiedot eivät viittaa jälkisivuusi. Jälkipisteiden aikaleimat eivät ole saatavilla julkisen GPS-API:n kautta, eikä jälkipisteita ole laitettu aikajärjestykseen.</string>
     <string name="gpx_upload_identifiable_visibility_descr">\"Tunnistettavissa\" tarkoittaa sitä, että jälki näkyy julkisesti GPS-jäljissäsi ja julkisissa GPS-jälkilistauksissa, eli muut käyttäjät voivat ladata raakajäljen ja yhdistää sen käyttäjätunnukseesi. GPS-API:n julkiset aikaleimalla varustetut jälkipistetiedot, jotka toimitetaan jälkipiste API:n kautta, viittaavat alkuperäiseen jälkisivuusi.</string>
     <string name="app_restart_required">Joidenkin asetusten käyttäminen edellyttää sovelluksen uudelleenkäynnistystä.</string>
-    <string name="osm_live_payment_subscription_management">Google Play -tilisi veloitetaan tilauksen oston yhteydessä
-\nja kun se vanhenee (kuukausi / kolme kuukautta / vuosi),
-\nse ei uusiudu, jos se peruutetaan aiemmin Google Play -asetuksista.</string>
+    <string name="osm_live_payment_subscription_management">Maksu veloitetaan Google Play -tililtäsi oston vahvistuksen yhteydessä.
+\n
+\nTilaus uusiutuu automaattisesti, ellei sitä peruuteta ennen uusiutumispäivää. Tililtäsi veloitetaan uusimisjakso (kuukausi/kolme kuukautta/vuosi) vasta uusiutumispäivänä.
+\n
+\nVoit hallita ja peruuttaa tilauksiasi Google Play -asetuksissa.</string>
     <string name="lang_my">burma</string>
     <string name="lang_jv">jaava</string>
     <string name="lang_an">aragonia</string>
+    <string name="lang_lmo">lombardi</string>
 </resources>
