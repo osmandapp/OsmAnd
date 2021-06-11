@@ -114,7 +114,8 @@ public abstract class SettingsHelper {
 		COLLECT,
 		COLLECT_AND_READ,
 		CHECK_DUPLICATES,
-		IMPORT
+		IMPORT,
+		IMPORT_FORCE_READ,
 	}
 
 	public SettingsHelper(@NonNull OsmandApplication app) {
@@ -671,66 +672,114 @@ public abstract class SettingsHelper {
 					break;
 			}
 		}
-
-		if (!profiles.isEmpty() || addEmptyItems) {
-			settingsToOperate.put(ExportSettingsType.PROFILE, profiles);
-		}
-		if (!quickActions.isEmpty() || addEmptyItems) {
-			settingsToOperate.put(ExportSettingsType.QUICK_ACTIONS, quickActions);
-		}
-		if (!poiUIFilters.isEmpty() || addEmptyItems) {
-			settingsToOperate.put(ExportSettingsType.POI_TYPES, poiUIFilters);
-		}
-		if (!tileSourceTemplates.isEmpty() || addEmptyItems) {
-			settingsToOperate.put(ExportSettingsType.MAP_SOURCES, tileSourceTemplates);
-		}
-		if (!renderFilesList.isEmpty() || addEmptyItems) {
-			settingsToOperate.put(ExportSettingsType.CUSTOM_RENDER_STYLE, renderFilesList);
-		}
-		if (!routingFilesList.isEmpty() || addEmptyItems) {
-			settingsToOperate.put(ExportSettingsType.CUSTOM_ROUTING, routingFilesList);
-		}
-		if (!avoidRoads.isEmpty() || addEmptyItems) {
-			settingsToOperate.put(ExportSettingsType.AVOID_ROADS, avoidRoads);
-		}
-		if (!multimediaFilesList.isEmpty() || addEmptyItems) {
-			settingsToOperate.put(ExportSettingsType.MULTIMEDIA_NOTES, multimediaFilesList);
-		}
-		if (!tracksFilesList.isEmpty() || addEmptyItems) {
-			settingsToOperate.put(ExportSettingsType.TRACKS, tracksFilesList);
-		}
-		if (!globalSettingsItems.isEmpty() || addEmptyItems) {
-			settingsToOperate.put(ExportSettingsType.GLOBAL, globalSettingsItems);
-		}
-		if (!notesPointList.isEmpty() || addEmptyItems) {
-			settingsToOperate.put(ExportSettingsType.OSM_NOTES, notesPointList);
-		}
-		if (!editsPointList.isEmpty() || addEmptyItems) {
-			settingsToOperate.put(ExportSettingsType.OSM_EDITS, editsPointList);
-		}
-		if (!mapFilesList.isEmpty() || addEmptyItems) {
-			settingsToOperate.put(ExportSettingsType.OFFLINE_MAPS, mapFilesList);
-		}
-		if (!favoriteGroups.isEmpty() || addEmptyItems) {
-			settingsToOperate.put(ExportSettingsType.FAVORITES, favoriteGroups);
-		}
-		if (!ttsVoiceFilesList.isEmpty() || addEmptyItems) {
-			settingsToOperate.put(ExportSettingsType.TTS_VOICE, ttsVoiceFilesList);
-		}
-		if (!voiceFilesList.isEmpty() || addEmptyItems) {
-			settingsToOperate.put(ExportSettingsType.VOICE, voiceFilesList);
-		}
-		if (!markersGroups.isEmpty() || addEmptyItems) {
-			settingsToOperate.put(ExportSettingsType.ACTIVE_MARKERS, markersGroups);
-		}
-		if (!historyEntries.isEmpty() || addEmptyItems) {
-			settingsToOperate.put(ExportSettingsType.SEARCH_HISTORY, historyEntries);
-		}
-		if (!onlineRoutingEngines.isEmpty() || addEmptyItems) {
-			settingsToOperate.put(ExportSettingsType.ONLINE_ROUTING_ENGINES, onlineRoutingEngines);
-		}
-		if (!itineraryGroups.isEmpty() || addEmptyItems) {
-			settingsToOperate.put(ExportSettingsType.ITINERARY_GROUPS, itineraryGroups);
+		for (SettingsItem item : settingsItems) {
+			switch (item.getType()) {
+				case PROFILE:
+					if (!profiles.isEmpty() || addEmptyItems) {
+						settingsToOperate.put(ExportSettingsType.PROFILE, profiles);
+					}
+					break;
+				case FILE:
+					FileSettingsItem fileItem = (FileSettingsItem) item;
+					if (fileItem.getSubtype() == FileSubtype.RENDERING_STYLE) {
+						if (!renderFilesList.isEmpty() || addEmptyItems) {
+							settingsToOperate.put(ExportSettingsType.CUSTOM_RENDER_STYLE, renderFilesList);
+						}
+					} else if (fileItem.getSubtype() == FileSubtype.ROUTING_CONFIG) {
+						if (!routingFilesList.isEmpty() || addEmptyItems) {
+							settingsToOperate.put(ExportSettingsType.CUSTOM_ROUTING, routingFilesList);
+						}
+					} else if (fileItem.getSubtype() == FileSubtype.MULTIMEDIA_NOTES) {
+						if (!multimediaFilesList.isEmpty() || addEmptyItems) {
+							settingsToOperate.put(ExportSettingsType.MULTIMEDIA_NOTES, multimediaFilesList);
+						}
+					} else if (fileItem.getSubtype() == FileSubtype.GPX) {
+						if (!tracksFilesList.isEmpty() || addEmptyItems) {
+							settingsToOperate.put(ExportSettingsType.TRACKS, tracksFilesList);
+						}
+					} else if (fileItem.getSubtype().isMap()) {
+						if (!mapFilesList.isEmpty() || addEmptyItems) {
+							settingsToOperate.put(ExportSettingsType.OFFLINE_MAPS, mapFilesList);
+						}
+					} else if (fileItem.getSubtype() == FileSubtype.TTS_VOICE) {
+						if (!ttsVoiceFilesList.isEmpty() || addEmptyItems) {
+							settingsToOperate.put(ExportSettingsType.TTS_VOICE, ttsVoiceFilesList);
+						}
+					} else if (fileItem.getSubtype() == FileSubtype.VOICE) {
+						if (!voiceFilesList.isEmpty() || addEmptyItems) {
+							settingsToOperate.put(ExportSettingsType.VOICE, voiceFilesList);
+						}
+					}
+					break;
+				case QUICK_ACTIONS:
+					if (!quickActions.isEmpty() || addEmptyItems) {
+						settingsToOperate.put(ExportSettingsType.QUICK_ACTIONS, quickActions);
+					}
+					break;
+				case POI_UI_FILTERS:
+					if (!poiUIFilters.isEmpty() || addEmptyItems) {
+						settingsToOperate.put(ExportSettingsType.POI_TYPES, poiUIFilters);
+					}
+					break;
+				case MAP_SOURCES:
+					if (!tileSourceTemplates.isEmpty() || addEmptyItems) {
+						settingsToOperate.put(ExportSettingsType.MAP_SOURCES, tileSourceTemplates);
+					}
+					break;
+				case AVOID_ROADS:
+					if (!avoidRoads.isEmpty() || addEmptyItems) {
+						settingsToOperate.put(ExportSettingsType.AVOID_ROADS, avoidRoads);
+					}
+					break;
+				case GLOBAL:
+					if (!globalSettingsItems.isEmpty() || addEmptyItems) {
+						settingsToOperate.put(ExportSettingsType.GLOBAL, globalSettingsItems);
+					}
+					break;
+				case OSM_NOTES:
+					if (!notesPointList.isEmpty() || addEmptyItems) {
+						settingsToOperate.put(ExportSettingsType.OSM_NOTES, notesPointList);
+					}
+					break;
+				case OSM_EDITS:
+					if (!editsPointList.isEmpty() || addEmptyItems) {
+						settingsToOperate.put(ExportSettingsType.OSM_EDITS, editsPointList);
+					}
+					break;
+				case FAVOURITES:
+					if (!favoriteGroups.isEmpty() || addEmptyItems) {
+						settingsToOperate.put(ExportSettingsType.FAVORITES, favoriteGroups);
+					}
+					break;
+				case ACTIVE_MARKERS:
+				case HISTORY_MARKERS:
+					if (!markersGroups.isEmpty() || addEmptyItems) {
+						settingsToOperate.put(ExportSettingsType.ACTIVE_MARKERS, markersGroups);
+					}
+					break;
+				case SEARCH_HISTORY:
+					if (!historyEntries.isEmpty() || addEmptyItems) {
+						settingsToOperate.put(ExportSettingsType.SEARCH_HISTORY, historyEntries);
+					}
+					break;
+				case GPX:
+					if (!tracksFilesList.isEmpty() || addEmptyItems) {
+						settingsToOperate.put(ExportSettingsType.TRACKS, tracksFilesList);
+					}
+					break;
+				case ONLINE_ROUTING_ENGINES:
+					if (!onlineRoutingEngines.isEmpty() || addEmptyItems) {
+						settingsToOperate.put(ExportSettingsType.ONLINE_ROUTING_ENGINES, onlineRoutingEngines);
+					}
+					break;
+				case ITINERARY_GROUPS:
+					if (!itineraryGroups.isEmpty() || addEmptyItems) {
+						settingsToOperate.put(ExportSettingsType.ITINERARY_GROUPS, itineraryGroups);
+					}
+					break;
+				default:
+					break;
+			}
 		}
 		return settingsToOperate;
 	}

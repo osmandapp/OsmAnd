@@ -3964,4 +3964,5 @@
     <string name="poi_climbing_grade_french_min">Legkönnyebb útvonal (francia skála)</string>
     <string name="poi_climbing_grade_saxon_min">Legkönnyebb útvonal (szász skála)</string>
     <string name="poi_power_terminal">Légvezeték végződése</string>
+    <string name="poi_fuel_propane">Propángáz</string>
 </resources>

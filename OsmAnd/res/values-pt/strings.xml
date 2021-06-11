@@ -34,7 +34,7 @@
     <string name="poi_filter_closest_poi">POIs mais próximos</string>
     <string name="poi_filter_custom_filter">Filtro personalizado</string>
     <string name="poi_filter_by_name">Procurar por nome</string>
-    <string name="poi_filter_food_shop">Hiper/supermercado</string>
+    <string name="poi_filter_food_shop">Loja de produtos alimentares</string>
     <string name="poi_filter_for_tourists">Para turistas</string>
     <string name="poi_filter_fuel">Combustível</string>
     <string name="poi_filter_namefinder">Pesquisar nome online</string>
@@ -2107,7 +2107,7 @@
     <string name="advanced_coords_search">Pesquisa avançada de coordenadas</string>
     <string name="back_to_search">Retroceder para pesquisa</string>
     <string name="confirmation_to_delete_history_items">Pretende remover os itens selecionados do \'histórico\'\?</string>
-    <string name="show_something_on_map">Ver %1$s no mapa</string>
+    <string name="show_something_on_map">Ver \'%1$s\' no mapa</string>
     <string name="poi_cannot_be_found">Não foi possível encontrar o nó ou o caminho.</string>
     <string name="search_no_results_feedback">Nenhum resultado de pesquisa\? 
 \nDê-nos a sua opinião</string>
@@ -3705,7 +3705,7 @@
     <string name="select_track_width">Espessura da linha do trilho</string>
     <string name="gpx_split_interval_descr">Selecione o intervalo em que as marcas com distância ou tempo no trilho serão mostradas.</string>
     <string name="gpx_split_interval_none_descr">Selecione a opção de divisão desejada: por tempo ou por distância.</string>
-    <string name="shared_string_custom">Personalizado</string>
+    <string name="shared_string_custom">Definir</string>
     <string name="gpx_direction_arrows">Setas de direção</string>
     <string name="track_coloring_solid">Sólida</string>
     <string name="plan_route_last_edited">Última edição</string>
@@ -3722,8 +3722,8 @@
     <string name="route_between_points_desc">Escolha como ligar os pontos: por uma linha reta ou por uma rota calculada entre eles como especificado abaixo.</string>
     <string name="whole_track">Trilho inteiro</string>
     <string name="next_segment">Próximo segmento</string>
-    <string name="route_between_points_warning_desc">Em seguida, encaixe o trilho na estrada mais próxima permitida com um dos seus perfis de navegação para usar esta opção.</string>
-    <string name="threshold_distance">Distância limiar</string>
+    <string name="route_between_points_warning_desc">Na próxima janela, defina o limite de distância e depois adicione pontos próximos de uma via para que esses pontos sejam automaticamente posicionados nessa via com acesso permitido ou adequado conforme o perfil escolhido.</string>
+    <string name="threshold_distance">Limite de distância</string>
     <string name="navigation_profile">Perfil de navegação</string>
     <string name="route_between_points_add_track_desc">Selecione um ficheiro de trilho no qual será adicionado um novo segmento.</string>
     <string name="follow_track">Seguir o trilho</string>
@@ -4178,4 +4178,6 @@
     <string name="receiving_data_from_server">A receber dados do servidor</string>
     <string name="restore_complete">Restauro completo</string>
     <string name="grey_color_slope">Os declives desconhecidos são mostrados na cor cinzento.</string>
+    <string name="backup_version_history">Histórico de versões</string>
+    <string name="backup_storage_taken">Espaço utilizado</string>
 </resources>
