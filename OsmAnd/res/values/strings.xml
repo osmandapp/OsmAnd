@@ -12,6 +12,12 @@
 
 -->
 
+    <string name="shared_string_includes_with_columns">Includes:</string>
+    <string name="shared_string_not_included_with_columns">Not included:</string>
+    <string name="cancel_anytime_in_gplay">Cancel anytime in Google Play.</string>
+    <string name="shared_string_learn_more">Learn more</string>
+    <string name="osmand_pro_tagline">Get maximum features</string>
+    <string name="osmand_maps_plus_tagline">Get extended features</string>
     <string name="redeem_promo_code">Redeem promo code</string>
     <string name="not_available_with">Not available with %1$s </string>
     <string name="continue_with">Continue with %1$s</string>

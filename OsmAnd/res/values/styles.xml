@@ -227,6 +227,7 @@
         <item name="dlg_btn_secondary">@drawable/dlg_btn_secondary_light</item>
         <item name="dlg_btn_secondary_text">@color/dlg_btn_secondary_text_light</item>
         <item name="dlg_btn_stroked">@drawable/dlg_btn_stroked_light</item>
+        <item name="stroked_btn_contour">@drawable/stroked_btn_contour_light</item>
         <item name="profile_save_btn">@drawable/btn_round_profile_blue</item>
         <item name="profile_cancel_btn">@drawable/btn_round_profile_gray</item>
 
@@ -526,6 +527,7 @@
         <item name="pages_bg">@drawable/pages_bg_dark</item>
         <item name="dlg_btn_primary">@drawable/dlg_btn_primary_dark</item>
         <item name="dlg_btn_primary_text">@color/dlg_btn_primary_text_dark</item>
+        <item name="stroked_btn_contour">@drawable/stroked_btn_contour_dark</item>
         <item name="dlg_btn_secondary">@drawable/dlg_btn_secondary_dark</item>
         <item name="dlg_btn_secondary_text">@color/dlg_btn_secondary_text_dark</item>
         <item name="dlg_btn_stroked">@drawable/dlg_btn_stroked_dark</item>

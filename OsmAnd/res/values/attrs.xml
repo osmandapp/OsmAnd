@@ -133,6 +133,7 @@
 		<attr name="dlg_btn_secondary" format="reference" />
 		<attr name="dlg_btn_secondary_text" format="reference" />
 		<attr name="dlg_btn_stroked" format="reference" />
+        <attr name="stroked_btn_contour" format="reference" />
 		<attr name="profile_save_btn" format="reference"/>
 		<attr name="profile_cancel_btn" format="reference"/>
 		<attr name="btn_bg_border_inactive" format="reference"/>
