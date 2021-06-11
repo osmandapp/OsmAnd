@@ -2787,4 +2787,7 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="gpx_upload_public_visibility_descr">\"Julkinen\" tarkoittaa sitä, että jälki näkyy julkisesti GPS-jäljissäsi ja julkisissa GPS-jälkilistauksissa sekä julkisessa jälkiluettelossa, jossa aikaleimat on raakamuodossa. API:n kautta toimitetut tiedot eivät viittaa jälkisivuusi. Jälkipisteiden aikaleimat eivät ole saatavilla julkisen GPS-API:n kautta, eikä jälkipisteita ole laitettu aikajärjestykseen.</string>
     <string name="gpx_upload_identifiable_visibility_descr">\"Tunnistettavissa\" tarkoittaa sitä, että jälki näkyy julkisesti GPS-jäljissäsi ja julkisissa GPS-jälkilistauksissa, eli muut käyttäjät voivat ladata raakajäljen ja yhdistää sen käyttäjätunnukseesi. GPS-API:n julkiset aikaleimalla varustetut jälkipistetiedot, jotka toimitetaan jälkipiste API:n kautta, viittaavat alkuperäiseen jälkisivuusi.</string>
     <string name="app_restart_required">Joidenkin asetusten käyttäminen edellyttää sovelluksen uudelleenkäynnistystä.</string>
+    <string name="osm_live_payment_subscription_management">Google Play -tilisi veloitetaan tilauksen oston yhteydessä
+\nja kun se vanhenee (kuukausi / kolme kuukautta / vuosi),
+\nse ei uusiudu, jos se peruutetaan aiemmin Google Play -asetuksista.</string>
 </resources>
