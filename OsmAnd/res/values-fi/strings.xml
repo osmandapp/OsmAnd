@@ -458,7 +458,7 @@
     <string name="show_poi_over_map">Näytä KP-peite</string>
     <string name="search_address">Etsi osoite</string>
     <string name="use_english_names_descr">Valitse omakieliset tai englanninkieliset nimet</string>
-    <string name="go_back_to_osmand">Palaa OsmAnd karttaan</string>
+    <string name="go_back_to_osmand">Palaa karttaan</string>
     <string name="empty_route_calculated">Virhe: Laskettu reitti on tyhjä</string>
     <string name="route_general_information">Kokonaismatka %1$s, matka-aika %2$d h %3$d min.</string>
     <string name="gps_provider">GPS</string>
@@ -743,29 +743,22 @@
     <string name="shared_string_currently_recording_track">Reitin nauhoitus</string>
     <string name="track_segments">Jälkijanat</string>
     <string name="track_points">Jälkipisteet</string>
-    <string name="osmand_rastermaps_plugin_description">"Tällä lisäosalla voit päästä monenlaisiin online (ns. laatta- tai rasteri-) karttoihin, esimääritellyistä Openstreetmap laatoista (kuten Mapnik) satelliitti kuviin ja erityistarkoitus tasoihin kuten sääkarttoihin, ilmasto karttoihin, geologisiin karttoihin, mäkisävy tasoihin, jne.
-
-Mitä tahansa näistä kartoista voidaan käyttää pää (pohja) karttana näytettäessä OsmAnd karttaruudulla, tai päällys- tai aluskerroksena toiselle pohjakartalle (kuten OsmAndin perus offline kartat). Saadaksesi mikä tahansa aluskerros näkyvämmäksi, tiettyjä osia OsmAnd vektorikartoista voi helposti piilottaa \'Kartta asetukset\' valikosta tarvittaessa.
-
-Laattakarttoja voi saada suoraan online lähteistä, tai voidaan valmistaa offline käyttöön (tai manuaalisesti kopioida OsmAndin kansioon) sqlite tietokantana jonka voi teihdä eri kolmannen osapuolen karttavalmistelu työkaluilla.
- "</string>
-    <string name="record_plugin_description">"Tämä lisäosa ottaa käyttöön toiminnallisuudet nauhoittaa ja tallentaa jälkiä manuaalisesti koskettamalla GPX nauhoitus toimintoja karttaruudulla, tai myös automaattisesti tallentaa kaikki navigointireitit GPX tiedostoon.
-
-
-Nauhoitetut jäljet voidaan jakaa ystävillesi tai käyttää OSM osallistumisissa. Urheilijat voivat nauhoittaa jälkiä harjoittelun seuraamiseen. Jotain perus jälkianalyysejä voidaan tehdä suoraan OsmAndissa, kuten kierrosaikoja, keskimääräistä nopeutta jne., ja jälkiä voi tietysty myös myöhemmin analysoida erityisissä kolmannen osapuolen analysointi työkaluissa.
- "</string>
+    <string name="osmand_rastermaps_plugin_description">Pääse käsiksi monenlaisiin online (ns. laatta- tai rasteri-) karttoihin, esimääritellyistä OSM-laatoista (kuten Mapnik) satelliittikuviin ja erityistarkoitustasoihin kuten sääkarttoihin, ilmastokarttoihin, geologisiin karttoihin, mäkisävy tasoihin, jne.
+\n
+\nMitä tahansa näistä kartoista voidaan käyttää pää(pohja)karttana, tai päällys- tai aluskerroksena toiselle pohjakartalle (kuten OsmAndin perus offline-kartat). Saadaksesi mikä tahansa aluskerros näkyvämmäksi, tiettyjä osia OsmAnd vektorikartoista voi tarvittaessa helposti piilottaa \"Kartta-asetukset\" valikosta.
+\n
+\nLaattakarttoja voi saada suoraan online lähteistä, tai voidaan valmistaa offline-käyttöön (tai manuaalisesti kopioida OsmAndin kansioon) SQLite-tietokantana, jonka voi tehdä eri kolmannen osapuolen karttavalmistelutyökaluilla.</string>
+    <string name="record_plugin_description">Tämä lisäosa ottaa käyttöön toiminnallisuudet nauhoittaa ja tallentaa jälkiä manuaalisesti koskettamalla GPX-kirjauswidgettiä kartalla, tai myös automaattisesti tallentaa kaikki navigointireitit GPX-tiedostoon.
+\n
+\nNauhoitetut jäljet voidaan jakaa ystävillesi tai käyttää OSM osallistumisissa. Urheilijat voivat nauhoittaa jälkiä harjoittelun seuraamiseen. Jotain perusanalyysejä jäljille voidaan tehdä suoraan OsmAndissa, kuten kierrosaikoja, keskimääräistä nopeutta jne., ja jälkiä voi tietysti myös myöhemmin analysoida erityisissä kolmannen osapuolen analysointityökaluissa.</string>
     <string name="srtm_paid_version_title">Korkeuskäyrät lisäosa</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd lisäosa offline korkeuskäyrille</string>
-    <string name="osmand_srtm_long_description_1000_chars">"Tämä lisäosa tarjoaa sekä korkeuskäyrä päällyskerros ja (helpotus) mäkisävy tason näytettäväksi OsmAnd offline karttojen päällä. Tätä toiminnallisuutta arvostavat paljon urheilijat, retkeilijät, vuoristo seikkailijat, ja ketkä tahansa maisemien ihailusta kiinnostuneet.
-
-
-Maailmanlaajuiset tiedot (välillä 70 astetta pohjoista ja 70 astetta eteläistä) perustuu mittauksiin jotka on tehnyt SRTM (Shuttle Radar Topography Mission) ja ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), ja kuvausvälineet mukana kulkeva Terra, NASAn maapallontarkkailujärjestelmän lippulaiva satelliitti. ASTER on yhteistyö NASAn, Japanin talous-, kauppa ja teollisuusministeriön (METI), ja Japanin avaruusjärjestelmien (J-spacesystems) välillä. *
- "</string>
-    <string name="srtm_plugin_description">"Tämä lisäosa tarjoaa sekä korkeuskäyrä päällyskerros ja (helpotus) mäkisävy tason näytettäväksi OsmAnd offline karttojen päällä. Tätä toiminnallisuutta arvostavat paljon urheilijat, retkeilijät, vuoristo seikkailijat, ja ketkä tahansa maisemien ihailusta kiinnostuneet.
-
-
-Maailmanlaajuiset tiedot (välillä 70 astetta pohjoista ja 70 astetta eteläistä) perustuu mittauksiin jotka on tehnyt SRTM (Shuttle Radar Topography Mission) ja ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), ja kuvausvälineet mukana kulkeva Terra, NASAn maapallontarkkailujärjestelmän lippulaiva satelliitti. ASTER on yhteistyö NASAn, Japanin talous-, kauppa ja teollisuusministeriön (METI), ja Japanin avaruusjärjestelmien (J-spacesystems) välillä.
- "</string>
+    <string name="osmand_srtm_long_description_1000_chars">Tämä lisäosa tarjoaa korkeuskäyräpeitteen ja (kohokuva) mäkisävytason näytettäväksi OsmAnd offline-karttojen päällä. Tätä toiminnallisuutta arvostavat paljon urheilijat, retkeilijät, vuoristoseikkailijat, ja ketkä tahansa maisemien ihailusta kiinnostuneet.
+\n
+\nMaailmanlaajuiset tiedot (välillä 70° pohjoista ja 70° eteläistä) perustuu mittauksiin jotka on tehnyt SRTM (Shuttle Radar Topography Mission) ja ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), ja NASAn maapallontarkkailujärjestelmän lippulaivasatelliitti Terran mukana kulkeva kuvauslaite. ASTER on yhteistyö NASAn, Japanin talous-, kauppa ja teollisuusministeriön (METI), ja Japanin avaruusjärjestelmien (J-spacesystems) välillä.</string>
+    <string name="srtm_plugin_description">Tämä lisäosa tarjoaa korkeuskäyräpeitteen ja (kohokuva) mäkisävytason näytettäväksi OsmAnd offline-karttojen päällä. Tätä toiminnallisuutta arvostavat paljon urheilijat, retkeilijät, vuoristoseikkailijat, ja ketkä tahansa maisemien ihailusta kiinnostuneet.
+\n
+\nMaailmanlaajuiset tiedot (välillä 70° pohjoista ja 70° eteläistä) perustuu mittauksiin jotka on tehnyt SRTM (Shuttle Radar Topography Mission) ja ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), ja NASAn maapallontarkkailujärjestelmän lippulaivasatelliitti Terran mukana kulkeva kuvauslaite. ASTER on yhteistyö NASAn, Japanin talous-, kauppa ja teollisuusministeriön (METI), ja Japanin avaruusjärjestelmien (J-spacesystems) välillä.</string>
     <string name="layer_map">Kartan lähde…</string>
     <string name="text_size">Tekstin koko</string>
     <string name="map_locale">Kartan kieli</string>
@@ -1448,7 +1441,7 @@ Maailmanlaajuiset tiedot (välillä 70 astetta pohjoista ja 70 astetta eteläist
 \nsovelluksen suoritus taustalta</string>
     <string name="map_widget_mini_route">Pienoisreittikartta</string>
     <string name="bg_service_interval">Aseta virkistyksen aikaväli:</string>
-    <string name="select_animate_speedup">Reitin simulointinopeus:</string>
+    <string name="select_animate_speedup">Reittisimulaation nopeus:</string>
     <string name="global_app_allocated_memory_descr">Muistia varattu %1$s MB (Android raja %2$s MB, Dalvik %3$s MB).</string>
     <string name="share_route_as_gpx">Jaa reitti GPX-tiedostona</string>
     <string name="share_route_subject">OsmAndista jaettu reitti</string>
@@ -1870,7 +1863,7 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="navigation_intent_invalid">Virheellinen formaatti: %s</string>
     <string name="use_fast_recalculation">Älykäs reitin uudelleen laskenta</string>
     <string name="use_fast_recalculation_desc">Laskee uudelleen ainoastaan reitin alkuosan. Hyödyllinen pitkille matkoille.</string>
-    <string name="rate_this_app">Arvostele tämä sovellutus</string>
+    <string name="rate_this_app">Arvostele tämä sovellus</string>
     <string name="user_hates_app_get_feedback">Kerro meille miksi.</string>
     <string name="user_hates_app_get_feedback_long">Ole hyvä ja kerro meille mitä haluaisit muuttaa tässä sovelluksessa.</string>
     <string name="failed_to_upload">Vieminen epäonnistui</string>
@@ -1941,7 +1934,7 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="shared_string_sort">Lajittele</string>
     <string name="coordinate_input">Koordinaattien syöttö</string>
     <string name="marker_save_as_track_descr">Vie markkerisi seuraavaan GPX-tiedostoon:</string>
-    <string name="move_to_history">Siirrä historiaan</string>
+    <string name="move_to_history">Vie historiaan</string>
     <string name="group_will_be_removed_after_restart">Ryhmä poistetaan sovelluksen uudelleenkäynnistyksen jälkeen.</string>
     <string name="show_arrows_on_the_map">Näytä nuolet kartalla</string>
     <string name="remove_from_map_markers">Poista karttamarkkereista</string>
@@ -2747,7 +2740,7 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="added_profiles_descr">Laajennuksen lisäämät profiilit</string>
     <string name="added_profiles">Lisätyt profiilit</string>
     <string name="profile_appearance">Profiilin ulkoasu</string>
-    <string name="add_new_profile_q">Lisätäänkö uusi profiili \'%1$s\'\?</string>
+    <string name="add_new_profile_q">Lisää uusi profiili \"%1$s\"\?</string>
     <string name="master_profile">Pääprofiili</string>
     <string name="reset_all_profile_settings">Palautetaanko kaikki profiiliasetukset\?</string>
     <string name="profile_type_custom_string">Mukautettu profiili</string>
@@ -2798,5 +2791,7 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="lang_lmo">lombardi</string>
     <string name="main_actions">Päätoiminnot</string>
     <string name="developer_plugin">Kehittäjälaajennus</string>
-    <string name="main_actions_descr">\'Päätoiminnot\' sisältää vain 4 painiketta.</string>
+    <string name="main_actions_descr">\"Päätoiminnot\" sisältää vain 4 painiketta.</string>
+    <string name="use_two_digits_longitude">Käytä kaksinumeroista pituusastetta</string>
+    <string name="file_does_not_contain_routing_rules">\"%1$s\" tiedosto ei sisällä reitityssääntöjä, ole hyvä ja valitse toinen tiedosto.</string>
 </resources>
