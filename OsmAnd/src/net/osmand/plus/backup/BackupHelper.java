@@ -897,12 +897,6 @@ public class BackupHelper {
 					public void onFilesDownloadDone(@NonNull Map<File, String> errors) {
 						Map<File, String> errMap = resolveServerErrors(errors);
 						res.putAll(errMap);
-						for (Entry<File, RemoteFile> fileEntry : filesMap.entrySet()) {
-							if (!errors.containsKey(fileEntry.getKey())) {
-								RemoteFile remoteFile = fileEntry.getValue();
-								updateFileUploadTime(remoteFile.getType(), remoteFile.getName(), remoteFile.getClienttimems());
-							}
-						}
 						if (listener != null) {
 							listener.onFilesDownloadDone(errMap);
 						}
@@ -953,12 +947,6 @@ public class BackupHelper {
 
 					@Override
 					public void onFilesDownloadDone(@NonNull Map<File, String> errors) {
-						for (Entry<File, RemoteFile> fileEntry : filesMap.entrySet()) {
-							if (!errors.containsKey(fileEntry.getKey())) {
-								RemoteFile remoteFile = fileEntry.getValue();
-								updateFileUploadTime(remoteFile.getType(), remoteFile.getName(), remoteFile.getClienttimems());
-							}
-						}
 						if (listener != null) {
 							listener.onFilesDownloadDone(resolveServerErrors(errors));
 						}

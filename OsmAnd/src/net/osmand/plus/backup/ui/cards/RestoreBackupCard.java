@@ -26,11 +26,11 @@ import java.util.List;
 
 public class RestoreBackupCard extends MapBaseCard {
 
-	private final BackupInfo info;
+	private final BackupInfo backup;
 
-	public RestoreBackupCard(@NonNull MapActivity mapActivity, BackupInfo info) {
+	public RestoreBackupCard(@NonNull MapActivity mapActivity, BackupInfo backup) {
 		super(mapActivity, false);
-		this.info = info;
+		this.backup = backup;
 	}
 
 	@Override
@@ -56,12 +56,12 @@ public class RestoreBackupCard extends MapBaseCard {
 				MapActivity mapActivity = getMapActivity();
 				if (mapActivity != null) {
 					List<SettingsItem> items = new ArrayList<>();
-					for (RemoteFile remoteFile : info.filesToDownload) {
+					for (RemoteFile remoteFile : backup.filesToDownload) {
 						if (remoteFile.item != null) {
 							items.add(remoteFile.item);
 						}
 					}
-					for (Pair<LocalFile, RemoteFile> pair : info.filesToMerge) {
+					for (Pair<LocalFile, RemoteFile> pair : backup.filesToMerge) {
 						if (pair.second.item != null) {
 							items.add(pair.second.item);
 						}

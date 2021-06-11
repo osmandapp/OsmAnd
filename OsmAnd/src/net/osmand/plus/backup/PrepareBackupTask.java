@@ -113,7 +113,7 @@ public class PrepareBackupTask {
 	}
 
 	private void doCollectRemoteFiles() {
-		app.getNetworkSettingsHelper().collectSettings("", 0, new BackupCollectListener() {
+		app.getNetworkSettingsHelper().collectSettings("", 0, false, new BackupCollectListener() {
 					@Override
 					public void onBackupCollectFinished(boolean succeed, boolean empty,
 														@NonNull List<SettingsItem> items,
