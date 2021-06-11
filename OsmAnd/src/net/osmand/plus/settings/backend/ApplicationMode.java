@@ -169,6 +169,15 @@ public class ApplicationMode {
 		return customModes;
 	}
 
+	public static boolean exist(String key) {
+		for (ApplicationMode p : values) {
+			if (p.getStringKey().equals(key)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public static ApplicationMode valueOfStringKey(String key, ApplicationMode def) {
 		for (ApplicationMode p : values) {
 			if (p.getStringKey().equals(key)) {

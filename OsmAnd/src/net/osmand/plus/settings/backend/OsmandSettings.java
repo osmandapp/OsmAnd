@@ -764,7 +764,42 @@ public class OsmandSettings {
 
 	public final CommonPreference<Integer> NUMBER_OF_STARTS_FIRST_XMAS_SHOWN = new IntPreference(this, "number_of_starts_first_xmas_shown", 0).makeGlobal();
 
-	public final OsmandPreference<String> AVAILABLE_APP_MODES = new StringPreference(this, "available_application_modes", "car,bicycle,pedestrian,public_transport,").makeGlobal().makeShared().cache();
+	public final OsmandPreference<String> AVAILABLE_APP_MODES = new StringPreference(this, "available_application_modes", "car,bicycle,pedestrian,public_transport,") {
+
+		@Override
+		public void readFromJson(JSONObject json, ApplicationMode appMode) throws JSONException {
+			Set<String> customAppModesKeys = new HashSet<>();
+			if ((json.has(CUSTOM_APP_MODES_KEYS.getId()))) {
+				customAppModesKeys = Algorithms.decodeStringSet(json.getString(CUSTOM_APP_MODES_KEYS.getId()), ",");
+			}
+
+			Set<String> nonexistentCustomAppModesKeys = new HashSet<>();
+			for (String customAppModeKey : customAppModesKeys) {
+				if (!ApplicationMode.exist(customAppModeKey)) {
+					nonexistentCustomAppModesKeys.add(customAppModeKey);
+				}
+			}
+			customAppModesKeys.removeAll(nonexistentCustomAppModesKeys);
+			json.put(CUSTOM_APP_MODES_KEYS.getId(), Algorithms.encodeStringSet(customAppModesKeys, ","));
+
+			Set<String> availableAppModesKeys = new HashSet<>();
+			if (json.has(AVAILABLE_APP_MODES.getId())) {
+				availableAppModesKeys = Algorithms.decodeStringSet(json.getString(AVAILABLE_APP_MODES.getId()),",");
+			}
+			for (String availableAppModeKey : availableAppModesKeys) {
+				if (availableAppModeKey.matches("^.*_\\d{10,13}$") && !customAppModesKeys.contains(availableAppModeKey)) {
+					nonexistentCustomAppModesKeys.add(availableAppModeKey);
+				}
+			}
+			if (!nonexistentCustomAppModesKeys.isEmpty()) {
+				availableAppModesKeys.removeAll(nonexistentCustomAppModesKeys);
+			}
+			json.put(AVAILABLE_APP_MODES.getId(), Algorithms.encodeStringSet(availableAppModesKeys, ","));
+
+			super.readFromJson(json, appMode);
+		}
+
+	}.makeGlobal().makeShared().cache();
 
 	public final OsmandPreference<String> LAST_FAV_CATEGORY_ENTERED = new StringPreference(this, "last_fav_category", "").makeGlobal();
 
