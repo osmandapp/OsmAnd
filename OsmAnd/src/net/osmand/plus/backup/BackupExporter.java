@@ -3,6 +3,7 @@ package net.osmand.plus.backup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.backup.BackupHelper.OnDeleteFilesListener;
 import net.osmand.plus.backup.NetworkWriter.OnUploadItemListener;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.Exporter;
@@ -10,15 +11,18 @@ import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
 public class BackupExporter extends Exporter {
 
 	private final BackupHelper backupHelper;
+	private final Map<String, RemoteFile> filesToDelete = new LinkedHashMap<>();
 	private final NetworkExportProgressListener listener;
 
 	public interface NetworkExportProgressListener {
@@ -39,16 +43,51 @@ public class BackupExporter extends Exporter {
 		this.listener = listener;
 	}
 
-	@Override
-	public void export() throws IOException {
-		writeItems();
+	public Map<String, RemoteFile> getFilesToDelete() {
+		return filesToDelete;
 	}
 
-	private void writeItems() throws IOException {
+	public void addFileToDelete(RemoteFile file) throws IllegalArgumentException {
+		if (filesToDelete.containsKey(file.getTypeNamePath())) {
+			throw new IllegalArgumentException("Already has such file: " + file.getTypeNamePath());
+		}
+		filesToDelete.put(file.getName(), file);
+	}
+
+	@Override
+	public void export() throws IOException {
+		exportItems();
+	}
+
+	private void exportItems() throws IOException {
+		int[] dataProgress = {0};
+		Set<Object> itemsProgress = new HashSet<>();
 		Map<String, String> errors = new HashMap<>();
-		OnUploadItemListener uploadItemListener = new OnUploadItemListener() {
-			final Set<SettingsItem> itemsProgress = new HashSet<>();
-			final int[] dataProgress = {0};
+
+		OnUploadItemListener uploadItemListener = getOnUploadItemListener(itemsProgress, dataProgress, errors);
+		OnDeleteFilesListener deleteFilesListener = getOnDeleteFilesListener(itemsProgress, dataProgress, errors);
+
+		NetworkWriter networkWriter = new NetworkWriter(backupHelper, uploadItemListener);
+		writeItems(networkWriter);
+		deleteFiles(deleteFilesListener);
+		if (!isCancelled()) {
+			backupHelper.updateBackupUploadTime();
+		}
+		if (listener != null) {
+			listener.networkExportDone(errors);
+		}
+	}
+
+	protected void deleteFiles(OnDeleteFilesListener listener) throws IOException {
+		try {
+			backupHelper.deleteFiles(new ArrayList<>(getFilesToDelete().values()), listener);
+		} catch (UserNotRegisteredException e) {
+			throw new IOException(e.getMessage(), e);
+		}
+	}
+
+	private OnUploadItemListener getOnUploadItemListener(Set<Object> itemsProgress, int[] dataProgress, Map<String, String> errors) {
+		return new OnUploadItemListener() {
 
 			@Override
 			public void onItemFileUploadStarted(@NonNull SettingsItem item, @NonNull String fileName, int work) {
@@ -81,14 +120,32 @@ public class BackupExporter extends Exporter {
 				}
 			}
 		};
-		NetworkWriter networkWriter = new NetworkWriter(backupHelper, uploadItemListener);
-		writeItems(networkWriter);
-		if (!isCancelled()) {
-			backupHelper.updateBackupUploadTime();
-		}
-		if (listener != null) {
-			listener.networkExportDone(errors);
-		}
+	}
+
+	private OnDeleteFilesListener getOnDeleteFilesListener(Set<Object> itemsProgress, int[] dataProgress, Map<String, String> errors) {
+		return new OnDeleteFilesListener() {
+
+			@Override
+			public void onFileDeleteProgress(@NonNull RemoteFile file) {
+				itemsProgress.add(file);
+				if (listener != null) {
+					if (file.item != null) {
+						listener.itemExportDone(file.item.getType().name(), file.getName());
+					}
+					listener.updateGeneralProgress(itemsProgress.size(), dataProgress[0]);
+				}
+			}
+
+			@Override
+			public void onFilesDeleteDone(@NonNull Map<RemoteFile, String> errors) {
+
+			}
+
+			@Override
+			public void onFilesDeleteError(int status, @NonNull String message) {
+
+			}
+		};
 	}
 
 	private void checkAndDeleteOldFile(@NonNull SettingsItem item, @NonNull String fileName, Map<String, String> errors) {

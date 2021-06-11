@@ -57,7 +57,7 @@ public class BackupStatusCard extends MapBaseCard {
 		if (backupInfo != null) {
 			if (!Algorithms.isEmpty(backupInfo.filesToMerge)) {
 				status = BackupStatus.CONFLICTS;
-			} else if (!Algorithms.isEmpty(backupInfo.filesToUpload)) {
+			} else if (!Algorithms.isEmpty(backupInfo.filesToUpload) || !Algorithms.isEmpty(backupInfo.filesToDelete)) {
 				status = BackupStatus.MAKE_BACKUP;
 			}
 		} else if (!app.getSettings().isInternetConnectionAvailable()) {

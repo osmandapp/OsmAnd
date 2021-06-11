@@ -26,7 +26,6 @@ import net.osmand.plus.backup.LocalFile;
 import net.osmand.plus.backup.NetworkSettingsHelper.BackupExportItemListener;
 import net.osmand.plus.backup.NetworkSettingsHelper.BackupExportListener;
 import net.osmand.plus.backup.RemoteFile;
-import net.osmand.plus.backup.UserNotRegisteredException;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -213,15 +212,8 @@ public class BackupUploadCard extends MapBaseCard {
 				@Override
 				public void onClick(View v) {
 					List<SettingsItem> items = info.getItemsToUpload();
-					if (!items.isEmpty()) {
-						app.getNetworkSettingsHelper().exportSettings(items, exportListener, exportItemListener);
-					}
-					if (!Algorithms.isEmpty(info.filesToDelete)) {
-						try {
-							app.getBackupHelper().deleteFiles(info.filesToDelete, deleteFilesListener);
-						} catch (UserNotRegisteredException e) {
-
-						}
+					if (!items.isEmpty() || !Algorithms.isEmpty(info.filesToDelete)) {
+						app.getNetworkSettingsHelper().exportSettings(items, info.filesToDelete, exportListener, exportItemListener);
 					}
 				}
 			});

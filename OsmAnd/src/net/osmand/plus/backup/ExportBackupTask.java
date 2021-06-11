@@ -24,6 +24,7 @@ public class ExportBackupTask extends AsyncTask<Void, Object, Boolean> {
 
 	ExportBackupTask(@NonNull NetworkSettingsHelper helper,
 					 @NonNull List<SettingsItem> items,
+					 @NonNull List<RemoteFile> filesToDelete,
 					 @Nullable BackupExportListener listener,
 					 @Nullable BackupExportItemListener itemListener) {
 		this.helper = helper;
@@ -32,6 +33,9 @@ public class ExportBackupTask extends AsyncTask<Void, Object, Boolean> {
 		this.exporter = new BackupExporter(helper.getApp().getBackupHelper(), getProgressListener());
 		for (SettingsItem item : items) {
 			exporter.addSettingsItem(item);
+		}
+		for (RemoteFile file : filesToDelete) {
+			exporter.addFileToDelete(file);
 		}
 	}
 
@@ -65,7 +69,7 @@ public class ExportBackupTask extends AsyncTask<Void, Object, Boolean> {
 	@Override
 	protected void onPreExecute() {
 		if (listener != null) {
-			listener.onBackupExportStarted(exporter.getItems().size());
+			listener.onBackupExportStarted(exporter.getItems().size() + exporter.getFilesToDelete().size());
 		}
 	}
 

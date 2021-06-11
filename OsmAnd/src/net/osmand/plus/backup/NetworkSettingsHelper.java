@@ -12,6 +12,7 @@ import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class NetworkSettingsHelper extends SettingsHelper {
@@ -119,9 +120,10 @@ public class NetworkSettingsHelper extends SettingsHelper {
 	}
 
 	public void exportSettings(@NonNull List<SettingsItem> items,
+							   @NonNull List<RemoteFile> filesToDelete,
 							   @Nullable BackupExportListener listener,
 							   @Nullable BackupExportItemListener itemListener) {
-		ExportBackupTask exportTask = new ExportBackupTask(this, items, listener, itemListener);
+		ExportBackupTask exportTask = new ExportBackupTask(this, items, filesToDelete, listener, itemListener);
 		this.exportTask = exportTask;
 		exportTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
@@ -129,6 +131,6 @@ public class NetworkSettingsHelper extends SettingsHelper {
 	public void exportSettings(@Nullable BackupExportListener listener,
 							   @Nullable BackupExportItemListener itemListener,
 							   @NonNull SettingsItem... items) {
-		exportSettings(new ArrayList<>(Arrays.asList(items)), listener, itemListener);
+		exportSettings(new ArrayList<>(Arrays.asList(items)), Collections.emptyList(), listener, itemListener);
 	}
 }
