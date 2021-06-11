@@ -1519,9 +1519,9 @@ Maailmanlaajuiset tiedot (välillä 70 astetta pohjoista ja 70 astetta eteläist
     <string name="routing_attr_avoid_borders_name">Vältä rajan ylitystä</string>
     <string name="routing_attr_avoid_borders_description">Vältä rajan ylitystä toiseen valtioon</string>
     <string name="routing_attr_weight_name">Painorajoitus</string>
-    <string name="routing_attr_weight_description">Määrittele ajoneuvon paino joka on sallittu reiteille</string>
+    <string name="routing_attr_weight_description">Määrittele ajoneuvon sallittu paino reiteille.</string>
     <string name="routing_attr_height_name">Sallittu korkeus</string>
-    <string name="routing_attr_height_description">Määrittele ajoneuvon sallittu korkeus reiteille</string>
+    <string name="routing_attr_height_description">Määrittele ajoneuvon sallittu korkeus reiteille.</string>
     <string name="copying_osmand_one_file_descr">Kopioidaan tiedostoa (%s) uuteen kohteeseen…</string>
     <string name="copying_osmand_files_descr">Kopioidaan OsmAnd datatiedostoja uuteen kohteeseen (%s)…</string>
     <string name="copying_osmand_files">Kopioidaan OsmAnd datatiedostoja…</string>
@@ -1748,7 +1748,7 @@ Maailmanlaajuiset tiedot (välillä 70 astetta pohjoista ja 70 astetta eteläist
     <string name="map_widget_audionotes">Audio huomautukset</string>
     <string name="index_srtm_parts">osat</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Retkeilysymbolit kartan päällä</string>
-    <string name="rendering_attr_noAdminboundaries_description">Pidä piilossa alueellisten rajojen näyttö (hallintotasot 5-9)</string>
+    <string name="rendering_attr_noAdminboundaries_description">Pidä alueelliset rajat piilossa (hallintotasot 5–9).</string>
     <string name="safe_mode_description">Suorita sovellus turvatilassa (käyttäen hitaampaa Androidia natiivin koodin sijasta).</string>
     <string name="native_library_not_running">Sovellutusta suoritetaan turvatilassa (poista tila Asetuksissa).</string>
     <string name="close_changeset">Sulje muutosjoukko</string>
@@ -1818,8 +1818,8 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
 \n%1$s</string>
     <string name="recording_context_menu_arecord">Tee audio muistiinpano</string>
     <string name="rendering_attr_alpineHiking_name">Alppivaelluksen mittakaava (SAC)</string>
-    <string name="rendering_attr_alpineHiking_description">Hahmota polut SAC mittakaavan mukaisesti</string>
-    <string name="rendering_attr_hikingRoutesOSMC_description">Piirrä polut OSMC-jälkien pohjalta</string>
+    <string name="rendering_attr_alpineHiking_description">Piirrä polut SAC-mittakaavan mukaisesti.</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">Piirrä polut OSMC-jälkien pohjalta.</string>
     <string name="keep_informing">Toista suunnistusohjeet</string>
     <string name="auto_follow_location_enabled">Keskitä käytettävä kartta automaattisesti.</string>
     <string name="data_to_search_poi_not_available">Lataa offline-dataa KP-kohteiden etsimiseksi.</string>
@@ -2043,7 +2043,7 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="shared_string_dont">Älä</string>
     <string name="shared_string_only_with_wifi">Vain Wi-Fi yhteydellä</string>
     <string name="wikivoyage_download_pics">Lataa kuvat</string>
-    <string name="shared_string_wifi_only">Vain Wi-Fi yhteydellä</string>
+    <string name="shared_string_wifi_only">Vain Wi-Fi-verkossa</string>
     <string name="select_travel_book">Valitse matkaopas</string>
     <string name="shared_string_travel_book">Matkaopas</string>
     <string name="online_webpage_warning">Sivu saatavilla vain verkossa. Avataanko selaimessa?</string>
@@ -2098,7 +2098,7 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="context_menu_read_full_article">Lue täysi artikkeli</string>
     <string name="context_menu_read_article">Lue artikkeli</string>
     <string name="context_menu_points_of_group">Kaikki ryhmän pisteet</string>
-    <string name="open_from"/>
+    <string name="open_from">Avoinna alkaen</string>
     <string name="av_locations_selected_desc">GPX-tiedosto, jossa koordinaatit ja valittujen huomautuksien data.</string>
     <string name="av_locations_all_desc">GPX-tiedosto, jossa koordinaatit ja kaikkien huomautuksien data.</string>
     <string name="modify_the_search_query">Muokkaa hakua.</string>
@@ -2465,7 +2465,7 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="osm_live_payment_month_cost_descr">%1$s / kuukausi</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / kuukausi</string>
     <string name="month">Kuukausi</string>
-    <string name="months_2_4">Kuukaudet</string>
+    <string name="months_2_4">Kuukautta</string>
     <string name="months_3">Kolme kuukautta</string>
     <string name="price_free">Ilmainen</string>
     <string name="rendering_value_thick_name">Paksu</string>
@@ -2595,7 +2595,7 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="upload_to_openstreetmap">Lähetä OpenStreetMappiin</string>
     <string name="edit_track">Muokkaa jälkeä</string>
     <string name="rename_track">Uudelleennimeä jälki</string>
-    <string name="change_folder">Muuta kansiota</string>
+    <string name="change_folder">Vaihda kansio</string>
     <string name="select_track_width">Valitse leveys</string>
     <string name="gpx_split_interval_descr">Valitse kuinka usein merkit näytetään välimatkalle tai ajalle jäljellä.</string>
     <string name="gpx_split_interval_none_descr">Valitse mieluisin jakoasetus: ajan tai välimatkan perusteella.</string>
@@ -2760,4 +2760,31 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="profile_type_osmand_string">OsmAnd-profiili</string>
     <string name="profile_type_user_string">Käyttäjäprofiili</string>
     <string name="search_poi_types_descr">Yhdistä eri luokkien POI-tyyppejä. Napauta \"Vaihda\" valitaksesi kaikki, napauta vasenta reunaa luokan valitsemiseksi.</string>
+    <string name="delete_address">Poista osoite</string>
+    <string name="add_address">Lisää osoite</string>
+    <string name="download_depth_countours">Merelliset korkeuskäyrät</string>
+    <string name="simulate_navigation">Simuloi suunnistus</string>
+    <string name="restart">Käynnistä uudelleen</string>
+    <string name="access_hint_enter_address">Syötä osoite</string>
+    <string name="routing_engine_vehicle_type_wheelchair">Pyörätuoli</string>
+    <string name="routing_engine_vehicle_type_hiking">Patikointi</string>
+    <string name="routing_engine_vehicle_type_walking">Kävely</string>
+    <string name="routing_engine_vehicle_type_mtb">Maastopyöräily</string>
+    <string name="hide_compass_ruler">Piilota kompassiviivain</string>
+    <string name="show_compass_ruler">Näytä kompassiviivain</string>
+    <string name="map_widget_ruler_control">Sädeviivain</string>
+    <string name="monitoring_control_start">REC</string>
+    <string name="routing_attr_length_name">Pituusrajoitus</string>
+    <string name="driving_region_automatic">Automaattinen</string>
+    <string name="transport_nearby_routes">Sisältäen</string>
+    <string name="transport_nearby_routes_within">Lähellä olevat reitit</string>
+    <string name="years_5">Vuotta</string>
+    <string name="years_2_4">Vuotta</string>
+    <string name="months_5">Kuukautta</string>
+    <string name="year">Vuosi</string>
+    <string name="gpx_upload_private_visibility_descr">\"Yksityinen\" tarkoittaa sitä, että jälki ei näy missään julkisissa listoissa, mutta sen jälkipisteet (jotka eivät ole aikajärjestyksessä) ovat saatavilla julkisen GPS-API:n kautta ilman aikaleimoja.</string>
+    <string name="gpx_upload_trackable_visibility_descr">\"Jäljitettävissä\" tarkoittaa sitä, että jälki ei näy missään julkisissa listoissa, mutta siitä prosessoidut jälkipisteet ja niiden aikaleimat (joita ei voida yhdistää suoraan sinuun), näkyvät julkisesta GPS-API:stä tehtyjen latausten kautta.</string>
+    <string name="gpx_upload_public_visibility_descr">\"Julkinen\" tarkoittaa sitä, että jälki näkyy julkisesti GPS-jäljissäsi ja julkisissa GPS-jälkilistauksissa sekä julkisessa jälkiluettelossa, jossa aikaleimat on raakamuodossa. API:n kautta toimitetut tiedot eivät viittaa jälkisivuusi. Jälkipisteiden aikaleimat eivät ole saatavilla julkisen GPS-API:n kautta, eikä jälkipisteita ole laitettu aikajärjestykseen.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">\"Tunnistettavissa\" tarkoittaa sitä, että jälki näkyy julkisesti GPS-jäljissäsi ja julkisissa GPS-jälkilistauksissa, eli muut käyttäjät voivat ladata raakajäljen ja yhdistää sen käyttäjätunnukseesi. GPS-API:n julkiset aikaleimalla varustetut jälkipistetiedot, jotka toimitetaan jälkipiste API:n kautta, viittaavat alkuperäiseen jälkisivuusi.</string>
+    <string name="app_restart_required">Joidenkin asetusten käyttäminen edellyttää sovelluksen uudelleenkäynnistystä.</string>
 </resources>
