@@ -10,7 +10,7 @@
     <string name="poi_office">Toimisto</string>
     <string name="poi_sport">Urheilu</string>
     <string name="poi_tourism">Matkailu</string>
-    <string name="poi_sightseeing">Kiertoajelu</string>
+    <string name="poi_sightseeing">Nähtävyys</string>
     <string name="poi_accomodation">Majoitus</string>
     <string name="poi_entertainment">Vapaa-aika</string>
     <string name="poi_tobacco">Tupakkakauppa</string>
@@ -113,10 +113,10 @@
     <string name="poi_hiking_routes">Vaellusreitit</string>
     <string name="poi_water_supply">Vesipiste</string>
     <string name="poi_power">Virtalähde</string>
-    <string name="poi_communication">Kommunikointi</string>
+    <string name="poi_communication">Viestintä</string>
     <string name="poi_landuse">Maankäyttö</string>
     <string name="poi_administrative">Hallinnollinen</string>
-    <string name="poi_internet_access">Internet</string>
+    <string name="poi_internet_access">Internet-yhteys</string>
     <string name="poi_club">Kerho</string>
     <string name="poi_sustenance">Ruoka</string>
     <string name="poi_cafe_and_restaurant">Kahvila ja ravintola</string>
@@ -132,7 +132,7 @@
     <string name="poi_alcohol">Alkoholikauppa</string>
     <string name="poi_cheese">Juustokauppa</string>
     <string name="poi_chocolate">Suklaakauppa</string>
-    <string name="poi_coffee">Kahvikauppa</string>
+    <string name="poi_coffee">Kahvila</string>
     <string name="poi_mall">ostoskeskus</string>
     <string name="poi_beverages">Virvoitusjuomakauppa</string>
     <string name="poi_butcher">Lihakauppa</string>
@@ -894,7 +894,7 @@
     <string name="poi_bath_open_air_yes">Kyllä</string>
     <string name="poi_traffic_enforcement">Liikenteen valvonta</string>
     <string name="poi_trash_disposal">Jätehuolto</string>
-    <string name="poi_palaeontological_site">Paleontologinen paikka</string>
+    <string name="poi_palaeontological_site">Paleontologinen kohde</string>
     <string name="poi_convenience">Lähikauppa</string>
     <string name="poi_confectionery">Makeiskauppa</string>
     <string name="poi_charity">Hyväntekeväisyyskauppa</string>
