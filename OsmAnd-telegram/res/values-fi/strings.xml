@@ -42,4 +42,5 @@
     <string name="shared_string_select">Valitse</string>
     <string name="shared_string_apply">Käytä</string>
     <string name="shared_string_sort">Lajittele</string>
+    <string name="unit_of_length">Pituuden yksikkö</string>
 </resources>
