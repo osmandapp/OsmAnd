@@ -26,9 +26,7 @@ public class NetworkSettingsHelper extends SettingsHelper {
 		void onBackupExportProgressUpdate(int value);
 
 		void onBackupExportFinished(boolean succeed);
-	}
 
-	public interface BackupExportItemListener {
 		void onBackupExportItemStarted(@NonNull String type, @NonNull String fileName, int work);
 
 		void onBackupExportItemProgress(@NonNull String type, @NonNull String fileName, int value);
@@ -77,11 +75,10 @@ public class NetworkSettingsHelper extends SettingsHelper {
 		return exportTask != null;
 	}
 
-	public void updateExportListeners(@Nullable BackupExportListener listener, @Nullable BackupExportItemListener itemListener) {
+	public void updateExportListeners(@Nullable BackupExportListener listener) {
 		ExportBackupTask exportTask = this.exportTask;
 		if (exportTask != null) {
 			exportTask.setListener(listener);
-			exportTask.setItemListener(itemListener);
 		}
 	}
 
@@ -122,16 +119,13 @@ public class NetworkSettingsHelper extends SettingsHelper {
 
 	public void exportSettings(@NonNull List<SettingsItem> items,
 							   @NonNull List<RemoteFile> filesToDelete,
-							   @Nullable BackupExportListener listener,
-							   @Nullable BackupExportItemListener itemListener) {
-		ExportBackupTask exportTask = new ExportBackupTask(this, items, filesToDelete, listener, itemListener);
+							   @Nullable BackupExportListener listener) {
+		ExportBackupTask exportTask = new ExportBackupTask(this, items, filesToDelete, listener);
 		this.exportTask = exportTask;
 		exportTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	public void exportSettings(@Nullable BackupExportListener listener,
-							   @Nullable BackupExportItemListener itemListener,
-							   @NonNull SettingsItem... items) {
-		exportSettings(new ArrayList<>(Arrays.asList(items)), Collections.emptyList(), listener, itemListener);
+	public void exportSettings(@Nullable BackupExportListener listener, @NonNull SettingsItem... items) {
+		exportSettings(new ArrayList<>(Arrays.asList(items)), Collections.emptyList(), listener);
 	}
 }

@@ -16,7 +16,6 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.BackupHelper.BackupInfo;
 import net.osmand.plus.backup.BackupHelper.OnDeleteFilesListener;
-import net.osmand.plus.backup.NetworkSettingsHelper.BackupExportItemListener;
 import net.osmand.plus.backup.NetworkSettingsHelper.BackupExportListener;
 import net.osmand.plus.backup.PrepareBackupResult;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
@@ -34,7 +33,7 @@ import net.osmand.util.Algorithms;
 import java.util.Map;
 
 public class BackupStatusFragment extends BaseOsmAndFragment implements CardListener, BackupExportListener,
-		BackupExportItemListener, OnDeleteFilesListener, OnPrepareBackupListener {
+		OnDeleteFilesListener, OnPrepareBackupListener {
 
 	private OsmandApplication app;
 
@@ -125,7 +124,7 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements CardList
 		MapActivity mapActivity = getMapActivity();
 		BackupInfo backupInfo = getBackupInfo();
 		if (mapActivity != null && backupInfo != null) {
-			uploadCard = new BackupUploadCard(mapActivity, backupInfo, this, this, this);
+			uploadCard = new BackupUploadCard(mapActivity, backupInfo, this, this);
 			uploadCard.setListener(this);
 			cardsContainer.addView(uploadCard.build(mapActivity), 0);
 		}

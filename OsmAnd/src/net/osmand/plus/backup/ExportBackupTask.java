@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.backup.BackupExporter.NetworkExportProgressListener;
-import net.osmand.plus.backup.NetworkSettingsHelper.BackupExportItemListener;
 import net.osmand.plus.backup.NetworkSettingsHelper.BackupExportListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
@@ -20,16 +19,13 @@ public class ExportBackupTask extends AsyncTask<Void, Object, Boolean> {
 	private final NetworkSettingsHelper helper;
 	private final BackupExporter exporter;
 	private BackupExportListener listener;
-	private BackupExportItemListener itemListener;
 
 	ExportBackupTask(@NonNull NetworkSettingsHelper helper,
 					 @NonNull List<SettingsItem> items,
 					 @NonNull List<RemoteFile> filesToDelete,
-					 @Nullable BackupExportListener listener,
-					 @Nullable BackupExportItemListener itemListener) {
+					 @Nullable BackupExportListener listener) {
 		this.helper = helper;
 		this.listener = listener;
-		this.itemListener = itemListener;
 		this.exporter = new BackupExporter(helper.getApp().getBackupHelper(), getProgressListener());
 		for (SettingsItem item : items) {
 			exporter.addSettingsItem(item);
@@ -45,14 +41,6 @@ public class ExportBackupTask extends AsyncTask<Void, Object, Boolean> {
 
 	public void setListener(BackupExportListener listener) {
 		this.listener = listener;
-	}
-
-	public BackupExportItemListener getItemListener() {
-		return itemListener;
-	}
-
-	public void setItemListener(BackupExportItemListener itemListener) {
-		this.itemListener = itemListener;
 	}
 
 	@Override
@@ -82,11 +70,11 @@ public class ExportBackupTask extends AsyncTask<Void, Object, Boolean> {
 				} else if (object instanceof ItemProgressInfo) {
 					ItemProgressInfo info = (ItemProgressInfo) object;
 					if (info.finished) {
-						itemListener.onBackupExportItemFinished(info.type, info.fileName);
+						listener.onBackupExportItemFinished(info.type, info.fileName);
 					} else if (info.value == 0) {
-						itemListener.onBackupExportItemStarted(info.type, info.fileName, info.work);
+						listener.onBackupExportItemStarted(info.type, info.fileName, info.work);
 					} else {
-						itemListener.onBackupExportItemProgress(info.type, info.fileName, info.value);
+						listener.onBackupExportItemProgress(info.type, info.fileName, info.value);
 					}
 				}
 			}

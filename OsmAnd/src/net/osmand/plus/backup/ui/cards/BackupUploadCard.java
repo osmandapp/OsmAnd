@@ -23,7 +23,6 @@ import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupHelper.BackupInfo;
 import net.osmand.plus.backup.BackupHelper.OnDeleteFilesListener;
 import net.osmand.plus.backup.LocalFile;
-import net.osmand.plus.backup.NetworkSettingsHelper.BackupExportItemListener;
 import net.osmand.plus.backup.NetworkSettingsHelper.BackupExportListener;
 import net.osmand.plus.backup.RemoteFile;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -44,7 +43,6 @@ public class BackupUploadCard extends MapBaseCard {
 
 	private final BackupInfo info;
 	private final BackupExportListener exportListener;
-	private final BackupExportItemListener exportItemListener;
 	private final OnDeleteFilesListener deleteFilesListener;
 
 	private View actionButton;
@@ -58,12 +56,10 @@ public class BackupUploadCard extends MapBaseCard {
 	public BackupUploadCard(@NonNull MapActivity mapActivity,
 							@NonNull BackupInfo info,
 							@Nullable BackupExportListener exportListener,
-							@Nullable BackupExportItemListener exportItemListener,
 							@Nullable OnDeleteFilesListener deleteFilesListener) {
 		super(mapActivity, false);
 		this.info = info;
 		this.exportListener = exportListener;
-		this.exportItemListener = exportItemListener;
 		this.deleteFilesListener = deleteFilesListener;
 	}
 
@@ -151,7 +147,7 @@ public class BackupUploadCard extends MapBaseCard {
 			localVersionButton.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					app.getNetworkSettingsHelper().exportSettings(exportListener, exportItemListener, pair.first.item);
+					app.getNetworkSettingsHelper().exportSettings(exportListener, pair.first.item);
 				}
 			});
 			View serverButton = itemView.findViewById(R.id.server_button);
@@ -213,7 +209,7 @@ public class BackupUploadCard extends MapBaseCard {
 				public void onClick(View v) {
 					List<SettingsItem> items = info.getItemsToUpload();
 					if (!items.isEmpty() || !Algorithms.isEmpty(info.filesToDelete)) {
-						app.getNetworkSettingsHelper().exportSettings(items, info.filesToDelete, exportListener, exportItemListener);
+						app.getNetworkSettingsHelper().exportSettings(items, info.filesToDelete, exportListener);
 					}
 				}
 			});

@@ -129,9 +129,7 @@ public class BackupExporter extends Exporter {
 			public void onFileDeleteProgress(@NonNull RemoteFile file) {
 				itemsProgress.add(file);
 				if (listener != null) {
-					if (file.item != null) {
-						listener.itemExportDone(file.item.getType().name(), file.getName());
-					}
+					listener.itemExportDone(file.getType(), file.getName());
 					listener.updateGeneralProgress(itemsProgress.size(), dataProgress[0]);
 				}
 			}
