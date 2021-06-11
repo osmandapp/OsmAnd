@@ -2794,4 +2794,5 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="main_actions_descr">\"Päätoiminnot\" sisältää vain 4 painiketta.</string>
     <string name="use_two_digits_longitude">Käytä kaksinumeroista pituusastetta</string>
     <string name="file_does_not_contain_routing_rules">\"%1$s\" tiedosto ei sisällä reitityssääntöjä, ole hyvä ja valitse toinen tiedosto.</string>
+    <string name="reset_items_descr">Asetusten piilottaminen palauttaa ne alkuperäiseen tilaansa.</string>
 </resources>
