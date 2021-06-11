@@ -157,7 +157,7 @@ public class BackupUploadCard extends MapBaseCard {
 				public void onClick(View v) {
 					SettingsItem settingsItem = pair.second.item;
 					settingsItem.setShouldReplace(true);
-					app.getNetworkSettingsHelper().importSettings(Collections.singletonList(settingsItem), "", 0, null);
+					app.getNetworkSettingsHelper().importSettings(Collections.singletonList(settingsItem), "", 1, true, null);
 				}
 			});
 			AndroidUiHelper.updateVisibility(serverButton, true);

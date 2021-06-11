@@ -114,7 +114,8 @@ public abstract class SettingsHelper {
 		COLLECT,
 		COLLECT_AND_READ,
 		CHECK_DUPLICATES,
-		IMPORT
+		IMPORT,
+		IMPORT_FORCE_READ,
 	}
 
 	public SettingsHelper(@NonNull OsmandApplication app) {
