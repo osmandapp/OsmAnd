@@ -43,4 +43,22 @@
     <string name="shared_string_apply">Käytä</string>
     <string name="shared_string_sort">Lajittele</string>
     <string name="unit_of_length">Pituuden yksikkö</string>
+    <string name="precision">Tarkkuus</string>
+    <string name="direction">Suunta</string>
+    <string name="privacy">Yksityisyys</string>
+    <string name="proxy">Välityspalvelin</string>
+    <string name="proxy_settings">Välityspalvelimen asetukset</string>
+    <string name="proxy_disconnected">Yhteys katkaistu</string>
+    <string name="proxy_credentials">Tunnukset</string>
+    <string name="proxy_connected">Yhdistetty</string>
+    <string name="proxy_type">Välityspalvelimen tyyppi</string>
+    <string name="shared_string_connection">Yhteys</string>
+    <string name="proxy_server">Palvelin</string>
+    <string name="proxy_port">Portti</string>
+    <string name="proxy_username">Käyttäjänimi</string>
+    <string name="proxy_password">Salasana</string>
+    <string name="proxy_key">Avain</string>
+    <string name="gpx_settings">GPX-asetukset</string>
+    <string name="shared_string_start">Alku</string>
+    <string name="shared_string_end">Loppu</string>
 </resources>
