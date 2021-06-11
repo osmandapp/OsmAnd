@@ -2586,7 +2586,7 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="icon_group_emergency">Hätätapaus</string>
     <string name="icon_group_transport">Liikenne</string>
     <string name="icon_group_symbols">Symbolit</string>
-    <string name="replace_point_descr">Korvaa toinen kohde tällä.</string>
+    <string name="replace_point_descr">Korvaa toinen piste tällä</string>
     <string name="shared_string_folders">Kansiot</string>
     <string name="select_folder">Valitse kansio</string>
     <string name="select_folder_descr">Valitse kansio tai lisää uusi</string>
@@ -2790,4 +2790,7 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="osm_live_payment_subscription_management">Google Play -tilisi veloitetaan tilauksen oston yhteydessä
 \nja kun se vanhenee (kuukausi / kolme kuukautta / vuosi),
 \nse ei uusiudu, jos se peruutetaan aiemmin Google Play -asetuksista.</string>
+    <string name="lang_my">burma</string>
+    <string name="lang_jv">jaava</string>
+    <string name="lang_an">aragonia</string>
 </resources>
