@@ -965,7 +965,7 @@ public class BackupHelper {
 				for (SettingsItem item : localItems) {
 					String fileName = BackupHelper.getItemFileName(item);
 					if (item instanceof FileSettingsItem) {
-						File file = app.getAppPath(fileName);
+						File file = ((FileSettingsItem) item).getFile();
 						if (file.isDirectory()) {
 							List<File> dirs = new ArrayList<>();
 							dirs.add(file);

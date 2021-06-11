@@ -111,6 +111,9 @@ class BackupImporter {
 						if (errors.isEmpty()) {
 							is = new FileInputStream(tempFile);
 							reader.readFromStream(is, remoteFile.getName());
+							if (forceReadData) {
+								item.apply();
+							}
 							backupHelper.updateFileUploadTime(remoteFile.getType(), remoteFile.getName(), remoteFile.getClienttimems());
 							if (item instanceof FileSettingsItem) {
 								String itemFileName = BackupHelper.getFileItemName((FileSettingsItem) item);

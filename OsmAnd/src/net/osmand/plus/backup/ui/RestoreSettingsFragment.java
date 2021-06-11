@@ -135,13 +135,15 @@ public class RestoreSettingsFragment extends ImportSettingsFragment {
 					PrepareBackupResult backup = app.getBackupHelper().getBackup();
 					List<SettingsItem> itemsForRestore = new ArrayList<>();
 					for (RemoteFile remoteFile : backup.getBackupInfo().filesToDownload) {
-						if (remoteFile.item != null) {
-							itemsForRestore.add(remoteFile.item);
+						int index = items.indexOf(remoteFile.item);
+						if (index != -1) {
+							itemsForRestore.add(items.get(index));
 						}
 					}
 					for (Pair<LocalFile, RemoteFile> pair : backup.getBackupInfo().filesToMerge) {
-						if (pair.second.item != null) {
-							itemsForRestore.add(pair.second.item);
+						int index = items.indexOf(pair.second.item);
+						if (index != -1) {
+							itemsForRestore.add(items.get(index));
 						}
 					}
 					setSettingsItems(itemsForRestore);
