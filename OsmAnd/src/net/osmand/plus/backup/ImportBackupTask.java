@@ -44,7 +44,7 @@ public class ImportBackupTask extends AsyncTask<Void, Void, List<SettingsItem>> 
 	private boolean importDone;
 
 	ImportBackupTask(@NonNull NetworkSettingsHelper helper,
-					 String latestChanges, int version,
+					 String latestChanges, int version, boolean readData,
 					 @Nullable BackupCollectListener collectListener) {
 		this.helper = helper;
 		this.app = helper.getApp();
@@ -52,10 +52,10 @@ public class ImportBackupTask extends AsyncTask<Void, Void, List<SettingsItem>> 
 		this.latestChanges = latestChanges;
 		this.version = version;
 		importer = new BackupImporter(app.getBackupHelper());
-		importType = ImportType.COLLECT;
+		importType = readData ? ImportType.COLLECT_AND_READ : ImportType.COLLECT;
 	}
 
-	ImportBackupTask(@NonNull NetworkSettingsHelper helper,
+	ImportBackupTask(@NonNull NetworkSettingsHelper helper, boolean forceReadData,
 				   @NonNull List<SettingsItem> items, String latestChanges, int version,
 				   @Nullable ImportListener importListener) {
 		this.helper = helper;
@@ -65,7 +65,7 @@ public class ImportBackupTask extends AsyncTask<Void, Void, List<SettingsItem>> 
 		this.latestChanges = latestChanges;
 		this.version = version;
 		importer = new BackupImporter(app.getBackupHelper());
-		importType = ImportType.IMPORT;
+		importType = forceReadData ? ImportType.IMPORT_FORCE_READ : ImportType.IMPORT;
 	}
 
 	ImportBackupTask(@NonNull NetworkSettingsHelper helper,
@@ -109,6 +109,7 @@ public class ImportBackupTask extends AsyncTask<Void, Void, List<SettingsItem>> 
 				this.duplicates = getDuplicatesData(selectedItems);
 				return selectedItems;
 			case IMPORT:
+			case IMPORT_FORCE_READ:
 				return items;
 		}
 		return null;
@@ -123,6 +124,7 @@ public class ImportBackupTask extends AsyncTask<Void, Void, List<SettingsItem>> 
 		}
 		switch (importType) {
 			case COLLECT:
+			case COLLECT_AND_READ:
 				importDone = true;
 				collectListener.onBackupCollectFinished(items != null, false, this.items, remoteFiles);
 				break;
@@ -133,11 +135,19 @@ public class ImportBackupTask extends AsyncTask<Void, Void, List<SettingsItem>> 
 				}
 				break;
 			case IMPORT:
+			case IMPORT_FORCE_READ:
 				if (items != null && items.size() > 0) {
 					for (SettingsItem item : items) {
 						item.apply();
+						String fileName = item.getFileName();
+						if (fileName != null) {
+							RemoteFile remoteFile = app.getBackupHelper().getBackup().getRemoteFile(item.getType().name(), fileName);
+							if (remoteFile != null) {
+								app.getBackupHelper().updateFileUploadTime(remoteFile.getType(), remoteFile.getName(), remoteFile.getClienttimems());
+							}
+						}
 					}
-					new ImportBackupItemsTask(helper, importListener, items)
+					new ImportBackupItemsTask(helper, importType == ImportType.IMPORT_FORCE_READ, importListener, items)
 							.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 				}
 				break;

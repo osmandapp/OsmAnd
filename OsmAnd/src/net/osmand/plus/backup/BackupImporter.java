@@ -79,7 +79,7 @@ class BackupImporter {
 		return result;
 	}
 
-	void importItems(@NonNull List<SettingsItem> items) throws IllegalArgumentException {
+	void importItems(@NonNull List<SettingsItem> items, boolean forceReadData) throws IllegalArgumentException {
 		if (Algorithms.isEmpty(items)) {
 			throw new IllegalArgumentException("No items");
 		}
@@ -98,7 +98,7 @@ class BackupImporter {
 					break;
 				}
 			}
-			if (item != null/* && !item.shouldReadOnCollecting()*/) {
+			if (item != null && (!item.shouldReadOnCollecting() || forceReadData)) {
 				FileInputStream is = null;
 				try {
 					SettingsItemReader<? extends SettingsItem> reader = item.getReader();
@@ -111,6 +111,10 @@ class BackupImporter {
 						if (errors.isEmpty()) {
 							is = new FileInputStream(tempFile);
 							reader.readFromStream(is, remoteFile.getName());
+							if (forceReadData) {
+								item.apply();
+							}
+							backupHelper.updateFileUploadTime(remoteFile.getType(), remoteFile.getName(), remoteFile.getClienttimems());
 							if (item instanceof FileSettingsItem) {
 								String itemFileName = BackupHelper.getFileItemName((FileSettingsItem) item);
 								if (app.getAppPath(itemFileName).isDirectory()) {

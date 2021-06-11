@@ -20,12 +20,15 @@ public class ImportBackupItemsTask extends AsyncTask<Void, Void, Boolean> {
 	private final ImportListener listener;
 	private final List<SettingsItem> items;
 	private final StateChangedListener<String> localeListener;
+	private boolean forceReadData;
 	private boolean needRestart = false;
 
 	ImportBackupItemsTask(@NonNull NetworkSettingsHelper helper,
+						  boolean forceReadData,
 						  @Nullable ImportListener listener,
 						  @NonNull List<SettingsItem> items) {
 		this.helper = helper;
+		this.forceReadData = forceReadData;
 		this.app = helper.getApp();
 		importer = new BackupImporter(app.getBackupHelper());
 		this.listener = listener;
@@ -46,7 +49,7 @@ public class ImportBackupItemsTask extends AsyncTask<Void, Void, Boolean> {
 	@Override
 	protected Boolean doInBackground(Void... voids) {
 		try {
-			importer.importItems(items);
+			importer.importItems(items, forceReadData);
 			return true;
 		} catch (IllegalArgumentException e) {
 			NetworkSettingsHelper.LOG.error("Failed to import items from backup", e);

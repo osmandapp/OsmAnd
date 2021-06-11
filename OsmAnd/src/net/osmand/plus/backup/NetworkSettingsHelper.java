@@ -99,9 +99,9 @@ public class NetworkSettingsHelper extends SettingsHelper {
 		}
 	}
 
-	public void collectSettings(String latestChanges, int version,
+	public void collectSettings(String latestChanges, int version, boolean readData,
 								@Nullable BackupCollectListener listener) {
-		new ImportBackupTask(this, latestChanges, version, listener)
+		new ImportBackupTask(this, latestChanges, version, readData, listener)
 				.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
@@ -114,8 +114,9 @@ public class NetworkSettingsHelper extends SettingsHelper {
 
 	public void importSettings(@NonNull List<SettingsItem> items,
 							   String latestChanges, int version,
+							   boolean forceReadData,
 							   @Nullable ImportListener listener) {
-		new ImportBackupTask(this, items, latestChanges, version, listener)
+		new ImportBackupTask(this, forceReadData, items, latestChanges, version, listener)
 				.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 

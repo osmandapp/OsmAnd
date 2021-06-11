@@ -3,6 +3,7 @@ package net.osmand.plus.backup.ui;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.style.StyleSpan;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,13 +17,19 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.backup.ImportBackupTask;
+import net.osmand.plus.backup.LocalFile;
 import net.osmand.plus.backup.NetworkSettingsHelper;
+import net.osmand.plus.backup.NetworkSettingsHelper.BackupCollectListener;
+import net.osmand.plus.backup.PrepareBackupResult;
+import net.osmand.plus.backup.RemoteFile;
+import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.fragments.ImportCompleteFragment;
 import net.osmand.plus.settings.fragments.ImportSettingsFragment;
 
 import org.apache.commons.logging.Log;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RestoreSettingsFragment extends ImportSettingsFragment {
@@ -49,7 +56,7 @@ public class RestoreSettingsFragment extends ImportSettingsFragment {
 			if (duplicates == null) {
 				importTask.setDuplicatesListener(getDuplicatesListener());
 			} else if (duplicates.isEmpty() && selectedItems != null) {
-				settingsHelper.importSettings(selectedItems, "", 1, getImportListener());
+				settingsHelper.importSettings(selectedItems, "", 1, false, getImportListener());
 			}
 		}
 	}
@@ -62,6 +69,8 @@ public class RestoreSettingsFragment extends ImportSettingsFragment {
 		Toolbar toolbar = view.findViewById(R.id.toolbar);
 		toolbar.setTitle(R.string.restore_from_osmand_cloud);
 		description.setText(R.string.choose_what_to_restore);
+
+		collectItems();
 
 		return view;
 	}
@@ -88,7 +97,7 @@ public class RestoreSettingsFragment extends ImportSettingsFragment {
 			if (isAdded()) {
 				updateUi(R.string.shared_string_restore, R.string.receiving_data_from_server);
 			}
-			settingsHelper.importSettings(items, "", 1, getImportListener());
+			settingsHelper.importSettings(items, "", 1, false, getImportListener());
 		} else if (fragmentManager != null && !isStateSaved()) {
 			RestoreDuplicatesFragment.showInstance(fragmentManager, duplicates, items, this);
 		}
@@ -114,9 +123,41 @@ public class RestoreSettingsFragment extends ImportSettingsFragment {
 		updateUi(R.string.shared_string_preparing, R.string.checking_for_duplicate_description);
 	}
 
+	private void collectItems() {
+		settingsHelper.collectSettings("", 0, true, new BackupCollectListener() {
+			@Override
+			public void onBackupCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items, @NonNull List<RemoteFile> remoteFiles) {
+				toolbarLayout.setTitle(getString(R.string.restore_from_osmand_cloud));
+				description.setText(R.string.choose_what_to_restore);
+				buttonsContainer.setVisibility(View.VISIBLE);
+				progressBar.setVisibility(View.GONE);
+				if (succeed) {
+					PrepareBackupResult backup = app.getBackupHelper().getBackup();
+					List<SettingsItem> itemsForRestore = new ArrayList<>();
+					for (RemoteFile remoteFile : backup.getBackupInfo().filesToDownload) {
+						int index = items.indexOf(remoteFile.item);
+						if (index != -1) {
+							itemsForRestore.add(items.get(index));
+						}
+					}
+					for (Pair<LocalFile, RemoteFile> pair : backup.getBackupInfo().filesToMerge) {
+						int index = items.indexOf(pair.second.item);
+						if (index != -1) {
+							itemsForRestore.add(items.get(index));
+						}
+					}
+					setSettingsItems(itemsForRestore);
+					dataList = SettingsHelper.getSettingsToOperateByCategory(settingsItems, false, false);
+					adapter.updateSettingsItems(dataList, selectedItemsMap);
+				}
+			}
+		});
+		updateUi(R.string.shared_string_preparing, R.string.shared_string_preparing);
+	}
+
 	public static void showInstance(@NonNull FragmentManager fm, @NonNull List<SettingsItem> settingsItems) {
 		RestoreSettingsFragment fragment = new RestoreSettingsFragment();
-		fragment.setSettingsItems(settingsItems);
+		//fragment.setSettingsItems(settingsItems);
 		fm.beginTransaction().
 				replace(R.id.fragmentContainer, fragment, TAG)
 				.addToBackStack(SETTINGS_LIST_TAG)

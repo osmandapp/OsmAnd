@@ -920,12 +920,6 @@ public class BackupHelper {
 					public void onFilesDownloadDone(@NonNull Map<File, String> errors) {
 						Map<File, String> errMap = resolveServerErrors(errors);
 						res.putAll(errMap);
-						for (Entry<File, RemoteFile> fileEntry : filesMap.entrySet()) {
-							if (!errors.containsKey(fileEntry.getKey())) {
-								RemoteFile remoteFile = fileEntry.getValue();
-								updateFileUploadTime(remoteFile.getType(), remoteFile.getName(), remoteFile.getClienttimems());
-							}
-						}
 						if (listener != null) {
 							listener.onFilesDownloadDone(errMap);
 						}
@@ -976,12 +970,6 @@ public class BackupHelper {
 
 					@Override
 					public void onFilesDownloadDone(@NonNull Map<File, String> errors) {
-						for (Entry<File, RemoteFile> fileEntry : filesMap.entrySet()) {
-							if (!errors.containsKey(fileEntry.getKey())) {
-								RemoteFile remoteFile = fileEntry.getValue();
-								updateFileUploadTime(remoteFile.getType(), remoteFile.getName(), remoteFile.getClienttimems());
-							}
-						}
 						if (listener != null) {
 							listener.onFilesDownloadDone(resolveServerErrors(errors));
 						}
@@ -1000,8 +988,7 @@ public class BackupHelper {
 				for (SettingsItem item : localItems) {
 					String fileName = BackupHelper.getItemFileName(item);
 					if (item instanceof FileSettingsItem) {
-						FileSettingsItem settingsItem = (FileSettingsItem) item;
-						File file = app.getAppPath(fileName);
+						File file = ((FileSettingsItem) item).getFile();
 						if (file.isDirectory()) {
 							List<File> dirs = new ArrayList<>();
 							dirs.add(file);
@@ -1016,7 +1003,7 @@ public class BackupHelper {
 								}
 							}
 						} else {
-							createLocalFile(result, item, fileName, settingsItem.getFile().lastModified());
+							createLocalFile(result, item, fileName, file.lastModified());
 						}
 					} else {
 						createLocalFile(result, item, fileName, item.getLastModifiedTime());
