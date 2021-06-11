@@ -592,7 +592,7 @@
     <string name="poi_car_rental">Прокат автомобилей</string>
     <string name="poi_car_sharing">Кратковременный прокат автомобилей</string>
     <string name="poi_boat_sharing">Прокат лодок</string>
-    <string name="poi_toilets">Уборные;Туалеты</string>
+    <string name="poi_toilets">Туалет;Уборные;Туалеты</string>
     <string name="poi_sauna">Сауна</string>
     <string name="poi_brothel">Бордель;Публичный дом</string>
     <string name="poi_mortuary">Морг</string>
@@ -3931,4 +3931,9 @@
     <string name="poi_shrub">Кустарник;Куст</string>
     <string name="poi_fruit">Фрукты</string>
     <string name="poi_dune">Дюна</string>
+    <string name="poi_fuel_propane">Пропан</string>
+    <string name="poi_planetarium">Планетарий</string>
+    <string name="poi_service_vehicle_rental_yes">Прокат автомобилей</string>
+    <string name="poi_geodesist">Геодезист</string>
+    <string name="poi_bay_filter">Тип залива</string>
 </resources>
