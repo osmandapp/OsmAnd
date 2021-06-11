@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
 import java.io.Reader;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -74,7 +73,7 @@ public class RouteTestingTest {
 		} else {
 			binaryMapIndexReaders = new BinaryMapIndexReader[]{new BinaryMapIndexReader(raf, new File(fl))};
 		}
-		
+
 		for (int planRoadDirection = -1; planRoadDirection <= 1; planRoadDirection++) {
 			if (params.containsKey("wrongPlanRoadDirection")) {
 				if (params.get("wrongPlanRoadDirection").equals(planRoadDirection + "")) {
@@ -108,18 +107,22 @@ public class RouteTestingTest {
 				}
 			}
 			Map<Long, String> expectedResults = te.getExpectedResults();
-			Iterator<Entry<Long, String>> it = expectedResults.entrySet().iterator();
-			while (it.hasNext()) {
-				Entry<Long, String> es = it.next();
-				if (es.getValue().equals("false")) {
-					Assert.assertTrue("Expected segment " + (es.getKey()) + " was wrongly reached in route segments "
-							+ reachedSegments.toString(), !reachedSegments.contains(es.getKey()));
-				} else {
-					Assert.assertTrue("Expected segment " + (es.getKey()) + " weren't reached in route segments "
-							+ reachedSegments.toString(), reachedSegments.contains(es.getKey()));
+			for (Entry<Long, String> es : expectedResults.entrySet()) {
+				switch (es.getValue()) {
+					case "false":
+						Assert.assertFalse("Expected segment " + (es.getKey()) + " was wrongly reached in route segments "
+								+ reachedSegments, reachedSegments.contains(es.getKey()));
+						break;
+					case "true":
+						Assert.assertTrue("Expected segment " + (es.getKey()) + " weren't reached in route segments "
+								+ reachedSegments, reachedSegments.contains(es.getKey()));
+						break;
+					case "visitedSegments":
+						Assert.assertTrue("Expected segments visit " + (es.getKey()) + " less then actually visited segments "
+								+ ctx.getVisitedSegments(), ctx.getVisitedSegments() < es.getKey());
+						break;
 				}
 			}
 		}
 	}
-
 }

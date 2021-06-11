@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -81,30 +80,20 @@ public class BackupExporter extends Exporter {
 	}
 
 	private void checkAndDeleteOldFile(@NonNull SettingsItem item, @NonNull String fileName, Map<String, String> errors) {
-		String type = item.getType().name();
-		try {
-			ExportSettingsType exportType = ExportSettingsType.getExportSettingsTypeForItem(item);
-			if (exportType != null && !backupHelper.getVersionHistoryTypePref(exportType).get()) {
-				RemoteFile remoteFile = getRemoteFile(type, fileName);
-				if (remoteFile != null) {
-					backupHelper.deleteFiles(Collections.singletonList(remoteFile), true, null);
+		PrepareBackupResult backup = backupHelper.getBackup();
+		if (backup != null) {
+			String type = item.getType().name();
+			try {
+				ExportSettingsType exportType = ExportSettingsType.getExportSettingsTypeForItem(item);
+				if (exportType != null && !backupHelper.getVersionHistoryTypePref(exportType).get()) {
+					RemoteFile remoteFile = backup.getRemoteFile(type, fileName);
+					if (remoteFile != null) {
+						backupHelper.deleteFiles(Collections.singletonList(remoteFile), true, null);
+					}
 				}
-			}
-		} catch (UserNotRegisteredException e) {
-			errors.put(type + "/" + fileName, e.getMessage());
-		}
-	}
-
-	@Nullable
-	private RemoteFile getRemoteFile(@NonNull String type, @NonNull String fileName) {
-		List<RemoteFile> remoteFiles = backupHelper.getBackup().getAllRemoteFiles();
-		if (!Algorithms.isEmpty(fileName) && !Algorithms.isEmpty(remoteFiles)) {
-			for (RemoteFile remoteFile : remoteFiles) {
-				if (remoteFile.getType().equals(type) && remoteFile.getName().equals(fileName)) {
-					return remoteFile;
-				}
+			} catch (UserNotRegisteredException e) {
+				errors.put(type + "/" + fileName, e.getMessage());
 			}
 		}
-		return null;
 	}
 }

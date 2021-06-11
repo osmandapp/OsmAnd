@@ -3966,4 +3966,5 @@
     <string name="poi_climbing_grade_french_min">最簡單的路線（法國分級）</string>
     <string name="poi_climbing_grade_saxon_min">最簡單的路線（薩克森分級）</string>
     <string name="poi_power_terminal">電力終端</string>
+    <string name="poi_fuel_propane">丙烷</string>
 </resources>

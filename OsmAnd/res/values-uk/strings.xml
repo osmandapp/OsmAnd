@@ -1638,7 +1638,7 @@
     <string name="osn_close_dialog_error">Не вдалося закрити примітку.</string>
     <string name="shared_string_commit">Підтвердити</string>
     <string name="context_menu_item_delete_waypoint">Вилучити GPX точку?</string>
-    <string name="context_menu_item_edit_waypoint">Редагувати GPX точку</string>
+    <string name="context_menu_item_edit_waypoint">Змінити маршрутну точку GPX</string>
     <string name="shared_string_location">Розташування</string>
     <string name="lang_nds">Нижньонімецька</string>
     <string name="lang_mk">Македонська</string>
@@ -1919,7 +1919,7 @@
     <string name="rendering_value_medium_name">Середньо</string>
     <string name="rendering_value_bold_name">Жирно</string>
     <string name="no_map_markers_found">Додайте позначки на мапі</string>
-    <string name="no_waypoints_found">Точки шляху не знайдені</string>
+    <string name="no_waypoints_found">Маршрутні точки не знайдені</string>
     <string name="storage_permission_restart_is_required">Застосунок отримав дозвіл на запис у зовнішнє сховище. Потрібне перезавантаження програми.</string>
     <string name="shared_string_move_up">Перемістити ↑</string>
     <string name="shared_string_move_down">Перемістити ↓</string>
@@ -4169,4 +4169,7 @@
     <string name="restore_selected_data">Відновити вибрані дані</string>
     <string name="receiving_data_from_server">Отримання даних із сервера</string>
     <string name="restore_complete">Відновлення завершено</string>
+    <string name="grey_color_slope">Сірий колір застосовується на позначення невизначених схилів.</string>
+    <string name="backup_version_history">Історія версій</string>
+    <string name="backup_storage_taken">Заповнення сховища</string>
 </resources>
