@@ -230,25 +230,28 @@ public class TravelObfHelper implements TravelHelper {
 
 	@NonNull
 	private TravelGpx getTravelGpx(File file, Amenity amenity) {
-		TravelGpx res = new TravelGpx();
-		res.file = file;
+		TravelGpx travelGpx = new TravelGpx();
+		travelGpx.file = file;
 		String title = amenity.getName("en");
-		res.title = res.createTitle(Algorithms.isEmpty(title) ? amenity.getName() : title);
-		res.lat = amenity.getLocation().getLatitude();
-		res.lon = amenity.getLocation().getLongitude();
-		res.routeId = Algorithms.emptyIfNull(amenity.getTagContent(Amenity.ROUTE_ID));
-		res.user = Algorithms.emptyIfNull(amenity.getTagContent(USER));
-		res.activityType = Algorithms.emptyIfNull(amenity.getTagContent(ACTIVITY_TYPE));
-		res.ref = Algorithms.emptyIfNull(amenity.getRef());
+		travelGpx.title = travelGpx.createTitle(Algorithms.isEmpty(title) ? amenity.getName() : title);
+		travelGpx.lat = amenity.getLocation().getLatitude();
+		travelGpx.lon = amenity.getLocation().getLongitude();
+		travelGpx.routeId = Algorithms.emptyIfNull(amenity.getTagContent(Amenity.ROUTE_ID));
+		travelGpx.user = Algorithms.emptyIfNull(amenity.getTagContent(USER));
+		travelGpx.activityType = Algorithms.emptyIfNull(amenity.getTagContent(ACTIVITY_TYPE));
+		travelGpx.ref = Algorithms.emptyIfNull(amenity.getRef());
 		try {
-			res.totalDistance = Float.parseFloat(Algorithms.emptyIfNull(amenity.getTagContent(DISTANCE)));
-			res.diffElevationUp = Double.parseDouble(Algorithms.emptyIfNull(amenity.getTagContent(DIFF_ELE_UP)));
-			res.diffElevationDown = Double.parseDouble(Algorithms.emptyIfNull(amenity.getTagContent(DIFF_ELE_DOWN)));
-			res.routeRadius = Integer.parseInt(Algorithms.emptyIfNull(amenity.getTagContent(ROUTE_RADIUS)));
+			travelGpx.totalDistance = Float.parseFloat(Algorithms.emptyIfNull(amenity.getTagContent(DISTANCE)));
+			travelGpx.diffElevationUp = Double.parseDouble(Algorithms.emptyIfNull(amenity.getTagContent(DIFF_ELE_UP)));
+			travelGpx.diffElevationDown = Double.parseDouble(Algorithms.emptyIfNull(amenity.getTagContent(DIFF_ELE_DOWN)));
+			String radius = amenity.getTagContent(ROUTE_RADIUS);
+			if (radius != null) {
+				travelGpx.routeRadius = Integer.parseInt(radius);
+			}
 		} catch (NumberFormatException e) {
 			LOG.debug(e.getMessage(), e);
 		}
-		return res;
+		return travelGpx;
 	}
 
 	@NonNull

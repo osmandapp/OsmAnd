@@ -33,13 +33,12 @@ public class TravelGpx extends TravelArticle {
 	public float totalDistance;
 	public double diffElevationUp;
 	public double diffElevationDown;
-	public int routeRadius;
+	public int routeRadius = -1;
 
 	@Nullable
 	public GPXFile buildGpxFile(@NonNull List<BinaryMapIndexReader> readers) {
 		final List<BinaryMapDataObject> segmentList = new ArrayList<>();
 		final List<Amenity> wayPointList = new ArrayList<>();
-
 		for (BinaryMapIndexReader reader : readers) {
 			try {
 				if (file != null && !file.equals(reader.getFile())) {
@@ -64,6 +63,10 @@ public class TravelGpx extends TravelArticle {
 								return false;
 							}
 						});
+				int radiusMeters = routeRadius * 1000;
+				if (routeRadius >= 0) {
+					sr.setBBoxRadius(lat, lon, radiusMeters);
+				}
 				reader.searchMapIndex(sr);
 				BinaryMapIndexReader.SearchRequest<Amenity> pointRequest = BinaryMapIndexReader.buildSearchPoiRequest(
 						0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, 15, getSearchFilter(ROUTE_TRACK_POINT),
@@ -81,6 +84,9 @@ public class TravelGpx extends TravelArticle {
 								return false;
 							}
 						});
+				if (routeRadius >= 0) {
+					pointRequest.setBBoxRadius(lat, lon, radiusMeters);
+				}
 				reader.searchPoi(pointRequest);
 				if (!Algorithms.isEmpty(segmentList)) {
 					break;
