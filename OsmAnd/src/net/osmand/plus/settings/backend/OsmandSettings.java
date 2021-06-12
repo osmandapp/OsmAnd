@@ -780,6 +780,7 @@ public class OsmandSettings {
 				}
 			}
 			customAppModesKeys.removeAll(nonexistentCustomAppModesKeys);
+			nonexistentCustomAppModesKeys.clear();
 			json.put(CUSTOM_APP_MODES_KEYS.getId(), Algorithms.encodeStringSet(customAppModesKeys, ","));
 
 			Set<String> availableAppModesKeys = new HashSet<>();
