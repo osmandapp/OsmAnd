@@ -12,6 +12,7 @@ import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class NetworkSettingsHelper extends SettingsHelper {
@@ -25,6 +26,12 @@ public class NetworkSettingsHelper extends SettingsHelper {
 		void onBackupExportProgressUpdate(int value);
 
 		void onBackupExportFinished(boolean succeed);
+
+		void onBackupExportItemStarted(@NonNull String type, @NonNull String fileName, int work);
+
+		void onBackupExportItemProgress(@NonNull String type, @NonNull String fileName, int value);
+
+		void onBackupExportItemFinished(@NonNull String type, @NonNull String fileName);
 	}
 
 	public interface BackupCollectListener {
@@ -68,7 +75,7 @@ public class NetworkSettingsHelper extends SettingsHelper {
 		return exportTask != null;
 	}
 
-	public void updateExportListener(@Nullable BackupExportListener listener) {
+	public void updateExportListeners(@Nullable BackupExportListener listener) {
 		ExportBackupTask exportTask = this.exportTask;
 		if (exportTask != null) {
 			exportTask.setListener(listener);
@@ -110,15 +117,15 @@ public class NetworkSettingsHelper extends SettingsHelper {
 				.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	public void exportSettings(@Nullable BackupExportListener listener,
-							   @NonNull List<SettingsItem> items) {
-		ExportBackupTask exportTask = new ExportBackupTask(this, listener, items);
+	public void exportSettings(@NonNull List<SettingsItem> items,
+							   @NonNull List<RemoteFile> filesToDelete,
+							   @Nullable BackupExportListener listener) {
+		ExportBackupTask exportTask = new ExportBackupTask(this, items, filesToDelete, listener);
 		this.exportTask = exportTask;
 		exportTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	public void exportSettings(@Nullable BackupExportListener listener,
-							   @NonNull SettingsItem... items) {
-		exportSettings(listener, new ArrayList<>(Arrays.asList(items)));
+	public void exportSettings(@Nullable BackupExportListener listener, @NonNull SettingsItem... items) {
+		exportSettings(new ArrayList<>(Arrays.asList(items)), Collections.emptyList(), listener);
 	}
 }

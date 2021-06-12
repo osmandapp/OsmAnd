@@ -28,7 +28,10 @@ public class NetworkWriter implements AbstractWriter {
 	private final OnUploadItemListener listener;
 
 	public interface OnUploadItemListener {
+		void onItemFileUploadStarted(@NonNull SettingsItem item, @NonNull String fileName, int work);
+
 		void onItemFileUploadProgress(@NonNull SettingsItem item, @NonNull String fileName, int progress, int deltaWork);
+
 		void onItemFileUploadDone(@NonNull SettingsItem item, @NonNull String fileName, long uploadTime, @Nullable String error);
 	}
 
@@ -124,6 +127,14 @@ public class NetworkWriter implements AbstractWriter {
 
 	private OnUploadFileListener getUploadFileListener(final @NonNull SettingsItem item) {
 		return new OnUploadFileListener() {
+
+			@Override
+			public void onFileUploadStarted(@NonNull String type, @NonNull String fileName, int work) {
+				if (listener != null) {
+					listener.onItemFileUploadStarted(item, fileName, work);
+				}
+			}
+
 			@Override
 			public void onFileUploadProgress(@NonNull String type, @NonNull String fileName, int progress, int deltaWork) {
 				if (listener != null) {

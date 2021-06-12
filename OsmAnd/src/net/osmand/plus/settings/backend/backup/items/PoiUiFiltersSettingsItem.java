@@ -112,7 +112,7 @@ public class PoiUiFiltersSettingsItem extends CollectionSettingsItem<PoiUIFilter
 	@NonNull
 	@Override
 	public String getPublicName(@NonNull Context ctx) {
-		return "poi_ui_filters";
+		return ctx.getString(R.string.poi_dialog_poi_type);
 	}
 
 	@Override

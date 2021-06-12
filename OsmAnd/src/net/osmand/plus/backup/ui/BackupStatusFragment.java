@@ -194,6 +194,27 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements CardList
 	}
 
 	@Override
+	public void onBackupExportItemStarted(@NonNull String type, @NonNull String fileName, int work) {
+		if (uploadCard != null) {
+			uploadCard.onBackupExportItemStarted(type, fileName, work);
+		}
+	}
+
+	@Override
+	public void onBackupExportItemFinished(@NonNull String type, @NonNull String fileName) {
+		if (uploadCard != null) {
+			uploadCard.onBackupExportItemFinished(type, fileName);
+		}
+	}
+
+	@Override
+	public void onBackupExportItemProgress(@NonNull String type, @NonNull String fileName, int value) {
+		if (uploadCard != null) {
+			uploadCard.onBackupExportItemProgress(type, fileName, value);
+		}
+	}
+
+	@Override
 	public void onFileDeleteProgress(@NonNull RemoteFile file) {
 
 	}
