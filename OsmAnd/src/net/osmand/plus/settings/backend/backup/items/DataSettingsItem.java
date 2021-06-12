@@ -61,8 +61,12 @@ public class DataSettingsItem extends StreamSettingsItem {
 	}
 
 	@Override
-	protected long getLocalModifiedTime() {
+	public long getLocalModifiedTime() {
 		return 0;
+	}
+
+	@Override
+	public void setLocalModifiedTime(long lastModifiedTime) {
 	}
 
 	@Override

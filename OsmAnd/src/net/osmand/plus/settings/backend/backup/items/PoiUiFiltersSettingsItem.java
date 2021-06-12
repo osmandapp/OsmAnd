@@ -57,8 +57,13 @@ public class PoiUiFiltersSettingsItem extends CollectionSettingsItem<PoiUIFilter
 	}
 
 	@Override
-	protected long getLocalModifiedTime() {
+	public long getLocalModifiedTime() {
 		return app.getPoiFilters().getLastModifiedTime();
+	}
+
+	@Override
+	public void setLocalModifiedTime(long lastModifiedTime) {
+		app.getPoiFilters().setLastModifiedTime(lastModifiedTime);
 	}
 
 	@Override

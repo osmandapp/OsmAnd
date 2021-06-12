@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.ImportBackupTask;
 import net.osmand.plus.backup.LocalFile;
 import net.osmand.plus.backup.NetworkSettingsHelper;
@@ -23,6 +24,7 @@ import net.osmand.plus.backup.NetworkSettingsHelper.BackupCollectListener;
 import net.osmand.plus.backup.PrepareBackupResult;
 import net.osmand.plus.backup.RemoteFile;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
+import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.fragments.ImportCompleteFragment;
 import net.osmand.plus.settings.fragments.ImportSettingsFragment;
@@ -125,6 +127,26 @@ public class RestoreSettingsFragment extends ImportSettingsFragment {
 
 	private void collectItems() {
 		settingsHelper.collectSettings("", 0, true, new BackupCollectListener() {
+
+			@Nullable
+			private SettingsItem getRestoreItem(@NonNull List<SettingsItem> items, @NonNull RemoteFile remoteFile) {
+				for (SettingsItem item : items) {
+					String itemFileName = BackupHelper.getItemFileName(item);
+					if (item.getType().name().equals(remoteFile.getType())) {
+						if (remoteFile.getName().equals(itemFileName)) {
+							return item;
+						} else if (item instanceof FileSettingsItem) {
+							FileSettingsItem fileItem = (FileSettingsItem) item;
+							if (remoteFile.getName().startsWith(fileItem.getSubtype().getSubtypeFolder())
+									&& remoteFile.getName().startsWith(itemFileName)) {
+								return item;
+							}
+						}
+					}
+				}
+				return null;
+			}
+
 			@Override
 			public void onBackupCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items, @NonNull List<RemoteFile> remoteFiles) {
 				toolbarLayout.setTitle(getString(R.string.restore_from_osmand_cloud));
@@ -135,15 +157,15 @@ public class RestoreSettingsFragment extends ImportSettingsFragment {
 					PrepareBackupResult backup = app.getBackupHelper().getBackup();
 					List<SettingsItem> itemsForRestore = new ArrayList<>();
 					for (RemoteFile remoteFile : backup.getBackupInfo().filesToDownload) {
-						int index = items.indexOf(remoteFile.item);
-						if (index != -1) {
-							itemsForRestore.add(items.get(index));
+						SettingsItem restoreItem = getRestoreItem(items, remoteFile);
+						if (restoreItem != null) {
+							itemsForRestore.add(restoreItem);
 						}
 					}
 					for (Pair<LocalFile, RemoteFile> pair : backup.getBackupInfo().filesToMerge) {
-						int index = items.indexOf(pair.second.item);
-						if (index != -1) {
-							itemsForRestore.add(items.get(index));
+						SettingsItem restoreItem = getRestoreItem(items, pair.second);
+						if (restoreItem != null) {
+							itemsForRestore.add(restoreItem);
 						}
 					}
 					setSettingsItems(itemsForRestore);

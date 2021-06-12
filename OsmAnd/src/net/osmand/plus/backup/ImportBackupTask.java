@@ -40,7 +40,6 @@ public class ImportBackupTask extends AsyncTask<Void, Void, List<SettingsItem>> 
 	private List<RemoteFile> remoteFiles;
 
 	private final ImportType importType;
-	private RemoteFilesType remoteFilesType;
 	private boolean importDone;
 
 	ImportBackupTask(@NonNull NetworkSettingsHelper helper,

@@ -89,12 +89,14 @@ class BackupImporter {
 		}
 		OsmandApplication app = backupHelper.getApp();
 		File tempDir = FileUtils.getTempDir(app);
+		Map<RemoteFile, SettingsItem> remoteFileItems = new HashMap<>();
 		for (RemoteFile remoteFile : remoteFiles) {
 			SettingsItem item = null;
 			for (SettingsItem settingsItem : items) {
 				String fileName = remoteFile.item != null ? remoteFile.item.getFileName() : null;
 				if (fileName != null && settingsItem.applyFileName(fileName)) {
 					item = settingsItem;
+					remoteFileItems.put(remoteFile, item);
 					break;
 				}
 			}
@@ -141,6 +143,9 @@ class BackupImporter {
 					Algorithms.closeStream(is);
 				}
 			}
+		}
+		for (Entry<RemoteFile, SettingsItem> fileItem : remoteFileItems.entrySet()) {
+			fileItem.getValue().setLocalModifiedTime(fileItem.getKey().getClienttimems());
 		}
 	}
 
@@ -272,7 +277,11 @@ class BackupImporter {
 			}
 			if (SettingsItemType.PROFILE.name().equals(type)) {
 				JSONObject appMode = new JSONObject();
-				appMode.put("stringKey", fileName.replaceFirst("profile_", ""));
+				String name = fileName.replaceFirst("profile_", "");
+				if (name.endsWith(".json")) {
+					name = name.substring(0, name.length() - 5);
+				}
+				appMode.put("stringKey", name);
 				itemJson.put("appMode", appMode);
 			}
 			itemJson.put("file", fileName);

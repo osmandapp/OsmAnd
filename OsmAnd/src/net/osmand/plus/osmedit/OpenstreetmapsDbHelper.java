@@ -92,6 +92,10 @@ public class OpenstreetmapsDbHelper extends SQLiteOpenHelper {
 		return lastModifiedTime;
 	}
 
+	public void setLastModifiedTime(long lastModifiedTime) {
+		BackupHelper.setLastModifiedTime(context, OPENSTREETMAP_DB_LAST_MODIFIED_NAME, lastModifiedTime);
+	}
+
 	private void updateLastModifiedTime() {
 		BackupHelper.setLastModifiedTime(context, OPENSTREETMAP_DB_LAST_MODIFIED_NAME);
 	}

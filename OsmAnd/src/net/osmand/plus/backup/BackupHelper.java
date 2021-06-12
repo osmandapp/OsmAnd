@@ -30,6 +30,7 @@ import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.AbstractProgress;
+import net.osmand.plus.settings.backend.backup.items.CollectionSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.GpxSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
@@ -1030,7 +1031,7 @@ public class BackupHelper {
 
 			private List<SettingsItem> getFilteredLocalItems() {
 				List<ExportSettingsType> settingsTypes = new ArrayList<>();
-				for (ExportSettingsType type : ExportSettingsType.values()) {
+				for (ExportSettingsType type : ExportSettingsType.getEnabledTypes()) {
 					if (getBackupTypePref(type).get()) {
 						settingsTypes.add(type);
 					}
@@ -1121,6 +1122,11 @@ public class BackupHelper {
 				List<RemoteFile> remoteFiles = new ArrayList<>(uniqueRemoteFiles);
 				remoteFiles.addAll(deletedRemoteFiles);
 				for (RemoteFile remoteFile : remoteFiles) {
+					ExportSettingsType exportType = remoteFile.item != null
+							? ExportSettingsType.getExportSettingsTypeForItem(remoteFile.item) : null;
+					if (exportType == null || !ExportSettingsType.isTypeEnabled(exportType)) {
+						continue;
+					}
 					boolean hasLocalFile = false;
 					for (LocalFile localFile : localFiles) {
 						if (remoteFile.getName().equals(localFile.getFileName(true))) {
@@ -1140,9 +1146,7 @@ public class BackupHelper {
 						}
 					}
 					if (!hasLocalFile && !remoteFile.isDeleted()) {
-						ExportSettingsType exportType = remoteFile.item != null
-								? ExportSettingsType.getExportSettingsTypeForItem(remoteFile.item) : null;
-						if (exportType == null || getBackupTypePref(exportType).get()) {
+						if (getBackupTypePref(exportType).get()) {
 							if (backupLastUploadedTime > 0 && backupLastUploadedTime >= remoteFile.getClienttimems()) {
 								info.filesToDelete.add(remoteFile);
 							} else {
@@ -1152,6 +1156,11 @@ public class BackupHelper {
 					}
 				}
 				for (LocalFile localFile : localFiles) {
+					ExportSettingsType exportType = localFile.item != null
+							? ExportSettingsType.getExportSettingsTypeForItem(localFile.item) : null;
+					if (exportType == null || !ExportSettingsType.isTypeEnabled(exportType)) {
+						continue;
+					}
 					boolean hasRemoteFile = false;
 					for (RemoteFile remoteFile : uniqueRemoteFiles) {
 						if (localFile.getFileName(true).equals(remoteFile.getName())) {
@@ -1160,7 +1169,10 @@ public class BackupHelper {
 						}
 					}
 					if (!hasRemoteFile) {
-						info.filesToUpload.add(localFile);
+						boolean isEmpty = localFile.item instanceof CollectionSettingsItem<?> && ((CollectionSettingsItem<?>) localFile.item).isEmpty();
+						if (!isEmpty) {
+							info.filesToUpload.add(localFile);
+						}
 					}
 				}
 				return info;

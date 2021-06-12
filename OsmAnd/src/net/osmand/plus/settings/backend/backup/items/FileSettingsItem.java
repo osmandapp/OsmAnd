@@ -193,8 +193,13 @@ public class FileSettingsItem extends StreamSettingsItem {
 	}
 
 	@Override
-	protected long getLocalModifiedTime() {
+	public long getLocalModifiedTime() {
 		return file.lastModified();
+	}
+
+	@Override
+	public void setLocalModifiedTime(long lastModifiedTime) {
+		file.setLastModified(lastModifiedTime);
 	}
 
 	public File getPluginPath() {

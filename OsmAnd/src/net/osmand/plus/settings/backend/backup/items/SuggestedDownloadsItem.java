@@ -58,8 +58,12 @@ public class SuggestedDownloadsItem extends SettingsItem {
 	}
 
 	@Override
-	protected long getLocalModifiedTime() {
+	public long getLocalModifiedTime() {
 		return 0;
+	}
+
+	@Override
+	public void setLocalModifiedTime(long lastModifiedTime) {
 	}
 
 	@Override

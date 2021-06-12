@@ -20,7 +20,7 @@ public class ImportBackupItemsTask extends AsyncTask<Void, Void, Boolean> {
 	private final ImportListener listener;
 	private final List<SettingsItem> items;
 	private final StateChangedListener<String> localeListener;
-	private boolean forceReadData;
+	private final boolean forceReadData;
 	private boolean needRestart = false;
 
 	ImportBackupItemsTask(@NonNull NetworkSettingsHelper helper,

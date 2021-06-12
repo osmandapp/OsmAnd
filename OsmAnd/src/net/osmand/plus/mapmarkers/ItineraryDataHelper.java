@@ -84,6 +84,16 @@ public class ItineraryDataHelper {
 		return 0;
 	}
 
+	public void setLastModifiedTime(long lastModifiedTime) {
+		File internalFile = getInternalFile();
+		File externalFile = getExternalFile();
+		if (externalFile.exists()) {
+			externalFile.setLastModified(lastModifiedTime);
+		} else if (internalFile.exists()) {
+			internalFile.setLastModified(lastModifiedTime);
+		}
+	}
+
 	private File getInternalFile() {
 		return app.getFileStreamPath(FILE_TO_BACKUP);
 	}

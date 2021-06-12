@@ -115,7 +115,9 @@ public abstract class SettingsItem {
 		this.lastModifiedTime = lastModified;
 	}
 
-	protected abstract long getLocalModifiedTime();
+	public abstract long getLocalModifiedTime();
+
+	public abstract void setLocalModifiedTime(long lastModifiedTime);
 
 	public boolean applyFileName(@NonNull String fileName) {
 		String n = getFileName();
