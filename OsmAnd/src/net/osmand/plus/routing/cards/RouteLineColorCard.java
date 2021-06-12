@@ -134,6 +134,7 @@ public class RouteLineColorCard extends BaseCard implements CardListener, ColorP
 			gradientCard.updateVisibility(false);
 			previewRouteLineInfo.setUseDefaultColor(false);
 		}
+		previewRouteLineInfo.setRouteColoringType(selectedType);
 		updateColorItems();
 		updateDescription();
 	}

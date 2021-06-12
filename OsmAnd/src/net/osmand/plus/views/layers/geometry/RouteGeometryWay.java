@@ -75,13 +75,11 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 		}
 
 		Paint.Cap cap = routeColoringType.isGradient() || routeColoringType.isSolidMultiColor() ?
-				Paint.Cap.ROUND : Paint.Cap.BUTT;
+				Paint.Cap.ROUND : getContext().getAttrs().paint.getStrokeCap();
 		getContext().getAttrs().customColorPaint.setStrokeCap(cap);
 	}
 
 	public void updateRoute(@NonNull RotatedTileBox tb, @NonNull RouteCalculationResult route) {
-		needUpdate = true;
-		routeColoringType = RouteColoringType.STEEPNESS;
 		if (needUpdate || tb.getMapDensity() != getMapDensity() || this.route != route) {
 			this.route = route;
 			needUpdate = false;
