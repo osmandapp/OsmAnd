@@ -23,7 +23,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.SegmentActionsListener;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.util.Algorithms;
 
 import static net.osmand.AndroidUtils.dpToPx;
@@ -35,7 +35,7 @@ import static net.osmand.plus.track.OptionsCard.EDIT_BUTTON_INDEX;
 import static net.osmand.plus.track.OptionsCard.SHOW_ON_MAP_BUTTON_INDEX;
 import static net.osmand.plus.wikipedia.WikiArticleHelper.getFirstParagraph;
 
-public class OverviewCard extends BaseCard {
+public class OverviewCard extends MapBaseCard {
 
 	private View showButton;
 	private View appearanceButton;

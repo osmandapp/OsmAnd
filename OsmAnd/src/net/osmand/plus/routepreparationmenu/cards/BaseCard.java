@@ -5,6 +5,10 @@ import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.helpers.AndroidUiHelper;
+
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
@@ -12,16 +16,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.content.ContextCompat;
-
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.AndroidUiHelper;
+import androidx.fragment.app.FragmentActivity;
 
 public abstract class BaseCard {
 
 	protected OsmandApplication app;
-	protected MapActivity mapActivity;
+	protected FragmentActivity activity;
 
 	protected View view;
 
@@ -39,13 +39,13 @@ public abstract class BaseCard {
 		void onCardButtonPressed(@NonNull BaseCard card, int buttonIndex);
 	}
 
-	public BaseCard(@NonNull MapActivity mapActivity) {
-		this(mapActivity, true);
+	public BaseCard(@NonNull FragmentActivity activity) {
+		this(activity, true);
 	}
 
-	public BaseCard(@NonNull MapActivity mapActivity, boolean usedOnMap) {
-		this.mapActivity = mapActivity;
-		this.app = mapActivity.getMyApplication();
+	public BaseCard(@NonNull FragmentActivity activity, boolean usedOnMap) {
+		this.activity = activity;
+		this.app = (OsmandApplication) activity.getApplicationContext();
 		nightMode = usedOnMap ? app.getDaynightHelper().isNightModeForMapControls() : !app.getSettings().isLightContent();
 	}
 
@@ -97,10 +97,6 @@ public abstract class BaseCard {
 		view = LayoutInflater.from(context).inflate(getCardLayoutId(), null);
 		update();
 		return view;
-	}
-
-	public MapActivity getMapActivity() {
-		return mapActivity;
 	}
 
 	public OsmandApplication getMyApplication() {

@@ -19,18 +19,19 @@ import net.osmand.plus.UiUtilities.CompoundButtonType;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.settings.backend.ExportSettingsCategory;
 import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.fragments.ExportSettingsAdapter;
 import net.osmand.plus.settings.fragments.SettingsCategoryItems;
 import net.osmand.util.Algorithms;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-
-import static net.osmand.plus.settings.fragments.ExportSettingsAdapter.getCategoryDescr;
 
 public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 
@@ -72,11 +73,11 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 		titleTv.setText(UiUtilities.createCustomFontSpannable(typeface, name, name));
 
 		TextView description = view.findViewById(R.id.description);
-		description.setText(getCategoryDescr(app, itemsMap, selectedItemsMap, category, true));
+		description.setText(getCategoryDescr(category, true));
 
 		int selectedTypes = 0;
 		for (ExportSettingsType type : items.getTypes()) {
-			if (!Algorithms.isEmpty(selectedItemsMap.get(type))) {
+			if (selectedItemsMap.get(type) != null) {
 				selectedTypes++;
 			}
 		}
@@ -115,14 +116,15 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 		List<?> items = categoryItems.getItemsForType(type);
 		List<?> selectedItems = selectedItemsMap.get(type);
 
+		boolean selected = selectedItems != null;
 		TextView title = view.findViewById(R.id.title);
 		title.setText(type.getTitleId());
 
 		TextView description = view.findViewById(R.id.description);
-		description.setText(ExportSettingsAdapter.getSelectedTypeDescr(app, selectedItemsMap, type, items));
+		description.setText(getSelectedTypeDescr(app, selectedItemsMap, type, items));
 
 		CompoundButton compoundButton = view.findViewById(R.id.switch_widget);
-		compoundButton.setChecked(selectedItems != null && selectedItems.containsAll(items));
+		compoundButton.setChecked(selected);
 		UiUtilities.setupCompoundButton(compoundButton, nightMode, CompoundButtonType.GLOBAL);
 
 		view.setOnClickListener(new View.OnClickListener() {
@@ -136,7 +138,7 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 			}
 		});
 		setupSelectableBackground(view);
-		setupChildIcon(view, type.getIconRes(), !Algorithms.isEmpty(selectedItems));
+		setupChildIcon(view, type.getIconRes(), selected);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.divider), false);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.card_top_divider), false);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.card_bottom_divider), isLastChild);
@@ -170,6 +172,72 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 		this.selectedItemsMap = selectedItemsMap;
 		Collections.sort(itemsTypes);
 		notifyDataSetChanged();
+	}
+
+	private String getCategoryDescr(ExportSettingsCategory category, boolean exportMode) {
+		long itemsSize = 0;
+		int selectedTypes = 0;
+		SettingsCategoryItems items = itemsMap.get(category);
+		for (ExportSettingsType type : items.getTypes()) {
+			if (selectedItemsMap.get(type) != null) {
+				selectedTypes++;
+				itemsSize += ExportSettingsAdapter.calculateItemsSize(items.getItemsForType(type));
+			}
+		}
+		String description;
+		if (selectedTypes == 0 && exportMode) {
+			description = app.getString(R.string.shared_string_none);
+		} else if (selectedTypes == items.getTypes().size()) {
+			description = app.getString(R.string.shared_string_all);
+		} else {
+			description = app.getString(R.string.ltr_or_rtl_combine_via_slash, String.valueOf(selectedTypes), String.valueOf(items.getTypes().size()));
+		}
+		String formattedSize = AndroidUtils.formatSize(app, itemsSize);
+		return itemsSize == 0 ? description : app.getString(R.string.ltr_or_rtl_combine_via_comma, description, formattedSize);
+	}
+
+	public static String getSelectedTypeDescr(OsmandApplication app, Map<ExportSettingsType, List<?>> selectedItemsMap,
+											  ExportSettingsType type, List<?> items) {
+		long itemsSize = 0;
+		int selectedTypes = 0;
+
+		List<?> selectedItems = selectedItemsMap.get(type);
+		if (selectedItems != null) {
+			for (int i = 0; i < items.size(); i++) {
+				Object object = items.get(i);
+				if (selectedItems.contains(object)) {
+					selectedTypes++;
+					if (object instanceof FileSettingsItem) {
+						itemsSize += ((FileSettingsItem) object).getSize();
+					} else if (object instanceof File) {
+						itemsSize += ((File) object).length();
+					} else if (object instanceof MapMarkersGroup) {
+						MapMarkersGroup markersGroup = (MapMarkersGroup) object;
+						if (Algorithms.stringsEqual(markersGroup.getId(), ExportSettingsType.ACTIVE_MARKERS.name())
+								|| Algorithms.stringsEqual(markersGroup.getId(), ExportSettingsType.HISTORY_MARKERS.name())) {
+							itemsSize += ((MapMarkersGroup) object).getMarkers().size();
+						}
+					}
+				}
+			}
+			if (itemsSize > 0 && type == ExportSettingsType.ACTIVE_MARKERS) {
+				String itemsDescr = app.getString(R.string.shared_string_items);
+				return app.getString(R.string.ltr_or_rtl_combine_via_colon, itemsDescr, String.valueOf(itemsSize));
+			}
+			String description;
+			if (selectedTypes == items.size()) {
+				description = app.getString(R.string.shared_string_all);
+				if (items.size() > 0) {
+					description = app.getString(R.string.ltr_or_rtl_combine_via_comma, description, String.valueOf(items.size()));
+				}
+			} else {
+				description = app.getString(R.string.ltr_or_rtl_combine_via_slash, String.valueOf(selectedTypes), String.valueOf(items.size()));
+			}
+			String formattedSize = AndroidUtils.formatSize(app, itemsSize);
+			return itemsSize == 0 ? description : app.getString(R.string.ltr_or_rtl_combine_via_comma, description, formattedSize);
+		} else {
+			return app.getString(R.string.shared_string_none);
+		}
 	}
 
 	@Override

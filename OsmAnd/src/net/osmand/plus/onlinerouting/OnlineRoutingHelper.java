@@ -38,9 +38,9 @@ public class OnlineRoutingHelper {
 
 	private static final Log LOG = PlatformUtil.getLog(OnlineRoutingHelper.class);
 
-	private OsmandApplication app;
-	private OsmandSettings settings;
-	private Map<String, OnlineRoutingEngine> cachedEngines;
+	private final OsmandApplication app;
+	private final OsmandSettings settings;
+	private final Map<String, OnlineRoutingEngine> cachedEngines;
 
 	public OnlineRoutingHelper(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -176,6 +176,10 @@ public class OnlineRoutingHelper {
 			engine.put(EngineParameter.KEY, key);
 		}
 		return key;
+	}
+
+	public long getLastModifiedTime() {
+		return settings.ONLINE_ROUTING_ENGINES.getLastModifiedTime();
 	}
 
 	@NonNull

@@ -119,8 +119,12 @@ public class MapMarkersHelper {
 		loadMarkers();
 	}
 
-	public long getDatabaseLastModifiedTime() {
-		return markersDbHelper.getLastModifiedTime();
+	public long getMarkersLastModifiedTime() {
+		return markersDbHelper.getMarkersLastModifiedTime();
+	}
+
+	public long getMarkersHistoryLastModifiedTime() {
+		return markersDbHelper.getMarkersHistoryLastModifiedTime();
 	}
 
 	private void loadMarkers() {

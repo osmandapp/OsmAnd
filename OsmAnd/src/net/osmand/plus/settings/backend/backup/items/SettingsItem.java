@@ -183,6 +183,12 @@ public abstract class SettingsItem {
 		return json.toString();
 	}
 
+	public JSONObject toJsonObj() throws JSONException {
+		JSONObject json = new JSONObject();
+		writeToJson(json);
+		return json;
+	}
+
 	void readItemsFromJson(@NonNull JSONObject json) throws IllegalArgumentException {
 		// override
 	}

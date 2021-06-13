@@ -4160,4 +4160,12 @@
     <string name="backup_delete_all_data_descr">Все данные в OsmAnd Cloud будут удалены. Локальные версии останутся нетронутыми.</string>
     <string name="backup_data">Резервное копирование данных</string>
     <string name="select_backup_data_descr">Выберите данные и папки для резервного копирования.</string>
+    <string name="backup_restore_data_descr">Восстановление данных на устройстве, используя онлайн-резервные копии.</string>
+    <string name="backup_restore_data">Восстановление данных</string>
+    <string name="restore_from_osmand_cloud">Восстановить из OsmAnd Cloud</string>
+    <string name="choose_what_to_restore">Выберите данные для восстановления.</string>
+    <string name="restore_selected_data">Восстановить выбранные данные</string>
+    <string name="receiving_data_from_server">Получение данных с сервера</string>
+    <string name="restore_complete">Восстановление завершено</string>
+    <string name="grey_color_slope">Серый цвет используется, когда уклон не определен.</string>
 </resources>

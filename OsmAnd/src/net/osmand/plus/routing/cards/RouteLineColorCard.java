@@ -17,6 +17,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.enums.DayNightMode;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
 import net.osmand.plus.routing.RouteColoringType;
@@ -45,7 +46,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-public class RouteLineColorCard extends BaseCard implements CardListener, ColorPickerListener, HeaderInfo {
+public class RouteLineColorCard extends MapBaseCard implements CardListener, ColorPickerListener, HeaderInfo {
 
 	private static final int DAY_TITLE_ID = R.string.day;
 	private static final int NIGHT_TITLE_ID = R.string.night;

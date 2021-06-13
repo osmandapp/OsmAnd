@@ -120,8 +120,8 @@ public class OsmandSettings {
 	private Map<String, CommonPreference<Boolean>> customBooleanRoutingProps = new LinkedHashMap<String, CommonPreference<Boolean>>();
 	private Map<String, CommonPreference<Boolean>> customBooleanRendersProps = new LinkedHashMap<String, CommonPreference<Boolean>>();
 
-	private ImpassableRoadsStorage impassableRoadsStorage = new ImpassableRoadsStorage(this);
-	private IntermediatePointsStorage intermediatePointsStorage = new IntermediatePointsStorage(this);
+	private final ImpassableRoadsStorage impassableRoadsStorage = new ImpassableRoadsStorage(this);
+	private final IntermediatePointsStorage intermediatePointsStorage = new IntermediatePointsStorage(this);
 
 	private Object objectToShow;
 	private boolean editObjectToShow;
@@ -788,7 +788,8 @@ public class OsmandSettings {
 
 		@Override
 		protected boolean setValue(Object prefs, ApplicationMode val) {
-			boolean valueSaved = settingsAPI.edit(prefs).putString(getId(), val.getStringKey()).commit();
+			boolean valueSaved = super.setValue(prefs, val)
+					&& settingsAPI.edit(prefs).putString(getId(), val.getStringKey()).commit();
 			if (valueSaved) {
 				setApplicationMode(val);
 			}
@@ -834,7 +835,8 @@ public class OsmandSettings {
 
 		@Override
 		protected boolean setValue(Object prefs, ApplicationMode val) {
-			return settingsAPI.edit(prefs).putString(getId(), val.getStringKey()).commit();
+			return super.setValue(prefs, val)
+					&& settingsAPI.edit(prefs).putString(getId(), val.getStringKey()).commit();
 		}
 
 		@Override
@@ -1042,7 +1044,7 @@ public class OsmandSettings {
 		ROUTE_SERVICE.setModeDefaultValue(ApplicationMode.AIRCRAFT, RouteService.STRAIGHT);
 	}
 
-	public final CommonPreference<String> ONLINE_ROUTING_ENGINES = new StringPreference(this, "online_routing_engines", null).makeGlobal();
+	public final CommonPreference<String> ONLINE_ROUTING_ENGINES = new StringPreference(this, "online_routing_engines", null).makeGlobal().storeLastModifiedTime();
 
 	public final CommonPreference<NavigationIcon> NAVIGATION_ICON = new EnumStringPreference<>(this, "navigation_icon", NavigationIcon.DEFAULT, NavigationIcon.values()).makeProfile().cache();
 
@@ -1195,7 +1197,7 @@ public class OsmandSettings {
 	public final OsmandPreference<String> BACKUP_ACCESS_TOKEN_UPDATE_TIME = new StringPreference(this, "backup_access_token_update_time", "").makeGlobal();
 
 	public final OsmandPreference<Long> FAVORITES_LAST_UPLOADED_TIME = new LongPreference(this, "favorites_last_uploaded_time", 0L).makeGlobal();
-	public final OsmandPreference<Long> BACKUP_LAST_UPLOADED_TIME = new LongPreference(this, "backup_last_uploaded_time", 0L).makeGlobal();
+	public final OsmandPreference<Long> BACKUP_LAST_UPLOADED_TIME = new LongPreference(this, "backup_last_uploaded_time", 0L).makeGlobal().makeShared();
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<String> USER_OSM_BUG_NAME =
@@ -1815,9 +1817,30 @@ public class OsmandSettings {
 		return true;
 	}
 
+	public long getTileSourcesLastModifiedTime() {
+		long lastModified = 0;
+		File tilesDir = ctx.getAppPath(IndexConstants.TILES_INDEX_DIR);
+		if (tilesDir != null && tilesDir.canRead()) {
+			List<File> dirs = new ArrayList<>();
+			dirs.add(tilesDir);
+			Algorithms.collectDirs(tilesDir, dirs);
+			for (File dir : dirs) {
+				File[] files = dir.listFiles();
+				if (files != null && files.length > 0) {
+					for (File file : files) {
+						long l = file.lastModified();
+						if (l > lastModified) {
+							lastModified = l;
+						}
+					}
+				}
+			}
+		}
+		return lastModified;
+	}
+
 	public Map<String, String> getTileSourceEntries() {
 		return getTileSourceEntries(true);
-
 	}
 
 	public Map<String, String> getTileSourceEntries(boolean sqlite) {
@@ -1825,19 +1848,18 @@ public class OsmandSettings {
 		File dir = ctx.getAppPath(IndexConstants.TILES_INDEX_DIR);
 		if (dir != null && dir.canRead()) {
 			File[] files = dir.listFiles();
-			Arrays.sort(files, new Comparator<File>() {
-				@Override
-				public int compare(File object1, File object2) {
-					if (object1.lastModified() > object2.lastModified()) {
-						return -1;
-					} else if (object1.lastModified() == object2.lastModified()) {
-						return 0;
-					}
-					return 1;
-				}
-
-			});
 			if (files != null) {
+				Arrays.sort(files, new Comparator<File>() {
+					@Override
+					public int compare(File object1, File object2) {
+						if (object1.lastModified() > object2.lastModified()) {
+							return -1;
+						} else if (object1.lastModified() == object2.lastModified()) {
+							return 0;
+						}
+						return 1;
+					}
+				});
 				for (File f : files) {
 					if (f.getName().endsWith(IndexConstants.SQLITE_EXT)) {
 						if (sqlite) {
@@ -1859,7 +1881,6 @@ public class OsmandSettings {
 			}
 		}
 		return map;
-
 	}
 
 	public static final String EXTERNAL_STORAGE_DIR = "external_storage_dir"; //$NON-NLS-1$
@@ -2411,6 +2432,10 @@ public class OsmandSettings {
 		return settingsAPI.edit(globalPreferences).putInt(POINT_NAVIGATE_ROUTE, NAVIGATE).commit();
 	}
 
+	public long getImpassableRoadsLastModifiedTime() {
+		return impassableRoadsStorage.getLastModifiedTime();
+	}
+
 	public List<AvoidRoadInfo> getImpassableRoadPoints() {
 		return impassableRoadsStorage.getImpassableRoadsInfo();
 	}
@@ -2446,7 +2471,7 @@ public class OsmandSettings {
 
 	public final CommonPreference<Boolean> QUICK_ACTION = new BooleanPreference(this, "quick_action_state", false).makeProfile();
 
-	public final CommonPreference<String> QUICK_ACTION_LIST = new StringPreference(this, "quick_action_list", "").makeGlobal().makeShared();
+	public final CommonPreference<String> QUICK_ACTION_LIST = new StringPreference(this, "quick_action_list", "").makeGlobal().makeShared().storeLastModifiedTime();
 
 	public final CommonPreference<Boolean> IS_QUICK_ACTION_TUTORIAL_SHOWN = new BooleanPreference(this, "quick_action_tutorial", false).makeGlobal().makeShared();
 

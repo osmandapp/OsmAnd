@@ -2493,7 +2493,7 @@
     <string name="quick_action_take_photo_note">Yeni resim notu</string>
     <string name="quick_action_add_osm_bug">OSM notu oluştur</string>
     <string name="quick_action_add_parking">Otopark ekle</string>
-    <string name="quick_action_add_favorite">Favorilere ekle</string>
+    <string name="quick_action_add_favorite">Sık kullanılanlara ekle</string>
     <string name="quick_favorites_show_favorites_dialog">Favorileri göster</string>
     <string name="routing_attr_avoid_sett_description">Parke ve kaldırım taşından kaçınır</string>
     <string name="rate_dialog_descr">Lütfen geri bildirimlerinizi paylaşın ve çalışmalarımızı Google Play\'de değerlendirin.</string>
@@ -4165,4 +4165,11 @@
 \nVerilerin geçerli sürümü sunucuya kaydedilecek, ancak daha önce yapılan değişikliklere geri dönemeyeceksiniz.</string>
     <string name="backup_data">Verileri yedekle</string>
     <string name="select_backup_data_descr">Yedeklenecek verileri ve klasörleri seçin.</string>
+    <string name="backup_restore_data_descr">Çevrim içi yedeklemeleri kullanarak aygıttaki verileri geri yükleyin.</string>
+    <string name="backup_restore_data">Verileri geri yükle</string>
+    <string name="restore_from_osmand_cloud">OsmAnd Cloud\'dan geri yükle</string>
+    <string name="choose_what_to_restore">Neyin geri yükleneceğini seçin.</string>
+    <string name="restore_selected_data">Seçili verileri geri yükle</string>
+    <string name="receiving_data_from_server">Veriler sunucudan alınıyor</string>
+    <string name="restore_complete">Geri yükleme tamamlandı</string>
 </resources>

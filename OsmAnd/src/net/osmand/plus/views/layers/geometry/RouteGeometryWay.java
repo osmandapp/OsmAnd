@@ -346,11 +346,11 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 
 	private static class GeometrySolidWayStyle extends GeometryWayStyle<RouteGeometryWayContext> {
 
-		private final Integer pointColor;
+		private final Integer directionArrowsColor;
 
-		GeometrySolidWayStyle(RouteGeometryWayContext context, Integer color, Float width, Integer pointColor) {
+		GeometrySolidWayStyle(RouteGeometryWayContext context, Integer color, Float width, Integer directionArrowsColor) {
 			super(context, color, width);
-			this.pointColor = pointColor;
+			this.directionArrowsColor = directionArrowsColor;
 		}
 
 		@Override
@@ -360,7 +360,7 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 
 		@Override
 		public Integer getPointColor() {
-			return pointColor;
+			return directionArrowsColor;
 		}
 
 		@Override
@@ -375,7 +375,7 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 				return false;
 			}
 			GeometrySolidWayStyle o = (GeometrySolidWayStyle) other;
-			return Algorithms.objectEquals(pointColor, o.pointColor);
+			return Algorithms.objectEquals(directionArrowsColor, o.directionArrowsColor);
 		}
 	}
 }

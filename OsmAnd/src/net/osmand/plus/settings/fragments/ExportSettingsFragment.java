@@ -78,7 +78,7 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 			progressValue = savedInstanceState.getInt(PROGRESS_VALUE_KEY);
 		}
 		exportMode = true;
-		dataList = app.getFileSettingsHelper().getSettingsByCategory(true);
+		dataList = app.getFileSettingsHelper().getSettingsByCategory(true, false);
 		if (!globalExport && savedInstanceState == null) {
 			updateSelectedProfile();
 		}

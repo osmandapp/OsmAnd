@@ -56,8 +56,8 @@ public class QuickActionsSettingsItem extends CollectionSettingsItem<QuickAction
 	}
 
 	@Override
-	protected long getLocalModifiedTime() { // TODO
-		return 0;
+	protected long getLocalModifiedTime() {
+		return actionRegistry.getLastModifiedTime();
 	}
 
 	@Override

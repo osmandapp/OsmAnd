@@ -11,7 +11,7 @@ import java.util.Map;
 
 public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 
-	private OsmandSettings settings;
+	private final OsmandSettings settings;
 	private Object cachedPreference;
 
 	private final String id;
@@ -23,7 +23,7 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 	private boolean cache;
 	private boolean global;
 	private boolean shared;
-
+	private boolean lastModifiedTimeStored;
 
 	public CommonPreference(OsmandSettings settings, String id, T defaultValue) {
 		this.settings = settings;
@@ -35,7 +35,19 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 	// Methods to possibly override
 	protected abstract T getValue(Object prefs, T defaultValue);
 
-	protected abstract boolean setValue(Object prefs, T val);
+	protected long getLastModifiedTime(Object prefs) {
+		if (!lastModifiedTimeStored) {
+			throw new IllegalStateException("Setting " + getId() + " is not granted to store last modified time");
+		}
+		return getSettingsAPI().getLong(prefs, getLastModifiedTimeId(), 0);
+	}
+
+	protected boolean setValue(Object prefs, T val) {
+		if (lastModifiedTimeStored) {
+			getSettingsAPI().edit(prefs).putLong(getLastModifiedTimeId(), System.currentTimeMillis()).commit();
+		}
+		return true;
+	}
 
 	public abstract T parseString(String s);
 
@@ -77,14 +89,18 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 		return this;
 	}
 
+	public final CommonPreference<T> storeLastModifiedTime() {
+		lastModifiedTimeStored = true;
+		return this;
+	}
+
 	protected final Object getPreferences() {
 		return settings.getPreferences(global);
-
 	}
 
 	public final void setModeDefaultValue(ApplicationMode mode, T defValue) {
 		if (defaultValues == null) {
-			defaultValues = new LinkedHashMap<ApplicationMode, T>();
+			defaultValues = new LinkedHashMap<>();
 		}
 		defaultValues.put(mode, defValue);
 	}
@@ -185,11 +201,24 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 		if (setValue(prefs, obj)) {
 			cachedValue = obj;
 			cachedPreference = prefs;
-			settings.updateLastPreferencesEditTime(prefs);
+			if (!shared) {
+				settings.updateLastPreferencesEditTime(prefs);
+			}
 			fireEvent(obj);
 			return true;
 		}
 		return false;
+	}
+
+	public long getLastModifiedTimeModeValue(ApplicationMode mode) {
+		if (global) {
+			return getLastModifiedTime();
+		}
+		return getLastModifiedTime(settings.getProfilePreferences(mode));
+	}
+
+	public long getLastModifiedTime() {
+		return getLastModifiedTime(getPreferences());
 	}
 
 	public final boolean isSet() {
@@ -206,6 +235,14 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 
 	public final boolean isShared() {
 		return shared;
+	}
+
+	public boolean isLastModifiedTimeStored() {
+		return lastModifiedTimeStored;
+	}
+
+	protected String getLastModifiedTimeId() {
+		return id + "_last_modified";
 	}
 
 	@Override

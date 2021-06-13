@@ -19,7 +19,8 @@ public class ContextMenuItemsPreference extends CommonPreference<ContextMenuItem
 
 	@Override
 	protected boolean setValue(Object prefs, ContextMenuItemsSettings val) {
-		return getSettingsAPI().edit(prefs).putString(getId(), val.writeToJsonString(idScheme)).commit();
+		return super.setValue(prefs, val)
+				&& getSettingsAPI().edit(prefs).putString(getId(), val.writeToJsonString(idScheme)).commit();
 	}
 
 

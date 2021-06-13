@@ -73,7 +73,11 @@ public class OsmEditsSettingsItem extends CollectionSettingsItem<OpenstreetmapPo
 	}
 
 	@Override
-	protected long getLocalModifiedTime() { // TODO
+	protected long getLocalModifiedTime() {
+		OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+		if (osmEditingPlugin != null) {
+			return osmEditingPlugin.getDBPOI().getLastModifiedTime();
+		}
 		return 0;
 	}
 

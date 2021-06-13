@@ -7,7 +7,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.backup.NetworkSettingsHelper.BackupImportListener;
+import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
 import java.util.List;
@@ -17,13 +17,13 @@ public class ImportBackupItemsTask extends AsyncTask<Void, Void, Boolean> {
 	private final NetworkSettingsHelper helper;
 	private final OsmandApplication app;
 	private final BackupImporter importer;
-	private final BackupImportListener listener;
+	private final ImportListener listener;
 	private final List<SettingsItem> items;
 	private final StateChangedListener<String> localeListener;
 	private boolean needRestart = false;
 
 	ImportBackupItemsTask(@NonNull NetworkSettingsHelper helper,
-						  @Nullable BackupImportListener listener,
+						  @Nullable ImportListener listener,
 						  @NonNull List<SettingsItem> items) {
 		this.helper = helper;
 		this.app = helper.getApp();

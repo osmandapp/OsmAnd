@@ -40,6 +40,7 @@ import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
+import net.osmand.plus.settings.fragments.ImportedSettingsItemsAdapter.OnItemClickListener;
 
 import java.util.List;
 
@@ -47,19 +48,22 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID
 import static net.osmand.plus.settings.fragments.BaseSettingsListFragment.SETTINGS_LIST_TAG;
 
 public class ImportCompleteFragment extends BaseOsmAndFragment {
+
 	public static final String TAG = ImportCompleteFragment.class.getSimpleName();
+
 	private OsmandApplication app;
-	private RecyclerView recyclerView;
 	private List<SettingsItem> settingsItems;
-	private String fileName;
-	private boolean needRestart;
+
+	private RecyclerView recyclerView;
+	private String sourceName;
 	private boolean nightMode;
+	private boolean needRestart;
 
 	public static void showInstance(FragmentManager fm, @NonNull List<SettingsItem> settingsItems,
-									@NonNull String fileName, boolean needRestart) {
+									@NonNull String sourceName, boolean needRestart) {
 		ImportCompleteFragment fragment = new ImportCompleteFragment();
 		fragment.setSettingsItems(settingsItems);
-		fragment.setFileName(fileName);
+		fragment.setSourceName(sourceName);
 		fragment.setRetainInstance(true);
 		fragment.setNeedRestart(needRestart);
 		fm.beginTransaction()
@@ -92,8 +96,8 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 		final ViewGroup buttonContainer = root.findViewById(R.id.button_container);
 		recyclerView = root.findViewById(R.id.list);
 		description.setText(UiUtilities.createSpannableString(
-				String.format(getString(R.string.import_complete_description), fileName),
-				new StyleSpan(Typeface.BOLD), fileName
+				String.format(getString(R.string.import_complete_description), sourceName),
+				new StyleSpan(Typeface.BOLD), sourceName
 		));
 		btnClose.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -132,9 +136,9 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 		if (settingsItems != null) {
 			ImportedSettingsItemsAdapter adapter = new ImportedSettingsItemsAdapter(
 					app,
-					SettingsHelper.getSettingsToOperate(settingsItems, true),
+					SettingsHelper.getSettingsToOperate(settingsItems, true, false),
 					nightMode,
-					new ImportedSettingsItemsAdapter.OnItemClickListener() {
+					new OnItemClickListener() {
 						@Override
 						public void onItemClick(ExportSettingsType type) {
 							navigateTo(type);
@@ -276,8 +280,8 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 		this.settingsItems = settingsItems;
 	}
 
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
+	public void setSourceName(String sourceName) {
+		this.sourceName = sourceName;
 	}
 
 	public void setNeedRestart(boolean needRestart) {

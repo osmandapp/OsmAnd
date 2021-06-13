@@ -23,7 +23,7 @@ import net.osmand.util.Algorithms;
 
 import java.util.List;
 
-public class RouteDirectionsCard extends BaseCard {
+public class RouteDirectionsCard extends MapBaseCard {
 
 	public RouteDirectionsCard(@NonNull MapActivity mapActivity) {
 		super(mapActivity);
