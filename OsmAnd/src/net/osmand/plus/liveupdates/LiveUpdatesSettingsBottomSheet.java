@@ -556,7 +556,7 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 	}
 
 	@ColorRes
-	public static int getActivePrimaryColorId(boolean nightMode) {
+	public static int getActiveColorId(boolean nightMode) {
 		return nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
 	}
 

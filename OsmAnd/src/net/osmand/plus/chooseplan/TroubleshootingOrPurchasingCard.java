@@ -26,6 +26,7 @@ import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 public class TroubleshootingOrPurchasingCard extends BaseCard {
 
 	private static final String OSMAND_NEW_DEVICE_URL = "https://docs.osmand.net/en/main@latest/osmand/purchases#new-device--new-account";
+	private static final String REDEEM_PROMO_CODE_URL = "https://support.google.com/googleplay/answer/3422659";
 	private static final String OSMAND_EMAIL = "support@osmand.net";
 
 	protected InAppPurchaseHelper purchaseHelper;
@@ -95,6 +96,8 @@ public class TroubleshootingOrPurchasingCard extends BaseCard {
 	protected void setupRedeemPromoCodeBtn() {
 		View redeemPromoCode = view.findViewById(R.id.redeem_promo_code);
 		redeemPromoCode.setVisibility(showPromoCodeBtn ? View.VISIBLE : View.GONE);
+		redeemPromoCode.setOnClickListener(v ->
+				WikipediaDialogFragment.showFullArticle(activity, Uri.parse(REDEEM_PROMO_CODE_URL), nightMode));
 	}
 
 	protected void setupNewDeviceOrAccountBtn() {

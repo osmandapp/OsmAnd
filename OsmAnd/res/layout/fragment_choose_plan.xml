@@ -75,8 +75,8 @@
 
                         <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/header_icon"
-                            android:layout_width="@dimen/standard_icon_size_big"
-                            android:layout_height="@dimen/standard_icon_size_big"
+                            android:layout_width="@dimen/big_icon_size"
+                            android:layout_height="@dimen/big_icon_size"
                             android:layout_gravity="center"
                             android:background="?attr/selectableItemBackgroundBorderless"
                             osmand:srcCompat="@drawable/ic_action_cloud_upload_colored" />
@@ -89,6 +89,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="start|center_vertical"
                         android:layout_weight="1"
+                        android:textColor="?android:textColorPrimary"
                         android:textSize="@dimen/default_header_text_size"
                         osmand:typeface="@string/font_roboto_medium"
                         tools:text="@string/osmand_cloud" />
@@ -132,7 +133,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/content_padding_small"
                     android:orientation="vertical"
-                    tools:listitem="@layout/purchase_osmand_feature_item" />
+                    tools:listitem="@layout/purchase_dialog_list_item" />
 
                 <View
                     android:layout_width="match_parent"
@@ -148,7 +149,7 @@
 
                     <include
                         android:id="@+id/button_continue_pro"
-                        layout="@layout/purchase_dialog_button" />
+                        layout="@layout/purchase_dialog_btn_continue" />
 
                     <View
                         android:layout_width="match_parent"
@@ -156,7 +157,7 @@
 
                     <include
                         android:id="@+id/button_continue_maps_plus"
-                        layout="@layout/purchase_dialog_button" />
+                        layout="@layout/purchase_dialog_btn_continue" />
 
                     <View
                         android:layout_width="match_parent"
