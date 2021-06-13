@@ -810,7 +810,7 @@ public class BackupHelper {
 		};
 	}
 
-	public void deleteOldFiles(@Nullable final OnDeleteFilesListener listener) throws UserNotRegisteredException {
+	public void deleteOldFiles(@Nullable final OnDeleteFilesListener listener, List<ExportSettingsType> types) throws UserNotRegisteredException {
 		checkRegistered();
 
 		Map<String, String> params = new HashMap<>();
@@ -818,10 +818,10 @@ public class BackupHelper {
 		params.put("accessToken", getAccessToken());
 		params.put("allVersions", "true");
 		AndroidNetworkUtils.sendRequestAsync(app, LIST_FILES_URL, params, "Delete old files", false, false,
-				getDeleteOldFilesListener(listener), EXECUTOR);
+				getDeleteOldFilesListener(listener, types), EXECUTOR);
 	}
 
-	private OnRequestResultListener getDeleteOldFilesListener(@Nullable OnDeleteFilesListener listener) {
+	private OnRequestResultListener getDeleteOldFilesListener(@Nullable OnDeleteFilesListener listener, List<ExportSettingsType> types) {
 		return new OnRequestResultListener() {
 			@Override
 			public void onResult(@Nullable String resultJson, @Nullable String error) {
@@ -858,8 +858,15 @@ public class BackupHelper {
 					}
 				} else {
 					try {
-						if (!remoteFiles.isEmpty()) {
-							deleteFiles(remoteFiles, true, listener);
+						List<RemoteFile> filesToDelete = new ArrayList<>();
+						for (RemoteFile file : remoteFiles) {
+							ExportSettingsType exportType = ExportSettingsType.getExportSettingsTypeForRemoteFile(file);
+							if (types.contains(exportType)) {
+								filesToDelete.add(file);
+							}
+						}
+						if (!filesToDelete.isEmpty()) {
+							deleteFiles(filesToDelete, true, listener);
 						} else {
 							if (listener != null) {
 								listener.onFilesDeleteDone(Collections.emptyMap());
@@ -1122,8 +1129,7 @@ public class BackupHelper {
 				List<RemoteFile> remoteFiles = new ArrayList<>(uniqueRemoteFiles);
 				remoteFiles.addAll(deletedRemoteFiles);
 				for (RemoteFile remoteFile : remoteFiles) {
-					ExportSettingsType exportType = remoteFile.item != null
-							? ExportSettingsType.getExportSettingsTypeForItem(remoteFile.item) : null;
+					ExportSettingsType exportType = ExportSettingsType.getExportSettingsTypeForRemoteFile(remoteFile);
 					if (exportType == null || !ExportSettingsType.isTypeEnabled(exportType)) {
 						continue;
 					}

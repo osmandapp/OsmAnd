@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,19 +17,26 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.BackupHelper;
+import net.osmand.plus.backup.BackupHelper.OnDeleteFilesListener;
+import net.osmand.plus.backup.RemoteFile;
+import net.osmand.plus.backup.UserNotRegisteredException;
 import net.osmand.plus.backup.ui.BackupTypesAdapter.OnItemSelectedListener;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ExportSettingsCategory;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.fragments.BaseSettingsListFragment;
 import net.osmand.plus.settings.fragments.SettingsCategoryItems;
+
+import org.apache.commons.logging.Log;
 
 import java.util.Collections;
 import java.util.EnumMap;
@@ -39,6 +47,7 @@ import java.util.Map;
 public class VersionHistoryFragment extends BaseOsmAndFragment implements OnItemSelectedListener {
 
 	public static final String TAG = VersionHistoryFragment.class.getSimpleName();
+	private static final Log log = PlatformUtil.getLog(VersionHistoryFragment.class);
 
 	private OsmandApplication app;
 	private BackupHelper backupHelper;
@@ -46,6 +55,8 @@ public class VersionHistoryFragment extends BaseOsmAndFragment implements OnItem
 	private List<SettingsItem> settingsItems;
 	private Map<ExportSettingsCategory, SettingsCategoryItems> dataList = new LinkedHashMap<>();
 	protected Map<ExportSettingsType, List<?>> selectedItemsMap = new EnumMap<>(ExportSettingsType.class);
+
+	private ProgressBar progressBar;
 
 	private boolean nightMode;
 	private boolean wasDrawerDisabled;
@@ -69,26 +80,32 @@ public class VersionHistoryFragment extends BaseOsmAndFragment implements OnItem
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		LayoutInflater themedInflater = UiUtilities.getInflater(app, nightMode);
-		View root = themedInflater.inflate(R.layout.fragment_backup_types, container, false);
-		AndroidUtils.addStatusBarPadding21v(app, root);
-		setupToolbar(root);
+		View view = themedInflater.inflate(R.layout.fragment_backup_types, container, false);
+		AndroidUtils.addStatusBarPadding21v(app, view);
+		setupToolbar(view);
+
+		progressBar = view.findViewById(R.id.progress_bar);
 
 		BackupTypesAdapter adapter = new BackupTypesAdapter(app, this, nightMode);
 		adapter.updateSettingsItems(dataList, selectedItemsMap);
 
-		ExpandableListView expandableList = root.findViewById(R.id.list);
+		ExpandableListView expandableList = view.findViewById(R.id.list);
 		expandableList.setAdapter(adapter);
 		BaseSettingsListFragment.setupListView(expandableList);
 
-		return root;
+		return view;
 	}
 
 	@Override
 	public void onCategorySelected(ExportSettingsCategory category, boolean selected) {
 		SettingsCategoryItems categoryItems = dataList.get(category);
-		for (ExportSettingsType type : categoryItems.getTypes()) {
+		List<ExportSettingsType> types = categoryItems.getTypes();
+		for (ExportSettingsType type : types) {
 			backupHelper.getVersionHistoryTypePref(type).set(selected);
 			selectedItemsMap.put(type, selected ? categoryItems.getItemsForType(type) : null);
+		}
+		if (!selected) {
+			showClearHistoryBottomSheet(types);
 		}
 	}
 
@@ -96,6 +113,10 @@ public class VersionHistoryFragment extends BaseOsmAndFragment implements OnItem
 	public void onTypeSelected(ExportSettingsType type, boolean selected) {
 		backupHelper.getVersionHistoryTypePref(type).set(selected);
 		selectedItemsMap.put(type, selected ? getItemsForType(type) : null);
+
+		if (!selected) {
+			showClearHistoryBottomSheet(Collections.singletonList(type));
+		}
 	}
 
 	@Override
@@ -115,6 +136,45 @@ public class VersionHistoryFragment extends BaseOsmAndFragment implements OnItem
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null && !wasDrawerDisabled) {
 			mapActivity.enableDrawer();
+		}
+	}
+
+	protected void deleteHistoryForTypes(List<ExportSettingsType> types) {
+		try {
+			updateProgressVisibility(true);
+			backupHelper.deleteOldFiles(getOnDeleteFilesListener(), types);
+		} catch (UserNotRegisteredException e) {
+			log.error(e);
+		}
+	}
+
+	private OnDeleteFilesListener getOnDeleteFilesListener() {
+		return new OnDeleteFilesListener() {
+			@Override
+			public void onFileDeleteProgress(@NonNull RemoteFile file) {
+				updateProgressVisibility(true);
+			}
+
+			@Override
+			public void onFilesDeleteDone(@NonNull Map<RemoteFile, String> errors) {
+				updateProgressVisibility(false);
+			}
+
+			@Override
+			public void onFilesDeleteError(int status, @NonNull String message) {
+				updateProgressVisibility(false);
+			}
+		};
+	}
+
+	private void updateProgressVisibility(boolean visible) {
+		AndroidUiHelper.updateVisibility(progressBar, visible);
+	}
+
+	private void showClearHistoryBottomSheet(List<ExportSettingsType> types) {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			VersionHistoryClearBottomSheet.showInstance(activity.getSupportFragmentManager(), types, this);
 		}
 	}
 
