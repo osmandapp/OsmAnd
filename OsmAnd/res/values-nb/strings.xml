@@ -3998,4 +3998,33 @@
     <string name="make_backup">Lag sikkerhetskopi</string>
     <string name="backup_conflicts">Konflikter</string>
     <string name="backup_view_conflicts">Vis konflikter</string>
+    <string name="srtm_download_single_help_message">Velg varianten. Du vil måtte laste ned igjen filen for å endre formatet.</string>
+    <string name="user_points">Brukerpunkter</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">Unngå lavutslippssoner og miljøsoner</string>
+    <string name="routing_attr_avoid_low_emission_zone_name">Unngå lavutslippssoner og miljøsoner</string>
+    <string name="shared_string_external">Ekstern</string>
+    <string name="provided_by">Tilbudt av %1$s</string>
+    <string name="failed_loading_predefined_engines">Klarte ikke å laste inn liste over forhåndsdefinerte maler.
+\nSjekk at du er tilknyttet Internett.</string>
+    <string name="make_backup_descr">Det er mange endringer på denne enheten. Utfør en sikkerhetskopi slik at denne dataen ikke går tapt.</string>
+    <string name="backup_confilcts_descr">Noen filer kunne ikke lastes opp til tjeneren fordi en nyere versjon er lagret på tjeneren.</string>
+    <string name="backup_no_internet_descr">Sjekk at du er tilknyttet Internett og prøv igjen.</string>
+    <string name="backup_pause_all">Pause alle</string>
+    <string name="backup_delete_all_data_descr">All data på OsmAnd-sky vil bli slettet. Lokale versjoner vil ikke bli endret.</string>
+    <string name="backup_delete_old_data_descr">Nåværende versjoner av din data vil bli tatt vare på i OsmAnd-sky</string>
+    <string name="backup_delete_old_data_warning">Du er i ferd med å slette endringshistorikken for tidligere nedlastet data.
+\n
+\nDen nåværende versjonen av dataen vil bli endret på tjeneren, men du vil ikke kunne gå tilbake til de tidligere utførte endringene.</string>
+    <string name="select_backup_data_descr">Velg data og mapper for sikkerhetskopi.</string>
+    <string name="backup_restore_data_descr">Gjenopprett data på enheten, ved bruk av nettbaserte sikkerhetskopier.</string>
+    <string name="receiving_data_from_server">Mottar data fra tjeneren …</string>
+    <string name="restore_complete">Gjenoppretting fullført</string>
+    <string name="grey_color_slope">Grå farge brukes nå helningen ikke er definert.</string>
+    <string name="backup_storage_taken">Brukt lagringsplass</string>
+    <string name="backup_data">Sikkerhetskopier data</string>
+    <string name="backup_restore_data">Gjenopprett data</string>
+    <string name="restore_from_osmand_cloud">Gjenopprett fra OsmAnd-sky</string>
+    <string name="choose_what_to_restore">Velg hva som skal gjenopprettes.</string>
+    <string name="restore_selected_data">Gjenopprett valgt data</string>
+    <string name="backup_version_history">Versjonshistorikk</string>
 </resources>
