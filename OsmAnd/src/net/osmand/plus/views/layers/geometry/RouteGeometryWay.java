@@ -1,8 +1,8 @@
 package net.osmand.plus.views.layers.geometry;
 
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.Paint;
-import android.util.Log;
 
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
@@ -74,7 +74,7 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 			getContext().getAttrs().shadowPaint.setStrokeWidth(width + getContext().getDensity() * 2);
 		}
 
-		Paint.Cap cap = routeColoringType.isGradient() || routeColoringType.isSolidMultiColor() ?
+		Paint.Cap cap = routeColoringType.isGradient() || routeColoringType.isRouteInfoAttribute() ?
 				Paint.Cap.ROUND : getContext().getAttrs().paint.getStrokeCap();
 		getContext().getAttrs().customColorPaint.setStrokeCap(cap);
 	}
@@ -85,15 +85,12 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 			needUpdate = false;
 			List<Location> locations = route.getImmutableAllLocations();
 
-			if (routeColoringType.isSolidSingleColor()) {
-				updateWay(locations, tb);
-			} else if (routeColoringType.isGradient()) {
+			if (routeColoringType.isGradient()) {
 				updateGradientRoute(tb, locations);
-			} else if (routeColoringType.isSolidMultiColor()) {
-				boolean success = updateSolidMultiColorRoute(tb, route);
-				if (!success) {
-					updateWay(locations, tb);
-				}
+			} else if (routeColoringType.isRouteInfoAttribute()) {
+				updateSolidMultiColorRoute(tb, route);
+			} else {
+				updateWay(locations, tb);
 			}
 		}
 	}
@@ -125,7 +122,7 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 		return styleMap;
 	}
 
-	private boolean updateSolidMultiColorRoute(RotatedTileBox tileBox, RouteCalculationResult route) {
+	private void updateSolidMultiColorRoute(RotatedTileBox tileBox, RouteCalculationResult route) {
 		OsmandApplication app = getContext().getApp();
 		boolean night = app.getDaynightHelper().isNightModeForMapControls();
 		RenderingRulesStorage currentRenderer = app.getRendererRegistry().getCurrentSelectedRenderer();
@@ -140,9 +137,6 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 		List<RouteStatistics> routeStatisticsList = RouteStatisticsHelper.calculateRouteStatistic(routeSegments,
 				Collections.singletonList(routeColoringType.getAttrName()), currentRenderer,
 				defaultRenderer, currentSearchRequest, defaultSearchRequest);
-		if (Algorithms.isEmpty(routeStatisticsList)) {
-			return false;
-		}
 
 		List<Location> locations = new ArrayList<>();
 		RouteStatistics routeStatistics = routeStatisticsList.get(0);
@@ -152,7 +146,6 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 			// TODO
 		}
 		updateWay(locations, styleMap, tileBox);
-		return true;
 	}
 
 	@Override
@@ -191,6 +184,10 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 				gradientWayStyle.currColor = RouteColorize.getGradientColor(prevColor, nextColor, percent);
 				gradientWayStyle.nextColor = nextColor;
 			}
+		} else if (routeColoringType.isRouteInfoAttribute() && style instanceof GeometrySolidWayStyle) {
+			GeometrySolidWayStyle solidWayStyle = (GeometrySolidWayStyle) style;
+			GeometrySolidWayStyle transparentWayStyle = getSolidWayStyle(Color.TRANSPARENT);
+			solidWayStyle.color = getStyle(startLocationIndex, transparentWayStyle).color;
 		}
 		return previousVisible;
 	}
@@ -221,6 +218,14 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 		return new GeometrySolidWayStyle(getContext(), color, width, customPointColor);
 	}
 
+	@NonNull
+	public GeometrySolidWayStyle getSolidWayStyle(int lineColor) {
+		Paint paint = getContext().getAttrs().paint;
+		float width = customWidth != null ? customWidth : paint.getStrokeWidth();
+		return new GeometrySolidWayStyle(getContext(), lineColor, width, customPointColor);
+	}
+
+	@NonNull
 	public GeometryGradientWayStyle getGradientWayStyle() {
 		Paint paint = getContext().getAttrs().paint;
 		int color = customColor != null ? customColor : paint.getColor();

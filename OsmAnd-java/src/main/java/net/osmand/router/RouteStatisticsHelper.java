@@ -94,6 +94,9 @@ public class RouteStatisticsHelper {
 																RenderingRulesStorage defaultRenderer,
 																RenderingRuleSearchRequest currentSearchRequest,
 																RenderingRuleSearchRequest defaultSearchRequest) {
+		if (route == null) {
+			return Collections.emptyList();
+		}
 		List<RouteSegmentWithIncline> routeSegmentWithInclines = calculateInclineRouteSegments(route);
 		// "steepnessColor", "surfaceColor", "roadClassColor", "smoothnessColor"
 		// steepness=-19_-16

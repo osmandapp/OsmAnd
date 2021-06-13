@@ -285,14 +285,17 @@ public class RouteCalculationResult {
 		return routeVisibleAngle;
 	}
 
+	@Nullable
 	public List<RouteSegmentResult> getOriginalRoute() {
 		return getOriginalRoute(0);
 	}
 
+	@Nullable
 	public List<RouteSegmentResult> getOriginalRoute(int startIndex) {
 		return getOriginalRoute(startIndex, segments.size());
 	}
 
+	@Nullable
 	public List<RouteSegmentResult> getOriginalRoute(int startIndex, int endIndex) {
 		if (segments.size() == 0) {
 			return null;

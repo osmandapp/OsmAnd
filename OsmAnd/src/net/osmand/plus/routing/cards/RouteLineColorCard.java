@@ -243,7 +243,7 @@ public class RouteLineColorCard extends BaseCard implements CardListener, ColorP
 		String colorName = "";
 		if (selectedType.isDefault()) {
 			colorName = app.getString(R.string.map_widget_renderer);
-		} else if (selectedType.isGradient() || selectedType.isSolidMultiColor()) {
+		} else if (selectedType.isGradient() || selectedType.isRouteInfoAttribute()) {
 			colorName = selectedType.getHumanString(app);
 		} else if (getRouteLineColor() != null) {
 			int colorNameId = ColorDialogs.getColorName(getRouteLineColor());
@@ -253,7 +253,7 @@ public class RouteLineColorCard extends BaseCard implements CardListener, ColorP
 	}
 
 	private void updateDescription() {
-		if (selectedType.isSolidMultiColor()) {
+		if (selectedType.isRouteInfoAttribute()) {
 			AndroidUiHelper.updateVisibility(tvDescription, false);
 			return;
 		}

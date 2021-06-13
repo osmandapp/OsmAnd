@@ -2,8 +2,19 @@ package net.osmand.plus.routing;
 
 import android.content.Context;
 
+import net.osmand.Location;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.track.GradientScaleType;
+import net.osmand.render.RenderingRuleSearchRequest;
+import net.osmand.render.RenderingRulesStorage;
+import net.osmand.router.RouteSegmentResult;
+import net.osmand.router.RouteStatisticsHelper;
+import net.osmand.util.Algorithms;
+
+import java.util.Collections;
+import java.util.List;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
@@ -79,9 +90,50 @@ public enum RouteColoringType {
 		return this == ALTITUDE || this == SLOPE;
 	}
 
-	public boolean isSolidMultiColor() {
+	public boolean isRouteInfoAttribute() {
 		return this == ROAD_TYPE || this == SURFACE || this == SMOOTHNESS || this == STEEPNESS
 				|| this == WINTER_ICE_ROAD || this == TRACK_TYPE;
+	}
+
+	public boolean isAvailableForDrawing(@NonNull OsmandApplication app) {
+		RouteCalculationResult route = app.getRoutingHelper().getRoute();
+		if (isGradient()) {
+			List<Location> locations = route.getImmutableAllLocations();
+			for (Location location : locations) {
+				if (location.hasAltitude()) {
+					return true;
+				}
+			}
+			return false;
+		}
+
+		if (isRouteInfoAttribute()) {
+			List<RouteSegmentResult> routeSegments = route.getOriginalRoute();
+			if (Algorithms.isEmpty(routeSegments)) {
+				return false;
+			}
+
+			RenderingRulesStorage currentRenderer = app.getRendererRegistry().getCurrentSelectedRenderer();
+			RenderingRulesStorage defaultRenderer = app.getRendererRegistry().defaultRender();
+			List<String> attrs = RouteStatisticsHelper.getRouteStatisticAttrsNames(currentRenderer, defaultRenderer);
+			if (Algorithms.isEmpty(attrs) || !attrs.contains(attrName)) {
+				return false;
+			}
+
+			boolean night = app.getDaynightHelper().isNightModeForMapControls();
+			MapRenderRepositories maps = app.getResourceManager().getRenderer();
+			RenderingRuleSearchRequest currentSearchRequest =
+					maps.getSearchRequestWithAppliedCustomRules(currentRenderer, night);
+			RenderingRuleSearchRequest defaultSearchRequest =
+					maps.getSearchRequestWithAppliedCustomRules(defaultRenderer, night);
+			List<RouteStatisticsHelper.RouteStatistics> routeStatisticsList =
+					RouteStatisticsHelper.calculateRouteStatistic(routeSegments,
+							Collections.singletonList(attrName), currentRenderer,
+							defaultRenderer, currentSearchRequest, defaultSearchRequest);
+			return !Algorithms.isEmpty(routeStatisticsList);
+		}
+
+		return true;
 	}
 
 	@Nullable
