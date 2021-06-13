@@ -302,6 +302,7 @@ public class RouteLineColorCard extends BaseCard implements CardListener, ColorP
 			View view = themedInflater.inflate(R.layout.point_editor_group_select_item, parent, false);
 			view.getLayoutParams().width = app.getResources().getDimensionPixelSize(R.dimen.gpx_group_button_width);
 			view.getLayoutParams().height = app.getResources().getDimensionPixelSize(R.dimen.gpx_group_button_height);
+			((TextView) view.findViewById(R.id.groupName)).setMaxLines(1);
 
 			AppearanceViewHolder holder = new AppearanceViewHolder(view);
 			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

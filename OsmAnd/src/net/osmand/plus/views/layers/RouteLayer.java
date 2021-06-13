@@ -305,7 +305,7 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 			attrsIsPaint_1 = attrs.isPaint_1;
 		}
 
-		if (updatePaints || updateRouteColoringType()) {
+		if (updateRouteColoringType() || updatePaints) {
 			attrs.isPaint_1 = routeColoringType.isDefault() && attrsIsPaint_1;
 			updateTurnArrowColor();
 			copyRenderingAttrs(attrs, attrsPreview);
@@ -385,8 +385,8 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 		List<Double> distances = new ArrayList<>();
 		List<GeometryWayStyle<?>> styles = new ArrayList<>();
 		updateAttrs(settings, tileBox);
-		updateRouteColors(nightMode);
 		updateRouteColoringType();
+		updateRouteColors(nightMode);
 		previewLineGeometry.setRouteStyleParams(getRouteLineColor(), getRouteLineWidth(tileBox),
 				getDirectionArrowsColor(), routeColoringType);
 		fillPreviewLineArrays(tx, ty, angles, distances, styles);

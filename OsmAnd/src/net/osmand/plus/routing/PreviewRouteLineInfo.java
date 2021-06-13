@@ -13,7 +13,7 @@ public class PreviewRouteLineInfo {
 
 	private static final String LINE_COLOR_DAY = "line_color_day";
 	private static final String LINE_COLOR_NIGHT = "line_color_night";
-	private static final String LINE_COLORING_TYPE = "line_coloring_type";
+	private static final String ROUTE_COLORING_TYPE = "route_coloring_type";
 	private static final String LINE_WIDTH = "line_width";
 	private static final String NAVIGATION_ICON_ID = "navigation_icon_id";
 	private static final String NAVIGATION_ICON_COLOR = "navigation_icon_color";
@@ -27,7 +27,6 @@ public class PreviewRouteLineInfo {
 	@ColorInt
 	private Integer colorDay;
 	private Integer colorNight;
-	@NonNull
 	private RouteColoringType coloringType = RouteColoringType.DEFAULT;
 	private String width;
 
@@ -42,9 +41,9 @@ public class PreviewRouteLineInfo {
 	private boolean useDefaultColor;
 
 	public PreviewRouteLineInfo(@Nullable @ColorInt Integer colorDay,
-								@Nullable @ColorInt Integer colorNight,
-								@NonNull RouteColoringType coloringType,
-								@Nullable String width) {
+	                            @Nullable @ColorInt Integer colorNight,
+	                            @NonNull RouteColoringType coloringType,
+	                            @Nullable String width) {
 		this.colorDay = colorDay;
 		this.colorNight = colorNight;
 		this.coloringType = coloringType;
@@ -168,7 +167,7 @@ public class PreviewRouteLineInfo {
 		if (bundle.containsKey(LINE_COLOR_NIGHT)) {
 			colorNight = bundle.getInt(LINE_COLOR_NIGHT);
 		}
-		coloringType = RouteColoringType.getColoringTypeByName(bundle.getString(LINE_COLORING_TYPE));
+		coloringType = RouteColoringType.getColoringTypeByName(bundle.getString(ROUTE_COLORING_TYPE));
 		width = bundle.getString(LINE_WIDTH);
 		iconId = bundle.getInt(NAVIGATION_ICON_ID);
 		iconColor = bundle.getInt(NAVIGATION_ICON_COLOR);
@@ -186,7 +185,7 @@ public class PreviewRouteLineInfo {
 		if (colorNight != null) {
 			bundle.putInt(LINE_COLOR_NIGHT, colorNight);
 		}
-		bundle.putString(LINE_COLORING_TYPE, coloringType.getName());
+		bundle.putString(ROUTE_COLORING_TYPE, coloringType.getName());
 		if (width != null) {
 			bundle.putString(LINE_WIDTH, width);
 		}

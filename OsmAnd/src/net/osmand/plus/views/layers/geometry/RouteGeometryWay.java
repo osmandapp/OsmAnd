@@ -56,9 +56,9 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 	}
 
 	public void setRouteStyleParams(@Nullable @ColorInt Integer color,
-									@Nullable Float width,
-									@Nullable @ColorInt Integer pointColor,
-									@NonNull RouteColoringType routeColoringType) {
+	                                @Nullable Float width,
+	                                @Nullable @ColorInt Integer pointColor,
+	                                @NonNull RouteColoringType routeColoringType) {
 		this.needUpdate = this.routeColoringType != routeColoringType;
 
 		if (!Algorithms.objectEquals(customWidth, width)) {

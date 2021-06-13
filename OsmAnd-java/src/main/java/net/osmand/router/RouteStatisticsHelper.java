@@ -80,20 +80,20 @@ public class RouteStatisticsHelper {
 	}
 
 	public static List<RouteStatistics> calculateRouteStatistic(List<RouteSegmentResult> route,
-																RenderingRulesStorage currentRenderer,
-																RenderingRulesStorage defaultRenderer,
-																RenderingRuleSearchRequest currentSearchRequest,
-																RenderingRuleSearchRequest defaultSearchRequest) {
+	                                                            RenderingRulesStorage currentRenderer,
+	                                                            RenderingRulesStorage defaultRenderer,
+	                                                            RenderingRuleSearchRequest currentSearchRequest,
+	                                                            RenderingRuleSearchRequest defaultSearchRequest) {
 		return calculateRouteStatistic(route, null, currentRenderer, defaultRenderer,
 				currentSearchRequest, defaultSearchRequest);
 	}
 
 	public static List<RouteStatistics> calculateRouteStatistic(List<RouteSegmentResult> route,
-																List<String> attributesNames,
-																RenderingRulesStorage currentRenderer,
-																RenderingRulesStorage defaultRenderer,
-																RenderingRuleSearchRequest currentSearchRequest,
-																RenderingRuleSearchRequest defaultSearchRequest) {
+	                                                            List<String> attributesNames,
+	                                                            RenderingRulesStorage currentRenderer,
+	                                                            RenderingRulesStorage defaultRenderer,
+                                                                RenderingRuleSearchRequest currentSearchRequest,
+	                                                            RenderingRuleSearchRequest defaultSearchRequest) {
 		if (route == null) {
 			return Collections.emptyList();
 		}

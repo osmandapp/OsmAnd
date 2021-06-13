@@ -151,7 +151,7 @@ public enum RouteColoringType {
 	public static RouteColoringType getColoringTypeByName(@Nullable String name) {
 		for (RouteColoringType coloringType : RouteColoringType.values()) {
 			if (coloringType.name.equalsIgnoreCase(name)) {
-				return DEFAULT;
+				return coloringType;
 			}
 		}
 		return DEFAULT;
