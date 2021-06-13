@@ -39,7 +39,7 @@ public class RouteColorize {
 
     public static final double SLOPE_MIN_VALUE = -0.25;//25%
     public static final double SLOPE_MAX_VALUE = 1.0;//100%
-    public static final double[][] SLOPE_PALETTE = {{SLOPE_MIN_VALUE, WHITE}, {0.0, GREEN}, {0.125, YELLOW}, {0.25, RED}, {SLOPE_MAX_VALUE, PURPLE}};
+    public static final double[][] SLOPE_PALETTE = {{SLOPE_MIN_VALUE, GREEN}, {0.0, WHITE}, {0.125, YELLOW}, {0.25, RED}, {SLOPE_MAX_VALUE, PURPLE}};
 
     private static final float DEFAULT_BASE = 17.2f;
 
