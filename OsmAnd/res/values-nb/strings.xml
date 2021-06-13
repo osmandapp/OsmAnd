@@ -3675,9 +3675,9 @@
     <string name="recalculate_route_distance_promo">Ruten blir beregnet på nytt hvis avstanden fra ruten til nåværende posisjon er større enn valgt verdi.</string>
     <string name="osm_live_payment_subscription_management">Betaling vil bli belastet din Google Play-konto ved bekreftelse av kjøp.
 \n
-\n Abonnement fornyes automatisk med mindre det avbrytes før fornyelsesdatoen. Din konto vil bli belastet for fornyelsesperioden (måned/tre måneder/år) kun på fornyelsesdatoen.
+\nAbonnement fornyes automatisk med mindre det avbrytes før fornyelsesdatoen. Din konto vil bli belastet for fornyelsesperioden (måned/tre måneder/år) kun på fornyelsesdatoen.
 \n
-\n Du kan håndtere og avbryte dine abonnementer ved å gå til dine Google Play-innstillinger.</string>
+\nDu kan håndtere og avbryte dine abonnementer ved å gå til dine Google Play-innstillinger.</string>
     <string name="turn_screen_on_descr">Angi når skjermen skal vekkes opp (forsikre deg om at OsmAnd er i forgrunnen når enheten låses):</string>
     <string name="map_source_zoom_levels">Still inn minimum og maksimum zoomnivå for å vise eller laste det nettbaserte kartet.</string>
     <string name="map_source_zoom_levels_descr">Har innvirkning på om skjermen skal brukes som kart eller overlag/underlag.
