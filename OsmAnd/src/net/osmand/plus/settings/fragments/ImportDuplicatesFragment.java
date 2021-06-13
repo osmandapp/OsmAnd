@@ -215,7 +215,7 @@ public abstract class ImportDuplicatesFragment extends BaseOsmAndFragment {
 		List<File> voiceFilesList = new ArrayList<>();
 		List<File> mapFilesList = new ArrayList<>();
 		List<MapMarker> mapMarkers = new ArrayList<>();
-		List<MapMarker> mapMarkersGroups = new ArrayList<>();
+		List<MapMarker> mapMarkersHistory = new ArrayList<>();
 		List<HistoryEntry> historyEntries = new ArrayList<>();
 		List<OnlineRoutingEngine> onlineRoutingEngines = new ArrayList<>();
 		List<MapMarkersGroup> itineraryGroups = new ArrayList<>();
@@ -258,9 +258,9 @@ public abstract class ImportDuplicatesFragment extends BaseOsmAndFragment {
 			} else if (object instanceof MapMarker) {
 				MapMarker mapMarker = (MapMarker) object;
 				if (mapMarker.history) {
-					mapMarkers.add(mapMarker);
+					mapMarkersHistory.add(mapMarker);
 				} else {
-					mapMarkersGroups.add(mapMarker);
+					mapMarkers.add(mapMarker);
 				}
 			} else if (object instanceof HistoryEntry) {
 				historyEntries.add((HistoryEntry) object);
@@ -334,9 +334,9 @@ public abstract class ImportDuplicatesFragment extends BaseOsmAndFragment {
 			duplicates.add(getString(R.string.map_markers));
 			duplicates.addAll(mapMarkers);
 		}
-		if (!mapMarkersGroups.isEmpty()) {
+		if (!mapMarkersHistory.isEmpty()) {
 			duplicates.add(getString(R.string.markers_history));
-			duplicates.addAll(mapMarkersGroups);
+			duplicates.addAll(mapMarkersHistory);
 		}
 		if (!onlineRoutingEngines.isEmpty()) {
 			duplicates.add(getString(R.string.online_routing_engines));

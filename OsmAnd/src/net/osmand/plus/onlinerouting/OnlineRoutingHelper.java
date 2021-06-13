@@ -182,6 +182,10 @@ public class OnlineRoutingHelper {
 		return settings.ONLINE_ROUTING_ENGINES.getLastModifiedTime();
 	}
 
+	public void setLastModifiedTime(long lastModifiedTime) {
+		settings.ONLINE_ROUTING_ENGINES.setLastModifiedTime(lastModifiedTime);
+	}
+
 	@NonNull
 	private Map<String, OnlineRoutingEngine> loadSavedEngines() {
 		Map<String, OnlineRoutingEngine> cachedEngines = new LinkedHashMap<>();

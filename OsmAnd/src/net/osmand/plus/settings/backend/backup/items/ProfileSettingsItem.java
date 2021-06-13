@@ -71,8 +71,13 @@ public class ProfileSettingsItem extends OsmandSettingsItem {
 	}
 
 	@Override
-	protected long getLocalModifiedTime() {
+	public long getLocalModifiedTime() {
 		return app.getSettings().getLastModePreferencesEditTime(appMode);
+	}
+
+	@Override
+	public void setLocalModifiedTime(long lastModifiedTime) {
+		app.getSettings().setLastModePreferencesEditTime(appMode, lastModifiedTime);
 	}
 
 	public ApplicationMode getAppMode() {

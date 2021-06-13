@@ -106,6 +106,14 @@ public class MapMarkersDbHelper {
 		return lastModifiedTime;
 	}
 
+	public void setMarkersLastModifiedTime(long lastModifiedTime) {
+		BackupHelper.setLastModifiedTime(context, MARKERS_LAST_MODIFIED_NAME, lastModifiedTime);
+	}
+
+	public void setMarkersHistoryLastModifiedTime(long lastModifiedTime) {
+		BackupHelper.setLastModifiedTime(context, MARKERS_HISTORY_LAST_MODIFIED_NAME, lastModifiedTime);
+	}
+
 	private void updateMarkersLastModifiedTime() {
 		BackupHelper.setLastModifiedTime(context, MARKERS_LAST_MODIFIED_NAME);
 	}

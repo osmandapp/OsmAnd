@@ -586,8 +586,17 @@ public class OsmandSettings {
 		return getLastPreferencesEditTime(preferences);
 	}
 
+	public void setLastModePreferencesEditTime(ApplicationMode mode, long lastModifiedTime) {
+		Object preferences = getProfilePreferences(mode);
+		updateLastPreferencesEditTime(preferences, lastModifiedTime);
+	}
+
 	public long getLastGlobalPreferencesEditTime() {
 		return getLastPreferencesEditTime(globalPreferences);
+	}
+
+	public void setLastGlobalPreferencesEditTime(long lastModifiedTime) {
+		updateLastPreferencesEditTime(globalPreferences, lastModifiedTime);
 	}
 
 	private long getLastPreferencesEditTime(Object preferences) {
@@ -596,6 +605,10 @@ public class OsmandSettings {
 
 	protected void updateLastPreferencesEditTime(Object preferences) {
 		long time = System.currentTimeMillis();
+		updateLastPreferencesEditTime(preferences, time);
+	}
+
+	protected void updateLastPreferencesEditTime(Object preferences, long time) {
 		settingsAPI.edit(preferences).putLong(LAST_PREFERENCES_EDIT_TIME, time).commit();
 	}
 
@@ -1838,6 +1851,26 @@ public class OsmandSettings {
 		return lastModified;
 	}
 
+	public void setTileSourcesLastModifiedTime(long lastModifiedTime) {
+		File tilesDir = ctx.getAppPath(IndexConstants.TILES_INDEX_DIR);
+		if (tilesDir != null && tilesDir.canRead()) {
+			List<File> dirs = new ArrayList<>();
+			dirs.add(tilesDir);
+			Algorithms.collectDirs(tilesDir, dirs);
+			for (File dir : dirs) {
+				File[] files = dir.listFiles();
+				if (files != null && files.length > 0) {
+					for (File file : files) {
+						long l = file.lastModified();
+						if (l > lastModifiedTime) {
+							file.setLastModified(lastModifiedTime);
+						}
+					}
+				}
+			}
+		}
+	}
+
 	public Map<String, String> getTileSourceEntries() {
 		return getTileSourceEntries(true);
 	}
@@ -2433,6 +2466,10 @@ public class OsmandSettings {
 
 	public long getImpassableRoadsLastModifiedTime() {
 		return impassableRoadsStorage.getLastModifiedTime();
+	}
+
+	public void setImpassableRoadsLastModifiedTime(long lastModifiedTime) {
+		impassableRoadsStorage.setLastModifiedTime(lastModifiedTime);
 	}
 
 	public List<AvoidRoadInfo> getImpassableRoadPoints() {

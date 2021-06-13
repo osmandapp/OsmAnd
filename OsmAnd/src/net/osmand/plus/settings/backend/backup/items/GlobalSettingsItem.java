@@ -35,8 +35,13 @@ public class GlobalSettingsItem extends OsmandSettingsItem {
 	}
 
 	@Override
-	protected long getLocalModifiedTime() {
+	public long getLocalModifiedTime() {
 		return app.getSettings().getLastGlobalPreferencesEditTime();
+	}
+
+	@Override
+	public void setLocalModifiedTime(long lastModifiedTime) {
+		app.getSettings().setLastGlobalPreferencesEditTime(lastModifiedTime);
 	}
 
 	@NonNull

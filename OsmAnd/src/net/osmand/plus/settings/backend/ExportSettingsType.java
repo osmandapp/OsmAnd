@@ -5,11 +5,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public enum ExportSettingsType {
 
@@ -104,5 +111,23 @@ public enum ExportSettingsType {
 			}
 		}
 		return null;
+	}
+
+	public static List<ExportSettingsType> getEnabledTypes() {
+		List<ExportSettingsType> result = new ArrayList<>(Arrays.asList(ExportSettingsType.values()));
+		OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
+		if (osmEditingPlugin == null) {
+			result.remove(ExportSettingsType.OSM_EDITS);
+			result.remove(ExportSettingsType.OSM_NOTES);
+		}
+		AudioVideoNotesPlugin avNotesPlugin = OsmandPlugin.getEnabledPlugin(AudioVideoNotesPlugin.class);
+		if (avNotesPlugin == null) {
+			result.remove(ExportSettingsType.MULTIMEDIA_NOTES);
+		}
+		return result;
+	}
+
+	public static boolean isTypeEnabled(@NonNull ExportSettingsType type) {
+		return getEnabledTypes().contains(type);
 	}
 }

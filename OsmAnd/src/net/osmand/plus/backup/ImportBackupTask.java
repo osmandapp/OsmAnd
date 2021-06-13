@@ -40,7 +40,6 @@ public class ImportBackupTask extends AsyncTask<Void, Void, List<SettingsItem>> 
 	private List<RemoteFile> remoteFiles;
 
 	private final ImportType importType;
-	private RemoteFilesType remoteFilesType;
 	private boolean importDone;
 
 	ImportBackupTask(@NonNull NetworkSettingsHelper helper,
@@ -139,6 +138,13 @@ public class ImportBackupTask extends AsyncTask<Void, Void, List<SettingsItem>> 
 				if (items != null && items.size() > 0) {
 					for (SettingsItem item : items) {
 						item.apply();
+						String fileName = item.getFileName();
+						if (fileName != null) {
+							RemoteFile remoteFile = app.getBackupHelper().getBackup().getRemoteFile(item.getType().name(), fileName);
+							if (remoteFile != null) {
+								app.getBackupHelper().updateFileUploadTime(remoteFile.getType(), remoteFile.getName(), remoteFile.getClienttimems());
+							}
+						}
 					}
 					new ImportBackupItemsTask(helper, importType == ImportType.IMPORT_FORCE_READ, importListener, items)
 							.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);

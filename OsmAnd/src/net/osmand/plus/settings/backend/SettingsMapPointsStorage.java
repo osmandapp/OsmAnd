@@ -41,6 +41,14 @@ abstract class SettingsMapPointsStorage {
 		return getSettingsAPI().getLong(osmandSettings.getGlobalPreferences(), pointsKey + "_last_modified", 0);
 	}
 
+	public void setLastModifiedTime(long lastModifiedTime) {
+		if (!lastModifiedTimeStored) {
+			throw new IllegalStateException(pointsKey + " is not granted to store last modified time");
+		}
+		getSettingsAPI().edit(osmandSettings.getGlobalPreferences())
+				.putLong(pointsKey + "_last_modified", lastModifiedTime).commit();
+	}
+
 	public List<String> getPointDescriptions(int sz) {
 		List<String> list = new ArrayList<>();
 		String ip = getSettingsAPI().getString(osmandSettings.getGlobalPreferences(), descriptionsKey, "");

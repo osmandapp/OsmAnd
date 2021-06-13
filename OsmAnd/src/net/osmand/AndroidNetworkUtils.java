@@ -52,6 +52,7 @@ public class AndroidNetworkUtils {
 	}
 
 	public interface OnFileUploadCallback {
+		void onFileUploadStarted();
 		void onFileUploadProgress(int percent);
 		void onFileUploadDone(@Nullable String error);
 	}
@@ -789,6 +790,13 @@ public class AndroidNetworkUtils {
 										final Executor executor) {
 
 		new AsyncTask<Void, Integer, String>() {
+
+			@Override
+			protected void onPreExecute() {
+				if (callback != null) {
+					callback.onFileUploadStarted();
+				}
+			}
 
 			@Override
 			@Nullable

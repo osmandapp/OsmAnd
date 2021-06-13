@@ -40,6 +40,10 @@ public abstract class CollectionSettingsItem<T> extends SettingsItem {
 		return items;
 	}
 
+	public boolean isEmpty() {
+		return items.isEmpty();
+	}
+
 	@NonNull
 	public List<T> getAppliedItems() {
 		return appliedItems;
