@@ -456,7 +456,7 @@
     <string name="poi_public_transport_station">Stasiun transportasi umum</string>
     <string name="poi_tram_stop">Perhentian tram</string>
     <string name="poi_public_transport_platform_tram">Perhentian tram</string>
-    <string name="poi_bus_stop">Perhentian bus</string>
+    <string name="poi_bus_stop">Halte bus</string>
     <string name="poi_public_transport_platform_trolleybus">Perhentian bus listrik</string>
     <string name="poi_public_transport_platform_bus">Perhentian bus</string>
     <string name="poi_public_transport_platform">Perhentian transportasi umum</string>
@@ -1026,7 +1026,7 @@
     <string name="poi_artwork_type_architecture">Jenis karya seni: arsitektur</string>
     <string name="poi_artwork_type_mural">Jenis karya seni: lukisan dinding</string>
     <string name="poi_artwork_type_statue">Jenis karya seni: patung</string>
-    <string name="poi_artwork_type_sculpture"></string>
+    <string name="poi_artwork_type_sculpture"/>
     <string name="poi_faa">Kode FAA</string>
     <string name="poi_icao">Kode ICAO</string>
     <string name="poi_iata">Kode IATA</string>
@@ -1106,4 +1106,18 @@
     <string name="poi_service_bicycle_repair_yes">Perbaikan</string>
     <string name="poi_shop_additional_yes">Dengan toko</string>
     <string name="poi_surveillance_yes">Pengawasan: ya</string>
+    <string name="poi_aerialway_access_both">Masuk dan keluar</string>
+    <string name="poi_stars_5s">5S (Mewah Superior)</string>
+    <string name="poi_stars_5">5 (Mewah)</string>
+    <string name="poi_stars_4s">4S (Kelas Satu Superior)</string>
+    <string name="poi_stars_4">4 (Kelas Satu)</string>
+    <string name="poi_stars_3s">3S (Nyaman Superior)</string>
+    <string name="poi_stars_3">3 (Nyaman)</string>
+    <string name="poi_stars_2s">2S (Standar Superior)</string>
+    <string name="poi_stars_2">2 (Standar)</string>
+    <string name="poi_aerialway_access_exit">Keluar saja</string>
+    <string name="poi_aerialway_access_entry">Masuk saja</string>
+    <string name="poi_stars_1">1 (Turis)</string>
+    <string name="poi_stars_1s">1S (Turis Superior)</string>
+    <string name="poi_recycling_diapers">Popok</string>
 </resources>
