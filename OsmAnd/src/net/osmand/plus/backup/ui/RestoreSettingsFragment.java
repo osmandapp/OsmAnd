@@ -117,7 +117,7 @@ public class RestoreSettingsFragment extends ImportSettingsFragment {
 	}
 
 	private void importItems() {
-		List<SettingsItem> selectedItems = settingsHelper.prepareSettingsItems(adapter.getData(), settingsItems, false, false);
+		List<SettingsItem> selectedItems = settingsHelper.prepareSettingsItems(adapter.getData(), settingsItems, false);
 		if (settingsItems != null) {
 			duplicateStartTime = System.currentTimeMillis();
 			settingsHelper.checkDuplicates(settingsItems, selectedItems, getDuplicatesListener());
@@ -177,10 +177,9 @@ public class RestoreSettingsFragment extends ImportSettingsFragment {
 		updateUi(R.string.shared_string_preparing, R.string.shared_string_preparing);
 	}
 
-	public static void showInstance(@NonNull FragmentManager fm, @NonNull List<SettingsItem> settingsItems) {
+	public static void showInstance(@NonNull FragmentManager manager) {
 		RestoreSettingsFragment fragment = new RestoreSettingsFragment();
-		//fragment.setSettingsItems(settingsItems);
-		fm.beginTransaction().
+		manager.beginTransaction().
 				replace(R.id.fragmentContainer, fragment, TAG)
 				.addToBackStack(SETTINGS_LIST_TAG)
 				.commitAllowingStateLoss();

@@ -1,7 +1,6 @@
 package net.osmand.plus.backup.ui.cards;
 
 import android.graphics.drawable.Drawable;
-import android.util.Pair;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -13,24 +12,13 @@ import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.backup.BackupHelper.BackupInfo;
-import net.osmand.plus.backup.LocalFile;
-import net.osmand.plus.backup.RemoteFile;
 import net.osmand.plus.backup.ui.RestoreSettingsFragment;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
-import net.osmand.plus.settings.backend.backup.items.SettingsItem;
-import net.osmand.util.Algorithms;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class RestoreBackupCard extends MapBaseCard {
 
-	private final BackupInfo backup;
-
-	public RestoreBackupCard(@NonNull MapActivity mapActivity, BackupInfo backup) {
+	public RestoreBackupCard(@NonNull MapActivity mapActivity) {
 		super(mapActivity, false);
-		this.backup = backup;
 	}
 
 	@Override
@@ -55,20 +43,7 @@ public class RestoreBackupCard extends MapBaseCard {
 			public void onClick(View v) {
 				MapActivity mapActivity = getMapActivity();
 				if (mapActivity != null) {
-					List<SettingsItem> items = new ArrayList<>();
-					for (RemoteFile remoteFile : backup.filesToDownload) {
-						if (remoteFile.item != null) {
-							items.add(remoteFile.item);
-						}
-					}
-					for (Pair<LocalFile, RemoteFile> pair : backup.filesToMerge) {
-						if (pair.second.item != null) {
-							items.add(pair.second.item);
-						}
-					}
-					if (!Algorithms.isEmpty(items)) {
-						RestoreSettingsFragment.showInstance(mapActivity.getSupportFragmentManager(), items);
-					}
+					RestoreSettingsFragment.showInstance(mapActivity.getSupportFragmentManager());
 				}
 			}
 		});

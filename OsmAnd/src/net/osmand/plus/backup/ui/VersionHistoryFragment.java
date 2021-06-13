@@ -72,7 +72,7 @@ public class VersionHistoryFragment extends BaseOsmAndFragment implements OnItem
 		app = requireMyApplication();
 		backupHelper = app.getBackupHelper();
 		nightMode = !app.getSettings().isLightContent();
-		dataList = SettingsHelper.getSettingsToOperateByCategory(settingsItems, false, true);
+		dataList = getDataList();
 		selectedItemsMap = getSelectedItems();
 	}
 
@@ -158,11 +158,13 @@ public class VersionHistoryFragment extends BaseOsmAndFragment implements OnItem
 			@Override
 			public void onFilesDeleteDone(@NonNull Map<RemoteFile, String> errors) {
 				updateProgressVisibility(false);
+				backupHelper.prepareBackup();
 			}
 
 			@Override
 			public void onFilesDeleteError(int status, @NonNull String message) {
 				updateProgressVisibility(false);
+				backupHelper.prepareBackup();
 			}
 		};
 	}
@@ -196,6 +198,16 @@ public class VersionHistoryFragment extends BaseOsmAndFragment implements OnItem
 			}
 		});
 		ViewCompat.setElevation(view.findViewById(R.id.appbar), 5.0f);
+	}
+
+	private Map<ExportSettingsCategory, SettingsCategoryItems> getDataList() {
+		Map<ExportSettingsType, List<?>> settingsToOperate = SettingsHelper.getSettingsToOperate(settingsItems, false, true);
+		for (ExportSettingsType type : ExportSettingsType.getEnabledTypes()) {
+			if (!settingsToOperate.containsKey(type)) {
+				settingsToOperate.put(type, Collections.emptyList());
+			}
+		}
+		return SettingsHelper.getSettingsToOperateByCategory(settingsToOperate, true);
 	}
 
 	protected Map<ExportSettingsType, List<?>> getSelectedItems() {

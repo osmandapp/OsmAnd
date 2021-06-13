@@ -18,7 +18,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.backup.BackupHelper.BackupInfo;
+import net.osmand.plus.backup.BackupInfo;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.settings.fragments.MainSettingsFragment;
@@ -55,9 +55,10 @@ public class BackupStatusCard extends MapBaseCard {
 		itemsContainer = view.findViewById(R.id.items_container);
 
 		if (backupInfo != null) {
-			if (!Algorithms.isEmpty(backupInfo.filesToMerge)) {
+			if (!Algorithms.isEmpty(backupInfo.getFilteredFilesToMerge(app))) {
 				status = BackupStatus.CONFLICTS;
-			} else if (!Algorithms.isEmpty(backupInfo.filesToUpload) || !Algorithms.isEmpty(backupInfo.filesToDelete)) {
+			} else if (!Algorithms.isEmpty(backupInfo.getFilteredFilesToUpload(app))
+					|| !Algorithms.isEmpty(backupInfo.getFilteredFilesToDelete(app))) {
 				status = BackupStatus.MAKE_BACKUP;
 			}
 		} else if (!app.getSettings().isInternetConnectionAvailable()) {

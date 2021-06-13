@@ -14,7 +14,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.backup.BackupHelper.BackupInfo;
+import net.osmand.plus.backup.BackupInfo;
 import net.osmand.plus.backup.BackupHelper.OnDeleteFilesListener;
 import net.osmand.plus.backup.NetworkSettingsHelper.BackupExportListener;
 import net.osmand.plus.backup.PrepareBackupResult;
@@ -28,7 +28,6 @@ import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
-import net.osmand.util.Algorithms;
 
 import java.util.Map;
 
@@ -107,9 +106,7 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements CardList
 				statusCard.setListener(this);
 				cardsContainer.addView(statusCard.build(mapActivity));
 			}
-			if (backupInfo != null && (!Algorithms.isEmpty(backupInfo.filesToDownload) || !Algorithms.isEmpty(backupInfo.filesToMerge))) {
-				cardsContainer.addView(new RestoreBackupCard(mapActivity, backupInfo).build(mapActivity));
-			}
+			cardsContainer.addView(new RestoreBackupCard(mapActivity).build(mapActivity));
 			cardsContainer.addView(new LocalBackupCard(mapActivity).build(mapActivity));
 		}
 	}
