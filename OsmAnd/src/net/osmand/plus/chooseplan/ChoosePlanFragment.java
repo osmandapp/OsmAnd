@@ -68,7 +68,7 @@ public class ChoosePlanFragment extends BasePurchaseFragment {
 
 	@Override
 	protected void initData(@Nullable Bundle args) {
-
+		features.remove(OsmAndFeature.COMBINED_WIKI);
 	}
 
 	@Override
@@ -105,7 +105,7 @@ public class ChoosePlanFragment extends BasePurchaseFragment {
 	private void createFeaturesList() {
 		itemViews.clear();
 		listContainer.removeAllViews();
-		for (OsmAndFeature feature : OsmAndFeature.values()) {
+		for (OsmAndFeature feature : features) {
 			View view = createFeatureItemView(feature);
 			itemViews.put(feature, view);
 			listContainer.addView(view);
@@ -127,7 +127,8 @@ public class ChoosePlanFragment extends BasePurchaseFragment {
 		v.findViewById(R.id.secondary_icon).setVisibility(mapsPlusVisibility);
 
 		View divider = v.findViewById(R.id.bottom_divider);
-		divider.setVisibility(feature.isLastItem() ? View.GONE : View.VISIBLE);
+		boolean isLastItem = features.indexOf(feature) == features.size() - 1;
+		divider.setVisibility(isLastItem ? View.GONE : View.VISIBLE);
 	}
 
 	private void setupLaterButton() {

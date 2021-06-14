@@ -31,12 +31,14 @@
     <string name="offline_wikivoyage">Offline Wikivoyage</string>
     <string name="offline_wikipeadia">Offline Wikipedia</string>
     <string name="terrain_maps_contour_lines_hillshade_slope">Terrain maps: cotrour lines, hillshades, slope</string>
+    <string name="wikipedia_and_wikivoyage_offline">Wikipedia and Wikivoyage offline</string>
     <string name="unlimited_map_downloads">Unlimited map downloads</string>
     <string name="purchases_feature_desc_osmand_cloud">Get OsmAnd Cloud to store all OsmAnd data online. Forget about loosing your data after reinstall, backup and restore all information without a problem.</string>
     <string name="purchases_feature_desc_advanced_widgets">Get access to Advanced OsmAnd Widgets.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Get access to more frequently maps update, choose between: hourly, daily or weekly updates. Updates are downloaded incrementally, only for the changed area.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Get access to regular monthly updates for offline maps.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Get unlimited downloads for all continents and regions offline maps.</string>
+    <string name="purchases_feature_desc_combined_wiki">Explore Wikipedia articles on the go, without an internet connection. Offline data divided by countries and available in all languages.</string>
     <string name="purchases_feature_desc_wikipedia">Explore Wikipedia offline. Articles divided by countries and regions and available in all languages.</string>
     <string name="purchases_feature_desc_wikivoyage">Explore Wikipedia offline. Articles divided by countries and regions and available in all languages.</string>
     <string name="purchases_feature_desc_terrain">Terrain contour lines, full hillshade map with dark shades and slope maps with colors to show, peaks and lowlands.</string>

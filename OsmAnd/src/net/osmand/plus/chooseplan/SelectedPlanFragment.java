@@ -81,7 +81,7 @@ public abstract class SelectedPlanFragment extends BasePurchaseFragment {
 
 	private void createFeaturesPreview() {
 		LinearLayout container = view.findViewById(R.id.features_list);
-		for (OsmAndFeature feature : OsmAndFeature.values()) {
+		for (OsmAndFeature feature : features) {
 			View itemView = inflater.inflate(R.layout.purchase_dialog_preview_list_item, container, false);
 			bindFeatureItem(itemView, feature);
 			container.addView(itemView);
@@ -97,7 +97,8 @@ public abstract class SelectedPlanFragment extends BasePurchaseFragment {
 		});
 	}
 
-	protected void bindFeatureItem(@NonNull View itemView, @NonNull OsmAndFeature feature) {
+	protected void bindFeatureItem(@NonNull View itemView,
+	                               @NonNull OsmAndFeature feature) {
 		bindFeatureItem(itemView, feature, false);
 		ImageView ivCheckmark = itemView.findViewById(R.id.checkmark);
 		if (includedFeatures.contains(feature)) {

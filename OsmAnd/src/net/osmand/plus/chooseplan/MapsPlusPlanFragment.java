@@ -9,6 +9,8 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.R;
 
+import java.util.Arrays;
+
 public class MapsPlusPlanFragment extends SelectedPlanFragment {
 
 	public static void showInstance(@NonNull FragmentActivity activity) {
@@ -18,9 +20,10 @@ public class MapsPlusPlanFragment extends SelectedPlanFragment {
 
 	@Override
 	protected void initData(@Nullable Bundle args) {
-		includedFeatures.clear();
-		noIncludedFeatures.clear();
-		for (OsmAndFeature feature : OsmAndFeature.values()) {
+		features.remove(OsmAndFeature.WIKIPEDIA);
+		features.remove(OsmAndFeature.WIKIVOYAGE);
+
+		for (OsmAndFeature feature : features) {
 			if (feature.isAvailableInMapsPlus()) {
 				includedFeatures.add(feature);
 			} else {

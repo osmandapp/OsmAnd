@@ -21,9 +21,11 @@ public class OsmAndProPlanFragment extends SelectedPlanFragment {
 
 	@Override
 	protected void initData(@Nullable Bundle args) {
-		includedFeatures.clear();
-		noIncludedFeatures.clear();
-		includedFeatures.addAll(Arrays.asList(OsmAndFeature.values()));
+		features.remove(OsmAndFeature.MONTHLY_MAP_UPDATES);
+		features.remove(OsmAndFeature.WIKIPEDIA);
+		features.remove(OsmAndFeature.WIKIVOYAGE);
+
+		includedFeatures.addAll(features);
 	}
 
 	@Override
