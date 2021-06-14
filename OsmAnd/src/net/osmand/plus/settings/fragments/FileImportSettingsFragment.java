@@ -93,7 +93,7 @@ public class FileImportSettingsFragment extends ImportSettingsFragment {
 	}
 
 	private void importItems() {
-		List<SettingsItem> selectedItems = settingsHelper.prepareSettingsItems(adapter.getData(), settingsItems, false, false);
+		List<SettingsItem> selectedItems = settingsHelper.prepareSettingsItems(adapter.getData(), settingsItems, false);
 		if (file != null && settingsItems != null) {
 			duplicateStartTime = System.currentTimeMillis();
 			settingsHelper.checkDuplicates(file, settingsItems, selectedItems, getDuplicatesListener());

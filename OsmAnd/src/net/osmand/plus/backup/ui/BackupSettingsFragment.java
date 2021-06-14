@@ -27,6 +27,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupHelper.OnDeleteFilesListener;
 import net.osmand.plus.backup.PrepareBackupResult;
+import net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
 import net.osmand.plus.backup.RemoteFile;
 import net.osmand.plus.backup.UserNotRegisteredException;
@@ -53,7 +54,7 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 	private OsmandApplication app;
 	private BackupHelper backupHelper;
 
-	private List<SettingsItem> oldItems = new ArrayList<>();
+	private List<RemoteFile> oldRemoteFiles = new ArrayList<>();
 
 	private ProgressBar progressBar;
 
@@ -175,23 +176,26 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 			public void onClick(View v) {
 				FragmentActivity activity = getActivity();
 				if (activity != null) {
-					VersionHistoryFragment.showInstance(activity.getSupportFragmentManager(), oldItems);
+					List<SettingsItem> items = new ArrayList<>();
+					for (RemoteFile remoteFile : oldRemoteFiles) {
+						if (remoteFile.item != null) {
+							items.add(remoteFile.item);
+						}
+					}
+					VersionHistoryFragment.showInstance(activity.getSupportFragmentManager(), items);
 				}
 			}
 		});
 		setupSelectableBackground(container);
 
 		TextView summary = container.findViewById(android.R.id.summary);
-		List<RemoteFile> remoteFiles = backupHelper.getBackup().getRemoteFiles();
-		if (!Algorithms.isEmpty(oldItems) && !Algorithms.isEmpty(remoteFiles)) {
-			AndroidUiHelper.updateVisibility(summary, true);
+		if (!Algorithms.isEmpty(oldRemoteFiles)) {
 			int filesSize = 0;
-			for (RemoteFile remoteFile : remoteFiles) {
-				if (oldItems.contains(remoteFile.item)) {
-					filesSize += remoteFile.getFilesize();
-				}
+			for (RemoteFile remoteFile : oldRemoteFiles) {
+				filesSize += remoteFile.getFilesize();
 			}
 			summary.setText(AndroidUtils.formatSize(app, filesSize));
+			AndroidUiHelper.updateVisibility(summary, true);
 		} else {
 			AndroidUiHelper.updateVisibility(summary, false);
 		}
@@ -260,7 +264,7 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 	public void onBackupPrepared(@Nullable PrepareBackupResult backupResult) {
 		updateProgressVisibility(false);
 		if (backupResult != null && Algorithms.isEmpty(backupResult.getError())) {
-			oldItems = backupResult.getSettingsItems();
+			oldRemoteFiles = backupResult.getRemoteFiles(RemoteFilesType.OLD);
 			View view = getView();
 			if (view != null) {
 				setupVersionHistory(view);
@@ -300,11 +304,13 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 	@Override
 	public void onFilesDeleteDone(@NonNull Map<RemoteFile, String> errors) {
 		updateProgressVisibility(false);
+		backupHelper.prepareBackup();
 	}
 
 	@Override
 	public void onFilesDeleteError(int status, @NonNull String message) {
 		updateProgressVisibility(false);
+		backupHelper.prepareBackup();
 	}
 
 	@Override

@@ -132,21 +132,21 @@ public abstract class SettingsHelper {
 		typesMap.putAll(getMyPlacesItems(addEmptyItems));
 		typesMap.putAll(getResourcesItems(addEmptyItems));
 
-		return getFilteredSettingsItems(typesMap, settingsTypes, Collections.emptyList(), export, addEmptyItems);
+		return getFilteredSettingsItems(typesMap, settingsTypes, Collections.emptyList(), export);
 	}
 
 	public List<SettingsItem> getFilteredSettingsItems(@NonNull Map<ExportSettingsType, List<?>> allSettingsMap,
 													   @NonNull List<ExportSettingsType> settingsTypes,
 													   @NonNull List<SettingsItem> settingsItems,
-													   boolean export, boolean addEmptyItems) {
-		List<Object> dataObjects = new ArrayList<>();
+													   boolean export) {
+		List<SettingsItem> filteredSettingsItems = new ArrayList<>();
 		for (ExportSettingsType settingsType : settingsTypes) {
 			List<?> settingsDataObjects = allSettingsMap.get(settingsType);
 			if (settingsDataObjects != null) {
-				dataObjects.addAll(settingsDataObjects);
+				filteredSettingsItems.addAll(prepareSettingsItems(settingsDataObjects, settingsItems, export));
 			}
 		}
-		return prepareSettingsItems(dataObjects, settingsItems, export, addEmptyItems);
+		return filteredSettingsItems;
 	}
 
 	public Map<ExportSettingsCategory, SettingsCategoryItems> getSettingsByCategory(boolean addProfiles, boolean addEmptyItems) {
@@ -242,14 +242,13 @@ public abstract class SettingsHelper {
 				myPlacesItems.put(ExportSettingsType.MULTIMEDIA_NOTES, files);
 			}
 		}
-		List<MapMarkersGroup> mapMarkersGroups = new ArrayList<>();
 		List<MapMarker> mapMarkers = app.getMapMarkersHelper().getMapMarkers();
 		if (!mapMarkers.isEmpty() || addEmptyItems) {
 			String name = app.getString(R.string.map_markers);
 			String groupId = ExportSettingsType.ACTIVE_MARKERS.name();
 			MapMarkersGroup markersGroup = new MapMarkersGroup(groupId, name, ItineraryType.MARKERS);
 			markersGroup.setMarkers(mapMarkers);
-			mapMarkersGroups.add(markersGroup);
+			myPlacesItems.put(ExportSettingsType.ACTIVE_MARKERS, Collections.singletonList(markersGroup));
 		}
 		List<MapMarker> markersHistory = app.getMapMarkersHelper().getMapMarkersHistory();
 		if (!markersHistory.isEmpty() || addEmptyItems) {
@@ -257,10 +256,7 @@ public abstract class SettingsHelper {
 			String groupId = ExportSettingsType.HISTORY_MARKERS.name();
 			MapMarkersGroup markersGroup = new MapMarkersGroup(groupId, name, ItineraryType.MARKERS);
 			markersGroup.setMarkers(markersHistory);
-			mapMarkersGroups.add(markersGroup);
-		}
-		if (!mapMarkersGroups.isEmpty() || addEmptyItems) {
-			myPlacesItems.put(ExportSettingsType.ACTIVE_MARKERS, mapMarkersGroups);
+			myPlacesItems.put(ExportSettingsType.HISTORY_MARKERS, Collections.singletonList(markersGroup));
 		}
 		List<HistoryEntry> historyEntries = SearchHistoryHelper.getInstance(app).getHistoryEntries(false);
 		if (!historyEntries.isEmpty() || addEmptyItems) {
@@ -280,15 +276,19 @@ public abstract class SettingsHelper {
 		if (!externalRenderers.isEmpty() || addEmptyItems) {
 			resourcesItems.put(ExportSettingsType.CUSTOM_RENDER_STYLE, new ArrayList<>(externalRenderers.values()));
 		}
+		List<File> routingProfiles = new ArrayList<>();
 		File routingProfilesFolder = app.getAppPath(IndexConstants.ROUTING_PROFILES_DIR);
 		if (routingProfilesFolder.exists() && routingProfilesFolder.isDirectory()) {
 			File[] fl = routingProfilesFolder.listFiles();
 			if (fl != null && fl.length > 0) {
-				resourcesItems.put(ExportSettingsType.CUSTOM_ROUTING, Arrays.asList(fl));
+				routingProfiles.addAll(Arrays.asList(fl));
 			}
 		}
+		if (!Algorithms.isEmpty(routingProfiles) || addEmptyItems) {
+			resourcesItems.put(ExportSettingsType.CUSTOM_ROUTING, routingProfiles);
+		}
 		List<OnlineRoutingEngine> onlineRoutingEngines = app.getOnlineRoutingHelper().getOnlyCustomEngines();
-		if (!Algorithms.isEmpty(onlineRoutingEngines)) {
+		if (!Algorithms.isEmpty(onlineRoutingEngines) || addEmptyItems) {
 			resourcesItems.put(ExportSettingsType.ONLINE_ROUTING_ENGINES, onlineRoutingEngines);
 		}
 		List<ITileSource> iTileSources = new ArrayList<>();
@@ -355,7 +355,7 @@ public abstract class SettingsHelper {
 		return files;
 	}
 
-	public List<SettingsItem> prepareSettingsItems(List<?> data, List<SettingsItem> settingsItems, boolean export, boolean addEmptyItems) {
+	public List<SettingsItem> prepareSettingsItems(List<?> data, List<SettingsItem> settingsItems, boolean export) {
 		List<SettingsItem> result = new ArrayList<>();
 		List<QuickAction> quickActions = new ArrayList<>();
 		List<PoiUIFilter> poiUIFilters = new ArrayList<>();
@@ -418,23 +418,23 @@ public abstract class SettingsHelper {
 				onlineRoutingEngines.add((OnlineRoutingEngine) object);
 			}
 		}
-		if (!quickActions.isEmpty() || addEmptyItems) {
+		if (!quickActions.isEmpty()) {
 			QuickActionsSettingsItem baseItem = getBaseItem(SettingsItemType.QUICK_ACTIONS, QuickActionsSettingsItem.class, settingsItems);
 			result.add(new QuickActionsSettingsItem(app, baseItem, quickActions));
 		}
-		if (!poiUIFilters.isEmpty() || addEmptyItems) {
+		if (!poiUIFilters.isEmpty()) {
 			PoiUiFiltersSettingsItem baseItem = getBaseItem(SettingsItemType.POI_UI_FILTERS, PoiUiFiltersSettingsItem.class, settingsItems);
 			result.add(new PoiUiFiltersSettingsItem(app, baseItem, poiUIFilters));
 		}
-		if (!tileSourceTemplates.isEmpty() || addEmptyItems) {
+		if (!tileSourceTemplates.isEmpty()) {
 			MapSourcesSettingsItem baseItem = getBaseItem(SettingsItemType.MAP_SOURCES, MapSourcesSettingsItem.class, settingsItems);
 			result.add(new MapSourcesSettingsItem(app, baseItem, tileSourceTemplates));
 		}
-		if (!avoidRoads.isEmpty() || addEmptyItems) {
+		if (!avoidRoads.isEmpty()) {
 			AvoidRoadsSettingsItem baseItem = getBaseItem(SettingsItemType.AVOID_ROADS, AvoidRoadsSettingsItem.class, settingsItems);
 			result.add(new AvoidRoadsSettingsItem(app, baseItem, avoidRoads));
 		}
-		if (!appModeBeans.isEmpty() || addEmptyItems) {
+		if (!appModeBeans.isEmpty()) {
 			for (ApplicationModeBean modeBean : appModeBeans) {
 				if (export) {
 					ApplicationMode mode = ApplicationMode.valueOfStringKey(modeBean.stringKey, null);
@@ -446,19 +446,19 @@ public abstract class SettingsHelper {
 				}
 			}
 		}
-		if (!osmNotesPointList.isEmpty() || addEmptyItems) {
+		if (!osmNotesPointList.isEmpty()) {
 			OsmNotesSettingsItem baseItem = getBaseItem(SettingsItemType.OSM_NOTES, OsmNotesSettingsItem.class, settingsItems);
 			result.add(new OsmNotesSettingsItem(app, baseItem, osmNotesPointList));
 		}
-		if (!osmEditsPointList.isEmpty() || addEmptyItems) {
+		if (!osmEditsPointList.isEmpty()) {
 			OsmEditsSettingsItem baseItem = getBaseItem(SettingsItemType.OSM_EDITS, OsmEditsSettingsItem.class, settingsItems);
 			result.add(new OsmEditsSettingsItem(app, baseItem, osmEditsPointList));
 		}
-		if (!favoriteGroups.isEmpty() || addEmptyItems) {
+		if (!favoriteGroups.isEmpty()) {
 			FavoritesSettingsItem baseItem = getBaseItem(SettingsItemType.FAVOURITES, FavoritesSettingsItem.class, settingsItems);
 			result.add(new FavoritesSettingsItem(app, baseItem, favoriteGroups));
 		}
-		if (!markersGroups.isEmpty() || addEmptyItems) {
+		if (!markersGroups.isEmpty()) {
 			List<MapMarker> mapMarkers = new ArrayList<>();
 			for (MapMarkersGroup group : markersGroups) {
 				mapMarkers.addAll(group.getMarkers());
@@ -466,7 +466,7 @@ public abstract class SettingsHelper {
 			MarkersSettingsItem baseItem = getBaseItem(SettingsItemType.ACTIVE_MARKERS, MarkersSettingsItem.class, settingsItems);
 			result.add(new MarkersSettingsItem(app, baseItem, mapMarkers));
 		}
-		if (!markersHistoryGroups.isEmpty() || addEmptyItems) {
+		if (!markersHistoryGroups.isEmpty()) {
 			List<MapMarker> mapMarkers = new ArrayList<>();
 			for (MapMarkersGroup group : markersHistoryGroups) {
 				mapMarkers.addAll(group.getMarkers());
@@ -474,15 +474,15 @@ public abstract class SettingsHelper {
 			HistoryMarkersSettingsItem baseItem = getBaseItem(SettingsItemType.HISTORY_MARKERS, HistoryMarkersSettingsItem.class, settingsItems);
 			result.add(new HistoryMarkersSettingsItem(app, baseItem, mapMarkers));
 		}
-		if (!historyEntries.isEmpty() || addEmptyItems) {
+		if (!historyEntries.isEmpty()) {
 			SearchHistorySettingsItem baseItem = getBaseItem(SettingsItemType.SEARCH_HISTORY, SearchHistorySettingsItem.class, settingsItems);
 			result.add(new SearchHistorySettingsItem(app, baseItem, historyEntries));
 		}
-		if (!onlineRoutingEngines.isEmpty() || addEmptyItems) {
+		if (!onlineRoutingEngines.isEmpty()) {
 			OnlineRoutingSettingsItem baseItem = getBaseItem(SettingsItemType.ONLINE_ROUTING_ENGINES, OnlineRoutingSettingsItem.class, settingsItems);
 			result.add(new OnlineRoutingSettingsItem(app, baseItem, onlineRoutingEngines));
 		}
-		if (!itineraryGroups.isEmpty() || addEmptyItems) {
+		if (!itineraryGroups.isEmpty()) {
 			ItinerarySettingsItem baseItem = getBaseItem(SettingsItemType.ITINERARY_GROUPS, ItinerarySettingsItem.class, settingsItems);
 			result.add(new ItinerarySettingsItem(app, baseItem, itineraryGroups));
 		}
@@ -514,9 +514,11 @@ public abstract class SettingsHelper {
 	}
 
 	public static Map<ExportSettingsCategory, SettingsCategoryItems> getSettingsToOperateByCategory(List<SettingsItem> items, boolean importComplete, boolean addEmptyItems) {
-		Map<ExportSettingsCategory, SettingsCategoryItems> exportMap = new LinkedHashMap<>();
 		Map<ExportSettingsType, List<?>> settingsToOperate = getSettingsToOperate(items, importComplete, addEmptyItems);
+		return getSettingsToOperateByCategory(settingsToOperate, addEmptyItems);
+	}
 
+	public static Map<ExportSettingsCategory, SettingsCategoryItems> getSettingsToOperateByCategory(Map<ExportSettingsType, List<?>> settingsToOperate, boolean addEmptyItems) {
 		Map<ExportSettingsType, List<?>> settingsItems = new LinkedHashMap<>();
 		Map<ExportSettingsType, List<?>> myPlacesItems = new LinkedHashMap<>();
 		Map<ExportSettingsType, List<?>> resourcesItems = new LinkedHashMap<>();
@@ -531,6 +533,7 @@ public abstract class SettingsHelper {
 				resourcesItems.put(type, entry.getValue());
 			}
 		}
+		Map<ExportSettingsCategory, SettingsCategoryItems> exportMap = new LinkedHashMap<>();
 		if (!settingsItems.isEmpty() || addEmptyItems) {
 			exportMap.put(ExportSettingsCategory.SETTINGS, new SettingsCategoryItems(settingsItems));
 		}

@@ -20,7 +20,7 @@ import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
 import net.osmand.plus.backup.BackupHelper;
-import net.osmand.plus.backup.BackupHelper.BackupInfo;
+import net.osmand.plus.backup.BackupInfo;
 import net.osmand.plus.backup.BackupHelper.OnDeleteFilesListener;
 import net.osmand.plus.backup.LocalFile;
 import net.osmand.plus.backup.NetworkSettingsHelper.BackupExportListener;
@@ -108,7 +108,7 @@ public class BackupUploadCard extends MapBaseCard {
 		itemsContainer.removeAllViews();
 
 		LayoutInflater themedInflater = UiUtilities.getInflater(view.getContext(), nightMode);
-		for (SettingsItem item : info.getItemsToUpload()) {
+		for (SettingsItem item : info.getItemsToUpload(app)) {
 			View itemView = themedInflater.inflate(R.layout.backup_upload_item, itemsContainer, false);
 			setupItemView(item, itemView);
 
@@ -119,7 +119,7 @@ public class BackupUploadCard extends MapBaseCard {
 
 	private void setupItemsToDelete() {
 		LayoutInflater themedInflater = UiUtilities.getInflater(view.getContext(), nightMode);
-		for (SettingsItem item : info.getItemsToDelete()) {
+		for (SettingsItem item : info.getItemsToDelete(app)) {
 			View itemView = themedInflater.inflate(R.layout.backup_upload_item, itemsContainer, false);
 			setupItemView(item, itemView);
 
@@ -135,7 +135,7 @@ public class BackupUploadCard extends MapBaseCard {
 		itemsContainer = view.findViewById(R.id.items_container);
 
 		LayoutInflater themedInflater = UiUtilities.getInflater(view.getContext(), nightMode);
-		for (Pair<LocalFile, RemoteFile> pair : info.filesToMerge) {
+		for (Pair<LocalFile, RemoteFile> pair : info.getFilteredFilesToMerge(app)) {
 			SettingsItem item = pair.first.item;
 			if (pair.first.item == null || pair.second.item == null) {
 				continue;
@@ -207,9 +207,9 @@ public class BackupUploadCard extends MapBaseCard {
 			actionButton.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					List<SettingsItem> items = info.getItemsToUpload();
-					if (!items.isEmpty() || !Algorithms.isEmpty(info.filesToDelete)) {
-						app.getNetworkSettingsHelper().exportSettings(items, info.filesToDelete, exportListener);
+					List<SettingsItem> items = info.getItemsToUpload(app);
+					if (!items.isEmpty() || !Algorithms.isEmpty(info.getFilteredFilesToDelete(app))) {
+						app.getNetworkSettingsHelper().exportSettings(items, info.getFilteredFilesToDelete(app), exportListener);
 					}
 				}
 			});
@@ -261,17 +261,17 @@ public class BackupUploadCard extends MapBaseCard {
 	}
 
 	private SettingsItem getSettingsItem(@NonNull String type, @NonNull String fileName) {
-		for (LocalFile file : info.filesToUpload) {
+		for (LocalFile file : info.getFilteredFilesToUpload(app)) {
 			if (file.item != null && file.item.getType().name().equals(type) && BackupHelper.getItemFileName(file.item).equals(fileName)) {
 				return file.item;
 			}
 		}
-		for (RemoteFile file : info.filesToDelete) {
+		for (RemoteFile file : info.getFilteredFilesToDelete(app)) {
 			if (file.item != null && file.item.getType().name().equals(type) && BackupHelper.getItemFileName(file.item).equals(fileName)) {
 				return file.item;
 			}
 		}
-		for (Pair<LocalFile, RemoteFile> pair : info.filesToMerge) {
+		for (Pair<LocalFile, RemoteFile> pair : info.getFilteredFilesToMerge(app)) {
 			SettingsItem item = pair.first.item;
 			if (item != null && item.getType().name().equals(type) && BackupHelper.getItemFileName(item).equals(fileName)) {
 				return item;
