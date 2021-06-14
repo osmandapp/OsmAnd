@@ -777,7 +777,24 @@ public class OsmandSettings {
 
 	public final CommonPreference<Integer> NUMBER_OF_STARTS_FIRST_XMAS_SHOWN = new IntPreference(this, "number_of_starts_first_xmas_shown", 0).makeGlobal();
 
-	public final OsmandPreference<String> AVAILABLE_APP_MODES = new StringPreference(this, "available_application_modes", "car,bicycle,pedestrian,public_transport,").makeGlobal().makeShared().cache();
+	public final OsmandPreference<String> AVAILABLE_APP_MODES = new StringPreference(this, "available_application_modes", "car,bicycle,pedestrian,public_transport,") {
+
+		@Override
+		public void readFromJson(JSONObject json, ApplicationMode appMode) throws JSONException {
+			Set<String> appModesKeys = Algorithms.decodeStringSet(json.getString(getId()),",");
+			Set<String> nonexistentAppModesKeys = new HashSet<>();
+			for (String appModeKey : appModesKeys) {
+				if (ApplicationMode.valueOfStringKey(appModeKey, null) == null) {
+					nonexistentAppModesKeys.add(appModeKey);
+				}
+			}
+			if (!nonexistentAppModesKeys.isEmpty()) {
+				appModesKeys.removeAll(nonexistentAppModesKeys);
+			}
+			set(parseString(Algorithms.encodeStringSet(appModesKeys, ",")));
+		}
+
+	}.makeGlobal().makeShared().cache();
 
 	public final OsmandPreference<String> LAST_FAV_CATEGORY_ENTERED = new StringPreference(this, "last_fav_category", "").makeGlobal();
 
@@ -2955,7 +2972,7 @@ public class OsmandSettings {
 			new EnumStringPreference<>(this, "rate_us_state", RateUsState.INITIAL_STATE, RateUsState.values()).makeGlobal();
 
 	public final CommonPreference<String> CUSTOM_APP_MODES_KEYS =
-			new StringPreference(this, "custom_app_modes_keys", "").makeGlobal().makeShared().cache();
+			new StringPreference(this, "custom_app_modes_keys", "").makeGlobal().cache();
 
 	public Set<String> getCustomAppModesKeys() {
 		String appModesKeys = CUSTOM_APP_MODES_KEYS.get();

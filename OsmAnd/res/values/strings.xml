@@ -43,6 +43,8 @@
     <string name="purchases_feature_desc_wikivoyage">Explore Wikipedia offline. Articles divided by countries and regions and available in all languages.</string>
     <string name="purchases_feature_desc_terrain">Terrain contour lines, full hillshade map with dark shades and slope maps with colors to show, peaks and lowlands.</string>
     <string name="purchases_feature_desc_nautical">Get access to nautical depth information</string>
+    <string name="delete_version_history">Delete version history</string>
+    <string name="backup_version_history_delete_descr">Do you want to delete the change history for disabled types from cloud?</string>
     <string name="backup_storage_taken">Storage taken</string>
     <string name="backup_version_history">Version history</string>
     <string name="grey_color_slope">Grey color is used when slope is undefined.</string>
@@ -607,7 +609,7 @@
     <string name="extra_maps_menu_group">Extra maps</string>
     <string name="search_poi_types_descr">Combine POI types from different categories. Tap switch to select all, tap left side to category selection.</string>
     <string name="search_poi_types">Search for POI types</string>
-    <string name="osm_live_payment_subscription_management">Payment will be charged to your Google Play account at the confirmation of purchase.\n\n Subscription automatically renews unless it is canceled before the renewal date. Your account will be charged for renewal period (month/three month/year) only on the renewal date.\n\n You can manage and cancel your subscriptions by going to your Google Play settings.</string>
+    <string name="osm_live_payment_subscription_management">Payment will be charged to your Google Play account at the confirmation of purchase.\n\nSubscription automatically renews unless it is canceled before the renewal date. Your account will be charged for renewal period (month/three month/year) only on the renewal date.\n\nYou can manage and cancel your subscriptions by going to your Google Play settings.</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="custom_color">Custom color</string>
     <string name="lang_lmo">Lombard</string>

@@ -3554,9 +3554,9 @@
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="osm_live_payment_subscription_management">Ödeme, satın alma onaylandığında Google Play hesabınızdan alınacaktır.
 \n
-\n Yenileme tarihinden önce iptal edilmedikçe abonelik otomatik olarak yenilenir. Hesabınızdan yenileme süresi (ay/üç ay/yıl) için sadece yenileme tarihinde ücret alınacaktır.
+\nYenileme tarihinden önce iptal edilmedikçe abonelik otomatik olarak yenilenir. Hesabınızdan yenileme süresi (ay/üç ay/yıl) için sadece yenileme tarihinde ücret alınacaktır.
 \n
-\n Google Play ayarlarınıza giderek aboneliklerinizi yönetebilir ve iptal edebilirsiniz.</string>
+\nGoogle Play ayarlarınıza giderek aboneliklerinizi yönetebilir ve iptal edebilirsiniz.</string>
     <string name="search_poi_types">POI türleri ara</string>
     <string name="search_poi_types_descr">Farklı kategorilerdeki POI türlerini birleştirin. Tümünü seçmek için düğmeye, kategori seçimi için sol tarafa dokunun.</string>
     <string name="radius_ruler_item">Yarıçap cetveli</string>
@@ -3802,7 +3802,7 @@
 \n
 \nYenileme tarihinden önce iptal edilmediği sürece abonelik otomatik olarak uzatılır. Hesabınızdan yenileme süresi (ay/üç ay/yıl) için yalnızca yenileme tarihinde ücret alınacaktır.
 \n
-\n AppGallery ayarlarınızda aboneliklerinizi yönetebilir ve iptal edebilirsiniz.</string>
+\nAppGallery ayarlarınızda aboneliklerinizi yönetebilir ve iptal edebilirsiniz.</string>
     <string name="routing_attr_avoid_footways_description">Yaya yollarından kaçın</string>
     <string name="routing_attr_avoid_footways_name">Yaya yollarından kaçın</string>
     <string name="development">Geliştirme</string>

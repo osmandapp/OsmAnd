@@ -200,7 +200,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		final int zoom = tileBox.getZoom();
-		if(zoom < ZOOM_TO_SHOW_SELECTION_ST) {
+		if (zoom < ZOOM_TO_SHOW_SELECTION_ST) {
 			return;
 		}
 		//make sure no maps are loaded for the location
@@ -254,6 +254,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		lastCheckMapZoom = zoom;
 
 		if (app.getSettings().SHOW_DOWNLOAD_MAP_DIALOG.get()
+				&& mapActivity.getWidgetsVisibilityHelper().shouldShowDownloadMapWidget()
 				&& zoom >= ZOOM_MIN_TO_SHOW_DOWNLOAD_DIALOG
 				&& zoom <= ZOOM_MAX_TO_SHOW_DOWNLOAD_DIALOG
 				&& !view.isAnimatingMapMove()

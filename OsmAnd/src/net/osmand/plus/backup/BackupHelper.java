@@ -145,36 +145,6 @@ public class BackupHelper {
 		void onFilesDownloadDone(@NonNull Map<File, String> errors);
 	}
 
-	public static class BackupInfo {
-		public List<RemoteFile> filesToDownload = new ArrayList<>();
-		public List<LocalFile> filesToUpload = new ArrayList<>();
-		public List<RemoteFile> filesToDelete = new ArrayList<>();
-		public List<LocalFile> localFilesToDelete = new ArrayList<>();
-		public List<Pair<LocalFile, RemoteFile>> filesToMerge = new ArrayList<>();
-
-		public List<SettingsItem> getItemsToUpload() {
-			List<SettingsItem> items = new ArrayList<>();
-			for (LocalFile localFile : filesToUpload) {
-				SettingsItem item = localFile.item;
-				if (item != null && !items.contains(item)) {
-					items.add(item);
-				}
-			}
-			return items;
-		}
-
-		public List<SettingsItem> getItemsToDelete() {
-			List<SettingsItem> items = new ArrayList<>();
-			for (RemoteFile remoteFile : filesToDelete) {
-				SettingsItem item = remoteFile.item;
-				if (item != null && !items.contains(item)) {
-					items.add(item);
-				}
-			}
-			return items;
-		}
-	}
-
 	public BackupHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 		this.settings = app.getSettings();
@@ -810,7 +780,7 @@ public class BackupHelper {
 		};
 	}
 
-	public void deleteOldFiles(@Nullable final OnDeleteFilesListener listener) throws UserNotRegisteredException {
+	public void deleteOldFiles(@Nullable final OnDeleteFilesListener listener, List<ExportSettingsType> types) throws UserNotRegisteredException {
 		checkRegistered();
 
 		Map<String, String> params = new HashMap<>();
@@ -818,10 +788,10 @@ public class BackupHelper {
 		params.put("accessToken", getAccessToken());
 		params.put("allVersions", "true");
 		AndroidNetworkUtils.sendRequestAsync(app, LIST_FILES_URL, params, "Delete old files", false, false,
-				getDeleteOldFilesListener(listener), EXECUTOR);
+				getDeleteOldFilesListener(listener, types), EXECUTOR);
 	}
 
-	private OnRequestResultListener getDeleteOldFilesListener(@Nullable OnDeleteFilesListener listener) {
+	private OnRequestResultListener getDeleteOldFilesListener(@Nullable OnDeleteFilesListener listener, List<ExportSettingsType> types) {
 		return new OnRequestResultListener() {
 			@Override
 			public void onResult(@Nullable String resultJson, @Nullable String error) {
@@ -858,8 +828,15 @@ public class BackupHelper {
 					}
 				} else {
 					try {
-						if (!remoteFiles.isEmpty()) {
-							deleteFiles(remoteFiles, true, listener);
+						List<RemoteFile> filesToDelete = new ArrayList<>();
+						for (RemoteFile file : remoteFiles) {
+							ExportSettingsType exportType = ExportSettingsType.getExportSettingsTypeForRemoteFile(file);
+							if (types.contains(exportType)) {
+								filesToDelete.add(file);
+							}
+						}
+						if (!filesToDelete.isEmpty()) {
+							deleteFiles(filesToDelete, true, listener);
 						} else {
 							if (listener != null) {
 								listener.onFilesDeleteDone(Collections.emptyMap());
@@ -985,7 +962,7 @@ public class BackupHelper {
 			@Override
 			protected List<LocalFile> doInBackground(Void... voids) {
 				List<LocalFile> result = new ArrayList<>();
-				List<SettingsItem> localItems = getFilteredLocalItems();
+				List<SettingsItem> localItems = getLocalItems();
 				for (SettingsItem item : localItems) {
 					String fileName = BackupHelper.getItemFileName(item);
 					if (item instanceof FileSettingsItem) {
@@ -1029,14 +1006,9 @@ public class BackupHelper {
 				}
 			}
 
-			private List<SettingsItem> getFilteredLocalItems() {
-				List<ExportSettingsType> settingsTypes = new ArrayList<>();
-				for (ExportSettingsType type : ExportSettingsType.getEnabledTypes()) {
-					if (getBackupTypePref(type).get()) {
-						settingsTypes.add(type);
-					}
-				}
-				return app.getFileSettingsHelper().getFilteredSettingsItems(settingsTypes, true, true, true);
+			private List<SettingsItem> getLocalItems() {
+				List<ExportSettingsType> types = ExportSettingsType.getEnabledTypes();
+				return app.getFileSettingsHelper().getFilteredSettingsItems(types, true, true, true);
 			}
 
 			@Override
@@ -1122,8 +1094,7 @@ public class BackupHelper {
 				List<RemoteFile> remoteFiles = new ArrayList<>(uniqueRemoteFiles);
 				remoteFiles.addAll(deletedRemoteFiles);
 				for (RemoteFile remoteFile : remoteFiles) {
-					ExportSettingsType exportType = remoteFile.item != null
-							? ExportSettingsType.getExportSettingsTypeForItem(remoteFile.item) : null;
+					ExportSettingsType exportType = ExportSettingsType.getExportSettingsTypeForRemoteFile(remoteFile);
 					if (exportType == null || !ExportSettingsType.isTypeEnabled(exportType)) {
 						continue;
 					}
@@ -1146,12 +1117,10 @@ public class BackupHelper {
 						}
 					}
 					if (!hasLocalFile && !remoteFile.isDeleted()) {
-						if (getBackupTypePref(exportType).get()) {
-							if (backupLastUploadedTime > 0 && backupLastUploadedTime >= remoteFile.getClienttimems()) {
-								info.filesToDelete.add(remoteFile);
-							} else {
-								info.filesToDownload.add(remoteFile);
-							}
+						if (backupLastUploadedTime > 0 && backupLastUploadedTime >= remoteFile.getClienttimems()) {
+							info.filesToDelete.add(remoteFile);
+						} else {
+							info.filesToDownload.add(remoteFile);
 						}
 					}
 				}

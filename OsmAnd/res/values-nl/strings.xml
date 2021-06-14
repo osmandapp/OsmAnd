@@ -3441,9 +3441,9 @@
     <string name="additional_actions_descr">U kunt toegang krijgen tot deze acties door op de \"%1$s\" knop te tikken.</string>
     <string name="osm_live_payment_subscription_management">De betaling wordt na bevestiging van de aankoop in rekening gebracht op je Google Play-account.
 \n
-\n Het abonnement wordt automatisch verlengd, tenzij het wordt opgezegd vóór de verlengingsdatum. De betaling wordt alleen op de verlengingsdatum op uw account in rekening gebracht voor de verlengingsperiode (maand / drie maanden / jaar).
+\nHet abonnement wordt automatisch verlengd, tenzij het wordt opgezegd vóór de verlengingsdatum. De betaling wordt alleen op de verlengingsdatum op uw account in rekening gebracht voor de verlengingsperiode (maand / drie maanden / jaar).
 \n
-\n Je kunt je abonnementen beheren en opzeggen via de Google Play-instellingen.</string>
+\nJe kunt je abonnementen beheren en opzeggen via de Google Play-instellingen.</string>
     <string name="search_offline_geo_error">Kon de geo-intent \'%s\' niet verwerken.</string>
     <string name="index_name_antarctica">Antarctica</string>
     <string name="sort_by_category">Sorteer op categorie</string>

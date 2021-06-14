@@ -370,7 +370,7 @@ public class VoiceRouter {
 			// If we wait before more than 20 sec (reset counter)
 			if (ms - waitAnnouncedSpeedLimit > 20 * 1000) {
 				waitAnnouncedSpeedLimit = 0;
-			} else if (router.getSettings().SPEAK_SPEED_LIMIT.get()  && ms - waitAnnouncedSpeedLimit > 10 * 1000 ) {
+			} else if (router.getSettings().SPEAK_SPEED_LIMIT.get() && ms - waitAnnouncedSpeedLimit > 10 * 1000 ) {
 				CommandBuilder p = getNewCommandPlayerToPlay();
 				if (p != null) {
 					lastAnnouncedSpeedLimit = ms;

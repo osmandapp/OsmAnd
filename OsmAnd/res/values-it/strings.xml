@@ -3562,9 +3562,9 @@
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="osm_live_payment_subscription_management">Il tuo account Google Play viene addebitato al momento della conferma dell\'acquisto.
 \n
-\n La sottoscrizione si rinnova automaticamente finché non viene cancellata prima del rinnovo. Il tuo account verrà addebitato per il rinnovo periodico (mensile, trimestrale, annuale) solo alla data di rinnovo.
+\nLa sottoscrizione si rinnova automaticamente finché non viene cancellata prima del rinnovo. Il tuo account verrà addebitato per il rinnovo periodico (mensile, trimestrale, annuale) solo alla data di rinnovo.
 \n
-\n Puoi gestire e cancellare la tua sottoscrizione dalle impostazioni del tuo account Google Play.</string>
+\nPuoi gestire e cancellare la tua sottoscrizione dalle impostazioni del tuo account Google Play.</string>
     <string name="search_poi_types_descr">Combina PDI di più categorie. Tappa il pulsante per selezionarle tutte, oppure sul lato sinistro per una selezione puntuale.</string>
     <string name="lang_gu">Gujarati</string>
     <string name="lang_ba">Baschiro</string>

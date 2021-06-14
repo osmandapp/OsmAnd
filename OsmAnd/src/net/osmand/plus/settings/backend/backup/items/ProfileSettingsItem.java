@@ -45,6 +45,7 @@ public class ProfileSettingsItem extends OsmandSettingsItem {
 	public ProfileSettingsItem(@NonNull OsmandApplication app, @NonNull ApplicationMode appMode) {
 		super(app.getSettings());
 		this.appMode = appMode;
+		modeBean = appMode.toModeBean();
 	}
 
 	public ProfileSettingsItem(@NonNull OsmandApplication app, @Nullable ProfileSettingsItem baseItem, @NonNull ApplicationModeBean modeBean) {

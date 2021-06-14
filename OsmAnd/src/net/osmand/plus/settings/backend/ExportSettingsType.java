@@ -8,6 +8,7 @@ import androidx.annotation.StringRes;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.backup.RemoteFile;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
@@ -90,25 +91,51 @@ public enum ExportSettingsType {
 			if (exportType.getItemName().equals(item.getType().name())) {
 				if (item.getType() == SettingsItemType.FILE) {
 					FileSettingsItem fileItem = (FileSettingsItem) item;
-					if (fileItem.getSubtype() == FileSubtype.RENDERING_STYLE) {
-						return ExportSettingsType.CUSTOM_RENDER_STYLE;
-					} else if (fileItem.getSubtype() == FileSubtype.ROUTING_CONFIG) {
-						return ExportSettingsType.CUSTOM_ROUTING;
-					} else if (fileItem.getSubtype() == FileSubtype.MULTIMEDIA_NOTES) {
-						return ExportSettingsType.MULTIMEDIA_NOTES;
-					} else if (fileItem.getSubtype() == FileSubtype.GPX) {
-						return ExportSettingsType.TRACKS;
-					} else if (fileItem.getSubtype().isMap()) {
-						return ExportSettingsType.OFFLINE_MAPS;
-					} else if (fileItem.getSubtype() == FileSubtype.TTS_VOICE) {
-						return ExportSettingsType.TTS_VOICE;
-					} else if (fileItem.getSubtype() == FileSubtype.VOICE) {
-						return ExportSettingsType.VOICE;
+					return getExportSettingsTypeFileSubtype(fileItem.getSubtype());
+				} else {
+					return exportType;
+				}
+			}
+		}
+		return null;
+	}
+
+	@Nullable
+	public static ExportSettingsType getExportSettingsTypeForRemoteFile(@NonNull RemoteFile remoteFile) {
+		if (remoteFile.item != null) {
+			return getExportSettingsTypeForItem(remoteFile.item);
+		}
+		for (ExportSettingsType exportType : ExportSettingsType.values()) {
+			String type = remoteFile.getType();
+			if (exportType.getItemName().equals(type)) {
+				if (SettingsItemType.FILE.name().equals(type)) {
+					FileSubtype subtype = FileSubtype.getSubtypeByFileName(remoteFile.getName());
+					if (subtype != null) {
+						return getExportSettingsTypeFileSubtype(subtype);
 					}
 				} else {
 					return exportType;
 				}
 			}
+		}
+		return null;
+	}
+
+	public static ExportSettingsType getExportSettingsTypeFileSubtype(@NonNull FileSubtype subtype) {
+		if (subtype == FileSubtype.RENDERING_STYLE) {
+			return ExportSettingsType.CUSTOM_RENDER_STYLE;
+		} else if (subtype == FileSubtype.ROUTING_CONFIG) {
+			return ExportSettingsType.CUSTOM_ROUTING;
+		} else if (subtype == FileSubtype.MULTIMEDIA_NOTES) {
+			return ExportSettingsType.MULTIMEDIA_NOTES;
+		} else if (subtype == FileSubtype.GPX) {
+			return ExportSettingsType.TRACKS;
+		} else if (subtype.isMap()) {
+			return ExportSettingsType.OFFLINE_MAPS;
+		} else if (subtype == FileSubtype.TTS_VOICE) {
+			return ExportSettingsType.TTS_VOICE;
+		} else if (subtype == FileSubtype.VOICE) {
+			return ExportSettingsType.VOICE;
 		}
 		return null;
 	}

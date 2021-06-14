@@ -11,9 +11,6 @@
 		android:layout_height="@dimen/list_content_padding"
 		android:background="?attr/activity_background_color" />
 
-	<include
-		layout="@layout/divider" />
-
 	<LinearLayout
 		android:id="@+id/troubleshooting_container"
 		android:layout_width="match_parent"
