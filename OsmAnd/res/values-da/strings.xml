@@ -3930,4 +3930,15 @@
     <string name="shared_string_subtype">Undertype</string>
     <string name="shared_string_vehicle">Køretøj</string>
     <string name="shared_string_api_key">API-nøgle</string>
+    <string name="backup_data">Sikkerhedskopier data</string>
+    <string name="backup_restore_data_descr">Gendan data på enheden med online sikkerhedskopier.</string>
+    <string name="select_backup_data_descr">Vælg data og mapper til sikkerhedskopiering.</string>
+    <string name="backup_restore_data">Gendan data</string>
+    <string name="restore_from_osmand_cloud">Gendan fra OsmAnd Cloud</string>
+    <string name="choose_what_to_restore">Vælg hvad der skal gendannes.</string>
+    <string name="restore_selected_data">Gendanner valgte data</string>
+    <string name="receiving_data_from_server">Henter data fra serveren</string>
+    <string name="restore_complete">Gendannelse fuldført</string>
+    <string name="grey_color_slope">Grå farve anvendes, når hældningen er udefineret.</string>
+    <string name="backup_version_history">Versionshistorik</string>
 </resources>

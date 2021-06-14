@@ -4177,4 +4177,5 @@
     <string name="restore_complete">Wiederherstellung abgeschlossen</string>
     <string name="grey_color_slope">Graue Farbe wird verwendet, wenn die Steigung undefiniert ist.</string>
     <string name="backup_version_history">Versionsgeschichte</string>
+    <string name="backup_storage_taken">Belegter Speicher</string>
 </resources>

@@ -1767,7 +1767,7 @@
     <string name="osn_close_dialog_error">No se pudo cerrar la nota de OSM.</string>
     <string name="shared_string_commit">Confirmar</string>
     <string name="context_menu_item_delete_waypoint">¿Borrar el punto GPX?</string>
-    <string name="context_menu_item_edit_waypoint">Editar punto GPX</string>
+    <string name="context_menu_item_edit_waypoint">Editar punto de ruta GPX</string>
     <string name="rendering_attr_currentTrackColor_description">Color del GPX</string>
     <string name="rendering_attr_currentTrackWidth_description">Ancho del GPX</string>
     <string name="rendering_attr_roadStyle_description">Estilo del camino</string>
@@ -4173,4 +4173,6 @@
     <string name="receiving_data_from_server">Recibir datos del servidor</string>
     <string name="restore_complete">Restauración completa</string>
     <string name="grey_color_slope">El color gris se usa al no estar definida la pendiente.</string>
+    <string name="backup_version_history">Historial de versiones</string>
+    <string name="backup_storage_taken">Almacenamiento tomado</string>
 </resources>

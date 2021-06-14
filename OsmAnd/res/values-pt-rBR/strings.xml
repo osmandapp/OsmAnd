@@ -446,7 +446,7 @@
     <string name="index_item_world_seamarks">Marcas marítimas mundiais</string>
     <string name="index_item_world_bitcoin_payments">Pagamentos mundiais de bitcoin</string>
     <string name="index_item_world_basemap">Mapa de visão geral do mundo</string>
-    <string name="index_item_world_ski">Mapa mundial de esquí</string>
+    <string name="index_item_world_ski">Mapa mundial de esqui</string>
     <string name="lang_zh">Chinês</string>
     <string name="lang_pt_br">Português (Brasil)</string>
     <string name="lang_en">Inglês</string>
@@ -2139,7 +2139,7 @@
     <string name="active_markers_descr">Especifique o número de indicadores de direção.</string>
     <string name="digits_quantity">Número de casas decimais</string>
     <string name="shared_string_right">Direita</string>
-    <string name="shared_string_left">Esqueda</string>
+    <string name="shared_string_left">Esquerda</string>
     <string name="show_number_pad">Mostrar teclado numérico</string>
     <string name="shared_string_paste">Colar</string>
     <string name="go_to_next_field">Próximo campo</string>
@@ -2372,7 +2372,7 @@
     <string name="lang_zh_hk">Chinês (Hong Kong)</string>
     <string name="driving_region_australia">Austrália</string>
     <string name="osmand_extended_description_part4">Esqui
-\n O plugin de mapas de ski Skiing OsmAnd permite que você veja pistas de ski com nível de complexidade e algumas informações adicionais, como localização de elevadores e outras facilidades.</string>
+\n O plugin de mapas de esqui OsmAnd permite que você veja pistas de esqui com nível de complexidade e algumas informações adicionais, como localização de elevadores e outras facilidades.</string>
     <string name="live_monitoring_max_interval_to_send">Buffer de tempo para rastreamento on-line</string>
     <string name="save_poi_too_many_uppercase">O nome contém muitas letras maiúsculas. Continuar\?</string>
     <string name="file_name_containes_illegal_char">Caráter ilegal no nome do arquivo</string>
@@ -2470,12 +2470,12 @@
     <string name="quick_action_map_style_action">Adicionar um estilo de mapa</string>
     <string name="quick_action_empty_param_error">Preencha todos os parâmetros</string>
     <string name="quick_action_map_styles">Estilos de mapa</string>
-    <string name="quick_action_map_overlay">Mudar sobreposição de mapa</string>
+    <string name="quick_action_map_overlay">Mudar mapa da camada superior</string>
     <string name="quick_action_map_overlay_title">Sobreposições de mapa</string>
     <string name="quick_action_map_overlay_action">Adicionar sobreposição</string>
     <string name="quick_action_map_overlay_switch">Sobreposição de mapa alterada para \"%s\".</string>
     <string name="quick_action_map_underlay_switch">Camada inferior de mapa foi alterada para \"%s\".</string>
-    <string name="quick_action_map_underlay">Mudar camada inferior de mapa</string>
+    <string name="quick_action_map_underlay">Mudar mapa da camada inferior</string>
     <string name="quick_action_map_underlay_title">Camadas inferiores de mapa</string>
     <string name="quick_action_map_underlay_action">Adicionar sobreposição</string>
     <string name="quick_action_map_source">Mudar fonte de mapa</string>
@@ -3122,7 +3122,7 @@
     <string name="discard_changes">Descartar alteração</string>
     <string name="vehicle_parameters_descr">Peso, altura, comprimento, velocidade</string>
     <string name="vehicle_parameters">Parâmetros do veículo</string>
-    <string name="screen_alerts">Alertas de tela</string>
+    <string name="screen_alerts">Alertas na tela</string>
     <string name="configure_profile_info">Configurações para o perfil:</string>
     <string name="utm_format_descr">OsmAnd usa o padrão UTM, que é semelhante, mas não idêntico, ao formato UTM NATO.</string>
     <string name="navigate_point_format_utm">Padrão UTM</string>
@@ -3200,7 +3200,7 @@
     <string name="rendering_attr_piste_difficulty_aerialway_name">Maneira aérea</string>
     <string name="rendering_attr_piste_difficulty_connection_name">Conexão</string>
     <string name="shared_string_calculate">Calcular</string>
-    <string name="shared_string_osmand_usage">Uso do Osmand</string>
+    <string name="shared_string_osmand_usage">Uso do OsmAnd</string>
     <string name="shared_sting_tiles">Quadrículas</string>
     <string name="shared_string_maps">Mapas</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
@@ -3316,7 +3316,7 @@
     <string name="live_monitoring_descr">Permite compartilhar a localização atual usando a gravação de viagem.</string>
     <string name="live_monitoring">Rastreamento online</string>
     <string name="save_track_logging_accuracy">Precisão de registro</string>
-    <string name="tracks_view_descr">Você pode encontrar todas as suas faixas gravadas em %1$ss ou na pasta OsmAd usando o gerenciador de arquivos.</string>
+    <string name="tracks_view_descr">Você pode encontrar todas as suas faixas gravadas em %1$s ou na pasta OsmAnd usando o gerenciador de arquivos.</string>
     <string name="multimedia_notes_view_descr">Você pode encontrar todas as suas anotações em %1$s.</string>
     <string name="video_notes">Notas de vídeo</string>
     <string name="photo_notes">Notas fotográficas</string>
@@ -3596,7 +3596,7 @@
     <string name="profiles_for_action_not_found">Não foi possível encontrar nenhum desses perfis.</string>
     <string name="index_item_world_basemap_detailed">Mapa geral do mundo (detalhado)</string>
     <string name="unsupported_type_error">Tipo não suportado</string>
-    <string name="gpx_parse_error">OsmA GPX não está bem formado, entre em contato com a equipe de suporte para investigar mais.</string>
+    <string name="gpx_parse_error">O arquivo GPX do OsmAnd não está bem formado, entre em contato com a equipe de suporte para investigar mais.</string>
     <string name="expire_time">Tempo de expiração</string>
     <string name="mercator_projection">Projeção de Mercator</string>
     <string name="storage_format">Formato de armazenamento</string>
@@ -3871,7 +3871,7 @@
 \nMapillary - imagens de nível da rua;
 \nWeb / Wikimedia - fotos de POI especificadas de acordo com os dados do OpenStreetMap.</string>
     <string name="shared_string_resources">Recursos</string>
-    <string name="approximate_file_size">Tamanho aproximado do arquivo</string>
+    <string name="approximate_file_size">Tamanho aprox. do arquivo</string>
     <string name="select_data_to_export">Selecione os dados a serem exportados para o arquivo.</string>
     <string name="file_size_needed_for_import">Necessário para importação</string>
     <string name="export_not_enough_space_descr">Seu dispositivo tem apenas %1$s livre. Libere espaço ou desmarque alguns itens para exportar.</string>
@@ -3903,8 +3903,8 @@
     <string name="reverse_all_points">Reverter todos os pontos</string>
     <string name="profile_by_default_description">Selecione o perfil que será utilizado na inicialização do aplicativo.</string>
     <string name="shared_string_last_used">Usado por último</string>
-    <string name="routing_attr_prefer_hiking_routes_description">Percursos de caminhada preferidos</string>
-    <string name="routing_attr_prefer_hiking_routes_name">Percursos de caminhada preferidos</string>
+    <string name="routing_attr_prefer_hiking_routes_description">Preferir percursos de caminhada</string>
+    <string name="routing_attr_prefer_hiking_routes_name">Preferir percursos de caminhada</string>
     <string name="routing_attr_allow_streams_description">Permitir riachos e drenos</string>
     <string name="routing_attr_allow_streams_name">Permitir riachos e drenos</string>
     <string name="routing_attr_allow_intermittent_description">Permitir vias de água intermitentes</string>
@@ -3917,9 +3917,9 @@
     <string name="shared_string_api_key">Chave de API</string>
     <string name="shared_string_server_url">URL do servidor</string>
     <string name="shared_string_enter_param">Digite o parâmetro</string>
-    <string name="keep_it_empty_if_not">Mantenha-o vazio se não</string>
+    <string name="keep_it_empty_if_not">Mantenha-o vazio se não o tiver</string>
     <string name="online_routing_example_hint">O URL com todos os parâmetros terá a seguinte aparência:</string>
-    <string name="test_route_calculation">Cálculo da rota de teste</string>
+    <string name="test_route_calculation">Testar cálculo de rota</string>
     <string name="routing_engine_vehicle_type_driving">Condução</string>
     <string name="routing_engine_vehicle_type_foot">Pé</string>
     <string name="routing_engine_vehicle_type_bike">Bicicleta</string>
@@ -4004,7 +4004,7 @@
     <string name="routing_attr_driving_style_description">Selecione o propósito de condução para obter um trajeto mais curto, mais rápido ou mais seguro</string>
     <string name="snap_to_road_descr">O ícone da posição atual se ajustará à rota de navegação atual</string>
     <string name="map_orientation_threshold_descr">Não gire a visualização do mapa se a velocidade for inferior a um limite</string>
-    <string name="restart">Somente com Wi-Fi</string>
+    <string name="restart">Reiniciar</string>
     <string name="shared_strings_all_regions">Todas as regiões</string>
     <string name="delete_number_files_question">Excluir %1$d arquivos\?</string>
     <string name="track_recording_stop_without_saving">Pare sem salvar</string>
@@ -4024,7 +4024,7 @@
     <string name="live_update_frequency_day_variant">As atualizações do mapa serão verificadas todos os dias. Próxima vez %1$s em %2$s.</string>
     <string name="live_update_frequency_hour_variant">As atualizações do mapa serão verificadas a cada hora. Da próxima vez, %1$s em %2$s.</string>
     <string name="delete_updates">Apagar atualizações</string>
-    <string name="live_update_delete_updates_msg">Tem certeza de que deseja excluir todas as atualizações ao vivo de %s\?</string>
+    <string name="live_update_delete_updates_msg">Tem certeza de que deseja excluir todas as %s atualizações OsmAnd Live\?</string>
     <string name="purchases">Compras</string>
     <string name="select_category_descr">Selecione a categoria ou adicione uma nova</string>
     <string name="track_recording_will_be_continued">A gravação continuará.</string>
