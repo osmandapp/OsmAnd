@@ -4042,15 +4042,15 @@
     <string name="lost_data_warning">Minden nem mentett adat törlődni fog.</string>
     <string name="show_start_dialog">Kezdő párbeszéd megjelenítése</string>
     <string name="trip_recording_show_start_dialog_setting">Ha le van tiltva, akkor a felvétel azonnal elindul a widget vagy a menüelem megérintése után, kihagyva a megerősítő párbeszédpanelt.</string>
-    <string name="release_4_0_beta">• Új lehetőség: szinvonalak letöltése (méter mellett) lábban
+    <string name="release_4_0_beta">• Új lehetőség: szintvonalak letöltése (méter mellett) lábban
 \n
 \n• Útvonaltervezési környezet: hozzáadott fülek a pontok és grafikonok közötti váltáshoz
 \n
-\n• Az OsmAnd Live frissítések átköltöztek a „Letöltések&gt; Frissítések” helyre
+\n• Az OsmAnd Live frissítések átköltöztek a „Letöltések &gt; Frissítések” helyre
 \n
 \n• A nyomvonalak már magasság, sebesség vagy lejtés szerint is színezhetők
 \n
-\n• Módoítható a navigációs útvonal megjelenése
+\n• A navigációs útvonal megjelenése módosítható
 \n
 \n• Frissült az „Utazás felvétele” párbeszédpanel
 \n
@@ -4167,4 +4167,6 @@
     <string name="grey_color_slope">A szürke szín ott fordul elő, ahol a lejtés nincs meghatározva.</string>
     <string name="backup_version_history">Verzióelőzmények</string>
     <string name="backup_version_history_delete_descr">Törölni szeretné a letiltott típusok módosítási előzményeit a felhőből\?</string>
+    <string name="backup_storage_taken">Foglalt tárhely</string>
+    <string name="delete_version_history">Verziótörténet törlése</string>
 </resources>
