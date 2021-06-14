@@ -3540,11 +3540,11 @@
     <string name="download_unsupported_action">Action %1$s non prise en charge</string>
     <string name="lang_ky">Kirghize</string>
     <string name="lang_gu">Gujarati</string>
-    <string name="osm_live_payment_subscription_management">Le paiement sera débité de votre compte Google Play dès confirmation de l\'achat.
+    <string name="osm_live_payment_subscription_management">Le paiement sera prélevé de votre compte Google Play dès confirmation de l\'achat.
 \n
-\nA moins qu\'il ne soit annulé avant sa date de renouvellement, l\'abonnement sera automatiquement débité à chaque échéance (mensuelle / trimestrielle / annuelle). 
+\nA moins qu\'il ne soit annulé avant sa date de renouvellement, l\'abonnement sera automatiquement prélevé à chaque échéance (mensuelle / trimestrielle / annuelle).
 \n
-\nVous pouvez gérer et annuler vos abonnements dans vos paramètres Google Play.</string>
+\nVous pouvez gérer et annuler vos abonnements en vous rendant dans les paramètres Google Play.</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="search_poi_types_descr">Combinez des PI de différentes catégories. Appuyez sur \"basculer\" pour tout sélectionner, le côté gauche sélectionne une catégorie.</string>
     <string name="search_poi_types">Rechercher des types de PI</string>
@@ -4164,4 +4164,5 @@
     <string name="grey_color_slope">Les pentes inconnues sont de couleur grise.</string>
     <string name="backup_storage_taken">Espace utilisé</string>
     <string name="backup_version_history">Historique des versions</string>
+    <string name="delete_version_history">Supprimer l\'historique des versions</string>
 </resources>
