@@ -29,9 +29,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
+import java.util.TreeSet;
 
 import static net.osmand.plus.backup.BackupHelper.INFO_EXT;
 
@@ -162,11 +165,21 @@ class BackupImporter {
 			Map<File, RemoteFile> remoteInfoFilesMap = new HashMap<>();
 			Map<String, RemoteFile> remoteItemFilesMap = new HashMap<>();
 			List<RemoteFile> remoteInfoFiles = new ArrayList<>();
-			List<String> remoteInfoNames = new ArrayList<>();
+			Set<String> remoteInfoNames = new HashSet<>();
 			List<RemoteFile> noInfoRemoteItemFiles = new ArrayList<>();
 			OsmandApplication app = backupHelper.getApp();
 			File tempDir = FileUtils.getTempDir(app);
-			for (RemoteFile remoteFile : remoteFiles) {
+
+			List<RemoteFile> uniqueRemoteFiles = new ArrayList<>();
+			Set<String> uniqueFileIds = new TreeSet<>();
+			for (RemoteFile rf : remoteFiles) {
+				String fileId = rf.getTypeNamePath();
+				if (uniqueFileIds.add(fileId) && !rf.isDeleted()) {
+					uniqueRemoteFiles.add(rf);
+				}
+			}
+
+			for (RemoteFile remoteFile : uniqueRemoteFiles) {
 				String fileName = remoteFile.getTypeNamePath();
 				if (fileName.endsWith(INFO_EXT)) {
 					if (readItems) {
@@ -175,7 +188,7 @@ class BackupImporter {
 					String itemFileName = fileName.substring(0, fileName.length() - INFO_EXT.length());
 					remoteInfoNames.add(itemFileName);
 					remoteInfoFiles.add(remoteFile);
-				} else {
+				} else if (!remoteItemFilesMap.containsKey(fileName)) {
 					remoteItemFilesMap.put(fileName, remoteFile);
 				}
 			}
