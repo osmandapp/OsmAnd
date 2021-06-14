@@ -768,17 +768,17 @@ public class OsmandSettings {
 
 		@Override
 		public void readFromJson(JSONObject json, ApplicationMode appMode) throws JSONException {
-			Set<String> importAppModesKeys = Algorithms.decodeStringSet(json.getString(getId()),",");
-			Set<String> nonexistentCustomAppModesKeys = new HashSet<>();
-			for (String importAppModeKey : importAppModesKeys) {
-				if (ApplicationMode.valueOfStringKey(importAppModeKey, null) == null) {
-					nonexistentCustomAppModesKeys.add(importAppModeKey);
+			Set<String> appModesKeys = Algorithms.decodeStringSet(json.getString(getId()),",");
+			Set<String> nonexistentAppModesKeys = new HashSet<>();
+			for (String appModeKey : appModesKeys) {
+				if (ApplicationMode.valueOfStringKey(appModeKey, null) == null) {
+					nonexistentAppModesKeys.add(appModeKey);
 				}
 			}
-			if (!nonexistentCustomAppModesKeys.isEmpty()) {
-				importAppModesKeys.removeAll(nonexistentCustomAppModesKeys);
-				set(parseString(Algorithms.encodeStringSet(importAppModesKeys, ",")));
+			if (!nonexistentAppModesKeys.isEmpty()) {
+				appModesKeys.removeAll(nonexistentAppModesKeys);
 			}
+			set(parseString(Algorithms.encodeStringSet(appModesKeys, ",")));
 		}
 
 	}.makeGlobal().makeShared().cache();
