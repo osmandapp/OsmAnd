@@ -3,7 +3,7 @@
     <string name="shared_string_telegram">Telegram</string>
     <string name="privacy_policy_use_telegram">A Telegram (üzenetküldő alkalmazás) a másokkal való összekapcsolódásra és kommunikációra használható.</string>
     <string name="privacy_policy_telegram_client">A Telegram nyílt platformot használó kliensprogramok egyike az OsmAnd Tracker. Partnerei bármelyik másik Telegram kliensprogramot is használhatják.</string>
-    <string name="privacy_policy_agree">A „Tovább”-ra kattintva elfogadja a Telegram és az OsmAnd adatvédelmi irányelveinek feltételeit.</string>
+    <string name="privacy_policy_agree">A „Tovább”-ra koppintva elfogadja a Telegram és az OsmAnd adatvédelmi irányelveinek feltételeit.</string>
     <string name="shared_string_accept">Elfogadás</string>
     <string name="telegram_privacy_policy">Telegram adatvédelmi irányelvei</string>
     <string name="osmand_privacy_policy">OsmAnd adatvédelmi irányelvei</string>

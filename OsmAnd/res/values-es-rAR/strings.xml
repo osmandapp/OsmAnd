@@ -1767,7 +1767,7 @@
     <string name="osn_close_dialog_error">No se pudo cerrar la nota de OSM.</string>
     <string name="shared_string_commit">Confirmar</string>
     <string name="context_menu_item_delete_waypoint">¿Borrar el punto GPX?</string>
-    <string name="context_menu_item_edit_waypoint">Editar punto GPX</string>
+    <string name="context_menu_item_edit_waypoint">Editar punto de ruta GPX</string>
     <string name="rendering_attr_currentTrackColor_description">Color del GPX</string>
     <string name="rendering_attr_currentTrackWidth_description">Ancho del GPX</string>
     <string name="rendering_attr_roadStyle_description">Estilo del camino</string>
@@ -3030,7 +3030,7 @@
     <string name="new_profile">Nuevo perfil</string>
     <string name="shared_string_crash">Error</string>
     <string name="last_launch_crashed">OsmAnd falló la última vez. Por favor, ayúdanos a mejorar OsmAnd compartiendo el mensaje de error.</string>
-    <string name="app_mode_ufo">OVNI</string>
+    <string name="app_mode_ufo">Ovni</string>
     <string name="release_3_4">• Perfiles de aplicación: crea un perfil personalizado según tus necesidades, con un icono y color personalizado.
 \n
 \n • Ahora puedes personalizar las velocidades predefinidas, máximas y mínimas de cualquier perfil
@@ -4135,7 +4135,7 @@
     <string name="shared_string_online">En línea</string>
     <string name="osmand_online_routing_promo">Puedes usar plantillas predefinidas o añadir navegadores en línea personalizados, soportado: OSRM, Graphhopper, OpenRouteService, GPX.</string>
     <string name="shared_string_external">Externo</string>
-    <string name="provided_by">Proporcionado por %1$s</string>
+    <string name="provided_by">Provisto por %1$s</string>
     <string name="failed_loading_predefined_engines">No se pudo cargar la lista de plantillas predefinidas.
 \nComprueba la conexión a Internet.</string>
     <string name="shared_string_predefined">Predefinido</string>
@@ -4163,4 +4163,16 @@
     <string name="backup_delete_old_data_warning">Se borrará el historial de cambios de los datos cargados previamente.
 \n
 \nLa versión actual de los datos se guardará en el servidor, pero no podrás volver a los cambios anteriores.</string>
+    <string name="backup_data">Datos de la copia de seguridad</string>
+    <string name="select_backup_data_descr">Marca los datos y carpetas para la copia de seguridad.</string>
+    <string name="backup_restore_data_descr">Restaura los datos en el dispositivo, usando copias de seguridad en línea.</string>
+    <string name="backup_restore_data">Restaurar datos</string>
+    <string name="restore_from_osmand_cloud">Restaurar desde OsmAnd Cloud</string>
+    <string name="choose_what_to_restore">Elige qué restaurar.</string>
+    <string name="restore_selected_data">Restaurar datos marcados</string>
+    <string name="receiving_data_from_server">Recibir datos del servidor</string>
+    <string name="restore_complete">Restauración completa</string>
+    <string name="grey_color_slope">El color gris se usa al no estar definida la pendiente.</string>
+    <string name="backup_version_history">Historial de versiones</string>
+    <string name="backup_storage_taken">Almacenamiento tomado</string>
 </resources>

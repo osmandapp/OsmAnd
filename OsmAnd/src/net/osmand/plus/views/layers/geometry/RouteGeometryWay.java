@@ -47,7 +47,7 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 	public void setRouteStyleParams(@Nullable @ColorInt Integer color,
 	                                @Nullable Float width,
 	                                @Nullable @ColorInt Integer pointColor,
-									@Nullable GradientScaleType scaleType) {
+	                                @Nullable GradientScaleType scaleType) {
 		this.needUpdate = this.scaleType != scaleType;
 
 		if (scaleType != null && !Algorithms.objectEquals(customWidth, width)) {

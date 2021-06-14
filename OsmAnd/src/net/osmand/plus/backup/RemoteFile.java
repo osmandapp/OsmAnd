@@ -75,6 +75,14 @@ public class RemoteFile {
 		return filesize;
 	}
 
+	public boolean isDeleted() {
+		return filesize < 0;
+	}
+
+	public boolean isInfoFile() {
+		return name != null && name.endsWith(BackupHelper.INFO_EXT);
+	}
+
 	public String getType() {
 		return type;
 	}
@@ -136,5 +144,11 @@ public class RemoteFile {
 	public int hashCode() {
 		return Algorithms.hash(id, userid, deviceid, filesize, type, name,
 				updatetime, updatetimems, clienttime, clienttimems);
+	}
+
+	@NonNull
+	@Override
+	public String toString() {
+		return "type " + type + ", name " + name + "";
 	}
 }

@@ -15,7 +15,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.util.Algorithms;
 
 import java.text.SimpleDateFormat;
@@ -25,7 +25,7 @@ import java.util.Locale;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 
-public class SubscriptionsListCard extends BaseCard {
+public class SubscriptionsListCard extends MapBaseCard {
 
 	private final InAppPurchaseHelper purchaseHelper;
 

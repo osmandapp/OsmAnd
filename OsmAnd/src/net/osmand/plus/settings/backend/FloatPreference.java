@@ -13,7 +13,8 @@ public class FloatPreference extends CommonPreference<Float> {
 
 	@Override
 	protected boolean setValue(Object prefs, Float val) {
-		return getSettingsAPI().edit(prefs).putFloat(getId(), val).commit();
+		return super.setValue(prefs, val)
+				&& getSettingsAPI().edit(prefs).putFloat(getId(), val).commit();
 	}
 
 	@Override

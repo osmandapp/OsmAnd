@@ -20,13 +20,13 @@ import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
-import net.osmand.plus.settings.backend.backup.FileSettingsHelper.SettingsCollectListener;
-import net.osmand.plus.settings.backend.backup.FileSettingsHelper.SettingsImportListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.CheckDuplicatesListener;
+import net.osmand.plus.settings.backend.backup.SettingsHelper.CollectListener;
+import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
 import net.osmand.plus.settings.backend.backup.items.PluginSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.fragments.ImportCompleteFragment;
-import net.osmand.plus.settings.fragments.ImportSettingsFragment;
+import net.osmand.plus.settings.fragments.FileImportSettingsFragment;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -76,9 +76,9 @@ class SettingsImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 		final File file = new File(tempDir, name);
 		if (error == null && file.exists()) {
 			final FileSettingsHelper settingsHelper = app.getFileSettingsHelper();
-			settingsHelper.collectSettings(file, latestChanges, version, new SettingsCollectListener() {
+			settingsHelper.collectSettings(file, latestChanges, version, new CollectListener() {
 				@Override
-				public void onSettingsCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items) {
+				public void onCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items) {
 					hideProgress();
 					if (succeed) {
 						List<SettingsItem> pluginIndependentItems = new ArrayList<>();
@@ -98,10 +98,10 @@ class SettingsImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 								FragmentActivity activity = activityRef.get();
 								if (!silentImport && activity != null) {
 									FragmentManager fragmentManager = activity.getSupportFragmentManager();
-									ImportSettingsFragment.showInstance(fragmentManager, pluginIndependentItems, file);
+									FileImportSettingsFragment.showInstance(fragmentManager, pluginIndependentItems, file);
 								}
 							} else {
-								Map<ExportSettingsType, List<?>> allSettingsMap = getSettingsToOperate(pluginIndependentItems, false);
+								Map<ExportSettingsType, List<?>> allSettingsMap = getSettingsToOperate(pluginIndependentItems, false, false);
 								List<SettingsItem> settingsList = settingsHelper.getFilteredSettingsItems(allSettingsMap, settingsTypes, pluginIndependentItems, false);
 								settingsHelper.checkDuplicates(file, settingsList, settingsList, getDuplicatesListener(file, replace));
 							}
@@ -131,10 +131,10 @@ class SettingsImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 		};
 	}
 
-	private SettingsImportListener getImportListener(final File file) {
-		return new SettingsImportListener() {
+	private ImportListener getImportListener(final File file) {
+		return new ImportListener() {
 			@Override
-			public void onSettingsImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> items) {
+			public void onImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> items) {
 				if (succeed) {
 					app.getRendererRegistry().updateExternalRenderers();
 					app.getPoiFilters().loadSelectedPoiFilters();
@@ -172,9 +172,9 @@ class SettingsImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 			progress = null;
 		}
 
-		final SettingsImportListener importListener = new SettingsImportListener() {
+		final ImportListener importListener = new ImportListener() {
 			@Override
-			public void onSettingsImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> items) {
+			public void onImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> items) {
 				FragmentActivity activity = activityRef.get();
 				if (progress != null && AndroidUtils.isActivityNotDestroyed(activity)) {
 					progress.dismiss();

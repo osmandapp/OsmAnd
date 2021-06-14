@@ -1229,7 +1229,7 @@
     <string name="select_address_activity">Укажите адрес</string>
     <string name="favourites_list_activity">Выбор избранной</string>
     <string name="local_openstreetmap_act_title">Модификации OSM</string>
-    <string name="av_def_action_choose">Выбрать</string>
+    <string name="av_def_action_choose">По запросу\?</string>
     <string name="osmand_play_title_30_chars">OsmAnd карты и навигация</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ карты и навигация</string>
     <string name="use_kalman_filter_compass_descr">Уменьшает «шум» компаса, но добавляет инерцию.</string>
@@ -2706,7 +2706,7 @@
     <string name="wikivoyage_download_pics">Загружать изображения</string>
     <string name="wikivoyage_download_pics_descr">Изображения из статей можно загрузить для использования в автономном режиме. 
 \nВы всегда можете изменить настройку в «Исследовать» → «Параметры».</string>
-    <string name="shared_string_wifi_only">Только Wi-Fi</string>
+    <string name="shared_string_wifi_only">Только по Wi-Fi</string>
     <string name="select_travel_book">Выберите дневник путешествий</string>
     <string name="shared_string_travel_book">Дневник путешествий</string>
     <string name="online_webpage_warning">Страница доступна только онлайн. Открыть её в браузере\?</string>
@@ -4132,7 +4132,7 @@
     <string name="backup_delete_all_data_warning">Вы собираетесь удалить все данные ранее загруженные в OsmAnd Cloud, включая истории версий.\n\nВы не сможете восстановить удаленные данные.</string>
     <string name="backup_delete_old_data_warning">Вы собираетесь удалить историю изменений для ранее загруженных данных.\n\nТекущая версия данных будет сохранена на сервере, но вы не сможете вернуться к ранее сделанным изменениям.</string>
     <string name="upload_local_version">Отправить локальную версию</string>
-    <string name="download_server_version">Загрузить версию с сервера</string>
+    <string name="download_server_version">Скачать версию с сервера</string>
     <string name="shared_string_predefined">Предопределенные</string>
     <string name="backup_now">Создать резервную копию сейчас</string>
     <string name="make_backup">Создать резервную копию</string>
@@ -4160,4 +4160,14 @@
     <string name="backup_delete_all_data_descr">Все данные в OsmAnd Cloud будут удалены. Локальные версии останутся нетронутыми.</string>
     <string name="backup_data">Резервное копирование данных</string>
     <string name="select_backup_data_descr">Выберите данные и папки для резервного копирования.</string>
+    <string name="backup_restore_data_descr">Восстановление данных на устройстве, используя онлайн-резервные копии.</string>
+    <string name="backup_restore_data">Восстановить данные</string>
+    <string name="restore_from_osmand_cloud">Восстановить из OsmAnd Cloud</string>
+    <string name="choose_what_to_restore">Выберите данные для восстановления.</string>
+    <string name="restore_selected_data">Восстановить выбранные данные</string>
+    <string name="receiving_data_from_server">Получение данных с сервера</string>
+    <string name="restore_complete">Восстановление завершено</string>
+    <string name="grey_color_slope">Серый цвет используется, когда уклон не определен.</string>
+    <string name="backup_storage_taken">Занятое пространство</string>
+    <string name="backup_version_history">История версий</string>
 </resources>

@@ -20,6 +20,7 @@ public class BooleanStringPreference extends BooleanPreference {
 
 	@Override
 	protected boolean setValue(Object prefs, Boolean val) {
-		return getSettingsAPI().edit(prefs).putString(getId(), val != null ? val.toString() : null).commit();
+		return super.setValue(prefs, val)
+				&& getSettingsAPI().edit(prefs).putString(getId(), val != null ? val.toString() : null).commit();
 	}
 }

@@ -12,12 +12,14 @@ import java.util.StringTokenizer;
 
 abstract class SettingsMapPointsStorage {
 
-	private OsmandSettings osmandSettings;
+	private final OsmandSettings osmandSettings;
+	private final boolean lastModifiedTimeStored;
 	protected String pointsKey;
 	protected String descriptionsKey;
 
-	public SettingsMapPointsStorage(OsmandSettings osmandSettings) {
+	public SettingsMapPointsStorage(OsmandSettings osmandSettings, boolean storeLastModifiedTime) {
 		this.osmandSettings = osmandSettings;
+		this.lastModifiedTimeStored = storeLastModifiedTime;
 	}
 
 	protected SettingsAPI getSettingsAPI() {
@@ -26,6 +28,25 @@ abstract class SettingsMapPointsStorage {
 
 	protected OsmandSettings getOsmandSettings() {
 		return osmandSettings;
+	}
+
+	public boolean isLastModifiedTimeStored() {
+		return lastModifiedTimeStored;
+	}
+
+	public long getLastModifiedTime() {
+		if (!lastModifiedTimeStored) {
+			throw new IllegalStateException(pointsKey + " is not granted to store last modified time");
+		}
+		return getSettingsAPI().getLong(osmandSettings.getGlobalPreferences(), pointsKey + "_last_modified", 0);
+	}
+
+	public void setLastModifiedTime(long lastModifiedTime) {
+		if (!lastModifiedTimeStored) {
+			throw new IllegalStateException(pointsKey + " is not granted to store last modified time");
+		}
+		getSettingsAPI().edit(osmandSettings.getGlobalPreferences())
+				.putLong(pointsKey + "_last_modified", lastModifiedTime).commit();
 	}
 
 	public List<String> getPointDescriptions(int sz) {
@@ -129,6 +150,10 @@ abstract class SettingsMapPointsStorage {
 			} else {
 				tb.append(ds.get(i));
 			}
+		}
+		if (lastModifiedTimeStored) {
+			getSettingsAPI().edit(osmandSettings.getGlobalPreferences())
+					.putLong(pointsKey + "_last_modified", System.currentTimeMillis()).commit();
 		}
 		return getSettingsAPI().edit(osmandSettings.getGlobalPreferences())
 				.putString(pointsKey, sb.toString())

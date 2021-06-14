@@ -25,7 +25,7 @@ public class EnumStringPreference<E extends Enum<E>> extends CommonPreference<E>
 	@Override
 	public boolean setValue(Object prefs, E val) {
 		String name = val == null ? null : val.name();
-		return getSettingsAPI().edit(prefs).putString(getId(), name).commit();
+		return super.setValue(prefs, val) && getSettingsAPI().edit(prefs).putString(getId(), name).commit();
 	}
 
 	@Override

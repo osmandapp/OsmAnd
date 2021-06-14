@@ -4155,4 +4155,16 @@
     <string name="backup_delete_old_data_warning">您將要刪除先前載入資料的變更歷史紀錄。
 \n
 \n目前版本的資料將會儲存到伺服氣上，但您將無法回退到先前做出的修改。</string>
+    <string name="backup_data">備份資料</string>
+    <string name="select_backup_data_descr">選取要備份的資料與資料夾。</string>
+    <string name="backup_restore_data_descr">使用線上備份復原裝置上的資料。</string>
+    <string name="backup_restore_data">復原資料</string>
+    <string name="restore_from_osmand_cloud">從 OsmAnd Cloud 復原</string>
+    <string name="choose_what_to_restore">選擇要復原的內容。</string>
+    <string name="restore_selected_data">復原選定的資料</string>
+    <string name="receiving_data_from_server">正在從伺服器接收資料</string>
+    <string name="restore_complete">復原完成</string>
+    <string name="grey_color_slope">當斜率未被定義時則使用灰色。</string>
+    <string name="backup_version_history">版本歷史紀錄</string>
+    <string name="backup_storage_taken">用掉的儲存空間</string>
 </resources>

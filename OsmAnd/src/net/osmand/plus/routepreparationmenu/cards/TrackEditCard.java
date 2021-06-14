@@ -26,7 +26,7 @@ import net.osmand.util.Algorithms;
 import java.io.File;
 import java.util.List;
 
-public class TrackEditCard extends BaseCard {
+public class TrackEditCard extends MapBaseCard {
 
 	private final GPXFile gpxFile;
 

@@ -13,6 +13,7 @@ import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -24,9 +25,17 @@ import java.io.OutputStream;
 public class NetworkWriter implements AbstractWriter {
 
 	private final BackupHelper backupHelper;
-	private final OnUploadFileListener listener;
+	private final OnUploadItemListener listener;
 
-	public NetworkWriter(@NonNull BackupHelper backupHelper, @Nullable OnUploadFileListener listener) {
+	public interface OnUploadItemListener {
+		void onItemFileUploadStarted(@NonNull SettingsItem item, @NonNull String fileName, int work);
+
+		void onItemFileUploadProgress(@NonNull SettingsItem item, @NonNull String fileName, int progress, int deltaWork);
+
+		void onItemFileUploadDone(@NonNull SettingsItem item, @NonNull String fileName, long uploadTime, @Nullable String error);
+	}
+
+	public NetworkWriter(@NonNull BackupHelper backupHelper, @Nullable OnUploadItemListener listener) {
 		this.backupHelper = backupHelper;
 		this.listener = listener;
 	}
@@ -60,16 +69,23 @@ public class NetworkWriter implements AbstractWriter {
 
 	private String uploadItemInfo(@NonNull SettingsItem item, @NonNull String fileName) throws IOException {
 		try {
-			String itemJson = item.toJson();
-			InputStream inputStream = new ByteArrayInputStream(itemJson.getBytes("UTF-8"));
-			StreamWriter streamWriter = new StreamWriter() {
-				@Override
-				public void write(OutputStream outputStream, IProgress progress) throws IOException {
-					Algorithms.streamCopy(inputStream, outputStream, progress, 1024);
-					outputStream.flush();
-				}
-			};
-			return backupHelper.uploadFileSync(fileName, item.getType().name(), streamWriter, listener);
+			JSONObject json = item.toJsonObj();
+			boolean hasFile = json.has("file");
+			if (json.length() > (hasFile ? 2 : 1)) {
+				String itemJson = json.toString();
+				InputStream inputStream = new ByteArrayInputStream(itemJson.getBytes("UTF-8"));
+				StreamWriter streamWriter = new StreamWriter() {
+					@Override
+					public void write(OutputStream outputStream, IProgress progress) throws IOException {
+						Algorithms.streamCopy(inputStream, outputStream, progress, 1024);
+						outputStream.flush();
+					}
+				};
+				return backupHelper.uploadFileSync(fileName, item.getType().name(), streamWriter,
+						getUploadFileListener(item));
+			} else {
+				return null;
+			}
 		} catch (JSONException | UserNotRegisteredException e) {
 			throw new IOException(e.getMessage(), e);
 		}
@@ -83,7 +99,8 @@ public class NetworkWriter implements AbstractWriter {
 				itemWriter.writeToStream(outputStream, progress);
 			}
 		};
-		return backupHelper.uploadFileSync(fileName, itemWriter.getItem().getType().name(), streamWriter, listener);
+		return backupHelper.uploadFileSync(fileName, itemWriter.getItem().getType().name(), streamWriter,
+				getUploadFileListener(itemWriter.getItem()));
 	}
 
 	private String uploadDirWithFiles(@NonNull SettingsItemWriter<? extends SettingsItem> itemWriter,
@@ -108,4 +125,35 @@ public class NetworkWriter implements AbstractWriter {
 		return error;
 	}
 
+	private OnUploadFileListener getUploadFileListener(final @NonNull SettingsItem item) {
+		return new OnUploadFileListener() {
+
+			@Override
+			public void onFileUploadStarted(@NonNull String type, @NonNull String fileName, int work) {
+				if (listener != null) {
+					listener.onItemFileUploadStarted(item, fileName, work);
+				}
+			}
+
+			@Override
+			public void onFileUploadProgress(@NonNull String type, @NonNull String fileName, int progress, int deltaWork) {
+				if (listener != null) {
+					listener.onItemFileUploadProgress(item, fileName, progress, deltaWork);
+				}
+			}
+
+			@Override
+			public void onFileUploadDone(@NonNull String type, @NonNull String fileName, long uploadTime, @Nullable String error) {
+				if (item instanceof FileSettingsItem) {
+					String itemFileName = BackupHelper.getFileItemName((FileSettingsItem) item);
+					if (backupHelper.getApp().getAppPath(itemFileName).isDirectory()) {
+						backupHelper.updateFileUploadTime(item.getType().name(), itemFileName, uploadTime);
+					}
+				}
+				if (listener != null) {
+					listener.onItemFileUploadDone(item, fileName, uploadTime, error);
+				}
+			}
+		};
+	}
 }

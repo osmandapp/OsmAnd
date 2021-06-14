@@ -2687,7 +2687,7 @@
     <string name="audionotes_plugin_description">Tee reisi ajal heli-, pildi- või videomärkmeid, kasutades kas kaardi nuppu või otse kontekstimenüüd.</string>
     <string name="osmand_parking_plugin_description">Võimaldab registreerida oma auto parkimiskoha ja jälgida järelejäänud parkimisaega.
 \nNii asukoht kui aeg on nähtavad nii OsmAnd armatuurlaual kui kaardi vidinas. Meeldetuletust saab lisada Androidi kalendrisse.</string>
-    <string name="unit_of_length_descr">Muuda kauguse mõõtmise ühikuid.</string>
+    <string name="unit_of_length_descr">Muuda pikkusühikuid.</string>
     <string name="osmand_distance_planning_plugin_description">Selleks, et reise kavandada ja punktide vahelist kaugust mõõta, loo teekondi kaardil koputades või olemasolevaid GPX-faile kasutades, Tulemusi saad salvestada GPX-failina, mida on hiljem võimalik juhendamiseks kasutada.</string>
     <string name="osmand_accessibility_description">Teeb seadme erivajadusega kasutajatele mõeldud funktsioonid otse OsmAndis kättesaadavaks. See lihtsustab näiteks kõnesünteesi häälte kõnekiiruse reguleerimist, ekraanil navigeerimise suuna seadistamist, rulliku kasutamist suurenduse juhtimiseks või kõnesünteesi tagasisidet, näiteks oma asukoha automaatseks teatamiseks.</string>
     <string name="osm_editing_plugin_description">Tee OsmAnd\'i abil OSM\'i kaastöid, näiteks loo või muuda OSM\'i huvipunkte, ava või kommenteeri OSM\'i märkmeid ning lisa salvestatud GPX faile. Selleks sisesta oma OSM\'i kasutajanimi ja salasõna. OSM on kogukonna juhitud globaalne vaba litsentsi alusel avaldatud kaardistamisprojekt.</string>
@@ -4062,4 +4062,28 @@
     <string name="cloud_email_already_registered">Selle postiaadressiga konto on juba registreeritud.</string>
     <string name="resend_verification_code">Saada kood uuesti</string>
     <string name="verification_code_missing">Ma ei saanud kinnituskoodi</string>
+    <string name="backup_complete">Varukoopia on tehtud</string>
+    <string name="backup_now">Varunda nüüd</string>
+    <string name="make_backup_descr">Selles seadmed leiduvates andmetes on palju muudatusi. Vältimaks võimalikku andmekadu, palun tee neist varukoopia.</string>
+    <string name="make_backup">Tee varukoopia</string>
+    <string name="backup_conflicts">Versioonide erinevused</string>
+    <string name="backup_confilcts_descr">Kuna serveris leiduv versioon on uuem, siis mõned failid jäid serverisse üleslaadimata.</string>
+    <string name="backup_view_conflicts">Vaata versioonide erinevusi</string>
+    <string name="backup_delete_all_data_descr">Kustutame kõik OsmAnd Cloud\'is leiduvad andmed. Kohalikus seadmes leiduvad andmed jäävad muutmata.</string>
+    <string name="backup_no_internet_descr">Kontrolli oma võrguühendust ja proovi allalaadimist uuesti.</string>
+    <string name="backup_pause_all">Peata kõik</string>
+    <string name="upload_local_version">Laadi üles kohalik versioon</string>
+    <string name="download_server_version">Laadi alla serveris leiduv versioon</string>
+    <string name="shared_string_logout">Logi välja</string>
+    <string name="backup_delete_all_data">Kustuta kõik minu andmed</string>
+    <string name="backup_delete_all_data_warning">Sa oled kustutamas kõik hiljuti OsmAnd Cloud\'i varundatud andmed, sealhulgas versioonide ajaloo.
+\n
+\nNende kustutatud andmete taastamine pole võimalik.</string>
+    <string name="backup_danger_zone">Hoiatus</string>
+    <string name="backup_delete_old_data_descr">Sinu andmete viimane versioon on varundatud OsmAnd Cloud\'is</string>
+    <string name="backup_delete_old_data">Kustuta vanad versioonid</string>
+    <string name="delete_all_confirmation">Jah, kustuta kõik</string>
+    <string name="backup_data">Andmete varundamine</string>
+    <string name="select_backup_data_descr">Vali varundatavad andmed ja kaustad.</string>
+    <string name="select_nav_profile_dialog_message">„Navigatsioonitüüp“ määrab teekonna koostamise viisi. Saad valida võrguühenduseta ja võrgupõhiste marsruutimismootorite vahel.</string>
 </resources>

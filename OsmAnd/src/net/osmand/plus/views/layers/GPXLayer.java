@@ -786,7 +786,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			return scaleType;
 		} else {
 			if (isCurrentTrack) {
-				currentTrackScaleType.set(null);
+				return null;
 			} else {
 				gpxDbHelper.updateGradientScaleType(dataItem, null);
 			}

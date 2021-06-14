@@ -8,6 +8,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.backup.BackupHelper.OnDownloadFileListListener;
+import net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.SettingsItemsFactory;
@@ -40,22 +41,27 @@ class BackupImporter {
 
 	private final BackupHelper backupHelper;
 
+	public static class CollectItemsResult {
+		public List<SettingsItem> items;
+		public List<RemoteFile> remoteFiles;
+	}
+
 	BackupImporter(@NonNull BackupHelper backupHelper) {
 		this.backupHelper = backupHelper;
 	}
 
-	List<SettingsItem> collectItems(boolean readItems) throws IllegalArgumentException, IOException {
-		List<SettingsItem> result = new ArrayList<>();
+	@NonNull
+	CollectItemsResult collectItems(boolean readItems) throws IllegalArgumentException, IOException {
+		CollectItemsResult result = new CollectItemsResult();
 		StringBuilder error = new StringBuilder();
 		try {
 			backupHelper.downloadFileListSync(new OnDownloadFileListListener() {
 				@Override
 				public void onDownloadFileList(int status, @Nullable String message, @NonNull List<RemoteFile> remoteFiles) {
 					if (status == BackupHelper.STATUS_SUCCESS) {
+						result.remoteFiles = remoteFiles;
 						try {
-							backupHelper.setRemoteFiles(remoteFiles);
-							List<SettingsItem> items = getRemoteItems(remoteFiles, readItems);
-							result.addAll(items);
+							result.items = getRemoteItems(remoteFiles, readItems);
 						} catch (IOException e) {
 							error.append(e.getMessage());
 						}
@@ -73,25 +79,28 @@ class BackupImporter {
 		return result;
 	}
 
-	void importItems(@NonNull List<SettingsItem> items) throws IllegalArgumentException {
+	void importItems(@NonNull List<SettingsItem> items, boolean forceReadData) throws IllegalArgumentException {
 		if (Algorithms.isEmpty(items)) {
 			throw new IllegalArgumentException("No items");
 		}
-		List<RemoteFile> remoteFiles = backupHelper.getRemoteFiles();
+		List<RemoteFile> remoteFiles = backupHelper.getBackup().getRemoteFiles(RemoteFilesType.UNIQUE);
 		if (Algorithms.isEmpty(remoteFiles)) {
 			throw new IllegalArgumentException("No remote files");
 		}
 		OsmandApplication app = backupHelper.getApp();
 		File tempDir = FileUtils.getTempDir(app);
+		Map<RemoteFile, SettingsItem> remoteFileItems = new HashMap<>();
 		for (RemoteFile remoteFile : remoteFiles) {
 			SettingsItem item = null;
 			for (SettingsItem settingsItem : items) {
-				if (settingsItem.equals(remoteFile.item)) {
+				String fileName = remoteFile.item != null ? remoteFile.item.getFileName() : null;
+				if (fileName != null && settingsItem.applyFileName(fileName)) {
 					item = settingsItem;
+					remoteFileItems.put(remoteFile, item);
 					break;
 				}
 			}
-			if (item != null && !item.shouldReadOnCollecting()) {
+			if (item != null && (!item.shouldReadOnCollecting() || forceReadData)) {
 				FileInputStream is = null;
 				try {
 					SettingsItemReader<? extends SettingsItem> reader = item.getReader();
@@ -103,7 +112,18 @@ class BackupImporter {
 						Map<File, String> errors = backupHelper.downloadFilesSync(map, null);
 						if (errors.isEmpty()) {
 							is = new FileInputStream(tempFile);
-							reader.readFromStream(is, fileName);
+							reader.readFromStream(is, remoteFile.getName());
+							if (forceReadData) {
+								item.apply();
+							}
+							backupHelper.updateFileUploadTime(remoteFile.getType(), remoteFile.getName(), remoteFile.getClienttimems());
+							if (item instanceof FileSettingsItem) {
+								String itemFileName = BackupHelper.getFileItemName((FileSettingsItem) item);
+								if (app.getAppPath(itemFileName).isDirectory()) {
+									backupHelper.updateFileUploadTime(item.getType().name(), itemFileName,
+											remoteFile.getClienttimems());
+								}
+							}
 						} else {
 							throw new IOException("Error reading temp item file " + fileName + ": " +
 									errors.values().iterator().next());
@@ -124,12 +144,17 @@ class BackupImporter {
 				}
 			}
 		}
-		backupHelper.setRemoteFiles(null);
+		for (Entry<RemoteFile, SettingsItem> fileItem : remoteFileItems.entrySet()) {
+			fileItem.getValue().setLocalModifiedTime(fileItem.getKey().getClienttimems());
+		}
 	}
 
 	@NonNull
 	private List<SettingsItem> getRemoteItems(@NonNull List<RemoteFile> remoteFiles, boolean readItems) throws IllegalArgumentException, IOException {
 		List<SettingsItem> items = new ArrayList<>();
+		if (remoteFiles.isEmpty()) {
+			return items;
+		}
 		try {
 			JSONObject json = new JSONObject();
 			JSONArray itemsJson = new JSONArray();
@@ -214,6 +239,9 @@ class BackupImporter {
 	private RemoteFile getItemRemoteFile(@NonNull SettingsItem item, @NonNull Collection<RemoteFile> remoteFiles) {
 		String fileName = item.getFileName();
 		if (!Algorithms.isEmpty(fileName)) {
+			if (fileName.charAt(0) != '/') {
+				fileName = "/" + fileName;
+			}
 			if (item instanceof GpxSettingsItem) {
 				GpxSettingsItem gpxItem = (GpxSettingsItem) item;
 				String folder = gpxItem.getSubtype().getSubtypeFolder();
@@ -221,12 +249,12 @@ class BackupImporter {
 					folder = "/" + folder;
 				}
 				if (fileName.startsWith(folder)) {
-					fileName = fileName.substring(folder.length());
+					fileName = fileName.substring(folder.length() - 1);
 				}
 			}
 			for (RemoteFile remoteFile : remoteFiles) {
 				String remoteFileName = remoteFile.getTypeNamePath();
-				String typeFileName = remoteFile.getType() + (fileName.charAt(0) == '/' ? fileName : "/" + fileName);
+				String typeFileName = remoteFile.getType() + fileName;
 				if (remoteFileName.equals(typeFileName) || remoteFileName.startsWith(typeFileName + "/")) {
 					return remoteFile;
 				}
@@ -242,11 +270,20 @@ class BackupImporter {
 			String fileName = remoteFile.getName();
 			fileName = fileName.substring(0, fileName.length() - INFO_EXT.length());
 			String type = remoteFile.getType();
+			JSONObject itemJson = new JSONObject();
+			itemJson.put("type", type);
 			if (SettingsItemType.GPX.name().equals(type)) {
 				fileName = FileSubtype.GPX.getSubtypeFolder() + fileName;
 			}
-			JSONObject itemJson = new JSONObject();
-			itemJson.put("type", type);
+			if (SettingsItemType.PROFILE.name().equals(type)) {
+				JSONObject appMode = new JSONObject();
+				String name = fileName.replaceFirst("profile_", "");
+				if (name.endsWith(".json")) {
+					name = name.substring(0, name.length() - 5);
+				}
+				appMode.put("stringKey", name);
+				itemJson.put("appMode", appMode);
+			}
 			itemJson.put("file", fileName);
 			itemsJson.put(itemJson);
 		}

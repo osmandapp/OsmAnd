@@ -3561,7 +3561,7 @@ Lon %2$s</string>
 \n
 \n A subscrición é renovada  de xeito automático, a menos que sexa desbotada antes da data de renovación. A túa conta será cobrada polo período de renovación (mes/trimestre/ano) soamente na data de renovación.
 \n
-\n Podes xestionar e desbotar as túas subscricións entrando nos axustes da Google Play."</string>
+\nPodes xestionar e desbotar as túas subscricións entrando nos axustes da Google Play."</string>
     <string name="search_poi_types">Procurar tipos de PDI</string>
     <string name="search_poi_types_descr">Combina tipos de PDI de diferentes categorías. Preme en \"trocar\" para marcar todo, preme o lado esquerdo para escoller unha categoría.</string>
     <string name="download_unsupported_action">Acción %1$s non admitida</string>

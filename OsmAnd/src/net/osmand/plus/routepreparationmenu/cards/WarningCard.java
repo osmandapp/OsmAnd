@@ -18,7 +18,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.util.Algorithms;
 
-public abstract class WarningCard extends BaseCard {
+public abstract class WarningCard extends MapBaseCard {
 
 	protected int imageId;
 	protected Drawable imageDrawable;

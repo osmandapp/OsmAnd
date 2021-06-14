@@ -56,8 +56,13 @@ public class AvoidRoadsSettingsItem extends CollectionSettingsItem<AvoidRoadInfo
 	}
 
 	@Override
-	protected long getLocalModifiedTime() { // TODO
-		return 0;
+	public long getLocalModifiedTime() {
+		return specificRoads.getLastModifiedTime();
+	}
+
+	@Override
+	public void setLocalModifiedTime(long lastModifiedTime) {
+		specificRoads.setLastModifiedTime(lastModifiedTime);
 	}
 
 	@NonNull
@@ -69,7 +74,7 @@ public class AvoidRoadsSettingsItem extends CollectionSettingsItem<AvoidRoadInfo
 	@NonNull
 	@Override
 	public String getPublicName(@NonNull Context ctx) {
-		return "avoid_roads";
+		return ctx.getString(R.string.avoid_road);
 	}
 
 	@Override

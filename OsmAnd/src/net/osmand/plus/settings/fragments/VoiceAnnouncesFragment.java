@@ -98,8 +98,6 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 		Preference languageSetting = findPreference("voice_provider");
 		languageSetting.setIcon(getContentIcon(R.drawable.ic_action_map_language));
 
-		setupSpeedLimitExceedPref();
-
 		setupKeepInformingPref();
 		setupArrivalAnnouncementPref();
 
@@ -109,6 +107,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 		enableDisablePreferences(!settings.VOICE_MUTE.getModeValue(getSelectedAppMode()));
 		setupSpeakCamerasPref();
 		setupSpeedCamerasAlert();
+		setupSpeedLimitExceedPref();
 	}
 
 	private void setupSpeedLimitExceedPref() {
@@ -130,6 +129,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 		ListPreferenceEx voiceProvider = findPreference(settings.SPEED_LIMIT_EXCEED_KMH.getId());
 		voiceProvider.setEntries(names);
 		voiceProvider.setEntryValues(valuesKmh);
+		voiceProvider.setEnabled(settings.SPEAK_SPEED_LIMIT.getModeValue(getSelectedAppMode()));
 	}
 
 	private void setupKeepInformingPref() {
