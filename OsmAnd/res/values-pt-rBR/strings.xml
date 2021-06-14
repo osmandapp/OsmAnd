@@ -1679,7 +1679,7 @@
     <string name="osn_close_dialog_error">Não foi possível fechar a nota.</string>
     <string name="shared_string_commit">Enviar</string>
     <string name="context_menu_item_delete_waypoint">Apagar ponto de trajeto GPX\?</string>
-    <string name="context_menu_item_edit_waypoint">Editar ponto de trajeto GPX</string>
+    <string name="context_menu_item_edit_waypoint">Editar ponto GPX</string>
     <string name="shared_string_location">Localização</string>
     <string name="share_osm_edits_subject">Edições no OSM compartilhadas via OsmAnd</string>
     <string name="lang_nds">Baixo-alemão</string>
@@ -2288,7 +2288,7 @@
     <string name="access_collapsed_list">Lista recolhida</string>
     <string name="access_tree_list">Lista-árvore</string>
     <string name="no_map_markers_found">Por favor, adicione marcadores de mapa pelo mapa</string>
-    <string name="no_waypoints_found">Não há pontos de passagem encontrados</string>
+    <string name="no_waypoints_found">Não há pontos de rota</string>
     <string name="storage_permission_restart_is_required">O aplicativo agora pode gravar no armazenamento externo, mas precisa ser reiniciado para tal.</string>
     <string name="shared_string_move_up">Mover ↑</string>
     <string name="shared_string_move_down">Mover ↓</string>
@@ -3546,9 +3546,9 @@
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="osm_live_payment_subscription_management">O pagamento será cobrado na sua conta do Google Play na confirmação da compra.
 \n
-\n  A assinatura é renovada automaticamente, a menos que seja cancelada antes da data de renovação. Sua conta será cobrada pelo período de renovação (mês/três meses/ano) somente na data de renovação.
+\nA assinatura é renovada automaticamente, a menos que seja cancelada antes da data de renovação. Sua conta será cobrada pelo período de renovação (mês/três meses/ano) somente na data de renovação.
 \n
-\n  Você pode gerenciar e cancelar suas assinaturas acessando as configurações do Google Play.</string>
+\nVocê pode gerenciar e cancelar suas assinaturas acessando as configurações do Google Play.</string>
     <string name="search_poi_types">Pesquisar tipos de POI</string>
     <string name="search_poi_types_descr">Combine tipos de POI de diferentes categorias. Toque em para selecionar tudo, toque em lado esquerdo para selecionar a categoria.</string>
     <string name="tracker_item">Rastreador do OsmAnd</string>
@@ -4169,4 +4169,6 @@
     <string name="grey_color_slope">A cor cinza é usada quando a inclinação é indefinida.</string>
     <string name="backup_version_history">Histórico de versão</string>
     <string name="backup_storage_taken">Armazenamento ocupado</string>
+    <string name="backup_version_history_delete_descr">Você deseja excluir o histórico de alterações para tipos desabilitados da nuvem\?</string>
+    <string name="delete_version_history">Excluir histórico de versão</string>
 </resources>
