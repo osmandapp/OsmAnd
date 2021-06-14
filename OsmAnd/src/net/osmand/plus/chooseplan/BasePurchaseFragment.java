@@ -3,12 +3,8 @@ package net.osmand.plus.chooseplan;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -22,6 +18,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
@@ -172,31 +169,45 @@ public abstract class BasePurchaseFragment extends BaseOsmAndDialogFragment {
 		return null;
 	}
 
-	protected void setupButtonBackground(@NonNull View v) {
-		setupButtonBackground(v, ContextCompat.getColor(themedCtx, getActiveColorId(nightMode)));
+	protected void setupRoundedBackground(@NonNull View v) {
+		setupRoundedBackground(v, ContextCompat.getColor(themedCtx, getActiveColorId(nightMode)));
 	}
 
-	protected void setupButtonBackground(@NonNull View v, @ColorInt int colorNoAlpha) {
-		int colorAlpha = UiUtilities.getColorWithAlpha(colorNoAlpha, 0.1f);
-		Drawable normal = createRoundedDrawable(colorAlpha);
-		Drawable selectable = createSelectableDrawable(colorAlpha);
-		Drawable[] layers = {normal, selectable};
-		LayerDrawable layerDrawable = new LayerDrawable(layers);
-		AndroidUtils.setBackground(v, layerDrawable);
+	protected void setupRoundedBackground(@NonNull View v, @ColorInt int color) {
+		Drawable normal = createRoundedDrawable(getAlphaColor(color, 0.1f));
+		setupRoundedBackground(v, normal, color);
 	}
 
-	protected Drawable createSelectableDrawable(@ColorInt int color) {
-		Drawable normal = new ColorDrawable(Color.TRANSPARENT);
-		Drawable selectable = createRoundedDrawable(color);
-		// todo investigate
-		// UiUtilities.getColoredSelectableDrawable(app, colorAlpha, 1.0f)
-		return AndroidUtils.createPressedStateListDrawable(normal, selectable);
+	protected void setupRoundedBackground(@NonNull View v,
+	                                      @NonNull Drawable normal,
+	                                      @ColorInt int color) {
+		Drawable selected = createRoundedDrawable(getAlphaColor(color, 0.5f));
+		setupRoundedBackground(v, normal, selected);
+	}
+
+	protected void setupRoundedBackground(@NonNull View v,
+	                                      @NonNull Drawable normal,
+	                                      @NonNull Drawable selected) {
+		Drawable background;
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+			Drawable[] layers = new Drawable[]{normal, getRippleDrawable()};
+			background = new LayerDrawable(layers);
+		} else {
+			background = AndroidUtils.createPressedStateListDrawable(normal, selected);
+		}
+		AndroidUtils.setBackground(v, background);
 	}
 
 	protected Drawable getActiveStrokeDrawable() {
 		return app.getUIUtilities().getIcon(nightMode ?
 				R.drawable.btn_background_stroked_active_dark :
 				R.drawable.btn_background_stroked_active_light);
+	}
+
+	protected Drawable getRippleDrawable() {
+		return AppCompatResources.getDrawable(app, nightMode ?
+				R.drawable.purchase_button_ripple_dark :
+				R.drawable.purchase_button_ripple_light);
 	}
 
 	protected void setupIconBackground(@NonNull View v,
@@ -207,10 +218,6 @@ public abstract class BasePurchaseFragment extends BaseOsmAndDialogFragment {
 
 	protected Drawable createRoundedDrawable(@ColorInt int color) {
 		return UiUtilities.createTintedDrawable(app, R.drawable.rectangle_rounded, color);
-	}
-
-	protected int getAlphaColor(@ColorInt int colorNoAlpha, float ratio) {
-		return UiUtilities.getColorWithAlpha(colorNoAlpha, ratio);
 	}
 
 	protected void bindFeatureItem(@NonNull View itemView,
@@ -224,13 +231,8 @@ public abstract class BasePurchaseFragment extends BaseOsmAndDialogFragment {
 		tvTitle.setText(getString(titleId));
 	}
 
-	protected void openUrl(@NonNull String url) {
-		Intent i = new Intent(Intent.ACTION_VIEW);
-		i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		i.setData(Uri.parse(url));
-		if (AndroidUtils.isIntentSafe(app, i)) {
-			app.startActivity(i);
-		}
+	protected int getAlphaColor(@ColorInt int colorNoAlpha, float ratio) {
+		return UiUtilities.getColorWithAlpha(colorNoAlpha, ratio);
 	}
 
 	protected abstract void initData(@Nullable Bundle args);

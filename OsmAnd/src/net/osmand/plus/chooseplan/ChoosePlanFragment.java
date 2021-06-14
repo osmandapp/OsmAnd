@@ -134,7 +134,7 @@ public class ChoosePlanFragment extends BasePurchaseFragment {
 	private void setupLaterButton() {
 		View button = view.findViewById(R.id.button_later);
 		button.setOnClickListener(v -> dismiss());
-		setupButtonBackground(button);
+		setupRoundedBackground(button);
 	}
 
 	private void createTroubleshootingCard() {
@@ -195,7 +195,7 @@ public class ChoosePlanFragment extends BasePurchaseFragment {
 			int colorWithAlpha = getAlphaColor(activeColor, 0.1f);
 			int bgColor = selected ? colorWithAlpha : Color.TRANSPARENT;
 
-			Drawable selectableBg = UiUtilities.getColoredSelectableDrawable(app, colorWithAlpha, 1.0f);
+			Drawable selectableBg = UiUtilities.getColoredSelectableDrawable(app, activeColor, 0.5f);
 			Drawable[] layers = {new ColorDrawable(bgColor), selectableBg};
 			LayerDrawable layerDrawable = new LayerDrawable(layers);
 			AndroidUtils.setBackground(v, layerDrawable);
@@ -244,7 +244,7 @@ public class ChoosePlanFragment extends BasePurchaseFragment {
 		ImageView ivIcon = v.findViewById(R.id.icon);
 		ivIcon.setImageResource(iconId);
 
-		setupButtonBackground(v, colorNoAlpha);
+		setupRoundedBackground(v, colorNoAlpha);
 		v.setOnClickListener(l);
 		v.setEnabled(available);
 	}

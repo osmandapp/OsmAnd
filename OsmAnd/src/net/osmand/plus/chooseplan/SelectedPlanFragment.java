@@ -1,5 +1,7 @@
 package net.osmand.plus.chooseplan;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
@@ -144,23 +146,23 @@ public abstract class SelectedPlanFragment extends BasePurchaseFragment {
 		for (int i = 0; i < container.getChildCount(); i++) {
 			View itemView = container.getChildAt(i);
 			ImageView ivCheckmark = itemView.findViewById(R.id.icon);
-			boolean selected = itemView.getTag().equals(selectedItemTag);
 
-			if (selected) {
+			int colorNoAlpha = ContextCompat.getColor(app, getActiveColorId(nightMode));
+			Drawable normal;
+			if (itemView.getTag().equals(selectedItemTag)) {
 				ivCheckmark.setImageDrawable(getCheckmark());
 
 				Drawable stroke = getActiveStrokeDrawable();
-				int colorNoAlpha = ContextCompat.getColor(app, getActiveColorId(nightMode));
 				int colorWithAlpha = getAlphaColor(colorNoAlpha, 0.1f);
 
 				Drawable bgDrawable = app.getUIUtilities().getPaintedIcon(R.drawable.rectangle_rounded, colorWithAlpha);
 				Drawable[] layers = {bgDrawable, stroke};
-				LayerDrawable layerDrawable = new LayerDrawable(layers);
-				AndroidUtils.setBackground(itemView, layerDrawable);
+				normal = new LayerDrawable(layers);
 			} else {
 				ivCheckmark.setImageDrawable(getEmptyCheckmark());
-				itemView.setBackground(null);
+				normal = new ColorDrawable(Color.TRANSPARENT);
 			}
+			setupRoundedBackground(itemView, normal, colorNoAlpha);
 		}
 	}
 
@@ -174,12 +176,16 @@ public abstract class SelectedPlanFragment extends BasePurchaseFragment {
 		tvDesc.setText("€ 11,99 / year");
 
 		itemView.setOnClickListener(v -> app.showShortToastMessage("Purchase"));
+
+		int activeColor = ContextCompat.getColor(app, getActiveColorId(nightMode));
+		Drawable normal = new ColorDrawable(activeColor);
+		setupRoundedBackground(itemView, normal, activeColor);
 	}
 
 	private void setupRestoreButton() {
 		View button = view.findViewById(R.id.button_restore);
 		button.setOnClickListener(v -> purchaseHelper.requestInventory());
-		setupButtonBackground(button);
+		setupRoundedBackground(button);
 	}
 
 	private void createIncludesList() {
