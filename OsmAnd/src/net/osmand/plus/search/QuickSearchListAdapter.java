@@ -29,13 +29,12 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
-import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
+import net.osmand.plus.chooseplan.BasePurchaseFragment.OsmAndFeature;
+import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.search.listitems.QuickSearchBannerListItem;
-import net.osmand.plus.chooseplan.ChoosePlanDialogFragment.ChoosePlanDialogType;
 import net.osmand.plus.mapcontextmenu.MenuController;
-import net.osmand.plus.search.listitems.QuickSearchBannerListItem;
 import net.osmand.plus.search.listitems.QuickSearchHeaderListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItemType;
@@ -285,12 +284,8 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		LinearLayout view = getLinearLayout(convertView, R.layout.read_wikipedia_ofline_banner);
 		View btnGet = view.findViewById(R.id.btn_get);
 		if (btnGet != null) {
-			btnGet.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					ChoosePlanDialogFragment.showDialogInstance(app, activity.getSupportFragmentManager(), ChoosePlanDialogType.WIKIPEDIA);
-				}
-			});
+			btnGet.setOnClickListener(
+					v -> ChoosePlanFragment.showInstance(activity, OsmAndFeature.WIKIPEDIA));
 		}
 		return view;
 	}

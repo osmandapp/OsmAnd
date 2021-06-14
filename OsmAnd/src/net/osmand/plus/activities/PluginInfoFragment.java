@@ -30,8 +30,8 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
-import net.osmand.plus.chooseplan.ChoosePlanDialogFragment.ChoosePlanDialogType;
+import net.osmand.plus.chooseplan.BasePurchaseFragment.OsmAndFeature;
+import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.dialogs.PluginInstalledBottomSheetDialog.PluginStateListener;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
@@ -167,10 +167,7 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 			public void onClick(View v) {
 				try {
 					if (plugin instanceof SRTMPlugin) {
-						FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-						if (fragmentManager != null) {
-							ChoosePlanDialogFragment.showDialogInstance(app, fragmentManager, ChoosePlanDialogType.HILLSHADE_SRTM_PLUGIN);
-						}
+						ChoosePlanFragment.showInstance(requireActivity(), OsmAndFeature.TERRAIN);
 					} else {
 						startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL())));
 					}

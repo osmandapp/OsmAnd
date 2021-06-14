@@ -21,8 +21,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
-import net.osmand.plus.chooseplan.ChoosePlanDialogFragment.ChoosePlanDialogType;
+import net.osmand.plus.chooseplan.BasePurchaseFragment.OsmAndFeature;
+import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
@@ -306,9 +306,9 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 				public void onIndexItemClick(IndexItem item) {
 					if ((item.getType() == DownloadActivityType.WIKIPEDIA_FILE
 							|| item.getType() == DownloadActivityType.TRAVEL_FILE) && !Version.isPaidVersion(app)) {
-						FragmentManager fm = getFragmentManager();
-						if (fm != null) {
-							ChoosePlanDialogFragment.showDialogInstance(app, fm, ChoosePlanDialogType.WIKIPEDIA);
+						FragmentActivity activity = getActivity();
+						if (activity != null) {
+							ChoosePlanFragment.showInstance(activity, OsmAndFeature.WIKIPEDIA);
 						}
 					} else {
 						DownloadIndexesThread downloadThread = app.getDownloadThread();
@@ -362,9 +362,9 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 				public void onIndexItemClick(IndexItem item) {
 					if ((item.getType() == DownloadActivityType.WIKIPEDIA_FILE
 							|| item.getType() == DownloadActivityType.TRAVEL_FILE) && !Version.isPaidVersion(app)) {
-						FragmentManager fm = getFragmentManager();
-						if (fm != null) {
-							ChoosePlanDialogFragment.showDialogInstance(app, fm, ChoosePlanDialogType.WIKIPEDIA);
+						FragmentActivity activity = getActivity();
+						if (activity != null) {
+							ChoosePlanFragment.showInstance(activity, OsmAndFeature.WIKIPEDIA);
 						}
 					} else {
 						DownloadIndexesThread downloadThread = app.getDownloadThread();

@@ -8,12 +8,12 @@ import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.chooseplan.ChoosePlanDialogFragment.ChoosePlanDialogType;
+import net.osmand.plus.chooseplan.BasePurchaseFragment.OsmAndFeature;
+import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResources;
@@ -140,8 +140,7 @@ public class ContourLinesMenu {
 						}
 					});
 				} else if (itemId == R.string.srtm_plugin_name) {
-					ChoosePlanDialogFragment.showDialogInstance(mapActivity.getMyApplication(),
-							mapActivity.getSupportFragmentManager(), ChoosePlanDialogType.HILLSHADE_SRTM_PLUGIN);
+					ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.TERRAIN);
 					closeDashboard(mapActivity);
 				} else if (contourWidthProp != null && itemId == contourWidthName.hashCode()) {
 					plugin.selectPropertyValue(mapActivity, contourWidthProp, widthPref, new Runnable() {

@@ -236,7 +236,7 @@ public abstract class OsmLiveGoneDialog extends BaseOsmAndDialogFragment {
 							dismiss();
 							FragmentActivity activity = getActivity();
 							if (activity != null) {
-								ChoosePlanDialogFragment.showDialogInstance(app, activity.getSupportFragmentManager(), ChoosePlanDialogType.SUBSCRIPTION);
+								ChoosePlanFragment.showInstance(activity, BasePurchaseFragment.OsmAndFeature.HOURLY_MAP_UPDATES);
 							}
 						}
 					});

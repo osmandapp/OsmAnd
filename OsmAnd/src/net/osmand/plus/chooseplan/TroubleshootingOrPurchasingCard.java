@@ -18,7 +18,7 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
+import net.osmand.plus.chooseplan.BasePurchaseFragment.OsmAndFeature;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
@@ -64,10 +64,8 @@ public class TroubleshootingOrPurchasingCard extends BaseCard {
 			infoDescription.setText(infoPurchases);
 
 			View osmandLive = view.findViewById(R.id.osmand_live);
-			osmandLive.setOnClickListener(v -> ChoosePlanDialogFragment.showDialogInstance(getMyApplication(),
-					activity.getSupportFragmentManager(),
-					ChoosePlanDialogFragment.ChoosePlanDialogType.SUBSCRIPTION));
-
+			osmandLive.setOnClickListener(
+					v -> ChoosePlanFragment.showInstance(activity, OsmAndFeature.HOURLY_MAP_UPDATES));
 			CardView getItButtonContainer = view.findViewById(R.id.card_view);
 			int colorRes = nightMode ? R.color.switch_button_active_dark : R.color.switch_button_active_light;
 			getItButtonContainer.setCardBackgroundColor(ContextCompat.getColor(activity, colorRes));

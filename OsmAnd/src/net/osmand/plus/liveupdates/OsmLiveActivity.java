@@ -17,9 +17,9 @@ import com.google.android.material.tabs.TabLayout;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
+import net.osmand.plus.chooseplan.BasePurchaseFragment.OsmAndFeature;
 import net.osmand.plus.chooseplan.ChoosePlanDialogFragment.ChoosePlanDialogListener;
-import net.osmand.plus.chooseplan.ChoosePlanDialogFragment.ChoosePlanDialogType;
+import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.download.AbstractDownloadActivity;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 
@@ -80,7 +80,7 @@ public class OsmLiveActivity extends AbstractDownloadActivity implements ChooseP
 	protected void onResume() {
 		super.onResume();
 		if (!InAppPurchaseHelper.isSubscribedToLiveUpdates(getMyApplication()) && showSettingOnly) {
-			ChoosePlanDialogFragment.showDialogInstance(getMyApplication(), getSupportFragmentManager(), ChoosePlanDialogType.SUBSCRIPTION);
+			ChoosePlanFragment.showInstance(this, OsmAndFeature.HOURLY_MAP_UPDATES);
 		}
 	}
 

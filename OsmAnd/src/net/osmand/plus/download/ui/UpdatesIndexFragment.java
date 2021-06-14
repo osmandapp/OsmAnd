@@ -368,12 +368,8 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 								R.color.switch_button_active_dark, R.color.switch_button_active_stroke_dark);
 						CardView cardView = ((CardView) view.findViewById(R.id.card_view));
 						cardView.setCardBackgroundColor(stateList);
-						cardView.setOnClickListener(new OnClickListener() {
-							@Override
-							public void onClick(View v) {
-								ChoosePlanDialogFragment.showDialogInstance(getMyApplication(),
-										getMyActivity().getSupportFragmentManager(), ChoosePlanDialogType.SUBSCRIPTION);
-							}
+						cardView.setOnClickListener(v -> {
+							ChoosePlanFragment.showInstance(getMyActivity(), OsmAndFeature.HOURLY_MAP_UPDATES);
 						});
 					} else {
 						view = inflater.inflate(R.layout.bottom_sheet_item_with_descr_switch_and_additional_button_56dp, parent, false);
