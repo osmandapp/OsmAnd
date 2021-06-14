@@ -5,7 +5,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -36,10 +35,7 @@ import net.osmand.plus.profiles.data.ProfileDataObject;
 import net.osmand.plus.profiles.data.RoutingDataObject;
 import net.osmand.plus.profiles.data.RoutingDataUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.widgets.multistatetoggle.RadioItem;
-import net.osmand.plus.widgets.multistatetoggle.RadioItem.OnRadioItemClickListener;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
-import net.osmand.router.RoutingConfiguration;
 import net.osmand.router.RoutingConfiguration.Builder;
 import net.osmand.util.Algorithms;
 
@@ -51,12 +47,27 @@ import static net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.NONE_VEHI
 
 public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 
+	private final static String DOWNLOADED_PREDEFINED_JSON = "downloaded_predefined_json";
+	private final static String DIALOG_TYPE = "dialog_type";
+
 	private RoutingDataUtils dataUtils;
 
 	private List<ProfilesGroup> predefinedGroups;
 	private List<ProfilesGroup> profileGroups = new ArrayList<>();
-	private boolean onlineRouting = false;
-	private boolean alreadyTriedToDownload = false;
+	private boolean triedToDownload = false;
+	private DialogMode dialogMode;
+	private String predefinedJson;
+
+	public enum DialogMode {
+		OFFLINE(R.string.shared_string_offline),
+		ONLINE(R.string.shared_string_online);
+
+		DialogMode(int titleId) {
+			this.titleId = titleId;
+		}
+
+		int titleId;
+	}
 
 	public static void showInstance(@NonNull FragmentActivity activity,
 	                                @Nullable Fragment target,
@@ -72,19 +83,23 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 			fragment.setUsedOnMap(usedOnMap);
 			fragment.setAppMode(appMode);
 			fragment.setTargetFragment(target, 0);
+			boolean isOnline = OnlineRoutingEngine.isOnlineEngineKey(selectedItemKey);
+			fragment.setDialogMode(isOnline ? DialogMode.ONLINE : DialogMode.OFFLINE);
 			fragment.show(fragmentManager, TAG);
 		}
 	}
 
 	@Override
 	public void createMenuItems(@Nullable Bundle savedInstanceState) {
+		readFromBundle(savedInstanceState);
 		createHeader();
-		if (onlineRouting) {
+		if (dialogMode == DialogMode.ONLINE) {
 			if (predefinedGroups == null) {
-				if (alreadyTriedToDownload) {
+				if (triedToDownload) {
 					addNonePredefinedView();
 				} else {
 					addProgressWithTitleItem(getString(R.string.loading_list_of_routing_services));
+					tryDownloadPredefinedItems();
 				}
 			}
 			createProfilesList();
@@ -96,45 +111,64 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 		addSpaceItem(getDimen(R.dimen.empty_state_text_button_padding_top));
 	}
 
+	public void readFromBundle(Bundle savedState) {
+		if (savedState != null) {
+			if (savedState.containsKey(DIALOG_TYPE)) {
+				dialogMode = DialogMode.valueOf(savedState.getString(DIALOG_TYPE));
+			}
+			if (savedState.containsKey(DOWNLOADED_PREDEFINED_JSON)) {
+				predefinedJson = savedState.getString(DOWNLOADED_PREDEFINED_JSON);
+				predefinedGroups = getDataUtils().parsePredefinedEngines(predefinedJson);
+				refreshProfiles();
+			}
+		}
+	}
+
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		if (predefinedJson != null) {
+			outState.putString(DOWNLOADED_PREDEFINED_JSON, predefinedJson);
+		}
+		if (dialogMode != null) {
+			outState.putString(DIALOG_TYPE, dialogMode.name());
+		}
+	}
+
 	private void createHeader() {
 		items.add(new TitleItem(getString(R.string.select_nav_profile_dialog_title)));
 		items.add(new LongDescriptionItem(getString(R.string.select_nav_profile_dialog_message)));
-		TextRadioItem offline = createRadioButton(false);
-		TextRadioItem online = createRadioButton(true);
-		addToggleButton(onlineRouting ? online : offline, offline, online);
+		TextRadioItem offline = createRadioButton(DialogMode.OFFLINE);
+		TextRadioItem online = createRadioButton(DialogMode.ONLINE);
+		addToggleButton(dialogMode == DialogMode.ONLINE ? online : offline, offline, online);
 	}
 
-	private TextRadioItem createRadioButton(final boolean online) {
-		String title = getString(online ?
-				R.string.shared_string_online : R.string.shared_string_offline);
+	private TextRadioItem createRadioButton(final DialogMode mode) {
+		String title = getString(mode.titleId);
 		TextRadioItem item = new TextRadioItem(title);
-		item.setOnClickListener(new OnRadioItemClickListener() {
-			@Override
-			public boolean onRadioItemClick(RadioItem radioItem, View view) {
-				if (onlineRouting != online) {
-					onlineRouting = online;
-					predefinedGroups = null;
-					alreadyTriedToDownload = false;
-
-					if (online) {
-						getDataUtils().downloadPredefinedEngines(new CallbackWithObject<List<ProfilesGroup>>() {
-							@Override
-							public boolean processResult(final List<ProfilesGroup> result) {
-								alreadyTriedToDownload = true;
-								predefinedGroups = result;
-								refreshView();
-								return false;
-							}
-						});
-					}
-
-					refreshView();
-					return true;
-				}
-				return false;
+		item.setOnClickListener((radioItem, view) -> {
+			if (dialogMode != mode) {
+				dialogMode = mode;
+				predefinedGroups = null;
+				triedToDownload = false;
+				refreshView();
+				return true;
 			}
+			return false;
 		});
 		return item;
+	}
+
+	private void tryDownloadPredefinedItems() {
+		getDataUtils().downloadPredefinedEngines(result -> {
+			triedToDownload = true;
+			predefinedJson = result;
+			if (result != null) {
+				predefinedGroups = getDataUtils().parsePredefinedEngines(predefinedJson);
+			}
+			refreshView();
+			return true;
+		});
 	}
 
 	private void createProfilesList() {
@@ -166,34 +200,25 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 
 	private void createOfflineFooter() {
 		items.add(new LongDescriptionItem(app.getString(R.string.osmand_routing_promo)));
-		addButtonItem(R.string.import_routing_file, R.drawable.ic_action_folder, new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				MapActivity mapActivity = getMapActivity();
-				if (mapActivity == null) {
-					return;
-				}
-				mapActivity.getImportHelper().chooseFileToImport(ROUTING, new CallbackWithObject<Builder>() {
-					@Override
-					public boolean processResult(RoutingConfiguration.Builder builder) {
-						refreshView();
-						return false;
-					}
-				});
+		addButtonItem(R.string.import_routing_file, R.drawable.ic_action_folder, v -> {
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity == null) {
+				return;
 			}
+			mapActivity.getImportHelper().chooseFileToImport(ROUTING, (CallbackWithObject<Builder>) builder -> {
+				refreshView();
+				return false;
+			});
 		});
 	}
 
 	private void createOnlineFooter() {
 		items.add(new LongDescriptionItem(app.getString(R.string.osmand_online_routing_promo)));
-		addButtonItem(R.string.add_online_routing_engine, R.drawable.ic_action_plus, new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (getActivity() != null) {
-					OnlineRoutingEngineFragment.showInstance(getActivity(), getAppMode(), null);
-				}
-				dismiss();
+		addButtonItem(R.string.add_online_routing_engine, R.drawable.ic_action_plus, v -> {
+			if (getActivity() != null) {
+				OnlineRoutingEngineFragment.showInstance(getActivity(), getAppMode(), null);
 			}
+			dismiss();
 		});
 	}
 
@@ -235,14 +260,11 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 			ivEndBtnIcon.setImageDrawable(drawable);
 
 			basePart.setOnClickListener(getItemClickListener(profile));
-			endBtn.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					if (getActivity() != null) {
-						OnlineRoutingEngineFragment.showInstance(getActivity(), getAppMode(), profile.getStringKey());
-					}
-					dismiss();
+			endBtn.setOnClickListener(v -> {
+				if (getActivity() != null) {
+					OnlineRoutingEngineFragment.showInstance(getActivity(), getAppMode(), profile.getStringKey());
 				}
+				dismiss();
 			});
 		}
 		items.add(builder.create());
@@ -273,7 +295,7 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 	@Override
 	protected void refreshProfiles() {
 		profileGroups.clear();
-		if (onlineRouting) {
+		if (dialogMode == DialogMode.ONLINE) {
 			profileGroups = getDataUtils().getOnlineProfiles(predefinedGroups);
 		} else {
 			profileGroups = getDataUtils().getOfflineProfiles();
@@ -320,6 +342,10 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 			dataUtils = new RoutingDataUtils(app);
 		}
 		return dataUtils;
+	}
+
+	public void setDialogMode(DialogMode dialogMode) {
+		this.dialogMode = dialogMode;
 	}
 
 }

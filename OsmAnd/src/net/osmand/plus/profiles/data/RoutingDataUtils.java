@@ -180,29 +180,30 @@ public class RoutingDataUtils {
 				engine.getBaseUrl(), engine.getStringKey(), R.drawable.ic_world_globe_dark);
 	}
 
-	public void downloadPredefinedEngines(final CallbackWithObject<List<ProfilesGroup>> callback) {
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				List<ProfilesGroup> predefinedEngines = null;
-				try {
-					String content = app.getOnlineRoutingHelper().makeRequest(DOWNLOAD_ENGINES_URL);
-					predefinedEngines = parsePredefinedEngines(content);
-				} catch (IOException | JSONException e) {
-					LOG.error("Error trying download predefined routing engines list: " + e.getMessage());
-				}
-				final List<ProfilesGroup> predefined = predefinedEngines;
-				app.runInUIThread(new Runnable() {
-					@Override
-					public void run() {
-						callback.processResult(predefined);
-					}
-				});
+	public void downloadPredefinedEngines(final CallbackWithObject<String> callback) {
+		new Thread(() -> {
+			String content = null;
+			try {
+				content = app.getOnlineRoutingHelper().makeRequest(DOWNLOAD_ENGINES_URL);
+			} catch (IOException e) {
+				LOG.error("Error trying download predefined routing engines list: " + e.getMessage());
 			}
+			final String result = content;
+			app.runInUIThread(() -> callback.processResult(result));
 		}).start();
 	}
 
-	private List<ProfilesGroup> parsePredefinedEngines(String content) throws JSONException {
+	public List<ProfilesGroup> parsePredefinedEngines(String content) {
+		try {
+			return parsePredefinedEnginesImpl(content);
+		} catch (JSONException e) {
+			LOG.error("Error trying parse JSON: " + e.getMessage());
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	private List<ProfilesGroup> parsePredefinedEnginesImpl(String content) throws JSONException {
 		JSONObject root = new JSONObject(content);
 		JSONArray providers = root.getJSONArray(PROVIDERS);
 		List<ProfilesGroup> result = new ArrayList<>();
