@@ -3975,4 +3975,22 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="verification_code_missing">Ez dut jaso egiaztatze-koderik</string>
     <string name="verification_code_missing_description">Kodearen itxaronaldia 10 minutukoa izan daiteke; gainera, Zaborra karpeta egiaztatu dezakezu. Laguntzen ez badizu, erabili beheko botoia.</string>
     <string name="select_nav_profile_dialog_message">\"Nabigazio motak\" ibilbideak nola kalkulatzen diren arautzen du. Lineaz kanpoko eta lineako bideratze motorren artean hauta dezakezu.</string>
+    <string name="backup_delete_old_data_descr">Zure datuen uneko bertsioak OsmAnd Hodeian gordeko dira</string>
+    <string name="backup_delete_old_data_warning">Aurretik kargatutako datuen aldaketen historia ezabatzekotan zaude.
+\n
+\nDatuen uneko bertsioa zerbitzarian gordeko da, baina ezin izango duzu lehen egindako aldaketetara itzuli.</string>
+    <string name="backup_data">Datuen babeskopia</string>
+    <string name="select_backup_data_descr">Aukeratu datuak eta karpetak babeskopiarako.</string>
+    <string name="backup_restore_data_descr">Leheneratu gailuko datuak, lineako babeskopia erabilita.</string>
+    <string name="backup_restore_data">Leheneratu datuak</string>
+    <string name="restore_from_osmand_cloud">Leheneratu OsmAnd hodeitik</string>
+    <string name="choose_what_to_restore">Aukeratu zer leheneratu.</string>
+    <string name="restore_selected_data">Leheneratu hautatutako datuak</string>
+    <string name="receiving_data_from_server">Datuak jasotzen zerbitzaritik</string>
+    <string name="restore_complete">Leheneratzea burutu da</string>
+    <string name="grey_color_slope">Kolore grisa erabiltzen da malda zehaztu gabe dagoenean.</string>
+    <string name="backup_version_history">Bertsioen historia</string>
+    <string name="backup_storage_taken">Biltegiratzea</string>
+    <string name="backup_version_history_delete_descr">Desgaituta dauden moten aldaketen historia hodeitik ezabatu nahi duzu\?</string>
+    <string name="delete_version_history">Ezabatu bertsioen historia</string>
 </resources>
