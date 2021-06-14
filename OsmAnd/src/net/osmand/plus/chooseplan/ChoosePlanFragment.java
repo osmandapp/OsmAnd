@@ -98,6 +98,22 @@ public class ChoosePlanFragment extends BasePurchaseFragment {
 
 		ImageView restoreBtn = view.findViewById(R.id.button_reset);
 		restoreBtn.setOnClickListener(v -> purchaseHelper.requestInventory());
+
+		scrollView.getViewTreeObserver().addOnScrollChangedListener(this::updateToolbar);
+	}
+
+	private void updateToolbar() {
+		View shadow = view.findViewById(R.id.toolbar_shadow);
+		View header = view.findViewById(R.id.header);
+		TextView tvTitle = view.findViewById(R.id.toolbar_title);
+		if (scrollView.getScrollY() > header.getBottom()) {
+			shadow.setVisibility(View.VISIBLE);
+			tvTitle.setText(getString(selectedFeature.getHeaderTitleId()));
+
+		} else {
+			shadow.setVisibility(View.GONE);
+			tvTitle.setText("");
+		}
 	}
 
 	private void setupHeaderIconBackground() {
@@ -160,6 +176,7 @@ public class ChoosePlanFragment extends BasePurchaseFragment {
 
 	private void fullUpdateView() {
 		updateHeader();
+		updateToolbar();
 		updateListSelection();
 		updateContinueButtons();
 	}

@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
@@ -27,6 +28,7 @@ import java.util.List;
 import java.util.Map;
 
 import static net.osmand.plus.liveupdates.LiveUpdatesSettingsBottomSheet.getActiveColorId;
+import static net.osmand.plus.liveupdates.LiveUpdatesSettingsBottomSheet.getActiveTabTextColorId;
 
 public abstract class SelectedPlanFragment extends BasePurchaseFragment {
 
@@ -41,7 +43,7 @@ public abstract class SelectedPlanFragment extends BasePurchaseFragment {
 
 	@Override
 	protected int getLayoutId() {
-		return R.layout.fragment_osmand_purchase_base;
+		return R.layout.fragment_selected_plan;
 	}
 
 	@Override
@@ -54,6 +56,11 @@ public abstract class SelectedPlanFragment extends BasePurchaseFragment {
 		setupApplyButton();
 		setupRestoreButton();
 		createIncludesList();
+		fullUpdate();
+	}
+
+	private void fullUpdate() {
+		updateToolbar();
 	}
 
 	private void setupToolbar() {
@@ -64,6 +71,34 @@ public abstract class SelectedPlanFragment extends BasePurchaseFragment {
 		ImageView helpBtn = view.findViewById(R.id.button_help);
 		helpBtn.setOnClickListener(v ->
 				WikipediaDialogFragment.showFullArticle(requireActivity(), Uri.parse(PURCHASES_INFO), nightMode));
+
+		scrollView.getViewTreeObserver().addOnScrollChangedListener(this::updateToolbar);
+	}
+
+	private void updateToolbar() {
+		View container = view.findViewById(R.id.toolbar_container);
+		View shadow = view.findViewById(R.id.toolbar_shadow);
+		View header = view.findViewById(R.id.header);
+		int defaultLinksColor = ContextCompat.getColor(app, getToolbarActiveLinksColor());
+		int activeLinksColor = ContextCompat.getColor(app, getActiveTabTextColorId(nightMode));
+
+		ImageView icBack = view.findViewById(R.id.button_back);
+		ImageView icInfo = view.findViewById(R.id.button_help);
+		TextView tvTitle = view.findViewById(R.id.toolbar_title);
+		if (scrollView.getScrollY() > header.getBottom()) {
+			container.setBackgroundColor(ContextCompat.getColor(app, getActiveColorId(nightMode)));
+			shadow.setVisibility(View.VISIBLE);
+			tvTitle.setText(getHeader());
+			tvTitle.setTextColor(activeLinksColor);
+			icBack.setColorFilter(activeLinksColor);
+			icInfo.setColorFilter(activeLinksColor);
+		} else {
+			container.setBackgroundColor(ContextCompat.getColor(app, getHeaderBgColorId()));
+			shadow.setVisibility(View.GONE);
+			tvTitle.setText("");
+			icBack.setColorFilter(defaultLinksColor);
+			icInfo.setColorFilter(defaultLinksColor);
+		}
 	}
 
 	private void setupHeader() {
@@ -232,6 +267,13 @@ public abstract class SelectedPlanFragment extends BasePurchaseFragment {
 		return getIcon(nightMode ?
 				R.drawable.ic_action_radio_button_night :
 				R.drawable.ic_action_radio_button_day);
+	}
+
+	@ColorRes
+	protected int getToolbarActiveLinksColor() {
+		return nightMode ?
+				R.color.purchase_sc_toolbar_active_dark :
+				R.color.purchase_sc_toolbar_active_light;
 	}
 
 	protected abstract Drawable getPreviewListCheckmark();

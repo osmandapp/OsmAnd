@@ -9,8 +9,6 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.R;
 
-import java.util.Arrays;
-
 public class OsmAndProPlanFragment extends SelectedPlanFragment {
 
 	public static void showInstance(@NonNull FragmentActivity activity) {

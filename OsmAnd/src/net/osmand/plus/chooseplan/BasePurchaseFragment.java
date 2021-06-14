@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
@@ -44,6 +45,7 @@ public abstract class BasePurchaseFragment extends BaseOsmAndDialogFragment {
 	protected boolean nightMode;
 
 	protected View view;
+	protected ScrollView scrollView;
 
 	protected List<OsmAndFeature> features = new ArrayList<>(Arrays.asList(OsmAndFeature.values()));
 
@@ -149,6 +151,7 @@ public abstract class BasePurchaseFragment extends BaseOsmAndDialogFragment {
 	                         @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
 		view = inflater.inflate(getLayoutId(), container, false);
+		scrollView = view.findViewById(R.id.scroll_view);
 		initView();
 		return view;
 	}
