@@ -48,7 +48,6 @@ public class BackupUploadCard extends MapBaseCard {
 	private final PrepareBackupResult backup;
 	private final BackupExportListener exportListener;
 
-	private View actionButton;
 	private TextView headerTitle;
 	private ProgressBar progressBar;
 	private ViewGroup itemsContainer;
@@ -246,19 +245,17 @@ public class BackupUploadCard extends MapBaseCard {
 	}
 
 	private void setupActionButton() {
-		actionButton = view.findViewById(R.id.action_button);
+		View actionButton = view.findViewById(R.id.action_button);
 		if (app.getNetworkSettingsHelper().isBackupExporting()) {
 			UiUtilities.setupDialogButton(nightMode, actionButton, DialogButtonType.SECONDARY, R.string.shared_string_cancel);
-			AndroidUtils.setBackground(app, actionButton, nightMode, R.drawable.dlg_btn_transparent_light, R.drawable.dlg_btn_transparent_dark);
 			actionButton.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					app.getNetworkSettingsHelper().cancelExport();
 				}
 			});
-		} else {
+		} else if (status == BackupStatus.MAKE_BACKUP || status == BackupStatus.CONFLICTS) {
 			UiUtilities.setupDialogButton(nightMode, actionButton, DialogButtonType.SECONDARY, R.string.backup_now);
-			AndroidUtils.setBackground(app, actionButton, nightMode, R.drawable.dlg_btn_transparent_light, R.drawable.dlg_btn_transparent_dark);
 			actionButton.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -269,7 +266,16 @@ public class BackupUploadCard extends MapBaseCard {
 					}
 				}
 			});
+		} else if (status == BackupStatus.NO_INTERNET_CONNECTION || status == BackupStatus.ERROR) {
+			UiUtilities.setupDialogButton(nightMode, actionButton, DialogButtonType.SECONDARY, R.string.retry);
+			actionButton.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					app.getBackupHelper().prepareBackup();
+				}
+			});
 		}
+		AndroidUtils.setBackground(app, actionButton, nightMode, R.drawable.dlg_btn_transparent_light, R.drawable.dlg_btn_transparent_dark);
 		AndroidUiHelper.updateVisibility(actionButton, status != BackupStatus.BACKUP_COMPLETE);
 	}
 
