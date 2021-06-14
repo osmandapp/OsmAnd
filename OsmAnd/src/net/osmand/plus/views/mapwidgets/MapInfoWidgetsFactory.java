@@ -64,7 +64,6 @@ import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.TextRenderer;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.ShowAlongTheRouteBottomSheet;
-import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
@@ -79,6 +78,8 @@ import org.apache.commons.logging.Log;
 
 import java.util.Iterator;
 import java.util.LinkedList;
+
+import static net.osmand.plus.routing.RouteCalculationResult.*;
 
 public class MapInfoWidgetsFactory {
 	public enum TopToolbarControllerType {
@@ -856,7 +857,7 @@ public class MapInfoWidgetsFactory {
 		private LocationPointWrapper lastPoint;
 		private TurnDrawable turnDrawable;
 		private int shadowRad;
-		RouteCalculationResult.NextDirectionInfo calc1;
+		NextDirectionInfo calc1;
 
 		private static final Log LOG = PlatformUtil.getLog(TopTextView.class);
 		private boolean showMarker;
@@ -876,7 +877,7 @@ public class MapInfoWidgetsFactory {
 			settings = app.getSettings();
 			waypointHelper = app.getWaypointHelper();
 			updateVisibility(false);
-			calc1 = new RouteCalculationResult.NextDirectionInfo();
+			calc1 = new NextDirectionInfo();
 		}
 
 		public boolean updateVisibility(boolean visible) {
@@ -911,8 +912,10 @@ public class MapInfoWidgetsFactory {
 			if (routingHelper != null && routingHelper.isRouteCalculated() && !routingHelper.isDeviatedFromRoute()) {
 				if (routingHelper.isFollowingMode()) {
 					if (settings.SHOW_STREET_NAME.get()) {
-						RouteCalculationResult.NextDirectionInfo nextDirInfo = routingHelper.getNextRouteDirectionInfo(calc1, true);
-						streetName = routingHelper.getCurrentName(nextDirInfo);
+						NextDirectionInfo nextDirInfo = routingHelper.getNextRouteDirectionInfo(calc1, true);
+						NextDirectionInfo nextDirInfoAfter = routingHelper.getNextRouteDirectionInfoAfter(
+								nextDirInfo, new NextDirectionInfo(), true);
+						streetName = routingHelper.getCurrentName(nextDirInfoAfter);
 						turnDrawable.setColor(R.color.nav_arrow);
 					}
 				} else {
