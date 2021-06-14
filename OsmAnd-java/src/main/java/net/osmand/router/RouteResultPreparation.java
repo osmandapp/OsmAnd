@@ -4,16 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
@@ -1720,8 +1711,8 @@ public class RouteResultPreparation {
 	}
 	
 	private Integer[] getPossibleTurns(int[] oLanes, boolean onlyPrimary, boolean uniqueFromActive) {
-		Set<Integer> possibleTurns = new LinkedHashSet<>();
-		Set<Integer> upossibleTurns = new LinkedHashSet<>();
+		List<Integer> possibleTurns = new LinkedList<>();
+		List<Integer> upossibleTurns = new LinkedList<>();
 		for (int i = 0; i < oLanes.length; i++) {
 			// Nothing is in the list to compare to, so add the first elements
 			upossibleTurns.clear();
