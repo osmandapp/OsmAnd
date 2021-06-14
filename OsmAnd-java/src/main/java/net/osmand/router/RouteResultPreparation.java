@@ -317,8 +317,8 @@ public class RouteResultPreparation {
 
 			for (int j = rr.getStartPointIndex(); j != rr.getEndPointIndex(); j = next) {
 				next = plus ? j + 1 : j - 1;
-				double d = measuredDist(road.getPoint31XTile(j), road.getPoint31YTile(j), road.getPoint31XTile(next),
-						road.getPoint31YTile(next));
+				double d = MapUtils.measuredDist31(road.getPoint31XTile(j), road.getPoint31YTile(j),
+						road.getPoint31XTile(next), road.getPoint31YTile(next));
 				distance += d;
 				double obstacle = ctx.getRouter().defineObstacle(road, j, plus);
 				if (obstacle < 0) {
@@ -1872,11 +1872,4 @@ public class RouteResultPreparation {
 	private long getPoint(RouteDataObject road, int pointInd) {
 		return (((long) road.getPoint31XTile(pointInd)) << 31) + (long) road.getPoint31YTile(pointInd);
 	}
-	
-	private static double measuredDist(int x1, int y1, int x2, int y2) {
-		return MapUtils.getDistance(MapUtils.get31LatitudeY(y1), MapUtils.get31LongitudeX(x1), 
-				MapUtils.get31LatitudeY(y2), MapUtils.get31LongitudeX(x2));
-	}
-
-
 }
