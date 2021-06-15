@@ -25,11 +25,14 @@ import net.osmand.plus.backup.ui.cards.LocalBackupCard;
 import net.osmand.plus.backup.ui.cards.RestoreBackupCard;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
+import java.util.List;
 import java.util.Map;
 
 public class BackupStatusFragment extends BaseOsmAndFragment implements BackupExportListener,
-		OnDeleteFilesListener, OnPrepareBackupListener {
+		OnDeleteFilesListener, OnPrepareBackupListener, ImportListener {
 
 	private OsmandApplication app;
 	private BackupHelper backupHelper;
@@ -84,7 +87,7 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements BackupEx
 		if (mapActivity != null) {
 			cardsContainer.removeAllViews();
 
-			uploadCard = new BackupUploadCard(mapActivity, backupHelper.getBackup(), this);
+			uploadCard = new BackupUploadCard(mapActivity, backupHelper.getBackup(), this, this);
 			cardsContainer.addView(uploadCard.build(mapActivity), 0);
 
 			cardsContainer.addView(new RestoreBackupCard(mapActivity).build(mapActivity));
@@ -117,7 +120,6 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements BackupEx
 	public void onBackupExportStarted(int itemsCount) {
 		if (uploadCard != null) {
 			uploadCard.update();
-			uploadCard.setupProgress(itemsCount);
 		}
 	}
 
@@ -167,5 +169,10 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements BackupEx
 	@Override
 	public void onFilesDeleteError(int status, @NonNull String message) {
 
+	}
+
+	@Override
+	public void onImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> items) {
+		backupHelper.prepareBackup();
 	}
 }

@@ -32,6 +32,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
 import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.fragments.MainSettingsFragment;
@@ -47,6 +48,7 @@ public class BackupUploadCard extends MapBaseCard {
 	private final BackupStatus status;
 	private final PrepareBackupResult backup;
 	private final BackupExportListener exportListener;
+	private final ImportListener importListener;
 
 	private TextView headerTitle;
 	private ProgressBar progressBar;
@@ -55,11 +57,13 @@ public class BackupUploadCard extends MapBaseCard {
 	private boolean buttonsVisible = true;
 
 	public BackupUploadCard(@NonNull MapActivity mapActivity, @NonNull PrepareBackupResult backup,
-							@Nullable BackupExportListener exportListener) {
+							@Nullable BackupExportListener exportListener,
+							@Nullable ImportListener importListener) {
 		super(mapActivity, false);
 		this.backup = backup;
 		this.status = getBackupStatus();
 		this.exportListener = exportListener;
+		this.importListener = importListener;
 	}
 
 	@Override
@@ -76,6 +80,7 @@ public class BackupUploadCard extends MapBaseCard {
 		setupWarningContainer();
 		BackupInfo info = backup.getBackupInfo();
 		if (info != null) {
+			setupProgress(info);
 			setupUploadItems(info);
 			setupItemsToDelete(info);
 			setupConflictingItems(info);
@@ -210,7 +215,7 @@ public class BackupUploadCard extends MapBaseCard {
 				public void onClick(View v) {
 					SettingsItem settingsItem = pair.second.item;
 					settingsItem.setShouldReplace(true);
-					app.getNetworkSettingsHelper().importSettings(Collections.singletonList(settingsItem), "", 1, true, null);
+					app.getNetworkSettingsHelper().importSettings(Collections.singletonList(settingsItem), "", 1, true, importListener);
 				}
 			});
 			AndroidUiHelper.updateVisibility(serverButton, true);
@@ -276,10 +281,14 @@ public class BackupUploadCard extends MapBaseCard {
 			});
 		}
 		AndroidUtils.setBackground(app, actionButton, nightMode, R.drawable.dlg_btn_transparent_light, R.drawable.dlg_btn_transparent_dark);
-		AndroidUiHelper.updateVisibility(actionButton, status != BackupStatus.BACKUP_COMPLETE);
+
+		BackupInfo info = backup.getBackupInfo();
+		AndroidUiHelper.updateVisibility(actionButton, info != null
+				&& (!info.getFilteredFilesToUpload(app).isEmpty() || !info.getFilteredFilesToDelete(app).isEmpty()));
 	}
 
-	public void setupProgress(int itemsCount) {
+	public void setupProgress(@NonNull BackupInfo info) {
+		int itemsCount = info.getFilteredFilesToUpload(app).size() + info.getFilteredFilesToDelete(app).size();
 		progressBar.setMax(itemsCount);
 	}
 
@@ -306,6 +315,8 @@ public class BackupUploadCard extends MapBaseCard {
 				ImageView icon = itemView.findViewById(R.id.second_icon);
 				icon.setImageDrawable(getContentIcon(R.drawable.ic_action_cloud_done));
 				AndroidUiHelper.updateVisibility(icon, true);
+				AndroidUiHelper.updateVisibility(itemView.findViewById(R.id.server_button), false);
+				AndroidUiHelper.updateVisibility(itemView.findViewById(R.id.local_version_button), false);
 			}
 		}
 	}
@@ -319,6 +330,7 @@ public class BackupUploadCard extends MapBaseCard {
 				progress.setMax(max);
 				progress.setProgress(0);
 				AndroidUiHelper.updateVisibility(progress, true);
+				AndroidUiHelper.updateVisibility(itemView.findViewById(R.id.second_icon), false);
 			}
 		}
 	}
@@ -327,18 +339,18 @@ public class BackupUploadCard extends MapBaseCard {
 		BackupInfo info = backup.getBackupInfo();
 		if (info != null) {
 			for (LocalFile file : info.getFilteredFilesToUpload(app)) {
-				if (file.item != null && file.item.getType().name().equals(type) && BackupHelper.getItemFileName(file.item).equals(fileName)) {
+				if (file.item != null && BackupHelper.applyItem(file.item, type, fileName)) {
 					return file.item;
 				}
 			}
 			for (RemoteFile file : info.getFilteredFilesToDelete(app)) {
-				if (file.item != null && file.item.getType().name().equals(type) && BackupHelper.getItemFileName(file.item).equals(fileName)) {
+				if (file.item != null && BackupHelper.applyItem(file.item, type, fileName)) {
 					return file.item;
 				}
 			}
 			for (Pair<LocalFile, RemoteFile> pair : info.getFilteredFilesToMerge(app)) {
 				SettingsItem item = pair.first.item;
-				if (item != null && item.getType().name().equals(type) && BackupHelper.getItemFileName(item).equals(fileName)) {
+				if (item != null && BackupHelper.applyItem(item, type, fileName)) {
 					return item;
 				}
 			}

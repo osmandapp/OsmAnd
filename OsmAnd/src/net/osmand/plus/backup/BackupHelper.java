@@ -254,6 +254,19 @@ public class BackupHelper {
 		return app.getSettings().registerBooleanPreference(VERSION_HISTORY_PREFIX + type.name(), true).makeGlobal().makeShared();
 	}
 
+	public static boolean applyItem(@NonNull SettingsItem item, @NonNull String type, @NonNull String name) {
+		String itemFileName = getItemFileName(item);
+		if (item.getType().name().equals(type)) {
+			if (name.equals(itemFileName)) {
+				return true;
+			} else if (item instanceof FileSettingsItem) {
+				FileSettingsItem fileItem = (FileSettingsItem) item;
+				return name.startsWith(fileItem.getSubtype().getSubtypeFolder()) && name.startsWith(itemFileName);
+			}
+		}
+		return false;
+	}
+
 	@NonNull
 	public static String getItemFileName(@NonNull SettingsItem item) {
 		String fileName;
