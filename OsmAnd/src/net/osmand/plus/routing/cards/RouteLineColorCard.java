@@ -150,6 +150,7 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 			AndroidUiHelper.updateVisibility(gradientCard.getView(), true);
 			themeToggleContainer.setVisibility(View.GONE);
 			previewRouteLineInfo.setUseDefaultColor(false);
+			changeMapTheme(initMapTheme);
 		}
 		previewRouteLineInfo.setGradientScaleType(getGradientScaleTypeFromMode());
 		updateColorItems();
