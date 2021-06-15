@@ -167,22 +167,38 @@ public abstract class SelectedPlanFragment extends BasePurchaseFragment {
 		LinearLayout container = view.findViewById(R.id.price_block);
 		container.removeAllViews();
 		container.addView(createPurchaseButton("Monthly subscription",
-				"€ 3 / Month"));
+				"€ 3 / Month", null, null));
 		container.addView(createPurchaseButton("Annual subscription",
-				"1 month free, then € 24,99 /year "));
+				"€ 11,99 / Year",
+				"-50%",
+				"Regular price: € 24,99 / Year"));
 		selectedItemTag = "Annual subscription";
 		updateButtons();
 	}
 
 	private View createPurchaseButton(String title,
+	                                  String price,
+	                                  String discount,
 	                                  String description) {
 		View itemView = inflater.inflate(R.layout.purchase_dialog_btn_payment, null);
 
 		TextView tvTitle = itemView.findViewById(R.id.title);
 		tvTitle.setText(title);
 
+		TextView tvPrice = itemView.findViewById(R.id.price);
+		tvPrice.setText(price);
+
+		TextView tvDiscount = itemView.findViewById(R.id.discount);
+		if (discount != null) {
+			tvDiscount.setText(discount);
+			tvDiscount.setVisibility(View.VISIBLE);
+		}
+
 		TextView tvDesc = itemView.findViewById(R.id.description);
-		tvDesc.setText(description);
+		if (description != null) {
+			tvDesc.setText(description);
+			tvDesc.setVisibility(View.VISIBLE);
+		}
 
 		itemView.setTag(title);
 		itemView.setOnClickListener(v -> {
