@@ -691,10 +691,10 @@
     <string name="rendering_attr_hmRendered_description">Augmenter le niveau de détail affiché.</string>
     <string name="rendering_attr_hmRendered_name">Afficher plus de détail</string>
     <string name="asap">Dès que possible</string>
-    <string name="gpxup_public">Public</string>
+    <string name="gpxup_public">publique</string>
     <string name="gpxup_identifiable">Identifiable</string>
     <string name="gpxup_trackable">Traçable</string>
-    <string name="gpxup_private">Privée</string>
+    <string name="gpxup_private">privée</string>
     <string name="osmand_parking_event">Récupérer le véhicule au parking</string>
     <string name="osmand_parking_warning">Avertissement</string>
     <string name="osmand_parking_warning_text">Un rappel pour récupérer votre véhicule a été ajouté à votre agenda. Vous pouvez modifier ou supprimer ce rappel.</string>
@@ -2665,7 +2665,7 @@
     <string name="wikivoyage_download_pics">Télécharger les images</string>
     <string name="wikivoyage_download_pics_descr">Les images des articles peuvent être téléchargées pour un usage hors ligne.
 \nPour modifier ce paramétrage, allez dans : Explorer &gt; Options.</string>
-    <string name="shared_string_wifi_only">Wifi seulement</string>
+    <string name="shared_string_wifi_only">Seulement en Wi-Fi</string>
     <string name="select_travel_book">Sélectionnez un carnet de voyage</string>
     <string name="shared_string_travel_book">Carnet de voyage</string>
     <string name="download_images">Télécharger les images</string>
