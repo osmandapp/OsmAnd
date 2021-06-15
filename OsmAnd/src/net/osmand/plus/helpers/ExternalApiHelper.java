@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 
 import androidx.annotation.NonNull;
@@ -452,23 +453,12 @@ public class ExternalApiHelper {
 					result.putExtra(PARAM_DESTINATION_LON, finalLocation.getLongitude());
 
 					int time = routingHelper.getLeftTime();
-					result.putExtra(PARAM_TIME_LEFT, time);
 					long eta = time + System.currentTimeMillis() / 1000;
-					result.putExtra(PARAM_ETA, eta);
-					result.putExtra(PARAM_DISTANCE_LEFT, routingHelper.getLeftDistance());
 
-					NextDirectionInfo ni = routingHelper.getNextRouteDirectionInfo(new NextDirectionInfo(), true);
-					if (ni.distanceTo > 0) {
-						updateTurnInfo("next_", result, ni);
-						ni = routingHelper.getNextRouteDirectionInfoAfter(ni, new NextDirectionInfo(), true);
-						if (ni.distanceTo > 0) {
-							updateTurnInfo("after_next", result, ni);
-						}
-					}
-					routingHelper.getNextRouteDirectionInfo(new NextDirectionInfo(), false);
-					if (ni.distanceTo > 0) {
-						updateTurnInfo("no_speak_next_", result, ni);
-					}
+					result.putExtra(PARAM_ETA, eta);
+					result.putExtra(PARAM_TIME_LEFT, time);
+					result.putExtra(PARAM_DISTANCE_LEFT, routingHelper.getLeftDistance());
+					result.putExtras(getRouteDirectionsInfo(app));
 				}
 				result.putExtra(PARAM_VERSION, VERSION_CODE);
 
@@ -698,20 +688,45 @@ public class ExternalApiHelper {
 		}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	private void updateTurnInfo(String prefix, Intent result, NextDirectionInfo ni) {
-		result.putExtra(prefix + PARAM_NT_DISTANCE, ni.distanceTo);
-		result.putExtra(prefix + PARAM_NT_IMMINENT, ni.imminent);
-		if (ni.directionInfo != null && ni.directionInfo.getTurnType() != null) {
-			TurnType tt = ni.directionInfo.getTurnType();
-			RouteDirectionInfo a = ni.directionInfo;
-			result.putExtra(prefix + PARAM_NT_DIRECTION_NAME, RoutingHelperUtils.formatStreetName(a.getStreetName(), a.getRef(), a.getDestinationName(), ""));
-			result.putExtra(prefix + PARAM_NT_DIRECTION_TURN, tt.toXmlString());
-			result.putExtra(prefix + PARAM_NT_DIRECTION_ANGLE, tt.getTurnAngle());
-			result.putExtra(prefix + PARAM_NT_DIRECTION_POSSIBLY_LEFT, tt.isPossibleLeftTurn());
-			result.putExtra(prefix + PARAM_NT_DIRECTION_POSSIBLY_RIGHT, tt.isPossibleRightTurn());
-			if (tt.getLanes() != null) {
-				result.putExtra(prefix + PARAM_NT_DIRECTION_LANES, Arrays.toString(tt.getLanes()));
+	public static void updateTurnInfo(String prefix, Bundle bundle, NextDirectionInfo nextInfo) {
+		bundle.putInt(prefix + PARAM_NT_DISTANCE, nextInfo.distanceTo);
+		bundle.putInt(prefix + PARAM_NT_IMMINENT, nextInfo.imminent);
+		if (nextInfo.directionInfo != null && nextInfo.directionInfo.getTurnType() != null) {
+			updateRouteDirectionInfo(prefix, bundle, nextInfo.directionInfo);
+		}
+	}
+
+	public static Bundle getRouteDirectionsInfo(OsmandApplication app) {
+		Bundle bundle = new Bundle();
+		RoutingHelper routingHelper = app.getRoutingHelper();
+		List<RouteDirectionInfo> directions = routingHelper.getRouteDirections();
+		if (!Algorithms.isEmpty(directions)) {
+			updateRouteDirectionInfo("current_", bundle, directions.get(0));
+		}
+		NextDirectionInfo ni = routingHelper.getNextRouteDirectionInfo(new NextDirectionInfo(), true);
+		if (ni.distanceTo > 0) {
+			updateTurnInfo("next_", bundle, ni);
+			ni = routingHelper.getNextRouteDirectionInfoAfter(ni, new NextDirectionInfo(), true);
+			if (ni.distanceTo > 0) {
+				updateTurnInfo("after_next", bundle, ni);
 			}
+		}
+		routingHelper.getNextRouteDirectionInfo(new NextDirectionInfo(), false);
+		if (ni.distanceTo > 0) {
+			updateTurnInfo("no_speak_next_", bundle, ni);
+		}
+		return bundle;
+	}
+
+	public static void updateRouteDirectionInfo(String prefix, Bundle bundle, RouteDirectionInfo info) {
+		TurnType tt = info.getTurnType();
+		bundle.putString(prefix + PARAM_NT_DIRECTION_NAME, RoutingHelperUtils.formatStreetName(info.getStreetName(), info.getRef(), info.getDestinationName(), ""));
+		bundle.putString(prefix + PARAM_NT_DIRECTION_TURN, tt.toXmlString());
+		bundle.putFloat(prefix + PARAM_NT_DIRECTION_ANGLE, tt.getTurnAngle());
+		bundle.putBoolean(prefix + PARAM_NT_DIRECTION_POSSIBLY_LEFT, tt.isPossibleLeftTurn());
+		bundle.putBoolean(prefix + PARAM_NT_DIRECTION_POSSIBLY_RIGHT, tt.isPossibleRightTurn());
+		if (tt.getLanes() != null) {
+			bundle.putString(prefix + PARAM_NT_DIRECTION_LANES, Arrays.toString(tt.getLanes()));
 		}
 	}
 
