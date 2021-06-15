@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.Location;
+import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.helpers.GpxUiHelper;
@@ -80,6 +81,7 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 	}
 
 	public void updateRoute(@NonNull RotatedTileBox tb, @NonNull RouteCalculationResult route) {
+		needUpdate = true;
 		if (needUpdate || tb.getMapDensity() != getMapDensity() || this.route != route) {
 			this.route = route;
 			needUpdate = false;
@@ -138,14 +140,51 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 				Collections.singletonList(routeColoringType.getAttrName()), currentRenderer,
 				defaultRenderer, currentSearchRequest, defaultSearchRequest);
 
+		List<Location> srcLocations = route.getImmutableAllLocations();
 		List<Location> locations = new ArrayList<>();
 		RouteStatistics routeStatistics = routeStatisticsList.get(0);
-
 		Map<Integer, GeometryWayStyle<?>> styleMap = new HashMap<>();
-		for (RouteSegmentAttribute attr : routeStatistics.elements) {
-			// TODO
+
+		int start = getIdxOfFirstSegmentsLocation(srcLocations, routeSegments);
+		if (start != 0) {
+			locations.add(srcLocations.get(0));
 		}
+		int attrsIdx = 0;
+		for (int i = start; i < srcLocations.size(); i++) {
+			locations.add(srcLocations.get(i));
+			RouteSegmentAttribute attr;
+			if (attrsIdx + 1 <=	 routeStatistics.elements.size()) {
+				attr = routeStatistics.elements.get(attrsIdx);
+			} else {
+				continue;
+			}
+			if (attr.getStartLocation() == null || attr.getEndLocation() == null) {
+				attrsIdx++;
+				continue;
+			}
+			if (attr.getStartLocationIdx() == i) {
+				GeometrySolidWayStyle style = getSolidWayStyle(attr.getColor());
+				styleMap.put(locations.size(), style);
+				locations.add(attr.getStartLocation());
+			}
+			if (attr.getEndLocationIdx() == i) {
+				locations.add(attr.getEndLocation());
+				attrsIdx++;
+			}
+		}
+
 		updateWay(locations, styleMap, tileBox);
+	}
+
+	private int getIdxOfFirstSegmentsLocation(List<Location> locations, List<RouteSegmentResult> segments) {
+		LatLon firstSegmentsLocation = segments.get(0).getStartPoint();
+		Location firstLocation = locations.get(0);
+		if (firstSegmentsLocation.getLatitude() == firstLocation.getLatitude()
+				&& firstSegmentsLocation.getLongitude() == firstLocation.getLongitude()) {
+			return 0;
+		} else {
+			return 1;
+		}
 	}
 
 	@Override

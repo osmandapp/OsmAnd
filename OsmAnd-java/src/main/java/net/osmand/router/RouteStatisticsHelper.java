@@ -8,6 +8,8 @@ import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -75,6 +77,7 @@ public class RouteStatisticsHelper {
 		RouteDataObject obj;
 		int startPointIdx;
 		int endPointIdx;
+		boolean idxShifted = false;
 		float dist;
 		float h;
 		float[] interpolatedHeightByStep;
@@ -151,7 +154,9 @@ public class RouteStatisticsHelper {
 			RouteSegmentWithIncline incl = new RouteSegmentWithIncline();
 			incl.obj = r.getObject();
 			incl.startPointIdx = getStartEndPointIndex(route, segmentIdx, true);
-			incl.endPointIdx = getStartEndPointIndex(route, segmentIdx, false);
+			incl.endPointIdx = r.getEndPointIndex();
+			incl.idxShifted = incl.startPointIdx != r.getStartPointIndex()
+					|| incl.endPointIdx != getStartEndPointIndex(route, segmentIdx, false);
 			incl.dist = r.getDistance();
 			input.add(incl);
 			float prevH = prevHeight;
@@ -366,41 +371,141 @@ public class RouteStatisticsHelper {
 		protected List<RouteSegmentAttribute> processRoute(List<RouteSegmentWithIncline> route, String attribute) {
 			List<RouteSegmentAttribute> routes = new ArrayList<>();
 			RouteSegmentAttribute prev = null;
-			for (RouteSegmentWithIncline segment : route) {
+
+			for (int segmentIdx = 0; segmentIdx < route.size(); segmentIdx++) {
+				RouteSegmentWithIncline segment = route.get(segmentIdx);
+
 				if (segment.slopeClass == null || segment.slopeClass.length == 0) {
 					RouteSegmentAttribute current = classifySegment(attribute, -1, segment);
-					current.distance = segment.dist;
-					if (prev != null && prev.getPropertyName() != null &&
-						prev.getPropertyName().equals(current.getPropertyName())) {
-						prev.incrementDistanceBy(current.distance);
+					if (equalPropertyNames(prev, current)) {
+						prev.incrementDistanceBy(segment.dist);
 					} else {
+						current.distance = segment.dist;
 						routes.add(current);
 						prev = current;
 					}
 				} else {
-					for (int i = 0; i < segment.slopeClass.length; i++) {
-						float d = (float) (i == 0 ? (segment.dist - H_STEP * (segment.slopeClass.length - 1)) : H_STEP);
-						if (i > 0 && segment.slopeClass[i] == segment.slopeClass[i - 1]) {
-							prev.incrementDistanceBy(d);
-						} else {
-							RouteSegmentAttribute current = classifySegment(attribute, 
-									segment.slopeClass[i], segment);
-							current.distance = d;
-							if (prev != null && prev.getPropertyName() != null &&
-								prev.getPropertyName().equals(current.getPropertyName())) {
-								prev.incrementDistanceBy(current.distance);
-							} else {
-								if (current.slopeIndex == segment.slopeClass[i]) {
-									current.setUserPropertyName(segment.slopeClassUserString[i]);
-								}
-								routes.add(current);
-								prev = current;
-							}
-						}
-					}
+					prev = processSegmentWithIncline(prev, route, segmentIdx, attribute, routes);
 				}
 			}
 			return routes;
+		}
+
+		private RouteSegmentAttribute processSegmentWithIncline(RouteSegmentAttribute prev,
+																List<RouteSegmentWithIncline> segments,
+		                                                        int segmentIdx,
+																String attribute,
+																List<RouteSegmentAttribute> routes) {
+			RouteSegmentWithIncline segment = segments.get(segmentIdx);
+			float dist = 0;
+
+			for (int i = 0; i < segment.slopeClass.length; i++) {
+				float d = (float) (i == 0 ? (segment.dist - H_STEP * (segment.slopeClass.length - 1)) : H_STEP);
+				int currSlopeClass = segment.slopeClass[i];
+
+				if (i > 0 && currSlopeClass == segment.slopeClass[i - 1]) {
+					prev.incrementDistanceBy(d);
+					dist += d;
+					setStartEndLocationIfNeeded(prev, segments, segmentIdx, dist, true);
+					if (i + 1 == segment.slopeClass.length) {
+						setStartEndLocationIfNeeded(prev, segments, segmentIdx, dist, false);
+					}
+					continue;
+				}
+
+				RouteSegmentAttribute current = classifySegment(attribute, currSlopeClass, segment);
+				current.distance = d;
+				if (equalPropertyNames(prev, current)) {
+					prev.incrementDistanceBy(current.distance);
+					dist += d;
+					setStartEndLocationIfNeeded(prev, segments, segmentIdx, dist, true);
+					continue;
+				}
+
+				if (current.slopeIndex == currSlopeClass) {
+					current.setUserPropertyName(segment.slopeClassUserString[i]);
+				}
+				dist = d;
+				if (prev != null) {
+					setStartEndLocationIfNeeded(prev, segments, segmentIdx, dist, false);
+				}
+				setStartEndLocationIfNeeded(current, segments, segmentIdx, dist, true);
+				routes.add(current);
+				prev = current;
+
+			}
+
+			return prev;
+		}
+
+		private void setStartEndLocationIfNeeded(RouteSegmentAttribute attr, List<RouteSegmentWithIncline> segments,
+		                                         int startIdx, float dist, boolean start) {
+			if (start && attr.getStartLocation() != null) {
+				return;
+			}
+			Pair<Location, Integer> locationInfo = computeLocationAndIndex(segments, startIdx, dist);
+			if (locationInfo != null) {
+				attr.setStartEndLocationInfo(locationInfo, start);
+			}
+		}
+
+		private Pair<Location, Integer> computeLocationAndIndex(List<RouteSegmentWithIncline> segments,
+		                                                        int startSegmentIdx,
+																float processedRouteSegmentDist) {
+			RouteSegmentWithIncline segment = segments.get(startSegmentIdx);
+			int next;
+			int inc = segment.startPointIdx < segment.endPointIdx ? 1 : -1;
+			int idx = segment.startPointIdx;
+			RouteDataObject obj = segment.obj;
+			if (segment.idxShifted && startSegmentIdx + 1 == segments.size()) {
+				int end = segment.endPointIdx;
+				processedRouteSegmentDist -= (float) MapUtils.measuredDist31(obj.getPoint31XTile(end),
+						obj.getPoint31YTile(end), obj.getPoint31XTile(end + inc), obj.getPoint31YTile(end + inc));
+			}
+			float dist = processedRouteSegmentDist;
+
+			for (int i = segment.startPointIdx; i != segment.endPointIdx; i = next) {
+				idx = i;
+				next = i + inc;
+				dist = (float) MapUtils.measuredDist31(obj.getPoint31XTile(i), obj.getPoint31YTile(i),
+						obj.getPoint31XTile(next), obj.getPoint31YTile(next));
+				if (processedRouteSegmentDist - dist <= 0) {
+					break;
+				}
+				processedRouteSegmentDist -= dist;
+			}
+
+			boolean first = startSegmentIdx == 0;
+			if (segment.idxShifted && first && idx == segment.startPointIdx) {
+					return null;
+			}
+
+			double ratio = processedRouteSegmentDist / dist;
+			double prevLat = MapUtils.get31LatitudeY(obj.getPoint31YTile(idx));
+			double prevLon = MapUtils.get31LongitudeX(obj.getPoint31XTile(idx));
+			double nextLat = MapUtils.get31LatitudeY(obj.getPoint31YTile(idx + inc));
+			double nextLon = MapUtils.get31LongitudeX(obj.getPoint31XTile(idx + inc));
+			double lat = prevLat + ratio * (nextLat - prevLat);
+			double lon = prevLon + ratio * (nextLon - prevLon);
+			Location location = new Location("", lat, lon);
+
+			int actualStartIdx = first && segment.idxShifted ? segment.startPointIdx + inc : segment.startPointIdx;
+			int locationIdx = getLocationIdx(segments, startSegmentIdx, Math.abs(actualStartIdx - idx));
+			return Pair.of(location, locationIdx);
+		}
+
+		private int getLocationIdx(List<RouteSegmentWithIncline> segments, int currSegmentIdx, int pointOrder) {
+			int locationsCount = 0;
+			for (int segmentIdx = 0; segmentIdx < currSegmentIdx; segmentIdx++) {
+				RouteSegmentWithIncline segment = segments.get(segmentIdx);
+				locationsCount += Math.abs(segment.startPointIdx - segment.endPointIdx);
+			}
+			return locationsCount + pointOrder;
+		}
+
+		private boolean equalPropertyNames(RouteSegmentAttribute left, RouteSegmentAttribute right) {
+			return left != null && left.propertyName != null && right != null
+					&& left.propertyName.equals(right.propertyName);
 		}
 
 		public RouteSegmentAttribute classifySegment(String attribute, int slopeClass, RouteSegmentWithIncline segment) {
@@ -454,7 +559,11 @@ public class RouteStatisticsHelper {
 		private final int slopeIndex;
 		private float distance;
 		private String userPropertyName;
-		private List<Location> locations = new ArrayList<>();
+
+		private Location startLocation;
+		private Location endLocation;
+		private int startLocationIdx;
+		private int endLocationIdx;
 
 		RouteSegmentAttribute(String propertyName, int color, int slopeIndex) {
 			this.propertyName = propertyName == null ? UNDEFINED_ATTR : propertyName;
@@ -492,13 +601,34 @@ public class RouteStatisticsHelper {
 		public int getColor() {
 			return color;
 		}
-		
-		private void addLocation(Location location) {
-			this.locations.add(location);
+
+		private void setStartEndLocationInfo(Pair<Location, Integer> pair, boolean start) {
+			if (pair == null) {
+				return;
+			}
+			if (start) {
+				startLocation = pair.getLeft();
+				startLocationIdx = pair.getRight();
+			} else {
+				endLocation = pair.getLeft();
+				endLocationIdx = pair.getRight();
+			}
 		}
-		
-		public List<Location> getLocations() {
-			return locations;
+
+		public Location getStartLocation() {
+			return startLocation;
+		}
+
+		public Location getEndLocation() {
+			return endLocation;
+		}
+
+		public int getStartLocationIdx() {
+			return startLocationIdx;
+		}
+
+		public int getEndLocationIdx() {
+			return endLocationIdx;
 		}
 
 		@Override
