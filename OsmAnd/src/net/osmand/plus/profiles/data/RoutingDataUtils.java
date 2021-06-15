@@ -198,7 +198,6 @@ public class RoutingDataUtils {
 			return parsePredefinedEnginesImpl(content);
 		} catch (JSONException e) {
 			LOG.error("Error trying parse JSON: " + e.getMessage());
-			e.printStackTrace();
 		}
 		return null;
 	}

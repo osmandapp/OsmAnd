@@ -140,7 +140,8 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 		items.add(new LongDescriptionItem(getString(R.string.select_nav_profile_dialog_message)));
 		TextRadioItem offline = createRadioButton(DialogMode.OFFLINE);
 		TextRadioItem online = createRadioButton(DialogMode.ONLINE);
-		addToggleButton(dialogMode == DialogMode.ONLINE ? online : offline, offline, online);
+		TextRadioItem selectedItem = dialogMode == DialogMode.ONLINE ? online : offline;
+		addToggleButton(selectedItem, offline, online);
 	}
 
 	private TextRadioItem createRadioButton(final DialogMode mode) {
