@@ -1175,6 +1175,13 @@ public class RouteCalculationResult {
 	public boolean directionsAvailable(){
 		return currentDirectionInfo < directions.size();
 	}
+
+	public RouteDirectionInfo getCurrentDirection() {
+		if (currentDirectionInfo < directions.size()) {
+			return directions.get(currentDirectionInfo);
+		}
+		return null;
+	}
 	
 	public int getDistanceToPoint(int locationIndex) {
 		if(listDistance != null && currentRoute < listDistance.length && locationIndex < listDistance.length && 

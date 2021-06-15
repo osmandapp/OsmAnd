@@ -699,9 +699,9 @@ public class ExternalApiHelper {
 	public static Bundle getRouteDirectionsInfo(OsmandApplication app) {
 		Bundle bundle = new Bundle();
 		RoutingHelper routingHelper = app.getRoutingHelper();
-		List<RouteDirectionInfo> directions = routingHelper.getRouteDirections();
-		if (!Algorithms.isEmpty(directions)) {
-			updateRouteDirectionInfo("current_", bundle, directions.get(0));
+		RouteDirectionInfo directionInfo = routingHelper.getRoute().getCurrentDirection();
+		if (directionInfo != null) {
+			updateRouteDirectionInfo("current_", bundle, directionInfo);
 		}
 		NextDirectionInfo ni = routingHelper.getNextRouteDirectionInfo(new NextDirectionInfo(), true);
 		if (ni.distanceTo > 0) {
