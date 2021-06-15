@@ -464,10 +464,10 @@
     <string name="poi_parking_entrance">Pintu masuk parkir</string>
     <string name="poi_motorcycle_parking">Parkir sepeda motor</string>
     <string name="poi_parking">Parkir</string>
-    <string name="poi_waterway_fuel">Pom bensin untuk perahu</string>
+    <string name="poi_waterway_fuel">SPBU untuk perahu</string>
     <string name="poi_fuel_electricity">Listrik</string>
     <string name="poi_fuel_diesel">Diesel</string>
-    <string name="poi_fuel">Pom bensin;Pom bensin;Stasiun pengisian;Pom bensin</string>
+    <string name="poi_fuel">SPBU;SPBU;Stasiun pengisian;SPBU</string>
     <string name="poi_car_wash">Cuci mobil</string>
     <string name="poi_vehicle_inspection">Inspeksi kendaraan</string>
     <string name="poi_service_tyres">Ban</string>

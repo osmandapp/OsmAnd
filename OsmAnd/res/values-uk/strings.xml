@@ -4172,4 +4172,6 @@
     <string name="grey_color_slope">Сірий колір застосовується на позначення невизначених схилів.</string>
     <string name="backup_version_history">Історія версій</string>
     <string name="backup_storage_taken">Заповнення сховища</string>
+    <string name="backup_version_history_delete_descr">Хочете видалити історію змін для вимкнених типів із хмари\?</string>
+    <string name="delete_version_history">Видалити журнал версій</string>
 </resources>

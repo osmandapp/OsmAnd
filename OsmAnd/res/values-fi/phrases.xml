@@ -486,7 +486,7 @@
     <string name="poi_slipway">Veneenlaskupaikka</string>
     <string name="poi_turning_circle">Kääntöpaikka</string>
     <string name="poi_power_plant">Voimalaitos</string>
-    <string name="poi_recycling_small_appliances">Pienet sähkölaitteet</string>
+    <string name="poi_recycling_small_appliances">Pienet kodinkoneet</string>
     <string name="poi_recycling_fluorescent_tubes">Loisteputket</string>
     <string name="poi_recycling_engine_oil">Moottoriöljy</string>
     <string name="poi_recycling_cooking_oil">Ruokaöljy</string>
@@ -1600,4 +1600,10 @@
     <string name="poi_bullfighting">Härkätaistelu</string>
     <string name="poi_socket_type2_output_filter">Type 2 -lähtö</string>
     <string name="poi_socket_chademo_output_filter">CHAdeMO-lähtö</string>
+    <string name="poi_recycling_sheet_metal">Pelti</string>
+    <string name="poi_recycling_electrical_items">Sähkötarvikkeet</string>
+    <string name="poi_recycling_small_electrical_appliances">Pienet sähkölaitteet</string>
+    <string name="poi_recycling_hydrargyrum">Elohopea</string>
+    <string name="poi_recycling_compost">Komposti</string>
+    <string name="poi_waste_disposal">Jätehuolto</string>
 </resources>
