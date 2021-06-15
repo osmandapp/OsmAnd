@@ -191,24 +191,9 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 
 		ImageView buttonBack = view.findViewById(R.id.button_back);
 		buttonBack.setImageResource(AndroidUtils.getNavigationIconResId(ctx));
-		buttonBack.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dismiss();
-			}
-		});
-		view.findViewById(R.id.button_later).setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dismiss();
-			}
-		});
-		view.findViewById(R.id.button_restore).setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				purchaseHelper.requestInventory();
-			}
-		});
+		buttonBack.setOnClickListener(v -> dismiss());
+		view.findViewById(R.id.button_later).setOnClickListener(v -> dismiss());
+		view.findViewById(R.id.button_restore).setOnClickListener(v -> purchaseHelper.requestInventory());
 
 		ViewGroup infoContainer = (ViewGroup) view.findViewById(R.id.info_container);
 		TextViewEx infoDescription = (TextViewEx) view.findViewById(R.id.info_description);

@@ -20,6 +20,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 
 import org.apache.commons.logging.Log;
@@ -164,6 +165,8 @@ public abstract class SelectedPlanFragment extends BasePurchaseFragment {
 	}
 
 	private void setupPlanButtons() {
+		List<InAppSubscription> visibleSubscriptions = purchaseHelper.getSubscriptions().getVisibleSubscriptions();
+
 		LinearLayout container = view.findViewById(R.id.price_block);
 		container.removeAllViews();
 		container.addView(createPurchaseButton("Monthly subscription",

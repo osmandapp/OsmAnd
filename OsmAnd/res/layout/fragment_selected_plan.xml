@@ -157,7 +157,7 @@
                             android:layout_marginStart="@dimen/content_padding"
                             android:layout_marginLeft="@dimen/content_padding"
                             android:tint="?attr/active_color_basic"
-                            osmand:srcCompat="@drawable/ic_action_arrow_down" />
+                            osmand:srcCompat="@drawable/ic_arrow_down" />
 
                     </LinearLayout>
 
