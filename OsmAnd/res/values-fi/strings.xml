@@ -2310,9 +2310,9 @@
     <string name="app_mode_skiing">Hiihto</string>
     <string name="base_profile_descr_ski">Hiihto</string>
     <string name="routing_profile_ski">Hiihto</string>
-    <string name="routing_attr_piste_type_downhill_name">Alppihiihto / laskettelu</string>
+    <string name="routing_attr_piste_type_downhill_name">Alppihiihto ja laskettelu</string>
     <string name="routing_attr_piste_type_downhill_description">Alppihiihto tai laskettelurinteet ja pääsy hiihtohisseihin.</string>
-    <string name="routing_attr_piste_type_nordic_name">Maastohiihto / pohjoismainen hiihto</string>
+    <string name="routing_attr_piste_type_nordic_name">Maastohiihto ja pohjoismainen hiihto</string>
     <string name="routing_attr_piste_type_nordic_description">Ladut pohjoismaiseen tai maastohiihtoon.</string>
     <string name="shared_string_open_track">Avaa jälki</string>
     <string name="list_of_installed_plugins">Asennetut lisäosat</string>
@@ -2912,7 +2912,7 @@
     <string name="on_foot">Jalan</string>
     <string name="transfers">Vaihdot</string>
     <string name="rendering_attr_piste_difficulty_novice_name">Noviisi</string>
-    <string name="routeInfo_piste_type_name">Pistetyyppi</string>
+    <string name="routeInfo_piste_type_name">Latutyyppi</string>
     <string name="routing_attr_allow_advanced_name">Salli edistyneet reitit</string>
     <string name="rendering_attr_piste_difficulty_extreme_name">Äärimmäinen</string>
     <string name="public_transport_ped_route_title">Jalkaisin kuljettava reitti on noin %1$s ja se voi olla nopeampi kuin joukkoliikenne</string>
@@ -3397,4 +3397,55 @@
     <string name="dialogs_and_notifications_descr">Hallitse ponnahdusikkunoita, valintaikkunoita ja ilmoituksia.</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Näytä solmuverkon pyöräreitit</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Solmuverkot</string>
+    <string name="expire_time_descr">Välimuistiin tallennetut ruudut ladataan uudelleen määritettyjen minuuttien kuluttua. Jätä tämä kenttä tyhjäksi, jos et koskaan päivitä tämän lähteen ruutuja.
+\n
+\nYksi päivä on 1440 minuuttia.
+\nYksi viikko on 10 080 minuuttia.
+\nYksi kuukausi on 43 829 minuuttia.</string>
+    <string name="tiles_storage_descr">Valitse, miten ladatut ruudut tallennetaan.</string>
+    <string name="export_import_quick_actions_with_profiles_promo">Voit viedä tai tuoda pikatoimintoja sovellusprofiileilla.</string>
+    <string name="delete_all_actions_message_q">Haluatko varmasti poistaa %d pikatoimintoa peruuttamattomasti\?</string>
+    <string name="screen_timeout">Näytön aikakatkaisu</string>
+    <string name="uninstall_speed_cameras">Poista nopeuskamerat</string>
+    <string name="speed_camera_pois">Nopeuskameroiden KP:t</string>
+    <string name="speed_cameras_legal_descr">Joissain maissa tai alueilla nopeusvalvontakameroiden varoitussovellusten käyttö on lailla kielletty.
+\n
+\nSinun on tehtävä valinta maasi lainsäädännön mukaan.
+\n
+\nValitse %1$s, niin saat hälytyksiä ja varoituksia nopeuskameroista.
+\n
+\nValitse %2$s. Kaikki nopeuskameroihin liittyvät tiedot: hälytykset, ilmoitukset, KP:t poistetaan, kunnes OsmAnd asennetaan kokonaan uudelleen.</string>
+    <string name="keep_active">Pidä aktiivisena</string>
+    <string name="speed_cameras_alert">Nopeusvalvontakameroiden hälytykset on joissakin maissa kielletty lailla.</string>
+    <string name="screen_timeout_descr">Jos \"%1$s\" on päällä, toiminta-aika riippuu siitä.</string>
+    <string name="details_dialog_decr">Näytä tai piilota kartan lisätiedot</string>
+    <string name="add_online_source">Lisää verkkolähde</string>
+    <string name="clear_tiles_warning">Näiden muutosten tekeminen tyhjentää tämän ruutulähteen välimuistiin tallennetut tiedot</string>
+    <string name="routing_attr_piste_type_sled_name">Kelkka</string>
+    <string name="download_detailed_map">Lataa yksityiskohtainen %s kartta, jotta voit tarkastella tätä aluetta.</string>
+    <string name="routeInfo_piste_difficulty_name">Ladun vaikeustaso</string>
+    <string name="rendering_attr_piste_difficulty_undefined_name">Määrittelemätön</string>
+    <string name="rendering_attr_piste_difficulty_expert_name">Asiantuntija</string>
+    <string name="rendering_attr_piste_difficulty_advanced_name">Edistynyt</string>
+    <string name="rendering_attr_piste_difficulty_intermediate_name">Keskitasoinen</string>
+    <string name="rendering_attr_piste_difficulty_easy_name">Helppo</string>
+    <string name="rendering_attr_piste_type_nordic_name">Pohjoismainen</string>
+    <string name="rendering_attr_piste_type_downhill_name">Alamäki</string>
+    <string name="rendering_attr_piste_type_connection_name">Yhteys</string>
+    <string name="rendering_attr_piste_type_hike_name">Vaellus</string>
+    <string name="rendering_attr_piste_type_sled_name">Kelkka</string>
+    <string name="rendering_attr_piste_type_sleigh_name">Reki</string>
+    <string name="change_data_storage_folder">Vaihda tallennuskansio</string>
+    <string name="internal_app_storage_description">Sisäinen tallennustila OsmAndia varten (piilotettu käyttäjiltä ja muilta sovelluksilta).</string>
+    <string name="paste_Osmand_data_folder_path">Liitä polku kansioon, jossa on OsmAnd-tiedot</string>
+    <string name="change_osmand_data_folder_question">Muuta OsmAnd-tietokansiota\?</string>
+    <string name="enter_path_to_folder">Kirjoita kansion polku</string>
+    <string name="data_storage_space_description">%1$s Gt vapaata (%2$s Gt:sta)</string>
+    <string name="data_storage_preference_summary">%1$s • %2$s</string>
+    <string name="track_storage_directory_descrp">Jäljet voidaan tallentaa joko rec-kansioon, kuukausittaisiin tai päivittäisiin kansioihin.</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_description">Suosi päällystämätöntä tietä päällystettyjen teiden sijaan reitityksessä.</string>
+    <string name="quick_action_hillshade_descr">Painike, joka näyttää tai piilottaa kukkulavarjostuksen kartalla.</string>
+    <string name="tts_initialization_error">Teksti-puheeksi-moottoria ei voida käynnistää.</string>
+    <string name="update_all_maps_q">Haluatko varmasti päivittää kaikki (%1$d) kartat\?</string>
+    <string name="update_all_maps">Päivitä kaikki kartat</string>
 </resources>
