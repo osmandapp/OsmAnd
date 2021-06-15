@@ -229,6 +229,8 @@ public class RouteProvider {
 					if (!gpxRoute.isEmpty()) {
 						LatLon startPoint = gpxRoute.get(0).getStartPoint();
 						nearestGpxLocation = new Location("", startPoint.getLatitude(), startPoint.getLongitude());
+					} else {
+						nearestGpxLocation = new Location("", routeParams.end.getLatitude(), routeParams.end.getLongitude());
 					}
 				} else {
 					gpxRoute = result.getOriginalRoute();
