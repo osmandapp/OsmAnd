@@ -4169,4 +4169,6 @@
     <string name="grey_color_slope">Sivá farba sa použije, keď sklon nie je určený.</string>
     <string name="backup_version_history">História verzií</string>
     <string name="backup_storage_taken">Použité miesto</string>
+    <string name="backup_version_history_delete_descr">Chcete vymazať históriu zmien pre vypnuté typy z cloudu (úložiska na serveri)\?</string>
+    <string name="delete_version_history">Vymazať históriu verzií</string>
 </resources>
