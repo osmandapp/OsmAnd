@@ -15,6 +15,7 @@
     <string name="shared_string_includes_with_columns">Includes:</string>
     <string name="shared_string_not_included_with_columns">Not included:</string>
     <string name="cancel_anytime_in_gplay">Cancel anytime in Google Play.</string>
+    <string name="cancel_anytime_in_huawei_appgallery">Cancel anytime in Huawei AppGallery</string>
     <string name="shared_string_learn_more">Learn more</string>
     <string name="osmand_pro_tagline">Get maximum features</string>
     <string name="osmand_maps_plus_tagline">Get extended features</string>
