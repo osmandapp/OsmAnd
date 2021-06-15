@@ -7,6 +7,11 @@
 	android:background="?attr/bg_color"
 	android:orientation="vertical">
 
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/list_content_padding"
+		android:background="?attr/activity_background_color" />
+
 	<androidx.appcompat.widget.AppCompatImageView
 		android:layout_width="@dimen/card_row_min_height"
 		android:layout_height="@dimen/card_row_min_height"
@@ -68,6 +73,10 @@
 
 	<include
 		layout="@layout/divider_half_item" />
+
+	<include
+		android:id="@+id/redeem_promo_code"
+		layout="@layout/redeem_promo_code_button" />
 
 	<include
 		android:id="@+id/new_device_account_container"
