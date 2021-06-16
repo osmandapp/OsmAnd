@@ -4436,5 +4436,8 @@
 
 	<string name="poi_fuel_propane">Propane</string>
 
+	<string name="poi_picnic_table_yes">Picnic table: yes</string>
+	<string name="poi_picnic_table_no">Picnic table: no</string>
+
 
 </resources>
