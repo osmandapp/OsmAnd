@@ -731,7 +731,8 @@ public class MapRenderRepositories {
 					prefs.MAP_PREFERRED_LOCALE.get() != null && prefs.MAP_PREFERRED_LOCALE.get().isEmpty()) {
 				currentRenderingContext.preferredLocale = app.getLanguage();
 				currentRenderingContext.transliterate =
-						!languagesNotTransliterateOnBasemap.contains(app.getLanguage());
+						!languagesNotTransliterateOnBasemap.contains(app.getLanguage())
+						&& prefs.MAP_TRANSLITERATE_NAMES.get();
 			} else {
 				currentRenderingContext.preferredLocale = prefs.MAP_PREFERRED_LOCALE.get();
 				currentRenderingContext.transliterate = prefs.MAP_TRANSLITERATE_NAMES.get();
@@ -775,6 +776,11 @@ public class MapRenderRepositories {
 			}
 			this.bmp = bmp;
 			this.bmpLocation = tileRect;
+
+			for (TextRenderer.TextDrawInfo tr : currentRenderingContext.textToDraw) {
+				System.out.println(tr.text + " (JAVA text)");
+			}
+
 			if(nativeLib != null) {
 				renderer.generateNewBitmapNative(currentRenderingContext, nativeLib, cNativeObjects, bmp, renderingReq, mapTileDownloader);
 			} else {
