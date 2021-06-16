@@ -26,7 +26,8 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.chooseplan.TroubleshootingOrPurchasingCard;
+import net.osmand.plus.chooseplan.PurchasingCard;
+import net.osmand.plus.chooseplan.TroubleshootingCard;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.liveupdates.CountrySelectionFragment;
@@ -108,8 +109,9 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 			cardsContainer.addView(subscriptionsCard.build(mapActivity));
 		}
 
-		cardsContainer.addView(new TroubleshootingOrPurchasingCard(mapActivity, purchaseHelper, isPaidVersion, false)
-				.build(mapActivity));
+		cardsContainer.addView((isPaidVersion ?
+				new TroubleshootingCard(mapActivity, purchaseHelper, false) :
+				new PurchasingCard(mapActivity, purchaseHelper)).build(mapActivity));
 	}
 
 	@Override

@@ -161,8 +161,7 @@ public class ChoosePlanFragment extends BasePurchaseFragment {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			FrameLayout container = view.findViewById(R.id.troubleshooting_card);
-			boolean isPaidVersion = Version.isPaidVersion(app);
-			container.addView(new TroubleshootingOrPurchasingCard(activity, purchaseHelper, isPaidVersion, true)
+			container.addView(new TroubleshootingCard(activity, purchaseHelper, true)
 					.build(activity));
 		}
 	}
