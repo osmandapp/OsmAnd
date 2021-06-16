@@ -11,7 +11,8 @@
 	Thx - Hardy
 
 -->
-
+    <string name="routing_attr_avoid_tunnels_name">Avoid tunnels</string>
+    <string name="routing_attr_avoid_tunnels_description">Avoid tunnels</string>
     <string name="delete_version_history">Delete version history</string>
     <string name="backup_version_history_delete_descr">Do you want to delete the change history for disabled types from cloud?</string>
     <string name="backup_storage_taken">Storage taken</string>
