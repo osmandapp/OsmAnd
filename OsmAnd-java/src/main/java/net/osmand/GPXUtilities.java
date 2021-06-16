@@ -1820,12 +1820,29 @@ public class GPXUtilities {
 			if (rect.width() > 0.00001 && rect.height() > 0.00001) {
 				WptPt wptPt = findPointToShow();
 				if (wptPt != null) {
-					int radius = (((int) Math.max(MapUtils.getDistance(wptPt.lat, wptPt.lon, rect.bottom, rect.left),
-							MapUtils.getDistance(wptPt.lat, wptPt.lon, rect.top, rect.right))) / RADIUS_DIVIDER + 1) * 5;
-					outerRadius = String.valueOf(radius);
+					int radius = (int) Math.max(MapUtils.getDistance(wptPt.lat, wptPt.lon, rect.bottom, rect.left),
+							MapUtils.getDistance(wptPt.lat, wptPt.lon, rect.top, rect.right));
+					outerRadius = getRadiusID(radius);
 				}
 			}
 			return outerRadius;
+		}
+
+		/**
+		 * convert radius to char to store in the obf file
+		 *
+		 * @param radius integer radius in m
+		 * @return String where  A <= 5 km, B <= 10 km, C <= 50 km, D <= 100 km, E <= 500 km, F <= 1000 km,
+		 * G <= 5000 km, H <= 10000 km
+		 */
+		private String getRadiusID(int radius) {
+			radius = (radius / RADIUS_DIVIDER + 1) * 5;
+			int id = 0;
+			int limit = 5;
+			while ((radius - limit) > 0) {
+				limit *= (id++ & 1) == 0 ? 2 : 5;
+			}
+			return String.valueOf((char) ('A' + id));
 		}
 
 		private int getItemsToWriteSize() {
