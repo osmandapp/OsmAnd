@@ -27,6 +27,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
+import net.osmand.plus.activities.MapActivity;
 
 import org.apache.commons.logging.Log;
 
@@ -267,6 +268,26 @@ public class ChoosePlanFragment extends BasePurchaseFragment {
 		setupRoundedBackground(v, colorNoAlpha);
 		v.setOnClickListener(l);
 		v.setEnabled(available);
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.disableDrawer();
+		}
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.enableDrawer();
+		}
 	}
 
 }
