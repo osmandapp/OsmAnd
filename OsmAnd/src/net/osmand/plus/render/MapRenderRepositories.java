@@ -776,11 +776,6 @@ public class MapRenderRepositories {
 			}
 			this.bmp = bmp;
 			this.bmpLocation = tileRect;
-
-			for (TextRenderer.TextDrawInfo tr : currentRenderingContext.textToDraw) {
-				System.out.println(tr.text + " (JAVA text)");
-			}
-
 			if(nativeLib != null) {
 				renderer.generateNewBitmapNative(currentRenderingContext, nativeLib, cNativeObjects, bmp, renderingReq, mapTileDownloader);
 			} else {
