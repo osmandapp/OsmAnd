@@ -1406,7 +1406,8 @@ public class RouteResultPreparation {
 				} else if ((TurnType.isRightTurn(turn) && possiblyRightTurn)
 						|| (TurnType.isLeftTurn(turn) && possiblyLeftTurn)) {
 					active = true;
-					// } else if (turn == TurnType.C) {
+				} else if (TurnType.isSlightTurn(turn) && !possiblyRightTurn && !possiblyLeftTurn) {
+					active = true;
 				} else if (turn == tp) {
 					active = true;
 				}
