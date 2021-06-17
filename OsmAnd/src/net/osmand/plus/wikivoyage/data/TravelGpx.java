@@ -63,9 +63,8 @@ public class TravelGpx extends TravelArticle {
 								return false;
 							}
 						});
-				int radiusMeters = routeRadius * 1000;
 				if (routeRadius >= 0) {
-					sr.setBBoxRadius(lat, lon, radiusMeters);
+					sr.setBBoxRadius(lat, lon, routeRadius);
 				}
 				reader.searchMapIndex(sr);
 				BinaryMapIndexReader.SearchRequest<Amenity> pointRequest = BinaryMapIndexReader.buildSearchPoiRequest(
@@ -85,7 +84,7 @@ public class TravelGpx extends TravelArticle {
 							}
 						});
 				if (routeRadius >= 0) {
-					pointRequest.setBBoxRadius(lat, lon, radiusMeters);
+					pointRequest.setBBoxRadius(lat, lon, routeRadius);
 				}
 				reader.searchPoi(pointRequest);
 				if (!Algorithms.isEmpty(segmentList)) {

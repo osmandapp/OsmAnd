@@ -1831,7 +1831,7 @@ public class GPXUtilities {
 		/**
 		 * convert radius to char to store in the obf file
 		 *
-		 * @param radius integer radius in m
+		 * @param radius integer radius in meters
 		 * @return String where  A <= 5 km, B <= 10 km, C <= 50 km, D <= 100 km, E <= 500 km, F <= 1000 km,
 		 * G <= 5000 km, H <= 10000 km
 		 */
