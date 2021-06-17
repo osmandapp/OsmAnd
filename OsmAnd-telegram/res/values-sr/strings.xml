@@ -32,7 +32,7 @@
     <string name="mile">mi</string>
     <string name="km">km</string>
     <string name="m">m</string>
-    <string name="nm">nmi</string>
+    <string name="nm">нми</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
@@ -84,7 +84,7 @@
     <string name="closing">Затварање</string>
     <string name="logging_out">Одјављивање</string>
     <string name="initialization">Покретање</string>
-    <string name="shared_string_logout">Одјавити се</string>
+    <string name="shared_string_logout">Одјави се</string>
     <string name="shared_string_login">Пријавите се</string>
     <string name="password_descr">Телеграм лозинка</string>
     <string name="enter_password">Унесите лозинку</string>
@@ -261,7 +261,7 @@
     <string name="status_widget_title">Статус Трагача ОсмАнда</string>
     <string name="shared_string_suggested">Предложено</string>
     <string name="back_to_osmand">Повратак на ОсмАнд</string>
-    <string name="duration_ago">Пре %1$</string>
+    <string name="duration_ago">Пре %1$s</string>
     <string name="last_response_duration">Последњи одговор: пре %1$</string>
     <string name="last_update_from_telegram_duration">Последње ажурирање из Телеграма: пре %1$</string>
     <string name="last_response_date">Последњи одговор: %1$</string>
