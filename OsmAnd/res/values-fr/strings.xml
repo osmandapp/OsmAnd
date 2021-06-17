@@ -3560,22 +3560,22 @@
     <string name="subscription_osmandlive_item">Abonnement - OsmAnd Live</string>
     <string name="osmand_purchases_item">Achats OsmAnd</string>
     <string name="navigation_profiles_item">Profils de navigation</string>
-    <string name="release_3_7">- Nouvelles cartes des pistes hors ligne 
-\n 
-\n - Personnalisation complète des favoris et des points de passage GPX - couleurs, icônes et formes personnalisées 
-\n 
-\n - Personnalisez l\'ordre des éléments dans le menu contextuel, le menu configurer la carte et le panneau déroulant 
-\n 
-\n - Wikipédia comme couche séparée dans Paramétrer la carte, sélectionnez uniquement les langues nécessaires 
-\n 
-\n - Créez vos propres filtres de PI avec une flexibilité totale 
-\n 
-\n - Ajout d\'options permettant de restaurer les paramètres des profils personnalisés 
-\n 
-\n - Les routes GPX utilisées en navigation prennent en charge les voies de circulation et les instructions de virage complètes 
-\n 
-\n - Correction des tailles sur les tablettes 
-\n 
+    <string name="release_3_7">- Nouvelles cartes des pentes hors ligne
+\n
+\n - Personnalisation complète des favoris et des points de passage GPX - couleurs, icônes et formes personnalisées
+\n
+\n - Personnalisez l\'ordre des éléments dans le menu contextuel, le menu configurer la carte et le panneau déroulant
+\n
+\n - Wikipédia comme couche séparée dans Paramétrer la carte, sélectionnez uniquement les langues nécessaires
+\n
+\n - Créez vos propres filtres de PI avec une flexibilité totale
+\n
+\n - Ajout d\'options permettant de restaurer les paramètres des profils personnalisés
+\n
+\n - Les routes GPX utilisées en navigation prennent en charge les voies de circulation et les instructions de virage complètes
+\n
+\n - Correction des tailles sur les tablettes
+\n
 \n - Correction de bugs avec RTL
 \n
 \n</string>
@@ -3893,7 +3893,7 @@
     <string name="plan_route_split_after">Couper après</string>
     <string name="plan_route_add_new_segment">Ajouter un nouveau segment</string>
     <string name="gpx_upload_identifiable_visibility_descr">« Identifiable » signifie que la trace sera affichée publiquement dans « Mes traces GPS » ainsi que dans les listes de traces GPS publiques. Ainsi les autres utilisateurs pourront télécharger la trace brute et l\'associer avec votre nom d\'utilisateur. Les données de points de passage horodatés fournis par l\'API GPS publique feront référence à la page d\'origine de votre trace.</string>
-    <string name="gpx_upload_public_visibility_descr">« Public » signifie que la trace est affichée publiquement dans vos traces GPS et dans les listes de traces GPS publiques. Les données diffusées via l\'API ne font pas référence à votre page de traces. Les horodatages des points de trace ne sont pas disponibles via l\'API GPS publique et les points de trace ne sont pas classés par ordre chronologique.</string>
+    <string name="gpx_upload_public_visibility_descr">« Publique » signifie que la trace est affichée publiquement dans vos traces GPS et dans les listes de traces GPS publiques. Les données diffusées via l\'API ne font pas référence à votre page de traces. Les horodatages des points de trace ne sont pas disponibles via l\'API GPS publique et les points de trace ne sont pas classés par ordre chronologique.</string>
     <string name="profile_type_osmand_string">Profil OsmAnd</string>
     <string name="profile_type_user_string">Profil utilisateur</string>
     <string name="reverse_all_points">Inverser tous les points</string>
