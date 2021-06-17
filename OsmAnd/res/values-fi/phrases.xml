@@ -524,7 +524,7 @@
     <string name="poi_canal">Kanaali</string>
     <string name="poi_pier">Laituri</string>
     <string name="poi_surveillance">Valvonta</string>
-    <string name="poi_observatory"/>
+    <string name="poi_observatory">Observatorio</string>
     <string name="poi_driving_school">Ajokoulu</string>
     <string name="poi_kindergarten">Päiväkoti</string>
     <string name="poi_school">Koulu</string>
