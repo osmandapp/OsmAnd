@@ -342,12 +342,7 @@ public class RouteColorize {
             LOG.info("Will use default palette");
             palette = new double[3][2];
 
-            double[][] defaultPalette = {
-                    {minValue, GREEN},
-                    {(minValue + maxValue) / 2, YELLOW},
-                    {maxValue, RED}
-            };
-            palette = defaultPalette;
+            palette = getDefaultPalette(colorizationType);
         }
         double min;
         double max = min = palette[0][VALUE_INDEX];
@@ -506,6 +501,18 @@ public class RouteColorize {
             result[i] = doubleList.get(i);
         }
         return result;
+    }
+
+    private double[][] getDefaultPalette(ColorizationType colorizationType) {
+        if (colorizationType == ColorizationType.SLOPE) {
+            return SLOPE_PALETTE;
+        } else {
+            return new double[][] {
+                    {minValue, GREEN},
+                    {(minValue + maxValue) / 2, YELLOW},
+                    {maxValue, RED}
+            };
+        }
     }
 
     private static int rgbaToDecimal(int r, int g, int b, int a) {
