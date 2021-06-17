@@ -74,6 +74,7 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 	private List<DownloadItem> voiceItemsRec;
 
 	private InfoType selectedVoiceType = InfoType.TTS;
+	private IndexItem indexToSelectAfterDownload = null;
 
 	public static void showInstance(@NonNull FragmentManager fm, Fragment target, ApplicationMode appMode, boolean usedOnMap) {
 		try {
@@ -102,13 +103,10 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 		Context context = requireContext();
 		settings = app.getSettings();
 		int padding = getDimen(R.dimen.content_padding_small);
-
 		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
-		BaseBottomSheetItem titleItem = new BottomSheetItemWithDescription.Builder()
-				.setDescription(getString(R.string.language_description))
-				.setDescriptionColorId(nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light)
-				.setTitle(getString(R.string.shared_string_language))
-				.setLayoutId(R.layout.bottom_sheet_item_title_with_description)
+
+		BaseBottomSheetItem titleItem = new BaseBottomSheetItem.Builder()
+				.setCustomView(createTitleAndDescription(inflater))
 				.create();
 		items.add(titleItem);
 
@@ -128,6 +126,7 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 		items.add(new DividerSpaceItem(context, padding));
 		BaseBottomSheetItem switchStartAndEndItem = new BottomSheetItemWithDescription.Builder()
 				.setDescription(getString(selectedVoiceType.descriptionRes))
+				.setDescriptionTextSizeId(R.dimen.default_list_text_size)
 				.setLayoutId(R.layout.bottom_sheet_item_description_long)
 				.create();
 		items.add(switchStartAndEndItem);
@@ -184,7 +183,25 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 
 	@Override
 	public void downloadHasFinished() {
+		selectLastClickedDownloadedIndexItem();
 		updateItems();
+	}
+
+	private View createTitleAndDescription(LayoutInflater inflater) {
+		View titleAndDescription = inflater.inflate(R.layout.bottom_sheet_item_title_with_description, null);
+
+		TextView title = titleAndDescription.findViewById(R.id.title);
+		title.setText(R.string.shared_string_language);
+		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+				LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+		params.bottomMargin = getDimen(R.dimen.bottom_sheet_title_padding_top);
+		title.setLayoutParams(params);
+
+		TextView description = titleAndDescription.findViewById(R.id.description);
+		description.setText(R.string.language_description);
+		description.setTextColor(AndroidUtils.getColorFromAttr(titleAndDescription.getContext(), android.R.attr.textColorPrimary));
+
+		return titleAndDescription;
 	}
 
 	private void setupTypeRadioGroup(LinearLayout buttonsContainer) {
@@ -225,12 +242,12 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 		createSuggestedVoiceItemsView(selectedVoiceType == InfoType.TTS ? voiceItems : voiceItemsRec);
 	}
 
-	private void createSuggestedVoiceItemsView(List<DownloadItem> suggestedMaps) {
+	private void createSuggestedVoiceItemsView(List<DownloadItem> suggestedVoicePrompts) {
 		OsmandPreference<String> voiceProvider = settings.VOICE_PROVIDER;
 		int defaultLanguagePosition = items.size();
 
 		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
-		for (final DownloadItem downloadItem : suggestedMaps) {
+		for (final DownloadItem downloadItem : suggestedVoicePrompts) {
 			final IndexItem indexItem = (IndexItem) downloadItem;
 
 			View container = createVoiceItemView(indexItem, inflater);
@@ -261,13 +278,14 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 								boolean checked = !voiceDownloadedItem[0].isChecked();
 								voiceDownloadedItem[0].setChecked(checked);
 								voiceProvider.setModeValue(getAppMode(), indexItem.getBasename());
-								if (getTargetFragment() instanceof OnPreferenceChanged) {
-									((OnPreferenceChanged) getTargetFragment()).onPreferenceChanged(voiceProvider.getId());
-								}
+								onVoiceProviderChanged();
 								dismiss();
 							} else {
 								if (downloadThread.isDownloading(indexItem)) {
 									downloadThread.cancelDownload(indexItem);
+									if (indexItem.equals(indexToSelectAfterDownload)) {
+										indexToSelectAfterDownload = null;
+									}
 									AndroidUiHelper.updateVisibility(progressBar, false);
 									AndroidUiHelper.updateVisibility(textDescription, true);
 									secondaryIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_gsave_dark));
@@ -277,6 +295,7 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 									progressBar.setIndeterminate(downloadThread.isDownloading());
 									secondaryIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_remove_dark));
 									new DownloadValidationManager(app).startDownload(getActivity(), indexItem);
+									indexToSelectAfterDownload = indexItem;
 								}
 							}
 						}
@@ -319,9 +338,29 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 		return container;
 	}
 
+	private void selectLastClickedDownloadedIndexItem() {
+		if (indexToSelectAfterDownload != null && indexToSelectAfterDownload.isDownloaded()) {
+			settings.VOICE_PROVIDER.setModeValue(getAppMode(), indexToSelectAfterDownload.getBasename());
+			onVoiceProviderChanged();
+			indexToSelectAfterDownload = null;
+		}
+	}
+
+	private void onVoiceProviderChanged() {
+		Fragment target = getTargetFragment();
+		if (target instanceof OnPreferenceChanged) {
+			((OnPreferenceChanged) target).onPreferenceChanged(settings.VOICE_PROVIDER.getId());
+		}
+	}
+
 	@Override
 	protected int getActiveColorId() {
 		return nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+	}
+
+	@Override
+	protected int getDismissButtonTextId() {
+		return R.string.shared_string_close;
 	}
 
 	public int getDimen(@DimenRes int id) {
@@ -331,8 +370,8 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 	private BaseBottomSheetItem createDividerItem() {
 		DividerItem dividerItem = new DividerItem(app);
 		int start = getDimen(R.dimen.content_padding);
-		int vertical = getDimen(R.dimen.content_padding_small_half);
-		dividerItem.setMargins(start, vertical, 0, vertical);
+		int top = getDimen(R.dimen.content_padding_small);
+		dividerItem.setMargins(start, top, 0, 0);
 		return dividerItem;
 	}
 

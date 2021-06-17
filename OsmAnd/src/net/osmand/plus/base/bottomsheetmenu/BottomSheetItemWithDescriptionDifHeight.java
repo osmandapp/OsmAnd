@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import androidx.annotation.ColorRes;
+import androidx.annotation.DimenRes;
 import androidx.annotation.LayoutRes;
 
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
@@ -28,6 +29,7 @@ public class BottomSheetItemWithDescriptionDifHeight extends BottomSheetItemWith
 	                                               boolean iconHidden,
 	                                               CharSequence description,
 	                                               @ColorRes int descriptionColorId,
+	                                               @DimenRes int descriptionTextSizeId,
 	                                               int descriptionMaxLines,
 	                                               boolean descriptionLinksClickable,
 	                                               int minHeight) {
@@ -44,6 +46,7 @@ public class BottomSheetItemWithDescriptionDifHeight extends BottomSheetItemWith
 				iconHidden,
 				description,
 				descriptionColorId,
+				descriptionTextSizeId,
 				descriptionMaxLines,
 				descriptionLinksClickable);
 
@@ -84,6 +87,7 @@ public class BottomSheetItemWithDescriptionDifHeight extends BottomSheetItemWith
 					iconHidden,
 					description,
 					descriptionColorId,
+					descriptionTextSizeId,
 					descriptionMaxLines,
 					descriptionLinksClickable,
 					minHeight);

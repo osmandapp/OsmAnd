@@ -10,6 +10,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
+import androidx.annotation.DimenRes;
 import androidx.annotation.LayoutRes;
 import androidx.core.content.ContextCompat;
 import androidx.core.widget.CompoundButtonCompat;
@@ -44,6 +45,7 @@ public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescri
 											 boolean iconHidden,
 											 CharSequence description,
 											 @ColorRes int descriptionColorId,
+											 @DimenRes int descriptionTextSizeId,
 											 int descriptionMaxLines,
 											 boolean descriptionLinksClickable,
 											 boolean checked,
@@ -63,6 +65,7 @@ public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescri
 				iconHidden,
 				description,
 				descriptionColorId,
+				descriptionTextSizeId,
 				descriptionMaxLines,
 				descriptionLinksClickable);
 		this.checked = checked;
@@ -154,6 +157,7 @@ public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescri
 					iconHidden,
 					description,
 					descriptionColorId,
+					descriptionTextSizeId,
 					descriptionMaxLines,
 					descriptionLinksClickable,
 					checked,
