@@ -1116,27 +1116,32 @@ public class Algorithms {
 
 	public static int[] stringToGradientPalette(String str) {
 		if (Algorithms.isBlank(str)) {
-			return RouteColorize.colors;
+			return RouteColorize.COLORS;
 		}
 		String[] arr = str.split(" ");
-		if (arr.length != 3) {
-			return RouteColorize.colors;
+		if (arr.length != 3 || arr.length != 5) {
+			return RouteColorize.COLORS;
 		}
-		int[] colors = new int[3];
+		int[] colors = new int[arr.length];
 		try {
-			for (int i = 0; i < 3; i++) {
+			for (int i = 0; i < arr.length; i++) {
 				colors[i] = Algorithms.parseColor(arr[i]);
 			}
 		} catch (IllegalArgumentException e) {
-			return RouteColorize.colors;
+			return arr.length == 3 ? RouteColorize.COLORS : RouteColorize.SLOPE_COLORS;
 		}
 		return colors;
 	}
 
 	public static String gradientPaletteToString(int[] colors) {
-		int[] src = (colors != null && colors.length == 3) ? colors : RouteColorize.colors;
-		return Algorithms.colorToString(src[0]) + " " +
-				Algorithms.colorToString(src[1]) + " " +
-				Algorithms.colorToString(src[2]);
+		int[] src = (colors != null && (colors.length == 3 || colors.length == 5)) ? colors : RouteColorize.COLORS;
+		StringBuilder palette = new StringBuilder();
+		for (int i = 0; i < src.length; i++) {
+			palette.append(colorToString(src[i]));
+			if (i + 1 != src.length) {
+				palette.append(" ");
+			}
+		}
+		return palette.toString();
 	}
 }

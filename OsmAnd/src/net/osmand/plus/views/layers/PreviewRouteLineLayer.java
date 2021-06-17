@@ -28,6 +28,7 @@ import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.geometry.GeometryWayStyle;
 import net.osmand.plus.views.layers.geometry.RouteGeometryWay;
+import net.osmand.plus.views.layers.geometry.RouteGeometryWay.GeometryGradientWayStyle;
 import net.osmand.plus.views.layers.geometry.RouteGeometryWayContext;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
@@ -38,6 +39,7 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -128,14 +130,13 @@ public class PreviewRouteLineLayer extends OsmandMapLayer {
 			QuadPoint c = tileBox.getCenterPixelPoint();
 
 			canvas.rotate(-angle, c.x, c.y);
-			drawRouteLinePreview(canvas, tileBox, settings, previewRouteLineInfo);
+			drawRouteLinePreview(canvas, tileBox, previewRouteLineInfo);
 			canvas.rotate(angle, c.x, c.y);
 		}
 	}
 
 	private void drawRouteLinePreview(Canvas canvas,
 									  RotatedTileBox tileBox,
-									  DrawSettings settings,
 									  PreviewRouteLineInfo previewInfo) {
 		Rect previewBounds = previewInfo.getLineBounds();
 		if (previewBounds == null) {
@@ -200,36 +201,90 @@ public class PreviewRouteLineLayer extends OsmandMapLayer {
 
 	private void fillPreviewLineArrays(List<Float> tx, List<Float> ty, List<Double> angles,
 									   List<Double> distances, List<GeometryWayStyle<?>> styles) {
-		angles.add(0d);
-		distances.add(0d);
-		for (int i = 1; i < tx.size(); i++) {
-			float x = tx.get(i);
-			float y = ty.get(i);
-			float px = tx.get(i - 1);
-			float py = ty.get(i - 1);
-			double angleRad = Math.atan2(y - py, x - px);
-			Double angle = (angleRad * 180 / Math.PI) + 90f;
-			angles.add(angle);
-			double dist = Math.sqrt((y - py) * (y - py) + (x - px) * (x - px));
-			distances.add(dist);
-		}
+		fillDistancesAngles(tx, ty, angles, distances);
 
 		if (gradientScaleType == null) {
 			for (int i = 0; i < tx.size(); i++) {
 				styles.add(previewLineGeometry.getDefaultWayStyle());
 			}
-		} else {
-			for (int i = 1; i < tx.size(); i++) {
-				RouteGeometryWay.GeometryGradientWayStyle style = previewLineGeometry.getGradientWayStyle();
-				styles.add(style);
-				double prevDist = distances.get(i - 1);
-				double currDist = distances.get(i);
-				double nextDist = i + 1 == distances.size() ? 0 : distances.get(i + 1);
-				style.currColor = getPreviewColor(i - 1, (prevDist + currDist / 2) / (prevDist + currDist));
-				style.nextColor = getPreviewColor(i, (currDist + nextDist / 2) / (currDist + nextDist));
-			}
-			styles.add(styles.get(styles.size() - 1));
+		} else if (gradientScaleType == GradientScaleType.ALTITUDE) {
+			fillAltitudeGradientArrays(distances, styles);
+		} else if (gradientScaleType == GradientScaleType.SLOPE) {
+			fillSlopeGradientArrays(tx, ty, angles, distances, styles);
 		}
+	}
+
+	private void fillAltitudeGradientArrays(List<Double> distances, List<GeometryWayStyle<?>> styles) {
+		int[] colors = RouteColorize.COLORS;
+		for (int i = 1; i < distances.size(); i++) {
+			RouteGeometryWay.GeometryGradientWayStyle style = previewLineGeometry.getGradientWayStyle();
+			styles.add(style);
+			double prevDist = distances.get(i - 1);
+			double currDist = distances.get(i);
+			double nextDist = i + 1 == distances.size() ? 0 : distances.get(i + 1);
+			style.currColor = getPreviewColor(colors, i - 1, (prevDist + currDist / 2) / (prevDist + currDist));
+			style.nextColor = getPreviewColor(colors, i, (currDist + nextDist / 2) / (currDist + nextDist));
+		}
+		styles.add(styles.get(styles.size() - 1));
+	}
+
+	private void fillSlopeGradientArrays(List<Float> tx, List<Float> ty, List<Double> angles,
+										 List<Double> distances, List<GeometryWayStyle<?>> styles) {
+		double totalDist = 0;
+		for (Double d : distances) {
+			totalDist += d;
+		}
+
+		boolean rtl = AndroidUtils.isLayoutRtl(view.getContext());
+		int[] palette = RouteColorize.SLOPE_COLORS;
+		List<Double> gradientLengthsRatio = Arrays.asList(0.145833, 0.130209, 0.291031);
+		List<Float> srcTx = new ArrayList<>(tx);
+		List<Float> srcTy = new ArrayList<>(ty);
+		int[] colors = new int[srcTx.size() + gradientLengthsRatio.size()];
+		colors[0] = palette[0];
+		colors[colors.length - 1] = palette[palette.length - 1];
+		double passedDist = 0;
+
+		for (int i = 0; i < gradientLengthsRatio.size(); i++) {
+			double ratio = gradientLengthsRatio.get(i);
+			double length = passedDist + totalDist * ratio;
+			passedDist += totalDist * ratio;
+			int insertIdx;
+			for (insertIdx = 1; insertIdx < distances.size() && length - distances.get(insertIdx) > 0; insertIdx++) {
+				length -= distances.get(insertIdx);
+			}
+
+			float px = srcTx.get(insertIdx - 1);
+			float py = srcTy.get(insertIdx - 1);
+			float nx = srcTx.get(insertIdx);
+			float ny = srcTy.get(insertIdx);
+			float r = (float) (length / distances.get(insertIdx));
+			float x = (float) Math.ceil(rtl ? px - (px - nx) * r : px + (nx - px) * r);
+			float y = (float) Math.ceil(py + (ny - py) * r);
+			int idx = findNextPrevPointIdx(x, y, tx, ty, !rtl);
+			tx.add(idx, x);
+			ty.add(idx, y);
+			colors[idx] = palette[i + 1];
+		}
+
+		distances.clear();
+		angles.clear();
+		fillDistancesAngles(tx, ty, angles, distances);
+
+		for (int i = 1; i < tx.size(); i++) {
+			GeometryGradientWayStyle style = previewLineGeometry.getGradientWayStyle();
+			styles.add(style);
+			double currDist = distances.get(i);
+			double nextDist = i + 1 == distances.size() ? 0 : distances.get(i + 1);
+			style.currColor = i == 1 ? colors[0] : ((GeometryGradientWayStyle) styles.get(i - 2)).nextColor;
+			if (colors[i] != 0) {
+				style.nextColor = colors[i];
+			} else {
+				double coeff = currDist / (currDist + nextDist);
+				style.nextColor = RouteColorize.getIntermediateColor(colors[i - 1], colors[i + 1], coeff);
+			}
+		}
+		styles.add(styles.get(styles.size() - 1));
 	}
 
 	public boolean isPreviewRouteLineVisible() {
@@ -393,16 +448,45 @@ public class PreviewRouteLineLayer extends OsmandMapLayer {
 		drawable.draw(canvas);
 	}
 
-	private int getPreviewColor(int index, double coeff) {
-		if (index == 0) {
-			return RouteColorize.GREEN;
-		} else if (index == 1) {
-			return RouteColorize.getGradientColor(RouteColorize.GREEN, RouteColorize.YELLOW, coeff);
-		} else if (index == 2) {
-			return RouteColorize.getGradientColor(RouteColorize.YELLOW, RouteColorize.RED, coeff);
-		} else {
-			return RouteColorize.RED;
+	private void fillDistancesAngles(List<Float> tx, List<Float> ty, List<Double> angles,
+									 List<Double> distances) {
+		angles.add(0d);
+		distances.add(0d);
+		for (int i = 1; i < tx.size(); i++) {
+			float x = tx.get(i);
+			float y = ty.get(i);
+			float px = tx.get(i - 1);
+			float py = ty.get(i - 1);
+			double angleRad = Math.atan2(y - py, x - px);
+			Double angle = (angleRad * 180 / Math.PI) + 90f;
+			angles.add(angle);
+			double dist = Math.sqrt((y - py) * (y - py) + (x - px) * (x - px));
+			distances.add(dist);
 		}
+	}
+
+	private int findNextPrevPointIdx(float x, float y, List<Float> tx, List<Float> ty, boolean next) {
+		for (int i = 0; i < tx.size(); i++) {
+			if (next && tx.get(i) >= x || !next && tx.get(i) <= x) {
+				if (ty.get(i) == y) {
+					return i;
+				} else if (ty.get(i) <= y) {
+					return i;
+				}
+			}
+		}
+		return tx.size() - 1;
+	}
+
+	private int getPreviewColor(int[] colors, int index, double coeff) {
+		if (index == 0) {
+			return colors[0];
+		} else if (index > 0 && index < colors.length) {
+			return RouteColorize.getIntermediateColor(colors[index - 1], colors[index], coeff);
+		} else if (index == colors.length) {
+			return colors[index - 1];
+		}
+		return 0;
 	}
 
 	private ApplicationMode getAppMode() {

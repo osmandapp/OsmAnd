@@ -33,13 +33,18 @@ public class RouteColorize {
     public static final int GREEN = rgbaToDecimal(90, 220, 95, 255);
     public static final int YELLOW = rgbaToDecimal(212, 239, 50, 255);
     public static final int RED = rgbaToDecimal(243, 55, 77, 255);
-    public static final int PURPLE = rgbaToDecimal(128, 0, 128, 255);
+    public static final int GREEN_SLOPE = rgbaToDecimal(46, 185, 0, 255);
     public static final int WHITE = rgbaToDecimal(255, 255, 255, 255);
-    public static final int[] colors = new int[] {GREEN, YELLOW, RED};
+    public static final int YELLOW_SLOPE = rgbaToDecimal(255, 222, 2, 255);
+    public static final int RED_SLOPE = rgbaToDecimal(255, 1, 1, 255);
+    public static final int PURPLE_SLOPE = rgbaToDecimal(130, 1, 255, 255);
+
+    public static final int[] COLORS = new int[] {GREEN, YELLOW, RED};
+    public static final int[] SLOPE_COLORS = new int[] {GREEN_SLOPE, WHITE, YELLOW_SLOPE, RED_SLOPE, PURPLE_SLOPE};
 
     public static final double SLOPE_MIN_VALUE = -0.25;//25%
     public static final double SLOPE_MAX_VALUE = 1.0;//100%
-    public static final double[][] SLOPE_PALETTE = {{SLOPE_MIN_VALUE, GREEN}, {0.0, WHITE}, {0.125, YELLOW}, {0.25, RED}, {SLOPE_MAX_VALUE, PURPLE}};
+    public static final double[][] SLOPE_PALETTE = {{SLOPE_MIN_VALUE, GREEN_SLOPE}, {0.0, WHITE}, {0.125, YELLOW_SLOPE}, {0.25, RED_SLOPE}, {SLOPE_MAX_VALUE, PURPLE_SLOPE}};
 
     private static final float DEFAULT_BASE = 17.2f;
 
@@ -227,7 +232,7 @@ public class RouteColorize {
                 double minPaletteValue = palette[i][VALUE_INDEX];
                 double maxPaletteValue = palette[i + 1][VALUE_INDEX];
                 double percent = (value - minPaletteValue) / (maxPaletteValue - minPaletteValue);
-                return getGradientColor(minPaletteColor, maxPaletteColor, percent);
+                return getIntermediateColor(minPaletteColor, maxPaletteColor, percent);
             }
         }
         if (value <= palette[0][0]) {
@@ -467,7 +472,7 @@ public class RouteColorize {
         }
     }
 
-    public static int getGradientColor(int minPaletteColor, int maxPaletteColor, double percent) {
+    public static int getIntermediateColor(int minPaletteColor, int maxPaletteColor, double percent) {
         double resultRed = getRed(minPaletteColor) + percent * (getRed(maxPaletteColor) - getRed(minPaletteColor));
         double resultGreen = getGreen(minPaletteColor) + percent * (getGreen(maxPaletteColor) - getGreen(minPaletteColor));
         double resultBlue = getBlue(minPaletteColor) + percent * (getBlue(maxPaletteColor) - getBlue(minPaletteColor));

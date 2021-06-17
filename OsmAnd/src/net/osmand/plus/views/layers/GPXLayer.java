@@ -809,7 +809,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		}
 		GpxDataItem dataItem = gpxDbHelper.getItem(new File(gpxFile.path));
 		if (dataItem == null) {
-			return RouteColorize.colors;
+			return scaleType == GradientScaleType.SLOPE ? RouteColorize.SLOPE_COLORS : RouteColorize.COLORS;
 		}
 		if (scaleType == GradientScaleType.SPEED) {
 			return dataItem.getGradientSpeedPalette();
