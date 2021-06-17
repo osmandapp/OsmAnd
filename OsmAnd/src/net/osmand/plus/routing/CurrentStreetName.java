@@ -7,6 +7,7 @@ import net.osmand.binary.RouteDataObject;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.data.AnnounceTimeDistances;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.router.ExitInfo;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
@@ -51,10 +52,14 @@ public class CurrentStreetName {
 			if (streetName.turnType == null) {
 				streetName.turnType = TurnType.valueOf(TurnType.C, false);
 			}
-			if (n.directionInfo.getExitInfo() != null) {
-				streetName.exitRef = n.directionInfo.getExitInfo().getRef();
-				if (!Algorithms.isEmpty(n.directionInfo.getExitInfo().getExitStreetName())) {
-					streetName.text = n.directionInfo.getExitInfo().getExitStreetName();
+			ExitInfo exitInfo = n.directionInfo.getExitInfo();
+			if (exitInfo != null) {
+				streetName.exitRef = exitInfo.getRef();
+				if (!Algorithms.isEmpty(exitInfo.getExitName())) {
+					if (!Algorithms.isEmpty(exitInfo.getExitDestination())) {
+						streetName.text = exitInfo.getExitDestination();
+					}
+					streetName.text = streetName.text + ", " + exitInfo.getExitName();
 				}
 			}
 		}

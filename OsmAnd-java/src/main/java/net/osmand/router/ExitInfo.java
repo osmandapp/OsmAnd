@@ -1,25 +1,32 @@
 package net.osmand.router;
 
-
 public class ExitInfo {
 
-    private String ref;
+	private String ref;
+	private String exitName;
+	private String exitDestination;
 
-    private String exitStreetName;
+	public String getRef() {
+		return ref;
+	}
 
-    public String getRef() {
-        return ref;
-    }
+	public void setRef(String ref) {
+		this.ref = ref;
+	}
 
-    public void setRef(String ref) {
-        this.ref = ref;
-    }
+	public String getExitName() {
+		return exitName;
+	}
 
-    public String getExitStreetName() {
-        return exitStreetName;
-    }
+	public void setExitName(String exitStreetName) {
+		this.exitName = exitStreetName;
+	}
 
-    public void setExitStreetName(String exitStreetName) {
-        this.exitStreetName = exitStreetName;
-    }
+	public String getExitDestination() {
+		return exitDestination;
+	}
+
+	public void setExitDestination(String exitDestination) {
+		this.exitDestination = exitDestination;
+	}
 }

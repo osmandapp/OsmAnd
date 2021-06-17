@@ -910,14 +910,10 @@ public class MapInfoWidgetsFactory {
 			CurrentStreetName streetName = null;
 			boolean showClosestWaypointFirstInAddress = true;
 			if (routingHelper != null && routingHelper.isRouteCalculated() && !routingHelper.isDeviatedFromRoute()) {
-				if (routingHelper.isFollowingMode()) {
-					if (settings.SHOW_STREET_NAME.get()) {
+				if (routingHelper.isFollowingMode() && settings.SHOW_STREET_NAME.get()){
 						NextDirectionInfo nextDirInfo = routingHelper.getNextRouteDirectionInfo(calc1, true);
-						NextDirectionInfo nextDirInfoAfter = routingHelper.getNextRouteDirectionInfoAfter(
-								nextDirInfo, new NextDirectionInfo(), true);
-						streetName = routingHelper.getCurrentName(nextDirInfoAfter);
+						streetName = routingHelper.getCurrentName(nextDirInfo);
 						turnDrawable.setColor(R.color.nav_arrow);
-					}
 				} else {
 					int di = MapRouteInfoMenu.getDirectionInfo();
 					if (di >= 0 && map.getMapRouteInfoMenu().isVisible() && di < routingHelper.getRouteDirections().size()) {

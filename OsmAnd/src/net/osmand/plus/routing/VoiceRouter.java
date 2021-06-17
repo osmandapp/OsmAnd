@@ -606,11 +606,15 @@ public class VoiceRouter {
 		}
 		if (player != null && player.supportsStructuredStreetNames()) {
 			result.put(TO_REF, getNonNullString(getSpeakablePointName(exitInfo.getRef())));
-			result.put(TO_STREET_NAME, getNonNullString(getSpeakablePointName(exitInfo.getExitStreetName())));
+			if (!Algorithms.isEmpty(exitInfo.getExitDestination())) {
+				result.put(TO_STREET_NAME, getNonNullString(getSpeakablePointName(exitInfo.getExitDestination())));
+			} else {
+				result.put(TO_STREET_NAME, getNonNullString(getSpeakablePointName(exitInfo.getExitName())));
+			}
 			result.put(TO_DEST, includeDest ? getNonNullString(getSpeakablePointName(routeInfo.getRef())) : "");
 		} else {
 			result.put(TO_REF, getNonNullString(getSpeakablePointName(exitInfo.getRef())));
-			result.put(TO_STREET_NAME, getNonNullString(getSpeakablePointName(exitInfo.getExitStreetName())));
+			result.put(TO_STREET_NAME, getNonNullString(getSpeakablePointName(exitInfo.getExitName())));
 			result.put(TO_DEST, "");
 		}
 		return new StreetName(result);
@@ -777,6 +781,7 @@ public class VoiceRouter {
 			if (tParam != null) {
 				if (exitInfo != null && !Algorithms.isEmpty(exitInfo.getRef()) && settings.SPEAK_EXIT_NUMBER_NAMES.get()) {
 					String stringRef = getSpeakableExitRef(exitInfo.getRef());
+
 					p.takeExit(tParam, stringRef, getIntRef(exitInfo.getRef()), getSpeakableExitName(next, exitInfo, !suppressDest));
 				} else {
 					p.turn(tParam, getSpeakableStreetName(currentSegment, next, !suppressDest));

@@ -16,6 +16,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.router.ExitInfo;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingContext;
@@ -416,7 +417,8 @@ public class RouteCalculationResult {
 					if (s.getObject().isExitPoint() && next.getObject().getHighway().equals("motorway_link")) {
 						ExitInfo exitInfo = new ExitInfo();
 						exitInfo.setRef(next.getObject().getExitRef());
-						exitInfo.setExitStreetName(next.getObject().getExitName());
+						exitInfo.setExitName(next.getObject().getExitName());
+						exitInfo.setExitDestination(getDestination(ctx ,lind, list));
 						info.setExitInfo(exitInfo);
 					}
 
@@ -468,7 +470,23 @@ public class RouteCalculationResult {
 		}
 		return segmentsToPopulate;
 	}
-	
+
+	private static String getDestination(OsmandApplication ctx, int lind, List<RouteSegmentResult> list) {
+		OsmandSettings settings = ctx.getSettings();
+		String lang = settings.MAP_PREFERRED_LOCALE.get();
+		Boolean transliterate = settings.MAP_TRANSLITERATE_NAMES.get();
+		for (int ind = lind; ind < list.size(); ind++) {
+			RouteSegmentResult segmentResult = list.get(ind);
+			String destinationName = segmentResult.getObject().getDestinationName(lang, transliterate,
+					segmentResult.isForwardDirection(),false);
+			if (!Algorithms.isEmpty(destinationName)) {
+				return segmentResult.getObject().getDestinationName(lang, transliterate,
+						segmentResult.isForwardDirection(),true);
+			}
+		}
+		return "";
+	}
+
 	protected static void addMissingTurnsToRoute(List<Location> locations, 
 			List<RouteDirectionInfo> originalDirections, Location start, LatLon end, ApplicationMode mode, Context ctx,
 			boolean leftSide){
