@@ -486,7 +486,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	}
 
 	@Override
-	public void newDownloadIndexes() {
+	public void onUpdatedIndexesList() {
 		updateDownloadSection();
 	}
 

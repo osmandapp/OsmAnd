@@ -137,7 +137,7 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 	}
 
 	@Override
-	public void newDownloadIndexes() {
+	public void onUpdatedIndexesList() {
 		updateItems();
 	}
 

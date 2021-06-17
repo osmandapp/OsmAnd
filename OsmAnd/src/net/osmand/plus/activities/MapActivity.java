@@ -1802,10 +1802,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	// DownloadEvents
 	@Override
-	public void newDownloadIndexes() {
+	public void onUpdatedIndexesList() {
 		for (Fragment fragment : getSupportFragmentManager().getFragments()) {
 			if (fragment instanceof DownloadEvents) {
-				((DownloadEvents) fragment).newDownloadIndexes();
+				((DownloadEvents) fragment).onUpdatedIndexesList();
 			}
 		}
 		if (dashboardOnMap.isVisible()) {

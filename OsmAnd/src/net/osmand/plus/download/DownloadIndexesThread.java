@@ -64,7 +64,7 @@ public class DownloadIndexesThread {
 
 	public interface DownloadEvents {
 		
-		void newDownloadIndexes();
+		void onUpdatedIndexesList();
 		
 		void downloadInProgress();
 		
@@ -151,9 +151,9 @@ public class DownloadIndexesThread {
 	}
 	
 	@UiThread
-	protected void newDownloadIndexes() {
+	protected void onUpdatedIndexesList() {
 		if (uiActivity != null) {
-			uiActivity.newDownloadIndexes();
+			uiActivity.onUpdatedIndexesList();
 		}
 	}
 
@@ -370,7 +370,7 @@ public class DownloadIndexesThread {
 				showWarnDialog();
 			}
 			currentRunningTask.remove(this);
-			newDownloadIndexes();
+			onUpdatedIndexesList();
 		}
 
 		private void showWarnDialog() {

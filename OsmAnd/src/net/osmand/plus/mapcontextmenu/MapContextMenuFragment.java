@@ -2262,7 +2262,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	//DownloadEvents
 	@Override
-	public void newDownloadIndexes() {
+	public void onUpdatedIndexesList() {
 		updateOnDownload();
 	}
 
