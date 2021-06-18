@@ -176,7 +176,7 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 	}
 	
 	public String getRemoteDate(DateFormat dateFormat) {
-		if(timestamp <= 0) {
+		if (timestamp <= 0) {
 			return "";
 		}
 		return dateFormat.format(new Date(timestamp));
@@ -238,6 +238,14 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 		}
 		return null;
 	}
+
+	public boolean isVoiceTTS() {
+		return fileName.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS);
+	}
+
+	public boolean isRecordedVoice() {
+		return fileName.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP);
+	}
 	
 	public static class DownloadEntry {
 		public long dateModified;
@@ -254,7 +262,6 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 		public boolean isAsset;
 		public String assetName;
 		public DownloadActivityType type;
-		
 
 		public DownloadEntry() {
 		}
@@ -266,5 +273,4 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 			isAsset = true;
 		}
 	}
-
 }

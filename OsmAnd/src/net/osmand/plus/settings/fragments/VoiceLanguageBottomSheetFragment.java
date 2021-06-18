@@ -163,27 +163,34 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 	@Override
 	public void downloadInProgress() {
 		IndexItem downloadIndexItem = downloadThread.getCurrentDownloadingItem();
-		if (downloadIndexItem != null) {
-			for (BaseBottomSheetItem item : items) {
-				Object tag = item.getTag();
-				if (item instanceof BottomSheetItemWithDescription && tag instanceof IndexItem) {
-					IndexItem indexItem = (IndexItem) tag;
-					BottomSheetItemWithDescription mapItem = (BottomSheetItemWithDescription) item;
-					ProgressBar progressBar = mapItem.getView().findViewById(R.id.ProgressBar);
-					if (downloadIndexItem.equals(indexItem)) {
-						progressBar.setProgress(downloadThread.getCurrentDownloadingItemProgress());
-						progressBar.setIndeterminate(false);
-					} else if (indexItem.isDownloaded()) {
-						AndroidUiHelper.updateVisibility(progressBar, false);
-					}
-				}
+		if (downloadIndexItem == null) {
+			return;
+		}
+		for (BaseBottomSheetItem item : items) {
+			Object tag = item.getTag();
+			if (!(item instanceof BottomSheetItemWithDescription) || !(tag instanceof IndexItem)) {
+				continue;
+			}
+			IndexItem indexItem = (IndexItem) tag;
+			if (indexItem.isVoiceTTS()) {
+				continue;
+			}
+			BottomSheetItemWithDescription mapItem = (BottomSheetItemWithDescription) item;
+			ProgressBar progressBar = mapItem.getView().findViewById(R.id.ProgressBar);
+			if (downloadIndexItem.equals(indexItem)) {
+				progressBar.setProgress(downloadThread.getCurrentDownloadingItemProgress());
+				progressBar.setIndeterminate(false);
+			} else if (indexItem.isDownloaded()) {
+				AndroidUiHelper.updateVisibility(progressBar, false);
 			}
 		}
 	}
 
 	@Override
 	public void downloadHasFinished() {
-		selectLastClickedDownloadedIndexItem();
+		if (indexToSelectAfterDownload != null && indexToSelectAfterDownload.isDownloaded()) {
+			updateVoiceProvider(indexToSelectAfterDownload, false);
+		}
 		updateItems();
 	}
 
@@ -245,6 +252,7 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 	private void createSuggestedVoiceItemsView(List<DownloadItem> suggestedVoicePrompts) {
 		OsmandPreference<String> voiceProvider = settings.VOICE_PROVIDER;
 		int defaultLanguagePosition = items.size();
+		boolean isTTS = selectedVoiceType == InfoType.TTS;
 
 		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
 		for (final DownloadItem downloadItem : suggestedVoicePrompts) {
@@ -252,11 +260,12 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 
 			View container = createVoiceItemView(indexItem, inflater);
 
-			String indexFormattedName = indexItem.getBasename().replaceAll("-tts", "");
-			boolean isDefault = indexItem.isDownloaded() && indexFormattedName.equals(app.getLanguage()) && indexItem.getRelatedGroup().getType().equals(VOICE_HEADER_TTS);
+			boolean isDefault = isDefaultTTS(indexItem);
 			String title = isDefault ? getString(R.string.use_system_language) : indexItem.getVisibleName(app, app.getRegions(), false);
 			String dateUpdate = indexItem.getDate(SimpleDateFormat.getDateInstance(DateFormat.DEFAULT));
-			String description = isDefault ? downloadItem.getVisibleName(app, app.getRegions(), false) : indexItem.getSizeDescription(app) + " • " + dateUpdate;
+			String description = isDefault
+					? downloadItem.getVisibleName(app, app.getRegions(), false)
+					: isTTS ? "" : indexItem.getSizeDescription(app) + " • " + dateUpdate;
 
 			final TextView textDescription = container.findViewById(R.id.description);
 			final ProgressBar progressBar = container.findViewById(R.id.ProgressBar);
@@ -271,32 +280,18 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 					.setIconHidden(true)
 					.setTitle(title)
 					.setPosition(isDefault ? defaultLanguagePosition : -1)
-					.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							if (indexItem.isDownloaded()) {
-								boolean checked = !voiceDownloadedItem[0].isChecked();
-								voiceDownloadedItem[0].setChecked(checked);
-								voiceProvider.setModeValue(getAppMode(), indexItem.getBasename());
-								onVoiceProviderChanged();
-								dismiss();
+					.setOnClickListener(v -> {
+						if (indexItem.isDownloaded()) {
+							updateVoiceProvider(indexItem, true);
+						} else if (isTTS) {
+							if (!downloadThread.isDownloading(indexItem)) {
+								downloadIndexItem(indexItem);
+							}
+						} else {
+							if (downloadThread.isDownloading(indexItem)) {
+								onClickedDownloadingIndex(indexItem, progressBar, textDescription, secondaryIcon);
 							} else {
-								if (downloadThread.isDownloading(indexItem)) {
-									downloadThread.cancelDownload(indexItem);
-									if (indexItem.equals(indexToSelectAfterDownload)) {
-										indexToSelectAfterDownload = null;
-									}
-									AndroidUiHelper.updateVisibility(progressBar, false);
-									AndroidUiHelper.updateVisibility(textDescription, true);
-									secondaryIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_gsave_dark));
-								} else {
-									AndroidUiHelper.updateVisibility(progressBar, true);
-									AndroidUiHelper.updateVisibility(textDescription, false);
-									progressBar.setIndeterminate(downloadThread.isDownloading());
-									secondaryIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_remove_dark));
-									new DownloadValidationManager(app).startDownload(getActivity(), indexItem);
-									indexToSelectAfterDownload = indexItem;
-								}
+								onClickedNotDownloadedIndex(indexItem, progressBar, textDescription, secondaryIcon);
 							}
 						}
 					})
@@ -306,8 +301,32 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 		}
 	}
 
-	private View createVoiceItemView(DownloadItem indexItem, LayoutInflater inflater) {
+	private void onClickedDownloadingIndex(IndexItem indexItem, View progressBar,
+	                                       View textDescription, ImageView secondaryIcon) {
+		downloadThread.cancelDownload(indexItem);
+		if (indexItem.equals(indexToSelectAfterDownload)) {
+			indexToSelectAfterDownload = null;
+		}
+		AndroidUiHelper.updateVisibility(progressBar, false);
+		AndroidUiHelper.updateVisibility(textDescription, true);
+		secondaryIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_gsave_dark));
+	}
+
+	private void onClickedNotDownloadedIndex(IndexItem indexItem, ProgressBar progressBar,
+											 View textDescription, ImageView secondaryIcon) {
+		AndroidUiHelper.updateVisibility(progressBar, true);
+		AndroidUiHelper.updateVisibility(textDescription, false);
+		progressBar.setIndeterminate(downloadThread.isDownloading());
+		secondaryIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_remove_dark));
+		downloadIndexItem(indexItem);
+	}
+
+	private View createVoiceItemView(IndexItem indexItem, LayoutInflater inflater) {
 		View container = inflater.inflate(R.layout.list_item_icon_and_download, null);
+		boolean isTTS = indexItem.isVoiceTTS();
+		if (isTTS && !isDefaultTTS(indexItem)) {
+			container.findViewById(R.id.main_container).setMinimumHeight(getDimen(R.dimen.bottom_sheet_list_item_height));
+		}
 		AndroidUtils.setBackground(container, UiUtilities.getSelectableDrawable(container.getContext()));
 		AndroidUiHelper.updateVisibility(container.findViewById(R.id.divider), false);
 
@@ -317,18 +336,20 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 
 		ImageView secondaryIcon = container.findViewById(R.id.secondary_icon);
 		AndroidUiHelper.updateVisibility(secondaryIcon, true);
-		AndroidUiHelper.updateVisibility(progressBar, downloadThread.isDownloading((IndexItem) indexItem));
+		AndroidUiHelper.updateVisibility(progressBar, downloadThread.isDownloading(indexItem));
 
-		if (indexItem == downloadThread.getCurrentDownloadingItem()) {
-			progressBar.setProgress(downloadThread.getCurrentDownloadingItemProgress());
-			progressBar.setIndeterminate(false);
-			secondaryIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_remove_dark));
-		} else {
-			progressBar.setIndeterminate(downloadThread.isDownloading());
-			secondaryIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_gsave_dark));
+		if (!isTTS) {
+			if (indexItem == downloadThread.getCurrentDownloadingItem()) {
+				progressBar.setProgress(downloadThread.getCurrentDownloadingItemProgress());
+				progressBar.setIndeterminate(false);
+				secondaryIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_remove_dark));
+			} else {
+				progressBar.setIndeterminate(downloadThread.isDownloading());
+				secondaryIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_gsave_dark));
+			}
 		}
 
-		if (indexItem.isDownloaded()) {
+		if (indexItem.isDownloaded() || isTTS) {
 			AndroidUiHelper.updateVisibility(radioButton, true);
 			AndroidUiHelper.updateVisibility(secondaryIcon, false);
 		} else {
@@ -338,12 +359,25 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 		return container;
 	}
 
-	private void selectLastClickedDownloadedIndexItem() {
-		if (indexToSelectAfterDownload != null && indexToSelectAfterDownload.isDownloaded()) {
-			settings.VOICE_PROVIDER.setModeValue(getAppMode(), indexToSelectAfterDownload.getBasename());
-			onVoiceProviderChanged();
-			indexToSelectAfterDownload = null;
+	private void updateVoiceProvider(IndexItem indexItem, boolean forceDismiss) {
+		settings.VOICE_PROVIDER.setModeValue(getAppMode(), indexItem.getBasename());
+		onVoiceProviderChanged();
+		if (indexItem.isVoiceTTS() || forceDismiss) {
+			dismiss();
 		}
+		indexToSelectAfterDownload = null;
+	}
+
+	private void downloadIndexItem(IndexItem indexItem) {
+		if (getActivity() != null) {
+			new DownloadValidationManager(app).startDownload(getActivity(), indexItem);
+			indexToSelectAfterDownload = indexItem;
+		}
+	}
+
+	private boolean isDefaultTTS(IndexItem indexItem) {
+		return indexItem.isDownloaded() && indexItem.isVoiceTTS()
+				&& indexItem.getBasename().replaceAll("-tts", "").equals(app.getLanguage());
 	}
 
 	private void onVoiceProviderChanged() {

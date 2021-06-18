@@ -354,9 +354,9 @@ public class DownloadResources extends DownloadResourceGroup {
 		OsmandRegions regs = app.getRegions();
 		for (IndexItem ii : resources) {
 			if (ii.getType() == DownloadActivityType.VOICE_FILE) {
-				if (ii.getFileName().endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS)) {
+				if (ii.isVoiceTTS()) {
 					voiceTTS.addItem(ii);
-				} else if (ii.getFileName().endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)) {
+				} else if (ii.isRecordedVoice()) {
 					voiceRec.addItem(ii);
 				}
 				continue;
