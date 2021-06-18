@@ -16,6 +16,7 @@ import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.helpers.enums.MetricsConstants;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.AnnouncementTimeBottomSheet;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
@@ -112,8 +113,9 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 		Preference languageSetting = findPreference(settings.VOICE_PROVIDER.getId());
 		languageSetting.setIcon(getContentIcon(R.drawable.ic_action_map_language));
 		String voiceIndexBasename = settings.VOICE_PROVIDER.getModeValue(getSelectedAppMode());
-		String summary = voiceIndexBasename == null ?
-				getString(R.string.shared_string_not_selected) : FileNameTranslationHelper.getVoiceName(getContext(), voiceIndexBasename);
+		String summary = voiceIndexBasename == null || voiceIndexBasename.equals(OsmandSettings.VOICE_PROVIDER_NOT_USE)
+				? getString(R.string.shared_string_not_selected)
+				: FileNameTranslationHelper.getVoiceName(getContext(), voiceIndexBasename);
 		languageSetting.setSummary(summary);
 	}
 

@@ -512,6 +512,11 @@ public class OsmandApplication extends MultiDexApplication {
 	                                   boolean warningNoneProvider, Runnable run, boolean showDialog, boolean force, final boolean applyAllModes) {
 		String voiceProvider = osmandSettings.VOICE_PROVIDER.getModeValue(applicationMode);
 		if (voiceProvider == null || OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
+			if (OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
+				for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+					osmandSettings.VOICE_MUTE.setModeValue(mode, true);
+				}
+			}
 			if (warningNoneProvider && voiceProvider == null) {
 				if (uiContext instanceof MapActivity) {
 					OsmAndDialogs.showVoiceProviderDialog((MapActivity) uiContext, applicationMode, applyAllModes);

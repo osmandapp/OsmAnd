@@ -2635,8 +2635,8 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	// this value could localized
 	public final OsmandPreference<String> VOICE_PROVIDER = new StringPreference(this, "voice_provider", null) {
-		protected String getDefaultValue() {
-
+		@Override
+		public String getProfileDefaultValue(ApplicationMode mode) {
 			Configuration config = ctx.getResources().getConfiguration();
 			for (String lang : TTS_AVAILABLE_VOICES) {
 				if (lang.equals(config.locale.getLanguage())) {
