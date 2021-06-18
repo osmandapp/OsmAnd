@@ -52,10 +52,8 @@ public class CurrentStreetName {
 				streetName.turnType = TurnType.valueOf(TurnType.C, false);
 			}
 			if (n.directionInfo.getExitInfo() != null) {
+				// don't display name of exit street name
 				streetName.exitRef = n.directionInfo.getExitInfo().getRef();
-				if (!Algorithms.isEmpty(n.directionInfo.getExitInfo().getExitStreetName())) {
-					streetName.text = n.directionInfo.getExitInfo().getExitStreetName();
-				}
 			}
 		}
 		// 2. display current road street name
