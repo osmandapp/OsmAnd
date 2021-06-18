@@ -29,7 +29,6 @@ public class BottomSheetItemWithDescriptionDifHeight extends BottomSheetItemWith
 	                                               boolean iconHidden,
 	                                               CharSequence description,
 	                                               @ColorRes int descriptionColorId,
-	                                               @DimenRes int descriptionTextSizeId,
 	                                               int descriptionMaxLines,
 	                                               boolean descriptionLinksClickable,
 	                                               int minHeight) {
@@ -46,7 +45,6 @@ public class BottomSheetItemWithDescriptionDifHeight extends BottomSheetItemWith
 				iconHidden,
 				description,
 				descriptionColorId,
-				descriptionTextSizeId,
 				descriptionMaxLines,
 				descriptionLinksClickable);
 
@@ -87,7 +85,6 @@ public class BottomSheetItemWithDescriptionDifHeight extends BottomSheetItemWith
 					iconHidden,
 					description,
 					descriptionColorId,
-					descriptionTextSizeId,
 					descriptionMaxLines,
 					descriptionLinksClickable,
 					minHeight);

@@ -349,9 +349,7 @@ public class DownloadActivityType {
 
 	public String getVisibleName(DownloadItem downloadItem, Context ctx, OsmandRegions osmandRegions, boolean includingParent) {
 		if (this == VOICE_FILE) {
-			String fileName = downloadItem.getFileName();
-			if (fileName.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)
-					|| fileName.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS)) {
+			if (downloadItem.isVoiceTTS() || downloadItem.isRecordedVoice()) {
 				return FileNameTranslationHelper.getVoiceName(ctx, getBasename(downloadItem));
 			}
 			return getBasename(downloadItem);

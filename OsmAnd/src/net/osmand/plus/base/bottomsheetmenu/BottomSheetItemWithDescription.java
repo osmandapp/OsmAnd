@@ -21,8 +21,6 @@ public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 	protected CharSequence description;
 	@ColorRes
 	private int descriptionColorId = INVALID_ID;
-	@DimenRes
-	private int descriptionTextSizeId = INVALID_ID;
 	private int descriptionMaxLines = INVALID_VALUE;
 	private boolean descriptionLinksClickable = false;
 
@@ -41,13 +39,11 @@ public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 										  boolean iconHidden,
 										  CharSequence description,
 										  @ColorRes int descriptionColorId,
-										  @DimenRes int descriptionTextSizeId,
 										  int descriptionMaxLines,
 										  boolean descriptionLinksClickable) {
 		super(customView, layoutId, tag, disabled, onClickListener, position, icon, background, title, titleColorId, iconHidden);
 		this.description = description;
 		this.descriptionColorId = descriptionColorId;
-		this.descriptionTextSizeId = descriptionTextSizeId;
 		this.descriptionMaxLines = descriptionMaxLines;
 		this.descriptionLinksClickable = descriptionLinksClickable;
 	}
@@ -84,14 +80,11 @@ public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 		descriptionTv = view.findViewById(R.id.description);
 		if (descriptionTv != null) {
 			changeDescriptionVisibility();
-			descriptionTv.setText(description);
+			if (description != null) {
+				descriptionTv.setText(description);
+			}
 			if (descriptionColorId != INVALID_ID) {
 				descriptionTv.setTextColor(ContextCompat.getColor(context, descriptionColorId));
-			}
-			if (descriptionTextSizeId != INVALID_ID) {
-				Resources resources = context.getResources();
-				float sp = resources.getDimensionPixelSize(descriptionTextSizeId) / resources.getDisplayMetrics().scaledDensity;
-				descriptionTv.setTextSize(sp);
 			}
 			if (descriptionMaxLines != INVALID_VALUE) {
 				descriptionTv.setMaxLines(descriptionMaxLines);
@@ -103,7 +96,7 @@ public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 	}
 
 	private void changeDescriptionVisibility() {
-		if (Algorithms.isEmpty(description)) {
+		if (Algorithms.isEmpty(description) && Algorithms.isEmpty(descriptionTv.getText())) {
 			descriptionTv.setVisibility(View.GONE);
 		} else {
 			descriptionTv.setVisibility(View.VISIBLE);
@@ -116,8 +109,6 @@ public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 		@ColorRes
 		protected int descriptionColorId = INVALID_ID;
 		protected int descriptionMaxLines = INVALID_POSITION;
-		@DimenRes
-		protected int descriptionTextSizeId = INVALID_ID;
 		protected boolean descriptionLinksClickable = false;
 
 		public Builder setDescription(CharSequence description) {
@@ -132,11 +123,6 @@ public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 
 		public Builder setDescriptionMaxLines(int maxLines) {
 			this.descriptionMaxLines = maxLines;
-			return this;
-		}
-
-		public Builder setDescriptionTextSizeId(@DimenRes int descriptionTextSizeId) {
-			this.descriptionTextSizeId = descriptionTextSizeId;
 			return this;
 		}
 
@@ -159,7 +145,6 @@ public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 					iconHidden,
 					description,
 					descriptionColorId,
-					descriptionTextSizeId,
 					descriptionMaxLines,
 					descriptionLinksClickable);
 		}

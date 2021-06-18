@@ -238,14 +238,6 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 		}
 		return null;
 	}
-
-	public boolean isVoiceTTS() {
-		return fileName.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS);
-	}
-
-	public boolean isRecordedVoice() {
-		return fileName.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP);
-	}
 	
 	public static class DownloadEntry {
 		public long dateModified;

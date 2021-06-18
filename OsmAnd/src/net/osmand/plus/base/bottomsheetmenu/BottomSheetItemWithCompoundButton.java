@@ -45,7 +45,6 @@ public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescri
 											 boolean iconHidden,
 											 CharSequence description,
 											 @ColorRes int descriptionColorId,
-											 @DimenRes int descriptionTextSizeId,
 											 int descriptionMaxLines,
 											 boolean descriptionLinksClickable,
 											 boolean checked,
@@ -65,7 +64,6 @@ public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescri
 				iconHidden,
 				description,
 				descriptionColorId,
-				descriptionTextSizeId,
 				descriptionMaxLines,
 				descriptionLinksClickable);
 		this.checked = checked;
@@ -157,7 +155,6 @@ public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescri
 					iconHidden,
 					description,
 					descriptionColorId,
-					descriptionTextSizeId,
 					descriptionMaxLines,
 					descriptionLinksClickable,
 					checked,

@@ -38,7 +38,6 @@ public class BottomSheetItemTitleWithDescrAndButton extends BottomSheetItemWithD
 												  boolean iconHidden,
 												  CharSequence description,
 												  @ColorRes int descriptionColorId,
-												  @DimenRes int descriptionTextSizeId,
 												  int descriptionMaxLines,
 												  boolean descriptionLinksClickable,
 												  String buttonTitle,
@@ -59,7 +58,6 @@ public class BottomSheetItemTitleWithDescrAndButton extends BottomSheetItemWithD
 				iconHidden,
 				description,
 				descriptionColorId,
-				descriptionTextSizeId,
 				descriptionMaxLines,
 				descriptionLinksClickable);
 		this.buttonTitle = buttonTitle;
@@ -136,7 +134,6 @@ public class BottomSheetItemTitleWithDescrAndButton extends BottomSheetItemWithD
 					iconHidden,
 					description,
 					descriptionColorId,
-					descriptionTextSizeId,
 					descriptionMaxLines,
 					descriptionLinksClickable,
 					buttonTitle,

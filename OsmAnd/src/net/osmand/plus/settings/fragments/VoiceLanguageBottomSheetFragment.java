@@ -3,6 +3,7 @@ package net.osmand.plus.settings.fragments;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -124,12 +125,10 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 		);
 
 		items.add(new DividerSpaceItem(context, padding));
-		BaseBottomSheetItem switchStartAndEndItem = new BottomSheetItemWithDescription.Builder()
-				.setDescription(getString(selectedVoiceType.descriptionRes))
-				.setDescriptionTextSizeId(R.dimen.default_list_text_size)
-				.setLayoutId(R.layout.bottom_sheet_item_description_long)
+		BaseBottomSheetItem selectedVoiceProviderDescription = new BottomSheetItemWithDescription.Builder()
+				.setCustomView(createVoiceProviderDescription(inflater, selectedVoiceType.descriptionRes))
 				.create();
-		items.add(switchStartAndEndItem);
+		items.add(selectedVoiceProviderDescription);
 
 		items.add(createDividerItem());
 
@@ -223,6 +222,14 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 		} else {
 			radioGroup.setSelectedItem(recorded);
 		}
+	}
+
+	private View createVoiceProviderDescription(LayoutInflater inflater, @StringRes int descriptionRes) {
+		TextView description = (TextView) inflater.inflate(R.layout.bottom_sheet_item_description_long, null);
+		description.setText(descriptionRes);
+		DisplayMetrics displayMetrics = inflater.getContext().getResources().getDisplayMetrics();
+		description.setTextSize(getDimen(R.dimen.default_list_text_size) / displayMetrics.scaledDensity);
+		return description;
 	}
 
 	private TextRadioItem createRadioButton(final InfoType voiceType) {
