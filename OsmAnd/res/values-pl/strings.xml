@@ -4170,4 +4170,6 @@
     <string name="restore_complete">Przywracanie zakończone</string>
     <string name="grey_color_slope">Kolor szary jest używany, gdy nachylenie jest nieokreślone.</string>
     <string name="backup_version_history">Historia wersji</string>
+    <string name="backup_version_history_delete_descr">Czy chcesz usunąć z chmury historię zmian dla wyłączonych typów\?</string>
+    <string name="delete_version_history">Usuń historię wersji</string>
 </resources>
