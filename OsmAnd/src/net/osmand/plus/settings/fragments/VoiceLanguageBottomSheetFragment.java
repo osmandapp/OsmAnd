@@ -27,6 +27,8 @@ import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadItem;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.download.VoiceIndexes;
+import net.osmand.plus.download.VoiceIndexes.VoiceIndexType;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandPreference;
@@ -71,7 +73,7 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 	private OsmandSettings settings;
 	private DownloadIndexesThread downloadThread;
 
-	private List<DownloadItem> voiceItems;
+	private List<DownloadItem> voiceItemsTTS;
 	private List<DownloadItem> voiceItemsRec;
 
 	private InfoType selectedVoiceType = InfoType.TTS;
@@ -248,12 +250,12 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 	}
 
 	private void createVoiceView() {
-		if (selectedVoiceType == InfoType.TTS && Algorithms.isEmpty(voiceItems)) {
-			voiceItems = getVoiceList(VOICE_TTS_KEY);
+		if (selectedVoiceType == InfoType.TTS && Algorithms.isEmpty(voiceItemsTTS)) {
+			voiceItemsTTS = getVoiceList(selectedVoiceType.indexType);
 		} else if (selectedVoiceType == InfoType.RECORDED && Algorithms.isEmpty(voiceItemsRec)) {
-			voiceItemsRec = getVoiceList(VOICE_REC_KEY);
+			voiceItemsRec = getVoiceList(selectedVoiceType.indexType);
 		}
-		createSuggestedVoiceItemsView(selectedVoiceType == InfoType.TTS ? voiceItems : voiceItemsRec);
+		createSuggestedVoiceItemsView(selectedVoiceType == InfoType.TTS ? voiceItemsTTS : voiceItemsRec);
 	}
 
 	private void createSuggestedVoiceItemsView(List<DownloadItem> suggestedVoicePrompts) {
@@ -383,7 +385,7 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 	}
 
 	private boolean isDefaultTTS(IndexItem indexItem) {
-		return indexItem.isDownloaded() && indexItem.isVoiceTTS()
+		return indexItem.isVoiceTTS()
 				&& indexItem.getBasename().replaceAll("-tts", "").equals(app.getLanguage());
 	}
 
@@ -416,35 +418,39 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 		return dividerItem;
 	}
 
-	public List<DownloadItem> getVoiceList(String type) {
-		if (!downloadThread.getIndexes().isDownloadedFromInternet && settings.isInternetConnectionAvailable()) {
-			downloadThread.runReloadIndexFiles();
+	public List<DownloadItem> getVoiceList(VoiceIndexType indexType) {
+		VoiceIndexes voiceIndexes = downloadThread.getVoiceIndexes();
+		boolean hasInternet = settings.isInternetConnectionAvailable();
+		if (!voiceIndexes.isDownloadedFromInternet() && hasInternet) {
+			downloadThread.runReloadVoiceIndexes();
 		}
 
-		boolean downloadIndexes = settings.isInternetConnectionAvailable()
-				&& !downloadThread.getIndexes().isDownloadedFromInternet
-				&& !downloadThread.getIndexes().downloadFromInternetFailed;
+		boolean shouldReloadIndexes = hasInternet
+				&& !voiceIndexes.isDownloadedFromInternet()
+				&& !voiceIndexes.downloadFromInternetFailed();
 
 		List<DownloadItem> suggestedVoice = new ArrayList<>();
-		if (!downloadIndexes) {
-			suggestedVoice.addAll(downloadThread.getIndexes().getDownloadItemsForGroup(type));
+		if (!shouldReloadIndexes) {
+			suggestedVoice.addAll(voiceIndexes.getVoicePrompts(indexType));
 		}
 
 		return suggestedVoice;
 	}
 
 	private enum InfoType {
-		TTS(R.string.tts_title, R.string.tts_description),
-		RECORDED(R.string.shared_string_recorded, R.string.recorded_description);
+		TTS(R.string.tts_title, R.string.tts_description, VoiceIndexType.TTS),
+		RECORDED(R.string.shared_string_recorded, R.string.recorded_description, VoiceIndexType.REC);
 
 		@StringRes
 		public int titleRes;
 		@StringRes
 		public int descriptionRes;
+		public VoiceIndexType indexType;
 
-		InfoType(int titleRes, int descriptionRes) {
+		InfoType(int titleRes, int descriptionRes, VoiceIndexType indexType) {
 			this.titleRes = titleRes;
 			this.descriptionRes = descriptionRes;
+			this.indexType = indexType;
 		}
 	}
 }

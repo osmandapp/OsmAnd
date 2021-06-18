@@ -60,6 +60,7 @@ public class DownloadIndexesThread {
 	private IndexItem currentDownloadingItem = null;
 	private int currentDownloadingItemProgress = 0;
 	private DownloadResources indexes;
+	private VoiceIndexes voiceIndexes;
 	private static final int THREAD_ID = 10103;
 
 	public interface DownloadEvents {
@@ -75,6 +76,7 @@ public class DownloadIndexesThread {
 	public DownloadIndexesThread(OsmandApplication app) {
 		this.app = app;
 		indexes = new DownloadResources(app);
+		voiceIndexes = new VoiceIndexes(app);
 		updateLoadedFiles();
 		downloadFileHelper = new DownloadFileHelper(app);
 		dbHelper = new DatabaseHelper(app);
@@ -164,6 +166,10 @@ public class DownloadIndexesThread {
 	public DownloadResources getIndexes() {
 		return indexes;
 	}
+
+	public VoiceIndexes getVoiceIndexes() {
+		return voiceIndexes;
+	}
 	
 	public List<IndexItem> getCurrentDownloadingItems() {
 		List<IndexItem> res = new ArrayList<IndexItem>();
@@ -205,22 +211,26 @@ public class DownloadIndexesThread {
 	}
 
 	public void runReloadIndexFilesSilent() {
-		if (checkRunning(true)) {
-			return;
+		if (!anotherTaskExecuting(true)) {
+			execute(new ReloadIndexesTask());
 		}
-		execute(new ReloadIndexesTask());
 	}
 
 	public void runReloadIndexFiles() {
-		if (checkRunning(false)) {
-			return;
+		if (!anotherTaskExecuting(false)) {
+			execute(new ReloadIndexesTask());
 		}
-		execute(new ReloadIndexesTask());
+	}
+
+	public void runReloadVoiceIndexes() {
+		if (!anotherTaskExecuting(false)) {
+			execute(new ReloadVoiceIndexesTask());
+		}
 	}
 
 	public void runDownloadFiles(IndexItem... items) {
 		if (getCurrentRunningTask() instanceof ReloadIndexesTask) {
-			if(checkRunning(false)) {
+			if (anotherTaskExecuting(false)) {
 				return;
 			}	
 		}
@@ -308,7 +318,7 @@ public class DownloadIndexesThread {
 	
 	/// PRIVATE IMPL
 
-	private boolean checkRunning(boolean silent) {
+	private boolean anotherTaskExecuting(boolean silent) {
 		if (getCurrentRunningTask() != null) {
 			if (!silent) {
 				Toast.makeText(app, R.string.wait_current_task_finished, Toast.LENGTH_SHORT).show();
@@ -346,19 +356,17 @@ public class DownloadIndexesThread {
 			TrafficStats.setThreadStatsTag(THREAD_ID);
 			DownloadResources result = null;
 			DownloadOsmandIndexesHelper.IndexFileList indexFileList = DownloadOsmandIndexesHelper.getIndexesList(ctx);
-			if (indexFileList != null) {
-				try {
-					while (app.isApplicationInitializing()) {
-						Thread.sleep(200);
-					}
-					result = new DownloadResources(app);
-					result.isDownloadedFromInternet = indexFileList.isDownloadedFromInternet();
-					result.mapVersionIsIncreased = indexFileList.isIncreasedMapVersion();
-					app.getSettings().LAST_CHECKED_UPDATES.set(System.currentTimeMillis());
-					result.prepareData(indexFileList.getIndexFiles());
-				} catch (Exception e) {
-					LOG.error(e);
+			try {
+				while (app.isApplicationInitializing()) {
+					Thread.sleep(200);
 				}
+				result = new DownloadResources(app);
+				result.isDownloadedFromInternet = indexFileList.isDownloadedFromInternet();
+				result.mapVersionIsIncreased = indexFileList.isIncreasedMapVersion();
+				app.getSettings().LAST_CHECKED_UPDATES.set(System.currentTimeMillis());
+				result.prepareData(indexFileList.getIndexFiles());
+			} catch (Exception e) {
+				LOG.error(e);
 			}
 			return result == null ? new DownloadResources(app) : result;
 		}
@@ -402,6 +410,49 @@ public class DownloadIndexesThread {
 		}
 	}
 
+	private class ReloadVoiceIndexesTask extends BasicProgressAsyncTask<Void, Void, Void, VoiceIndexes> {
+
+		public ReloadVoiceIndexesTask() {
+			super(app);
+		}
+
+		@Override
+		protected void onPreExecute() {
+			currentRunningTask.add(this);
+			super.onPreExecute();
+			voiceIndexes.setDownloadFromInternetFailed(false);
+		}
+
+		@Override
+		protected VoiceIndexes doInBackground(Void... voids) {
+			TrafficStats.setThreadStatsTag(THREAD_ID);
+			VoiceIndexes result = null;
+			DownloadOsmandIndexesHelper.IndexFileList indexFileList = DownloadOsmandIndexesHelper.getIndexesList(ctx);
+			try {
+				while (app.isApplicationInitializing()) {
+					Thread.sleep(200);
+				}
+				result = new VoiceIndexes(app);
+				result.setDownloadedFromInternet(indexFileList.isDownloadedFromInternet());
+				result.listVoicePrompts(indexFileList.getIndexFiles());
+			} catch (Exception e) {
+				LOG.error(e);
+			}
+			return result == null ? new VoiceIndexes(app) : result;
+		}
+
+		@Override
+		protected void onPostExecute(VoiceIndexes result) {
+			voiceIndexes = result;
+			result.setDownloadFromInternetFailed(!result.isDownloadedFromInternet());
+			currentRunningTask.remove(this);
+			onUpdatedIndexesList();
+		}
+
+		@Override
+		protected void updateProgress(boolean updateOnlyProgress, Void unused) {
+		}
+	}
 
 	private class DownloadIndexesAsyncTask extends BasicProgressAsyncTask<IndexItem, IndexItem, Object, String> implements DownloadFileShowWarning {
 

@@ -162,7 +162,13 @@ public class DownloadResources extends DownloadResourceGroup {
 		this.indexActivatedFileNames = indexActivatedFileNames;
 	}
 
-	public boolean checkIfItemOutdated(IndexItem item, java.text.DateFormat format) {
+	private boolean checkIfItemOutdated(IndexItem item, java.text.DateFormat format) {
+		return checkIfItemOutdated(app, indexActivatedFileNames, indexFileNames, item, format);
+	}
+
+	public static boolean checkIfItemOutdated(OsmandApplication app, Map<String, String> indexActivatedFileNames,
+	                                          Map<String, String> indexFileNames, IndexItem item,
+	                                          java.text.DateFormat format) {
 		boolean outdated = false;
 		String sfName = item.getTargetFileName();
 		String indexActivatedDate = indexActivatedFileNames.get(sfName);
@@ -238,14 +244,15 @@ public class DownloadResources extends DownloadResourceGroup {
 				}
 			}
 			if (outdated) {
-				logItemUpdateInfo(item, format, itemSize, oldItemSize);
+				logItemUpdateInfo(indexActivatedFileNames, indexFileNames, item, format, itemSize, oldItemSize);
 			}
 		}
 		item.setOutdated(outdated);
 		return outdated;
 	}
 
-	private void logItemUpdateInfo(IndexItem item, DateFormat format, long itemSize, long oldItemSize) {
+	private static void logItemUpdateInfo(Map<String, String> indexActivatedFileNames, Map<String, String> indexFileNames,
+	                                      IndexItem item, DateFormat format, long itemSize, long oldItemSize) {
 		String date = item.getDate(format);
 		String sfName = item.getTargetFileName();
 		String indexActivatedDate = indexActivatedFileNames.get(sfName);
@@ -312,7 +319,7 @@ public class DownloadResources extends DownloadResourceGroup {
 			itemsToUpdate.clear();
 			java.text.DateFormat format = app.getResourceManager().getDateFormat();
 			for (IndexItem item : filtered) {
-				boolean outdated = checkIfItemOutdated(item, format);
+				boolean outdated = checkIfItemOutdated(app, indexActivatedFileNames, indexFileNames, item, format);
 				// include only activated files here
 				if (outdated && indexActivatedFileNames.containsKey(item.getTargetFileName())) {
 					itemsToUpdate.add(item);

@@ -484,6 +484,7 @@ public class AppInitializer implements IProgress {
 		app.backupHelper = startupInit(new BackupHelper(app), BackupHelper.class);
 
 		initOpeningHoursParser();
+		app.getDownloadThread().runReloadVoiceIndexes();
 	}
 
 	private void initOpeningHoursParser() {
