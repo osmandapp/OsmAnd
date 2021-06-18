@@ -240,6 +240,10 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 		return stringKey != null && stringKey.startsWith(PREDEFINED_PREFIX);
 	}
 
+	public static boolean isOnlineEngineKey(@Nullable String stringKey) {
+		return stringKey != null && stringKey.startsWith(ONLINE_ROUTING_ENGINE_PREFIX);
+	}
+
 	public static class OnlineRoutingResponse {
 
 		private List<Location> route;

@@ -586,8 +586,17 @@ public class OsmandSettings {
 		return getLastPreferencesEditTime(preferences);
 	}
 
+	public void setLastModePreferencesEditTime(ApplicationMode mode, long lastModifiedTime) {
+		Object preferences = getProfilePreferences(mode);
+		updateLastPreferencesEditTime(preferences, lastModifiedTime);
+	}
+
 	public long getLastGlobalPreferencesEditTime() {
 		return getLastPreferencesEditTime(globalPreferences);
+	}
+
+	public void setLastGlobalPreferencesEditTime(long lastModifiedTime) {
+		updateLastPreferencesEditTime(globalPreferences, lastModifiedTime);
 	}
 
 	private long getLastPreferencesEditTime(Object preferences) {
@@ -596,6 +605,10 @@ public class OsmandSettings {
 
 	protected void updateLastPreferencesEditTime(Object preferences) {
 		long time = System.currentTimeMillis();
+		updateLastPreferencesEditTime(preferences, time);
+	}
+
+	protected void updateLastPreferencesEditTime(Object preferences, long time) {
 		settingsAPI.edit(preferences).putLong(LAST_PREFERENCES_EDIT_TIME, time).commit();
 	}
 
@@ -764,7 +777,24 @@ public class OsmandSettings {
 
 	public final CommonPreference<Integer> NUMBER_OF_STARTS_FIRST_XMAS_SHOWN = new IntPreference(this, "number_of_starts_first_xmas_shown", 0).makeGlobal();
 
-	public final OsmandPreference<String> AVAILABLE_APP_MODES = new StringPreference(this, "available_application_modes", "car,bicycle,pedestrian,public_transport,").makeGlobal().makeShared().cache();
+	public final OsmandPreference<String> AVAILABLE_APP_MODES = new StringPreference(this, "available_application_modes", "car,bicycle,pedestrian,public_transport,") {
+
+		@Override
+		public void readFromJson(JSONObject json, ApplicationMode appMode) throws JSONException {
+			Set<String> appModesKeys = Algorithms.decodeStringSet(json.getString(getId()),",");
+			Set<String> nonexistentAppModesKeys = new HashSet<>();
+			for (String appModeKey : appModesKeys) {
+				if (ApplicationMode.valueOfStringKey(appModeKey, null) == null) {
+					nonexistentAppModesKeys.add(appModeKey);
+				}
+			}
+			if (!nonexistentAppModesKeys.isEmpty()) {
+				appModesKeys.removeAll(nonexistentAppModesKeys);
+			}
+			set(parseString(Algorithms.encodeStringSet(appModesKeys, ",")));
+		}
+
+	}.makeGlobal().makeShared().cache();
 
 	public final OsmandPreference<String> LAST_FAV_CATEGORY_ENTERED = new StringPreference(this, "last_fav_category", "").makeGlobal();
 
@@ -1838,6 +1868,26 @@ public class OsmandSettings {
 		return lastModified;
 	}
 
+	public void setTileSourcesLastModifiedTime(long lastModifiedTime) {
+		File tilesDir = ctx.getAppPath(IndexConstants.TILES_INDEX_DIR);
+		if (tilesDir != null && tilesDir.canRead()) {
+			List<File> dirs = new ArrayList<>();
+			dirs.add(tilesDir);
+			Algorithms.collectDirs(tilesDir, dirs);
+			for (File dir : dirs) {
+				File[] files = dir.listFiles();
+				if (files != null && files.length > 0) {
+					for (File file : files) {
+						long l = file.lastModified();
+						if (l > lastModifiedTime) {
+							file.setLastModified(lastModifiedTime);
+						}
+					}
+				}
+			}
+		}
+	}
+
 	public Map<String, String> getTileSourceEntries() {
 		return getTileSourceEntries(true);
 	}
@@ -2435,6 +2485,10 @@ public class OsmandSettings {
 		return impassableRoadsStorage.getLastModifiedTime();
 	}
 
+	public void setImpassableRoadsLastModifiedTime(long lastModifiedTime) {
+		impassableRoadsStorage.setLastModifiedTime(lastModifiedTime);
+	}
+
 	public List<AvoidRoadInfo> getImpassableRoadPoints() {
 		return impassableRoadsStorage.getImpassableRoadsInfo();
 	}
@@ -2918,7 +2972,7 @@ public class OsmandSettings {
 			new EnumStringPreference<>(this, "rate_us_state", RateUsState.INITIAL_STATE, RateUsState.values()).makeGlobal();
 
 	public final CommonPreference<String> CUSTOM_APP_MODES_KEYS =
-			new StringPreference(this, "custom_app_modes_keys", "").makeGlobal().makeShared().cache();
+			new StringPreference(this, "custom_app_modes_keys", "").makeGlobal().cache();
 
 	public Set<String> getCustomAppModesKeys() {
 		String appModesKeys = CUSTOM_APP_MODES_KEYS.get();

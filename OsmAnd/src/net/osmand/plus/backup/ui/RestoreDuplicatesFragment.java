@@ -62,7 +62,7 @@ public class RestoreDuplicatesFragment extends ImportDuplicatesFragment {
 			Fragment target = getTargetFragment();
 			if (target instanceof ImportSettingsFragment) {
 				ImportListener importListener = ((ImportSettingsFragment) target).getImportListener();
-				settingsHelper.importSettings(settingsItems, "", 1, importListener);
+				settingsHelper.importSettings(settingsItems, "", 1, false, importListener);
 			}
 		}
 	}

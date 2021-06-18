@@ -62,6 +62,10 @@ public class AvoidSpecificRoads {
 		return app.getSettings().getImpassableRoadsLastModifiedTime();
 	}
 
+	public void setLastModifiedTime(long lastModifiedTime) {
+		app.getSettings().setImpassableRoadsLastModifiedTime(lastModifiedTime);
+	}
+
 	public void loadImpassableRoads() {
 		for (AvoidRoadInfo avoidRoadInfo : app.getSettings().getImpassableRoadPoints()) {
 			impassableRoads.put(new LatLon(avoidRoadInfo.latitude, avoidRoadInfo.longitude), avoidRoadInfo);

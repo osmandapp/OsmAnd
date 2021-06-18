@@ -14,7 +14,6 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Map;
 
@@ -43,11 +42,18 @@ public abstract class OsmandSettingsItemWriter<T extends OsmandSettingsItem> ext
 		}
 		if (json.length() > 0) {
 			try {
-				InputStream inputStream = new ByteArrayInputStream(json.toString(2).getBytes("UTF-8"));
-				Algorithms.streamCopy(inputStream, outputStream, progress, 1024);
+				int bytesDivisor = 1024;
+				byte[] bytes = json.toString(2).getBytes("UTF-8");
+				if (progress != null) {
+					progress.startWork(bytes.length / bytesDivisor);
+				}
+				Algorithms.streamCopy(new ByteArrayInputStream(bytes), outputStream, progress, bytesDivisor);
 			} catch (JSONException e) {
 				SettingsHelper.LOG.error("Failed to write json to stream", e);
 			}
+		}
+		if (progress != null) {
+			progress.finishTask();
 		}
 	}
 }

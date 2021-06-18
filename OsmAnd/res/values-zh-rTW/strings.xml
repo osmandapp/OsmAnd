@@ -4167,4 +4167,6 @@
     <string name="grey_color_slope">當斜率未被定義時則使用灰色。</string>
     <string name="backup_version_history">版本歷史紀錄</string>
     <string name="backup_storage_taken">用掉的儲存空間</string>
+    <string name="backup_version_history_delete_descr">您想要從雲端刪除已停用類型的變更歷史紀錄嗎？</string>
+    <string name="delete_version_history">刪除版本歷史紀錄</string>
 </resources>

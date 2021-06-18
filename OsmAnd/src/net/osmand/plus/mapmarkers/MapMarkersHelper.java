@@ -127,6 +127,14 @@ public class MapMarkersHelper {
 		return markersDbHelper.getMarkersHistoryLastModifiedTime();
 	}
 
+	public void setMarkersLastModifiedTime(long lastModifiedTime) {
+		markersDbHelper.setMarkersLastModifiedTime(lastModifiedTime);
+	}
+
+	public void setMarkersHistoryLastModifiedTime(long lastModifiedTime) {
+		markersDbHelper.setMarkersHistoryLastModifiedTime(lastModifiedTime);
+	}
+
 	private void loadMarkers() {
 		mapMarkers = new ArrayList<>();
 		mapMarkersHistory = new ArrayList<>();

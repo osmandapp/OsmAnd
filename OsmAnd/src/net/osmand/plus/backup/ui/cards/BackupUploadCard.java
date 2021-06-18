@@ -1,12 +1,15 @@
 package net.osmand.plus.backup.ui.cards;
 
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
+import android.os.Build;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -20,16 +23,16 @@ import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
 import net.osmand.plus.backup.BackupHelper;
-import net.osmand.plus.backup.BackupHelper.BackupInfo;
-import net.osmand.plus.backup.BackupHelper.OnDeleteFilesListener;
+import net.osmand.plus.backup.BackupInfo;
 import net.osmand.plus.backup.LocalFile;
 import net.osmand.plus.backup.NetworkSettingsHelper.BackupExportListener;
+import net.osmand.plus.backup.PrepareBackupResult;
 import net.osmand.plus.backup.RemoteFile;
-import net.osmand.plus.backup.UserNotRegisteredException;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ExportSettingsType;
-import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
+import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
 import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.fragments.MainSettingsFragment;
@@ -42,26 +45,25 @@ import static net.osmand.plus.backup.ui.cards.LocalBackupCard.adjustIndicator;
 
 public class BackupUploadCard extends MapBaseCard {
 
-	private final BackupInfo info;
+	private final BackupStatus status;
+	private final PrepareBackupResult backup;
 	private final BackupExportListener exportListener;
-	private final OnDeleteFilesListener deleteFilesListener;
+	private final ImportListener importListener;
 
-	private View actionButton;
-	private View progressContainer;
-	private TextView progressTitle;
+	private TextView headerTitle;
 	private ProgressBar progressBar;
 	private ViewGroup itemsContainer;
 
 	private boolean buttonsVisible = true;
 
-	public BackupUploadCard(@NonNull MapActivity mapActivity,
-							@NonNull BackupInfo info,
+	public BackupUploadCard(@NonNull MapActivity mapActivity, @NonNull PrepareBackupResult backup,
 							@Nullable BackupExportListener exportListener,
-							@Nullable OnDeleteFilesListener deleteFilesListener) {
+							@Nullable ImportListener importListener) {
 		super(mapActivity, false);
-		this.info = info;
+		this.backup = backup;
+		this.status = getBackupStatus();
 		this.exportListener = exportListener;
-		this.deleteFilesListener = deleteFilesListener;
+		this.importListener = importListener;
 	}
 
 	@Override
@@ -71,60 +73,118 @@ public class BackupUploadCard extends MapBaseCard {
 
 	@Override
 	protected void updateContent() {
+		itemsContainer = view.findViewById(R.id.items_container);
+		itemsContainer.removeAllViews();
+
 		setupHeader();
-		setupUploadItems();
-		setupItemsToDelete();
-		setupConflictingItems();
+		setupWarningContainer();
+		BackupInfo info = backup.getBackupInfo();
+		if (info != null) {
+			setupProgress(info);
+			setupUploadItems(info);
+			setupItemsToDelete(info);
+			setupConflictingItems(info);
+		}
 		setupActionButton();
-		AndroidUiHelper.updateVisibility(actionButton, buttonsVisible);
 		AndroidUiHelper.updateVisibility(itemsContainer, buttonsVisible);
 	}
 
 	private void setupHeader() {
-		progressContainer = view.findViewById(R.id.upload_container);
-		progressTitle = progressContainer.findViewById(R.id.title);
-		progressBar = progressContainer.findViewById(R.id.progress_bar);
+		View container = view.findViewById(R.id.header_container);
+		headerTitle = container.findViewById(R.id.title);
+		progressBar = container.findViewById(R.id.progress_bar);
 
-		progressTitle.setText(R.string.shared_string_items);
-		ImageView icon = progressContainer.findViewById(R.id.icon);
-		icon.setImageDrawable(getContentIcon(R.drawable.ic_action_cloud_upload));
+		ImageView icon = view.findViewById(R.id.icon);
+		TextView description = view.findViewById(R.id.description);
 
-		progressContainer.setOnClickListener(new OnClickListener() {
+		if (app.getNetworkSettingsHelper().isBackupExporting()) {
+			headerTitle.setText(R.string.uploading);
+			icon.setImageDrawable(getContentIcon(R.drawable.ic_action_cloud_upload));
+			AndroidUiHelper.updateVisibility(description, false);
+		} else {
+			description.setText(status.statusTitleRes);
+			icon.setImageDrawable(getContentIcon(status.statusIconRes));
+
+			String backupTime = MainSettingsFragment.getLastBackupTimeDescription(app);
+			if (Algorithms.isEmpty(backupTime)) {
+				headerTitle.setText(R.string.shared_string_never);
+			} else {
+				headerTitle.setText(backupTime);
+			}
+			AndroidUiHelper.updateVisibility(description, true);
+		}
+		container.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				buttonsVisible = !buttonsVisible;
 				adjustIndicator(app, buttonsVisible, view, nightMode);
-				AndroidUiHelper.updateVisibility(actionButton, buttonsVisible);
 				AndroidUiHelper.updateVisibility(itemsContainer, buttonsVisible);
 			}
 		});
 		adjustIndicator(app, buttonsVisible, view, nightMode);
-
-		setupSelectableBackground(progressContainer);
+		setupSelectableBackground(container);
 		AndroidUiHelper.updateVisibility(progressBar, app.getNetworkSettingsHelper().isBackupExporting());
+		AndroidUiHelper.updateVisibility(container.findViewById(R.id.explicit_indicator), status != BackupStatus.BACKUP_COMPLETE);
 	}
 
-	private void setupUploadItems() {
-		itemsContainer = view.findViewById(R.id.items_container);
-		itemsContainer.removeAllViews();
+	private void setupWarningContainer() {
+		String error = backup.getError();
+		if (status.warningTitleRes != -1 || !Algorithms.isEmpty(error)) {
+			LayoutInflater themedInflater = UiUtilities.getInflater(view.getContext(), nightMode);
+			View itemView = themedInflater.inflate(R.layout.backup_warning, itemsContainer, false);
 
+			TextView title = itemView.findViewById(R.id.title);
+			TextView description = itemView.findViewById(R.id.description);
+
+			if (status.warningTitleRes != -1) {
+				title.setText(status.warningTitleRes);
+				description.setText(status.warningDescriptionRes);
+			} else {
+				title.setText(R.string.subscribe_email_error);
+				description.setText(error);
+			}
+			ImageView icon = itemView.findViewById(R.id.icon);
+			icon.setImageDrawable(getContentIcon(status.warningIconRes));
+			setupWarningRoundedBg(itemView.findViewById(R.id.warning_container));
+
+			itemsContainer.addView(itemView);
+		}
+	}
+
+	public void setupWarningRoundedBg(View selectableView) {
+		int color = AndroidUtils.getColorFromAttr(selectableView.getContext(), R.attr.activity_background_color);
+		int selectedColor = UiUtilities.getColorWithAlpha(getActiveColor(), 0.3f);
+
+		Drawable bgDrawable = getPaintedIcon(R.drawable.rectangle_rounded, color);
+		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+			Drawable selectable = getPaintedIcon(R.drawable.ripple_rectangle_rounded, selectedColor);
+			Drawable[] layers = {bgDrawable, selectable};
+			AndroidUtils.setBackground(selectableView, new LayerDrawable(layers));
+		} else {
+			AndroidUtils.setBackground(selectableView, bgDrawable);
+		}
+		LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) selectableView.getLayoutParams();
+		params.setMargins(params.leftMargin, AndroidUtils.dpToPx(app, 6), params.rightMargin, params.bottomMargin);
+	}
+
+	private void setupUploadItems(BackupInfo info) {
 		LayoutInflater themedInflater = UiUtilities.getInflater(view.getContext(), nightMode);
-		for (SettingsItem item : info.getItemsToUpload()) {
+		for (SettingsItem item : info.getItemsToUpload(app)) {
 			View itemView = themedInflater.inflate(R.layout.backup_upload_item, itemsContainer, false);
 			setupItemView(item, itemView);
 
 			itemsContainer.addView(itemView);
-			AndroidUiHelper.updateVisibility(itemView.findViewById(R.id.warningIcon), false);
+			AndroidUiHelper.updateVisibility(itemView.findViewById(R.id.second_icon), false);
 		}
 	}
 
-	private void setupItemsToDelete() {
+	private void setupItemsToDelete(BackupInfo info) {
 		LayoutInflater themedInflater = UiUtilities.getInflater(view.getContext(), nightMode);
-		for (SettingsItem item : info.getItemsToDelete()) {
+		for (SettingsItem item : info.getItemsToDelete(app)) {
 			View itemView = themedInflater.inflate(R.layout.backup_upload_item, itemsContainer, false);
 			setupItemView(item, itemView);
 
-			ImageView icon = itemView.findViewById(R.id.warningIcon);
+			ImageView icon = itemView.findViewById(R.id.second_icon);
 			icon.setImageDrawable(getContentIcon(R.drawable.ic_action_delete_dark));
 			AndroidUiHelper.updateVisibility(icon, true);
 
@@ -132,11 +192,9 @@ public class BackupUploadCard extends MapBaseCard {
 		}
 	}
 
-	private void setupConflictingItems() {
-		itemsContainer = view.findViewById(R.id.items_container);
-
+	private void setupConflictingItems(BackupInfo info) {
 		LayoutInflater themedInflater = UiUtilities.getInflater(view.getContext(), nightMode);
-		for (Pair<LocalFile, RemoteFile> pair : info.filesToMerge) {
+		for (Pair<LocalFile, RemoteFile> pair : info.getFilteredFilesToMerge(app)) {
 			SettingsItem item = pair.first.item;
 			if (pair.first.item == null || pair.second.item == null) {
 				continue;
@@ -157,12 +215,12 @@ public class BackupUploadCard extends MapBaseCard {
 				public void onClick(View v) {
 					SettingsItem settingsItem = pair.second.item;
 					settingsItem.setShouldReplace(true);
-					app.getNetworkSettingsHelper().importSettings(Collections.singletonList(settingsItem), "", 0, null);
+					app.getNetworkSettingsHelper().importSettings(Collections.singletonList(settingsItem), "", 1, true, importListener);
 				}
 			});
 			AndroidUiHelper.updateVisibility(serverButton, true);
 			AndroidUiHelper.updateVisibility(localVersionButton, true);
-			AndroidUiHelper.updateVisibility(itemView.findViewById(R.id.warningIcon), true);
+			AndroidUiHelper.updateVisibility(itemView.findViewById(R.id.second_icon), true);
 			UiUtilities.setupDialogButton(nightMode, localVersionButton, DialogButtonType.SECONDARY, R.string.upload_local_version);
 			UiUtilities.setupDialogButton(nightMode, serverButton, DialogButtonType.SECONDARY, R.string.download_server_version);
 			AndroidUtils.setBackground(app, localVersionButton, nightMode, R.drawable.dlg_btn_transparent_light, R.drawable.dlg_btn_transparent_dark);
@@ -174,15 +232,7 @@ public class BackupUploadCard extends MapBaseCard {
 
 	private void setupItemView(SettingsItem item, View itemView) {
 		TextView title = itemView.findViewById(R.id.title);
-		if (item instanceof ProfileSettingsItem) {
-			ProfileSettingsItem profileSettingsItem = (ProfileSettingsItem) item;
-			title.setText(profileSettingsItem.getAppMode().toHumanString());
-		} else if (item instanceof FileSettingsItem) {
-			FileSettingsItem profileSettingsItem = (FileSettingsItem) item;
-			title.setText(Algorithms.getFileWithoutDirs(profileSettingsItem.getFile().getName()));
-		} else {
-			title.setText(item.getName());
-		}
+		title.setText(item.getPublicName(app));
 
 		String filename = BackupHelper.getItemFileName(item);
 		TextView description = itemView.findViewById(R.id.description);
@@ -195,52 +245,142 @@ public class BackupUploadCard extends MapBaseCard {
 			description.setText(app.getString(R.string.ltr_or_rtl_combine_via_colon, summary, app.getString(R.string.shared_string_never)));
 		}
 		ImageView icon = itemView.findViewById(R.id.icon);
-		icon.setImageDrawable(getIcon(item));
+		icon.setImageDrawable(getItemIcon(item));
+		itemView.setTag(item);
 	}
 
 	private void setupActionButton() {
-		actionButton = view.findViewById(R.id.action_button);
+		View actionButton = view.findViewById(R.id.action_button);
 		if (app.getNetworkSettingsHelper().isBackupExporting()) {
 			UiUtilities.setupDialogButton(nightMode, actionButton, DialogButtonType.SECONDARY, R.string.shared_string_cancel);
-			AndroidUtils.setBackground(app, actionButton, nightMode, R.drawable.dlg_btn_transparent_light, R.drawable.dlg_btn_transparent_dark);
 			actionButton.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					app.getNetworkSettingsHelper().cancelExport();
 				}
 			});
-		} else {
+		} else if (status == BackupStatus.MAKE_BACKUP || status == BackupStatus.CONFLICTS) {
 			UiUtilities.setupDialogButton(nightMode, actionButton, DialogButtonType.SECONDARY, R.string.backup_now);
-			AndroidUtils.setBackground(app, actionButton, nightMode, R.drawable.dlg_btn_transparent_light, R.drawable.dlg_btn_transparent_dark);
 			actionButton.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					List<SettingsItem> items = info.getItemsToUpload();
-					if (!items.isEmpty()) {
-						app.getNetworkSettingsHelper().exportSettings(exportListener, items);
-					}
-					if (!Algorithms.isEmpty(info.filesToDelete)) {
-						try {
-							app.getBackupHelper().deleteFiles(info.filesToDelete, deleteFilesListener);
-						} catch (UserNotRegisteredException e) {
-
-						}
+					BackupInfo info = backup.getBackupInfo();
+					List<SettingsItem> items = info.getItemsToUpload(app);
+					if (!items.isEmpty() || !Algorithms.isEmpty(info.getFilteredFilesToDelete(app))) {
+						app.getNetworkSettingsHelper().exportSettings(items, info.getFilteredFilesToDelete(app), exportListener);
 					}
 				}
 			});
+		} else if (status == BackupStatus.NO_INTERNET_CONNECTION || status == BackupStatus.ERROR) {
+			UiUtilities.setupDialogButton(nightMode, actionButton, DialogButtonType.SECONDARY, R.string.retry);
+			actionButton.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					app.getBackupHelper().prepareBackup();
+				}
+			});
+		}
+		AndroidUtils.setBackground(app, actionButton, nightMode, R.drawable.dlg_btn_transparent_light, R.drawable.dlg_btn_transparent_dark);
+
+		BackupInfo info = backup.getBackupInfo();
+		AndroidUiHelper.updateVisibility(actionButton, info != null
+				&& (!info.getFilteredFilesToUpload(app).isEmpty() || !info.getFilteredFilesToDelete(app).isEmpty()));
+	}
+
+	public void setupProgress(@NonNull BackupInfo info) {
+		int itemsCount = info.getFilteredFilesToUpload(app).size() + info.getFilteredFilesToDelete(app).size();
+		progressBar.setMax(itemsCount);
+	}
+
+	public void onBackupExportItemProgress(@NonNull String type, @NonNull String fileName, int value) {
+		SettingsItem item = getSettingsItem(type, fileName);
+		if (item != null) {
+			View itemView = view.findViewWithTag(item);
+			if (itemView != null) {
+				ProgressBar progress = itemView.findViewById(R.id.progressBar);
+				progress.setProgress(value);
+				AndroidUiHelper.updateVisibility(progress, true);
+			}
 		}
 	}
 
-	public void setupProgress(int itemsCount) {
-		progressBar.setMax(itemsCount);
+	public void onBackupExportItemFinished(@NonNull String type, @NonNull String fileName) {
+		SettingsItem item = getSettingsItem(type, fileName);
+		if (item != null) {
+			View itemView = view.findViewWithTag(item);
+			if (itemView != null) {
+				ProgressBar progress = itemView.findViewById(R.id.progressBar);
+				AndroidUiHelper.updateVisibility(progress, false);
+
+				ImageView icon = itemView.findViewById(R.id.second_icon);
+				icon.setImageDrawable(getContentIcon(R.drawable.ic_action_cloud_done));
+				AndroidUiHelper.updateVisibility(icon, true);
+				AndroidUiHelper.updateVisibility(itemView.findViewById(R.id.server_button), false);
+				AndroidUiHelper.updateVisibility(itemView.findViewById(R.id.local_version_button), false);
+			}
+		}
+	}
+
+	public void onBackupExportItemStarted(@NonNull String type, @NonNull String fileName, int max) {
+		SettingsItem item = getSettingsItem(type, fileName);
+		if (item != null) {
+			View itemView = view.findViewWithTag(item);
+			if (itemView != null) {
+				ProgressBar progress = itemView.findViewById(R.id.progressBar);
+				progress.setMax(max);
+				progress.setProgress(0);
+				AndroidUiHelper.updateVisibility(progress, true);
+				AndroidUiHelper.updateVisibility(itemView.findViewById(R.id.second_icon), false);
+			}
+		}
+	}
+
+	private SettingsItem getSettingsItem(@NonNull String type, @NonNull String fileName) {
+		BackupInfo info = backup.getBackupInfo();
+		if (info != null) {
+			for (LocalFile file : info.getFilteredFilesToUpload(app)) {
+				if (file.item != null && BackupHelper.applyItem(file.item, type, fileName)) {
+					return file.item;
+				}
+			}
+			for (RemoteFile file : info.getFilteredFilesToDelete(app)) {
+				if (file.item != null && BackupHelper.applyItem(file.item, type, fileName)) {
+					return file.item;
+				}
+			}
+			for (Pair<LocalFile, RemoteFile> pair : info.getFilteredFilesToMerge(app)) {
+				SettingsItem item = pair.first.item;
+				if (item != null && BackupHelper.applyItem(item, type, fileName)) {
+					return item;
+				}
+			}
+		}
+		return null;
 	}
 
 	public void updateProgress(int value) {
 		String uploading = app.getString(R.string.local_openstreetmap_uploading);
-		progressTitle.setText(app.getString(R.string.ltr_or_rtl_combine_via_space, uploading, String.valueOf(value)));
+		headerTitle.setText(app.getString(R.string.ltr_or_rtl_combine_via_space, uploading, String.valueOf(value)));
 
 		progressBar.setProgress(value);
 		AndroidUiHelper.updateVisibility(progressBar, app.getNetworkSettingsHelper().isBackupExporting());
+	}
+
+	private BackupStatus getBackupStatus() {
+		BackupInfo info = backup.getBackupInfo();
+		if (info != null) {
+			if (!Algorithms.isEmpty(info.getFilteredFilesToMerge(app))) {
+				return BackupStatus.CONFLICTS;
+			} else if (!Algorithms.isEmpty(info.getFilteredFilesToUpload(app))
+					|| !Algorithms.isEmpty(info.getFilteredFilesToDelete(app))) {
+				return BackupStatus.MAKE_BACKUP;
+			}
+		} else if (!app.getSettings().isInternetConnectionAvailable()) {
+			return BackupStatus.NO_INTERNET_CONNECTION;
+		} else if (backup.getError() != null) {
+			return BackupStatus.ERROR;
+		}
+		return BackupStatus.BACKUP_COMPLETE;
 	}
 
 	private void setupSelectableBackground(View view) {
@@ -248,39 +388,15 @@ public class BackupUploadCard extends MapBaseCard {
 		AndroidUtils.setBackground(view, drawable);
 	}
 
-	private Drawable getIcon(SettingsItem item) {
-		switch (item.getType()) {
-			case GLOBAL:
-				return getContentIcon(ExportSettingsType.GLOBAL.getIconRes());
-			case PROFILE:
-				ProfileSettingsItem profileSettingsItem = (ProfileSettingsItem) item;
-				return getContentIcon(profileSettingsItem.getAppMode().getIconRes());
-			case QUICK_ACTIONS:
-				return getContentIcon(ExportSettingsType.QUICK_ACTIONS.getIconRes());
-			case POI_UI_FILTERS:
-				return getContentIcon(ExportSettingsType.POI_TYPES.getIconRes());
-			case MAP_SOURCES:
-				return getContentIcon(ExportSettingsType.MAP_SOURCES.getIconRes());
-			case AVOID_ROADS:
-				return getContentIcon(ExportSettingsType.AVOID_ROADS.getIconRes());
-			case OSM_NOTES:
-				return getContentIcon(ExportSettingsType.OSM_NOTES.getIconRes());
-			case OSM_EDITS:
-				return getContentIcon(ExportSettingsType.OSM_EDITS.getIconRes());
-			case FAVOURITES:
-				return getContentIcon(ExportSettingsType.FAVORITES.getIconRes());
-			case ACTIVE_MARKERS:
-				return getContentIcon(ExportSettingsType.ACTIVE_MARKERS.getIconRes());
-			case HISTORY_MARKERS:
-				return getContentIcon(ExportSettingsType.HISTORY_MARKERS.getIconRes());
-			case SEARCH_HISTORY:
-				return getContentIcon(ExportSettingsType.SEARCH_HISTORY.getIconRes());
-			case GPX:
-				return getContentIcon(ExportSettingsType.TRACKS.getIconRes());
-			case ONLINE_ROUTING_ENGINES:
-				return getContentIcon(ExportSettingsType.ONLINE_ROUTING_ENGINES.getIconRes());
-			case ITINERARY_GROUPS:
-				return getContentIcon(ExportSettingsType.ITINERARY_GROUPS.getIconRes());
+	private Drawable getItemIcon(SettingsItem item) {
+		if (item instanceof ProfileSettingsItem) {
+			ProfileSettingsItem profileItem = (ProfileSettingsItem) item;
+			ApplicationMode mode = profileItem.getAppMode();
+			return getContentIcon(mode.getIconRes());
+		}
+		ExportSettingsType type = ExportSettingsType.getExportSettingsTypeForItem(item);
+		if (type != null) {
+			return getContentIcon(type.getIconRes());
 		}
 		return null;
 	}

@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.backup.BackupHelper.BackupInfo;
 import net.osmand.plus.backup.BackupHelper.OnCollectLocalFilesListener;
 import net.osmand.plus.backup.BackupHelper.OnGenerateBackupInfoListener;
 import net.osmand.plus.backup.NetworkSettingsHelper.BackupCollectListener;
@@ -113,7 +112,7 @@ public class PrepareBackupTask {
 	}
 
 	private void doCollectRemoteFiles() {
-		app.getNetworkSettingsHelper().collectSettings("", 0, new BackupCollectListener() {
+		app.getNetworkSettingsHelper().collectSettings("", 0, false, new BackupCollectListener() {
 					@Override
 					public void onBackupCollectFinished(boolean succeed, boolean empty,
 														@NonNull List<SettingsItem> items,

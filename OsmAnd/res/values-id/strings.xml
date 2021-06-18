@@ -1941,4 +1941,13 @@
     <string name="receiving_data_from_server">Menerima data dari server</string>
     <string name="restore_complete">Pemulihan selesai</string>
     <string name="poi_context_menu_website">Tampilkan situs web POI</string>
+    <string name="send_location_way_choose_title">Bagikan lokasi menggunakan</string>
+    <string name="mile">mi</string>
+    <string name="mile_per_hour">mph</string>
+    <string name="foot">kaki</string>
+    <string name="system_locale">Sistem</string>
+    <string name="error_doing_search">Tidak dapat melakukan pencarian luring.</string>
+    <string name="install_more">Pasang lebih banyak…</string>
+    <string name="incomplete_locale">belum lengkap</string>
+    <string name="backup_version_history">Riwayat versi</string>
 </resources>

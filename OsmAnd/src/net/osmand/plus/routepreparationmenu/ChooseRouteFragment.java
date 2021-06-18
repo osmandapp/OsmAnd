@@ -528,7 +528,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 					File dst = new File(dir, "route.gpx");
 					try {
 						FileWriter fw = new FileWriter(dst);
-						GPXUtilities.writeGpx(fw, gpx);
+						GPXUtilities.writeGpx(fw, gpx, null);
 						fw.close();
 						final Intent sendIntent = new Intent();
 						sendIntent.setAction(Intent.ACTION_SEND);

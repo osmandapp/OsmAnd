@@ -70,11 +70,20 @@ public class GradientCard extends MapBaseCard {
 
 		if (isTrack) {
 			AndroidUiHelper.updateVisibility(view, true);
-			double min = RouteColorize.getMinValue(selectedScaleType.toColorizationType(), gpxTrackAnalysis);
-			double max = RouteColorize.getMaxValue(selectedScaleType.toColorizationType(),
-					gpxTrackAnalysis, min, app.getSettings().getApplicationMode().getMaxSpeed());
-			minValue.setText(formatValue(min));
-			maxValue.setText(formatValue(max));
+			if (selectedScaleType == GradientScaleType.SPEED && gpxTrackAnalysis.isSpeedSpecified()
+					|| selectedScaleType == GradientScaleType.ALTITUDE && gpxTrackAnalysis.isElevationSpecified()) {
+				double min = RouteColorize.getMinValue(selectedScaleType.toColorizationType(), gpxTrackAnalysis);
+				double max = RouteColorize.getMaxValue(selectedScaleType.toColorizationType(),
+						gpxTrackAnalysis, min, app.getSettings().getApplicationMode().getMaxSpeed());
+				minValue.setText(formatValue(min));
+				maxValue.setText(formatValue(max));
+			} else if (selectedScaleType == GradientScaleType.SPEED) {
+				minValue.setText(R.string.shared_string_min_speed);
+				maxValue.setText(R.string.shared_string_max_speed);
+			} else if (selectedScaleType == GradientScaleType.ALTITUDE) {
+				minValue.setText(R.string.shared_string_min_height);
+				maxValue.setText(R.string.shared_string_max_height);
+			}
 		} else {
 			if (selectedScaleType == GradientScaleType.ALTITUDE) {
 				minValue.setText(R.string.shared_string_min_height);

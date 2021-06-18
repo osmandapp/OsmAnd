@@ -62,6 +62,7 @@ public class BackupDbHelper {
 
 	public BackupDbHelper(OsmandApplication app) {
 		this.app = app;
+		//removeUploadedFileInfos();
 	}
 
 	@Nullable

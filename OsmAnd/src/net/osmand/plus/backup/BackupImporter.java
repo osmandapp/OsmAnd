@@ -29,9 +29,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
+import java.util.TreeSet;
 
 import static net.osmand.plus.backup.BackupHelper.INFO_EXT;
 
@@ -79,7 +82,7 @@ class BackupImporter {
 		return result;
 	}
 
-	void importItems(@NonNull List<SettingsItem> items) throws IllegalArgumentException {
+	void importItems(@NonNull List<SettingsItem> items, boolean forceReadData) throws IllegalArgumentException {
 		if (Algorithms.isEmpty(items)) {
 			throw new IllegalArgumentException("No items");
 		}
@@ -89,16 +92,18 @@ class BackupImporter {
 		}
 		OsmandApplication app = backupHelper.getApp();
 		File tempDir = FileUtils.getTempDir(app);
+		Map<RemoteFile, SettingsItem> remoteFileItems = new HashMap<>();
 		for (RemoteFile remoteFile : remoteFiles) {
 			SettingsItem item = null;
 			for (SettingsItem settingsItem : items) {
 				String fileName = remoteFile.item != null ? remoteFile.item.getFileName() : null;
 				if (fileName != null && settingsItem.applyFileName(fileName)) {
 					item = settingsItem;
+					remoteFileItems.put(remoteFile, item);
 					break;
 				}
 			}
-			if (item != null/* && !item.shouldReadOnCollecting()*/) {
+			if (item != null && (!item.shouldReadOnCollecting() || forceReadData)) {
 				FileInputStream is = null;
 				try {
 					SettingsItemReader<? extends SettingsItem> reader = item.getReader();
@@ -111,6 +116,10 @@ class BackupImporter {
 						if (errors.isEmpty()) {
 							is = new FileInputStream(tempFile);
 							reader.readFromStream(is, remoteFile.getName());
+							if (forceReadData) {
+								item.apply();
+							}
+							backupHelper.updateFileUploadTime(remoteFile.getType(), remoteFile.getName(), remoteFile.getClienttimems());
 							if (item instanceof FileSettingsItem) {
 								String itemFileName = BackupHelper.getFileItemName((FileSettingsItem) item);
 								if (app.getAppPath(itemFileName).isDirectory()) {
@@ -138,6 +147,9 @@ class BackupImporter {
 				}
 			}
 		}
+		for (Entry<RemoteFile, SettingsItem> fileItem : remoteFileItems.entrySet()) {
+			fileItem.getValue().setLocalModifiedTime(fileItem.getKey().getClienttimems());
+		}
 	}
 
 	@NonNull
@@ -153,11 +165,21 @@ class BackupImporter {
 			Map<File, RemoteFile> remoteInfoFilesMap = new HashMap<>();
 			Map<String, RemoteFile> remoteItemFilesMap = new HashMap<>();
 			List<RemoteFile> remoteInfoFiles = new ArrayList<>();
-			List<String> remoteInfoNames = new ArrayList<>();
+			Set<String> remoteInfoNames = new HashSet<>();
 			List<RemoteFile> noInfoRemoteItemFiles = new ArrayList<>();
 			OsmandApplication app = backupHelper.getApp();
 			File tempDir = FileUtils.getTempDir(app);
-			for (RemoteFile remoteFile : remoteFiles) {
+
+			List<RemoteFile> uniqueRemoteFiles = new ArrayList<>();
+			Set<String> uniqueFileIds = new TreeSet<>();
+			for (RemoteFile rf : remoteFiles) {
+				String fileId = rf.getTypeNamePath();
+				if (uniqueFileIds.add(fileId) && !rf.isDeleted()) {
+					uniqueRemoteFiles.add(rf);
+				}
+			}
+
+			for (RemoteFile remoteFile : uniqueRemoteFiles) {
 				String fileName = remoteFile.getTypeNamePath();
 				if (fileName.endsWith(INFO_EXT)) {
 					if (readItems) {
@@ -166,7 +188,7 @@ class BackupImporter {
 					String itemFileName = fileName.substring(0, fileName.length() - INFO_EXT.length());
 					remoteInfoNames.add(itemFileName);
 					remoteInfoFiles.add(remoteFile);
-				} else {
+				} else if (!remoteItemFilesMap.containsKey(fileName)) {
 					remoteItemFilesMap.put(fileName, remoteFile);
 				}
 			}
@@ -268,7 +290,11 @@ class BackupImporter {
 			}
 			if (SettingsItemType.PROFILE.name().equals(type)) {
 				JSONObject appMode = new JSONObject();
-				appMode.put("stringKey", fileName.replaceFirst("profile_", ""));
+				String name = fileName.replaceFirst("profile_", "");
+				if (name.endsWith(".json")) {
+					name = name.substring(0, name.length() - 5);
+				}
+				appMode.put("stringKey", name);
 				itemJson.put("appMode", appMode);
 			}
 			itemJson.put("file", fileName);

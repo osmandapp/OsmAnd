@@ -1,9 +1,12 @@
 package net.osmand.plus.settings.backend.backup.items;
 
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
 import net.osmand.util.Algorithms;
@@ -28,6 +31,12 @@ public class ResourcesSettingsItem extends FileSettingsItem {
 	@Override
 	public SettingsItemType getType() {
 		return SettingsItemType.RESOURCES;
+	}
+
+	@NonNull
+	@Override
+	public String getPublicName(@NonNull Context ctx) {
+		return ctx.getString(R.string.shared_string_resources);
 	}
 
 	@Override
