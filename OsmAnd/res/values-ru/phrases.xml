@@ -147,7 +147,7 @@
     <string name="poi_vehicle_inspection">Пункт техосмотра;Техосмотр</string>
     <string name="poi_car_wash">Автомойка</string>
     <string name="poi_fuel">Автомобильная заправка;Автозаправка;Бензоколонка;АЗС;Бензозаправка;Заправка</string>
-    <string name="poi_electricity_combined_charging">Зарядная станция</string>
+    <string name="poi_electricity_combined_charging">Зарядная станция;Станция зарядки электромобилей;Станция зарядки EV;Пункт зарядки электромобилей;Пункт зарядки;Электронная зарядная станция;Оборудование для питания электромобилей</string>
     <string name="poi_vehicle_ramp">Ремонтная эстакада/яма</string>
     <string name="poi_compressed_air">Подкачка шин</string>
     <string name="poi_parking">Парковка</string>
@@ -592,7 +592,7 @@
     <string name="poi_car_rental">Прокат автомобилей</string>
     <string name="poi_car_sharing">Кратковременный прокат автомобилей</string>
     <string name="poi_boat_sharing">Прокат лодок</string>
-    <string name="poi_toilets">Уборные;Туалеты</string>
+    <string name="poi_toilets">Туалет;Уборные;Туалеты</string>
     <string name="poi_sauna">Сауна</string>
     <string name="poi_brothel">Бордель;Публичный дом</string>
     <string name="poi_mortuary">Морг</string>
@@ -3917,4 +3917,23 @@
     <string name="poi_wakeboarding">Вейкбординг</string>
     <string name="poi_speedway">Спидвей</string>
     <string name="poi_snooker">Снукер</string>
+    <string name="poi_service_vehicle_inspection_yes">Техосмотр</string>
+    <string name="poi_pillory">Позорный столб</string>
+    <string name="poi_shop_water">Магазин питьевой воды</string>
+    <string name="poi_pest_control">Магазин средств борьбы с вредителями</string>
+    <string name="poi_telecom_medium_coaxial">Носитель: коаксиальный</string>
+    <string name="poi_telecom_medium_fibre">Носитель: оптоволокно</string>
+    <string name="poi_telecom_medium_copper">Носитель: медь</string>
+    <string name="poi_health_post">Медпункт</string>
+    <string name="poi_club_social">Социальный клуб</string>
+    <string name="poi_horseshoes">Метание подковы</string>
+    <string name="poi_hoops">Кольца</string>
+    <string name="poi_shrub">Кустарник;Куст</string>
+    <string name="poi_fruit">Фрукты</string>
+    <string name="poi_dune">Дюна</string>
+    <string name="poi_fuel_propane">Пропан</string>
+    <string name="poi_planetarium">Планетарий</string>
+    <string name="poi_service_vehicle_rental_yes">Прокат автомобилей</string>
+    <string name="poi_geodesist">Геодезист</string>
+    <string name="poi_bay_filter">Тип залива</string>
 </resources>

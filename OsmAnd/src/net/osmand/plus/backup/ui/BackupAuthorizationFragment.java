@@ -1,4 +1,4 @@
-package net.osmand.plus.settings.fragments;
+package net.osmand.plus.backup.ui;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -24,11 +24,13 @@ import net.osmand.plus.chooseplan.ChoosePlanDialogFragment.ChoosePlanDialogType;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.settings.fragments.ExportSettingsFragment;
 
 import static net.osmand.plus.UiUtilities.setupDialogButton;
 import static net.osmand.plus.importfiles.ImportHelper.ImportType.SETTINGS;
 
-public class BackupAndRestoreFragment extends BaseSettingsFragment {
+public class BackupAuthorizationFragment extends BaseSettingsFragment {
 
 	private static final String AUTHORIZE = "authorize";
 	private static final String LOCAL_BACKUP = "local_backup";
@@ -178,10 +180,10 @@ public class BackupAndRestoreFragment extends BaseSettingsFragment {
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager) {
 		if (!fragmentManager.isStateSaved()) {
-			Fragment fragment = new BackupAndRestoreFragment();
+			Fragment fragment = new BackupAuthorizationFragment();
 			fragmentManager.beginTransaction()
-					.replace(R.id.fragmentContainer, fragment, SettingsScreenType.BACKUP_AND_RESTORE.fragmentName)
-					.addToBackStack(SettingsScreenType.BACKUP_AND_RESTORE.name())
+					.replace(R.id.fragmentContainer, fragment, SettingsScreenType.BACKUP_AUTHORIZATION.fragmentName)
+					.addToBackStack(SettingsScreenType.BACKUP_AUTHORIZATION.name())
 					.commit();
 		}
 	}

@@ -14,7 +14,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ListStringPreference;
 import net.osmand.plus.track.CustomColorBottomSheet.ColorPickerListener;
@@ -27,7 +27,7 @@ import org.apache.commons.logging.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ColorsCard extends BaseCard implements ColorPickerListener {
+public class ColorsCard extends MapBaseCard implements ColorPickerListener {
 
 	public static final int MAX_CUSTOM_COLORS = 6;
 	public static final double MINIMUM_CONTRAST_RATIO = 1.5;

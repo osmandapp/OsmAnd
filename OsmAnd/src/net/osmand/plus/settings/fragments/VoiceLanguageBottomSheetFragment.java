@@ -48,18 +48,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.DimenRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import static net.osmand.plus.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
-import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.OTHER_GROUP;
-import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.VOICE_HEADER_REC;
-import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.VOICE_HEADER_TTS;
-import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.VOICE_REC;
-import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.VOICE_TTS;
 
 public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet implements DownloadEvents {
 
@@ -400,10 +394,6 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 	@Override
 	protected int getDismissButtonTextId() {
 		return R.string.shared_string_close;
-	}
-
-	public int getDimen(@DimenRes int id) {
-		return getResources().getDimensionPixelSize(id);
 	}
 
 	private BaseBottomSheetItem createDividerItem() {

@@ -439,6 +439,7 @@ public class AppInitializer implements IProgress {
 		getLazyRoutingConfig();
 		app.applyTheme(app);
 		startupInit(app.reconnectToBRouter(), IBRouterService.class);
+		app.backupHelper = startupInit(new BackupHelper(app), BackupHelper.class);
 		app.inAppPurchaseHelper = startupInit(new InAppPurchaseHelperImpl(app), InAppPurchaseHelperImpl.class);
 		app.poiTypes = startupInit(MapPoiTypes.getDefaultNoInit(), MapPoiTypes.class);
 		app.transportRoutingHelper = startupInit(new TransportRoutingHelper(app), TransportRoutingHelper.class);
@@ -481,7 +482,6 @@ public class AppInitializer implements IProgress {
 		app.osmOAuthHelper = startupInit(new OsmOAuthHelper(app), OsmOAuthHelper.class);
 		app.oprAuthHelper = startupInit(new OprAuthHelper(app), OprAuthHelper.class);
 		app.onlineRoutingHelper = startupInit(new OnlineRoutingHelper(app), OnlineRoutingHelper.class);
-		app.backupHelper = startupInit(new BackupHelper(app), BackupHelper.class);
 
 		initOpeningHoursParser();
 		app.getDownloadThread().runReloadVoiceIndexes();

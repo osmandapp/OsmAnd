@@ -7,8 +7,10 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
+import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -77,10 +79,52 @@ public class MapMarkersDbHelper {
 	public static final String TAIL_NEXT_VALUE = "tail_next";
 	public static final String HISTORY_NEXT_VALUE = "history_next";
 
+	private static final String MARKERS_LAST_MODIFIED_NAME = "map_markers";
+	private static final String MARKERS_HISTORY_LAST_MODIFIED_NAME = "map_markers_history";
+
 	private final OsmandApplication context;
 
 	public MapMarkersDbHelper(OsmandApplication context) {
 		this.context = context;
+	}
+
+	public long getMarkersLastModifiedTime() {
+		long lastModifiedTime = BackupHelper.getLastModifiedTime(context, MARKERS_LAST_MODIFIED_NAME);
+		if (lastModifiedTime == 0) {
+			lastModifiedTime = getDBLastModifiedTime();
+			BackupHelper.setLastModifiedTime(context, MARKERS_LAST_MODIFIED_NAME, lastModifiedTime);
+		}
+		return lastModifiedTime;
+	}
+
+	public long getMarkersHistoryLastModifiedTime() {
+		long lastModifiedTime = BackupHelper.getLastModifiedTime(context, MARKERS_HISTORY_LAST_MODIFIED_NAME);
+		if (lastModifiedTime == 0) {
+			lastModifiedTime = getDBLastModifiedTime();
+			BackupHelper.setLastModifiedTime(context, MARKERS_HISTORY_LAST_MODIFIED_NAME, lastModifiedTime);
+		}
+		return lastModifiedTime;
+	}
+
+	public void setMarkersLastModifiedTime(long lastModifiedTime) {
+		BackupHelper.setLastModifiedTime(context, MARKERS_LAST_MODIFIED_NAME, lastModifiedTime);
+	}
+
+	public void setMarkersHistoryLastModifiedTime(long lastModifiedTime) {
+		BackupHelper.setLastModifiedTime(context, MARKERS_HISTORY_LAST_MODIFIED_NAME, lastModifiedTime);
+	}
+
+	private void updateMarkersLastModifiedTime() {
+		BackupHelper.setLastModifiedTime(context, MARKERS_LAST_MODIFIED_NAME);
+	}
+
+	private void updateMarkersHistoryLastModifiedTime() {
+		BackupHelper.setLastModifiedTime(context, MARKERS_HISTORY_LAST_MODIFIED_NAME);
+	}
+
+	private long getDBLastModifiedTime() {
+		File dbFile = context.getDatabasePath(DB_NAME);
+		return dbFile.exists() ? dbFile.lastModified() : 0;
 	}
 
 	private SQLiteConnection openConnection(boolean readonly) {
@@ -111,24 +155,34 @@ public class MapMarkersDbHelper {
 	}
 
 	protected void onUpgrade(SQLiteConnection db, int oldVersion, int newVersion) {
+		boolean upgraded = false;
 		if (oldVersion < 8) {
 			db.execSQL("ALTER TABLE " + MARKERS_TABLE_NAME + " ADD " + MARKERS_COL_DISABLED + " int");
+			upgraded = true;
 		}
 		if (oldVersion < 9) {
 			db.execSQL("UPDATE " + MARKERS_TABLE_NAME +
 					" SET " + MARKERS_COL_DISABLED + " = ? " +
 					"WHERE " + MARKERS_COL_DISABLED + " IS NULL", new Object[] {0});
+			upgraded = true;
 		}
 		if (oldVersion < 10) {
 			db.execSQL("ALTER TABLE " + MARKERS_TABLE_NAME + " ADD " + MARKERS_COL_SELECTED + " int");
+			upgraded = true;
 		}
 		if (oldVersion < 11) {
 			db.execSQL("UPDATE " + MARKERS_TABLE_NAME +
 					" SET " + MARKERS_COL_SELECTED + " = ? " +
 					"WHERE " + MARKERS_COL_SELECTED + " IS NULL", new Object[] {0});
+			upgraded = true;
 		}
 		if (oldVersion < 12) {
 			db.execSQL("ALTER TABLE " + MARKERS_TABLE_NAME + " ADD " + MARKERS_COL_MAP_OBJECT_NAME + " TEXT");
+			upgraded = true;
+		}
+		if (upgraded) {
+			updateMarkersLastModifiedTime();
+			updateMarkersHistoryLastModifiedTime();
 		}
 	}
 
@@ -140,6 +194,8 @@ public class MapMarkersDbHelper {
 								" WHERE " + MARKERS_COL_GROUP_KEY + " = ?" +
 								" AND " + MARKERS_COL_ACTIVE + " = ?",
 						new Object[] {groupId, 1});
+
+				updateMarkersLastModifiedTime();
 			} finally {
 				db.close();
 			}
@@ -212,6 +268,12 @@ public class MapMarkersDbHelper {
 				new Object[]{marker.id, marker.getLatitude(), marker.getLongitude(), descr, active,
 						currentTime, marker.visitedDate, marker.groupName, marker.groupKey, marker.colorIndex,
 						marker.history ? HISTORY_NEXT_VALUE : TAIL_NEXT_VALUE, 0, 0, marker.mapObjectName});
+
+		if (marker.history) {
+			updateMarkersHistoryLastModifiedTime();
+		} else {
+			updateMarkersLastModifiedTime();
+		}
 	}
 
 	@Nullable
@@ -350,6 +412,8 @@ public class MapMarkersDbHelper {
 								MARKERS_COL_SELECTED + " = ? " +
 								"WHERE " + MARKERS_COL_ID + " = ?",
 						new Object[]{marker.getLatitude(), marker.getLongitude(), descr, marker.colorIndex, marker.selected, marker.id});
+
+				updateMarkersLastModifiedTime();
 			} finally {
 				db.close();
 			}
@@ -362,6 +426,7 @@ public class MapMarkersDbHelper {
 			try {
 				db.execSQL("UPDATE " + MARKERS_TABLE_NAME + " SET " + MARKERS_COL_NEXT_KEY + " = ? " +
 						"WHERE " + MARKERS_COL_ID + " = ?", new Object[]{next == null ? TAIL_NEXT_VALUE : next.id, moved.id});
+				updateMarkersLastModifiedTime();
 			} finally {
 				db.close();
 			}
@@ -380,6 +445,8 @@ public class MapMarkersDbHelper {
 						MARKERS_COL_VISITED + " = ?, " +
 						MARKERS_COL_NEXT_KEY + " = ? " +
 						"WHERE " + MARKERS_COL_ID + " = ?", new Object[]{0, marker.visitedDate, HISTORY_NEXT_VALUE, marker.id});
+				updateMarkersLastModifiedTime();
+				updateMarkersHistoryLastModifiedTime();
 			} finally {
 				db.close();
 			}
@@ -395,6 +462,8 @@ public class MapMarkersDbHelper {
 						MARKERS_COL_VISITED + " = ?, " +
 						MARKERS_COL_NEXT_KEY + " = ? " +
 						"WHERE " + MARKERS_COL_ACTIVE + " = ?", new Object[]{0, timestamp, HISTORY_NEXT_VALUE, 1});
+				updateMarkersLastModifiedTime();
+				updateMarkersHistoryLastModifiedTime();
 			} finally {
 				db.close();
 			}
@@ -413,6 +482,8 @@ public class MapMarkersDbHelper {
 								"WHERE " + MARKERS_COL_ID + " = ? " +
 								"AND " + MARKERS_COL_ACTIVE + " = ?",
 						new Object[]{1, marker.id, 0});
+				updateMarkersLastModifiedTime();
+				updateMarkersHistoryLastModifiedTime();
 			} finally {
 				db.close();
 			}
@@ -459,6 +530,11 @@ public class MapMarkersDbHelper {
 								" WHERE " + MARKERS_COL_ID + " = ?" +
 								" AND " + MARKERS_COL_ACTIVE + " = ?",
 						new Object[]{marker.id, marker.history ? 0 : 1});
+				if (marker.history) {
+					updateMarkersHistoryLastModifiedTime();
+				} else {
+					updateMarkersLastModifiedTime();
+				}
 			} finally {
 				db.close();
 			}

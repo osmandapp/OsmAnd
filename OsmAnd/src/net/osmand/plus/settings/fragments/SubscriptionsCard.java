@@ -16,10 +16,10 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.liveupdates.LiveUpdatesFragment;
 import net.osmand.plus.liveupdates.OsmLiveActivity;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.util.Algorithms;
 
-public class SubscriptionsCard extends BaseCard {
+public class SubscriptionsCard extends MapBaseCard {
 
 	private static final String PLAY_STORE_SUBSCRIPTION_URL = "https://play.google.com/store/account/subscriptions";
 	private static final String PLAY_STORE_SUBSCRIPTION_DEEPLINK_URL = "https://play.google.com/store/account/subscriptions?sku=%s&package=%s";

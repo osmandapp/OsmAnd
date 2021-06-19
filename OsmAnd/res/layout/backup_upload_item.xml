@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:id="@+id/selectable_list_item"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/icon"
+			android:layout_width="@dimen/standard_icon_size"
+			android:layout_height="@dimen/standard_icon_size"
+			android:layout_gravity="center_vertical"
+			android:layout_marginLeft="@dimen/content_padding"
+			android:layout_marginRight="@dimen/content_padding"
+			android:tint="?attr/default_icon_color"
+			tools:srcCompat="@drawable/ic_map" />
+
+		<LinearLayout
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_weight="1"
+			android:orientation="vertical"
+			android:paddingLeft="@dimen/content_padding"
+			android:paddingTop="@dimen/content_padding_small"
+			android:paddingRight="@dimen/content_padding"
+			android:paddingBottom="@dimen/content_padding_small">
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/title"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:letterSpacing="@dimen/text_button_letter_spacing"
+				android:textColor="?android:textColorPrimary"
+				android:textSize="@dimen/default_list_text_size"
+				osmand:fontFamily="@string/font_roboto_regular"
+				osmand:lineHeight="@dimen/default_title_line_height"
+				tools:text="Favorites" />
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/description"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:letterSpacing="@dimen/description_letter_spacing"
+				android:textColor="?android:textColorSecondary"
+				android:textSize="@dimen/default_desc_text_size"
+				osmand:fontFamily="@string/font_roboto_regular"
+				osmand:lineHeight="@dimen/default_desc_line_height"
+				tools:text="Last backup yesterday" />
+
+		</LinearLayout>
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/second_icon"
+			android:layout_width="@dimen/standard_icon_size"
+			android:layout_height="@dimen/standard_icon_size"
+			android:layout_gravity="center_vertical"
+			android:layout_marginLeft="@dimen/content_padding"
+			android:layout_marginRight="@dimen/content_padding"
+			osmand:srcCompat="@drawable/ic_action_alert"
+			osmand:tint="?attr/default_icon_color" />
+
+		<me.zhanghai.android.materialprogressbar.MaterialProgressBar
+			android:id="@+id/progressBar"
+			style="@style/Widget.MaterialProgressBar.ProgressBar.NoPadding"
+			android:layout_width="@dimen/acceptable_touch_radius"
+			android:layout_height="@dimen/acceptable_touch_radius"
+			android:layout_gravity="center_vertical"
+			android:layout_marginLeft="@dimen/text_margin_small"
+			android:layout_marginRight="@dimen/text_margin_small"
+			android:indeterminate="false"
+			android:visibility="gone"
+			osmand:mpb_progressStyle="circular"
+			osmand:mpb_setBothDrawables="true"
+			osmand:mpb_useIntrinsicPadding="false"
+			tools:visibility="visible" />
+
+	</LinearLayout>
+
+	<include
+		android:id="@+id/local_version_button"
+		layout="@layout/bottom_sheet_dialog_button"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/dialog_button_height"
+		android:layout_marginLeft="@dimen/content_padding"
+		android:layout_marginTop="@dimen/content_padding"
+		android:layout_marginRight="@dimen/content_padding"
+		android:layout_marginBottom="@dimen/content_padding"
+		android:visibility="gone" />
+
+	<include
+		android:id="@+id/server_button"
+		layout="@layout/bottom_sheet_dialog_button"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/dialog_button_height"
+		android:layout_marginLeft="@dimen/content_padding"
+		android:layout_marginRight="@dimen/content_padding"
+		android:layout_marginBottom="@dimen/content_padding"
+		android:visibility="gone" />
+
+	<include layout="@layout/divider_half_item_with_background" />
+
+</LinearLayout>

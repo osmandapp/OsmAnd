@@ -65,12 +65,33 @@ public class ItineraryDataHelper {
 		GPX_TIME_FORMAT.setTimeZone(TimeZone.getTimeZone("UTC"));
 	}
 
-	private OsmandApplication app;
-	private MapMarkersHelper mapMarkersHelper;
+	private final OsmandApplication app;
+	private final MapMarkersHelper mapMarkersHelper;
 
 	public ItineraryDataHelper(OsmandApplication app, MapMarkersHelper mapMarkersHelper) {
 		this.app = app;
 		this.mapMarkersHelper = mapMarkersHelper;
+	}
+
+	public long getLastModifiedTime() {
+		File internalFile = getInternalFile();
+		File externalFile = getExternalFile();
+		if (externalFile.exists()) {
+			return externalFile.lastModified();
+		} else if (internalFile.exists()) {
+			return internalFile.lastModified();
+		}
+		return 0;
+	}
+
+	public void setLastModifiedTime(long lastModifiedTime) {
+		File internalFile = getInternalFile();
+		File externalFile = getExternalFile();
+		if (externalFile.exists()) {
+			externalFile.setLastModified(lastModifiedTime);
+		} else if (internalFile.exists()) {
+			internalFile.setLastModified(lastModifiedTime);
+		}
 	}
 
 	private File getInternalFile() {

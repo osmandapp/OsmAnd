@@ -79,6 +79,16 @@ public class ItinerarySettingsItem extends CollectionSettingsItem<MapMarkersGrou
 	}
 
 	@Override
+	public long getLocalModifiedTime() {
+		return markersHelper.getDataHelper().getLastModifiedTime();
+	}
+
+	@Override
+	public void setLocalModifiedTime(long lastModifiedTime) {
+		markersHelper.getDataHelper().setLastModifiedTime(lastModifiedTime);
+	}
+
+	@Override
 	public void apply() {
 		List<MapMarkersGroup> newItems = getNewItems();
 		if (!newItems.isEmpty() || !duplicateItems.isEmpty()) {

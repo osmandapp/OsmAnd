@@ -20,6 +20,7 @@ import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -56,6 +57,20 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 	@Override
 	public SettingsItemType getType() {
 		return SettingsItemType.FAVOURITES;
+	}
+
+	@Override
+	public long getLocalModifiedTime() {
+		File favoritesFile = favoritesHelper.getExternalFile();
+		return favoritesFile.exists() ? favoritesFile.lastModified() : 0;
+	}
+
+	@Override
+	public void setLocalModifiedTime(long lastModifiedTime) {
+		File favoritesFile = favoritesHelper.getExternalFile();
+		if (favoritesFile.exists()) {
+			favoritesFile.setLastModified(lastModifiedTime);
+		};
 	}
 
 	@NonNull

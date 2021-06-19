@@ -1,12 +1,7 @@
 package net.osmand.plus.views.layers.geometry;
 
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.graphics.Paint;
-
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
@@ -22,12 +17,14 @@ import net.osmand.router.RouteColorize.RouteColorizationPoint;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import gnu.trove.list.array.TByteArrayList;
 
 public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, RouteGeometryWayDrawer> {
@@ -50,7 +47,7 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 	public void setRouteStyleParams(@Nullable @ColorInt Integer color,
 	                                @Nullable Float width,
 	                                @Nullable @ColorInt Integer pointColor,
-									@Nullable GradientScaleType scaleType) {
+	                                @Nullable GradientScaleType scaleType) {
 		this.needUpdate = this.scaleType != scaleType;
 
 		if (scaleType != null && !Algorithms.objectEquals(customWidth, width)) {
@@ -169,16 +166,9 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 		Paint paint = getContext().getAttrs().paint;
 		int color = customColor != null ? customColor : paint.getColor();
 		float width = customWidth != null ? customWidth : paint.getStrokeWidth();
-		GeometryWayProvider provider = getLocationProvider();
-		if (provider instanceof GradientGeometryWayProvider) {
-			return new GeometryGradientWayStyle(getContext(), color, width);
-		} else if (provider != null) {
-			return new GeometrySolidWayStyle(getContext(), color, width, customPointColor);
-		} else {
-			return scaleType == null
-					? new GeometrySolidWayStyle(getContext(), color, width, customPointColor)
-					: new GeometryGradientWayStyle(getContext(), color, width);
-		}
+		return scaleType == null || gradientColoringUnavailable()
+				? new GeometrySolidWayStyle(getContext(), color, width, customPointColor)
+				: new GeometryGradientWayStyle(getContext(), color, width);
 	}
 
 	public GeometryGradientWayStyle getGradientWayStyle() {
@@ -199,7 +189,7 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 
 	@Override
 	protected PathGeometryZoom getGeometryZoom(RotatedTileBox tb) {
-		if (scaleType == null) {
+		if (scaleType == null || gradientColoringUnavailable()) {
 			return super.getGeometryZoom(tb);
 		}
 		int zoom = tb.getZoom();
@@ -209,6 +199,11 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 			zooms.put(zoom, zm);
 		}
 		return zm;
+	}
+
+	private boolean gradientColoringUnavailable() {
+		GeometryWayProvider provider = getLocationProvider();
+		return !(provider instanceof GradientGeometryWayProvider) && provider != null;
 	}
 
 	private static class GradientGeometryWayProvider implements GeometryWayProvider {

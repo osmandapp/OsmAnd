@@ -3962,4 +3962,9 @@
     <string name="poi_operator_type_government">Tipo de operador: gobierno</string>
     <string name="poi_operator_type_private">Tipo de operador: privado</string>
     <string name="poi_operator_type_public">Tipo de operador: público</string>
+    <string name="poi_climbing_grade_uiaa_min">Ruta más fácil (escala UIAA)</string>
+    <string name="poi_climbing_grade_french_min">Ruta más fácil (escala francés)</string>
+    <string name="poi_climbing_grade_saxon_min">Ruta más fácil (escala sajón)</string>
+    <string name="poi_power_terminal">Terminal de energía</string>
+    <string name="poi_fuel_propane">Propano</string>
 </resources>

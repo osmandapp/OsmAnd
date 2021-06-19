@@ -71,11 +71,7 @@ public class RoutingHelper {
 	private List<LatLon> intermediatePoints;
 	private Location lastProjection;
 	private Location lastFixedLocation;
-
-	private RouteCalculationResult originalRoute = null;
-
 	private boolean routeWasFinished;
-
 	private ApplicationMode mode;
 
 	private static boolean isDeviatedFromRoute = false;
@@ -203,7 +199,6 @@ public class RoutingHelper {
 		route = new RouteCalculationResult("");
 		isDeviatedFromRoute = false;
 		routeRecalculationHelper.resetEvalWaitInterval();
-		originalRoute = null;
 		app.getWaypointHelper().setNewRoute(route);
 		app.runInUIThread(new Runnable() {
 			@Override
@@ -820,12 +815,6 @@ public class RoutingHelper {
 		} else {
 			routeRecalculationHelper.recalculateRouteInBackground(lastFixedLocation, finalLocation,
 					intermediatePoints, currentGPXRoute, route, true, false);
-		}
-	}
-
-	void updateOriginalRoute() {
-		if (originalRoute == null) {
-			originalRoute = route;
 		}
 	}
 

@@ -44,7 +44,7 @@ public class OnlineRoutingSettingsItem extends CollectionSettingsItem<OnlineRout
 	protected void init() {
 		super.init();
 		helper = app.getOnlineRoutingHelper();
-		existingItems = new ArrayList<>(helper.getEngines());
+		existingItems = new ArrayList<>(helper.getOnlyCustomEngines());
 		otherEngines = new ArrayList<>(existingItems);
 	}
 
@@ -64,6 +64,16 @@ public class OnlineRoutingSettingsItem extends CollectionSettingsItem<OnlineRout
 	@Override
 	public String getPublicName(@NonNull Context ctx) {
 		return ctx.getString(R.string.online_routing_engine);
+	}
+
+	@Override
+	public long getLocalModifiedTime() {
+		return helper.getLastModifiedTime();
+	}
+
+	@Override
+	public void setLocalModifiedTime(long lastModifiedTime) {
+		helper.setLastModifiedTime(lastModifiedTime);
 	}
 
 	@Override

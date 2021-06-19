@@ -1767,7 +1767,7 @@
     <string name="osn_close_dialog_error">No se pudo cerrar la nota de OSM.</string>
     <string name="shared_string_commit">Confirmar</string>
     <string name="context_menu_item_delete_waypoint">¿Borrar el punto GPX?</string>
-    <string name="context_menu_item_edit_waypoint">Editar punto GPX</string>
+    <string name="context_menu_item_edit_waypoint">Editar punto de ruta GPX</string>
     <string name="rendering_attr_currentTrackColor_description">Color del GPX</string>
     <string name="rendering_attr_currentTrackWidth_description">Ancho del GPX</string>
     <string name="rendering_attr_roadStyle_description">Estilo del camino</string>
@@ -3030,7 +3030,7 @@
     <string name="new_profile">Nuevo perfil</string>
     <string name="shared_string_crash">Error</string>
     <string name="last_launch_crashed">OsmAnd falló la última vez. Por favor, ayúdanos a mejorar OsmAnd compartiendo el mensaje de error.</string>
-    <string name="app_mode_ufo">OVNI</string>
+    <string name="app_mode_ufo">Ovni</string>
     <string name="release_3_4">• Perfiles de aplicación: crea un perfil personalizado según tus necesidades, con un icono y color personalizado.
 \n
 \n • Ahora puedes personalizar las velocidades predefinidas, máximas y mínimas de cualquier perfil
@@ -4129,4 +4129,50 @@
     <string name="resend_verification_code">Reenviar código</string>
     <string name="verification_code_missing">No he recibido el código de verificación</string>
     <string name="verification_code_missing_description">El código puede demorar 10 minutos, también puedes comprobar la carpeta de spam. Si esto no ayuda, usa el botón de abajo.</string>
+    <string name="select_nav_profile_dialog_message">El «Tipo de navegación» determina cómo se calculan las rutas. Puedes elegir entre los motores de navegación en línea o sin conexión.</string>
+    <string name="loading_list_of_routing_services">Cargando lista de servicios de navegación disponibles</string>
+    <string name="shared_string_offline">Desconectado</string>
+    <string name="shared_string_online">En línea</string>
+    <string name="osmand_online_routing_promo">Puedes usar plantillas predefinidas o añadir navegadores en línea personalizados, soportado: OSRM, Graphhopper, OpenRouteService, GPX.</string>
+    <string name="shared_string_external">Externo</string>
+    <string name="provided_by">Provisto por %1$s</string>
+    <string name="failed_loading_predefined_engines">No se pudo cargar la lista de plantillas predefinidas.
+\nComprueba la conexión a Internet.</string>
+    <string name="shared_string_predefined">Predefinido</string>
+    <string name="backup_complete">Copia de seguridad completa</string>
+    <string name="backup_now">Respaldar ahora</string>
+    <string name="make_backup">Crear copia de seguridad</string>
+    <string name="make_backup_descr">Hay muchos cambios en este dispositivo, haz una copia de seguridad de estos datos para no perderlos.</string>
+    <string name="backup_conflicts">Conflictos</string>
+    <string name="backup_confilcts_descr">Algunos archivos no se pudieron cargar porque existe una versión más reciente en el servidor.</string>
+    <string name="backup_view_conflicts">Ver conflictos</string>
+    <string name="backup_no_internet_descr">Comprueba la conexión a Internet y vuelve a descargar.</string>
+    <string name="backup_pause_all">Pausar todo</string>
+    <string name="upload_local_version">Cargar versión local</string>
+    <string name="download_server_version">Descargar versión del servidor</string>
+    <string name="shared_string_logout">Cerrar sesión</string>
+    <string name="backup_delete_all_data">Borrar todos mis datos</string>
+    <string name="backup_delete_all_data_descr">Todos los datos de OsmAnd Cloud serán borrados. Las versiones locales quedarán intactas.</string>
+    <string name="backup_delete_all_data_warning">Se borrarán todos los datos cargados previamente a OsmAnd Cloud, incluyendo el historial de versiones.
+\n
+\nNo se podrán recuperar los datos borrados.</string>
+    <string name="backup_danger_zone">Zona peligrosa</string>
+    <string name="delete_all_confirmation">Sí, borrar todo</string>
+    <string name="backup_delete_old_data">Quitar versiones antiguas</string>
+    <string name="backup_delete_old_data_descr">Las versiones actuales de sus datos se conservarán en OsmAnd Cloud</string>
+    <string name="backup_delete_old_data_warning">Se borrará el historial de cambios de los datos cargados previamente.
+\n
+\nLa versión actual de los datos se guardará en el servidor, pero no podrás volver a los cambios anteriores.</string>
+    <string name="backup_data">Datos de la copia de seguridad</string>
+    <string name="select_backup_data_descr">Marca los datos y carpetas para la copia de seguridad.</string>
+    <string name="backup_restore_data_descr">Restaura los datos en el dispositivo, usando copias de seguridad en línea.</string>
+    <string name="backup_restore_data">Restaurar datos</string>
+    <string name="restore_from_osmand_cloud">Restaurar desde OsmAnd Cloud</string>
+    <string name="choose_what_to_restore">Elige qué restaurar.</string>
+    <string name="restore_selected_data">Restaurar datos marcados</string>
+    <string name="receiving_data_from_server">Recibir datos del servidor</string>
+    <string name="restore_complete">Restauración completa</string>
+    <string name="grey_color_slope">El color gris se usa al no estar definida la pendiente.</string>
+    <string name="backup_version_history">Historial de versiones</string>
+    <string name="backup_storage_taken">Almacenamiento tomado</string>
 </resources>

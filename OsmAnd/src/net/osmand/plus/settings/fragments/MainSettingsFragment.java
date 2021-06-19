@@ -1,6 +1,5 @@
 package net.osmand.plus.settings.fragments;
 
-import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -20,16 +19,17 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.development.TestBackupActivity;
+import net.osmand.plus.backup.ui.BackupAndRestoreFragment;
+import net.osmand.plus.backup.ui.BackupAuthorizationFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.profiles.ProfileDataUtils;
-import net.osmand.plus.profiles.SelectProfileBottomSheet;
-import net.osmand.plus.profiles.SelectProfileBottomSheet.DialogMode;
+import net.osmand.plus.profiles.SelectBaseProfileBottomSheet;
 import net.osmand.plus.profiles.SelectProfileBottomSheet.OnSelectProfileCallback;
+import net.osmand.plus.profiles.data.ProfileDataUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -126,9 +126,8 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 			return true;
 		} else if (CREATE_PROFILE.equals(prefId)) {
 			if (getActivity() != null) {
-				SelectProfileBottomSheet.showInstance(
-						getActivity(), DialogMode.BASE_PROFILE, this,
-						getSelectedAppMode(), null, false);
+				SelectBaseProfileBottomSheet.showInstance(
+						getActivity(), this, getSelectedAppMode(), null, false);
 			}
 		} else if (IMPORT_PROFILE.equals(prefId)) {
 			final MapActivity mapActivity = getMapActivity();
@@ -159,10 +158,9 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
 				if (app.getBackupHelper().isRegistered()) {
-					Intent intent = new Intent(mapActivity, TestBackupActivity.class);
-					mapActivity.startActivity(intent);
-				} else {
 					BackupAndRestoreFragment.showInstance(mapActivity.getSupportFragmentManager());
+				} else {
+					BackupAuthorizationFragment.showInstance(mapActivity.getSupportFragmentManager());
 				}
 			}
 		}
@@ -184,18 +182,28 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 		Preference backupSettings = findPreference(BACKUP_AND_RESTORE);
 		backupSettings.setIcon(getContentIcon(R.drawable.ic_action_cloud_upload));
 
-		long lastUploadedTime = settings.BACKUP_LAST_UPLOADED_TIME.get();
-		if (lastUploadedTime > 0) {
-			String time;
-			long duration = (System.currentTimeMillis() - lastUploadedTime) / 1000;
-			if (duration > MIN_DURATION_FOR_DATE_FORMAT) {
-				time = OsmAndFormatter.getFormattedDate(app, lastUploadedTime);
-			} else {
-				time = getString(R.string.duration_ago, OsmAndFormatter.getFormattedDuration((int) duration, app));
-			}
+		String time = getLastBackupTimeDescription(app);
+		if (!Algorithms.isEmpty(time)) {
 			String summary = getString(R.string.last_backup);
 			backupSettings.setSummary(getString(R.string.ltr_or_rtl_combine_via_colon, summary, time));
 		}
+	}
+
+	public static String getLastBackupTimeDescription(OsmandApplication app) {
+		long lastUploadedTime = app.getSettings().BACKUP_LAST_UPLOADED_TIME.get();
+		return getLastBackupTimeDescription(app, lastUploadedTime, "");
+	}
+
+	public static String getLastBackupTimeDescription(OsmandApplication app, long lastUploadedTimems, String def) {
+		if (lastUploadedTimems > 0) {
+			long duration = (System.currentTimeMillis() - lastUploadedTimems) / 1000;
+			if (duration > MIN_DURATION_FOR_DATE_FORMAT) {
+				return OsmAndFormatter.getFormattedDate(app, lastUploadedTimems);
+			} else {
+				return app.getString(R.string.duration_ago, OsmAndFormatter.getFormattedDuration((int) duration, app));
+			}
+		}
+		return def;
 	}
 
 	private void profileManagementPref() {

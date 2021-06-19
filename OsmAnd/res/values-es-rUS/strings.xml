@@ -1056,7 +1056,7 @@
     <string name="delete_confirmation_msg">¿Borrar «%1$s»?</string>
     <string name="city_type_suburb">Suburbio</string>
     <string name="city_type_hamlet">Aldea</string>
-    <string name="city_type_village">Villa</string>
+    <string name="city_type_village">Pueblo</string>
     <string name="city_type_town">Ciudad pequeña</string>
     <string name="city_type_city">Ciudad</string>
     <string name="animate_route_off">Parar simulación</string>
@@ -1394,7 +1394,7 @@
     <string name="downloading_list_indexes">Descargando lista de regiones disponibles…</string>
     <string name="list_index_files_was_not_loaded">No se pudo obtener la lista de regiones desde https://osmand.net.</string>
     <string name="fav_points_edited">Punto favorito editado</string>
-    <string name="fav_points_not_exist">Sin puntos de Favoritos</string>
+    <string name="fav_points_not_exist">No existen puntos favoritos</string>
     <string name="update_existing">Reemplazar</string>
     <string name="only_show">Mostrar ruta</string>
     <string name="follow">Iniciar la guía</string>
@@ -4064,7 +4064,7 @@
     <string name="annual_subscription">Suscripción anual</string>
     <string name="monthly_subscription">Suscripción mensual</string>
     <string name="three_months_subscription">Suscripción trimestral</string>
-    <string name="next_billing_date">Próxima facturación: %1$s</string>
+    <string name="next_billing_date">Próxima fecha de facturación: %1$s</string>
     <string name="osmand_live_cancelled">Cancelado</string>
     <string name="renew_subscription">Renovar suscripción</string>
     <string name="in_grace_period">En período de gracia</string>
@@ -4107,4 +4107,70 @@
     <string name="poi_routes">Rutas</string>
     <string name="routing_attr_avoid_low_emission_zone_description">Evita las zonas de baja emisión o zonas urbanas de atmósfera protegida</string>
     <string name="routing_attr_avoid_low_emission_zone_name">Evitar zonas de baja emisión</string>
+    <string name="search_more">Buscar más…</string>
+    <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
+    <string name="backup_and_restore">Copia de seguridad y restauración</string>
+    <string name="last_backup">Última copia de seguridad</string>
+    <string name="duration_ago">hace %1$s</string>
+    <string name="osmand_cloud">OsmAnd Cloud</string>
+    <string name="osmand_cloud_authorize_descr">Nunca pierdas tus datos, haz una copia de seguridad y restaura toda la información sin problemas.</string>
+    <string name="local_backup">Copia de seguridad local</string>
+    <string name="local_backup_descr">Crea una copia de seguridad o restaura los datos de un archivo local.</string>
+    <string name="backup_into_file">Copia de seguridad en un archivo</string>
+    <string name="restore_from_file">Restaurar desde archivo</string>
+    <string name="osmand_cloud_help_descr">¿Necesitas ayuda\? Ponte en contacto con nosotros en %1$s</string>
+    <string name="osmand_cloud_create_account_descr">Ingresa la dirección de correo electrónico, todos los datos estarán vinculados a ella.
+\nEnviaremos un código de verificación a esta dirección de correo electrónico.</string>
+    <string name="osmand_cloud_login_descr">Ingresa la dirección de correo electrónico usada para el registro. Enviaremos un código único necesario para el siguiente paso.</string>
+    <string name="verify_email_address">Confirmar dirección de correo electrónico</string>
+    <string name="verify_email_address_descr">Hemos enviado un código de verificación a «%1$s», ingresarlo en el siguiente campo.</string>
+    <string name="enter_verification_code">Ingresa el código de 4 dígitos</string>
+    <string name="cloud_email_not_registered">Este correo electrónico no se ha registrado para OsmAnd Cloud</string>
+    <string name="cloud_email_already_registered">Ya existe una cuenta con este correo electrónico.</string>
+    <string name="resend_verification_code">Reenviar código</string>
+    <string name="verification_code_missing">No he recibido el código de verificación</string>
+    <string name="verification_code_missing_description">El código puede demorar 10 minutos, también puedes comprobar la carpeta de spam. Si esto no ayuda, usa el botón de abajo.</string>
+    <string name="select_nav_profile_dialog_message">El «Tipo de navegación» determina cómo se calculan las rutas. Puedes elegir entre los motores de navegación en línea o sin conexión.</string>
+    <string name="loading_list_of_routing_services">Cargando lista de servicios de navegación disponibles</string>
+    <string name="shared_string_offline">Desconectado</string>
+    <string name="shared_string_online">En línea</string>
+    <string name="osmand_online_routing_promo">Puedes usar plantillas predefinidas o añadir navegadores en línea personalizados, soportado: OSRM, Graphhopper, OpenRouteService, GPX.</string>
+    <string name="shared_string_external">Externo</string>
+    <string name="provided_by">Provisto por %1$s</string>
+    <string name="failed_loading_predefined_engines">No se pudo cargar la lista de plantillas predefinidas.
+\nComprueba la conexión a Internet.</string>
+    <string name="shared_string_predefined">Predefinido</string>
+    <string name="backup_complete">Copia de seguridad completa</string>
+    <string name="backup_now">Respaldar ahora</string>
+    <string name="make_backup">Crear copia de seguridad</string>
+    <string name="make_backup_descr">Hay muchos cambios en este dispositivo, haz una copia de seguridad de estos datos para no perderlos.</string>
+    <string name="backup_conflicts">Conflictos</string>
+    <string name="backup_confilcts_descr">Algunos archivos no se pudieron cargar porque existe una versión más reciente en el servidor.</string>
+    <string name="backup_view_conflicts">Ver conflictos</string>
+    <string name="backup_no_internet_descr">Comprueba la conexión a Internet y vuelve a descargar.</string>
+    <string name="backup_pause_all">Pausar todo</string>
+    <string name="upload_local_version">Cargar versión local</string>
+    <string name="download_server_version">Descargar versión del servidor</string>
+    <string name="shared_string_logout">Cerrar sesión</string>
+    <string name="backup_delete_all_data">Borrar todos mis datos</string>
+    <string name="backup_delete_all_data_descr">Todos los datos de OsmAnd Cloud serán borrados. Las versiones locales quedarán intactas.</string>
+    <string name="backup_delete_all_data_warning">Se borrarán todos los datos cargados previamente a OsmAnd Cloud, incluyendo el historial de versiones.
+\n
+\nNo se podrán recuperar los datos borrados.</string>
+    <string name="backup_danger_zone">Zona peligrosa</string>
+    <string name="delete_all_confirmation">Sí, borrar todo</string>
+    <string name="backup_delete_old_data">Quitar versiones antiguas</string>
+    <string name="backup_delete_old_data_descr">Las versiones actuales de sus datos se conservarán en OsmAnd Cloud</string>
+    <string name="backup_delete_old_data_warning">Se borrará el historial de cambios de los datos cargados previamente.
+\n
+\nLa versión actual de los datos se guardará en el servidor, pero no podrás volver a los cambios anteriores.</string>
+    <string name="backup_data">Datos de la copia de seguridad</string>
+    <string name="select_backup_data_descr">Marca los datos y carpetas para la copia de seguridad.</string>
+    <string name="backup_restore_data_descr">Restaura los datos en el dispositivo, usando copias de seguridad en línea.</string>
+    <string name="backup_restore_data">Restaurar datos</string>
+    <string name="restore_from_osmand_cloud">Restaurar desde OsmAnd Cloud</string>
+    <string name="choose_what_to_restore">Elige qué restaurar.</string>
+    <string name="restore_selected_data">Restaurar datos marcados</string>
+    <string name="receiving_data_from_server">Recibir datos del servidor</string>
+    <string name="restore_complete">Restauración completa</string>
 </resources>

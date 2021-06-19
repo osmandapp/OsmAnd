@@ -16,7 +16,7 @@ class ImpassableRoadsStorage extends SettingsMapPointsStorage {
 	protected String appModeKey;
 
 	public ImpassableRoadsStorage(OsmandSettings osmandSettings) {
-		super(osmandSettings);
+		super(osmandSettings, true);
 		pointsKey = OsmandSettings.IMPASSABLE_ROAD_POINTS;
 		descriptionsKey = OsmandSettings.IMPASSABLE_ROADS_DESCRIPTIONS;
 		roadsIdsKey = OsmandSettings.IMPASSABLE_ROADS_IDS;

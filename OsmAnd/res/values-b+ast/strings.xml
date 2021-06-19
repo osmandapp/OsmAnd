@@ -3,7 +3,7 @@
     <string name="av_locations">Locations</string>
     <string name="plugin_settings">Plugins</string>
     <string name="no_updates_available">No updates available</string>
-    <string name="download_live_updates">Live updates</string>
+    <string name="download_live_updates">Anovamientos en direuto</string>
     <string name="copied_to_clipboard">Copied to clipboard</string>
     <string name="contact_us">Contact</string>
     <string name="first_usage_item">First use</string>
@@ -11,23 +11,23 @@
     <string name="help_us_to_improve_menu_group">Help improve OsmAnd</string>
     <string name="new_version">Versión nueva</string>
     <string name="begin_with_osmand_menu_group">First steps with OsmAnd</string>
-    <string name="value_downloaded_of_max">%1$.1f of %2$.1f MB</string>
+    <string name="value_downloaded_of_max">%1$.1f de %2$.1f MB</string>
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="get_full_version">Versión completa</string>
-    <string name="downloads">Downloads</string>
-    <string name="later">Later</string>
+    <string name="downloads">Descargues</string>
+    <string name="later">Dempués</string>
     <string name="roads">Roads</string>
     <string name="unsaved_changes_will_be_lost">Any unsaved changes will be lost. Continue\?</string>
     <string name="are_you_sure">Are you sure\?</string>
     <string name="working_days">Working days</string>
     <string name="next_proceed">Next</string>
-    <string name="shared_string_skip">Skip</string>
+    <string name="shared_string_skip">Saltar</string>
     <string name="app_name_osmand">OsmAnd</string>
     <string name="shared_string_undo">Undo</string>
     <string name="osn_bug_name">OSM Note</string>
     <string name="osn_add_dialog_error">Could not create note.</string>
     <string name="osb_comment_dialog_error">Could not add comment.</string>
-    <string name="shared_string_location">Location</string>
+    <string name="shared_string_location">Allugamientu</string>
     <string name="lang_nds">Low German</string>
     <string name="lang_mk">Macedoniu</string>
     <string name="read_more">Read more</string>
@@ -103,7 +103,7 @@
     <string name="shared_string_ok">D\'acuerdu</string>
     <string name="shared_string_cancel">Encaboxar</string>
     <string name="shared_string_yes">Sí</string>
-    <string name="shared_string_do_not_use">Don\'t use</string>
+    <string name="shared_string_do_not_use">Nun usar</string>
     <string name="shared_string_no">Non</string>
     <string name="shared_string_never">Never</string>
     <string name="shared_string_help">Help</string>
@@ -116,14 +116,14 @@
     <string name="shared_string_deselect_all">Deselect all</string>
     <string name="shared_string_clear">Clear</string>
     <string name="shared_string_clear_all">Clear all</string>
-    <string name="shared_string_save">Save</string>
+    <string name="shared_string_save">Guardar</string>
     <string name="shared_string_rename">Rename</string>
     <string name="shared_string_delete">Delete</string>
     <string name="shared_string_delete_all">Delete all</string>
     <string name="shared_string_share">Share</string>
     <string name="shared_string_apply">Aplicar</string>
     <string name="shared_string_control_stop">Stop</string>
-    <string name="shared_string_import">Import</string>
+    <string name="shared_string_import">Importar</string>
     <string name="shared_string_export">Export</string>
     <string name="shared_string_more">More…</string>
     <string name="shared_string_more_actions">More actions</string>
@@ -137,7 +137,7 @@
     <string name="shared_string_audio">Audio</string>
     <string name="shared_string_video">Video</string>
     <string name="shared_string_photo">Photo</string>
-    <string name="shared_string_online_maps">Online maps</string>
+    <string name="shared_string_online_maps">Mapes en llinia</string>
     <string name="audionotes_plugin_name">Audio/video notes</string>
     <string name="shared_string_accessibility">Accessibility</string>
     <string name="osm_settings">OpenStreetMap editing</string>
@@ -153,14 +153,14 @@
     <string name="rendering_attr_transportStops_name">Transport stops</string>
     <string name="navigate_point_zone">Zone</string>
     <string name="download_tab_downloads">Toles descargues</string>
-    <string name="download_tab_updates">Updates</string>
+    <string name="download_tab_updates">Anovamientos</string>
     <string name="download_tab_local">Local</string>
     <string name="everything_up_to_date">All files up to date</string>
     <string name="use_opengl_render">Use OpenGL rendering</string>
     <string name="use_opengl_render_descr">Use hardware accelerated OpenGL rendering (may use more battery, or not work on very old devices).</string>
     <string name="coordinates">Coordenaes</string>
     <string name="impassable_road">Avoid roads…</string>
-    <string name="rendering_category_details">Details</string>
+    <string name="rendering_category_details">Detalles</string>
     <string name="rendering_category_transport">Transport</string>
     <string name="map_widget_right">Panel derechu</string>
     <string name="map_widget_left">Panel esquierdu</string>
@@ -180,13 +180,13 @@
     <string name="traffic_warning_railways">Railroad crossing</string>
     <string name="traffic_warning_pedestrian">Pedestrian crosswalk</string>
     <string name="get_plugin">Get</string>
-    <string name="map_widget_battery">Battery level</string>
+    <string name="map_widget_battery">Nivel de la batería</string>
     <string name="app_mode_bus">Bus</string>
     <string name="app_mode_train">Tren</string>
     <!-- string name="lat_lon_pattern">Lla: %1$.5f Llo: %2$.5f</string -->
     <string name="osm_live_thanks">Thank you for supporting OsmAnd!
 \nTo activate all new features you need to restart OsmAnd.</string>
-    <string name="live_updates">Live updates</string>
+    <string name="live_updates">Anovamientos en direuto</string>
     <string name="safe_mode">Mou seguru</string>
     <string name="access_no_destination">Accessibility plugin: No destination set</string>
     <string name="access_smart_autoannounce_descr">Notify only when direction to the target point changes.</string>
@@ -217,7 +217,7 @@
     <string name="rendering_value_lightblue_name">Azul claro</string>
     <string name="rendering_value_translucent_lightblue_name">Azul claro tresllúcido</string>
     <string name="shared_string_gpx_points">Points</string>
-    <string name="map_locale">Map language</string>
+    <string name="map_locale">Llingua del mapa</string>
     <string name="lock_screen_request_explanation">%1$s needs this permission to turn off the screen for the power saving feature.</string>
     <string name="proxy_host_descr">Specify your proxy\'s hostname (e.g. 127.0.0.1).</string>
     <string name="proxy_port_title">Proxy Port</string>
@@ -405,7 +405,7 @@
     <string name="monitoring_settings">Trip recording</string>
     <string name="int_hour">h</string>
     <string name="rendering_attr_hideText_name">Text</string>
-    <string name="rendering_attr_moreDetailed_name">More details</string>
+    <string name="rendering_attr_moreDetailed_name">Más detalles</string>
     <string name="gpx_selection_number_of_points">%1$s puntos</string>
     <string name="follow_us">Follow us</string>
     <string name="use_osm_live_routing">OsmAnd Live navigation</string>
@@ -435,10 +435,10 @@
     <string name="shared_string_edit">Edit</string>
     <string name="welmode_download_maps">Download maps</string>
     <string name="no_address_found">No address determined</string>
-    <string name="shared_string_download">Download</string>
-    <string name="shared_string_downloading">Downloading…</string>
+    <string name="shared_string_download">Baxar</string>
+    <string name="shared_string_downloading">Baxando…</string>
     <string name="shared_string_close">Zarrar</string>
-    <string name="shared_string_exit">Exit</string>
+    <string name="shared_string_exit">Colar</string>
     <string name="shared_string_show_all">Show all</string>
     <string name="shared_string_next">Next</string>
     <string name="shared_string_show_on_map">Amosar nel mapa</string>
@@ -449,10 +449,10 @@
     <string name="no_inet_connection_desc_map">Required to download maps.</string>
     <string name="no_inet_connection">Nun hai conexón a internet</string>
     <string name="storage_place_description">OsmAnd\'s data storage (for maps, track files, etc.): %1$s.</string>
-    <string name="storage_free_space">Free space</string>
+    <string name="storage_free_space">Espaciu llibre</string>
     <string name="download_files_not_enough_space">There is not enough free space to download %1$s MB (free: %2$s).</string>
-    <string name="install_more">Install more…</string>
-    <string name="shared_string_select_on_map">Select on map</string>
+    <string name="install_more">Instalar más…</string>
+    <string name="shared_string_select_on_map">Esbillar nel mapa</string>
     <string name="fast_route_mode">El camín más rápidu</string>
     <string name="speak_street_names">Street names (TTS)</string>
     <string name="si_mi_meters">Miles/meters</string>
@@ -501,7 +501,7 @@
     <string name="shared_string_topbar">Barra cimera</string>
     <string name="use_osm_live_routing_description">Enable navigation for OsmAnd Live changes.</string>
     <string name="access_disable_offroute_recalc_descr">No route recalculation after going off route.</string>
-    <string name="restore_purchases">Restore purchases</string>
+    <string name="restore_purchases">Restaurar les compres</string>
     <string name="do_not_send_anonymous_app_usage">Don\'t send anonymous app usage statistics</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd collects info about which parts of the app you open. Your location is never sent, nor is anything you enter into the app or details of areas you view, search, or download.</string>
     <string name="do_not_show_startup_messages">Don\'t show startup messages</string>
@@ -520,14 +520,14 @@
     <string name="shared_string_time">Time</string>
     <string name="total_distance">Distancia total</string>
     <string name="routing_attr_height_obstacles_name">Use elevation data</string>
-    <string name="search_another_country">Select another region</string>
-    <string name="shared_string_change">Change</string>
+    <string name="search_another_country">Esbillar otra rexón</string>
+    <string name="shared_string_change">Camudar</string>
     <string name="mapillary_image">Imaxe de Mapillary</string>
     <string name="open_mapillary">Open Mapillary</string>
     <string name="shared_string_install">Install</string>
     <string name="improve_coverage_install_mapillary_desc">Install Mapillary to add photos to this map location.</string>
     <string name="online_photos">Semeyes en llinia</string>
-    <string name="shared_string_add_photos">Add photos</string>
+    <string name="shared_string_add_photos">Amestar semeyes</string>
     <string name="no_photos_descr">Equí nun hai semeyes.</string>
     <string name="mapillary_action_descr">Share your street-level view via Mapillary.</string>
     <string name="mapillary_widget">Widget de Mapillary</string>
@@ -545,7 +545,7 @@
     <string name="routing_attr_allow_private_description">Allow access to private areas.</string>
     <string name="change_color">Change color</string>
     <string name="edit_name">Edit name</string>
-    <string name="animate_my_location">Animate own position</string>
+    <string name="animate_my_location">Animar la mio posición</string>
     <string name="type_address">Type address</string>
     <string name="nearest_cities">Nearest cities</string>
     <string name="select_postcode">Postcode search</string>
@@ -594,7 +594,7 @@
     <string name="add_location_as_first_point_descr">Add your position as point of departure to plan the perfect route.</string>
     <string name="my_location">My position</string>
     <string name="shared_string_finish">Finish</string>
-    <string name="coordinate_input">Coordinate input</string>
+    <string name="coordinate_input">Introducción de coordenaes</string>
     <string name="move_to_history">Move to history</string>
     <string name="group_will_be_removed_after_restart">The group will be gone the next time you start the app.</string>
     <string name="show_guide_line">Show directional lines</string>
@@ -615,7 +615,7 @@
     <string name="osn_modify_dialog_error">Nun pudo modificase la nota.</string>
     <string name="yesterday">Ayeri</string>
     <string name="this_year">This year</string>
-    <string name="move_all_to_history">Move all to history</string>
+    <string name="move_all_to_history">Mover too al historial</string>
     <string name="do_not_use_animations">Ensin animaciones</string>
     <string name="keep_showing_on_map">Keep showing on map</string>
     <string name="exit_without_saving">Exit without saving\?</string>
@@ -666,7 +666,7 @@
     <string name="by_date">Pola data</string>
     <string name="by_type">Pol tipu</string>
     <string name="shared_string_more_without_dots">Más</string>
-    <string name="appearance_on_the_map">Appearance on the map</string>
+    <string name="appearance_on_the_map">Aspeutu nel mapa</string>
     <string name="empty_state_markers_groups">Import groups</string>
     <string name="shared_string_two">Dos</string>
     <string name="shared_string_one">One</string>
@@ -721,10 +721,10 @@
     <string name="unlock_all_features">Unlock all OsmAnd features</string>
     <string name="purchase_dialog_title">Choose plan</string>
     <string name="shared_string_only_with_wifi">Only on Wi-Fi</string>
-    <string name="wikivoyage_download_pics">Download images</string>
+    <string name="wikivoyage_download_pics">Baxar les imáxenes</string>
     <string name="shared_string_wifi_only">Only on Wi-Fi</string>
     <string name="online_webpage_warning">Page only available online. Open in web browser\?</string>
-    <string name="images_cache">Image cache</string>
+    <string name="images_cache">Caché d\'imáxenes</string>
     <string name="shared_string_wikivoyage">Wikivoyage</string>
     <string name="saved_articles">Bookmarked articles</string>
     <string name="nothing_found_in_radius">Could not find anything:</string>
@@ -748,7 +748,7 @@
     <string name="distance_indication_descr">Choose how to display the distance to active markers.</string>
     <string name="active_markers_descr">Specify number of direction indicators.</string>
     <string name="digits_quantity">Number of decimal digits</string>
-    <string name="shared_string_groups">Groups</string>
+    <string name="shared_string_groups">Grupos</string>
     <string name="today">Güei</string>
     <string name="last_seven_days">Last 7 days</string>
     <string name="show_direction">Distance indication</string>
@@ -761,7 +761,7 @@
     <string name="search_map_hint">Ciudá o rexón</string>
     <string name="trip_rec_notification_settings">Turn on quick recording</string>
     <string name="trip_rec_notification_settings_desc">Display a system notification allowing to start trip recording.</string>
-    <string name="custom_search">Custom search</string>
+    <string name="custom_search">Busca personalizada</string>
     <string name="shared_string_filters">Peñeres</string>
     <string name="save_filter">Save filter</string>
     <string name="new_filter">Peñera nueva</string>
@@ -777,7 +777,7 @@
     <string name="access_direction_haptic_feedback">Haptic directions</string>
     <string name="access_smart_autoannounce">Smart autoannounce</string>
     <string name="access_tree_list">Tree list</string>
-    <string name="map_mode">Map mode</string>
+    <string name="map_mode">Mou del mapa</string>
     <string name="open_street_map_login_and_pass">OSM username and password</string>
     <string name="add_points_to_map_markers_q">Add all points as map markers\?</string>
     <string name="clear_active_markers_q">Remove all active markers\?</string>
@@ -802,12 +802,12 @@
     <string name="lang_kab">Kabyle</string>
     <string name="lang_ber">Berber</string>
     <string name="shared_string_dismiss">Escartar</string>
-    <string name="shared_string_on">On</string>
-    <string name="shared_string_off">Off</string>
+    <string name="shared_string_on">Sí</string>
+    <string name="shared_string_off">Non</string>
     <string name="shared_string_enable">Enable</string>
     <string name="shared_string_disabled">Disabled</string>
-    <string name="shared_string_control_start">Start</string>
-    <string name="shared_string_collapse">Collapse</string>
+    <string name="shared_string_control_start">Aniciar</string>
+    <string name="shared_string_collapse">Contrayer</string>
     <string name="plugin_ski_name">Ski map view</string>
     <string name="version_settings">Builds</string>
     <string name="rendering_value__name">Default</string>
@@ -818,7 +818,7 @@
     <string name="rendering_attr_subwayMode_name">Subway routes</string>
     <string name="enable_proxy_title">Enable HTTP proxy</string>
     <string name="proxy_host_title">Proxy Host</string>
-    <string name="of">%1$d of %2$d</string>
+    <string name="of">%1$d de %2$d</string>
     <string name="ascent_descent">Ascent/Descent</string>
     <string name="home">Dashboard</string>
     <string name="always_center_position_on_map">Display position always in center</string>
@@ -830,13 +830,13 @@
     <string name="app_modes_choose">App profiles</string>
     <string name="map_widget_map_rendering">Map rendering</string>
     <string name="app_mode_motorcycle">Motorcycle</string>
-    <string name="map_magnifier">Map magnifier</string>
+    <string name="map_magnifier">Lente del mapa</string>
     <string name="edit_tilesource_maxzoom">Maximum zoom</string>
     <string name="edit_tilesource_minzoom">Minimum zoom</string>
     <string name="driving_region">Driving region</string>
     <string name="driving_region_australia">Australia</string>
     <string name="speak_title">Announce…</string>
-    <string name="settings_preset">Default profile</string>
+    <string name="settings_preset">Perfil predetermináu</string>
     <string name="distance_measurement_start_editing">Start editing</string>
     <string name="use_magnetic_sensor">Use magnetic sensor</string>
     <string name="cancel_route">¿Escartar el camín\?</string>
@@ -887,12 +887,12 @@
     <string name="poi_filter_public_transport">Public transport</string>
     <string name="poi_filter_restaurants">Restaurants</string>
     <string name="show_warnings_title">Show alerts…</string>
-    <string name="interrupt_music">Pause music</string>
+    <string name="interrupt_music">Posar la música</string>
     <string name="day_night_info_description">Sunrise: %1$s
 \nSunset: %2$s</string>
     <string name="day_night_info">Day/night info</string>
-    <string name="map_widget_renderer">Map style</string>
-    <string name="map_widget_transparent">Transparent widgets</string>
+    <string name="map_widget_renderer">Estilu del mapa</string>
+    <string name="map_widget_transparent">Widgets tresparentes</string>
     <string name="screen_is_locked">Tap the lock icon to unlock</string>
     <string name="map_widget_back_to_loc">Where am I</string>
     <string name="map_widget_compass">Brúxula</string>
@@ -974,7 +974,7 @@
     <string name="file_can_not_be_renamed">Could not rename file.</string>
     <string name="file_with_name_already_exists">A file with that name already exists.</string>
     <string name="search_position_address">Address…</string>
-    <string name="search_position_favorites">Favorites…</string>
+    <string name="search_position_favorites">Favoritos…</string>
     <string name="select_search_position">Origin:</string>
     <string name="file_with_name_already_exist">File with same name already exists.</string>
     <string name="favorite_friends_category">Friends</string>
@@ -990,7 +990,7 @@
     <string name="ttsvoice">TTS voice</string>
     <string name="map_text_size_descr">Text size for names on the map:</string>
     <string name="preferred_locale_descr">App display language (used after OsmAnd is restarted).</string>
-    <string name="preferred_locale">Display language</string>
+    <string name="preferred_locale">Llingua de l\'aplicación</string>
     <string name="version_index_is_not_supported">The version of index \'\'{0}\'\' is not supported</string>
     <string name="specified_dir_doesnt_exist">Could not find the specified folder.</string>
     <string name="loading_builds_failed">Retrieving the list of OsmAnd builds failed</string>
@@ -1007,7 +1007,7 @@
     <string name="rotate_map_compass_opt">Compass direction</string>
     <string name="rotate_map_bearing_opt">Movement direction</string>
     <string name="rotate_map_none_opt">No rotation (north always upwards)</string>
-    <string name="rotate_map_to_bearing">Map orientation</string>
+    <string name="rotate_map_to_bearing">Orientación del mapa</string>
     <string name="share_fav_subject">Favorites shared via OsmAnd</string>
     <string name="error_occurred_loading_gpx">Could not load GPX.</string>
     <string name="send_report">Send report</string>
@@ -1033,12 +1033,12 @@
     <string name="uploading">Uploading…</string>
     <string name="searching">Searching…</string>
     <string name="search_offline_address">Offline search</string>
-    <string name="search_online_address">Online search</string>
+    <string name="search_online_address">Busca en llinia</string>
     <string name="route_general_information">Total distance %1$s, traveling time %2$d h %3$d min.</string>
     <string name="address">Address</string>
     <string name="downloading_list_indexes">Baxando la llista de rexones disponibles…</string>
     <string name="list_index_files_was_not_loaded">Could not fetch list of regions from https://osmand.net.</string>
-    <string name="fav_points_not_exist">No Favorite points exist</string>
+    <string name="fav_points_not_exist">Nun esisten puntos favoritos</string>
     <string name="update_existing">Trocar</string>
     <string name="mark_final_location_first">Please set the destination first</string>
     <string name="closing_changeset">Zarrando\'l conxuntu de cambeos…</string>
@@ -1111,23 +1111,23 @@
     <string name="quick_action_add_poi_descr">A button to add a POI in the middle of the screen.</string>
     <string name="quick_action_switch_day_mode">Day mode</string>
     <string name="quick_action_switch_night_mode">Night mode</string>
-    <string name="quick_action_showhide_favorites_descr">A toggle to show or hide the Favorite points on the map.</string>
-    <string name="quick_action_showhide_poi_descr">A toggle to show or hide POIs on the map.</string>
+    <string name="quick_action_showhide_favorites_descr">Un alternador p\'amosar/anubrir los puntos favoritos nel mapa.</string>
+    <string name="quick_action_showhide_poi_descr">Un alternador p\'amosar/anubrir los PdI nel mapa.</string>
     <string name="quick_action_add_navigation">Navigation</string>
     <string name="quick_action_bug_descr">This message is included in the comment field.</string>
     <string name="quick_action_gpx_category_descr">Choose an optional category.</string>
     <string name="mappilary_no_internet_desc">Photos from Mapillary are only available online.</string>
-    <string name="retry">Retry</string>
+    <string name="retry">Retentar</string>
     <string name="empty_state_favourites">Add Favorites</string>
     <string name="empty_state_favourites_desc">Import Favorites or add them by marking points on the map.</string>
     <string name="total_donations">Total donations</string>
-    <string name="toast_empty_name_error">Unnamed location</string>
+    <string name="toast_empty_name_error">Allugamientu ensin nome</string>
     <string name="show_tunnels">Tunnels</string>
     <string name="download_wiki_region_placeholder">this region</string>
     <string name="wiki_article_not_found">Article not found</string>
     <string name="how_to_open_wiki_title">How to open Wikipedia articles\?</string>
     <string name="run_full_osmand_header">Launch OsmAnd\?</string>
-    <string name="delete_search_history">Delete search history</string>
+    <string name="delete_search_history">Desaniciar l\'historial de busques</string>
     <string name="download_images">Download images</string>
     <string name="shared_string_read">Read</string>
     <string name="shared_string_result">Result</string>
@@ -1135,11 +1135,11 @@
     <string name="osm_edits_export_desc">Export as OSM notes, POIs, or both.</string>
     <string name="empty_state_markers_history_desc">Markers marked as passed will appear on this screen.</string>
     <string name="marker_moved_to_history">Map marker moved to history</string>
-    <string name="shared_string_list">List</string>
+    <string name="shared_string_list">Llista</string>
     <string name="make_active">Make active</string>
     <string name="none_point_error">Please add at least one point.</string>
     <string name="mapillary_menu_title_pano">Display only 360° images</string>
-    <string name="report">Report</string>
+    <string name="report">Informar</string>
     <string name="number_of_recipients">Number of recipients</string>
     <string name="upload_osm_note">Upload OSM Note</string>
     <string name="shared_string_reverse_order">Reverse order</string>
@@ -1150,7 +1150,7 @@
     <string name="animate_routing_route">Simulate using calculated route</string>
     <string name="map_widget_fps_info">FPS debug info</string>
     <string name="driving_region_descr">Select driving region: US, Europe, UK, Asia, and others.</string>
-    <string name="map_widget_gps_info">GPS info</string>
+    <string name="map_widget_gps_info">Información del GPS</string>
     <string name="layer_recordings">Recording layer</string>
     <string name="poi_filter_accomodation">Accommodation</string>
     <string name="osmand_plus_extended_description_part8">Approximate map coverage and quality:
@@ -1249,7 +1249,7 @@
     <string name="show_current_gpx_title">Show current track</string>
     <string name="data_to_search_poi_not_available">Download offline data to search for POIs.</string>
     <string name="basemap_missing">Download the base world map to get an overview covering the whole world at low zoom levels.</string>
-    <string name="search_offline_clear_search">New Search</string>
+    <string name="search_offline_clear_search">Busca nueva</string>
     <string name="tts_missing_language_data">Go to the market to download selected language\?</string>
     <string name="poi_filter_closest_poi">Nearest POIs</string>
     <string name="off_router_service_no_gps_available">The background navigation service requires a location provider to be turned on.</string>
@@ -1365,7 +1365,7 @@
     <string name="angular_measeurement">Angular unit</string>
     <string name="angular_measeurement_descr">Change what azimuth is measured in.</string>
     <string name="previous_route">Camín anterior</string>
-    <string name="on_foot">On foot</string>
+    <string name="on_foot">A pie</string>
     <string name="shared_string_contents">Contents</string>
     <string name="favourites_group">Favorites category</string>
     <string name="hide_passed">Hide passed</string>
@@ -1821,7 +1821,7 @@
     <string name="shared_string_others">Others</string>
     <string name="favorite_home_category">Home</string>
     <string name="favorite_delete_multiple">Are you sure you want to delete %1$d Favorites and %2$d Favorite groups\?</string>
-    <string name="favourites_delete_multiple_succesful">Favorite points deleted.</string>
+    <string name="favourites_delete_multiple_succesful">Desaniciáronse los puntos favoritos.</string>
     <string name="show_more_map_detail_descr">Show some vector map detail (roads etc.) at lower zoom levels already.</string>
     <string name="show_more_map_detail">Show more map detail</string>
     <string name="local_index_items_uploaded">%1$d of %2$d item(s) uploaded.</string>
@@ -2497,7 +2497,7 @@
     <string name="shared_string_trip_recording">Trip recording</string>
     <string name="default_speed_system_descr">Define unit of speed.</string>
     <string name="favorite_category_select">Choose category</string>
-    <string name="favorite_category_add_new">Add new</string>
+    <string name="favorite_category_add_new">Amestar una</string>
     <string name="srtm_plugin_disabled">Contour lines disabled</string>
     <string name="hillshade_layer_disabled">Hillshade layer disabled</string>
     <string name="world_maps">World maps</string>
@@ -2620,7 +2620,7 @@
     <string name="rendering_attr_showSurfaceGrade_name">Show road quality</string>
     <string name="rendering_attr_showAccess_name">Show access restrictions and toll</string>
     <string name="rendering_attr_hideAccess_name">Access restrictions</string>
-    <string name="rendering_attr_lessDetailed_name">Fewer details</string>
+    <string name="rendering_attr_lessDetailed_name">Menos detalles</string>
     <string name="rendering_attr_buildings15zoom_name">Buildings on zoom 15</string>
     <string name="rendering_attr_hideWoodScrubs_name">Wood and scrubs</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Non-vehicle highways</string>
@@ -2636,7 +2636,7 @@
     <string name="pause_navigation">Pause Navigation</string>
     <string name="continue_navigation">Continue Navigation</string>
     <string name="rendering_attr_coloredBuildings_name">Color-code buildings by type</string>
-    <string name="rendering_value_pedestrian_name">On foot</string>
+    <string name="rendering_value_pedestrian_name">A pie</string>
     <string name="rendering_value_browse_map_name">Browse map</string>
     <string name="download_additional_maps">Download missing maps %1$s (%2$d MB)\?</string>
     <string name="index_tours">Tours</string>
@@ -2675,7 +2675,7 @@
     <string name="clear_tile_data">Clear all tiles</string>
     <string name="search_my_location">Find my position</string>
     <string name="allow_access_location">Allow location access</string>
-    <string name="give_permission">Grant permission</string>
+    <string name="give_permission">Conceder el permisu</string>
     <string name="osmand_plus_banner_desc">Unlimited map downloads, updates, and Wikipedia plugin.</string>
     <string name="get_for">Get for %1$s</string>
     <string name="osm_live_payment_desc">Subscription charged per selected period. Cancel it on Google Play at any time.</string>
@@ -2921,7 +2921,7 @@
     <string name="travel_card_update_descr">New Wikivoyage data available, update it to enjoy.</string>
     <string name="show_images">Show images</string>
     <string name="shared_string_restart">App restart</string>
-    <string name="download_all">Download all</string>
+    <string name="download_all">Baxar too</string>
     <string name="read_wikipedia_offline">Read Wikipedia offline</string>
     <string name="read_wikipedia_offline_description">Get OsmAnd Live subscription to read Wikipedia and Wikivoyage articles offline.</string>
     <string name="open_wikipedia_link_online">Open Wikipedia link online</string>
@@ -3016,7 +3016,7 @@
     <string name="rendering_attr_surface_grass_name">Yerba</string>
     <string name="rendering_attr_surface_sand_name">Sable</string>
     <string name="rendering_attr_surface_unpaved_name">Unpaved</string>
-    <string name="route_add_start_point">Add point of departure</string>
+    <string name="route_add_start_point">Amiesta\'l puntu de salida</string>
     <string name="transfers_size">%1$d transfers</string>
     <string name="add_intermediate">Amestar un puntu intermediu</string>
     <string name="public_transport_warning_title">Public transport navigation is currently in beta testing, expect errors and inaccuracies.</string>
@@ -3124,7 +3124,7 @@
     <string name="exported_osmand_profile">Perfil d\'OsmAnd: %1$s</string>
     <string name="export_profile">Export profile</string>
     <string name="route_start_point">Puntu d\'aniciu</string>
-    <string name="swap_two_places">Swap %1$s and %2$s</string>
+    <string name="swap_two_places">Intercambiar %1$s y %2$s</string>
     <string name="rendering_value_white_name">White</string>
     <string name="default_speed_dialog_msg">Estimates arrival time for unknown road types, and limits speed for all roads (may affect routing)</string>
     <string name="empty_filename">Empty filename</string>
@@ -3146,7 +3146,7 @@
     <string name="selected_profile">Selected profile</string>
     <string name="reorder_profiles">Editar la llista de perfiles</string>
     <string name="choose_icon_color_name">Icon, color and name</string>
-    <string name="profile_appearance">Profile appearance</string>
+    <string name="profile_appearance">Aspeutu del perfil</string>
     <string name="save_heading_descr">Save heading to each track point while recording.</string>
     <string name="save_heading">Include heading</string>
     <string name="add_new_profile_q">Add the new profile \'%1$s\'\?</string>
@@ -3179,7 +3179,7 @@
     <string name="video_notes">Video notes</string>
     <string name="multimedia_notes_view_descr">Your OSM notes are in %1$s.</string>
     <string name="tracks_view_descr">Your recorded tracks are in %1$s, or the OsmAnd folder.</string>
-    <string name="save_track_logging_accuracy">Logging accuracy</string>
+    <string name="save_track_logging_accuracy">Precisión del rexistru</string>
     <string name="live_monitoring">Online tracking</string>
     <string name="live_monitoring_descr">Allows sharing current location using trip recording.</string>
     <string name="accessibility_prefs_descr">Choose icon, color and name</string>
@@ -3270,7 +3270,7 @@
     <string name="recalculate_route_distance_promo">The route will be recalculated if the distance from the route to the current location is more than selected value.</string>
     <string name="n_items_of_z">%1$s de %2$s</string>
     <string name="download_slope_maps">Slopes</string>
-    <string name="quick_action_terrain_descr">A button to show or hide terrain layer on the map.</string>
+    <string name="quick_action_terrain_descr">Un botón p\'amosar/anubrir la capa del terrén nel mapa.</string>
     <string name="lang_kk">Kazakh</string>
     <string name="lang_jv">Javanese</string>
     <string name="lang_gu">Gujarati</string>
@@ -3284,9 +3284,9 @@
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="osm_live_payment_subscription_management">Payment will be charged to your Google Play account at the confirmation of purchase.
 \n
-\n Subscription automatically renews unless it is canceled before the renewal date. Your account will be charged for renewal period (month/three month/year) only on the renewal date.
+\nSubscription automatically renews unless it is canceled before the renewal date. Your account will be charged for renewal period (month/three month/year) only on the renewal date.
 \n
-\n You can manage and cancel your subscriptions by going to your Google Play settings.</string>
+\nYou can manage and cancel your subscriptions by going to your Google Play settings.</string>
     <string name="search_poi_types">Search for POI types</string>
     <string name="search_poi_types_descr">Combine POI types from different categories. Tap switch to select all, tap left side to category selection.</string>
     <string name="extra_maps_menu_group">Mapes adicionales</string>
@@ -3378,9 +3378,9 @@
     <string name="shared_string_delete_all_q">Delete all\?</string>
     <string name="delete_all_actions_message_q">Are you sure you want to irrevocably delete %d quick actions\?</string>
     <string name="screen_timeout">Screen timeout</string>
-    <string name="uninstall_speed_cameras">Uninstall speed cameras</string>
+    <string name="uninstall_speed_cameras">Desinstalar los radares de velocidá</string>
     <string name="shared_string_legal">Legal</string>
-    <string name="speed_camera_pois">Speed camera POI’s</string>
+    <string name="speed_camera_pois">PdI de radares de velocidá</string>
     <string name="speed_cameras_legal_descr">In some countries or regions, the use of speed camera warning applications is prohibited by law.
 \n
 \nYou need to make a choice depending on the law of your country.
@@ -3389,7 +3389,7 @@
 \n
 \nSelect %2$s. All data related to speed cameras: alerts, notifications, POIs will be deleted until OsmAnd is completely reinstalled.</string>
     <string name="keep_active">Keep active</string>
-    <string name="shared_string_uninstall">Uninstall</string>
+    <string name="shared_string_uninstall">Desinstalar</string>
     <string name="speed_cameras_alert">Speed cameras alerts in some countries is prohibited by the law.</string>
     <string name="screen_timeout_descr">If \"%1$s\" is on, the activity time will depend on it.</string>
     <string name="default_screen_timeout">Default screen timeout</string>
@@ -3403,13 +3403,13 @@
     <string name="vessel_height_warning">You can set vessel height to avoid low bridges. Keep in mind, if the bridge is movable, we will use its height in the open state.</string>
     <string name="vessel_height_limit_description">Set vessel height to avoid low bridges. Keep in mind, if the bridge is movable, we will use its height in the open state.</string>
     <string name="vessel_width_limit_description">Set vessel width to avoid narrow bridges</string>
-    <string name="quick_action_showhide_mapillary_descr">A toggle to show or hide the Mapillary layer on the map.</string>
+    <string name="quick_action_showhide_mapillary_descr">Un alternador p\'amosar/anubrir la capa de Mapillary nel mapa.</string>
     <string name="routing_attr_length_description">Specify vehicle length to be permitted on routes.</string>
     <string name="routing_attr_length_name">Llende de llongura</string>
     <string name="shared_string_bearing">Bearing</string>
     <string name="item_deleted">%1$s deleted</string>
     <string name="speed_cameras_restart_descr">Restart the app to delete all speed camera data.</string>
-    <string name="shared_string_uninstall_and_restart">Uninstall and Restart</string>
+    <string name="shared_string_uninstall_and_restart">Desinstalar y reaniciar</string>
     <string name="speed_cameras_removed_descr">Esti preséu nun tien radares de velocidá.</string>
     <string name="app_mode_inline_skates">Inline skates</string>
     <string name="quick_action_remove_next_destination">Delete nearest destination point</string>
@@ -3429,7 +3429,7 @@
     <string name="set_working_days_to_continue">Set working days to continue</string>
     <string name="route_between_points">Route between points</string>
     <string name="plan_a_route">Plan a route</string>
-    <string name="add_to_a_track">Amestar a un camín</string>
+    <string name="add_to_a_track">Add to a track</string>
     <string name="track_show_start_finish_icons">Show start and finish icons</string>
     <string name="select_track_width">Select width</string>
     <string name="gpx_split_interval_descr">Select the interval at which marks with distance or time on the track will be displayed.</string>
@@ -3507,7 +3507,7 @@
     <string name="routing_profile_ski">Ski</string>
     <string name="settings_derived_routing_mode_string">User-mode, derived from: %s</string>
     <string name="settings_routing_mode_string">Mou: %s</string>
-    <string name="select_icon_profile_dialog_title">Select icon</string>
+    <string name="select_icon_profile_dialog_title">Esbilla d\'un iconu</string>
     <string name="hide_compass_ruler">Hide compass ruler</string>
     <string name="show_compass_ruler">Show compass ruler</string>
     <string name="base_profile_descr_ski">Skiing</string>
@@ -3519,13 +3519,13 @@
     <string name="app_mode_shuttle_bus">Shuttle bus</string>
     <string name="app_mode_taxi">Taxi</string>
     <string name="nav_type_hint">Navigation type</string>
-    <string name="profile_name_hint">Profile name</string>
+    <string name="profile_name_hint">Nome del perfil</string>
     <string name="shared_string_allow">Allow</string>
     <string name="shared_string_no_thank_you">Non, gracies</string>
     <string name="settings_privacy_and_security_desc">Pick what data you share</string>
     <string name="settings_privacy_and_security">Privacidá y seguranza</string>
     <string name="privacy_and_security_change_descr">Tap \"Allow\" if you agree with our %1$s</string>
-    <string name="visited_screens_collect_descr">Helps us understand OsmAnd feature popularity.</string>
+    <string name="visited_screens_collect_descr">Ayúdanos a entender la popularidá de les funciones d\'OsmAnd.</string>
     <string name="downloaded_maps_collect_descr">Helps us understand country and region map popularity.</string>
     <string name="collected_data_descr">Define which data you allow OsmAnd to share.</string>
     <string name="collected_data">Data collected</string>
@@ -3638,7 +3638,7 @@
     <string name="map_during_navigation">Map during navigation</string>
     <string name="map_during_navigation_info">Map during navigation</string>
     <string name="turn_screen_on">Turn screen on</string>
-    <string name="copy_from_other_profile">Copy from another profile</string>
+    <string name="copy_from_other_profile">Copiar d\'otru perfil</string>
     <string name="osmand_settings">Axustes d\'OsmAnd</string>
     <string name="osmand_settings_descr">Effective for the entire app</string>
     <string name="manage_profiles">Manage app profiles…</string>
@@ -3650,7 +3650,7 @@
     <string name="configure_navigation">Configure navigation</string>
     <string name="list_of_installed_plugins">Installed plugins</string>
     <string name="map_look">Map look</string>
-    <string name="map_look_descr">Map appearance</string>
+    <string name="map_look_descr">L\'aspeutu del mapa</string>
     <string name="route_parameters_info">Settings for routing in the selected profile \"%1$s\".</string>
     <string name="turn_screen_on_info">Show map on the lock screen during navigation.</string>
     <string name="analytics_pref_title">Analytics</string>
@@ -3666,11 +3666,11 @@
     <string name="navigate_point_format_utm">UTM Standard</string>
     <string name="mgrs_format_descr">OsmAnd uses MGRS, which is similar to the UTM NATO format.</string>
     <string name="utm_format_descr">OsmAnd uses the UTM Standard, which is similar but not identical to the UTM NATO format.</string>
-    <string name="configure_profile">Configure profile</string>
+    <string name="configure_profile">Configurar el perfil</string>
     <string name="switch_profile">Switch profile</string>
     <string name="application_profile_changed">App profile changed to \"%s\"</string>
     <string name="logcat_buffer">Logcat buffer</string>
-    <string name="plugins_settings">Plugin settings</string>
+    <string name="plugins_settings">Axustes de los plugins</string>
     <string name="shared_string_by_default">Por defeutu</string>
     <string name="download_detailed_map">Download detailed %s map, to view this area.</string>
     <string name="routeInfo_piste_difficulty_name">Piste difficulty</string>
@@ -3825,7 +3825,7 @@
     <string name="on_pause">On pause</string>
     <string name="app_restart_required">Application restart required to apply some settings.</string>
     <string name="routing_attr_height_obstacles_description">Routing could avoid strong uphills.</string>
-    <string name="quick_action_coordinates_widget_descr">A toggle to show or hide the Coordinates widget on the map.</string>
+    <string name="quick_action_coordinates_widget_descr">Un alternador p\'amosar/anubrir el widget Coordenaes nel mapa.</string>
     <string name="map_widget_distance_by_tap">Distance by tap</string>
     <string name="latest_openstreetmap_update">Latest OpenStreetMap update available:</string>
     <string name="updated">Updated: %s</string>
@@ -3857,7 +3857,7 @@
     <string name="specify_color_for_map_mode">Specify color for map mode %1$s.</string>
     <string name="no_purchases">Nun tienes nenguna compra</string>
     <string name="new_device_account">New device / new account</string>
-    <string name="contact_support_description">If you have any questions, please contact us at %1$s.</string>
+    <string name="contact_support_description">Si tienes dalguna entruga, ponte en contautu con nós per %1$s.</string>
     <string name="empty_purchases_description">If your purchases don\'t show up here, tap on “%1$s”, or contact our support team.</string>
     <string name="contact_support">Contact support</string>
     <string name="troubleshooting">Igua de problemes</string>
@@ -3922,15 +3922,15 @@
     <string name="select_base_profile_dialog_message">Base your custom profile on one of the default app profiles, this defines the basic setup like default visibility of widgets and units of speed and distance. These are the default app profiles, together with examples of custom profiles they may be extended to:</string>
     <string name="select_base_profile_dialog_title">Select profile to start with</string>
     <string name="profile_alert_delete_msg">Are you sure you want to delete the \"%s\" profile</string>
-    <string name="profile_alert_delete_title">Delete profile</string>
+    <string name="profile_alert_delete_title">Desaniciar el perfil</string>
     <string name="profile_alert_need_save_msg">Save changes to the profile first</string>
     <string name="profile_alert_need_save_title">Save changes</string>
     <string name="profile_alert_cant_delete_base">Nun pues desaniciar los perfiles base d\'OsmAnd</string>
     <string name="profile_alert_duplicate_name_msg">Yá hai un ficheru con esi nome</string>
-    <string name="delete_description">Delete description</string>
-    <string name="add_description">Add description</string>
+    <string name="delete_description">Desaniciar la descripción</string>
+    <string name="add_description">Amestar una descripción</string>
     <string name="select_group">Select group</string>
-    <string name="select_shape">Select shape</string>
+    <string name="select_shape">Esbilla d\'una forma</string>
     <string name="shared_string_circle">Círculu</string>
     <string name="shared_string_octagon">Octágonu</string>
     <string name="shared_string_square">Cuadráu</string>
@@ -3939,9 +3939,9 @@
 \n
 \nTurn off unused plugins to hide all their controls. %1$s.</string>
     <string name="ui_customization_short_descr">Drawer items, context menu</string>
-    <string name="ui_customization">UI Customization</string>
+    <string name="ui_customization">Personalización de la IU</string>
     <string name="shared_string_drawer">Caxón</string>
-    <string name="context_menu_actions">Context menu actions</string>
+    <string name="context_menu_actions">Aiciones del menú contestual</string>
     <string name="reorder_or_hide_from">Reorder or hide items from the %1$s.</string>
     <string name="shared_string_divider">Divider</string>
     <string name="divider_descr">Elements below this point separated by a divider.</string>
@@ -4114,4 +4114,61 @@
     <string name="edit_track">Edit track</string>
     <string name="rename_track">Rename track</string>
     <string name="change_folder">Change folder</string>
+    <string name="backup_and_restore">Backup &amp; Restore</string>
+    <string name="last_backup">Last backup</string>
+    <string name="duration_ago">%1$s ago</string>
+    <string name="osmand_cloud">OsmAnd Cloud</string>
+    <string name="osmand_cloud_authorize_descr">Never lose your data, backup and restore all information without a problem.</string>
+    <string name="local_backup">Local backup</string>
+    <string name="local_backup_descr">Backup or restore data from a local file.</string>
+    <string name="backup_into_file">Backup into file</string>
+    <string name="restore_from_file">Restore from file</string>
+    <string name="osmand_cloud_help_descr">Need help\? Please contact us at %1$s</string>
+    <string name="osmand_cloud_create_account_descr">Please enter your email address, all your data will be linked to it.
+\nWe will send you a verification code to this email address.</string>
+    <string name="osmand_cloud_login_descr">Please enter the email address, you used for registration. We will send you a one-time password needed on the next step.</string>
+    <string name="verify_email_address">Verify email address</string>
+    <string name="verify_email_address_descr">We sent a verification code to %1$s, please enter it in the field below.</string>
+    <string name="enter_verification_code">Enter 4 digit code</string>
+    <string name="cloud_email_not_registered">This email has not been registered for OsmAnd Cloud</string>
+    <string name="cloud_email_already_registered">Account with this email is already registered.</string>
+    <string name="resend_verification_code">Resend code</string>
+    <string name="verification_code_missing">I didn\'t receive verification code</string>
+    <string name="verification_code_missing_description">Waiting time for code can be 10 minutes, also you can check your spam folder. If it doesn\'t help, use button below.</string>
+    <string name="select_nav_profile_dialog_message">The \'Navigation type\' governs how routes are calculated. You can select between offline and online routing engines.</string>
+    <string name="loading_list_of_routing_services">Loading list of available routing services</string>
+    <string name="shared_string_offline">Offline</string>
+    <string name="shared_string_online">Online</string>
+    <string name="osmand_online_routing_promo">You can use predefined templates, or add custom online routing, supported: OSRM, Graphhopper, OpenRouteService, GPX.</string>
+    <string name="shared_string_external">External</string>
+    <string name="provided_by">Provided by %1$s</string>
+    <string name="failed_loading_predefined_engines">Failed to load the list of predefined templates.
+\nPlease check your Internet connection.</string>
+    <string name="shared_string_predefined">Predefined</string>
+    <string name="backup_complete">Backup complete</string>
+    <string name="backup_now">Backup now</string>
+    <string name="make_backup">Make a backup</string>
+    <string name="make_backup_descr">There are many changes on this device, please make a backup of this data so as not to lose it.</string>
+    <string name="backup_conflicts">Conflicts</string>
+    <string name="backup_confilcts_descr">Some files could not be uploaded to the server because a newer version is stored on the server.</string>
+    <string name="backup_view_conflicts">View conflicts</string>
+    <string name="backup_no_internet_descr">Check your internet connection and download again.</string>
+    <string name="backup_pause_all">Pause all</string>
+    <string name="upload_local_version">Upload local version</string>
+    <string name="download_server_version">Download server version</string>
+    <string name="shared_string_logout">Logout</string>
+    <string name="backup_delete_all_data">Delete all my data</string>
+    <string name="backup_delete_all_data_descr">All data on OsmAnd Cloud will be deleted. Local versions will stay untouched.</string>
+    <string name="backup_delete_all_data_warning">You are about to delete all data previously uploaded to OsmAnd Cloud, including version history.
+\n
+\nYou will not be able to recover deleted data.</string>
+    <string name="backup_danger_zone">Danger zone</string>
+    <string name="delete_all_confirmation">Yes, delete all</string>
+    <string name="backup_delete_old_data">Remove old versions</string>
+    <string name="backup_delete_old_data_descr">Current versions of your data will be preserved on OsmAnd Cloud</string>
+    <string name="backup_delete_old_data_warning">You are about to delete the change history for the previously loaded data.
+\n
+\nThe current version of the data will be saved on the server, but you will not be able to revert to the previously made changes.</string>
+    <string name="backup_data">Backup data</string>
+    <string name="select_backup_data_descr">Select data and folders for backup.</string>
 </resources>

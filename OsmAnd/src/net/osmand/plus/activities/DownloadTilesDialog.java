@@ -135,9 +135,10 @@ public class DownloadTilesDialog {
 		};
 		instance.addDownloaderCallback(callback);
 		
-		Runnable r = new Runnable(){
+		Runnable r = new Runnable() {
 			@Override
 			public void run() {
+				long requestTimestamp = System.currentTimeMillis();
 				int requests = 0;
 				int limitRequests = 50;
 				try {
@@ -160,7 +161,7 @@ public class DownloadTilesDialog {
 								if (rm.tileExistOnFileSystem(tileId, map, x, y, z)) {
 									progressDlg.setProgress(progressDlg.getProgress() + 1);
 								} else {
-									rm.hasTileForMapSync(tileId, map, x, y, z, true);
+									rm.hasTileForMapSync(tileId, map, x, y, z, true, requestTimestamp);
 									requests++;
 								}
 								if (!cancel) {
@@ -179,7 +180,7 @@ public class DownloadTilesDialog {
 							}
 						}
 					}
-					if(cancel){
+					if(cancel) {
 						instance.refuseAllPreviousRequests();
 					} else {
 						while (instance.isSomethingBeingDownloaded()) {
@@ -197,7 +198,7 @@ public class DownloadTilesDialog {
 					instance.refuseAllPreviousRequests();
 				} finally {
 					instance.clearCallbacks();
-					for(IMapDownloaderCallback cbck : previousCallbacks) {
+					for (IMapDownloaderCallback cbck : previousCallbacks) {
 						instance.addDownloaderCallback(cbck);
 					}
 					app.getResourceManager().reloadTilesFromFS();

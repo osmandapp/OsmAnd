@@ -22,7 +22,7 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HistoryCard extends BaseCard {
+public class HistoryCard extends MapBaseCard {
 
 	private List<SearchResult> searchResults;
 	private int limit = 3;

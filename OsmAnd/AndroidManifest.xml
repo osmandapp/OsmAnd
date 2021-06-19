@@ -1026,7 +1026,6 @@
 		</activity>
 
 		<activity android:name="net.osmand.plus.development.TestVoiceActivity" />
-		<activity android:name="net.osmand.plus.development.TestBackupActivity" />
 		<activity android:name="net.osmand.plus.development.LogcatActivity" />
 		<activity android:name="net.osmand.plus.download.DownloadActivity" android:label="" />
 

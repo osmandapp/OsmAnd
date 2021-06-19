@@ -42,8 +42,8 @@ import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.backup.FileSettingsHelper.SettingsCollectListener;
-import net.osmand.plus.settings.backend.backup.FileSettingsHelper.SettingsImportListener;
+import net.osmand.plus.settings.backend.backup.SettingsHelper.CollectListener;
+import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet.ResetAppModePrefsListener;
@@ -185,9 +185,9 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 	}
 
 	private void restoreCustomModeFromFile(final File file) {
-		app.getFileSettingsHelper().collectSettings(file, "", 1, new SettingsCollectListener() {
+		app.getFileSettingsHelper().collectSettings(file, "", 1, new CollectListener() {
 			@Override
-			public void onSettingsCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items) {
+			public void onCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items) {
 				if (succeed) {
 					for (SettingsItem item : items) {
 						item.setShouldReplace(true);
@@ -199,9 +199,9 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 	}
 
 	private void importBackupSettingsItems(File file, List<SettingsItem> items) {
-		app.getFileSettingsHelper().importSettings(file, items, "", 1, new SettingsImportListener() {
+		app.getFileSettingsHelper().importSettings(file, items, "", 1, new ImportListener() {
 			@Override
-			public void onSettingsImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> items) {
+			public void onImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> items) {
 				app.showToastMessage(R.string.profile_prefs_reset_successful);
 				updateCopiedOrResetPrefs();
 			}
@@ -414,7 +414,6 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 					ApplicationMode selectedMode = getSelectedAppMode();
 					if (!ApplicationMode.values(app).contains(selectedMode)) {
 						ApplicationMode.changeProfileAvailability(selectedMode, true, app);
-						mapActivity.getMapLayers().getMapWidgetRegistry().updateVisibleWidgets();
 					}
 					settings.setApplicationMode(selectedMode);
 					fragmentManager.beginTransaction()

@@ -204,7 +204,7 @@
     <string name="last_response_date">Azken erantzuna: %1$s</string>
     <string name="last_update_from_telegram_duration">Telegram-en azken eguneraketa duela %1$s</string>
     <string name="last_response_duration">Azken erantzuna duela %1$s</string>
-    <string name="duration_ago">duela %1$s</string>
+    <string name="duration_ago">Duela %1$s</string>
     <string name="welcome_descr"><b>OsmAnd aztarnaria</b>-ri esker, kokapena partekatu dezakezu eta besteena OsmAnd-en ikus. <br/> <br/> Aplikazioak Telegram APIa erabiltzen du eta, beraz, Telegram kontua behar duzu.</string>
     <string name="shared_string_authorization_descr">Sartu zure Telegram-eko telefono zenbakia nazioarteko formatuan</string>
     <string name="osmand_service_descr">OsmAnd aztarnaria atzeko planoan exekutatzen da pantaila itzalita dagoenean.</string>

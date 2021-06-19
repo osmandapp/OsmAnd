@@ -87,7 +87,7 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		titleTv.setText(UiUtilities.createCustomFontSpannable(FontCache.getRobotoMedium(app), title, title));
 
 		TextView subTextTv = group.findViewById(R.id.sub_text_tv);
-		subTextTv.setText(getCategoryDescr(category));
+		subTextTv.setText(getCategoryDescr(category, exportMode));
 
 		int selectedTypes = 0;
 		for (ExportSettingsType type : items.getTypes()) {
@@ -116,7 +116,7 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 			}
 		});
 
-		adjustIndicator(app, groupPosition, isExpanded, group, nightMode);
+		adjustIndicator(app, groupPosition, isExpanded, group, !nightMode);
 		AndroidUiHelper.updateVisibility(group.findViewById(R.id.divider), isExpanded);
 		AndroidUiHelper.updateVisibility(group.findViewById(R.id.card_top_divider), true);
 		AndroidUiHelper.updateVisibility(group.findViewById(R.id.vertical_divider), false);
@@ -144,7 +144,7 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		TextView subTextTv = child.findViewById(R.id.sub_text_tv);
 		subTextTv.setText(getSelectedTypeDescr(type, items));
 
-		ImageView icon = child.findViewById(R.id.explist_indicator);
+		ImageView icon = child.findViewById(R.id.explicit_indicator);
 		setupIcon(icon, type.getIconRes(), !Algorithms.isEmpty(selectedItems));
 
 		final ThreeStateCheckbox checkBox = child.findViewById(R.id.check_box);
@@ -263,7 +263,7 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		return selectedItems;
 	}
 
-	private String getCategoryDescr(ExportSettingsCategory category) {
+	private String getCategoryDescr(ExportSettingsCategory category, boolean exportMode) {
 		long itemsSize = 0;
 		int selectedTypes = 0;
 		SettingsCategoryItems items = itemsMap.get(category);

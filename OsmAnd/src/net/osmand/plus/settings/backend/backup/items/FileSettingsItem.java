@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.backend.backup.items;
 
+import android.content.Context;
+
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -7,7 +9,9 @@ import androidx.annotation.Nullable;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.download.SrtmDownloadItem;
+import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
@@ -138,7 +142,6 @@ public class FileSettingsItem extends StreamSettingsItem {
 	private final File appPath;
 	protected FileSubtype subtype;
 	private long size;
-	private long lastModified;
 
 	public FileSettingsItem(@NonNull OsmandApplication app, @NonNull File file) throws IllegalArgumentException {
 		super(app, file.getPath().replace(app.getAppPath(null).getPath(), ""));
@@ -176,6 +179,27 @@ public class FileSettingsItem extends StreamSettingsItem {
 	@Override
 	public SettingsItemType getType() {
 		return SettingsItemType.FILE;
+	}
+
+	@NonNull
+	@Override
+	public String getPublicName(@NonNull Context ctx) {
+		if (subtype.isMap() || subtype == FileSubtype.TTS_VOICE || subtype == FileSubtype.VOICE) {
+			return FileNameTranslationHelper.getFileNameWithRegion(app, file.getName());
+		} else if (subtype == FileSubtype.MULTIMEDIA_NOTES) {
+			return new Recording(file).getName(app, true);
+		}
+		return super.getPublicName(ctx);
+	}
+
+	@Override
+	public long getLocalModifiedTime() {
+		return file.lastModified();
+	}
+
+	@Override
+	public void setLocalModifiedTime(long lastModifiedTime) {
+		file.setLastModified(lastModifiedTime);
 	}
 
 	public File getPluginPath() {
@@ -228,14 +252,6 @@ public class FileSettingsItem extends StreamSettingsItem {
 
 	public void setSize(long size) {
 		this.size = size;
-	}
-
-	public long getLastModified() {
-		return lastModified;
-	}
-
-	public void setLastModified(long lastModified) {
-		this.lastModified = lastModified;
 	}
 
 	@NonNull
@@ -310,8 +326,8 @@ public class FileSettingsItem extends StreamSettingsItem {
 				} finally {
 					Algorithms.closeStream(output);
 				}
-				if (lastModified != -1) {
-					savedFile.setLastModified(lastModified);
+				if (lastModifiedTime != -1) {
+					savedFile.setLastModified(lastModifiedTime);
 				}
 			}
 		};

@@ -10,7 +10,7 @@ import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.util.Algorithms;
 
-public class PreviousRouteCard extends BaseCard {
+public class PreviousRouteCard extends MapBaseCard {
 
 	public PreviousRouteCard(MapActivity mapActivity) {
 		super(mapActivity);

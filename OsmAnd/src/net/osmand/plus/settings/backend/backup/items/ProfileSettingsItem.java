@@ -45,6 +45,7 @@ public class ProfileSettingsItem extends OsmandSettingsItem {
 	public ProfileSettingsItem(@NonNull OsmandApplication app, @NonNull ApplicationMode appMode) {
 		super(app.getSettings());
 		this.appMode = appMode;
+		modeBean = appMode.toModeBean();
 	}
 
 	public ProfileSettingsItem(@NonNull OsmandApplication app, @Nullable ProfileSettingsItem baseItem, @NonNull ApplicationModeBean modeBean) {
@@ -68,6 +69,16 @@ public class ProfileSettingsItem extends OsmandSettingsItem {
 	@Override
 	public SettingsItemType getType() {
 		return SettingsItemType.PROFILE;
+	}
+
+	@Override
+	public long getLocalModifiedTime() {
+		return app.getSettings().getLastModePreferencesEditTime(appMode);
+	}
+
+	@Override
+	public void setLocalModifiedTime(long lastModifiedTime) {
+		app.getSettings().setLastModePreferencesEditTime(appMode, lastModifiedTime);
 	}
 
 	public ApplicationMode getAppMode() {

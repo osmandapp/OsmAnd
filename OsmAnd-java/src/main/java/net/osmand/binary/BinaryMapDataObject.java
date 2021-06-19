@@ -1,5 +1,6 @@
 package net.osmand.binary;
 
+import gnu.trove.iterator.TIntObjectIterator;
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TIntObjectHashMap;
 
@@ -27,15 +28,12 @@ public class BinaryMapDataObject {
 	protected long id = 0;
 	
 	protected MapIndex mapIndex = null;
-	
-	
-	public BinaryMapDataObject(){
-	}
-	
 
-	
+	public BinaryMapDataObject() {
+	}
+
 	public BinaryMapDataObject(long id, int[] coordinates, int[][] polygonInnerCoordinates, int objectType, boolean area, 
-			int[] types, int[] additionalTypes, int labelX, int labelY){
+			int[] types, int[] additionalTypes, int labelX, int labelY) {
 		this.polygonInnerCoordinates = polygonInnerCoordinates;
 		this.coordinates = coordinates;
 		this.additionalTypes = additionalTypes;
@@ -52,7 +50,7 @@ public class BinaryMapDataObject {
 	}
 	
 	
-	public String getName(){
+	public String getName() {
 		if(objectNames == null){
 			return "";
 		}
@@ -62,8 +60,7 @@ public class BinaryMapDataObject {
 		}
 		return name;
 	}
-	
-	
+
 	public TIntObjectHashMap<String> getObjectNames() {
 		return objectNames;
 	}
@@ -134,7 +131,7 @@ public class BinaryMapDataObject {
 		return area;
 	}
 	
-	public boolean isCycle(){
+	public boolean isCycle() {
 		if(coordinates == null || coordinates.length < 2) {
 			return false;
 		}
@@ -159,8 +156,8 @@ public class BinaryMapDataObject {
 	}
 	
 	
-	public int getSimpleLayer(){
-		if(mapIndex != null) {
+	public int getSimpleLayer() {
+		if (mapIndex != null) {
 			if (additionalTypes != null) {
 				for (int i = 0; i < additionalTypes.length; i++) {
 					if (mapIndex.positiveLayers.contains(additionalTypes[i])) {
@@ -186,12 +183,13 @@ public class BinaryMapDataObject {
 		this.mapIndex = mapIndex;
 	}
 	
-	public int getPointsLength(){
+	public int getPointsLength() {
 		if(coordinates == null){
 			return 0;
 		}
 		return coordinates.length / 2;
 	}
+
 	public int getPoint31YTile(int ind) {
 		return coordinates[2 * ind + 1];
 	}
@@ -199,7 +197,6 @@ public class BinaryMapDataObject {
 	public int getPoint31XTile(int ind) {
 		return coordinates[2 * ind];
 	}
-	
 	
 	public boolean compareBinary(BinaryMapDataObject thatObj, int coordinatesPrecision) {
 		if(this.objectType == thatObj.objectType
@@ -399,4 +396,19 @@ public class BinaryMapDataObject {
 	public int getObjectType() {
 		return objectType;
 	}
-}	
+
+	public String getTagValue(String tag) {
+		if (mapIndex == null) {
+			return "";
+		}
+		TIntObjectIterator<String> it = objectNames.iterator();
+		while (it.hasNext()) {
+			it.advance();
+			BinaryMapIndexReader.TagValuePair tp = mapIndex.decodeType(it.key());
+			if (tp.tag.equals(tag)) {
+				return it.value();
+			}
+		}
+		return "";
+	}
+}

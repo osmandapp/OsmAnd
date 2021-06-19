@@ -11,7 +11,7 @@ import net.osmand.plus.R;
 public abstract class OsmandBaseExpandableListAdapter extends BaseExpandableListAdapter {
 
 	protected void adjustIndicator(OsmandApplication app, int groupPosition, boolean isExpanded, View row, boolean light) {
-		ImageView indicator = (ImageView) row.findViewById(R.id.explist_indicator);
+		ImageView indicator = (ImageView) row.findViewById(R.id.explicit_indicator);
 		if (!isExpanded) {
 			indicator.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_arrow_down, light));
 			indicator.setContentDescription(row.getContext().getString(R.string.access_collapsed_list));

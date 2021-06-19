@@ -580,7 +580,7 @@ public class TransportRoutingHelper {
 					}
 				}
 			};
-			params.resultListener = new RouteCalculationResultListener() {
+			params.alternateResultListener = new RouteCalculationResultListener() {
 				@Override
 				public void onRouteCalculated(RouteCalculationResult route) {
 					RouteRecalculationTask.this.walkingRouteSegments.put(new Pair<>(walkingRouteSegment.s1, walkingRouteSegment.s2), route);

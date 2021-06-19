@@ -66,6 +66,16 @@ public class SearchHistorySettingsItem extends CollectionSettingsItem<HistoryEnt
 	}
 
 	@Override
+	public long getLocalModifiedTime() {
+		return searchHistoryHelper.getLastModifiedTime();
+	}
+
+	@Override
+	public void setLocalModifiedTime(long lastModifiedTime) {
+		searchHistoryHelper.setLastModifiedTime(lastModifiedTime);
+	}
+
+	@Override
 	public void apply() {
 		List<HistoryEntry> newItems = getNewItems();
 		if (!newItems.isEmpty() || !duplicateItems.isEmpty()) {

@@ -49,7 +49,7 @@ import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.osmedit.OsmNotesPoint;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.profiles.ProfileIconColors;
-import net.osmand.plus.profiles.RoutingProfileDataObject.RoutingProfilesResources;
+import net.osmand.plus.profiles.data.RoutingDataObject.RoutingProfilesResources;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -428,7 +428,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			}
 			if (item.getTag() instanceof FileSettingsItem) {
 				FileSettingsItem settingsItem = (FileSettingsItem) item.getTag();
-				item.setTitle(getNameForMultimediaFile(settingsItem.getFile(), settingsItem.getLastModified()));
+				item.setTitle(getNameForMultimediaFile(settingsItem.getFile(), settingsItem.getLastModifiedTime()));
 			} else {
 				item.setTitle(new Recording(file).getName(app, true));
 			}

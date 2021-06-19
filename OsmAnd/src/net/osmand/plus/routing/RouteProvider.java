@@ -167,7 +167,6 @@ public class RouteProvider {
 				LatLon end = new LatLon(gpxPoint.getLatitude(), gpxPoint.getLongitude());
 
 				RouteCalculationParams params = new RouteCalculationParams();
-				params.inSnapToRoadMode = true;
 				params.start = start;
 				params.end = end;
 				RoutingHelper.applyApplicationSettings(params, routeParams.ctx.getSettings(), appMode);
@@ -218,6 +217,7 @@ public class RouteProvider {
 
 			if (nearestGpxPointInd > 0) {
 				nearestGpxLocation = gpxRouteLocations.get(nearestGpxPointInd);
+
 			} else if (!gpxRouteLocations.isEmpty()) {
 				nearestGpxLocation = gpxRouteLocations.get(0);
 			}
@@ -225,9 +225,12 @@ public class RouteProvider {
 				gpxRoute = findRouteWithIntermediateSegments(routeParams, result, gpxRouteLocations, gpxParams.segmentEndpoints, nearestGpxPointInd);
 			} else {
 				if (nearestGpxPointInd > 0) {
-					gpxRoute = result.getOriginalRoute(nearestGpxPointInd);
-					if (gpxRoute.size() > 0) {
-						gpxRoute.remove(0);
+					gpxRoute = result.getOriginalRoute(nearestGpxPointInd, false);
+					if (!gpxRoute.isEmpty()) {
+						LatLon startPoint = gpxRoute.get(0).getStartPoint();
+						nearestGpxLocation = new Location("", startPoint.getLatitude(), startPoint.getLongitude());
+					} else {
+						nearestGpxLocation = new Location("", routeParams.end.getLatitude(), routeParams.end.getLongitude());
 					}
 				} else {
 					gpxRoute = result.getOriginalRoute();
@@ -471,7 +474,7 @@ public class RouteProvider {
 			int indexNew = findNearestGpxPointIndexFromRoute(gpxRouteLocations, newSegmentPoint, routeParams.gpxRoute.calculateOsmAndRouteParts);
 			int indexPrev = findNearestGpxPointIndexFromRoute(gpxRouteLocations, prevSegmentPoint, routeParams.gpxRoute.calculateOsmAndRouteParts);
 			if (indexPrev != -1 && indexPrev > nearestGpxPointInd && indexNew != -1) {
-				newGpxRoute.addAll(result.getOriginalRoute(lastIndex, indexPrev));
+				newGpxRoute.addAll(result.getOriginalRoute(lastIndex, indexPrev, true));
 				lastIndex = indexNew;
 
 				LatLon end = new LatLon(newSegmentPoint.getLatitude(), newSegmentPoint.getLongitude());

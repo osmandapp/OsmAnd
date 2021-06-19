@@ -39,7 +39,6 @@ public class SuggestedDownloadsItem extends SettingsItem {
 	@Override
 	public SettingsItemType getType() {
 		return SettingsItemType.SUGGESTED_DOWNLOADS;
-
 	}
 
 	@NonNull
@@ -51,11 +50,20 @@ public class SuggestedDownloadsItem extends SettingsItem {
 	@NonNull
 	@Override
 	public String getPublicName(@NonNull Context ctx) {
-		return "suggested_downloads";
+		return ctx.getString(R.string.suggested_maps);
 	}
 
 	public List<CustomOsmandPlugin.SuggestedDownloadItem> getItems() {
 		return items;
+	}
+
+	@Override
+	public long getLocalModifiedTime() {
+		return 0;
+	}
+
+	@Override
+	public void setLocalModifiedTime(long lastModifiedTime) {
 	}
 
 	@Override

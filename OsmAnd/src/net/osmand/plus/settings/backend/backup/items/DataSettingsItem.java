@@ -33,6 +33,11 @@ public class DataSettingsItem extends StreamSettingsItem {
 		super(app, json);
 	}
 
+	@Override
+	public long getSize() {
+		return data != null ? data.length : 0;
+	}
+
 	public DataSettingsItem(@NonNull OsmandApplication app, @NonNull byte[] data, @NonNull String name) {
 		super(app, name);
 		this.data = data;
@@ -53,6 +58,15 @@ public class DataSettingsItem extends StreamSettingsItem {
 	@Nullable
 	public byte[] getData() {
 		return data;
+	}
+
+	@Override
+	public long getLocalModifiedTime() {
+		return 0;
+	}
+
+	@Override
+	public void setLocalModifiedTime(long lastModifiedTime) {
 	}
 
 	@Override

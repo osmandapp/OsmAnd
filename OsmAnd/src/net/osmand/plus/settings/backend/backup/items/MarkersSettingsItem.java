@@ -78,6 +78,16 @@ public class MarkersSettingsItem extends CollectionSettingsItem<MapMarker> {
 	}
 
 	@Override
+	public long getLocalModifiedTime() {
+		return markersHelper.getMarkersLastModifiedTime();
+	}
+
+	@Override
+	public void setLocalModifiedTime(long lastModifiedTime) {
+		markersHelper.setMarkersLastModifiedTime(lastModifiedTime);
+	}
+
+	@Override
 	public void apply() {
 		List<MapMarker> newItems = getNewItems();
 		if (!newItems.isEmpty() || !duplicateItems.isEmpty()) {

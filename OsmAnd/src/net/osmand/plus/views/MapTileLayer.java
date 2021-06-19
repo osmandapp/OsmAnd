@@ -117,15 +117,14 @@ public class MapTileLayer extends BaseMapLayer {
 	
 	@SuppressLint("WrongCall")
 	@Override
-	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox,
-			DrawSettings drawSettings) {
+	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
 		if ((map == null && mapTileAdapter == null) || !visible) {
 			return;
 		}
 		if (mapTileAdapter != null) {
 			mapTileAdapter.onDraw(canvas, tileBox, drawSettings);
 		}
-		drawTileMap(canvas, tileBox);
+		drawTileMap(canvas, tileBox, drawSettings);
 	}
 
 	@Override
@@ -133,7 +132,7 @@ public class MapTileLayer extends BaseMapLayer {
 		
 	}
 
-	public void drawTileMap(Canvas canvas, RotatedTileBox tileBox) {
+	public void drawTileMap(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
 		ITileSource map = this.map; 
 		if (map == null) {
 			return;
@@ -147,7 +146,6 @@ public class MapTileLayer extends BaseMapLayer {
 		if (map.isEllipticYTile()) {
 			ellipticTileCorrection = (float) (MapUtils.getTileEllipsoidNumberY(nzoom, tileBox.getLatitude()) - tileBox.getCenterTileY());
 		}
-
 
 		int left = (int) Math.floor(tilesRect.left);
 		int top = (int) Math.floor(tilesRect.top + ellipticTileCorrection);
@@ -183,7 +181,8 @@ public class MapTileLayer extends BaseMapLayer {
 				boolean imgExist = mgr.tileExistOnFileSystem(ordImgTile, map, tileX, tileY, nzoom);
 				boolean originalWillBeLoaded = useInternet && nzoom <= maxLevel;
 				if (imgExist || originalWillBeLoaded) {
-					bmp = mgr.getBitmapTilesCache().getTileForMapAsync(ordImgTile, map, tileX, tileY, nzoom, useInternet);
+					bmp = mgr.getBitmapTilesCache().getTileForMapAsync(ordImgTile, map, tileX, tileY,
+							nzoom, useInternet, drawSettings.mapRefreshTimestamp);
 				}
 				if (bmp == null) {
 					int div = 1;
@@ -194,17 +193,20 @@ public class MapTileLayer extends BaseMapLayer {
 					int kzoom = 1;
 					for (; kzoom <= allowedScale; kzoom++) {
 						div *= 2;
-						String imgTileId = mgr.calculateTileId(map, tileX / div, tileY / div, nzoom - kzoom);
+						int x = tileX / div;
+						int y = tileY / div;
+						int zoom = nzoom - kzoom;
+						String imgTileId = mgr.calculateTileId(map, x, y, zoom);
 						if (readFromCache) {
-							bmp = mgr.getBitmapTilesCache().get(imgTileId);
+							bmp = mgr.getBitmapTilesCache().get(imgTileId, drawSettings.mapRefreshTimestamp);
 							if (bmp != null) {
 								break;
 							}
 						} else if (loadIfExists) {
-							if (mgr.tileExistOnFileSystem(imgTileId, map, tileX / div, tileY / div, nzoom - kzoom) 
-									|| (useInternet && nzoom - kzoom <= maxLevel)) {
-								bmp = mgr.getBitmapTilesCache().getTileForMapAsync(imgTileId, map, tileX / div, tileY / div, nzoom
-										- kzoom, useInternet);
+							if (mgr.tileExistOnFileSystem(imgTileId, map, x, y, zoom)
+									|| (useInternet && zoom <= maxLevel)) {
+								bmp = mgr.getBitmapTilesCache().getTileForMapAsync(imgTileId, map, x, y,
+										zoom, useInternet, drawSettings.mapRefreshTimestamp);
 								break;
 							}
 						}
@@ -254,7 +256,7 @@ public class MapTileLayer extends BaseMapLayer {
 									bitmapToZoom.width(), bitmapToZoom.height(), m, true);
 							bitmapToZoom.set(0, 0, tileSize, tileSize);
 							// very expensive that's why put in the cache
-							mgr.getBitmapTilesCache().put(ordImgTile, sampled);
+							mgr.getBitmapTilesCache().put(ordImgTile, sampled, drawSettings.mapRefreshTimestamp);
 							canvas.drawBitmap(sampled, bitmapToZoom, bitmapToDraw, paintBitmap);
 						}
 					}

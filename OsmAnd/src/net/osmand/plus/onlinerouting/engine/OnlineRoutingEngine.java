@@ -34,7 +34,10 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 	protected static final Log LOG = PlatformUtil.getLog(OnlineRoutingEngine.class);
 
 	public final static String ONLINE_ROUTING_ENGINE_PREFIX = "online_routing_engine_";
+	public final static String PREDEFINED_PREFIX = ONLINE_ROUTING_ENGINE_PREFIX + "predefined_";
+
 	public final static VehicleType CUSTOM_VEHICLE = new VehicleType("", R.string.shared_string_custom);
+	public final static VehicleType NONE_VEHICLE = new VehicleType("None", R.string.shared_string_none);
 
 	private final Map<String, String> params = new HashMap<>();
 	private final List<VehicleType> allowedVehicles = new ArrayList<>();
@@ -46,8 +49,8 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 		if (!isEmpty(params)) {
 			this.params.putAll(params);
 		}
-		collectAllowedVehiclesInternal();
-		collectAllowedParameters(allowedParameters);
+		collectAllowedVehicles();
+		collectAllowedParameters();
 	}
 
 	@NonNull
@@ -62,6 +65,20 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 	@Nullable
 	public String getStringKey() {
 		return get(EngineParameter.KEY);
+	}
+
+	/**
+	 * Used only when creating a full server url
+	 * @return a string that represents the type of vehicle, or an empty string
+	 * if the vehicle type not provided
+	 */
+	@NonNull
+	public String getVehicleKeyForUrl() {
+		String key = get(EngineParameter.VEHICLE_KEY);
+		if (key == null || NONE_VEHICLE.getKey().equals(key)) {
+			return "";
+		}
+		return key;
 	}
 
 	@NonNull
@@ -133,10 +150,11 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 		params.remove(key.name());
 	}
 
-	private void collectAllowedVehiclesInternal() {
+	private void collectAllowedVehicles() {
 		allowedVehicles.clear();
 		collectAllowedVehicles(allowedVehicles);
 		allowedVehicles.add(CUSTOM_VEHICLE);
+		allowedVehicles.add(NONE_VEHICLE);
 	}
 
 	protected abstract void collectAllowedVehicles(@NonNull List<VehicleType> vehicles);
@@ -146,10 +164,18 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 		return Collections.unmodifiableList(allowedVehicles);
 	}
 
+	private void collectAllowedParameters() {
+		collectAllowedParameters(allowedParameters);
+	}
+
 	protected abstract void collectAllowedParameters(@NonNull Set<EngineParameter> params);
 
 	public boolean isParameterAllowed(EngineParameter key) {
 		return allowedParameters.contains(key);
+	}
+
+	public boolean isPredefined() {
+		return isPredefinedEngineKey(getStringKey());
 	}
 
 	@Nullable
@@ -201,6 +227,21 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 	@NonNull
 	public static String generateKey() {
 		return ONLINE_ROUTING_ENGINE_PREFIX + System.currentTimeMillis();
+	}
+
+	@NonNull
+	public static String generatePredefinedKey(@NonNull String provider,
+	                                           @NonNull String type) {
+		String key = PREDEFINED_PREFIX + provider + "_" + type;
+		return key.replaceAll(" ", "_").toLowerCase();
+	}
+
+	public static boolean isPredefinedEngineKey(@Nullable String stringKey) {
+		return stringKey != null && stringKey.startsWith(PREDEFINED_PREFIX);
+	}
+
+	public static boolean isOnlineEngineKey(@Nullable String stringKey) {
+		return stringKey != null && stringKey.startsWith(ONLINE_ROUTING_ENGINE_PREFIX);
 	}
 
 	public static class OnlineRoutingResponse {

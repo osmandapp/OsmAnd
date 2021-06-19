@@ -33,7 +33,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RouteStatisticCard extends BaseCard {
+public class RouteStatisticCard extends MapBaseCard {
 
 	public static final int DETAILS_BUTTON_INDEX = 0;
 	public static final int START_BUTTON_INDEX = 1;

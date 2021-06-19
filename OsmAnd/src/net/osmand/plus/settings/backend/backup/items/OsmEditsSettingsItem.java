@@ -73,6 +73,23 @@ public class OsmEditsSettingsItem extends CollectionSettingsItem<OpenstreetmapPo
 	}
 
 	@Override
+	public long getLocalModifiedTime() {
+		OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+		if (osmEditingPlugin != null) {
+			return osmEditingPlugin.getDBPOI().getLastModifiedTime();
+		}
+		return 0;
+	}
+
+	@Override
+	public void setLocalModifiedTime(long lastModifiedTime) {
+		OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+		if (osmEditingPlugin != null) {
+			osmEditingPlugin.getDBPOI().setLastModifiedTime(lastModifiedTime);
+		}
+	}
+
+	@Override
 	public void apply() {
 		List<OpenstreetmapPoint> newItems = getNewItems();
 		if (!newItems.isEmpty() || !duplicateItems.isEmpty()) {

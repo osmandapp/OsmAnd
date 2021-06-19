@@ -3555,9 +3555,9 @@
     <string name="custom_color">Sérsniðinn litur</string>
     <string name="osm_live_payment_subscription_management">Greiðsla verður gjaldfærð á Google Play reikninginn þinn við staðfestingu á kaupunum.
 \n
-\n Áskrift endurnýjast sjálfkrafa nema hún sé felld niður fyrir endurnýjunardag. Reikningur þinn verður einungis gjaldfærður fyrir endurnýjunartímabil (mánuður / þrír mánuðir / ár) á endurnýjunardegi. 
+\nÁskrift endurnýjast sjálfkrafa nema hún sé felld niður fyrir endurnýjunardag. Reikningur þinn verður einungis gjaldfærður fyrir endurnýjunartímabil (mánuður / þrír mánuðir / ár) á endurnýjunardegi.
 \n
-\n Þú getur stýrt og aflýst áskriftunum þínum með því að fara í Google Play stillingarnar þínar.</string>
+\nÞú getur stýrt og aflýst áskriftunum þínum með því að fara í Google Play stillingarnar þínar.</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="search_poi_types">Leita eftir tegundum merkisstaða</string>
     <string name="search_poi_types_descr">Sameina gerðir merkisstaða úr mismunandi flokkum. Ýttu á hnappinn til að velja allt, ýttu vinstra megin til að fara í val á flokkum.</string>
@@ -3823,9 +3823,9 @@
     <string name="use_two_phase_routing">Nota 2-umferða A* leiðararútreikning</string>
     <string name="osm_live_payment_subscription_management_hw">Greiðsla verður gjaldfærð á AppGallery reikninginn þinn við staðfestingu á kaupunum.
 \n
-\n Áskrift endurnýjast sjálfkrafa nema hún sé felld niður fyrir endurnýjunardag. Reikningur þinn verður einungis gjaldfærður fyrir endurnýjunartímabil (mánuður / þrír mánuðir / ár) á endurnýjunardegi.
+\nÁskrift endurnýjast sjálfkrafa nema hún sé felld niður fyrir endurnýjunardag. Reikningur þinn verður einungis gjaldfærður fyrir endurnýjunartímabil (mánuður / þrír mánuðir / ár) á endurnýjunardegi.
 \n
-\n Þú getur stýrt og aflýst áskriftunum þínum með því að fara í AppGallery stillingarnar þínar.</string>
+\nÞú getur stýrt og aflýst áskriftunum þínum með því að fara í AppGallery stillingarnar þínar.</string>
     <string name="shared_string_graph">Graf</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="shared_string_local_maps">Staðkort</string>
@@ -4112,4 +4112,24 @@
     <string name="poi_routes">Leiðir</string>
     <string name="routing_attr_avoid_low_emission_zone_description">Forðast svæði með takmörkunum á útblæstri</string>
     <string name="routing_attr_avoid_low_emission_zone_name">Forðast svæði með takmörkunum á útblæstri</string>
+    <string name="osmand_cloud_help_descr">Þarftu aðstoð\? Hafðu samband við okkur á %1$s</string>
+    <string name="osmand_cloud_create_account_descr">Settu inn tölvupóstfangið þitt, öll gögnin þín munu tengjast því.
+\nVið munum senda þér sannvottunarkóða á þetta tölvupóstfang.</string>
+    <string name="osmand_cloud_login_descr">Settu inn tölvupóstfangið sem þú notaðir við skráningu. Við munum senda þér eins-skiptis lykilorð til að nota í næsta skrefi.</string>
+    <string name="verify_email_address_descr">Við sendum sannvottunarkóða á %1$s, settu kóðann inn í reitinn hér fyrir neðan.</string>
+    <string name="cloud_email_not_registered">Þetta tölvupóstfang hefur ekki verið skráð fyrir OsmAnd Cloud-tölvuskýið</string>
+    <string name="cloud_email_already_registered">Aðgangur með þessu tölvupóstfang er nú þegar skráð.</string>
+    <string name="verification_code_missing">Ég fékk ekki neinn sannvottunarkóða</string>
+    <string name="backup_and_restore">Afrita og endurheimta</string>
+    <string name="last_backup">Síðasta öryggisafrit</string>
+    <string name="duration_ago">fyrir %1$s síðan</string>
+    <string name="osmand_cloud">OsmAnd Cloud-tölvuský</string>
+    <string name="local_backup">Staðvært öryggisafrit</string>
+    <string name="local_backup_descr">Öryggisafritun eða endurheimting úr skrá á tækinu.</string>
+    <string name="backup_into_file">Öryggisafritun í skrá</string>
+    <string name="restore_from_file">Endurheimta úr skrá</string>
+    <string name="verify_email_address">Sannreyna tölvupóstfang</string>
+    <string name="enter_verification_code">Settu inn 4-stafa kóða</string>
+    <string name="resend_verification_code">Endursenda kóða</string>
+    <string name="select_nav_profile_dialog_message">Gerð leiðsagnar hefur áhrif á reglur þær sem notaðar eru við útreikning leiða. Þú getur valið á milli nettengdra og ónettengdra leiðargerða.</string>
 </resources>

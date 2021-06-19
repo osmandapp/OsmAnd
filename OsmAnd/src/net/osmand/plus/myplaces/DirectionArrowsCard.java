@@ -9,10 +9,10 @@ import androidx.annotation.NonNull;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.track.TrackDrawInfo;
 
-public class DirectionArrowsCard extends BaseCard {
+public class DirectionArrowsCard extends MapBaseCard {
 
 	private TrackDrawInfo trackDrawInfo;
 

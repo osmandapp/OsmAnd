@@ -13,7 +13,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.ColorRes;
-import androidx.annotation.DimenRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.AppCompatImageView;
@@ -545,10 +544,6 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 		void runSort();
 
 		void updateList();
-	}
-
-	public int getDimen(@DimenRes int id) {
-		return getResources().getDimensionPixelSize(id);
 	}
 
 	public String getStateText(boolean isEnabled) {

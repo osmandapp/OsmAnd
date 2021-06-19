@@ -74,6 +74,7 @@ public class UiUtilities {
 
 	public enum DialogButtonType {
 		PRIMARY,
+		PRIMARY_HARMFUL,
 		SECONDARY,
 		SECONDARY_HARMFUL,
 		STROKED
@@ -720,6 +721,13 @@ public class UiUtilities {
 					AndroidUtils.setBackground(ctx, buttonContainer, nightMode, R.drawable.ripple_solid_light, R.drawable.ripple_solid_dark);
 				}
 				AndroidUtils.setBackground(ctx, buttonView, nightMode, R.drawable.dlg_btn_primary_light, R.drawable.dlg_btn_primary_dark);
+				textAndIconColorResId = nightMode ? R.color.dlg_btn_primary_text_dark : R.color.dlg_btn_primary_text_light;
+				break;
+			case PRIMARY_HARMFUL:
+				if (v21) {
+					AndroidUtils.setBackground(ctx, buttonContainer, nightMode, R.drawable.ripple_solid_light, R.drawable.ripple_solid_dark);
+				}
+				AndroidUtils.setBackground(buttonView, AppCompatResources.getDrawable(ctx, R.drawable.dlg_btn_primary_harmfull));
 				textAndIconColorResId = nightMode ? R.color.dlg_btn_primary_text_dark : R.color.dlg_btn_primary_text_light;
 				break;
 			case SECONDARY:
