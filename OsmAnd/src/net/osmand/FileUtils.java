@@ -199,7 +199,7 @@ public class FileUtils {
 	}
 
 	public static boolean isTempFile(@NonNull OsmandApplication app, @Nullable String path) {
-		return path != null && path.startsWith(getTempDir(app).getPath());
+		return path != null && path.startsWith(getTempDir(app).getAbsolutePath());
 	}
 
 	public interface RenameCallback {
