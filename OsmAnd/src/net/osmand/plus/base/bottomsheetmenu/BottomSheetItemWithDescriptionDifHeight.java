@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import androidx.annotation.ColorRes;
-import androidx.annotation.DimenRes;
 import androidx.annotation.LayoutRes;
 
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
