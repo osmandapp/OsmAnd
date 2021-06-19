@@ -17,7 +17,7 @@ import net.osmand.PicassoUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.util.Algorithms;
@@ -27,7 +27,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 
 import static net.osmand.plus.myplaces.TrackActivityFragmentAdapter.getMetadataImageLink;
 
-public class DescriptionCard extends BaseCard {
+public class DescriptionCard extends MapBaseCard {
 
 	private final GPXFile gpxFile;
 

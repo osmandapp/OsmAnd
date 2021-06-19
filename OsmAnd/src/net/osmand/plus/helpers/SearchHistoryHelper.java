@@ -6,10 +6,12 @@ import net.osmand.osm.AbstractPoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
+import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.util.Algorithms;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -28,9 +30,9 @@ public class SearchHistoryHelper {
 
 	private static SearchHistoryHelper instance = null;
 
-	private OsmandApplication context;
+	private final OsmandApplication context;
 	private List<HistoryEntry> loadedEntries = null;
-	private Map<PointDescription, HistoryEntry> mp = new HashMap<>();
+	private final Map<PointDescription, HistoryEntry> mp = new HashMap<>();
 
 	public SearchHistoryHelper(OsmandApplication context) {
 		this.context = context;
@@ -41,6 +43,14 @@ public class SearchHistoryHelper {
 			instance = new SearchHistoryHelper(context);
 		}
 		return instance;
+	}
+
+	public long getLastModifiedTime() {
+		return new HistoryItemDBHelper().getLastModifiedTime();
+	}
+
+	public void setLastModifiedTime(long lastModifiedTime) {
+		new HistoryItemDBHelper().setLastModifiedTime(lastModifiedTime);
 	}
 
 	public void addNewItemToHistory(double latitude, double longitude, PointDescription pointDescription) {
@@ -354,24 +364,27 @@ public class SearchHistoryHelper {
 				HISTORY_COL_FREQ_VALUES + " TEXT, " +
 				HISTORY_COL_LAT + " double, " + HISTORY_COL_LON + " double);";
 
+		private static final String HISTORY_LAST_MODIFIED_NAME = "history_recents";
 
 		HistoryItemDBHelper() {
 		}
 
 		private SQLiteConnection openConnection(boolean readonly) {
 			SQLiteConnection conn = context.getSQLiteAPI().getOrCreateDatabase(DB_NAME, readonly);
-			if (conn.getVersion() < DB_VERSION) {
+			if (conn != null && conn.getVersion() < DB_VERSION) {
 				if (readonly) {
 					conn.close();
 					conn = context.getSQLiteAPI().getOrCreateDatabase(DB_NAME, false);
 				}
-				int version = conn.getVersion();
-				if (version == 0) {
-					onCreate(conn);
-				} else {
-					onUpgrade(conn, version, DB_VERSION);
+				if (conn != null) {
+					int version = conn.getVersion();
+					if (version == 0) {
+						onCreate(conn);
+					} else {
+						onUpgrade(conn, version, DB_VERSION);
+					}
+					conn.setVersion(DB_VERSION);
 				}
-				conn.setVersion(DB_VERSION);
 			}
 			return conn;
 		}
@@ -381,10 +394,33 @@ public class SearchHistoryHelper {
 		}
 
 		public void onUpgrade(SQLiteConnection db, int oldVersion, int newVersion) {
+			boolean upgraded = false;
 			if (oldVersion < 2) {
 				db.execSQL("DROP TABLE IF EXISTS " + HISTORY_TABLE_NAME);
 				onCreate(db);
+				upgraded = true;
 			}
+			if (upgraded) {
+				updateLastModifiedTime();
+			}
+		}
+
+		public long getLastModifiedTime() {
+			long lastModifiedTime = BackupHelper.getLastModifiedTime(context, HISTORY_LAST_MODIFIED_NAME);
+			if (lastModifiedTime == 0) {
+				File dbFile = context.getDatabasePath(DB_NAME);
+				lastModifiedTime = dbFile.exists() ? dbFile.lastModified() : 0;
+				BackupHelper.setLastModifiedTime(context, HISTORY_LAST_MODIFIED_NAME, lastModifiedTime);
+			}
+			return lastModifiedTime;
+		}
+
+		public void setLastModifiedTime(long lastModifiedTime) {
+			BackupHelper.setLastModifiedTime(context, HISTORY_LAST_MODIFIED_NAME, lastModifiedTime);
+		}
+
+		private void updateLastModifiedTime() {
+			BackupHelper.setLastModifiedTime(context, HISTORY_LAST_MODIFIED_NAME);
 		}
 
 		public boolean remove(HistoryEntry e) {
@@ -395,6 +431,7 @@ public class SearchHistoryHelper {
 									HISTORY_COL_NAME + " = ? AND " +
 									HISTORY_COL_LAT + " = ? AND " + HISTORY_COL_LON + " = ?",
 							new Object[] {e.getSerializedName(), e.getLat(), e.getLon()});
+					updateLastModifiedTime();
 				} finally {
 					db.close();
 				}
@@ -408,6 +445,7 @@ public class SearchHistoryHelper {
 			if (db != null) {
 				try {
 					db.execSQL("DELETE FROM " + HISTORY_TABLE_NAME);
+					updateLastModifiedTime();
 				} finally {
 					db.close();
 				}
@@ -428,6 +466,7 @@ public class SearchHistoryHelper {
 									HISTORY_COL_LAT + " = ? AND " + HISTORY_COL_LON + " = ?",
 							new Object[] {e.getLastAccessTime(), e.getIntervals(), e.getIntervalsValues(),
 									e.getSerializedName(), e.getLat(), e.getLon()});
+					updateLastModifiedTime();
 				} finally {
 					db.close();
 				}
@@ -454,6 +493,7 @@ public class SearchHistoryHelper {
 					"INSERT INTO " + HISTORY_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?)",
 					new Object[]{e.getSerializedName(), e.getLastAccessTime(),
 							e.getIntervals(), e.getIntervalsValues(), e.getLat(), e.getLon()});
+			updateLastModifiedTime();
 		}
 
 		public List<HistoryEntry> getEntries() {
@@ -494,7 +534,7 @@ public class SearchHistoryHelper {
 							for (HistoryEntry he : entries) {
 								insert(he, db);
 							}
-
+							updateLastModifiedTime();
 						}
 					}
 					if (query != null) {

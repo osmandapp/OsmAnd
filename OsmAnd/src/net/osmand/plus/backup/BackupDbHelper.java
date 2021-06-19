@@ -15,7 +15,7 @@ public class BackupDbHelper {
 	private final OsmandApplication app;
 
 	private static final String DB_NAME = "backup_files";
-	private static final int DB_VERSION = 1;
+	private static final int DB_VERSION = 2;
 	private static final String UPLOADED_FILES_TABLE_NAME = "uploaded_files";
 	private static final String UPLOADED_FILE_COL_TYPE = "type";
 	private static final String UPLOADED_FILE_COL_NAME = "name";
@@ -24,6 +24,13 @@ public class BackupDbHelper {
 			UPLOADED_FILE_COL_TYPE + " TEXT, " +
 			UPLOADED_FILE_COL_NAME + " TEXT, " +
 			UPLOADED_FILE_COL_UPLOAD_TIME + " long);";
+
+	private static final String LAST_MODIFIED_TABLE_NAME = "last_modified_items";
+	private static final String LAST_MODIFIED_COL_NAME = "name";
+	private static final String LAST_MODIFIED_COL_MODIFIED_TIME = "last_modified_time";
+	private static final String LAST_MODIFIED_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " + LAST_MODIFIED_TABLE_NAME + " (" +
+			LAST_MODIFIED_COL_NAME + " TEXT, " +
+			LAST_MODIFIED_COL_MODIFIED_TIME + " long);";
 
 	public static class UploadedFileInfo {
 		private final String type;
@@ -55,6 +62,7 @@ public class BackupDbHelper {
 
 	public BackupDbHelper(OsmandApplication app) {
 		this.app = app;
+		//removeUploadedFileInfos();
 	}
 
 	@Nullable
@@ -80,10 +88,13 @@ public class BackupDbHelper {
 
 	public void onCreate(SQLiteConnection db) {
 		db.execSQL(UPLOADED_FILES_TABLE_CREATE);
+		db.execSQL(LAST_MODIFIED_TABLE_CREATE);
 	}
 
 	public void onUpgrade(SQLiteConnection db, int oldVersion, int newVersion) {
-		// Non implemented yet
+		if (oldVersion < 2) {
+			db.execSQL(LAST_MODIFIED_TABLE_CREATE);
+		}
 	}
 
 	public boolean removeUploadedFileInfo(@NonNull UploadedFileInfo info) {
@@ -134,19 +145,15 @@ public class BackupDbHelper {
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
-				insertUploadedFileInfo(info, db);
+				db.execSQL(
+						"INSERT INTO " + UPLOADED_FILES_TABLE_NAME + " VALUES (?, ?, ?)",
+						new Object[]{info.type, info.name, info.uploadTime});
 			} finally {
 				db.close();
 			}
 			return true;
 		}
 		return false;
-	}
-
-	private void insertUploadedFileInfo(@NonNull UploadedFileInfo info, @NonNull SQLiteConnection db) {
-		db.execSQL(
-				"INSERT INTO " + UPLOADED_FILES_TABLE_NAME + " VALUES (?, ?, ?)",
-				new Object[]{info.type, info.name, info.uploadTime});
 	}
 
 	@NonNull
@@ -209,5 +216,42 @@ public class BackupDbHelper {
 		String name = query.getString(1);
 		long uploadTime = query.getLong(2);
 		return new UploadedFileInfo(type, name, uploadTime);
+	}
+
+	public void setLastModifiedTime(@NonNull String name, long lastModifiedTime) {
+		SQLiteConnection db = openConnection(false);
+		if (db != null) {
+			try {
+				db.execSQL("DELETE FROM " + LAST_MODIFIED_TABLE_NAME +
+						" WHERE " + LAST_MODIFIED_COL_NAME + " = ?", new Object[]{name});
+				db.execSQL("INSERT INTO " + LAST_MODIFIED_TABLE_NAME + " VALUES (?, ?)",
+						new Object[]{name, lastModifiedTime});
+			} finally {
+				db.close();
+			}
+		}
+	}
+
+	public long getLastModifiedTime(@NonNull String name) {
+		long res = 0;
+		SQLiteConnection db = openConnection(true);
+		if (db != null) {
+			try {
+				SQLiteCursor query = db.rawQuery(
+						"SELECT " + LAST_MODIFIED_COL_MODIFIED_TIME +
+								" FROM " + LAST_MODIFIED_TABLE_NAME +
+								" WHERE " + LAST_MODIFIED_COL_NAME + " = ?",
+						new String[]{name});
+				if (query != null && query.moveToFirst()) {
+					res = query.getLong(0);
+				}
+				if (query != null) {
+					query.close();
+				}
+			} finally {
+				db.close();
+			}
+		}
+		return res;
 	}
 }

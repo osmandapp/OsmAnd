@@ -4158,4 +4158,16 @@
     <string name="backup_delete_old_data_warning">Zamierzasz usunąć historię zmian dla poprzednio wczytanych danych.
 \n
 \nAktualna wersja danych zostanie zapisana na serwerze, ale nie będzie można powrócić do wcześniej wprowadzonych zmian.</string>
+    <string name="shared_string_online">Online</string>
+    <string name="backup_data">Kopia zapasowa danych</string>
+    <string name="select_backup_data_descr">Wybierz dane i foldery do utworzenia kopii zapasowej.</string>
+    <string name="backup_restore_data_descr">Przywracanie danych na urządzeniu przy użyciu kopii zapasowych online.</string>
+    <string name="backup_restore_data">Przywróć dane</string>
+    <string name="restore_from_osmand_cloud">Przywracanie z chmury OsmAnd</string>
+    <string name="choose_what_to_restore">Wybierz, co chcesz przywrócić.</string>
+    <string name="restore_selected_data">Przywracanie wybranych danych</string>
+    <string name="receiving_data_from_server">Odbieranie danych z serwera</string>
+    <string name="restore_complete">Przywracanie zakończone</string>
+    <string name="grey_color_slope">Kolor szary jest używany, gdy nachylenie jest nieokreślone.</string>
+    <string name="backup_version_history">Historia wersji</string>
 </resources>

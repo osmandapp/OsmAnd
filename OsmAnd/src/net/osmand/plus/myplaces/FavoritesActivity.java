@@ -69,23 +69,24 @@ public class FavoritesActivity extends TabActivity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		OsmandApplication app = (OsmandApplication) getApplication();
+		OsmandApplication app = getMyApplication();
 		app.applyTheme(this);
 		super.onCreate(savedInstanceState);
 
 		app.logEvent("myplaces_open");
 
-		importHelper = new ImportHelper(this, getMyApplication(), null);
+		importHelper = new ImportHelper(this, app, null);
 
 		//noinspection ConstantConditions
 		getSupportActionBar().setTitle(R.string.shared_string_my_places);
 		getSupportActionBar().setElevation(0);
 
 		setContentView(R.layout.tab_content);
+		viewPager = findViewById(R.id.pager);
+		
 		List<TabItem> mTabs = getTabItems();
 		setTabs(mTabs);
 
-		viewPager = findViewById(R.id.pager);
 		if (savedInstanceState == null) {
 			Intent intent = getIntent();
 			if (intent != null && intent.hasExtra(MapActivity.INTENT_PARAMS)) {
@@ -179,20 +180,19 @@ public class FavoritesActivity extends TabActivity {
 	}
 
 	private void setTabs(List<TabItem> mTabs) {
-		PagerSlidingTabStrip mSlidingTabLayout = (PagerSlidingTabStrip) findViewById(R.id.sliding_tabs);
-		OsmandSettings settings = ((OsmandApplication) getApplication()).getSettings();
-		ViewPager mViewPager = (ViewPager) findViewById(R.id.pager);
+		PagerSlidingTabStrip mSlidingTabLayout = findViewById(R.id.sliding_tabs);
+		OsmandSettings settings = getMyApplication().getSettings();
 		Integer tabId = settings.FAVORITES_TAB.get();
 		int tab = 0;
-		for(int i = 0; i < mTabs.size(); i++) {
-			if(mTabs.get(i).resId == tabId) {
+		for (int i = 0; i < mTabs.size(); i++) {
+			if (mTabs.get(i).resId == tabId) {
 				tab = i;
 			}
 		}
 		tabSize = mTabs.size();
-		setViewPagerAdapter(mViewPager, mTabs);
-		mSlidingTabLayout.setViewPager(mViewPager);
-		mViewPager.setCurrentItem(tab);
+		setViewPagerAdapter(viewPager, mTabs);
+		mSlidingTabLayout.setViewPager(viewPager);
+		viewPager.setCurrentItem(tab);
 	}
 
 	private List<TabItem> getTabItems() {
@@ -229,14 +229,33 @@ public class FavoritesActivity extends TabActivity {
 		if (mTabs.size() != tabSize) {
 			setTabs(mTabs);
 		}
+		viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+			@Override
+			public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+			}
+
+			@Override
+			public void onPageSelected(int position) {
+				OsmandApplication app = getMyApplication();
+				if (app != null) {
+					app.getSettings().FAVORITES_TAB.set(mTabs.get(position).resId);
+				}
+			}
+
+			@Override
+			public void onPageScrollStateChanged(int state) {
+			}
+		});
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		viewPager.clearOnPageChangeListeners();
 	}
 
 	public OsmandApplication getMyApplication() {
 		return (OsmandApplication) getApplication();
-	}
-
-	private OsmAndLocationProvider getLocationProvider() {
-		return getMyApplication().getLocationProvider();
 	}
 
 	@Override
@@ -298,4 +317,3 @@ public class FavoritesActivity extends TabActivity {
 		context.startActivity(intent);
 	}
 }
-

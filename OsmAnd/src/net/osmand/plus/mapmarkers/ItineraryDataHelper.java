@@ -73,6 +73,27 @@ public class ItineraryDataHelper {
 		this.mapMarkersHelper = mapMarkersHelper;
 	}
 
+	public long getLastModifiedTime() {
+		File internalFile = getInternalFile();
+		File externalFile = getExternalFile();
+		if (externalFile.exists()) {
+			return externalFile.lastModified();
+		} else if (internalFile.exists()) {
+			return internalFile.lastModified();
+		}
+		return 0;
+	}
+
+	public void setLastModifiedTime(long lastModifiedTime) {
+		File internalFile = getInternalFile();
+		File externalFile = getExternalFile();
+		if (externalFile.exists()) {
+			externalFile.setLastModified(lastModifiedTime);
+		} else if (internalFile.exists()) {
+			internalFile.setLastModified(lastModifiedTime);
+		}
+	}
+
 	private File getInternalFile() {
 		return app.getFileStreamPath(FILE_TO_BACKUP);
 	}

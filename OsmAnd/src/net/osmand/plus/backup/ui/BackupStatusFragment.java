@@ -14,25 +14,29 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.backup.BackupHelper.BackupInfo;
+import net.osmand.plus.backup.BackupHelper;
+import net.osmand.plus.backup.BackupHelper.OnDeleteFilesListener;
 import net.osmand.plus.backup.NetworkSettingsHelper.BackupExportListener;
+import net.osmand.plus.backup.PrepareBackupResult;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
-import net.osmand.plus.backup.ui.cards.BackupStatusCard;
+import net.osmand.plus.backup.RemoteFile;
 import net.osmand.plus.backup.ui.cards.BackupUploadCard;
 import net.osmand.plus.backup.ui.cards.LocalBackupCard;
+import net.osmand.plus.backup.ui.cards.RestoreBackupCard;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
+import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
-public class BackupStatusFragment extends BaseOsmAndFragment implements CardListener, BackupExportListener {
+import java.util.List;
+import java.util.Map;
+
+public class BackupStatusFragment extends BaseOsmAndFragment implements BackupExportListener,
+		OnDeleteFilesListener, OnPrepareBackupListener, ImportListener {
 
 	private OsmandApplication app;
+	private BackupHelper backupHelper;
 
-	private BackupInfo backupInfo;
-	private String error;
-
-	private BackupStatusCard statusCard;
 	private BackupUploadCard uploadCard;
 
 	private ProgressBar progressBar;
@@ -49,6 +53,7 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements CardList
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = requireMyApplication();
+		backupHelper = app.getBackupHelper();
 		nightMode = !app.getSettings().isLightContent();
 	}
 
@@ -61,10 +66,20 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements CardList
 		progressBar = view.findViewById(R.id.progress_bar);
 		cardsContainer = view.findViewById(R.id.cards_container);
 
-		updateCards();
-		prepareBackup();
-
 		return view;
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		updateCards();
+		backupHelper.addPrepareBackupListener(this);
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		backupHelper.removePrepareBackupListener(this);
 	}
 
 	private void updateCards() {
@@ -72,47 +87,23 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements CardList
 		if (mapActivity != null) {
 			cardsContainer.removeAllViews();
 
-			if (backupInfo != null && app.getNetworkSettingsHelper().isBackupExporting()) {
-				showUploadCard();
-			} else if (backupInfo != null || error != null) {
-				statusCard = new BackupStatusCard(mapActivity, backupInfo, error);
-				statusCard.setListener(this);
-				cardsContainer.addView(statusCard.build(mapActivity));
-			}
+			uploadCard = new BackupUploadCard(mapActivity, backupHelper.getBackup(), this, this);
+			cardsContainer.addView(uploadCard.build(mapActivity), 0);
+
+			cardsContainer.addView(new RestoreBackupCard(mapActivity).build(mapActivity));
 			cardsContainer.addView(new LocalBackupCard(mapActivity).build(mapActivity));
 		}
 	}
 
-	private void hideStatusCard() {
-		if (statusCard != null && statusCard.getView() != null) {
-			cardsContainer.removeView(statusCard.getView());
-		}
+	@Override
+	public void onBackupPreparing() {
+		AndroidUiHelper.setVisibility(View.VISIBLE, progressBar);
 	}
 
-	private void showUploadCard() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			uploadCard = new BackupUploadCard(mapActivity, backupInfo, this);
-			uploadCard.setListener(this);
-			cardsContainer.addView(uploadCard.build(mapActivity), 0);
-		}
-	}
-
-	private void prepareBackup() {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
-			AndroidUiHelper.setVisibility(View.VISIBLE, progressBar);
-			app.getBackupHelper().prepareBackupInfo(new OnPrepareBackupListener() {
-
-				@Override
-				public void onBackupPrepared(@Nullable BackupInfo backupInfo, String error) {
-					AndroidUiHelper.setVisibility(View.INVISIBLE, progressBar);
-					BackupStatusFragment.this.error = error;
-					BackupStatusFragment.this.backupInfo = backupInfo;
-					updateCards();
-				}
-			});
-		}
+	@Override
+	public void onBackupPrepared(@Nullable PrepareBackupResult backupResult) {
+		AndroidUiHelper.setVisibility(View.INVISIBLE, progressBar);
+		updateCards();
 	}
 
 	@Nullable
@@ -126,29 +117,7 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements CardList
 	}
 
 	@Override
-	public void onCardLayoutNeeded(@NonNull BaseCard card) {
-
-	}
-
-	@Override
-	public void onCardPressed(@NonNull BaseCard card) {
-
-	}
-
-	@Override
-	public void onCardButtonPressed(@NonNull BaseCard card, int buttonIndex) {
-		if (card instanceof BackupStatusCard) {
-			if (buttonIndex == BackupStatusCard.RETRY_BUTTON_INDEX) {
-				prepareBackup();
-			} else if (buttonIndex == BackupStatusCard.BACKUP_BUTTON_INDEX) {
-				hideStatusCard();
-				showUploadCard();
-			}
-		}
-	}
-
-	@Override
-	public void onBackupExportStarted() {
+	public void onBackupExportStarted(int itemsCount) {
 		if (uploadCard != null) {
 			uploadCard.update();
 		}
@@ -163,6 +132,47 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements CardList
 
 	@Override
 	public void onBackupExportFinished(boolean succeed) {
-		prepareBackup();
+		backupHelper.prepareBackup();
+	}
+
+	@Override
+	public void onBackupExportItemStarted(@NonNull String type, @NonNull String fileName, int work) {
+		if (uploadCard != null) {
+			uploadCard.onBackupExportItemStarted(type, fileName, work);
+		}
+	}
+
+	@Override
+	public void onBackupExportItemFinished(@NonNull String type, @NonNull String fileName) {
+		if (uploadCard != null) {
+			uploadCard.onBackupExportItemFinished(type, fileName);
+		}
+	}
+
+	@Override
+	public void onBackupExportItemProgress(@NonNull String type, @NonNull String fileName, int value) {
+		if (uploadCard != null) {
+			uploadCard.onBackupExportItemProgress(type, fileName, value);
+		}
+	}
+
+	@Override
+	public void onFileDeleteProgress(@NonNull RemoteFile file) {
+
+	}
+
+	@Override
+	public void onFilesDeleteDone(@NonNull Map<RemoteFile, String> errors) {
+
+	}
+
+	@Override
+	public void onFilesDeleteError(int status, @NonNull String message) {
+
+	}
+
+	@Override
+	public void onImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> items) {
+		backupHelper.prepareBackup();
 	}
 }

@@ -15,6 +15,12 @@ import android.graphics.drawable.LayerDrawable;
 import android.os.AsyncTask;
 import android.util.Pair;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.content.ContextCompat;
+
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
@@ -83,12 +89,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.content.ContextCompat;
 
 import static net.osmand.GPXUtilities.calculateTrackBounds;
 import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
@@ -785,7 +785,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			return scaleType;
 		} else {
 			if (isCurrentTrack) {
-				currentTrackScaleType.set(null);
+				return null;
 			} else {
 				gpxDbHelper.updateGradientScaleType(dataItem, null);
 			}
@@ -947,10 +947,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			Pair<WptPt, WptPt> points = findPointsNearSegments(selectedGpxFile.getPointsToDisplay(), tb, r, mx, my);
 			if (points != null) {
 				LatLon latLon = tb.getLatLonFromPixel(mx, my);
-				SelectedGpxPoint selectedGpxPoint =
-						createSelectedGpxPoint(selectedGpxFile, points.first, points.second, latLon);
-				res.add(selectedGpxPoint);
-				break;
+				res.add(createSelectedGpxPoint(selectedGpxFile, points.first, points.second, latLon));
 			}
 		}
 	}
@@ -1176,10 +1173,18 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 			if (!Algorithms.isEmpty(trackPoints)) {
 				MapActivity mapActivity = (MapActivity) view.getContext();
-				SelectedGpxPoint selectedGpxPoint = (SelectedGpxPoint) trackPoints.get(0);
 				LatLon latLon = tileBox.getLatLonFromPixel(point.x, point.y);
-				PointDescription description = getObjectName(selectedGpxPoint);
-				mapActivity.getContextMenu().show(latLon, description, selectedGpxPoint);
+				ContextMenuLayer contextMenuLayer = mapActivity.getMapLayers().getContextMenuLayer();
+				if (trackPoints.size() == 1) {
+					SelectedGpxPoint gpxPoint = (SelectedGpxPoint) trackPoints.get(0);
+					contextMenuLayer.showContextMenu(latLon, getObjectName(gpxPoint), gpxPoint, this);
+				} else if (trackPoints.size() > 1) {
+					Map<Object, IContextMenuProvider> selectedObjects = new HashMap<>();
+					for (Object object : trackPoints) {
+						selectedObjects.put(object, this);
+					}
+					contextMenuLayer.showContextMenuForSelectedObjects(latLon, selectedObjects);
+				}
 				return true;
 			}
 		}

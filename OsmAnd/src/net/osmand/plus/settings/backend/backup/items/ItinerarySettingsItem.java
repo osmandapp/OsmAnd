@@ -79,8 +79,13 @@ public class ItinerarySettingsItem extends CollectionSettingsItem<MapMarkersGrou
 	}
 
 	@Override
-	protected long getLocalModifiedTime() { // TODO
-		return 0;
+	public long getLocalModifiedTime() {
+		return markersHelper.getDataHelper().getLastModifiedTime();
+	}
+
+	@Override
+	public void setLocalModifiedTime(long lastModifiedTime) {
+		markersHelper.getDataHelper().setLastModifiedTime(lastModifiedTime);
 	}
 
 	@Override

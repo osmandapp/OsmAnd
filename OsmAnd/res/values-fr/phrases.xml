@@ -3952,4 +3952,8 @@
     <string name="poi_service_vehicle_rental_yes">Location de voitures</string>
     <string name="poi_planetarium">Planétarium</string>
     <string name="poi_service_vehicle_inspection_yes">Contrôle technique</string>
+    <string name="poi_fuel_propane">Propane</string>
+    <string name="poi_climbing_grade_uiaa_min">Voie la plus simple (cotation UIAA)</string>
+    <string name="poi_climbing_grade_french_min">Voie la plus simple (cotation française)</string>
+    <string name="poi_climbing_grade_saxon_min">Voie la plus simple (cotation allemande)</string>
 </resources>

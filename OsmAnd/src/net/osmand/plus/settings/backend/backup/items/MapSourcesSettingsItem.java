@@ -54,8 +54,13 @@ public class MapSourcesSettingsItem extends CollectionSettingsItem<ITileSource> 
 	}
 
 	@Override
-	protected long getLocalModifiedTime() { // TODO
-		return 0;
+	public long getLocalModifiedTime() {
+		return app.getSettings().getTileSourcesLastModifiedTime();
+	}
+
+	@Override
+	public void setLocalModifiedTime(long lastModifiedTime) {
+		app.getSettings().setTileSourcesLastModifiedTime(lastModifiedTime);
 	}
 
 	@Override
@@ -136,7 +141,7 @@ public class MapSourcesSettingsItem extends CollectionSettingsItem<ITileSource> 
 	@NonNull
 	@Override
 	public String getPublicName(@NonNull Context ctx) {
-		return "map_sources";
+		return ctx.getString(R.string.quick_action_map_source_title);
 	}
 
 	@Override

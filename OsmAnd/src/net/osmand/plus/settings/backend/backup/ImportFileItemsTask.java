@@ -7,7 +7,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.backup.FileSettingsHelper.SettingsImportListener;
+import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
 import java.io.File;
@@ -20,14 +20,14 @@ public class ImportFileItemsTask extends AsyncTask<Void, Void, Boolean> {
 	private final OsmandApplication app;
 	private final SettingsImporter importer;
 	private final File file;
-	private final SettingsImportListener listener;
+	private final ImportListener listener;
 	private final List<SettingsItem> items;
 	private final StateChangedListener<String> localeListener;
 	private boolean needRestart = false;
 
 	ImportFileItemsTask(@NonNull FileSettingsHelper helper,
 						@NonNull File file,
-						@Nullable SettingsImportListener listener,
+						@Nullable ImportListener listener,
 						@NonNull List<SettingsItem> items) {
 		this.helper = helper;
 		this.app = helper.getApp();

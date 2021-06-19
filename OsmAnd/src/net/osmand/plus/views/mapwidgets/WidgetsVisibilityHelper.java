@@ -136,6 +136,10 @@ public class WidgetsVisibilityHelper {
 				&& (additionalDialogsHide || !isPortrait());
 	}
 
+	public boolean shouldShowDownloadMapWidget() {
+		return !isInRouteLineAppearanceMode();
+	}
+
 	private boolean isQuickActionLayerOn() {
 		return mapLayers.getMapQuickActionLayer().isLayerOn();
 	}

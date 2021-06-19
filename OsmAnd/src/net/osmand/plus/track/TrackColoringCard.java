@@ -11,14 +11,13 @@ import android.widget.TextView;
 import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.AndroidUtils;
-import net.osmand.GPXUtilities.Elevation;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 
 import org.apache.commons.logging.Log;
 
@@ -31,19 +30,21 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class TrackColoringCard extends BaseCard {
+public class TrackColoringCard extends MapBaseCard {
 
 	private final static String SOLID_COLOR = "solid_color";
 	private static final Log log = PlatformUtil.getLog(TrackColoringCard.class);
 
-	private GPXTrackAnalysis gpxTrackAnalysis;
-	private TrackDrawInfo trackDrawInfo;
+	private final GPXTrackAnalysis gpxTrackAnalysis;
+	private final TrackDrawInfo trackDrawInfo;
 
 	private TrackColoringAdapter coloringAdapter;
 	private TrackAppearanceItem selectedAppearanceItem;
 	private List<TrackAppearanceItem> appearanceItems;
 
-	public TrackColoringCard(MapActivity mapActivity, GPXTrackAnalysis gpxTrackAnalysis, TrackDrawInfo trackDrawInfo) {
+	public TrackColoringCard(@NonNull MapActivity mapActivity,
+	                         @NonNull GPXTrackAnalysis gpxTrackAnalysis,
+	                         @NonNull TrackDrawInfo trackDrawInfo) {
 		super(mapActivity);
 		this.trackDrawInfo = trackDrawInfo;
 		this.gpxTrackAnalysis = gpxTrackAnalysis;
@@ -84,8 +85,8 @@ public class TrackColoringCard extends BaseCard {
 		items.add(new TrackAppearanceItem(SOLID_COLOR, app.getString(R.string.track_coloring_solid), R.drawable.ic_action_circle, true));
 		for (GradientScaleType scaleType : GradientScaleType.values()) {
 			boolean isAvailable = gpxTrackAnalysis.isColorizationTypeAvailable(scaleType.toColorizationType());
-			items.add(new TrackAppearanceItem(scaleType.getTypeName(),
-					scaleType.getHumanString(app), scaleType.getIconId(), isAvailable));
+			items.add(new TrackAppearanceItem(scaleType.getTypeName(), scaleType.getHumanString(app),
+					scaleType.getIconId(), isAvailable || trackDrawInfo.isCurrentRecording()));
 		}
 		return items;
 	}

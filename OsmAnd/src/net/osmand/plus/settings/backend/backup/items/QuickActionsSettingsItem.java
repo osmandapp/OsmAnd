@@ -56,8 +56,13 @@ public class QuickActionsSettingsItem extends CollectionSettingsItem<QuickAction
 	}
 
 	@Override
-	protected long getLocalModifiedTime() { // TODO
-		return 0;
+	public long getLocalModifiedTime() {
+		return actionRegistry.getLastModifiedTime();
+	}
+
+	@Override
+	public void setLocalModifiedTime(long lastModifiedTime) {
+		actionRegistry.setLastModifiedTime(lastModifiedTime);
 	}
 
 	@Override
@@ -107,7 +112,7 @@ public class QuickActionsSettingsItem extends CollectionSettingsItem<QuickAction
 	@NonNull
 	@Override
 	public String getPublicName(@NonNull Context ctx) {
-		return "quick_actions";
+		return ctx.getString(R.string.shared_string_quick_actions);
 	}
 
 	@Override

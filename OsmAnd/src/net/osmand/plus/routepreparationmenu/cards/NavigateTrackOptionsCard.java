@@ -14,7 +14,7 @@ import static net.osmand.plus.UiUtilities.CustomRadioButtonType;
 import static net.osmand.plus.UiUtilities.CustomRadioButtonType.START;
 import static net.osmand.plus.UiUtilities.CustomRadioButtonType.END;
 
-public class NavigateTrackOptionsCard extends BaseCard {
+public class NavigateTrackOptionsCard extends MapBaseCard {
 
 	private LocalRoutingParameter passWholeRoute;
 	private LocalRoutingParameter navigationType;

@@ -1,5 +1,6 @@
 package net.osmand.plus.osmedit;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +8,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import androidx.annotation.NonNull;
+
+import net.osmand.plus.backup.BackupHelper;
 
 public class OsmBugsDbHelper extends SQLiteOpenHelper {
 
@@ -23,9 +28,15 @@ public class OsmBugsDbHelper extends SQLiteOpenHelper {
 			OSMBUGS_COL_ID + " INTEGER, " + OSMBUGS_COL_TEXT + " TEXT,  " + //$NON-NLS-1$ //$NON-NLS-2$
 			OSMBUGS_COL_LAT + " double, " + OSMBUGS_COL_LON + " double, " + //$NON-NLS-1$ //$NON-NLS-2$
 			OSMBUGS_COL_ACTION + " TEXT, " + OSMBUGS_COL_AUTHOR + " TEXT);"; //$NON-NLS-1$ //$NON-NLS-2$
+
+	private static final String OSMBUGS_DB_LAST_MODIFIED_NAME = "osmbugs";
+
+	private final Context context;
 	List<OsmNotesPoint> cache = null;
-	public OsmBugsDbHelper(Context context) {
+
+	public OsmBugsDbHelper(@NonNull Context context) {
 		super(context, OSMBUGS_DB_NAME, null, DATABASE_VERSION);
+		this.context = context;
 	}
 
 	@Override
@@ -35,6 +46,24 @@ public class OsmBugsDbHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+	}
+
+	public long getLastModifiedTime() {
+		long lastModifiedTime = BackupHelper.getLastModifiedTime(context, OSMBUGS_DB_LAST_MODIFIED_NAME);
+		if (lastModifiedTime == 0) {
+			File dbFile = context.getDatabasePath(OSMBUGS_DB_NAME);
+			lastModifiedTime = dbFile.exists() ? dbFile.lastModified() : 0;
+			BackupHelper.setLastModifiedTime(context, OSMBUGS_DB_LAST_MODIFIED_NAME, lastModifiedTime);
+		}
+		return lastModifiedTime;
+	}
+
+	public void setLastModifiedTime(long lastModifiedTime) {
+		BackupHelper.setLastModifiedTime(context, OSMBUGS_DB_LAST_MODIFIED_NAME, lastModifiedTime);
+	}
+
+	private void updateLastModifiedTime() {
+		BackupHelper.setLastModifiedTime(context, OSMBUGS_DB_LAST_MODIFIED_NAME);
 	}
 
 	public List<OsmNotesPoint> getOsmbugsPoints() {
@@ -54,6 +83,7 @@ public class OsmBugsDbHelper extends SQLiteOpenHelper {
 							" SET " + OSMBUGS_COL_TEXT + " = ? " +
 							"WHERE " + OSMBUGS_COL_ID + " = ?", new Object[]{text, id});
 			checkOsmbugsPoints(db);
+			updateLastModifiedTime();
 			db.close();
 			return true;
 		}
@@ -69,6 +99,7 @@ public class OsmBugsDbHelper extends SQLiteOpenHelper {
 							new Object[] { p.getId(), p.getText(), p.getLatitude(), p.getLongitude(), 
 							OsmPoint.stringAction.get(p.getAction()), p.getAuthor() }); //$NON-NLS-1$ //$NON-NLS-2$
 			checkOsmbugsPoints(db);
+			updateLastModifiedTime();
 			db.close();
 			return true;
 		}
@@ -81,6 +112,7 @@ public class OsmBugsDbHelper extends SQLiteOpenHelper {
 			db.execSQL("DELETE FROM " + OSMBUGS_TABLE_NAME +
 					" WHERE " + OSMBUGS_COL_ID + " = ?", new Object[] { p.getId() }); //$NON-NLS-1$ //$NON-NLS-2$
 			checkOsmbugsPoints(db);
+			updateLastModifiedTime();
 			db.close();
 			return true;
 		}

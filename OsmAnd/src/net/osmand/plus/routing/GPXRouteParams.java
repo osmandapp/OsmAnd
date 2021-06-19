@@ -46,20 +46,6 @@ public class GPXRouteParams {
 		return wpt;
 	}
 
-	public Location getStartPointForRoute() {
-		if (!points.isEmpty()) {
-			return points.get(0);
-		}
-		return null;
-	}
-
-	public Location getEndPointForRoute() {
-		if (!points.isEmpty()) {
-			return points.get(points.size());
-		}
-		return null;
-	}
-
 	public LatLon getLastPoint() {
 		if (!points.isEmpty()) {
 			Location l = points.get(points.size() - 1);
@@ -76,7 +62,7 @@ public class GPXRouteParams {
 		useIntermediatePointsRTE = builder.isUseIntermediatePointsRTE();
 		builder.calculateOsmAndRoute = false; // Disabled temporary builder.calculateOsmAndRoute;
 		if (!file.isPointsEmpty()) {
-			wpt = new ArrayList<LocationPoint>(file.getPoints().size());
+			wpt = new ArrayList<>(file.getPoints().size());
 			for (WptPt w : file.getPoints()) {
 				wpt.add(new WptLocationPoint(w));
 			}
@@ -136,14 +122,14 @@ public class GPXRouteParams {
 		boolean calculateOsmAndRoute = false;
 		// parameters
 		private final GPXFile file;
+		private final boolean leftSide;
 		private boolean reverse;
-		private boolean leftSide;
 		private boolean passWholeRoute;
 		private boolean calculateOsmAndRouteParts;
 		private int selectedSegment = -1;
 
 		public GPXRouteParamsBuilder(GPXFile file, OsmandSettings settings) {
-			leftSide = settings.DRIVING_REGION.get().leftHandDriving;
+			this.leftSide = settings.DRIVING_REGION.get().leftHandDriving;
 			this.file = file;
 		}
 

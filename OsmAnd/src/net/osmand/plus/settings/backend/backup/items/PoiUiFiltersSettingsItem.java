@@ -57,8 +57,13 @@ public class PoiUiFiltersSettingsItem extends CollectionSettingsItem<PoiUIFilter
 	}
 
 	@Override
-	protected long getLocalModifiedTime() { // TODO
-		return 0;
+	public long getLocalModifiedTime() {
+		return app.getPoiFilters().getLastModifiedTime();
+	}
+
+	@Override
+	public void setLocalModifiedTime(long lastModifiedTime) {
+		app.getPoiFilters().setLastModifiedTime(lastModifiedTime);
 	}
 
 	@Override
@@ -112,7 +117,7 @@ public class PoiUiFiltersSettingsItem extends CollectionSettingsItem<PoiUIFilter
 	@NonNull
 	@Override
 	public String getPublicName(@NonNull Context ctx) {
-		return "poi_ui_filters";
+		return ctx.getString(R.string.poi_dialog_poi_type);
 	}
 
 	@Override

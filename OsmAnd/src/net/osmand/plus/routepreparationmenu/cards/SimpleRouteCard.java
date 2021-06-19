@@ -23,7 +23,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SimpleRouteCard extends BaseCard {
+public class SimpleRouteCard extends MapBaseCard {
 
 	private MapActivity mapActivity;
 	private GPXFile gpx;

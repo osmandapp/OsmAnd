@@ -4,14 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.backup.BackupHelper.BackupInfo;
 import net.osmand.plus.backup.BackupHelper.OnCollectLocalFilesListener;
 import net.osmand.plus.backup.BackupHelper.OnGenerateBackupInfoListener;
 import net.osmand.plus.backup.NetworkSettingsHelper.BackupCollectListener;
+import net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
@@ -20,12 +19,8 @@ public class PrepareBackupTask {
 	private final OsmandApplication app;
 	private final BackupHelper backupHelper;
 
+	private PrepareBackupResult backup;
 	private final OnPrepareBackupListener listener;
-
-	private BackupInfo result;
-	private List<RemoteFile> remoteFiles;
-	private List<LocalFile> fileInfos;
-	private String error;
 
 	private Stack<TaskType> runningTasks = new Stack<>();
 
@@ -36,7 +31,8 @@ public class PrepareBackupTask {
 	}
 
 	public interface OnPrepareBackupListener {
-		void onBackupPrepared(@Nullable BackupInfo backupInfo, @Nullable String error);
+		void onBackupPreparing();
+		void onBackupPrepared(@Nullable PrepareBackupResult backupResult);
 	}
 
 	public PrepareBackupTask(@NonNull OsmandApplication app, @Nullable OnPrepareBackupListener listener) {
@@ -45,27 +41,24 @@ public class PrepareBackupTask {
 		this.listener = listener;
 	}
 
-	public BackupInfo getResult() {
-		return result;
-	}
-
-	public String getError() {
-		return error;
+	@Nullable
+	public PrepareBackupResult getResult() {
+		return backup;
 	}
 
 	public boolean prepare() {
 		if (!runningTasks.empty()) {
 			return false;
 		}
+		if (listener != null) {
+			listener.onBackupPreparing();
+		}
 		initTasks();
 		return runTasks();
 	}
 
 	private void initTasks() {
-		result = null;
-		remoteFiles = null;
-		fileInfos = null;
-		error = null;
+		backup = new PrepareBackupResult();
 		Stack<TaskType> tasks = new Stack<>();
 		TaskType[] types = TaskType.values();
 		for (int i = types.length - 1; i >= 0; i--) {
@@ -107,64 +100,64 @@ public class PrepareBackupTask {
 	private void doCollectLocalFiles() {
 		backupHelper.collectLocalFiles(new OnCollectLocalFilesListener() {
 			@Override
-			public void onFileCollected(@NonNull LocalFile fileInfo) {
+			public void onFileCollected(@NonNull LocalFile localFile) {
 			}
 
 			@Override
-			public void onFilesCollected(@NonNull List<LocalFile> fileInfos) {
-				PrepareBackupTask.this.fileInfos = fileInfos;
+			public void onFilesCollected(@NonNull List<LocalFile> localFiles) {
+				backup.setLocalFiles(localFiles);
 				onTaskFinished(TaskType.COLLECT_LOCAL_FILES);
 			}
 		});
 	}
 
 	private void doCollectRemoteFiles() {
-		app.getNetworkSettingsHelper().collectSettings("", 0, new BackupCollectListener() {
-			@Override
-			public void onBackupCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items) {
-				if (succeed) {
-					List<RemoteFile> remoteFiles = new ArrayList<>();
-					for (RemoteFile remoteFile : app.getBackupHelper().getRemoteFiles()) {
-						if (!remoteFile.getName().endsWith(BackupHelper.INFO_EXT)) {
-							remoteFiles.add(remoteFile);
+		app.getNetworkSettingsHelper().collectSettings("", 0, false, new BackupCollectListener() {
+					@Override
+					public void onBackupCollectFinished(boolean succeed, boolean empty,
+														@NonNull List<SettingsItem> items,
+														@NonNull List<RemoteFile> remoteFiles) {
+						if (succeed) {
+							backup.setSettingsItems(items);
+							backup.setRemoteFiles(remoteFiles);
+						} else {
+							onError("Download remote items error");
 						}
+						onTaskFinished(TaskType.COLLECT_REMOTE_FILES);
 					}
-					PrepareBackupTask.this.remoteFiles = remoteFiles;
-				} else {
-					onError("Download remote items error");
 				}
-				onTaskFinished(TaskType.COLLECT_REMOTE_FILES);
-			}
-		});
+		);
 	}
 
 	private void doGenerateBackupInfo() {
-		if (fileInfos == null || remoteFiles == null) {
+		if (backup.getLocalFiles() == null || backup.getRemoteFiles() == null) {
 			onTaskFinished(TaskType.GENERATE_BACKUP_INFO);
 			return;
 		}
-		backupHelper.generateBackupInfo(fileInfos, remoteFiles, new OnGenerateBackupInfoListener() {
-			@Override
-			public void onBackupInfoGenerated(@Nullable BackupInfo backupInfo, @Nullable String error) {
-				if (Algorithms.isEmpty(error)) {
-					PrepareBackupTask.this.result = backupInfo;
-				} else {
-					onError(error);
-				}
-				onTaskFinished(TaskType.GENERATE_BACKUP_INFO);
-			}
-		});
+		backupHelper.generateBackupInfo(backup.getLocalFiles(), backup.getRemoteFiles(RemoteFilesType.UNIQUE),
+				backup.getRemoteFiles(RemoteFilesType.DELETED), new OnGenerateBackupInfoListener() {
+					@Override
+					public void onBackupInfoGenerated(@Nullable BackupInfo backupInfo, @Nullable String error) {
+						if (Algorithms.isEmpty(error)) {
+							backup.setBackupInfo(backupInfo);
+						} else {
+							onError(error);
+						}
+						onTaskFinished(TaskType.GENERATE_BACKUP_INFO);
+					}
+				});
 	}
 
 	private void onError(@NonNull String message) {
-		this.error = message;
+		backup.setError(message);
 		runningTasks.clear();
 		onTasksDone();
 	}
 
 	private void onTasksDone() {
+		backupHelper.setBackup(backup);
 		if (listener != null) {
-			listener.onBackupPrepared(result, error);
+			listener.onBackupPrepared(backup);
 		}
 	}
 }
