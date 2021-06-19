@@ -137,6 +137,7 @@ class RouteRecalculationHelper {
 	}
 
 	private void setNewRoute(RouteCalculationResult prevRoute, final RouteCalculationResult res, Location start) {
+		routingHelper.setRoute(res);
 		final boolean newRoute = !prevRoute.isCalculated();
 		if (isFollowingMode()) {
 			Location lastFixedLocation = getLastFixedLocation();
@@ -174,7 +175,8 @@ class RouteRecalculationHelper {
 	void startRouteCalculationThread(RouteCalculationParams params, boolean paramsChanged, boolean updateProgress) {
 		synchronized (routingHelper) {
 			getSettings().LAST_ROUTE_APPLICATION_MODE.set(getAppMode());
-			RouteRecalculationTask newTask = new RouteRecalculationTask(this, params, paramsChanged);
+			RouteRecalculationTask newTask = new RouteRecalculationTask(this,
+					params, paramsChanged, updateProgress);
 			lastTask = newTask;
 			startProgress(params);
 			if (updateProgress) {
@@ -217,19 +219,6 @@ class RouteRecalculationHelper {
 			if (params.mode.getRouteService() == RouteService.OSMAND) {
 				params.calculationProgress = new RouteCalculationProgress();
 				updateProgress = true;
-			} else {
-				params.alternateResultListener = new RouteCalculationParams.RouteCalculationResultListener() {
-					@Override
-					public void onRouteCalculated(RouteCalculationResult route) {
-						app.runInUIThread(new Runnable() {
-
-							@Override
-							public void run() {
-								finishProgress(params);
-							}
-						});
-					}
-				};
 			}
 			if (getLastProjection() != null) {
 				params.currentLocation = getLastFixedLocation();
@@ -302,6 +291,7 @@ class RouteRecalculationHelper {
 		private final RoutingHelper routingHelper;
 		private final RouteCalculationParams params;
 		private final boolean paramsChanged;
+		private final boolean updateProgress;
 
 		private MissingMapsOnlineSearchTask missingMapsOnlineSearchTask;
 
@@ -311,11 +301,13 @@ class RouteRecalculationHelper {
 		List<WorldRegion> missingMaps;
 
 		public RouteRecalculationTask(@NonNull RouteRecalculationHelper routingThreadHelper,
-									  @NonNull RouteCalculationParams params, boolean paramsChanged) {
+									  @NonNull RouteCalculationParams params, boolean paramsChanged,
+									  boolean updateProgress) {
 			this.routingThreadHelper = routingThreadHelper;
 			this.routingHelper = routingThreadHelper.routingHelper;
 			this.params = params;
 			this.paramsChanged = paramsChanged;
+			this.updateProgress = updateProgress;
 			if (params.calculationProgress == null) {
 				params.calculationProgress = new RouteCalculationProgress();
 			}
