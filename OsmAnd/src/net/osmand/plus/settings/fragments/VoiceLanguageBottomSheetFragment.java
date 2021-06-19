@@ -66,9 +66,6 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 	private static final String TAG = TrackSelectSegmentBottomSheet.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(VoiceLanguageBottomSheetFragment.class);
 
-	private static final String VOICE_REC_KEY = OTHER_GROUP.getDefaultId() + "#" + VOICE_REC.getDefaultId() + "#" + VOICE_HEADER_REC.getDefaultId();
-	private static final String VOICE_TTS_KEY = OTHER_GROUP.getDefaultId() + "#" + VOICE_TTS.getDefaultId() + "#" + VOICE_HEADER_TTS.getDefaultId();
-
 	private OsmandApplication app;
 	private OsmandSettings settings;
 	private DownloadIndexesThread downloadThread;
@@ -241,7 +238,6 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 			@Override
 			public boolean onRadioItemClick(RadioItem radioItem, View view) {
 				selectedVoiceType = voiceType;
-				createVoiceView();
 				updateItems();
 				return true;
 			}
