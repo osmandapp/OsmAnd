@@ -1,9 +1,14 @@
 package net.osmand.plus.download;
 
+import net.osmand.Collator;
+import net.osmand.OsmAndCollator;
+import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -32,6 +37,7 @@ public class VoiceIndexes {
 	public void listVoicePrompts(@NonNull List<IndexItem> resources) {
 		voicePromptsTTS.clear();
 		voicePromptsRec.clear();
+
 		Map<String, String> indexFileNames = app.getResourceManager().getIndexFileNames();
 		DateFormat dateFormat = app.getResourceManager().getDateFormat();
 
@@ -46,6 +52,9 @@ public class VoiceIndexes {
 				}
 			}
 		}
+
+		Collections.sort(voicePromptsTTS, createComparator());
+		Collections.sort(voicePromptsRec, createComparator());
 	}
 
 	@NonNull
@@ -81,6 +90,12 @@ public class VoiceIndexes {
 
 	public void setDownloadFromInternetFailed(boolean failed) {
 		this.downloadFromInternetFailed = failed;
+	}
+
+	private Comparator<DownloadItem> createComparator() {
+		Collator collator = OsmAndCollator.primaryCollator();
+		OsmandRegions regions = app.getRegions();
+		return (first, second) -> collator.compare(first.getVisibleName(app, regions), second.getVisibleName(app, regions));
 	}
 
 	public enum VoiceIndexType {
