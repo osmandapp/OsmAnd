@@ -1,5 +1,12 @@
 package net.osmand.plus.routing;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import net.osmand.map.WorldRegion;
+
+import java.util.List;
+
 public interface RouteCalculationProgressCallback {
 
 	void start();
@@ -8,7 +15,7 @@ public interface RouteCalculationProgressCallback {
 
 	void requestPrivateAccessRouting();
 
-	void updateMissingMaps(RouteCalculationParams params);
+	void updateMissingMaps(@Nullable List<WorldRegion> missingMaps, boolean onlineSearch);
 
 	void finish();
 }

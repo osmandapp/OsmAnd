@@ -63,6 +63,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
+import net.osmand.map.WorldRegion;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
@@ -126,7 +127,6 @@ import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenuFragment;
 import net.osmand.plus.routing.IRouteInformationListener;
-import net.osmand.plus.routing.RouteCalculationParams;
 import net.osmand.plus.routing.RouteCalculationProgressCallback;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper.TransportRouteCalculationProgressCallback;
@@ -162,9 +162,7 @@ import net.osmand.router.GeneralRouter;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
-import org.json.JSONException;
 
-import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -538,7 +536,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				if (routingHelper.isPublicTransportMode() || !routingHelper.isOsmandRouting()) {
 					dashboardOnMap.updateRouteCalculationProgress(0);
 				}
-				if (mapRouteInfoMenu.getSuggestedMissingMaps() != null) {
+				if (mapRouteInfoMenu.getSuggestedMaps() != null) {
 					mapRouteInfoMenu.clearSuggestedMissingMaps();
 				}
 			}
@@ -593,14 +591,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 
 			@Override
-			public void updateMissingMaps(RouteCalculationParams params) {
-				try {
-					mapRouteInfoMenu.updateSuggestedMissingMaps(params);
-				} catch (IOException e) {
-					LOG.error("Error while calling updateSuggestedMissingMaps", e);
-				} catch (JSONException e) {
-					LOG.error("Failed write to json", e);
-				}
+			public void updateMissingMaps(@Nullable List<WorldRegion> missingMaps, boolean onlineSearch) {
+				mapRouteInfoMenu.updateSuggestedMissingMaps(missingMaps, onlineSearch);
 			}
 
 			@Override

@@ -12,6 +12,7 @@ import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.QuadRect;
+import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
@@ -60,7 +61,7 @@ public class RouteCalculationResult {
 	protected List<RouteDirectionInfo> cacheAgreggatedDirections;
 	protected List<LocationPoint> locationPoints = new ArrayList<LocationPoint>();
 
-	protected boolean navigationDisabled;
+	protected List<WorldRegion> missingMaps;
 
 	// params
 	protected final ApplicationMode appMode;
@@ -197,8 +198,12 @@ public class RouteCalculationResult {
 		return alarmInfo;
 	}
 
+	public List<WorldRegion> getMissingMaps() {
+		return missingMaps;
+	}
+
 	private static void calculateIntermediateIndexes(Context ctx, List<Location> locations,
-			List<LatLon> intermediates, List<RouteDirectionInfo> localDirections, int[] intermediatePoints) {
+													 List<LatLon> intermediates, List<RouteDirectionInfo> localDirections, int[] intermediatePoints) {
 		if(intermediates != null && localDirections != null) {
 			int[] interLocations = new int[intermediates.size()];
 			for(int currentIntermediate = 0; currentIntermediate < intermediates.size(); currentIntermediate++ ) {
@@ -1276,7 +1281,7 @@ public class RouteCalculationResult {
 	}
 
 	public int getCurrentStraightAngleRoute() {
-		return currentStraightAngleRoute > currentRoute ? currentStraightAngleRoute : currentRoute;
+		return Math.max(currentStraightAngleRoute, currentRoute);
 	}
 
 	public Location getCurrentStraightAnglePoint() {
@@ -1286,14 +1291,6 @@ public class RouteCalculationResult {
 	public void updateNextVisiblePoint(int nextPoint, Location mp) {
 		currentStraightAnglePoint = mp;
 		currentStraightAngleRoute = nextPoint;
-	}
-
-	public boolean isNavigationDisabled() {
-		return navigationDisabled;
-	}
-
-	public void setNavigationDisabled(boolean navigationDisabled) {
-		this.navigationDisabled = navigationDisabled;
 	}
 
 	public static class NextDirectionInfo {

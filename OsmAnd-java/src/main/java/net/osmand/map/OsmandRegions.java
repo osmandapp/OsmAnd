@@ -52,8 +52,8 @@ public class OsmandRegions {
 	public static final String FIELD_LEFT_HAND_DRIVING = "region_left_hand_navigation";
 	public static final String FIELD_WIKI_LINK = "region_wiki_link";
 	public static final String FIELD_POPULATION = "region_population";
-	public static final String STD_FORMAT = "%1$s %2$s";
-	public static final String REVERSE_FORMAT = "%2$s, %1$s";
+	public static final String LOCALE_NAME_DEFAULT_FORMAT = "%1$s %2$s";
+	public static final String LOCALE_NAME_REVERSED_FORMAT = "%2$s, %1$s";
 
 	private BinaryMapIndexReader reader;
 	private String locale = "en";
@@ -167,19 +167,15 @@ public class OsmandRegions {
 
 
 	public String getLocaleName(String downloadName, boolean includingParent) {
-		final String lc = downloadName.toLowerCase();
-		if (downloadNamesToFullNames.containsKey(lc)) {
-			String fullName = downloadNamesToFullNames.get(lc);
-			return getLocaleNameByFullName(fullName, includingParent, STD_FORMAT);
-		}
-		return downloadName.replace('_', ' ');
+		return getLocaleName(downloadName, includingParent, false);
 	}
 
-	public String getLocaleName(String downloadName) {
+	public String getLocaleName(String downloadName, boolean includingParent, boolean reversed) {
 		final String lc = downloadName.toLowerCase();
 		if (downloadNamesToFullNames.containsKey(lc)) {
 			String fullName = downloadNamesToFullNames.get(lc);
-			return getLocaleNameByFullName(fullName, true, REVERSE_FORMAT);
+			return getLocaleNameByFullName(fullName, includingParent, reversed
+					? LOCALE_NAME_REVERSED_FORMAT : LOCALE_NAME_DEFAULT_FORMAT);
 		}
 		return downloadName.replace('_', ' ');
 	}
@@ -812,20 +808,17 @@ public class OsmandRegions {
 		} catch (IOException e) {
 			throw new IOException("Error while calling queryBbox");
 		}
-
-		if (mapDataObjects != null) {
-			Iterator<BinaryMapDataObject> it = mapDataObjects.iterator();
-			while (it.hasNext()) {
-				BinaryMapDataObject o = it.next();
-				if (o.getTypes() != null) {
-					WorldRegion downloadRegion = getRegionData(getFullName(o));
-					if ( downloadRegion == null
-							|| !downloadRegion.isRegionMapDownload()
-							|| !contain(o, point31x, point31y)) {
-						it.remove();
-					} else {
-						foundObjects.put(downloadRegion, o);
-					}
+		Iterator<BinaryMapDataObject> it = mapDataObjects.iterator();
+		while (it.hasNext()) {
+			BinaryMapDataObject o = it.next();
+			if (o.getTypes() != null) {
+				WorldRegion downloadRegion = getRegionData(getFullName(o));
+				if ( downloadRegion == null
+						|| !downloadRegion.isRegionMapDownload()
+						|| !contain(o, point31x, point31y)) {
+					it.remove();
+				} else {
+					foundObjects.put(downloadRegion, o);
 				}
 			}
 		}

@@ -4,6 +4,8 @@ package net.osmand.plus.routing;
 import android.os.Bundle;
 import android.util.Base64;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.Route;
@@ -76,15 +78,6 @@ public class RouteProvider {
 	private static final int MIN_DISTANCE_FOR_INSERTING_ROUTE_SEGMENT = 60;
 	private static final int ADDITIONAL_DISTANCE_FOR_START_POINT = 300;
 	private static final int MIN_STRAIGHT_DIST = 50000;
-	private static List<WorldRegion> missingMaps;
-
-	public interface OnMissingMapsListener {
-		void onUpdateMissingMaps(List<WorldRegion> missingMaps);
-	}
-	
-	public static void setMissingMapsListener(OnMissingMapsListener eventListener) {
-		eventListener.onUpdateMissingMaps(missingMaps);
-	}
 
 	public static Location createLocation(WptPt pt){
 		Location loc = new Location("OsmandRouteProvider");
@@ -104,7 +97,8 @@ public class RouteProvider {
 	public RouteCalculationResult calculateRouteImpl(RouteCalculationParams params) {
 		long time = System.currentTimeMillis();
 		if (params.start != null && params.end != null) {
-			if(log.isInfoEnabled()){
+			params.routeCalculationStartTime = time;
+			if (log.isInfoEnabled()){
 				log.info("Start finding route from " + params.start + " to " + params.end +" using " + 
 						params.mode.getRouteService().getName()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			}
@@ -115,22 +109,16 @@ public class RouteProvider {
 				if (calcGPXRoute && !params.gpxRoute.calculateOsmAndRoute) {
 					res = calculateGpxRoute(params);
 				} else if (params.mode.getRouteService() == RouteService.OSMAND) {
-					SuggestionsMapsProvider suggestionsMapsProvider = new SuggestionsMapsProvider(params);
-
-					LinkedList<Location> points = suggestionsMapsProvider.getStartFinishIntermediatesPoints("");
-					List<WorldRegion> suggestionsMapsStartFinishIntermediates = suggestionsMapsProvider.getMissingMaps(points);
-
-					List<Location> pointsStraightLine = suggestionsMapsProvider.getLocationBasedOnDistanceInterval(points);
-					if (!Algorithms.isEmpty(suggestionsMapsStartFinishIntermediates)) {
-						missingMaps = suggestionsMapsProvider.getMissingMaps(pointsStraightLine);
-						params.ctx.getRoutingHelper().getRoute().setNavigationDisabled(true);
+					MissingMapsHelper missingMapsHelper = new MissingMapsHelper(params);
+					List<Location> points = missingMapsHelper.getStartFinishIntermediatePoints();
+					List<WorldRegion> missingMaps = missingMapsHelper.getMissingMaps(points);
+					List<Location> pathPoints = missingMapsHelper.getDistributedPathPoints(points);
+					if (!Algorithms.isEmpty(missingMaps)) {
 						res = new RouteCalculationResult("Additional maps available");
+						res.missingMaps = missingMapsHelper.getMissingMaps(pathPoints);
 					} else {
-						params.ctx.getRoutingHelper().getRoute().setNavigationDisabled(false);
-						if (suggestionsMapsProvider.checkIfPointOnWater(points)) {
-							params.missingMaps = suggestionsMapsProvider.getMissingMaps(pointsStraightLine);
-						} else {
-							params.startTimeRouteCalculation = System.currentTimeMillis();
+						if (!missingMapsHelper.isAnyPointOnWater(pathPoints)) {
+							params.missingMaps = missingMapsHelper.getMissingMaps(pathPoints);
 						}
 						res = findVectorMapsRoute(params, calcGPXRoute);
 					}
@@ -1200,12 +1188,11 @@ public class RouteProvider {
 		return new RouteCalculationResult(res, dir, params, null, addMissingTurns);
 	}
 
-	private RouteCalculationResult findStraightRoute(RouteCalculationParams params) {
-		SuggestionsMapsProvider suggestionsMapsProvider = new SuggestionsMapsProvider(params);
-		LinkedList<Location> points = suggestionsMapsProvider.getStartFinishIntermediatesPoints("pnt");
+	private RouteCalculationResult findStraightRoute(@NonNull RouteCalculationParams params) {
+		LinkedList<Location> points = new LinkedList<>();
 		List<Location> segments = new ArrayList<>();
 		points.add(new Location("pnt", params.start.getLatitude(), params.start.getLongitude()));
-		if(params.intermediates != null) {
+		if (params.intermediates != null) {
 			for (LatLon l : params.intermediates) {
 				points.add(new Location("pnt", l.getLatitude(), l.getLongitude()));
 			}
@@ -1213,12 +1200,12 @@ public class RouteProvider {
 		points.add(new Location("", params.end.getLatitude(), params.end.getLongitude()));
 		Location lastAdded = null;
 		float speed = params.mode.getDefaultSpeed();
-		List<RouteDirectionInfo> computeDirections = new ArrayList<RouteDirectionInfo>();
-		while(!points.isEmpty()) {
+		List<RouteDirectionInfo> computeDirections = new ArrayList<>();
+		while (!points.isEmpty()) {
 			Location pl = points.peek();
 			if (lastAdded == null || lastAdded.distanceTo(pl) < MIN_STRAIGHT_DIST) {
 				lastAdded = points.poll();
-				if(lastAdded.getProvider().equals("pnt")) {
+				if (lastAdded.getProvider().equals("pnt")) {
 					RouteDirectionInfo previousInfo = new RouteDirectionInfo(speed, TurnType.straight());
 					previousInfo.routePointOffset = segments.size();
 					previousInfo.setDescriptionRoute(params.ctx.getString(R.string.route_head));

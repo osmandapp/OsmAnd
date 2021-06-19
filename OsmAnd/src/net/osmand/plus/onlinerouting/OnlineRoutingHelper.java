@@ -42,9 +42,9 @@ public class OnlineRoutingHelper {
 
 	private static final Log LOG = PlatformUtil.getLog(OnlineRoutingHelper.class);
 
-	private OsmandApplication app;
-	private OsmandSettings settings;
-	private Map<String, OnlineRoutingEngine> cachedEngines;
+	private final OsmandApplication app;
+	private final OsmandSettings settings;
+	private final Map<String, OnlineRoutingEngine> cachedEngines;
 
 	public OnlineRoutingHelper(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -104,8 +104,8 @@ public class OnlineRoutingHelper {
 
 	@Nullable
 	public OnlineRoutingResponse calculateRouteOnline(@NonNull OnlineRoutingEngine engine,
-	                                                   @NonNull List<LatLon> path,
-	                                                   boolean leftSideNavigation) throws IOException, JSONException {
+													  @NonNull List<LatLon> path,
+													  boolean leftSideNavigation) throws IOException, JSONException {
 		String url = engine.getFullUrl(path);
 		String content = makeRequest(url);
 		return engine.parseResponse(content, app, leftSideNavigation);
@@ -133,9 +133,11 @@ public class OnlineRoutingHelper {
 		return content.toString();
 	}
 
-	public OnlineRoutingEngine startOsrmEngine(RouteCalculationParams params) {
-		ApplicationMode mode = params.ctx.getRoutingHelper().getAppMode();
-		boolean isCarBicycleFoot = mode.equals(ApplicationMode.CAR) || mode.equals(ApplicationMode.BICYCLE) || mode.equals(ApplicationMode.PEDESTRIAN);
+	@Nullable
+	public OnlineRoutingEngine startOsrmEngine(@NonNull ApplicationMode mode) {
+		boolean isCarBicycleFoot = mode.isDerivedRoutingFrom(ApplicationMode.CAR)
+				|| mode.isDerivedRoutingFrom(ApplicationMode.BICYCLE)
+				|| mode.isDerivedRoutingFrom(ApplicationMode.PEDESTRIAN);
 		Map<String, String> paramsOnlineRouting = new HashMap<>();
 		paramsOnlineRouting.put(EngineParameter.VEHICLE_KEY.name(), mode.getStringKey());
 		if (isCarBicycleFoot) {

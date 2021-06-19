@@ -102,11 +102,9 @@ import net.osmand.plus.routepreparationmenu.cards.SuggestionsMapsDownloadWarning
 import net.osmand.plus.routepreparationmenu.cards.TracksCard;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.IRouteInformationListener;
-import net.osmand.plus.routing.RouteCalculationParams;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelperUtils;
-import net.osmand.plus.routing.SuggestionsMapsProvider;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -126,7 +124,6 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
-import org.json.JSONException;
 
 import java.io.File;
 import java.io.IOException;
@@ -199,13 +196,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private boolean addButtonCollapsing;
 	private boolean addButtonCollapsed;
 
-	private List<WorldRegion> suggestedMissingMaps;
-
-	boolean isNavigationDisable;
-
-	boolean onlineCheckNeeded;
-
-	boolean isCardUpdated;
+	private List<WorldRegion> suggestedMaps;
+	boolean suggestedMapsOnlineSearch;
 
 	private interface OnButtonCollapsedListener {
 		void onButtonCollapsed(boolean success);
@@ -520,33 +512,26 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		}
 	}
 
-	public void updateSuggestedMissingMaps(RouteCalculationParams params) throws IOException, JSONException {
-		if (params.startTimeRouteCalculation != 0) {
-			SuggestionsMapsProvider suggestionsMapsProvider = new SuggestionsMapsProvider(params);
-			List<Location> onlinePoints = suggestionsMapsProvider.findOnlineRoutePoints();
-			suggestedMissingMaps = suggestionsMapsProvider.getMissingMaps(onlinePoints);
-			onlineCheckNeeded = true;
-		} else {
-			suggestedMissingMaps = params.missingMaps;
-		}
-		if (!isCardUpdated) {
+	public void updateSuggestedMissingMaps(@Nullable List<WorldRegion> missingMaps, boolean onlineSearch) {
+		boolean updated = !Algorithms.objectEquals(missingMaps, suggestedMaps);
+		if (updated) {
+			suggestedMaps = missingMaps;
+			suggestedMapsOnlineSearch = onlineSearch;
 			updateCards();
-			isCardUpdated = true;
 		}
 	}
 
-	public List<WorldRegion> getSuggestedMissingMaps() {
-		return suggestedMissingMaps;
+	public List<WorldRegion> getSuggestedMaps() {
+		return suggestedMaps;
 	}
 
-	public boolean isOnlineCheckNeeded() {
-		return onlineCheckNeeded;
+	public boolean isSuggestedMapsOnlineSearch() {
+		return suggestedMapsOnlineSearch;
 	}
 
 	public void clearSuggestedMissingMaps() {
-		suggestedMissingMaps = null;
-		isCardUpdated = false;
-		onlineCheckNeeded = false;
+		suggestedMaps = null;
+		suggestedMapsOnlineSearch = false;
 	}
 
 	public void openMenuHeaderOnly() {
@@ -641,8 +626,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
 		RoutingHelper routingHelper = app.getRoutingHelper();
 
-		boolean isNavigationEnable = !Algorithms.isEmpty(mapActivity.getMapRouteInfoMenu().getSuggestedMissingMaps());
-		isNavigationDisable = mapActivity.getRoutingHelper().getRoute().isNavigationDisabled();
+		boolean hasPrecalculatedMissingMaps = hasPrecalculatedMissingMaps();
+		boolean hasCalculatedMissingMaps = hasCalculatedMissingMaps(app);
 
 		List<BaseCard> menuCards = new ArrayList<>();
 
@@ -720,13 +705,13 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				menuCards.add(new PublicTransportBetaWarningCard(mapActivity));
 			} else if (app.getRoutingHelper().isBoatMode()) {
 				menuCards.add(new NauticalBridgeHeightWarningCard(mapActivity));
-			} else if (isNavigationEnable) {
+			} else if (hasPrecalculatedMissingMaps) {
 				menuCards.add(new SuggestionsMapsDownloadWarningCard(mapActivity));
-			} else if (app.getTargetPointsHelper().hasTooLongDistanceToNavigate() && !isNavigationDisable) {
+			} else if (app.getTargetPointsHelper().hasTooLongDistanceToNavigate() && !hasCalculatedMissingMaps) {
 				menuCards.add(new LongDistanceWarningCard(mapActivity));
 			}
 		} else {
-			if (isNavigationDisable) {
+			if (hasCalculatedMissingMaps) {
 				menuCards.add(new SuggestionsMapsDownloadWarningCard(mapActivity));
 			} else {
 				// Home/work card
@@ -790,6 +775,14 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		this.menuCards = menuCards;
 		setBottomShadowVisible(bottomShadowVisible);
 		setupCards();
+	}
+
+	private boolean hasPrecalculatedMissingMaps() {
+		return !Algorithms.isEmpty(suggestedMaps);
+	}
+
+	private boolean hasCalculatedMissingMaps(@NonNull OsmandApplication app) {
+		return !Algorithms.isEmpty(app.getRoutingHelper().getRoute().getMissingMaps());
 	}
 
 	private void setupCards() {
@@ -1117,6 +1110,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		boolean routeCalculated = isRouteCalculated();
 		boolean currentLocationNotFound = OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)
 				&& targetHelper.getPointToStart() == null && targetHelper.getPointToNavigate() != null;
+		boolean hasCalculatedMissingMaps = hasCalculatedMissingMaps(app);
 
 		int iconId = publicTransportMode ? R.drawable.ic_map : R.drawable.ic_action_start_navigation;
 		int color1;
@@ -1132,7 +1126,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			color2 = color1;
 		} else {
 			color1 = nightMode ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light;
-			if (routeCalculated || currentLocationNotFound && !helper.isRouteBeingCalculated() && !isNavigationDisable) {
+			if (routeCalculated || currentLocationNotFound && !helper.isRouteBeingCalculated() && !hasCalculatedMissingMaps) {
 				AndroidUtils.setBackground(app, startButton, nightMode, R.color.active_color_primary_light, R.color.active_color_primary_dark);
 				color2 = color1;
 			} else {
@@ -1151,7 +1145,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			startButtonText.setText(R.string.shared_string_control_start);
 		}
 
-		if (isNavigationDisable) {
+		if (hasCalculatedMissingMaps) {
 			startButton.setClickable(false);
 			startButton.setEnabled(false);
 		} else {
@@ -2482,10 +2476,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		showMenuState = menuState;
 	}
 
-	public boolean isNavigationDisable() {
-		return isNavigationDisable;
-	}
-
 	@DrawableRes
 	public int getRoutePlanningBtnImage() {
 		return menuBackStack.empty() ? 0 : menuBackStack.peek().getButtonImage();
@@ -2504,10 +2494,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	public QuadRect getRouteRect(@NonNull MapActivity mapActivity) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		RoutingHelper routingHelper = app.getRoutingHelper();
-		MapRouteInfoMenu menu = mapActivity.getMapRouteInfoMenu();
-
 		QuadRect rect = new QuadRect(0, 0, 0, 0);
-		if (menu.isTransportRouteCalculated()) {
+		if (isTransportRouteCalculated()) {
 			TransportRoutingHelper transportRoutingHelper = app.getTransportRoutingHelper();
 			TransportRouteResult result = transportRoutingHelper.getCurrentRouteResult();
 			if (result != null) {

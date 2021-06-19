@@ -12,6 +12,7 @@ import net.osmand.ValueHolder;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
+import net.osmand.map.WorldRegion;
 import net.osmand.osm.edit.Node;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -568,7 +569,7 @@ public class TransportRoutingHelper {
 				}
 
 				@Override
-				public void updateMissingMaps(RouteCalculationParams params) {
+				public void updateMissingMaps(@Nullable List<WorldRegion> missingMaps, boolean onlineSearch) {
 				}
 
 				@Override
