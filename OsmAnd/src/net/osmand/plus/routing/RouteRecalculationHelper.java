@@ -383,6 +383,14 @@ class RouteRecalculationHelper {
 					showMessage(routeCalcError);
 				}
 			}
+			if (!updateProgress) {
+				routingHelper.getApplication().runInUIThread(new Runnable() {
+					@Override
+					public void run() {
+						routingThreadHelper.finishProgress(params);
+					}
+				});
+			}
 			app.getNotificationHelper().refreshNotification(NAVIGATION);
 		}
 	}
