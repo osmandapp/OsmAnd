@@ -3,7 +3,7 @@
     <string name="poi_shop">Kauppa</string>
     <string name="poi_shop_food">Lähikauppa ja supermarket</string>
     <string name="poi_emergency">Hätätapaus</string>
-    <string name="poi_filling_station">Huoltoasema</string>
+    <string name="poi_filling_station">Täyttöasema</string>
     <string name="poi_man_made">Rakennelma</string>
     <string name="poi_education">Koulutus</string>
     <string name="poi_healthcare">Terveydenhuolto</string>
@@ -32,7 +32,7 @@
     <string name="poi_deadlock">Umpikuja</string>
     <string name="poi_architecture_umgebinde">Arkkitehtuuri: umgebinde</string>
     <string name="poi_dolphin">Delfiini</string>
-    <string name="poi_fire_hydrant_count"/>
+    <string name="poi_fire_hydrant_count">Palopostien lukumäärä</string>
     <string name="poi_fuel_type">Polttoaineen tyyppi</string>
     <string name="poi_fuel_avia_type">Polttoaineen tyyppi (lento)</string>
     <string name="poi_payment_type">Maksutapa</string>
@@ -236,7 +236,7 @@
     <string name="poi_fuel_e85">E85</string>
     <string name="poi_fuel_biogas">Biokaasu</string>
     <string name="poi_waterway_fuel">Huoltoasema veneille</string>
-    <string name="poi_electricity_combined_charging">Latausasema</string>
+    <string name="poi_electricity_combined_charging">Latausasema;Sähköajoneuvon latausasema;EV-latausasema;Sähköinen latauspiste;Latauspiste;Sähköinen latausasema;Sähköajoneuvojen syöttölaitteet</string>
     <string name="poi_compressed_air">Paineilma</string>
     <string name="poi_parking">Pysäköinti</string>
     <string name="poi_motorcycle_parking">Moottoripyöräpysäköinti</string>
@@ -524,7 +524,7 @@
     <string name="poi_canal">Kanaali</string>
     <string name="poi_pier">Laituri</string>
     <string name="poi_surveillance">Valvonta</string>
-    <string name="poi_observatory"/>
+    <string name="poi_observatory">Observatorio</string>
     <string name="poi_driving_school">Ajokoulu</string>
     <string name="poi_kindergarten">Päiväkoti</string>
     <string name="poi_school">Koulu</string>
@@ -607,7 +607,7 @@
     <string name="poi_denomination_roman_catholic">Roomalaiskatolinen</string>
     <string name="poi_denomination_orthodox">Ortodoksi</string>
     <string name="poi_denomination_lutheran">Luterilainen</string>
-    <string name="poi_denomination_sunni">Sunni</string>
+    <string name="poi_denomination_sunni">Sunnalaisuus</string>
     <string name="poi_denomination_anglican">Anglikaaninen</string>
     <string name="poi_denomination_protestant">Protestanttinen</string>
     <string name="poi_denomination_methodist">Metodistinen</string>
@@ -681,7 +681,7 @@
     <string name="poi_tactile_paving_yes">Kyllä</string>
     <string name="poi_traffic_signals_sound_yes">Kyllä</string>
     <string name="poi_capacity_disabled_yes">Kyllä</string>
-    <string name="poi_capacity_women_yes"/>
+    <string name="poi_capacity_women_yes">Naisille omistettuja paikkoja</string>
     <string name="poi_aerialway_bubble_yes">Kupla</string>
     <string name="poi_aerialway_heating_yes">Kyllä</string>
     <string name="poi_aerialway_bicycle_yes">Sallittu</string>
@@ -997,14 +997,14 @@
     <string name="poi_aerialway_bicycle_no">Polkupyörä: ei sallittu</string>
     <string name="poi_aerialway_bicycle_summer">Sallittu vain kesällä</string>
     <string name="poi_description_payment">Maksun kuvaus</string>
-    <string name="poi_toilets_access_permissive">WC:n käyttö: sallittu</string>
+    <string name="poi_toilets_access_permissive">WC:n käyttö: salliva</string>
     <string name="poi_memorial_war">Sotamuistomerkki</string>
     <string name="poi_memorial_plaque">Muistolaatta</string>
     <string name="poi_memorial_stele">Steela</string>
     <string name="poi_memorial_bust">Rintakuva</string>
     <string name="poi_memorial_koshinto">Koshinto</string>
     <string name="poi_memorial_jizo">Jizo</string>
-    <string name="poi_memorial_cross">Ristin muotoinen</string>
+    <string name="poi_memorial_cross">Ristinmuotoinen</string>
     <string name="poi_memorial_obelisk">Obeliski</string>
     <string name="poi_resource_gravel">Sora</string>
     <string name="poi_resource_sand">Hiekka</string>
@@ -1081,8 +1081,8 @@
     <string name="poi_hazard_additional_avalanche">Vaara: lumivyöry</string>
     <string name="poi_hazard_additional_minefield">Vaara: miinakenttä</string>
     <string name="poi_hazard_additional_contamination">Vaara: saastuminen</string>
-    <string name="poi_vehicle_permissive">Ajoneuvo pääsy: salliva</string>
-    <string name="poi_motorcar_permissive"/>
+    <string name="poi_vehicle_permissive">Ajoneuvolla pääsy: salliva</string>
+    <string name="poi_motorcar_permissive">Autolla pääsy: salliva</string>
     <string name="poi_snowmobile_permissive">Salliva</string>
     <string name="poi_motorcycle_permissive">Salliva</string>
     <string name="poi_hgv_permissive">Salliva</string>
@@ -1428,7 +1428,7 @@
     <string name="poi_social_facility_for_migrant">Maahanmuuttajat</string>
     <string name="poi_social_facility_for_homeless">Koditon</string>
     <string name="poi_social_facility_for_juvenile">Nuorten</string>
-    <string name="poi_social_facility_for_mental_health">Mielenterveysongelmista kärsivät potilaat</string>
+    <string name="poi_social_facility_for_mental_health">Potilaita, joilla on mielenterveyshäiriöitä</string>
     <string name="poi_social_facility_for_orphan">Orvot</string>
     <string name="poi_social_facility_for_child">Lapset</string>
     <string name="poi_social_facility_for_senior">Seniorit</string>
@@ -1447,7 +1447,7 @@
     <string name="poi_sanitary_dump_station_yes">Septitankin tyhjennys asema: kyllä</string>
     <string name="poi_caravans_no">Asuntovaunut: ei</string>
     <string name="poi_group_only_no">Vain ryhmä: ei</string>
-    <string name="poi_group_only_yes">Ainoastaan ryhmä: kyllä</string>
+    <string name="poi_group_only_yes">Vain ryhmä: kyllä</string>
     <string name="poi_radar">Tutka</string>
     <string name="poi_mast">Masto</string>
     <string name="poi_astronomical_observatory">Tähtitieteellinen</string>
@@ -1606,4 +1606,9 @@
     <string name="poi_recycling_hydrargyrum">Elohopea</string>
     <string name="poi_recycling_compost">Komposti</string>
     <string name="poi_waste_disposal">Jätehuolto</string>
+    <string name="poi_foot_permissive">Jalankulkien pääsy: salliva</string>
+    <string name="poi_motor_vehicle_permissive">Moottoriajoneuvolla pääsy: salliva</string>
+    <string name="poi_bicycle_permissive">Polkupyörällä pääsy: salliva</string>
+    <string name="poi_horse_permissive">Hevosella pääsy: salliva</string>
+    <string name="poi_capacity">Kapasiteetti</string>
 </resources>

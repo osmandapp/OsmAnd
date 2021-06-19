@@ -172,7 +172,7 @@
     <string name="user_name">OSM käyttäjänimesi</string>
     <string name="open_street_map_login_descr">Tarvitaan openstreetmap.org ehdotuksia varten</string>
     <string name="user_password">Salasana</string>
-    <string name="download_files_not_enough_space">Ei ole tarpeeksi tilaa jotta voitaisiin ladata %1$s MB (vapaana: %2$s).</string>
+    <string name="download_files_not_enough_space">%1$s Mt:n lataamiseen ei ole tarpeeksi vapaata tilaa (vapaana: %2$s).</string>
     <string name="download_files_question_space">Lataa {0} tiedosto(a)\?
 \n{1} Mt (/ {2} Mt) käytetään.</string>
     <string name="delete_confirmation_msg">Poista %1$s?</string>
@@ -998,7 +998,7 @@
 \n- synkronoida ryhmiä ja laitteita palvelimen kanssa;
 \n- hallita ryhmiä ja laitteita henkilökohtaisella hallintapaneelilla websivustolla.</string>
     <string name="osm_user_stat">Muokkauksia %1$s, sijoitus %2$s, muokkaukset yhteensä %3$s</string>
-    <string name="osm_editors_ranking">OSM-muokkaajien sijoitukset</string>
+    <string name="osm_editors_ranking">OSM-editorisijoitukset</string>
     <string name="download_files_error_not_enough_space">Tilaa ei ole tarpeeksi!
 \n{3} Mt tarvitaan väliaikaisesti, {1} Mt pysyvästi.
 \n(Vain {2} Mt on käytettävissä.)</string>
@@ -1471,7 +1471,7 @@
     <string name="index_name_netherlands">Eurooppa - Alankomaat</string>
     <string name="fav_export_confirmation">Tiedosto jossa aiemmin viedyt suosikit on jo olemassa, Hauatko korvata sen?</string>
     <string name="osmand_service">Taustatila</string>
-    <string name="osmand_service_descr">OsmAnd\'ia suoritetaan taustalla kun näyttö on pois päältä</string>
+    <string name="osmand_service_descr">OsmAnd\'ia suoritetaan taustalla kun näyttö on pois päältä.</string>
     <string name="native_library_not_supported">Natiivia kirjastoa ei tueta tällä laitteistolla.</string>
     <string name="init_native_library">Alustetaan natiivi kirjasto…</string>
     <string name="keep_informing_never">Ainoastaan käsin (näpäytä nuolta)</string>
@@ -1745,7 +1745,7 @@
     <string name="safe_mode_description">Suorita sovellus turvatilassa (käyttäen hitaampaa Androidia natiivin koodin sijasta).</string>
     <string name="native_library_not_running">Sovellutusta suoritetaan turvatilassa (poista tila Asetuksissa).</string>
     <string name="close_changeset">Sulje muutosjoukko</string>
-    <string name="show_warnings_descr">Konfiguroi liikennevaroitukset (nopeusrajoitukset, pakolliset pysähdykset, hidasteet), nopeuskameravaroitukset ja kaistatiedot</string>
+    <string name="show_warnings_descr">Määritä liikennevaroitukset (nopeusrajoitukset, pakolliset pysähdykset, hidasteet, tunnelit), nopeuskameravaroitukset ja kaistatiedot.</string>
     <string name="auto_zoom_map_descr">Automaattisesti zoomautuva kartta nopeutesi mukaan (kun kartta on synkronoitu nykyiseen sijaintiisi)</string>
     <string name="interrupt_music_descr">Keskeytä musiikki täydellisesti ääniohjeiden ajaksi (ei ainoastaan hiljennystä)</string>
     <string name="map_widget_next_next_turn">Toinen käännös</string>
@@ -2257,7 +2257,7 @@
     <string name="rendering_attr_highway_class_cycleway_name">Pyörätie</string>
     <string name="rendering_attr_undefined_name">Määrittelemätön</string>
     <string name="routeInfo_road_types_name">Tietyypit</string>
-    <string name="shared_string_swap">Muuta</string>
+    <string name="shared_string_swap">Vaihda</string>
     <string name="show_more">Näytä lisää</string>
     <string name="tracks_on_map">Näytetyt jäljet</string>
     <string name="configure_profile_info">Profiilin asetukset:</string>
@@ -2905,7 +2905,7 @@
     <string name="save_poi_too_many_uppercase">Nimi sisältää liikaa isoja kirjaimia. Jatka\?</string>
     <string name="intermediate_destinations">Välietapit</string>
     <string name="add_destination_point">Aseta määränpää</string>
-    <string name="add_destination_query">Aseta määränpää ensin</string>
+    <string name="add_destination_query">Aseta ensin määränpää</string>
     <string name="change_data_storage_full_description">Siirrä OsmAnd-tiedostot uuteen kohteeseen\?
 \n%1$s &gt; %2$s</string>
     <string name="route_way">Tie</string>
@@ -3448,4 +3448,179 @@
     <string name="tts_initialization_error">Teksti-puheeksi-moottoria ei voida käynnistää.</string>
     <string name="update_all_maps_q">Haluatko varmasti päivittää kaikki (%1$d) kartat\?</string>
     <string name="update_all_maps">Päivitä kaikki kartat</string>
+    <string name="quick_action_terrain_descr">Painike, jolla voit näyttää tai piilottaa maastotason kartalla.</string>
+    <string name="send_search_query">Lähetä hakukysely\?</string>
+    <string name="send_search_query_description">Hakukyselysi lähetetään sijaintisi kanssa: \"%1$s\".
+\n
+\n Henkilökohtaisia tietoja ei kerätä, ainoastaan hakutietoja, joita tarvitaan haun parantamiseksi.</string>
+    <string name="poi_cannot_be_found">Solmua tai väylää ei löytänyt.</string>
+    <string name="ask_for_location_permission">Anna OsmAndille sijainnin käyttöoikeus jatkaaksesi.</string>
+    <string name="more_transport_on_stop_hint">Tältä pysäkiltä on saatavilla lisää kuljetuksia.</string>
+    <string name="start_search_from_city">Määritä ensin kaupunki/kunta/seutu</string>
+    <string name="search_street">Etsi katua</string>
+    <string name="third_party_application">Kolmannen osapuolen sovellus</string>
+    <string name="osm_live_payment_current_subscription">Nykyinen tilaus</string>
+    <string name="osm_live_payment_discount_descr">Säästä %1$s</string>
+    <string name="osm_live_subscriptions">Tilaukset</string>
+    <string name="show_along_the_route">Näytä reitin varrella</string>
+    <string name="intermediate_waypoint">Välietappi</string>
+    <string name="shared_string_capacity">Kapasiteetti</string>
+    <string name="metric_ton">tn</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Painike, joka näyttää tai piilottaa valitut jäljet kartalla.</string>
+    <string name="sit_on_the_stop">Nouse kyytiin pysäkillä</string>
+    <string name="by_transport_type">Käyttäen %1$s</string>
+    <string name="cubic_m">m³</string>
+    <string name="add_intermediate_point">Lisää välietappi</string>
+    <string name="release_3_4">• Sovellusprofiilit: Luo mukautettu profiili omiin tarpeisiisi, jossa on mukautettu kuvake ja väri
+\n
+\n • Mukauta nyt minkä tahansa profiilin oletus- ja vähimmäis/enimmäisnopeuksia
+\n
+\n • Lisätty widgetti nykyisiä koordinaatteja varten
+\n
+\n • Lisätty ominaisuuksia kompassin ja sädeviivoittimen näyttämiseksi kartalla
+\n
+\n • Korjattu jäljen kirjaaminen taustalla
+\n
+\n • Parannettu taustakartan lataamista
+\n
+\n • Palautettu Kytke näyttö päälle -asetus
+\n
+\n • Korjattu Wikipedian kielen valinta
+\n
+\n • Korjattu kompassipainikkeen käyttäytyminen navigoinnin aikana
+\n
+\n • Muita virheenkorjauksia
+\n
+\n</string>
+    <string name="release_3_5">• Päivitetty sovelluksen ja profiilin asetuksia: asetukset on nyt järjestetty tyypin mukaan. Kutakin profiilia voi muokata erikseen.
+\n
+\n • Uusi kartanlatausvalintaikkuna, joka ehdottaa ladattavaa karttaa selaamisen aikana.
+\n
+\n • Tumman teeman korjaukset
+\n
+\n • Korjattu useita reititysongelmia ympäri maailmaa
+\n
+\n • Päivitetty pohjakartta yksityiskohtaisemmalla tieverkolla
+\n
+\n • Korjattu tulva-alueet ympäri maailmaa
+\n
+\n • Hiihtoreititys: lisätty korkeusprofiili ja reitin monimutkaisuus reitin yksityiskohtiin.
+\n
+\n • Muita virheenkorjauksia
+\n
+\n</string>
+    <string name="release_3_7">• Uusia offline rinnekarttoja
+\n
+\n • Suosikkien ja GPX-väyläpisteiden täysi mukautus – mukautetut värit, kuvakkeet ja muodot
+\n
+\n • Kohteiden järjestyksen mukauttaminen \"Kontekstivalikko\", \"Määritä kartta\" ja \"Valikko\" valikoissa
+\n
+\n • Wikipedia erillisenä kerroksena Määritä kartta -valikossa, valitse vain tarvittavat kielet
+\n
+\n • Luo omia KP-suodattimia / karttoja täysin joustavasti
+\n
+\n • Lisätty vaihtoehtoja asetusten palauttamiseen mukautetuille profiileille
+\n
+\n • Täydet GPX-reitit navigoinnista tukevat liikennekaistoja ja täydellisiä käännösohjeita
+\n
+\n • Korjattu käyttöliittymän kokoja tableteilla
+\n
+\n • Korjattu virheitä oikealta vasemmalle kirjoitettujen kielien kanssa
+\n
+\n</string>
+    <string name="ui_customization_short_descr">Valikon kohteet, kontekstivalikko</string>
+    <string name="shared_string_drawer">Valikko</string>
+    <string name="ui_customization_description">Mukauta kohteiden määrää \"Valikko\", \"Määritä kartta\" ja \"Kontekstivalikko\" valikoissa.
+\n
+\nPoista käytöstä käyttämättömät lisäosat piilottaaksesi kaikki niiden ohjaimet. %1$s.</string>
+    <string name="release_3_8">• Päivitetty Suunnittele reitti -toiminto: mahdollistaa eri navigointityyppien käyttämisen segmenteittäin ja jälkien sisällyttämisen
+\n
+\n • Uusi ulkonäkövalikko jäljille: valitse väri, paksuus, näytä suuntanuolet, alku- ja loppukuvakkeet
+\n
+\n • Parannettu polkupyöräilysolmujen näkyvyyttä.
+\n
+\n • Jäljet ovat nyt napautettavissa, ja niissä on kontekstivalikko perustiedoilla.
+\n
+\n • Parannettu hakualgoritmeja
+\n
+\n • Parannettu Seuraa jälkeä -toiminnon ominaisuuksia navigoinnissa
+\n
+\n • Korjattu profiilin asetusten tuonti- ja vientiongelmia
+\n
+\n</string>
+    <string name="release_3_9">• Lisätty mahdollisuus viedä ja tuoda kaikki tiedot, mukaan lukien asetukset, resurssit ja omat paikat
+\n
+\n • Suunnittele reitti: kuvaajat jäljille joissa on reitti ja lisätty mahdollisuus luoda ja muokata useita jälkien segmenttejä
+\n
+\n • Lisätty OAuth-todennusmenetelmä OpenStreetMapille, parannettu OSM-valintaikkunoiden käyttöliittymää
+\n
+\n • Tuetaan mukautettuja värejä suosikeille ja jälkien väyläpisteille
+\n
+\n</string>
+    <string name="use_system_screen_timeout">Käytä järjestelmän näytön aikakatkaisua</string>
+    <string name="reset_to_default_category_button_promo">\"Palauta oletusasetukset\" palauttaa lajittelujärjestyksen asennuksen oletusarvoihin.</string>
+    <string name="release_3_6">• Profiilit: nyt voit muuttaa järjestystä, asettaa kartan kuvakkeen, muuttaa kaikkia perusprofiilien asetuksia ja palauttaa ne takaisin oletusasetuksiin.
+\n
+\n • Navigointiin on lisätty poistumisnumero
+\n
+\n • Uudistetut lisäosa-asetukset
+\n
+\n • Uudistettu Asetukset-näyttö kaikkien profiilien nopeaa käyttöä varten
+\n
+\n • Lisätty mahdollisuus kopioida asetuksia toisesta profiilista
+\n
+\n • Lisätty mahdollisuus muuttaa järjestystä tai piilottaa KP-kategoriat haussa
+\n
+\n • KP-kuvakkeet kohdistettu oikein kartalla
+\n
+\n • Auringonlasku- ja auringonnousutiedot lisätty kartan määritykseen
+\n
+\n • Koti-/työkuvakkeet lisätty karttaan
+\n
+\n • Lisätty tuki moniriviselle kuvaukselle asetuksissa
+\n
+\n • Japanin karttaan lisätty oikea translitterointi
+\n
+\n • Lisätty Etelämantereen kartta
+\n
+\n</string>
+    <string name="routing_profile_direct_to">Suoraan pisteeseen</string>
+    <string name="route_recalculation_dist_descr">Reitti lasketaan uudelleen, jos etäisyys reitille on pidempi kuin määritetty parametri</string>
+    <string name="route_recalculation_dist_title">Pienin etäisyys reitin uudelleen laskemiseksi</string>
+    <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
+    <string name="plugin_disabled_descr">Tämä lisäosa on erillinen sovellus: sinun on poistettava se erikseen, jos et enää aio käyttää sitä.
+\n
+\nLisäosa jää laitteeseen OsmAndin poistamisen jälkeen.</string>
+    <string name="plugin_disabled">Lisäosa pois päältä</string>
+    <string name="please_provide_profile_name_message">Anna profiilille nimi</string>
+    <string name="select_data_to_import">Valitse tuotavat tiedot.</string>
+    <string name="import_duplicates_title">Joitakin kohteita on jo olemassa</string>
+    <string name="import_duplicates_description">OsmAndissa on jo elementtejä, joilla on samat nimet kuin tuoduilla elementeillä.
+\n
+\nValitse toiminto.</string>
+    <string name="keep_both_desc">Tuodut kohteet lisätään etuliitteen kanssa</string>
+    <string name="replace_all_desc">Nykyiset kohteet korvataan tiedostosta löytyvillä kohteilla</string>
+    <string name="listed_exist">Lueteltu %1$s on jo olemassa OsmAndissa.</string>
+    <string name="recalc_angle_dialog_title">Sijaintini ja reitin välinen pienin kulma</string>
+    <string name="recalc_angle_dialog_descr">Sijaintini ja lasketun reitin välinen ylimääräinen suora segmentti näytetään, kunnes reitti lasketaan uudelleen</string>
+    <string name="import_rendering_file">Tuo piirtotiedosto</string>
+    <string name="hillshade_description">Rinnevarjostuskartta, jossa käytetään tummia sävyjä osoittamaan rinteet, huiput ja alankoalueet.</string>
+    <string name="item_deleted">%1$s poistettu</string>
+    <string name="speed_cameras_restart_descr">Käynnistä sovellus uudelleen poistaaksesi kaikki nopeuskameratiedot.</string>
+    <string name="speed_cameras_removed_descr">Tässä laitteessa ei ole nopeuskameroita.</string>
+    <string name="threshold_distance">Kynnysetäisyys</string>
+    <string name="street_level_imagery">Katutason kuvat</string>
+    <string name="attach_to_the_roads">Kiinnitä teihin</string>
+    <string name="plan_route_change_route_type_before">Vaihda reittityyppiä ennen</string>
+    <string name="plan_route_change_route_type_after">Vaihda reittityyppiä jälkeenpäin</string>
+    <string name="simplified_track">Yksinkertaistettu jälki</string>
+    <string name="simplified_track_description">Vain reittiviiva tallennetaan, väyläpisteet poistetaan.</string>
+    <string name="disable_recording_once_app_killed_descrp">Jäljen kirjaaminen keskeytyy, kun sovellus lopetetaan (viimeisimpien sovellusten kautta). (OsmAnd-taustailmoitus katoaa Androidin ilmoituspalkista.)</string>
+    <string name="save_global_track_interval_descr">Määritä kirjausväli yleiseen reitin tallennukseen (kytketään päälle kartalta Matkatallennus-widgetin kautta).</string>
+    <string name="send_files_to_openstreetmap">Lähetä GPX-tiedosto OpenStreetMapiin</string>
+    <string name="enter_text_separated">Kirjoita tunnisteet pilkuilla erotettuina.</string>
+    <string name="live_update_frequency_week_variant">Karttapäivitykset tarkistetaan joka viikko. Seuraavan kerran %1$s, %2$s päästä.</string>
+    <string name="live_update_frequency_day_variant">Karttapäivitykset tarkistetaan joka päivä. Seuraavan kerran %1$s, %2$s päästä.</string>
+    <string name="live_update_frequency_hour_variant">Karttapäivitykset tarkistetaan joka tunti. Seuraavan kerran %1$s, %2$s päästä.</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_name">Luonnon rajat</string>
 </resources>
