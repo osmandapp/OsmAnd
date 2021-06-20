@@ -48,11 +48,11 @@ public class GradientCard extends MapBaseCard {
 			return;
 		}
 
-		boolean hasSpeedHeightData = gpxTrackAnalysis != null;
-		boolean isRouteAltitude = !hasSpeedHeightData && selectedScaleType == GradientScaleType.ALTITUDE;
+		boolean isAnalysisProvided = gpxTrackAnalysis != null;
+		boolean isRouteAltitude = !isAnalysisProvided && selectedScaleType == GradientScaleType.ALTITUDE;
 		AndroidUiHelper.updateVisibility(view, true);
-		AndroidUiHelper.updateVisibility(view.findViewById(R.id.upper_space), hasSpeedHeightData || isRouteAltitude);
-		AndroidUiHelper.updateVisibility(view.findViewById(R.id.bottom_space), hasSpeedHeightData);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.upper_space), isAnalysisProvided || isRouteAltitude);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.bottom_space), isAnalysisProvided);
 
 		View slopeLegend = view.findViewById(R.id.slope_legend);
 		View speedAltitudeLegend = view.findViewById(R.id.speed_altitude_legend);
@@ -69,7 +69,7 @@ public class GradientCard extends MapBaseCard {
 		TextView minValue = view.findViewById(R.id.min_value);
 		TextView maxValue = view.findViewById(R.id.max_value);
 
-		if (hasSpeedHeightData) {
+		if (isAnalysisProvided) {
 			AndroidUiHelper.updateVisibility(view, true);
 			if (selectedScaleType == GradientScaleType.SPEED && gpxTrackAnalysis.isSpeedSpecified()
 					|| selectedScaleType == GradientScaleType.ALTITUDE && gpxTrackAnalysis.isElevationSpecified()) {
