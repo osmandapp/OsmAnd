@@ -22,6 +22,7 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
+import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadItem;
@@ -164,7 +165,7 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 				continue;
 			}
 			IndexItem indexItem = (IndexItem) tag;
-			if (indexItem.isVoiceTTS()) {
+			if (DownloadActivityType.isVoiceTTS(indexItem)) {
 				continue;
 			}
 			BottomSheetItemWithDescription mapItem = (BottomSheetItemWithDescription) item;
@@ -322,7 +323,7 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 
 	private View createVoiceItemView(IndexItem indexItem, LayoutInflater inflater) {
 		View container = inflater.inflate(R.layout.list_item_icon_and_download, null);
-		boolean isTTS = indexItem.isVoiceTTS();
+		boolean isTTS = DownloadActivityType.isVoiceTTS(indexItem);
 		if (isTTS && !isDefaultTTS(indexItem)) {
 			container.findViewById(R.id.main_container).setMinimumHeight(getDimen(R.dimen.bottom_sheet_list_item_height));
 		}
@@ -361,7 +362,7 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 	private void updateVoiceProvider(IndexItem indexItem, boolean forceDismiss) {
 		settings.VOICE_PROVIDER.setModeValue(getAppMode(), indexItem.getBasename());
 		onVoiceProviderChanged();
-		if (indexItem.isVoiceTTS() || forceDismiss) {
+		if (DownloadActivityType.isVoiceTTS(indexItem) || forceDismiss) {
 			dismiss();
 		}
 		indexToSelectAfterDownload = null;
@@ -375,7 +376,7 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 	}
 
 	private boolean isDefaultTTS(IndexItem indexItem) {
-		return indexItem.isVoiceTTS()
+		return DownloadActivityType.isVoiceTTS(indexItem)
 				&& indexItem.getBasename().replaceAll("-tts", "").equals(app.getLanguage());
 	}
 

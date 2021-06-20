@@ -59,14 +59,6 @@ public abstract class DownloadItem {
 		return type.getBasename(this);
 	}
 
-	public boolean isVoiceTTS() {
-		return !Algorithms.isEmpty(getFileName()) && getFileName().endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS);
-	}
-
-	public boolean isRecordedVoice() {
-		return !Algorithms.isEmpty(getFileName()) && getFileName().endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP);
-	}
-
 	@NonNull
 	public abstract List<File> getDownloadedFiles(@NonNull OsmandApplication app);
 

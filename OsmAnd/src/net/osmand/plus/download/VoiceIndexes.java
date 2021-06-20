@@ -43,10 +43,10 @@ public class VoiceIndexes {
 
 		for (IndexItem ii : resources) {
 			if (ii.getType() == DownloadActivityType.VOICE_FILE) {
-				if (ii.isVoiceTTS()) {
+				if (DownloadActivityType.isVoiceTTS(ii)) {
 					voicePromptsTTS.add(ii);
 					DownloadResources.checkIfItemOutdated(app, indexFileNames, indexFileNames, ii, dateFormat);
-				} else if (ii.isRecordedVoice()) {
+				} else if (DownloadActivityType.isVoiceRec(ii)) {
 					voicePromptsRec.add(ii);
 					DownloadResources.checkIfItemOutdated(app, indexFileNames, indexFileNames, ii, dateFormat);
 				}
