@@ -225,10 +225,8 @@ public class GPXDatabase {
 
 			if (!Algorithms.isEmpty(gpxFile.getSplitType()) && gpxFile.getSplitInterval() > 0) {
 				GpxSplitType gpxSplitType = GpxSplitType.getSplitTypeByName(gpxFile.getSplitType());
-				if (gpxSplitType != null) {
-					splitType = gpxSplitType.getType();
-					splitInterval = gpxFile.getSplitInterval();
-				}
+				splitType = gpxSplitType.getType();
+				splitInterval = gpxFile.getSplitInterval();
 			}
 			if (!Algorithms.isEmpty(gpxFile.getGradientScaleType())) {
 				gradientScaleType = GradientScaleType.getGradientTypeByName(gpxFile.getGradientScaleType());
@@ -919,9 +917,12 @@ public class GPXDatabase {
 		item.showArrows = showArrows;
 		item.showStartFinish = showStartFinish;
 		item.width = width;
-		item.gradientSpeedPalette = Algorithms.stringToGradientPalette(gradientSpeedPalette);
-		item.gradientAltitudePalette = Algorithms.stringToGradientPalette(gradientAltitudePalette);
-		item.gradientSlopePalette = Algorithms.stringToGradientPalette(gradientSlopePalette);
+		item.gradientSpeedPalette = Algorithms.stringToGradientPalette(gradientSpeedPalette,
+				GradientScaleType.SPEED.getColorTypeName());
+		item.gradientAltitudePalette = Algorithms.stringToGradientPalette(gradientAltitudePalette,
+				GradientScaleType.ALTITUDE.getColorTypeName());
+		item.gradientSlopePalette = Algorithms.stringToGradientPalette(gradientSlopePalette,
+				GradientScaleType.SLOPE.getColorTypeName());
 
 		try {
 			item.gradientScaleType = GradientScaleType.getGradientTypeByName(gradientScaleType);

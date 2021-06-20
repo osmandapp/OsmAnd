@@ -340,8 +340,6 @@ public class RouteColorize {
     private void checkPalette() {
         if (palette == null || palette.length < 2 || palette[0].length < 2 || palette[1].length < 2) {
             LOG.info("Will use default palette");
-            palette = new double[3][2];
-
             palette = getDefaultPalette(colorizationType);
         }
         double min;

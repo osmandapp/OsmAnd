@@ -1114,13 +1114,14 @@ public class Algorithms {
 		return false;
 	}
 
-	public static int[] stringToGradientPalette(String str) {
+	public static int[] stringToGradientPalette(String str, String gradientScaleType) {
 		if (Algorithms.isBlank(str)) {
 			return RouteColorize.COLORS;
 		}
 		String[] arr = str.split(" ");
-		if (arr.length != 3 || arr.length != 5) {
-			return RouteColorize.COLORS;
+		if (arr.length < 2) {
+			return "gradient_slope_color".equals(gradientScaleType) ?
+					RouteColorize.SLOPE_COLORS : RouteColorize.COLORS;
 		}
 		int[] colors = new int[arr.length];
 		try {

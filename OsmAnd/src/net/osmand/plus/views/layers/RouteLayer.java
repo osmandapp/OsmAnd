@@ -48,7 +48,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 
-public class RouteLayer extends PreviewRouteLineLayer implements IContextMenuProvider {
+public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 
 	private static final Log log = PlatformUtil.getLog(RouteLayer.class);
 
@@ -65,7 +65,6 @@ public class RouteLayer extends PreviewRouteLineLayer implements IContextMenuPro
 
 	private RenderingLineAttributes attrsPT;
 	private RenderingLineAttributes attrsW;
-	private boolean nightMode;
 
 	private RouteGeometryWayContext routeWayContext;
 	private PublicTransportGeometryWayContext publicTransportWayContext;
@@ -122,9 +121,7 @@ public class RouteLayer extends PreviewRouteLineLayer implements IContextMenuPro
 	}
 
 	protected void initPaints() {
-		paintIconAction = new Paint();
-		paintIconAction.setFilterBitmap(true);
-		paintIconAction.setAntiAlias(true);
+		super.initPaints();
 
 		paintGridCircle = new Paint();
 		paintGridCircle.setStyle(Paint.Style.FILL_AND_STROKE);
@@ -206,6 +203,7 @@ public class RouteLayer extends PreviewRouteLineLayer implements IContextMenuPro
 		return false;
 	}
 
+	@Nullable
 	private MapActivity getMapActivity() {
 		if (view.getContext() instanceof MapActivity) {
 			return (MapActivity) view.getContext();
@@ -296,7 +294,7 @@ public class RouteLayer extends PreviewRouteLineLayer implements IContextMenuPro
 							attrs.paint3.setColor(customTurnArrowColor);
 						}
 						canvas.drawPath(pth, attrs.paint3);
-						drawDirectionArrow(canvas, attrs.paint3, matrix, x, y, px, py);
+						drawTurnArrow(canvas, matrix, x, y, px, py);
 						attrs.paint3.setColor(defaultTurnArrowColor);
 					} else {
 						px = x;

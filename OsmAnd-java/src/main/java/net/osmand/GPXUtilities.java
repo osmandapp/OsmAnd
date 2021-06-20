@@ -1712,7 +1712,7 @@ public class GPXUtilities {
 			if (extensions != null) {
 				clrValue = extensions.get(gradientScaleType);
 			}
-			return Algorithms.stringToGradientPalette(clrValue);
+			return Algorithms.stringToGradientPalette(clrValue, gradientScaleType);
 		}
 
 		public void setGradientScaleColor(String gradientScaleType, int[] gradientScalePalette) {

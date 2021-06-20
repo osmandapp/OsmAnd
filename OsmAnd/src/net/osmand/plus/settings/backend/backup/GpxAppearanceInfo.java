@@ -101,8 +101,8 @@ public class GpxAppearanceInfo {
 		return null;
 	}
 
-	private static int[] getGradientPalette(JSONObject json, GradientScaleType scaleType) {
-		return Algorithms.stringToGradientPalette(json.optString(scaleType.getColorTypeName()));
+	private static int[] getGradientPalette(@NonNull JSONObject json, @NonNull GradientScaleType scaleType) {
+		return Algorithms.stringToGradientPalette(json.optString(scaleType.getColorTypeName()), scaleType.getColorTypeName());
 	}
 
 	private static void writeParam(@NonNull JSONObject json, @NonNull String name, @Nullable Object value) throws JSONException {
