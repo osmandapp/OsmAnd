@@ -97,8 +97,8 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 	}
 
 	private void drawRouteLinePreview(Canvas canvas,
-									  RotatedTileBox tileBox,
-									  PreviewRouteLineInfo previewInfo) {
+	                                  RotatedTileBox tileBox,
+	                                  PreviewRouteLineInfo previewInfo) {
 		Rect previewBounds = previewInfo.getLineBounds();
 		if (previewBounds == null) {
 			return;
@@ -161,7 +161,7 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 	}
 
 	private void fillPreviewLineArrays(List<Float> tx, List<Float> ty, List<Double> angles,
-									   List<Double> distances, List<GeometryWayStyle<?>> styles) {
+	                                   List<Double> distances, List<GeometryWayStyle<?>> styles) {
 		fillDistancesAngles(tx, ty, angles, distances);
 
 		if (gradientScaleType == null) {
@@ -190,7 +190,7 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 	}
 
 	private void fillSlopeGradientArrays(List<Float> tx, List<Float> ty, List<Double> angles,
-										 List<Double> distances, List<GeometryWayStyle<?>> styles) {
+	                                     List<Double> distances, List<GeometryWayStyle<?>> styles) {
 		double totalDist = 0;
 		for (Double d : distances) {
 			totalDist += d;
@@ -249,7 +249,7 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 	}
 
 	private void fillDistancesAngles(List<Float> tx, List<Float> ty, List<Double> angles,
-									 List<Double> distances) {
+	                                 List<Double> distances) {
 		angles.add(0d);
 		distances.add(0d);
 		for (int i = 1; i < tx.size(); i++) {

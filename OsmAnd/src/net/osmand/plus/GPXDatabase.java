@@ -558,7 +558,8 @@ public class GPXDatabase {
 				}
 				db.execSQL("UPDATE " + GPX_TABLE_NAME + " SET " + columnName + " = ? " +
 								" WHERE " + GPX_COL_NAME + " = ? AND " + GPX_COL_DIR + " = ?",
-						new Object[] {Algorithms.gradientPaletteToString(gradientScalePalette), fileName, fileDir});
+						new Object[] {Algorithms.gradientPaletteToString(gradientScalePalette,
+								gradientScaleType.getColorTypeName()), fileName, fileDir});
 			} finally {
 				db.close();
 			}
@@ -785,9 +786,10 @@ public class GPXDatabase {
 					new Object[] {fileName, fileDir, color, 0, item.fileLastUploadedTime, item.splitType, item.splitInterval,
 							item.apiImported ? 1 : 0, item.showAsMarkers ? 1 : 0, item.joinSegments ? 1 : 0,
 							item.showArrows ? 1 : 0, item.showStartFinish ? 1 : 0, item.width,
-							Algorithms.gradientPaletteToString(item.gradientSpeedPalette),
-							Algorithms.gradientPaletteToString(item.gradientAltitudePalette),
-							Algorithms.gradientPaletteToString(item.gradientSlopePalette), gradientScaleType});
+							Algorithms.gradientPaletteToString(item.gradientSpeedPalette, GradientScaleType.SPEED.getColorTypeName()),
+							Algorithms.gradientPaletteToString(item.gradientAltitudePalette, GradientScaleType.ALTITUDE.getColorTypeName()),
+							Algorithms.gradientPaletteToString(item.gradientSlopePalette, GradientScaleType.SLOPE.getColorTypeName()),
+							gradientScaleType});
 		}
 	}
 

@@ -1115,13 +1115,13 @@ public class Algorithms {
 	}
 
 	public static int[] stringToGradientPalette(String str, String gradientScaleType) {
+		boolean isSlope = "gradient_slope_color".equals(gradientScaleType);
 		if (Algorithms.isBlank(str)) {
-			return RouteColorize.COLORS;
+			return isSlope ? RouteColorize.SLOPE_COLORS : RouteColorize.COLORS;
 		}
 		String[] arr = str.split(" ");
 		if (arr.length < 2) {
-			return "gradient_slope_color".equals(gradientScaleType) ?
-					RouteColorize.SLOPE_COLORS : RouteColorize.COLORS;
+			return isSlope ? RouteColorize.SLOPE_COLORS : RouteColorize.COLORS;
 		}
 		int[] colors = new int[arr.length];
 		try {
@@ -1129,20 +1129,26 @@ public class Algorithms {
 				colors[i] = Algorithms.parseColor(arr[i]);
 			}
 		} catch (IllegalArgumentException e) {
-			return arr.length == 3 ? RouteColorize.COLORS : RouteColorize.SLOPE_COLORS;
+			return isSlope ? RouteColorize.SLOPE_COLORS : RouteColorize.COLORS;
 		}
 		return colors;
 	}
 
-	public static String gradientPaletteToString(int[] colors) {
-		int[] src = (colors != null && (colors.length == 3 || colors.length == 5)) ? colors : RouteColorize.COLORS;
-		StringBuilder palette = new StringBuilder();
+	public static String gradientPaletteToString(int[] palette, String gradientScaleType) {
+		boolean isSlope = "gradient_slope_color".equals(gradientScaleType);
+		int[] src;
+		if (palette != null && palette.length >= 2) {
+			src = palette;
+		} else {
+			src = isSlope ? RouteColorize.SLOPE_COLORS : RouteColorize.COLORS;
+		}
+		StringBuilder stringPalette = new StringBuilder();
 		for (int i = 0; i < src.length; i++) {
-			palette.append(colorToString(src[i]));
+			stringPalette.append(colorToString(src[i]));
 			if (i + 1 != src.length) {
-				palette.append(" ");
+				stringPalette.append(" ");
 			}
 		}
-		return palette.toString();
+		return stringPalette.toString();
 	}
 }

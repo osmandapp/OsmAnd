@@ -61,9 +61,12 @@ public class GpxAppearanceInfo {
 		writeParam(json, "split_type", GpxSplitType.getSplitTypeByTypeId(splitType).getTypeName());
 		writeParam(json, "split_interval", splitInterval);
 		writeParam(json, "gradient_scale_type", scaleType);
-		writeParam(json, GradientScaleType.SPEED.getColorTypeName(), Algorithms.gradientPaletteToString(gradientSpeedPalette));
-		writeParam(json, GradientScaleType.ALTITUDE.getColorTypeName(), Algorithms.gradientPaletteToString(gradientAltitudePalette));
-		writeParam(json, GradientScaleType.SLOPE.getColorTypeName(), Algorithms.gradientPaletteToString(gradientSlopePalette));
+		writeParam(json, GradientScaleType.SPEED.getColorTypeName(),
+				Algorithms.gradientPaletteToString(gradientSpeedPalette, GradientScaleType.SPEED.getColorTypeName()));
+		writeParam(json, GradientScaleType.ALTITUDE.getColorTypeName(),
+				Algorithms.gradientPaletteToString(gradientAltitudePalette, GradientScaleType.ALTITUDE.getColorTypeName()));
+		writeParam(json, GradientScaleType.SLOPE.getColorTypeName(),
+				Algorithms.gradientPaletteToString(gradientSlopePalette, GradientScaleType.SLOPE.getColorTypeName()));
 
 		writeParam(json, "time_span", timeSpan);
 		writeParam(json, "wpt_points", wptPoints);

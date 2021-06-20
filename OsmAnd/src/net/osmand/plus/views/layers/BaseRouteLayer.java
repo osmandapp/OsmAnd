@@ -149,7 +149,6 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 		return routeLineColor;
 	}
 
-
 	protected float getRouteLineWidth(@NonNull RotatedTileBox tileBox) {
 		String widthKey;
 		if (previewRouteLineInfo != null) {

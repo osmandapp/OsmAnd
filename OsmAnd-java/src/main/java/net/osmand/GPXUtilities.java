@@ -1716,7 +1716,8 @@ public class GPXUtilities {
 		}
 
 		public void setGradientScaleColor(String gradientScaleType, int[] gradientScalePalette) {
-			getExtensionsToWrite().put(gradientScaleType, Algorithms.gradientPaletteToString(gradientScalePalette));
+			getExtensionsToWrite().put(gradientScaleType,
+					Algorithms.gradientPaletteToString(gradientScalePalette, gradientScaleType));
 		}
 
 		public String getGradientScaleType() {
