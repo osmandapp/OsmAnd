@@ -207,7 +207,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment {
 
 		AndroidUiHelper.updateVisibility(errorText, false);
 		AndroidUiHelper.updateVisibility(buttonAuthorize, false);
-		AndroidUiHelper.updateVisibility(view.findViewById(R.id.promocode_container), promoCodeSupported());
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.promocode_container), dialogType == LoginDialogType.SIGN_UP && promoCodeSupported());
 
 		buttonAuthorize.setOnClickListener(new OnClickListener() {
 			@Override
@@ -395,8 +395,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment {
 	}
 
 	private boolean promoCodeSupported() {
-		return dialogType == LoginDialogType.SIGN_UP
-				&& (Version.isDeveloperVersion(app) || !Version.isProductionVersion(app));
+		return Version.isDeveloperVersion(app) || !Version.isProductionVersion(app) || !Version.isGooglePlayEnabled();
 	}
 
 	private void updateDescription() {

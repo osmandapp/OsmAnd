@@ -54,7 +54,7 @@ public class BackupUploadCard extends MapBaseCard {
 	private ProgressBar progressBar;
 	private ViewGroup itemsContainer;
 
-	private boolean buttonsVisible = true;
+	private boolean buttonsVisible = false;
 
 	public BackupUploadCard(@NonNull MapActivity mapActivity, @NonNull PrepareBackupResult backup,
 							@Nullable BackupExportListener exportListener,
