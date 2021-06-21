@@ -11,8 +11,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+
+import org.apache.commons.logging.Log;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -20,6 +23,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class LogcatActivity extends BaseLogcatActivity {
+
+	private static final Log log = PlatformUtil.getLog(LogcatActivity.class);
 
 	private static final int SHARE_ID = 0;
 	private static final int LEVEL_ID = 1;
@@ -32,7 +37,7 @@ public class LogcatActivity extends BaseLogcatActivity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		OsmandApplication app = (OsmandApplication) getApplication();
+		OsmandApplication app = getMyApplication();
 		app.applyTheme(this);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.recyclerview);
@@ -55,16 +60,6 @@ public class LogcatActivity extends BaseLogcatActivity {
 //
 //			recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 //		}
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-	}
-
-	@Override
-	protected void onPause() {
-		super.onPause();
 	}
 
 	@Override
