@@ -339,7 +339,7 @@ public class ContextMenuAdapter {
 				return convertView;
 			}
 			if (layoutId == R.layout.help_to_improve_item) {
-				TextView feedbackButton = (TextView) convertView.findViewById(R.id.feedbackButton);
+				TextView feedbackButton = convertView.findViewById(R.id.feedbackButton);
 				Drawable pollIcon = app.getUIUtilities().getThemedIcon(R.drawable.ic_action_big_poll);
 				feedbackButton.setCompoundDrawablesWithIntrinsicBounds(null, pollIcon, null, null);
 				feedbackButton.setOnClickListener(new View.OnClickListener() {
@@ -350,7 +350,7 @@ public class ContextMenuAdapter {
 								.show(((FragmentActivity) getContext()).getSupportFragmentManager(), null);
 					}
 				});
-				TextView contactUsButton = (TextView) convertView.findViewById(R.id.contactUsButton);
+				TextView contactUsButton = convertView.findViewById(R.id.contactUsButton);
 				Drawable contactUsIcon =
 						app.getUIUtilities().getThemedIcon(R.drawable.ic_action_big_feedback);
 				contactUsButton.setCompoundDrawablesWithIntrinsicBounds(null, contactUsIcon, null,
@@ -367,26 +367,6 @@ public class ContextMenuAdapter {
 						}
 					}
 				});
-				File logFile = app.getAppPath(OsmandApplication.EXCEPTION_PATH);
-				View sendLogButtonDiv = convertView.findViewById(R.id.sendLogButtonDiv);
-				TextView sendLogButton = (TextView) convertView.findViewById(R.id.sendLogButton);
-				if (logFile.exists()) {
-					Drawable sendLogIcon =
-							app.getUIUtilities().getThemedIcon(R.drawable.ic_crashlog);
-					sendLogButton.setCompoundDrawablesWithIntrinsicBounds(null, sendLogIcon, null, null);
-					sendLogButton.setCompoundDrawablePadding(AndroidUtils.dpToPx(app, 8f));
-					sendLogButton.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							app.sendCrashLog();
-						}
-					});
-					sendLogButtonDiv.setVisibility(View.VISIBLE);
-					sendLogButton.setVisibility(View.VISIBLE);
-				} else {
-					sendLogButtonDiv.setVisibility(View.GONE);
-					sendLogButton.setVisibility(View.GONE);
-				}
 				return convertView;
 			}
 

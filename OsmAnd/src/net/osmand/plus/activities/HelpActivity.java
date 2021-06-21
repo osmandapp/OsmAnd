@@ -22,14 +22,18 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.actions.ShareDialog;
+import net.osmand.plus.development.BaseLogcatActivity;
 import net.osmand.plus.dialogs.HelpArticleDialogFragment;
 
+import java.io.File;
+
 import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
-public class HelpActivity extends OsmandActionBarActivity implements OnItemClickListener, OnItemLongClickListener {
+public class HelpActivity extends BaseLogcatActivity implements OnItemClickListener, OnItemLongClickListener {
 
 	//	public static final String DIALOG = "dialog";
 	public static final String OSMAND_POLL_HTML = "https://osmand.net/android-poll.html";
@@ -40,7 +44,7 @@ public class HelpActivity extends OsmandActionBarActivity implements OnItemClick
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		((OsmandApplication) getApplication()).applyTheme(this);
+		getMyApplication().applyTheme(this);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.fragment_help_screen);
 
@@ -126,9 +130,29 @@ public class HelpActivity extends OsmandActionBarActivity implements OnItemClick
 	}
 
 	private void createHelpUsToImproveItems(ContextMenuAdapter contextMenuAdapter) {
+		final OsmandApplication app = getMyApplication();
+
 		contextMenuAdapter.addItem(createCategory(R.string.help_us_to_improve_menu_group));
 		contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setLayout(R.layout.help_to_improve_item).createItem());
+
+		final File exceptionLog = app.getAppPath(OsmandApplication.EXCEPTION_PATH);
+		if (exceptionLog.exists()) {
+			contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
+					.setTitle(getString(R.string.send_crash_log))
+					.setListener((adapter, itemId, position, isChecked, viewCoordinates) -> {
+						app.sendCrashLog(exceptionLog);
+						return false;
+					}).createItem()
+			);
+		}
+		contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setTitle(getString(R.string.send_logcat_log))
+				.setListener((adapter, itemId, position, isChecked, viewCoordinates) -> {
+					startSaveLogsAsyncTask();
+					return false;
+				}).createItem()
+		);
 	}
 
 	private void createFeaturesItems(ContextMenuAdapter contextMenuAdapter) {
@@ -183,12 +207,12 @@ public class HelpActivity extends OsmandActionBarActivity implements OnItemClick
 		contextMenuAdapter.addItem(createItem(R.string.what_is_new, NULL_ID,
 				"feature_articles/osmand-3-9-released.html"));
 
-		String releasedate = "";
+		String releaseDate = "";
 		if (!getString(R.string.app_edition).isEmpty()) {
-			releasedate = ", " + getString(R.string.shared_string_release).toLowerCase() + ": "
+			releaseDate = ", " + getString(R.string.shared_string_release).toLowerCase() + ": "
 					+ getString(R.string.app_edition);
 		}
-		String version = Version.getFullVersion(getMyApplication()) + releasedate;
+		String version = Version.getFullVersion(getMyApplication()) + releaseDate;
 		ShowArticleOnTouchListener listener = new ShowArticleOnTouchListener(
 				"feature_articles/about.html", this, version);
 		contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
@@ -252,6 +276,16 @@ public class HelpActivity extends OsmandActionBarActivity implements OnItemClick
 					}
 				})
 				.createItem();
+	}
+
+	@NonNull
+	@Override
+	protected String getFilterLevel() {
+		return "";
+	}
+
+	@Override
+	protected void onLogEntryAdded() {
 	}
 
 	private static class ShowArticleOnTouchListener implements ContextMenuAdapter.ItemClickListener {
