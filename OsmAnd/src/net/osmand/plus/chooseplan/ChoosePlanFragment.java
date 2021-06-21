@@ -99,22 +99,25 @@ public class ChoosePlanFragment extends BasePurchaseFragment {
 
 		ImageView restoreBtn = view.findViewById(R.id.button_reset);
 		restoreBtn.setOnClickListener(v -> purchaseHelper.requestInventory());
-
-		scrollView.getViewTreeObserver().addOnScrollChangedListener(this::updateToolbar);
 	}
 
-	private void updateToolbar() {
-		View shadow = view.findViewById(R.id.toolbar_shadow);
-		View header = view.findViewById(R.id.header);
-		TextView tvTitle = view.findViewById(R.id.toolbar_title);
-		if (scrollView.getScrollY() > header.getBottom()) {
-			shadow.setVisibility(View.VISIBLE);
-			tvTitle.setText(getString(selectedFeature.getHeaderTitleId()));
+	@Override
+	protected void updateToolbar(int verticalOffset) {
+		float absOffset = Math.abs(verticalOffset);
+		float totalScrollRange = appBar.getTotalScrollRange();
 
-		} else {
-			shadow.setVisibility(View.GONE);
-			tvTitle.setText("");
-		}
+		float alpha = UiUtilities.getProportionalAlpha(totalScrollRange * 0.25f, totalScrollRange * 0.9f, absOffset);
+		float inverseAlpha = 1.0f - UiUtilities.getProportionalAlpha(totalScrollRange * 0.5f, totalScrollRange, absOffset);
+
+		View header = view.findViewById(R.id.header);
+		header.setAlpha(alpha);
+
+		TextView tvTitle = view.findViewById(R.id.toolbar_title);
+		tvTitle.setText(getString(selectedFeature.getHeaderTitleId()));
+		tvTitle.setAlpha(inverseAlpha);
+
+		View shadow = view.findViewById(R.id.shadowView);
+		shadow.setAlpha(inverseAlpha);
 	}
 
 	private void setupHeaderIconBackground() {

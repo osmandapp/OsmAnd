@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
@@ -21,6 +20,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
+import androidx.core.widget.NestedScrollView;
+
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
@@ -36,7 +39,7 @@ import java.util.List;
 
 import static net.osmand.plus.liveupdates.LiveUpdatesSettingsBottomSheet.getActiveColorId;
 
-public abstract class BasePurchaseFragment extends BaseOsmAndDialogFragment {
+public abstract class BasePurchaseFragment extends BaseOsmAndDialogFragment implements OnOffsetChangedListener {
 
 	protected OsmandApplication app;
 	protected InAppPurchaseHelper purchaseHelper;
@@ -45,7 +48,9 @@ public abstract class BasePurchaseFragment extends BaseOsmAndDialogFragment {
 	protected boolean nightMode;
 
 	protected View view;
-	protected ScrollView scrollView;
+	protected AppBarLayout appBar;
+	protected NestedScrollView scrollView;
+	private int lastKnownToolbarOffset;
 
 	protected List<OsmAndFeature> features = new ArrayList<>(Arrays.asList(OsmAndFeature.values()));
 
@@ -152,6 +157,8 @@ public abstract class BasePurchaseFragment extends BaseOsmAndDialogFragment {
 	                         @Nullable Bundle savedInstanceState) {
 		view = inflater.inflate(getLayoutId(), container, false);
 		scrollView = view.findViewById(R.id.scroll_view);
+		appBar = view.findViewById(R.id.appbar);
+		appBar.addOnOffsetChangedListener(this);
 		initView();
 		return view;
 	}
@@ -233,6 +240,18 @@ public abstract class BasePurchaseFragment extends BaseOsmAndDialogFragment {
 		TextView tvTitle = itemView.findViewById(R.id.title);
 		tvTitle.setText(getString(titleId));
 	}
+
+	@Override
+	public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+		lastKnownToolbarOffset = verticalOffset;
+		updateToolbar();
+	}
+
+	protected void updateToolbar() {
+		updateToolbar(lastKnownToolbarOffset);
+	}
+
+	protected abstract void updateToolbar(int verticalOffset);
 
 	protected int getAlphaColor(@ColorInt int colorNoAlpha, float ratio) {
 		return UiUtilities.getColorWithAlpha(colorNoAlpha, ratio);

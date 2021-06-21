@@ -1,5 +1,6 @@
 package net.osmand.plus.chooseplan;
 
+import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -7,9 +8,10 @@ import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.ColorRes;
@@ -19,6 +21,7 @@ import androidx.core.content.ContextCompat;
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
@@ -74,49 +77,52 @@ public abstract class SelectedPlanFragment extends BasePurchaseFragment {
 		ImageView helpBtn = view.findViewById(R.id.button_help);
 		helpBtn.setOnClickListener(v ->
 				WikipediaDialogFragment.showFullArticle(requireActivity(), Uri.parse(PURCHASES_INFO), nightMode));
-
-		scrollView.getViewTreeObserver().addOnScrollChangedListener(this::updateToolbar);
 	}
 
-	private void updateToolbar() {
-		View container = view.findViewById(R.id.toolbar_container);
-		View shadow = view.findViewById(R.id.toolbar_shadow);
-		View header = view.findViewById(R.id.header);
+	@Override
+	protected void updateToolbar(int verticalOffset) {
+		float absOffset = Math.abs(verticalOffset);
+		float totalScrollRange = appBar.getTotalScrollRange();
+		boolean collapsed = Math.abs(verticalOffset) == appBar.getTotalScrollRange();
+
+		float alpha = UiUtilities.getProportionalAlpha(0, totalScrollRange * 0.75f, absOffset);
+		float inverseAlpha = 1.0f - UiUtilities.getProportionalAlpha(0, totalScrollRange, absOffset);
+
 		int defaultLinksColor = ContextCompat.getColor(app, getToolbarLinksColor());
 		int activeLinksColor = ContextCompat.getColor(app, getActiveToolbarLinksColor());
 		int headerBgColor = ContextCompat.getColor(app, getHeaderBgColorId());
 		int activeColor = ContextCompat.getColor(app, getActiveColorId(nightMode));
-		int toolbarColor;
+
+		View header = view.findViewById(R.id.header);
+		header.setAlpha(alpha);
 
 		ImageView icBack = view.findViewById(R.id.button_back);
 		ImageView icInfo = view.findViewById(R.id.button_help);
+		int iconsColor = UiUtilities.getProportionalColorMix(defaultLinksColor, activeLinksColor, 0, totalScrollRange, Math.abs(verticalOffset));
+		icBack.setColorFilter(iconsColor);
+		icInfo.setColorFilter(iconsColor);
+
 		TextView tvTitle = view.findViewById(R.id.toolbar_title);
+		tvTitle.setTextColor(activeLinksColor);
+		tvTitle.setText(getHeader());
+		tvTitle.setAlpha(inverseAlpha);
 
-		boolean paintToolbar = scrollView.getScrollY() > header.getBottom();
-		if (paintToolbar) {
-			toolbarColor = activeColor;
-			shadow.setVisibility(View.VISIBLE);
-			tvTitle.setText(getHeader());
-			tvTitle.setTextColor(activeLinksColor);
-			icBack.setColorFilter(activeLinksColor);
-			icInfo.setColorFilter(activeLinksColor);
-		} else {
-			toolbarColor = headerBgColor;
-			shadow.setVisibility(View.GONE);
-			tvTitle.setText("");
-			icBack.setColorFilter(defaultLinksColor);
-			icInfo.setColorFilter(defaultLinksColor);
-		}
-
-		container.setBackgroundColor(toolbarColor);
-		if (Build.VERSION.SDK_INT >= 21 && getDialog() != null && getDialog().getWindow() != null) {
-			getDialog().getWindow().setStatusBarColor(toolbarColor);
+		int toolbarColor = UiUtilities.getProportionalColorMix(headerBgColor, activeColor, 0, totalScrollRange, Math.abs(verticalOffset));
+		appBar.setBackgroundColor(toolbarColor);
+		Dialog dialog = getDialog();
+		if (Build.VERSION.SDK_INT >= 21 && dialog != null && dialog.getWindow() != null) {
+			Window window = dialog.getWindow();
+			window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+			window.setStatusBarColor(toolbarColor);
 			if (Build.VERSION.SDK_INT >= 23 && !nightMode) {
-				getDialog().getWindow().getDecorView().setSystemUiVisibility(paintToolbar ?
+				window.getDecorView().setSystemUiVisibility(collapsed ?
 						view.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR :
 						view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 			}
 		}
+
+		View shadow = view.findViewById(R.id.shadowView);
+		shadow.setAlpha(inverseAlpha);
 	}
 
 	private void setupHeader() {
@@ -145,10 +151,10 @@ public abstract class SelectedPlanFragment extends BasePurchaseFragment {
 
 	private void setupLearnMoreButton() {
 		View btn = view.findViewById(R.id.learn_more_button);
-		ScrollView scrollView = view.findViewById(R.id.scroll_view);
 		btn.setOnClickListener(v -> {
 			View includesContainer = view.findViewById(R.id.list_included);
 			scrollView.smoothScrollTo(0, includesContainer.getTop());
+			appBar.setExpanded(false);
 		});
 	}
 
