@@ -8,6 +8,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.R;
+import net.osmand.plus.inapp.InAppPurchases;
+import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class OsmAndProPlanFragment extends SelectedPlanFragment {
 
@@ -46,6 +51,19 @@ public class OsmAndProPlanFragment extends SelectedPlanFragment {
 	@Override
 	protected int getHeaderIconId() {
 		return R.drawable.ic_action_osmand_pro_logo;
+	}
+
+	@Override
+	protected List<InAppSubscription> getVisibleSubscriptions() {
+		InAppPurchases purchases = app.getInAppPurchaseHelper().getInAppPurchases();
+		List<InAppSubscription> subscriptions = new ArrayList<>();
+		List<InAppSubscription> visibleSubscriptions = purchaseHelper.getSubscriptions().getVisibleSubscriptions();
+		for (InAppSubscription subscription : visibleSubscriptions) {
+			if (purchases.isOsmAndProSubscription(subscription)) {
+				subscriptions.add(subscription);
+			}
+		}
+		return subscriptions;
 	}
 
 	@Override
