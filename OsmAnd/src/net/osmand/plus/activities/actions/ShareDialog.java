@@ -2,6 +2,7 @@ package net.osmand.plus.activities.actions;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
+import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -13,14 +14,15 @@ import android.os.Bundle;
 import android.text.Html;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
-
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 
 public class ShareDialog {
 
@@ -110,23 +112,22 @@ public class ShareDialog {
 		}
 		
 		public void execute(Activity a, String title) {
-			if(type == ACTION) {
+			if (type == ACTION) {
 				runnable.run();
-			} else if(type == VIEW) {
+			} else if (type == VIEW) {
 				AlertDialog.Builder bld = new AlertDialog.Builder(a);
 				bld.setTitle(title);
 				bld.setMessage(content);
 				bld.show();
-			} else if(type == EMAIL) {
+			} else if (type == EMAIL) {
 				sendEmail(a, content, title);
-			} else if(type == SMS) {
+			} else if (type == SMS) {
 				sendSms(a, content);
-			} else if(type == CLIPBOARD) {
-				sendToClipboard(a, content);
-			} else if(type == QR) {
+			} else if (type == CLIPBOARD) {
+				copyToClipboardWithToast(a, content, Toast.LENGTH_LONG);
+			} else if (type == QR) {
 				sendQRCode(a, "TEXT_TYPE", null, content);
 			}
-			
 		}
 	}
 	
@@ -214,10 +215,32 @@ public class ShareDialog {
 		}
 	}
 
-	public static void sendToClipboard(Activity activity, String text) {
-		ClipboardManager clipboard = (ClipboardManager) activity.getSystemService(Activity.CLIPBOARD_SERVICE);
-		clipboard.setText(text);
-		Toast.makeText(activity, activity.getString(R.string.copied_to_clipboard) + "\n" + text, Toast.LENGTH_LONG)
-				.show();
+	public static void copyToClipboardWithToast(@NonNull Context context, @NonNull String text, int duration) {
+		copyToClipboard(context, text, true, duration);
+	}
+
+	/**
+	 * @return true if text was copied
+	 */
+	public static boolean copyToClipboard(@NonNull Context context, @NonNull String text) {
+		return copyToClipboard(context, text, false, -1);
+	}
+
+	/**
+	 * @return true if text was copied
+	 */
+	private static boolean copyToClipboard(@NonNull Context context, @NonNull String text,
+	                                       boolean showToast, int duration) {
+		Object object = context.getSystemService(Activity.CLIPBOARD_SERVICE);
+		if (object instanceof ClipboardManager) {
+			ClipboardManager clipboardManager = (ClipboardManager) object;
+			clipboardManager.setPrimaryClip(ClipData.newPlainText("", text));
+			if (showToast) {
+				String toastMessage = context.getString(R.string.copied_to_clipboard) + ":\n" + text;
+				Toast.makeText(context, toastMessage, duration).show();
+			}
+			return true;
+		}
+		return false;
 	}
 }

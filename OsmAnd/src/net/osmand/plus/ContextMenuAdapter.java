@@ -558,12 +558,27 @@ public class ContextMenuAdapter {
 	}
 
 	public interface ItemClickListener {
-		//boolean return type needed to desribe if drawer needed to be close or not
+
+		/**
+		 * @return true if drawer should be closed
+		 */
 		boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter,
 								   int itemId,
 								   int position,
 								   boolean isChecked,
 								   int[] viewCoordinates);
+	}
+
+	public interface ItemLongClickListener {
+
+		/**
+		 * @return true if drawer should be closed
+		 */
+		boolean onContextMenuLongClick(ArrayAdapter<ContextMenuItem> adapter,
+									   int itemId,
+									   int position,
+									   boolean isChecked,
+									   int[] viewCoordinates);
 	}
 
 	public interface ProgressListener {

@@ -8,14 +8,11 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
-import androidx.annotation.DrawableRes;
-import androidx.annotation.IdRes;
-import androidx.annotation.StringRes;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
+import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.ContextMenuAdapter;
@@ -24,12 +21,17 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.activities.actions.ShareDialog;
 import net.osmand.plus.dialogs.HelpArticleDialogFragment;
 
-public class HelpActivity extends OsmandActionBarActivity implements AdapterView.OnItemClickListener {
+import androidx.annotation.DrawableRes;
+import androidx.annotation.StringRes;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
+
+public class HelpActivity extends OsmandActionBarActivity implements OnItemClickListener, OnItemLongClickListener {
 
 	//	public static final String DIALOG = "dialog";
-	@IdRes
 	public static final String OSMAND_POLL_HTML = "https://osmand.net/android-poll.html";
 	public static final int NULL_ID = -1;
 	private ArrayAdapter<ContextMenuItem> mAdapter;
@@ -56,9 +58,10 @@ public class HelpActivity extends OsmandActionBarActivity implements AdapterView
 
 		mAdapter = contextMenuAdapter.createListAdapter(this, lightContent);
 
-		ListView listView = (ListView) findViewById(android.R.id.list);
+		ListView listView = findViewById(android.R.id.list);
 		listView.setAdapter(mAdapter);
 		listView.setOnItemClickListener(this);
+		listView.setOnItemLongClickListener(this);
 		int dividerColor = lightContent ? R.color.divider_color_light : R.color.divider_color_dark;
 		Drawable dividerDrawable = new ColorDrawable(ContextCompat.getColor(this, dividerColor));
 		listView.setDivider(dividerDrawable);
@@ -70,15 +73,22 @@ public class HelpActivity extends OsmandActionBarActivity implements AdapterView
 		setupHomeButton();
 	}
 
-
-
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		ContextMenuAdapter.ItemClickListener listener =
-				mAdapter.getItem(position).getItemClickListener();
+		ContextMenuAdapter.ItemClickListener listener = mAdapter.getItem(position).getItemClickListener();
 		if (listener != null) {
 			listener.onContextMenuClick(mAdapter, position, position, false, null);
 		}
+	}
+
+	@Override
+	public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+		ContextMenuAdapter.ItemLongClickListener listener = mAdapter.getItem(position).getItemLongClickListener();
+		if (listener != null) {
+			listener.onContextMenuLongClick(mAdapter, position, position, false, null);
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -174,18 +184,25 @@ public class HelpActivity extends OsmandActionBarActivity implements AdapterView
 				"feature_articles/osmand-3-9-released.html"));
 
 		String releasedate = "";
-		if (!this.getString(R.string.app_edition).isEmpty()) {
-			releasedate = ", " + this.getString(R.string.shared_string_release).toLowerCase() + ": " + this.getString(R.string.app_edition);
+		if (!getString(R.string.app_edition).isEmpty()) {
+			releasedate = ", " + getString(R.string.shared_string_release).toLowerCase() + ": "
+					+ getString(R.string.app_edition);
 		}
 		String version = Version.getFullVersion(getMyApplication()) + releasedate;
 		ShowArticleOnTouchListener listener = new ShowArticleOnTouchListener(
 				"feature_articles/about.html", this, version);
 		contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitle(getString(R.string.shared_string_about))
-				.setDescription(version).setListener(listener).createItem());
+				.setDescription(version)
+				.setListener(listener)
+				.setLongClickListener((adapter, itemId, position, isChecked, viewCoordinates) -> {
+					ShareDialog.copyToClipboardWithToast(adapter.getContext(), version, Toast.LENGTH_SHORT);
+					return false;
+				})
+				.createItem());
 	}
 
-	// Helper metods
+	// Helper methods
 	private ContextMenuItem createCategory(@StringRes int titleRes) {
 		return new ContextMenuItem.ItemBuilder().setTitle(
 				getString(titleRes)).setCategory(true)
