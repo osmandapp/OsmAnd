@@ -225,10 +225,8 @@ public class GPXDatabase {
 
 			if (!Algorithms.isEmpty(gpxFile.getSplitType()) && gpxFile.getSplitInterval() > 0) {
 				GpxSplitType gpxSplitType = GpxSplitType.getSplitTypeByName(gpxFile.getSplitType());
-				if (gpxSplitType != null) {
-					splitType = gpxSplitType.getType();
-					splitInterval = gpxFile.getSplitInterval();
-				}
+				splitType = gpxSplitType.getType();
+				splitInterval = gpxFile.getSplitInterval();
 			}
 			if (!Algorithms.isEmpty(gpxFile.getGradientScaleType())) {
 				gradientScaleType = GradientScaleType.getGradientTypeByName(gpxFile.getGradientScaleType());
@@ -560,7 +558,8 @@ public class GPXDatabase {
 				}
 				db.execSQL("UPDATE " + GPX_TABLE_NAME + " SET " + columnName + " = ? " +
 								" WHERE " + GPX_COL_NAME + " = ? AND " + GPX_COL_DIR + " = ?",
-						new Object[] {Algorithms.gradientPaletteToString(gradientScalePalette), fileName, fileDir});
+						new Object[] {Algorithms.gradientPaletteToString(gradientScalePalette,
+								gradientScaleType.getColorTypeName()), fileName, fileDir});
 			} finally {
 				db.close();
 			}
@@ -787,9 +786,10 @@ public class GPXDatabase {
 					new Object[] {fileName, fileDir, color, 0, item.fileLastUploadedTime, item.splitType, item.splitInterval,
 							item.apiImported ? 1 : 0, item.showAsMarkers ? 1 : 0, item.joinSegments ? 1 : 0,
 							item.showArrows ? 1 : 0, item.showStartFinish ? 1 : 0, item.width,
-							Algorithms.gradientPaletteToString(item.gradientSpeedPalette),
-							Algorithms.gradientPaletteToString(item.gradientAltitudePalette),
-							Algorithms.gradientPaletteToString(item.gradientSlopePalette), gradientScaleType});
+							Algorithms.gradientPaletteToString(item.gradientSpeedPalette, GradientScaleType.SPEED.getColorTypeName()),
+							Algorithms.gradientPaletteToString(item.gradientAltitudePalette, GradientScaleType.ALTITUDE.getColorTypeName()),
+							Algorithms.gradientPaletteToString(item.gradientSlopePalette, GradientScaleType.SLOPE.getColorTypeName()),
+							gradientScaleType});
 		}
 	}
 
@@ -919,9 +919,12 @@ public class GPXDatabase {
 		item.showArrows = showArrows;
 		item.showStartFinish = showStartFinish;
 		item.width = width;
-		item.gradientSpeedPalette = Algorithms.stringToGradientPalette(gradientSpeedPalette);
-		item.gradientAltitudePalette = Algorithms.stringToGradientPalette(gradientAltitudePalette);
-		item.gradientSlopePalette = Algorithms.stringToGradientPalette(gradientSlopePalette);
+		item.gradientSpeedPalette = Algorithms.stringToGradientPalette(gradientSpeedPalette,
+				GradientScaleType.SPEED.getColorTypeName());
+		item.gradientAltitudePalette = Algorithms.stringToGradientPalette(gradientAltitudePalette,
+				GradientScaleType.ALTITUDE.getColorTypeName());
+		item.gradientSlopePalette = Algorithms.stringToGradientPalette(gradientSlopePalette,
+				GradientScaleType.SLOPE.getColorTypeName());
 
 		try {
 			item.gradientScaleType = GradientScaleType.getGradientTypeByName(gradientScaleType);

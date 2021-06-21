@@ -385,6 +385,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 	private void setDrawInfoOnRouteLayer(@Nullable PreviewRouteLineInfo drawInfo) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
+			mapActivity.getMapLayers().getPreviewRouteLineLayer().setPreviewRouteLineInfo(drawInfo);
 			mapActivity.getMapLayers().getRouteLayer().setPreviewRouteLineInfo(drawInfo);
 		}
 	}

@@ -76,4 +76,16 @@ public class BackupInfo {
 		}
 		return files;
 	}
+
+	@NonNull
+	@Override
+	public String toString() {
+		return "BackupInfo {" +
+				" filesToDownload=" + filesToDownload.size() +
+				", filesToUpload=" + filesToUpload.size() +
+				", filesToDelete=" + filesToDelete.size() +
+				", localFilesToDelete=" + localFilesToDelete.size() +
+				", filesToMerge=" + filesToMerge.size() +
+				" }";
+	}
 }
