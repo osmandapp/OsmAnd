@@ -5,8 +5,6 @@ import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.OSMSettings.OSMTagKey;
 import net.osmand.util.Algorithms;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
 
 public class OpenstreetmapPoint extends OsmPoint {
