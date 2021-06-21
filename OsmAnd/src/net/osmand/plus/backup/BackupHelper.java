@@ -1052,6 +1052,9 @@ public class BackupHelper {
 
 	@SuppressLint("StaticFieldLeak")
 	public void collectLocalFiles(@Nullable final OnCollectLocalFilesListener listener) {
+		if (DEBUG) {
+			LOG.debug("+++ collectLocalFiles");
+		}
 		AsyncTask<Void, LocalFile, List<LocalFile>> task = new AsyncTask<Void, LocalFile, List<LocalFile>>() {
 
 			@Override
@@ -1115,6 +1118,9 @@ public class BackupHelper {
 
 			@Override
 			protected void onPostExecute(List<LocalFile> localFiles) {
+				if (DEBUG) {
+					LOG.debug("--- collectLocalFiles: " + localFiles.size());
+				}
 				if (listener != null) {
 					listener.onFilesCollected(localFiles);
 				}
@@ -1180,6 +1186,9 @@ public class BackupHelper {
 								   @NonNull final List<RemoteFile> deletedRemoteFiles,
 								   @Nullable final OnGenerateBackupInfoListener listener) {
 
+		if (DEBUG) {
+			LOG.debug("+++ generateBackupInfo");
+		}
 		final long backupLastUploadedTime = settings.BACKUP_LAST_UPLOADED_TIME.get();
 
 		AsyncTask<Void, Void, BackupInfo> task = new AsyncTask<Void, Void, BackupInfo>() {
@@ -1244,6 +1253,9 @@ public class BackupHelper {
 
 			@Override
 			protected void onPostExecute(BackupInfo backupInfo) {
+				if (DEBUG) {
+					LOG.debug("--- generateBackupInfo: " + backupInfo);
+				}
 				if (listener != null) {
 					listener.onBackupInfoGenerated(backupInfo, null);
 				}
