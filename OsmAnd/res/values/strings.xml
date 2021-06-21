@@ -11,6 +11,9 @@
 	Thx - Hardy
 
 -->
+    
+    <string name="send_logcat_log">Send logcat log</string>
+    <string name="send_crash_log">Send crash log</string>
     <string name="routing_attr_avoid_tunnels_name">Avoid tunnels</string>
     <string name="routing_attr_avoid_tunnels_description">Avoid tunnels</string>
     <string name="delete_version_history">Delete version history</string>
