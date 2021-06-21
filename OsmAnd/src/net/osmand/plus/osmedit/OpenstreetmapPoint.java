@@ -5,6 +5,10 @@ import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.OSMSettings.OSMTagKey;
 import net.osmand.util.Algorithms;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
 public class OpenstreetmapPoint extends OsmPoint {
 	private static final long serialVersionUID = 729654300829771467L;
 	private Entity entity;
@@ -89,6 +93,24 @@ public class OpenstreetmapPoint extends OsmPoint {
 		return sb.toString();
 	}
 
+	public void trimChangedTagNamesValues() {
+		Entity entity = getEntity();
+		if (entity == null) {
+			return;
+		}
+		Set<String> changedTags = entity.getChangedTags();
+		if (changedTags != null) {
+			for (String tag : changedTags) {
+				if (tag == null || tag.trim().equals(tag)) {
+					continue;
+				}
+				String trimmedTag = tag.trim();
+				changedTags.remove(tag);
+				changedTags.add(trimmedTag);
+				entity.putTag(trimmedTag, entity.getTag(trimmedTag));
+			}
+		}
+	}
 
 	@Override
 	public String toString() {
