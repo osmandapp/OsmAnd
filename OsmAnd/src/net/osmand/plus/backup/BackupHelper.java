@@ -619,7 +619,7 @@ public class BackupHelper {
 			@Override
 			public void onFilesUploadDone(@NonNull Map<File, String> errors) {
 				if (DEBUG) {
-					LOG.debug("--- uploadFilesDone");
+					LOG.debug("--- uploadFilesDone. Errors=" + errors);
 				}
 				if (errors.isEmpty()) {
 					settings.BACKUP_LAST_UPLOADED_TIME.set(System.currentTimeMillis() + 1);
@@ -706,7 +706,7 @@ public class BackupHelper {
 						}
 					}
 					if (DEBUG) {
-						LOG.debug("--- deleteFilesDone. Errors=" + errors.size());
+						LOG.debug("--- deleteFilesDone. Errors=" + errors);
 					}
 					listener.onFilesDeleteDone(errors);
 				}
@@ -982,7 +982,7 @@ public class BackupHelper {
 						Map<File, String> errMap = resolveServerErrors(errors);
 						res.putAll(errMap);
 						if (DEBUG) {
-							LOG.debug("--- downloadFilesSyncDone. Errors=" + errors.size());
+							LOG.debug("--- downloadFilesSyncDone. Errors=" + errors);
 						}
 						if (listener != null) {
 							listener.onFilesDownloadDone(errMap);
@@ -1041,7 +1041,7 @@ public class BackupHelper {
 					@Override
 					public void onFilesDownloadDone(@NonNull Map<File, String> errors) {
 						if (DEBUG) {
-							LOG.debug("--- downloadFilesDone. Errors=" + errors.size());
+							LOG.debug("--- downloadFilesDone. Errors=" + errors);
 						}
 						if (listener != null) {
 							listener.onFilesDownloadDone(resolveServerErrors(errors));
