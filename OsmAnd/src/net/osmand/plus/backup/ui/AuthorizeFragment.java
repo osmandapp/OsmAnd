@@ -396,7 +396,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment {
 
 	private boolean promoCodeSupported() {
 		return dialogType == LoginDialogType.SIGN_UP
-				&& Version.isDeveloperVersion(app) || !Version.isProductionVersion(app);
+				&& (Version.isDeveloperVersion(app) || !Version.isProductionVersion(app));
 	}
 
 	private void updateDescription() {
