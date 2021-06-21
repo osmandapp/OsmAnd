@@ -413,16 +413,18 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 			downloadThread.runReloadIndexFiles();
 		}
 
-		boolean downloadIndexes = settings.isInternetConnectionAvailable()
-				&& !downloadThread.getIndexes().isDownloadedFromInternet
-				&& !downloadThread.getIndexes().downloadFromInternetFailed;
-
 		List<DownloadItem> suggestedVoice = new ArrayList<>();
-		if (!downloadIndexes) {
+		if (!shouldDownloadIndexes(app)) {
 			suggestedVoice.addAll(downloadThread.getIndexes().getDownloadItemsForGroup(type));
 		}
 
 		return suggestedVoice;
+	}
+
+	public static boolean shouldDownloadIndexes(@NonNull OsmandApplication app) {
+		return app.getSettings().isInternetConnectionAvailable()
+				&& !app.getDownloadThread().getIndexes().isDownloadedFromInternet
+				&& !app.getDownloadThread().getIndexes().downloadFromInternetFailed;
 	}
 
 	private enum InfoType {
