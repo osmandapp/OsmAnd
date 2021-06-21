@@ -281,8 +281,8 @@ public abstract class SelectedPlanFragment extends BasePurchaseFragment {
 	private void createIncludesList() {
 		LinearLayout container = view.findViewById(R.id.list_included);
 		Map<String, List<OsmAndFeature>> chapters = new LinkedHashMap<>();
-		chapters.put(getString(R.string.shared_string_includes_with_columns), includedFeatures);
-		chapters.put(getString(R.string.shared_string_not_included_with_columns), noIncludedFeatures);
+		chapters.put(getString(R.string.ltr_or_rtl_combine_via_colon, getString(R.string.shared_string_includes), ""), includedFeatures);
+		chapters.put(getString(R.string.ltr_or_rtl_combine_via_colon, getString(R.string.shared_string_not_included), ""), noIncludedFeatures);
 
 		for (String key : chapters.keySet()) {
 			List<OsmAndFeature> features = chapters.get(key);

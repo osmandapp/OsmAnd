@@ -319,7 +319,7 @@ public class DiscountHelper {
 				} else {
 					for (InAppPurchase p : purchaseHelper.getSubscriptions().getAllSubscriptions()) {
 						if (url.contains(p.getSku())) {
-							ChoosePlanFragment.showInstance(mapActivity);
+							ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.HOURLY_MAP_UPDATES);
 							break;
 						}
 					}
@@ -379,8 +379,6 @@ public class DiscountHelper {
 			}
 			if (feature != null) {
 				ChoosePlanFragment.showInstance(mapActivity, feature);
-			} else {
-				ChoosePlanFragment.showInstance(mapActivity);
 			}
 		} else {
 			Intent intent = new Intent(Intent.ACTION_VIEW);

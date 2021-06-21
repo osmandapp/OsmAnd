@@ -47,10 +47,6 @@ public class ChoosePlanFragment extends BasePurchaseFragment {
 
 	private OsmAndFeature selectedFeature;
 
-	public static void showInstance(@NonNull FragmentActivity activity) {
-		showInstance(activity, OsmAndFeature.OSMAND_CLOUD);
-	}
-
 	public static void showInstance(@NonNull FragmentActivity activity,
 	                                @NonNull OsmAndFeature selectedFeature) {
 		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();

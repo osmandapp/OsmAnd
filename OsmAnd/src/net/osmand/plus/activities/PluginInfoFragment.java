@@ -167,7 +167,10 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 			public void onClick(View v) {
 				try {
 					if (plugin instanceof SRTMPlugin) {
-						ChoosePlanFragment.showInstance(requireActivity(), OsmAndFeature.TERRAIN);
+						FragmentActivity activity = getActivity();
+						if (activity != null) {
+							ChoosePlanFragment.showInstance(activity, OsmAndFeature.TERRAIN);
+						}
 					} else {
 						startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL())));
 					}

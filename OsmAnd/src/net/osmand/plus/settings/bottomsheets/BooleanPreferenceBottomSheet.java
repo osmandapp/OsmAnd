@@ -23,7 +23,6 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.liveupdates.LiveUpdatesSettingsBottomSheet;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.BooleanPreference;
 import net.osmand.plus.settings.backend.OsmandPreference;
@@ -145,9 +144,9 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 			selectedColor = UiUtilities.getColorWithAlpha(color, checked ? 0.3f : 0.5f);
 		} else {
 			bgColor = ContextCompat.getColor(app, checked
-					? LiveUpdatesSettingsBottomSheet.getActiveColorId(nightMode) : getSecondaryIconColorId(nightMode));
+					? getActiveColorId(nightMode) : getSecondaryIconColorId(nightMode));
 			selectedColor = UiUtilities.getColorWithAlpha(
-					ContextCompat.getColor(app, LiveUpdatesSettingsBottomSheet.getActiveColorId(nightMode)), checked ? 0.3f : 0.5f);
+					ContextCompat.getColor(app, getActiveColorId(nightMode)), checked ? 0.3f : 0.5f);
 		}
 
 		int bgResId = isLayoutRtl ? R.drawable.rectangle_rounded_left : R.drawable.rectangle_rounded_right;

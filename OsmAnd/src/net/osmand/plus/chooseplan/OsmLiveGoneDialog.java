@@ -28,8 +28,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
-import net.osmand.plus.chooseplan.ChoosePlanDialogFragment.ChoosePlanDialogType;
-import net.osmand.plus.chooseplan.ChoosePlanDialogFragment.OsmAndFeature;
+import net.osmand.plus.chooseplan.BasePurchaseFragment.OsmAndFeature;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.settings.backend.OsmandPreference;
@@ -50,13 +49,12 @@ public abstract class OsmLiveGoneDialog extends BaseOsmAndDialogFragment {
 	private View subscriptionButton;
 
 	private final OsmAndFeature[] subscriptionFeatures = {
-			OsmAndFeature.DAILY_MAP_UPDATES,
-			OsmAndFeature.UNLIMITED_DOWNLOADS,
-			OsmAndFeature.WIKIPEDIA_OFFLINE,
-			OsmAndFeature.WIKIVOYAGE_OFFLINE,
-			OsmAndFeature.CONTOUR_LINES_HILLSHADE_MAPS,
-			OsmAndFeature.SEA_DEPTH_MAPS,
-			OsmAndFeature.UNLOCK_ALL_FEATURES,
+			OsmAndFeature.MONTHLY_MAP_UPDATES,
+			OsmAndFeature.UNLIMITED_MAP_DOWNLOADS,
+			OsmAndFeature.WIKIPEDIA,
+			OsmAndFeature.WIKIVOYAGE,
+			OsmAndFeature.TERRAIN,
+			OsmAndFeature.NAUTICAL_DEPTH
 	};
 
 	public static class OsmLiveOnHoldDialog extends OsmLiveGoneDialog {
@@ -164,7 +162,7 @@ public abstract class OsmLiveGoneDialog extends BaseOsmAndDialogFragment {
 		}
 		descr.append(getString(R.string.purchase_cancelled_dialog_descr));
 		for (OsmAndFeature feature : subscriptionFeatures) {
-			descr.append("\n").append("— ").append(feature.toHumanString(ctx));
+			descr.append("\n").append("— ").append(getString(feature.getHeaderTitleId()));
 		}
 		infoDescr.setText(descr);
 

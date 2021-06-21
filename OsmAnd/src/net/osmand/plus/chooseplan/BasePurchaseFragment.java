@@ -1,5 +1,6 @@
 package net.osmand.plus.chooseplan;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -214,6 +215,7 @@ public abstract class BasePurchaseFragment extends BaseOsmAndDialogFragment impl
 				R.drawable.btn_background_stroked_active_light);
 	}
 
+	@TargetApi(Build.VERSION_CODES.LOLLIPOP)
 	protected Drawable getRippleDrawable() {
 		return AppCompatResources.getDrawable(app, nightMode ?
 				R.drawable.purchase_button_ripple_dark :

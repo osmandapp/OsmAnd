@@ -29,6 +29,7 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.MenuItemCompat;
+import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Collator;
@@ -369,7 +370,10 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 						CardView cardView = ((CardView) view.findViewById(R.id.card_view));
 						cardView.setCardBackgroundColor(stateList);
 						cardView.setOnClickListener(v -> {
-							ChoosePlanFragment.showInstance(getMyActivity(), OsmAndFeature.HOURLY_MAP_UPDATES);
+							FragmentActivity activity = getMyActivity();
+							if (activity != null) {
+								ChoosePlanFragment.showInstance(activity, OsmAndFeature.HOURLY_MAP_UPDATES);
+							}
 						});
 					} else {
 						view = inflater.inflate(R.layout.bottom_sheet_item_with_descr_switch_and_additional_button_56dp, parent, false);
