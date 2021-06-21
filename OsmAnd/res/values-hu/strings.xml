@@ -1489,7 +1489,7 @@
     <string name="shared_string_do_not_use">Ne használja</string>
     <string name="shared_string_address">Cím</string>
     <string name="rendering_attr_OSMMapperAssistant_name">OSM térképezősegéd</string>
-    <string name="shared_string_is_open">Nyitva van</string>
+    <string name="shared_string_is_open">Most nyitva van</string>
     <string name="shared_string_manage">Kezelés</string>
     <string name="shared_string_edit">Szerkesztés</string>
     <string name="plugin_touringview_descr">A nézet aktiválása megváltoztatja az OsmAnd térképstílusát „Túra nézet”-re, amely egy speciális, nagy részletezettségű nézet az utazóknak és a hivatásos sofőröknek. 
@@ -1995,7 +1995,7 @@
     <string name="osm_live_banner_desc">Szerezzen korlátlan számú térképletöltést, valamint heti, napi vagy akár óránkénti térképfrissítést.</string>
     <string name="osmand_plus_banner_desc">Korlátlan számú térképletöltés és -frissítés, valamint Wikipédia-bővítmény.</string>
     <string name="si_mi_meters">Mérföld/méter</string>
-    <string name="search_map">Térképek keresése…</string>
+    <string name="search_map">Térkép keresése…</string>
     <string name="first_usage_wizard_desc">Engedélyezd az OsmAndnak a pozíciód meghatározását, hogy letölthető térképet javasolhasson a régióhoz.</string>
     <string name="location_not_found">Hely nem található</string>
     <string name="no_inet_connection">Nincs internetkapcsolat</string>
@@ -2270,7 +2270,7 @@
     <string name="mapillary_action_descr">Ossza meg utcaszintű képeit a Mapillary segítségével.</string>
     <string name="mapillary_widget">Mapillary-widget</string>
     <string name="mapillary_widget_descr">Gyors Mapillary közreműködést tesz lehetővé.</string>
-    <string name="mapillary_descr">Online utcaszintű fényképek mindenkinek. Fedezz fel helyeket, vegyél benne részt, fényképezd le a világot.</string>
+    <string name="mapillary_descr">Online utcaszintű fényképek mindenkinek. Fedezzen fel helyeket, dolgozzon együtt másokkal, örökítse meg a világot.</string>
     <string name="plugin_mapillary_descr">Utcaszintű fényképek mindenkinek. Fedezz fel helyeket, vegyél benne részt, fényképezd le a világot.</string>
     <string name="osmand_extended_description_part4">Síelés
 \nAz OsmAnd sítérkép bővítménye lehetővé teszi a sípályák megjelenítését nehézség szerint, valamint további információkat, mint például a felvonók helyét, és más berendezéseket.</string>
@@ -4042,15 +4042,15 @@
     <string name="lost_data_warning">Minden nem mentett adat törlődni fog.</string>
     <string name="show_start_dialog">Kezdő párbeszéd megjelenítése</string>
     <string name="trip_recording_show_start_dialog_setting">Ha le van tiltva, akkor a felvétel azonnal elindul a widget vagy a menüelem megérintése után, kihagyva a megerősítő párbeszédpanelt.</string>
-    <string name="release_4_0_beta">• Új lehetőség: szinvonalak letöltése (méter mellett) lábban
+    <string name="release_4_0_beta">• Új lehetőség: szintvonalak letöltése (méter mellett) lábban
 \n
 \n• Útvonaltervezési környezet: hozzáadott fülek a pontok és grafikonok közötti váltáshoz
 \n
-\n• Az OsmAnd Live frissítések átköltöztek a „Letöltések&gt; Frissítések” helyre
+\n• Az OsmAnd Live frissítések átköltöztek a „Letöltések &gt; Frissítések” helyre
 \n
 \n• A nyomvonalak már magasság, sebesség vagy lejtés szerint is színezhetők
 \n
-\n• Módoítható a navigációs útvonal megjelenése
+\n• A navigációs útvonal megjelenése módosítható
 \n
 \n• Frissült az „Utazás felvétele” párbeszédpanel
 \n
@@ -4166,4 +4166,7 @@
     <string name="restore_complete">A visszaállítás befejeződött</string>
     <string name="grey_color_slope">A szürke szín ott fordul elő, ahol a lejtés nincs meghatározva.</string>
     <string name="backup_version_history">Verzióelőzmények</string>
+    <string name="backup_version_history_delete_descr">Törölni szeretné a letiltott típusok módosítási előzményeit a felhőből\?</string>
+    <string name="backup_storage_taken">Foglalt tárhely</string>
+    <string name="delete_version_history">Verziótörténet törlése</string>
 </resources>

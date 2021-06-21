@@ -56,6 +56,7 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.POIMapLayer;
 import net.osmand.plus.views.layers.PointLocationLayer;
 import net.osmand.plus.views.layers.PointNavigationLayer;
+import net.osmand.plus.views.layers.PreviewRouteLineLayer;
 import net.osmand.plus.views.layers.RouteLayer;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer;
 import net.osmand.plus.views.layers.DistanceRulerControlLayer;
@@ -79,6 +80,7 @@ public class MapActivityLayers {
 	private MapVectorLayer mapVectorLayer;
 	private GPXLayer gpxLayer;
 	private RouteLayer routeLayer;
+	private PreviewRouteLineLayer previewRouteLineLayer;
 	private POIMapLayer poiMapLayer;
 	private FavouritesLayer mFavouritesLayer;
 	private TransportStopsLayer transportStopsLayer;
@@ -143,6 +145,10 @@ public class MapActivityLayers {
 		// 1. route layer
 		routeLayer = new RouteLayer(routingHelper);
 		mapView.addLayer(routeLayer, 1);
+
+		// 1.5 preview route line layer
+		previewRouteLineLayer = new PreviewRouteLineLayer();
+		mapView.addLayer(previewRouteLineLayer, 1.5f);
 
 		// 2. osm bugs layer
 		// 3. poi layer
@@ -596,6 +602,10 @@ public class MapActivityLayers {
 
 	public RouteLayer getRouteLayer() {
 		return routeLayer;
+	}
+
+	public PreviewRouteLineLayer getPreviewRouteLineLayer() {
+		return previewRouteLineLayer;
 	}
 
 	public PointNavigationLayer getNavigationLayer() {

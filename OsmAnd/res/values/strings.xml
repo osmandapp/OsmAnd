@@ -44,6 +44,8 @@
     <string name="purchases_feature_desc_wikivoyage">Explore Wikipedia offline. Articles divided by countries and regions and available in all languages.</string>
     <string name="purchases_feature_desc_terrain">Terrain contour lines, full hillshade map with dark shades and slope maps with colors to show, peaks and lowlands.</string>
     <string name="purchases_feature_desc_nautical">Get access to nautical depth information</string>
+    <string name="routing_attr_avoid_tunnels_name">Avoid tunnels</string>
+    <string name="routing_attr_avoid_tunnels_description">Avoid tunnels</string>
     <string name="delete_version_history">Delete version history</string>
     <string name="backup_version_history_delete_descr">Do you want to delete the change history for disabled types from cloud?</string>
     <string name="backup_storage_taken">Storage taken</string>
@@ -1469,7 +1471,7 @@
     <string name="show_closed_notes">Show closed notes</string>
     <string name="switch_osm_notes_visibility_desc">Show or hide OSM notes on the map.</string>
     <string name="gpx_file_desc">GPX - suitable for export to JOSM or other OSM editors.</string>
-    <string name="osc_file_desc">OSC - suitable for export to OSM.</string>
+    <string name="osc_file_desc">OSC - suitable for export to OpenStreetMap.</string>
     <string name="shared_string_gpx_file">GPX file</string>
     <string name="osc_file">OSC file</string>
     <string name="choose_file_type">Select filetype</string>
@@ -1504,8 +1506,8 @@
     <string name="modify_the_search_query">Change your search.</string>
     <string name="shared_string_actions">Actions</string>
     <string name="shared_string_marker">Marker</string>
-    <string name="empty_state_osm_edits">Create or modify OSM objects</string>
-    <string name="empty_state_osm_edits_descr">Create or modify OSM POIs, open or comment on OSM notes, and contribute recorded GPX files.</string>
+    <string name="empty_state_osm_edits">Create or modify OpenStreetMap objects</string>
+    <string name="empty_state_osm_edits_descr">Create or modify OpenStreetMap POIs, open or comment on OSM notes, and contribute recorded GPX files.</string>
     <string name="shared_string_deleted">Deleted</string>
     <string name="shared_string_edited">Edited</string>
     <string name="shared_string_added">Added</string>

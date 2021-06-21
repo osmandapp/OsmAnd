@@ -198,6 +198,10 @@ public class FileUtils {
 		return isWriteable;
 	}
 
+	public static boolean isTempFile(@NonNull OsmandApplication app, @Nullable String path) {
+		return path != null && path.startsWith(getTempDir(app).getAbsolutePath());
+	}
+
 	public interface RenameCallback {
 		void renamedTo(File file);
 	}

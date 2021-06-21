@@ -809,7 +809,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		}
 		GpxDataItem dataItem = gpxDbHelper.getItem(new File(gpxFile.path));
 		if (dataItem == null) {
-			return RouteColorize.colors;
+			return scaleType == GradientScaleType.SLOPE ? RouteColorize.SLOPE_COLORS : RouteColorize.COLORS;
 		}
 		if (scaleType == GradientScaleType.SPEED) {
 			return dataItem.getGradientSpeedPalette();
@@ -1244,10 +1244,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					selectedPoint.lon = latLon.getLongitude();
 					app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, false);
 					SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, false);
-					SelectedGpxPoint selectedGpxPoint =
-							new SelectedGpxPoint(selectedGpxFile, selectedPoint, null, null, Float.NaN);
-					TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint,
-							null, null, false, false);
+					SelectedGpxPoint selectedGpxPoint = new SelectedGpxPoint(selectedGpxFile, selectedPoint, null, null, Float.NaN);
+					TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint);
 				} else {
 					log.error(errorMessage);
 				}
