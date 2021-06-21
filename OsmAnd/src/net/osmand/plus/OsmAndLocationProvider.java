@@ -328,7 +328,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 					gpsInfo.usedSatellites = u;
 					updateLocation(location);
 				}
-			};
+			}
 			service.registerGnssStatusCallback((GnssStatus.Callback) gpsStatusListener, null);
 		} else {
 			gpsStatusListener = new Listener() {
