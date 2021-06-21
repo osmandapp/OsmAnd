@@ -26,8 +26,7 @@ public enum SettingsItemType {
 	HISTORY_MARKERS,
 	SEARCH_HISTORY,
 	ONLINE_ROUTING_ENGINES,
-	ITINERARY_GROUPS,
-	UNKNOWN;
+	ITINERARY_GROUPS;
 
 	@NonNull
 	public static SettingsItemType fromName(@NonNull String name) {
@@ -37,7 +36,7 @@ public enum SettingsItemType {
 		try {
 			return SettingsItemType.valueOf(name);
 		} catch (RuntimeException e) {
-			return SettingsItemType.UNKNOWN;
+			return null;
 		}
 	}
 }

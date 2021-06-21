@@ -110,7 +110,6 @@ public class BackupAuthorizationFragment extends BaseSettingsFragment {
 		boolean subscribed = InAppPurchaseHelper.isSubscribedToOsmAndPro(app);
 		if (subscribed) {
 			setupAuthorizeButton(signUpButton, DialogButtonType.PRIMARY, R.string.register_opr_create_new_account, true);
-			setupAuthorizeButton(signInButton, DialogButtonType.SECONDARY, R.string.register_opr_have_account, false);
 		} else {
 			signUpButton.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -123,7 +122,7 @@ public class BackupAuthorizationFragment extends BaseSettingsFragment {
 			});
 			setupDialogButton(isNightMode(), signUpButton, DialogButtonType.PRIMARY, R.string.get_plugin);
 		}
-		AndroidUiHelper.updateVisibility(signInButton, subscribed);
+		setupAuthorizeButton(signInButton, DialogButtonType.SECONDARY, R.string.register_opr_have_account, false);
 	}
 
 	private void setupAuthorizeButton(View view, DialogButtonType buttonType, @StringRes int textId, final boolean signUp) {
