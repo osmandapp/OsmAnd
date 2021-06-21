@@ -28,8 +28,6 @@ import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadItem;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.download.VoiceIndexes;
-import net.osmand.plus.download.VoiceIndexes.VoiceIndexType;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandPreference;
@@ -55,6 +53,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import static net.osmand.plus.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
+import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.OTHER_GROUP;
+import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.VOICE_HEADER_REC;
+import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.VOICE_HEADER_TTS;
+import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.VOICE_REC;
+import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.VOICE_TTS;
 
 public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet implements DownloadEvents {
 
@@ -65,7 +68,7 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 	private OsmandSettings settings;
 	private DownloadIndexesThread downloadThread;
 
-	private List<DownloadItem> voiceItemsTTS;
+	private List<DownloadItem> voiceItems;
 	private List<DownloadItem> voiceItemsRec;
 
 	private InfoType selectedVoiceType = InfoType.TTS;
@@ -241,12 +244,12 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 	}
 
 	private void createVoiceView() {
-		if (selectedVoiceType == InfoType.TTS && Algorithms.isEmpty(voiceItemsTTS)) {
-			voiceItemsTTS = getVoiceList(selectedVoiceType.indexType);
+		if (selectedVoiceType == InfoType.TTS && Algorithms.isEmpty(voiceItems)) {
+			voiceItems = getVoiceList(selectedVoiceType.indexGroupName);
 		} else if (selectedVoiceType == InfoType.RECORDED && Algorithms.isEmpty(voiceItemsRec)) {
-			voiceItemsRec = getVoiceList(selectedVoiceType.indexType);
+			voiceItemsRec = getVoiceList(selectedVoiceType.indexGroupName);
 		}
-		createSuggestedVoiceItemsView(selectedVoiceType == InfoType.TTS ? voiceItemsTTS : voiceItemsRec);
+		createSuggestedVoiceItemsView(selectedVoiceType == InfoType.TTS ? voiceItems : voiceItemsRec);
 	}
 
 	private void createSuggestedVoiceItemsView(List<DownloadItem> suggestedVoicePrompts) {
@@ -405,39 +408,39 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 		return dividerItem;
 	}
 
-	public List<DownloadItem> getVoiceList(VoiceIndexType indexType) {
-		VoiceIndexes voiceIndexes = downloadThread.getVoiceIndexes();
-		boolean hasInternet = settings.isInternetConnectionAvailable();
-		if (!voiceIndexes.isDownloadedFromInternet() && hasInternet) {
-			downloadThread.runReloadVoiceIndexes();
+	public List<DownloadItem> getVoiceList(String type) {
+		if (!downloadThread.getIndexes().isDownloadedFromInternet && settings.isInternetConnectionAvailable()) {
+			downloadThread.runReloadIndexFiles();
 		}
 
-		boolean shouldReloadIndexes = hasInternet
-				&& !voiceIndexes.isDownloadedFromInternet()
-				&& !voiceIndexes.downloadFromInternetFailed();
+		boolean downloadIndexes = settings.isInternetConnectionAvailable()
+				&& !downloadThread.getIndexes().isDownloadedFromInternet
+				&& !downloadThread.getIndexes().downloadFromInternetFailed;
 
 		List<DownloadItem> suggestedVoice = new ArrayList<>();
-		if (!shouldReloadIndexes) {
-			suggestedVoice.addAll(voiceIndexes.getVoicePrompts(indexType));
+		if (!downloadIndexes) {
+			suggestedVoice.addAll(downloadThread.getIndexes().getDownloadItemsForGroup(type));
 		}
 
 		return suggestedVoice;
 	}
 
 	private enum InfoType {
-		TTS(R.string.tts_title, R.string.tts_description, VoiceIndexType.TTS),
-		RECORDED(R.string.shared_string_recorded, R.string.recorded_description, VoiceIndexType.REC);
+		TTS(R.string.tts_title, R.string.tts_description, OTHER_GROUP.getDefaultId()
+				+ "#" + VOICE_TTS.getDefaultId() + "#" + VOICE_HEADER_TTS.getDefaultId()),
+		RECORDED(R.string.shared_string_recorded, R.string.recorded_description, OTHER_GROUP.getDefaultId()
+				+ "#" + VOICE_REC.getDefaultId() + "#" + VOICE_HEADER_REC.getDefaultId());
 
 		@StringRes
 		public int titleRes;
 		@StringRes
 		public int descriptionRes;
-		public VoiceIndexType indexType;
+		public String indexGroupName;
 
-		InfoType(int titleRes, int descriptionRes, VoiceIndexType indexType) {
+		InfoType(int titleRes, int descriptionRes, String indexGroupName) {
 			this.titleRes = titleRes;
 			this.descriptionRes = descriptionRes;
-			this.indexType = indexType;
+			this.indexGroupName = indexGroupName;
 		}
 	}
 }

@@ -484,7 +484,6 @@ public class AppInitializer implements IProgress {
 		app.onlineRoutingHelper = startupInit(new OnlineRoutingHelper(app), OnlineRoutingHelper.class);
 
 		initOpeningHoursParser();
-		app.getDownloadThread().runReloadVoiceIndexes();
 	}
 
 	private void initOpeningHoursParser() {
