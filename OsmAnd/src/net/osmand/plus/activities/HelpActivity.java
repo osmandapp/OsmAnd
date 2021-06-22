@@ -8,14 +8,11 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
-import androidx.annotation.DrawableRes;
-import androidx.annotation.IdRes;
-import androidx.annotation.StringRes;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
+import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.ContextMenuAdapter;
@@ -24,12 +21,21 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.activities.actions.ShareDialog;
+import net.osmand.plus.development.BaseLogcatActivity;
 import net.osmand.plus.dialogs.HelpArticleDialogFragment;
 
-public class HelpActivity extends OsmandActionBarActivity implements AdapterView.OnItemClickListener {
+import java.io.File;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
+
+public class HelpActivity extends BaseLogcatActivity implements OnItemClickListener, OnItemLongClickListener {
 
 	//	public static final String DIALOG = "dialog";
-	@IdRes
 	public static final String OSMAND_POLL_HTML = "https://osmand.net/android-poll.html";
 	public static final int NULL_ID = -1;
 	private ArrayAdapter<ContextMenuItem> mAdapter;
@@ -38,7 +44,7 @@ public class HelpActivity extends OsmandActionBarActivity implements AdapterView
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		((OsmandApplication) getApplication()).applyTheme(this);
+		getMyApplication().applyTheme(this);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.fragment_help_screen);
 
@@ -56,9 +62,10 @@ public class HelpActivity extends OsmandActionBarActivity implements AdapterView
 
 		mAdapter = contextMenuAdapter.createListAdapter(this, lightContent);
 
-		ListView listView = (ListView) findViewById(android.R.id.list);
+		ListView listView = findViewById(android.R.id.list);
 		listView.setAdapter(mAdapter);
 		listView.setOnItemClickListener(this);
+		listView.setOnItemLongClickListener(this);
 		int dividerColor = lightContent ? R.color.divider_color_light : R.color.divider_color_dark;
 		Drawable dividerDrawable = new ColorDrawable(ContextCompat.getColor(this, dividerColor));
 		listView.setDivider(dividerDrawable);
@@ -70,15 +77,22 @@ public class HelpActivity extends OsmandActionBarActivity implements AdapterView
 		setupHomeButton();
 	}
 
-
-
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		ContextMenuAdapter.ItemClickListener listener =
-				mAdapter.getItem(position).getItemClickListener();
+		ContextMenuAdapter.ItemClickListener listener = mAdapter.getItem(position).getItemClickListener();
 		if (listener != null) {
 			listener.onContextMenuClick(mAdapter, position, position, false, null);
 		}
+	}
+
+	@Override
+	public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+		ContextMenuAdapter.ItemLongClickListener listener = mAdapter.getItem(position).getItemLongClickListener();
+		if (listener != null) {
+			listener.onContextMenuLongClick(mAdapter, position, position, false, null);
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -116,9 +130,29 @@ public class HelpActivity extends OsmandActionBarActivity implements AdapterView
 	}
 
 	private void createHelpUsToImproveItems(ContextMenuAdapter contextMenuAdapter) {
+		final OsmandApplication app = getMyApplication();
+
 		contextMenuAdapter.addItem(createCategory(R.string.help_us_to_improve_menu_group));
 		contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setLayout(R.layout.help_to_improve_item).createItem());
+
+		final File exceptionLog = app.getAppPath(OsmandApplication.EXCEPTION_PATH);
+		if (exceptionLog.exists()) {
+			contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
+					.setTitle(getString(R.string.send_crash_log))
+					.setListener((adapter, itemId, position, isChecked, viewCoordinates) -> {
+						app.sendCrashLog(exceptionLog);
+						return false;
+					}).createItem()
+			);
+		}
+		contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setTitle(getString(R.string.send_logcat_log))
+				.setListener((adapter, itemId, position, isChecked, viewCoordinates) -> {
+					startSaveLogsAsyncTask();
+					return false;
+				}).createItem()
+		);
 	}
 
 	private void createFeaturesItems(ContextMenuAdapter contextMenuAdapter) {
@@ -173,19 +207,26 @@ public class HelpActivity extends OsmandActionBarActivity implements AdapterView
 		contextMenuAdapter.addItem(createItem(R.string.what_is_new, NULL_ID,
 				"feature_articles/osmand-3-9-released.html"));
 
-		String releasedate = "";
-		if (!this.getString(R.string.app_edition).isEmpty()) {
-			releasedate = ", " + this.getString(R.string.shared_string_release).toLowerCase() + ": " + this.getString(R.string.app_edition);
+		String releaseDate = "";
+		if (!getString(R.string.app_edition).isEmpty()) {
+			releaseDate = ", " + getString(R.string.shared_string_release).toLowerCase() + ": "
+					+ getString(R.string.app_edition);
 		}
-		String version = Version.getFullVersion(getMyApplication()) + releasedate;
+		String version = Version.getFullVersion(getMyApplication()) + releaseDate;
 		ShowArticleOnTouchListener listener = new ShowArticleOnTouchListener(
 				"feature_articles/about.html", this, version);
 		contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitle(getString(R.string.shared_string_about))
-				.setDescription(version).setListener(listener).createItem());
+				.setDescription(version)
+				.setListener(listener)
+				.setLongClickListener((adapter, itemId, position, isChecked, viewCoordinates) -> {
+					ShareDialog.copyToClipboardWithToast(adapter.getContext(), version, Toast.LENGTH_SHORT);
+					return false;
+				})
+				.createItem());
 	}
 
-	// Helper metods
+	// Helper methods
 	private ContextMenuItem createCategory(@StringRes int titleRes) {
 		return new ContextMenuItem.ItemBuilder().setTitle(
 				getString(titleRes)).setCategory(true)
@@ -235,6 +276,16 @@ public class HelpActivity extends OsmandActionBarActivity implements AdapterView
 					}
 				})
 				.createItem();
+	}
+
+	@NonNull
+	@Override
+	protected String getFilterLevel() {
+		return "";
+	}
+
+	@Override
+	protected void onLogEntryAdded() {
 	}
 
 	private static class ShowArticleOnTouchListener implements ContextMenuAdapter.ItemClickListener {

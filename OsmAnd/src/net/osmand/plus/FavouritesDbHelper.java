@@ -352,11 +352,12 @@ public class FavouritesDbHelper {
 		return true;
 	}
 
-	public void setSpecialPoint(@NonNull LatLon latLon, FavouritePoint.SpecialPointType specialType, @Nullable String address) {
+	public void setSpecialPoint(@NonNull LatLon latLon, SpecialPointType specialType, @Nullable String address) {
 		FavouritePoint point = getSpecialPoint(specialType);
 		if (point != null) {
 			point.setIconId(specialType.getIconId(context));
 			editFavourite(point, latLon.getLatitude(), latLon.getLongitude(), address);
+			lookupAddress(point);
 		} else {
 			point = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), specialType.getName(), specialType.getCategory());
 			point.setAddress(address);
@@ -384,7 +385,7 @@ public class FavouritesDbHelper {
 
 		if (!p.getName().isEmpty()) {
 			p.setVisible(group.visible);
-			if (FavouritePoint.SpecialPointType.PARKING.equals(p.getSpecialPointType())) {
+			if (SpecialPointType.PARKING == p.getSpecialPointType()) {
 				p.setColor(ContextCompat.getColor(context, R.color.parking_icon_background));
 			} else {
 				if (p.getColor() == 0) {
@@ -528,7 +529,7 @@ public class FavouritesDbHelper {
 			}
 			FavoriteGroup pg = getOrCreateGroup(p, 0);
 			p.setVisible(pg.visible);
-			if (FavouritePoint.SpecialPointType.PARKING.equals(p.getSpecialPointType())) {
+			if (SpecialPointType.PARKING == p.getSpecialPointType()) {
 				p.setColor(ContextCompat.getColor(context, R.color.parking_icon_background));
 			} else {
 				if (p.getColor() == 0) {

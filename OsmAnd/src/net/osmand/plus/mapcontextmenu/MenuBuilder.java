@@ -1,8 +1,6 @@
 package net.osmand.plus.mapcontextmenu;
 
-import android.app.Activity;
 import android.content.ClipData;
-import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -28,13 +26,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.view.ContextThemeWrapper;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
-
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
@@ -51,6 +42,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.ActivityResultListener.OnActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.actions.ShareDialog;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapcontextmenu.UploadPhotosAsyncTask.UploadPhotosListener;
@@ -91,6 +83,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 
 import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
 
@@ -982,10 +981,7 @@ public class MenuBuilder {
 	}
 
 	protected void copyToClipboard(String text, Context ctx) {
-		((ClipboardManager) app.getSystemService(Activity.CLIPBOARD_SERVICE)).setText(text);
-		Toast.makeText(ctx,
-				ctx.getResources().getString(R.string.copied_to_clipboard) + ":\n" + text,
-				Toast.LENGTH_SHORT).show();
+		ShareDialog.copyToClipboardWithToast(ctx, text, Toast.LENGTH_SHORT);
 	}
 
 	protected CollapsableView getLocationCollapsableView(Map<Integer, String> locationData) {

@@ -673,9 +673,6 @@ public abstract class MenuController extends BaseMenuController implements Colla
 
 			boolean internetConnectionAvailable =
 					mapActivity.getMyApplication().getSettings().isInternetConnectionAvailable();
-			boolean downloadIndexes = internetConnectionAvailable
-					&& !downloadThread.getIndexes().isDownloadedFromInternet
-					&& !downloadThread.getIndexes().downloadFromInternetFailed;
 
 			boolean isDownloading = indexItem != null && downloadThread.isDownloading(indexItem);
 			if (isDownloading) {
@@ -700,7 +697,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 					titleProgressController.caption = v;
 				}
 				titleProgressController.visible = true;
-			} else if (downloadIndexes) {
+			} else if (downloadThread.shouldDownloadIndexes()) {
 				titleProgressController.setIndexesDownloadMode(mapActivity);
 				titleProgressController.visible = true;
 			} else if (!internetConnectionAvailable) {
