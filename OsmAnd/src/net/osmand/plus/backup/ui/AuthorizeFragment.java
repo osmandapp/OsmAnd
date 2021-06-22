@@ -33,6 +33,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.DialogButtonType;
+import net.osmand.plus.Version;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupHelper.OnRegisterDeviceListener;
 import net.osmand.plus.backup.BackupHelper.OnRegisterUserListener;
@@ -73,6 +74,8 @@ public class AuthorizeFragment extends BaseOsmAndFragment {
 	private View buttonContinue;
 
 	private LoginDialogType dialogType = LoginDialogType.SIGN_UP;
+
+	private String promoCode;
 
 	private long lastTimeCodeSent = 0;
 	private boolean nightMode;
@@ -130,6 +133,11 @@ public class AuthorizeFragment extends BaseOsmAndFragment {
 			View itemView = mainView.findViewById(type.viewId);
 			EditText editText = itemView.findViewById(R.id.edit_text);
 			editText.addTextChangedListener(getTextWatcher());
+
+			if (type == LoginDialogType.SIGN_UP) {
+				EditText promoCodeEditText = itemView.findViewById(R.id.promocode_edit_text);
+				promoCodeEditText.addTextChangedListener(getPromoTextWatcher(editText));
+			}
 		}
 	}
 
@@ -191,12 +199,15 @@ public class AuthorizeFragment extends BaseOsmAndFragment {
 		View buttonAuthorize = view.findViewById(R.id.button);
 
 		EditText editText = view.findViewById(R.id.edit_text);
+		EditText promoEditText = view.findViewById(R.id.promocode_edit_text);
+
 		editText.setText(settings.BACKUP_USER_EMAIL.get());
 		editText.requestFocus();
 		AndroidUtils.softKeyboardDelayed(getActivity(), editText);
 
 		AndroidUiHelper.updateVisibility(errorText, false);
 		AndroidUiHelper.updateVisibility(buttonAuthorize, false);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.promocode_container), dialogType == LoginDialogType.SIGN_UP && promoCodeSupported());
 
 		buttonAuthorize.setOnClickListener(new OnClickListener() {
 			@Override
@@ -212,6 +223,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment {
 			@Override
 			public void onClick(View v) {
 				String email = editText.getText().toString();
+				promoCode = promoEditText.getText().toString();
 				if (AndroidUtils.isValidEmail(email)) {
 					settings.BACKUP_USER_EMAIL.set(email);
 					progressBar.setVisibility(View.VISIBLE);
@@ -316,6 +328,25 @@ public class AuthorizeFragment extends BaseOsmAndFragment {
 		};
 	}
 
+	private TextWatcher getPromoTextWatcher(EditText editText) {
+		return new TextWatcher() {
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				buttonContinue.setEnabled(!Algorithms.isEmpty(editText.getText()));
+			}
+		};
+	}
+
 	private OnRegisterDeviceListener geRegisterDeviceListener(LoginDialogType type, TextView errorText, View nextTypeButton) {
 		return new OnRegisterDeviceListener() {
 
@@ -343,7 +374,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment {
 	}
 
 	private void registerUser(TextView errorText) {
-		backupHelper.registerUser(settings.BACKUP_USER_EMAIL.get(), new OnRegisterUserListener() {
+		backupHelper.registerUser(settings.BACKUP_USER_EMAIL.get(), promoCode, new OnRegisterUserListener() {
 			@Override
 			public void onRegisterUser(int status, @Nullable String message, @Nullable String error) {
 				FragmentActivity activity = getActivity();
@@ -361,6 +392,10 @@ public class AuthorizeFragment extends BaseOsmAndFragment {
 				}
 			}
 		});
+	}
+
+	private boolean promoCodeSupported() {
+		return Version.isDeveloperVersion(app) || !Version.isProductionVersion(app) || !Version.isGooglePlayEnabled();
 	}
 
 	private void updateDescription() {
