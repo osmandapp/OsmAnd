@@ -374,11 +374,8 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 				downloadThread.runReloadIndexFiles();
 			}
 		}
-		final boolean downloadIndexes = settings.isInternetConnectionAvailable()
-				&& !downloadThread.getIndexes().isDownloadedFromInternet
-				&& !downloadThread.getIndexes().downloadFromInternetFailed;
 
-		if (downloadIndexes) {
+		if (downloadThread.shouldDownloadIndexes()) {
 			adapter.addItem(new ContextMenuItem.ItemBuilder()
 					.setLayout(R.layout.list_item_icon_and_download)
 					.setTitleId(R.string.downloading_list_indexes, mapActivity)
@@ -486,7 +483,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	}
 
 	@Override
-	public void newDownloadIndexes() {
+	public void onUpdatedIndexesList() {
 		updateDownloadSection();
 	}
 

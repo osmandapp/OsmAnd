@@ -1,7 +1,6 @@
 package net.osmand.plus.development;
 
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -11,45 +10,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import net.osmand.AndroidUtils;
+import net.osmand.PlatformUtil;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+
+import org.apache.commons.logging.Log;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.AndroidUtils;
-import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.ActionBarProgressActivity;
+public class LogcatActivity extends BaseLogcatActivity {
 
-import org.apache.commons.logging.Log;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-
-public class LogcatActivity extends ActionBarProgressActivity {
-
-	public static final String LOGCAT_PATH = "logcat.log";
-
-
-	public static int MAX_BUFFER_LOG = 10000;
+	private static final Log log = PlatformUtil.getLog(LogcatActivity.class);
 
 	private static final int SHARE_ID = 0;
 	private static final int LEVEL_ID = 1;
 
-	private static final Log log = PlatformUtil.getLog(LogcatActivity.class);
-
-	private LogcatAsyncTask logcatAsyncTask;
-	private List<String> logs = new ArrayList<>();
 	private LogcatAdapter adapter;
 	private String[] LEVELS = {"D", "I", "W", "E"};
 	private int filterLevel = 1;
@@ -58,7 +37,7 @@ public class LogcatActivity extends ActionBarProgressActivity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		OsmandApplication app = (OsmandApplication) getApplication();
+		OsmandApplication app = getMyApplication();
 		app.applyTheme(this);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.recyclerview);
@@ -84,18 +63,6 @@ public class LogcatActivity extends ActionBarProgressActivity {
 	}
 
 	@Override
-	protected void onResume() {
-		super.onResume();
-		startLogcatAsyncTask();
-	}
-
-	@Override
-	protected void onPause() {
-		super.onPause();
-		stopLogcatAsyncTask();
-	}
-
-	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		OsmandApplication app = getMyApplication();
 		Drawable shareIcon = app.getUIUtilities().getIcon(R.drawable.ic_action_gshare_dark);
@@ -112,11 +79,6 @@ public class LogcatActivity extends ActionBarProgressActivity {
 		return super.onCreateOptionsMenu(menu);
 	}
 
-	@NonNull
-	private String getFilterLevel() {
-		return "*:" + LEVELS[this.filterLevel];
-	}
-
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
@@ -126,7 +88,7 @@ public class LogcatActivity extends ActionBarProgressActivity {
 				return true;
 			case LEVEL_ID:
 				this.filterLevel++;
-				if(this.filterLevel >= LEVELS.length) {
+				if (this.filterLevel >= LEVELS.length) {
 					this.filterLevel = 0;
 				}
 				item.setTitle(getFilterLevel());
@@ -143,21 +105,18 @@ public class LogcatActivity extends ActionBarProgressActivity {
 		return false;
 	}
 
-
-	private void startSaveLogsAsyncTask() {
-		SaveLogsAsyncTask saveLogsAsyncTask = new SaveLogsAsyncTask(this, logs);
-		saveLogsAsyncTask.execute();
+	@NonNull
+	@Override
+	protected String getFilterLevel() {
+		return "*:" + LEVELS[this.filterLevel];
 	}
 
-	private void startLogcatAsyncTask() {
-		logcatAsyncTask = new LogcatAsyncTask(this, getFilterLevel());
-		logcatAsyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-	}
-
-	private void stopLogcatAsyncTask() {
-		if (logcatAsyncTask != null && logcatAsyncTask.getStatus() == AsyncTask.Status.RUNNING) {
-			logcatAsyncTask.cancel(false);
-			logcatAsyncTask.stopLogging();
+	@Override
+	protected void onLogEntryAdded() {
+		boolean autoscroll = !recyclerView.canScrollVertically(1);
+		adapter.notifyDataSetChanged();
+		if (autoscroll) {
+			recyclerView.scrollToPosition(logs.size() - 1);
 		}
 	}
 
@@ -192,7 +151,6 @@ public class LogcatActivity extends ActionBarProgressActivity {
 			return logs.get(position);
 		}
 
-
 		private class LogViewHolder extends RecyclerView.ViewHolder {
 
 			final TextView logTextView;
@@ -200,117 +158,6 @@ public class LogcatActivity extends ActionBarProgressActivity {
 			public LogViewHolder(View itemView) {
 				super(itemView);
 				this.logTextView = itemView.findViewById(R.id.description);
-			}
-		}
-	}
-
-	public static class SaveLogsAsyncTask extends AsyncTask<Void, String, File> {
-
-		private WeakReference<LogcatActivity> logcatActivity;
-		private Collection<String> logs;
-
-		SaveLogsAsyncTask(LogcatActivity logcatActivity, Collection<String> logs) {
-			this.logcatActivity = new WeakReference<>(logcatActivity);
-			this.logs = logs;
-		}
-
-		@Override
-		protected void onPreExecute() {
-			LogcatActivity activity = logcatActivity.get();
-			if (activity != null) {
-				activity.setSupportProgressBarIndeterminateVisibility(true);
-			}
-		}
-
-		@Override
-		protected File doInBackground(Void... voids) {
-			File file = logcatActivity.get().getMyApplication().getAppPath(LOGCAT_PATH);
-			try {
-				if (file.exists()) {
-					file.delete();
-				}
-				StringBuilder stringBuilder = new StringBuilder();
-				for (String log : logs) {
-					stringBuilder.append(log);
-					stringBuilder.append("\n");
-				}
-				if (file.getParentFile().canWrite()) {
-					BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
-					writer.write(stringBuilder.toString());
-					writer.close();
-				}
-			} catch (Exception e) {
-				log.error(e);
-			}
-
-			return file;
-		}
-
-		@Override
-		protected void onPostExecute(File file) {
-			LogcatActivity activity = logcatActivity.get();
-			if (activity != null) {
-				activity.setSupportProgressBarIndeterminateVisibility(false);
-				activity.getMyApplication().sendCrashLog(file);
-			}
-		}
-	}
-
-	public static class LogcatAsyncTask extends AsyncTask<Void, String, Void> {
-
-		private Process processLogcat;
-		private WeakReference<LogcatActivity> logcatActivity;
-		private String filterLevel;
-
-		LogcatAsyncTask(LogcatActivity logcatActivity, String filterLevel) {
-			this.logcatActivity = new WeakReference<>(logcatActivity);
-			this.filterLevel = filterLevel;
-		}
-
-		@Override
-		protected Void doInBackground(Void... voids) {
-			try {
-				String filter = String.valueOf(android.os.Process.myPid());
-				String[] command = {"logcat", filterLevel, "--pid=" + filter, "-T", String.valueOf(MAX_BUFFER_LOG)};
-				processLogcat = Runtime.getRuntime().exec(command);
-
-				BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(processLogcat.getInputStream()));
-
-				String line;
-				while ((line = bufferedReader.readLine()) != null && logcatActivity.get() != null) {
-					if (isCancelled()) {
-						break;
-					}
-					publishProgress(line);
-				}
-				stopLogging();
-			} catch (IOException e) {
-				// ignore
-			} catch (Exception e) {
-				log.error(e);
-			}
-
-			return null;
-		}
-
-		@Override
-		protected void onProgressUpdate(String... values) {
-			if (values.length > 0 && !isCancelled()) {
-				LogcatActivity activity = logcatActivity.get();
-				if (activity != null) {
-					boolean autoscroll = !activity.recyclerView.canScrollVertically(1);
-					activity.logs.addAll(Arrays.asList(values));
-					activity.adapter.notifyDataSetChanged();
-					if(autoscroll) {
-						activity.recyclerView.scrollToPosition(activity.logs.size() - 1);
-					}
-				}
-			}
-		}
-
-		private void stopLogging() {
-			if (processLogcat != null) {
-				processLogcat.destroy();
 			}
 		}
 	}

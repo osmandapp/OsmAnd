@@ -357,12 +357,12 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 
 	@Override
 	@UiThread
-	public void newDownloadIndexes() {
+	public void onUpdatedIndexesList() {
 		visibleBanner.updateBannerInProgress();
 		for (WeakReference<Fragment> ref : fragSet) {
 			Fragment f = ref.get();
 			if (f instanceof DownloadEvents && f.isAdded()) {
-				((DownloadEvents) f).newDownloadIndexes();
+				((DownloadEvents) f).onUpdatedIndexesList();
 			}
 		}
 		downloadHasFinished();
@@ -585,7 +585,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 				if (!Algorithms.isEmpty(warnings)) {
 					app.showToastMessage(AndroidUtils.formatWarnings(warnings).toString());
 				}
-				newDownloadIndexes();
+				onUpdatedIndexesList();
 			}
 		});
 		reloadIndexesTask.executeOnExecutor(singleThreadExecutor);

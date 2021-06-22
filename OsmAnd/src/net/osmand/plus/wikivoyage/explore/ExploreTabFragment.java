@@ -107,7 +107,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 	}
 
 	@Override
-	public void newDownloadIndexes() {
+	public void onUpdatedIndexesList() {
 		if (waitForIndexes) {
 			waitForIndexes = false;
 			checkDownloadIndexes();
