@@ -98,21 +98,28 @@ public class OpenstreetmapPoint extends OsmPoint {
 		}
 		Set<String> changedTags = entity.getChangedTags();
 		if (changedTags != null) {
-			for (String tag : changedTags) {
-				if (tag == null || tag.trim().equals(tag)) {
+			for (String changedTag : changedTags) {
+				if (changedTag == null || changedTag.trim().equals(changedTag)) {
 					continue;
 				}
-				String trimmedTag = tag.trim();
-				changedTags.remove(tag);
+				String trimmedTag = changedTag.trim();
+
+				if (entity.getTags().containsKey(trimmedTag) && entity.getTags().containsKey(changedTag)) {
+					String changedTagValue = entity.getTag(changedTag);
+					entity.putTag(changedTag, Algorithms.trimIfNotNull(changedTagValue));
+					continue;
+				}
+
+				changedTags.remove(changedTag);
 				changedTags.add(trimmedTag);
 
 				if (entity.getTags().containsKey(trimmedTag)) {
 					String tagValue = entity.getTag(trimmedTag);
-					entity.putTag(trimmedTag, tagValue == null ? null : tagValue.trim());
-				} else if (entity.getTags().containsKey(tag)) {
-					String tagValue = entity.getTag(tag);
-					entity.removeTag(tag);
-					entity.putTag(trimmedTag, tagValue == null ? null : tagValue.trim());
+					entity.putTag(trimmedTag, Algorithms.trimIfNotNull(tagValue));
+				} else if (entity.getTags().containsKey(changedTag)) {
+					String tagValue = entity.getTag(changedTag);
+					entity.removeTag(changedTag);
+					entity.putTag(trimmedTag, Algorithms.trimIfNotNull(tagValue));
 				}
 			}
 		}
