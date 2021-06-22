@@ -12,7 +12,7 @@ public class OpenstreetmapPoint extends OsmPoint {
 	private Entity entity;
 	private String comment;
 
-	public OpenstreetmapPoint(){
+	public OpenstreetmapPoint() {
 	}
 
 	@Override
@@ -105,7 +105,15 @@ public class OpenstreetmapPoint extends OsmPoint {
 				String trimmedTag = tag.trim();
 				changedTags.remove(tag);
 				changedTags.add(trimmedTag);
-				entity.putTag(trimmedTag, entity.getTag(trimmedTag));
+
+				if (entity.getTags().containsKey(trimmedTag)) {
+					String tagValue = entity.getTag(trimmedTag);
+					entity.putTag(trimmedTag, tagValue == null ? null : tagValue.trim());
+				} else if (entity.getTags().containsKey(tag)) {
+					String tagValue = entity.getTag(tag);
+					entity.removeTag(tag);
+					entity.putTag(trimmedTag, tagValue == null ? null : tagValue.trim());
+				}
 			}
 		}
 	}
