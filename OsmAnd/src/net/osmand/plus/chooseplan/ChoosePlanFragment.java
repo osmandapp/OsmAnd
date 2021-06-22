@@ -20,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
@@ -57,12 +58,11 @@ public class ChoosePlanFragment extends BasePurchaseFragment {
 				app.startActivity(intent);
 			}
 		} else {
-			try {
+			FragmentManager fm = activity.getSupportFragmentManager();
+			if (!fm.isStateSaved() && fm.findFragmentByTag(TAG) == null) {
 				ChoosePlanFragment fragment = new ChoosePlanFragment();
 				fragment.selectedFeature = selectedFeature;
 				fragment.show(activity.getSupportFragmentManager(), TAG);
-			} catch (RuntimeException e) {
-				LOG.error(selectedFeature.name(), e);
 			}
 		}
 	}

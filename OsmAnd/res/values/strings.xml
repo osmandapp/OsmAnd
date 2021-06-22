@@ -12,6 +12,8 @@
 
 -->
 
+    <string name="regular_price">Regular price</string>
+    <string name="complete_purchase">Complete purchase</string>
     <string name="shared_string_includes">Includes</string>
     <string name="shared_string_not_included">Not included</string>
     <string name="cancel_anytime_in_gplay">Cancel anytime in Google Play.</string>

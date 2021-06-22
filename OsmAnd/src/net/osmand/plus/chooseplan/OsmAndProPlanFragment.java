@@ -8,6 +8,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.R;
+import net.osmand.plus.chooseplan.button.PriceButton;
+import net.osmand.plus.chooseplan.button.PriceButtonsUtils;
 import net.osmand.plus.inapp.InAppPurchases;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 
@@ -24,11 +26,18 @@ public class OsmAndProPlanFragment extends SelectedPlanFragment {
 
 	@Override
 	protected void initData(@Nullable Bundle args) {
+		super.initData(args);
 		features.remove(OsmAndFeature.MONTHLY_MAP_UPDATES);
 		features.remove(OsmAndFeature.WIKIPEDIA);
 		features.remove(OsmAndFeature.WIKIVOYAGE);
 
 		includedFeatures.addAll(features);
+	}
+
+	@Override
+	protected void collectPriceButtons(List<PriceButton<?>> priceButtons) {
+		priceButtons.clear();
+		priceButtons.addAll(PriceButtonsUtils.collectSubscriptions(app, purchaseHelper, getVisibleSubscriptions()));
 	}
 
 	@Override

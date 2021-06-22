@@ -7,8 +7,8 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatImageView;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
@@ -25,20 +25,19 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
+import net.osmand.plus.chooseplan.button.PriceButton;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
-import net.osmand.plus.inapp.InAppPurchases.InAppSubscriptionIntroductoryInfo;
-import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import static net.osmand.plus.chooseplan.ChoosePlanDialogFragment.subscribe;
 import static net.osmand.plus.liveupdates.LiveUpdatesSettingsBottomSheet.getActiveColorId;
 
 public abstract class SelectedPlanFragment extends BasePurchaseFragment {
@@ -50,11 +49,21 @@ public abstract class SelectedPlanFragment extends BasePurchaseFragment {
 
 	protected List<OsmAndFeature> includedFeatures = new ArrayList<>();
 	protected List<OsmAndFeature> noIncludedFeatures = new ArrayList<>();
-	private String selectedItemTag;
+	protected List<PriceButton<?>> priceButtons = new ArrayList<>();
+	private Map<PriceButton<?>, View> buttonViews = new HashMap<>();
+	private PriceButton<?> selectedPriceButton;
 
 	@Override
 	protected int getLayoutId() {
 		return R.layout.fragment_selected_plan;
+	}
+
+	@Override
+	protected void initData(@Nullable Bundle args) {
+		collectPriceButtons(priceButtons);
+		if (priceButtons.size() > 0) {
+			selectedPriceButton = priceButtons.get(0);
+		}
 	}
 
 	@Override
@@ -165,7 +174,7 @@ public abstract class SelectedPlanFragment extends BasePurchaseFragment {
 	}
 
 	protected void bindFeatureItem(@NonNull View itemView,
-								   @NonNull OsmAndFeature feature) {
+	                               @NonNull OsmAndFeature feature) {
 		bindFeatureItem(itemView, feature, false);
 		ImageView ivCheckmark = itemView.findViewById(R.id.checkmark);
 		if (includedFeatures.contains(feature)) {
@@ -180,208 +189,48 @@ public abstract class SelectedPlanFragment extends BasePurchaseFragment {
 		LinearLayout container = view.findViewById(R.id.price_block);
 		container.removeAllViews();
 
-		View lastBtn = null;
-		List<InAppSubscription> visibleSubscriptions = getVisibleSubscriptions();
-		InAppSubscription maxDiscountSubscription = null;
-		double maxDiscount = 0;
-		boolean anyPurchased = false;
-		for (final InAppSubscription s : visibleSubscriptions) {
-			if (s.isPurchased()) {
-				anyPurchased = true;
+		for (PriceButton<?> btn : priceButtons) {
+			View itemView = inflater.inflate(R.layout.purchase_dialog_btn_payment, container, false);
+			TextView tvTitle = itemView.findViewById(R.id.title);
+			TextView tvPrice = itemView.findViewById(R.id.price);
+			TextView tvDiscount = itemView.findViewById(R.id.discount);
+			TextView tvDesc = itemView.findViewById(R.id.description);
+
+			tvTitle.setText(btn.getTitle());
+			tvPrice.setText(btn.getPrice());
+			if (!Algorithms.isEmpty(btn.getDiscount())) {
+				tvDiscount.setText(btn.getDiscount());
+				tvDiscount.setVisibility(View.VISIBLE);
+				if (!Algorithms.isEmpty(btn.getRegularPrice())) {
+					String pattern = getString(R.string.ltr_or_rtl_combine_via_colon);
+					String regularPrice = String.format(pattern, getString(R.string.regular_price), btn.getRegularPrice());
+					tvDesc.setText(regularPrice);
+					tvDesc.setVisibility(View.VISIBLE);
+				}
 			}
-			double discount = s.getDiscountPercent(purchaseHelper.getMonthlyLiveUpdates());
-			if (discount > maxDiscount) {
-				maxDiscountSubscription = s;
-				maxDiscount = discount;
-			}
-		}
-		boolean maxDiscountAction = maxDiscountSubscription != null && maxDiscountSubscription.hasDiscountOffer();
-		for (final InAppSubscription s : visibleSubscriptions) {
-			InAppSubscriptionIntroductoryInfo introductoryInfo = s.getIntroductoryInfo();
-			boolean hasIntroductoryInfo = introductoryInfo != null;
-			CharSequence descriptionText = s.getDescription(themedCtx);
-			if (s.isPurchased()) {
-				View buttonPurchased = inflater.inflate(R.layout.purchase_dialog_card_button_active_ex, container, false);
-				TextViewEx title = (TextViewEx) buttonPurchased.findViewById(R.id.title);
-				TextViewEx description = (TextViewEx) buttonPurchased.findViewById(R.id.description);
-				TextViewEx descriptionContribute = (TextViewEx) buttonPurchased.findViewById(R.id.description_contribute);
-				descriptionContribute.setVisibility(s.isDonationSupported() ? View.VISIBLE : View.GONE);
-				TextViewEx buttonTitle = (TextViewEx) buttonPurchased.findViewById(R.id.button_title);
-				View buttonView = buttonPurchased.findViewById(R.id.button_view);
-				View buttonCancelView = buttonPurchased.findViewById(R.id.button_cancel_view);
-				View div = buttonPurchased.findViewById(R.id.div);
-				AppCompatImageView rightImage = (AppCompatImageView) buttonPurchased.findViewById(R.id.right_image);
 
-				CharSequence priceTitle = hasIntroductoryInfo ?
-						introductoryInfo.getFormattedDescription(themedCtx, buttonTitle.getCurrentTextColor()) : s.getPriceWithPeriod(app);
-				title.setText(s.getTitle(app));
-				if (Algorithms.isEmpty(descriptionText.toString())) {
-					description.setVisibility(View.GONE);
-				} else {
-					description.setText(descriptionText);
-				}
-				buttonTitle.setText(priceTitle);
-				buttonView.setVisibility(View.VISIBLE);
-				buttonCancelView.setVisibility(View.GONE);
-				buttonPurchased.setOnClickListener(null);
-				div.setVisibility(View.GONE);
-				rightImage.setVisibility(View.GONE);
-				if (s.isDonationSupported()) {
-					buttonPurchased.setOnClickListener(new OnClickListener() {
-						@Override
-						public void onClick(View v) {
-//							showDonationSettings();
-							dismiss();
-						}
-					});
-				} else {
-					buttonPurchased.setOnClickListener(null);
-				}
-				container.addView(buttonPurchased);
+			itemView.setOnClickListener(v -> {
+				selectedPriceButton = btn;
+				updateButtons();
+			});
 
-				View buttonCancel = inflater.inflate(R.layout.purchase_dialog_card_button_active_ex, container, false);
-				title = (TextViewEx) buttonCancel.findViewById(R.id.title);
-				description = (TextViewEx) buttonCancel.findViewById(R.id.description);
-				buttonView = buttonCancel.findViewById(R.id.button_view);
-				buttonCancelView = buttonCancel.findViewById(R.id.button_cancel_view);
-				div = buttonCancel.findViewById(R.id.div);
-				rightImage = (AppCompatImageView) buttonCancel.findViewById(R.id.right_image);
-
-				title.setText(getString(R.string.osm_live_payment_current_subscription));
-				description.setText(s.getRenewDescription(themedCtx));
-				buttonView.setVisibility(View.GONE);
-				buttonCancelView.setVisibility(View.VISIBLE);
-				buttonCancelView.setOnClickListener(new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						purchaseHelper.manageSubscription(app, s.getSku());
-					}
-				});
-				div.setVisibility(View.VISIBLE);
-				rightImage.setVisibility(View.VISIBLE);
-				container.addView(buttonCancel);
-				lastBtn = buttonCancel;
-			} else {
-				View button = inflater.inflate(R.layout.purchase_dialog_card_button_ex, container, false);
-				TextViewEx title = (TextViewEx) button.findViewById(R.id.title);
-				TextViewEx description = (TextViewEx) button.findViewById(R.id.description);
-				TextViewEx descriptionContribute = (TextViewEx) button.findViewById(R.id.description_contribute);
-				descriptionContribute.setVisibility(s.isDonationSupported() ? View.VISIBLE : View.GONE);
-
-				View buttonView = button.findViewById(R.id.button_view);
-				View buttonExView = button.findViewById(R.id.button_ex_view);
-				TextViewEx buttonTitle = (TextViewEx) button.findViewById(R.id.button_title);
-				TextViewEx buttonExTitle = (TextViewEx) button.findViewById(R.id.button_ex_title);
-
-				boolean showSolidButton = !anyPurchased
-						&& (!maxDiscountAction || hasIntroductoryInfo || maxDiscountSubscription.isUpgrade());
-				int descriptionColor = showSolidButton ? buttonExTitle.getCurrentTextColor() : buttonTitle.getCurrentTextColor();
-				buttonView.setVisibility(!showSolidButton ? View.VISIBLE : View.GONE);
-				buttonExView.setVisibility(showSolidButton ? View.VISIBLE : View.GONE);
-				View div = button.findViewById(R.id.div);
-
-				CharSequence priceTitle = hasIntroductoryInfo ?
-						introductoryInfo.getFormattedDescription(app, descriptionColor) : s.getPriceWithPeriod(app);
-				title.setText(s.getTitle(app));
-				if (Algorithms.isEmpty(descriptionText.toString())) {
-					description.setVisibility(View.GONE);
-				} else {
-					description.setText(descriptionText);
-				}
-				buttonTitle.setText(priceTitle);
-				buttonExTitle.setText(priceTitle);
-
-				TextViewEx buttonDiscountTitle = (TextViewEx) button.findViewById(R.id.button_discount_title);
-				View buttonDiscountView = button.findViewById(R.id.button_discount_view);
-				String discountTitle = s.getDiscountTitle(app, purchaseHelper.getMonthlyLiveUpdates());
-				if (!Algorithms.isEmpty(discountTitle)) {
-					buttonDiscountTitle.setText(discountTitle);
-					buttonDiscountView.setVisibility(View.VISIBLE);
-					if (s.equals(maxDiscountSubscription)) {
-						int saveTextColor = R.color.color_osm_edit_delete;
-						if (hasIntroductoryInfo || maxDiscountSubscription.isUpgrade()) {
-							saveTextColor = R.color.active_buttons_and_links_text_light;
-							AndroidUtils.setBackground(buttonDiscountView, UiUtilities.tintDrawable(buttonDiscountView.getBackground(),
-									ContextCompat.getColor(themedCtx, R.color.color_osm_edit_delete)));
-						}
-						buttonDiscountTitle.setTextColor(ContextCompat.getColor(app, saveTextColor));
-					}
-				}
-				if (!showSolidButton) {
-					buttonView.setOnClickListener(new OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							if (getActivity() != null) {
-								subscribe(app, getActivity(), purchaseHelper, s.getSku());
-							}
-						}
-					});
-				} else {
-					buttonExView.setOnClickListener(new OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							if (getActivity() != null) {
-								subscribe(app, getActivity(), purchaseHelper, s.getSku());
-							}
-						}
-					});
-				}
-				div.setVisibility(View.VISIBLE);
-				container.addView(button);
-				lastBtn = button;
-			}
-		}
-		if (lastBtn != null) {
-			View div = lastBtn.findViewById(R.id.div);
-			if (div != null) {
-				div.setVisibility(View.GONE);
-			}
-		}
-		container.setVisibility(View.VISIBLE);
-	}
-
-	private View createPurchaseButton(String title,
-									  String price,
-									  String discount,
-									  String description) {
-		View itemView = inflater.inflate(R.layout.purchase_dialog_btn_payment, null);
-
-		TextView tvTitle = itemView.findViewById(R.id.title);
-		tvTitle.setText(title);
-
-		TextView tvPrice = itemView.findViewById(R.id.price);
-		tvPrice.setText(price);
-
-		TextView tvDiscount = itemView.findViewById(R.id.discount);
-		if (discount != null) {
-			tvDiscount.setText(discount);
-			tvDiscount.setVisibility(View.VISIBLE);
+			buttonViews.put(btn, itemView);
+			container.addView(itemView);
 		}
 
-		TextView tvDesc = itemView.findViewById(R.id.description);
-		if (description != null) {
-			tvDesc.setText(description);
-			tvDesc.setVisibility(View.VISIBLE);
-		}
-
-		itemView.setTag(title);
-		itemView.setOnClickListener(v -> {
-			selectedItemTag = title;
-			updateButtons();
-		});
-
-		return itemView;
+		updateButtons();
 	}
 
 	private void updateButtons() {
-		LinearLayout container = view.findViewById(R.id.price_block);
-		for (int i = 0; i < container.getChildCount(); i++) {
-			View itemView = container.getChildAt(i);
+		for (PriceButton<?> key : buttonViews.keySet()) {
+			View itemView = buttonViews.get(key);
+			if (itemView == null) continue;
+
 			ImageView ivCheckmark = itemView.findViewById(R.id.icon);
 
 			int colorNoAlpha = ContextCompat.getColor(app, getActiveColorId(nightMode));
 			Drawable normal;
-			if (itemView.getTag().equals(selectedItemTag)) {
+			if (key.equals(selectedPriceButton)) {
 				ivCheckmark.setImageDrawable(getCheckmark());
 
 				Drawable stroke = getActiveStrokeDrawable();
@@ -396,21 +245,28 @@ public abstract class SelectedPlanFragment extends BasePurchaseFragment {
 			}
 			setupRoundedBackground(itemView, normal, colorNoAlpha);
 		}
+
+		if (selectedPriceButton != null) {
+			View applyButton = view.findViewById(R.id.apply_button);
+			TextView tvPrice = applyButton.findViewById(R.id.description);
+			tvPrice.setText(selectedPriceButton.getPrice());
+		}
 	}
 
 	private void setupApplyButton() {
 		View itemView = view.findViewById(R.id.apply_button);
 
 		TextView tvTitle = itemView.findViewById(R.id.title);
-		tvTitle.setText("Complete purchase");
+		tvTitle.setText(getString(R.string.complete_purchase));
 
-		TextView tvDesc = itemView.findViewById(R.id.description);
-		tvDesc.setText("€ 11,99 / year");
-
-		itemView.setOnClickListener(v -> app.showShortToastMessage("Purchase"));
+		itemView.setOnClickListener(v ->  {
+			if (selectedPriceButton != null && getActivity() != null) {
+				selectedPriceButton.onApply(getActivity(), purchaseHelper);
+			}
+		});
 
 		int activeColor = ContextCompat.getColor(app, getActiveColorId(nightMode));
-		Drawable normal = new ColorDrawable(activeColor);
+		Drawable normal = createRoundedDrawable(activeColor);;
 		setupRoundedBackground(itemView, normal, activeColor);
 	}
 
@@ -495,6 +351,8 @@ public abstract class SelectedPlanFragment extends BasePurchaseFragment {
 				R.color.active_buttons_and_links_text_dark :
 				R.color.active_buttons_and_links_text_light;
 	}
+
+	protected abstract void collectPriceButtons(List<PriceButton<?>> priceButtons);
 
 	protected abstract List<InAppSubscription> getVisibleSubscriptions();
 

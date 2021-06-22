@@ -896,6 +896,11 @@ public abstract class InAppPurchases {
 			return discountPercent > 0 ? ctx.getString(R.string.osm_live_payment_discount_descr, discountPercent + "%") : "";
 		}
 
+		public String getDiscount(@NonNull InAppSubscription monthlyLiveUpdates) {
+			int discountPercent = getDiscountPercent(monthlyLiveUpdates);
+			return discountPercent > 0 ? "-" + discountPercent + "%" : "";
+		}
+
 		public int getDiscountPercent(@NonNull InAppSubscription monthlyLiveUpdates) {
 			double regularMonthlyPrice = monthlyLiveUpdates.getPriceValue();
 			if (introductoryInfo != null) {
