@@ -7,10 +7,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.chooseplan.button.OneTimePaymentButton;
 import net.osmand.plus.chooseplan.button.PriceButton;
 import net.osmand.plus.chooseplan.button.PriceButtonsUtils;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 
@@ -42,11 +44,7 @@ public class MapsPlusPlanFragment extends SelectedPlanFragment {
 	@Override
 	protected void collectPriceButtons(List<PriceButton<?>> priceButtons) {
 		priceButtons.clear();
-		priceButtons.addAll(PriceButtonsUtils.collectSubscriptions(app, purchaseHelper, getVisibleSubscriptions()));
-		OneTimePaymentButton oneTimePaymentButton = PriceButtonsUtils.getOneTimePaymentButton(app);
-		if (oneTimePaymentButton != null) {
-			priceButtons.add(oneTimePaymentButton);
-		}
+		priceButtons.addAll(collectPriceButtons(app, purchaseHelper));
 	}
 
 	@Override
@@ -72,7 +70,23 @@ public class MapsPlusPlanFragment extends SelectedPlanFragment {
 	}
 
 	@Override
-	protected List<InAppSubscription> getVisibleSubscriptions() {
+	protected Drawable getPreviewListCheckmark() {
+		return getContentIcon(R.drawable.ic_action_done);
+	}
+
+	public static List<PriceButton<?>> collectPriceButtons(OsmandApplication app,
+	                                                       InAppPurchaseHelper purchaseHelper) {
+		List<PriceButton<?>> priceButtons = new ArrayList<>(
+				PriceButtonsUtils.collectSubscriptions(app, purchaseHelper, getVisibleSubscriptions(app, purchaseHelper)));
+		OneTimePaymentButton oneTimePaymentButton = PriceButtonsUtils.getOneTimePaymentButton(app);
+		if (oneTimePaymentButton != null) {
+			priceButtons.add(oneTimePaymentButton);
+		}
+		return priceButtons;
+	}
+
+	protected static List<InAppSubscription> getVisibleSubscriptions(OsmandApplication app,
+	                                                                 InAppPurchaseHelper purchaseHelper) {
 		InAppPurchases purchases = app.getInAppPurchaseHelper().getInAppPurchases();
 		List<InAppSubscription> subscriptions = new ArrayList<>();
 		List<InAppSubscription> visibleSubscriptions = purchaseHelper.getSubscriptions().getVisibleSubscriptions();
@@ -82,11 +96,6 @@ public class MapsPlusPlanFragment extends SelectedPlanFragment {
 			}
 		}
 		return subscriptions;
-	}
-
-	@Override
-	protected Drawable getPreviewListCheckmark() {
-		return getContentIcon(R.drawable.ic_action_done);
 	}
 
 }

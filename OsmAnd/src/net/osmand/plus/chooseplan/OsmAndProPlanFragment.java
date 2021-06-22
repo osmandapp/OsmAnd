@@ -7,9 +7,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.chooseplan.button.PriceButton;
 import net.osmand.plus.chooseplan.button.PriceButtonsUtils;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 
@@ -37,7 +39,7 @@ public class OsmAndProPlanFragment extends SelectedPlanFragment {
 	@Override
 	protected void collectPriceButtons(List<PriceButton<?>> priceButtons) {
 		priceButtons.clear();
-		priceButtons.addAll(PriceButtonsUtils.collectSubscriptions(app, purchaseHelper, getVisibleSubscriptions()));
+		priceButtons.addAll(collectPriceButtons(app, purchaseHelper));
 	}
 
 	@Override
@@ -63,7 +65,17 @@ public class OsmAndProPlanFragment extends SelectedPlanFragment {
 	}
 
 	@Override
-	protected List<InAppSubscription> getVisibleSubscriptions() {
+	protected Drawable getPreviewListCheckmark() {
+		return getCheckmark();
+	}
+
+	public static List<PriceButton<?>> collectPriceButtons(OsmandApplication app,
+	                                                       InAppPurchaseHelper purchaseHelper) {
+		return new ArrayList<>(PriceButtonsUtils.collectSubscriptions(
+				app, purchaseHelper, getSubscriptions(app, purchaseHelper)));
+	}
+
+	public static List<InAppSubscription> getSubscriptions(OsmandApplication app, InAppPurchaseHelper purchaseHelper) {
 		InAppPurchases purchases = app.getInAppPurchaseHelper().getInAppPurchases();
 		List<InAppSubscription> subscriptions = new ArrayList<>();
 		List<InAppSubscription> visibleSubscriptions = purchaseHelper.getSubscriptions().getVisibleSubscriptions();
@@ -73,11 +85,6 @@ public class OsmAndProPlanFragment extends SelectedPlanFragment {
 			}
 		}
 		return subscriptions;
-	}
-
-	@Override
-	protected Drawable getPreviewListCheckmark() {
-		return getCheckmark();
 	}
 
 }

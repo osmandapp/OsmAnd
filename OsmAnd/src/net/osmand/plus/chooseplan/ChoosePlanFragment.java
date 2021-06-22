@@ -29,10 +29,13 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.chooseplan.button.PriceButton;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.logging.Log;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static net.osmand.plus.liveupdates.LiveUpdatesSettingsBottomSheet.getActiveColorId;
@@ -236,12 +239,20 @@ public class ChoosePlanFragment extends BasePurchaseFragment {
 	}
 
 	private void updateContinueButtons() {
+		List<PriceButton<?>> priceButtons = OsmAndProPlanFragment.collectPriceButtons(app, purchaseHelper);
+		PriceButton<?>[] array = new PriceButton[priceButtons.size()];
+		priceButtons.toArray(array);
+
 		updateContinueButton(view.findViewById(R.id.button_continue_pro),
 				R.drawable.ic_action_osmand_pro_logo,
 				getString(R.string.osmand_pro),
-				"From € 3 / month",
+				ObjectUtils.min(array).getPrice().toString(),
 				v -> OsmAndProPlanFragment.showInstance(requireActivity()),
 				true);
+
+		priceButtons = MapsPlusPlanFragment.collectPriceButtons(app, purchaseHelper);
+		array = new PriceButton[priceButtons.size()];
+		priceButtons.toArray(array);
 
 		boolean availableInMapsPlus = selectedFeature.isAvailableInMapsPlus();
 		int mapsPlusIconId = availableInMapsPlus ?
@@ -250,27 +261,29 @@ public class ChoosePlanFragment extends BasePurchaseFragment {
 		updateContinueButton(view.findViewById(R.id.button_continue_maps_plus),
 				mapsPlusIconId,
 				getString(R.string.maps_plus),
-				"From € 9,99 / year",
+				ObjectUtils.min(array).getPrice().toString(),
 				v -> MapsPlusPlanFragment.showInstance(requireActivity()),
 				availableInMapsPlus);
 	}
 
 	private void updateContinueButton(View v,
 	                                  int iconId,
-	                                  String title,
-	                                  String description,
+	                                  String plan,
+	                                  String price,
 	                                  OnClickListener l,
 	                                  boolean available) {
 		int colorNoAlpha = ContextCompat.getColor(themedCtx,
 				available ? getActiveColorId(nightMode) : getDefaultIconColorId(nightMode));
 
-		int baseTitlePartId = available ? R.string.continue_with : R.string.not_available_with;
-		title = String.format(getString(baseTitlePartId), title);
+		int pattern = available ? R.string.continue_with : R.string.not_available_with;
+		plan = String.format(getString(pattern), plan);
 		TextView tvTitle = v.findViewById(R.id.title);
-		tvTitle.setText(title);
+		tvTitle.setText(plan);
 		tvTitle.setTextColor(colorNoAlpha);
 
 		TextView tvDescription = v.findViewById(R.id.description);
+		String pricePattern = getString(R.string.from_with_param);
+		String description = String.format(pricePattern, price);
 		tvDescription.setText(description);
 		tvDescription.setTextColor(getAlphaColor(colorNoAlpha, 0.75f));
 

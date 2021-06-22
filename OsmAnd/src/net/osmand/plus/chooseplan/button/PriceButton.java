@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 
-public abstract class PriceButton<T extends InAppPurchase> {
+public abstract class PriceButton<T extends InAppPurchase> implements Comparable<PriceButton> {
 
 	private String id;
 	protected CharSequence title;
@@ -76,5 +76,10 @@ public abstract class PriceButton<T extends InAppPurchase> {
 	@Override
 	public int hashCode() {
 		return id != null ? id.hashCode() : 0;
+	}
+
+	@Override
+	public int compareTo(PriceButton o) {
+		return Double.compare(purchaseItem.getPriceValue(), o.getPurchaseItem().getPriceValue());
 	}
 }

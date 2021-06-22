@@ -12,6 +12,7 @@
 
 -->
 
+    <string name="from_with_param">From %1$s</string>
     <string name="regular_price">Regular price</string>
     <string name="complete_purchase">Complete purchase</string>
     <string name="shared_string_includes">Includes</string>

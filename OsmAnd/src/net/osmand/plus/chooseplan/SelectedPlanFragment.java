@@ -26,7 +26,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
 import net.osmand.plus.chooseplan.button.PriceButton;
-import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.util.Algorithms;
 
@@ -371,8 +370,6 @@ public abstract class SelectedPlanFragment extends BasePurchaseFragment {
 	}
 
 	protected abstract void collectPriceButtons(List<PriceButton<?>> priceButtons);
-
-	protected abstract List<InAppSubscription> getVisibleSubscriptions();
 
 	protected abstract Drawable getPreviewListCheckmark();
 
