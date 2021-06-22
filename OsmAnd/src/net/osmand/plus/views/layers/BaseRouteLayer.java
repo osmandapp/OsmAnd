@@ -8,11 +8,18 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.Version;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -29,10 +36,6 @@ import org.apache.commons.logging.Log;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
 
@@ -123,8 +126,16 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 		if (previewRouteLineInfo != null) {
 			gradientScaleType = previewRouteLineInfo.getGradientScaleType();
 		} else {
-			ApplicationMode mode = view.getApplication().getRoutingHelper().getAppMode();
-			gradientScaleType = view.getSettings().ROUTE_LINE_GRADIENT.getModeValue(mode);
+			OsmandApplication app = view.getApplication();
+			ApplicationMode mode = app.getRoutingHelper().getAppMode();
+			GradientScaleType scaleType = app.getSettings().ROUTE_LINE_GRADIENT.getModeValue(mode);
+			if (scaleType == GradientScaleType.SLOPE) {
+				if (InAppPurchaseHelper.isSubscribedToOsmAndPro(app) || Version.isDeveloperVersion(app)) {
+					gradientScaleType = scaleType;
+				} else {
+					gradientScaleType = null;
+				}
+			}
 		}
 		return prev != gradientScaleType;
 	}
