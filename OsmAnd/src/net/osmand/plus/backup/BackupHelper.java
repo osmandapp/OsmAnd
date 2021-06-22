@@ -833,7 +833,6 @@ public class BackupHelper {
 	}
 
 	private OnRequestResultListener getDeleteOldFilesListener(@Nullable OnDeleteFilesListener listener, List<ExportSettingsType> types) {
-		OperationLog operationLog = new OperationLog("deleteOldFiles", DEBUG);
 		return new OnRequestResultListener() {
 			@Override
 			public void onResult(@Nullable String resultJson, @Nullable String error) {
@@ -864,7 +863,6 @@ public class BackupHelper {
 					status = STATUS_EMPTY_RESPONSE_ERROR;
 					message = "Download file list error: empty response";
 				}
-				operationLog.finishOperation("(" + status + "): " + message);
 				if (status != STATUS_SUCCESS) {
 					if (listener != null) {
 						listener.onFilesDeleteError(status, message);
