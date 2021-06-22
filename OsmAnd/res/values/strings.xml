@@ -46,6 +46,9 @@
     <string name="purchases_feature_desc_wikivoyage">Explore Wikipedia offline. Articles divided by countries and regions and available in all languages.</string>
     <string name="purchases_feature_desc_terrain">Terrain contour lines, full hillshade map with dark shades and slope maps with colors to show, peaks and lowlands.</string>
     <string name="purchases_feature_desc_nautical">Get access to nautical depth information</string>
+
+    <string name="send_logcat_log">Send logcat log</string>
+    <string name="send_crash_log">Send crash log</string>
     <string name="routing_attr_avoid_tunnels_name">Avoid tunnels</string>
     <string name="routing_attr_avoid_tunnels_description">Avoid tunnels</string>
     <string name="delete_version_history">Delete version history</string>

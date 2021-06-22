@@ -116,7 +116,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 	}
 
 	@Override
-	public void newDownloadIndexes() {
+	public void onUpdatedIndexesList() {
 		invalidateListView(getMyActivity());
 		updateUpdateAllButton();
 	}

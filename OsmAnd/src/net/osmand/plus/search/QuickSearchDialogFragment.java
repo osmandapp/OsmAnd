@@ -2362,7 +2362,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	@Override
-	public void newDownloadIndexes() {
+	public void onUpdatedIndexesList() {
 		if (!searching) {
 			hideProgressBar();
 		}

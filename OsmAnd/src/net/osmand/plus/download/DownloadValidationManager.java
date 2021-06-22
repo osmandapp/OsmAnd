@@ -39,7 +39,7 @@ public class DownloadValidationManager {
 		return downloadThread;
 	}
 
-	public void startDownload(FragmentActivity context, IndexItem... items) {
+	public void startDownload(@NonNull FragmentActivity context, IndexItem... items) {
 		downloadFilesWithAllChecks(context, items);
 	}
 
@@ -94,7 +94,7 @@ public class DownloadValidationManager {
 		}
 	}
 
-	public void downloadFilesCheck_3_ValidateSpace(final FragmentActivity context, final IndexItem... items) {
+	public void downloadFilesCheck_3_ValidateSpace(@NonNull final FragmentActivity context, final IndexItem... items) {
 		long szChangeLong = 0;
 		long szMaxTempLong = 0;
 		int i = 0;
@@ -142,7 +142,7 @@ public class DownloadValidationManager {
 		}
 	}
 
-	private void downloadFileCheck_Final_Run(FragmentActivity context, IndexItem[] items) {
+	private void downloadFileCheck_Final_Run(@NonNull FragmentActivity context, IndexItem[] items) {
 		downloadThread.runDownloadFiles(items);
 		if (context instanceof DownloadEvents) {
 			((DownloadEvents) context).downloadInProgress();
@@ -150,18 +150,16 @@ public class DownloadValidationManager {
 	}
 
 
-	protected void downloadFilesWithAllChecks(FragmentActivity context, IndexItem[] items) {
+	protected void downloadFilesWithAllChecks(@NonNull FragmentActivity context, IndexItem[] items) {
 		downloadFilesCheck_1_FreeVersion(context, items);
 	}
 
-	protected void downloadFilesCheck_1_FreeVersion(FragmentActivity context, IndexItem[] items) {
+	protected void downloadFilesCheck_1_FreeVersion(@NonNull FragmentActivity context, IndexItem[] items) {
 		if (!Version.isPaidVersion(app)) {
 			int total = settings.NUMBER_OF_FREE_DOWNLOADS.get();
 			if (total > MAXIMUM_AVAILABLE_FREE_DOWNLOADS) {
-				if (context != null) {
-					new InstallPaidVersionDialogFragment()
-							.show(context.getSupportFragmentManager(), InstallPaidVersionDialogFragment.TAG);
-				}
+				new InstallPaidVersionDialogFragment()
+						.show(context.getSupportFragmentManager(), InstallPaidVersionDialogFragment.TAG);
 			} else {
 				downloadFilesCheck_2_Internet(context, items);
 			}
@@ -170,7 +168,7 @@ public class DownloadValidationManager {
 		}
 	}
 
-	protected void downloadFilesCheck_2_Internet(final FragmentActivity context, final IndexItem[] items) {
+	protected void downloadFilesCheck_2_Internet(@NonNull final FragmentActivity context, final IndexItem[] items) {
 		if (!getMyApplication().getSettings().isWifiConnected()) {
 			if (getMyApplication().getSettings().isInternetConnectionAvailable()) {
 				AlertDialog.Builder builder = new AlertDialog.Builder(context);
