@@ -395,7 +395,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment {
 	}
 
 	private boolean promoCodeSupported() {
-		return Version.isDeveloperVersion(app) || !Version.isProductionVersion(app) || !Version.isGooglePlayEnabled();
+		return !Version.isGooglePlayEnabled();
 	}
 
 	private void updateDescription() {
