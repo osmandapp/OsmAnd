@@ -2263,7 +2263,7 @@
     <string name="show_closed_notes">Mostrar notas fechadas</string>
     <string name="switch_osm_notes_visibility_desc">Mostrar notas do OpenStreetMap.</string>
     <string name="gpx_file_desc">GPX - adequado para exportar para o JOSM ou outros editores do OSM.</string>
-    <string name="osc_file_desc">OSC - adequado para exportar para o OSM.</string>
+    <string name="osc_file_desc">OSC - adequado para exportar para o OpenStreetMap.</string>
     <string name="shared_string_gpx_file">Ficheiro GPX</string>
     <string name="osc_file">Ficheiro OSC</string>
     <string name="choose_file_type">Selecione o tipo de ficheiro</string>
@@ -2291,7 +2291,7 @@
     <string name="modify_the_search_query">Altere a sua pesquisa.</string>
     <string name="shared_string_actions">Ações</string>
     <string name="shared_string_marker">Marcador</string>
-    <string name="empty_state_osm_edits">Criar ou alterar elementos do OSM</string>
+    <string name="empty_state_osm_edits">Criar ou alterar elementos do OpenStreetMap</string>
     <string name="empty_state_osm_edits_descr">Crie ou altere POIs do OpenStreetMap, crie ou comente notas e contribua com ficheiros de GPX gravados.</string>
     <string name="shared_string_deleted">Eliminado</string>
     <string name="shared_string_edited">Editado</string>
@@ -2717,7 +2717,7 @@
     <string name="quick_action_add_poi_descr">Um botão para adicionar um POI no centro do ecrã.</string>
     <string name="quick_action_navigation_voice_descr">Um botão para ativar ou desativar a orientação por voz durante a navegação.</string>
     <string name="quick_action_add_parking_descr">Um botão para assinalar o local de estacionamento da viatura no centro do ecrã.</string>
-    <string name="quick_action_interim_dialog">Mostrar uma janela temporal</string>
+    <string name="quick_action_interim_dialog">Editar etiquetas ao aplicar</string>
     <string name="favorite_autofill_toast_text">" guardado em "</string>
     <string name="favorite_empty_place_name">Local</string>
     <string name="quick_action_duplicates">O nome do botão de ação rápida foi alterado para %1$s para evitar duplicação.</string>
@@ -3431,7 +3431,7 @@
     <string name="sunrise_at">Nascer do sol em %1$s</string>
     <string name="sunset_at">Pôr do sol em %1$s</string>
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
-    <string name="profile_prefs_reset_successful">Todas as configurações do perfil foram repostas nos valores originais.</string>
+    <string name="profile_prefs_reset_successful">Todas as configurações do perfil foram repostas para os valores de origem.</string>
     <string name="plugin_prefs_reset_successful">Todas as configurações da extensão foram repostas nos valores originais.</string>
     <string name="add_custom_category">Adicionar categoria personalizada</string>
     <string name="shared_string_available">Disponível</string>
@@ -4182,4 +4182,8 @@
     <string name="backup_storage_taken">Espaço utilizado</string>
     <string name="backup_version_history_delete_descr">Quer mesmo eliminar o histórico de alterações de tipos desativados da cloud\?</string>
     <string name="delete_version_history">Eliminar histórico de versões</string>
+    <string name="routing_attr_avoid_tunnels_description">Evitar túneis</string>
+    <string name="routing_attr_avoid_tunnels_name">Evitar túneis</string>
+    <string name="send_crash_log">Enviar registo de falha de sistema</string>
+    <string name="send_logcat_log">Enviar registo logcat</string>
 </resources>
