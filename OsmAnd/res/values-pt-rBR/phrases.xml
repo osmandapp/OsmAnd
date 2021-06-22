@@ -3967,4 +3967,5 @@
     <string name="poi_climbing_grade_french_min">Rota mais fácil (grau francês)</string>
     <string name="poi_fuel_propane">Propano</string>
     <string name="poi_power_terminal">Terminal elétrico</string>
+    <string name="poi_power_portal">Portal de eletricidade</string>
 </resources>
