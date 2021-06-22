@@ -56,6 +56,7 @@ public abstract class BasePurchaseFragment extends BaseOsmAndDialogFragment
 	protected AppBarLayout appBar;
 	protected NestedScrollView scrollView;
 	private int lastKnownToolbarOffset;
+	private int lastScrollY;
 
 	protected List<OsmAndFeature> features = new ArrayList<>(Arrays.asList(OsmAndFeature.values()));
 
