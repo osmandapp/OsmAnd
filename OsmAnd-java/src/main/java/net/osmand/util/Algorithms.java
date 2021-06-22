@@ -87,6 +87,10 @@ public class Algorithms {
 		return s == null ? "" : s;
 	}
 
+	public static String trimIfNotNull(String s) {
+		return s == null ? null : s.trim();
+	}
+
 	public static boolean isEmpty(CharSequence s) {
 		return s == null || s.length() == 0;
 	}
