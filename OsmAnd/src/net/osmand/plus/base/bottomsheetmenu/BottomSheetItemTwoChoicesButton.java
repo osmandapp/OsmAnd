@@ -12,6 +12,9 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.ColorRes;
+import androidx.annotation.DimenRes;
+import androidx.annotation.LayoutRes;
 import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
 
@@ -41,7 +44,7 @@ public class BottomSheetItemTwoChoicesButton extends BottomSheetItemWithCompound
 	private GradientDrawable bottomBtnBg;
 
 	public BottomSheetItemTwoChoicesButton(View customView,
-										   int layoutId,
+										   @LayoutRes int layoutId,
 										   Object tag,
 										   boolean disabled,
 										   View.OnClickListener onClickListener,
@@ -49,16 +52,16 @@ public class BottomSheetItemTwoChoicesButton extends BottomSheetItemWithCompound
 										   Drawable icon,
 										   Drawable background,
 										   CharSequence title,
-										   int titleColorId,
+										   @ColorRes int titleColorId,
 										   boolean iconHidden,
 										   CharSequence description,
-										   int descriptionColorId,
+										   @ColorRes int descriptionColorId,
 										   int descriptionMaxLines,
 										   boolean descriptionLinksClickable,
 										   boolean checked,
 										   ColorStateList buttonTintList,
 										   CompoundButton.OnCheckedChangeListener onCheckedChangeListener,
-										   int compoundButtonColorId,
+										   @ColorRes int compoundButtonColorId,
 										   boolean isLeftBtnSelected,
 										   int leftBtnTitleRes,
 										   int rightBtnTitleRes,

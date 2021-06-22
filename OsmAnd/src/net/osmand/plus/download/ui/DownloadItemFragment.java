@@ -125,7 +125,7 @@ public class DownloadItemFragment extends DialogFragment implements DownloadEven
 	}
 
 	@Override
-	public void newDownloadIndexes() {
+	public void onUpdatedIndexesList() {
 		if (banner != null) {
 			banner.updateBannerInProgress();
 		}

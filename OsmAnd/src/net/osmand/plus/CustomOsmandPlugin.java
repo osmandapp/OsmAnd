@@ -192,11 +192,7 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 			downloadThread.runReloadIndexFiles();
 		}
 
-		boolean downloadIndexes = app.getSettings().isInternetConnectionAvailable()
-				&& !downloadThread.getIndexes().isDownloadedFromInternet
-				&& !downloadThread.getIndexes().downloadFromInternetFailed;
-
-		if (!downloadIndexes) {
+		if (!downloadThread.shouldDownloadIndexes()) {
 			for (SuggestedDownloadItem item : suggestedDownloadItems) {
 				DownloadActivityType type = DownloadActivityType.getIndexType(item.scopeId);
 				if (type != null) {
