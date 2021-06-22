@@ -15,8 +15,7 @@ public class OneTimePaymentButton extends PriceButton<InAppPurchase> {
 	}
 
 	@Override
-	public void onApply(@NonNull FragmentActivity activity,
-	                    @NonNull InAppPurchaseHelper purchaseHelper) {
+	public void onApply(@NonNull FragmentActivity activity, @NonNull InAppPurchaseHelper purchaseHelper) {
 		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
 		if (app.isPlusVersionInApp()) {
 			app.logEvent("in_app_purchase_redirect_from_banner");

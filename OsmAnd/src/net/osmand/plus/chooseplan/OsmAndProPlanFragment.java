@@ -25,7 +25,6 @@ public class OsmAndProPlanFragment extends SelectedPlanFragment {
 		fragment.show(activity.getSupportFragmentManager(), TAG);
 	}
 
-
 	@Override
 	protected void initData(@Nullable Bundle args) {
 		super.initData(args);
@@ -44,9 +43,7 @@ public class OsmAndProPlanFragment extends SelectedPlanFragment {
 
 	@Override
 	protected int getHeaderBgColorId() {
-		return nightMode ?
-				R.color.activity_background_color_dark :
-				R.color.activity_background_color_light;
+		return nightMode ? R.color.activity_background_color_dark : R.color.activity_background_color_light;
 	}
 
 	@Override
@@ -69,13 +66,12 @@ public class OsmAndProPlanFragment extends SelectedPlanFragment {
 		return getCheckmark();
 	}
 
-	public static List<PriceButton<?>> collectPriceButtons(OsmandApplication app,
-	                                                       InAppPurchaseHelper purchaseHelper) {
-		return new ArrayList<>(PriceButtonsUtils.collectSubscriptions(
-				app, purchaseHelper, getSubscriptions(app, purchaseHelper)));
+	public static List<PriceButton<?>> collectPriceButtons(OsmandApplication app, InAppPurchaseHelper purchaseHelper) {
+		List<InAppSubscription> subscriptions = getVisibleSubscriptions(app, purchaseHelper);
+		return new ArrayList<>(PriceButtonsUtils.collectSubscriptionButtons(app, purchaseHelper, subscriptions));
 	}
 
-	public static List<InAppSubscription> getSubscriptions(OsmandApplication app, InAppPurchaseHelper purchaseHelper) {
+	public static List<InAppSubscription> getVisibleSubscriptions(OsmandApplication app, InAppPurchaseHelper purchaseHelper) {
 		InAppPurchases purchases = app.getInAppPurchaseHelper().getInAppPurchases();
 		List<InAppSubscription> subscriptions = new ArrayList<>();
 		List<InAppSubscription> visibleSubscriptions = purchaseHelper.getSubscriptions().getVisibleSubscriptions();
@@ -86,5 +82,4 @@ public class OsmAndProPlanFragment extends SelectedPlanFragment {
 		}
 		return subscriptions;
 	}
-
 }

@@ -68,5 +68,4 @@ public abstract class BasePurchasingCard extends BaseCard {
 		contactSupportLinkContainer.setOnClickListener(
 				v -> app.sendSupportEmail(app.getString(R.string.purchases)));
 	}
-
 }

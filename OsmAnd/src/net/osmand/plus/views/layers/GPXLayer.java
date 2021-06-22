@@ -44,10 +44,8 @@ import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.PointImageDrawable;
-import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.mapmarkers.MapMarker;
@@ -1425,9 +1423,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			}
 			if (analysis.isColorizationTypeAvailable(GradientScaleType.ALTITUDE.toColorizationType())) {
 				availableScaleTypes.add(GradientScaleType.ALTITUDE);
-				if (InAppPurchaseHelper.isSubscribedToOsmAndPro(app) || Version.isDeveloperVersion(app)) {
-					availableScaleTypes.add(GradientScaleType.SLOPE);
-				}
+				availableScaleTypes.add(GradientScaleType.SLOPE);
 			}
 		}
 	}

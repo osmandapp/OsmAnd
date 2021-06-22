@@ -51,7 +51,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.base.BottomSheetDialogFragment;
-import net.osmand.plus.chooseplan.BasePurchaseFragment.OsmAndFeature;
+import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.ReloadIndexesTask.ReloadIndexesListener;

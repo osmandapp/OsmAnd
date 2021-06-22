@@ -53,7 +53,7 @@ public abstract class OsmLiveGoneDialog extends BaseOsmAndDialogFragment {
 			OsmAndFeature.WIKIPEDIA,
 			OsmAndFeature.WIKIVOYAGE,
 			OsmAndFeature.TERRAIN,
-			OsmAndFeature.NAUTICAL_DEPTH
+			OsmAndFeature.NAUTICAL
 	};
 
 	public static class OsmLiveOnHoldDialog extends OsmLiveGoneDialog {

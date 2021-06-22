@@ -63,12 +63,15 @@ public class DashPluginsFragment extends DashBaseFragment {
 	}
 
 	private final View.OnClickListener pluginDetailsListener(final OsmandPlugin plugin) {
-		return view -> {
-			FragmentActivity activity = getActivity();
-			if (activity != null) {
-				PluginsFragment.showInstance(activity.getSupportFragmentManager());
+		return new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				FragmentActivity activity = getActivity();
+				if (activity != null) {
+					PluginsFragment.showInstance(activity.getSupportFragmentManager());
+				}
+				closeDashboard();
 			}
-			closeDashboard();
 		};
 	}
 

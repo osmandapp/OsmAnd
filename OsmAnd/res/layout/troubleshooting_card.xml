@@ -62,6 +62,10 @@
 		layout="@layout/redeem_promo_code_button" />
 
 	<include
+		android:id="@+id/redeem_promo_code_divider"
+		layout="@layout/divider_half_item" />
+
+	<include
 		android:id="@+id/new_device_account_container"
 		layout="@layout/new_device_or_account_button" />
 

@@ -5,10 +5,11 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
+import net.osmand.util.Algorithms;
 
 public abstract class PriceButton<T extends InAppPurchase> implements Comparable<PriceButton> {
 
-	private String id;
+	private final String id;
 	protected CharSequence title;
 	protected CharSequence price;
 	protected String discount;
@@ -20,8 +21,7 @@ public abstract class PriceButton<T extends InAppPurchase> implements Comparable
 		this.purchaseItem = purchaseItem;
 	}
 
-	public abstract void onApply(@NonNull FragmentActivity activity,
-	                             @NonNull InAppPurchaseHelper purchaseHelper);
+	public abstract void onApply(@NonNull FragmentActivity activity, @NonNull InAppPurchaseHelper purchaseHelper);
 
 	public String getId() {
 		return id;
@@ -69,13 +69,12 @@ public abstract class PriceButton<T extends InAppPurchase> implements Comparable
 		if (!(o instanceof PriceButton)) return false;
 
 		PriceButton<?> that = (PriceButton<?>) o;
-
-		return id != null ? id.equals(that.id) : that.id == null;
+		return Algorithms.stringsEqual(id, that.id);
 	}
 
 	@Override
 	public int hashCode() {
-		return id != null ? id.hashCode() : 0;
+		return id.hashCode();
 	}
 
 	@Override

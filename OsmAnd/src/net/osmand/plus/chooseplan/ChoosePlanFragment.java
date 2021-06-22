@@ -53,8 +53,7 @@ public class ChoosePlanFragment extends BasePurchaseFragment {
 
 	private OsmAndFeature selectedFeature;
 
-	public static void showInstance(@NonNull FragmentActivity activity,
-	                                @NonNull OsmAndFeature selectedFeature) {
+	public static void showInstance(@NonNull FragmentActivity activity, @NonNull OsmAndFeature selectedFeature) {
 		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
 		if (Version.isAmazon()) {
 			Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Version.getUrlWithUtmRef(app, "net.osmand.plus")));
@@ -155,8 +154,7 @@ public class ChoosePlanFragment extends BasePurchaseFragment {
 		return v;
 	}
 
-	protected void bindFeatureItem(@NonNull View v,
-	                               @NonNull OsmAndFeature feature) {
+	protected void bindFeatureItem(@NonNull View v, @NonNull OsmAndFeature feature) {
 		bindFeatureItem(v, feature, false);
 
 		int mapsPlusVisibility = feature.isAvailableInMapsPlus() ? View.VISIBLE : View.INVISIBLE;
@@ -267,11 +265,11 @@ public class ChoosePlanFragment extends BasePurchaseFragment {
 	}
 
 	private void updateContinueButton(View v,
-	                                  int iconId,
-	                                  String plan,
-	                                  String price,
-	                                  OnClickListener l,
-	                                  boolean available) {
+									  int iconId,
+									  String plan,
+									  String price,
+									  OnClickListener l,
+									  boolean available) {
 		int colorNoAlpha = ContextCompat.getColor(themedCtx,
 				available ? getActiveColorId(nightMode) : getDefaultIconColorId(nightMode));
 
@@ -314,5 +312,4 @@ public class ChoosePlanFragment extends BasePurchaseFragment {
 			mapActivity.enableDrawer();
 		}
 	}
-
 }

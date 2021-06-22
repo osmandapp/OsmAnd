@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -94,8 +93,8 @@ public abstract class BasePurchaseFragment extends BaseOsmAndDialogFragment
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater i,
-	                         @Nullable ViewGroup container,
-	                         @Nullable Bundle savedInstanceState) {
+							 @Nullable ViewGroup container,
+							 @Nullable Bundle savedInstanceState) {
 		view = inflater.inflate(getLayoutId(), container, false);
 		scrollView = view.findViewById(R.id.scroll_view);
 		scrollView.getViewTreeObserver().addOnScrollChangedListener(this);
@@ -118,9 +117,7 @@ public abstract class BasePurchaseFragment extends BaseOsmAndDialogFragment
 
 	@ColorRes
 	protected int getStatusBarColorId() {
-		return nightMode ?
-				R.color.list_background_color_dark :
-				R.color.list_background_color_light;
+		return nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light;
 	}
 
 	@Override
@@ -138,33 +135,28 @@ public abstract class BasePurchaseFragment extends BaseOsmAndDialogFragment
 		return null;
 	}
 
-	protected void setupRoundedBackground(@NonNull View v) {
-		setupRoundedBackground(v, ContextCompat.getColor(themedCtx, getActiveColorId(nightMode)));
+	protected void setupRoundedBackground(@NonNull View view) {
+		setupRoundedBackground(view, ContextCompat.getColor(themedCtx, getActiveColorId(nightMode)));
 	}
 
-	protected void setupRoundedBackground(@NonNull View v, @ColorInt int color) {
+	protected void setupRoundedBackground(@NonNull View view, @ColorInt int color) {
 		Drawable normal = createRoundedDrawable(getAlphaColor(color, 0.1f));
-		setupRoundedBackground(v, normal, color);
+		setupRoundedBackground(view, normal, color);
 	}
 
-	protected void setupRoundedBackground(@NonNull View v,
-	                                      @NonNull Drawable normal,
-	                                      @ColorInt int color) {
+	protected void setupRoundedBackground(@NonNull View view, @NonNull Drawable normal, @ColorInt int color) {
 		Drawable selected = createRoundedDrawable(getAlphaColor(color, 0.5f));
-		setupRoundedBackground(v, normal, selected);
+		setupRoundedBackground(view, normal, selected);
 	}
 
-	protected void setupRoundedBackground(@NonNull View v,
-	                                      @NonNull Drawable normal,
-	                                      @NonNull Drawable selected) {
+	protected void setupRoundedBackground(@NonNull View view, @NonNull Drawable normal, @NonNull Drawable selected) {
 		Drawable background;
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-			Drawable[] layers = new Drawable[]{normal, getRippleDrawable()};
-			background = new LayerDrawable(layers);
+			background = UiUtilities.getLayeredIcon(normal, getRippleDrawable());
 		} else {
 			background = AndroidUtils.createPressedStateListDrawable(normal, selected);
 		}
-		AndroidUtils.setBackground(v, background);
+		AndroidUtils.setBackground(view, background);
 	}
 
 	protected Drawable getActiveStrokeDrawable() {
@@ -181,7 +173,7 @@ public abstract class BasePurchaseFragment extends BaseOsmAndDialogFragment
 	}
 
 	protected void setupIconBackground(@NonNull View v,
-	                                   @ColorInt int color) {
+									   @ColorInt int color) {
 		Drawable background = createRoundedDrawable(color);
 		AndroidUtils.setBackground(v, background);
 	}
@@ -191,12 +183,12 @@ public abstract class BasePurchaseFragment extends BaseOsmAndDialogFragment
 	}
 
 	protected void bindFeatureItem(@NonNull View itemView,
-	                               @NonNull OsmAndFeature feature,
-	                               boolean useHeaderTitle) {
+								   @NonNull OsmAndFeature feature,
+								   boolean useHeaderTitle) {
 		ImageView ivIcon = itemView.findViewById(R.id.icon);
 		ivIcon.setImageResource(feature.getIconId(nightMode));
 
-		int titleId = useHeaderTitle ? feature.getHeaderTitleId() : feature.getInListTitleId();
+		int titleId = useHeaderTitle ? feature.getHeaderTitleId() : feature.getListTitleId();
 		TextView tvTitle = itemView.findViewById(R.id.title);
 		tvTitle.setText(getString(titleId));
 	}

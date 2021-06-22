@@ -369,7 +369,7 @@ public class DiscountHelper {
 			} else if (CHOOSE_PLAN_TYPE_LIVE.equals(planType)) {
 				feature = OsmAndFeature.HOURLY_MAP_UPDATES;
 			} else if (CHOOSE_PLAN_TYPE_SEA_DEPTH.equals(planType)) {
-				feature = OsmAndFeature.NAUTICAL_DEPTH;
+				feature = OsmAndFeature.NAUTICAL;
 			} else if (CHOOSE_PLAN_TYPE_HILLSHADE.equals(planType)) {
 				feature = OsmAndFeature.TERRAIN;
 			} else if (CHOOSE_PLAN_TYPE_WIKIPEDIA.equals(planType)) {

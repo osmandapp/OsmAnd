@@ -18,14 +18,14 @@ import java.util.List;
 
 public class PriceButtonsUtils {
 
-	public static List<SubscriptionButton> collectSubscriptions(OsmandApplication app,
-	                                                            InAppPurchaseHelper purchaseHelper,
-	                                                            List<InAppSubscription> subscriptions) {
+	public static List<SubscriptionButton> collectSubscriptionButtons(OsmandApplication app,
+																	  InAppPurchaseHelper purchaseHelper,
+																	  List<InAppSubscription> subscriptions) {
 		List<SubscriptionButton> priceButtons = new ArrayList<>();
 		InAppSubscription maxDiscountSubscription = null;
 		double maxDiscount = 0;
 		boolean anyPurchased = false;
-		for (final InAppSubscription s : subscriptions) {
+		for (InAppSubscription s : subscriptions) {
 			if (s.isPurchased()) {
 				anyPurchased = true;
 			}
@@ -36,7 +36,7 @@ public class PriceButtonsUtils {
 			}
 		}
 		boolean maxDiscountAction = maxDiscountSubscription != null && maxDiscountSubscription.hasDiscountOffer();
-		for (final InAppSubscription s : subscriptions) {
+		for (InAppSubscription s : subscriptions) {
 			InAppSubscriptionIntroductoryInfo introductoryInfo = s.getIntroductoryInfo();
 			boolean hasIntroductoryInfo = introductoryInfo != null;
 			CharSequence descriptionText = s.getDescription(app);
@@ -109,7 +109,7 @@ public class PriceButtonsUtils {
 				if (!Algorithms.isEmpty(discount)) {
 					priceBtn.setDiscount(discount);
 
-					String regularPrice = s.getDefaultPrice(app);
+					String regularPrice = s.getRegularPrice(app, purchaseHelper.getMonthlyLiveUpdates());
 					priceBtn.setRegularPrice(regularPrice);
 				}
 
@@ -139,5 +139,4 @@ public class PriceButtonsUtils {
 		}
 		return null;
 	}
-
 }

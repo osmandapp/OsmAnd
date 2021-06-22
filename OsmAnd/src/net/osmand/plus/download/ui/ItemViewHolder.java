@@ -363,7 +363,7 @@ public class ItemViewHolder {
 							ChoosePlanFragment.showInstance(context, OsmAndFeature.WIKIPEDIA);
 							break;
 						case ASK_FOR_DEPTH_CONTOURS_PURCHASE:
-							ChoosePlanFragment.showInstance(context, OsmAndFeature.NAUTICAL_DEPTH);
+							ChoosePlanFragment.showInstance(context, OsmAndFeature.NAUTICAL);
 							break;
 						case ASK_FOR_SEAMARKS_PLUGIN:
 							showPluginsScreen();

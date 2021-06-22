@@ -49,9 +49,7 @@ public class MapsPlusPlanFragment extends SelectedPlanFragment {
 
 	@Override
 	protected int getHeaderBgColorId() {
-		return nightMode ?
-				R.color.list_background_color_dark :
-				R.color.list_background_color_light;
+		return nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light;
 	}
 
 	@Override
@@ -74,10 +72,9 @@ public class MapsPlusPlanFragment extends SelectedPlanFragment {
 		return getContentIcon(R.drawable.ic_action_done);
 	}
 
-	public static List<PriceButton<?>> collectPriceButtons(OsmandApplication app,
-	                                                       InAppPurchaseHelper purchaseHelper) {
-		List<PriceButton<?>> priceButtons = new ArrayList<>(
-				PriceButtonsUtils.collectSubscriptions(app, purchaseHelper, getVisibleSubscriptions(app, purchaseHelper)));
+	public static List<PriceButton<?>> collectPriceButtons(OsmandApplication app, InAppPurchaseHelper purchaseHelper) {
+		List<InAppSubscription> subscriptions = getVisibleSubscriptions(app, purchaseHelper);
+		List<PriceButton<?>> priceButtons = new ArrayList<>(PriceButtonsUtils.collectSubscriptionButtons(app, purchaseHelper, subscriptions));
 		OneTimePaymentButton oneTimePaymentButton = PriceButtonsUtils.getOneTimePaymentButton(app);
 		if (oneTimePaymentButton != null) {
 			priceButtons.add(oneTimePaymentButton);
@@ -85,8 +82,7 @@ public class MapsPlusPlanFragment extends SelectedPlanFragment {
 		return priceButtons;
 	}
 
-	protected static List<InAppSubscription> getVisibleSubscriptions(OsmandApplication app,
-	                                                                 InAppPurchaseHelper purchaseHelper) {
+	protected static List<InAppSubscription> getVisibleSubscriptions(OsmandApplication app, InAppPurchaseHelper purchaseHelper) {
 		InAppPurchases purchases = app.getInAppPurchaseHelper().getInAppPurchases();
 		List<InAppSubscription> subscriptions = new ArrayList<>();
 		List<InAppSubscription> visibleSubscriptions = purchaseHelper.getSubscriptions().getVisibleSubscriptions();
@@ -97,5 +93,4 @@ public class MapsPlusPlanFragment extends SelectedPlanFragment {
 		}
 		return subscriptions;
 	}
-
 }

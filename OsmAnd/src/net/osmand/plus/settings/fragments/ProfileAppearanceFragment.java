@@ -59,6 +59,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper.SettingsExportListener;
 import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
+import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.fragments.RouteLineAppearanceFragment.OnApplyRouteLineListener;
 import net.osmand.plus.track.ColorsCard;
 import net.osmand.plus.track.CustomColorBottomSheet.ColorPickerListener;

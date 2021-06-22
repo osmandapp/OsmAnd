@@ -378,11 +378,15 @@ public abstract class InAppPurchases {
 		}
 
 		public CharSequence getDescription(@NonNull Context ctx) {
+			return getFormattedPrice(ctx, getPriceValue(), getPriceCurrencyCode());
+		}
+
+		public String getFormattedPrice(@NonNull Context ctx, double priceValue, String priceCurrencyCode) {
 			NumberFormat currencyFormatter = getCurrencyFormatter();
 			if (currencyFormatter != null) {
-				return currencyFormatter.format(getPriceValue());
+				return currencyFormatter.format(priceValue);
 			} else {
-				return ctx.getString(R.string.default_price_currency_format, getPriceValue(), getPriceCurrencyCode());
+				return ctx.getString(R.string.default_price_currency_format, priceValue, priceCurrencyCode);
 			}
 		}
 
@@ -915,6 +919,17 @@ public abstract class InAppPurchases {
 				}
 			}
 			return 0;
+		}
+
+		public String getRegularPrice(@NonNull Context ctx, @NonNull InAppSubscription monthlyLiveUpdates) {
+			Period period = getSubscriptionPeriod();
+			if (period != null) {
+				double price = monthlyLiveUpdates.getPriceValue();
+				double months = period.getUnit().getMonthsValue();
+				double regularPrice = price * months;
+				return getFormattedPrice(ctx, regularPrice, getPriceCurrencyCode());
+			}
+			return null;
 		}
 
 		public String getPriceWithPeriod(Context ctx) {
