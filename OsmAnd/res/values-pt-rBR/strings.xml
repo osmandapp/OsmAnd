@@ -101,7 +101,7 @@
     <string name="shared_string_rename">Renomear</string>
     <string name="shared_string_delete">Apagar</string>
     <string name="shared_string_delete_all">Apagar tudo</string>
-    <string name="shared_string_share">Compartilhe</string>
+    <string name="shared_string_share">Compartilhar</string>
     <string name="shared_string_apply">Aplicar</string>
     <string name="shared_string_control_start">Iniciar</string>
     <string name="shared_string_control_stop">Parar</string>
@@ -4175,4 +4175,6 @@
     <string name="delete_version_history">Excluir histórico de versão</string>
     <string name="send_crash_log">Enviar registo de falha de sistema</string>
     <string name="send_logcat_log">Enviar registo logcat</string>
+    <string name="routing_attr_avoid_tunnels_description">Evitar túneis</string>
+    <string name="routing_attr_avoid_tunnels_name">Evitar túneis</string>
 </resources>
