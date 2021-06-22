@@ -42,7 +42,7 @@ public class WikiImageHelper {
 		if (wikidataId.startsWith(WIKIDATA_PREFIX)) {
 			String url = WIKIDATA_API_ENDPOINT + WIKIDATA_ACTION + wikidataId + FORMAT_JSON;
 			WikidataResponse response = sendWikipediaApiRequest(url, WikidataResponse.class);
-			if (response != null) {
+			if (response != null && response.claims != null && response.claims.p18 != null) {
 				for (P18 p18 : response.claims.p18) {
 					String imageFileName = p18.mainsnak.datavalue.value;
 					if (imageFileName != null) {
