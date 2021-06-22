@@ -30,7 +30,7 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.chooseplan.BasePurchaseFragment.OsmAndFeature;
+import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.dialogs.PluginInstalledBottomSheetDialog.PluginStateListener;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;

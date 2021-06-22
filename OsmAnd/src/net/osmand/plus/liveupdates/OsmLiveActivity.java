@@ -17,7 +17,7 @@ import com.google.android.material.tabs.TabLayout;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.chooseplan.BasePurchaseFragment.OsmAndFeature;
+import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.chooseplan.ChoosePlanDialogFragment.ChoosePlanDialogListener;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.download.AbstractDownloadActivity;

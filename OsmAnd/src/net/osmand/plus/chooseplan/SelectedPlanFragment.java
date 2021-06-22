@@ -46,6 +46,7 @@ public abstract class SelectedPlanFragment extends BasePurchaseFragment {
 	private static final Log LOG = PlatformUtil.getLog(SelectedPlanFragment.class);
 
 	private static final String PURCHASES_INFO = "https://docs.osmand.net/en/main@latest/osmand/purchases/android";
+	public static final String SELECTED_PRICE_BTN = "selected_price_button";
 
 	protected List<OsmAndFeature> includedFeatures = new ArrayList<>();
 	protected List<OsmAndFeature> noIncludedFeatures = new ArrayList<>();
@@ -63,6 +64,23 @@ public abstract class SelectedPlanFragment extends BasePurchaseFragment {
 		collectPriceButtons(priceButtons);
 		if (priceButtons.size() > 0) {
 			selectedPriceButton = priceButtons.get(0);
+		}
+		if (args != null && args.containsKey(SELECTED_PRICE_BTN)) {
+			String key = args.getString(SELECTED_PRICE_BTN);
+			for (PriceButton<?> button : priceButtons) {
+				if (Algorithms.objectEquals(key, button.getId())) {
+					selectedPriceButton = button;
+					break;
+				}
+			}
+		}
+	}
+
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
+		if (selectedPriceButton != null) {
+			outState.putString(SELECTED_PRICE_BTN, selectedPriceButton.getId());
 		}
 	}
 

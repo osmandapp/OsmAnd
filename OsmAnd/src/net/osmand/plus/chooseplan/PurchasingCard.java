@@ -13,7 +13,6 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.chooseplan.BasePurchaseFragment.OsmAndFeature;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 
 public class PurchasingCard extends BasePurchasingCard {

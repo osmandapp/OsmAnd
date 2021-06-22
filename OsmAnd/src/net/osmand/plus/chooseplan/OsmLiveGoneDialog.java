@@ -28,7 +28,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
-import net.osmand.plus.chooseplan.BasePurchaseFragment.OsmAndFeature;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.settings.backend.OsmandPreference;
@@ -234,7 +233,7 @@ public abstract class OsmLiveGoneDialog extends BaseOsmAndDialogFragment {
 							dismiss();
 							FragmentActivity activity = getActivity();
 							if (activity != null) {
-								ChoosePlanFragment.showInstance(activity, BasePurchaseFragment.OsmAndFeature.HOURLY_MAP_UPDATES);
+								ChoosePlanFragment.showInstance(activity, OsmAndFeature.HOURLY_MAP_UPDATES);
 							}
 						}
 					});

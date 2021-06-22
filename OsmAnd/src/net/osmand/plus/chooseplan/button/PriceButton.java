@@ -23,6 +23,10 @@ public abstract class PriceButton<T extends InAppPurchase> {
 	public abstract void onApply(@NonNull FragmentActivity activity,
 	                             @NonNull InAppPurchaseHelper purchaseHelper);
 
+	public String getId() {
+		return id;
+	}
+
 	public CharSequence getTitle() {
 		return title;
 	}

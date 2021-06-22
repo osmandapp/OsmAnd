@@ -39,7 +39,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
-import net.osmand.plus.chooseplan.BasePurchaseFragment.OsmAndFeature;
+import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.liveupdates.LiveUpdatesClearBottomSheet.RefreshLiveUpdates;
 import net.osmand.plus.liveupdates.LiveUpdatesFragment;

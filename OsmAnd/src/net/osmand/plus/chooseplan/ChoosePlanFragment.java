@@ -43,6 +43,8 @@ public class ChoosePlanFragment extends BasePurchaseFragment {
 	public static final String TAG = SelectedPlanFragment.class.getSimpleName();
 	protected static final Log LOG = PlatformUtil.getLog(SelectedPlanFragment.class);
 
+	public static final String SELECTED_FEATURE = "selected_feature";
+
 	private LinearLayout listContainer;
 	private Map<OsmAndFeature, View> itemViews = new HashMap<>();
 
@@ -70,6 +72,17 @@ public class ChoosePlanFragment extends BasePurchaseFragment {
 	@Override
 	protected void initData(@Nullable Bundle args) {
 		features.remove(OsmAndFeature.COMBINED_WIKI);
+		if (args != null && args.containsKey(SELECTED_FEATURE)) {
+			selectedFeature = OsmAndFeature.valueOf(args.getString(SELECTED_FEATURE));
+		}
+	}
+
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
+		if (selectedFeature != null) {
+			outState.putString(SELECTED_FEATURE, selectedFeature.name());
+		}
 	}
 
 	@Override
