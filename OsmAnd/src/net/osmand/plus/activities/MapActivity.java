@@ -810,9 +810,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 
 		app.getDownloadThread().setUiActivity(this);
-		if (VoiceLanguageBottomSheetFragment.shouldDownloadIndexes(app)) {
-			app.getDownloadThread().runReloadIndexFilesSilent();
-		}
 
 		boolean routeWasFinished = routingHelper.isRouteWasFinished();
 		if (routeWasFinished && !DestinationReachedMenu.wasShown()) {

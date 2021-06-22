@@ -305,6 +305,12 @@ public class DownloadIndexesThread {
 	public double getAvailableSpace() {
 		return AndroidUtils.getAvailableSpace(app) / (1 << 20);
 	}
+
+	public boolean shouldDownloadIndexes() {
+		return app.getSettings().isInternetConnectionAvailable()
+				&& !indexes.isDownloadedFromInternet
+				&& !indexes.downloadFromInternetFailed;
+	}
 	
 	/// PRIVATE IMPL
 

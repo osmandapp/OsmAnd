@@ -292,9 +292,9 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 							}
 						} else {
 							if (downloadThread.isDownloading(indexItem)) {
-								onClickedDownloadingIndex(indexItem, progressBar, textDescription, secondaryIcon);
+								cancelIndexDownload(indexItem, progressBar, textDescription, secondaryIcon);
 							} else {
-								onClickedNotDownloadedIndex(indexItem, progressBar, textDescription, secondaryIcon);
+								startIndexDownload(indexItem, progressBar, textDescription, secondaryIcon);
 							}
 						}
 					})
@@ -304,8 +304,8 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 		}
 	}
 
-	private void onClickedDownloadingIndex(IndexItem indexItem, View progressBar,
-	                                       View textDescription, ImageView secondaryIcon) {
+	private void cancelIndexDownload(IndexItem indexItem, View progressBar,
+									 View textDescription, ImageView secondaryIcon) {
 		downloadThread.cancelDownload(indexItem);
 		if (indexItem.equals(indexToSelectAfterDownload)) {
 			indexToSelectAfterDownload = null;
@@ -315,8 +315,8 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 		secondaryIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_gsave_dark));
 	}
 
-	private void onClickedNotDownloadedIndex(IndexItem indexItem, ProgressBar progressBar,
-											 View textDescription, ImageView secondaryIcon) {
+	private void startIndexDownload(IndexItem indexItem, ProgressBar progressBar,
+									View textDescription, ImageView secondaryIcon) {
 		AndroidUiHelper.updateVisibility(progressBar, true);
 		AndroidUiHelper.updateVisibility(textDescription, false);
 		progressBar.setIndeterminate(downloadThread.isDownloading());
@@ -414,17 +414,11 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 		}
 
 		List<DownloadItem> suggestedVoice = new ArrayList<>();
-		if (!shouldDownloadIndexes(app)) {
+		if (!downloadThread.shouldDownloadIndexes()) {
 			suggestedVoice.addAll(downloadThread.getIndexes().getDownloadItemsForGroup(type));
 		}
 
 		return suggestedVoice;
-	}
-
-	public static boolean shouldDownloadIndexes(@NonNull OsmandApplication app) {
-		return app.getSettings().isInternetConnectionAvailable()
-				&& !app.getDownloadThread().getIndexes().isDownloadedFromInternet
-				&& !app.getDownloadThread().getIndexes().downloadFromInternetFailed;
 	}
 
 	private enum InfoType {
