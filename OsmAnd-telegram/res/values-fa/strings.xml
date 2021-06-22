@@ -82,4 +82,14 @@
     <string name="shared_string_export">برون‌برد</string>
     <string name="logcat_buffer">بافر لاگ‌کت</string>
     <string name="logcat_buffer_descr">لاگ‌های باجزئیات برنامه را بررسی و هم‌رسانی کنید</string>
+    <string name="shared_string_start">شروع</string>
+    <string name="shared_string_end">پایان</string>
+    <string name="saved_messages">پیام‌های ذخیره شده</string>
+    <string name="unit_of_speed_system">یکای سرعت</string>
+    <string name="unit_of_speed_system_descr">یکای سرعت را تعریف کنید.</string>
+    <string name="time_zone">منطقهٔ زمانی</string>
+    <string name="status_widget_title">وضعیت ردیاب OsmAnd</string>
+    <string name="shared_string_suggested">پیشنهادی</string>
+    <string name="back_to_osmand">بازگشت به OsmAnd</string>
+    <string name="duration_ago">‏%1$s پیش</string>
 </resources>

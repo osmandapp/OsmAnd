@@ -1492,7 +1492,7 @@
     <string name="app_mode_car">Aŭto</string>
     <string name="app_mode_bicycle">Biciklo</string>
     <string name="app_mode_pedestrian">Piediranto</string>
-    <string name="get_plugin">Elŝuti</string>
+    <string name="get_plugin">Akiri</string>
     <string name="do_you_like_osmand">Ĉu OsmAnd plaĉas al ci?</string>
     <string name="app_name_osmand">OsmAnd</string>
     <string name="access_direction_audio_feedback">Sonaj sciigoj pri direkto</string>
@@ -2975,7 +2975,7 @@
     <string name="profile_alert_delete_msg">Ĉu vi certe volas forigi la profilon “%s”\?</string>
     <string name="select_base_profile_dialog_title">Elektu komencan profilon</string>
     <string name="select_base_profile_dialog_message">Via propra profilo estos bazita sur iu implicita aplikaĵa profilo, kiu difinos bazajn agordojn kiel videblon de fenestraĵoj, unuojn de rapido kaj distanco. Jen implicitaj profiloj kaj ekzemplaj profiloj por krei:</string>
-    <string name="select_nav_profile_dialog_title">Elektu profilon de navigo</string>
+    <string name="select_nav_profile_dialog_title">Elekti profilon de navigo</string>
     <string name="base_profile_descr_car">Aŭto, kamiono, motorciklo</string>
     <string name="base_profile_descr_bicycle">Biciklo, motorbiciklo, ĉevalo</string>
     <string name="base_profile_descr_pedestrian">Promenado, marŝado, kurado</string>
@@ -2985,10 +2985,10 @@
     <string name="routing_profile_geocoding">Koordinat-trovado</string>
     <string name="routing_profile_straightline">Rekta linio</string>
     <string name="routing_profile_broutrer">BRouter (malkonekte)</string>
-    <string name="osmand_default_routing">Kurs‑difinilo OsmAnd</string>
+    <string name="osmand_default_routing">OsmAnd-navigilo</string>
     <string name="custom_routing">Propra profilo de kurs‑difinado</string>
-    <string name="special_routing_type">Speciala kurs‑difinado</string>
-    <string name="third_party_routing_type">Ekstera kurs‑difinilo</string>
+    <string name="special_routing_type">Speciala navigilo</string>
+    <string name="third_party_routing_type">Ekstera navigilo</string>
     <string name="application_profiles_descr">Elekti profilojn videblajn en la aplikaĵo.</string>
     <string name="application_profiles">Profiloj de aplikaĵo</string>
     <string name="quick_action_need_to_add_item_to_list">Aldonu almenaŭ unu elementon al la listo en agordoj de “rapida ago”</string>
@@ -3298,7 +3298,6 @@
     <string name="select_color">Elekti koloron</string>
     <string name="edit_profiles_descr">Ne eblas forigi la implicitajn profilojn de OsmAnd, sed eblas malaktivigi ilin (ĉe la antaŭa ekrano) aŭ movi ilin suben.</string>
     <string name="edit_profiles">Redakti profilojn</string>
-    <string name="select_nav_profile_dialog_message">“Speco de navigo” influas al maniero kiel kalkuli kurson.</string>
     <string name="profile_appearance">Aspekto de profilo</string>
     <string name="choose_icon_color_name">Emblemo, koloro kaj nomo</string>
     <string name="reorder_profiles">Redakti liston de profiloj</string>
@@ -3311,7 +3310,7 @@
     <string name="file_does_not_contain_routing_rules">Neniuj reguloj pri kurs‑difinado en “%1$s”. Bonvolu elekti alian dosieron.</string>
     <string name="not_support_file_type_with_ext">Bonvolu elekti dosieron kun la subtenata finaĵo %1$s.</string>
     <string name="import_from_file">Enporti el dosiero</string>
-    <string name="import_routing_file">Enporti dosieron de kurs‑difinado</string>
+    <string name="import_routing_file">Enporti dosieron de navigilo</string>
     <string name="import_profile">Enporti profilon</string>
     <string name="monitoring_prefs_descr">Navigado, precizo de registrado</string>
     <string name="multimedia_notes_prefs_descr">Dimensioj de bildo, kvalito de sono kaj video</string>
@@ -3333,7 +3332,7 @@
     <string name="osm_edits_view_descr">Ĉiuj viaj jam nepublikigitaj redaktoj aŭ rimarkoj OSM estos videblaj ĉe %1$s. Punktoj alŝutitaj al OSM ne estos videblaj en OsmAnd.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Emblemo montrata dum navigi aŭ moviĝi.</string>
-    <string name="select_map_icon_descr">Montri emblemon dum restado.</string>
+    <string name="select_map_icon_descr">Emblemo montrata dum restado.</string>
     <string name="logcat_buffer_descr">Legi kaj kunhavigi detalajn protokolojn de la aplikaĵo</string>
     <string name="permission_is_required">Permeso estas necesa por uzi tiun ĉi eblaĵon.</string>
     <string name="monitoring_min_speed_descr">Tiu ĉi filtrilo preventas registri punktojn sub difinita rapidlimo. Tiel registritaj spuroj aspektos pli glate dum vidiĝi sur la mapo.</string>
@@ -3824,7 +3823,6 @@
     <string name="message_graph_will_be_available_after_recalculation">Bonvolu atendi.
 \nDiagramo estos videbla post rekalkuli kurson.</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
-    <string name="app_mode_gap">Manko</string>
     <string name="shared_string_local_maps">Lokaj mapoj</string>
     <string name="icon_group_amenity">Oportunaĵo</string>
     <string name="icon_group_special">Specialaj</string>
@@ -3949,7 +3947,7 @@
     <string name="routing_engine_vehicle_type_racingbike">Biciklo vetkura</string>
     <string name="routing_engine_vehicle_type_mtb">Montbiciklo</string>
     <string name="message_server_error">Servila eraro: %1$s</string>
-    <string name="message_name_is_already_exists">Tiu ĉi nomo jam estas uzata</string>
+    <string name="message_name_is_already_exists">La nomo jam estas uzata</string>
     <string name="start_recording">Ekigi registri</string>
     <string name="show_track_on_map">Montri kurson sur mapo</string>
     <string name="routing_engine_vehicle_type_wheelchair">Rulseĝo</string>
@@ -3969,7 +3967,7 @@
     <string name="announcement_time_arrive">Atingo al celo</string>
     <string name="shared_string_turn">Turno</string>
     <string name="announcement_time_intervals">Interspacoj distancaj kaj tempaj</string>
-    <string name="announcement_time_descr">Tempo de anonco de diversaj voĉaj sciigoj dependas de ilia specoj, nuna naviga kaj implicita naviga rapido.</string>
+    <string name="announcement_time_descr">La tempo de anonco de diversaj voĉaj sciigoj dependas de iliaj specoj, nuna kaj implicita navigaj rapidoj.</string>
     <string name="announcement_time_title">Tempo de anonco</string>
     <string name="copy_to_map_favorites">Kopii al ŝatataj</string>
     <string name="delete_online_routing_engine">Ĉu forigi tiun ĉi enretan navigilon\?</string>
@@ -4004,7 +4002,7 @@
     <string name="activity_type_offroad_name">Ekstervoje</string>
     <string name="activity_type_motorbike_name">Motorciklo</string>
     <string name="activity_type_car_name">Aŭto</string>
-    <string name="select_segments_description">%1$s enhavas almenaŭ unu segmenton, vi devas elekti la necesan parton por navigi.</string>
+    <string name="select_segments_description">%1$s enhavas pli ol unu segmento, elektu la deziratan parton por navigi.</string>
     <string name="temporary_conditional_routing_descr">Uzi vojajn limigojn, kiuj estas nun aktivaj sur la mapo</string>
     <string name="routing_attr_driving_style_description">Elekti inter pli mallonga, pli rapida aŭ pli sekura kursoj</string>
     <string name="snap_to_road_descr">Proksimigas emblemon de via pozicio al la nune navigata vojo</string>
@@ -4043,18 +4041,21 @@
     <string name="purchases">Aĉetoj</string>
     <string name="quick_action_show_hide_title">Montri/kaŝi</string>
     <string name="shared_string_interval">Intertempo</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Kaŝi limojn de naturaj rezervejoj, protektataj areoj kaj naciaj parkoj</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Kaŝi limojn de naturaj rezervejoj, protektataj areoj kaj naciaj parkoj.</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">Limoj de rezervejoj</string>
-    <string name="trip_recording_logging_interval_info">Agordita periodo de intertempo de registrado, dum kiu OsmAnd petos la nunajn poziciajn datumojn.</string>
+    <string name="trip_recording_logging_interval_info">La periodo de intertempo de registrado estas tempo post kiu OsmAnd petos pri aktualaj datumoj de pozicio.</string>
     <string name="lost_data_warning">Ĉiuj nekonservitaj datumoj perdiĝos.</string>
     <string name="trip_recording_save_and_continue">Konservi kaj daŭrigi</string>
-    <string name="trip_recording_show_start_dialog_setting">Se malŝaltita, registrado komenciĝos tuj post frapeto sur la fenestraĵo aŭ menuero, preterlasante la konfirman dialogon.</string>
+    <string name="trip_recording_show_start_dialog_setting">Se malaktiva, registrado komenciĝos tuj post frapeto sur la fenestraĵo aŭ menuero, preterlasante la ekranon de konfirmo.</string>
     <string name="show_start_dialog">Montri komencan dialogon</string>
-    <string name="specify_color_for_map_mode">Elektu koloron por map‑reĝimo: %1$s.</string>
+    <string name="specify_color_for_map_mode">Elektu koloron por map‑reĝimo %1$s.</string>
     <string name="customize_route_line">Alĝustigi linion de kurso</string>
     <string name="shared_string_route_line">Linio de kurso</string>
-    <string name="route_line_use_map_style_appearance">Por la linio de kurso estos uzata %1$s difinita por la map‑stilo: %2$s.</string>
-    <string name="release_4_0_beta">• ĝisdatigoj OsmAnd Live movitaj al “elŝutoj” → “ĝisdatigoj”
+    <string name="release_4_0_beta">• eblo elŝuti nivelkurbojn en futoj
+\n
+\n• horizontala vido por “plani kurson”: aldonitaj langetoj por baskuli inter punktoj kaj diagramoj
+\n
+\n• ĝisdatigoj OsmAnd Live movitaj al “elŝutoj” → “ĝisdatigoj”
 \n
 \n• eblo kolorigi spurojn laŭ altitudo, rapido aŭ dekliveco
 \n
@@ -4085,4 +4086,50 @@
     <string name="exit_number">Numero de elirejo</string>
     <string name="user_points">Poentoj de uzanto</string>
     <string name="output">Eligo</string>
+    <string name="shared_string_feet">futoj</string>
+    <string name="srtm_unit_format">Unuo por nivelkurboj</string>
+    <string name="srtm_download_list_help_message">OsmAnd liveras nivelkurbojn en metroj kaj en futoj. Ve devos reelŝuti la dosieron por ŝanĝi la formon.</string>
+    <string name="srtm_download_single_help_message">Elektu la deziratan mezurunuon. Vi devos reelŝuti la dosieron por ŝanĝi la formon.</string>
+    <string name="route_line_use_gradient_coloring">Linio de spuro estas kolorigata laŭ la profilo de altitudo.</string>
+    <string name="shared_string_min_height">Minimuma alto</string>
+    <string name="shared_string_max_height">Maksimuma alto</string>
+    <string name="language_description">Elektu preferatan lingvon kaj specon de voĉo por navigaj gvidiloj.</string>
+    <string name="tts_description">Uzante parolsintezitajn voĉojn la aplikaĵo povas elparoli ĉiujn specojn de instrukcioj: gvidiloj pri turnoj, nomoj de stratoj kaj interesejoj, ktp.</string>
+    <string name="tts_title">Parolsintezita</string>
+    <string name="recorded_description">Antaŭregistritaj voĉoj sonas pli bone, sed la aplikaĵo povas nur elparoli gvidiloj pri turnoj. Ĝi ne povas anonci nomojn de stratoj aŭ de interesejoj.</string>
+    <string name="use_system_language">Uzi sisteman lingvon</string>
+    <string name="shared_string_itinerary">Kurso</string>
+    <string name="route_line_use_map_style_width">Uzi implicitan larĝon por la map‑stilo %1$s.</string>
+    <string name="route_line_use_map_style_color">Uzi implicitan koloron de la map‑stilo %1$s.</string>
+    <string name="poi_routes">Kursoj</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">Eviti zonojn nur por malalte aer‑malpurigantaj veturiloj</string>
+    <string name="routing_attr_avoid_low_emission_zone_name">Sen zonoj de restrikta emisio</string>
+    <string name="search_more">Serĉi pli…</string>
+    <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
+    <string name="backup_and_restore">Sekurkopio</string>
+    <string name="last_backup">Antaŭa sekurkopio</string>
+    <string name="duration_ago">antaŭ %1$s</string>
+    <string name="cloud_email_not_registered">Tiu ĉi retpoŝta adreso ne estis registrita en OsmAnd-Nubo</string>
+    <string name="osmand_cloud">OsmAnd-Nubo</string>
+    <string name="osmand_cloud_authorize_descr">Neniam perdu viajn datumojn: fari sekurkopiojn kaj restarigi ĉiujn datumojn senprobleme.</string>
+    <string name="local_backup">Loka sekurkopio</string>
+    <string name="local_backup_descr">Fari sekurkopion aŭ restarigi datumojn el loka dosiero.</string>
+    <string name="backup_into_file">Konservi al dosiero</string>
+    <string name="restore_from_file">Restarigi el dosiero</string>
+    <string name="osmand_cloud_help_descr">Ĉu vi bezonas helpon\? Kontaktu nin ĉe %1$s</string>
+    <string name="osmand_cloud_create_account_descr">Enigu vian retpoŝtan adreson, ĉiuj viaj datumoj estos ligitaj kun ĝi.
+\nLa kontrolkodo estos sendita al tiu ĉi retpoŝta adreso.</string>
+    <string name="osmand_cloud_login_descr">Enigu la retpoŝtan adreson, kiun vi uzis por registriĝi. Ni sendos al vi unufojan pasvorton necesan por la sekva etapo.</string>
+    <string name="verify_email_address">Kontroli retpoŝtan adreson</string>
+    <string name="verify_email_address_descr">La kontrolkodo estis sendita al %1$s, enigu ĝin en la lampon sube.</string>
+    <string name="enter_verification_code">Enigu 4-ciferan kodon</string>
+    <string name="cloud_email_already_registered">Konto kun tiu ĉi retpoŝta adreso jam estas registrita.</string>
+    <string name="resend_verification_code">Resendi kontrolkodon</string>
+    <string name="verification_code_missing">Mi ne ricevis kontrolkodon</string>
+    <string name="verification_code_missing_description">Necesos atendi eĉ 10 minutojn por ricevi la kodon, bonvolu ankaŭ kontroli vian trudmesaĝujon. Se tio ĉi ne helpos, uzu la butonon sube.</string>
+    <string name="select_nav_profile_dialog_message">Elekto de profilo de navigo influas al maniero kiel kalkuli kurson. Eblas elekti malkonektan aŭ enretan navigilon.</string>
+    <string name="restore_complete">Restarigo finita</string>
+    <string name="grey_color_slope">Griza koloro estas uzata kiam dekliveco estas nekonata.</string>
+    <string name="backup_version_history">Historio de versioj</string>
+    <string name="backup_storage_taken">Uzata spaco</string>
 </resources>

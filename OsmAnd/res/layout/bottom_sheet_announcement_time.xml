@@ -62,18 +62,12 @@
 		osmand:typeface="@string/font_roboto_medium"
 		tools:text="Normal" />
 
-	<SeekBar
-		android:id="@+id/seek_bar_arrival"
-		style="@style/Widget.AppCompat.SeekBar.Discrete"
+	<com.google.android.material.slider.Slider
+		android:id="@+id/arrival_slider"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_marginTop="@dimen/pages_item_margin"
-		android:maxHeight="2dp"
-		android:paddingTop="11dp"
-		android:paddingBottom="11dp"
-		osmand:tickMark="@drawable/seekbar_tickmark_announcement_time"
-		tools:max="3"
-		tools:progress="1" />
+		android:layout_marginLeft="@dimen/content_padding"
+		android:layout_marginRight="@dimen/content_padding" />
 
 	<View
 		android:id="@+id/divider"

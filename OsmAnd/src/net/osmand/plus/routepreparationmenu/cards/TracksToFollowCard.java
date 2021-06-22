@@ -1,7 +1,6 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import android.view.ViewTreeObserver;
 
 import net.osmand.Collator;
 import net.osmand.IndexConstants;
@@ -12,6 +11,7 @@ import net.osmand.plus.helpers.GpxTrackAdapter;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.helpers.enums.TracksSortByMode;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
+import net.osmand.plus.routepreparationmenu.FollowTrackFragment;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -22,7 +22,14 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TracksToFollowCard extends BaseCard {
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+public class TracksToFollowCard extends MapBaseCard {
+
+	private final Fragment target;
 
 	private List<GPXInfo> gpxInfoList;
 	private Map<String, List<GPXInfo>> gpxInfoCategories;
@@ -34,8 +41,9 @@ public class TracksToFollowCard extends BaseCard {
 	private String visibleCategory;
 	private String selectedCategory;
 
-	public TracksToFollowCard(MapActivity mapActivity, List<GPXInfo> gpxInfoList, String selectedCategory) {
+	public TracksToFollowCard(@NonNull MapActivity mapActivity, @NonNull Fragment target, @NonNull List<GPXInfo> gpxInfoList, @NonNull String selectedCategory) {
 		super(mapActivity);
+		this.target = target;
 		this.gpxInfoList = gpxInfoList;
 		this.selectedCategory = selectedCategory;
 		defaultCategory = app.getString(R.string.shared_string_all);
@@ -64,14 +72,27 @@ public class TracksToFollowCard extends BaseCard {
 
 	@Override
 	protected void updateContent() {
-		setupCategoriesRow();
 		setupTracksItems();
 	}
 
 	private void setupTracksItems() {
-		RecyclerView filesRecyclerView = view.findViewById(R.id.track_list);
+		final RecyclerView filesRecyclerView = view.findViewById(R.id.track_list);
 		filesRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 		filesRecyclerView.setNestedScrollingEnabled(false);
+		filesRecyclerView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+			@Override
+			public void onScrollChanged() {
+				if (target instanceof FollowTrackFragment) {
+					boolean scrollToBottomAvailable = filesRecyclerView.canScrollVertically(1);
+					FollowTrackFragment followTrackFragment = (FollowTrackFragment) target;
+					if (scrollToBottomAvailable) {
+						followTrackFragment.showShadowButton();
+					} else {
+						followTrackFragment.hideShadowButton();
+					}
+				}
+			}
+		});
 
 		tracksAdapter = new GpxTrackAdapter(view.getContext(), gpxInfoList, false, showFoldersName());
 		tracksAdapter.setAdapterListener(new GpxTrackAdapter.OnItemClickListener() {
@@ -87,10 +108,11 @@ public class TracksToFollowCard extends BaseCard {
 				}
 			}
 		});
+		tracksAdapter.setTrackCategoriesAdapter(createTrackCategoriesAdapter());
 		filesRecyclerView.setAdapter(tracksAdapter);
 	}
 
-	private void setupCategoriesRow() {
+	private HorizontalSelectionAdapter createTrackCategoriesAdapter() {
 		final HorizontalSelectionAdapter selectionAdapter = new HorizontalSelectionAdapter(app, nightMode);
 		selectionAdapter.setTitledItems(new ArrayList<>(gpxInfoCategories.keySet()));
 		selectionAdapter.setSelectedItemByTitle(selectedCategory);
@@ -103,11 +125,7 @@ public class TracksToFollowCard extends BaseCard {
 				selectionAdapter.notifyDataSetChanged();
 			}
 		});
-
-		RecyclerView iconCategoriesRecyclerView = view.findViewById(R.id.track_categories);
-		iconCategoriesRecyclerView.setAdapter(selectionAdapter);
-		iconCategoriesRecyclerView.setLayoutManager(new LinearLayoutManager(app, RecyclerView.HORIZONTAL, false));
-		selectionAdapter.notifyDataSetChanged();
+		return selectionAdapter;
 	}
 
 	private void updateTracksAdapter() {

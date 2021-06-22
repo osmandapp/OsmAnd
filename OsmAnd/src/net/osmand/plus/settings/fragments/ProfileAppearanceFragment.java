@@ -49,20 +49,21 @@ import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.profiles.NavigationIcon;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.profiles.ProfileIcons;
-import net.osmand.plus.profiles.SelectProfileBottomSheet;
-import net.osmand.plus.profiles.SelectProfileBottomSheet.DialogMode;
+import net.osmand.plus.profiles.SelectBaseProfileBottomSheet;
 import net.osmand.plus.profiles.SelectProfileBottomSheet.OnSelectProfileCallback;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
-import net.osmand.plus.routing.RouteLineDrawInfo;
+import net.osmand.plus.routing.PreviewRouteLineInfo;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.CommonPreference;
-import net.osmand.plus.settings.backend.backup.ProfileSettingsItem;
+import net.osmand.plus.settings.backend.backup.FileSettingsHelper.SettingsExportListener;
+import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.fragments.RouteLineAppearanceFragment.OnApplyRouteLineListener;
 import net.osmand.plus.track.ColorsCard;
 import net.osmand.plus.track.CustomColorBottomSheet.ColorPickerListener;
+import net.osmand.plus.track.GradientScaleType;
 import net.osmand.plus.widgets.FlowLayout;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.util.Algorithms;
@@ -109,7 +110,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 	private static final String IS_BASE_PROFILE_IMPORTED = "is_base_profile_imported";
 	private static final String IS_NEW_PROFILE_KEY = "is_new_profile_key";
 
-	private SettingsHelper.SettingsExportListener exportListener;
+	private SettingsExportListener exportListener;
 
 	private ProgressDialog progress;
 
@@ -164,7 +165,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 			changedProfile.routeService = profile.routeService;
 			changedProfile.locationIcon = profile.locationIcon;
 			changedProfile.navigationIcon = profile.navigationIcon;
-			changedProfile.routeLineDrawInfo = profile.routeLineDrawInfo;
+			changedProfile.previewRouteLineInfo = profile.previewRouteLineInfo;
 			isNewProfile = ApplicationMode.valueOfStringKey(changedProfile.stringKey, null) == null;
 		}
 		requireMyActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
@@ -185,7 +186,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		profile.routeService = baseModeForNewProfile.getRouteService();
 		profile.locationIcon = baseModeForNewProfile.getLocationIcon();
 		profile.navigationIcon = baseModeForNewProfile.getNavigationIcon();
-		profile.routeLineDrawInfo = createRouteLineDrawInfo(baseModeForNewProfile);
+		profile.previewRouteLineInfo = createRouteLineDrawInfo(baseModeForNewProfile);
 	}
 
 	@Override
@@ -326,7 +327,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		outState.putBoolean(IS_BASE_PROFILE_IMPORTED, isBaseProfileImported);
 		outState.putSerializable(PROFILE_LOCATION_ICON_KEY, changedProfile.locationIcon);
 		outState.putSerializable(PROFILE_NAVIGATION_ICON_KEY, changedProfile.navigationIcon);
-		changedProfile.routeLineDrawInfo.saveToBundle(outState);
+		changedProfile.previewRouteLineInfo.saveToBundle(outState);
 	}
 
 	private void restoreState(Bundle savedInstanceState) {
@@ -340,7 +341,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		isBaseProfileImported = savedInstanceState.getBoolean(IS_BASE_PROFILE_IMPORTED);
 		changedProfile.locationIcon = (LocationIcon) savedInstanceState.getSerializable(PROFILE_LOCATION_ICON_KEY);
 		changedProfile.navigationIcon = (NavigationIcon) savedInstanceState.getSerializable(PROFILE_NAVIGATION_ICON_KEY);
-		changedProfile.routeLineDrawInfo = new RouteLineDrawInfo(savedInstanceState);
+		changedProfile.previewRouteLineInfo = new PreviewRouteLineInfo(savedInstanceState);
 		isNewProfile = savedInstanceState.getBoolean(IS_NEW_PROFILE_KEY);
 	}
 
@@ -420,12 +421,12 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 				public void onClick(View v) {
 					if (isNewProfile) {
 						hideKeyboard();
-						String selectedAppModeKey =
-								changedProfile.parent != null ? changedProfile.parent.getStringKey() : null;
 						if (getActivity() != null) {
-							SelectProfileBottomSheet.showInstance(
-									getActivity(), DialogMode.BASE_PROFILE, ProfileAppearanceFragment.this,
-									getSelectedAppMode(), selectedAppModeKey, false);
+							String selected = changedProfile.parent != null ?
+									changedProfile.parent.getStringKey() : null;
+							SelectBaseProfileBottomSheet.showInstance(
+									getActivity(),ProfileAppearanceFragment.this,
+									getSelectedAppMode(), selected, false);
 						}
 					}
 				}
@@ -476,9 +477,9 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		super.onPause();
 		if (isNewProfile) {
 			File file = ConfigureProfileFragment.getBackupFileForCustomMode(app, changedProfile.stringKey);
-			boolean fileExporting = app.getSettingsHelper().isFileExporting(file);
+			boolean fileExporting = app.getFileSettingsHelper().isFileExporting(file);
 			if (fileExporting) {
-				app.getSettingsHelper().updateExportListener(file, null);
+				app.getFileSettingsHelper().updateExportListener(file, null);
 			}
 		}
 	}
@@ -689,9 +690,9 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		}
 	}
 
-	private SettingsHelper.SettingsExportListener getSettingsExportListener() {
+	private SettingsExportListener getSettingsExportListener() {
 		if (exportListener == null) {
-			exportListener = new SettingsHelper.SettingsExportListener() {
+			exportListener = new SettingsExportListener() {
 
 				@Override
 				public void onSettingsExportFinished(@NonNull File file, boolean succeed) {
@@ -775,7 +776,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 			mode.setCustomIconColor(changedProfile.customColor);
 			mode.setLocationIcon(changedProfile.locationIcon);
 			mode.setNavigationIcon(changedProfile.navigationIcon);
-			saveRouteLineAppearance(mode, changedProfile.routeLineDrawInfo);
+			saveRouteLineAppearance(mode, changedProfile.previewRouteLineInfo);
 
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
@@ -803,7 +804,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		if (!ApplicationMode.values(app).contains(mode)) {
 			ApplicationMode.changeProfileAvailability(mode, true, app);
 		}
-		saveRouteLineAppearance(mode, changedProfile.routeLineDrawInfo);
+		saveRouteLineAppearance(mode, changedProfile.previewRouteLineInfo);
 		return mode;
 	}
 
@@ -813,7 +814,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 			if (!tempDir.exists()) {
 				tempDir.mkdirs();
 			}
-			app.getSettingsHelper().exportSettings(tempDir, mode.getStringKey(),
+			app.getFileSettingsHelper().exportSettings(tempDir, mode.getStringKey(),
 					getSettingsExportListener(), true, new ProfileSettingsItem(app, mode));
 		}
 	}
@@ -832,10 +833,10 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 	private void checkSavingProfile() {
 		if (isNewProfile) {
 			File file = ConfigureProfileFragment.getBackupFileForCustomMode(app, changedProfile.stringKey);
-			boolean fileExporting = app.getSettingsHelper().isFileExporting(file);
+			boolean fileExporting = app.getFileSettingsHelper().isFileExporting(file);
 			if (fileExporting) {
 				showNewProfileSavingDialog(null);
-				app.getSettingsHelper().updateExportListener(file, getSettingsExportListener());
+				app.getFileSettingsHelper().updateExportListener(file, getSettingsExportListener());
 			} else if (file.exists()) {
 				dismissProfileSavingDialog();
 				customProfileSaved();
@@ -994,7 +995,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		if (CUSTOMIZE_ROUTE_LINE.equals(prefId)) {
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
-				RouteLineDrawInfo drawInfo = changedProfile.routeLineDrawInfo;
+				PreviewRouteLineInfo drawInfo = changedProfile.previewRouteLineInfo;
 				drawInfo.setIconId(changedProfile.navigationIcon.getIconId());
 				drawInfo.setIconColor(changedProfile.getActualColor());
 				RouteLineAppearanceFragment.showInstance(mapActivity, drawInfo, this);
@@ -1014,15 +1015,16 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 	}
 
 	@Override
-	public void applyRouteLineAppearance(@NonNull RouteLineDrawInfo routeLineDrawInfo) {
-		changedProfile.routeLineDrawInfo = routeLineDrawInfo;
+	public void applyRouteLineAppearance(@NonNull PreviewRouteLineInfo previewRouteLineInfo) {
+		changedProfile.previewRouteLineInfo = previewRouteLineInfo;
 	}
 
-	private RouteLineDrawInfo createRouteLineDrawInfo(@NonNull ApplicationMode appMode) {
+	private PreviewRouteLineInfo createRouteLineDrawInfo(@NonNull ApplicationMode appMode) {
 		Integer colorDay = getRouteLineColor(appMode, settings.ROUTE_LINE_COLOR_DAY);
 		Integer colorNight = getRouteLineColor(appMode, settings.ROUTE_LINE_COLOR_NIGHT);
+		GradientScaleType scaleType = settings.ROUTE_LINE_GRADIENT.getModeValue(appMode);
 		String widthKey = settings.ROUTE_LINE_WIDTH.getModeValue(appMode);
-		return new RouteLineDrawInfo(colorDay, colorNight, widthKey);
+		return new PreviewRouteLineInfo(colorDay, colorNight, scaleType, widthKey);
 	}
 
 	private Integer getRouteLineColor(@NonNull ApplicationMode appMode,
@@ -1032,9 +1034,10 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 	}
 
 	private void saveRouteLineAppearance(@NonNull ApplicationMode appMode,
-	                                     @NonNull RouteLineDrawInfo drawInfo) {
+	                                     @NonNull PreviewRouteLineInfo drawInfo) {
 		saveRouteLineColor(appMode, settings.ROUTE_LINE_COLOR_DAY, drawInfo.getColor(false));
 		saveRouteLineColor(appMode, settings.ROUTE_LINE_COLOR_NIGHT, drawInfo.getColor(true));
+		settings.ROUTE_LINE_GRADIENT.setModeValue(appMode, drawInfo.getGradientScaleType());
 		settings.ROUTE_LINE_WIDTH.setModeValue(appMode, drawInfo.getWidth());
 	}
 
@@ -1079,7 +1082,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		RouteService routeService;
 		NavigationIcon navigationIcon;
 		LocationIcon locationIcon;
-		RouteLineDrawInfo routeLineDrawInfo;
+		PreviewRouteLineInfo previewRouteLineInfo;
 
 		@ColorInt
 		public int getActualColor() {
@@ -1116,7 +1119,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 				return false;
 			if (routeService != that.routeService) return false;
 			if (navigationIcon != that.navigationIcon) return false;
-			if (routeLineDrawInfo != null ? !routeLineDrawInfo.equals(that.routeLineDrawInfo) : that.routeLineDrawInfo != null) return false;
+			if (previewRouteLineInfo != null ? !previewRouteLineInfo.equals(that.previewRouteLineInfo) : that.previewRouteLineInfo != null) return false;
 			return locationIcon == that.locationIcon;
 		}
 
@@ -1132,7 +1135,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 			result = 31 * result + (routeService != null ? routeService.hashCode() : 0);
 			result = 31 * result + (navigationIcon != null ? navigationIcon.hashCode() : 0);
 			result = 31 * result + (locationIcon != null ? locationIcon.hashCode() : 0);
-			result = 31 * result + (routeLineDrawInfo != null ? routeLineDrawInfo.hashCode() : 0);
+			result = 31 * result + (previewRouteLineInfo != null ? previewRouteLineInfo.hashCode() : 0);
 			return result;
 		}
 	}

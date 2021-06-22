@@ -225,7 +225,7 @@ public class CustomRegion extends WorldRegion {
 				&& app.getSettings().isInternetConnectionAvailable()) {
 			OnRequestResultListener resultListener = new OnRequestResultListener() {
 				@Override
-				public void onResult(String result) {
+				public void onResult(@Nullable String result, @Nullable String error) {
 					if (!Algorithms.isEmpty(result)) {
 						if ("json".equalsIgnoreCase(dynamicDownloadItems.format)) {
 							dynamicItemsJson = mapJsonItems(result);

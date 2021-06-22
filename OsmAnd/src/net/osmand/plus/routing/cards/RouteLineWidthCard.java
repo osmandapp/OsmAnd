@@ -24,8 +24,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
-import net.osmand.plus.routing.RouteLineDrawInfo;
+import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
+import net.osmand.plus.routing.PreviewRouteLineInfo;
 import net.osmand.plus.settings.fragments.HeaderInfo;
 import net.osmand.plus.settings.fragments.HeaderUiAdapter;
 import net.osmand.plus.track.AppearanceViewHolder;
@@ -35,12 +35,12 @@ import net.osmand.util.Algorithms;
 import java.util.Arrays;
 import java.util.List;
 
-public class RouteLineWidthCard extends BaseCard implements HeaderInfo {
+public class RouteLineWidthCard extends MapBaseCard implements HeaderInfo {
 
 	private final static int CUSTOM_WIDTH_MIN = 1;
 	private final static int CUSTOM_WIDTH_MAX = 36;
 
-	private RouteLineDrawInfo routeLineDrawInfo;
+	private PreviewRouteLineInfo previewRouteLineInfo;
 	private OnNeedScrollListener onNeedScrollListener;
 	private HeaderUiAdapter headerUiAdapter;
 
@@ -71,11 +71,11 @@ public class RouteLineWidthCard extends BaseCard implements HeaderInfo {
 	}
 
 	public RouteLineWidthCard(@NonNull MapActivity mapActivity,
-	                          @NonNull RouteLineDrawInfo routeLineDrawInfo,
+	                          @NonNull PreviewRouteLineInfo previewRouteLineInfo,
 	                          @NonNull OnNeedScrollListener onNeedScrollListener,
 	                          @NonNull HeaderUiAdapter headerUiAdapter) {
 		super(mapActivity);
-		this.routeLineDrawInfo = routeLineDrawInfo;
+		this.previewRouteLineInfo = previewRouteLineInfo;
 		this.onNeedScrollListener = onNeedScrollListener;
 		this.headerUiAdapter = headerUiAdapter;
 	}
@@ -120,12 +120,12 @@ public class RouteLineWidthCard extends BaseCard implements HeaderInfo {
 	}
 
 	private void setRouteLineWidth(String widthKey) {
-		routeLineDrawInfo.setWidth(widthKey);
+		previewRouteLineInfo.setWidth(widthKey);
 		mapActivity.refreshMap();
 	}
 
 	private String getRouteLineWidth() {
-		return routeLineDrawInfo.getWidth();
+		return previewRouteLineInfo.getWidth();
 	}
 
 	@Override
@@ -142,9 +142,8 @@ public class RouteLineWidthCard extends BaseCard implements HeaderInfo {
 
 	private void updateDescription() {
 		if (selectedMode == WidthMode.DEFAULT) {
-			String pattern = app.getString(R.string.route_line_use_map_style_appearance);
-			String width = app.getString(R.string.shared_string_color).toLowerCase();
-			String description = String.format(pattern, width, app.getRendererRegistry().getSelectedRendererName());
+			String pattern = app.getString(R.string.route_line_use_map_style_width);
+			String description = String.format(pattern, app.getRendererRegistry().getSelectedRendererName());
 			tvDescription.setText(description);
 			tvDescription.setVisibility(View.VISIBLE);
 		} else {

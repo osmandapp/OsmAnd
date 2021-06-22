@@ -12,22 +12,107 @@
 
 -->
 
+    <string name="delete_version_history">Delete version history</string>
+    <string name="backup_version_history_delete_descr">Do you want to delete the change history for disabled types from cloud?</string>
+    <string name="backup_storage_taken">Storage taken</string>
+    <string name="backup_version_history">Version history</string>
+    <string name="grey_color_slope">Grey color is used when slope is undefined.</string>
+    <string name="restore_complete">Restore complete</string>
+    <string name="receiving_data_from_server">Receiving data from the server</string>
+    <string name="restore_selected_data">Restore selected data</string>
+    <string name="choose_what_to_restore">Choose what to restore.</string>
+    <string name="restore_from_osmand_cloud">Restore from OsmAnd Cloud</string>
+    <string name="backup_restore_data">Restore data</string>
+    <string name="backup_restore_data_descr">Restore data on the device, using online backups.</string>
+    <string name="select_backup_data_descr">Select data and folders for backup.</string>
+    <string name="backup_data">Backup data</string>
+    <string name="backup_delete_old_data_warning">You are about to delete the change history for the previously loaded data.\n\nThe current version of the data will be saved on the server, but you will not be able to revert to the previously made changes.</string>
+    <string name="backup_delete_old_data_descr">Current versions of your data will be preserved on OsmAnd Cloud</string>
+    <string name="backup_delete_old_data">Remove old versions</string>
+    <string name="delete_all_confirmation">Yes, delete all</string>
+    <string name="backup_danger_zone">Danger zone</string>
+    <string name="backup_delete_all_data_warning">You are about to delete all data previously uploaded to OsmAnd Cloud, including version history.\n\nYou will not be able to recover deleted data.</string>
+    <string name="backup_delete_all_data_descr">All data on OsmAnd Cloud will be deleted. Local versions will stay untouched.</string>
+    <string name="backup_delete_all_data">Delete all my data</string>
+    <string name="shared_string_logout">Logout</string>
+    <string name="download_server_version">Download server version</string>
+    <string name="upload_local_version">Upload local version</string>
+    <string name="backup_pause_all">Pause all</string>
+    <string name="backup_no_internet_descr">Check your internet connection and download again.</string>
+    <string name="backup_view_conflicts">View conflicts</string>
+    <string name="backup_confilcts_descr">Some files could not be uploaded to the server because a newer version is stored on the server.</string>
+    <string name="backup_conflicts">Conflicts</string>
+    <string name="make_backup_descr">There are many changes on this device, please make a backup of this data so as not to lose it.</string>
+    <string name="make_backup">Make a backup</string>
+    <string name="backup_now">Backup now</string>
+    <string name="backup_complete">Backup complete</string>
+    <string name="shared_string_predefined">Predefined</string>
+    <string name="failed_loading_predefined_engines">Failed to load the list of predefined templates.\nPlease check your Internet connection.</string>
+    <string name="provided_by">Provided by %1$s</string>
+    <string name="shared_string_external">External</string>
+    <string name="osmand_online_routing_promo">You can use predefined templates, or add custom online routing, supported: OSRM, Graphhopper, OpenRouteService, GPX.</string>
+    <string name="shared_string_online">Online</string>
+    <string name="shared_string_offline">Offline</string>
+    <string name="loading_list_of_routing_services">Loading list of available routing services</string>
+    <string name="select_nav_profile_dialog_message">The \'Navigation type\' governs how routes are calculated. You can select between offline and online routing engines.</string>
+    <string name="verification_code_missing_description">Waiting time for code can be 10 minutes, also you can check your spam folder. If it doesn\'t help, use button below.</string>
+    <string name="verification_code_missing">I didn\'t receive verification code</string>
+    <string name="resend_verification_code">Resend code</string>
+    <string name="cloud_email_already_registered">Account with this email is already registered.</string>
+    <string name="cloud_email_not_registered">This email has not been registered for OsmAnd Cloud</string>
+    <string name="enter_verification_code">Enter 4 digit code</string>
+    <string name="verify_email_address_descr">We sent a verification code to %1$s, please enter it in the field below.</string>
+    <string name="verify_email_address">Verify email address</string>
+    <string name="osmand_cloud_login_descr">Please enter the email address, you used for registration. We will send you a one-time password needed on the next step.</string>
+    <string name="osmand_cloud_create_account_descr">Please enter your email address, all your data will be linked to it.\nWe will send you a verification code to this email address.</string>
+    <string name="osmand_cloud_help_descr">Need help? Please contact us at %1$s</string>
+    <string name="restore_from_file">Restore from file</string>
+    <string name="backup_into_file">Backup into file</string>
+    <string name="local_backup_descr">Backup or restore data from a local file.</string>
+    <string name="local_backup">Local backup</string>
+    <string name="osmand_cloud_authorize_descr">Never lose your data, backup and restore all information without a problem.</string>
+    <string name="osmand_cloud">OsmAnd Cloud</string>
+    <string name="duration_ago">%1$s ago</string>
+    <string name="last_backup">Last backup</string>
+    <string name="backup_and_restore">Backup &amp; Restore</string>
+    <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
+    <string name="search_more">Search more…</string>
+    <string name="routing_attr_avoid_low_emission_zone_name">Avoid low emission zones</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">Avoid low emission zones</string>
+    <string name="poi_routes">Routes</string>
+    <string name="route_line_use_map_style_color">Use map style (%1$s) default color.</string>
+    <string name="route_line_use_map_style_width">Use map style (%1$s) default width.</string>
+    <string name="shared_string_itinerary">Itinerary</string>
+    <string name="use_system_language">Use system language</string>
+    <string name="recorded_description">Recorded voice sounds better, but can pronounce only prerecorded phrases: turn instructions. Can\'t announce street names or POI names.</string>
+    <string name="tts_title">TTS</string>
+    <string name="tts_description">Text-to-speech (TTS) can pronounce all types of instructions: street names, turn instruction, POI names etc.</string>
+    <string name="language_description">Select preferred language and type of voice guidance.</string>
+    <string name="shared_string_max_height">Max. height</string>
+    <string name="shared_string_min_height">Min. height</string>
+    <string name="route_line_use_gradient_coloring">Route line is colored by elevation slope.</string>
     <string name="output">Output</string>
     <string name="user_points">User points</string>
     <string name="announce_when_exceeded">Announce when exceeded</string>
     <string name="exit_number">Exit number</string>
+    <string name="srtm_download_single_help_message">Please select the variant. You will need to re-download the file to change the format.</string>
+    <string name="srtm_download_list_help_message">OsmAnd provides contour lines data in meters and feet. You will need to re-download the file to change the format.</string>
+    <string name="srtm_unit_format">Contour lines unit variant</string>
+    <string name="shared_string_feet">feet</string>
     <string name="update_all_maps_added">Update all maps added to %1$s?</string>
     <string name="release_4_0_beta">
+    • Added option to download Contour lines in feet\n\n
+    • Plan Route landscape: added tabs to switch between points or graphs\n\n
     • OsmAnd Live updates moved to \"Downloads > Updates\"\n\n
-    • Tracks now could be colorizing by altitude, speed, or slope.\n\n
-    • Added option to change the appearance of the navigation route line\n\n
+    • Tracks can now be colored by altitude, speed, or slope.\n\n
+    • Added option to change the route line appearance.\n\n
     • Updated \"Trip recording\" dialog\n\n
     </string>
     <string name="expired">Expired</string>
     <string name="on_hold">On hold</string>
     <string name="in_grace_period">In grace period</string>
     <string name="renew_subscription">Renew subscription</string>
-    <string name="osmand_live_cancelled">Cancelled</string>
+    <string name="osmand_live_cancelled">Canceled</string>
     <string name="next_billing_date">Next billing date: %1$s</string>
     <string name="three_months_subscription">Three months subscription</string>
     <string name="monthly_subscription">Monthly subscription</string>
@@ -40,25 +125,24 @@
     <string name="contact_support_description">If you have any questions, please contact us at %1$s.</string>
     <string name="new_device_account">New device / new account</string>
     <string name="no_purchases">You don\'t have any purchases</string>
-    <string name="specify_color_for_map_mode">Specify color for map mode: %1$s.</string>
-    <string name="route_line_use_map_style_appearance">Route line would be use %1$s specified on selected map style: %2$s.</string>
+    <string name="specify_color_for_map_mode">Specify color for map mode %1$s.</string>
     <string name="shared_string_route_line">Route line</string>
     <string name="customize_route_line">Customize route line</string>
-    <string name="trip_recording_show_start_dialog_setting">If disabled, recording will start right after tap on the widget or menu item, skipping the confirmation dialog.</string>
+    <string name="trip_recording_show_start_dialog_setting">If disabled, recording will start immediately after tapping the widget or menu item, skipping the confirmation dialog.</string>
     <string name="show_start_dialog">Show start dialog</string>
     <string name="lost_data_warning">All unsaved data will be lost.</string>
     <string name="trip_recording_save_and_continue">Save and continue</string>
-    <string name="trip_recording_logging_interval_info">Logging interval set time period in which OsmAnd will ask for the current location position data.</string>
-    <string name="select_another_colorization">Please select another type of colorization.</string>
+    <string name="trip_recording_logging_interval_info">The logging interval sets the time period in which OsmAnd will request the current position data.</string>
+    <string name="select_another_colorization">Please select another type of coloring.</string>
     <string name="track_has_no_speed">The track does not contain speed data.</string>
     <string name="track_has_no_altitude">The track does not contain altitude data.</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">Nature boundaries</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Hide nature reserve, protected areas and national park boundaries</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Hide nature reserve, protected areas, and national park boundaries.</string>
     <string name="shared_string_interval">Interval</string>
     <string name="quick_action_show_hide_title">Show/hide</string>
     <string name="copy_poi_name">Copy POI name</string>
     <string name="track_recording_will_be_continued">The recording will be continued.</string>
-    <string name="select_category_descr">Select category or add new one</string>
+    <string name="select_category_descr">Select category or add a new one</string>
     <string name="purchases">Purchases</string>
     <string name="live_update_delete_updates_msg">Are you sure you want to delete all %s live updates?</string>
     <string name="delete_updates">Delete updates</string>
@@ -82,7 +166,7 @@
     <string name="shared_strings_all_regions">All regions</string>
     <string name="restart">Restart</string>
     <string name="map_orientation_threshold_descr">Don\'t rotate map view if speed is less than a threshold</string>
-    <string name="snap_to_road_descr">Current location icon will be snapped to the current navigation route</string>
+    <string name="snap_to_road_descr">Current position icon will snap to the current navigation route</string>
     <string name="routing_attr_driving_style_description">Select driving purpose to get shorter, faster or safer route</string>
     <string name="routing_attr_short_way_description">Optimized shorter route (energy saving)</string>
     <string name="temporary_conditional_routing_descr">Use road restrictions that are active now on the map</string>
@@ -93,7 +177,7 @@
     <string name="activity_type_running_name">Running</string>
     <string name="activity_type_hiking_name">Hiking</string>
     <string name="activity_type_cycling_name">Cycling</string>
-    <string name="activity_type_mountainbike_name">Mountainbike</string>
+    <string name="activity_type_mountainbike_name">Mountain bike</string>
     <string name="activity_type_racing_name">Racing</string>
     <string name="activity_type_riding_name">Riding</string>
     <string name="activity_type_snowmobile_name">Snowmobile</string>
@@ -107,7 +191,7 @@
     <string name="toast_select_edits_for_upload">Select edits for upload</string>
     <string name="uploaded_count">Uploaded %1$d of %2$d</string>
     <string name="segments_count">Segment %1$d</string>
-    <string name="select_segments_description">%1$s contains more than one segment, you need to select the needed part for the navigation.</string>
+    <string name="select_segments_description">%1$s contains more than one segment, you need to specify the portion for the navigation.</string>
     <string name="select_segments">Select segments</string>
     <string name="uploading_count">Uploading %1$d of %2$d</string>
     <string name="upload_photo_completed">Upload completed</string>
@@ -117,8 +201,8 @@
     <string name="delete_waypoints">Delete waypoints</string>
     <string name="context_menu_edit_descr">Edit description</string>
     <string name="context_menu_read_full">Read full</string>
-    <string name="delete_online_routing_engine">Delete this online routing engine?</string>
-    <string name="message_name_is_already_exists">The name is already exists</string>
+    <string name="delete_online_routing_engine">Remove this online routing engine?</string>
+    <string name="message_name_is_already_exists">Name already exists</string>
     <string name="message_server_error">Server error: %1$s</string>
     <string name="routing_engine_vehicle_type_mtb">MTB</string>
     <string name="routing_engine_vehicle_type_racingbike">Racing bike</string>
@@ -136,7 +220,7 @@
     <string name="show_track_on_map">Show track on map</string>
     <string name="start_recording">Start recording</string>
     <string name="announcement_time_title">Announcement time</string>
-    <string name="announcement_time_descr">Announcement time of different voice prompts depends on prompt type, current navigation speed and default navigation speed.</string>
+    <string name="announcement_time_descr">The anouncement timing of different voice prompts depends on prompt type, current navigation speed, and default navigation speed.</string>
     <string name="announcement_time_intervals">Time and distance intervals</string>
     <string name="shared_string_turn">Turn</string>
     <string name="announcement_time_arrive">Arrive at destination</string>
@@ -252,7 +336,6 @@
     <string name="icon_group_transport">Transport</string>
     <string name="icon_group_special">Special</string>
     <string name="icon_group_amenity">Amenity</string>
-    <string name="app_mode_gap">Gap</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="shared_string_local_maps">Local maps</string>
     <string name="message_graph_will_be_available_after_recalculation">Please wait.\nGraph will be available after route recalculation.</string>
@@ -495,7 +578,7 @@
     <string name="extra_maps_menu_group">Extra maps</string>
     <string name="search_poi_types_descr">Combine POI types from different categories. Tap switch to select all, tap left side to category selection.</string>
     <string name="search_poi_types">Search for POI types</string>
-    <string name="osm_live_payment_subscription_management">Payment will be charged to your Google Play account at the confirmation of purchase.\n\n Subscription automatically renews unless it is canceled before the renewal date. Your account will be charged for renewal period (month/three month/year) only on the renewal date.\n\n You can manage and cancel your subscriptions by going to your Google Play settings.</string>
+    <string name="osm_live_payment_subscription_management">Payment will be charged to your Google Play account at the confirmation of purchase.\n\nSubscription automatically renews unless it is canceled before the renewal date. Your account will be charged for renewal period (month/three month/year) only on the renewal date.\n\nYou can manage and cancel your subscriptions by going to your Google Play settings.</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="custom_color">Custom color</string>
     <string name="lang_lmo">Lombard</string>
@@ -724,7 +807,6 @@
     <string name="shared_string_downloading_formatted">Downloading %s</string>
     <string name="edit_profiles_descr">OsmAnd default profiles cannot be deleted, but disabled (on the previous screen), or be sorted to the bottom.</string>
     <string name="edit_profiles">Edit profiles</string>
-    <string name="select_nav_profile_dialog_message">The \'Navigation type\' governs how routes are calculated.</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
     <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
     <string name="personal_category_name">Personal</string>

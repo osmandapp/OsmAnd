@@ -14,7 +14,7 @@
     <string name="local_openstreetmap_settings">PDI/Note OSM salvati in locale</string>
     <string name="local_openstreetmap_settings_descr">Visualizza e gestisci i PDI/Note OSM inseriti nel database locale.</string>
     <string name="live_monitoring_interval_descr">Specifica l\'intervallo del tracking online.</string>
-    <string name="live_monitoring_interval">Intervallo del Live tracking</string>
+    <string name="live_monitoring_interval">Intervallo di tracciamento online</string>
     <string name="live_monitoring_url_descr">Specifica l\'indirizzo internet con la sintassi dei parametri: lat={0}, lon={1}, data/ora={2}, hdop={3}, altitudine={4}, velocità={5}, angolo={6}.</string>
     <string name="live_monitoring_url">Indirizzo internet per il tracking in diretta</string>
     <string name="gpx_monitoring_disabled_warn">Registra la traccia usando il widget GPX o le impostazioni \'Registrazione viaggi\'.</string>
@@ -529,8 +529,8 @@
     <string name="poi_error_unexpected_template">Impossibile eseguire l’azione {0}.</string>
     <string name="poi_error_io_error_template">Errore di I/O durante l\'esecuzione dell\'azione {0}.</string>
     <string name="poi_error_info_not_loaded">Informazioni relative al nodo non caricate</string>
-    <string name="poi_dialog_opening_hours">Apri</string>
-    <string name="poi_dialog_comment">Commento</string>
+    <string name="poi_dialog_opening_hours">Aperto</string>
+    <string name="poi_dialog_comment">Commenta</string>
     <string name="poi_dialog_comment_default">Cambio PDI</string>
     <string name="poi_dialog_other_tags_message">Tutte le altre etichette sono conservate</string>
     <string name="default_buttons_commit">Esegui</string>
@@ -928,7 +928,7 @@
     <string name="favourites_list_activity">Seleziona Preferito</string>
     <string name="local_openstreetmap_act_title">Modifiche OSM</string>
     <string name="download_using_mobile_internet">Non connesso al Wi-Fi. Usare la connessione a Internet attuale per il download\?</string>
-    <string name="cancel_route">Ignora il percorso\?</string>
+    <string name="cancel_route">Abbandonare il percorso\?</string>
     <string name="cancel_navigation">Interrompere la navigazione</string>
     <string name="clear_destination">Cancella la destinazione</string>
     <string name="other_location">Altra</string>
@@ -1398,7 +1398,7 @@
     <string name="shared_string_ellipsis">…</string>
     <string name="shared_string_ok">Ok</string>
     <string name="shared_string_cancel">Annulla</string>
-    <string name="shared_string_dismiss">Ignora</string>
+    <string name="shared_string_dismiss">Abbandona</string>
     <string name="shared_string_yes">Sì</string>
     <string name="shared_string_no">No</string>
     <string name="shared_string_on">Acceso</string>
@@ -1764,7 +1764,7 @@
     <string name="rendering_attr_currentTrackColor_description">Colore del GPX</string>
     <string name="rendering_attr_currentTrackWidth_description">Larghezza del GPX</string>
     <string name="rendering_attr_roadStyle_description">Stile delle strade</string>
-    <string name="poi_dialog_reopen">Riapri</string>
+    <string name="poi_dialog_reopen">Riapre</string>
     <string name="use_dashboard_btn">Usa il pannello di controllo</string>
     <string name="use_drawer_btn">Utilizza menù</string>
     <string name="dashboard_or_drawer_title">Pannello di controllo o menù</string>
@@ -2163,7 +2163,7 @@
     <string name="shared_string_time">Tempo</string>
     <string name="total_distance">Distanza totale</string>
     <string name="routing_attr_height_obstacles_name">Utilizza dati altitudine</string>
-    <string name="shared_string_time_span">Intervallo di tempo</string>
+    <string name="shared_string_time_span">Tempo totale</string>
     <string name="shared_string_max">Massimo</string>
     <string name="shared_string_start_time">Ora d\'inizio</string>
     <string name="shared_string_end_time">Ora di fine</string>
@@ -2173,7 +2173,7 @@
     <string name="shared_string_move">Sposta</string>
     <string name="shared_string_gpx_tracks">Tracce</string>
     <string name="average_speed">Velocità media</string>
-    <string name="shared_string_time_moving">Tempo in movimento</string>
+    <string name="shared_string_time_moving">In movimento</string>
     <string name="points_delete_multiple_succesful">Punti cancellati.</string>
     <string name="points_delete_multiple">Confermi la cancellazione di %1$d punto(i)\?</string>
     <string name="route_points_category_name">Svolte di questo percorso</string>
@@ -3195,7 +3195,7 @@
     <string name="avoid_in_routing_descr_">Evita certi percorsi e tipi di strade</string>
     <string name="app_mode_utv">Lato per lato</string>
     <string name="rendering_attr_piste_difficulty_aerialway_name">Funivia</string>
-    <string name="rendering_attr_piste_difficulty_connection_name">Collegamento</string>
+    <string name="rendering_attr_piste_difficulty_connection_name">Connessione</string>
     <string name="shared_string_calculate">Calcola</string>
     <string name="shared_string_osmand_usage">Utilizzo di OsmAnd</string>
     <string name="shared_sting_tiles">Mattonelle</string>
@@ -3292,7 +3292,6 @@
     <string name="select_color">Seleziona il colore</string>
     <string name="edit_profiles_descr">Non puoi cancellare i profili preimpostati di OsmAnd, ma puoi disabilitarli nello schermo precedente o spostarli in basso.</string>
     <string name="edit_profiles">Modifica il profilo</string>
-    <string name="select_nav_profile_dialog_message">Il \'Tipo di navigazione\' determina il modo in cui vengono calcolati i percorsi.</string>
     <string name="profile_appearance">Aspetto del profilo</string>
     <string name="choose_icon_color_name">Scegli l\'icona, il colore e il nome</string>
     <string name="reorder_profiles">Modifica la lista dei profili</string>
@@ -3327,7 +3326,7 @@
     <string name="logcat_buffer_descr">Controlla e condividi i log dettagliati dell\'applicazione</string>
     <string name="permission_is_required">Un permesso è richiesto per usare questa opzione.</string>
     <string name="rearrange_categories">Sistema categorie</string>
-    <string name="create_custom_categories_list_promo">Cambia l\'ordinamento della lista, nasconde le categoria non necessarie. Puoi importare o esportare tutti i cambiamenti con i profili.</string>
+    <string name="create_custom_categories_list_promo">Cambia l\'ordinamento della lista, nasconde le categorie. Puoi importare o esportare tutti i cambiamenti con i profili.</string>
     <string name="add_new_custom_category_button_promo">Puoi aggiungere una nuova categoria personalizzata selezionandone una o più.</string>
     <string name="shared_string_available">Disponibile</string>
     <string name="add_custom_category">Aggiungi categoria personalizzata</string>
@@ -3448,7 +3447,7 @@
     <string name="shared_string_importing">Importazione in corso</string>
     <string name="items_added">Oggetti aggiunti</string>
     <string name="shared_string_import_complete">Importazione completata</string>
-    <string name="import_complete_description">Tutti i dati sono stati importati da %1$s, puoi utilizzare i bottoni sottostanti per aprire e gestire le parti dell\' applicazione di cui necessiti.</string>
+    <string name="import_complete_description">Tutti i dati sono stati importati da %1$s, puoi utilizzare i bottoni sottostanti per aprire le parti dell\' applicazione di cui necessiti per gestirli.</string>
     <string name="recalculate_route_distance_promo">Il percorso verrà ricalcolato quando la distanza tra il percorso e la propria posizione è maggiore del valore selezionato.</string>
     <string name="select_distance_route_will_recalc">Seleziona le distanza dopo la quale il percorso verrà ricalcolato.</string>
     <string name="recalculate_route_in_deviation">Ricalcola il percorso in caso di deviazione</string>
@@ -3563,23 +3562,23 @@
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="osm_live_payment_subscription_management">Il tuo account Google Play viene addebitato al momento della conferma dell\'acquisto.
 \n
-\n La sottoscrizione si rinnova automaticamente finché non viene cancellata prima del rinnovo. Il tuo account verrà addebitato per il rinnovo periodico (mensile, trimestrale, annuale) solo alla data di rinnovo.
+\nLa sottoscrizione si rinnova automaticamente finché non viene cancellata prima del rinnovo. Il tuo account verrà addebitato per il rinnovo periodico (mensile, trimestrale, annuale) solo alla data di rinnovo.
 \n
-\n Puoi gestire e cancellare la tua sottoscrizione dalle impostazioni del tuo account Google Play.</string>
+\nPuoi gestire e cancellare la tua sottoscrizione dalle impostazioni del tuo account Google Play.</string>
     <string name="search_poi_types_descr">Combina PDI di più categorie. Tappa il pulsante per selezionarle tutte, oppure sul lato sinistro per una selezione puntuale.</string>
     <string name="lang_gu">Gujarati</string>
     <string name="lang_ba">Baschiro</string>
     <string name="lang_jv">Giavanese</string>
     <string name="lang_cv">Ciuvascia</string>
-    <string name="release_3_7">• Nuove mappe dei pendii
+    <string name="release_3_7">• Nuove mappe offline dei Pendii
 \n
-\n • Personalizzazione completa dei Preferiti e dei Waypoint GPX – colori personalizzati, icone, forme
+\n • Personalizzazione completa dei Preferiti e dei Punti GPX intermedi – colori personalizzati, icone, forme
 \n
 \n • Personalizza l\'ordine degli oggetti nel \"Menu contestuale\", \"Configura la mappa\" e \"Pannello\"
 \n
-\n • In Configura la mappa Wikipedia come livello separato, selezione solo le lingue che utilizzi
+\n • In Configura la mappa Wikipedia come livello separato, seleziona solo le lingue che utilizzi
 \n
-\n • Crea filtri personalizzati per i PDI/mappe con totale flessibiità
+\n • Crea filtri personalizzati per i PDI/mappe con totale flessibilità
 \n
 \n • Aggiunta l\'opzione per reimpostare le impostazioni dei profili personalizzati
 \n
@@ -3803,7 +3802,7 @@
     <string name="use_live_routing">Dati OsmAnd Live</string>
     <string name="complex_routing_descr">Calcolo del percorso in due fasi per la navigazione in auto.</string>
     <string name="use_native_pt">Sviluppo Trasporto Pubblico nativo</string>
-    <string name="use_native_pt_desc">Cambia a Java (safe) calcolo del percorso su Trasporto Pubblico</string>
+    <string name="use_native_pt_desc">Cambia a Java (sicuro) calcolo del percorso su Trasporto Pubblico</string>
     <string name="perform_oauth_authorization_description">Entra con OAuth per usare le funzionalità osmedit</string>
     <string name="perform_oauth_authorization">Connettiti via OAuth</string>
     <string name="clear_osm_token">Cancella il token OAuth OpenStreetMap</string>
@@ -3815,7 +3814,6 @@
     <string name="message_graph_will_be_available_after_recalculation">Attendi.
 \nIl grafico sarà disponibile dopo il ricalcolo del percorso.</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
-    <string name="app_mode_gap">Buco</string>
     <string name="navigate_point_mgrs">MGRS</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="mgrs_format_descr">OsmAnd utilizza MGRS, che è simile al formato UTM NATO.</string>
@@ -4027,7 +4025,7 @@
     <string name="copy_poi_name">Copia il nome del PDI</string>
     <string name="quick_action_show_hide_title">Mostra/nascondi</string>
     <string name="shared_string_interval">Intervallo</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Nascondi i confini delle riserve naturali, delle aree protette e dei parchi naturali</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Nascondi i confini delle riserve naturali, delle aree protette e dei parchi naturali.</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">Confini naturali</string>
     <string name="track_has_no_altitude">La traccia non contiene i dati di altitudine.</string>
     <string name="track_has_no_speed">La traccia non contiene i dati di velocità.</string>
@@ -4036,19 +4034,23 @@
     <string name="trip_recording_save_and_continue">Salva e continua</string>
     <string name="lost_data_warning">Tutti i dati non salvati andranno persi.</string>
     <string name="show_start_dialog">Mostra la finestra di avvio</string>
-    <string name="trip_recording_show_start_dialog_setting">Se disabilitato, la registrazione inizierà appena tappato sul widget o sul menu, saltando la finestra di conferma.</string>
-    <string name="specify_color_for_map_mode">Specifica il colore per il tipo di mappa: %1$s.</string>
+    <string name="trip_recording_show_start_dialog_setting">Se disabilitato, la registrazione inizierà appena premuto sul widget o sul menu, saltando la finestra di conferma.</string>
+    <string name="specify_color_for_map_mode">Specifica il colore per il tipo di mappa %1$s.</string>
     <string name="new_device_account">Nuovo dispositivo / nuovo account</string>
     <string name="contact_support_description">Se hai delle domande, per favore contattaci al %1$s.</string>
     <string name="next_billing_date">Nuova data di addebito: %1$s</string>
     <string name="routing_attr_allow_streams_name">Permetti ruscelli e scoli</string>
-    <string name="release_4_0_beta">• Aggiornamenti OsmAnd Live spostati in \"Scarica mappe&gt; Aggiornabili\"
+    <string name="release_4_0_beta">• Aggiunta opzione per scaricare le linee di contorno in piedi
 \n
-\n • Le tracce adesso possono essere colorate in base all\'altitudine, velocità o pendenza.
+\n• Panoramica pianificazione percorso: aggiunte schede per passare da punti a grafici
 \n
-\n • Aggiunta l\'opzione per cambiare l\'aspetto della line del percorso di navigazione
+\n• Aggiornamenti OsmAnd Live spostati in \"Scarica mappe &gt; Aggiornabili\"
 \n
-\n • Aggiornato la finestra di dialogo \"Registra il percorso\"
+\n• Le tracce adesso possono essere colorate in base all\'altitudine, velocità o pendenza
+\n
+\n• Aggiunta l\'opzione per cambiare l\'aspetto della linea del percorso di navigazione
+\n
+\n• Aggiornata la finestra di dialogo \"Registra il percorso\"
 \n
 \n</string>
     <string name="routing_attr_allow_streams_description">Permetti ruscelli e scoli</string>
@@ -4056,9 +4058,8 @@
     <string name="routing_attr_allow_intermittent_name">Permetti le vie d\'acqua intermittenti</string>
     <string name="customize_route_line">Personalizza la linea del percorso</string>
     <string name="shared_string_route_line">Linea del percorso</string>
-    <string name="route_line_use_map_style_appearance">Per la linea del percorso sarà utilizzato %1$s specificato nello stile della mappa selezionato: %2$s.</string>
     <string name="no_purchases">Non hai alcun acquisto</string>
-    <string name="empty_purchases_description">Se l\'acquisto non viene visualizzato qui, tappa su “%1$s”, o contatta il supporto.</string>
+    <string name="empty_purchases_description">Se l\'acquisto non viene visualizzato qui, premi su “%1$s”, o contatta il supporto.</string>
     <string name="contact_support">Contatta il supporto</string>
     <string name="troubleshooting">Risoluzione dei problemi</string>
     <string name="troubleshooting_description">Per problemi con gli acquisti per favore segui il link.</string>
@@ -4076,4 +4077,89 @@
     <string name="user_points">Punti utente</string>
     <string name="output">Output</string>
     <string name="map_quick_action_pattern">%1$s → …</string>
+    <string name="in_grace_period">In periodo di grazia</string>
+    <string name="shared_string_feet">piedi</string>
+    <string name="srtm_unit_format">Unità di misura delle linee di contorno</string>
+    <string name="srtm_download_list_help_message">OsmAnd fornisce i dati delle curve di livello in metri e in piedi. Dovrai scaricare di nuovo il file per cambiarne il formato.</string>
+    <string name="srtm_download_single_help_message">Selezionare la variante. Sarà necessario scaricare di nuovo il file per modificarne il formato.</string>
+    <string name="route_line_use_gradient_coloring">La linea del percorso sarà colorata a seconda della pendenza.</string>
+    <string name="shared_string_min_height">Altezza min</string>
+    <string name="shared_string_max_height">Altezza max</string>
+    <string name="routing_attr_avoid_low_emission_zone_name">Evita le zone a basse emissioni</string>
+    <string name="language_description">Seleziona la lingua preferita e il tipo di istruzioni vocali.</string>
+    <string name="tts_description">La sintesi vocale (Text-to-Speech o TTS) può pronunciare tutti i tipi di istruzioni: nomi delle strade, biforcazioni, nome dei PDI etc.</string>
+    <string name="tts_title">TTS</string>
+    <string name="recorded_description">Una voce registrata suona più naturale, ma può pronunciare solo frasi preregistrate, come ad esempio le biforcazioni. Non può pronunciare i nomi delle strade o dei PDI.</string>
+    <string name="use_system_language">Utilizza la lingua di sistema</string>
+    <string name="route_line_use_map_style_color">Utilizza il colore predefinito dello stile della mappa (%1$s).</string>
+    <string name="route_line_use_map_style_width">Utilizza la larghezza predefinita dello stile della mappa (%1$s).</string>
+    <string name="shared_string_itinerary">Itinerario</string>
+    <string name="poi_routes">Percorsi</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">Evita le zone a basse emissioni</string>
+    <string name="osmand_cloud_create_account_descr">Per favore immetti il tuo indirizzo email, tutti i tuoi dati saranno collegati ad esso.
+\nTi invieremo un codice di verifica a quella mail.</string>
+    <string name="search_more">Cerca di più …</string>
+    <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
+    <string name="backup_and_restore">Salvataggio e Ripristino</string>
+    <string name="last_backup">Ultimo salvataggio</string>
+    <string name="duration_ago">%1$s fa</string>
+    <string name="osmand_cloud">OsmAnd Cloud</string>
+    <string name="osmand_cloud_authorize_descr">Non perdere mai i tuoi dati, salva e ripristina tutte le informazioni senza problemi.</string>
+    <string name="local_backup">Salvataggio locale</string>
+    <string name="local_backup_descr">Salva o ripristina dati da un file locale.</string>
+    <string name="backup_into_file">Salva sul file</string>
+    <string name="restore_from_file">Ripristina dal file</string>
+    <string name="osmand_cloud_help_descr">Serve aiuto\? Per favore contattaci a %1$s</string>
+    <string name="osmand_cloud_login_descr">Per favore immetti l\'indirizzo email che hai usato per la registrazione. Ti invieremo una password temporanea necessaria per il prossimo passo.</string>
+    <string name="verify_email_address">Verifica l\'indirizzo email</string>
+    <string name="verify_email_address_descr">Abbiamo inviato un codice di verifica a %1$s, per favore immettilo nel campo sottostante.</string>
+    <string name="enter_verification_code">Immetti un codice di 4 cifre</string>
+    <string name="cloud_email_not_registered">Questa mail non è stata registrata per OsmAnd Cloud</string>
+    <string name="cloud_email_already_registered">Un account con questa mail è già registrato.</string>
+    <string name="resend_verification_code">Invia di nuovo il codice</string>
+    <string name="verification_code_missing">Non ho ricevuto il codice di verifica</string>
+    <string name="verification_code_missing_description">L\'attesa del codice può essere di 10 minuti, verifica anche la cartella spam. Se non è d\'aiuto utilizza il pulsante sotto.</string>
+    <string name="select_nav_profile_dialog_message">Il \"Tipo di navigazione\" governa come i percorsi sono calcolati. Puoi scegliere fra motori di calcolo online e offline.</string>
+    <string name="loading_list_of_routing_services">Caricamento della lista dei servizi di navigazione disponibili</string>
+    <string name="shared_string_offline">Offline</string>
+    <string name="shared_string_online">Online</string>
+    <string name="osmand_online_routing_promo">Puoi utilizzare i modelli predefiniti o aggiungere motori di navigatori online supportati: OSRM, Graphhopper, OpenRouteService, GPX.</string>
+    <string name="shared_string_external">Esterno</string>
+    <string name="provided_by">Fornito da %1$s</string>
+    <string name="failed_loading_predefined_engines">Caricamento della lista dei modelli predefiniti fallito.
+\nControlla la tua connessione internet.</string>
+    <string name="shared_string_predefined">Predefinito</string>
+    <string name="backup_complete">Backup completo</string>
+    <string name="backup_now">Backup adesso</string>
+    <string name="make_backup">Fai un backup</string>
+    <string name="make_backup_descr">Ci sono più cambiamenti nel dispositivo, fai un backup di questi dati per non perderli.</string>
+    <string name="backup_conflicts">Conflitti</string>
+    <string name="backup_confilcts_descr">Alcuni file potrebbero non essere caricati nel server se vi fosse una versione più recente nel server.</string>
+    <string name="backup_view_conflicts">Visualizza i conflitti</string>
+    <string name="backup_no_internet_descr">Controlla la tua connessione internet e scarica nuovamente.</string>
+    <string name="backup_pause_all">Metti in tutto in pausa</string>
+    <string name="upload_local_version">Upload la versione locale</string>
+    <string name="download_server_version">Scarica la versione del server</string>
+    <string name="shared_string_logout">Esci</string>
+    <string name="backup_delete_all_data">Cancella tutti i miei dati</string>
+    <string name="backup_delete_all_data_descr">Tutti i dati in OsmAnd Cloud saranno cancellati. Quelli locali rimarranno inalterati.</string>
+    <string name="backup_delete_all_data_warning">Stai per cancellare tutti i dati precedentemente caricati su OsmAnd Cloud, inclusa la cronologia delle versioni.
+\n
+\nNon sarai in grado di ripristinare i dati eliminati.</string>
+    <string name="backup_danger_zone">Zona pericolosa</string>
+    <string name="delete_all_confirmation">Si, cancella tutto</string>
+    <string name="backup_delete_old_data">Rimuovi le vecchie versioni</string>
+    <string name="backup_delete_old_data_descr">La versione corrente dei tuoi dati sarà conservata nel Cloud OsmAnd</string>
+    <string name="backup_delete_old_data_warning">Stai per cancellare la cronologia dei cambiamenti per i dati precedentemente caricati.
+\n
+\nLa versione corrente dei dati sarà salvata nel server, ma non sarai in grado di ripristinare le modifiche precedenti.</string>
+    <string name="backup_data">Backup dei dati</string>
+    <string name="select_backup_data_descr">Scegli dati e cartelle dal backup.</string>
+    <string name="backup_restore_data_descr">Ripristina dati nel dispositivo, utilizzando i backup online.</string>
+    <string name="backup_restore_data">Ripristina dati</string>
+    <string name="restore_from_osmand_cloud">Ripristina da OsmAnd Cloud</string>
+    <string name="choose_what_to_restore">Scegli cosa ripristinare.</string>
+    <string name="restore_selected_data">Ripristina i dati selezionati</string>
+    <string name="receiving_data_from_server">Ricezione in corso dei dati dal server</string>
+    <string name="restore_complete">Ripristino completo</string>
 </resources>

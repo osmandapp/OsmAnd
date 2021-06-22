@@ -38,9 +38,9 @@ public class OnlineRoutingHelper {
 
 	private static final Log LOG = PlatformUtil.getLog(OnlineRoutingHelper.class);
 
-	private OsmandApplication app;
-	private OsmandSettings settings;
-	private Map<String, OnlineRoutingEngine> cachedEngines;
+	private final OsmandApplication app;
+	private final OsmandSettings settings;
+	private final Map<String, OnlineRoutingEngine> cachedEngines;
 
 	public OnlineRoutingHelper(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -51,6 +51,16 @@ public class OnlineRoutingHelper {
 	@NonNull
 	public List<OnlineRoutingEngine> getEngines() {
 		return new ArrayList<>(cachedEngines.values());
+	}
+
+	public List<OnlineRoutingEngine> getOnlyCustomEngines() {
+		List<OnlineRoutingEngine> engines = new ArrayList<>();
+		for (OnlineRoutingEngine engine : getEngines()) {
+			if (!engine.isPredefined()) {
+				engines.add(engine);
+			}
+		}
+		return engines;
 	}
 
 	@NonNull
@@ -166,6 +176,14 @@ public class OnlineRoutingHelper {
 			engine.put(EngineParameter.KEY, key);
 		}
 		return key;
+	}
+
+	public long getLastModifiedTime() {
+		return settings.ONLINE_ROUTING_ENGINES.getLastModifiedTime();
+	}
+
+	public void setLastModifiedTime(long lastModifiedTime) {
+		settings.ONLINE_ROUTING_ENGINES.setLastModifiedTime(lastModifiedTime);
 	}
 
 	@NonNull

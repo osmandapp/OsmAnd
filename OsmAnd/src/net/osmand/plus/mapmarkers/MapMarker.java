@@ -11,7 +11,6 @@ import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.R;
-import net.osmand.plus.itinerary.ItineraryGroup;
 import net.osmand.util.Algorithms;
 
 import static net.osmand.data.PointDescription.POINT_TYPE_MAP_MARKER;
@@ -45,10 +44,10 @@ public class MapMarker implements LocationPoint {
 		this.index = index;
 	}
 
-	public int getType() {
+	public ItineraryType getType() {
 		return favouritePoint == null ?
-				(wptPt == null ? ItineraryGroup.ANY_TYPE : ItineraryGroup.GPX_TYPE) :
-				ItineraryGroup.FAVORITES_TYPE;
+				(wptPt == null ? ItineraryType.MARKERS : ItineraryType.TRACK) :
+				ItineraryType.FAVOURITES;
 	}
 
 	public PointDescription getPointDescription(Context ctx) {

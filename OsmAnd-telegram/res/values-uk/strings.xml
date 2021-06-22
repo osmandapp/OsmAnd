@@ -72,7 +72,7 @@
     <string name="send_my_location">Надіслати мою позицію</string>
     <string name="gps_and_location">Позиція</string>
     <string name="sharing_time">Час трансляцій</string>
-    <string name="stop_sharing_all">Трансляція активна (вимкнути)</string>
+    <string name="stop_sharing_all">Трансляція увімкнена (вимкнути)</string>
     <string name="turn_off_location_sharing">Вимкнути трансляцію</string>
     <string name="open_osmand">Відкрити OsmAnd</string>
     <string name="shared_string_bot">Бот</string>
@@ -89,7 +89,7 @@
     <string name="hours_and_minutes_format">%1$d г %2$d хв</string>
     <string name="minutes_format">%1$d хв</string>
     <string name="hours_format">%1$d г</string>
-    <string name="shared_string_install">Встановити</string>
+    <string name="shared_string_install">Установити</string>
     <string name="shared_string_share">Поділитися</string>
     <string name="shared_string_back">Назад</string>
     <string name="set_time">Оберіть час</string>
@@ -120,11 +120,11 @@
     <string name="gps_not_available">Будь ласка, увімкніть «Позиціювання» у системних налаштуваннях</string>
     <string name="osmand_service">Режим тла</string>
     <string name="osmand_service_descr">OsmAnd Tracker працює у фоновому режимі з вимкненим екраном.</string>
-    <string name="shared_string_distance">Відстань</string>
+    <string name="shared_string_distance">Віддаль</string>
     <string name="share_location">Поділитися позицією</string>
     <string name="sharing_location">Трансляція позиції</string>
     <string name="install_osmand_dialog_message">Спочатку Вам необхідно встановити безкоштовну або платну версію OsmAnd</string>
-    <string name="install_osmand">Встановити OsmAnd</string>
+    <string name="install_osmand">Установити OsmAnd</string>
     <string name="show_users_on_map">Показувати користувачів на карті</string>
     <string name="active_chats">Активні чати</string>
     <string name="shared_string_authorization">Авторизація</string>
@@ -158,7 +158,7 @@
     <string name="shared_string_second_short">сек</string>
     <string name="welcome_descr"><b>OsmAnd Tracker</b> дозволяє Вам транслювати свою позицію та бачити позицію інших в OsmAnd.<br/><br/>Застосунок використовує Telegram API та потребує облікового запису Telegram.</string>
     <string name="my_location">Моя позиція</string>
-    <string name="send_my_location_desc">Встановіть мінімальний інтервал між надсиланням позиції.</string>
+    <string name="send_my_location_desc">Установіть мінімальний інтервал між надсиланням позиції.</string>
     <string name="expire_at">Діє до</string>
     <string name="last_update_from_telegram">Нещодавнє оновлення з Telegram</string>
     <string name="shared_string_ok">Гаразд</string>
@@ -189,10 +189,10 @@
     <string name="live_now">В мережі</string>
     <string name="location_recording_enabled">Запис позиціювання увімкнуто</string>
     <string name="timeline_description">Увімкніть моніторинг, аби зберігати всі позиції в історії.</string>
-    <string name="app_name_short">OsmAnd трекер</string>
+    <string name="app_name_short">OsmAnd Tracker</string>
     <string name="privacy_policy_use_telegram">Telegram (програма месенджер) використовується для зв\'язку та спілкування між людьми.</string>
     <string name="privacy_policy_telegram_client">OsmAnd трекер є одним із клієнтів, який використовує відкриту платформу Telegram. Вашими контактами зможе скористуватися будь-який інший клієнт Telegram.</string>
-    <string name="privacy_policy_agree">Клацнувши далі,, Ви погоджуєтесь з умовами політики конфіденційності Telegram та політикою конфіденційності OsmAnd.</string>
+    <string name="privacy_policy_agree">Торкнувшись «Далі», ви погоджуєтесь з умовами політики приватності Telegram та політикою приватності OsmAnd.</string>
     <string name="telegram_privacy_policy">Політика конфіденційності Telegram</string>
     <string name="osmand_privacy_policy">Політика конфіденційності OsmAnd</string>
     <string name="shared_string_appearance">Зовнішній вигляд</string>
@@ -232,9 +232,9 @@
     <string name="set_time_timeline_descr">Виберіть час для відображення</string>
     <string name="stale_location_desc">Востаннє контакт переміщувався.</string>
     <string name="stale_location">Не рухається</string>
-    <string name="set_visible_time_for_all">Встановити денний час для всіх</string>
+    <string name="set_visible_time_for_all">Установити денний час для всіх</string>
     <string name="visible_time_for_all">Видимий час для всіх</string>
-    <string name="set_time_description">Встановіть час, коли вибрані контакти та групи бачитимуть ваше місцеперебування в режимі реального часу.</string>
+    <string name="set_time_description">Установіть час, коли вибрані контакти та групи бачитимуть ваше місцеперебування в режимі реального часу.</string>
     <string name="location_service_no_gps_available">Виберіть одного з локальних постачальників, щоб поділитися своїм місцеположенням.</string>
     <string name="search_contacts">Пошук контактів</string>
     <string name="search_contacts_descr">Пошук у всіх своїх групах та контактах.</string>
@@ -254,7 +254,7 @@
     <string name="units_and_formats">Одиниці виміру й формати</string>
     <string name="unit_of_length">Одиниці вимірювання довжини</string>
     <string name="unit_of_length_descr">Змінити одиницю вимірювання відстані.</string>
-    <string name="unit_of_speed_system_descr">Визначити одиницю швидкості.</string>
+    <string name="unit_of_speed_system_descr">Визначити одиницю вимірювання швидкості.</string>
     <string name="unit_of_speed_system">Одиниця вимірювання швидкості</string>
     <string name="buffer_time_descr">Найбільший час зберігання точок у буфері</string>
     <string name="buffer_time">Термін дії буфера</string>

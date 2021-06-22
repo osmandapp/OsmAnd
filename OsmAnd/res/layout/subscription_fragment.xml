@@ -2,6 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="?attr/spinnerListBackground"
     android:orientation="vertical">
 
@@ -212,7 +213,7 @@
                                     android:paddingLeft="2dp"
                                     android:paddingEnd="0dp"
                                     android:paddingRight="0dp"
-                                    android:text="Ukraine"
+                                    tools:text="Ukraine"
                                     app:drawableEndCompat="@drawable/ic_action_arrow_drop_down"
                                     app:drawableRightCompat="@drawable/ic_action_arrow_drop_down" />
 

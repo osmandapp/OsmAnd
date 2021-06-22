@@ -77,23 +77,15 @@
 			android:background="?attr/route_info_bg"
 			android:foregroundGravity="top|fill_horizontal">
 
-			<androidx.core.widget.NestedScrollView
-				android:id="@+id/route_menu_bottom_scroll"
+			<LinearLayout
+				android:id="@+id/route_menu_cards_container"
 				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:background="?attr/route_info_bg">
+				android:layout_height="wrap_content"
+				android:background="?attr/route_info_bg"
+				android:orientation="vertical"
+				android:paddingBottom="@dimen/dialog_button_ex_height">
 
-				<LinearLayout
-					android:id="@+id/route_menu_cards_container"
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:background="?attr/route_info_bg"
-					android:orientation="vertical"
-					android:paddingBottom="@dimen/dialog_button_ex_height">
-
-				</LinearLayout>
-
-			</androidx.core.widget.NestedScrollView>
+			</LinearLayout>
 
 		</FrameLayout>
 

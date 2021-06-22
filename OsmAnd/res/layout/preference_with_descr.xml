@@ -32,22 +32,25 @@
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:layout_gravity="center_vertical"
+			android:layout_marginTop="@dimen/content_padding_small"
+			android:layout_marginBottom="@dimen/content_padding_small"
 			android:layout_weight="1"
 			android:orientation="vertical"
-			android:paddingLeft="@dimen/content_padding"
-			android:paddingRight="@dimen/content_padding"
 			android:paddingStart="@dimen/content_padding"
-			android:paddingEnd="@dimen/content_padding">
+			android:paddingLeft="@dimen/content_padding"
+			android:paddingEnd="@dimen/content_padding"
+			android:paddingRight="@dimen/content_padding">
 
 			<net.osmand.plus.widgets.TextViewEx
 				android:id="@android:id/title"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:ellipsize="marquee"
-				android:singleLine="true"
 				android:letterSpacing="@dimen/text_button_letter_spacing"
+				android:singleLine="true"
 				android:textColor="?android:textColorPrimary"
 				android:textSize="@dimen/default_list_text_size"
+				osmand:lineHeight="@dimen/default_desc_line_height"
 				osmand:typeface="@string/font_roboto_regular" />
 
 			<net.osmand.plus.widgets.TextViewEx
@@ -59,6 +62,7 @@
 				android:scrollbars="none"
 				android:textColor="?android:textColorSecondary"
 				android:textSize="@dimen/default_desc_text_size"
+				osmand:lineHeight="@dimen/default_desc_line_height"
 				osmand:typeface="@string/font_roboto_regular" />
 
 		</LinearLayout>

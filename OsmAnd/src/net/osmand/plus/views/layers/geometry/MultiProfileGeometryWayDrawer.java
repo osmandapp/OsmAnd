@@ -20,7 +20,9 @@ public class MultiProfileGeometryWayDrawer extends GeometryWayDrawer<MultiProfil
 	}
 
 	@Override
-	public void drawPath(Canvas canvas, Path path, GeometryWayStyle<?> style) {
+	public void drawPath(Canvas canvas, DrawPathData pathData) {
+		Path path = pathData.path;
+		GeometryWayStyle<?> style = pathData.style;
 		if (style instanceof GeometryMultiProfileWayStyle && !((GeometryMultiProfileWayStyle) style).isGap()) {
 			RenderingLineAttributes attrs = getContext().getAttrs();
 

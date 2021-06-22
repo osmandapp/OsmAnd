@@ -7,19 +7,21 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.StyleSpan;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
-
-import net.osmand.AndroidUtils;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
-import net.osmand.plus.inapp.InAppPurchaseHelper;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
-import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
+
+import net.osmand.AndroidUtils;
+import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
+import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 
 public class TroubleshootingOrPurchasingCard extends BaseCard {
 
@@ -35,8 +37,10 @@ public class TroubleshootingOrPurchasingCard extends BaseCard {
 		return isPaidVersion ? R.layout.troubleshooting_card : R.layout.no_purchases_card;
 	}
 
-	public TroubleshootingOrPurchasingCard(@NonNull MapActivity mapActivity, @NonNull InAppPurchaseHelper purchaseHelper, boolean isPaidVersion) {
-		super(mapActivity, false);
+	public TroubleshootingOrPurchasingCard(@NonNull FragmentActivity activity,
+	                                       @NonNull InAppPurchaseHelper purchaseHelper,
+	                                       boolean isPaidVersion) {
+		super(activity, false);
 		this.purchaseHelper = purchaseHelper;
 		this.isPaidVersion = isPaidVersion;
 	}
@@ -59,44 +63,40 @@ public class TroubleshootingOrPurchasingCard extends BaseCard {
 				@Override
 				public void onClick(View v) {
 					ChoosePlanDialogFragment.showDialogInstance(getMyApplication(),
-							mapActivity.getSupportFragmentManager(),
-							ChoosePlanDialogFragment.ChoosePlanDialogType.OSM_LIVE);
+							activity.getSupportFragmentManager(),
+							ChoosePlanDialogFragment.ChoosePlanDialogType.SUBSCRIPTION);
 				}
 			});
 
 			CardView getItButtonContainer = view.findViewById(R.id.card_view);
 			int colorRes = nightMode ? R.color.switch_button_active_dark : R.color.switch_button_active_light;
-			getItButtonContainer.setCardBackgroundColor(ContextCompat.getColor(mapActivity, colorRes));
+			getItButtonContainer.setCardBackgroundColor(ContextCompat.getColor(activity, colorRes));
 
 			View getItButton = view.findViewById(R.id.card_container);
 			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-				AndroidUtils.setBackground(mapActivity, getItButton, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
+				AndroidUtils.setBackground(activity, getItButton, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
 			} else {
-				AndroidUtils.setBackground(mapActivity, getItButton, nightMode, R.drawable.btn_unstroked_light, R.drawable.btn_unstroked_dark);
+				AndroidUtils.setBackground(activity, getItButton, nightMode, R.drawable.btn_unstroked_light, R.drawable.btn_unstroked_dark);
 			}
+
+			ImageView getItArrow = view.findViewById(R.id.additional_button_icon);
+			UiUtilities.rotateImageByLayoutDirection(getItArrow);
 		}
 	}
 
 	protected void setupRestorePurchasesBtn() {
 		View purchasesRestore = view.findViewById(R.id.restore_purchases);
-		purchasesRestore.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (purchaseHelper != null) {
-					purchaseHelper.requestInventory();
-				}
+		purchasesRestore.setOnClickListener(v -> {
+			if (purchaseHelper != null) {
+				purchaseHelper.requestInventory();
 			}
 		});
 	}
 
 	protected void setupNewDeviceOrAccountBtn() {
 		View newDeviceAccountContainer = view.findViewById(R.id.new_device_account_container);
-		newDeviceAccountContainer.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				WikipediaDialogFragment.showFullArticle(mapActivity, Uri.parse(OSMAND_NEW_DEVICE_URL), nightMode);
-			}
-		});
+		newDeviceAccountContainer.setOnClickListener(v ->
+				WikipediaDialogFragment.showFullArticle(activity, Uri.parse(OSMAND_NEW_DEVICE_URL), nightMode));
 	}
 
 	protected void setupSupportDescription() {
@@ -112,11 +112,7 @@ public class TroubleshootingOrPurchasingCard extends BaseCard {
 
 	private void setupContactUsLink() {
 		View contactSupportLinkContainer = view.findViewById(R.id.contact_support_title_container);
-		contactSupportLinkContainer.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				app.sendSupportEmail(app.getString(R.string.purchases));
-			}
-		});
+		contactSupportLinkContainer.setOnClickListener(
+				v -> app.sendSupportEmail(app.getString(R.string.purchases)));
 	}
 }

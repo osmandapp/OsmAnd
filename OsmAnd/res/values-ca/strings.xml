@@ -3289,7 +3289,6 @@
     <string name="select_color">Seleccioneu el color</string>
     <string name="edit_profiles_descr">Els perfils predeterminats de l\'OsmAnd no es poden esborrar però si desactivar-se (a la pantalla anterior) o reordenar-se cap al el final.</string>
     <string name="edit_profiles">Edita els perfils</string>
-    <string name="select_nav_profile_dialog_message">El \'tipus de navegació\' determina com es calculen les rutes.</string>
     <string name="profile_appearance">Aparença del perfil</string>
     <string name="choose_icon_color_name">Icona, color i nom</string>
     <string name="reorder_profiles">Edita la llista de perfils</string>
@@ -3748,7 +3747,6 @@
     <string name="icon_group_sport">Esport</string>
     <string name="icon_group_emergency">Emergència</string>
     <string name="use_native_pt">Desenvolupament local de Transport Public</string>
-    <string name="app_mode_gap">Discontinu</string>
     <string name="lenght_limit_description">Proporcioneu la llargada del vostre vehicle, pot haver-hi rutes restringides als vehicles llargs.</string>
     <string name="gpx_parse_error">No s\'ha generat correctament l\'arxiu GPX. Indiqueu-ho a l\'equip de suport per continuar investigant.</string>
     <string name="save_track_to_gpx">Enregistra automàticament la traça durant la navegació</string>
@@ -3825,4 +3823,5 @@
     <string name="track_has_no_altitude">La traça no conté dades d\'altitud.</string>
     <string name="track_has_no_speed">La traça no conté dades de velocitat.</string>
     <string name="select_another_colorization">Seleccioneu un altre tipus de coloració.</string>
+    <string name="verification_code_missing_description">El retard pel codi pot ser de 10 minuts, verifiqueu també la vostra carpeta de correu brossa. Si això no us ajuda, utilitzeu el botó de sota.</string>
 </resources>

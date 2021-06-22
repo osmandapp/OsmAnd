@@ -2,25 +2,26 @@ package net.osmand.plus.mapmarkers;
 
 import androidx.annotation.DrawableRes;
 
-import net.osmand.plus.itinerary.ItineraryGroup;
+import net.osmand.plus.R;
 
 public class GroupHeader {
 
-	@DrawableRes
-	private int iconRes;
-	private ItineraryGroup group;
+	private MapMarkersGroup group;
 
-	public GroupHeader(int iconRes, ItineraryGroup group) {
-		this.iconRes = iconRes;
+	public GroupHeader(MapMarkersGroup group) {
 		this.group = group;
 	}
 
 	@DrawableRes
 	public int getIconRes() {
-		return iconRes;
+		ItineraryType type = group.getType();
+		if (type != ItineraryType.MARKERS) {
+			return type == ItineraryType.FAVOURITES ? R.drawable.ic_action_favorite : R.drawable.ic_action_polygom_dark;
+		}
+		return 0;
 	}
 
-	public ItineraryGroup getGroup() {
+	public MapMarkersGroup getGroup() {
 		return group;
 	}
 }

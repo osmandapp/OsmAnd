@@ -6,6 +6,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.AndroidNetworkUtils.OnRequestResultListener;
@@ -194,7 +195,7 @@ public class PerformLiveUpdateAsyncTask
 		AndroidNetworkUtils.sendRequestAsync(
 				app, LiveUpdatesFragment.URL, null, "Requesting map updates info...", false, false, new OnRequestResultListener() {
 					@Override
-					public void onResult(String result) {
+					public void onResult(@Nullable String result, @Nullable String error) {
 						if (!Algorithms.isEmpty(result)) {
 							SimpleDateFormat source = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.US);
 							source.setTimeZone(TimeZone.getTimeZone("UTC"));

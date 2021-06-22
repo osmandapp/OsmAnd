@@ -30,7 +30,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.TargetPointsHelper.TargetPointChangedListener;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment.ContextMenuItemClickListener;
 import net.osmand.plus.mapcontextmenu.MenuController.ContextMenuToolbarController;
@@ -573,17 +572,9 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		if (mapActivity != null) {
 			boolean topControlsVisible = shouldShowTopControls(menuVisible);
 			boolean bottomControlsVisible = shouldShowBottomControls(menuVisible);
-			updateControlsVisibility(mapActivity, topControlsVisible, bottomControlsVisible);
+			mapActivity.getWidgetsVisibilityHelper().updateControlsVisibility(topControlsVisible, bottomControlsVisible);
+			mapActivity.refreshMap();
 		}
-	}
-
-	public static void updateControlsVisibility(@NonNull MapActivity mapActivity, boolean topControlsVisible, boolean bottomControlsVisible) {
-		AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_center_info), topControlsVisible);
-		AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_left_widgets_panel), topControlsVisible);
-		AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_right_widgets_panel), topControlsVisible);
-		AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.bottom_controls_container), bottomControlsVisible);
-
-		mapActivity.refreshMap();
 	}
 
 	public boolean shouldShowTopControls() {

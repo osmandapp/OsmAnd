@@ -10,6 +10,7 @@ import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.util.Algorithms;
 
@@ -27,11 +28,12 @@ import java.util.Locale;
 import java.util.Map;
 
 import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
+import static net.osmand.plus.activities.LocalIndexHelper.LocalIndexType.SRTM_DATA;
 
 public class DownloadActivityType {
 	private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.US);
 	private static Map<String, DownloadActivityType> byTag = new HashMap<>();
-	
+
 	public static final DownloadActivityType NORMAL_FILE =
 			new DownloadActivityType(R.string.download_regular_maps, "map", 10);
 	public static final DownloadActivityType VOICE_FILE =
@@ -83,7 +85,7 @@ public class DownloadActivityType {
 		iconResource = R.drawable.ic_map;
 	}
 
-	public int getStringResource(){
+	public int getStringResource() {
 		return stringResource;
 	}
 
@@ -101,7 +103,7 @@ public class DownloadActivityType {
 
 	public static boolean isCountedInDownloads(IndexItem es) {
 		DownloadActivityType tp = es.getType();
-		if(tp == NORMAL_FILE || tp == ROADS_FILE){
+		if (tp == NORMAL_FILE || tp == ROADS_FILE) {
 			if (!es.extra) {
 				return true;
 			}
@@ -120,17 +122,17 @@ public class DownloadActivityType {
 	public static Collection<DownloadActivityType> values() {
 		return byTag.values();
 	}
-	
+
 	protected static String addVersionToExt(String ext, int version) {
 		return "_" + version + ext;
 	}
-	
+
 	public boolean isAccepted(String fileName) {
-		if(NORMAL_FILE == this) {
-			return fileName.endsWith(addVersionToExt(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP, IndexConstants.BINARY_MAP_VERSION)) 
+		if (NORMAL_FILE == this) {
+			return fileName.endsWith(addVersionToExt(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP, IndexConstants.BINARY_MAP_VERSION))
 					|| fileName.endsWith(IndexConstants.EXTRA_ZIP_EXT)
 					|| fileName.endsWith(IndexConstants.SQLITE_EXT);
-		} else if(ROADS_FILE == this) {
+		} else if (ROADS_FILE == this) {
 			return fileName.endsWith(addVersionToExt(IndexConstants.BINARY_ROAD_MAP_INDEX_EXT_ZIP, IndexConstants.BINARY_MAP_VERSION));
 		} else if (VOICE_FILE == this) {
 			return fileName.endsWith(addVersionToExt(IndexConstants.VOICE_INDEX_EXT_ZIP, IndexConstants.VOICE_VERSION));
@@ -145,8 +147,9 @@ public class DownloadActivityType {
 			return fileName.endsWith(addVersionToExt(IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT_ZIP,
 					IndexConstants.BINARY_MAP_VERSION));
 		} else if (SRTM_COUNTRY_FILE == this) {
-			return fileName.endsWith(addVersionToExt(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT_ZIP,
-					IndexConstants.BINARY_MAP_VERSION));
+			boolean srtm = fileName.endsWith(addVersionToExt(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT_ZIP, IndexConstants.BINARY_MAP_VERSION));
+			boolean srtmf = fileName.endsWith(addVersionToExt(IndexConstants.BINARY_SRTM_FEET_MAP_INDEX_EXT_ZIP, IndexConstants.BINARY_MAP_VERSION));
+			return srtm || srtmf;
 		} else if (HILLSHADE_FILE == this) {
 			return fileName.endsWith(IndexConstants.SQLITE_EXT);
 		} else if (SLOPE_FILE == this) {
@@ -160,7 +163,7 @@ public class DownloadActivityType {
 		}
 		return false;
 	}
-	
+
 	public File getDownloadFolder(OsmandApplication ctx, IndexItem indexItem) {
 		if (NORMAL_FILE == this) {
 			if (indexItem.fileName.endsWith(IndexConstants.SQLITE_EXT)) {
@@ -196,17 +199,17 @@ public class DownloadActivityType {
 	}
 
 	public boolean isZipStream(OsmandApplication ctx, IndexItem indexItem) {
-		return HILLSHADE_FILE != this && SLOPE_FILE != this  && SQLITE_FILE != this && WIKIVOYAGE_FILE != this && GPX_FILE != this;
+		return HILLSHADE_FILE != this && SLOPE_FILE != this && SQLITE_FILE != this && WIKIVOYAGE_FILE != this && GPX_FILE != this;
 	}
 
 	public boolean isZipFolder(OsmandApplication ctx, IndexItem indexItem) {
 		return this == VOICE_FILE;
 	}
-	
+
 	public boolean preventMediaIndexing(OsmandApplication ctx, IndexItem indexItem) {
 		return this == VOICE_FILE && indexItem.fileName.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP);
 	}
-	
+
 	public String getUnzipExtension(OsmandApplication ctx, IndexItem indexItem) {
 		if (NORMAL_FILE == this) {
 			if (indexItem.fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)) {
@@ -217,7 +220,7 @@ public class DownloadActivityType {
 				return IndexConstants.EXTRA_EXT;
 			} else if (indexItem.fileName.endsWith(IndexConstants.SQLITE_EXT)) {
 				return IndexConstants.SQLITE_EXT;
-			} else if (indexItem.fileName.endsWith(IndexConstants.ANYVOICE_INDEX_EXT_ZIP)){
+			} else if (indexItem.fileName.endsWith(IndexConstants.ANYVOICE_INDEX_EXT_ZIP)) {
 				return "";
 			}
 		} else if (ROADS_FILE == this) {
@@ -227,7 +230,7 @@ public class DownloadActivityType {
 		} else if (FONT_FILE == this) {
 			return IndexConstants.FONT_INDEX_EXT;
 		} else if (SRTM_COUNTRY_FILE == this) {
-			return IndexConstants.BINARY_SRTM_MAP_INDEX_EXT;
+			return SrtmDownloadItem.getExtension(indexItem);
 		} else if (WIKIPEDIA_FILE == this) {
 			return IndexConstants.BINARY_WIKI_MAP_INDEX_EXT;
 		} else if (WIKIVOYAGE_FILE == this) {
@@ -249,9 +252,9 @@ public class DownloadActivityType {
 		}
 		throw new UnsupportedOperationException();
 	}
-	
+
 	public String getUrlSuffix(OsmandApplication ctx) {
-		if (this== ROADS_FILE) {
+		if (this == ROADS_FILE) {
 			return "&road=yes";
 		} else if (this == LIVE_UPDATES_FILE) {
 			return "&aosmc=yes";
@@ -280,7 +283,7 @@ public class DownloadActivityType {
 	public String getBaseUrl(OsmandApplication ctx, String fileName) {
 		String url = "https://" + IndexConstants.INDEX_DOWNLOAD_DOMAIN + "/download?event=2&"
 				+ Version.getVersionAsURLParam(ctx) + "&file=" + encode(fileName);
-		if(this == LIVE_UPDATES_FILE && fileName.length() > 16) {
+		if (this == LIVE_UPDATES_FILE && fileName.length() > 16) {
 			// DATE_AND_EXT_STR_LEN = "_18_06_02.obf.gz".length()
 			String region = fileName.substring(0, fileName.length() - 16).toLowerCase();
 			url += "&region=" + encode(region);
@@ -343,7 +346,7 @@ public class DownloadActivityType {
 		}
 		return "";
 	}
-	
+
 	public String getVisibleName(DownloadItem downloadItem, Context ctx, OsmandRegions osmandRegions, boolean includingParent) {
 		if (this == VOICE_FILE) {
 			String fileName = downloadItem.getFileName();
@@ -360,6 +363,9 @@ public class DownloadActivityType {
 		final String basename = getBasename(downloadItem);
 		if (basename.endsWith(FileNameTranslationHelper.WIKI_NAME)) {
 			return FileNameTranslationHelper.getWikiName(ctx, basename);
+		}
+		if (basename.endsWith(FileNameTranslationHelper.WIKIVOYAGE_NAME)) {
+			return FileNameTranslationHelper.getWikivoyageName(ctx, basename);
 		}
 //		if (this == HILLSHADE_FILE){
 //			return FileNameTranslationHelper.getHillShadeName(ctx, osmandRegions, bn);
@@ -383,7 +389,7 @@ public class DownloadActivityType {
 
 		return osmandRegions.getLocaleName(basename, includingParent);
 	}
-	
+
 	public String getTargetFileName(IndexItem item) {
 		String fileName = item.fileName;
 		// if(fileName.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP) ||
@@ -423,7 +429,7 @@ public class DownloadActivityType {
 			}
 			String baseNameWithoutVersion = fileName.substring(0, l);
 			if (this == SRTM_COUNTRY_FILE) {
-				return baseNameWithoutVersion + IndexConstants.BINARY_SRTM_MAP_INDEX_EXT;
+				return baseNameWithoutVersion + SrtmDownloadItem.getExtension(item);
 			}
 			if (this == WIKIPEDIA_FILE) {
 				return baseNameWithoutVersion + IndexConstants.BINARY_WIKI_MAP_INDEX_EXT;
@@ -487,7 +493,7 @@ public class DownloadActivityType {
 			return fileName.substring(0, l);
 		}
 		if (this == LIVE_UPDATES_FILE) {
-			if(fileName.indexOf('.') > 0){
+			if (fileName.indexOf('.') > 0) {
 				return fileName.substring(0, fileName.indexOf('.'));
 			}
 			return fileName;
@@ -495,7 +501,7 @@ public class DownloadActivityType {
 		int ls = fileName.lastIndexOf('_');
 		if (ls >= 0) {
 			return fileName.substring(0, ls);
-		} else if(fileName.indexOf('.') > 0){
+		} else if (fileName.indexOf('.') > 0) {
 			return fileName.substring(0, fileName.indexOf('.'));
 		}
 		return fileName;

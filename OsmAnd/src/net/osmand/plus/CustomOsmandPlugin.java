@@ -26,15 +26,15 @@ import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.backup.AvoidRoadsSettingsItem;
-import net.osmand.plus.settings.backend.backup.MapSourcesSettingsItem;
-import net.osmand.plus.settings.backend.backup.PluginSettingsItem;
-import net.osmand.plus.settings.backend.backup.PoiUiFiltersSettingsItem;
-import net.osmand.plus.settings.backend.backup.ProfileSettingsItem;
-import net.osmand.plus.settings.backend.backup.QuickActionsSettingsItem;
-import net.osmand.plus.settings.backend.backup.SettingsHelper;
-import net.osmand.plus.settings.backend.backup.SettingsHelper.SettingsCollectListener;
-import net.osmand.plus.settings.backend.backup.SettingsItem;
+import net.osmand.plus.settings.backend.backup.SettingsHelper.CollectListener;
+import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
+import net.osmand.plus.settings.backend.backup.items.AvoidRoadsSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.MapSourcesSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.PluginSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.PoiUiFiltersSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.QuickActionsSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -235,18 +235,18 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 			progress.show();
 		}
 
-		final SettingsHelper.SettingsImportListener importListener = new SettingsHelper.SettingsImportListener() {
+		final ImportListener importListener = new ImportListener() {
 			@Override
-			public void onSettingsImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> items) {
+			public void onImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> items) {
 				if (AndroidUtils.isActivityNotDestroyed(activity)) {
 					progress.dismiss();
 				}
 			}
 		};
 
-		app.getSettingsHelper().collectSettings(file, "", 1, new SettingsCollectListener() {
+		app.getFileSettingsHelper().collectSettings(file, "", 1, new CollectListener() {
 			@Override
-			public void onSettingsCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items) {
+			public void onCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items) {
 				if (succeed && !items.isEmpty()) {
 					for (Iterator<SettingsItem> iterator = items.iterator(); iterator.hasNext(); ) {
 						SettingsItem item = iterator.next();
@@ -262,7 +262,7 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 							item.setShouldReplace(true);
 						}
 					}
-					app.getSettingsHelper().importSettings(file, items, "", 1, importListener);
+					app.getFileSettingsHelper().importSettings(file, items, "", 1, importListener);
 				}
 			}
 		});
@@ -276,9 +276,9 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 	}
 
 	private void removePluginItemsFromFile(final File file, final PluginItemsListener itemsListener) {
-		app.getSettingsHelper().collectSettings(file, "", 1, new SettingsCollectListener() {
+		app.getFileSettingsHelper().collectSettings(file, "", 1, new CollectListener() {
 			@Override
-			public void onSettingsCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items) {
+			public void onCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items) {
 				if (succeed && !items.isEmpty()) {
 					for (SettingsItem item : items) {
 						if (item instanceof QuickActionsSettingsItem) {

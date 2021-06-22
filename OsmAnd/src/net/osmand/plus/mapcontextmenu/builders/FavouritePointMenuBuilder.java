@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -26,8 +28,6 @@ import net.osmand.util.MapUtils;
 
 import java.io.IOException;
 import java.util.List;
-
-import androidx.annotation.NonNull;
 
 public class FavouritePointMenuBuilder extends MenuBuilder {
 
@@ -59,9 +59,9 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	}
 
 	@Override
-	protected void buildNearestRow(View view, List<Amenity> nearestAmenities, boolean process, int iconId, String text, String amenityKey) {
+	protected void buildNearestRow(View view, List<Amenity> nearestAmenities, int iconId, String text, String amenityKey) {
 		if (originObject == null || !(originObject instanceof Amenity)) {
-			super.buildNearestRow(view, nearestAmenities, process, iconId, text, amenityKey);
+			super.buildNearestRow(view, nearestAmenities, iconId, text, amenityKey);
 		}
 	}
 
@@ -73,6 +73,9 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 
 	@Override
 	public void buildInternal(View view) {
+		if (fav != null && fav.getTimestamp() != 0) {
+			buildDateRow(view, fav.getTimestamp());
+		}
 		if (originObject != null && originObject instanceof Amenity) {
 			AmenityMenuBuilder builder = new AmenityMenuBuilder(mapActivity, (Amenity) originObject);
 			builder.setLatLon(getLatLon());

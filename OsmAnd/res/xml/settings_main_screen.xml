@@ -18,6 +18,18 @@
 		android:selectable="false" />
 
 	<Preference
+		android:key="backup_and_restore"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:title="@string/backup_and_restore"
+		tools:icon="@drawable/ic_action_cloud_upload"
+		tools:summary="@string/last_backup" />
+
+	<Preference
+		android:layout="@layout/divider_half_item_with_background"
+		android:selectable="false" />
+
+	<Preference
 		android:key="purchases_settings"
 		android:layout="@layout/preference_with_descr"
 		android:persistent="false"
@@ -63,13 +75,6 @@
 		android:persistent="false"
 		android:title="@string/import_profile"
 		tools:icon="@drawable/ic_action_import" />
-
-	<Preference
-		android:key="export_profiles"
-		android:layout="@layout/preference_button"
-		android:persistent="false"
-		android:title="@string/shared_string_export"
-		tools:icon="@drawable/ic_action_export" />
 
 	<Preference
 		android:key="reorder_profiles"

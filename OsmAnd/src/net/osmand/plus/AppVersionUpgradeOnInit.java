@@ -12,6 +12,7 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.api.SettingsAPI;
+import net.osmand.plus.mapmarkers.MarkersDb39HelperLegacy;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.EnumStringPreference;
@@ -50,8 +51,10 @@ class AppVersionUpgradeOnInit {
 	public static final int VERSION_3_7_01 = 3701;
 	// 3800 - 3.8-00
 	public static final int VERSION_3_8_00 = 3800;
+	// 4000 - 4.0-00
+	public static final int VERSION_4_0_00 = 4000;
 
-	public static final int LAST_APP_VERSION = VERSION_3_8_00;
+	public static final int LAST_APP_VERSION = VERSION_4_0_00;
 
 	static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
@@ -87,22 +90,22 @@ class AppVersionUpgradeOnInit {
 					settings.SHOW_DASHBOARD_ON_START.set(true);
 					settings.SHOW_DASHBOARD_ON_MAP_SCREEN.set(true);
 					settings.SHOW_CARD_TO_CHOOSE_DRAWER.set(true);
-					startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_2_2).commit();
-				}
-				if (prevAppVersion < VERSION_2_3) {
-					startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_2_3).commit();
 				}
 				if (prevAppVersion < VERSION_3_2) {
 					settings.BILLING_PURCHASE_TOKENS_SENT.set("");
-					startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_2).commit();
 				}
 				if (prevAppVersion < VERSION_3_5 || Version.getAppVersion(app).equals("3.5.3")
 						|| Version.getAppVersion(app).equals("3.5.4")) {
 					migratePreferences();
-					app.getAppInitializer().addListener(new AppInitializer.AppInitializeListener() {
+					app.getAppInitializer().addListener(new AppInitializeListener() {
 						@Override
-						public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
-							if (event.equals(AppInitializer.InitEvents.FAVORITES_INITIALIZED)) {
+						public void onStart(AppInitializer init) {
+
+						}
+
+						@Override
+						public void onProgress(AppInitializer init, InitEvents event) {
+							if (event.equals(InitEvents.FAVORITES_INITIALIZED)) {
 								migrateHomeWorkParkingToFavorites();
 							}
 						}
@@ -111,20 +114,22 @@ class AppVersionUpgradeOnInit {
 						public void onFinish(AppInitializer init) {
 						}
 					});
-					startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_5).commit();
 				}
 				if (prevAppVersion < VERSION_3_6) {
 					migratePreferences();
-					startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_6).commit();
 				}
 				if (prevAppVersion < VERSION_3_7) {
 					migrateEnumPreferences();
-					startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_7).commit();
 				}
 				if (prevAppVersion < VERSION_3_7_01) {
 					app.getAppInitializer().addListener(new AppInitializeListener() {
 						@Override
-						public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
+						public void onStart(AppInitializer init) {
+
+						}
+
+						@Override
+						public void onProgress(AppInitializer init, InitEvents event) {
 							if (event.equals(InitEvents.FAVORITES_INITIALIZED)) {
 								app.getFavorites().fixBlackBackground();
 							}
@@ -134,11 +139,26 @@ class AppVersionUpgradeOnInit {
 						public void onFinish(AppInitializer init) {
 						}
 					});
-					startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_7_01).commit();
 				}
 				if (prevAppVersion < VERSION_3_8_00) {
 					migrateQuickActionStates();
-					startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_8_00).commit();
+				}
+				if (prevAppVersion < VERSION_4_0_00) {
+					app.getAppInitializer().addListener(new AppInitializeListener() {
+
+						@Override
+						public void onStart(AppInitializer init) {
+							new MarkersDb39HelperLegacy(app).migrateMarkersGroups();
+						}
+
+						@Override
+						public void onProgress(AppInitializer init, InitEvents event) {
+						}
+
+						@Override
+						public void onFinish(AppInitializer init) {
+						}
+					});
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
 				startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();

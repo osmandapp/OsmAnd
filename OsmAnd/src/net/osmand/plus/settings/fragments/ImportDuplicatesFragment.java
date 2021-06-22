@@ -1,9 +1,7 @@
 package net.osmand.plus.settings.fragments;
 
-import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +15,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.ViewCompat;
 import androidx.core.widget.NestedScrollView;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,79 +31,59 @@ import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.mapmarkers.MapMarker;
+import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.osmedit.OpenstreetmapPoint;
 import net.osmand.plus.osmedit.OsmNotesPoint;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.backup.SettingsHelper;
-import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportAsyncTask;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportType;
-import net.osmand.plus.settings.backend.backup.SettingsHelper.SettingsImportListener;
-import net.osmand.plus.settings.backend.backup.SettingsItem;
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.view.ComplexButton;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.osmand.plus.settings.backend.backup.FileSettingsItem.FileSubtype;
-import static net.osmand.plus.settings.fragments.BaseSettingsListFragment.SETTINGS_LIST_TAG;
+import static net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 
 
-public class ImportDuplicatesFragment extends BaseOsmAndFragment {
+public abstract class ImportDuplicatesFragment extends BaseOsmAndFragment {
 
-	public static final String TAG = ImportDuplicatesFragment.class.getSimpleName();
-	private OsmandApplication app;
-	private RecyclerView list;
-	private LinearLayout buttonsContainer;
-	private NestedScrollView nestedScroll;
-	private List<? super Object> duplicatesList;
-	private List<SettingsItem> settingsItems;
-	private File file;
-	private boolean nightMode;
-	private ProgressBar progressBar;
-	private CollapsingToolbarLayout toolbarLayout;
-	private TextView description;
-	private SettingsHelper settingsHelper;
+	protected OsmandApplication app;
+	protected List<SettingsItem> settingsItems;
+	protected List<? super Object> duplicatesList;
 
-	public static void showInstance(@NonNull FragmentManager fm, List<? super Object> duplicatesList,
-									List<SettingsItem> settingsItems, File file, Fragment targetFragment) {
-		ImportDuplicatesFragment fragment = new ImportDuplicatesFragment();
-		fragment.setTargetFragment(targetFragment, 0);
-		fragment.setDuplicatesList(duplicatesList);
-		fragment.setSettingsItems(settingsItems);
-		fragment.setFile(file);
-		fm.beginTransaction()
-				.replace(R.id.fragmentContainer, fragment, TAG)
-				.addToBackStack(SETTINGS_LIST_TAG)
-				.commitAllowingStateLoss();
+	protected RecyclerView list;
+	protected TextView description;
+	protected ProgressBar progressBar;
+	protected LinearLayout buttonsContainer;
+	protected NestedScrollView nestedScroll;
+	protected CollapsingToolbarLayout toolbarLayout;
+
+	protected boolean nightMode;
+
+	@Override
+	public int getStatusBarColorId() {
+		return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
 	}
+
+	public void setSettingsItems(List<SettingsItem> settingsItems) {
+		this.settingsItems = settingsItems;
+	}
+
+	public void setDuplicatesList(List<? super Object> duplicatesList) {
+		this.duplicatesList = duplicatesList;
+	}
+
+	protected abstract ImportType getImportTaskType();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = requireMyApplication();
-		settingsHelper = app.getSettingsHelper();
 		nightMode = !app.getSettings().isLightContent();
-		ImportAsyncTask importTask = settingsHelper.getImportTask();
-		if (importTask != null) {
-			if (settingsItems == null) {
-				settingsItems = importTask.getSelectedItems();
-			}
-			if (duplicatesList == null) {
-				duplicatesList = importTask.getDuplicates();
-			}
-			if (file == null) {
-				file = importTask.getFile();
-			}
-			Fragment target = getTargetFragment();
-			if (target instanceof ImportSettingsFragment) {
-				SettingsImportListener importListener = ((ImportSettingsFragment) target).getImportListener();
-				importTask.setImportListener(importListener);
-			}
-		}
 	}
 
 	@Nullable
@@ -178,7 +155,7 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment {
 			list.setLayoutManager(new LinearLayoutManager(getMyApplication()));
 			list.setAdapter(adapter);
 		}
-		if (settingsHelper.getImportTaskType() == ImportType.IMPORT) {
+		if (getImportTaskType() == ImportType.IMPORT) {
 			setupImportingUi();
 		} else {
 			toolbarLayout.setTitle(getString(R.string.import_duplicates_title));
@@ -186,7 +163,41 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment {
 		toolbarLayout.setTitle(getString(R.string.import_duplicates_title));
 	}
 
-	private List<Object> prepareDuplicates(List<? super Object> duplicatesList) {
+	protected void importItems(boolean shouldReplace) {
+		if (settingsItems != null) {
+			setupImportingUi();
+			for (SettingsItem item : settingsItems) {
+				item.setShouldReplace(shouldReplace);
+			}
+		}
+	}
+
+	protected void setupImportingUi() {
+		list.setVisibility(View.GONE);
+		progressBar.setVisibility(View.VISIBLE);
+		buttonsContainer.setVisibility(View.GONE);
+	}
+
+	protected void setupToolbar(Toolbar toolbar) {
+		toolbar.setTitle(R.string.import_duplicates_title);
+		toolbar.setNavigationIcon(getPaintedContentIcon(
+				AndroidUtils.getNavigationIconResId(app),
+				nightMode
+						? getResources().getColor(R.color.active_buttons_and_links_text_dark)
+						: getResources().getColor(R.color.active_buttons_and_links_text_light)));
+		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
+		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				FragmentManager fm = getFragmentManager();
+				if (fm != null && !fm.isStateSaved()) {
+					fm.popBackStackImmediate();
+				}
+			}
+		});
+	}
+
+	protected List<Object> prepareDuplicates(List<? super Object> duplicatesList) {
 		List<? super Object> duplicates = new ArrayList<>();
 		List<ApplicationMode.ApplicationModeBean> profiles = new ArrayList<>();
 		List<QuickAction> actions = new ArrayList<>();
@@ -204,9 +215,10 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment {
 		List<File> voiceFilesList = new ArrayList<>();
 		List<File> mapFilesList = new ArrayList<>();
 		List<MapMarker> mapMarkers = new ArrayList<>();
-		List<MapMarker> mapMarkersGroups = new ArrayList<>();
+		List<MapMarker> mapMarkersHistory = new ArrayList<>();
 		List<HistoryEntry> historyEntries = new ArrayList<>();
 		List<OnlineRoutingEngine> onlineRoutingEngines = new ArrayList<>();
+		List<MapMarkersGroup> itineraryGroups = new ArrayList<>();
 
 		for (Object object : duplicatesList) {
 			if (object instanceof ApplicationMode.ApplicationModeBean) {
@@ -246,14 +258,16 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment {
 			} else if (object instanceof MapMarker) {
 				MapMarker mapMarker = (MapMarker) object;
 				if (mapMarker.history) {
-					mapMarkers.add(mapMarker);
+					mapMarkersHistory.add(mapMarker);
 				} else {
-					mapMarkersGroups.add(mapMarker);
+					mapMarkers.add(mapMarker);
 				}
 			} else if (object instanceof HistoryEntry) {
 				historyEntries.add((HistoryEntry) object);
 			} else if (object instanceof OnlineRoutingEngine) {
 				onlineRoutingEngines.add((OnlineRoutingEngine) object);
+			} else if (object instanceof MapMarkersGroup) {
+				itineraryGroups.add((MapMarkersGroup) object);
 			}
 		}
 		if (!profiles.isEmpty()) {
@@ -320,75 +334,22 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment {
 			duplicates.add(getString(R.string.map_markers));
 			duplicates.addAll(mapMarkers);
 		}
-		if (!mapMarkersGroups.isEmpty()) {
+		if (!mapMarkersHistory.isEmpty()) {
 			duplicates.add(getString(R.string.markers_history));
-			duplicates.addAll(mapMarkersGroups);
+			duplicates.addAll(mapMarkersHistory);
 		}
 		if (!onlineRoutingEngines.isEmpty()) {
 			duplicates.add(getString(R.string.online_routing_engines));
 			duplicates.addAll(onlineRoutingEngines);
 		}
-		return duplicates;
-	}
-
-	@Override
-	public int getStatusBarColorId() {
-		return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
-	}
-
-	private void importItems(boolean shouldReplace) {
-		if (settingsItems != null && file != null) {
-			setupImportingUi();
-			for (SettingsItem item : settingsItems) {
-				item.setShouldReplace(shouldReplace);
-			}
-			Fragment target = getTargetFragment();
-			if (target instanceof ImportSettingsFragment) {
-				SettingsImportListener importListener = ((ImportSettingsFragment) target).getImportListener();
-				settingsHelper.importSettings(file, settingsItems, "", 1, importListener);
-			}
+		if (!historyEntries.isEmpty()) {
+			duplicates.add(getString(R.string.shared_string_search_history));
+			duplicates.addAll(historyEntries);
 		}
-	}
-
-	private void setupImportingUi() {
-		toolbarLayout.setTitle(getString(R.string.shared_string_importing));
-		description.setText(UiUtilities.createSpannableString(
-				String.format(getString(R.string.importing_from), file.getName()),
-				new StyleSpan(Typeface.BOLD), file.getName()
-		));
-		progressBar.setVisibility(View.VISIBLE);
-		list.setVisibility(View.GONE);
-		buttonsContainer.setVisibility(View.GONE);
-	}
-
-	private void setupToolbar(Toolbar toolbar) {
-		toolbar.setTitle(R.string.import_duplicates_title);
-		toolbar.setNavigationIcon(getPaintedContentIcon(
-				AndroidUtils.getNavigationIconResId(app),
-				nightMode
-						? getResources().getColor(R.color.active_buttons_and_links_text_dark)
-						: getResources().getColor(R.color.active_buttons_and_links_text_light)));
-		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
-		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				FragmentManager fm = getFragmentManager();
-				if (fm != null && !fm.isStateSaved()) {
-					fm.popBackStackImmediate();
-				}
-			}
-		});
-	}
-
-	public void setDuplicatesList(List<? super Object> duplicatesList) {
-		this.duplicatesList = duplicatesList;
-	}
-
-	public void setSettingsItems(List<SettingsItem> settingsItems) {
-		this.settingsItems = settingsItems;
-	}
-
-	public void setFile(File file) {
-		this.file = file;
+		if (!itineraryGroups.isEmpty()) {
+			duplicates.add(getString(R.string.shared_string_itinerary));
+			duplicates.addAll(itineraryGroups);
+		}
+		return duplicates;
 	}
 }

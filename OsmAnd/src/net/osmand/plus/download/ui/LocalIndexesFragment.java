@@ -55,6 +55,7 @@ import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.mapsource.EditMapSourceDialogFragment.OnMapSourceUpdateListener;
@@ -73,6 +74,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
 
 public class LocalIndexesFragment extends OsmandExpandableListFragment implements DownloadEvents,
 		OnMapSourceUpdateListener, RenameCallback {
@@ -351,10 +353,10 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 							getMyApplication().getResourceManager().closeFile(info.getFileName());
 							File tShm = new File(f.getParentFile(), f.getName() + "-shm");
 							File tWal = new File(f.getParentFile(), f.getName() + "-wal");
-							if(tShm.exists()) {
+							if (tShm.exists()) {
 								Algorithms.removeAllFiles(tShm);
 							}
-							if(tWal.exists()) {
+							if (tWal.exists()) {
 								Algorithms.removeAllFiles(tWal);
 							}
 						}
@@ -370,8 +372,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 							getMyApplication().getResourceManager().closeFile(info.getFileName());
 						}
 					} else if (operation == CLEAR_TILES_OPERATION) {
-						ITileSource src =  (ITileSource) info.getAttachedObject();
-						if(src != null) {
+						ITileSource src = (ITileSource) info.getAttachedObject();
+						if (src != null) {
 							src.deleteTiles(info.getPathToData());
 						}
 					}
@@ -419,10 +421,10 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		@Override
 		protected void onPostExecute(String result) {
 			a.setProgressBarIndeterminateVisibility(false);
-			if(result != null && result.length() > 0) {
+			if (result != null && result.length() > 0) {
 				Toast.makeText(a, result, Toast.LENGTH_LONG).show();
 			}
-			
+
 			if (operation == RESTORE_OPERATION || operation == BACKUP_OPERATION || operation == CLEAR_TILES_OPERATION) {
 				a.reloadLocalIndexes();
 			} else {
@@ -507,7 +509,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
 			@Override
 			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter,
-											  int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
+			                                  int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 				localOptionsMenu(itemId);
 				return true;
 			}
@@ -608,7 +610,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 	}
 
 	private void openSelectionMode(final int actionResId, final int actionIconId,
-								   final DialogInterface.OnClickListener listener) {
+	                               final DialogInterface.OnClickListener listener) {
 		final int colorResId = getMyApplication().getSettings().isLightContent() ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark;
 		String value = getString(actionResId);
 		if (value.endsWith("...")) {
@@ -709,7 +711,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 	}
 
 	public void openSelectionMode(int stringRes, int darkIcon, DialogInterface.OnClickListener listener,
-								  EnumSet<LocalIndexType> filter) {
+	                              EnumSet<LocalIndexType> filter) {
 		if (filter != null) {
 			listAdapter.filterCategories(filter);
 		}
@@ -860,7 +862,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 
 		@Override
 		public View getChildView(final int groupPosition, final int childPosition,
-								 boolean isLastChild, View convertView, ViewGroup parent) {
+		                         boolean isLastChild, View convertView, ViewGroup parent) {
 			LocalIndexInfoViewHolder viewHolder;
 			if (convertView == null) {
 				LayoutInflater inflater = LayoutInflater.from(ctx);
@@ -878,8 +880,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		private String getNameToDisplay(LocalIndexInfo child) {
 			return child.getType() == LocalIndexType.VOICE_DATA ? FileNameTranslationHelper.getVoiceName(ctx, child.getFileName()) :
 					FileNameTranslationHelper.getFileName(ctx,
-					ctx.getMyApplication().getResourceManager().getOsmandRegions(),
-					child.getFileName());
+							ctx.getMyApplication().getResourceManager().getOsmandRegions(),
+							child.getFileName());
 		}
 
 		@Override
@@ -963,7 +965,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				return ctx.getString(R.string.download_roads_only_item);
 			} else if (child.isBackupedData() && child.getFileName().endsWith(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT)) {
 				return ctx.getString(R.string.download_wikipedia_maps);
-			} else if (child.isBackupedData() && child.getFileName().endsWith(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT)) {
+			} else if (child.isBackupedData() && (SrtmDownloadItem.isSrtmFile(child.getFileName()))) {
 				return ctx.getString(R.string.download_srtm_maps);
 			}
 			return "";
@@ -1027,6 +1029,10 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 						builder.append(" • ");
 					}
 					builder.append(AndroidUtils.formatSize(ctx, child.getSize() * 1024l));
+				}
+
+				if (SrtmDownloadItem.isSRTMItem(child)) {
+					builder.append(" ").append(SrtmDownloadItem.getAbbreviationInScopes(ctx, child));
 				}
 
 				if (!Algorithms.isEmpty(child.getDescription())) {
@@ -1150,5 +1156,4 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 	private DownloadActivity getDownloadActivity() {
 		return (DownloadActivity) getActivity();
 	}
-
 }

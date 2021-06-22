@@ -101,7 +101,7 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 				}
 			}
 		});
-		UiUtilities.rotateImageByLayoutDirection(closeButton, AndroidUtils.getLayoutDirection(app));
+		UiUtilities.rotateImageByLayoutDirection(closeButton);
 
 		adapter = new PluginsListAdapter(requireContext());
 

@@ -102,6 +102,14 @@ public class QuickActionRegistry {
 		return getQuickActions();
 	}
 
+	public long getLastModifiedTime() {
+		return settings.QUICK_ACTION_LIST.getLastModifiedTime();
+	}
+
+	public void setLastModifiedTime(long lastModifiedTime) {
+		settings.QUICK_ACTION_LIST.setLastModifiedTime(lastModifiedTime);
+	}
+
 	public void addQuickAction(QuickAction action) {
 		quickActions.add(action);
 		saveActions();
@@ -150,6 +158,16 @@ public class QuickActionRegistry {
 			}
 		}
 		return null;
+	}
+
+	public List<QuickAction> collectQuickActionsByType(QuickActionType type) {
+		List<QuickAction> actions = new ArrayList<>();
+		for (QuickAction action : quickActions) {
+			if (action.getType() == type.getId()) {
+				actions.add(action);
+			}
+		}
+		return actions;
 	}
 
 	public boolean isNameUnique(QuickAction action, Context context) {

@@ -157,6 +157,10 @@ public class ImportedSettingsItemsAdapter extends
 				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_world_globe_dark, activeColorRes));
 				holder.title.setText(R.string.online_routing_engines);
 				break;
+			case ITINERARY_GROUPS:
+				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_flag, activeColorRes));
+				holder.title.setText(R.string.shared_string_itinerary);
+				break;
 		}
 	}
 

@@ -24,6 +24,7 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.slider.Slider;
 
 import net.osmand.AndroidUtils;
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.ValueHolder;
@@ -55,6 +56,7 @@ import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import static net.osmand.plus.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
 
@@ -489,19 +491,24 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				app.getNotificationHelper().refreshNotifications();
 				updateControl();
 
+				GPXFile gpxFile = null;
 				File file = null;
 				File dir = app.getAppCustomization().getTracksDir();
 				File[] children = dir.listFiles();
-				if (children != null && !Algorithms.isEmpty(result.getFilenames())) {
+				Map<String, GPXFile> gpxFilesByName = result.getGpxFilesByName();
+				if (children != null && !Algorithms.isEmpty(gpxFilesByName)) {
+					String filename = gpxFilesByName.keySet().iterator().next();
 					SavingTrackHelper helper = app.getSavingTrackHelper();
 					for (File child : children) {
-						if (child.getName().startsWith(result.getFilenames().get(0))
+						if (child.getName().startsWith(filename)
 								&& child.lastModified() == helper.getLastTimeFileSaved()) {
 							file = child;
+							gpxFile = gpxFilesByName.get(filename);
+							break;
 						}
 					}
 				}
-				if (file != null && file.exists()) {
+				if (file != null && file.exists() && (gpxFile != null && (gpxFile.hasTrkPt() || gpxFile.hasWptPt()))) {
 					if (!openTrack) {
 						if (activityRef != null) {
 							final Activity a = activityRef.get();

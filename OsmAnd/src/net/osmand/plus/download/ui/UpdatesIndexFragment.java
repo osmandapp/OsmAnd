@@ -236,7 +236,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 		if (position == 0) {
 			DownloadActivity activity = getMyActivity();
 			if (activity != null) {
-				if (!listAdapter.isShowOsmLivePurchaseBanner()) {
+				if (!listAdapter.isShowSubscriptionPurchaseBanner()) {
 					LiveUpdatesFragment.showInstance(activity.getSupportFragmentManager(), this);
 				}
 			}
@@ -291,7 +291,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 		static final int OSM_LIVE_BANNER = 1;
 		List<IndexItem> items;
 		private final ArrayList<LocalIndexInfo> mapsList = new ArrayList<>();
-		private final boolean showOsmLivePurchaseBanner;
+		private final boolean showSubscriptionPurchaseBanner;
 		private TextView countView;
 		private int countEnabled = 0;
 
@@ -310,14 +310,14 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 			countEnabled = updateCountEnabled(countView, mapsList, settings);
 		}
 
-		public UpdateIndexAdapter(Context context, int resource, List<IndexItem> items, boolean showOsmLivePurchaseBanner) {
+		public UpdateIndexAdapter(Context context, int resource, List<IndexItem> items, boolean showSubscriptionPurchaseBanner) {
 			super(context, resource, items);
 			this.items = items;
-			this.showOsmLivePurchaseBanner = showOsmLivePurchaseBanner;
+			this.showSubscriptionPurchaseBanner = showSubscriptionPurchaseBanner;
 		}
 
-		public boolean isShowOsmLivePurchaseBanner() {
-			return showOsmLivePurchaseBanner;
+		public boolean isShowSubscriptionPurchaseBanner() {
+			return showSubscriptionPurchaseBanner;
 		}
 
 		@Override
@@ -361,7 +361,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 				} else if (viewType == OSM_LIVE_BANNER) {
 					OsmandApplication app = getMyApplication();
 					boolean nightMode = !app.getSettings().isLightContent();
-					if (showOsmLivePurchaseBanner) {
+					if (showSubscriptionPurchaseBanner) {
 						view = inflater.inflate(R.layout.osm_live_banner_list_item, parent, false);
 						ColorStateList stateList = AndroidUtils.createPressedColorStateList(app, nightMode,
 								R.color.switch_button_active_light, R.color.switch_button_active_stroke_light,
@@ -372,7 +372,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 							@Override
 							public void onClick(View v) {
 								ChoosePlanDialogFragment.showDialogInstance(getMyApplication(),
-										getMyActivity().getSupportFragmentManager(), ChoosePlanDialogType.OSM_LIVE);
+										getMyActivity().getSupportFragmentManager(), ChoosePlanDialogType.SUBSCRIPTION);
 							}
 						});
 					} else {
@@ -397,7 +397,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 						additionalButton.setOnClickListener(new OnClickListener() {
 							@Override
 							public void onClick(View v) {
-								if (!listAdapter.isShowOsmLivePurchaseBanner()) {
+								if (!listAdapter.isShowSubscriptionPurchaseBanner()) {
 									showUpdateDialog(getActivity(), getFragmentManager(), UpdatesIndexFragment.this);
 								}
 							}
@@ -410,7 +410,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 				holder.setShowRemoteDate(true);
 				holder.setShowTypeInDesc(true);
 				holder.setShowParentRegionName(true);
-				holder.bindIndexItem(getItem(position));
+				holder.bindDownloadItem(getItem(position));
 			}
 			return view;
 		}

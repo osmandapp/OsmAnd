@@ -20,6 +20,7 @@ import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.R;
 import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.mapmarkers.MapMarker;
+import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.OsmandMapLayer;
@@ -106,7 +107,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 				List<LatLon> smallObjectsLatLon = new ArrayList<>();
 				for (FavoriteGroup group : favouritesDbHelper.getFavoriteGroups()) {
 					List<Pair<FavouritePoint, MapMarker>> fullObjects = new ArrayList<>();
-					boolean synced = view.getApplication().getItineraryHelper().getMarkersGroup(group) != null;
+					boolean synced = isSynced(group);
 					for (FavouritePoint favoritePoint : group.getPoints()) {
 						double lat = favoritePoint.getLatitude();
 						double lon = favoritePoint.getLongitude();
@@ -114,10 +115,8 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 								&& lat >= latLonBounds.bottom && lat <= latLonBounds.top
 								&& lon >= latLonBounds.left && lon <= latLonBounds.right) {
 							MapMarker marker = null;
-							if (synced) {
-								if ((marker = mapMarkersHelper.getMapMarker(favoritePoint)) == null) {
-									continue;
-								}
+							if (synced && (marker = mapMarkersHelper.getMapMarker(favoritePoint)) == null) {
+								continue;
 							}
 							cache.add(favoritePoint);
 							float x = tileBox.getPixXFromLatLon(lat, lon);
@@ -156,6 +155,11 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 			textLayer.putData(this, cache);
 		}
 
+	}
+
+	private boolean isSynced(@NonNull FavoriteGroup group) {
+		MapMarkersGroup markersGroup = mapMarkersHelper.getMarkersGroup(group);
+		return markersGroup != null && !markersGroup.isDisabled();
 	}
 
 	private void drawBigPoint(Canvas canvas, FavouritePoint favoritePoint, float x, float y, @Nullable MapMarker marker,

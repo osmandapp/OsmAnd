@@ -1230,7 +1230,7 @@
     <string name="poi_sand">Arena</string>
     <string name="poi_dead_wood">Bosque muerto</string>
     <string name="poi_passing_place">Lugar de paso</string>
-    <string name="poi_level">Nivel</string>
+    <string name="poi_level">Planta</string>
     <string name="poi_horse_riding">Equitación</string>
     <string name="poi_heath">Brezal</string>
     <string name="poi_logging">Tala de árboles</string>
@@ -3914,7 +3914,7 @@
     <string name="poi_taekwondo">Taekwondo</string>
     <string name="poi_table_soccer">Futbolín</string>
     <string name="poi_sumo">Sumo</string>
-    <string name="poi_speedway">Pista de carreras</string>
+    <string name="poi_speedway">Speedway</string>
     <string name="poi_snooker">Snooker</string>
     <string name="poi_shot_put">Lanzamiento de peso</string>
     <string name="poi_pilates">Pilates</string>

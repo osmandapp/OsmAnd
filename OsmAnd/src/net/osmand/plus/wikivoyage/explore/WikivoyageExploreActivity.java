@@ -28,6 +28,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView.OnNavig
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.AppInitializer;
+import net.osmand.plus.AppInitializer.AppInitializeListener;
+import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.OnDialogFragmentResultListener;
 import net.osmand.plus.OsmandApplication;
@@ -317,9 +319,14 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 		switchProgressBarVisibility(true);
 		if (app.isApplicationInitializing()) {
 			final WeakReference<WikivoyageExploreActivity> activityRef = new WeakReference<>(this);
-			app.getAppInitializer().addListener(new AppInitializer.AppInitializeListener() {
+			app.getAppInitializer().addListener(new AppInitializeListener() {
 				@Override
-				public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
+				public void onStart(AppInitializer init) {
+
+				}
+
+				@Override
+				public void onProgress(AppInitializer init, InitEvents event) {
 				}
 
 				@Override

@@ -1,9 +1,11 @@
 package net.osmand.plus.helpers;
 
 import android.content.Context;
+
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.map.OsmandRegions;
+import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.DownloadResources;
@@ -19,6 +21,7 @@ import java.lang.reflect.Field;
 public class FileNameTranslationHelper {
 	private static final Log LOG = PlatformUtil.getLog(FileNameTranslationHelper.class);
 	public static final String WIKI_NAME = "_wiki";
+	public static final String WIKIVOYAGE_NAME = "_wikivoyage";
 	public static final String HILL_SHADE = "Hillshade";
 	public static final String SLOPE = "Slope";
 	public static final String SEA_DEPTH = "Depth_";
@@ -31,6 +34,8 @@ public class FileNameTranslationHelper {
 		String basename = getBasename(fileName);
 		if (basename.endsWith(WIKI_NAME)) { //wiki files
 			return getWikiName(ctx, basename);
+		} else if (basename.endsWith(WIKIVOYAGE_NAME)) {
+			return getWikivoyageName(ctx, basename);
 		} else if (fileName.endsWith("tts")) { //tts files
 			return getVoiceName(ctx, fileName);
 		} else if (fileName.endsWith(IndexConstants.FONT_INDEX_EXT)) { //otf files
@@ -75,10 +80,10 @@ public class FileNameTranslationHelper {
 		return ctx.getString(R.string.ltr_or_rtl_combine_via_space, locName, "(" + terrain + ")");
 	}
 
-	public static String getWikiName(Context ctx, String basename){
+	public static String getWikiName(Context ctx, String basename) {
 		String cutted = basename.substring(0, basename.indexOf("_wiki"));
 		String wikiName = getStandardLangName(ctx, cutted);
-		if (wikiName == null){
+		if (wikiName == null) {
 			wikiName = cutted;
 		}
 		String wikiWord = ctx.getString(R.string.amenity_type_osmwiki);
@@ -87,7 +92,18 @@ public class FileNameTranslationHelper {
 			//removing word in "()" from recourse file
 			return wikiName + " " + wikiWord.substring(0, index).trim();
 		}
-		return  wikiName + " " + ctx.getString(R.string.amenity_type_osmwiki);
+		return wikiName + " " + ctx.getString(R.string.amenity_type_osmwiki);
+	}
+
+	public static String getWikivoyageName(Context ctx, String basename) {
+		String formattedName = basename.substring(0, basename.indexOf(WIKIVOYAGE_NAME)).replaceAll("-", "").replaceAll("all", "");
+		String wikiVoyageName = getSuggestedWikivoyageMaps(ctx, formattedName);
+		if (wikiVoyageName == null) {
+			wikiVoyageName = formattedName;
+		}
+		String wikiVoyageWord = ctx.getString(R.string.shared_string_wikivoyage);
+
+		return ctx.getString(R.string.ltr_or_rtl_combine_via_space, wikiVoyageName, wikiVoyageWord);
 	}
 
 	public static String getVoiceName(Context ctx, String fileName) {
@@ -196,8 +212,8 @@ public class FileNameTranslationHelper {
 			return ctx.getString(R.string.lang_pl);
 		} else if (filename.equalsIgnoreCase("Portuguese")) {
 			return ctx.getString(R.string.lang_pt);
-		//} else if (filename.equalsIgnoreCase("Portuguese")) {
-		//	return ctx.getString(R.string.lang_pt_br);
+			//} else if (filename.equalsIgnoreCase("Portuguese")) {
+			//	return ctx.getString(R.string.lang_pt_br);
 		} else if (filename.equalsIgnoreCase("Romanian")) {
 			return ctx.getString(R.string.lang_ro);
 		} else if (filename.equalsIgnoreCase("Russian")) {
@@ -227,11 +243,11 @@ public class FileNameTranslationHelper {
 			return ctx.getString(R.string.index_item_world_altitude_correction);
 		} else if (basename.equals("world_basemap")) {
 			return ctx.getString(R.string.index_item_world_basemap);
-		} else if (basename.equals("world_basemap_detailed")){
+		} else if (basename.equals("world_basemap_detailed")) {
 			return ctx.getString(R.string.index_item_world_basemap_detailed);
 		} else if (basename.equals("world_bitcoin_payments")) {
 			return ctx.getString(R.string.index_item_world_bitcoin_payments);
-		} else if (basename.equals(DownloadResources.WORLD_SEAMARKS_KEY) || 
+		} else if (basename.equals(DownloadResources.WORLD_SEAMARKS_KEY) ||
 				basename.equals(DownloadResources.WORLD_SEAMARKS_OLD_KEY)) {
 			return ctx.getString(R.string.index_item_world_seamarks);
 		} else if (basename.equals("world_wikivoyage")) {
@@ -242,6 +258,29 @@ public class FileNameTranslationHelper {
 			return ctx.getString(R.string.index_item_depth_points_southern_hemisphere);
 		} else if (basename.equals("depth_points_northern_hemisphere_osmand_ext")) {
 			return ctx.getString(R.string.index_item_depth_points_northern_hemisphere);
+		}
+		return null;
+	}
+
+	private static String getSuggestedWikivoyageMaps(Context ctx, String filename) {
+		if (WorldRegion.AFRICA_REGION_ID.equalsIgnoreCase(filename)) {
+			return ctx.getString(R.string.index_name_africa);
+		} else if (WorldRegion.AUSTRALIA_AND_OCEANIA_REGION_ID.replaceAll("-", "").equalsIgnoreCase(filename)) {
+			return ctx.getString(R.string.index_name_oceania);
+		} else if (WorldRegion.ASIA_REGION_ID.equalsIgnoreCase(filename)) {
+			return ctx.getString(R.string.index_name_asia);
+		} else if (WorldRegion.CENTRAL_AMERICA_REGION_ID.equalsIgnoreCase(filename)) {
+			return ctx.getString(R.string.index_name_central_america);
+		} else if (WorldRegion.EUROPE_REGION_ID.equalsIgnoreCase(filename)) {
+			return ctx.getString(R.string.index_name_europe);
+		} else if (WorldRegion.RUSSIA_REGION_ID.equalsIgnoreCase(filename)) {
+			return ctx.getString(R.string.index_name_russia);
+		} else if (WorldRegion.NORTH_AMERICA_REGION_ID.equalsIgnoreCase(filename)) {
+			return ctx.getString(R.string.index_name_north_america);
+		} else if (WorldRegion.SOUTH_AMERICA_REGION_ID.equalsIgnoreCase(filename)) {
+			return ctx.getString(R.string.index_name_south_america);
+		} else if (WorldRegion.ANTARCTICA_REGION_ID.equalsIgnoreCase(filename)) {
+			return ctx.getString(R.string.index_name_antarctica);
 		}
 		return null;
 	}

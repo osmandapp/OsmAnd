@@ -88,9 +88,10 @@ import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.backup.ProfileSettingsItem;
+import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
-import net.osmand.plus.settings.backend.backup.SettingsItem;
+import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.AidlMapLayer;
@@ -1819,9 +1820,13 @@ public class OsmandAidlApi {
 		long arrivalTime = 0;
 		int leftDistance = 0;
 		Bundle turnInfo = null;
+		ALatLon destinationLocation = null;
 
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		if (routingHelper.isRouteCalculated()) {
+			LatLon finalLocation = routingHelper.getFinalLocation();
+			destinationLocation = new ALatLon(finalLocation.getLatitude(), finalLocation.getLongitude());
+
 			leftTime = routingHelper.getLeftTime();
 			arrivalTime = leftTime + System.currentTimeMillis() / 1000;
 			leftDistance = routingHelper.getLeftDistance();
@@ -1840,7 +1845,9 @@ public class OsmandAidlApi {
 				updateTurnInfo("no_speak_next_", turnInfo, directionInfo);
 			}
 		}
-		return new AppInfoParams(lastKnownLocation, mapLocation, turnInfo, leftTime, leftDistance, arrivalTime, mapVisible);
+		AppInfoParams params = new AppInfoParams(lastKnownLocation, mapLocation, turnInfo, leftTime, leftDistance, arrivalTime, mapVisible);
+		params.setDestinationLocation(destinationLocation);
+		return params;
 	}
 
 	private void updateTurnInfo(String prefix, Bundle bundle, NextDirectionInfo ni) {
@@ -1866,9 +1873,14 @@ public class OsmandAidlApi {
 			return false;
 		}
 		if (app.isApplicationInitializing()) {
-			app.getAppInitializer().addListener(new AppInitializer.AppInitializeListener() {
+			app.getAppInitializer().addListener(new AppInitializeListener() {
 				@Override
-				public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
+				public void onStart(AppInitializer init) {
+
+				}
+
+				@Override
+				public void onProgress(AppInitializer init, InitEvents event) {
 				}
 
 				@Override
@@ -1885,6 +1897,11 @@ public class OsmandAidlApi {
 	boolean registerForOsmandInitialization(final OsmandAppInitCallback callback) {
 		if (app.isApplicationInitializing()) {
 			app.getAppInitializer().addListener(new AppInitializeListener() {
+				@Override
+				public void onStart(AppInitializer init) {
+
+				}
+
 				@Override
 				public void onProgress(AppInitializer init, InitEvents event) {
 				}
@@ -2255,9 +2272,14 @@ public class OsmandAidlApi {
 		};
 
 		if (app.isApplicationInitializing()) {
-			app.getAppInitializer().addListener(new AppInitializer.AppInitializeListener() {
+			app.getAppInitializer().addListener(new AppInitializeListener() {
 				@Override
-				public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
+				public void onStart(AppInitializer init) {
+
+				}
+
+				@Override
+				public void onProgress(AppInitializer init, InitEvents event) {
 				}
 
 				@Override
@@ -2377,8 +2399,8 @@ public class OsmandAidlApi {
 			settingsItems.add(new ProfileSettingsItem(app, appMode));
 			File exportDir = app.getSettings().getExternalStorageDirectory();
 			String fileName = appMode.toHumanString();
-			SettingsHelper settingsHelper = app.getSettingsHelper();
-			settingsItems.addAll(settingsHelper.getFilteredSettingsItems(settingsTypes, false, true));
+			FileSettingsHelper settingsHelper = app.getFileSettingsHelper();
+			settingsItems.addAll(settingsHelper.getFilteredSettingsItems(settingsTypes, false, true, false));
 			settingsHelper.exportSettings(exportDir, fileName, null, settingsItems, true);
 			return true;
 		}

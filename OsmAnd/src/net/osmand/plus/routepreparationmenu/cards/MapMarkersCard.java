@@ -23,7 +23,7 @@ import net.osmand.plus.views.DirectionDrawable;
 
 import java.util.List;
 
-public class MapMarkersCard extends BaseCard {
+public class MapMarkersCard extends MapBaseCard {
 	private List<MapMarker> markers;
 	private boolean showLimited = true;
 	private LatLon loc;

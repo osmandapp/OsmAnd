@@ -94,7 +94,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:background="@null"
-                        android:text="Split interval:"
+                        tools:text="Split interval:"
                         android:textColor="?android:attr/textColorPrimary"
                         android:textSize="@dimen/default_desc_text_size"
                         osmand:typeface="@string/font_roboto_medium" />

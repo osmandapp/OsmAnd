@@ -13,7 +13,8 @@ public class BooleanPreference extends CommonPreference<Boolean> {
 
 	@Override
 	protected boolean setValue(Object prefs, Boolean val) {
-		return getSettingsAPI().edit(prefs).putBoolean(getId(), val).commit();
+		return super.setValue(prefs, val)
+				&& getSettingsAPI().edit(prefs).putBoolean(getId(), val).commit();
 	}
 
 	@Override

@@ -445,6 +445,9 @@ public class ContextMenuAdapter {
 				ImageView imageView = (ImageView) convertView.findViewById(R.id.secondary_icon);
 				imageView.setImageDrawable(drawable);
 				imageView.setVisibility(View.VISIBLE);
+				if (secondaryDrawable == R.drawable.ic_action_additional_option) {
+					UiUtilities.rotateImageByLayoutDirection(imageView);
+				}
 			} else {
 				ImageView imageView = (ImageView) convertView.findViewById(R.id.secondary_icon);
 				if (imageView != null) {

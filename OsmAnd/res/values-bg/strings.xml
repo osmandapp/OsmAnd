@@ -135,7 +135,7 @@
 \n
 \nГлобалната карта (между 70° северна ширина и 70° южна ширина) се базира на измервания от SRTM (Shuttle Radar Topography Mission) и ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), устройство за изображения на борда на Terra, най-добрият спътник на програмата на NASA Earth Observing System. ASTER е съвместен проект на NASA, Японското правителство и японската компания Japan Space Systems (J-spacesystems).</string>
     <string name="map_widget_distancemeasurement">Измерване на дистанции</string>
-    <string name="audionotes_location_not_defined">Няма определена позиция за тази бележка. Използвайте контекстното меню за да изберете място и да направите бележка</string>
+    <string name="audionotes_location_not_defined">Докоснете \"Използване на мястото...\" за да добавите бележка там.</string>
     <string name="map_widget_audionotes">Аудио бележки</string>
     <string name="audionotes_plugin_description">С добавката можете да правите бележки (гласови, снимка или видео) по време на пътуване, ползвайки специалния бутон или контекстното меню.</string>
     <string name="audionotes_plugin_name">Аудио/видео бележки</string>
@@ -211,7 +211,30 @@
     <string name="snap_to_road">Придържай мястото към пътя</string>
     <string name="osmand_play_title_30_chars">OsmAnd за карти и навигация</string>
     <string name="osmand_short_description_80_chars">Мобилни карти и навигация от OSM</string>
-    <string name="osmand_long_description_1000_chars">" OsmAnd (OSM Automated Navigation Directions) OsmAnd е отворено приложение за навигация с достъп до широк спектър от данни на OpenStreetMap (OSM). Всички данни (векторни или графични карти) могат да бъдат съхранявани в картата памет на телефона за офлайн използване. OsmAnd предлага офлайн и онлайн маршрутизация, включително гласова навигация завой-по-завой. Някои от основните функции: - Пълна офлайн функционалност (съхранение на свалените карти в устройството) - Компактни офлайн векторни карти за целия свят на разположение - Сваляне на карти за държава или регион директно от приложението - Наслагване на няколко слоя карти са възможни, като GPX файлове, POI, контурни линии, спирки на общ. транспорт, допълнителни карти с адаптивна прозрачност - Офлайн търсене на адреси и места (POI) - Офлайн маршрутизация за кратки разстояния (експериментален) - Режими: Автомобил, велосипед или пешеходец със съответните опции: - възможност за дневен/нощен изглед - мащабиране в зависимост от скоростта - ориентация на картата според компаса или по посоката на движение - допълнително ориентиране по ленти, предупреждения за ограничения на скоростта, записани и синтезирани гласове Ограничения на тази безплатна версия на OsmAnd: - Ограничен брой сваляния на карти - Няма достъп до Уикипедия POI в офлайн режим OsmAnd активно се разработва и нашия проект и неговия по-нататъшен напредък разчита на финансовите вноски за развитието и тестването на нови функционалности. Моля, помислете за закупуване на OsmAnd+, или финансиране на специфични нови функции или провеждане на общо дарение на osmand.net. "</string>
+    <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions)
+\nOsmAnd е отворено приложение за навигация с достъп до широк спектър от данни на OpenStreetMap (OSM). 
+\nВсички данни (векторни или графични карти) могат да бъдат съхранявани в паметта на телефона/устройството за ползване без Интернет връзка (офлайн).
+\nOsmAnd предлага офлайн и онлайн маршрутизация, включително гласова навигация в реално време.
+\n
+\nНякои от основните функции: 
+\n- Пълна офлайн функционалност (съхранение на свалените карти в устройството);
+\n- Компактни офлайн векторни карти за целия свят на разположение;
+\n- Сваляне на карти за държава или регион директно от приложението;
+\n- Наслагване на няколко слоя карти са възможни, като GPX файлове, POI, контурни линии, спирки на общ. транспорт, допълнителни карти с адаптивна прозрачност;
+\n- Офлайн търсене на адреси и места (POI);
+\n- Офлайн маршрутизация за кратки разстояния;
+\n- Режими: Автомобил, велосипед или пешеходец със съответните опции: 
+\n- възможност за дневен/нощен изглед;
+\n- мащабиране в зависимост от скоростта;
+\n- ориентация на картата според компаса или по посоката на движение;
+\n- допълнително ориентиране по ленти, предупреждения за ограничения на скоростта, записани и синтезирани гласове.
+\n
+\nОграничения на тази безплатна версия на OsmAnd:
+\n- Ограничен брой сваляния на карти;
+\n- Няма достъп до Уикипедия POI в офлайн режим.
+\n
+\nOsmAnd активно се разработва и нашия проект и неговия по-нататъшен напредък разчита на финансовите вноски за развитието и тестването на нови функционалности.
+\nМоля, помислете за закупуване на OsmAnd+, или финансиране на специфични нови функции или провеждане на общо дарение на osmand.net.</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ Карти и Навигация</string>
     <string name="osmand_plus_short_description_80_chars">Мобилно приложение за разглеждане на карти и навигация ползващо данни от OSM</string>
     <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions) 
@@ -938,8 +961,8 @@
     <string name="navigate_point_latitude">Геогр. ширина</string>
     <string name="navigate_point_longitude">Геогр. дължина</string>
     <string name="navigate_point_format_D">ГГГ.ГГ</string>
-    <string name="navigate_point_format_DM">ГГГ ММ.ММ</string>
-    <string name="navigate_point_format_DMS">ГГГ ММ СС.СС</string>
+    <string name="navigate_point_format_DM">ГГГ ММ.МММ</string>
+    <string name="navigate_point_format_DMS">ГГГ ММ СС.С</string>
     <string name="shared_string_show_on_map">Покажи на картата</string>
     <string name="search_address_top_text">Изберете адрес</string>
     <string name="search_address_region">Област/регион</string>
@@ -1386,7 +1409,7 @@
     <string name="gpx_timespan">Интервал: %1$s</string>
     <string name="gpx_timemoving">Време в движение: %1$s</string>
     <string name="gpx_selection_segment_title">Сегмент</string>
-    <string name="gpx_selection_number_of_points">" %1$s точки"</string>
+    <string name="gpx_selection_number_of_points">%1$s точки</string>
     <string name="gpx_selection_point">Точка %1$s</string>
     <string name="gpx_selection_route_points">%1$s
 \nТочки %2$s</string>
@@ -1728,8 +1751,9 @@
     <string name="poi_dialog_reopen">Повторно отваряне</string>
     <string name="poi_action_delete">изтриване</string>
     <string name="favourites_context_menu_add">Добавяне на любим</string>
-    <string name="plugin_ski_descr">"Тази добавка за OsmAnd показва ски писти, алпийски маршрути, кабинкови лифтове и ски лифтове. Маршрутите и пистите са оцветени съобразно тяхната трудност. Можете да ползвате специален картен стил \"Зима\", който оцветява пейзажа в съответните цветове.
-\n\nТози стил може да бъде деактивиран го отново от тук, или чрез промяна на \"Стил на картата\" в \"Настройки на картата\". "</string>
+    <string name="plugin_ski_descr">Тази добавка за OsmAnd показва ски писти, алпийски маршрути, кабинкови лифтове и ски лифтове. Маршрутите и пистите са оцветени съобразно тяхната трудност. Можете да ползвате специален картен стил \"Зима\", който оцветява пейзажа в съответните цветове.
+\n
+\nТози стил може да бъде деактивиран от това меню или чрез промяна в \"Стил на картата\" от менюто \"Настройки на картата\".</string>
     <string name="copying_osmand_one_file_descr">Копиране на файл (%s) на новата дестинация…</string>
     <string name="copying_osmand_files_descr">Копиране на файлове с данни на OsmAnd към ново местоназначение (%s)…</string>
     <string name="calculate_osmand_route_gpx">Изчисляване OsmAnd офлайн маршрут</string>
@@ -2198,7 +2222,6 @@
 \nГрафиката ще бъде достъпна след преизчисляване.</string>
     <string name="shared_string_local_maps">Местни карти</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
-    <string name="app_mode_gap">Пропуск</string>
     <string name="icon_group_amenity">Удобства</string>
     <string name="icon_group_special">Специални</string>
     <string name="icon_group_transport">Транспорт</string>
@@ -2274,4 +2297,34 @@
     <string name="activity_type_offroad_name">Офроуд</string>
     <string name="activity_type_motorbike_name">Мотор</string>
     <string name="activity_type_car_name">Автомобил</string>
+    <string name="no_waypoints_found">Не са намерени точки на маршрута</string>
+    <string name="shared_string_save_as_gpx">Записване като нов файл за проследяване</string>
+    <string name="save_track_to_gpx_globally">Записване на следата в GPX файл</string>
+    <string name="routing_attr_short_way_description">Оптимизиран по-кратък маршрут (спестяване на енергия)</string>
+    <string name="context_menu_item_add_waypoint">Добавяне на точка от маршрута</string>
+    <string name="map_widget_monitoring">Запис на пътуването</string>
+    <string name="poi_routes">Маршрути</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">Избягвайте зоните с ниски емисии</string>
+    <string name="routing_attr_avoid_low_emission_zone_name">Избягване на зони с ниски емисии</string>
+    <string name="search_more">Търсене на още…</string>
+    <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
+    <string name="backup_and_restore">Архивиране и възстановяване</string>
+    <string name="last_backup">Последно архивиране</string>
+    <string name="duration_ago">Преди %1$s</string>
+    <string name="osmand_cloud">OsmAnd Cloud</string>
+    <string name="osmand_cloud_authorize_descr">Никога не губете данните си, архивирайте и възстановявайте цялата информация без проблем.</string>
+    <string name="local_backup">Локално архивиране</string>
+    <string name="local_backup_descr">Създаване на резервно копие или възстановяване на данни от локален файл.</string>
+    <string name="backup_into_file">Архивиране във файл</string>
+    <string name="restore_from_file">Възстановяване от файл</string>
+    <string name="osmand_cloud_help_descr">Имате нужда от помощ\? Моля, свържете се с нас на %1$s</string>
+    <string name="osmand_cloud_create_account_descr">Моля, въведете имейл адреса си, всички ваши данни ще бъдат свързани с него.
+\nЩе ви изпратим код за проверка на този имейл адрес.</string>
+    <string name="osmand_cloud_login_descr">Моля, въведете имейл адреса, който сте използвали при регистрацията. На следващата стъпка ще ви изпратим необходимата еднократна парола.</string>
+    <string name="verify_email_address">Проверка на имейл адреса</string>
+    <string name="verify_email_address_descr">Изпратихме код за проверка на %1$s, моля, въведете го в полето по-долу.</string>
+    <string name="enter_verification_code">Въведете 4-цифрен код</string>
+    <string name="cloud_email_not_registered">Този имейл не е регистриран в OsmAnd Cloud</string>
+    <string name="cloud_email_already_registered">Профилът с този имейл вече е регистриран.</string>
+    <string name="resend_verification_code">Изпращане на кода отново</string>
 </resources>

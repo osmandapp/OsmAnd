@@ -22,13 +22,12 @@ public class RouteCalculationParams {
 	public boolean onlyStartPointChanged;
 	public boolean fast;
 	public boolean leftSide;
-	public boolean inSnapToRoadMode;
-	public boolean inPublicTransportMode;
 	public boolean startTransportStop;
 	public boolean targetTransportStop;
+	public boolean inPublicTransportMode;
 	public RouteCalculationProgress calculationProgress;
 	public RouteCalculationProgressCallback calculationProgressCallback;
-	public RouteCalculationResultListener resultListener;
+	public RouteCalculationResultListener alternateResultListener;
 
 	public interface RouteCalculationResultListener {
 		void onRouteCalculated(RouteCalculationResult route);

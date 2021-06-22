@@ -313,7 +313,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 
 	public List<Amenity> searchAmenities(double top, double left, double bottom, double right, int zoom,
 										 ResultMatcher<Amenity> matcher) {
-		List<Amenity> results = new ArrayList<Amenity>();
+		List<Amenity> results = new ArrayList<>();
 		List<Amenity> tempResults = currentSearchResult;
 		if (tempResults != null) {
 			for (Amenity a : tempResults) {

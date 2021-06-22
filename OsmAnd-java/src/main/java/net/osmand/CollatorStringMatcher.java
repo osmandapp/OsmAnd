@@ -129,19 +129,22 @@ public class CollatorStringMatcher implements StringMatcher {
 	 * Special check try to find as well in the middle of name
 	 * 
 	 * @param collator
-	 * @param fullText
+	 * @param fullTextP
 	 * @param theStart
 	 * @return true if searchIn starts with token
 	 */
 	public static boolean cstartsWith(Collator collator, String fullTextP, String theStart, 
 			boolean checkBeginning, boolean checkSpaces, boolean equals) {
+		// FUTURE: This is not effective code, it runs on each comparision
+		// It would be more efficient to normalize all strings in file and normalize search string before collator  
+		theStart = alignChars(theStart);
 		String searchIn = simplifyStringAndAlignChars(fullTextP);
 		int searchInLength = searchIn.length();
 		int startLength = theStart.length();
 		if (startLength == 0) {
 			return true;
 		}
-		// this is not correct because of Auhofstrasse != Auhofstraße
+		// this is not correct without (simplifyStringAndAlignChars) because of Auhofstrasse != Auhofstraße
 		if (startLength > searchInLength) {
 			return false;
 		}
@@ -181,9 +184,14 @@ public class CollatorStringMatcher implements StringMatcher {
 	}
 	
 	private static String simplifyStringAndAlignChars(String fullText) {
-		int i;
 		fullText = fullText.toLowerCase(Locale.getDefault());
-		while( (i = fullText.indexOf('ß') ) != -1 ) {
+		fullText = alignChars(fullText);
+		return fullText;
+	}
+
+	private static String alignChars(String fullText) {
+		int i;
+		while ((i = fullText.indexOf('ß')) != -1) {
 			fullText = fullText.substring(0, i) + "ss" + fullText.substring(i+1);
 		}
 		return fullText;

@@ -131,6 +131,7 @@ class RouteRecalculationHelper {
 	}
 
 	private void setNewRoute(RouteCalculationResult prevRoute, final RouteCalculationResult res, Location start) {
+		routingHelper.setRoute(res);
 		final boolean newRoute = !prevRoute.isCalculated();
 		if (isFollowingMode()) {
 			Location lastFixedLocation = getLastFixedLocation();
@@ -168,7 +169,8 @@ class RouteRecalculationHelper {
 	void startRouteCalculationThread(RouteCalculationParams params, boolean paramsChanged, boolean updateProgress) {
 		synchronized (routingHelper) {
 			getSettings().LAST_ROUTE_APPLICATION_MODE.set(getAppMode());
-			RouteRecalculationTask newTask = new RouteRecalculationTask(this, params, paramsChanged);
+			RouteRecalculationTask newTask = new RouteRecalculationTask(this,
+					params, paramsChanged, updateProgress);
 			lastTask = newTask;
 			startProgress(params);
 			if (updateProgress) {
@@ -211,19 +213,6 @@ class RouteRecalculationHelper {
 			if (params.mode.getRouteService() == RouteService.OSMAND) {
 				params.calculationProgress = new RouteCalculationProgress();
 				updateProgress = true;
-			} else {
-				params.resultListener = new RouteCalculationParams.RouteCalculationResultListener() {
-					@Override
-					public void onRouteCalculated(RouteCalculationResult route) {
-						app.runInUIThread(new Runnable() {
-
-							@Override
-							public void run() {
-								finishProgress(params);
-							}
-						});
-					}
-				};
 			}
 			if (getLastProjection() != null) {
 				params.currentLocation = getLastFixedLocation();
@@ -284,23 +273,26 @@ class RouteRecalculationHelper {
 		}
 	}
 
-	private static class RouteRecalculationTask implements Runnable {
+	private static class RouteRecalculationTask implements Runnable  {
 
 		private final RouteRecalculationHelper routingThreadHelper;
 		private final RoutingHelper routingHelper;
 		private final RouteCalculationParams params;
 		private final boolean paramsChanged;
+		private final boolean updateProgress;
 
 		String routeCalcError;
 		String routeCalcErrorShort;
 		int evalWaitInterval = 0;
 
 		public RouteRecalculationTask(@NonNull RouteRecalculationHelper routingThreadHelper,
-									  @NonNull RouteCalculationParams params, boolean paramsChanged) {
+									  @NonNull RouteCalculationParams params, boolean paramsChanged,
+									  boolean updateProgress) {
 			this.routingThreadHelper = routingThreadHelper;
 			this.routingHelper = routingThreadHelper.routingHelper;
 			this.params = params;
 			this.paramsChanged = paramsChanged;
+			this.updateProgress = updateProgress;
 			if (params.calculationProgress == null) {
 				params.calculationProgress = new RouteCalculationProgress();
 			}
@@ -344,39 +336,39 @@ class RouteRecalculationHelper {
 				}
 			}
 			RouteCalculationResult prev = routingHelper.getRoute();
-			synchronized (routingHelper) {
-				if (res.isCalculated()) {
-					if (!params.inSnapToRoadMode && !params.inPublicTransportMode) {
-						routingHelper.setRoute(res);
-						routingHelper.updateOriginalRoute();
-					}
-					if (params.resultListener != null) {
-						params.resultListener.onRouteCalculated(res);
-					}
-				} else {
-					evalWaitInterval = Math.max(3000, routingThreadHelper.evalWaitInterval * 3 / 2); // for Issue #3899
-					evalWaitInterval = Math.min(evalWaitInterval, 120000);
-				}
-			}
 			OsmandApplication app = routingHelper.getApplication();
 			if (res.isCalculated()) {
-				if (!params.inSnapToRoadMode && !params.inPublicTransportMode) {
+				if (params.alternateResultListener != null) {
+					params.alternateResultListener.onRouteCalculated(res);
+				} else {
 					routingThreadHelper.setNewRoute(prev, res, params.start);
 				}
-			} else if (onlineSourceWithoutInternet) {
-				routeCalcError = app.getString(R.string.error_calculating_route)
-						+ ":\n" + app.getString(R.string.internet_connection_required_for_online_route);
-				routeCalcErrorShort = app.getString(R.string.error_calculating_route);
-				showMessage(routeCalcError);
 			} else {
-				if (res.getErrorMessage() != null) {
-					routeCalcError = app.getString(R.string.error_calculating_route) + ":\n" + res.getErrorMessage();
+				evalWaitInterval = Math.max(3000, routingThreadHelper.evalWaitInterval * 3 / 2); // for Issue #3899
+				evalWaitInterval = Math.min(evalWaitInterval, 120000);
+				if (onlineSourceWithoutInternet) {
+					routeCalcError = app.getString(R.string.error_calculating_route)
+							+ ":\n" + app.getString(R.string.internet_connection_required_for_online_route);
 					routeCalcErrorShort = app.getString(R.string.error_calculating_route);
+					showMessage(routeCalcError);
 				} else {
-					routeCalcError = app.getString(R.string.empty_route_calculated);
-					routeCalcErrorShort = app.getString(R.string.empty_route_calculated);
+					if (res.getErrorMessage() != null) {
+						routeCalcError = app.getString(R.string.error_calculating_route) + ":\n" + res.getErrorMessage();
+						routeCalcErrorShort = app.getString(R.string.error_calculating_route);
+					} else {
+						routeCalcError = app.getString(R.string.empty_route_calculated);
+						routeCalcErrorShort = app.getString(R.string.empty_route_calculated);
+					}
+					showMessage(routeCalcError);
 				}
-				showMessage(routeCalcError);
+			}
+			if (!updateProgress) {
+				routingHelper.getApplication().runInUIThread(new Runnable() {
+					@Override
+					public void run() {
+						routingThreadHelper.finishProgress(params);
+					}
+				});
 			}
 			app.getNotificationHelper().refreshNotification(NAVIGATION);
 		}

@@ -32,6 +32,10 @@ public class BaseBottomSheetItem {
 		return tag;
 	}
 
+	public void setTag(Object tag) {
+		this.tag = tag;
+	}
+
 	public BaseBottomSheetItem(View view,
 							   @LayoutRes int layoutId,
 							   Object tag,

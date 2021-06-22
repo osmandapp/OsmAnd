@@ -2,8 +2,8 @@ package net.osmand.util;
 
 import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
-import net.osmand.router.RouteColorize;
 import net.osmand.data.LatLon;
+import net.osmand.router.RouteColorize;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
@@ -57,6 +57,7 @@ public class Algorithms {
 	public static final int SQLITE_FILE_SIGNATURE = 0x53514C69;
 	public static final int BZIP_FILE_SIGNATURE = 0x425a;
 	public static final int GZIP_FILE_SIGNATURE = 0x1f8b;
+
 
 	public static String normalizeSearchText(String s) {
 		boolean norm = false;
@@ -186,7 +187,10 @@ public class Algorithms {
 	}
 
 	public static String getFileExtension(File f) {
-		String name = f.getName();
+		return getFileNameExtension(f.getName());
+	}
+
+	public static String getFileNameExtension(String name) {
 		int i = name.lastIndexOf(".");
 		return name.substring(i + 1);
 	}
@@ -298,30 +302,40 @@ public class Algorithms {
 	}
 
 	public static Set<String> decodeStringSet(String s) {
-		if (isEmpty(s)) {
-			return Collections.emptySet();
-		}
-		return new HashSet<>(Arrays.asList(s.split(CHAR_TOSPLIT + "")));
+		return decodeStringSet(s, String.valueOf(CHAR_TOSPLIT));
 	}
 
 	public static String encodeStringSet(Set<String> set) {
+		return encodeStringSet(set, String.valueOf(CHAR_TOSPLIT));
+	}
+
+	public static Set<String> decodeStringSet(String s, String split) {
+		if (isEmpty(s)) {
+			return Collections.emptySet();
+		}
+		return new HashSet<>(Arrays.asList(s.split(split)));
+	}
+
+	public static String encodeStringSet(Set<String> set, String split) {
 		if (set != null) {
 			StringBuilder sb = new StringBuilder();
 			for (String s : set) {
-				sb.append(s).append(CHAR_TOSPLIT);
+				sb.append(s).append(split);
 			}
 			return sb.toString();
 		}
 		return "";
 	}
 
-	public static int findFirstNumberEndIndex(String value) {
+	public static int findFirstNumberEndIndexLegacy(String value) {
+		// keep this method unmodified ! (to check old clients crashes on server side)
 		int i = 0;
 		boolean valid = false;
 		if (value.length() > 0 && value.charAt(0) == '-') {
 			i++;
 		}
-		while (i < value.length() && (isDigit(value.charAt(i)) || value.charAt(i) == '.')) {
+		while (i < value.length() &&
+				(isDigit(value.charAt(i)) || value.charAt(i) == '.')) {
 			i++;
 			valid = true;
 		}
@@ -330,6 +344,43 @@ public class Algorithms {
 		} else {
 			return -1;
 		}
+	}
+
+	public static int findFirstNumberEndIndex(String value) {
+		int i = 0;
+		if (value.length() > 0 && value.charAt(0) == '-') {
+			i++;
+		}
+		int state = 0; // 0 - no number, 1 - 1st digits, 2 - dot, 3 - last digits
+		while (i < value.length() && (isDigit(value.charAt(i)) || (value.charAt(i) == '.'))) {
+			if (value.charAt(i) == '.') {
+				if (state == 2) {
+					return i - 1;
+				}
+				if (state != 1) {
+					return -1;
+				}
+				state = 2;
+			} else {
+				if (state == 2) {
+					// last digits 
+					state = 3;
+				} else if (state == 0) {
+					// first digits started
+					state = 1;
+				}
+
+			}
+			i++;
+		}
+		if (state == 2) {
+			// invalid number like 40. correct to -> '40'
+			return i - 1;
+		}
+		if (state == 0) {
+			return -1;
+		}
+		return i;
 	}
 
 	public static boolean isDigit(char charAt) {

@@ -104,7 +104,7 @@ class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer, ICont
 	}
 
 	@Override
-	public void drawTileMap(Canvas canvas, RotatedTileBox tileBox) {
+	public void drawTileMap(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
 		ITileSource map = this.map;
 		if (map == null) {
 			return;
@@ -129,7 +129,8 @@ class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer, ICont
 		int dzoom = nzoom - TILE_ZOOM;
 		int div = (int) Math.pow(2.0, dzoom);
 
-		boolean useInternet = (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) != null || OsmandPlugin.getEnabledPlugin(MapillaryPlugin.class) != null)
+		boolean useInternet = (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) != null
+				|| OsmandPlugin.getEnabledPlugin(MapillaryPlugin.class) != null)
 				&& settings.isInternetConnectionAvailable() && map.couldBeDownloadedFromInternet();
 
 		Map<String, GeometryTile> tiles = new HashMap<>();
@@ -145,7 +146,8 @@ class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer, ICont
 					// asking tile image async
 					boolean imgExist = mgr.tileExistOnFileSystem(tileId, map, tileX, tileY, TILE_ZOOM);
 					if (imgExist || useInternet) {
-						tile = mgr.getGeometryTilesCache().getTileForMapAsync(tileId, map, tileX, tileY, TILE_ZOOM, useInternet);
+						tile = mgr.getGeometryTilesCache().getTileForMapAsync(tileId, map, tileX, tileY,
+								TILE_ZOOM, useInternet, drawSettings.mapRefreshTimestamp);
 					}
 					if (tile != null) {
 						tiles.put(tileId, tile);

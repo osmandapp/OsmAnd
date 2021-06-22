@@ -184,7 +184,8 @@ public class AnalyticsHelper extends SQLiteOpenHelper {
 
 					String jsonStr = json.toString();
 					InputStream inputStream = new ByteArrayInputStream(jsonStr.getBytes());
-					String res = AndroidNetworkUtils.uploadFile(ANALYTICS_UPLOAD_URL, inputStream, ANALYTICS_FILE_NAME, true, additionalData, null);
+					String res = AndroidNetworkUtils.uploadFile(ANALYTICS_UPLOAD_URL, inputStream,
+							ANALYTICS_FILE_NAME, true, additionalData, null, null);
 					if (res != null) {
 						return;
 					}

@@ -1,6 +1,24 @@
 package net.osmand.search.core;
 
 
+import java.io.IOException;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.TreeSet;
+
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.ResultMatcher;
@@ -32,27 +50,10 @@ import net.osmand.util.LocationParser;
 import net.osmand.util.LocationParser.ParsedOpenLocationCode;
 import net.osmand.util.MapUtils;
 
-import java.io.IOException;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.TreeSet;
-
 
 public class SearchCoreFactory {
 
+	public static boolean DISPLAY_DEFAULT_POI_TYPES = false;
 	public static final int MAX_DEFAULT_SEARCH_RADIUS = 7;
 	public static final int SEARCH_MAX_PRIORITY = Integer.MAX_VALUE;
 
@@ -162,7 +163,7 @@ public class SearchCoreFactory {
 				cityResult.object = ct;
 				cityResult.objectType = ObjectType.CITY;
 				cityResult.localeName = ct.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
-				cityResult.otherNames = ct.getAllNames(true);
+				cityResult.otherNames = ct.getOtherNames(true);
 				cityResult.location = ct.getLocation();
 				cityResult.localeRelatedObjectName = res.file.getRegionName();
 				cityResult.file = res.file;
@@ -363,7 +364,7 @@ public class SearchCoreFactory {
 					res.object = c;
 					res.file = (BinaryMapIndexReader) c.getReferenceFile();
 					res.localeName = c.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
-					res.otherNames = c.getAllNames(true);
+					res.otherNames = c.getOtherNames(true);
 					res.localeRelatedObjectName = res.file.getRegionName();
 					res.relatedObject = res.file;
 					res.location = c.getLocation();
@@ -408,7 +409,7 @@ public class SearchCoreFactory {
 						sr.object = object;
 						sr.file = currentFile[0];
 						sr.localeName = object.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
-						sr.otherNames = object.getAllNames(true);
+						sr.otherNames = object.getOtherNames(true);
 						sr.localeRelatedObjectName = sr.file.getRegionName();
 						sr.relatedObject = sr.file;
 						sr.location = object.getLocation();
@@ -418,8 +419,9 @@ public class SearchCoreFactory {
 						int x = MapUtils.get31TileNumberX(object.getLocation().getLongitude());
 						List<City> closestCities = null;
 						if (object instanceof Street) {
-							if ((locSpecified && !streetBbox.contains(x, y, x, y))
-									|| !phrase.isSearchTypeAllowed(ObjectType.STREET)) {
+							// remove limitation by location
+							if (  //(locSpecified && !streetBbox.contains(x, y, x, y)) || 
+								!phrase.isSearchTypeAllowed(ObjectType.STREET)) {
 								return false;
 							}
 							if (object.getName().startsWith("<")) {
@@ -598,7 +600,7 @@ public class SearchCoreFactory {
 								return false;
 							}
 							SearchResult sr = new SearchResult(phrase);
-							sr.otherNames = object.getAllNames(true);
+							sr.otherNames = object.getOtherNames(true);
 							sr.localeName = object.getName(phrase.getSettings().getLang(),
 									phrase.getSettings().isTransliterate());
 							if (!nm.matches(sr.localeName) && !nm.matches(sr.otherNames)
@@ -816,6 +818,47 @@ public class SearchCoreFactory {
 				topVisibleFilters = types.getTopVisibleFilters();
 				topVisibleFilters.remove(types.getOsmwiki());
 				categories = types.getCategories(false);
+
+				if (DISPLAY_DEFAULT_POI_TYPES) {
+					List<String> order = new ArrayList<>();
+					for (AbstractPoiType p : topVisibleFilters) {
+						order.add(getStandardFilterId(p));
+					}
+					CustomSearchPoiFilter nearestPois = new CustomSearchPoiFilter() {
+
+						@Override
+						public boolean isEmpty() {
+							return false;
+						}
+
+						@Override
+						public boolean accept(PoiCategory type, String subcategory) {
+							return true;
+						}
+
+						@Override
+						public ResultMatcher<Amenity> wrapResultMatcher(ResultMatcher<Amenity> matcher) {
+							return matcher;
+						}
+
+						@Override
+						public String getName() {
+							return "Neareset POIs";
+						}
+
+						@Override
+						public Object getIconResource() {
+							return null;
+						}
+
+						@Override
+						public String getFilterId() {
+							return "nearest_pois";
+						}
+					};
+					setActivePoiFiltersByOrder(order);
+					addCustomFilter(nearestPois, 100);
+				}
 			}
 		}
 
@@ -978,8 +1021,7 @@ public class SearchCoreFactory {
 				nameFilter = phrase.getUnknownSearchPhrase();
 			} else if (searchAmenityTypesAPI != null && phrase.isFirstUnknownSearchWordComplete()) {
 				NameStringMatcher nm = phrase.getFirstUnknownNameStringMatcher();
-				NameStringMatcher nmAdditional = new NameStringMatcher(phrase.getFirstUnknownSearchWord(),
-						StringMatcherMode.CHECK_EQUALS_FROM_SPACE) ;
+				NameStringMatcher nmAdditional = new NameStringMatcher(phrase.getFirstUnknownSearchWord(), StringMatcherMode.CHECK_EQUALS_FROM_SPACE);
 				searchAmenityTypesAPI.initPoiTypes();
 				Map<String, PoiTypeResult> poiTypeResults = searchAmenityTypesAPI.getPoiTypeResults(nm, nmAdditional);
 				// find first full match only
@@ -987,15 +1029,15 @@ public class SearchCoreFactory {
 					for (String foundName : poiTypeResult.foundWords) {
 						CollatorStringMatcher csm = new CollatorStringMatcher(foundName, StringMatcherMode.CHECK_ONLY_STARTS_WITH);
 						// matches only completely
-						int mwords = phrase.countWords(foundName) ;
+						int mwords = SearchPhrase.countWords(foundName);
 						if (csm.matches(phrase.getUnknownSearchPhrase()) && countExtraWords < mwords) {
-							countExtraWords = phrase.countWords(foundName);
+							countExtraWords = SearchPhrase.countWords(foundName);
 							List<String> otherSearchWords = phrase.getUnknownSearchWords();
 							nameFilter = null;
 							if (countExtraWords - 1 < otherSearchWords.size()) {
 								nameFilter = "";
-								for(int k = countExtraWords - 1; k < otherSearchWords.size(); k++) {
-									if(nameFilter.length() > 0) {
+								for (int k = countExtraWords - 1; k < otherSearchWords.size(); k++) {
+									if (nameFilter.length() > 0) {
 										nameFilter += SearchPhrase.DELIMITER;
 									}
 									nameFilter += otherSearchWords.get(k);
@@ -1003,6 +1045,12 @@ public class SearchCoreFactory {
 							}
 							poiTypeFilter = getPoiTypeFilter(poiTypeResult.pt, poiAdditionals);
 							unselectedPoiType = poiTypeResult.pt;
+							int wordsInPoiType = SearchPhrase.countWords(foundName);
+							int wordsInUnknownPart = SearchPhrase.countWords(phrase.getUnknownSearchPhrase());
+							if (wordsInPoiType == wordsInUnknownPart) {
+								// store only perfect match
+								phrase.setUnselectedPoiType(unselectedPoiType);
+							}
 						}
 					}
 				}
@@ -1070,7 +1118,7 @@ public class SearchCoreFactory {
 						}
 					}
 					res.localeName = object.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
-					res.otherNames = object.getAllNames(true);
+					res.otherNames = object.getOtherNames(true);
 					if (Algorithms.isEmpty(res.localeName)) {
 						AbstractPoiType st = types.getAnyPoiTypeByKey(object.getSubType());
 						if (st != null) {
@@ -1198,7 +1246,7 @@ public class SearchCoreFactory {
 					SearchResult res = new SearchResult(phrase);
 
 					res.localeName = object.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
-					res.otherNames = object.getAllNames(true);
+					res.otherNames = object.getOtherNames(true);
 					boolean pub = true;
 					if (object.getName().startsWith("<")) {
 						// streets related to city
@@ -1324,7 +1372,7 @@ public class SearchCoreFactory {
 						res.localeName = b.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
 						res.location = b.getLocation();
 					}
-					res.otherNames = b.getAllNames(true);
+					res.otherNames = b.getOtherNames(true);
 					res.object = b;
 					res.file = file;
 					res.priority = priority;
@@ -1345,11 +1393,11 @@ public class SearchCoreFactory {
 								CommonWords.getCommonSearch(streetIntersection) == -1) ) {
 					for (Street street : s.getIntersectedStreets()) {
 						SearchResult res = new SearchResult(phrase);
-						if ((!streetMatch.matches(street.getName()) && !streetMatch.matches(street.getAllNames(true)))
+						if ((!streetMatch.matches(street.getName()) && !streetMatch.matches(street.getOtherNames(true)))
 								|| !phrase.isSearchTypeAllowed(ObjectType.STREET_INTERSECTION)) {
 							continue;
 						}
-						res.otherNames = street.getAllNames(true);
+						res.otherNames = street.getOtherNames(true);
 						res.localeName = street.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
 						res.object = street;
 						res.file = file;

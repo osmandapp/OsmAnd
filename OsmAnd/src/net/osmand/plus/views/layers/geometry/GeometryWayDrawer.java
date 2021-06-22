@@ -5,8 +5,10 @@ import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PointF;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
+import android.util.Pair;
 
 import net.osmand.data.RotatedTileBox;
 
@@ -16,6 +18,20 @@ import java.util.List;
 public class GeometryWayDrawer<T extends GeometryWayContext> {
 
 	private T context;
+
+	public static class DrawPathData {
+		Path path;
+		PointF start;
+		PointF end;
+		GeometryWayStyle<?> style;
+
+		public DrawPathData(Path path, PointF start, PointF end, GeometryWayStyle<?> style) {
+			this.path = path;
+			this.start = start;
+			this.end = end;
+			this.style = style;
+		}
+	}
 
 	public GeometryWayDrawer(T context) {
 		this.context = context;
@@ -89,14 +105,20 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 		}
 	}
 
+	protected void drawFullBorder(Canvas canvas, int zoom, List<DrawPathData> pathsData) {
+	}
+
+	protected void drawSegmentBorder(Canvas canvas, int zoom, DrawPathData pathData) {
+	}
+
 	protected PathPoint getArrowPathPoint(float iconx, float icony, GeometryWayStyle<?> style, double angle) {
 		return new PathPoint(iconx, icony, angle, style);
 	}
 
-	public void drawPath(Canvas canvas, Path path, GeometryWayStyle<?> style) {
-		context.getAttrs().customColor = style.getColor();
-		context.getAttrs().customWidth = style.getWidth();
-		context.getAttrs().drawPath(canvas, path);
+	public void drawPath(Canvas canvas, DrawPathData pathData) {
+		context.getAttrs().customColor = pathData.style.getColor();
+		context.getAttrs().customWidth = pathData.style.getWidth();
+		context.getAttrs().drawPath(canvas, pathData.path);
 	}
 
 	public static class PathPoint {

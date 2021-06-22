@@ -22,12 +22,12 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
-import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.widgets.MultiStateToggleButton;
-import net.osmand.plus.widgets.MultiStateToggleButton.OnRadioItemClickListener;
-import net.osmand.plus.widgets.MultiStateToggleButton.RadioItem;
+import net.osmand.plus.widgets.multistatetoggle.RadioItem;
+import net.osmand.plus.widgets.multistatetoggle.RadioItem.OnRadioItemClickListener;
+import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
+import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
 
 import org.apache.commons.logging.Log;
 
@@ -120,11 +120,11 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	private void setupTypeRadioGroup(LinearLayout buttonsContainer) {
-		RadioItem none = createRadioButton(GpxSplitType.NO_SPLIT, R.string.shared_string_none);
-		RadioItem time = createRadioButton(GpxSplitType.TIME, R.string.shared_string_time);
-		RadioItem distance = createRadioButton(GpxSplitType.DISTANCE, R.string.distance);
+		TextRadioItem none = createRadioButton(GpxSplitType.NO_SPLIT, R.string.shared_string_none);
+		TextRadioItem time = createRadioButton(GpxSplitType.TIME, R.string.shared_string_time);
+		TextRadioItem distance = createRadioButton(GpxSplitType.DISTANCE, R.string.distance);
 
-		MultiStateToggleButton radioGroup = new MultiStateToggleButton(app, buttonsContainer, nightMode);
+		TextToggleButton radioGroup = new TextToggleButton(app, buttonsContainer, nightMode);
 		radioGroup.setItems(none, time, distance);
 
 		if (selectedSplitType == GpxSplitType.NO_SPLIT) {
@@ -134,9 +134,9 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 	}
 
-	private RadioItem createRadioButton(final GpxSplitType splitType, int titleId) {
+	private TextRadioItem createRadioButton(final GpxSplitType splitType, int titleId) {
 		String title = app.getString(titleId);
-		RadioItem item = new RadioItem(title);
+		TextRadioItem item = new TextRadioItem(title);
 		item.setOnClickListener(new OnRadioItemClickListener() {
 			@Override
 			public boolean onRadioItemClick(RadioItem radioItem, View view) {

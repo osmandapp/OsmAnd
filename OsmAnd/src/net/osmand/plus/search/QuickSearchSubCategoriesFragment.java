@@ -101,7 +101,7 @@ public class QuickSearchSubCategoriesFragment extends BaseOsmAndDialogFragment {
 				updateAddBtnVisibility();
 			}
 		});
-		if (selectAll || acceptedCategories == null) {
+		if (selectAll || acceptedCategories == null || poiCategory.getPoiTypes().size() == acceptedCategories.size()) {
 			adapter.setSelectedItems(poiTypeList);
 			selectAll = true;
 		} else {

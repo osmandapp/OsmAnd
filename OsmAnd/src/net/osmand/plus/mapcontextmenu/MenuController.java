@@ -8,6 +8,7 @@ import android.text.style.ForegroundColorSpan;
 import android.util.Pair;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import androidx.annotation.ColorRes;
@@ -174,7 +175,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 				builder.addMenuPlugin(plugin);
 			}
 		}
-		builder.build(rootView);
+		builder.build((ViewGroup) rootView);
 	}
 
 	public static MenuController getMenuController(@NonNull MapActivity mapActivity,
@@ -229,6 +230,8 @@ public abstract class MenuController extends BaseMenuController implements Colla
 				menuController = new MapillaryMenuController(mapActivity, pointDescription, (MapillaryImage) object);
 			} else if (object instanceof SelectedGpxPoint) {
 				menuController = new SelectedGpxMenuController(mapActivity, pointDescription, (SelectedGpxPoint) object);
+			} else if (object instanceof Pair && ((Pair<?, ?>) object).second instanceof SelectedGpxPoint) {
+				menuController = new SelectedGpxMenuController(mapActivity, pointDescription, (SelectedGpxPoint) ((Pair<?, ?>) object).second);
 			}
 		}
 		if (menuController == null) {

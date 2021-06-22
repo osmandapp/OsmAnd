@@ -122,7 +122,9 @@ public class Version {
 	public static boolean isPaidVersion(OsmandApplication ctx) {
 		return !isFreeVersion(ctx)
 				|| InAppPurchaseHelper.isFullVersionPurchased(ctx)
-				|| InAppPurchaseHelper.isSubscribedToLiveUpdates(ctx);
+				|| InAppPurchaseHelper.isSubscribedToLiveUpdates(ctx)
+				|| InAppPurchaseHelper.isSubscribedToMaps(ctx)
+				|| InAppPurchaseHelper.isSubscribedToOsmAndPro(ctx);
 	}
 	
 	public static boolean isDeveloperVersion(OsmandApplication ctx){

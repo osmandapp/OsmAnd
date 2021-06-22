@@ -78,7 +78,7 @@ public class DownloadResourceGroupAdapter extends OsmandBaseExpandableListAdapte
 			} else {
 				viewHolder.setShowTypeInDesc(true);
 			}
-			viewHolder.bindIndexItem(item);
+			viewHolder.bindDownloadItem(item);
 		} else {
 			DownloadResourceGroup group = (DownloadResourceGroup) child;
 			DownloadGroupViewHolder viewHolder;

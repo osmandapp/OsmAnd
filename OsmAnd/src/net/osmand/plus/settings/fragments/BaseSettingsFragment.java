@@ -59,6 +59,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
 import net.osmand.plus.audionotes.MultimediaNotesFragment;
+import net.osmand.plus.backup.ui.BackupAuthorizationFragment;
 import net.osmand.plus.development.DevelopmentSettingsFragment;
 import net.osmand.plus.monitoring.MonitoringSettingsFragment;
 import net.osmand.plus.openplacereviews.OprSettingsFragment;
@@ -135,7 +136,8 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		LIVE_MONITORING(LiveMonitoringFragment.class.getName(), false, ApplyQueryType.SNACK_BAR, R.xml.live_monitoring, R.layout.global_preferences_toolbar_with_switch),
 		ACCESSIBILITY_SETTINGS(AccessibilitySettingsFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.accessibility_settings, R.layout.profile_preference_toolbar),
 		OPEN_PLACE_REVIEWS(OprSettingsFragment.class.getName(), false, null, R.xml.open_place_reviews, R.layout.global_preference_toolbar),
-		DEVELOPMENT_SETTINGS(DevelopmentSettingsFragment.class.getName(), false, null, R.xml.development_settings, R.layout.global_preference_toolbar);
+		DEVELOPMENT_SETTINGS(DevelopmentSettingsFragment.class.getName(), false, null, R.xml.development_settings, R.layout.global_preference_toolbar),
+		BACKUP_AUTHORIZATION(BackupAuthorizationFragment.class.getName(), false, null, R.xml.backup_authorization, R.layout.profile_preference_toolbar);
 
 		public final String fragmentName;
 		public final boolean profileDependent;
@@ -492,8 +494,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 				}
 			});
 			if (closeButton instanceof ImageView) {
-				UiUtilities.rotateImageByLayoutDirection(
-						(ImageView) closeButton, AndroidUtils.getLayoutDirection(app));
+				UiUtilities.rotateImageByLayoutDirection((ImageView) closeButton);
 			}
 		}
 
@@ -922,6 +923,12 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		if (mapActivity != null) {
 			mapActivity.getMapRouteInfoMenu().updateMenu();
 		}
+	}
+
+	public void setupSpeedCamerasAlert() {
+		Preference speedCamerasAlert = findPreference(settings.SPEED_CAMERAS_UNINSTALLED.getId());
+		speedCamerasAlert.setIcon(getContentIcon(R.drawable.ic_action_alert));
+		speedCamerasAlert.setVisible(!settings.SPEED_CAMERAS_UNINSTALLED.get());
 	}
 
 	public void setupPrefRoundedBg(PreferenceViewHolder holder) {

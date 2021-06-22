@@ -3294,7 +3294,6 @@
     <string name="select_color">選取顏色</string>
     <string name="edit_profiles_descr">OsmAnd 預設的設定檔無法被刪除，但可以被停用（在前一個畫面），或被排到底部。</string>
     <string name="edit_profiles">編輯設定檔</string>
-    <string name="select_nav_profile_dialog_message">「導航類型」會控制路徑的計算方式。</string>
     <string name="profile_appearance">設定檔外觀</string>
     <string name="choose_icon_color_name">圖示、顏色與名稱</string>
     <string name="reorder_profiles">編輯設定檔清單</string>
@@ -3817,7 +3816,6 @@
     <string name="message_graph_will_be_available_after_recalculation">請稍候。
 \n重新計算路線後即可使用圖表。</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
-    <string name="app_mode_gap">分隔</string>
     <string name="shared_string_local_maps">本機地圖</string>
     <string name="icon_group_amenity">便利設施</string>
     <string name="icon_group_special">特殊</string>
@@ -3964,7 +3962,7 @@
     <string name="routing_engine_vehicle_type_mtb">登山車</string>
     <string name="message_server_error">伺服器錯誤：%1$s</string>
     <string name="message_name_is_already_exists">名稱已存在</string>
-    <string name="delete_online_routing_engine">刪除此線上路線引擎？</string>
+    <string name="delete_online_routing_engine">移除此線上路線引擎？</string>
     <string name="context_menu_read_full">讀取全部</string>
     <string name="context_menu_edit_descr">編輯描述</string>
     <string name="delete_waypoints">刪除航點</string>
@@ -3977,7 +3975,7 @@
     <string name="toast_select_edits_for_upload">選取要上傳的檔案</string>
     <string name="hillshade_slope_contour_lines">地形陰影／斜坡／等高線</string>
     <string name="select_segments">選取線段</string>
-    <string name="select_segments_description">%1$s 包含了多於一段，您必須為導航選取必要的部份。</string>
+    <string name="select_segments_description">%1$s 包含了多於一段，您必須指定導航的部份。</string>
     <string name="segments_count">線段 %1$d</string>
     <string name="open_place_reviews_plugin_description">OpenPlaceReviews 是一個社群驅動的專案，其蒐集關於餐廳、飯店、博物館、航點等公共場所的資訊。其蒐集的資訊包含了照片、評論、其他系統的連結（如 OpenStreetMap、維基百科）。
 \n
@@ -4036,22 +4034,25 @@
     <string name="track_has_no_altitude">軌跡不包含海拔資料。</string>
     <string name="track_has_no_speed">軌跡不包含速度資料。</string>
     <string name="select_another_colorization">請選擇另一種顏色。</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">隱藏自然保留區、保護區與國家公園界線</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">隱藏自然保留區、保護區與國家公園界線。</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">自然界線</string>
-    <string name="trip_recording_logging_interval_info">紀錄間隔設定的時段，OsmAnd 將會要求目前位置的位置資料。</string>
+    <string name="trip_recording_logging_interval_info">紀錄間隔設定的時段，OsmAnd 將會要求目前位置的資料。</string>
     <string name="trip_recording_save_and_continue">儲存並繼續</string>
     <string name="lost_data_warning">所有未儲存的資料都將會遺失。</string>
     <string name="show_start_dialog">顯示開始對話框</string>
     <string name="trip_recording_show_start_dialog_setting">若停用，則在點擊小工具或選單項目後將跳過確認對話框，立刻開始。</string>
     <string name="customize_route_line">自訂路線</string>
     <string name="shared_string_route_line">路線</string>
-    <string name="route_line_use_map_style_appearance">路線將會使用 %1$s 在選定的地圖樣式上指定的：%2$s。</string>
     <string name="specify_color_for_map_mode">指定地圖模式的顏色：%1$s。</string>
-    <string name="release_4_0_beta">• OsmAnd Live 更新移動至「下載 &gt; 更新」
+    <string name="release_4_0_beta">• 新增以英呎為單位下載等高線
 \n
-\n • 軌跡現在可以使用海拔、速度或坡度來填色
+\n • 規劃路線樣式：新增切換點與圖形的分頁
 \n
-\n • 新增了變更導航路線外觀的選項
+\n • OsmAnd Live 更新移動至「下載 &gt; 更新」
+\n
+\n • 現在可以使用海拔、速度或坡度來為軌跡著色了。
+\n
+\n • 新增變更路線外觀的選項。
 \n
 \n • 更新「旅程錄製」對話框
 \n
@@ -4079,4 +4080,91 @@
     <string name="user_points">使用者點</string>
     <string name="output">輸出</string>
     <string name="map_quick_action_pattern">%1$s → …</string>
+    <string name="shared_string_feet">英呎</string>
+    <string name="srtm_unit_format">等高線單位變體</string>
+    <string name="srtm_download_list_help_message">OsmAnd 提供以公尺與英呎為單位的等高線資料。您將必須重新下載檔案以變更格式。</string>
+    <string name="srtm_download_single_help_message">請選取變體。您將必須重新下載檔案以變更格式。</string>
+    <string name="route_line_use_gradient_coloring">路線將以高程坡度著色。</string>
+    <string name="shared_string_min_height">最低高度</string>
+    <string name="shared_string_max_height">最高高度</string>
+    <string name="language_description">選取偏好的語言以及語音導航的類型。</string>
+    <string name="tts_description">文字轉語音 (TTS) 可以說出所有類型的指令：街道名稱、轉彎指示、POI 名稱等。</string>
+    <string name="tts_title">文字轉語音</string>
+    <string name="recorded_description">錄製的聲音聽起來更好，但只能說出預先錄製的片段：轉彎指示。無法說出街道名稱或 POI 名稱。</string>
+    <string name="use_system_language">使用系統語言</string>
+    <string name="shared_string_itinerary">行程</string>
+    <string name="route_line_use_map_style_width">使用地圖樣式 (%1$s) 預設寬度。</string>
+    <string name="route_line_use_map_style_color">使用地圖樣式 (%1$s) 預設色彩。</string>
+    <string name="poi_routes">路線</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">避免低排放區域</string>
+    <string name="routing_attr_avoid_low_emission_zone_name">避免低排放區域</string>
+    <string name="search_more">搜尋更多……</string>
+    <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
+    <string name="backup_and_restore">備份與還原</string>
+    <string name="last_backup">上次備份</string>
+    <string name="osmand_cloud">OsmAnd Cloud</string>
+    <string name="duration_ago">%1$s 前</string>
+    <string name="osmand_cloud_authorize_descr">絕對不會遺失您的資料、備份與還原所有資訊。</string>
+    <string name="local_backup">本機備份</string>
+    <string name="local_backup_descr">從本機檔案備份或還原資料。</string>
+    <string name="backup_into_file">備份至檔案</string>
+    <string name="restore_from_file">從檔案還原</string>
+    <string name="osmand_cloud_help_descr">需要協助嗎？請在 %1$s 聯絡我們</string>
+    <string name="osmand_cloud_create_account_descr">請輸入您的電子郵件地址，您所有的資料都將會連結到這個地址。
+\n我們將會傳送驗證碼到這個電子郵件地址給您。</string>
+    <string name="osmand_cloud_login_descr">請輸入您用於註冊的電子郵件地址。我們將會傳送下一步所需的一次性密碼。</string>
+    <string name="verify_email_address">驗證電子郵件地址</string>
+    <string name="verify_email_address_descr">我們已將驗證碼傳送至 %1$s，請在下方欄位輸入。</string>
+    <string name="enter_verification_code">輸入 4 位數代碼</string>
+    <string name="cloud_email_not_registered">此電子郵件尚未註冊 OsmAnd Cloud</string>
+    <string name="cloud_email_already_registered">使用此電子郵件的帳號已被註冊。</string>
+    <string name="resend_verification_code">重新傳送代碼</string>
+    <string name="verification_code_missing">我沒有收到驗證碼</string>
+    <string name="verification_code_missing_description">等待代碼的時間可能需要10分鐘，您也可以檢查您的垃圾郵件資料夾。如果沒有幫助，請點擊下方的按鈕。</string>
+    <string name="select_nav_profile_dialog_message">「導航類型」控制著路線計算的方式。您可以在離線與線上導航引擎中選取。</string>
+    <string name="loading_list_of_routing_services">載入可用路線規劃服務清單</string>
+    <string name="shared_string_offline">離線</string>
+    <string name="shared_string_online">線上</string>
+    <string name="osmand_online_routing_promo">您可以使用預先定義的範本，或是新增自訂的線上路線規劃，支援：OSRM, Graphhopper, OpenRouteService, GPX。</string>
+    <string name="shared_string_external">外部</string>
+    <string name="provided_by">由 %1$s 提供</string>
+    <string name="failed_loading_predefined_engines">載入預先定義範本失敗。
+\n請檢查您的網際網路連線。</string>
+    <string name="shared_string_predefined">預先定義</string>
+    <string name="backup_complete">備份完成</string>
+    <string name="backup_now">立即備份</string>
+    <string name="make_backup">備份</string>
+    <string name="make_backup_descr">此裝置有許多變動，請備份此資料以免遺失。</string>
+    <string name="backup_conflicts">衝突</string>
+    <string name="backup_confilcts_descr">部份檔案無法上傳至伺服器，因為伺服器上已儲存了較新的版本。</string>
+    <string name="backup_view_conflicts">檢視衝突</string>
+    <string name="backup_no_internet_descr">檢查您的網際網路連線並再次下載。</string>
+    <string name="backup_pause_all">暫停全部</string>
+    <string name="upload_local_version">上傳本機版本</string>
+    <string name="download_server_version">下載伺服器版本</string>
+    <string name="shared_string_logout">登出</string>
+    <string name="backup_delete_all_data">刪除我所有的資料</string>
+    <string name="backup_delete_all_data_descr">OsmAnd Cloud 上的所有資料都將會被刪除。本機版本將維持不變。</string>
+    <string name="backup_delete_all_data_warning">您將要刪除先前上傳至 OsmAnd Cloud 的所有資料，包含版本歷史紀錄。
+\n
+\n您將無法復原已刪除的資料。</string>
+    <string name="backup_danger_zone">危險地帶</string>
+    <string name="delete_all_confirmation">是的，刪除全部</string>
+    <string name="backup_delete_old_data">移除舊版本</string>
+    <string name="backup_delete_old_data_descr">您目前版本的資料將保留在 OsmAnd Cloud 上</string>
+    <string name="backup_delete_old_data_warning">您將要刪除先前載入資料的變更歷史紀錄。
+\n
+\n目前版本的資料將會儲存到伺服氣上，但您將無法回退到先前做出的修改。</string>
+    <string name="backup_data">備份資料</string>
+    <string name="select_backup_data_descr">選取要備份的資料與資料夾。</string>
+    <string name="backup_restore_data_descr">使用線上備份復原裝置上的資料。</string>
+    <string name="backup_restore_data">復原資料</string>
+    <string name="restore_from_osmand_cloud">從 OsmAnd Cloud 復原</string>
+    <string name="choose_what_to_restore">選擇要復原的內容。</string>
+    <string name="restore_selected_data">復原選定的資料</string>
+    <string name="receiving_data_from_server">正在從伺服器接收資料</string>
+    <string name="restore_complete">復原完成</string>
+    <string name="grey_color_slope">當斜率未被定義時則使用灰色。</string>
+    <string name="backup_version_history">版本歷史紀錄</string>
+    <string name="backup_storage_taken">用掉的儲存空間</string>
 </resources>

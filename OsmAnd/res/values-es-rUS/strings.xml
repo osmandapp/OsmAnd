@@ -1056,7 +1056,7 @@
     <string name="delete_confirmation_msg">¿Borrar «%1$s»?</string>
     <string name="city_type_suburb">Suburbio</string>
     <string name="city_type_hamlet">Aldea</string>
-    <string name="city_type_village">Villa</string>
+    <string name="city_type_village">Pueblo</string>
     <string name="city_type_town">Ciudad pequeña</string>
     <string name="city_type_city">Ciudad</string>
     <string name="animate_route_off">Parar simulación</string>
@@ -1394,7 +1394,7 @@
     <string name="downloading_list_indexes">Descargando lista de regiones disponibles…</string>
     <string name="list_index_files_was_not_loaded">No se pudo obtener la lista de regiones desde https://osmand.net.</string>
     <string name="fav_points_edited">Punto favorito editado</string>
-    <string name="fav_points_not_exist">Sin puntos de Favoritos</string>
+    <string name="fav_points_not_exist">No existen puntos favoritos</string>
     <string name="update_existing">Reemplazar</string>
     <string name="only_show">Mostrar ruta</string>
     <string name="follow">Iniciar la guía</string>
@@ -3301,7 +3301,6 @@
     <string name="select_color">Elegir el color</string>
     <string name="edit_profiles_descr">Los perfiles predefinidos de OsmAnd no se pueden borrar, sino desactivar (en la pantalla anterior) u ordenarse en la parte inferior.</string>
     <string name="edit_profiles">Editar perfiles</string>
-    <string name="select_nav_profile_dialog_message">El «Tipo de navegación» determina cómo se calculan las rutas.</string>
     <string name="profile_appearance">Aspecto del perfil</string>
     <string name="choose_icon_color_name">Icono, color y nombre</string>
     <string name="reorder_profiles">Editar la lista de perfiles</string>
@@ -3889,7 +3888,6 @@
     <string name="select_items_for_import">Marca los elementos que serán importados.</string>
     <string name="select_groups_for_import">Marca los grupos que serán importados.</string>
     <string name="cannot_upload_image">No se puede subir la imagen, inténtalo más tarde</string>
-    <string name="app_mode_gap">Separador</string>
     <string name="release_3_9">• Se ha añadido la opción de exportar e importar todos los datos, incluyendo los ajustes, los recursos y «Mis sitios»
 \n
 \n • Planificar ruta: se añadieron gráficos para los segmentos de trazas con la ruta y capacidad de crear o editar trazas de segmentos múltiples
@@ -3979,7 +3977,7 @@
     <string name="login_open_place_reviews">Acceder a OpenPlaceReviews</string>
     <string name="hillshade_slope_contour_lines">Sombreado / Pendiente / Curvas de nivel</string>
     <string name="delete_waypoints">Borrar puntos de referencia</string>
-    <string name="delete_online_routing_engine">¿Borrar este motor de navegación en línea\?</string>
+    <string name="delete_online_routing_engine">¿Quitar este motor de navegación en línea\?</string>
     <string name="copy_to_map_markers">Copiar a «Marcadores del mapa»</string>
     <string name="copy_to_map_favorites">Copiar a favoritos</string>
     <string name="context_menu_read_full">Leer completo</string>
@@ -4007,12 +4005,12 @@
     <string name="activity_type_cycling_name">Bicicleta</string>
     <string name="activity_type_car_name">Automóvil</string>
     <string name="select_segments">Elegir segmentos</string>
-    <string name="select_segments_description">«%1$s» contiene más de un segmento, debe marcar la parte necesaria para la navegación.</string>
+    <string name="select_segments_description">«%1$s» contiene más de un segmento, define el tramo para la navegación.</string>
     <string name="segments_count">Segmento %1$d</string>
     <string name="temporary_conditional_routing_descr">Usar las restricciones viales que están activas ahora en el mapa</string>
     <string name="routing_attr_short_way_description">Ruta optimizada más corta (bajo consumo)</string>
     <string name="routing_attr_driving_style_description">Elige el propósito de la conducción para obtener la ruta más corta, más rápida o más segura</string>
-    <string name="snap_to_road_descr">El icono de la ubicación actual se ajustará a la ruta de navegación actual</string>
+    <string name="snap_to_road_descr">El icono de la ubicación actual será ajustado a la ruta de navegación</string>
     <string name="map_orientation_threshold_descr">No girar la vista del mapa si la velocidad es inferior a un umbral</string>
     <string name="restart">Reiniciar</string>
     <string name="shared_strings_all_regions">Todas las regiones</string>
@@ -4042,7 +4040,7 @@
     <string name="copy_poi_name">Copiar nombre del PDI</string>
     <string name="quick_action_show_hide_title">Mostrar/Ocultar</string>
     <string name="shared_string_interval">Intervalo</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Oculta fronteras de reservas naturales, áreas protegidas y parques nacionales</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Oculta fronteras de reservas naturales, áreas protegidas y parques nacionales.</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">Fronteras naturales</string>
     <string name="track_has_no_altitude">La traza no contiene datos de altitud.</string>
     <string name="track_has_no_speed">La traza no contiene datos de velocidad.</string>
@@ -4054,8 +4052,7 @@
     <string name="trip_recording_show_start_dialog_setting">Si se desactiva, la grabación será iniciada al pulsar el widget o el elemento del menú, saltándose el diálogo de confirmación.</string>
     <string name="customize_route_line">Personalizar línea de ruta</string>
     <string name="shared_string_route_line">Línea de ruta</string>
-    <string name="route_line_use_map_style_appearance">La línea de ruta usará el %1$s definido en el estilo de mapa elegido: %2$s.</string>
-    <string name="specify_color_for_map_mode">Define el color para el modo de mapa: %1$s.</string>
+    <string name="specify_color_for_map_mode">Define el color para el modo de mapa «%1$s».</string>
     <string name="no_purchases">No tienes compras</string>
     <string name="new_device_account">Nuevo dispositivo / nueva cuenta</string>
     <string name="contact_support_description">Si tienes alguna duda, ponte en contacto con nosotros en %1$s.</string>
@@ -4067,17 +4064,21 @@
     <string name="annual_subscription">Suscripción anual</string>
     <string name="monthly_subscription">Suscripción mensual</string>
     <string name="three_months_subscription">Suscripción trimestral</string>
-    <string name="next_billing_date">Próxima facturación: %1$s</string>
+    <string name="next_billing_date">Próxima fecha de facturación: %1$s</string>
     <string name="osmand_live_cancelled">Cancelado</string>
     <string name="renew_subscription">Renovar suscripción</string>
     <string name="in_grace_period">En período de gracia</string>
     <string name="on_hold">En espera</string>
     <string name="expired">Expirado</string>
-    <string name="release_4_0_beta">• Las actualizaciones de OsmAnd Live se han movido a «Descargas &gt; Actualizaciones».
+    <string name="release_4_0_beta">• Se ha añadido la opción para descargar las curvas de nivel en pies.
+\n
+\n• Paisaje del plan de ruta: se añadieron pestañas para alternar entre puntos o gráficos
+\n
+\n• Las actualizaciones de OsmAnd Live se han movido a «Descargas &gt; Actualizaciones».
 \n
 \n• Las trazas ahora pueden colorearse por altitud, velocidad o pendiente.
 \n
-\n• Se ha añadido la opción de cambiar el aspecto a la línea de ruta de la navegación
+\n• Se ha añadido la opción de cambiar el aspecto a la línea de ruta.
 \n
 \n• Se ha actualizado el cuadro de diálogo «Grabación de viaje»
 \n
@@ -4088,4 +4089,88 @@
     <string name="user_points">Puntos de usuario</string>
     <string name="output">Salida</string>
     <string name="map_quick_action_pattern">%1$s → …</string>
+    <string name="shared_string_feet">pies</string>
+    <string name="srtm_unit_format">Variante de unidad de las curvas de nivel</string>
+    <string name="srtm_download_list_help_message">OsmAnd proporciona datos de curvas de nivel en metros y pies. Deberás volver a descargar el archivo para cambiar el formato.</string>
+    <string name="srtm_download_single_help_message">Marca la variante. Deberás volver a descargar el archivo para cambiar el formato.</string>
+    <string name="tts_title">TTS</string>
+    <string name="recorded_description">La voz grabada suena mejor, pero sólo puede pronunciar frases pregrabadas: indicaciones de giro. No puede anunciar los nombres de las calles o de los PDI.</string>
+    <string name="use_system_language">Usar idioma del sistema</string>
+    <string name="shared_string_itinerary">Itinerario</string>
+    <string name="route_line_use_gradient_coloring">La línea de ruta se colorea según la pendiente de elevación.</string>
+    <string name="shared_string_min_height">Altura mín.</string>
+    <string name="shared_string_max_height">Altura máx.</string>
+    <string name="language_description">Marca el idioma preferido y el tipo de indicaciones por voz.</string>
+    <string name="tts_description">El sistema de texto a voz (TTS) puede pronunciar todo tipo de avisos: nombres de calles y PDI, indicaciones de giro, etc.</string>
+    <string name="route_line_use_map_style_width">Usa el ancho predefinido del estilo de mapa (%1$s).</string>
+    <string name="route_line_use_map_style_color">Usa el color predefinido del estilo de mapa (%1$s).</string>
+    <string name="poi_routes">Rutas</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">Evita las zonas de baja emisión o zonas urbanas de atmósfera protegida</string>
+    <string name="routing_attr_avoid_low_emission_zone_name">Evitar zonas de baja emisión</string>
+    <string name="search_more">Buscar más…</string>
+    <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
+    <string name="backup_and_restore">Copia de seguridad y restauración</string>
+    <string name="last_backup">Última copia de seguridad</string>
+    <string name="duration_ago">hace %1$s</string>
+    <string name="osmand_cloud">OsmAnd Cloud</string>
+    <string name="osmand_cloud_authorize_descr">Nunca pierdas tus datos, haz una copia de seguridad y restaura toda la información sin problemas.</string>
+    <string name="local_backup">Copia de seguridad local</string>
+    <string name="local_backup_descr">Crea una copia de seguridad o restaura los datos de un archivo local.</string>
+    <string name="backup_into_file">Copia de seguridad en un archivo</string>
+    <string name="restore_from_file">Restaurar desde archivo</string>
+    <string name="osmand_cloud_help_descr">¿Necesitas ayuda\? Ponte en contacto con nosotros en %1$s</string>
+    <string name="osmand_cloud_create_account_descr">Ingresa la dirección de correo electrónico, todos los datos estarán vinculados a ella.
+\nEnviaremos un código de verificación a esta dirección de correo electrónico.</string>
+    <string name="osmand_cloud_login_descr">Ingresa la dirección de correo electrónico usada para el registro. Enviaremos un código único necesario para el siguiente paso.</string>
+    <string name="verify_email_address">Confirmar dirección de correo electrónico</string>
+    <string name="verify_email_address_descr">Hemos enviado un código de verificación a «%1$s», ingresarlo en el siguiente campo.</string>
+    <string name="enter_verification_code">Ingresa el código de 4 dígitos</string>
+    <string name="cloud_email_not_registered">Este correo electrónico no se ha registrado para OsmAnd Cloud</string>
+    <string name="cloud_email_already_registered">Ya existe una cuenta con este correo electrónico.</string>
+    <string name="resend_verification_code">Reenviar código</string>
+    <string name="verification_code_missing">No he recibido el código de verificación</string>
+    <string name="verification_code_missing_description">El código puede demorar 10 minutos, también puedes comprobar la carpeta de spam. Si esto no ayuda, usa el botón de abajo.</string>
+    <string name="select_nav_profile_dialog_message">El «Tipo de navegación» determina cómo se calculan las rutas. Puedes elegir entre los motores de navegación en línea o sin conexión.</string>
+    <string name="loading_list_of_routing_services">Cargando lista de servicios de navegación disponibles</string>
+    <string name="shared_string_offline">Desconectado</string>
+    <string name="shared_string_online">En línea</string>
+    <string name="osmand_online_routing_promo">Puedes usar plantillas predefinidas o añadir navegadores en línea personalizados, soportado: OSRM, Graphhopper, OpenRouteService, GPX.</string>
+    <string name="shared_string_external">Externo</string>
+    <string name="provided_by">Provisto por %1$s</string>
+    <string name="failed_loading_predefined_engines">No se pudo cargar la lista de plantillas predefinidas.
+\nComprueba la conexión a Internet.</string>
+    <string name="shared_string_predefined">Predefinido</string>
+    <string name="backup_complete">Copia de seguridad completa</string>
+    <string name="backup_now">Respaldar ahora</string>
+    <string name="make_backup">Crear copia de seguridad</string>
+    <string name="make_backup_descr">Hay muchos cambios en este dispositivo, haz una copia de seguridad de estos datos para no perderlos.</string>
+    <string name="backup_conflicts">Conflictos</string>
+    <string name="backup_confilcts_descr">Algunos archivos no se pudieron cargar porque existe una versión más reciente en el servidor.</string>
+    <string name="backup_view_conflicts">Ver conflictos</string>
+    <string name="backup_no_internet_descr">Comprueba la conexión a Internet y vuelve a descargar.</string>
+    <string name="backup_pause_all">Pausar todo</string>
+    <string name="upload_local_version">Cargar versión local</string>
+    <string name="download_server_version">Descargar versión del servidor</string>
+    <string name="shared_string_logout">Cerrar sesión</string>
+    <string name="backup_delete_all_data">Borrar todos mis datos</string>
+    <string name="backup_delete_all_data_descr">Todos los datos de OsmAnd Cloud serán borrados. Las versiones locales quedarán intactas.</string>
+    <string name="backup_delete_all_data_warning">Se borrarán todos los datos cargados previamente a OsmAnd Cloud, incluyendo el historial de versiones.
+\n
+\nNo se podrán recuperar los datos borrados.</string>
+    <string name="backup_danger_zone">Zona peligrosa</string>
+    <string name="delete_all_confirmation">Sí, borrar todo</string>
+    <string name="backup_delete_old_data">Quitar versiones antiguas</string>
+    <string name="backup_delete_old_data_descr">Las versiones actuales de sus datos se conservarán en OsmAnd Cloud</string>
+    <string name="backup_delete_old_data_warning">Se borrará el historial de cambios de los datos cargados previamente.
+\n
+\nLa versión actual de los datos se guardará en el servidor, pero no podrás volver a los cambios anteriores.</string>
+    <string name="backup_data">Datos de la copia de seguridad</string>
+    <string name="select_backup_data_descr">Marca los datos y carpetas para la copia de seguridad.</string>
+    <string name="backup_restore_data_descr">Restaura los datos en el dispositivo, usando copias de seguridad en línea.</string>
+    <string name="backup_restore_data">Restaurar datos</string>
+    <string name="restore_from_osmand_cloud">Restaurar desde OsmAnd Cloud</string>
+    <string name="choose_what_to_restore">Elige qué restaurar.</string>
+    <string name="restore_selected_data">Restaurar datos marcados</string>
+    <string name="receiving_data_from_server">Recibir datos del servidor</string>
+    <string name="restore_complete">Restauración completa</string>
 </resources>

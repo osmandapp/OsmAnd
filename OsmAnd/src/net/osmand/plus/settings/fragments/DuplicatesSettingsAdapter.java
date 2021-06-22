@@ -24,11 +24,13 @@ import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.mapmarkers.ItineraryType;
 import net.osmand.plus.mapmarkers.MapMarker;
+import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.profiles.ProfileIconColors;
-import net.osmand.plus.profiles.RoutingProfileDataObject.RoutingProfilesResources;
+import net.osmand.plus.profiles.data.RoutingDataObject.RoutingProfilesResources;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -41,7 +43,7 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.util.List;
 
-import static net.osmand.plus.settings.backend.backup.FileSettingsItem.FileSubtype;
+import static net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 
 public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -178,6 +180,18 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 			} else if (currentItem instanceof OnlineRoutingEngine) {
 				itemHolder.title.setText(((OnlineRoutingEngine) currentItem).getName(app));
 				itemHolder.icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_world_globe_dark, activeColorRes));
+			} else if (currentItem instanceof MapMarkersGroup) {
+				MapMarkersGroup markersGroup = (MapMarkersGroup) currentItem;
+				String groupName = markersGroup.getName();
+				if (Algorithms.isEmpty(groupName)) {
+					if (markersGroup.getType() == ItineraryType.FAVOURITES) {
+						groupName = app.getString(R.string.shared_string_favorites);
+					} else if (markersGroup.getType() == ItineraryType.MARKERS) {
+						groupName = app.getString(R.string.map_markers);
+					}
+				}
+				itemHolder.title.setText(groupName);
+				itemHolder.icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_flag, activeColorRes));
 			}
 			itemHolder.divider.setVisibility(shouldShowDivider(position) ? View.VISIBLE : View.GONE);
 		}

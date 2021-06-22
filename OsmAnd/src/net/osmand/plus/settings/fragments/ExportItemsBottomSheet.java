@@ -36,28 +36,30 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton.Bu
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.SimpleDividerItem;
+import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
-import net.osmand.plus.itinerary.ItineraryGroup;
+import net.osmand.plus.mapmarkers.ItineraryType;
+import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.osmedit.OpenstreetmapPoint;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.osmedit.OsmNotesPoint;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.profiles.ProfileIconColors;
-import net.osmand.plus.profiles.RoutingProfileDataObject.RoutingProfilesResources;
+import net.osmand.plus.profiles.data.RoutingDataObject.RoutingProfilesResources;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
 import net.osmand.plus.settings.backend.ExportSettingsType;
-import net.osmand.plus.settings.backend.backup.FileSettingsItem;
-import net.osmand.plus.settings.backend.backup.FileSettingsItem.FileSubtype;
-import net.osmand.plus.settings.backend.backup.GlobalSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
+import net.osmand.plus.settings.backend.backup.items.GlobalSettingsItem;
 import net.osmand.plus.settings.backend.backup.GpxAppearanceInfo;
-import net.osmand.plus.settings.backend.backup.GpxSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.GpxSettingsItem;
 import net.osmand.plus.settings.fragments.ExportSettingsAdapter.OnItemSelectedListener;
 import net.osmand.util.Algorithms;
 import net.osmand.view.ThreeStateCheckbox;
@@ -277,7 +279,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	private String setupDescription(View view) {
-		TextView description = view.findViewById(R.id.description);
+		TextView description = view.findViewById(R.id.title_description);
 		if (type == ExportSettingsType.FAVORITES) {
 			description.setText(R.string.select_groups_for_import);
 		} else {
@@ -376,14 +378,25 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			GlobalSettingsItem globalSettingsItem = (GlobalSettingsItem) object;
 			item.setTitle(globalSettingsItem.getPublicName(app));
 			item.setIcon(uiUtilities.getIcon(R.drawable.ic_action_settings, getItemIconColor(object)));
-		} else if (object instanceof ItineraryGroup) {
-			ItineraryGroup markersGroup = (ItineraryGroup) object;
+		} else if (object instanceof MapMarkersGroup) {
+			MapMarkersGroup markersGroup = (MapMarkersGroup) object;
 			if (ExportSettingsType.ACTIVE_MARKERS.name().equals(markersGroup.getId())) {
 				item.setTitle(getString(R.string.map_markers));
 				item.setIcon(uiUtilities.getIcon(R.drawable.ic_action_flag, getItemIconColor(object)));
 			} else if (ExportSettingsType.HISTORY_MARKERS.name().equals(markersGroup.getId())) {
 				item.setTitle(getString(R.string.markers_history));
 				item.setIcon(uiUtilities.getIcon(R.drawable.ic_action_history, getItemIconColor(object)));
+			} else {
+				String groupName = markersGroup.getName();
+				if (Algorithms.isEmpty(groupName)) {
+					if (markersGroup.getType() == ItineraryType.FAVOURITES) {
+						groupName = app.getString(R.string.shared_string_favorites);
+					} else if (markersGroup.getType() == ItineraryType.MARKERS) {
+						groupName = app.getString(R.string.map_markers);
+					}
+				}
+				item.setTitle(groupName);
+				item.setIcon(uiUtilities.getIcon(R.drawable.ic_action_flag, getItemIconColor(object)));
 			}
 			int selectedMarkers = markersGroup.getMarkers().size();
 			String itemsDescr = getString(R.string.shared_string_items);
@@ -415,7 +428,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			}
 			if (item.getTag() instanceof FileSettingsItem) {
 				FileSettingsItem settingsItem = (FileSettingsItem) item.getTag();
-				item.setTitle(getNameForMultimediaFile(settingsItem.getFile(), settingsItem.getLastModified()));
+				item.setTitle(getNameForMultimediaFile(settingsItem.getFile(), settingsItem.getLastModifiedTime()));
 			} else {
 				item.setTitle(new Recording(file).getName(app, true));
 			}
@@ -530,7 +543,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			return getString(R.string.download_roads_only_item);
 		} else if (file.getName().endsWith(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT)) {
 			return getString(R.string.download_wikipedia_maps);
-		} else if (file.getName().endsWith(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT)) {
+		} else if (SrtmDownloadItem.isSrtmFile(file.getName())) {
 			return getString(R.string.download_srtm_maps);
 		} else if (file.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
 			return getString(R.string.download_regular_maps);

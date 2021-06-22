@@ -131,7 +131,7 @@
     <string name="poi_alt_name">الاسم البديل</string>
     <string name="poi_official_name">الاسم الرسمي</string>
     <string name="poi_village">قرية</string>
-    <string name="poi_town">مدينة صغيرة</string>
+    <string name="poi_town">مدينة</string>
     <string name="poi_website">موقع إنترنت</string>
     <string name="poi_emergency_phone">هاتف الطوارئ</string>
     <string name="poi_recycling_mobile_phones">هواتف نقالة</string>
@@ -214,7 +214,7 @@
     <string name="poi_grit_bin">سلة حصى</string>
     <string name="poi_ambulance_station">محطة إسعاف</string>
     <string name="poi_emergency_access_point">نقطة وصول الطوارئ</string>
-    <string name="poi_ford">مجرى الماء على الطريق</string>
+    <string name="poi_ford">مخاضة (مجرى الماء فوق الطريق)</string>
     <string name="poi_vehicle_inspection">فحص المركبات</string>
     <string name="poi_car_wash">غسيل السيارات</string>
     <string name="poi_fuel">محطة بنزين: بترول، ديزل، غاز</string>
@@ -669,7 +669,7 @@
     <string name="poi_fire_flapper">أداة/مكنسة اطفاء النار</string>
     <string name="poi_ford_stepping_stones">معبر حجري</string>
     <string name="poi_gate">بوابة</string>
-    <string name="poi_lift_gate">بوابة برافعة</string>
+    <string name="poi_lift_gate">حاجز عمودي يرتفع وينخفض</string>
     <string name="poi_toll_booth">كشك طريق مدفوع</string>
     <string name="poi_traffic_calming_rumble_strip">مطب تحذيري</string>
     <string name="poi_traffic_calming_table">مطب مرتفع وطويل</string>
@@ -1321,7 +1321,7 @@
     <string name="poi_material_plastic">المادة: البلاستيك</string>
     <string name="poi_material_glass">المادة: زجاج</string>
     <string name="poi_material_aluminium">المواد : الألومنيوم</string>
-    <string name="poi_site_type_city">مدينة</string>
+    <string name="poi_site_type_city">المدينة</string>
     <string name="poi_historic_farm">مزرعة تاريخية</string>
     <string name="poi_historic_railway_station">محطة سكة حديد تاريخية</string>
     <string name="poi_artist_name">فنان</string>
@@ -1500,7 +1500,7 @@
     <string name="poi_substation_type">النوع</string>
     <string name="poi_books_type">كتب</string>
     <string name="poi_denotation">إشارة</string>
-    <string name="poi_allotments">أراضي مخصصات</string>
+    <string name="poi_allotments">الحدائق/المزارع المحصصة</string>
     <string name="poi_denomination_shaktism">شاكتيزم</string>
     <string name="poi_bird_hide">مكان لمراقبة الطيور</string>
     <string name="poi_passing_place">مكان المرور</string>
@@ -1638,7 +1638,7 @@
     <string name="poi_orienteering">التوجيه</string>
     <string name="poi_ice_stock">مخزون الثلج</string>
     <string name="poi_bowls">كرة</string>
-    <string name="poi_place_allotments">أراضي مخصصات</string>
+    <string name="poi_place_allotments">الحدائق/المزارع المحصصة</string>
     <string name="poi_register_office">مكتب السجل المدني</string>
     <string name="poi_bunker_silo">غرفة تحميل</string>
     <string name="poi_recycling_hardcore">صلب</string>
@@ -1829,11 +1829,11 @@
     <string name="poi_kent_carriage_gap">حاجز المركبات الرباعية</string>
     <string name="poi_turnstile">باب دوار</string>
     <string name="poi_swing_gate">بوابة عامودية جانبية</string>
-    <string name="poi_sally_port">مدخل أمن الحصن</string>
-    <string name="poi_kissing_gate">بوابة منحنية عازلة Kissing gate</string>
+    <string name="poi_sally_port">مدخل آمن للحصن/السجن</string>
+    <string name="poi_kissing_gate">بوابة لا تسمح بعبور الماشية</string>
     <string name="poi_horse_stile">معبر خيول</string>
     <string name="poi_jersey_barrier">‫حاجز خرساني - نيوجيرسي</string>
-    <string name="poi_stile">عضادة</string>
+    <string name="poi_stile">درج يمر فوق السياج</string>
     <string name="poi_bump_gate">بوابة مركبات تمنع مرور الماشية</string>
     <string name="poi_full_height_turnstile">مدخل حاجز دوار</string>
     <string name="poi_bus_trap">حاجز حافلات</string>
@@ -2111,7 +2111,7 @@
     <string name="poi_rtsa_scale">مقياس RTSA</string>
     <string name="poi_windfall">متضرره من الرياح</string>
     <string name="poi_scrub">فيضة/روضة</string>
-    <string name="poi_heath">براح</string>
+    <string name="poi_heath">براح/قفار ( أراضي الأشجار القمئية)</string>
     <string name="poi_railway_level_crossing">مستوى العبور</string>
     <string name="poi_railway_crossing">معبر خط القطار</string>
     <string name="poi_tactile_paving_no">بدون رصيف اللمس/المكفوفين</string>
@@ -3299,7 +3299,7 @@
     <string name="poi_departures_board_yes">نعم</string>
     <string name="poi_departures_board_no">لوحة المغادرين: لا</string>
     <string name="poi_elevator">مصعد</string>
-    <string name="poi_city_block">كتلة المدينة</string>
+    <string name="poi_city_block">مساحة المدينة</string>
     <string name="poi_borough">محافظة</string>
     <string name="poi_give_box">صندوق العطايا</string>
     <string name="poi_traffic_signals_arrow_no">أسهم: لا</string>
@@ -3827,4 +3827,5 @@
     <string name="poi_content_wine">المحتوى: نبيذ</string>
     <string name="poi_pawnbroker">مقرض مال</string>
     <string name="poi_bay_filter">نوع الخليج</string>
+    <string name="poi_dune">كثيب رملي/عرق/سيف</string>
 </resources>

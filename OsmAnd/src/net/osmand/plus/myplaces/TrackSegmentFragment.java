@@ -286,13 +286,13 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 	@Override
 	public void openSplitInterval(GpxDisplayItem gpxItem, TrkSegment trkSegment) {
 		FragmentManager fragmentManager = getFragmentManager();
-		if (fragmentManager != null) {
+		if (fragmentManager != null && displayHelper != null) {
 			SplitSegmentDialogFragment.showInstance(fragmentManager, displayHelper, gpxItem, trkSegment);
 		}
 	}
 
 	@Override
-	public void openAnalyzeOnMap(GpxDisplayItem gpxItem) {
+	public void openAnalyzeOnMap(@NonNull GpxDisplayItem gpxItem) {
 		OsmandSettings settings = app.getSettings();
 		settings.setMapLocationToShow(gpxItem.locationOnMap.lat, gpxItem.locationOnMap.lon,
 				settings.getLastKnownMapZoom(),

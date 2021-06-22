@@ -74,6 +74,7 @@ public class UiUtilities {
 
 	public enum DialogButtonType {
 		PRIMARY,
+		PRIMARY_HARMFUL,
 		SECONDARY,
 		SECONDARY_HARMFUL,
 		STROKED
@@ -442,14 +443,13 @@ public class UiUtilities {
 		} catch (Throwable e) { }
 	}
 
-	public static void rotateImageByLayoutDirection(ImageView image, int layoutDirection) {
+	public static void rotateImageByLayoutDirection(ImageView image) {
 		if (image == null) {
 			return;
 		}
-		int rotation = layoutDirection == ViewCompat.LAYOUT_DIRECTION_RTL ? 180 : 0;
+		int rotation = AndroidUtils.getLayoutDirection(image.getContext()) == ViewCompat.LAYOUT_DIRECTION_RTL ? 180 : 0;
 		image.setRotationY(rotation);
 	}
-
 
 	public static void updateCustomRadioButtons(Context app, View buttonsView, boolean nightMode,
 	                                            CustomRadioButtonType buttonType) {
@@ -721,6 +721,13 @@ public class UiUtilities {
 					AndroidUtils.setBackground(ctx, buttonContainer, nightMode, R.drawable.ripple_solid_light, R.drawable.ripple_solid_dark);
 				}
 				AndroidUtils.setBackground(ctx, buttonView, nightMode, R.drawable.dlg_btn_primary_light, R.drawable.dlg_btn_primary_dark);
+				textAndIconColorResId = nightMode ? R.color.dlg_btn_primary_text_dark : R.color.dlg_btn_primary_text_light;
+				break;
+			case PRIMARY_HARMFUL:
+				if (v21) {
+					AndroidUtils.setBackground(ctx, buttonContainer, nightMode, R.drawable.ripple_solid_light, R.drawable.ripple_solid_dark);
+				}
+				AndroidUtils.setBackground(buttonView, AppCompatResources.getDrawable(ctx, R.drawable.dlg_btn_primary_harmfull));
 				textAndIconColorResId = nightMode ? R.color.dlg_btn_primary_text_dark : R.color.dlg_btn_primary_text_light;
 				break;
 			case SECONDARY:

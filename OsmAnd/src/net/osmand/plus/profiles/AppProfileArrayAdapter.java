@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.profiles.data.ProfileDataObject;
 
 import java.util.List;
 

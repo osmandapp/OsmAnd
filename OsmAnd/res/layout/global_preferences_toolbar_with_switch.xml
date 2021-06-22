@@ -76,7 +76,9 @@
 
 		</LinearLayout>
 
-		<include layout="@layout/preference_toolbar_switch" />
+		<include
+			layout="@layout/preference_toolbar_switch"
+			tools:visibility="gone" />
 
 	</LinearLayout>
 

@@ -10,6 +10,7 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 
+import net.osmand.StateChangedListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
@@ -76,10 +77,14 @@ public class MapWidgetRegistry {
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
 
+	private final StateChangedListener<String> listener;
+
 	public MapWidgetRegistry(OsmandApplication app) {
 		this.app = app;
 		this.settings = app.getSettings();
 		loadVisibleElementsFromSettings();
+		listener = change -> updateVisibleWidgets();
+		settings.AVAILABLE_APP_MODES.addListener(listener);
 	}
 
 	public void populateStackControl(LinearLayout stack,

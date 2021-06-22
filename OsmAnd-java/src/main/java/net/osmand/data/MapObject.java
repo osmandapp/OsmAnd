@@ -16,13 +16,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 import java.util.zip.GZIPInputStream;
 
 
@@ -110,20 +108,11 @@ public abstract class MapObject implements Comparable<MapObject> {
 		return mp;
 	}
 
-	public List<String> getAllNames() {
-		List<String> l = new ArrayList<String>();
-		if (!Algorithms.isEmpty(enName)) {
-			l.add(unzipContent(enName));
-		}
-		if (names != null) {
-			for (String nm : names.values()) {
-				l.add(unzipContent(nm));
-			}
-		}
-		return l;
+	public List<String> getOtherNames() {
+		return getOtherNames(false);
 	}
 	
-	public List<String> getAllNames(boolean transliterate) {
+	public List<String> getOtherNames(boolean transliterate) {
 		List<String> l = new ArrayList<String>();
 		String enName = getEnName(transliterate); 
 		if (!Algorithms.isEmpty(enName)) {
@@ -183,7 +172,9 @@ public abstract class MapObject implements Comparable<MapObject> {
 	public String getName(String lang, boolean transliterate) {
 		if (lang != null && lang.length() > 0) {
 			if (lang.equals("en")) {
-				return getEnName(transliterate);
+				// for some objects like wikipedia, english name is stored 'name' tag
+				String enName = getEnName(transliterate);
+				return !Algorithms.isEmpty(enName) ? enName : getName();
 			} else {
 				// get name
 				if (names != null) {

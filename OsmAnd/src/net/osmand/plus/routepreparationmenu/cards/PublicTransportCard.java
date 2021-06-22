@@ -37,7 +37,7 @@ import net.osmand.util.Algorithms;
 import java.util.Iterator;
 import java.util.List;
 
-public class PublicTransportCard extends BaseCard {
+public class PublicTransportCard extends MapBaseCard {
 
 	private static final int MIN_WALK_TIME = 120;
 	public static final int DETAILS_BUTTON_INDEX = 0;
@@ -138,9 +138,14 @@ public class PublicTransportCard extends BaseCard {
 
 		TextView fromLine = (TextView) view.findViewById(R.id.from_line);
 		TextView wayLine = (TextView) view.findViewById(R.id.way_line);
+		TextView intervalLine = view.findViewById(R.id.interval_line);
 
 		fromLine.setText(getFirstLineDescrSpan());
 		wayLine.setText(getSecondLineDescrSpan(segments));
+		if (hasInterval(segments)) {
+			intervalLine.setText(getIntervalDescr(segments));
+			intervalLine.setVisibility(View.VISIBLE);
+		}
 
 		updateButtons();
 
@@ -150,6 +155,15 @@ public class PublicTransportCard extends BaseCard {
 		if (transparentBackground) {
 			view.findViewById(R.id.routes_info_container).setBackgroundDrawable(null);
 		}
+	}
+
+	private boolean hasInterval(List<TransportRouteResultSegment> segments) {
+		for (TransportRouteResultSegment segment : segments) {
+			if (segment.route.hasInterval()) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public void updateButtons() {
@@ -278,6 +292,28 @@ public class PublicTransportCard extends BaseCard {
 		secondLineDesc.setSpan(new CustomTypefaceSpan(typeface), startWalkTime, startWalkTime + walkTimeStr.length(), 0);
 
 		return secondLineDesc;
+	}
+
+	private String getIntervalDescr(List<TransportRouteResultSegment> segments) {
+		String interval = Algorithms.capitalizeFirstLetter(app.getString(R.string.shared_string_interval));
+		Iterator<TransportRouteResultSegment> iterator = segments.iterator();
+		boolean firstInterval = true;
+		while (iterator.hasNext()) {
+			TransportRouteResultSegment segment = iterator.next();
+			if (segment.route.hasInterval()) {
+				if (firstInterval) {
+					interval = app.getString(R.string.ltr_or_rtl_combine_via_space, interval,
+							app.getString(R.string.ltr_or_rtl_combine_via_dash,
+									segment.route.getRef(), segment.route.getInterval()));
+					firstInterval = false;
+				} else {
+					interval = app.getString(R.string.ltr_or_rtl_combine_via_comma, interval,
+							app.getString(R.string.ltr_or_rtl_combine_via_dash,
+									segment.route.getRef(), segment.route.getInterval()));
+				}
+			}
+		}
+		return interval;
 	}
 
 	private void createRouteBadges(List<TransportRouteResultSegment> segments, boolean badgesRowClickable) {

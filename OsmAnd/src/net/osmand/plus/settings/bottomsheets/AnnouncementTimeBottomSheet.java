@@ -1,26 +1,24 @@
 package net.osmand.plus.settings.bottomsheets;
 
-import android.graphics.drawable.ClipDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
-import android.widget.SeekBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+
+import com.google.android.material.slider.Slider;
+import com.google.android.material.slider.Slider.OnChangeListener;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
+import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem.Builder;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routing.data.AnnounceTimeDistances;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -33,8 +31,7 @@ import org.apache.commons.logging.Log;
 import static net.osmand.plus.settings.bottomsheets.SingleSelectPreferenceBottomSheet.SELECTED_ENTRY_INDEX_KEY;
 
 
-public class AnnouncementTimeBottomSheet extends BasePreferenceBottomSheet
-		implements SeekBar.OnSeekBarChangeListener {
+public class AnnouncementTimeBottomSheet extends BasePreferenceBottomSheet {
 
 	public static final String TAG = AnnouncementTimeBottomSheet.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(AnnouncementTimeBottomSheet.class);
@@ -46,7 +43,7 @@ public class AnnouncementTimeBottomSheet extends BasePreferenceBottomSheet
 	private int selectedEntryIndex = -1;
 
 	private TextViewEx tvSeekBarLabel;
-	private SeekBar seekBarArrival;
+	private Slider slider;
 	private ImageView ivArrow;
 	private TextViewEx tvIntervalsDescr;
 
@@ -110,22 +107,6 @@ public class AnnouncementTimeBottomSheet extends BasePreferenceBottomSheet
 		dismiss();
 	}
 
-	@Override
-	public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-		if (progress != selectedEntryIndex) {
-			selectedEntryIndex = progress;
-			updateViews();
-		}
-	}
-
-	@Override
-	public void onStartTrackingTouch(SeekBar seekBar) {
-	}
-
-	@Override
-	public void onStopTrackingTouch(SeekBar seekBar) {
-	}
-
 	private ListPreferenceEx getListPreference() {
 		return (ListPreferenceEx) getPreference();
 	}
@@ -135,30 +116,40 @@ public class AnnouncementTimeBottomSheet extends BasePreferenceBottomSheet
 				.inflate(R.layout.bottom_sheet_announcement_time, null);
 
 		tvSeekBarLabel = rootView.findViewById(R.id.tv_seek_bar_label);
-		seekBarArrival = rootView.findViewById(R.id.seek_bar_arrival);
+		slider = rootView.findViewById(R.id.arrival_slider);
 		ivArrow = rootView.findViewById(R.id.iv_arrow);
 		tvIntervalsDescr = rootView.findViewById(R.id.tv_interval_descr);
+		int appModeColor = getAppMode().getProfileColor(nightMode);
 
-		setProfileColorToSeekBar();
-		seekBarArrival.setOnSeekBarChangeListener(this);
-		seekBarArrival.setProgress(selectedEntryIndex);
-		seekBarArrival.setMax(listPreference.getEntries().length - 1);
-		rootView.findViewById(R.id.description_container).setOnClickListener(new View.OnClickListener() {
+		slider.setValue(selectedEntryIndex);
+		slider.setValueFrom(0);
+		slider.setValueTo(listPreference.getEntries().length - 1);
+		slider.setStepSize(1);
+		slider.addOnChangeListener(new OnChangeListener() {
+			@Override
+			public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
+				int intValue = (int) value;
+				if (intValue != selectedEntryIndex) {
+					selectedEntryIndex = intValue;
+					updateViews();
+				}
+			}
+		});
+		UiUtilities.setupSlider(slider, nightMode, appModeColor, true);
+		rootView.findViewById(R.id.description_container).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				toggleDescriptionVisibility();
 			}
 		});
 
-		return new BaseBottomSheetItem.Builder()
+		return new Builder()
 				.setCustomView(rootView)
 				.create();
 	}
 
 	private void updateViews() {
-		seekBarArrival.setProgress(selectedEntryIndex);
 		tvSeekBarLabel.setText(listPreference.getEntries()[selectedEntryIndex]);
-
 		float value = (float) listPreference.getEntryValues()[selectedEntryIndex];
 		announceTimeDistances.setArrivalDistances(value);
 		tvIntervalsDescr.setText(announceTimeDistances.getIntervalsDescription(app));
@@ -168,31 +159,6 @@ public class AnnouncementTimeBottomSheet extends BasePreferenceBottomSheet
 		collapsed = !collapsed;
 		ivArrow.setImageResource(collapsed ? R.drawable.ic_action_arrow_down : R.drawable.ic_action_arrow_up);
 		AndroidUiHelper.updateVisibility(tvIntervalsDescr, !collapsed);
-	}
-
-	private void setProfileColorToSeekBar() {
-		int color = getAppMode().getProfileColor(nightMode);
-
-		LayerDrawable seekBarProgressLayer =
-				(LayerDrawable) ContextCompat.getDrawable(app, R.drawable.seekbar_progress_announcement_time);
-
-		GradientDrawable background = (GradientDrawable) seekBarProgressLayer.findDrawableByLayerId(R.id.background);
-		background.setColor(color);
-		background.setAlpha(70);
-
-		GradientDrawable progress = (GradientDrawable) seekBarProgressLayer.findDrawableByLayerId(R.id.progress);
-		progress.setColor(color);
-		Drawable clippedProgress = new ClipDrawable(progress, Gravity.CENTER_VERTICAL | Gravity.START, 1);
-
-		seekBarArrival.setProgressDrawable(new LayerDrawable(new Drawable[] {
-				background, clippedProgress
-		}));
-
-		LayerDrawable seekBarThumpLayer =
-				(LayerDrawable) ContextCompat.getDrawable(app, R.drawable.seekbar_thumb_announcement_time);
-		GradientDrawable thump = (GradientDrawable) seekBarThumpLayer.findDrawableByLayerId(R.id.thump);
-		thump.setColor(color);
-		seekBarArrival.setThumb(thump);
 	}
 
 	public static void showInstance(@NonNull FragmentManager fm, String prefKey, Fragment target,

@@ -22,6 +22,7 @@ import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.quickaction.SwitchableAction;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.util.Algorithms;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -65,16 +66,36 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 	}
 
 	@Override
-	protected void saveListToParams(List<Pair<String, String>> list) {
+	public String getNextSelectedItem(OsmandApplication app) {
+		List<Pair<String, String>> sources = loadListFromParams();
+		if (sources.size() > 0) {
+			String currentSource = getSelectedItem(app);
 
+			int index = -1;
+			for (int idx = 0; idx < sources.size(); idx++) {
+				if (Algorithms.stringsEqual(sources.get(idx).first, currentSource)) {
+					index = idx;
+					break;
+				}
+			}
+
+			Pair<String, String> nextSource = sources.get(0);
+			if (index >= 0 && index + 1 < sources.size()) {
+				nextSource = sources.get(index + 1);
+			}
+			return nextSource.first;
+		}
+		return null;
+	}
+
+	@Override
+	protected void saveListToParams(List<Pair<String, String>> list) {
 		getParams().put(getListKey(), new Gson().toJson(list));
 	}
 
 	@Override
 	public List<Pair<String, String>> loadListFromParams() {
-
 		String json = getParams().get(getListKey());
-
 		if (json == null || json.isEmpty()) return new ArrayList<>();
 
 		Type listType = new TypeToken<ArrayList<Pair<String, String>>>() {
@@ -84,11 +105,14 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 	}
 
 	@Override
+	protected String getItemName(Context context, Pair<String, String> item) {
+		return item.second;
+	}
+
+	@Override
 	public void execute(MapActivity activity) {
-
-		if (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) != null) {
-
-			OsmandSettings settings = activity.getMyApplication().getSettings();
+		OsmandRasterMapsPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class);
+		if (plugin != null) {
 			List<Pair<String, String>> sources = loadListFromParams();
 			if (sources.size() > 0) {
 				boolean showBottomSheetStyles = Boolean.parseBoolean(getParams().get(KEY_DIALOG));
@@ -96,18 +120,8 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 					showChooseDialog(activity.getSupportFragmentManager());
 					return;
 				}
-
-				Pair<String, String> currentSource = settings.MAP_ONLINE_DATA.get()
-						? new Pair<>(settings.MAP_TILE_SOURCES.get(), settings.MAP_TILE_SOURCES.get())
-						: new Pair<>(LAYER_OSM_VECTOR, activity.getString(R.string.vector_data));
-
-				Pair<String, String> nextSource = sources.get(0);
-				int index = sources.indexOf(currentSource);
-
-				if (index >= 0 && index + 1 < sources.size()) {
-					nextSource = sources.get(index + 1);
-				}
-				executeWithParams(activity, nextSource.first);
+				String nextItem = getNextSelectedItem(activity.getMyApplication());
+				executeWithParams(activity, nextItem);
 			}
 		}
 	}
@@ -202,11 +216,6 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 				builder.show();
 			}
 		};
-	}
-
-	@Override
-	protected String getItemName(Context context, Pair<String, String> item) {
-		return item.second;
 	}
 
 	@Override

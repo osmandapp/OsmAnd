@@ -175,7 +175,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 					});
 				}
 				for (Purchase purchase : purchases) {
-					InAppSubscription subscription = getLiveUpdates().getSubscriptionBySku(purchase.getSku());
+					InAppSubscription subscription = getSubscriptions().getSubscriptionBySku(purchase.getSku());
 					if (!purchase.isAcknowledged() || (subscription != null && !subscription.isPurchased())) {
 						onPurchaseFinished(purchase);
 					}
@@ -352,7 +352,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 			 */
 
 			List<String> allOwnedSubscriptionSkus = getAllOwnedSubscriptionSkus();
-			for (InAppSubscription s : getLiveUpdates().getAllSubscriptions()) {
+			for (InAppSubscription s : getSubscriptions().getAllSubscriptions()) {
 				if (hasDetails(s.getSku())) {
 					Purchase purchase = getPurchase(s.getSku());
 					SkuDetails liveUpdatesDetails = getSkuDetails(s.getSku());
@@ -366,7 +366,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 				Purchase purchase = getPurchase(sku);
 				SkuDetails liveUpdatesDetails = getSkuDetails(sku);
 				if (liveUpdatesDetails != null) {
-					InAppSubscription s = getLiveUpdates().upgradeSubscription(sku);
+					InAppSubscription s = getSubscriptions().upgradeSubscription(sku);
 					if (s == null) {
 						s = new InAppPurchaseLiveUpdatesOldSubscription(liveUpdatesDetails);
 					}
@@ -415,14 +415,15 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 
 			// Do we have the live updates?
 			boolean subscribedToLiveUpdates = false;
-			List<Purchase> liveUpdatesPurchases = new ArrayList<>();
-			for (InAppSubscription s : getLiveUpdates().getAllSubscriptions()) {
+			List<Purchase> subscriptionPurchases = new ArrayList<>();
+			for (InAppSubscription s : getSubscriptions().getAllSubscriptions()) {
 				Purchase purchase = getPurchase(s.getSku());
 				if (purchase != null || s.getState().isActive()) {
 					if (purchase != null) {
-						liveUpdatesPurchases.add(purchase);
+						subscriptionPurchases.add(purchase);
 					}
-					if (!subscribedToLiveUpdates) {
+					if (!subscribedToLiveUpdates
+							&& (purchases.isLiveUpdatesSubscription(s) || purchases.isOsmAndProSubscription(s))) {
 						subscribedToLiveUpdates = true;
 					}
 				}
@@ -443,9 +444,9 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 			settings.INAPPS_READ.set(true);
 
 			List<Purchase> tokensToSend = new ArrayList<>();
-			if (liveUpdatesPurchases.size() > 0) {
+			if (subscriptionPurchases.size() > 0) {
 				List<String> tokensSent = Arrays.asList(settings.BILLING_PURCHASE_TOKENS_SENT.get().split(";"));
-				for (Purchase purchase : liveUpdatesPurchases) {
+				for (Purchase purchase : subscriptionPurchases) {
 					if (needRestoreUserInfo()) {
 						restoreUserInfo(purchase);
 					}
@@ -550,7 +551,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 	}
 
 	@Override
-	protected InAppCommand getPurchaseLiveUpdatesCommand(final WeakReference<Activity> activity, final String sku, final String userInfo) {
+	protected InAppCommand getPurchaseSubscriptionCommand(final WeakReference<Activity> activity, final String sku, final String userInfo) {
 		return new InAppCommand() {
 			@Override
 			public void run(InAppPurchaseHelper helper) {

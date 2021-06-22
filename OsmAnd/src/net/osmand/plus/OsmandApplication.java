@@ -25,13 +25,6 @@ import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.multidex.MultiDex;
-import androidx.multidex.MultiDexApplication;
-
 import net.osmand.AndroidUtils;
 import net.osmand.FileUtils;
 import net.osmand.IndexConstants;
@@ -52,6 +45,8 @@ import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.actions.OsmAndDialogs;
 import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPIImpl;
+import net.osmand.plus.backup.BackupHelper;
+import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadService;
@@ -66,7 +61,6 @@ import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.helpers.enums.DrivingRegion;
 import net.osmand.plus.helpers.enums.MetricsConstants;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
-import net.osmand.plus.itinerary.ItineraryHelper;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
@@ -85,7 +79,7 @@ import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.backup.SettingsHelper;
+import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.router.GeneralRouter;
@@ -107,6 +101,12 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.multidex.MultiDex;
+import androidx.multidex.MultiDexApplication;
 import btools.routingapp.BRouterServiceConnection;
 import btools.routingapp.IBRouterService;
 
@@ -161,14 +161,15 @@ public class OsmandApplication extends MultiDexApplication {
 	InAppPurchaseHelper inAppPurchaseHelper;
 	MapViewTrackingUtilities mapViewTrackingUtilities;
 	LockHelper lockHelper;
-	SettingsHelper settingsHelper;
+	FileSettingsHelper fileSettingsHelper;
+	NetworkSettingsHelper networkSettingsHelper;
 	GpxDbHelper gpxDbHelper;
 	QuickActionRegistry quickActionRegistry;
 	OsmOAuthHelper osmOAuthHelper;
 	OprAuthHelper oprAuthHelper;
 	MeasurementEditingContext measurementEditingContext;
 	OnlineRoutingHelper onlineRoutingHelper;
-	ItineraryHelper itineraryHelper;
+	BackupHelper backupHelper;
 
 	private Map<String, Builder> customRoutingConfigs = new ConcurrentHashMap<>();
 	private File externalStorageDirectory;
@@ -278,11 +279,11 @@ public class OsmandApplication extends MultiDexApplication {
 			}
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
-	
+
+	@NonNull
 	public UiUtilities getUIUtilities() {
 		return iconsCache;
 	}
-	
 	
 	@Override
 	public void onTerminate() {
@@ -391,8 +392,12 @@ public class OsmandApplication extends MultiDexApplication {
 		return lockHelper;
 	}
 
-	public SettingsHelper getSettingsHelper() {
-		return settingsHelper;
+	public FileSettingsHelper getFileSettingsHelper() {
+		return fileSettingsHelper;
+	}
+
+	public NetworkSettingsHelper getNetworkSettingsHelper() {
+		return networkSettingsHelper;
 	}
 
 	public OsmOAuthHelper getOsmOAuthHelper() {
@@ -470,8 +475,8 @@ public class OsmandApplication extends MultiDexApplication {
 		return onlineRoutingHelper;
 	}
 
-	public ItineraryHelper getItineraryHelper() {
-		return itineraryHelper;
+	public BackupHelper getBackupHelper() {
+		return backupHelper;
 	}
 
 	public TransportRoutingHelper getTransportRoutingHelper() {

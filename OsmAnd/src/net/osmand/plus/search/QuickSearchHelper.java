@@ -2,10 +2,8 @@ package net.osmand.plus.search;
 
 import android.view.View;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.WptPt;
+import net.osmand.IndexConstants;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.data.Amenity;
@@ -18,7 +16,7 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
-import net.osmand.plus.GpxSelectionHelper;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -45,9 +43,14 @@ import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public class QuickSearchHelper implements ResourceListener {
 
@@ -57,8 +60,10 @@ public class QuickSearchHelper implements ResourceListener {
 	public static final int SEARCH_FAVORITE_CATEGORY_PRIORITY = 51;
 	public static final int SEARCH_WPT_API_PRIORITY = 50;
 	public static final int SEARCH_WPT_OBJECT_PRIORITY = 52;
+	public static final int SEARCH_TRACK_API_PRIORITY = 50;
+	public static final int SEARCH_TRACK_OBJECT_PRIORITY = 53;
 	public static final int SEARCH_HISTORY_API_PRIORITY = 50;
-	public static final int SEARCH_HISTORY_OBJECT_PRIORITY = 53;
+	public static final int SEARCH_HISTORY_OBJECT_PRIORITY = 54;
 	public static final int SEARCH_ONLINE_API_PRIORITY = 500;
 	public static final int SEARCH_ONLINE_AMENITY_PRIORITY = 500;
 	private OsmandApplication app;
@@ -102,6 +107,7 @@ public class QuickSearchHelper implements ResourceListener {
 
 		// Register WptPt search api
 		core.registerAPI(new SearchWptAPI(app));
+		core.registerAPI(new SearchGpxAPI(app));
 		core.registerAPI(new SearchHistoryAPI(app));
 
 		core.registerAPI(new SearchOnlineApi(app));
@@ -134,6 +140,7 @@ public class QuickSearchHelper implements ResourceListener {
 	public void setRepositoriesForSearchUICore(final OsmandApplication app) {
 		BinaryMapIndexReader[] binaryMapIndexReaderArray = app.getResourceManager().getQuickSearchFiles();
 		core.getSearchSettings().setOfflineIndexes(Arrays.asList(binaryMapIndexReaderArray));
+		core.getSearchSettings().setRegions(app.getRegions());
 	}
 
 	public Amenity findAmenity(String name, double lat, double lon, String lang, boolean transliterate) {
@@ -195,24 +202,22 @@ public class QuickSearchHelper implements ResourceListener {
 				return false;
 			}
 
-			List<GpxSelectionHelper.SelectedGpxFile> list = app.getSelectedGpxHelper().getSelectedGPXFiles();
-			for (GpxSelectionHelper.SelectedGpxFile selectedGpx : list) {
-				if (selectedGpx != null) {
-					for (GPXUtilities.WptPt point : selectedGpx.getGpxFile().getPoints()) {
-						SearchResult sr = new SearchResult(phrase);
-						sr.localeName = point.name;
-						sr.object = point;
-						sr.priority = SEARCH_WPT_OBJECT_PRIORITY;
-						sr.objectType = ObjectType.WPT;
-						sr.location = new LatLon(point.getLatitude(), point.getLongitude());
-						//sr.localeRelatedObjectName = app.getRegions().getCountryName(sr.location);
-						sr.relatedObject = selectedGpx.getGpxFile();
-						sr.preferredZoom = 17;
-						if (phrase.getFullSearchPhrase().length() <= 1 && phrase.isNoSelectedType()) {
-							resultMatcher.publish(sr);
-						} else if (phrase.getFirstUnknownNameStringMatcher().matches(sr.localeName)) {
-							resultMatcher.publish(sr);
-						}
+			List<SelectedGpxFile> list = app.getSelectedGpxHelper().getSelectedGPXFiles();
+			for (SelectedGpxFile selectedGpx : list) {
+				for (WptPt point : selectedGpx.getGpxFile().getPoints()) {
+					SearchResult sr = new SearchResult(phrase);
+					sr.localeName = point.name;
+					sr.object = point;
+					sr.priority = SEARCH_WPT_OBJECT_PRIORITY;
+					sr.objectType = ObjectType.WPT;
+					sr.location = new LatLon(point.getLatitude(), point.getLongitude());
+					//sr.localeRelatedObjectName = app.getRegions().getCountryName(sr.location);
+					sr.relatedObject = selectedGpx.getGpxFile();
+					sr.preferredZoom = 17;
+					if (phrase.getFullSearchPhrase().length() <= 1 && phrase.isNoSelectedType()) {
+						resultMatcher.publish(sr);
+					} else if (phrase.getFirstUnknownNameStringMatcher().matches(sr.localeName)) {
+						resultMatcher.publish(sr);
 					}
 				}
 			}
@@ -494,6 +499,50 @@ public class QuickSearchHelper implements ResourceListener {
 				return -1;
 			}
 			return SEARCH_HISTORY_API_PRIORITY;
+		}
+	}
+
+	public static class SearchGpxAPI extends SearchBaseAPI {
+
+		private final OsmandApplication app;
+
+		public SearchGpxAPI(OsmandApplication app) {
+			super(ObjectType.GPX_TRACK);
+			this.app = app;
+		}
+
+		@Override
+		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
+			File tracksDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
+			List<GPXInfo> gpxInfoList = new ArrayList<>();
+			GpxUiHelper.readGpxDirectory(tracksDir, gpxInfoList, "", false);
+			for (GPXInfo gpxInfo : gpxInfoList) {
+				SearchResult searchResult = new SearchResult(phrase);
+				searchResult.objectType = ObjectType.GPX_TRACK;
+				searchResult.localeName = GpxUiHelper.getGpxFileRelativePath(app, gpxInfo.getFileName());
+				searchResult.relatedObject = gpxInfo;
+				searchResult.priority = SEARCH_TRACK_OBJECT_PRIORITY;
+				searchResult.preferredZoom = 17;
+				if (phrase.getFullSearchPhrase().length() <= 1 && phrase.isNoSelectedType()) {
+					resultMatcher.publish(searchResult);
+				} else if (phrase.getFirstUnknownNameStringMatcher().matches(searchResult.localeName)) {
+					resultMatcher.publish(searchResult);
+				}
+			}
+			return true;
+		}
+
+		@Override
+		public int getSearchPriority(SearchPhrase p) {
+			if (!p.isNoSelectedType()) {
+				return -1;
+			}
+			return SEARCH_TRACK_API_PRIORITY;
+		}
+
+		@Override
+		public boolean isSearchMoreAvailable(SearchPhrase phrase) {
+			return false;
 		}
 	}
 

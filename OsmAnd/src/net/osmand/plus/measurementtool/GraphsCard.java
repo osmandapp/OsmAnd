@@ -24,6 +24,7 @@ import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.LineGraphType;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
@@ -37,7 +38,7 @@ import net.osmand.plus.measurementtool.graph.CustomGraphAdapter.LegendViewType;
 import net.osmand.plus.measurementtool.graph.GraphAdapterHelper;
 import net.osmand.plus.measurementtool.graph.GraphAdapterHelper.RefreshMapCallback;
 import net.osmand.plus.routepreparationmenu.RouteDetailsFragment;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.util.Algorithms;
 
@@ -53,7 +54,7 @@ import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.SPEED;
 import static net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionItem;
 import static net.osmand.router.RouteStatisticsHelper.RouteStatistics;
 
-public class GraphsCard extends BaseCard implements OnUpdateInfoListener {
+public class GraphsCard extends MapBaseCard implements OnUpdateInfoListener {
 
 	private static String GRAPH_DATA_GPX_FILE_NAME = "graph_data_tmp";
 	private static int INVALID_ID = -1;
@@ -109,7 +110,14 @@ public class GraphsCard extends BaseCard implements OnUpdateInfoListener {
 
 		GraphAdapterHelper.bindGraphAdapters(commonGraphAdapter, Collections.singletonList((BaseGraphAdapter) customGraphAdapter), (ViewGroup) view);
 		refreshMapCallback = GraphAdapterHelper.bindToMap(commonGraphAdapter, mapActivity, trackDetailsMenu);
+		updateTopPadding();
 		fullUpdate();
+	}
+
+	private void updateTopPadding() {
+		int topPadding = AndroidUiHelper.isOrientationPortrait(mapActivity) ?
+				0 : app.getResources().getDimensionPixelSize(R.dimen.content_padding_small);
+		view.setPadding(0, topPadding, 0, 0);
 	}
 
 	@Override
@@ -284,7 +292,7 @@ public class GraphsCard extends BaseCard implements OnUpdateInfoListener {
 		OsmandApplication app = getMyApplication();
 		gpxFile = getGpxFile();
 		analysis = gpxFile != null ? gpxFile.getAnalysis(0) : null;
-		gpxItem = gpxFile != null ? GpxUiHelper.makeGpxDisplayItem(app, gpxFile) : null;
+		gpxItem = gpxFile != null ? GpxUiHelper.makeGpxDisplayItem(app, gpxFile, true) : null;
 		if (gpxItem != null) {
 			trackDetailsMenu.setGpxItem(gpxItem);
 		}

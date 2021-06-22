@@ -36,7 +36,6 @@ import net.osmand.plus.settings.fragments.ExportSettingsAdapter.OnItemSelectedLi
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.LinkedHashMap;
@@ -45,7 +44,7 @@ import java.util.Map;
 
 public abstract class BaseSettingsListFragment extends BaseOsmAndFragment implements OnItemSelectedListener {
 
-	protected static final String SETTINGS_LIST_TAG = "settings_list_tag";
+	public static final String SETTINGS_LIST_TAG = "settings_list_tag";
 
 	protected OsmandApplication app;
 
@@ -200,11 +199,12 @@ public abstract class BaseSettingsListFragment extends BaseOsmAndFragment implem
 		});
 	}
 
-	private void setupListView(@NonNull final ListView listView) {
+	public static void setupListView(@NonNull final ListView listView) {
 		if (listView.getFooterViewsCount() == 0) {
-			int padding = getResources().getDimensionPixelSize(R.dimen.toolbar_height_expanded);
+			Context context = listView.getContext();
+			int padding = context.getResources().getDimensionPixelSize(R.dimen.toolbar_height_expanded);
 
-			View emptyView = new View(listView.getContext());
+			View emptyView = new View(context);
 			emptyView.setLayoutParams(new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, padding));
 			listView.addFooterView(emptyView);
 			ScrollUtils.addOnGlobalLayoutListener(listView, new Runnable() {
@@ -221,8 +221,7 @@ public abstract class BaseSettingsListFragment extends BaseOsmAndFragment implem
 		if (calculatedSize != 0) {
 			selectedItemsSize.setText(AndroidUtils.formatSize(app, calculatedSize));
 
-			File dir = app.getAppPath("").getParentFile();
-			long availableSizeBytes = AndroidUtils.getAvailableSpace(dir);
+			long availableSizeBytes = AndroidUtils.getAvailableSpace(app);
 			if (calculatedSize > availableSizeBytes) {
 				String availableSize = AndroidUtils.formatSize(app, availableSizeBytes);
 				availableSpaceDescr.setText(getString(R.string.export_not_enough_space_descr, availableSize));

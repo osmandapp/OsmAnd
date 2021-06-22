@@ -22,7 +22,7 @@
     <string name="proxy_port">ポート</string>
     <string name="proxy_server">サーバー</string>
     <string name="shared_string_connection">接続</string>
-    <string name="shared_string_enable">有効</string>
+    <string name="shared_string_enable">有効化</string>
     <string name="proxy_type">プロキシタイプ</string>
     <string name="proxy_connected">接続しました</string>
     <string name="proxy_disconnected">切断しました</string>

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 
 import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.backup.items.OsmandSettingsItem;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
@@ -18,7 +19,7 @@ import java.util.Map;
 
 public abstract class OsmandSettingsItemReader<T extends OsmandSettingsItem> extends SettingsItemReader<T> {
 
-	private OsmandSettings settings;
+	private final OsmandSettings settings;
 
 	public OsmandSettingsItemReader(@NonNull T item, @NonNull OsmandSettings settings) {
 		super(item);
@@ -53,7 +54,7 @@ public abstract class OsmandSettingsItemReader<T extends OsmandSettingsItem> ext
 		readPreferencesFromJson(json);
 	}
 
-	void readPreferencesFromJson(final JSONObject json) {
+	public void readPreferencesFromJson(final JSONObject json) {
 		settings.getContext().runInUIThread(new Runnable() {
 			@Override
 			public void run() {

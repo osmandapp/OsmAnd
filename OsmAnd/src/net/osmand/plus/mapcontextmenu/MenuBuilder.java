@@ -82,9 +82,11 @@ import org.apache.commons.logging.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.ref.WeakReference;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -102,6 +104,11 @@ public class MenuBuilder {
 	protected final String NEAREST_WIKI_KEY = "nearest_wiki_key";
 	protected final String NEAREST_POI_KEY = "nearest_poi_key";
 
+	private static final int NEARBY_MAX_POI_COUNT = 10;
+	private static final int NEARBY_POI_MIN_RADIUS = 250;
+	private static final int NEARBY_POI_MAX_RADIUS = 1000;
+	private static final int NEARBY_POI_SEARCH_FACTOR = 2;
+
 	protected MapActivity mapActivity;
 	protected MapContextMenu mapContextMenu;
 	protected OsmandApplication app;
@@ -116,8 +123,7 @@ public class MenuBuilder {
 	private boolean showNearestWiki = false;
 	private boolean showNearestPoi = false;
 	private boolean showOnlinePhotos = true;
-	protected List<Amenity> nearestWiki = new ArrayList<>();
-	protected List<Amenity> nearestPoi = new ArrayList<>();
+
 	private List<OsmandPlugin> menuPlugins = new ArrayList<>();
 	@Nullable
 	private CardsRowBuilder onlinePhotoCardsRow;
@@ -271,7 +277,7 @@ public class MenuBuilder {
 		this.light = light;
 	}
 
-	public void build(View view) {
+	public void build(ViewGroup view) {
 		firstRow = true;
 		hidden = false;
 		buildTopInternal(view);
@@ -358,22 +364,70 @@ public class MenuBuilder {
 		}
 	}
 
-	protected void buildNearestWikiRow(View view) {
-		buildNearestRow(view, nearestWiki, processNearestWiki(),
-				R.drawable.ic_action_wikipedia, app.getString(R.string.wiki_around), NEAREST_WIKI_KEY);
+	protected void buildNearestWikiRow(ViewGroup viewGroup) {
+		final int position = viewGroup.getChildCount();
+		final WeakReference<ViewGroup> viewGroupRef = new WeakReference<>(viewGroup);
+		buildNearestWikiRow(new SearchAmenitiesListener() {
+			@Override
+			public void onFinish(List<Amenity> amenities) {
+				ViewGroup viewGroup = viewGroupRef.get();
+				if (viewGroup == null || Algorithms.isEmpty(amenities)) {
+					return;
+				}
+				View amenitiesRow = createRowContainer(viewGroup.getContext(), NEAREST_WIKI_KEY);
+
+				buildNearestRow(amenitiesRow, amenities, R.drawable.ic_action_wikipedia, app.getString(R.string.wiki_around), NEAREST_WIKI_KEY);
+				viewGroup.addView(amenitiesRow, position);
+			}
+		});
 	}
 
-	protected void buildNearestPoiRow(View view) {
+	protected void buildNearestPoiRow(ViewGroup viewGroup) {
 		if (amenity != null) {
-			buildNearestRow(view, nearestPoi, processNearestPoi(), AmenityMenuController.getRightIconId(amenity),
-					app.getString(R.string.speak_poi) + " \"" + AmenityMenuController.getTypeStr(amenity) + "\" (" + nearestPoi.size() + ")", NEAREST_POI_KEY);
+			final int position = viewGroup.getChildCount();
+			final WeakReference<ViewGroup> viewGroupRef = new WeakReference<>(viewGroup);
+			buildNearestPoiRow(new SearchAmenitiesListener() {
+				@Override
+				public void onFinish(List<Amenity> amenities) {
+					ViewGroup viewGroup = viewGroupRef.get();
+					if (viewGroup == null) {
+						return;
+					}
+					String title = app.getString(R.string.speak_poi);
+					String type = "\"" + AmenityMenuController.getTypeStr(amenity) + "\"";
+					String count = "(" + amenities.size() + ")";
+					String text = app.getString(R.string.ltr_or_rtl_triple_combine_via_space, title, type, count);
+
+					View amenitiesRow = createRowContainer(viewGroup.getContext(), NEAREST_POI_KEY);
+					buildNearestRow(amenitiesRow, amenities, AmenityMenuController.getRightIconId(amenity), text, NEAREST_POI_KEY);
+
+					View wikiRow = viewGroup.findViewWithTag(NEAREST_WIKI_KEY);
+					if (wikiRow != null) {
+						int index = viewGroup.indexOfChild(wikiRow);
+						viewGroup.addView(amenitiesRow, index + 1);
+					} else {
+						viewGroup.addView(amenitiesRow, position);
+					}
+				}
+			});
 		}
 	}
 
-	protected void buildNearestRow(View view, List<Amenity> nearestAmenities, boolean process, int iconId, String text, String amenityKey) {
-		if (process && nearestAmenities.size() > 0) {
-			buildRow(view, iconId, null, text + " (" + nearestAmenities.size() + ")", 0, true,
-					getCollapsableView(view.getContext(), true, nearestAmenities, amenityKey), false, 0, false, null, false);
+	protected View createRowContainer(Context context, String tag) {
+		LinearLayout view = new LinearLayout(context);
+		view.setTag(tag);
+		view.setOrientation(LinearLayout.VERTICAL);
+		view.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+		return view;
+	}
+
+	protected void buildNearestRow(View view, List<Amenity> nearestAmenities, int iconId, String text, String amenityKey) {
+		if (nearestAmenities.size() > 0) {
+			String count = "(" + nearestAmenities.size() + ")";
+			text = app.getString(R.string.ltr_or_rtl_combine_via_space, text, count);
+			CollapsableView collapsableView = getCollapsableView(view.getContext(), true, nearestAmenities, amenityKey);
+			buildRow(view, iconId, null, text, 0, true, collapsableView,
+					false, 0, false, null, false);
 		}
 	}
 
@@ -1025,6 +1079,14 @@ public class MenuBuilder {
 		container.addView(button);
 	}
 
+	protected void buildDateRow(View view, long timestamp) {
+		DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(view.getContext());
+		DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(view.getContext());
+		Date date = new Date(timestamp);
+		buildRow(view, R.drawable.ic_action_data, null, dateFormat.format(date) + " — " + timeFormat.format(date),
+				0, false, null, false, 0, false, null, false);
+	}
+
 	public boolean hasCustomAddressLine() {
 		return false;
 	}
@@ -1122,14 +1184,17 @@ public class MenuBuilder {
 		LinearLayout.LayoutParams titleParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		titleView.setLayoutParams(titleParams);
 		titleView.setTextSize(16);
-		titleView.setTextColor(app.getResources().getColor(light ? R.color.text_color_primary_light : R.color.text_color_primary_dark));
+		int textColor = app.getResources().getColor(light ? R.color.text_color_primary_light : R.color.text_color_primary_dark);
+		titleView.setTextColor(textColor);
 		String desc = route.getDescription(getMapActivity().getMyApplication(), true);
 		Drawable arrow = app.getUIUtilities().getIcon(R.drawable.ic_arrow_right_16, light ? R.color.ctx_menu_route_icon_color_light : R.color.ctx_menu_route_icon_color_dark);
 		arrow.setBounds(0, 0, arrow.getIntrinsicWidth(), arrow.getIntrinsicHeight());
 
 		titleView.setText(AndroidUtils.replaceCharsWithIcon(desc, arrow, arrowChars));
 		infoView.addView(titleView);
-
+		if (route.route.hasInterval()) {
+			infoView.addView(createIntervalView(view.getContext(), route, titleParams, textColor));
+		}
 		LinearLayout typeView = new LinearLayout(view.getContext());
 		typeView.setOrientation(LinearLayout.HORIZONTAL);
 		LinearLayout.LayoutParams typeViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -1158,6 +1223,18 @@ public class MenuBuilder {
 		((ViewGroup) view).addView(baseView);
 
 		return baseView;
+	}
+
+	private View createIntervalView(Context ctx, TransportStopRoute route, LinearLayout.LayoutParams titleParams,
+	                                int textColor) {
+		TextView intervalView;
+		intervalView = new TextView(ctx);
+		intervalView.setLayoutParams(titleParams);
+		intervalView.setTextSize(16);
+		intervalView.setTextColor(textColor);
+		intervalView.setText(ctx.getString(R.string.ltr_or_rtl_combine_via_colon,
+				ctx.getString(R.string.shared_string_interval), route.route.getInterval()));
+		return intervalView;
 	}
 
 	private void buildTransportRouteRow(ViewGroup parent, TransportStopRoute r, OnClickListener listener, boolean showDivider) {
@@ -1222,7 +1299,8 @@ public class MenuBuilder {
 
 		for (final Amenity poi : nearestAmenities) {
 			TextViewEx button = buildButtonInCollapsableView(context, false, false);
-			String name = poi.getName(preferredMapAppLang, transliterateNames);
+			final PointDescription pointDescription = mapActivity.getMapLayers().getPoiMapLayer().getObjectName(poi);
+			String name = pointDescription.getName();
 			if (Algorithms.isBlank(name)) {
 				name = AmenityMenuController.getTypeStr(poi);
 			}
@@ -1234,20 +1312,35 @@ public class MenuBuilder {
 				@Override
 				public void onClick(View v) {
 					LatLon latLon = new LatLon(poi.getLocation().getLatitude(), poi.getLocation().getLongitude());
-					PointDescription pointDescription = mapActivity.getMapLayers().getPoiMapLayer().getObjectName(poi);
 					mapActivity.getContextMenu().show(latLon, pointDescription, poi);
+					mapActivity.setMapLocation(poi.getLocation().getLatitude(), poi.getLocation().getLongitude());
 				}
 			});
 			view.addView(button);
 		}
 		PoiUIFilter filter = getPoiFilterForType(nearestPoiType);
 		if (filter != null) {
-			view.addView(createShowAllButton(context, filter));
+			if (nearestAmenities.size() >= NEARBY_MAX_POI_COUNT) {
+				view.addView(createShowOnMap(context, filter));
+			}
+			view.addView(createSearchMoreButton(context, filter));
 		}
 		return new CollapsableView(view, this, collapsed);
 	}
 
-	private View createShowAllButton(Context context, final PoiUIFilter filter) {
+	private View createSearchMoreButton(Context context, final PoiUIFilter filter) {
+		TextViewEx buttonShowAll = buildButtonInCollapsableView(context, false, false);
+		buttonShowAll.setText(app.getString(R.string.search_more));
+		buttonShowAll.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mapActivity.showQuickSearch(filter, latLon);
+			}
+		});
+		return buttonShowAll;
+	}
+
+	private View createShowOnMap(Context context, final PoiUIFilter filter) {
 		TextViewEx buttonShowAll = buildButtonInCollapsableView(context, false, false);
 		buttonShowAll.setText(app.getString(R.string.shared_string_show_on_map));
 		buttonShowAll.setOnClickListener(new View.OnClickListener() {
@@ -1338,26 +1431,22 @@ public class MenuBuilder {
 		return button;
 	}
 
-	protected boolean processNearestWiki() {
+	protected void buildNearestWikiRow(SearchAmenitiesListener listener) {
 		if (showNearestWiki && latLon != null && amenity != null) {
 			PoiUIFilter filter = app.getPoiFilters().getTopWikiPoiFilter();
 			if (filter != null) {
-				nearestWiki = getSortedAmenities(filter, latLon);
-				return true;
+				searchSortedAmenities(filter, latLon, listener);
 			}
 		}
-		return false;
 	}
 
-	protected boolean processNearestPoi() {
+	protected void buildNearestPoiRow(SearchAmenitiesListener listener) {
 		if (showNearestPoi && latLon != null && amenity != null) {
 			PoiUIFilter filter = getPoiFilterForAmenity(amenity);
 			if (filter != null) {
-				nearestPoi = getSortedAmenities(filter, latLon);
-				return true;
+				searchSortedAmenities(filter, latLon, listener);
 			}
 		}
-		return false;
 	}
 
 	private PoiUIFilter getPoiFilterForType(String nearestPoiType) {
@@ -1380,28 +1469,51 @@ public class MenuBuilder {
 		return null;
 	}
 
-	private List<Amenity> getSortedAmenities(PoiUIFilter filter, final LatLon latLon) {
-		QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), 250);
-
-		List<Amenity> nearestAmenities = getAmenities(rect, filter);
-		nearestAmenities.remove(amenity);
-
-		Collections.sort(nearestAmenities, new Comparator<Amenity>() {
-
-			@Override
-			public int compare(Amenity o1, Amenity o2) {
-				double d1 = MapUtils.getDistance(latLon, o1.getLocation());
-				double d2 = MapUtils.getDistance(latLon, o2.getLocation());
-				return Double.compare(d1, d2);
-			}
-		});
-
-		return nearestAmenities;
+	private void searchSortedAmenities(PoiUIFilter filter, LatLon latLon, SearchAmenitiesListener listener) {
+		execute(new SearchAmenitiesTask(filter, latLon, listener));
 	}
 
-	private List<Amenity> getAmenities(QuadRect rect, PoiUIFilter filter) {
-		return filter.searchAmenities(rect.top, rect.left,
-				rect.bottom, rect.right, -1, null);
+	private class SearchAmenitiesTask extends AsyncTask<Void, Void, List<Amenity>> {
+
+		private final LatLon latLon;
+		private final PoiUIFilter filter;
+		private final SearchAmenitiesListener listener;
+
+		private SearchAmenitiesTask(PoiUIFilter filter, LatLon latLon, SearchAmenitiesListener listener) {
+			this.filter = filter;
+			this.latLon = latLon;
+			this.listener = listener;
+		}
+
+		@Override
+		protected List<Amenity> doInBackground(Void... params) {
+			int radius = NEARBY_POI_MIN_RADIUS;
+			List<Amenity> amenities = Collections.emptyList();
+			while (amenities.size() < NEARBY_MAX_POI_COUNT && radius <= NEARBY_POI_MAX_RADIUS) {
+				QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), radius);
+				amenities = getAmenities(rect, filter);
+				amenities.remove(amenity);
+				radius *= NEARBY_POI_SEARCH_FACTOR;
+			}
+			MapUtils.sortListOfMapObject(amenities, latLon.getLatitude(), latLon.getLongitude());
+			return amenities.subList(0, Math.min(NEARBY_MAX_POI_COUNT, amenities.size()));
+		}
+
+		@Override
+		protected void onPostExecute(List<Amenity> amenities) {
+			if (listener != null) {
+				listener.onFinish(amenities);
+			}
+		}
+
+		private List<Amenity> getAmenities(QuadRect rect, PoiUIFilter filter) {
+			return filter.searchAmenities(rect.top, rect.left,
+					rect.bottom, rect.right, -1, null);
+		}
+	}
+
+	public interface SearchAmenitiesListener {
+		void onFinish(List<Amenity> amenities);
 	}
 
 	@SuppressWarnings("unchecked")

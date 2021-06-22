@@ -16,6 +16,8 @@ import android.os.Build;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.UiThread;
+import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.AndroidUtils;
@@ -31,6 +33,8 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.plus.activities.LocalIndexHelper;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.SavingTrackHelper;
+import net.osmand.plus.backup.BackupHelper;
+import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
@@ -39,7 +43,6 @@ import net.osmand.plus.helpers.DayNightHelper;
 import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelperImpl;
-import net.osmand.plus.itinerary.ItineraryHelper;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
@@ -60,7 +63,7 @@ import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.backup.SettingsHelper;
+import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.voice.CommandPlayerException;
@@ -137,8 +140,13 @@ public class AppInitializer implements IProgress {
 
 	public interface AppInitializeListener {
 
+		@WorkerThread
+		void onStart(AppInitializer init);
+
+		@UiThread
 		void onProgress(AppInitializer init, InitEvents event);
 
+		@UiThread
 		void onFinish(AppInitializer init);
 	}
 	
@@ -431,6 +439,7 @@ public class AppInitializer implements IProgress {
 		getLazyRoutingConfig();
 		app.applyTheme(app);
 		startupInit(app.reconnectToBRouter(), IBRouterService.class);
+		app.backupHelper = startupInit(new BackupHelper(app), BackupHelper.class);
 		app.inAppPurchaseHelper = startupInit(new InAppPurchaseHelperImpl(app), InAppPurchaseHelperImpl.class);
 		app.poiTypes = startupInit(MapPoiTypes.getDefaultNoInit(), MapPoiTypes.class);
 		app.transportRoutingHelper = startupInit(new TransportRoutingHelper(app), TransportRoutingHelper.class);
@@ -467,12 +476,12 @@ public class AppInitializer implements IProgress {
 		app.travelHelper = startupInit(app.travelHelper, TravelHelper.class);
 
 		app.lockHelper = startupInit(new LockHelper(app), LockHelper.class);
-		app.settingsHelper = startupInit(new SettingsHelper(app), SettingsHelper.class);
+		app.fileSettingsHelper = startupInit(new FileSettingsHelper(app), FileSettingsHelper.class);
+		app.networkSettingsHelper = startupInit(new NetworkSettingsHelper(app), NetworkSettingsHelper.class);
 		app.quickActionRegistry = startupInit(new QuickActionRegistry(app.getSettings()), QuickActionRegistry.class);
 		app.osmOAuthHelper = startupInit(new OsmOAuthHelper(app), OsmOAuthHelper.class);
 		app.oprAuthHelper = startupInit(new OprAuthHelper(app), OprAuthHelper.class);
 		app.onlineRoutingHelper = startupInit(new OnlineRoutingHelper(app), OnlineRoutingHelper.class);
-		app.itineraryHelper = startupInit(new ItineraryHelper(app), ItineraryHelper.class);
 
 		initOpeningHoursParser();
 	}
@@ -655,6 +664,7 @@ public class AppInitializer implements IProgress {
 
 	private void startApplicationBackground() {
 		try {
+			notifyStart();
 			startBgTime = System.currentTimeMillis();
 			app.getRendererRegistry().initRenderers(this);
 			notifyEvent(InitEvents.INIT_RENDERERS);
@@ -685,7 +695,7 @@ public class AppInitializer implements IProgress {
 			// restore backuped favorites to normal file
 			restoreBackupForFavoritesFiles();
 			notifyEvent(InitEvents.RESTORE_BACKUPS);
-			app.itineraryHelper.syncAllGroupsAsync();
+			app.mapMarkersHelper.syncAllGroups();
 			app.searchUICore.initSearchUICore();
 
 			checkLiveUpdatesAlerts();
@@ -812,6 +822,12 @@ public class AppInitializer implements IProgress {
 
 			}
 			app.getResourceManager().initMapBoundariesCacheNative();
+		}
+	}
+
+	public void notifyStart() {
+		for (AppInitializeListener listener : listeners) {
+			listener.onStart(AppInitializer.this);
 		}
 	}
 

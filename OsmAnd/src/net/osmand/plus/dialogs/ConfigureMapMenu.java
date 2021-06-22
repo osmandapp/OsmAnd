@@ -40,6 +40,7 @@ import net.osmand.plus.helpers.enums.DayNightMode;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RendererRegistry;
+import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.ListStringPreference;
 import net.osmand.plus.settings.backend.OsmandPreference;
@@ -147,7 +148,7 @@ public class ConfigureMapMenu {
 		}
 		List<RenderingRuleProperty> customRules = new ArrayList<>();
 		boolean useDepthContours = app.getResourceManager().hasDepthContours()
-				&& (InAppPurchaseHelper.isSubscribedToLiveUpdates(app)
+				&& (InAppPurchaseHelper.isSubscribedToAny(app)
 				|| InAppPurchaseHelper.isDepthContoursPurchased(app));
 		for (RenderingRuleProperty p : renderer.PROPS.getCustomRules()) {
 			if (useDepthContours || !"depthContours".equals(p.getAttrName())) {
@@ -173,6 +174,7 @@ public class ConfigureMapMenu {
 		final OsmandApplication app = activity.getMyApplication();
 		final OsmandSettings settings = app.getSettings();
 		final int selectedProfileColor = settings.getApplicationMode().getProfileColor(nightMode);
+		ResourceManager resourceManager = app.getResourceManager();
 		MapLayerMenuListener l = new MapLayerMenuListener(activity, adapter);
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setId(SHOW_CATEGORY_ID)
@@ -189,9 +191,12 @@ public class ConfigureMapMenu {
 				.setItemDeleteAction(makeDeleteAction(settings.SHOW_FAVORITES))
 				.setListener(l)
 				.createItem());
-		PoiUIFilter wiki = app.getPoiFilters().getTopWikiPoiFilter();
-		selected = app.getPoiFilters().isShowingAnyPoi(wiki);
-		adapter.addItem(new ContextMenuItem.ItemBuilder()
+		boolean hasPoiData = !Algorithms.isEmpty(resourceManager.getAddressRepositories())
+				|| !Algorithms.isEmpty(resourceManager.getTravelRepositories());
+		if (hasPoiData) {
+			PoiUIFilter wiki = app.getPoiFilters().getTopWikiPoiFilter();
+			selected = app.getPoiFilters().isShowingAnyPoi(wiki);
+			adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setId(POI_OVERLAY_ID)
 				.setTitleId(R.string.layer_poi, activity)
 				.setSelected(selected)
@@ -200,6 +205,7 @@ public class ConfigureMapMenu {
 				.setIcon(R.drawable.ic_action_info_dark)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(l).createItem());
+		}
 		selected = settings.SHOW_POI_LABEL.get();
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setId(POI_OVERLAY_LABELS_ID)
@@ -530,7 +536,7 @@ public class ConfigureMapMenu {
 									TextView switchText = (TextView) v.findViewById(R.id.switchText);
 									switchText.setText(activity.getString(R.string.translit_name_if_miss, txtValues[position]));
 									SwitchCompat check = (SwitchCompat) v.findViewById(R.id.check);
-									check.setChecked(settings.MAP_TRANSLITERATE_NAMES.isSet() ? transliterateNames : txtIds[position].equals("en"));
+									check.setChecked(transliterateNames);
 									check.setOnCheckedChangeListener(translitChangdListener);
 									UiUtilities.setupCompoundButton(nightMode, selectedProfileColor, check);
 								} else {
@@ -548,6 +554,7 @@ public class ConfigureMapMenu {
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
 								selectedLanguageIndex = which;
+								transliterateNames = settings.MAP_TRANSLITERATE_NAMES.isSet() ? transliterateNames : txtIds[which].equals("en");
 								((AlertDialog) dialog).getListView().setSelection(which);
 								singleChoiceAdapter.notifyDataSetChanged();
 							}

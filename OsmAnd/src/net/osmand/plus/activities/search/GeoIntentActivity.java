@@ -40,6 +40,11 @@ public class GeoIntentActivity extends OsmandListActivity {
 		
 		getMyApplication().checkApplicationIsBeingInitialized(this, new AppInitializeListener() {
 			@Override
+			public void onStart(AppInitializer init) {
+
+			}
+
+			@Override
 			public void onProgress(AppInitializer init, InitEvents event) {
 			}
 			

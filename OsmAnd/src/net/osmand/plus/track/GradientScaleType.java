@@ -4,6 +4,7 @@ import android.content.Context;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
@@ -15,12 +16,12 @@ public enum GradientScaleType {
 	ALTITUDE("altitude", "gradient_altitude_color", R.string.altitude, R.drawable.ic_action_altitude_average),
 	SLOPE("slope", "gradient_slope_color", R.string.shared_string_slope, R.drawable.ic_action_altitude_ascent);
 
-	private String typeName;
-	private String colorTypeName;
+	private final String typeName;
+	private final String colorTypeName;
 	@StringRes
-	private int resId;
+	private final int resId;
 	@DrawableRes
-	private int iconId;
+	private final int iconId;
 
 	GradientScaleType(@NonNull String typeName, @NonNull String colorTypeName, @StringRes int resId, @DrawableRes int iconId) {
 		this.typeName = typeName;
@@ -57,6 +58,7 @@ public enum GradientScaleType {
 		}
 	}
 
+	@Nullable
 	public static GradientScaleType getGradientTypeByName(@NonNull String name) {
 		for (GradientScaleType scaleType : GradientScaleType.values()) {
 			if (scaleType.name().equalsIgnoreCase(name)) {

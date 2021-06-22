@@ -105,6 +105,10 @@ public abstract class GeometryWayContext {
 		attrs.customColor = 0;
 	}
 
+	public void clearCustomShader() {
+		attrs.customColorPaint.setShader(null);
+	}
+
 	public int getStrokeColor(int sourceColor) {
 		return ColorUtils.blendARGB(sourceColor, Color.BLACK, 0.6f);
 	}

@@ -5,11 +5,15 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.Way;
+import net.osmand.plus.backup.BackupHelper;
 import net.osmand.util.Algorithms;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -39,10 +43,15 @@ public class OpenstreetmapsDbHelper extends SQLiteOpenHelper {
 			OPENSTREETMAP_COL_TAGS + " VARCHAR(2048)," +
 			OPENSTREETMAP_COL_ACTION + " TEXT, " + OPENSTREETMAP_COL_COMMENT + " TEXT," +
 			" " + OPENSTREETMAP_COL_CHANGED_TAGS + " TEXT, " + OPENSTREETMAP_COL_ENTITY_TYPE + " TEXT);";
-	List<OpenstreetmapPoint> cache = null; 	
+	List<OpenstreetmapPoint> cache = null;
 
-	public OpenstreetmapsDbHelper(Context context) {
+	private static final String OPENSTREETMAP_DB_LAST_MODIFIED_NAME = "openstreetmap";
+
+	private final Context context;
+
+	public OpenstreetmapsDbHelper(@NonNull Context context) {
 		super(context, OPENSTREETMAP_DB_NAME, null, DATABASE_VERSION);
+		this.context = context;
 	}
 	
 	@Override
@@ -52,18 +61,43 @@ public class OpenstreetmapsDbHelper extends SQLiteOpenHelper {
 	
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		if(newVersion == 4) {
+		boolean upgraded = false;
+		if (newVersion == 4) {
 			db.execSQL("DROP TABLE IF EXISTS " + OPENSTREETMAP_TABLE_NAME);
-			db.execSQL(OPENSTREETMAP_TABLE_CREATE);	
+			db.execSQL(OPENSTREETMAP_TABLE_CREATE);
+			upgraded = true;
 		}
 		if (oldVersion < 5) {
 			db.execSQL("ALTER TABLE " + OPENSTREETMAP_TABLE_NAME + " ADD " + OPENSTREETMAP_COL_CHANGED_TAGS + " TEXT");
+			upgraded = true;
 		}
 		if (oldVersion < 6) {
 			db.execSQL("ALTER TABLE " + OPENSTREETMAP_TABLE_NAME + " ADD " + OPENSTREETMAP_COL_ENTITY_TYPE + " TEXT");
 			db.execSQL("UPDATE " + OPENSTREETMAP_TABLE_NAME + " SET " + OPENSTREETMAP_COL_ENTITY_TYPE + " = ? " +
 					"WHERE " + OPENSTREETMAP_COL_ENTITY_TYPE + " IS NULL", new String[]{Entity.EntityType.NODE.toString()});
+			upgraded = true;
 		}
+		if (upgraded) {
+			updateLastModifiedTime();
+		}
+	}
+
+	public long getLastModifiedTime() {
+		long lastModifiedTime = BackupHelper.getLastModifiedTime(context, OPENSTREETMAP_DB_LAST_MODIFIED_NAME);
+		if (lastModifiedTime == 0) {
+			File dbFile = context.getDatabasePath(OPENSTREETMAP_DB_NAME);
+			lastModifiedTime = dbFile.exists() ? dbFile.lastModified() : 0;
+			BackupHelper.setLastModifiedTime(context, OPENSTREETMAP_DB_LAST_MODIFIED_NAME, lastModifiedTime);
+		}
+		return lastModifiedTime;
+	}
+
+	public void setLastModifiedTime(long lastModifiedTime) {
+		BackupHelper.setLastModifiedTime(context, OPENSTREETMAP_DB_LAST_MODIFIED_NAME, lastModifiedTime);
+	}
+
+	private void updateLastModifiedTime() {
+		BackupHelper.setLastModifiedTime(context, OPENSTREETMAP_DB_LAST_MODIFIED_NAME);
 	}
 
 	public List<OpenstreetmapPoint> getOpenstreetmapPoints() {
@@ -118,6 +152,7 @@ public class OpenstreetmapsDbHelper extends SQLiteOpenHelper {
 			
 			db.close();
 			checkOpenstreetmapPoints();
+			updateLastModifiedTime();
 			return true;
 		}
 		return false;
@@ -130,6 +165,7 @@ public class OpenstreetmapsDbHelper extends SQLiteOpenHelper {
 					" WHERE " + OPENSTREETMAP_COL_ID + " = ?", new Object[] { p.getId() }); //$NON-NLS-1$ //$NON-NLS-2$
 			db.close();
 			checkOpenstreetmapPoints();
+			updateLastModifiedTime();
 			return true;
 		}
 		return false;

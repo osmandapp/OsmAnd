@@ -40,7 +40,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.DeletePointsTask;
 import net.osmand.plus.myplaces.DeletePointsTask.OnPointsDeleteListener;
 import net.osmand.plus.myplaces.EditTrackGroupDialogFragment;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -55,7 +55,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-public class TrackPointsCard extends BaseCard implements OnChildClickListener, OnPointsDeleteListener {
+public class TrackPointsCard extends MapBaseCard implements OnChildClickListener, OnPointsDeleteListener {
 
 	public static final int ADD_WAYPOINT_INDEX = 0;
 	public static final int DELETE_WAYPOINTS_INDEX = 1;
@@ -71,6 +71,9 @@ public class TrackPointsCard extends BaseCard implements OnChildClickListener, O
 
 	private final PointGPXAdapter adapter;
 	private ExpandableListView listView;
+	private View addActionsView;
+	private View addWaypointActionView;
+	private View deleteWaypointActionView;
 
 	public TrackPointsCard(@NonNull MapActivity mapActivity, @NonNull TrackDisplayHelper displayHelper) {
 		super(mapActivity);
@@ -102,10 +105,19 @@ public class TrackPointsCard extends BaseCard implements OnChildClickListener, O
 		if (listView.getAdapter() == null) {
 			listView.setAdapter(adapter);
 		}
-		if (!adapter.isEmpty() && listView.getFooterViewsCount() == 0) {
-			LayoutInflater inflater = UiUtilities.getInflater(mapActivity, nightMode);
+		LayoutInflater inflater = UiUtilities.getInflater(mapActivity, nightMode);
+		if (addActionsView == null && addWaypointActionView == null) {
 			listView.addFooterView(inflater.inflate(R.layout.list_shadow_footer, listView, false));
 			addActions(inflater);
+			addWaypointAction(inflater);
+		}
+		if (!adapter.isEmpty() && deleteWaypointActionView == null){
+			AndroidUiHelper.updateVisibility(addWaypointActionView.findViewById(R.id.divider), true);
+			deleteWaypointAction(inflater);
+		} else if (adapter.isEmpty() && deleteWaypointActionView != null) {
+			AndroidUiHelper.updateVisibility(addWaypointActionView.findViewById(R.id.divider), false);
+			listView.removeFooterView(deleteWaypointActionView);
+			deleteWaypointActionView = null;
 		}
 		expandAllGroups();
 	}
@@ -117,7 +129,6 @@ public class TrackPointsCard extends BaseCard implements OnChildClickListener, O
 	public void updateGroups() {
 		selectedItems.clear();
 		selectedGroups.clear();
-		adapter.synchronizeGroups(getDisplayGroups());
 	}
 
 	public List<GpxDisplayGroup> getGroups() {
@@ -125,29 +136,25 @@ public class TrackPointsCard extends BaseCard implements OnChildClickListener, O
 	}
 
 	private void addActions(LayoutInflater inflater) {
-		View view = inflater.inflate(R.layout.preference_category_with_descr, listView, false);
-		TextView title = view.findViewById(android.R.id.title);
+		addActionsView = inflater.inflate(R.layout.preference_category_with_descr, listView, false);
+		TextView title = addActionsView.findViewById(android.R.id.title);
 		title.setText(R.string.shared_string_actions);
 
-		AndroidUiHelper.updateVisibility(view.findViewById(android.R.id.icon), false);
-		AndroidUiHelper.updateVisibility(view.findViewById(android.R.id.summary), false);
-		listView.addFooterView(view);
-
-		addWaypointAction(inflater);
-		deleteWaypointAction(inflater);
+		AndroidUiHelper.updateVisibility(addActionsView.findViewById(android.R.id.icon), false);
+		AndroidUiHelper.updateVisibility(addActionsView.findViewById(android.R.id.summary), false);
+		listView.addFooterView(addActionsView);
 	}
 
 	private void addWaypointAction(LayoutInflater inflater) {
-		View view = inflater.inflate(R.layout.preference_button, listView, false);
-		TextView addWaypointTitle = view.findViewById(android.R.id.title);
-		ImageView addWaypointIcon = view.findViewById(android.R.id.icon);
+		addWaypointActionView = inflater.inflate(R.layout.preference_button, listView, false);
+		TextView addWaypointTitle = addWaypointActionView.findViewById(android.R.id.title);
+		ImageView addWaypointIcon = addWaypointActionView.findViewById(android.R.id.icon);
 
 		addWaypointTitle.setText(R.string.add_waypoint);
 		addWaypointIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_name_field));
 
-		AndroidUiHelper.updateVisibility(view.findViewById(R.id.divider), true);
 
-		view.setOnClickListener(new OnClickListener() {
+		addWaypointActionView.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				CardListener listener = getListener();
@@ -156,18 +163,18 @@ public class TrackPointsCard extends BaseCard implements OnChildClickListener, O
 				}
 			}
 		});
-		listView.addFooterView(view);
+		listView.addFooterView(addWaypointActionView);
 	}
 
 	private void deleteWaypointAction(LayoutInflater inflater) {
-		View view = inflater.inflate(R.layout.preference_button, listView, false);
-		TextView deleteWaypointsTitle = view.findViewById(android.R.id.title);
-		ImageView deleteWaypointsIcon = view.findViewById(android.R.id.icon);
+		deleteWaypointActionView = inflater.inflate(R.layout.preference_button, listView, false);
+		TextView deleteWaypointsTitle = deleteWaypointActionView.findViewById(android.R.id.title);
+		ImageView deleteWaypointsIcon = deleteWaypointActionView.findViewById(android.R.id.icon);
 
 		deleteWaypointsTitle.setText(R.string.delete_waypoints);
 		deleteWaypointsIcon.setImageDrawable(getColoredIcon(R.drawable.ic_action_delete_dark, R.color.color_osm_edit_delete));
 
-		view.setOnClickListener(new OnClickListener() {
+		deleteWaypointActionView.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				CardListener listener = getListener();
@@ -176,7 +183,7 @@ public class TrackPointsCard extends BaseCard implements OnChildClickListener, O
 				}
 			}
 		});
-		listView.addFooterView(view);
+		listView.addFooterView(deleteWaypointActionView);
 	}
 
 	private void expandAllGroups() {
@@ -270,6 +277,7 @@ public class TrackPointsCard extends BaseCard implements OnChildClickListener, O
 	@Override
 	public void onPointsDeleted() {
 		updateGroups();
+		update();
 	}
 
 	public void filter(String text) {

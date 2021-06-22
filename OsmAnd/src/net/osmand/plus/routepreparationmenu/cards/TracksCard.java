@@ -31,7 +31,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class TracksCard extends BaseCard {
+public class TracksCard extends MapBaseCard {
 
 	private final List<GPXFile> gpxFiles;
 	private boolean showLimited = true;

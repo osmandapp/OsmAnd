@@ -598,7 +598,7 @@ public class BinaryMapPoiReaderAdapter {
 					boolean matches = matcher.matches(am.getName().toLowerCase()) ||
 							matcher.matches(am.getEnName(true).toLowerCase());
 					if (!matches) {
-						for (String s : am.getAllNames()) {
+						for (String s : am.getOtherNames()) {
 							matches = matcher.matches(s.toLowerCase());
 							if (matches) {
 								break;
@@ -734,6 +734,19 @@ public class BinaryMapPoiReaderAdapter {
 			switch (tag) {
 			case 0:
 				req.numberOfAcceptedObjects++;
+				if (hasLocation) {
+					if (precisionXY != 0) {
+						int[] xy = MapUtils.calculateFinalXYFromBaseAndPrecisionXY(BASE_POI_ZOOM, FINAL_POI_ZOOM, precisionXY, x >> BASE_POI_SHIFT, y >> BASE_POI_SHIFT, true);
+						int x31 = xy[0] << FINAL_POI_SHIFT;
+						int y31 = xy[1] << FINAL_POI_SHIFT;
+						am.setLocation(MapUtils.get31LatitudeY(y31), MapUtils.get31LongitudeX(x31));
+					} else {
+						am.setLocation(MapUtils.get31LatitudeY(y), MapUtils.get31LongitudeX(x));
+					}
+				} else {
+					return null;
+				}
+
 				if (req.radius > 0) {
 					LatLon loc = am.getLocation();
 					List<Location> locs = req.tiles.get(req.getTileHashOnPath(loc.getLatitude(), loc.getLongitude()));
@@ -745,16 +758,6 @@ public class BinaryMapPoiReaderAdapter {
 						return null;
 					} else {
 						am.setRoutePoint(arp);
-					}
-				}
-				if (hasLocation) {
-					if (precisionXY != 0) {
-						int[] xy = MapUtils.calculateFinalXYFromBaseAndPrecisionXY(BASE_POI_ZOOM, FINAL_POI_ZOOM, precisionXY, x >> BASE_POI_SHIFT, y >> BASE_POI_SHIFT, true);
-						int x31 = xy[0] << FINAL_POI_SHIFT;
-						int y31 = xy[1] << FINAL_POI_SHIFT;
-						am.setLocation(MapUtils.get31LatitudeY(y31), MapUtils.get31LongitudeX(x31));
-					} else {
-						am.setLocation(MapUtils.get31LatitudeY(y), MapUtils.get31LongitudeX(x));
 					}
 				}
 				return am;
@@ -772,7 +775,6 @@ public class BinaryMapPoiReaderAdapter {
 				}
 				am = new Amenity();
 				hasLocation = true;
-				//am.setLocation(MapUtils.get31LatitudeY(y), MapUtils.get31LongitudeX(x)); // set precise coordinates
 				break;
 			case OsmandOdb.OsmAndPoiBoxDataAtom.SUBCATEGORIES_FIELD_NUMBER:
 				int subtypev = codedIS.readUInt32();

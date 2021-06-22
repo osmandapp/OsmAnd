@@ -218,13 +218,13 @@ public class MapMarkersDialogFragment extends DialogFragment implements OnGroupS
 	@Override
 	public void onResume() {
 		super.onResume();
-		getMyApplication().getItineraryHelper().addSyncListener(this);
+		getMyApplication().getMapMarkersHelper().addSyncListener(this);
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		getMyApplication().getItineraryHelper().removeSyncListener(this);
+		getMyApplication().getMapMarkersHelper().removeSyncListener(this);
 	}
 
 	@Override
@@ -481,7 +481,7 @@ public class MapMarkersDialogFragment extends DialogFragment implements OnGroupS
 
 			@Override
 			public void saveGpx(final String fileName) {
-				final String gpxPath = mapActivity.getMyApplication().getMapMarkersHelper().saveMarkersToFile(fileName);
+				final String gpxPath = mapActivity.getMyApplication().getMapMarkersHelper().getDataHelper().saveMarkersToFile(fileName);
 				snackbar = Snackbar.make(viewPager, String.format(getString(R.string.shared_string_file_is_saved), fileName) + ".", Snackbar.LENGTH_LONG)
 						.setAction(R.string.shared_string_show, new View.OnClickListener() {
 							@Override

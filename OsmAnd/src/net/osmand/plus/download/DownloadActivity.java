@@ -652,7 +652,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		TextView messageTextView = (TextView) view.findViewById(R.id.leftTextView);
 		ProgressBar sizeProgress = (ProgressBar) view.findViewById(R.id.progressBar);
 
-		File dir = activity.getMyApplication().getAppPath("").getParentFile();
+		File dir = activity.getMyApplication().getAppPath(null);
 		String size = "";
 		int percent = 0;
 		if (dir.canRead()) {

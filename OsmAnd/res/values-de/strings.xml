@@ -448,7 +448,7 @@
     <string name="preferred_locale">Anzeigesprache</string>
     <string name="shared_string_next">Weiter</string>
     <string name="shared_string_previous">Zurück</string>
-    <string name="unit_of_length_descr">Maß für Entfernungen ändern.</string>
+    <string name="unit_of_length_descr">Ändern Sie, in welcher Entfernung gemessen wird.</string>
     <string name="unit_of_length">Längeneinheiten</string>
     <string name="si_mi_feet">Meilen/Fuß</string>
     <string name="si_mi_yard">Meilen/Yards</string>
@@ -871,8 +871,8 @@
     <string name="context_menu_item_add_parking_point">Parkposition festlegen</string>
     <string name="context_menu_item_delete_parking_point">Parkplatz-Standort löschen</string>
     <string name="gpxup_public">Öffentlich</string>
-    <string name="gpxup_identifiable">Erkennbar</string>
-    <string name="gpxup_trackable">Verfolgbar</string>
+    <string name="gpxup_identifiable">Identifizierbar</string>
+    <string name="gpxup_trackable">Nachverfolgbar</string>
     <string name="gpxup_private">Privat</string>
     <string name="global_app_allocated_memory_descr">Belegter Speicher %1$s MB (Android-Limit %2$s MB, Dalvik %3$s MB).</string>
     <string name="global_app_allocated_memory">Belegter Speicher</string>
@@ -2525,7 +2525,7 @@
     <string name="context_menu_item_modify_note">OSM-Hinweis ändern</string>
     <string name="make_round_trip_descr">Kopie des Startpunkts als Ziel hinzufügen.</string>
     <string name="make_round_trip">Rundreise erstellen</string>
-    <string name="my_location">Meine Position</string>
+    <string name="my_location">Mein Standort</string>
     <string name="shared_string_finish">Beenden</string>
     <string name="use_system_keyboard">Gerätetastatur verwenden</string>
     <string name="marker_moved_to_active">Kartenmarkierung auf aktiv gesetzt</string>
@@ -2685,7 +2685,7 @@
     <string name="shared_string_dont">Nicht</string>
     <string name="shared_string_do">Tun</string>
     <string name="shared_string_only_with_wifi">Nur mit WLAN</string>
-    <string name="shared_string_wifi_only">Nur mit WLAN</string>
+    <string name="shared_string_wifi_only">Nur bei WLAN</string>
     <string name="select_travel_book">Reisebuch auswählen</string>
     <string name="shared_string_travel_book">Reisebuch</string>
     <string name="images_cache">Bilder-Cache</string>
@@ -3308,7 +3308,6 @@
     <string name="select_color">Farbe wählen</string>
     <string name="edit_profiles_descr">OsmAnd-Standardprofile können nicht gelöscht, aber (auf dem vorherigen Bildschirm) deaktiviert oder nach unten verschoben werden.</string>
     <string name="edit_profiles">Profile bearbeiten</string>
-    <string name="select_nav_profile_dialog_message">Der \'Navigationstyp\' bestimmt, wie die Routen berechnet werden.</string>
     <string name="profile_appearance">Profildarstellung</string>
     <string name="choose_icon_color_name">Symbol, Farbe und Name</string>
     <string name="reorder_profiles">Profilliste bearbeiten</string>
@@ -3359,7 +3358,7 @@
     <string name="sunset_at">Sonnenuntergang um %1$s</string>
     <string name="sunrise_at">Sonnenaufgang um %1$s</string>
     <string name="rearrange_categories">Kategorien neu ordnen</string>
-    <string name="create_custom_categories_list_promo">Ändern Sie die Sortierung der Liste, blenden Sie Kategorien aus. Sie können alle Änderungen mit Profilen importieren oder exportieren.</string>
+    <string name="create_custom_categories_list_promo">Ändern Sie die Sortierreihenfolge der Liste, blenden Sie Kategorien aus. Sie können alle Änderungen mit Profilen importieren oder exportieren.</string>
     <string name="add_new_custom_category_button_promo">Sie können eine neue benutzerdefinierte Kategorie hinzufügen, indem Sie eine oder mehrere Kategorien auswählen.</string>
     <string name="rendering_attr_streetLightingNight_name">Nur nachts anzeigen</string>
     <string name="plugin_prefs_reset_successful">Alle Plugin-Einstellungen wurden auf den Standardzustand zurückgesetzt.</string>
@@ -3496,7 +3495,7 @@
     <string name="shared_string_octagon">Achteck</string>
     <string name="app_mode_ski_touring">Skitouren</string>
     <string name="app_mode_ski_snowmobile">Schneemobil</string>
-    <string name="custom_osmand_plugin">Benutzerdefiniertes OsmAnd-Plugin</string>
+    <string name="custom_osmand_plugin">Benutzerdefinierte OsmAnd Erweiterung</string>
     <string name="slope_description">Hangneigungskarten verwendet Farben, um die Geländesteilheit zu visualisieren.</string>
     <string name="replace_point_descr">Einen anderen Punkt durch diesen ersetzen.</string>
     <string name="changes_applied_to_profile">Die Änderungen wurden auf das \'%1$s\' Profil angewendet.</string>
@@ -3856,7 +3855,7 @@
 \nSie können sich mit der sicheren OAuth-Methode anmelden oder Ihren Benutzernamen und Ihr Passwort verwenden.</string>
     <string name="use_login_password">Benutzername und Passwort verwenden</string>
     <string name="login_account">Konto</string>
-    <string name="user_login">Benutzername</string>
+    <string name="user_login">Anmelden</string>
     <string name="markers_history">Historie der Marker</string>
     <string name="send_files_to_openstreetmap">GPX-Datei an OpenStreetMap senden</string>
     <string name="enter_text_separated">Geben Sie durch Komma getrennte Tags ein.</string>
@@ -3907,7 +3906,6 @@
 \n • Unterstützung benutzerdefinierter Farben für Favoriten und Track-Wegpunkte
 \n
 \n</string>
-    <string name="app_mode_gap">Lücke</string>
     <string name="plan_route_join_segments">Segmente verbinden</string>
     <string name="plan_route_add_new_segment">Neues Segment hinzufügen</string>
     <string name="profile_type_osmand_string">OsmAnd-Profil</string>
@@ -3936,7 +3934,7 @@
     <string name="shared_string_subtype">Subtyp</string>
     <string name="keep_it_empty_if_not">Leer lassen, wenn kein API-Schlüssel vorhanden</string>
     <string name="copy_address">Adresse kopieren</string>
-    <string name="routing_engine_vehicle_type_driving">Fahren</string>
+    <string name="routing_engine_vehicle_type_driving">Fahrzeug</string>
     <string name="online_routing_engine">Online Navigationssystem</string>
     <string name="online_routing_engines">Online Navigationssysteme</string>
     <string name="shared_string_folders">Ordner</string>
@@ -3968,7 +3966,7 @@
     <string name="routing_engine_vehicle_type_racingbike">Rennrad</string>
     <string name="routing_engine_vehicle_type_mtb">Mountainbike</string>
     <string name="message_server_error">Server-Fehler: %1$s</string>
-    <string name="message_name_is_already_exists">Der Name ist bereits vorhanden</string>
+    <string name="message_name_is_already_exists">Name existiert bereits</string>
     <string name="announcement_time_passing">Beim Passieren</string>
     <string name="announcement_time_off_route">Abweichung von der Route</string>
     <string name="announcement_time_arrive">Ankunft am Ziel</string>
@@ -4024,10 +4022,10 @@
     <string name="shared_string_interval">Intervall</string>
     <string name="track_has_no_altitude">Der Track enthält keine Höhendaten.</string>
     <string name="track_has_no_speed">Der Track enthält keine Geschwindigkeitsdaten.</string>
-    <string name="select_another_colorization">Bitte wähle eine andere Art der Einfärbung aus.</string>
+    <string name="select_another_colorization">Bitte wählen Sie eine andere Art der Einfärbung.</string>
     <string name="map_widget_distance_by_tap">Entfernung durch Antippen</string>
     <string name="select_segments">Segmente auswählen</string>
-    <string name="select_segments_description">%1$s enthält mehr als ein Segment, Sie müssen den benötigten Teil für die Navigation auswählen.</string>
+    <string name="select_segments_description">%1$s enthält mehr als ein Segment, Sie müssen den benötigten Teil für die Navigation spezifizieren.</string>
     <string name="segments_count">Segment %1$d</string>
     <string name="temporary_conditional_routing_descr">Verwenden Sie Straßeneinschränkungen, die jetzt in der Karte aktiv sind</string>
     <string name="routing_attr_short_way_description">Optimierte kürzere Route (energiesparend)</string>
@@ -4047,8 +4045,8 @@
     <string name="live_update_frequency_day_variant">Die Kartenaktualisierung wird täglich überprüft. Das nächste Mal %1$s in %2$s.</string>
     <string name="live_update_frequency_hour_variant">Die Kartenaktualisierung wird stündlich überprüft. Das nächste Mal %1$s in %2$s.</string>
     <string name="live_update_delete_updates_msg">Sind Sie sicher, dass Sie alle %s Live-Updates löschen möchten\?</string>
-    <string name="select_category_descr">Kategorie auswählen oder neue hinzufügen</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Grenzen von Naturschutzgebieten, Schutzgebieten und Nationalparks ausblenden</string>
+    <string name="select_category_descr">Kategorie auswählen oder eine neue hinzufügen</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Grenzen von Naturschutzgebieten, Schutzgebieten und Nationalparks ausblenden.</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">Grenzen von Schutzgebieten</string>
     <string name="trip_recording_save_and_continue">Speichern und fortfahren</string>
     <string name="lost_data_warning">Alle nicht gespeicherten Daten gehen verloren.</string>
@@ -4056,8 +4054,12 @@
     <string name="trip_recording_show_start_dialog_setting">Wenn deaktiviert, beginnt die Aufnahme direkt nach dem Tippen auf das Widget oder den Menüpunkt und überspringt den Bestätigungsdialog.</string>
     <string name="customize_route_line">Routenlinie anpassen</string>
     <string name="shared_string_route_line">Routenlinie</string>
-    <string name="specify_color_for_map_mode">Legen Sie die Farbe für den Kartenmodus fest: %1$s.</string>
-    <string name="release_4_0_beta">• OsmAnd Live-Updates nach \"Downloads &gt; Updates\" verschoben
+    <string name="specify_color_for_map_mode">Legen Sie die Farbe für den Kartenmodus fest %1$s.</string>
+    <string name="release_4_0_beta">• Option zum Herunterladen von Höhenlinien in Fuß zugefügt
+\n
+\n• Routenplanung im Querformat: Registerkarten zum Umschalten zwischen Punkten oder Diagrammen hinzugefügt
+\n
+\n• OsmAnd Live-Updates nach \"Downloads &gt; Updates\" verschoben
 \n
 \n• Tracks können nun nach Höhe, Geschwindigkeit oder Steigung eingefärbt werden.
 \n
@@ -4066,7 +4068,6 @@
 \n• Dialog \"Streckenaufzeichnung\" aktualisiert
 \n
 \n</string>
-    <string name="route_line_use_map_style_appearance">Die Routenlinie würde %1$s verwenden, die für den ausgewählten Kartenstil angegeben ist: %2$s.</string>
     <string name="no_purchases">Du hast keine Einkäufe</string>
     <string name="new_device_account">Neues Gerät / neues Konto</string>
     <string name="contact_support_description">Wenn du Fragen hast, kontaktiere uns bitte unter %1$s.</string>
@@ -4089,4 +4090,92 @@
     <string name="announce_when_exceeded">Meldung bei Überschreitung</string>
     <string name="user_points">Anwenderpunkte</string>
     <string name="output">Leistung</string>
+    <string name="shared_string_feet">Fuß</string>
+    <string name="srtm_unit_format">Einheitenvariante der Höhenlinien</string>
+    <string name="srtm_download_list_help_message">OsmAnd liefert Höhenlinien-Daten in Metern und Fuß. Sie müssen die Datei erneut herunterladen, um das Format zu ändern.</string>
+    <string name="srtm_download_single_help_message">Bitte wählen Sie die gewünschte Variante. Sie müssen die Datei erneut herunterladen, um das Format zu ändern.</string>
+    <string name="route_line_use_gradient_coloring">Die Routenlinie wird durch die Steigung eingefärbt.</string>
+    <string name="shared_string_min_height">Mindesthöhe</string>
+    <string name="shared_string_max_height">Maximale Höhe</string>
+    <string name="language_description">Wählen Sie die bevorzugte Sprache und die Art der Sprachführung.</string>
+    <string name="tts_description">Text-to-Speech (TTS) kann alle Arten von Anweisungen aussprechen: Straßennamen, Abbiegeanweisungen, POI-Namen usw.</string>
+    <string name="tts_title">TTS</string>
+    <string name="recorded_description">Aufgezeichnete Stimme klingt besser, kann aber nur vorher aufgezeichnete Phrasen aussprechen: Abbiegeanweisungen. Kann keine Straßennamen oder POI-Namen ansagen.</string>
+    <string name="use_system_language">Systemsprache verwenden</string>
+    <string name="in_grace_period">In der Nachlaufzeit</string>
+    <string name="shared_string_itinerary">Reiseplan</string>
+    <string name="poi_routes">Routen</string>
+    <string name="route_line_use_map_style_width">Standardbreite des Kartenstils (%1$s) verwenden.</string>
+    <string name="route_line_use_map_style_color">Standardfarbe des Kartenstils (%1$s) verwenden.</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">Umweltzonen vermeiden</string>
+    <string name="routing_attr_avoid_low_emission_zone_name">Umweltzonen vermeiden</string>
+    <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
+    <string name="search_more">Mehr suchen…</string>
+    <string name="osmand_cloud_authorize_descr">Verlieren Sie niemals Ihre Daten, sichern und stellen Sie alle Informationen problemlos wieder her.</string>
+    <string name="osmand_cloud_create_account_descr">Bitte geben Sie Ihre E-Mail-Adresse ein, alle Ihre Daten werden mit dieser verknüpft.
+\nWir senden Ihnen einen Verifizierungscode an diese E-Mail-Adresse.</string>
+    <string name="verification_code_missing_description">Die Wartezeit für den Code kann 10 Minuten betragen, außerdem können Sie Ihren Spamordner überprüfen. Wenn dies nicht hilft, verwenden Sie die Schaltfläche unten.</string>
+    <string name="backup_and_restore">Backup und Wiederherstellen</string>
+    <string name="last_backup">Letztes Backup</string>
+    <string name="duration_ago">vor %1$s</string>
+    <string name="osmand_cloud">OsmAnd Cloud</string>
+    <string name="local_backup">Lokales Backup</string>
+    <string name="local_backup_descr">Daten aus/in eine lokale Datei wiederherstellen/sichern.</string>
+    <string name="backup_into_file">Backup in Datei</string>
+    <string name="restore_from_file">Von Datei wiederherstellen</string>
+    <string name="osmand_cloud_help_descr">Sie benötigen Hilfe\? Bitte kontaktieren Sie uns unter %1$s</string>
+    <string name="osmand_cloud_login_descr">Bitte geben Sie die E-Mail-Adresse ein, die Sie für die Registrierung verwendet haben. Wir werden Ihnen ein Einmalpasswort senden, dass Sie im nächsten Schritt benötigen.</string>
+    <string name="verify_email_address">E-Mail-Adresse verifizieren</string>
+    <string name="verify_email_address_descr">Wir haben einen Bestätigungscode an %1$s gesendet, bitte geben Sie ihn unten ein.</string>
+    <string name="enter_verification_code">Geben Sie den 4-stelligen Code ein</string>
+    <string name="cloud_email_not_registered">Diese E-Mail wurde noch nicht für OsmAnd Cloud registriert</string>
+    <string name="cloud_email_already_registered">Account mit dieser E-Mail wurde bereits registriert.</string>
+    <string name="resend_verification_code">Code erneut senden</string>
+    <string name="verification_code_missing">Ich habe keinen Bestätigungscode erhalten</string>
+    <string name="select_nav_profile_dialog_message">Die \'Navigationsart\' bestimmt, wie Routen berechnet werden. Sie können zwischen Offline- und Online-Routenplanern wählen.</string>
+    <string name="loading_list_of_routing_services">Lade Liste der verfügbaren Routingdienste</string>
+    <string name="shared_string_offline">Offline</string>
+    <string name="shared_string_online">Online</string>
+    <string name="osmand_online_routing_promo">Sie können vordefinierte Vorlagen verwenden oder benutzerdefinierte Online-Routen hinzufügen. Unterstützt wird: OSRM, Graphhopper, OpenRouteService, GPX.</string>
+    <string name="shared_string_external">Extern</string>
+    <string name="provided_by">Bereitgestellt von %1$s</string>
+    <string name="failed_loading_predefined_engines">Die Liste der vordefinierten Vorlagen konnte nicht geladen werden.
+\nBitte überprüfen Sie Ihre Internetverbindung.</string>
+    <string name="shared_string_predefined">Vordefiniert</string>
+    <string name="backup_complete">Sicherung abgeschlossen</string>
+    <string name="backup_now">Jetzt sichern</string>
+    <string name="make_backup">Erstellen Sie eine Sicherung</string>
+    <string name="make_backup_descr">Es sind viele Änderungen auf diesem Gerät vorhanden, bitte führen Sie eine Sicherung dieser Daten durch, um sie nicht zu verlieren.</string>
+    <string name="backup_conflicts">Konflikte</string>
+    <string name="backup_confilcts_descr">Einige Dateien konnten nicht auf den Server hochgeladen werden, weil eine neuere Version auf dem Server gespeichert ist.</string>
+    <string name="backup_view_conflicts">Konflikte anzeigen</string>
+    <string name="backup_no_internet_descr">Überprüfen Sie Ihre Internetverbindung und laden Sie erneut herunter.</string>
+    <string name="backup_pause_all">Alle anhalten</string>
+    <string name="upload_local_version">Lokale Version hochladen</string>
+    <string name="download_server_version">Serverversion herunterladen</string>
+    <string name="shared_string_logout">Abmelden</string>
+    <string name="backup_delete_all_data">Alle meine Daten löschen</string>
+    <string name="backup_delete_all_data_descr">Alle Daten auf OsmAnd Cloud werden gelöscht. Lokale Versionen bleiben unangetastet.</string>
+    <string name="backup_delete_all_data_warning">Sie sind im Begriff, alle zuvor in die OsmAnd Cloud hochgeladenen Daten zu löschen, einschließlich der Versionshistorie.
+\n
+\nSie können gelöschte Daten nicht wiederherstellen.</string>
+    <string name="backup_danger_zone">Gefahrenbereich</string>
+    <string name="delete_all_confirmation">Ja, alle löschen</string>
+    <string name="backup_delete_old_data">Alte Versionen entfernen</string>
+    <string name="backup_delete_old_data_descr">Aktuelle Versionen Ihrer Daten bleiben in der OsmAnd Cloud erhalten</string>
+    <string name="backup_delete_old_data_warning">Sie sind im Begriff, den Änderungsverlauf für die zuvor geladenen Daten zu löschen.
+\n
+\nDie aktuelle Version der Daten wird auf dem Server gespeichert, aber Sie können nicht zu den zuvor vorgenommenen Änderungen zurückkehren.</string>
+    <string name="backup_data">Daten sichern</string>
+    <string name="select_backup_data_descr">Wählen Sie Daten und Ordner für die Sicherung aus.</string>
+    <string name="backup_restore_data_descr">Stelle Daten von dem Gerät wieder her, verwende dabei Online-Backups.</string>
+    <string name="backup_restore_data">Stelle Daten wieder her</string>
+    <string name="restore_from_osmand_cloud">Wiederherstellung aus der OsmAnd Cloud</string>
+    <string name="choose_what_to_restore">Wähle aus was wiederhergestellt werden soll.</string>
+    <string name="restore_selected_data">Stelle ausgewählte Daten wieder her</string>
+    <string name="receiving_data_from_server">Empfange Daten vom Server</string>
+    <string name="restore_complete">Wiederherstellung abgeschlossen</string>
+    <string name="grey_color_slope">Graue Farbe wird verwendet, wenn die Steigung undefiniert ist.</string>
+    <string name="backup_version_history">Versionsgeschichte</string>
+    <string name="backup_storage_taken">Belegter Speicher</string>
 </resources>
