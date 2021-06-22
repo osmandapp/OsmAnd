@@ -2106,8 +2106,8 @@
     <string name="show_passed">Mostrar o que passou</string>
     <string name="hide_passed">Ocultar o que passou</string>
     <string name="modify_the_search_query">Modifique a sua pesquisa.</string>
-    <string name="empty_state_osm_edits">Criar ou modificar objetos OSM</string>
-    <string name="empty_state_osm_edits_descr">Criar ou modificar POIs do OSM, abrir ou comentar sobre Notas do OSM, e contribuir com arquivos GPX gravados.</string>
+    <string name="empty_state_osm_edits">Criar ou modificar objetos do OpenStreetMap</string>
+    <string name="empty_state_osm_edits_descr">Criar ou modificar POIs do OpenStreetMap, abrir ou comentar sobre Notas do OSM, e contribuir com arquivos GPX gravados.</string>
     <string name="shared_string_deleted">Excluído</string>
     <string name="shared_string_edited">Editado</string>
     <string name="shared_string_added">Adicionado</string>
@@ -2534,7 +2534,7 @@
     <string name="first_intermediate_dest_description">Adiciona parada inicial</string>
     <string name="subsequent_dest_description">Mover destino para cima, e criar</string>
     <string name="gpx_file_desc">GPX - adequado para exportar para JOSM ou outros editores OSM.</string>
-    <string name="osc_file_desc">OSC - adequado para exportar para OSM.</string>
+    <string name="osc_file_desc">OSC - adequado para exportar para OpenStreetMap.</string>
     <string name="osm_edits_export_desc">Exporte como notas OSM, POIs ou ambos.</string>
     <string name="all_data">Todos os dados</string>
     <string name="osm_notes">Notas OSM</string>
@@ -4173,4 +4173,6 @@
     <string name="backup_storage_taken">Armazenamento ocupado</string>
     <string name="backup_version_history_delete_descr">Você deseja excluir o histórico de alterações para tipos desabilitados da nuvem\?</string>
     <string name="delete_version_history">Excluir histórico de versão</string>
+    <string name="send_crash_log">Enviar registo de falha de sistema</string>
+    <string name="send_logcat_log">Enviar registo logcat</string>
 </resources>
