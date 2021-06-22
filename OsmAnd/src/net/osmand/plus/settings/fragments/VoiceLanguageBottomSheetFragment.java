@@ -305,7 +305,7 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 	}
 
 	private void cancelIndexDownload(IndexItem indexItem, View progressBar,
-									 View textDescription, ImageView secondaryIcon) {
+	                                 View textDescription, ImageView secondaryIcon) {
 		downloadThread.cancelDownload(indexItem);
 		if (indexItem.equals(indexToSelectAfterDownload)) {
 			indexToSelectAfterDownload = null;
@@ -316,7 +316,7 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 	}
 
 	private void startIndexDownload(IndexItem indexItem, ProgressBar progressBar,
-									View textDescription, ImageView secondaryIcon) {
+	                                View textDescription, ImageView secondaryIcon) {
 		AndroidUiHelper.updateVisibility(progressBar, true);
 		AndroidUiHelper.updateVisibility(textDescription, false);
 		progressBar.setIndeterminate(downloadThread.isDownloading());
