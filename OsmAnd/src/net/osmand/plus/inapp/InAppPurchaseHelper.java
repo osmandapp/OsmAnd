@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.AndroidNetworkUtils.OnRequestResultListener;
 import net.osmand.AndroidNetworkUtils.OnSendRequestsListener;
+import net.osmand.AndroidNetworkUtils.Request;
 import net.osmand.AndroidNetworkUtils.RequestResponse;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -658,7 +659,7 @@ public abstract class InAppPurchaseHelper {
 		try {
 			String url = "https://osmand.net/subscription/purchased";
 			String userOperation = "Sending purchase info...";
-			final List<AndroidNetworkUtils.Request> requests = new ArrayList<>();
+			final List<Request> requests = new ArrayList<>();
 			for (PurchaseInfo info : purchaseInfoList) {
 				Map<String, String> parameters = new HashMap<>();
 				parameters.put("userid", userId);
@@ -668,9 +669,12 @@ public abstract class InAppPurchaseHelper {
 				parameters.put("email", email);
 				parameters.put("token", token);
 				addUserInfo(parameters);
-				requests.add(new AndroidNetworkUtils.Request(url, parameters, userOperation, true, true));
+				requests.add(new Request(url, parameters, userOperation, true, true));
 			}
 			AndroidNetworkUtils.sendRequestsAsync(ctx, requests, new OnSendRequestsListener() {
+				@Override
+				public void onRequestSending(@NonNull Request request) {
+				}
 
 				@Override
 				public void onRequestSent(@NonNull RequestResponse response) {
