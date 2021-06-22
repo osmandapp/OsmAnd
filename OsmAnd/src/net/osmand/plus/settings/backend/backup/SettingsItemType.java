@@ -33,6 +33,10 @@ public enum SettingsItemType {
 		if (name.equals("QUICK_ACTION")) {
 			return SettingsItemType.QUICK_ACTIONS;
 		}
-		return SettingsItemType.valueOf(name);
+		try {
+			return SettingsItemType.valueOf(name);
+		} catch (RuntimeException e) {
+			return null;
+		}
 	}
 }

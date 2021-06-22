@@ -432,7 +432,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 	}
 
 	@Override
-	public void newDownloadIndexes() {
+	public void onUpdatedIndexesList() {
 		if (waitForIndexes && wizardType == WizardType.SEARCH_MAP) {
 			waitForIndexes = false;
 			searchMap();
