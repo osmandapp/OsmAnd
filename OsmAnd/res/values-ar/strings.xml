@@ -4240,4 +4240,10 @@
     <string name="grey_color_slope">يستخدم اللون الرمادي عندما يكون المنحدر غير محدد.</string>
     <string name="backup_version_history">تاريخ النسخة</string>
     <string name="backup_storage_taken">التخزين المستخدم</string>
+    <string name="backup_version_history_delete_descr">هل تريد حذف محفوظات التغيير للأنواع المعطلة من السحابة؟</string>
+    <string name="delete_version_history">حذف محفوظات الإصدار</string>
+    <string name="routing_attr_avoid_tunnels_description">تجنب الأنفاق</string>
+    <string name="routing_attr_avoid_tunnels_name">تجنب الأنفاق</string>
+    <string name="send_crash_log">إرسال سجل الأعطال</string>
+    <string name="send_logcat_log">إرسال سجل السجلات</string>
 </resources>

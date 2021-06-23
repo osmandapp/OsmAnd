@@ -2601,7 +2601,7 @@
 \n • Возможность записи путешествие в фоновом режиме (в то время, как устройство находится в спящем режиме) 
 \n OsmAnd это активно развивающееся программное обеспечение с открытым исходным кодом. Каждый может внести свой вклад в приложение, сообщая об ошибках, улучшая переводы или кодируя новые функции. Кроме того, проект опирается на финансовые взносы для финансирования разработки и тестирования новых функциональных возможностей.
 \n</string>
-    <string name="empty_state_osm_edits">Создайте или измените объекты OSM</string>
+    <string name="empty_state_osm_edits">Создайте или измените объекты OpenStreetMap</string>
     <string name="empty_state_osm_edits_descr">Добавляйте и редактируйте POI, сообщайте о неточностях на карте в OSM-заметках, делитесь записанными треками.</string>
     <string name="shared_string_deleted">Удалено</string>
     <string name="shared_string_edited">Отредактировано</string>
@@ -2650,7 +2650,7 @@
     <string name="show_closed_notes">Показать закрытые заметки</string>
     <string name="switch_osm_notes_visibility_desc">Показать/скрыть заметки OSM на карте.</string>
     <string name="gpx_file_desc">GPX — подходит для экспорта в JOSM и другие OSM редакторы.</string>
-    <string name="osc_file_desc">OSC — подходит для экспорта в OSM.</string>
+    <string name="osc_file_desc">OSC — подходит для экспорта в OpenStreetMap.</string>
     <string name="shared_string_gpx_file">Файл GPX</string>
     <string name="osc_file">OSC файл</string>
     <string name="choose_file_type">Выберите тип файла</string>
@@ -4111,13 +4111,14 @@
     <string name="local_backup_descr">Резервное копирование данных в локальный файл или восстановление из него.</string>
     <string name="backup_into_file">Резервное копирование в файл</string>
     <string name="restore_from_file">Восстановление из файла</string>
-    <string name="osmand_cloud_help_descr">Нужна помощь\? Напишите нам на %1$s</string>
+    <string name="osmand_cloud_help_descr">Нужна помощь\? Напишите нам на
+\n%1$s</string>
     <string name="osmand_cloud_create_account_descr">Введите адрес электронной почты и все ваши данные будут привязаны к нему.
 \nМы вышлем вам проверочный код на указанный адрес электронной почты.</string>
     <string name="osmand_cloud_login_descr">Введите адрес электронной почты, который вы использовали при регистрации. Мы вышлем вам одноразовый пароль, необходимый на следующем шаге.</string>
     <string name="verify_email_address">Подтверждение адреса электронной почты</string>
     <string name="verify_email_address_descr">Мы отправили проверочный код на %1$s, пожалуйста, введите его в поле ниже.</string>
-    <string name="cloud_email_not_registered">Данный адрес электронной почты не был зарегистрирован в Osmand Cloud</string>
+    <string name="cloud_email_not_registered">Данный адрес электронной почты не был зарегистрирован в OsmAnd Cloud</string>
     <string name="cloud_email_already_registered">Учетная запись с данным адресом электронной почты уже зарегистрирована.</string>
     <string name="resend_verification_code">Отправить код повторно</string>
     <string name="verification_code_missing">Я не получил код подтверждения</string>
@@ -4172,4 +4173,8 @@
     <string name="backup_version_history">История версий</string>
     <string name="backup_version_history_delete_descr">Вы хотите удалить историю изменений для отключенных типов из облака\?</string>
     <string name="delete_version_history">Удалить историю версий</string>
+    <string name="routing_attr_avoid_tunnels_description">Исключить тоннели</string>
+    <string name="routing_attr_avoid_tunnels_name">Без тоннелей</string>
+    <string name="send_crash_log">Отправить журнал сбоев</string>
+    <string name="send_logcat_log">Отправить журнал logcat</string>
 </resources>
