@@ -2559,8 +2559,8 @@
     <string name="show_arrows_descr">顯示一個或兩個箭頭指示方向到活動標記。</string>
     <string name="shared_string_more_without_dots">更多</string>
     <string name="looking_for_tracks_with_waypoints">尋找有航點的軌跡</string>
-    <string name="empty_state_osm_edits">建立或修改 OSM 物件</string>
-    <string name="empty_state_osm_edits_descr">建立或修改 OSM 的 POI，開啟或評論 OSM 註記，並提供記錄好的 GPX 檔案。</string>
+    <string name="empty_state_osm_edits">建立或修改 OpenStreetMap 物件</string>
+    <string name="empty_state_osm_edits_descr">建立或修改 OpenStreetMap 的 POI，開啟或評論 OSM 註記，並提供記錄好的 GPX 檔案。</string>
     <string name="shared_string_deleted">已刪除</string>
     <string name="shared_string_edited">已編輯</string>
     <string name="shared_string_added">已增加</string>
@@ -2606,7 +2606,7 @@
     <string name="show_closed_notes">顯示已關閉的註解</string>
     <string name="switch_osm_notes_visibility_desc">在地圖上顯示或隱藏 OSM 的註解。</string>
     <string name="gpx_file_desc">GPX - 適合匯出到 JOSM 或其他 OSM 編輯。</string>
-    <string name="osc_file_desc">OSC - 適合匯出到 OSM。</string>
+    <string name="osc_file_desc">OSC - 適合匯出到 OpenStreetMap。</string>
     <string name="shared_string_gpx_file">GPX 檔案</string>
     <string name="osc_file">OSC 檔案</string>
     <string name="choose_file_type">選取檔案類型</string>
@@ -4169,4 +4169,8 @@
     <string name="backup_storage_taken">用掉的儲存空間</string>
     <string name="backup_version_history_delete_descr">您想要從雲端刪除已停用類型的變更歷史紀錄嗎？</string>
     <string name="delete_version_history">刪除版本歷史紀錄</string>
+    <string name="routing_attr_avoid_tunnels_description">避開隧道</string>
+    <string name="routing_attr_avoid_tunnels_name">避開隧道</string>
+    <string name="send_crash_log">傳送當機紀錄檔</string>
+    <string name="send_logcat_log">傳送 logcat 紀錄檔</string>
 </resources>

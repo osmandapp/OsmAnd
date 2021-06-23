@@ -100,4 +100,6 @@
     <string name="last_update_from_telegram_date">Poslední aktualizace z Telegramu: %1$s</string>
     <string name="shared_string_error_short">CHYBA</string>
     <string name="send_report">Odeslat hlášení</string>
+    <string name="status_widget_title">Stav OsmAnd Tracker</string>
+    <string name="shared_string_logout">Odhlásit se</string>
 </resources>

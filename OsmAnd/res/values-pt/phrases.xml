@@ -68,7 +68,7 @@
     <string name="poi_wine">Loja de vinhos</string>
     <string name="poi_books">Livraria</string>
     <string name="poi_bicycle">Loja de bicicletas</string>
-    <string name="poi_anime">Loja de banda desenhada japonesam (anime)</string>
+    <string name="poi_anime">Loja de anime / banda desenhada japonesa</string>
     <string name="poi_antiques">Loja de antiguidades</string>
     <string name="poi_art">Loja de arte</string>
     <string name="poi_baby_goods">Produtos para bebés</string>
@@ -407,7 +407,7 @@
     <string name="poi_standpipe">Boca de incêndio (tubo)</string>
     <string name="poi_water_works">Estação de tratamento de água</string>
     <string name="poi_boatyard">Estaleiro naval</string>
-    <string name="poi_wastewater_plant">Estação de tratamento de esgotos (ETAR)</string>
+    <string name="poi_wastewater_plant">Estação de tratamento de esgotos / ETAR</string>
     <string name="poi_water_tower">Reservatório elevado</string>
     <string name="poi_lock_gate">Comporta de eclusa</string>
     <string name="poi_waterway_turning_point">Ponto de viragem fluvial</string>
@@ -3967,4 +3967,8 @@
     <string name="poi_climbing_grade_saxon_min">Rota mais fácil (grau saxão)</string>
     <string name="poi_power_terminal">Terminal elétrico</string>
     <string name="poi_fuel_propane">Propano</string>
+    <string name="poi_picnic_table_no">Mesa para piquenique: não</string>
+    <string name="poi_power_portal">Portal de eletricidade</string>
+    <string name="poi_memorial_subject">Assunto</string>
+    <string name="poi_picnic_table_yes">Mesa para piquenique: sim</string>
 </resources>
