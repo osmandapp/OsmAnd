@@ -4178,4 +4178,5 @@
     <string name="routing_attr_avoid_tunnels_name">Уникати тунелів</string>
     <string name="send_crash_log">Надіслати журнал збоїв</string>
     <string name="send_logcat_log">Надіслати вміст журналу</string>
+    <string name="backup_promocode">Промокод</string>
 </resources>
