@@ -15,7 +15,6 @@ public enum OsmAndFeature {
 	TERRAIN(R.string.terrain_maps, R.string.terrain_maps_contour_lines_hillshade_slope, R.string.purchases_feature_desc_terrain, R.drawable.ic_action_srtm_colored_day, R.drawable.ic_action_srtm_colored_day, true),
 	NAUTICAL(R.string.nautical_depth, R.string.purchases_feature_desc_nautical, R.drawable.ic_action_nautical_depth_colored_day, R.drawable.ic_action_nautical_depth_colored_night, true);
 
-
 	private final int headerTitleId;
 	private final int listTitleId;
 	private final int descriptionId;

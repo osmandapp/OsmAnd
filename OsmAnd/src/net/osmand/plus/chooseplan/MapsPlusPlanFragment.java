@@ -17,6 +17,7 @@ import net.osmand.plus.inapp.InAppPurchases;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MapsPlusPlanFragment extends SelectedPlanFragment {
@@ -26,19 +27,27 @@ public class MapsPlusPlanFragment extends SelectedPlanFragment {
 		fragment.show(activity.getSupportFragmentManager(), TAG);
 	}
 
+	private final OsmAndFeature[] subscriptionFeatures = {
+			OsmAndFeature.MONTHLY_MAP_UPDATES,
+			OsmAndFeature.UNLIMITED_MAP_DOWNLOADS,
+			OsmAndFeature.COMBINED_WIKI,
+			OsmAndFeature.WIKIPEDIA,
+			OsmAndFeature.WIKIVOYAGE,
+			OsmAndFeature.TERRAIN,
+			OsmAndFeature.NAUTICAL
+	};
+
 	@Override
 	protected void initData(@Nullable Bundle args) {
 		super.initData(args);
-		features.remove(OsmAndFeature.WIKIPEDIA);
-		features.remove(OsmAndFeature.WIKIVOYAGE);
 
 		for (OsmAndFeature feature : features) {
-			if (feature.isAvailableInMapsPlus()) {
-				includedFeatures.add(feature);
-			} else {
+			if (!feature.isAvailableInMapsPlus()) {
 				noIncludedFeatures.add(feature);
 			}
 		}
+		includedFeatures.addAll(Arrays.asList(subscriptionFeatures));
+		features = new ArrayList<>(includedFeatures);
 	}
 
 	@Override
