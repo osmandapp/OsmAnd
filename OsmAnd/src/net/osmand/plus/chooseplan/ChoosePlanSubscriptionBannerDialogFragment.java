@@ -4,11 +4,11 @@ public class ChoosePlanSubscriptionBannerDialogFragment extends ChoosePlanFreeBa
 	public static final String TAG = ChoosePlanSubscriptionBannerDialogFragment.class.getSimpleName();
 
 	@Override
-	public OsmAndFeature[] getPlanTypeFeatures() {
-		return new OsmAndFeature[] {};
+	public OsmAndFeatureOld[] getPlanTypeFeatures() {
+		return new OsmAndFeatureOld[] {};
 	}
 	@Override
-	public OsmAndFeature[] getSelectedPlanTypeFeatures() {
-		return new OsmAndFeature[] {};
+	public OsmAndFeatureOld[] getSelectedPlanTypeFeatures() {
+		return new OsmAndFeatureOld[] {};
 	}
 }

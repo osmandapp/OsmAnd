@@ -3,11 +3,8 @@ package net.osmand.plus.chooseplan.button;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
-
-import static net.osmand.plus.chooseplan.ChoosePlanDialogFragment.subscribe;
 
 public class SubscriptionButton extends PriceButton<InAppSubscription> {
 
@@ -17,12 +14,10 @@ public class SubscriptionButton extends PriceButton<InAppSubscription> {
 
 	@Override
 	public void onApply(@NonNull FragmentActivity activity, @NonNull InAppPurchaseHelper purchaseHelper) {
-		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
-
 		if (purchaseItem.isPurchased()) {
 			purchaseHelper.manageSubscription(activity, purchaseItem.getSku());
 		} else {
-			subscribe(app, activity, purchaseHelper, purchaseItem.getSku());
+			InAppPurchaseHelper.subscribe(activity, purchaseHelper, purchaseItem.getSku());
 		}
 	}
 }

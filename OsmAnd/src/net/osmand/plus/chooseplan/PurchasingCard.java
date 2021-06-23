@@ -17,8 +17,7 @@ import net.osmand.plus.inapp.InAppPurchaseHelper;
 
 public class PurchasingCard extends BasePurchasingCard {
 
-	public PurchasingCard(@NonNull FragmentActivity activity,
-	                      @NonNull InAppPurchaseHelper purchaseHelper) {
+	public PurchasingCard(@NonNull FragmentActivity activity, @NonNull InAppPurchaseHelper purchaseHelper) {
 		super(activity, purchaseHelper);
 	}
 

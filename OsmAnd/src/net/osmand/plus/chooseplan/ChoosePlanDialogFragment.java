@@ -20,12 +20,21 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
@@ -39,25 +48,12 @@ import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscriptionIntroductoryInfo;
 import net.osmand.plus.liveupdates.SubscriptionFragment;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
 import java.util.List;
-
-import androidx.annotation.ColorRes;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 
 public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment implements InAppPurchaseListener {
 	public static final String TAG = ChoosePlanDialogFragment.class.getSimpleName();
@@ -77,64 +73,9 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 		void onChoosePlanDialogDismiss();
 	}
 
-	public enum OsmAndFeature {
-		WIKIVOYAGE_OFFLINE(R.string.wikivoyage_offline, R.drawable.ic_action_explore),
-		DAILY_MAP_UPDATES(R.string.daily_map_updates, R.drawable.ic_action_time_span),
-		MONTHLY_MAP_UPDATES(R.string.monthly_map_updates, R.drawable.ic_action_sand_clock),
-		UNLIMITED_DOWNLOADS(R.string.unlimited_downloads, R.drawable.ic_action_unlimited_download),
-		WIKIPEDIA_OFFLINE(R.string.wikipedia_offline, R.drawable.ic_plugin_wikipedia),
-		CONTOUR_LINES_HILLSHADE_MAPS(R.string.contour_lines_hillshade_maps, R.drawable.ic_plugin_srtm),
-		SEA_DEPTH_MAPS(R.string.index_item_depth_contours_osmand_ext, R.drawable.ic_action_nautical_depth),
-		UNLOCK_ALL_FEATURES(R.string.unlock_all_features, R.drawable.ic_action_osmand_logo),
-		DONATION_TO_OSM(R.string.donation_to_osm, 0);
-
-		private final int key;
-		private final int iconId;
-
-		OsmAndFeature(int key, int iconId) {
-			this.key = key;
-			this.iconId = iconId;
-		}
-
-		public String toHumanString(Context ctx) {
-			return ctx.getString(key);
-		}
-
-		public int getIconId() {
-			return iconId;
-		}
-
-		public boolean isFeaturePurchased(OsmandApplication ctx) {
-			if (InAppPurchaseHelper.isSubscribedToLiveUpdates(ctx)) {
-				return true;
-			}
-			switch (this) {
-				case DAILY_MAP_UPDATES:
-				case DONATION_TO_OSM:
-				case UNLOCK_ALL_FEATURES:
-					return false;
-				case MONTHLY_MAP_UPDATES:
-				case UNLIMITED_DOWNLOADS:
-				case WIKIPEDIA_OFFLINE:
-				case WIKIVOYAGE_OFFLINE:
-					return !Version.isFreeVersion(ctx) || InAppPurchaseHelper.isFullVersionPurchased(ctx);
-				case SEA_DEPTH_MAPS:
-					return InAppPurchaseHelper.isDepthContoursPurchased(ctx);
-				case CONTOUR_LINES_HILLSHADE_MAPS:
-					return OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null || InAppPurchaseHelper.isContourLinesPurchased(ctx);
-			}
-			return false;
-		}
-
-		public static OsmAndFeature[] possibleValues() {
-			return new OsmAndFeature[]{WIKIVOYAGE_OFFLINE, DAILY_MAP_UPDATES, MONTHLY_MAP_UPDATES, UNLIMITED_DOWNLOADS,
-					WIKIPEDIA_OFFLINE, CONTOUR_LINES_HILLSHADE_MAPS, UNLOCK_ALL_FEATURES, DONATION_TO_OSM};
-		}
-	}
-
-	public boolean hasSelectedSubscriptionFeature(OsmAndFeature feature) {
+	public boolean hasSelectedSubscriptionFeature(OsmAndFeatureOld feature) {
 		if (getSelectedSubscriptionFeatures() != null) {
-			for (OsmAndFeature f : getSelectedSubscriptionFeatures()) {
+			for (OsmAndFeatureOld f : getSelectedSubscriptionFeatures()) {
 				if (feature == f) {
 					return true;
 				}
@@ -143,9 +84,9 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 		return false;
 	}
 
-	public boolean hasSelectedPlanTypeFeature(OsmAndFeature feature) {
+	public boolean hasSelectedPlanTypeFeature(OsmAndFeatureOld feature) {
 		if (getSelectedPlanTypeFeatures() != null) {
-			for (OsmAndFeature f : getSelectedPlanTypeFeatures()) {
+			for (OsmAndFeatureOld f : getSelectedPlanTypeFeatures()) {
 				if (feature == f) {
 					return true;
 				}
@@ -210,7 +151,6 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 			}
 		});
 
-		ViewGroup infoContainer = (ViewGroup) view.findViewById(R.id.info_container);
 		TextViewEx infoDescription = (TextViewEx) view.findViewById(R.id.info_description);
 		ViewGroup cardsContainer = (ViewGroup) view.findViewById(R.id.cards_container);
 		if (!TextUtils.isEmpty(getInfoDescription())) {
@@ -219,10 +159,9 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 		TextViewEx planInfoDescription = (TextViewEx) view.findViewById(R.id.plan_info_description);
 		planInfoDescription.setText(Version.isHuawei()
 				? R.string.osm_live_payment_subscription_management_hw : R.string.osm_live_payment_subscription_management);
-		ViewGroup subscriptionsCard = buildSubscriptionsCard(ctx, cardsContainer);
-		if (subscriptionsCard != null) {
-			cardsContainer.addView(subscriptionsCard);
-		}
+
+		cardsContainer.addView(buildSubscriptionsCard(ctx, cardsContainer));
+
 		ViewGroup planTypeCard = buildPlanTypeCard(ctx, cardsContainer);
 		if (planTypeCard != null) {
 			cardsContainer.addView(planTypeCard);
@@ -236,7 +175,7 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 	}
 
 	@Override
-	public void onDismiss(DialogInterface dialog) {
+	public void onDismiss(@NonNull DialogInterface dialog) {
 		super.onDismiss(dialog);
 		Activity activity = getActivity();
 		if (activity instanceof ChoosePlanDialogListener) {
@@ -258,13 +197,13 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 		return app;
 	}
 
-	public abstract OsmAndFeature[] getSubscriptionFeatures();
+	public abstract OsmAndFeatureOld[] getSubscriptionFeatures();
 
-	public abstract OsmAndFeature[] getPlanTypeFeatures();
+	public abstract OsmAndFeatureOld[] getPlanTypeFeatures();
 
-	public abstract OsmAndFeature[] getSelectedSubscriptionFeatures();
+	public abstract OsmAndFeatureOld[] getSelectedSubscriptionFeatures();
 
-	public abstract OsmAndFeature[] getSelectedPlanTypeFeatures();
+	public abstract OsmAndFeatureOld[] getSelectedPlanTypeFeatures();
 
 	@DrawableRes
 	public abstract int getPlanTypeHeaderImageId();
@@ -306,7 +245,7 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 		headerDescr.setText(R.string.osm_live_subscription);
 		ViewGroup rowsContainer = (ViewGroup) cardView.findViewById(R.id.rows_container);
 		View featureRowDiv = null;
-		for (OsmAndFeature feature : getSubscriptionFeatures()) {
+		for (OsmAndFeatureOld feature : getSubscriptionFeatures()) {
 			String featureName = feature.toHumanString(ctx);
 			View featureRow = inflate(hasSelectedSubscriptionFeature(feature)
 					? R.layout.purchase_dialog_card_selected_row : R.layout.purchase_dialog_card_row, cardView);
@@ -335,7 +274,7 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 		subscriptionCardButtonsContainer = (ViewGroup) cardView.findViewById(R.id.card_buttons_container);
 		subscriptionCardProgress = (ProgressBar) cardView.findViewById(R.id.card_progress);
 		if (subscriptionCardProgress != null) {
-			int color =  ContextCompat.getColor(ctx, nightMode ? R.color.wikivoyage_active_dark : R.color.wikivoyage_active_light);
+			int color = ContextCompat.getColor(ctx, nightMode ? R.color.wikivoyage_active_dark : R.color.wikivoyage_active_light);
 			subscriptionCardProgress.getIndeterminateDrawable().setColorFilter(color, android.graphics.PorterDuff.Mode.MULTIPLY);
 		}
 		return cardView;
@@ -489,8 +428,9 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 						buttonView.setOnClickListener(new OnClickListener() {
 							@Override
 							public void onClick(View v) {
-								if (getActivity() != null) {
-									subscribe(app, getActivity(), purchaseHelper, s.getSku());
+								FragmentActivity activity = getActivity();
+								if (activity != null && purchaseHelper != null) {
+									InAppPurchaseHelper.subscribe(activity, purchaseHelper, s.getSku());
 								}
 							}
 						});
@@ -498,8 +438,9 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 						buttonExView.setOnClickListener(new OnClickListener() {
 							@Override
 							public void onClick(View v) {
-								if (getActivity() != null) {
-									subscribe(app, getActivity(), purchaseHelper, s.getSku());
+								FragmentActivity activity = getActivity();
+								if (activity != null && purchaseHelper != null) {
+									InAppPurchaseHelper.subscribe(activity, purchaseHelper, s.getSku());
 								}
 							}
 						});
@@ -530,22 +471,6 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 		}
 	}
 
-	public static void subscribe(@NonNull OsmandApplication app, Activity activity,
-								 InAppPurchaseHelper purchaseHelper, String sku) {
-		if (!app.getSettings().isInternetConnectionAvailable(true)) {
-			Toast.makeText(app, R.string.internet_not_available, Toast.LENGTH_LONG).show();
-		} else {
-			if (activity != null && purchaseHelper != null) {
-				OsmandSettings settings = app.getSettings();
-				purchaseHelper.purchaseSubscription(activity, sku,
-						settings.BILLING_USER_EMAIL.get(),
-						settings.BILLING_USER_NAME.get(),
-						settings.BILLING_USER_COUNTRY_DOWNLOAD_NAME.get(),
-						settings.BILLING_HIDE_USER_NAME.get());
-			}
-		}
-	}
-
 	private ViewGroup buildPlanTypeCard(@NonNull Context ctx, ViewGroup container) {
 		if (getPlanTypeFeatures().length == 0) {
 			return null;
@@ -569,7 +494,7 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 
 		ViewGroup rowsContainer = (ViewGroup) cardView.findViewById(R.id.rows_container);
 		View featureRow = null;
-		for (OsmAndFeature feature : getPlanTypeFeatures()) {
+		for (OsmAndFeatureOld feature : getPlanTypeFeatures()) {
 			String featureName = feature.toHumanString(ctx);
 			featureRow = inflate(hasSelectedPlanTypeFeature(feature)
 					? R.layout.purchase_dialog_card_selected_row : R.layout.purchase_dialog_card_row, cardView);
