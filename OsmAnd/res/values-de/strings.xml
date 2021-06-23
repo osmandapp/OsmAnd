@@ -4180,4 +4180,8 @@
     <string name="backup_storage_taken">Belegter Speicher</string>
     <string name="backup_version_history_delete_descr">Möchten Sie die Änderungshistorie für deaktivierte Typen aus der Cloud löschen\?</string>
     <string name="delete_version_history">Versionsgeschichte löschen</string>
+    <string name="routing_attr_avoid_tunnels_description">Tunnel vermeiden</string>
+    <string name="routing_attr_avoid_tunnels_name">Tunnel vermeiden</string>
+    <string name="send_crash_log">Crash Log senden</string>
+    <string name="send_logcat_log">Logcat Log senden</string>
 </resources>
