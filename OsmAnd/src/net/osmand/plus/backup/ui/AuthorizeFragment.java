@@ -374,7 +374,8 @@ public class AuthorizeFragment extends BaseOsmAndFragment {
 	}
 
 	private void registerUser(TextView errorText) {
-		backupHelper.registerUser(settings.BACKUP_USER_EMAIL.get(), promoCode, new OnRegisterUserListener() {
+		boolean login = dialogType == LoginDialogType.SIGN_IN;
+		backupHelper.registerUser(settings.BACKUP_USER_EMAIL.get(), promoCode, login, new OnRegisterUserListener() {
 			@Override
 			public void onRegisterUser(int status, @Nullable String message, @Nullable String error) {
 				FragmentActivity activity = getActivity();

@@ -312,9 +312,11 @@ public class BackupHelper {
 		return fileName;
 	}
 
-	public void registerUser(@NonNull final String email, @Nullable String promoCode, @Nullable final OnRegisterUserListener listener) {
+	public void registerUser(@NonNull final String email, @Nullable String promoCode, boolean login,
+							 @Nullable final OnRegisterUserListener listener) {
 		Map<String, String> params = new HashMap<>();
 		params.put("email", email);
+		params.put("login", String.valueOf(login));
 		final String orderId = Algorithms.isEmpty(promoCode) ? getOrderId() : promoCode;
 		if (!Algorithms.isEmpty(orderId)) {
 			params.put("orderid", orderId);
