@@ -4179,4 +4179,5 @@
     <string name="routing_attr_avoid_tunnels_name">Vyhnout se tunelům</string>
     <string name="send_crash_log">Odeslat záznam o pádu</string>
     <string name="send_logcat_log">Odeslat záznam z logcatu</string>
+    <string name="backup_promocode">Promokód</string>
 </resources>

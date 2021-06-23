@@ -4177,4 +4177,5 @@
     <string name="routing_attr_avoid_tunnels_name">Без тоннелей</string>
     <string name="send_crash_log">Отправить журнал сбоев</string>
     <string name="send_logcat_log">Отправить журнал logcat</string>
+    <string name="backup_promocode">Промокод</string>
 </resources>

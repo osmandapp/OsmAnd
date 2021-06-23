@@ -3722,7 +3722,7 @@
     <string name="route_between_points_desc">Escolha como ligar os pontos: por uma linha reta ou por uma rota calculada entre eles como especificado abaixo.</string>
     <string name="whole_track">Trilho inteiro</string>
     <string name="next_segment">Próximo segmento</string>
-    <string name="route_between_points_warning_desc">Na próxima janela, defina o limite de distância e depois adicione pontos próximos de uma via para que esses pontos sejam automaticamente posicionados nessa via com acesso permitido ou adequado conforme o perfil escolhido.</string>
+    <string name="route_between_points_warning_desc">Em seguida, ajuste o trilho para a estrada mais próxima permitida com um dos seus perfis de navegação para usar esta opção.</string>
     <string name="threshold_distance">Limite de distância</string>
     <string name="navigation_profile">Perfil de navegação</string>
     <string name="route_between_points_add_track_desc">Selecione um ficheiro de trilho no qual será adicionado um novo segmento.</string>
@@ -4186,4 +4186,5 @@
     <string name="routing_attr_avoid_tunnels_name">Evitar túneis</string>
     <string name="send_crash_log">Enviar registo de falha de sistema</string>
     <string name="send_logcat_log">Enviar registo logcat</string>
+    <string name="backup_promocode">Código promocional</string>
 </resources>

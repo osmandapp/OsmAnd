@@ -4173,4 +4173,5 @@
     <string name="routing_attr_avoid_tunnels_name">Alagutak elkerülése</string>
     <string name="send_crash_log">Összeomlási napló elküldése</string>
     <string name="send_logcat_log">Logcat napló elküldése</string>
+    <string name="backup_promocode">Promóciós kód</string>
 </resources>
