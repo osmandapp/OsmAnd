@@ -18,6 +18,11 @@ public class SubscriptionButton extends PriceButton<InAppSubscription> {
 	@Override
 	public void onApply(@NonNull FragmentActivity activity, @NonNull InAppPurchaseHelper purchaseHelper) {
 		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
-		subscribe(app, activity, purchaseHelper, purchaseItem.getSku());
+
+		if (purchaseItem.isPurchased()) {
+			purchaseHelper.manageSubscription(activity, purchaseItem.getSku());
+		} else {
+			subscribe(app, activity, purchaseHelper, purchaseItem.getSku());
+		}
 	}
 }

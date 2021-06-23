@@ -41,57 +41,27 @@ public class PriceButtonsUtils {
 			boolean hasIntroductoryInfo = introductoryInfo != null;
 			CharSequence descriptionText = s.getDescription(app);
 			if (s.isPurchased()) {
-//				View buttonPurchased = inflater.inflate(R.layout.purchase_dialog_card_button_active_ex, container, false);
-//				TextViewEx title = (TextViewEx) buttonPurchased.findViewById(R.id.title);
-//				TextViewEx description = (TextViewEx) buttonPurchased.findViewById(R.id.description);
-//				TextViewEx descriptionContribute = (TextViewEx) buttonPurchased.findViewById(R.id.description_contribute);
-//				descriptionContribute.setVisibility(s.isDonationSupported() ? View.VISIBLE : View.GONE);
-//				TextViewEx buttonTitle = (TextViewEx) buttonPurchased.findViewById(R.id.button_title);
-//				View buttonView = buttonPurchased.findViewById(R.id.button_view);
-//				View buttonCancelView = buttonPurchased.findViewById(R.id.button_cancel_view);
-//				View div = buttonPurchased.findViewById(R.id.div);
-//				AppCompatImageView rightImage = (AppCompatImageView) buttonPurchased.findViewById(R.id.right_image);
+				SubscriptionButton priceBtn = new SubscriptionButton(s.getSkuNoVersion(), s);
+				priceBtn.setTitle(s.getTitle(app));
 
-//				CharSequence priceTitle = hasIntroductoryInfo ?
-//						introductoryInfo.getFormattedDescription(themedCtx, buttonTitle.getCurrentTextColor()) : s.getPriceWithPeriod(app);
-//				title.setText(s.getTitle(app));
-//				if (Algorithms.isEmpty(descriptionText.toString())) {
-//					description.setVisibility(View.GONE);
-//				} else {
-//					description.setText(descriptionText);
-//				}
-//				buttonTitle.setText(priceTitle);
-//				buttonView.setVisibility(View.VISIBLE);
-//				buttonCancelView.setVisibility(View.GONE);
-//				buttonPurchased.setOnClickListener(null);
-//				div.setVisibility(View.GONE);
-//				rightImage.setVisibility(View.GONE);
-//				if (s.isDonationSupported()) {
-//					buttonPurchased.setOnClickListener(v -> {
-//						showDonationSettings();
-//						dismiss();
-//					});
-//				} else {
-//					buttonPurchased.setOnClickListener(null);
-//				}
-//				container.addView(buttonPurchased);
+				boolean showSolidButton = !anyPurchased
+						&& (!maxDiscountAction || hasIntroductoryInfo || maxDiscountSubscription.isUpgrade());
+				int descriptionColor = Color.RED; // tvTitle.getCurrentTextColor();
+				// todo
+				// showSolidButton ? buttonExTitle.getCurrentTextColor() : buttonTitle.getCurrentTextColor();
+				CharSequence priceTitle = hasIntroductoryInfo ?
+						introductoryInfo.getFormattedDescription(app, descriptionColor) : s.getPriceWithPeriod(app);
+				priceBtn.setPrice(priceTitle);
 
-//				View buttonCancel = inflater.inflate(R.layout.purchase_dialog_card_button_active_ex, container, false);
-//				title = (TextViewEx) buttonCancel.findViewById(R.id.title);
-//				description = (TextViewEx) buttonCancel.findViewById(R.id.description);
-//				buttonView = buttonCancel.findViewById(R.id.button_view);
-//				buttonCancelView = buttonCancel.findViewById(R.id.button_cancel_view);
-//				div = buttonCancel.findViewById(R.id.div);
-//				rightImage = (AppCompatImageView) buttonCancel.findViewById(R.id.right_image);
+				String discount = s.getDiscount(purchaseHelper.getMonthlyLiveUpdates());
+				if (!Algorithms.isEmpty(discount)) {
+					priceBtn.setDiscount(discount);
 
-//				title.setText(getString(R.string.osm_live_payment_current_subscription));
-//				description.setText(s.getRenewDescription(themedCtx));
-//				buttonView.setVisibility(View.GONE);
-//				buttonCancelView.setVisibility(View.VISIBLE);
-//				buttonCancelView.setOnClickListener(v -> purchaseHelper.manageSubscription(app, s.getSku()));
-//				div.setVisibility(View.VISIBLE);
-//				rightImage.setVisibility(View.VISIBLE);
-//				container.addView(buttonCancel);
+					String regularPrice = s.getRegularPrice(app, purchaseHelper.getMonthlyLiveUpdates());
+					priceBtn.setRegularPrice(regularPrice);
+				}
+
+				priceButtons.add(priceBtn);
 			} else {
 				SubscriptionButton priceBtn = new SubscriptionButton(s.getSkuNoVersion(), s);
 				priceBtn.setTitle(s.getTitle(app));
