@@ -21,14 +21,8 @@ public class WikiImageCard extends ImageCard {
 		this.title = wikiImage.getImageName();
 		this.url = this.imageUrl;
 
-		View.OnClickListener onClickListener = new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				openUrl(getMapActivity(), getMyApplication(), getTitle(), wikiImage.getImageHiResUrl(),
-						isExternalLink() || Algorithms.isEmpty(getImageHiresUrl()),
-						!Algorithms.isEmpty(getImageHiresUrl()));
-			}
-		};
+		View.OnClickListener onClickListener = v -> openUrl(getMapActivity(), getMyApplication(),
+				getTitle(), wikiImage.getUrlWithCommonAttributions(), false, false);
 
 		if (!Algorithms.isEmpty(buttonText)) {
 			this.onButtonClickListener = onClickListener;
@@ -36,5 +30,4 @@ public class WikiImageCard extends ImageCard {
 			this.onClickListener = onClickListener;
 		}
 	}
-
 }
