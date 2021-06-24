@@ -20,6 +20,17 @@ import java.util.List;
 
 public class MapsPlusPlanFragment extends SelectedPlanFragment {
 
+	public static final List<OsmAndFeature> MAPS_PLUS_PREVIEW_FEATURES = Arrays.asList(
+			OsmAndFeature.OSMAND_CLOUD,
+			OsmAndFeature.ADVANCED_WIDGETS,
+			OsmAndFeature.HOURLY_MAP_UPDATES,
+			OsmAndFeature.MONTHLY_MAP_UPDATES,
+			OsmAndFeature.UNLIMITED_MAP_DOWNLOADS,
+			OsmAndFeature.COMBINED_WIKI,
+			OsmAndFeature.TERRAIN,
+			OsmAndFeature.NAUTICAL
+	);
+
 	public static void showInstance(@NonNull FragmentActivity activity) {
 		MapsPlusPlanFragment fragment = new MapsPlusPlanFragment();
 		fragment.show(activity.getSupportFragmentManager(), TAG);
@@ -33,9 +44,7 @@ public class MapsPlusPlanFragment extends SelectedPlanFragment {
 
 	@Override
 	protected void collectFeatures() {
-		previewFeatures.addAll(Arrays.asList(OsmAndFeature.values()));
-		previewFeatures.remove(OsmAndFeature.WIKIPEDIA);
-		previewFeatures.remove(OsmAndFeature.WIKIVOYAGE);
+		previewFeatures.addAll(MAPS_PLUS_PREVIEW_FEATURES);
 
 		for (OsmAndFeature feature : previewFeatures) {
 			if (feature.isAvailableInMapsPlus()) {

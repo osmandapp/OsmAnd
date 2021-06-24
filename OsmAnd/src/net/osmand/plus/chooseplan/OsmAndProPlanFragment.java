@@ -19,6 +19,16 @@ import java.util.List;
 
 public class OsmAndProPlanFragment extends SelectedPlanFragment {
 
+	public static final List<OsmAndFeature> OSMAND_PRO_PREVIEW_FEATURES = Arrays.asList(
+			OsmAndFeature.OSMAND_CLOUD,
+			OsmAndFeature.ADVANCED_WIDGETS,
+			OsmAndFeature.HOURLY_MAP_UPDATES,
+			OsmAndFeature.UNLIMITED_MAP_DOWNLOADS,
+			OsmAndFeature.COMBINED_WIKI,
+			OsmAndFeature.TERRAIN,
+			OsmAndFeature.NAUTICAL
+	);
+
 	public static void showInstance(@NonNull FragmentActivity activity) {
 		OsmAndProPlanFragment fragment = new OsmAndProPlanFragment();
 		fragment.show(activity.getSupportFragmentManager(), TAG);
@@ -32,12 +42,8 @@ public class OsmAndProPlanFragment extends SelectedPlanFragment {
 
 	@Override
 	protected void collectFeatures() {
-		previewFeatures.addAll(Arrays.asList(OsmAndFeature.values()));
-		previewFeatures.remove(OsmAndFeature.MONTHLY_MAP_UPDATES);
-		previewFeatures.remove(OsmAndFeature.WIKIPEDIA);
-		previewFeatures.remove(OsmAndFeature.WIKIVOYAGE);
-
-		includedFeatures.addAll(previewFeatures);
+		previewFeatures.addAll(OSMAND_PRO_PREVIEW_FEATURES);
+		includedFeatures.addAll(OSMAND_PRO_PREVIEW_FEATURES);
 	}
 
 	@Override

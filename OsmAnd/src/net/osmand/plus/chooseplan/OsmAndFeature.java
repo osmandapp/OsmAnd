@@ -1,7 +1,6 @@
 package net.osmand.plus.chooseplan;
 
 import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
@@ -62,12 +61,23 @@ public enum OsmAndFeature {
 	}
 
 	public boolean isAvailableInMapsPlus() {
-		return mapsPlusFeatures.contains(this);
+		return MAPS_PLUS_FEATURES.contains(this);
 	}
 
-	public static final List<OsmAndFeature> osmandProFeatures = Arrays.asList(OsmAndFeature.values());
+	public static final List<OsmAndFeature> OSMAND_PRO_FEATURES = Arrays.asList(
+			OsmAndFeature.OSMAND_CLOUD,
+			OsmAndFeature.ADVANCED_WIDGETS,
+			OsmAndFeature.HOURLY_MAP_UPDATES,
+			OsmAndFeature.MONTHLY_MAP_UPDATES,
+			OsmAndFeature.UNLIMITED_MAP_DOWNLOADS,
+			OsmAndFeature.COMBINED_WIKI,
+			OsmAndFeature.WIKIPEDIA,
+			OsmAndFeature.WIKIVOYAGE,
+			OsmAndFeature.TERRAIN,
+			OsmAndFeature.NAUTICAL
+	);
 
-	public static final List<OsmAndFeature> mapsPlusFeatures = Arrays.asList(
+	public static final List<OsmAndFeature> MAPS_PLUS_FEATURES = Arrays.asList(
 			OsmAndFeature.MONTHLY_MAP_UPDATES,
 			OsmAndFeature.UNLIMITED_MAP_DOWNLOADS,
 			OsmAndFeature.COMBINED_WIKI,
@@ -75,5 +85,4 @@ public enum OsmAndFeature {
 			OsmAndFeature.WIKIVOYAGE,
 			OsmAndFeature.TERRAIN,
 			OsmAndFeature.NAUTICAL);
-
 }
