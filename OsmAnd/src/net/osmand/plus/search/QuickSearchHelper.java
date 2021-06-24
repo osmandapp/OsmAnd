@@ -2,6 +2,9 @@ package net.osmand.plus.search;
 
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -49,25 +52,23 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 public class QuickSearchHelper implements ResourceListener {
 
-	public static final int SEARCH_FAVORITE_API_PRIORITY = 50;
-	public static final int SEARCH_FAVORITE_API_CATEGORY_PRIORITY = 50;
-	public static final int SEARCH_FAVORITE_OBJECT_PRIORITY = 50;
-	public static final int SEARCH_FAVORITE_CATEGORY_PRIORITY = 51;
-	public static final int SEARCH_WPT_API_PRIORITY = 50;
-	public static final int SEARCH_WPT_OBJECT_PRIORITY = 52;
-	public static final int SEARCH_TRACK_API_PRIORITY = 50;
-	public static final int SEARCH_TRACK_OBJECT_PRIORITY = 53;
-	public static final int SEARCH_HISTORY_API_PRIORITY = 50;
-	public static final int SEARCH_HISTORY_OBJECT_PRIORITY = 54;
+	public static final int SEARCH_FAVORITE_API_PRIORITY = 100;
+	public static final int SEARCH_FAVORITE_API_CATEGORY_PRIORITY = 100;
+	public static final int SEARCH_FAVORITE_OBJECT_PRIORITY = 100;
+	public static final int SEARCH_FAVORITE_CATEGORY_PRIORITY = 101;
+	public static final int SEARCH_WPT_API_PRIORITY = 100;
+	public static final int SEARCH_WPT_OBJECT_PRIORITY = 102;
+	public static final int SEARCH_TRACK_API_PRIORITY = 100;
+	public static final int SEARCH_TRACK_OBJECT_PRIORITY = 103;
+	public static final int SEARCH_HISTORY_API_PRIORITY = 100;
+	public static final int SEARCH_HISTORY_OBJECT_PRIORITY = 104;
 	public static final int SEARCH_ONLINE_API_PRIORITY = 500;
 	public static final int SEARCH_ONLINE_AMENITY_PRIORITY = 500;
-	private OsmandApplication app;
-	private SearchUICore core;
+
+	private final OsmandApplication app;
+	private final SearchUICore core;
 	private SearchResultCollection resultCollection;
 	private boolean mapsIndexed;
 
@@ -184,7 +185,7 @@ public class QuickSearchHelper implements ResourceListener {
 
 	public static class SearchWptAPI extends SearchBaseAPI {
 
-		private OsmandApplication app;
+		private final OsmandApplication app;
 
 		public SearchWptAPI(OsmandApplication app) {
 			super(ObjectType.WPT);
@@ -235,8 +236,8 @@ public class QuickSearchHelper implements ResourceListener {
 
 	public static class SearchFavoriteCategoryAPI extends SearchBaseAPI {
 
-		private OsmandApplication app;
-		private FavouritesDbHelper helper;
+		private final OsmandApplication app;
+		private final FavouritesDbHelper helper;
 
 		public SearchFavoriteCategoryAPI(OsmandApplication app) {
 			super(ObjectType.FAVORITE_GROUP);
@@ -293,7 +294,7 @@ public class QuickSearchHelper implements ResourceListener {
 
 	public static class SearchFavoriteAPI extends SearchBaseAPI {
 
-		private OsmandApplication app;
+		private final OsmandApplication app;
 
 		public SearchFavoriteAPI(OsmandApplication app) {
 			super(ObjectType.FAVORITE);
@@ -350,8 +351,8 @@ public class QuickSearchHelper implements ResourceListener {
 	public static class SearchOnlineApi extends SearchBaseAPI {
 		private static final int SEARCH_RADIUS_INCREMENT = 3;
 
-		private OsmandApplication app;
-		private NominatimPoiFilter filter;
+		private final OsmandApplication app;
+		private final NominatimPoiFilter filter;
 
 		public SearchOnlineApi(OsmandApplication app) {
 			super(ObjectType.ONLINE_SEARCH);
@@ -423,7 +424,7 @@ public class QuickSearchHelper implements ResourceListener {
 
 	public static class SearchHistoryAPI extends SearchBaseAPI {
 
-		private OsmandApplication app;
+		private final OsmandApplication app;
 
 		public SearchHistoryAPI(OsmandApplication app) {
 			super(ObjectType.RECENT_OBJ);
