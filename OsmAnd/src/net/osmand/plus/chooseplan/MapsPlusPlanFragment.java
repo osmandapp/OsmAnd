@@ -1,7 +1,6 @@
 package net.osmand.plus.chooseplan;
 
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
@@ -34,11 +33,11 @@ public class MapsPlusPlanFragment extends SelectedPlanFragment {
 
 	@Override
 	protected void collectFeatures() {
-		features.addAll(Arrays.asList(OsmAndFeature.values()));
-		features.remove(OsmAndFeature.WIKIPEDIA);
-		features.remove(OsmAndFeature.WIKIVOYAGE);
+		previewFeatures.addAll(Arrays.asList(OsmAndFeature.values()));
+		previewFeatures.remove(OsmAndFeature.WIKIPEDIA);
+		previewFeatures.remove(OsmAndFeature.WIKIVOYAGE);
 
-		for (OsmAndFeature feature : features) {
+		for (OsmAndFeature feature : previewFeatures) {
 			if (feature.isAvailableInMapsPlus()) {
 				includedFeatures.add(feature);
 			} else {

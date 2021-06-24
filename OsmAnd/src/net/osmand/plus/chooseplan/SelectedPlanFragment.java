@@ -51,7 +51,7 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 
 	protected List<OsmAndFeature> includedFeatures = new ArrayList<>();
 	protected List<OsmAndFeature> noIncludedFeatures = new ArrayList<>();
-	protected List<OsmAndFeature> features = new ArrayList<>();
+	protected List<OsmAndFeature> previewFeatures = new ArrayList<>();
 	protected List<PriceButton<?>> priceButtons = new ArrayList<>();
 	private Map<PriceButton<?>, View> buttonViews = new HashMap<>();
 	private PriceButton<?> selectedPriceButton;
@@ -184,7 +184,7 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 
 	private void createFeaturesPreview() {
 		LinearLayout container = mainView.findViewById(R.id.features_list);
-		for (OsmAndFeature feature : features) {
+		for (OsmAndFeature feature : previewFeatures) {
 			View itemView = themedInflater.inflate(R.layout.purchase_dialog_preview_list_item, container, false);
 			bindFeatureItem(itemView, feature);
 			container.addView(itemView);
