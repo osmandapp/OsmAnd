@@ -54,16 +54,16 @@ import java.util.List;
 
 public class QuickSearchHelper implements ResourceListener {
 
-	public static final int SEARCH_FAVORITE_API_PRIORITY = 100;
-	public static final int SEARCH_FAVORITE_API_CATEGORY_PRIORITY = 100;
-	public static final int SEARCH_FAVORITE_OBJECT_PRIORITY = 100;
-	public static final int SEARCH_FAVORITE_CATEGORY_PRIORITY = 101;
-	public static final int SEARCH_WPT_API_PRIORITY = 100;
-	public static final int SEARCH_WPT_OBJECT_PRIORITY = 102;
-	public static final int SEARCH_TRACK_API_PRIORITY = 100;
-	public static final int SEARCH_TRACK_OBJECT_PRIORITY = 103;
-	public static final int SEARCH_HISTORY_API_PRIORITY = 100;
-	public static final int SEARCH_HISTORY_OBJECT_PRIORITY = 104;
+	public static final int SEARCH_FAVORITE_API_PRIORITY = 150;
+	public static final int SEARCH_FAVORITE_API_CATEGORY_PRIORITY = 150;
+	public static final int SEARCH_FAVORITE_OBJECT_PRIORITY = 150;
+	public static final int SEARCH_FAVORITE_CATEGORY_PRIORITY = 151;
+	public static final int SEARCH_WPT_API_PRIORITY = 150;
+	public static final int SEARCH_WPT_OBJECT_PRIORITY = 152;
+	public static final int SEARCH_TRACK_API_PRIORITY = 150;
+	public static final int SEARCH_TRACK_OBJECT_PRIORITY = 153;
+	public static final int SEARCH_HISTORY_API_PRIORITY = 150;
+	public static final int SEARCH_HISTORY_OBJECT_PRIORITY = 154;
 	public static final int SEARCH_ONLINE_API_PRIORITY = 500;
 	public static final int SEARCH_ONLINE_AMENITY_PRIORITY = 500;
 
