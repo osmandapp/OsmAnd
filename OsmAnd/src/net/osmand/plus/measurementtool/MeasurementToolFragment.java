@@ -2173,6 +2173,12 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			if (editingCtx.hasRoute() || editingCtx.hasChanges()) {
 				String trackName = getSuggestedFileName();
 				GPXFile gpx = editingCtx.exportGpx(trackName);
+				// come back wpt point to gpx after approximation
+				if (editingCtx.getGpxData() != null && !editingCtx.getGpxData().getGpxFile().getPoints().isEmpty()) {
+					for (WptPt wptPt : editingCtx.getGpxData().getGpxFile().getPoints()) {
+						gpx.addPoint(wptPt);
+					}
+				}
 				if (gpx != null) {
 					ApplicationMode appMode = editingCtx.getAppMode();
 					dismiss(mapActivity);

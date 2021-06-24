@@ -521,6 +521,10 @@ public class MapActivityActions implements DialogProvider {
 			mapActivity.getRoutingHelper().setGpxParams(null);
 			settings.FOLLOW_THE_GPX_ROUTE.set(null);
 		} else {
+			// just for debug
+			result.tracks.get(0).segments.get(0).routeSegments = new ArrayList<>();
+			result.tracks.get(0).segments.get(0).routeTypes = new ArrayList<>();
+
 			GPXRouteParamsBuilder params = new GPXRouteParamsBuilder(result, settings);
 			params.setCalculateOsmAndRouteParts(settings.GPX_ROUTE_CALC_OSMAND_PARTS.get());
 			params.setCalculateOsmAndRoute(settings.GPX_ROUTE_CALC.get());
