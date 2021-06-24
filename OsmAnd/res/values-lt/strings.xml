@@ -870,10 +870,7 @@
     <string name="audionotes_plugin_description">Šis įskiepis leidžia įrašinėti garsą ir vaizdą bei fotografuoti kelionės metu paspaudus mygtuką žemėlapio ekrane arba tiesiai iš kontekstinio meniu bt kurioje žemėlapio vietoje.</string>
     <string name="audionotes_plugin_name">Audio užrašų įskiepis</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd įskiepis, skirtas aukščio kontūrų linijoms</string>
-    <string name="osmand_srtm_long_description_1000_chars">Šis įskiepis įgalina tiek aukščio kontūrų linijas ir (reljefo) kalnų šešėlių sluoksnių atvaizdavimą ant OsmAnd žemėlapių. Ši funkcija gali būti naudinga atletams, keliautojams ir visiems, kas aktuali reljefo struktūra. 
-\n
-\nPasaulio duomenys (tarp 70 laipsnių šiaurės ir 70 laipsnių pietų) yra paremti SRTM (Shuttle Radar Topography Mission) ir ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), vaizdo fiksavimo instrumento Terra, NASA Earth Observing System palydovo, matavimais. ASTER yra bendradarbiavimo tarp NASA, Japonijos ekonomikos, prekybos ir industrijos (METI) ministerijos ir Japan Space Systems (J-spacesystems) projektas.</string>
-    <string name="map_widget_distancemeasurement">Atstumo matavimas</string>
+   <string name="map_widget_distancemeasurement">Atstumo matavimas</string>
     <string name="audionotes_location_not_defined">Vieta, kuriai skiriama ši pastaba, nenustatyta. Pasirinkite \"Naudoti vietą …\" priskirti pastabą specifinei vietai.</string>
     <string name="map_widget_audionotes">Audio užrašai</string>
     <string name="av_def_action_video">Įrašyti vaizdą</string>

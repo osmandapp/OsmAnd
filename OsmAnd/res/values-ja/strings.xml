@@ -896,9 +896,6 @@ POIの更新は利用できません</string>
     <string name="av_photo_play_sound">写真撮影時にシャッター音を鳴らす</string>
     <string name="av_camera_focus_infinity">フォーカスを無限遠(∞)にセット</string>
     <string name="av_camera_focus_macro">マクロ(近距離)フォーカスモード</string>
-    <string name="osmand_srtm_long_description_1000_chars">このプラグインは等高線と陰影起伏図(山間や盆地などの起伏が視覚的に把握できる図)の両方を、OsmAndの標準マップ上にオーバーレイ表示できるようになるものです。 この機能は地形の構造を知る必要のあるアスリート、ハイカー、登山者はもちろん、その他多くの人々の助けとなるでしょう。 
-\n 
-\nこのグローバルデータ(北緯70°から南緯70°の間)はSRTM(スペースシャトル立体地形データ)とNASAの地球観測衛星であるテラ(Terra)に搭載されたASTER(資源探査用将来型センサ)と呼ばれる機器の観測結果をベースにしたものです。 ASTERはNASAと日本の経済産業省(METI)、そして宇宙システム開発利用推進機構(J-spacesystems)の共同作業によるものです。</string>
     <string name="audionotes_location_not_defined">マップ上を長押しでメニューを開き、右端のボタン[その他]から任意の形式のメモを取ることができます。</string>
     <string name="map_widget_audionotes">音声メモ</string>
     <string name="audionotes_plugin_description">旅行中にマップ画面のウィジェットボタンまたはコンテキストメニューを使用して、音声/写真/ビデオのメモを作成します。</string>
