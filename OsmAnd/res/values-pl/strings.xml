@@ -4175,4 +4175,10 @@
     <string name="add_online_routing_engine">Dodaj silnik wyznaczania tras online</string>
     <string name="delete_online_routing_engine">Usunąć ten silnik wyznaczania tras online\?</string>
     <string name="backup_storage_taken">Zajęta pamięć</string>
+    <string name="shared_string_offline">Offline</string>
+    <string name="routing_attr_avoid_tunnels_description">Unikaj tuneli</string>
+    <string name="routing_attr_avoid_tunnels_name">Unikaj tuneli</string>
+    <string name="backup_promocode">Kod promocyjny</string>
+    <string name="send_crash_log">Wyślij dziennik awarii</string>
+    <string name="send_logcat_log">Wyślij dziennik logcat</string>
 </resources>
