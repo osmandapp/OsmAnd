@@ -4098,4 +4098,55 @@ POIの更新は利用できません</string>
     <string name="monthly_subscription">月毎のサブスクリプション</string>
     <string name="three_months_subscription">3ヶ月毎のサブスクリプション</string>
     <string name="renew_subscription">サブスクリプションの更新</string>
+    <string name="shared_string_offline">オフライン</string>
+    <string name="shared_string_online">オンライン</string>
+    <string name="osmand_online_routing_promo">定義済みのテンプレートの使用、カスタムオンラインルートが追加できます。サポート形式は以下の通り:OSRM, Graphhopper, OpenRouteService, GPX</string>
+    <string name="shared_string_external">外部</string>
+    <string name="provided_by">%1$sから提供</string>
+    <string name="failed_loading_predefined_engines">定義済みのテンプレートリストを読み込めませんでした。
+\nインターネット接続を確認してください。</string>
+    <string name="shared_string_predefined">定義済み</string>
+    <string name="backup_complete">バックアップが完了しました</string>
+    <string name="backup_now">今すぐバックアップ</string>
+    <string name="make_backup">バックアップの作成</string>
+    <string name="make_backup_descr">この端末には多くの変更があります。現データを失わないようにバックアップを推奨します。</string>
+    <string name="backup_conflicts">競合</string>
+    <string name="backup_confilcts_descr">新しいバージョンがサーバーに保存されているため、一部のファイルをサーバーにアップロードできませんでした。</string>
+    <string name="backup_view_conflicts">競合内容を表示</string>
+    <string name="backup_no_internet_descr">インターネット接続を確認してから、再度ダウンロードしてください。</string>
+    <string name="backup_pause_all">すべてを一時停止</string>
+    <string name="upload_local_version">現在のバージョンをアップロード</string>
+    <string name="backup_delete_all_data_descr">OsmAndクラウド上のすべてのデータが削除されます。現在のバージョンは変更されません。</string>
+    <string name="download_server_version">サーバー上のバージョンをダウンロード</string>
+    <string name="shared_string_logout">ログアウト</string>
+    <string name="backup_delete_all_data">すべてのデータを削除する</string>
+    <string name="backup_delete_all_data_warning">バージョン履歴を含め、以前にOsmAndクラウドにアップロードされたすべてのデータを削除しようとしています。
+\n
+\n削除されたデータを復元することはできません。</string>
+    <string name="backup_delete_old_data_descr">データの現在のバージョンがOsmAndクラウドに保存されます</string>
+    <string name="backup_delete_old_data_warning">以前ロードしたデータの変更履歴を削除しようとしています。
+\n
+\nデータの現在のバージョンはサーバーに保存されますが、以前に行った変更に戻すことはできません。</string>
+    <string name="backup_delete_old_data">古いバージョンを削除</string>
+    <string name="backup_danger_zone">要注意</string>
+    <string name="delete_all_confirmation">はい、すべて削除します</string>
+    <string name="backup_data">バックアップデータ</string>
+    <string name="select_backup_data_descr">バックアップするデータとフォルダーを選択します。</string>
+    <string name="backup_restore_data_descr">オンラインバックアップを利用して、端末にデータを復元します。</string>
+    <string name="backup_restore_data">データの復元</string>
+    <string name="restore_from_osmand_cloud">OsmAndクラウドから復元</string>
+    <string name="choose_what_to_restore">復元したいものを選択してください。</string>
+    <string name="restore_selected_data">選択したデータを復元</string>
+    <string name="receiving_data_from_server">サーバーからデータを受信</string>
+    <string name="restore_complete">復元が完了しました</string>
+    <string name="grey_color_slope">勾配の色定義がなされていない場合は、グレーが使用されます。</string>
+    <string name="backup_version_history">バージョン履歴</string>
+    <string name="backup_storage_taken">使用済みストレージ</string>
+    <string name="backup_version_history_delete_descr">既に有効ではない変更履歴をクラウドから削除しますか？</string>
+    <string name="delete_version_history">バージョン履歴の削除</string>
+    <string name="routing_attr_avoid_tunnels_description">移動時にトンネルを避けるようにします</string>
+    <string name="routing_attr_avoid_tunnels_name">トンネルを避ける</string>
+    <string name="backup_promocode">プロモーションコード</string>
+    <string name="send_crash_log">クラッシュログの送信</string>
+    <string name="send_logcat_log">Logcatログの送信</string>
 </resources>
