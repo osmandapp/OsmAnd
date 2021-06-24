@@ -227,6 +227,7 @@
         <item name="dlg_btn_secondary">@drawable/dlg_btn_secondary_light</item>
         <item name="dlg_btn_secondary_text">@color/dlg_btn_secondary_text_light</item>
         <item name="dlg_btn_stroked">@drawable/dlg_btn_stroked_light</item>
+        <item name="stroked_btn_contour">@drawable/stroked_btn_contour_light</item>
         <item name="profile_save_btn">@drawable/btn_round_profile_blue</item>
         <item name="profile_cancel_btn">@drawable/btn_round_profile_gray</item>
 
@@ -245,6 +246,7 @@
         <item name="btn_radio_button_left">@drawable/radio_button_left_light</item>
         <item name="btn_radio_button_right">@drawable/radio_button_right_light</item>
         <item name="btn_radio_button_center">@drawable/radio_button_center_light</item>
+        <item name="radio_button_outline">@drawable/ic_action_radio_button_day</item>
         <item name="checkboxStyle">@style/CheckboxStyle</item>
         <item name="radioButtonStyle">@style/RadioButtonStyle</item>
         <item name="text_input_background">@color/text_input_background_light</item>
@@ -526,6 +528,7 @@
         <item name="pages_bg">@drawable/pages_bg_dark</item>
         <item name="dlg_btn_primary">@drawable/dlg_btn_primary_dark</item>
         <item name="dlg_btn_primary_text">@color/dlg_btn_primary_text_dark</item>
+        <item name="stroked_btn_contour">@drawable/stroked_btn_contour_dark</item>
         <item name="dlg_btn_secondary">@drawable/dlg_btn_secondary_dark</item>
         <item name="dlg_btn_secondary_text">@color/dlg_btn_secondary_text_dark</item>
         <item name="dlg_btn_stroked">@drawable/dlg_btn_stroked_dark</item>
@@ -547,6 +550,7 @@
         <item name="btn_radio_button_left">@drawable/radio_button_left_dark</item>
         <item name="btn_radio_button_right">@drawable/radio_button_right_dark</item>
         <item name="btn_radio_button_center">@drawable/radio_button_center_dark</item>
+        <item name="radio_button_outline">@drawable/ic_action_radio_button_night</item>
         <item name="checkboxStyle">@style/CheckboxStyle</item>
         <item name="radioButtonStyle">@style/RadioButtonStyle</item>
         <item name="text_input_background">@color/text_input_background_dark</item>

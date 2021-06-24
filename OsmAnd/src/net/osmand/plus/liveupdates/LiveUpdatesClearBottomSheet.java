@@ -68,7 +68,7 @@ public class LiveUpdatesClearBottomSheet extends MenuBottomSheetDialogFragment {
 
 		String nameToDisplay = getNameToDisplay(fileName, app);
 		String text = getString(R.string.live_update_delete_updates_msg, nameToDisplay);
-		SpannableString message = UiUtilities.createSpannableString(text, new StyleSpan(Typeface.BOLD), nameToDisplay);
+		SpannableString message = UiUtilities.createSpannableString(text, Typeface.BOLD, nameToDisplay);
 
 		items.add(new LongDescriptionItem.Builder()
 				.setDescription(message)

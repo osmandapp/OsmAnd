@@ -924,9 +924,6 @@
     <string name="srtm_paid_version_title">Modul Vrstevnice</string>
     <string name="shared_string_control_stop">Zastavit</string>
     <string name="dropbox_plugin_description">Synchronizuje trasy a audio/video poznámky s vaším účtem Dropbox.</string>
-    <string name="osmand_srtm_long_description_1000_chars">Tento modul poskytuje zobrazení vrstevnic a vrstvy stínování kopců, které mohou být zobrazené na standardních OsmAnd mapách. Tato funkce je vhodná především pro sportovce, turisty, chodce a vůbec všechny, které zajímá profil terénu.
-\n
-\nCelosvětová výšková data (mezi 70° severní šířky a 70° jižní šířky) se zakládají na měřeních SRTM (Shuttle Radar Topography Mission) a ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), snímkovacího přístroje na palubě satelitu Terra, vlajkového satelitu Systému pozorování Země NASA. ASTER je společným projektem NASA, japonského ministerstva hospodářství, obchodu a průmyslu (METI) a Japan Space Systems (J-spacesystems).</string>
     <string name="stop_routing_confirm">Opravdu chcete zastavit navigaci?</string>
     <string name="clear_dest_confirm">Opravdu chcete smazat svůj cíl (a mezicíle)?</string>
     <string name="recording_context_menu_show">Zobrazit</string>
@@ -2413,7 +2410,7 @@
     <string name="round_trip">Okružní trasa</string>
     <string name="plan_route_no_markers_toast">Pro použití této funkce musíte přidat alespoň jednu značku .</string>
     <string name="rendering_value_darkyellow_name">Tmavě žlutá</string>
-    <string name="empty_state_osm_edits">Vytvořit nebo upravit OSM objekty</string>
+    <string name="empty_state_osm_edits">Vytvořit nebo upravit OpenStreetMap objekty</string>
     <string name="looking_for_tracks_with_waypoints">Hledání stop s trasovými body</string>
     <string name="shared_string_more_without_dots">Více</string>
     <string name="appearance_on_the_map">Vzhled na mapě</string>
@@ -2443,7 +2440,7 @@
     <string name="tap_on_map_to_hide_interface_descr">Klepnutí na mapu přepne ovládací tlačítka a nástroje.</string>
     <string name="tap_on_map_to_hide_interface">Režim celé obrazovky</string>
     <string name="mark_passed">Označit prošlé</string>
-    <string name="empty_state_osm_edits_descr">Vytvořit nebo upravit body zájmu OSM, otevřít nebo okomentovat OSM poznámky a přispět zaznamenanými GPX soubory.</string>
+    <string name="empty_state_osm_edits_descr">Vytvořit nebo upravit body zájmu OpenStreetMap, otevřít nebo okomentovat OSM poznámky a přispět zaznamenanými GPX soubory.</string>
     <string name="shared_string_deleted">Odstraněné</string>
     <string name="shared_string_edited">Upravené</string>
     <string name="shared_string_added">Přidané</string>
@@ -2485,7 +2482,7 @@
     <string name="show_closed_notes">Zobrazit zavřené poznámky</string>
     <string name="switch_osm_notes_visibility_desc">Zobrazit nebo skrýt OpenStreetMap poznámky na mapě.</string>
     <string name="gpx_file_desc">GPX - vhodné pro export do JOSM nebo jiných editorů OSM.</string>
-    <string name="osc_file_desc">OSC - vhodné pro export do OSM.</string>
+    <string name="osc_file_desc">OSC - vhodné pro export do OpenStreetMap.</string>
     <string name="shared_string_gpx_file">Soubor GPX</string>
     <string name="osc_file">Soubor OSC</string>
     <string name="choose_file_type">Zvolte typ souboru</string>
@@ -3118,7 +3115,7 @@
     <string name="voice_announces">Hlasová oznámení</string>
     <string name="route_parameters_descr">Konfigurace parametrů trasy</string>
     <string name="route_parameters">Parametry trasy</string>
-    <string name="default_speed_dialog_msg">Odhaduje času příjezdu u cest s neznámým povrchem a omezuje rychlost na všech cestách (může ovlivnit trasu)</string>
+    <string name="default_speed_dialog_msg">Odhaduje čas příjezdu u cest s neznámým povrchem a omezuje rychlost na všech cestách (může ovlivnit trasu)</string>
     <string name="configure_profile_info">Nastavení profilu:</string>
     <string name="utm_format_descr">OsmAnd používá UTM Standard, který je podobný, ale nikoliv identický s UTM NATO formátem.</string>
     <string name="shared_string_example">Příklad</string>
@@ -4173,4 +4170,11 @@
     <string name="restore_selected_data">Obnovit vybrané údaje</string>
     <string name="receiving_data_from_server">Získávání údajů ze serveru</string>
     <string name="restore_complete">Obnovení dokončeno</string>
+    <string name="backup_version_history_delete_descr">Chcete vymazat historii změn pro vypnuté typy z cloudového úložiště\?</string>
+    <string name="delete_version_history">Smazat historii verzí</string>
+    <string name="routing_attr_avoid_tunnels_description">Vyhnout se tunelům</string>
+    <string name="routing_attr_avoid_tunnels_name">Vyhnout se tunelům</string>
+    <string name="send_crash_log">Odeslat záznam o pádu</string>
+    <string name="send_logcat_log">Odeslat záznam z logcatu</string>
+    <string name="backup_promocode">Promokód</string>
 </resources>

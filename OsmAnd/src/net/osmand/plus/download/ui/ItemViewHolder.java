@@ -31,8 +31,8 @@ import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.PluginsFragment;
-import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
-import net.osmand.plus.chooseplan.ChoosePlanDialogFragment.ChoosePlanDialogType;
+import net.osmand.plus.chooseplan.OsmAndFeature;
+import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.download.CityItem;
 import net.osmand.plus.download.CustomIndexItem;
 import net.osmand.plus.download.DownloadItem;
@@ -360,10 +360,10 @@ public class ItemViewHolder {
 					switch (clickAction) {
 						case ASK_FOR_FULL_VERSION_PURCHASE:
 							context.getMyApplication().logEvent("in_app_purchase_show_from_wiki_context_menu");
-							ChoosePlanDialogFragment.showDialogInstance(context.getMyApplication(), context.getSupportFragmentManager(), ChoosePlanDialogType.WIKIPEDIA);
+							ChoosePlanFragment.showInstance(context, OsmAndFeature.WIKIPEDIA);
 							break;
 						case ASK_FOR_DEPTH_CONTOURS_PURCHASE:
-							ChoosePlanDialogFragment.showDialogInstance(context.getMyApplication(), context.getSupportFragmentManager(), ChoosePlanDialogType.SEA_DEPTH_MAPS);
+							ChoosePlanFragment.showInstance(context, OsmAndFeature.NAUTICAL);
 							break;
 						case ASK_FOR_SEAMARKS_PLUGIN:
 							showPluginsScreen();
@@ -371,7 +371,7 @@ public class ItemViewHolder {
 									context.getString(R.string.activate_seamarks_plugin), Toast.LENGTH_SHORT).show();
 							break;
 						case ASK_FOR_SRTM_PLUGIN_PURCHASE:
-							ChoosePlanDialogFragment.showDialogInstance(context.getMyApplication(), context.getSupportFragmentManager(), ChoosePlanDialogType.HILLSHADE_SRTM_PLUGIN);
+							ChoosePlanFragment.showInstance(context, OsmAndFeature.TERRAIN);
 							break;
 						case ASK_FOR_SRTM_PLUGIN_ENABLE:
 							showPluginsScreen();

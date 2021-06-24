@@ -216,6 +216,20 @@ public abstract class InAppPurchaseHelper {
 		return subscriptions;
 	}
 
+	public static void subscribe(@NonNull Activity activity, @NonNull InAppPurchaseHelper purchaseHelper, @NonNull String sku) {
+		OsmandApplication app = (OsmandApplication) activity.getApplication();
+		OsmandSettings settings = app.getSettings();
+		if (settings.isInternetConnectionAvailable(true)) {
+			purchaseHelper.purchaseSubscription(activity, sku,
+					settings.BILLING_USER_EMAIL.get(),
+					settings.BILLING_USER_NAME.get(),
+					settings.BILLING_USER_COUNTRY_DOWNLOAD_NAME.get(),
+					settings.BILLING_HIDE_USER_NAME.get());
+		} else {
+			app.showToastMessage(R.string.internet_not_available);
+		}
+	}
+
 	public abstract void isInAppPurchaseSupported(@NonNull final Activity activity, @Nullable final InAppPurchaseInitCallback callback);
 
 	public boolean hasInventory() {

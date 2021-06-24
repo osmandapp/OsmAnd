@@ -277,9 +277,6 @@
     <string name="shared_string_control_start">Allughe</string>
     <string name="map_widget_av_notes">Notas àudio/vìdeo</string>
     <string name="osmand_srtm_short_description_80_chars">Estensione OsmAnd pro sas curvas de livellu chene lìnia</string>
-    <string name="osmand_srtm_long_description_1000_chars">Custa estensione frunit sas curvas de livellu e sas umbraduras de sos rilievos, chi podent èssere ammustradas in supra de sas mapas regulares de OsmAnd. Custa funtzionalidade at a èssere appretziada meda dae sos atletas, sos escursionistas, e totu sos chi sunt interessados in s\'orografia e su paesàgiu. 
-\n 
-\nSos datos globales (intre sos 70 grados nord e sos 70 grados sud) sunt basados in supra de sas medidas de su SRTM (Shuttle Radar Topography Mission) e de s’ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un’aina medidora in subra de Terra, su satèllite de su sistema di osservatzione de sa terra de sa NASA. ASTER est un’isfortzu de cooperatzione intre sa NASA, su Ministeru de s’Economia Cummèrtziu e Industria (METI) de su Giapone, e su sistema ispatziale giaponesu (J-spacesystems).</string>
     <string name="map_widget_distancemeasurement">Medidura de sa distantzia</string>
     <string name="audionotes_location_not_defined">Toca \"Imprea positzione…\" pro annànghere una nota a sa positzione.</string>
     <string name="map_widget_audionotes">Notas àudio</string>
@@ -2565,8 +2562,8 @@
     <string name="active_markers_descr">Dislinda su nùmeru de indicadores de diretzione.</string>
     <string name="shared_string_more_without_dots">Àteru</string>
     <string name="looking_for_tracks_with_waypoints">Chirchende rastas cun puntos de coladòrgiu</string>
-    <string name="empty_state_osm_edits">Crea o modìfica ogetos OSM</string>
-    <string name="empty_state_osm_edits_descr">Crea o modìfica PDI OSM, aberi o cummenta sas notas OSM, e contribui cun documentos GPX registrados.</string>
+    <string name="empty_state_osm_edits">Crea o modìfica ogetos de OpenStreetMap</string>
+    <string name="empty_state_osm_edits_descr">Crea o modìfica PDI de OpenStreetMap, aberi o cummenta sas notas de OpenStreetMap, e contribui cun documentos GPX registrados.</string>
     <string name="shared_string_deleted">Iscantzelladu</string>
     <string name="shared_string_edited">Modificadu</string>
     <string name="shared_string_added">Annantu</string>
@@ -4173,4 +4170,9 @@
     <string name="backup_storage_taken">Ispàtziu giai impreadu</string>
     <string name="backup_version_history_delete_descr">Cheres iscantzellare sa cronologia pro sas castas disabilitadas dae sa nue\?</string>
     <string name="delete_version_history">Iscantzella sa cronologia de sas versiones</string>
+    <string name="routing_attr_avoid_tunnels_description">Istransi sas gallerias</string>
+    <string name="routing_attr_avoid_tunnels_name">Istransi sas gallerias</string>
+    <string name="send_crash_log">Imbia su registru de sas serraduras improvisas</string>
+    <string name="send_logcat_log">Imbia su registru logcat</string>
+    <string name="backup_promocode">Còdighe promotzione</string>
 </resources>
