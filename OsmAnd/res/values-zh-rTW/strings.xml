@@ -4173,4 +4173,5 @@
     <string name="routing_attr_avoid_tunnels_name">避開隧道</string>
     <string name="send_crash_log">傳送當機紀錄檔</string>
     <string name="send_logcat_log">傳送 logcat 紀錄檔</string>
+    <string name="backup_promocode">促銷代碼</string>
 </resources>
