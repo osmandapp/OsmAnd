@@ -6,6 +6,9 @@ import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
 
+import java.util.Arrays;
+import java.util.List;
+
 public enum OsmAndFeature {
 
 	OSMAND_CLOUD(R.string.osmand_cloud, R.string.purchases_feature_desc_osmand_cloud, R.drawable.ic_action_cloud_upload_colored_day, R.drawable.ic_action_cloud_upload_colored_night),
@@ -58,47 +61,19 @@ public enum OsmAndFeature {
 		return nightMode ? iconNightId : iconDayId;
 	}
 
-	public static boolean isAvailableInMapsPlus(@NonNull OsmAndFeature feature) {
-		for (OsmAndFeature osmAndFeature : mapsPlusFeatures) {
-			if (feature == osmAndFeature) {
-				return true;
-			}
-		}
-		return false;
+	public boolean isAvailableInMapsPlus() {
+		return mapsPlusFeatures.contains(this);
 	}
 
-	public static final OsmAndFeature[] mapsPlusFeatures = {
+	public static final List<OsmAndFeature> osmandProFeatures = Arrays.asList(OsmAndFeature.values());
+
+	public static final List<OsmAndFeature> mapsPlusFeatures = Arrays.asList(
 			OsmAndFeature.MONTHLY_MAP_UPDATES,
 			OsmAndFeature.UNLIMITED_MAP_DOWNLOADS,
 			OsmAndFeature.COMBINED_WIKI,
 			OsmAndFeature.WIKIPEDIA,
 			OsmAndFeature.WIKIVOYAGE,
 			OsmAndFeature.TERRAIN,
-			OsmAndFeature.NAUTICAL
-	};
+			OsmAndFeature.NAUTICAL);
 
-	public static final OsmAndFeature[] osmandProFeatures = {
-			OsmAndFeature.OSMAND_CLOUD,
-			OsmAndFeature.ADVANCED_WIDGETS,
-			OsmAndFeature.HOURLY_MAP_UPDATES,
-			OsmAndFeature.MONTHLY_MAP_UPDATES,
-			OsmAndFeature.UNLIMITED_MAP_DOWNLOADS,
-			OsmAndFeature.COMBINED_WIKI,
-			OsmAndFeature.WIKIPEDIA,
-			OsmAndFeature.WIKIVOYAGE,
-			OsmAndFeature.TERRAIN,
-			OsmAndFeature.NAUTICAL
-	};
-
-	public static final OsmAndFeature[] choosePlanFeatures = {
-			OsmAndFeature.OSMAND_CLOUD,
-			OsmAndFeature.ADVANCED_WIDGETS,
-			OsmAndFeature.HOURLY_MAP_UPDATES,
-			OsmAndFeature.MONTHLY_MAP_UPDATES,
-			OsmAndFeature.UNLIMITED_MAP_DOWNLOADS,
-			OsmAndFeature.WIKIPEDIA,
-			OsmAndFeature.WIKIVOYAGE,
-			OsmAndFeature.TERRAIN,
-			OsmAndFeature.NAUTICAL
-	};
 }

@@ -51,6 +51,7 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 
 	protected List<OsmAndFeature> includedFeatures = new ArrayList<>();
 	protected List<OsmAndFeature> noIncludedFeatures = new ArrayList<>();
+	protected List<OsmAndFeature> features = new ArrayList<>();
 	protected List<PriceButton<?>> priceButtons = new ArrayList<>();
 	private Map<PriceButton<?>, View> buttonViews = new HashMap<>();
 	private PriceButton<?> selectedPriceButton;
@@ -76,6 +77,7 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 				}
 			}
 		}
+		collectFeatures();
 	}
 
 	@Override
@@ -182,7 +184,7 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 
 	private void createFeaturesPreview() {
 		LinearLayout container = mainView.findViewById(R.id.features_list);
-		for (OsmAndFeature feature : getSubscriptionFeatures()) {
+		for (OsmAndFeature feature : features) {
 			View itemView = themedInflater.inflate(R.layout.purchase_dialog_preview_list_item, container, false);
 			bindFeatureItem(itemView, feature);
 			container.addView(itemView);
@@ -349,8 +351,7 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 		TextView tvDescription = itemView.findViewById(R.id.description);
 		tvDescription.setText(getString(feature.getDescriptionId()));
 
-//		int iconBgColor = ContextCompat.getColor(app, feature.isAvailableInMapsPlus() ?
-		int iconBgColor = ContextCompat.getColor(app, true ?
+		int iconBgColor = ContextCompat.getColor(app, feature.isAvailableInMapsPlus() ?
 				R.color.maps_plus_item_bg :
 				R.color.osmand_pro_item_bg);
 		int color = UiUtilities.getColorWithAlpha(iconBgColor, 0.2f);
@@ -376,6 +377,8 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 	}
 
 	protected abstract void collectPriceButtons(List<PriceButton<?>> priceButtons);
+
+	protected abstract void collectFeatures();
 
 	protected abstract Drawable getPreviewListCheckmark();
 

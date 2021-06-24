@@ -35,6 +35,8 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.logging.Log;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static net.osmand.plus.liveupdates.LiveUpdatesSettingsBottomSheet.getActiveColorId;
@@ -49,11 +51,7 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment {
 
 	private LinearLayout listContainer;
 	private OsmAndFeature selectedFeature;
-
-	@Override
-	public OsmAndFeature[] getSubscriptionFeatures() {
-		return OsmAndFeature.choosePlanFeatures;
-	}
+	private final List<OsmAndFeature> allFeatures = new ArrayList<>();
 
 	@Override
 	protected int getLayoutId() {
@@ -64,6 +62,8 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		allFeatures.addAll(Arrays.asList(OsmAndFeature.values()));
+		allFeatures.remove(OsmAndFeature.COMBINED_WIKI);
 		if (savedInstanceState != null && savedInstanceState.containsKey(SELECTED_FEATURE)) {
 			selectedFeature = OsmAndFeature.valueOf(savedInstanceState.getString(SELECTED_FEATURE));
 		}
@@ -101,7 +101,7 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment {
 
 	private void createFeaturesList() {
 		listContainer.removeAllViews();
-		for (OsmAndFeature feature : getSubscriptionFeatures()) {
+		for (OsmAndFeature feature : allFeatures) {
 			View view = createFeatureItemView(feature);
 			listContainer.addView(view);
 		}
@@ -119,11 +119,10 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment {
 	protected void bindFeatureItem(@NonNull View view, @NonNull OsmAndFeature feature, boolean useHeaderTitle) {
 		super.bindFeatureItem(view, feature, useHeaderTitle);
 
-		int visibility = OsmAndFeature.isAvailableInMapsPlus(feature) ? View.VISIBLE : View.INVISIBLE;
+		int visibility = feature.isAvailableInMapsPlus() ? View.VISIBLE : View.INVISIBLE;
 		AndroidUiHelper.setVisibility(visibility, view.findViewById(R.id.secondary_icon));
 
-		OsmAndFeature[] features = getSubscriptionFeatures();
-		boolean isLastItem = feature == features[features.length - 1];
+		boolean isLastItem = feature == allFeatures.get(allFeatures.size() - 1);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.bottom_divider), !isLastItem);
 	}
 
@@ -191,7 +190,7 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment {
 			String mapsPlus = getString(R.string.maps_plus);
 			String osmAndPro = getString(R.string.osmand_pro);
 			String availablePlans = osmAndPro;
-			if (OsmAndFeature.isAvailableInMapsPlus(selectedFeature)) {
+			if (selectedFeature.isAvailableInMapsPlus()) {
 				availablePlans = String.format(getString(R.string.ltr_or_rtl_combine_via_or), mapsPlus, osmAndPro);
 			}
 			String pattern = getString(R.string.you_can_get_feature_as_part_of_pattern);
@@ -231,7 +230,7 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment {
 		array = new PriceButton[priceButtons.size()];
 		priceButtons.toArray(array);
 
-		boolean availableInMapsPlus = OsmAndFeature.isAvailableInMapsPlus(selectedFeature);
+		boolean availableInMapsPlus = selectedFeature.isAvailableInMapsPlus();
 		int mapsPlusIconId = availableInMapsPlus ? R.drawable.ic_action_osmand_maps_plus : R.drawable.ic_action_osmand_maps_plus_desaturated;
 		updateContinueButton(mainView.findViewById(R.id.button_continue_maps_plus),
 				mapsPlusIconId,

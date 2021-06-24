@@ -145,8 +145,6 @@ public abstract class BasePurchaseDialogFragment extends BaseOsmAndDialogFragmen
 
 	protected abstract void updateToolbar(int verticalOffset);
 
-	protected abstract OsmAndFeature[] getSubscriptionFeatures();
-
 	protected void bindFeatureItem(@NonNull View view, @NonNull OsmAndFeature feature, boolean useHeaderTitle) {
 		ImageView ivIcon = view.findViewById(R.id.icon);
 		ivIcon.setImageResource(feature.getIconId(nightMode));

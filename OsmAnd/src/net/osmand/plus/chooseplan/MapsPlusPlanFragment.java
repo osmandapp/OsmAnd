@@ -27,26 +27,24 @@ public class MapsPlusPlanFragment extends SelectedPlanFragment {
 	}
 
 	@Override
-	public OsmAndFeature[] getSubscriptionFeatures() {
-		return OsmAndFeature.mapsPlusFeatures;
-	}
-
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		includedFeatures.addAll(Arrays.asList(OsmAndFeature.mapsPlusFeatures));
-
-		for (OsmAndFeature feature : OsmAndFeature.values()) {
-			if (!OsmAndFeature.isAvailableInMapsPlus(feature)) {
-				noIncludedFeatures.add(feature);
-			}
-		}
-	}
-
-	@Override
 	protected void collectPriceButtons(List<PriceButton<?>> priceButtons) {
 		priceButtons.clear();
 		priceButtons.addAll(collectPriceButtons(app, purchaseHelper));
+	}
+
+	@Override
+	protected void collectFeatures() {
+		features.addAll(Arrays.asList(OsmAndFeature.values()));
+		features.remove(OsmAndFeature.WIKIPEDIA);
+		features.remove(OsmAndFeature.WIKIVOYAGE);
+
+		for (OsmAndFeature feature : features) {
+			if (feature.isAvailableInMapsPlus()) {
+				includedFeatures.add(feature);
+			} else {
+				noIncludedFeatures.add(feature);
+			}
+		}
 	}
 
 	@Override

@@ -26,20 +26,19 @@ public class OsmAndProPlanFragment extends SelectedPlanFragment {
 	}
 
 	@Override
-	protected OsmAndFeature[] getSubscriptionFeatures() {
-		return OsmAndFeature.osmandProFeatures;
-	}
-
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		includedFeatures.addAll(Arrays.asList(OsmAndFeature.osmandProFeatures));
-	}
-
-	@Override
 	protected void collectPriceButtons(List<PriceButton<?>> priceButtons) {
 		priceButtons.clear();
 		priceButtons.addAll(collectPriceButtons(app, purchaseHelper));
+	}
+
+	@Override
+	protected void collectFeatures() {
+		features.addAll(Arrays.asList(OsmAndFeature.values()));
+		features.remove(OsmAndFeature.MONTHLY_MAP_UPDATES);
+		features.remove(OsmAndFeature.WIKIPEDIA);
+		features.remove(OsmAndFeature.WIKIVOYAGE);
+
+		includedFeatures.addAll(features);
 	}
 
 	@Override
