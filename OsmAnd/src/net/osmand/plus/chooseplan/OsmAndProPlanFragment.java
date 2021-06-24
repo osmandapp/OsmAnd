@@ -4,7 +4,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.OsmandApplication;
@@ -26,24 +25,15 @@ public class OsmAndProPlanFragment extends SelectedPlanFragment {
 		fragment.show(activity.getSupportFragmentManager(), TAG);
 	}
 
-	private final OsmAndFeature[] subscriptionFeatures = {
-			OsmAndFeature.OSMAND_CLOUD,
-			OsmAndFeature.ADVANCED_WIDGETS,
-			OsmAndFeature.HOURLY_MAP_UPDATES,
-			OsmAndFeature.MONTHLY_MAP_UPDATES,
-			OsmAndFeature.UNLIMITED_MAP_DOWNLOADS,
-			OsmAndFeature.COMBINED_WIKI,
-			OsmAndFeature.WIKIPEDIA,
-			OsmAndFeature.WIKIVOYAGE,
-			OsmAndFeature.TERRAIN,
-			OsmAndFeature.NAUTICAL
-	};
+	@Override
+	protected OsmAndFeature[] getSubscriptionFeatures() {
+		return OsmAndFeature.osmandProFeatures;
+	}
 
 	@Override
-	protected void initData(@Nullable Bundle args) {
-		super.initData(args);
-		includedFeatures.addAll(Arrays.asList(subscriptionFeatures));
-		features = new ArrayList<>(includedFeatures);
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		includedFeatures.addAll(Arrays.asList(OsmAndFeature.osmandProFeatures));
 	}
 
 	@Override

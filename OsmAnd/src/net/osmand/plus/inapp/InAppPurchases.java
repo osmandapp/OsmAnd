@@ -929,7 +929,7 @@ public abstract class InAppPurchases {
 				double regularPrice = price * months;
 				return getFormattedPrice(ctx, regularPrice, getPriceCurrencyCode());
 			}
-			return null;
+			return "";
 		}
 
 		public String getPriceWithPeriod(Context ctx) {

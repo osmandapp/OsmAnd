@@ -3,27 +3,27 @@ package net.osmand.plus.chooseplan;
 public class ChoosePlanWikivoyageDialogFragment extends ChoosePlanSubscriptionBannerDialogFragment {
 	public static final String TAG = ChoosePlanWikivoyageDialogFragment.class.getSimpleName();
 
-	private final OsmAndFeature[] subscriptionFeatures = {
-			OsmAndFeature.WIKIVOYAGE_OFFLINE,
-			OsmAndFeature.WIKIPEDIA_OFFLINE,
-			OsmAndFeature.DAILY_MAP_UPDATES,
-			OsmAndFeature.UNLIMITED_DOWNLOADS,
-			OsmAndFeature.CONTOUR_LINES_HILLSHADE_MAPS,
-			OsmAndFeature.SEA_DEPTH_MAPS,
-			OsmAndFeature.UNLOCK_ALL_FEATURES,
+	private final OsmAndFeatureOld[] subscriptionFeatures = {
+			OsmAndFeatureOld.WIKIVOYAGE_OFFLINE,
+			OsmAndFeatureOld.WIKIPEDIA_OFFLINE,
+			OsmAndFeatureOld.DAILY_MAP_UPDATES,
+			OsmAndFeatureOld.UNLIMITED_DOWNLOADS,
+			OsmAndFeatureOld.CONTOUR_LINES_HILLSHADE_MAPS,
+			OsmAndFeatureOld.SEA_DEPTH_MAPS,
+			OsmAndFeatureOld.UNLOCK_ALL_FEATURES,
 	};
-	private final OsmAndFeature[] selectedSubscriptionFeatures = {
-			OsmAndFeature.WIKIVOYAGE_OFFLINE,
-			OsmAndFeature.WIKIPEDIA_OFFLINE,
+	private final OsmAndFeatureOld[] selectedSubscriptionFeatures = {
+			OsmAndFeatureOld.WIKIVOYAGE_OFFLINE,
+			OsmAndFeatureOld.WIKIPEDIA_OFFLINE,
 	};
 
 	@Override
-	public OsmAndFeature[] getSubscriptionFeatures() {
+	public OsmAndFeatureOld[] getSubscriptionFeatures() {
 		return subscriptionFeatures;
 	}
 
 	@Override
-	public OsmAndFeature[] getSelectedSubscriptionFeatures() {
+	public OsmAndFeatureOld[] getSelectedSubscriptionFeatures() {
 		return selectedSubscriptionFeatures;
 	}
 

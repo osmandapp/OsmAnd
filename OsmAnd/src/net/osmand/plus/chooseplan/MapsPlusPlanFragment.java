@@ -4,7 +4,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.OsmandApplication;
@@ -27,27 +26,21 @@ public class MapsPlusPlanFragment extends SelectedPlanFragment {
 		fragment.show(activity.getSupportFragmentManager(), TAG);
 	}
 
-	private final OsmAndFeature[] subscriptionFeatures = {
-			OsmAndFeature.MONTHLY_MAP_UPDATES,
-			OsmAndFeature.UNLIMITED_MAP_DOWNLOADS,
-			OsmAndFeature.COMBINED_WIKI,
-			OsmAndFeature.WIKIPEDIA,
-			OsmAndFeature.WIKIVOYAGE,
-			OsmAndFeature.TERRAIN,
-			OsmAndFeature.NAUTICAL
-	};
+	@Override
+	public OsmAndFeature[] getSubscriptionFeatures() {
+		return OsmAndFeature.mapsPlusFeatures;
+	}
 
 	@Override
-	protected void initData(@Nullable Bundle args) {
-		super.initData(args);
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		includedFeatures.addAll(Arrays.asList(OsmAndFeature.mapsPlusFeatures));
 
-		for (OsmAndFeature feature : features) {
-			if (!feature.isAvailableInMapsPlus()) {
+		for (OsmAndFeature feature : OsmAndFeature.values()) {
+			if (!OsmAndFeature.isAvailableInMapsPlus(feature)) {
 				noIncludedFeatures.add(feature);
 			}
 		}
-		includedFeatures.addAll(Arrays.asList(subscriptionFeatures));
-		features = new ArrayList<>(includedFeatures);
 	}
 
 	@Override

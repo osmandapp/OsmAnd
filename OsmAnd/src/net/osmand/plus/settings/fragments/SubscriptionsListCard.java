@@ -102,7 +102,7 @@ public class SubscriptionsListCard extends MapBaseCard {
 				renewContainer.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						ChoosePlanDialogFragment.subscribe(app, mapActivity, purchaseHelper, sku);
+						InAppPurchaseHelper.subscribe(mapActivity, purchaseHelper, sku);
 					}
 				});
 

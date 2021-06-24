@@ -19,8 +19,8 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.PluginsFragment;
-import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
+import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
@@ -49,16 +49,19 @@ public class DashPluginsFragment extends DashBaseFragment {
 	private List<OsmandPlugin> plugins;
 
 	private View.OnClickListener getListener(final OsmandPlugin plugin) {
-		return view -> {
-			if (plugin instanceof SRTMPlugin) {
-				FragmentActivity activity = getActivity();
-				if (activity != null) {
-					ChoosePlanFragment.showInstance(activity, OsmAndFeature.TERRAIN);
+		return new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				if (plugin instanceof SRTMPlugin) {
+					FragmentActivity activity = getActivity();
+					if (activity != null) {
+						ChoosePlanFragment.showInstance(activity, OsmAndFeature.TERRAIN);
+					}
+				} else {
+					startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL())));
 				}
-			} else {
-				startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL())));
+				closeDashboard();
 			}
-			closeDashboard();
 		};
 	}
 

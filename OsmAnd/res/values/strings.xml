@@ -26,8 +26,6 @@
     <string name="not_available_with">Not available with %1$s </string>
     <string name="continue_with">Continue with %1$s</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s or %2$s</string>
-    <string name="osmand_pro">OsmAnd Pro</string>
-    <string name="maps_plus">Maps+</string>
     <string name="you_can_get_feature_as_part_of_pattern">You can get “%1$s” as part of: %2$s plan. Compare the plans:</string>
     <string name="advanced_widgets">Advanced Widgets</string>
     <string name="nautical_depth">Nautical depth</string>

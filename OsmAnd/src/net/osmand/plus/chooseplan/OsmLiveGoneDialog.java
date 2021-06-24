@@ -47,13 +47,14 @@ public abstract class OsmLiveGoneDialog extends BaseOsmAndDialogFragment {
 	private boolean nightMode;
 	private View subscriptionButton;
 
-	private final OsmAndFeature[] subscriptionFeatures = {
-			OsmAndFeature.MONTHLY_MAP_UPDATES,
-			OsmAndFeature.UNLIMITED_MAP_DOWNLOADS,
-			OsmAndFeature.WIKIPEDIA,
-			OsmAndFeature.WIKIVOYAGE,
-			OsmAndFeature.TERRAIN,
-			OsmAndFeature.NAUTICAL
+	private final OsmAndFeatureOld[] subscriptionFeatures = {
+			OsmAndFeatureOld.DAILY_MAP_UPDATES,
+			OsmAndFeatureOld.UNLIMITED_DOWNLOADS,
+			OsmAndFeatureOld.WIKIPEDIA_OFFLINE,
+			OsmAndFeatureOld.WIKIVOYAGE_OFFLINE,
+			OsmAndFeatureOld.CONTOUR_LINES_HILLSHADE_MAPS,
+			OsmAndFeatureOld.SEA_DEPTH_MAPS,
+			OsmAndFeatureOld.UNLOCK_ALL_FEATURES,
 	};
 
 	public static class OsmLiveOnHoldDialog extends OsmLiveGoneDialog {
@@ -160,8 +161,8 @@ public abstract class OsmLiveGoneDialog extends BaseOsmAndDialogFragment {
 			descr.append(subscriptionDescr).append("\n\n");
 		}
 		descr.append(getString(R.string.purchase_cancelled_dialog_descr));
-		for (OsmAndFeature feature : subscriptionFeatures) {
-			descr.append("\n").append("— ").append(getString(feature.getHeaderTitleId()));
+		for (OsmAndFeatureOld feature : subscriptionFeatures) {
+			descr.append("\n").append("— ").append(feature.toHumanString(ctx));
 		}
 		infoDescr.setText(descr);
 

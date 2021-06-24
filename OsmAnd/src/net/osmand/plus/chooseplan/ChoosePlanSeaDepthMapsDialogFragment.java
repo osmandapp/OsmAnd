@@ -3,46 +3,46 @@ package net.osmand.plus.chooseplan;
 public class ChoosePlanSeaDepthMapsDialogFragment extends ChoosePlanFreeBannerDialogFragment {
 	public static final String TAG = ChoosePlanSeaDepthMapsDialogFragment.class.getSimpleName();
 
-	private final OsmAndFeature[] subscriptionFeatures = {
-			OsmAndFeature.SEA_DEPTH_MAPS,
-			OsmAndFeature.CONTOUR_LINES_HILLSHADE_MAPS,
-			OsmAndFeature.WIKIPEDIA_OFFLINE,
-			OsmAndFeature.WIKIVOYAGE_OFFLINE,
-			OsmAndFeature.DAILY_MAP_UPDATES,
-			OsmAndFeature.UNLIMITED_DOWNLOADS,
-			OsmAndFeature.UNLOCK_ALL_FEATURES,
+	private final OsmAndFeatureOld[] subscriptionFeatures = {
+			OsmAndFeatureOld.SEA_DEPTH_MAPS,
+			OsmAndFeatureOld.CONTOUR_LINES_HILLSHADE_MAPS,
+			OsmAndFeatureOld.WIKIPEDIA_OFFLINE,
+			OsmAndFeatureOld.WIKIVOYAGE_OFFLINE,
+			OsmAndFeatureOld.DAILY_MAP_UPDATES,
+			OsmAndFeatureOld.UNLIMITED_DOWNLOADS,
+			OsmAndFeatureOld.UNLOCK_ALL_FEATURES,
 	};
-	private final OsmAndFeature[] selectedSubscriptionFeatures = {
-			OsmAndFeature.SEA_DEPTH_MAPS,
-			OsmAndFeature.CONTOUR_LINES_HILLSHADE_MAPS,
+	private final OsmAndFeatureOld[] selectedSubscriptionFeatures = {
+			OsmAndFeatureOld.SEA_DEPTH_MAPS,
+			OsmAndFeatureOld.CONTOUR_LINES_HILLSHADE_MAPS,
 	};
 
-	private final OsmAndFeature[] planTypeFeatures = {
-			OsmAndFeature.SEA_DEPTH_MAPS,
-			OsmAndFeature.CONTOUR_LINES_HILLSHADE_MAPS,
-			OsmAndFeature.WIKIPEDIA_OFFLINE,
-			OsmAndFeature.UNLIMITED_DOWNLOADS,
-			OsmAndFeature.MONTHLY_MAP_UPDATES,
+	private final OsmAndFeatureOld[] planTypeFeatures = {
+			OsmAndFeatureOld.SEA_DEPTH_MAPS,
+			OsmAndFeatureOld.CONTOUR_LINES_HILLSHADE_MAPS,
+			OsmAndFeatureOld.WIKIPEDIA_OFFLINE,
+			OsmAndFeatureOld.UNLIMITED_DOWNLOADS,
+			OsmAndFeatureOld.MONTHLY_MAP_UPDATES,
 	};
-	private final OsmAndFeature[] selectedPlanTypeFeatures = {};
+	private final OsmAndFeatureOld[] selectedPlanTypeFeatures = {};
 
 	@Override
-	public OsmAndFeature[] getSubscriptionFeatures() {
+	public OsmAndFeatureOld[] getSubscriptionFeatures() {
 		return subscriptionFeatures;
 	}
 
 	@Override
-	public OsmAndFeature[] getPlanTypeFeatures() {
+	public OsmAndFeatureOld[] getPlanTypeFeatures() {
 		return planTypeFeatures;
 	}
 
 	@Override
-	public OsmAndFeature[] getSelectedSubscriptionFeatures() {
+	public OsmAndFeatureOld[] getSelectedSubscriptionFeatures() {
 		return selectedSubscriptionFeatures;
 	}
 
 	@Override
-	public OsmAndFeature[] getSelectedPlanTypeFeatures() {
+	public OsmAndFeatureOld[] getSelectedPlanTypeFeatures() {
 		return selectedPlanTypeFeatures;
 	}
 }
