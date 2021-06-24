@@ -77,6 +77,16 @@ public enum OsmAndFeature {
 			OsmAndFeature.NAUTICAL
 	);
 
+	public static final List<OsmAndFeature> OSMAND_PRO_PREVIEW_FEATURES = Arrays.asList(
+			OsmAndFeature.OSMAND_CLOUD,
+			OsmAndFeature.ADVANCED_WIDGETS,
+			OsmAndFeature.HOURLY_MAP_UPDATES,
+			OsmAndFeature.UNLIMITED_MAP_DOWNLOADS,
+			OsmAndFeature.COMBINED_WIKI,
+			OsmAndFeature.TERRAIN,
+			OsmAndFeature.NAUTICAL
+	);
+
 	public static final List<OsmAndFeature> MAPS_PLUS_FEATURES = Arrays.asList(
 			OsmAndFeature.MONTHLY_MAP_UPDATES,
 			OsmAndFeature.UNLIMITED_MAP_DOWNLOADS,
@@ -85,4 +95,15 @@ public enum OsmAndFeature {
 			OsmAndFeature.WIKIVOYAGE,
 			OsmAndFeature.TERRAIN,
 			OsmAndFeature.NAUTICAL);
+
+	public static final List<OsmAndFeature> MAPS_PLUS_PREVIEW_FEATURES = Arrays.asList(
+			OsmAndFeature.OSMAND_CLOUD,
+			OsmAndFeature.ADVANCED_WIDGETS,
+			OsmAndFeature.HOURLY_MAP_UPDATES,
+			OsmAndFeature.MONTHLY_MAP_UPDATES,
+			OsmAndFeature.UNLIMITED_MAP_DOWNLOADS,
+			OsmAndFeature.COMBINED_WIKI,
+			OsmAndFeature.TERRAIN,
+			OsmAndFeature.NAUTICAL
+	);
 }

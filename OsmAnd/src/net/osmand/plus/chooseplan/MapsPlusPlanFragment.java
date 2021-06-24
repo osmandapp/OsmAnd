@@ -15,21 +15,9 @@ import net.osmand.plus.inapp.InAppPurchases;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class MapsPlusPlanFragment extends SelectedPlanFragment {
-
-	public static final List<OsmAndFeature> MAPS_PLUS_PREVIEW_FEATURES = Arrays.asList(
-			OsmAndFeature.OSMAND_CLOUD,
-			OsmAndFeature.ADVANCED_WIDGETS,
-			OsmAndFeature.HOURLY_MAP_UPDATES,
-			OsmAndFeature.MONTHLY_MAP_UPDATES,
-			OsmAndFeature.UNLIMITED_MAP_DOWNLOADS,
-			OsmAndFeature.COMBINED_WIKI,
-			OsmAndFeature.TERRAIN,
-			OsmAndFeature.NAUTICAL
-	);
 
 	public static void showInstance(@NonNull FragmentActivity activity) {
 		MapsPlusPlanFragment fragment = new MapsPlusPlanFragment();
@@ -44,7 +32,7 @@ public class MapsPlusPlanFragment extends SelectedPlanFragment {
 
 	@Override
 	protected void collectFeatures() {
-		previewFeatures.addAll(MAPS_PLUS_PREVIEW_FEATURES);
+		previewFeatures.addAll(OsmAndFeature.MAPS_PLUS_PREVIEW_FEATURES);
 
 		for (OsmAndFeature feature : previewFeatures) {
 			if (feature.isAvailableInMapsPlus()) {
