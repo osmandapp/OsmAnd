@@ -123,7 +123,7 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 	protected void updateToolbar(int verticalOffset) {
 		float absOffset = Math.abs(verticalOffset);
 		float totalScrollRange = appBar.getTotalScrollRange();
-		boolean collapsed = Math.abs(verticalOffset) == appBar.getTotalScrollRange();
+		boolean collapsed = totalScrollRange > 0 && Math.abs(verticalOffset) == totalScrollRange;
 
 		float alpha = UiUtilities.getProportionalAlpha(0, totalScrollRange * 0.75f, absOffset);
 		float inverseAlpha = 1.0f - UiUtilities.getProportionalAlpha(0, totalScrollRange, absOffset);
