@@ -311,6 +311,11 @@
 					android:layout_height="wrap_content"
 					android:orientation="vertical" />
 
+				<View
+					android:id="@+id/bottom_padding"
+					android:layout_width="match_parent"
+					android:layout_height="@dimen/toolbar_height" />
+
 			</LinearLayout>
 
 		</androidx.core.widget.NestedScrollView>
