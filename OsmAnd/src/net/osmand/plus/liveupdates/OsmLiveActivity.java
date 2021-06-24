@@ -17,15 +17,14 @@ import com.google.android.material.tabs.TabLayout;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.chooseplan.OsmAndFeature;
-import net.osmand.plus.chooseplan.ChoosePlanDialogFragment.ChoosePlanDialogListener;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
+import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.download.AbstractDownloadActivity;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 
 import org.apache.commons.logging.Log;
 
-public class OsmLiveActivity extends AbstractDownloadActivity implements ChoosePlanDialogListener {
+public class OsmLiveActivity extends AbstractDownloadActivity {
 	private final static Log LOG = PlatformUtil.getLog(OsmLiveActivity.class);
 	public final static String SHOW_SETTINGS_ONLY_INTENT_PARAM = "show_settings_only_intent_param";
 
@@ -90,11 +89,6 @@ public class OsmLiveActivity extends AbstractDownloadActivity implements ChooseP
 		outState.putBoolean(SHOW_SETTINGS_ONLY_INTENT_PARAM, showSettingOnly);
 	}
 
-	@Override
-	public void onChoosePlanDialogDismiss() {
-		//finish();
-	}
-
 	public boolean isShowSettingOnly() {
 		return showSettingOnly;
 	}
@@ -104,8 +98,8 @@ public class OsmLiveActivity extends AbstractDownloadActivity implements ChooseP
 	}
 
 	public static class LiveUpdatesFragmentPagerAdapter extends FragmentPagerAdapter {
-		private final Fragment[] fragments = new Fragment[] { new ReportsFragment() };
-		private static final int[] titleIds = new int[] { ReportsFragment.TITLE };
+		private final Fragment[] fragments = new Fragment[] {new ReportsFragment()};
+		private static final int[] titleIds = new int[] {ReportsFragment.TITLE};
 		private final String[] titles;
 		private final boolean showSettingsOnly;
 

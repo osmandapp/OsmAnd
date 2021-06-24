@@ -6,11 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+
 import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
@@ -21,9 +23,6 @@ import net.osmand.util.Algorithms;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
-
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
 
 public class SubscriptionsListCard extends MapBaseCard {
 
