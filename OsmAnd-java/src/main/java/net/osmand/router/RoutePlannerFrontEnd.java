@@ -79,6 +79,16 @@ public class RoutePlannerFrontEnd {
 					routeCalculations, routeDistCalculations, routePointsSearched, routeDistance, routeDistanceUnmatched);
 		}
 
+		// used in native library
+		public void addFinalPoint(GpxPoint finalPoint){
+			finalPoints.add(finalPoint);
+		}
+
+		// used in native library
+		public void addResultSegment(RouteSegmentResult routeSegmentResult){
+			result.add(routeSegmentResult);
+		}
+
 		public double distFromLastPoint(LatLon startPoint) {
 			if (result.size() > 0) {
 				return MapUtils.getDistance(getLastPoint(), startPoint);
@@ -103,6 +113,40 @@ public class RoutePlannerFrontEnd {
 		public List<RouteSegmentResult> stepBackRoute;
 		public int targetInd = -1;
 		public boolean straightLine = false;
+
+		// used in native library
+		public GpxPoint(int ind, double lat, double lon, double cumDist, int targetInd, boolean straightLine,
+		                RouteSegmentPoint pnt) {
+			this.ind = ind;
+			this.loc = new LatLon(lat, lon);
+			this.cumDist = cumDist;
+			this.targetInd = targetInd;
+			this.straightLine = straightLine;
+			this.pnt = pnt;
+			routeToTarget = new ArrayList<>();
+			stepBackRoute = new ArrayList<>();
+
+		}
+
+		// used in native library
+		public void addRouteToTarget(RouteSegmentResult routeSegmentResult) {
+			routeToTarget.add(routeSegmentResult);
+		}
+
+		// used in native library
+		public void addStepBackRoute(RouteSegmentResult routeSegmentResult) {
+			stepBackRoute.add(routeSegmentResult);
+		}
+
+		// used in native library
+		public double getLat(){
+			return loc.getLatitude();
+		}
+
+		// used in native library
+		public double getLon(){
+			return loc.getLongitude();
+		}
 
 		public GpxPoint() {
 		}
