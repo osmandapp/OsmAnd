@@ -82,7 +82,6 @@ import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.base.FailSafeFuntions;
 import net.osmand.plus.base.MapViewTrackingUtilities;
-import net.osmand.plus.chooseplan.OsmLiveGoneDialog;
 import net.osmand.plus.dashboard.DashBaseFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dialogs.CrashBottomSheetDialogFragment;
@@ -2361,9 +2360,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	@Override
 	public void onInAppPurchaseGetItems() {
 		DiscountHelper.checkAndDisplay(this);
-		if (!isFirstScreenShowing() && OsmLiveGoneDialog.shouldShowDialog(app)) {
-			OsmLiveGoneDialog.showInstance(app, getSupportFragmentManager());
-		}
 	}
 
 	public enum ShowQuickSearchMode {

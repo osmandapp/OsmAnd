@@ -108,7 +108,7 @@ public class RestoreSettingsFragment extends ImportSettingsFragment {
 		toolbarLayout.setTitle(getString(toolbarTitleRes));
 		description.setText(UiUtilities.createSpannableString(
 				String.format(getString(descriptionRes), getString(R.string.osmand_cloud)),
-				new StyleSpan(Typeface.BOLD), getString(R.string.osmand_cloud)
+				Typeface.BOLD, getString(R.string.osmand_cloud)
 		));
 		buttonsContainer.setVisibility(View.GONE);
 		progressBar.setVisibility(View.VISIBLE);

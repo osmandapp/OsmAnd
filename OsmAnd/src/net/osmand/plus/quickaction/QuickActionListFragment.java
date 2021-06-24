@@ -916,7 +916,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment
         String message = String.format(ctx.getString(
                 R.string.quick_actions_delete_text), actionName);
         SpannableString styledMessage = UiUtilities.createSpannableString(
-                message, new StyleSpan(Typeface.BOLD), actionName);
+                message, Typeface.BOLD, actionName);
 
         ConfirmationBottomSheet.showInstance(ctx.getSupportFragmentManager(), target,
                 ctx.getString(R.string.quick_actions_delete), styledMessage,
