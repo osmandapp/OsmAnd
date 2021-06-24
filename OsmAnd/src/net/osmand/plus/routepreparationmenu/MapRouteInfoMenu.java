@@ -102,6 +102,7 @@ import net.osmand.plus.routepreparationmenu.cards.SuggestionsMapsDownloadWarning
 import net.osmand.plus.routepreparationmenu.cards.TracksCard;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.IRouteInformationListener;
+import net.osmand.plus.routing.MissingMapsOnlineSearchTask;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelperUtils;
@@ -150,7 +151,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	public static boolean waypointsVisible = false;
 	public static boolean followTrackVisible = false;
 
-	private Stack<MapRouteMenuStateHolder> menuBackStack = new Stack<>();
+	private final Stack<MapRouteMenuStateHolder> menuBackStack = new Stack<>();
 
 	private boolean routeCalculationInProgress;
 
@@ -197,7 +198,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private boolean addButtonCollapsed;
 
 	private List<WorldRegion> suggestedMaps;
-	boolean suggestedMapsOnlineSearch;
+	private boolean suggestedMapsOnlineSearch;
+	private MissingMapsOnlineSearchTask missingMapsOnlineSearchTask;
 
 	private interface OnButtonCollapsedListener {
 		void onButtonCollapsed(boolean success);
@@ -513,11 +515,15 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	public void updateSuggestedMissingMaps(@Nullable List<WorldRegion> missingMaps, boolean onlineSearch) {
-		boolean updated = !Algorithms.objectEquals(missingMaps, suggestedMaps);
-		if (updated) {
-			suggestedMaps = missingMaps;
-			suggestedMapsOnlineSearch = onlineSearch;
-			updateCards();
+		WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
+		MapRouteInfoMenuFragment fragment = fragmentRef != null ? fragmentRef.get() : null;
+		if (fragmentRef != null && fragment.isVisible()) {
+			boolean updated = !Algorithms.objectEquals(missingMaps, suggestedMaps) || suggestedMapsOnlineSearch != onlineSearch;
+			if (updated) {
+				suggestedMaps = missingMaps;
+				suggestedMapsOnlineSearch = onlineSearch;
+				fragment.updateInfo();
+			}
 		}
 	}
 

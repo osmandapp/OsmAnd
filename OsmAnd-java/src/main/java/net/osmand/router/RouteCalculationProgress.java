@@ -1,5 +1,9 @@
 package net.osmand.router;
 
+import net.osmand.map.WorldRegion;
+
+import java.util.List;
+
 public class RouteCalculationProgress {
 
 	public int segmentNotFound = -1;
@@ -37,7 +41,11 @@ public class RouteCalculationProgress {
 	
 	public boolean isCancelled;
 	public boolean requestPrivateAccessRouting;
-	
+
+	public long routeCalculationStartTime;
+	public List<WorldRegion> missingMaps;
+	public boolean missingMapsOnlineSearchGranted;
+
 	private static final float INITIAL_PROGRESS = 0.05f;
 	private static final float FIRST_ITERATION = 0.72f;
 	

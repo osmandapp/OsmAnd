@@ -1,9 +1,13 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
+import android.view.LayoutInflater;
+import android.view.View;
+
 import androidx.annotation.NonNull;
 
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MultipleSelectionBottomSheet;
 import net.osmand.plus.base.SelectionBottomSheet;
@@ -25,15 +29,18 @@ import static net.osmand.plus.download.MultipleDownloadItem.getIndexItem;
 public class SuggestionsMapsDownloadWarningCard extends WarningCard {
 	private SelectionBottomSheet dialog;
 	private final List<WorldRegion> suggestedMaps;
+	private final boolean hasPrecalculatedMissingMaps;
+	private final boolean suggestedMapsOnlineSearch;
 
 	public SuggestionsMapsDownloadWarningCard(@NonNull MapActivity mapActivity) {
 		super(mapActivity);
 		MapRouteInfoMenu mapRouteInfoMenu = mapActivity.getMapRouteInfoMenu();
-		boolean hasPrecalculatedMissingMaps = !Algorithms.isEmpty(mapRouteInfoMenu.getSuggestedMaps());
-		if (hasPrecalculatedMissingMaps) {
+		hasPrecalculatedMissingMaps = !Algorithms.isEmpty(mapRouteInfoMenu.getSuggestedMaps());
+		suggestedMapsOnlineSearch = mapRouteInfoMenu.isSuggestedMapsOnlineSearch();
+		if (hasPrecalculatedMissingMaps || suggestedMapsOnlineSearch) {
 			suggestedMaps = mapActivity.getMapRouteInfoMenu().getSuggestedMaps();
 			imageId = R.drawable.ic_action_time_span;
-			title = mapRouteInfoMenu.isSuggestedMapsOnlineSearch()
+			title = suggestedMapsOnlineSearch
 					? mapActivity.getString(R.string.online_maps_required_descr)
 					: mapActivity.getString(R.string.direct_line_maps_required_descr);
 			linkText = mapActivity.getString(R.string.online_direct_line_maps_link);
@@ -65,6 +72,13 @@ public class SuggestionsMapsDownloadWarningCard extends WarningCard {
 			@Override
 			public void onDialogCreated() {
 				dialog.setTitle(app.getString(R.string.welmode_download_maps));
+				LayoutInflater inflater = UiUtilities.getInflater(dialog.getContext(), nightMode);
+				View view = inflater.inflate(R.layout.bottom_sheet_with_progress_bar, null);
+
+				uploadedPhotosTitle = view.findViewById(R.id.title);
+				uploadedPhotosCounter = view.findViewById(R.id.description);
+				progressBar = view.findViewById(R.id.progress_bar);
+				progressBar.setMax(maxProgress);
 			}
 
 			@Override
@@ -73,9 +87,9 @@ public class SuggestionsMapsDownloadWarningCard extends WarningCard {
 			}
 		});
 		msDialog.setSelectionUpdateListener(this::updateSize);
-		msDialog.setOnApplySelectionListener(selectedItems1 -> {
+		msDialog.setOnApplySelectionListener(selItems -> {
 			List<IndexItem> indexes = new ArrayList<>();
-			for (SelectableItem item : selectedItems1) {
+			for (SelectableItem item : selItems) {
 				IndexItem index = getIndexItem((DownloadItem) item.getObject());
 				if (index != null) {
 					indexes.add(index);
@@ -156,6 +170,9 @@ public class SuggestionsMapsDownloadWarningCard extends WarningCard {
 
 	@Override
 	protected void onLinkClicked() {
+		if (suggestedMapsOnlineSearch) {
+			app.getRoutingHelper().startMissingMapsOnlineSearch();
+		}
 		showMultipleSelectionDialog();
 	}
 

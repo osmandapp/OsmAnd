@@ -97,7 +97,7 @@ public class RouteProvider {
 	public RouteCalculationResult calculateRouteImpl(RouteCalculationParams params) {
 		long time = System.currentTimeMillis();
 		if (params.start != null && params.end != null) {
-			params.routeCalculationStartTime = time;
+			params.calculationProgress.routeCalculationStartTime = time;
 			if (log.isInfoEnabled()){
 				log.info("Start finding route from " + params.start + " to " + params.end +" using " + 
 						params.mode.getRouteService().getName()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
@@ -118,7 +118,7 @@ public class RouteProvider {
 						res.missingMaps = missingMapsHelper.getMissingMaps(pathPoints);
 					} else {
 						if (!missingMapsHelper.isAnyPointOnWater(pathPoints)) {
-							params.missingMaps = missingMapsHelper.getMissingMaps(pathPoints);
+							params.calculationProgress.missingMaps = missingMapsHelper.getMissingMaps(pathPoints);
 						}
 						res = findVectorMapsRoute(params, calcGPXRoute);
 					}
@@ -132,7 +132,7 @@ public class RouteProvider {
 				} else {
 					res = new RouteCalculationResult("Selected route service is not available");
 				}
-				if(log.isInfoEnabled() ){
+				if (log.isInfoEnabled() ){
 					log.info("Finding route contained " + res.getImmutableAllLocations().size() + " points for " + (System.currentTimeMillis() - time) + " ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				}
 				return res; 

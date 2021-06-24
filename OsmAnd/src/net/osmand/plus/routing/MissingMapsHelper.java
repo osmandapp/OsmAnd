@@ -1,9 +1,6 @@
 package net.osmand.plus.routing;
 
-import android.os.AsyncTask;
-
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -101,24 +98,15 @@ public class MissingMapsHelper {
 			final Location l = points.get(i);
 			LatLon latLonPoint = new LatLon(l.getLatitude(), l.getLongitude());
 			List<WorldRegion> worldRegions = params.ctx.getRegions().getWorldRegionsAt(latLonPoint);
-			boolean addMaps = true;
-			List<WorldRegion> maps = new ArrayList<>();
 			for (WorldRegion region : worldRegions) {
 				String mapName = region.getRegionDownloadName();
 				String countryMapName = region.getSuperregion().getRegionDownloadName();
 				List<WorldRegion> subregions = region.getSubregions();
 				boolean isDownloaded = params.ctx.getResourceManager().checkIfObjectDownloaded(mapName);
 				boolean isCountry = Algorithms.isEmpty(countryMapName) && !subregions.isEmpty();
-				if (!isDownloaded) {
-					if (!isCountry) {
-						maps.add(region);
-					}
-				} else {
-					addMaps = false;
+				if (!isDownloaded && !isCountry) {
+					result.add(region);
 				}
-			}
-			if (addMaps) {
-				result.addAll(maps);
 			}
 		}
 		return new ArrayList<>(result);
@@ -127,47 +115,15 @@ public class MissingMapsHelper {
 	@NonNull
 	private List<Location> removeDensePoints(@NonNull List<Location> routeLocation) {
 		List<Location> mapsBasedOnPoints = new ArrayList<>();
-		for (int i = 0, j = i + 1; j < routeLocation.size() - 1; j++) {
-			if (routeLocation.get(i).distanceTo(routeLocation.get(j)) >= MIN_STRAIGHT_DIST) {
-				mapsBasedOnPoints.add(routeLocation.get(j));
-				i = j;
+		if (!routeLocation.isEmpty()) {
+			mapsBasedOnPoints.add(routeLocation.get(0));
+			for (int i = 0, j = i + 1; j < routeLocation.size() - 1; j++) {
+				if (routeLocation.get(i).distanceTo(routeLocation.get(j)) >= MIN_STRAIGHT_DIST) {
+					mapsBasedOnPoints.add(routeLocation.get(j));
+					i = j;
+				}
 			}
 		}
 		return mapsBasedOnPoints;
-	}
-
-	public static class MissingMapsOnlineSearchTask extends AsyncTask<Void, Void, List<WorldRegion>> {
-
-		private final RouteCalculationParams params;
-		private final OnlineSearchMissingMapsListener listener;
-
-		public interface OnlineSearchMissingMapsListener {
-			void onMissingMapsOnlineSearchComplete(@Nullable List<WorldRegion> missingMaps);
-		}
-
-		public MissingMapsOnlineSearchTask(@NonNull RouteCalculationParams params,
-										   @Nullable OnlineSearchMissingMapsListener listener) {
-			this.params = params;
-			this.listener = listener;
-		}
-
-		@Override
-		protected List<WorldRegion> doInBackground(Void... voids) {
-			try {
-				MissingMapsHelper missingMapsHelper = new MissingMapsHelper(params);
-				List<Location> onlinePoints = missingMapsHelper.findOnlineRoutePoints();
-				return missingMapsHelper.getMissingMaps(onlinePoints);
-			} catch (IOException | JSONException e) {
-				LOG.error(e.getMessage(), e);
-			}
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(@Nullable List<WorldRegion> worldRegions) {
-			if (listener != null) {
-				listener.onMissingMapsOnlineSearchComplete(worldRegions);
-			}
-		}
 	}
 }

@@ -202,6 +202,10 @@ public class RouteCalculationResult {
 		return missingMaps;
 	}
 
+	public boolean hasMissingMaps() {
+		return !Algorithms.isEmpty(missingMaps);
+	}
+
 	private static void calculateIntermediateIndexes(Context ctx, List<Location> locations,
 													 List<LatLon> intermediates, List<RouteDirectionInfo> localDirections, int[] intermediatePoints) {
 		if(intermediates != null && localDirections != null) {
@@ -1022,7 +1026,7 @@ public class RouteCalculationResult {
 	public boolean isCalculated() {
 		return !locations.isEmpty();
 	}
-	
+
 	public boolean isEmpty() {
 		return locations.isEmpty() || currentRoute >= locations.size();
 	}
