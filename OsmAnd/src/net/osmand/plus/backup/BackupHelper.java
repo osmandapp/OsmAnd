@@ -49,7 +49,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -72,6 +71,7 @@ public class BackupHelper {
 
 	private static final String USER_REGISTER_URL = SERVER_URL + "/userdata/user-register";
 	private static final String DEVICE_REGISTER_URL = SERVER_URL + "/userdata/device-register";
+	private static final String UPDATE_ORDER_ID_URL = SERVER_URL + "/userdata/user-update-orderid";
 	private static final String UPLOAD_FILE_URL = SERVER_URL + "/userdata/upload-file";
 	private static final String LIST_FILES_URL = SERVER_URL + "/userdata/list-files";
 	private static final String DOWNLOAD_FILE_URL = SERVER_URL + "/userdata/download-file";
@@ -85,6 +85,7 @@ public class BackupHelper {
 	public final static int STATUS_PARSE_JSON_ERROR = 1;
 	public final static int STATUS_EMPTY_RESPONSE_ERROR = 2;
 	public final static int STATUS_SERVER_ERROR = 3;
+	public final static int STATUS_NO_ORDER_ID_ERROR = 4;
 
 	public static final int SERVER_ERROR_CODE_EMAIL_IS_INVALID = 101;
 	public static final int SERVER_ERROR_CODE_NO_VALID_SUBSCRIPTION = 102;
@@ -94,6 +95,9 @@ public class BackupHelper {
 	public static final int SERVER_ERROR_CODE_FILE_NOT_AVAILABLE = 106;
 	public static final int SERVER_ERROR_CODE_GZIP_ONLY_SUPPORTED_UPLOAD = 107;
 	public static final int SERVER_ERROR_CODE_SIZE_OF_SUPPORTED_BOX_IS_EXCEEDED = 108;
+	public static final int SERVER_ERROR_CODE_SUBSCRIPTION_WAS_USED_FOR_ANOTHER_ACCOUNT = 109;
+	public static final int SERVER_ERROR_CODE_SUBSCRIPTION_WAS_EXPIRED_OR_NOT_PRESENT = 110;
+	public static final int SERVER_ERROR_CODE_USER_IS_ALREADY_REGISTERED = 111;
 
 	private PrepareBackupTask prepareBackupTask;
 	private PrepareBackupResult backup = new PrepareBackupResult();
@@ -105,6 +109,10 @@ public class BackupHelper {
 
 	public interface OnRegisterDeviceListener {
 		void onRegisterDevice(int status, @Nullable String message, @Nullable String error);
+	}
+
+	public interface OnUpdateOrderIdListener {
+		void onUpdateOrderId(int status, @Nullable String message, @Nullable String error);
 	}
 
 	public interface OnDownloadFileListListener {
@@ -324,37 +332,34 @@ public class BackupHelper {
 		final String deviceId = app.getUserAndroidId();
 		params.put("deviceid", deviceId);
 		OperationLog operationLog = new OperationLog("registerUser", DEBUG);
-		AndroidNetworkUtils.sendRequestAsync(app, USER_REGISTER_URL, params, "Register user", false, true, new OnRequestResultListener() {
-			@Override
-			public void onResult(@Nullable String resultJson, @Nullable String error) {
-				int status;
-				String message;
-				if (!Algorithms.isEmpty(error)) {
-					message = "User registration error: " + parseServerError(error) + "\nEmail=" + email + "\nOrderId=" + orderId + "\nDeviceId=" + deviceId;
-					status = STATUS_SERVER_ERROR;
-				} else if (!Algorithms.isEmpty(resultJson)) {
-					try {
-						JSONObject result = new JSONObject(resultJson);
-						if (result.has("status") && "ok".equals(result.getString("status"))) {
-							message = "You have been registered successfully. Please check for email with activation code.";
-							status = STATUS_SUCCESS;
-						} else {
-							message = "User registration error: unknown";
-							status = STATUS_SERVER_ERROR;
-						}
-					} catch (JSONException e) {
-						message = "User registration error: json parsing";
-						status = STATUS_PARSE_JSON_ERROR;
+		AndroidNetworkUtils.sendRequestAsync(app, USER_REGISTER_URL, params, "Register user", false, true, (resultJson, error) -> {
+			int status;
+			String message;
+			if (!Algorithms.isEmpty(error)) {
+				message = "User registration error: " + parseServerError(error) + "\nEmail=" + email + "\nOrderId=" + orderId + "\nDeviceId=" + deviceId;
+				status = STATUS_SERVER_ERROR;
+			} else if (!Algorithms.isEmpty(resultJson)) {
+				try {
+					JSONObject result = new JSONObject(resultJson);
+					if (result.has("status") && "ok".equals(result.getString("status"))) {
+						message = "You have been registered successfully. Please check for email with activation code.";
+						status = STATUS_SUCCESS;
+					} else {
+						message = "User registration error: unknown";
+						status = STATUS_SERVER_ERROR;
 					}
-				} else {
-					message = "User registration error: empty response";
-					status = STATUS_EMPTY_RESPONSE_ERROR;
+				} catch (JSONException e) {
+					message = "User registration error: json parsing";
+					status = STATUS_PARSE_JSON_ERROR;
 				}
-				if (listener != null) {
-					listener.onRegisterUser(status, message, error);
-				}
-				operationLog.finishOperation(status + " " + message);
+			} else {
+				message = "User registration error: empty response";
+				status = STATUS_EMPTY_RESPONSE_ERROR;
 			}
+			if (listener != null) {
+				listener.onRegisterUser(status, message, error);
+			}
+			operationLog.finishOperation(status + " " + message);
 		}, EXECUTOR);
 	}
 
@@ -371,39 +376,84 @@ public class BackupHelper {
 		}
 		params.put("token", token);
 		OperationLog operationLog = new OperationLog("registerDevice", DEBUG);
-		AndroidNetworkUtils.sendRequestAsync(app, DEVICE_REGISTER_URL, params, "Register device", false, true, new OnRequestResultListener() {
-			@Override
-			public void onResult(@Nullable String resultJson, @Nullable String error) {
-				int status;
-				String message;
-				if (!Algorithms.isEmpty(error)) {
-					message = "Device registration error: " + parseServerError(error);
-					status = STATUS_SERVER_ERROR;
-				} else if (!Algorithms.isEmpty(resultJson)) {
-					try {
-						JSONObject result = new JSONObject(resultJson);
-						settings.BACKUP_DEVICE_ID.set(result.getString("id"));
-						settings.BACKUP_USER_ID.set(result.getString("userid"));
-						settings.BACKUP_NATIVE_DEVICE_ID.set(result.getString("deviceid"));
-						settings.BACKUP_ACCESS_TOKEN.set(result.getString("accesstoken"));
-						settings.BACKUP_ACCESS_TOKEN_UPDATE_TIME.set(result.getString("udpatetime"));
+		AndroidNetworkUtils.sendRequestAsync(app, DEVICE_REGISTER_URL, params, "Register device", false, true, (resultJson, error) -> {
+			int status;
+			String message;
+			if (!Algorithms.isEmpty(error)) {
+				message = "Device registration error: " + parseServerError(error);
+				status = STATUS_SERVER_ERROR;
+			} else if (!Algorithms.isEmpty(resultJson)) {
+				try {
+					JSONObject result = new JSONObject(resultJson);
+					settings.BACKUP_DEVICE_ID.set(result.getString("id"));
+					settings.BACKUP_USER_ID.set(result.getString("userid"));
+					settings.BACKUP_NATIVE_DEVICE_ID.set(result.getString("deviceid"));
+					settings.BACKUP_ACCESS_TOKEN.set(result.getString("accesstoken"));
+					settings.BACKUP_ACCESS_TOKEN_UPDATE_TIME.set(result.getString("udpatetime"));
 
-						message = "Device have been registered successfully";
-						status = STATUS_SUCCESS;
-					} catch (JSONException e) {
-						message = "Device registration error: json parsing";
-						status = STATUS_PARSE_JSON_ERROR;
-					}
-				} else {
-					message = "Device registration error: empty response";
-					status = STATUS_EMPTY_RESPONSE_ERROR;
+					message = "Device have been registered successfully";
+					status = STATUS_SUCCESS;
+				} catch (JSONException e) {
+					message = "Device registration error: json parsing";
+					status = STATUS_PARSE_JSON_ERROR;
 				}
-				if (listener != null) {
-					listener.onRegisterDevice(status, message, error);
-				}
-				operationLog.finishOperation(status + " " + message);
+			} else {
+				message = "Device registration error: empty response";
+				status = STATUS_EMPTY_RESPONSE_ERROR;
 			}
+			if (listener != null) {
+				listener.onRegisterDevice(status, message, error);
+			}
+			operationLog.finishOperation(status + " " + message);
 		}, EXECUTOR);
+	}
+
+	public void updateOrderIdSync(@Nullable final OnUpdateOrderIdListener listener) {
+		Map<String, String> params = new HashMap<>();
+		params.put("email", getEmail());
+		String orderId = getOrderId();
+		if (Algorithms.isEmpty(orderId)) {
+			if (listener != null) {
+				listener.onUpdateOrderId(STATUS_NO_ORDER_ID_ERROR, "Order id is empty", null);
+			}
+			return;
+		} else {
+			params.put("orderid", orderId);
+		}
+		String androidId = getAndroidId();
+		if (!Algorithms.isEmpty(androidId)) {
+			params.put("deviceid", androidId);
+		}
+		OperationLog operationLog = new OperationLog("updateOrderId", DEBUG);
+		AndroidNetworkUtils.sendRequest(app, UPDATE_ORDER_ID_URL, params, "Update order id", false, true, (resultJson, error) -> {
+			int status;
+			String message;
+			if (!Algorithms.isEmpty(error)) {
+				message = "Update order id error: " + parseServerError(error);
+				status = STATUS_SERVER_ERROR;
+			} else if (!Algorithms.isEmpty(resultJson)) {
+				try {
+					JSONObject result = new JSONObject(resultJson);
+					if (result.has("status") && "ok".equals(result.getString("status"))) {
+						message = "Order id have been updated successfully";
+						status = STATUS_SUCCESS;
+					} else {
+						message = "Update order id error: unknown";
+						status = STATUS_SERVER_ERROR;
+					}
+				} catch (JSONException e) {
+					message = "Update order id error: json parsing";
+					status = STATUS_PARSE_JSON_ERROR;
+				}
+			} else {
+				message = "Update order id error: empty response";
+				status = STATUS_EMPTY_RESPONSE_ERROR;
+			}
+			if (listener != null) {
+				listener.onUpdateOrderId(status, message, error);
+			}
+			operationLog.finishOperation(status + " " + message);
+		});
 	}
 
 	public boolean isBackupPreparing() {
@@ -457,11 +507,10 @@ public class BackupHelper {
 		headers.put("Accept-Encoding", "deflate, gzip");
 	}
 
-	public String uploadFileSync(@NonNull String fileName, @NonNull String type, @NonNull StreamWriter streamWriter,
+	public String uploadFileSync(@NonNull String fileName, @NonNull String type,
+								 @NonNull StreamWriter streamWriter, final long uploadTime,
 								 @Nullable final OnUploadFileListener listener) throws UserNotRegisteredException {
 		checkRegistered();
-
-		final long uploadTime = System.currentTimeMillis();
 
 		Map<String, String> params = new HashMap<>();
 		params.put("deviceid", getDeviceId());
@@ -504,11 +553,10 @@ public class BackupHelper {
 		if (error == null) {
 			updateFileUploadTime(type, fileName, uploadTime);
 		}
-		error = error != null ? resolveServerError(error) : null;
 		if (listener != null) {
 			listener.onFileUploadDone(type, fileName, uploadTime, error);
 		}
-		operationLog.finishOperation(type + " " + fileName + (error != null ? " Error: " + error : " OK"));
+		operationLog.finishOperation(type + " " + fileName + (error != null ? " Error: " + parseServerError(error) : " OK"));
 		return error;
 	}
 
@@ -540,12 +588,12 @@ public class BackupHelper {
 
 			@Override
 			public void onFileUploadDone(@Nullable String error) {
-				operationLog.finishOperation(type + " " + fileName + (error != null ? " Error: " + error : " OK"));
+				operationLog.finishOperation(type + " " + fileName + (error != null ? " Error: " + parseServerError(error) : " OK"));
 				if (error == null) {
 					updateFileUploadTime(type, fileName, uploadTime);
 				}
 				if (listener != null) {
-					listener.onFileUploadDone(type, fileName, uploadTime, error != null ? resolveServerError(error) : null);
+					listener.onFileUploadDone(type, fileName, uploadTime, error);
 				}
 			}
 		}, EXECUTOR);
@@ -610,7 +658,7 @@ public class BackupHelper {
 					settings.BACKUP_LAST_UPLOADED_TIME.set(System.currentTimeMillis() + 1);
 				}
 				if (listener != null) {
-					listener.onFilesUploadDone(resolveServerErrors(errors));
+					listener.onFilesUploadDone(errors);
 				}
 			}
 		}, EXECUTOR);
@@ -774,49 +822,46 @@ public class BackupHelper {
 	}
 
 	private OnRequestResultListener getDeleteAllFilesListener(@Nullable OnDeleteFilesListener listener) {
-		return new OnRequestResultListener() {
-			@Override
-			public void onResult(@Nullable String resultJson, @Nullable String error) {
-				int status;
-				String message;
-				List<RemoteFile> remoteFiles = new ArrayList<>();
-				if (!Algorithms.isEmpty(error)) {
-					status = STATUS_SERVER_ERROR;
-					message = "Download file list error: " + parseServerError(error);
-				} else if (!Algorithms.isEmpty(resultJson)) {
-					try {
-						JSONObject result = new JSONObject(resultJson);
-						JSONArray files = result.getJSONArray("allFiles");
-						for (int i = 0; i < files.length(); i++) {
-							remoteFiles.add(new RemoteFile(files.getJSONObject(i)));
-						}
-						status = STATUS_SUCCESS;
-						message = "OK";
-					} catch (JSONException | ParseException e) {
-						status = STATUS_PARSE_JSON_ERROR;
-						message = "Download file list error: json parsing";
+		return (resultJson, error) -> {
+			int status;
+			String message;
+			List<RemoteFile> remoteFiles = new ArrayList<>();
+			if (!Algorithms.isEmpty(error)) {
+				status = STATUS_SERVER_ERROR;
+				message = "Download file list error: " + parseServerError(error);
+			} else if (!Algorithms.isEmpty(resultJson)) {
+				try {
+					JSONObject result = new JSONObject(resultJson);
+					JSONArray files = result.getJSONArray("allFiles");
+					for (int i = 0; i < files.length(); i++) {
+						remoteFiles.add(new RemoteFile(files.getJSONObject(i)));
 					}
-				} else {
-					status = STATUS_EMPTY_RESPONSE_ERROR;
-					message = "Download file list error: empty response";
+					status = STATUS_SUCCESS;
+					message = "OK";
+				} catch (JSONException | ParseException e) {
+					status = STATUS_PARSE_JSON_ERROR;
+					message = "Download file list error: json parsing";
 				}
-				if (status != STATUS_SUCCESS) {
-					if (listener != null) {
-						listener.onFilesDeleteError(status, message);
-					}
-				} else {
-					try {
-						if (!remoteFiles.isEmpty()) {
-							deleteFiles(remoteFiles, true, listener);
-						} else {
-							if (listener != null) {
-								listener.onFilesDeleteDone(Collections.emptyMap());
-							}
-						}
-					} catch (UserNotRegisteredException e) {
+			} else {
+				status = STATUS_EMPTY_RESPONSE_ERROR;
+				message = "Download file list error: empty response";
+			}
+			if (status != STATUS_SUCCESS) {
+				if (listener != null) {
+					listener.onFilesDeleteError(status, message);
+				}
+			} else {
+				try {
+					if (!remoteFiles.isEmpty()) {
+						deleteFiles(remoteFiles, true, listener);
+					} else {
 						if (listener != null) {
-							listener.onFilesDeleteError(STATUS_SERVER_ERROR, "User not registered");
+							listener.onFilesDeleteDone(Collections.emptyMap());
 						}
+					}
+				} catch (UserNotRegisteredException e) {
+					if (listener != null) {
+						listener.onFilesDeleteError(STATUS_SERVER_ERROR, "User not registered");
 					}
 				}
 			}
@@ -835,60 +880,57 @@ public class BackupHelper {
 	}
 
 	private OnRequestResultListener getDeleteOldFilesListener(@Nullable OnDeleteFilesListener listener, List<ExportSettingsType> types) {
-		return new OnRequestResultListener() {
-			@Override
-			public void onResult(@Nullable String resultJson, @Nullable String error) {
-				int status;
-				String message;
-				List<RemoteFile> remoteFiles = new ArrayList<>();
-				if (!Algorithms.isEmpty(error)) {
-					status = STATUS_SERVER_ERROR;
-					message = "Download file list error: " + parseServerError(error);
-				} else if (!Algorithms.isEmpty(resultJson)) {
-					try {
-						JSONObject result = new JSONObject(resultJson);
-						JSONArray allFiles = result.getJSONArray("allFiles");
-						for (int i = 0; i < allFiles.length(); i++) {
-							remoteFiles.add(new RemoteFile(allFiles.getJSONObject(i)));
-						}
-						JSONArray uniqueFiles = result.getJSONArray("uniqueFiles");
-						for (int i = 0; i < uniqueFiles.length(); i++) {
-							remoteFiles.remove(new RemoteFile(uniqueFiles.getJSONObject(i)));
-						}
-						status = STATUS_SUCCESS;
-						message = "OK";
-					} catch (JSONException | ParseException e) {
-						status = STATUS_PARSE_JSON_ERROR;
-						message = "Download file list error: json parsing";
+		return (resultJson, error) -> {
+			int status;
+			String message;
+			List<RemoteFile> remoteFiles = new ArrayList<>();
+			if (!Algorithms.isEmpty(error)) {
+				status = STATUS_SERVER_ERROR;
+				message = "Download file list error: " + parseServerError(error);
+			} else if (!Algorithms.isEmpty(resultJson)) {
+				try {
+					JSONObject result = new JSONObject(resultJson);
+					JSONArray allFiles = result.getJSONArray("allFiles");
+					for (int i = 0; i < allFiles.length(); i++) {
+						remoteFiles.add(new RemoteFile(allFiles.getJSONObject(i)));
 					}
-				} else {
-					status = STATUS_EMPTY_RESPONSE_ERROR;
-					message = "Download file list error: empty response";
+					JSONArray uniqueFiles = result.getJSONArray("uniqueFiles");
+					for (int i = 0; i < uniqueFiles.length(); i++) {
+						remoteFiles.remove(new RemoteFile(uniqueFiles.getJSONObject(i)));
+					}
+					status = STATUS_SUCCESS;
+					message = "OK";
+				} catch (JSONException | ParseException e) {
+					status = STATUS_PARSE_JSON_ERROR;
+					message = "Download file list error: json parsing";
 				}
-				if (status != STATUS_SUCCESS) {
-					if (listener != null) {
-						listener.onFilesDeleteError(status, message);
+			} else {
+				status = STATUS_EMPTY_RESPONSE_ERROR;
+				message = "Download file list error: empty response";
+			}
+			if (status != STATUS_SUCCESS) {
+				if (listener != null) {
+					listener.onFilesDeleteError(status, message);
+				}
+			} else {
+				try {
+					List<RemoteFile> filesToDelete = new ArrayList<>();
+					for (RemoteFile file : remoteFiles) {
+						ExportSettingsType exportType = ExportSettingsType.getExportSettingsTypeForRemoteFile(file);
+						if (types.contains(exportType)) {
+							filesToDelete.add(file);
+						}
 					}
-				} else {
-					try {
-						List<RemoteFile> filesToDelete = new ArrayList<>();
-						for (RemoteFile file : remoteFiles) {
-							ExportSettingsType exportType = ExportSettingsType.getExportSettingsTypeForRemoteFile(file);
-							if (types.contains(exportType)) {
-								filesToDelete.add(file);
-							}
-						}
-						if (!filesToDelete.isEmpty()) {
-							deleteFiles(filesToDelete, true, listener);
-						} else {
-							if (listener != null) {
-								listener.onFilesDeleteDone(Collections.emptyMap());
-							}
-						}
-					} catch (UserNotRegisteredException e) {
+					if (!filesToDelete.isEmpty()) {
+						deleteFiles(filesToDelete, true, listener);
+					} else {
 						if (listener != null) {
-							listener.onFilesDeleteError(STATUS_SERVER_ERROR, "User not registered");
+							listener.onFilesDeleteDone(Collections.emptyMap());
 						}
+					}
+				} catch (UserNotRegisteredException e) {
+					if (listener != null) {
+						listener.onFilesDeleteError(STATUS_SERVER_ERROR, "User not registered");
 					}
 				}
 			}
@@ -946,10 +988,9 @@ public class BackupHelper {
 
 					@Override
 					public void onFilesDownloadDone(@NonNull Map<File, String> errors) {
-						Map<File, String> errMap = resolveServerErrors(errors);
-						res.putAll(errMap);
+						res.putAll(errors);
 						if (listener != null) {
-							listener.onFilesDownloadDone(errMap);
+							listener.onFilesDownloadDone(errors);
 						}
 					}
 				});
@@ -1006,7 +1047,7 @@ public class BackupHelper {
 					@Override
 					public void onFilesDownloadDone(@NonNull Map<File, String> errors) {
 						if (listener != null) {
-							listener.onFilesDownloadDone(resolveServerErrors(errors));
+							listener.onFilesDownloadDone(errors);
 						}
 					}
 				}, EXECUTOR);
@@ -1087,30 +1128,8 @@ public class BackupHelper {
 		task.executeOnExecutor(EXECUTOR);
 	}
 
-	private Map<File, String> resolveServerErrors(@NonNull Map<File, String> errors) {
-		Map<File, String> resolvedErrors = new HashMap<>();
-		for (Entry<File, String> fileError : errors.entrySet()) {
-			File file = fileError.getKey();
-			String errorStr = resolveServerError(fileError.getValue());
-			resolvedErrors.put(file, errorStr);
-		}
-		return resolvedErrors;
-	}
-
 	@NonNull
-	private String resolveServerError(@NonNull String fileError) {
-		String errorStr = fileError;
-		try {
-			JSONObject errorJson = new JSONObject(errorStr);
-			JSONObject error = errorJson.getJSONObject("error");
-			errorStr = "Error " + error.getInt("errorCode") + " (" + error.getString("message") + ")";
-		} catch (JSONException e) {
-			// ignore
-		}
-		return errorStr;
-	}
-
-	private String parseServerError(@NonNull String error) {
+	public static String parseServerError(@NonNull String error) {
 		try {
 			JSONObject resultError = new JSONObject(error);
 			if (resultError.has("error")) {

@@ -131,7 +131,11 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements BackupEx
 	}
 
 	@Override
-	public void onBackupExportFinished(boolean succeed) {
+	public void onBackupExportFinished(@Nullable String error) {
+		if (error != null) {
+			String err = BackupHelper.parseServerError(error);
+			app.showShortToastMessage(err);
+		}
 		backupHelper.prepareBackup();
 	}
 

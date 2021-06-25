@@ -25,7 +25,7 @@ public class NetworkSettingsHelper extends SettingsHelper {
 
 		void onBackupExportProgressUpdate(int value);
 
-		void onBackupExportFinished(boolean succeed);
+		void onBackupExportFinished(@Nullable String error);
 
 		void onBackupExportItemStarted(@NonNull String type, @NonNull String fileName, int work);
 

@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.backup.BackupHelper.OnDeleteFilesListener;
 import net.osmand.plus.backup.NetworkWriter.OnUploadItemListener;
 import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.backup.AbstractWriter;
 import net.osmand.plus.settings.backend.backup.Exporter;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
@@ -57,6 +58,33 @@ public class BackupExporter extends Exporter {
 	@Override
 	public void export() throws IOException {
 		exportItems();
+	}
+
+	@Override
+	protected void writeItems(AbstractWriter writer) throws IOException {
+		for (SettingsItem item : getItems().values()) {
+			try {
+				writer.write(item);
+			} catch (IOException e) {
+				int errorCode = BackupHelper.getErrorCode(e.getMessage());
+				if (errorCode == BackupHelper.SERVER_ERROR_CODE_SUBSCRIPTION_WAS_EXPIRED_OR_NOT_PRESENT) {
+					boolean[] orderIdUpdated = {false};
+					backupHelper.updateOrderIdSync((status, message, err) -> {
+						orderIdUpdated[0] = status == BackupHelper.STATUS_SUCCESS;
+					});
+					if (orderIdUpdated[0]) {
+						writer.write(item);
+					} else {
+						throw e;
+					}
+				} else {
+					throw e;
+				}
+			}
+			if (isCancelled()) {
+				break;
+			}
+		}
 	}
 
 	private void exportItems() throws IOException {
