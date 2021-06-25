@@ -52,7 +52,6 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 	private ListView listView;
 
 	private enum TelegramDiscussion {
-
 		ENGLISH(R.string.lang_en, "https://t.me/OsmAndMaps"),
 		RUSSIAN(R.string.lang_ru, "https://t.me/ruosmand"),
 		GERMAN(R.string.lang_de, "https://t.me/deosmand"),
@@ -76,7 +75,6 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 		public String getUrl() {
 			return url;
 		}
-
 	}
 
 	private enum SocialNetwork {
