@@ -368,7 +368,11 @@ public class RouteDataObject {
 				destinationTagLang = "destination:lang:" + lang;
 			}
 			String destinationTagDefault = "destination";
+			String destinationLanesTag = "destination:lanes";
+			String destinationLanesTagFB = (direction == true) ? destinationLanesTag + ":forward" : destinationLanesTag + ":backward";
 			String destinationDefault = null;
+			String destinationLanesDefault = null;
+			String destinationLanesFBDefault = null;
 
 			for (int i = 0; i < kt.length; i++) {
 				int k = kt[i];
@@ -382,13 +386,25 @@ public class RouteDataObject {
 					if (!Algorithms.isEmpty(lang) && destinationTagLang.equals(region.routeEncodingRules.get(k).getTag())) {
 						return destRef1 + ((transliterate) ? TransliterationHelper.transliterate(names.get(k)) : names.get(k));
 					}
+					if (destinationLanesTagFB.equals(region.routeEncodingRules.get(k).getTag())) {
+						destinationLanesFBDefault = names.get(k);
+					}
 					if (destinationTagDefault.equals(region.routeEncodingRules.get(k).getTag())) {
 						destinationDefault = names.get(k);
+					}
+					if (destinationLanesTag.equals(region.routeEncodingRules.get(k).getTag())) {
+						destinationLanesDefault = names.get(k);
 					}
 				}
 			}
 			if (destinationDefault != null) {
 				return destRef1 + ((transliterate) ? TransliterationHelper.transliterate(destinationDefault) : destinationDefault);
+			}
+			if (destinationLanesFBDefault != null) {
+				return destRef1 + ((transliterate) ? TransliterationHelper.transliterate(destinationLanesFBDefault) : destinationLanesFBDefault);
+			}
+			if (destinationLanesDefault != null) {
+				return destRef1 + ((transliterate) ? TransliterationHelper.transliterate(destinationLanesDefault) : destinationLanesDefault);
 			}
 		}
 		return Algorithms.isEmpty(destRef) ? null : destRef;

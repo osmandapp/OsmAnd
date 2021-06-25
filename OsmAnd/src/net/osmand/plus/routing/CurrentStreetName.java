@@ -54,6 +54,10 @@ public class CurrentStreetName {
 			if (n.directionInfo.getExitInfo() != null) {
 				// don't display name of exit street name
 				streetName.exitRef = n.directionInfo.getExitInfo().getRef();
+				if (!isSet && !Algorithms.isEmpty(n.directionInfo.getExitInfo().getExitStreetName())) {
+					streetName.text = n.directionInfo.getExitInfo().getExitStreetName();
+					isSet = true;
+				}
 			}
 		}
 		// 2. display current road street name
