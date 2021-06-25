@@ -483,9 +483,6 @@ Punktaŭ maršrutu %2$s</string>
     <string name="shared_string_control_start">Pačać</string>
     <string name="map_widget_av_notes">Aŭdyjo/vіdea-natatkі</string>
     <string name="osmand_srtm_short_description_80_chars">Modul OsmAnd dla pazasietkavych іzalinіj vyšyń</string>
-    <string name="osmand_srtm_long_description_1000_chars">Hety moduĺ pakazvaje jak izalinii vyšyń tak i reĺjef na standartnych mapach OsmAnd. Hetyja mahčymasci spatrebiacca spartsmienam, turystam, padarožnikam i ŭsim, chto cikavicca strukturaj reĺjefu miascovasci. 
-\n 
-\nHlabaĺnyja dadzienyja (pamiž 70 ° na poŭnačy i 70 ° na poŭdni) hruntujucca na vymiarenniach SRTM (Shuttle Radar Topography Mission) i ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), dadzienych instrumientu vizualizacyi Terra, flahmanskaha spadarožnika sistemy nazirannia Ziamli ad NASA. ASTER — heta vynik sumiesnaj pracy NASA, ministerstva ekanomiki Japonii, ministerstva handliu i pramyslovaści Japonii (METI), ahienctva kasmičnych sistem Japonii (J-spacesystems).</string>
     <string name="map_widget_distancemeasurement">Vymiareńnie adlehłaścі</string>
     <string name="audionotes_location_not_defined">Miescaznachodžannie dlia pryviazki natatki pakuĺ jašče nie vyznačylasia. «Vykarystać miescaznachodžańnie…» kab pryznačyć natatku ŭ vybranym miescy.</string>
     <string name="map_widget_audionotes">Aŭdyjo-natatkі</string>

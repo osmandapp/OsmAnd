@@ -198,8 +198,8 @@ public class FileUtils {
 		return isWriteable;
 	}
 
-	public static boolean isTempFile(OsmandApplication app, String path) {
-		return path != null && path.startsWith(FileUtils.getTempDir(app).getPath());
+	public static boolean isTempFile(@NonNull OsmandApplication app, @Nullable String path) {
+		return path != null && path.startsWith(getTempDir(app).getAbsolutePath());
 	}
 
 	public interface RenameCallback {

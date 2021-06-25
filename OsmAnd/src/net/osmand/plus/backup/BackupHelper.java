@@ -19,6 +19,7 @@ import net.osmand.AndroidNetworkUtils.OnSendRequestsListener;
 import net.osmand.AndroidNetworkUtils.Request;
 import net.osmand.AndroidNetworkUtils.RequestResponse;
 import net.osmand.AndroidUtils;
+import net.osmand.OperationLog;
 import net.osmand.PlatformUtil;
 import net.osmand.StreamWriter;
 import net.osmand.plus.OsmandApplication;
@@ -60,6 +61,7 @@ public class BackupHelper {
 	private final BackupDbHelper dbHelper;
 
 	public static final Log LOG = PlatformUtil.getLog(BackupHelper.class);
+	private static final boolean DEBUG = true;
 
 	public final static String INFO_EXT = ".info";
 
@@ -254,6 +256,19 @@ public class BackupHelper {
 		return app.getSettings().registerBooleanPreference(VERSION_HISTORY_PREFIX + type.name(), true).makeGlobal().makeShared();
 	}
 
+	public static boolean applyItem(@NonNull SettingsItem item, @NonNull String type, @NonNull String name) {
+		String itemFileName = getItemFileName(item);
+		if (item.getType().name().equals(type)) {
+			if (name.equals(itemFileName)) {
+				return true;
+			} else if (item instanceof FileSettingsItem) {
+				FileSettingsItem fileItem = (FileSettingsItem) item;
+				return name.startsWith(fileItem.getSubtype().getSubtypeFolder()) && name.startsWith(itemFileName);
+			}
+		}
+		return false;
+	}
+
 	@NonNull
 	public static String getItemFileName(@NonNull SettingsItem item) {
 		String fileName;
@@ -297,15 +312,18 @@ public class BackupHelper {
 		return fileName;
 	}
 
-	public void registerUser(@NonNull final String email, @Nullable final OnRegisterUserListener listener) {
+	public void registerUser(@NonNull final String email, @Nullable String promoCode, boolean login,
+							 @Nullable final OnRegisterUserListener listener) {
 		Map<String, String> params = new HashMap<>();
 		params.put("email", email);
-		final String orderId = getOrderId();
+		params.put("login", String.valueOf(login));
+		final String orderId = Algorithms.isEmpty(promoCode) ? getOrderId() : promoCode;
 		if (!Algorithms.isEmpty(orderId)) {
 			params.put("orderid", orderId);
 		}
 		final String deviceId = app.getUserAndroidId();
 		params.put("deviceid", deviceId);
+		OperationLog operationLog = new OperationLog("registerUser", DEBUG);
 		AndroidNetworkUtils.sendRequestAsync(app, USER_REGISTER_URL, params, "Register user", false, true, new OnRequestResultListener() {
 			@Override
 			public void onResult(@Nullable String resultJson, @Nullable String error) {
@@ -335,6 +353,7 @@ public class BackupHelper {
 				if (listener != null) {
 					listener.onRegisterUser(status, message, error);
 				}
+				operationLog.finishOperation(status + " " + message);
 			}
 		}, EXECUTOR);
 	}
@@ -351,6 +370,7 @@ public class BackupHelper {
 			params.put("deviceid", androidId);
 		}
 		params.put("token", token);
+		OperationLog operationLog = new OperationLog("registerDevice", DEBUG);
 		AndroidNetworkUtils.sendRequestAsync(app, DEVICE_REGISTER_URL, params, "Register device", false, true, new OnRequestResultListener() {
 			@Override
 			public void onResult(@Nullable String resultJson, @Nullable String error) {
@@ -381,6 +401,7 @@ public class BackupHelper {
 				if (listener != null) {
 					listener.onRegisterDevice(status, message, error);
 				}
+				operationLog.finishOperation(status + " " + message);
 			}
 		}, EXECUTOR);
 	}
@@ -452,6 +473,7 @@ public class BackupHelper {
 		Map<String, String> headers = new HashMap<>();
 		headers.put("Accept-Encoding", "deflate, gzip");
 
+		OperationLog operationLog = new OperationLog("uploadFileSync", DEBUG);
 		String error = AndroidNetworkUtils.uploadFile(UPLOAD_FILE_URL, streamWriter, fileName, true, params, headers,
 				new AbstractProgress() {
 
@@ -486,6 +508,7 @@ public class BackupHelper {
 		if (listener != null) {
 			listener.onFileUploadDone(type, fileName, uploadTime, error);
 		}
+		operationLog.finishOperation(type + " " + fileName + (error != null ? " Error: " + error : " OK"));
 		return error;
 	}
 
@@ -498,6 +521,7 @@ public class BackupHelper {
 		Map<String, String> headers = new HashMap<>();
 		prepareFileUpload(fileName, type, uploadTime, params, headers);
 
+		OperationLog operationLog = new OperationLog("uploadFile", DEBUG);
 		AndroidNetworkUtils.uploadFileAsync(UPLOAD_FILE_URL, streamWriter, fileName, true, params, headers, new OnFileUploadCallback() {
 
 			@Override
@@ -516,6 +540,7 @@ public class BackupHelper {
 
 			@Override
 			public void onFileUploadDone(@Nullable String error) {
+				operationLog.finishOperation(type + " " + fileName + (error != null ? " Error: " + error : " OK"));
 				if (error == null) {
 					updateFileUploadTime(type, fileName, uploadTime);
 				}
@@ -540,6 +565,7 @@ public class BackupHelper {
 			localFileMap.put(localFile.file, localFile);
 		}
 		AndroidNetworkUtils.uploadFilesAsync(UPLOAD_FILE_URL, new ArrayList<>(localFileMap.keySet()), true, params, headers, new OnFilesUploadCallback() {
+			OperationLog operationLog;
 			@Nullable
 			@Override
 			public Map<String, String> getAdditionalParams(@NonNull File file) {
@@ -556,6 +582,9 @@ public class BackupHelper {
 
 			@Override
 			public void onFileUploadProgress(@NonNull File file, int progress) {
+				if (progress == 0) {
+					operationLog = new OperationLog("uploadFile", DEBUG);
+				}
 				if (listener != null) {
 					listener.onFileUploadProgress(file, progress);
 				}
@@ -563,6 +592,9 @@ public class BackupHelper {
 
 			@Override
 			public void onFileUploadDone(@NonNull File file) {
+				if (operationLog != null) {
+					operationLog.finishOperation(file.getName());
+				}
 				LocalFile localFile = localFileMap.get(file);
 				if (localFile != null) {
 					updateFileUploadTime(localFile.item.getType().name(), localFile.getFileName(true), localFile.uploadTime);
@@ -609,11 +641,20 @@ public class BackupHelper {
 			filesMap.put(r, remoteFile);
 		}
 		AndroidNetworkUtils.sendRequestsAsync(null, requests, new OnSendRequestsListener() {
+			OperationLog operationLog;
+			@Override
+			public void onRequestSending(@NonNull Request request) {
+				operationLog = new OperationLog("deleteFile", DEBUG);
+			}
+
 			@Override
 			public void onRequestSent(@NonNull RequestResponse response) {
 				if (listener != null) {
 					RemoteFile remoteFile = filesMap.get(response.getRequest());
 					if (remoteFile != null) {
+						if (operationLog != null) {
+							operationLog.finishOperation(remoteFile.getName());
+						}
 						listener.onFileDeleteProgress(remoteFile);
 					}
 				}
@@ -682,6 +723,7 @@ public class BackupHelper {
 
 	private OnRequestResultListener getDownloadFileListListener(@Nullable OnDownloadFileListListener listener) {
 		return new OnRequestResultListener() {
+			final OperationLog operationLog = new OperationLog("downloadFileList", DEBUG);
 			@Override
 			public void onResult(@Nullable String resultJson, @Nullable String error) {
 				int status;
@@ -701,8 +743,8 @@ public class BackupHelper {
 							remoteFiles.add(new RemoteFile(allFiles.getJSONObject(i)));
 						}
 						status = STATUS_SUCCESS;
-						message = "Total files: " + totalFiles + "\n" +
-								"Total zip size: " + AndroidUtils.formatSize(app, Long.parseLong(totalZipSize)) + "\n" +
+						message = "Total files: " + totalFiles + " " +
+								"Total zip size: " + AndroidUtils.formatSize(app, Long.parseLong(totalZipSize)) + " " +
 								"Total file versions: " + totalFileVersions;
 					} catch (JSONException | ParseException e) {
 						status = STATUS_PARSE_JSON_ERROR;
@@ -712,6 +754,7 @@ public class BackupHelper {
 					status = STATUS_EMPTY_RESPONSE_ERROR;
 					message = "Download file list error: empty response";
 				}
+				operationLog.finishOperation("(" + status + "): " + message);
 				if (listener != null) {
 					listener.onDownloadFileList(status, message, remoteFiles);
 				}
@@ -863,6 +906,7 @@ public class BackupHelper {
 		params.put("accessToken", getAccessToken());
 		AndroidNetworkUtils.downloadFiles(DOWNLOAD_FILE_URL,
 				new ArrayList<>(filesMap.keySet()), params, new OnFilesDownloadCallback() {
+					OperationLog operationLog;
 					@Nullable
 					@Override
 					public Map<String, String> getAdditionalParams(@NonNull File file) {
@@ -875,6 +919,9 @@ public class BackupHelper {
 
 					@Override
 					public void onFileDownloadProgress(@NonNull File file, int percent) {
+						if (percent == 0) {
+							operationLog = new OperationLog("downloadFile", DEBUG);
+						}
 						if (listener != null) {
 							listener.onFileDownloadProgress(filesMap.get(file), percent);
 						}
@@ -882,6 +929,9 @@ public class BackupHelper {
 
 					@Override
 					public void onFileDownloadDone(@NonNull File file) {
+						if (operationLog != null) {
+							operationLog.finishOperation(file.getName());
+						}
 						if (listener != null) {
 							listener.onFileDownloaded(file);
 						}
@@ -915,6 +965,7 @@ public class BackupHelper {
 		params.put("accessToken", getAccessToken());
 		AndroidNetworkUtils.downloadFilesAsync(DOWNLOAD_FILE_URL,
 				new ArrayList<>(filesMap.keySet()), params, new OnFilesDownloadCallback() {
+					OperationLog operationLog;
 					@Nullable
 					@Override
 					public Map<String, String> getAdditionalParams(@NonNull File file) {
@@ -927,6 +978,9 @@ public class BackupHelper {
 
 					@Override
 					public void onFileDownloadProgress(@NonNull File file, int percent) {
+						if (percent == 0) {
+							operationLog = new OperationLog("downloadFile", DEBUG);
+						}
 						if (listener != null) {
 							listener.onFileDownloadProgress(filesMap.get(file), percent);
 						}
@@ -934,6 +988,9 @@ public class BackupHelper {
 
 					@Override
 					public void onFileDownloadDone(@NonNull File file) {
+						if (operationLog != null) {
+							operationLog.finishOperation(file.getName());
+						}
 						if (listener != null) {
 							listener.onFileDownloaded(file);
 						}
@@ -957,6 +1014,7 @@ public class BackupHelper {
 
 	@SuppressLint("StaticFieldLeak")
 	public void collectLocalFiles(@Nullable final OnCollectLocalFilesListener listener) {
+		OperationLog operationLog = new OperationLog("collectLocalFiles", DEBUG);
 		AsyncTask<Void, LocalFile, List<LocalFile>> task = new AsyncTask<Void, LocalFile, List<LocalFile>>() {
 
 			@Override
@@ -1020,6 +1078,7 @@ public class BackupHelper {
 
 			@Override
 			protected void onPostExecute(List<LocalFile> localFiles) {
+				operationLog.finishOperation(" Files=" + localFiles.size());
 				if (listener != null) {
 					listener.onFilesCollected(localFiles);
 				}
@@ -1085,6 +1144,7 @@ public class BackupHelper {
 								   @NonNull final List<RemoteFile> deletedRemoteFiles,
 								   @Nullable final OnGenerateBackupInfoListener listener) {
 
+		OperationLog operationLog = new OperationLog("generateBackupInfo", DEBUG, 200);
 		final long backupLastUploadedTime = settings.BACKUP_LAST_UPLOADED_TIME.get();
 
 		AsyncTask<Void, Void, BackupInfo> task = new AsyncTask<Void, Void, BackupInfo>() {
@@ -1149,6 +1209,7 @@ public class BackupHelper {
 
 			@Override
 			protected void onPostExecute(BackupInfo backupInfo) {
+				operationLog.finishOperation(backupInfo.toString());
 				if (listener != null) {
 					listener.onBackupInfoGenerated(backupInfo, null);
 				}

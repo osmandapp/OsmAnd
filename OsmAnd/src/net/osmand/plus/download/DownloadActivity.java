@@ -51,8 +51,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.base.BottomSheetDialogFragment;
-import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
-import net.osmand.plus.chooseplan.ChoosePlanDialogFragment.ChoosePlanDialogType;
+import net.osmand.plus.chooseplan.OsmAndFeature;
+import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.ReloadIndexesTask.ReloadIndexesListener;
 import net.osmand.plus.download.ui.ActiveDownloadsDialogFragment;
@@ -357,12 +357,12 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 
 	@Override
 	@UiThread
-	public void newDownloadIndexes() {
+	public void onUpdatedIndexesList() {
 		visibleBanner.updateBannerInProgress();
 		for (WeakReference<Fragment> ref : fragSet) {
 			Fragment f = ref.get();
 			if (f instanceof DownloadEvents && f.isAdded()) {
-				((DownloadEvents) f).newDownloadIndexes();
+				((DownloadEvents) f).onUpdatedIndexesList();
 			}
 		}
 		downloadHasFinished();
@@ -408,7 +408,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 					collapseBanner();
 				} else {
 					ctx.getMyApplication().logEvent("click_free_dialog");
-					ChoosePlanDialogFragment.showDialogInstance(ctx.getMyApplication(), ctx.getSupportFragmentManager(), ChoosePlanDialogType.FREE_VERSION);
+					ChoosePlanFragment.showInstance(ctx, OsmAndFeature.UNLIMITED_MAP_DOWNLOADS);
 				}
 			}
 		};
@@ -585,7 +585,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 				if (!Algorithms.isEmpty(warnings)) {
 					app.showToastMessage(AndroidUtils.formatWarnings(warnings).toString());
 				}
-				newDownloadIndexes();
+				onUpdatedIndexesList();
 			}
 		});
 		reloadIndexesTask.executeOnExecutor(singleThreadExecutor);

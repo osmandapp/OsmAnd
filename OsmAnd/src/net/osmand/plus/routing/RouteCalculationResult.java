@@ -290,16 +290,22 @@ public class RouteCalculationResult {
 	}
 
 	public List<RouteSegmentResult> getOriginalRoute(int startIndex) {
-		return getOriginalRoute(startIndex, segments.size());
+		return getOriginalRoute(startIndex, segments.size(), true);
 	}
 
-	public List<RouteSegmentResult> getOriginalRoute(int startIndex, int endIndex) {
+	public List<RouteSegmentResult> getOriginalRoute(int startIndex, boolean includeFirstSegment) {
+		return getOriginalRoute(startIndex, segments.size(), includeFirstSegment);
+	}
+
+	public List<RouteSegmentResult> getOriginalRoute(int startIndex, int endIndex, boolean includeFirstSegment) {
 		if (segments.size() == 0) {
 			return null;
 		}
 		List<RouteSegmentResult> list = new ArrayList<>();
-		list.add(segments.get(startIndex++));
-		for (int i = startIndex; i < endIndex; i++) {
+		if (includeFirstSegment) {
+			list.add(segments.get(startIndex));
+		}
+		for (int i = ++startIndex; i < endIndex; i++) {
 			if (segments.get(i - 1) != segments.get(i)) {
 				list.add(segments.get(i));
 			}
@@ -1174,6 +1180,13 @@ public class RouteCalculationResult {
 	
 	public boolean directionsAvailable(){
 		return currentDirectionInfo < directions.size();
+	}
+
+	public RouteDirectionInfo getCurrentDirection() {
+		if (currentDirectionInfo < directions.size()) {
+			return directions.get(currentDirectionInfo);
+		}
+		return null;
 	}
 	
 	public int getDistanceToPoint(int locationIndex) {

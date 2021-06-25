@@ -24,7 +24,6 @@ import net.osmand.plus.backup.NetworkSettingsHelper.BackupCollectListener;
 import net.osmand.plus.backup.PrepareBackupResult;
 import net.osmand.plus.backup.RemoteFile;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
-import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.fragments.ImportCompleteFragment;
 import net.osmand.plus.settings.fragments.ImportSettingsFragment;
@@ -109,7 +108,7 @@ public class RestoreSettingsFragment extends ImportSettingsFragment {
 		toolbarLayout.setTitle(getString(toolbarTitleRes));
 		description.setText(UiUtilities.createSpannableString(
 				String.format(getString(descriptionRes), getString(R.string.osmand_cloud)),
-				new StyleSpan(Typeface.BOLD), getString(R.string.osmand_cloud)
+				Typeface.BOLD, getString(R.string.osmand_cloud)
 		));
 		buttonsContainer.setVisibility(View.GONE);
 		progressBar.setVisibility(View.VISIBLE);
@@ -131,17 +130,8 @@ public class RestoreSettingsFragment extends ImportSettingsFragment {
 			@Nullable
 			private SettingsItem getRestoreItem(@NonNull List<SettingsItem> items, @NonNull RemoteFile remoteFile) {
 				for (SettingsItem item : items) {
-					String itemFileName = BackupHelper.getItemFileName(item);
-					if (item.getType().name().equals(remoteFile.getType())) {
-						if (remoteFile.getName().equals(itemFileName)) {
-							return item;
-						} else if (item instanceof FileSettingsItem) {
-							FileSettingsItem fileItem = (FileSettingsItem) item;
-							if (remoteFile.getName().startsWith(fileItem.getSubtype().getSubtypeFolder())
-									&& remoteFile.getName().startsWith(itemFileName)) {
-								return item;
-							}
-						}
+					if (BackupHelper.applyItem(item, remoteFile.getType(), remoteFile.getName())) {
+						return item;
 					}
 				}
 				return null;

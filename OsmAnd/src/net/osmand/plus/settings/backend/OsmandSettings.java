@@ -777,7 +777,24 @@ public class OsmandSettings {
 
 	public final CommonPreference<Integer> NUMBER_OF_STARTS_FIRST_XMAS_SHOWN = new IntPreference(this, "number_of_starts_first_xmas_shown", 0).makeGlobal();
 
-	public final OsmandPreference<String> AVAILABLE_APP_MODES = new StringPreference(this, "available_application_modes", "car,bicycle,pedestrian,public_transport,").makeGlobal().makeShared().cache();
+	public final OsmandPreference<String> AVAILABLE_APP_MODES = new StringPreference(this, "available_application_modes", "car,bicycle,pedestrian,public_transport,") {
+
+		@Override
+		public void readFromJson(JSONObject json, ApplicationMode appMode) throws JSONException {
+			Set<String> appModesKeys = Algorithms.decodeStringSet(json.getString(getId()),",");
+			Set<String> nonexistentAppModesKeys = new HashSet<>();
+			for (String appModeKey : appModesKeys) {
+				if (ApplicationMode.valueOfStringKey(appModeKey, null) == null) {
+					nonexistentAppModesKeys.add(appModeKey);
+				}
+			}
+			if (!nonexistentAppModesKeys.isEmpty()) {
+				appModesKeys.removeAll(nonexistentAppModesKeys);
+			}
+			set(parseString(Algorithms.encodeStringSet(appModesKeys, ",")));
+		}
+
+	}.makeGlobal().makeShared().cache();
 
 	public final OsmandPreference<String> LAST_FAV_CATEGORY_ENTERED = new StringPreference(this, "last_fav_category", "").makeGlobal();
 
@@ -2714,14 +2731,14 @@ public class OsmandSettings {
 
 	public static final String VOICE_PROVIDER_NOT_USE = "VOICE_PROVIDER_NOT_USE";
 
-	public static final String[] TTS_AVAILABLE_VOICES = new String[]{
+	public static final String[] TTS_AVAILABLE_VOICES = new String[] {
 			"de", "en", "es", "fr", "it", "ja", "nl", "pl", "pt", "ru", "zh"
 	};
 	// this value string is synchronized with settings_pref.xml preference name
 	// this value could localized
 	public final OsmandPreference<String> VOICE_PROVIDER = new StringPreference(this, "voice_provider", null) {
-		protected String getDefaultValue() {
-
+		@Override
+		public String getProfileDefaultValue(ApplicationMode mode) {
 			Configuration config = ctx.getResources().getConfiguration();
 			for (String lang : TTS_AVAILABLE_VOICES) {
 				if (lang.equals(config.locale.getLanguage())) {
@@ -2955,7 +2972,7 @@ public class OsmandSettings {
 			new EnumStringPreference<>(this, "rate_us_state", RateUsState.INITIAL_STATE, RateUsState.values()).makeGlobal();
 
 	public final CommonPreference<String> CUSTOM_APP_MODES_KEYS =
-			new StringPreference(this, "custom_app_modes_keys", "").makeGlobal().makeShared().cache();
+			new StringPreference(this, "custom_app_modes_keys", "").makeGlobal().cache();
 
 	public Set<String> getCustomAppModesKeys() {
 		String appModesKeys = CUSTOM_APP_MODES_KEYS.get();

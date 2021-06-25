@@ -99,11 +99,8 @@ public class WikipediaPoiMenu {
 				downloadThread.runReloadIndexFiles();
 			}
 		}
-		final boolean downloadIndexes = settings.isInternetConnectionAvailable()
-				&& !downloadThread.getIndexes().isDownloadedFromInternet
-				&& !downloadThread.getIndexes().downloadFromInternetFailed;
 
-		if (downloadIndexes) {
+		if (downloadThread.shouldDownloadIndexes()) {
 			adapter.addItem(new ContextMenuItem.ItemBuilder()
 					.setTitleId(R.string.shared_string_download_map, mapActivity)
 					.setDescription(app.getString(R.string.wiki_menu_download_descr))

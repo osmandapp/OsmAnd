@@ -913,9 +913,6 @@
     <string name="recording_error">A felvétel nem sikerült</string>
     <string name="recording_camera_not_available">A kamera nem érhető el</string>
     <string name="shared_string_control_stop">Leállítás</string>
-    <string name="osmand_srtm_long_description_1000_chars">Ez a bővítmény egy szintvonal fedvényt és egy domborzatárnyékolás réteget biztosít, amelyek az OsmAnd normál térképein jelennek meg. Ezt a funkcionalitást nagyon fogják értékelni a sportolók, túrázók, utazók és mindenki, akiket a táj domborzati szerkezete érdekel.
-\n 
-\nA globális adatok (az északi 70° és déli 70° szélesség között) az SRTM (Shuttle Radar Topography Mission) és az ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) mérésein alapulnak, amely a NASA Earsh Observing System zászlóshajójának, a Terra műholdnak a képalkotó berendezése. Az ASTER a NASA, a Japán Gazdasági, Kereskedelmi és Ipari Minisztérium (METI), valamint a Japán Űrügynökség (J-spacesystems) közös projektje.</string>
     <string name="av_widget_action_descr">Alapértelmezett widgetművelet:</string>
     <string name="av_widget_action">Alapértelmezett widgetmód</string>
     <string name="recording_description">Felvétel %1$s %3$s %2$s</string>
@@ -1489,7 +1486,7 @@
     <string name="shared_string_do_not_use">Ne használja</string>
     <string name="shared_string_address">Cím</string>
     <string name="rendering_attr_OSMMapperAssistant_name">OSM térképezősegéd</string>
-    <string name="shared_string_is_open">Nyitva van</string>
+    <string name="shared_string_is_open">Most nyitva van</string>
     <string name="shared_string_manage">Kezelés</string>
     <string name="shared_string_edit">Szerkesztés</string>
     <string name="plugin_touringview_descr">A nézet aktiválása megváltoztatja az OsmAnd térképstílusát „Túra nézet”-re, amely egy speciális, nagy részletezettségű nézet az utazóknak és a hivatásos sofőröknek. 
@@ -1995,7 +1992,7 @@
     <string name="osm_live_banner_desc">Szerezzen korlátlan számú térképletöltést, valamint heti, napi vagy akár óránkénti térképfrissítést.</string>
     <string name="osmand_plus_banner_desc">Korlátlan számú térképletöltés és -frissítés, valamint Wikipédia-bővítmény.</string>
     <string name="si_mi_meters">Mérföld/méter</string>
-    <string name="search_map">Térképek keresése…</string>
+    <string name="search_map">Térkép keresése…</string>
     <string name="first_usage_wizard_desc">Engedélyezd az OsmAndnak a pozíciód meghatározását, hogy letölthető térképet javasolhasson a régióhoz.</string>
     <string name="location_not_found">Hely nem található</string>
     <string name="no_inet_connection">Nincs internetkapcsolat</string>
@@ -2270,7 +2267,7 @@
     <string name="mapillary_action_descr">Ossza meg utcaszintű képeit a Mapillary segítségével.</string>
     <string name="mapillary_widget">Mapillary-widget</string>
     <string name="mapillary_widget_descr">Gyors Mapillary közreműködést tesz lehetővé.</string>
-    <string name="mapillary_descr">Online utcaszintű fényképek mindenkinek. Fedezz fel helyeket, vegyél benne részt, fényképezd le a világot.</string>
+    <string name="mapillary_descr">Online utcaszintű fényképek mindenkinek. Fedezzen fel helyeket, dolgozzon együtt másokkal, örökítse meg a világot.</string>
     <string name="plugin_mapillary_descr">Utcaszintű fényképek mindenkinek. Fedezz fel helyeket, vegyél benne részt, fényképezd le a világot.</string>
     <string name="osmand_extended_description_part4">Síelés
 \nAz OsmAnd sítérkép bővítménye lehetővé teszi a sípályák megjelenítését nehézség szerint, valamint további információkat, mint például a felvonók helyét, és más berendezéseket.</string>
@@ -2424,8 +2421,8 @@
     <string name="waypoints_added_to_map_markers">Útpontok hozzáadva a térképjelölőkhöz</string>
     <string name="wrong_format">Hibás formátum</string>
     <string name="shared_string_road">Út</string>
-    <string name="empty_state_osm_edits">OSM-objektum létrehozása vagy módosítása</string>
-    <string name="empty_state_osm_edits_descr">Hozzon létre vagy módosítson OSM POI-kat, nyisson vagy kommenteljen OSM-jegyzeteket, és működjék közre felvett GPX-nyomvonalakkal.</string>
+    <string name="empty_state_osm_edits">OpenStreetMap-objektum létrehozása vagy módosítása</string>
+    <string name="empty_state_osm_edits_descr">Hozzon létre vagy módosítson az OpenStreetMapen érdekes pontokat (POI-kat), nyisson vagy kommenteljen OSM-jegyzeteket, és működjék közre felvett GPX-nyomvonalakkal.</string>
     <string name="shared_string_deleted">Törölve</string>
     <string name="shared_string_edited">Szerkesztve</string>
     <string name="shared_string_added">Hozzáadva</string>
@@ -2494,7 +2491,7 @@
     <string name="show_closed_notes">Lezárt jegyzetek megjelenítése</string>
     <string name="switch_osm_notes_visibility_desc">OSM-jegyzetek megjelenítése vagy elrejtése a térképen.</string>
     <string name="gpx_file_desc">GPX – megfelelő export a JOSM és más OSM-szerkesztők számára.</string>
-    <string name="osc_file_desc">OSC – megfelelő export az OSM számára.</string>
+    <string name="osc_file_desc">OSC – OpenStreetMapnek megfelelő export.</string>
     <string name="shared_string_gpx_file">GPX-fájl</string>
     <string name="osc_file">OSC-fájl</string>
     <string name="choose_file_type">Fájltípus kijelölése</string>
@@ -4042,15 +4039,15 @@
     <string name="lost_data_warning">Minden nem mentett adat törlődni fog.</string>
     <string name="show_start_dialog">Kezdő párbeszéd megjelenítése</string>
     <string name="trip_recording_show_start_dialog_setting">Ha le van tiltva, akkor a felvétel azonnal elindul a widget vagy a menüelem megérintése után, kihagyva a megerősítő párbeszédpanelt.</string>
-    <string name="release_4_0_beta">• Új lehetőség: szinvonalak letöltése (méter mellett) lábban
+    <string name="release_4_0_beta">• Új lehetőség: szintvonalak letöltése (méter mellett) lábban
 \n
 \n• Útvonaltervezési környezet: hozzáadott fülek a pontok és grafikonok közötti váltáshoz
 \n
-\n• Az OsmAnd Live frissítések átköltöztek a „Letöltések&gt; Frissítések” helyre
+\n• Az OsmAnd Live frissítések átköltöztek a „Letöltések &gt; Frissítések” helyre
 \n
 \n• A nyomvonalak már magasság, sebesség vagy lejtés szerint is színezhetők
 \n
-\n• Módoítható a navigációs útvonal megjelenése
+\n• A navigációs útvonal megjelenése módosítható
 \n
 \n• Frissült az „Utazás felvétele” párbeszédpanel
 \n
@@ -4166,4 +4163,12 @@
     <string name="restore_complete">A visszaállítás befejeződött</string>
     <string name="grey_color_slope">A szürke szín ott fordul elő, ahol a lejtés nincs meghatározva.</string>
     <string name="backup_version_history">Verzióelőzmények</string>
+    <string name="backup_version_history_delete_descr">Törölni szeretné a letiltott típusok módosítási előzményeit a felhőből\?</string>
+    <string name="backup_storage_taken">Foglalt tárhely</string>
+    <string name="delete_version_history">Verziótörténet törlése</string>
+    <string name="routing_attr_avoid_tunnels_description">Alagutak elkerülése</string>
+    <string name="routing_attr_avoid_tunnels_name">Alagutak elkerülése</string>
+    <string name="send_crash_log">Összeomlási napló elküldése</string>
+    <string name="send_logcat_log">Logcat napló elküldése</string>
+    <string name="backup_promocode">Promóciós kód</string>
 </resources>

@@ -6,7 +6,6 @@ import android.os.AsyncTask;
 
 import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.EntityInfo;
-import net.osmand.osm.edit.Node;
 import net.osmand.plus.dialogs.ProgressDialogFragment;
 
 import java.util.HashMap;
@@ -51,12 +50,16 @@ public class UploadOpenstreetmapPointAsyncTask
 
 		boolean uploaded = false;
 		for (OsmPoint point : points) {
-			if (interruptUploading)
+			if (interruptUploading) {
 				break;
+			}
 
 			if (point.getGroup() == OsmPoint.Group.POI) {
 				OpenstreetmapPoint p = (OpenstreetmapPoint) point;
 				EntityInfo entityInfo = null;
+
+				p.trimChangedTagNamesValues();
+
 				if (OsmPoint.Action.CREATE != p.getAction()) {
 					entityInfo = remotepoi.loadEntity(p.getEntity());
 				}
@@ -78,7 +81,7 @@ public class UploadOpenstreetmapPointAsyncTask
 				loadErrorsMap.put(point, errorMessage);
 			}
 		}
-		if(uploaded && closeChangeSet) {
+		if (uploaded && closeChangeSet) {
 			remotepoi.closeChangeSet();
 		}
 

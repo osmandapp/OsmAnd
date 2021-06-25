@@ -1195,9 +1195,6 @@
     <string name="recording_context_menu_precord">Сделать фото</string>
     <string name="dropbox_plugin_description">Синхронизация треков и медиазаметок с вашим аккаунтом Dropbox.</string>
     <string name="dropbox_plugin_name">Плагин Dropbox</string>
-    <string name="osmand_srtm_long_description_1000_chars">Плагин обеспечивает наложение контурных линий и слоя затенения рельефа (отмывки), которые будут отображаться поверх стандартных карт OsmAnd. Эту функцию оценят спортсмены, туристы, путешественники и все, для кого рельеф местности имеет значение.
-\n
-\nГлобальные данные (между 70° на севере и 70° на юге) основываются на измерениях SRTM (Shuttle Radar Topography Mission) и ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), инструментом визуализации Terra, флагманского спутника Земли системы наблюдения NASA. ASTER является результатом совместных усилий NASA, министерства экономики Японии, торговли и промышленности (METI), космических систем Японии (J-spacesystems).</string>
     <string name="recording_photo_description">Фото %1$s %2$s</string>
     <string name="local_indexes_cat_av">Медиаданные</string>
     <string name="stop_routing_confirm">Остановить навигацию\?</string>
@@ -2601,7 +2598,7 @@
 \n • Возможность записи путешествие в фоновом режиме (в то время, как устройство находится в спящем режиме) 
 \n OsmAnd это активно развивающееся программное обеспечение с открытым исходным кодом. Каждый может внести свой вклад в приложение, сообщая об ошибках, улучшая переводы или кодируя новые функции. Кроме того, проект опирается на финансовые взносы для финансирования разработки и тестирования новых функциональных возможностей.
 \n</string>
-    <string name="empty_state_osm_edits">Создайте или измените объекты OSM</string>
+    <string name="empty_state_osm_edits">Создайте или измените объекты OpenStreetMap</string>
     <string name="empty_state_osm_edits_descr">Добавляйте и редактируйте POI, сообщайте о неточностях на карте в OSM-заметках, делитесь записанными треками.</string>
     <string name="shared_string_deleted">Удалено</string>
     <string name="shared_string_edited">Отредактировано</string>
@@ -2650,7 +2647,7 @@
     <string name="show_closed_notes">Показать закрытые заметки</string>
     <string name="switch_osm_notes_visibility_desc">Показать/скрыть заметки OSM на карте.</string>
     <string name="gpx_file_desc">GPX — подходит для экспорта в JOSM и другие OSM редакторы.</string>
-    <string name="osc_file_desc">OSC — подходит для экспорта в OSM.</string>
+    <string name="osc_file_desc">OSC — подходит для экспорта в OpenStreetMap.</string>
     <string name="shared_string_gpx_file">Файл GPX</string>
     <string name="osc_file">OSC файл</string>
     <string name="choose_file_type">Выберите тип файла</string>
@@ -4111,13 +4108,14 @@
     <string name="local_backup_descr">Резервное копирование данных в локальный файл или восстановление из него.</string>
     <string name="backup_into_file">Резервное копирование в файл</string>
     <string name="restore_from_file">Восстановление из файла</string>
-    <string name="osmand_cloud_help_descr">Нужна помощь\? Напишите нам на %1$s</string>
+    <string name="osmand_cloud_help_descr">Нужна помощь\? Напишите нам на
+\n%1$s</string>
     <string name="osmand_cloud_create_account_descr">Введите адрес электронной почты и все ваши данные будут привязаны к нему.
 \nМы вышлем вам проверочный код на указанный адрес электронной почты.</string>
     <string name="osmand_cloud_login_descr">Введите адрес электронной почты, который вы использовали при регистрации. Мы вышлем вам одноразовый пароль, необходимый на следующем шаге.</string>
     <string name="verify_email_address">Подтверждение адреса электронной почты</string>
     <string name="verify_email_address_descr">Мы отправили проверочный код на %1$s, пожалуйста, введите его в поле ниже.</string>
-    <string name="cloud_email_not_registered">Данный адрес электронной почты не был зарегистрирован в Osmand Cloud</string>
+    <string name="cloud_email_not_registered">Данный адрес электронной почты не был зарегистрирован в OsmAnd Cloud</string>
     <string name="cloud_email_already_registered">Учетная запись с данным адресом электронной почты уже зарегистрирована.</string>
     <string name="resend_verification_code">Отправить код повторно</string>
     <string name="verification_code_missing">Я не получил код подтверждения</string>
@@ -4170,4 +4168,11 @@
     <string name="grey_color_slope">Серый цвет используется, когда уклон не определен.</string>
     <string name="backup_storage_taken">Занятое пространство</string>
     <string name="backup_version_history">История версий</string>
+    <string name="backup_version_history_delete_descr">Вы хотите удалить историю изменений для отключенных типов из облака\?</string>
+    <string name="delete_version_history">Удалить историю версий</string>
+    <string name="routing_attr_avoid_tunnels_description">Исключить тоннели</string>
+    <string name="routing_attr_avoid_tunnels_name">Без тоннелей</string>
+    <string name="send_crash_log">Отправить журнал сбоев</string>
+    <string name="send_logcat_log">Отправить журнал logcat</string>
+    <string name="backup_promocode">Промокод</string>
 </resources>

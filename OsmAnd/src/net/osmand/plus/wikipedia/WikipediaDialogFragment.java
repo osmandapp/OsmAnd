@@ -299,7 +299,7 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 		}
 	}
 
-	private Drawable getIcon(int resId) {
+	protected Drawable getIcon(int resId) {
 		int colorId = nightMode ? R.color.ctx_menu_controller_button_text_color_dark_n : R.color.ctx_menu_controller_button_text_color_light_n;
 		return getIcon(resId, colorId);
 	}

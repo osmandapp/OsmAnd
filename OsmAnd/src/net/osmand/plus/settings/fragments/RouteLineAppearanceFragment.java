@@ -7,7 +7,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -282,18 +281,32 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 
 	private void setupScrollListener() {
 		final View scrollView = getBottomScrollView();
-		scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
-			@Override
-			public void onScrollChanged() {
-				boolean scrollToBottomAvailable = scrollView.canScrollVertically(1);
-				if (scrollToBottomAvailable) {
-					showShadowButton();
-				} else {
-					hideShadowButton();
-				}
-				updateHeaderState();
+		scrollView.getViewTreeObserver().addOnScrollChangedListener(() -> {
+			boolean scrollToTopAvailable = scrollView.canScrollVertically(-1);
+			boolean scrollToBottomAvailable = scrollView.canScrollVertically(1);
+			if (scrollToTopAvailable) {
+				showBottomHeaderShadow();
+			} else {
+				hideBottomHeaderShadow();
 			}
+			if (scrollToBottomAvailable) {
+				showShadowButton();
+			} else {
+				hideShadowButton();
+			}
+			updateHeaderState();
 		});
+	}
+
+	private void showBottomHeaderShadow() {
+		OsmandApplication app = getMyApplication();
+		if (app != null) {
+			getBottomContainer().setForeground(app.getUIUtilities().getIcon(R.drawable.bg_contextmenu_shadow));
+		}
+	}
+
+	private void hideBottomHeaderShadow() {
+		getBottomContainer().setForeground(null);
 	}
 
 	private void showShadowButton() {
@@ -372,6 +385,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 	private void setDrawInfoOnRouteLayer(@Nullable PreviewRouteLineInfo drawInfo) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
+			mapActivity.getMapLayers().getPreviewRouteLineLayer().setPreviewRouteLineInfo(drawInfo);
 			mapActivity.getMapLayers().getRouteLayer().setPreviewRouteLineInfo(drawInfo);
 		}
 	}

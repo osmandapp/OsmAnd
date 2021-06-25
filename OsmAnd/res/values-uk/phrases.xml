@@ -3967,4 +3967,8 @@
     <string name="poi_climbing_grade_uiaa_min">Найпростіший маршрут (класифікація UIAA)</string>
     <string name="poi_power_terminal">Термінал живлення</string>
     <string name="poi_fuel_propane">Пропан</string>
+    <string name="poi_power_portal">Портал живлення</string>
+    <string name="poi_memorial_subject">Призначення</string>
+    <string name="poi_picnic_table_no">Стіл для пікніка: ні</string>
+    <string name="poi_picnic_table_yes">Стіл для пікніка: так</string>
 </resources>

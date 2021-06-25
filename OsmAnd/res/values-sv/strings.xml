@@ -889,9 +889,6 @@
     <string name="item_unchecked">ej markerad</string>
     <string name="av_def_action_choose">På förfrågan\?</string>
     <string name="enable_plugin_monitoring_services">Aktivera Trippinspelningspluginen för att använda positionsloggningstjänster (GPX-loggning, online-spårning)</string>
-    <string name="osmand_srtm_long_description_1000_chars">Denna modul erbjuder både ett överlägg med konturlinjer och ett höjdkurvslager som kan visas ovanpå OsmAnds offline-kartor. Denna funktion kommer att uppskattas av idrottsmän, vandrare och alla som är intresserade av höjdskillnader i landskapet.
-\n
-\nDessa globala data (mellan 70 grader norr och 70 grader syd) är baserade på SRTM (Shuttle Radar Topography Mission) och ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), ett bildinstrument på Terra, NASA:s Earth Observing Systems satellit. ASTER är ett samarbete mellan NASA, Japans finansdepartement, Trade and Industry (METI) och Japan Space Systems (J-spacesystems).</string>
     <string name="access_arrival_time">Ankomsttid</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
     <string name="layer_hillshade">Skuggad relief-lager</string>

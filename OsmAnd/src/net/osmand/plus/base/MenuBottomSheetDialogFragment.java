@@ -145,6 +145,11 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 	@ColorRes
 	protected int getActiveColorId() {
+		return getActiveColorId(nightMode);
+	}
+
+	@ColorRes
+	protected static int getActiveColorId(boolean nightMode) {
 		return nightMode ? R.color.osmand_orange : R.color.color_myloc_distance;
 	}
 

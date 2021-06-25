@@ -816,9 +816,6 @@
     <string name="recording_open_external_player">Відкрити зовнішній програвач</string>
     <string name="recording_delete_confirm">Вилучити цей елемент?</string>
     <string name="recording_description">Запис %1$s %3$s %2$s</string>
-    <string name="osmand_srtm_long_description_1000_chars">Це розширення показує як шар горизонталей, так і шар рельєфу поверх звичайних мап OsmAnd. Ця функціональність стане в нагоді спортсменам, туристам, мандрівникам та будь-кому, хто цікавиться структурою рельєфу місцевості.
-\n
-\nВсесвітні дані (між 70° на півночі і 70° на півдні) базуються на вимірюваннях SRTM (Shuttle Radar Topography Mission) і ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), даних інструменту відмальовуванню Terra, флагманського супутника системи спостереження Землі від NASA. ASTER — це підсумок спільної роботи NASA, міністерства економіки Японії, міністерства торгівлі і промисловості Японії (METI), агенції космічних систем Японії (J-spacesystems).</string>
     <string name="map_widget_distancemeasurement">Вимірювання відстаней</string>
     <string name="map_widget_audionotes">Аудіопримітки</string>
     <string name="audionotes_plugin_description">Робіть звуко/світлино/відео примітки під час подорожі використовуючи кнопку мапи або контекстне меню розташування.</string>
@@ -2565,8 +2562,8 @@
     <string name="shared_string_left">Наліво</string>
     <string name="looking_for_tracks_with_waypoints">Пошук треків з шляховими точками</string>
     <string name="shared_string_more_without_dots">Більше</string>
-    <string name="empty_state_osm_edits">Створити або змінити OSM-об\'єкти</string>
-    <string name="empty_state_osm_edits_descr">Створюйте або змінюйте OSM POI, відкривайте або коментуйте примітки OSM та надсилайте записані GPX-файли.</string>
+    <string name="empty_state_osm_edits">Створити або змінити об\'єкти OpenStreetMap</string>
+    <string name="empty_state_osm_edits_descr">Створюйте або змінюйте OpenStreetMap POI, відкривайте або коментуйте примітки OSM та надсилайте записані GPX-файли.</string>
     <string name="shared_string_deleted">Вилучено</string>
     <string name="shared_string_edited">Відредаговано</string>
     <string name="shared_string_added">Додано</string>
@@ -2613,7 +2610,7 @@
     <string name="show_closed_notes">Показати закриті примітки</string>
     <string name="switch_osm_notes_visibility_desc">Показати чи приховати примітки OSM на мапі.</string>
     <string name="gpx_file_desc">GPX — підходить для експорту в JOSM та інші OSM-редактори.</string>
-    <string name="osc_file_desc">OSC — підходить для експорту в OSM.</string>
+    <string name="osc_file_desc">OSC — підходить для експорту в OpenStreetMap.</string>
     <string name="shared_string_gpx_file">GPX-файл</string>
     <string name="osc_file">OSC-файл</string>
     <string name="choose_file_type">Виберіть тип файлу</string>
@@ -4172,4 +4169,11 @@
     <string name="grey_color_slope">Сірий колір застосовується на позначення невизначених схилів.</string>
     <string name="backup_version_history">Історія версій</string>
     <string name="backup_storage_taken">Заповнення сховища</string>
+    <string name="backup_version_history_delete_descr">Хочете видалити історію змін для вимкнених типів із хмари\?</string>
+    <string name="delete_version_history">Видалити журнал версій</string>
+    <string name="routing_attr_avoid_tunnels_description">Уникати тунелів</string>
+    <string name="routing_attr_avoid_tunnels_name">Уникати тунелів</string>
+    <string name="send_crash_log">Надіслати журнал збоїв</string>
+    <string name="send_logcat_log">Надіслати вміст журналу</string>
+    <string name="backup_promocode">Промокод</string>
 </resources>

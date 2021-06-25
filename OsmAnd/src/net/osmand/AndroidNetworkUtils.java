@@ -107,6 +107,7 @@ public class AndroidNetworkUtils {
 	}
 
 	public interface OnSendRequestsListener {
+		void onRequestSending(@NonNull Request request);
 		void onRequestSent(@NonNull RequestResponse response);
 		void onRequestsSent(@NonNull List<RequestResponse> results);
 	}
@@ -122,7 +123,7 @@ public class AndroidNetworkUtils {
 										 @Nullable final OnSendRequestsListener listener,
 										 final Executor executor) {
 
-		new AsyncTask<Void, RequestResponse, List<RequestResponse>>() {
+		new AsyncTask<Void, Object, List<RequestResponse>>() {
 
 			@Override
 			protected List<RequestResponse> doInBackground(Void... params) {
@@ -130,6 +131,7 @@ public class AndroidNetworkUtils {
 				for (Request request : requests) {
 					RequestResponse requestResponse;
 					try {
+						publishProgress(request);
 						final String[] response = {null, null};
 						sendRequest(ctx, request.getUrl(), request.getParameters(),
 								request.getUserOperation(), request.isToastAllowed(), request.isPost(), new OnRequestResultListener() {
@@ -150,9 +152,14 @@ public class AndroidNetworkUtils {
 			}
 
 			@Override
-			protected void onProgressUpdate(RequestResponse... values) {
+			protected void onProgressUpdate(Object... values) {
 				if (listener != null) {
-					listener.onRequestSent(values[0]);
+					Object obj = values[0];
+					if (obj instanceof RequestResponse) {
+						listener.onRequestSent((RequestResponse) obj);
+					} else if (obj instanceof Request) {
+						listener.onRequestSending((Request) obj);
+					}
 				}
 			}
 

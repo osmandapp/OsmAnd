@@ -83,8 +83,8 @@ import net.osmand.plus.myplaces.SplitSegmentDialogFragment;
 import net.osmand.plus.myplaces.TrackActivityFragmentAdapter;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
-import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
+import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
@@ -832,8 +832,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				boolean gpxFileSelected = !isGpxFileSelected(app, gpxFile);
 				app.getSelectedGpxHelper().selectGpxFile(gpxFile, gpxFileSelected, false);
 				if (FileUtils.isTempFile(app, getGpx().path)) {
-					onFileMove(displayHelper.getFile(),
-							new File(app.getAppPath(IndexConstants.GPX_TRAVEL_DIR), displayHelper.getFile().getName()));
+					File file = displayHelper.getFile();
+					onFileMove(file, new File(app.getAppPath(IndexConstants.GPX_TRAVEL_DIR), file.getName()));
 				}
 				updateContent();
 				mapActivity.refreshMap();
