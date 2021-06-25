@@ -23,6 +23,8 @@ import net.osmand.OperationLog;
 import net.osmand.PlatformUtil;
 import net.osmand.StreamWriter;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.api.SQLiteAPI;
+import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
@@ -1058,6 +1060,15 @@ public class BackupHelper {
 		OperationLog operationLog = new OperationLog("collectLocalFiles", DEBUG);
 		AsyncTask<Void, LocalFile, List<LocalFile>> task = new AsyncTask<Void, LocalFile, List<LocalFile>>() {
 
+			BackupDbHelper dbHelper;
+			SQLiteConnection db;
+
+			@Override
+			protected void onPreExecute() {
+				dbHelper = app.getBackupHelper().getDbHelper();
+				db = dbHelper.openConnection(true);
+			}
+
 			@Override
 			protected List<LocalFile> doInBackground(Void... voids) {
 				List<LocalFile> result = new ArrayList<>();
@@ -1095,14 +1106,14 @@ public class BackupHelper {
 				localFile.subfolder = "";
 				localFile.fileName = fileName;
 				localFile.localModifiedTime = lastModifiedTime;
-				UploadedFileInfo info = app.getBackupHelper().getDbHelper().getUploadedFileInfo(item.getType().name(), fileName);
-				if (info != null) {
-					localFile.uploadTime = info.getUploadTime();
+				if (db != null) {
+					UploadedFileInfo info = dbHelper.getUploadedFileInfo(db, item.getType().name(), fileName);
+					if (info != null) {
+						localFile.uploadTime = info.getUploadTime();
+					}
 				}
 				result.add(localFile);
-				if (listener != null) {
-					listener.onFileCollected(localFile);
-				}
+				publishProgress(localFile);
 			}
 
 			private List<SettingsItem> getLocalItems() {
@@ -1119,6 +1130,9 @@ public class BackupHelper {
 
 			@Override
 			protected void onPostExecute(List<LocalFile> localFiles) {
+				if (db != null) {
+					db.close();
+				}
 				operationLog.finishOperation(" Files=" + localFiles.size());
 				if (listener != null) {
 					listener.onFilesCollected(localFiles);
