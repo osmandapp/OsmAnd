@@ -10,7 +10,6 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class BackupDbHelper {
 
@@ -150,35 +149,17 @@ public class BackupDbHelper {
 		return false;
 	}
 
-	public boolean updateUploadedFileInfo(@NonNull UploadedFileInfo info) {
-		SQLiteConnection db = openConnection(false);
-		if (db != null) {
-			try {
-				db.execSQL(
-						"UPDATE " + UPLOADED_FILES_TABLE_NAME + " SET " + UPLOADED_FILE_COL_UPLOAD_TIME + "= ? " +
-								"WHERE " + UPLOADED_FILE_COL_TYPE + " = ? AND " + UPLOADED_FILE_COL_NAME + " = ?",
-						new Object[]{info.uploadTime, info.type, info.name});
-			} finally {
-				db.close();
-			}
-			return true;
-		}
-		return false;
+	private void updateUploadedFileInfo(@NonNull SQLiteConnection db, @NonNull UploadedFileInfo info) {
+		db.execSQL(
+				"UPDATE " + UPLOADED_FILES_TABLE_NAME + " SET " + UPLOADED_FILE_COL_UPLOAD_TIME + "= ? " +
+						"WHERE " + UPLOADED_FILE_COL_TYPE + " = ? AND " + UPLOADED_FILE_COL_NAME + " = ?",
+				new Object[]{info.uploadTime, info.type, info.name});
 	}
 
-	public boolean addUploadedFileInfo(@NonNull UploadedFileInfo info) {
-		SQLiteConnection db = openConnection(false);
-		if (db != null) {
-			try {
-				db.execSQL(
-						"INSERT INTO " + UPLOADED_FILES_TABLE_NAME + " VALUES (?, ?, ?)",
-						new Object[]{info.type, info.name, info.uploadTime});
-			} finally {
-				db.close();
-			}
-			return true;
-		}
-		return false;
+	private void addUploadedFileInfo(@NonNull SQLiteConnection db, @NonNull UploadedFileInfo info) {
+		db.execSQL(
+				"INSERT INTO " + UPLOADED_FILES_TABLE_NAME + " VALUES (?, ?, ?)",
+				new Object[]{info.type, info.name, info.uploadTime});
 	}
 
 	@NonNull
@@ -240,6 +221,24 @@ public class BackupDbHelper {
 			query.close();
 		}
 		return info;
+	}
+
+	public void updateFileUploadTime(@NonNull String type, @NonNull String fileName, long updateTime) {
+		SQLiteConnection db = openConnection(true);
+		if (db != null) {
+			try {
+				UploadedFileInfo info = getUploadedFileInfo(db, type, fileName);
+				if (info != null) {
+					info.setUploadTime(updateTime);
+					updateUploadedFileInfo(db, info);
+				} else {
+					info = new UploadedFileInfo(type, fileName, updateTime);
+					addUploadedFileInfo(db, info);
+				}
+			} finally {
+				db.close();
+			}
+		}
 	}
 
 	@NonNull

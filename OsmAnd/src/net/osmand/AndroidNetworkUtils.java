@@ -555,7 +555,7 @@ public class AndroidNetworkUtils {
 	private static String streamToString(InputStream inputStream) throws IOException {
 		StringBuilder result = new StringBuilder();
 		if (inputStream != null) {
-			BufferedReader in = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"), 256);
+			BufferedReader in = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"), 1024);
 			String buffer;
 			boolean f = true;
 			while ((buffer = in.readLine()) != null) {

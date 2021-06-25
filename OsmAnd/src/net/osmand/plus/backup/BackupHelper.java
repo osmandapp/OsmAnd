@@ -238,15 +238,7 @@ public class BackupHelper {
 	}
 
 	public void updateFileUploadTime(@NonNull String type, @NonNull String fileName, long updateTime) {
-		BackupDbHelper dbHelper = getDbHelper();
-		UploadedFileInfo info = dbHelper.getUploadedFileInfo(type, fileName);
-		if (info != null) {
-			info.setUploadTime(updateTime);
-			dbHelper.updateUploadedFileInfo(info);
-		} else {
-			info = new UploadedFileInfo(type, fileName, updateTime);
-			dbHelper.addUploadedFileInfo(info);
-		}
+		dbHelper.updateFileUploadTime(type, fileName, updateTime);
 	}
 
 	public void updateBackupUploadTime() {
