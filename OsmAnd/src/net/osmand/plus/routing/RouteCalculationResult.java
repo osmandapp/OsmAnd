@@ -717,7 +717,7 @@ public class RouteCalculationResult {
 	 * Remove unnecessary go straight from CloudMade.
 	 * Remove also last direction because it will be added after.
 	 */
-	private void removeUnnecessaryGoAhead(List<RouteDirectionInfo> directions) {
+	public static void removeUnnecessaryGoAhead(List<RouteDirectionInfo> directions) {
 		if (directions != null && directions.size() > 1) {
 			for (int i = 1; i < directions.size();) {
 				RouteDirectionInfo r = directions.get(i);

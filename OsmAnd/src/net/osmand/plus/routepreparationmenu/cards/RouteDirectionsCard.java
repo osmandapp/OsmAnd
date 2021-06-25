@@ -23,6 +23,8 @@ import net.osmand.util.Algorithms;
 
 import java.util.List;
 
+import static net.osmand.plus.routing.RouteCalculationResult.removeUnnecessaryGoAhead;
+
 public class RouteDirectionsCard extends MapBaseCard {
 
 	public RouteDirectionsCard(@NonNull MapActivity mapActivity) {
@@ -43,6 +45,7 @@ public class RouteDirectionsCard extends MapBaseCard {
 
 	private void createRouteDirections(LinearLayout cardsContainer) {
 		List<RouteDirectionInfo> routeDirections = app.getRoutingHelper().getRouteDirections();
+		removeUnnecessaryGoAhead(routeDirections);
 		for (int i = 0; i < routeDirections.size(); i++) {
 			RouteDirectionInfo routeDirectionInfo = routeDirections.get(i);
 			View view = getRouteDirectionView(i, routeDirectionInfo, routeDirections);
