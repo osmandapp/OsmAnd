@@ -246,24 +246,12 @@ public class TravelObfHelper implements TravelHelper {
 			travelGpx.diffElevationDown = Double.parseDouble(Algorithms.emptyIfNull(amenity.getTagContent(DIFF_ELE_DOWN)));
 			String radius = amenity.getTagContent(ROUTE_RADIUS);
 			if (radius != null) {
-				travelGpx.routeRadius = getRadius(radius.charAt(0));
+				travelGpx.routeRadius = MapUtils.convertCharToDist(radius.charAt(0));
 			}
 		} catch (NumberFormatException e) {
 			LOG.debug(e.getMessage(), e);
 		}
 		return travelGpx;
-	}
-
-	/**
-	 * convert char to radius
-	 *
-	 * @param x char where A <= 5 km, B <= 10 km, C <= 50 km, D <= 100 km, E <= 500 km, F <= 1000 km,
-	 *          * G <= 5000 km, H <= 10000 km
-	 * @return radius integer radius in meters
-	 */
-	int getRadius(char x) {
-		int id = x - 'A' + 1;
-		return (int) Math.pow(10, (id / 2)) * (id % 2 == 0 ? 1 : 5) * 1000;
 	}
 
 	@NonNull

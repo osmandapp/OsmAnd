@@ -1660,10 +1660,14 @@ public class GPXUtilities {
 		}
 
 		public QuadRect getRect() {
-			return getRect(0, 0, 0, 0);
+			return getRectAroundPoint(0, 0);
 		}
 
-		public QuadRect getRect(double left, double bottom, double right, double top) {
+		public QuadRect getRectAroundPoint(double lat, double lon) {
+			return getBounds(lon, lat, lon, lat);
+		}
+
+		public QuadRect getBounds(double left, double bottom, double right, double top) {
 			for (Track track : tracks) {
 				for (TrkSegment segment : track.segments) {
 					for (WptPt p : segment.points) {
@@ -1815,34 +1819,9 @@ public class GPXUtilities {
 		}
 
 		public String getOuterRadius() {
-			String outerRadius = "";
 			QuadRect rect = getRect();
-			if (rect.width() > 0.00001 && rect.height() > 0.00001) {
-				WptPt wptPt = findPointToShow();
-				if (wptPt != null) {
-					int radius = (int) Math.max(MapUtils.getDistance(wptPt.lat, wptPt.lon, rect.bottom, rect.left),
-							MapUtils.getDistance(wptPt.lat, wptPt.lon, rect.top, rect.right));
-					outerRadius = getRadiusID(radius);
-				}
-			}
-			return outerRadius;
-		}
-
-		/**
-		 * convert radius to char to store in the obf file
-		 *
-		 * @param radius integer radius in meters
-		 * @return String where  A <= 5 km, B <= 10 km, C <= 50 km, D <= 100 km, E <= 500 km, F <= 1000 km,
-		 * G <= 5000 km, H <= 10000 km
-		 */
-		private String getRadiusID(int radius) {
-			radius = (radius / RADIUS_DIVIDER + 1) * 5;
-			int id = 0;
-			int limit = 5;
-			while ((radius - limit) > 0) {
-				limit *= (id++ & 1) == 0 ? 2 : 5;
-			}
-			return String.valueOf((char) ('A' + id));
+			int radius = (int) MapUtils.getDistance(rect.bottom, rect.left, rect.top, rect.right);
+			return MapUtils.convertDistToChar(radius);
 		}
 
 		private int getItemsToWriteSize() {
