@@ -10,7 +10,7 @@ import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.util.Algorithms;
-import net.osmand.plus.importfiles.ImportHelper.ON_GPX_IMPORT;
+import net.osmand.plus.importfiles.ImportHelper.OnSuccessfulGpxImport;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -25,18 +25,18 @@ class GpxImportTask extends BaseLoadAsyncTask<Void, Void, GPXFile> {
 
 	private final boolean save;
 	private final boolean useImportDir;
-	private final ON_GPX_IMPORT onGpxImport;
+	private final OnSuccessfulGpxImport onGpxImport;
 
 	public GpxImportTask(@NonNull ImportHelper importHelper, @NonNull FragmentActivity activity,
-	                     @NonNull Uri gpxFile, @NonNull String fileName, @Nullable ON_GPX_IMPORT onGpxImport,
+	                     @NonNull Uri gpxFile, @NonNull String fileName, @Nullable OnSuccessfulGpxImport onGpxImport,
 	                     boolean useImportDir, boolean save) {
 		super(activity);
 		this.importHelper = importHelper;
 		this.gpxFile = gpxFile;
 		this.fileName = fileName;
+		this.onGpxImport = onGpxImport;
 		this.save = save;
 		this.useImportDir = useImportDir;
-		this.onGpxImport = onGpxImport;
 	}
 
 	@Override
@@ -63,6 +63,6 @@ class GpxImportTask extends BaseLoadAsyncTask<Void, Void, GPXFile> {
 	@Override
 	protected void onPostExecute(GPXFile result) {
 		hideProgress();
-		importHelper.handleResult(result, fileName, onGpxImport, save, useImportDir, false, fileSize);
+		importHelper.handleResult(result, fileName, onGpxImport, fileSize, save, useImportDir, false);
 	}
 }

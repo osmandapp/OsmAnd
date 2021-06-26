@@ -114,7 +114,7 @@ public class ImportHelper {
 		}
 	}
 
-	public enum ON_GPX_IMPORT {
+	public enum OnSuccessfulGpxImport {
 		OPEN_GPX_CONTEXT_MENU,
 		OPEN_PLAN_ROUTE_FRAGMENT
 	}
@@ -148,10 +148,10 @@ public class ImportHelper {
 		handleResult(result, name, fileSize, save, useImportDir, false);
 	}
 
-	public boolean handleGpxImport(final Uri contentUri, final boolean useImportDir, ON_GPX_IMPORT onGpxImport) {
+	public boolean handleGpxImport(final Uri contentUri, OnSuccessfulGpxImport onGpxImport, final boolean useImportDir) {
 		String name = getNameFromContentUri(app, contentUri);
-		boolean isOsmandSubdir = Algorithms.isSubDirectory(app.getAppPath(GPX_INDEX_DIR), new File(contentUri.getPath()));
-		if (!isOsmandSubdir && name != null) {
+		boolean isOsmandSubDir = Algorithms.isSubDirectory(app.getAppPath(GPX_INDEX_DIR), new File(contentUri.getPath()));
+		if (!isOsmandSubDir && name != null) {
 			String nameLC = name.toLowerCase();
 			if (nameLC.endsWith(GPX_FILE_EXT)) {
 				name = name.substring(0, name.length() - GPX_FILE_EXT.length()) + GPX_FILE_EXT;
@@ -238,7 +238,7 @@ public class ImportHelper {
 		}
 	}
 
-	private void handleGpxImport(@NonNull Uri gpxFile, @NonNull String fileName, @Nullable ON_GPX_IMPORT onGpxImport,
+	private void handleGpxImport(@NonNull Uri gpxFile, @NonNull String fileName, @Nullable OnSuccessfulGpxImport onGpxImport,
 	                             boolean useImportDir, boolean save) {
 		executeImportTask(new GpxImportTask(this, activity, gpxFile, fileName, onGpxImport, useImportDir, save));
 	}
@@ -418,10 +418,13 @@ public class ImportHelper {
 
 	protected void handleResult(GPXFile result, String name, long fileSize, boolean save,
 								boolean useImportDir, boolean forceImportFavourites) {
-		handleResult(result, name, ON_GPX_IMPORT.OPEN_GPX_CONTEXT_MENU, save, useImportDir, forceImportFavourites, fileSize);
+		handleResult(result, name, OnSuccessfulGpxImport.OPEN_GPX_CONTEXT_MENU, fileSize, save, useImportDir,
+				forceImportFavourites);
 	}
 
-	protected void handleResult(final GPXFile result, final String name, ON_GPX_IMPORT onGpxImport, final boolean save, final boolean useImportDir, boolean forceImportFavourites, long fileSize) {
+	protected void handleResult(final GPXFile result, final String name, OnSuccessfulGpxImport onGpxImport,
+	                            long fileSize, final boolean save, final boolean useImportDir,
+	                            boolean forceImportFavourites) {
 		if (result != null) {
 			if (result.error != null) {
 				app.showToastMessage(result.error.getMessage());
@@ -433,9 +436,9 @@ public class ImportHelper {
 					String existingFilePath = getExistingFilePath(name, fileSize);
 					if (existingFilePath != null) {
 						app.showToastMessage(R.string.file_already_imported);
-						if (onGpxImport == ON_GPX_IMPORT.OPEN_GPX_CONTEXT_MENU) {
+						if (onGpxImport == OnSuccessfulGpxImport.OPEN_GPX_CONTEXT_MENU) {
 							showGpxContextMenu(existingFilePath);
-						} else if (onGpxImport == ON_GPX_IMPORT.OPEN_PLAN_ROUTE_FRAGMENT) {
+						} else if (onGpxImport == OnSuccessfulGpxImport.OPEN_PLAN_ROUTE_FRAGMENT) {
 							showPlanRouteFragment(result);
 						}
 					} else {
@@ -561,10 +564,10 @@ public class ImportHelper {
 
 		private final GPXFile result;
 		private final String name;
-		private final ON_GPX_IMPORT onGpxImport;
+		private final OnSuccessfulGpxImport onGpxImport;
 		private final boolean useImportDir;
 
-		private SaveAsyncTask(GPXFile result, final String name, ON_GPX_IMPORT onGpxImport, boolean useImportDir) {
+		private SaveAsyncTask(GPXFile result, final String name, OnSuccessfulGpxImport onGpxImport, boolean useImportDir) {
 			this.result = result;
 			this.name = name;
 			this.onGpxImport = onGpxImport;
@@ -604,10 +607,10 @@ public class ImportHelper {
 		}
 	}
 
-	private void showNeededScreen(ON_GPX_IMPORT onGpxImport, @NonNull GPXFile gpxFile) {
-		if (onGpxImport == ON_GPX_IMPORT.OPEN_GPX_CONTEXT_MENU) {
+	private void showNeededScreen(OnSuccessfulGpxImport onGpxImport, @NonNull GPXFile gpxFile) {
+		if (onGpxImport == OnSuccessfulGpxImport.OPEN_GPX_CONTEXT_MENU) {
 			showGpxContextMenu(gpxFile.path);
-		} else if (onGpxImport == ON_GPX_IMPORT.OPEN_PLAN_ROUTE_FRAGMENT) {
+		} else if (onGpxImport == OnSuccessfulGpxImport.OPEN_PLAN_ROUTE_FRAGMENT) {
 			showPlanRouteFragment(gpxFile);
 		}
 	}

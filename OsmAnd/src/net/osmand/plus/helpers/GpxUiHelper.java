@@ -242,9 +242,8 @@ public class GpxUiHelper {
 	}
 
 	public static AlertDialog selectGPXFiles(List<String> selectedGpxList, final Activity activity,
-											 final CallbackWithObject<GPXFile[]> callbackWithObject, 
-											 int dialogThemeRes,
-	                                         boolean nightMode) {
+	                                         final CallbackWithObject<GPXFile[]> callbackWithObject,
+	                                         int dialogThemeRes, boolean nightMode) {
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
 		final List<GPXInfo> orderedAllGpxList = listGpxInfo(app, selectedGpxList, false);
 		if (orderedAllGpxList.size() < 2) {
@@ -263,9 +262,10 @@ public class GpxUiHelper {
 		return allGpxList;
 	}
 
-	public static AlertDialog selectGPXFile(final Activity activity,
-											final boolean showCurrentGpx, final boolean multipleChoice,
-											final CallbackWithObject<GPXFile[]> callbackWithObject, boolean nightMode) {
+	public static AlertDialog selectGPXFile(final Activity activity, final boolean showCurrentGpx,
+	                                        final boolean multipleChoice,
+	                                        final CallbackWithObject<GPXFile[]> callbackWithObject,
+	                                        boolean nightMode) {
 		int dialogThemeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
 		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
@@ -317,7 +317,7 @@ public class GpxUiHelper {
 	}
 
 	private static void fillGpxContextMenuAdapter(ContextMenuAdapter adapter, List<GPXInfo> allGpxFiles,
-												  boolean needSelectItems) {
+	                                              boolean needSelectItems) {
 		for (GPXInfo gpxInfo : allGpxFiles) {
 			adapter.addItem(ContextMenuItem.createBuilder(getGpxTitle(gpxInfo.getFileName()))
 					.setSelected(needSelectItems && gpxInfo.selected)
@@ -408,12 +408,12 @@ public class GpxUiHelper {
 	}
 
 	private static AlertDialog createDialog(final Activity activity,
-											final boolean showCurrentGpx,
-											final boolean multipleChoice,
-											final boolean showAppearanceSetting,
-											final CallbackWithObject<GPXFile[]> callbackWithObject,
-											final List<GPXInfo> gpxInfoList,
-											final ContextMenuAdapter contextMenuAdapter,
+	                                        final boolean showCurrentGpx,
+	                                        final boolean multipleChoice,
+	                                        final boolean showAppearanceSetting,
+	                                        final CallbackWithObject<GPXFile[]> callbackWithObject,
+	                                        final List<GPXInfo> gpxInfoList,
+	                                        final ContextMenuAdapter contextMenuAdapter,
 	                                        final int themeRes,
 	                                        final boolean nightMode) {
 		final OsmandApplication app = (OsmandApplication) activity.getApplication();
@@ -423,9 +423,9 @@ public class GpxUiHelper {
 		final Map<String, String> gpxAppearanceParams = new HashMap<>();
 		final DialogGpxDataItemCallback gpxDataItemCallback = new DialogGpxDataItemCallback(app);
 
-		ArrayList<String> gpxFileNames = new ArrayList<>(Arrays.asList(contextMenuAdapter.getItemNames()));
+		ArrayList<String> modifiableGpxFileNames = new ArrayList<>(Arrays.asList(contextMenuAdapter.getItemNames()));
 		final ArrayAdapter<String> alertDialogAdapter = new ArrayAdapter<String>(activity, layout, R.id.title,
-				gpxFileNames) {
+				modifiableGpxFileNames) {
 
 			@Override
 			public int getItemViewType(int position) {
@@ -892,7 +892,7 @@ public class GpxUiHelper {
 				});
 
 				Uri uri = resultData.getData();
-				importHelper.handleGpxImport(uri, false, null);
+				importHelper.handleGpxImport(uri, null, false);
 			};
 
 			ActivityResultListener listener =
@@ -905,8 +905,8 @@ public class GpxUiHelper {
 	}
 
 	private static void updateGpxDialogAfterImport(final Activity activity,
-												   ArrayAdapter<String> dialogAdapter,
-												   ContextMenuAdapter adapter, List<GPXInfo> allGpxFiles) {
+	                                               ArrayAdapter<String> dialogAdapter,
+	                                               ContextMenuAdapter adapter, List<GPXInfo> allGpxFiles) {
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
 
 		List<String> selectedGpxFiles = new ArrayList<>();

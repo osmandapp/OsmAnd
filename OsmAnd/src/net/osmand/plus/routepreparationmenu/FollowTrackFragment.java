@@ -36,7 +36,7 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.helpers.enums.TracksSortByMode;
 import net.osmand.plus.importfiles.ImportHelper;
-import net.osmand.plus.importfiles.ImportHelper.ON_GPX_IMPORT;
+import net.osmand.plus.importfiles.ImportHelper.OnSuccessfulGpxImport;
 import net.osmand.plus.importfiles.ImportHelper.OnGpxImportCompleteListener;
 import net.osmand.plus.measurementtool.GpxData;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
@@ -505,7 +505,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 						importHelper.setGpxImportCompleteListener(null);
 					}
 				});
-				importHelper.handleGpxImport(uri, true, ON_GPX_IMPORT.OPEN_PLAN_ROUTE_FRAGMENT);
+				importHelper.handleGpxImport(uri, OnSuccessfulGpxImport.OPEN_PLAN_ROUTE_FRAGMENT, true);
 			}
 		} else {
 			super.onActivityResult(requestCode, resultCode, data);

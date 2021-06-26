@@ -23,7 +23,7 @@ import net.osmand.plus.activities.FavoritesTreeFragment;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.importfiles.ImportHelper;
-import net.osmand.plus.importfiles.ImportHelper.ON_GPX_IMPORT;
+import net.osmand.plus.importfiles.ImportHelper.OnSuccessfulGpxImport;
 import net.osmand.plus.importfiles.ImportHelper.OnGpxImportCompleteListener;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -146,7 +146,7 @@ public class FavoritesActivity extends TabActivity {
 
 					}
 				});
-				if (!importHelper.handleGpxImport(uri, false, ON_GPX_IMPORT.OPEN_GPX_CONTEXT_MENU)) {
+				if (!importHelper.handleGpxImport(uri, OnSuccessfulGpxImport.OPEN_GPX_CONTEXT_MENU, false)) {
 					if (gpxFragment!= null) {
 						gpxFragment.finishImport(false);
 					}
