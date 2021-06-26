@@ -181,7 +181,7 @@ public class StartPlanRouteBottomSheet extends BottomSheetBehaviourDialogFragmen
 
 					}
 				});
-				importHelper.handleGpxImport(uri, false, false);
+				importHelper.handleGpxImport(uri, false, ImportHelper.ON_GPX_IMPORT.OPEN_PLAN_ROUTE_FRAGMENT);
 			}
 		} else {
 			super.onActivityResult(requestCode, resultCode, data);

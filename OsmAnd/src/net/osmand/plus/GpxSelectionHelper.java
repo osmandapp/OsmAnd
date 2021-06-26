@@ -510,6 +510,7 @@ public class GpxSelectionHelper {
 		}
 	}
 
+	@Nullable
 	public SelectedGpxFile getSelectedFileByPath(String path) {
 		List<SelectedGpxFile> newList = new ArrayList<>(selectedGPXFiles);
 		for (SelectedGpxFile s : newList) {

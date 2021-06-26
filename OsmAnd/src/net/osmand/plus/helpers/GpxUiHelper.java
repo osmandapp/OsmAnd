@@ -898,7 +898,7 @@ public class GpxUiHelper {
 					(resultCode, resultData) -> {
 				if (resultCode == Activity.RESULT_OK && resultData != null) {
 					Uri uri = resultData.getData();
-					if (mapActivity.getImportHelper().handleGpxImport(uri, false)) {
+					if (mapActivity.getImportHelper().handleGpxImport(uri, false, null)) {
 						updateGpxDialogAfterImport(activity, listAdapter, adapter, allGpxFiles);
 					}
 				}
