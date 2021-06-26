@@ -4179,4 +4179,5 @@
     <string name="routing_attr_avoid_tunnels_name">Sen tuneloj</string>
     <string name="send_crash_log">Sendi pane-protokolon</string>
     <string name="send_logcat_log">Sendi logcat-erar-protokolon</string>
+    <string name="backup_promocode">Reklamkodo</string>
 </resources>
