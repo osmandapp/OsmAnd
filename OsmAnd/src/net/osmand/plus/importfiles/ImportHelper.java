@@ -442,7 +442,7 @@ public class ImportHelper {
 						executeImportTask(new SaveAsyncTask(result, name, onGpxImport, useImportDir));
 					}
 				} else {
-					showAppropriateScreen(onGpxImport, result);
+					showNeededScreen(onGpxImport, result);
 				}
 				if (gpxImportCompleteListener != null) {
 					gpxImportCompleteListener.onImportComplete(true);
@@ -580,17 +580,18 @@ public class ImportHelper {
 		protected void onPostExecute(final String warning) {
 			boolean success = Algorithms.isEmpty(warning);
 
-			if (gpxImportCompleteListener != null) {
-				gpxImportCompleteListener.onSaveComplete(success, result);
-			}
 			if (success) {
 				SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(result.path);
 				if (selectedGpxFile != null) {
 					selectedGpxFile.setGpxFile(result, app);
 				}
-				showAppropriateScreen(onGpxImport, result);
+				showNeededScreen(onGpxImport, result);
 			} else {
 				app.showToastMessage(warning);
+			}
+
+			if (gpxImportCompleteListener != null) {
+				gpxImportCompleteListener.onSaveComplete(success, result);
 			}
 		}
 	}
@@ -603,7 +604,7 @@ public class ImportHelper {
 		}
 	}
 
-	private void showAppropriateScreen(ON_GPX_IMPORT onGpxImport, @NonNull GPXFile gpxFile) {
+	private void showNeededScreen(ON_GPX_IMPORT onGpxImport, @NonNull GPXFile gpxFile) {
 		if (onGpxImport == ON_GPX_IMPORT.OPEN_GPX_CONTEXT_MENU) {
 			showGpxContextMenu(gpxFile.path);
 		} else if (onGpxImport == ON_GPX_IMPORT.OPEN_PLAN_ROUTE_FRAGMENT) {

@@ -891,19 +891,35 @@ public class GpxUiHelper {
 	}
 
 	@TargetApi(Build.VERSION_CODES.KITKAT)
-	private static void addTrack(final Activity activity, ArrayAdapter<String> listAdapter, ContextMenuAdapter adapter, List<GPXInfo> allGpxFiles) {
+	private static void addTrack(final Activity activity, ArrayAdapter<String> listAdapter,
+	                             ContextMenuAdapter contextMenuAdapter, List<GPXInfo> allGpxFiles) {
 		if (activity instanceof MapActivity) {
 			final MapActivity mapActivity = (MapActivity) activity;
-			ActivityResultListener listener = new ActivityResultListener(OPEN_GPX_DOCUMENT_REQUEST,
-					(resultCode, resultData) -> {
-				if (resultCode == Activity.RESULT_OK && resultData != null) {
-					Uri uri = resultData.getData();
-					if (mapActivity.getImportHelper().handleGpxImport(uri, false, null)) {
-						updateGpxDialogAfterImport(activity, listAdapter, adapter, allGpxFiles);
-					}
+			ActivityResultListener.OnActivityResultListener onActivityResultListener = (resultCode, resultData) -> {
+				if (resultCode != Activity.RESULT_OK || resultData == null) {
+					return;
 				}
-			});
 
+				ImportHelper importHelper = mapActivity.getImportHelper();
+				importHelper.setGpxImportCompleteListener(new ImportHelper.OnGpxImportCompleteListener() {
+					@Override
+					public void onImportComplete(boolean success) {
+					}
+
+					@Override
+					public void onSaveComplete(boolean success, GPXFile result) {
+						if (success) {
+							updateGpxDialogAfterImport(activity, listAdapter, contextMenuAdapter, allGpxFiles);
+						}
+					}
+				});
+
+				Uri uri = resultData.getData();
+				mapActivity.getImportHelper().handleGpxImport(uri, false, null);
+			};
+
+			ActivityResultListener listener =
+					new ActivityResultListener(OPEN_GPX_DOCUMENT_REQUEST, onActivityResultListener);
 			Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
 			intent.setType("*/*");
 			mapActivity.registerActivityResultListener(listener);
