@@ -2563,8 +2563,8 @@
     <string name="appearance_on_the_map">Aspecto en el mapa</string>
     <string name="looking_for_tracks_with_waypoints">Buscando trazas con puntos de referencia</string>
     <string name="shared_string_more_without_dots">Más</string>
-    <string name="empty_state_osm_edits">Crear o modificar objetos OSM</string>
-    <string name="empty_state_osm_edits_descr">Crea o modifica puntos de interés, abre o comenta notas de OSM y contribuye con grabaciones GPX.</string>
+    <string name="empty_state_osm_edits">Crear o modificar objetos de OpenStreetMap</string>
+    <string name="empty_state_osm_edits_descr">Crea o modifica puntos de interés, abre o comenta notas de OpenStreetMap y contribuye con grabaciones GPX.</string>
     <string name="shared_string_deleted">Borrado</string>
     <string name="shared_string_edited">Editado</string>
     <string name="shared_string_added">Añadido</string>
@@ -2610,7 +2610,7 @@
     <string name="show_closed_notes">Mostrar notas de OSM cerradas</string>
     <string name="switch_osm_notes_visibility_desc">Mostrar u ocultar notas de OSM en el mapa.</string>
     <string name="gpx_file_desc">GPX - adecuado para exportar a JOSM u otros editores OSM.</string>
-    <string name="osc_file_desc">OSC - adecuado para exportar a OSM.</string>
+    <string name="osc_file_desc">OSC - adecuado para exportar a OpenStreetMap.</string>
     <string name="shared_string_gpx_file">Archivo GPX</string>
     <string name="osc_file">Archivo OSC</string>
     <string name="choose_file_type">Elegir tipo de archivo</string>
@@ -3549,10 +3549,10 @@
     <string name="extra_maps_menu_group">Mapas adicionales</string>
     <string name="download_unsupported_action">Acción «%1$s» no admitida</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
-    <string name="osm_live_payment_subscription_management">El pago será cargado a la cuenta de Google Play al confirmar la compra. 
-\n 
-\nLa suscripción se renueva automáticamente a menos que se cancele antes de la fecha de renovación. Se le cobrará a su cuenta el período de renovación (mes/trimestre/año) sólo en la fecha de renovación. 
-\n 
+    <string name="osm_live_payment_subscription_management">El pago será cargado a la cuenta de Google Play al confirmar la compra.
+\n
+\nLa suscripción se renueva automáticamente a menos que se cancele antes de la fecha de renovación. Se le cobrará a su cuenta el período de renovación (mes/trimestre/año) sólo en la fecha de renovación.
+\n
 \nPuedes administrar y cancelar las suscripciones accediendo a los ajustes de Google Play.</string>
     <string name="search_poi_types">Buscar por tipos de PDI</string>
     <string name="search_poi_types_descr">Combina tipos de PDI de diferentes categorías. Pulsa «Alternar» para marcar todo y el lado izquierdo para elegir una categoría.</string>
@@ -3906,7 +3906,7 @@
     <string name="profile_type_user_string">Perfil de usuario</string>
     <string name="reverse_all_points">Invertir todos los puntos</string>
     <string name="profile_by_default_description">Elige el perfil que será usado al iniciar la aplicación.</string>
-    <string name="shared_string_last_used">Usado por última vez</string>
+    <string name="shared_string_last_used">Último usado</string>
     <string name="routing_attr_prefer_hiking_routes_description">Prefiere rutas de senderismo</string>
     <string name="routing_attr_prefer_hiking_routes_name">Preferir rutas de senderismo</string>
     <string name="routing_attr_allow_streams_description">Permite arroyos y desagües</string>
@@ -4167,9 +4167,16 @@
     <string name="restore_from_osmand_cloud">Restaurar desde OsmAnd Cloud</string>
     <string name="choose_what_to_restore">Elige qué restaurar.</string>
     <string name="restore_selected_data">Restaurar datos marcados</string>
-    <string name="receiving_data_from_server">Recibir datos del servidor</string>
+    <string name="receiving_data_from_server">Recibiendo datos del servidor</string>
     <string name="restore_complete">Restauración completa</string>
     <string name="grey_color_slope">El color gris se usa al no estar definida la pendiente.</string>
     <string name="backup_version_history">Historial de versiones</string>
-    <string name="backup_storage_taken">Almacenamiento tomado</string>
+    <string name="backup_storage_taken">Almacenamiento usado</string>
+    <string name="backup_version_history_delete_descr">¿Borrar el historial de cambios en la nube de los tipos desactivados\?</string>
+    <string name="delete_version_history">Borrar el historial de versiones</string>
+    <string name="routing_attr_avoid_tunnels_description">Evita los túneles</string>
+    <string name="routing_attr_avoid_tunnels_name">Evitar túneles</string>
+    <string name="backup_promocode">Código promocional</string>
+    <string name="send_crash_log">Enviar informe de errores</string>
+    <string name="send_logcat_log">Enviar informe de logcat</string>
 </resources>

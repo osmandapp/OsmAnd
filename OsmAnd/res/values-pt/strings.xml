@@ -75,7 +75,7 @@
     <string name="show_point_options">Usar localização…</string>
     <string name="renderer_load_sucess">O motor de renderização foi carregado</string>
     <string name="renderer_load_exception">Não foi possível carregar o renderizador.</string>
-    <string name="renderers">Renderizadores de vetor</string>
+    <string name="renderers">Renderizadores vetoriais</string>
     <string name="renderers_descr">Escolha a aparência de renderização</string>
     <string name="poi_context_menu_website">Mostrar o site do POI</string>
     <string name="poi_context_menu_call">Mostrar o número de telefone do POI</string>
@@ -1290,7 +1290,7 @@
     <string name="no_internet_connection">Não é possível descarregar. Verifique se tem ligação à Internet.</string>
     <string name="everything_up_to_date">Todos os ficheiros foram atualizados</string>
     <string name="use_opengl_render">Usar o renderizador OpenGL</string>
-    <string name="home_button">Início</string>
+    <string name="home_button">Casa</string>
     <string name="map_update">Estão disponíveis alterações em %1$s mapas</string>
     <string name="search_for">Procurar por</string>
     <string name="shared_string_show_all">Mostrar tudo</string>
@@ -1572,7 +1572,7 @@
     <string name="dashboard_or_drawer_description">Há uma nova opção para controlar principalmente a aplicação através do painel de controlo flexível ou um menu estático. A sua escolha pode ser alterada nas configurações do painel.</string>
     <string name="dashboard_or_drawer_title">Painel de controlo ou menu de controlo</string>
     <string name="only_download_over_wifi">Descarregar apenas em Wi-Fi</string>
-    <string name="live_update">Atualização ao vivo</string>
+    <string name="live_update">Atualização Live (cada hora)</string>
     <string name="update_now">Atualizar agora</string>
     <string name="missing_write_external_storage_permission">OsmAnd não tem permissão para usar o cartão de memória</string>
     <string name="last_update">Última atualização: %s</string>
@@ -1795,7 +1795,7 @@
     <string name="current_track">Trilho atual</string>
     <string name="map_widget_battery">Nível da bateria</string>
     <string name="change_markers_position">Mover marcador</string>
-    <string name="move_marker_bottom_sheet_title">Mover o mapa para alterar a posição do marcador</string>
+    <string name="move_marker_bottom_sheet_title">Desloque o mapa para alterar a posição do marcador</string>
     <!-- string name="lat_lon_pattern">Lat: %1$.5f Lon: %2$.5f</string -->
     <string name="follow_us">Siga-nos</string>
     <string name="skip_map_downloading">Ignorar o descarregamento de mapas</string>
@@ -1829,7 +1829,7 @@
     <string name="remove_from_map_markers">Remover dos \'Marcadores do mapa\'</string>
     <string name="descendingly">Z-A</string>
     <string name="ascendingly">A-Z</string>
-    <string name="date_added">Adicionado</string>
+    <string name="date_added">Data de adicionado</string>
     <string name="order_by">Ordenar por:</string>
     <string name="marker_show_distance_descr">Selecionar como indicar a distância e a direção para os marcadores no mapa:</string>
     <string name="map_orientation_change_in_accordance_with_speed">Limite para orientação do mapa</string>
@@ -1870,7 +1870,7 @@
     <string name="measurement_tool">Medir distância</string>
     <string name="quick_action_resume_pause_navigation">Pausar/retomar navegação</string>
     <string name="quick_action_resume_pause_navigation_descr">Botão para pausar ou retomar a navegação.</string>
-    <string name="quick_action_show_navigation_finish_dialog">Mostrar diálogo \'Navegação terminada\'</string>
+    <string name="quick_action_show_navigation_finish_dialog">Mostrar ecrã \"Navegação terminada\"</string>
     <string name="quick_action_start_stop_navigation">Iniciar/parar navegação</string>
     <string name="quick_action_start_stop_navigation_descr">Botão para iniciar ou terminar a navegação.</string>
     <string name="store_tracks_in_monthly_directories">Guardar percursos gravados em diretórios mensais</string>
@@ -3233,7 +3233,7 @@
     <string name="update_all_maps_q">Tem a certeza que quer atualizar todos os mapas (%1$d)\?</string>
     <string name="release_3_5">- Configurações atualizadas da aplicação e do perfil: as definições estão agora organizadas por tipo. Cada perfil pode ser personalizado separadamente.
 \n
-\n - Novo diálogo para descarregar mapas sugerindo um mapa para descarregar enquanto navega
+\n - Novo ecrã para descarregar mapas sugerindo um mapa para descarregar enquanto navega
 \n
 \n - Correções de temas escuros
 \n
@@ -3292,9 +3292,9 @@
     <string name="quick_action_directions_from_desc">Um botão para centrar o ecrã no ponto de partida. Em seguida, solicitará para definir o destino ou acionar o cálculo da rota.</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Nós da rede de ciclovias</string>
     <string name="clear_confirmation_msg">Limpar %1$s\?</string>
-    <string name="download_map_dialog">Diálogo de descarregar mapas</string>
-    <string name="dialogs_and_notifications_title">Diálogos e notificações</string>
-    <string name="dialogs_and_notifications_descr">Controlar janelas sobrepostas, diálogos e notificações.</string>
+    <string name="download_map_dialog">Ecrã de descarregar mapas</string>
+    <string name="dialogs_and_notifications_title">Ecrãs e notificações</string>
+    <string name="dialogs_and_notifications_descr">Controlar janelas sobrepostas, diálogos/ecrãs e notificações.</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Redes de nós</string>
     <string name="suggested_maps">Mapas sugeridos</string>
     <string name="suggested_maps_descr">Estes mapas são necessários para a extensão.</string>
@@ -3897,7 +3897,7 @@
 \n
 \n• Planear rota: gráficos para segmentos de trilhos com rota, e adicionada a capacidade de criar e editar múltiplos trilhos de segmentos.
 \n
-\n• Adicionado método de autenticação OAuth para o OpenStreetMap, melhoria da interface das janelas de diálogos do OpenStreetMap.
+\n• Adicionado método de autenticação OAuth para o OpenStreetMap, melhoria da interface dos ecrãs de opções do OpenStreetMap.
 \n
 \n• Cores personalizadas para favoritos e pontos de rotas de trilhos.
 \n
@@ -3968,7 +3968,7 @@
 \n
 \n• Adicionada opção para alterar a aparência da linha de rota.
 \n
-\n• Janela \"Gravar viagem\" atualizada.
+\n• Ecrã \"Gravar viagem\" atualizado.
 \n
 \n</string>
     <string name="routing_attr_height_obstacles_description">O roteamento pode evitar subidas íngremes.</string>
@@ -4069,8 +4069,8 @@
     <string name="select_another_colorization">Selecione outro tipo de colorização.</string>
     <string name="trip_recording_save_and_continue">Guardar e continuar</string>
     <string name="lost_data_warning">Todos os dados por guardar serão perdidos.</string>
-    <string name="show_start_dialog">Mostrar janela de diálogo ao iniciar</string>
-    <string name="trip_recording_show_start_dialog_setting">Se desativado, a gravação começará logo a seguir ao tocar no widget ou item do menu, ignorando a janela de confirmação.</string>
+    <string name="show_start_dialog">Mostrar ecrã de opções ao começar</string>
+    <string name="trip_recording_show_start_dialog_setting">Se desativado, a gravação começará logo a seguir ao tocar no widget ou item do menu, ignorando o ecrã de confirmação.</string>
     <string name="customize_route_line">Personalizar a linha de itinerário</string>
     <string name="shared_string_route_line">Linha de itinerário</string>
     <string name="specify_color_for_map_mode">Especificar cor para o modo mapa %1$s.</string>

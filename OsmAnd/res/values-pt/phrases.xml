@@ -167,7 +167,7 @@
     <string name="poi_atv">Loja de moto quatro</string>
     <string name="poi_cosmetics">Cosméticos</string>
     <string name="poi_marketplace">Mercado / feira</string>
-    <string name="poi_sewing">Loja de produtos secos</string>
+    <string name="poi_sewing">Retrosaria</string>
     <string name="poi_watches">Relojoaria</string>
     <string name="poi_swimming_pool_shop">Loja de artigos de piscina</string>
     <string name="poi_games">Jogos</string>
@@ -358,7 +358,7 @@
     <string name="poi_aeroway_fuel">Estação de combustível de aeronaves</string>
     <string name="poi_waterway_fuel">Posto de gasolina para embarcações</string>
     <string name="poi_motorcycle_parking">Estacionamento para motos</string>
-    <string name="poi_parking_entrance">Entrada/saída de estacionamento (subterrâneo/pisos)</string>
+    <string name="poi_parking_entrance">Entrada de estacionamento (subterrâneo/pisos)</string>
     <string name="poi_garages">Garagens</string>
     <string name="poi_public_transport_platform">Paragem de transporte público</string>
     <string name="poi_bus_stop">Paragem de autocarro</string>
@@ -519,7 +519,7 @@
     <string name="poi_basin">Bacia</string>
     <string name="poi_canal">Canal artificial</string>
     <string name="poi_pier">Pontão (atracadouro)</string>
-    <string name="poi_surveillance">Vigilância</string>
+    <string name="poi_surveillance">Vídeovigilância</string>
     <string name="poi_observatory">Observatório</string>
     <string name="poi_astronomical_observatory">Astronómico</string>
     <string name="poi_tower">Torre</string>
@@ -827,7 +827,7 @@
     <string name="poi_clock">Relógio</string>
     <string name="poi_travel_agent">Agência de viagens</string>
     <string name="poi_viewpoint">Miradouro</string>
-    <string name="poi_camp_site">Local de acampamento</string>
+    <string name="poi_camp_site">Parque de campismo</string>
     <string name="poi_caravan_site">Parque de caravanas</string>
     <string name="poi_picnic_table">Mesa de piquenique</string>
     <string name="poi_spring">Nascente</string>
@@ -1990,7 +1990,7 @@
     <string name="poi_route_subway_ref">Metropolitano</string>
     <string name="poi_route_railway_ref">Rota ferroviária</string>
     <string name="poi_historic_yes">Objeto histórico</string>
-    <string name="poi_surveillance_yes">Vigilância: sim</string>
+    <string name="poi_surveillance_yes">Vídeovigilância: sim</string>
     <string name="poi_shop_additional_yes">Com loja</string>
     <string name="poi_service_bicycle_retail_yes">Venda</string>
     <string name="poi_service_bicycle_retail_no">Venda de bicicletas: não</string>
@@ -2096,9 +2096,9 @@
     <string name="poi_crop_cranberry">Cultivo: amora</string>
     <string name="poi_crop_asparagus">Cultivo: aspargo</string>
     <string name="poi_crop_flowers">Cultivo: flores</string>
-    <string name="poi_surveillance_indoor">Vigilância: interior</string>
-    <string name="poi_surveillance_outdoor">Vigilância: exterior</string>
-    <string name="poi_surveillance_public">Vigilância: público</string>
+    <string name="poi_surveillance_indoor">Vídeovigilância: interior</string>
+    <string name="poi_surveillance_outdoor">Vídeovigilância: exterior</string>
+    <string name="poi_surveillance_public">Vídeovigilância: público</string>
     <string name="poi_clothes_women">Femininas</string>
     <string name="poi_clothes_underwear">Roupa íntima</string>
     <string name="poi_clothes_men">Masculinas</string>
@@ -3068,7 +3068,7 @@
     <string name="poi_party">Artigos de festas</string>
     <string name="poi_electrical">Loja de materiais elétricos</string>
     <string name="poi_locksmith">Loja de chaves e fechaduras</string>
-    <string name="poi_lighting">Luminárias / candeeiros</string>
+    <string name="poi_lighting">Loja de iluminação</string>
     <string name="poi_lottery">Bilhetes de lotaria / apostas / raspadinhas</string>
     <string name="poi_gambling">Local de apostas</string>
     <string name="poi_gambling_type">Tipo</string>
@@ -3971,4 +3971,8 @@
     <string name="poi_power_portal">Portal de eletricidade</string>
     <string name="poi_memorial_subject">Assunto</string>
     <string name="poi_picnic_table_yes">Mesa para piquenique: sim</string>
+    <string name="poi_contact_webcam">Câmara web</string>
+    <string name="poi_contact_xing">Xing</string>
+    <string name="poi_contact_vhf">VHF</string>
+    <string name="poi_contact_linkedin">LinkedIn</string>
 </resources>
