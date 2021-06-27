@@ -498,7 +498,7 @@
     <string name="poi_cash_withdrawal_bank_card">Pinigų išgryninimas</string>
     <string name="poi_park_ride">Atrakcionai</string>
     <string name="poi_water_place_access">Vandens prieiga</string>
-    <string name="poi_socket_chademo_output_filter">CHAdeMO rezultatas</string>
+    <string name="poi_socket_chademo_output_filter">CHAdeMO jungtis</string>
     <string name="poi_socket">Lizdas</string>
     <string name="poi_climbing_style">Kopimo stilius</string>
     <string name="poi_works">Gamykla</string>
