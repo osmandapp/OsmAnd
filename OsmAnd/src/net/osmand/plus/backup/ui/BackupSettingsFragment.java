@@ -275,7 +275,7 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 	private void deleteAllFiles() {
 		try {
 			updateProgressVisibility(true);
-			backupHelper.deleteAllFiles(BackupSettingsFragment.this);
+			backupHelper.deleteAllFiles(BackupSettingsFragment.this, Arrays.asList(ExportSettingsType.values()));
 		} catch (UserNotRegisteredException e) {
 			updateProgressVisibility(false);
 			log.error(e);
