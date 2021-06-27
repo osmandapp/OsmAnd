@@ -4182,4 +4182,19 @@
     <string name="send_crash_log">Crash Log senden</string>
     <string name="send_logcat_log">Logcat Log senden</string>
     <string name="backup_promocode">Aktionscode</string>
+    <string name="unlimited_map_downloads">Unbegrenzte Karten-Downloads</string>
+    <string name="wikipedia_and_wikivoyage_offline">Wikipedia und Wikivoyage offline</string>
+    <string name="offline_wikipeadia">Wikipedia offline</string>
+    <string name="offline_wikivoyage">Wikivoyage offline</string>
+    <string name="terrain_maps">Terrainkarten</string>
+    <string name="nautical_depth">Nautische Tiefe</string>
+    <string name="advanced_widgets">Erweiterte Wigdets</string>
+    <string name="ltr_or_rtl_combine_via_or">%1$s oder %2$s</string>
+    <string name="shared_string_learn_more">Mehr erfahren</string>
+    <string name="cancel_anytime_in_huawei_appgallery">Jederzeit in der Huawei AppGallery kündigen</string>
+    <string name="cancel_anytime_in_gplay">Jederzeit auf Google Play kündigen.</string>
+    <string name="shared_string_not_included">Nicht enthalten</string>
+    <string name="shared_string_includes">Enthält</string>
+    <string name="complete_purchase">Vollständiger Kauf</string>
+    <string name="regular_price">Normaler Preis</string>
 </resources>

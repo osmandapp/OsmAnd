@@ -4178,4 +4178,18 @@
     <string name="backup_promocode">Kod promocyjny</string>
     <string name="send_crash_log">Wyślij dziennik awarii</string>
     <string name="send_logcat_log">Wyślij dziennik logcat</string>
+    <string name="ltr_or_rtl_combine_via_or">%1$s lub %2$s</string>
+    <string name="continue_with">Kontynuuj z %1$s</string>
+    <string name="not_available_with">Niedostępne z %1$s</string>
+    <string name="redeem_promo_code">Zrealizuj kod promocyjny</string>
+    <string name="osmand_maps_plus_tagline">Uzyskaj rozszerzoną funkcjonalność</string>
+    <string name="osmand_pro_tagline">Uzyskaj maksymalną funkcjonalność</string>
+    <string name="shared_string_not_included">Nie zawiera</string>
+    <string name="shared_string_learn_more">Dowiedz się więcej</string>
+    <string name="cancel_anytime_in_huawei_appgallery">Anuluj w dowolnym momencie w Huawei AppGallery.</string>
+    <string name="cancel_anytime_in_gplay">Anuluj w dowolnym momencie w Google Play.</string>
+    <string name="shared_string_includes">Zawiera</string>
+    <string name="from_with_param">Od %1$s</string>
+    <string name="complete_purchase">Zakończ zakup</string>
+    <string name="regular_price">Zwykła cena</string>
 </resources>

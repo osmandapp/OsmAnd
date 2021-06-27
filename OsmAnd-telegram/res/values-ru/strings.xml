@@ -166,8 +166,8 @@
     <string name="shared_string_collected">Собрано</string>
     <string name="gps_points">Точки GPS</string>
     <string name="shared_string_sent">Отправлено</string>
-    <string name="monitoring_is_enabled">Мониторинг включён</string>
-    <string name="monitoring_is_disabled">Мониторинг отключён</string>
+    <string name="monitoring_is_enabled">Мониторинг включен</string>
+    <string name="monitoring_is_disabled">Мониторинг отключен</string>
     <string name="time_on_the_move">Время в движении</string>
     <string name="average_altitude">Средняя высота</string>
     <string name="average_speed">Средняя скорость</string>
@@ -270,5 +270,5 @@
     <string name="shared_string_export">Экспорт</string>
     <string name="logcat_buffer">Буфер Logcat</string>
     <string name="logcat_buffer_descr">Проверьте и поделитесь подробными журналами приложения</string>
-    <string name="send_report">Отправить отчёт</string>
+    <string name="send_report">Отправить отчет</string>
 </resources>
