@@ -77,7 +77,8 @@ public class NetworkWriter implements AbstractWriter {
 		try {
 			JSONObject json = item.toJsonObj();
 			boolean hasFile = json.has("file");
-			if (json.length() > (hasFile ? 2 : 1)) {
+			boolean hasSubtype = json.has("subtype");
+			if (json.length() > (hasFile ? 2 + (hasSubtype ? 1 : 0) : 1)) {
 				String itemJson = json.toString();
 				InputStream inputStream = new ByteArrayInputStream(itemJson.getBytes("UTF-8"));
 				StreamWriter streamWriter = (outputStream, progress) -> {
