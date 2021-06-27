@@ -23,7 +23,6 @@ import net.osmand.OperationLog;
 import net.osmand.PlatformUtil;
 import net.osmand.StreamWriter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
@@ -804,7 +803,7 @@ public class BackupHelper {
 		};
 	}
 
-	public void deleteAllFiles(@Nullable final OnDeleteFilesListener listener) throws UserNotRegisteredException {
+	public void deleteAllFiles(@Nullable final OnDeleteFilesListener listener, @NonNull List<ExportSettingsType> types) throws UserNotRegisteredException {
 		checkRegistered();
 
 		Map<String, String> params = new HashMap<>();
@@ -812,10 +811,10 @@ public class BackupHelper {
 		params.put("accessToken", getAccessToken());
 		params.put("allVersions", "true");
 		AndroidNetworkUtils.sendRequestAsync(app, LIST_FILES_URL, params, "Delete all files", false, false,
-				getDeleteAllFilesListener(listener), EXECUTOR);
+				getDeleteAllFilesListener(listener, types), EXECUTOR);
 	}
 
-	private OnRequestResultListener getDeleteAllFilesListener(@Nullable OnDeleteFilesListener listener) {
+	private OnRequestResultListener getDeleteAllFilesListener(@Nullable OnDeleteFilesListener listener, @NonNull List<ExportSettingsType> types) {
 		return (resultJson, error) -> {
 			int status;
 			String message;
@@ -846,8 +845,15 @@ public class BackupHelper {
 				}
 			} else {
 				try {
-					if (!remoteFiles.isEmpty()) {
-						deleteFiles(remoteFiles, true, listener);
+					List<RemoteFile> filesToDelete = new ArrayList<>();
+					for (RemoteFile file : remoteFiles) {
+						ExportSettingsType exportType = ExportSettingsType.getExportSettingsTypeForRemoteFile(file);
+						if (types.contains(exportType)) {
+							filesToDelete.add(file);
+						}
+					}
+					if (!filesToDelete.isEmpty()) {
+						deleteFiles(filesToDelete, true, listener);
 					} else {
 						if (listener != null) {
 							listener.onFilesDeleteDone(Collections.emptyMap());
@@ -862,7 +868,7 @@ public class BackupHelper {
 		};
 	}
 
-	public void deleteOldFiles(@Nullable final OnDeleteFilesListener listener, List<ExportSettingsType> types) throws UserNotRegisteredException {
+	public void deleteOldFiles(@Nullable final OnDeleteFilesListener listener, @NonNull List<ExportSettingsType> types) throws UserNotRegisteredException {
 		checkRegistered();
 
 		Map<String, String> params = new HashMap<>();
@@ -873,7 +879,7 @@ public class BackupHelper {
 				getDeleteOldFilesListener(listener, types), EXECUTOR);
 	}
 
-	private OnRequestResultListener getDeleteOldFilesListener(@Nullable OnDeleteFilesListener listener, List<ExportSettingsType> types) {
+	private OnRequestResultListener getDeleteOldFilesListener(@Nullable OnDeleteFilesListener listener, @NonNull List<ExportSettingsType> types) {
 		return (resultJson, error) -> {
 			int status;
 			String message;
