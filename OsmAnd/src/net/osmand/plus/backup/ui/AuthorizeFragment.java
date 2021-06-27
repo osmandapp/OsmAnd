@@ -59,6 +59,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment {
 	private static final String OSMAND_DOCS = "https://docs.osmand.net/en/main@latest/osmand/purchases/android";
 
 	private static final String LOGIN_DIALOG_TYPE_KEY = "login_dialog_type_key";
+	private static final String SIGN_IN_KEY = "sign_in_key";
 
 	private static final int VERIFICATION_CODE_EXPIRATION_TIME_MIN = 10 * 60 * 1000; // 10 minutes
 
@@ -76,6 +77,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment {
 	private LoginDialogType dialogType = LoginDialogType.SIGN_UP;
 
 	private String promoCode;
+	private boolean signIn;
 
 	private long lastTimeCodeSent = 0;
 	private boolean nightMode;
@@ -83,6 +85,13 @@ public class AuthorizeFragment extends BaseOsmAndFragment {
 	@Override
 	public int getStatusBarColorId() {
 		return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
+	}
+
+	public void setDialogType(LoginDialogType dialogType) {
+		this.dialogType = dialogType;
+		if (dialogType != LoginDialogType.VERIFY_EMAIL) {
+			signIn = dialogType == LoginDialogType.SIGN_IN;
+		}
 	}
 
 	@Override
@@ -93,8 +102,13 @@ public class AuthorizeFragment extends BaseOsmAndFragment {
 		backupHelper = app.getBackupHelper();
 		nightMode = !settings.isLightContent();
 
-		if (savedInstanceState != null && savedInstanceState.containsKey(LOGIN_DIALOG_TYPE_KEY)) {
-			dialogType = LoginDialogType.valueOf(savedInstanceState.getString(LOGIN_DIALOG_TYPE_KEY));
+		if (savedInstanceState != null) {
+			if (savedInstanceState.containsKey(LOGIN_DIALOG_TYPE_KEY)) {
+				dialogType = LoginDialogType.valueOf(savedInstanceState.getString(LOGIN_DIALOG_TYPE_KEY));
+			}
+			if (savedInstanceState.containsKey(SIGN_IN_KEY)) {
+				signIn = savedInstanceState.getBoolean(SIGN_IN_KEY);
+			}
 		}
 	}
 
@@ -124,6 +138,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment {
 
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
+		outState.putBoolean(SIGN_IN_KEY, signIn);
 		outState.putString(LOGIN_DIALOG_TYPE_KEY, dialogType.name());
 		super.onSaveInstanceState(outState);
 	}
@@ -212,7 +227,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment {
 		buttonAuthorize.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				dialogType = nextType;
+				setDialogType(nextType);
 				updateContent();
 			}
 		});
@@ -374,7 +389,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment {
 	}
 
 	private void registerUser(TextView errorText) {
-		boolean login = dialogType == LoginDialogType.SIGN_IN;
+		boolean login = dialogType == LoginDialogType.SIGN_IN || signIn;
 		backupHelper.registerUser(settings.BACKUP_USER_EMAIL.get(), promoCode, login, new OnRegisterUserListener() {
 			@Override
 			public void onRegisterUser(int status, @Nullable String message, @Nullable String error) {
@@ -383,7 +398,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment {
 					progressBar.setVisibility(View.INVISIBLE);
 					if (status == BackupHelper.STATUS_SUCCESS) {
 						lastTimeCodeSent = System.currentTimeMillis();
-						dialogType = LoginDialogType.VERIFY_EMAIL;
+						setDialogType(LoginDialogType.VERIFY_EMAIL);
 						updateContent();
 					} else {
 						errorText.setText(message);
@@ -457,7 +472,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment {
 	public static void showInstance(@NonNull FragmentManager fragmentManager, boolean signUp) {
 		if (!fragmentManager.isStateSaved()) {
 			AuthorizeFragment fragment = new AuthorizeFragment();
-			fragment.dialogType = signUp ? LoginDialogType.SIGN_UP : LoginDialogType.SIGN_IN;
+			fragment.setDialogType(signUp ? LoginDialogType.SIGN_UP : LoginDialogType.SIGN_IN);
 			fragmentManager.beginTransaction().
 					replace(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
