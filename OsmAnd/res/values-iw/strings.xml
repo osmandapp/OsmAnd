@@ -4181,4 +4181,6 @@
     <string name="send_crash_log">שליחת יומן קריסה</string>
     <string name="send_logcat_log">שליחת יומני logcat</string>
     <string name="backup_promocode">קוד מבצע</string>
+    <string name="complete_purchase">רכישה מלאה</string>
+    <string name="regular_price">מחיר רגיל</string>
 </resources>
