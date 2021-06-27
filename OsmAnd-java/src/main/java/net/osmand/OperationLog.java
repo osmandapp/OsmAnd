@@ -36,14 +36,18 @@ public class OperationLog {
 
 	public void startOperation(String message) {
 		this.startTime = System.currentTimeMillis();
-		logImpl("+++ " + operationName + (!Algorithms.isEmpty(message) ? " " + message : ""), debug);
+		logImpl(operationName + " BEGIN " + (!Algorithms.isEmpty(message) ? message : ""), debug);
 		startLogged = debug;
+	}
+
+	public void finishOperation() {
+		finishOperation(null);
 	}
 
 	public void finishOperation(String message) {
 		long elapsedTime = System.currentTimeMillis() - startTime;
 		if (startLogged || debug || elapsedTime > logThreshold) {
-			logImpl("--- " + operationName + " (" + elapsedTime + " ms)"
+			logImpl(operationName + " END (" + elapsedTime + " ms)"
 					+ (!Algorithms.isEmpty(message) ? " " + message : ""), true);
 		}
 	}
@@ -54,7 +58,7 @@ public class OperationLog {
 
 	public void log(String message, boolean forceLog) {
 		if (debug || forceLog) {
-			LOG.debug("=== " + operationName + (!Algorithms.isEmpty(message) ? " " + message : ""));
+			LOG.debug(operationName + (!Algorithms.isEmpty(message) ? " " + message : ""));
 		}
 	}
 
