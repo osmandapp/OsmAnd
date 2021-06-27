@@ -4068,7 +4068,7 @@
 \n
 \n</string>
     <string name="map_quick_action_pattern">%1$s → …</string>
-    <string name="edit_online_routing_engine">Edytuj silnik routingu online</string>
+    <string name="edit_online_routing_engine">Edytuj silnik wyznaczania tras online</string>
     <string name="select_segments_description">%1$s zawiera więcej niż jeden segment, musisz wybrać wymagany element nawigacji.</string>
     <string name="segments_count">Segment %1$d</string>
     <string name="track_recording_save_and_stop">Zapisz i zatrzymaj nagrywanie</string>
@@ -4126,7 +4126,7 @@
     <string name="verification_code_missing">Nie otrzymałem kodu weryfikacyjnego</string>
     <string name="verification_code_missing_description">Czas oczekiwania na kod może wynosić 10 minut, możesz również sprawdzić folder spam. Jeśli to nie pomoże, użyj przycisku poniżej.</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
-    <string name="select_nav_profile_dialog_message">„Typ nawigacji” określa sposób obliczania tras. Możesz wybierać między silnikami routingu offline i online.</string>
+    <string name="select_nav_profile_dialog_message">„Rodzaj nawigacji” określa sposób obliczania tras. Możesz wybierać między silnikami wyznaczania tras offline i online.</string>
     <string name="loading_list_of_routing_services">Wczytywanie listy dostępnych usług routingu</string>
     <string name="osmand_online_routing_promo">Można użyć wstępnie zdefiniowanych szablonów lub dodać własne trasy online, obsługiwane: OSRM, Graphhopper, OpenRouteService, GPX.</string>
     <string name="shared_string_external">Zewnętrzny</string>
@@ -4172,4 +4172,7 @@
     <string name="backup_version_history">Historia wersji</string>
     <string name="backup_version_history_delete_descr">Czy chcesz usunąć z chmury historię zmian dla wyłączonych typów\?</string>
     <string name="delete_version_history">Usuń historię wersji</string>
+    <string name="add_online_routing_engine">Dodaj silnik wyznaczania tras online</string>
+    <string name="delete_online_routing_engine">Usunąć ten silnik wyznaczania tras online\?</string>
+    <string name="backup_storage_taken">Zajęta pamięć</string>
 </resources>
