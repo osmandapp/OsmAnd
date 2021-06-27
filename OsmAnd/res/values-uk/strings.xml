@@ -711,12 +711,12 @@
     <string name="osmand_parking_position_description_add">Забрати автомобіль о:</string>
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
-    <string name="osmand_parking_position_name">Місце стоянки</string>
+    <string name="osmand_parking_position_name">Місце для стоянки</string>
     <string name="osmand_parking_plugin_description">Дозволяє записувати, де Вашу автівку припарковано, а також, скільки часу залишається на парковці. 
 \n Місце розташування та час видно на приладовій панелі, а також у віджеті мапи. Нагадування про сигналізацію можна додати в календар Android.</string>
     <string name="osmand_parking_plugin_name">Місце стоянки</string>
-    <string name="context_menu_item_add_parking_point">Позначити як місце паркування</string>
-    <string name="context_menu_item_delete_parking_point">Видалити позначку місця паркування</string>
+    <string name="context_menu_item_add_parking_point">Позначити місцем стоянки</string>
+    <string name="context_menu_item_delete_parking_point">Видалити позначку місця стоянки</string>
     <string name="starting_point_too_far">Початкова точка занадто далеко від найближчої дороги.</string>
     <string name="shared_location">Загальні місця</string>
     <string name="global_app_allocated_memory_descr">Зайнято пам’яті %1$s MB (Обмеження Android %2$s MB, dalvik %3$s MB).</string>
