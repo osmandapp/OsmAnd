@@ -4196,4 +4196,7 @@
     <string name="cancel_anytime_in_gplay">ניתן לבטל בכל עת בחנות Google Play.</string>
     <string name="backup_delete_types_descr">למחוק את כל הנתונים על סוגים מושבתים מהענן\?</string>
     <string name="backup_delete_types">מחיקת סוגי נתונים מושבתים</string>
+    <string name="offline_wikipeadia">ויקיפדיה בלתי־מקוונת</string>
+    <string name="offline_wikivoyage">ויקימסע בלתי־מקוון</string>
+    <string name="terrain_maps">מפות תוואי שטח</string>
 </resources>
