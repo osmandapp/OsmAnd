@@ -58,6 +58,8 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 		ITALIAN(R.string.lang_it, "https://t.me/itosmand"),
 		FRENCH(R.string.lang_fr, "https://t.me/frosmand"),
 		POLISH(R.string.lang_pl, "https://t.me/osmand_pl"),
+		PORTUGUESE_BRAZIL(R.string.lang_pt_br, "https://t.me/brosmand"),
+		SPANISH(R.string.lang_es, "https://t.me/osmand_es"),
 		UKRAINIAN(R.string.lang_uk, "https://t.me/uaosmand");
 
 		private final int langTitleId;
