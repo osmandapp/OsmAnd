@@ -2,6 +2,7 @@ package net.osmand.osm;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class RouteActivityType {
 	private static final List<RouteActivityType> values = new ArrayList<>();
@@ -69,6 +70,20 @@ public class RouteActivityType {
 			}
 		}
 		return activityType;
+	}
+	
+	public static RouteActivityType getTypeFromOSMTags(Map<String, String> tags) {
+		String rt = tags.get("route");
+		if ("piste".equals(rt)) {
+			return WINTER;
+		} else if ("road".equals(rt)) {
+			return CAR;
+		} else if ("hiking".equals(rt)) {
+			return HIKING;
+		} else if ("bicycle".equals(rt)) {
+			return CYCLING;
+		}
+		return null;
 	}
 
 	public static RouteActivityType convertFromOsmGPXTag(String tg) {
@@ -263,4 +278,6 @@ public class RouteActivityType {
 			return routeActivityType;
 		}
 	}
+
+	
 }

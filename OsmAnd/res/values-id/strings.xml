@@ -1950,4 +1950,8 @@
     <string name="install_more">Pasang lebih banyak…</string>
     <string name="incomplete_locale">belum lengkap</string>
     <string name="backup_version_history">Riwayat versi</string>
+    <string name="delete_version_history">Hapus riwayat versi</string>
+    <string name="routing_attr_avoid_tunnels_description">Hindari terowongan</string>
+    <string name="routing_attr_avoid_tunnels_name">Hindari terowongan</string>
+    <string name="backup_promocode">Kode promo</string>
 </resources>

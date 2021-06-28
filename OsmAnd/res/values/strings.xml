@@ -14,6 +14,8 @@
 
     <string name="shared_string_view_all">View all</string>
     <string name="shared_string_discussion">Discussion</string>
+    <string name="backup_delete_types">Delete disabled types data</string>
+    <string name="backup_delete_types_descr">Do you want to delete data for disabled types from cloud?</string>
     <string name="from_with_param">From %1$s</string>
     <string name="regular_price">Regular price</string>
     <string name="complete_purchase">Complete purchase</string>

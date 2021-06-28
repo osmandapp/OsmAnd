@@ -75,7 +75,7 @@ public class OverviewCard extends MapBaseCard {
 		directionsButton = view.findViewById(R.id.directions_button);
 		description = view.findViewById(R.id.description);
 		RecyclerView blocksView = view.findViewById(R.id.recycler_overview);
-		blockStatisticsBuilder.setBlocksView(blocksView);
+		blockStatisticsBuilder.setBlocksView(blocksView, true);
 
 		setupDescription();
 		initShowButton(iconColorDef, iconColorPres);

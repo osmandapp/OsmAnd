@@ -1364,8 +1364,8 @@
     <string name="modify_the_search_query">Измените претрагу.</string>
     <string name="shared_string_actions">Радње</string>
     <string name="shared_string_marker">Ознака</string>
-    <string name="empty_state_osm_edits">Стварајте или мењајте предмете ОСМ-а</string>
-    <string name="empty_state_osm_edits_descr">Стварајте или мењајте ОСМ тачке од интереса, отворите или коментаришите ОСМ белешке и доприносите снимањем GPX фајлова.</string>
+    <string name="empty_state_osm_edits">Стварајте или мењајте OpenStreetMap објекте</string>
+    <string name="empty_state_osm_edits_descr">Стварајте или мењајте OpenStreetMap POI-а, отворите или коментаришите OSM белешке и доприносите снимањем GPX фајлова.</string>
     <string name="shared_string_deleted">Избрисано</string>
     <string name="shared_string_edited">Уређено</string>
     <string name="shared_string_added">Додато</string>
@@ -1572,7 +1572,7 @@
     <string name="switch_osm_notes_visibility_desc">Прикажи или сакриј ОСМ белешке на карти.</string>
     <string name="shared_string_gpx_file">GPX фајл</string>
     <string name="gpx_file_desc">GPX - погодно за извоз у ЈОСМ и друге ОСМ уређиваче.</string>
-    <string name="osc_file_desc">ОСЦ - погодно за извоз у OSM.</string>
+    <string name="osc_file_desc">OSC - погодно за извоз у OpenStreetMap.</string>
     <string name="osc_file">ОСЦ фајл</string>
     <string name="osm_edits_export_desc">Извези као ОСМ белешке, тачке од интереса или оба.</string>
     <string name="lang_ml">Малајалам</string>
@@ -4169,4 +4169,9 @@
     <string name="backup_storage_taken">Заузето складиште</string>
     <string name="backup_version_history_delete_descr">Да ли желите да из облака избришете историју промена за онеспособљене типове\?</string>
     <string name="delete_version_history">Обриши историју верзије</string>
+    <string name="routing_attr_avoid_tunnels_description">Избегавање тунела</string>
+    <string name="routing_attr_avoid_tunnels_name">Избегавај тунеле</string>
+    <string name="backup_promocode">Промотивни код</string>
+    <string name="send_crash_log">Пошаљите лог пада</string>
+    <string name="send_logcat_log">Пошаљите логкат лог</string>
 </resources>
