@@ -4219,4 +4219,6 @@
     <string name="from_with_param">De %1$s</string>
     <string name="backup_delete_types_descr">Quer eliminar dados para tipos desativados da nuvem\?</string>
     <string name="backup_delete_types">Eliminar dados de tipos desativados</string>
+    <string name="shared_string_discussion">Discussão</string>
+    <string name="shared_string_view_all">Ver tudo</string>
 </resources>
