@@ -660,7 +660,7 @@ public class ImportHelper {
 		if (forceImportFavourites) {
 			importFavoritesImpl(gpxFile, fileName, true);
 		} else if (fileName != null) {
-			if (forceImportGpx) {
+			if (forceImportGpx || !Algorithms.isEmpty(gpxFile.tracks)) {
 				handleResult(gpxFile, fileName, fileSize, save, useImportDir, false);
 			} else {
 				ImportGpxBottomSheetDialogFragment fragment = new ImportGpxBottomSheetDialogFragment();
