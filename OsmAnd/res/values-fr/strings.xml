@@ -4199,4 +4199,7 @@
     <string name="shared_string_not_included">Non inclus</string>
     <string name="regular_price">Prix habituel</string>
     <string name="from_with_param">À partir de %1$s</string>
+    <string name="backup_delete_types_descr">Souhaitez-vous supprimer du Cloud les données des types désactivés \?</string>
+    <string name="backup_version_history_delete_descr">Souhaitez-vous supprimer du Cloud l’historique des modifications pour les types désactivés \?</string>
+    <string name="backup_delete_types">Supprimer les données des types désactivés</string>
 </resources>
