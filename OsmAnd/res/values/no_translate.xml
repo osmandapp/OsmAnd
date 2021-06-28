@@ -6,6 +6,8 @@
     <!-- string name="app_version_suffix"></string -->
 
     <!-- Not translatable -->
+    <string name="github">GitHub</string>
+    <string name="telegram">Telegram</string>
     <string name="full_version_price">€7,99</string>
     <string name="srtm_plugin_price">€2,99</string>
     <string name="sea_depth_maps_price">€1,39</string>

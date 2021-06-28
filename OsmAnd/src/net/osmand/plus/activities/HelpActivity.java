@@ -1,5 +1,6 @@
 package net.osmand.plus.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import net.osmand.AndroidUtils;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.ContextMenuItem.ItemBuilder;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -35,19 +37,99 @@ import androidx.fragment.app.FragmentActivity;
 
 public class HelpActivity extends BaseLogcatActivity implements OnItemClickListener, OnItemLongClickListener {
 
-	//	public static final String DIALOG = "dialog";
 	public static final String OSMAND_POLL_HTML = "https://osmand.net/android-poll.html";
-	public static final int NULL_ID = -1;
-	private ArrayAdapter<ContextMenuItem> mAdapter;
+	public static final String GITHUB_DISCUSSIONS_URL = "https://github.com/osmandapp/OsmAnd/discussions";
+	// public static final String OSMAND_MAP_LEGEND = "https://osmand.net/help/map-legend_default.png";
 
-	//public static final String OSMAND_MAP_LEGEND = "https://osmand.net/help/map-legend_default.png";
+	public static final int COLLAPSED_TELEGRAM_CHATS_COUNT = 3;
+	public static final int NULL_ID = -1;
+
+	public static final String TELEGRAM_CHATS_EXPANDED = "telegram_chats_expanded";
+	// public static final String DIALOG = "dialog";
+
+	private ArrayAdapter<ContextMenuItem> mAdapter;
+	private boolean telegramChatsExpanded;
+	private ListView listView;
+
+	private enum TelegramDiscussion {
+		ENGLISH(R.string.lang_en, "https://t.me/OsmAndMaps"),
+		RUSSIAN(R.string.lang_ru, "https://t.me/ruosmand"),
+		GERMAN(R.string.lang_de, "https://t.me/deosmand"),
+		ITALIAN(R.string.lang_it, "https://t.me/itosmand"),
+		FRENCH(R.string.lang_fr, "https://t.me/frosmand"),
+		POLISH(R.string.lang_pl, "https://t.me/osmand_pl"),
+		UKRAINIAN(R.string.lang_uk, "https://t.me/uaosmand");
+
+		private final int langTitleId;
+		private final String url;
+
+		TelegramDiscussion(int langTitleId, String url) {
+			this.langTitleId = langTitleId;
+			this.url = url;
+		}
+
+		public String getLangTitle(Context ctx) {
+			return ctx.getString(langTitleId);
+		}
+
+		public String getUrl() {
+			return url;
+		}
+	}
+
+	private enum SocialNetwork {
+		TWITTER(R.string.twitter, R.string.twitter_address, R.drawable.ic_action_social_twitter),
+		REDDIT(R.string.reddit, R.string.reddit_address, R.drawable.ic_action_social_reddit),
+		FACEBOOK(R.string.facebook, R.string.facebook_address, R.drawable.ic_action_social_facebook);
+
+		SocialNetwork(int titleId, int urlId, int iconId) {
+			this.titleId = titleId;
+			this.urlId = urlId;
+			this.iconId = iconId;
+		}
+
+		private int titleId;
+		private int urlId;
+		private int iconId;
+
+		public String getTitle(Context ctx) {
+			return ctx.getString(titleId);
+		}
+
+		public String getUrl(Context ctx) {
+			return ctx.getString(urlId);
+		}
+
+		public int getIconId() {
+			return iconId;
+		}
+	}
+
+	@Override
+	protected void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putBoolean(TELEGRAM_CHATS_EXPANDED, telegramChatsExpanded);
+	}
+
+	private void readBundle(Bundle savedInstanceState) {
+		if (savedInstanceState != null) {
+			telegramChatsExpanded = savedInstanceState.getBoolean(TELEGRAM_CHATS_EXPANDED);
+		}
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		getMyApplication().applyTheme(this);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.fragment_help_screen);
+		readBundle(savedInstanceState);
+		listView = findViewById(android.R.id.list);
+		createItems();
+		setTitle(R.string.shared_string_help);
+		setupHomeButton();
+	}
 
+	private void createItems() {
 		ContextMenuAdapter contextMenuAdapter = new ContextMenuAdapter(getMyApplication());
 		contextMenuAdapter.setDefaultLayoutId(R.layout.two_line_with_images_list_item);
 
@@ -56,13 +138,13 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 		createPluginsItems(contextMenuAdapter);
 		createHelpUsToImproveItems(contextMenuAdapter);
 		createOtherItems(contextMenuAdapter);
+		createDiscussionItems(contextMenuAdapter);
 		createSocialNetworksItems(contextMenuAdapter);
 
 		boolean lightContent = getMyApplication().getSettings().isLightContent();
 
 		mAdapter = contextMenuAdapter.createListAdapter(this, lightContent);
 
-		ListView listView = findViewById(android.R.id.list);
 		listView.setAdapter(mAdapter);
 		listView.setOnItemClickListener(this);
 		listView.setOnItemLongClickListener(this);
@@ -72,9 +154,6 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 		listView.setDividerHeight(AndroidUtils.dpToPx(this, 1f));
 		listView.setBackgroundColor(getResources().getColor(
 				lightContent ? R.color.list_background_color_light : R.color.list_background_color_dark));
-
-		setTitle(R.string.shared_string_help);
-		setupHomeButton();
 	}
 
 	@Override
@@ -117,16 +196,31 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 				R.string.legend_item_description, "feature_articles/map-legend.html"));
 	}
 
-	private void createSocialNetworksItems(ContextMenuAdapter contextMenuAdapter) {
-		contextMenuAdapter.addItem(createCategory(R.string.follow_us));
-		contextMenuAdapter.addItem(createSocialItem(R.string.twitter, R.string.twitter_address,
-				R.drawable.ic_action_social_twitter));
-	        contextMenuAdapter.addItem(createSocialItem(R.string.reddit, R.string.reddit_address,
-				R.drawable.ic_action_social_reddit));
-		contextMenuAdapter.addItem(createSocialItem(R.string.facebook, R.string.facebook_address,
-				R.drawable.ic_action_social_facebook));
-		contextMenuAdapter.addItem(createSocialItem(R.string.vk, R.string.vk_address,
-				R.drawable.ic_action_social_vk));
+	private void createDiscussionItems(ContextMenuAdapter adapter) {
+		adapter.addItem(createCategory(R.string.shared_string_discussion));
+		adapter.addItem(createSocialItem(getString(R.string.github), GITHUB_DISCUSSIONS_URL,
+				R.drawable.ic_action_social_github));
+		TelegramDiscussion[] discussions = TelegramDiscussion.values();
+		int countToShow = telegramChatsExpanded ? discussions.length : COLLAPSED_TELEGRAM_CHATS_COUNT;
+		for (int i = 0; i < countToShow; i++) {
+			TelegramDiscussion discussion = discussions[i];
+			String pattern = getString(R.string.ltr_or_rtl_combine_via_space);
+			String title = String.format(pattern, getString(R.string.telegram), discussion.getLangTitle(this));
+			adapter.addItem(createSocialItem(title, discussion.getUrl(), R.drawable.ic_action_social_telegram));
+		}
+		if (!telegramChatsExpanded) {
+			adapter.addItem(createViewAllButton());
+		}
+	}
+
+	private void createSocialNetworksItems(ContextMenuAdapter adapter) {
+		adapter.addItem(createCategory(R.string.follow_us));
+		for (SocialNetwork n : SocialNetwork.values()) {
+			String title = n.getTitle(this);
+			String url = n.getUrl(this);
+			ContextMenuItem item = createSocialItem(title, url, n.getIconId());
+			adapter.addItem(item);
+		}
 	}
 
 	private void createHelpUsToImproveItems(ContextMenuAdapter contextMenuAdapter) {
@@ -255,25 +349,34 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 				.createItem();
 	}
 
-	private ContextMenuItem createSocialItem(@StringRes int title,
-											 @StringRes int urlRes,
-											 @DrawableRes int icon) {
-		final String url = getString(urlRes);
+	private ContextMenuItem createSocialItem(String title,
+	                                         String url,
+	                                         @DrawableRes int icon) {
 		return new ContextMenuItem.ItemBuilder()
-				.setTitle(getString(title))
+				.setTitle(title)
 				.setDescription(url)
 				.setIcon(icon)
-				.setListener(new ContextMenuAdapter.ItemClickListener() {
-					@Override
-					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter,
-													  int itemId,
-													  int position,
-													  boolean isChecked,
-													  int[] viewCoordinates) {
-						Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+				.setListener((adapter, itemId, position, isChecked, viewCoordinates) -> {
+					Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+					if (AndroidUtils.isIntentSafe(this, intent)) {
 						startActivity(intent);
-						return false;
 					}
+					return false;
+				})
+				.createItem();
+	}
+
+	private ContextMenuItem createViewAllButton() {
+		return new ItemBuilder()
+				.setLayout(R.layout.title_with_right_icon_list_item)
+				.setTitle(getString(R.string.shared_string_view_all))
+				.setIcon(R.drawable.ic_action_arrow_down)
+				.setListener((adapter, itemId, position, isChecked, viewCoordinates) -> {
+					telegramChatsExpanded = true;
+					int pos = listView.getFirstVisiblePosition();
+					createItems();
+					listView.setSelection(pos);
+					return false;
 				})
 				.createItem();
 	}
