@@ -1673,7 +1673,7 @@ public class GPXUtilities {
 			for (Track track : tracks) {
 				for (TrkSegment segment : track.segments) {
 					for (WptPt p : segment.points) {
-						if (left == 0 && right == 0) {
+						if (left == defaultMissingLon && right == defaultMissingLon) {
 							left = p.getLongitude();
 							right = p.getLongitude();
 							top = p.getLatitude();
@@ -1688,7 +1688,7 @@ public class GPXUtilities {
 				}
 			}
 			for (WptPt p : points) {
-				if (left == 0 && right == 0) {
+				if (left == defaultMissingLon && right == defaultMissingLon) {
 					left = p.getLongitude();
 					right = p.getLongitude();
 					top = p.getLatitude();
@@ -1702,7 +1702,7 @@ public class GPXUtilities {
 			}
 			for (Route route : routes) {
 				for (WptPt p : route.points) {
-					if (left == 0 && right == 0) {
+					if (left == defaultMissingLon && right == defaultMissingLon) {
 						left = p.getLongitude();
 						right = p.getLongitude();
 						top = p.getLatitude();
