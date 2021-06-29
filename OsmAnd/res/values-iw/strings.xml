@@ -4199,4 +4199,14 @@
     <string name="offline_wikipeadia">ויקיפדיה בלתי־מקוונת</string>
     <string name="offline_wikivoyage">ויקימסע בלתי־מקוון</string>
     <string name="terrain_maps">מפות תוואי שטח</string>
+    <string name="wikipedia_and_wikivoyage_offline">ויקיפדיה וויקימסע בלתי־מקוונות</string>
+    <string name="terrain_maps_contour_lines_hillshade_slope">מפות תוואי שטח: קווי מתאר, הצללות הרים, מדרון</string>
+    <string name="purchases_feature_desc_nautical">קבלת גישה לפרטי עומק ימי</string>
+    <string name="purchases_feature_desc_wikivoyage">קריאה בוויקיפדיה ללא אינטרנט. ערכים, בחלוקה למדינות ולמחוזות, זמינים בכל השפות.</string>
+    <string name="purchases_feature_desc_wikipedia">קריאה בוויקיפדיה ללא אינטרנט. ערכים, בחלוקה למדינות ולמחוזות, זמינים בכל השפות.</string>
+    <string name="purchases_feature_desc_combined_wiki">ניתן לקרוא ערכים מוויקיפדיה בדרכים, ללא חיבור לאינטרנט. נתונים בלתי מקוונים בחלוקה למדינות זמינים בכל השפות.</string>
+    <string name="purchases_feature_desc_unlimited_map_download">קבלת הורדות בלתי מוגבלות לכל המפות הבלתי מקוונות של היבשות והמחוזות.</string>
+    <string name="purchases_feature_desc_monthly_map_updates">קבלת גישה לעדכונים חודשיים מתחדשים למפות בלתי־מקוונות.</string>
+    <string name="purchases_feature_desc_advanced_widgets">קבלת גישה לווידג׳טים מתקדמים של OsmAnd.</string>
+    <string name="unlimited_map_downloads">הורדת מפות ללא הגבלה</string>
 </resources>

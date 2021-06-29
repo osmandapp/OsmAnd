@@ -270,5 +270,5 @@
     <string name="shared_string_export">Экспорт</string>
     <string name="logcat_buffer">Буфер Logcat</string>
     <string name="logcat_buffer_descr">Проверьте и поделитесь подробными журналами приложения</string>
-    <string name="send_report">Отправить отчёт</string>
+    <string name="send_report">Отправить отчет</string>
 </resources>
