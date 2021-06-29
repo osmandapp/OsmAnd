@@ -48,6 +48,10 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+import static net.osmand.GPXUtilities.TRAVEL_GPX_CONVERT_FIRST_DIST;
+import static net.osmand.GPXUtilities.TRAVEL_GPX_CONVERT_FIRST_LETTER;
+import static net.osmand.GPXUtilities.TRAVEL_GPX_CONVERT_MULT_1;
+import static net.osmand.GPXUtilities.TRAVEL_GPX_CONVERT_MULT_2;
 import static net.osmand.GPXUtilities.writeGpxFile;
 import static net.osmand.data.Amenity.REF;
 import static net.osmand.plus.helpers.GpxUiHelper.getGpxTitle;
@@ -252,7 +256,8 @@ public class TravelObfHelper implements TravelHelper {
 			travelGpx.diffElevationDown = Double.parseDouble(Algorithms.emptyIfNull(amenity.getTagContent(DIFF_ELE_DOWN)));
 			String radius = amenity.getTagContent(ROUTE_RADIUS);
 			if (radius != null) {
-				travelGpx.routeRadius = MapUtils.convertCharToDist(radius.charAt(0),'A', 5000, 2, 5);
+				travelGpx.routeRadius = MapUtils.convertCharToDist(radius.charAt(0), TRAVEL_GPX_CONVERT_FIRST_LETTER,
+						TRAVEL_GPX_CONVERT_FIRST_DIST, TRAVEL_GPX_CONVERT_MULT_1, TRAVEL_GPX_CONVERT_MULT_2);
 			}
 		} catch (NumberFormatException e) {
 			LOG.debug(e.getMessage(), e);

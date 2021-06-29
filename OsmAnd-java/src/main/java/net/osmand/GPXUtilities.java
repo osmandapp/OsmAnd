@@ -57,6 +57,10 @@ public class GPXUtilities {
 	private static final String PROFILE_TYPE_EXTENSION = "profile";
 	private static final String GAP_PROFILE_TYPE = "gap";
 	private static final String TRKPT_INDEX_EXTENSION = "trkpt_idx";
+	public static final char TRAVEL_GPX_CONVERT_FIRST_LETTER = 'A';
+	public static final int TRAVEL_GPX_CONVERT_FIRST_DIST = 5000;
+	public static final int TRAVEL_GPX_CONVERT_MULT_1 = 2;
+	public static final int TRAVEL_GPX_CONVERT_MULT_2 = 5;
 
 	public final static String GPX_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z'"; //$NON-NLS-1$
 	private final static String GPX_TIME_FORMAT_MILLIS = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"; //$NON-NLS-1$
@@ -1820,7 +1824,8 @@ public class GPXUtilities {
 		public String getOuterRadius() {
 			QuadRect rect = getRect();
 			int radius = (int) MapUtils.getDistance(rect.bottom, rect.left, rect.top, rect.right);
-			return MapUtils.convertDistToChar(radius, 'A', 5000, 2, 5);
+			return MapUtils.convertDistToChar(radius, TRAVEL_GPX_CONVERT_FIRST_LETTER, TRAVEL_GPX_CONVERT_FIRST_DIST,
+					TRAVEL_GPX_CONVERT_MULT_1, TRAVEL_GPX_CONVERT_MULT_2);
 		}
 
 		private int getItemsToWriteSize() {
