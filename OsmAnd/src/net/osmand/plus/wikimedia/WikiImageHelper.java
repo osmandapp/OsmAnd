@@ -107,7 +107,8 @@ public class WikiImageHelper {
 
 	private static WikiImage getImageData(@NonNull String wikiMediaTag) {
 		try {
-			String imageFileName = wikiMediaTag.substring(WIKIMEDIA_FILE.length());
+			wikiMediaTag = wikiMediaTag.replace(WIKIMEDIA_FILE, "");
+			String imageFileName = wikiMediaTag;
 
 			String imageName = URLDecoder.decode(imageFileName, "UTF-8");
 			imageFileName = imageName.replace(" ", "_");
