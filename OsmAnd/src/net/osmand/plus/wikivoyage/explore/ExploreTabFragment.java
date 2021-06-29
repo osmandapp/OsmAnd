@@ -267,11 +267,8 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 	private boolean isOnlyDefaultTravelBookPresent() {
 		OsmandApplication app = getMyApplication();
 		if (app != null && !app.isApplicationInitializing()) {
-			for (BinaryMapIndexReader reader : app.getResourceManager().getTravelRepositories()) {
-				if (!reader.getFile().getName().equals(DEFAULT_WIKIVOYAGE_TRAVEL_OBF)) {
-					return false;
-				}
-			}
+			return app.getResourceManager().isOnlyDefaultTravelBookPresent();
+
 		}
 		return true;
 	}
