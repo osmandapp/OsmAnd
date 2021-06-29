@@ -18,8 +18,10 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 
@@ -47,6 +49,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.actions.OsmAndDialogs;
+import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.backup.ui.BackupAuthorizationFragment;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
@@ -62,6 +66,7 @@ import net.osmand.plus.measurementtool.StartPlanRouteBottomSheet;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.monitoring.TripRecordingBottomSheet;
 import net.osmand.plus.monitoring.TripRecordingStartingBottomSheet;
+import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.osmedit.dialogs.DismissRouteBottomSheetFragment;
 import net.osmand.plus.profiles.data.ProfileDataObject;
 import net.osmand.plus.profiles.data.RoutingDataUtils;
@@ -93,11 +98,16 @@ import java.util.List;
 import java.util.Map;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_AV_NOTES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BACKUP_RESTORE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_CONFIGURE_MAP_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_CONFIGURE_PROFILE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_CONFIGURE_SCREEN_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DASHBOARD_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DIRECTIONS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_FAVORITES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_OSM_EDITS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_TRACKS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_TRIP_RECORDING_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DIVIDER_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DOWNLOAD_MAPS_ID;
@@ -823,12 +833,31 @@ public class MapActivityActions implements DialogProvider {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 						app.logEvent("drawer_myplaces_open");
-						Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization()
+						Intent newIntent = new Intent(mapActivity, app.getAppCustomization()
 								.getFavoritesActivity());
 						newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 						mapActivity.startActivity(newIntent);
 						return true;
 					}
+				}).createItem());
+
+		int icon = R.drawable.ic_action_favorite_stroke;
+		addMyPlacesTabToDrawer(optionsMenuHelper, R.string.shared_string_my_favorites, icon, DRAWER_FAVORITES_ID);
+		addMyPlacesTabToDrawer(optionsMenuHelper, R.string.shared_string_tracks, icon, DRAWER_TRACKS_ID);
+		if (OsmandPlugin.isPluginEnabled(AudioVideoNotesPlugin.class)) {
+			addMyPlacesTabToDrawer(optionsMenuHelper, R.string.notes, icon, DRAWER_AV_NOTES_ID);
+		}
+		if (OsmandPlugin.isPluginEnabled(OsmEditingPlugin.class)) {
+			addMyPlacesTabToDrawer(optionsMenuHelper, R.string.osm_edits, icon, DRAWER_OSM_EDITS_ID);
+		}
+
+		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.backup_and_restore, mapActivity)
+				.setId(DRAWER_BACKUP_RESTORE_ID)
+				.setIcon(R.drawable.ic_action_cloud_upload)
+				.setListener((adapter, itemId, position, isChecked, viewCoordinates) -> {
+					app.logEvent("drawer_backup_restore_open");
+					BackupAuthorizationFragment.showInstance(mapActivity.getSupportFragmentManager());
+					return true;
 				}).createItem());
 
 		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.search_button, mapActivity)
@@ -1107,6 +1136,25 @@ public class MapActivityActions implements DialogProvider {
 			}
 		}
 		return description;
+	}
+
+	private void addMyPlacesTabToDrawer(ContextMenuAdapter adapter, @StringRes int titleRes,
+										@DrawableRes int iconRes, String drawerId) {
+		adapter.addItem(new ItemBuilder().setTitleId(titleRes, mapActivity)
+				.setId(drawerId)
+				.setIcon(iconRes)
+				.setListener((adapter1, itemId, position, isChecked, viewCoordinates) -> {
+					String logTitle = mapActivity.getString(titleRes).replace(" ", "_");
+					mapActivity.getMyApplication().logEvent("drawer_" + logTitle + "_open");
+					Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization()
+							.getFavoritesActivity());
+					newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+					settings.FAVORITES_TAB.set(titleRes);
+					mapActivity.startActivity(newIntent);
+					return true;
+
+				})
+				.createItem());
 	}
 
 	public void openIntermediatePointsDialog() {

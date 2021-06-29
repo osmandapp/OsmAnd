@@ -15,7 +15,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_AV_NOTES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BACKUP_RESTORE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DASHBOARD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_FAVORITES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_OSM_EDITS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_TRACKS_ID;
 
 public class ContextMenuItemsSettings implements Serializable {
 
@@ -105,6 +110,11 @@ public class ContextMenuItemsSettings implements Serializable {
 	public static ContextMenuItemsSettings getDrawerDefaultInstance() {
 		ArrayList<String> hiddenByDefault = new ArrayList<>();
 		hiddenByDefault.add(DRAWER_DASHBOARD_ID);
+		hiddenByDefault.add(DRAWER_FAVORITES_ID);
+		hiddenByDefault.add(DRAWER_TRACKS_ID);
+		hiddenByDefault.add(DRAWER_AV_NOTES_ID);
+		hiddenByDefault.add(DRAWER_OSM_EDITS_ID);
+		hiddenByDefault.add(DRAWER_BACKUP_RESTORE_ID);
 		return new ContextMenuItemsSettings(hiddenByDefault, new ArrayList<String>());
 	}
 }
