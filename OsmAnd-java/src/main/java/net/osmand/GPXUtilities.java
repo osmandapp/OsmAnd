@@ -1660,14 +1660,12 @@ public class GPXUtilities {
 		}
 
 		public QuadRect getRect() {
-			return getRectAroundPoint(0, 0);
+			return getBounds(0, 0);
 		}
 
-		public QuadRect getRectAroundPoint(double lat, double lon) {
-			return getBounds(lon, lat, lon, lat);
-		}
-
-		public QuadRect getBounds(double left, double bottom, double right, double top) {
+		public QuadRect getBounds(double defaultMissingLat, double defaultMissingLon) {
+			double left = defaultMissingLon, right = defaultMissingLon;
+			double top = defaultMissingLat, bottom = defaultMissingLat;
 			for (Track track : tracks) {
 				for (TrkSegment segment : track.segments) {
 					for (WptPt p : segment.points) {
