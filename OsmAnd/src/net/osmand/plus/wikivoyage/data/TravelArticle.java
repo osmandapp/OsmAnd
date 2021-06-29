@@ -11,7 +11,6 @@ import androidx.annotation.Size;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.osm.PoiCategory;
@@ -27,8 +26,6 @@ import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.List;
 
 import static net.osmand.GPXUtilities.*;
 import static net.osmand.util.Algorithms.capitalizeFirstLetter;
@@ -51,6 +48,8 @@ public class TravelArticle {
 	String imageTitle;
 	GPXFile gpxFile;
 	String routeId;
+	int routeRadius = -1;
+	public String ref;
 	String routeSource = "";
 	long originalId;
 	String lang;
@@ -177,65 +176,13 @@ public class TravelArticle {
 		return IMAGE_ROOT_URL + "thumb/" + hash[0] + "/" + hash[1] + "/" + imageTitle + "/" + prefix + imageTitle + suffix;
 	}
 
-	@Nullable
-	public GPXFile buildGpxFile(@NonNull List<BinaryMapIndexReader> readers){
-		GPXFile gpxFile = null;
-		List<Amenity> pointList = getPointList(readers);
-		if (!Algorithms.isEmpty(pointList)) {
-			gpxFile = new GPXFile(getTitle(), getLang(), getContent());
-			gpxFile.metadata.link = TravelArticle.getImageUrl(getImageTitle(), false);
-			for (Amenity amenity : pointList) {
-				WptPt wptPt = createWptPt(amenity, getLang());
-				gpxFile.addPoint(wptPt);
-			}
-		}
-		return gpxFile;
+	@NonNull
+	public String getPointFilterString(){
+		return ROUTE_ARTICLE_POINT;
 	}
 
 	@NonNull
-	private synchronized List<Amenity> getPointList(List<BinaryMapIndexReader> readers) {
-		final List<Amenity> pointList = new ArrayList<>();
-		final String lang = getLang();
-		for (BinaryMapIndexReader reader : readers) {
-			try {
-				if (file != null && !file.equals(reader.getFile())) {
-					continue;
-				}
-				BinaryMapIndexReader.SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(0, 0,
-						Algorithms.emptyIfNull(title), 0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE,
-						getSearchFilter(ROUTE_ARTICLE_POINT), new ResultMatcher<Amenity>() {
-
-							@Override
-							public boolean publish(Amenity amenity) {
-								String amenityLang = amenity.getTagSuffix(Amenity.LANG_YES + ":");
-								if (Algorithms.stringsEqual(lang, amenityLang)
-										&& Algorithms.stringsEqual(routeId,
-										Algorithms.emptyIfNull(amenity.getTagContent(Amenity.ROUTE_ID)))) {
-									pointList.add(amenity);
-								}
-								return false;
-							}
-
-							@Override
-							public boolean isCancelled() {
-								return false;
-							}
-						}, null);
-
-				if (!Algorithms.isEmpty(title)) {
-					reader.searchPoiByName(req);
-				} else {
-					reader.searchPoi(req);
-				}
-			} catch (Exception e) {
-				LOG.error(e.getMessage(), e);
-			}
-		}
-		return pointList;
-	}
-
-	@NonNull
-	private WptPt createWptPt(@NonNull Amenity amenity, @Nullable String lang) {
+	public WptPt createWptPt(@NonNull Amenity amenity, @Nullable String lang) {
 		WptPt wptPt = new WptPt();
 		wptPt.name = amenity.getName();
 		wptPt.lat = amenity.getLocation().getLatitude();

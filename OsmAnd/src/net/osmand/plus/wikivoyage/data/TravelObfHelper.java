@@ -9,11 +9,13 @@ import androidx.annotation.Nullable;
 
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
+import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
+import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
@@ -47,12 +49,16 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static net.osmand.GPXUtilities.writeGpxFile;
+import static net.osmand.data.Amenity.REF;
+import static net.osmand.plus.helpers.GpxUiHelper.getGpxTitle;
 import static net.osmand.plus.wikivoyage.data.PopularArticles.ARTICLES_PER_PAGE;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.ACTIVITY_TYPE;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.DIFF_ELE_DOWN;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.DIFF_ELE_UP;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.DISTANCE;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_TRACK_POINT;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.USER;
+import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 
 public class TravelObfHelper implements TravelHelper {
 
@@ -233,7 +239,7 @@ public class TravelObfHelper implements TravelHelper {
 		TravelGpx travelGpx = new TravelGpx();
 		travelGpx.file = file;
 		String title = amenity.getName("en");
-		travelGpx.title = travelGpx.createTitle(Algorithms.isEmpty(title) ? amenity.getName() : title);
+		travelGpx.title = createTitle(Algorithms.isEmpty(title) ? amenity.getName() : title);
 		travelGpx.lat = amenity.getLocation().getLatitude();
 		travelGpx.lon = amenity.getLocation().getLongitude();
 		travelGpx.routeId = Algorithms.emptyIfNull(amenity.getTagContent(Amenity.ROUTE_ID));
@@ -919,7 +925,116 @@ public class TravelObfHelper implements TravelHelper {
 		}
 	}
 
-	private static class GpxFileReader extends AsyncTask<Void, Void, GPXFile> {
+	@Nullable
+	private synchronized GPXFile buildGpxFile(@NonNull List<BinaryMapIndexReader> readers, TravelArticle article) {
+		final List<BinaryMapDataObject> segmentList = new ArrayList<>();
+		final List<Amenity> pointList = new ArrayList<>();
+		for (BinaryMapIndexReader reader : readers) {
+			try {
+				if (article.file != null && !article.file.equals(reader.getFile())) {
+					continue;
+				}
+				if (article instanceof TravelGpx) {
+					BinaryMapIndexReader.SearchRequest<BinaryMapDataObject> sr = BinaryMapIndexReader.buildSearchRequest(
+							0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, 15, null,
+							new ResultMatcher<BinaryMapDataObject>() {
+								@Override
+								public boolean publish(BinaryMapDataObject object) {
+									if (object.getPointsLength() > 1) {
+										if (object.getTagValue(REF).equals(article.ref)
+												&& createTitle(object.getName()).equals(article.title)) {
+											segmentList.add(object);
+										}
+									}
+									return false;
+								}
+
+								@Override
+								public boolean isCancelled() {
+									return false;
+								}
+							});
+					if (article.routeRadius >= 0) {
+						sr.setBBoxRadius(article.lat, article.lon, article.routeRadius);
+					}
+					reader.searchMapIndex(sr);
+				}
+
+				BinaryMapIndexReader.SearchRequest<Amenity> pointRequest = BinaryMapIndexReader.buildSearchPoiRequest(
+						0, 0, Algorithms.emptyIfNull(article.title), 0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE,
+						getSearchFilter(article.getPointFilterString()),
+						new ResultMatcher<Amenity>() {
+							@Override
+							public boolean publish(Amenity amenity) {
+								if (amenity.getRouteId().equals(article.getRouteId())) {
+									if (article.getPointFilterString().equals(ROUTE_TRACK_POINT)) {
+										pointList.add(amenity);
+									} else {
+										String amenityLang = amenity.getTagSuffix(Amenity.LANG_YES + ":");
+										if (Algorithms.stringsEqual(article.lang, amenityLang)) {
+											pointList.add(amenity);
+										}
+									}
+								}
+								return false;
+							}
+
+							@Override
+							public boolean isCancelled() {
+								return false;
+							}
+						}, null);
+				if (article.routeRadius >= 0) {
+					pointRequest.setBBoxRadius(article.lat, article.lon, article.routeRadius);
+				}
+				if (!Algorithms.isEmpty(article.title)) {
+					reader.searchPoiByName(pointRequest);
+				} else {
+					reader.searchPoi(pointRequest);
+				}
+				if (!Algorithms.isEmpty(segmentList)) {
+					break;
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		GPXFile gpxFile = null;
+		if (!segmentList.isEmpty()) {
+			GPXUtilities.Track track = new GPXUtilities.Track();
+			for (BinaryMapDataObject segment : segmentList) {
+				GPXUtilities.TrkSegment trkSegment = new GPXUtilities.TrkSegment();
+				for (int i = 0; i < segment.getPointsLength(); i++) {
+					GPXUtilities.WptPt point = new GPXUtilities.WptPt();
+					point.lat = MapUtils.get31LatitudeY(segment.getPoint31YTile(i));
+					point.lon = MapUtils.get31LongitudeX(segment.getPoint31XTile(i));
+					trkSegment.points.add(point);
+				}
+				track.segments.add(trkSegment);
+			}
+			gpxFile = new GPXFile(article.getTitle(), article.getLang(), "");
+			gpxFile.tracks = new ArrayList<>();
+			gpxFile.tracks.add(track);
+			gpxFile.setRef(article.ref);
+		}
+		if (!pointList.isEmpty()) {
+			if (gpxFile == null) {
+				gpxFile = new GPXFile(article.getTitle(), article.getLang(), "");
+			}
+			for (Amenity wayPoint : pointList) {
+				gpxFile.addPoint(article.createWptPt(wayPoint, article.getLang()));
+			}
+		}
+		article.gpxFile = gpxFile;
+		return gpxFile;
+	}
+
+	@NonNull
+	public String createTitle(@NonNull String name) {
+		return capitalizeFirstLetter(getGpxTitle(name));
+	}
+
+	private class GpxFileReader extends AsyncTask<Void, Void, GPXFile> {
 
 		private final TravelArticle article;
 		private final GpxReadCallback callback;
@@ -941,7 +1056,7 @@ public class TravelObfHelper implements TravelHelper {
 
 		@Override
 		protected GPXFile doInBackground(Void... voids) {
-			return article.buildGpxFile(readers);
+			return buildGpxFile(readers, article);
 		}
 
 		@Override
