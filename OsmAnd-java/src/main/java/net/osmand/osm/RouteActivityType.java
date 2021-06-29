@@ -74,14 +74,8 @@ public class RouteActivityType {
 	
 	public static RouteActivityType getTypeFromOSMTags(Map<String, String> tags) {
 		String rt = tags.get("route");
-		if ("piste".equals(rt)) {
-			return WINTER;
-		} else if ("road".equals(rt)) {
-			return CAR;
-		} else if ("hiking".equals(rt)) {
-			return HIKING;
-		} else if ("bicycle".equals(rt)) {
-			return CYCLING;
+		if (rt != null) {
+			return convertFromOsmGPXTag(rt);
 		}
 		return null;
 	}
@@ -227,6 +221,7 @@ public class RouteActivityType {
 		case "enduro":
 		case "feldwege":
 		case "feldweg":
+		case "rally":
 			return OFFROAD;
 		case "boat": 
 		case "water": 
