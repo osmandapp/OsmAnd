@@ -751,17 +751,6 @@ public class MapUtils {
 		return Math.sqrt((endX - startX) * (endX - startX) + (endY - startY) * (endY - startY));
 	}
 
-	/**
-	 * convert distance to char to store in the obf file
-	 *
-	 * @param dist integer distance in meters
-	 * @return String where  A <= 5 km, B <= 10 km, C <= 50 km, D <= 100 km, E <= 500 km, F <= 1000 km,
-	 * G <= 5000 km, H <= 10000 km
-	 */
-	public static String convertDistToChar(int dist) {
-		return convertDistToChar(dist, 'A', 5000, 2, 5);
-	}
-
 	public static String convertDistToChar(int dist, char firstLetter, int firstDist, int mult1, int mult2) {
 		int iteration = 0;
 		while (dist - firstDist > 0) {
@@ -769,17 +758,6 @@ public class MapUtils {
 			firstDist = firstDist * (iteration % 2 == 1 ? mult1 : mult2);
 		}
 		return String.valueOf((char) (firstLetter + iteration));
-	}
-
-	/**
-	 * convert char to distance
-	 *
-	 * @param ch char where A <= 5 km, B <= 10 km, C <= 50 km, D <= 100 km, E <= 500 km, F <= 1000 km,
-	 *           * G <= 5000 km, H <= 10000 km
-	 * @return integer distance in meters
-	 */
-	public static int convertCharToDist(char ch) {
-		return convertCharToDist(ch, 'A', 5000, 2, 5);
 	}
 
 	public static int convertCharToDist(char ch, char firstLetter, int firstDist, int mult1, int mult2) {

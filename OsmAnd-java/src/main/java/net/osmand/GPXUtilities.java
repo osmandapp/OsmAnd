@@ -1822,7 +1822,7 @@ public class GPXUtilities {
 		public String getOuterRadius() {
 			QuadRect rect = getRect();
 			int radius = (int) MapUtils.getDistance(rect.bottom, rect.left, rect.top, rect.right);
-			return MapUtils.convertDistToChar(radius);
+			return MapUtils.convertDistToChar(radius, 'A', 5000, 2, 5);
 		}
 
 		private int getItemsToWriteSize() {

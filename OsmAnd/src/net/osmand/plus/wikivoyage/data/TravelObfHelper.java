@@ -252,7 +252,7 @@ public class TravelObfHelper implements TravelHelper {
 			travelGpx.diffElevationDown = Double.parseDouble(Algorithms.emptyIfNull(amenity.getTagContent(DIFF_ELE_DOWN)));
 			String radius = amenity.getTagContent(ROUTE_RADIUS);
 			if (radius != null) {
-				travelGpx.routeRadius = MapUtils.convertCharToDist(radius.charAt(0));
+				travelGpx.routeRadius = MapUtils.convertCharToDist(radius.charAt(0),'A', 5000, 2, 5);
 			}
 		} catch (NumberFormatException e) {
 			LOG.debug(e.getMessage(), e);
@@ -996,7 +996,7 @@ public class TravelObfHelper implements TravelHelper {
 					break;
 				}
 			} catch (Exception e) {
-				System.out.println(e.getMessage());
+				LOG.error(e.getMessage());
 			}
 		}
 		GPXFile gpxFile = null;
