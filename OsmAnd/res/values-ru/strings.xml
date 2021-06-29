@@ -2063,7 +2063,7 @@
     <string name="road_blocked">Дорога перекрыта</string>
     <string name="nm">мор. миля</string>
     <string name="nm_h">уз</string>
-    <string name="downloads_left_template">Осталось %1$s загрузок</string>
+    <string name="downloads_left_template">Осталось загрузок: %1$s</string>
     <string name="donations">Пожертвования</string>
     <string name="osm_live_subscribe_btn">Подписаться</string>
     <string name="osm_live_hide_user_name">Не показывать мое имя в отчетах</string>
@@ -2219,7 +2219,7 @@
     <string name="si_mi_meters">Мили/метры</string>
     <string name="get_for">Получить за %1$s</string>
     <string name="get_it">Получить</string>
-    <string name="osm_live_banner_desc">Получайте неограниченное количество загрузок карт, вдобавок к еженедельным, ежедневным и даже почасовым обновлениям.</string>
+    <string name="osm_live_banner_desc">Получите неограниченное количество загрузок карт, а также еженедельные, ежедневные и даже почасовые обновления.</string>
     <string name="osmand_plus_banner_desc">Неограниченный доступ к картам, обновлениям и плагину «Википедия».</string>
     <string name="select_voice_provider">Голосовые инструкции</string>
     <string name="osm_live_payment_desc">Абонентская плата взимается за выбранный период. Отменить подписку можно в Google Play в любой момент.</string>
@@ -4185,7 +4185,7 @@
     <string name="purchases_feature_desc_monthly_map_updates">Доступ к регулярным ежемесячным обновлениям для локальных карт.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Доступ к более частому обновлению карт, выбирайте между: ежечасными, ежедневными или еженедельными обновлениями. Обновления загружаются постепенно, только для измененной области.</string>
     <string name="purchases_feature_desc_advanced_widgets">Доступ к расширенным виджетам OsmAnd.</string>
-    <string name="purchases_feature_desc_osmand_cloud">Получите OsmAnd Cloud для хранения всех данных OsmAnd в облаке. Забудьте о потере данных после переустановки, создавайте резервные копии и восстанавливайте всю информацию без проблем.</string>
+    <string name="purchases_feature_desc_osmand_cloud">OsmAnd Cloud для хранения всех данных OsmAnd в облаке. Забудьте о потере данных после переустановки, создавайте резервные копии и восстанавливайте всю информацию без проблем.</string>
     <string name="unlimited_map_downloads">Неограниченные загрузки карт</string>
     <string name="wikipedia_and_wikivoyage_offline">Локальные Википедия и Викигид</string>
     <string name="offline_wikipeadia">Локальная Википедия</string>
@@ -4206,9 +4206,9 @@
     <string name="cancel_anytime_in_gplay">Отмена в любое время в Google Play.</string>
     <string name="shared_string_not_included">Не включает</string>
     <string name="shared_string_includes">Включает</string>
-    <string name="complete_purchase">Полная покупка</string>
+    <string name="complete_purchase">Оформить покупку</string>
     <string name="regular_price">Обычная цена</string>
-    <string name="from_with_param">Из %1$s</string>
+    <string name="from_with_param">За %1$s</string>
     <string name="backup_delete_types_descr">Вы хотите удалить из облака данные для отключенных типов\?</string>
     <string name="backup_delete_types">Удалить данные отключенных типов</string>
     <string name="shared_string_discussion">Обсуждение</string>
