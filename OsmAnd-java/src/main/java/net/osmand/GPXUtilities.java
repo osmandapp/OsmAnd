@@ -1668,54 +1668,38 @@ public class GPXUtilities {
 		}
 
 		public QuadRect getBounds(double defaultMissingLat, double defaultMissingLon) {
-			double left = defaultMissingLon, right = defaultMissingLon;
-			double top = defaultMissingLat, bottom = defaultMissingLat;
+			QuadRect qr = new QuadRect(defaultMissingLon, defaultMissingLat, defaultMissingLon, defaultMissingLat);
 			for (Track track : tracks) {
 				for (TrkSegment segment : track.segments) {
 					for (WptPt p : segment.points) {
-						if (left == defaultMissingLon && right == defaultMissingLon) {
-							left = p.getLongitude();
-							right = p.getLongitude();
-							top = p.getLatitude();
-							bottom = p.getLatitude();
-						} else {
-							left = Math.min(left, p.getLongitude());
-							right = Math.max(right, p.getLongitude());
-							top = Math.max(top, p.getLatitude());
-							bottom = Math.min(bottom, p.getLatitude());
-						}
+						updateQR(qr, p, defaultMissingLat, defaultMissingLon);
 					}
 				}
 			}
 			for (WptPt p : points) {
-				if (left == defaultMissingLon && right == defaultMissingLon) {
-					left = p.getLongitude();
-					right = p.getLongitude();
-					top = p.getLatitude();
-					bottom = p.getLatitude();
-				} else {
-					left = Math.min(left, p.getLongitude());
-					right = Math.max(right, p.getLongitude());
-					top = Math.max(top, p.getLatitude());
-					bottom = Math.min(bottom, p.getLatitude());
-				}
+				updateQR(qr, p, defaultMissingLat, defaultMissingLon);
 			}
 			for (Route route : routes) {
 				for (WptPt p : route.points) {
-					if (left == defaultMissingLon && right == defaultMissingLon) {
-						left = p.getLongitude();
-						right = p.getLongitude();
-						top = p.getLatitude();
-						bottom = p.getLatitude();
-					} else {
-						left = Math.min(left, p.getLongitude());
-						right = Math.max(right, p.getLongitude());
-						top = Math.max(top, p.getLatitude());
-						bottom = Math.min(bottom, p.getLatitude());
-					}
+					updateQR(qr, p, defaultMissingLat, defaultMissingLon);
 				}
 			}
-			return new QuadRect(left, top, right, bottom);
+			return qr;
+		}
+
+		private void updateQR(QuadRect q, WptPt p, double defLat, double defLon) {
+			if (q.left == defLon && q.top == defLat && 
+					q.right == defLon && q.bottom == defLat) {
+				q.left = p.getLongitude();
+				q.right = p.getLongitude();
+				q.top = p.getLatitude();
+				q.bottom = p.getLatitude();
+			} else {
+				q.left = Math.min(q.left, p.getLongitude());
+				q.right = Math.max(q.right, p.getLongitude());
+				q.top = Math.max(q.top, p.getLatitude());
+				q.bottom = Math.min(q.bottom, p.getLatitude());
+			}			
 		}
 
 		public int[] getGradientScaleColor(String gradientScaleType) {
