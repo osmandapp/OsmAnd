@@ -1058,19 +1058,13 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		if (application == null || before.points.isEmpty()) {
 			return null;
 		}
-		GPXFile newGpx = RouteExporter.exportRoute(gpxName, getRouteSegments());
-
+		List<WptPt> points = null;
 		GpxData gpxData = getGpxData();
 		if (gpxData != null && gpxData.getGpxFile() != null) {
-			GPXFile gpxFile = gpxData.getGpxFile();
-			newGpx.addPoints(gpxFile.getPoints());
-
-			for (List<WptPt> points : getRoutePoints()) {
-				newGpx.addRoutePoints(points, true);
-			}
+			points = gpxData.getGpxFile().getPoints();
 		}
 
-		return newGpx;
+		return RouteExporter.exportRoute(gpxName, getRouteSegments(), points, getRoutePoints());
 	}
 
 	private TrkSegment getRouteSegment(int startPointIndex, int endPointIndex) {
