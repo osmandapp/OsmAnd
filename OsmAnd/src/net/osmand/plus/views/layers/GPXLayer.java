@@ -873,8 +873,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			MapActivity mapActivity = (MapActivity) view.getContext();
 			OsmandApplication app = mapActivity.getMyApplication();
 			MapRouteInfoMenu routeInfoMenu = mapActivity.getMapRouteInfoMenu();
-			return !app.getSelectedGpxHelper().shouldHideTrackToFollow()
-					|| routeInfoMenu.isVisible()
+			return routeInfoMenu.isVisible()
 					|| app.getRoutingHelper().isFollowingMode()
 					|| MapRouteInfoMenu.followTrackVisible
 					|| MapRouteInfoMenu.chooseRoutesVisible
