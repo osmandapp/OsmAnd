@@ -16,10 +16,12 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupHelper.OnDeleteFilesListener;
+import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.backup.NetworkSettingsHelper.BackupExportListener;
 import net.osmand.plus.backup.PrepareBackupResult;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
 import net.osmand.plus.backup.RemoteFile;
+import net.osmand.plus.backup.ServerError;
 import net.osmand.plus.backup.ui.cards.BackupUploadCard;
 import net.osmand.plus.backup.ui.cards.LocalBackupCard;
 import net.osmand.plus.backup.ui.cards.RestoreBackupCard;
@@ -36,6 +38,7 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements BackupEx
 
 	private OsmandApplication app;
 	private BackupHelper backupHelper;
+	private NetworkSettingsHelper settingsHelper;
 
 	private BackupUploadCard uploadCard;
 
@@ -54,6 +57,7 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements BackupEx
 		super.onCreate(savedInstanceState);
 		app = requireMyApplication();
 		backupHelper = app.getBackupHelper();
+		settingsHelper = app.getNetworkSettingsHelper();
 		nightMode = !app.getSettings().isLightContent();
 	}
 
@@ -73,12 +77,14 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements BackupEx
 	public void onResume() {
 		super.onResume();
 		updateCards();
+		settingsHelper.updateExportListener(this);
 		backupHelper.addPrepareBackupListener(this);
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
+		settingsHelper.updateExportListener(null);
 		backupHelper.removePrepareBackupListener(this);
 	}
 
@@ -133,7 +139,7 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements BackupEx
 	@Override
 	public void onBackupExportFinished(@Nullable String error) {
 		if (error != null) {
-			String err = BackupHelper.parseServerError(error);
+			String err = new ServerError(error).getLocalizedError(app);
 			app.showShortToastMessage(err);
 		}
 		backupHelper.prepareBackup();

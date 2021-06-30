@@ -100,11 +100,11 @@ public class BackupHelper {
 	private final List<OnPrepareBackupListener> prepareBackupListeners = new ArrayList<>();
 
 	public interface OnRegisterUserListener {
-		void onRegisterUser(int status, @Nullable String message, @Nullable String error);
+		void onRegisterUser(int status, @Nullable String message, @Nullable ServerError error);
 	}
 
 	public interface OnRegisterDeviceListener {
-		void onRegisterDevice(int status, @Nullable String message, @Nullable String error);
+		void onRegisterDevice(int status, @Nullable String message, @Nullable ServerError error);
 	}
 
 	public interface OnUpdateOrderIdListener {
@@ -332,8 +332,10 @@ public class BackupHelper {
 		AndroidNetworkUtils.sendRequestAsync(app, USER_REGISTER_URL, params, "Register user", false, true, (resultJson, error) -> {
 			int status;
 			String message;
+			ServerError serverError = null;
 			if (!Algorithms.isEmpty(error)) {
-				message = "User registration error: " + parseServerError(error) + "\nEmail=" + email + "\nOrderId=" + orderId + "\nDeviceId=" + deviceId;
+				serverError = new ServerError(error);
+				message = "User registration error: " + serverError + "\nEmail=" + email + "\nOrderId=" + orderId + "\nDeviceId=" + deviceId;
 				status = STATUS_SERVER_ERROR;
 			} else if (!Algorithms.isEmpty(resultJson)) {
 				try {
@@ -354,7 +356,7 @@ public class BackupHelper {
 				status = STATUS_EMPTY_RESPONSE_ERROR;
 			}
 			if (listener != null) {
-				listener.onRegisterUser(status, message, error);
+				listener.onRegisterUser(status, message, serverError);
 			}
 			operationLog.finishOperation(status + " " + message);
 		});
@@ -376,8 +378,10 @@ public class BackupHelper {
 		AndroidNetworkUtils.sendRequestAsync(app, DEVICE_REGISTER_URL, params, "Register device", false, true, (resultJson, error) -> {
 			int status;
 			String message;
+			ServerError serverError = null;
 			if (!Algorithms.isEmpty(error)) {
-				message = "Device registration error: " + parseServerError(error);
+				serverError = new ServerError(error);
+				message = "Device registration error: " + serverError;
 				status = STATUS_SERVER_ERROR;
 			} else if (!Algorithms.isEmpty(resultJson)) {
 				try {
@@ -399,7 +403,7 @@ public class BackupHelper {
 				status = STATUS_EMPTY_RESPONSE_ERROR;
 			}
 			if (listener != null) {
-				listener.onRegisterDevice(status, message, error);
+				listener.onRegisterDevice(status, message, serverError);
 			}
 			operationLog.finishOperation(status + " " + message);
 		});
@@ -426,7 +430,7 @@ public class BackupHelper {
 			int status;
 			String message;
 			if (!Algorithms.isEmpty(error)) {
-				message = "Update order id error: " + parseServerError(error);
+				message = "Update order id error: " + new ServerError(error);
 				status = STATUS_SERVER_ERROR;
 			} else if (!Algorithms.isEmpty(resultJson)) {
 				try {
@@ -554,7 +558,7 @@ public class BackupHelper {
 		if (listener != null) {
 			listener.onFileUploadDone(type, fileName, uploadTime, error);
 		}
-		operationLog.finishOperation(type + " " + fileName + (error != null ? " Error: " + parseServerError(error) : " OK"));
+		operationLog.finishOperation(type + " " + fileName + (error != null ? " Error: " + new ServerError(error) : " OK"));
 		return error;
 	}
 
@@ -586,7 +590,7 @@ public class BackupHelper {
 
 			@Override
 			public void onFileUploadDone(@Nullable String error) {
-				operationLog.finishOperation(type + " " + fileName + (error != null ? " Error: " + parseServerError(error) : " OK"));
+				operationLog.finishOperation(type + " " + fileName + (error != null ? " Error: " + new ServerError(error) : " OK"));
 				if (error == null) {
 					updateFileUploadTime(type, fileName, uploadTime);
 				}
@@ -711,7 +715,7 @@ public class BackupHelper {
 								if (response != null) {
 									String errorStr = response.getError();
 									if (!Algorithms.isEmpty(errorStr)) {
-										message = parseServerError(errorStr);
+										message = new ServerError(errorStr).toString();
 										success = false;
 									} else {
 										String responseStr = response.getResponse();
@@ -773,7 +777,7 @@ public class BackupHelper {
 				List<RemoteFile> remoteFiles = new ArrayList<>();
 				if (!Algorithms.isEmpty(error)) {
 					status = STATUS_SERVER_ERROR;
-					message = "Download file list error: " + parseServerError(error);
+					message = "Download file list error: " + new ServerError(error);
 				} else if (!Algorithms.isEmpty(resultJson)) {
 					try {
 						JSONObject result = new JSONObject(resultJson);
@@ -822,7 +826,7 @@ public class BackupHelper {
 			List<RemoteFile> remoteFiles = new ArrayList<>();
 			if (!Algorithms.isEmpty(error)) {
 				status = STATUS_SERVER_ERROR;
-				message = "Download file list error: " + parseServerError(error);
+				message = "Download file list error: " + new ServerError(error);
 			} else if (!Algorithms.isEmpty(resultJson)) {
 				try {
 					JSONObject result = new JSONObject(resultJson);
@@ -887,7 +891,7 @@ public class BackupHelper {
 			List<RemoteFile> remoteFiles = new ArrayList<>();
 			if (!Algorithms.isEmpty(error)) {
 				status = STATUS_SERVER_ERROR;
-				message = "Download file list error: " + parseServerError(error);
+				message = "Download file list error: " + new ServerError(error);
 			} else if (!Algorithms.isEmpty(resultJson)) {
 				try {
 					JSONObject result = new JSONObject(resultJson);
@@ -1141,35 +1145,6 @@ public class BackupHelper {
 			}
 		};
 		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-	}
-
-	@NonNull
-	public static String parseServerError(@NonNull String error) {
-		try {
-			JSONObject resultError = new JSONObject(error);
-			if (resultError.has("error")) {
-				JSONObject errorObj = resultError.getJSONObject("error");
-				return errorObj.getInt("errorCode") + " (" + errorObj.getString("message") + ")";
-			}
-		} catch (JSONException e) {
-			// ignore
-		}
-		return error;
-	}
-
-	public static int getErrorCode(@Nullable String error) {
-		if (!Algorithms.isEmpty(error)) {
-			try {
-				JSONObject resultError = new JSONObject(error);
-				if (resultError.has("error")) {
-					JSONObject errorObj = resultError.getJSONObject("error");
-					return errorObj.getInt("errorCode");
-				}
-			} catch (JSONException e) {
-				// ignore
-			}
-		}
-		return -1;
 	}
 
 	@SuppressLint("StaticFieldLeak")

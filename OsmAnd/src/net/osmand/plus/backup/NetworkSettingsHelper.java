@@ -53,6 +53,11 @@ public class NetworkSettingsHelper extends SettingsHelper {
 	}
 
 	@Nullable
+	public ExportBackupTask getExportTask() {
+		return exportTask;
+	}
+
+	@Nullable
 	public ImportType getImportTaskType() {
 		ImportBackupTask importTask = this.importTask;
 		return importTask != null ? importTask.getImportType() : null;
@@ -75,7 +80,11 @@ public class NetworkSettingsHelper extends SettingsHelper {
 		return exportTask != null;
 	}
 
-	public void updateExportListeners(@Nullable BackupExportListener listener) {
+	public boolean isBackupImporting() {
+		return importTask != null;
+	}
+
+	public void updateExportListener(@Nullable BackupExportListener listener) {
 		ExportBackupTask exportTask = this.exportTask;
 		if (exportTask != null) {
 			exportTask.setListener(listener);

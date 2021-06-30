@@ -5,6 +5,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
+import net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType;
 import net.osmand.plus.backup.UserNotRegisteredException;
 import net.osmand.plus.backup.ui.BackupTypesAdapter.OnItemSelectedListener;
 import net.osmand.plus.backup.ui.ClearTypesBottomSheet.BackupClearType;
@@ -35,6 +36,11 @@ public class BackupTypesFragment extends BaseBackupTypesFragment implements OnIt
 	}
 
 	@Override
+	protected RemoteFilesType getRemoteFilesType() {
+		return RemoteFilesType.UNIQUE;
+	}
+
+	@Override
 	protected Map<ExportSettingsType, List<?>> getSelectedItems() {
 		Map<ExportSettingsType, List<?>> selectedItemsMap = new EnumMap<>(ExportSettingsType.class);
 		for (ExportSettingsType type : ExportSettingsType.values()) {
@@ -43,11 +49,6 @@ public class BackupTypesFragment extends BaseBackupTypesFragment implements OnIt
 			}
 		}
 		return selectedItemsMap;
-	}
-
-	@Override
-	protected Map<ExportSettingsCategory, SettingsCategoryItems> getDataList() {
-		return app.getFileSettingsHelper().getSettingsByCategory(true, true);
 	}
 
 	@Override
