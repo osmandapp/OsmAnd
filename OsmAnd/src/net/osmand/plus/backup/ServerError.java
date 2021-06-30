@@ -1,6 +1,7 @@
 package net.osmand.plus.backup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -32,10 +33,12 @@ public class ServerError {
 		parseError(error);
 	}
 
+	@NonNull
 	public String getError() {
 		return error;
 	}
 
+	@Nullable
 	public String getMessage() {
 		return message;
 	}
@@ -59,6 +62,7 @@ public class ServerError {
 		}
 	}
 
+	@NonNull
 	public String getLocalizedError(@NonNull OsmandApplication app) {
 		switch (code) {
 			case SERVER_ERROR_CODE_EMAIL_IS_INVALID:
