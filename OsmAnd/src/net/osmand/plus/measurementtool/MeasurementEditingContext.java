@@ -2,6 +2,9 @@ package net.osmand.plus.measurementtool;
 
 import android.util.Pair;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
@@ -42,9 +45,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode.WHOLE_TRACK;
 import static net.osmand.plus.measurementtool.command.MeasurementModeCommand.MeasurementCommandType.APPROXIMATE_POINTS;
@@ -771,7 +771,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 			return;
 		}
 		GPXFile gpxFile = gpxData.getGpxFile();
-		if(gpxFile.hasRtePt() && !gpxFile.hasTrkPt()){
+		if (gpxFile.hasRtePt() && !gpxFile.hasTrkPt()) {
 			addPoints(gpxFile.getRoutePoints());
 			return;
 		}
@@ -1058,7 +1058,19 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		if (application == null || before.points.isEmpty()) {
 			return null;
 		}
-		return RouteExporter.exportRoute(gpxName, getRouteSegments(), null);
+		GPXFile newGpx = RouteExporter.exportRoute(gpxName, getRouteSegments());
+
+		GpxData gpxData = getGpxData();
+		if (gpxData != null && gpxData.getGpxFile() != null) {
+			GPXFile gpxFile = gpxData.getGpxFile();
+			newGpx.addPoints(gpxFile.getPoints());
+
+			for (List<WptPt> points : getRoutePoints()) {
+				newGpx.addRoutePoints(points, true);
+			}
+		}
+
+		return newGpx;
 	}
 
 	private TrkSegment getRouteSegment(int startPointIndex, int endPointIndex) {
