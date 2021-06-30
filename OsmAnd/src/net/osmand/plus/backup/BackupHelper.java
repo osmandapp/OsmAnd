@@ -24,6 +24,7 @@ import net.osmand.StreamWriter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
+import net.osmand.plus.backup.BackupExecutor.BackupExecutorListener;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
 import net.osmand.plus.backup.ThreadPoolTaskExecutor.OnThreadPoolTaskExecutorListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
@@ -60,6 +61,7 @@ public class BackupHelper {
 	public static final Log LOG = PlatformUtil.getLog(BackupHelper.class);
 	private static final boolean DEBUG = true;
 	private static final int THREAD_POOL_SIZE = 4;
+	private final BackupExecutor executor;
 
 	public final static String INFO_EXT = ".info";
 
@@ -162,6 +164,7 @@ public class BackupHelper {
 
 	public BackupHelper(@NonNull OsmandApplication app) {
 		this.app = app;
+		this.executor = new BackupExecutor(app);
 		this.settings = app.getSettings();
 		this.dbHelper = new BackupDbHelper(app);
 	}
@@ -182,6 +185,18 @@ public class BackupHelper {
 
 	void setBackup(PrepareBackupResult backup) {
 		this.backup = backup;
+	}
+
+	public boolean isBusy() {
+		return executor.getState() == BackupExecutor.State.BUSY;
+	}
+
+	public void addBackupListener(@NonNull BackupExecutorListener listener) {
+		executor.addListener(listener);
+	}
+
+	public void removeBackupListener(@NonNull BackupExecutorListener listener) {
+		executor.removeListener(listener);
 	}
 
 	public static void setLastModifiedTime(@NonNull Context ctx, @NonNull String name) {
@@ -359,7 +374,7 @@ public class BackupHelper {
 				listener.onRegisterUser(status, message, serverError);
 			}
 			operationLog.finishOperation(status + " " + message);
-		});
+		}, executor);
 	}
 
 	public void registerDevice(String token, @Nullable final OnRegisterDeviceListener listener) {
@@ -406,10 +421,10 @@ public class BackupHelper {
 				listener.onRegisterDevice(status, message, serverError);
 			}
 			operationLog.finishOperation(status + " " + message);
-		});
+		}, executor);
 	}
 
-	public void updateOrderIdSync(@Nullable final OnUpdateOrderIdListener listener) {
+	void updateOrderIdSync(@Nullable final OnUpdateOrderIdListener listener) {
 		Map<String, String> params = new HashMap<>();
 		params.put("email", getEmail());
 		String orderId = getOrderId();
@@ -508,9 +523,9 @@ public class BackupHelper {
 		headers.put("Accept-Encoding", "deflate, gzip");
 	}
 
-	public String uploadFileSync(@NonNull String fileName, @NonNull String type,
-								 @NonNull StreamWriter streamWriter, final long uploadTime,
-								 @Nullable final OnUploadFileListener listener) throws UserNotRegisteredException {
+	String uploadFileSync(@NonNull String fileName, @NonNull String type,
+						  @NonNull StreamWriter streamWriter, final long uploadTime,
+						  @Nullable final OnUploadFileListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 
 		Map<String, String> params = new HashMap<>();
@@ -562,8 +577,8 @@ public class BackupHelper {
 		return error;
 	}
 
-	public void uploadFile(@NonNull String fileName, @NonNull String type, @NonNull StreamWriter streamWriter,
-						   @Nullable final OnUploadFileListener listener) throws UserNotRegisteredException {
+	void uploadFile(@NonNull String fileName, @NonNull String type, @NonNull StreamWriter streamWriter,
+					@Nullable final OnUploadFileListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 
 		final long uploadTime = System.currentTimeMillis();
@@ -598,10 +613,11 @@ public class BackupHelper {
 					listener.onFileUploadDone(type, fileName, uploadTime, error);
 				}
 			}
-		});
+		}, executor);
 	}
 
-	public void uploadFiles(@NonNull List<LocalFile> localFiles, @Nullable final OnUploadFilesListener listener) throws UserNotRegisteredException {
+	void uploadFiles(@NonNull List<LocalFile> localFiles,
+					 @Nullable final OnUploadFilesListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 
 		Map<String, String> params = new HashMap<>();
@@ -664,14 +680,16 @@ public class BackupHelper {
 					listener.onFilesUploadDone(errors);
 				}
 			}
-		});
+		}, executor);
 	}
 
-	public void deleteFiles(@NonNull List<RemoteFile> remoteFiles, @Nullable final OnDeleteFilesListener listener) throws UserNotRegisteredException {
+	void deleteFiles(@NonNull List<RemoteFile> remoteFiles,
+					 @Nullable final OnDeleteFilesListener listener) throws UserNotRegisteredException {
 		deleteFiles(remoteFiles, false, listener);
 	}
 
-	public void deleteFiles(@NonNull List<RemoteFile> remoteFiles, boolean byVersion, @Nullable final OnDeleteFilesListener listener) throws UserNotRegisteredException {
+	void deleteFiles(@NonNull List<RemoteFile> remoteFiles, boolean byVersion,
+					 @Nullable final OnDeleteFilesListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 
 		Map<String, String> commonParameters = new HashMap<>();
@@ -690,7 +708,7 @@ public class BackupHelper {
 			tasks.add(new SendRequestTask(app, r, remoteFile));
 		}
 		ThreadPoolTaskExecutor<SendRequestTask> executor =
-				new ThreadPoolTaskExecutor<>(4, new OnThreadPoolTaskExecutorListener<SendRequestTask>() {
+				new ThreadPoolTaskExecutor<>(THREAD_POOL_SIZE, new OnThreadPoolTaskExecutorListener<SendRequestTask>() {
 
 					@Override
 					public void onTaskStarted(@NonNull SendRequestTask task) {
@@ -741,10 +759,10 @@ public class BackupHelper {
 						}
 					}
 				});
-		executor.runAsync(tasks);
+		executor.runAsync(tasks, executor);
 	}
 
-	public void downloadFileListSync(@Nullable final OnDownloadFileListListener listener) throws UserNotRegisteredException {
+	void downloadFileListSync(@Nullable final OnDownloadFileListListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 
 		Map<String, String> params = new HashMap<>();
@@ -755,7 +773,7 @@ public class BackupHelper {
 				getDownloadFileListListener(listener));
 	}
 
-	public void downloadFileList(@Nullable final OnDownloadFileListListener listener) throws UserNotRegisteredException {
+	void downloadFileList(@Nullable final OnDownloadFileListListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 
 		Map<String, String> params = new HashMap<>();
@@ -763,7 +781,7 @@ public class BackupHelper {
 		params.put("accessToken", getAccessToken());
 		params.put("allVersions", "true");
 		AndroidNetworkUtils.sendRequestAsync(app, LIST_FILES_URL, params, "Download file list", false, false,
-				getDownloadFileListListener(listener));
+				getDownloadFileListListener(listener), executor);
 	}
 
 	private OnRequestResultListener getDownloadFileListListener(@Nullable OnDownloadFileListListener listener) {
@@ -808,7 +826,8 @@ public class BackupHelper {
 		};
 	}
 
-	public void deleteAllFiles(@Nullable final OnDeleteFilesListener listener, @NonNull List<ExportSettingsType> types) throws UserNotRegisteredException {
+	public void deleteAllFiles(@Nullable final OnDeleteFilesListener listener,
+							   @NonNull List<ExportSettingsType> types) throws UserNotRegisteredException {
 		checkRegistered();
 
 		Map<String, String> params = new HashMap<>();
@@ -816,7 +835,7 @@ public class BackupHelper {
 		params.put("accessToken", getAccessToken());
 		params.put("allVersions", "true");
 		AndroidNetworkUtils.sendRequestAsync(app, LIST_FILES_URL, params, "Delete all files", false, false,
-				getDeleteAllFilesListener(listener, types));
+				getDeleteAllFilesListener(listener, types), executor);
 	}
 
 	private OnRequestResultListener getDeleteAllFilesListener(@Nullable OnDeleteFilesListener listener, @NonNull List<ExportSettingsType> types) {
@@ -873,7 +892,8 @@ public class BackupHelper {
 		};
 	}
 
-	public void deleteOldFiles(@Nullable final OnDeleteFilesListener listener, @NonNull List<ExportSettingsType> types) throws UserNotRegisteredException {
+	public void deleteOldFiles(@Nullable final OnDeleteFilesListener listener,
+							   @NonNull List<ExportSettingsType> types) throws UserNotRegisteredException {
 		checkRegistered();
 
 		Map<String, String> params = new HashMap<>();
@@ -881,7 +901,7 @@ public class BackupHelper {
 		params.put("accessToken", getAccessToken());
 		params.put("allVersions", "true");
 		AndroidNetworkUtils.sendRequestAsync(app, LIST_FILES_URL, params, "Delete old files", false, false,
-				getDeleteOldFilesListener(listener, types));
+				getDeleteOldFilesListener(listener, types), executor);
 	}
 
 	private OnRequestResultListener getDeleteOldFilesListener(@Nullable OnDeleteFilesListener listener, @NonNull List<ExportSettingsType> types) {
@@ -943,8 +963,8 @@ public class BackupHelper {
 	}
 
 	@NonNull
-	public Map<File, String> downloadFilesSync(@NonNull final Map<File, RemoteFile> filesMap,
-											   @Nullable final OnDownloadFileListener listener) throws UserNotRegisteredException {
+	Map<File, String> downloadFilesSync(@NonNull final Map<File, RemoteFile> filesMap,
+										@Nullable final OnDownloadFileListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 
 		Map<File, String> res = new HashMap<>();
@@ -1003,8 +1023,8 @@ public class BackupHelper {
 		return res;
 	}
 
-	public void downloadFiles(@NonNull final Map<File, RemoteFile> filesMap,
-							  @Nullable final OnDownloadFileListener listener) throws UserNotRegisteredException {
+	void downloadFiles(@NonNull final Map<File, RemoteFile> filesMap,
+					   @Nullable final OnDownloadFileListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 
 		Map<String, String> params = new HashMap<>();
@@ -1057,11 +1077,11 @@ public class BackupHelper {
 							listener.onFilesDownloadDone(errors);
 						}
 					}
-				});
+				}, executor);
 	}
 
 	@SuppressLint("StaticFieldLeak")
-	public void collectLocalFiles(@Nullable final OnCollectLocalFilesListener listener) {
+	void collectLocalFiles(@Nullable final OnCollectLocalFilesListener listener) {
 		OperationLog operationLog = new OperationLog("collectLocalFiles", DEBUG);
 		AsyncTask<Void, LocalFile, List<LocalFile>> task = new AsyncTask<Void, LocalFile, List<LocalFile>>() {
 
@@ -1144,14 +1164,14 @@ public class BackupHelper {
 				}
 			}
 		};
-		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		task.executeOnExecutor(executor);
 	}
 
 	@SuppressLint("StaticFieldLeak")
-	public void generateBackupInfo(@NonNull final List<LocalFile> localFiles,
-								   @NonNull final List<RemoteFile> uniqueRemoteFiles,
-								   @NonNull final List<RemoteFile> deletedRemoteFiles,
-								   @Nullable final OnGenerateBackupInfoListener listener) {
+	void generateBackupInfo(@NonNull final List<LocalFile> localFiles,
+							@NonNull final List<RemoteFile> uniqueRemoteFiles,
+							@NonNull final List<RemoteFile> deletedRemoteFiles,
+							@Nullable final OnGenerateBackupInfoListener listener) {
 
 		OperationLog operationLog = new OperationLog("generateBackupInfo", DEBUG, 200);
 		final long backupLastUploadedTime = settings.BACKUP_LAST_UPLOADED_TIME.get();
@@ -1224,7 +1244,7 @@ public class BackupHelper {
 				}
 			}
 		};
-		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		task.executeOnExecutor(executor);
 	}
 
 	private static class SendRequestTask extends ThreadPoolTaskExecutor.Task {

@@ -13,6 +13,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executor;
 import java.util.concurrent.Future;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -74,9 +75,9 @@ public class ThreadPoolTaskExecutor<T extends ThreadPoolTaskExecutor.Task> exten
 		waitUntilFinished();
 	}
 
-	public void runAsync(@NonNull List<T> tasks) {
+	public void runAsync(@NonNull List<T> tasks, @Nullable Executor executor) {
 		asyncTask = new AsyncTaskExecutor(tasks);
-		asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		asyncTask.executeOnExecutor(executor != null ? executor : AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	private void initTasks(List<T> tasks) {
