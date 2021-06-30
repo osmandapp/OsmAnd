@@ -2659,7 +2659,7 @@
     <string name="record_plugin_description">See lisa aktiveerib radade salvestamise funktsionaalsuse, puudutades käsitsi kaardil GPX logimisvidinat või logides automaatselt kõik oma teekonnad GPX faili.
 \n
 \nSalvestatud radu saad jagada oma sõpradega või kasutada OSM kaastöödeks. Sportlased saavad kasutada salvestatud radu oma treeningute jälgimiseks. Mõningast raja põhianalüüsi saad teha otse OsmAnd sees, näiteks ringiajad, keskmine kiirus jne. Lisaks muidugi saad radu hiljem analüüsida ka spetsiaalsetete kolmandate osapoolte analüüsitööriistadega.</string>
-   <string name="srtm_plugin_description">See laiendus pakub nii kõrgusjoonte ülekatte kui ka (reljeefse) künkavarjutuse kihi, mida kuvatakse OsmAnd standardkaartidel. Seda funktsionaalsust hindavad sportlased, matkajad, rändajad ja kõik teised, kes on huvitatud maastiku reljeefstruktuurist. (Pange tähele, et kõrgusjoonte ja/või reljeefi andmed on eraldi, pärast laienduse aktiveerimist on saadaval täiendavad allalaaditavad failid.)
+    <string name="srtm_plugin_description">See laiendus pakub nii kõrgusjoonte ülekatte kui ka (reljeefse) künkavarjutuse kihi, mida kuvatakse OsmAnd standardkaartidel. Seda funktsionaalsust hindavad sportlased, matkajad, rändajad ja kõik teised, kes on huvitatud maastiku reljeefstruktuurist. (Pange tähele, et kõrgusjoonte ja/või reljeefi andmed on eraldi, pärast laienduse aktiveerimist on saadaval täiendavad allalaaditavad failid.)
 \n
 \nGlobaalsed andmed (vahemikus 70 ° põhja ja 70 ° lõuna) põhinevad mõõtmistel, mille on teinud SRTM (süstiku radari topograafiamissioon) ja ASTER (täiustatud kosmose termilise kiirguse ja peegelduse radiomeeter), NASA maavaatlussatelliitide süsteemi lipulaeva Terra pardal olev pildistamisinstrument. ASTER on NASA, Jaapani majandus-, kaubandus- ja tööstusministeeriumi (METI) ja Jaapani kosmosesüsteemide (J-kosmosesüsteemid) koostöö.</string>
     <string name="plugin_touringview_descr">Selle vaate aktiveerimine muudab OsmAndi kaardistiili „Reisivaateks“. See on reisijatele ja kutselistele autojuhtidele mõeldud eriline kõrglahutusega vaade.
@@ -4083,4 +4083,8 @@
     <string name="backup_data">Andmete varundamine</string>
     <string name="select_backup_data_descr">Vali varundatavad andmed ja kaustad.</string>
     <string name="select_nav_profile_dialog_message">„Navigatsioonitüüp“ määrab teekonna koostamise viisi. Saad valida võrguühenduseta ja võrgupõhiste marsruutimismootorite vahel.</string>
+    <string name="backup_delete_types_descr">Kas sa soovid kustutada kasutuselt eemaldatud andmetüüpide kirjed\?</string>
+    <string name="backup_delete_types">Kustuta kasutuselt eemaldatud andmetüüpide kirjed</string>
+    <string name="shared_string_discussion">Arutelu</string>
+    <string name="shared_string_view_all">Näita kõiki</string>
 </resources>
