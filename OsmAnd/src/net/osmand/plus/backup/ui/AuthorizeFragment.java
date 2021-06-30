@@ -39,6 +39,8 @@ import net.osmand.plus.backup.BackupHelper.OnRegisterDeviceListener;
 import net.osmand.plus.backup.BackupHelper.OnRegisterUserListener;
 import net.osmand.plus.backup.ServerError;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.chooseplan.ChoosePlanFragment;
+import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
@@ -47,6 +49,7 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
+import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_NO_VALID_SUBSCRIPTION;
 import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_TOKEN_IS_NOT_VALID_OR_EXPIRED;
 import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_USER_IS_NOT_REGISTERED;
 
@@ -405,6 +408,10 @@ public class AuthorizeFragment extends BaseOsmAndFragment {
 						errorText.setText(error != null ? error.getLocalizedError(app) : message);
 						buttonContinue.setEnabled(false);
 						AndroidUiHelper.updateVisibility(errorText, true);
+
+						if (activity != null && error != null && error.getCode() == SERVER_ERROR_CODE_NO_VALID_SUBSCRIPTION) {
+							ChoosePlanFragment.showInstance(activity, OsmAndFeature.OSMAND_CLOUD);
+						}
 					}
 				}
 			}
