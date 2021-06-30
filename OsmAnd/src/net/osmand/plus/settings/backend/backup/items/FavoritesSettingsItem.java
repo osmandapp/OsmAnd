@@ -28,7 +28,6 @@ import java.util.List;
 import java.util.Map;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.PERSONAL_CATEGORY;
 import static net.osmand.plus.importfiles.ImportHelper.asFavourites;
 
 public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup> {
@@ -94,7 +93,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 			appliedItems = new ArrayList<>(newItems);
 
 			for (FavoriteGroup duplicate : duplicateItems) {
-				boolean isPersonal = duplicate.getName().equals(PERSONAL_CATEGORY);
+				boolean isPersonal = duplicate.isPersonal();
 				boolean replace = shouldReplace || isPersonal;
 				if (replace) {
 					FavoriteGroup existingGroup = favoritesHelper.getGroup(duplicate.getName());
@@ -122,7 +121,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 	@Override
 	public boolean isDuplicate(@NonNull FavoriteGroup favoriteGroup) {
 		String name = favoriteGroup.getName();
-		if (name.equals(PERSONAL_CATEGORY)) {
+		if (favoriteGroup.isPersonal()) {
 			personalGroup = favoriteGroup;
 			return false;
 		}
