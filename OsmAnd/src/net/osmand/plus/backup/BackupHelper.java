@@ -175,6 +175,11 @@ public class BackupHelper {
 	}
 
 	@NonNull
+	BackupExecutor getExecutor() {
+		return executor;
+	}
+
+	@NonNull
 	public BackupDbHelper getDbHelper() {
 		return dbHelper;
 	}

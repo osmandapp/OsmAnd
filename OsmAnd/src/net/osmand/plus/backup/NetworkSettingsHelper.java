@@ -43,6 +43,10 @@ public class NetworkSettingsHelper extends SettingsHelper {
 		super(app);
 	}
 
+	private BackupHelper getBackupHelper() {
+		return getApp().getBackupHelper();
+	}
+
 	@Nullable
 	public ImportBackupTask getImportTask() {
 		return importTask;
@@ -108,14 +112,14 @@ public class NetworkSettingsHelper extends SettingsHelper {
 	public void collectSettings(String latestChanges, int version, boolean readData,
 								@Nullable BackupCollectListener listener) {
 		new ImportBackupTask(this, latestChanges, version, readData, listener)
-				.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+				.executeOnExecutor(getBackupHelper().getExecutor());
 	}
 
 	public void checkDuplicates(@NonNull List<SettingsItem> items,
 								@NonNull List<SettingsItem> selectedItems,
 								CheckDuplicatesListener listener) {
 		new ImportBackupTask(this, items, selectedItems, listener)
-				.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+				.executeOnExecutor(getBackupHelper().getExecutor());
 	}
 
 	public void importSettings(@NonNull List<SettingsItem> items,
@@ -123,7 +127,7 @@ public class NetworkSettingsHelper extends SettingsHelper {
 							   boolean forceReadData,
 							   @Nullable ImportListener listener) {
 		new ImportBackupTask(this, forceReadData, items, latestChanges, version, listener)
-				.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+				.executeOnExecutor(getBackupHelper().getExecutor());
 	}
 
 	public void exportSettings(@NonNull List<SettingsItem> items,
@@ -131,7 +135,7 @@ public class NetworkSettingsHelper extends SettingsHelper {
 							   @Nullable BackupExportListener listener) {
 		ExportBackupTask exportTask = new ExportBackupTask(this, items, filesToDelete, listener);
 		this.exportTask = exportTask;
-		exportTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		exportTask.executeOnExecutor(getBackupHelper().getExecutor());
 	}
 
 	public void exportSettings(@Nullable BackupExportListener listener, @NonNull SettingsItem... items) {
