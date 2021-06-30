@@ -29,9 +29,6 @@
     <string name="recording_default_name">Optager</string>
     <string name="map_widget_av_notes">lyd-/videonoter</string>
     <string name="osmand_srtm_short_description_80_chars">Udvidelse for offline højdekurver</string>
-    <string name="osmand_srtm_long_description_1000_chars">Udvidelsen giver både en højdekurver overlejring og reliefskygger, der vises ovenpå OsmAnds standard kort. Funktionaliteten er meget værdsat af sportsfolk, vandrere, og enhver interesseret i en relief struktur af landskabet.
-\n
-\nDe globale data (mellem 70° nord og 70° syd) er baseret på målinger af SRTM (Shuttle Radar Topografi Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), et billeddannende instrument ombord på Terra satellitten, flagskibet i NASAs Earth Observering system. ASTER er et samarbejde mellem NASA, Japans Ministry of Economy, Trade and Industry (METI), og Japan Space Systems (J-spacesystems).</string>
     <string name="map_widget_distancemeasurement">Afstandsmåling</string>
     <string name="audionotes_location_not_defined">Tryk på \'Brug placering...\' for at tilføje en note til placeringen.</string>
     <string name="map_widget_audionotes">Lydnoter</string>

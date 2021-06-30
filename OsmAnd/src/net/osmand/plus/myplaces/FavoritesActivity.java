@@ -13,17 +13,9 @@ import android.text.style.ImageSpan;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.appcompat.widget.SearchView;
-import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
-
 import net.osmand.GPXUtilities;
 import net.osmand.PlatformUtil;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -31,6 +23,7 @@ import net.osmand.plus.activities.FavoritesTreeFragment;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.importfiles.ImportHelper;
+import net.osmand.plus.importfiles.ImportHelper.OnSuccessfulGpxImport;
 import net.osmand.plus.importfiles.ImportHelper.OnGpxImportCompleteListener;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -41,6 +34,13 @@ import org.apache.commons.logging.Log;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.appcompat.widget.SearchView;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import static net.osmand.plus.myplaces.TrackSegmentFragment.TRACK_DELETED_KEY;
 
@@ -146,7 +146,7 @@ public class FavoritesActivity extends TabActivity {
 
 					}
 				});
-				if (!importHelper.handleGpxImport(uri, false)) {
+				if (!importHelper.handleGpxImport(uri, OnSuccessfulGpxImport.OPEN_GPX_CONTEXT_MENU, false)) {
 					if (gpxFragment!= null) {
 						gpxFragment.finishImport(false);
 					}

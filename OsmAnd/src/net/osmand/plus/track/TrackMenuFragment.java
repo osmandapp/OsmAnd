@@ -1377,16 +1377,18 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		});
 	}
 
-	public static boolean showInstance(@NonNull MapActivity mapActivity, @NonNull SelectedGpxFile selectedGpxFile, @Nullable SelectedGpxPoint gpxPoint) {
+	public static boolean showInstance(@NonNull MapActivity mapActivity,
+	                                   @NonNull SelectedGpxFile selectedGpxFile,
+	                                   @Nullable SelectedGpxPoint gpxPoint) {
 		return showInstance(mapActivity, selectedGpxFile, gpxPoint, null, null, false);
 	}
 
 	public static boolean showInstance(@NonNull MapActivity mapActivity,
-									   @NonNull SelectedGpxFile selectedGpxFile,
-									   @Nullable SelectedGpxPoint gpxPoint,
-									   @Nullable String returnScreenName,
-									   @Nullable String callingFragmentTag,
-									   boolean adjustMapPosition) {
+	                                   @NonNull SelectedGpxFile selectedGpxFile,
+	                                   @Nullable SelectedGpxPoint gpxPoint,
+	                                   @Nullable String returnScreenName,
+	                                   @Nullable String callingFragmentTag,
+	                                   boolean adjustMapPosition) {
 		try {
 			Bundle args = new Bundle();
 			args.putInt(ContextMenuFragment.MENU_STATE_KEY, MenuState.HEADER_ONLY);

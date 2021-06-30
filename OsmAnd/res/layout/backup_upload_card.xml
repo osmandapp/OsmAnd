@@ -87,6 +87,10 @@
 
 		</LinearLayout>
 
+		<include
+			android:id="@+id/warning_card"
+			layout="@layout/backup_warning" />
+
 		<LinearLayout
 			android:id="@+id/items_container"
 			android:layout_width="match_parent"

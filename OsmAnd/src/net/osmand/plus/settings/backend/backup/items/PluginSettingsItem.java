@@ -98,7 +98,7 @@ public class PluginSettingsItem extends SettingsItem {
 					plugin.updateDownloadItems(((DownloadsItem) item).getItems());
 				}
 			}
-			OsmandPlugin.addCustomPlugin(app, plugin);
+			app.runInUIThread(() -> OsmandPlugin.addCustomPlugin(app, plugin));
 		}
 	}
 

@@ -6,10 +6,14 @@
     <!-- string name="app_version_suffix"></string -->
 
     <!-- Not translatable -->
+    <string name="github">GitHub</string>
+    <string name="telegram">Telegram</string>
     <string name="full_version_price">€7,99</string>
     <string name="srtm_plugin_price">€2,99</string>
     <string name="sea_depth_maps_price">€1,39</string>
     <string name="osm_live">OsmAnd Live</string>
+    <string name="osmand_pro">OsmAnd Pro</string>
+    <string name="maps_plus">Maps+</string>
     <string name="openstreetmap_copyright"><a href="https://www.openstreetmap.org/copyright">&#169; OpenStreetMap</a></string>
     <string name="support_email">support@osmand.net</string>
     <string name="preferred_locale_no_translate">Display language</string>
@@ -26,6 +30,11 @@
     <string name="osm_live_3_months_monthly_price">€1,33</string>
     <string name="osm_live_annual_price">€7,99</string>
     <string name="osm_live_annual_monthly_price">€0,66</string>
+    <string name="osm_pro_monthly_price">€2.99</string>
+    <string name="osm_pro_annual_price">€29.99</string>
+    <string name="osm_pro_annual_monthly_price">€2.49</string>
+    <string name="osm_maps_plus_annual_price">€24.99</string>
+    <string name="osm_maps_plus_annual_monthly_price">€2.08</string>
     <string name="twitter_address">https://twitter.com/osmandapp</string>
     <string name="reddit_address">https://www.reddit.com/r/OsmAnd</string>
     <string name="facebook_address">https://www.facebook.com/osmandapp</string>

@@ -109,6 +109,20 @@ public class ImportBackupTask extends AsyncTask<Void, Void, List<SettingsItem>> 
 				return selectedItems;
 			case IMPORT:
 			case IMPORT_FORCE_READ:
+				if (items != null && items.size() > 0) {
+					BackupHelper backupHelper = app.getBackupHelper();
+					PrepareBackupResult backup = backupHelper.getBackup();
+					for (SettingsItem item : items) {
+						item.apply();
+						String fileName = item.getFileName();
+						if (fileName != null) {
+							RemoteFile remoteFile = backup.getRemoteFile(item.getType().name(), fileName);
+							if (remoteFile != null) {
+								backupHelper.updateFileUploadTime(remoteFile.getType(), remoteFile.getName(), remoteFile.getClienttimems());
+							}
+						}
+					}
+				}
 				return items;
 		}
 		return null;
@@ -136,16 +150,6 @@ public class ImportBackupTask extends AsyncTask<Void, Void, List<SettingsItem>> 
 			case IMPORT:
 			case IMPORT_FORCE_READ:
 				if (items != null && items.size() > 0) {
-					for (SettingsItem item : items) {
-						item.apply();
-						String fileName = item.getFileName();
-						if (fileName != null) {
-							RemoteFile remoteFile = app.getBackupHelper().getBackup().getRemoteFile(item.getType().name(), fileName);
-							if (remoteFile != null) {
-								app.getBackupHelper().updateFileUploadTime(remoteFile.getType(), remoteFile.getName(), remoteFile.getClienttimems());
-							}
-						}
-					}
 					new ImportBackupItemsTask(helper, importType == ImportType.IMPORT_FORCE_READ, importListener, items)
 							.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 				}

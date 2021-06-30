@@ -128,13 +128,13 @@ public class BackupUploadCard extends MapBaseCard {
 	}
 
 	private void setupWarningContainer() {
+		ViewGroup warningView = view.findViewById(R.id.warning_card);
 		String error = backup.getError();
 		if (status.warningTitleRes != -1 || !Algorithms.isEmpty(error)) {
-			LayoutInflater themedInflater = UiUtilities.getInflater(view.getContext(), nightMode);
-			View itemView = themedInflater.inflate(R.layout.backup_warning, itemsContainer, false);
+			AndroidUiHelper.updateVisibility(warningView, true);
 
-			TextView title = itemView.findViewById(R.id.title);
-			TextView description = itemView.findViewById(R.id.description);
+			TextView title = warningView.findViewById(R.id.title);
+			TextView description = warningView.findViewById(R.id.description);
 
 			if (status.warningTitleRes != -1) {
 				title.setText(status.warningTitleRes);
@@ -143,11 +143,11 @@ public class BackupUploadCard extends MapBaseCard {
 				title.setText(R.string.subscribe_email_error);
 				description.setText(error);
 			}
-			ImageView icon = itemView.findViewById(R.id.icon);
+			ImageView icon = warningView.findViewById(R.id.icon);
 			icon.setImageDrawable(getContentIcon(status.warningIconRes));
-			setupWarningRoundedBg(itemView.findViewById(R.id.warning_container));
-
-			itemsContainer.addView(itemView);
+			setupWarningRoundedBg(warningView.findViewById(R.id.warning_container));
+		} else {
+			AndroidUiHelper.updateVisibility(warningView, false);
 		}
 	}
 
@@ -259,6 +259,7 @@ public class BackupUploadCard extends MapBaseCard {
 					app.getNetworkSettingsHelper().cancelExport();
 				}
 			});
+			AndroidUiHelper.updateVisibility(actionButton, true);
 		} else if (status == BackupStatus.MAKE_BACKUP || status == BackupStatus.CONFLICTS) {
 			UiUtilities.setupDialogButton(nightMode, actionButton, DialogButtonType.SECONDARY, R.string.backup_now);
 			actionButton.setOnClickListener(new OnClickListener() {
@@ -271,6 +272,9 @@ public class BackupUploadCard extends MapBaseCard {
 					}
 				}
 			});
+			BackupInfo info = backup.getBackupInfo();
+			AndroidUiHelper.updateVisibility(actionButton, info != null
+					&& (!info.getFilteredFilesToUpload(app).isEmpty() || !info.getFilteredFilesToDelete(app).isEmpty()));
 		} else if (status == BackupStatus.NO_INTERNET_CONNECTION || status == BackupStatus.ERROR) {
 			UiUtilities.setupDialogButton(nightMode, actionButton, DialogButtonType.SECONDARY, R.string.retry);
 			actionButton.setOnClickListener(new OnClickListener() {
@@ -279,12 +283,11 @@ public class BackupUploadCard extends MapBaseCard {
 					app.getBackupHelper().prepareBackup();
 				}
 			});
+			AndroidUiHelper.updateVisibility(actionButton, true);
+		} else if (status == BackupStatus.BACKUP_COMPLETE) {
+			AndroidUiHelper.updateVisibility(actionButton, false);
 		}
 		AndroidUtils.setBackground(app, actionButton, nightMode, R.drawable.dlg_btn_transparent_light, R.drawable.dlg_btn_transparent_dark);
-
-		BackupInfo info = backup.getBackupInfo();
-		AndroidUiHelper.updateVisibility(actionButton, info != null
-				&& (!info.getFilteredFilesToUpload(app).isEmpty() || !info.getFilteredFilesToDelete(app).isEmpty()));
 	}
 
 	public void setupProgress(@NonNull BackupInfo info) {

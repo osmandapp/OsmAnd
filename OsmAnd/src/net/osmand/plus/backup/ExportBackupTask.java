@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-public class ExportBackupTask extends AsyncTask<Void, Object, Boolean> {
+public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 
 	private final NetworkSettingsHelper helper;
 	private final BackupExporter exporter;
@@ -44,14 +44,15 @@ public class ExportBackupTask extends AsyncTask<Void, Object, Boolean> {
 	}
 
 	@Override
-	protected Boolean doInBackground(Void... voids) {
+	protected String doInBackground(Void... voids) {
+		String error = null;
 		try {
 			exporter.export();
-			return true;
 		} catch (IOException e) {
 			SettingsHelper.LOG.error("Failed to backup items", e);
+			error = e.getMessage();
 		}
-		return false;
+		return error;
 	}
 
 	@Override
@@ -83,14 +84,14 @@ public class ExportBackupTask extends AsyncTask<Void, Object, Boolean> {
 
 	@Override
 	protected void onCancelled() {
-		onPostExecute(false);
+		onPostExecute(null);
 	}
 
 	@Override
-	protected void onPostExecute(Boolean success) {
+	protected void onPostExecute(String error) {
 		helper.exportTask = null;
 		if (listener != null) {
-			listener.onBackupExportFinished(success);
+			listener.onBackupExportFinished(error);
 		}
 	}
 

@@ -26,6 +26,7 @@ import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadItem;
+import net.osmand.plus.download.DownloadOsmandIndexesHelper;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -416,6 +417,8 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 		List<DownloadItem> suggestedVoice = new ArrayList<>();
 		if (!downloadThread.shouldDownloadIndexes()) {
 			suggestedVoice.addAll(downloadThread.getIndexes().getDownloadItemsForGroup(type));
+		} else if (selectedVoiceType == InfoType.TTS) {
+			suggestedVoice.addAll(DownloadOsmandIndexesHelper.listTtsVoiceIndexes(app));
 		}
 
 		return suggestedVoice;

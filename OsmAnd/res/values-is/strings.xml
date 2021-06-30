@@ -2151,7 +2151,7 @@
     <string name="show_on_map_after_saving">Sýna í korti eftir vistun</string>
     <string name="measurement_tool">Mæla vegalengd</string>
     <string name="store_tracks_in_monthly_directories_descrp">Geyma skráða ferla í undirmöppum fyrir hvern skráningamánuð (svo sem 2018-01).</string>
-    <string name="empty_state_osm_edits">Búa til eða breyta OSM-hlutum</string>
+    <string name="empty_state_osm_edits">Búa til eða breyta OpenStreetMap-hlutum</string>
     <string name="shared_string_deleted">Eytt</string>
     <string name="shared_string_edited">Breytt</string>
     <string name="shared_string_added">Bætt við</string>
@@ -2356,10 +2356,7 @@
 \nHvert þessara korta má nota sem aðalkort (grunnkort) til birtingar á kortaskjá OsmAnd, eða sem yfir- eða undirlag (þekjur) á öðru grunnkorti (eins og stöðluðu ónettengdu OsmAnd kortunum). Til að gera undirlagskort sýnilegri, er einfalt að fela eftir þörfum ýmis einindi OsmAnd vigurkortanna með því að fara í valmyndina \'Stilla kort\'. 
 \n 
 \nTígluð kort er hægt að sækja beint frá gagnagjöfum á netinu, en einnig er hægt að undirbúa þau fyrir ónettengda notkun (og afrita síðan handvirkt í gagnamöppu OsmAnd) sem SQLite-gagnagrunn, sem er hægt að útbúa í fjölmörgum utanaðkomandi kortaumsýslutólum.</string>
-    <string name="osmand_srtm_long_description_1000_chars">Þessi viðbót kemur með bæði yfirlag/þekju fyrir hæðarlínur og lag fyrir hæðaskyggingu (relief hillshade), sem bæði birtast ofan á staðalkortum OsmAnd\'. Þessir eiginleikar eru gjarnan í miklum metum hjá íþróttafólki, göngufólki, ferðamönnum og öðrum þeim sem áhuga hafa á uppbyggingu landsins.
-\n
-\nAlmennt byggjast þessi gögn (milli 70 breiddargráðu norður og 70 breiddargráðu suður) á mælingum frá SRTM (Shuttle Radar Topography Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), og frá myndgreiningartækjum um borð í Terra, aðalgervihnetti Earth Observing System hjá NASA. ASTER er samvinnuverkefni NASA, Ráðuneytis efnahags, viðskipta og iðnaðar í Japan (METI), og Japan Space Systems (J-spacesystems).</string>
-    <string name="srtm_plugin_description">Þessi viðbót kemur með bæði yfirlag/þekju fyrir hæðarlínur og lag fyrir hæðaskyggingu (relief hillshade), sem bæði birtast ofan á staðalkortum OsmAnd\'. Þessir eiginleikar eru gjarnan í miklum metum hjá íþróttafólki, göngufólki, ferðamönnum og öðrum þeim sem áhuga hafa á uppbyggingu landsins. (Taktu eftir því að hæðarlínu- og skyggingargögnin eru aðskildir pakkar sem þarf að sækja eftir að viðbótin hefur verið gerð virk.) 
+    <string name="srtm_plugin_description">Þessi viðbót kemur með bæði yfirlag/þekju fyrir hæðarlínur og lag fyrir hæðaskyggingu (relief hillshade), sem bæði birtast ofan á staðalkortum OsmAnd\'. Þessir eiginleikar eru gjarnan í miklum metum hjá íþróttafólki, göngufólki, ferðamönnum og öðrum þeim sem áhuga hafa á uppbyggingu landsins. (Taktu eftir því að hæðarlínu- og skyggingargögnin eru aðskildir pakkar sem þarf að sækja eftir að viðbótin hefur verið gerð virk.)
 \n 
 \nAlmennt byggjast þessi gögn (milli 70 breiddargráðu norður og 70 breiddargráðu suður) á mælingum frá SRTM (Shuttle Radar Topography Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), og frá myndgreiningartækjum um borð í Terra, aðalgervihnetti Earth Observing System hjá NASA. ASTER er samvinnuverkefni NASA, Ráðuneytis efnahags, viðskipta og iðnaðar í Japan (METI), og Japan Space Systems (J-spacesystems).</string>
     <string name="plugin_nautical_descr">Þessi viðbót bætir eiginleikum inn í landakort OsmAnd og leiðsagnarforritið þannig að úr verði sjókort til skemmtisiglinga, fyrir seglbáta og fleiri tegundir vatnaíþrótta. 
@@ -2422,7 +2419,7 @@
     <string name="non_optimal_route_calculation">Reikna leiðir yfir langar fjarlægðir sem hugsanlega eru ekki þær bestu</string>
     <string name="av_locations_selected_desc">GPX-skrá með hnitum og gögnum valinna minnispunkta.</string>
     <string name="av_locations_all_desc">GPX-skrá með hnitum og gögnum allra minnispunkta.</string>
-    <string name="empty_state_osm_edits_descr">Búðu til eða breyttu merkisstöðum í OSM (POI), opnaðu eða gerðu athugasemdir á OSM-minnispunkta og sendu inn skráða ferla í GPX-skrám.</string>
+    <string name="empty_state_osm_edits_descr">Búðu til eða breyttu merkisstöðum í OpenStreetMap (POI), opnaðu eða gerðu athugasemdir á OSM-minnispunkta og sendu inn skráða ferla í GPX-skrám.</string>
     <string name="one_tap_active_descr">Ýttu á merki á kortinu til að færa það efst í virk kortamerki án þess að opna samhengisvalmyndina.</string>
     <string name="empty_state_av_notes_desc">Bættu minnispunkti með hljóði, ljósmynd eða myndskeiði á punkta á kortinu, með hjálp viðmótshluta eða samhengisvalmyndar.</string>
     <string name="add_track_to_markers_descr">Veldu feril til að bæta ferilpunktum í kortamerki hans.</string>
@@ -2488,7 +2485,7 @@
     <string name="show_closed_notes">Sýna lokaða minnispunkta</string>
     <string name="switch_osm_notes_visibility_desc">Birta eða fela OSM-minnispunkta á kortinu.</string>
     <string name="gpx_file_desc">GPX - hentar til útflutnings fyrir JOSM eða aðra OSM-ritla.</string>
-    <string name="osc_file_desc">OSC - hentar til útflutnings í OSM.</string>
+    <string name="osc_file_desc">OSC - hentar til útflutnings í OpenStreetMap.</string>
     <string name="osm_edits_export_desc">Flytja út sem OSM-minnispunkta, merkisstaði, eða bæði.</string>
     <string name="osm_notes">OSM-minnispunktar</string>
     <string name="rec_split">Skipta upptöku</string>
@@ -4132,4 +4129,44 @@
     <string name="enter_verification_code">Settu inn 4-stafa kóða</string>
     <string name="resend_verification_code">Endursenda kóða</string>
     <string name="select_nav_profile_dialog_message">Gerð leiðsagnar hefur áhrif á reglur þær sem notaðar eru við útreikning leiða. Þú getur valið á milli nettengdra og ónettengdra leiðargerða.</string>
+    <string name="loading_list_of_routing_services">Hleð inn lista yfir tiltækar beiningarþjónustur</string>
+    <string name="failed_loading_predefined_engines">Það tókst ekki að sækja lista yfir forákvörðuð sniðmát. 
+\nAthugaðu með nettenginguna þína.</string>
+    <string name="shared_string_offline">Ónettengt</string>
+    <string name="shared_string_online">Nettengt</string>
+    <string name="shared_string_external">Utanaðkomandi</string>
+    <string name="provided_by">Kemur frá %1$s</string>
+    <string name="shared_string_predefined">Forákvarðað</string>
+    <string name="backup_complete">Öryggisafritun lokið</string>
+    <string name="backup_now">Taka öryggisafrit núna</string>
+    <string name="make_backup">Gera öryggisafrit</string>
+    <string name="backup_conflicts">Árekstrar</string>
+    <string name="backup_view_conflicts">Skoða árekstra</string>
+    <string name="backup_no_internet_descr">Athugaðu hvort það sé allt í lagi með nettenginguna og reyndu niðurhal aftur.</string>
+    <string name="backup_pause_all">Setja allt í bið</string>
+    <string name="upload_local_version">Sækja útgáfu á tækinu</string>
+    <string name="download_server_version">Sækja útgáfu netþjóns</string>
+    <string name="shared_string_logout">Skrá út</string>
+    <string name="backup_delete_all_data">Eyða öllum mínum gögnum</string>
+    <string name="backup_danger_zone">Hættusvæði</string>
+    <string name="delete_all_confirmation">Já, eyða öllu</string>
+    <string name="backup_delete_old_data">Fjarlægja eldri útgáfur</string>
+    <string name="backup_data">Gögn öryggisafrits</string>
+    <string name="select_backup_data_descr">Veldu gögn og möppur til að taka öryggisafrit af.</string>
+    <string name="backup_restore_data_descr">Endurheimta gögn á tækinu með nettengdum öryggisafritum.</string>
+    <string name="backup_restore_data">Endurheimta gögn</string>
+    <string name="restore_from_osmand_cloud">Endurheimta úr OsmAnd Cloud-tölvuskýi</string>
+    <string name="choose_what_to_restore">Veldu það sem á að endurheimta.</string>
+    <string name="restore_selected_data">Endurheimta valin gögn</string>
+    <string name="receiving_data_from_server">Tek á móti gögnum frá netþjóninum</string>
+    <string name="restore_complete">Endurheimtingu lokið</string>
+    <string name="grey_color_slope">Grár litur er notaður þegar brekka er óskilgreind.</string>
+    <string name="backup_version_history">Útgáfuferli</string>
+    <string name="backup_storage_taken">Geymslurými upptekið</string>
+    <string name="delete_version_history">Eyða útgáfuferli</string>
+    <string name="routing_attr_avoid_tunnels_description">Forðast veggöng</string>
+    <string name="routing_attr_avoid_tunnels_name">Forðast veggöng</string>
+    <string name="backup_promocode">Afsláttarkóði</string>
+    <string name="send_crash_log">Senda hrunskýrslu</string>
+    <string name="send_logcat_log">Senda logcat-atvikaskrá</string>
 </resources>

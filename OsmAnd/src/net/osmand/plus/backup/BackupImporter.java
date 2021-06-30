@@ -7,7 +7,7 @@ import net.osmand.FileUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.backup.BackupHelper.OnDownloadFileListListener;
+import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
 import net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
@@ -28,6 +28,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -58,19 +59,16 @@ class BackupImporter {
 		CollectItemsResult result = new CollectItemsResult();
 		StringBuilder error = new StringBuilder();
 		try {
-			backupHelper.downloadFileListSync(new OnDownloadFileListListener() {
-				@Override
-				public void onDownloadFileList(int status, @Nullable String message, @NonNull List<RemoteFile> remoteFiles) {
-					if (status == BackupHelper.STATUS_SUCCESS) {
-						result.remoteFiles = remoteFiles;
-						try {
-							result.items = getRemoteItems(remoteFiles, readItems);
-						} catch (IOException e) {
-							error.append(e.getMessage());
-						}
-					} else {
-						error.append(message);
+			backupHelper.downloadFileListSync((status, message, remoteFiles) -> {
+				if (status == BackupHelper.STATUS_SUCCESS) {
+					result.remoteFiles = remoteFiles;
+					try {
+						result.items = getRemoteItems(remoteFiles, readItems);
+					} catch (IOException e) {
+						error.append(e.getMessage());
 					}
+				} else {
+					error.append(message);
 				}
 			});
 		} catch (UserNotRegisteredException e) {
@@ -154,10 +152,10 @@ class BackupImporter {
 
 	@NonNull
 	private List<SettingsItem> getRemoteItems(@NonNull List<RemoteFile> remoteFiles, boolean readItems) throws IllegalArgumentException, IOException {
-		List<SettingsItem> items = new ArrayList<>();
 		if (remoteFiles.isEmpty()) {
-			return items;
+			return Collections.emptyList();
 		}
+		List<SettingsItem> items = new ArrayList<>();
 		try {
 			JSONObject json = new JSONObject();
 			JSONArray itemsJson = new JSONArray();
@@ -180,6 +178,11 @@ class BackupImporter {
 			}
 
 			for (RemoteFile remoteFile : uniqueRemoteFiles) {
+				UploadedFileInfo info = backupHelper.getDbHelper().getUploadedFileInfo(remoteFile.getType(), remoteFile.getName());
+				long uploadTime = info != null ? info.getUploadTime() : 0;
+				if (uploadTime == remoteFile.getClienttimems()) {
+					continue;
+				}
 				String fileName = remoteFile.getTypeNamePath();
 				if (fileName.endsWith(INFO_EXT)) {
 					if (readItems) {
@@ -213,6 +216,9 @@ class BackupImporter {
 
 			SettingsItemsFactory itemsFactory = new SettingsItemsFactory(app, json);
 			List<SettingsItem> settingsItemList = itemsFactory.getItems();
+			if (settingsItemList.isEmpty()) {
+				return Collections.emptyList();
+			}
 			updateFilesInfo(remoteItemFilesMap, settingsItemList);
 			items.addAll(settingsItemList);
 

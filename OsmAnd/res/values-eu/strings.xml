@@ -158,9 +158,6 @@
     <string name="shared_string_control_start">Hasi</string>
     <string name="map_widget_av_notes">Audio/bideo oharrak</string>
     <string name="osmand_srtm_short_description_80_chars">Lineaz kanpoko sestra-kurben OsmAnd gehigarria</string>
-    <string name="osmand_srtm_long_description_1000_chars">Gehigarri honek OsmAnd-eko lineaz kanpoko mapetan agertu daitezkeen sestra-kurbak eta erliebe-itzalak eskaintzen ditu. Kirolariek, mendizaleek eta orokorrean paisaiaren erliebearen estrukturan interesa duen edonork gogoko izango du. 
-\n 
-\nDatu globalak (iparraldera 70 gradu eta hegoaldera 70 gradu bitartean) STRM (Shuttle Radar Topography Mission) eta ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) neurrietan oinarrituak daude, espazioko Terra irudi tresna, NASAren Lurra Behatzeko Sistemaren satelite enblematikoa. ASTER NASAren, Japoniako Ekonomi, Merkataritza eta Industria Ministerioaren (EMIM), eta Japoneko Espazio Sistemaren (J-espaziosistema) elkarlanaren ondorioz sortua izan da.</string>
     <string name="map_widget_distancemeasurement">Distantzia neurketa</string>
     <string name="audionotes_location_not_defined">Sakatu \"Erabili kokapena…\" oharra kokapenera gehitzeko.</string>
     <string name="map_widget_audionotes">Audio oharrak</string>

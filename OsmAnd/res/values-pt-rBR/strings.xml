@@ -101,7 +101,7 @@
     <string name="shared_string_rename">Renomear</string>
     <string name="shared_string_delete">Apagar</string>
     <string name="shared_string_delete_all">Apagar tudo</string>
-    <string name="shared_string_share">Compartilhe</string>
+    <string name="shared_string_share">Compartilhar</string>
     <string name="shared_string_apply">Aplicar</string>
     <string name="shared_string_control_start">Iniciar</string>
     <string name="shared_string_control_stop">Parar</string>
@@ -204,9 +204,6 @@
     <string name="rendering_attr_streetLighting_name">Iluminação pública</string>
     <string name="proxy_pref_title">Proxy</string>
     <string name="track_points">Pontos da trilha</string>
-    <string name="osmand_srtm_long_description_1000_chars">Fornece curvas de nível e camada de sombras de relevo por cima do mapa padrão do OsmAnd. Esta funcionalidade será muito apreciada por atletas, viajantes e alguém interessado na estrutura de relevo da paisagem. 
-\n 
-\nOs dados globais (entre as latitudes 70° norte e 70° sul) são baseados em medições do SRTM (Shuttle Radar Topography Mission) e ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), um instrumento de imagens Terra, o satélite principal do Sistema de Observação da Terra da NASA. ASTER é um esforço conjunto da NASA, do Ministério da Economia, Comércio e Indústria do Japão (METI) e do Sistema Espacial Japonês (J-spacesystems).</string>
     <string name="srtm_plugin_description">Este plugin fornece curvas de nível e camada de sombras de relevo por cima do mapa padrão do OsmAnd. Esta funcionalidade será muito apreciada por atletas, viajantes e qualquer interessado na estrutura de relevo da paisagem. (Por favor, note que as curvas de nível e/ou dados de relevo são downloads adicionais separados disponíveis depois de ativar o plugin.)
 \n 
 \nOs dados globais (entre as latitudes 70° norte e 70° sul) são baseados em medições do SRTM (Shuttle Radar Topography Mission) e ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), um instrumento de imagens Terra, o satélite principal do Sistema de Observação da Terra da NASA. ASTER é um esforço conjunto da NASA, do Ministério da Economia, Comércio e Indústria do Japão (METI) e do Sistema Espacial Japonês (J-spacesystems).</string>
@@ -2106,8 +2103,8 @@
     <string name="show_passed">Mostrar o que passou</string>
     <string name="hide_passed">Ocultar o que passou</string>
     <string name="modify_the_search_query">Modifique a sua pesquisa.</string>
-    <string name="empty_state_osm_edits">Criar ou modificar objetos OSM</string>
-    <string name="empty_state_osm_edits_descr">Criar ou modificar POIs do OSM, abrir ou comentar sobre Notas do OSM, e contribuir com arquivos GPX gravados.</string>
+    <string name="empty_state_osm_edits">Criar ou modificar objetos do OpenStreetMap</string>
+    <string name="empty_state_osm_edits_descr">Criar ou modificar POIs do OpenStreetMap, abrir ou comentar sobre Notas do OSM, e contribuir com arquivos GPX gravados.</string>
     <string name="shared_string_deleted">Excluído</string>
     <string name="shared_string_edited">Editado</string>
     <string name="shared_string_added">Adicionado</string>
@@ -2534,7 +2531,7 @@
     <string name="first_intermediate_dest_description">Adiciona parada inicial</string>
     <string name="subsequent_dest_description">Mover destino para cima, e criar</string>
     <string name="gpx_file_desc">GPX - adequado para exportar para JOSM ou outros editores OSM.</string>
-    <string name="osc_file_desc">OSC - adequado para exportar para OSM.</string>
+    <string name="osc_file_desc">OSC - adequado para exportar para OpenStreetMap.</string>
     <string name="osm_edits_export_desc">Exporte como notas OSM, POIs ou ambos.</string>
     <string name="all_data">Todos os dados</string>
     <string name="osm_notes">Notas OSM</string>
@@ -3715,10 +3712,8 @@
     <string name="route_between_points_desc">Escolha como conectar os pontos, por uma linha reta, ou calcular uma rota entre eles conforme especificado abaixo.</string>
     <string name="whole_track">Trilha inteira</string>
     <string name="next_segment">Próximo segmento</string>
-    <string name="route_between_points_warning_desc">Para usar esta opção, OsmAnd precisa ajustar sua trilha para as estradas do mapa.
-\n
-\n Na próxima etapa, você precisará selecionar o perfil de navegação para detectar as estradas permitidas e a distância limite para aproximar o rastreamento das estradas.</string>
-    <string name="threshold_distance">Distância limite</string>
+    <string name="route_between_points_warning_desc">Em seguida, ajuste seu caminho para a estrada permitida mais próxima com um de seus perfis de navegação para usar esta opção.</string>
+    <string name="threshold_distance">Limite de distância</string>
     <string name="navigation_profile">Perfil de navegação</string>
     <string name="route_between_points_add_track_desc">Selecione um arquivo de trilha para o qual um novo segmento será adicionado.</string>
     <string name="street_level_imagery">Imagens de rua</string>
@@ -4173,4 +4168,46 @@
     <string name="backup_storage_taken">Armazenamento ocupado</string>
     <string name="backup_version_history_delete_descr">Você deseja excluir o histórico de alterações para tipos desabilitados da nuvem\?</string>
     <string name="delete_version_history">Excluir histórico de versão</string>
+    <string name="send_crash_log">Enviar registo de falha de sistema</string>
+    <string name="send_logcat_log">Enviar registo logcat</string>
+    <string name="routing_attr_avoid_tunnels_description">Evitar túneis</string>
+    <string name="routing_attr_avoid_tunnels_name">Evitar túneis</string>
+    <string name="backup_promocode">Código promocional</string>
+    <string name="purchases_feature_desc_nautical">Tenha acesso a informações de profundidade náutica</string>
+    <string name="purchases_feature_desc_terrain">Curvas de nível do terreno, mapa em sombras de relevo com tons escuros e mapas de declive com cores para mostrar, picos e planícies.</string>
+    <string name="purchases_feature_desc_wikivoyage">Explore a Wikipédia offline. Os artigos são divididos por países e regiões e disponíveis em todos os idiomas.</string>
+    <string name="purchases_feature_desc_wikipedia">Explore a Wikipédia offline. Artigos são divididos por países e regiões e disponíveis em todos os idiomas.</string>
+    <string name="purchases_feature_desc_combined_wiki">Explore os artigos da Wikipédia em qualquer lugar, sem uma conexão à Internet. Estes dados offline estão divididos por países e disponíveis em todos os idiomas.</string>
+    <string name="purchases_feature_desc_unlimited_map_download">Obtenha downloads ilimitados para todos os mapas offline de continentes e regiões.</string>
+    <string name="purchases_feature_desc_monthly_map_updates">Obtenha acesso a atualizações mensais regulares para mapas offline.</string>
+    <string name="purchases_feature_desc_hourly_map_updates">Tenha acesso a atualizações de mapas com mais frequência, escolha entre: atualizações de hora em hora, diárias ou semanais. As atualizações são baixadas de forma incremental, apenas para a área alterada.</string>
+    <string name="purchases_feature_desc_advanced_widgets">Obtenha acesso ao OsmAnd avançado e aos Widgets.</string>
+    <string name="purchases_feature_desc_osmand_cloud">Obtenha o OsmAnd Cloud para armazenar todos os dados do OsmAnd online. Esqueça a perda dos seus dados após reinstalar, faça cópias de segurança e restaure todas as informações sem problemas.</string>
+    <string name="unlimited_map_downloads">Downloads ilimitados de mapas</string>
+    <string name="wikipedia_and_wikivoyage_offline">Wikipédia e Wikivoyage offline</string>
+    <string name="terrain_maps_contour_lines_hillshade_slope">Mapas de terreno: curvas de nível, sombras de relevo, declives</string>
+    <string name="offline_wikipeadia">Wikipédia offline</string>
+    <string name="offline_wikivoyage">Wikivoyage offline</string>
+    <string name="terrain_maps">Mapas de terreno</string>
+    <string name="nautical_depth">Profundidade náutica</string>
+    <string name="advanced_widgets">Widgets avançados</string>
+    <string name="you_can_get_feature_as_part_of_pattern">Pode obter “%1$s” como parte do plano: %2$s. Compare os planos:</string>
+    <string name="ltr_or_rtl_combine_via_or">%1$s ou %2$s</string>
+    <string name="continue_with">Continue com %1$s</string>
+    <string name="not_available_with">Não disponível com %1$s</string>
+    <string name="redeem_promo_code">Resgatar código promocional</string>
+    <string name="osmand_maps_plus_tagline">Obtenha as funcionalidades estendidas</string>
+    <string name="osmand_pro_tagline">Obtenha todas as funcionalidades</string>
+    <string name="shared_string_learn_more">Saber mais</string>
+    <string name="cancel_anytime_in_huawei_appgallery">Cancele a qualquer momento no Huawei AppGallery</string>
+    <string name="cancel_anytime_in_gplay">Cancele a qualquer momento no Google Play.</string>
+    <string name="shared_string_not_included">Não incluído</string>
+    <string name="shared_string_includes">Inclui</string>
+    <string name="complete_purchase">Compra completa</string>
+    <string name="regular_price">Preço normal</string>
+    <string name="from_with_param">De %1$s</string>
+    <string name="backup_delete_types_descr">Você deseja excluir dados para tipos desabilitados da nuvem\?</string>
+    <string name="backup_delete_types">Excluir dados de tipos desativados</string>
+    <string name="shared_string_discussion">Discussão</string>
+    <string name="shared_string_view_all">Ver tudo</string>
 </resources>

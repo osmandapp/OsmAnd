@@ -9,6 +9,8 @@ import net.osmand.data.QuadRect;
 import net.osmand.router.RouteColorize.ColorizationType;
 import net.osmand.util.Algorithms;
 
+import net.osmand.util.MapUtils;
+
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -55,6 +57,10 @@ public class GPXUtilities {
 	private static final String PROFILE_TYPE_EXTENSION = "profile";
 	private static final String GAP_PROFILE_TYPE = "gap";
 	private static final String TRKPT_INDEX_EXTENSION = "trkpt_idx";
+	public static final char TRAVEL_GPX_CONVERT_FIRST_LETTER = 'A';
+	public static final int TRAVEL_GPX_CONVERT_FIRST_DIST = 5000;
+	public static final int TRAVEL_GPX_CONVERT_MULT_1 = 2;
+	public static final int TRAVEL_GPX_CONVERT_MULT_2 = 5;
 
 	public final static String GPX_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z'"; //$NON-NLS-1$
 	private final static String GPX_TIME_FORMAT_MILLIS = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"; //$NON-NLS-1$
@@ -64,6 +70,7 @@ public class GPXUtilities {
 	// speed, ele, hdop
 	private final static NumberFormat decimalFormat = new DecimalFormat("#.#", new DecimalFormatSymbols(
 			new Locale("EN", "US")));
+	public static final int RADIUS_DIVIDER = 5000;
 
 	public enum GPXColor {
 		BLACK(0xFF000000),
@@ -1657,54 +1664,42 @@ public class GPXUtilities {
 		}
 
 		public QuadRect getRect() {
-			double left = 0, right = 0;
-			double top = 0, bottom = 0;
+			return getBounds(0, 0);
+		}
+
+		public QuadRect getBounds(double defaultMissingLat, double defaultMissingLon) {
+			QuadRect qr = new QuadRect(defaultMissingLon, defaultMissingLat, defaultMissingLon, defaultMissingLat);
 			for (Track track : tracks) {
 				for (TrkSegment segment : track.segments) {
 					for (WptPt p : segment.points) {
-						if (left == 0 && right == 0) {
-							left = p.getLongitude();
-							right = p.getLongitude();
-							top = p.getLatitude();
-							bottom = p.getLatitude();
-						} else {
-							left = Math.min(left, p.getLongitude());
-							right = Math.max(right, p.getLongitude());
-							top = Math.max(top, p.getLatitude());
-							bottom = Math.min(bottom, p.getLatitude());
-						}
+						updateQR(qr, p, defaultMissingLat, defaultMissingLon);
 					}
 				}
 			}
 			for (WptPt p : points) {
-				if (left == 0 && right == 0) {
-					left = p.getLongitude();
-					right = p.getLongitude();
-					top = p.getLatitude();
-					bottom = p.getLatitude();
-				} else {
-					left = Math.min(left, p.getLongitude());
-					right = Math.max(right, p.getLongitude());
-					top = Math.max(top, p.getLatitude());
-					bottom = Math.min(bottom, p.getLatitude());
-				}
+				updateQR(qr, p, defaultMissingLat, defaultMissingLon);
 			}
 			for (Route route : routes) {
 				for (WptPt p : route.points) {
-					if (left == 0 && right == 0) {
-						left = p.getLongitude();
-						right = p.getLongitude();
-						top = p.getLatitude();
-						bottom = p.getLatitude();
-					} else {
-						left = Math.min(left, p.getLongitude());
-						right = Math.max(right, p.getLongitude());
-						top = Math.max(top, p.getLatitude());
-						bottom = Math.min(bottom, p.getLatitude());
-					}
+					updateQR(qr, p, defaultMissingLat, defaultMissingLon);
 				}
 			}
-			return new QuadRect(left, top, right, bottom);
+			return qr;
+		}
+
+		private void updateQR(QuadRect q, WptPt p, double defLat, double defLon) {
+			if (q.left == defLon && q.top == defLat && 
+					q.right == defLon && q.bottom == defLat) {
+				q.left = p.getLongitude();
+				q.right = p.getLongitude();
+				q.top = p.getLatitude();
+				q.bottom = p.getLatitude();
+			} else {
+				q.left = Math.min(q.left, p.getLongitude());
+				q.right = Math.max(q.right, p.getLongitude());
+				q.top = Math.max(q.top, p.getLatitude());
+				q.bottom = Math.min(q.bottom, p.getLatitude());
+			}			
 		}
 
 		public int[] getGradientScaleColor(String gradientScaleType) {
@@ -1808,6 +1803,13 @@ public class GPXUtilities {
 				return extensions.get("ref");
 			}
 			return null;
+		}
+
+		public String getOuterRadius() {
+			QuadRect rect = getRect();
+			int radius = (int) MapUtils.getDistance(rect.bottom, rect.left, rect.top, rect.right);
+			return MapUtils.convertDistToChar(radius, TRAVEL_GPX_CONVERT_FIRST_LETTER, TRAVEL_GPX_CONVERT_FIRST_DIST,
+					TRAVEL_GPX_CONVERT_MULT_1, TRAVEL_GPX_CONVERT_MULT_2);
 		}
 
 		private int getItemsToWriteSize() {

@@ -132,13 +132,10 @@ public abstract class SettingsItem {
 		this.shouldReplace = shouldReplace;
 	}
 
-	@NonNull
+	@Nullable
 	public static SettingsItemType parseItemType(@NonNull JSONObject json) throws IllegalArgumentException, JSONException {
 		String typeName = json.has("type") ? json.getString("type") : null;
-		if (typeName == null) {
-			return null;
-		}
-		return SettingsItemType.fromName(typeName);
+		return typeName == null ? null : SettingsItemType.fromName(typeName);
 	}
 
 	public boolean exists() {

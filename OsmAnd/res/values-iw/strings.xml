@@ -920,9 +920,6 @@
     <string name="av_settings">הגדרות שמע/וידאו</string>
     <string name="recording_error">הקלטה נכשלה</string>
     <string name="recording_camera_not_available">מצלמה אינה זמינה</string>
-    <string name="osmand_srtm_long_description_1000_chars">תוסף זה מספק הן שכבת קווי מתאר והן שכבת הצללה אותן ניתן להציג על המפות הרגילות של OsmAnd. תכונה זו נחוצה ביותר לאתלטים, מטיילי שטח, תרמילאים וכל מי שמעוניין להבין את מבנה פני השטח.
-\n 
-\nהנתונים הגלובליים (בין 70° צפון ל־70° דרום) מבוססים על מדידות שבוצעו על ידי ה־SRTM (משימת הטופוגרפיה של מעבורת המכ״ם) ו־ASTER (רדיומטר חלל מתקדם לגילוי פליטה תרמית והשתקפות), התקן דימות על סיפונה של Terra, לוויין הדגל של מערכת ההשקפה על כדור הארץ של NASA.‏ ASTER הנו שיתוף פעולה בין NASA, משרד התמ״ת היפני (METI) ומערכות החלל היפניות (J-spacesystems).</string>
     <string name="srtm_paid_version_msg">נא לשקול לקנות את תוסף ‚קווי המתאר’ מהחנות כדי לתמוך בפיתוח עתידי.</string>
     <string name="srtm_paid_version_title">תוסף קווי מתאר</string>
     <string name="intermediate_points_change_order">שינוי הסדר</string>
@@ -1973,7 +1970,7 @@
     <string name="arrival_distance">הכרזת הגעה</string>
     <string name="index_name_netherlands">אירופה - הולנד</string>
     <string name="keep_informing_never">ידני בלבד (נגיעה בחץ)</string>
-    <string name="empty_state_osm_edits">יצירה או שינוי של עצמים ב־OSM</string>
+    <string name="empty_state_osm_edits">יצירה או שינוי של עצמים ב־OpenStreetMap</string>
     <string name="shared_string_deleted">נמחקה</string>
     <string name="shared_string_edited">נערכה</string>
     <string name="shared_string_added">נוספה</string>
@@ -2404,7 +2401,7 @@
     <string name="nothing_found_in_radius">לא נמצא שום דבר:</string>
     <string name="switch_osm_notes_visibility_desc">הצגת או הסתרת הערות OSM במפה.</string>
     <string name="gpx_file_desc">GPX - מתאים לייצוא ל־JOSM או עורכי OSM אחרים.</string>
-    <string name="osc_file_desc">OSC - מתאים לייצוא ל־OSM.</string>
+    <string name="osc_file_desc">OSC - מתאים לייצוא ל־OpenStreetMap.</string>
     <string name="shared_string_gpx_file">קובץ GPX</string>
     <string name="osc_file">קובץ OSC</string>
     <string name="choose_file_type">נא לבחור את סוג הקובץ</string>
@@ -2546,7 +2543,7 @@
     <string name="dd_ddddd_format">DD.DDDDD°</string>
     <string name="dd_mm_mmmm_format">DD°MM.MMMM′</string>
     <string name="dd_mm_mmm_format">DD°MM.MMM′</string>
-    <string name="empty_state_osm_edits_descr">ניתן ליצור או לערוך נקודות עניין ב־OSM, לפתוח או להגיב על הערות OSM ולתרום קובצי GPX שהוקלטו.</string>
+    <string name="empty_state_osm_edits_descr">ניתן ליצור או לערוך נקודות עניין ב־OpenStreetMap, לפתוח או להגיב על הערות OSM ולתרום קובצי GPX שהוקלטו.</string>
     <string name="empty_state_markers_history_desc">סמנים שסומנו כיוון שעברת אותם יופיעו במסך הזה.</string>
     <string name="mark_passed">סמן שעברת</string>
     <string name="show_passed">הצגת אלו שעברת</string>
@@ -4179,4 +4176,37 @@
     <string name="backup_storage_taken">אחסון מנוצל</string>
     <string name="backup_version_history_delete_descr">למחוק את היסטוריית השינויים לסוגים שמושבתים מהענן\?</string>
     <string name="delete_version_history">מחיקת היסטוריית גרסאות</string>
+    <string name="routing_attr_avoid_tunnels_description">הימנעות ממנהרות</string>
+    <string name="routing_attr_avoid_tunnels_name">הימנעות ממנהרות</string>
+    <string name="send_crash_log">שליחת יומן קריסה</string>
+    <string name="send_logcat_log">שליחת יומני logcat</string>
+    <string name="backup_promocode">קוד מבצע</string>
+    <string name="complete_purchase">רכישה מלאה</string>
+    <string name="regular_price">מחיר רגיל</string>
+    <string name="nautical_depth">עומק ימי</string>
+    <string name="advanced_widgets">וידג׳טים מתקדמים</string>
+    <string name="ltr_or_rtl_combine_via_or">%1$s או %2$s</string>
+    <string name="continue_with">להמשיך עם %1$s</string>
+    <string name="not_available_with">לא זמין עם %1$s</string>
+    <string name="redeem_promo_code">פדיון קוד מבצע</string>
+    <string name="osmand_maps_plus_tagline">קבלת יכולות נרחבות</string>
+    <string name="osmand_pro_tagline">קבלת פסגת היכולות</string>
+    <string name="shared_string_learn_more">מידע נוסף</string>
+    <string name="cancel_anytime_in_huawei_appgallery">ניתן לבטל בכל עת בחנות Huawei AppGallery</string>
+    <string name="cancel_anytime_in_gplay">ניתן לבטל בכל עת בחנות Google Play.</string>
+    <string name="backup_delete_types_descr">למחוק את כל הנתונים על סוגים מושבתים מהענן\?</string>
+    <string name="backup_delete_types">מחיקת סוגי נתונים מושבתים</string>
+    <string name="offline_wikipeadia">ויקיפדיה בלתי־מקוונת</string>
+    <string name="offline_wikivoyage">ויקימסע בלתי־מקוון</string>
+    <string name="terrain_maps">מפות תוואי שטח</string>
+    <string name="wikipedia_and_wikivoyage_offline">ויקיפדיה וויקימסע בלתי־מקוונות</string>
+    <string name="terrain_maps_contour_lines_hillshade_slope">מפות תוואי שטח: קווי מתאר, הצללות הרים, מדרון</string>
+    <string name="purchases_feature_desc_nautical">קבלת גישה לפרטי עומק ימי</string>
+    <string name="purchases_feature_desc_wikivoyage">קריאה בוויקיפדיה ללא אינטרנט. ערכים, בחלוקה למדינות ולמחוזות, זמינים בכל השפות.</string>
+    <string name="purchases_feature_desc_wikipedia">קריאה בוויקיפדיה ללא אינטרנט. ערכים, בחלוקה למדינות ולמחוזות, זמינים בכל השפות.</string>
+    <string name="purchases_feature_desc_combined_wiki">ניתן לקרוא ערכים מוויקיפדיה בדרכים, ללא חיבור לאינטרנט. נתונים בלתי מקוונים בחלוקה למדינות זמינים בכל השפות.</string>
+    <string name="purchases_feature_desc_unlimited_map_download">קבלת הורדות בלתי מוגבלות לכל המפות הבלתי מקוונות של היבשות והמחוזות.</string>
+    <string name="purchases_feature_desc_monthly_map_updates">קבלת גישה לעדכונים חודשיים מתחדשים למפות בלתי־מקוונות.</string>
+    <string name="purchases_feature_desc_advanced_widgets">קבלת גישה לווידג׳טים מתקדמים של OsmAnd.</string>
+    <string name="unlimited_map_downloads">הורדת מפות ללא הגבלה</string>
 </resources>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/content_padding"
+    android:layout_marginRight="@dimen/content_padding">
+
+    <View
+        android:id="@+id/top_padding"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/content_padding" />
+
+    <FrameLayout
+        android:id="@+id/icon_background"
+        android:layout_width="@dimen/big_icon_size"
+        android:layout_height="@dimen/big_icon_size"
+        android:background="@drawable/rectangle_rounded">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/icon"
+            android:layout_width="@dimen/standard_icon_size"
+            android:layout_height="@dimen/standard_icon_size"
+            android:layout_gravity="center"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            osmand:srcCompat="@drawable/ic_action_cloud_upload_colored" />
+
+    </FrameLayout>
+
+    <net.osmand.plus.widgets.TextViewEx
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start|center_vertical"
+        android:textColor="?android:textColorPrimary"
+        android:layout_marginTop="@dimen/content_padding_half"
+        android:textSize="@dimen/default_list_text_size"
+        osmand:typeface="@string/font_roboto_medium"
+        tools:text="@string/osmand_cloud" />
+
+    <net.osmand.plus.widgets.TextViewEx
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start|center_vertical"
+        android:textColor="?android:textColorSecondary"
+        android:layout_marginTop="@dimen/text_margin_small"
+        android:textSize="@dimen/default_list_text_size"
+        osmand:typeface="@string/font_roboto_regular"
+        tools:text="@string/purchases_feature_desc_osmand_cloud" />
+
+    <View
+        android:id="@+id/bottom_padding"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/content_padding" />
+
+</LinearLayout>
