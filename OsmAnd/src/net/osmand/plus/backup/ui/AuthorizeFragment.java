@@ -309,7 +309,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment {
 									}
 									BackupAndRestoreFragment.showInstance(fragmentManager);
 								} else {
-									errorText.setText(message);
+									errorText.setText(BackupHelper.getLocalizedError(app, error));
 									buttonContinue.setEnabled(false);
 									AndroidUiHelper.updateVisibility(errorText, true);
 								}
@@ -378,7 +378,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment {
 							errorText.setText(type.warningId);
 							AndroidUiHelper.updateVisibility(nextTypeButton, true);
 						} else {
-							errorText.setText(message);
+							errorText.setText(BackupHelper.getLocalizedError(app, error));
 						}
 						buttonContinue.setEnabled(false);
 						AndroidUiHelper.updateVisibility(errorText, true);
@@ -401,7 +401,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment {
 						setDialogType(LoginDialogType.VERIFY_EMAIL);
 						updateContent();
 					} else {
-						errorText.setText(message);
+						errorText.setText(BackupHelper.getLocalizedError(app, error));
 						buttonContinue.setEnabled(false);
 						AndroidUiHelper.updateVisibility(errorText, true);
 					}

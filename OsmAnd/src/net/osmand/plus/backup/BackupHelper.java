@@ -22,6 +22,7 @@ import net.osmand.OperationLog;
 import net.osmand.PlatformUtil;
 import net.osmand.StreamWriter;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
@@ -1170,6 +1171,67 @@ public class BackupHelper {
 			}
 		}
 		return -1;
+	}
+
+	public static String getErrorMessage(@Nullable String error) {
+		if (!Algorithms.isEmpty(error)) {
+			try {
+				JSONObject resultError = new JSONObject(error);
+				if (resultError.has("error")) {
+					JSONObject errorObj = resultError.getJSONObject("error");
+					return errorObj.getString("message");
+				}
+			} catch (JSONException e) {
+				// ignore
+			}
+		}
+		return null;
+	}
+
+	public static String getLocalizedError(@NonNull OsmandApplication app, @Nullable String error) {
+		String message = BackupHelper.getErrorMessage(error);
+		if (Algorithms.isEmpty(message)) {
+			return error;
+		}
+		int code = BackupHelper.getErrorCode(error);
+		switch (code) {
+			case SERVER_ERROR_CODE_EMAIL_IS_INVALID:
+				return app.getString(R.string.osm_live_enter_email);
+			case SERVER_ERROR_CODE_NO_VALID_SUBSCRIPTION:
+				return app.getString(R.string.backup_error_no_valid_subscription);
+			case SERVER_ERROR_CODE_USER_IS_NOT_REGISTERED:
+				return app.getString(R.string.backup_error_user_is_not_registered);
+			case SERVER_ERROR_CODE_TOKEN_IS_NOT_VALID_OR_EXPIRED:
+				return app.getString(R.string.backup_error_token_is_not_valid_or_expired);
+			case SERVER_ERROR_CODE_PROVIDED_TOKEN_IS_NOT_VALID:
+				return app.getString(R.string.backup_error_token_is_not_valid);
+			case SERVER_ERROR_CODE_FILE_NOT_AVAILABLE:
+				return app.getString(R.string.backup_error_file_not_available);
+			case SERVER_ERROR_CODE_GZIP_ONLY_SUPPORTED_UPLOAD:
+				return app.getString(R.string.backup_error_gzip_only_supported_upload);
+			case SERVER_ERROR_CODE_SIZE_OF_SUPPORTED_BOX_IS_EXCEEDED:
+				String prefix = "Maximum size of OsmAnd Cloud exceeded ";
+				int indexStart = message.indexOf(prefix);
+				int indexEnd = message.indexOf(".");
+				if (indexStart != -1 && indexEnd != -1) {
+					String login = message.substring(indexStart + prefix.length(), indexEnd);
+					return app.getString(R.string.backup_error_size_is_exceeded, login);
+				}
+				break;
+			case SERVER_ERROR_CODE_SUBSCRIPTION_WAS_USED_FOR_ANOTHER_ACCOUNT:
+				prefix = "user was already signed up as ";
+				int index = message.indexOf(prefix);
+				if (index != -1) {
+					String login = message.substring(index + prefix.length());
+					return app.getString(R.string.backup_error_subscription_was_used, login);
+				}
+				break;
+			case SERVER_ERROR_CODE_SUBSCRIPTION_WAS_EXPIRED_OR_NOT_PRESENT:
+				return app.getString(R.string.backup_error_subscription_was_expired);
+			case SERVER_ERROR_CODE_USER_IS_ALREADY_REGISTERED:
+				return app.getString(R.string.backup_error_user_is_already_registered);
+		}
+		return message;
 	}
 
 	@SuppressLint("StaticFieldLeak")

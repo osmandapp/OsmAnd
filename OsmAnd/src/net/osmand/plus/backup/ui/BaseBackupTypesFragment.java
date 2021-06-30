@@ -22,6 +22,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupHelper.OnDeleteFilesListener;
+import net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType;
 import net.osmand.plus.backup.RemoteFile;
 import net.osmand.plus.backup.ui.BackupTypesAdapter.OnItemSelectedListener;
 import net.osmand.plus.backup.ui.ClearTypesBottomSheet.BackupClearType;
@@ -30,9 +31,11 @@ import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ExportSettingsCategory;
 import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.fragments.BaseSettingsListFragment;
 import net.osmand.plus.settings.fragments.SettingsCategoryItems;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.LinkedHashMap;
@@ -73,9 +76,9 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment impleme
 
 	protected abstract BackupClearType getClearType();
 
-	protected abstract Map<ExportSettingsType, List<?>> getSelectedItems();
+	protected abstract RemoteFilesType getRemoteFilesType();
 
-	protected abstract Map<ExportSettingsCategory, SettingsCategoryItems> getDataList();
+	protected abstract Map<ExportSettingsType, List<?>> getSelectedItems();
 
 	@Nullable
 	@Override
@@ -164,6 +167,25 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment impleme
 		if (activity != null) {
 			ClearTypesBottomSheet.showInstance(activity.getSupportFragmentManager(), types, clearType, this);
 		}
+	}
+
+	protected Map<ExportSettingsCategory, SettingsCategoryItems> getDataList() {
+		List<RemoteFile> remoteFiles = backupHelper.getBackup().getRemoteFiles(getRemoteFilesType());
+		if (remoteFiles == null) {
+			remoteFiles = Collections.emptyList();
+		}
+
+		Map<ExportSettingsType, List<?>> settingsToOperate = new EnumMap<>(ExportSettingsType.class);
+		for (ExportSettingsType type : ExportSettingsType.getEnabledTypes()) {
+			List<RemoteFile> filesByType = new ArrayList<>();
+			for (RemoteFile remoteFile : remoteFiles) {
+				if (ExportSettingsType.getExportSettingsTypeForRemoteFile(remoteFile) == type) {
+					filesByType.add(remoteFile);
+				}
+			}
+			settingsToOperate.put(type, filesByType);
+		}
+		return SettingsHelper.getSettingsToOperateByCategory(settingsToOperate, true);
 	}
 
 	protected List<Object> getItemsForType(ExportSettingsType type) {

@@ -1,5 +1,6 @@
 package net.osmand.plus.backup.ui;
 
+import android.os.AsyncTask.Status;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,8 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupHelper.OnDeleteFilesListener;
+import net.osmand.plus.backup.ExportBackupTask;
+import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.backup.NetworkSettingsHelper.BackupExportListener;
 import net.osmand.plus.backup.PrepareBackupResult;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
@@ -36,6 +39,7 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements BackupEx
 
 	private OsmandApplication app;
 	private BackupHelper backupHelper;
+	private NetworkSettingsHelper settingsHelper;
 
 	private BackupUploadCard uploadCard;
 
@@ -54,7 +58,13 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements BackupEx
 		super.onCreate(savedInstanceState);
 		app = requireMyApplication();
 		backupHelper = app.getBackupHelper();
+		settingsHelper = app.getNetworkSettingsHelper();
 		nightMode = !app.getSettings().isLightContent();
+
+		ExportBackupTask exportTask = settingsHelper.getExportTask();
+		if (exportTask != null && exportTask.getStatus() != Status.FINISHED) {
+			exportTask.setListener(this);
+		}
 	}
 
 	@Nullable
@@ -133,7 +143,7 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements BackupEx
 	@Override
 	public void onBackupExportFinished(@Nullable String error) {
 		if (error != null) {
-			String err = BackupHelper.parseServerError(error);
+			String err = BackupHelper.getLocalizedError(app, error);
 			app.showShortToastMessage(err);
 		}
 		backupHelper.prepareBackup();

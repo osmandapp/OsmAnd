@@ -11,6 +11,7 @@ import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.util.List;
 import java.util.Map;
 
@@ -18,14 +19,14 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 
 	private final NetworkSettingsHelper helper;
 	private final BackupExporter exporter;
-	private BackupExportListener listener;
+	private WeakReference<BackupExportListener> listener;
 
 	ExportBackupTask(@NonNull NetworkSettingsHelper helper,
 					 @NonNull List<SettingsItem> items,
 					 @NonNull List<RemoteFile> filesToDelete,
 					 @Nullable BackupExportListener listener) {
 		this.helper = helper;
-		this.listener = listener;
+		this.listener = new WeakReference<>(listener);
 		this.exporter = new BackupExporter(helper.getApp().getBackupHelper(), getProgressListener());
 		for (SettingsItem item : items) {
 			exporter.addSettingsItem(item);
@@ -35,12 +36,8 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 		}
 	}
 
-	public BackupExportListener getListener() {
-		return listener;
-	}
-
 	public void setListener(BackupExportListener listener) {
-		this.listener = listener;
+		this.listener = new WeakReference<>(listener);
 	}
 
 	@Override
@@ -57,25 +54,27 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 
 	@Override
 	protected void onPreExecute() {
-		if (listener != null) {
-			listener.onBackupExportStarted(exporter.getItems().size() + exporter.getFilesToDelete().size());
+		BackupExportListener exportListener = listener.get();
+		if (exportListener != null) {
+			exportListener.onBackupExportStarted(exporter.getItems().size() + exporter.getFilesToDelete().size());
 		}
 	}
 
 	@Override
 	protected void onProgressUpdate(Object... values) {
-		if (listener != null) {
+		BackupExportListener exportListener = listener.get();
+		if (exportListener != null) {
 			for (Object object : values) {
 				if (object instanceof Integer) {
-					listener.onBackupExportProgressUpdate((Integer) object);
+					exportListener.onBackupExportProgressUpdate((Integer) object);
 				} else if (object instanceof ItemProgressInfo) {
 					ItemProgressInfo info = (ItemProgressInfo) object;
 					if (info.finished) {
-						listener.onBackupExportItemFinished(info.type, info.fileName);
+						exportListener.onBackupExportItemFinished(info.type, info.fileName);
 					} else if (info.value == 0) {
-						listener.onBackupExportItemStarted(info.type, info.fileName, info.work);
+						exportListener.onBackupExportItemStarted(info.type, info.fileName, info.work);
 					} else {
-						listener.onBackupExportItemProgress(info.type, info.fileName, info.value);
+						exportListener.onBackupExportItemProgress(info.type, info.fileName, info.value);
 					}
 				}
 			}
@@ -90,8 +89,9 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 	@Override
 	protected void onPostExecute(String error) {
 		helper.exportTask = null;
-		if (listener != null) {
-			listener.onBackupExportFinished(error);
+		BackupExportListener exportListener = listener.get();
+		if (exportListener != null) {
+			exportListener.onBackupExportFinished(error);
 		}
 	}
 
