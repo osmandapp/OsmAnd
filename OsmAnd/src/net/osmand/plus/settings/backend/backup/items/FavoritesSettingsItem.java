@@ -28,11 +28,13 @@ import java.util.List;
 import java.util.Map;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.PERSONAL_CATEGORY;
 import static net.osmand.plus.importfiles.ImportHelper.asFavourites;
 
 public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup> {
 
 	private FavouritesDbHelper favoritesHelper;
+	private FavoriteGroup personalGroup;
 
 	public FavoritesSettingsItem(@NonNull OsmandApplication app, @NonNull List<FavoriteGroup> items) {
 		super(app, null, items);
@@ -85,11 +87,16 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 	@Override
 	public void apply() {
 		List<FavoriteGroup> newItems = getNewItems();
+		if (personalGroup != null) {
+			duplicateItems.add(personalGroup);
+		}
 		if (!newItems.isEmpty() || !duplicateItems.isEmpty()) {
 			appliedItems = new ArrayList<>(newItems);
 
 			for (FavoriteGroup duplicate : duplicateItems) {
-				if (shouldReplace) {
+				boolean isPersonal = duplicate.getName().equals(PERSONAL_CATEGORY);
+				boolean replace = shouldReplace || isPersonal;
+				if (replace) {
 					FavoriteGroup existingGroup = favoritesHelper.getGroup(duplicate.getName());
 					if (existingGroup != null) {
 						List<FavouritePoint> favouritePoints = new ArrayList<>(existingGroup.getPoints());
@@ -98,7 +105,9 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 						}
 					}
 				}
-				appliedItems.add(shouldReplace ? duplicate : renameItem(duplicate));
+				if (!isPersonal) {
+					appliedItems.add(shouldReplace ? duplicate : renameItem(duplicate));
+				}
 			}
 			List<FavouritePoint> favourites = getPointsFromGroups(appliedItems);
 			for (FavouritePoint favourite : favourites) {
@@ -106,12 +115,17 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 			}
 			favoritesHelper.sortAll();
 			favoritesHelper.saveCurrentPointsIntoFile();
+			favoritesHelper.loadFavorites();
 		}
 	}
 
 	@Override
 	public boolean isDuplicate(@NonNull FavoriteGroup favoriteGroup) {
 		String name = favoriteGroup.getName();
+		if (name.equals(PERSONAL_CATEGORY)) {
+			personalGroup = favoriteGroup;
+			return false;
+		}
 		for (FavoriteGroup group : existingItems) {
 			if (group.getName().equals(name)) {
 				return true;
