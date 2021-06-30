@@ -3,6 +3,7 @@ package net.osmand.plus.wikimedia;
 public class WikiImage {
 
 	private static final String WIKIMEDIA_COMMONS_URL = "https://commons.wikimedia.org/wiki/";
+	private static final String WIKIMEDIA_FILE = "File:";
 
 	private final String wikiMediaTag;
 	private final String imageName;
@@ -17,7 +18,7 @@ public class WikiImage {
 	}
 
 	public String getUrlWithCommonAttributions() {
-		return WIKIMEDIA_COMMONS_URL + wikiMediaTag;
+		return WIKIMEDIA_COMMONS_URL + WIKIMEDIA_FILE + wikiMediaTag;
 	}
 
 	public String getImageName() {
