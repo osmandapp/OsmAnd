@@ -58,7 +58,7 @@ public class BackupAndRestoreFragment extends BaseOsmAndFragment {
 
 		OsmandApplication app = requireMyApplication();
 		NetworkSettingsHelper settingsHelper = app.getNetworkSettingsHelper();
-		if (!settingsHelper.isBackupExporting() && !settingsHelper.isBackupImporting()) {
+		if (!settingsHelper.isBackupExporting()) {
 			app.getBackupHelper().prepareBackup();
 		}
 
