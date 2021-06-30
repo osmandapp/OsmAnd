@@ -37,6 +37,7 @@ import net.osmand.plus.Version;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupHelper.OnRegisterDeviceListener;
 import net.osmand.plus.backup.BackupHelper.OnRegisterUserListener;
+import net.osmand.plus.backup.ServerError;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -298,7 +299,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment {
 					backupHelper.registerDevice(token, new OnRegisterDeviceListener() {
 
 						@Override
-						public void onRegisterDevice(int status, @Nullable String message, @Nullable String error) {
+						public void onRegisterDevice(int status, @Nullable String message, @Nullable ServerError error) {
 							FragmentActivity activity = getActivity();
 							if (AndroidUtils.isActivityNotDestroyed(activity)) {
 								progressBar.setVisibility(View.INVISIBLE);
@@ -309,7 +310,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment {
 									}
 									BackupAndRestoreFragment.showInstance(fragmentManager);
 								} else {
-									errorText.setText(BackupHelper.getLocalizedError(app, error));
+									errorText.setText(error != null ? error.getLocalizedError(app) : message);
 									buttonContinue.setEnabled(false);
 									AndroidUiHelper.updateVisibility(errorText, true);
 								}
@@ -366,10 +367,10 @@ public class AuthorizeFragment extends BaseOsmAndFragment {
 		return new OnRegisterDeviceListener() {
 
 			@Override
-			public void onRegisterDevice(int status, @Nullable String message, @Nullable String error) {
+			public void onRegisterDevice(int status, @Nullable String message, @Nullable ServerError error) {
 				FragmentActivity activity = getActivity();
 				if (AndroidUtils.isActivityNotDestroyed(activity)) {
-					int errorCode = BackupHelper.getErrorCode(error);
+					int errorCode = error != null ? error.getCode() : -1;
 					if (errorCode == type.permittedErrorCode) {
 						registerUser(errorText);
 					} else if (errorCode != -1) {
@@ -378,7 +379,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment {
 							errorText.setText(type.warningId);
 							AndroidUiHelper.updateVisibility(nextTypeButton, true);
 						} else {
-							errorText.setText(BackupHelper.getLocalizedError(app, error));
+							errorText.setText(error.getLocalizedError(app));
 						}
 						buttonContinue.setEnabled(false);
 						AndroidUiHelper.updateVisibility(errorText, true);
@@ -392,7 +393,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment {
 		boolean login = dialogType == LoginDialogType.SIGN_IN || signIn;
 		backupHelper.registerUser(settings.BACKUP_USER_EMAIL.get(), promoCode, login, new OnRegisterUserListener() {
 			@Override
-			public void onRegisterUser(int status, @Nullable String message, @Nullable String error) {
+			public void onRegisterUser(int status, @Nullable String message, @Nullable ServerError error) {
 				FragmentActivity activity = getActivity();
 				if (AndroidUtils.isActivityNotDestroyed(activity)) {
 					progressBar.setVisibility(View.INVISIBLE);
@@ -401,7 +402,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment {
 						setDialogType(LoginDialogType.VERIFY_EMAIL);
 						updateContent();
 					} else {
-						errorText.setText(BackupHelper.getLocalizedError(app, error));
+						errorText.setText(error != null ? error.getLocalizedError(app) : message);
 						buttonContinue.setEnabled(false);
 						AndroidUiHelper.updateVisibility(errorText, true);
 					}

@@ -1,6 +1,5 @@
 package net.osmand.plus.backup.ui;
 
-import android.os.AsyncTask.Status;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,12 +16,12 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupHelper.OnDeleteFilesListener;
-import net.osmand.plus.backup.ExportBackupTask;
 import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.backup.NetworkSettingsHelper.BackupExportListener;
 import net.osmand.plus.backup.PrepareBackupResult;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
 import net.osmand.plus.backup.RemoteFile;
+import net.osmand.plus.backup.ServerError;
 import net.osmand.plus.backup.ui.cards.BackupUploadCard;
 import net.osmand.plus.backup.ui.cards.LocalBackupCard;
 import net.osmand.plus.backup.ui.cards.RestoreBackupCard;
@@ -60,11 +59,6 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements BackupEx
 		backupHelper = app.getBackupHelper();
 		settingsHelper = app.getNetworkSettingsHelper();
 		nightMode = !app.getSettings().isLightContent();
-
-		ExportBackupTask exportTask = settingsHelper.getExportTask();
-		if (exportTask != null && exportTask.getStatus() != Status.FINISHED) {
-			exportTask.setListener(this);
-		}
 	}
 
 	@Nullable
@@ -83,12 +77,14 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements BackupEx
 	public void onResume() {
 		super.onResume();
 		updateCards();
+		settingsHelper.updateExportListener(this);
 		backupHelper.addPrepareBackupListener(this);
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
+		settingsHelper.updateExportListener(null);
 		backupHelper.removePrepareBackupListener(this);
 	}
 
@@ -143,7 +139,7 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements BackupEx
 	@Override
 	public void onBackupExportFinished(@Nullable String error) {
 		if (error != null) {
-			String err = BackupHelper.getLocalizedError(app, error);
+			String err = new ServerError(error).getLocalizedError(app);
 			app.showShortToastMessage(err);
 		}
 		backupHelper.prepareBackup();

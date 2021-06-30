@@ -22,7 +22,6 @@ import net.osmand.OperationLog;
 import net.osmand.PlatformUtil;
 import net.osmand.StreamWriter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
@@ -101,11 +100,11 @@ public class BackupHelper {
 	private final List<OnPrepareBackupListener> prepareBackupListeners = new ArrayList<>();
 
 	public interface OnRegisterUserListener {
-		void onRegisterUser(int status, @Nullable String message, @Nullable String error);
+		void onRegisterUser(int status, @Nullable String message, @Nullable ServerError error);
 	}
 
 	public interface OnRegisterDeviceListener {
-		void onRegisterDevice(int status, @Nullable String message, @Nullable String error);
+		void onRegisterDevice(int status, @Nullable String message, @Nullable ServerError error);
 	}
 
 	public interface OnUpdateOrderIdListener {
@@ -333,8 +332,10 @@ public class BackupHelper {
 		AndroidNetworkUtils.sendRequestAsync(app, USER_REGISTER_URL, params, "Register user", false, true, (resultJson, error) -> {
 			int status;
 			String message;
+			ServerError serverError = null;
 			if (!Algorithms.isEmpty(error)) {
-				message = "User registration error: " + parseServerError(error) + "\nEmail=" + email + "\nOrderId=" + orderId + "\nDeviceId=" + deviceId;
+				serverError = new ServerError(error);
+				message = "User registration error: " + serverError + "\nEmail=" + email + "\nOrderId=" + orderId + "\nDeviceId=" + deviceId;
 				status = STATUS_SERVER_ERROR;
 			} else if (!Algorithms.isEmpty(resultJson)) {
 				try {
@@ -355,7 +356,7 @@ public class BackupHelper {
 				status = STATUS_EMPTY_RESPONSE_ERROR;
 			}
 			if (listener != null) {
-				listener.onRegisterUser(status, message, error);
+				listener.onRegisterUser(status, message, serverError);
 			}
 			operationLog.finishOperation(status + " " + message);
 		});
@@ -377,8 +378,10 @@ public class BackupHelper {
 		AndroidNetworkUtils.sendRequestAsync(app, DEVICE_REGISTER_URL, params, "Register device", false, true, (resultJson, error) -> {
 			int status;
 			String message;
+			ServerError serverError = null;
 			if (!Algorithms.isEmpty(error)) {
-				message = "Device registration error: " + parseServerError(error);
+				serverError = new ServerError(error);
+				message = "Device registration error: " + serverError;
 				status = STATUS_SERVER_ERROR;
 			} else if (!Algorithms.isEmpty(resultJson)) {
 				try {
@@ -400,7 +403,7 @@ public class BackupHelper {
 				status = STATUS_EMPTY_RESPONSE_ERROR;
 			}
 			if (listener != null) {
-				listener.onRegisterDevice(status, message, error);
+				listener.onRegisterDevice(status, message, serverError);
 			}
 			operationLog.finishOperation(status + " " + message);
 		});
@@ -427,7 +430,7 @@ public class BackupHelper {
 			int status;
 			String message;
 			if (!Algorithms.isEmpty(error)) {
-				message = "Update order id error: " + parseServerError(error);
+				message = "Update order id error: " + new ServerError(error);
 				status = STATUS_SERVER_ERROR;
 			} else if (!Algorithms.isEmpty(resultJson)) {
 				try {
@@ -555,7 +558,7 @@ public class BackupHelper {
 		if (listener != null) {
 			listener.onFileUploadDone(type, fileName, uploadTime, error);
 		}
-		operationLog.finishOperation(type + " " + fileName + (error != null ? " Error: " + parseServerError(error) : " OK"));
+		operationLog.finishOperation(type + " " + fileName + (error != null ? " Error: " + new ServerError(error) : " OK"));
 		return error;
 	}
 
@@ -587,7 +590,7 @@ public class BackupHelper {
 
 			@Override
 			public void onFileUploadDone(@Nullable String error) {
-				operationLog.finishOperation(type + " " + fileName + (error != null ? " Error: " + parseServerError(error) : " OK"));
+				operationLog.finishOperation(type + " " + fileName + (error != null ? " Error: " + new ServerError(error) : " OK"));
 				if (error == null) {
 					updateFileUploadTime(type, fileName, uploadTime);
 				}
@@ -712,7 +715,7 @@ public class BackupHelper {
 								if (response != null) {
 									String errorStr = response.getError();
 									if (!Algorithms.isEmpty(errorStr)) {
-										message = parseServerError(errorStr);
+										message = new ServerError(errorStr).toString();
 										success = false;
 									} else {
 										String responseStr = response.getResponse();
@@ -774,7 +777,7 @@ public class BackupHelper {
 				List<RemoteFile> remoteFiles = new ArrayList<>();
 				if (!Algorithms.isEmpty(error)) {
 					status = STATUS_SERVER_ERROR;
-					message = "Download file list error: " + parseServerError(error);
+					message = "Download file list error: " + new ServerError(error);
 				} else if (!Algorithms.isEmpty(resultJson)) {
 					try {
 						JSONObject result = new JSONObject(resultJson);
@@ -823,7 +826,7 @@ public class BackupHelper {
 			List<RemoteFile> remoteFiles = new ArrayList<>();
 			if (!Algorithms.isEmpty(error)) {
 				status = STATUS_SERVER_ERROR;
-				message = "Download file list error: " + parseServerError(error);
+				message = "Download file list error: " + new ServerError(error);
 			} else if (!Algorithms.isEmpty(resultJson)) {
 				try {
 					JSONObject result = new JSONObject(resultJson);
@@ -888,7 +891,7 @@ public class BackupHelper {
 			List<RemoteFile> remoteFiles = new ArrayList<>();
 			if (!Algorithms.isEmpty(error)) {
 				status = STATUS_SERVER_ERROR;
-				message = "Download file list error: " + parseServerError(error);
+				message = "Download file list error: " + new ServerError(error);
 			} else if (!Algorithms.isEmpty(resultJson)) {
 				try {
 					JSONObject result = new JSONObject(resultJson);
@@ -1142,96 +1145,6 @@ public class BackupHelper {
 			}
 		};
 		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-	}
-
-	@NonNull
-	public static String parseServerError(@NonNull String error) {
-		try {
-			JSONObject resultError = new JSONObject(error);
-			if (resultError.has("error")) {
-				JSONObject errorObj = resultError.getJSONObject("error");
-				return errorObj.getInt("errorCode") + " (" + errorObj.getString("message") + ")";
-			}
-		} catch (JSONException e) {
-			// ignore
-		}
-		return error;
-	}
-
-	public static int getErrorCode(@Nullable String error) {
-		if (!Algorithms.isEmpty(error)) {
-			try {
-				JSONObject resultError = new JSONObject(error);
-				if (resultError.has("error")) {
-					JSONObject errorObj = resultError.getJSONObject("error");
-					return errorObj.getInt("errorCode");
-				}
-			} catch (JSONException e) {
-				// ignore
-			}
-		}
-		return -1;
-	}
-
-	public static String getErrorMessage(@Nullable String error) {
-		if (!Algorithms.isEmpty(error)) {
-			try {
-				JSONObject resultError = new JSONObject(error);
-				if (resultError.has("error")) {
-					JSONObject errorObj = resultError.getJSONObject("error");
-					return errorObj.getString("message");
-				}
-			} catch (JSONException e) {
-				// ignore
-			}
-		}
-		return null;
-	}
-
-	public static String getLocalizedError(@NonNull OsmandApplication app, @Nullable String error) {
-		String message = BackupHelper.getErrorMessage(error);
-		if (Algorithms.isEmpty(message)) {
-			return error;
-		}
-		int code = BackupHelper.getErrorCode(error);
-		switch (code) {
-			case SERVER_ERROR_CODE_EMAIL_IS_INVALID:
-				return app.getString(R.string.osm_live_enter_email);
-			case SERVER_ERROR_CODE_NO_VALID_SUBSCRIPTION:
-				return app.getString(R.string.backup_error_no_valid_subscription);
-			case SERVER_ERROR_CODE_USER_IS_NOT_REGISTERED:
-				return app.getString(R.string.backup_error_user_is_not_registered);
-			case SERVER_ERROR_CODE_TOKEN_IS_NOT_VALID_OR_EXPIRED:
-				return app.getString(R.string.backup_error_token_is_not_valid_or_expired);
-			case SERVER_ERROR_CODE_PROVIDED_TOKEN_IS_NOT_VALID:
-				return app.getString(R.string.backup_error_token_is_not_valid);
-			case SERVER_ERROR_CODE_FILE_NOT_AVAILABLE:
-				return app.getString(R.string.backup_error_file_not_available);
-			case SERVER_ERROR_CODE_GZIP_ONLY_SUPPORTED_UPLOAD:
-				return app.getString(R.string.backup_error_gzip_only_supported_upload);
-			case SERVER_ERROR_CODE_SIZE_OF_SUPPORTED_BOX_IS_EXCEEDED:
-				String prefix = "Maximum size of OsmAnd Cloud exceeded ";
-				int indexStart = message.indexOf(prefix);
-				int indexEnd = message.indexOf(".");
-				if (indexStart != -1 && indexEnd != -1) {
-					String login = message.substring(indexStart + prefix.length(), indexEnd);
-					return app.getString(R.string.backup_error_size_is_exceeded, login);
-				}
-				break;
-			case SERVER_ERROR_CODE_SUBSCRIPTION_WAS_USED_FOR_ANOTHER_ACCOUNT:
-				prefix = "user was already signed up as ";
-				int index = message.indexOf(prefix);
-				if (index != -1) {
-					String login = message.substring(index + prefix.length());
-					return app.getString(R.string.backup_error_subscription_was_used, login);
-				}
-				break;
-			case SERVER_ERROR_CODE_SUBSCRIPTION_WAS_EXPIRED_OR_NOT_PRESENT:
-				return app.getString(R.string.backup_error_subscription_was_expired);
-			case SERVER_ERROR_CODE_USER_IS_ALREADY_REGISTERED:
-				return app.getString(R.string.backup_error_user_is_already_registered);
-		}
-		return message;
 	}
 
 	@SuppressLint("StaticFieldLeak")

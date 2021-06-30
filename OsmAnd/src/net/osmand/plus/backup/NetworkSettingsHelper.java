@@ -84,7 +84,7 @@ public class NetworkSettingsHelper extends SettingsHelper {
 		return importTask != null;
 	}
 
-	public void updateExportListeners(@Nullable BackupExportListener listener) {
+	public void updateExportListener(@Nullable BackupExportListener listener) {
 		ExportBackupTask exportTask = this.exportTask;
 		if (exportTask != null) {
 			exportTask.setListener(listener);
