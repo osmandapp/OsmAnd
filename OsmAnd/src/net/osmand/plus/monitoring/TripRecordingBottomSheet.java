@@ -8,33 +8,14 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import androidx.annotation.ColorRes;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.cardview.widget.CardView;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
@@ -49,7 +30,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
-import net.osmand.plus.base.MenuBottomSheetDialogFragment;
+import net.osmand.plus.base.SideMenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
@@ -72,6 +53,21 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import static net.osmand.AndroidUtils.getSecondaryTextColorId;
 import static net.osmand.AndroidUtils.setPadding;
 import static net.osmand.plus.UiUtilities.CompoundButtonType.GLOBAL;
@@ -79,7 +75,7 @@ import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_ALTITUDE;
 import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_GENERAL;
 import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_SPEED;
 
-public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment implements SegmentActionsListener {
+public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment implements SegmentActionsListener {
 
 	public static final String TAG = TripRecordingBottomSheet.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(TripRecordingBottomSheet.class);
@@ -231,31 +227,6 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 				TripRecordingOptionsBottomSheet.showInstance(fragmentManager, TripRecordingBottomSheet.this);
 			}
 		});
-	}
-
-	@Override
-	public void onStart() {
-		super.onStart();
-		Activity activity = requireActivity();
-		if (AndroidUiHelper.isOrientationPortrait(activity)) {
-			return;
-		}
-
-		Dialog dialog = getDialog();
-		if (dialog != null) {
-			CoordinatorLayout.LayoutParams layoutParams = new CoordinatorLayout.LayoutParams(
-					CoordinatorLayout.LayoutParams.MATCH_PARENT, CoordinatorLayout.LayoutParams.MATCH_PARENT
-			);
-			dialog.findViewById(R.id.content_container).setLayoutParams(layoutParams);
-
-			Window window = dialog.getWindow();
-			if (window != null) {
-				WindowManager.LayoutParams params = window.getAttributes();
-				params.width = AndroidUtils.getScreenWidth(activity) / 2;
-				params.gravity = Gravity.START;
-				window.setAttributes(params);
-			}
-		}
 	}
 
 	@Override
@@ -778,38 +749,5 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 				drawTopShadow(showTopShadow);
 			}
 		});
-	}
-
-	@Override
-	protected Drawable getLandscapeSidesBg(@NonNull Context ctx) {
-		int backgroundRes = AndroidUtils.isRTL() ?
-				R.drawable.bg_contextmenu_shadow_left_light : R.drawable.bg_contextmenu_shadow_right_light;
-		return createBackgroundDrawable(ctx, backgroundRes);
-	}
-
-	@Override
-	protected Drawable getLandscapeTopsidesBg(@NonNull Context ctx) {
-		int backgroundRes = AndroidUtils.isRTL() ?
-				R.drawable.bg_contextmenu_shadow_left_light : R.drawable.bg_contextmenu_shadow_right_light;
-		return createBackgroundDrawable(ctx, backgroundRes);
-	}
-
-	@Override
-	protected int getWindowAnimations(@NonNull Activity context) {
-		if (AndroidUiHelper.isOrientationPortrait(context)) {
-			return super.getWindowAnimations(context);
-		}
-		return AndroidUtils.isLayoutRtl(context) ?
-				R.style.Animations_PopUpMenu_MiddleHeightRight : R.style.Animations_PopUpMenu_MiddleHeightLeft;
-	}
-
-
-	@Nullable
-	public MapActivity getMapActivity() {
-		Activity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			return (MapActivity) activity;
-		}
-		return null;
 	}
 }
