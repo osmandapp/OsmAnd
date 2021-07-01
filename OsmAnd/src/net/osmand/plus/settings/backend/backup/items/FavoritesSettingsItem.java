@@ -11,7 +11,10 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.osmedit.OsmEditingPlugin;
+import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
@@ -114,6 +117,24 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 				}
 				if (!isPersonal) {
 					appliedItems.add(shouldReplace ? duplicate : renameItem(duplicate));
+				} else {
+					for (FavouritePoint item : duplicate.getPoints())
+					{
+						if (item.getSpecialPointType() == FavouritePoint.SpecialPointType.PARKING) {
+							ParkingPositionPlugin plugin = OsmandPlugin.getPlugin(ParkingPositionPlugin.class);
+							if (plugin != null) {
+								plugin.clearParkingPosition();
+								boolean isTimeRestricted = item.getTimestamp() > 0;
+								plugin.setParkingType(isTimeRestricted);
+								plugin.setParkingTime(isTimeRestricted ? item.getTimestamp() : 0);
+								plugin.setParkingPosition(item.getLatitude(), item.getLongitude());
+								plugin.addOrRemoveParkingEvent(item.getCalendarEvent());
+								if (item.getCalendarEvent()) {
+									plugin.addCalendarEvent(app);
+								}
+							}
+						}
+					}
 				}
 			}
 			List<FavouritePoint> favourites = getPointsFromGroups(appliedItems);

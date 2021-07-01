@@ -2,6 +2,7 @@ package net.osmand.plus.parkingpoint;
 
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -371,7 +372,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 				setParkingTime(cal.getTimeInMillis());
 				CheckBox addCalendarEvent = (CheckBox) setTimeParking.findViewById(R.id.check_event_in_calendar);
 				if (addCalendarEvent.isChecked()) {
-					addCalendarEvent(setTimeParking);
+					addCalendarEvent(setTimeParking.getContext());
 					addOrRemoveParkingEvent(true);
 				} else {
 					addOrRemoveParkingEvent(false);
@@ -385,16 +386,16 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	
 	/**
 	 * Opens a Calendar app with added notification to pick up the car from time-limited parking.
-	 * @param view
+	 * @param context
 	 */
-	private void addCalendarEvent(View view) { 
+	public void addCalendarEvent(final Context context) {
 		Intent intent = new Intent(Intent.ACTION_EDIT);
 		intent.setType("vnd.android.cursor.item/event"); //$NON-NLS-1$
 		intent.putExtra("calendar_id", 1); //$NON-NLS-1$
-		intent.putExtra("title", view.getContext().getString(R.string.osmand_parking_event)); //$NON-NLS-1$
+		intent.putExtra("title", context.getString(R.string.osmand_parking_event)); //$NON-NLS-1$
 		intent.putExtra("beginTime", getParkingTime()); //$NON-NLS-1$
 		intent.putExtra("endTime", getParkingTime() + 60 * 60 * 1000); //$NON-NLS-1$
-		view.getContext().startActivity(intent);
+		context.startActivity(intent);
 	}
 
 	/**
