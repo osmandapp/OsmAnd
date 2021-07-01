@@ -21,7 +21,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.BackupHelper;
-import net.osmand.plus.backup.BackupHelper.OnDeleteFilesListener;
+import net.osmand.plus.backup.BackupListeners.OnDeleteFilesListener;
 import net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType;
 import net.osmand.plus.backup.RemoteFile;
 import net.osmand.plus.backup.ui.BackupTypesAdapter.OnItemSelectedListener;
@@ -42,7 +42,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment implements OnItemSelectedListener, OnClearTypesListener {
+public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
+		implements OnItemSelectedListener, OnClearTypesListener, OnDeleteFilesListener {
 
 	protected OsmandApplication app;
 	protected BackupHelper backupHelper;
@@ -129,6 +130,7 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment impleme
 			if (!wasDrawerDisabled) {
 				mapActivity.disableDrawer();
 			}
+			backupHelper.getBackupListeners().addDeleteFilesListener(this);
 		}
 	}
 
@@ -139,6 +141,7 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment impleme
 		if (mapActivity != null && !wasDrawerDisabled) {
 			mapActivity.enableDrawer();
 		}
+		backupHelper.getBackupListeners().removeDeleteFilesListener(this);
 	}
 
 	@Override
@@ -197,25 +200,21 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment impleme
 		return Collections.emptyList();
 	}
 
-	protected OnDeleteFilesListener getOnDeleteFilesListener() {
-		return new OnDeleteFilesListener() {
-			@Override
-			public void onFileDeleteProgress(@NonNull RemoteFile file) {
-				updateProgressVisibility(true);
-			}
+	@Override
+	public void onFileDeleteProgress(@NonNull RemoteFile file) {
+		updateProgressVisibility(true);
+	}
 
-			@Override
-			public void onFilesDeleteDone(@NonNull Map<RemoteFile, String> errors) {
-				updateProgressVisibility(false);
-				backupHelper.prepareBackup();
-			}
+	@Override
+	public void onFilesDeleteDone(@NonNull Map<RemoteFile, String> errors) {
+		updateProgressVisibility(false);
+		backupHelper.prepareBackup();
+	}
 
-			@Override
-			public void onFilesDeleteError(int status, @NonNull String message) {
-				updateProgressVisibility(false);
-				backupHelper.prepareBackup();
-			}
-		};
+	@Override
+	public void onFilesDeleteError(int status, @NonNull String message) {
+		updateProgressVisibility(false);
+		backupHelper.prepareBackup();
 	}
 
 	protected void updateProgressVisibility(boolean visible) {

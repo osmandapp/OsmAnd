@@ -36,6 +36,10 @@ public class ThreadPoolTaskExecutor<T extends ThreadPoolTaskExecutor.Task> exten
 		void onTasksFinished(@NonNull List<T> results);
 	}
 
+	public interface ProgressPublisher<T> {
+		void publishTaskProgress(@NonNull T task);
+	}
+
 	public abstract static class Task implements Callable<Void> {
 
 		boolean finished;
@@ -110,7 +114,11 @@ public class ThreadPoolTaskExecutor<T extends ThreadPoolTaskExecutor.Task> exten
 			Future<?> future = (Future<?>) r;
 			T task = taskMap.get(future);
 			if (task != null) {
-				asyncTask.publishTaskProgress(task);
+				if (asyncTask != null) {
+					asyncTask.publishTaskProgress(task);
+				} else {
+					publishTaskProgress(task);
+				}
 			}
 		}
 	}
@@ -123,7 +131,11 @@ public class ThreadPoolTaskExecutor<T extends ThreadPoolTaskExecutor.Task> exten
 				T task = taskMap.get(future);
 				if (task != null) {
 					task.finished = true;
-					asyncTask.publishTaskProgress(task);
+					if (asyncTask != null) {
+						asyncTask.publishTaskProgress(task);
+					} else {
+						publishTaskProgress(task);
+					}
 				}
 				try {
 					future.get();
@@ -134,6 +146,18 @@ public class ThreadPoolTaskExecutor<T extends ThreadPoolTaskExecutor.Task> exten
 				}
 			} else {
 				exceptions.put(future, t);
+			}
+		}
+	}
+
+	@SafeVarargs
+	private final void publishTaskProgress(T... values) {
+		if (listener != null) {
+			T task = values[0];
+			if (task.isFinished()) {
+				listener.onTaskFinished(task);
+			} else {
+				listener.onTaskStarted(task);
 			}
 		}
 	}
@@ -149,14 +173,7 @@ public class ThreadPoolTaskExecutor<T extends ThreadPoolTaskExecutor.Task> exten
 		@SafeVarargs
 		@Override
 		protected final void onProgressUpdate(T... values) {
-			if (listener != null) {
-				T task = values[0];
-				if (task.isFinished()) {
-					listener.onTaskFinished(task);
-				} else {
-					listener.onTaskStarted(task);
-				}
-			}
+			ThreadPoolTaskExecutor.this.publishTaskProgress(values);
 		}
 
 		@Override

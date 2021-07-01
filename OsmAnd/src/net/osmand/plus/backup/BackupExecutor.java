@@ -1,5 +1,7 @@
 package net.osmand.plus.backup;
 
+import android.os.AsyncTask;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -7,6 +9,7 @@ import net.osmand.plus.OsmandApplication;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -18,6 +21,7 @@ public class BackupExecutor extends ThreadPoolExecutor {
 	private final OsmandApplication app;
 	private final List<BackupExecutorListener> listeners = Collections.synchronizedList(new ArrayList<>());
 	private final AtomicInteger aState = new AtomicInteger(State.IDLE.ordinal());
+	private final List<BackupCommand> activeCommands = Collections.synchronizedList(new ArrayList<>());
 
 	public enum State {
 		IDLE,
@@ -55,9 +59,30 @@ public class BackupExecutor extends ThreadPoolExecutor {
 		listeners.remove(listener);
 	}
 
+	public void runCommand(@NonNull BackupCommand command) {
+		updateActiveCommands();
+		if (command.getStatus() == AsyncTask.Status.PENDING) {
+			activeCommands.add(command);
+			command.executeOnExecutor(this);
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Nullable
+	public <T extends BackupCommand> T getActiveCommand(@NonNull Class<T> commandClass) {
+		updateActiveCommands();
+		for (BackupCommand command : activeCommands) {
+			if (commandClass.isInstance(command)) {
+				return (T) command;
+			}
+		}
+		return null;
+	}
+
 	@Nullable
 	private State updateState(boolean beforeExecute) {
-		State newState = beforeExecute || !getQueue().isEmpty() ? State.BUSY : State.IDLE;
+		updateActiveCommands();
+		State newState = beforeExecute || !getQueue().isEmpty() || !activeCommands.isEmpty() ? State.BUSY : State.IDLE;
 		State oldState = State.getByOrdinal(aState.getAndSet(newState.ordinal()));
 		return newState != oldState ? newState : null;
 	}
@@ -86,5 +111,15 @@ public class BackupExecutor extends ThreadPoolExecutor {
 				listener.onBackupExecutorStateChanged(state);
 			}
 		});
+	}
+
+	private void updateActiveCommands() {
+		Iterator<BackupCommand> it = activeCommands.iterator();
+		while (it.hasNext()) {
+			BackupCommand command = it.next();
+			if (command.getStatus() == AsyncTask.Status.FINISHED) {
+				it.remove();
+			}
+		}
 	}
 }

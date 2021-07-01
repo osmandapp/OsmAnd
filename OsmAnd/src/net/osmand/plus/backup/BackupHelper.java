@@ -8,15 +8,10 @@ import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.WorkerThread;
 
 import net.osmand.AndroidNetworkUtils;
-import net.osmand.AndroidNetworkUtils.OnFileUploadCallback;
 import net.osmand.AndroidNetworkUtils.OnFilesDownloadCallback;
-import net.osmand.AndroidNetworkUtils.OnFilesUploadCallback;
 import net.osmand.AndroidNetworkUtils.OnRequestResultListener;
-import net.osmand.AndroidNetworkUtils.Request;
-import net.osmand.AndroidNetworkUtils.RequestResponse;
 import net.osmand.AndroidUtils;
 import net.osmand.OperationLog;
 import net.osmand.PlatformUtil;
@@ -25,8 +20,18 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
 import net.osmand.plus.backup.BackupExecutor.BackupExecutorListener;
+import net.osmand.plus.backup.BackupListeners.OnCollectLocalFilesListener;
+import net.osmand.plus.backup.BackupListeners.OnDeleteFilesListener;
+import net.osmand.plus.backup.BackupListeners.OnDownloadFileListListener;
+import net.osmand.plus.backup.BackupListeners.OnGenerateBackupInfoListener;
+import net.osmand.plus.backup.BackupListeners.OnUpdateOrderIdListener;
+import net.osmand.plus.backup.BackupListeners.OnUploadFileListener;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
-import net.osmand.plus.backup.ThreadPoolTaskExecutor.OnThreadPoolTaskExecutorListener;
+import net.osmand.plus.backup.commands.DeleteAllFilesCommand;
+import net.osmand.plus.backup.commands.DeleteFilesCommand;
+import net.osmand.plus.backup.commands.DeleteOldFilesCommand;
+import net.osmand.plus.backup.commands.RegisterDeviceCommand;
+import net.osmand.plus.backup.commands.RegisterUserCommand;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.settings.backend.CommonPreference;
@@ -47,7 +52,6 @@ import org.json.JSONObject;
 import java.io.File;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,22 +63,23 @@ public class BackupHelper {
 	private final BackupDbHelper dbHelper;
 
 	public static final Log LOG = PlatformUtil.getLog(BackupHelper.class);
-	private static final boolean DEBUG = true;
-	private static final int THREAD_POOL_SIZE = 4;
+	public static final boolean DEBUG = true;
+
+	public static final int THREAD_POOL_SIZE = 4;
 	private final BackupExecutor executor;
 
 	public final static String INFO_EXT = ".info";
 
-	private static final String SERVER_URL = "https://osmand.net";
+	public static final String SERVER_URL = "https://osmand.net";
 
-	private static final String USER_REGISTER_URL = SERVER_URL + "/userdata/user-register";
-	private static final String DEVICE_REGISTER_URL = SERVER_URL + "/userdata/device-register";
-	private static final String UPDATE_ORDER_ID_URL = SERVER_URL + "/userdata/user-update-orderid";
-	private static final String UPLOAD_FILE_URL = SERVER_URL + "/userdata/upload-file";
-	private static final String LIST_FILES_URL = SERVER_URL + "/userdata/list-files";
-	private static final String DOWNLOAD_FILE_URL = SERVER_URL + "/userdata/download-file";
-	private static final String DELETE_FILE_URL = SERVER_URL + "/userdata/delete-file";
-	private static final String DELETE_FILE_VERSION_URL = SERVER_URL + "/userdata/delete-file-version";
+	public static final String USER_REGISTER_URL = SERVER_URL + "/userdata/user-register";
+	public static final String DEVICE_REGISTER_URL = SERVER_URL + "/userdata/device-register";
+	public static final String UPDATE_ORDER_ID_URL = SERVER_URL + "/userdata/user-update-orderid";
+	public static final String UPLOAD_FILE_URL = SERVER_URL + "/userdata/upload-file";
+	public static final String LIST_FILES_URL = SERVER_URL + "/userdata/list-files";
+	public static final String DOWNLOAD_FILE_URL = SERVER_URL + "/userdata/download-file";
+	public static final String DELETE_FILE_URL = SERVER_URL + "/userdata/delete-file";
+	public static final String DELETE_FILE_VERSION_URL = SERVER_URL + "/userdata/delete-file-version";
 
 	private static final String BACKUP_TYPE_PREFIX = "backup_type_";
 	private static final String VERSION_HISTORY_PREFIX = "save_version_history_";
@@ -101,66 +106,7 @@ public class BackupHelper {
 	private PrepareBackupResult backup = new PrepareBackupResult();
 	private final List<OnPrepareBackupListener> prepareBackupListeners = new ArrayList<>();
 
-	public interface OnRegisterUserListener {
-		void onRegisterUser(int status, @Nullable String message, @Nullable ServerError error);
-	}
-
-	public interface OnRegisterDeviceListener {
-		void onRegisterDevice(int status, @Nullable String message, @Nullable ServerError error);
-	}
-
-	public interface OnUpdateOrderIdListener {
-		void onUpdateOrderId(int status, @Nullable String message, @Nullable String error);
-	}
-
-	public interface OnDownloadFileListListener {
-		void onDownloadFileList(int status, @Nullable String message, @NonNull List<RemoteFile> remoteFiles);
-	}
-
-	public interface OnCollectLocalFilesListener {
-		void onFileCollected(@NonNull LocalFile localFile);
-
-		void onFilesCollected(@NonNull List<LocalFile> localFiles);
-	}
-
-	public interface OnGenerateBackupInfoListener {
-		void onBackupInfoGenerated(@Nullable BackupInfo backupInfo, @Nullable String error);
-	}
-
-	public interface OnUploadFileListener {
-		void onFileUploadStarted(@NonNull String type, @NonNull String fileName, int work);
-
-		void onFileUploadProgress(@NonNull String type, @NonNull String fileName, int progress, int deltaWork);
-
-		void onFileUploadDone(@NonNull String type, @NonNull String fileName, long uploadTime, @Nullable String error);
-	}
-
-	public interface OnUploadFilesListener {
-		void onFileUploadProgress(@NonNull File file, int progress);
-
-		void onFileUploadDone(@NonNull File file);
-
-		void onFilesUploadDone(@NonNull Map<File, String> errors);
-	}
-
-	public interface OnDeleteFilesListener {
-		void onFileDeleteProgress(@NonNull RemoteFile file);
-
-		void onFilesDeleteDone(@NonNull Map<RemoteFile, String> errors);
-
-		void onFilesDeleteError(int status, @NonNull String message);
-	}
-
-	public interface OnDownloadFileListener {
-		void onFileDownloadProgress(@NonNull RemoteFile remoteFile, int progress);
-
-		@WorkerThread
-		void onFileDownloadedAsync(@NonNull File file);
-
-		void onFileDownloaded(@NonNull File file);
-
-		void onFilesDownloadDone(@NonNull Map<File, String> errors);
-	}
+	private final BackupListeners backupListeners = new BackupListeners();
 
 	public BackupHelper(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -175,13 +121,18 @@ public class BackupHelper {
 	}
 
 	@NonNull
-	BackupExecutor getExecutor() {
+	public BackupExecutor getExecutor() {
 		return executor;
 	}
 
 	@NonNull
 	public BackupDbHelper getDbHelper() {
 		return dbHelper;
+	}
+
+	@NonNull
+	public BackupListeners getBackupListeners() {
+		return backupListeners;
 	}
 
 	public PrepareBackupResult getBackup() {
@@ -219,7 +170,7 @@ public class BackupHelper {
 	}
 
 	@SuppressLint("HardwareIds")
-	private String getAndroidId() {
+	public String getAndroidId() {
 		try {
 			return Settings.Secure.getString(app.getContentResolver(), Settings.Secure.ANDROID_ID);
 		} catch (Exception e) {
@@ -337,99 +288,15 @@ public class BackupHelper {
 		return fileName;
 	}
 
-	public void registerUser(@NonNull final String email, @Nullable String promoCode, boolean login,
-							 @Nullable final OnRegisterUserListener listener) {
-		Map<String, String> params = new HashMap<>();
-		params.put("email", email);
-		params.put("login", String.valueOf(login));
-		final String orderId = Algorithms.isEmpty(promoCode) ? getOrderId() : promoCode;
-		if (!Algorithms.isEmpty(orderId)) {
-			params.put("orderid", orderId);
-		}
-		final String deviceId = app.getUserAndroidId();
-		params.put("deviceid", deviceId);
-		OperationLog operationLog = new OperationLog("registerUser", DEBUG);
-		AndroidNetworkUtils.sendRequestAsync(app, USER_REGISTER_URL, params, "Register user", false, true, (resultJson, error) -> {
-			int status;
-			String message;
-			ServerError serverError = null;
-			if (!Algorithms.isEmpty(error)) {
-				serverError = new ServerError(error);
-				message = "User registration error: " + serverError + "\nEmail=" + email + "\nOrderId=" + orderId + "\nDeviceId=" + deviceId;
-				status = STATUS_SERVER_ERROR;
-			} else if (!Algorithms.isEmpty(resultJson)) {
-				try {
-					JSONObject result = new JSONObject(resultJson);
-					if (result.has("status") && "ok".equals(result.getString("status"))) {
-						message = "You have been registered successfully. Please check for email with activation code.";
-						status = STATUS_SUCCESS;
-					} else {
-						message = "User registration error: unknown";
-						status = STATUS_SERVER_ERROR;
-					}
-				} catch (JSONException e) {
-					message = "User registration error: json parsing";
-					status = STATUS_PARSE_JSON_ERROR;
-				}
-			} else {
-				message = "User registration error: empty response";
-				status = STATUS_EMPTY_RESPONSE_ERROR;
-			}
-			if (listener != null) {
-				listener.onRegisterUser(status, message, serverError);
-			}
-			operationLog.finishOperation(status + " " + message);
-		}, executor);
+	public void registerUser(@NonNull final String email, @Nullable String promoCode, boolean login) {
+		executor.runCommand(new RegisterUserCommand(this, login, email, promoCode));
 	}
 
-	public void registerDevice(String token, @Nullable final OnRegisterDeviceListener listener) {
-		Map<String, String> params = new HashMap<>();
-		params.put("email", getEmail());
-		String orderId = getOrderId();
-		if (orderId != null) {
-			params.put("orderid", orderId);
-		}
-		String androidId = getAndroidId();
-		if (!Algorithms.isEmpty(androidId)) {
-			params.put("deviceid", androidId);
-		}
-		params.put("token", token);
-		OperationLog operationLog = new OperationLog("registerDevice", DEBUG);
-		AndroidNetworkUtils.sendRequestAsync(app, DEVICE_REGISTER_URL, params, "Register device", false, true, (resultJson, error) -> {
-			int status;
-			String message;
-			ServerError serverError = null;
-			if (!Algorithms.isEmpty(error)) {
-				serverError = new ServerError(error);
-				message = "Device registration error: " + serverError;
-				status = STATUS_SERVER_ERROR;
-			} else if (!Algorithms.isEmpty(resultJson)) {
-				try {
-					JSONObject result = new JSONObject(resultJson);
-					settings.BACKUP_DEVICE_ID.set(result.getString("id"));
-					settings.BACKUP_USER_ID.set(result.getString("userid"));
-					settings.BACKUP_NATIVE_DEVICE_ID.set(result.getString("deviceid"));
-					settings.BACKUP_ACCESS_TOKEN.set(result.getString("accesstoken"));
-					settings.BACKUP_ACCESS_TOKEN_UPDATE_TIME.set(result.getString("udpatetime"));
-
-					message = "Device have been registered successfully";
-					status = STATUS_SUCCESS;
-				} catch (JSONException e) {
-					message = "Device registration error: json parsing";
-					status = STATUS_PARSE_JSON_ERROR;
-				}
-			} else {
-				message = "Device registration error: empty response";
-				status = STATUS_EMPTY_RESPONSE_ERROR;
-			}
-			if (listener != null) {
-				listener.onRegisterDevice(status, message, serverError);
-			}
-			operationLog.finishOperation(status + " " + message);
-		}, executor);
+	public void registerDevice(@NonNull String token) {
+		executor.runCommand(new RegisterDeviceCommand(this, token));
 	}
 
-	void updateOrderIdSync(@Nullable final OnUpdateOrderIdListener listener) {
+	void updateOrderId(@Nullable final OnUpdateOrderIdListener listener) {
 		Map<String, String> params = new HashMap<>();
 		params.put("email", getEmail());
 		String orderId = getOrderId();
@@ -517,20 +384,9 @@ public class BackupHelper {
 		prepareBackupListeners.remove(listener);
 	}
 
-	private void prepareFileUpload(@NonNull String fileName, @NonNull String type, long uploadTime,
-								   @NonNull Map<String, String> params, @NonNull Map<String, String> headers) {
-		params.put("deviceid", getDeviceId());
-		params.put("accessToken", getAccessToken());
-		params.put("name", fileName);
-		params.put("type", type);
-		params.put("clienttime", String.valueOf(uploadTime));
-
-		headers.put("Accept-Encoding", "deflate, gzip");
-	}
-
-	String uploadFileSync(@NonNull String fileName, @NonNull String type,
-						  @NonNull StreamWriter streamWriter, final long uploadTime,
-						  @Nullable final OnUploadFileListener listener) throws UserNotRegisteredException {
+	String uploadFile(@NonNull String fileName, @NonNull String type,
+					  @NonNull StreamWriter streamWriter, final long uploadTime,
+					  @Nullable final OnUploadFileListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 
 		Map<String, String> params = new HashMap<>();
@@ -543,7 +399,7 @@ public class BackupHelper {
 		Map<String, String> headers = new HashMap<>();
 		headers.put("Accept-Encoding", "deflate, gzip");
 
-		OperationLog operationLog = new OperationLog("uploadFileSync", DEBUG);
+		OperationLog operationLog = new OperationLog("uploadFile", DEBUG);
 		operationLog.startOperation(type + " " + fileName);
 		String error = AndroidNetworkUtils.uploadFile(UPLOAD_FILE_URL, streamWriter, fileName, true, params, headers,
 				new AbstractProgress() {
@@ -582,112 +438,6 @@ public class BackupHelper {
 		return error;
 	}
 
-	void uploadFile(@NonNull String fileName, @NonNull String type, @NonNull StreamWriter streamWriter,
-					@Nullable final OnUploadFileListener listener) throws UserNotRegisteredException {
-		checkRegistered();
-
-		final long uploadTime = System.currentTimeMillis();
-		Map<String, String> params = new HashMap<>();
-		Map<String, String> headers = new HashMap<>();
-		prepareFileUpload(fileName, type, uploadTime, params, headers);
-
-		OperationLog operationLog = new OperationLog("uploadFile", DEBUG);
-		AndroidNetworkUtils.uploadFileAsync(UPLOAD_FILE_URL, streamWriter, fileName, true, params, headers, new OnFileUploadCallback() {
-
-			@Override
-			public void onFileUploadStarted() {
-				if (listener != null) {
-					listener.onFileUploadStarted(type, fileName, 1);
-				}
-			}
-
-			@Override
-			public void onFileUploadProgress(int progress) {
-				if (listener != null) {
-					listener.onFileUploadProgress(type, fileName, progress, 0);
-				}
-			}
-
-			@Override
-			public void onFileUploadDone(@Nullable String error) {
-				operationLog.finishOperation(type + " " + fileName + (error != null ? " Error: " + new ServerError(error) : " OK"));
-				if (error == null) {
-					updateFileUploadTime(type, fileName, uploadTime);
-				}
-				if (listener != null) {
-					listener.onFileUploadDone(type, fileName, uploadTime, error);
-				}
-			}
-		}, executor);
-	}
-
-	void uploadFiles(@NonNull List<LocalFile> localFiles,
-					 @Nullable final OnUploadFilesListener listener) throws UserNotRegisteredException {
-		checkRegistered();
-
-		Map<String, String> params = new HashMap<>();
-		params.put("deviceid", getDeviceId());
-		params.put("accessToken", getAccessToken());
-		Map<String, String> headers = new HashMap<>();
-		headers.put("Accept-Encoding", "deflate, gzip");
-
-		final Map<File, LocalFile> localFileMap = new HashMap<>();
-		for (LocalFile localFile : localFiles) {
-			localFileMap.put(localFile.file, localFile);
-		}
-		AndroidNetworkUtils.uploadFilesAsync(UPLOAD_FILE_URL, new ArrayList<>(localFileMap.keySet()), true, params, headers, new OnFilesUploadCallback() {
-			OperationLog operationLog;
-
-			@Nullable
-			@Override
-			public Map<String, String> getAdditionalParams(@NonNull File file) {
-				Map<String, String> additionaParams = new HashMap<>();
-				LocalFile localFile = localFileMap.get(file);
-				if (localFile != null) {
-					additionaParams.put("name", localFile.getFileName(true));
-					additionaParams.put("type", localFile.item.getType().name());
-					localFile.uploadTime = System.currentTimeMillis();
-					additionaParams.put("clienttime", String.valueOf(localFile.uploadTime));
-				}
-				return additionaParams;
-			}
-
-			@Override
-			public void onFileUploadProgress(@NonNull File file, int progress) {
-				if (progress == 0) {
-					operationLog = new OperationLog("uploadFile", DEBUG);
-				}
-				if (listener != null) {
-					listener.onFileUploadProgress(file, progress);
-				}
-			}
-
-			@Override
-			public void onFileUploadDone(@NonNull File file) {
-				if (operationLog != null) {
-					operationLog.finishOperation(file.getName());
-				}
-				LocalFile localFile = localFileMap.get(file);
-				if (localFile != null) {
-					updateFileUploadTime(localFile.item.getType().name(), localFile.getFileName(true), localFile.uploadTime);
-				}
-				if (listener != null) {
-					listener.onFileUploadDone(file);
-				}
-			}
-
-			@Override
-			public void onFilesUploadDone(@NonNull Map<File, String> errors) {
-				if (errors.isEmpty()) {
-					settings.BACKUP_LAST_UPLOADED_TIME.set(System.currentTimeMillis() + 1);
-				}
-				if (listener != null) {
-					listener.onFilesUploadDone(errors);
-				}
-			}
-		}, executor);
-	}
-
 	void deleteFiles(@NonNull List<RemoteFile> remoteFiles,
 					 @Nullable final OnDeleteFilesListener listener) throws UserNotRegisteredException {
 		deleteFiles(remoteFiles, false, listener);
@@ -696,86 +446,7 @@ public class BackupHelper {
 	void deleteFiles(@NonNull List<RemoteFile> remoteFiles, boolean byVersion,
 					 @Nullable final OnDeleteFilesListener listener) throws UserNotRegisteredException {
 		checkRegistered();
-
-		Map<String, String> commonParameters = new HashMap<>();
-		commonParameters.put("deviceid", getDeviceId());
-		commonParameters.put("accessToken", getAccessToken());
-
-		List<SendRequestTask> tasks = new ArrayList<>();
-		for (RemoteFile remoteFile : remoteFiles) {
-			Map<String, String> parameters = new HashMap<>(commonParameters);
-			parameters.put("name", remoteFile.getName());
-			parameters.put("type", remoteFile.getType());
-			if (byVersion) {
-				parameters.put("updatetime", String.valueOf(remoteFile.getUpdatetimems()));
-			}
-			Request r = new Request(byVersion ? DELETE_FILE_VERSION_URL : DELETE_FILE_URL, parameters, null, false, true);
-			tasks.add(new SendRequestTask(app, r, remoteFile));
-		}
-		ThreadPoolTaskExecutor<SendRequestTask> executor =
-				new ThreadPoolTaskExecutor<>(THREAD_POOL_SIZE, new OnThreadPoolTaskExecutorListener<SendRequestTask>() {
-
-					@Override
-					public void onTaskStarted(@NonNull SendRequestTask task) {
-					}
-
-					@Override
-					public void onTaskFinished(@NonNull SendRequestTask task) {
-						if (listener != null) {
-							RemoteFile remoteFile = task.remoteFile;
-							listener.onFileDeleteProgress(remoteFile);
-						}
-					}
-
-					@Override
-					public void onTasksFinished(@NonNull List<SendRequestTask> tasks) {
-						if (listener != null) {
-							Map<RemoteFile, String> errors = new HashMap<>();
-							for (SendRequestTask task : tasks) {
-								boolean success;
-								String message = null;
-								RequestResponse response = task.response;
-								if (response != null) {
-									String errorStr = response.getError();
-									if (!Algorithms.isEmpty(errorStr)) {
-										message = new ServerError(errorStr).toString();
-										success = false;
-									} else {
-										String responseStr = response.getResponse();
-										try {
-											JSONObject result = new JSONObject(responseStr);
-											if (result.has("status") && "ok".equals(result.getString("status"))) {
-												success = true;
-											} else {
-												message = "Unknown error";
-												success = false;
-											}
-										} catch (JSONException e) {
-											message = "Json parsing error";
-											success = false;
-										}
-									}
-									if (!success) {
-										errors.put(task.remoteFile, message);
-									}
-								}
-							}
-							listener.onFilesDeleteDone(errors);
-						}
-					}
-				});
-		executor.runAsync(tasks, executor);
-	}
-
-	void downloadFileListSync(@Nullable final OnDownloadFileListListener listener) throws UserNotRegisteredException {
-		checkRegistered();
-
-		Map<String, String> params = new HashMap<>();
-		params.put("deviceid", getDeviceId());
-		params.put("accessToken", getAccessToken());
-		params.put("allVersions", "true");
-		AndroidNetworkUtils.sendRequest(app, LIST_FILES_URL, params, "Download file list", false, false,
-				getDownloadFileListListener(listener));
+		executor.runCommand(new DeleteFilesCommand(this, remoteFiles, byVersion, listener));
 	}
 
 	void downloadFileList(@Nullable final OnDownloadFileListListener listener) throws UserNotRegisteredException {
@@ -785,191 +456,60 @@ public class BackupHelper {
 		params.put("deviceid", getDeviceId());
 		params.put("accessToken", getAccessToken());
 		params.put("allVersions", "true");
-		AndroidNetworkUtils.sendRequestAsync(app, LIST_FILES_URL, params, "Download file list", false, false,
-				getDownloadFileListListener(listener), executor);
-	}
+		AndroidNetworkUtils.sendRequest(app, LIST_FILES_URL, params, "Download file list", false, false,
+				new OnRequestResultListener() {
+					final OperationLog operationLog = new OperationLog("downloadFileList", DEBUG);
 
-	private OnRequestResultListener getDownloadFileListListener(@Nullable OnDownloadFileListListener listener) {
-		return new OnRequestResultListener() {
-			final OperationLog operationLog = new OperationLog("downloadFileList", DEBUG);
-
-			@Override
-			public void onResult(@Nullable String resultJson, @Nullable String error) {
-				int status;
-				String message;
-				List<RemoteFile> remoteFiles = new ArrayList<>();
-				if (!Algorithms.isEmpty(error)) {
-					status = STATUS_SERVER_ERROR;
-					message = "Download file list error: " + new ServerError(error);
-				} else if (!Algorithms.isEmpty(resultJson)) {
-					try {
-						JSONObject result = new JSONObject(resultJson);
-						String totalZipSize = result.getString("totalZipSize");
-						String totalFiles = result.getString("totalFiles");
-						String totalFileVersions = result.getString("totalFileVersions");
-						JSONArray allFiles = result.getJSONArray("allFiles");
-						for (int i = 0; i < allFiles.length(); i++) {
-							remoteFiles.add(new RemoteFile(allFiles.getJSONObject(i)));
+					@Override
+					public void onResult(@Nullable String resultJson, @Nullable String error) {
+						int status;
+						String message;
+						List<RemoteFile> remoteFiles = new ArrayList<>();
+						if (!Algorithms.isEmpty(error)) {
+							status = STATUS_SERVER_ERROR;
+							message = "Download file list error: " + new ServerError(error);
+						} else if (!Algorithms.isEmpty(resultJson)) {
+							try {
+								JSONObject result1 = new JSONObject(resultJson);
+								String totalZipSize = result1.getString("totalZipSize");
+								String totalFiles = result1.getString("totalFiles");
+								String totalFileVersions = result1.getString("totalFileVersions");
+								JSONArray allFiles = result1.getJSONArray("allFiles");
+								for (int i = 0; i < allFiles.length(); i++) {
+									remoteFiles.add(new RemoteFile(allFiles.getJSONObject(i)));
+								}
+								status = STATUS_SUCCESS;
+								message = "Total files: " + totalFiles + " " +
+										"Total zip size: " + AndroidUtils.formatSize(app, Long.parseLong(totalZipSize)) + " " +
+										"Total file versions: " + totalFileVersions;
+							} catch (JSONException | ParseException e) {
+								status = STATUS_PARSE_JSON_ERROR;
+								message = "Download file list error: json parsing";
+							}
+						} else {
+							status = STATUS_EMPTY_RESPONSE_ERROR;
+							message = "Download file list error: empty response";
 						}
-						status = STATUS_SUCCESS;
-						message = "Total files: " + totalFiles + " " +
-								"Total zip size: " + AndroidUtils.formatSize(app, Long.parseLong(totalZipSize)) + " " +
-								"Total file versions: " + totalFileVersions;
-					} catch (JSONException | ParseException e) {
-						status = STATUS_PARSE_JSON_ERROR;
-						message = "Download file list error: json parsing";
-					}
-				} else {
-					status = STATUS_EMPTY_RESPONSE_ERROR;
-					message = "Download file list error: empty response";
-				}
-				operationLog.finishOperation("(" + status + "): " + message);
-				if (listener != null) {
-					listener.onDownloadFileList(status, message, remoteFiles);
-				}
-			}
-		};
-	}
-
-	public void deleteAllFiles(@Nullable final OnDeleteFilesListener listener,
-							   @NonNull List<ExportSettingsType> types) throws UserNotRegisteredException {
-		checkRegistered();
-
-		Map<String, String> params = new HashMap<>();
-		params.put("deviceid", getDeviceId());
-		params.put("accessToken", getAccessToken());
-		params.put("allVersions", "true");
-		AndroidNetworkUtils.sendRequestAsync(app, LIST_FILES_URL, params, "Delete all files", false, false,
-				getDeleteAllFilesListener(listener, types), executor);
-	}
-
-	private OnRequestResultListener getDeleteAllFilesListener(@Nullable OnDeleteFilesListener listener, @NonNull List<ExportSettingsType> types) {
-		return (resultJson, error) -> {
-			int status;
-			String message;
-			List<RemoteFile> remoteFiles = new ArrayList<>();
-			if (!Algorithms.isEmpty(error)) {
-				status = STATUS_SERVER_ERROR;
-				message = "Download file list error: " + new ServerError(error);
-			} else if (!Algorithms.isEmpty(resultJson)) {
-				try {
-					JSONObject result = new JSONObject(resultJson);
-					JSONArray files = result.getJSONArray("allFiles");
-					for (int i = 0; i < files.length(); i++) {
-						remoteFiles.add(new RemoteFile(files.getJSONObject(i)));
-					}
-					status = STATUS_SUCCESS;
-					message = "OK";
-				} catch (JSONException | ParseException e) {
-					status = STATUS_PARSE_JSON_ERROR;
-					message = "Download file list error: json parsing";
-				}
-			} else {
-				status = STATUS_EMPTY_RESPONSE_ERROR;
-				message = "Download file list error: empty response";
-			}
-			if (status != STATUS_SUCCESS) {
-				if (listener != null) {
-					listener.onFilesDeleteError(status, message);
-				}
-			} else {
-				try {
-					List<RemoteFile> filesToDelete = new ArrayList<>();
-					for (RemoteFile file : remoteFiles) {
-						ExportSettingsType exportType = ExportSettingsType.getExportSettingsTypeForRemoteFile(file);
-						if (types.contains(exportType)) {
-							filesToDelete.add(file);
-						}
-					}
-					if (!filesToDelete.isEmpty()) {
-						deleteFiles(filesToDelete, true, listener);
-					} else {
+						operationLog.finishOperation("(" + status + "): " + message);
 						if (listener != null) {
-							listener.onFilesDeleteDone(Collections.emptyMap());
+							listener.onDownloadFileList(status, message, remoteFiles);
 						}
 					}
-				} catch (UserNotRegisteredException e) {
-					if (listener != null) {
-						listener.onFilesDeleteError(STATUS_SERVER_ERROR, "User not registered");
-					}
-				}
-			}
-		};
+				});
 	}
 
-	public void deleteOldFiles(@Nullable final OnDeleteFilesListener listener,
-							   @NonNull List<ExportSettingsType> types) throws UserNotRegisteredException {
+	public void deleteAllFiles(@NonNull List<ExportSettingsType> types) throws UserNotRegisteredException {
 		checkRegistered();
-
-		Map<String, String> params = new HashMap<>();
-		params.put("deviceid", getDeviceId());
-		params.put("accessToken", getAccessToken());
-		params.put("allVersions", "true");
-		AndroidNetworkUtils.sendRequestAsync(app, LIST_FILES_URL, params, "Delete old files", false, false,
-				getDeleteOldFilesListener(listener, types), executor);
+		executor.runCommand(new DeleteAllFilesCommand(this, types));
 	}
 
-	private OnRequestResultListener getDeleteOldFilesListener(@Nullable OnDeleteFilesListener listener, @NonNull List<ExportSettingsType> types) {
-		return (resultJson, error) -> {
-			int status;
-			String message;
-			List<RemoteFile> remoteFiles = new ArrayList<>();
-			if (!Algorithms.isEmpty(error)) {
-				status = STATUS_SERVER_ERROR;
-				message = "Download file list error: " + new ServerError(error);
-			} else if (!Algorithms.isEmpty(resultJson)) {
-				try {
-					JSONObject result = new JSONObject(resultJson);
-					JSONArray allFiles = result.getJSONArray("allFiles");
-					for (int i = 0; i < allFiles.length(); i++) {
-						remoteFiles.add(new RemoteFile(allFiles.getJSONObject(i)));
-					}
-					JSONArray uniqueFiles = result.getJSONArray("uniqueFiles");
-					for (int i = 0; i < uniqueFiles.length(); i++) {
-						remoteFiles.remove(new RemoteFile(uniqueFiles.getJSONObject(i)));
-					}
-					status = STATUS_SUCCESS;
-					message = "OK";
-				} catch (JSONException | ParseException e) {
-					status = STATUS_PARSE_JSON_ERROR;
-					message = "Download file list error: json parsing";
-				}
-			} else {
-				status = STATUS_EMPTY_RESPONSE_ERROR;
-				message = "Download file list error: empty response";
-			}
-			if (status != STATUS_SUCCESS) {
-				if (listener != null) {
-					listener.onFilesDeleteError(status, message);
-				}
-			} else {
-				try {
-					List<RemoteFile> filesToDelete = new ArrayList<>();
-					for (RemoteFile file : remoteFiles) {
-						ExportSettingsType exportType = ExportSettingsType.getExportSettingsTypeForRemoteFile(file);
-						if (types.contains(exportType)) {
-							filesToDelete.add(file);
-						}
-					}
-					if (!filesToDelete.isEmpty()) {
-						deleteFiles(filesToDelete, true, listener);
-					} else {
-						if (listener != null) {
-							listener.onFilesDeleteDone(Collections.emptyMap());
-						}
-					}
-				} catch (UserNotRegisteredException e) {
-					if (listener != null) {
-						listener.onFilesDeleteError(STATUS_SERVER_ERROR, "User not registered");
-					}
-				}
-			}
-		};
+	public void deleteOldFiles(@NonNull List<ExportSettingsType> types) throws UserNotRegisteredException {
+		checkRegistered();
+		executor.runCommand(new DeleteOldFilesCommand(this, types));
 	}
 
 	@NonNull
-	Map<File, String> downloadFilesSync(@NonNull final Map<File, RemoteFile> filesMap,
-										@Nullable final OnDownloadFileListener listener) throws UserNotRegisteredException {
+	Map<File, String> downloadFiles(@NonNull final Map<File, RemoteFile> filesMap) throws UserNotRegisteredException {
 		checkRegistered();
 
 		Map<File, String> res = new HashMap<>();
@@ -995,9 +535,6 @@ public class BackupHelper {
 						if (percent == 0) {
 							operationLog = new OperationLog("downloadFile", DEBUG);
 						}
-						if (listener != null) {
-							listener.onFileDownloadProgress(filesMap.get(file), percent);
-						}
 					}
 
 					@Override
@@ -1005,84 +542,18 @@ public class BackupHelper {
 						if (operationLog != null) {
 							operationLog.finishOperation(file.getName());
 						}
-						if (listener != null) {
-							listener.onFileDownloaded(file);
-						}
 					}
 
 					@Override
 					public void onFileDownloadedAsync(@NonNull File file) {
-						if (listener != null) {
-							listener.onFileDownloadedAsync(file);
-						}
 					}
 
 					@Override
 					public void onFilesDownloadDone(@NonNull Map<File, String> errors) {
 						res.putAll(errors);
-						if (listener != null) {
-							listener.onFilesDownloadDone(errors);
-						}
 					}
 				});
 		return res;
-	}
-
-	void downloadFiles(@NonNull final Map<File, RemoteFile> filesMap,
-					   @Nullable final OnDownloadFileListener listener) throws UserNotRegisteredException {
-		checkRegistered();
-
-		Map<String, String> params = new HashMap<>();
-		params.put("deviceid", getDeviceId());
-		params.put("accessToken", getAccessToken());
-		AndroidNetworkUtils.downloadFilesAsync(DOWNLOAD_FILE_URL,
-				new ArrayList<>(filesMap.keySet()), params, new OnFilesDownloadCallback() {
-					OperationLog operationLog;
-
-					@Nullable
-					@Override
-					public Map<String, String> getAdditionalParams(@NonNull File file) {
-						RemoteFile remoteFile = filesMap.get(file);
-						Map<String, String> additionaParams = new HashMap<>();
-						additionaParams.put("name", remoteFile.getName());
-						additionaParams.put("type", remoteFile.getType());
-						return additionaParams;
-					}
-
-					@Override
-					public void onFileDownloadProgress(@NonNull File file, int percent) {
-						if (percent == 0) {
-							operationLog = new OperationLog("downloadFile", DEBUG);
-						}
-						if (listener != null) {
-							listener.onFileDownloadProgress(filesMap.get(file), percent);
-						}
-					}
-
-					@Override
-					public void onFileDownloadDone(@NonNull File file) {
-						if (operationLog != null) {
-							operationLog.finishOperation(file.getName());
-						}
-						if (listener != null) {
-							listener.onFileDownloaded(file);
-						}
-					}
-
-					@Override
-					public void onFileDownloadedAsync(@NonNull File file) {
-						if (listener != null) {
-							listener.onFileDownloadedAsync(file);
-						}
-					}
-
-					@Override
-					public void onFilesDownloadDone(@NonNull Map<File, String> errors) {
-						if (listener != null) {
-							listener.onFilesDownloadDone(errors);
-						}
-					}
-				}, executor);
 	}
 
 	@SuppressLint("StaticFieldLeak")
@@ -1250,30 +721,5 @@ public class BackupHelper {
 			}
 		};
 		task.executeOnExecutor(executor);
-	}
-
-	private static class SendRequestTask extends ThreadPoolTaskExecutor.Task {
-
-		private final OsmandApplication app;
-		private final Request request;
-		private final RemoteFile remoteFile;
-		private RequestResponse response;
-
-		public SendRequestTask(@NonNull OsmandApplication app, @NonNull Request request,
-							   @NonNull RemoteFile remoteFile) {
-			this.app = app;
-			this.request = request;
-			this.remoteFile = remoteFile;
-		}
-
-		@Override
-		public Void call() throws Exception {
-			OperationLog operationLog = new OperationLog("deleteFile", DEBUG);
-			AndroidNetworkUtils.sendRequest(app, request, (result, error) -> {
-				response = new RequestResponse(request, result, error);
-			});
-			operationLog.finishOperation(remoteFile.getName());
-			return null;
-		}
 	}
 }

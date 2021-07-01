@@ -59,7 +59,7 @@ class BackupImporter {
 		CollectItemsResult result = new CollectItemsResult();
 		StringBuilder error = new StringBuilder();
 		try {
-			backupHelper.downloadFileListSync((status, message, remoteFiles) -> {
+			backupHelper.downloadFileList((status, message, remoteFiles) -> {
 				if (status == BackupHelper.STATUS_SUCCESS) {
 					result.remoteFiles = remoteFiles;
 					try {
@@ -110,7 +110,7 @@ class BackupImporter {
 						File tempFile = new File(tempDir, fileName);
 						Map<File, RemoteFile> map = new HashMap<>();
 						map.put(tempFile, remoteFile);
-						Map<File, String> errors = backupHelper.downloadFilesSync(map, null);
+						Map<File, String> errors = backupHelper.downloadFiles(map);
 						if (errors.isEmpty()) {
 							is = new FileInputStream(tempFile);
 							reader.readFromStream(is, remoteFile.getName());
@@ -312,7 +312,7 @@ class BackupImporter {
 	private void generateItemsJson(@NonNull JSONArray itemsJson,
 								   @NonNull Map<File, RemoteFile> remoteInfoFiles,
 								   @NonNull List<RemoteFile> noInfoRemoteItemFiles) throws UserNotRegisteredException, JSONException, IOException {
-		Map<File, String> errors = backupHelper.downloadFilesSync(remoteInfoFiles, null);
+		Map<File, String> errors = backupHelper.downloadFiles(remoteInfoFiles);
 		if (errors.isEmpty()) {
 			for (File file : remoteInfoFiles.keySet()) {
 				String jsonStr = Algorithms.getFileAsString(file);
@@ -342,7 +342,7 @@ class BackupImporter {
 	private void downloadAndReadItemFiles(@NonNull Map<RemoteFile, SettingsItemReader<? extends SettingsItem>> remoteFilesForRead,
 										  @NonNull Map<File, RemoteFile> remoteFilesForDownload) throws UserNotRegisteredException, IOException {
 		OsmandApplication app = backupHelper.getApp();
-		Map<File, String> errors = backupHelper.downloadFilesSync(remoteFilesForDownload, null);
+		Map<File, String> errors = backupHelper.downloadFiles(remoteFilesForDownload);
 		if (errors.isEmpty()) {
 			for (Entry<File, RemoteFile> entry : remoteFilesForDownload.entrySet()) {
 				File tempFile = entry.getKey();

@@ -5,7 +5,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.IProgress;
 import net.osmand.StreamWriter;
-import net.osmand.plus.backup.BackupHelper.OnUploadFileListener;
+import net.osmand.plus.backup.BackupListeners.OnUploadFileListener;
 import net.osmand.plus.settings.backend.backup.AbstractWriter;
 import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
@@ -85,7 +85,7 @@ public class NetworkWriter implements AbstractWriter {
 					Algorithms.streamCopy(inputStream, outputStream, progress, 1024);
 					outputStream.flush();
 				};
-				return backupHelper.uploadFileSync(fileName, item.getType().name(), streamWriter, uploadTime,
+				return backupHelper.uploadFile(fileName, item.getType().name(), streamWriter, uploadTime,
 						getUploadFileListener(item));
 			} else {
 				return null;
@@ -103,7 +103,7 @@ public class NetworkWriter implements AbstractWriter {
 				itemWriter.writeToStream(outputStream, progress);
 			}
 		};
-		return backupHelper.uploadFileSync(fileName, itemWriter.getItem().getType().name(), streamWriter, uploadTime,
+		return backupHelper.uploadFile(fileName, itemWriter.getItem().getType().name(), streamWriter, uploadTime,
 				getUploadFileListener(itemWriter.getItem()));
 	}
 

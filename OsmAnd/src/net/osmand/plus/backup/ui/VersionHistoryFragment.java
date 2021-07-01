@@ -69,7 +69,7 @@ public class VersionHistoryFragment extends BaseBackupTypesFragment {
 	public void onClearTypesConfirmed(@NonNull List<ExportSettingsType> types) {
 		try {
 			updateProgressVisibility(true);
-			backupHelper.deleteOldFiles(getOnDeleteFilesListener(), types);
+			backupHelper.deleteOldFiles(types);
 		} catch (UserNotRegisteredException e) {
 			updateProgressVisibility(false);
 			log.error(e);

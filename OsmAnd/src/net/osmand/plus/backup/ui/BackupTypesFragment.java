@@ -71,7 +71,7 @@ public class BackupTypesFragment extends BaseBackupTypesFragment implements OnIt
 	public void onClearTypesConfirmed(@NonNull List<ExportSettingsType> types) {
 		try {
 			updateProgressVisibility(true);
-			backupHelper.deleteAllFiles(getOnDeleteFilesListener(), types);
+			backupHelper.deleteAllFiles(types);
 		} catch (UserNotRegisteredException e) {
 			updateProgressVisibility(false);
 			log.error(e);

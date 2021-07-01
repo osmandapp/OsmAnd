@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.OperationLog;
-import net.osmand.plus.backup.BackupHelper.OnDeleteFilesListener;
+import net.osmand.plus.backup.BackupListeners.OnDeleteFilesListener;
 import net.osmand.plus.backup.NetworkWriter.OnUploadItemListener;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.AbstractWriter;
@@ -85,7 +85,7 @@ public class BackupExporter extends Exporter {
 		log.startOperation();
 
 		StringBuilder orderIdUpdateError = new StringBuilder();
-		backupHelper.updateOrderIdSync((status, message, err) -> {
+		backupHelper.updateOrderId((status, message, err) -> {
 			if (err != null) {
 				orderIdUpdateError.append(err);
 			}
