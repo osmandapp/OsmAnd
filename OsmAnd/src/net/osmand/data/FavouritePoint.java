@@ -31,6 +31,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	public static final String PASSED_TIMESTAMP = "passed_timestamp";
 	private static final String HIDDEN = "hidden";
 	private static final String ADDRESS_EXTENSION = "address";
+	private static final String CALENDAR_EXTENSION = "calendar_event";
 	public static final BackgroundType DEFAULT_BACKGROUND_TYPE = BackgroundType.CIRCLE;
 	public static final int DEFAULT_UI_ICON_ID = R.drawable.mx_special_star;
 
@@ -49,6 +50,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	private double altitude = Double.NaN;
 	private long timestamp;
 	private long passedTimestamp;
+	private boolean calendarEvent;
 
 	public FavouritePoint() {
 	}
@@ -238,6 +240,14 @@ public class FavouritePoint implements Serializable, LocationPoint {
 
 	public void setTimestamp(long timestamp) {
 		this.timestamp = timestamp;
+	}
+
+	public boolean getCalendarEvent() {
+		return calendarEvent;
+	}
+
+	public void setCalendarEvent(boolean calendarEvent) {
+		this.calendarEvent = calendarEvent;
 	}
 
 	public long getPassedTimestamp() {
@@ -478,6 +488,10 @@ public class FavouritePoint implements Serializable, LocationPoint {
 			String time = pt.getExtensionsToWrite().get(PASSED_TIMESTAMP);
 			fp.setPassedTimestamp(Algorithms.parseLongSilently(time, 0));
 		}
+		if (pt.getExtensionsToWrite().containsKey(CALENDAR_EXTENSION)) {
+			String calendarEvent = pt.getExtensionsToWrite().get(CALENDAR_EXTENSION);
+			fp.setCalendarEvent(calendarEvent.equals("true"));
+		}
 		fp.setColor(pt.getColor(0));
 		fp.setVisible(!pt.getExtensionsToRead().containsKey(HIDDEN));
 		fp.setAddress(pt.getExtensionsToRead().get(ADDRESS_EXTENSION));
@@ -504,6 +518,10 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		}
 		if (getPassedTimestamp() != 0) {
 			pt.getExtensionsToWrite().put(PASSED_TIMESTAMP, String.valueOf(getPassedTimestamp()));
+		}
+		if (getCalendarEvent())
+		{
+			pt.getExtensionsToWrite().put(CALENDAR_EXTENSION, "true");
 		}
 		if (iconId != 0) {
 			pt.setIconName(getIconEntryName(ctx).substring(3));
