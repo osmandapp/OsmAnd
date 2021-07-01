@@ -47,6 +47,8 @@ class ObfImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 			return app.getAppPath(IndexConstants.ROADS_INDEX_DIR + name);
 		} else if (name.endsWith(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT)) {
 			return app.getAppPath(IndexConstants.WIKI_INDEX_DIR + name);
+		} else if (name.endsWith(IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)) {
+			return app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR + name);
 		}
 		return app.getAppPath(name);
 	}
