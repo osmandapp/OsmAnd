@@ -87,6 +87,42 @@
 		android:paddingStart="@dimen/content_padding" />
 
     <LinearLayout
+        android:id="@+id/checkbox_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:visibility="visible"
+        android:visibility="gone"
+        android:minHeight="@dimen/bottom_sheet_list_item_height"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/content_padding"
+            android:layout_marginRight="@dimen/content_padding"
+            android:focusable="false"
+            android:clickable="false" />
+
+        <net.osmand.plus.widgets.TextViewEx
+            android:id="@+id/checkbox_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:letterSpacing="@dimen/description_letter_spacing"
+            android:paddingLeft="0dp"
+            android:paddingStart="0dp"
+            android:paddingRight="@dimen/content_padding"
+            android:paddingEnd="@dimen/content_padding"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="@dimen/default_desc_text_size"
+            osmand:typeface="@string/font_roboto_regular"
+            android:layout_gravity="center_vertical"
+            tools:text="Approximate route" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/field_box_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
