@@ -1018,14 +1018,16 @@ public class TravelObfHelper implements TravelHelper {
 				}
 				track.segments.add(trkSegment);
 			}
-			gpxFile = new GPXFile(article.getTitle(), article.getLang(), "");
+			gpxFile = new GPXFile(article.getTitle(), article.getLang(), article.getContent());
+			gpxFile.metadata.link = TravelArticle.getImageUrl(article.getImageTitle(), false);
 			gpxFile.tracks = new ArrayList<>();
 			gpxFile.tracks.add(track);
 			gpxFile.setRef(article.ref);
 		}
 		if (!pointList.isEmpty()) {
 			if (gpxFile == null) {
-				gpxFile = new GPXFile(article.getTitle(), article.getLang(), "");
+				gpxFile = new GPXFile(article.getTitle(), article.getLang(), article.getContent());
+				gpxFile.metadata.link = TravelArticle.getImageUrl(article.getImageTitle(), false);
 			}
 			for (Amenity wayPoint : pointList) {
 				gpxFile.addPoint(article.createWptPt(wayPoint, article.getLang()));
