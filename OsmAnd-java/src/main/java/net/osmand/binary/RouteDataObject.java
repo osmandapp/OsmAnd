@@ -318,7 +318,7 @@ public class RouteDataObject {
 		return null;
 	}
 
-	public String getDestinationRef(boolean direction) {
+	public String getDestinationRef(String lang, boolean transliterate, boolean direction) {
 		if (names != null) {
 			int[] kt = names.keys();
 			String refTag = (direction == true) ? "destination:ref:forward" : "destination:ref:backward";
@@ -341,13 +341,13 @@ public class RouteDataObject {
 			}
 			//return names.get(region.refTypeRule);
 		}
-		return null;
+		return getRef(lang, transliterate, direction);
 	}
 
 	public String getDestinationName(String lang, boolean transliterate, boolean direction) {
-		//Issue #3289: Treat destination:ref like a destination, not like a ref
+		/*//Issue #3289: Treat destination:ref like a destination, not like a ref
 		String destRef = ((getDestinationRef(direction) == null) || getDestinationRef(direction).equals(getRef(lang, transliterate, direction))) ? "" : getDestinationRef(direction);
-		String destRef1 = Algorithms.isEmpty(destRef) ? "" : destRef + ", ";
+		String destRef1 = Algorithms.isEmpty(destRef) ? "" : destRef + ", ";*/
 
 		if (names != null) {
 			int[] kt = names.keys();
@@ -368,46 +368,30 @@ public class RouteDataObject {
 				destinationTagLang = "destination:lang:" + lang;
 			}
 			String destinationTagDefault = "destination";
-			String destinationLanesTag = "destination:lanes";
-			String destinationLanesTagFB = (direction == true) ? destinationLanesTag + ":forward" : destinationLanesTag + ":backward";
 			String destinationDefault = null;
-			String destinationLanesDefault = null;
-			String destinationLanesFBDefault = null;
 
 			for (int i = 0; i < kt.length; i++) {
 				int k = kt[i];
 				if (region.routeEncodingRules.size() > k) {
 					if (!Algorithms.isEmpty(lang) && destinationTagLangFB.equals(region.routeEncodingRules.get(k).getTag())) {
-						return destRef1 + ((transliterate) ? TransliterationHelper.transliterate(names.get(k)) : names.get(k));
+						return (transliterate) ? TransliterationHelper.transliterate(names.get(k)) : names.get(k);
 					}
 					if (destinationTagFB.equals(region.routeEncodingRules.get(k).getTag())) {
-						return destRef1 + ((transliterate) ? TransliterationHelper.transliterate(names.get(k)) : names.get(k));
+						return (transliterate) ? TransliterationHelper.transliterate(names.get(k)) : names.get(k);
 					}
 					if (!Algorithms.isEmpty(lang) && destinationTagLang.equals(region.routeEncodingRules.get(k).getTag())) {
-						return destRef1 + ((transliterate) ? TransliterationHelper.transliterate(names.get(k)) : names.get(k));
-					}
-					if (destinationLanesTagFB.equals(region.routeEncodingRules.get(k).getTag())) {
-						destinationLanesFBDefault = names.get(k);
+						return (transliterate) ? TransliterationHelper.transliterate(names.get(k)) : names.get(k);
 					}
 					if (destinationTagDefault.equals(region.routeEncodingRules.get(k).getTag())) {
 						destinationDefault = names.get(k);
 					}
-					if (destinationLanesTag.equals(region.routeEncodingRules.get(k).getTag())) {
-						destinationLanesDefault = names.get(k);
-					}
 				}
 			}
 			if (destinationDefault != null) {
-				return destRef1 + ((transliterate) ? TransliterationHelper.transliterate(destinationDefault) : destinationDefault);
-			}
-			if (destinationLanesFBDefault != null) {
-				return destRef1 + ((transliterate) ? TransliterationHelper.transliterate(destinationLanesFBDefault) : destinationLanesFBDefault);
-			}
-			if (destinationLanesDefault != null) {
-				return destRef1 + ((transliterate) ? TransliterationHelper.transliterate(destinationLanesDefault) : destinationLanesDefault);
+				return (transliterate) ? TransliterationHelper.transliterate(destinationDefault) : destinationDefault;
 			}
 		}
-		return Algorithms.isEmpty(destRef) ? null : destRef;
+		return "";
 	}
 
 	public int getPoint31XTile(int i) {
@@ -781,23 +765,23 @@ public class RouteDataObject {
 //		return false;
 //	}
 
-	public String getExitName() {
-		if (pointNames != null && pointNameTypes != null) {
-			int pnSz = pointNames.length;
-			for (int i = 0; i < pnSz; i++) {
-				String[] point = pointNames[i];
-				if (point != null) {
-					int pSz = point.length;
-					for (int j = 0; j < pSz; j++) {
-						if (pointNameTypes[i][j] == region.nameTypeRule) {
-							return point[j];
-						}
-					}
-				}
-			}
-		}
-		return null;
-	}
+//	public String getExitName() {
+//		if (pointNames != null && pointNameTypes != null) {
+//			int pnSz = pointNames.length;
+//			for (int i = 0; i < pnSz; i++) {
+//				String[] point = pointNames[i];
+//				if (point != null) {
+//					int pSz = point.length;
+//					for (int j = 0; j < pSz; j++) {
+//						if (pointNameTypes[i][j] == region.nameTypeRule) {
+//							return point[j];
+//						}
+//					}
+//				}
+//			}
+//		}
+//		return null;
+//	}
 
 	public String getExitRef() {
 		if (pointNames != null && pointNameTypes != null) {

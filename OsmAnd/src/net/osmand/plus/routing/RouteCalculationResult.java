@@ -4,6 +4,7 @@ import android.content.Context;
 
 import androidx.annotation.Nullable;
 
+import net.osmand.GPXUtilities;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
@@ -37,6 +38,7 @@ public class RouteCalculationResult {
 	// Evaluates street name that the route follows after turn within specified distance.
 	// It is useful to find names for short segments on intersections and roundabouts.
 	private static float distanceSeekStreetName = 150;
+	private static float distanceSeekDestination = 1000;
 
 	private static double distanceClosestToIntermediate = 3000;
 	private static double distanceThresholdToIntermediate = 25;
@@ -395,50 +397,79 @@ public class RouteCalculationResult {
 						// Consider roundabout end.
 						info.routeEndPointOffset = roundAboutEnd;
 					}
-					RouteSegmentResult next = list.get(lind);
-					String ref = next.getObject().getRef(ctx.getSettings().MAP_PREFERRED_LOCALE.get(),
-							ctx.getSettings().MAP_TRANSLITERATE_NAMES.get(), next.isForwardDirection());
-					info.setRef(ref);
-					String streetName = next.getObject().getName(ctx.getSettings().MAP_PREFERRED_LOCALE.get(),
+					RouteSegmentResult current = (routeInd == lind) ? s : list.get(lind);
+
+					String dnRef = current.getObject().getDestinationRef(ctx.getSettings().MAP_PREFERRED_LOCALE.get(),
+							ctx.getSettings().MAP_TRANSLITERATE_NAMES.get(), current.isForwardDirection());
+					String streetName = current.getObject().getName(ctx.getSettings().MAP_PREFERRED_LOCALE.get(),
 							ctx.getSettings().MAP_TRANSLITERATE_NAMES.get());
-					if (Algorithms.isEmpty(streetName)) {
-						// try to get street names from following segments
-						float distanceFromTurn = next.getDistance();
+					String destinationName = current.getObject().getDestinationName(ctx.getSettings().MAP_PREFERRED_LOCALE.get(),
+							ctx.getSettings().MAP_TRANSLITERATE_NAMES.get(), current.isForwardDirection());
+					if (Algorithms.isEmpty(streetName) || Algorithms.isEmpty(destinationName)) {
+						// try to get street and destination names from following segments
+						float distanceFromTurn = current.getDistance();
+						float maxDistance = Math.max(distanceSeekStreetName, distanceSeekDestination);
+						boolean hasNewTurn = false;
 						for (int n = lind + 1; n + 1 < list.size(); n++) {
 							RouteSegmentResult s1 = list.get(n);
-							// scan the list only until the next turn
-							if (s1.getTurnType() != null || distanceFromTurn > distanceSeekStreetName ||
-									!Algorithms.isEmpty(streetName)) {
+							String s1DnRef = s1.getObject().getDestinationRef(ctx.getSettings().MAP_PREFERRED_LOCALE.get(),
+									ctx.getSettings().MAP_TRANSLITERATE_NAMES.get(), current.isForwardDirection());
+							boolean dnRefIsEquals = !Algorithms.isEmpty(s1DnRef) && !Algorithms.isEmpty(dnRef) && s1DnRef.equals(dnRef);
+							if (s1.getTurnType() != null) {
+								hasNewTurn = true;
+							}
+							if (!hasNewTurn && distanceFromTurn < distanceSeekStreetName
+									&& Algorithms.isEmpty(streetName)) {
+								streetName = s1.getObject().getName(ctx.getSettings().MAP_PREFERRED_LOCALE.get(),
+										ctx.getSettings().MAP_TRANSLITERATE_NAMES.get());
+							}
+							if (distanceFromTurn < distanceSeekDestination && (s1.getObject().getHighway().equals("motorway_link") || dnRefIsEquals)
+									&& Algorithms.isEmpty(destinationName)) {
+								destinationName = s1.getObject().getDestinationName(ctx.getSettings().MAP_PREFERRED_LOCALE.get(),
+										ctx.getSettings().MAP_TRANSLITERATE_NAMES.get(), s1.isForwardDirection());
+							}
+							distanceFromTurn += s1.getDistance();
+							if (distanceFromTurn > maxDistance || (!Algorithms.isEmpty(destinationName) && !Algorithms.isEmpty(streetName))) {
 								break;
 							}
-							streetName = s1.getObject().getName(ctx.getSettings().MAP_PREFERRED_LOCALE.get(),
-									ctx.getSettings().MAP_TRANSLITERATE_NAMES.get());
-							distanceFromTurn += s1.getDistance();
 						}
 					}
+					if (!Algorithms.isEmpty(dnRef) && !Algorithms.isEmpty(destinationName)) {
+						destinationName = dnRef + ", " + destinationName;
+					} else if (!Algorithms.isEmpty(dnRef) && Algorithms.isEmpty(destinationName)) {
+						destinationName = dnRef;
+					}
 					info.setStreetName(streetName);
-					info.setDestinationName(next.getObject().getDestinationName(ctx.getSettings().MAP_PREFERRED_LOCALE.get(),
-							ctx.getSettings().MAP_TRANSLITERATE_NAMES.get(), next.isForwardDirection()));
-					if (s.getObject().isExitPoint() && next.getObject().getHighway().equals("motorway_link")) {
+					info.setDestinationName(destinationName);
+
+					if (s.getObject().isExitPoint() && current.getObject().getHighway().equals("motorway_link")) {
 						ExitInfo exitInfo = new ExitInfo();
-						exitInfo.setRef(next.getObject().getExitRef());
-						exitInfo.setExitStreetName(next.getObject().getExitName());
+						exitInfo.setRef(current.getObject().getExitRef());
+						//exitInfo.setExitStreetName(next.getObject().getExitName());
+						exitInfo.setDestinationName(destinationName);
+						exitInfo.setDestinationRef(dnRef);
 						info.setExitInfo(exitInfo);
 					}
 
-					if (ref != null) {
-						RouteDataObject nextRoad = next.getObject();
-						info.setRouteDataObject(nextRoad);
+					if (routeInd > 0) {
+						RouteSegmentResult previous;
+						previous = list.get(routeInd - 1);
+						String previousRef = previous.getObject().getRef(ctx.getSettings().MAP_PREFERRED_LOCALE.get(),
+								ctx.getSettings().MAP_TRANSLITERATE_NAMES.get(), previous.isForwardDirection());
+						if (previousRef != null) {
+							info.setRef(previousRef);
+							info.setRouteDataObject(previous.getObject());
 
-						boolean isNextShieldFound = nextRoad.hasNameTagStartsWith("road_ref");
-						for (int ind = lind; ind < list.size() && !isNextShieldFound; ind++) {
-							if (list.get(ind).getTurnType() != null) {
-								isNextShieldFound = true;
-							} else {
-								RouteDataObject obj = list.get(ind).getObject();
-								if (obj.hasNameTagStartsWith("road_ref")) {
-									info.setRouteDataObject(obj);
+							boolean isNextShieldFound = previous.getObject().hasNameTagStartsWith("road_ref");
+							for (int ind = lind; ind < list.size() && !isNextShieldFound; ind++) {
+								if (list.get(ind).getTurnType() != null) {
 									isNextShieldFound = true;
+								} else {
+									RouteDataObject obj = list.get(ind).getObject();
+									if (obj.hasNameTagStartsWith("road_ref")) {
+										info.setRouteDataObject(obj);
+										isNextShieldFound = true;
+									}
 								}
 							}
 						}
