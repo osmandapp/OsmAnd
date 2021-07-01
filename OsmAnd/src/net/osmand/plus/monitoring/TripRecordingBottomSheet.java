@@ -8,10 +8,13 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -25,6 +28,7 @@ import androidx.annotation.StringRes;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.cardview.widget.CardView;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.Fragment;
@@ -116,7 +120,7 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 		return app.getLocationProvider().getLastKnownLocation() == null;
 	}
 
-	private boolean wasTrackMonitored() {
+	private boolean isMonitoringTrack() {
 		return settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
 	}
 
@@ -135,7 +139,6 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 		plugin = OsmandPlugin.getPlugin(OsmandMonitoringPlugin.class);
 		selectedGpxFile = helper.getCurrentTrack();
 		LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
-		final FragmentManager fragmentManager = getFragmentManager();
 
 		View itemView = inflater.inflate(R.layout.trip_recording_fragment, null, false);
 		items.add(new BaseBottomSheetItem.Builder()
@@ -165,60 +168,94 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 		blockStatisticsBuilder.setTabItem(GPX_TAB_ITEM_GENERAL);
 		blockStatisticsBuilder.initStatBlocks(null,
 				ContextCompat.getColor(app, getActiveTextColorId(nightMode)));
+	}
 
-		CardView cardLeft = itemView.findViewById(R.id.button_left);
-		createItem(cardLeft, ItemType.CLOSE);
-		cardLeft.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
+	@Override
+	protected void setupBottomButtons(ViewGroup view) {
+		Activity activity = requireActivity();
+		LayoutInflater themedInflater = UiUtilities.getInflater(activity, nightMode);
+		int contentPadding = (int) getDimen(R.dimen.content_padding);
+		View buttonsContainer = themedInflater.inflate(R.layout.preference_button_with_icon_quadruple, null);
+		buttonsContainer.setPadding(contentPadding, contentPadding, contentPadding, contentPadding);
+		view.addView(buttonsContainer);
+
+		setupCloseButton(buttonsContainer);
+		setupResumePauseButton(buttonsContainer);
+		setupFinishButton(buttonsContainer);
+		setupOptionsButton(buttonsContainer);
+	}
+
+	private void setupCloseButton(View container) {
+		CardView closeButton = container.findViewById(R.id.button_left);
+		createItem(closeButton, ItemType.CLOSE);
+		closeButton.setOnClickListener(v -> dismiss());
+	}
+
+	private void setupResumePauseButton(View container) {
+		final CardView resumePauseButton = container.findViewById(R.id.button_center_left);
+		createItem(resumePauseButton, isMonitoringTrack() ? ItemType.PAUSE : ItemType.RESUME);
+		resumePauseButton.setOnClickListener(v -> {
+			boolean isMonitoringTrack = isMonitoringTrack();
+			if (isMonitoringTrack) {
+				blockStatisticsBuilder.stopUpdatingStatBlocks();
+				stopUpdatingGraph();
+			} else {
+				blockStatisticsBuilder.runUpdatingStatBlocksIfNeeded();
+				runUpdatingGraph();
+			}
+			settings.SAVE_GLOBAL_TRACK_TO_GPX.set(!isMonitoringTrack);
+			updateStatus();
+			createItem(resumePauseButton, !isMonitoringTrack ? ItemType.PAUSE : ItemType.RESUME);
+		});
+	}
+
+	private void setupFinishButton(View container) {
+		CardView finishButton = container.findViewById(R.id.button_center_right);
+		createItem(finishButton, ItemType.FINISH);
+		finishButton.setOnClickListener(v -> {
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null && plugin != null && hasDataToSave()) {
+				plugin.saveCurrentTrack(null, mapActivity);
+				app.getNotificationHelper().refreshNotifications();
 				dismiss();
 			}
 		});
+	}
 
-		final CardView cardCenterLeft = itemView.findViewById(R.id.button_center_left);
-		createItem(cardCenterLeft, wasTrackMonitored() ? ItemType.PAUSE : ItemType.RESUME);
-		cardCenterLeft.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				boolean wasTrackMonitored = !wasTrackMonitored();
-				if (!wasTrackMonitored) {
-					blockStatisticsBuilder.stopUpdatingStatBlocks();
-					stopUpdatingGraph();
-				} else {
-					blockStatisticsBuilder.runUpdatingStatBlocksIfNeeded();
-					runUpdatingGraph();
-				}
-				settings.SAVE_GLOBAL_TRACK_TO_GPX.set(wasTrackMonitored);
-				updateStatus();
-				createItem(cardCenterLeft, wasTrackMonitored ? ItemType.PAUSE : ItemType.RESUME);
+	private void setupOptionsButton(View container) {
+		CardView optionsButton = container.findViewById(R.id.button_right);
+		createItem(optionsButton, ItemType.OPTIONS);
+		optionsButton.setOnClickListener(v -> {
+			FragmentManager fragmentManager = getFragmentManager();
+			if (fragmentManager != null) {
+				TripRecordingOptionsBottomSheet.showInstance(fragmentManager, TripRecordingBottomSheet.this);
 			}
 		});
+	}
 
-		CardView cardCenterRight = itemView.findViewById(R.id.button_center_right);
-		createItem(cardCenterRight, ItemType.FINISH);
-		cardCenterRight.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				MapActivity mapActivity = getMapActivity();
-				if (mapActivity != null && plugin != null && hasDataToSave()) {
-					plugin.saveCurrentTrack(null, mapActivity);
-					app.getNotificationHelper().refreshNotifications();
-					dismiss();
-				}
+	@Override
+	public void onStart() {
+		super.onStart();
+		Activity activity = requireActivity();
+		if (AndroidUiHelper.isOrientationPortrait(activity)) {
+			return;
+		}
+
+		Dialog dialog = getDialog();
+		if (dialog != null) {
+			CoordinatorLayout.LayoutParams layoutParams = new CoordinatorLayout.LayoutParams(
+					CoordinatorLayout.LayoutParams.MATCH_PARENT, CoordinatorLayout.LayoutParams.MATCH_PARENT
+			);
+			dialog.findViewById(R.id.content_container).setLayoutParams(layoutParams);
+
+			Window window = dialog.getWindow();
+			if (window != null) {
+				WindowManager.LayoutParams params = window.getAttributes();
+				params.width = AndroidUtils.getScreenWidth(activity) / 2;
+				params.gravity = Gravity.START;
+				window.setAttributes(params);
 			}
-		});
-
-		CardView cardRight = itemView.findViewById(R.id.button_right);
-		createItem(cardRight, ItemType.OPTIONS);
-		cardRight.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (fragmentManager != null) {
-					TripRecordingOptionsBottomSheet.showInstance(fragmentManager, TripRecordingBottomSheet.this);
-				}
-			}
-		});
-
+		}
 	}
 
 	@Override
@@ -337,7 +374,7 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 		displayHelper.setGpx(gpxFile);
 
 		graphsAdapter = new GPXItemPagerAdapter(app, null, displayHelper, nightMode, this, true);
-		graphsAdapter.setChartHMargin(getResources().getDimensionPixelSize(R.dimen.content_padding));
+		graphsAdapter.setChartHMargin(getDimen(R.dimen.content_padding));
 
 		pager.setAdapter(graphsAdapter);
 		tabLayout.setViewPager(pager);
@@ -348,7 +385,7 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 	private void updateStatus() {
 		TextView statusTitle = statusContainer.findViewById(R.id.text_status);
 		AppCompatImageView statusIcon = statusContainer.findViewById(R.id.icon_status);
-		ItemType status = searchingGPS() ? ItemType.SEARCHING_GPS : !wasTrackMonitored() ? ItemType.ON_PAUSE : ItemType.RECORDING;
+		ItemType status = searchingGPS() ? ItemType.SEARCHING_GPS : !isMonitoringTrack() ? ItemType.ON_PAUSE : ItemType.RECORDING;
 		Integer titleId = status.getTitleId();
 		if (titleId != null) {
 			statusTitle.setText(titleId);
@@ -744,9 +781,28 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 	}
 
 	@Override
-	protected boolean hideButtonsContainer() {
-		return true;
+	protected Drawable getLandscapeSidesBg(@NonNull Context ctx) {
+		int backgroundRes = AndroidUtils.isRTL() ?
+				R.drawable.bg_contextmenu_shadow_left_light : R.drawable.bg_contextmenu_shadow_right_light;
+		return createBackgroundDrawable(ctx, backgroundRes);
 	}
+
+	@Override
+	protected Drawable getLandscapeTopsidesBg(@NonNull Context ctx) {
+		int backgroundRes = AndroidUtils.isRTL() ?
+				R.drawable.bg_contextmenu_shadow_left_light : R.drawable.bg_contextmenu_shadow_right_light;
+		return createBackgroundDrawable(ctx, backgroundRes);
+	}
+
+	@Override
+	protected int getWindowAnimations(@NonNull Activity context) {
+		if (AndroidUiHelper.isOrientationPortrait(context)) {
+			return super.getWindowAnimations(context);
+		}
+		return AndroidUtils.isLayoutRtl(context) ?
+				R.style.Animations_PopUpMenu_MiddleHeightRight : R.style.Animations_PopUpMenu_MiddleHeightLeft;
+	}
+
 
 	@Nullable
 	public MapActivity getMapActivity() {
