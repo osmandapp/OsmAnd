@@ -36,7 +36,6 @@ import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.settings.backend.ExportSettingsType;
-import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -176,13 +175,7 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 			public void onClick(View v) {
 				FragmentActivity activity = getActivity();
 				if (activity != null) {
-					List<SettingsItem> items = new ArrayList<>();
-					for (RemoteFile remoteFile : oldRemoteFiles) {
-						if (remoteFile.item != null) {
-							items.add(remoteFile.item);
-						}
-					}
-					VersionHistoryFragment.showInstance(activity.getSupportFragmentManager(), items);
+					VersionHistoryFragment.showInstance(activity.getSupportFragmentManager());
 				}
 			}
 		});

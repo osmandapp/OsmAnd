@@ -58,7 +58,8 @@ public class WikiImageHelper {
 	public static void addWikimediaImageCards(@NonNull MapActivity mapActivity, @NonNull String wikiMediaTagContent,
 	                                          @NonNull List<ImageCard> imageCards) {
 		if (wikiMediaTagContent.startsWith(WIKIMEDIA_FILE)) {
-			addImageCard(mapActivity, imageCards, wikiMediaTagContent);
+			String fileName = wikiMediaTagContent.replace(WIKIMEDIA_FILE, "");
+			addImageCard(mapActivity, imageCards, fileName);
 		} else if (wikiMediaTagContent.startsWith(WIKIMEDIA_CATEGORY)) {
 			String url = WIKIMEDIA_API_ENDPOINT + WIKIMEDIA_ACTION + wikiMediaTagContent + CM_LIMIT + FORMAT_JSON;
 			WikimediaResponse response = sendWikipediaApiRequest(url, WikimediaResponse.class);
@@ -98,17 +99,15 @@ public class WikiImageHelper {
 	}
 
 	private static void addImageCard(@NonNull MapActivity mapActivity, @NonNull List<ImageCard> images,
-	                                 @NonNull String wikiMediaTag) {
-		WikiImage img = getImageData(wikiMediaTag);
+	                                 @NonNull String fileName) {
+		WikiImage img = getImageData(fileName);
 		if (img != null) {
 			images.add(new WikiImageCard(mapActivity, img));
 		}
 	}
 
-	private static WikiImage getImageData(@NonNull String wikiMediaTag) {
+	private static WikiImage getImageData(@NonNull String imageFileName) {
 		try {
-			String imageFileName = wikiMediaTag.substring(WIKIMEDIA_FILE.length());
-
 			String imageName = URLDecoder.decode(imageFileName, "UTF-8");
 			imageFileName = imageName.replace(" ", "_");
 			imageName = imageName.substring(0, imageName.lastIndexOf("."));
@@ -123,7 +122,7 @@ public class WikiImageHelper {
 					imageFileName + "/" + THUMB_SIZE + "px-" +
 					imageFileName;
 
-			return new WikiImage(wikiMediaTag, imageName, imageStubUrl, imageHiResUrl);
+			return new WikiImage(imageFileName, imageName, imageStubUrl, imageHiResUrl);
 
 		} catch (UnsupportedEncodingException e) {
 			LOG.error(e.getLocalizedMessage());

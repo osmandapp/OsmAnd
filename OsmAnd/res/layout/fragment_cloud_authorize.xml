@@ -137,6 +137,13 @@
 					android:visibility="gone" />
 
 				<include
+					android:id="@+id/get_button"
+					layout="@layout/bottom_sheet_dialog_button"
+					android:layout_width="match_parent"
+					android:layout_height="@dimen/bottom_sheet_list_item_height"
+					android:layout_marginTop="@dimen/content_padding_small" />
+
+				<include
 					android:id="@+id/continue_button"
 					layout="@layout/bottom_sheet_dialog_button"
 					android:layout_width="match_parent"

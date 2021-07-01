@@ -886,7 +886,9 @@ public class GpxUiHelper {
 					@Override
 					public void onSaveComplete(boolean success, GPXFile result) {
 						if (success) {
-							updateGpxDialogAfterImport(activity, listAdapter, contextMenuAdapter, allGpxFiles);
+							OsmandApplication app = (OsmandApplication) activity.getApplication();
+							app.getSelectedGpxHelper().selectGpxFile(result, true, false);
+							updateGpxDialogAfterImport(activity, listAdapter, contextMenuAdapter, allGpxFiles, result.path);
 						}
 					}
 				});
@@ -906,10 +908,12 @@ public class GpxUiHelper {
 
 	private static void updateGpxDialogAfterImport(final Activity activity,
 	                                               ArrayAdapter<String> dialogAdapter,
-	                                               ContextMenuAdapter adapter, List<GPXInfo> allGpxFiles) {
+	                                               ContextMenuAdapter adapter, List<GPXInfo> allGpxFiles,
+	                                               String importedGpx) {
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
 
 		List<String> selectedGpxFiles = new ArrayList<>();
+		selectedGpxFiles.add(importedGpx);
 		for (int i = 0; i < allGpxFiles.size(); i++) {
 			GPXInfo gpxInfo = allGpxFiles.get(i);
 			ContextMenuItem menuItem = adapter.getItem(i);

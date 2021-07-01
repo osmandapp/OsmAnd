@@ -8,7 +8,6 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.backup.BackupImporter.CollectItemsResult;
 import net.osmand.plus.backup.NetworkSettingsHelper.BackupCollectListener;
-import net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.CheckDuplicatesListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportType;
@@ -151,7 +150,7 @@ public class ImportBackupTask extends AsyncTask<Void, Void, List<SettingsItem>> 
 			case IMPORT_FORCE_READ:
 				if (items != null && items.size() > 0) {
 					new ImportBackupItemsTask(helper, importType == ImportType.IMPORT_FORCE_READ, importListener, items)
-							.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+							.executeOnExecutor(app.getBackupHelper().getExecutor());
 				}
 				break;
 		}

@@ -16,10 +16,12 @@ import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.TabActivity.OsmandFragmentPagerAdapter;
 import net.osmand.plus.activities.TabActivity.TabItem;
+import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
@@ -54,7 +56,11 @@ public class BackupAndRestoreFragment extends BaseOsmAndFragment {
 		setupTabs(view);
 		setupToolbar(view);
 
-		requireMyApplication().getBackupHelper().prepareBackup();
+		OsmandApplication app = requireMyApplication();
+		NetworkSettingsHelper settingsHelper = app.getNetworkSettingsHelper();
+		if (!settingsHelper.isBackupExporting()) {
+			app.getBackupHelper().prepareBackup();
+		}
 
 		return view;
 	}

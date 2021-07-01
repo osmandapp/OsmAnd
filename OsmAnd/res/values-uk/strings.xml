@@ -4209,4 +4209,8 @@
     <string name="complete_purchase">Завершити купівлю</string>
     <string name="regular_price">Звичайна ціна</string>
     <string name="from_with_param">Від %1$s</string>
+    <string name="backup_delete_types_descr">Видалити дані для вимкнених типів із хмари\?</string>
+    <string name="backup_delete_types">Видалити дані вимкнених типів</string>
+    <string name="shared_string_discussion">Обговорення</string>
+    <string name="shared_string_view_all">Подивитись все</string>
 </resources>

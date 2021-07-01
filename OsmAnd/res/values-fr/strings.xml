@@ -4202,4 +4202,6 @@
     <string name="backup_delete_types_descr">Souhaitez-vous supprimer du Cloud les données des types désactivés \?</string>
     <string name="backup_version_history_delete_descr">Souhaitez-vous supprimer du Cloud l’historique des modifications pour les types désactivés \?</string>
     <string name="backup_delete_types">Supprimer les données des types désactivés</string>
+    <string name="shared_string_discussion">Discussion</string>
+    <string name="shared_string_view_all">Tout afficher</string>
 </resources>

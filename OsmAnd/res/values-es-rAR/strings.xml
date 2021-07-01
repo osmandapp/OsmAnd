@@ -4172,7 +4172,7 @@
     <string name="grey_color_slope">El color gris se usa al no estar definida la pendiente.</string>
     <string name="backup_version_history">Historial de versiones</string>
     <string name="backup_storage_taken">Almacenamiento usado</string>
-    <string name="backup_version_history_delete_descr">¿Borrar el historial de cambios en la nube de los tipos desactivados\?</string>
+    <string name="backup_version_history_delete_descr">¿Borrar el historial de cambios en la nube de los tipos de datos desactivados\?</string>
     <string name="delete_version_history">Borrar el historial de versiones</string>
     <string name="routing_attr_avoid_tunnels_description">Evita los túneles</string>
     <string name="routing_attr_avoid_tunnels_name">Evitar túneles</string>
@@ -4214,4 +4214,6 @@
     <string name="from_with_param">De %1$s</string>
     <string name="backup_delete_types_descr">¿Borrar los tipos de datos desactivados en la nube\?</string>
     <string name="backup_delete_types">Borrar los tipos de datos desactivados</string>
+    <string name="shared_string_discussion">Debate</string>
+    <string name="shared_string_view_all">Ver todo</string>
 </resources>

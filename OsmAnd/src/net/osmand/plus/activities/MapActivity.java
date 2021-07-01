@@ -1208,7 +1208,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					if (gpxFile.showCurrentTrack) {
 						selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
 					} else {
-						selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path);
+						selectedGpxFile = app.getSelectedGpxHelper()
+								.selectGpxFile(gpxFile, true, false, false, false, false);
 					}
 
 					TrackAppearanceFragment.showInstance(this, selectedGpxFile, null);

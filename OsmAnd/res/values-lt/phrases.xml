@@ -586,4 +586,23 @@
     <string name="poi_adit">Šachtos įėjimas</string>
     <string name="poi_mineshaft">Šachta</string>
     <string name="poi_climbing">Kopimas</string>
+    <string name="poi_recycling_printer_cartridges">Spausdintuvo kasetės</string>
+    <string name="poi_recycling_tetrapak">Tetrapak</string>
+    <string name="poi_recycling_cooking_oil">Kepimo aliejus</string>
+    <string name="poi_recycling_low_energy_bulbs">Mažai energijos naudojančios lemputės</string>
+    <string name="poi_recycling_garden_waste">Sodo atliekos</string>
+    <string name="poi_recycling_beverage_cartons">Gėrimų pakuotės</string>
+    <string name="poi_recycling_small_appliances">Smulkūs prietaisai</string>
+    <string name="poi_recycling_cardboard">Kartonas</string>
+    <string name="poi_recycling_waste">Atliekos (juodi maišai)</string>
+    <string name="poi_recycling_green_waste">Žaliosios atliekos</string>
+    <string name="poi_recycling_centre">Perdirbimo centras</string>
+    <string name="poi_fuel_1_50">1:50 kuras</string>
+    <string name="poi_fuel_1_25">1:25 kuras</string>
+    <string name="poi_traffic_calming_rumble_strip">Apie stabdymą įspėjančios juostos</string>
+    <string name="poi_traffic_calming_bump">Greičio kalnelis</string>
+    <string name="poi_toll_booth">Rinkliavos postas</string>
+    <string name="poi_mountain_pass">Kalnų perėja</string>
+    <string name="poi_emergency_access_point">Avarinis prieigos taškas</string>
+    <string name="poi_checkpoint_type">Kontrolinio punkto tipas</string>
 </resources>
