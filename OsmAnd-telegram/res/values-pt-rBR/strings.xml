@@ -102,7 +102,7 @@
     <string name="minutes_format">%1$d m</string>
     <string name="hours_format">%1$d h</string>
     <string name="shared_string_install">Instalar</string>
-    <string name="shared_string_share">Compartilhe</string>
+    <string name="shared_string_share">Compartilhar</string>
     <string name="shared_string_back">Voltar</string>
     <string name="visible_time_for_all">Hora visível para todos</string>
     <string name="set_time_description">Defina a hora em que seus contatos e grupos selecionados verão sua localização em tempo real.</string>
@@ -196,7 +196,7 @@
     <string name="shared_string_telegram">Telegram</string>
     <string name="privacy_policy_use_telegram">Telegrama (o aplicativo de mensagens) é usado para conectar e se comunicar com as pessoas.</string>
     <string name="privacy_policy_telegram_client">OsmAnd tracker é um dos clientes que usam a Plataforma aberta do Telegram . Seus contatos podem usar qualquer outro cliente Telegram.</string>
-    <string name="privacy_policy_agree">Ao clicar em \"Continuar\", você concorda com as condições da política de privacidade do Telegram- e OsmAnd.</string>
+    <string name="privacy_policy_agree">Ao tocar em \"Continuar\", você concorda com as condições da política de privacidade do Telegram- e OsmAnd.</string>
     <string name="shared_string_accept">Aceitar</string>
     <string name="telegram_privacy_policy">Política de privacidade do Telegram</string>
     <string name="osmand_privacy_policy">Política de privacidade do OsmAnd</string>
@@ -268,7 +268,7 @@
     <string name="duration_ago">%1$s atrás</string>
     <string name="shared_string_error_short">ERR</string>
     <string name="shared_string_export">Exportar</string>
-    <string name="logcat_buffer">Buffer de Logcat</string>
+    <string name="logcat_buffer">Buffer de logcat</string>
     <string name="logcat_buffer_descr">Verifique e compartilhe registros detalhados do aplicativo</string>
     <string name="send_report">Enviar o relatório</string>
 </resources>

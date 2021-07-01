@@ -33,10 +33,14 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.DialogButtonType;
+import net.osmand.plus.Version;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupHelper.OnRegisterDeviceListener;
 import net.osmand.plus.backup.BackupHelper.OnRegisterUserListener;
+import net.osmand.plus.backup.ServerError;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.chooseplan.ChoosePlanFragment;
+import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
@@ -45,6 +49,8 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
+import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_NO_VALID_SUBSCRIPTION;
+import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_SUBSCRIPTION_WAS_EXPIRED_OR_NOT_PRESENT;
 import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_TOKEN_IS_NOT_VALID_OR_EXPIRED;
 import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_USER_IS_NOT_REGISTERED;
 
@@ -58,6 +64,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment {
 	private static final String OSMAND_DOCS = "https://docs.osmand.net/en/main@latest/osmand/purchases/android";
 
 	private static final String LOGIN_DIALOG_TYPE_KEY = "login_dialog_type_key";
+	private static final String SIGN_IN_KEY = "sign_in_key";
 
 	private static final int VERIFICATION_CODE_EXPIRATION_TIME_MIN = 10 * 60 * 1000; // 10 minutes
 
@@ -71,8 +78,12 @@ public class AuthorizeFragment extends BaseOsmAndFragment {
 	private TextView title;
 	private TextView description;
 	private View buttonContinue;
+	private View buttonChoosePlan;
 
 	private LoginDialogType dialogType = LoginDialogType.SIGN_UP;
+
+	private String promoCode;
+	private boolean signIn;
 
 	private long lastTimeCodeSent = 0;
 	private boolean nightMode;
@@ -80,6 +91,13 @@ public class AuthorizeFragment extends BaseOsmAndFragment {
 	@Override
 	public int getStatusBarColorId() {
 		return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
+	}
+
+	public void setDialogType(LoginDialogType dialogType) {
+		this.dialogType = dialogType;
+		if (dialogType != LoginDialogType.VERIFY_EMAIL) {
+			signIn = dialogType == LoginDialogType.SIGN_IN;
+		}
 	}
 
 	@Override
@@ -90,8 +108,13 @@ public class AuthorizeFragment extends BaseOsmAndFragment {
 		backupHelper = app.getBackupHelper();
 		nightMode = !settings.isLightContent();
 
-		if (savedInstanceState != null && savedInstanceState.containsKey(LOGIN_DIALOG_TYPE_KEY)) {
-			dialogType = LoginDialogType.valueOf(savedInstanceState.getString(LOGIN_DIALOG_TYPE_KEY));
+		if (savedInstanceState != null) {
+			if (savedInstanceState.containsKey(LOGIN_DIALOG_TYPE_KEY)) {
+				dialogType = LoginDialogType.valueOf(savedInstanceState.getString(LOGIN_DIALOG_TYPE_KEY));
+			}
+			if (savedInstanceState.containsKey(SIGN_IN_KEY)) {
+				signIn = savedInstanceState.getBoolean(SIGN_IN_KEY);
+			}
 		}
 	}
 
@@ -108,12 +131,14 @@ public class AuthorizeFragment extends BaseOsmAndFragment {
 		description = view.findViewById(R.id.description);
 		progressBar = view.findViewById(R.id.progress_bar);
 		buttonContinue = view.findViewById(R.id.continue_button);
+		buttonChoosePlan = view.findViewById(R.id.get_button);
 
 		setupToolbar();
 		setupTextWatchers();
 		updateContent();
 		setupSupportButton();
 
+		UiUtilities.setupDialogButton(nightMode, buttonChoosePlan, DialogButtonType.SECONDARY, R.string.get_plugin);
 		UiUtilities.setupDialogButton(nightMode, buttonContinue, DialogButtonType.PRIMARY, R.string.shared_string_continue);
 
 		return view;
@@ -121,6 +146,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment {
 
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
+		outState.putBoolean(SIGN_IN_KEY, signIn);
 		outState.putString(LOGIN_DIALOG_TYPE_KEY, dialogType.name());
 		super.onSaveInstanceState(outState);
 	}
@@ -130,6 +156,11 @@ public class AuthorizeFragment extends BaseOsmAndFragment {
 			View itemView = mainView.findViewById(type.viewId);
 			EditText editText = itemView.findViewById(R.id.edit_text);
 			editText.addTextChangedListener(getTextWatcher());
+
+			if (type == LoginDialogType.SIGN_UP) {
+				EditText promoCodeEditText = itemView.findViewById(R.id.promocode_edit_text);
+				promoCodeEditText.addTextChangedListener(getPromoTextWatcher(editText));
+			}
 		}
 	}
 
@@ -191,27 +222,42 @@ public class AuthorizeFragment extends BaseOsmAndFragment {
 		View buttonAuthorize = view.findViewById(R.id.button);
 
 		EditText editText = view.findViewById(R.id.edit_text);
+		EditText promoEditText = view.findViewById(R.id.promocode_edit_text);
+
 		editText.setText(settings.BACKUP_USER_EMAIL.get());
 		editText.requestFocus();
 		AndroidUtils.softKeyboardDelayed(getActivity(), editText);
 
 		AndroidUiHelper.updateVisibility(errorText, false);
 		AndroidUiHelper.updateVisibility(buttonAuthorize, false);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.promocode_container), dialogType == LoginDialogType.SIGN_UP && promoCodeSupported());
 
 		buttonAuthorize.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				dialogType = nextType;
+				setDialogType(nextType);
 				updateContent();
 			}
 		});
 		UiUtilities.setupDialogButton(nightMode, buttonAuthorize, DialogButtonType.SECONDARY, nextType.titleId);
 		AndroidUtils.setBackground(app, buttonAuthorize, nightMode, R.drawable.dlg_btn_transparent_light, R.drawable.dlg_btn_transparent_dark);
 
+		buttonChoosePlan.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				FragmentActivity activity = getActivity();
+				if (activity != null) {
+					ChoosePlanFragment.showInstance(activity, OsmAndFeature.OSMAND_CLOUD);
+				}
+			}
+		});
+		AndroidUiHelper.updateVisibility(buttonChoosePlan, false);
+
 		buttonContinue.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				String email = editText.getText().toString();
+				promoCode = promoEditText.getText().toString();
 				if (AndroidUtils.isValidEmail(email)) {
 					settings.BACKUP_USER_EMAIL.set(email);
 					progressBar.setVisibility(View.VISIBLE);
@@ -271,7 +317,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment {
 					backupHelper.registerDevice(token, new OnRegisterDeviceListener() {
 
 						@Override
-						public void onRegisterDevice(int status, @Nullable String message, @Nullable String error) {
+						public void onRegisterDevice(int status, @Nullable String message, @Nullable ServerError error) {
 							FragmentActivity activity = getActivity();
 							if (AndroidUtils.isActivityNotDestroyed(activity)) {
 								progressBar.setVisibility(View.INVISIBLE);
@@ -282,7 +328,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment {
 									}
 									BackupAndRestoreFragment.showInstance(fragmentManager);
 								} else {
-									errorText.setText(message);
+									errorText.setText(error != null ? error.getLocalizedError(app) : message);
 									buttonContinue.setEnabled(false);
 									AndroidUiHelper.updateVisibility(errorText, true);
 								}
@@ -316,14 +362,33 @@ public class AuthorizeFragment extends BaseOsmAndFragment {
 		};
 	}
 
+	private TextWatcher getPromoTextWatcher(EditText editText) {
+		return new TextWatcher() {
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				buttonContinue.setEnabled(!Algorithms.isEmpty(editText.getText()));
+			}
+		};
+	}
+
 	private OnRegisterDeviceListener geRegisterDeviceListener(LoginDialogType type, TextView errorText, View nextTypeButton) {
 		return new OnRegisterDeviceListener() {
 
 			@Override
-			public void onRegisterDevice(int status, @Nullable String message, @Nullable String error) {
+			public void onRegisterDevice(int status, @Nullable String message, @Nullable ServerError error) {
 				FragmentActivity activity = getActivity();
 				if (AndroidUtils.isActivityNotDestroyed(activity)) {
-					int errorCode = BackupHelper.getErrorCode(error);
+					int errorCode = error != null ? error.getCode() : -1;
 					if (errorCode == type.permittedErrorCode) {
 						registerUser(errorText);
 					} else if (errorCode != -1) {
@@ -332,35 +397,50 @@ public class AuthorizeFragment extends BaseOsmAndFragment {
 							errorText.setText(type.warningId);
 							AndroidUiHelper.updateVisibility(nextTypeButton, true);
 						} else {
-							errorText.setText(message);
+							errorText.setText(error.getLocalizedError(app));
 						}
 						buttonContinue.setEnabled(false);
 						AndroidUiHelper.updateVisibility(errorText, true);
 					}
+					AndroidUiHelper.updateVisibility(buttonChoosePlan, false);
 				}
 			}
 		};
 	}
 
 	private void registerUser(TextView errorText) {
-		backupHelper.registerUser(settings.BACKUP_USER_EMAIL.get(), new OnRegisterUserListener() {
+		boolean login = dialogType == LoginDialogType.SIGN_IN || signIn;
+		backupHelper.registerUser(settings.BACKUP_USER_EMAIL.get(), promoCode, login, new OnRegisterUserListener() {
 			@Override
-			public void onRegisterUser(int status, @Nullable String message, @Nullable String error) {
+			public void onRegisterUser(int status, @Nullable String message, @Nullable ServerError error) {
 				FragmentActivity activity = getActivity();
 				if (AndroidUtils.isActivityNotDestroyed(activity)) {
 					progressBar.setVisibility(View.INVISIBLE);
 					if (status == BackupHelper.STATUS_SUCCESS) {
 						lastTimeCodeSent = System.currentTimeMillis();
-						dialogType = LoginDialogType.VERIFY_EMAIL;
+						setDialogType(LoginDialogType.VERIFY_EMAIL);
 						updateContent();
 					} else {
-						errorText.setText(message);
+						boolean choosePlanVisible = false;
+						if (error != null) {
+							int code = error.getCode();
+							choosePlanVisible = !promoCodeSupported()
+									&& (code == SERVER_ERROR_CODE_NO_VALID_SUBSCRIPTION
+									|| code == SERVER_ERROR_CODE_USER_IS_NOT_REGISTERED
+									|| code == SERVER_ERROR_CODE_SUBSCRIPTION_WAS_EXPIRED_OR_NOT_PRESENT);
+						}
+						errorText.setText(error != null ? error.getLocalizedError(app) : message);
 						buttonContinue.setEnabled(false);
 						AndroidUiHelper.updateVisibility(errorText, true);
+						AndroidUiHelper.updateVisibility(buttonChoosePlan, choosePlanVisible);
 					}
 				}
 			}
 		});
+	}
+
+	private boolean promoCodeSupported() {
+		return !Version.isGooglePlayEnabled();
 	}
 
 	private void updateDescription() {
@@ -421,7 +501,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment {
 	public static void showInstance(@NonNull FragmentManager fragmentManager, boolean signUp) {
 		if (!fragmentManager.isStateSaved()) {
 			AuthorizeFragment fragment = new AuthorizeFragment();
-			fragment.dialogType = signUp ? LoginDialogType.SIGN_UP : LoginDialogType.SIGN_IN;
+			fragment.setDialogType(signUp ? LoginDialogType.SIGN_UP : LoginDialogType.SIGN_IN);
 			fragmentManager.beginTransaction().
 					replace(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)

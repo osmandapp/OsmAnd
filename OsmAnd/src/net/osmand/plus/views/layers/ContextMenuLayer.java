@@ -17,6 +17,11 @@ import android.widget.ArrayAdapter;
 import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresPermission;
+import androidx.appcompat.content.res.AppCompatResources;
+
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
@@ -84,10 +89,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresPermission;
-import androidx.appcompat.content.res.AppCompatResources;
 import gnu.trove.list.array.TIntArrayList;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CHANGE_MARKER_POSITION;
@@ -824,13 +825,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				showContextMenu(latLon, pointDescription, selectedObj, provider);
 			}
 			return true;
-
 		} else if (selectedObjects.size() > 1) {
-			hideVisibleMenues();
-			selectedObjectContextMenuProvider = null;
 			showContextMenuForSelectedObjects(pointLatLon, selectedObjects);
 			return true;
-
 		} else if (showUnknownLocation) {
 			hideVisibleMenues();
 			selectedObjectContextMenuProvider = null;
@@ -1087,7 +1084,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		return false;
 	}
 
-	private void showContextMenuForSelectedObjects(final LatLon latLon, final Map<Object, IContextMenuProvider> selectedObjects) {
+	protected void showContextMenuForSelectedObjects(LatLon latLon, Map<Object, IContextMenuProvider> selectedObjects) {
+		hideVisibleMenues();
+		selectedObjectContextMenuProvider = null;
 		multiSelectionMenu.show(latLon, selectedObjects);
 	}
 

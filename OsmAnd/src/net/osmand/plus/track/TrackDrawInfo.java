@@ -167,7 +167,7 @@ public class TrackDrawInfo {
 		width = bundle.getString(TRACK_WIDTH);
 		String gradientScaleTypeName = bundle.getString(TRACK_GRADIENT_SCALE_TYPE);
 		if (!Algorithms.isEmpty(gradientScaleTypeName)) {
-			gradientScaleType = GradientScaleType.valueOf(gradientScaleTypeName);
+			gradientScaleType = GradientScaleType.getGradientTypeByName(gradientScaleTypeName);
 		}
 		color = bundle.getInt(TRACK_COLOR);
 		splitType = bundle.getInt(TRACK_SPLIT_TYPE);

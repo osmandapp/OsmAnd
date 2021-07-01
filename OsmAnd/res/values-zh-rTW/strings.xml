@@ -972,9 +972,6 @@
     <string name="files_limit">剩餘 %1$d 個檔</string>
     <string name="layer_recordings">記錄層</string>
     <string name="intermediate_items_sort_return">中轉地點到目的地的路途中已最佳化排列。</string>
-    <string name="osmand_srtm_long_description_1000_chars">這個外掛元件同時提供了等高線上層和（地貌）地形陰影層，顯示在 OsmAnd 標準地圖的頂部。此功能會讓運動選手、健行旅遊者、背包客，和對起伏的地理構成感興趣的任何人。
-\n 
-\n全球圖資（在北緯 70 ° 至南緯 70 ° 之間）的量測基礎在於 SRTM (Shuttle Radar Topography Mission)和 ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer)，安裝在美國太空總署地球觀測系統的旗艦衛星 Terra 上的遙測儀器，ASTER 是美國太空總署、日本經濟產業省(METI)、日本太空系統 (J-spacesystems)之間的通力合作產物。</string>
     <string name="audionotes_location_not_defined">輕點「使用位置……」以新增註記到地點。</string>
     <string name="srtm_plugin_description">這個外掛元件同時提供了等高線上層和（地貌）地形陰影層，顯示在 OsmAnd 標準地圖的頂部。此功能會讓運動選手、健行旅遊者、背包客，和對起伏的地理構成感興趣的任何人。（請注意，等高線和地貌資料是各自獨立的，在外掛元件啟用後可以追加下載。） 
 \n 
@@ -2559,8 +2556,8 @@
     <string name="show_arrows_descr">顯示一個或兩個箭頭指示方向到活動標記。</string>
     <string name="shared_string_more_without_dots">更多</string>
     <string name="looking_for_tracks_with_waypoints">尋找有航點的軌跡</string>
-    <string name="empty_state_osm_edits">建立或修改 OSM 物件</string>
-    <string name="empty_state_osm_edits_descr">建立或修改 OSM 的 POI，開啟或評論 OSM 註記，並提供記錄好的 GPX 檔案。</string>
+    <string name="empty_state_osm_edits">建立或修改 OpenStreetMap 物件</string>
+    <string name="empty_state_osm_edits_descr">建立或修改 OpenStreetMap 的 POI，開啟或評論 OSM 註記，並提供記錄好的 GPX 檔案。</string>
     <string name="shared_string_deleted">已刪除</string>
     <string name="shared_string_edited">已編輯</string>
     <string name="shared_string_added">已增加</string>
@@ -2606,7 +2603,7 @@
     <string name="show_closed_notes">顯示已關閉的註解</string>
     <string name="switch_osm_notes_visibility_desc">在地圖上顯示或隱藏 OSM 的註解。</string>
     <string name="gpx_file_desc">GPX - 適合匯出到 JOSM 或其他 OSM 編輯。</string>
-    <string name="osc_file_desc">OSC - 適合匯出到 OSM。</string>
+    <string name="osc_file_desc">OSC - 適合匯出到 OpenStreetMap。</string>
     <string name="shared_string_gpx_file">GPX 檔案</string>
     <string name="osc_file">OSC 檔案</string>
     <string name="choose_file_type">選取檔案類型</string>
@@ -4167,4 +4164,48 @@
     <string name="grey_color_slope">當斜率未被定義時則使用灰色。</string>
     <string name="backup_version_history">版本歷史紀錄</string>
     <string name="backup_storage_taken">用掉的儲存空間</string>
+    <string name="backup_version_history_delete_descr">您想要從雲端刪除已停用類型的變更歷史紀錄嗎？</string>
+    <string name="delete_version_history">刪除版本歷史紀錄</string>
+    <string name="routing_attr_avoid_tunnels_description">避開隧道</string>
+    <string name="routing_attr_avoid_tunnels_name">避開隧道</string>
+    <string name="send_crash_log">傳送當機紀錄檔</string>
+    <string name="send_logcat_log">傳送 logcat 紀錄檔</string>
+    <string name="backup_promocode">促銷代碼</string>
+    <string name="purchases_feature_desc_nautical">取得航海深度資訊</string>
+    <string name="purchases_feature_desc_terrain">地形等高線，帶有深色陰影的完整山體陰影圖，以及帶有顏色的坡度圖，山峰與低地。</string>
+    <string name="purchases_feature_desc_wikivoyage">離線瀏覽維基百科。文章按國家與區域劃分，並以所有語言提供。</string>
+    <string name="purchases_feature_desc_wikipedia">離線瀏覽維基百科。文章按國家與區域劃分，並以所有語言提供。</string>
+    <string name="purchases_feature_desc_combined_wiki">隨時瀏覽維基百科，不需要網際網路連線。離線資料按國家劃分，並以所有語言提供。</string>
+    <string name="purchases_feature_desc_unlimited_map_download">取得所有大洲與區域的無限制下載離線地圖。</string>
+    <string name="purchases_feature_desc_monthly_map_updates">取得每月定期更新的離線地圖。</string>
+    <string name="purchases_feature_desc_hourly_map_updates">存取更頻繁的地圖更新，可選擇的頻率：每小時、每天或每週更新。更新會以增量的方式下載，僅用於已變更的區域。</string>
+    <string name="purchases_feature_desc_advanced_widgets">存取進階 OsmAnd 小工具。</string>
+    <string name="purchases_feature_desc_osmand_cloud">取得 OsmAnd 以將所有 OsmAnd 的資料儲存到線上。忘記您重新安裝、備份與復原所有資訊的步驟吧，一切都沒問題了。</string>
+    <string name="unlimited_map_downloads">無限制的地圖下載</string>
+    <string name="wikipedia_and_wikivoyage_offline">離線的維基百科與維基導遊</string>
+    <string name="terrain_maps_contour_lines_hillshade_slope">地形圖：等高線、地形陰影、坡度</string>
+    <string name="offline_wikipeadia">離線維基百科</string>
+    <string name="offline_wikivoyage">離線維基導遊</string>
+    <string name="terrain_maps">地形圖</string>
+    <string name="nautical_depth">航海深度</string>
+    <string name="advanced_widgets">進階小工具</string>
+    <string name="you_can_get_feature_as_part_of_pattern">您可以取得「%1$s」作為：%2$s 方案的一部分。比較方案：</string>
+    <string name="ltr_or_rtl_combine_via_or">%1$s 或 %2$s</string>
+    <string name="continue_with">使用 %1$s 繼續</string>
+    <string name="not_available_with">不適用於 %1$s</string>
+    <string name="redeem_promo_code">兌換折扣碼</string>
+    <string name="osmand_maps_plus_tagline">取得延伸功能</string>
+    <string name="osmand_pro_tagline">取得最多功能</string>
+    <string name="shared_string_learn_more">取得更多資訊</string>
+    <string name="cancel_anytime_in_huawei_appgallery">隨時在 Huawei AppGallery 中取消</string>
+    <string name="cancel_anytime_in_gplay">隨時在 Google Play 中取消。</string>
+    <string name="shared_string_not_included">不包含</string>
+    <string name="shared_string_includes">包含</string>
+    <string name="complete_purchase">完整購買</string>
+    <string name="regular_price">一般價格</string>
+    <string name="from_with_param">來自 %1$s</string>
+    <string name="backup_delete_types_descr">您想要從雲端刪除已停用類型的資料嗎？</string>
+    <string name="backup_delete_types">刪除已停用的類型資料</string>
+    <string name="shared_string_discussion">討論</string>
+    <string name="shared_string_view_all">檢視全部</string>
 </resources>

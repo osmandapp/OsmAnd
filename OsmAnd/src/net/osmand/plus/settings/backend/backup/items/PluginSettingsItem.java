@@ -66,8 +66,12 @@ public class PluginSettingsItem extends SettingsItem {
 	}
 
 	@Override
-	protected long getLocalModifiedTime() {
+	public long getLocalModifiedTime() {
 		return 0;
+	}
+
+	@Override
+	public void setLocalModifiedTime(long lastModifiedTime) {
 	}
 
 	@Override
@@ -94,7 +98,7 @@ public class PluginSettingsItem extends SettingsItem {
 					plugin.updateDownloadItems(((DownloadsItem) item).getItems());
 				}
 			}
-			OsmandPlugin.addCustomPlugin(app, plugin);
+			app.runInUIThread(() -> OsmandPlugin.addCustomPlugin(app, plugin));
 		}
 	}
 

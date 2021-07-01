@@ -5,25 +5,25 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.core.text.TextUtilsCompat;
-import androidx.core.view.ViewCompat;
-
 import net.osmand.LocationConvert;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.actions.ShareDialog;
 import net.osmand.plus.mapcontextmenu.BaseMenuController;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+
+import androidx.annotation.NonNull;
+import androidx.core.text.TextUtilsCompat;
+import androidx.core.view.ViewCompat;
 
 public class ShareMenu extends BaseMenuController {
 
@@ -125,11 +125,11 @@ public class ShareMenu extends BaseMenuController {
 				ShareDialog.sendMessage(mapActivity, sms);
 				break;
 			case CLIPBOARD:
-				ShareDialog.sendToClipboard(mapActivity, sms);
+				ShareDialog.copyToClipboardWithToast(mapActivity, sms, Toast.LENGTH_LONG);
 				break;
 			case ADDRESS:
 				if (!Algorithms.isEmpty(address)) {
-					ShareDialog.sendToClipboard(mapActivity, address);
+					ShareDialog.copyToClipboardWithToast(mapActivity, address, Toast.LENGTH_LONG);
 				} else {
 					Toast.makeText(mapActivity,
 							R.string.no_address_found,
@@ -138,7 +138,7 @@ public class ShareMenu extends BaseMenuController {
 				break;
 			case NAME:
 				if (!Algorithms.isEmpty(title)) {
-					ShareDialog.sendToClipboard(mapActivity, title);
+					ShareDialog.copyToClipboardWithToast(mapActivity, title, Toast.LENGTH_LONG);
 				} else {
 					Toast.makeText(mapActivity,
 							R.string.toast_empty_name_error,
@@ -148,8 +148,8 @@ public class ShareMenu extends BaseMenuController {
 			case COORDINATES:
 				OsmandSettings st = ((OsmandApplication) mapActivity.getApplicationContext()).getSettings();
 				int f = st.COORDINATES_FORMAT.get();
-				ShareDialog.sendToClipboard(mapActivity,
-						OsmAndFormatter.getFormattedCoordinates(latLon.getLatitude(), latLon.getLongitude(), f));
+				String coordinates = OsmAndFormatter.getFormattedCoordinates(latLon.getLatitude(), latLon.getLongitude(), f);
+				ShareDialog.copyToClipboardWithToast(mapActivity, coordinates, Toast.LENGTH_LONG);
 				break;
 			case GEO:
 				Intent mapIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(geoUrl));

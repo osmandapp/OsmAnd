@@ -202,7 +202,7 @@
     <string name="osmand_privacy_policy">OsmAnd integritetspolicy</string>
     <string name="telegram_privacy_policy">Telegram integritetspolicy</string>
     <string name="shared_string_accept">Acceptera</string>
-    <string name="privacy_policy_agree">Genom att klicka på \"Fortsätt\" godkänner du villkoren i Telegram- och OsmAnds integritetspolicy.</string>
+    <string name="privacy_policy_agree">Genom att trycka på \"Fortsätt\" godkänner du villkoren i Telegram- och OsmAnd-sekretesspolicyn.</string>
     <string name="privacy_policy_telegram_client">OsmAnd tracker är en av klienterna som använder Telegram öppen plattform. Dina kontakter kan använda vilken Telegram-klient som helst.</string>
     <string name="privacy_policy_use_telegram">Telegram (meddelandeappen) används för att ansluta och kommunicera med människor.</string>
     <string name="shared_string_telegram">Telegram</string>

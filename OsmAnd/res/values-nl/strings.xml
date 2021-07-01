@@ -852,9 +852,6 @@
     <string name="audionotes_plugin_description">Maak audio-, foto-, video-notities tijdens een reis door gebruik te maken van een knop op de kaart of de locatie context menu.</string>
     <string name="audionotes_plugin_name">Audio-/videonotities</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd-plugin voor offline hoogtelijnen</string>
-    <string name="osmand_srtm_long_description_1000_chars">Deze plug-in toont hoogtelijnen en een reliëfschaduwlaag bovenop de normale OsmAnd-kaart. Uitermate praktisch voor sporters, wandelaars, trekkers, en iedereen die geïnteresseerd is in de hoogteverschillen van een landschap. 
-\n 
-\n De wereldwijde gegevens (van 70° noorderbreedte tot 70° zuiderbreedte) zijn gebaseerd op metingen door SRTM (Shuttle Radar Topography Mission) en ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), een beeldvormend instrument aan boord van de Terra-satelliet, het vlaggenschip van NASA\'s Earth Observing System. ASTER is een samenwerkingsverband tussen NASA, het Japanse Ministerie van Economie, Handel en Industrie (METI), en Japan Space Systems (J-spacesystems).</string>
     <string name="map_widget_distancemeasurement">Afstandsmeting</string>
     <string name="audionotes_location_not_defined">Schakel \'locatie\' in om een notitie aan de locatie toe te voegen.</string>
     <string name="map_widget_audionotes">Audionotities</string>
@@ -3441,9 +3438,9 @@
     <string name="additional_actions_descr">U kunt toegang krijgen tot deze acties door op de \"%1$s\" knop te tikken.</string>
     <string name="osm_live_payment_subscription_management">De betaling wordt na bevestiging van de aankoop in rekening gebracht op je Google Play-account.
 \n
-\n Het abonnement wordt automatisch verlengd, tenzij het wordt opgezegd vóór de verlengingsdatum. De betaling wordt alleen op de verlengingsdatum op uw account in rekening gebracht voor de verlengingsperiode (maand / drie maanden / jaar).
+\nHet abonnement wordt automatisch verlengd, tenzij het wordt opgezegd vóór de verlengingsdatum. De betaling wordt alleen op de verlengingsdatum op uw account in rekening gebracht voor de verlengingsperiode (maand / drie maanden / jaar).
 \n
-\n Je kunt je abonnementen beheren en opzeggen via de Google Play-instellingen.</string>
+\nJe kunt je abonnementen beheren en opzeggen via de Google Play-instellingen.</string>
     <string name="search_offline_geo_error">Kon de geo-intent \'%s\' niet verwerken.</string>
     <string name="index_name_antarctica">Antarctica</string>
     <string name="sort_by_category">Sorteer op categorie</string>

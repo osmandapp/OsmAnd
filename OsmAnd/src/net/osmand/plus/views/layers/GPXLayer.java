@@ -15,7 +15,14 @@ import android.graphics.drawable.LayerDrawable;
 import android.os.AsyncTask;
 import android.util.Pair;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.content.ContextCompat;
+
 import net.osmand.AndroidUtils;
+import net.osmand.FileUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
@@ -83,12 +90,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.content.ContextCompat;
 
 import static net.osmand.GPXUtilities.calculateTrackBounds;
 import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
@@ -809,7 +810,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		}
 		GpxDataItem dataItem = gpxDbHelper.getItem(new File(gpxFile.path));
 		if (dataItem == null) {
-			return RouteColorize.colors;
+			return scaleType == GradientScaleType.SLOPE ? RouteColorize.SLOPE_COLORS : RouteColorize.COLORS;
 		}
 		if (scaleType == GradientScaleType.SPEED) {
 			return dataItem.getGradientSpeedPalette();
@@ -947,10 +948,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			Pair<WptPt, WptPt> points = findPointsNearSegments(selectedGpxFile.getPointsToDisplay(), tb, r, mx, my);
 			if (points != null) {
 				LatLon latLon = tb.getLatLonFromPixel(mx, my);
-				SelectedGpxPoint selectedGpxPoint =
-						createSelectedGpxPoint(selectedGpxFile, points.first, points.second, latLon);
-				res.add(selectedGpxPoint);
-				break;
+				res.add(createSelectedGpxPoint(selectedGpxFile, points.first, points.second, latLon));
 			}
 		}
 	}
@@ -1176,10 +1174,18 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 			if (!Algorithms.isEmpty(trackPoints)) {
 				MapActivity mapActivity = (MapActivity) view.getContext();
-				SelectedGpxPoint selectedGpxPoint = (SelectedGpxPoint) trackPoints.get(0);
 				LatLon latLon = tileBox.getLatLonFromPixel(point.x, point.y);
-				PointDescription description = getObjectName(selectedGpxPoint);
-				mapActivity.getContextMenu().show(latLon, description, selectedGpxPoint);
+				ContextMenuLayer contextMenuLayer = mapActivity.getMapLayers().getContextMenuLayer();
+				if (trackPoints.size() == 1) {
+					SelectedGpxPoint gpxPoint = (SelectedGpxPoint) trackPoints.get(0);
+					contextMenuLayer.showContextMenu(latLon, getObjectName(gpxPoint), gpxPoint, this);
+				} else if (trackPoints.size() > 1) {
+					Map<Object, IContextMenuProvider> selectedObjects = new HashMap<>();
+					for (Object object : trackPoints) {
+						selectedObjects.put(object, this);
+					}
+					contextMenuLayer.showContextMenuForSelectedObjects(latLon, selectedObjects);
+				}
 				return true;
 			}
 		}
@@ -1200,7 +1206,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		} else if (object instanceof SelectedGpxPoint) {
 			SelectedGpxPoint selectedGpxPoint = (SelectedGpxPoint) object;
 			SelectedGpxFile selectedGpxFile = selectedGpxPoint.getSelectedGpxFile();
-			TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint, null, null, false);
+			TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint);
 			return true;
 		}
 		return false;
@@ -1224,7 +1230,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private void saveGpx(@NonNull GPXFile gpxFile, String gpxFileName, LatLon latLon) {
 		OsmandApplication app = view.getApplication();
 		MapActivity mapActivity = (MapActivity) view.getContext();
-		File file = app.getAppPath(IndexConstants.GPX_TRAVEL_DIR + gpxFileName);
+		File file = new File(FileUtils.getTempDir(app), gpxFileName);
 		new SaveGpxAsyncTask(file, gpxFile, new SaveGpxAsyncTask.SaveGpxListener() {
 			@Override
 			public void gpxSavingStarted() {
@@ -1239,10 +1245,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					selectedPoint.lon = latLon.getLongitude();
 					app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, false);
 					SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, false);
-					SelectedGpxPoint selectedGpxPoint =
-							new SelectedGpxPoint(selectedGpxFile, selectedPoint, null, null, Float.NaN);
-					TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint,
-							null, null, false, false);
+					SelectedGpxPoint selectedGpxPoint = new SelectedGpxPoint(selectedGpxFile, selectedPoint, null, null, Float.NaN);
+					TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint);
 				} else {
 					log.error(errorMessage);
 				}

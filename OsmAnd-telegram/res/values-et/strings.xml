@@ -5,7 +5,7 @@
     <string name="time_zone_descr">Vali oma asukohateadetes kuvatav ajavöönd.</string>
     <string name="time_zone">Ajavöönd</string>
     <string name="units_and_formats">Ühikud ja formaadid</string>
-    <string name="unit_of_length_descr">Muuda kauguse mõõtmise ühikuid.</string>
+    <string name="unit_of_length_descr">Muuda pikkusühikuid.</string>
     <string name="unit_of_length">Pikkusühikud</string>
     <string name="unit_of_speed_system_descr">Määra kiiruse ühik.</string>
     <string name="unit_of_speed_system">Kiiruse ühik</string>
@@ -100,7 +100,7 @@
     <string name="shared_string_telegram">Telegram</string>
     <string name="privacy_policy_use_telegram">Telegram (sõnumirakendus) on kasutusel inimestega kontakteerumiseks ja suhtlemiseks.</string>
     <string name="privacy_policy_telegram_client">OsmAnd Tracker on üks Telegrami avatud platvormi kasutavaid kliente. Teie kontaktid saavad kasutada mis tahes muud Telegrami klienti.</string>
-    <string name="privacy_policy_agree">Vajutades \"Jätka\" nõustud Telegram ja OsmAnd rakenduste privaatsuspoliitika tingimustega.</string>
+    <string name="privacy_policy_agree">Vajutades „Jätka“ nõustud Telegram\'i ja OsmAnd\'i rakenduste privaatsuspoliitika tingimustega.</string>
     <string name="shared_string_accept">Nõustu</string>
     <string name="telegram_privacy_policy">Telegram privaatsuspoliitika</string>
     <string name="osmand_privacy_policy">OsmAnd privaatsuspoliitika</string>
@@ -157,7 +157,7 @@
     <string name="sharing_status">Jagamise olek</string>
     <string name="location_sharing_status">Jagamine: %1$s</string>
     <string name="no_gps_connection">GPS ühendus puudub</string>
-    <string name="no_internet_connection">Interneti-ühendus puudub</string>
+    <string name="no_internet_connection">Internetiühendus puudub</string>
     <string name="add_device">Lisa seade</string>
     <string name="share_location_as">Jaga asukohta kui</string>
     <string name="live_now_description">Sinuga asukohta jagavad kontaktid ja grupid.</string>
@@ -180,7 +180,7 @@
     <string name="disconnect_from_telegram">Kuidas OsmAnd Tracker Telegramist välja lülitada</string>
     <string name="logout_help_desc">Kuidas OsmAnd Tracker Telegramist välja lülitada</string>
     <string name="connected_account">Ühendatud konto</string>
-    <string name="shared_string_account">Konto</string>
+    <string name="shared_string_account">Kasutajakonto</string>
     <string name="in_time">%1$s jooksul</string>
     <string name="osmand_connect_desc">Vali OsmAnd Trackeri poolt asukohtade kuvamiseks kasutatav OsmAnd versioon.</string>
     <string name="osmand_connect">OsmAnd ühendamine</string>
@@ -231,12 +231,12 @@
     <string name="initialization">Alustamine</string>
     <string name="logging_out">Välja logimine</string>
     <string name="closing">Sulgemine</string>
-    <string name="gps_network_not_enabled">Lülitada sisse \"Asukoht\"\?</string>
+    <string name="gps_network_not_enabled">Kas lülitame asukohateenuse sisse\?</string>
     <string name="not_logged_in">Sa ei ole sisse logitud</string>
     <string name="no_location_permission">Rakendusel puudub juurdepääs asukohaandmetele.</string>
     <string name="gps_not_available">Palun lülita süsteemi seadetes sisse \"Asukoht\"</string>
     <string name="location_service_no_gps_available">Vali oma asukoha jagamiseks üks asukoha pakkujatest.</string>
-    <string name="osmand_service_descr">OsmAnd Tracker töötab taustal välja lülitatud ekraaniga.</string>
+    <string name="osmand_service_descr">OsmAnd töötab taustal, ekraan välja lülitatud.</string>
     <string name="shared_string_distance">Kaugus</string>
     <string name="share_location">Jaga asukohta</string>
     <string name="sharing_location">Asukoha jagamine</string>
@@ -250,7 +250,7 @@
     <string name="shared_string_authorization_descr">Palun sisesta oma Telegrami telefoninumber rahvusvahelises formaadis</string>
     <string name="shared_string_welcome">Tere tulemast</string>
     <string name="nm_h">sõlme</string>
-    <string name="si_nm_h">Meremiili tunnis (sõlm)</string>
+    <string name="si_nm_h">Meremiili tunnis (sõlme)</string>
     <string name="shared_string_hour_short">h</string>
     <string name="shared_string_minute_short">min</string>
     <string name="shared_string_second_short">sek</string>

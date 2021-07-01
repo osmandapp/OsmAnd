@@ -49,6 +49,10 @@ public class SearchHistoryHelper {
 		return new HistoryItemDBHelper().getLastModifiedTime();
 	}
 
+	public void setLastModifiedTime(long lastModifiedTime) {
+		new HistoryItemDBHelper().setLastModifiedTime(lastModifiedTime);
+	}
+
 	public void addNewItemToHistory(double latitude, double longitude, PointDescription pointDescription) {
 		addNewItemToHistory(new HistoryEntry(latitude, longitude, pointDescription));
 	}
@@ -409,6 +413,10 @@ public class SearchHistoryHelper {
 				BackupHelper.setLastModifiedTime(context, HISTORY_LAST_MODIFIED_NAME, lastModifiedTime);
 			}
 			return lastModifiedTime;
+		}
+
+		public void setLastModifiedTime(long lastModifiedTime) {
+			BackupHelper.setLastModifiedTime(context, HISTORY_LAST_MODIFIED_NAME, lastModifiedTime);
 		}
 
 		private void updateLastModifiedTime() {

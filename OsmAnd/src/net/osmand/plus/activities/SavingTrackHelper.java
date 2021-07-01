@@ -39,6 +39,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import androidx.annotation.NonNull;
+
 public class SavingTrackHelper extends SQLiteOpenHelper {
 
 	public final static String DATABASE_NAME = "tracks"; //$NON-NLS-1$
@@ -759,6 +761,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		return currentTrack.getGpxFile();
 	}
 
+	@NonNull
 	public SelectedGpxFile getCurrentTrack() {
 		return currentTrack;
 	}

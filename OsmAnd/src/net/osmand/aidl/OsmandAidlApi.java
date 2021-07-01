@@ -79,9 +79,7 @@ import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.routing.IRoutingDataUpdateListener;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
-import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.routing.VoiceRouter;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
@@ -116,7 +114,6 @@ import java.io.InputStream;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -143,14 +140,6 @@ import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_UNSUPPORTED_FILE_
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_WRITE_LOCK_ERROR;
 import static net.osmand.aidlapi.OsmandAidlConstants.OK_RESPONSE;
 import static net.osmand.plus.FavouritesDbHelper.FILE_TO_SAVE;
-import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_DIRECTION_ANGLE;
-import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_DIRECTION_LANES;
-import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_DIRECTION_NAME;
-import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_DIRECTION_POSSIBLY_LEFT;
-import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_DIRECTION_POSSIBLY_RIGHT;
-import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_DIRECTION_TURN;
-import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_DISTANCE;
-import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_IMMINENT;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.REPLACE_KEY;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.SILENT_IMPORT_KEY;
 
@@ -1817,54 +1806,24 @@ public class OsmandAidlApi {
 		}
 
 		int leftTime = 0;
-		long arrivalTime = 0;
 		int leftDistance = 0;
+		long arrivalTime = 0;
 		Bundle turnInfo = null;
 		ALatLon destinationLocation = null;
 
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		if (routingHelper.isRouteCalculated()) {
-			LatLon finalLocation = routingHelper.getFinalLocation();
-			destinationLocation = new ALatLon(finalLocation.getLatitude(), finalLocation.getLongitude());
+			LatLon latLon = routingHelper.getFinalLocation();
+			destinationLocation = new ALatLon(latLon.getLatitude(), latLon.getLongitude());
 
 			leftTime = routingHelper.getLeftTime();
-			arrivalTime = leftTime + System.currentTimeMillis() / 1000;
 			leftDistance = routingHelper.getLeftDistance();
-
-			NextDirectionInfo directionInfo = routingHelper.getNextRouteDirectionInfo(new NextDirectionInfo(), true);
-			turnInfo = new Bundle();
-			if (directionInfo.distanceTo > 0) {
-				updateTurnInfo("next_", turnInfo, directionInfo);
-				directionInfo = routingHelper.getNextRouteDirectionInfoAfter(directionInfo, new NextDirectionInfo(), true);
-				if (directionInfo.distanceTo > 0) {
-					updateTurnInfo("after_next", turnInfo, directionInfo);
-				}
-			}
-			routingHelper.getNextRouteDirectionInfo(new NextDirectionInfo(), false);
-			if (directionInfo.distanceTo > 0) {
-				updateTurnInfo("no_speak_next_", turnInfo, directionInfo);
-			}
+			arrivalTime = leftTime + System.currentTimeMillis() / 1000;
+			turnInfo = ExternalApiHelper.getRouteDirectionsInfo(app);
 		}
 		AppInfoParams params = new AppInfoParams(lastKnownLocation, mapLocation, turnInfo, leftTime, leftDistance, arrivalTime, mapVisible);
 		params.setDestinationLocation(destinationLocation);
 		return params;
-	}
-
-	private void updateTurnInfo(String prefix, Bundle bundle, NextDirectionInfo ni) {
-		bundle.putInt(prefix + PARAM_NT_DISTANCE, ni.distanceTo);
-		bundle.putInt(prefix + PARAM_NT_IMMINENT, ni.imminent);
-		if (ni.directionInfo != null && ni.directionInfo.getTurnType() != null) {
-			TurnType tt = ni.directionInfo.getTurnType();
-			RouteDirectionInfo a = ni.directionInfo;
-			bundle.putString(prefix + PARAM_NT_DIRECTION_NAME, RoutingHelperUtils.formatStreetName(a.getStreetName(), a.getRef(), a.getDestinationName(), ""));
-			bundle.putString(prefix + PARAM_NT_DIRECTION_TURN, tt.toXmlString());
-			bundle.putFloat(prefix + PARAM_NT_DIRECTION_ANGLE, tt.getTurnAngle());
-			bundle.putBoolean(prefix + PARAM_NT_DIRECTION_POSSIBLY_LEFT, tt.isPossibleLeftTurn());
-			bundle.putBoolean(prefix + PARAM_NT_DIRECTION_POSSIBLY_RIGHT, tt.isPossibleRightTurn());
-			if (tt.getLanes() != null) {
-				bundle.putString(prefix + PARAM_NT_DIRECTION_LANES, Arrays.toString(tt.getLanes()));
-			}
-		}
 	}
 
 	boolean search(final String searchQuery, final int searchType, final double latitude, final double longitude,

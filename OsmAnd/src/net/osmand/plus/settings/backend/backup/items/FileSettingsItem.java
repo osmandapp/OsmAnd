@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.backend.backup.items;
 
+import android.content.Context;
+
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -7,7 +9,9 @@ import androidx.annotation.Nullable;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.download.SrtmDownloadItem;
+import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
@@ -177,9 +181,25 @@ public class FileSettingsItem extends StreamSettingsItem {
 		return SettingsItemType.FILE;
 	}
 
+	@NonNull
 	@Override
-	protected long getLocalModifiedTime() {
+	public String getPublicName(@NonNull Context ctx) {
+		if (subtype.isMap() || subtype == FileSubtype.TTS_VOICE || subtype == FileSubtype.VOICE) {
+			return FileNameTranslationHelper.getFileNameWithRegion(app, file.getName());
+		} else if (subtype == FileSubtype.MULTIMEDIA_NOTES) {
+			return new Recording(file).getName(app, true);
+		}
+		return super.getPublicName(ctx);
+	}
+
+	@Override
+	public long getLocalModifiedTime() {
 		return file.lastModified();
+	}
+
+	@Override
+	public void setLocalModifiedTime(long lastModifiedTime) {
+		file.setLastModified(lastModifiedTime);
 	}
 
 	public File getPluginPath() {

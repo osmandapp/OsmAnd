@@ -3,12 +3,14 @@ package net.osmand.plus.importfiles;
 import android.net.Uri;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.util.Algorithms;
+import net.osmand.plus.importfiles.ImportHelper.OnSuccessfulGpxImport;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -16,25 +18,25 @@ import java.io.InputStream;
 
 class GpxImportTask extends BaseLoadAsyncTask<Void, Void, GPXFile> {
 
-	private ImportHelper importHelper;
-	private Uri gpxFile;
-	private String fileName;
+	private final ImportHelper importHelper;
+	private final Uri gpxFile;
+	private final String fileName;
 	private long fileSize;
 
-	private boolean save;
-	private boolean useImportDir;
-	private boolean showInDetailsActivity;
+	private final boolean save;
+	private final boolean useImportDir;
+	private final OnSuccessfulGpxImport onGpxImport;
 
 	public GpxImportTask(@NonNull ImportHelper importHelper, @NonNull FragmentActivity activity,
-						 @NonNull Uri gpxFile, @NonNull String fileName, boolean save, boolean useImportDir,
-						 boolean showInDetailsActivity) {
+	                     @NonNull Uri gpxFile, @NonNull String fileName, @Nullable OnSuccessfulGpxImport onGpxImport,
+	                     boolean useImportDir, boolean save) {
 		super(activity);
 		this.importHelper = importHelper;
 		this.gpxFile = gpxFile;
 		this.fileName = fileName;
+		this.onGpxImport = onGpxImport;
 		this.save = save;
 		this.useImportDir = useImportDir;
-		this.showInDetailsActivity = showInDetailsActivity;
 	}
 
 	@Override
@@ -61,6 +63,6 @@ class GpxImportTask extends BaseLoadAsyncTask<Void, Void, GPXFile> {
 	@Override
 	protected void onPostExecute(GPXFile result) {
 		hideProgress();
-		importHelper.handleResult(result, fileName, fileSize, save, useImportDir, false, showInDetailsActivity);
+		importHelper.handleResult(result, fileName, onGpxImport, fileSize, save, useImportDir, false);
 	}
 }

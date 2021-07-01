@@ -64,9 +64,17 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 	}
 
 	@Override
-	protected long getLocalModifiedTime() {
+	public long getLocalModifiedTime() {
 		File favoritesFile = favoritesHelper.getExternalFile();
 		return favoritesFile.exists() ? favoritesFile.lastModified() : 0;
+	}
+
+	@Override
+	public void setLocalModifiedTime(long lastModifiedTime) {
+		File favoritesFile = favoritesHelper.getExternalFile();
+		if (favoritesFile.exists()) {
+			favoritesFile.setLastModified(lastModifiedTime);
+		};
 	}
 
 	@NonNull

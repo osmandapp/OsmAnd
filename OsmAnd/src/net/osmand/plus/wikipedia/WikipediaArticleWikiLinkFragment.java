@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
@@ -15,8 +16,8 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleDividerItem;
-import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
-import net.osmand.plus.chooseplan.ChoosePlanDialogFragment.ChoosePlanDialogType;
+import net.osmand.plus.chooseplan.OsmAndFeature;
+import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleWikiLinkFragment;
 
 
@@ -74,15 +75,12 @@ public class WikipediaArticleWikiLinkFragment extends MenuBottomSheetDialogFragm
 				.setIcon(osmandLiveIcon)
 				.setTitle(getString(R.string.read_wikipedia_offline))
 				.setLayoutId(R.layout.bottom_sheet_item_in_frame_with_descr_and_icon)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						FragmentManager fm = getFragmentManager();
-						if (fm != null) {
-							ChoosePlanDialogFragment.showDialogInstance(getMyApplication(), fm, ChoosePlanDialogType.WIKIVOYAGE);
-						}
-						dismiss();
+				.setOnClickListener(v -> {
+					FragmentActivity activity = getActivity();
+					if (activity != null) {
+						ChoosePlanFragment.showInstance(activity, OsmAndFeature.WIKIVOYAGE);
 					}
+					dismiss();
 				})
 				.create();
 		items.add(wikiArticleOfflineItem);

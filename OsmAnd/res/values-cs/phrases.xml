@@ -3959,4 +3959,15 @@
     <string name="poi_karate">Karate</string>
     <string name="poi_camp_pitch">Místo pro stan</string>
     <string name="poi_pest_control">Obchod s prostředky proti škůdcům</string>
+    <string name="poi_fuel_propane">Propan</string>
+    <string name="poi_power_terminal">Energetický terminál</string>
+    <string name="poi_picnic_table_no">Piknikový stůl: ne</string>
+    <string name="poi_picnic_table_yes">Piknikový stůl: ano</string>
+    <string name="poi_climbing_grade_uiaa_min">Nejlehčí cesta (stupnice UIAA)</string>
+    <string name="poi_climbing_grade_french_min">Nejlehčí cesta (francouzská stupnice)</string>
+    <string name="poi_climbing_grade_saxon_min">Nejlehčí cesta (saská stupnice)</string>
+    <string name="poi_contact_xing">Xing</string>
+    <string name="poi_contact_vhf">VHF</string>
+    <string name="poi_contact_webcam">Webkamera</string>
+    <string name="poi_contact_linkedin">LinkedIn</string>
 </resources>

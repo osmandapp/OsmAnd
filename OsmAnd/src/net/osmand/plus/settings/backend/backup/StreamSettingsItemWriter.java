@@ -19,13 +19,21 @@ public class StreamSettingsItemWriter extends SettingsItemWriter<StreamSettingsI
 
 	@Override
 	public void writeToStream(@NonNull OutputStream outputStream, @Nullable IProgress progress) throws IOException {
-		InputStream inputStream = getItem().getInputStream();
+		int bytesDivisor = 1024;
+		StreamSettingsItem item = getItem();
+		if (progress != null) {
+			progress.startWork((int) (item.getSize() / bytesDivisor));
+		}
+		InputStream inputStream = item.getInputStream();
 		if (inputStream != null) {
 			try {
-				Algorithms.streamCopy(inputStream, outputStream, progress, 1024);
+				Algorithms.streamCopy(inputStream, outputStream, progress, bytesDivisor);
 			} finally {
 				Algorithms.closeStream(inputStream);
 			}
+		}
+		if (progress != null) {
+			progress.finishTask();
 		}
 	}
 }

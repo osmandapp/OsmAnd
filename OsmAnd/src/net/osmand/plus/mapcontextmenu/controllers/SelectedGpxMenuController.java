@@ -44,7 +44,7 @@ public class SelectedGpxMenuController extends MenuController {
 			public void buttonPressed() {
 				mapContextMenu.close();
 				SelectedGpxFile selectedGpxFile = selectedGpxPoint.getSelectedGpxFile();
-				TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint, null, null, false);
+				TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint);
 			}
 		};
 		leftTitleButtonController.caption = mapActivity.getString(R.string.shared_string_open_track);

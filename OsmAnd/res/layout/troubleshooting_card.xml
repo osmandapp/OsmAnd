@@ -11,9 +11,6 @@
 		android:layout_height="@dimen/list_content_padding"
 		android:background="?attr/activity_background_color" />
 
-	<include
-		layout="@layout/divider" />
-
 	<LinearLayout
 		android:id="@+id/troubleshooting_container"
 		android:layout_width="match_parent"
@@ -50,18 +47,6 @@
 			android:textSize="@dimen/default_list_text_size"
 			app:typeface="@string/font_roboto_medium" />
 
-		<net.osmand.plus.widgets.TextViewEx
-			android:id="@+id/troubleshooting_description"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_marginEnd="@dimen/card_button_progress_size_small"
-			android:layout_marginRight="@dimen/card_button_progress_size_small"
-			android:letterSpacing="@dimen/description_letter_spacing"
-			android:text="@string/troubleshooting_description"
-			android:textColor="?android:textColorSecondary"
-			android:textSize="@dimen/default_desc_text_size"
-			app:typeface="@string/font_roboto_regular" />
-
 	</LinearLayout>
 
 	<include
@@ -70,6 +55,14 @@
 
 	<include
 		android:id="@+id/dismiss_button"
+		layout="@layout/divider_half_item" />
+
+	<include
+		android:id="@+id/redeem_promo_code"
+		layout="@layout/redeem_promo_code_button" />
+
+	<include
+		android:id="@+id/redeem_promo_code_divider"
 		layout="@layout/divider_half_item" />
 
 	<include

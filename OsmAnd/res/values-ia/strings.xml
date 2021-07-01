@@ -2,4 +2,5 @@
 <resources>
     <string name="add_new_profile_q">Adder nove profilo \'%1$s\'\?</string>
     <string name="shared_string_downloading_formatted">Discargante %s</string>
+    <string name="backup_version_history">Chronologia del versiones</string>
 </resources>

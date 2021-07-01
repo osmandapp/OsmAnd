@@ -3,7 +3,6 @@ package net.osmand.plus.backup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.backup.BackupHelper.BackupInfo;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
 
@@ -108,7 +107,7 @@ public class PrepareBackupResult {
 		}
 		List<RemoteFile> oldRemoteFiles = new ArrayList<>();
 		for (RemoteFile rf : remoteFiles) {
-			if (!uniqueRemoteFiles.contains(rf)) {
+			if (!rf.isInfoFile() && !rf.isDeleted() && !uniqueRemoteFiles.contains(rf)) {
 				oldRemoteFiles.add(rf);
 			}
 		}
