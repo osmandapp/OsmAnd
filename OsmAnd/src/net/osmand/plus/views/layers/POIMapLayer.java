@@ -406,28 +406,19 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	public boolean showMenuAction(@Nullable Object object) {
 		OsmandApplication app = view.getApplication();
 		MapActivity mapActivity = (MapActivity) view.getContext();
-		String routeID;
-		LatLon latLon;
-		TravelGpx travelGpx;
 		if ((object instanceof Pair && ((Pair<?, ?>) object).first instanceof TravelGpx
-				&& ((Pair<?, ?>) object).second instanceof SelectedGpxMenuController.SelectedGpxPoint)
-				|| ((object instanceof Amenity) && ((Amenity) object).getSubType().equals("route_track"))) {
-			if (object instanceof Pair) {
-				Pair<TravelGpx, SelectedGpxMenuController.SelectedGpxPoint> pair = (Pair) object;
-				routeID = pair.first.getRouteId();
-				latLon = new LatLon(pair.second.getSelectedPoint().lat, pair.second.getSelectedPoint().lon);
-				travelGpx = pair.first;
-
-			} else {
-				Amenity amenity = (Amenity) object;
-				routeID = amenity.getRouteId();
-				latLon = new LatLon(amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude());
-				travelGpx = app.getTravelHelper().searchGpx(latLon, routeID, amenity.getRef(), null);
-				if (travelGpx == null) {
-					return true;
-				}
+				&& ((Pair<?, ?>) object).second instanceof SelectedGpxMenuController.SelectedGpxPoint)) {
+			Pair<TravelGpx, SelectedGpxMenuController.SelectedGpxPoint> pair = (Pair) object;
+			LatLon latLon = new LatLon(pair.second.getSelectedPoint().lat, pair.second.getSelectedPoint().lon);
+			app.getTravelHelper().readGpxFile(pair.first, gpxReadListener(mapActivity, pair.first.getRouteId(), latLon));
+			return true;
+		} else if ((object instanceof Amenity) && ((Amenity) object).getSubType().equals("route_track")) {
+			Amenity amenity = (Amenity) object;
+			TravelGpx travelGpx = app.getTravelHelper().searchGpx(amenity.getLocation(), amenity.getRouteId(), amenity.getRef(), null);
+			if (travelGpx == null) {
+				return true;
 			}
-			app.getTravelHelper().readGpxFile(travelGpx, gpxReadListener(mapActivity, routeID, latLon));
+			app.getTravelHelper().readGpxFile(travelGpx, gpxReadListener(mapActivity, amenity.getRouteId(), amenity.getLocation()));
 			return true;
 		} else if (object instanceof SelectedGpxMenuController.SelectedGpxPoint) {
 			SelectedGpxMenuController.SelectedGpxPoint selectedGpxPoint = (SelectedGpxMenuController.SelectedGpxPoint) object;
