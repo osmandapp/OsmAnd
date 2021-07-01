@@ -54,6 +54,7 @@ import static net.osmand.GPXUtilities.TRAVEL_GPX_CONVERT_MULT_1;
 import static net.osmand.GPXUtilities.TRAVEL_GPX_CONVERT_MULT_2;
 import static net.osmand.GPXUtilities.writeGpxFile;
 import static net.osmand.data.Amenity.REF;
+import static net.osmand.data.Amenity.ROUTE_ID;
 import static net.osmand.plus.helpers.GpxUiHelper.getGpxTitle;
 import static net.osmand.plus.wikivoyage.data.PopularArticles.ARTICLES_PER_PAGE;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.ACTIVITY_TYPE;
@@ -170,7 +171,7 @@ public class TravelObfHelper implements TravelHelper {
 	}
 
 	@Nullable
-	public synchronized TravelGpx searchGpx(LatLon location, String fileName, String ref, @Nullable GpxReadCallback callback) {
+	public synchronized TravelGpx searchGpx(LatLon location, String routeID, String ref, @Nullable GpxReadCallback callback) {
 		final List<Pair<File, Amenity>> foundAmenities = new ArrayList<>();
 		int searchRadius = ARTICLE_SEARCH_RADIUS;
 		TravelGpx travelGpx = null;
@@ -184,7 +185,7 @@ public class TravelObfHelper implements TravelHelper {
 			}
 			for (Pair<File, Amenity> foundGpx : foundAmenities) {
 				Amenity amenity = foundGpx.second;
-				if (amenity.getName().equals(fileName) && amenity.getRef().equals(ref)) {
+				if (amenity.getRouteId().equals(routeID) && amenity.getRef().equals(ref)) {
 					travelGpx = getTravelGpx(foundGpx.first, amenity);
 					break;
 				}
@@ -947,7 +948,7 @@ public class TravelObfHelper implements TravelHelper {
 								public boolean publish(BinaryMapDataObject object) {
 									if (object.getPointsLength() > 1) {
 										if (object.getTagValue(REF).equals(article.ref)
-												&& createTitle(object.getName()).equals(article.title)) {
+												&& object.getTagValue(ROUTE_ID).equals(article.routeId)) {
 											segmentList.add(object);
 										}
 									}
@@ -1017,14 +1018,20 @@ public class TravelObfHelper implements TravelHelper {
 				}
 				track.segments.add(trkSegment);
 			}
-			gpxFile = new GPXFile(article.getTitle(), article.getLang(), "");
+			gpxFile = new GPXFile(article.getTitle(), article.getLang(), article.getContent());
+			if (!Algorithms.isEmpty(article.getImageTitle())) {
+				gpxFile.metadata.link = TravelArticle.getImageUrl(article.getImageTitle(), false);
+			}
 			gpxFile.tracks = new ArrayList<>();
 			gpxFile.tracks.add(track);
 			gpxFile.setRef(article.ref);
 		}
 		if (!pointList.isEmpty()) {
 			if (gpxFile == null) {
-				gpxFile = new GPXFile(article.getTitle(), article.getLang(), "");
+				gpxFile = new GPXFile(article.getTitle(), article.getLang(), article.getContent());
+				if (!Algorithms.isEmpty(article.getImageTitle())) {
+					gpxFile.metadata.link = TravelArticle.getImageUrl(article.getImageTitle(), false);
+				}
 			}
 			for (Amenity wayPoint : pointList) {
 				gpxFile.addPoint(article.createWptPt(wayPoint, article.getLang()));

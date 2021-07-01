@@ -735,8 +735,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 				for (RenderedObject renderedObject : renderedObjects) {
 
-					String gpxFileName = renderedObject.getFileNameByExtension(IndexConstants.GPX_FILE_EXT);
-					boolean isGpx = !Algorithms.isEmpty(gpxFileName);
+					String routeID = renderedObject.getRouteID();
+					boolean isGpx = !Algorithms.isEmpty(routeID);
 					if (!isGpx && (renderedObject.getId() == null || !renderedObject.isVisible()
 							|| renderedObject.isDrawOnPath())) {
 						continue;
@@ -768,7 +768,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 					LatLon searchLatLon = objectLatLon != null ? objectLatLon : pointLatLon;
 					if (isGpx) {
 						String ref = Algorithms.emptyIfNull(renderedObject.getTagValue("ref"));
-						TravelGpx travelGpx = app.getTravelHelper().searchGpx(pointLatLon, gpxFileName, ref, null);
+						TravelGpx travelGpx = app.getTravelHelper().searchGpx(pointLatLon, routeID, ref, null);
 						if (travelGpx != null && isUniqueGpx(selectedObjects, travelGpx)) {
 							WptPt selectedPoint = new WptPt();
 							selectedPoint.lat = pointLatLon.getLatitude();

@@ -506,13 +506,10 @@ public class NativeLibrary {
 			return names;
 		}
 
-		public String getFileNameByExtension(String extension) {
-			if (Algorithms.isEmpty(extension) || !extension.startsWith(".")) {
-				return null;
-			}
-			for (String name : getOriginalNames()) {
-				if (name.endsWith(extension)) {
-					return name;
+		public String getRouteID() {
+			for (Map.Entry<String, String> entry : getTags().entrySet()) {
+				if("route_id".equals(entry.getKey())) {
+					return entry.getValue();
 				}
 			}
 			return null;
