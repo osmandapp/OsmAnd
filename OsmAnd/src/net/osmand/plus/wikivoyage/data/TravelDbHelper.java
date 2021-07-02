@@ -19,6 +19,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.wikivoyage.data.TravelArticle.TravelArticleIdentifier;
@@ -200,6 +201,11 @@ public class TravelDbHelper implements TravelHelper {
 		} else {
 			localDataHelper.removeArticleFromSaved(article);
 		}
+	}
+
+	@Override
+	public GpxReadCallback gpxReadListener(@NonNull MapActivity mapActivity, @NonNull String name, @NonNull LatLon location) {
+		return null;
 	}
 
 	public List<File> getExistingTravelBooks() {

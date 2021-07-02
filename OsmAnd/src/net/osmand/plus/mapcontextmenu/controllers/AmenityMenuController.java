@@ -1,15 +1,10 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
-import net.osmand.FileUtils;
-import net.osmand.GPXUtilities;
-import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
@@ -18,7 +13,6 @@ import net.osmand.data.TransportStop;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
-import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -28,8 +22,6 @@ import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.builders.AmenityMenuBuilder;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.render.RenderingIcons;
-import net.osmand.plus.track.SaveGpxAsyncTask;
-import net.osmand.plus.track.TrackMenuFragment;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
@@ -39,16 +31,15 @@ import net.osmand.util.OpeningHoursParser;
 
 import org.apache.commons.logging.Log;
 
-import java.io.File;
 import java.util.List;
 
+import static net.osmand.plus.wikivoyage.data.TravelHelper.*;
 import static net.osmand.plus.wikivoyage.data.TravelObfHelper.ROUTE_ARTICLE_POINT;
 
 public class AmenityMenuController extends MenuController {
 
 	private Amenity amenity;
 	private MapMarker marker;
-	private static final Log LOG = PlatformUtil.getLog(AmenityMenuController.class);
 	private TransportStopController transportStopController;
 
 	public AmenityMenuController(@NonNull MapActivity mapActivity,
@@ -113,17 +104,16 @@ public class AmenityMenuController extends MenuController {
 		openingHoursInfo = OpeningHoursParser.getInfo(amenity.getOpeningHours());
 	}
 
-	boolean openTrack() {
+	void openTrack() {
 		OsmandApplication app = getMapActivity().getMyApplication();
 		TravelHelper travelHelper = app.getTravelHelper();
 		String lang = amenity.getTagSuffix(Amenity.LANG_YES + ":");
 		String name = amenity.getTagContent("route_name");
 		TravelArticle article = travelHelper.getArticleByTitle(name, lang, true, null);
-		if (article == null) {
-			return true;
+		if (article != null) {
+			GpxReadCallback gpxReadListener = travelHelper.gpxReadListener(getMapActivity(), name, amenity.getLocation());
+			travelHelper.readGpxFile(article, gpxReadListener);
 		}
-		travelHelper.readGpxFile(article, gpxReadListener(getMapActivity(), name, amenity.getLocation()));
-		return true;
 	}
 
 	@Override
@@ -132,49 +122,6 @@ public class AmenityMenuController extends MenuController {
 			this.amenity = (Amenity) object;
 		}
 	}
-
-	public TravelHelper.GpxReadCallback gpxReadListener(MapActivity mapActivity, String gpxFileName, LatLon latLon) {
-		return new TravelHelper.GpxReadCallback() {
-			@Override
-			public void onGpxFileReading() {
-			}
-
-			@Override
-			public void onGpxFileRead(@Nullable GPXUtilities.GPXFile gpxFile) {
-				if (gpxFile != null) {
-					saveGpx(mapActivity, gpxFile, gpxFileName, latLon);
-				}
-			}
-		};
-	}
-
-	private void saveGpx(MapActivity mapActivity, @NonNull GPXUtilities.GPXFile gpxFile, String gpxFileName, LatLon latLon) {
-		OsmandApplication app = mapActivity.getMyApplication();
-		gpxFileName += IndexConstants.GPX_FILE_EXT;
-		File file = new File(FileUtils.getTempDir(app), gpxFileName);
-		new SaveGpxAsyncTask(file, gpxFile, new SaveGpxAsyncTask.SaveGpxListener() {
-			@Override
-			public void gpxSavingStarted() {
-
-			}
-
-			@Override
-			public void gpxSavingFinished(Exception errorMessage) {
-				if (errorMessage == null) {
-					GPXUtilities.WptPt selectedPoint = new GPXUtilities.WptPt();
-					selectedPoint.lat = latLon.getLatitude();
-					selectedPoint.lon = latLon.getLongitude();
-					app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, false);
-					GpxSelectionHelper.SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, false);
-					SelectedGpxMenuController.SelectedGpxPoint selectedGpxPoint = new SelectedGpxMenuController.SelectedGpxPoint(selectedGpxFile, selectedPoint, null, null, Float.NaN);
-					TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint);
-				} else {
-					LOG.error(errorMessage);
-				}
-			}
-		}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-	}
-
 
 	@Override
 	protected Object getObject() {

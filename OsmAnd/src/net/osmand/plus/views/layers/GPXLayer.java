@@ -22,16 +22,13 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
-import net.osmand.FileUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
-import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
-import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
@@ -95,6 +92,7 @@ import java.util.Set;
 import static net.osmand.GPXUtilities.calculateTrackBounds;
 import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
 import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
+import static net.osmand.plus.wikivoyage.data.TravelHelper.*;
 
 public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IMoveObjectProvider, MapTextProvider<WptPt> {
 
@@ -1201,7 +1199,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				&& ((Pair<?, ?>) object).second instanceof SelectedGpxPoint) {
 			Pair<TravelGpx, SelectedGpxPoint> pair = (Pair) object;
 			LatLon latLon = new LatLon(pair.second.getSelectedPoint().lat, pair.second.getSelectedPoint().lon);
-			app.getTravelHelper().readGpxFile(pair.first, gpxReadListener(mapActivity, pair.first.getRouteId(), latLon));
+			TravelHelper travelHelper = app.getTravelHelper();
+			GpxReadCallback gpxReadListener = travelHelper.gpxReadListener(mapActivity, pair.first.getRouteId(), latLon);
+			travelHelper.readGpxFile(pair.first, gpxReadListener);
 			return true;
 		} else if (object instanceof SelectedGpxPoint) {
 			SelectedGpxPoint selectedGpxPoint = (SelectedGpxPoint) object;

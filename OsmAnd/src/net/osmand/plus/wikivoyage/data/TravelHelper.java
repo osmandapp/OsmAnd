@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.wikivoyage.data.TravelArticle.TravelArticleIdentifier;
 
 import java.io.File;
@@ -77,4 +78,6 @@ public interface TravelHelper {
 	String getWikivoyageFileName();
 
 	void saveOrRemoveArticle(@NonNull TravelArticle article, boolean save);
+
+	GpxReadCallback gpxReadListener(@NonNull MapActivity mapActivity, @NonNull String name, @NonNull LatLon location);
 }
