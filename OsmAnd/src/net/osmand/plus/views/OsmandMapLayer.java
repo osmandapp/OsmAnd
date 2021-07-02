@@ -22,6 +22,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.FileUtils;
 import net.osmand.GPXUtilities;
+import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
@@ -301,6 +302,7 @@ public abstract class OsmandMapLayer {
 
 	private void saveGpx(MapActivity mapActivity, @NonNull GPXUtilities.GPXFile gpxFile, String gpxFileName, LatLon latLon) {
 		OsmandApplication app = mapActivity.getMyApplication();
+		gpxFileName += IndexConstants.GPX_FILE_EXT;
 		File file = new File(FileUtils.getTempDir(app), gpxFileName);
 		new SaveGpxAsyncTask(file, gpxFile, new SaveGpxAsyncTask.SaveGpxListener() {
 			@Override
