@@ -414,7 +414,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 				if (travelGpx == null) {
 					return true;
 				}
-				travelHelper.readGpxFile(travelGpx, mapActivity, amenity.getRouteId(), amenity.getLocation());
+				travelHelper.openTrackMenu(travelGpx, mapActivity, amenity.getRouteId(), amenity.getLocation());
 				return true;
 			} else if (amenity.getSubType().equals(ROUTE_ARTICLE)) {
 				String lang = app.getLanguage();
