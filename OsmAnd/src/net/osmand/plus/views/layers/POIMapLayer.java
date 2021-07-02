@@ -8,6 +8,7 @@ import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.text.util.Linkify;
 import android.util.Base64;
+import android.util.Pair;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,20 +32,24 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.osm.PoiType;
+import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.helpers.WaypointHelper;
+import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.track.TrackMenuFragment;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapTextLayer.MapTextProvider;
 import net.osmand.plus.widgets.WebViewEx;
+import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -398,7 +403,29 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	}
 
 	@Override
-	public boolean showMenuAction(@Nullable Object o) {
+	public boolean showMenuAction(@Nullable Object object) {
+		OsmandApplication app = view.getApplication();
+		MapActivity mapActivity = (MapActivity) view.getContext();
+		if ((object instanceof Pair && ((Pair<?, ?>) object).first instanceof TravelGpx
+				&& ((Pair<?, ?>) object).second instanceof SelectedGpxMenuController.SelectedGpxPoint)) {
+			Pair<TravelGpx, SelectedGpxMenuController.SelectedGpxPoint> pair = (Pair) object;
+			LatLon latLon = new LatLon(pair.second.getSelectedPoint().lat, pair.second.getSelectedPoint().lon);
+			app.getTravelHelper().readGpxFile(pair.first, gpxReadListener(mapActivity, pair.first.getRouteId(), latLon));
+			return true;
+		} else if ((object instanceof Amenity) && ((Amenity) object).getSubType().equals("route_track")) {
+			Amenity amenity = (Amenity) object;
+			TravelGpx travelGpx = app.getTravelHelper().searchGpx(amenity.getLocation(), amenity.getRouteId(), amenity.getRef(), null);
+			if (travelGpx == null) {
+				return true;
+			}
+			app.getTravelHelper().readGpxFile(travelGpx, gpxReadListener(mapActivity, amenity.getRouteId(), amenity.getLocation()));
+			return true;
+		} else if (object instanceof SelectedGpxMenuController.SelectedGpxPoint) {
+			SelectedGpxMenuController.SelectedGpxPoint selectedGpxPoint = (SelectedGpxMenuController.SelectedGpxPoint) object;
+			GpxSelectionHelper.SelectedGpxFile selectedGpxFile = selectedGpxPoint.getSelectedGpxFile();
+			TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint);
+			return true;
+		}
 		return false;
 	}
 

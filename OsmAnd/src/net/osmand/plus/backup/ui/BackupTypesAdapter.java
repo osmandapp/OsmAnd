@@ -17,6 +17,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.CompoundButtonType;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
+import net.osmand.plus.backup.RemoteFile;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
@@ -73,7 +74,7 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 		titleTv.setText(UiUtilities.createCustomFontSpannable(typeface, name, name));
 
 		TextView description = view.findViewById(R.id.description);
-		description.setText(getCategoryDescr(category, true));
+		description.setText(getCategoryDescr(category));
 
 		int selectedTypes = 0;
 		for (ExportSettingsType type : items.getTypes()) {
@@ -174,7 +175,7 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 		notifyDataSetChanged();
 	}
 
-	private String getCategoryDescr(ExportSettingsCategory category, boolean exportMode) {
+	private String getCategoryDescr(ExportSettingsCategory category) {
 		long itemsSize = 0;
 		int selectedTypes = 0;
 		SettingsCategoryItems items = itemsMap.get(category);
@@ -185,7 +186,7 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 			}
 		}
 		String description;
-		if (selectedTypes == 0 && exportMode) {
+		if (selectedTypes == 0) {
 			description = app.getString(R.string.shared_string_none);
 		} else if (selectedTypes == items.getTypes().size()) {
 			description = app.getString(R.string.shared_string_all);
@@ -202,7 +203,7 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 		int selectedTypes = 0;
 
 		List<?> selectedItems = selectedItemsMap.get(type);
-		if (selectedItems != null) {
+		if (!Algorithms.isEmpty(selectedItems)) {
 			for (int i = 0; i < items.size(); i++) {
 				Object object = items.get(i);
 				if (selectedItems.contains(object)) {
@@ -211,6 +212,8 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 						itemsSize += ((FileSettingsItem) object).getSize();
 					} else if (object instanceof File) {
 						itemsSize += ((File) object).length();
+					} else if (object instanceof RemoteFile) {
+						itemsSize += ((RemoteFile) object).getZipSize();
 					} else if (object instanceof MapMarkersGroup) {
 						MapMarkersGroup markersGroup = (MapMarkersGroup) object;
 						if (Algorithms.stringsEqual(markersGroup.getId(), ExportSettingsType.ACTIVE_MARKERS.name())
@@ -234,7 +237,11 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 				description = app.getString(R.string.ltr_or_rtl_combine_via_slash, String.valueOf(selectedTypes), String.valueOf(items.size()));
 			}
 			String formattedSize = AndroidUtils.formatSize(app, itemsSize);
-			return itemsSize == 0 ? description : app.getString(R.string.ltr_or_rtl_combine_via_comma, description, formattedSize);
+			if (Algorithms.isEmpty(formattedSize)) {
+				return description;
+			} else {
+				return app.getString(R.string.ltr_or_rtl_combine_via_comma, description, formattedSize);
+			}
 		} else {
 			return app.getString(R.string.shared_string_none);
 		}

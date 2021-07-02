@@ -352,6 +352,25 @@ public class FavouritesDbHelper {
 		return true;
 	}
 
+	public void setParkingPoint(@NonNull LatLon latLon, @Nullable String address, long pickupTimestamp, boolean addToCalendar) {
+		SpecialPointType specialType = SpecialPointType.PARKING;
+		FavouritePoint point = getSpecialPoint(specialType);
+		if (point != null) {
+			point.setIconId(specialType.getIconId(context));
+			point.setTimestamp(pickupTimestamp);
+			point.setCalendarEvent(addToCalendar);
+			editFavourite(point, latLon.getLatitude(), latLon.getLongitude(), address);
+			lookupAddress(point);
+		} else {
+			point = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), specialType.getName(), specialType.getCategory());
+			point.setAddress(address);
+			point.setTimestamp(pickupTimestamp);
+			point.setCalendarEvent(addToCalendar);
+			point.setIconId(specialType.getIconId(context));
+			addFavourite(point);
+		}
+	}
+
 	public void setSpecialPoint(@NonNull LatLon latLon, SpecialPointType specialType, @Nullable String address) {
 		FavouritePoint point = getSpecialPoint(specialType);
 		if (point != null) {

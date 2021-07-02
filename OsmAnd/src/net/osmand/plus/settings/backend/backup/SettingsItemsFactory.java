@@ -84,9 +84,6 @@ public class SettingsItemsFactory {
 				SettingsHelper.LOG.error("Error creating item from json: " + itemJson, e);
 			}
 		}
-		if (items.size() == 0) {
-			throw new IllegalArgumentException("No items");
-		}
 		for (SettingsItem item : items) {
 			if (item instanceof PluginSettingsItem) {
 				PluginSettingsItem pluginSettingsItem = ((PluginSettingsItem) item);
@@ -113,7 +110,7 @@ public class SettingsItemsFactory {
 		return null;
 	}
 
-	@NonNull
+	@Nullable
 	private SettingsItem createItem(@NonNull JSONObject json) throws IllegalArgumentException, JSONException {
 		SettingsItem item = null;
 		SettingsItemType type = SettingsItem.parseItemType(json);

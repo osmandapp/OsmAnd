@@ -12,6 +12,20 @@
 
 -->
 
+    <string name="backup_error_no_valid_subscription">No valid subscription present</string>
+    <string name="backup_error_user_is_not_registered">User with that email is not registered</string>
+    <string name="backup_error_token_is_not_valid_or_expired">Token is not valid or expired</string>
+    <string name="backup_error_token_is_not_valid">Provided device id or token is not valid</string>
+    <string name="backup_error_file_not_available">File is not available</string>
+    <string name="backup_error_gzip_only_supported_upload">File is submitted not in gzip format</string>
+    <string name="backup_error_size_is_exceeded">Maximum size of OsmAnd Cloud exceeded %1$s</string>
+    <string name="backup_error_subscription_was_used">Subscription or promo was used by another account %1$s</string>
+    <string name="backup_error_subscription_was_expired">Subscription is not valid any more</string>
+    <string name="backup_error_user_is_already_registered">User was already registered with such email</string>
+    <string name="shared_string_view_all">View all</string>
+    <string name="shared_string_discussion">Discussion</string>
+    <string name="backup_delete_types">Delete disabled types data</string>
+    <string name="backup_delete_types_descr">Do you want to delete data for disabled types from cloud?</string>
     <string name="from_with_param">From %1$s</string>
     <string name="regular_price">Regular price</string>
     <string name="complete_purchase">Complete purchase</string>

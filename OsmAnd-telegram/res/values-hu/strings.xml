@@ -131,7 +131,7 @@
     <string name="enter_password">Jelszó megadása</string>
     <string name="password_descr">Telegram jelszó</string>
     <string name="shared_string_login">Belépés</string>
-    <string name="shared_string_logout">Kilépés</string>
+    <string name="shared_string_logout">Kijelentkezés</string>
     <string name="initialization">Indítás</string>
     <string name="logging_out">Kilépés folyamatban</string>
     <string name="closing">Bezárás folyamatban</string>

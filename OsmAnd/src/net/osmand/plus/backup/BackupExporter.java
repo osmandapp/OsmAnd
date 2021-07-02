@@ -3,27 +3,43 @@ package net.osmand.plus.backup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.backup.BackupHelper.OnDeleteFilesListener;
+import net.osmand.OperationLog;
+import net.osmand.plus.backup.BackupListeners.OnDeleteFilesListener;
 import net.osmand.plus.backup.NetworkWriter.OnUploadItemListener;
 import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.backup.AbstractWriter;
 import net.osmand.plus.settings.backend.backup.Exporter;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.Callable;
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 public class BackupExporter extends Exporter {
 
 	private final BackupHelper backupHelper;
 	private final Map<String, RemoteFile> filesToDelete = new LinkedHashMap<>();
 	private final NetworkExportProgressListener listener;
+
+	private final ExecutorService executor = new AsyncWriterTaskExecutor();
+	private final Map<Future<?>, AsyncWriterTask> tasks = new ConcurrentHashMap<>();
+	private final Map<Future<?>, Throwable> exceptions = new ConcurrentHashMap<>();
 
 	public interface NetworkExportProgressListener {
 		void itemExportStarted(@NonNull String type, @NonNull String fileName, int work);
@@ -54,9 +70,55 @@ public class BackupExporter extends Exporter {
 		filesToDelete.put(file.getName(), file);
 	}
 
+	private boolean isInterrupted() {
+		return !exceptions.isEmpty();
+	}
+
 	@Override
 	public void export() throws IOException {
 		exportItems();
+	}
+
+	@Override
+	protected void writeItems(@NonNull AbstractWriter writer) throws IOException {
+		OperationLog log = new OperationLog("writeItems", true);
+		log.startOperation();
+
+		StringBuilder orderIdUpdateError = new StringBuilder();
+		backupHelper.updateOrderId((status, message, err) -> {
+			if (err != null) {
+				orderIdUpdateError.append(err);
+			}
+		});
+		if (orderIdUpdateError.length() > 0) {
+			throw new IOException(orderIdUpdateError.toString());
+		}
+
+		Collection<SettingsItem> items = getItems().values();
+		for (SettingsItem item : items) {
+			AsyncWriterTask task = new AsyncWriterTask(writer, item);
+			Future<?> future = executor.submit(task);
+			tasks.put(future, task);
+		}
+		executor.shutdown();
+		boolean finished = false;
+		while (!finished) {
+			try {
+				finished = executor.awaitTermination(100, TimeUnit.MILLISECONDS);
+				if (isCancelled() || isInterrupted()) {
+					for (Future<?> future : tasks.keySet()) {
+						future.cancel(false);
+					}
+				}
+			} catch (InterruptedException e) {
+				// ignore
+			}
+		}
+		if (!exceptions.isEmpty()) {
+			Throwable t = exceptions.values().iterator().next();
+			throw new IOException(t.getMessage(), t);
+		}
+		log.finishOperation();
 	}
 
 	private void exportItems() throws IOException {
@@ -160,6 +222,47 @@ public class BackupExporter extends Exporter {
 				}
 			} catch (UserNotRegisteredException e) {
 				errors.put(type + "/" + fileName, e.getMessage());
+			}
+		}
+	}
+
+	private static class AsyncWriterTask implements Callable<Void> {
+
+		private final AbstractWriter writer;
+		private final SettingsItem item;
+
+		public AsyncWriterTask(@NonNull AbstractWriter writer, @NonNull SettingsItem item) {
+			this.writer = writer;
+			this.item = item;
+		}
+
+		@Override
+		public Void call() throws Exception {
+			writer.write(item);
+			return null;
+		}
+	}
+
+	private class AsyncWriterTaskExecutor extends ThreadPoolExecutor {
+
+		public AsyncWriterTaskExecutor() {
+			super(4, 4, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>());
+		}
+
+		protected void afterExecute(Runnable r, Throwable t) {
+			super.afterExecute(r, t);
+			if (r instanceof Future<?>) {
+				if (t == null && ((Future<?>) r).isDone()) {
+					try {
+						((Future<?>) r).get();
+					} catch (CancellationException | InterruptedException e) {
+						// ignore
+					} catch (ExecutionException ee) {
+						exceptions.put((Future<?>) r, ee.getCause());
+					}
+				} else {
+					exceptions.put((Future<?>) r, t);
+				}
 			}
 		}
 	}
