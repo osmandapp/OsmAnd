@@ -4148,7 +4148,7 @@
     <string name="verification_code_missing_description">زمان انتظار برای دریافت کد تا ۱۰ دقیقه ممکن است برسد. همچنین لطفا پوشهٔ هرزنامه را بررسی کنید. در غیر این صورت دکمهٔ زیر را بزنید.</string>
     <string name="select_nav_profile_dialog_message">«نوع ناوبری» نحوهٔ محاسبهٔ مسیر را کنترل می‌کند. می‌توانید از بین موتورهای مسیریابی آنلاین و آفلاین انتخاب کنید.</string>
     <string name="restore_complete">بازیابی کامل است</string>
-    <string name="backup_data">از اطلاعات پشتیبان تهیه کنید</string>
+    <string name="backup_data">از داده‌ها پشتیبان بگیرید</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
     <string name="loading_list_of_routing_services">در حال بارکردن لیست خدمات مسیریابی موجود</string>
     <string name="shared_string_offline">آفلاین</string>
@@ -4194,4 +4194,8 @@
     <string name="complete_purchase">تکمیل خرید</string>
     <string name="from_with_param">از %1$s</string>
     <string name="shared_string_view_all">دیدن همه</string>
+    <string name="backup_error_token_is_not_valid">توکن یا شناسهٔ دستگاه نامعتبر است</string>
+    <string name="backup_error_token_is_not_valid_or_expired">توکن نامعتبر است یا منقضی شده است</string>
+    <string name="backup_error_user_is_not_registered">کاربری با این ایمیل ثبت‌نام نکرده است</string>
+    <string name="backup_error_no_valid_subscription">اشتراک معتبری وجود ندارد</string>
 </resources>
