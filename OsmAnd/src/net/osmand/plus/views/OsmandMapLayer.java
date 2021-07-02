@@ -18,11 +18,7 @@ import android.view.MotionEvent;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
-import net.osmand.FileUtils;
-import net.osmand.GPXUtilities;
-import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
@@ -32,23 +28,17 @@ import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.osm.PoiCategory;
 import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
-import net.osmand.plus.track.SaveGpxAsyncTask;
-import net.osmand.plus.track.TrackMenuFragment;
-import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -283,48 +273,6 @@ public abstract class OsmandMapLayer {
 		imageView.setPadding(iconPadding, iconPadding, iconPadding, iconPadding);
 		imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
 		imageView.setImageDrawable(icon);
-	}
-
-	public TravelHelper.GpxReadCallback gpxReadListener(MapActivity mapActivity, String gpxFileName, LatLon latLon) {
-		return new TravelHelper.GpxReadCallback() {
-			@Override
-			public void onGpxFileReading() {
-			}
-
-			@Override
-			public void onGpxFileRead(@Nullable GPXUtilities.GPXFile gpxFile) {
-				if (gpxFile != null) {
-					saveGpx(mapActivity, gpxFile, gpxFileName, latLon);
-				}
-			}
-		};
-	}
-
-	private void saveGpx(MapActivity mapActivity, @NonNull GPXUtilities.GPXFile gpxFile, String gpxFileName, LatLon latLon) {
-		OsmandApplication app = mapActivity.getMyApplication();
-		gpxFileName += IndexConstants.GPX_FILE_EXT;
-		File file = new File(FileUtils.getTempDir(app), gpxFileName);
-		new SaveGpxAsyncTask(file, gpxFile, new SaveGpxAsyncTask.SaveGpxListener() {
-			@Override
-			public void gpxSavingStarted() {
-
-			}
-
-			@Override
-			public void gpxSavingFinished(Exception errorMessage) {
-				if (errorMessage == null) {
-					GPXUtilities.WptPt selectedPoint = new GPXUtilities.WptPt();
-					selectedPoint.lat = latLon.getLatitude();
-					selectedPoint.lon = latLon.getLongitude();
-					app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, false);
-					GpxSelectionHelper.SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, false);
-					SelectedGpxMenuController.SelectedGpxPoint selectedGpxPoint = new SelectedGpxMenuController.SelectedGpxPoint(selectedGpxFile, selectedPoint, null, null, Float.NaN);
-					TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint);
-				} else {
-					log.error(errorMessage);
-				}
-			}
-		}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	public abstract class MapLayerData<T> {

@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.wikivoyage.data.TravelArticle.TravelArticleIdentifier;
 
 import java.io.File;
@@ -20,6 +21,7 @@ public interface TravelHelper {
 
 		void onGpxFileRead(@Nullable GPXFile gpxFile);
 	}
+
 
 	TravelLocalDataHelper getBookmarksHelper();
 
@@ -62,7 +64,8 @@ public interface TravelHelper {
 	@Nullable
 	TravelGpx searchGpx(LatLon location, String fileName, String ref);
 
-	void readGpxFile(@NonNull TravelArticle article, @Nullable GpxReadCallback callback);
+	void openTrackMenu(@NonNull TravelArticle article, @NonNull MapActivity mapActivity,
+					   @NonNull String gpxFileName, @NonNull LatLon location);
 
 	@NonNull
 	String getGPXName(@NonNull TravelArticle article);
@@ -77,4 +80,5 @@ public interface TravelHelper {
 	String getWikivoyageFileName();
 
 	void saveOrRemoveArticle(@NonNull TravelArticle article, boolean save);
+
 }

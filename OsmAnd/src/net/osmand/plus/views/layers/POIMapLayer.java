@@ -414,7 +414,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 				if (travelGpx == null) {
 					return true;
 				}
-				travelHelper.readGpxFile(travelGpx, gpxReadListener(mapActivity, amenity.getRouteId(), amenity.getLocation()));
+				travelHelper.readGpxFile(travelGpx, mapActivity, amenity.getRouteId(), amenity.getLocation());
 				return true;
 			} else if (amenity.getSubType().equals(ROUTE_ARTICLE)) {
 				String lang = app.getLanguage();
@@ -424,7 +424,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 				if (article == null) {
 					return true;
 				}
-				travelHelper.readGpxFile(article, gpxReadListener(mapActivity, name, amenity.getLocation()));
+				travelHelper.openTrackMenu(article, mapActivity, name, amenity.getLocation());
 				return true;
 			}
 		}
