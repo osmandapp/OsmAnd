@@ -35,10 +35,6 @@ import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
 public class RouteCalculationResult {
 	private final static Log log = PlatformUtil.getLog(RouteCalculationResult.class);
 
-	// Evaluates street name that the route follows after turn within specified distance.
-	// It is useful to find names for short segments on intersections and roundabouts.
-
-
 	private static double distanceClosestToIntermediate = 3000;
 	private static double distanceThresholdToIntermediate = 25;
 	private static double DISTANCE_THRESHOLD_TO_INTRODUCE_FIRST_AND_LAST_POINTS = 50;
@@ -414,7 +410,7 @@ public class RouteCalculationResult {
 						RouteSegmentResult previous;
 						previous = list.get(routeInd - 1);
 						info.setRef(previous.getRef(lang, transliterate));
-						
+
 						if (info.getRef() != null) {
 							RouteDataObject rdoWithShield = previous.getObjectWithShield(list, lind);
 							if (rdoWithShield != null) {

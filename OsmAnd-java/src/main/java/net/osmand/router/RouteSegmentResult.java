@@ -39,6 +39,8 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 	// this make not possible to make turns in between segment result for now
 	private TurnType turnType;
 
+	// Evaluates street name that the route follows after turn within specified distance.
+	// It is useful to find names for short segments on intersections
 	private static float distanceSeekStreetName = 150;
 	private static float distanceSeekDestination = 1000;
 
