@@ -108,11 +108,10 @@ public class AmenityMenuController extends MenuController {
 		OsmandApplication app = getMapActivity().getMyApplication();
 		TravelHelper travelHelper = app.getTravelHelper();
 		String lang = amenity.getTagSuffix(Amenity.LANG_YES + ":");
-		String name = amenity.getTagContent("route_name");
+		String name = amenity.getTagContent(Amenity.ROUTE_NAME);
 		TravelArticle article = travelHelper.getArticleByTitle(name, lang, true, null);
 		if (article != null) {
-			GpxReadCallback gpxReadListener = travelHelper.gpxReadListener(getMapActivity(), name, amenity.getLocation());
-			travelHelper.readGpxFile(article, gpxReadListener);
+			travelHelper.openTrackMenu(article, getMapActivity(), name, amenity.getLocation());
 		}
 	}
 

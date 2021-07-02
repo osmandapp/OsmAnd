@@ -203,10 +203,6 @@ public class TravelDbHelper implements TravelHelper {
 		}
 	}
 
-	@Override
-	public GpxReadCallback gpxReadListener(@NonNull MapActivity mapActivity, @NonNull String name, @NonNull LatLon location) {
-		return null;
-	}
 
 	public List<File> getExistingTravelBooks() {
 		return existingTravelBooks;
@@ -724,7 +720,8 @@ public class TravelDbHelper implements TravelHelper {
 	}
 
 	@Override
-	public void readGpxFile(@NonNull TravelArticle article, @Nullable TravelHelper.GpxReadCallback callback) {
+	public void openTrackMenu(@NonNull TravelArticle article, @NonNull MapActivity mapActivity,
+							  @NonNull String gpxFileName, @NonNull LatLon location) {
 
 	}
 

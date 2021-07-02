@@ -22,6 +22,7 @@ public interface TravelHelper {
 		void onGpxFileRead(@Nullable GPXFile gpxFile);
 	}
 
+
 	TravelLocalDataHelper getBookmarksHelper();
 
 	void initializeDataOnAppStartup();
@@ -63,7 +64,8 @@ public interface TravelHelper {
 	@Nullable
 	TravelGpx searchGpx(LatLon location, String fileName, String ref);
 
-	void readGpxFile(@NonNull TravelArticle article, @Nullable GpxReadCallback callback);
+	void openTrackMenu(@NonNull TravelArticle article, @NonNull MapActivity mapActivity,
+					   @NonNull String gpxFileName, @NonNull LatLon location);
 
 	@NonNull
 	String getGPXName(@NonNull TravelArticle article);
@@ -79,5 +81,4 @@ public interface TravelHelper {
 
 	void saveOrRemoveArticle(@NonNull TravelArticle article, boolean save);
 
-	GpxReadCallback gpxReadListener(@NonNull MapActivity mapActivity, @NonNull String name, @NonNull LatLon location);
 }
