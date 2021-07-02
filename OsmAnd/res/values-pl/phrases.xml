@@ -484,7 +484,7 @@
     <string name="poi_landuse">Przeznaczenie obszaru</string>
     <string name="poi_service">Usługi</string>
     <string name="poi_craft">Profesja</string>
-    <string name="poi_seamark">Żeglarstwo</string>
+    <string name="poi_seamark">Morski</string>
     <string name="poi_medical_supply">Artykuły medyczne</string>
     <string name="poi_fuel_diesel">Olej napędowy</string>
     <string name="poi_fuel_gtl_diesel">Modyfikowany olej napędowy</string>
@@ -3875,4 +3875,5 @@
     <string name="poi_embassy_interests_section">Sekcja zainteresowań</string>
     <string name="poi_diplomatic_liaison">Łączność</string>
     <string name="poi_liaison_filter">Łączność</string>
+    <string name="poi_water_source_tap">Naciśnij</string>
 </resources>
