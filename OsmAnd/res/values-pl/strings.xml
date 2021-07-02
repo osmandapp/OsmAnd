@@ -469,7 +469,7 @@
     <string name="search_button">Wyszukaj</string>
     <string name="search_activity">Wyszukaj</string>
     <string name="searchpoi_activity">Wybierz użyteczne miejsca</string>
-    <string name="search_POI_level_btn">Wyszukaj więcej</string>
+    <string name="search_POI_level_btn">Znajdź więcej</string>
     <string name="incremental_search_city">Znajdź miejscowość wpisując pierwsze litery</string>
     <string name="incremental_search_street">Znajdź ulicę</string>
     <string name="incremental_search_building">Znajdź numer domu</string>
@@ -477,9 +477,9 @@
     <string name="choose_intersected_street">Wybierz przecinającą ulicę</string>
     <string name="Closest_Amenities">Pobliskie usługi</string>
     <string name="app_mode_default">Przeglądanie mapy</string>
-    <string name="app_mode_car">Samochód</string>
-    <string name="app_mode_bicycle">Rower</string>
-    <string name="app_mode_pedestrian">Pieszo</string>
+    <string name="app_mode_car">Jazda</string>
+    <string name="app_mode_bicycle">Kolarstwo</string>
+    <string name="app_mode_pedestrian">Chodzenie</string>
     <string name="position_on_map_center">Centralnie</string>
     <string name="position_on_map_bottom">Na dole</string>
     <string name="navigate_point_top_text">Wprowadź szerokość i długość geograficzną w wybranym formacie (D - stopnie, M - minuty, S - sekundy)</string>
@@ -714,7 +714,7 @@
     <string name="osmand_parking_position_description_add">Odebrać pojazd o:</string>
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
-    <string name="osmand_parking_position_name">Miejsce parkowania</string>
+    <string name="osmand_parking_position_name">Miejsce parkingowe</string>
     <string name="osmand_parking_plugin_description">Umożliwia zapisanie miejsca zaparkowania samochodu, w tym pozostałego czasu parkowania.
 \n Zarówno lokalizacja, jak i czas są widoczne na pulpicie nawigacyjnym, a także w widżecie mapy. Przypomnienie o alarmie można dodać do kalendarza Android.</string>
     <string name="osmand_parking_plugin_name">Miejsce parkingowe</string>
@@ -987,10 +987,10 @@
     <string name="gpx_saved_sucessfully">Zapisano plik GPX do {0}</string>
     <string name="osmand_distance_planning_plugin_description">Utwórz ścieżki, dotykając mapy lub używając lub modyfikując istniejące pliki GPX, aby zaplanować podróż i zmierzyć odległość między punktami. Wynik można zapisać jako plik GPX, aby użyć później w celu uzyskania wskazówek.</string>
     <string name="osmand_distance_planning_plugin_name">Kalkulator odległości i narzędzie planowania</string>
-    <string name="use_distance_measurement_help">* Naciśnij, aby zaznaczyć punkt. 
-\n * Naciśnij i przytrzymaj mapę, aby usunąć poprzedni punkt. 
-\n * Naciśnij i przytrzymaj punkt, aby przejrzeć i dołączyć opis. 
-\n * Kliknij na widżecie obliczania odległości, aby zobaczyć więcej czynności.</string>
+    <string name="use_distance_measurement_help">* Naciśnij, aby zaznaczyć punkt.
+\n * Naciśnij i przytrzymaj mapę, aby usunąć poprzedni punkt.
+\n * Naciśnij i przytrzymaj punkt, aby przejrzeć i dołączyć opis.
+\n * Naciśnij na widżecie obliczania odległości, aby zobaczyć więcej czynności.</string>
     <string name="shared_string_do_not_show_again">Nie pokazuj ponownie</string>
     <string name="distance_measurement_start_editing">Rozpocznij edycję</string>
     <string name="distance_measurement_finish_editing">Zakończ edycję</string>
@@ -1036,7 +1036,7 @@
     <string name="speak_street_names">Nazwy ulic (syntezowane)</string>
     <string name="driving_region_japan">Japonia</string>
     <string name="driving_region_us">Stany Zjednoczone</string>
-    <string name="driving_region_europe_asia">Europa i Azja, Ameryka Łacińska i podobne</string>
+    <string name="driving_region_europe_asia">Europa, Azja, Ameryka Łacińska i podobne</string>
     <string name="driving_region_uk">Wielka Brytania, Indie i inne</string>
     <string name="driving_region_descr">Wybierz region jazdy: USA, Europa, Wielka Brytania, Azja i inne.</string>
     <string name="driving_region">Region ruchu</string>
@@ -1316,7 +1316,7 @@
     <string name="traffic_warning_calming">Uspokojenie ruchu</string>
     <string name="traffic_warning_speed_camera">Fotoradar</string>
     <string name="traffic_warning">Ostrzeżenia drogowe</string>
-    <string name="local_index_description">Kliknij istniejący element, aby zobaczyć szczegóły, naciśnij i przytrzymaj, aby wyłączyć lub usunąć. Aktualne dane na urządzeniu (%1$s wolne):</string>
+    <string name="local_index_description">Naciśnij istniejący element, aby zobaczyć szczegóły, naciśnij i przytrzymaj, aby wyłączyć lub usunąć. Aktualne dane na urządzeniu (%1$s wolne):</string>
     <string name="text_size_descr">Ustaw rozmiar tekstu na mapie.</string>
     <string name="text_size">Rozmiar tekstu</string>
     <string name="fav_point_dublicate">Powielona nazwa ulubionego miejsca</string>
@@ -1413,7 +1413,7 @@
     <string name="free">Wolne %1$s</string>
     <string name="device_memory">Pamięć urządzenia</string>
     <string name="edit_group">Modyfikowanie grupy</string>
-    <string name="parking_place">Miejsce parkowania</string>
+    <string name="parking_place">Miejsce parkingowe</string>
     <string name="avoid_roads_msg">Wyznacz alternatywną trasę wybierając drogi, które mają być omijane</string>
     <string name="enable_proxy_title">Włączenie proxy HTTP</string>
     <string name="proxy_host_title">Host proxy</string>
@@ -1528,7 +1528,7 @@
     <string name="storage_directory_manual">Określony ręcznie</string>
     <string name="storage_directory_internal_app">Wewnętrzna pamięć programu</string>
     <string name="storage_directory">Przechowywanie map</string>
-    <string name="search_poi_category_hint">Wprowadź tekst, aby wyszukać dane</string>
+    <string name="search_poi_category_hint">Wpisz, aby szukać po wszystkich</string>
     <string name="rendering_attr_hideHouseNumbers_name">Numery budynków</string>
     <string name="storage_directory_multiuser">Pamięć użytkownika</string>
     <string name="routing_attr_avoid_borders_description">Omijaj przejścia graniczne</string>
@@ -2499,7 +2499,7 @@
     <string name="total_donations">Łączne dotacje</string>
     <string name="winter_and_ski_renderer">Zima i narciarstwo</string>
     <string name="touring_view_renderer">Widok turystyczny</string>
-    <string name="nautical_renderer">Żeglarstwo</string>
+    <string name="nautical_renderer">Morski</string>
     <string name="make_as_start_point">Ustal jako punkt początkowy</string>
     <string name="shared_string_current">Aktualne</string>
     <string name="last_intermediate_dest_description">Dodaje cel pośredni</string>
@@ -2686,7 +2686,7 @@
     <string name="mapnik_render_descr">Stary, domyślny styl „Mapnik”. Kolory podobne do „Mapnika”.</string>
     <string name="touring_view_render_descr">Styl turystyczny o wysokim kontraście i maksymalnej szczegółowości. Zawiera wszystkie opcje domyślnego stylu OsmAnd, wyświetlając jak najwięcej szczegółów, w szczególności drogi, ścieżki i inne sposoby podróżowania. Czyste rozróżnienie typów dróg jak w atlasie turystycznym. Nadaje się do użytku w dzień, w nocy i na zewnątrz.</string>
     <string name="default_render_descr">Styl ogólnego przeznaczenia. Wyraźnie pokazuje w gęsto zaludnionych miastach. Zawiera poziomice, drogi, jakość nawierzchni, ograniczenia dostępu, oznaczenia dróg, renderowanie ścieżek z uwzględnieniem klasyfikacji trudności, obiekty sportów spływowych.</string>
-    <string name="contour_lines_hillshade_maps">Poziomice i cieniowanie rzeźby terenu</string>
+    <string name="contour_lines_hillshade_maps">Linie konturowe i mapy cieniowania rzeźby terenu</string>
     <string name="get_osmand_live">Zdobądź OsmAnd Live i odblokuj wszystkie funkcjonalności: dzienne uaktualnienia map z nieograniczoną liczbą pobrań, wszystkie płatne i nieodpłatne wtyczki, Wikipedię, przewodniki Wikipodróży i wiele innych.</string>
     <string name="purchase_dialog_travel_description">Kup jedną z poniższych opcji, aby otrzymać funkcję przewodnika offline:</string>
     <string name="open_wikipedia_link_online">Otwórz odnośnik do Wikipedii online</string>
@@ -3949,7 +3949,7 @@
     <string name="show_track_on_map">Pokaż trasę na mapie</string>
     <string name="routing_engine_vehicle_type_wheelchair">Wózek inwalidzki</string>
     <string name="routing_engine_vehicle_type_hiking">Wędrówki</string>
-    <string name="routing_engine_vehicle_type_walking">Pieszo</string>
+    <string name="routing_engine_vehicle_type_walking">Chodzenie</string>
     <string name="routing_engine_vehicle_type_cycling_electric">Jazda na rowerze elektrycznym</string>
     <string name="routing_engine_vehicle_type_cycling_mountain">Kolarstwo górskie</string>
     <string name="routing_engine_vehicle_type_cycling_road">Kolarstwo szosowe</string>
@@ -3991,7 +3991,7 @@
     <string name="activity_type_cycling_name">Kolarstwo</string>
     <string name="activity_type_hiking_name">Turystyka piesza</string>
     <string name="activity_type_running_name">Uruchomiony</string>
-    <string name="activity_type_walking_name">Pieszo</string>
+    <string name="activity_type_walking_name">Chodzenie</string>
     <string name="activity_type_motorbike_name">Motocykl</string>
     <string name="activity_type_offroad_name">Poza drogą</string>
     <string name="activity_type_car_name">Samochód</string>

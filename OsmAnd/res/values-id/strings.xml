@@ -1954,4 +1954,25 @@
     <string name="routing_attr_avoid_tunnels_description">Hindari terowongan</string>
     <string name="routing_attr_avoid_tunnels_name">Hindari terowongan</string>
     <string name="backup_promocode">Kode promo</string>
+    <string name="purchases_feature_desc_wikivoyage">Jelajahi Wikipedia secara luring. Artikel-artikel dibagi berdasarkan negara dan daerah dan tersedia pada bahasa apapun.</string>
+    <string name="purchases_feature_desc_osmand_cloud">Dapatkan OsmAnd Cloud untuk menyimpan data OsmAnd secara daring. Lupakan data hilang setelah memasang ulang, cadangkan serta pulihkan semua informasi tanpa satupun masalah.</string>
+    <string name="unlimited_map_downloads">Unduhan peta tanpa batas</string>
+    <string name="offline_wikipeadia">Wikipedia Luring</string>
+    <string name="offline_wikivoyage">Wikivoyage Luring</string>
+    <string name="ltr_or_rtl_combine_via_or">%1$s atau %2$s</string>
+    <string name="continue_with">Lanjut dengan %1$s</string>
+    <string name="not_available_with">Tidak tersedia pada %1$s</string>
+    <string name="redeem_promo_code">Tukarkan kode promo</string>
+    <string name="osmand_maps_plus_tagline">Dapatkan fitur yang diperluas</string>
+    <string name="osmand_pro_tagline">Dapatkan banyak fitur</string>
+    <string name="shared_string_learn_more">Pelajari lebih lanjut</string>
+    <string name="cancel_anytime_in_huawei_appgallery">Batalkan kapan saja di Huawei AppGallery</string>
+    <string name="cancel_anytime_in_gplay">Batalkan kapan saja di Google Play.</string>
+    <string name="shared_string_not_included">Tidak mengandung</string>
+    <string name="shared_string_includes">Mengandung</string>
+    <string name="complete_purchase">Selesaikan pembelian</string>
+    <string name="regular_price">Harga reguler</string>
+    <string name="from_with_param">Dari %1$s</string>
+    <string name="shared_string_discussion">Diskusi</string>
+    <string name="shared_string_view_all">Lihat semua</string>
 </resources>
