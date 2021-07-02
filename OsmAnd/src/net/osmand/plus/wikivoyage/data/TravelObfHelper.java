@@ -628,6 +628,7 @@ public class TravelObfHelper implements TravelHelper {
 				}
 			}
 		};
+		readGpxFile(article, callback);
 	}
 
 	private void readGpxFile(@NonNull TravelArticle article, @Nullable GpxReadCallback callback) {
