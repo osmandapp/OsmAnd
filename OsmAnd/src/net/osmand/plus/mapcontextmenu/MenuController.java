@@ -188,7 +188,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		MenuController menuController = null;
 		if (object != null) {
 			if (object instanceof Amenity) {
-				if (((Amenity) object).getSubType().equals(ROUTE_ARTICLE)) {
+				if (!((Amenity) object).getSubType().equals(ROUTE_ARTICLE)) {
 					menuController = new AmenityMenuController(mapActivity, pointDescription, (Amenity) object);
 				}
 			} else if (object instanceof FavouritePoint) {
