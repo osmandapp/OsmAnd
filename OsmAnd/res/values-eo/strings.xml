@@ -4177,4 +4177,22 @@
     <string name="send_crash_log">Sendi pane-protokolon</string>
     <string name="send_logcat_log">Sendi logcat-erar-protokolon</string>
     <string name="backup_promocode">Reklamkodo</string>
+    <string name="ltr_or_rtl_combine_via_or">%1$s aŭ %2$s</string>
+    <string name="continue_with">Pluigi kun %1$s</string>
+    <string name="not_available_with">Ne disponebla kun %1$s</string>
+    <string name="redeem_promo_code">Uzi reklamkodon</string>
+    <string name="osmand_maps_plus_tagline">Akiri aldonajn eblaĵojn</string>
+    <string name="osmand_pro_tagline">Akiri ĉiujn eblaĵojn</string>
+    <string name="shared_string_learn_more">Pliaj informoj</string>
+    <string name="cancel_anytime_in_huawei_appgallery">Rezignebla iam ajn per Huawei AppGallery.</string>
+    <string name="cancel_anytime_in_gplay">Rezignebla iam ajn per Google Play.</string>
+    <string name="shared_string_not_included">Ne enhavas</string>
+    <string name="shared_string_includes">Enhavas</string>
+    <string name="complete_purchase">Aĉeti</string>
+    <string name="regular_price">Norma prezo</string>
+    <string name="from_with_param">De %1$s</string>
+    <string name="backup_delete_types_descr">Ĉu vi volas forigi el la nubo datumojn de malaktivaj elementoj\?</string>
+    <string name="backup_delete_types">Forigi datumojn de malaktivaj specoj</string>
+    <string name="shared_string_discussion">Diskuto</string>
+    <string name="shared_string_view_all">Montri ĉiujn</string>
 </resources>
