@@ -607,7 +607,7 @@ public class VoiceRouter {
 			return new StreetName(result);
 		}
 		result.put(TO_REF, getNonNullString(getSpeakablePointName(exitInfo.getRef())));
-		String dest = cutLongDestination(getSpeakablePointName(exitInfo.getDestinationName()));
+		String dest = cutLongDestination(getSpeakablePointName(routeInfo.getDestinationName()));
 		result.put(TO_DEST, getNonNullString(dest));
 		result.put(TO_STREET_NAME, "");
 		return new StreetName(result);

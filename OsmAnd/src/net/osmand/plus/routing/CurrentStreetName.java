@@ -54,8 +54,8 @@ public class CurrentStreetName {
 			if (n.directionInfo.getExitInfo() != null) {
 				// don't display name of exit street name
 				streetName.exitRef = n.directionInfo.getExitInfo().getRef();
-				if (!isSet && !Algorithms.isEmpty(n.directionInfo.getExitInfo().getDestinationName())) {
-					streetName.text = n.directionInfo.getExitInfo().getDestinationName();
+				if (!isSet && !Algorithms.isEmpty(n.directionInfo.getDestinationName())) {
+					streetName.text = n.directionInfo.getDestinationName();
 					isSet = true;
 				}
 			}

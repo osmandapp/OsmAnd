@@ -293,9 +293,6 @@ public class RouteDataObject {
 	}
 
 	public String getRef(String lang, boolean transliterate, boolean direction) {
-		//if (getDestinationRef(direction) != null) {
-		//	return getDestinationRef(direction);
-		//}
 		if (names != null) {
 			if (Algorithms.isEmpty(lang)) {
 				return names.get(region.refTypeRule);
@@ -345,10 +342,6 @@ public class RouteDataObject {
 	}
 
 	public String getDestinationName(String lang, boolean transliterate, boolean direction) {
-		/*//Issue #3289: Treat destination:ref like a destination, not like a ref
-		String destRef = ((getDestinationRef(direction) == null) || getDestinationRef(direction).equals(getRef(lang, transliterate, direction))) ? "" : getDestinationRef(direction);
-		String destRef1 = Algorithms.isEmpty(destRef) ? "" : destRef + ", ";*/
-
 		if (names != null) {
 			int[] kt = names.keys();
 
@@ -765,23 +758,23 @@ public class RouteDataObject {
 //		return false;
 //	}
 
-//	public String getExitName() {
-//		if (pointNames != null && pointNameTypes != null) {
-//			int pnSz = pointNames.length;
-//			for (int i = 0; i < pnSz; i++) {
-//				String[] point = pointNames[i];
-//				if (point != null) {
-//					int pSz = point.length;
-//					for (int j = 0; j < pSz; j++) {
-//						if (pointNameTypes[i][j] == region.nameTypeRule) {
-//							return point[j];
-//						}
-//					}
-//				}
-//			}
-//		}
-//		return null;
-//	}
+	public String getExitName() {
+		if (pointNames != null && pointNameTypes != null) {
+			int pnSz = pointNames.length;
+			for (int i = 0; i < pnSz; i++) {
+				String[] point = pointNames[i];
+				if (point != null) {
+					int pSz = point.length;
+					for (int j = 0; j < pSz; j++) {
+						if (pointNameTypes[i][j] == region.nameTypeRule) {
+							return point[j];
+						}
+					}
+				}
+			}
+		}
+		return null;
+	}
 
 	public String getExitRef() {
 		if (pointNames != null && pointNameTypes != null) {

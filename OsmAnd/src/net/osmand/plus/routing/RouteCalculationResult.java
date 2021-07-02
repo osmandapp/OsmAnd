@@ -442,12 +442,11 @@ public class RouteCalculationResult {
 					info.setStreetName(streetName);
 					info.setDestinationName(destinationName);
 
-					if (s.getObject().isExitPoint() && current.getObject().getHighway().equals("motorway_link")) {
+					//if (s.getObject().isExitPoint() && current.getObject().getHighway().equals("motorway_link")) {
+					if (s.getObject().isExitPoint()) {
 						ExitInfo exitInfo = new ExitInfo();
 						exitInfo.setRef(current.getObject().getExitRef());
-						//exitInfo.setExitStreetName(next.getObject().getExitName());
-						exitInfo.setDestinationName(destinationName);
-						exitInfo.setDestinationRef(dnRef);
+						exitInfo.setExitStreetName(current.getObject().getExitName());
 						info.setExitInfo(exitInfo);
 					}
 

@@ -5,8 +5,7 @@ public class ExitInfo {
 
     private String ref;
 
-    private String destinationName;
-    private String destinationRef;
+    private String exitStreetName;
 
     public String getRef() {
         return ref;
@@ -16,19 +15,11 @@ public class ExitInfo {
         this.ref = ref;
     }
 
-    public String getDestinationRef() {
-        return destinationRef;
+    public String getExitStreetName() {
+        return exitStreetName;
     }
 
-    public void setDestinationRef(String destinationRef) {
-        this.destinationRef = destinationRef;
-    }
-
-    public String getDestinationName() {
-        return destinationName;
-    }
-
-    public void setDestinationName(String destinationName) {
-        this.destinationName = destinationName;
+    public void setExitStreetName(String exitStreetName) {
+        this.exitStreetName = exitStreetName;
     }
 }
