@@ -91,6 +91,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import static net.osmand.plus.wikivoyage.data.TravelObfHelper.ROUTE_ARTICLE;
+
 public abstract class MenuController extends BaseMenuController implements CollapseExpandListener {
 
 	public static class MenuState {
@@ -186,7 +188,9 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		MenuController menuController = null;
 		if (object != null) {
 			if (object instanceof Amenity) {
-				menuController = new AmenityMenuController(mapActivity, pointDescription, (Amenity) object);
+				if (((Amenity) object).getSubType().equals(ROUTE_ARTICLE)) {
+					menuController = new AmenityMenuController(mapActivity, pointDescription, (Amenity) object);
+				}
 			} else if (object instanceof FavouritePoint) {
 				if (pointDescription.isParking()
 						|| (FavouritePoint.SpecialPointType.PARKING.equals(((FavouritePoint) object).getSpecialPointType()))) {
