@@ -60,7 +60,7 @@ public interface TravelHelper {
 	ArrayList<String> getArticleLangs(@NonNull TravelArticleIdentifier articleId);
 
 	@Nullable
-	TravelGpx searchGpx(LatLon location, String fileName, String ref, @Nullable GpxReadCallback callback);
+	TravelGpx searchGpx(LatLon location, String fileName, String ref);
 
 	void readGpxFile(@NonNull TravelArticle article, @Nullable GpxReadCallback callback);
 

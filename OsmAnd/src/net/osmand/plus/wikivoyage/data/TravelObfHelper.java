@@ -71,6 +71,7 @@ public class TravelObfHelper implements TravelHelper {
 	private static final String WORLD_WIKIVOYAGE_FILE_NAME = "World_wikivoyage.travel.obf";
 	public static final String ROUTE_ARTICLE = "route_article";
 	public static final String ROUTE_TRACK = "route_track";
+	public static final String ROUTE_ARTICLE_POINT = "route_article_point";
 	public static final String ROUTE_RADIUS = "route_radius";
 	public static final int ARTICLE_SEARCH_RADIUS = 50 * 1000;
 	public static final int SAVED_ARTICLE_SEARCH_RADIUS = 30 * 1000;
@@ -171,7 +172,7 @@ public class TravelObfHelper implements TravelHelper {
 	}
 
 	@Nullable
-	public synchronized TravelGpx searchGpx(LatLon location, String routeID, String ref, @Nullable GpxReadCallback callback) {
+	public synchronized TravelGpx searchGpx(LatLon location, String routeID, String ref) {
 		final List<Pair<File, Amenity>> foundAmenities = new ArrayList<>();
 		int searchRadius = ARTICLE_SEARCH_RADIUS;
 		TravelGpx travelGpx = null;

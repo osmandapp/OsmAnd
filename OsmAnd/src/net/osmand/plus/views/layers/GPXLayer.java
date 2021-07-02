@@ -1200,9 +1200,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		if (object instanceof Pair && ((Pair<?, ?>) object).first instanceof TravelGpx
 				&& ((Pair<?, ?>) object).second instanceof SelectedGpxPoint) {
 			Pair<TravelGpx, SelectedGpxPoint> pair = (Pair) object;
-			String gpxFileName = pair.first.getRouteId() + IndexConstants.GPX_FILE_EXT;
 			LatLon latLon = new LatLon(pair.second.getSelectedPoint().lat, pair.second.getSelectedPoint().lon);
-			app.getTravelHelper().readGpxFile(pair.first, gpxReadListener(mapActivity, gpxFileName, latLon));
+			app.getTravelHelper().readGpxFile(pair.first, gpxReadListener(mapActivity, pair.first.getRouteId(), latLon));
 			return true;
 		} else if (object instanceof SelectedGpxPoint) {
 			SelectedGpxPoint selectedGpxPoint = (SelectedGpxPoint) object;
