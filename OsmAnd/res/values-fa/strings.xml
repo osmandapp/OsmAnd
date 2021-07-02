@@ -2584,7 +2584,7 @@
     <string name="shared_string_more_without_dots">بیشتر</string>
     <string name="looking_for_tracks_with_waypoints">در حال جست‌وجوی ردهای دارای راه‌نشان</string>
     <string name="empty_state_osm_edits">مکان‌های اوپن‌استریت‌مپ را ایجاد یا ویرایش کنید</string>
-    <string name="empty_state_osm_edits_descr">‏POIها را اضافه یا ویرایش کنید، یادداشت‌های OSMای اضافه کنید یا روی آن‌ها نظر بدهید و پرونده‌های GPX ضبط‌شده را آپلود کنید.</string>
+    <string name="empty_state_osm_edits_descr">‏POIها را اضافه یا ویرایش کنید، یادداشت‌های اوپن‌استریت‌مپ‌ای اضافه کنید یا روی آن‌ها نظر بدهید و پرونده‌های GPX ضبط‌شده را آپلود کنید.</string>
     <string name="shared_string_deleted">حذف‌شده(ها)</string>
     <string name="shared_string_edited">ویرایش شد</string>
     <string name="shared_string_added">افزوده شد</string>
