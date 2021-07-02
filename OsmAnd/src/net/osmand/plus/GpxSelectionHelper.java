@@ -394,6 +394,7 @@ public class GpxSelectionHelper {
 		if (group.track == null) {
 			return;
 		}
+
 		List<GpxDisplayItem> list = group.getModifiableList();
 		String timeSpanClr = Algorithms.colorToString(ContextCompat.getColor(app, R.color.gpx_time_span_color));
 		String speedClr = Algorithms.colorToString(ContextCompat.getColor(app, R.color.gpx_speed));
@@ -401,6 +402,8 @@ public class GpxSelectionHelper {
 		String descClr = Algorithms.colorToString(ContextCompat.getColor(app, R.color.gpx_altitude_desc));
 		String distanceClr = Algorithms.colorToString(ContextCompat.getColor(app, R.color.gpx_distance_color));
 		final float eleThreshold = 3;
+		int segmentCount = 0;
+
 		for (TrkSegment r : group.track.segments) {
 			if (r.points.size() == 0) {
 				continue;
@@ -427,12 +430,14 @@ public class GpxSelectionHelper {
 					item.splitName += " (" + formatSecondarySplitName(analysis.secondaryMetricEnd, group, app) + ") ";
 				}
 
+				if (!group.track.generalTrack && group.track.segments.size() > 1) {
+					String title = split || Algorithms.isBlank(r.name) ? String.valueOf(segmentCount + 1) : r.name;
+					item.title = formatTitle(app, title);
+				}
+
 				item.description = GpxUiHelper.getDescription(app, analysis, true);
 				item.analysis = analysis;
 				String name = "";
-//				if(group.track.segments.size() > 1) {
-//					name += t++ + ". ";
-//				}
 				if (!group.isSplitDistance()) {
 					name += GpxUiHelper.getColorValue(distanceClr, OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
 				}
@@ -475,6 +480,7 @@ public class GpxSelectionHelper {
 				item.locationStart = analysis.locationStart;
 				item.locationEnd = analysis.locationEnd;
 				list.add(item);
+				segmentCount++;
 			}
 		}
 	}
@@ -485,6 +491,11 @@ public class GpxSelectionHelper {
 		} else {
 			return OsmAndFormatter.getFormattedDistance((float) metricEnd, app);
 		}
+	}
+
+	private static String formatTitle(OsmandApplication app, String segmentName) {
+		return app.getString(R.string.ltr_or_rtl_combine_via_colon,
+				app.getString(R.string.gpx_selection_segment_title), segmentName);
 	}
 
 	private static String formatSplitName(double metricEnd, GpxDisplayGroup group, OsmandApplication app) {
@@ -1118,6 +1129,7 @@ public class GpxSelectionHelper {
 		public WptPt locationEnd;
 		public double splitMetric = -1;
 		public double secondarySplitMetric = -1;
+		public String title;
 		public String splitName;
 		public String name;
 		public String description;

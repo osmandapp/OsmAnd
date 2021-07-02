@@ -417,6 +417,8 @@ public class GPXUtilities {
 	}
 
 	public static class TrkSegment extends GPXExtensions {
+
+		public String name = null;
 		public boolean generalSegment = false;
 		public List<WptPt> points = new ArrayList<>();
 
@@ -1962,6 +1964,7 @@ public class GPXUtilities {
 				for (TrkSegment segment : track.segments) {
 					serializer.startTag(null, "trkseg"); //$NON-NLS-1$
 					for (WptPt p : segment.points) {
+						writeNotNullText(serializer, "name", segment.name);
 						serializer.startTag(null, "trkpt"); //$NON-NLS-1$
 						writeWpt(format, serializer, p, progress);
 						serializer.endTag(null, "trkpt"); //$NON-NLS-1$
@@ -2433,7 +2436,9 @@ public class GPXUtilities {
 								parserState.push(wptPt);
 							}
 						} else if (parse instanceof TrkSegment) {
-							if (tag.equals("trkpt") || tag.equals("rpt")) {
+							if (tag.equals("name")) {
+								((TrkSegment) parse).name = readText(parser, "name");
+							} else if (tag.equals("trkpt") || tag.equals("rpt")) {
 								WptPt wptPt = parseWptAttributes(parser);
 								((TrkSegment) parse).points.add(wptPt);
 								parserState.push(wptPt);

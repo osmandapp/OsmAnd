@@ -17,6 +17,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.helpers.TrackSelectSegmentAdapter.TrackViewHolder;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.List;
@@ -53,7 +54,9 @@ public class TrackSelectSegmentAdapter extends RecyclerView.Adapter<TrackViewHol
 
 		TrkSegment segment = segments.get(position);
 
-		String segmentTitle = app.getResources().getString(R.string.segments_count, position + 1);
+		String segmentTitle = Algorithms.isBlank(segment.name)
+				? app.getResources().getString(R.string.segments_count, position + 1)
+				: segment.name;
 		holder.name.setText(segmentTitle);
 
 		double distance = getDistance(segment);
