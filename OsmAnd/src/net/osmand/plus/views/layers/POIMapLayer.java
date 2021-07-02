@@ -58,7 +58,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import static net.osmand.AndroidUtils.dpToPx;
-import static net.osmand.plus.wikivoyage.data.TravelObfHelper.ROUTE_ARTICLE_POINT;
+import static net.osmand.plus.wikivoyage.data.TravelObfHelper.ROUTE_ARTICLE;
 import static net.osmand.plus.wikivoyage.data.TravelObfHelper.ROUTE_TRACK;
 
 public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider,
@@ -416,9 +416,10 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 				}
 				travelHelper.readGpxFile(travelGpx, gpxReadListener(mapActivity, amenity.getRouteId(), amenity.getLocation()));
 				return true;
-			} else if (amenity.getSubType().equals(ROUTE_ARTICLE_POINT)) {
-				String lang = amenity.getTagSuffix(Amenity.LANG_YES + ":");
-				String name = amenity.getTagContent(Amenity.ROUTE_NAME, lang);
+			} else if (amenity.getSubType().equals(ROUTE_ARTICLE)) {
+				String lang = app.getLanguage();
+				lang = amenity.getContentLanguage(Amenity.DESCRIPTION, lang, "en");
+				String name = amenity.getName(lang);
 				TravelArticle article = travelHelper.getArticleByTitle(name, lang, true, null);
 				if (article == null) {
 					return true;
