@@ -1113,7 +1113,7 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 	private void addMyPlacesTabToDrawer(ContextMenuAdapter adapter, @StringRes int titleRes,
-										@DrawableRes int iconRes, String drawerId) {
+	                                    @DrawableRes int iconRes, String drawerId) {
 		ContextMenuItem item = new ItemBuilder().setTitleId(titleRes, mapActivity)
 				.setId(drawerId)
 				.setIcon(iconRes)

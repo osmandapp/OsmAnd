@@ -46,16 +46,16 @@ public abstract class SideMenuBottomSheetDialogFragment extends MenuBottomSheetD
 
 	@Override
 	protected Drawable getLandscapeSidesBg(@NonNull Context ctx) {
-		int backgroundRes = AndroidUtils.isRTL() ?
-				R.drawable.bg_contextmenu_shadow_left_light : R.drawable.bg_contextmenu_shadow_right_light;
-		return createBackgroundDrawable(ctx, backgroundRes);
+		int backgroundResAttr = AndroidUtils.isLayoutRtl(ctx) ?
+				 R.attr.right_menu_view_bg : R.attr.left_menu_view_bg;
+		return createBackgroundDrawable(ctx, AndroidUtils.resolveAttribute(ctx, backgroundResAttr));
 	}
 
 	@Override
 	protected Drawable getLandscapeTopsidesBg(@NonNull Context ctx) {
-		int backgroundRes = AndroidUtils.isRTL() ?
-				R.drawable.bg_contextmenu_shadow_left_light : R.drawable.bg_contextmenu_shadow_right_light;
-		return createBackgroundDrawable(ctx, backgroundRes);
+		int backgroundResAttr = AndroidUtils.isLayoutRtl(ctx) ?
+				R.attr.right_menu_view_bg : R.attr.left_menu_view_bg;
+		return createBackgroundDrawable(ctx, AndroidUtils.resolveAttribute(ctx, backgroundResAttr));
 	}
 
 	@Override
