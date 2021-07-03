@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public class ColoringTypeAvailabilityCache {
 
@@ -18,7 +19,8 @@ public class ColoringTypeAvailabilityCache {
 		this.app = app;
 	}
 
-	public boolean isColoringAvailable(@NonNull RouteColoringType routeColoringType) {
+	public boolean isColoringAvailable(@NonNull RouteColoringType routeColoringType,
+	                                   @Nullable String routeInfoAttribute) {
 		RouteCalculationResult currRoute = app.getRoutingHelper().getRoute();
 		if (!currRoute.equals(prevRoute)) {
 			cache.clear();
@@ -26,7 +28,7 @@ public class ColoringTypeAvailabilityCache {
 		}
 		Boolean available = cache.get(routeColoringType);
 		if (available == null) {
-			available = routeColoringType.isAvailableForDrawing(app);
+			available = routeColoringType.isAvailableForDrawing(app, routeInfoAttribute);
 			cache.put(routeColoringType, available);
 		}
 		return available;

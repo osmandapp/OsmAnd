@@ -24,27 +24,20 @@ import androidx.annotation.StringRes;
 
 public enum RouteColoringType {
 
-	DEFAULT("default", null, R.string.map_widget_renderer, R.drawable.ic_action_map_style),
-	CUSTOM_COLOR("custom_color", null, R.string.shared_string_custom, R.drawable.ic_action_settings),
-	ALTITUDE("altitude", null, R.string.altitude, R.drawable.ic_action_hillshade_dark),
-	SLOPE("slope", null, R.string.shared_string_slope, R.drawable.ic_action_altitude_ascent),
-	ROAD_TYPE("road_type", "routeInfo_roadClass", R.string.routeInfo_roadClass_name, R.drawable.ic_action_hillshade_dark),
-	SURFACE("surface", "routeInfo_surface", R.string.routeInfo_surface_name, R.drawable.ic_action_hillshade_dark),
-	SMOOTHNESS("smoothness", "routeInfo_smoothness", R.string.routeInfo_smoothness_name, R.drawable.ic_action_hillshade_dark),
-	STEEPNESS("steepness", "routeInfo_steepness", R.string.routeInfo_steepness_name, R.drawable.ic_action_hillshade_dark),
-	WINTER_ICE_ROAD("winter_ice_road", "routeInfo_winter_ice_road", R.string.routeInfo_winter_ice_road_name, R.drawable.ic_action_hillshade_dark),
-	TRACK_TYPE("track_type", "routeInfo_tracktype", R.string.routeInfo_tracktype_name, R.drawable.ic_action_hillshade_dark);
+	DEFAULT("default", R.string.map_widget_renderer, R.drawable.ic_action_map_style),
+	CUSTOM_COLOR("custom_color", R.string.shared_string_custom, R.drawable.ic_action_settings),
+	ALTITUDE("altitude", R.string.altitude, R.drawable.ic_action_hillshade_dark),
+	SLOPE("slope", R.string.shared_string_slope, R.drawable.ic_action_altitude_ascent),
+	ATTRIBUTE("attribute", R.string.attribute, R.drawable.ic_action_hillshade_dark);
 
 	private final String name;
-	private final String attrName;
 	@StringRes
 	private final int titleId;
 	@DrawableRes
 	private final int iconId;
 
-	RouteColoringType(String name, String attrName, int titleId, int iconId) {
+	RouteColoringType(String name, int titleId, int iconId) {
 		this.name = name;
-		this.attrName = attrName;
 		this.titleId = titleId;
 		this.iconId = iconId;
 	}
@@ -52,11 +45,6 @@ public enum RouteColoringType {
 	@NonNull
 	public String getName() {
 		return name;
-	}
-
-	@Nullable
-	public String getAttrName() {
-		return attrName;
 	}
 
 	@StringRes
@@ -91,11 +79,10 @@ public enum RouteColoringType {
 	}
 
 	public boolean isRouteInfoAttribute() {
-		return this == ROAD_TYPE || this == SURFACE || this == SMOOTHNESS || this == STEEPNESS
-				|| this == WINTER_ICE_ROAD || this == TRACK_TYPE;
+		return this == ATTRIBUTE;
 	}
 
-	public boolean isAvailableForDrawing(@NonNull OsmandApplication app) {
+	public boolean isAvailableForDrawing(@NonNull OsmandApplication app, @Nullable String attributeName) {
 		RouteCalculationResult route = app.getRoutingHelper().getRoute();
 		if (isGradient()) {
 			List<Location> locations = route.getImmutableAllLocations();
@@ -108,32 +95,37 @@ public enum RouteColoringType {
 		}
 
 		if (isRouteInfoAttribute()) {
-			List<RouteSegmentResult> routeSegments = route.getOriginalRoute();
-			if (Algorithms.isEmpty(routeSegments)) {
-				return false;
-			}
-
-			RenderingRulesStorage currentRenderer = app.getRendererRegistry().getCurrentSelectedRenderer();
-			RenderingRulesStorage defaultRenderer = app.getRendererRegistry().defaultRender();
-			List<String> attrs = RouteStatisticsHelper.getRouteStatisticAttrsNames(currentRenderer, defaultRenderer);
-			if (Algorithms.isEmpty(attrs) || !attrs.contains(attrName)) {
-				return false;
-			}
-
-			boolean night = app.getDaynightHelper().isNightModeForMapControls();
-			MapRenderRepositories maps = app.getResourceManager().getRenderer();
-			RenderingRuleSearchRequest currentSearchRequest =
-					maps.getSearchRequestWithAppliedCustomRules(currentRenderer, night);
-			RenderingRuleSearchRequest defaultSearchRequest =
-					maps.getSearchRequestWithAppliedCustomRules(defaultRenderer, night);
-			List<RouteStatisticsHelper.RouteStatistics> routeStatisticsList =
-					RouteStatisticsHelper.calculateRouteStatistic(routeSegments,
-							Collections.singletonList(attrName), currentRenderer,
-							defaultRenderer, currentSearchRequest, defaultSearchRequest);
-			return !Algorithms.isEmpty(routeStatisticsList);
+			return isAttributeAvailableForDrawing(app, attributeName);
 		}
 
 		return true;
+	}
+
+	private boolean isAttributeAvailableForDrawing(@NonNull OsmandApplication app, @Nullable String attributeName) {
+		List<RouteSegmentResult> routeSegments = app.getRoutingHelper().getRoute().getOriginalRoute();
+		if (Algorithms.isEmpty(routeSegments) || Algorithms.isEmpty(attributeName)) {
+			return false;
+		}
+
+		RenderingRulesStorage currentRenderer = app.getRendererRegistry().getCurrentSelectedRenderer();
+		RenderingRulesStorage defaultRenderer = app.getRendererRegistry().defaultRender();
+		List<String> rendererAttrs = RouteStatisticsHelper.getRouteStatisticAttrsNames(currentRenderer, defaultRenderer);
+		if (Algorithms.isEmpty(rendererAttrs) || !rendererAttrs.contains(attributeName)) {
+			return false;
+		}
+
+		boolean night = app.getDaynightHelper().isNightModeForMapControls();
+		MapRenderRepositories maps = app.getResourceManager().getRenderer();
+		RenderingRuleSearchRequest currentSearchRequest =
+				maps.getSearchRequestWithAppliedCustomRules(currentRenderer, night);
+		RenderingRuleSearchRequest defaultSearchRequest =
+				maps.getSearchRequestWithAppliedCustomRules(defaultRenderer, night);
+
+		List<RouteStatisticsHelper.RouteStatistics> routeStatisticsList =
+				RouteStatisticsHelper.calculateRouteStatistic(routeSegments,
+						Collections.singletonList(attributeName), currentRenderer,
+						defaultRenderer, currentSearchRequest, defaultSearchRequest);
+		return !Algorithms.isEmpty(routeStatisticsList);
 	}
 
 	@Nullable
