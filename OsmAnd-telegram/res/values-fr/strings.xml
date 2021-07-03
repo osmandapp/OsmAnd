@@ -100,7 +100,7 @@
     <string name="app_name_short">Tracker OsmAnd</string>
     <string name="privacy_policy_use_telegram">Telegram (l\'application de messagerie) est utilisée pour se connecter et communiquer avec d\'autres personnes.</string>
     <string name="privacy_policy_telegram_client">OsmAnd tracker est l\'un des clients qui utilise la plateforme ouverte Telegram. Vos contacts peuvent utiliser n\'importe quel autre client Telegram.</string>
-    <string name="privacy_policy_agree">En appuyant sur « Continuer » vous acceptez les conditions des politiques de confidentialité de Telegram et d\'OsmAnd.</string>
+    <string name="privacy_policy_agree">En appuyant sur « Continuer », vous acceptez les conditions des politiques de confidentialité de Telegram et d\'OsmAnd.</string>
     <string name="telegram_privacy_policy">Politique de confidentialité de Telegram</string>
     <string name="osmand_privacy_policy">Politique de confidentialité d\'OsmAnd</string>
     <string name="how_it_works">Comment cela fonctionne</string>

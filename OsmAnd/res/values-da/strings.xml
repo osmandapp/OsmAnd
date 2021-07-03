@@ -29,9 +29,6 @@
     <string name="recording_default_name">Optager</string>
     <string name="map_widget_av_notes">lyd-/videonoter</string>
     <string name="osmand_srtm_short_description_80_chars">Udvidelse for offline højdekurver</string>
-    <string name="osmand_srtm_long_description_1000_chars">Udvidelsen giver både en højdekurver overlejring og reliefskygger, der vises ovenpå OsmAnds standard kort. Funktionaliteten er meget værdsat af sportsfolk, vandrere, og enhver interesseret i en relief struktur af landskabet.
-\n
-\nDe globale data (mellem 70° nord og 70° syd) er baseret på målinger af SRTM (Shuttle Radar Topografi Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), et billeddannende instrument ombord på Terra satellitten, flagskibet i NASAs Earth Observering system. ASTER er et samarbejde mellem NASA, Japans Ministry of Economy, Trade and Industry (METI), og Japan Space Systems (J-spacesystems).</string>
     <string name="map_widget_distancemeasurement">Afstandsmåling</string>
     <string name="audionotes_location_not_defined">Tryk på \'Brug placering...\' for at tilføje en note til placeringen.</string>
     <string name="map_widget_audionotes">Lydnoter</string>
@@ -3930,4 +3927,15 @@
     <string name="shared_string_subtype">Undertype</string>
     <string name="shared_string_vehicle">Køretøj</string>
     <string name="shared_string_api_key">API-nøgle</string>
+    <string name="backup_data">Sikkerhedskopier data</string>
+    <string name="backup_restore_data_descr">Gendan data på enheden med online sikkerhedskopier.</string>
+    <string name="select_backup_data_descr">Vælg data og mapper til sikkerhedskopiering.</string>
+    <string name="backup_restore_data">Gendan data</string>
+    <string name="restore_from_osmand_cloud">Gendan fra OsmAnd Cloud</string>
+    <string name="choose_what_to_restore">Vælg hvad der skal gendannes.</string>
+    <string name="restore_selected_data">Gendanner valgte data</string>
+    <string name="receiving_data_from_server">Henter data fra serveren</string>
+    <string name="restore_complete">Gendannelse fuldført</string>
+    <string name="grey_color_slope">Grå farve anvendes, når hældningen er udefineret.</string>
+    <string name="backup_version_history">Versionshistorik</string>
 </resources>

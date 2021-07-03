@@ -92,6 +92,8 @@
 	<dimen name="dialog_content_bottom_margin">16dp</dimen>
 	<dimen name="local_size_height">34dp</dimen>
 	<dimen name="standard_icon_size">24dp</dimen>
+	<dimen name="big_icon_size">36dp</dimen>
+	<dimen name="icon_background_size">56dp</dimen>
 	<dimen name="poi_icon_size">16dp</dimen>
 	<dimen name="gpx_small_icon_margin">3dp</dimen>
 	<dimen name="gpx_small_text_margin">14dp</dimen>
@@ -207,6 +209,8 @@
     <dimen name="default_desc_text_size">14sp</dimen>
     <dimen name="default_sub_text_size">12sp</dimen>
 	<dimen name="default_sub_text_size_small">10sp</dimen>
+	<dimen name="default_header_text_size">21sp</dimen>
+	<dimen name="big_header_text_size">30sp</dimen>
 	<dimen name="welcome_header_text_size">23sp</dimen>
 	<dimen name="text_button_text_size">15sp</dimen>
 	<dimen name="travel_card_primary_text_size">15sp</dimen>

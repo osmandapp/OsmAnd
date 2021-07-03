@@ -42,7 +42,7 @@ public class WikiImageHelper {
 		if (wikidataId.startsWith(WIKIDATA_PREFIX)) {
 			String url = WIKIDATA_API_ENDPOINT + WIKIDATA_ACTION + wikidataId + FORMAT_JSON;
 			WikidataResponse response = sendWikipediaApiRequest(url, WikidataResponse.class);
-			if (response != null) {
+			if (response != null && response.claims != null && response.claims.p18 != null) {
 				for (P18 p18 : response.claims.p18) {
 					String imageFileName = p18.mainsnak.datavalue.value;
 					if (imageFileName != null) {
@@ -58,7 +58,7 @@ public class WikiImageHelper {
 	public static void addWikimediaImageCards(@NonNull MapActivity mapActivity, @NonNull String wikiMediaTagContent,
 	                                          @NonNull List<ImageCard> imageCards) {
 		if (wikiMediaTagContent.startsWith(WIKIMEDIA_FILE)) {
-			String fileName = wikiMediaTagContent.substring(WIKIMEDIA_FILE.length());
+			String fileName = wikiMediaTagContent.replace(WIKIMEDIA_FILE, "");
 			addImageCard(mapActivity, imageCards, fileName);
 		} else if (wikiMediaTagContent.startsWith(WIKIMEDIA_CATEGORY)) {
 			String url = WIKIMEDIA_API_ENDPOINT + WIKIMEDIA_ACTION + wikiMediaTagContent + CM_LIMIT + FORMAT_JSON;
@@ -122,7 +122,7 @@ public class WikiImageHelper {
 					imageFileName + "/" + THUMB_SIZE + "px-" +
 					imageFileName;
 
-			return new WikiImage(imageName, imageStubUrl, imageHiResUrl);
+			return new WikiImage(imageFileName, imageName, imageStubUrl, imageHiResUrl);
 
 		} catch (UnsupportedEncodingException e) {
 			LOG.error(e.getLocalizedMessage());

@@ -160,7 +160,7 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 
 		RecyclerView statBlocks = itemView.findViewById(R.id.block_statistics);
 		blockStatisticsBuilder = new GpxBlockStatisticsBuilder(app, selectedGpxFile, nightMode);
-		blockStatisticsBuilder.setBlocksView(statBlocks);
+		blockStatisticsBuilder.setBlocksView(statBlocks, false);
 		blockStatisticsBuilder.setBlocksClickable(false);
 		blockStatisticsBuilder.setTabItem(GPX_TAB_ITEM_GENERAL);
 		blockStatisticsBuilder.initStatBlocks(null,

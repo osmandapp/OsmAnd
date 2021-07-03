@@ -856,7 +856,6 @@
     <string name="recording_default_name">მიმდინარეობს ჩაწერა</string>
     <string name="map_widget_av_notes">ხმოვანი/ვიდეო შენიშვნები</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd-ის დამატება გათიშული კონტურული ხაზებისათვის</string>
-    <string name="osmand_srtm_long_description_1000_chars">ეს დამატება უზრუნველყოფს კონტურულ ხაზებს, რომლებიც შეიძლება ნაჩვენები იქნას OsmAnd-ის გათიშულ რუკებზე. გლობალური მონაცემები (70 გრადუს ჩრდილოეთსა და 70 გრადუს სამხრეთს შორის) ემყარება SRTM (Shuttle Radar Topography Mission) და ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer)-ის მონაცემებს, რომელიც წარმოადგენს ფოტოკამერას Terra-ზე, NASA-ს წამყვან თანამგზავრზე, რომელიც ემსახურება დედამიწის დათვალიერების სისტემას. ASTER წარმოადგენს ერთობლივ პროექტს NASA-ს, იაპონიის ეკონომიკის სამინისტროს, ვაჭრობისა და ინდუსტრიის (METI), და იაპონიის კოსმოსურ სისტემებს (J-spacesystems) შორის.</string>
     <string name="map_widget_distancemeasurement">მანძილის გაზომვა</string>
     <string name="audionotes_location_not_defined">გამოიყენეთ \"მდებარეობის გამოყენება…\" შენიშვნის სასურველი მდებარეობისათვის მისანიჭებლად.</string>
     <string name="map_widget_audionotes">ხმოვანი შენიშვნები</string>

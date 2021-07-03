@@ -855,9 +855,6 @@
     <string name="audionotes_plugin_name">Note audio/video</string>
     <string name="audionotes_location_not_defined">Tocca \'Utilizza posizione...\' per aggiungere una posizione alla nota.</string>
     <string name="osmand_srtm_short_description_80_chars">Plugin OsmAnd per le curve di livello offline</string>
-    <string name="osmand_srtm_long_description_1000_chars">Questo plugin fornisce sia le curve di livello che lo strato ombreggiamento dei rilievi che possono essere visualizzate nelle mappe standard di OsmAnd. Questa funzionalità sarà molto apprezzata dagli atleti, dagli escursionisti, e tutti coloro che sono interessati all\'orografia e al paesaggio. 
-\n 
-\nI dati globali (fra i 70° nord e 70° sud) sono basati su misurazioni del SRTM (Shuttle Radar Topography Mission) e ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), lo strumento misuratore a bordo Terra, il satellite della NASA del sistema di osservazione della terra. ASTER è uno sforzo di cooperazione tra NASA, il Ministero dell\'Economia del Giappone, Commercio e Industria (METI) e sistema spaziale giapponese (J-spacesystems).</string>
     <string name="map_widget_distancemeasurement">Misurazione della distanza</string>
     <string name="map_widget_audionotes">Note audio</string>
     <string name="av_def_action_video">Registra video</string>
@@ -3562,9 +3559,9 @@
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="osm_live_payment_subscription_management">Il tuo account Google Play viene addebitato al momento della conferma dell\'acquisto.
 \n
-\n La sottoscrizione si rinnova automaticamente finché non viene cancellata prima del rinnovo. Il tuo account verrà addebitato per il rinnovo periodico (mensile, trimestrale, annuale) solo alla data di rinnovo.
+\nLa sottoscrizione si rinnova automaticamente finché non viene cancellata prima del rinnovo. Il tuo account verrà addebitato per il rinnovo periodico (mensile, trimestrale, annuale) solo alla data di rinnovo.
 \n
-\n Puoi gestire e cancellare la tua sottoscrizione dalle impostazioni del tuo account Google Play.</string>
+\nPuoi gestire e cancellare la tua sottoscrizione dalle impostazioni del tuo account Google Play.</string>
     <string name="search_poi_types_descr">Combina PDI di più categorie. Tappa il pulsante per selezionarle tutte, oppure sul lato sinistro per una selezione puntuale.</string>
     <string name="lang_gu">Gujarati</string>
     <string name="lang_ba">Baschiro</string>

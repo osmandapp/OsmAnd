@@ -58,7 +58,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 	public static String TYPE_MAPILLARY_CONTRIBUTE = "mapillary-contribute";
 
 	public static final String ID = "osmand.mapillary";
-	private static final String MAPILLARY_PACKAGE_ID = "app.mapillary";
+	private static final String MAPILLARY_PACKAGE_ID = "com.mapillary.app";
 
 	private static final Log LOG = PlatformUtil.getLog(OpenPlaceReviewsPlugin.class);
 

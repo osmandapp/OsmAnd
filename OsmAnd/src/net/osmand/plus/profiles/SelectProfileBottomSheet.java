@@ -225,12 +225,7 @@ public abstract class SelectProfileBottomSheet extends BasePreferenceBottomSheet
 	}
 
 	protected OnClickListener getItemClickListener(final ProfileDataObject profile) {
-		return new OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				onItemSelected(profile);
-			}
-		};
+		return view -> onItemSelected(profile);
 	}
 
 	protected void onItemSelected(ProfileDataObject profile) {

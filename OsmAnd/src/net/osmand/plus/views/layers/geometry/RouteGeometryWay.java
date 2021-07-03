@@ -185,7 +185,7 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 				double percent = MapUtils.getProjectionCoeff(currLat, currLon, prevLat, prevLon, nextLat, nextLon);
 				int prevColor = locationProvider.getColor(startLocationIndex - 1);
 				int nextColor = locationProvider.getColor(startLocationIndex);
-				gradientWayStyle.currColor = RouteColorize.getGradientColor(prevColor, nextColor, percent);
+				gradientWayStyle.currColor = RouteColorize.getIntermediateColor(prevColor, nextColor, percent);
 				gradientWayStyle.nextColor = nextColor;
 			}
 		} else if (routeColoringType.isRouteInfoAttribute() && style instanceof GeometrySolidWayStyle) {

@@ -258,10 +258,10 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 	}
 
 	@Override
-	public void newDownloadIndexes() {
+	public void onUpdatedIndexesList() {
 		ExploreTabFragment exploreTabFragment = getExploreTabFragment();
 		if (exploreTabFragment != null) {
-			exploreTabFragment.newDownloadIndexes();
+			exploreTabFragment.onUpdatedIndexesList();
 		}
 	}
 

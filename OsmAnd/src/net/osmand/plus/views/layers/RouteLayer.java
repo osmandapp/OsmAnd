@@ -1,7 +1,5 @@
 package net.osmand.plus.views.layers;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
@@ -11,8 +9,6 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
-import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 
 import net.osmand.AndroidUtils;
@@ -20,41 +16,26 @@ import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.data.QuadPoint;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportStop;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.profiles.LocationIcon;
-import net.osmand.plus.render.OsmandRenderer;
-import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.plus.routing.ColoringTypeAvailabilityCache;
-import net.osmand.plus.routing.PreviewRouteLineInfo;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteColoringType;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
-import net.osmand.plus.settings.backend.CommonPreference;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.views.OsmandMapLayer;
-import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
-import net.osmand.plus.views.layers.geometry.GeometryWayStyle;
 import net.osmand.plus.views.layers.geometry.PublicTransportGeometryWay;
 import net.osmand.plus.views.layers.geometry.PublicTransportGeometryWayContext;
 import net.osmand.plus.views.layers.geometry.RouteGeometryWay;
-import net.osmand.plus.views.layers.geometry.RouteGeometryWay.GeometryGradientWayStyle;
 import net.osmand.plus.views.layers.geometry.RouteGeometryWayContext;
-import net.osmand.render.RenderingRuleProperty;
-import net.osmand.render.RenderingRuleSearchRequest;
-import net.osmand.render.RenderingRulesStorage;
-import net.osmand.router.RouteColorize;
 import net.osmand.router.TransportRouteResult;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -62,68 +43,39 @@ import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.graphics.drawable.DrawableCompat;
 
-import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
-
-public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
+public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 
 	private static final Log log = PlatformUtil.getLog(RouteLayer.class);
-
-	private static final int DEFAULT_WIDTH_MULTIPLIER = 7;
-
-	private OsmandMapTileView view;
 
 	private final RoutingHelper helper;
 	private final TransportRoutingHelper transportHelper;
 	// keep array lists created
-	private List<Location> actionPoints = new ArrayList<Location>();
+	private final List<Location> actionPoints = new ArrayList<>();
 
-	// cache
-	private Bitmap actionArrow;
-
-	private Paint paintIconAction;
-	private Paint paintIconActionPreview;
 	private Paint paintGridOuterCircle;
 	private Paint paintGridCircle;
 
 	private LayerDrawable selectedPoint;
 	private TrackChartPoints trackChartPoints;
-	private PreviewRouteLineInfo previewRouteLineInfo;
 
-	private RenderingLineAttributes attrs;
-	private RenderingLineAttributes attrsPreview;
 	private RenderingLineAttributes attrsPT;
 	private RenderingLineAttributes attrsW;
-	private Map<String, Float> cachedRouteLineWidth = new HashMap<>();
-	private boolean nightMode;
 
 	private RouteGeometryWayContext routeWayContext;
-	private RouteGeometryWayContext previewWayContext;
 	private PublicTransportGeometryWayContext publicTransportWayContext;
 	private RouteGeometryWay routeGeometry;
-	private RouteGeometryWay previewLineGeometry;
 	private PublicTransportGeometryWay publicTransportRouteGeometry;
 
-	private LayerDrawable projectionIcon;
-	private LayerDrawable previewIcon;
-
 	private final ColoringTypeAvailabilityCache coloringAvailabilityCache;
-	private RouteColoringType routeColoringType = RouteColoringType.DEFAULT;
-	private String routeInfoAttribute;
-	private int routeLineColor;
-	private Integer directionArrowsColor;
-	private int customTurnArrowColor = 0;
-	private Boolean attrsIsPaint_1 = null;
+
+	private LayerDrawable projectionIcon;
 
 	public RouteLayer(RoutingHelper helper) {
 		this.helper = helper;
@@ -139,29 +91,9 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 		this.trackChartPoints = trackChartPoints;
 	}
 
-	private void initUI() {
-		float density = view.getDensity();
-
-		actionArrow = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_action_arrow, null);
-
-		paintIconAction = new Paint();
-		paintIconAction.setFilterBitmap(true);
-		paintIconAction.setAntiAlias(true);
-		paintIconActionPreview = new Paint(paintIconAction);
-
-		attrs = new RenderingLineAttributes("route");
-		attrs.defaultWidth = (int) (12 * density);
-		attrs.defaultWidth3 = (int) (7 * density);
-		attrs.defaultColor = view.getResources().getColor(R.color.nav_track);
-		attrs.shadowPaint.setColor(0x80000000);
-		attrs.shadowPaint.setStrokeCap(Cap.ROUND);
-		attrs.paint3.setStrokeCap(Cap.BUTT);
-		attrs.paint3.setColor(Color.WHITE);
-		attrs.paint2.setStrokeCap(Cap.BUTT);
-		attrs.paint2.setColor(Color.BLACK);
-
-		attrsPreview = new RenderingLineAttributes("previewLine");
-		copyRenderingAttrs(attrs, attrsPreview);
+	@Override
+	protected void initAttrs(float density) {
+		super.initAttrs(density);
 
 		attrsPT = new RenderingLineAttributes("publicTransportLine");
 		attrsPT.defaultWidth = (int) (12 * density);
@@ -180,26 +112,28 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 		attrsW.paint3.setColor(Color.WHITE);
 		attrsW.paint2.setStrokeCap(Cap.BUTT);
 		attrsW.paint2.setColor(Color.BLACK);
+	}
 
+	@Override
+	protected void initGeometries(float density) {
 		routeWayContext = new RouteGeometryWayContext(view.getContext(), density);
 		routeWayContext.updatePaints(nightMode, attrs);
 		routeGeometry = new RouteGeometryWay(routeWayContext);
 
-		previewWayContext = new RouteGeometryWayContext(view.getContext(), density);
-		previewWayContext.updatePaints(nightMode, attrsPreview);
-		previewLineGeometry = new RouteGeometryWay(previewWayContext);
-
 		publicTransportWayContext = new PublicTransportGeometryWayContext(view.getContext(), density);
 		publicTransportWayContext.updatePaints(nightMode, attrs, attrsPT, attrsW);
 		publicTransportRouteGeometry = new PublicTransportGeometryWay(publicTransportWayContext);
+	}
 
-		selectedPoint = (LayerDrawable) AppCompatResources.getDrawable(view.getContext(), R.drawable.map_location_default);
+	protected void initPaints() {
+		super.initPaints();
 
 		paintGridCircle = new Paint();
 		paintGridCircle.setStyle(Paint.Style.FILL_AND_STROKE);
 		paintGridCircle.setAntiAlias(true);
 		paintGridCircle.setColor(attrs.defaultColor);
 		paintGridCircle.setAlpha(255);
+
 		paintGridOuterCircle = new Paint();
 		paintGridOuterCircle.setStyle(Paint.Style.FILL_AND_STROKE);
 		paintGridOuterCircle.setAntiAlias(true);
@@ -208,9 +142,9 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 	}
 
 	@Override
-	public void initLayer(OsmandMapTileView view) {
-		this.view = view;
-		initUI();
+	protected void initIcons() {
+		super.initIcons();
+		selectedPoint = (LayerDrawable) AppCompatResources.getDrawable(view.getContext(), R.drawable.map_location_default);
 	}
 
 	@Override
@@ -219,7 +153,9 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 				(helper.getFinalLocation() != null && helper.getRoute().isCalculated()) ||
 				isPlanRouteGraphsAvailable()) {
 
+			updateRouteColoringType();
 			updateAttrs(settings, tileBox);
+			updateRouteColors(nightMode);
 			
 			int w = tileBox.getPixWidth();
 			int h = tileBox.getPixHeight();
@@ -272,25 +208,8 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 		return false;
 	}
 
-	public boolean isPreviewRouteLineVisible() {
-		return previewRouteLineInfo != null;
-	}
-
-	public void setPreviewRouteLineInfo(PreviewRouteLineInfo previewInfo) {
-		this.previewRouteLineInfo = previewInfo;
-		if (previewInfo == null) {
-			previewIcon = null;
-		}
-	}
-
-	private MapActivity getMapActivity() {
-		if (view.getContext() instanceof MapActivity) {
-			return (MapActivity) view.getContext();
-		}
-		return null;
-	}
-
-	private void updateAttrs(DrawSettings settings, RotatedTileBox tileBox) {
+	@Override
+	protected void updateAttrs(DrawSettings settings, RotatedTileBox tileBox) {
 		boolean updatePaints = attrs.updatePaints(view.getApplication(), settings, tileBox);
 		attrs.isPaint3 = false;
 		attrs.isPaint2 = false;
@@ -303,18 +222,23 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 
 		nightMode = settings != null && settings.isNightMode();
 
-		if (updatePaints || attrsIsPaint_1 == null) {
-			attrsIsPaint_1 = attrs.isPaint_1;
-		}
+		updateIsPaint_1(updatePaints);
 
-		if (updateRouteColoringType() || updatePaints) {
-			attrs.isPaint_1 = routeColoringType.isDefault() && attrsIsPaint_1;
-			updateTurnArrowColor();
-			copyRenderingAttrs(attrs, attrsPreview);
+		if (updatePaints) {
 			routeWayContext.updatePaints(nightMode, attrs);
-			previewWayContext.updatePaints(nightMode, attrsPreview);
 			publicTransportWayContext.updatePaints(nightMode, attrs, attrsPT, attrsW);
 		}
+	}
+
+	@Override
+	protected void updateTurnArrowColor() {
+		if (routeColoringType.isGradient()
+				&& coloringAvailabilityCache.isColoringAvailable(routeColoringType, null)) {
+			customTurnArrowColor = Color.WHITE;
+		} else {
+			customTurnArrowColor = attrs.paint3.getColor();
+		}
+		paintIconAction.setColorFilter(new PorterDuffColorFilter(customTurnArrowColor, PorterDuff.Mode.MULTIPLY));
 	}
 
 	private void drawXAxisPoints(Canvas canvas, RotatedTileBox tileBox) {
@@ -345,130 +269,6 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 		}
 	}
 
-	@Override
-	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
-		if (previewRouteLineInfo != null) {
-			float angle = tileBox.getRotate();
-			QuadPoint c = tileBox.getCenterPixelPoint();
-
-			canvas.rotate(-angle, c.x, c.y);
-			drawRouteLinePreview(canvas, tileBox, settings, previewRouteLineInfo);
-			canvas.rotate(angle, c.x, c.y);
-		}
-	}
-
-	private void drawRouteLinePreview(Canvas canvas,
-	                                  RotatedTileBox tileBox,
-	                                  DrawSettings settings,
-	                                  PreviewRouteLineInfo previewInfo) {
-		Rect previewBounds = previewInfo.getLineBounds();
-		if (previewBounds == null) {
-			return;
-		}
-		float startX = previewBounds.left;
-		float startY = previewBounds.bottom;
-		float endX = previewBounds.right;
-		float endY = previewBounds.top;
-		float centerX = previewInfo.getCenterX();
-		float centerY = previewInfo.getCenterY();
-
-		List<Float> tx = new ArrayList<>();
-		List<Float> ty = new ArrayList<>();
-		tx.add(startX);
-		tx.add(centerX);
-		tx.add(centerX);
-		tx.add(endX);
-		ty.add(startY);
-		ty.add(startY);
-		ty.add(endY);
-		ty.add(endY);
-
-		List<Double> angles = new ArrayList<>();
-		List<Double> distances = new ArrayList<>();
-		List<GeometryWayStyle<?>> styles = new ArrayList<>();
-		updateAttrs(settings, tileBox);
-		updateRouteColoringType();
-		updateRouteColors(nightMode);
-		previewLineGeometry.setRouteStyleParams(getRouteLineColor(), getRouteLineWidth(tileBox),
-				getDirectionArrowsColor(), routeColoringType, routeInfoAttribute);
-		fillPreviewLineArrays(tx, ty, angles, distances, styles);
-		canvas.rotate(+tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
-		previewLineGeometry.drawRouteSegment(tileBox, canvas, tx, ty, angles, distances, 0, styles);
-		canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
-
-		Matrix matrix = new Matrix();
-		Path path = new Path();
-		int lineLength = AndroidUtils.dpToPx(view.getContext(), 24);
-		int offset = AndroidUtils.isLayoutRtl(view.getContext()) ? lineLength : -lineLength;
-		path.moveTo(centerX + offset, startY);
-		path.lineTo(centerX, startY);
-		path.lineTo(centerX, startY - lineLength);
-		canvas.drawPath(path, attrsPreview.paint3);
-		drawDirectionArrow(canvas, attrsPreview.paint3, paintIconActionPreview,
-				matrix, centerX, startY - lineLength, centerX, startY);
-		path.reset();
-		path.moveTo(centerX, endY + lineLength);
-		path.lineTo(centerX, endY);
-		path.lineTo(centerX - offset, endY);
-		canvas.drawPath(path, attrsPreview.paint3);
-		drawDirectionArrow(canvas, attrsPreview.paint3, paintIconActionPreview,
-				matrix, centerX - offset, endY, centerX, endY);
-
-		if (previewIcon == null) {
-			previewIcon = (LayerDrawable) AppCompatResources.getDrawable(view.getContext(), previewInfo.getIconId());
-			DrawableCompat.setTint(previewIcon.getDrawable(1), previewInfo.getIconColor());
-		}
-		canvas.rotate(-90, centerX, centerY);
-		drawIcon(canvas, previewIcon, (int) centerX, (int) centerY);
-		canvas.rotate(90, centerX, centerY);
-	}
-
-	private void fillPreviewLineArrays(List<Float> tx, List<Float> ty, List<Double> angles,
-									   List<Double> distances, List<GeometryWayStyle<?>> styles) {
-		angles.add(0d);
-		distances.add(0d);
-		for (int i = 1; i < tx.size(); i++) {
-			float x = tx.get(i);
-			float y = ty.get(i);
-			float px = tx.get(i - 1);
-			float py = ty.get(i - 1);
-			double angleRad = Math.atan2(y - py, x - px);
-			Double angle = (angleRad * 180 / Math.PI) + 90f;
-			angles.add(angle);
-			double dist = Math.sqrt((y - py) * (y - py) + (x - px) * (x - px));
-			distances.add(dist);
-		}
-
-		if (!routeColoringType.isGradient()) {
-			for (int i = 0; i < tx.size(); i++) {
-				styles.add(previewLineGeometry.getDefaultWayStyle());
-			}
-		} else {
-			for (int i = 1; i < tx.size(); i++) {
-				GeometryGradientWayStyle style = previewLineGeometry.getGradientWayStyle();
-				styles.add(style);
-				double prevDist = distances.get(i - 1);
-				double currDist = distances.get(i);
-				double nextDist = i + 1 == distances.size() ? 0 : distances.get(i + 1);
-				style.currColor = getPreviewColor(i - 1, (prevDist + currDist / 2) / (prevDist + currDist));
-				style.nextColor = getPreviewColor(i, (currDist + nextDist / 2) / (currDist + nextDist));
-			}
-			styles.add(styles.get(styles.size() - 1));
-		}
-	}
-
-	private int getPreviewColor(int index, double coeff) {
-		if (index == 0) {
-			return RouteColorize.GREEN;
-		} else if (index == 1) {
-			return RouteColorize.getGradientColor(RouteColorize.GREEN, RouteColorize.YELLOW, coeff);
-		} else if (index == 2) {
-			return RouteColorize.getGradientColor(RouteColorize.YELLOW, RouteColorize.RED, coeff);
-		} else {
-			return RouteColorize.RED;
-		}
-	}
-
 	private void drawAction(RotatedTileBox tb, Canvas canvas, List<Location> actionPoints) {
 		if (actionPoints.size() > 0) {
 			canvas.rotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
@@ -481,13 +281,13 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 					Location o = actionPoints.get(i);
 					if (o == null) {
 						first = true;
-						int attrColor = attrs.paint3.getColor();
+						int defaultTurnArrowColor = attrs.paint3.getColor();
 						if (customTurnArrowColor != 0) {
 							attrs.paint3.setColor(customTurnArrowColor);
 						}
 						canvas.drawPath(pth, attrs.paint3);
-						drawDirectionArrow(canvas, attrs.paint3, paintIconAction, matrix, x, y, px, py);
-						attrs.paint3.setColor(attrColor);
+						drawTurnArrow(canvas, matrix, x, y, px, py);
+						attrs.paint3.setColor(defaultTurnArrowColor);
 					} else {
 						px = x;
 						py = y;
@@ -509,155 +309,16 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 		}
 	}
 
-	private void drawDirectionArrow(Canvas canvas, Paint directionArrowsPaint, Paint paintIconAction,
-									Matrix matrix, float x, float y, float px, float py) {
-		double angleRad = Math.atan2(y - py, x - px);
-		double angle = (angleRad * 180 / Math.PI) + 90f;
-		double distSegment = Math.sqrt((y - py) * (y - py) + (x - px) * (x - px));
-		if (distSegment == 0) {
-			return;
-		}
-		float pdx = x - px;
-		float pdy = y - py;
-		float scale = directionArrowsPaint.getStrokeWidth() / (actionArrow.getWidth() / 2.25f);
-		float scaledWidth = actionArrow.getWidth();
-		matrix.reset();
-		matrix.postTranslate(0, -actionArrow.getHeight() / 2f);
-		matrix.postRotate((float) angle, actionArrow.getWidth() / 2f, 0);
-		if (scale > 1.0f) {
-			matrix.postScale(scale, scale);
-			scaledWidth *= scale;
-		}
-		matrix.postTranslate(px + pdx - scaledWidth/ 2f, py + pdy);
-		canvas.drawBitmap(actionArrow, matrix, paintIconAction);
-	}
-
 	private void drawProjectionPoint(Canvas canvas, double[] projectionXY) {
 		if (projectionIcon == null) {
 			helper.getSettings().getApplicationMode().getLocationIcon();
 			projectionIcon = (LayerDrawable) AppCompatResources.getDrawable(view.getContext(), LocationIcon.DEFAULT.getIconId());
 		}
-		int locationX = (int) projectionXY[0];
-		int locationY = (int) projectionXY[1];
-		drawIcon(canvas, projectionIcon, locationX, locationY);
-	}
-
-	private static void drawIcon(Canvas canvas, Drawable drawable, int locationX, int locationY) {
-		drawable.setBounds(locationX - drawable.getIntrinsicWidth() / 2,
-				locationY - drawable.getIntrinsicHeight() / 2,
-				locationX + drawable.getIntrinsicWidth() / 2,
-				locationY + drawable.getIntrinsicHeight() / 2);
-		drawable.draw(canvas);
-	}
-
-	@ColorInt
-	public int getRouteLineColor(boolean night) {
-		updateRouteColors(night);
-		return routeLineColor;
-	}
-
-	@ColorInt
-	public int getRouteLineColor() {
-		return routeLineColor;
-	}
-
-	@Nullable
-	@ColorInt
-	public Integer getDirectionArrowsColor() {
-		return directionArrowsColor;
-	}
-
-	public void updateRouteColors(boolean night) {
-		updateTurnArrowColor();
-		Integer color;
-		if (previewRouteLineInfo != null) {
-			color = previewRouteLineInfo.getColor(night);
-		} else {
-			CommonPreference<Integer> colorPreference = night ?
-					view.getSettings().ROUTE_LINE_COLOR_NIGHT :
-					view.getSettings().ROUTE_LINE_COLOR_DAY;
-			int storedValue = colorPreference.getModeValue(helper.getAppMode());
-			color = storedValue != 0 ? storedValue : null;
+		if (projectionIcon != null) {
+			int locationX = (int) projectionXY[0];
+			int locationY = (int) projectionXY[1];
+			drawIcon(canvas, projectionIcon, locationX, locationY);
 		}
-		if (color == null) {
-			directionArrowsColor = null;
-			updateAttrs(new DrawSettings(night), view.getCurrentRotatedTileBox());
-			color = attrs.paint.getColor();
-		} else if (routeLineColor != color) {
-			directionArrowsColor = UiUtilities.getContrastColor(view.getContext(), color, false);
-		}
-		routeLineColor = color;
-	}
-
-	private boolean updateRouteColoringType() {
-		RouteColoringType prevType = routeColoringType;
-		String prevAttr = routeInfoAttribute;
-		if (previewRouteLineInfo != null) {
-			routeColoringType = previewRouteLineInfo.getRouteColoringType();
-			routeInfoAttribute = previewRouteLineInfo.getRouteInfoAttribute();
-		} else {
-			OsmandSettings settings = view.getSettings();
-			routeColoringType = settings.ROUTE_COLORING_TYPE.getModeValue(helper.getAppMode());
-			routeInfoAttribute = settings.ROUTE_INFO_ATTRIBUTE.getModeValue(helper.getAppMode());
-		}
-		return prevType != routeColoringType || !Algorithms.objectEquals(prevAttr, routeInfoAttribute);
-	}
-
-	private float getRouteLineWidth(@NonNull RotatedTileBox tileBox) {
-		String widthKey;
-		if (previewRouteLineInfo != null) {
-			widthKey = previewRouteLineInfo.getWidth();
-		} else {
-			widthKey = view.getSettings().ROUTE_LINE_WIDTH.getModeValue(helper.getAppMode());
-		}
-		return widthKey != null ? getWidthByKey(tileBox, widthKey) : attrs.paint.getStrokeWidth();
-	}
-
-	@Nullable
-	private Float getWidthByKey(RotatedTileBox tileBox, String widthKey) {
-		Float resultValue = cachedRouteLineWidth.get(widthKey);
-		if (resultValue != null) {
-			return resultValue;
-		}
-		if (!Algorithms.isEmpty(widthKey) && Algorithms.isInt(widthKey)) {
-			try {
-				int widthDp = Integer.parseInt(widthKey);
-				resultValue = (float) AndroidUtils.dpToPx(view.getApplication(), widthDp);
-			} catch (NumberFormatException e) {
-				log.error(e.getMessage(), e);
-				resultValue = DEFAULT_WIDTH_MULTIPLIER * view.getDensity();
-			}
-		} else {
-			RenderingRulesStorage rrs = view.getApplication().getRendererRegistry().getCurrentSelectedRenderer();
-			RenderingRuleSearchRequest req = new RenderingRuleSearchRequest(rrs);
-			req.setBooleanFilter(rrs.PROPS.R_NIGHT_MODE, nightMode);
-			req.setIntFilter(rrs.PROPS.R_MINZOOM, tileBox.getZoom());
-			req.setIntFilter(rrs.PROPS.R_MAXZOOM, tileBox.getZoom());
-			RenderingRuleProperty ctWidth = rrs.PROPS.get(CURRENT_TRACK_WIDTH_ATTR);
-			if (ctWidth != null) {
-				req.setStringFilter(ctWidth, widthKey);
-			}
-			if (req.searchRenderingAttribute("gpx")) {
-				RenderingContext rc = new OsmandRenderer.RenderingContext(view.getContext());
-				rc.setDensityValue((float) tileBox.getMapDensity());
-				resultValue = rc.getComplexValue(req, req.ALL.R_STROKE_WIDTH);
-			}
-		}
-		cachedRouteLineWidth.put(widthKey, resultValue);
-		return resultValue;
-	}
-
-	private void updateTurnArrowColor() {
-		if (routeColoringType.isGradient() &&
-				coloringAvailabilityCache.isColoringAvailable(routeColoringType, routeInfoAttribute)) {
-			customTurnArrowColor = Color.WHITE;
-		} else {
-			customTurnArrowColor = attrs.paint3.getColor();
-		}
-		attrsPreview.paint3.setColor(routeColoringType.isGradient() ? Color.WHITE : customTurnArrowColor);
-		paintIconAction.setColorFilter(new PorterDuffColorFilter(customTurnArrowColor, PorterDuff.Mode.MULTIPLY));
-		paintIconActionPreview.setColorFilter(
-				new PorterDuffColorFilter(attrsPreview.paint3.getColor(), PorterDuff.Mode.MULTIPLY));
 	}
 
 	public void drawLocations(RotatedTileBox tb, Canvas canvas, double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude) {
@@ -680,13 +341,14 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 			boolean directTo = route.getRouteService() == RouteService.DIRECT_TO;
 			boolean straight = route.getRouteService() == RouteService.STRAIGHT;
 			publicTransportRouteGeometry.clearRoute();
-			updateRouteColors(nightMode);
+
 			RouteColoringType actualColoringType =
 					coloringAvailabilityCache.isColoringAvailable(routeColoringType, routeInfoAttribute) ?
 							routeColoringType : RouteColoringType.DEFAULT;
 			routeGeometry.setRouteStyleParams(getRouteLineColor(), getRouteLineWidth(tb),
-					getDirectionArrowsColor(), actualColoringType, routeInfoAttribute);
+					directionArrowsColor, actualColoringType, routeInfoAttribute);
 			routeGeometry.updateRoute(tb, route);
+
 			if (directTo) {
 				routeGeometry.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
 						null, 0);
@@ -722,10 +384,10 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 		List<Location> locs = route.getImmutableAllLocations();
 		int cr = route.getCurrentRoute();
 		int locIndex = locs.size() - 1;
-		if(route.getIntermediatePointsToPass() > 0) {
+		if (route.getIntermediatePointsToPass() > 0) {
 			locIndex = route.getIndexOfIntermediate(route.getIntermediatePointsToPass() - 1);
 		}
-		if(ll != null && cr > 0 && cr < locs.size() && locIndex >= 0 && locIndex < locs.size()) {
+		if (ll != null && cr > 0 && cr < locs.size() && locIndex >= 0 && locIndex < locs.size()) {
 			Location loc1 = locs.get(cr - 1);
 			Location loc2 = locs.get(cr);
 			double distLeft = route.getDistanceFromPoint(cr) - route.getDistanceFromPoint(locIndex);
@@ -736,14 +398,14 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 			final int aY = box.getPixYFromLatNoRot(loc1.getLatitude());
 			final int bX = box.getPixXFromLonNoRot(loc2.getLongitude());
 			final int bY = box.getPixYFromLatNoRot(loc2.getLatitude());
-			if(baDist != 0) {
+			if (baDist != 0) {
 				double CF = (dTarget - distLeft) / baDist;
 				double rX = bX - CF * (bX - aX);
 				double rY = bY - CF * (bY - aY);
 				projectionXY = new double[] {rX, rY};
 			}
 		}
-		if(projectionXY != null) {
+		if (projectionXY != null) {
 
 			double distanceLoc2Proj = MapUtils.getSqrtDistance((int)projectionXY[0], (int) projectionXY[1],
 					box.getPixXFromLonNoRot(ll.getLongitude()), box.getPixYFromLatNoRot(ll.getLatitude()));
@@ -862,7 +524,7 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 			}
 		}
 	}
-	
+
 	private Location calculateProjection(double part, Location lp, Location l) {
 		Location p = new Location(l);
 		p.setLatitude(lp.getLatitude() + part * (l.getLatitude() - lp.getLatitude()));
@@ -870,31 +532,14 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 		return p;
 	}
 
-	private void copyRenderingAttrs(RenderingLineAttributes from, RenderingLineAttributes to) {
-		to.paint = new Paint(from.paint);
-		to.customColorPaint = new Paint(from.customColorPaint);
-		to.customColor = from.customColor;
-		to.customWidth = from.customWidth;
-		to.defaultWidth = from.defaultWidth;
-		to.defaultColor = from.defaultColor;
-		to.isPaint2 = from.isPaint2;
-		to.paint2 = new Paint(from.paint2);
-		to.defaultWidth2 = from.defaultWidth2;
-		to.isPaint3 = from.isPaint3;
-		to.paint3 = new Paint(from.paint3);
-		to.defaultWidth3 = from.defaultWidth3;
-		to.shadowPaint = new Paint(from.shadowPaint);
-		to.isShadowPaint = from.isShadowPaint;
-		to.defaultShadowWidthExtent = from.defaultShadowWidthExtent;
-		to.paint_1 = new Paint(from.paint_1);
-		to.isPaint_1 = from.isPaint_1;
-		to.defaultWidth_1 = from.defaultWidth_1;
+	@Override
+	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 	}
 
 	@Override
 	public void destroyLayer() {
-		
 	}
+
 	@Override
 	public boolean drawInScreenPixels() {
 		return false;
@@ -910,14 +555,14 @@ public class RouteLayer extends OsmandMapLayer implements IContextMenuProvider {
 		return false;
 	}
 
-	private int getRadiusPoi(RotatedTileBox tb){
+	private int getRadiusPoi(RotatedTileBox tb) {
 		final double zoom = tb.getZoom();
 		int r;
-		if(zoom <= 15) {
+		if (zoom <= 15) {
 			r = 8;
-		} else if(zoom <= 16) {
+		} else if (zoom <= 16) {
 			r = 10;
-		} else if(zoom <= 17) {
+		} else if (zoom <= 17) {
 			r = 14;
 		} else {
 			r = 18;

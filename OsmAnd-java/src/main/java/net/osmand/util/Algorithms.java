@@ -87,6 +87,10 @@ public class Algorithms {
 		return s == null ? "" : s;
 	}
 
+	public static String trimIfNotNull(String s) {
+		return s == null ? null : s.trim();
+	}
+
 	public static boolean isEmpty(CharSequence s) {
 		return s == null || s.length() == 0;
 	}
@@ -1114,29 +1118,41 @@ public class Algorithms {
 		return false;
 	}
 
-	public static int[] stringToGradientPalette(String str) {
+	public static int[] stringToGradientPalette(String str, String gradientScaleType) {
+		boolean isSlope = "gradient_slope_color".equals(gradientScaleType);
 		if (Algorithms.isBlank(str)) {
-			return RouteColorize.colors;
+			return isSlope ? RouteColorize.SLOPE_COLORS : RouteColorize.COLORS;
 		}
 		String[] arr = str.split(" ");
-		if (arr.length != 3) {
-			return RouteColorize.colors;
+		if (arr.length < 2) {
+			return isSlope ? RouteColorize.SLOPE_COLORS : RouteColorize.COLORS;
 		}
-		int[] colors = new int[3];
+		int[] colors = new int[arr.length];
 		try {
-			for (int i = 0; i < 3; i++) {
+			for (int i = 0; i < arr.length; i++) {
 				colors[i] = Algorithms.parseColor(arr[i]);
 			}
 		} catch (IllegalArgumentException e) {
-			return RouteColorize.colors;
+			return isSlope ? RouteColorize.SLOPE_COLORS : RouteColorize.COLORS;
 		}
 		return colors;
 	}
 
-	public static String gradientPaletteToString(int[] colors) {
-		int[] src = (colors != null && colors.length == 3) ? colors : RouteColorize.colors;
-		return Algorithms.colorToString(src[0]) + " " +
-				Algorithms.colorToString(src[1]) + " " +
-				Algorithms.colorToString(src[2]);
+	public static String gradientPaletteToString(int[] palette, String gradientScaleType) {
+		boolean isSlope = "gradient_slope_color".equals(gradientScaleType);
+		int[] src;
+		if (palette != null && palette.length >= 2) {
+			src = palette;
+		} else {
+			src = isSlope ? RouteColorize.SLOPE_COLORS : RouteColorize.COLORS;
+		}
+		StringBuilder stringPalette = new StringBuilder();
+		for (int i = 0; i < src.length; i++) {
+			stringPalette.append(colorToString(src[i]));
+			if (i + 1 != src.length) {
+				stringPalette.append(" ");
+			}
+		}
+		return stringPalette.toString();
 	}
 }

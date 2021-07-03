@@ -4,8 +4,6 @@ import android.animation.Animator;
 import android.animation.Animator.AnimatorListener;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.app.Activity;
-import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
@@ -27,14 +25,6 @@ import android.widget.LinearLayout;
 import android.widget.OverScroller;
 import android.widget.Toast;
 
-import androidx.annotation.IdRes;
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.view.ContextThemeWrapper;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
@@ -44,11 +34,20 @@ import net.osmand.plus.LockableScrollView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.actions.ShareDialog;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.InterceptorLinearLayout;
 import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
 import net.osmand.plus.views.controls.SingleTapConfirm;
 import net.osmand.plus.views.layers.MapControlsLayer;
+
+import androidx.annotation.IdRes;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import static net.osmand.plus.mapcontextmenu.MapContextMenuFragment.CURRENT_Y_UNDEFINED;
 
@@ -1081,13 +1080,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment
 	}
 
 	protected void copyToClipboard(@NonNull String text, @NonNull Context ctx) {
-		Object systemService = ctx.getSystemService(Activity.CLIPBOARD_SERVICE);
-		if (systemService instanceof ClipboardManager) {
-			((ClipboardManager) systemService).setText(text);
-			Toast.makeText(ctx,
-					ctx.getResources().getString(R.string.copied_to_clipboard) + ":\n" + text,
-					Toast.LENGTH_SHORT).show();
-		}
+		ShareDialog.copyToClipboardWithToast(ctx, text, Toast.LENGTH_SHORT);
 	}
 
 	public static boolean showInstance(@NonNull MapActivity mapActivity, ContextMenuFragment fragment) {

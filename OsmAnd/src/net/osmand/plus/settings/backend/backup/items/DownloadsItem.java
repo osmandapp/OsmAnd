@@ -51,7 +51,7 @@ public class DownloadsItem extends SettingsItem {
 	@NonNull
 	@Override
 	public String getPublicName(@NonNull Context ctx) {
-		return "downloads";
+		return ctx.getString(R.string.welmode_download_maps);
 	}
 
 	public List<WorldRegion> getItems() {
@@ -59,8 +59,12 @@ public class DownloadsItem extends SettingsItem {
 	}
 
 	@Override
-	protected long getLocalModifiedTime() {
+	public long getLocalModifiedTime() {
 		return 0;
+	}
+
+	@Override
+	public void setLocalModifiedTime(long lastModifiedTime) {
 	}
 
 	@Override

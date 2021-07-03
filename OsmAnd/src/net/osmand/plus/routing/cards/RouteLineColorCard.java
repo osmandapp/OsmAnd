@@ -17,8 +17,8 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.enums.DayNightMode;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
-import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
+import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
 import net.osmand.plus.routing.RouteColoringType;
 import net.osmand.plus.settings.backend.ListStringPreference;
@@ -133,11 +133,13 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 			colorsCard.updateVisibility(false);
 			gradientCard.updateVisibility(true);
 			previewRouteLineInfo.setUseDefaultColor(false);
+			changeMapTheme(initMapTheme);
 		} else {
 			AndroidUiHelper.updateVisibility(themeToggleContainer, false);
 			colorsCard.updateVisibility(false);
 			gradientCard.updateVisibility(false);
 			previewRouteLineInfo.setUseDefaultColor(false);
+			changeMapTheme(initMapTheme);
 		}
 		previewRouteLineInfo.setRouteColoringType(selectedType);
 		previewRouteLineInfo.setRouteInfoAttribute(selectedRouteInfoAttribute);

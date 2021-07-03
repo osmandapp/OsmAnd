@@ -370,7 +370,7 @@ public class VoiceRouter {
 			// If we wait before more than 20 sec (reset counter)
 			if (ms - waitAnnouncedSpeedLimit > 20 * 1000) {
 				waitAnnouncedSpeedLimit = 0;
-			} else if (router.getSettings().SPEAK_SPEED_LIMIT.get()  && ms - waitAnnouncedSpeedLimit > 10 * 1000 ) {
+			} else if (router.getSettings().SPEAK_SPEED_LIMIT.get() && ms - waitAnnouncedSpeedLimit > 10 * 1000 ) {
 				CommandBuilder p = getNewCommandPlayerToPlay();
 				if (p != null) {
 					lastAnnouncedSpeedLimit = ms;
@@ -565,7 +565,8 @@ public class VoiceRouter {
 			if (includeDest == true) {
 				result.put(TO_REF, getNonNullString(getSpeakablePointName(i.getRef())));
 				result.put(TO_STREET_NAME, getNonNullString(getSpeakablePointName(i.getStreetName())));
-				result.put(TO_DEST, getNonNullString(getSpeakablePointName(i.getDestinationName())));
+				String dest = cutLongDestination(getSpeakablePointName(i.getDestinationName()));
+				result.put(TO_DEST, getNonNullString(dest));
 			} else {
 				result.put(TO_REF, getNonNullString(getSpeakablePointName(i.getRef())));
 				result.put(TO_STREET_NAME, getNonNullString(getSpeakablePointName(i.getStreetName())));
@@ -579,8 +580,9 @@ public class VoiceRouter {
 							settings.MAP_TRANSLITERATE_NAMES.get(), currentSegment.isForwardDirection()))));
 					result.put(FROM_STREET_NAME, getNonNullString(getSpeakablePointName(obj.getName(settings.MAP_PREFERRED_LOCALE.get(),
 							settings.MAP_TRANSLITERATE_NAMES.get()))));
-					result.put(FROM_DEST, getNonNullString(getSpeakablePointName(obj.getDestinationName(settings.MAP_PREFERRED_LOCALE.get(),
-							settings.MAP_TRANSLITERATE_NAMES.get(), currentSegment.isForwardDirection()))));
+					String dest = cutLongDestination(getSpeakablePointName(obj.getDestinationName(settings.MAP_PREFERRED_LOCALE.get(),
+							settings.MAP_TRANSLITERATE_NAMES.get(), currentSegment.isForwardDirection())));
+					result.put(FROM_DEST, getNonNullString(dest));
 				} else {
 					RouteDataObject obj = currentSegment.getObject();
 					result.put(FROM_REF, getNonNullString(getSpeakablePointName(obj.getRef(settings.MAP_PREFERRED_LOCALE.get(),
@@ -604,15 +606,10 @@ public class VoiceRouter {
 		if (exitInfo == null || !router.getSettings().SPEAK_STREET_NAMES.get()) {
 			return new StreetName(result);
 		}
-		if (player != null && player.supportsStructuredStreetNames()) {
-			result.put(TO_REF, getNonNullString(getSpeakablePointName(exitInfo.getRef())));
-			result.put(TO_STREET_NAME, getNonNullString(getSpeakablePointName(exitInfo.getExitStreetName())));
-			result.put(TO_DEST, includeDest ? getNonNullString(getSpeakablePointName(routeInfo.getRef())) : "");
-		} else {
-			result.put(TO_REF, getNonNullString(getSpeakablePointName(exitInfo.getRef())));
-			result.put(TO_STREET_NAME, getNonNullString(getSpeakablePointName(exitInfo.getExitStreetName())));
-			result.put(TO_DEST, "");
-		}
+		result.put(TO_REF, getNonNullString(getSpeakablePointName(exitInfo.getRef())));
+		String dest = cutLongDestination(getSpeakablePointName(routeInfo.getDestinationName()));
+		result.put(TO_DEST, getNonNullString(dest));
+		result.put(TO_STREET_NAME, "");
 		return new StreetName(result);
 	}
 
@@ -996,5 +993,16 @@ public class VoiceRouter {
 			voiceMessageListeners.add(new WeakReference<>(listener));
 		}
 		return voiceMessageListeners;
+	}
+
+	private String cutLongDestination(String destination) {
+		if (destination == null) {
+			return null;
+		}
+		String[] words = destination.split(",");
+		if (words.length > 3) {
+			return words[0] + "," + words[1] + "," + words[2];
+		}
+		return destination;
 	}
 }

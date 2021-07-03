@@ -556,13 +556,17 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 	}
 
 	@ColorRes
-	public static int getActivePrimaryColorId(boolean nightMode) {
+	public static int getActiveColorId(boolean nightMode) {
 		return nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
 	}
 
 	@ColorRes
 	public static int getTertiaryTextColorId(boolean nightMode) {
 		return nightMode ? R.color.text_color_tertiary_dark : R.color.text_color_tertiary_light;
+	}
+
+	public static int getDefaultIconColorId(boolean nightMode) {
+		return nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
 	}
 
 	@Override

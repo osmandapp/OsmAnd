@@ -415,9 +415,6 @@
     <string name="shared_string_control_start">Comezar</string>
     <string name="map_widget_av_notes">Notas de son/vídeo</string>
     <string name="osmand_srtm_short_description_80_chars">Plugin do OsmAnd para curvas de nivel sen conexión</string>
-    <string name="osmand_srtm_long_description_1000_chars">Este plugin fornece unha capa de sobreposición de curvas do nivel e unha capa de sombras da altitude (relevo) que poden ser amosadas nos mapas sen conexión do OsmAnd. Esta funcionalidade pode ser moi apreciada por atletas, camiñantes, sendeiristas e calquera que teña interese pola estrutura do relevo da paisaxe. 
-\n
-\nOs datos globais (entre os 70 graos norte e os 70 graos sul) están baseados nas medicións do SRTM (Misión Topográfica con Radar da Lanzadeira Espacial) e ASTER (Radiómetro Espacial Avanzado de Emisión Térmica e Reflexión) e instrumentos de imaxes a bordo do Terra, o satélite máis importante do Sistema de Observación Terrestre da NASA. ASTER é un esforzo cooperativo entre a NASA, o Ministerio de Economía do Xapón, Comercio e Industria (METI) e Sistemas Espaciais Xaponeses (J-spaceystems).</string>
     <string name="map_widget_distancemeasurement">Medición de distancias</string>
     <string name="audionotes_location_not_defined">Preme \'Empregar localización…\' para engadir unha nota á localización.</string>
     <string name="map_widget_audionotes">Notas de son</string>
@@ -3561,7 +3558,7 @@ Lon %2$s</string>
 \n
 \n A subscrición é renovada  de xeito automático, a menos que sexa desbotada antes da data de renovación. A túa conta será cobrada polo período de renovación (mes/trimestre/ano) soamente na data de renovación.
 \n
-\n Podes xestionar e desbotar as túas subscricións entrando nos axustes da Google Play."</string>
+\nPodes xestionar e desbotar as túas subscricións entrando nos axustes da Google Play."</string>
     <string name="search_poi_types">Procurar tipos de PDI</string>
     <string name="search_poi_types_descr">Combina tipos de PDI de diferentes categorías. Preme en \"trocar\" para marcar todo, preme o lado esquerdo para escoller unha categoría.</string>
     <string name="download_unsupported_action">Acción %1$s non admitida</string>

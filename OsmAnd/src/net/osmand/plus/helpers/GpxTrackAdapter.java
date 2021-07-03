@@ -101,14 +101,14 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 	public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 		if (holder.getItemViewType() == TRACK_INFO_VIEW_TYPE) {
 			TrackViewHolder trackViewHolder = (TrackViewHolder) holder;
-			boolean currentlyRecordingTrack = (showCurrentGpx && position == 0);
+			int listPosition = mapToListPosition(position);
+			boolean currentlyRecordingTrack = (showCurrentGpx && isFirstListItem(position));
 			if (currentlyRecordingTrack) {
 				trackViewHolder.icon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_track_recordable));
 			} else {
 				trackViewHolder.icon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_polygom_dark));
 			}
-			final int adapterPosition = trackViewHolder.getAdapterPosition();
-			GPXInfo info = gpxInfoList.get(adapterPosition);
+			GPXInfo info = gpxInfoList.get(listPosition);
 			GpxDataItem dataItem = getDataItem(info);
 			String itemTitle = GpxUiHelper.getGpxTitle(info.getFileName());
 			if (!showFolderName) {
@@ -119,7 +119,7 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 				@Override
 				public void onClick(View v) {
 					if (onItemClickListener != null) {
-						onItemClickListener.onItemClick(adapterPosition);
+						onItemClickListener.onItemClick(listPosition);
 					}
 				}
 			});
@@ -134,7 +134,15 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
 	@Override
 	public int getItemCount() {
-		return gpxInfoList.size();
+		return gpxInfoList.size() + (trackCategoriesAdapter == null ? 0 : 1);
+	}
+
+	private int mapToListPosition(int position) {
+		return trackCategoriesAdapter == null ? position : position - 1;
+	}
+
+	private boolean isFirstListItem(int position) {
+		return position == 0 && trackCategoriesAdapter == null || position == 1 && trackCategoriesAdapter != null;
 	}
 
 	private void updateGpxInfoView(TrackViewHolder holder, String itemTitle, GPXInfo info,

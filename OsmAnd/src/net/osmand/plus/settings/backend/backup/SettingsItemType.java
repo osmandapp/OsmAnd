@@ -28,11 +28,15 @@ public enum SettingsItemType {
 	ONLINE_ROUTING_ENGINES,
 	ITINERARY_GROUPS;
 
-	@NonNull
+	@Nullable
 	public static SettingsItemType fromName(@NonNull String name) {
 		if (name.equals("QUICK_ACTION")) {
 			return SettingsItemType.QUICK_ACTIONS;
 		}
-		return SettingsItemType.valueOf(name);
+		try {
+			return SettingsItemType.valueOf(name);
+		} catch (RuntimeException e) {
+			return null;
+		}
 	}
 }

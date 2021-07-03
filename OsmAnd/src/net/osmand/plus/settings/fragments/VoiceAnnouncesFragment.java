@@ -8,6 +8,19 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import net.osmand.AndroidUtils;
+import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
+import net.osmand.plus.helpers.FileNameTranslationHelper;
+import net.osmand.plus.helpers.enums.MetricsConstants;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.bottomsheets.AnnouncementTimeBottomSheet;
+import net.osmand.plus.settings.preferences.ListPreferenceEx;
+import net.osmand.plus.wikipedia.WikipediaDialogFragment;
+
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
@@ -15,24 +28,11 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 import androidx.preference.SwitchPreferenceCompat;
 
-import net.osmand.AndroidUtils;
-import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
-import net.osmand.plus.helpers.enums.MetricsConstants;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.bottomsheets.AnnouncementTimeBottomSheet;
-import net.osmand.plus.settings.preferences.ListPreferenceEx;
-import net.osmand.plus.wikipedia.WikipediaDialogFragment;
-
 import static net.osmand.plus.UiUtilities.CompoundButtonType.TOOLBAR;
 
 public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPreferenceChanged {
 
 	public static final String TAG = VoiceAnnouncesFragment.class.getSimpleName();
-
-	private static final String MORE_VALUE = "MORE_VALUE";
 
 	private static final String OSMAND_VOICE_NAVIGATION_URL = "https://docs.osmand.net/en/main@latest/osmand/troubleshooting/navigation#voice-navigation";
 
@@ -94,11 +94,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 	protected void setupPreferences() {
 		Preference voiceAnnouncesInfo = findPreference("voice_announces_info");
 		voiceAnnouncesInfo.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
-
-		Preference languageSetting = findPreference("voice_provider");
-		languageSetting.setIcon(getContentIcon(R.drawable.ic_action_map_language));
-
-		setupSpeedLimitExceedPref();
+		setupVoiceProviderPref();
 
 		setupKeepInformingPref();
 		setupArrivalAnnouncementPref();
@@ -109,6 +105,17 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 		enableDisablePreferences(!settings.VOICE_MUTE.getModeValue(getSelectedAppMode()));
 		setupSpeakCamerasPref();
 		setupSpeedCamerasAlert();
+		setupSpeedLimitExceedPref();
+	}
+
+	private void setupVoiceProviderPref() {
+		Preference languageSetting = findPreference(settings.VOICE_PROVIDER.getId());
+		languageSetting.setIcon(getContentIcon(R.drawable.ic_action_map_language));
+		String voiceIndexBasename = settings.VOICE_PROVIDER.getModeValue(getSelectedAppMode());
+		String summary = voiceIndexBasename == null || voiceIndexBasename.equals(OsmandSettings.VOICE_PROVIDER_NOT_USE)
+				? getString(R.string.shared_string_not_selected)
+				: FileNameTranslationHelper.getVoiceName(getContext(), voiceIndexBasename);
+		languageSetting.setSummary(summary);
 	}
 
 	private void setupSpeedLimitExceedPref() {
@@ -130,6 +137,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 		ListPreferenceEx voiceProvider = findPreference(settings.SPEED_LIMIT_EXCEED_KMH.getId());
 		voiceProvider.setEntries(names);
 		voiceProvider.setEntryValues(valuesKmh);
+		voiceProvider.setEnabled(settings.SPEAK_SPEED_LIMIT.getModeValue(getSelectedAppMode()));
 	}
 
 	private void setupKeepInformingPref() {
@@ -264,6 +272,8 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 		if (prefId.equals(settings.SPEED_CAMERAS_UNINSTALLED.getId())) {
 			setupSpeakCamerasPref();
 			setupSpeedCamerasAlert();
+		} else if (prefId.equals(settings.VOICE_PROVIDER.getId())) {
+			setupVoiceProviderPref();
 		}
 	}
 
