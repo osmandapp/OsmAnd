@@ -47,6 +47,7 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 	private Float customWidth;
 	private Integer customPointColor;
 	private RouteColoringType routeColoringType;
+	private String routeInfoAttribute;
 
 	private boolean needUpdate;
 
@@ -58,8 +59,10 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 	public void setRouteStyleParams(@Nullable @ColorInt Integer color,
 	                                @Nullable Float width,
 	                                @Nullable @ColorInt Integer pointColor,
-	                                @NonNull RouteColoringType routeColoringType) {
-		this.needUpdate = this.routeColoringType != routeColoringType;
+	                                @NonNull RouteColoringType routeColoringType,
+									@Nullable String routeInfoAttribute) {
+		this.needUpdate = this.routeColoringType != routeColoringType
+				|| !Algorithms.objectEquals(this.routeColoringType, routeColoringType);
 
 		if (!Algorithms.objectEquals(customWidth, width)) {
 			for (GeometryWayStyle<?> style : styleMap.values()) {
@@ -70,6 +73,7 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 		this.customWidth = width;
 		this.customPointColor = pointColor;
 		this.routeColoringType = routeColoringType;
+		this.routeInfoAttribute = routeInfoAttribute;
 		if (width != null) {
 			getContext().getAttrs().shadowPaint.setStrokeWidth(width + getContext().getDensity() * 2);
 		}
@@ -135,7 +139,7 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 
 		List<RouteSegmentResult> routeSegments = route.getOriginalRoute();
 		List<RouteStatistics> routeStatisticsList = RouteStatisticsHelper.calculateRouteStatistic(routeSegments,
-				Collections.singletonList(routeColoringType.getAttrName()), currentRenderer,
+				Collections.singletonList(routeInfoAttribute), currentRenderer,
 				defaultRenderer, currentSearchRequest, defaultSearchRequest);
 
 		List<Location> locations = new ArrayList<>();

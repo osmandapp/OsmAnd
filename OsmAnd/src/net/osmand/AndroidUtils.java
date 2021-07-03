@@ -1023,6 +1023,7 @@ public class AndroidUtils {
 		return value != null ? value : propertyName;
 	}
 
+	@NonNull
 	public static String getRenderingStringPropertyValue(Context ctx, String propertyValue) {
 		if (propertyValue == null) {
 			return "";
@@ -1032,6 +1033,7 @@ public class AndroidUtils {
 		return value != null ? value : propertyValue;
 	}
 
+	@NonNull
 	public static String getStringRouteInfoPropertyValue(Context ctx, String propertyValue) {
 		if (propertyValue == null) {
 			return "";
@@ -1047,6 +1049,7 @@ public class AndroidUtils {
 		return value != null ? value : defValue;
 	}
 
+	@Nullable
 	private static String getStringByProperty(@NonNull Context ctx, @NonNull String property) {
 		try {
 			Field field = R.string.class.getField(property);
@@ -1057,6 +1060,7 @@ public class AndroidUtils {
 		return null;
 	}
 
+	@Nullable
 	private static String getStringForField(@NonNull Context ctx, @Nullable Field field) throws IllegalAccessException {
 		if (field != null) {
 			Integer in = (Integer) field.get(null);

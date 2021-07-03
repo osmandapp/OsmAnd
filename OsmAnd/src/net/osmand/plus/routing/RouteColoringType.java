@@ -2,6 +2,7 @@ package net.osmand.plus.routing;
 
 import android.content.Context;
 
+import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -58,8 +59,20 @@ public enum RouteColoringType {
 	}
 
 	@NonNull
-	public String getHumanString(@NonNull Context context) {
-		return context.getString(titleId);
+	public String getHumanString(@NonNull Context context, @Nullable String routeInfoAttribute) {
+		return this.isRouteInfoAttribute()
+				? getHumanStringRouteInfoAttribute(context, routeInfoAttribute)
+				: context.getString(titleId);
+	}
+
+	@NonNull
+	private String getHumanStringRouteInfoAttribute(@NonNull Context context, @Nullable String routeInfoAttribute) {
+		String routeInfoPrefix = RouteStatisticsHelper.ROUTE_INFO_PREFIX;
+		if (!this.isRouteInfoAttribute() || routeInfoAttribute == null
+				|| !routeInfoAttribute.startsWith(routeInfoPrefix)) {
+			return "";
+		}
+		return AndroidUtils.getStringRouteInfoPropertyValue(context, routeInfoAttribute.replace(routeInfoPrefix, ""));
 	}
 
 	public boolean isDefault() {
@@ -141,6 +154,9 @@ public enum RouteColoringType {
 
 	@NonNull
 	public static RouteColoringType getColoringTypeByName(@Nullable String name) {
+		if (!Algorithms.isEmpty(name) && name.startsWith(RouteStatisticsHelper.ROUTE_INFO_PREFIX)) {
+			return ATTRIBUTE;
+		}
 		for (RouteColoringType coloringType : RouteColoringType.values()) {
 			if (coloringType.name.equalsIgnoreCase(name)) {
 				return coloringType;

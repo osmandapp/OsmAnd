@@ -14,6 +14,7 @@ public class PreviewRouteLineInfo {
 	private static final String LINE_COLOR_DAY = "line_color_day";
 	private static final String LINE_COLOR_NIGHT = "line_color_night";
 	private static final String ROUTE_COLORING_TYPE = "route_coloring_type";
+	private static final String ROUTE_INFO_ATTRIBUTE = "route_info_attribute";
 	private static final String LINE_WIDTH = "line_width";
 	private static final String NAVIGATION_ICON_ID = "navigation_icon_id";
 	private static final String NAVIGATION_ICON_COLOR = "navigation_icon_color";
@@ -28,6 +29,7 @@ public class PreviewRouteLineInfo {
 	private Integer colorDay;
 	private Integer colorNight;
 	private RouteColoringType coloringType = RouteColoringType.DEFAULT;
+	private String routeInfoAttribute;
 	private String width;
 
 	// temporally parameters to show in preview
@@ -43,10 +45,12 @@ public class PreviewRouteLineInfo {
 	public PreviewRouteLineInfo(@Nullable @ColorInt Integer colorDay,
 	                            @Nullable @ColorInt Integer colorNight,
 	                            @NonNull RouteColoringType coloringType,
+	                            @Nullable String routeInfoAttribute,
 	                            @Nullable String width) {
 		this.colorDay = colorDay;
 		this.colorNight = colorNight;
 		this.coloringType = coloringType;
+		this.routeInfoAttribute = routeInfoAttribute;
 		this.width = width;
 	}
 
@@ -58,6 +62,7 @@ public class PreviewRouteLineInfo {
 		this.colorDay = existed.colorDay;
 		this.colorNight = existed.colorNight;
 		this.coloringType = existed.coloringType;
+		this.routeInfoAttribute = existed.routeInfoAttribute;
 		this.width = existed.width;
 		this.iconId = existed.iconId;
 		this.iconColor = existed.iconColor;
@@ -82,6 +87,10 @@ public class PreviewRouteLineInfo {
 
 	public void setRouteColoringType(@NonNull RouteColoringType coloringType) {
 		this.coloringType = coloringType;
+	}
+
+	public void setRouteInfoAttribute(@Nullable String routeInfoAttribute) {
+		this.routeInfoAttribute = routeInfoAttribute;
 	}
 
 	public void setWidth(@Nullable String width) {
@@ -131,6 +140,11 @@ public class PreviewRouteLineInfo {
 	}
 
 	@Nullable
+	public String getRouteInfoAttribute() {
+		return routeInfoAttribute;
+	}
+
+	@Nullable
 	public String getWidth() {
 		return width;
 	}
@@ -168,6 +182,7 @@ public class PreviewRouteLineInfo {
 			colorNight = bundle.getInt(LINE_COLOR_NIGHT);
 		}
 		coloringType = RouteColoringType.getColoringTypeByName(bundle.getString(ROUTE_COLORING_TYPE));
+		routeInfoAttribute = bundle.getString(ROUTE_INFO_ATTRIBUTE);
 		width = bundle.getString(LINE_WIDTH);
 		iconId = bundle.getInt(NAVIGATION_ICON_ID);
 		iconColor = bundle.getInt(NAVIGATION_ICON_COLOR);
@@ -186,6 +201,9 @@ public class PreviewRouteLineInfo {
 			bundle.putInt(LINE_COLOR_NIGHT, colorNight);
 		}
 		bundle.putString(ROUTE_COLORING_TYPE, coloringType.getName());
+		if (routeInfoAttribute != null) {
+			bundle.putString(ROUTE_INFO_ATTRIBUTE, routeInfoAttribute);
+		}
 		if (width != null) {
 			bundle.putString(LINE_WIDTH, width);
 		}
@@ -208,6 +226,7 @@ public class PreviewRouteLineInfo {
 		if (!Algorithms.objectEquals(getColor(false), that.getColor(false))) return false;
 		if (!Algorithms.objectEquals(getColor(true), that.getColor(true))) return false;
 		if (!Algorithms.objectEquals(coloringType, that.coloringType)) return false;
+		if (!Algorithms.objectEquals(routeInfoAttribute, that.routeInfoAttribute)) return false;
 		return Algorithms.objectEquals(width, that.width);
 	}
 
@@ -216,6 +235,7 @@ public class PreviewRouteLineInfo {
 		int result = colorDay != null ? colorDay.hashCode() : 0;
 		result = 31 * result + (colorNight != null ? colorNight.hashCode() : 0);
 		result = 31 * result + coloringType.ordinal();
+		result = 31 * result + (routeInfoAttribute != null ? routeInfoAttribute.hashCode() : 0);
 		result = 31 * result + (width != null ? width.hashCode() : 0);
 		return result;
 	}
