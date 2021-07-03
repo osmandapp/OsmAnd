@@ -4226,4 +4226,6 @@
     <string name="backup_error_file_not_available">Datei ist nicht verfügbar</string>
     <string name="backup_error_token_is_not_valid">Angegebene Geräte-ID oder Token ist nicht gültig</string>
     <string name="backup_error_user_is_not_registered">Benutzer mit dieser E-Mail ist nicht registriert</string>
+    <string name="backup_error_token_is_not_valid_or_expired">Token ist nicht gültig oder abgelaufen</string>
+    <string name="backup_error_no_valid_subscription">Kein gültiges Abonnement vorhanden</string>
 </resources>
