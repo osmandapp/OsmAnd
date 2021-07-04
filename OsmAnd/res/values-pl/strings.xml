@@ -2464,7 +2464,7 @@
     <string name="shared_string_deleted">Usunięte</string>
     <string name="shared_string_edited">Zmodyfikowane</string>
     <string name="shared_string_added">Dodane</string>
-    <string name="empty_state_osm_edits">Tworzenie lub modyfikowanie obiektów OSM</string>
+    <string name="empty_state_osm_edits">Twórz lub modyfikuj obiekty OpenStreetMap</string>
     <string name="rename_marker">Zmień nazwę znacznika</string>
     <string name="open_from">Otwarte od</string>
     <string name="open_till">Otwarte do</string>
@@ -3771,7 +3771,7 @@
     <string name="open_saved_track">Otwórz zapisaną ścieżkę</string>
     <string name="shared_string_is_saved">jest zapisywany</string>
     <string name="one_point_error">Należy dodać co najmniej dwa punkty.</string>
-    <string name="disable_recording_once_app_killed_descrp">Wstrzyma rejestrowanie ścieżki, gdy aplikacja zostanie zabita (za pośrednictwem ostatnich aplikacji). (Wskazanie tła OsmAnd znika z paska powiadomień Androida.)</string>
+    <string name="disable_recording_once_app_killed_descrp">Nagrywanie trasy zostanie wstrzymane po zamknięciu aplikacji (za pośrednictwem ostatnich aplikacji). (Ikona w obszarze powiadomień systemu Android dla tła OsmAnd zniknie.)</string>
     <string name="shared_string_redo">Ponów</string>
     <string name="release_3_8">• Zaktualizowana funkcja planu trasy: umożliwia korzystanie z różnych typów nawigacji na segment i dołączanie ścieżek
 \n
@@ -3834,7 +3834,7 @@
     <string name="manage_subscription">Zarządzaj subskrypcją</string>
     <string name="subscription_expired_title">Subskrypcja OsmAnd Live wygasła</string>
     <string name="subscription_paused_title">Subskrypcja OsmAnd Live została wstrzymana</string>
-    <string name="snowmobile_render_descr">Do jazdy skuterem śnieżnym z wyznaczonymi drogami i torami.</string>
+    <string name="snowmobile_render_descr">Do jazdy skuterem śnieżnym po wyznaczonych drogach.</string>
     <string name="message_you_need_add_two_points_to_show_graphs">Dodaj co najmniej dwa punkty</string>
     <string name="subscription_payment_issue_title">Stuknij przycisk, aby skonfigurować metodę płatności w Google Play i naprawić subskrypcję.</string>
     <string name="subscription_on_hold_title">Subskrypcja OsmAnd Live jest wstrzymana</string>
@@ -4045,7 +4045,7 @@
     <string name="rendering_attr_noNatureReserveBoundaries_name">Naturalne granice</string>
     <string name="track_has_no_altitude">Trasa nie zawiera danych o wysokości.</string>
     <string name="track_has_no_speed">Trasa nie zawiera informacji o prędkości.</string>
-    <string name="trip_recording_logging_interval_info">Interwał rejestrowania ustawia okres, w którym OsmAnd zażąda bieżących danych pozycji.</string>
+    <string name="trip_recording_logging_interval_info">Interwał rejestrowania ustawia okres czasu, w którym OsmAnd będzie żądał danych o aktualnej pozycji.</string>
     <string name="show_start_dialog">Pokaż okno rozpocznij</string>
     <string name="trip_recording_show_start_dialog_setting">Jeśli ta opcja jest wyłączona, nagrywanie rozpocznie się natychmiast po dotknięciu widżetu lub elementu menu, pomijając okno dialogowe potwierdzenia.</string>
     <string name="customize_route_line">Zmień trasę nawigacji</string>
@@ -4215,4 +4215,14 @@
     <string name="backup_delete_types">Usuń dane wyłączonych typów</string>
     <string name="backup_delete_types_descr">Czy chcesz usunąć z chmury dane dla wyłączonych typów\?</string>
     <string name="shared_string_discussion">Dyskusja</string>
+    <string name="backup_error_user_is_already_registered">Użytkownik był już zarejestrowany z takim adresem e-mail</string>
+    <string name="backup_error_subscription_was_expired">Subskrypcja jest już nieważna</string>
+    <string name="backup_error_subscription_was_used">Subskrypcja lub promocja została wykorzystana przez inne konto %1$s</string>
+    <string name="backup_error_size_is_exceeded">Przekroczono maksymalny rozmiar chmury OsmAnd Cloud %1$s</string>
+    <string name="backup_error_gzip_only_supported_upload">Plik nie jest przesyłany w formacie gzip</string>
+    <string name="backup_error_file_not_available">Plik nie jest dostępny</string>
+    <string name="backup_error_token_is_not_valid">Podany identyfikator urządzenia lub token jest nieprawidłowy</string>
+    <string name="backup_error_token_is_not_valid_or_expired">Token jest nieprawidłowy lub wygasł</string>
+    <string name="backup_error_user_is_not_registered">Użytkownik z tym adresem e-mail nie jest zarejestrowany</string>
+    <string name="backup_error_no_valid_subscription">Brak ważnej subskrypcji</string>
 </resources>
