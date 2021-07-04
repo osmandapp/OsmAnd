@@ -4104,7 +4104,7 @@
     <string name="backup_and_restore">Kopia i przywracanie</string>
     <string name="last_backup">Ostatnia kopia zapasowa</string>
     <string name="duration_ago">%1$s temu</string>
-    <string name="osmand_cloud">Chmura OsmAnd</string>
+    <string name="osmand_cloud">OsmAnd Cloud</string>
     <string name="osmand_cloud_authorize_descr">Nigdy nie trać swoich danych, wykonuj kopie zapasowe i przywracaj wszystkie informacje bez problemu.</string>
     <string name="local_backup">Lokalna kopia zapasowa</string>
     <string name="local_backup_descr">Tworzenie kopii zapasowej lub przywracanie danych z pliku lokalnego.</string>
@@ -4160,14 +4160,14 @@
     <string name="select_backup_data_descr">Wybierz dane i foldery do utworzenia kopii zapasowej.</string>
     <string name="backup_restore_data_descr">Przywracanie danych na urządzeniu przy użyciu kopii zapasowych online.</string>
     <string name="backup_restore_data">Przywróć dane</string>
-    <string name="restore_from_osmand_cloud">Przywracanie z chmury OsmAnd</string>
+    <string name="restore_from_osmand_cloud">Przywróć z chmury OsmAnd Cloud</string>
     <string name="choose_what_to_restore">Wybierz, co chcesz przywrócić.</string>
     <string name="restore_selected_data">Przywracanie wybranych danych</string>
     <string name="receiving_data_from_server">Odbieranie danych z serwera</string>
     <string name="restore_complete">Przywracanie zakończone</string>
     <string name="grey_color_slope">Kolor szary jest używany, gdy nachylenie jest nieokreślone.</string>
     <string name="backup_version_history">Historia wersji</string>
-    <string name="backup_version_history_delete_descr">Czy chcesz usunąć z chmury historię zmian dla wyłączonych typów\?</string>
+    <string name="backup_version_history_delete_descr">Czy chcesz usunąć z chmury OsmAnd Cloud historię zmian dla nieaktualnych typów danych\?</string>
     <string name="delete_version_history">Usuń historię wersji</string>
     <string name="add_online_routing_engine">Dodaj silnik wyznaczania tras online</string>
     <string name="delete_online_routing_engine">Usunąć ten silnik wyznaczania tras online\?</string>
@@ -4201,7 +4201,7 @@
     <string name="purchases_feature_desc_monthly_map_updates">Uzyskaj dostęp do regularnych, comiesięcznych aktualizacji dla map offline.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Uzyskaj dostęp do częstszych aktualizacji map, wybieraj między aktualizacjami: godzinnymi, dziennymi lub tygodniowymi. Aktualizacje są pobierane przyrostowo, tylko dla zmienionego obszaru.</string>
     <string name="purchases_feature_desc_advanced_widgets">Uzyskaj dostęp do zaawansowanych widżetów OsmAnd.</string>
-    <string name="purchases_feature_desc_osmand_cloud">Otrzymaj OsmAnd Cloud, aby przechowywać wszystkie dane OsmAnd w trybie online. Zapomnij o utracie swoich danych po ponownej instalacji, twórz kopie zapasowe i przywracaj wszystkie informacje bez problemu.</string>
+    <string name="purchases_feature_desc_osmand_cloud">Otrzymaj OsmAnd Cloud, aby przechowywać wszystkie dane OsmAnd w trybie online. Bez utraty danych po reinstalacji. Z łatwością twórz kopie zapasowe i przywracaj wszystkie informacje.</string>
     <string name="unlimited_map_downloads">Nieograniczone pobieranie map</string>
     <string name="you_can_get_feature_as_part_of_pattern">Możesz otrzymać \"%1$s\" jako część planu: %2$s. Porównaj plany:</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia i Wikipodróże w trybie offline</string>
@@ -4213,7 +4213,7 @@
     <string name="advanced_widgets">Zaawansowane widżety</string>
     <string name="shared_string_view_all">Wyświetl wszystko</string>
     <string name="backup_delete_types">Usuń dane wyłączonych typów</string>
-    <string name="backup_delete_types_descr">Czy chcesz usunąć z chmury dane dla wyłączonych typów\?</string>
+    <string name="backup_delete_types_descr">Usunąć wszystkie dane z chmury OsmAnd Cloud dla nieaktualnych typów\?</string>
     <string name="shared_string_discussion">Dyskusja</string>
     <string name="backup_error_user_is_already_registered">Użytkownik był już zarejestrowany z takim adresem e-mail</string>
     <string name="backup_error_subscription_was_expired">Subskrypcja jest już nieważna</string>
