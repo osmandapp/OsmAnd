@@ -24,7 +24,7 @@
     <string name="backup_error_user_is_already_registered">This e-mail address is in use on another account</string>
     <string name="shared_string_view_all">View all</string>
     <string name="shared_string_discussion">Discussion</string>
-    <string name="backup_delete_types">Delete disabled data types</string<
+    <string name="backup_delete_types">Delete disabled data types</string>
     <string name="backup_delete_types_descr">Delete all data for deprecated data types from OsmAnd cloud?</string>
     <string name="from_with_param">From %1$s</string>
     <string name="regular_price">Regular price</string>
