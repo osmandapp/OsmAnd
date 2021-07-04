@@ -4219,7 +4219,7 @@
     <string name="backup_error_subscription_was_expired">Subskrypcja jest już nieważna</string>
     <string name="backup_error_subscription_was_used">Subskrypcja lub promocja została wykorzystana przez inne konto %1$s</string>
     <string name="backup_error_size_is_exceeded">Przekroczono maksymalny rozmiar chmury OsmAnd Cloud %1$s</string>
-    <string name="backup_error_gzip_only_supported_upload">Plik nie jest przesyłany w formacie gzip</string>
+    <string name="backup_error_gzip_only_supported_upload">Plik nie został przesłany w formacie gzip</string>
     <string name="backup_error_file_not_available">Plik nie jest dostępny</string>
     <string name="backup_error_token_is_not_valid">Podany identyfikator urządzenia lub token jest nieprawidłowy</string>
     <string name="backup_error_token_is_not_valid_or_expired">Token jest nieprawidłowy lub wygasł</string>
