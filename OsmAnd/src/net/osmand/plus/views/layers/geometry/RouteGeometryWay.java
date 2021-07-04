@@ -348,7 +348,7 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 		}
 	}
 
-	private static class GeometrySolidWayStyle extends GeometryWayStyle<RouteGeometryWayContext> {
+	public static class GeometrySolidWayStyle extends GeometryWayStyle<RouteGeometryWayContext> {
 
 		private final Integer directionArrowsColor;
 

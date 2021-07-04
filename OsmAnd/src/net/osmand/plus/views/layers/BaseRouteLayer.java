@@ -241,7 +241,7 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 		return null;
 	}
 
-	private ApplicationMode getAppMode() {
+	protected ApplicationMode getAppMode() {
 		return view.getApplication().getRoutingHelper().getAppMode();
 	}
 
