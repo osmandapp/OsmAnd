@@ -93,7 +93,7 @@
     <string name="enter_password">Wpisz kod</string>
     <string name="password_descr">Hasło Telegram</string>
     <string name="shared_string_login">Zaloguj się</string>
-    <string name="shared_string_logout">Wyloguj się</string>
+    <string name="shared_string_logout">Wyloguj</string>
     <string name="not_logged_in">Nie jesteś zalogowany/a</string>
     <string name="shared_string_continue">Kontynuuj</string>
     <string name="shared_string_cancel">Anuluj</string>
