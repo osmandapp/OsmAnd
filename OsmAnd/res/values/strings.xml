@@ -122,7 +122,7 @@
     <string name="backup_into_file">Back up as file</string>
     <string name="local_backup_descr">Back up or restore data from a local file.</string>
     <string name="local_backup">Local backup</string>
-    <string name="osmand_cloud_authorize_descr">Never lose your data, back up and restore all info easily.</string>
+    <string name="osmand_cloud_authorize_descr">Never lose your data. Back up and restore all info easily.</string>
     <string name="osmand_cloud">OsmAnd Cloud</string>
     <string name="duration_ago">%1$s ago</string>
     <string name="last_backup">Last backup</string>
