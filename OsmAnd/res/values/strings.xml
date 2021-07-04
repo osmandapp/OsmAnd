@@ -4221,7 +4221,7 @@
     <string name="import_track">Import GPX file</string>
     <string name="import_track_desc">File %1$s does not contain waypoints, import it as a track?</string>
     <string name="move_point">Move Point</string>
-    <string name="osm_recipients_label">OSM recipients<Sma/string>
+    <string name="osm_recipients_label">OSM recipients</string>
     <string name="total_donations">Total donations</string>
     <string name="day_off_label">off</string>
     <string name="winter_and_ski_renderer">Winter and ski</string>
