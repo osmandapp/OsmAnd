@@ -22,6 +22,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.TabActivity.OsmandFragmentPagerAdapter;
 import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.backup.NetworkSettingsHelper;
+import net.osmand.plus.backup.ui.status.BackupStatusFragment;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
