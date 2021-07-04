@@ -6,7 +6,6 @@ import android.os.Build;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -113,13 +112,10 @@ public class BackupUploadCard extends MapBaseCard {
 			}
 			AndroidUiHelper.updateVisibility(description, true);
 		}
-		container.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				buttonsVisible = !buttonsVisible;
-				adjustIndicator(app, buttonsVisible, view, nightMode);
-				AndroidUiHelper.updateVisibility(itemsContainer, buttonsVisible);
-			}
+		container.setOnClickListener(v -> {
+			buttonsVisible = !buttonsVisible;
+			adjustIndicator(app, buttonsVisible, view, nightMode);
+			AndroidUiHelper.updateVisibility(itemsContainer, buttonsVisible);
 		});
 		adjustIndicator(app, buttonsVisible, view, nightMode);
 		setupSelectableBackground(container);
@@ -167,9 +163,9 @@ public class BackupUploadCard extends MapBaseCard {
 		params.setMargins(params.leftMargin, AndroidUtils.dpToPx(app, 6), params.rightMargin, params.bottomMargin);
 	}
 
-	private void setupUploadItems(BackupInfo info) {
+	private void setupUploadItems(@NonNull BackupInfo info) {
 		LayoutInflater themedInflater = UiUtilities.getInflater(view.getContext(), nightMode);
-		for (SettingsItem item : info.getItemsToUpload(app)) {
+		for (SettingsItem item : info.itemsToUpload) {
 			View itemView = themedInflater.inflate(R.layout.backup_upload_item, itemsContainer, false);
 			setupItemView(item, itemView);
 
@@ -178,9 +174,9 @@ public class BackupUploadCard extends MapBaseCard {
 		}
 	}
 
-	private void setupItemsToDelete(BackupInfo info) {
+	private void setupItemsToDelete(@NonNull BackupInfo info) {
 		LayoutInflater themedInflater = UiUtilities.getInflater(view.getContext(), nightMode);
-		for (SettingsItem item : info.getItemsToDelete(app)) {
+		for (SettingsItem item : info.itemsToDelete) {
 			View itemView = themedInflater.inflate(R.layout.backup_upload_item, itemsContainer, false);
 			setupItemView(item, itemView);
 
@@ -192,9 +188,9 @@ public class BackupUploadCard extends MapBaseCard {
 		}
 	}
 
-	private void setupConflictingItems(BackupInfo info) {
+	private void setupConflictingItems(@NonNull BackupInfo info) {
 		LayoutInflater themedInflater = UiUtilities.getInflater(view.getContext(), nightMode);
-		for (Pair<LocalFile, RemoteFile> pair : info.getFilteredFilesToMerge(app)) {
+		for (Pair<LocalFile, RemoteFile> pair : info.filteredFilesToMerge) {
 			SettingsItem item = pair.first.item;
 			if (pair.first.item == null || pair.second.item == null) {
 				continue;
@@ -203,20 +199,12 @@ public class BackupUploadCard extends MapBaseCard {
 			setupItemView(item, itemView);
 
 			View localVersionButton = itemView.findViewById(R.id.local_version_button);
-			localVersionButton.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					app.getNetworkSettingsHelper().exportSettings(exportListener, pair.first.item);
-				}
-			});
+			localVersionButton.setOnClickListener(v -> app.getNetworkSettingsHelper().exportSettings(exportListener, pair.first.item));
 			View serverButton = itemView.findViewById(R.id.server_button);
-			serverButton.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					SettingsItem settingsItem = pair.second.item;
-					settingsItem.setShouldReplace(true);
-					app.getNetworkSettingsHelper().importSettings(Collections.singletonList(settingsItem), "", 1, true, importListener);
-				}
+			serverButton.setOnClickListener(v -> {
+				SettingsItem settingsItem = pair.second.item;
+				settingsItem.setShouldReplace(true);
+				app.getNetworkSettingsHelper().importSettings(Collections.singletonList(settingsItem), "", 1, true, importListener);
 			});
 			AndroidUiHelper.updateVisibility(serverButton, true);
 			AndroidUiHelper.updateVisibility(localVersionButton, true);
@@ -230,7 +218,7 @@ public class BackupUploadCard extends MapBaseCard {
 		}
 	}
 
-	private void setupItemView(SettingsItem item, View itemView) {
+	private void setupItemView(@NonNull SettingsItem item, @NonNull View itemView) {
 		TextView title = itemView.findViewById(R.id.title);
 		title.setText(item.getPublicName(app));
 
@@ -253,36 +241,23 @@ public class BackupUploadCard extends MapBaseCard {
 		View actionButton = view.findViewById(R.id.action_button);
 		if (app.getNetworkSettingsHelper().isBackupExporting()) {
 			UiUtilities.setupDialogButton(nightMode, actionButton, DialogButtonType.SECONDARY, R.string.shared_string_cancel);
-			actionButton.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					app.getNetworkSettingsHelper().cancelExport();
-				}
-			});
+			actionButton.setOnClickListener(v -> app.getNetworkSettingsHelper().cancelExport());
 			AndroidUiHelper.updateVisibility(actionButton, true);
 		} else if (status == BackupStatus.MAKE_BACKUP || status == BackupStatus.CONFLICTS) {
 			UiUtilities.setupDialogButton(nightMode, actionButton, DialogButtonType.SECONDARY, R.string.backup_now);
-			actionButton.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					BackupInfo info = backup.getBackupInfo();
-					List<SettingsItem> items = info.getItemsToUpload(app);
-					if (!items.isEmpty() || !Algorithms.isEmpty(info.getFilteredFilesToDelete(app))) {
-						app.getNetworkSettingsHelper().exportSettings(items, info.getFilteredFilesToDelete(app), exportListener);
-					}
+			actionButton.setOnClickListener(v -> {
+				BackupInfo info = backup.getBackupInfo();
+				List<SettingsItem> items = info.itemsToUpload;
+				if (!items.isEmpty() || !Algorithms.isEmpty(info.filteredFilesToDelete)) {
+					app.getNetworkSettingsHelper().exportSettings(items, info.filteredFilesToDelete, exportListener);
 				}
 			});
 			BackupInfo info = backup.getBackupInfo();
 			AndroidUiHelper.updateVisibility(actionButton, info != null
-					&& (!info.getFilteredFilesToUpload(app).isEmpty() || !info.getFilteredFilesToDelete(app).isEmpty()));
+					&& (!info.filteredFilesToUpload.isEmpty() || !info.filteredFilesToDelete.isEmpty()));
 		} else if (status == BackupStatus.NO_INTERNET_CONNECTION || status == BackupStatus.ERROR) {
 			UiUtilities.setupDialogButton(nightMode, actionButton, DialogButtonType.SECONDARY, R.string.retry);
-			actionButton.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					app.getBackupHelper().prepareBackup();
-				}
-			});
+			actionButton.setOnClickListener(v -> app.getBackupHelper().prepareBackup());
 			AndroidUiHelper.updateVisibility(actionButton, true);
 		} else if (status == BackupStatus.BACKUP_COMPLETE) {
 			AndroidUiHelper.updateVisibility(actionButton, false);
@@ -291,7 +266,7 @@ public class BackupUploadCard extends MapBaseCard {
 	}
 
 	public void setupProgress(@NonNull BackupInfo info) {
-		int itemsCount = info.getFilteredFilesToUpload(app).size() + info.getFilteredFilesToDelete(app).size();
+		int itemsCount = info.filteredFilesToUpload.size() + info.filteredFilesToDelete.size();
 		progressBar.setMax(itemsCount);
 	}
 
@@ -338,20 +313,21 @@ public class BackupUploadCard extends MapBaseCard {
 		}
 	}
 
+	@Nullable
 	private SettingsItem getSettingsItem(@NonNull String type, @NonNull String fileName) {
 		BackupInfo info = backup.getBackupInfo();
 		if (info != null) {
-			for (LocalFile file : info.getFilteredFilesToUpload(app)) {
+			for (LocalFile file : info.filteredFilesToUpload) {
 				if (file.item != null && BackupHelper.applyItem(file.item, type, fileName)) {
 					return file.item;
 				}
 			}
-			for (RemoteFile file : info.getFilteredFilesToDelete(app)) {
+			for (RemoteFile file : info.filteredFilesToDelete) {
 				if (file.item != null && BackupHelper.applyItem(file.item, type, fileName)) {
 					return file.item;
 				}
 			}
-			for (Pair<LocalFile, RemoteFile> pair : info.getFilteredFilesToMerge(app)) {
+			for (Pair<LocalFile, RemoteFile> pair : info.filteredFilesToMerge) {
 				SettingsItem item = pair.first.item;
 				if (item != null && BackupHelper.applyItem(item, type, fileName)) {
 					return item;
@@ -372,10 +348,10 @@ public class BackupUploadCard extends MapBaseCard {
 	private BackupStatus getBackupStatus() {
 		BackupInfo info = backup.getBackupInfo();
 		if (info != null) {
-			if (!Algorithms.isEmpty(info.getFilteredFilesToMerge(app))) {
+			if (!Algorithms.isEmpty(info.filteredFilesToMerge)) {
 				return BackupStatus.CONFLICTS;
-			} else if (!Algorithms.isEmpty(info.getFilteredFilesToUpload(app))
-					|| !Algorithms.isEmpty(info.getFilteredFilesToDelete(app))) {
+			} else if (!Algorithms.isEmpty(info.filteredFilesToUpload)
+					|| !Algorithms.isEmpty(info.filteredFilesToDelete)) {
 				return BackupStatus.MAKE_BACKUP;
 			}
 		} else if (!app.getSettings().isInternetConnectionAvailable()) {
@@ -391,7 +367,8 @@ public class BackupUploadCard extends MapBaseCard {
 		AndroidUtils.setBackground(view, drawable);
 	}
 
-	private Drawable getItemIcon(SettingsItem item) {
+	@Nullable
+	private Drawable getItemIcon(@NonNull SettingsItem item) {
 		if (item instanceof ProfileSettingsItem) {
 			ProfileSettingsItem profileItem = (ProfileSettingsItem) item;
 			ApplicationMode mode = profileItem.getAppMode();

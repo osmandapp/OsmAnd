@@ -9,7 +9,9 @@ import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class BackupDbHelper {
 
@@ -187,6 +189,33 @@ public class BackupDbHelper {
 			}
 		}
 		return infos;
+	}
+
+	@NonNull
+	public Map<String, Long> getUploadedFileInfoMap() {
+		Map<String, Long> infoMap = new HashMap<>();
+		SQLiteConnection db = openConnection(true);
+		if (db != null) {
+			try {
+				SQLiteCursor query = db.rawQuery(
+						"SELECT " + UPLOADED_FILE_COL_TYPE + ", " +
+								UPLOADED_FILE_COL_NAME + ", " +
+								UPLOADED_FILE_COL_UPLOAD_TIME +
+								" FROM " + UPLOADED_FILES_TABLE_NAME, null);
+				if (query != null && query.moveToFirst()) {
+					do {
+						UploadedFileInfo info = readUploadedFileInfo(query);
+						infoMap.put(info.getType() + "___" + info.getName(), info.uploadTime);
+					} while (query.moveToNext());
+				}
+				if (query != null) {
+					query.close();
+				}
+			} finally {
+				db.close();
+			}
+		}
+		return infoMap;
 	}
 
 	@Nullable
