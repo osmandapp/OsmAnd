@@ -41,6 +41,12 @@ public class BackupDbHelper {
 		private final String name;
 		private long uploadTime;
 
+		public UploadedFileInfo(@NonNull String type, @NonNull String name) {
+			this.type = type;
+			this.name = name;
+			this.uploadTime = 0;
+		}
+
 		public UploadedFileInfo(@NonNull String type, @NonNull String name, long uploadTime) {
 			this.type = type;
 			this.name = name;
