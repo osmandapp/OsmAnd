@@ -65,15 +65,15 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
 			String fileName = BackupHelper.getItemFileName(item);
 			ItemProgressInfo progressInfo = settingsHelper.getExportTask().getItemProgressInfo(item.getType().name(), fileName);
 			if (progressInfo != null) {
-				if (progressInfo.finished) {
+				if (progressInfo.isFinished()) {
 					secondIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_cloud_done));
 					AndroidUiHelper.updateVisibility(secondIcon, true);
 					AndroidUiHelper.updateVisibility(progressBar, false);
 					AndroidUiHelper.updateVisibility(itemView.findViewById(R.id.server_button), false);
 					AndroidUiHelper.updateVisibility(itemView.findViewById(R.id.local_version_button), false);
 				} else {
-					progressBar.setMax(progressInfo.work);
-					progressBar.setProgress(progressInfo.value);
+					progressBar.setMax(progressInfo.getWork());
+					progressBar.setProgress(progressInfo.getValue());
 
 					AndroidUiHelper.updateVisibility(progressBar, true);
 					AndroidUiHelper.updateVisibility(secondIcon, false);
