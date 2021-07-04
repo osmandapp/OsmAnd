@@ -13,12 +13,16 @@ import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 
 	private final NetworkSettingsHelper helper;
 	private final BackupExporter exporter;
 	private BackupExportListener listener;
+
+	private final Map<String, ItemProgressInfo> itemsProgress = new ConcurrentHashMap<>();
+	private int generalProgress;
 
 	ExportBackupTask(@NonNull NetworkSettingsHelper helper,
 					 @NonNull List<SettingsItem> items,
@@ -41,6 +45,15 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 
 	public void setListener(BackupExportListener listener) {
 		this.listener = listener;
+	}
+
+	public int getGeneralProgress() {
+		return generalProgress;
+	}
+
+	@Nullable
+	public ItemProgressInfo getItemProgressInfo(@NonNull String type, @NonNull String fileName) {
+		return itemsProgress.get(type + fileName);
 	}
 
 	@Override
@@ -100,22 +113,39 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 
 			@Override
 			public void itemExportStarted(@NonNull String type, @NonNull String fileName, int work) {
-				publishProgress(new ItemProgressInfo(type, fileName, 0, work, false));
+				ItemProgressInfo progressInfo = new ItemProgressInfo(type, fileName, 0, work, false);
+				itemsProgress.put(type + fileName, progressInfo);
+				publishProgress(progressInfo);
 			}
 
 			@Override
 			public void updateItemProgress(@NonNull String type, @NonNull String fileName, int progress) {
-				publishProgress(new ItemProgressInfo(type, fileName, progress, 0, false));
+				int work = 0;
+				ItemProgressInfo prevInfo = getItemProgressInfo(type, fileName);
+				if (prevInfo != null) {
+					work = prevInfo.work;
+				}
+				ItemProgressInfo progressInfo = new ItemProgressInfo(type, fileName, progress, work, false);
+				itemsProgress.put(type + fileName, progressInfo);
+				publishProgress(progressInfo);
 			}
 
 			@Override
 			public void itemExportDone(@NonNull String type, @NonNull String fileName) {
-				publishProgress(new ItemProgressInfo(type, fileName, 0, 0, true));
+				int work = 0;
+				ItemProgressInfo prevInfo = getItemProgressInfo(type, fileName);
+				if (prevInfo != null) {
+					work = prevInfo.work;
+				}
+				ItemProgressInfo progressInfo = new ItemProgressInfo(type, fileName, 0, work, true);
+				itemsProgress.put(type + fileName, progressInfo);
+				publishProgress(progressInfo);
 			}
 
 			@Override
 			public void updateGeneralProgress(int uploadedItems, int uploadedKb) {
 				exporter.setCancelled(isCancelled());
+				generalProgress = uploadedItems;
 				publishProgress(uploadedItems);
 			}
 
@@ -126,14 +156,14 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 		};
 	}
 
-	private static class ItemProgressInfo {
+	public static class ItemProgressInfo {
 
 		private final String type;
 		private final String fileName;
 
-		private final int work;
-		private final int value;
-		private final boolean finished;
+		public final int work;
+		public final int value;
+		public final boolean finished;
 
 		public ItemProgressInfo(String type, String fileName, int progress, int work, boolean finished) {
 			this.type = type;
