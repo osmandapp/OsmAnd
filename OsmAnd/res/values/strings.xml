@@ -13,7 +13,7 @@
 -->
 
     <string name="backup_error_no_valid_subscription">No valid subscription present</string>
-    <string name="backup_error_user_is_not_registered">No user is registered with that e-address</string>
+    <string name="backup_error_user_is_not_registered">No user registered with that e-mail address</string>
     <string name="backup_error_token_is_not_valid_or_expired">Invalid or expired token</string>
     <string name="backup_error_token_is_not_valid">Something is wrong with the provided device ID or token</string>
     <string name="backup_error_file_not_available">File unavailable</string>
@@ -65,7 +65,7 @@
     <string name="routing_attr_avoid_tunnels_name">Avoid tunnels</string>
     <string name="routing_attr_avoid_tunnels_description">Avoid tunnels</string>
     <string name="delete_version_history">Delete version history</string>
-    <string name="backup_version_history_delete_descr">Do you want to delete the changelog for deprecated data types from OsmAnd cloud?</string>
+    <string name="backup_version_history_delete_descr">Delete the changelog for deprecated data types from OsmAnd cloud?</string>
     <string name="backup_storage_taken">Storage taken</string>
     <string name="backup_version_history">Version history</string>
     <string name="grey_color_slope">Grey color is used when slope is undefined.</string>
@@ -99,7 +99,7 @@
     <string name="backup_now">Backup now</string>
     <string name="backup_complete">Backup complete</string>
     <string name="shared_string_predefined">Predefined</string>
-    <string name="failed_loading_predefined_engines">Failed to load the list of predefined templates.\nPlease check your Internet connection.</string>
+    <string name="failed_loading_predefined_engines">Could not load the list of predefined templates.\nPlease check your Internet connection.</string>
     <string name="provided_by">Provided by %1$s</string>
     <string name="shared_string_external">External</string>
     <string name="osmand_online_routing_promo">You can use predefined templates, or add custom online routing, supported: OSRM, Graphhopper, OpenRouteService, GPX.</string>
@@ -110,19 +110,19 @@
     <string name="verification_code_missing_description">Waiting time for code can be 10 minutes, also you can check your spam folder. If it doesn\'t help, use button below.</string>
     <string name="verification_code_missing">I didn\'t receive verification code</string>
     <string name="resend_verification_code">Resend code</string>
-    <string name="cloud_email_already_registered">Account with this email is already registered.</string>
-    <string name="cloud_email_not_registered">This email has not been registered for OsmAnd Cloud</string>
-    <string name="enter_verification_code">Enter 4 digit code</string>
-    <string name="verify_email_address_descr">We sent a verification code to %1$s, please enter it in the field below.</string>
-    <string name="verify_email_address">Verify email address</string>
-    <string name="osmand_cloud_login_descr">Please enter the email address, you used for registration. We will send you a one-time password needed on the next step.</string>
-    <string name="osmand_cloud_create_account_descr">Please enter your email address, all your data will be linked to it.\nWe will send you a verification code to this email address.</string>
+    <string name="cloud_email_already_registered">This e-mail address is already registered.</string>
+    <string name="cloud_email_not_registered">This e-mail address is not registered for OsmAnd Cloud</string>
+    <string name="enter_verification_code">Enter the 4-digit code</string>
+    <string name="verify_email_address_descr">Verification code sent to %1$s. Please enter it in the field below.</string>
+    <string name="verify_email_address">Verify the e-mail address</string>
+    <string name="osmand_cloud_login_descr">Please enter the e-mail address you registred with. A one-time password for the next step will be sent to it.</string>
+    <string name="osmand_cloud_create_account_descr">Please enter your e-mail address, a verification code will be sent there,\nand all your data will be linked to it.</string>
     <string name="osmand_cloud_help_descr">Need help? Please contact us at %1$s</string>
     <string name="restore_from_file">Restore from file</string>
-    <string name="backup_into_file">Backup into file</string>
-    <string name="local_backup_descr">Backup or restore data from a local file.</string>
+    <string name="backup_into_file">Back up as file</string>
+    <string name="local_backup_descr">Back up or restore data from a local file.</string>
     <string name="local_backup">Local backup</string>
-    <string name="osmand_cloud_authorize_descr">Never lose your data, backup and restore all information without a problem.</string>
+    <string name="osmand_cloud_authorize_descr">Never lose your data, back up and restore all info easily.</string>
     <string name="osmand_cloud">OsmAnd Cloud</string>
     <string name="duration_ago">%1$s ago</string>
     <string name="last_backup">Last backup</string>
@@ -4221,7 +4221,7 @@
     <string name="import_track">Import GPX file</string>
     <string name="import_track_desc">File %1$s does not contain waypoints, import it as a track?</string>
     <string name="move_point">Move Point</string>
-    <string name="osm_recipients_label">OSM recipients</string>
+    <string name="osm_recipients_label">OSM recipients<Sma/string>
     <string name="total_donations">Total donations</string>
     <string name="day_off_label">off</string>
     <string name="winter_and_ski_renderer">Winter and ski</string>
