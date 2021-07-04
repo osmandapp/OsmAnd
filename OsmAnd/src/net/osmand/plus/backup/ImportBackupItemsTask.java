@@ -33,12 +33,7 @@ public class ImportBackupItemsTask extends AsyncTask<Void, Void, Boolean> {
 		importer = new BackupImporter(app.getBackupHelper());
 		this.listener = listener;
 		this.items = items;
-		localeListener = new StateChangedListener<String>() {
-			@Override
-			public void stateChanged(String change) {
-				needRestart = true;
-			}
-		};
+		localeListener = change -> needRestart = true;
 	}
 
 	@Override

@@ -672,21 +672,19 @@ public class BackupHelper {
 						} else if (remoteUploadTime == localUploadTime) {
 							if (localUploadTime < localFile.localModifiedTime) {
 								info.filesToUpload.add(localFile);
-								//info.filesToDownload.add(remoteFile);
+								info.filesToDownload.add(remoteFile);
 							}
 							//info.filesToUpload.add(localFile);
 							//info.filesToDownload.add(remoteFile);
 						} else {
 							info.filesToMerge.add(new Pair<>(localFile, remoteFile));
-							//info.filesToDownload.add(remoteFile);
+							info.filesToDownload.add(remoteFile);
 						}
-							/*
-							long localFileSize = localFile.file == null ? 0 : localFile.file.length();
-							long remoteFileSize = remoteFile.getFilesize();
-							if (remoteFileSize > 0 && localFileSize > 0 && localFileSize != remoteFileSize && !info.filesToDownload.contains(remoteFile)) {
-								info.filesToDownload.add(remoteFile);
-							}
-							 */
+						long localFileSize = localFile.file == null ? 0 : localFile.file.length();
+						long remoteFileSize = remoteFile.getFilesize();
+						if (remoteFileSize > 0 && localFileSize > 0 && localFileSize != remoteFileSize && !info.filesToDownload.contains(remoteFile)) {
+							info.filesToDownload.add(remoteFile);
+						}
 					}
 					if (localFile == null && !remoteFile.isDeleted()) {
 						if (backupLastUploadedTime > 0 && backupLastUploadedTime >= remoteFile.getClienttimems()) {
