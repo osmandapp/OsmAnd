@@ -173,15 +173,15 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 	}
 
 	protected Map<ExportSettingsCategory, SettingsCategoryItems> getDataList() {
-		List<RemoteFile> remoteFiles = backupHelper.getBackup().getRemoteFiles(getRemoteFilesType());
+		Map<String, RemoteFile> remoteFiles = backupHelper.getBackup().getRemoteFiles(getRemoteFilesType());
 		if (remoteFiles == null) {
-			remoteFiles = Collections.emptyList();
+			remoteFiles = Collections.emptyMap();
 		}
 
 		Map<ExportSettingsType, List<?>> settingsToOperate = new EnumMap<>(ExportSettingsType.class);
 		for (ExportSettingsType type : ExportSettingsType.getEnabledTypes()) {
 			List<RemoteFile> filesByType = new ArrayList<>();
-			for (RemoteFile remoteFile : remoteFiles) {
+			for (RemoteFile remoteFile : remoteFiles.values()) {
 				if (ExportSettingsType.getExportSettingsTypeForRemoteFile(remoteFile) == type) {
 					filesByType.add(remoteFile);
 				}

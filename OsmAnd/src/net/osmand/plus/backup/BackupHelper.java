@@ -604,7 +604,6 @@ public class BackupHelper {
 				LocalFile localFile = new LocalFile();
 				localFile.file = file;
 				localFile.item = item;
-				localFile.subfolder = "";
 				localFile.fileName = fileName;
 				localFile.localModifiedTime = lastModifiedTime;
 				if (infos != null) {
@@ -644,9 +643,9 @@ public class BackupHelper {
 	}
 
 	@SuppressLint("StaticFieldLeak")
-	void generateBackupInfo(@NonNull final List<LocalFile> localFiles,
-							@NonNull final List<RemoteFile> uniqueRemoteFiles,
-							@NonNull final List<RemoteFile> deletedRemoteFiles,
+	void generateBackupInfo(@NonNull final Map<String, LocalFile> localFiles,
+							@NonNull final Map<String, RemoteFile> uniqueRemoteFiles,
+							@NonNull final Map<String, RemoteFile> deletedRemoteFiles,
 							@Nullable final OnGenerateBackupInfoListener listener) {
 
 		OperationLog operationLog = new OperationLog("generateBackupInfo", DEBUG, 200);
@@ -657,32 +656,30 @@ public class BackupHelper {
 			@Override
 			protected BackupInfo doInBackground(Void... voids) {
 				BackupInfo info = new BackupInfo();
-				List<RemoteFile> remoteFiles = new ArrayList<>(uniqueRemoteFiles);
-				remoteFiles.addAll(deletedRemoteFiles);
+				List<RemoteFile> remoteFiles = new ArrayList<>(uniqueRemoteFiles.values());
+				remoteFiles.addAll(deletedRemoteFiles.values());
 				for (RemoteFile remoteFile : remoteFiles) {
 					ExportSettingsType exportType = ExportSettingsType.getExportSettingsTypeForRemoteFile(remoteFile);
 					if (exportType == null || !ExportSettingsType.isTypeEnabled(exportType)) {
 						continue;
 					}
-					boolean hasLocalFile = false;
-					for (LocalFile localFile : localFiles) {
-						if (remoteFile.getName().equals(localFile.getFileName(true))) {
-							hasLocalFile = true;
-							long remoteUploadTime = remoteFile.getClienttimems();
-							long localUploadTime = localFile.uploadTime;
-							if (remoteFile.isDeleted()) {
-								info.localFilesToDelete.add(localFile);
-							} else if (remoteUploadTime == localUploadTime) {
-								if (localUploadTime < localFile.localModifiedTime) {
-									info.filesToUpload.add(localFile);
-									//info.filesToDownload.add(remoteFile);
-								}
-								//info.filesToUpload.add(localFile);
-								//info.filesToDownload.add(remoteFile);
-							} else {
-								info.filesToMerge.add(new Pair<>(localFile, remoteFile));
+					LocalFile localFile = localFiles.get(remoteFile.getTypeNamePath());
+					if (localFile != null) {
+						long remoteUploadTime = remoteFile.getClienttimems();
+						long localUploadTime = localFile.uploadTime;
+						if (remoteFile.isDeleted()) {
+							info.localFilesToDelete.add(localFile);
+						} else if (remoteUploadTime == localUploadTime) {
+							if (localUploadTime < localFile.localModifiedTime) {
+								info.filesToUpload.add(localFile);
 								//info.filesToDownload.add(remoteFile);
 							}
+							//info.filesToUpload.add(localFile);
+							//info.filesToDownload.add(remoteFile);
+						} else {
+							info.filesToMerge.add(new Pair<>(localFile, remoteFile));
+							//info.filesToDownload.add(remoteFile);
+						}
 							/*
 							long localFileSize = localFile.file == null ? 0 : localFile.file.length();
 							long remoteFileSize = remoteFile.getFilesize();
@@ -690,29 +687,21 @@ public class BackupHelper {
 								info.filesToDownload.add(remoteFile);
 							}
 							 */
-							break;
-						}
 					}
-					if (!hasLocalFile && !remoteFile.isDeleted()) {
+					if (localFile == null && !remoteFile.isDeleted()) {
 						if (backupLastUploadedTime > 0 && backupLastUploadedTime >= remoteFile.getClienttimems()) {
 							info.filesToDelete.add(remoteFile);
 						}
 						info.filesToDownload.add(remoteFile);
 					}
 				}
-				for (LocalFile localFile : localFiles) {
+				for (LocalFile localFile : localFiles.values()) {
 					ExportSettingsType exportType = localFile.item != null
 							? ExportSettingsType.getExportSettingsTypeForItem(localFile.item) : null;
 					if (exportType == null || !ExportSettingsType.isTypeEnabled(exportType)) {
 						continue;
 					}
-					boolean hasRemoteFile = false;
-					for (RemoteFile remoteFile : uniqueRemoteFiles) {
-						if (localFile.getFileName(true).equals(remoteFile.getName())) {
-							hasRemoteFile = true;
-							break;
-						}
-					}
+					boolean hasRemoteFile = uniqueRemoteFiles.containsKey(localFile.getTypeFileName());
 					if (!hasRemoteFile) {
 						boolean isEmpty = localFile.item instanceof CollectionSettingsItem<?> && ((CollectionSettingsItem<?>) localFile.item).isEmpty();
 						if (!isEmpty) {

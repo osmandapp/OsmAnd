@@ -1,14 +1,12 @@
 package net.osmand.plus.backup;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import net.osmand.FileUtils;
 import net.osmand.OperationLog;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
 import net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
@@ -32,6 +30,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -88,7 +87,7 @@ class BackupImporter {
 		if (Algorithms.isEmpty(items)) {
 			throw new IllegalArgumentException("No items");
 		}
-		List<RemoteFile> remoteFiles = backupHelper.getBackup().getRemoteFiles(RemoteFilesType.UNIQUE);
+		Collection<RemoteFile> remoteFiles = backupHelper.getBackup().getRemoteFiles(RemoteFilesType.UNIQUE).values();
 		if (Algorithms.isEmpty(remoteFiles)) {
 			throw new IllegalArgumentException("No remote files");
 		}
@@ -239,11 +238,13 @@ class BackupImporter {
 			if (readItems) {
 				Map<RemoteFile, SettingsItemReader<? extends SettingsItem>> remoteFilesForRead = new HashMap<>();
 				for (SettingsItem item : settingsItemList) {
-					RemoteFile remoteFile = getItemRemoteFile(item, remoteItemFilesMap.values());
-					if (remoteFile != null && item.shouldReadOnCollecting()) {
-						SettingsItemReader<? extends SettingsItem> reader = item.getReader();
-						if (reader != null) {
-							remoteFilesForRead.put(remoteFile, reader);
+					if (item.shouldReadOnCollecting()) {
+						List<RemoteFile> foundRemoteFiles = getItemRemoteFiles(item, remoteItemFilesMap);
+						for (RemoteFile remoteFile : foundRemoteFiles) {
+							SettingsItemReader<? extends SettingsItem> reader = item.getReader();
+							if (reader != null) {
+								remoteFilesForRead.put(remoteFile, reader);
+							}
 						}
 					}
 				}
@@ -270,8 +271,9 @@ class BackupImporter {
 		return items;
 	}
 
-	@Nullable
-	private RemoteFile getItemRemoteFile(@NonNull SettingsItem item, @NonNull Collection<RemoteFile> remoteFiles) {
+	@NonNull
+	private List<RemoteFile> getItemRemoteFiles(@NonNull SettingsItem item, @NonNull Map<String, RemoteFile> remoteFiles) {
+		List<RemoteFile> res = new ArrayList<>();
 		String fileName = item.getFileName();
 		if (!Algorithms.isEmpty(fileName)) {
 			if (fileName.charAt(0) != '/') {
@@ -287,15 +289,22 @@ class BackupImporter {
 					fileName = fileName.substring(folder.length() - 1);
 				}
 			}
-			for (RemoteFile remoteFile : remoteFiles) {
-				String remoteFileName = remoteFile.getTypeNamePath();
-				String typeFileName = remoteFile.getType() + fileName;
-				if (remoteFileName.equals(typeFileName) || remoteFileName.startsWith(typeFileName + "/")) {
-					return remoteFile;
+			String typeFileName = item.getType().name() + fileName;
+			RemoteFile remoteFile = remoteFiles.remove(typeFileName);
+			if (remoteFile != null) {
+				res.add(remoteFile);
+			}
+			Iterator<Entry<String, RemoteFile>> it = remoteFiles.entrySet().iterator();
+			while (it.hasNext()) {
+				Entry<String, RemoteFile> fileEntry = it.next();
+				String remoteFileName = fileEntry.getKey();
+				if (remoteFileName.startsWith(typeFileName + "/")) {
+					res.add(fileEntry.getValue());
+					it.remove();
 				}
 			}
 		}
-		return null;
+		return res;
 	}
 
 	private void generateItemsJson(@NonNull JSONArray itemsJson,
@@ -410,10 +419,12 @@ class BackupImporter {
 		}
 	}
 
-	private void updateFilesInfo(@NonNull Map<String, RemoteFile> remoteFiles, List<SettingsItem> settingsItemList) {
+	private void updateFilesInfo(@NonNull Map<String, RemoteFile> remoteFiles,
+								 @NonNull List<SettingsItem> settingsItemList) {
+		Map<String, RemoteFile> remoteFilesMap = new HashMap<>(remoteFiles);
 		for (SettingsItem settingsItem : settingsItemList) {
-			RemoteFile remoteFile = getItemRemoteFile(settingsItem, remoteFiles.values());
-			if (remoteFile != null) {
+			List<RemoteFile> foundRemoteFiles = getItemRemoteFiles(settingsItem, remoteFilesMap);
+			for (RemoteFile remoteFile : foundRemoteFiles) {
 				settingsItem.setLastModifiedTime(remoteFile.getClienttimems());
 				remoteFile.item = settingsItem;
 				if (settingsItem instanceof FileSettingsItem) {
