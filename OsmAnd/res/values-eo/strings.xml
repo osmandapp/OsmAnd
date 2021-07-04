@@ -4125,11 +4125,11 @@
     <string name="verification_code_missing">Mi ne ricevis kontrolkodon</string>
     <string name="verification_code_missing_description">Necesos atendi eĉ 10 minutojn por ricevi la kodon, bonvolu ankaŭ kontroli vian trudmesaĝujon. Se tio ĉi ne helpos, uzu la butonon sube.</string>
     <string name="select_nav_profile_dialog_message">Elekto de profilo de navigo influas al maniero kiel kalkuli kurson. Eblas elekti malkonektan aŭ enretan navigilon.</string>
-    <string name="restore_complete">Restarigo finita</string>
+    <string name="restore_complete">Restarigita</string>
     <string name="grey_color_slope">Griza koloro estas uzata kiam dekliveco estas nekonata.</string>
     <string name="backup_version_history">Historio de versioj</string>
     <string name="backup_storage_taken">Uzata spaco</string>
-    <string name="backup_version_history_delete_descr">Ĉu vi certe volas forigi historion de ŝanĝitaj specoj el la OsmAnd-Nubo\?</string>
+    <string name="backup_version_history_delete_descr">Ĉu vi certe volas forigi historion de neaktualaj specoj de datumoj el OsmAnd-Nubo\?</string>
     <string name="delete_version_history">Forigi historion de versioj</string>
     <string name="loading_list_of_routing_services">Ŝargado de listo de disponeblaj navigiloj</string>
     <string name="shared_string_offline">Malkonekta</string>
@@ -4171,7 +4171,7 @@
     <string name="restore_from_osmand_cloud">Restarigi el OsmAnd-Nubo</string>
     <string name="choose_what_to_restore">Elektu kion restarigi.</string>
     <string name="restore_selected_data">Restarigi elektitajn datumojn</string>
-    <string name="receiving_data_from_server">Ricevado de datumoj el la servilo</string>
+    <string name="receiving_data_from_server">Ricevado de datumoj el la servilo…</string>
     <string name="routing_attr_avoid_tunnels_description">Eviti tunelojn</string>
     <string name="routing_attr_avoid_tunnels_name">Sen tuneloj</string>
     <string name="send_crash_log">Sendi pane-protokolon</string>
@@ -4191,8 +4191,8 @@
     <string name="complete_purchase">Aĉeti</string>
     <string name="regular_price">Norma prezo</string>
     <string name="from_with_param">De %1$s</string>
-    <string name="backup_delete_types_descr">Ĉu vi volas forigi el la nubo datumojn de malaktivaj elementoj\?</string>
-    <string name="backup_delete_types">Forigi datumojn de malaktivaj specoj</string>
+    <string name="backup_delete_types_descr">Ĉu vi volas forigi el la nubo datumojn de neaktualaj elementoj\?</string>
+    <string name="backup_delete_types">Forigi malaktivajn specojn de datumoj</string>
     <string name="shared_string_discussion">Diskuto</string>
     <string name="shared_string_view_all">Montri ĉiujn</string>
     <string name="purchases_feature_desc_nautical">Akiru aliron al informoj pri mara profundo.</string>
@@ -4204,7 +4204,7 @@
     <string name="purchases_feature_desc_monthly_map_updates">Akiru aliron al ĉiumonataj ĝisdatigoj de malkonektaj mapoj.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Akiru aliron al pli oftaj ĝisdatigoj de mapoj: ĉiuhoraj, ĉiutagaj aŭ ĉiusemajnaj. Ne necesas reelŝuti la tutan mapon – ĝisdatigoj enhavas nur ŝanĝitajn objektojn.</string>
     <string name="purchases_feature_desc_advanced_widgets">Akiru aliron al spertulaj fenestraĵoj OsmAnd.</string>
-    <string name="purchases_feature_desc_osmand_cloud">Tenu ĉiujn datumojn de OsmAnd enrete en OsmAnd-Nubo. Ne ĉagreniĝu pri perdi viajn datumojn post reinstalo, kreu kaj restarigu sekurkopiojn de viaj datumoj senprobleme.</string>
+    <string name="purchases_feature_desc_osmand_cloud">Tenu ĉiujn datumojn de OsmAnd enrete en OsmAnd-Nubo. Ne perdu viajn datumojn post reinstalu. Facile kreu kaj restarigu sekurkopiojn de viaj datumoj.</string>
     <string name="unlimited_map_downloads">Senlimaj elŝutoj de mapoj</string>
     <string name="wikipedia_and_wikivoyage_offline">Vikipedo kaj Vikivojaĝo malkonekte</string>
     <string name="terrain_maps_contour_lines_hillshade_slope">Terenaj mapoj: nivelkurboj, nivelombrumo, dekliveco</string>
@@ -4213,15 +4213,15 @@
     <string name="terrain_maps">Terenaj mapoj</string>
     <string name="nautical_depth">Maraj profundec-kurboj</string>
     <string name="advanced_widgets">Spertulaj fenestraĵoj</string>
-    <string name="backup_error_user_is_already_registered">Jam ekzistas uzanto kun tiu ĉi retpoŝta adreso</string>
+    <string name="backup_error_user_is_already_registered">Tiu ĉi retpoŝta adreso estas uzata de alia konto</string>
     <string name="backup_error_subscription_was_expired">Abono senvalidiĝis</string>
     <string name="backup_error_subscription_was_used">Abono aŭ reklamkodo estas uzata de alia konto: %1$s</string>
     <string name="backup_error_size_is_exceeded">Superis maksimuman grandon por OsmAnd-Nubo: %1$s</string>
-    <string name="backup_error_gzip_only_supported_upload">Liverita dosiero ne estas en la formo gzip</string>
-    <string name="backup_error_file_not_available">Dosiero ne estas disponebla</string>
-    <string name="backup_error_token_is_not_valid">Identigilo de aparato aŭ ĵetono estas malĝusta</string>
-    <string name="backup_error_token_is_not_valid_or_expired">Ĵetono estas malĝusta aŭ senvalidiĝis</string>
-    <string name="backup_error_user_is_not_registered">Uzanto kun tiu ĉi retpoŝta adreso ne estas registrita</string>
+    <string name="backup_error_gzip_only_supported_upload">Dosiero estu en la formo .gzip</string>
+    <string name="backup_error_file_not_available">Dosiero ne disponebla</string>
+    <string name="backup_error_token_is_not_valid">Io estas erara pri identigilo de la aparato aŭ ĵetono</string>
+    <string name="backup_error_token_is_not_valid_or_expired">Ĵetono malĝusta aŭ senvalidiĝis</string>
+    <string name="backup_error_user_is_not_registered">Neniu registrita uzanto kun tiu ĉi retpoŝta adreso</string>
     <string name="backup_error_no_valid_subscription">Neniu valida abono</string>
-    <string name="you_can_get_feature_as_part_of_pattern">Vi povas akiri la eblaĵon “%1$s” kiel parto de la plano %2$s. Komparo de planoj:</string>
+    <string name="you_can_get_feature_as_part_of_pattern">Vi povas akiri la eblaĵon “%1$s” kiel parto de la plano %2$s. Komparo:</string>
 </resources>
