@@ -964,7 +964,10 @@ public class MapInfoWidgetsFactory {
 				if (streetName.shieldObject != null && streetName.shieldObject.nameIds != null
 						&& setRoadShield(shieldIcon, streetName.shieldObject)) {
 					AndroidUiHelper.updateVisibility(shieldIcon, true);
-					streetName.text = streetName.text.substring(streetName.text.indexOf("»"));
+					int indexOf = streetName.text.indexOf("»");
+					if (indexOf > 0) {
+						streetName.text = streetName.text.substring(indexOf);
+					}
 				} else {
 					AndroidUiHelper.updateVisibility(shieldIcon, false);
 				}
