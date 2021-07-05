@@ -4129,7 +4129,7 @@
     <string name="grey_color_slope">Griza koloro estas uzata kiam dekliveco estas nekonata.</string>
     <string name="backup_version_history">Historio de versioj</string>
     <string name="backup_storage_taken">Uzata spaco</string>
-    <string name="backup_version_history_delete_descr">Ĉu vi certe volas forigi historion de neaktualaj specoj de datumoj el OsmAnd-Nubo\?</string>
+    <string name="backup_version_history_delete_descr">Ĉu forigi historion de neaktualaj specoj de datumoj el OsmAnd-Nubo\?</string>
     <string name="delete_version_history">Forigi historion de versioj</string>
     <string name="loading_list_of_routing_services">Ŝargado de listo de disponeblaj navigiloj</string>
     <string name="shared_string_offline">Malkonekta</string>
