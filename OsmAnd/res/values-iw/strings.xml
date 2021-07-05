@@ -4209,4 +4209,10 @@
     <string name="purchases_feature_desc_monthly_map_updates">קבלת גישה לעדכונים חודשיים מתחדשים למפות בלתי־מקוונות.</string>
     <string name="purchases_feature_desc_advanced_widgets">קבלת גישה לווידג׳טים מתקדמים של OsmAnd.</string>
     <string name="unlimited_map_downloads">הורדת מפות ללא הגבלה</string>
+    <string name="backup_error_gzip_only_supported_upload">הקובץ שהוגש אינו בתצורת gzip</string>
+    <string name="backup_error_file_not_available">הקובץ אינו זמין</string>
+    <string name="backup_error_token_is_not_valid">מזהה המכשיר שסופק או האסימון אינם תקפיפ</string>
+    <string name="backup_error_token_is_not_valid_or_expired">האסימון אינו תקף או שתוקפו פג</string>
+    <string name="backup_error_user_is_not_registered">לא רשום משתמש עם כתובת הדוא״ל הזאת</string>
+    <string name="backup_error_no_valid_subscription">לא קיים מינוי בתוקף</string>
 </resources>

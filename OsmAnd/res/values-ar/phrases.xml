@@ -239,7 +239,7 @@
     <string name="poi_fuel_electricity">كهرباء</string>
     <string name="poi_electricity_combined_charging">محطة شحن</string>
     <string name="poi_compressed_air">هواء مضغوط</string>
-    <string name="poi_garages">كراجات</string>
+    <string name="poi_garages">مرائب/كراجات</string>
     <string name="poi_public_transport_platform">موقف النقل العام</string>
     <string name="poi_public_transport_platform_bus">موقف حافلات</string>
     <string name="poi_bus_stop">موقف حافلات</string>
@@ -254,7 +254,7 @@
     <string name="poi_aerodrome">مطار</string>
     <string name="poi_helipad">مهبط للطائرات</string>
     <string name="poi_runway">المدرج</string>
-    <string name="poi_slipway">دعامة</string>
+    <string name="poi_slipway">مزلقة سفن</string>
     <string name="poi_ferry_terminal">محطة العبارة</string>
     <string name="poi_lighthouse">المنارة</string>
     <string name="poi_bicycle_rental">تأجير دراجات</string>
@@ -561,7 +561,7 @@
     <string name="poi_waste_basket">سلة المهملات</string>
     <string name="poi_commercial">مساحة تجارية</string>
     <string name="poi_vineyard">حقل عنب</string>
-    <string name="poi_farmyard">مزرعة</string>
+    <string name="poi_farmyard">مرافق مزرعة</string>
     <string name="poi_meadow">مرعى/مرج/روضة</string>
     <string name="poi_canal">قناة</string>
     <string name="poi_surveillance">مراقبة</string>
@@ -572,7 +572,7 @@
     <string name="poi_radar">رادار</string>
     <string name="poi_windmill">طاحونة هوائية</string>
     <string name="poi_salt_pond">بركة ملح</string>
-    <string name="poi_reservoir">خزان</string>
+    <string name="poi_reservoir">خزان/مستودع مياه</string>
     <string name="poi_storage_tank">صهريج تخزين</string>
     <string name="poi_kindergarten">رياض الأطفال</string>
     <string name="poi_training">مرفق التدريب</string>
@@ -759,7 +759,7 @@
     <string name="poi_beach_resort">منتجع شاطئ</string>
     <string name="poi_dog_park">حديقة للكلاب</string>
     <string name="poi_leisure_fishing">مكان للصيد</string>
-    <string name="poi_harbour">ميناء</string>
+    <string name="poi_harbour">ميناء/مرفأ</string>
     <string name="poi_miniature_golf">ملعب غولف مصغر</string>
     <string name="poi_bench">مقعد</string>
     <string name="poi_water_park">حديقة مائية</string>
@@ -932,7 +932,7 @@
     <string name="poi_piste_downhill">انحدار الزحلقة</string>
     <string name="poi_piste_playground">ملعب الزحلقة</string>
     <string name="poi_community_centre">مركز إجتماعي</string>
-    <string name="poi_marina">بحرية</string>
+    <string name="poi_marina">مرسى لليخوت والقوارب الصغيرة</string>
     <string name="poi_playground">ملعب للأطفال</string>
     <string name="poi_bar">حانة</string>
     <string name="poi_pub">حانة</string>
@@ -956,7 +956,7 @@
     <string name="poi_beacon">منارة</string>
     <string name="poi_fog_signal">إشارة ضباب</string>
     <string name="poi_harbour_basin">حوض الميناء</string>
-    <string name="poi_seamark_harbour">ميناء</string>
+    <string name="poi_seamark_harbour">ميناء/مرفأ</string>
     <string name="poi_signal_station_warning">محطة إشارة، تحذير</string>
     <string name="poi_military_bunker">وقود السفن العسكرية</string>
     <string name="poi_wiki_lang_ce">ويكي الشيشان</string>
@@ -1333,7 +1333,7 @@
     <string name="poi_cargo_vehicle">المركبات</string>
     <string name="poi_cargo_bicycle">الدراجات</string>
     <string name="poi_cargo_container">الحاويات</string>
-    <string name="poi_fitness_station">مركز اللياقة البدنية</string>
+    <string name="poi_fitness_station">مركز لياقة بدنية</string>
     <string name="poi_hackerspace">منتدى القراصنة</string>
     <string name="poi_health_specialty_ophthalmology_yes">طب العيون</string>
     <string name="poi_health_specialty_gynaecology_yes">طب النساء والتوليد</string>
@@ -1372,7 +1372,7 @@
     <string name="poi_health_specialty_acupuncture_yes">الوخز بالإبر</string>
     <string name="poi_health_specialty_traditional_chinese_medicine_yes">الطب الصيني التقليدي</string>
     <string name="poi_health_specialty_behavior_yes">السلوك</string>
-    <string name="poi_fitness_centre">مركز اللياقة البدنية</string>
+    <string name="poi_fitness_centre">مركز لياقة بدنية</string>
     <string name="poi_fitness">اللياقة البدنية</string>
     <string name="poi_billiards">بلياردو</string>
     <string name="poi_microwave_oven_yes">فرن ميكروويف : نعم</string>
@@ -1427,7 +1427,7 @@
     <string name="poi_basin">أرض حوضية</string>
     <string name="poi_pier">رصيف بحري</string>
     <string name="poi_crane">رافعة</string>
-    <string name="poi_construction">بناء</string>
+    <string name="poi_construction">تحت الإنشاء</string>
     <string name="poi_direction_all">الاتجاه: الكل</string>
     <string name="poi_direction_exit">الاتجاه: مخرج</string>
     <string name="poi_piste_grooming">مسار الزحلقة</string>
@@ -1453,9 +1453,9 @@
     <string name="poi_archery">الرماية</string>
     <string name="poi_turning_circle">دائرة دوران</string>
     <string name="poi_waterway_turning_point">نقطة دوران في المياة</string>
-    <string name="poi_forest">محمية</string>
+    <string name="poi_forest">غابة يعتني بها البشر</string>
     <string name="poi_brownfield">أرض صناعية سابقة</string>
-    <string name="poi_greenfield">حقل أخضر</string>
+    <string name="poi_greenfield">قطعة أرض (خضراء)</string>
     <string name="poi_works">أعمال</string>
     <string name="poi_mineshaft">منجم</string>
     <string name="poi_adit">ممر المنجم</string>
@@ -2301,7 +2301,7 @@
     <string name="poi_generator_output_electricity_yes">الناتج: الكهرباء</string>
     <string name="poi_generator_output_electricity">الطاقة الناتجة</string>
     <string name="poi_voltage">الجهد الكهربائي</string>
-    <string name="poi_greenhouse_horticulture">البستنة الدفيئة</string>
+    <string name="poi_greenhouse_horticulture">محمية زراعية</string>
     <string name="poi_observatory_type_gravitational">الجاذبية</string>
     <string name="poi_observatory_type_meteorological">الأرصاد الجوية</string>
     <string name="poi_observatory_type_espionage">الاستخدام: التجسس</string>
@@ -2424,7 +2424,7 @@
     <string name="poi_car_wash_yes">نعم</string>
     <string name="poi_compressed_air_no">مكيف هواء بارد: لا</string>
     <string name="poi_compressed_air_yes">نعم</string>
-    <string name="poi_plant_nursery">العناية بالنباتات</string>
+    <string name="poi_plant_nursery">مشتل</string>
     <string name="poi_addr_housename">اسم المنزل</string>
     <string name="poi_nuclear_explosion_device">الانفجار: الجهاز</string>
     <string name="poi_nuclear_explosion_warhead">الانفجار: رأس حربي</string>
@@ -2472,7 +2472,7 @@
     <string name="poi_protection_title">عنوان الحماية</string>
     <string name="poi_bandy">باندي</string>
     <string name="poi_street_cabinet">كبينة/خزنة شارع</string>
-    <string name="poi_firepit">حفرة النار</string>
+    <string name="poi_firepit">حفرة إشعال نار</string>
     <string name="poi_atm_yes">صراف آلي: نعم</string>
     <string name="poi_inscription_ne">نقش: شمال شرقي</string>
     <string name="poi_inscription_e">النقش: شرق</string>
@@ -2482,8 +2482,8 @@
     <string name="poi_inscription_w">النقش: غرب</string>
     <string name="poi_inscription_nw">النقش: شمال غربي</string>
     <string name="poi_inscription_n">النقش: شمال</string>
-    <string name="poi_forestry_allotment">لافتة: تخصيص الغابات</string>
-    <string name="poi_forestry_compartment">لافتة: مقصورة الغابات</string>
+    <string name="poi_forestry_allotment">لافتة: الغابات المخصصات</string>
+    <string name="poi_forestry_compartment">لافتة: الغابات المقصورة</string>
     <string name="poi_health_specialty_obstetrics_caesarean_section_no">التخصص الصحي: ولادة (قيصرية): لا</string>
     <string name="poi_health_specialty_radiotherapy_yes">العلاج الإشعاعي</string>
     <string name="poi_cargo_hgv">مركبات الحمولة الثقيلة</string>
@@ -3830,4 +3830,5 @@
     <string name="poi_dune">كثيب رملي/عرق/سيف</string>
     <string name="poi_refugee_site">مخيم لاجئين</string>
     <string name="poi_historic_manor">قصر سكني قديم/تاريخي</string>
+    <string name="poi_trail_riding_station">سكن للخيول والفرسان</string>
 </resources>

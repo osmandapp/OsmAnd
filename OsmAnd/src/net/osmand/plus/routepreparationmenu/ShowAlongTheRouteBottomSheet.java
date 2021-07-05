@@ -11,19 +11,16 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ExpandableListView;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import net.osmand.AndroidUtils;
 import net.osmand.ValueHolder;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -40,6 +37,7 @@ import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.IRoutingDataUpdateListener;
+import net.osmand.plus.settings.backend.ApplicationMode;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -389,15 +387,8 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 		}
 
 		@Override
-		protected void adjustIndicator(OsmandApplication app, int groupPosition, boolean isExpanded, View row, boolean light) {
-			ImageView indicator = (ImageView) row.findViewById(R.id.icon);
-			if (!isExpanded) {
-				indicator.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_arrow_down, light));
-				indicator.setContentDescription(row.getContext().getString(R.string.access_collapsed_list));
-			} else {
-				indicator.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_arrow_up, light));
-				indicator.setContentDescription(row.getContext().getString(R.string.access_expanded_list));
-			}
+		protected void adjustIndicator(OsmandApplication app, int groupPosition, boolean expanded, View row, boolean light) {
+			adjustIndicator(app, row, expanded, !light);
 		}
 
 		private String getHeader(int type, Context ctx) {

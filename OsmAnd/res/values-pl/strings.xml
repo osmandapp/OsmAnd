@@ -266,7 +266,7 @@
     <string name="error_occurred_loading_gpx">Nie można wczytać GPX.</string>
     <string name="send_report">Wyślij raport</string>
     <string name="none_region_found">Nie znaleziono pobranych map na karcie pamięci.</string>
-    <string name="poi_namefinder_query_empty">Napisz, aby odnaleźć POI</string>
+    <string name="poi_namefinder_query_empty">Wpisz, aby odnaleźć użyteczne miejsce</string>
     <string name="any_poi">Jakiekolwiek</string>
     <string name="thanks_yandex_traffic">Podziękowania dla Yandex za informację o korkach.</string>
     <string name="layer_yandex_traffic">Yandex - informacje o korkach</string>
@@ -743,7 +743,7 @@
     <string name="map_widget_back_to_loc">Gdzie jestem?</string>
     <string name="map_widget_lock_screen">Zablokuj ekran</string>
     <string name="map_widget_compass">Kompas</string>
-    <string name="map_widget_reset">Przywróć domyślne</string>
+    <string name="map_widget_reset">Przywróć ustawienia domyślne</string>
     <string name="map_widget_parking">Miejsce parkowania</string>
     <string name="map_widget_speed">Prędkość</string>
     <string name="map_widget_distance">Cel</string>
@@ -886,10 +886,10 @@
 \nŚwiatowe dane (między 70° szerokości północnej a 70° szerokości południowej) opierają się na pomiarach SRTM (Shuttle Radar Topography Mission) i ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), przyrządu na pokładzie Terra, flagowego satelity Systemu Obserwacji Ziemi NASA. ASTER jest wspólnym przedsięwzięciem NASA, japońskiego Ministerstwa Gospodarki, Handlu i Przemysłu (METI) i Japońskich Systemów Kosmicznych (J-spacesystems).</string>
     <string name="index_srtm_ele">Poziomice</string>
     <string name="index_srtm_parts">części</string>
-    <string name="audionotes_plugin_description">Twórz notatki audio/fotograficzne/wideo podczas podróży, korzystając z przycisku mapy lub menu kontekstowego lokalizacji.</string>
-    <string name="audionotes_plugin_name">Notatki głosowe</string>
-    <string name="audionotes_location_not_defined">Naciśnij „Użyj położenia…”, abydodać notatkę do położenia.</string>
-    <string name="map_widget_audionotes">Notatki głosowe</string>
+    <string name="audionotes_plugin_description">Twórz uwagi audio/zdjęcia/wideo podczas podróży, korzystając z przycisku mapy lub menu kontekstowego lokalizacji.</string>
+    <string name="audionotes_plugin_name">Uwagi audio/wideo</string>
+    <string name="audionotes_location_not_defined">Naciśnij „Użyj położenia…”, aby dodać uwagę do lokalizacji.</string>
+    <string name="map_widget_audionotes">Uwagi z audio</string>
     <string name="av_def_action_video">Nagranie filmu</string>
     <string name="av_def_action_audio">Nagranie dźwięku</string>
     <string name="av_widget_action_descr">Domyślna funkcja widżetu:</string>
@@ -915,16 +915,16 @@
     <string name="recording_default_name">Nagranie</string>
     <string name="shared_string_control_stop">Zakończ</string>
     <string name="shared_string_control_start">Start</string>
-    <string name="map_widget_av_notes">Notatki audio/video</string>
+    <string name="map_widget_av_notes">Uwagi audio/wideo</string>
     <string name="osmand_srtm_short_description_80_chars">Wtyczka OsmAnd do rysowania poziomic offline</string>
     <string name="map_widget_distancemeasurement">Pomiar odległości</string>
-    <string name="dropbox_plugin_description">Synchronizacja ścieżek i notatek audio/wideo z kontem Dropbox.</string>
+    <string name="dropbox_plugin_description">Synchronizuj trasy i uwagi audio/wideo ze swoim kontem Dropbox.</string>
     <string name="dropbox_plugin_name">Wtyczka Dropbox</string>
     <string name="intermediate_points_change_order">Zmień kolejność</string>
     <string name="srtm_paid_version_msg">Rozważ zakup wtyczki dodającej poziomice, aby wspomóc dalszy rozwój.</string>
     <string name="srtm_paid_version_title">Wtyczka poziomic</string>
-    <string name="recording_context_menu_arecord">Nagraj notatkę audio</string>
-    <string name="recording_context_menu_vrecord">Nagraj notatkę wideo</string>
+    <string name="recording_context_menu_arecord">Zrób uwagę audio</string>
+    <string name="recording_context_menu_vrecord">Zrób uwagę wideo</string>
     <string name="recording_context_menu_show">Wyświetlanie</string>
     <string name="recording_photo_description">Zdjęcie %1$s %2$s</string>
     <string name="av_def_action_picture">Zrobienie zdjęcia</string>
@@ -1407,7 +1407,7 @@
     <string name="location_on_map">Położenie:
 \n Szer. %1$s
 \n Dł. %2$s</string>
-    <string name="notes">Notatki A/V</string>
+    <string name="notes">Uwagi A/V</string>
     <string name="online_map">Mapa online</string>
     <string name="roads_only">Tylko drogi</string>
     <string name="free">Wolne %1$s</string>
@@ -1555,7 +1555,7 @@
     <string name="shared_string_wikipedia">Wikipedia</string>
     <string name="local_indexes_cat_wiki">Wikipedia</string>
     <string name="shared_string_show_details">Wyświetl szczegóły</string>
-    <string name="local_recordings_delete_all_confirm">Usunąć %1$d notatek?</string>
+    <string name="local_recordings_delete_all_confirm">Czy na pewno usunąć %1$d uwag\?</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="light_theme">Jasny</string>
     <string name="dark_theme">Ciemny</string>
@@ -1746,8 +1746,8 @@
     <string name="context_menu_item_open_note">Utwórz uwagę OSM</string>
     <string name="osn_bug_name">Uwaga OSM</string>
     <string name="osn_comment_dialog_title">Dodaj komentarz</string>
-    <string name="osn_reopen_dialog_title">Otwórz notatkę ponownie</string>
-    <string name="osn_close_dialog_title">Zamknij notatkę</string>
+    <string name="osn_reopen_dialog_title">Otwórz ponownie uwagę</string>
+    <string name="osn_close_dialog_title">Zamknij uwagę</string>
     <string name="osn_add_dialog_success">Utworzono uwagę</string>
     <string name="context_menu_item_delete_waypoint">Usunąć punkt trasy GPX\?</string>
     <string name="shared_string_location">Położenie</string>
@@ -1760,7 +1760,7 @@
     <string name="use_drawer_btn">Używaj menu</string>
     <string name="dashboard_or_drawer_description">Wybór oferuje kontrolę aplikacja za pomocą konfigurowalnego panelu lub statycznego menu. Wybór zawsze można zmienić w ustawieniach panelu.</string>
     <string name="osm_save_offline">Zapisz lokalnie</string>
-    <string name="please_specify_poi_type_only_from_list">Proszę podać właściwy typ POI lub go pominąć.</string>
+    <string name="please_specify_poi_type_only_from_list">Określ prawidłowy rodzaj użytecznego miejsca lub pomiń to.</string>
     <string name="osm_edit_modified_poi">Zmodyfikowane użyteczne miejsce OSM</string>
     <string name="osm_edit_deleted_poi">Usunięto użyteczne miejce OSM</string>
     <string name="osm_edit_reopened_note">Otwarto ponownie uwagę OSM</string>
@@ -2086,9 +2086,9 @@
     <string name="quick_action_add_poi">Dodaj użyteczne miejsce</string>
     <string name="quick_action_map_style">Zmień styl mapy</string>
     <string name="quick_action_map_style_switch">Zmieniono styl mapy na „%s”.</string>
-    <string name="quick_action_take_audio_note">Nowa notatka dźwiękowa</string>
-    <string name="quick_action_take_video_note">Nowa notatka filmowa</string>
-    <string name="quick_action_take_photo_note">Nowa notatka fotograficzna</string>
+    <string name="quick_action_take_audio_note">Nowa uwaga audio</string>
+    <string name="quick_action_take_video_note">Nowa uwaga wideo</string>
+    <string name="quick_action_take_photo_note">Nowa uwaga ze zdjęciem</string>
     <string name="quick_action_add_osm_bug">Dodaj uwagę OSM</string>
     <string name="quick_action_navigation_voice">Przełącz wyciszenie dźwięku</string>
     <string name="quick_action_navigation_voice_off">Włącz Dźwięk</string>
@@ -2464,7 +2464,7 @@
     <string name="shared_string_deleted">Usunięte</string>
     <string name="shared_string_edited">Zmodyfikowane</string>
     <string name="shared_string_added">Dodane</string>
-    <string name="empty_state_osm_edits">Tworzenie lub modyfikowanie obiektów OSM</string>
+    <string name="empty_state_osm_edits">Twórz lub modyfikuj obiekty OpenStreetMap</string>
     <string name="rename_marker">Zmień nazwę znacznika</string>
     <string name="open_from">Otwarte od</string>
     <string name="open_till">Otwarte do</string>
@@ -2485,8 +2485,8 @@
     <string name="context_menu_read_full_article">Czytaj cały artykuł</string>
     <string name="context_menu_read_article">Czytaj artykuł</string>
     <string name="empty_state_av_notes">Notuj!</string>
-    <string name="empty_state_av_notes_desc">Dodaj notatki audio, wideo lub zdjęcia do dowolnego punktu na mapie za pomocą widżetów lub menu kontekstowego.</string>
-    <string name="notes_by_date">Notatki A/V według daty</string>
+    <string name="empty_state_av_notes_desc">Dodaj uwagi audio, wideo lub zdjęcia do dowolnego punktu na mapie za pomocą widżetów lub menu kontekstowego.</string>
+    <string name="notes_by_date">Uwagi A/V według daty</string>
     <string name="empty_state_markers_groups">Importuj grupy</string>
     <string name="add_favourites_group_to_markers_descr">Wybierz kategorię Ulubione, aby dodać znaczniki.</string>
     <string name="digits_quantity">Liczba cyfr dziesiętnych</string>
@@ -2513,8 +2513,8 @@
     <string name="choose_file_type">Wybierz typ pliku</string>
     <string name="all_data">Wszystkie dane</string>
     <string name="osm_notes">Uwagi OSM</string>
-    <string name="av_locations_selected_desc">Plik GPX ze współrzędnymi i danymi wybranych notatek.</string>
-    <string name="av_locations_all_desc">Plik GPX ze współrzędnymi i danymi wszystkich notatek.</string>
+    <string name="av_locations_selected_desc">Plik GPX ze współrzędnymi i danymi wybranych uwag.</string>
+    <string name="av_locations_all_desc">Plik GPX ze współrzędnymi i danymi wszystkich uwag.</string>
     <string name="modify_the_search_query">Zmień wyszukiwanie.</string>
     <string name="one_tap_active_descr">Dotknięciem znacznika na mapie przenosi go na górę listy aktywnych znaczników, bez otwierania menu kontekstowego.</string>
     <string name="one_tap_active">Aktywacja jednym dotknięciem</string>
@@ -2551,8 +2551,8 @@
     <string name="distance_farthest">Najpierw najdalsze</string>
     <string name="distance_nearest">Najpierw najbliższe</string>
     <string name="day_off_label">zamknięte</string>
-    <string name="osm_edits_export_desc">Eksportuj jako uwagi OSM, POI lub oba.</string>
-    <string name="empty_state_osm_edits_descr">Twórz lub modyfikuj OSM POI, otwórz lub skomentuj uwagi OSM, oraz udostępniaj nagrane pliki GPX.</string>
+    <string name="osm_edits_export_desc">Eksportuj jako uwagi OSM, użyteczne miejsca, albo oba.</string>
+    <string name="empty_state_osm_edits_descr">Twórz lub modyfikuj użyteczne miejsca OpenStreetMap, otwórz lub skomentuj uwagi OSM, oraz udostępniaj nagrane pliki GPX.</string>
     <string name="empty_state_markers_groups_desc">Importuj ulubione grupy lub punkty trasy jako znaczniki.</string>
     <string name="rendering_attr_whiteWaterSports_name">Sporty spływowe</string>
     <string name="group_deleted">Usunięto grupę</string>
@@ -3318,8 +3318,8 @@
     <string name="live_monitoring_descr">Umożliwia udostępnianie aktualnej pozycji za pomocą rejestrowania podróży.</string>
     <string name="live_monitoring">Śledzenie online</string>
     <string name="save_track_logging_accuracy">Dokładność rejestrowania</string>
-    <string name="video_notes">Notatki wideo</string>
-    <string name="photo_notes">Notatki fotograficzne</string>
+    <string name="video_notes">Uwagi z wideo</string>
+    <string name="photo_notes">Uwagi ze zdjęciem</string>
     <string name="route_recalculation">Ponowne wyliczenie trasy</string>
     <string name="accessibility_announce">Zapowiedź</string>
     <string name="login_and_pass">Nazwa użytkownika i hasło</string>
@@ -3346,8 +3346,8 @@
     <string name="shared_string_available">Dostępne</string>
     <string name="add_custom_category">Dodaj niestandardową kategorię</string>
     <string name="rendering_attr_streetLightingNight_name">Wyświetlaj tylko w nocy</string>
-    <string name="plugin_prefs_reset_successful">Ustawienia wtyczek przywrócone do domyślnych.</string>
-    <string name="profile_prefs_reset_successful">Ustawienia profili przywrócone do domyślnych.</string>
+    <string name="plugin_prefs_reset_successful">Ustawienia wszystkich wtyczek przywrócone do domyślnych.</string>
+    <string name="profile_prefs_reset_successful">Ustawienia wszystkich profili przywrócone do domyślnych.</string>
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
     <string name="sunset_at">Zachód słońca o %1$s</string>
     <string name="sunrise_at">Wschód słońca o %1$s</string>
@@ -3358,7 +3358,7 @@
     <string name="reset_plugin_to_default">Przywrócenie ustawień wtyczki do wartości domyślnych</string>
     <string name="multimedia_use_system_camera">Użyj aplikacji systemowej</string>
     <string name="multimedia_photo_play_sound">Dźwięk migawki aparatu</string>
-    <string name="reset_to_default_category_button_promo">Opcja \'Przywróć ustawienia domyślne\' spowoduje przywrócenie porządku sortowania do stanu domyślnego po instalacji.</string>
+    <string name="reset_to_default_category_button_promo">Opcja \"Przywróć ustawienia domyślne\" spowoduje przywrócenie kolejności sortowania do stanu domyślnego po instalacji.</string>
     <string name="accessibility_mode_disabled">Tryb ułatwień jest dostępu wyłączony w twoim systemie.</string>
     <string name="use_system_screen_timeout">Wygaś ekran zgodnie z ustawieniami systemu</string>
     <string name="clear_recorded_data">Wyczyść zarejestrowane dane</string>
@@ -3549,8 +3549,8 @@
 \n
 \nWyłącz nieużywane wtyczki, aby ukryć wszystkie ich elementy sterujące. %1$s.</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
-    <string name="search_poi_types">Szukaj typów użytecznych miejsc</string>
-    <string name="search_poi_types_descr">Łącz typy użytecznych zmian z różnych kategorii. Stuknij przełącznik, aby zaznaczyć wszystko, stuknij lewą stronę, aby wybrać kategorię.</string>
+    <string name="search_poi_types">Szukaj rodzajów użytecznych miejsc</string>
+    <string name="search_poi_types_descr">Łącz rodzaje użytecznych miejsc z różnych kategorii. Naciśnij przełącznik, aby zaznaczyć wszystko; naciśnij lewą stronę, aby wybrać kategorię.</string>
     <string name="legend_item_description">Przewodnik po symbolach mapy.</string>
     <string name="navigation_profiles_item">Profile nawigacji</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>
@@ -3771,7 +3771,7 @@
     <string name="open_saved_track">Otwórz zapisaną ścieżkę</string>
     <string name="shared_string_is_saved">jest zapisywany</string>
     <string name="one_point_error">Należy dodać co najmniej dwa punkty.</string>
-    <string name="disable_recording_once_app_killed_descrp">Wstrzyma rejestrowanie ścieżki, gdy aplikacja zostanie zabita (za pośrednictwem ostatnich aplikacji). (Wskazanie tła OsmAnd znika z paska powiadomień Androida.)</string>
+    <string name="disable_recording_once_app_killed_descrp">Nagrywanie trasy zostanie wstrzymane po zamknięciu aplikacji (za pośrednictwem ostatnich aplikacji). (Ikona w obszarze powiadomień systemu Android dla tła OsmAnd zniknie.)</string>
     <string name="shared_string_redo">Ponów</string>
     <string name="release_3_8">• Zaktualizowana funkcja planu trasy: umożliwia korzystanie z różnych typów nawigacji na segment i dołączanie ścieżek
 \n
@@ -3834,7 +3834,7 @@
     <string name="manage_subscription">Zarządzaj subskrypcją</string>
     <string name="subscription_expired_title">Subskrypcja OsmAnd Live wygasła</string>
     <string name="subscription_paused_title">Subskrypcja OsmAnd Live została wstrzymana</string>
-    <string name="snowmobile_render_descr">Do jazdy skuterem śnieżnym z wyznaczonymi drogami i torami.</string>
+    <string name="snowmobile_render_descr">Do jazdy skuterem śnieżnym po wyznaczonych drogach.</string>
     <string name="message_you_need_add_two_points_to_show_graphs">Dodaj co najmniej dwa punkty</string>
     <string name="subscription_payment_issue_title">Stuknij przycisk, aby skonfigurować metodę płatności w Google Play i naprawić subskrypcję.</string>
     <string name="subscription_on_hold_title">Subskrypcja OsmAnd Live jest wstrzymana</string>
@@ -4021,7 +4021,7 @@
     <string name="live_update_delete_updates_msg">Czy na pewno chcesz usunąć wszystkie %s aktualizacje na żywo\?</string>
     <string name="purchases">Zakupy</string>
     <string name="select_category_descr">Wybierz kategorię lub dodaj nową</string>
-    <string name="copy_poi_name">Skopiuj nazwę punktu POI</string>
+    <string name="copy_poi_name">Skopiuj nazwę użytecznego miejsca</string>
     <string name="quick_action_show_hide_title">Pokaż/ukryj</string>
     <string name="trip_recording_save_and_continue">Zapisz i kontynuuj</string>
     <string name="lost_data_warning">Wszystkie niezapisane dane zostaną utracone.</string>
@@ -4045,7 +4045,7 @@
     <string name="rendering_attr_noNatureReserveBoundaries_name">Naturalne granice</string>
     <string name="track_has_no_altitude">Trasa nie zawiera danych o wysokości.</string>
     <string name="track_has_no_speed">Trasa nie zawiera informacji o prędkości.</string>
-    <string name="trip_recording_logging_interval_info">Interwał rejestrowania ustawia okres, w którym OsmAnd zażąda bieżących danych pozycji.</string>
+    <string name="trip_recording_logging_interval_info">Interwał rejestrowania ustawia okres czasu, w którym OsmAnd będzie żądał danych o aktualnej pozycji.</string>
     <string name="show_start_dialog">Pokaż okno rozpocznij</string>
     <string name="trip_recording_show_start_dialog_setting">Jeśli ta opcja jest wyłączona, nagrywanie rozpocznie się natychmiast po dotknięciu widżetu lub elementu menu, pomijając okno dialogowe potwierdzenia.</string>
     <string name="customize_route_line">Zmień trasę nawigacji</string>
@@ -4104,7 +4104,7 @@
     <string name="backup_and_restore">Kopia i przywracanie</string>
     <string name="last_backup">Ostatnia kopia zapasowa</string>
     <string name="duration_ago">%1$s temu</string>
-    <string name="osmand_cloud">Chmura OsmAnd</string>
+    <string name="osmand_cloud">OsmAnd Cloud</string>
     <string name="osmand_cloud_authorize_descr">Nigdy nie trać swoich danych, wykonuj kopie zapasowe i przywracaj wszystkie informacje bez problemu.</string>
     <string name="local_backup">Lokalna kopia zapasowa</string>
     <string name="local_backup_descr">Tworzenie kopii zapasowej lub przywracanie danych z pliku lokalnego.</string>
@@ -4160,14 +4160,14 @@
     <string name="select_backup_data_descr">Wybierz dane i foldery do utworzenia kopii zapasowej.</string>
     <string name="backup_restore_data_descr">Przywracanie danych na urządzeniu przy użyciu kopii zapasowych online.</string>
     <string name="backup_restore_data">Przywróć dane</string>
-    <string name="restore_from_osmand_cloud">Przywracanie z chmury OsmAnd</string>
+    <string name="restore_from_osmand_cloud">Przywróć z chmury OsmAnd Cloud</string>
     <string name="choose_what_to_restore">Wybierz, co chcesz przywrócić.</string>
     <string name="restore_selected_data">Przywracanie wybranych danych</string>
     <string name="receiving_data_from_server">Odbieranie danych z serwera</string>
     <string name="restore_complete">Przywracanie zakończone</string>
     <string name="grey_color_slope">Kolor szary jest używany, gdy nachylenie jest nieokreślone.</string>
     <string name="backup_version_history">Historia wersji</string>
-    <string name="backup_version_history_delete_descr">Czy chcesz usunąć z chmury historię zmian dla wyłączonych typów\?</string>
+    <string name="backup_version_history_delete_descr">Czy chcesz usunąć z chmury OsmAnd Cloud historię zmian dla nieaktualnych typów danych\?</string>
     <string name="delete_version_history">Usuń historię wersji</string>
     <string name="add_online_routing_engine">Dodaj silnik wyznaczania tras online</string>
     <string name="delete_online_routing_engine">Usunąć ten silnik wyznaczania tras online\?</string>
@@ -4201,7 +4201,7 @@
     <string name="purchases_feature_desc_monthly_map_updates">Uzyskaj dostęp do regularnych, comiesięcznych aktualizacji dla map offline.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Uzyskaj dostęp do częstszych aktualizacji map, wybieraj między aktualizacjami: godzinnymi, dziennymi lub tygodniowymi. Aktualizacje są pobierane przyrostowo, tylko dla zmienionego obszaru.</string>
     <string name="purchases_feature_desc_advanced_widgets">Uzyskaj dostęp do zaawansowanych widżetów OsmAnd.</string>
-    <string name="purchases_feature_desc_osmand_cloud">Otrzymaj OsmAnd Cloud, aby przechowywać wszystkie dane OsmAnd w trybie online. Zapomnij o utracie swoich danych po ponownej instalacji, twórz kopie zapasowe i przywracaj wszystkie informacje bez problemu.</string>
+    <string name="purchases_feature_desc_osmand_cloud">Otrzymaj OsmAnd Cloud, aby przechowywać wszystkie dane OsmAnd w trybie online. Bez utraty danych po reinstalacji. Z łatwością twórz kopie zapasowe i przywracaj wszystkie informacje.</string>
     <string name="unlimited_map_downloads">Nieograniczone pobieranie map</string>
     <string name="you_can_get_feature_as_part_of_pattern">Możesz otrzymać \"%1$s\" jako część planu: %2$s. Porównaj plany:</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia i Wikipodróże w trybie offline</string>
@@ -4213,6 +4213,16 @@
     <string name="advanced_widgets">Zaawansowane widżety</string>
     <string name="shared_string_view_all">Wyświetl wszystko</string>
     <string name="backup_delete_types">Usuń dane wyłączonych typów</string>
-    <string name="backup_delete_types_descr">Czy chcesz usunąć z chmury dane dla wyłączonych typów\?</string>
+    <string name="backup_delete_types_descr">Usunąć wszystkie dane z chmury OsmAnd Cloud dla nieaktualnych typów\?</string>
     <string name="shared_string_discussion">Dyskusja</string>
+    <string name="backup_error_user_is_already_registered">Użytkownik był już zarejestrowany z takim adresem e-mail</string>
+    <string name="backup_error_subscription_was_expired">Subskrypcja jest już nieważna</string>
+    <string name="backup_error_subscription_was_used">Subskrypcja lub promocja została wykorzystana przez inne konto %1$s</string>
+    <string name="backup_error_size_is_exceeded">Przekroczono maksymalny rozmiar chmury OsmAnd Cloud %1$s</string>
+    <string name="backup_error_gzip_only_supported_upload">Plik nie został przesłany w formacie gzip</string>
+    <string name="backup_error_file_not_available">Plik nie jest dostępny</string>
+    <string name="backup_error_token_is_not_valid">Podany identyfikator urządzenia lub token jest nieprawidłowy</string>
+    <string name="backup_error_token_is_not_valid_or_expired">Token jest nieprawidłowy lub wygasł</string>
+    <string name="backup_error_user_is_not_registered">Użytkownik z tym adresem e-mail nie jest zarejestrowany</string>
+    <string name="backup_error_no_valid_subscription">Brak ważnej subskrypcji</string>
 </resources>
