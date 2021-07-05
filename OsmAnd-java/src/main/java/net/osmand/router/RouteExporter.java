@@ -46,7 +46,7 @@ public class RouteExporter {
 		return gpx;
 	}
 
-	public static GPXFile exportRoute(String name, List<TrkSegment> trkSegments, List<WptPt> points) {
+	public static GPXFile exportRoute(String name, List<TrkSegment> trkSegments, List<WptPt> points, List<List<WptPt>> routePoints) {
 		GPXFile gpx = new GPXFile(OSMAND_ROUTER_V2);
 		Track track = new Track();
 		track.name = name;
@@ -55,6 +55,11 @@ public class RouteExporter {
 		if (points != null) {
 			for (WptPt pt : points) {
 				gpx.addPoint(pt);
+			}
+		}
+		if (routePoints != null) {
+			for (List<WptPt> wptPts : routePoints) {
+				gpx.addRoutePoints(wptPts, true);
 			}
 		}
 		return gpx;
