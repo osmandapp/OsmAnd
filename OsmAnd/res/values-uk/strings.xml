@@ -4106,20 +4106,20 @@
     <string name="last_backup">Останнє резервне копіювання</string>
     <string name="duration_ago">%1$s тому</string>
     <string name="osmand_cloud">OsmAnd Cloud</string>
-    <string name="osmand_cloud_authorize_descr">Ніколи не втрачайте свої дані, резервне копіювання та відновлення всіх даних без ускладнень.</string>
+    <string name="osmand_cloud_authorize_descr">Ніколи не втрачайте свої дані. Легко створюйте резервні копії та відновлюйте їх.</string>
     <string name="local_backup">Локальна резервна копія</string>
     <string name="local_backup_descr">Резервне копіювання або відновлення даних із локального файлу.</string>
     <string name="backup_into_file">Створити резервну копію у файл</string>
     <string name="restore_from_file">Відновити з файлу</string>
     <string name="osmand_cloud_help_descr">Потрібна допомога\? Зв\'яжіться з нами через %1$s</string>
-    <string name="osmand_cloud_create_account_descr">Будь ласка, введіть вашу адресу електронної пошти, всі ваші дані буде пов\'язано з нею.
-\nМи надішлемо вам код підтвердження на цю електронну адресу.</string>
-    <string name="osmand_cloud_login_descr">Будь ласка, введіть адресу електронної пошти, яку ви застосували для реєстрації. Ми надішлемо вам одноразовий пароль, необхідний на наступному кроці.</string>
+    <string name="osmand_cloud_create_account_descr">Введіть вашу адресу е-пошти, код підтвердження буде надіслано
+\nна неї, а ваші дані буде пов\'язано з нею.</string>
+    <string name="osmand_cloud_login_descr">Введіть адресу е-пошти з якою ви реєструвалися. Одноразовий пароль, необхідний на наступному кроці буде надіслано на неї.</string>
     <string name="verify_email_address">Підтвердити електронну адресу</string>
-    <string name="verify_email_address_descr">Ми надіслали код підтвердження на %1$s, введіть його в поле знизу.</string>
+    <string name="verify_email_address_descr">Код підтвердження надіслано на %1$s. Введіть його в поле знизу.</string>
     <string name="enter_verification_code">Введіть 4-значний код</string>
     <string name="cloud_email_not_registered">Цю електронну адресу ще не зареєстровано для OsmAnd Cloud</string>
-    <string name="cloud_email_already_registered">Обліковий запис з цією електронною адресою вже зареєстровано.</string>
+    <string name="cloud_email_already_registered">Ця адреса е-пошти вже зареєстрована.</string>
     <string name="resend_verification_code">Надіслати код ще раз</string>
     <string name="verification_code_missing">Код підтвердження не надійшов</string>
     <string name="verification_code_missing_description">Час очікування коду може тривати 10 хвилин, також ви можете перевірити теку з небажаним. Якщо це не допомогло, скористайтеся кнопкою знизу.</string>
@@ -4221,6 +4221,6 @@
     <string name="backup_error_file_not_available">Файл недоступний</string>
     <string name="backup_error_token_is_not_valid">Щось не так із наданим ідентифікатором пристрою або токеном</string>
     <string name="backup_error_token_is_not_valid_or_expired">Токен недійсний або його термін дії завершився</string>
-    <string name="backup_error_user_is_not_registered">Жоден користувач не зареєстрований з цією е-адресою</string>
+    <string name="backup_error_user_is_not_registered">Жоден користувач не зареєстрований з цією адресою е-пошти</string>
     <string name="backup_error_no_valid_subscription">Немає дійсної передплати</string>
 </resources>
