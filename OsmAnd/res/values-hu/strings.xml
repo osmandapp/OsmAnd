@@ -4159,11 +4159,11 @@
     <string name="restore_from_osmand_cloud">Visszaállítás az OsmAnd Cloud-ból</string>
     <string name="choose_what_to_restore">Válassza ki, mit állítson vissza.</string>
     <string name="restore_selected_data">Kijelölt adatok visszaállítása</string>
-    <string name="receiving_data_from_server">Adatok fogadása a kiszolgálóról</string>
-    <string name="restore_complete">A visszaállítás befejeződött</string>
+    <string name="receiving_data_from_server">Adatok fogadása a kiszolgálóról…</string>
+    <string name="restore_complete">Visszaállítva</string>
     <string name="grey_color_slope">A szürke szín ott fordul elő, ahol a lejtés nincs meghatározva.</string>
     <string name="backup_version_history">Verzióelőzmények</string>
-    <string name="backup_version_history_delete_descr">Törölni szeretné a letiltott típusok módosítási előzményeit a felhőből\?</string>
+    <string name="backup_version_history_delete_descr">Szeretné törölni az elavult adattípusok változásnaplóját az OsmAnd cloudból\?</string>
     <string name="backup_storage_taken">Foglalt tárhely</string>
     <string name="delete_version_history">Verziótörténet törlése</string>
     <string name="routing_attr_avoid_tunnels_description">Alagutak elkerülése</string>
@@ -4173,11 +4173,11 @@
     <string name="backup_promocode">Promóciós kód</string>
     <string name="cancel_anytime_in_gplay">Bármikor lemondhatja a Google Play-ben.</string>
     <string name="offline_wikivoyage">Offline Wikivoyage útikönyv</string>
-    <string name="you_can_get_feature_as_part_of_pattern">%2$s csomag részeként ezt kapja: %1$s. Csomagok összehasonlítása:</string>
+    <string name="you_can_get_feature_as_part_of_pattern">%2$s csomag részeként ezt kapja: %1$s. Összehasonlítás:</string>
     <string name="shared_string_view_all">Összes megtekintése</string>
     <string name="shared_string_discussion">Megbeszélés</string>
     <string name="backup_delete_types">Letiltott adattípusok törlése</string>
-    <string name="backup_delete_types_descr">Szeretné törölni a letiltott típusok adatait a felhőből\?</string>
+    <string name="backup_delete_types_descr">Törölje az összes elavult adattípus adatát az OsmAnd felhőből\?</string>
     <string name="from_with_param">Ennyitől: %1$s</string>
     <string name="regular_price">Rendes ár</string>
     <string name="complete_purchase">Vásárlás befejezése</string>
@@ -4198,7 +4198,7 @@
     <string name="terrain_maps_contour_lines_hillshade_slope">Domborzati térképek: szintvonalak, domborzatárnyékolás, lejtők</string>
     <string name="wikipedia_and_wikivoyage_offline">Offline Wikipédia enciklopédia és Wikivoyage útikönyv</string>
     <string name="unlimited_map_downloads">Korlátlan térképletöltés</string>
-    <string name="purchases_feature_desc_osmand_cloud">Szerezze be az OsmAnd Cloudot az összes OsmAnd-adat online tárolásához. Felejtse el az újratelepítés után elveszett adatokat: készítsen biztonsági másolatot és állítsa vissza az összes információt gond nélkül.</string>
+    <string name="purchases_feature_desc_osmand_cloud">Szerezzen OsmAnd Cloud felhőtárhelyet az összes OsmAnd-adat online tárolásához. Nincs többé adatvesztés az újratelepítés után. Az összes információ biztonsági mentése és visszaállítása egyszerű lesz.</string>
     <string name="purchases_feature_desc_advanced_widgets">Speciális OsmAnd-widgetek.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Gyakoribb térképfrissítések: hetente, naponta vagy akár óránként. A frissítések fokozatosan töltődnek le, mindig csak a módosult területre.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Havi frissítés az offline térképekhez.</string>
@@ -4211,11 +4211,11 @@
     <string name="backup_error_no_valid_subscription">Jelenleg nincs érvényes előfizetése</string>
     <string name="backup_error_user_is_not_registered">Ezzel az e-mail címmel nincs regisztrált felhasználó</string>
     <string name="backup_error_token_is_not_valid_or_expired">A token nem érvényes vagy lejárt</string>
-    <string name="backup_error_token_is_not_valid">A megadott eszközazonosító vagy token nem érvényes</string>
+    <string name="backup_error_token_is_not_valid">Valami nem megy a megadott eszközazonosítóval vagy tokennel</string>
     <string name="backup_error_file_not_available">A fájl nem áll rendelkezésre</string>
-    <string name="backup_error_gzip_only_supported_upload">A fájl nem gzip formátumban lett beküldve</string>
+    <string name="backup_error_gzip_only_supported_upload">A fájlt .gzip formátumban kell elküldeni</string>
     <string name="backup_error_size_is_exceeded">Az OsmAnd Cloud maximális mérete túllépte ezt: %1$s</string>
     <string name="backup_error_subscription_was_used">Ezt az előfizetést vagy promóciós kódot már felhasználták %1$s fiókhoz</string>
-    <string name="backup_error_subscription_was_expired">Ez az előfizetés már nem érvényes</string>
-    <string name="backup_error_user_is_already_registered">Ezzel az e-mail-címmel már van egy regisztrált felhasználó</string>
+    <string name="backup_error_subscription_was_expired">Lejárt előfizetés</string>
+    <string name="backup_error_user_is_already_registered">Ezt az e-mail-címet egy másik fiók már használja</string>
 </resources>

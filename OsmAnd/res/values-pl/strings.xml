@@ -443,7 +443,7 @@
     <string name="open_street_map_login_descr">Potrzebne do przysyłania zmian do serwisu openstreetmap.org.</string>
     <string name="user_name">Nazwa użytkownika OSM</string>
     <string name="mark_point">Cel</string>
-    <string name="shared_string_add_to_favorites">Dodaj do ulubionych</string>
+    <string name="shared_string_add_to_favorites">Dodaj do \"Ulubionych\"</string>
     <string name="use_english_names_descr">Zaznacz, jeśli chcesz używać angielskich nazw zamiast miejscowych.</string>
     <string name="use_english_names">Używaj angielskich nazw na mapie</string>
     <string name="app_settings">Ustawienia aplikacji</string>
@@ -962,7 +962,7 @@
     <string name="select_address_activity">Podaj adres</string>
     <string name="local_openstreetmap_act_title">Modyfikacje OSM</string>
     <string name="shared_string_more_actions">Więcej czynności</string>
-    <string name="favourites_list_activity">Wybierz Ulubione miejsca</string>
+    <string name="favourites_list_activity">Wybierz ulubione</string>
     <string name="download_using_mobile_internet">Brak połączenia z Wi-Fi. Użyć do pobierania obecnego połączenia z Internetem?</string>
     <string name="clear_destination">Usuń cel trasy</string>
     <string name="cancel_navigation">Zakończ nawigację</string>
@@ -1170,7 +1170,7 @@
     <string name="index_item_nation_addresses">Adresy krajowe</string>
     <string name="index_item_world_basemap">Podstawowa mapa świata</string>
     <string name="index_item_world_ski">Światowa mapa tras narciarskich</string>
-    <string name="interrupt_music_descr">Komunikaty głosowe zatrzymają odtwarzanie muzyki.</string>
+    <string name="interrupt_music_descr">Komunikaty głosowe wstrzymują odtwarzanie muzyki.</string>
     <string name="interrupt_music">Przerywanie muzyki</string>
     <string name="always_center_position_on_map">Zawsze wyśrodkowane położenie</string>
     <string name="voice_pref_title">Głos</string>
@@ -1196,7 +1196,7 @@
     <string name="gpx_file_is_empty">Pusty plik GPX</string>
     <string name="shared_string_tracks">Trasy</string>
     <string name="shared_string_my_favorites">Ulubione</string>
-    <string name="shared_string_my_places">Miejsca</string>
+    <string name="shared_string_my_places">Moje miejsca</string>
     <string name="gpx_info_subtracks">Podtrasy: %1$s</string>
     <string name="gpx_info_waypoints">Punkty trasy: %1$s </string>
     <string name="gpx_info_distance">Odległość: %1$s (%2$s punktów) </string>
@@ -1655,7 +1655,7 @@
     <string name="shared_string_navigation">Nawigacja</string>
     <string name="osmand_running_in_background">Uruchomiona w tle</string>
     <string name="simulate_your_location_stop_descr">Przestań symulować swoją pozycję.</string>
-    <string name="favourites_context_menu_add">Dodaj do ulubionych</string>
+    <string name="favourites_context_menu_add">Dodaj ulubione</string>
     <string name="roads">Drogi</string>
     <string name="favorite_category_add_new">Dodaj nową</string>
     <string name="favorite_category_select">Wybór kategorii</string>
@@ -2096,7 +2096,7 @@
     <string name="quick_action_add_parking">Dodaj położenie parkowania</string>
     <string name="quick_action_new_action">Dodaj czynność</string>
     <string name="quick_action_edit_action">Modyfikowanie czynności</string>
-    <string name="quick_action_add_favorite">Dodaj do ulubionych</string>
+    <string name="quick_action_add_favorite">Dodaj ulubione</string>
     <string name="dialog_add_action_title">Dodawanie czynności</string>
     <string name="quick_actions_delete">Usuwanie czynności</string>
     <string name="quick_actions_delete_text">Usunąć czynność „%s”?</string>
@@ -2804,7 +2804,7 @@
     <string name="transfers">przesiadki</string>
     <string name="on_foot">pieszo</string>
     <string name="route_way">Trasa</string>
-    <string name="points_of_interests">Użyteczne miejsca</string>
+    <string name="points_of_interests">Użyteczne miejsca (POI)</string>
     <string name="waiting_for_route_calculation">Wyznaczanie trasy…</string>
     <string name="app_mode_public_transport">Transport publiczny</string>
     <string name="avoid_roads_descr">Proszę wybrać na mapie lub z poniższej listy, drogę omijaną podczas nawigacji:</string>
@@ -3723,7 +3723,7 @@
     <string name="street_level_imagery">Zdjęcia z poziomu ulicy</string>
     <string name="plan_route_exit_dialog_descr">Czy na pewno chcesz odrzucić wszystkie zmiany w zaplanowanej trasie\?</string>
     <string name="in_case_of_reverse_direction">W przypadku odwrotnego kierunku</string>
-    <string name="navigate_to_track_descr">Przejdź z mojej lokalizacji na trasę</string>
+    <string name="navigate_to_track_descr">Nawiguj z aktualnego położenia na trasę</string>
     <string name="app_mode_wheelchair_forward">Sportowy wózek inwalidzki</string>
     <string name="show_gpx">Trasy</string>
     <string name="follow_track">Śledź trasę</string>
@@ -3903,7 +3903,7 @@
     <string name="profile_type_osmand_string">Profil OsmAnd</string>
     <string name="profile_type_user_string">Profil użytkownika</string>
     <string name="reverse_all_points">Odwróć wszystkie punkty</string>
-    <string name="profile_by_default_description">Wybierz profil, który będzie używany przy uruchomieniu aplikacji.</string>
+    <string name="profile_by_default_description">Wybierz profil, który będzie używany po starcie aplikacji.</string>
     <string name="shared_string_last_used">Ostatnio używane</string>
     <string name="routing_attr_prefer_hiking_routes_description">Preferowane szlaki turystyczne</string>
     <string name="routing_attr_prefer_hiking_routes_name">Preferuj szlaki turystyczne</string>
@@ -3911,7 +3911,7 @@
     <string name="routing_attr_allow_streams_name">Zezwalaj na strumienie i dreny</string>
     <string name="routing_attr_allow_intermittent_description">Zezwalaj na przerywane drogi wodne</string>
     <string name="routing_attr_allow_intermittent_name">Zezwalaj na przerywane drogi wodne</string>
-    <string name="voice_prompts_timetable">Czas komunikatów głosowych</string>
+    <string name="voice_prompts_timetable">Czasy komunikatów głosowych</string>
     <string name="shared_string_subtype">Podtyp</string>
     <string name="shared_string_vehicle">Pojazd</string>
     <string name="shared_string_api_key">Klucz API</string>
@@ -3928,7 +3928,7 @@
     <string name="shared_string_folders">Foldery</string>
     <string name="select_folder">Wybierz folder</string>
     <string name="select_folder_descr">Wybierz folder lub dodaj nowy</string>
-    <string name="shared_string_empty">Opróżnij</string>
+    <string name="shared_string_empty">Puste</string>
     <string name="analyze_by_intervals">Analiza przedziałów czasowych</string>
     <string name="upload_to_openstreetmap">Prześlij do OpenStreetMap</string>
     <string name="edit_track">Edytuj trasę</string>
@@ -3983,14 +3983,14 @@
     <string name="opr_use_dev_url">Użyj test.openplacereviews.org</string>
     <string name="login_open_place_reviews">Zaloguj się do OpenPlaceReviews</string>
     <string name="activity_type_water_name">Zbiornik wodny</string>
-    <string name="activity_type_winter_name">Zima</string>
+    <string name="activity_type_winter_name">Zimowe</string>
     <string name="activity_type_snowmobile_name">Skuter śnieżny</string>
-    <string name="activity_type_riding_name">Jazda konna</string>
+    <string name="activity_type_riding_name">Konne</string>
     <string name="activity_type_racing_name">Wyścigi</string>
     <string name="activity_type_mountainbike_name">Rower górski</string>
     <string name="activity_type_cycling_name">Kolarstwo</string>
     <string name="activity_type_hiking_name">Turystyka piesza</string>
-    <string name="activity_type_running_name">Uruchomiony</string>
+    <string name="activity_type_running_name">Bieganie</string>
     <string name="activity_type_walking_name">Chodzenie</string>
     <string name="activity_type_motorbike_name">Motocykl</string>
     <string name="activity_type_offroad_name">Poza drogą</string>
@@ -4157,14 +4157,14 @@
 \nAktualna wersja danych zostanie zapisana na serwerze, ale nie będzie można powrócić do wcześniej wprowadzonych zmian.</string>
     <string name="shared_string_online">Online</string>
     <string name="backup_data">Kopia zapasowa danych</string>
-    <string name="select_backup_data_descr">Wybierz dane i foldery do utworzenia kopii zapasowej.</string>
+    <string name="select_backup_data_descr">Wybierz dane i foldery do kopii zapasowej.</string>
     <string name="backup_restore_data_descr">Przywracanie danych na urządzeniu przy użyciu kopii zapasowych online.</string>
     <string name="backup_restore_data">Przywróć dane</string>
     <string name="restore_from_osmand_cloud">Przywróć z chmury OsmAnd Cloud</string>
     <string name="choose_what_to_restore">Wybierz, co chcesz przywrócić.</string>
     <string name="restore_selected_data">Przywracanie wybranych danych</string>
-    <string name="receiving_data_from_server">Odbieranie danych z serwera</string>
-    <string name="restore_complete">Przywracanie zakończone</string>
+    <string name="receiving_data_from_server">Odbieranie danych z serwera…</string>
+    <string name="restore_complete">Przywrócone</string>
     <string name="grey_color_slope">Kolor szary jest używany, gdy nachylenie jest nieokreślone.</string>
     <string name="backup_version_history">Historia wersji</string>
     <string name="backup_version_history_delete_descr">Czy chcesz usunąć z chmury OsmAnd Cloud historię zmian dla nieaktualnych typów danych\?</string>
@@ -4199,11 +4199,11 @@
     <string name="purchases_feature_desc_combined_wiki">Przeglądaj artykuły z Wikipedii w podróży, bez połączenia z Internetem. Dane w trybie offline podzielone według krajów i dostępne we wszystkich językach.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Uzyskaj nieograniczone pobierania map offline dla wszystkich kontynentów i regionów.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Uzyskaj dostęp do regularnych, comiesięcznych aktualizacji dla map offline.</string>
-    <string name="purchases_feature_desc_hourly_map_updates">Uzyskaj dostęp do częstszych aktualizacji map, wybieraj między aktualizacjami: godzinnymi, dziennymi lub tygodniowymi. Aktualizacje są pobierane przyrostowo, tylko dla zmienionego obszaru.</string>
+    <string name="purchases_feature_desc_hourly_map_updates">Uzyskaj dostęp do częstszych aktualizacji map. Cogodzinne, dzienne lub tygodniowe. Aktualizacje są pobierane przyrostowo, tylko dla zmienionego obszaru.</string>
     <string name="purchases_feature_desc_advanced_widgets">Uzyskaj dostęp do zaawansowanych widżetów OsmAnd.</string>
     <string name="purchases_feature_desc_osmand_cloud">Otrzymaj OsmAnd Cloud, aby przechowywać wszystkie dane OsmAnd w trybie online. Bez utraty danych po reinstalacji. Z łatwością twórz kopie zapasowe i przywracaj wszystkie informacje.</string>
     <string name="unlimited_map_downloads">Nieograniczone pobieranie map</string>
-    <string name="you_can_get_feature_as_part_of_pattern">Możesz otrzymać \"%1$s\" jako część planu: %2$s. Porównaj plany:</string>
+    <string name="you_can_get_feature_as_part_of_pattern">Możesz otrzymać \"%1$s\" jako część planu: %2$s. Porównanie:</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia i Wikipodróże w trybie offline</string>
     <string name="offline_wikipeadia">Wikipedia w trybie offline</string>
     <string name="offline_wikivoyage">Wikipodróże w trybie offline</string>
@@ -4212,17 +4212,17 @@
     <string name="nautical_depth">Głębokość morska</string>
     <string name="advanced_widgets">Zaawansowane widżety</string>
     <string name="shared_string_view_all">Wyświetl wszystko</string>
-    <string name="backup_delete_types">Usuń dane wyłączonych typów</string>
+    <string name="backup_delete_types">Usuń wyłączone typy danych</string>
     <string name="backup_delete_types_descr">Usunąć wszystkie dane z chmury OsmAnd Cloud dla nieaktualnych typów\?</string>
     <string name="shared_string_discussion">Dyskusja</string>
-    <string name="backup_error_user_is_already_registered">Użytkownik był już zarejestrowany z takim adresem e-mail</string>
-    <string name="backup_error_subscription_was_expired">Subskrypcja jest już nieważna</string>
-    <string name="backup_error_subscription_was_used">Subskrypcja lub promocja została wykorzystana przez inne konto %1$s</string>
+    <string name="backup_error_user_is_already_registered">Ten adres e-mail jest już w użyciu na innym koncie</string>
+    <string name="backup_error_subscription_was_expired">Subskrypcja nieważna</string>
+    <string name="backup_error_subscription_was_used">Subskrypcja lub promocja wykorzystana przez inne konto %1$s</string>
     <string name="backup_error_size_is_exceeded">Przekroczono maksymalny rozmiar chmury OsmAnd Cloud %1$s</string>
-    <string name="backup_error_gzip_only_supported_upload">Plik nie został przesłany w formacie gzip</string>
-    <string name="backup_error_file_not_available">Plik nie jest dostępny</string>
-    <string name="backup_error_token_is_not_valid">Podany identyfikator urządzenia lub token jest nieprawidłowy</string>
-    <string name="backup_error_token_is_not_valid_or_expired">Token jest nieprawidłowy lub wygasł</string>
-    <string name="backup_error_user_is_not_registered">Użytkownik z tym adresem e-mail nie jest zarejestrowany</string>
+    <string name="backup_error_gzip_only_supported_upload">Plik powinien zostać przesłany w formacie gzip</string>
+    <string name="backup_error_file_not_available">Plik niedostępny</string>
+    <string name="backup_error_token_is_not_valid">Coś poszło nie tak z podanym identyfikatorem urządzenia lub tokenem</string>
+    <string name="backup_error_token_is_not_valid_or_expired">Nieprawidłowy lub nieaktualny token</string>
+    <string name="backup_error_user_is_not_registered">Żaden użytkownik nie jest zarejestrowany z tym adresem e-mail</string>
     <string name="backup_error_no_valid_subscription">Brak ważnej subskrypcji</string>
 </resources>
