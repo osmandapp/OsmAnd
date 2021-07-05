@@ -25,8 +25,6 @@ public class MapMarker implements LocationPoint {
 	private PointDescription pointDescription;
 	public int colorIndex;
 	public boolean history;
-	public boolean selected;
-	public int dist;
 	public long creationDate;
 	public long visitedDate;
 	public String groupKey;
@@ -35,11 +33,13 @@ public class MapMarker implements LocationPoint {
 	public FavouritePoint favouritePoint;
 	public String mapObjectName;
 
-	public MapMarker(LatLon point, PointDescription name, int colorIndex, boolean selected) {
+	public int dist;
+	public boolean selected;
+
+	public MapMarker(@NonNull LatLon point, @NonNull PointDescription name, int colorIndex) {
 		this.point = point;
 		this.pointDescription = name;
 		this.colorIndex = colorIndex;
-		this.selected = selected;
 	}
 
 	public ItineraryType getType() {

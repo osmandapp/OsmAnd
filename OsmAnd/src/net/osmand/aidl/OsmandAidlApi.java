@@ -1052,7 +1052,7 @@ public class OsmandAidlApi {
 		PointDescription pd = new PointDescription(
 				PointDescription.POINT_TYPE_MAP_MARKER, name != null ? name : "");
 		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
-		markersHelper.addMapMarker(new LatLon(latitude, longitude), pd);
+		markersHelper.addMapMarker(new LatLon(latitude, longitude), pd, null);
 		refreshMap();
 		return true;
 	}
@@ -1098,10 +1098,11 @@ public class OsmandAidlApi {
 				if (ignoreCoordinates || latLon.equals(new LatLon(m.getLatitude(), m.getLongitude()))) {
 					PointDescription pd = new PointDescription(
 							PointDescription.POINT_TYPE_MAP_MARKER, newName != null ? newName : "");
-					MapMarker marker = new MapMarker(m.point, pd, m.colorIndex, m.selected);
+					MapMarker marker = new MapMarker(m.point, pd, m.colorIndex);
 					marker.id = m.id;
-					marker.creationDate = m.creationDate;
+					marker.selected = m.selected;
 					marker.visitedDate = m.visitedDate;
+					marker.creationDate = m.creationDate;
 					markersHelper.moveMapMarker(marker, latLonNew);
 					refreshMap();
 					return true;

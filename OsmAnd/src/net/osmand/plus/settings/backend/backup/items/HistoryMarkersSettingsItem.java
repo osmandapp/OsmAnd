@@ -125,9 +125,10 @@ public class HistoryMarkersSettingsItem extends CollectionSettingsItem<MapMarker
 			number++;
 			String name = item.getOnlyName() + " " + number;
 			PointDescription description = new PointDescription(PointDescription.POINT_TYPE_LOCATION, name);
-			MapMarker renamedMarker = new MapMarker(item.point, description, item.colorIndex, item.selected);
+			MapMarker renamedMarker = new MapMarker(item.point, description, item.colorIndex);
 			if (!isDuplicate(renamedMarker)) {
 				renamedMarker.history = true;
+				renamedMarker.selected = item.selected;
 				renamedMarker.visitedDate = item.visitedDate;
 				renamedMarker.creationDate = item.creationDate;
 				return renamedMarker;

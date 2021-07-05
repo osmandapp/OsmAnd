@@ -44,7 +44,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import static net.osmand.plus.mapmarkers.ItineraryDataHelper.VISITED_DATE;
-import static net.osmand.util.MapUtils.createShortLinkString;
 
 // TODO rename after 4.0 MapMarkersHelper -> ItineraryHelper
 public class MapMarkersHelper {
@@ -148,9 +147,10 @@ public class MapMarkersHelper {
 		sortMarkers(mapMarkersHistory, true, BY_DATE_ADDED_DESC);
 		sortGroups();
 		saveGroups();
+		lookupAddressAll();
 	}
 
-	private void saveGroups() {
+	protected void saveGroups() {
 		List<MapMarkersGroup> markersGroups = new ArrayList<>();
 		for (MapMarkersGroup group : mapMarkersGroups) {
 			if (!group.isDisabled()) {
@@ -757,33 +757,17 @@ public class MapMarkersHelper {
 		refresh();
 	}
 
-	public void addMapMarker(@NonNull LatLon point, @Nullable PointDescription historyName) {
-		addMapMarkers(Collections.singletonList(point), Collections.singletonList(historyName), null);
-	}
-
 	public void addMapMarker(@NonNull LatLon point,
 							 @Nullable PointDescription historyName,
 							 @Nullable String mapObjectName) {
-		addMarkers(Collections.singletonList(point),
+		addMapMarkers(Collections.singletonList(point),
 				Collections.singletonList(historyName),
-				null,
-				null,
-				null,
 				Collections.singletonList(mapObjectName));
 	}
 
 	public void addMapMarkers(@NonNull List<LatLon> points,
 							  @NonNull List<PointDescription> historyNames,
-							  @Nullable MapMarkersGroup group) {
-		addMarkers(points, historyNames, group, null, null, null);
-	}
-
-	private void addMarkers(@NonNull List<LatLon> points,
-							@NonNull List<PointDescription> historyNames,
-							@Nullable MapMarkersGroup group,
-							@Nullable List<FavouritePoint> favouritePoints,
-							@Nullable List<WptPt> wptPts,
-							@Nullable List<String> mapObjNames) {
+							  @Nullable List<String> mapObjNames) {
 		if (points.size() > 0) {
 			ctx.getSettings().SHOW_MAP_MARKERS.set(true);
 			int colorIndex = -1;
@@ -791,15 +775,9 @@ public class MapMarkersHelper {
 			for (int i = 0; i < points.size(); i++) {
 				LatLon point = points.get(i);
 				PointDescription historyName = historyNames.get(i);
-				FavouritePoint favouritePoint = favouritePoints == null ? null : favouritePoints.get(i);
-				WptPt wptPt = wptPts == null ? null : wptPts.get(i);
 				String mapObjName = mapObjNames == null ? null : mapObjNames.get(i);
-				final PointDescription pointDescription;
-				if (historyName == null) {
-					pointDescription = new PointDescription(PointDescription.POINT_TYPE_LOCATION, "");
-				} else {
-					pointDescription = historyName;
-				}
+				PointDescription pointDescription = historyName != null
+						? historyName : new PointDescription(PointDescription.POINT_TYPE_LOCATION, "");
 				if (pointDescription.isLocation() && Algorithms.isEmpty(pointDescription.getName())) {
 					pointDescription.setName(PointDescription.getSearchAddressStr(ctx));
 				}
@@ -813,28 +791,7 @@ public class MapMarkersHelper {
 					colorIndex = (colorIndex + 1) % MAP_MARKERS_COLORS_COUNT;
 				}
 
-				MapMarker marker = new MapMarker(point, pointDescription, colorIndex, false);
-				if (group != null) {
-					marker.id = getMarkerId(ctx, group, marker);
-					if (markersDbHelper.getMarker(marker.id) != null) {
-						continue;
-					}
-					marker.groupName = group.getName();
-					marker.groupKey = group.getId();
-				}
-				if (wptPt != null) {
-					String timestamp = wptPt.getExtensionsToWrite().get(FavouritePoint.PASSED_TIMESTAMP);
-					long passedTime = Algorithms.parseLongSilently(timestamp, 0);
-					marker.wptPt = wptPt;
-					marker.history = passedTime != 0;
-					marker.visitedDate = passedTime;
-				} else if (favouritePoint != null) {
-					marker.favouritePoint = favouritePoint;
-					marker.history = favouritePoint.getPassedTimestamp() != 0;
-					marker.visitedDate = favouritePoint.getPassedTimestamp();
-				} else {
-					marker.history = false;
-				}
+				MapMarker marker = new MapMarker(point, pointDescription, colorIndex);
 				marker.mapObjectName = mapObjName;
 
 				addedMarkers.add(marker);
@@ -849,10 +806,6 @@ public class MapMarkersHelper {
 			}
 			addMarkersToGroups(addedMarkers);
 		}
-	}
-
-	public static String getMarkerId(OsmandApplication app, MapMarkersGroup group, MapMarker marker) {
-		return group.getId() + marker.getName(app) + createShortLinkString(marker.point.getLatitude(), marker.point.getLongitude(), 15);
 	}
 
 	public void updateMapMarker(MapMarker marker, boolean refresh) {
@@ -956,7 +909,7 @@ public class MapMarkersHelper {
 	}
 
 	private boolean syncFavouritesPassedPoints(MapMarker marker) {
-		boolean passedPoint = marker.favouritePoint.getPassedTimestamp() != 0;
+		boolean passedPoint = marker.favouritePoint.getVisitedDate() != 0;
 		if (marker.history && !passedPoint) {
 			return ctx.getFavorites().favouritePassed(marker.favouritePoint, true, false);
 		} else if (!marker.history && passedPoint) {
@@ -971,12 +924,12 @@ public class MapMarkersHelper {
 		if (file.exists()) {
 			SelectedGpxFile selectedGpxFile = gpxHelper.getSelectedFileByPath(file.getAbsolutePath());
 			if (selectedGpxFile != null) {
-				boolean passedPoint = marker.wptPt.getExtensionsToWrite().containsKey(FavouritePoint.PASSED_TIMESTAMP);
+				boolean passedPoint = marker.wptPt.getExtensionsToWrite().containsKey(VISITED_DATE);
 				if (marker.history && !passedPoint) {
-					marker.wptPt.getExtensionsToWrite().put(FavouritePoint.PASSED_TIMESTAMP, String.valueOf(System.currentTimeMillis()));
+					marker.wptPt.getExtensionsToWrite().put(VISITED_DATE, ItineraryDataHelper.formatTime(System.currentTimeMillis()));
 					gpxFiles.add(selectedGpxFile.getGpxFile());
 				} else if (!marker.history && passedPoint) {
-					marker.wptPt.getExtensionsToWrite().remove(FavouritePoint.PASSED_TIMESTAMP);
+					marker.wptPt.getExtensionsToWrite().remove(VISITED_DATE);
 					gpxFiles.add(selectedGpxFile.getGpxFile());
 				}
 			}
@@ -1080,7 +1033,7 @@ public class MapMarkersHelper {
 		} else {
 			throw new IllegalArgumentException("Unsupported ItineraryType: " + group.getType());
 		}
-		updateGroupMarkers(groupMarkers, existingMarkers);
+		updateGroupMarkers(group, groupMarkers, existingMarkers);
 		removeOldMarkersIfPresent(groupMarkers);
 	}
 
@@ -1097,15 +1050,7 @@ public class MapMarkersHelper {
 		}
 		List<FavouritePoint> points = new ArrayList<>(favGroup.getPoints());
 		for (FavouritePoint point : points) {
-			int colorIndex = MapMarker.getColorIndex(ctx, point.getColor());
-			LatLon latLon = new LatLon(point.getLatitude(), point.getLongitude());
-			PointDescription name = new PointDescription(PointDescription.POINT_TYPE_MAP_MARKER, point.getName());
-
-			MapMarker mapMarker = new MapMarker(latLon, name, colorIndex, false);
-			mapMarker.id = getMarkerId(ctx, group, mapMarker);
-			mapMarker.favouritePoint = point;
-
-			existingMarkers.add(mapMarker);
+			existingMarkers.add(ItineraryDataHelper.fromFavourite(ctx, point, group));
 		}
 	}
 
@@ -1129,16 +1074,12 @@ public class MapMarkersHelper {
 		for (WptPt wptPt : gpxPoints) {
 			if (addAll || group.getWptCategories().contains(wptPt.category)
 					|| (wptPt.category == null && group.getWptCategories().contains(""))) {
-				boolean history = !Algorithms.isEmpty(wptPt.getExtensionsToRead().get(VISITED_DATE));
-				MapMarker mapMarker = ItineraryDataHelper.fromWpt(wptPt, ctx, history);
-				mapMarker.id = getMarkerId(ctx, group, mapMarker);
-
-				existingMarkers.add(mapMarker);
+				existingMarkers.add(ItineraryDataHelper.fromWpt(ctx, wptPt, group));
 			}
 		}
 	}
 
-	private void updateGroupMarkers(@NonNull List<MapMarker> groupMarkers, @NonNull List<MapMarker> markers) {
+	private void updateGroupMarkers(@NonNull MapMarkersGroup group, @NonNull List<MapMarker> groupMarkers, @NonNull List<MapMarker> markers) {
 		for (MapMarker marker : markers) {
 			MapMarker savedMarker = getMapMarker(marker.id);
 			if (savedMarker != null) {
@@ -1153,10 +1094,13 @@ public class MapMarkersHelper {
 					}
 				}
 				savedMarker.copyParams(marker);
-			} else if (marker.history) {
-				addToMapMarkersHistoryList(marker);
 			} else {
-				addToMapMarkersList(marker);
+				if (marker.history) {
+					addToMapMarkersHistoryList(marker);
+				} else {
+					addToMapMarkersList(marker);
+				}
+				group.getMarkers().add(marker);
 			}
 			Iterator<MapMarker> iterator = groupMarkers.iterator();
 			while (iterator.hasNext()) {
