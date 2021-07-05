@@ -1098,7 +1098,7 @@ public class OsmandAidlApi {
 				if (ignoreCoordinates || latLon.equals(new LatLon(m.getLatitude(), m.getLongitude()))) {
 					PointDescription pd = new PointDescription(
 							PointDescription.POINT_TYPE_MAP_MARKER, newName != null ? newName : "");
-					MapMarker marker = new MapMarker(m.point, pd, m.colorIndex, m.selected, m.index);
+					MapMarker marker = new MapMarker(m.point, pd, m.colorIndex, m.selected);
 					marker.id = m.id;
 					marker.creationDate = m.creationDate;
 					marker.visitedDate = m.visitedDate;
