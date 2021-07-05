@@ -1048,9 +1048,17 @@ public class MapMarkersHelper {
 			removeGroupActiveMarkers(group, true);
 			return;
 		}
+		int colorIndex = -1;
 		List<FavouritePoint> points = new ArrayList<>(favGroup.getPoints());
 		for (FavouritePoint point : points) {
-			existingMarkers.add(ItineraryDataHelper.fromFavourite(ctx, point, group));
+			if (colorIndex == -1) {
+				colorIndex = mapMarkers.isEmpty() ? 0 : (mapMarkers.get(0).colorIndex + 1) % MAP_MARKERS_COLORS_COUNT;
+			} else {
+				colorIndex = (colorIndex + 1) % MAP_MARKERS_COLORS_COUNT;
+			}
+			MapMarker mapMarker = ItineraryDataHelper.fromFavourite(ctx, point, group);
+			mapMarker.colorIndex = colorIndex;
+			existingMarkers.add(mapMarker);
 		}
 	}
 
@@ -1069,12 +1077,20 @@ public class MapMarkersHelper {
 			removeGroupActiveMarkers(group, true);
 			return;
 		}
+		int colorIndex = -1;
 		boolean addAll = group.getWptCategories() == null || group.getWptCategories().isEmpty();
 		List<WptPt> gpxPoints = new ArrayList<>(gpx.getPoints());
 		for (WptPt wptPt : gpxPoints) {
 			if (addAll || group.getWptCategories().contains(wptPt.category)
 					|| (wptPt.category == null && group.getWptCategories().contains(""))) {
-				existingMarkers.add(ItineraryDataHelper.fromWpt(ctx, wptPt, group));
+				if (colorIndex == -1) {
+					colorIndex = mapMarkers.isEmpty() ? 0 : (mapMarkers.get(0).colorIndex + 1) % MAP_MARKERS_COLORS_COUNT;
+				} else {
+					colorIndex = (colorIndex + 1) % MAP_MARKERS_COLORS_COUNT;
+				}
+				MapMarker mapMarker = ItineraryDataHelper.fromWpt(ctx, wptPt, group);
+				mapMarker.colorIndex = colorIndex;
+				existingMarkers.add(mapMarker);
 			}
 		}
 	}
