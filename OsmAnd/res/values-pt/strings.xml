@@ -4172,12 +4172,12 @@
     <string name="restore_from_osmand_cloud">Restaurar de OsmAnd Cloud</string>
     <string name="choose_what_to_restore">Escolher o que restaurar.</string>
     <string name="restore_selected_data">Restaurar dados selecionados</string>
-    <string name="receiving_data_from_server">A receber dados do servidor</string>
-    <string name="restore_complete">Restauro completo</string>
+    <string name="receiving_data_from_server">A receber dados do servidor…</string>
+    <string name="restore_complete">Restaurado</string>
     <string name="grey_color_slope">Os declives desconhecidos são mostrados na cor cinzento.</string>
     <string name="backup_version_history">Histórico de versões</string>
     <string name="backup_storage_taken">Espaço utilizado</string>
-    <string name="backup_version_history_delete_descr">Quer mesmo eliminar o histórico de alterações de tipos desativados da cloud\?</string>
+    <string name="backup_version_history_delete_descr">Quer mesmo eliminar o histórico de alterações de tipos em desuso da cloud\?</string>
     <string name="delete_version_history">Eliminar histórico de versões</string>
     <string name="routing_attr_avoid_tunnels_description">Evitar túneis</string>
     <string name="routing_attr_avoid_tunnels_name">Evitar túneis</string>
@@ -4191,9 +4191,9 @@
     <string name="purchases_feature_desc_combined_wiki">Explore os artigos da Wikipédia em qualquer lugar, sem uma ligação à Internet. Estes dados offline estão divididos por países e disponíveis em todos os idiomas.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Obtenha descarregamentos ilimitados para todos os mapas offline de continentes e regiões.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Obtenha acesso a atualizações mensais regulares para mapas offline.</string>
-    <string name="purchases_feature_desc_hourly_map_updates">Tenha acesso a atualizações de mapas com mais frequência, escolha entre: atualizações de hora em hora, diárias ou semanais. As atualizações são descarregadas de forma incremental, apenas para a área alterada.</string>
-    <string name="purchases_feature_desc_advanced_widgets">Obtenha acesso ao OsmAnd avançado e aos Widgets.</string>
-    <string name="purchases_feature_desc_osmand_cloud">Obtenha o OsmAnd Cloud para armazenar todos os dados do OsmAnd online. Esqueça a perda dos seus dados após reinstalar, faça cópias de segurança e restaure todas as informações sem problemas.</string>
+    <string name="purchases_feature_desc_hourly_map_updates">Tenha acesso a atualizações de mapas com mais frequência. Atualizações de hora em hora, diárias ou semanais. As atualizações são descarregadas de forma incremental, apenas para a área alterada.</string>
+    <string name="purchases_feature_desc_advanced_widgets">Obtenha acesso ao OsmAnd avançado e aos widgets.</string>
+    <string name="purchases_feature_desc_osmand_cloud">Obtenha o OsmAnd Cloud para armazenar todos os dados do OsmAnd online. Não perca os seus dados após reinstalações. Faça cópias de segurança e restaure todas as informações facilmente.</string>
     <string name="unlimited_map_downloads">Descarregamentos ilimitados de mapas</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipédia e Wikivoyage offline</string>
     <string name="terrain_maps_contour_lines_hillshade_slope">Mapas de terreno: curvas de nível, sombras de relevo, declives</string>
@@ -4202,7 +4202,7 @@
     <string name="terrain_maps">Mapas de terreno</string>
     <string name="nautical_depth">Profundidade náutica</string>
     <string name="advanced_widgets">Widgets avançados</string>
-    <string name="you_can_get_feature_as_part_of_pattern">Pode obter “%1$s” como parte do plano: %2$s. Compare os planos:</string>
+    <string name="you_can_get_feature_as_part_of_pattern">Pode obter “%1$s” como parte do plano: %2$s. Comparação:</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s ou %2$s</string>
     <string name="continue_with">Continue com %1$s</string>
     <string name="not_available_with">Não disponível com %1$s</string>
@@ -4217,8 +4217,18 @@
     <string name="complete_purchase">Compra completa</string>
     <string name="regular_price">Preço normal</string>
     <string name="from_with_param">De %1$s</string>
-    <string name="backup_delete_types_descr">Quer eliminar dados para tipos desativados da nuvem\?</string>
+    <string name="backup_delete_types_descr">Quer eliminar dados para tipos desativados em desuso da nuvem\?</string>
     <string name="backup_delete_types">Eliminar dados de tipos desativados</string>
     <string name="shared_string_discussion">Discussão</string>
     <string name="shared_string_view_all">Ver tudo</string>
+    <string name="backup_error_user_is_already_registered">Este endereço de email está a ser utilizado noutra conta</string>
+    <string name="backup_error_subscription_was_expired">Subscrição expirada</string>
+    <string name="backup_error_subscription_was_used">Subscrição ou código promocional usada por outra conta %1$s</string>
+    <string name="backup_error_size_is_exceeded">O tamanho máximo do OsmAnd Cloud excedeu %1$s</string>
+    <string name="backup_error_gzip_only_supported_upload">O ficheiro tem de ser enviado no formato .gzip</string>
+    <string name="backup_error_file_not_available">Ficheiro indisponível</string>
+    <string name="backup_error_token_is_not_valid">Algo está errado com o código ou token do dispositivo fornecido</string>
+    <string name="backup_error_token_is_not_valid_or_expired">Token inválido ou expirado</string>
+    <string name="backup_error_user_is_not_registered">Não está registado nenhum utilizador com esse endereço de email</string>
+    <string name="backup_error_no_valid_subscription">Nenhuma assinatura válida presente</string>
 </resources>
