@@ -196,7 +196,7 @@
     <string name="track_recording_will_be_continued">The recording will be continued.</string>
     <string name="select_category_descr">Select category or add a new one</string>
     <string name="purchases">Purchases</string>
-    <string name="live_update_delete_updates_msg">Are you sure you want to delete all %s live updates?</string>
+    <string name="live_update_delete_updates_msg">Delete all %s live updates?</string>
     <string name="delete_updates">Delete updates</string>
     <string name="live_update_frequency_hour_variant">Map updates will be checked every hour. Next time %1$s in %2$s.</string>
     <string name="live_update_frequency_day_variant">Map updates will be checked every day. Next time %1$s in %2$s.</string>
@@ -210,7 +210,7 @@
     <string name="routing_attr_height_obstacles_description">Routing could avoid strong uphills.</string>
     <string name="app_restart_required">Application restart required to apply some settings.</string>
     <string name="on_pause">On pause</string>
-    <string name="track_recording_description">Are you sure you want to stop recording?\nAll unsaved data will be lost.</string>
+    <string name="track_recording_description">Stop recording?\nAll unsaved data will be lost.</string>
     <string name="track_recording_title">Track recording stopped</string>
     <string name="track_recording_save_and_stop">Save and stop recording</string>
     <string name="track_recording_stop_without_saving">Stop without saving</string>
@@ -474,7 +474,7 @@
     <string name="add_segment_to_the_track">Add to a track file</string>
     <string name="shared_string_save_as_gpx">Save as new track file</string>
     <string name="in_case_of_reverse_direction">In case of reverse direction</string>
-    <string name="plan_route_exit_dialog_descr">Are you sure you want to discard all changes in the planned route?</string>
+    <string name="plan_route_exit_dialog_descr">Discard all changes in the planned route?</string>
     <string name="street_level_imagery">Street-level imagery</string>
     <string name="route_between_points_add_track_desc">Select a track file to add the new segment to.</string>
     <string name="navigation_profile">Navigation profile</string>
@@ -552,7 +552,7 @@
     <string name="shared_string_legal">Legal</string>
     <string name="uninstall_speed_cameras">Uninstall speed cameras</string>
     <string name="screen_timeout">Screen timeout</string>
-    <string name="delete_all_actions_message_q">Are you sure you want to irrevocably delete %d quick actions?</string>
+    <string name="delete_all_actions_message_q">Irrevocably delete %d quick actions?</string>
     <string name="shared_string_delete_all_q">Delete all?</string>
     <string name="export_import_quick_actions_with_profiles_promo">You can export or import quick actions with app profiles.</string>
     <string name="tiles_storage_descr">Choose how to store downloaded tiles.</string>
@@ -706,7 +706,7 @@
     <string name="recalculate_route_distance_promo">The route will be recalculated if the distance from the route to the current location is more than selected value.</string>
     <string name="select_distance_route_will_recalc">Select the distance after which the route will be recalculated.</string>
     <string name="recalculate_route_in_deviation">Recalculate route in case of deviation</string>
-    <string name="clear_recorded_data_warning">Are you sure you want to clear recorded data?</string>
+    <string name="clear_recorded_data_warning">Clear recorded data?</string>
     <string name="restore_all_profile_settings_descr">All profile settings will be restored to their original state after creating/importing this profile.</string>
     <string name="restore_all_profile_settings">Restore all profile settings?</string>
     <string name="saving_new_profile">Saving new profile</string>
@@ -923,7 +923,7 @@
     <string name="routing_attr_prefer_unpaved_name">Prefer unpaved roads</string>
     <string name="routing_attr_prefer_unpaved_description">Prefer unpaved roads.</string>
     <string name="update_all_maps">Update all maps</string>
-    <string name="update_all_maps_q">Are you sure you want to update all (%1$d) maps?</string>
+    <string name="update_all_maps_q">Update all (%1$d) maps?</string>
     <string name="track_storage_directory">Track storage folder</string>
     <string name="track_storage_directory_descrp">Tracks can be stored in the \'rec\' folder, monthly, or daily folders.</string>
     <string name="store_tracks_in_rec_directory">Record tracks to \'rec\' folder</string>
@@ -1149,7 +1149,7 @@
     <string name="profile_alert_need_save_title">Save changes</string>
     <string name="profile_alert_need_save_msg">Save changes to the profile first</string>
     <string name="profile_alert_delete_title">Delete profile</string>
-    <string name="profile_alert_delete_msg">Are you sure you want to delete the \"%s\" profile</string>
+    <string name="profile_alert_delete_msg">Delete the \"%s\" profile</string>
     <string name="select_base_profile_dialog_title">Select profile to start with</string>
     <string name="select_base_profile_dialog_message">Base your custom profile on one of the default app profiles, this defines the basic setup like default visibility of widgets and units of speed and distance. These are the default app profiles, together with examples of custom profiles they may be extended to:</string>
     <string name="select_nav_profile_dialog_title">Select navigation type</string>
@@ -1770,7 +1770,7 @@
     <string name="shared_string_slope">Slope</string>
     <string name="add_new_folder">Add new folder</string>
     <string name="points_delete_multiple_succesful">Point(s) deleted.</string>
-    <string name="points_delete_multiple">Are you sure you want to delete %1$d point(s)?</string>
+    <string name="points_delete_multiple">Delete %1$d point(s)?</string>
     <string name="route_points_category_name">Turns to pass on this route</string>
     <string name="track_points_category_name">Waypoints, points of interest, named features</string>
     <string name="shared_string_gpx_track">Track</string>
@@ -1932,7 +1932,7 @@
     <string name="update_all_maps_now">Update all maps now?</string>
     <string name="clear_tile_data">Clear all tiles</string>
     <string name="routing_attr_short_way_name">Fuel-efficient way</string>
-    <string name="replace_favorite_confirmation">Are you sure you want to replace Favorite %1$s?</string>
+    <string name="replace_favorite_confirmation">Replace the \"%1$s\" Favorite?</string>
     <string name="rendering_attr_hideOverground_name">Overground objects</string>
     <string name="shared_string_change">Change</string>
     <string name="get_started">Get started</string>
@@ -2353,8 +2353,8 @@
     <string name="current_route">Current route</string>
     <string name="osm_changes_added_to_local_edits">OSM changes added to local changeset</string>
     <string name="mark_to_delete">Mark to delete</string>
-    <string name="local_recordings_delete_all_confirm">Are you sure you want to delete %1$d notes?</string>
-    <string name="local_osm_changes_upload_all_confirm">Are you sure you want to upload %1$d change(s) to OSM?</string>
+    <string name="local_recordings_delete_all_confirm">Delete %1$d notes?</string>
+    <string name="local_osm_changes_upload_all_confirm">Upload %1$d change(s) to OSM?</string>
     <string name="confirmation_to_clear_history">Clear history?</string>
     <string name="delay_to_start_navigation_descr">Specify wait time to remain on the route planning screen.</string>
     <string name="delay_to_start_navigation">Start turn-by-turn guidance after…</string>
@@ -2849,7 +2849,7 @@
     <string name="app_mode_motorcycle">Motorcycle</string>
     <string name="app_mode_boat">Boat</string>
     <string name="app_mode_aircraft">Aircraft</string>
-    <string name="local_osm_changes_delete_all_confirm">Are you sure you want to delete %1$d OSM changes?</string>
+    <string name="local_osm_changes_delete_all_confirm">Delete %1$d OSM changes?</string>
     <string name="animate_routing_route_not_calculated">Please calculate the route first</string>
     <string name="animate_routing_route">Simulate using calculated route</string>
     <string name="animate_routing_gpx">Simulate using GPX track</string>
@@ -2980,8 +2980,8 @@
     <string name="download_hillshade_maps">Hillshades</string>
     <string name="local_indexes_cat_srtm">Contour lines</string>
     <string name="local_indexes_cat_av">Audio/Video data</string>
-    <string name="stop_routing_confirm">Are you sure you want to stop the navigation?</string>
-    <string name="clear_dest_confirm">Are you sure you want to clear your destination (and intermediate destinations)?</string>
+    <string name="stop_routing_confirm">Stop the navigation?</string>
+    <string name="clear_dest_confirm">Remove your destination (and intermediate destinations)?</string>
     <string name="precise_routing_mode_descr">Calculate precise routes without glitches. Still distance-limited and slow.</string>
     <string name="precise_routing_mode">Precise routing (alpha)</string>
     <string name="recording_context_menu_show">Show</string>
@@ -3588,7 +3588,7 @@
     <string name="show_more_map_detail">Show more map detail</string>
     <string name="show_more_map_detail_descr">Show some vector map detail (roads etc.) at lower zoom levels already.</string>
     <string name="favourites_delete_multiple_succesful">Favorite points deleted.</string>
-    <string name="favorite_delete_multiple">Are you sure you want to delete %1$d Favorites and %2$d Favorite groups?</string>
+    <string name="favorite_delete_multiple">Delete %1$d Favorites and %2$d Favorite groups?</string>
     <string name="favorite_home_category">Home</string>
     <string name="favorite_friends_category">Friends</string>
     <string name="favorite_places_category">Places</string>
@@ -4070,7 +4070,7 @@
     <string name="unsaved_changes_will_be_lost">Any unsaved changes will be lost. Continue?</string>
     <string name="downloads_left_template">%1$s downloads left</string>
     <string name="roads">Roads</string>
-    <string name="downloading_number_of_files">Downloading - %1$d file</string>
+    <string name="downloading_number_of_files">Downloading %1$d file…</string>
     <string name="show_free_version_banner">Show free version banner</string>
     <string name="show_free_version_banner_description">Display the free version banner even in the paid version.</string>
     <string name="buy">Buy</string>
@@ -4152,7 +4152,7 @@
     <string name="quick_action_add_favorite">Add Favorite</string>
     <string name="dialog_add_action_title">Add action</string>
     <string name="quick_actions_delete">Delete action</string>
-    <string name="quick_actions_delete_text">Are you sure you want to delete the action \"%s\"?</string>
+    <string name="quick_actions_delete_text">Delete the \"%s\" action?</string>
     <string name="quick_favorites_show_favorites_dialog">Show Favorites dialog</string>
     <string name="quick_favorites_name_preset">Name preset</string>
     <string name="quick_action_add_marker_descr">A button to add a map marker at the screen center location.</string>
