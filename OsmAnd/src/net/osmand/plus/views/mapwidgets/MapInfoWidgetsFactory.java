@@ -964,6 +964,7 @@ public class MapInfoWidgetsFactory {
 				if (streetName.shieldObject != null && streetName.shieldObject.nameIds != null
 						&& setRoadShield(shieldIcon, streetName.shieldObject)) {
 					AndroidUiHelper.updateVisibility(shieldIcon, true);
+					streetName.text = streetName.text.substring(streetName.text.indexOf("»"));
 				} else {
 					AndroidUiHelper.updateVisibility(shieldIcon, false);
 				}
@@ -987,6 +988,8 @@ public class MapInfoWidgetsFactory {
 					} else {
 						AndroidUiHelper.updateVisibility(turnIcon, false);
 					}
+				} else {
+					AndroidUiHelper.updateVisibility(turnIcon, false);
 				}
 				if (streetName.text == null || streetName.text.isEmpty()) {
 					addressTextShadow.setText("");
@@ -1005,14 +1008,14 @@ public class MapInfoWidgetsFactory {
 			for (int i = 0; i < object.nameIds.length; i++) {
 				String key = object.region.routeEncodingRules.get(object.nameIds[i]).getTag();
 				String val = object.names.get(object.nameIds[i]);
-				if (!key.startsWith("road_ref")) {
+				if (!key.endsWith("_ref") && !key.startsWith("route_road")) {
 					additional.append(key).append("=").append(val).append(";");
 				}
 			}
 			for (int i = 0; i < object.nameIds.length; i++) {
 				String key = object.region.routeEncodingRules.get(object.nameIds[i]).getTag();
 				String val = object.names.get(object.nameIds[i]);
-				if (key.startsWith("road_ref")) {
+				if (key.startsWith("route_road") && key.endsWith("_ref")) {
 					boolean visible = setRoadShield(view, object, key, val, additional);
 					if (visible) {
 						return true;
