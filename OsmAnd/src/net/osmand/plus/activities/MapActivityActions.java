@@ -878,7 +878,7 @@ public class MapActivityActions implements DialogProvider {
 
 		final OsmandMonitoringPlugin monitoringPlugin = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
 		if (monitoringPlugin != null) {
-			ContextMenuItem tripRecordingItem = new ItemBuilder().setTitleId(R.string.map_widget_monitoring, mapActivity)
+			optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.map_widget_monitoring, mapActivity)
 					.setId(DRAWER_TRIP_RECORDING_ID)
 					.setIcon(R.drawable.ic_action_track_recordable)
 					.setListener(new ItemClickListener() {
@@ -893,8 +893,7 @@ public class MapActivityActions implements DialogProvider {
 							}
 							return true;
 						}
-					}).createItem();
-			optionsMenuHelper.addItem(tripRecordingItem, optionsMenuHelper.setLowestOrder(tripRecordingItem));
+					}).createItem());
 		}
 
 		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.get_directions, mapActivity)
@@ -1009,22 +1008,6 @@ public class MapActivityActions implements DialogProvider {
 					}
 				}).createItem());
 
-		/*
-		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.shared_string_settings, mapActivity)
-				.setId(DRAWER_SETTINGS_ID)
-				.setIcon(R.drawable.ic_action_settings)
-				.setListener(new ItemClickListener() {
-					@Override
-					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
-						app.logEvent("drawer_settings_open");
-						final Intent settings = new Intent(mapActivity, getMyApplication().getAppCustomization()
-								.getSettingsActivity());
-						settings.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-						mapActivity.startActivity(settings);
-						return true;
-					}
-				}).createItem());
-		*/
 		optionsMenuHelper.addItem(new ItemBuilder().setTitle(getString(R.string.shared_string_settings))
 				.setId(DRAWER_SETTINGS_ID + ".new")
 				.setIcon(R.drawable.ic_action_settings)
@@ -1117,8 +1100,8 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 	private void addMyPlacesTabToDrawer(ContextMenuAdapter adapter, @StringRes int titleRes,
-	                                    @DrawableRes int iconRes, String drawerId) {
-		ContextMenuItem item = new ItemBuilder().setTitleId(titleRes, mapActivity)
+										@DrawableRes int iconRes, String drawerId) {
+		adapter.addItem(new ItemBuilder().setTitleId(titleRes, mapActivity)
 				.setId(drawerId)
 				.setIcon(iconRes)
 				.setListener((adapter1, itemId, position, isChecked, viewCoordinates) -> {
@@ -1132,13 +1115,7 @@ public class MapActivityActions implements DialogProvider {
 					return true;
 
 				})
-				.createItem();
-
-		if (DRAWER_AV_NOTES_ID.equals(drawerId) || DRAWER_OSM_EDITS_ID.equals(drawerId)) {
-			adapter.addItem(item, adapter.setLowestOrder(item));
-		} else {
-			adapter.addItem(item);
-		}
+				.createItem());
 	}
 
 	public void openIntermediatePointsDialog() {

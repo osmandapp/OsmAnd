@@ -37,7 +37,6 @@ import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.dialogs.HelpArticleDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.ContextMenuItemsSettings;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.ContextMenuItemsPreference;
 import net.osmand.plus.settings.backend.OsmandPreference;
@@ -90,14 +89,10 @@ public class ContextMenuAdapter {
 	}
 
 	public void addItem(ContextMenuItem item) {
-		addItem(item, false);
-	}
-
-	public void addItem(ContextMenuItem item, boolean shiftNextItemsOrder) {
 		String id = item.getId();
 		if (id != null) {
 			item.setHidden(isItemHidden(id));
-			item.setOrder(getItemOrder(id, item.getOrder(), shiftNextItemsOrder));
+			item.setOrder(getItemOrder(id, item.getOrder()));
 		}
 		items.add(item);
 		sortItemsByOrder();
@@ -178,19 +173,14 @@ public class ContextMenuAdapter {
         return false;
     }
 
-    private int getItemOrder(@NonNull String id, int defaultOrder, boolean shiftNextItemsOrder) {
+    private int getItemOrder(@NonNull String id, int defaultOrder) {
         ContextMenuItemsPreference contextMenuItemsPreference = app.getSettings().getContextMenuItemsPreference(id);
 		if (contextMenuItemsPreference != null) {
-			List<String> orderIds = new ArrayList<>(contextMenuItemsPreference.get().getOrderIds());
+			List<String> orderIds = contextMenuItemsPreference.get().getOrderIds();
 			if (!Algorithms.isEmpty(orderIds)) {
 				int index = orderIds.indexOf(id);
 				if (index != -1) {
 					return index;
-				}
-				if (shiftNextItemsOrder) {
-					orderIds.add(defaultOrder, id);
-					List<String> hiddenIds = contextMenuItemsPreference.get().getHiddenIds();
-					contextMenuItemsPreference.set(new ContextMenuItemsSettings(hiddenIds, orderIds));
 				}
 			}
 		}
@@ -632,14 +622,6 @@ public class ContextMenuAdapter {
 			}
 		}
 		return visible;
-	}
-
-	public boolean setLowestOrder(ContextMenuItem item) {
-		if (length() > 0) {
-			item.setOrder(items.get(length() - 1).getOrder() + 1);
-			return true;
-		}
-		return false;
 	}
 
 	public static OnItemDeleteAction makeDeleteAction(final OsmandPreference... prefs) {
