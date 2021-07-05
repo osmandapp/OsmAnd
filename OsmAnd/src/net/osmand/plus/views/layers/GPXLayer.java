@@ -1078,7 +1078,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			return new PointDescription(PointDescription.POINT_TYPE_GPX, name);
 		} else if (o instanceof Pair && ((Pair<?, ?>) o).first instanceof TravelGpx) {
 			TravelGpx travelGpx = (TravelGpx) ((Pair<?, ?>) o).first;
-			return new PointDescription(PointDescription.POINT_TYPE_GPX, travelGpx.getRouteId());
+			return new PointDescription(PointDescription.POINT_TYPE_GPX, travelGpx.getTitle());
 		}
 		return null;
 	}

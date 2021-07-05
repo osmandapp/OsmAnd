@@ -300,8 +300,11 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			displayHelper.setGpxDataItem(app.getGpxDbHelper().getItem(file));
 		}
 		displayHelper.setGpx(selectedGpxFile.getGpxFile());
-		String fileName = Algorithms.getFileWithoutDirs(getGpx().path);
-		gpxTitle = !isCurrentRecordingTrack() ? GpxUiHelper.getGpxTitle(fileName)
+		String title = getGpx().metadata.getArticleTitle();
+		if (title == null) {
+			title = GpxUiHelper.getGpxTitle(Algorithms.getFileWithoutDirs(getGpx().path));
+		}
+		gpxTitle = !isCurrentRecordingTrack() ? title
 				: app.getResources().getString(R.string.shared_string_currently_recording_track);
 	}
 
