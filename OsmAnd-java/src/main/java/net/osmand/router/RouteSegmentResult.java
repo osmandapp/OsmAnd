@@ -41,8 +41,11 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 
 	// Evaluates street name that the route follows after turn within specified distance.
 	// It is useful to find names for short segments on intersections
-	private static float distanceSeekStreetName = 150;
-	private static float distanceSeekDestination = 1000;
+	private static final float DIST_TO_SEEK_STREET_NAME = 150;
+
+	// Evaluates destination for exit from one road to another on the followed highway link within specified distance.
+	// In most cases using on "cloverleaf" junctions
+	private static final float DIST_TO_SEEK_DEST = 1000;
 
 	public RouteSegmentResult(RouteDataObject object) {
 		this.object = object;
@@ -580,17 +583,16 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 		if (Algorithms.isEmpty(destinationName)) {
 			// try to get destination name from following segments
 			float distanceFromTurn = getDistance();
-			float maxDistance = distanceSeekDestination;
 			for (int n = routeInd + 1; n + 1 < list.size(); n++) {
 				RouteSegmentResult s1 = list.get(n);
 				String s1DnRef = s1.getObject().getDestinationRef(lang,	transliterate, isForwardDirection());
 				boolean dnRefIsEquals = !Algorithms.isEmpty(s1DnRef) && !Algorithms.isEmpty(dnRef) && s1DnRef.equals(dnRef);
-				if (distanceFromTurn < distanceSeekDestination && (s1.getObject().getHighway().equals("motorway_link") || dnRefIsEquals)
+				if (distanceFromTurn < DIST_TO_SEEK_DEST && (s1.getObject().getHighway().equals("motorway_link") || dnRefIsEquals)
 						&& Algorithms.isEmpty(destinationName)) {
 					destinationName = s1.getObject().getDestinationName(lang, transliterate, s1.isForwardDirection());
 				}
 				distanceFromTurn += s1.getDistance();
-				if (distanceFromTurn > maxDistance || !Algorithms.isEmpty(destinationName)) {
+				if (distanceFromTurn > DIST_TO_SEEK_DEST || !Algorithms.isEmpty(destinationName)) {
 					break;
 				}
 			}
@@ -614,12 +616,12 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 				if (s1.getTurnType() != null) {
 					hasNewTurn = true;
 				}
-				if (!hasNewTurn && distanceFromTurn < distanceSeekStreetName
+				if (!hasNewTurn && distanceFromTurn < DIST_TO_SEEK_STREET_NAME
 						&& Algorithms.isEmpty(streetName)) {
 					streetName = s1.getObject().getName(lang, transliterate);
 				}
 				distanceFromTurn += s1.getDistance();
-				if (distanceFromTurn > distanceSeekStreetName || !Algorithms.isEmpty(streetName)) {
+				if (distanceFromTurn > DIST_TO_SEEK_STREET_NAME || !Algorithms.isEmpty(streetName)) {
 					break;
 				}
 			}
