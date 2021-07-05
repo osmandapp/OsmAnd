@@ -4048,4 +4048,8 @@
     <string name="backup_error_subscription_was_expired">Utløpt abonnement</string>
     <string name="backup_error_token_is_not_valid_or_expired">Ugyldig eller utløpt symbol</string>
     <string name="backup_error_token_is_not_valid">Noe er galt med angitt enhets-ID eller symbol</string>
+    <string name="local_backup_descr">Sikkerhetskopier eller gjenopprett data fra en lokal fil.</string>
+    <string name="verify_email_address_descr">Bekreftelseskode sendt til %1$s. Skriv den inn i feltet nedenfor.</string>
+    <string name="delete_version_history">Slett versjonshistorikk</string>
+    <string name="nautical_depth">Havdybde</string>
 </resources>
