@@ -36,6 +36,7 @@ import net.osmand.plus.api.SettingsAPI.SettingsEditor;
 import net.osmand.plus.api.SettingsAPIImpl;
 import net.osmand.plus.audionotes.NotesSortByMode;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
+import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.RateUsHelper.RateUsState;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.enums.AngularConstants;
@@ -2811,8 +2812,10 @@ public class OsmandSettings {
 	public final CommonPreference<Float> ROUTE_STRAIGHT_ANGLE = new FloatPreference(this, "routing_straight_angle", 30.f).makeProfile();
 
 	public final ListStringPreference CUSTOM_ROUTE_LINE_COLORS = (ListStringPreference) new ListStringPreference(this, "custom_route_line_colors", null, ",").makeShared().makeGlobal();
-	public final CommonPreference<Integer> ROUTE_LINE_COLOR_DAY = new IntPreference(this, "route_line_color", 0).cache().makeProfile();
-	public final CommonPreference<Integer> ROUTE_LINE_COLOR_NIGHT = new IntPreference(this, "route_line_color_night", 0).cache().makeProfile();
+	public final CommonPreference<Integer> CUSTOM_ROUTE_COLOR_DAY = new IntPreference(this,
+			"route_line_color", ColorDialogs.pallette[0]).cache().makeProfile();
+	public final CommonPreference<Integer> CUSTOM_ROUTE_COLOR_NIGHT = new IntPreference(this,
+			"route_line_color_night", ColorDialogs.pallette[0]).cache().makeProfile();
 	public final CommonPreference<RouteColoringType> ROUTE_COLORING_TYPE = new EnumStringPreference<>(this,
 			"route_line_coloring_type", RouteColoringType.DEFAULT, RouteColoringType.values()).cache().makeProfile();
 	public final CommonPreference<String> ROUTE_INFO_ATTRIBUTE = new StringPreference(this, "route_info_attribute", null)

@@ -40,7 +40,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -119,26 +118,22 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 			AndroidUiHelper.updateVisibility(themeToggleContainer, false);
 			colorsCard.updateVisibility(false);
 			gradientCard.updateVisibility(false);
-			previewRouteLineInfo.setUseDefaultColor(true);
 			changeMapTheme(initMapTheme);
 		} else if (selectedType.isCustomColor()) {
 			AndroidUiHelper.updateVisibility(themeToggleContainer, true);
 			colorsCard.updateVisibility(true);
 			gradientCard.updateVisibility(false);
-			previewRouteLineInfo.setUseDefaultColor(false);
 			changeMapTheme(isNightMap() ? DayNightMode.NIGHT : DayNightMode.DAY);
 		} else if (selectedType.isGradient()) {
 			AndroidUiHelper.updateVisibility(themeToggleContainer, false);
 			gradientCard.setSelectedScaleType(selectedType.toGradientScaleType());
 			colorsCard.updateVisibility(false);
 			gradientCard.updateVisibility(true);
-			previewRouteLineInfo.setUseDefaultColor(false);
 			changeMapTheme(initMapTheme);
 		} else {
 			AndroidUiHelper.updateVisibility(themeToggleContainer, false);
 			colorsCard.updateVisibility(false);
 			gradientCard.updateVisibility(false);
-			previewRouteLineInfo.setUseDefaultColor(false);
 			changeMapTheme(initMapTheme);
 		}
 		previewRouteLineInfo.setRouteColoringType(selectedType);
@@ -176,10 +171,7 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 			((OnMapThemeUpdateListener) targetFragment).onMapThemeUpdated(mapTheme);
 		}
 		if (selectedType == RouteColoringType.CUSTOM_COLOR) {
-			Integer color = getRouteLineColor();
-			if (color != null) {
-				colorsCard.setSelectedColor(color);
-			}
+			colorsCard.setSelectedColor(getCustomRouteColor());
 		}
 	}
 
@@ -204,15 +196,9 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 	}
 
 	private int getSelectedColorForTheme(List<Integer> colors, boolean nightMode) {
-		Integer color = previewRouteLineInfo.getColorIgnoreDefault(nightMode);
-		if (color != null) {
-			if (!ColorDialogs.isPaletteColor(color)) {
-				colors.add(color);
-			}
-		} else {
-			color = colors.get(0);
-			previewRouteLineInfo.setUseDefaultColor(true);
-			previewRouteLineInfo.setColor(color, nightMode);
+		int color = previewRouteLineInfo.getCustomColor(nightMode);
+		if (!ColorDialogs.isPaletteColor(color)) {
+			colors.add(color);
 		}
 		return color;
 	}
@@ -220,17 +206,16 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 	@Override
 	public void onColorSelected(Integer prevColor, int newColor) {
 		colorsCard.onColorSelected(prevColor, newColor);
-		updateSelectedColor();
+		updateSelectedCustomColor();
 	}
 
-	@Nullable
-	private Integer getRouteLineColor() {
-		return previewRouteLineInfo.getColor(isNightMap());
+	private int getCustomRouteColor() {
+		return previewRouteLineInfo.getCustomColor(isNightMap());
 	}
 
-	private void updateSelectedColor() {
+	private void updateSelectedCustomColor() {
 		int selectedColor = colorsCard.getSelectedColor();
-		previewRouteLineInfo.setColor(selectedColor, isNightMap());
+		previewRouteLineInfo.setCustomColor(selectedColor, isNightMap());
 		updateColorItems();
 	}
 
@@ -257,8 +242,8 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 		String colorName = "";
 		if (selectedType.isDefault() || selectedType.isGradient() || selectedType.isRouteInfoAttribute()) {
 			colorName = selectedType.getHumanString(app, selectedRouteInfoAttribute);
-		} else if (getRouteLineColor() != null) {
-			int colorNameId = ColorDialogs.getColorName(getRouteLineColor());
+		} else {
+			int colorNameId = ColorDialogs.getColorName(getCustomRouteColor());
 			colorName = app.getString(colorNameId);
 		}
 		return colorName;
@@ -295,7 +280,7 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 	@Override
 	public void onCardPressed(@NonNull BaseCard card) {
 		if (card instanceof ColorsCard) {
-			updateSelectedColor();
+			updateSelectedCustomColor();
 		}
 	}
 

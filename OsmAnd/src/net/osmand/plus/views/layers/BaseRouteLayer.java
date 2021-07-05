@@ -96,26 +96,32 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 	}
 
 	protected void updateRouteColors(boolean night) {
-		Integer color;
-		if (previewRouteLineInfo != null) {
-			color = previewRouteLineInfo.getColor(night);
+		if (routeColoringType.isCustomColor()) {
+			updateCustomColor(night);
 		} else {
-			CommonPreference<Integer> colorPreference = night ?
-					view.getSettings().ROUTE_LINE_COLOR_NIGHT :
-					view.getSettings().ROUTE_LINE_COLOR_DAY;
-			int storedValue = colorPreference.getModeValue(getAppMode());
-			color = storedValue != 0 ? storedValue : null;
-		}
-		if (color == null) {
 			directionArrowsColor = null;
 			updateAttrs(new DrawSettings(night), view.getCurrentRotatedTileBox());
-			color = attrs.paint.getColor();
-		} else if (routeLineColor != color) {
-			directionArrowsColor = UiUtilities.getContrastColor(view.getContext(), color, false);
+			routeLineColor = attrs.paint.getColor();
+		}
+		updateTurnArrowColor();
+	}
+
+	private void updateCustomColor(boolean night) {
+		int customColor;
+		if (previewRouteLineInfo != null) {
+			customColor = previewRouteLineInfo.getCustomColor(night);
+		} else {
+			CommonPreference<Integer> colorPreference = night
+					? view.getSettings().CUSTOM_ROUTE_COLOR_NIGHT
+					: view.getSettings().CUSTOM_ROUTE_COLOR_DAY;
+			customColor = colorPreference.getModeValue(getAppMode());
+		}
+
+		if (routeLineColor != customColor) {
+			directionArrowsColor = UiUtilities.getContrastColor(view.getContext(), customColor, false);
 			updateIsPaint_1(false);
 		}
-		routeLineColor = color;
-		updateTurnArrowColor();
+		routeLineColor = customColor;
 	}
 
 	protected void updateRouteColoringType() {
