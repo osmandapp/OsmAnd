@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 public class ColoringTypeAvailabilityCache {
 
 	private final OsmandApplication app;
-	private final Map<RouteColoringType, Boolean> cache = new HashMap<>();
+	private final Map<String, Boolean> cache = new HashMap<>();
 
 	private RouteCalculationResult prevRoute = null;
 
@@ -26,10 +26,14 @@ public class ColoringTypeAvailabilityCache {
 			cache.clear();
 			prevRoute = currRoute;
 		}
-		Boolean available = cache.get(routeColoringType);
+
+		String key = routeColoringType.isRouteInfoAttribute() ?
+				routeInfoAttribute : routeColoringType.getName();
+
+		Boolean available = cache.get(key);
 		if (available == null) {
 			available = routeColoringType.isAvailableForDrawing(app, routeInfoAttribute);
-			cache.put(routeColoringType, available);
+			cache.put(key, available);
 		}
 		return available;
 	}
