@@ -4103,20 +4103,20 @@
     <string name="last_backup">Posledná záloha</string>
     <string name="duration_ago">pred %1$s</string>
     <string name="osmand_cloud">OsmAnd Cloud</string>
-    <string name="osmand_cloud_authorize_descr">Nikdy nestraťte svoje údaje, zálohujte a obnovujte údaje bez problémov.</string>
+    <string name="osmand_cloud_authorize_descr">Nikdy nestraťte svoje údaje. Zálohujte a obnovte všetky údaje ľahko.</string>
     <string name="local_backup">Lokálna záloha</string>
     <string name="local_backup_descr">Zálohovať alebo obnoviť údaje z lokálneho súboru.</string>
-    <string name="backup_into_file">Zálohovať do súboru</string>
+    <string name="backup_into_file">Zálohovať ako súbor</string>
     <string name="restore_from_file">Obnoviť zo súboru</string>
     <string name="osmand_cloud_help_descr">Potrebujete pomoc\? Prosím kontaktujte nás na %1$s</string>
-    <string name="osmand_cloud_create_account_descr">Prosím zadajte vašu emailovú adresy, na ktorú budú naviazané všetky údaje.
-\nPošleme na ňu overovací kód.</string>
-    <string name="osmand_cloud_login_descr">Prosím zadajte emailovú adresu, ktorú ste použili na registráciu. Pošleme vám jednorazové heslo potrebné pre ďalší krok.</string>
+    <string name="osmand_cloud_create_account_descr">Prosím zadajte vašu emailovú adresu, na ktorú bude zaslaný overovací kód
+\na budú na ňu naviazané všetky údaje.</string>
+    <string name="osmand_cloud_login_descr">Prosím zadajte emailovú adresu, s ktorou ste sa registrovali. Bude na ňu zaslané jednorazové heslo pre ďalší krok.</string>
     <string name="verify_email_address">Overiť emailovú adresu</string>
-    <string name="verify_email_address_descr">Poslali sme overovací kód na %1$s, prosím zadajte ho do poľa nižšie.</string>
+    <string name="verify_email_address_descr">Overovací kód bol zaslaný na %1$s. Prosím zadajte ho do poľa nižšie.</string>
     <string name="enter_verification_code">Zadajte 4-miestny kód</string>
-    <string name="cloud_email_not_registered">Táto emailová adresa nebola registrovaná pre OsmAnd Cloud</string>
-    <string name="cloud_email_already_registered">Účet s touto emailovou adresou je už zaregistrovaný.</string>
+    <string name="cloud_email_not_registered">Táto emailová adresa nie je registrovaná pre OsmAnd Cloud</string>
+    <string name="cloud_email_already_registered">Táto emailová adresa je už zaregistrovaná.</string>
     <string name="resend_verification_code">Poslať kód znovu</string>
     <string name="verification_code_missing">Neobdržal som overovací kód</string>
     <string name="verification_code_missing_description">Čakacia doba na kód môže byť 10 minút, skontrolujte aj svoj priečinok nevyžiadanej pošty. Ak to nepomôže, použite tlačidlo nižšie.</string>
@@ -4161,11 +4161,11 @@
     <string name="restore_from_osmand_cloud">Obnoviť z OsmAnd Cloud</string>
     <string name="choose_what_to_restore">Zvoľte čo sa má obnoviť.</string>
     <string name="restore_selected_data">Obnoviť zvolené údaje</string>
-    <string name="receiving_data_from_server">Prijímam údaje zo servera</string>
-    <string name="restore_complete">Obnovenie kompletné</string>
+    <string name="receiving_data_from_server">Prijímam údaje zo servera…</string>
+    <string name="restore_complete">Obnovené</string>
     <string name="grey_color_slope">Sivá farba sa použije, keď sklon nie je určený.</string>
     <string name="backup_version_history">História verzií</string>
     <string name="backup_storage_taken">Použité miesto</string>
-    <string name="backup_version_history_delete_descr">Chcete vymazať históriu zmien pre vypnuté typy z cloudu (úložiska na serveri)\?</string>
+    <string name="backup_version_history_delete_descr">Vymazať históriu zmien pre zastaralé dátové typy z OsmAnd cloudu\?</string>
     <string name="delete_version_history">Vymazať históriu verzií</string>
 </resources>

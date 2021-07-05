@@ -4103,20 +4103,20 @@
     <string name="last_backup">Último backup</string>
     <string name="duration_ago">%1$s atrás</string>
     <string name="osmand_cloud">OsmAnd Cloud</string>
-    <string name="osmand_cloud_authorize_descr">Nunca perca seus dados, faça backup e restaure todas as informações sem problemas.</string>
+    <string name="osmand_cloud_authorize_descr">Nunca perca seus dados. Faça backup e restaure todas as informações facilmente.</string>
     <string name="local_backup">Backup local</string>
     <string name="local_backup_descr">Faça backup ou restaure dados de um arquivo local.</string>
-    <string name="backup_into_file">Backup em arquivo</string>
+    <string name="backup_into_file">Backup como arquivo</string>
     <string name="restore_from_file">Restaurar do arquivo</string>
     <string name="osmand_cloud_help_descr">Precisa de ajuda\? Entre em contato conosco em %1$s</string>
-    <string name="osmand_cloud_create_account_descr">Por favor, insira seu endereço de e-mail, todos os seus dados estarão vinculados a ele.
-\nEnviaremos a você um código de verificação para este endereço de e-mail.</string>
-    <string name="osmand_cloud_login_descr">Por favor, insira o endereço de e-mail que você usou para se registrar. Enviaremos a você uma senha de uso único necessária na próxima etapa.</string>
+    <string name="osmand_cloud_create_account_descr">Digite seu endereço de e-mail, um código de verificação será enviado para lá,
+\ne todos os seus dados serão vinculados a ele.</string>
+    <string name="osmand_cloud_login_descr">Por favor, insira o endereço de e-mail com o qual você se registrou. Uma senha de uso único para a próxima etapa será enviada a ele.</string>
     <string name="verify_email_address">Verifique o endereço de e-mail</string>
-    <string name="verify_email_address_descr">Enviamos um código de verificação para %1$s, digite-o no campo abaixo.</string>
+    <string name="verify_email_address_descr">Código de verificação enviado para %1$s. Por favor insira-o no campo abaixo.</string>
     <string name="enter_verification_code">Digite o código de 4 dígitos</string>
-    <string name="cloud_email_not_registered">Este e-mail não foi registrado para o OsmAnd Cloud</string>
-    <string name="cloud_email_already_registered">A conta com este e-mail já está cadastrada.</string>
+    <string name="cloud_email_not_registered">Este endereço de e-mail não está registrado para OsmAnd Cloud</string>
+    <string name="cloud_email_already_registered">Este endereço de e-mail já está registrado.</string>
     <string name="resend_verification_code">Reenviar código</string>
     <string name="verification_code_missing">Não recebi o código de verificação</string>
     <string name="verification_code_missing_description">O tempo de espera pelo código pode ser de 10 minutos, você também pode verificar sua pasta de spam. Se não ajudar, use o botão abaixo.</string>
@@ -4127,7 +4127,7 @@
     <string name="osmand_online_routing_promo">Você pode usar modelos predefinidos ou adicionar roteamento on-line personalizado, suportado: OSRM, Graphhopper, OpenRouteService, GPX.</string>
     <string name="shared_string_external">Externo</string>
     <string name="provided_by">Fornecido por %1$s</string>
-    <string name="failed_loading_predefined_engines">Falha ao carregar a lista de modelos predefinidos.
+    <string name="failed_loading_predefined_engines">Não foi possível carregar a lista de modelos predefinidos.
 \nPor favor, verifique sua conexão à internet.</string>
     <string name="shared_string_predefined">Predefinido</string>
     <string name="backup_complete">Backup completo</string>
@@ -4166,7 +4166,7 @@
     <string name="grey_color_slope">A cor cinza é usada quando a inclinação é indefinida.</string>
     <string name="backup_version_history">Histórico de versão</string>
     <string name="backup_storage_taken">Armazenamento ocupado</string>
-    <string name="backup_version_history_delete_descr">Você deseja excluir o log de mudanças para tipos de dados obsoletos do OsmAnd cloud\?</string>
+    <string name="backup_version_history_delete_descr">Excluir o registro de alterações para tipos de dados obsoletos do OsmAnd cloud\?</string>
     <string name="delete_version_history">Excluir histórico de versão</string>
     <string name="send_crash_log">Enviar registo de falha de sistema</string>
     <string name="send_logcat_log">Enviar registo logcat</string>
@@ -4218,6 +4218,6 @@
     <string name="backup_error_file_not_available">Arquivo indisponível</string>
     <string name="backup_error_token_is_not_valid">Algo está errado com o código ou token do dispositivo fornecido</string>
     <string name="backup_error_token_is_not_valid_or_expired">Token inválido ou expirado</string>
-    <string name="backup_error_user_is_not_registered">Nenhum usuário está registrado com esse endereço de e-mail</string>
+    <string name="backup_error_user_is_not_registered">Nenhum usuário registrado com esse endereço de e-mail</string>
     <string name="backup_error_no_valid_subscription">Nenhuma assinatura válida presente</string>
 </resources>
