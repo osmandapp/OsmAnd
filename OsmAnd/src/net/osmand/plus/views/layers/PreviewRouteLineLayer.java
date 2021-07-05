@@ -257,8 +257,8 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 	}
 
 	private void fillMultiColorLineArrays(List<Integer> palette, List<Double> lengthRatios,
-										  List<Float> tx, List<Float> ty, List<Double> angles,
-										  List<Double> distances, List<Integer> colors) {
+	                                      List<Float> tx, List<Float> ty, List<Double> angles,
+	                                      List<Double> distances, List<Integer> colors) {
 		double totalDist = 0;
 		for (Double d : distances) {
 			totalDist += d;

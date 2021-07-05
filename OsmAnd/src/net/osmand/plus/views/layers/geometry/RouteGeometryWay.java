@@ -60,7 +60,7 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 	                                @Nullable Float width,
 	                                @Nullable @ColorInt Integer pointColor,
 	                                @NonNull RouteColoringType routeColoringType,
-									@Nullable String routeInfoAttribute) {
+	                                @Nullable String routeInfoAttribute) {
 		this.needUpdate = this.routeColoringType != routeColoringType
 				|| !Algorithms.objectEquals(this.routeColoringType, routeColoringType);
 
