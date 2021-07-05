@@ -675,7 +675,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	private void buildNearestWiki(ViewGroup viewGroup) {
 		final int position = viewGroup.getChildCount();
 		final WeakReference<ViewGroup> viewGroupRef = new WeakReference<>(viewGroup);
-		buildNearestWikiRow(new SearchAmenitiesListener() {
+		buildNearestWikiRow(viewGroup, new SearchAmenitiesListener() {
 			@Override
 			public void onFinish(List<Amenity> amenities) {
 				ViewGroup viewGroup = viewGroupRef.get();

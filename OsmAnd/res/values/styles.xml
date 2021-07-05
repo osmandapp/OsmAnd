@@ -87,6 +87,7 @@
         <item name="pstsInactiveTextColor">@color/searchbar_tab_inactive_light</item>
         <item name="btn_flat_bg">@drawable/btn_flat</item>
         <item name="btn_border_bg">@drawable/btn_border_bg_light</item>
+        <item name="banner_border_bg">@drawable/banner_border_bg_light</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="actionModeBackground">@color/app_bar_color_light</item>
         <item name="actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
@@ -401,6 +402,7 @@
         <item name="pstsInactiveTextColor">@color/searchbar_tab_inactive_dark</item>
         <item name="btn_flat_bg">@drawable/btn_flat_night</item>
         <item name="btn_border_bg">@drawable/btn_border_bg_dark</item>
+        <item name="banner_border_bg">@drawable/banner_border_bg_dark</item>
         <item name="actionModeBackground">@color/app_bar_color_dark</item>
         <item name="actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
         <item name="bg_color">@color/list_background_color_dark</item>
