@@ -841,14 +841,17 @@ public class MapActivityActions implements DialogProvider {
 					}
 				}).createItem());
 
-		int icon = R.drawable.ic_action_favorite_stroke;
-		addMyPlacesTabToDrawer(optionsMenuHelper, R.string.shared_string_my_favorites, icon, DRAWER_FAVORITES_ID);
-		addMyPlacesTabToDrawer(optionsMenuHelper, R.string.shared_string_tracks, icon, DRAWER_TRACKS_ID);
+		addMyPlacesTabToDrawer(optionsMenuHelper, R.string.shared_string_my_favorites,
+				R.drawable.ic_action_folder_favorites, DRAWER_FAVORITES_ID);
+		addMyPlacesTabToDrawer(optionsMenuHelper, R.string.shared_string_tracks,
+				R.drawable.ic_action_folder_tracks, DRAWER_TRACKS_ID);
 		if (OsmandPlugin.isPluginEnabled(AudioVideoNotesPlugin.class)) {
-			addMyPlacesTabToDrawer(optionsMenuHelper, R.string.notes, icon, DRAWER_AV_NOTES_ID);
+			addMyPlacesTabToDrawer(optionsMenuHelper, R.string.notes,
+					R.drawable.ic_action_folder_av_notes, DRAWER_AV_NOTES_ID);
 		}
 		if (OsmandPlugin.isPluginEnabled(OsmEditingPlugin.class)) {
-			addMyPlacesTabToDrawer(optionsMenuHelper, R.string.osm_edits, icon, DRAWER_OSM_EDITS_ID);
+			addMyPlacesTabToDrawer(optionsMenuHelper, R.string.osm_edits,
+					R.drawable.ic_action_folder_osm_notes, DRAWER_OSM_EDITS_ID);
 		}
 
 		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.backup_and_restore, mapActivity)
