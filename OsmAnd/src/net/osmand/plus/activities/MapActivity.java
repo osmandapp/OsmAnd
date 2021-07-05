@@ -455,7 +455,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 							dashboardOnMap.updateLocation(true, true, false);
 						}
 						app.getTargetPointsHelper().lookupAddessAll();
-						app.getMapMarkersHelper().lookupAddressAll();
 					}
 					if (event == InitEvents.FAVORITES_INITIALIZED) {
 						refreshMap();
