@@ -5,21 +5,28 @@ import android.view.View;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 
 public abstract class OsmandBaseExpandableListAdapter extends BaseExpandableListAdapter {
 
-	protected void adjustIndicator(OsmandApplication app, int groupPosition, boolean isExpanded, View row, boolean light) {
+	protected void adjustIndicator(OsmandApplication app, int groupPosition, boolean expanded, View row, boolean light) {
+		adjustIndicator(app, row, expanded, !light);
 		ImageView indicator = (ImageView) row.findViewById(R.id.explicit_indicator);
-		if (!isExpanded) {
-			indicator.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_arrow_down, light));
+		indicator.setVisibility(getChildrenCount(groupPosition) > 0 ? View.VISIBLE : View.GONE);
+	}
+
+	public static void adjustIndicator(@NonNull OsmandApplication app, @NonNull View row, boolean expanded, boolean nightMode) {
+		ImageView indicator = row.findViewById(R.id.explicit_indicator);
+		if (!expanded) {
+			indicator.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_arrow_down, !nightMode));
 			indicator.setContentDescription(row.getContext().getString(R.string.access_collapsed_list));
 		} else {
-			indicator.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_arrow_up, light));
+			indicator.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_arrow_up, !nightMode));
 			indicator.setContentDescription(row.getContext().getString(R.string.access_expanded_list));
 		}
-		indicator.setVisibility(getChildrenCount(groupPosition) > 0 ? View.VISIBLE : View.GONE);
 	}
 
 	protected void setCategoryIcon(OsmandApplication app, int resId, int groupPosition, boolean isExpanded, View row, boolean light) {

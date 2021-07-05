@@ -2,7 +2,6 @@ package net.osmand.plus.backup.ui;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.text.style.StyleSpan;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,12 +10,15 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.backup.BackupHelper;
+import net.osmand.plus.backup.BackupInfo;
 import net.osmand.plus.backup.ImportBackupTask;
 import net.osmand.plus.backup.LocalFile;
 import net.osmand.plus.backup.NetworkSettingsHelper;
@@ -139,28 +141,34 @@ public class RestoreSettingsFragment extends ImportSettingsFragment {
 
 			@Override
 			public void onBackupCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items, @NonNull List<RemoteFile> remoteFiles) {
-				toolbarLayout.setTitle(getString(R.string.restore_from_osmand_cloud));
-				description.setText(R.string.choose_what_to_restore);
-				buttonsContainer.setVisibility(View.VISIBLE);
-				progressBar.setVisibility(View.GONE);
-				if (succeed) {
-					PrepareBackupResult backup = app.getBackupHelper().getBackup();
-					List<SettingsItem> itemsForRestore = new ArrayList<>();
-					for (RemoteFile remoteFile : backup.getBackupInfo().filesToDownload) {
-						SettingsItem restoreItem = getRestoreItem(items, remoteFile);
-						if (restoreItem != null) {
-							itemsForRestore.add(restoreItem);
+				FragmentActivity activity = getActivity();
+				if (AndroidUtils.isActivityNotDestroyed(activity)) {
+					toolbarLayout.setTitle(getString(R.string.restore_from_osmand_cloud));
+					description.setText(R.string.choose_what_to_restore);
+					buttonsContainer.setVisibility(View.VISIBLE);
+					progressBar.setVisibility(View.GONE);
+					if (succeed) {
+						PrepareBackupResult backup = app.getBackupHelper().getBackup();
+						BackupInfo info = backup.getBackupInfo();
+						List<SettingsItem> itemsForRestore = new ArrayList<>();
+						if (info != null) {
+							for (RemoteFile remoteFile : info.filesToDownload) {
+								SettingsItem restoreItem = getRestoreItem(items, remoteFile);
+								if (restoreItem != null) {
+									itemsForRestore.add(restoreItem);
+								}
+							}
+							for (Pair<LocalFile, RemoteFile> pair : info.filesToMerge) {
+								SettingsItem restoreItem = getRestoreItem(items, pair.second);
+								if (restoreItem != null) {
+									itemsForRestore.add(restoreItem);
+								}
+							}
 						}
+						setSettingsItems(itemsForRestore);
+						dataList = SettingsHelper.getSettingsToOperateByCategory(settingsItems, false, false);
+						adapter.updateSettingsItems(dataList, selectedItemsMap);
 					}
-					for (Pair<LocalFile, RemoteFile> pair : backup.getBackupInfo().filesToMerge) {
-						SettingsItem restoreItem = getRestoreItem(items, pair.second);
-						if (restoreItem != null) {
-							itemsForRestore.add(restoreItem);
-						}
-					}
-					setSettingsItems(itemsForRestore);
-					dataList = SettingsHelper.getSettingsToOperateByCategory(settingsItems, false, false);
-					adapter.updateSettingsItems(dataList, selectedItemsMap);
 				}
 			}
 		});

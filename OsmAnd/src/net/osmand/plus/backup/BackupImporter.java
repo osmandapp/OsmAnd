@@ -1,13 +1,12 @@
 package net.osmand.plus.backup;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import net.osmand.FileUtils;
+import net.osmand.OperationLog;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
 import net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
@@ -31,6 +30,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -58,8 +58,10 @@ class BackupImporter {
 	CollectItemsResult collectItems(boolean readItems) throws IllegalArgumentException, IOException {
 		CollectItemsResult result = new CollectItemsResult();
 		StringBuilder error = new StringBuilder();
+		OperationLog operationLog = new OperationLog("collectRemoteItems", BackupHelper.DEBUG);
+		operationLog.startOperation();
 		try {
-			backupHelper.downloadFileListSync((status, message, remoteFiles) -> {
+			backupHelper.downloadFileList((status, message, remoteFiles) -> {
 				if (status == BackupHelper.STATUS_SUCCESS) {
 					result.remoteFiles = remoteFiles;
 					try {
@@ -74,6 +76,7 @@ class BackupImporter {
 		} catch (UserNotRegisteredException e) {
 			throw new IllegalArgumentException(e.getMessage(), e);
 		}
+		operationLog.finishOperation();
 		if (!Algorithms.isEmpty(error)) {
 			throw new IOException(error.toString());
 		}
@@ -84,7 +87,7 @@ class BackupImporter {
 		if (Algorithms.isEmpty(items)) {
 			throw new IllegalArgumentException("No items");
 		}
-		List<RemoteFile> remoteFiles = backupHelper.getBackup().getRemoteFiles(RemoteFilesType.UNIQUE);
+		Collection<RemoteFile> remoteFiles = backupHelper.getBackup().getRemoteFiles(RemoteFilesType.UNIQUE).values();
 		if (Algorithms.isEmpty(remoteFiles)) {
 			throw new IllegalArgumentException("No remote files");
 		}
@@ -110,7 +113,7 @@ class BackupImporter {
 						File tempFile = new File(tempDir, fileName);
 						Map<File, RemoteFile> map = new HashMap<>();
 						map.put(tempFile, remoteFile);
-						Map<File, String> errors = backupHelper.downloadFilesSync(map, null);
+						Map<File, String> errors = backupHelper.downloadFiles(map);
 						if (errors.isEmpty()) {
 							is = new FileInputStream(tempFile);
 							reader.readFromStream(is, remoteFile.getName());
@@ -157,6 +160,8 @@ class BackupImporter {
 		}
 		List<SettingsItem> items = new ArrayList<>();
 		try {
+			OperationLog operationLog = new OperationLog("getRemoteItems", BackupHelper.DEBUG);
+			operationLog.startOperation();
 			JSONObject json = new JSONObject();
 			JSONArray itemsJson = new JSONArray();
 			json.put("items", itemsJson);
@@ -176,12 +181,13 @@ class BackupImporter {
 					uniqueRemoteFiles.add(rf);
 				}
 			}
+			operationLog.log("build uniqueRemoteFiles");
 
+			Map<String, Long> infoMap = backupHelper.getDbHelper().getUploadedFileInfoMap();
 			for (RemoteFile remoteFile : uniqueRemoteFiles) {
-				UploadedFileInfo info = backupHelper.getDbHelper().getUploadedFileInfo(remoteFile.getType(), remoteFile.getName());
-				long uploadTime = info != null ? info.getUploadTime() : 0;
-				if (uploadTime == remoteFile.getClienttimems()) {
-					continue;
+				Long uploadTime = infoMap.get(remoteFile.getType() + "___" + remoteFile.getName());
+				if (uploadTime != null && uploadTime == remoteFile.getClienttimems()) {
+					//continue;
 				}
 				String fileName = remoteFile.getTypeNamePath();
 				if (fileName.endsWith(INFO_EXT)) {
@@ -195,6 +201,8 @@ class BackupImporter {
 					remoteItemFilesMap.put(fileName, remoteFile);
 				}
 			}
+			operationLog.log("build maps");
+
 			for (Entry<String, RemoteFile> remoteFileEntry : remoteItemFilesMap.entrySet()) {
 				String itemFileName = remoteFileEntry.getKey();
 				boolean hasInfo = false;
@@ -208,28 +216,35 @@ class BackupImporter {
 					noInfoRemoteItemFiles.add(remoteFileEntry.getValue());
 				}
 			}
+			operationLog.log("build noInfoRemoteItemFiles");
+
 			if (readItems) {
 				generateItemsJson(itemsJson, remoteInfoFilesMap, noInfoRemoteItemFiles);
 			} else {
 				generateItemsJson(itemsJson, remoteInfoFiles, noInfoRemoteItemFiles);
 			}
+			operationLog.log("generateItemsJson");
 
 			SettingsItemsFactory itemsFactory = new SettingsItemsFactory(app, json);
+			operationLog.log("create setting items");
 			List<SettingsItem> settingsItemList = itemsFactory.getItems();
 			if (settingsItemList.isEmpty()) {
 				return Collections.emptyList();
 			}
 			updateFilesInfo(remoteItemFilesMap, settingsItemList);
 			items.addAll(settingsItemList);
+			operationLog.log("updateFilesInfo");
 
 			if (readItems) {
 				Map<RemoteFile, SettingsItemReader<? extends SettingsItem>> remoteFilesForRead = new HashMap<>();
 				for (SettingsItem item : settingsItemList) {
-					RemoteFile remoteFile = getItemRemoteFile(item, remoteItemFilesMap.values());
-					if (remoteFile != null && item.shouldReadOnCollecting()) {
-						SettingsItemReader<? extends SettingsItem> reader = item.getReader();
-						if (reader != null) {
-							remoteFilesForRead.put(remoteFile, reader);
+					if (item.shouldReadOnCollecting()) {
+						List<RemoteFile> foundRemoteFiles = getItemRemoteFiles(item, remoteItemFilesMap);
+						for (RemoteFile remoteFile : foundRemoteFiles) {
+							SettingsItemReader<? extends SettingsItem> reader = item.getReader();
+							if (reader != null) {
+								remoteFilesForRead.put(remoteFile, reader);
+							}
 						}
 					}
 				}
@@ -241,7 +256,9 @@ class BackupImporter {
 				if (!remoteFilesForDownload.isEmpty()) {
 					downloadAndReadItemFiles(remoteFilesForRead, remoteFilesForDownload);
 				}
+				operationLog.log("readItems");
 			}
+			operationLog.finishOperation();
 		} catch (IllegalArgumentException e) {
 			throw new IllegalArgumentException("Error reading items", e);
 		} catch (JSONException e) {
@@ -254,8 +271,9 @@ class BackupImporter {
 		return items;
 	}
 
-	@Nullable
-	private RemoteFile getItemRemoteFile(@NonNull SettingsItem item, @NonNull Collection<RemoteFile> remoteFiles) {
+	@NonNull
+	private List<RemoteFile> getItemRemoteFiles(@NonNull SettingsItem item, @NonNull Map<String, RemoteFile> remoteFiles) {
+		List<RemoteFile> res = new ArrayList<>();
 		String fileName = item.getFileName();
 		if (!Algorithms.isEmpty(fileName)) {
 			if (fileName.charAt(0) != '/') {
@@ -271,15 +289,22 @@ class BackupImporter {
 					fileName = fileName.substring(folder.length() - 1);
 				}
 			}
-			for (RemoteFile remoteFile : remoteFiles) {
-				String remoteFileName = remoteFile.getTypeNamePath();
-				String typeFileName = remoteFile.getType() + fileName;
-				if (remoteFileName.equals(typeFileName) || remoteFileName.startsWith(typeFileName + "/")) {
-					return remoteFile;
+			String typeFileName = item.getType().name() + fileName;
+			RemoteFile remoteFile = remoteFiles.remove(typeFileName);
+			if (remoteFile != null) {
+				res.add(remoteFile);
+			}
+			Iterator<Entry<String, RemoteFile>> it = remoteFiles.entrySet().iterator();
+			while (it.hasNext()) {
+				Entry<String, RemoteFile> fileEntry = it.next();
+				String remoteFileName = fileEntry.getKey();
+				if (remoteFileName.startsWith(typeFileName + "/")) {
+					res.add(fileEntry.getValue());
+					it.remove();
 				}
 			}
 		}
-		return null;
+		return res;
 	}
 
 	private void generateItemsJson(@NonNull JSONArray itemsJson,
@@ -312,7 +337,7 @@ class BackupImporter {
 	private void generateItemsJson(@NonNull JSONArray itemsJson,
 								   @NonNull Map<File, RemoteFile> remoteInfoFiles,
 								   @NonNull List<RemoteFile> noInfoRemoteItemFiles) throws UserNotRegisteredException, JSONException, IOException {
-		Map<File, String> errors = backupHelper.downloadFilesSync(remoteInfoFiles, null);
+		Map<File, String> errors = backupHelper.downloadFiles(remoteInfoFiles);
 		if (errors.isEmpty()) {
 			for (File file : remoteInfoFiles.keySet()) {
 				String jsonStr = Algorithms.getFileAsString(file);
@@ -329,20 +354,38 @@ class BackupImporter {
 	}
 
 	private void addRemoteFilesToJson(@NonNull JSONArray itemsJson, @NonNull List<RemoteFile> noInfoRemoteItemFiles) throws JSONException {
+		Set<String> fileItems = new HashSet<>();
 		for (RemoteFile remoteFile : noInfoRemoteItemFiles) {
 			String type = remoteFile.getType();
 			String fileName = remoteFile.getName();
-			JSONObject itemJson = new JSONObject();
-			itemJson.put("type", type);
-			itemJson.put("file", fileName);
-			itemsJson.put(itemJson);
+			if (type.equals(SettingsItemType.FILE.name()) && fileName.startsWith(FileSubtype.VOICE.getSubtypeFolder())) {
+				FileSubtype subtype = FileSubtype.getSubtypeByFileName(fileName);
+				int lastSeparatorIndex = fileName.lastIndexOf('/');
+				if (lastSeparatorIndex > 0) {
+					fileName = fileName.substring(0, lastSeparatorIndex);
+				}
+				String typeName = subtype + "___" + fileName;
+				if (!fileItems.contains(typeName)) {
+					fileItems.add(typeName);
+					JSONObject itemJson = new JSONObject();
+					itemJson.put("type", type);
+					itemJson.put("file", fileName);
+					itemJson.put("subtype", subtype);
+					itemsJson.put(itemJson);
+				}
+			} else {
+				JSONObject itemJson = new JSONObject();
+				itemJson.put("type", type);
+				itemJson.put("file", fileName);
+				itemsJson.put(itemJson);
+			}
 		}
 	}
 
 	private void downloadAndReadItemFiles(@NonNull Map<RemoteFile, SettingsItemReader<? extends SettingsItem>> remoteFilesForRead,
 										  @NonNull Map<File, RemoteFile> remoteFilesForDownload) throws UserNotRegisteredException, IOException {
 		OsmandApplication app = backupHelper.getApp();
-		Map<File, String> errors = backupHelper.downloadFilesSync(remoteFilesForDownload, null);
+		Map<File, String> errors = backupHelper.downloadFiles(remoteFilesForDownload);
 		if (errors.isEmpty()) {
 			for (Entry<File, RemoteFile> entry : remoteFilesForDownload.entrySet()) {
 				File tempFile = entry.getKey();
@@ -376,10 +419,12 @@ class BackupImporter {
 		}
 	}
 
-	private void updateFilesInfo(@NonNull Map<String, RemoteFile> remoteFiles, List<SettingsItem> settingsItemList) {
+	private void updateFilesInfo(@NonNull Map<String, RemoteFile> remoteFiles,
+								 @NonNull List<SettingsItem> settingsItemList) {
+		Map<String, RemoteFile> remoteFilesMap = new HashMap<>(remoteFiles);
 		for (SettingsItem settingsItem : settingsItemList) {
-			RemoteFile remoteFile = getItemRemoteFile(settingsItem, remoteFiles.values());
-			if (remoteFile != null) {
+			List<RemoteFile> foundRemoteFiles = getItemRemoteFiles(settingsItem, remoteFilesMap);
+			for (RemoteFile remoteFile : foundRemoteFiles) {
 				settingsItem.setLastModifiedTime(remoteFile.getClienttimems());
 				remoteFile.item = settingsItem;
 				if (settingsItem instanceof FileSettingsItem) {

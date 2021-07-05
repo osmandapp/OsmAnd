@@ -521,6 +521,7 @@ public class GpxSelectionHelper {
 		}
 	}
 
+	@Nullable
 	public SelectedGpxFile getSelectedFileByPath(String path) {
 		List<SelectedGpxFile> newList = new ArrayList<>(selectedGPXFiles);
 		for (SelectedGpxFile s : newList) {
@@ -531,6 +532,7 @@ public class GpxSelectionHelper {
 		return null;
 	}
 
+	@Nullable
 	public SelectedGpxFile getSelectedFileByName(String path) {
 		for (SelectedGpxFile s : selectedGPXFiles) {
 			if (s.getGpxFile().path.endsWith("/" + path)) {
@@ -540,6 +542,7 @@ public class GpxSelectionHelper {
 		return null;
 	}
 
+	@Nullable
 	public SelectedGpxFile getSelectedCurrentRecordingTrack() {
 		for (SelectedGpxFile s : selectedGPXFiles) {
 			if (s.isShowCurrentTrack()) {

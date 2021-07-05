@@ -5,7 +5,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.IProgress;
 import net.osmand.StreamWriter;
-import net.osmand.plus.backup.BackupHelper.OnUploadFileListener;
+import net.osmand.plus.backup.BackupListeners.OnUploadFileListener;
 import net.osmand.plus.settings.backend.backup.AbstractWriter;
 import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
@@ -77,14 +77,15 @@ public class NetworkWriter implements AbstractWriter {
 		try {
 			JSONObject json = item.toJsonObj();
 			boolean hasFile = json.has("file");
-			if (json.length() > (hasFile ? 2 : 1)) {
+			boolean hasSubtype = json.has("subtype");
+			if (json.length() > (hasFile ? 2 + (hasSubtype ? 1 : 0) : 1)) {
 				String itemJson = json.toString();
 				InputStream inputStream = new ByteArrayInputStream(itemJson.getBytes("UTF-8"));
 				StreamWriter streamWriter = (outputStream, progress) -> {
 					Algorithms.streamCopy(inputStream, outputStream, progress, 1024);
 					outputStream.flush();
 				};
-				return backupHelper.uploadFileSync(fileName, item.getType().name(), streamWriter, uploadTime,
+				return backupHelper.uploadFile(fileName, item.getType().name(), streamWriter, uploadTime,
 						getUploadFileListener(item));
 			} else {
 				return null;
@@ -102,7 +103,7 @@ public class NetworkWriter implements AbstractWriter {
 				itemWriter.writeToStream(outputStream, progress);
 			}
 		};
-		return backupHelper.uploadFileSync(fileName, itemWriter.getItem().getType().name(), streamWriter, uploadTime,
+		return backupHelper.uploadFile(fileName, itemWriter.getItem().getType().name(), streamWriter, uploadTime,
 				getUploadFileListener(itemWriter.getItem()));
 	}
 

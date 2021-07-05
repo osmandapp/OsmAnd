@@ -19,6 +19,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
@@ -36,6 +37,8 @@ import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.MapUtils;
 
+import org.apache.commons.logging.Log;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -46,6 +49,7 @@ public abstract class OsmandMapLayer {
 	public static final float ICON_VISIBLE_PART_RATIO = 0.45f;
 	protected List<LatLon> fullObjectsLatLon;
 	protected List<LatLon> smallObjectsLatLon;
+	private static final Log log = PlatformUtil.getLog(OsmandMapLayer.class);
 
 	public enum MapGestureType {
 		DOUBLE_TAP_ZOOM_IN,

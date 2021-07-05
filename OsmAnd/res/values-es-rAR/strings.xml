@@ -2563,8 +2563,8 @@
     <string name="appearance_on_the_map">Aspecto en el mapa</string>
     <string name="looking_for_tracks_with_waypoints">Buscando trazas con puntos de referencia</string>
     <string name="shared_string_more_without_dots">Más</string>
-    <string name="empty_state_osm_edits">Crear o modificar objetos OSM</string>
-    <string name="empty_state_osm_edits_descr">Crea o modifica puntos de interés, abre o comenta notas de OSM y contribuye con grabaciones GPX.</string>
+    <string name="empty_state_osm_edits">Crear o modificar objetos de OpenStreetMap</string>
+    <string name="empty_state_osm_edits_descr">Crea o modifica puntos de interés, abre o comenta notas de OpenStreetMap y contribuye con grabaciones GPX.</string>
     <string name="shared_string_deleted">Borrado</string>
     <string name="shared_string_edited">Editado</string>
     <string name="shared_string_added">Añadido</string>
@@ -2610,7 +2610,7 @@
     <string name="show_closed_notes">Mostrar notas de OSM cerradas</string>
     <string name="switch_osm_notes_visibility_desc">Mostrar u ocultar notas de OSM en el mapa.</string>
     <string name="gpx_file_desc">GPX - adecuado para exportar a JOSM u otros editores OSM.</string>
-    <string name="osc_file_desc">OSC - adecuado para exportar a OSM.</string>
+    <string name="osc_file_desc">OSC - adecuado para exportar a OpenStreetMap.</string>
     <string name="shared_string_gpx_file">Archivo GPX</string>
     <string name="osc_file">Archivo OSC</string>
     <string name="choose_file_type">Elegir tipo de archivo</string>
@@ -3549,10 +3549,10 @@
     <string name="extra_maps_menu_group">Mapas adicionales</string>
     <string name="download_unsupported_action">Acción «%1$s» no admitida</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
-    <string name="osm_live_payment_subscription_management">El pago será cargado a la cuenta de Google Play al confirmar la compra. 
-\n 
-\nLa suscripción se renueva automáticamente a menos que se cancele antes de la fecha de renovación. Se le cobrará a su cuenta el período de renovación (mes/trimestre/año) sólo en la fecha de renovación. 
-\n 
+    <string name="osm_live_payment_subscription_management">El pago será cargado a la cuenta de Google Play al confirmar la compra.
+\n
+\nLa suscripción se renueva automáticamente a menos que se cancele antes de la fecha de renovación. Se le cobrará a su cuenta el período de renovación (mes/trimestre/año) sólo en la fecha de renovación.
+\n
 \nPuedes administrar y cancelar las suscripciones accediendo a los ajustes de Google Play.</string>
     <string name="search_poi_types">Buscar por tipos de PDI</string>
     <string name="search_poi_types_descr">Combina tipos de PDI de diferentes categorías. Pulsa «Alternar» para marcar todo y el lado izquierdo para elegir una categoría.</string>
@@ -3906,7 +3906,7 @@
     <string name="profile_type_user_string">Perfil de usuario</string>
     <string name="reverse_all_points">Invertir todos los puntos</string>
     <string name="profile_by_default_description">Elige el perfil que será usado al iniciar la aplicación.</string>
-    <string name="shared_string_last_used">Usado por última vez</string>
+    <string name="shared_string_last_used">Último usado</string>
     <string name="routing_attr_prefer_hiking_routes_description">Prefiere rutas de senderismo</string>
     <string name="routing_attr_prefer_hiking_routes_name">Preferir rutas de senderismo</string>
     <string name="routing_attr_allow_streams_description">Permite arroyos y desagües</string>
@@ -4167,9 +4167,63 @@
     <string name="restore_from_osmand_cloud">Restaurar desde OsmAnd Cloud</string>
     <string name="choose_what_to_restore">Elige qué restaurar.</string>
     <string name="restore_selected_data">Restaurar datos marcados</string>
-    <string name="receiving_data_from_server">Recibir datos del servidor</string>
+    <string name="receiving_data_from_server">Recibiendo datos del servidor</string>
     <string name="restore_complete">Restauración completa</string>
     <string name="grey_color_slope">El color gris se usa al no estar definida la pendiente.</string>
     <string name="backup_version_history">Historial de versiones</string>
-    <string name="backup_storage_taken">Almacenamiento tomado</string>
+    <string name="backup_storage_taken">Almacenamiento usado</string>
+    <string name="backup_version_history_delete_descr">¿Borrar el historial de cambios en la nube de los tipos de datos desactivados\?</string>
+    <string name="delete_version_history">Borrar el historial de versiones</string>
+    <string name="routing_attr_avoid_tunnels_description">Evita los túneles</string>
+    <string name="routing_attr_avoid_tunnels_name">Evitar túneles</string>
+    <string name="backup_promocode">Código promocional</string>
+    <string name="send_crash_log">Enviar informe de errores</string>
+    <string name="send_logcat_log">Enviar informe de logcat</string>
+    <string name="purchases_feature_desc_nautical">Obtén acceso a la información de profundidad náutica</string>
+    <string name="purchases_feature_desc_terrain">Curvas de nivel del terreno, mapa completo de sombreados con tonos oscuros y mapas de pendientes con colores para mostrar, picos y tierras bajas.</string>
+    <string name="purchases_feature_desc_wikivoyage">Explora Wikipedia sin conexión. Artículos divididos por países y regiones y disponibles en todos los idiomas.</string>
+    <string name="purchases_feature_desc_wikipedia">Explora Wikipedia sin conexión. Artículos divididos por países y regiones y disponibles en todos los idiomas.</string>
+    <string name="purchases_feature_desc_combined_wiki">Explora los artículos de Wikipedia sobre la marcha, sin conexión a Internet. Datos sin conexión divididos por países y disponibles en todos los idiomas.</string>
+    <string name="purchases_feature_desc_unlimited_map_download">Obtén acceso sin conexión a descargas ilimitadas para todos los continentes y mapas de regiones.</string>
+    <string name="purchases_feature_desc_monthly_map_updates">Obtén acceso a las actualizaciones mensuales de los mapas sin conexión.</string>
+    <string name="purchases_feature_desc_hourly_map_updates">Obtén acceso a la actualización de mapas con mayor frecuencia, elige entre: actualizaciones horarias, diarias o semanales. Las actualizaciones se descargan de forma incremental, sólo para el área modificada.</string>
+    <string name="purchases_feature_desc_advanced_widgets">Obtén acceso a los widgets avanzados de OsmAnd.</string>
+    <string name="purchases_feature_desc_osmand_cloud">Obtén OsmAnd Cloud para almacenar en línea todos los datos de OsmAnd. Olvídate de perder tus datos al reinstalar, haz una copia de seguridad y restaura toda la información sin problemas.</string>
+    <string name="unlimited_map_downloads">Descargas de mapas ilimitadas</string>
+    <string name="wikipedia_and_wikivoyage_offline">Wikipedia y Wikiviajes sin conexión</string>
+    <string name="terrain_maps_contour_lines_hillshade_slope">Mapas del terreno: curvas de nivel, sombreados, pendiente</string>
+    <string name="offline_wikipeadia">Wikipedia sin conexión</string>
+    <string name="offline_wikivoyage">Wikiviajes sin conexión</string>
+    <string name="terrain_maps">Mapas del terreno</string>
+    <string name="nautical_depth">Profundidad náutica</string>
+    <string name="advanced_widgets">Widgets avanzados</string>
+    <string name="you_can_get_feature_as_part_of_pattern">Puedes conseguir «%1$s» como parte de: Plan %2$s. Comparar planes:</string>
+    <string name="ltr_or_rtl_combine_via_or">%1$s o %2$s</string>
+    <string name="continue_with">Continuar con %1$s</string>
+    <string name="not_available_with">No disponible con %1$s</string>
+    <string name="redeem_promo_code">Canjear código promocional</string>
+    <string name="osmand_maps_plus_tagline">Obtén funciones ampliadas</string>
+    <string name="osmand_pro_tagline">Obtén todas las funciones</string>
+    <string name="shared_string_learn_more">Más información</string>
+    <string name="cancel_anytime_in_huawei_appgallery">Cancelar en cualquier momento en Huawei AppGallery</string>
+    <string name="cancel_anytime_in_gplay">Cancelar en cualquier momento en Google Play.</string>
+    <string name="shared_string_not_included">No incluido</string>
+    <string name="shared_string_includes">Incluido</string>
+    <string name="complete_purchase">Compra completa</string>
+    <string name="regular_price">Precio normal</string>
+    <string name="from_with_param">De %1$s</string>
+    <string name="backup_delete_types_descr">¿Borrar los tipos de datos desactivados en la nube\?</string>
+    <string name="backup_delete_types">Borrar los tipos de datos desactivados</string>
+    <string name="shared_string_discussion">Debate</string>
+    <string name="shared_string_view_all">Ver todo</string>
+    <string name="backup_error_user_is_already_registered">Ya se encuentra registrado ese correo electrónico</string>
+    <string name="backup_error_subscription_was_expired">Suscripción expirada</string>
+    <string name="backup_error_subscription_was_used">La suscripción o promoción fue usada en otra cuenta %1$s</string>
+    <string name="backup_error_size_is_exceeded">Tamaño máximo de OsmAnd Cloud excedido %1$s</string>
+    <string name="backup_error_gzip_only_supported_upload">El archivo no se ha enviado en formato gzip</string>
+    <string name="backup_error_file_not_available">Archivo no disponible</string>
+    <string name="backup_error_token_is_not_valid">El ID del dispositivo o el token proporcionado es inválido</string>
+    <string name="backup_error_token_is_not_valid_or_expired">El token es inválido o ha caducado</string>
+    <string name="backup_error_user_is_not_registered">El usuario con ese correo electrónico no está registrado</string>
+    <string name="backup_error_no_valid_subscription">No hay ninguna suscripción válida</string>
 </resources>

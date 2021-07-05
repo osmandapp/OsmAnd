@@ -3971,4 +3971,8 @@
     <string name="poi_memorial_subject">Sugetu</string>
     <string name="poi_picnic_table_no">Mesa pro picnic: nono</string>
     <string name="poi_picnic_table_yes">Mesa pro picnic: eja</string>
+    <string name="poi_contact_vhf">VHF</string>
+    <string name="poi_contact_webcam">Telecàmera</string>
+    <string name="poi_contact_linkedin">LinkedIn</string>
+    <string name="poi_contact_xing">Xing</string>
 </resources>

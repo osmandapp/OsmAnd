@@ -320,9 +320,7 @@ public class LocalIndexHelper {
 	private void loadTravelData(File mapPath, List<LocalIndexInfo> result, AbstractLoadLocalIndexTask loadTask) {
 		if (mapPath.canRead()) {
 			for (File mapFile : listFilesSorted(mapPath)) {
-				if (mapFile.isFile() && mapFile.getName().endsWith(IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT)
-						|| (mapFile.isFile() && mapFile.getName().endsWith(IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)
-						&& Version.isDeveloperVersion(app))) { //todo remove when .travel.obf will be used in production
+				if (mapFile.isFile() && mapFile.getName().endsWith(IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)) {
 					LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.TRAVEL_DATA, mapFile, false, app);
 					updateDescription(info);
 					result.add(info);

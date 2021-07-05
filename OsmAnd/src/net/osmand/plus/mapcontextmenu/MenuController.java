@@ -91,6 +91,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import static net.osmand.plus.wikivoyage.data.TravelObfHelper.ROUTE_ARTICLE;
+
 public abstract class MenuController extends BaseMenuController implements CollapseExpandListener {
 
 	public static class MenuState {

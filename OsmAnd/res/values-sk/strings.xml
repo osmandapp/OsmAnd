@@ -2560,8 +2560,8 @@
     <string name="active_markers_descr">Zadajte počet smerových šípok.</string>
     <string name="shared_string_more_without_dots">Viac</string>
     <string name="looking_for_tracks_with_waypoints">Hľadajú sa stopy s waypointami</string>
-    <string name="empty_state_osm_edits">Vytvoriť alebo upraviť objekty OSM</string>
-    <string name="empty_state_osm_edits_descr">Vytvoriť alebo upraviť body záujmu OSM, otvoriť alebo komentovať OSM poznámky a prispieť zaznamenanými súbormi GPX.</string>
+    <string name="empty_state_osm_edits">Vytvoriť alebo upraviť objekty OpenStreetMap</string>
+    <string name="empty_state_osm_edits_descr">Vytvoriť alebo upraviť body záujmu OpenStreetMap, otvoriť alebo komentovať OSM poznámky a prispieť zaznamenanými súbormi GPX.</string>
     <string name="shared_string_deleted">Odstránené</string>
     <string name="shared_string_edited">Upravené</string>
     <string name="shared_string_added">Pridané</string>
@@ -2607,7 +2607,7 @@
     <string name="show_closed_notes">Zobraziť uzavreté poznámky</string>
     <string name="switch_osm_notes_visibility_desc">Zobraziť alebo skryť OSM poznámky na mape.</string>
     <string name="gpx_file_desc">GPX - vhodné na export do JOSM a iných editorov OSM.</string>
-    <string name="osc_file_desc">OSC - vhodné na export do OSM.</string>
+    <string name="osc_file_desc">OSC - vhodné na export do OpenStreetMap.</string>
     <string name="shared_string_gpx_file">Súbor GPX</string>
     <string name="osc_file">Súbor OSC</string>
     <string name="choose_file_type">Zvoľte typ súboru</string>
