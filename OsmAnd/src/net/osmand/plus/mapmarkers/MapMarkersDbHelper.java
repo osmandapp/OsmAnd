@@ -249,10 +249,10 @@ public class MapMarkersDbHelper {
 						MARKERS_COL_DISABLED + ", " +
 						MARKERS_COL_SELECTED + ", " +
 						MARKERS_COL_MAP_OBJECT_NAME + ") " +
-						"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+						"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
 				new Object[] {marker.id, marker.getLatitude(), marker.getLongitude(), descr, active,
-						currentTime, marker.visitedDate, marker.groupName, marker.groupKey, marker.colorIndex,
-						0, 0, marker.mapObjectName});
+						currentTime, marker.visitedDate, marker.groupName, marker.groupKey,
+						marker.colorIndex, 0, 0, marker.mapObjectName});
 
 		if (marker.history) {
 			updateMarkersHistoryLastModifiedTime();
@@ -382,7 +382,7 @@ public class MapMarkersDbHelper {
 			try {
 				db.execSQL("UPDATE " + MARKERS_TABLE_NAME + " SET " +
 						MARKERS_COL_ACTIVE + " = ?, " +
-						MARKERS_COL_VISITED + " = ?, " +
+						MARKERS_COL_VISITED + " = ? " +
 						"WHERE " + MARKERS_COL_ID + " = ?", new Object[]{0, marker.visitedDate, marker.id});
 				updateMarkersLastModifiedTime();
 				updateMarkersHistoryLastModifiedTime();
@@ -398,7 +398,7 @@ public class MapMarkersDbHelper {
 			try {
 				db.execSQL("UPDATE " + MARKERS_TABLE_NAME + " SET " +
 						MARKERS_COL_ACTIVE + " = ?, " +
-						MARKERS_COL_VISITED + " = ?, " +
+						MARKERS_COL_VISITED + " = ? " +
 						"WHERE " + MARKERS_COL_ACTIVE + " = ?", new Object[] {0, timestamp, 1});
 				updateMarkersLastModifiedTime();
 				updateMarkersHistoryLastModifiedTime();

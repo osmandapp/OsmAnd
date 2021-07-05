@@ -385,6 +385,7 @@ public class ItineraryDataHelper {
 		marker.visitedDate = parseTime(visitedDateStr);
 		marker.creationDate = parseTime(creationDateStr);
 		marker.history = history;
+		marker.wptPt = point;
 
 		return marker;
 	}
