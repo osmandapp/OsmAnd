@@ -240,13 +240,15 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 						int y = (int) tileBox.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation()
 								.getLongitude());
 						if (tileBox.containsPoint(x, y, iconSize)) {
-							String id = null;
-							PoiType st = o.getType().getPoiTypeByKeyName(o.getSubType());
-							if (st != null) {
-								if (RenderingIcons.containsSmallIcon(st.getIconKeyName())) {
-									id = st.getIconKeyName();
-								} else if (RenderingIcons.containsSmallIcon(st.getOsmTag() + "_" + st.getOsmValue())) {
-									id = st.getOsmTag() + "_" + st.getOsmValue();
+							String id = o.getGpxIcon();
+							if (id == null) {
+								PoiType st = o.getType().getPoiTypeByKeyName(o.getSubType());
+								if (st != null) {
+									if (RenderingIcons.containsSmallIcon(st.getIconKeyName())) {
+										id = st.getIconKeyName();
+									} else if (RenderingIcons.containsSmallIcon(st.getOsmTag() + "_" + st.getOsmValue())) {
+										id = st.getOsmTag() + "_" + st.getOsmValue();
+									}
 								}
 							}
 							if (id != null) {

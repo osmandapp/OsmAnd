@@ -179,7 +179,7 @@ public class TravelObfHelper implements TravelHelper {
 	}
 
 	@Nullable
-	public synchronized TravelGpx searchGpx(LatLon location, String routeID, String ref) {
+	public synchronized TravelGpx searchGpx(@NonNull LatLon location, @Nullable String routeID, @Nullable String ref) {
 		final List<Pair<File, Amenity>> foundAmenities = new ArrayList<>();
 		int searchRadius = ARTICLE_SEARCH_RADIUS;
 		TravelGpx travelGpx = null;
@@ -193,7 +193,8 @@ public class TravelObfHelper implements TravelHelper {
 			}
 			for (Pair<File, Amenity> foundGpx : foundAmenities) {
 				Amenity amenity = foundGpx.second;
-				if (amenity.getRouteId().equals(routeID) && amenity.getRef().equals(ref)) {
+				if (Algorithms.objectEquals(amenity.getRouteId(), routeID)
+						&& Algorithms.objectEquals(amenity.getRef(), ref)) {
 					travelGpx = getTravelGpx(foundGpx.first, amenity);
 					break;
 				}

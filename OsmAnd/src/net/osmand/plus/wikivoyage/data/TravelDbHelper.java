@@ -715,7 +715,7 @@ public class TravelDbHelper implements TravelHelper {
 
 	@Nullable
 	@Override
-	public TravelGpx searchGpx(LatLon location, String fileName, String ref) {
+	public TravelGpx searchGpx(@NonNull LatLon location, @Nullable String fileName, @Nullable String ref) {
 		return null;
 	}
 
