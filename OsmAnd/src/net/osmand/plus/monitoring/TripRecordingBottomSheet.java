@@ -168,9 +168,8 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 
 	@Override
 	protected void setupBottomButtons(ViewGroup view) {
-		Activity activity = requireActivity();
-		LayoutInflater themedInflater = UiUtilities.getInflater(activity, nightMode);
-		int contentPadding = (int) getDimen(R.dimen.content_padding);
+		LayoutInflater themedInflater = UiUtilities.getInflater(view.getContext(), nightMode);
+		int contentPadding = getDimen(R.dimen.content_padding);
 		View buttonsContainer = themedInflater.inflate(R.layout.preference_button_with_icon_quadruple, null);
 		buttonsContainer.setPadding(contentPadding, contentPadding, contentPadding, contentPadding);
 		view.addView(buttonsContainer);

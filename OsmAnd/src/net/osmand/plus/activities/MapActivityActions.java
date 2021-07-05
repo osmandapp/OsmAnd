@@ -106,6 +106,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_CONFIGURE_S
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DASHBOARD_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DIRECTIONS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_FAVORITES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_OSM_EDITS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_TRACKS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_TRIP_RECORDING_ID;
@@ -1121,8 +1122,8 @@ public class MapActivityActions implements DialogProvider {
 				.setId(drawerId)
 				.setIcon(iconRes)
 				.setListener((adapter1, itemId, position, isChecked, viewCoordinates) -> {
-					String logTitle = mapActivity.getString(titleRes).replace(" ", "_");
-					mapActivity.getMyApplication().logEvent("drawer_" + logTitle + "_open");
+					String itemLogName = drawerId.replace(DRAWER_ITEM_ID_SCHEME, "");
+					mapActivity.getMyApplication().logEvent("drawer_" + itemLogName + "_open");
 					Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization()
 							.getFavoritesActivity());
 					newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);

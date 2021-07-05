@@ -402,23 +402,24 @@ public class GpxSelectionHelper {
 		String descClr = Algorithms.colorToString(ContextCompat.getColor(app, R.color.gpx_altitude_desc));
 		String distanceClr = Algorithms.colorToString(ContextCompat.getColor(app, R.color.gpx_distance_color));
 		final float eleThreshold = 3;
-		int segmentCount = 0;
 
-		for (TrkSegment r : group.track.segments) {
-			if (r.points.size() == 0) {
+		for (int segmentIdx = 0; segmentIdx < group.track.segments.size(); segmentIdx++) {
+			TrkSegment segment = group.track.segments.get(segmentIdx);
+
+			if (segment.points.size() == 0) {
 				continue;
 			}
 			GPXTrackAnalysis[] as;
 			boolean split = true;
 			if (group.splitDistance > 0) {
-				List<GPXTrackAnalysis> trackSegments = r.splitByDistance(group.splitDistance, joinSegments);
+				List<GPXTrackAnalysis> trackSegments = segment.splitByDistance(group.splitDistance, joinSegments);
 				as = trackSegments.toArray(new GPXTrackAnalysis[0]);
 			} else if (group.splitTime > 0) {
-				List<GPXTrackAnalysis> trackSegments = r.splitByTime(group.splitTime, joinSegments);
+				List<GPXTrackAnalysis> trackSegments = segment.splitByTime(group.splitTime, joinSegments);
 				as = trackSegments.toArray(new GPXTrackAnalysis[0]);
 			} else {
 				split = false;
-				as = new GPXTrackAnalysis[] {GPXTrackAnalysis.segment(0, r)};
+				as = new GPXTrackAnalysis[] {GPXTrackAnalysis.segment(0, segment)};
 			}
 			for (GPXTrackAnalysis analysis : as) {
 				GpxDisplayItem item = new GpxDisplayItem();
@@ -431,8 +432,9 @@ public class GpxSelectionHelper {
 				}
 
 				if (!group.track.generalTrack && group.track.segments.size() > 1) {
-					String title = split || Algorithms.isBlank(r.name) ? String.valueOf(segmentCount + 1) : r.name;
-					item.title = formatTitle(app, title);
+					String title = split || Algorithms.isBlank(segment.name) ?
+							String.valueOf(segmentIdx + 1) : segment.name;
+					item.segmentName = formatTitle(app, title);
 				}
 
 				item.description = GpxUiHelper.getDescription(app, analysis, true);
@@ -480,7 +482,6 @@ public class GpxSelectionHelper {
 				item.locationStart = analysis.locationStart;
 				item.locationEnd = analysis.locationEnd;
 				list.add(item);
-				segmentCount++;
 			}
 		}
 	}
@@ -1128,16 +1129,20 @@ public class GpxSelectionHelper {
 
 		public GPXTrackAnalysis analysis;
 		public GpxDisplayGroup group;
+
 		public WptPt locationStart;
 		public WptPt locationEnd;
+
 		public double splitMetric = -1;
 		public double secondarySplitMetric = -1;
-		public String title;
+
+		public String segmentName;
 		public String splitName;
 		public String name;
 		public String description;
 		public String url;
 		public Bitmap image;
+
 		public boolean expanded;
 		public boolean route;
 		public boolean wasHidden = true;

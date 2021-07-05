@@ -55,7 +55,7 @@ public class TrackSelectSegmentAdapter extends RecyclerView.Adapter<TrackViewHol
 		TrkSegment segment = segments.get(position);
 
 		String segmentTitle = Algorithms.isBlank(segment.name)
-				? app.getResources().getString(R.string.segments_count, position + 1)
+				? app.getString(R.string.segments_count, position + 1)
 				: segment.name;
 		holder.name.setText(segmentTitle);
 

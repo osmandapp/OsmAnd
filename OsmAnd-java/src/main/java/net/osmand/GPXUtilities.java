@@ -1965,8 +1965,8 @@ public class GPXUtilities {
 				writeNotNullText(serializer, "desc", track.desc);
 				for (TrkSegment segment : track.segments) {
 					serializer.startTag(null, "trkseg"); //$NON-NLS-1$
+					writeNotNullText(serializer, "name", segment.name);
 					for (WptPt p : segment.points) {
-						writeNotNullText(serializer, "name", segment.name);
 						serializer.startTag(null, "trkpt"); //$NON-NLS-1$
 						writeWpt(format, serializer, p, progress);
 						serializer.endTag(null, "trkpt"); //$NON-NLS-1$
