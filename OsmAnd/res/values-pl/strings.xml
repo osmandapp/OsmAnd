@@ -61,20 +61,20 @@
 \n
 \nPrzytrzymaj dłużej, aby wyświetlić opcje"</string>
     <string name="local_index_installed">Wersja lokalna</string>
-    <string name="local_index_items_backuped">Zarchiwizowano %1$d z %2$d.</string>
+    <string name="local_index_items_backuped">Zdezaktywowano %1$d z %2$d elementy/ów.</string>
     <string name="local_index_items_deleted">Usunięto %1$d z %2$d.</string>
     <string name="local_index_items_restored">Przywrócono %1$d z %2$d.</string>
     <string name="local_index_no_items_to_do">Brak elementów %1$s</string>
     <string name="local_index_action_do">Zostanie %1$s %2$s elementów. Kontynuować?</string>
     <string name="local_index_descr_title">Zarządzanie plikami map.</string>
     <string name="local_index_mi_restore">Przywróć</string>
-    <string name="local_index_mi_backup">Zarchiwizuj</string>
+    <string name="local_index_mi_backup">Dezaktywuj</string>
     <string name="shared_string_download">Pobierz</string>
     <string name="local_index_poi_data">Dane użytecznych miejsc</string>
     <string name="local_index_address_data">Dane adresowe</string>
     <string name="local_index_transport_data">Dane transportu publicznego</string>
     <string name="local_index_map_data">Dane mapy</string>
-    <string name="local_indexes_cat_backup">Kopia zapasowa</string>
+    <string name="local_indexes_cat_backup">Nieaktywny</string>
     <string name="local_indexes_cat_tts">Komunikaty głosowe (syntezowane)</string>
     <string name="local_indexes_cat_voice">Komunikaty głosowe (nagrane)</string>
     <string name="local_indexes_cat_tile">Mapy online i buforowane kafelki</string>
@@ -4105,20 +4105,20 @@
     <string name="last_backup">Ostatnia kopia zapasowa</string>
     <string name="duration_ago">%1$s temu</string>
     <string name="osmand_cloud">OsmAnd Cloud</string>
-    <string name="osmand_cloud_authorize_descr">Nigdy nie trać swoich danych, wykonuj kopie zapasowe i przywracaj wszystkie informacje bez problemu.</string>
+    <string name="osmand_cloud_authorize_descr">Nigdy nie trać swoich danych. Wykonuj kopie zapasowe i przywracaj wszystkie informacje bez problemu.</string>
     <string name="local_backup">Lokalna kopia zapasowa</string>
-    <string name="local_backup_descr">Tworzenie kopii zapasowej lub przywracanie danych z pliku lokalnego.</string>
-    <string name="backup_into_file">Kopia zapasowa do pliku</string>
+    <string name="local_backup_descr">Utwórz kopię zapasową lub przywróć dane z pliku lokalnego.</string>
+    <string name="backup_into_file">Utwórz kopię zapasową jako plik</string>
     <string name="restore_from_file">Przywróć z pliku</string>
     <string name="osmand_cloud_help_descr">Potrzebujesz pomocy\? Skontaktuj się z nami pod adresem %1$s</string>
-    <string name="osmand_cloud_create_account_descr">Podaj swój adres e-mail, wszystkie Twoje dane będą z nim powiązane.
-\nWyślemy Ci kod weryfikacyjny na ten adres e-mail.</string>
-    <string name="osmand_cloud_login_descr">Proszę wpisać adres e-mail, którego użyłeś do rejestracji. Wyślemy Ci jednorazowe hasło potrzebne w następnym kroku.</string>
+    <string name="osmand_cloud_create_account_descr">Wprowadź swój adres e-mail, zostanie na niego wysłany kod weryfikacyjny,
+\ni wszystkie Twoje dane zostaną przypisane do niego.</string>
+    <string name="osmand_cloud_login_descr">Wprowadź adres e-mail, którego użyłeś do rejestracji. Zostanie wysłane na niego jednorazowe hasło do użycia w następnym roku.</string>
     <string name="verify_email_address">Zweryfikuj adres e-mail</string>
-    <string name="verify_email_address_descr">Wysłaliśmy kod weryfikacyjny na adres %1$s, wprowadź go w poniższe pole.</string>
+    <string name="verify_email_address_descr">Kod weryfikacyjny wysłany na %1$s. Wprowadź go w polu poniżej.</string>
     <string name="enter_verification_code">Wprowadź 4-cyfrowy kod</string>
-    <string name="cloud_email_not_registered">Ten e-mail nie został zarejestrowany w OsmAnd Cloud</string>
-    <string name="cloud_email_already_registered">Konto o tym adresie jest już zarejestrowane.</string>
+    <string name="cloud_email_not_registered">Ten adres e-mail nie jest zarejestrowany w OsmAnd Cloud</string>
+    <string name="cloud_email_already_registered">Ten adres e-mail jest już zarejestrowany.</string>
     <string name="resend_verification_code">Wyślij ponownie kod</string>
     <string name="verification_code_missing">Nie otrzymałem kodu weryfikacyjnego</string>
     <string name="verification_code_missing_description">Czas oczekiwania na kod może wynosić 10 minut, możesz również sprawdzić folder spam. Jeśli to nie pomoże, użyj przycisku poniżej.</string>
@@ -4128,8 +4128,8 @@
     <string name="osmand_online_routing_promo">Można użyć wstępnie zdefiniowanych szablonów lub dodać własne trasy online, obsługiwane: OSRM, Graphhopper, OpenRouteService, GPX.</string>
     <string name="shared_string_external">Zewnętrzny</string>
     <string name="provided_by">Dostarczone przez %1$s</string>
-    <string name="failed_loading_predefined_engines">Nie można załadować listy wstępnie zdefiniowanych szablonów.
-\nSprawdź połączenie internetowe.</string>
+    <string name="failed_loading_predefined_engines">Nie udało się załadować listy wstępnie zdefiniowanych szablonów.
+\nSprawdź swoje połączenie internetowe.</string>
     <string name="shared_string_predefined">Wstępnie zdefiniowane</string>
     <string name="backup_complete">Zakończono tworzenie kopii zapasowej</string>
     <string name="backup_now">Utwórz kopię zapasową teraz</string>
@@ -4167,7 +4167,7 @@
     <string name="restore_complete">Przywrócone</string>
     <string name="grey_color_slope">Kolor szary jest używany, gdy nachylenie jest nieokreślone.</string>
     <string name="backup_version_history">Historia wersji</string>
-    <string name="backup_version_history_delete_descr">Czy chcesz usunąć z chmury OsmAnd Cloud historię zmian dla nieaktualnych typów danych\?</string>
+    <string name="backup_version_history_delete_descr">Usunąć z chmury OsmAnd Cloud historię zmian dla nieaktualnych typów danych\?</string>
     <string name="delete_version_history">Usuń historię wersji</string>
     <string name="add_online_routing_engine">Dodaj silnik wyznaczania tras online</string>
     <string name="delete_online_routing_engine">Usunąć ten silnik wyznaczania tras online\?</string>
@@ -4223,6 +4223,6 @@
     <string name="backup_error_file_not_available">Plik niedostępny</string>
     <string name="backup_error_token_is_not_valid">Coś poszło nie tak z podanym identyfikatorem urządzenia lub tokenem</string>
     <string name="backup_error_token_is_not_valid_or_expired">Nieprawidłowy lub nieaktualny token</string>
-    <string name="backup_error_user_is_not_registered">Żaden użytkownik nie jest zarejestrowany z tym adresem e-mail</string>
+    <string name="backup_error_user_is_not_registered">Brak użytkownika zarejestrowanego z tym adresem e-mail</string>
     <string name="backup_error_no_valid_subscription">Brak ważnej subskrypcji</string>
 </resources>
