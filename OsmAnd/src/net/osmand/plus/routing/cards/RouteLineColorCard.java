@@ -308,8 +308,8 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 		}
 
 		private List<String> listRouteInfoAttributes() {
-			RenderingRulesStorage defaultRenderer = app.getRendererRegistry().getCurrentSelectedRenderer();
-			RenderingRulesStorage currentRenderer = app.getRendererRegistry().defaultRender();
+			RenderingRulesStorage currentRenderer = app.getRendererRegistry().getCurrentSelectedRenderer();
+			RenderingRulesStorage defaultRenderer = app.getRendererRegistry().defaultRender();
 			return RouteStatisticsHelper.getRouteStatisticAttrsNames(currentRenderer, defaultRenderer);
 		}
 
