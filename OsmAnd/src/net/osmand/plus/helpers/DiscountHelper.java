@@ -27,12 +27,12 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.chooseplan.ChoosePlanDialogFragment.ChoosePlanDialogType;
+import net.osmand.plus.chooseplan.OsmAndFeature;
+import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
@@ -319,7 +319,7 @@ public class DiscountHelper {
 				} else {
 					for (InAppPurchase p : purchaseHelper.getSubscriptions().getAllSubscriptions()) {
 						if (url.contains(p.getSku())) {
-							ChoosePlanDialogFragment.showDialogInstance(app, mapActivity.getSupportFragmentManager(), ChoosePlanDialogType.SUBSCRIPTION);
+							ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.HOURLY_MAP_UPDATES);
 							break;
 						}
 					}
@@ -363,18 +363,22 @@ public class DiscountHelper {
 			}
 		} else if (url.startsWith(SHOW_CHOOSE_PLAN_PREFIX)) {
 			String planType = url.substring(SHOW_CHOOSE_PLAN_PREFIX.length()).trim();
+			OsmAndFeature feature = null;
 			if (CHOOSE_PLAN_TYPE_FREE.equals(planType)) {
-				ChoosePlanDialogFragment.showDialogInstance(mapActivity.getMyApplication(), mapActivity.getSupportFragmentManager(), ChoosePlanDialogType.FREE_VERSION);
+				feature = OsmAndFeature.UNLIMITED_MAP_DOWNLOADS;
 			} else if (CHOOSE_PLAN_TYPE_LIVE.equals(planType)) {
-				ChoosePlanDialogFragment.showDialogInstance(mapActivity.getMyApplication(), mapActivity.getSupportFragmentManager(), ChoosePlanDialogType.SUBSCRIPTION);
+				feature = OsmAndFeature.HOURLY_MAP_UPDATES;
 			} else if (CHOOSE_PLAN_TYPE_SEA_DEPTH.equals(planType)) {
-				ChoosePlanDialogFragment.showDialogInstance(mapActivity.getMyApplication(), mapActivity.getSupportFragmentManager(), ChoosePlanDialogType.SEA_DEPTH_MAPS);
+				feature = OsmAndFeature.NAUTICAL;
 			} else if (CHOOSE_PLAN_TYPE_HILLSHADE.equals(planType)) {
-				ChoosePlanDialogFragment.showDialogInstance(mapActivity.getMyApplication(), mapActivity.getSupportFragmentManager(), ChoosePlanDialogType.HILLSHADE_SRTM_PLUGIN);
+				feature = OsmAndFeature.TERRAIN;
 			} else if (CHOOSE_PLAN_TYPE_WIKIPEDIA.equals(planType)) {
-				ChoosePlanDialogFragment.showDialogInstance(mapActivity.getMyApplication(), mapActivity.getSupportFragmentManager(), ChoosePlanDialogType.WIKIPEDIA);
+				feature = OsmAndFeature.WIKIPEDIA;
 			} else if (CHOOSE_PLAN_TYPE_WIKIVOYAGE.equals(planType)) {
-				ChoosePlanDialogFragment.showDialogInstance(mapActivity.getMyApplication(), mapActivity.getSupportFragmentManager(), ChoosePlanDialogType.WIKIVOYAGE);
+				feature = OsmAndFeature.WIKIVOYAGE;
+			}
+			if (feature != null) {
+				ChoosePlanFragment.showInstance(mapActivity, feature);
 			}
 		} else {
 			Intent intent = new Intent(Intent.ACTION_VIEW);

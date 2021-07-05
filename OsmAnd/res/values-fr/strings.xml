@@ -691,10 +691,10 @@
     <string name="rendering_attr_hmRendered_description">Augmenter le niveau de détail affiché.</string>
     <string name="rendering_attr_hmRendered_name">Afficher plus de détail</string>
     <string name="asap">Dès que possible</string>
-    <string name="gpxup_public">Public</string>
+    <string name="gpxup_public">publique</string>
     <string name="gpxup_identifiable">Identifiable</string>
     <string name="gpxup_trackable">Traçable</string>
-    <string name="gpxup_private">Privée</string>
+    <string name="gpxup_private">privée</string>
     <string name="osmand_parking_event">Récupérer le véhicule au parking</string>
     <string name="osmand_parking_warning">Avertissement</string>
     <string name="osmand_parking_warning_text">Un rappel pour récupérer votre véhicule a été ajouté à votre agenda. Vous pouvez modifier ou supprimer ce rappel.</string>
@@ -885,9 +885,6 @@
     <string name="audionotes_plugin_description">Prenez des notes (photos, audios ou vidéos) pendant votre itinéraire soit en utilisant un bouton, soit depuis le menu contextuel de n\'importe quel point.</string>
     <string name="audionotes_plugin_name">Notes audio/vidéo</string>
     <string name="osmand_srtm_short_description_80_chars">Greffon OsmAnd pour les courbes de niveau hors-ligne</string>
-    <string name="osmand_srtm_long_description_1000_chars">Ce greffon permet l\'affichage de courbes de niveau ainsi que du relief (ombres) qui s\'ajoutent au-dessus des cartes standard d\'OsmAnd. Ces informations sont particulièrement utiles pour les sportifs, les randonneurs, les cyclistes et d\'une manière générale par toutes les personnes qui souhaitent connaitre le relief. 
-\n 
-\nLes données globales (entre 70° Nord et 70° Sud) sont basées sur des mesures SRTM (Shuttle Radar Topography Mission) et ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), des instruments d\'imagerie embarqués à bord de Terra, le satellite phare du système d\'observation de la terre de la NASA. ASTER est un effort de coopération entre la NASA, le ministère japonais de l\'économie, du commerce et de l\'industrie (METI) et «Japan Space Systems (J-Spacesystems).</string>
     <string name="map_widget_distancemeasurement">Mesure de distance</string>
     <string name="av_def_action_video">Enregistrer une vidéo</string>
     <string name="av_def_action_audio">Enregistrer une note audio</string>
@@ -2555,8 +2552,8 @@
     <string name="active_markers_descr">Définir le nombre d\'indications de direction à afficher.</string>
     <string name="shared_string_more_without_dots">Plus</string>
     <string name="looking_for_tracks_with_waypoints">Recherche de fichiers de trace GPX avec points de passage</string>
-    <string name="empty_state_osm_edits">Créer et modifier des éléments OSM</string>
-    <string name="empty_state_osm_edits_descr">Créer ou modifier les PI OSM, ouvrir ou commenter des Notes OSM et contribuer aux traces GPX enregistrées.</string>
+    <string name="empty_state_osm_edits">Créer ou modifier des objets OpenStreetMap</string>
+    <string name="empty_state_osm_edits_descr">Créer ou modifier les PI OpenStreetMap, ouvrir ou commenter des Notes OSM et contribuer aux traces GPX enregistrées.</string>
     <string name="shared_string_deleted">Supprimé</string>
     <string name="shared_string_edited">Modifié</string>
     <string name="shared_string_added">Ajouté</string>
@@ -2602,7 +2599,7 @@
     <string name="show_closed_notes">Afficher les notes fermées</string>
     <string name="switch_osm_notes_visibility_desc">Affiche ou masque les notes OSM sur la carte.</string>
     <string name="gpx_file_desc">GPX - adapté à l\'export vers JOSM et d\'autres éditeurs OSM.</string>
-    <string name="osc_file_desc">OSC - adapté à l\'export vers OSM.</string>
+    <string name="osc_file_desc">OSC - adapté à l\'export vers OpenStreetMap.</string>
     <string name="shared_string_gpx_file">Fichier GPX</string>
     <string name="osc_file">Fichier OSC</string>
     <string name="choose_file_type">Sélectionnez le type de fichier</string>
@@ -2665,7 +2662,7 @@
     <string name="wikivoyage_download_pics">Télécharger les images</string>
     <string name="wikivoyage_download_pics_descr">Les images des articles peuvent être téléchargées pour un usage hors ligne.
 \nPour modifier ce paramétrage, allez dans : Explorer &gt; Options.</string>
-    <string name="shared_string_wifi_only">Wifi seulement</string>
+    <string name="shared_string_wifi_only">Seulement en Wi-Fi</string>
     <string name="select_travel_book">Sélectionnez un carnet de voyage</string>
     <string name="shared_string_travel_book">Carnet de voyage</string>
     <string name="download_images">Télécharger les images</string>
@@ -3286,7 +3283,7 @@
     <string name="desert_render_descr">Pour les déserts et autres zones faiblement peuplées, affiche plus de détails.</string>
     <string name="select_navigation_icon">Icône de votre position en déplacement</string>
     <string name="select_map_icon">Icône de votre position à l\'arrêt</string>
-    <string name="delete_profiles_descr">« Appliquer » supprimera définitivement les profils retirés.</string>
+    <string name="delete_profiles_descr">« Appliquer » supprimera définitivement les profils.</string>
     <string name="master_profile">Profil principal</string>
     <string name="select_color">Sélectionnez la couleur</string>
     <string name="edit_profiles_descr">Les profils OsmAnd par défaut ne peuvent pas être supprimés mais vous pouvez les désactiver (depuis l\'écran précédent) ou les déplacer vers le bas.</string>
@@ -3409,7 +3406,7 @@
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_routing">Calcul d\'itinéraire</string>
     <string name="shared_string_include_data">Inclure des données supplémentaires</string>
-    <string name="import_profile_dialog_description">Le profil importé contient des données supplémentaires. Cliquez sur Importer pour n\'importer que les données de profil ou sélectionnez les données supplémentaires à importer.</string>
+    <string name="import_profile_dialog_description">Le profil contient des données supplémentaires. Appuyez sur \"Importer\" pour n\'importer que les données de profil ou sélectionnez les données supplémentaires à importer.</string>
     <string name="export_profile_dialog_description">Vous pouvez sélectionner des données supplémentaires à exporter en même temps que le profil.</string>
     <string name="index_name_antarctica">Antarctique</string>
     <string name="shared_string_app_default_w_val">Par défaut pour l\'application (%s)</string>
@@ -3540,11 +3537,11 @@
     <string name="download_unsupported_action">Action %1$s non prise en charge</string>
     <string name="lang_ky">Kirghize</string>
     <string name="lang_gu">Gujarati</string>
-    <string name="osm_live_payment_subscription_management">Le paiement sera débité de votre compte Google Play dès confirmation de l\'achat.
+    <string name="osm_live_payment_subscription_management">Le paiement sera prélevé de votre compte Google Play dès confirmation de l\'achat.
 \n
-\nA moins qu\'il ne soit annulé avant sa date de renouvellement, l\'abonnement sera automatiquement débité à chaque échéance (mensuelle / trimestrielle / annuelle). 
+\nA moins qu\'il ne soit annulé avant sa date de renouvellement, l\'abonnement sera automatiquement prélevé à chaque échéance (mensuelle / trimestrielle / annuelle).
 \n
-\nVous pouvez gérer et annuler vos abonnements dans vos paramètres Google Play.</string>
+\nVous pouvez gérer et annuler vos abonnements en vous rendant dans les paramètres Google Play.</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="search_poi_types_descr">Combinez des PI de différentes catégories. Appuyez sur \"basculer\" pour tout sélectionner, le côté gauche sélectionne une catégorie.</string>
     <string name="search_poi_types">Rechercher des types de PI</string>
@@ -3560,22 +3557,22 @@
     <string name="subscription_osmandlive_item">Abonnement - OsmAnd Live</string>
     <string name="osmand_purchases_item">Achats OsmAnd</string>
     <string name="navigation_profiles_item">Profils de navigation</string>
-    <string name="release_3_7">- Nouvelles cartes des pistes hors ligne 
-\n 
-\n - Personnalisation complète des favoris et des points de passage GPX - couleurs, icônes et formes personnalisées 
-\n 
-\n - Personnalisez l\'ordre des éléments dans le menu contextuel, le menu configurer la carte et le panneau déroulant 
-\n 
-\n - Wikipédia comme couche séparée dans Paramétrer la carte, sélectionnez uniquement les langues nécessaires 
-\n 
-\n - Créez vos propres filtres de PI avec une flexibilité totale 
-\n 
-\n - Ajout d\'options permettant de restaurer les paramètres des profils personnalisés 
-\n 
-\n - Les routes GPX utilisées en navigation prennent en charge les voies de circulation et les instructions de virage complètes 
-\n 
-\n - Correction des tailles sur les tablettes 
-\n 
+    <string name="release_3_7">- Nouvelles cartes des pentes hors ligne
+\n
+\n - Personnalisation complète des favoris et des points de passage GPX - couleurs, icônes et formes personnalisées
+\n
+\n - Personnalisez l\'ordre des éléments dans le menu contextuel, le menu configurer la carte et le panneau déroulant
+\n
+\n - Wikipédia comme couche séparée dans Paramétrer la carte, sélectionnez uniquement les langues nécessaires
+\n
+\n - Créez vos propres filtres de PI avec une flexibilité totale
+\n
+\n - Ajout d\'options permettant de restaurer les paramètres des profils personnalisés
+\n
+\n - Les routes GPX utilisées en navigation prennent en charge les voies de circulation et les instructions de virage complètes
+\n
+\n - Correction des tailles sur les tablettes
+\n
 \n - Correction de bugs avec RTL
 \n
 \n</string>
@@ -3706,7 +3703,7 @@
     <string name="route_between_points_desc">Définissez comment relier les points : par une ligne droite ou en calculant un itinéraire avec le profil ci-dessous.</string>
     <string name="route_between_points_whole_track_button_desc">Toute la trace sera recalculée en utilisant le profil sélectionné.</string>
     <string name="route_between_points_next_segment_button_desc">Seul le prochain segment sera recalculé en utilisant le profil sélectionné.</string>
-    <string name="route_between_points_warning_desc">Ensuite, sélectionnez le profil de navigation pour détecter les routes autorisées et le seuil de distance afin de déplacer votre trace.</string>
+    <string name="route_between_points_warning_desc">Ensuite, sélectionnez le profil de navigation pour déplacer votre trace sur les routes les plus proches, autorisées par votre profil de navigation.</string>
     <string name="route_between_points_add_track_desc">Sélectionnez le fichier de trace auquel vous souhaitez ajouter un nouveau segment.</string>
     <string name="save_as_new_track">Enregistrer comme nouvelle trace</string>
     <string name="reverse_route">Inverser l\'itinéraire</string>
@@ -3893,7 +3890,7 @@
     <string name="plan_route_split_after">Couper après</string>
     <string name="plan_route_add_new_segment">Ajouter un nouveau segment</string>
     <string name="gpx_upload_identifiable_visibility_descr">« Identifiable » signifie que la trace sera affichée publiquement dans « Mes traces GPS » ainsi que dans les listes de traces GPS publiques. Ainsi les autres utilisateurs pourront télécharger la trace brute et l\'associer avec votre nom d\'utilisateur. Les données de points de passage horodatés fournis par l\'API GPS publique feront référence à la page d\'origine de votre trace.</string>
-    <string name="gpx_upload_public_visibility_descr">« Public » signifie que la trace est affichée publiquement dans vos traces GPS et dans les listes de traces GPS publiques. Les données diffusées via l\'API ne font pas référence à votre page de traces. Les horodatages des points de trace ne sont pas disponibles via l\'API GPS publique et les points de trace ne sont pas classés par ordre chronologique.</string>
+    <string name="gpx_upload_public_visibility_descr">« Publique » signifie que la trace est affichée publiquement dans vos traces GPS et dans les listes de traces GPS publiques. Les données diffusées via l\'API ne font pas référence à votre page de traces. Les horodatages des points de trace ne sont pas disponibles via l\'API GPS publique et les points de trace ne sont pas classés par ordre chronologique.</string>
     <string name="profile_type_osmand_string">Profil OsmAnd</string>
     <string name="profile_type_user_string">Profil utilisateur</string>
     <string name="reverse_all_points">Inverser tous les points</string>
@@ -4162,4 +4159,56 @@
     <string name="receiving_data_from_server">Réception de données du serveur</string>
     <string name="restore_complete">Restauration terminée</string>
     <string name="grey_color_slope">Les pentes inconnues sont de couleur grise.</string>
+    <string name="backup_storage_taken">Espace utilisé</string>
+    <string name="backup_version_history">Historique des versions</string>
+    <string name="delete_version_history">Supprimer l\'historique des versions</string>
+    <string name="routing_attr_avoid_tunnels_description">Éviter les tunnels</string>
+    <string name="routing_attr_avoid_tunnels_name">Éviter les tunnels</string>
+    <string name="send_crash_log">Envoyer le journal des plantages</string>
+    <string name="send_logcat_log">Envoyer le journal logcat</string>
+    <string name="backup_promocode">Code promo</string>
+    <string name="purchases_feature_desc_wikivoyage">Consultez les articles Wikipédia sans connexion Internet. Les articles sont découpés par pays et disponibles dans toutes les langues.</string>
+    <string name="purchases_feature_desc_wikipedia">Consultez les articles Wikipédia sans connexion Internet. Les articles sont découpés par pays et disponibles dans toutes les langues.</string>
+    <string name="purchases_feature_desc_combined_wiki">Consultez les articles Wikipédia sans connexion Internet. Les données hors ligne sont découpées par pays et disponibles dans toutes les langues.</string>
+    <string name="purchases_feature_desc_hourly_map_updates">Accédez à des mises à jour de cartes plus fréquentes : horaire, quotidienne ou hebdomadaires Pour les zones déjà téléchargées, les mises à jour sont de taille réduite grâce à une diffusion incrémentielle.</string>
+    <string name="purchases_feature_desc_osmand_cloud">Utilisez OsmAnd Cloud pour sauvegarder toutes les données d\'OsmAnd en ligne. Plus aucun risque de perdre vos données après une réinstallation. Sauvegardez et restaurez toutes vos informations sans difficulté.</string>
+    <string name="nautical_depth">Profondeur bathymétrique</string>
+    <string name="terrain_maps_contour_lines_hillshade_slope">Cartes du relief : courbes de niveaux, ombrages, pentes</string>
+    <string name="purchases_feature_desc_unlimited_map_download">Téléchargez en illimité des cartes hors ligne pour tous les continents et toutes les régions.</string>
+    <string name="purchases_feature_desc_terrain">Cartes avec courbes de niveaux, ombrage du relief, pentes et des couleurs mettant en valeur les sommets et plaines.</string>
+    <string name="purchases_feature_desc_nautical">Accédez aux informations de profondeur bathymétrique</string>
+    <string name="shared_string_includes">Inclus</string>
+    <string name="complete_purchase">Finaliser l\'achat</string>
+    <string name="purchases_feature_desc_monthly_map_updates">Obtenez les mises à jour mensuelles pour les cartes hors ligne.</string>
+    <string name="purchases_feature_desc_advanced_widgets">Accédez aux widgets avancés d\'OsmAnd.</string>
+    <string name="unlimited_map_downloads">Téléchargements illimités de cartes</string>
+    <string name="wikipedia_and_wikivoyage_offline">Wikipédia et Wikivoyage hors ligne</string>
+    <string name="offline_wikipeadia">Wikipédia hors ligne</string>
+    <string name="offline_wikivoyage">Wikivoyage hors ligne</string>
+    <string name="terrain_maps">Cartes du terrain</string>
+    <string name="advanced_widgets">Widgets avancés</string>
+    <string name="ltr_or_rtl_combine_via_or">%1$s ou %2$s</string>
+    <string name="continue_with">Continuer avec %1$s</string>
+    <string name="not_available_with">Non disponible avec %1$s</string>
+    <string name="redeem_promo_code">Utiliser le code promo</string>
+    <string name="osmand_maps_plus_tagline">Bénéficiez de fonctionnalités étendues</string>
+    <string name="osmand_pro_tagline">Bénéficiez d\'un maximum de fonctionnalités</string>
+    <string name="shared_string_learn_more">En savoir plus</string>
+    <string name="cancel_anytime_in_huawei_appgallery">Annulez à tout moment dans Huawei AppGallery</string>
+    <string name="cancel_anytime_in_gplay">Annulez à tout moment dans Google Play.</string>
+    <string name="shared_string_not_included">Non inclus</string>
+    <string name="regular_price">Prix habituel</string>
+    <string name="from_with_param">À partir de %1$s</string>
+    <string name="backup_delete_types_descr">Souhaitez-vous supprimer du Cloud les données des types désactivés \?</string>
+    <string name="backup_version_history_delete_descr">Souhaitez-vous supprimer du Cloud l’historique des modifications pour les types désactivés \?</string>
+    <string name="backup_delete_types">Supprimer les données des types désactivés</string>
+    <string name="shared_string_discussion">Discussion</string>
+    <string name="shared_string_view_all">Tout afficher</string>
+    <string name="backup_error_subscription_was_expired">L\'abonnement a expiré</string>
+    <string name="backup_error_subscription_was_used">L\'abonnement ou la promo a été utilisé par un autre compte %1$s</string>
+    <string name="backup_error_no_valid_subscription">Aucun abonnement n\'est valide</string>
+    <string name="backup_error_user_is_not_registered">Aucun utilisateur n’existe avec cet email</string>
+    <string name="backup_error_user_is_already_registered">Un utilisateur existe déjà avec cet e-mail</string>
+    <string name="backup_error_file_not_available">Le fichier n\'est pas disponible</string>
+    <string name="backup_error_token_is_not_valid_or_expired">Le jeton n\'est pas valide ou a expiré</string>
 </resources>

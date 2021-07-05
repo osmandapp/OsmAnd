@@ -58,6 +58,10 @@ public class OsmBugsDbHelper extends SQLiteOpenHelper {
 		return lastModifiedTime;
 	}
 
+	public void setLastModifiedTime(long lastModifiedTime) {
+		BackupHelper.setLastModifiedTime(context, OSMBUGS_DB_LAST_MODIFIED_NAME, lastModifiedTime);
+	}
+
 	private void updateLastModifiedTime() {
 		BackupHelper.setLastModifiedTime(context, OSMBUGS_DB_LAST_MODIFIED_NAME);
 	}

@@ -916,9 +916,6 @@
     <string name="av_settings">Nastavitve za zvok in video</string>
     <string name="recording_error">Snemanje je spodletelo</string>
     <string name="recording_camera_not_available">Kamera ni na voljo</string>
-    <string name="osmand_srtm_long_description_1000_chars">Ta vstavek omogoča prikaz izohips in reliefa pokrajine na standardnih zemljevidih OsmAnd. Zmožnost je uporabna za športnike in pohodnike ter za vse, ki potrebujejo podatke o reliefu pokrajine. 
-\n 
-\nGlobalni podatki (med 70° severno in 70° južno) temeljijo na meritvah SRTM (Shuttle Radar Topography Mission) in ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), instrumentu za slikanje na Terri, glavnem Nasinem opazovalnem satelitu. Naprava ASTER deluje s podporo ameriške agencije NASA, japonskega ministrstva za gospodarstvo, trgovino in industrijo (METI) in japonskega vesoljskega sistema (J-spacesystems).</string>
     <string name="audionotes_location_not_defined">Mesto, ki naj bi ga povezali z zaznamkom, še ni določeno. Z možnostjo \"Uporabi mesto …\" je mogoče dodeliti zaznamek za določeno točko na zemljevidu.</string>
     <string name="srtm_paid_version_msg">Razmislite o nakupu vstavka za prikaz »Izohips« in s tem podprite nadaljnji razvoj.</string>
     <string name="srtm_paid_version_title">Vstavek Izohipse</string>

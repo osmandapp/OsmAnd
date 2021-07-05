@@ -8,7 +8,6 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.backup.BackupImporter.CollectItemsResult;
 import net.osmand.plus.backup.NetworkSettingsHelper.BackupCollectListener;
-import net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.CheckDuplicatesListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportType;
@@ -40,11 +39,10 @@ public class ImportBackupTask extends AsyncTask<Void, Void, List<SettingsItem>> 
 	private List<RemoteFile> remoteFiles;
 
 	private final ImportType importType;
-	private RemoteFilesType remoteFilesType;
 	private boolean importDone;
 
 	ImportBackupTask(@NonNull NetworkSettingsHelper helper,
-					 String latestChanges, int version,
+					 String latestChanges, int version, boolean readData,
 					 @Nullable BackupCollectListener collectListener) {
 		this.helper = helper;
 		this.app = helper.getApp();
@@ -52,10 +50,10 @@ public class ImportBackupTask extends AsyncTask<Void, Void, List<SettingsItem>> 
 		this.latestChanges = latestChanges;
 		this.version = version;
 		importer = new BackupImporter(app.getBackupHelper());
-		importType = ImportType.COLLECT;
+		importType = readData ? ImportType.COLLECT_AND_READ : ImportType.COLLECT;
 	}
 
-	ImportBackupTask(@NonNull NetworkSettingsHelper helper,
+	ImportBackupTask(@NonNull NetworkSettingsHelper helper, boolean forceReadData,
 				   @NonNull List<SettingsItem> items, String latestChanges, int version,
 				   @Nullable ImportListener importListener) {
 		this.helper = helper;
@@ -65,7 +63,7 @@ public class ImportBackupTask extends AsyncTask<Void, Void, List<SettingsItem>> 
 		this.latestChanges = latestChanges;
 		this.version = version;
 		importer = new BackupImporter(app.getBackupHelper());
-		importType = ImportType.IMPORT;
+		importType = forceReadData ? ImportType.IMPORT_FORCE_READ : ImportType.IMPORT;
 	}
 
 	ImportBackupTask(@NonNull NetworkSettingsHelper helper,
@@ -109,6 +107,21 @@ public class ImportBackupTask extends AsyncTask<Void, Void, List<SettingsItem>> 
 				this.duplicates = getDuplicatesData(selectedItems);
 				return selectedItems;
 			case IMPORT:
+			case IMPORT_FORCE_READ:
+				if (items != null && items.size() > 0) {
+					BackupHelper backupHelper = app.getBackupHelper();
+					PrepareBackupResult backup = backupHelper.getBackup();
+					for (SettingsItem item : items) {
+						item.apply();
+						String fileName = item.getFileName();
+						if (fileName != null) {
+							RemoteFile remoteFile = backup.getRemoteFile(item.getType().name(), fileName);
+							if (remoteFile != null) {
+								backupHelper.updateFileUploadTime(remoteFile.getType(), remoteFile.getName(), remoteFile.getClienttimems());
+							}
+						}
+					}
+				}
 				return items;
 		}
 		return null;
@@ -123,6 +136,7 @@ public class ImportBackupTask extends AsyncTask<Void, Void, List<SettingsItem>> 
 		}
 		switch (importType) {
 			case COLLECT:
+			case COLLECT_AND_READ:
 				importDone = true;
 				collectListener.onBackupCollectFinished(items != null, false, this.items, remoteFiles);
 				break;
@@ -133,12 +147,10 @@ public class ImportBackupTask extends AsyncTask<Void, Void, List<SettingsItem>> 
 				}
 				break;
 			case IMPORT:
+			case IMPORT_FORCE_READ:
 				if (items != null && items.size() > 0) {
-					for (SettingsItem item : items) {
-						item.apply();
-					}
-					new ImportBackupItemsTask(helper, importListener, items)
-							.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+					new ImportBackupItemsTask(helper, importType == ImportType.IMPORT_FORCE_READ, importListener, items)
+							.executeOnExecutor(app.getBackupHelper().getExecutor());
 				}
 				break;
 		}

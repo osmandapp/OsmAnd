@@ -1,6 +1,7 @@
 package net.osmand.plus.base.bottomsheetmenu;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.ColorRes;
+import androidx.annotation.DimenRes;
 import androidx.annotation.LayoutRes;
 import androidx.core.content.ContextCompat;
 
@@ -78,7 +80,9 @@ public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 		descriptionTv = view.findViewById(R.id.description);
 		if (descriptionTv != null) {
 			changeDescriptionVisibility();
-			descriptionTv.setText(description);
+			if (description != null) {
+				descriptionTv.setText(description);
+			}
 			if (descriptionColorId != INVALID_ID) {
 				descriptionTv.setTextColor(ContextCompat.getColor(context, descriptionColorId));
 			}
@@ -92,7 +96,7 @@ public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 	}
 
 	private void changeDescriptionVisibility() {
-		if (Algorithms.isEmpty(description)) {
+		if (Algorithms.isEmpty(description) && Algorithms.isEmpty(descriptionTv.getText())) {
 			descriptionTv.setVisibility(View.GONE);
 		} else {
 			descriptionTv.setVisibility(View.VISIBLE);

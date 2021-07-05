@@ -293,9 +293,6 @@ public class RouteDataObject {
 	}
 
 	public String getRef(String lang, boolean transliterate, boolean direction) {
-		//if (getDestinationRef(direction) != null) {
-		//	return getDestinationRef(direction);
-		//}
 		if (names != null) {
 			if (Algorithms.isEmpty(lang)) {
 				return names.get(region.refTypeRule);
@@ -318,7 +315,7 @@ public class RouteDataObject {
 		return null;
 	}
 
-	public String getDestinationRef(boolean direction) {
+	public String getDestinationRef(String lang, boolean transliterate, boolean direction) {
 		if (names != null) {
 			int[] kt = names.keys();
 			String refTag = (direction == true) ? "destination:ref:forward" : "destination:ref:backward";
@@ -341,14 +338,10 @@ public class RouteDataObject {
 			}
 			//return names.get(region.refTypeRule);
 		}
-		return null;
+		return getRef(lang, transliterate, direction);
 	}
 
 	public String getDestinationName(String lang, boolean transliterate, boolean direction) {
-		//Issue #3289: Treat destination:ref like a destination, not like a ref
-		String destRef = ((getDestinationRef(direction) == null) || getDestinationRef(direction).equals(getRef(lang, transliterate, direction))) ? "" : getDestinationRef(direction);
-		String destRef1 = Algorithms.isEmpty(destRef) ? "" : destRef + ", ";
-
 		if (names != null) {
 			int[] kt = names.keys();
 
@@ -374,13 +367,13 @@ public class RouteDataObject {
 				int k = kt[i];
 				if (region.routeEncodingRules.size() > k) {
 					if (!Algorithms.isEmpty(lang) && destinationTagLangFB.equals(region.routeEncodingRules.get(k).getTag())) {
-						return destRef1 + ((transliterate) ? TransliterationHelper.transliterate(names.get(k)) : names.get(k));
+						return (transliterate) ? TransliterationHelper.transliterate(names.get(k)) : names.get(k);
 					}
 					if (destinationTagFB.equals(region.routeEncodingRules.get(k).getTag())) {
-						return destRef1 + ((transliterate) ? TransliterationHelper.transliterate(names.get(k)) : names.get(k));
+						return (transliterate) ? TransliterationHelper.transliterate(names.get(k)) : names.get(k);
 					}
 					if (!Algorithms.isEmpty(lang) && destinationTagLang.equals(region.routeEncodingRules.get(k).getTag())) {
-						return destRef1 + ((transliterate) ? TransliterationHelper.transliterate(names.get(k)) : names.get(k));
+						return (transliterate) ? TransliterationHelper.transliterate(names.get(k)) : names.get(k);
 					}
 					if (destinationTagDefault.equals(region.routeEncodingRules.get(k).getTag())) {
 						destinationDefault = names.get(k);
@@ -388,10 +381,10 @@ public class RouteDataObject {
 				}
 			}
 			if (destinationDefault != null) {
-				return destRef1 + ((transliterate) ? TransliterationHelper.transliterate(destinationDefault) : destinationDefault);
+				return (transliterate) ? TransliterationHelper.transliterate(destinationDefault) : destinationDefault;
 			}
 		}
-		return Algorithms.isEmpty(destRef) ? null : destRef;
+		return "";
 	}
 
 	public int getPoint31XTile(int i) {

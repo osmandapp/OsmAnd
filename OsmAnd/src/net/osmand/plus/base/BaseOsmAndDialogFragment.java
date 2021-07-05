@@ -47,6 +47,10 @@ public class BaseOsmAndDialogFragment extends DialogFragment {
 		return getIconsCache().getPaintedIcon(id, color);
 	}
 
+	protected Drawable getIcon(@DrawableRes int id) {
+		return getIconsCache().getIcon(id);
+	}
+
 	protected Drawable getIcon(@DrawableRes int id, @ColorRes int colorId) {
 		return getIconsCache().getIcon(id, colorId);
 	}

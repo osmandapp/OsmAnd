@@ -46,6 +46,8 @@ public abstract class StreamSettingsItem extends SettingsItem {
 		this.inputStream = inputStream;
 	}
 
+	public abstract long getSize();
+
 	@NonNull
 	@Override
 	public String getName() {

@@ -33,7 +33,7 @@ public class ActiveDownloadsDialogFragment extends DialogFragment implements Dow
 		return builder.create();
 	}
 	
-	public void newDownloadIndexes() {
+	public void onUpdatedIndexesList() {
 		adapter.refreshAllData();
 	};
 	

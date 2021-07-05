@@ -48,6 +48,7 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 	private Float customWidth;
 	private Integer customPointColor;
 	private RouteColoringType routeColoringType;
+	private String routeInfoAttribute;
 
 	private boolean needUpdate;
 
@@ -59,8 +60,10 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 	public void setRouteStyleParams(@Nullable @ColorInt Integer color,
 	                                @Nullable Float width,
 	                                @Nullable @ColorInt Integer pointColor,
-	                                @NonNull RouteColoringType routeColoringType) {
-		this.needUpdate = this.routeColoringType != routeColoringType;
+	                                @NonNull RouteColoringType routeColoringType,
+	                                @Nullable String routeInfoAttribute) {
+		this.needUpdate = this.routeColoringType != routeColoringType
+				|| !Algorithms.objectEquals(this.routeColoringType, routeColoringType);
 
 		if (!Algorithms.objectEquals(customWidth, width)) {
 			for (GeometryWayStyle<?> style : styleMap.values()) {
@@ -71,6 +74,7 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 		this.customWidth = width;
 		this.customPointColor = pointColor;
 		this.routeColoringType = routeColoringType;
+		this.routeInfoAttribute = routeInfoAttribute;
 		if (width != null) {
 			getContext().getAttrs().shadowPaint.setStrokeWidth(width + getContext().getDensity() * 2);
 		}
@@ -137,7 +141,7 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 
 		List<RouteSegmentResult> routeSegments = route.getOriginalRoute();
 		List<RouteStatistics> routeStatisticsList = RouteStatisticsHelper.calculateRouteStatistic(routeSegments,
-				Collections.singletonList(routeColoringType.getAttrName()), currentRenderer,
+				Collections.singletonList(routeInfoAttribute), currentRenderer,
 				defaultRenderer, currentSearchRequest, defaultSearchRequest);
 
 		List<Location> srcLocations = route.getImmutableAllLocations();
@@ -220,7 +224,7 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 				double percent = MapUtils.getProjectionCoeff(currLat, currLon, prevLat, prevLon, nextLat, nextLon);
 				int prevColor = locationProvider.getColor(startLocationIndex - 1);
 				int nextColor = locationProvider.getColor(startLocationIndex);
-				gradientWayStyle.currColor = RouteColorize.getGradientColor(prevColor, nextColor, percent);
+				gradientWayStyle.currColor = RouteColorize.getIntermediateColor(prevColor, nextColor, percent);
 				gradientWayStyle.nextColor = nextColor;
 			}
 		} else if (routeColoringType.isRouteInfoAttribute() && style instanceof GeometrySolidWayStyle) {
@@ -383,7 +387,7 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 		}
 	}
 
-	private static class GeometrySolidWayStyle extends GeometryWayStyle<RouteGeometryWayContext> {
+	public static class GeometrySolidWayStyle extends GeometryWayStyle<RouteGeometryWayContext> {
 
 		private final Integer directionArrowsColor;
 

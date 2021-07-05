@@ -72,8 +72,7 @@ public class ParkingTypeBottomSheetDialogFragment extends MenuBottomSheetDialogF
 				plugin.setParkingPosition(latitude, longitude, false);
 			}
 			mapActivity.refreshMap();
-			mapActivity.getMyApplication().getFavorites().setSpecialPoint(
-					plugin.getParkingPosition(), SpecialPointType.PARKING, null);
+			mapActivity.getMyApplication().getFavorites().setParkingPoint(plugin.getParkingPosition(), null, plugin.getParkingTime(), plugin.isParkingEventAdded());
 			if (!limited) {
 				plugin.showContextMenuIfNeeded(mapActivity, true);
 			}

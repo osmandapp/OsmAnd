@@ -12,7 +12,6 @@ public class LocalFile {
 
 	@Nullable
 	public File file;
-	public String subfolder;
 	public String fileName;
 	public long uploadTime = 0;
 	public long localModifiedTime = 0;
@@ -55,7 +54,7 @@ public class LocalFile {
 		return file.lastModified();
 	}
 
-	public String getFileName(boolean includeSubfolder) {
+	public String getFileName() {
 		String result;
 		if (fileName != null) {
 			result = fileName;
@@ -64,15 +63,22 @@ public class LocalFile {
 		} else {
 			result = fileName = file.getName();
 		}
-		if (includeSubfolder && !Algorithms.isEmpty(subfolder)) {
-			result = subfolder + "/" + result;
-		}
 		return result;
+	}
+
+	public String getTypeFileName() {
+		String type = item != null ? item.getType().name() : "";
+		String fileName = getFileName();
+		if (!Algorithms.isEmpty(fileName)) {
+			return type + (fileName.charAt(0) == '/' ? fileName : "/" + fileName);
+		} else {
+			return type;
+		}
 	}
 
 	@NonNull
 	@Override
 	public String toString() {
-		return getFileName(true);
+		return getFileName();
 	}
 }

@@ -105,8 +105,6 @@ public class RouteStatisticsHelper {
 			return Collections.emptyList();
 		}
 		List<RouteSegmentWithIncline> routeSegmentWithInclines = calculateInclineRouteSegments(route);
-		// "steepnessColor", "surfaceColor", "roadClassColor", "smoothnessColor"
-		// steepness=-19_-16
 		List<RouteStatistics>  result = new ArrayList<>();
 		if (Algorithms.isEmpty(attributesNames)) {
 			attributesNames = getRouteStatisticAttrsNames(currentRenderer, defaultRenderer);
@@ -124,7 +122,7 @@ public class RouteStatisticsHelper {
 	}
 
 	public static List<String> getRouteStatisticAttrsNames(RenderingRulesStorage currentRenderer,
-														   RenderingRulesStorage defaultRenderer) {
+	                                                       RenderingRulesStorage defaultRenderer) {
 		List<String> attributeNames = new ArrayList<>();
 		if (currentRenderer != null) {
 			for (String s : currentRenderer.getRenderingAttributeNames()) {
@@ -309,7 +307,8 @@ public class RouteStatisticsHelper {
 		final RenderingRuleSearchRequest defaultRenderingRuleSearchRequest;
 
 		RouteStatisticComputer(RenderingRulesStorage currentRenderer, RenderingRulesStorage defaultRenderer,
-							   RenderingRuleSearchRequest currentRenderingRuleSearchRequest, RenderingRuleSearchRequest defaultRenderingRuleSearchRequest) {
+		                       RenderingRuleSearchRequest currentRenderingRuleSearchRequest,
+		                       RenderingRuleSearchRequest defaultRenderingRuleSearchRequest) {
 			this.currentRenderer = currentRenderer;
 			this.defaultRenderer = defaultRenderer;
 			this.currentRenderingRuleSearchRequest = currentRenderingRuleSearchRequest;
@@ -526,8 +525,8 @@ public class RouteStatisticsHelper {
 			return res;
 		}
 
-		protected boolean searchRenderingAttribute(String attribute,
-												   RenderingRulesStorage rrs, RenderingRuleSearchRequest req, RouteSegmentWithIncline segment,
+		protected boolean searchRenderingAttribute(String attribute, RenderingRulesStorage rrs,
+		                                           RenderingRuleSearchRequest req, RouteSegmentWithIncline segment,
 												   int slopeClass) {
 			//String additional = attrName + "=" + attribute;
 			boolean mainTagAdded = false;

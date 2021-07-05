@@ -1012,9 +1012,6 @@
     <string name="audionotes_plugin_description">Machen Sie während einer Reise Audio-, Foto- und Video-Notizen, indem Sie entweder eine Karten-Schaltfläche oder ein Standort-Kontextmenü verwenden.</string>
     <string name="audionotes_plugin_name">Audio-/Video-Notizen</string>
     <string name="audionotes_location_not_defined">Benutzen Sie \'Standort verwenden … \', um dem Ort eine Notiz zuzuweisen.</string>
-    <string name="osmand_srtm_long_description_1000_chars">Diese Erweiterung beinhaltet Höhenlinien und Relief-Schattierungen, die als Ergänzung zu den Standard-Offline-Karten von OsmAnd angezeigt werden können. Diese Funktionalität ist vor allem für Sportler, Wanderer, Radfahrer, Trekker und jeden interessant, der sich für das Geländerelief einer Landschaft interessiert.
-\n 
-\nDie globalen Daten (zwischen 70° Nord und 70° Süd) basieren auf Messungen von SRTM (Shuttle Radar Topography Mission) und ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), einem bildgebenden System an Bord des Satelliten Terra, dem Flaggschiff des NASA-Programms zur Erdbeobachtung. ASTER beruht auf der erfolgreichen Zusammenarbeit zwischen der NASA, dem japanischen Ministerium für Wirtschaft, Handel und Industrie und dem japanischen Raumfahrtprogramm (J-spacesystems).</string>
     <string name="stop_routing_confirm">Sind Sie sicher, dass Sie die Navigation stoppen möchten?</string>
     <string name="clear_dest_confirm">Sind Sie sicher, dass Sie Ihr Ziel (und die Zwischenziele) löschen möchten?</string>
     <string name="precise_routing_mode_descr">Routen fehlerfrei berechnen. Diese Funktion ist dennoch auf kurze Entfernung begrenzt und langsam.</string>
@@ -3553,9 +3550,9 @@
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="osm_live_payment_subscription_management">Die Bezahlung wird Ihrem Google Play-Konto bei der Bestätigung des Kaufs belastet.
 \n
-\nDas Abonnement verlängert sich automatisch, sofern es nicht vor dem Verlängerungsdatum gekündigt wird. Ihr Konto wird für den Verlängerungszeitraum (Monat / drei Monate / Jahr) nur am Verlängerungsdatum belastet.
+\n Das Abonnement verlängert sich automatisch, sofern es nicht vor dem Verlängerungsdatum gekündigt wird. Ihr Konto wird für den Verlängerungszeitraum (Monat / drei Monate / Jahr) nur am Verlängerungsdatum belastet.
 \n
-\nSie können Ihre Abonnements verwalten und kündigen, indem Sie zu Ihren Google Play-Einstellungen gehen.</string>
+\n Sie können Ihre Abonnements verwalten und kündigen, indem Sie zu Ihren Google Play-Einstellungen gehen.</string>
     <string name="search_poi_types">Suche nach POI-Typen</string>
     <string name="search_poi_types_descr">Kombinieren Sie POI-Typen aus verschiedenen Kategorien. Tippen Sie auf den Schalter, um alle auszuwählen, tippen Sie auf die linke Seite zur Kategorieauswahl.</string>
     <string name="shared_string_divider">Trenner</string>
@@ -3691,7 +3688,7 @@
     <string name="use_volume_buttons_as_zoom">Lautstärketasten als Zoom</string>
     <string name="lenght_limit_description">Bitte geben Sie Ihre Fahrzeuglänge an. Für lange Fahrzeuge könnten einige Streckenabschnitte nicht befahrbar sein.</string>
     <string name="quick_action_remove_next_destination">Nächstgelegenen Zielpunkt löschen</string>
-    <string name="please_provide_point_name_error">Bitte geben Sie einen Namen für das Profil an</string>
+    <string name="please_provide_point_name_error">Bitte geben Sie einen Namen für den Favoriten an</string>
     <string name="quick_action_remove_next_destination_descr">Löscht das nächste Ziel auf Ihrer Route. Wenn dies das endgültige Ziel ist, wird die Navigation gestoppt.</string>
     <string name="search_download_wikipedia_maps">Wikipedia-Karten herunterladen</string>
     <string name="plugin_wikipedia_description">Holen Sie sich Informationen über Sehenswürdigkeiten aus Wikipedia, einem Offline-Reiseführer für die Hosentasche mit Artikeln über Orte und Ziele.</string>
@@ -3772,7 +3769,7 @@
     <string name="save_global_track_interval_descr">Aufzeichnungsintervall für die generelle Track-Aufzeichnung festlegen (wird über die Schaltfläche \'Routenaufzeichung\' auf dem Kartenbildschirm angeschaltet).</string>
     <string name="route_between_points_warning_desc">Als nächstes können Sie Ihren Track mit einem Ihrer Navigationsprofile auf die nächstgelegene erlaubte Straße einrasten lassen, um diese Option zu nutzen.</string>
     <string name="quick_action_add_gpx">Track-Wegpunkt hinzufügen</string>
-    <string name="number_of_gpx_files_selected_pattern">%s Track Dateien ausgewählt</string>
+    <string name="number_of_gpx_files_selected_pattern">%s Track-Dateien ausgewählt</string>
     <string name="simplified_track_description">Nur die Routenlinie wird gespeichert, die Wegpunkte werden gelöscht.</string>
     <string name="one_point_error">Bitte fügen Sie mindestens zwei Punkte hinzu.</string>
     <string name="shared_string_save_as_gpx">Als neue Track-Datei speichern</string>
@@ -4176,4 +4173,59 @@
     <string name="receiving_data_from_server">Empfange Daten vom Server</string>
     <string name="restore_complete">Wiederherstellung abgeschlossen</string>
     <string name="grey_color_slope">Graue Farbe wird verwendet, wenn die Steigung undefiniert ist.</string>
+    <string name="backup_version_history">Versionsgeschichte</string>
+    <string name="backup_storage_taken">Belegter Speicher</string>
+    <string name="backup_version_history_delete_descr">Möchten Sie die Änderungshistorie für deaktivierte Typen aus der Cloud löschen\?</string>
+    <string name="delete_version_history">Versionsgeschichte löschen</string>
+    <string name="routing_attr_avoid_tunnels_description">Tunnel vermeiden</string>
+    <string name="routing_attr_avoid_tunnels_name">Tunnel vermeiden</string>
+    <string name="send_crash_log">Crash Log senden</string>
+    <string name="send_logcat_log">Logcat Log senden</string>
+    <string name="backup_promocode">Aktionscode</string>
+    <string name="unlimited_map_downloads">Unbegrenzte Karten-Downloads</string>
+    <string name="wikipedia_and_wikivoyage_offline">Wikipedia und Wikivoyage offline</string>
+    <string name="offline_wikipeadia">Wikipedia offline</string>
+    <string name="offline_wikivoyage">Wikivoyage offline</string>
+    <string name="terrain_maps">Terrainkarten</string>
+    <string name="nautical_depth">Nautische Tiefe</string>
+    <string name="advanced_widgets">Erweiterte Wigdets</string>
+    <string name="ltr_or_rtl_combine_via_or">%1$s oder %2$s</string>
+    <string name="shared_string_learn_more">Mehr erfahren</string>
+    <string name="cancel_anytime_in_huawei_appgallery">Jederzeit in der Huawei AppGallery kündigen</string>
+    <string name="cancel_anytime_in_gplay">Jederzeit auf Google Play kündigen.</string>
+    <string name="shared_string_not_included">Nicht enthalten</string>
+    <string name="shared_string_includes">Enthält</string>
+    <string name="complete_purchase">Vollständiger Kauf</string>
+    <string name="regular_price">Normaler Preis</string>
+    <string name="purchases_feature_desc_nautical">Zugang zu Informationen über Wassertiefen erhalten</string>
+    <string name="purchases_feature_desc_terrain">Höhenlinien, Reliefkarten mit dunklen Schattierungen und Hangneigungskarten mit Farben zur Darstellung von Erhebungen und Niederungen.</string>
+    <string name="purchases_feature_desc_wikipedia">Erkunden Sie Wikipedia offline. Artikel sind nach Ländern und Regionen unterteilt und in allen Sprachen verfügbar.</string>
+    <string name="purchases_feature_desc_combined_wiki">Erkunden Sie Wikipedia Artikel auch unterwegs, ohne Internetverbindung. Offline Daten sind nach Ländern aufgeteilt und in allen Sprachen verfügbar.</string>
+    <string name="purchases_feature_desc_unlimited_map_download">Erhalten Sie unbegrenzte Downloads für Offline-Karten aller Kontinente und Regionen.</string>
+    <string name="purchases_feature_desc_monthly_map_updates">Erhalten Sie Zugang zu den regulären monatlichen Updates für Offlinekarten.</string>
+    <string name="purchases_feature_desc_hourly_map_updates">Erhalten Sie Zugang zu häufigeren Kartenaktualisierungen. Wählen Sie zwischen: stündlichen, täglichen oder wöchentlichen Aktualisierungen. Updates werden inkrementell heruntergeladen, nur für den geänderten Bereich.</string>
+    <string name="purchases_feature_desc_advanced_widgets">Erhalten Sie Zugang zu den erweiterten OsmAnd Widgets.</string>
+    <string name="purchases_feature_desc_osmand_cloud">Holen Sie sich OsmAnd Cloud, um alle OsmAnd Daten online zu speichern. Kein Verlust Ihrer Daten mehr nach einer Neuinstallation. Sichern Sie alle Informationen und stellen Sie sie problemlos wieder her.</string>
+    <string name="terrain_maps_contour_lines_hillshade_slope">Geländekarten: Höhenlinien, Relief, Hangneigung</string>
+    <string name="you_can_get_feature_as_part_of_pattern">Sie können \"%1$s\" als Teil vom %2$s Tarif erhalten. Vergleichen Sie die Tarife:</string>
+    <string name="not_available_with">Nicht verfügbar mit %1$s</string>
+    <string name="redeem_promo_code">Aktionscode einlösen</string>
+    <string name="from_with_param">Von %1$s</string>
+    <string name="continue_with">Mit %1$s fortfahren</string>
+    <string name="osmand_maps_plus_tagline">Erweiterte Features erhalten</string>
+    <string name="osmand_pro_tagline">Alle Features erhalten</string>
+    <string name="backup_delete_types">Deaktivierte Datentypen löschen</string>
+    <string name="shared_string_discussion">Diskussion</string>
+    <string name="shared_string_view_all">Alle anzeigen</string>
+    <string name="backup_delete_types_descr">Möchten Sie die Daten aus der Cloud entfernen, die sie deaktiviert haben\?</string>
+    <string name="backup_error_user_is_already_registered">Benutzer wurde bereits mit dieser E-Mail registriert</string>
+    <string name="backup_error_subscription_was_expired">Abonnement ist nicht mehr gültig</string>
+    <string name="backup_error_subscription_was_used">Abonnement oder Aktionsangebot wurde von einem anderen Konto verwendet %1$s</string>
+    <string name="backup_error_size_is_exceeded">Maximale Größe der OsmAnd Cloud überschritten %1$s</string>
+    <string name="backup_error_gzip_only_supported_upload">Datei wird nicht im gzip-Format übertragen</string>
+    <string name="backup_error_file_not_available">Datei ist nicht verfügbar</string>
+    <string name="backup_error_token_is_not_valid">Angegebene Geräte-ID oder Token ist nicht gültig</string>
+    <string name="backup_error_user_is_not_registered">Benutzer mit dieser E-Mail ist nicht registriert</string>
+    <string name="backup_error_token_is_not_valid_or_expired">Token ist nicht gültig oder abgelaufen</string>
+    <string name="backup_error_no_valid_subscription">Kein gültiges Abonnement vorhanden</string>
 </resources>

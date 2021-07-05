@@ -111,7 +111,7 @@ public class TransportRoute extends MapObject {
 	}
 	
 	// intrusive operation cause it changes ways itself!
-	private static void mergeRouteWays(List<Way> forwardWays) {
+	public static void mergeRouteWays(List<Way> forwardWays) {
 		boolean changed = true;
 		// combine as many ways as possible
 		while (changed && forwardWays != null) {

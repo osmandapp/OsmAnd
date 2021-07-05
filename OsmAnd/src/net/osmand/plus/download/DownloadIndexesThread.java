@@ -64,7 +64,7 @@ public class DownloadIndexesThread {
 
 	public interface DownloadEvents {
 		
-		void newDownloadIndexes();
+		void onUpdatedIndexesList();
 		
 		void downloadInProgress();
 		
@@ -151,9 +151,9 @@ public class DownloadIndexesThread {
 	}
 	
 	@UiThread
-	protected void newDownloadIndexes() {
+	protected void onUpdatedIndexesList() {
 		if (uiActivity != null) {
-			uiActivity.newDownloadIndexes();
+			uiActivity.onUpdatedIndexesList();
 		}
 	}
 
@@ -305,6 +305,12 @@ public class DownloadIndexesThread {
 	public double getAvailableSpace() {
 		return AndroidUtils.getAvailableSpace(app) / (1 << 20);
 	}
+
+	public boolean shouldDownloadIndexes() {
+		return app.getSettings().isInternetConnectionAvailable()
+				&& !indexes.isDownloadedFromInternet
+				&& !indexes.downloadFromInternetFailed;
+	}
 	
 	/// PRIVATE IMPL
 
@@ -370,7 +376,7 @@ public class DownloadIndexesThread {
 				showWarnDialog();
 			}
 			currentRunningTask.remove(this);
-			newDownloadIndexes();
+			onUpdatedIndexesList();
 		}
 
 		private void showWarnDialog() {

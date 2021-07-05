@@ -428,13 +428,13 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			if (operation == RESTORE_OPERATION || operation == BACKUP_OPERATION || operation == CLEAR_TILES_OPERATION) {
 				a.reloadLocalIndexes();
 			} else {
-				a.newDownloadIndexes();
+				a.onUpdatedIndexesList();
 			}
 		}
 	}
 
 	@Override
-	public void newDownloadIndexes() {
+	public void onUpdatedIndexesList() {
 		reloadData();
 	}
 

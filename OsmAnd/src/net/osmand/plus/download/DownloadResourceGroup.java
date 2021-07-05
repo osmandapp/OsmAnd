@@ -3,6 +3,7 @@ package net.osmand.plus.download;
 import android.annotation.SuppressLint;
 import android.content.Context;
 
+import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
@@ -211,13 +212,13 @@ public class DownloadResourceGroup {
 	}
 
 	public void addGroup(DownloadResourceGroup g) {
-		if(type.isScreen()) {
+		if (type.isScreen()) {
 			if(!g.type.isHeader()) {
 				throw new UnsupportedOperationException("Trying to add " + g.getUniqueId() + " to " + getUniqueId());
 			}
 		}
-		if(type.isHeader()) {
-			if(!g.type.isScreen()) {
+		if (type.isHeader()) {
+			if (!g.type.isScreen()) {
 				throw new UnsupportedOperationException("Trying to add " + g.getUniqueId() + " to " + getUniqueId());
 			}
 		}
@@ -226,25 +227,10 @@ public class DownloadResourceGroup {
 	}
 
 	protected void sortDownloadItems(List<DownloadItem> items) {
-		if (Algorithms.isEmpty(items)) return;
-		final net.osmand.Collator collator = OsmAndCollator.primaryCollator();
-		final OsmandApplication app = getRoot().app;
-		final OsmandRegions osmandRegions = app.getRegions();
-		Collections.sort(items, new Comparator<DownloadItem>() {
-			@Override
-			public int compare(DownloadItem firstItem, DownloadItem secondItem) {
-				int firstOrder = firstItem.getType().getOrderIndex();
-				int secondOrder = secondItem.getType().getOrderIndex();
-				if(firstOrder < secondOrder) {
-					return -1;
-				} else if(firstOrder > secondOrder) {
-					return 1;
-				}
-				String firstName = firstItem.getVisibleName(app, osmandRegions);
-				String secondName = secondItem.getVisibleName(app, osmandRegions);
-				return collator.compare(firstName, secondName);
-			}
-		});
+		if (Algorithms.isEmpty(items)) {
+			return;
+		}
+		Collections.sort(items, getComparator(getRoot().app));
 	}
 	
 	public void addItem(DownloadItem i) {
@@ -369,5 +355,22 @@ public class DownloadResourceGroup {
 
 	public String getId() {
 		return id;
+	}
+
+	public static Comparator<DownloadItem> getComparator(final OsmandApplication app) {
+		final OsmandRegions osmandRegions = app.getRegions();
+		final Collator collator = OsmAndCollator.primaryCollator();
+		return (firstItem, secondItem) -> {
+			int firstOrder = firstItem.getType().getOrderIndex();
+			int secondOrder = secondItem.getType().getOrderIndex();
+			if (firstOrder < secondOrder) {
+				return -1;
+			} else if (firstOrder > secondOrder) {
+				return 1;
+			}
+			String firstName = firstItem.getVisibleName(app, osmandRegions);
+			String secondName = secondItem.getVisibleName(app, osmandRegions);
+			return collator.compare(firstName, secondName);
+		};
 	}
 }

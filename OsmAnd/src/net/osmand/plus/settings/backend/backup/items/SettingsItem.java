@@ -8,7 +8,6 @@ import androidx.annotation.Nullable;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.IProgress;
-import net.osmand.ProgressOutputStream;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
@@ -29,6 +28,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -115,7 +115,9 @@ public abstract class SettingsItem {
 		this.lastModifiedTime = lastModified;
 	}
 
-	protected abstract long getLocalModifiedTime();
+	public abstract long getLocalModifiedTime();
+
+	public abstract void setLocalModifiedTime(long lastModifiedTime);
 
 	public boolean applyFileName(@NonNull String fileName) {
 		String n = getFileName();
@@ -130,13 +132,10 @@ public abstract class SettingsItem {
 		this.shouldReplace = shouldReplace;
 	}
 
-	@NonNull
+	@Nullable
 	public static SettingsItemType parseItemType(@NonNull JSONObject json) throws IllegalArgumentException, JSONException {
 		String typeName = json.has("type") ? json.getString("type") : null;
-		if (typeName == null) {
-			throw new IllegalArgumentException("No type field");
-		}
-		return SettingsItemType.fromName(typeName);
+		return typeName == null ? null : SettingsItemType.fromName(typeName);
 	}
 
 	public boolean exists() {
@@ -241,12 +240,19 @@ public abstract class SettingsItem {
 				JSONObject json = writeItemsToJson(new JSONObject());
 				if (json.length() > 0) {
 					try {
-						InputStream inputStream = new ByteArrayInputStream(json.toString(2).getBytes("UTF-8"));
-						Algorithms.streamCopy(inputStream, outputStream, progress, 1024);
+						int bytesDivisor = 1024;
+						byte[] bytes = json.toString(2).getBytes("UTF-8");
+						if (progress != null) {
+							progress.startWork(bytes.length / bytesDivisor);
+						}
+						Algorithms.streamCopy(new ByteArrayInputStream(bytes), outputStream, progress, bytesDivisor);
 					} catch (JSONException e) {
 						warnings.add(app.getString(R.string.settings_item_write_error, String.valueOf(getType())));
 						SettingsHelper.LOG.error("Failed to write json to stream", e);
 					}
+				}
+				if (progress != null) {
+					progress.finishTask();
 				}
 			}
 		};
@@ -257,9 +263,8 @@ public abstract class SettingsItem {
 		return new SettingsItemWriter<SettingsItem>(this) {
 			@Override
 			public void writeToStream(@NonNull OutputStream outputStream, @Nullable IProgress progress) throws IOException {
-				ProgressOutputStream progressOutputStream = new ProgressOutputStream(outputStream, progress);
-				Exception error = GPXUtilities.writeGpx(
-						new BufferedWriter(new OutputStreamWriter(progressOutputStream, "UTF-8")), gpxFile);
+				Writer writer = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+				Exception error = GPXUtilities.writeGpx(writer, gpxFile, progress);
 				if (error != null) {
 					warnings.add(app.getString(R.string.settings_item_write_error, String.valueOf(getType())));
 					SettingsHelper.LOG.error("Failed write to gpx file", error);

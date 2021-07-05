@@ -17,8 +17,8 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.enums.DayNightMode;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
-import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
+import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
 import net.osmand.plus.routing.RouteColoringType;
 import net.osmand.plus.settings.backend.ListStringPreference;
@@ -32,9 +32,11 @@ import net.osmand.plus.widgets.multistatetoggle.RadioItem;
 import net.osmand.plus.widgets.multistatetoggle.RadioItem.OnRadioItemClickListener;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
+import net.osmand.render.RenderingRulesStorage;
+import net.osmand.router.RouteStatisticsHelper;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -63,6 +65,7 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 	private ViewGroup cardsContainer;
 
 	private RouteColoringType selectedType;
+	private String selectedRouteInfoAttribute;
 	private PreviewRouteLineInfo previewRouteLineInfo;
 	private DayNightMode initMapTheme;
 	private DayNightMode selectedMapTheme;
@@ -107,6 +110,7 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 
 	private void initSelectedMode() {
 		selectedType = previewRouteLineInfo.getRouteColoringType();
+		selectedRouteInfoAttribute = previewRouteLineInfo.getRouteInfoAttribute();
 		modeChanged();
 	}
 
@@ -129,13 +133,16 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 			colorsCard.updateVisibility(false);
 			gradientCard.updateVisibility(true);
 			previewRouteLineInfo.setUseDefaultColor(false);
+			changeMapTheme(initMapTheme);
 		} else {
 			AndroidUiHelper.updateVisibility(themeToggleContainer, false);
 			colorsCard.updateVisibility(false);
 			gradientCard.updateVisibility(false);
 			previewRouteLineInfo.setUseDefaultColor(false);
+			changeMapTheme(initMapTheme);
 		}
 		previewRouteLineInfo.setRouteColoringType(selectedType);
+		previewRouteLineInfo.setRouteInfoAttribute(selectedRouteInfoAttribute);
 		updateColorItems();
 		updateDescription();
 	}
@@ -231,26 +238,30 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 		if (targetFragment instanceof OnSelectedColorChangeListener) {
 			((OnSelectedColorChangeListener) targetFragment).onSelectedColorChanged();
 		}
-		updateColorName();
+		updateHeader();
 	}
 
 	@Override
 	public void onNeedUpdateHeader() {
-		updateColorName();
+		updateHeader();
 	}
 
-	private void updateColorName() {
+	private void updateHeader() {
 		String title = app.getString(R.string.shared_string_color);
+		String colorName = getColorName();
+		headerUiAdapter.onUpdateHeader(this, title, colorName);
+	}
+
+	@NonNull
+	private String getColorName() {
 		String colorName = "";
-		if (selectedType.isDefault()) {
-			colorName = app.getString(R.string.map_widget_renderer);
-		} else if (selectedType.isGradient() || selectedType.isRouteInfoAttribute()) {
-			colorName = selectedType.getHumanString(app);
+		if (selectedType.isDefault() || selectedType.isGradient() || selectedType.isRouteInfoAttribute()) {
+			colorName = selectedType.getHumanString(app, selectedRouteInfoAttribute);
 		} else if (getRouteLineColor() != null) {
 			int colorNameId = ColorDialogs.getColorName(getRouteLineColor());
 			colorName = app.getString(colorNameId);
 		}
-		headerUiAdapter.onUpdateHeader(this, title, colorName);
+		return colorName;
 	}
 
 	private void updateDescription() {
@@ -294,7 +305,28 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 
 	private class ColorTypeAdapter extends RecyclerView.Adapter<AppearanceViewHolder> {
 
-		private final List<RouteColoringType> items = Arrays.asList(RouteColoringType.values());
+		private final List<String> coloringTypes = new ArrayList<>();
+
+		public ColorTypeAdapter() {
+			coloringTypes.addAll(listStaticColoringTypes());
+			coloringTypes.addAll(listRouteInfoAttributes());
+		}
+
+		private List<String> listStaticColoringTypes() {
+			List<String> coloringTypes = new ArrayList<>();
+			for (RouteColoringType coloringType : RouteColoringType.values()) {
+				if (!coloringType.isRouteInfoAttribute()) {
+					coloringTypes.add(coloringType.getName());
+				}
+			}
+			return coloringTypes;
+		}
+
+		private List<String> listRouteInfoAttributes() {
+			RenderingRulesStorage defaultRenderer = app.getRendererRegistry().getCurrentSelectedRenderer();
+			RenderingRulesStorage currentRenderer = app.getRendererRegistry().defaultRender();
+			return RouteStatisticsHelper.getRouteStatisticAttrsNames(currentRenderer, defaultRenderer);
+		}
 
 		@NonNull
 		@Override
@@ -315,14 +347,16 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 
 		@Override
 		public void onBindViewHolder(@NonNull final AppearanceViewHolder holder, int position) {
-			RouteColoringType item = items.get(position);
-			holder.title.setText(item.getHumanString(app));
+			String coloringTypeName = coloringTypes.get(position);
+			RouteColoringType coloringType = RouteColoringType.getColoringTypeByName(coloringTypeName);
 
-			updateButtonBg(holder, item);
-			updateTextAndIconColor(holder, item);
+			holder.title.setText(coloringType.getHumanString(app, coloringTypeName));
+			updateButtonBg(holder, coloringType, coloringTypeName);
+			updateTextAndIconColor(holder, coloringType, coloringTypeName);
 
 			holder.itemView.setOnClickListener(view -> {
-				selectedType = items.get(holder.getAdapterPosition());
+				selectedType = coloringType;
+				selectedRouteInfoAttribute = coloringTypeName;
 				notifyItemRangeChanged(0, getItemCount());
 
 				modeChanged();
@@ -334,11 +368,15 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 			});
 		}
 
-		private void updateButtonBg(AppearanceViewHolder holder, RouteColoringType item) {
-			GradientDrawable rectContourDrawable = (GradientDrawable) AppCompatResources.getDrawable(app, R.drawable.bg_select_group_button_outline);
+		private void updateButtonBg(AppearanceViewHolder holder, RouteColoringType coloringType,
+		                            String coloringTypeName) {
+			GradientDrawable rectContourDrawable = (GradientDrawable) AppCompatResources
+					.getDrawable(app, R.drawable.bg_select_group_button_outline);
 			if (rectContourDrawable != null) {
-				if (selectedType == item) {
-					int strokeColor = ContextCompat.getColor(app, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
+				if (isItemSelected(coloringType, coloringTypeName)) {
+					int strokeColorRes = nightMode ?
+							R.color.active_color_primary_dark : R.color.active_color_primary_light;
+					int strokeColor = ContextCompat.getColor(app, strokeColorRes);
 					rectContourDrawable.setStroke(AndroidUtils.dpToPx(app, 2), strokeColor);
 				} else {
 					int strokeColor = ContextCompat.getColor(app, nightMode ?
@@ -350,12 +388,13 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 			}
 		}
 
-		private void updateTextAndIconColor(AppearanceViewHolder holder, RouteColoringType item) {
+		private void updateTextAndIconColor(AppearanceViewHolder holder, RouteColoringType coloringType,
+		                                    String coloringTypeName) {
 			Context ctx = holder.itemView.getContext();
 			int iconColorId;
 			int textColorId;
 
-			if (selectedType == item) {
+			if (isItemSelected(coloringType, coloringTypeName)) {
 				iconColorId = AndroidUtils.getColorFromAttr(ctx, R.attr.default_icon_color);
 				textColorId = AndroidUtils.getColorFromAttr(ctx, android.R.attr.textColor);
 			} else {
@@ -363,13 +402,22 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 				textColorId = iconColorId;
 			}
 
-			holder.icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(item.getIconId(), iconColorId));
+			holder.icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(coloringType.getIconId(), iconColorId));
 			holder.title.setTextColor(textColorId);
+		}
+
+		private boolean isItemSelected(RouteColoringType coloringType, String coloringTypeName) {
+			if (coloringType.isRouteInfoAttribute()) {
+				return Algorithms.objectEquals(selectedRouteInfoAttribute, coloringTypeName)
+						&& selectedType == coloringType;
+			} else {
+				return selectedType == coloringType;
+			}
 		}
 
 		@Override
 		public int getItemCount() {
-			return items.size();
+			return coloringTypes.size();
 		}
 	}
 

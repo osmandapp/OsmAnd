@@ -82,6 +82,12 @@ public class PoiFiltersHelper {
 		return lastModifiedTime;
 	}
 
+	public void setLastModifiedTime(long lastModifiedTime) {
+		PoiFilterDbHelper helper = openDbHelperNoPois();
+		helper.setLastModifiedTime(lastModifiedTime);
+		helper.close();
+	}
+
 	public NominatimPoiFilter getNominatimPOIFilter() {
 		if (nominatimPOIFilter == null) {
 			nominatimPOIFilter = new NominatimPoiFilter(application, false);
@@ -736,6 +742,10 @@ public class PoiFiltersHelper {
 				BackupHelper.setLastModifiedTime(context, FILTERS_LAST_MODIFIED_NAME, lastModifiedTime);
 			}
 			return lastModifiedTime;
+		}
+
+		public void setLastModifiedTime(long lastModifiedTime) {
+			BackupHelper.setLastModifiedTime(context, FILTERS_LAST_MODIFIED_NAME, lastModifiedTime);
 		}
 
 		private void updateLastModifiedTime() {

@@ -2,6 +2,8 @@ package net.osmand.plus;
 
 import android.content.Context;
 
+import net.osmand.plus.ContextMenuAdapter.OnItemDeleteAction;
+
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
@@ -9,8 +11,6 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
-
-import net.osmand.plus.ContextMenuAdapter.OnItemDeleteAction;
 
 public class ContextMenuItem {
 	public static final int INVALID_ID = -1;
@@ -37,6 +37,7 @@ public class ContextMenuItem {
 	private String description;
 	private final OnUpdateCallback onUpdateCallback;
 	private final ContextMenuAdapter.ItemClickListener itemClickListener;
+	private final ContextMenuAdapter.ItemLongClickListener itemLongClickListener;
 	private final ContextMenuAdapter.OnIntegerValueChangedListener integerListener;
 	private final ContextMenuAdapter.ProgressListener progressListener;
 	private final OnItemDeleteAction itemDeleteAction;
@@ -62,6 +63,7 @@ public class ContextMenuItem {
 							String description,
 							OnUpdateCallback onUpdateCallback,
 							ContextMenuAdapter.ItemClickListener itemClickListener,
+							ContextMenuAdapter.ItemLongClickListener itemLongClickListener,
 							ContextMenuAdapter.OnIntegerValueChangedListener integerListener,
 							ContextMenuAdapter.ProgressListener progressListener,
 							OnItemDeleteAction itemDeleteAction,
@@ -86,6 +88,7 @@ public class ContextMenuItem {
 		this.description = description;
 		this.onUpdateCallback = onUpdateCallback;
 		this.itemClickListener = itemClickListener;
+		this.itemLongClickListener = itemLongClickListener;
 		this.integerListener = integerListener;
 		this.progressListener = progressListener;
 		this.hideDivider = hideDivider;
@@ -169,14 +172,22 @@ public class ContextMenuItem {
 		return itemDeleteAction;
 	}
 
+	@Nullable
 	public ContextMenuAdapter.ItemClickListener getItemClickListener() {
 		return itemClickListener;
 	}
 
+	@Nullable
+	public ContextMenuAdapter.ItemLongClickListener getItemLongClickListener() {
+		return itemLongClickListener;
+	}
+
+	@Nullable
 	public ContextMenuAdapter.OnIntegerValueChangedListener getIntegerListener() {
 		return integerListener;
 	}
 
+	@Nullable
 	public ContextMenuAdapter.ProgressListener getProgressListener() {
 		return progressListener;
 	}
@@ -280,6 +291,7 @@ public class ContextMenuItem {
 		private String mDescription = null;
 		private OnUpdateCallback mOnUpdateCallback = null;
 		private ContextMenuAdapter.ItemClickListener mItemClickListener = null;
+		private ContextMenuAdapter.ItemLongClickListener mItemLongClickListener = null;
 		private ContextMenuAdapter.OnIntegerValueChangedListener mIntegerListener = null;
 		private ContextMenuAdapter.ProgressListener mProgressListener = null;
 		private OnItemDeleteAction mItemDeleteAction = null;
@@ -376,6 +388,11 @@ public class ContextMenuItem {
 			return this;
 		}
 
+		public ItemBuilder setLongClickListener(ContextMenuAdapter.ItemLongClickListener longClickListener) {
+			mItemLongClickListener = longClickListener;
+			return this;
+		}
+
 		public ItemBuilder setIntegerListener(ContextMenuAdapter.OnIntegerValueChangedListener integerListener) {
 			mIntegerListener = integerListener;
 			return this;
@@ -428,8 +445,9 @@ public class ContextMenuItem {
 		public ContextMenuItem createItem() {
 			ContextMenuItem item = new ContextMenuItem(mTitleId, mTitle, mIcon, mColor, mSecondaryIcon,
 					mSelected, mProgress, mLayout, mLoading, mIsCategory, mIsClickable, mSkipPaintingWithoutColor,
-					mOrder, mDescription, mOnUpdateCallback, mItemClickListener, mIntegerListener, mProgressListener,
-					mItemDeleteAction, mHideDivider, mHideCompoundButton, mMinHeight, mTag, mId);
+					mOrder, mDescription, mOnUpdateCallback, mItemClickListener, mItemLongClickListener,
+					mIntegerListener, mProgressListener, mItemDeleteAction, mHideDivider, mHideCompoundButton,
+					mMinHeight, mTag, mId);
 			item.update();
 			return item;
 		}

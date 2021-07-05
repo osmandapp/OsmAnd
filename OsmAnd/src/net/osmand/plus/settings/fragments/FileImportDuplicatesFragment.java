@@ -79,7 +79,7 @@ public class FileImportDuplicatesFragment extends ImportDuplicatesFragment {
 		toolbarLayout.setTitle(getString(R.string.shared_string_importing));
 		description.setText(UiUtilities.createSpannableString(
 				String.format(getString(R.string.importing_from), file.getName()),
-				new StyleSpan(Typeface.BOLD), file.getName()
+				Typeface.BOLD, file.getName()
 		));
 	}
 

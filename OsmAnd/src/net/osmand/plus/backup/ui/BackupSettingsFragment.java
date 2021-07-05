@@ -25,8 +25,9 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.backup.BackupHelper;
-import net.osmand.plus.backup.BackupHelper.OnDeleteFilesListener;
+import net.osmand.plus.backup.BackupListeners.OnDeleteFilesListener;
 import net.osmand.plus.backup.PrepareBackupResult;
+import net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
 import net.osmand.plus.backup.RemoteFile;
 import net.osmand.plus.backup.UserNotRegisteredException;
@@ -34,13 +35,13 @@ import net.osmand.plus.backup.ui.DeleteAllDataConfirmationBottomSheet.OnConfirmD
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.settings.backend.backup.items.SettingsItem;
+import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 
 public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDeleteFilesListener,
@@ -51,7 +52,7 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 	private OsmandApplication app;
 	private BackupHelper backupHelper;
 
-	private List<SettingsItem> oldItems = new ArrayList<>();
+	private Map<String, RemoteFile> oldRemoteFiles = new HashMap<>();
 
 	private ProgressBar progressBar;
 
@@ -103,12 +104,14 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 		if (!backupHelper.isBackupPreparing()) {
 			onBackupPrepared(backupHelper.getBackup());
 		}
+		backupHelper.getBackupListeners().addDeleteFilesListener(this);
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
 		backupHelper.removePrepareBackupListener(this);
+		backupHelper.getBackupListeners().removeDeleteFilesListener(this);
 	}
 
 	private void setupBackupTypes(View view) {
@@ -173,23 +176,20 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 			public void onClick(View v) {
 				FragmentActivity activity = getActivity();
 				if (activity != null) {
-					VersionHistoryFragment.showInstance(activity.getSupportFragmentManager(), oldItems);
+					VersionHistoryFragment.showInstance(activity.getSupportFragmentManager());
 				}
 			}
 		});
 		setupSelectableBackground(container);
 
 		TextView summary = container.findViewById(android.R.id.summary);
-		List<RemoteFile> remoteFiles = backupHelper.getBackup().getRemoteFiles();
-		if (!Algorithms.isEmpty(oldItems) && !Algorithms.isEmpty(remoteFiles)) {
-			AndroidUiHelper.updateVisibility(summary, true);
+		if (!Algorithms.isEmpty(oldRemoteFiles)) {
 			int filesSize = 0;
-			for (RemoteFile remoteFile : remoteFiles) {
-				if (oldItems.contains(remoteFile.item)) {
-					filesSize += remoteFile.getFilesize();
-				}
+			for (RemoteFile remoteFile : oldRemoteFiles.values()) {
+				filesSize += remoteFile.getFilesize();
 			}
 			summary.setText(AndroidUtils.formatSize(app, filesSize));
+			AndroidUiHelper.updateVisibility(summary, true);
 		} else {
 			AndroidUiHelper.updateVisibility(summary, false);
 		}
@@ -258,7 +258,7 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 	public void onBackupPrepared(@Nullable PrepareBackupResult backupResult) {
 		updateProgressVisibility(false);
 		if (backupResult != null && Algorithms.isEmpty(backupResult.getError())) {
-			oldItems = backupResult.getSettingsItems();
+			oldRemoteFiles = backupResult.getRemoteFiles(RemoteFilesType.OLD);
 			View view = getView();
 			if (view != null) {
 				setupVersionHistory(view);
@@ -269,7 +269,7 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 	private void deleteAllFiles() {
 		try {
 			updateProgressVisibility(true);
-			backupHelper.deleteAllFiles(BackupSettingsFragment.this);
+			backupHelper.deleteAllFiles(Arrays.asList(ExportSettingsType.values()));
 		} catch (UserNotRegisteredException e) {
 			updateProgressVisibility(false);
 			log.error(e);
@@ -279,7 +279,7 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 	protected void deleteOldFiles() {
 		try {
 			updateProgressVisibility(true);
-			backupHelper.deleteOldFiles(BackupSettingsFragment.this);
+			backupHelper.deleteOldFiles(Arrays.asList(ExportSettingsType.values()));
 		} catch (UserNotRegisteredException e) {
 			updateProgressVisibility(false);
 			log.error(e);
@@ -298,11 +298,13 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 	@Override
 	public void onFilesDeleteDone(@NonNull Map<RemoteFile, String> errors) {
 		updateProgressVisibility(false);
+		backupHelper.prepareBackup();
 	}
 
 	@Override
 	public void onFilesDeleteError(int status, @NonNull String message) {
 		updateProgressVisibility(false);
+		backupHelper.prepareBackup();
 	}
 
 	@Override

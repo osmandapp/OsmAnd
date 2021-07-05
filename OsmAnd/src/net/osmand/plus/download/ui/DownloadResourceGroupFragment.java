@@ -463,7 +463,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 	}
 
 	@Override
-	public void newDownloadIndexes() {
+	public void onUpdatedIndexesList() {
 		if (banner != null) {
 			banner.updateBannerInProgress();
 		}

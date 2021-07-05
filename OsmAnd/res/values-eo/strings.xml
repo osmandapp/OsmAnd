@@ -644,10 +644,7 @@
     <string name="srtm_paid_version_title">Nivelkurba kromprogramo</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd-kromprogramo por desegni nivelkurbojn malkonekte</string>
     <string name="srtm_plugin_name">Nivelkurboj</string>
-    <string name="osmand_srtm_long_description_1000_chars">Tiu ĉi kromprogramo ebligas vidigi kaj tavolon de nivelkurboj kaj tavolon de nivelombrumo (reliefon) supre normaj OsmAnd‑mapoj. Tiu ĉi eblo estas dezirata de atletoj, migrantoj, turistoj kaj de ĉiuj scivolaj pri reliefa strukturo de tero. 
-\n 
-\nLa mondaj datumoj (inter 70° N kaj 70° S) estas bazitaj sur mezuroj de SRTM (Shuttle Radar Topography Mission) kaj de ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) – bildiga aparato en la Terra (ĉefa satelito de Sistemo de Tera Observado de NASA). ASTER estas kunlaboraĵo de NASA, de Japana Ministerio pri Ekonomio, Komerco kaj Industrio (METI) kaj de Japanaj Spacaj Sistemoj (J‑spacesystems).</string>
-    <string name="srtm_plugin_description">Tiu ĉi kromprogramo ebligas vidigi kaj tavolon de nivelkurboj kaj tavolon de nivelombrumo (reliefo) supre normaj OsmAnd-mapoj. Tiu ĉi eblo estas dezirata de atletoj, migrantoj, turistoj, kaj ĉiuj scivolaj en reliefa strukturo de tero. (Bonvolu rimarki, ke datumoj de nivelkurboj kaj nivelombrumo estas elŝuteblaj aparte post instalado de kromprogramo.) 
+    <string name="srtm_plugin_description">Tiu ĉi kromprogramo ebligas vidigi kaj tavolon de nivelkurboj kaj tavolon de nivelombrumo (reliefo) supre normaj OsmAnd-mapoj. Tiu ĉi eblo estas dezirata de atletoj, migrantoj, turistoj, kaj ĉiuj scivolaj en reliefa strukturo de tero. (Bonvolu rimarki, ke datumoj de nivelkurboj kaj nivelombrumo estas elŝuteblaj aparte post instalado de kromprogramo.)
 \n 
 \nLa mondaj datumoj (inter 70° N kaj 70° S) estas bazitaj sur mezuroj de la SRTM (Shuttle Radar Topography Mission) kaj de la ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), bildiga aparato en la Terra - ĉefa satelito de Sistemo de Tera Observado de NASA. ASTER estas kunlaboraĵo de NASA, de Japana Ministerio pri Ekonomio, Komerco kaj Industrio (METI) kaj de Japanaj Spacaj Sistemoj (J-spacesystems).</string>
     <string name="no_index_file_to_download">Elŝutoj ne trovitaj, bonvolu kontroli vian retkonekton.</string>
@@ -2562,8 +2559,8 @@
     <string name="active_markers_descr">Nombro de indikiloj de direkto por vidigi.</string>
     <string name="looking_for_tracks_with_waypoints">Serĉado de kursoj kun navigadpunktoj</string>
     <string name="shared_string_more_without_dots">Pli</string>
-    <string name="empty_state_osm_edits">Krei aŭ redakti OSM-objektojn</string>
-    <string name="empty_state_osm_edits_descr">Kreu aŭ redaktu OSM-punktojn, kreu aŭ komentu OSM-rimarkojn kaj kontribuu per registritaj GPX-spuroj.</string>
+    <string name="empty_state_osm_edits">Krei aŭ redakti OpenStreetMap-objektojn</string>
+    <string name="empty_state_osm_edits_descr">Kreu aŭ redaktu OpenStreetMap-punktojn, kreu aŭ komentu OSM-rimarkojn kaj kontribuu per registritaj GPX-spuroj.</string>
     <string name="shared_string_deleted">Forigita</string>
     <string name="shared_string_edited">Redaktita</string>
     <string name="shared_string_added">Aldonita</string>
@@ -2609,7 +2606,7 @@
     <string name="show_closed_notes">Montri fermitajn rimarkojn</string>
     <string name="switch_osm_notes_visibility_desc">Montri aŭ kaŝi OSM‑rimarkojn sur la mapo.</string>
     <string name="gpx_file_desc">GPX - taŭga por elporti al JOSM aŭ aliaj OSM-redaktiloj.</string>
-    <string name="osc_file_desc">OSC - taŭga por elporti al OSM.</string>
+    <string name="osc_file_desc">OSC – taŭga por elporti al OpenStreetMap.</string>
     <string name="shared_string_gpx_file">GPX-dosiero</string>
     <string name="osc_file">OSC-dosiero</string>
     <string name="choose_file_type">Elektu dosiertipon</string>
@@ -4128,4 +4125,103 @@
     <string name="verification_code_missing">Mi ne ricevis kontrolkodon</string>
     <string name="verification_code_missing_description">Necesos atendi eĉ 10 minutojn por ricevi la kodon, bonvolu ankaŭ kontroli vian trudmesaĝujon. Se tio ĉi ne helpos, uzu la butonon sube.</string>
     <string name="select_nav_profile_dialog_message">Elekto de profilo de navigo influas al maniero kiel kalkuli kurson. Eblas elekti malkonektan aŭ enretan navigilon.</string>
+    <string name="restore_complete">Restarigo finita</string>
+    <string name="grey_color_slope">Griza koloro estas uzata kiam dekliveco estas nekonata.</string>
+    <string name="backup_version_history">Historio de versioj</string>
+    <string name="backup_storage_taken">Uzata spaco</string>
+    <string name="backup_version_history_delete_descr">Ĉu vi certe volas forigi historion de ŝanĝitaj specoj el la OsmAnd-Nubo\?</string>
+    <string name="delete_version_history">Forigi historion de versioj</string>
+    <string name="loading_list_of_routing_services">Ŝargado de listo de disponeblaj navigiloj</string>
+    <string name="shared_string_offline">Malkonekta</string>
+    <string name="shared_string_online">Enreta</string>
+    <string name="osmand_online_routing_promo">Vi povas uzi antaŭdifinitajn ŝablonojn aŭ aldoni propran enretan navigilon (subtenataj: OSRM, Graphhopper, OpenRouteService, GPX).</string>
+    <string name="shared_string_external">Ekstera</string>
+    <string name="provided_by">Liverata de %1$s</string>
+    <string name="failed_loading_predefined_engines">Fiaskis enlegi liston de antaŭdifinitaj ŝablonoj.
+\nKontrolu vian retkonekton.</string>
+    <string name="shared_string_predefined">Anatŭdifinita</string>
+    <string name="backup_complete">Sekurkopio farita</string>
+    <string name="backup_now">Fari sekurkopion nun</string>
+    <string name="make_backup">Fari sekurkopion</string>
+    <string name="make_backup_descr">Estas multaj ŝanĝoj en tiu ĉi aparato, konsideru fari sekurkopion por ke ne perdu viajn datumojn.</string>
+    <string name="backup_conflicts">Konfliktoj</string>
+    <string name="backup_confilcts_descr">Ne povas alŝuti al la servilo kelkajn dosieroj, ĉar pli novaj versioj troviĝas en la servilo.</string>
+    <string name="backup_view_conflicts">Montri konfliktojn</string>
+    <string name="backup_no_internet_descr">Kontrolu vian retkonekton kaj reprovu.</string>
+    <string name="backup_pause_all">Paŭzigi</string>
+    <string name="upload_local_version">Alŝuti lokan version</string>
+    <string name="download_server_version">Elŝuti version el servilo</string>
+    <string name="shared_string_logout">Elsaluti</string>
+    <string name="backup_delete_all_data">Forigi ĉiujn datumojn</string>
+    <string name="backup_delete_all_data_descr">Ĉiuj datumoj en la OsmAnd-Nubo estos forigitaj. Lokaj versioj ne estos ŝanĝitaj.</string>
+    <string name="backup_delete_all_data_warning">Per tiu ĉi menuo vi povas forigi ĈIUJN datumojn senditajn al la OsmAnd-Nubo, inkluzivante historion de versioj.
+\n
+\nVi ne povos restarigi forigitajn datumojn.</string>
+    <string name="backup_danger_zone">Danĝera zono</string>
+    <string name="delete_all_confirmation">Jes, forigi ĉion</string>
+    <string name="backup_delete_old_data">Forigi malnovajn sekurkopiojn</string>
+    <string name="backup_delete_old_data_descr">Aktuala versio de viaj datumoj estos konservita en la OsmAnd-Nubo</string>
+    <string name="backup_delete_old_data_warning">Per tiu ĉi menuo vi povas forigi malnovajn sekurkopiojn.
+\n
+\nLa aktuala versio de datumoj estos konservita en la servilo, sed vi ne povos restarigi pli malnovajn versiojn de viaj datumoj.</string>
+    <string name="backup_data">Sekurkopii datumojn</string>
+    <string name="select_backup_data_descr">Elektu datumojn kaj dosierujojn por sekurkopii.</string>
+    <string name="backup_restore_data_descr">Restarigi datumojn al via aparato uzante enretan sekurkopion.</string>
+    <string name="backup_restore_data">Restarigi datumojn</string>
+    <string name="restore_from_osmand_cloud">Restarigi el OsmAnd-Nubo</string>
+    <string name="choose_what_to_restore">Elektu kion restarigi.</string>
+    <string name="restore_selected_data">Restarigi elektitajn datumojn</string>
+    <string name="receiving_data_from_server">Ricevado de datumoj el la servilo</string>
+    <string name="routing_attr_avoid_tunnels_description">Eviti tunelojn</string>
+    <string name="routing_attr_avoid_tunnels_name">Sen tuneloj</string>
+    <string name="send_crash_log">Sendi pane-protokolon</string>
+    <string name="send_logcat_log">Sendi logcat-erar-protokolon</string>
+    <string name="backup_promocode">Reklamkodo</string>
+    <string name="ltr_or_rtl_combine_via_or">%1$s aŭ %2$s</string>
+    <string name="continue_with">Pluigi kun %1$s</string>
+    <string name="not_available_with">Ne disponebla kun %1$s</string>
+    <string name="redeem_promo_code">Uzi reklamkodon</string>
+    <string name="osmand_maps_plus_tagline">Akiri aldonajn eblaĵojn</string>
+    <string name="osmand_pro_tagline">Akiri ĉiujn eblaĵojn</string>
+    <string name="shared_string_learn_more">Pliaj informoj</string>
+    <string name="cancel_anytime_in_huawei_appgallery">Rezignebla iam ajn per Huawei AppGallery.</string>
+    <string name="cancel_anytime_in_gplay">Rezignebla iam ajn per Google Play.</string>
+    <string name="shared_string_not_included">Ne enhavas</string>
+    <string name="shared_string_includes">Enhavas</string>
+    <string name="complete_purchase">Aĉeti</string>
+    <string name="regular_price">Norma prezo</string>
+    <string name="from_with_param">De %1$s</string>
+    <string name="backup_delete_types_descr">Ĉu vi volas forigi el la nubo datumojn de malaktivaj elementoj\?</string>
+    <string name="backup_delete_types">Forigi datumojn de malaktivaj specoj</string>
+    <string name="shared_string_discussion">Diskuto</string>
+    <string name="shared_string_view_all">Montri ĉiujn</string>
+    <string name="purchases_feature_desc_nautical">Akiru aliron al informoj pri mara profundo.</string>
+    <string name="purchases_feature_desc_terrain">Montrado de montpintoj, altaĵoj kaj malaltaĵoj per nivelkurboj, mapoj de nivelombrumo (tonoj de grizo) kaj mapoj de dekliveco (koloraj).</string>
+    <string name="purchases_feature_desc_wikivoyage">Esploru Vikivojaĝon malkonekte. Artikoloj estas dividitaj laŭ landoj/regionoj kaj estas disponeblaj en ĉiuj lingvoj.</string>
+    <string name="purchases_feature_desc_wikipedia">Esploru Vikipedion malkonekte. Artikoloj estas dividitaj laŭ landoj/regionoj kaj estas disponeblaj en ĉiuj lingvoj.</string>
+    <string name="purchases_feature_desc_combined_wiki">Esploru artikolojn de Vikipedio dum vojaĝi sen interreta konekto. Datumoj estas dividitaj laŭ landoj kaj liveras artikolojn en ĉiuj lingvoj.</string>
+    <string name="purchases_feature_desc_unlimited_map_download">Akiru aliron al senlimaj elŝutoj de malkonektaj mapoj de ĉiuj kontinentoj kaj regionoj.</string>
+    <string name="purchases_feature_desc_monthly_map_updates">Akiru aliron al ĉiumonataj ĝisdatigoj de malkonektaj mapoj.</string>
+    <string name="purchases_feature_desc_hourly_map_updates">Akiru aliron al pli oftaj ĝisdatigoj de mapoj: ĉiuhoraj, ĉiutagaj aŭ ĉiusemajnaj. Ne necesas reelŝuti la tutan mapon – ĝisdatigoj enhavas nur ŝanĝitajn objektojn.</string>
+    <string name="purchases_feature_desc_advanced_widgets">Akiru aliron al spertulaj fenestraĵoj OsmAnd.</string>
+    <string name="purchases_feature_desc_osmand_cloud">Tenu ĉiujn datumojn de OsmAnd enrete en OsmAnd-Nubo. Ne ĉagreniĝu pri perdi viajn datumojn post reinstalo, kreu kaj restarigu sekurkopiojn de viaj datumoj senprobleme.</string>
+    <string name="unlimited_map_downloads">Senlimaj elŝutoj de mapoj</string>
+    <string name="wikipedia_and_wikivoyage_offline">Vikipedo kaj Vikivojaĝo malkonekte</string>
+    <string name="terrain_maps_contour_lines_hillshade_slope">Terenaj mapoj: nivelkurboj, nivelombrumo, dekliveco</string>
+    <string name="offline_wikipeadia">Vikipedio malkonekte</string>
+    <string name="offline_wikivoyage">Vikivojaĝo malkonekte</string>
+    <string name="terrain_maps">Terenaj mapoj</string>
+    <string name="nautical_depth">Maraj profundec-kurboj</string>
+    <string name="advanced_widgets">Spertulaj fenestraĵoj</string>
+    <string name="backup_error_user_is_already_registered">Jam ekzistas uzanto kun tiu ĉi retpoŝta adreso</string>
+    <string name="backup_error_subscription_was_expired">Abono senvalidiĝis</string>
+    <string name="backup_error_subscription_was_used">Abono aŭ reklamkodo estas uzata de alia konto: %1$s</string>
+    <string name="backup_error_size_is_exceeded">Superis maksimuman grandon por OsmAnd-Nubo: %1$s</string>
+    <string name="backup_error_gzip_only_supported_upload">Liverita dosiero ne estas en la formo gzip</string>
+    <string name="backup_error_file_not_available">Dosiero ne estas disponebla</string>
+    <string name="backup_error_token_is_not_valid">Identigilo de aparato aŭ ĵetono estas malĝusta</string>
+    <string name="backup_error_token_is_not_valid_or_expired">Ĵetono estas malĝusta aŭ senvalidiĝis</string>
+    <string name="backup_error_user_is_not_registered">Uzanto kun tiu ĉi retpoŝta adreso ne estas registrita</string>
+    <string name="backup_error_no_valid_subscription">Neniu valida abono</string>
+    <string name="you_can_get_feature_as_part_of_pattern">Vi povas akiri la eblaĵon “%1$s” kiel parto de la plano %2$s. Komparo de planoj:</string>
 </resources>

@@ -222,7 +222,7 @@ public class ResourceManager {
 
 	protected final Map<String, BinaryMapReaderResource> fileReaders = new ConcurrentHashMap<String, BinaryMapReaderResource>();
 
-	private final Map<String, RegionAddressRepository> addressMap = new ConcurrentHashMap<String, RegionAddressRepository>();
+	protected final Map<String, RegionAddressRepository> addressMap = new ConcurrentHashMap<String, RegionAddressRepository>();
 	protected final Map<String, AmenityIndexRepository> amenityRepositories = new ConcurrentHashMap<String, AmenityIndexRepository>();
 	//	protected final Map<String, BinaryMapIndexReader> routingMapFiles = new ConcurrentHashMap<String, BinaryMapIndexReader>();
 	protected final Map<String, BinaryMapReaderResource> transportRepositories = new ConcurrentHashMap<String, BinaryMapReaderResource>();
@@ -786,11 +786,15 @@ public class ResourceManager {
 					}
 					renderer.initializeNewResource(progress, f, mapReader);
 					BinaryMapReaderResource resource = new BinaryMapReaderResource(f, mapReader);
-					if (collectTravelFiles(resource)) {
-						//travel files are indexed
-						continue;
+					if (mapReader.containsPoiData()) {
+						amenityRepositories.put(f.getName(), new AmenityIndexRepositoryBinary(resource, context));
 					}
 					fileReaders.put(f.getName(), resource);
+					if (resource.getFileName().endsWith(IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)) {
+						travelRepositories.put(resource.getFileName(), resource);
+						// travel files should be indexed separately (so it's possible to turn on / off)
+						continue;
+					}
 					if (!mapReader.getRegionNames().isEmpty()) {
 						RegionAddressRepositoryBinary rarb = new RegionAddressRepositoryBinary(this, resource);
 						addressMap.put(f.getName(), rarb);
@@ -806,9 +810,6 @@ public class ResourceManager {
 					if (mapReader.hasTransportData() && (!f.getParentFile().equals(liveDir) ||
 							context.getSettings().USE_OSM_LIVE_FOR_PUBLIC_TRANSPORT.get())) {
 						resource.setUseForPublicTransport(true);
-					}
-					if (mapReader.containsPoiData()) {
-						amenityRepositories.put(f.getName(), new AmenityIndexRepositoryBinary(resource, context));
 					}
 				}
 			} catch (SQLiteException e) {
@@ -874,29 +875,13 @@ public class ResourceManager {
 		return res;
 	}
 
-	public List<BinaryMapIndexReader> getTravelRepositories(double topLat, double leftLon, double bottomLat, double rightLon) {
-		List<String> fileNames = new ArrayList<>(travelRepositories.keySet());
-		Collections.sort(fileNames, Algorithms.getStringVersionComparator());
-		int leftX31 = MapUtils.get31TileNumberX(leftLon);
-		int topX31 = MapUtils.get31TileNumberY(topLat);
-		int rightX31 = MapUtils.get31TileNumberX(rightLon);
-		int bottomX31 = MapUtils.get31TileNumberY(bottomLat);
-		List<BinaryMapIndexReader> res = new ArrayList<>();
-		for (String fileName : fileNames) {
-			BinaryMapReaderResource r = travelRepositories.get(fileName);
-			if (r != null && r.getShallowReader().containsPoiData(leftX31, topX31, rightX31, bottomX31)) {
-				res.add(r.getReader(BinaryMapReaderResourceType.POI));
+	public boolean isOnlyDefaultTravelBookPresent() {
+		for (BinaryMapIndexReader reader : getTravelRepositories()) {
+			if (!reader.getFile().getName().equals(DEFAULT_WIKIVOYAGE_TRAVEL_OBF)) {
+				return false;
 			}
 		}
-		return res;
-	}
-
-	private boolean collectTravelFiles(BinaryMapReaderResource resource) {
-		if (resource.getFileName().contains(IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)) {
-			travelRepositories.put(resource.getFileName(), resource);
-			return true;
-		}
-		return false;
+		return true;
 	}
 
 	public void initMapBoundariesCacheNative() {
@@ -910,12 +895,18 @@ public class ResourceManager {
 	}
 
 	////////////////////////////////////////////// Working with amenities ////////////////////////////////////////////////
-
 	public List<AmenityIndexRepository> getAmenityRepositories() {
+		return getAmenityRepositories(true);
+	}
+
+	public List<AmenityIndexRepository> getAmenityRepositories(boolean includeTravel) {
 		List<String> fileNames = new ArrayList<>(amenityRepositories.keySet());
 		Collections.sort(fileNames, Algorithms.getStringVersionComparator());
 		List<AmenityIndexRepository> res = new ArrayList<>();
 		for (String fileName : fileNames) {
+			if (!includeTravel && fileName.endsWith(IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)) {
+				continue;
+			}
 			AmenityIndexRepository r = amenityRepositories.get(fileName);
 			if (r != null) {
 				res.add(r);
@@ -1019,7 +1010,7 @@ public class ResourceManager {
 		int top = MapUtils.get31TileNumberY(topLatitude);
 		int right = MapUtils.get31TileNumberX(rightLongitude);
 		int bottom = MapUtils.get31TileNumberY(bottomLatitude);
-		for (AmenityIndexRepository index : getAmenityRepositories()) {
+		for (AmenityIndexRepository index : getAmenityRepositories(false)) {
 			if (matcher != null && matcher.isCancelled()) {
 				break;
 			}
@@ -1053,17 +1044,6 @@ public class ResourceManager {
 		return amenities;
 	}
 
-	public Map<PoiCategory, List<String>> searchAmenityCategoriesByName(String searchQuery, double lat, double lon) {
-		Map<PoiCategory, List<String>> map = new LinkedHashMap<PoiCategory, List<String>>();
-		for (AmenityIndexRepository index : getAmenityRepositories()) {
-			if (index instanceof AmenityIndexRepositoryBinary) {
-				if (index.checkContains(lat, lon)) {
-					((AmenityIndexRepositoryBinary) index).searchAmenityCategoriesByName(searchQuery, map);
-				}
-			}
-		}
-		return map;
-	}
 
 	public AmenityIndexRepositoryBinary getAmenityRepositoryByFileName(String filename) {
 		return (AmenityIndexRepositoryBinary) amenityRepositories.get(filename);
@@ -1220,7 +1200,8 @@ public class ResourceManager {
 		List<BinaryMapIndexReader> readers = new ArrayList<>(fileReaders.size());
 		for (BinaryMapReaderResource r : fileReaders) {
 			BinaryMapIndexReader shallowReader = r.getShallowReader();
-			if (shallowReader != null && (shallowReader.containsPoiData() || shallowReader.containsAddressData())) {
+			if (shallowReader != null && (shallowReader.containsPoiData() || shallowReader.containsAddressData()) &&
+					!r.getFileName().endsWith(IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)) {
 				BinaryMapIndexReader reader = r.getReader(BinaryMapReaderResourceType.QUICK_SEARCH);
 				if (reader != null) {
 					readers.add(reader);

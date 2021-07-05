@@ -133,12 +133,14 @@
 		<attr name="dlg_btn_secondary" format="reference" />
 		<attr name="dlg_btn_secondary_text" format="reference" />
 		<attr name="dlg_btn_stroked" format="reference" />
+        <attr name="stroked_btn_contour" format="reference" />
 		<attr name="profile_save_btn" format="reference"/>
 		<attr name="profile_cancel_btn" format="reference"/>
 		<attr name="btn_bg_border_inactive" format="reference"/>
 		<attr name="btn_radio_button_left" format="reference"/>
 		<attr name="btn_radio_button_right" format="reference"/>
 		<attr name="btn_radio_button_center" format="reference"/>
+        <attr name="radio_button_outline" format="reference"/>
 		<attr name="bg_dash_line" format="reference"/>
 		<attr name="text_input_background" format="reference"/>
 		<attr name="image_help_announcement_time" format="reference"/>

@@ -39,6 +39,14 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 	// this make not possible to make turns in between segment result for now
 	private TurnType turnType;
 
+	// Evaluates street name that the route follows after turn within specified distance.
+	// It is useful to find names for short segments on intersections
+	private static final float DIST_TO_SEEK_STREET_NAME = 150;
+
+	// Evaluates destination for exit from one road to another on the followed highway link within specified distance.
+	// In most cases using on "cloverleaf" junctions
+	private static final float DIST_TO_SEEK_DEST = 1000;
+
 	public RouteSegmentResult(RouteDataObject object) {
 		this.object = object;
 	}
@@ -569,6 +577,76 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 		return object.toString() + ": " + startPointIndex + "-" + endPointIndex;
 	}
 
-	
+	public String getDestinationName(String lang, boolean transliterate, List<RouteSegmentResult> list, int routeInd) {
+		String dnRef = getObject().getDestinationRef(lang, transliterate, isForwardDirection());
+		String destinationName = getObject().getDestinationName(lang, transliterate, isForwardDirection());
+		if (Algorithms.isEmpty(destinationName)) {
+			// try to get destination name from following segments
+			float distanceFromTurn = getDistance();
+			for (int n = routeInd + 1; n + 1 < list.size(); n++) {
+				RouteSegmentResult s1 = list.get(n);
+				String s1DnRef = s1.getObject().getDestinationRef(lang,	transliterate, isForwardDirection());
+				boolean dnRefIsEquals = !Algorithms.isEmpty(s1DnRef) && !Algorithms.isEmpty(dnRef) && s1DnRef.equals(dnRef);
+				if (distanceFromTurn < DIST_TO_SEEK_DEST && (s1.getObject().getHighway().equals("motorway_link") || dnRefIsEquals)
+						&& Algorithms.isEmpty(destinationName)) {
+					destinationName = s1.getObject().getDestinationName(lang, transliterate, s1.isForwardDirection());
+				}
+				distanceFromTurn += s1.getDistance();
+				if (distanceFromTurn > DIST_TO_SEEK_DEST || !Algorithms.isEmpty(destinationName)) {
+					break;
+				}
+			}
+		}
+		if (!Algorithms.isEmpty(dnRef) && !Algorithms.isEmpty(destinationName)) {
+			destinationName = dnRef + ", " + destinationName;
+		} else if (!Algorithms.isEmpty(dnRef) && Algorithms.isEmpty(destinationName)) {
+			destinationName = dnRef;
+		}
+		return destinationName;
+	}
 
+	public String getStreetName(String lang, boolean transliterate, List<RouteSegmentResult> list, int routeInd) {
+		String streetName = getObject().getName(lang, transliterate);
+		if (Algorithms.isEmpty(streetName)) {
+			// try to get street name from following segments
+			float distanceFromTurn = getDistance();
+			boolean hasNewTurn = false;
+			for (int n = routeInd + 1; n + 1 < list.size(); n++) {
+				RouteSegmentResult s1 = list.get(n);
+				if (s1.getTurnType() != null) {
+					hasNewTurn = true;
+				}
+				if (!hasNewTurn && distanceFromTurn < DIST_TO_SEEK_STREET_NAME
+						&& Algorithms.isEmpty(streetName)) {
+					streetName = s1.getObject().getName(lang, transliterate);
+				}
+				distanceFromTurn += s1.getDistance();
+				if (distanceFromTurn > DIST_TO_SEEK_STREET_NAME || !Algorithms.isEmpty(streetName)) {
+					break;
+				}
+			}
+		}
+		return streetName;
+	}
+
+	public String getRef(String lang, boolean transliterate) {
+		return getObject().getRef(lang, transliterate, isForwardDirection());
+	}
+
+	public RouteDataObject getObjectWithShield(List<RouteSegmentResult> list, int routeInd) {
+		RouteDataObject rdo = null;
+		boolean isNextShieldFound = getObject().hasNameTagStartsWith("road_ref");
+		for (int ind = routeInd; ind < list.size() && !isNextShieldFound; ind++) {
+			if (list.get(ind).getTurnType() != null) {
+				isNextShieldFound = true;
+			} else {
+				RouteDataObject obj = list.get(ind).getObject();
+				if (obj.hasNameTagStartsWith("road_ref")) {
+					rdo = obj;
+					isNextShieldFound = true;
+				}
+			}
+		}
+		return rdo;
+	}
 }

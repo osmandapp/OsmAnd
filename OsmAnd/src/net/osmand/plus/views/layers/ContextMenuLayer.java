@@ -17,6 +17,11 @@ import android.widget.ArrayAdapter;
 import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresPermission;
+import androidx.appcompat.content.res.AppCompatResources;
+
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
@@ -84,10 +89,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresPermission;
-import androidx.appcompat.content.res.AppCompatResources;
 import gnu.trove.list.array.TIntArrayList;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CHANGE_MARKER_POSITION;
@@ -734,8 +735,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 				for (RenderedObject renderedObject : renderedObjects) {
 
-					String gpxFileName = renderedObject.getFileNameByExtension(IndexConstants.GPX_FILE_EXT);
-					boolean isGpx = !Algorithms.isEmpty(gpxFileName);
+					String routeID = renderedObject.getRouteID();
+					boolean isGpx = !Algorithms.isEmpty(routeID);
 					if (!isGpx && (renderedObject.getId() == null || !renderedObject.isVisible()
 							|| renderedObject.isDrawOnPath())) {
 						continue;
@@ -767,7 +768,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 					LatLon searchLatLon = objectLatLon != null ? objectLatLon : pointLatLon;
 					if (isGpx) {
 						String ref = Algorithms.emptyIfNull(renderedObject.getTagValue("ref"));
-						TravelGpx travelGpx = app.getTravelHelper().searchGpx(pointLatLon, gpxFileName, ref, null);
+						TravelGpx travelGpx = app.getTravelHelper().searchGpx(pointLatLon, routeID, ref);
 						if (travelGpx != null && isUniqueGpx(selectedObjects, travelGpx)) {
 							WptPt selectedPoint = new WptPt();
 							selectedPoint.lat = pointLatLon.getLatitude();
@@ -824,13 +825,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				showContextMenu(latLon, pointDescription, selectedObj, provider);
 			}
 			return true;
-
 		} else if (selectedObjects.size() > 1) {
-			hideVisibleMenues();
-			selectedObjectContextMenuProvider = null;
 			showContextMenuForSelectedObjects(pointLatLon, selectedObjects);
 			return true;
-
 		} else if (showUnknownLocation) {
 			hideVisibleMenues();
 			selectedObjectContextMenuProvider = null;
@@ -1087,7 +1084,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		return false;
 	}
 
-	private void showContextMenuForSelectedObjects(final LatLon latLon, final Map<Object, IContextMenuProvider> selectedObjects) {
+	protected void showContextMenuForSelectedObjects(LatLon latLon, Map<Object, IContextMenuProvider> selectedObjects) {
+		hideVisibleMenues();
+		selectedObjectContextMenuProvider = null;
 		multiSelectionMenu.show(latLon, selectedObjects);
 	}
 

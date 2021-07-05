@@ -2,6 +2,7 @@ package net.osmand.plus.settings.backend;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SettingsAPI;
+import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,9 +43,16 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 		return getSettingsAPI().getLong(prefs, getLastModifiedTimeId(), 0);
 	}
 
+	protected void setLastModifiedTime(Object prefs, long lastModifiedTime) {
+		if (!lastModifiedTimeStored) {
+			throw new IllegalStateException("Setting " + getId() + " is not granted to store last modified time");
+		}
+		getSettingsAPI().edit(prefs).putLong(getLastModifiedTimeId(), lastModifiedTime).commit();
+	}
+
 	protected boolean setValue(Object prefs, T val) {
 		if (lastModifiedTimeStored) {
-			getSettingsAPI().edit(prefs).putLong(getLastModifiedTimeId(), System.currentTimeMillis()).commit();
+			setLastModifiedTime(prefs, System.currentTimeMillis());
 		}
 		return true;
 	}
@@ -112,9 +120,12 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 		}
 
 		Object profilePrefs = settings.getProfilePreferences(mode);
+		boolean changed = !Algorithms.objectEquals(obj, getValue(profilePrefs, obj));
 		boolean valueSaved = setValue(profilePrefs, obj);
 		if (valueSaved) {
-			settings.updateLastPreferencesEditTime(profilePrefs);
+			if (changed) {
+				settings.updateLastPreferencesEditTime(profilePrefs);
+			}
 			if (cache && cachedPreference == profilePrefs) {
 				cachedValue = obj;
 			}
@@ -198,10 +209,11 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 	@Override
 	public boolean set(T obj) {
 		Object prefs = getPreferences();
+		boolean changed = !Algorithms.objectEquals(obj, getValue(prefs, obj));
 		if (setValue(prefs, obj)) {
 			cachedValue = obj;
 			cachedPreference = prefs;
-			if (!shared) {
+			if (changed && !shared) {
 				settings.updateLastPreferencesEditTime(prefs);
 			}
 			fireEvent(obj);
@@ -219,6 +231,10 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 
 	public long getLastModifiedTime() {
 		return getLastModifiedTime(getPreferences());
+	}
+
+	public void setLastModifiedTime(long lastModifiedTime) {
+		setLastModifiedTime(getPreferences(), lastModifiedTime);
 	}
 
 	public final boolean isSet() {

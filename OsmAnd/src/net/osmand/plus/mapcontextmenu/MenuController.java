@@ -91,6 +91,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import static net.osmand.plus.wikivoyage.data.TravelObfHelper.ROUTE_ARTICLE;
+
 public abstract class MenuController extends BaseMenuController implements CollapseExpandListener {
 
 	public static class MenuState {
@@ -673,9 +675,6 @@ public abstract class MenuController extends BaseMenuController implements Colla
 
 			boolean internetConnectionAvailable =
 					mapActivity.getMyApplication().getSettings().isInternetConnectionAvailable();
-			boolean downloadIndexes = internetConnectionAvailable
-					&& !downloadThread.getIndexes().isDownloadedFromInternet
-					&& !downloadThread.getIndexes().downloadFromInternetFailed;
 
 			boolean isDownloading = indexItem != null && downloadThread.isDownloading(indexItem);
 			if (isDownloading) {
@@ -700,7 +699,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 					titleProgressController.caption = v;
 				}
 				titleProgressController.visible = true;
-			} else if (downloadIndexes) {
+			} else if (downloadThread.shouldDownloadIndexes()) {
 				titleProgressController.setIndexesDownloadMode(mapActivity);
 				titleProgressController.visible = true;
 			} else if (!internetConnectionAvailable) {

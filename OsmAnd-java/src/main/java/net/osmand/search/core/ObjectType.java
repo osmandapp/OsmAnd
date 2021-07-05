@@ -12,7 +12,7 @@ public enum ObjectType {
 
 	// ONLINE SEARCH
 	ONLINE_SEARCH(true),
-	
+
 	REGION(true),
 
 	SEARCH_STARTED(false),
@@ -22,20 +22,22 @@ public enum ObjectType {
 	SEARCH_API_REGION_FINISHED(false),
 	UNKNOWN_NAME_FILTER(false);
 
-	private boolean hasLocation;
-	private ObjectType(boolean location) {
+	private final boolean hasLocation;
+
+	ObjectType(boolean location) {
 		this.hasLocation = location;
 	}
+
 	public boolean hasLocation() {
 		return hasLocation;
 	}
-	
+
 	public static boolean isAddress(ObjectType t) {
 		return t == CITY || t == VILLAGE || t == POSTCODE || t == STREET || t == HOUSE || t == STREET_INTERSECTION;
 	}
 
 	public static boolean isTopVisible(ObjectType t) {
-		return t == POI_TYPE || t == FAVORITE || t == FAVORITE_GROUP || t == WPT || t == LOCATION || t == PARTIAL_LOCATION;
+		return t == POI_TYPE || t == FAVORITE || t == FAVORITE_GROUP || t == WPT || t == GPX_TRACK || t == LOCATION || t == PARTIAL_LOCATION;
 	}
 
 	public static ObjectType getExclusiveSearchType(ObjectType t) {

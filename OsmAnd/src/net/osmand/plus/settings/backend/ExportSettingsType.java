@@ -5,11 +5,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.backup.RemoteFile;
+import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public enum ExportSettingsType {
 
@@ -83,20 +91,27 @@ public enum ExportSettingsType {
 			if (exportType.getItemName().equals(item.getType().name())) {
 				if (item.getType() == SettingsItemType.FILE) {
 					FileSettingsItem fileItem = (FileSettingsItem) item;
-					if (fileItem.getSubtype() == FileSubtype.RENDERING_STYLE) {
-						return ExportSettingsType.CUSTOM_RENDER_STYLE;
-					} else if (fileItem.getSubtype() == FileSubtype.ROUTING_CONFIG) {
-						return ExportSettingsType.CUSTOM_ROUTING;
-					} else if (fileItem.getSubtype() == FileSubtype.MULTIMEDIA_NOTES) {
-						return ExportSettingsType.MULTIMEDIA_NOTES;
-					} else if (fileItem.getSubtype() == FileSubtype.GPX) {
-						return ExportSettingsType.TRACKS;
-					} else if (fileItem.getSubtype().isMap()) {
-						return ExportSettingsType.OFFLINE_MAPS;
-					} else if (fileItem.getSubtype() == FileSubtype.TTS_VOICE) {
-						return ExportSettingsType.TTS_VOICE;
-					} else if (fileItem.getSubtype() == FileSubtype.VOICE) {
-						return ExportSettingsType.VOICE;
+					return getExportSettingsTypeFileSubtype(fileItem.getSubtype());
+				} else {
+					return exportType;
+				}
+			}
+		}
+		return null;
+	}
+
+	@Nullable
+	public static ExportSettingsType getExportSettingsTypeForRemoteFile(@NonNull RemoteFile remoteFile) {
+		if (remoteFile.item != null) {
+			return getExportSettingsTypeForItem(remoteFile.item);
+		}
+		for (ExportSettingsType exportType : ExportSettingsType.values()) {
+			String type = remoteFile.getType();
+			if (exportType.getItemName().equals(type)) {
+				if (SettingsItemType.FILE.name().equals(type)) {
+					FileSubtype subtype = FileSubtype.getSubtypeByFileName(remoteFile.getName());
+					if (subtype != null) {
+						return getExportSettingsTypeFileSubtype(subtype);
 					}
 				} else {
 					return exportType;
@@ -104,5 +119,42 @@ public enum ExportSettingsType {
 			}
 		}
 		return null;
+	}
+
+	public static ExportSettingsType getExportSettingsTypeFileSubtype(@NonNull FileSubtype subtype) {
+		if (subtype == FileSubtype.RENDERING_STYLE) {
+			return ExportSettingsType.CUSTOM_RENDER_STYLE;
+		} else if (subtype == FileSubtype.ROUTING_CONFIG) {
+			return ExportSettingsType.CUSTOM_ROUTING;
+		} else if (subtype == FileSubtype.MULTIMEDIA_NOTES) {
+			return ExportSettingsType.MULTIMEDIA_NOTES;
+		} else if (subtype == FileSubtype.GPX) {
+			return ExportSettingsType.TRACKS;
+		} else if (subtype.isMap()) {
+			return ExportSettingsType.OFFLINE_MAPS;
+		} else if (subtype == FileSubtype.TTS_VOICE) {
+			return ExportSettingsType.TTS_VOICE;
+		} else if (subtype == FileSubtype.VOICE) {
+			return ExportSettingsType.VOICE;
+		}
+		return null;
+	}
+
+	public static List<ExportSettingsType> getEnabledTypes() {
+		List<ExportSettingsType> result = new ArrayList<>(Arrays.asList(ExportSettingsType.values()));
+		OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
+		if (osmEditingPlugin == null) {
+			result.remove(ExportSettingsType.OSM_EDITS);
+			result.remove(ExportSettingsType.OSM_NOTES);
+		}
+		AudioVideoNotesPlugin avNotesPlugin = OsmandPlugin.getEnabledPlugin(AudioVideoNotesPlugin.class);
+		if (avNotesPlugin == null) {
+			result.remove(ExportSettingsType.MULTIMEDIA_NOTES);
+		}
+		return result;
+	}
+
+	public static boolean isTypeEnabled(@NonNull ExportSettingsType type) {
+		return getEnabledTypes().contains(type);
 	}
 }
