@@ -67,7 +67,7 @@ public class ContextMenuItemsSettings implements Serializable {
 	}
 
 	private void hideOriginallyCreatedDrawerItems() {
-		for (String defaultHiddenItem : getDrawerHiddenByDefault()) {
+		for (String defaultHiddenItem : getDrawerHiddenItemsByDefault()) {
 			boolean isNewlyCreated = !hiddenIds.contains(defaultHiddenItem) && !orderIds.contains(defaultHiddenItem);
 			if (isNewlyCreated) {
 				hiddenIds.add(defaultHiddenItem);
@@ -121,10 +121,10 @@ public class ContextMenuItemsSettings implements Serializable {
 	}
 
 	public static ContextMenuItemsSettings getDrawerDefaultInstance() {
-		return new ContextMenuItemsSettings(getDrawerHiddenByDefault(), new ArrayList<>());
+		return new ContextMenuItemsSettings(getDrawerHiddenItemsByDefault(), new ArrayList<>());
 	}
 
-	private static List<String> getDrawerHiddenByDefault() {
+	private static List<String> getDrawerHiddenItemsByDefault() {
 		List<String> hiddenByDefault = new ArrayList<>();
 		hiddenByDefault.add(DRAWER_DASHBOARD_ID);
 		hiddenByDefault.add(DRAWER_FAVORITES_ID);
