@@ -84,7 +84,7 @@
     <string name="closing">Затварање</string>
     <string name="logging_out">Одјављивање</string>
     <string name="initialization">Покретање</string>
-    <string name="shared_string_logout">Одјави се</string>
+    <string name="shared_string_logout">Одјава</string>
     <string name="shared_string_login">Пријавите се</string>
     <string name="password_descr">Телеграм лозинка</string>
     <string name="enter_password">Унесите лозинку</string>
