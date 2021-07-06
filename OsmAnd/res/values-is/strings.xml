@@ -4102,7 +4102,7 @@
     <string name="recorded_description">Raddupptökur hljóma betur, en geta aðeins borið fram foruppteknar setningar eins og ábendingar um beygjur. Þær ná ekki að bera fram götuheiti eða nöfn merkisstaða.</string>
     <string name="use_system_language">Nota tungumál kerfis</string>
     <string name="shared_string_itinerary">Ferðaáætlun</string>
-    <string name="search_more">Leita betur…</string>
+    <string name="search_more">Leita áfram…</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
     <string name="route_line_use_map_style_width">Nota kortastíl (%1$s) sjálfgefna breidd.</string>
     <string name="route_line_use_map_style_color">Nota kortastíl (%1$s) sjálfgefinn lit.</string>
