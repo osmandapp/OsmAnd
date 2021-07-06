@@ -880,8 +880,8 @@ public class OsmandApplication extends MultiDexApplication {
 	@Nullable
 	public GeneralRouter getRouter(Builder builder, ApplicationMode am) {
 		GeneralRouter router = builder.getRouter(am.getRoutingProfile());
-		if (router == null && am.getParent() != null) {
-			router = builder.getRouter(am.getParent().getStringKey());
+		if (router == null) {
+			router = builder.getRouter(am.getDefaultRoutingProfile());
 		}
 		return router;
 	}

@@ -439,6 +439,10 @@ public class ApplicationMode {
 		return app.getSettings().ROUTING_PROFILE.getModeValue(this);
 	}
 
+	public String getDefaultRoutingProfile() {
+		return app.getSettings().ROUTING_PROFILE.getProfileDefaultValue(this);
+	}
+
 	public void setRoutingProfile(String routingProfile) {
 		if (!Algorithms.isEmpty(routingProfile)) {
 			app.getSettings().ROUTING_PROFILE.setModeValue(this, routingProfile);
