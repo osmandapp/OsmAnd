@@ -17,12 +17,15 @@ import net.osmand.data.Amenity;
 import net.osmand.data.MapObject;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.chooseplan.ChoosePlanFragment;
+import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
@@ -136,6 +139,40 @@ public class WikipediaPlugin extends OsmandPlugin {
 	protected void registerLayerContextMenuActions(OsmandMapTileView mapView,
 												   ContextMenuAdapter adapter,
 												   final MapActivity mapActivity) {
+		if (!Version.isPaidVersion(app)) {
+			createPromoWikipediaItem(mapView, adapter, mapActivity);
+		} else {
+			createWikipediaItem(mapView, adapter, mapActivity);
+		}
+	}
+
+	private void createPromoWikipediaItem(OsmandMapTileView mapView,
+	                                      ContextMenuAdapter adapter,
+	                                      final MapActivity mapActivity) {
+		OsmAndFeature feature = OsmAndFeature.WIKIPEDIA;
+		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+
+		ItemClickListener listener = (adapter1, itemId, position, isChecked, viewCoordinates) -> {
+			if (mapActivity != null) {
+				ChoosePlanFragment.showInstance(mapActivity, feature);
+			}
+			return false;
+		};
+
+		adapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setId(WIKIPEDIA_ID)
+				.setLayout(R.layout.list_item_promo)
+				.setTitleId(R.string.shared_string_wikipedia, mapActivity)
+				.setDescription(app.getString(R.string.explore_wikipedia_offline))
+				.setIcon(feature.getIconId(nightMode))
+				.setSkipPaintingWithoutColor(true)
+				.setListener(listener)
+				.createItem());
+	}
+
+	private void createWikipediaItem(OsmandMapTileView mapView,
+	                                 ContextMenuAdapter adapter,
+	                                 final MapActivity mapActivity) {
 		ContextMenuAdapter.ItemClickListener listener = new ContextMenuAdapter.OnRowItemClick() {
 
 			@Override
@@ -150,7 +187,7 @@ public class WikipediaPlugin extends OsmandPlugin {
 
 			@Override
 			public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter, int itemId,
-											  final int pos, boolean isChecked, int[] viewCoordinates) {
+			                                  final int pos, boolean isChecked, int[] viewCoordinates) {
 				if (itemId == R.string.shared_string_wikipedia) {
 					toggleWikipediaPoi(isChecked, selected -> {
 						ContextMenuItem item = adapter.getItem(pos);

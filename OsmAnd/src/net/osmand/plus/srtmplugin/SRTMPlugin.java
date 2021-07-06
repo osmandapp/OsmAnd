@@ -14,12 +14,16 @@ import androidx.appcompat.app.AlertDialog;
 import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.chooseplan.ChoosePlanFragment;
+import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
@@ -262,7 +266,43 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void registerLayerContextMenuActions(final OsmandMapTileView mapView, ContextMenuAdapter adapter, final MapActivity mapActivity) {
+	public void registerLayerContextMenuActions(OsmandMapTileView mapView,
+	                                            ContextMenuAdapter adapter,
+	                                            MapActivity mapActivity) {
+		if (!Version.isPaidVersion(app)) {
+			createPromoItem(mapView, adapter, mapActivity);
+		} else {
+			createContextMenuItems(mapView, adapter, mapActivity);
+		}
+	}
+
+	private void createPromoItem(OsmandMapTileView mapView,
+	                             ContextMenuAdapter adapter,
+	                             MapActivity mapActivity) {
+		OsmAndFeature feature = OsmAndFeature.TERRAIN;
+		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+
+		ItemClickListener listener = (adapter1, itemId, position, isChecked, viewCoordinates) -> {
+			if (mapActivity != null) {
+				ChoosePlanFragment.showInstance(mapActivity, feature);
+			}
+			return false;
+		};
+
+		adapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setId(TERRAIN)
+				.setLayout(R.layout.list_item_promo)
+				.setTitleId(R.string.shared_string_terrain, mapActivity)
+				.setDescription(app.getString(R.string.contour_lines_hillshades_slope))
+				.setIcon(feature.getIconId(nightMode))
+				.setSkipPaintingWithoutColor(true)
+				.setListener(listener)
+				.createItem());
+	}
+
+	private void createContextMenuItems(OsmandMapTileView mapView,
+	                                    ContextMenuAdapter adapter,
+	                                    MapActivity mapActivity) {
 		ContextMenuAdapter.ItemClickListener listener = new ContextMenuAdapter.OnRowItemClick() {
 
 			@Override
@@ -280,10 +320,10 @@ public class SRTMPlugin extends OsmandPlugin {
 
 			@Override
 			public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter,
-											  final int itemId,
-											  final int position,
-											  final boolean isChecked,
-											  final int[] viewCoordinates) {
+			                                  final int itemId,
+			                                  final int position,
+			                                  final boolean isChecked,
+			                                  final int[] viewCoordinates) {
 				if (itemId == R.string.srtm_plugin_name) {
 					toggleContourLines(mapActivity, isChecked, new Runnable() {
 						@Override
