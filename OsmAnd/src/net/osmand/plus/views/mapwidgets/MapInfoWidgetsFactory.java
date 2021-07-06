@@ -991,8 +991,6 @@ public class MapInfoWidgetsFactory {
 					} else {
 						AndroidUiHelper.updateVisibility(turnIcon, false);
 					}
-				} else {
-					AndroidUiHelper.updateVisibility(turnIcon, false);
 				}
 				if (streetName.text == null || streetName.text.isEmpty()) {
 					addressTextShadow.setText("");
