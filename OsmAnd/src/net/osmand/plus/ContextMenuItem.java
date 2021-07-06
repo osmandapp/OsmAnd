@@ -43,6 +43,7 @@ public class ContextMenuItem {
 	private final OnItemDeleteAction itemDeleteAction;
 	private final boolean hideDivider;
 	private final boolean hideCompoundButton;
+	private final boolean unsorted;
 	private final int minHeight;
 	private final int tag;
 	private final String id;
@@ -69,6 +70,7 @@ public class ContextMenuItem {
 							OnItemDeleteAction itemDeleteAction,
 							boolean hideDivider,
 							boolean hideCompoundButton,
+							boolean unsorted,
 							int minHeight,
 							int tag,
 							String id) {
@@ -94,6 +96,7 @@ public class ContextMenuItem {
 		this.hideDivider = hideDivider;
 		this.itemDeleteAction = itemDeleteAction;
 		this.hideCompoundButton = hideCompoundButton;
+		this.unsorted = unsorted;
 		this.minHeight = minHeight;
 		this.tag = tag;
 		this.id = id;
@@ -208,6 +211,10 @@ public class ContextMenuItem {
 		return hideCompoundButton;
 	}
 
+	public boolean isUnsorted() {
+		return unsorted;
+	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
@@ -298,6 +305,7 @@ public class ContextMenuItem {
 		private boolean mSkipPaintingWithoutColor;
 		private boolean mHideDivider;
 		private boolean mHideCompoundButton;
+		private boolean mUnsorted;
 		private int mMinHeight;
 		private int mTag;
 		private String mId;
@@ -423,6 +431,11 @@ public class ContextMenuItem {
 			return this;
 		}
 
+		public ItemBuilder setUnsorted(boolean unsorted) {
+			mUnsorted = unsorted;
+			return this;
+		}
+
 		public ItemBuilder setMinHeight(int minHeight) {
 			this.mMinHeight = minHeight;
 			return this;
@@ -447,7 +460,7 @@ public class ContextMenuItem {
 					mSelected, mProgress, mLayout, mLoading, mIsCategory, mIsClickable, mSkipPaintingWithoutColor,
 					mOrder, mDescription, mOnUpdateCallback, mItemClickListener, mItemLongClickListener,
 					mIntegerListener, mProgressListener, mItemDeleteAction, mHideDivider, mHideCompoundButton,
-					mMinHeight, mTag, mId);
+					mUnsorted, mMinHeight, mTag, mId);
 			item.update();
 			return item;
 		}

@@ -296,6 +296,7 @@ public class SRTMPlugin extends OsmandPlugin {
 				.setDescription(app.getString(R.string.contour_lines_hillshades_slope))
 				.setIcon(feature.getIconId(nightMode))
 				.setSkipPaintingWithoutColor(true)
+				.setUnsorted(true)
 				.setListener(listener)
 				.createItem());
 	}

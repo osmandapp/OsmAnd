@@ -166,6 +166,7 @@ public class WikipediaPlugin extends OsmandPlugin {
 				.setDescription(app.getString(R.string.explore_wikipedia_offline))
 				.setIcon(feature.getIconId(nightMode))
 				.setSkipPaintingWithoutColor(true)
+				.setUnsorted(true)
 				.setListener(listener)
 				.createItem());
 	}

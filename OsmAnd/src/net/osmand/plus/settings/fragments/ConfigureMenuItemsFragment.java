@@ -50,6 +50,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.APP_PROFILES_ID;
@@ -219,6 +220,17 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 					MapContextMenu menu = ((MapActivity) activity).getContextMenu();
 					contextMenuAdapter = menu.getActionsContextMenuAdapter(true);
 					break;
+			}
+			clearUnsortedItems();
+		}
+	}
+
+	private void clearUnsortedItems() {
+		Iterator<ContextMenuItem> iterator = contextMenuAdapter.getItems().listIterator();
+		while (iterator.hasNext()) {
+			ContextMenuItem item = iterator.next();
+			if (item.isUnsorted()) {
+				iterator.remove();
 			}
 		}
 	}
