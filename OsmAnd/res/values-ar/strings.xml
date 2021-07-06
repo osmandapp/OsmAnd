@@ -3616,10 +3616,10 @@
     <string name="extra_maps_menu_group">خرائط إضافية</string>
     <string name="download_unsupported_action">%1$s إجراء غير معتمد</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
-    <string name="osm_live_payment_subscription_management">سيتم احتساب الدفع لحساب Google Play الخاص بك في تأكيد الشراء. 
-\n 
-\nيتم تجديد الاشتراك تلقائيًا ما لم يتم إلغاؤه قبل تاريخ التجديد. سيتم تحميل حسابك لفترة التجديد (شهر / ثلاثة أشهر / سنة) فقط في تاريخ التجديد. 
-\n 
+    <string name="osm_live_payment_subscription_management">سيتم احتساب الدفع لحساب Google Play الخاص بك في تأكيد الشراء.
+\n
+\nيتم تجديد الاشتراك تلقائيًا ما لم يتم إلغاؤه قبل تاريخ التجديد. سيتم تحميل حسابك لفترة التجديد (شهر / ثلاثة أشهر / سنة) فقط في تاريخ التجديد.
+\n
 \nيمكنك إدارة وإلغاء الاشتراكات الخاصة بك عن طريق الذهاب إلى إعدادات Google Play الخاصة بك.</string>
     <string name="search_poi_types">البحث عن أنواع poi</string>
     <string name="search_poi_types_descr">اجمع أنواع النقاط المهمة من فئات مختلفة. اضغط على مفتاح التبديل لتحديد الكل ، ثم انقر على الجانب الأيسر لاختيار الفئة.</string>
@@ -4089,7 +4089,7 @@
     <string name="on_pause">عند الإيقاف المؤقت</string>
     <string name="app_restart_required">مطلوب إعادة تشغيل التطبيق لتطبيق بعض الإعدادات.</string>
     <string name="routing_attr_height_obstacles_description">التوجيه يمكن أن يتجنب المرتفعات القوية.</string>
-    <string name="quick_action_coordinates_widget_descr">تبديل لإظهار أو إخفاء أداة الإحداثيات على الخريطة.</string>
+    <string name="quick_action_coordinates_widget_descr">إظهار أو إخفاء عرض الإحداثيات على الخريطة.</string>
     <string name="map_widget_distance_by_tap">المسافة عن طريق الضغط</string>
     <string name="latest_openstreetmap_update">آخر تحديث خريطة الشارع المفتوح المتاحة:</string>
     <string name="updated">تحديث: %s</string>
@@ -4234,7 +4234,7 @@
     <string name="restore_from_osmand_cloud">استعادة من سحابة أوسماند</string>
     <string name="choose_what_to_restore">حدد المحتوى الذي تريد استعادته .</string>
     <string name="restore_selected_data">استعادة البيانات المحددة</string>
-    <string name="receiving_data_from_server">استقبال البيانات من السيرفر</string>
+    <string name="receiving_data_from_server">استقبال البيانات من السيرفر…</string>
     <string name="restore_complete">اكتمال الاستعادة</string>
     <string name="grey_color_slope">يستخدم اللون الرمادي عندما يكون المنحدر غير محدد.</string>
     <string name="backup_version_history">تاريخ النسخة</string>
@@ -4289,7 +4289,7 @@
     <string name="backup_error_size_is_exceeded">تجاوزت الحد الأقصى لحجم سحابة أوسماند %1$s</string>
     <string name="backup_error_gzip_only_supported_upload">صيغة الملف المرسل ليست gzip</string>
     <string name="backup_error_file_not_available">الملف غير متوفر</string>
-    <string name="backup_error_token_is_not_valid">معرف الجهاز المتوفر أو الرمز المميز غير صالح</string>
+    <string name="backup_error_token_is_not_valid">معرف الجهاز المتوفر أو الرمزغير صالح</string>
     <string name="backup_error_token_is_not_valid_or_expired">الرمز غير صالح أو منتهي الصلاحية</string>
     <string name="backup_error_user_is_not_registered">المستخدم مع هذا البريد الإلكتروني غير مسجل</string>
     <string name="backup_error_no_valid_subscription">لا يوجد اشتراك صالح</string>
