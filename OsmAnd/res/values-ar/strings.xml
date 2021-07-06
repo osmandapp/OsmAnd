@@ -4000,7 +4000,7 @@
     <string name="online_routing_engines">محركات التوجيه عبر الإنترنت</string>
     <string name="shared_string_folders">المجلدات</string>
     <string name="select_folder">تحديد مجلد</string>
-    <string name="select_folder_descr">تحديد مجلد أو إضافة جديد</string>
+    <string name="select_folder_descr">حدد مجلد أو إضافة واحد جديد</string>
     <string name="shared_string_empty">فارغ</string>
     <string name="analyze_by_intervals">التحليل حسب الفواصل الزمنية (الفاصل الزمني)</string>
     <string name="upload_to_openstreetmap">رفع إلى خريطة الشارع المفتوح</string>
@@ -4070,12 +4070,12 @@
     <string name="activity_type_car_name">سيارة</string>
     <string name="copy_poi_name">نسخ اسم POI</string>
     <string name="select_another_colorization">الرجاء اختيار أنواع أخرى من التلوين.</string>
-    <string name="snap_to_road_descr">سيتم محاذاة رمز الموضع الحالي إلى مسار التنقل الحالي</string>
+    <string name="snap_to_road_descr">سيتم محاذاة رمز الموضع الحالي إلى مسار الملاحة الحالي</string>
     <string name="select_segments">حدد الجزء</string>
     <string name="select_segments_description">%1$s يحتوي على أكثر من مقطع ، تحتاج إلى تحديد الجزء المطلوب للتنقل.</string>
     <string name="segments_count">الجزء %1$d</string>
     <string name="temporary_conditional_routing_descr">استخدم قيود الطريق النشطة الآن على الخريطة</string>
-    <string name="routing_attr_short_way_description">طريق أقصر أمثل (توفير الطاقة)</string>
+    <string name="routing_attr_short_way_description">طريق أقصر محسن (توفير الطاقة)</string>
     <string name="routing_attr_driving_style_description">حدد غرض القيادة للحصول على مسار أقصر أو أسرع أو أكثر أمانًا</string>
     <string name="map_orientation_threshold_descr">إذا كانت السرعة أقل من الحد ، لا تقم بتدويرالخريطة</string>
     <string name="restart">اعاده تشغيل</string>
@@ -4193,7 +4193,7 @@
     <string name="verification_code_missing">لم أتلق رمز التحقق</string>
     <string name="verification_code_missing_description">مدة انتظار الرمز قد تصل إلى 10 دقائق ، كما يمكنك التحقق من مجلد البريد العشوائي، استخدم الزر أدناه.</string>
     <string name="restore_from_file">استعادة من ملف</string>
-    <string name="select_nav_profile_dialog_message">يؤثر نوع التنقل على كييفية حساب المسارات يمكنك الاختيار بين محركات التوجيه المتصلة وغير المتصلة بالإنترنت.</string>
+    <string name="select_nav_profile_dialog_message">يؤثر \'نوع التنقل\' على كييفية حساب المسارات يمكنك الاختيار بين محركات التوجيه المتصلة وغير المتصلة بالإنترنت.</string>
     <string name="loading_list_of_routing_services">تحميل قائمة خدمات التوجيه المتوفرة</string>
     <string name="shared_string_offline">دون اتصال</string>
     <string name="shared_string_online">عبر الإنترنت</string>
