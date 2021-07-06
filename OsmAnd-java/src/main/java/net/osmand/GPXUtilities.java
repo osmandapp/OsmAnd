@@ -1189,6 +1189,18 @@ public class GPXUtilities {
 			return Collections.unmodifiableList(points);
 		}
 
+		public List<WptPt> getAllSegmentsPoints() {
+			List<WptPt> points = new ArrayList<>();
+			for (Track track : tracks) {
+				if (track.generalTrack) continue;
+				for (TrkSegment segment : track.segments) {
+					if (segment.generalSegment) continue;
+					points.addAll(segment.points);
+				}
+			}
+			return points;
+		}
+
 		public Map<String, List<WptPt>> getPointsByCategories() {
 			Map<String, List<WptPt>> res = new HashMap<>();
 			for (WptPt pt : points) {
