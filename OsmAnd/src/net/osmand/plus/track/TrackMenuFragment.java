@@ -300,7 +300,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			displayHelper.setGpxDataItem(app.getGpxDbHelper().getItem(file));
 		}
 		displayHelper.setGpx(selectedGpxFile.getGpxFile());
-		String title = getGpx().metadata.getArticleTitle();
+		String title = getGpx().getArticleTitle();
 		if (title == null) {
 			title = GpxUiHelper.getGpxTitle(Algorithms.getFileWithoutDirs(getGpx().path));
 		}

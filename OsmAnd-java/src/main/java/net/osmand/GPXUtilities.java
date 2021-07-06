@@ -1826,6 +1826,10 @@ public class GPXUtilities {
 					TRAVEL_GPX_CONVERT_MULT_1, TRAVEL_GPX_CONVERT_MULT_2);
 		}
 
+		public String getArticleTitle() {
+			return metadata != null ? metadata.getArticleTitle() : null;
+		}
+
 		private int getItemsToWriteSize() {
 			int size = getPointsSize();
 			for (Route route : routes) {
