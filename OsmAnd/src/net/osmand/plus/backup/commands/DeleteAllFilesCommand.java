@@ -34,13 +34,13 @@ public class DeleteAllFilesCommand extends BaseDeleteFilesCommand {
 	private final List<ExportSettingsType> types;
 
 	public DeleteAllFilesCommand(@NonNull BackupHelper helper,
-								 @NonNull List<ExportSettingsType> types) {
+								 @Nullable List<ExportSettingsType> types) {
 		super(helper, true);
 		this.types = types;
 	}
 
 	public DeleteAllFilesCommand(@NonNull BackupHelper helper,
-								 @NonNull List<ExportSettingsType> types,
+								 @Nullable List<ExportSettingsType> types,
 								 @Nullable OnDeleteFilesListener listener) {
 		super(helper, true, listener);
 		this.types = types;
@@ -101,11 +101,15 @@ public class DeleteAllFilesCommand extends BaseDeleteFilesCommand {
 				publishProgress(status, message);
 			} else {
 				List<RemoteFile> filesToDelete = new ArrayList<>();
-				for (RemoteFile file : remoteFiles) {
-					ExportSettingsType exportType = ExportSettingsType.getExportSettingsTypeForRemoteFile(file);
-					if (types.contains(exportType)) {
-						filesToDelete.add(file);
+				if (types != null) {
+					for (RemoteFile file : remoteFiles) {
+						ExportSettingsType exportType = ExportSettingsType.getExportSettingsTypeForRemoteFile(file);
+						if (types.contains(exportType)) {
+							filesToDelete.add(file);
+						}
 					}
+				} else {
+					filesToDelete.addAll(remoteFiles);
 				}
 				if (!filesToDelete.isEmpty()) {
 					deleteFiles(filesToDelete);

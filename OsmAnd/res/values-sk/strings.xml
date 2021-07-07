@@ -4114,7 +4114,6 @@
     <string name="osmand_cloud_login_descr">Prosím zadajte emailovú adresu, s ktorou ste sa registrovali. Bude na ňu zaslané jednorazové heslo pre ďalší krok.</string>
     <string name="verify_email_address">Overiť emailovú adresu</string>
     <string name="verify_email_address_descr">Overovací kód bol zaslaný na %1$s. Prosím zadajte ho do poľa nižšie.</string>
-    <string name="enter_verification_code">Zadajte 4-miestny kód</string>
     <string name="cloud_email_not_registered">Táto emailová adresa nie je registrovaná pre OsmAnd Cloud</string>
     <string name="cloud_email_already_registered">Táto emailová adresa je už zaregistrovaná.</string>
     <string name="resend_verification_code">Poslať kód znovu</string>

@@ -4114,7 +4114,6 @@
     <string name="osmand_cloud_login_descr">Унесите адресу е-поште коју сте користили за регистрацију. Послаћемо вам једнократну лозинку потребну за следећи корак.</string>
     <string name="verify_email_address">Потврдите адресу е-поште</string>
     <string name="verify_email_address_descr">Верификациони код је послат на %1$s, унесите га у поље испод.</string>
-    <string name="enter_verification_code">Унесите четвороцифрени код</string>
     <string name="cloud_email_not_registered">Ова адреса е-поште није регистрована за ОсмАнд облак</string>
     <string name="cloud_email_already_registered">Налог са овом е-поштом је већ регистрован.</string>
     <string name="resend_verification_code">Поново пошаљи код</string>

@@ -4104,7 +4104,6 @@
     <string name="osmand_cloud_help_descr">Besoin d\'aide \? Contactez-nous %1$s.</string>
     <string name="verify_email_address">Vérifier l’adresse e-mail</string>
     <string name="verify_email_address_descr">Nous avons envoyé un code de vérification à %1$s, veuillez le saisir dans le champ ci-dessous.</string>
-    <string name="enter_verification_code">Entrez le code à 4 chiffres</string>
     <string name="cloud_email_already_registered">Un compte avec cet email existe déjà.</string>
     <string name="resend_verification_code">Renvoyer le code</string>
     <string name="verification_code_missing">Je n\'ai pas reçu le code de vérification</string>

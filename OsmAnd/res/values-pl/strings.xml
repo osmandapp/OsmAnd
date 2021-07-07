@@ -4116,7 +4116,6 @@
     <string name="osmand_cloud_login_descr">Wprowadź adres e-mail, którego użyłeś do rejestracji. Zostanie wysłane na niego jednorazowe hasło do użycia w następnym roku.</string>
     <string name="verify_email_address">Zweryfikuj adres e-mail</string>
     <string name="verify_email_address_descr">Kod weryfikacyjny wysłany na %1$s. Wprowadź go w polu poniżej.</string>
-    <string name="enter_verification_code">Wprowadź 4-cyfrowy kod</string>
     <string name="cloud_email_not_registered">Ten adres e-mail nie jest zarejestrowany w OsmAnd Cloud</string>
     <string name="cloud_email_already_registered">Ten adres e-mail jest już zarejestrowany.</string>
     <string name="resend_verification_code">Wyślij ponownie kod</string>

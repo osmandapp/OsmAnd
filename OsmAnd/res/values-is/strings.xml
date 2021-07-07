@@ -4126,7 +4126,6 @@
     <string name="backup_into_file">Öryggisafritun í skrá</string>
     <string name="restore_from_file">Endurheimta úr skrá</string>
     <string name="verify_email_address">Sannreyna tölvupóstfang</string>
-    <string name="enter_verification_code">Settu inn 4-stafa kóða</string>
     <string name="resend_verification_code">Endursenda kóða</string>
     <string name="select_nav_profile_dialog_message">Gerð leiðsagnar hefur áhrif á reglur þær sem notaðar eru við útreikning leiða. Þú getur valið á milli nettengdra og ónettengdra leiðargerða.</string>
     <string name="loading_list_of_routing_services">Hleð inn lista yfir tiltækar beiningarþjónustur</string>

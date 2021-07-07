@@ -4118,7 +4118,6 @@
     <string name="osmand_cloud_login_descr">Introduza o endereço de email que usou para o registo da conta. Enviaremos uma palavra-passe única, que será necessária para o próximo passo.</string>
     <string name="verify_email_address">Verifique o endereço de email</string>
     <string name="verify_email_address_descr">Enviámos um código de verificação para %1$s. Introduza-o no campo abaixo.</string>
-    <string name="enter_verification_code">Introduza o código de 4 dígitos</string>
     <string name="cloud_email_not_registered">Este email ainda não foi registado no OsmAnd Cloud</string>
     <string name="cloud_email_already_registered">A conta com este email já está registada.</string>
     <string name="resend_verification_code">Reenviar código</string>

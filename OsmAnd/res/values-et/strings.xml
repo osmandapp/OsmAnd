@@ -4054,7 +4054,6 @@
     <string name="osmand_cloud_login_descr">Palun sisesta e-posti aadress, mida kasutasid registreerimisel. Me saadame sulle ühekordse parooli, mida vajad järgmisel sammul.</string>
     <string name="verify_email_address">Kinnita e-posti aadress</string>
     <string name="verify_email_address_descr">Me saatsime kinnituskoodi aadressile %1$s. Palun sisesta see väljale all.</string>
-    <string name="enter_verification_code">Sisesta neljast numbrist kood</string>
     <string name="cloud_email_not_registered">See e-postiaadress ei ole registreeritud OsmAnd Cloudile</string>
     <string name="cloud_email_already_registered">Selle postiaadressiga konto on juba registreeritud.</string>
     <string name="resend_verification_code">Saada kood uuesti</string>

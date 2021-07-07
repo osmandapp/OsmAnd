@@ -234,7 +234,6 @@
     <string name="osmand_cloud_login_descr">Rhowch y cyfeiriad e-bost bu i chi ei ddefnyddio i gofrestru. Byddwch yn derbyn cyfrinair i\'w ddefnyddio unwaith er mwyn parhau i\'r cam nesaf.</string>
     <string name="verify_email_address">Dilysu cyfeiriad ebost</string>
     <string name="verify_email_address_descr">Anfonwyd cod dilysu at %1$s. Rhowch y cod yn y maes isod.</string>
-    <string name="enter_verification_code">Rhowch god 4 digid</string>
     <string name="cloud_email_not_registered">Nid yw\'r e-bost hwn wedi\'i gofrestru am OsmAnd Cloud</string>
     <string name="cloud_email_already_registered">Mae eisoes cyfrif wedi\'i gofrestru gyda\'r e-bost hwn.</string>
     <string name="resend_verification_code">Ail-anfon cod</string>
