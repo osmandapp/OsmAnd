@@ -13,6 +13,7 @@ import androidx.core.util.Pair;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -60,7 +61,13 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 
 	@Override
 	public String getSelectedItem(OsmandApplication app) {
-		return app.getSettings().MAP_UNDERLAY.get() != null ? app.getSettings().MAP_UNDERLAY.get() : KEY_NO_UNDERLAY;
+		String mapUnderlay = app.getSettings().MAP_UNDERLAY.get();
+		if (mapUnderlay == null) {
+			return KEY_NO_UNDERLAY;
+		}
+		return mapUnderlay.endsWith(IndexConstants.SQLITE_EXT)
+				? Algorithms.getFileNameWithoutExtension(mapUnderlay)
+				: mapUnderlay;
 	}
 
 	@Override

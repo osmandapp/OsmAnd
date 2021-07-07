@@ -1,13 +1,12 @@
 package net.osmand.plus.backup;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import net.osmand.FileUtils;
+import net.osmand.OperationLog;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
 import net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
@@ -31,11 +30,21 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.concurrent.Callable;
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 import static net.osmand.plus.backup.BackupHelper.INFO_EXT;
 
@@ -43,7 +52,15 @@ class BackupImporter {
 
 	private static final Log LOG = PlatformUtil.getLog(BackupImporter.class);
 
+	private static final int THREAD_POOL_SIZE = 4;
+
 	private final BackupHelper backupHelper;
+
+	private boolean cancelled;
+
+	private final ExecutorService executor = new AsyncReaderTaskExecutor();
+	private final Map<Future<?>, AsyncReaderTask> tasks = new ConcurrentHashMap<>();
+	private final Map<Future<?>, Throwable> exceptions = new ConcurrentHashMap<>();
 
 	public static class CollectItemsResult {
 		public List<SettingsItem> items;
@@ -58,6 +75,8 @@ class BackupImporter {
 	CollectItemsResult collectItems(boolean readItems) throws IllegalArgumentException, IOException {
 		CollectItemsResult result = new CollectItemsResult();
 		StringBuilder error = new StringBuilder();
+		OperationLog operationLog = new OperationLog("collectRemoteItems", BackupHelper.DEBUG);
+		operationLog.startOperation();
 		try {
 			backupHelper.downloadFileList((status, message, remoteFiles) -> {
 				if (status == BackupHelper.STATUS_SUCCESS) {
@@ -74,6 +93,7 @@ class BackupImporter {
 		} catch (UserNotRegisteredException e) {
 			throw new IllegalArgumentException(e.getMessage(), e);
 		}
+		operationLog.finishOperation();
 		if (!Algorithms.isEmpty(error)) {
 			throw new IOException(error.toString());
 		}
@@ -84,12 +104,12 @@ class BackupImporter {
 		if (Algorithms.isEmpty(items)) {
 			throw new IllegalArgumentException("No items");
 		}
-		List<RemoteFile> remoteFiles = backupHelper.getBackup().getRemoteFiles(RemoteFilesType.UNIQUE);
+		Collection<RemoteFile> remoteFiles = backupHelper.getBackup().getRemoteFiles(RemoteFilesType.UNIQUE).values();
 		if (Algorithms.isEmpty(remoteFiles)) {
 			throw new IllegalArgumentException("No remote files");
 		}
-		OsmandApplication app = backupHelper.getApp();
-		File tempDir = FileUtils.getTempDir(app);
+		OperationLog operationLog = new OperationLog("importItems", BackupHelper.DEBUG);
+		operationLog.startOperation();
 		Map<RemoteFile, SettingsItem> remoteFileItems = new HashMap<>();
 		for (RemoteFile remoteFile : remoteFiles) {
 			SettingsItem item = null;
@@ -102,51 +122,76 @@ class BackupImporter {
 				}
 			}
 			if (item != null && (!item.shouldReadOnCollecting() || forceReadData)) {
-				FileInputStream is = null;
-				try {
-					SettingsItemReader<? extends SettingsItem> reader = item.getReader();
-					if (reader != null) {
-						String fileName = remoteFile.getTypeNamePath();
-						File tempFile = new File(tempDir, fileName);
-						Map<File, RemoteFile> map = new HashMap<>();
-						map.put(tempFile, remoteFile);
-						Map<File, String> errors = backupHelper.downloadFiles(map);
-						if (errors.isEmpty()) {
-							is = new FileInputStream(tempFile);
-							reader.readFromStream(is, remoteFile.getName());
-							if (forceReadData) {
-								item.apply();
-							}
-							backupHelper.updateFileUploadTime(remoteFile.getType(), remoteFile.getName(), remoteFile.getClienttimems());
-							if (item instanceof FileSettingsItem) {
-								String itemFileName = BackupHelper.getFileItemName((FileSettingsItem) item);
-								if (app.getAppPath(itemFileName).isDirectory()) {
-									backupHelper.updateFileUploadTime(item.getType().name(), itemFileName,
-											remoteFile.getClienttimems());
-								}
-							}
-						} else {
-							throw new IOException("Error reading temp item file " + fileName + ": " +
-									errors.values().iterator().next());
-						}
-					}
-					item.applyAdditionalParams();
-				} catch (IllegalArgumentException e) {
-					item.getWarnings().add(app.getString(R.string.settings_item_read_error, item.getName()));
-					LOG.error("Error reading item data: " + item.getName(), e);
-				} catch (IOException e) {
-					item.getWarnings().add(app.getString(R.string.settings_item_read_error, item.getName()));
-					LOG.error("Error reading item data: " + item.getName(), e);
-				} catch (UserNotRegisteredException e) {
-					item.getWarnings().add(app.getString(R.string.settings_item_read_error, item.getName()));
-					LOG.error("Error reading item data: " + item.getName(), e);
-				} finally {
-					Algorithms.closeStream(is);
-				}
+				AsyncReaderTask task = new AsyncReaderTask(remoteFile, item, forceReadData);
+				Future<?> future = executor.submit(task);
+				tasks.put(future, task);
 			}
 		}
+
+		executor.shutdown();
+		boolean finished = false;
+		while (!finished) {
+			try {
+				finished = executor.awaitTermination(100, TimeUnit.MILLISECONDS);
+				if (isCancelled() || isInterrupted()) {
+					for (Future<?> future : tasks.keySet()) {
+						future.cancel(false);
+					}
+				}
+			} catch (InterruptedException e) {
+				// ignore
+			}
+		}
+
 		for (Entry<RemoteFile, SettingsItem> fileItem : remoteFileItems.entrySet()) {
 			fileItem.getValue().setLocalModifiedTime(fileItem.getKey().getClienttimems());
+		}
+		operationLog.finishOperation();
+	}
+
+	private void importItem(@NonNull RemoteFile remoteFile, @NonNull SettingsItem item, boolean forceReadData) {
+		OsmandApplication app = backupHelper.getApp();
+		File tempDir = FileUtils.getTempDir(app);
+		FileInputStream is = null;
+		try {
+			SettingsItemReader<? extends SettingsItem> reader = item.getReader();
+			if (reader != null) {
+				String fileName = remoteFile.getTypeNamePath();
+				File tempFile = new File(tempDir, fileName);
+				Map<File, RemoteFile> map = new HashMap<>();
+				map.put(tempFile, remoteFile);
+				Map<File, String> errors = backupHelper.downloadFiles(map);
+				if (errors.isEmpty()) {
+					is = new FileInputStream(tempFile);
+					reader.readFromStream(is, remoteFile.getName());
+					if (forceReadData) {
+						item.apply();
+					}
+					backupHelper.updateFileUploadTime(remoteFile.getType(), remoteFile.getName(), remoteFile.getClienttimems());
+					if (item instanceof FileSettingsItem) {
+						String itemFileName = BackupHelper.getFileItemName((FileSettingsItem) item);
+						if (app.getAppPath(itemFileName).isDirectory()) {
+							backupHelper.updateFileUploadTime(item.getType().name(), itemFileName,
+									remoteFile.getClienttimems());
+						}
+					}
+				} else {
+					throw new IOException("Error reading temp item file " + fileName + ": " +
+							errors.values().iterator().next());
+				}
+			}
+			item.applyAdditionalParams(reader);
+		} catch (IllegalArgumentException e) {
+			item.getWarnings().add(app.getString(R.string.settings_item_read_error, item.getName()));
+			LOG.error("Error reading item data: " + item.getName(), e);
+		} catch (IOException e) {
+			item.getWarnings().add(app.getString(R.string.settings_item_read_error, item.getName()));
+			LOG.error("Error reading item data: " + item.getName(), e);
+		} catch (UserNotRegisteredException e) {
+			item.getWarnings().add(app.getString(R.string.settings_item_read_error, item.getName()));
+			LOG.error("Error reading item data: " + item.getName(), e);
+		} finally {
+			Algorithms.closeStream(is);
 		}
 	}
 
@@ -157,6 +202,8 @@ class BackupImporter {
 		}
 		List<SettingsItem> items = new ArrayList<>();
 		try {
+			OperationLog operationLog = new OperationLog("getRemoteItems", BackupHelper.DEBUG);
+			operationLog.startOperation();
 			JSONObject json = new JSONObject();
 			JSONArray itemsJson = new JSONArray();
 			json.put("items", itemsJson);
@@ -176,12 +223,13 @@ class BackupImporter {
 					uniqueRemoteFiles.add(rf);
 				}
 			}
+			operationLog.log("build uniqueRemoteFiles");
 
+			Map<String, Long> infoMap = backupHelper.getDbHelper().getUploadedFileInfoMap();
 			for (RemoteFile remoteFile : uniqueRemoteFiles) {
-				UploadedFileInfo info = backupHelper.getDbHelper().getUploadedFileInfo(remoteFile.getType(), remoteFile.getName());
-				long uploadTime = info != null ? info.getUploadTime() : 0;
-				if (uploadTime == remoteFile.getClienttimems()) {
-					continue;
+				Long uploadTime = infoMap.get(remoteFile.getType() + "___" + remoteFile.getName());
+				if (uploadTime != null && uploadTime == remoteFile.getClienttimems()) {
+					//continue;
 				}
 				String fileName = remoteFile.getTypeNamePath();
 				if (fileName.endsWith(INFO_EXT)) {
@@ -195,6 +243,8 @@ class BackupImporter {
 					remoteItemFilesMap.put(fileName, remoteFile);
 				}
 			}
+			operationLog.log("build maps");
+
 			for (Entry<String, RemoteFile> remoteFileEntry : remoteItemFilesMap.entrySet()) {
 				String itemFileName = remoteFileEntry.getKey();
 				boolean hasInfo = false;
@@ -208,28 +258,35 @@ class BackupImporter {
 					noInfoRemoteItemFiles.add(remoteFileEntry.getValue());
 				}
 			}
+			operationLog.log("build noInfoRemoteItemFiles");
+
 			if (readItems) {
 				generateItemsJson(itemsJson, remoteInfoFilesMap, noInfoRemoteItemFiles);
 			} else {
 				generateItemsJson(itemsJson, remoteInfoFiles, noInfoRemoteItemFiles);
 			}
+			operationLog.log("generateItemsJson");
 
 			SettingsItemsFactory itemsFactory = new SettingsItemsFactory(app, json);
+			operationLog.log("create setting items");
 			List<SettingsItem> settingsItemList = itemsFactory.getItems();
 			if (settingsItemList.isEmpty()) {
 				return Collections.emptyList();
 			}
 			updateFilesInfo(remoteItemFilesMap, settingsItemList);
 			items.addAll(settingsItemList);
+			operationLog.log("updateFilesInfo");
 
 			if (readItems) {
 				Map<RemoteFile, SettingsItemReader<? extends SettingsItem>> remoteFilesForRead = new HashMap<>();
 				for (SettingsItem item : settingsItemList) {
-					RemoteFile remoteFile = getItemRemoteFile(item, remoteItemFilesMap.values());
-					if (remoteFile != null && item.shouldReadOnCollecting()) {
-						SettingsItemReader<? extends SettingsItem> reader = item.getReader();
-						if (reader != null) {
-							remoteFilesForRead.put(remoteFile, reader);
+					if (item.shouldReadOnCollecting()) {
+						List<RemoteFile> foundRemoteFiles = getItemRemoteFiles(item, remoteItemFilesMap);
+						for (RemoteFile remoteFile : foundRemoteFiles) {
+							SettingsItemReader<? extends SettingsItem> reader = item.getReader();
+							if (reader != null) {
+								remoteFilesForRead.put(remoteFile, reader);
+							}
 						}
 					}
 				}
@@ -241,7 +298,9 @@ class BackupImporter {
 				if (!remoteFilesForDownload.isEmpty()) {
 					downloadAndReadItemFiles(remoteFilesForRead, remoteFilesForDownload);
 				}
+				operationLog.log("readItems");
 			}
+			operationLog.finishOperation();
 		} catch (IllegalArgumentException e) {
 			throw new IllegalArgumentException("Error reading items", e);
 		} catch (JSONException e) {
@@ -254,8 +313,9 @@ class BackupImporter {
 		return items;
 	}
 
-	@Nullable
-	private RemoteFile getItemRemoteFile(@NonNull SettingsItem item, @NonNull Collection<RemoteFile> remoteFiles) {
+	@NonNull
+	private List<RemoteFile> getItemRemoteFiles(@NonNull SettingsItem item, @NonNull Map<String, RemoteFile> remoteFiles) {
+		List<RemoteFile> res = new ArrayList<>();
 		String fileName = item.getFileName();
 		if (!Algorithms.isEmpty(fileName)) {
 			if (fileName.charAt(0) != '/') {
@@ -271,15 +331,22 @@ class BackupImporter {
 					fileName = fileName.substring(folder.length() - 1);
 				}
 			}
-			for (RemoteFile remoteFile : remoteFiles) {
-				String remoteFileName = remoteFile.getTypeNamePath();
-				String typeFileName = remoteFile.getType() + fileName;
-				if (remoteFileName.equals(typeFileName) || remoteFileName.startsWith(typeFileName + "/")) {
-					return remoteFile;
+			String typeFileName = item.getType().name() + fileName;
+			RemoteFile remoteFile = remoteFiles.remove(typeFileName);
+			if (remoteFile != null) {
+				res.add(remoteFile);
+			}
+			Iterator<Entry<String, RemoteFile>> it = remoteFiles.entrySet().iterator();
+			while (it.hasNext()) {
+				Entry<String, RemoteFile> fileEntry = it.next();
+				String remoteFileName = fileEntry.getKey();
+				if (remoteFileName.startsWith(typeFileName + "/")) {
+					res.add(fileEntry.getValue());
+					it.remove();
 				}
 			}
 		}
-		return null;
+		return res;
 	}
 
 	private void generateItemsJson(@NonNull JSONArray itemsJson,
@@ -329,13 +396,31 @@ class BackupImporter {
 	}
 
 	private void addRemoteFilesToJson(@NonNull JSONArray itemsJson, @NonNull List<RemoteFile> noInfoRemoteItemFiles) throws JSONException {
+		Set<String> fileItems = new HashSet<>();
 		for (RemoteFile remoteFile : noInfoRemoteItemFiles) {
 			String type = remoteFile.getType();
 			String fileName = remoteFile.getName();
-			JSONObject itemJson = new JSONObject();
-			itemJson.put("type", type);
-			itemJson.put("file", fileName);
-			itemsJson.put(itemJson);
+			if (type.equals(SettingsItemType.FILE.name()) && fileName.startsWith(FileSubtype.VOICE.getSubtypeFolder())) {
+				FileSubtype subtype = FileSubtype.getSubtypeByFileName(fileName);
+				int lastSeparatorIndex = fileName.lastIndexOf('/');
+				if (lastSeparatorIndex > 0) {
+					fileName = fileName.substring(0, lastSeparatorIndex);
+				}
+				String typeName = subtype + "___" + fileName;
+				if (!fileItems.contains(typeName)) {
+					fileItems.add(typeName);
+					JSONObject itemJson = new JSONObject();
+					itemJson.put("type", type);
+					itemJson.put("file", fileName);
+					itemJson.put("subtype", subtype);
+					itemsJson.put(itemJson);
+				}
+			} else {
+				JSONObject itemJson = new JSONObject();
+				itemJson.put("type", type);
+				itemJson.put("file", fileName);
+				itemsJson.put(itemJson);
+			}
 		}
 	}
 
@@ -354,7 +439,7 @@ class BackupImporter {
 						FileInputStream is = new FileInputStream(tempFile);
 						try {
 							reader.readFromStream(is, item.getFileName());
-							item.applyAdditionalParams();
+							item.applyAdditionalParams(reader);
 						} catch (IllegalArgumentException e) {
 							item.getWarnings().add(app.getString(R.string.settings_item_read_error, item.getName()));
 							LOG.error("Error reading item data: " + item.getName(), e);
@@ -376,15 +461,72 @@ class BackupImporter {
 		}
 	}
 
-	private void updateFilesInfo(@NonNull Map<String, RemoteFile> remoteFiles, List<SettingsItem> settingsItemList) {
+	private void updateFilesInfo(@NonNull Map<String, RemoteFile> remoteFiles,
+								 @NonNull List<SettingsItem> settingsItemList) {
+		Map<String, RemoteFile> remoteFilesMap = new HashMap<>(remoteFiles);
 		for (SettingsItem settingsItem : settingsItemList) {
-			RemoteFile remoteFile = getItemRemoteFile(settingsItem, remoteFiles.values());
-			if (remoteFile != null) {
+			List<RemoteFile> foundRemoteFiles = getItemRemoteFiles(settingsItem, remoteFilesMap);
+			for (RemoteFile remoteFile : foundRemoteFiles) {
 				settingsItem.setLastModifiedTime(remoteFile.getClienttimems());
 				remoteFile.item = settingsItem;
 				if (settingsItem instanceof FileSettingsItem) {
 					FileSettingsItem fileSettingsItem = (FileSettingsItem) settingsItem;
 					fileSettingsItem.setSize(remoteFile.getFilesize());
+				}
+			}
+		}
+	}
+
+	public void setCancelled(boolean cancelled) {
+		this.cancelled = cancelled;
+	}
+
+	public boolean isCancelled() {
+		return cancelled;
+	}
+
+	private boolean isInterrupted() {
+		return !exceptions.isEmpty();
+	}
+
+	private class AsyncReaderTask implements Callable<Void> {
+
+		private final RemoteFile remoteFile;
+		private final SettingsItem item;
+		private final boolean forceReadData;
+
+		public AsyncReaderTask(@NonNull RemoteFile remoteFile, @NonNull SettingsItem item, boolean forceReadData) {
+			this.remoteFile = remoteFile;
+			this.item = item;
+			this.forceReadData = forceReadData;
+		}
+
+		@Override
+		public Void call() throws Exception {
+			importItem(remoteFile, item, forceReadData);
+			return null;
+		}
+	}
+
+	private class AsyncReaderTaskExecutor extends ThreadPoolExecutor {
+
+		public AsyncReaderTaskExecutor() {
+			super(THREAD_POOL_SIZE, THREAD_POOL_SIZE, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>());
+		}
+
+		protected void afterExecute(Runnable r, Throwable t) {
+			super.afterExecute(r, t);
+			if (r instanceof Future<?>) {
+				if (t == null && ((Future<?>) r).isDone()) {
+					try {
+						((Future<?>) r).get();
+					} catch (CancellationException | InterruptedException e) {
+						// ignore
+					} catch (ExecutionException ee) {
+						exceptions.put((Future<?>) r, ee.getCause());
+					}
+				} else {
+					exceptions.put((Future<?>) r, t);
 				}
 			}
 		}

@@ -12,27 +12,41 @@
 
 -->
 
+    <string name="duration_moment_ago">a moment ago</string>
+    <string name="release_4_0">
+    • Cloud backup\n\n
+    • Added night mode for \"Topo\" rendering style\n\n
+    • Added option to download Contour lines in feet\n\n
+    • Tracks can now be colored by altitude, speed, or slope.\n\n
+    • Updated \"Trip recording\" dialog\n\n
+    • Distance by tap moved from the Radius ruler into a separate option\n\n
+    • Plan Route: added ability to change navigation options, accessing configure map and search without leaving plan route\n\n
+    • New \"Purchase\" screen with detailed information about purchasing\n\n
+    • Added option to change the route line appearance.\n\n
+    • OsmAnd Live updates moved to \"Downloads > Updates\"\n\n
+    </string>
+    <string name="approximate_route_description">Attach the route to roads on the map to get all turns and additional data, like smoothness, road types etc.</string>
     <string name="backup_error_no_valid_subscription">No valid subscription present</string>
-    <string name="backup_error_user_is_not_registered">User with that email is not registered</string>
-    <string name="backup_error_token_is_not_valid_or_expired">Token is not valid or expired</string>
-    <string name="backup_error_token_is_not_valid">Provided device id or token is not valid</string>
-    <string name="backup_error_file_not_available">File is not available</string>
-    <string name="backup_error_gzip_only_supported_upload">File is submitted not in gzip format</string>
+    <string name="backup_error_user_is_not_registered">No user registered with that e-mail address</string>
+    <string name="backup_error_token_is_not_valid_or_expired">Invalid or expired token</string>
+    <string name="backup_error_token_is_not_valid">Something is wrong with the provided device ID or token</string>
+    <string name="backup_error_file_not_available">File unavailable</string>
+    <string name="backup_error_gzip_only_supported_upload">The file should be sent in .gzip format</string>
     <string name="backup_error_size_is_exceeded">Maximum size of OsmAnd Cloud exceeded %1$s</string>
-    <string name="backup_error_subscription_was_used">Subscription or promo was used by another account %1$s</string>
-    <string name="backup_error_subscription_was_expired">Subscription is not valid any more</string>
-    <string name="backup_error_user_is_already_registered">User was already registered with such email</string>
+    <string name="backup_error_subscription_was_used">Subscription or promo used by another account %1$s</string>
+    <string name="backup_error_subscription_was_expired">Expired subscription</string>
+    <string name="backup_error_user_is_already_registered">This e-mail address is in use on another account</string>
     <string name="shared_string_view_all">View all</string>
     <string name="shared_string_discussion">Discussion</string>
-    <string name="backup_delete_types">Delete disabled types data</string>
-    <string name="backup_delete_types_descr">Do you want to delete data for disabled types from cloud?</string>
+    <string name="backup_delete_types">Delete disabled data types</string>
+    <string name="backup_delete_types_descr">Delete all data for deprecated data types from OsmAnd cloud?</string>
     <string name="from_with_param">From %1$s</string>
     <string name="regular_price">Regular price</string>
     <string name="complete_purchase">Complete purchase</string>
     <string name="shared_string_includes">Includes</string>
     <string name="shared_string_not_included">Not included</string>
-    <string name="cancel_anytime_in_gplay">Cancel anytime in Google Play.</string>
-    <string name="cancel_anytime_in_huawei_appgallery">Cancel anytime in Huawei AppGallery</string>
+    <string name="cancel_anytime_in_gplay">Cancel it anytime on Google Play.</string>
+    <string name="cancel_anytime_in_huawei_appgallery">Cancel it anytime in Huawei AppGallery</string>
     <string name="shared_string_learn_more">Learn more</string>
     <string name="osmand_pro_tagline">Get maximum features</string>
     <string name="osmand_maps_plus_tagline">Get extended features</string>
@@ -40,8 +54,8 @@
     <string name="not_available_with">Not available with %1$s </string>
     <string name="continue_with">Continue with %1$s</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s or %2$s</string>
-    <string name="you_can_get_feature_as_part_of_pattern">You can get “%1$s” as part of: %2$s plan. Compare the plans:</string>
-    <string name="advanced_widgets">Advanced Widgets</string>
+    <string name="you_can_get_feature_as_part_of_pattern">You can get “%1$s” as part of: %2$s plan. Comparison:</string>
+    <string name="advanced_widgets">Advanced widgets</string>
     <string name="nautical_depth">Nautical depth</string>
     <string name="terrain_maps">Terrain maps</string>
     <string name="offline_wikivoyage">Offline Wikivoyage</string>
@@ -49,9 +63,9 @@
     <string name="terrain_maps_contour_lines_hillshade_slope">Terrain maps: contour lines, hillshades, slope</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia and Wikivoyage offline</string>
     <string name="unlimited_map_downloads">Unlimited map downloads</string>
-    <string name="purchases_feature_desc_osmand_cloud">Get OsmAnd Cloud to store all OsmAnd data online. Forget about loosing your data after reinstall, backup and restore all information without a problem.</string>
-    <string name="purchases_feature_desc_advanced_widgets">Get access to Advanced OsmAnd Widgets.</string>
-    <string name="purchases_feature_desc_hourly_map_updates">Get access to more frequently maps update, choose between: hourly, daily or weekly updates. Updates are downloaded incrementally, only for the changed area.</string>
+    <string name="purchases_feature_desc_osmand_cloud">Get OsmAnd Cloud to store all OsmAnd data online. No lost data after reinstalling. Back up and restore all info easily.</string>
+    <string name="purchases_feature_desc_advanced_widgets">Get access to advanced OsmAnd widgets.</string>
+    <string name="purchases_feature_desc_hourly_map_updates">Get access to more frequent map updates. Hourly, daily, or weekly updates. Updates are downloaded incrementally, only for the changed area.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Get access to regular monthly updates for offline maps.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Get unlimited downloads for all continents and regions offline maps.</string>
     <string name="purchases_feature_desc_combined_wiki">Explore Wikipedia articles on the go, without an internet connection. Offline data divided by countries and available in all languages.</string>
@@ -65,19 +79,19 @@
     <string name="routing_attr_avoid_tunnels_name">Avoid tunnels</string>
     <string name="routing_attr_avoid_tunnels_description">Avoid tunnels</string>
     <string name="delete_version_history">Delete version history</string>
-    <string name="backup_version_history_delete_descr">Do you want to delete the change history for disabled types from cloud?</string>
+    <string name="backup_version_history_delete_descr">Delete the changelog for deprecated data types from OsmAnd cloud?</string>
     <string name="backup_storage_taken">Storage taken</string>
     <string name="backup_version_history">Version history</string>
     <string name="grey_color_slope">Grey color is used when slope is undefined.</string>
-    <string name="restore_complete">Restore complete</string>
-    <string name="receiving_data_from_server">Receiving data from the server</string>
+    <string name="restore_complete">Restored</string>
+    <string name="receiving_data_from_server">Receiving data from the server…</string>
     <string name="restore_selected_data">Restore selected data</string>
     <string name="choose_what_to_restore">Choose what to restore.</string>
     <string name="restore_from_osmand_cloud">Restore from OsmAnd Cloud</string>
     <string name="backup_restore_data">Restore data</string>
     <string name="backup_restore_data_descr">Restore data on the device, using online backups.</string>
-    <string name="select_backup_data_descr">Select data and folders for backup.</string>
-    <string name="backup_data">Backup data</string>
+    <string name="select_backup_data_descr">Select data and folders to back up.</string>
+    <string name="backup_data">Back up data</string>
     <string name="backup_delete_old_data_warning">You are about to delete the change history for the previously loaded data.\n\nThe current version of the data will be saved on the server, but you will not be able to revert to the previously made changes.</string>
     <string name="backup_delete_old_data_descr">Current versions of your data will be preserved on OsmAnd Cloud</string>
     <string name="backup_delete_old_data">Remove old versions</string>
@@ -86,7 +100,7 @@
     <string name="backup_delete_all_data_warning">You are about to delete all data previously uploaded to OsmAnd Cloud, including version history.\n\nYou will not be able to recover deleted data.</string>
     <string name="backup_delete_all_data_descr">All data on OsmAnd Cloud will be deleted. Local versions will stay untouched.</string>
     <string name="backup_delete_all_data">Delete all my data</string>
-    <string name="shared_string_logout">Logout</string>
+    <string name="shared_string_logout">Log out</string>
     <string name="download_server_version">Download server version</string>
     <string name="upload_local_version">Upload local version</string>
     <string name="backup_pause_all">Pause all</string>
@@ -99,7 +113,7 @@
     <string name="backup_now">Backup now</string>
     <string name="backup_complete">Backup complete</string>
     <string name="shared_string_predefined">Predefined</string>
-    <string name="failed_loading_predefined_engines">Failed to load the list of predefined templates.\nPlease check your Internet connection.</string>
+    <string name="failed_loading_predefined_engines">Could not load the list of predefined templates.\nPlease check your Internet connection.</string>
     <string name="provided_by">Provided by %1$s</string>
     <string name="shared_string_external">External</string>
     <string name="osmand_online_routing_promo">You can use predefined templates, or add custom online routing, supported: OSRM, Graphhopper, OpenRouteService, GPX.</string>
@@ -110,19 +124,19 @@
     <string name="verification_code_missing_description">Waiting time for code can be 10 minutes, also you can check your spam folder. If it doesn\'t help, use button below.</string>
     <string name="verification_code_missing">I didn\'t receive verification code</string>
     <string name="resend_verification_code">Resend code</string>
-    <string name="cloud_email_already_registered">Account with this email is already registered.</string>
-    <string name="cloud_email_not_registered">This email has not been registered for OsmAnd Cloud</string>
-    <string name="enter_verification_code">Enter 4 digit code</string>
-    <string name="verify_email_address_descr">We sent a verification code to %1$s, please enter it in the field below.</string>
-    <string name="verify_email_address">Verify email address</string>
-    <string name="osmand_cloud_login_descr">Please enter the email address, you used for registration. We will send you a one-time password needed on the next step.</string>
-    <string name="osmand_cloud_create_account_descr">Please enter your email address, all your data will be linked to it.\nWe will send you a verification code to this email address.</string>
+    <string name="cloud_email_already_registered">This e-mail address is already registered.</string>
+    <string name="cloud_email_not_registered">This e-mail address is not registered for OsmAnd Cloud</string>
+    <string name="enter_verification_code">Enter one-time password</string>
+    <string name="verify_email_address_descr">Verification code sent to %1$s. Please enter it in the field below.</string>
+    <string name="verify_email_address">Verify the e-mail address</string>
+    <string name="osmand_cloud_login_descr">Please enter the e-mail address you registred with. A one-time password for the next step will be sent to it.</string>
+    <string name="osmand_cloud_create_account_descr">Please enter your e-mail address, a verification code will be sent there,\nand all your data will be linked to it.</string>
     <string name="osmand_cloud_help_descr">Need help? Please contact us at %1$s</string>
     <string name="restore_from_file">Restore from file</string>
-    <string name="backup_into_file">Backup into file</string>
-    <string name="local_backup_descr">Backup or restore data from a local file.</string>
+    <string name="backup_into_file">Back up as file</string>
+    <string name="local_backup_descr">Back up or restore data from a local file.</string>
     <string name="local_backup">Local backup</string>
-    <string name="osmand_cloud_authorize_descr">Never lose your data, backup and restore all information without a problem.</string>
+    <string name="osmand_cloud_authorize_descr">Never lose your data. Back up and restore all info easily.</string>
     <string name="osmand_cloud">OsmAnd Cloud</string>
     <string name="duration_ago">%1$s ago</string>
     <string name="last_backup">Last backup</string>
@@ -196,7 +210,7 @@
     <string name="track_recording_will_be_continued">The recording will be continued.</string>
     <string name="select_category_descr">Select category or add a new one</string>
     <string name="purchases">Purchases</string>
-    <string name="live_update_delete_updates_msg">Are you sure you want to delete all %s live updates?</string>
+    <string name="live_update_delete_updates_msg">Delete all %s live updates?</string>
     <string name="delete_updates">Delete updates</string>
     <string name="live_update_frequency_hour_variant">Map updates will be checked every hour. Next time %1$s in %2$s.</string>
     <string name="live_update_frequency_day_variant">Map updates will be checked every day. Next time %1$s in %2$s.</string>
@@ -210,7 +224,7 @@
     <string name="routing_attr_height_obstacles_description">Routing could avoid strong uphills.</string>
     <string name="app_restart_required">Application restart required to apply some settings.</string>
     <string name="on_pause">On pause</string>
-    <string name="track_recording_description">Are you sure you want to stop recording?\nAll unsaved data will be lost.</string>
+    <string name="track_recording_description">Stop recording?\nAll unsaved data will be lost.</string>
     <string name="track_recording_title">Track recording stopped</string>
     <string name="track_recording_save_and_stop">Save and stop recording</string>
     <string name="track_recording_stop_without_saving">Stop without saving</string>
@@ -474,7 +488,7 @@
     <string name="add_segment_to_the_track">Add to a track file</string>
     <string name="shared_string_save_as_gpx">Save as new track file</string>
     <string name="in_case_of_reverse_direction">In case of reverse direction</string>
-    <string name="plan_route_exit_dialog_descr">Are you sure you want to discard all changes in the planned route?</string>
+    <string name="plan_route_exit_dialog_descr">Discard all changes in the planned route?</string>
     <string name="street_level_imagery">Street-level imagery</string>
     <string name="route_between_points_add_track_desc">Select a track file to add the new segment to.</string>
     <string name="navigation_profile">Navigation profile</string>
@@ -552,7 +566,7 @@
     <string name="shared_string_legal">Legal</string>
     <string name="uninstall_speed_cameras">Uninstall speed cameras</string>
     <string name="screen_timeout">Screen timeout</string>
-    <string name="delete_all_actions_message_q">Are you sure you want to irrevocably delete %d quick actions?</string>
+    <string name="delete_all_actions_message_q">Irrevocably delete %d quick actions?</string>
     <string name="shared_string_delete_all_q">Delete all?</string>
     <string name="export_import_quick_actions_with_profiles_promo">You can export or import quick actions with app profiles.</string>
     <string name="tiles_storage_descr">Choose how to store downloaded tiles.</string>
@@ -706,7 +720,7 @@
     <string name="recalculate_route_distance_promo">The route will be recalculated if the distance from the route to the current location is more than selected value.</string>
     <string name="select_distance_route_will_recalc">Select the distance after which the route will be recalculated.</string>
     <string name="recalculate_route_in_deviation">Recalculate route in case of deviation</string>
-    <string name="clear_recorded_data_warning">Are you sure you want to clear recorded data?</string>
+    <string name="clear_recorded_data_warning">Clear recorded data?</string>
     <string name="restore_all_profile_settings_descr">All profile settings will be restored to their original state after creating/importing this profile.</string>
     <string name="restore_all_profile_settings">Restore all profile settings?</string>
     <string name="saving_new_profile">Saving new profile</string>
@@ -923,7 +937,7 @@
     <string name="routing_attr_prefer_unpaved_name">Prefer unpaved roads</string>
     <string name="routing_attr_prefer_unpaved_description">Prefer unpaved roads.</string>
     <string name="update_all_maps">Update all maps</string>
-    <string name="update_all_maps_q">Are you sure you want to update all (%1$d) maps?</string>
+    <string name="update_all_maps_q">Update all (%1$d) maps?</string>
     <string name="track_storage_directory">Track storage folder</string>
     <string name="track_storage_directory_descrp">Tracks can be stored in the \'rec\' folder, monthly, or daily folders.</string>
     <string name="store_tracks_in_rec_directory">Record tracks to \'rec\' folder</string>
@@ -1149,7 +1163,7 @@
     <string name="profile_alert_need_save_title">Save changes</string>
     <string name="profile_alert_need_save_msg">Save changes to the profile first</string>
     <string name="profile_alert_delete_title">Delete profile</string>
-    <string name="profile_alert_delete_msg">Are you sure you want to delete the \"%s\" profile</string>
+    <string name="profile_alert_delete_msg">Delete the \"%s\" profile</string>
     <string name="select_base_profile_dialog_title">Select profile to start with</string>
     <string name="select_base_profile_dialog_message">Base your custom profile on one of the default app profiles, this defines the basic setup like default visibility of widgets and units of speed and distance. These are the default app profiles, together with examples of custom profiles they may be extended to:</string>
     <string name="select_nav_profile_dialog_title">Select navigation type</string>
@@ -1770,7 +1784,7 @@
     <string name="shared_string_slope">Slope</string>
     <string name="add_new_folder">Add new folder</string>
     <string name="points_delete_multiple_succesful">Point(s) deleted.</string>
-    <string name="points_delete_multiple">Are you sure you want to delete %1$d point(s)?</string>
+    <string name="points_delete_multiple">Delete %1$d point(s)?</string>
     <string name="route_points_category_name">Turns to pass on this route</string>
     <string name="track_points_category_name">Waypoints, points of interest, named features</string>
     <string name="shared_string_gpx_track">Track</string>
@@ -1932,7 +1946,7 @@
     <string name="update_all_maps_now">Update all maps now?</string>
     <string name="clear_tile_data">Clear all tiles</string>
     <string name="routing_attr_short_way_name">Fuel-efficient way</string>
-    <string name="replace_favorite_confirmation">Are you sure you want to replace Favorite %1$s?</string>
+    <string name="replace_favorite_confirmation">Replace the \"%1$s\" Favorite?</string>
     <string name="rendering_attr_hideOverground_name">Overground objects</string>
     <string name="shared_string_change">Change</string>
     <string name="get_started">Get started</string>
@@ -2353,8 +2367,8 @@
     <string name="current_route">Current route</string>
     <string name="osm_changes_added_to_local_edits">OSM changes added to local changeset</string>
     <string name="mark_to_delete">Mark to delete</string>
-    <string name="local_recordings_delete_all_confirm">Are you sure you want to delete %1$d notes?</string>
-    <string name="local_osm_changes_upload_all_confirm">Are you sure you want to upload %1$d change(s) to OSM?</string>
+    <string name="local_recordings_delete_all_confirm">Delete %1$d notes?</string>
+    <string name="local_osm_changes_upload_all_confirm">Upload %1$d change(s) to OSM?</string>
     <string name="confirmation_to_clear_history">Clear history?</string>
     <string name="delay_to_start_navigation_descr">Specify wait time to remain on the route planning screen.</string>
     <string name="delay_to_start_navigation">Start turn-by-turn guidance after…</string>
@@ -2849,7 +2863,7 @@
     <string name="app_mode_motorcycle">Motorcycle</string>
     <string name="app_mode_boat">Boat</string>
     <string name="app_mode_aircraft">Aircraft</string>
-    <string name="local_osm_changes_delete_all_confirm">Are you sure you want to delete %1$d OSM changes?</string>
+    <string name="local_osm_changes_delete_all_confirm">Delete %1$d OSM changes?</string>
     <string name="animate_routing_route_not_calculated">Please calculate the route first</string>
     <string name="animate_routing_route">Simulate using calculated route</string>
     <string name="animate_routing_gpx">Simulate using GPX track</string>
@@ -2980,8 +2994,8 @@
     <string name="download_hillshade_maps">Hillshades</string>
     <string name="local_indexes_cat_srtm">Contour lines</string>
     <string name="local_indexes_cat_av">Audio/Video data</string>
-    <string name="stop_routing_confirm">Are you sure you want to stop the navigation?</string>
-    <string name="clear_dest_confirm">Are you sure you want to clear your destination (and intermediate destinations)?</string>
+    <string name="stop_routing_confirm">Stop the navigation?</string>
+    <string name="clear_dest_confirm">Remove your destination (and intermediate destinations)?</string>
     <string name="precise_routing_mode_descr">Calculate precise routes without glitches. Still distance-limited and slow.</string>
     <string name="precise_routing_mode">Precise routing (alpha)</string>
     <string name="recording_context_menu_show">Show</string>
@@ -3588,7 +3602,7 @@
     <string name="show_more_map_detail">Show more map detail</string>
     <string name="show_more_map_detail_descr">Show some vector map detail (roads etc.) at lower zoom levels already.</string>
     <string name="favourites_delete_multiple_succesful">Favorite points deleted.</string>
-    <string name="favorite_delete_multiple">Are you sure you want to delete %1$d Favorites and %2$d Favorite groups?</string>
+    <string name="favorite_delete_multiple">Delete %1$d Favorites and %2$d Favorite groups?</string>
     <string name="favorite_home_category">Home</string>
     <string name="favorite_friends_category">Friends</string>
     <string name="favorite_places_category">Places</string>
@@ -4070,7 +4084,7 @@
     <string name="unsaved_changes_will_be_lost">Any unsaved changes will be lost. Continue?</string>
     <string name="downloads_left_template">%1$s downloads left</string>
     <string name="roads">Roads</string>
-    <string name="downloading_number_of_files">Downloading - %1$d file</string>
+    <string name="downloading_number_of_files">Downloading %1$d file…</string>
     <string name="show_free_version_banner">Show free version banner</string>
     <string name="show_free_version_banner_description">Display the free version banner even in the paid version.</string>
     <string name="buy">Buy</string>
@@ -4152,7 +4166,7 @@
     <string name="quick_action_add_favorite">Add Favorite</string>
     <string name="dialog_add_action_title">Add action</string>
     <string name="quick_actions_delete">Delete action</string>
-    <string name="quick_actions_delete_text">Are you sure you want to delete the action \"%s\"?</string>
+    <string name="quick_actions_delete_text">Delete the \"%s\" action?</string>
     <string name="quick_favorites_show_favorites_dialog">Show Favorites dialog</string>
     <string name="quick_favorites_name_preset">Name preset</string>
     <string name="quick_action_add_marker_descr">A button to add a map marker at the screen center location.</string>

@@ -12,7 +12,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.mapmarkers.ItineraryType;
 import net.osmand.plus.mapmarkers.MapMarker;
-import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.settings.backend.ExportSettingsType;
@@ -126,12 +125,12 @@ public class MarkersSettingsItem extends CollectionSettingsItem<MapMarker> {
 			number++;
 			String name = item.getOnlyName() + " " + number;
 			PointDescription description = new PointDescription(PointDescription.POINT_TYPE_LOCATION, name);
-			MapMarker renamedMarker = new MapMarker(item.point, description, item.colorIndex, item.selected, item.index);
+			MapMarker renamedMarker = new MapMarker(item.point, description, item.colorIndex);
 			if (!isDuplicate(renamedMarker)) {
 				renamedMarker.history = false;
+				renamedMarker.selected = item.selected;
 				renamedMarker.visitedDate = item.visitedDate;
 				renamedMarker.creationDate = item.creationDate;
-				renamedMarker.nextKey = MapMarkersDbHelper.TAIL_NEXT_VALUE;
 				return renamedMarker;
 			}
 		}

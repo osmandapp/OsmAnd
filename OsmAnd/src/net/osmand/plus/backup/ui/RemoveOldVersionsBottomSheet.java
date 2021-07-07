@@ -61,6 +61,11 @@ public class RemoveOldVersionsBottomSheet extends MenuBottomSheetDialogFragment 
 		return true;
 	}
 
+	@Override
+	public int getFirstDividerHeight() {
+		return getResources().getDimensionPixelSize(R.dimen.dialog_content_margin);
+	}
+
 	public static void showInstance(@NonNull FragmentManager fragmentManager, Fragment target) {
 		if (!fragmentManager.isStateSaved()) {
 			RemoveOldVersionsBottomSheet fragment = new RemoveOldVersionsBottomSheet();

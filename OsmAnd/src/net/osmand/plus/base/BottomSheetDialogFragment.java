@@ -38,7 +38,7 @@ public abstract class BottomSheetDialogFragment extends DialogFragment {
 		dialog.setCanceledOnTouchOutside(true);
 		Window window = dialog.getWindow();
 		if (!settings.DO_NOT_USE_ANIMATIONS.get() && window != null) {
-			window.getAttributes().windowAnimations = R.style.Animations_PopUpMenu_Bottom;
+			window.getAttributes().windowAnimations = getWindowAnimations(requireActivity());
 		}
 
 		return dialog;
@@ -110,5 +110,9 @@ public abstract class BottomSheetDialogFragment extends DialogFragment {
 		} else {
 			return null;
 		}
+	}
+
+	protected int getWindowAnimations(@NonNull Activity context) {
+		return R.style.Animations_PopUpMenu_Bottom;
 	}
 }

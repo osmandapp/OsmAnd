@@ -5,14 +5,28 @@ import androidx.annotation.Nullable;
 
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.Track;
+import net.osmand.GPXUtilities.TrkSegment;
+import net.osmand.GPXUtilities.WptPt;
+import net.osmand.LocationsHolder;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.onlinerouting.EngineParameter;
 import net.osmand.plus.onlinerouting.VehicleType;
+import net.osmand.plus.routing.RoutingEnvironment;
+import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.router.RouteCalculationProgress;
+import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
+import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
+import net.osmand.util.Algorithms;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -20,6 +34,8 @@ import java.util.Set;
 import static net.osmand.plus.onlinerouting.engine.EngineType.GPX_TYPE;
 
 public class GpxEngine extends OnlineRoutingEngine {
+
+	private static final String ONLINE_ROUTING_GPX_FILE_NAME = "online_routing_gpx";
 
 	public GpxEngine(@Nullable Map<String, String> params) {
 		super(params);
@@ -76,6 +92,7 @@ public class GpxEngine extends OnlineRoutingEngine {
 		params.add(EngineParameter.CUSTOM_NAME);
 		params.add(EngineParameter.NAME_INDEX);
 		params.add(EngineParameter.CUSTOM_URL);
+		params.add(EngineParameter.APPROXIMATE_ROUTE);
 	}
 
 	@Override
@@ -89,7 +106,46 @@ public class GpxEngine extends OnlineRoutingEngine {
 	                                           @NonNull OsmandApplication app,
 	                                           boolean leftSideNavigation) {
 		GPXFile gpxFile = parseGpx(content);
-		return gpxFile != null ? new OnlineRoutingResponse(parseGpx(content)) : null;
+		return gpxFile != null ? prepareResponse(app, gpxFile) : null;
+	}
+
+	private OnlineRoutingResponse prepareResponse(@NonNull OsmandApplication app,
+	                                              @NonNull GPXFile gpxFile) {
+		if (shouldApproximateRoute()) {
+			GPXFile approximated = approximateGpx(app, gpxFile);
+			gpxFile = approximated != null ? approximated : gpxFile;
+		}
+		return new OnlineRoutingResponse(gpxFile);
+	}
+
+	private GPXFile approximateGpx(@NonNull OsmandApplication app,
+	                               @NonNull GPXFile gpxFile) {
+		try {
+			RoutingHelper routingHelper = app.getRoutingHelper();
+			ApplicationMode appMode = routingHelper.getAppMode();
+
+			List<WptPt> points = gpxFile.getAllSegmentsPoints();
+			LocationsHolder holder = new LocationsHolder(points);
+
+			if (holder.getSize() > 1) {
+				LatLon start = holder.getLatLon(0);
+				LatLon end = holder.getLatLon(holder.getSize() - 1);
+				RoutingEnvironment env = routingHelper.getRoutingEnvironment(app, appMode, start, end);
+
+				GpxRouteApproximation gctx = new GpxRouteApproximation(env.getCtx());
+				List<GpxPoint> gpxPoints = routingHelper.generateGpxPoints(env, gctx, holder);
+				GpxRouteApproximation gpxApproximation = routingHelper.calculateGpxApproximation(env, gctx, gpxPoints, null);
+
+				MeasurementEditingContext ctx = new MeasurementEditingContext();
+				ctx.setApplication(app);
+				ctx.setPoints(gpxApproximation, points, appMode);
+				return ctx.exportGpx(ONLINE_ROUTING_GPX_FILE_NAME);
+			}
+
+		} catch (IOException | InterruptedException e) {
+			LOG.error(e.getMessage(), e);
+		}
+		return null;
 	}
 
 	@Override

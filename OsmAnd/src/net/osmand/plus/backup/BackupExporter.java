@@ -33,6 +33,8 @@ import java.util.concurrent.TimeUnit;
 
 public class BackupExporter extends Exporter {
 
+	private static final int THREAD_POOL_SIZE = 4;
+
 	private final BackupHelper backupHelper;
 	private final Map<String, RemoteFile> filesToDelete = new LinkedHashMap<>();
 	private final NetworkExportProgressListener listener;
@@ -114,11 +116,11 @@ public class BackupExporter extends Exporter {
 				// ignore
 			}
 		}
+		log.finishOperation();
 		if (!exceptions.isEmpty()) {
 			Throwable t = exceptions.values().iterator().next();
 			throw new IOException(t.getMessage(), t);
 		}
-		log.finishOperation();
 	}
 
 	private void exportItems() throws IOException {
@@ -246,7 +248,7 @@ public class BackupExporter extends Exporter {
 	private class AsyncWriterTaskExecutor extends ThreadPoolExecutor {
 
 		public AsyncWriterTaskExecutor() {
-			super(4, 4, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>());
+			super(THREAD_POOL_SIZE, THREAD_POOL_SIZE, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>());
 		}
 
 		protected void afterExecute(Runnable r, Throwable t) {

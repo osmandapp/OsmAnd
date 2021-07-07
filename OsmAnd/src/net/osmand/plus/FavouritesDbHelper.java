@@ -574,7 +574,7 @@ public class FavouritesDbHelper {
 	}
 
 	public boolean favouritePassed(@NonNull FavouritePoint point, boolean passed, boolean saveImmediately) {
-		point.setPassedTimestamp(passed ? System.currentTimeMillis() : 0);
+		point.setVisitedDate(passed ? System.currentTimeMillis() : 0);
 		if (saveImmediately) {
 			saveCurrentPointsIntoFile();
 		}

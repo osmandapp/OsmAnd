@@ -11,10 +11,8 @@ import net.osmand.FileUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.Metadata;
-import net.osmand.GPXUtilities.Route;
 import net.osmand.GPXUtilities.Track;
 import net.osmand.GPXUtilities.TrkSegment;
-import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -133,21 +131,11 @@ class SaveGpxRouteAsyncTask extends AsyncTask<Void, Void, Exception> {
             } else {
                 GPXFile newGpx = editingCtx.exportGpx(trackName);
                 if (newGpx != null) {
-                    List<Track> gpxTracks = gpx.tracks;
-                    List<WptPt> gpxPoints = gpx.getPoints();
-                    List<Route> gpxRoutes = gpx.routes;
-                    gpx = newGpx;
-                    List<List<WptPt>> routePoints = editingCtx.getRoutePoints();
-                    for (List<WptPt> points : routePoints) {
-                        gpx.addRoutePoints(points, true);
-                    }
-                    if (!Algorithms.isEmpty(gpxPoints)) {
-                        gpx.addPoints(gpxPoints);
-                    }
                     if (addToTrack) {
-                        gpx.tracks.addAll(gpxTracks);
-                        gpx.routes.addAll(gpxRoutes);
+                        newGpx.tracks.addAll(gpx.tracks);
+                        newGpx.routes.addAll(gpx.routes);
                     }
+                    gpx = newGpx;
                 }
             }
         }

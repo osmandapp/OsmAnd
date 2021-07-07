@@ -193,11 +193,9 @@ public class ProfileSettingsItem extends OsmandSettingsItem {
 		ApplicationMode.changeProfileAvailability(appMode, true, app);
 	}
 
-	public void applyAdditionalParams() {
+	public void applyAdditionalParams(@Nullable SettingsItemReader<? extends SettingsItem> reader) {
 		if (additionalPrefsJson != null) {
 			updatePluginResPrefs();
-
-			SettingsItemReader<? extends SettingsItem> reader = getReader();
 			if (reader instanceof OsmandSettingsItemReader) {
 				((OsmandSettingsItemReader<?>) reader).readPreferencesFromJson(additionalPrefsJson);
 			}

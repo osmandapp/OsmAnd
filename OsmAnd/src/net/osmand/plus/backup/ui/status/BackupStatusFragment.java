@@ -1,4 +1,4 @@
-package net.osmand.plus.backup.ui;
+package net.osmand.plus.backup.ui.status;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +9,8 @@ import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -22,9 +24,6 @@ import net.osmand.plus.backup.PrepareBackupResult;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
 import net.osmand.plus.backup.RemoteFile;
 import net.osmand.plus.backup.ServerError;
-import net.osmand.plus.backup.ui.cards.BackupUploadCard;
-import net.osmand.plus.backup.ui.cards.LocalBackupCard;
-import net.osmand.plus.backup.ui.cards.RestoreBackupCard;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
@@ -40,10 +39,8 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements BackupEx
 	private BackupHelper backupHelper;
 	private NetworkSettingsHelper settingsHelper;
 
-	private BackupUploadCard uploadCard;
-
+	private BackupStatusAdapter adapter;
 	private ProgressBar progressBar;
-	private ViewGroup cardsContainer;
 
 	private boolean nightMode;
 
@@ -68,7 +65,14 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements BackupEx
 		View view = themedInflater.inflate(R.layout.fragment_backup_status, container, false);
 
 		progressBar = view.findViewById(R.id.progress_bar);
-		cardsContainer = view.findViewById(R.id.cards_container);
+
+		adapter = new BackupStatusAdapter(getMapActivity(), this, this, nightMode);
+
+		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
+		recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+		recyclerView.setAdapter(adapter);
+		recyclerView.setItemAnimator(null);
+		recyclerView.setLayoutAnimation(null);
 
 		return view;
 	}
@@ -76,7 +80,7 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements BackupEx
 	@Override
 	public void onResume() {
 		super.onResume();
-		updateCards();
+		updateAdapter();
 		settingsHelper.updateExportListener(this);
 		backupHelper.addPrepareBackupListener(this);
 	}
@@ -88,16 +92,9 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements BackupEx
 		backupHelper.removePrepareBackupListener(this);
 	}
 
-	private void updateCards() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			cardsContainer.removeAllViews();
-
-			uploadCard = new BackupUploadCard(mapActivity, backupHelper.getBackup(), this, this);
-			cardsContainer.addView(uploadCard.build(mapActivity), 0);
-
-			cardsContainer.addView(new RestoreBackupCard(mapActivity).build(mapActivity));
-			cardsContainer.addView(new LocalBackupCard(mapActivity).build(mapActivity));
+	private void updateAdapter() {
+		if (adapter != null) {
+			adapter.setBackup(backupHelper.getBackup());
 		}
 	}
 
@@ -109,7 +106,7 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements BackupEx
 	@Override
 	public void onBackupPrepared(@Nullable PrepareBackupResult backupResult) {
 		AndroidUiHelper.setVisibility(View.INVISIBLE, progressBar);
-		updateCards();
+		updateAdapter();
 	}
 
 	@Nullable
@@ -124,15 +121,15 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements BackupEx
 
 	@Override
 	public void onBackupExportStarted(int itemsCount) {
-		if (uploadCard != null) {
-			uploadCard.update();
+		if (adapter != null) {
+			adapter.onBackupExportStarted(itemsCount);
 		}
 	}
 
 	@Override
 	public void onBackupExportProgressUpdate(int value) {
-		if (uploadCard != null) {
-			uploadCard.updateProgress(value);
+		if (adapter != null) {
+			adapter.onBackupExportProgressUpdate(value);
 		}
 	}
 
@@ -147,42 +144,50 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements BackupEx
 
 	@Override
 	public void onBackupExportItemStarted(@NonNull String type, @NonNull String fileName, int work) {
-		if (uploadCard != null) {
-			uploadCard.onBackupExportItemStarted(type, fileName, work);
+		if (adapter != null) {
+			adapter.onBackupExportItemStarted(type, fileName, work);
 		}
 	}
 
 	@Override
 	public void onBackupExportItemFinished(@NonNull String type, @NonNull String fileName) {
-		if (uploadCard != null) {
-			uploadCard.onBackupExportItemFinished(type, fileName);
+		if (adapter != null) {
+			adapter.onBackupExportItemFinished(type, fileName);
 		}
 	}
 
 	@Override
 	public void onBackupExportItemProgress(@NonNull String type, @NonNull String fileName, int value) {
-		if (uploadCard != null) {
-			uploadCard.onBackupExportItemProgress(type, fileName, value);
+		if (adapter != null) {
+			adapter.onBackupExportItemProgress(type, fileName, value);
 		}
 	}
 
 	@Override
 	public void onFileDeleteProgress(@NonNull RemoteFile file) {
-
+		if (adapter != null) {
+			adapter.onFileDeleteProgress(file);
+		}
 	}
 
 	@Override
 	public void onFilesDeleteDone(@NonNull Map<RemoteFile, String> errors) {
-
+		if (adapter != null) {
+			adapter.onFilesDeleteDone(errors);
+		}
 	}
 
 	@Override
 	public void onFilesDeleteError(int status, @NonNull String message) {
-
+		if (adapter != null) {
+			adapter.onFilesDeleteError(status, message);
+		}
 	}
 
 	@Override
 	public void onImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> items) {
-		backupHelper.prepareBackup();
+		if (adapter != null) {
+			adapter.onImportFinished(succeed, needRestart, items);
+		}
 	}
 }

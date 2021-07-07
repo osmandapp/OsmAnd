@@ -767,8 +767,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 					}
 					LatLon searchLatLon = objectLatLon != null ? objectLatLon : pointLatLon;
 					if (isGpx) {
-						String ref = Algorithms.emptyIfNull(renderedObject.getTagValue("ref"));
-						TravelGpx travelGpx = app.getTravelHelper().searchGpx(pointLatLon, routeID, ref, null);
+						TravelGpx travelGpx = app.getTravelHelper().searchGpx(pointLatLon, routeID,
+								renderedObject.getTagValue("ref"));
 						if (travelGpx != null && isUniqueGpx(selectedObjects, travelGpx)) {
 							WptPt selectedPoint = new WptPt();
 							selectedPoint.lat = pointLatLon.getLatitude();

@@ -42,18 +42,18 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.FavouritesDbHelper.FavoritesListener;
-import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandPreference;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.base.OsmandExpandableListFragment;
+import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.myplaces.FavoritesFragmentStateHolder;
+import net.osmand.plus.settings.backend.OsmandPreference;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -70,7 +70,8 @@ import java.util.Map;
 import java.util.Set;
 
 import static android.view.Gravity.CENTER;
-import static net.osmand.plus.OsmAndLocationProvider.*;
+import static net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
+import static net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import static net.osmand.plus.myplaces.FavoritesActivity.FAV_TAB;
 import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
 
@@ -740,7 +741,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		} else if (!tosave.getParentFile().exists()) {
 			Toast.makeText(getActivity(), R.string.sd_dir_not_accessible, Toast.LENGTH_LONG).show();
 		} else {
-			final AsyncTask<Void, Void, Exception > exportTask = new AsyncTask<Void, Void, Exception >() {
+			final AsyncTask<Void, Void, Exception> exportTask = new AsyncTask<Void, Void, Exception>() {
 				@Override
 				protected Exception doInBackground(Void... params) {
 					return helper.exportFavorites();
@@ -752,7 +753,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 				}
 
 				@Override
-				protected void onPostExecute(Exception  warning) {
+				protected void onPostExecute(Exception warning) {
 					hideProgressBar();
 					if (warning == null) {
 						Toast.makeText(

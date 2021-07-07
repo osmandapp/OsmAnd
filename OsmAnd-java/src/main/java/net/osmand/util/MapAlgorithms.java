@@ -1,14 +1,61 @@
 package net.osmand.util;
 
 import java.util.Collection;
-import java.util.List;
 
 import gnu.trove.list.TLongList;
+import gnu.trove.list.array.TIntArrayList;
 import net.osmand.data.LatLon;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.OsmMapUtils;
 
 public class MapAlgorithms {
+	
+	public static TIntArrayList decodeIntHeightArrayGraph(String str, int repeatBits) {
+		int maxRepeats = (1 << repeatBits) - 1;
+		TIntArrayList res = new TIntArrayList();
+		char[] ch = str.toCharArray();
+		res.add(ch[0]);
+		for (int i = 1; i < ch.length; i++) {
+			char c = ch[i];
+			int rept = c & maxRepeats;
+			while (rept > 0) {
+				res.add(0);
+				rept--;
+			}
+			int num = c >> repeatBits;
+			if (num % 2 == 0) {
+				res.add(num >> 1);
+			} else {
+				res.add(-(num >> 1));
+			}
+		}
+		return res;
+	}
+	
+	public static String encodeIntHeightArrayGraph(int step, TIntArrayList array, int repeatBits) {
+		int maxRepeats = (1 << repeatBits) - 1;
+		TIntArrayList ch = new TIntArrayList();
+		ch.add(step);
+		int repeat = 0;
+		for (int i = 0; i < array.size(); i++) {
+			int altInc = array.get(i);
+			if (altInc != 0 || repeat == maxRepeats) {
+				int posAltInc = Math.abs(altInc);
+				int sign = altInc < 0 ? 1 : 0;
+				char c = (char) (((posAltInc << 1) + sign) << repeatBits);
+				c += repeat;
+				ch.add(c);
+				repeat = 0;
+			} else {
+				repeat++;
+			}
+		}
+		char[] c = new char[ch.size()];
+		for (int i = 0; i < ch.size(); i++) {
+			c[i] = (char) ch.get(i);
+		}
+		return new String(c);
+	}
 	
 	public static boolean isClockwiseWay(TLongList c) {
 		if (c.size() == 0) {

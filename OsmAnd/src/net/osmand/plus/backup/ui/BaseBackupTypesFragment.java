@@ -34,6 +34,7 @@ import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.fragments.BaseSettingsListFragment;
 import net.osmand.plus.settings.fragments.SettingsCategoryItems;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -146,21 +147,25 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 
 	@Override
 	public void onCategorySelected(ExportSettingsCategory category, boolean selected) {
+		boolean hasItemsToDelete = false;
 		SettingsCategoryItems categoryItems = dataList.get(category);
 		List<ExportSettingsType> types = categoryItems.getTypes();
 		for (ExportSettingsType type : types) {
-			selectedItemsMap.put(type, selected ? categoryItems.getItemsForType(type) : null);
+			List<Object> items = getItemsForType(type);
+			hasItemsToDelete |= !Algorithms.isEmpty(items);
+			selectedItemsMap.put(type, selected ? items : null);
 		}
-		if (!selected) {
+		if (!selected && hasItemsToDelete) {
 			showClearTypesBottomSheet(types);
 		}
 	}
 
 	@Override
 	public void onTypeSelected(ExportSettingsType type, boolean selected) {
-		selectedItemsMap.put(type, selected ? getItemsForType(type) : null);
+		List<Object> items = getItemsForType(type);
+		selectedItemsMap.put(type, selected ? items : null);
 
-		if (!selected) {
+		if (!selected && !Algorithms.isEmpty(items)) {
 			showClearTypesBottomSheet(Collections.singletonList(type));
 		}
 	}
@@ -173,15 +178,15 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 	}
 
 	protected Map<ExportSettingsCategory, SettingsCategoryItems> getDataList() {
-		List<RemoteFile> remoteFiles = backupHelper.getBackup().getRemoteFiles(getRemoteFilesType());
+		Map<String, RemoteFile> remoteFiles = backupHelper.getBackup().getRemoteFiles(getRemoteFilesType());
 		if (remoteFiles == null) {
-			remoteFiles = Collections.emptyList();
+			remoteFiles = Collections.emptyMap();
 		}
 
 		Map<ExportSettingsType, List<?>> settingsToOperate = new EnumMap<>(ExportSettingsType.class);
 		for (ExportSettingsType type : ExportSettingsType.getEnabledTypes()) {
 			List<RemoteFile> filesByType = new ArrayList<>();
-			for (RemoteFile remoteFile : remoteFiles) {
+			for (RemoteFile remoteFile : remoteFiles.values()) {
 				if (ExportSettingsType.getExportSettingsTypeForRemoteFile(remoteFile) == type) {
 					filesByType.add(remoteFile);
 				}

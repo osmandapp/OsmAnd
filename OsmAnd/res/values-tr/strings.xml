@@ -4120,7 +4120,6 @@
     <string name="osmand_cloud_login_descr">Lütfen kayıt için kullandığınız e-posta adresini girin. Bir sonraki adımda size gerekli olan tek seferlik bir parola göndereceğiz.</string>
     <string name="verify_email_address">E-posta adresini doğrula</string>
     <string name="verify_email_address_descr">%1$s adresine bir doğrulama kodu gönderdik, lütfen aşağıdaki alana girin.</string>
-    <string name="enter_verification_code">4 haneli kodu girin</string>
     <string name="cloud_email_not_registered">Bu e-posta adresi OsmAnd Cloud için kaydolmadı</string>
     <string name="cloud_email_already_registered">Bu e-posta adresine sahip bir hesap zaten kayıtlı.</string>
     <string name="resend_verification_code">Kodu yeniden gönder</string>

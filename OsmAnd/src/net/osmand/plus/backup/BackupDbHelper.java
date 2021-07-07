@@ -9,7 +9,9 @@ import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class BackupDbHelper {
 
@@ -38,6 +40,12 @@ public class BackupDbHelper {
 		private final String type;
 		private final String name;
 		private long uploadTime;
+
+		public UploadedFileInfo(@NonNull String type, @NonNull String name) {
+			this.type = type;
+			this.name = name;
+			this.uploadTime = 0;
+		}
 
 		public UploadedFileInfo(@NonNull String type, @NonNull String name, long uploadTime) {
 			this.type = type;
@@ -187,6 +195,33 @@ public class BackupDbHelper {
 			}
 		}
 		return infos;
+	}
+
+	@NonNull
+	public Map<String, Long> getUploadedFileInfoMap() {
+		Map<String, Long> infoMap = new HashMap<>();
+		SQLiteConnection db = openConnection(true);
+		if (db != null) {
+			try {
+				SQLiteCursor query = db.rawQuery(
+						"SELECT " + UPLOADED_FILE_COL_TYPE + ", " +
+								UPLOADED_FILE_COL_NAME + ", " +
+								UPLOADED_FILE_COL_UPLOAD_TIME +
+								" FROM " + UPLOADED_FILES_TABLE_NAME, null);
+				if (query != null && query.moveToFirst()) {
+					do {
+						UploadedFileInfo info = readUploadedFileInfo(query);
+						infoMap.put(info.getType() + "___" + info.getName(), info.uploadTime);
+					} while (query.moveToNext());
+				}
+				if (query != null) {
+					query.close();
+				}
+			} finally {
+				db.close();
+			}
+		}
+		return infoMap;
 	}
 
 	@Nullable

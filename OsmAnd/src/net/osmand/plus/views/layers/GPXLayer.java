@@ -22,16 +22,13 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
-import net.osmand.FileUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
-import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
-import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
@@ -95,6 +92,7 @@ import java.util.Set;
 import static net.osmand.GPXUtilities.calculateTrackBounds;
 import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
 import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
+import static net.osmand.plus.wikivoyage.data.TravelHelper.*;
 
 public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IMoveObjectProvider, MapTextProvider<WptPt> {
 
@@ -874,8 +872,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			MapActivity mapActivity = (MapActivity) view.getContext();
 			OsmandApplication app = mapActivity.getMyApplication();
 			MapRouteInfoMenu routeInfoMenu = mapActivity.getMapRouteInfoMenu();
-			return !app.getSelectedGpxHelper().shouldHideTrackToFollow()
-					|| routeInfoMenu.isVisible()
+			return routeInfoMenu.isVisible()
 					|| app.getRoutingHelper().isFollowingMode()
 					|| MapRouteInfoMenu.followTrackVisible
 					|| MapRouteInfoMenu.chooseRoutesVisible
@@ -1080,7 +1077,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			return new PointDescription(PointDescription.POINT_TYPE_GPX, name);
 		} else if (o instanceof Pair && ((Pair<?, ?>) o).first instanceof TravelGpx) {
 			TravelGpx travelGpx = (TravelGpx) ((Pair<?, ?>) o).first;
-			return new PointDescription(PointDescription.POINT_TYPE_GPX, travelGpx.getRouteId());
+			return new PointDescription(PointDescription.POINT_TYPE_GPX, travelGpx.getTitle());
 		}
 		return null;
 	}
@@ -1200,9 +1197,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		if (object instanceof Pair && ((Pair<?, ?>) object).first instanceof TravelGpx
 				&& ((Pair<?, ?>) object).second instanceof SelectedGpxPoint) {
 			Pair<TravelGpx, SelectedGpxPoint> pair = (Pair) object;
-			String gpxFileName = pair.first.getRouteId() + IndexConstants.GPX_FILE_EXT;
 			LatLon latLon = new LatLon(pair.second.getSelectedPoint().lat, pair.second.getSelectedPoint().lon);
-			app.getTravelHelper().readGpxFile(pair.first, gpxReadListener(mapActivity, gpxFileName, latLon));
+			TravelHelper travelHelper = app.getTravelHelper();
+			travelHelper.openTrackMenu(pair.first, mapActivity, pair.first.getRouteId(), latLon);
 			return true;
 		} else if (object instanceof SelectedGpxPoint) {
 			SelectedGpxPoint selectedGpxPoint = (SelectedGpxPoint) object;

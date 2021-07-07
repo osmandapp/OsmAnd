@@ -5,14 +5,13 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.backup.BackupListeners.OnCollectLocalFilesListener;
-import net.osmand.plus.backup.BackupListeners.OnGenerateBackupInfoListener;
-import net.osmand.plus.backup.NetworkSettingsHelper.BackupCollectListener;
 import net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType;
-import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Stack;
 
 public class PrepareBackupTask {
 
@@ -22,16 +21,24 @@ public class PrepareBackupTask {
 	private PrepareBackupResult backup;
 	private final OnPrepareBackupListener listener;
 
-	private Stack<TaskType> runningTasks = new Stack<>();
+	private List<TaskType> pendingTasks = new ArrayList<>();
+	private List<TaskType> finishedTasks = new ArrayList<>();
 
 	private enum TaskType {
-		COLLECT_LOCAL_FILES,
-		COLLECT_REMOTE_FILES,
-		GENERATE_BACKUP_INFO
+		COLLECT_LOCAL_FILES(null),
+		COLLECT_REMOTE_FILES(new TaskType[]{COLLECT_LOCAL_FILES}),
+		GENERATE_BACKUP_INFO(new TaskType[]{COLLECT_LOCAL_FILES, COLLECT_REMOTE_FILES});
+
+		private final TaskType[] dependentTasks;
+
+		TaskType(@Nullable TaskType[] dependentTasks) {
+			this.dependentTasks = dependentTasks;
+		}
 	}
 
 	public interface OnPrepareBackupListener {
 		void onBackupPreparing();
+
 		void onBackupPrepared(@Nullable PrepareBackupResult backupResult);
 	}
 
@@ -47,7 +54,7 @@ public class PrepareBackupTask {
 	}
 
 	public boolean prepare() {
-		if (!runningTasks.empty()) {
+		if (!pendingTasks.isEmpty()) {
 			return false;
 		}
 		if (listener != null) {
@@ -59,20 +66,31 @@ public class PrepareBackupTask {
 
 	private void initTasks() {
 		backup = new PrepareBackupResult();
-		Stack<TaskType> tasks = new Stack<>();
-		TaskType[] types = TaskType.values();
-		for (int i = types.length - 1; i >= 0; i--) {
-			tasks.push(types[i]);
-		}
-		this.runningTasks = tasks;
+		this.pendingTasks = new ArrayList<>(Arrays.asList(TaskType.values()));
+		this.finishedTasks = new ArrayList<>();
 	}
 
 	private boolean runTasks() {
-		if (runningTasks.empty()) {
+		if (pendingTasks.isEmpty()) {
 			return false;
 		} else {
-			TaskType taskType = runningTasks.pop();
-			runTask(taskType);
+			Iterator<TaskType> it = pendingTasks.iterator();
+			while (it.hasNext()) {
+				boolean shouldRun = true;
+				TaskType taskType = it.next();
+				if (taskType.dependentTasks != null) {
+					for (TaskType dependentTask : taskType.dependentTasks) {
+						if (!finishedTasks.contains(dependentTask)) {
+							shouldRun = false;
+							break;
+						}
+					}
+				}
+				if (shouldRun) {
+					it.remove();
+					runTask(taskType);
+				}
+			}
 			return true;
 		}
 	}
@@ -92,6 +110,7 @@ public class PrepareBackupTask {
 	}
 
 	private void onTaskFinished(@NonNull TaskType taskType) {
+		finishedTasks.add(taskType);
 		if (!runTasks()) {
 			onTasksDone();
 		}
@@ -112,19 +131,14 @@ public class PrepareBackupTask {
 	}
 
 	private void doCollectRemoteFiles() {
-		app.getNetworkSettingsHelper().collectSettings("", 0, false, new BackupCollectListener() {
-					@Override
-					public void onBackupCollectFinished(boolean succeed, boolean empty,
-														@NonNull List<SettingsItem> items,
-														@NonNull List<RemoteFile> remoteFiles) {
-						if (succeed) {
-							backup.setSettingsItems(items);
-							backup.setRemoteFiles(remoteFiles);
-						} else {
-							onError("Download remote items error");
-						}
-						onTaskFinished(TaskType.COLLECT_REMOTE_FILES);
+		app.getNetworkSettingsHelper().collectSettings("", 0, false, (succeed, empty, items, remoteFiles) -> {
+					if (succeed) {
+						backup.setSettingsItems(items);
+						backup.setRemoteFiles(remoteFiles);
+					} else {
+						onError("Download remote items error");
 					}
+					onTaskFinished(TaskType.COLLECT_REMOTE_FILES);
 				}
 		);
 	}
@@ -135,22 +149,19 @@ public class PrepareBackupTask {
 			return;
 		}
 		backupHelper.generateBackupInfo(backup.getLocalFiles(), backup.getRemoteFiles(RemoteFilesType.UNIQUE),
-				backup.getRemoteFiles(RemoteFilesType.DELETED), new OnGenerateBackupInfoListener() {
-					@Override
-					public void onBackupInfoGenerated(@Nullable BackupInfo backupInfo, @Nullable String error) {
-						if (Algorithms.isEmpty(error)) {
-							backup.setBackupInfo(backupInfo);
-						} else {
-							onError(error);
-						}
-						onTaskFinished(TaskType.GENERATE_BACKUP_INFO);
+				backup.getRemoteFiles(RemoteFilesType.DELETED), (backupInfo, error) -> {
+					if (Algorithms.isEmpty(error)) {
+						backup.setBackupInfo(backupInfo);
+					} else {
+						onError(error);
 					}
+					onTaskFinished(TaskType.GENERATE_BACKUP_INFO);
 				});
 	}
 
 	private void onError(@NonNull String message) {
 		backup.setError(message);
-		runningTasks.clear();
+		pendingTasks.clear();
 		onTasksDone();
 	}
 

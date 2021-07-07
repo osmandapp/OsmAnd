@@ -11,14 +11,13 @@ import androidx.annotation.Nullable;
 
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.AndroidNetworkUtils.OnFilesDownloadCallback;
-import net.osmand.AndroidNetworkUtils.OnRequestResultListener;
 import net.osmand.AndroidUtils;
+import net.osmand.IndexConstants;
 import net.osmand.OperationLog;
 import net.osmand.PlatformUtil;
 import net.osmand.StreamWriter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
-import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
 import net.osmand.plus.backup.BackupExecutor.BackupExecutorListener;
 import net.osmand.plus.backup.BackupListeners.OnCollectLocalFilesListener;
 import net.osmand.plus.backup.BackupListeners.OnDeleteFilesListener;
@@ -40,6 +39,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.AbstractProgress;
 import net.osmand.plus.settings.backend.backup.items.CollectionSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 import net.osmand.plus.settings.backend.backup.items.GpxSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
@@ -53,6 +53,7 @@ import java.io.File;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -65,7 +66,6 @@ public class BackupHelper {
 	public static final Log LOG = PlatformUtil.getLog(BackupHelper.class);
 	public static final boolean DEBUG = true;
 
-	public static final int THREAD_POOL_SIZE = 4;
 	private final BackupExecutor executor;
 
 	public final static String INFO_EXT = ".info";
@@ -456,54 +456,51 @@ public class BackupHelper {
 		params.put("deviceid", getDeviceId());
 		params.put("accessToken", getAccessToken());
 		params.put("allVersions", "true");
+		final OperationLog operationLog = new OperationLog("downloadFileList", DEBUG);
+		operationLog.startOperation();
 		AndroidNetworkUtils.sendRequest(app, LIST_FILES_URL, params, "Download file list", false, false,
-				new OnRequestResultListener() {
-					final OperationLog operationLog = new OperationLog("downloadFileList", DEBUG);
-
-					@Override
-					public void onResult(@Nullable String resultJson, @Nullable String error) {
-						int status;
-						String message;
-						List<RemoteFile> remoteFiles = new ArrayList<>();
-						if (!Algorithms.isEmpty(error)) {
-							status = STATUS_SERVER_ERROR;
-							message = "Download file list error: " + new ServerError(error);
-						} else if (!Algorithms.isEmpty(resultJson)) {
-							try {
-								JSONObject result1 = new JSONObject(resultJson);
-								String totalZipSize = result1.getString("totalZipSize");
-								String totalFiles = result1.getString("totalFiles");
-								String totalFileVersions = result1.getString("totalFileVersions");
-								JSONArray allFiles = result1.getJSONArray("allFiles");
-								for (int i = 0; i < allFiles.length(); i++) {
-									remoteFiles.add(new RemoteFile(allFiles.getJSONObject(i)));
-								}
-								status = STATUS_SUCCESS;
-								message = "Total files: " + totalFiles + " " +
-										"Total zip size: " + AndroidUtils.formatSize(app, Long.parseLong(totalZipSize)) + " " +
-										"Total file versions: " + totalFileVersions;
-							} catch (JSONException | ParseException e) {
-								status = STATUS_PARSE_JSON_ERROR;
-								message = "Download file list error: json parsing";
+				(resultJson, error) -> {
+					int status;
+					String message;
+					List<RemoteFile> remoteFiles = new ArrayList<>();
+					if (!Algorithms.isEmpty(error)) {
+						status = STATUS_SERVER_ERROR;
+						message = "Download file list error: " + new ServerError(error);
+					} else if (!Algorithms.isEmpty(resultJson)) {
+						try {
+							JSONObject res = new JSONObject(resultJson);
+							String totalZipSize = res.getString("totalZipSize");
+							String totalFiles = res.getString("totalFiles");
+							String totalFileVersions = res.getString("totalFileVersions");
+							JSONArray allFiles = res.getJSONArray("allFiles");
+							for (int i = 0; i < allFiles.length(); i++) {
+								remoteFiles.add(new RemoteFile(allFiles.getJSONObject(i)));
 							}
-						} else {
-							status = STATUS_EMPTY_RESPONSE_ERROR;
-							message = "Download file list error: empty response";
+							status = STATUS_SUCCESS;
+							message = "Total files: " + totalFiles + " " +
+									"Total zip size: " + AndroidUtils.formatSize(app, Long.parseLong(totalZipSize)) + " " +
+									"Total file versions: " + totalFileVersions;
+						} catch (JSONException | ParseException e) {
+							status = STATUS_PARSE_JSON_ERROR;
+							message = "Download file list error: json parsing";
 						}
-						operationLog.finishOperation("(" + status + "): " + message);
-						if (listener != null) {
-							listener.onDownloadFileList(status, message, remoteFiles);
-						}
+					} else {
+						status = STATUS_EMPTY_RESPONSE_ERROR;
+						message = "Download file list error: empty response";
+					}
+					operationLog.finishOperation("(" + status + "): " + message);
+					if (listener != null) {
+						listener.onDownloadFileList(status, message, remoteFiles);
 					}
 				});
 	}
 
-	public void deleteAllFiles(@NonNull List<ExportSettingsType> types) throws UserNotRegisteredException {
+	public void deleteAllFiles(@Nullable List<ExportSettingsType> types) throws UserNotRegisteredException {
 		checkRegistered();
 		executor.runCommand(new DeleteAllFilesCommand(this, types));
 	}
 
-	public void deleteOldFiles(@NonNull List<ExportSettingsType> types) throws UserNotRegisteredException {
+	public void deleteOldFiles(@Nullable List<ExportSettingsType> types) throws UserNotRegisteredException {
 		checkRegistered();
 		executor.runCommand(new DeleteOldFilesCommand(this, types));
 	}
@@ -559,10 +556,12 @@ public class BackupHelper {
 	@SuppressLint("StaticFieldLeak")
 	void collectLocalFiles(@Nullable final OnCollectLocalFilesListener listener) {
 		OperationLog operationLog = new OperationLog("collectLocalFiles", DEBUG);
+		operationLog.startOperation();
 		AsyncTask<Void, LocalFile, List<LocalFile>> task = new AsyncTask<Void, LocalFile, List<LocalFile>>() {
 
 			BackupDbHelper dbHelper;
 			SQLiteConnection db;
+			Map<String, Long> infos;
 
 			@Override
 			protected void onPreExecute() {
@@ -573,44 +572,68 @@ public class BackupHelper {
 			@Override
 			protected List<LocalFile> doInBackground(Void... voids) {
 				List<LocalFile> result = new ArrayList<>();
+				infos = dbHelper.getUploadedFileInfoMap();
 				List<SettingsItem> localItems = getLocalItems();
+				operationLog.log("getLocalItems");
 				for (SettingsItem item : localItems) {
 					String fileName = BackupHelper.getItemFileName(item);
 					if (item instanceof FileSettingsItem) {
-						File file = ((FileSettingsItem) item).getFile();
+						FileSettingsItem fileItem = (FileSettingsItem) item;
+						File file = fileItem.getFile();
 						if (file.isDirectory()) {
+							if (item instanceof GpxSettingsItem) {
+								continue;
+							} else if (fileItem.getSubtype() == FileSubtype.VOICE) {
+								File jsFile = new File(file, file.getName() + "_" + IndexConstants.TTSVOICE_INDEX_EXT_JS);
+								if (jsFile.exists()) {
+									fileName = jsFile.getPath().replace(app.getAppPath(null).getPath() + "/", "");
+									createLocalFile(result, item, fileName, jsFile, jsFile.lastModified());
+									continue;
+								}
+							} else if (fileItem.getSubtype() == FileSubtype.TTS_VOICE) {
+								String langName = file.getName().replace(IndexConstants.VOICE_PROVIDER_SUFFIX, "");
+								File jsFile = new File(file, langName + "_" + IndexConstants.TTSVOICE_INDEX_EXT_JS);
+								if (jsFile.exists()) {
+									fileName = jsFile.getPath().replace(app.getAppPath(null).getPath() + "/", "");
+									createLocalFile(result, item, fileName, jsFile, jsFile.lastModified());
+									continue;
+								}
+							}
 							List<File> dirs = new ArrayList<>();
 							dirs.add(file);
 							Algorithms.collectDirs(file, dirs);
+							operationLog.log("collectDirs " + file.getName() + " BEGIN");
 							for (File dir : dirs) {
 								File[] files = dir.listFiles();
 								if (files != null && files.length > 0) {
 									for (File f : files) {
 										fileName = f.getPath().replace(app.getAppPath(null).getPath() + "/", "");
-										createLocalFile(result, item, fileName, f.lastModified());
+										createLocalFile(result, item, fileName, f, f.lastModified());
 									}
 								}
 							}
+							operationLog.log("collectDirs " + file.getName() + " END");
 						} else {
-							createLocalFile(result, item, fileName, file.lastModified());
+							createLocalFile(result, item, fileName, file, file.lastModified());
 						}
 					} else {
-						createLocalFile(result, item, fileName, item.getLastModifiedTime());
+						createLocalFile(result, item, fileName, null, item.getLastModifiedTime());
 					}
 				}
 				return result;
 			}
 
-			private void createLocalFile(List<LocalFile> result, SettingsItem item, String fileName, long lastModifiedTime) {
+			private void createLocalFile(@NonNull List<LocalFile> result, @NonNull SettingsItem item,
+										 @NonNull String fileName, @Nullable File file, long lastModifiedTime) {
 				LocalFile localFile = new LocalFile();
+				localFile.file = file;
 				localFile.item = item;
-				localFile.subfolder = "";
 				localFile.fileName = fileName;
 				localFile.localModifiedTime = lastModifiedTime;
-				if (db != null) {
-					UploadedFileInfo info = dbHelper.getUploadedFileInfo(db, item.getType().name(), fileName);
-					if (info != null) {
-						localFile.uploadTime = info.getUploadTime();
+				if (infos != null) {
+					Long uploadTime = infos.get(item.getType().name() + "___" + fileName);
+					if (uploadTime != null) {
+						localFile.uploadTime = uploadTime;
 					}
 				}
 				result.add(localFile);
@@ -619,7 +642,14 @@ public class BackupHelper {
 
 			private List<SettingsItem> getLocalItems() {
 				List<ExportSettingsType> types = ExportSettingsType.getEnabledTypes();
-				return app.getFileSettingsHelper().getFilteredSettingsItems(types, true, true, true);
+				Iterator<ExportSettingsType> it = types.iterator();
+				while (it.hasNext()) {
+					ExportSettingsType type = it.next();
+					if (!getBackupTypePref(type).get()) {
+						it.remove();
+					}
+				}
+				return app.getFileSettingsHelper().getFilteredSettingsItems(types, true, true);
 			}
 
 			@Override
@@ -640,68 +670,67 @@ public class BackupHelper {
 				}
 			}
 		};
-		task.executeOnExecutor(executor);
+		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	@SuppressLint("StaticFieldLeak")
-	void generateBackupInfo(@NonNull final List<LocalFile> localFiles,
-							@NonNull final List<RemoteFile> uniqueRemoteFiles,
-							@NonNull final List<RemoteFile> deletedRemoteFiles,
+	void generateBackupInfo(@NonNull final Map<String, LocalFile> localFiles,
+							@NonNull final Map<String, RemoteFile> uniqueRemoteFiles,
+							@NonNull final Map<String, RemoteFile> deletedRemoteFiles,
 							@Nullable final OnGenerateBackupInfoListener listener) {
 
 		OperationLog operationLog = new OperationLog("generateBackupInfo", DEBUG, 200);
+		operationLog.startOperation();
 		final long backupLastUploadedTime = settings.BACKUP_LAST_UPLOADED_TIME.get();
 
 		AsyncTask<Void, Void, BackupInfo> task = new AsyncTask<Void, Void, BackupInfo>() {
 			@Override
 			protected BackupInfo doInBackground(Void... voids) {
 				BackupInfo info = new BackupInfo();
-				List<RemoteFile> remoteFiles = new ArrayList<>(uniqueRemoteFiles);
-				remoteFiles.addAll(deletedRemoteFiles);
+				List<RemoteFile> remoteFiles = new ArrayList<>(uniqueRemoteFiles.values());
+				remoteFiles.addAll(deletedRemoteFiles.values());
 				for (RemoteFile remoteFile : remoteFiles) {
 					ExportSettingsType exportType = ExportSettingsType.getExportSettingsTypeForRemoteFile(remoteFile);
 					if (exportType == null || !ExportSettingsType.isTypeEnabled(exportType)) {
 						continue;
 					}
-					boolean hasLocalFile = false;
-					for (LocalFile localFile : localFiles) {
-						if (remoteFile.getName().equals(localFile.getFileName(true))) {
-							hasLocalFile = true;
-							long remoteUploadTime = remoteFile.getClienttimems();
-							long localUploadTime = localFile.uploadTime;
-							if (remoteFile.isDeleted()) {
-								info.localFilesToDelete.add(localFile);
-							} else if (remoteUploadTime == localUploadTime) {
-								if (localUploadTime < localFile.localModifiedTime) {
-									info.filesToUpload.add(localFile);
-								}
-							} else {
-								info.filesToMerge.add(new Pair<>(localFile, remoteFile));
+					LocalFile localFile = localFiles.get(remoteFile.getTypeNamePath());
+					if (localFile != null) {
+						long remoteUploadTime = remoteFile.getClienttimems();
+						long localUploadTime = localFile.uploadTime;
+						if (remoteFile.isDeleted()) {
+							info.localFilesToDelete.add(localFile);
+						} else if (remoteUploadTime == localUploadTime) {
+							if (localUploadTime < localFile.localModifiedTime) {
+								info.filesToUpload.add(localFile);
+								info.filesToDownload.add(remoteFile);
 							}
-							break;
-						}
-					}
-					if (!hasLocalFile && !remoteFile.isDeleted()) {
-						if (backupLastUploadedTime > 0 && backupLastUploadedTime >= remoteFile.getClienttimems()) {
-							info.filesToDelete.add(remoteFile);
+							//info.filesToUpload.add(localFile);
+							//info.filesToDownload.add(remoteFile);
 						} else {
+							info.filesToMerge.add(new Pair<>(localFile, remoteFile));
+							info.filesToDownload.add(remoteFile);
+						}
+						long localFileSize = localFile.file == null ? 0 : localFile.file.length();
+						long remoteFileSize = remoteFile.getFilesize();
+						if (remoteFileSize > 0 && localFileSize > 0 && localFileSize != remoteFileSize && !info.filesToDownload.contains(remoteFile)) {
 							info.filesToDownload.add(remoteFile);
 						}
 					}
+					if (localFile == null && !remoteFile.isDeleted()) {
+						if (backupLastUploadedTime > 0 && backupLastUploadedTime >= remoteFile.getClienttimems()) {
+							info.filesToDelete.add(remoteFile);
+						}
+						info.filesToDownload.add(remoteFile);
+					}
 				}
-				for (LocalFile localFile : localFiles) {
+				for (LocalFile localFile : localFiles.values()) {
 					ExportSettingsType exportType = localFile.item != null
 							? ExportSettingsType.getExportSettingsTypeForItem(localFile.item) : null;
 					if (exportType == null || !ExportSettingsType.isTypeEnabled(exportType)) {
 						continue;
 					}
-					boolean hasRemoteFile = false;
-					for (RemoteFile remoteFile : uniqueRemoteFiles) {
-						if (localFile.getFileName(true).equals(remoteFile.getName())) {
-							hasRemoteFile = true;
-							break;
-						}
-					}
+					boolean hasRemoteFile = uniqueRemoteFiles.containsKey(localFile.getTypeFileName());
 					if (!hasRemoteFile) {
 						boolean isEmpty = localFile.item instanceof CollectionSettingsItem<?> && ((CollectionSettingsItem<?>) localFile.item).isEmpty();
 						if (!isEmpty) {
@@ -709,6 +738,7 @@ public class BackupHelper {
 						}
 					}
 				}
+				info.createItemCollections(app);
 				return info;
 			}
 

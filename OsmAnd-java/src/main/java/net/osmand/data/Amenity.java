@@ -46,6 +46,7 @@ public class Amenity extends MapObject {
 	public static final String CONTENT_JSON = "content_json";
 	public static final String ROUTE_ID = "route_id";
 	public static final String ROUTE_SOURCE = "route_source";
+	public static final String ROUTE_NAME = "route_name";
 	public static final String COLOR = "color";
 	public static final String LANG_YES = "lang_yes";
 	public static final String GPX_ICON = "gpx_icon";

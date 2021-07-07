@@ -540,4 +540,24 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com --><resources>
     <string name="announce_when_exceeded">Tuyên bố khi vượt quá</string>
     <string name="shared_string_min_height">Độ cao tối thiểu</string>
     <string name="shared_string_max_height">Độ cao tối đa</string>
+    <string name="navigation_item_description">Thiết lập điều hướng.</string>
+    <string name="first_usage_item_description">Cách tải xuống bản đồ, đặt cài đặt cơ bản.</string>
+    <string name="first_usage_item">Sử dụng lần đầu</string>
+    <string name="free_downloads_used">Lượt tải xuống miễn phí đã sử dụng</string>
+    <string name="update_all">Cập nhật tất cả (%1$s MB)</string>
+    <string name="faq_item_description">Các câu hõi thường gặp</string>
+    <string name="faq_item">Câu hỏi thường gặp</string>
+    <string name="planning_trip_item">Lập kế hoạch cho một chuyến đi</string>
+    <string name="plugins_menu_group">Plugin</string>
+    <string name="other_menu_group">Khác</string>
+    <string name="help_us_to_improve_menu_group">Giúp cải thiện OsmAnd</string>
+    <string name="features_menu_group">Tính năng</string>
+    <string name="begin_with_osmand_menu_group">Những bước đầu với OsmAnd</string>
+    <string name="new_version">Phiên bản mới</string>
+    <string name="enter_country_name">Nhập tên quốc gia</string>
+    <string name="application_dir_description">Chọn nơi bạn muốn lưu trữ các bản đồ và các tệp dữ liệu khác.</string>
+    <string name="free_downloads_used_description">Hiển thị số lượt tải xuống miễn phí còn lại.</string>
+    <string name="backup_error_token_is_not_valid_or_expired">Token không hợp lệ hoặc đã hết hạn</string>
+    <string name="backup_error_user_is_not_registered">Không có người dùng nào đã đăng ký bằng địa chỉ đó</string>
+    <string name="backup_error_no_valid_subscription">Không có gói đăng ký hợp lệ nào đang có</string>
 </resources>

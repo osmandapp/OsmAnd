@@ -2177,7 +2177,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="private_access_routing_req">Jūsų kelionės tikslas yra privačioje teritorijoje. Ar leisti keliauti privačiais keliais šioje kelionėje\?</string>
     <string name="quick_action_showhide_osmbugs_descr">Paspaudus aktyvinimo mygtuką OSM užrašai bus parodomi ant žemėlapio arba paslepiami.</string>
     <string name="hillshade_menu_download_descr">Norėdami pamatyti kalnų reljefo šešėlių žemėlapį turite parsisiųsti kalnų šešėlių sluoksnio žemėlapį šiam regionui.</string>
-    <string name="hillshade_purchase_header">Norėdami pamatyti kalnų šešėlius žemėlapyje, turte nusipirkti ir įdiegti \"Kontūrų Linijų\" įskiepį</string>
+    <string name="hillshade_purchase_header">Įdiegti \"Kontūrų Linijų\" įskiepį, kad būtų rodomos sugraduotos vertikalios sritys.</string>
     <string name="hide_from_zoom_level">Paslėpti mąstelį</string>
     <string name="store_tracks_in_monthly_directories">Išsaugoti įrašytas keliones mėnesiniuose segtuvuose</string>
     <string name="store_tracks_in_monthly_directories_descrp">Išsaugoti įrašytas keliones mėnesiniuose poaplankiuose (pvz. 2018-01).</string>
@@ -2812,4 +2812,19 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="rendering_attr_piste_type_downhill_name">Nuokalnė</string>
     <string name="rendering_attr_piste_type_hike_name">Žygis</string>
     <string name="monitoring_control_start">REC</string>
+    <string name="from_with_param">Iš %1$s</string>
+    <string name="backup_delete_types_descr">Ar norite iš debesies ištrinti neįgalintų tipų duomenis\?</string>
+    <string name="ltr_or_rtl_combine_via_or">%1$s arba %2$s</string>
+    <string name="continue_with">Tęsti su %1$s</string>
+    <string name="not_available_with">Neprieinama su %1$s</string>
+    <string name="redeem_promo_code">Išgryninti promo kodą</string>
+    <string name="osmand_maps_plus_tagline">Gauti išplėstines funkcijas</string>
+    <string name="osmand_pro_tagline">Gaukite maksimalias funkcijas</string>
+    <string name="shared_string_learn_more">Sužinoti daugiau</string>
+    <string name="cancel_anytime_in_huawei_appgallery">Atšaukite bet kuriuo metu Huawei AppGallery</string>
+    <string name="cancel_anytime_in_gplay">Atšaukti bet kada Google Play.</string>
+    <string name="shared_string_not_included">Neįtraukta</string>
+    <string name="shared_string_includes">Apima</string>
+    <string name="complete_purchase">Užbaigti pirkimą</string>
+    <string name="backup_delete_types">Ištrinti neįgalintų tipų duomenis</string>
 </resources>

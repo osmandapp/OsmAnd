@@ -11,6 +11,7 @@ import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +20,9 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 	private final NetworkSettingsHelper helper;
 	private final BackupExporter exporter;
 	private BackupExportListener listener;
+
+	private final Map<String, ItemProgressInfo> itemsProgress = new HashMap<>();
+	private int generalProgress;
 
 	ExportBackupTask(@NonNull NetworkSettingsHelper helper,
 					 @NonNull List<SettingsItem> items,
@@ -41,6 +45,15 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 
 	public void setListener(BackupExportListener listener) {
 		this.listener = listener;
+	}
+
+	public int getGeneralProgress() {
+		return generalProgress;
+	}
+
+	@Nullable
+	public ItemProgressInfo getItemProgressInfo(@NonNull String type, @NonNull String fileName) {
+		return itemsProgress.get(type + fileName);
 	}
 
 	@Override
@@ -67,9 +80,17 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 		if (listener != null) {
 			for (Object object : values) {
 				if (object instanceof Integer) {
-					listener.onBackupExportProgressUpdate((Integer) object);
+					generalProgress = (Integer) object;
+					listener.onBackupExportProgressUpdate(generalProgress);
 				} else if (object instanceof ItemProgressInfo) {
 					ItemProgressInfo info = (ItemProgressInfo) object;
+
+					ItemProgressInfo prevInfo = getItemProgressInfo(info.type, info.fileName);
+					if (prevInfo != null) {
+						info.work = prevInfo.work;
+					}
+					itemsProgress.put(info.type + info.fileName, info);
+
 					if (info.finished) {
 						listener.onBackupExportItemFinished(info.type, info.fileName);
 					} else if (info.value == 0) {
@@ -126,12 +147,12 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 		};
 	}
 
-	private static class ItemProgressInfo {
+	public static class ItemProgressInfo {
 
 		private final String type;
 		private final String fileName;
 
-		private final int work;
+		private int work;
 		private final int value;
 		private final boolean finished;
 
@@ -141,6 +162,18 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 			this.value = progress;
 			this.work = work;
 			this.finished = finished;
+		}
+
+		public int getWork() {
+			return work;
+		}
+
+		public int getValue() {
+			return value;
+		}
+
+		public boolean isFinished() {
+			return finished;
 		}
 	}
 }

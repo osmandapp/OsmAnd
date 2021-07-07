@@ -674,7 +674,7 @@ public class ImportHelper {
 		if (forceImportFavourites) {
 			importFavoritesImpl(gpxFile, fileName, true);
 		} else if (fileName != null) {
-			if (forceImportGpx) {
+			if (forceImportGpx || !Algorithms.isEmpty(gpxFile.tracks)) {
 				handleResult(gpxFile, fileName, fileSize, save, useImportDir, false);
 			} else {
 				ImportGpxBottomSheetDialogFragment fragment = new ImportGpxBottomSheetDialogFragment();
@@ -696,7 +696,7 @@ public class ImportHelper {
 		List<FavouritePoint> favourites = new ArrayList<>();
 		for (WptPt p : wptPts) {
 			if (Algorithms.isEmpty(p.name)) {
-				p.name = app.getResources().getString(R.string.shared_string_waypoint);
+				p.name = app.getString(R.string.shared_string_waypoint);
 			}
 			if (!Algorithms.isEmpty(p.name)) {
 				final String fpCat;

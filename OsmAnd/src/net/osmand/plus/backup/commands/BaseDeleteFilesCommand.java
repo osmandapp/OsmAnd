@@ -4,10 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.AndroidNetworkUtils;
+import net.osmand.AndroidNetworkUtils.Request;
 import net.osmand.AndroidNetworkUtils.RequestResponse;
 import net.osmand.OperationLog;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.backup.BackupCommand;
+import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupListeners.OnDeleteFilesListener;
 import net.osmand.plus.backup.RemoteFile;
@@ -26,13 +28,14 @@ import java.util.Map;
 
 import static net.osmand.plus.backup.BackupHelper.DELETE_FILE_URL;
 import static net.osmand.plus.backup.BackupHelper.DELETE_FILE_VERSION_URL;
-import static net.osmand.plus.backup.BackupHelper.THREAD_POOL_SIZE;
 
 public abstract class BaseDeleteFilesCommand extends BackupCommand {
 
+	private static final int THREAD_POOL_SIZE = 4;
+
 	private final boolean byVersion;
 	private OnDeleteFilesListener listener;
-	private List<SendRequestTask> tasks = new ArrayList<>();
+	private List<DeleteRemoteFileTask> tasks = new ArrayList<>();
 
 	public BaseDeleteFilesCommand(@NonNull BackupHelper helper, boolean byVersion) {
 		super(helper);
@@ -55,7 +58,7 @@ public abstract class BaseDeleteFilesCommand extends BackupCommand {
 		commonParameters.put("deviceid", getHelper().getDeviceId());
 		commonParameters.put("accessToken", getHelper().getAccessToken());
 
-		List<SendRequestTask> tasks = new ArrayList<>();
+		List<DeleteRemoteFileTask> tasks = new ArrayList<>();
 		for (RemoteFile remoteFile : remoteFiles) {
 			Map<String, String> parameters = new HashMap<>(commonParameters);
 			parameters.put("name", remoteFile.getName());
@@ -63,23 +66,23 @@ public abstract class BaseDeleteFilesCommand extends BackupCommand {
 			if (byVersion) {
 				parameters.put("updatetime", String.valueOf(remoteFile.getUpdatetimems()));
 			}
-			AndroidNetworkUtils.Request r = new AndroidNetworkUtils.Request(byVersion ? DELETE_FILE_VERSION_URL : DELETE_FILE_URL, parameters, null, false, true);
-			tasks.add(new SendRequestTask(getApp(), r, remoteFile));
+			Request r = new Request(byVersion ? DELETE_FILE_VERSION_URL : DELETE_FILE_URL, parameters, null, false, true);
+			tasks.add(new DeleteRemoteFileTask(getApp(), r, remoteFile));
 		}
-		ThreadPoolTaskExecutor<SendRequestTask> executor =
-				new ThreadPoolTaskExecutor<>(THREAD_POOL_SIZE, new OnThreadPoolTaskExecutorListener<SendRequestTask>() {
+		ThreadPoolTaskExecutor<DeleteRemoteFileTask> executor =
+				new ThreadPoolTaskExecutor<>(THREAD_POOL_SIZE, new OnThreadPoolTaskExecutorListener<DeleteRemoteFileTask>() {
 
 					@Override
-					public void onTaskStarted(@NonNull SendRequestTask task) {
+					public void onTaskStarted(@NonNull DeleteRemoteFileTask task) {
 					}
 
 					@Override
-					public void onTaskFinished(@NonNull SendRequestTask task) {
+					public void onTaskFinished(@NonNull DeleteRemoteFileTask task) {
 						publishProgress(task);
 					}
 
 					@Override
-					public void onTasksFinished(@NonNull List<SendRequestTask> tasks) {
+					public void onTasksFinished(@NonNull List<DeleteRemoteFileTask> tasks) {
 						BaseDeleteFilesCommand.this.tasks = tasks;
 					}
 				});
@@ -97,8 +100,8 @@ public abstract class BaseDeleteFilesCommand extends BackupCommand {
 	protected void onProgressUpdate(Object... objects) {
 		for (OnDeleteFilesListener listener : getListeners()) {
 			Object obj = objects[0];
-			if (obj instanceof SendRequestTask) {
-				RemoteFile remoteFile = ((SendRequestTask) obj).remoteFile;
+			if (obj instanceof DeleteRemoteFileTask) {
+				RemoteFile remoteFile = ((DeleteRemoteFileTask) obj).remoteFile;
 				listener.onFileDeleteProgress(remoteFile);
 			}
 		}
@@ -109,7 +112,7 @@ public abstract class BaseDeleteFilesCommand extends BackupCommand {
 		List<OnDeleteFilesListener> listeners = getListeners();
 		if (!listeners.isEmpty()) {
 			Map<RemoteFile, String> errors = new HashMap<>();
-			for (SendRequestTask task : tasks) {
+			for (DeleteRemoteFileTask task : tasks) {
 				boolean success;
 				String message = null;
 				RequestResponse response = task.response;
@@ -147,15 +150,15 @@ public abstract class BaseDeleteFilesCommand extends BackupCommand {
 		}
 	}
 
-	private static class SendRequestTask extends ThreadPoolTaskExecutor.Task {
+	private static class DeleteRemoteFileTask extends ThreadPoolTaskExecutor.Task {
 
 		private final OsmandApplication app;
-		private final AndroidNetworkUtils.Request request;
+		private final Request request;
 		private final RemoteFile remoteFile;
 		private RequestResponse response;
 
-		public SendRequestTask(@NonNull OsmandApplication app, @NonNull AndroidNetworkUtils.Request request,
-							   @NonNull RemoteFile remoteFile) {
+		public DeleteRemoteFileTask(@NonNull OsmandApplication app, @NonNull Request request,
+									@NonNull RemoteFile remoteFile) {
 			this.app = app;
 			this.request = request;
 			this.remoteFile = remoteFile;
@@ -166,6 +169,10 @@ public abstract class BaseDeleteFilesCommand extends BackupCommand {
 			OperationLog operationLog = new OperationLog("deleteFile", BackupHelper.DEBUG);
 			AndroidNetworkUtils.sendRequest(app, request, (result, error) ->
 					response = new RequestResponse(request, result, error));
+			if (response.getError() == null) {
+				app.getBackupHelper().getDbHelper().removeUploadedFileInfo(
+						new UploadedFileInfo(remoteFile.getType(), remoteFile.getName()));
+			}
 			operationLog.finishOperation(remoteFile.getName());
 			return null;
 		}

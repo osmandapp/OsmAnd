@@ -5,13 +5,14 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.GPXDatabase;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxDbHelper;
 import net.osmand.plus.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.settings.backend.backup.FileSettingsItemReader;
 import net.osmand.plus.settings.backend.backup.GpxAppearanceInfo;
+import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.GradientScaleType;
@@ -67,26 +68,32 @@ public class GpxSettingsItem extends FileSettingsItem {
 	}
 
 	@Override
-	public void applyAdditionalParams() {
+	public void applyAdditionalParams(@Nullable SettingsItemReader<? extends SettingsItem> reader) {
 		if (appearanceInfo != null) {
-			GpxDataItem dataItem = app.getGpxDbHelper().getItem(savedFile, new GpxDataItemCallback() {
-				@Override
-				public boolean isCancelled() {
-					return false;
-				}
+			File savedFile = null;
+			if (reader instanceof FileSettingsItemReader) {
+				savedFile = ((FileSettingsItemReader) reader).getSavedFile();
+			}
+			if (savedFile != null) {
+				GpxDataItem dataItem = app.getGpxDbHelper().getItem(savedFile, new GpxDataItemCallback() {
+					@Override
+					public boolean isCancelled() {
+						return false;
+					}
 
-				@Override
-				public void onGpxDataItemReady(GpxDataItem item) {
-					updateGpxParams(item);
+					@Override
+					public void onGpxDataItemReady(GpxDataItem item) {
+						updateGpxParams(item);
+					}
+				});
+				if (dataItem != null) {
+					updateGpxParams(dataItem);
 				}
-			});
-			if (dataItem != null) {
-				updateGpxParams(dataItem);
 			}
 		}
 	}
 
-	private void updateGpxParams(@NonNull GPXDatabase.GpxDataItem dataItem) {
+	private void updateGpxParams(@NonNull GpxDataItem dataItem) {
 		GpxDbHelper gpxDbHelper = app.getGpxDbHelper();
 		GpxSplitType splitType = GpxSplitType.getSplitTypeByTypeId(appearanceInfo.splitType);
 		gpxDbHelper.updateColor(dataItem, appearanceInfo.color);
@@ -108,7 +115,7 @@ public class GpxSettingsItem extends FileSettingsItem {
 			}
 
 			@Override
-			public void onGpxDataItemReady(GPXDatabase.GpxDataItem item) {
+			public void onGpxDataItemReady(GpxDataItem item) {
 				appearanceInfo = new GpxAppearanceInfo(item);
 			}
 		});

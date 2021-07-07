@@ -3055,7 +3055,6 @@
     <string name="osmand_cloud_login_descr">Kirjoita sähköpostiosoite, jota käytit rekisteröitymiseen. Lähetämme sinulle seuraavassa vaiheessa tarvittavan kertakäyttösalasanan.</string>
     <string name="verify_email_address">Vahvista sähköpostiosoite</string>
     <string name="verify_email_address_descr">Lähetimme vahvistuskoodin osoitteeseen %1$s, kirjoita se alla olevaan kenttään.</string>
-    <string name="enter_verification_code">Syötä nelinumeroinen koodi</string>
     <string name="cloud_email_not_registered">Tätä sähköpostia ei ole rekisteröity OsmAnd Cloud -palveluun</string>
     <string name="cloud_email_already_registered">Tällä sähköpostilla on jo rekisteröity tili.</string>
     <string name="resend_verification_code">Lähetä koodi uudelleen</string>

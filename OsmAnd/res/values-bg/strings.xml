@@ -2320,7 +2320,6 @@
     <string name="osmand_cloud_login_descr">Моля, въведете имейл адреса, който сте използвали при регистрацията. На следващата стъпка ще ви изпратим необходимата еднократна парола.</string>
     <string name="verify_email_address">Проверка на имейл адреса</string>
     <string name="verify_email_address_descr">Изпратихме код за проверка на %1$s, моля, въведете го в полето по-долу.</string>
-    <string name="enter_verification_code">Въведете 4-цифрен код</string>
     <string name="cloud_email_not_registered">Този имейл не е регистриран в OsmAnd Cloud</string>
     <string name="cloud_email_already_registered">Профилът с този имейл вече е регистриран.</string>
     <string name="resend_verification_code">Изпращане на кода отново</string>

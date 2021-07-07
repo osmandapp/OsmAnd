@@ -70,6 +70,11 @@ public class DeleteAllDataBottomSheet extends MenuBottomSheetDialogFragment impl
 		return true;
 	}
 
+	@Override
+	public int getFirstDividerHeight() {
+		return getResources().getDimensionPixelSize(R.dimen.dialog_content_margin);
+	}
+
 	public static void showInstance(@NonNull FragmentManager fragmentManager, Fragment target) {
 		if (!fragmentManager.isStateSaved()) {
 			DeleteAllDataBottomSheet fragment = new DeleteAllDataBottomSheet();
