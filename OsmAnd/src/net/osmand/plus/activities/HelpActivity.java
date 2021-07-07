@@ -301,7 +301,7 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 		contextMenuAdapter.addItem(createItem(R.string.versions_item, NULL_ID,
 				"feature_articles/changes.html"));
 		contextMenuAdapter.addItem(createItem(R.string.what_is_new, NULL_ID,
-				"feature_articles/osmand-3-9-released.html"));
+				"feature_articles/osmand-android-4-0-released"));
 
 		String releaseDate = "";
 		if (!getString(R.string.app_edition).isEmpty()) {
